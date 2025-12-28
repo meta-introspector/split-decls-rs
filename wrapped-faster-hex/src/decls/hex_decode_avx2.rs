@@ -1,0 +1,7 @@
+macro_rules! hex_decode_avx2 {
+    () => {
+        # [target_feature (enable = "avx2")] # [cfg (any (target_arch = "x86" , target_arch = "x86_64"))] unsafe fn hex_decode_avx2 (mut src : & [u8] , mut dst : & mut [u8]) { let mask_a = _mm256_setr_epi8 (0 , - 1 , 2 , - 1 , 4 , - 1 , 6 , - 1 , 8 , - 1 , 10 , - 1 , 12 , - 1 , 14 , - 1 , 0 , - 1 , 2 , - 1 , 4 , - 1 , 6 , - 1 , 8 , - 1 , 10 , - 1 , 12 , - 1 , 14 , - 1 ,) ; let mask_b = _mm256_setr_epi8 (1 , - 1 , 3 , - 1 , 5 , - 1 , 7 , - 1 , 9 , - 1 , 11 , - 1 , 13 , - 1 , 15 , - 1 , 1 , - 1 , 3 , - 1 , 5 , - 1 , 7 , - 1 , 9 , - 1 , 11 , - 1 , 13 , - 1 , 15 , - 1 ,) ; while dst . len () >= 32 { let av1 = _mm256_loadu_si256 (src . as_ptr () as * const _) ; let av2 = _mm256_loadu_si256 (src [32 ..] . as_ptr () as * const _) ; let mut a1 = _mm256_shuffle_epi8 (av1 , mask_a) ; let mut b1 = _mm256_shuffle_epi8 (av1 , mask_b) ; let mut a2 = _mm256_shuffle_epi8 (av2 , mask_a) ; let mut b2 = _mm256_shuffle_epi8 (av2 , mask_b) ; a1 = unhex_avx2 (a1) ; a2 = unhex_avx2 (a2) ; b1 = unhex_avx2 (b1) ; b2 = unhex_avx2 (b2) ; let bytes = nib2byte_avx2 (a1 , b1 , a2 , b2) ; _mm256_storeu_si256 (dst . as_mut_ptr () as * mut _ , bytes) ; dst = & mut dst [32 ..] ; src = & src [64 ..] ; } hex_decode_fallback (src , dst) }
+    };
+}
+
+hex_decode_avx2!()

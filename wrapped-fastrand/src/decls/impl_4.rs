@@ -7,7 +7,7 @@ macro_rules! deps {
 macro_rules! impl_4 {
     () => {
         deps!();
-        impl Clone for Rng { # [doc = " Clones the generator by creating a new generator with the same seed."] fn clone (& self) -> Rng { Rng :: with_seed (self . 0) } }
+        impl Rng { # [doc = " Creates a new random number generator."] # [inline] pub fn new () -> Rng { try_with_rng (Rng :: fork) . unwrap_or_else (| _ | Rng :: with_seed (0x4d595df4d0f33173)) } }
     };
 }
 

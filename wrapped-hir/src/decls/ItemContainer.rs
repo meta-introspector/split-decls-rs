@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Trait!();
-        Module!();
         Crate!();
+        Module!();
         Impl!();
         ExternBlock!();
+        Trait!();
     };
 }
 

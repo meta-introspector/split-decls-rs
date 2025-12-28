@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        Result!();
+        Arbitrary!();
+        Unstructured!();
+    };
+}
+
+macro_rules! impl_126 {
+    () => {
+        deps!();
+        impl < 'a > Arbitrary < 'a > for SocketAddr { fn arbitrary (u : & mut Unstructured < 'a >) -> Result < Self > { if u . arbitrary () ? { Ok (SocketAddr :: V4 (u . arbitrary () ?)) } else { Ok (SocketAddr :: V6 (u . arbitrary () ?)) } } fn size_hint (depth : usize) -> (usize , Option < usize >) { size_hint :: and (bool :: size_hint (depth) , size_hint :: or (SocketAddrV4 :: size_hint (depth) , SocketAddrV6 :: size_hint (depth) ,) ,) } }
+    };
+}
+
+impl_126!()

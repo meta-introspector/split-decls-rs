@@ -1,15 +1,14 @@
 macro_rules! deps {
     () => {
-        LengthError!();
-        GenericArray!();
         ArrayLength!();
+        GenericArrayIter!();
     };
 }
 
 macro_rules! impl_52 {
     () => {
         deps!();
-        impl < T , N : ArrayLength > GenericArray < T , N > { # [doc = " Fallible equivalent of [`FromIterator::from_iter`]"] # [doc = ""] # [doc = " Given iterator must yield exactly `N` elements or an error will be returned. Using [`.take(N)`](Iterator::take)"] # [doc = " with an iterator longer than the array may be helpful."] # [inline] pub fn try_from_iter < I > (iter : I) -> Result < Self , LengthError > where I : IntoIterator < Item = T > , { let mut iter = iter . into_iter () ; match iter . size_hint () { (n , _) if n > N :: USIZE => return Err (LengthError) , (_ , Some (n)) if n < N :: USIZE => return Err (LengthError) , _ => { } } unsafe { let mut array = MaybeUninit :: < GenericArray < T , N > > :: uninit () ; let mut builder = IntrusiveArrayBuilder :: new_alt (& mut array) ; builder . extend (& mut iter) ; if ! builder . is_full () || iter . next () . is_some () { return Err (LengthError) ; } Ok (builder . finish_and_assume_init ()) } } # [doc = " Fallible equivalent of [`FallibleGenericSequence::from_fallible_iter`]."] # [doc = ""] # [doc = " Unlike `.collect::<Result<GenericArray<T, N>, E>>()`, this method will not panic"] # [doc = " on length mismatch, instead returning a `LengthError`."] # [doc = ""] # [doc = " Given iterator must yield exactly `N` elements or an error will be returned. Using [`.take(N)`](Iterator::take)"] # [doc = " with an iterator longer than the array may be helpful."] # [inline] pub fn try_from_fallible_iter < I , E > (iter : I) -> Result < Result < Self , E > , LengthError > where I : IntoIterator < Item = Result < T , E > > , { let mut iter = iter . into_iter () ; match iter . size_hint () { (n , _) if n > N :: USIZE => return Err (LengthError) , (_ , Some (n)) if n < N :: USIZE => return Err (LengthError) , _ => { } } unsafe { let mut array = MaybeUninit :: < GenericArray < T , N > > :: uninit () ; let mut builder = IntrusiveArrayBuilder :: new_alt (& mut array) ; if let Err (e) = builder . try_extend (& mut iter) { drop (builder) ; return Ok (Err (e)) ; } if ! builder . is_full () || iter . next () . is_some () { return Err (LengthError) ; } Ok (Ok (builder . finish_and_assume_init ())) } } }
+        impl < T : Clone , N : ArrayLength > Clone for GenericArrayIter < T , N > { fn clone (& self) -> Self { let mut array = unsafe { ptr :: read (& self . array) } ; let mut index_back = 0 ; for (dst , src) in array . as_mut_slice () . iter_mut () . zip (self . as_slice ()) { unsafe { ptr :: write (dst , src . clone ()) } ; index_back += 1 ; } GenericArrayIter { array , index : 0 , index_back , } } }
     };
 }
 

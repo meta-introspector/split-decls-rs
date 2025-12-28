@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        V256!();
+    };
+}
+
+macro_rules! impl_114 {
+    () => {
+        deps!();
+        impl Variant < WordU32 , N_CONSTS > for V256 { # [rustfmt :: skip] # [allow (clippy :: unreadable_literal)] # [doc = " The SHA256 constants as defined in FIPS 180-4."] const K : [WordU32 ; N_CONSTS] = [WordU32 (0x428a2f98) , WordU32 (0x71374491) , WordU32 (0xb5c0fbcf) , WordU32 (0xe9b5dba5) , WordU32 (0x3956c25b) , WordU32 (0x59f111f1) , WordU32 (0x923f82a4) , WordU32 (0xab1c5ed5) , WordU32 (0xd807aa98) , WordU32 (0x12835b01) , WordU32 (0x243185be) , WordU32 (0x550c7dc3) , WordU32 (0x72be5d74) , WordU32 (0x80deb1fe) , WordU32 (0x9bdc06a7) , WordU32 (0xc19bf174) , WordU32 (0xe49b69c1) , WordU32 (0xefbe4786) , WordU32 (0x0fc19dc6) , WordU32 (0x240ca1cc) , WordU32 (0x2de92c6f) , WordU32 (0x4a7484aa) , WordU32 (0x5cb0a9dc) , WordU32 (0x76f988da) , WordU32 (0x983e5152) , WordU32 (0xa831c66d) , WordU32 (0xb00327c8) , WordU32 (0xbf597fc7) , WordU32 (0xc6e00bf3) , WordU32 (0xd5a79147) , WordU32 (0x06ca6351) , WordU32 (0x14292967) , WordU32 (0x27b70a85) , WordU32 (0x2e1b2138) , WordU32 (0x4d2c6dfc) , WordU32 (0x53380d13) , WordU32 (0x650a7354) , WordU32 (0x766a0abb) , WordU32 (0x81c2c92e) , WordU32 (0x92722c85) , WordU32 (0xa2bfe8a1) , WordU32 (0xa81a664b) , WordU32 (0xc24b8b70) , WordU32 (0xc76c51a3) , WordU32 (0xd192e819) , WordU32 (0xd6990624) , WordU32 (0xf40e3585) , WordU32 (0x106aa070) , WordU32 (0x19a4c116) , WordU32 (0x1e376c08) , WordU32 (0x2748774c) , WordU32 (0x34b0bcb5) , WordU32 (0x391c0cb3) , WordU32 (0x4ed8aa4a) , WordU32 (0x5b9cca4f) , WordU32 (0x682e6ff3) , WordU32 (0x748f82ee) , WordU32 (0x78a5636f) , WordU32 (0x84c87814) , WordU32 (0x8cc70208) , WordU32 (0x90befffa) , WordU32 (0xa4506ceb) , WordU32 (0xbef9a3f7) , WordU32 (0xc67178f2) ,] ; # [rustfmt :: skip] # [allow (clippy :: unreadable_literal)] # [doc = " The SHA256 initial hash value H(0) as defined in FIPS 180-4."] const H0 : [WordU32 ; 8] = [WordU32 (0x6a09e667) , WordU32 (0xbb67ae85) , WordU32 (0x3c6ef372) , WordU32 (0xa54ff53a) , WordU32 (0x510e527f) , WordU32 (0x9b05688c) , WordU32 (0x1f83d9ab) , WordU32 (0x5be0cd19) ,] ; # [doc = " The Big Sigma 0 function as specified in FIPS 180-4 section 4.1.2."] fn big_sigma_0 (x : WordU32) -> WordU32 { (x . rotate_right (2)) ^ x . rotate_right (13) ^ x . rotate_right (22) } # [doc = " The Big Sigma 1 function as specified in FIPS 180-4 section 4.1.2."] fn big_sigma_1 (x : WordU32) -> WordU32 { (x . rotate_right (6)) ^ x . rotate_right (11) ^ x . rotate_right (25) } # [doc = " The Small Sigma 0 function as specified in FIPS 180-4 section 4.1.2."] fn small_sigma_0 (x : WordU32) -> WordU32 { (x . rotate_right (7)) ^ x . rotate_right (18) ^ (x >> WordU32 (3)) } # [doc = " The Small Sigma 1 function as specified in FIPS 180-4 section 4.1.2."] fn small_sigma_1 (x : WordU32) -> WordU32 { (x . rotate_right (17)) ^ x . rotate_right (19) ^ (x >> WordU32 (10)) } }
+    };
+}
+
+impl_114!()

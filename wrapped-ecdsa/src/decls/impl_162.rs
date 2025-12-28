@@ -1,0 +1,20 @@
+macro_rules! deps {
+    () => {
+        SignatureSize!();
+        MaxOverhead!();
+        Signature!();
+        SignatureBytes!();
+        MaxSize!();
+        EcdsaCurve!();
+        SignatureWithOid!();
+    };
+}
+
+macro_rules! impl_162 {
+    () => {
+        deps!();
+        # [cfg (feature = "digest")] impl < C > SignatureWithOid < C > where C : EcdsaCurve , { # [doc = " Create a new signature with an explicitly provided OID."] # [doc = ""] # [doc = " OID must begin with `1.2.840.10045.4`, the [RFC5758] OID prefix for"] # [doc = " ECDSA variants."] # [doc = ""] # [doc = " [RFC5758]: https://www.rfc-editor.org/rfc/rfc5758#section-3.2"] pub fn new (signature : Signature < C > , oid : ObjectIdentifier) -> Result < Self > { for (arc1 , arc2) in ObjectIdentifier :: new_unwrap ("1.2.840.10045.4.3") . arcs () . zip (oid . arcs ()) { if arc1 != arc2 { return Err (Error :: new ()) ; } } Ok (Self { signature , oid }) } # [doc = " Create a new signature, determining the OID from the given digest."] # [doc = ""] # [doc = " Supports SHA-2 family digests as enumerated in [RFC5758 § 3.2], i.e."] # [doc = " SHA-224, SHA-256, SHA-384, or SHA-512."] # [doc = ""] # [doc = " [RFC5758 § 3.2]: https://www.rfc-editor.org/rfc/rfc5758#section-3.2"] pub fn new_with_digest < D > (signature : Signature < C >) -> Result < Self > where D : AssociatedOid + Digest , { let oid = ecdsa_oid_for_digest (D :: OID) . ok_or_else (Error :: new) ? ; Ok (Self { signature , oid }) } # [doc = " Parse a signature from fixed-with bytes."] pub fn from_bytes_with_digest < D > (bytes : & SignatureBytes < C >) -> Result < Self > where D : AssociatedOid + Digest , SignatureSize < C > : ArraySize , { Self :: new_with_digest :: < D > (Signature :: < C > :: from_bytes (bytes) ?) } # [doc = " Parse a signature from a byte slice."] pub fn from_slice_with_digest < D > (slice : & [u8]) -> Result < Self > where D : AssociatedOid + Digest , SignatureSize < C > : ArraySize , { Self :: new_with_digest :: < D > (Signature :: < C > :: from_slice (slice) ?) } # [doc = " Parse a signature from ASN.1 DER and associate the given digest's OID with it."] # [cfg (feature = "der")] pub fn from_der_with_digest < D > (der_bytes : & [u8]) -> Result < Self > where D : AssociatedOid + Digest , der :: MaxSize < C > : ArraySize , < FieldBytesSize < C > as Add > :: Output : Add < der :: MaxOverhead > + ArraySize , { Self :: new_with_digest :: < D > (Signature :: < C > :: from_der (der_bytes) ?) } # [doc = " Parse a signature from ASN.1 DER and associate the given OID with it."] # [cfg (feature = "der")] pub fn from_der_with_oid (der_bytes : & [u8] , oid : ObjectIdentifier) -> Result < Self > where der :: MaxSize < C > : ArraySize , < FieldBytesSize < C > as Add > :: Output : Add < der :: MaxOverhead > + ArraySize , { Self :: new (Signature :: < C > :: from_der (der_bytes) ? , oid) } # [doc = " Get the fixed-width ECDSA signature."] pub fn signature (& self) -> & Signature < C > { & self . signature } # [doc = " Get the ECDSA OID for this signature."] pub fn oid (& self) -> ObjectIdentifier { self . oid } # [doc = " Serialize this signature as fixed-width bytes."] pub fn to_bytes (& self) -> SignatureBytes < C > where SignatureSize < C > : ArraySize , { self . signature . to_bytes () } # [doc = " Serialize this signature as ASN.1 DER."] # [doc = ""] # [doc = " Note that this includes only the `r` and `s` signature components, and not the OID."] # [doc = ""] # [doc = " See [`der::Signature`] documentation for more information."] # [cfg (feature = "der")] pub fn to_der (& self) -> der :: Signature < C > where der :: MaxSize < C > : ArraySize , < FieldBytesSize < C > as Add > :: Output : Add < der :: MaxOverhead > + ArraySize , { self . signature . clone () . into () } }
+    };
+}
+
+impl_162!()

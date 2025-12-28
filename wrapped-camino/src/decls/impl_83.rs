@@ -1,15 +1,13 @@
 macro_rules! deps {
     () => {
-        FromOsStrError!();
-        Utf8PathBuf!();
-        FromOsStringError!();
+        Utf8Path!();
     };
 }
 
 macro_rules! impl_83 {
     () => {
         deps!();
-        impl TryFrom < OsString > for Utf8PathBuf { type Error = FromOsStringError ; fn try_from (os_string : OsString) -> Result < Utf8PathBuf , Self :: Error > { Utf8PathBuf :: from_os_string (os_string) . map_err (| os_string | FromOsStringError { os_string , error : FromOsStrError (()) , }) } }
+        impl From < & '_ Utf8Path > for Arc < Path > { fn from (path : & Utf8Path) -> Arc < Path > { AsRef :: < Path > :: as_ref (path) . into () } }
     };
 }
 

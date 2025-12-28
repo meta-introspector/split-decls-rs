@@ -1,0 +1,18 @@
+macro_rules! deps {
+    () => {
+        Term!();
+        Message!();
+        Attribute!();
+        Expression!();
+        Entry!();
+    };
+}
+
+macro_rules! Identifier {
+    () => {
+        deps!();
+        # [doc = " Identifier is part of nodes such as [`Message`], [`Term`] and [`Attribute`]."] # [doc = ""] # [doc = " It is used to associate a unique key with an [`Entry`] or an [`Attribute`]"] # [doc = " and in [`Expression`] nodes to refer to another entry."] # [doc = ""] # [doc = " # Example"] # [doc = ""] # [doc = " ```"] # [doc = " use fluent_syntax::parser;"] # [doc = " use fluent_syntax::ast;"] # [doc = ""] # [doc = " let ftl = r#\""] # [doc = ""] # [doc = " hello-world = Value"] # [doc = ""] # [doc = " \"#;"] # [doc = ""] # [doc = " let resource = parser::parse(ftl)"] # [doc = "     .expect(\"Failed to parse an FTL resource.\");"] # [doc = ""] # [doc = " assert_eq!("] # [doc = "     resource,"] # [doc = "     ast::Resource {"] # [doc = "         body: vec!["] # [doc = "             ast::Entry::Message(ast::Message {"] # [doc = "                 id: ast::Identifier {"] # [doc = "                     name: \"hello-world\""] # [doc = "                 },"] # [doc = "                 value: Some(ast::Pattern {"] # [doc = "                     elements: vec!["] # [doc = "                         ast::PatternElement::TextElement {"] # [doc = "                             value: \"Value\""] # [doc = "                         }"] # [doc = "                     ]"] # [doc = "                 }),"] # [doc = "                 attributes: vec![],"] # [doc = "                 comment: None,"] # [doc = "             }),"] # [doc = "         ]"] # [doc = "     }"] # [doc = " );"] # [doc = " ```"] # [derive (Clone , Debug , Eq , PartialEq)] # [cfg_attr (feature = "serde" , derive (Serialize , Deserialize))] pub struct Identifier < S > { pub name : S , }
+    };
+}
+
+Identifier!()

@@ -1,0 +1,7 @@
+macro_rules! write_flags_of {
+    () => {
+        fn write_flags_of (p : & Command , p_global : Option < & Command >) -> String { debug ! ("write_flags_of;") ; let mut ret = vec ! [] ; for f in utils :: flags (p) { debug ! ("write_flags_of:iter: f={}" , f . get_id ()) ; let help = escape_help (& f . get_help () . unwrap_or_default () . to_string ()) ; let conflicts = arg_conflicts (p , & f , p_global) ; let multiple = if let ArgAction :: Count | ArgAction :: Append = f . get_action () { "*" } else { "" } ; if let Some (short) = f . get_short () { let s = format ! ("'{conflicts}{multiple}-{short}[{help}]' \\") ; debug ! ("write_flags_of:iter: Wrote...{}" , &* s) ; ret . push (s) ; if let Some (short_aliases) = f . get_visible_short_aliases () { for alias in short_aliases { let s = format ! ("'{conflicts}{multiple}-{alias}[{help}]' \\" ,) ; debug ! ("write_flags_of:iter: Wrote...{}" , &* s) ; ret . push (s) ; } } } if let Some (long) = f . get_long () { let l = format ! ("'{conflicts}{multiple}--{long}[{help}]' \\") ; debug ! ("write_flags_of:iter: Wrote...{}" , &* l) ; ret . push (l) ; if let Some (aliases) = f . get_visible_aliases () { for alias in aliases { let l = format ! ("'{conflicts}{multiple}--{alias}[{help}]' \\") ; debug ! ("write_flags_of:iter: Wrote...{}" , &* l) ; ret . push (l) ; } } } } ret . join ("\n") }
+    };
+}
+
+write_flags_of!()

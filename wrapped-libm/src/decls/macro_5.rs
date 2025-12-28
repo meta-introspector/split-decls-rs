@@ -1,0 +1,7 @@
+macro_rules! macro_5 {
+    () => {
+        # [cfg (f128_enabled)] libm_helper ! { f128 , funcs : { (fn ceil (x : f128) -> (f128) ; => ceilf128) ; (fn copysign (x : f128 , y : f128) -> (f128) ; => copysignf128) ; (fn fabs (x : f128) -> (f128) ; => fabsf128) ; (fn fdim (x : f128 , y : f128) -> (f128) ; => fdimf128) ; (fn floor (x : f128) -> (f128) ; => floorf128) ; (fn fma (x : f128 , y : f128 , z : f128) -> (f128) ; => fmaf128) ; (fn fmax (x : f128 , y : f128) -> (f128) ; => fmaxf128) ; (fn fmaximum (x : f128 , y : f128) -> (f128) ; => fmaximumf128) ; (fn fmaximum_num (x : f128 , y : f128) -> (f128) ; => fmaximum_numf128) ; (fn fmin (x : f128 , y : f128) -> (f128) ; => fminf128) ; (fn fminimum (x : f128 , y : f128) -> (f128) ; => fminimumf128) ; (fn fminimum_num (x : f128 , y : f128) -> (f128) ; => fminimum_numf128) ; (fn fmod (x : f128 , y : f128) -> (f128) ; => fmodf128) ; (fn ldexp (x : f128 , n : i32) -> (f128) ; => ldexpf128) ; (fn rint (x : f128) -> (f128) ; => rintf128) ; (fn round (x : f128) -> (f128) ; => roundf128) ; (fn roundeven (x : f128) -> (f128) ; => roundevenf128) ; (fn scalbn (x : f128 , n : i32) -> (f128) ; => scalbnf128) ; (fn sqrt (x : f128) -> (f128) ; => sqrtf128) ; (fn trunc (x : f128) -> (f128) ; => truncf128) ; } }
+    };
+}
+
+macro_5!()

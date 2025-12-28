@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        Postprocessor!();
+        SliderHeuristic!();
+    };
+}
+
+macro_rules! impl_32 {
+    () => {
+        deps!();
+        impl < H : SliderHeuristic > Postprocessor < '_ , H > { fn run (mut self) { loop { if ! self . hunk . next_hunk (self . removed , self . added) { break ; } let mut earliest_end ; let mut is_modification ; loop { while self . slide_up () { } earliest_end = self . hunk . after . end ; is_modification = self . hunk . before . start != self . hunk . before . end ; let hunk_size_unexpanded = self . hunk . after . len () ; while self . slide_down () { is_modification |= self . hunk . before . start != self . hunk . before . end ; } if hunk_size_unexpanded == self . hunk . after . len () { break ; } } if self . hunk . after . end == earliest_end { continue ; } if is_modification { while self . hunk . before . start == self . hunk . before . end { let success = self . slide_up () ; debug_assert ! (success) ; } } else { let slider_end = self . heuristic . best_slider_end (self . tokens , self . hunk . after . clone () , earliest_end ,) ; for _ in slider_end .. self . hunk . after . end { let success = self . slide_up () ; debug_assert ! (success) ; } } } } # [doc = " slide up a hunk by one token/line, potenitally merging it with a subsequent hunk"] fn slide_down (& mut self) -> bool { let Some (& next_token) = self . tokens . get (self . hunk . after . end as usize) else { return false ; } ; if self . tokens [self . hunk . after . start as usize] != next_token { return false ; } self . added [self . hunk . after . start as usize] = false ; self . added [self . hunk . after . end as usize] = true ; self . hunk . after . start += 1 ; self . hunk . after . end = find_hunk_end (self . added , self . hunk . after . end) ; self . hunk . before . start = self . hunk . before . end + 1 ; self . hunk . before . end = find_hunk_end (self . removed , self . hunk . before . start) ; true } # [doc = " slide up a hunk by one token/line, potenitally merging it with a previous hunk"] fn slide_up (& mut self) -> bool { if self . hunk . after . start == 0 { return false ; } if self . tokens [self . hunk . after . start as usize - 1] != self . tokens [self . hunk . after . end as usize - 1] { return false ; } self . added [self . hunk . after . start as usize - 1] = true ; self . added [self . hunk . after . end as usize - 1] = false ; self . hunk . after . end -= 1 ; self . hunk . after . start = find_hunk_start (self . added , self . hunk . after . start - 1) ; self . hunk . before . end = self . hunk . before . start - 1 ; self . hunk . before . start = find_hunk_start (self . removed , self . hunk . before . start - 1) ; true } }
+    };
+}
+
+impl_32!()

@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        Result!();
+        ErrnoSentinel!();
+    };
+}
+
+macro_rules! impl_8 {
+    () => {
+        deps!();
+        impl Errno { # [doc = " Returns the current value of errno"] pub fn last () -> Self { Self :: from_raw (Self :: last_raw ()) } # [doc = " Returns the current raw i32 value of errno"] pub fn last_raw () -> i32 { unsafe { * errno_location () } } # [doc = " Sets the value of errno."] # [doc = ""] # [doc = " # Example"] # [doc = " ```"] # [doc = " use nix::errno::Errno;"] # [doc = ""] # [doc = " Errno::EIO.set();"] # [doc = ""] # [doc = " assert_eq!(Errno::last(), Errno::EIO);"] # [doc = " ```"] pub fn set (self) { Self :: set_raw (self as i32) } # [doc = " Sets the raw i32 value of errno."] pub fn set_raw (errno : i32) { unsafe { * errno_location () = errno ; } } # [deprecated (since = "0.28.0" , note = "please use `Errno::from_raw()` instead")] pub const fn from_i32 (err : i32) -> Errno { Self :: from_raw (err) } pub const fn from_raw (err : i32) -> Errno { # [allow (deprecated)] from_i32 (err) } pub fn desc (self) -> & 'static str { desc (self) } # [doc = " Sets the platform-specific errno to no-error"] # [doc = ""] # [doc = " ```"] # [doc = " use nix::errno::Errno;"] # [doc = ""] # [doc = " Errno::EIO.set();"] # [doc = ""] # [doc = " Errno::clear();"] # [doc = ""] # [doc = " let err = Errno::last();"] # [doc = " assert_ne!(err, Errno::EIO);"] # [doc = " assert_eq!(err, Errno::from_raw(0));"] # [doc = " ```"] pub fn clear () { Self :: set_raw (0) } # [doc = " Returns `Ok(value)` if it does not contain the sentinel value. This"] # [doc = " should not be used when `-1` is not the errno sentinel value."] # [inline] pub fn result < S : ErrnoSentinel + PartialEq < S > > (value : S) -> Result < S > { if value == S :: sentinel () { Err (Self :: last ()) } else { Ok (value) } } }
+    };
+}
+
+impl_8!()

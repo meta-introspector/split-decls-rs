@@ -1,0 +1,7 @@
+macro_rules! git_for_windows_root {
+    () => {
+        # [doc = " Find a Git for Windows installation directory based on `git --exec-path` output."] # [doc = ""] # [doc = " Currently this is used only for finding the path to an `sh.exe` associated with Git. This is"] # [doc = " separate from `installation_config()` and `installation_config_prefix()` in `gix_path::env`."] # [doc = " This is *not* suitable for finding the highest-scoped configuration file, because that could be"] # [doc = " installed in an unusual place, or customized via `GIT_CONFIG_SYSTEM` or `GIT_CONFIG_NOSYSTEM`,"] # [doc = " all of which `installation_config()` should reflect. Likewise, `installation_config_prefix()`"] # [doc = " has strong uses, such as to find a directory inside `ProgramData` containing configuration."] # [doc = " But it is possible that some marginal uses of `installation_config_prefix()`, if they do not"] # [doc = " really relate to configuration, could be replaced with `git_for_windows_root()` in the future."] fn git_for_windows_root () -> Option < & 'static Path > { static GIT_ROOT : LazyLock < Option < PathBuf > > = LazyLock :: new (| | { super :: core_dir () . filter (| core | { core . is_absolute () && core . ends_with ("libexec/git-core") }) . and_then (| core | core . ancestors () . nth (2)) . filter (| prefix | { MSYS_USR_VARIANTS . iter () . any (| name | prefix . ends_with (name)) }) . and_then (| prefix | prefix . parent ()) . map (Into :: into) }) ; GIT_ROOT . as_deref () }
+    };
+}
+
+git_for_windows_root!()

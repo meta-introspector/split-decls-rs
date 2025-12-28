@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Key!();
+        TimesRange!();
     };
 }
 
 macro_rules! impl_29 {
     () => {
         deps!();
-        # [doc (hidden)] impl Key { pub fn new < T : 'static + ? Sized > () -> Self { Key (any :: TypeId :: of :: < T > ()) } }
+        impl From < RangeToInclusive < usize > > for TimesRange { fn from (r : RangeToInclusive < usize >) -> TimesRange { TimesRange (0 .. r . end + 1) } }
     };
 }
 

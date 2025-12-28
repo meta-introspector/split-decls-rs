@@ -1,13 +1,14 @@
 macro_rules! deps {
     () => {
-        FromPathBufError!();
+        Utf8PathBuf!();
+        Utf8Path!();
     };
 }
 
 macro_rules! impl_88 {
     () => {
         deps!();
-        impl fmt :: Display for FromPathBufError { fn fmt (& self , f : & mut fmt :: Formatter) -> fmt :: Result { write ! (f , "PathBuf contains invalid UTF-8: {}" , self . path . display ()) } }
+        impl < 'a > From < Cow < 'a , Utf8Path > > for Utf8PathBuf { fn from (path : Cow < 'a , Utf8Path >) -> Utf8PathBuf { path . into_owned () } }
     };
 }
 

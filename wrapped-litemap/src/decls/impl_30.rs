@@ -1,0 +1,7 @@
+macro_rules! impl_30 {
+    () => {
+        impl < 'a , V > LiteMap < & 'a [u8] , V , & 'a [(& 'a [u8] , V)] > { # [doc = " Const function to get the value associated with a `&[u8]` key, if it exists."] # [doc = ""] # [doc = " Also returns the index of the value."] # [doc = ""] # [doc = " Note: This function will no longer be needed if const trait behavior is stabilized."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```rust"] # [doc = " use litemap::LiteMap;"] # [doc = ""] # [doc = " const MAP: LiteMap<&[u8], usize, &[(&[u8], usize)]> ="] # [doc = "     LiteMap::from_sorted_store_unchecked(&["] # [doc = "         (b\"abc\", 11),"] # [doc = "         (b\"bcd\", 22),"] # [doc = "         (b\"cde\", 33),"] # [doc = "         (b\"def\", 44),"] # [doc = "         (b\"efg\", 55),"] # [doc = "     ]);"] # [doc = ""] # [doc = " assert_eq!(const { MAP.const_get_with_index(b\"def\") }, Some((3, &44)));"] # [doc = ""] # [doc = " assert_eq!(const { MAP.const_get_with_index(b\"dng\") }, None);"] # [doc = " ```"] pub const fn const_get_with_index (& self , key : & [u8]) -> Option < (usize , & 'a V) > { let mut i = 0 ; let mut j = self . const_len () ; while i < j { let mid = (i + j) / 2 ; # [expect (clippy :: indexing_slicing)] let x = & self . values [mid] ; match const_cmp_bytes (key , x . 0) { Ordering :: Equal => return Some ((mid , & x . 1)) , Ordering :: Greater => i = mid + 1 , Ordering :: Less => j = mid , } ; } None } }
+    };
+}
+
+impl_30!()

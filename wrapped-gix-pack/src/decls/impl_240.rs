@@ -1,0 +1,22 @@
+macro_rules! deps {
+    () => {
+        Outcome!();
+        Context!();
+        Tree!();
+        ProgressId!();
+        File!();
+        Kind!();
+        Entry!();
+        Options!();
+        Error!();
+    };
+}
+
+macro_rules! impl_240 {
+    () => {
+        deps!();
+        # [doc = " Traversal with index"] impl index :: File { # [doc = " Iterate through all _decoded objects_ in the given `pack` and handle them with a `Processor`, using an index to reduce waste"] # [doc = " at the cost of memory."] # [doc = ""] # [doc = " For more details, see the documentation on the [`traverse()`][index::File::traverse()] method."] pub fn traverse_with_index < Processor , E > (& self , pack : & crate :: data :: File , mut processor : Processor , progress : & mut dyn DynNestedProgress , should_interrupt : & AtomicBool , Options { check , thread_limit } : Options ,) -> Result < Outcome , Error < E > > where Processor : FnMut (gix_object :: Kind , & [u8] , & index :: Entry , & dyn gix_features :: progress :: Progress) -> Result < () , E > + Send + Clone , E : std :: error :: Error + Send + Sync + 'static , { let (verify_result , traversal_result) = parallel :: join ({ let mut pack_progress = progress . add_child_with_id (format ! ("Hash of pack '{}'" , pack . path () . file_name () . expect ("pack has filename") . to_string_lossy ()) , ProgressId :: HashPackDataBytes . into () ,) ; let mut index_progress = progress . add_child_with_id (format ! ("Hash of index '{}'" , self . path . file_name () . expect ("index has filename") . to_string_lossy ()) , ProgressId :: HashPackIndexBytes . into () ,) ; move | | { let res = self . possibly_verify (pack , check , & mut pack_progress , & mut index_progress , should_interrupt) ; if res . is_err () { should_interrupt . store (true , Ordering :: SeqCst) ; } res } } , | | -> Result < _ , Error < _ > > { let sorted_entries = index_entries_sorted_by_offset_ascending (self , & mut progress . add_child_with_id ("collecting sorted index" . into () , ProgressId :: CollectSortedIndexEntries . into () ,) ,) ; let tree = crate :: cache :: delta :: Tree :: from_offsets_in_pack (pack . path () , sorted_entries . into_iter () . map (Entry :: from) , & | e | e . index_entry . pack_offset , & | id | self . lookup (id) . map (| idx | self . pack_offset_at_index (idx)) , & mut progress . add_child_with_id ("indexing" . into () , ProgressId :: TreeFromOffsetsObjects . into ()) , should_interrupt , self . object_hash ,) ? ; let mut outcome = digest_statistics (tree . traverse (| slice , pack | pack . entry_slice (slice) , pack , pack . pack_end () as u64 , move | data , progress , traverse :: Context { entry : pack_entry , entry_end , decompressed : bytes , level , } | { let object_kind = pack_entry . header . as_kind () . expect ("non-delta object") ; data . level = level ; data . decompressed_size = pack_entry . decompressed_size ; data . object_kind = object_kind ; data . compressed_size = entry_end - pack_entry . data_offset ; data . object_size = bytes . len () as u64 ; let result = index :: traverse :: process_entry (check , object_kind , bytes , & data . index_entry , | | { gix_features :: hash :: crc32 (pack . entry_slice (data . index_entry . pack_offset .. entry_end) . expect ("slice pointing into the pack (by now data is verified)") ,) } , progress , & mut processor ,) ; match result { Err (err @ Error :: PackDecode { .. }) if ! check . fatal_decode_error () => { progress . info (format ! ("Ignoring decode error: {err}")) ; Ok (()) } res => res , } } , traverse :: Options { object_progress : Box :: new (progress . add_child_with_id ("Resolving" . into () , ProgressId :: DecodedObjects . into ()) ,) , size_progress : & mut progress . add_child_with_id ("Decoding" . into () , ProgressId :: DecodedBytes . into ()) , thread_limit , should_interrupt , object_hash : self . object_hash , } ,) ?) ; outcome . pack_size = pack . data_len () as u64 ; Ok (outcome) } ,) ; Ok (Outcome { actual_index_checksum : verify_result ? , statistics : traversal_result ? , }) } }
+    };
+}
+
+impl_240!()

@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        Load!();
+        AtomicPtr!();
+        Atomic!();
+    };
+}
+
+macro_rules! impl_271 {
+    () => {
+        deps!();
+        impl < T > AtomicPtr < T > { # [doc = " Creates a new instance of `AtomicPtr`."] # [track_caller] pub fn new (v : * mut T) -> AtomicPtr < T > { AtomicPtr (Atomic :: new (v , location ! ())) } # [doc = " Load the value without any synchronization."] # [doc = ""] # [doc = " # Safety"] # [doc = ""] # [doc = " An unsynchronized atomic load technically always has undefined behavior."] # [doc = " However, if the atomic value is not currently visible by other threads,"] # [doc = " this *should* always be equivalent to a non-atomic load of an un-shared"] # [doc = " `*mut T` value."] pub unsafe fn unsync_load (& self) -> * mut T { self . 0 . unsync_load () } # [doc = " Get access to a mutable reference to the inner value."] # [track_caller] pub fn with_mut < R > (& mut self , f : impl FnOnce (& mut * mut T) -> R) -> R { self . 0 . with_mut (f) } # [doc = " Consumes the atomic and returns the contained value."] # [track_caller] pub fn into_inner (self) -> * mut T { unsafe { self . unsync_load () } } # [doc = " Loads a value from the pointer."] # [track_caller] pub fn load (& self , order : Ordering) -> * mut T { self . 0 . load (order) } # [doc = " Stores a value into the pointer."] # [track_caller] pub fn store (& self , val : * mut T , order : Ordering) { self . 0 . store (val , order) } # [doc = " Stores a value into the pointer, returning the previous value."] # [track_caller] pub fn swap (& self , val : * mut T , order : Ordering) -> * mut T { self . 0 . swap (val , order) } # [doc = " Stores a value into the pointer if the current value is the same as the `current` value."] # [track_caller] pub fn compare_and_swap (& self , current : * mut T , new : * mut T , order : Ordering) -> * mut T { self . 0 . compare_and_swap (current , new , order) } # [doc = " Stores a value into the pointer if the current value is the same as the `current` value."] # [track_caller] pub fn compare_exchange (& self , current : * mut T , new : * mut T , success : Ordering , failure : Ordering ,) -> Result < * mut T , * mut T > { self . 0 . compare_exchange (current , new , success , failure) } # [doc = " Stores a value into the atomic if the current value is the same as the current value."] # [track_caller] pub fn compare_exchange_weak (& self , current : * mut T , new : * mut T , success : Ordering , failure : Ordering ,) -> Result < * mut T , * mut T > { self . compare_exchange (current , new , success , failure) } # [doc = " Fetches the value, and applies a function to it that returns an optional new value. Returns"] # [doc = " a [`Result`] of [`Ok`]`(previous_value)` if the function returned [`Some`]`(_)`, else"] # [doc = " [`Err`]`(previous_value)`."] # [track_caller] pub fn fetch_update < F > (& self , set_order : Ordering , fetch_order : Ordering , f : F ,) -> Result < * mut T , * mut T > where F : FnMut (* mut T) -> Option < * mut T > , { self . 0 . fetch_update (set_order , fetch_order , f) } }
+    };
+}
+
+impl_271!()

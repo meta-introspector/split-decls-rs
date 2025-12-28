@@ -1,15 +1,13 @@
 macro_rules! deps {
     () => {
-        HasCrate!();
-        Crate!();
-        TypeAlias!();
+        TypeNs!();
     };
 }
 
 macro_rules! impl_206 {
     () => {
         deps!();
-        impl HasCrate for TypeAlias { fn krate (& self , db : & dyn HirDatabase) -> Crate { self . module (db) . krate () } }
+        impl < 'db > HirDisplay < 'db > for TypeNs < 'db > { fn hir_fmt (& self , f : & mut HirFormatter < '_ , 'db >) -> Result < () , HirDisplayError > { self . ty . hir_fmt (f) } }
     };
 }
 

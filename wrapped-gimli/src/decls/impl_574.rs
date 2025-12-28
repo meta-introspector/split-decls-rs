@@ -1,0 +1,22 @@
+macro_rules! deps {
+    () => {
+        Reader!();
+        DebugAddrIndex!();
+        RawRngListIter!();
+        Range!();
+        DebugAddr!();
+        Result!();
+        RngListIter!();
+        DebugAddrBase!();
+        RawRngListEntry!();
+    };
+}
+
+macro_rules! impl_574 {
+    () => {
+        deps!();
+        impl < R : Reader > RngListIter < R > { # [doc = " Construct a `RngListIter`."] fn new (raw : RawRngListIter < R > , base_address : u64 , debug_addr : DebugAddr < R > , debug_addr_base : DebugAddrBase < R :: Offset > ,) -> RngListIter < R > { RngListIter { raw , base_address , debug_addr , debug_addr_base , } } # [inline] fn get_address (& self , index : DebugAddrIndex < R :: Offset >) -> Result < u64 > { self . debug_addr . get_address (self . raw . encoding . address_size , self . debug_addr_base , index) } # [doc = " Advance the iterator to the next range."] pub fn next (& mut self) -> Result < Option < Range > > { loop { let raw_range = match self . raw . next () ? { Some (range) => range , None => return Ok (None) , } ; let range = self . convert_raw (raw_range) ? ; if range . is_some () { return Ok (range) ; } } } # [doc = " Return the next raw range."] # [doc = ""] # [doc = " The raw range should be passed to `convert_range`."] # [doc (hidden)] pub fn next_raw (& mut self) -> Result < Option < RawRngListEntry < R :: Offset > > > { self . raw . next () } # [doc = " Convert a raw range into a range, and update the state of the iterator."] # [doc = ""] # [doc = " The raw range should have been obtained from `next_raw`."] # [doc (hidden)] pub fn convert_raw (& mut self , raw_range : RawRngListEntry < R :: Offset >) -> Result < Option < Range > > { let address_size = self . raw . encoding . address_size ; let range = match raw_range { RawRngListEntry :: BaseAddress { addr } => { self . base_address = addr ; return Ok (None) ; } RawRngListEntry :: BaseAddressx { addr } => { self . base_address = self . get_address (addr) ? ; return Ok (None) ; } RawRngListEntry :: StartxEndx { begin , end } => { let begin = self . get_address (begin) ? ; let end = self . get_address (end) ? ; Range { begin , end } } RawRngListEntry :: StartxLength { begin , length } => { let begin = self . get_address (begin) ? ; let end = begin . wrapping_add_sized (length , address_size) ; Range { begin , end } } RawRngListEntry :: AddressOrOffsetPair { begin , end } | RawRngListEntry :: OffsetPair { begin , end } => { if self . base_address >= u64 :: min_tombstone (address_size) { return Ok (None) ; } let mut range = Range { begin , end } ; range . add_base_address (self . base_address , address_size) ; range } RawRngListEntry :: StartEnd { begin , end } => Range { begin , end } , RawRngListEntry :: StartLength { begin , length } => { let end = begin . wrapping_add_sized (length , address_size) ; Range { begin , end } } } ; if range . begin >= u64 :: min_tombstone (address_size) || range . begin >= range . end { return Ok (None) ; } Ok (Some (range)) } }
+    };
+}
+
+impl_574!()

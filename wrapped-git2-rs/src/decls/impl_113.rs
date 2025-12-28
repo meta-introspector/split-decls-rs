@@ -1,13 +1,14 @@
 macro_rules! deps {
     () => {
-        FileMode!();
+        CertHostkey!();
+        SshHostKeyType!();
     };
 }
 
 macro_rules! impl_113 {
     () => {
         deps!();
-        impl From < FileMode > for i32 { fn from (mode : FileMode) -> i32 { match mode { FileMode :: Unreadable => raw :: GIT_FILEMODE_UNREADABLE as i32 , FileMode :: Tree => raw :: GIT_FILEMODE_TREE as i32 , FileMode :: Blob => raw :: GIT_FILEMODE_BLOB as i32 , FileMode :: BlobGroupWritable => raw :: GIT_FILEMODE_BLOB_GROUP_WRITABLE as i32 , FileMode :: BlobExecutable => raw :: GIT_FILEMODE_BLOB_EXECUTABLE as i32 , FileMode :: Link => raw :: GIT_FILEMODE_LINK as i32 , FileMode :: Commit => raw :: GIT_FILEMODE_COMMIT as i32 , } } }
+        impl < 'a > CertHostkey < 'a > { # [doc = " Returns the md5 hash of the hostkey, if available."] pub fn hash_md5 (& self) -> Option < & [u8 ; 16] > { unsafe { if (* self . raw) . kind as u32 & raw :: GIT_CERT_SSH_MD5 as u32 == 0 { None } else { Some (& (* self . raw) . hash_md5) } } } # [doc = " Returns the SHA-1 hash of the hostkey, if available."] pub fn hash_sha1 (& self) -> Option < & [u8 ; 20] > { unsafe { if (* self . raw) . kind as u32 & raw :: GIT_CERT_SSH_SHA1 as u32 == 0 { None } else { Some (& (* self . raw) . hash_sha1) } } } # [doc = " Returns the SHA-256 hash of the hostkey, if available."] pub fn hash_sha256 (& self) -> Option < & [u8 ; 32] > { unsafe { if (* self . raw) . kind as u32 & raw :: GIT_CERT_SSH_SHA256 as u32 == 0 { None } else { Some (& (* self . raw) . hash_sha256) } } } # [doc = " Returns the raw host key."] pub fn hostkey (& self) -> Option < & [u8] > { unsafe { if (* self . raw) . kind & raw :: GIT_CERT_SSH_RAW == 0 { return None ; } Some (slice :: from_raw_parts ((* self . raw) . hostkey as * const u8 , (* self . raw) . hostkey_len as usize ,)) } } # [doc = " Returns the type of the host key."] pub fn hostkey_type (& self) -> Option < SshHostKeyType > { unsafe { if (* self . raw) . kind & raw :: GIT_CERT_SSH_RAW == 0 { return None ; } let t = match (* self . raw) . raw_type { raw :: GIT_CERT_SSH_RAW_TYPE_UNKNOWN => SshHostKeyType :: Unknown , raw :: GIT_CERT_SSH_RAW_TYPE_RSA => SshHostKeyType :: Rsa , raw :: GIT_CERT_SSH_RAW_TYPE_DSS => SshHostKeyType :: Dss , raw :: GIT_CERT_SSH_RAW_TYPE_KEY_ECDSA_256 => SshHostKeyType :: Ecdsa256 , raw :: GIT_CERT_SSH_RAW_TYPE_KEY_ECDSA_384 => SshHostKeyType :: Ecdsa384 , raw :: GIT_CERT_SSH_RAW_TYPE_KEY_ECDSA_521 => SshHostKeyType :: Ecdsa521 , raw :: GIT_CERT_SSH_RAW_TYPE_KEY_ED25519 => SshHostKeyType :: Ed255219 , t => panic ! ("unexpected host key type {:?}" , t) , } ; Some (t) } } }
     };
 }
 

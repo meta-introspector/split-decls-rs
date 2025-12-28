@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        CharacterAndClass!();
         CharacterAndTrieValue!();
         IgnorableBehavior!();
         Trie!();
+        CharacterAndClass!();
     };
 }
 

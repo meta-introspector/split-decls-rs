@@ -1,0 +1,7 @@
+macro_rules! MIN_PAGE_SIZE {
+    () => {
+        # [doc = " The number of bytes we consider enough to warrant their own page when"] # [doc = " deciding whether to flush a partially full buffer. Actual pages may need"] # [doc = " to be smaller, e.g. when writing the tail of the data stream."] const MIN_PAGE_SIZE : usize = MAX_PAGE_SIZE / 2 ;
+    };
+}
+
+MIN_PAGE_SIZE!()

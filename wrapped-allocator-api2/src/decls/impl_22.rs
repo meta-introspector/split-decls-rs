@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        Allocator!();
+        Box!();
+    };
+}
+
+macro_rules! impl_22 {
+    () => {
+        deps!();
+        impl < T , A : Allocator > Box < mem :: MaybeUninit < T > , A > { # [doc = " Converts to `Box<T, A>`."] # [doc = ""] # [doc = " # Safety"] # [doc = ""] # [doc = " As with [`MaybeUninit::assume_init`],"] # [doc = " it is up to the caller to guarantee that the value"] # [doc = " really is in an initialized state."] # [doc = " Calling this when the content is not yet fully initialized"] # [doc = " causes immediate undefined behavior."] # [doc = ""] # [doc = " [`MaybeUninit::assume_init`]: mem::MaybeUninit::assume_init"] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " use allocator_api2::boxed::Box;"] # [doc = ""] # [doc = " let mut five = Box::<u32>::new_uninit();"] # [doc = ""] # [doc = " let five: Box<u32> = unsafe {"] # [doc = "     // Deferred initialization:"] # [doc = "     five.as_mut_ptr().write(5);"] # [doc = ""] # [doc = "     five.assume_init()"] # [doc = " };"] # [doc = ""] # [doc = " assert_eq!(*five, 5)"] # [doc = " ```"] # [inline (always)] pub unsafe fn assume_init (self) -> Box < T , A > { let (raw , alloc) = Self :: into_raw_with_allocator (self) ; unsafe { Box :: < T , A > :: from_raw_in (raw as * mut T , alloc) } } # [doc = " Writes the value and converts to `Box<T, A>`."] # [doc = ""] # [doc = " This method converts the box similarly to [`Box::assume_init`] but"] # [doc = " writes `value` into it before conversion thus guaranteeing safety."] # [doc = " In some scenarios use of this method may improve performance because"] # [doc = " the compiler may be able to optimize copying from stack."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " use allocator_api2::boxed::Box;"] # [doc = ""] # [doc = " let big_box = Box::<[usize; 1024]>::new_uninit();"] # [doc = ""] # [doc = " let mut array = [0; 1024];"] # [doc = " for (i, place) in array.iter_mut().enumerate() {"] # [doc = "     *place = i;"] # [doc = " }"] # [doc = ""] # [doc = " // The optimizer may be able to elide this copy, so previous code writes"] # [doc = " // to heap directly."] # [doc = " let big_box = Box::write(big_box, array);"] # [doc = ""] # [doc = " for (i, x) in big_box.iter().enumerate() {"] # [doc = "     assert_eq!(*x, i);"] # [doc = " }"] # [doc = " ```"] # [inline (always)] pub fn write (mut boxed : Self , value : T) -> Box < T , A > { unsafe { (* boxed) . write (value) ; boxed . assume_init () } } }
+    };
+}
+
+impl_22!()

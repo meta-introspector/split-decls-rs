@@ -1,7 +1,8 @@
 macro_rules! deps {
     () => {
-        HkdfExtract!();
+        HmacImpl!();
         SimpleHkdfExtract!();
+        HkdfExtract!();
     };
 }
 

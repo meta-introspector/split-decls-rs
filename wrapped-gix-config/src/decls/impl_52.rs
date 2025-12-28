@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        Options!();
+        File!();
+        Error!();
+    };
+}
+
+macro_rules! impl_52 {
+    () => {
+        deps!();
+        impl File < 'static > { # [doc = " Traverse all `include` and `includeIf` directives found in this instance and follow them, loading the"] # [doc = " referenced files from their location and adding their content right past the value that included them."] # [doc = ""] # [doc = " # Limitations"] # [doc = ""] # [doc = " - Note that this method is _not idempotent_ and calling it multiple times will resolve includes multiple"] # [doc = "   times. It's recommended use is as part of a multi-step bootstrapping which needs fine-grained control,"] # [doc = "   and unless that's given one should prefer one of the other ways of initialization that resolve includes"] # [doc = "   at the right time."] # [doc = ""] # [doc = " # Deviation"] # [doc = ""] # [doc = " - included values are added after the _section_ that included them, not directly after the value. This is"] # [doc = "   a deviation from how git does it, as it technically adds new value right after the include path itself,"] # [doc = "   technically 'splitting' the section. This can only make a difference if the `include` section also has values"] # [doc = "   which later overwrite portions of the included file, which seems unusual as these would be related to `includes`."] # [doc = "   We can fix this by 'splitting' the include section if needed so the included sections are put into the right place."] # [doc = " - `hasconfig:remote.*.url` will not prevent itself to include files with `[remote \"name\"]\\nurl = x` values, but it also"] # [doc = "   won't match them, i.e. one cannot include something that will cause the condition to match or to always be true."] pub fn resolve_includes (& mut self , options : init :: Options < '_ >) -> Result < () , Error > { if options . includes . max_depth == 0 { return Ok (()) ; } let mut buf = Vec :: new () ; resolve (self , & mut buf , options) } }
+    };
+}
+
+impl_52!()

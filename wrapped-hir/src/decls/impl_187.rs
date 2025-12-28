@@ -1,0 +1,17 @@
+macro_rules! deps {
+    () => {
+        LookupTable!();
+        AlternativeExprs!();
+        NewTypesKey!();
+        Type!();
+    };
+}
+
+macro_rules! impl_187 {
+    () => {
+        deps!();
+        impl < 'db > LookupTable < 'db > { # [doc = " Initialize lookup table"] fn new (many_threshold : usize , goal : Type < 'db >) -> Self { let mut res = Self { many_threshold , .. Default :: default () } ; res . new_types . insert (NewTypesKey :: ImplMethod , Vec :: new ()) ; res . new_types . insert (NewTypesKey :: StructProjection , Vec :: new ()) ; res . types_wishlist . insert (goal) ; res } # [doc = " Find all `Expr`s that unify with the `ty`"] fn find (& mut self , db : & 'db dyn HirDatabase , ty : & Type < 'db >) -> Option < Vec < Expr < 'db > > > { let res = self . data . iter () . find (| (t , _) | t . could_unify_with_deeply (db , ty)) . map (| (t , tts) | tts . exprs (t)) ; if res . is_none () { self . types_wishlist . insert (ty . clone ()) ; } if let Some (res) = & res && res . len () > self . many_threshold { return Some (vec ! [Expr :: Many (ty . clone ())]) ; } res } # [doc = " Same as find but automatically creates shared reference of types in the lookup"] # [doc = ""] # [doc = " For example if we have type `i32` in data and we query for `&i32` it map all the type"] # [doc = " trees we have for `i32` with `Expr::Reference` and returns them."] fn find_autoref (& mut self , db : & 'db dyn HirDatabase , ty : & Type < 'db >) -> Option < Vec < Expr < 'db > > > { let res = self . data . iter () . find (| (t , _) | t . could_unify_with_deeply (db , ty)) . map (| (t , it) | it . exprs (t)) . or_else (| | { self . data . iter () . find (| (t , _) | { t . add_reference (Mutability :: Shared) . could_unify_with_deeply (db , ty) }) . map (| (t , it) | { it . exprs (t) . into_iter () . map (| expr | Expr :: Reference (Box :: new (expr))) . collect () }) }) ; if res . is_none () { self . types_wishlist . insert (ty . clone ()) ; } if let Some (res) = & res && res . len () > self . many_threshold { return Some (vec ! [Expr :: Many (ty . clone ())]) ; } res } # [doc = " Insert new type trees for type"] # [doc = ""] # [doc = " Note that the types have to be the same, unification is not enough as unification is not"] # [doc = " transitive. For example Vec<i32> and FxHashSet<i32> both unify with Iterator<Item = i32>,"] # [doc = " but they clearly do not unify themselves."] fn insert (& mut self , ty : Type < 'db > , exprs : impl Iterator < Item = Expr < 'db > >) { match self . data . get_mut (& ty) { Some (it) => { it . extend_with_threshold (self . many_threshold , exprs) ; if it . is_many () { self . types_wishlist . remove (& ty) ; } } None => { self . data . insert (ty . clone () , AlternativeExprs :: new (self . many_threshold , exprs)) ; for it in self . new_types . values_mut () { it . push (ty . clone ()) ; } } } } # [doc = " Iterate all the reachable types"] fn iter_types (& self) -> impl Iterator < Item = Type < 'db > > + '_ { self . data . keys () . cloned () } # [doc = " Query new types reached since last query by key"] # [doc = ""] # [doc = " Create new key if you wish to query it to avoid conflicting with existing queries."] fn new_types (& mut self , key : NewTypesKey) -> Vec < Type < 'db > > { match self . new_types . get_mut (& key) { Some (it) => std :: mem :: take (it) , None => Vec :: new () , } } # [doc = " Types queried but not found"] fn types_wishlist (& mut self) -> & FxHashSet < Type < 'db > > { & self . types_wishlist } }
+    };
+}
+
+impl_187!()

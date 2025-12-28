@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        Arbitrary!();
+    };
+}
+
+macro_rules! Unstructured {
+    () => {
+        deps!();
+        # [doc = " A source of unstructured data."] # [doc = ""] # [doc = " An `Unstructured` helps `Arbitrary` implementations interpret raw data"] # [doc = " (typically provided by a fuzzer) as a \"DNA string\" that describes how to"] # [doc = " construct the `Arbitrary` type. The goal is that a small change to the \"DNA"] # [doc = " string\" (the raw data wrapped by an `Unstructured`) results in a small"] # [doc = " change to the generated `Arbitrary` instance. This helps a fuzzer"] # [doc = " efficiently explore the `Arbitrary`'s input space."] # [doc = ""] # [doc = " `Unstructured` is deterministic: given the same raw data, the same series of"] # [doc = " API calls will return the same results (modulo system resource constraints,"] # [doc = " like running out of memory). However, `Unstructured` does not guarantee"] # [doc = " anything beyond that: it makes not guarantee that it will yield bytes from"] # [doc = " the underlying data in any particular order."] # [doc = ""] # [doc = " You shouldn't generally need to use an `Unstructured` unless you are writing"] # [doc = " a custom `Arbitrary` implementation by hand, instead of deriving it. Mostly,"] # [doc = " you should just be passing it through to nested `Arbitrary::arbitrary`"] # [doc = " calls."] # [doc = ""] # [doc = " # Example"] # [doc = ""] # [doc = " Imagine you were writing a color conversion crate. You might want to write"] # [doc = " fuzz tests that take a random RGB color and assert various properties, run"] # [doc = " functions and make sure nothing panics, etc."] # [doc = ""] # [doc = " Below is what translating the fuzzer's raw input into an `Unstructured` and"] # [doc = " using that to generate an arbitrary RGB color might look like:"] # [doc = ""] # [doc = " ```"] # [doc = " # #[cfg(feature = \"derive\")] fn foo() {"] # [doc = " use arbitrary::{Arbitrary, Unstructured};"] # [doc = ""] # [doc = " /// An RGB color."] # [doc = " #[derive(Arbitrary)]"] # [doc = " pub struct Rgb {"] # [doc = "     r: u8,"] # [doc = "     g: u8,"] # [doc = "     b: u8,"] # [doc = " }"] # [doc = ""] # [doc = " // Get the raw bytes from the fuzzer."] # [doc = " #   let get_input_from_fuzzer = || &[];"] # [doc = " let raw_data: &[u8] = get_input_from_fuzzer();"] # [doc = ""] # [doc = " // Wrap it in an `Unstructured`."] # [doc = " let mut unstructured = Unstructured::new(raw_data);"] # [doc = ""] # [doc = " // Generate an `Rgb` color and run our checks."] # [doc = " if let Ok(rgb) = Rgb::arbitrary(&mut unstructured) {"] # [doc = " #   let run_my_color_conversion_checks = |_| {};"] # [doc = "     run_my_color_conversion_checks(rgb);"] # [doc = " }"] # [doc = " # }"] # [doc = " ```"] # [derive (Debug)] pub struct Unstructured < 'a > { data : & 'a [u8] , }
+    };
+}
+
+Unstructured!()

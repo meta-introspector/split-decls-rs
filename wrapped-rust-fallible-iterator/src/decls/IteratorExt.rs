@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        FallibleIterator!();
-        Convert!();
         Iterator!();
         IntoFallible!();
+        Convert!();
+        FallibleIterator!();
     };
 }
 

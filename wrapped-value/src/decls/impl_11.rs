@@ -1,13 +1,14 @@
 macro_rules! deps {
     () => {
-        Name!();
+        DeserializerError!();
+        ConstValue!();
     };
 }
 
 macro_rules! impl_11 {
     () => {
         deps!();
-        impl Deref for Name { type Target = str ; fn deref (& self) -> & Self :: Target { & self . 0 } }
+        impl IntoDeserializer < '_ , DeserializerError > for ConstValue { type Deserializer = Self ; fn into_deserializer (self) -> Self :: Deserializer { self } }
     };
 }
 

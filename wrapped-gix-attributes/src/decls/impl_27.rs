@@ -1,0 +1,17 @@
+macro_rules! deps {
+    () => {
+        Value!();
+        MetadataCollection!();
+        Search!();
+        Attributes!();
+    };
+}
+
+macro_rules! impl_27 {
+    () => {
+        deps!();
+        # [doc = " Mutation"] impl Search { # [doc = " Add the given file at `source` to our patterns if it exists, otherwise do nothing."] # [doc = " Update `collection` with newly added attribute names."] # [doc = " If a `root` is provided, it's not considered a global file anymore."] # [doc = " If `allow_macros` is `true`, macros will be processed like normal, otherwise they will be skipped entirely."] # [doc = " Returns `true` if the file was added, or `false` if it didn't exist."] pub fn add_patterns_file (& mut self , source : PathBuf , follow_symlinks : bool , root : Option < & Path > , buf : & mut Vec < u8 > , collection : & mut MetadataCollection , allow_macros : bool ,) -> std :: io :: Result < bool > { let was_added = gix_glob :: search :: add_patterns_file (& mut self . patterns , source , follow_symlinks , root , buf , Attributes) ? ; if was_added { let last = self . patterns . last_mut () . expect ("just added") ; if ! allow_macros { last . patterns . retain (| p | ! matches ! (p . value , Value :: MacroAssignments { .. })) ; } collection . update_from_list (last) ; } Ok (was_added) } # [doc = " Add patterns as parsed from `bytes`, providing their `source` path and possibly their `root` path, the path they"] # [doc = " are relative to. This also means that `source` is contained within `root` if `root` is provided."] # [doc = " If `allow_macros` is `true`, macros will be processed like normal, otherwise they will be skipped entirely."] pub fn add_patterns_buffer (& mut self , bytes : & [u8] , source : PathBuf , root : Option < & Path > , collection : & mut MetadataCollection , allow_macros : bool ,) { self . patterns . push (pattern :: List :: from_bytes (bytes , source , root , Attributes)) ; let last = self . patterns . last_mut () . expect ("just added") ; if ! allow_macros { last . patterns . retain (| p | ! matches ! (p . value , Value :: MacroAssignments { .. })) ; } collection . update_from_list (last) ; } # [doc = " Pop the last attribute patterns list from our queue."] pub fn pop_pattern_list (& mut self) -> Option < gix_glob :: search :: pattern :: List < Attributes > > { self . patterns . pop () } }
+    };
+}
+
+impl_27!()

@@ -1,0 +1,21 @@
+macro_rules! deps {
+    () => {
+        Square!();
+        Retrieve!();
+        Odd!();
+        PowBoundedExp!();
+        SquareAssign!();
+        MontyMultiplier!();
+        Unsigned!();
+        Integer!();
+    };
+}
+
+macro_rules! Monty {
+    () => {
+        deps!();
+        # [doc = " A representation of an integer optimized for the performance of modular operations."] pub trait Monty : 'static + Clone + Debug + Eq + Sized + Send + Sync + Add < Output = Self > + for < 'a > Add < & 'a Self , Output = Self > + AddAssign + for < 'a > AddAssign < & 'a Self > + Sub < Output = Self > + for < 'a > Sub < & 'a Self , Output = Self > + SubAssign + for < 'a > SubAssign < & 'a Self > + Mul < Output = Self > + for < 'a > Mul < & 'a Self , Output = Self > + MulAssign + for < 'a > MulAssign < & 'a Self > + Neg < Output = Self > + PowBoundedExp < Self :: Integer > + Retrieve < Output = Self :: Integer > + Square + SquareAssign { # [doc = " The original integer type."] type Integer : Unsigned < Monty = Self > ; # [doc = " Prepared Montgomery multiplier for tight loops."] type Multiplier < 'a > : Debug + Clone + MontyMultiplier < 'a , Monty = Self > ; # [doc = " The precomputed data needed for this representation."] type Params : 'static + Clone + Debug + Eq + Sized + Send + Sync ; # [doc = " Create the precomputed data for Montgomery representation of integers modulo `modulus`,"] # [doc = " variable time in `modulus`."] fn new_params_vartime (modulus : Odd < Self :: Integer >) -> Self :: Params ; # [doc = " Convert the value into the representation using precomputed data."] fn new (value : Self :: Integer , params : Self :: Params) -> Self ; # [doc = " Returns zero in this representation."] fn zero (params : Self :: Params) -> Self ; # [doc = " Returns one in this representation."] fn one (params : Self :: Params) -> Self ; # [doc = " Returns the parameter struct used to initialize this object."] fn params (& self) -> & Self :: Params ; # [doc = " Access the value in Montgomery form."] fn as_montgomery (& self) -> & Self :: Integer ; # [doc = " Copy the Montgomery representation from `other` into `self`."] # [doc = " NOTE: the parameters remain unchanged."] fn copy_montgomery_from (& mut self , other : & Self) ; # [doc = " Performs doubling, returning `self + self`."] fn double (& self) -> Self ; # [doc = " Performs division by 2, that is returns `x` such that `x + x = self`."] fn div_by_2 (& self) -> Self ; # [doc = " Performs division by 2 inplace, that is finds `x` such that `x + x = self`"] # [doc = " and writes it into `self`."] fn div_by_2_assign (& mut self) { * self = self . div_by_2 () } # [doc = " Calculate the sum of products of pairs `(a, b)` in `products`."] # [doc = ""] # [doc = " This method is variable time only with the value of the modulus."] # [doc = " For a modulus with leading zeros, this method is more efficient than a naive sum of products."] # [doc = ""] # [doc = " This method will panic if `products` is empty. All terms must be associated with equivalent"] # [doc = " Montgomery parameters."] fn lincomb_vartime (products : & [(& Self , & Self)]) -> Self ; }
+    };
+}
+
+Monty!()

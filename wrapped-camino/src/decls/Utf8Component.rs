@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Utf8Path!();
         Utf8PrefixComponent!();
         Utf8Components!();
+        Utf8Path!();
     };
 }
 

@@ -1,0 +1,29 @@
+macro_rules! deps {
+    () => {
+        ScopeDef!();
+        TypeAlias!();
+        Module!();
+        GenericDef!();
+        SemanticsScope!();
+        VisibleTraits!();
+        GenericParam!();
+        PathResolution!();
+        Trait!();
+        ItemInNs!();
+        Local!();
+        Label!();
+        Crate!();
+        Type!();
+        Function!();
+        ModuleDef!();
+    };
+}
+
+macro_rules! impl_94 {
+    () => {
+        deps!();
+        impl < 'db > SemanticsScope < 'db > { pub fn file_id (& self) -> HirFileId { self . file_id } pub fn module (& self) -> Module { Module { id : self . resolver . module () } } pub fn krate (& self) -> Crate { Crate { id : self . resolver . krate () } } pub fn containing_function (& self) -> Option < Function > { self . resolver . body_owner () . and_then (| owner | match owner { DefWithBodyId :: FunctionId (id) => Some (id . into ()) , _ => None , }) } pub (crate) fn resolver (& self) -> & Resolver < 'db > { & self . resolver } # [doc = " Note: `VisibleTraits` should be treated as an opaque type, passed into `Type"] pub fn visible_traits (& self) -> VisibleTraits { let resolver = & self . resolver ; VisibleTraits (resolver . traits_in_scope (self . db)) } # [doc = " Calls the passed closure `f` on all names in scope."] pub fn process_all_names (& self , f : & mut dyn FnMut (Name , ScopeDef)) { let scope = self . resolver . names_in_scope (self . db) ; for (name , entries) in scope { for entry in entries { let def = match entry { resolver :: ScopeDef :: ModuleDef (it) => ScopeDef :: ModuleDef (it . into ()) , resolver :: ScopeDef :: Unknown => ScopeDef :: Unknown , resolver :: ScopeDef :: ImplSelfType (it) => ScopeDef :: ImplSelfType (it . into ()) , resolver :: ScopeDef :: AdtSelfType (it) => ScopeDef :: AdtSelfType (it . into ()) , resolver :: ScopeDef :: GenericParam (id) => ScopeDef :: GenericParam (id . into ()) , resolver :: ScopeDef :: Local (binding_id) => match self . resolver . body_owner () { Some (parent) => ScopeDef :: Local (Local { parent , binding_id }) , None => continue , } , resolver :: ScopeDef :: Label (label_id) => match self . resolver . body_owner () { Some (parent) => ScopeDef :: Label (Label { parent , label_id }) , None => continue , } , } ; f (name . clone () , def) } } } # [doc = " Checks if a trait is in scope, either because of an import or because we're in an impl of it."] pub fn can_use_trait_methods (& self , t : Trait) -> bool { self . resolver . traits_in_scope (self . db) . contains (& t . id) } # [doc = " Resolve a path as-if it was written at the given scope. This is"] # [doc = " necessary a heuristic, as it doesn't take hygiene into account."] pub fn speculative_resolve (& self , ast_path : & ast :: Path) -> Option < PathResolution > { let mut kind = PathKind :: Plain ; let mut segments = vec ! [] ; let mut first = true ; for segment in ast_path . segments () { if first { first = false ; if segment . coloncolon_token () . is_some () { kind = PathKind :: Abs ; } } let Some (k) = segment . kind () else { continue } ; match k { ast :: PathSegmentKind :: Name (name_ref) => segments . push (name_ref . as_name ()) , ast :: PathSegmentKind :: Type { .. } => continue , ast :: PathSegmentKind :: SelfTypeKw => { segments . push (Name :: new_symbol_root (sym :: Self_)) } ast :: PathSegmentKind :: SelfKw => kind = PathKind :: Super (0) , ast :: PathSegmentKind :: SuperKw => match kind { PathKind :: Super (s) => kind = PathKind :: Super (s + 1) , PathKind :: Plain => kind = PathKind :: Super (1) , PathKind :: Crate | PathKind :: Abs | PathKind :: DollarCrate (_) => continue , } , ast :: PathSegmentKind :: CrateKw => kind = PathKind :: Crate , } } resolve_hir_path (self . db , & self . resolver , & Path :: BarePath (Interned :: new (ModPath :: from_segments (kind , segments))) , name_hygiene (self . db , InFile :: new (self . file_id , ast_path . syntax ())) , None ,) } pub fn resolve_mod_path (& self , path : & ModPath) -> impl Iterator < Item = ItemInNs > + use < > { let items = self . resolver . resolve_module_path_in_items (self . db , path) ; items . iter_items () . map (| (item , _) | item . into ()) } # [doc = " Iterates over associated types that may be specified after the given path (using"] # [doc = " `Ty::Assoc` syntax)."] pub fn assoc_type_shorthand_candidates (& self , resolution : & PathResolution , mut cb : impl FnMut (TypeAlias) ,) { let (Some (def) , Some (resolution)) = (self . resolver . generic_def () , resolution . in_type_ns ()) else { return ; } ; hir_ty :: associated_type_shorthand_candidates (self . db , def , resolution , | _ , id | { cb (id . into ()) ; false }) ; } pub fn generic_def (& self) -> Option < crate :: GenericDef > { self . resolver . generic_def () . map (| id | id . into ()) } pub fn extern_crates (& self) -> impl Iterator < Item = (Name , Module) > + '_ { self . resolver . extern_crates_in_scope () . map (| (name , id) | (name , Module { id })) } pub fn extern_crate_decls (& self) -> impl Iterator < Item = Name > + '_ { self . resolver . extern_crate_decls_in_scope (self . db) } pub fn has_same_self_type (& self , other : & SemanticsScope < '_ >) -> bool { self . resolver . impl_def () == other . resolver . impl_def () } }
+    };
+}
+
+impl_94!()

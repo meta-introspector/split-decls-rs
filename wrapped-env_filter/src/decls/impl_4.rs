@@ -1,0 +1,18 @@
+macro_rules! deps {
+    () => {
+        Builder!();
+        Directive!();
+        ParseError!();
+        Filter!();
+        ParseResult!();
+    };
+}
+
+macro_rules! impl_4 {
+    () => {
+        deps!();
+        impl Builder { # [doc = " Initializes the filter builder with defaults."] pub fn new () -> Builder { Builder { directives : Vec :: new () , filter : None , built : false , } } # [doc = " Initializes the filter builder from an environment."] pub fn from_env (env : & str) -> Builder { let mut builder = Builder :: new () ; if let Ok (s) = env :: var (env) { builder . parse (& s) ; } builder } # [doc = " Insert the directive replacing any directive with the same name."] fn insert_directive (& mut self , mut directive : Directive) { if let Some (pos) = self . directives . iter () . position (| d | d . name == directive . name) { mem :: swap (& mut self . directives [pos] , & mut directive) ; } else { self . directives . push (directive) ; } } # [doc = " Adds a directive to the filter for a specific module."] pub fn filter_module (& mut self , module : & str , level : LevelFilter) -> & mut Self { self . filter (Some (module) , level) } # [doc = " Adds a directive to the filter for all modules."] pub fn filter_level (& mut self , level : LevelFilter) -> & mut Self { self . filter (None , level) } # [doc = " Adds a directive to the filter."] # [doc = ""] # [doc = " The given module (if any) will log at most the specified level provided."] # [doc = " If no module is provided then the filter will apply to all log messages."] pub fn filter (& mut self , module : Option < & str > , level : LevelFilter) -> & mut Self { self . insert_directive (Directive { name : module . map (| s | s . to_owned ()) , level , }) ; self } # [doc = " Parses the directives string."] # [doc = ""] # [doc = " See the [Enabling Logging] section for more details."] # [doc = ""] # [doc = " [Enabling Logging]: ../index.html#enabling-logging"] pub fn parse (& mut self , filters : & str) -> & mut Self { # ! [allow (clippy :: print_stderr)] let ParseResult { directives , filter , errors , } = parse_spec (filters) ; for error in errors { eprintln ! ("warning: {error}, ignoring it") ; } self . filter = filter ; for directive in directives { self . insert_directive (directive) ; } self } # [doc = " Parses the directive string, returning an error if the given directive string is invalid."] # [doc = ""] # [doc = " See the [Enabling Logging] section for more details."] # [doc = ""] # [doc = " [Enabling Logging]: ../index.html#enabling-logging"] pub fn try_parse (& mut self , filters : & str) -> Result < & mut Self , ParseError > { let (directives , filter) = parse_spec (filters) . ok () ? ; self . filter = filter ; for directive in directives { self . insert_directive (directive) ; } Ok (self) } # [doc = " Build a log filter."] pub fn build (& mut self) -> Filter { assert ! (! self . built , "attempt to re-use consumed builder") ; self . built = true ; let mut directives = Vec :: new () ; if self . directives . is_empty () { directives . push (Directive { name : None , level : LevelFilter :: Error , }) ; } else { directives = mem :: take (& mut self . directives) ; directives . sort_by (| a , b | { let alen = a . name . as_ref () . map (| a | a . len ()) . unwrap_or (0) ; let blen = b . name . as_ref () . map (| b | b . len ()) . unwrap_or (0) ; alen . cmp (& blen) }) ; } Filter { directives : mem :: take (& mut directives) , filter : mem :: take (& mut self . filter) , } } }
+    };
+}
+
+impl_4!()

@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        FontSize!();
-        Figure!();
+        PointType!();
+        Display!();
     };
 }
 
 macro_rules! impl_19 {
     () => {
         deps!();
-        impl Set < FontSize > for Figure { # [doc = " Changes the size of the font"] # [doc = ""] # [doc = " # Panics"] # [doc = ""] # [doc = " Panics if `size` is a non-positive value"] fn set (& mut self , size : FontSize) -> & mut Figure { let size = size . 0 ; assert ! (size >= 0.) ; self . font_size = Some (size) ; self } }
+        impl Display < & 'static str > for PointType { fn display (& self) -> & 'static str { match * self { PointType :: Circle => "6" , PointType :: FilledCircle => "7" , PointType :: FilledSquare => "5" , PointType :: FilledTriangle => "9" , PointType :: Plus => "1" , PointType :: Square => "4" , PointType :: Star => "3" , PointType :: Triangle => "8" , PointType :: X => "2" , } } }
     };
 }
 

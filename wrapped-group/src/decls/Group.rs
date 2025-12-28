@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         GroupOpsOwned!();
+        ScalarMulOwned!();
         ScalarMul!();
         GroupOps!();
-        ScalarMulOwned!();
     };
 }
 

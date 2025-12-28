@@ -1,6 +1,6 @@
 macro_rules! ecdsa {
     () => {
-        # [cfg (feature = "ecdsa-core")] pub mod ecdsa ;
+        # [cfg (test)] pub mod ecdsa ;
     };
 }
 

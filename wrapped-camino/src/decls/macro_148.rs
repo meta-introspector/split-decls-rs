@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Utf8PathBuf!();
+        Utf8Path!();
     };
 }
 
 macro_rules! macro_148 {
     () => {
         deps!();
-        impl_cmp_str ! (Utf8PathBuf , Cow <'a , str >) ;
+        impl_cmp ! (Cow <'a , Utf8Path >, &'b Utf8Path) ;
     };
 }
 

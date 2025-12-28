@@ -1,13 +1,14 @@
 macro_rules! deps {
     () => {
-        TransitProcess!();
+        Result!();
+        Error!();
     };
 }
 
 macro_rules! impl_6 {
     () => {
         deps!();
-        impl Clone for TransitProcess { fn clone (& self) -> TransitProcess { TransitProcess { copied_bytes : self . copied_bytes , total_bytes : self . total_bytes , file_bytes_copied : self . file_bytes_copied , file_total_bytes : self . file_total_bytes , file_name : self . file_name . clone () , dir_name : self . dir_name . clone () , state : self . state . clone () , } } }
+        impl fmt :: Display for Error { fn fmt (& self , f : & mut fmt :: Formatter) -> fmt :: Result { write ! (f , "{}" , self . message) } }
     };
 }
 

@@ -1,8 +1,9 @@
 macro_rules! deps {
     () => {
-        Axis!();
         Axes!();
         ScaleFactorTrait!();
+        Axis!();
+        Properties!();
     };
 }
 

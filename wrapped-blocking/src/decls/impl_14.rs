@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Unblock!();
-        Executor!();
         State!();
+        Executor!();
+        Unblock!();
     };
 }
 

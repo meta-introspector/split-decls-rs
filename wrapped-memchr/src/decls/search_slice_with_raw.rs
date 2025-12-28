@@ -1,0 +1,7 @@
+macro_rules! search_slice_with_raw {
+    () => {
+        # [doc = " Search a slice using a function that operates on raw pointers."] # [doc = ""] # [doc = " Given a function to search a contiguous sequence of memory for the location"] # [doc = " of a non-empty set of bytes, this will execute that search on a slice of"] # [doc = " bytes. The pointer returned by the given function will be converted to an"] # [doc = " offset relative to the starting point of the given slice. That is, if a"] # [doc = " match is found, the offset returned by this routine is guaranteed to be a"] # [doc = " valid index into `haystack`."] # [doc = ""] # [doc = " Callers may use this for a forward or reverse search."] # [doc = ""] # [doc = " # Safety"] # [doc = ""] # [doc = " Callers must ensure that if a pointer is returned by `find_raw`, then the"] # [doc = " pointer must be greater than or equal to the starting pointer and less than"] # [doc = " the end pointer."] # [inline (always)] pub (crate) unsafe fn search_slice_with_raw (haystack : & [u8] , mut find_raw : impl FnMut (* const u8 , * const u8) -> Option < * const u8 > ,) -> Option < usize > { let start = haystack . as_ptr () ; let end = start . add (haystack . len ()) ; let found = find_raw (start , end) ? ; Some (found . distance (start)) }
+    };
+}
+
+search_slice_with_raw!()

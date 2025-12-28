@@ -1,0 +1,7 @@
+macro_rules! exe_invocation {
+    () => {
+        # [doc = " Return the name of the Git executable to invoke it."] # [doc = ""] # [doc = " If it's in the `PATH`, it will always be a short name."] # [doc = ""] # [doc = " Note that on Windows, we will find the executable in the `PATH` if it exists there, or search it"] # [doc = " in alternative locations which when found yields the full path to it."] pub fn exe_invocation () -> & 'static Path { if cfg ! (windows) { # [doc = " The path to the Git executable as located in the `PATH` or in other locations that it's"] # [doc = " known to be installed to. It's `None` if environment variables couldn't be read or if"] # [doc = " no executable could be found."] static EXECUTABLE_PATH : LazyLock < Option < PathBuf > > = LazyLock :: new (| | { std :: env :: split_paths (& std :: env :: var_os ("PATH") ?) . chain (git :: ALTERNATIVE_LOCATIONS . iter () . map (Into :: into)) . find_map (| prefix | { let full_path = prefix . join (EXE_NAME) ; full_path . is_file () . then_some (full_path) }) . map (| exe_path | { let is_in_alternate_location = git :: ALTERNATIVE_LOCATIONS . iter () . any (| prefix | exe_path . strip_prefix (prefix) . is_ok ()) ; if is_in_alternate_location { exe_path } else { EXE_NAME . into () } }) }) ; EXECUTABLE_PATH . as_deref () . unwrap_or (Path :: new (git :: EXE_NAME)) } else { Path :: new ("git") } }
+    };
+}
+
+exe_invocation!()

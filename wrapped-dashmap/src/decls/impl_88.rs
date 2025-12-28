@@ -1,0 +1,17 @@
+macro_rules! deps {
+    () => {
+        DashMap!();
+        RwLock!();
+        ReadOnlyView!();
+        HashMap!();
+    };
+}
+
+macro_rules! impl_88 {
+    () => {
+        deps!();
+        impl < 'a , K : 'a + Eq + Hash , V : 'a , S : BuildHasher + Clone > ReadOnlyView < K , V , S > { # [doc = " Returns the number of elements in the map."] pub fn len (& self) -> usize { self . map . len () } # [doc = " Returns `true` if the map contains no elements."] pub fn is_empty (& self) -> bool { self . map . is_empty () } # [doc = " Returns the number of elements the map can hold without reallocating."] pub fn capacity (& self) -> usize { self . map . capacity () } # [doc = " Returns `true` if the map contains a value for the specified key."] pub fn contains_key < Q > (& 'a self , key : & Q) -> bool where Q : Hash + Equivalent < K > + ? Sized , { self . get (key) . is_some () } # [doc = " Returns a reference to the value corresponding to the key."] pub fn get < Q > (& 'a self , key : & Q) -> Option < & 'a V > where Q : Hash + Equivalent < K > + ? Sized , { self . get_key_value (key) . map (| (_k , v) | v) } # [doc = " Returns the key-value pair corresponding to the supplied key."] pub fn get_key_value < Q > (& 'a self , key : & Q) -> Option < (& 'a K , & 'a V) > where Q : Hash + Equivalent < K > + ? Sized , { let hash = self . map . hash_u64 (& key) ; let idx = self . map . determine_shard (hash as usize) ; let shard = & self . map . shards [idx] ; let shard = unsafe { & * shard . data_ptr () } ; shard . find (hash , | (k , _v) | key . equivalent (k)) . map (| (k , v) | (k , v)) } # [doc = " An iterator visiting all key-value pairs in arbitrary order. The iterator element type is `(&'a K, &'a V)`."] pub fn iter (& 'a self) -> impl Iterator < Item = (& 'a K , & 'a V) > + 'a { self . map . shards . iter () . map (| shard | unsafe { & * shard . data_ptr () }) . flat_map (| shard | shard . iter ()) . map (| (k , v) | (k , v)) } # [doc = " An iterator visiting all keys in arbitrary order. The iterator element type is `&'a K`."] pub fn keys (& 'a self) -> impl Iterator < Item = & 'a K > + 'a { self . iter () . map (| (k , _v) | k) } # [doc = " An iterator visiting all values in arbitrary order. The iterator element type is `&'a V`."] pub fn values (& 'a self) -> impl Iterator < Item = & 'a V > + 'a { self . iter () . map (| (_k , v) | v) } cfg_if ! { if # [cfg (feature = "raw-api")] { # [doc = " Allows you to peek at the inner shards that store your data."] # [doc = " You should probably not use this unless you know what you are doing."] # [doc = ""] # [doc = " Requires the `raw-api` feature to be enabled."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " use dashmap::DashMap;"] # [doc = ""] # [doc = " let map = DashMap::<(), ()>::new().into_read_only();"] # [doc = " println!(\"Amount of shards: {}\", map.shards().len());"] # [doc = " ```"] pub fn shards (& self) -> & [CachePadded < RwLock < HashMap < K , V >>>] { & self . map . shards } } else { # [allow (dead_code)] pub (crate) fn shards (& self) -> & [CachePadded < RwLock < HashMap < K , V >>>] { & self . map . shards } } } }
+    };
+}
+
+impl_88!()

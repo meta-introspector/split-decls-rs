@@ -1,13 +1,14 @@
 macro_rules! deps {
     () => {
-        ConstValue!();
+        NameDeserializer!();
+        Name!();
     };
 }
 
 macro_rules! impl_25 {
     () => {
         deps!();
-        impl From < f32 > for ConstValue { # [inline] fn from (f : f32) -> Self { From :: from (f as f64) } }
+        impl NameDeserializer { # [inline] fn new (value : Name) -> Self { NameDeserializer { value } } }
     };
 }
 

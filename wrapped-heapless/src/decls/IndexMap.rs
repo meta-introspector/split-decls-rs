@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        FnvIndexMap!();
+        CoreMap!();
+    };
+}
+
+macro_rules! IndexMap {
+    () => {
+        deps!();
+        # [doc = " Fixed capacity [`IndexMap`](https://docs.rs/indexmap/2/indexmap/map/struct.IndexMap.html)"] # [doc = ""] # [doc = " Note that you cannot use `IndexMap` directly, since it is generic around the hashing algorithm"] # [doc = " in use. Pick a concrete instantiation like [`FnvIndexMap`] instead"] # [doc = " or create your own."] # [doc = ""] # [doc = " Note that the capacity of the `IndexMap` must be a power of 2."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " Since `IndexMap` cannot be used directly, we're using its `FnvIndexMap` instantiation"] # [doc = " for this example."] # [doc = ""] # [doc = " ```"] # [doc = " use heapless::index_map::FnvIndexMap;"] # [doc = ""] # [doc = " // A hash map with a capacity of 16 key-value pairs allocated on the stack"] # [doc = " let mut book_reviews = FnvIndexMap::<_, _, 16>::new();"] # [doc = ""] # [doc = " // review some books."] # [doc = " book_reviews"] # [doc = "     .insert(\"Adventures of Huckleberry Finn\", \"My favorite book.\")"] # [doc = "     .unwrap();"] # [doc = " book_reviews"] # [doc = "     .insert(\"Grimms' Fairy Tales\", \"Masterpiece.\")"] # [doc = "     .unwrap();"] # [doc = " book_reviews"] # [doc = "     .insert(\"Pride and Prejudice\", \"Very enjoyable.\")"] # [doc = "     .unwrap();"] # [doc = " book_reviews"] # [doc = "     .insert(\"The Adventures of Sherlock Holmes\", \"Eye lyked it alot.\")"] # [doc = "     .unwrap();"] # [doc = ""] # [doc = " // check for a specific one."] # [doc = " if !book_reviews.contains_key(\"Les Misérables\") {"] # [doc = "     println!("] # [doc = "         \"We've got {} reviews, but Les Misérables ain't one.\","] # [doc = "         book_reviews.len()"] # [doc = "     );"] # [doc = " }"] # [doc = ""] # [doc = " // oops, this review has a lot of spelling mistakes, let's delete it."] # [doc = " book_reviews.remove(\"The Adventures of Sherlock Holmes\");"] # [doc = ""] # [doc = " // look up the values associated with some keys."] # [doc = " let to_find = [\"Pride and Prejudice\", \"Alice's Adventure in Wonderland\"];"] # [doc = " for book in &to_find {"] # [doc = "     match book_reviews.get(book) {"] # [doc = "         Some(review) => println!(\"{}: {}\", book, review),"] # [doc = "         None => println!(\"{} is unreviewed.\", book),"] # [doc = "     }"] # [doc = " }"] # [doc = ""] # [doc = " // iterate over everything."] # [doc = " for (book, review) in &book_reviews {"] # [doc = "     println!(\"{}: \\\"{}\\\"\", book, review);"] # [doc = " }"] # [doc = " ```"] # [cfg_attr (feature = "zeroize" , derive (Zeroize) , zeroize (bound = "K: Zeroize, V: Zeroize"))] pub struct IndexMap < K , V , S , const N : usize > { core : CoreMap < K , V , N > , # [cfg_attr (feature = "zeroize" , zeroize (skip))] build_hasher : S , }
+    };
+}
+
+IndexMap!()

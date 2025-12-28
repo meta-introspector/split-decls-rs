@@ -3,6 +3,7 @@ macro_rules! deps {
         ContainingDirectory!();
         Handle!();
         AutoRemove!();
+        Writable!();
     };
 }
 

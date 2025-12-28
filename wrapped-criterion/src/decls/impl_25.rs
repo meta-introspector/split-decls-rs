@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        BenchmarkId!();
+        Criterion!();
+    };
+}
+
+macro_rules! impl_25 {
+    () => {
+        deps!();
+        impl BenchmarkId { # [doc = " Construct a new benchmark ID from a string function name and a parameter value."] # [doc = ""] # [doc = " Note that the parameter value need not be the same as the parameter passed to your"] # [doc = " actual benchmark. For instance, you might have a benchmark that takes a 1MB string as"] # [doc = " input. It would be impractical to embed the whole string in the benchmark ID, so instead"] # [doc = " your parameter value might be a descriptive string like \"1MB Alphanumeric\"."] # [doc = ""] # [doc = " # Examples"] # [doc = " ```"] # [doc = " # use criterion::{BenchmarkId, Criterion};"] # [doc = " // A basic benchmark ID is typically constructed from a constant string and a simple"] # [doc = " // parameter"] # [doc = " let basic_id = BenchmarkId::new(\"my_id\", 5);"] # [doc = ""] # [doc = " // The function name can be a string"] # [doc = " let function_name = \"test_string\".to_string();"] # [doc = " let string_id = BenchmarkId::new(function_name, 12);"] # [doc = ""] # [doc = " // Benchmark IDs are passed to benchmark groups:"] # [doc = " let mut criterion = Criterion::default();"] # [doc = " let mut group = criterion.benchmark_group(\"My Group\");"] # [doc = " // Generate a very large input"] # [doc = " let input : String = ::std::iter::repeat(\"X\").take(1024 * 1024).collect();"] # [doc = ""] # [doc = " // Note that we don't have to use the input as the parameter in the ID"] # [doc = " group.bench_with_input(BenchmarkId::new(\"Test long string\", \"1MB X's\"), &input, |b, i| {"] # [doc = "     b.iter(|| i.len())"] # [doc = " });"] # [doc = " ```"] pub fn new < S : Into < String > , P : :: std :: fmt :: Display > (function_name : S , parameter : P ,) -> BenchmarkId { BenchmarkId { function_name : Some (function_name . into ()) , parameter : Some (format ! ("{}" , parameter)) , } } # [doc = " Construct a new benchmark ID from just a parameter value. Use this when benchmarking a"] # [doc = " single function with a variety of different inputs."] pub fn from_parameter < P : :: std :: fmt :: Display > (parameter : P) -> BenchmarkId { BenchmarkId { function_name : None , parameter : Some (format ! ("{}" , parameter)) , } } pub (crate) fn no_function () -> BenchmarkId { BenchmarkId { function_name : None , parameter : None , } } pub (crate) fn no_function_with_input < P : :: std :: fmt :: Display > (parameter : P) -> BenchmarkId { BenchmarkId { function_name : None , parameter : Some (format ! ("{}" , parameter)) , } } }
+    };
+}
+
+impl_25!()

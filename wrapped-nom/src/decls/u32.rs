@@ -1,0 +1,20 @@
+macro_rules! deps {
+    () => {
+        Either!();
+        ParseError!();
+        Input!();
+        Error!();
+        Needed!();
+        Parser!();
+        Endianness!();
+    };
+}
+
+macro_rules! u32 {
+    () => {
+        deps!();
+        # [doc = " Recognizes an unsigned 4 byte integer"] # [doc = ""] # [doc = " If the parameter is `nom::number::Endianness::Big`, parse a big endian u32 integer,"] # [doc = " otherwise if `nom::number::Endianness::Little` parse a little endian u32 integer."] # [doc = " ```rust"] # [doc = " # use nom::{Err, error::ErrorKind, Needed, Parser};"] # [doc = " # use nom::Needed::Size;"] # [doc = " use nom::number::u32;"] # [doc = ""] # [doc = " let be_u32 = |s| {"] # [doc = "   u32::<_, (_, ErrorKind)>(nom::number::Endianness::Big).parse(s)"] # [doc = " };"] # [doc = ""] # [doc = " assert_eq!(be_u32(&b\"\\x00\\x03\\x05\\x07abcefg\"[..]), Ok((&b\"abcefg\"[..], 0x00030507)));"] # [doc = " assert_eq!(be_u32(&b\"\\x01\"[..]), Err(Err::Incomplete(Needed::new(3))));"] # [doc = ""] # [doc = " let le_u32 = |s| {"] # [doc = "   u32::<_, (_, ErrorKind)>(nom::number::Endianness::Little).parse(s)"] # [doc = " };"] # [doc = ""] # [doc = " assert_eq!(le_u32(&b\"\\x00\\x03\\x05\\x07abcefg\"[..]), Ok((&b\"abcefg\"[..], 0x07050300)));"] # [doc = " assert_eq!(le_u32(&b\"\\x01\"[..]), Err(Err::Incomplete(Needed::new(3))));"] # [doc = " ```"] # [inline] pub fn u32 < I , E : ParseError < I > > (endian : crate :: number :: Endianness ,) -> impl Parser < I , Output = u32 , Error = E > where I : Input < Item = u8 > , { match endian { crate :: number :: Endianness :: Big => Either :: Left (be_u32 ()) , crate :: number :: Endianness :: Little => Either :: Right (le_u32 ()) , # [cfg (target_endian = "big")] crate :: number :: Endianness :: Native => Either :: Left (be_u32 ()) , # [cfg (target_endian = "little")] crate :: number :: Endianness :: Native => Either :: Right (le_u32 ()) , } }
+    };
+}
+
+u32!()

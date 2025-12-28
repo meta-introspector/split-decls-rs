@@ -1,0 +1,20 @@
+macro_rules! deps {
+    () => {
+        TomlPackage!();
+        VecStringOrBool!();
+        Result!();
+        UnresolvedError!();
+        TomlPackageBuild!();
+        StringOrBool!();
+        RustVersion!();
+    };
+}
+
+macro_rules! impl_86 {
+    () => {
+        deps!();
+        impl TomlPackage { pub fn new (name : PackageName) -> Self { Self { name : Some (name) , .. Default :: default () } } pub fn normalized_name (& self) -> Result < & PackageName , UnresolvedError > { self . name . as_ref () . ok_or (UnresolvedError) } pub fn normalized_edition (& self) -> Result < Option < & String > , UnresolvedError > { self . edition . as_ref () . map (| v | v . normalized ()) . transpose () } pub fn normalized_rust_version (& self) -> Result < Option < & RustVersion > , UnresolvedError > { self . rust_version . as_ref () . map (| v | v . normalized ()) . transpose () } pub fn normalized_version (& self) -> Result < Option < & semver :: Version > , UnresolvedError > { self . version . as_ref () . map (| v | v . normalized ()) . transpose () } pub fn normalized_authors (& self) -> Result < Option < & Vec < String > > , UnresolvedError > { self . authors . as_ref () . map (| v | v . normalized ()) . transpose () } pub fn normalized_build (& self) -> Result < Option < & [String] > , UnresolvedError > { let build = self . build . as_ref () . ok_or (UnresolvedError) ? ; match build { TomlPackageBuild :: Auto (false) => Ok (None) , TomlPackageBuild :: Auto (true) => Err (UnresolvedError) , TomlPackageBuild :: SingleScript (value) => Ok (Some (std :: slice :: from_ref (value))) , TomlPackageBuild :: MultipleScript (scripts) => Ok (Some (scripts)) , } } pub fn normalized_exclude (& self) -> Result < Option < & Vec < String > > , UnresolvedError > { self . exclude . as_ref () . map (| v | v . normalized ()) . transpose () } pub fn normalized_include (& self) -> Result < Option < & Vec < String > > , UnresolvedError > { self . include . as_ref () . map (| v | v . normalized ()) . transpose () } pub fn normalized_publish (& self) -> Result < Option < & VecStringOrBool > , UnresolvedError > { self . publish . as_ref () . map (| v | v . normalized ()) . transpose () } pub fn normalized_description (& self) -> Result < Option < & String > , UnresolvedError > { self . description . as_ref () . map (| v | v . normalized ()) . transpose () } pub fn normalized_homepage (& self) -> Result < Option < & String > , UnresolvedError > { self . homepage . as_ref () . map (| v | v . normalized ()) . transpose () } pub fn normalized_documentation (& self) -> Result < Option < & String > , UnresolvedError > { self . documentation . as_ref () . map (| v | v . normalized ()) . transpose () } pub fn normalized_readme (& self) -> Result < Option < & String > , UnresolvedError > { let readme = self . readme . as_ref () . ok_or (UnresolvedError) ? ; readme . normalized () . and_then (| sb | match sb { StringOrBool :: Bool (false) => Ok (None) , StringOrBool :: Bool (true) => Err (UnresolvedError) , StringOrBool :: String (value) => Ok (Some (value)) , }) } pub fn normalized_keywords (& self) -> Result < Option < & Vec < String > > , UnresolvedError > { self . keywords . as_ref () . map (| v | v . normalized ()) . transpose () } pub fn normalized_categories (& self) -> Result < Option < & Vec < String > > , UnresolvedError > { self . categories . as_ref () . map (| v | v . normalized ()) . transpose () } pub fn normalized_license (& self) -> Result < Option < & String > , UnresolvedError > { self . license . as_ref () . map (| v | v . normalized ()) . transpose () } pub fn normalized_license_file (& self) -> Result < Option < & String > , UnresolvedError > { self . license_file . as_ref () . map (| v | v . normalized ()) . transpose () } pub fn normalized_repository (& self) -> Result < Option < & String > , UnresolvedError > { self . repository . as_ref () . map (| v | v . normalized ()) . transpose () } }
+    };
+}
+
+impl_86!()

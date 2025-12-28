@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        FixedBitSet!();
+        Block!();
     };
 }
 
 macro_rules! impl_15 {
     () => {
         deps!();
-        impl PartialEq for FixedBitSet { fn eq (& self , other : & Self) -> bool { self . length == other . length && self . as_simd_slice () . eq (other . as_simd_slice ()) } }
+        impl BitAndAssign for Block { # [inline] fn bitand_assign (& mut self , other : Self) { unsafe { self . 0 = _mm_and_si128 (self . 0 , other . 0) ; } } }
     };
 }
 

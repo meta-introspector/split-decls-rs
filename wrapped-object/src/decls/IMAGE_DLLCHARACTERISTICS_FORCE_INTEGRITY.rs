@@ -1,0 +1,7 @@
+macro_rules! IMAGE_DLLCHARACTERISTICS_FORCE_INTEGRITY {
+    () => {
+        # [doc = " Code Integrity Image"] pub const IMAGE_DLLCHARACTERISTICS_FORCE_INTEGRITY : u16 = 0x0080 ;
+    };
+}
+
+IMAGE_DLLCHARACTERISTICS_FORCE_INTEGRITY!()

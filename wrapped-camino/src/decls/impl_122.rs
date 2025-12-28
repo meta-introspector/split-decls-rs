@@ -7,7 +7,7 @@ macro_rules! deps {
 macro_rules! impl_122 {
     () => {
         deps!();
-        impl Hash for Utf8Path { fn hash < H : Hasher > (& self , state : & mut H) { for component in self . components () { component . hash (state) } } }
+        impl AsRef < Utf8Path > for String { # [inline] fn as_ref (& self) -> & Utf8Path { Utf8Path :: new (self) } }
     };
 }
 

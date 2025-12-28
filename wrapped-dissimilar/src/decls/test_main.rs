@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        Range!();
+    };
+}
+
+macro_rules! test_main {
+    () => {
+        deps!();
+        # [test] fn test_main () { let solution = main (Range :: empty () , Range :: empty ()) ; assert_diffs ! ([] , solution , "Null case") ; let solution = main (range ! ("abc") , range ! ("abc")) ; assert_diffs ! ([Equal ("abc")] , solution , "Equality") ; let solution = main (range ! ("abc") , range ! ("ab123c")) ; assert_diffs ! ([Equal ("ab") , Insert ("123") , Equal ("c")] , solution , "Simple insertion" ,) ; let solution = main (range ! ("a123bc") , range ! ("abc")) ; assert_diffs ! ([Equal ("a") , Delete ("123") , Equal ("bc")] , solution , "Simple deletion" ,) ; let solution = main (range ! ("abc") , range ! ("a123b456c")) ; assert_diffs ! ([Equal ("a") , Insert ("123") , Equal ("b") , Insert ("456") , Equal ("c") ,] , solution , "Two insertions" ,) ; let solution = main (range ! ("a123b456c") , range ! ("abc")) ; assert_diffs ! ([Equal ("a") , Delete ("123") , Equal ("b") , Delete ("456") , Equal ("c") ,] , solution , "Two deletions" ,) ; let solution = main (range ! ("a") , range ! ("b")) ; assert_diffs ! ([Delete ("a") , Insert ("b")] , solution , "Simple case #1") ; let solution = main (range ! ("Apples are a fruit.") , range ! ("Bananas are also fruit.") ,) ; assert_diffs ! ([Delete ("Apple") , Insert ("Banana") , Equal ("s are a") , Insert ("lso") , Equal (" fruit.") ,] , solution , "Simple case #2" ,) ; let solution = main (range ! ("ax\t") , range ! ("\u{0680}x\000")) ; assert_diffs ! ([Delete ("a") , Insert ("\u{0680}") , Equal ("x") , Delete ("\t") , Insert ("\000") ,] , solution , "Simple case #3" ,) ; let solution = main (range ! ("1ayb2") , range ! ("abxab")) ; assert_diffs ! ([Delete ("1") , Equal ("a") , Delete ("y") , Equal ("b") , Delete ("2") , Insert ("xab") ,] , solution , "Overlap #1" ,) ; let solution = main (range ! ("abcy") , range ! ("xaxcxabc")) ; assert_diffs ! ([Insert ("xaxcx") , Equal ("abc") , Delete ("y")] , solution , "Overlap #2" ,) ; let solution = main (range ! ("ABCDa=bcd=efghijklmnopqrsEFGHIJKLMNOefg") , range ! ("a-bcd-efghijklmnopqrs") ,) ; assert_diffs ! ([Delete ("ABCD") , Equal ("a") , Delete ("=") , Insert ("-") , Equal ("bcd") , Delete ("=") , Insert ("-") , Equal ("efghijklmnopqrs") , Delete ("EFGHIJKLMNOefg") ,] , solution , "Overlap #3" ,) ; let solution = main (range ! ("a [[Pennsylvania]] and [[New") , range ! (" and [[Pennsylvania]]") ,) ; assert_diffs ! ([Insert (" ") , Equal ("a") , Insert ("nd") , Equal (" [[Pennsylvania]]") , Delete (" and [[New") ,] , solution , "Large equality" ,) ; }
+    };
+}
+
+test_main!()

@@ -1,8 +1,9 @@
 macro_rules! deps {
     () => {
-        AutoRemove!();
-        Handle!();
+        Writable!();
         ContainingDirectory!();
+        Handle!();
+        AutoRemove!();
     };
 }
 

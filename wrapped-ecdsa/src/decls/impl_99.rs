@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        VerifyingKey!();
+        EcdsaCurve!();
+    };
+}
+
+macro_rules! impl_99 {
+    () => {
+        deps!();
+        impl < C > VerifyingKey < C > where C : EcdsaCurve + CurveArithmetic , AffinePoint < C > : FromEncodedPoint < C > + ToEncodedPoint < C > , FieldBytesSize < C > : sec1 :: ModulusSize , { # [doc = " Initialize [`VerifyingKey`] from a SEC1-encoded public key."] pub fn from_sec1_bytes (bytes : & [u8]) -> Result < Self > { PublicKey :: from_sec1_bytes (bytes) . map (| pk | Self { inner : pk }) . map_err (| _ | Error :: new ()) } # [doc = " Initialize [`VerifyingKey`] from an affine point."] # [doc = ""] # [doc = " Returns an [`Error`] if the given affine point is the additive identity"] # [doc = " (a.k.a. point at infinity)."] pub fn from_affine (affine : AffinePoint < C >) -> Result < Self > { Ok (Self { inner : PublicKey :: from_affine (affine) . map_err (| _ | Error :: new ()) ? , }) } # [doc = " Initialize [`VerifyingKey`] from an [`EncodedPoint`]."] pub fn from_encoded_point (public_key : & EncodedPoint < C >) -> Result < Self > { PublicKey :: < C > :: from_encoded_point (public_key) . into_option () . map (| public_key | Self { inner : public_key }) . ok_or_else (Error :: new) } # [doc = " Serialize this [`VerifyingKey`] as a SEC1 [`EncodedPoint`], optionally"] # [doc = " applying point compression."] pub fn to_encoded_point (& self , compress : bool) -> EncodedPoint < C > { self . inner . to_encoded_point (compress) } # [doc = " Convert this [`VerifyingKey`] into the"] # [doc = " `Elliptic-Curve-Point-to-Octet-String` encoding described in"] # [doc = " SEC 1: Elliptic Curve Cryptography (Version 2.0) section 2.3.3"] # [doc = " (page 10)."] # [doc = ""] # [doc = " <http://www.secg.org/sec1-v2.pdf>"] # [cfg (feature = "alloc")] pub fn to_sec1_bytes (& self) -> Box < [u8] > where C : PointCompression , { self . inner . to_sec1_bytes () } # [doc = " Borrow the inner [`AffinePoint`] for this public key."] pub fn as_affine (& self) -> & AffinePoint < C > { self . inner . as_affine () } }
+    };
+}
+
+impl_99!()

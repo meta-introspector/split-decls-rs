@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        LengthError!();
+        GenericArray!();
+        ArrayLength!();
+    };
+}
+
+macro_rules! impl_60 {
+    () => {
+        deps!();
+        impl < T , N : ArrayLength > GenericArray < T , N > { # [doc = " Converts a `Box<GenericArray<T, N>>` into `Box<[T]>` without reallocating."] # [doc = ""] # [doc = " This operation is O(1), constant-time regardless of the array length N."] # [inline] pub fn into_boxed_slice (self : Box < GenericArray < T , N > >) -> Box < [T] > { unsafe { Box :: from_raw (core :: ptr :: slice_from_raw_parts_mut (Box :: into_raw (self) as * mut T , N :: USIZE ,)) } } # [doc = " Converts a `Box<GenericArray<T, N>>` into `Vec<T>` without reallocating."] # [doc = ""] # [doc = " This operation is O(1), constant-time regardless of the array length N."] # [inline] pub fn into_vec (self : Box < GenericArray < T , N > >) -> Vec < T > { Vec :: from (self . into_boxed_slice ()) } # [doc = " Attempts to convert a `Box<[T]>` into `Box<GenericArray<T, N>>` without reallocating."] # [doc = ""] # [doc = " This operation is O(1), constant-time regardless of the array length N."] # [inline] pub fn try_from_boxed_slice (slice : Box < [T] >) -> Result < Box < GenericArray < T , N > > , LengthError > { if slice . len () != N :: USIZE { return Err (LengthError) ; } Ok (unsafe { Box :: from_raw (Box :: into_raw (slice) as * mut _) }) } # [doc = " Attempts to convert a `Vec<T>` into `Box<GenericArray<T, N>>` without reallocating."] # [doc = ""] # [doc = " This operation is O(1) **if the `Vec` has the same length and capacity as `N`**,"] # [doc = " otherwise it will be forced to call `Vec::shrink_to_fit` which is O(N),"] # [doc = " where N is the number of elements."] # [inline] pub fn try_from_vec (vec : Vec < T >) -> Result < Box < GenericArray < T , N > > , LengthError > { Self :: try_from_boxed_slice (vec . into_boxed_slice ()) } # [doc = " Alternative to `Box::<GenericArray<T, N>>::default()` that won't overflow the stack for very large arrays."] # [doc = ""] # [doc = " The standard `Box::default()` calls `default` on the inner type, creating it on the stack,"] # [doc = " and then moves it onto the heap. Optimized release builds often remove this step, but debug builds"] # [doc = " may have issues."] # [inline] pub fn default_boxed () -> Box < GenericArray < T , N > > where T : Default , { Box :: < GenericArray < T , N > > :: generate (| _ | T :: default ()) } # [doc = " Like [`GenericArray::try_from_iter`] but returns a `Box<GenericArray<T, N>>` instead."] pub fn try_boxed_from_iter < I > (iter : I) -> Result < Box < GenericArray < T , N > > , LengthError > where I : IntoIterator < Item = T > , { let mut iter = iter . into_iter () ; match iter . size_hint () { (n , _) if n > N :: USIZE => return Err (LengthError) , (_ , Some (n)) if n < N :: USIZE => return Err (LengthError) , _ => { } } let mut v = Vec :: with_capacity (N :: USIZE) ; v . extend ((& mut iter) . take (N :: USIZE)) ; if v . len () != N :: USIZE || iter . next () . is_some () { return Err (LengthError) ; } Ok (GenericArray :: try_from_vec (v) . unwrap ()) } }
+    };
+}
+
+impl_60!()

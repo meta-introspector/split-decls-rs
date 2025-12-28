@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        HasVisibility!();
-        Variant!();
+        Const!();
+        HasSource!();
     };
 }
 
 macro_rules! impl_56 {
     () => {
         deps!();
-        # [doc = " Variants inherit visibility from the parent enum."] impl HasVisibility for Variant { fn visibility (& self , db : & dyn HirDatabase) -> Visibility { self . parent_enum (db) . visibility (db) } }
+        impl HasSource for Const { type Ast = ast :: Const ; fn source (self , db : & dyn HirDatabase) -> Option < InFile < Self :: Ast > > { Some (self . id . lookup (db) . source (db)) } }
     };
 }
 

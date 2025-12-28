@@ -1,0 +1,7 @@
+macro_rules! expand_macro_recur {
+    () => {
+        fn expand_macro_recur (sema : & Semantics < '_ , RootDatabase > , macro_call : & ast :: Item , error : & mut String , result_span_map : & mut SpanMap < SyntaxContext > , offset_in_original_node : TextSize ,) -> Option < SyntaxNode > { let ExpandResult { value : expanded , err } = match macro_call { item @ ast :: Item :: MacroCall (macro_call) => sema . expand_attr_macro (item) . map (| it | it . map (| it | it . value)) . or_else (| | sema . expand_allowed_builtins (macro_call)) ? , item => sema . expand_attr_macro (item) ? . map (| it | it . value) , } ; let expanded = expanded . clone_for_update () ; if let Some (err) = err { format_to ! (error , "\n{}" , err . render_to_string (sema . db)) ; } let file_id = sema . hir_file_for (& expanded) . macro_file () . expect ("expansion must produce a macro file") ; let expansion_span_map = sema . db . expansion_span_map (file_id) ; result_span_map . merge (TextRange :: at (offset_in_original_node , macro_call . syntax () . text_range () . len ()) , expanded . text_range () . len () , & expansion_span_map ,) ; Some (expand (sema , expanded , error , result_span_map , u32 :: from (offset_in_original_node) as i32)) }
+    };
+}
+
+expand_macro_recur!()

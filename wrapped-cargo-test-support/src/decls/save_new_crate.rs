@@ -1,0 +1,7 @@
+macro_rules! save_new_crate {
+    () => {
+        fn save_new_crate (dst : PathBuf , new_crate : crates_io :: NewCrate , file : & [u8] , file_cksum : String , registry_path : & Path ,) { t ! (fs :: create_dir_all (dst . parent () . unwrap ())) ; t ! (fs :: write (& dst , file)) ; let deps = new_crate . deps . iter () . map (| dep | { let (name , package) = match & dep . explicit_name_in_toml { Some (explicit) => (explicit . to_string () , Some (dep . name . to_string ())) , None => (dep . name . to_string () , None) , } ; serde_json :: json ! ({ "name" : name , "req" : dep . version_req , "features" : dep . features , "default_features" : dep . default_features , "target" : dep . target , "optional" : dep . optional , "kind" : dep . kind , "registry" : dep . registry , "package" : package , "artifact" : dep . artifact , "bindep_target" : dep . bindep_target , "lib" : dep . lib , }) }) . collect :: < Vec < _ > > () ; let line = create_index_line (serde_json :: json ! (new_crate . name) , & new_crate . vers , deps , & file_cksum , new_crate . features , false , new_crate . links , new_crate . rust_version . as_deref () , None , None ,) ; write_to_index (registry_path , & new_crate . name , line , false) ; }
+    };
+}
+
+save_new_crate!()

@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        FromOsStringError!();
+        Utf8PathBuf!();
     };
 }
 
 macro_rules! impl_97 {
     () => {
         deps!();
-        impl error :: Error for FromOsStringError { fn source (& self) -> Option < & (dyn error :: Error + 'static) > { Some (& self . error) } }
+        impl From < Utf8PathBuf > for Rc < Path > { fn from (path : Utf8PathBuf) -> Rc < Path > { PathBuf :: from (path) . into () } }
     };
 }
 

@@ -1,0 +1,7 @@
+macro_rules! REBASE_OPCODE_ADD_ADDR_IMM_SCALED {
+    () => {
+        pub const REBASE_OPCODE_ADD_ADDR_IMM_SCALED : u8 = 0x40 ;
+    };
+}
+
+REBASE_OPCODE_ADD_ADDR_IMM_SCALED!()

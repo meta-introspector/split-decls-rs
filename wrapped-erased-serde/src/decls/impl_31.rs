@@ -1,0 +1,21 @@
+macro_rules! deps {
+    () => {
+        Any!();
+        EnumAccess!();
+        Result!();
+        Out!();
+        Visitor!();
+        Error!();
+        Variant!();
+        DeserializeSeed!();
+    };
+}
+
+macro_rules! impl_31 {
+    () => {
+        deps!();
+        impl < 'de , T > EnumAccess < 'de > for erase :: EnumAccess < T > where T : serde :: de :: EnumAccess < 'de > , { fn erased_variant_seed (& mut self , seed : & mut dyn DeserializeSeed < 'de > ,) -> Result < (Out , Variant < 'de >) , Error > { self . take () . variant_seed (seed) . map (| (out , variant) | { use serde :: de :: VariantAccess ; let erased = Variant { data : unsafe { Any :: new (variant) } , unit_variant : { unsafe fn unit_variant < 'de , T > (a : Any) -> Result < () , Error > where T : serde :: de :: EnumAccess < 'de > , { unsafe { a . take :: < T :: Variant > () . unit_variant () . map_err (erase) } } unit_variant :: < T > } , visit_newtype : { unsafe fn visit_newtype < 'de , T > (a : Any , seed : & mut dyn DeserializeSeed < 'de > ,) -> Result < Out , Error > where T : serde :: de :: EnumAccess < 'de > , { unsafe { a . take :: < T :: Variant > () . newtype_variant_seed (seed) . map_err (erase) } } visit_newtype :: < T > } , tuple_variant : { unsafe fn tuple_variant < 'de , T > (a : Any , len : usize , visitor : & mut dyn Visitor < 'de > ,) -> Result < Out , Error > where T : serde :: de :: EnumAccess < 'de > , { unsafe { a . take :: < T :: Variant > () . tuple_variant (len , visitor) . map_err (erase) } } tuple_variant :: < T > } , struct_variant : { unsafe fn struct_variant < 'de , T > (a : Any , fields : & 'static [& 'static str] , visitor : & mut dyn Visitor < 'de > ,) -> Result < Out , Error > where T : serde :: de :: EnumAccess < 'de > , { unsafe { a . take :: < T :: Variant > () . struct_variant (fields , visitor) . map_err (erase) } } struct_variant :: < T > } , } ; (out , erased) }) . map_err (erase) } }
+    };
+}
+
+impl_31!()

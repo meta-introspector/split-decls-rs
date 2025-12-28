@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        ReferenceType!();
+        TreeUpdateBuilder!();
     };
 }
 
 macro_rules! impl_103 {
     () => {
         deps!();
-        impl fmt :: Display for ReferenceType { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { self . str () . fmt (f) } }
+        impl Default for TreeUpdateBuilder { fn default () -> Self { Self :: new () } }
     };
 }
 

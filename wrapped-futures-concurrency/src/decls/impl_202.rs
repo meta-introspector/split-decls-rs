@@ -1,0 +1,17 @@
+macro_rules! deps {
+    () => {
+        Key!();
+        Keyed!();
+        ConcurrentStream!();
+        FutureGroup!();
+    };
+}
+
+macro_rules! impl_202 {
+    () => {
+        deps!();
+        impl < F : Future > FutureGroup < F > { # [doc = " Insert a new future into the group."] # [doc = ""] # [doc = " # Example"] # [doc = ""] # [doc = " ```rust"] # [doc = " use futures_concurrency::future::FutureGroup;"] # [doc = " use std::future;"] # [doc = ""] # [doc = " let mut group = FutureGroup::with_capacity(2);"] # [doc = " group.insert(future::ready(12));"] # [doc = " ```"] pub fn insert (& mut self , future : F) -> Key where F : Future , { if self . capacity <= self . len () { self . reserve (self . capacity * 2 + 1) ; } let index = self . futures . insert (future) ; self . keys . insert (index) ; self . states [index] . set_pending () ; self . wakers . readiness () . set_ready (index) ; Key (index) } # [allow (unused)] # [doc = " Insert a value into a pinned `FutureGroup`"] # [doc = ""] # [doc = " This method is private because it serves as an implementation detail for"] # [doc = " `ConcurrentStream`. We should never expose this publicly, as the entire"] # [doc = " point of this crate is that we abstract the futures poll machinery away"] # [doc = " from end-users."] pub (crate) fn insert_pinned (self : Pin < & mut Self > , future : F) -> Key where F : Future , { let mut this = self . project () ; let index = unsafe { this . futures . as_mut () . get_unchecked_mut () } . insert (future) ; this . keys . insert (index) ; let key = Key (index) ; let max_len = this . futures . as_ref () . capacity () . max (index) ; this . wakers . resize (max_len) ; this . states . resize (max_len) ; this . states [index] . set_pending () ; let mut readiness = this . wakers . readiness () ; readiness . set_ready (index) ; key } # [doc = " Create a stream which also yields the key of each item."] # [doc = ""] # [doc = " # Example"] # [doc = ""] # [doc = " ```rust"] # [doc = " use futures_concurrency::future::FutureGroup;"] # [doc = " use futures_lite::StreamExt;"] # [doc = " use std::future;"] # [doc = ""] # [doc = " # futures_lite::future::block_on(async {"] # [doc = " let mut group = FutureGroup::new();"] # [doc = " group.insert(future::ready(2));"] # [doc = " group.insert(future::ready(4));"] # [doc = ""] # [doc = " let mut out = 0;"] # [doc = " let mut group = group.keyed();"] # [doc = " while let Some((_key, num)) = group.next().await {"] # [doc = "     out += num;"] # [doc = " }"] # [doc = " assert_eq!(out, 6);"] # [doc = " # });"] # [doc = " ```"] pub fn keyed (self) -> Keyed < F > { Keyed { group : self } } }
+    };
+}
+
+impl_202!()

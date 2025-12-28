@@ -1,0 +1,7 @@
+macro_rules! PATTERN_LIMIT {
+    () => {
+        # [doc = " This is a limit placed on the total number of patterns we're willing to try"] # [doc = " and match at once. As more sophisticated algorithms are added, this number"] # [doc = " may be increased."] const PATTERN_LIMIT : usize = 128 ;
+    };
+}
+
+PATTERN_LIMIT!()

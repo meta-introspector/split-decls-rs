@@ -1,6 +1,6 @@
 macro_rules! macro_19 {
     () => {
-        impl_Integer_size ! (isize as i16 # [cfg (target_pointer_width = "16")]) ;
+        impl_Integer ! (u64 [len = 20] as u64) ;
     };
 }
 

@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        StdError!();
+        Error!();
+    };
+}
+
+macro_rules! impl_79 {
+    () => {
+        deps!();
+        # [cfg (any (feature = "std" , not (anyhow_no_core_error)))] impl From < Error > for Box < dyn StdError + Send + 'static > { # [cold] fn from (error : Error) -> Self { error . into_boxed_dyn_error () } }
+    };
+}
+
+impl_79!()

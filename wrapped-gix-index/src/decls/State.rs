@@ -1,8 +1,13 @@
 macro_rules! deps {
     () => {
+        Tree!();
+        Link!();
         PathStorage!();
+        FsMonitor!();
+        Paths!();
         Entry!();
         Version!();
+        UntrackedCache!();
     };
 }
 

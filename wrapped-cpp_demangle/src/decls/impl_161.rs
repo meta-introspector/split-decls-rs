@@ -1,0 +1,22 @@
+macro_rules! deps {
+    () => {
+        DemangleWrite!();
+        DemangleAsInner!();
+        PointerToMemberType!();
+        ArgScopeStack!();
+        DemangleContext!();
+        Type!();
+        Result!();
+        ArrayType!();
+        FunctionType!();
+    };
+}
+
+macro_rules! impl_161 {
+    () => {
+        deps!();
+        impl < 'subs , W > DemangleAsInner < 'subs , W > for Type where W : 'subs + DemangleWrite , { fn demangle_as_inner < 'prev , 'ctx > (& 'subs self , ctx : & 'ctx mut DemangleContext < 'subs , W > , scope : Option < ArgScopeStack < 'prev , 'subs > > ,) -> fmt :: Result { let ctx = try_begin_demangle_as_inner ! (self , ctx , scope) ; match * self { Type :: Qualified (ref quals , _) => quals . demangle_as_inner (ctx , scope) , Type :: PointerTo (_) => write ! (ctx , "*") , Type :: RvalueRef (_) => { while let Some (v) = ctx . inner . last () . and_then (| ty | ty . downcast_to_type ()) { match v { Type :: RvalueRef (_) => { ctx . inner . pop () . unwrap () ; } Type :: LvalueRef (_) => return Ok (()) , _ => break , } } write ! (ctx , "&&") } Type :: LvalueRef (_) => { while let Some (v) = ctx . inner . last () . and_then (| ty | ty . downcast_to_type ()) { match v { Type :: RvalueRef (_) => { ctx . inner . pop () . unwrap () ; } Type :: LvalueRef (_) => return Ok (()) , _ => break , } } write ! (ctx , "&") } ref otherwise => { unreachable ! ("We shouldn't ever put any other types on the inner stack: {:?}" , otherwise) ; } } } fn downcast_to_type (& self) -> Option < & Type > { Some (self) } fn downcast_to_function_type (& self) -> Option < & FunctionType > { if let Type :: Function (ref f) = * self { Some (f) } else { None } } fn downcast_to_array_type (& self) -> Option < & ArrayType > { if let Type :: Array (ref arr) = * self { Some (arr) } else { None } } fn downcast_to_pointer_to_member (& self) -> Option < & PointerToMemberType > { if let Type :: PointerToMember (ref ptm) = * self { Some (ptm) } else { None } } fn is_qualified (& self) -> bool { match * self { Type :: Qualified (..) => true , _ => false , } } }
+    };
+}
+
+impl_161!()

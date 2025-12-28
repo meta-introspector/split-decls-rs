@@ -1,0 +1,19 @@
+macro_rules! deps {
+    () => {
+        EarlyBinder!();
+        ImplTraits!();
+        HirDatabase!();
+        ImplTraitId!();
+        TypingMode!();
+        ImplTraitIdx!();
+    };
+}
+
+macro_rules! tait_hidden_types {
+    () => {
+        deps!();
+        # [salsa :: tracked (returns (ref) , unsafe (non_update_return_type))] pub (crate) fn tait_hidden_types < 'db > (db : & 'db dyn HirDatabase , type_alias : TypeAliasId ,) -> ArenaMap < ImplTraitIdx < 'db > , EarlyBinder < 'db , Ty < 'db > > > { let Some (taits_count) = ImplTraits :: type_alias_impl_traits (db , type_alias) . as_deref () . map (| taits | taits . as_ref () . skip_binder () . impl_traits . len ()) else { return ArenaMap :: new () ; } ; let loc = type_alias . loc (db) ; let module = loc . module (db) ; let interner = DbInterner :: new_with (db , Some (module . krate ()) , module . containing_block ()) ; let infcx = interner . infer_ctxt () . build (TypingMode :: non_body_analysis ()) ; let mut ocx = ObligationCtxt :: new (& infcx) ; let cause = ObligationCause :: dummy () ; let param_env = db . trait_environment (type_alias . into ()) . env ; let defining_bodies = tait_defining_bodies (db , & loc) ; let mut result = ArenaMap :: with_capacity (taits_count) ; for defining_body in defining_bodies { let infer = db . infer (defining_body) ; for (& opaque , & hidden_type) in & infer . type_of_opaque { let ImplTraitId :: TypeAliasImplTrait (opaque_owner , opaque_idx) = opaque . loc (db) else { continue ; } ; if opaque_owner != type_alias { continue ; } let hidden_type = infcx . insert_type_vars (hidden_type) ; match result . entry (opaque_idx) { la_arena :: Entry :: Vacant (entry) => { entry . insert (EarlyBinder :: bind (hidden_type)) ; } la_arena :: Entry :: Occupied (entry) => { _ = ocx . eq (& cause , param_env , entry . get () . instantiate_identity () , hidden_type) ; } } } } _ = ocx . try_evaluate_obligations () ; for idx in 0 .. taits_count { let idx = la_arena :: Idx :: from_raw (la_arena :: RawIdx :: from_u32 (idx as u32)) ; match result . entry (idx) { la_arena :: Entry :: Vacant (entry) => { entry . insert (EarlyBinder :: bind (Ty :: new_error (interner , ErrorGuaranteed))) ; } la_arena :: Entry :: Occupied (mut entry) => { * entry . get_mut () = entry . get () . map_bound (| hidden_type | { infcx . resolve_vars_if_possible (hidden_type) . replace_infer_with_error (interner) }) ; } } } result }
+    };
+}
+
+tait_hidden_types!()

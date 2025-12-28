@@ -1,0 +1,7 @@
+macro_rules! RemoteHandle {
+    () => {
+        # [doc = " The handle to a remote future returned by"] # [doc = " [`remote_handle`](crate::future::FutureExt::remote_handle). When you drop this,"] # [doc = " the remote future will be woken up to be dropped by the executor."] # [doc = ""] # [doc = " ## Unwind safety"] # [doc = ""] # [doc = " When the remote future panics, [Remote] will catch the unwind and transfer it to"] # [doc = " the thread where `RemoteHandle` is being awaited. This is good for the common"] # [doc = " case where [Remote] is spawned on a threadpool. It is unlikely that other code"] # [doc = " in the executor working thread shares mutable data with the spawned future and we"] # [doc = " preserve the executor from losing its working threads."] # [doc = ""] # [doc = " If you run the future locally and send the handle of to be awaited elsewhere, you"] # [doc = " must be careful with regard to unwind safety because the thread in which the future"] # [doc = " is polled will keep running after the panic and the thread running the [RemoteHandle]"] # [doc = " will unwind."] # [must_use = "dropping a remote handle cancels the underlying future"] # [derive (Debug)] # [cfg_attr (docsrs , doc (cfg (feature = "channel")))] pub struct RemoteHandle < T > { rx : Receiver < thread :: Result < T > > , keep_running : Arc < AtomicBool > , }
+    };
+}
+
+RemoteHandle!()

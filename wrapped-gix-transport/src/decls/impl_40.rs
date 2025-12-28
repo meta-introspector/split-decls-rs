@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        ReadStdoutFailOnError!();
+    };
+}
+
+macro_rules! impl_40 {
+    () => {
+        deps!();
+        impl ReadStdoutFailOnError { fn swap_err_if_present_in_stderr (& self , wanted : usize , res : std :: io :: Result < usize >) -> std :: io :: Result < usize > { match self . recv . try_recv () . ok () { Some (err) => Err (err) , None => match res { Ok (n) if n == wanted => Ok (n) , Ok (n) => { self . recv . recv_timeout (std :: time :: Duration :: from_millis (5)) . ok () . map_or (Ok (n) , Err) } Err (err) => Err (self . recv . recv () . ok () . unwrap_or (err)) , } , } } }
+    };
+}
+
+impl_40!()

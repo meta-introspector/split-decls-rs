@@ -1,0 +1,18 @@
+macro_rules! deps {
+    () => {
+        State!();
+        Source!();
+        Ignore!();
+        Attributes!();
+        PathIdMapping!();
+    };
+}
+
+macro_rules! impl_37 {
+    () => {
+        deps!();
+        # [doc = " Utilities"] impl State { # [doc = " Returns a vec of tuples of relative index paths along with the best usable blob OID for"] # [doc = " either *ignore* or *attribute* files or both. This allows files to be accessed directly from"] # [doc = " the object database without the need for a worktree checkout."] # [doc = ""] # [doc = " Note that this method…"] # [doc = " - ignores entries which aren't blobs."] # [doc = " - ignores ignore entries which are not skip-worktree."] # [doc = " - within merges, picks 'our' stage both for *ignore* and *attribute* files."] # [doc = ""] # [doc = " * `index` is where we look for suitable files by path in order to obtain their blob hash."] # [doc = " * `paths` is the indices storage backend for paths."] # [doc = " * `case` determines if the search for files should be case-sensitive or not."] pub fn id_mappings_from_index (& self , index : & gix_index :: State , paths : & gix_index :: PathStorageRef , case : Case ,) -> Vec < PathIdMapping > { let a1_backing ; # [cfg (feature = "attributes")] let a2_backing ; let names = match self { State :: IgnoreStack (ignore) => { a1_backing = [(ignore . exclude_file_name_for_directories . as_bytes () . as_bstr () , Some (ignore . source) ,)] ; a1_backing . as_ref () } # [cfg (feature = "attributes")] State :: AttributesAndIgnoreStack { ignore , .. } => { a2_backing = [(ignore . exclude_file_name_for_directories . as_bytes () . as_bstr () , Some (ignore . source) ,) , (".gitattributes" . into () , None) ,] ; a2_backing . as_ref () } # [cfg (feature = "attributes")] State :: CreateDirectoryAndAttributesStack { .. } | State :: AttributesStack (_) => { a1_backing = [(".gitattributes" . into () , None)] ; a1_backing . as_ref () } } ; index . entries () . iter () . filter_map (move | entry | { let path = entry . path_in (paths) ; if entry . mode == gix_index :: entry :: Mode :: FILE && (entry . stage_raw () == 0 || entry . stage_raw () == 2) { let basename = path . rfind_byte (b'/') . map_or (path , | pos | path [pos + 1 ..] . as_bstr ()) ; let ignore_source = names . iter () . find_map (| t | { match case { Case :: Sensitive => basename == t . 0 , Case :: Fold => basename . eq_ignore_ascii_case (t . 0) , } . then_some (t . 1) }) ? ; if let Some (source) = ignore_source { match source { ignore :: Source :: IdMapping => { } ignore :: Source :: WorktreeThenIdMappingIfNotSkipped => { if ! entry . flags . contains (gix_index :: entry :: Flags :: SKIP_WORKTREE) { return None ; } } } } Some ((path . to_owned () , entry . id)) } else { None } }) . collect () } pub (crate) fn ignore_or_panic (& self) -> & Ignore { match self { State :: IgnoreStack (v) => v , # [cfg (feature = "attributes")] State :: AttributesAndIgnoreStack { ignore , .. } => ignore , # [cfg (feature = "attributes")] State :: AttributesStack (_) | State :: CreateDirectoryAndAttributesStack { .. } => { unreachable ! ("BUG: must not try to check excludes without it being setup") } } } # [cfg (feature = "attributes")] pub (crate) fn attributes_or_panic (& self) -> & Attributes { match self { State :: AttributesStack (attributes) | State :: AttributesAndIgnoreStack { attributes , .. } | State :: CreateDirectoryAndAttributesStack { attributes , .. } => attributes , State :: IgnoreStack (_) => { unreachable ! ("BUG: must not try to check excludes without it being setup") } } } }
+    };
+}
+
+impl_37!()

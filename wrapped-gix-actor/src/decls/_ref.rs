@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        IdentityRef!();
+        Signature!();
+        SignatureRef!();
+    };
+}
+
+macro_rules! _ref {
+    () => {
+        deps!();
+        mod _ref { use bstr :: ByteSlice ; use winnow :: { error :: StrContext , prelude :: * } ; use crate :: { signature :: decode , IdentityRef , Signature , SignatureRef } ; # [doc = " Lifecycle"] impl < 'a > SignatureRef < 'a > { # [doc = " Deserialize a signature from the given `data`."] pub fn from_bytes < E > (mut data : & 'a [u8]) -> Result < SignatureRef < 'a > , winnow :: error :: ErrMode < E > > where E : winnow :: error :: ParserError < & 'a [u8] > + winnow :: error :: AddContext < & 'a [u8] , StrContext > , { decode . parse_next (& mut data) } # [doc = " Try to parse the timestamp and create an owned instance from this shared one."] pub fn to_owned (& self) -> Result < Signature , gix_date :: parse :: Error > { Ok (Signature { name : self . name . to_owned () , email : self . email . to_owned () , time : self . time () ? , }) } } # [doc = " Access"] impl < 'a > SignatureRef < 'a > { # [doc = " Trim the whitespace surrounding the `name`, `email` and `time` and return a new signature."] pub fn trim (& self) -> SignatureRef < 'a > { SignatureRef { name : self . name . trim () . as_bstr () , email : self . email . trim () . as_bstr () , time : self . time . trim () , } } # [doc = " Return the actor's name and email, effectively excluding the timestamp of this signature."] pub fn actor (& self) -> IdentityRef < 'a > { IdentityRef { name : self . name , email : self . email , } } # [doc = " Parse only the seconds since unix epoch from the `time` field, or silently default to 0"] # [doc = " if parsing fails. Note that this ignores the timezone, so it can parse otherwise broken dates."] # [doc = ""] # [doc = " For a fallible and more complete, but slower version, use [`time()`](Self::time)."] pub fn seconds (& self) -> gix_date :: SecondsSinceUnixEpoch { self . time . trim () . split (' ') . next () . and_then (| i | i . parse () . ok ()) . unwrap_or_default () } # [doc = " Parse the `time` field for access to the passed time since unix epoch, and the time offset."] # [doc = " The format is expected to be [raw](gix_date::parse_header())."] pub fn time (& self) -> Result < gix_date :: Time , gix_date :: parse :: Error > { self . time . parse () } } }
+    };
+}
+
+_ref!()

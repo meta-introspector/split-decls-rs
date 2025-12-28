@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Url!();
+        Scheme!();
     };
 }
 
 macro_rules! impl_10 {
     () => {
         deps!();
-        # [doc = " Modification"] impl Url { # [doc = " Set the given `user`, or unset it with `None`. Return the previous value."] pub fn set_user (& mut self , user : Option < String >) -> Option < String > { let prev = self . user . take () ; self . user = user ; prev } # [doc = " Set the given `password`, or unset it with `None`. Return the previous value."] pub fn set_password (& mut self , password : Option < String >) -> Option < String > { let prev = self . password . take () ; self . password = password ; prev } }
+        impl Scheme { # [doc = " Return ourselves parseable name."] pub fn as_str (& self) -> & str { use Scheme :: * ; match self { File => "file" , Git => "git" , Ssh => "ssh" , Http => "http" , Https => "https" , Ext (name) => name . as_str () , } } # [doc = " Return the default port for this scheme, or `None` if it is not known."] pub fn default_port (& self) -> Option < u16 > { match self { Scheme :: Http => Some (80) , Scheme :: Https => Some (443) , Scheme :: Ssh => Some (22) , Scheme :: Git => Some (9418) , _ => None , } } }
     };
 }
 

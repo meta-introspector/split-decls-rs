@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        UnparkMutex!();
+    };
+}
+
+macro_rules! impl_50 {
+    () => {
+        deps!();
+        impl < D > UnparkMutex < D > { pub (crate) fn new () -> Self { Self { status : AtomicUsize :: new (WAITING) , inner : UnsafeCell :: new (None) } } # [doc = " Attempt to \"notify\" the mutex that a poll should occur."] # [doc = ""] # [doc = " An `Ok` result indicates that the `POLLING` state has been entered, and"] # [doc = " the caller can proceed to poll the future. An `Err` result indicates"] # [doc = " that polling is not necessary (because the task is finished or the"] # [doc = " polling has been delegated)."] pub (crate) fn notify (& self) -> Result < D , () > { let mut status = self . status . load (SeqCst) ; loop { match status { WAITING => { match self . status . compare_exchange (WAITING , POLLING , SeqCst , SeqCst) { Ok (_) => { let data = unsafe { (* self . inner . get ()) . take () . unwrap () } ; return Ok (data) ; } Err (cur) => status = cur , } } POLLING => match self . status . compare_exchange (POLLING , REPOLL , SeqCst , SeqCst) { Ok (_) => return Err (()) , Err (cur) => status = cur , } , _ => return Err (()) , } } } # [doc = " Alert the mutex that polling is about to begin, clearing any accumulated"] # [doc = " re-poll requests."] # [doc = ""] # [doc = " # Safety"] # [doc = ""] # [doc = " Callable only from the `POLLING`/`REPOLL` states, i.e. between"] # [doc = " successful calls to `notify` and `wait`/`complete`."] pub (crate) unsafe fn start_poll (& self) { self . status . store (POLLING , SeqCst) ; } # [doc = " Alert the mutex that polling completed with `Pending`."] # [doc = ""] # [doc = " # Safety"] # [doc = ""] # [doc = " Callable only from the `POLLING`/`REPOLL` states, i.e. between"] # [doc = " successful calls to `notify` and `wait`/`complete`."] pub (crate) unsafe fn wait (& self , data : D) -> Result < () , D > { unsafe { * self . inner . get () = Some (data) } match self . status . compare_exchange (POLLING , WAITING , SeqCst , SeqCst) { Ok (_) => Ok (()) , Err (status) => { assert_eq ! (status , REPOLL) ; self . status . store (POLLING , SeqCst) ; Err (unsafe { (* self . inner . get ()) . take () . unwrap () }) } } } # [doc = " Alert the mutex that the task has completed execution and should not be"] # [doc = " notified again."] # [doc = ""] # [doc = " # Safety"] # [doc = ""] # [doc = " Callable only from the `POLLING`/`REPOLL` states, i.e. between"] # [doc = " successful calls to `notify` and `wait`/`complete`."] pub (crate) unsafe fn complete (& self) { self . status . store (COMPLETE , SeqCst) ; } }
+    };
+}
+
+impl_50!()

@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        VerifyingKey!();
+        EcdsaCurve!();
+    };
+}
+
+macro_rules! impl_114 {
+    () => {
+        deps!();
+        impl < C > From < VerifyingKey < C > > for EncodedPoint < C > where C : EcdsaCurve + CurveArithmetic + PointCompression , AffinePoint < C > : FromEncodedPoint < C > + ToEncodedPoint < C > , FieldBytesSize < C > : sec1 :: ModulusSize , { fn from (verifying_key : VerifyingKey < C >) -> EncodedPoint < C > { verifying_key . inner . into () } }
+    };
+}
+
+impl_114!()

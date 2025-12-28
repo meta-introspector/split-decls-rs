@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        Unwrap!();
-        Iterator!();
         FallibleIterator!();
+        Flatten!();
+        IntoFallibleIterator!();
     };
 }
 
 macro_rules! impl_85 {
     () => {
         deps!();
-        impl < T > iter :: Iterator for Unwrap < T > where T : FallibleIterator , T :: Error : core :: fmt :: Debug , { type Item = T :: Item ; # [inline] fn next (& mut self) -> Option < T :: Item > { self . 0 . next () . unwrap () } # [inline] fn size_hint (& self) -> (usize , Option < usize >) { let (_ , max) = self . 0 . size_hint () ; (0 , max) } }
+        impl < I > Clone for Flatten < I > where I : FallibleIterator + Clone , I :: Item : IntoFallibleIterator , < I :: Item as IntoFallibleIterator > :: IntoFallibleIter : Clone , { # [inline] fn clone (& self) -> Flatten < I > { Flatten { it : self . it . clone () , cur : self . cur . clone () , } } }
     };
 }
 

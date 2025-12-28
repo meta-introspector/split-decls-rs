@@ -1,0 +1,7 @@
+macro_rules! atomic_compare_exchange_weak {
+    () => {
+        # [doc = " Atomically compares data at `dst` to `current` and, if equal byte-for-byte, exchanges data at"] # [doc = " `dst` with `new`."] # [doc = ""] # [doc = " Returns the old value on success, or the current value at `dst` on failure."] # [doc = ""] # [doc = " This operation uses the `AcqRel` ordering. If possible, an atomic instructions is used, and a"] # [doc = " global lock otherwise."] # [allow (clippy :: let_unit_value)] unsafe fn atomic_compare_exchange_weak < T > (dst : * mut T , mut current : T , new : T) -> Result < T , T > where T : Copy + Eq , { atomic ! { T , a , { a = unsafe { &* (dst as * const _ as * const _) } ; let mut current_raw = unsafe { mem :: transmute_copy (& current) } ; let new_raw = unsafe { mem :: transmute_copy (& new) } ; loop { match a . compare_exchange_weak (current_raw , new_raw , Ordering :: AcqRel , Ordering :: Acquire ,) { Ok (_) => break Ok (current) , Err (previous_raw) => { let previous = unsafe { mem :: transmute_copy (& previous_raw) } ; if ! T :: eq (& previous , & current) { break Err (previous) ; } current = previous ; current_raw = previous_raw ; } } } } , { let guard = lock (dst as usize) . write () ; let old = unsafe { ptr :: read (dst) } ; if T :: eq (& old , & current) { unsafe { ptr :: write (dst , new) } Ok (old) } else { guard . abort () ; Err (old) } } } }
+    };
+}
+
+atomic_compare_exchange_weak!()

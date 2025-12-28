@@ -1,8 +1,15 @@
 macro_rules! deps {
     () => {
-        Baseline!();
-        BenchmarkFilter!();
+        Connection!();
         Mode!();
+        Reports!();
+        Measurement!();
+        BenchmarkFilter!();
+        Comparison!();
+        Baseline!();
+        WallTime!();
+        BenchmarkConfig!();
+        Profiler!();
     };
 }
 

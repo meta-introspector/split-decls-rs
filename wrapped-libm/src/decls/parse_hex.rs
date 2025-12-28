@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        HexFloatParseError!();
+        Parsed!();
+    };
+}
+
+macro_rules! parse_hex {
+    () => {
+        deps!();
+        # [doc = " Parse a hexadecimal float x"] const fn parse_hex (mut b : & [u8]) -> Result < Parsed , HexFloatParseError > { let mut sig : u128 = 0 ; let mut exp : i32 = 0 ; let mut seen_point = false ; let mut some_digits = false ; let mut inexact = false ; while let & [c , ref rest @ ..] = b { b = rest ; match c { b'.' => { if seen_point { return Err (HexFloatParseError ("unexpected '.' parsing fractional digits" ,)) ; } seen_point = true ; continue ; } b'p' | b'P' => break , c => { let digit = match hex_digit (c) { Some (d) => d , None => return Err (HexFloatParseError ("expected hexadecimal digit")) , } ; some_digits = true ; if (sig >> 124) == 0 { sig <<= 4 ; sig |= digit as u128 ; } else { exp += 4 ; inexact |= digit != 0 ; } if seen_point { exp -= 4 ; } } } } sig |= inexact as u128 ; if ! some_digits { return Err (HexFloatParseError ("at least one digit is required")) ; } ; some_digits = false ; let negate_exp = matches ! (b , [b'-' , ..]) ; if let & [b'-' | b'+' , ref rest @ ..] = b { b = rest ; } let mut pexp : u32 = 0 ; while let & [c , ref rest @ ..] = b { b = rest ; let digit = match dec_digit (c) { Some (d) => d , None => return Err (HexFloatParseError ("expected decimal digit")) , } ; some_digits = true ; pexp = pexp . saturating_mul (10) ; pexp += digit as u32 ; } if ! some_digits { return Err (HexFloatParseError ("at least one exponent digit is required" ,)) ; } ; { let e ; if negate_exp { e = (exp as i64) - (pexp as i64) ; } else { e = (exp as i64) + (pexp as i64) ; } ; exp = if e < i32 :: MIN as i64 { i32 :: MIN } else if e > i32 :: MAX as i64 { i32 :: MAX } else { e as i32 } ; } Ok (Parsed { sig , exp }) }
+    };
+}
+
+parse_hex!()

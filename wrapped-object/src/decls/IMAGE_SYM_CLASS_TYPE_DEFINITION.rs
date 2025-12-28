@@ -1,0 +1,7 @@
+macro_rules! IMAGE_SYM_CLASS_TYPE_DEFINITION {
+    () => {
+        pub const IMAGE_SYM_CLASS_TYPE_DEFINITION : u8 = 0x0D ;
+    };
+}
+
+IMAGE_SYM_CLASS_TYPE_DEFINITION!()

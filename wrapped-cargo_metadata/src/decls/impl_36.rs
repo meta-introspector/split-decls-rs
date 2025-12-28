@@ -1,13 +1,15 @@
 macro_rules! deps {
     () => {
-        CrateType!();
+        MessageIter!();
+        Message!();
+        Result!();
     };
 }
 
 macro_rules! impl_36 {
     () => {
         deps!();
-        impl From < & str > for CrateType { fn from (value : & str) -> Self { match value { "bin" => CrateType :: Bin , "lib" => CrateType :: Lib , "rlib" => CrateType :: RLib , "dylib" => CrateType :: DyLib , "cdylib" => CrateType :: CDyLib , "staticlib" => CrateType :: StaticLib , "proc-macro" => CrateType :: ProcMacro , x => CrateType :: Unknown (x . to_string ()) , } } }
+        impl < R : BufRead > Iterator for MessageIter < R > { type Item = io :: Result < Message > ; fn next (& mut self) -> Option < Self :: Item > { let mut line = String :: new () ; self . input . read_line (& mut line) . map (| n | { if n == 0 { None } else { if line . ends_with ('\n') { line . truncate (line . len () - 1) ; } let mut deserializer = serde_json :: Deserializer :: from_str (& line) ; deserializer . disable_recursion_limit () ; Some (Message :: deserialize (& mut deserializer) . unwrap_or (Message :: TextLine (line))) } }) . transpose () } }
     };
 }
 

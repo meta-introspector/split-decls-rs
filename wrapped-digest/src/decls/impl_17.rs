@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        InvalidOutputSize!();
+        MacError!();
     };
 }
 
 macro_rules! impl_17 {
     () => {
         deps!();
-        impl core :: error :: Error for InvalidOutputSize { }
+        impl core :: error :: Error for MacError { }
     };
 }
 

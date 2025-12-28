@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        MmapMut!();
+        MmapRaw!();
     };
 }
 
 macro_rules! impl_26 {
     () => {
         deps!();
-        # [cfg (feature = "stable_deref_trait")] unsafe impl stable_deref_trait :: StableDeref for MmapMut { }
+        impl fmt :: Debug for MmapRaw { fn fmt (& self , fmt : & mut fmt :: Formatter) -> fmt :: Result { fmt . debug_struct ("MmapRaw") . field ("ptr" , & self . as_ptr ()) . field ("len" , & self . len ()) . finish () } }
     };
 }
 

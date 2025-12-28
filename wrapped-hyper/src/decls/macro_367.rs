@@ -1,0 +1,7 @@
+macro_rules! macro_367 {
+    () => {
+        ffi_fn ! { # [doc = " Free a waker."] # [doc = ""] # [doc = " This should only be used if the request isn't consumed by"] # [doc = " `hyper_waker_wake`."] fn hyper_waker_free (waker : * mut hyper_waker) { drop (non_null ! (Box :: from_raw (waker) ?= ())) ; } }
+    };
+}
+
+macro_367!()

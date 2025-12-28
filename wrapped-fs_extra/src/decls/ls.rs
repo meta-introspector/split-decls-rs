@@ -1,0 +1,17 @@
+macro_rules! deps {
+    () => {
+        Result!();
+        LsResult!();
+        DirEntryAttr!();
+        ErrorKind!();
+    };
+}
+
+macro_rules! ls {
+    () => {
+        deps!();
+        # [doc = " Returns a collection of directory entries with attributes specifying the information that should be returned."] # [doc = ""] # [doc = " This function takes to arguments:"] # [doc = ""] # [doc = " * `path` - Path to directory."] # [doc = ""] # [doc = " * `config` - Set attributes which you want see in return data."] # [doc = ""] # [doc = " # Errors"] # [doc = ""] # [doc = " This function will return an error in the following situations, but is not limited to just"] # [doc = " these cases:"] # [doc = ""] # [doc = " * This `path` directory does not exist."] # [doc = " * Invalid `path`."] # [doc = " * The current process does not have the permission to access `path`."] # [doc = ""] # [doc = " #Examples"] # [doc = ""] # [doc = " ```rust,ignore"] # [doc = " extern crate fs_extra;"] # [doc = " use fs_extra::dir::{ls, DirEntryAttr, LsResult};"] # [doc = " use std::collections::HashSet;"] # [doc = ""] # [doc = " let mut config = HashSet::new();"] # [doc = " config.insert(DirEntryAttr::Name);"] # [doc = " config.insert(DirEntryAttr::Size);"] # [doc = " config.insert(DirEntryAttr::BaseInfo);"] # [doc = ""] # [doc = " let result = ls(\"test\", &config);"] # [doc = " assert_eq!(2, ls_result.items.len());"] # [doc = " assert_eq!(2, ls_result.base.len());"] # [doc = " ```"] pub fn ls < P > (path : P , config : & HashSet < DirEntryAttr >) -> Result < LsResult > where P : AsRef < Path > , { let mut items = Vec :: new () ; let path = path . as_ref () ; if ! path . is_dir () { err ! ("Path does not directory" , ErrorKind :: InvalidFolder) ; } for entry in read_dir (& path) ? { let entry = entry ? ; let path = entry . path () ; let metadata = entry . metadata () ? ; let item = get_details_entry_with_meta (path , & config , metadata) ? ; items . push (item) ; } let mut base = HashMap :: new () ; if config . contains (& DirEntryAttr :: BaseInfo) { base = get_details_entry (& path , & config) ? ; } Ok (LsResult { items , base }) }
+    };
+}
+
+ls!()

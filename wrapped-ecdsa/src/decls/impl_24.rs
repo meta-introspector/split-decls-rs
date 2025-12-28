@@ -1,15 +1,17 @@
 macro_rules! deps {
     () => {
-        Signature!();
         EcdsaCurve!();
-        SignatureSize!();
+        Signature!();
+        MaxSize!();
+        SignatureBytes!();
+        MaxOverhead!();
     };
 }
 
 macro_rules! impl_24 {
     () => {
         deps!();
-        impl < C > TryFrom < & [u8] > for Signature < C > where C : EcdsaCurve , SignatureSize < C > : ArraySize , { type Error = Error ; fn try_from (slice : & [u8]) -> Result < Self > { Self :: from_slice (slice) } }
+        impl < 'a , C > Decode < 'a > for Signature < C > where C : EcdsaCurve , MaxSize < C > : ArraySize , < FieldBytesSize < C > as Add > :: Output : Add < MaxOverhead > + ArraySize , { type Error = der :: Error ; fn decode < R : Reader < 'a > > (reader : & mut R) -> der :: Result < Self > { let header = Header :: peek (reader) ? ; header . tag () . assert_eq (Tag :: Sequence) ? ; let mut buf = SignatureBytes :: < C > :: default () ; let len = (header . encoded_len () ? + header . length ()) ? ; let slice = buf . get_mut (.. usize :: try_from (len) ?) . ok_or_else (| | reader . error (Tag :: Sequence . length_error ())) ? ; reader . read_into (slice) ? ; Self :: from_bytes (slice) . map_err (| _ | reader . error (Tag :: Integer . value_error ())) } }
     };
 }
 

@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
         Utf8PathBuf!();
-        Utf8Path!();
+        Utf8PathBufVisitor!();
     };
 }
 
 macro_rules! impl_5 {
     () => {
         deps!();
-        impl Deref for Utf8PathBuf { type Target = Utf8Path ; fn deref (& self) -> & Utf8Path { self . as_path () } }
+        impl < 'de > Deserialize < 'de > for Utf8PathBuf { fn deserialize < D > (deserializer : D) -> Result < Self , D :: Error > where D : Deserializer < 'de > , { deserializer . deserialize_string (Utf8PathBufVisitor) } }
     };
 }
 

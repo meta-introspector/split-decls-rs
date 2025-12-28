@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        StringTypedError!();
+        Error!();
+    };
+}
+
+macro_rules! error_serialize {
+    () => {
+        deps!();
+        # [doc = " Serializer / deserializer for any boxed error."] # [doc = " The string representation of the error, and its `source` chain can roundtrip across"] # [doc = " the serialization. The actual types are lost (downcast will not work)."] mod error_serialize { use std :: error :: Error as StdError ; use std :: ops :: Deref ; use serde :: { Deserialize , Deserializer , Serializer , ser :: SerializeStruct } ; use crate :: error :: StringTypedError ; pub fn serialize < S > (e : & Box < dyn StdError + Send + Sync > , serializer : S ,) -> Result < S :: Ok , S :: Error > where S : Serializer , { let mut state = serializer . serialize_struct ("StringTypedError" , 2) ? ; state . serialize_field ("message" , & format ! ("{}" , e)) ? ; let mut current_source : & dyn StdError = e . deref () ; let mut sources = Vec :: new () ; while let Some (err) = current_source . source () { sources . push (err . to_string ()) ; current_source = err ; } state . serialize_field ("caused-by" , & sources) ? ; state . end () } pub fn deserialize < 'de , D > (deserializer : D) -> Result < Box < dyn StdError + Sync + Send > , D :: Error > where D : Deserializer < 'de > , { # [derive (Deserialize)] # [serde (rename_all = "kebab-case")] struct ErrorData { message : String , caused_by : Option < Vec < String > > , } let data = ErrorData :: deserialize (deserializer) ? ; let mut prev = None ; if let Some (source) = data . caused_by { for e in source . into_iter () . rev () { prev = Some (Box :: new (StringTypedError { message : e , source : prev , })) ; } } let e = Box :: new (StringTypedError { message : data . message , source : prev , }) ; Ok (e) } }
+    };
+}
+
+error_serialize!()

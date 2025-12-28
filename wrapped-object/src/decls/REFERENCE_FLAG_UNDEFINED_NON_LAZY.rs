@@ -1,0 +1,7 @@
+macro_rules! REFERENCE_FLAG_UNDEFINED_NON_LAZY {
+    () => {
+        pub const REFERENCE_FLAG_UNDEFINED_NON_LAZY : u16 = 0 ;
+    };
+}
+
+REFERENCE_FLAG_UNDEFINED_NON_LAZY!()

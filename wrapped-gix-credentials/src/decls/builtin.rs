@@ -1,6 +1,9 @@
 macro_rules! deps {
     () => {
+        Kind!();
+        Action!();
         Program!();
+        Result!();
     };
 }
 

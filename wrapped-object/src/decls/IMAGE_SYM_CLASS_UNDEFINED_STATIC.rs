@@ -1,0 +1,7 @@
+macro_rules! IMAGE_SYM_CLASS_UNDEFINED_STATIC {
+    () => {
+        pub const IMAGE_SYM_CLASS_UNDEFINED_STATIC : u8 = 0x0E ;
+    };
+}
+
+IMAGE_SYM_CLASS_UNDEFINED_STATIC!()

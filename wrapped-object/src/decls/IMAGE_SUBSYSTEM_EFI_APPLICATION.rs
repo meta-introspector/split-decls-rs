@@ -1,0 +1,7 @@
+macro_rules! IMAGE_SUBSYSTEM_EFI_APPLICATION {
+    () => {
+        pub const IMAGE_SUBSYSTEM_EFI_APPLICATION : u16 = 10 ;
+    };
+}
+
+IMAGE_SUBSYSTEM_EFI_APPLICATION!()

@@ -1,0 +1,19 @@
+macro_rules! deps {
+    () => {
+        Cursor!();
+        EntryRef!();
+        Note!();
+        ToComponents!();
+        Id!();
+        Error!();
+    };
+}
+
+macro_rules! impl_200 {
+    () => {
+        deps!();
+        # [doc = " Operations"] impl < 'repo > Cursor < '_ , 'repo > { # [doc = " Like [`Editor::upsert()`](super::Editor::upsert()), but with the constraint of only editing in this cursor's tree."] pub fn upsert (& mut self , rela_path : impl ToComponents , kind : EntryKind , id : impl Into < ObjectId > ,) -> Result < & mut Self , gix_object :: tree :: editor :: Error > { self . inner . upsert (rela_path . to_components () , kind , id . into ()) ? ; Ok (self) } # [doc = " Like [`Editor::remove()`](super::Editor::remove), but with the constraint of only editing in this cursor's tree."] pub fn remove (& mut self , rela_path : impl ToComponents) -> Result < & mut Self , gix_object :: tree :: editor :: Error > { self . inner . remove (rela_path . to_components ()) ? ; Ok (self) } # [doc = " Like [`Editor::write()`](super::Editor::write()), but will write only the subtree of the cursor."] pub fn write (& mut self) -> Result < Id < 'repo > , write :: Error > { write_cursor (self) } # [doc = " Obtain the entry at `rela_path` or return `None` if none was found, or the tree wasn't yet written"] # [doc = " to that point."] # [doc = " The root tree is always available."] # [doc = " Note that after [writing](Self::write) only the root path remains, all other intermediate trees are removed."] # [doc = " The entry can be anything that can be stored in a tree, but may have a null-id if it's a newly"] # [doc = " inserted tree. Also, ids of trees might not be accurate as they may have been changed in memory."] pub fn get (& self , rela_path : impl ToComponents) -> Option < crate :: object :: tree :: EntryRef < 'repo , '_ > > { self . inner . get (rela_path . to_components ()) . map (| entry | crate :: object :: tree :: EntryRef { inner : entry . into () , repo : self . repo , }) } }
+    };
+}
+
+impl_200!()

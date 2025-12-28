@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         FactoryBlockGetName!();
-        FactoryBlockExecute!();
         FactoryBlockGetCost!();
+        FactoryBlockExecute!();
     };
 }
 

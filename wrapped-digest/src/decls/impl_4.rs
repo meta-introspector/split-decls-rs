@@ -1,0 +1,20 @@
+macro_rules! deps {
+    () => {
+        Mac!();
+        FixedOutputReset!();
+        CtOutput!();
+        Update!();
+        FixedOutput!();
+        MacError!();
+        MacMarker!();
+    };
+}
+
+macro_rules! impl_4 {
+    () => {
+        deps!();
+        impl < T : Update + FixedOutput + MacMarker > Mac for T { # [inline] fn update (& mut self , data : & [u8]) { Update :: update (self , data) ; } # [inline] fn chain_update (mut self , data : impl AsRef < [u8] >) -> Self { Update :: update (& mut self , data . as_ref ()) ; self } # [inline] fn finalize (self) -> CtOutput < Self > { CtOutput :: new (self . finalize_fixed ()) } # [inline (always)] fn finalize_reset (& mut self) -> CtOutput < Self > where Self : FixedOutputReset , { CtOutput :: new (self . finalize_fixed_reset ()) } # [inline] fn reset (& mut self) where Self : Reset , { Reset :: reset (self) } # [inline] fn verify (self , tag : & Output < Self >) -> Result < () , MacError > { if self . finalize () == tag . into () { Ok (()) } else { Err (MacError) } } # [inline] fn verify_reset (& mut self , tag : & Output < Self >) -> Result < () , MacError > where Self : FixedOutputReset , { if self . finalize_reset () == tag . into () { Ok (()) } else { Err (MacError) } } # [inline] fn verify_slice (self , tag : & [u8]) -> Result < () , MacError > { let n = tag . len () ; if n != Self :: OutputSize :: USIZE { return Err (MacError) ; } let choice = self . finalize_fixed () . as_slice () . ct_eq (tag) ; if choice . into () { Ok (()) } else { Err (MacError) } } # [inline] fn verify_slice_reset (& mut self , tag : & [u8]) -> Result < () , MacError > where Self : FixedOutputReset , { let n = tag . len () ; if n != Self :: OutputSize :: USIZE { return Err (MacError) ; } let choice = self . finalize_fixed_reset () . as_slice () . ct_eq (tag) ; if choice . into () { Ok (()) } else { Err (MacError) } } fn verify_truncated_left (self , tag : & [u8]) -> Result < () , MacError > { let n = tag . len () ; if n == 0 || n > Self :: OutputSize :: USIZE { return Err (MacError) ; } let choice = self . finalize_fixed () [.. n] . ct_eq (tag) ; if choice . into () { Ok (()) } else { Err (MacError) } } fn verify_truncated_right (self , tag : & [u8]) -> Result < () , MacError > { let n = tag . len () ; if n == 0 || n > Self :: OutputSize :: USIZE { return Err (MacError) ; } let m = Self :: OutputSize :: USIZE - n ; let choice = self . finalize_fixed () [m ..] . ct_eq (tag) ; if choice . into () { Ok (()) } else { Err (MacError) } } }
+    };
+}
+
+impl_4!()

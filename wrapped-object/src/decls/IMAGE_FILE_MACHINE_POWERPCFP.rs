@@ -1,0 +1,7 @@
+macro_rules! IMAGE_FILE_MACHINE_POWERPCFP {
+    () => {
+        pub const IMAGE_FILE_MACHINE_POWERPCFP : u16 = 0x01f1 ;
+    };
+}
+
+IMAGE_FILE_MACHINE_POWERPCFP!()

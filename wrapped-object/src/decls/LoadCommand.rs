@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        Endian!();
+        U32!();
+    };
+}
+
+macro_rules! LoadCommand {
+    () => {
+        deps!();
+        # [doc = " Common fields at the start of every load command."] # [doc = ""] # [doc = " The load commands directly follow the mach_header.  The total size of all"] # [doc = " of the commands is given by the sizeofcmds field in the mach_header.  All"] # [doc = " load commands must have as their first two fields `cmd` and `cmdsize`.  The `cmd`"] # [doc = " field is filled in with a constant for that command type.  Each command type"] # [doc = " has a structure specifically for it.  The `cmdsize` field is the size in bytes"] # [doc = " of the particular load command structure plus anything that follows it that"] # [doc = " is a part of the load command (i.e. section structures, strings, etc.).  To"] # [doc = " advance to the next load command the `cmdsize` can be added to the offset or"] # [doc = " pointer of the current load command.  The `cmdsize` for 32-bit architectures"] # [doc = " MUST be a multiple of 4 bytes and for 64-bit architectures MUST be a multiple"] # [doc = " of 8 bytes (these are forever the maximum alignment of any load commands)."] # [doc = " The padded bytes must be zero.  All tables in the object file must also"] # [doc = " follow these rules so the file can be memory mapped.  Otherwise the pointers"] # [doc = " to these tables will not work well or at all on some machines.  With all"] # [doc = " padding zeroed like objects will compare byte for byte."] # [derive (Debug , Clone , Copy)] # [repr (C)] pub struct LoadCommand < E : Endian > { # [doc = " Type of load command."] # [doc = ""] # [doc = " One of the `LC_*` constants."] pub cmd : U32 < E > , # [doc = " Total size of command in bytes."] pub cmdsize : U32 < E > , }
+    };
+}
+
+LoadCommand!()

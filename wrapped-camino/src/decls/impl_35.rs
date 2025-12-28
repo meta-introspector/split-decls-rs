@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Iter!();
+        Utf8Ancestors!();
     };
 }
 
 macro_rules! impl_35 {
     () => {
         deps!();
-        impl AsRef < OsStr > for Iter < '_ > { # [inline] fn as_ref (& self) -> & OsStr { self . as_path () . as_os_str () } }
+        impl FusedIterator for Utf8Ancestors < '_ > { }
     };
 }
 

@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        IdxRange!();
+        RawIdx!();
     };
 }
 
 macro_rules! impl_22 {
     () => {
         deps!();
-        impl < T > FusedIterator for IdxRange < T > { }
+        impl From < RawIdx > for u32 { # [inline] fn from (raw : RawIdx) -> u32 { raw . 0 } }
     };
 }
 

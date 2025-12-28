@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Utf8PrefixComponent!();
+        Iter!();
     };
 }
 
 macro_rules! impl_51 {
     () => {
         deps!();
-        impl fmt :: Debug for Utf8PrefixComponent < '_ > { fn fmt (& self , f : & mut fmt :: Formatter) -> fmt :: Result { fmt :: Debug :: fmt (& self . 0 , f) } }
+        impl AsRef < str > for Iter < '_ > { # [inline] fn as_ref (& self) -> & str { self . as_path () . as_ref () } }
     };
 }
 

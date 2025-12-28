@@ -1,0 +1,7 @@
+macro_rules! AsRaw {
+    () => {
+        # [doc = " A trait describing things that can be turned into a raw pointer."] # [doc = ""] # [doc = " This is just an abstraction of things that can be passed to the"] # [doc = " [`compare_and_swap`](struct.ArcSwapAny.html#method.compare_and_swap)."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " use std::ptr;"] # [doc = " use std::sync::Arc;"] # [doc = ""] # [doc = " use arc_swap::ArcSwapOption;"] # [doc = ""] # [doc = " let a = Arc::new(42);"] # [doc = " let shared = ArcSwapOption::from(Some(Arc::clone(&a)));"] # [doc = ""] # [doc = " shared.compare_and_swap(&a, Some(Arc::clone(&a)));"] # [doc = " shared.compare_and_swap(&None::<Arc<_>>, Some(Arc::clone(&a)));"] # [doc = " shared.compare_and_swap(shared.load(), Some(Arc::clone(&a)));"] # [doc = " shared.compare_and_swap(&shared.load(), Some(Arc::clone(&a)));"] # [doc = " shared.compare_and_swap(ptr::null(), Some(Arc::clone(&a)));"] # [doc = " ```"] # [doc = ""] # [doc = " Due to technical limitation, this is not implemented for owned `Arc`/`Option<Arc<_>>`, they"] # [doc = " need to be borrowed."] pub trait AsRaw < T > : Sealed { # [doc = " Converts the value into a raw pointer."] fn as_raw (& self) -> * mut T ; }
+    };
+}
+
+AsRaw!()

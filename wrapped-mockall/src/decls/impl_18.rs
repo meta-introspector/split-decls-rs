@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        TimesRange!();
+        NothingPrint!();
     };
 }
 
 macro_rules! impl_18 {
     () => {
         deps!();
-        impl From < usize > for TimesRange { fn from (n : usize) -> TimesRange { TimesRange (n .. (n + 1)) } }
+        impl Debug for NothingPrint { fn fmt (& self , f : & mut std :: fmt :: Formatter < '_ >) -> std :: fmt :: Result { write ! (f , "?") } }
     };
 }
 

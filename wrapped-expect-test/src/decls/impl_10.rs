@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Location!();
         Runtime!();
         Expect!();
+        Location!();
     };
 }
 

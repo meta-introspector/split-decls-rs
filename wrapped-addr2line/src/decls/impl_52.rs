@@ -1,0 +1,22 @@
+macro_rules! deps {
+    () => {
+        Loader!();
+        LoaderReader!();
+        Result!();
+        LoaderInternal!();
+        LocationRangeIter!();
+        Symbol!();
+        Location!();
+        FrameIter!();
+        Context!();
+    };
+}
+
+macro_rules! impl_52 {
+    () => {
+        deps!();
+        impl Loader { # [doc = " Load the DWARF data for an executable file and create a `Context`."] # [inline] pub fn new (path : impl AsRef < Path >) -> Result < Self > { Self :: new_with_sup (path , None :: < & Path >) } # [doc = " Load the DWARF data for an executable file and create a `Context`."] # [doc = ""] # [doc = " Optionally also use a supplementary object file."] pub fn new_with_sup (path : impl AsRef < Path > , sup_path : Option < impl AsRef < Path > > ,) -> Result < Self > { let arena_data = Arena :: new () ; let arena_mmap = Arena :: new () ; let internal = LoaderInternal :: new (path . as_ref () , sup_path . as_ref () . map (AsRef :: as_ref) , & arena_data , & arena_mmap ,) ? ; Ok (Loader { internal : unsafe { core :: mem :: transmute :: < LoaderInternal < '_ > , LoaderInternal < 'static > > (internal) } , arena_data , arena_mmap , }) } fn borrow_internal < 'a , F , T > (& 'a self , f : F) -> T where F : FnOnce (& 'a LoaderInternal < 'a > , & 'a Arena < Vec < u8 > > , & 'a Arena < Mmap >) -> T , { let internal = unsafe { core :: mem :: transmute :: < & LoaderInternal < 'static > , & 'a LoaderInternal < 'a > > (& self . internal) } ; f (internal , & self . arena_data , & self . arena_mmap) } # [doc = " Get the base address used for relative virtual addresses."] # [doc = ""] # [doc = " Currently this is only non-zero for PE."] pub fn relative_address_base (& self) -> u64 { self . borrow_internal (| i , _data , _mmap | i . relative_address_base) } # [doc = " Find the source file and line corresponding to the given virtual memory address."] # [doc = ""] # [doc = " This calls [`Context::find_location`] with the given address."] pub fn find_location (& self , probe : u64) -> Result < Option < Location < '_ > > > { self . borrow_internal (| i , data , mmap | i . find_location (probe , data , mmap)) } # [doc = " Return source file and lines for a range of addresses."] # [doc = ""] # [doc = " This calls [`Context::find_location_range`] with the given range."] pub fn find_location_range (& self , probe_low : u64 , probe_high : u64 ,) -> Result < LocationRangeIter < '_ , LoaderReader < '_ > > > { self . borrow_internal (| i , data , mmap | { i . find_location_range (probe_low , probe_high , data , mmap) }) } # [doc = " Return an iterator for the function frames corresponding to the given virtual"] # [doc = " memory address."] # [doc = ""] # [doc = " This calls [`Context::find_frames`] with the given address."] pub fn find_frames (& self , probe : u64) -> Result < FrameIter < '_ , LoaderReader < '_ > > > { self . borrow_internal (| i , data , mmap | i . find_frames (probe , data , mmap)) } # [doc = " Find the symbol table entry corresponding to the given virtual memory address."] # [doc = " Return the symbol name."] pub fn find_symbol (& self , probe : u64) -> Option < & str > { self . find_symbol_info (probe) . map (| symbol | symbol . name) } # [doc = " Find the symbol table entry corresponding to the given virtual memory address."] pub fn find_symbol_info (& self , probe : u64) -> Option < Symbol < '_ > > { self . borrow_internal (| i , _data , _mmap | i . find_symbol_info (probe)) } # [doc = " Get the address of a section"] pub fn get_section_range (& self , section_name : & [u8]) -> Option < gimli :: Range > { self . borrow_internal (| i , _data , _mmap | i . get_section_range (section_name)) } }
+    };
+}
+
+impl_52!()

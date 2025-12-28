@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        Path!();
+    };
+}
+
+macro_rules! Options {
+    () => {
+        deps!();
+        # [doc = " Options to help guide the [discovery][crate::upwards()] of repositories, along with their options"] # [doc = " when instantiated."] pub struct Options < 'a > { # [doc = " When discovering a repository, assure it has at least this trust level or ignore it otherwise."] # [doc = ""] # [doc = " This defaults to [`Reduced`][gix_sec::Trust::Reduced] as our default settings are geared towards avoiding abuse."] # [doc = " Set it to `Full` to only see repositories that [are owned by the current user][gix_sec::Trust::from_path_ownership()]."] pub required_trust : gix_sec :: Trust , # [doc = " When discovering a repository, ignore any repositories that are located in these directories or any of their parents."] # [doc = ""] # [doc = " Note that we ignore ceiling directories if the search directory is directly on top of one, which by default is an error"] # [doc = " if `match_ceiling_dir_or_error` is true, the default."] pub ceiling_dirs : Vec < PathBuf > , # [doc = " If true, default true, and `ceiling_dirs` is not empty, we expect at least one ceiling directory to"] # [doc = " contain our search dir or else there will be an error."] pub match_ceiling_dir_or_error : bool , # [doc = " if `true` avoid crossing filesystem boundaries."] # [doc = " Only supported on Unix-like systems."] pub cross_fs : bool , # [doc = " If true, limit discovery to `.git` directories."] # [doc = ""] # [doc = " This  will fail to find typical bare repositories, but would find them if they happen to be named `.git`."] # [doc = " Use this option if repos with worktrees are the only kind of repositories you are interested in for"] # [doc = " optimal discovery performance."] pub dot_git_only : bool , # [doc = " If set, the _current working directory_ (absolute path) to use when resolving relative paths. Note that"] # [doc = " that this is merely an optimization for those who discover a lot of repositories in the same process."] # [doc = ""] # [doc = " If unset, the current working directory will be obtained automatically."] # [doc = " Note that the path here might or might not contained decomposed unicode, which may end up in a path"] # [doc = " relevant us, like the git-dir or the worktree-dir. However, when opening the repository, it will"] # [doc = " change decomposed unicode to precomposed unicode based on the value of `core.precomposeUnicode`, and we"] # [doc = " don't have to deal with that value here just yet."] pub current_dir : Option < & 'a std :: path :: Path > , }
+    };
+}
+
+Options!()

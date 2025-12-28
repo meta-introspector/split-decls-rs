@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        FileRuntime!();
         Expect!();
         Patchwork!();
+        FileRuntime!();
     };
 }
 

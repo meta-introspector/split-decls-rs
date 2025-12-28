@@ -1,14 +1,13 @@
 macro_rules! deps {
     () => {
-        Idx!();
-        RawIdx!();
+        VacantEntry!();
     };
 }
 
 macro_rules! impl_16 {
     () => {
         deps!();
-        impl < T > Idx < T > { # [doc = " Creates a new index from a [`RawIdx`]."] pub const fn from_raw (raw : RawIdx) -> Self { Idx { raw , _ty : PhantomData } } # [doc = " Converts this index into the underlying [`RawIdx`]."] pub const fn into_raw (self) -> RawIdx { self . raw } }
+        impl < 'a , IDX , V > VacantEntry < 'a , IDX , V > { # [doc = " Sets the value of the entry with the `VacantEntry`’s key, and returns a mutable reference to it."] pub fn insert (self , value : V) -> & 'a mut V { self . slot . insert (value) } }
     };
 }
 

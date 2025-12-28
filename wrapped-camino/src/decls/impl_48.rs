@@ -1,13 +1,14 @@
 macro_rules! deps {
     () => {
-        Utf8Prefix!();
+        Iter!();
+        Utf8Path!();
     };
 }
 
 macro_rules! impl_48 {
     () => {
         deps!();
-        impl Utf8Prefix < '_ > { # [doc = " Determines if the prefix is verbatim, i.e., begins with `\\\\?\\`."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " use camino::Utf8Prefix::*;"] # [doc = ""] # [doc = " assert!(Verbatim(\"pictures\").is_verbatim());"] # [doc = " assert!(VerbatimUNC(\"server\", \"share\").is_verbatim());"] # [doc = " assert!(VerbatimDisk(b'C').is_verbatim());"] # [doc = " assert!(!DeviceNS(\"BrainInterface\").is_verbatim());"] # [doc = " assert!(!UNC(\"server\", \"share\").is_verbatim());"] # [doc = " assert!(!Disk(b'C').is_verbatim());"] # [doc = " ```"] # [must_use] pub fn is_verbatim (& self) -> bool { use Utf8Prefix :: * ; matches ! (self , Verbatim (_) | VerbatimDisk (_) | VerbatimUNC (..)) } }
+        impl < 'a > Iter < 'a > { # [doc = " Extracts a slice corresponding to the portion of the path remaining for iteration."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " use camino::Utf8Path;"] # [doc = ""] # [doc = " let mut iter = Utf8Path::new(\"/tmp/foo/bar.txt\").iter();"] # [doc = " iter.next();"] # [doc = " iter.next();"] # [doc = ""] # [doc = " assert_eq!(Utf8Path::new(\"foo/bar.txt\"), iter.as_path());"] # [doc = " ```"] # [must_use] # [inline] pub fn as_path (& self) -> & 'a Utf8Path { self . inner . as_path () } }
     };
 }
 

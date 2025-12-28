@@ -1,6 +1,6 @@
 macro_rules! __private {
     () => {
-        # [doc (hidden)] pub mod __private { # [allow (unused_imports)] pub use crate :: { external :: __private :: * , traits :: __private :: * } ; pub use core ; }
+        pub (crate) mod __private { # [cfg (feature = "serde")] pub use serde_core as serde ; # [cfg (feature = "arbitrary")] pub use arbitrary ; # [cfg (feature = "bytemuck")] pub use bytemuck ; }
     };
 }
 

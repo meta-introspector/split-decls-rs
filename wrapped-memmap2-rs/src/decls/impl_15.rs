@@ -1,13 +1,14 @@
 macro_rules! deps {
     () => {
-        Mmap!();
+        MmapAsRawDesc!();
+        MmapRawDescriptor!();
     };
 }
 
 macro_rules! impl_15 {
     () => {
         deps!();
-        # [cfg (feature = "stable_deref_trait")] unsafe impl stable_deref_trait :: StableDeref for Mmap { }
+        # [cfg (windows)] impl < T > MmapAsRawDesc for & T where T : AsRawHandle , { fn as_raw_desc (& self) -> MmapRawDescriptor { MmapRawDescriptor (self . as_raw_handle ()) } }
     };
 }
 

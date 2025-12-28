@@ -1,14 +1,13 @@
 macro_rules! deps {
     () => {
-        ObjectIdentifierRef!();
-        ObjectIdentifier!();
+        Buffer!();
     };
 }
 
 macro_rules! impl_18 {
     () => {
         deps!();
-        impl < const MAX_SIZE : usize > TryFrom < & ObjectIdentifierRef > for ObjectIdentifier < MAX_SIZE > { type Error = Error ; fn try_from (oid_ref : & ObjectIdentifierRef) -> Result < Self > { let len = oid_ref . as_bytes () . len () ; if len > MAX_SIZE { return Err (Error :: Length) ; } let mut bytes = [0u8 ; MAX_SIZE] ; bytes [.. len] . copy_from_slice (oid_ref . as_bytes ()) ; let ber = Buffer { bytes , length : len as u8 , } ; Ok (Self { ber }) } }
+        impl < const SIZE : usize > Buffer < SIZE > { # [doc = " Borrow the inner byte slice."] pub const fn as_bytes (& self) -> & [u8] { self . bytes . split_at (self . length as usize) . 0 } # [doc = " Get the length of the BER message."] pub const fn len (& self) -> usize { self . length as usize } # [doc = " Const comparison of two buffers."] pub const fn eq (& self , rhs : & Self) -> bool { if self . length != rhs . length { return false ; } let mut i = 0usize ; while i < self . len () { if self . bytes [i] != rhs . bytes [i] { return false ; } # [allow (clippy :: arithmetic_side_effects)] { i += 1 ; } } true } }
     };
 }
 

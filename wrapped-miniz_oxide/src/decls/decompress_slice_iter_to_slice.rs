@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        DecompressorOxide!();
+        TINFLStatus!();
+        Result!();
+    };
+}
+
+macro_rules! decompress_slice_iter_to_slice {
+    () => {
+        deps!();
+        # [doc = " Decompress one or more source slices from an iterator into the output slice."] # [doc = ""] # [doc = " * On success, returns the number of bytes that were written."] # [doc = " * On failure, returns the failure status code."] # [doc = ""] # [doc = " This will fail if the output buffer is not large enough, but in that case"] # [doc = " the output buffer will still contain the partial decompression."] # [doc = ""] # [doc = " * `out` the output buffer."] # [doc = " * `it` the iterator of input slices."] # [doc = " * `zlib_header` if the first slice out of the iterator is expected to have a"] # [doc = "   Zlib header. Otherwise the slices are assumed to be the deflate data only."] # [doc = " * `ignore_adler32` if the adler32 checksum should be validated in case of"] # [doc = "   of zlib data. (Set this to true if it should be ignored)"] # [doc = ""] # [doc = " # Examples"] # [doc = " ```"] # [doc = " use core::iter;"] # [doc = " use core::result::Result;"] # [doc = " use miniz_oxide::inflate::decompress_slice_iter_to_slice;"] # [doc = ""] # [doc = " fn main() -> Result<(), ()> {"] # [doc = "     const ENCODED: [u8; 20] = ["] # [doc = "         120, 156, 243, 72, 205, 201, 201, 215, 81, 168, 202, 201, 76, 82, 4, 0, 27, 101, 4, 19,"] # [doc = "     ];"] # [doc = "     let mut output = [0u8; 20];"] # [doc = "     // Using `once` to do the whole buffer in one go. One could also use e.g"] # [doc = "     // `slice::chunks` to easily split up a buffer into parts instead."] # [doc = "     let result ="] # [doc = "         decompress_slice_iter_to_slice(&mut output, iter::once(ENCODED.as_slice()), true, false);"] # [doc = ""] # [doc = "     if let Ok(bytes) = result {"] # [doc = "         if output[..bytes] == b\"Hello, zlib!\"[..] {"] # [doc = "             return Ok(());"] # [doc = "         }"] # [doc = "     }"] # [doc = "     Err(())"] # [doc = " }"] # [doc = " ```"] # [cfg (not (feature = "rustc-dep-of-std"))] pub fn decompress_slice_iter_to_slice < 'out , 'inp > (out : & 'out mut [u8] , it : impl Iterator < Item = & 'inp [u8] > , zlib_header : bool , ignore_adler32 : bool ,) -> Result < usize , TINFLStatus > { use self :: core :: inflate_flags :: * ; let mut it = it . peekable () ; let r = & mut DecompressorOxide :: new () ; let mut out_pos = 0 ; while let Some (in_buf) = it . next () { let has_more = it . peek () . is_some () ; let flags = { let mut f = TINFL_FLAG_USING_NON_WRAPPING_OUTPUT_BUF ; if zlib_header { f |= TINFL_FLAG_PARSE_ZLIB_HEADER ; } if ignore_adler32 { f |= TINFL_FLAG_IGNORE_ADLER32 ; } if has_more { f |= TINFL_FLAG_HAS_MORE_INPUT ; } f } ; let (status , _input_read , bytes_written) = decompress (r , in_buf , out , out_pos , flags) ; out_pos += bytes_written ; match status { TINFLStatus :: NeedsMoreInput => continue , TINFLStatus :: Done => return Ok (out_pos) , e => return Err (e) , } } Err (TINFLStatus :: FailedCannotMakeProgress) }
+    };
+}
+
+decompress_slice_iter_to_slice!()

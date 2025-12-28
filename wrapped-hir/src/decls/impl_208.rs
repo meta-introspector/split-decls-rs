@@ -1,15 +1,16 @@
 macro_rules! deps {
     () => {
-        Crate!();
-        Macro!();
-        HasCrate!();
+        LifetimeParam!();
+        TypeParam!();
+        GenericParam!();
+        ConstParam!();
     };
 }
 
 macro_rules! impl_208 {
     () => {
         deps!();
-        impl HasCrate for Macro { fn krate (& self , db : & dyn HirDatabase) -> Crate { self . module (db) . krate () } }
+        impl < 'db > HirDisplay < 'db > for GenericParam { fn hir_fmt (& self , f : & mut HirFormatter < '_ , 'db >) -> Result < () , HirDisplayError > { match self { GenericParam :: TypeParam (it) => it . hir_fmt (f) , GenericParam :: ConstParam (it) => it . hir_fmt (f) , GenericParam :: LifetimeParam (it) => it . hir_fmt (f) , } } }
     };
 }
 

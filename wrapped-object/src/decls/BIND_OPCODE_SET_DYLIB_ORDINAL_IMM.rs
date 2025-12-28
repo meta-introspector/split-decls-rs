@@ -1,0 +1,7 @@
+macro_rules! BIND_OPCODE_SET_DYLIB_ORDINAL_IMM {
+    () => {
+        pub const BIND_OPCODE_SET_DYLIB_ORDINAL_IMM : u8 = 0x10 ;
+    };
+}
+
+BIND_OPCODE_SET_DYLIB_ORDINAL_IMM!()

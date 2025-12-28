@@ -1,6 +1,9 @@
 macro_rules! deps {
     () => {
         Errors!();
+        Uts46!();
+        AsciiDenyList!();
+        Hyphens!();
     };
 }
 

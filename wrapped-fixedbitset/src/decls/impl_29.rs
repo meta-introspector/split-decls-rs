@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        SymmetricDifference!();
+        Block!();
     };
 }
 
 macro_rules! impl_29 {
     () => {
         deps!();
-        impl < 'a > FusedIterator for SymmetricDifference < 'a > { }
+        impl BitXor for Block { type Output = Block ; # [inline] fn bitxor (self , other : Self) -> Self :: Output { unsafe { Self (_mm256_xor_pd (self . 0 , other . 0)) } } }
     };
 }
 

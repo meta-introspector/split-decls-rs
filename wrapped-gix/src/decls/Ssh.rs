@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        Default!();
+        Clone!();
+    };
+}
+
+macro_rules! Ssh {
+    () => {
+        deps!();
+        # [doc = " The `ssh` top-level section."] # [derive (Copy , Clone , Default)] pub struct Ssh ;
+    };
+}
+
+Ssh!()

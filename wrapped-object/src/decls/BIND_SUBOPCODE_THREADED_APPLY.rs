@@ -1,0 +1,7 @@
+macro_rules! BIND_SUBOPCODE_THREADED_APPLY {
+    () => {
+        pub const BIND_SUBOPCODE_THREADED_APPLY : u8 = 0x01 ;
+    };
+}
+
+BIND_SUBOPCODE_THREADED_APPLY!()

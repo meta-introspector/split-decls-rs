@@ -1,7 +1,8 @@
 macro_rules! deps {
     () => {
-        OutputReader!();
         Hash!();
+        SerialJoin!();
+        OutputReader!();
     };
 }
 

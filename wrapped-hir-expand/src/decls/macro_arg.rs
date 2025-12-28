@@ -1,0 +1,23 @@
+macro_rules! deps {
+    () => {
+        MacroDefKind!();
+        MacroCallKind!();
+        MacroCallId!();
+        MacroDefId!();
+        Attr!();
+        MacroArgResult!();
+        SyntaxFixupUndoInfo!();
+        MacroCallLoc!();
+        ExpandDatabase!();
+        ProcMacro!();
+    };
+}
+
+macro_rules! macro_arg {
+    () => {
+        deps!();
+        fn macro_arg (db : & dyn ExpandDatabase , id : MacroCallId) -> MacroArgResult { let loc = db . lookup_intern_macro_call (id) ; if let MacroCallLoc { def : MacroDefId { kind : MacroDefKind :: BuiltInEager (..) , .. } , kind : MacroCallKind :: FnLike { eager : Some (eager) , .. } , .. } = & loc { return (eager . arg . clone () , SyntaxFixupUndoInfo :: NONE , eager . span) ; } let (parse , map) = parse_with_map (db , loc . kind . file_id ()) ; let root = parse . syntax_node () ; let (censor , item_node , span) = match loc . kind { MacroCallKind :: FnLike { ast_id , .. } => { let node = & ast_id . to_ptr (db) . to_node (& root) ; let path_range = node . path () . map_or_else (| | node . syntax () . text_range () , | path | path . syntax () . text_range ()) ; let span = map . span_for_range (path_range) ; let dummy_tt = | kind | { (Arc :: new (tt :: TopSubtree :: from_token_trees (tt :: Delimiter { open : span , close : span , kind } , tt :: TokenTreesView :: new (& []) ,)) , SyntaxFixupUndoInfo :: default () , span ,) } ; let Some (tt) = node . token_tree () else { return dummy_tt (tt :: DelimiterKind :: Invisible) ; } ; let first = tt . left_delimiter_token () . map (| it | it . kind ()) . unwrap_or (T ! ['(']) ; let last = tt . right_delimiter_token () . map (| it | it . kind ()) . unwrap_or (T ! [.]) ; let mismatched_delimiters = ! matches ! ((first , last) , (T ! ['('] , T ! [')']) | (T ! ['['] , T ! [']']) | (T ! ['{'] , T ! ['}'])) ; if mismatched_delimiters { cov_mark :: hit ! (issue9358_bad_macro_stack_overflow) ; let kind = match first { _ if loc . def . is_proc_macro () => tt :: DelimiterKind :: Invisible , T ! ['('] => tt :: DelimiterKind :: Parenthesis , T ! ['['] => tt :: DelimiterKind :: Bracket , T ! ['{'] => tt :: DelimiterKind :: Brace , _ => tt :: DelimiterKind :: Invisible , } ; return dummy_tt (kind) ; } let mut tt = syntax_bridge :: syntax_node_to_token_tree (tt . syntax () , map . as_ref () , span , if loc . def . is_proc_macro () { DocCommentDesugarMode :: ProcMacro } else { DocCommentDesugarMode :: Mbe } ,) ; if loc . def . is_proc_macro () { tt . top_subtree_delimiter_mut () . kind = tt :: DelimiterKind :: Invisible ; } return (Arc :: new (tt) , SyntaxFixupUndoInfo :: NONE , span) ; } MacroCallKind :: Derive { .. } => { unreachable ! ("`ExpandDatabase::macro_arg` called with `MacroCallKind::Derive`") } MacroCallKind :: Attr { ast_id , invoc_attr_index , .. } => { let node = ast_id . to_ptr (db) . to_node (& root) ; let attr_source = attr_source (invoc_attr_index , & node) ; let span = map . span_for_range (attr_source . as_ref () . and_then (| it | it . path ()) . map_or_else (| | node . syntax () . text_range () , | it | it . syntax () . text_range ()) ,) ; if matches ! (loc . def . kind , MacroDefKind :: BuiltInAttr (_ , expander) if expander . is_derive ()) && ast :: Adt :: can_cast (node . syntax () . kind ()) { let adt = ast :: Adt :: cast (node . syntax () . clone ()) . unwrap () ; let censor_derive_input = censor_derive_input (invoc_attr_index , & adt) ; (censor_derive_input , node , span) } else { (attr_source . into_iter () . map (| it | it . syntax () . clone () . into ()) . collect () , node , span) } } } ; let (mut tt , undo_info) = { let syntax = item_node . syntax () ; let censor_cfg = cfg_process :: process_cfg_attrs (db , syntax , & loc) . unwrap_or_default () ; let mut fixups = fixup :: fixup_syntax (map . as_ref () , syntax , span , DocCommentDesugarMode :: ProcMacro) ; fixups . append . retain (| it , _ | match it { syntax :: NodeOrToken :: Token (_) => true , it => ! censor . contains (it) && ! censor_cfg . contains (it) , }) ; fixups . remove . extend (censor) ; fixups . remove . extend (censor_cfg) ; (syntax_bridge :: syntax_node_to_token_tree_modified (syntax , map , fixups . append , fixups . remove , span , DocCommentDesugarMode :: ProcMacro ,) , fixups . undo_info ,) } ; if loc . def . is_proc_macro () { tt . top_subtree_delimiter_mut () . kind = tt :: DelimiterKind :: Invisible ; } (Arc :: new (tt) , undo_info , span) }
+    };
+}
+
+macro_arg!()

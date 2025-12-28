@@ -1,0 +1,7 @@
+macro_rules! inv_memrchr {
+    () => {
+        # [doc = " Return the last index not matching the byte `x` in `text`."] pub fn inv_memrchr (n1 : u8 , haystack : & [u8]) -> Option < usize > { let vn1 = repeat_byte (n1) ; let confirm = | byte | byte != n1 ; let loop_size = cmp :: min (LOOP_SIZE , haystack . len ()) ; let start_ptr = haystack . as_ptr () ; unsafe { let end_ptr = haystack . as_ptr () . add (haystack . len ()) ; let mut ptr = end_ptr ; if haystack . len () < USIZE_BYTES { return reverse_search (start_ptr , end_ptr , ptr , confirm) ; } let chunk = read_unaligned_usize (ptr . sub (USIZE_BYTES)) ; if (chunk ^ vn1) != 0 { return reverse_search (start_ptr , end_ptr , ptr , confirm) ; } ptr = ptr . sub (end_ptr as usize & ALIGN_MASK) ; debug_assert ! (start_ptr <= ptr && ptr <= end_ptr) ; while loop_size == LOOP_SIZE && ptr >= start_ptr . add (loop_size) { debug_assert_eq ! (0 , (ptr as usize) % USIZE_BYTES) ; let a = * (ptr . sub (2 * USIZE_BYTES) as * const usize) ; let b = * (ptr . sub (1 * USIZE_BYTES) as * const usize) ; let eqa = (a ^ vn1) != 0 ; let eqb = (b ^ vn1) != 0 ; if eqa || eqb { break ; } ptr = ptr . sub (loop_size) ; } reverse_search (start_ptr , end_ptr , ptr , confirm) } }
+    };
+}
+
+inv_memrchr!()

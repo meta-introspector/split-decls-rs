@@ -1,6 +1,6 @@
 macro_rules! names {
     () => {
-        mod names ;
+        pub mod names ;
     };
 }
 

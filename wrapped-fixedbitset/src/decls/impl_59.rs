@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        IntoOnes!();
+        Block!();
     };
 }
 
 macro_rules! impl_59 {
     () => {
         deps!();
-        impl FusedIterator for IntoOnes { }
+        impl Default for Block { # [inline] fn default () -> Self { Self :: NONE } }
     };
 }
 

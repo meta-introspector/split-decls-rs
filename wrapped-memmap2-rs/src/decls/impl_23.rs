@@ -1,14 +1,13 @@
 macro_rules! deps {
     () => {
-        MmapRaw!();
-        MmapMut!();
+        Mmap!();
     };
 }
 
 macro_rules! impl_23 {
     () => {
         deps!();
-        impl From < MmapMut > for MmapRaw { fn from (value : MmapMut) -> Self { Self { inner : value . inner } } }
+        impl fmt :: Debug for Mmap { fn fmt (& self , fmt : & mut fmt :: Formatter) -> fmt :: Result { fmt . debug_struct ("Mmap") . field ("ptr" , & self . as_ptr ()) . field ("len" , & self . len ()) . finish () } }
     };
 }
 

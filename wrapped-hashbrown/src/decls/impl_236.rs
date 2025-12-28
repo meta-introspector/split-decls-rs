@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        DefaultHashBuilder!();
+        HashMap!();
+    };
+}
+
+macro_rules! impl_236 {
+    () => {
+        deps!();
+        # [cfg (feature = "default-hasher")] impl < K , V > HashMap < K , V , DefaultHashBuilder > { # [doc = " Creates an empty `HashMap`."] # [doc = ""] # [doc = " The hash map is initially created with a capacity of 0, so it will not allocate until it"] # [doc = " is first inserted into."] # [doc = ""] # [doc = " # HashDoS resistance"] # [doc = ""] # [doc = " The `hash_builder` normally use a fixed key by default and that does"] # [doc = " not allow the `HashMap` to be protected against attacks such as [`HashDoS`]."] # [doc = " Users who require HashDoS resistance should explicitly use"] # [doc = " [`std::collections::hash_map::RandomState`]"] # [doc = " as the hasher when creating a [`HashMap`], for example with"] # [doc = " [`with_hasher`](HashMap::with_hasher) method."] # [doc = ""] # [doc = " [`HashDoS`]: https://en.wikipedia.org/wiki/Collision_attack"] # [doc = " [`std::collections::hash_map::RandomState`]: https://doc.rust-lang.org/std/collections/hash_map/struct.RandomState.html"] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " use hashbrown::HashMap;"] # [doc = " let mut map: HashMap<&str, i32> = HashMap::new();"] # [doc = " assert_eq!(map.len(), 0);"] # [doc = " assert_eq!(map.capacity(), 0);"] # [doc = " ```"] # [cfg_attr (feature = "inline-more" , inline)] pub fn new () -> Self { Self :: default () } # [doc = " Creates an empty `HashMap` with the specified capacity."] # [doc = ""] # [doc = " The hash map will be able to hold at least `capacity` elements without"] # [doc = " reallocating. If `capacity` is 0, the hash map will not allocate."] # [doc = ""] # [doc = " # HashDoS resistance"] # [doc = ""] # [doc = " The `hash_builder` normally use a fixed key by default and that does"] # [doc = " not allow the `HashMap` to be protected against attacks such as [`HashDoS`]."] # [doc = " Users who require HashDoS resistance should explicitly use"] # [doc = " [`std::collections::hash_map::RandomState`]"] # [doc = " as the hasher when creating a [`HashMap`], for example with"] # [doc = " [`with_capacity_and_hasher`](HashMap::with_capacity_and_hasher) method."] # [doc = ""] # [doc = " [`HashDoS`]: https://en.wikipedia.org/wiki/Collision_attack"] # [doc = " [`std::collections::hash_map::RandomState`]: https://doc.rust-lang.org/std/collections/hash_map/struct.RandomState.html"] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " use hashbrown::HashMap;"] # [doc = " let mut map: HashMap<&str, i32> = HashMap::with_capacity(10);"] # [doc = " assert_eq!(map.len(), 0);"] # [doc = " assert!(map.capacity() >= 10);"] # [doc = " ```"] # [cfg_attr (feature = "inline-more" , inline)] pub fn with_capacity (capacity : usize) -> Self { Self :: with_capacity_and_hasher (capacity , DefaultHashBuilder :: default ()) } }
+    };
+}
+
+impl_236!()

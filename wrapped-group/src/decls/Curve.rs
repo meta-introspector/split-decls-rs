@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Group!();
-        GroupOpsOwned!();
         GroupOps!();
+        GroupOpsOwned!();
     };
 }
 

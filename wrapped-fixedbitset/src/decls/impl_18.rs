@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        FixedBitSet!();
+        Block!();
     };
 }
 
 macro_rules! impl_18 {
     () => {
         deps!();
-        impl Default for FixedBitSet { fn default () -> Self { Self :: new () } }
+        impl BitXor for Block { type Output = Block ; # [inline] fn bitxor (self , other : Self) -> Self :: Output { unsafe { Self (_mm_xor_si128 (self . 0 , other . 0)) } } }
     };
 }
 

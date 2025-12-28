@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        SymbolKind!();
+        Definition!();
     };
 }
 
 macro_rules! impl_41 {
     () => {
         deps!();
-        impl From < hir :: ModuleDef > for SymbolKind { fn from (it : hir :: ModuleDef) -> Self { match it { hir :: ModuleDef :: Const (..) => SymbolKind :: Const , hir :: ModuleDef :: Variant (..) => SymbolKind :: Variant , hir :: ModuleDef :: Function (..) => SymbolKind :: Function , hir :: ModuleDef :: Macro (mac) if mac . is_proc_macro () => SymbolKind :: ProcMacro , hir :: ModuleDef :: Macro (..) => SymbolKind :: Macro , hir :: ModuleDef :: Module (..) => SymbolKind :: Module , hir :: ModuleDef :: Static (..) => SymbolKind :: Static , hir :: ModuleDef :: Adt (hir :: Adt :: Struct (..)) => SymbolKind :: Struct , hir :: ModuleDef :: Adt (hir :: Adt :: Enum (..)) => SymbolKind :: Enum , hir :: ModuleDef :: Adt (hir :: Adt :: Union (..)) => SymbolKind :: Union , hir :: ModuleDef :: Trait (..) => SymbolKind :: Trait , hir :: ModuleDef :: TypeAlias (..) => SymbolKind :: TypeAlias , hir :: ModuleDef :: BuiltinType (..) => SymbolKind :: TypeAlias , } } }
+        impl From < PathResolution > for Definition { fn from (path_resolution : PathResolution) -> Self { match path_resolution { PathResolution :: Def (def) => def . into () , PathResolution :: Local (local) => Definition :: Local (local) , PathResolution :: TypeParam (par) => Definition :: GenericParam (par . into ()) , PathResolution :: ConstParam (par) => Definition :: GenericParam (par . into ()) , PathResolution :: SelfType (impl_def) => Definition :: SelfType (impl_def) , PathResolution :: BuiltinAttr (attr) => Definition :: BuiltinAttr (attr) , PathResolution :: ToolModule (tool) => Definition :: ToolModule (tool) , PathResolution :: DeriveHelper (helper) => Definition :: DeriveHelper (helper) , } } }
     };
 }
 

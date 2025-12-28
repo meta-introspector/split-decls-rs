@@ -1,14 +1,17 @@
 macro_rules! deps {
     () => {
-        TypeNs!();
-        InstantiatedEnum!();
+        Enum!();
+        HasSource!();
+        Adt!();
+        Struct!();
+        Union!();
     };
 }
 
 macro_rules! impl_49 {
     () => {
         deps!();
-        impl < 'db > InstantiatedEnum < 'db > { pub fn ty (self , db : & 'db dyn HirDatabase) -> TypeNs < 'db > { let krate = self . inner . krate (db) ; let interner = DbInterner :: new_with (db , Some (krate . base ()) , None) ; let ty = db . ty (self . inner . id . into ()) ; TypeNs :: new (db , self . inner . id , ty . instantiate (interner , self . args)) } }
+        impl HasSource for Adt { type Ast = ast :: Adt ; fn source (self , db : & dyn HirDatabase) -> Option < InFile < Self :: Ast > > { match self { Adt :: Struct (s) => Some (s . source (db) ? . map (ast :: Adt :: Struct)) , Adt :: Union (u) => Some (u . source (db) ? . map (ast :: Adt :: Union)) , Adt :: Enum (e) => Some (e . source (db) ? . map (ast :: Adt :: Enum)) , } } }
     };
 }
 

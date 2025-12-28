@@ -1,0 +1,7 @@
+macro_rules! IMAGE_DLLCHARACTERISTICS_DYNAMIC_BASE {
+    () => {
+        # [doc = " DLL can move."] pub const IMAGE_DLLCHARACTERISTICS_DYNAMIC_BASE : u16 = 0x0040 ;
+    };
+}
+
+IMAGE_DLLCHARACTERISTICS_DYNAMIC_BASE!()

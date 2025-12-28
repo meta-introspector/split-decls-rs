@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        TrimmedPatch!();
+        SourceMap!();
+    };
+}
+
+macro_rules! impl_72 {
+    () => {
+        deps!();
+        impl < 'a > TrimmedPatch < 'a > { pub (crate) fn is_addition (& self , sm : & SourceMap < '_ >) -> bool { ! self . replacement . is_empty () && ! self . replaces_meaningful_content (sm) } pub (crate) fn is_deletion (& self , sm : & SourceMap < '_ >) -> bool { self . replacement . trim () . is_empty () && self . replaces_meaningful_content (sm) } pub (crate) fn is_replacement (& self , sm : & SourceMap < '_ >) -> bool { ! self . replacement . is_empty () && self . replaces_meaningful_content (sm) } # [doc = " Whether this is a replacement that overwrites source with a snippet"] # [doc = " in a way that isn't a superset of the original string. For example,"] # [doc = " replacing \"abc\" with \"abcde\" is not destructive, but replacing it"] # [doc = " it with \"abx\" is, since the \"c\" character is lost."] pub (crate) fn is_destructive_replacement (& self , sm : & SourceMap < '_ >) -> bool { self . is_replacement (sm) && ! sm . span_to_snippet (self . span . clone ()) . map_or (false , | s | { as_substr (s . trim () , self . replacement . trim ()) . is_some () }) } fn replaces_meaningful_content (& self , sm : & SourceMap < '_ >) -> bool { sm . span_to_snippet (self . span . clone ()) . map_or (! self . span . is_empty () , | snippet | ! snippet . trim () . is_empty ()) } }
+    };
+}
+
+impl_72!()

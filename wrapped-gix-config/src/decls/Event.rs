@@ -1,0 +1,17 @@
+macro_rules! deps {
+    () => {
+        File!();
+        Whitespace!();
+        Comment!();
+        Header!();
+    };
+}
+
+macro_rules! Event {
+    () => {
+        deps!();
+        # [doc = " Syntactic events that occurs in the config. Despite all these variants"] # [doc = " holding a [`Cow`] instead over a simple reference, the parser will only emit"] # [doc = " borrowed `Cow` variants."] # [doc = ""] # [doc = " The `Cow` is used here for ease of inserting new, typically owned events as used"] # [doc = " in the [`File`] struct when adding values, allowing a mix of owned and borrowed"] # [doc = " values."] # [doc = ""] # [doc = " [`Cow`]: std::borrow::Cow"] # [doc = " [`File`]: crate::File"] # [derive (Clone , Eq , PartialEq , Ord , PartialOrd , Hash , Debug)] pub enum Event < 'a > { # [doc = " A comment with a comment tag and the comment itself. Note that the"] # [doc = " comment itself may contain additional whitespace and comment markers"] # [doc = " at the beginning, like `# comment` or `; comment`."] Comment (Comment < 'a >) , # [doc = " A section header containing the section name and a subsection, if it"] # [doc = " exists. For instance, `remote \"origin\"` is parsed to `remote` as section"] # [doc = " name and `origin` as subsection name."] SectionHeader (section :: Header < 'a >) , # [doc = " A name to a value in a section, like `url` in `remote.origin.url`."] SectionValueName (section :: ValueName < 'a >) , # [doc = " A completed value. This may be any single-line string, including the empty string"] # [doc = " if an implicit boolean value is used."] # [doc = " Note that these values may contain spaces and any special character. This value is"] # [doc = " also unprocessed, so it may contain double quotes that should be"] # [doc = " [normalized][crate::value::normalize()] before interpretation."] Value (Cow < 'a , BStr >) , # [doc = " Represents any token used to signify a newline character. On Unix"] # [doc = " platforms, this is typically just `\\n`, but can be any valid newline"] # [doc = " *sequence*. Multiple newlines (such as `\\n\\n`) will be merged as a single"] # [doc = " newline event containing a string of multiple newline characters."] Newline (Cow < 'a , BStr >) , # [doc = " Any value that isn't completed. This occurs when the value is continued"] # [doc = " onto the next line by ending it with a backslash."] # [doc = " A [`Newline`][Self::Newline] event is guaranteed after, followed by"] # [doc = " either a ValueDone, a Whitespace, or another ValueNotDone."] ValueNotDone (Cow < 'a , BStr >) , # [doc = " The last line of a value which was continued onto another line."] # [doc = " With this it's possible to obtain the complete value by concatenating"] # [doc = " the prior [`ValueNotDone`][Self::ValueNotDone] events."] ValueDone (Cow < 'a , BStr >) , # [doc = " A continuous section of insignificant whitespace."] # [doc = ""] # [doc = " Note that values with internal whitespace will not be separated by this event,"] # [doc = " hence interior whitespace there is always part of the value."] Whitespace (Cow < 'a , BStr >) , # [doc = " This event is emitted when the parser counters a valid `=` character"] # [doc = " separating the key and value."] # [doc = " This event is necessary as it eliminates the ambiguity for whitespace"] # [doc = " events between a key and value event."] KeyValueSeparator , }
+    };
+}
+
+Event!()

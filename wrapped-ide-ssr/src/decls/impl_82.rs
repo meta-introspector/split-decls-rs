@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        ResolutionScope!();
+    };
+}
+
+macro_rules! impl_82 {
+    () => {
+        deps!();
+        impl < 'db > ResolutionScope < 'db > { pub (crate) fn new (sema : & hir :: Semantics < 'db , ide_db :: RootDatabase > , resolve_context : hir :: FilePosition ,) -> Option < ResolutionScope < 'db > > { use syntax :: ast :: AstNode ; let file = sema . parse (resolve_context . file_id) ; let node = file . syntax () . token_at_offset (resolve_context . offset) . left_biased () . and_then (| token | token . parent ()) . unwrap_or_else (| | file . syntax () . clone ()) ; let node = pick_node_for_resolution (node) ; let scope = sema . scope (& node) ? ; Some (ResolutionScope { scope , node }) } # [doc = " Returns the function in which SSR was invoked, if any."] pub (crate) fn current_function (& self) -> Option < SyntaxNode > { self . node . ancestors () . find (| node | node . kind () == SyntaxKind :: FN) } fn resolve_path (& self , path : & ast :: Path) -> Option < hir :: PathResolution > { if let Some (resolution) = self . scope . speculative_resolve (path) { return Some (resolution) ; } let resolved_qualifier = self . scope . speculative_resolve (& path . qualifier () ?) ? ; if let hir :: PathResolution :: Def (hir :: ModuleDef :: Adt (adt)) = resolved_qualifier { let name = path . segment () ? . name_ref () ? ; adt . ty (self . scope . db) . iterate_path_candidates (self . scope . db , & self . scope , & self . scope . visible_traits () . 0 , None , | assoc_item | { let item_name = assoc_item . name (self . scope . db) ? ; if item_name . as_str () == name . text () { Some (hir :: PathResolution :: Def (assoc_item . into ())) } else { None } } ,) } else { None } } fn qualifier_type (& self , path : & SyntaxNode) -> Option < hir :: Type < 'db > > { use syntax :: ast :: AstNode ; if let Some (path) = ast :: Path :: cast (path . clone ()) && let Some (qualifier) = path . qualifier () && let Some (hir :: PathResolution :: Def (hir :: ModuleDef :: Adt (adt))) = self . resolve_path (& qualifier) { return Some (adt . ty (self . scope . db)) ; } None } }
+    };
+}
+
+impl_82!()

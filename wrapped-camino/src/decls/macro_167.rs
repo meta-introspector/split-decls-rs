@@ -7,7 +7,7 @@ macro_rules! deps {
 macro_rules! macro_167 {
     () => {
         deps!();
-        impl_cmp_os_str ! (&'a Utf8Path , Cow <'b , OsStr >) ;
+        impl_cmp_str ! (Utf8Path , str) ;
     };
 }
 

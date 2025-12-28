@@ -1,7 +1,8 @@
 macro_rules! deps {
     () => {
-        ObjectType!();
         FileMode!();
+        ObjectType!();
+        Blob!();
     };
 }
 

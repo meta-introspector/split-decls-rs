@@ -1,0 +1,17 @@
+macro_rules! deps {
+    () => {
+        ValueFormatter!();
+        Slope!();
+        MeasurementData!();
+        Sample!();
+    };
+}
+
+macro_rules! regression_figure {
+    () => {
+        deps!();
+        pub (crate) fn regression_figure (title : Option < & str > , path : & Path , formatter : & dyn ValueFormatter , measurements : & MeasurementData < '_ > , size : Option < (u32 , u32) > ,) { let slope_estimate = measurements . absolute_estimates . slope . as_ref () . unwrap () ; let slope_dist = measurements . distributions . slope . as_ref () . unwrap () ; let (lb , ub) = slope_dist . confidence_interval (slope_estimate . confidence_interval . confidence_level) ; let data = & measurements . data ; let (max_iters , typical) = (data . x () . max () , data . y () . max ()) ; let mut scaled_y : Vec < f64 > = data . y () . iter () . cloned () . collect () ; let unit = formatter . scale_values (typical , & mut scaled_y) ; let scaled_y = Sample :: new (& scaled_y) ; let point_estimate = Slope :: fit (& measurements . data) . 0 ; let mut scaled_points = [point_estimate * max_iters , lb * max_iters , ub * max_iters] ; let _ = formatter . scale_values (typical , & mut scaled_points) ; let [point , lb , ub] = scaled_points ; let exponent = (max_iters . log10 () / 3.) . floor () as i32 * 3 ; let x_scale = 10f64 . powi (- exponent) ; let x_label = if exponent == 0 { "Iterations" . to_owned () } else { format ! ("Iterations (x 10^{})" , exponent) } ; let size = size . unwrap_or (SIZE) ; let root_area = SVGBackend :: new (path , size) . into_drawing_area () ; let mut cb = ChartBuilder :: on (& root_area) ; if let Some (title) = title { cb . caption (title , (DEFAULT_FONT , 20)) ; } let x_range = plotters :: data :: fitting_range (data . x () . iter ()) ; let y_range = plotters :: data :: fitting_range (scaled_y . iter ()) ; let mut chart = cb . margin ((5) . percent ()) . set_label_area_size (LabelAreaPosition :: Left , (5) . percent_width () . min (60)) . set_label_area_size (LabelAreaPosition :: Bottom , (5) . percent_height () . min (40)) . build_cartesian_2d (x_range , y_range) . unwrap () ; chart . configure_mesh () . x_desc (x_label) . y_desc (format ! ("Total sample time ({})" , unit)) . x_label_formatter (& | x | pretty_print_float (x * x_scale , true)) . light_line_style (TRANSPARENT) . draw () . unwrap () ; chart . draw_series (data . x () . iter () . zip (scaled_y . iter ()) . map (| (x , y) | Circle :: new ((* x , * y) , POINT_SIZE , DARK_BLUE . filled ())) ,) . unwrap () . label ("Sample") . legend (| (x , y) | Circle :: new ((x + 10 , y) , POINT_SIZE , DARK_BLUE . filled ())) ; chart . draw_series (std :: iter :: once (PathElement :: new (vec ! [(0.0 , 0.0) , (max_iters , point)] , DARK_BLUE ,))) . unwrap () . label ("Linear regression") . legend (| (x , y) | { PathElement :: new (vec ! [(x , y) , (x + 20 , y)] , DARK_BLUE . filled () . stroke_width (2) ,) }) ; chart . draw_series (std :: iter :: once (Polygon :: new (vec ! [(0.0 , 0.0) , (max_iters , lb) , (max_iters , ub)] , DARK_BLUE . mix (0.25) . filled () ,))) . unwrap () . label ("Confidence interval") . legend (| (x , y) | { Rectangle :: new ([(x , y - 5) , (x + 20 , y + 5)] , DARK_BLUE . mix (0.25) . filled ()) }) ; if title . is_some () { chart . configure_series_labels () . position (SeriesLabelPosition :: UpperLeft) . draw () . unwrap () ; } }
+    };
+}
+
+regression_figure!()

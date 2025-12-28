@@ -1,0 +1,20 @@
+macro_rules! deps {
+    () => {
+        NodeID!();
+        NodeStmt!();
+        Subgraph!();
+        Stmt!();
+        AttrStmt!();
+        EdgeStmt!();
+        IDEq!();
+    };
+}
+
+macro_rules! impl_33 {
+    () => {
+        deps!();
+        impl < 'a , A > Stmt < A > { # [doc = " Convert a statement with attributes of type `A` into a statement with"] # [doc = " attributes of type `B`."] fn filter_map_attr < B > (self , f : & 'a dyn Fn (A) -> Option < B >) -> Stmt < B > { match self { Stmt :: NodeStmt (node) => Stmt :: NodeStmt (node . filter_map_attr (f)) , Stmt :: EdgeStmt (edge) => Stmt :: EdgeStmt (edge . filter_map_attr (f)) , Stmt :: AttrStmt (attr) => Stmt :: AttrStmt (attr . filter_map_attr (f)) , Stmt :: IDEq (a , b) => Stmt :: IDEq (a , b) , Stmt :: Subgraph (sub) => Stmt :: Subgraph (sub . filter_map_attr (f)) , } } # [doc = " Returns true if `self` is a `NodeStmt` variant."] pub fn is_node_stmt (& self) -> bool { matches ! (self , Stmt :: NodeStmt (_)) } # [doc = " Returns `Some(&node)` if `&self` if a `&NodeStmt(node)`, and `None`"] # [doc = " otherwise."] pub fn get_node_ref (& self) -> Option < & NodeStmt < A > > { if let Stmt :: NodeStmt (node) = self { Some (node) } else { None } } # [doc = " Returns `Some(node)` if `self` if a `NodeStmt(node)`, and `None`"] # [doc = " otherwise."] pub fn get_node (self) -> Option < NodeStmt < A > > { if let Stmt :: NodeStmt (node) = self { Some (node) } else { None } } # [doc = " Returns true if `self` is a `EdgeStmt` variant."] pub fn is_edge_stmt (& self) -> bool { matches ! (self , Stmt :: EdgeStmt (_)) } # [doc = " Returns `Some(&edge)` if `&self` if a `&EdgeStmt(edge)`, and `None`"] # [doc = " otherwise."] pub fn get_edge_ref (& self) -> Option < & EdgeStmt < A > > { if let Stmt :: EdgeStmt (edge) = self { Some (edge) } else { None } } # [doc = " Returns `Some(edge)` if `self` if a `EdgeStmt(edge)`, and `None`"] # [doc = " otherwise."] pub fn get_edge (self) -> Option < EdgeStmt < A > > { if let Stmt :: EdgeStmt (edge) = self { Some (edge) } else { None } } # [doc = " Returns true if `self` is a `AttrStmt` variant."] pub fn is_attr_stmt (& self) -> bool { matches ! (self , Stmt :: AttrStmt (_)) } # [doc = " Returns `Some(&attr)` if `&self` if a `&AttrStmt(attr)`, and `None`"] # [doc = " otherwise."] pub fn get_attr_ref (& self) -> Option < & AttrStmt < A > > { if let Stmt :: AttrStmt (attr) = self { Some (attr) } else { None } } # [doc = " Returns `Some(attr)` if `self` if a `AttrStmt(attr)`, and `None`"] # [doc = " otherwise."] pub fn get_attr (self) -> Option < AttrStmt < A > > { if let Stmt :: AttrStmt (attr) = self { Some (attr) } else { None } } # [doc = " Returns true if `self` is a `IDEq` variant."] pub fn is_ideq_stmt (& self) -> bool { matches ! (self , Stmt :: IDEq (..)) } # [doc = " Returns `Some((&id1, &id2))` if `&self` if a `&IDEq(id1, id2)` and `None`"] # [doc = " otherwise."] pub fn get_ideq_ref (& self) -> Option < (& str , & str) > { if let Stmt :: IDEq (id1 , id2) = self { Some ((id1 , id2)) } else { None } } # [doc = " Returns `true` if `self` is a `Subgraph` variant."] pub fn is_subgraph (& self) -> bool { matches ! (self , Stmt :: Subgraph (..)) } # [doc = " Returns all `NodeID`s that appear in this statement."] fn get_node_ids (& self) -> HashSet < NodeID > { match self { Stmt :: Subgraph (g) => g . get_node_ids () , Stmt :: EdgeStmt (e) => e . get_node_ids () , Stmt :: NodeStmt (n) => HashSet :: from_iter ([n . get_node_id () . clone ()]) , _ => HashSet :: new () , } } }
+    };
+}
+
+impl_33!()

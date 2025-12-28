@@ -1,0 +1,20 @@
+macro_rules! deps {
+    () => {
+        SectionTable!();
+        SymbolTable!();
+        Pod!();
+        ImageSymbol!();
+        ReadRef!();
+        Result!();
+        ImageSymbolBytes!();
+    };
+}
+
+macro_rules! CoffHeader {
+    () => {
+        deps!();
+        # [doc = " A trait for generic access to [`pe::ImageFileHeader`] and [`pe::AnonObjectHeaderBigobj`]."] # [allow (missing_docs)] pub trait CoffHeader : Debug + Pod { type ImageSymbol : ImageSymbol ; type ImageSymbolBytes : Debug + Pod ; # [doc = " Return true if this type is [`pe::AnonObjectHeaderBigobj`]."] # [doc = ""] # [doc = " This is a property of the type, not a value in the header data."] fn is_type_bigobj () -> bool ; fn machine (& self) -> u16 ; fn number_of_sections (& self) -> u32 ; fn pointer_to_symbol_table (& self) -> u32 ; fn number_of_symbols (& self) -> u32 ; fn characteristics (& self) -> u16 ; # [doc = " Read the file header."] # [doc = ""] # [doc = " `data` must be the entire file data."] # [doc = " `offset` must be the file header offset. It is updated to point after the optional header,"] # [doc = " which is where the section headers are located."] fn parse < 'data , R : ReadRef < 'data > > (data : R , offset : & mut u64) -> read :: Result < & 'data Self > ; # [doc = " Read the section table."] # [doc = ""] # [doc = " `data` must be the entire file data."] # [doc = " `offset` must be after the optional file header."] # [inline] fn sections < 'data , R : ReadRef < 'data > > (& self , data : R , offset : u64 ,) -> read :: Result < SectionTable < 'data > > { SectionTable :: parse (self , data , offset) } # [doc = " Read the symbol table and string table."] # [doc = ""] # [doc = " `data` must be the entire file data."] # [inline] fn symbols < 'data , R : ReadRef < 'data > > (& self , data : R ,) -> read :: Result < SymbolTable < 'data , R , Self > > { SymbolTable :: parse (self , data) } }
+    };
+}
+
+CoffHeader!()

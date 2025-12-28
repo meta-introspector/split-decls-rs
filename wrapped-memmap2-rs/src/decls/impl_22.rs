@@ -1,6 +1,5 @@
 macro_rules! deps {
     () => {
-        MmapRaw!();
         Mmap!();
     };
 }
@@ -8,7 +7,7 @@ macro_rules! deps {
 macro_rules! impl_22 {
     () => {
         deps!();
-        impl From < Mmap > for MmapRaw { fn from (value : Mmap) -> Self { Self { inner : value . inner } } }
+        impl AsRef < [u8] > for Mmap { # [inline] fn as_ref (& self) -> & [u8] { self . deref () } }
     };
 }
 

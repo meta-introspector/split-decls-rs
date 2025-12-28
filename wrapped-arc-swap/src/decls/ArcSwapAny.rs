@@ -1,6 +1,9 @@
 macro_rules! deps {
     () => {
         ArcSwap!();
+        RefCnt!();
+        Strategy!();
+        DefaultStrategy!();
         ArcSwapOption!();
     };
 }

@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        HeapVec!();
+        StackVec!();
+        Limb!();
+    };
+}
+
+macro_rules! impl_61 {
+    () => {
+        deps!();
+        # [allow (clippy :: new_without_default)] impl HeapVec { # [doc = " Construct an empty vector."] # [inline] pub fn new () -> Self { Self { data : Vec :: with_capacity (bigint :: BIGINT_LIMBS) , } } # [doc = " Construct a vector from an existing slice."] # [inline] pub fn try_from (x : & [bigint :: Limb]) -> Option < Self > { let mut vec = Self :: new () ; vec . try_extend (x) ? ; Some (vec) } # [doc = " Sets the length of a vector."] # [doc = ""] # [doc = " This will explicitly set the size of the vector, without actually"] # [doc = " modifying its buffers, so it is up to the caller to ensure that the"] # [doc = " vector is actually the specified size."] # [doc = ""] # [doc = " # Safety"] # [doc = ""] # [doc = " Safe as long as `len` is less than `self.capacity()` and has been initialized."] # [inline] pub unsafe fn set_len (& mut self , len : usize) { debug_assert ! (len <= bigint :: BIGINT_LIMBS) ; unsafe { self . data . set_len (len) } ; } # [doc = " The number of elements stored in the vector."] # [inline] pub fn len (& self) -> usize { self . data . len () } # [doc = " If the vector is empty."] # [inline] pub fn is_empty (& self) -> bool { self . len () == 0 } # [doc = " The number of items the vector can hold."] # [inline] pub fn capacity (& self) -> usize { self . data . capacity () } # [doc = " Append an item to the vector."] # [inline] pub fn try_push (& mut self , value : bigint :: Limb) -> Option < () > { self . data . push (value) ; Some (()) } # [doc = " Remove an item from the end of the vector and return it, or None if empty."] # [inline] pub fn pop (& mut self) -> Option < bigint :: Limb > { self . data . pop () } # [doc = " Copy elements from a slice and append them to the vector."] # [inline] pub fn try_extend (& mut self , slc : & [bigint :: Limb]) -> Option < () > { self . data . extend_from_slice (slc) ; Some (()) } # [doc = " Try to resize the buffer."] # [doc = ""] # [doc = " If the new length is smaller than the current length, truncate"] # [doc = " the input. If it's larger, then append elements to the buffer."] # [inline] pub fn try_resize (& mut self , len : usize , value : bigint :: Limb) -> Option < () > { self . data . resize (len , value) ; Some (()) } # [doc = " Get the high 64 bits from the vector."] # [inline (always)] pub fn hi64 (& self) -> (u64 , bool) { bigint :: hi64 (& self . data) } # [doc = " Create StackVec from u64 value."] # [inline (always)] pub fn from_u64 (x : u64) -> Self { bigint :: from_u64 (x) } # [doc = " Normalize the integer, so any leading zero values are removed."] # [inline] pub fn normalize (& mut self) { bigint :: normalize (self) } # [doc = " Get if the big integer is normalized."] # [inline] pub fn is_normalized (& self) -> bool { bigint :: is_normalized (self) } # [doc = " AddAssign small integer."] # [inline] pub fn add_small (& mut self , y : bigint :: Limb) -> Option < () > { bigint :: small_add (self , y) } # [doc = " MulAssign small integer."] # [inline] pub fn mul_small (& mut self , y : bigint :: Limb) -> Option < () > { bigint :: small_mul (self , y) } }
+    };
+}
+
+impl_61!()

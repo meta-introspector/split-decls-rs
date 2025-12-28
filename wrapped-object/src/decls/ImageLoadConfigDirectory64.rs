@@ -1,0 +1,17 @@
+macro_rules! deps {
+    () => {
+        U32!();
+        U64!();
+        ImageLoadConfigCodeIntegrity!();
+        U16!();
+    };
+}
+
+macro_rules! ImageLoadConfigDirectory64 {
+    () => {
+        deps!();
+        # [derive (Debug , Clone , Copy)] # [repr (C)] pub struct ImageLoadConfigDirectory64 { pub size : U32 < LE > , pub time_date_stamp : U32 < LE > , pub major_version : U16 < LE > , pub minor_version : U16 < LE > , pub global_flags_clear : U32 < LE > , pub global_flags_set : U32 < LE > , pub critical_section_default_timeout : U32 < LE > , pub de_commit_free_block_threshold : U64 < LE > , pub de_commit_total_free_threshold : U64 < LE > , # [doc = " VA"] pub lock_prefix_table : U64 < LE > , pub maximum_allocation_size : U64 < LE > , pub virtual_memory_threshold : U64 < LE > , pub process_affinity_mask : U64 < LE > , pub process_heap_flags : U32 < LE > , pub csd_version : U16 < LE > , pub dependent_load_flags : U16 < LE > , # [doc = " VA"] pub edit_list : U64 < LE > , # [doc = " VA"] pub security_cookie : U64 < LE > , # [doc = " VA"] pub sehandler_table : U64 < LE > , pub sehandler_count : U64 < LE > , # [doc = " VA"] pub guard_cf_check_function_pointer : U64 < LE > , # [doc = " VA"] pub guard_cf_dispatch_function_pointer : U64 < LE > , # [doc = " VA"] pub guard_cf_function_table : U64 < LE > , pub guard_cf_function_count : U64 < LE > , pub guard_flags : U32 < LE > , pub code_integrity : ImageLoadConfigCodeIntegrity , # [doc = " VA"] pub guard_address_taken_iat_entry_table : U64 < LE > , pub guard_address_taken_iat_entry_count : U64 < LE > , # [doc = " VA"] pub guard_long_jump_target_table : U64 < LE > , pub guard_long_jump_target_count : U64 < LE > , # [doc = " VA"] pub dynamic_value_reloc_table : U64 < LE > , # [doc = " VA"] pub chpe_metadata_pointer : U64 < LE > , # [doc = " VA"] pub guard_rf_failure_routine : U64 < LE > , # [doc = " VA"] pub guard_rf_failure_routine_function_pointer : U64 < LE > , pub dynamic_value_reloc_table_offset : U32 < LE > , pub dynamic_value_reloc_table_section : U16 < LE > , pub reserved2 : U16 < LE > , # [doc = " VA"] pub guard_rf_verify_stack_pointer_function_pointer : U64 < LE > , pub hot_patch_table_offset : U32 < LE > , pub reserved3 : U32 < LE > , # [doc = " VA"] pub enclave_configuration_pointer : U64 < LE > , # [doc = " VA"] pub volatile_metadata_pointer : U64 < LE > , }
+    };
+}
+
+ImageLoadConfigDirectory64!()

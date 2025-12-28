@@ -1,0 +1,20 @@
+macro_rules! deps {
+    () => {
+        DebuggingInformationEntry!();
+        Endianity!();
+        Reader!();
+        ValueType!();
+        Result!();
+        AttributeValue!();
+        Encoding!();
+    };
+}
+
+macro_rules! impl_669 {
+    () => {
+        deps!();
+        impl ValueType { # [doc = " The size in bits of a value for this type."] pub fn bit_size (self , addr_mask : u64) -> u32 { match self { ValueType :: Generic => mask_bit_size (addr_mask) , ValueType :: I8 | ValueType :: U8 => 8 , ValueType :: I16 | ValueType :: U16 => 16 , ValueType :: I32 | ValueType :: U32 | ValueType :: F32 => 32 , ValueType :: I64 | ValueType :: U64 | ValueType :: F64 => 64 , } } # [doc = " Construct a `ValueType` from the attributes of a base type DIE."] pub fn from_encoding (encoding : constants :: DwAte , byte_size : u64) -> Option < ValueType > { Some (match (encoding , byte_size) { (constants :: DW_ATE_signed , 1) => ValueType :: I8 , (constants :: DW_ATE_signed , 2) => ValueType :: I16 , (constants :: DW_ATE_signed , 4) => ValueType :: I32 , (constants :: DW_ATE_signed , 8) => ValueType :: I64 , (constants :: DW_ATE_unsigned , 1) => ValueType :: U8 , (constants :: DW_ATE_unsigned , 2) => ValueType :: U16 , (constants :: DW_ATE_unsigned , 4) => ValueType :: U32 , (constants :: DW_ATE_unsigned , 8) => ValueType :: U64 , (constants :: DW_ATE_float , 4) => ValueType :: F32 , (constants :: DW_ATE_float , 8) => ValueType :: F64 , _ => return None , }) } # [doc = " Construct a `ValueType` from a base type DIE."] # [cfg (feature = "read")] pub fn from_entry < R : Reader > (entry : & DebuggingInformationEntry < '_ , '_ , R > ,) -> Result < Option < ValueType > > { if entry . tag () != constants :: DW_TAG_base_type { return Ok (None) ; } let mut encoding = None ; let mut byte_size = None ; let mut endianity = constants :: DW_END_default ; let mut attrs = entry . attrs () ; while let Some (attr) = attrs . next () ? { match attr . name () { constants :: DW_AT_byte_size => byte_size = attr . udata_value () , constants :: DW_AT_encoding => { if let AttributeValue :: Encoding (x) = attr . value () { encoding = Some (x) ; } } constants :: DW_AT_endianity => { if let AttributeValue :: Endianity (x) = attr . value () { endianity = x ; } } _ => { } } } if endianity != constants :: DW_END_default { return Ok (None) ; } if let (Some (encoding) , Some (byte_size)) = (encoding , byte_size) { Ok (ValueType :: from_encoding (encoding , byte_size)) } else { Ok (None) } } }
+    };
+}
+
+impl_669!()

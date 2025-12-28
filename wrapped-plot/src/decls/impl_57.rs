@@ -1,14 +1,15 @@
 macro_rules! deps {
     () => {
-        Display!();
-        VersionError!();
+        Set!();
+        Properties!();
+        PointSize!();
     };
 }
 
 macro_rules! impl_57 {
     () => {
         deps!();
-        impl fmt :: Display for VersionError { fn fmt (& self , f : & mut fmt :: Formatter) -> fmt :: Result { match self { VersionError :: Exec (err) => write ! (f , "`gnuplot --version` failed: {}" , err) , VersionError :: Error (msg) => { write ! (f , "`gnuplot --version` failed with error message:\n{}" , msg) } VersionError :: OutputError => write ! (f , "`gnuplot --version` returned invalid utf-8") , VersionError :: ParseError (msg) => write ! (f , "`gnuplot --version` returned an unparsable version string: {}" , msg) , } } }
+        impl Set < PointSize > for Properties { # [doc = " Changes the size of the points"] # [doc = ""] # [doc = " # Panics"] # [doc = ""] # [doc = " Panics if `size` is a non-positive value"] fn set (& mut self , ps : PointSize) -> & mut Properties { let ps = ps . 0 ; assert ! (ps > 0.) ; self . point_size = Some (ps) ; self } }
     };
 }
 

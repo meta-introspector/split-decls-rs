@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Resolve!();
-        Target!();
         Package!();
+        Target!();
         WorkspaceDefaultMembers!();
         PackageId!();
+        Resolve!();
     };
 }
 

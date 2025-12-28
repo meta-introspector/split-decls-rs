@@ -1,6 +1,10 @@
 macro_rules! deps {
     () => {
         ParseError!();
+        Op!();
+        MetaTemplate!();
+        MetaVarKind!();
+        RepeatKind!();
     };
 }
 

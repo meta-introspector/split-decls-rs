@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        MappedMutexGuard!();
+        RawMutex!();
+    };
+}
+
+macro_rules! impl_42 {
+    () => {
+        deps!();
+        impl < 'a , R : RawMutex + 'a , T : ? Sized + 'a > MappedMutexGuard < 'a , R , T > { # [doc = " Makes a new `MappedMutexGuard` for a component of the locked data."] # [doc = ""] # [doc = " This operation cannot fail as the `MappedMutexGuard` passed"] # [doc = " in already locked the mutex."] # [doc = ""] # [doc = " This is an associated function that needs to be"] # [doc = " used as `MappedMutexGuard::map(...)`. A method would interfere with methods of"] # [doc = " the same name on the contents of the locked data."] # [inline] pub fn map < U : ? Sized , F > (s : Self , f : F) -> MappedMutexGuard < 'a , R , U > where F : FnOnce (& mut T) -> & mut U , { let raw = s . raw ; let data = f (unsafe { & mut * s . data }) ; mem :: forget (s) ; MappedMutexGuard { raw , data , marker : PhantomData , } } # [doc = " Attempts to make a new `MappedMutexGuard` for a component of the"] # [doc = " locked data. The original guard is returned if the closure returns `None`."] # [doc = ""] # [doc = " This operation cannot fail as the `MappedMutexGuard` passed"] # [doc = " in already locked the mutex."] # [doc = ""] # [doc = " This is an associated function that needs to be"] # [doc = " used as `MappedMutexGuard::try_map(...)`. A method would interfere with methods of"] # [doc = " the same name on the contents of the locked data."] # [inline] pub fn try_map < U : ? Sized , F > (s : Self , f : F) -> Result < MappedMutexGuard < 'a , R , U > , Self > where F : FnOnce (& mut T) -> Option < & mut U > , { let raw = s . raw ; let data = match f (unsafe { & mut * s . data }) { Some (data) => data , None => return Err (s) , } ; mem :: forget (s) ; Ok (MappedMutexGuard { raw , data , marker : PhantomData , }) } # [doc = " Attempts to make a new `MappedMutexGuard` for a component of the"] # [doc = " locked data. The original guard is returned alongside arbitrary user data"] # [doc = " if the closure returns `Err`."] # [doc = ""] # [doc = " This operation cannot fail as the `MappedMutexGuard` passed"] # [doc = " in already locked the mutex."] # [doc = ""] # [doc = " This is an associated function that needs to be"] # [doc = " used as `MappedMutexGuard::try_map_or_err(...)`. A method would interfere with methods of"] # [doc = " the same name on the contents of the locked data."] # [inline] pub fn try_map_or_err < U : ? Sized , F , E > (s : Self , f : F ,) -> Result < MappedMutexGuard < 'a , R , U > , (Self , E) > where F : FnOnce (& mut T) -> Result < & mut U , E > , { let raw = s . raw ; let data = match f (unsafe { & mut * s . data }) { Ok (data) => data , Err (e) => return Err ((s , e)) , } ; mem :: forget (s) ; Ok (MappedMutexGuard { raw , data , marker : PhantomData , }) } }
+    };
+}
+
+impl_42!()

@@ -1,13 +1,15 @@
 macro_rules! deps {
     () => {
-        Axis!();
+        Default!();
+        Properties!();
+        LineType!();
     };
 }
 
 macro_rules! impl_40 {
     () => {
         deps!();
-        impl Axis { fn next (self) -> Option < Axis > { use crate :: Axis :: * ; match self { BottomX => Some (LeftY) , LeftY => Some (RightY) , RightY => Some (TopX) , TopX => None , } } }
+        impl Default for Properties { fn default () -> Properties { Properties { color : None , label : None , line_type : LineType :: Solid , linewidth : None , } } }
     };
 }
 

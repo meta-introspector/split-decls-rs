@@ -1,0 +1,17 @@
+macro_rules! deps {
+    () => {
+        PropertyCodePointMap!();
+        Baked!();
+        BidiMirroringGlyph!();
+        EnumeratedProperty!();
+    };
+}
+
+macro_rules! impl_396 {
+    () => {
+        deps!();
+        impl EnumeratedProperty for BidiMirroringGlyph { type DataMarker = PropertyEnumBidiMirroringGlyphV1 ; # [cfg (feature = "compiled_data")] const SINGLETON : & 'static crate :: provider :: PropertyCodePointMap < 'static , Self > = crate :: provider :: Baked :: SINGLETON_PROPERTY_ENUM_BIDI_MIRRORING_GLYPH_V1 ; const NAME : & 'static [u8] = b"Bidi_Mirroring_Glyph" ; const SHORT_NAME : & 'static [u8] = b"Bidi_Mirroring_Glyph" ; }
+    };
+}
+
+impl_396!()

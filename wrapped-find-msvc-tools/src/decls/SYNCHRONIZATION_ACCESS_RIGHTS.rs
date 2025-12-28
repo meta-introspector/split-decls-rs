@@ -1,0 +1,7 @@
+macro_rules! SYNCHRONIZATION_ACCESS_RIGHTS {
+    () => {
+        pub type SYNCHRONIZATION_ACCESS_RIGHTS = u32 ;
+    };
+}
+
+SYNCHRONIZATION_ACCESS_RIGHTS!()

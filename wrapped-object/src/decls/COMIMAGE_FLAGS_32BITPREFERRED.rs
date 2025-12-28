@@ -1,0 +1,7 @@
+macro_rules! COMIMAGE_FLAGS_32BITPREFERRED {
+    () => {
+        pub const COMIMAGE_FLAGS_32BITPREFERRED : u32 = 0x0002_0000 ;
+    };
+}
+
+COMIMAGE_FLAGS_32BITPREFERRED!()

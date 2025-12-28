@@ -1,0 +1,7 @@
+macro_rules! IMAGE_RESOURCE_NAME_IS_STRING {
+    () => {
+        pub const IMAGE_RESOURCE_NAME_IS_STRING : u32 = 0x8000_0000 ;
+    };
+}
+
+IMAGE_RESOURCE_NAME_IS_STRING!()

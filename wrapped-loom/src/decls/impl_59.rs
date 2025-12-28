@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        State!();
+        Mutex!();
+        Condvar!();
+    };
+}
+
+macro_rules! impl_59 {
+    () => {
+        deps!();
+        impl Condvar { # [doc = " Create a new condition variable object"] pub (crate) fn new () -> Condvar { super :: execution (| execution | { let state = execution . objects . insert (State { last_access : None , waiters : VecDeque :: new () , }) ; trace ! (? state , "Condvar::new") ; Condvar { state } }) } # [doc = " Blocks the current thread until this condition variable receives a notification."] pub (crate) fn wait (& self , mutex : & Mutex , location : Location) { self . state . branch_opaque (location) ; rt :: execution (| execution | { trace ! (state = ? self . state , ? mutex , "Condvar::wait") ; let state = self . state . get_mut (& mut execution . objects) ; state . waiters . push_back (execution . threads . active_id ()) ; }) ; mutex . release_lock () ; rt :: park (location) ; mutex . acquire_lock (location) ; } # [doc = " Wakes up one blocked thread on this condvar."] pub (crate) fn notify_one (& self , location : Location) { self . state . branch_opaque (location) ; rt :: execution (| execution | { let state = self . state . get_mut (& mut execution . objects) ; let thread = state . waiters . pop_front () ; trace ! (state = ? self . state , ? thread , "Condvar::notify_one") ; if let Some (thread) = thread { execution . threads . unpark (thread) ; } }) } # [doc = " Wakes up all blocked threads on this condvar."] pub (crate) fn notify_all (& self , location : Location) { self . state . branch_opaque (location) ; rt :: execution (| execution | { let state = self . state . get_mut (& mut execution . objects) ; trace ! (state = ? self . state , threads = ? state . waiters , "Condvar::notify_all") ; for thread in state . waiters . drain (..) { execution . threads . unpark (thread) ; } }) } }
+    };
+}
+
+impl_59!()

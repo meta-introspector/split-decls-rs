@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        UnsafeCell!();
+        Writing!();
+    };
+}
+
+macro_rules! MutPtr {
+    () => {
+        deps!();
+        # [doc = " A checked mutable raw pointer to an [`UnsafeCell`]."] # [doc = ""] # [doc = " This type is essentially a [`*mut T`], but with the added ability to"] # [doc = " participate in Loom's [`UnsafeCell`] access tracking. While a `MutPtr` to a"] # [doc = " given [`UnsafeCell`] exists, Loom will track that the [`UnsafeCell`] is"] # [doc = " being accessed mutably."] # [doc = ""] # [doc = " [`MutPtr`]s are produced by the [`UnsafeCell::get_mut`] method. The pointed"] # [doc = " value can be accessed using [`MutPtr::deref`]."] # [doc = ""] # [doc = " If an [`UnsafeCell`] is accessed mutably (by [`UnsafeCell::with_mut`] or"] # [doc = " [`UnsafeCell::get_mut`]) or immutably (by [`UnsafeCell::with`] or"] # [doc = " [`UnsafeCell::get`]) while a [`MutPtr`] to that cell exists, Loom will"] # [doc = " detect the invalid accesses and panic."] # [doc = ""] # [doc = " Note that the cell is considered to be mutably accessed for *the entire"] # [doc = " lifespan of the `MutPtr`*, not just when the `MutPtr` is actively"] # [doc = " dereferenced."] # [doc = ""] # [doc = " # Safety"] # [doc = ""] # [doc = " Although the `MutPtr` type is checked for concurrent access violations, it"] # [doc = " is **still a raw pointer**. A `MutPtr` is not bound to the lifetime of the"] # [doc = " [`UnsafeCell`] from which it was produced, and may outlive the cell. Loom"] # [doc = " does *not* currently check for dangling pointers. Therefore, the user is"] # [doc = " responsible for ensuring that a `MutPtr` does not dangle. However, unlike"] # [doc = " a normal `*mut T`, `MutPtr`s may only be produced from a valid"] # [doc = " [`UnsafeCell`], and therefore can be assumed to never be null."] # [doc = ""] # [doc = " Additionally, it is possible to write code in which raw pointers to an"] # [doc = " [`UnsafeCell`] are constructed that are *not* checked by Loom. If a raw"] # [doc = " pointer \"escapes\" Loom's tracking, invalid accesses may not be detected,"] # [doc = " resulting in tests passing when they should have failed. See [here] for"] # [doc = " details on how to avoid accidentally escaping the model."] # [doc = ""] # [doc = " [`*mut T`]: https://doc.rust-lang.org/stable/std/primitive.pointer.html"] # [doc = " [here]: #correct-usage"] # [derive (Debug)] pub struct MutPtr < T : ? Sized > { # [doc = " Drop guard representing the lifetime of the `ConstPtr`'s access."] _guard : rt :: cell :: Writing , ptr : * mut T , }
+    };
+}
+
+MutPtr!()

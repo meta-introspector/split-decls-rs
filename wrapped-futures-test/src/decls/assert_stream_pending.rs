@@ -1,0 +1,7 @@
+macro_rules! assert_stream_pending {
+    () => {
+        # [doc = " Assert that the next poll to the provided stream will return"] # [doc = " [`Poll::Pending`](futures_core::task::Poll::Pending)."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " use core::pin::pin;"] # [doc = ""] # [doc = " use futures::stream;"] # [doc = " use futures_test::future::FutureTestExt;"] # [doc = " use futures_test::assert_stream_pending;"] # [doc = " use futures_test::assert_stream_next;"] # [doc = " use futures_test::assert_stream_done;"] # [doc = ""] # [doc = " let stream = stream::once((async { 5 }).pending_once());"] # [doc = " let mut stream = pin!(stream);"] # [doc = ""] # [doc = " assert_stream_pending!(stream);"] # [doc = " assert_stream_next!(stream, 5);"] # [doc = " assert_stream_done!(stream);"] # [doc = " ```"] # [macro_export] macro_rules ! assert_stream_pending { ($ stream : expr) => { # [allow (clippy :: if_then_panic)] { let mut stream = & mut $ stream ; $ crate :: __private :: assert :: assert_is_unpin_stream (stream) ; let stream = $ crate :: __private :: Pin :: new (stream) ; let mut cx = $ crate :: task :: noop_context () ; let poll = $ crate :: __private :: stream :: Stream :: poll_next (stream , & mut cx) ; if poll . is_ready () { panic ! ("assertion failed: stream is not pending") ; } } } ; }
+    };
+}
+
+assert_stream_pending!()

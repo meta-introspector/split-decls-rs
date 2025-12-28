@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        Buffer!();
+    };
+}
+
+macro_rules! impl_331 {
+    () => {
+        deps!();
+        impl Buffer { # [doc = " Create a new buffer for stream searching. The minimum buffer length"] # [doc = " given should be the size of the maximum possible match length."] pub (crate) fn new (min_buffer_len : usize) -> Buffer { let min = core :: cmp :: max (1 , min_buffer_len) ; let capacity = core :: cmp :: max (min * 8 , DEFAULT_BUFFER_CAPACITY) ; Buffer { buf : vec ! [0 ; capacity] , min , end : 0 } } # [doc = " Return the contents of this buffer."] # [inline] pub (crate) fn buffer (& self) -> & [u8] { & self . buf [.. self . end] } # [doc = " Return the minimum size of the buffer. The only way a buffer may be"] # [doc = " smaller than this is if the stream itself contains less than the"] # [doc = " minimum buffer amount."] # [inline] pub (crate) fn min_buffer_len (& self) -> usize { self . min } # [doc = " Return all free capacity in this buffer."] fn free_buffer (& mut self) -> & mut [u8] { & mut self . buf [self . end ..] } # [doc = " Refill the contents of this buffer by reading as much as possible into"] # [doc = " this buffer's free capacity. If no more bytes could be read, then this"] # [doc = " returns false. Otherwise, this reads until it has filled the buffer"] # [doc = " past the minimum amount."] pub (crate) fn fill < R : std :: io :: Read > (& mut self , mut rdr : R ,) -> std :: io :: Result < bool > { let mut readany = false ; loop { let readlen = rdr . read (self . free_buffer ()) ? ; if readlen == 0 { return Ok (readany) ; } readany = true ; self . end += readlen ; if self . buffer () . len () >= self . min { return Ok (true) ; } } } # [doc = " Roll the contents of the buffer so that the suffix of this buffer is"] # [doc = " moved to the front and all other contents are dropped. The size of the"] # [doc = " suffix corresponds precisely to the minimum buffer length."] # [doc = ""] # [doc = " This should only be called when the entire contents of this buffer have"] # [doc = " been searched."] pub (crate) fn roll (& mut self) { let roll_start = self . end . checked_sub (self . min) . expect ("buffer capacity should be bigger than minimum amount") ; let roll_end = roll_start + self . min ; assert ! (roll_end <= self . end) ; self . buf . copy_within (roll_start .. roll_end , 0) ; self . end = self . min ; } }
+    };
+}
+
+impl_331!()

@@ -1,0 +1,19 @@
+macro_rules! deps {
+    () => {
+        KeyPair!();
+        EncapsulationKey!();
+        TestableKem!();
+        KemTester!();
+        XWing!();
+        UnknownCryptoError!();
+    };
+}
+
+macro_rules! tests {
+    () => {
+        deps!();
+        # [cfg (test)] mod tests { use super :: * ; # [cfg (feature = "safe_api")] use crate :: test_framework :: kem_interface :: { KemTester , TestableKem } ; # [cfg (feature = "safe_api")] impl TestableKem < SharedSecret , Ciphertext > for XWing { fn keygen (seed : & [u8]) -> Result < (Vec < u8 > , Vec < u8 >) , UnknownCryptoError > { let kp = KeyPair :: try_from (& Seed :: from_slice (seed) . unwrap ()) . unwrap () ; Ok ((kp . ek . as_ref () . to_vec () , kp . dk . unprotected_as_bytes () . to_vec () ,)) } fn ciphertext_from_bytes (b : & [u8]) -> Result < Ciphertext , UnknownCryptoError > { Ciphertext :: from_slice (b) } fn encap (ek : & [u8]) -> Result < (SharedSecret , Ciphertext) , UnknownCryptoError > { let ek = EncapsulationKey :: from_slice (ek) . unwrap () ; XWing :: encap (& ek) } fn decap (dk : & [u8] , c : & Ciphertext) -> Result < SharedSecret , UnknownCryptoError > { let kp = KeyPair :: try_from (& Seed :: from_slice (dk) ?) . unwrap () ; XWing :: decap (kp . private () , c) } } # [cfg (feature = "safe_api")] # [test] fn run_basic_kem_tests () { let seed = Seed :: generate () ; KemTester :: < XWing , SharedSecret , Ciphertext > :: run_all_tests (seed . unprotected_as_bytes ()) ; } # [test] # [doc = " Basic no_std-compatible test."] fn basic_roundtrip () { let seed = Seed :: from_slice (& [127u8 ; 32]) . unwrap () ; let kp = KeyPair :: try_from (& seed) . unwrap () ; let (k , c) = XWing :: encap_deterministic (kp . public () , & [255u8 ; 64]) . unwrap () ; let k_prime = XWing :: decap (kp . private () , & c) . unwrap () ; assert_eq ! (k , k_prime) ; } # [test] fn get_decapskey_as_bytes_is_seed () { let seed = Seed :: from_slice (& [127u8 ; 32]) . unwrap () ; let kp = KeyPair :: try_from (& seed) . unwrap () ; assert_eq ! (seed . unprotected_as_bytes () , kp . private () . unprotected_as_bytes ()) ; } # [test] fn bad_eseed_lens () { let seed = Seed :: from_slice (& [127u8 ; 32]) . unwrap () ; let kp = KeyPair :: try_from (& seed) . unwrap () ; assert ! (XWing :: encap_deterministic (kp . public () , & [255u8 ; 64]) . is_ok ()) ; assert ! (XWing :: encap_deterministic (kp . public () , & [255u8 ; 63]) . is_err ()) ; assert ! (XWing :: encap_deterministic (kp . public () , & [255u8 ; 65]) . is_err ()) ; } }
+    };
+}
+
+tests!()

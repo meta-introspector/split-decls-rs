@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        UpmappingResult!();
+        NavigationTarget!();
+    };
+}
+
+macro_rules! impl_20 {
+    () => {
+        deps!();
+        impl NavigationTarget { pub fn focus_or_full_range (& self) -> TextRange { self . focus_range . unwrap_or (self . full_range) } pub (crate) fn from_module_to_decl (db : & RootDatabase , module : hir :: Module ,) -> UpmappingResult < NavigationTarget > { let name = module . name (db) . map (| it | it . symbol () . clone ()) . unwrap_or_else (| | sym :: underscore) ; match module . declaration_source (db) { Some (InFile { value , file_id }) => { orig_range_with_focus (db , file_id , value . syntax () , value . name ()) . map (| (FileRange { file_id , range : full_range } , focus_range) | { let mut res = NavigationTarget :: from_syntax (file_id , name . clone () , focus_range , full_range , SymbolKind :: Module ,) ; res . docs = module . docs (db) ; res . description = Some (module . display (db , module . krate () . to_display_target (db)) . to_string () ,) ; res } ,) } _ => module . to_nav (db) , } } # [cfg (test)] pub (crate) fn debug_render (& self) -> String { let mut buf = format ! ("{} {:?} {:?} {:?}" , self . name , self . kind . unwrap () , self . file_id , self . full_range) ; if let Some (focus_range) = self . focus_range { buf . push_str (& format ! (" {focus_range:?}")) } if let Some (container_name) = & self . container_name { buf . push_str (& format ! (" {container_name}")) } buf } # [doc = " Allows `NavigationTarget` to be created from a `NameOwner`"] pub (crate) fn from_named (db : & RootDatabase , InFile { file_id , value } : InFile < & dyn ast :: HasName > , kind : SymbolKind ,) -> UpmappingResult < NavigationTarget > { let name = value . name () . map (| it | Symbol :: intern (& it . text ())) . unwrap_or_else (| | sym :: underscore) ; orig_range_with_focus (db , file_id , value . syntax () , value . name ()) . map (| (FileRange { file_id , range : full_range } , focus_range) | { NavigationTarget :: from_syntax (file_id , name . clone () , focus_range , full_range , kind) } ,) } pub (crate) fn from_syntax (file_id : FileId , name : Symbol , focus_range : Option < TextRange > , full_range : TextRange , kind : SymbolKind ,) -> NavigationTarget { NavigationTarget { file_id , name , kind : Some (kind) , full_range , focus_range , container_name : None , description : None , docs : None , alias : None , } } }
+    };
+}
+
+impl_20!()

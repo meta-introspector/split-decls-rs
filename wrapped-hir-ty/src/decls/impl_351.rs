@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        AutoderefCtx!();
+        TraitEnvironment!();
+        InferenceContextAutoderefCtx!();
+    };
+}
+
+macro_rules! impl_351 {
+    () => {
+        deps!();
+        impl < 'db > AutoderefCtx < 'db > for InferenceContextAutoderefCtx < '_ , '_ , 'db > { # [inline] fn infcx (& self) -> & InferCtxt < 'db > { & self . 0 . table . infer_ctxt } # [inline] fn env (& self) -> & TraitEnvironment < 'db > { & self . 0 . table . trait_env } }
+    };
+}
+
+impl_351!()

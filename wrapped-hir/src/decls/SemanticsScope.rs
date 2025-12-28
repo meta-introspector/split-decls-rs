@@ -1,0 +1,7 @@
+macro_rules! SemanticsScope {
+    () => {
+        # [doc = " `SemanticsScope` encapsulates the notion of a scope (the set of visible"] # [doc = " names) at a particular program point."] # [doc = ""] # [doc = " It is a bit tricky, as scopes do not really exist inside the compiler."] # [doc = " Rather, the compiler directly computes for each reference the definition it"] # [doc = " refers to. It might transiently compute the explicit scope map while doing"] # [doc = " so, but, generally, this is not something left after the analysis."] # [doc = ""] # [doc = " However, we do very much need explicit scopes for IDE purposes --"] # [doc = " completion, at its core, lists the contents of the current scope. The notion"] # [doc = " of scope is also useful to answer questions like \"what would be the meaning"] # [doc = " of this piece of code if we inserted it into this position?\"."] # [doc = ""] # [doc = " So `SemanticsScope` is constructed from a specific program point (a syntax"] # [doc = " node or just a raw offset) and provides access to the set of visible names"] # [doc = " on a somewhat best-effort basis."] # [doc = ""] # [doc = " Note that if you are wondering \"what does this specific existing name mean?\","] # [doc = " you'd better use the `resolve_` family of methods."] # [derive (Debug)] pub struct SemanticsScope < 'db > { pub db : & 'db dyn HirDatabase , file_id : HirFileId , resolver : Resolver < 'db > , }
+    };
+}
+
+SemanticsScope!()

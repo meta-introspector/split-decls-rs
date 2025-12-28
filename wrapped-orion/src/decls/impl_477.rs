@@ -1,0 +1,22 @@
+macro_rules! deps {
+    () => {
+        RingElementNTT!();
+        DecapKey!();
+        UnknownCryptoError!();
+        Shake256!();
+        FieldElement!();
+        RingElement!();
+        EncapKey!();
+        PkeParameters!();
+        ByteSerialization!();
+    };
+}
+
+macro_rules! impl_477 {
+    () => {
+        deps!();
+        impl < const K : usize , const ENCODED_SIZE_EK : usize , const ENCODED_SIZE_DK : usize , Pke : PkeParameters , > DecapKey < K , ENCODED_SIZE_EK , ENCODED_SIZE_DK , Pke > { pub (crate) fn get_encapsulation_key_bytes (& self) -> & [u8] { & self . bytes [ENCODE_SIZE_POLY * K .. (768 * K) + 32] } pub (crate) fn unchecked_from_slice (slice : & [u8]) -> Result < Self , UnknownCryptoError > { Pke :: decapsulation_key_check (slice) ? ; let dk_pke = & slice [0 .. ENCODE_SIZE_POLY * Pke :: K] ; let mut s_hat = [RingElementNTT :: zero () ; K] ; for (dk_part , s_hat_poly) in dk_pke . chunks (ENCODE_SIZE_POLY) . take (Pke :: K) . zip (s_hat . iter_mut ()) { ByteSerialization :: decode_12 (dk_part , & mut s_hat_poly . coefficients) ; } Ok (Self { bytes : slice . try_into () . unwrap () , s_hat , _phantom : PhantomData , }) } # [doc = " FIPS-203, Algorithm 15."] # [doc = ""] # [doc = " k \\in [2, 3, 4]"] fn decrypt (& self , c : & [u8]) -> Result < [u8 ; 32] , UnknownCryptoError > { debug_assert_eq ! (Pke :: K , K) ; debug_assert_eq ! (c . len () , Pke :: CIPHERTEXT_SIZE) ; let c1 = & c [.. Pke :: ENCODE_SIZE_D_U * Pke :: K] ; let c2 = & c [Pke :: ENCODE_SIZE_D_U * Pke :: K .. Pke :: CIPHERTEXT_SIZE] ; let mut u = [RingElement :: zero () ; K] ; for (c1_part , u_poly) in c1 . chunks (Pke :: ENCODE_SIZE_D_U) . take (Pke :: K) . zip (u . iter_mut ()) { Pke :: decode_du (c1_part , & mut u_poly . coefficients) ; for fe in u_poly . coefficients . iter_mut () { * fe = FieldElement :: decompress (fe . 0 , Pke :: D_U) ; } } let mut v = RingElement :: zero () ; Pke :: decode_dv (c2 , & mut v . coefficients) ; for fe in v . coefficients . iter_mut () { * fe = FieldElement :: decompress (fe . 0 , Pke :: D_V) ; } let mut product = RingElementNTT :: zero () ; for (sh , ue) in self . s_hat . iter () . zip (u . iter ()) { product += * sh * to_ntt (ue) ; } let mut w = v - inverse_ntt (& product) ; product . zeroize () ; let mut m = [0u8 ; 32] ; for fe in w . coefficients . iter_mut () { * fe = FieldElement :: new (fe . compress (1)) ; } ByteSerialization :: encode_1 (& w . coefficients , & mut m) ; Ok (m) } # [doc = " FIPS-203, Algorithm 18."] # [doc = " - decapsulation key dk ∈ B^{768k+96}."] # [doc = " - ciphertext c ∈ B^{32*(d_u*k+d_v)}."] # [doc = " - shared secret K ∈ B^{32}."] pub (crate) fn mlkem_decap_internal_with_ek (& self , c : & [u8] , c_prime : & mut [u8] , ek : & EncapKey < K , ENCODED_SIZE_EK , Pke > ,) -> Result < [u8 ; 32] , UnknownCryptoError > { debug_assert_eq ! (self . get_encapsulation_key_bytes () , ek . as_ref ()) ; debug_assert_eq ! (c . len () , Pke :: CIPHERTEXT_SIZE) ; let dk_pke = & self . bytes [0 .. ENCODE_SIZE_POLY * Pke :: K] ; let ek_pke = & self . bytes [dk_pke . len () .. (768 * Pke :: K) + 32] ; let h = & self . bytes [dk_pke . len () + ek_pke . len () .. (768 * Pke :: K) + 64] ; let z = & self . bytes [dk_pke . len () + ek_pke . len () + h . len () .. (768 * Pke :: K) + 96] ; let m = self . decrypt (c) ? ; let (mut k , r) = g (& [& m , h]) ; let mut k_bar = Zeroizing :: new ([0u8 ; 32]) ; let mut xof = shake256 :: Shake256 :: new () ; xof . absorb (z) ? ; xof . absorb (c) ? ; xof . squeeze (k_bar . as_mut ()) ? ; debug_assert_eq ! (self . get_encapsulation_key_bytes () , ek_pke) ; ek . encrypt (& m , r . as_ref () , c_prime) ? ; let ct_choice = c . ct_ne (c_prime) ; c_prime . zeroize () ; for (x , y) in k . iter_mut () . zip (k_bar . iter ()) { u8 :: conditional_assign (x , y , ct_choice) ; } Ok (k) } # [cfg (feature = "safe_api")] pub (crate) fn mlkem_decap_internal (& self , c : & [u8] , c_prime : & mut [u8] ,) -> Result < [u8 ; 32] , UnknownCryptoError > { let ek = EncapKey :: < K , ENCODED_SIZE_EK , Pke > :: from_slice (self . get_encapsulation_key_bytes ()) ? ; self . mlkem_decap_internal_with_ek (c , c_prime , & ek) } pub (crate) fn unprotected_as_bytes (& self) -> & [u8] { & self . bytes } }
+    };
+}
+
+impl_477!()

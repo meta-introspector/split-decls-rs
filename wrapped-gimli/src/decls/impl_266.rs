@@ -1,0 +1,20 @@
+macro_rules! deps {
+    () => {
+        SectionId!();
+        Result!();
+        Reader!();
+        DwarfPackage!();
+        Error!();
+        DwarfPackageSections!();
+        Section!();
+    };
+}
+
+macro_rules! impl_266 {
+    () => {
+        deps!();
+        impl < T > DwarfPackageSections < T > { # [doc = " Try to load the `.dwp` sections using the given loader function."] # [doc = ""] # [doc = " `section` loads a DWARF section from the object file."] # [doc = " It should return an empty section if the section does not exist."] pub fn load < F , E > (mut section : F) -> core :: result :: Result < Self , E > where F : FnMut (SectionId) -> core :: result :: Result < T , E > , E : From < Error > , { Ok (DwarfPackageSections { cu_index : Section :: load (& mut section) ? , tu_index : Section :: load (& mut section) ? , debug_abbrev : Section :: load (& mut section) ? , debug_info : Section :: load (& mut section) ? , debug_line : Section :: load (& mut section) ? , debug_str : Section :: load (& mut section) ? , debug_str_offsets : Section :: load (& mut section) ? , debug_loc : Section :: load (& mut section) ? , debug_loclists : Section :: load (& mut section) ? , debug_rnglists : Section :: load (& mut section) ? , debug_types : Section :: load (& mut section) ? , }) } # [doc = " Create a `DwarfPackage` structure that references the data in `self`."] pub fn borrow < 'a , F , R > (& 'a self , mut borrow : F , empty : R) -> Result < DwarfPackage < R > > where F : FnMut (& 'a T) -> R , R : Reader , { DwarfPackage :: from_sections (DwarfPackageSections { cu_index : self . cu_index . borrow (& mut borrow) , tu_index : self . tu_index . borrow (& mut borrow) , debug_abbrev : self . debug_abbrev . borrow (& mut borrow) , debug_info : self . debug_info . borrow (& mut borrow) , debug_line : self . debug_line . borrow (& mut borrow) , debug_str : self . debug_str . borrow (& mut borrow) , debug_str_offsets : self . debug_str_offsets . borrow (& mut borrow) , debug_loc : self . debug_loc . borrow (& mut borrow) , debug_loclists : self . debug_loclists . borrow (& mut borrow) , debug_rnglists : self . debug_rnglists . borrow (& mut borrow) , debug_types : self . debug_types . borrow (& mut borrow) , } , empty ,) } }
+    };
+}
+
+impl_266!()

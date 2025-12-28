@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        FixedBitSet!();
+        Block!();
     };
 }
 
 macro_rules! impl_17 {
     () => {
         deps!();
-        impl Ord for FixedBitSet { fn cmp (& self , other : & Self) -> Ordering { self . length . cmp (& other . length) . then_with (| | self . as_simd_slice () . cmp (other . as_simd_slice ())) } }
+        impl BitOrAssign for Block { # [inline] fn bitor_assign (& mut self , other : Self) { unsafe { self . 0 = _mm_or_si128 (self . 0 , other . 0) ; } } }
     };
 }
 

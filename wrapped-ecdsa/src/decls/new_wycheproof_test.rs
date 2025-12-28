@@ -1,0 +1,22 @@
+macro_rules! deps {
+    () => {
+        Signature!();
+        TestVector!();
+        VerifyingKey!();
+    };
+}
+
+macro_rules! new_wycheproof_test {
+    () => {
+        deps!();
+        # [doc = " Define a Wycheproof verification test."] # [macro_export] macro_rules ! new_wycheproof_test { ($ name : ident , $ test_name : expr , $ curve : path) => { use $ crate :: { Signature , elliptic_curve :: sec1 :: EncodedPoint , signature :: Verifier , } ; # [test] fn $ name () { use $ crate :: elliptic_curve :: { self , array :: typenum :: Unsigned } ; fn element_from_padded_slice < C : elliptic_curve :: Curve > (data : & [u8] ,) -> elliptic_curve :: FieldBytes < C > { let point_len = C :: FieldBytesSize :: USIZE ; if data . len () >= point_len { let offset = data . len () - point_len ; for v in data . iter () . take (offset) { assert_eq ! (* v , 0 , "EcdsaVerifier: point too large") ; } elliptic_curve :: FieldBytes ::< C >:: try_from (& data [offset ..]) . unwrap () } else { let iter = core :: iter :: repeat (0) . take (point_len - data . len ()) . chain (data . iter () . cloned ()) ; elliptic_curve :: FieldBytes ::< C >:: from_iter (iter) } } fn run_test (wx : & [u8] , wy : & [u8] , msg : & [u8] , sig : & [u8] , pass : bool ,) -> Option <&'static str > { let x = element_from_padded_slice ::<$ curve > (wx) ; let y = element_from_padded_slice ::<$ curve > (wy) ; let q_encoded = EncodedPoint ::<$ curve >:: from_affine_coordinates (& x , & y , false ,) ; let verifying_key = $ crate :: VerifyingKey ::<$ curve >:: from_encoded_point (& q_encoded) . unwrap () ; let sig = match Signature :: from_der (sig) { Ok (s) => s , Err (_) if ! pass => return None , Err (_) => return Some ("failed to parse signature ASN.1") , } ; match verifying_key . verify (msg , & sig) { Ok (_) if pass => None , Ok (_) => Some ("signature verify unexpectedly succeeded") , Err (_) if ! pass => None , Err (_) => Some ("signature verify failed") , } } # [derive (Debug , Clone , Copy)] struct TestVector { # [doc = " X coordinates of the public key"] pub wx : &'static [u8] , # [doc = " Y coordinates of the public key"] pub wy : &'static [u8] , # [doc = " Payload to verify"] pub msg : &'static [u8] , # [doc = " Der encoding of the signature"] pub sig : &'static [u8] , # [doc = " Whether the signature should verify (`[1]`) or fail (`[0]`)"] pub pass_ : &'static [u8] , } impl TestVector { pub (crate) fn pass (& self) -> bool { match self . pass_ { & [0] => false , & [1] => true , other => panic ! (concat ! ("Unsupported value for pass in `" , $ test_name , "`.\n" , "found=`{other:?}`,\n" , "expected=[0] or [1]") , other = other) , } } } $ crate :: dev :: blobby :: parse_into_structs ! (include_bytes ! (concat ! ("test_vectors/data/" , $ test_name , ".blb")) ; static TEST_VECTORS : & [TestVector { wx , wy , msg , sig , pass_ }] ;) ; for (i , tv) in TEST_VECTORS . iter () . enumerate () { if let Some (desc) = run_test (tv . wx , tv . wy , tv . msg , tv . sig , tv . pass ()) { panic ! ("\n\
+                                 Failed test №{}: {}\n\
+                                 wx:\t{:?}\n\
+                                 wy:\t{:?}\n\
+                                 msg:\t{:?}\n\
+                                 sig:\t{:?}\n\
+                                 pass:\t{}\n" , i , desc , tv . wx , tv . wy , tv . msg , tv . sig , tv . pass () ,) ; } } } } ; }
+    };
+}
+
+new_wycheproof_test!()

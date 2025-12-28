@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        AltairInitialEnvironments!();
+        AltairWindowOptions!();
+        AltairSettingsState!();
+    };
+}
+
+macro_rules! AltairConfigOptions {
+    () => {
+        deps!();
+        # [doc = " Altair config [options](https://github.com/altair-graphql/altair/blob/master/packages/altair-core/src/config.ts#L79)"] # [derive (Default , Serialize , Deserialize , JsonSchema)] # [serde (rename_all = "camelCase")] pub struct AltairConfigOptions { # [doc = " Options to be applied on every new window (including the initial)"] # [serde (default , flatten , skip_serializing_if = "Option::is_none")] pub window_options : Option < AltairWindowOptions > , # [doc = " Initial Environments to be added"] # [doc = " ```js"] # [doc = "  {"] # [doc = "    base: {"] # [doc = "     title: 'Environment',"] # [doc = "     variables: {}"] # [doc = "   },"] # [doc = "   subEnvironments: ["] # [doc = "     {"] # [doc = "       title: 'sub-1',"] # [doc = "       variables: {}"] # [doc = "     }"] # [doc = "   ]"] # [doc = " }"] # [doc = " ```"] # [serde (default , skip_serializing_if = "Option::is_none")] pub initial_environments : Option < AltairInitialEnvironments > , # [doc = " Namespace for storing the data for the altair instance."] # [doc = ""] # [doc = " Use this when you have multiple altair instances running on the same"] # [doc = " domain."] # [doc = ""] # [doc = " e.g. altair_dev_"] # [serde (default , skip_serializing_if = "Option::is_none")] pub instance_storage_namespace : Option < String > , # [doc = " Initial app settings to use"] # [serde (default , skip_serializing_if = "Option::is_none")] pub initial_settings : Option < AltairSettingsState > , # [doc = " Indicates if the state should be preserved for subsequent app loads"] # [doc = " (default true)"] # [serde (default , skip_serializing_if = "Option::is_none")] pub preserve_state : Option < bool > , # [doc = " List of options for windows to be loaded"] # [serde (default , skip_serializing_if = "Vec::is_empty")] pub initial_windows : Vec < AltairWindowOptions > , # [doc = " Persisted settings for the app. The settings will be merged with the app"] # [doc = " settings."] # [serde (default , skip_serializing_if = "Option::is_none")] pub persisted_settings : Option < AltairSettingsState > , # [doc = " Disable the account and remote syncing functionality"] # [serde (default , skip_serializing_if = "Option::is_none")] pub disable_account : Option < bool > , }
+    };
+}
+
+AltairConfigOptions!()

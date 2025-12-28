@@ -1,0 +1,17 @@
+macro_rules! deps {
+    () => {
+        PathIdMapping!();
+        Attributes!();
+        Statistics!();
+        Source!();
+    };
+}
+
+macro_rules! impl_27 {
+    () => {
+        deps!();
+        impl Attributes { pub (crate) fn pop_directory (& mut self) { self . stack . pop_pattern_list () . expect ("something to pop") ; } # [allow (clippy :: too_many_arguments)] pub (crate) fn push_directory (& mut self , root : & Path , dir : & Path , rela_dir : & BStr , buf : & mut Vec < u8 > , id_mappings : & [PathIdMapping] , objects : & dyn gix_object :: Find , stats : & mut Statistics ,) -> std :: io :: Result < () > { let attr_path_relative = gix_path :: join_bstr_unix_pathsep (rela_dir , ".gitattributes") ; let attr_file_in_index = id_mappings . binary_search_by (| t | t . 0 . as_bstr () . cmp (attr_path_relative . as_ref ())) ; let no_follow_symlinks = false ; let read_macros_as_dir_is_root = root == dir ; let mut added = false ; match self . source { Source :: IdMapping | Source :: IdMappingThenWorktree => { if let Ok (idx) = attr_file_in_index { let blob = objects . find_blob (& id_mappings [idx] . 1 , buf) . map_err (std :: io :: Error :: other) ? ; let attr_path = gix_path :: from_bstring (attr_path_relative . into_owned ()) ; self . stack . add_patterns_buffer (blob . data , attr_path , Some (Path :: new ("")) , & mut self . collection , read_macros_as_dir_is_root ,) ; added = true ; stats . patterns_buffers += 1 ; } if ! added && matches ! (self . source , Source :: IdMappingThenWorktree) { added = self . stack . add_patterns_file (dir . join (".gitattributes") , no_follow_symlinks , Some (root) , buf , & mut self . collection , read_macros_as_dir_is_root ,) ? ; stats . pattern_files += usize :: from (added) ; stats . tried_pattern_files += 1 ; } } Source :: WorktreeThenIdMapping => { added = self . stack . add_patterns_file (dir . join (".gitattributes") , no_follow_symlinks , Some (root) , buf , & mut self . collection , read_macros_as_dir_is_root ,) ? ; stats . pattern_files += usize :: from (added) ; stats . tried_pattern_files += 1 ; if let Some (idx) = attr_file_in_index . ok () . filter (| _ | ! added) { let blob = objects . find_blob (& id_mappings [idx] . 1 , buf) . map_err (std :: io :: Error :: other) ? ; let attr_path = gix_path :: from_bstring (attr_path_relative . into_owned ()) ; self . stack . add_patterns_buffer (blob . data , attr_path , Some (Path :: new ("")) , & mut self . collection , read_macros_as_dir_is_root ,) ; added = true ; stats . patterns_buffers += 1 ; } } } if ! added && self . info_attributes . is_none () { self . stack . add_patterns_buffer (& [] , "<empty dummy>" . into () , None , & mut self . collection , true) ; } if let Some (info_attr) = self . info_attributes . take () { let added = self . stack . add_patterns_file (info_attr , true , None , buf , & mut self . collection , true ,) ? ; stats . pattern_files += usize :: from (added) ; stats . tried_pattern_files += 1 ; } Ok (()) } pub (crate) fn matching_attributes (& self , relative_path : & BStr , case : Case , is_dir : Option < bool > , out : & mut gix_attributes :: search :: Outcome ,) -> bool { out . initialize (& self . collection) ; let groups = [& self . globals , & self . stack] ; let mut has_match = false ; groups . iter () . rev () . any (| group | { has_match |= group . pattern_matching_relative_path (relative_path , case , is_dir , out) ; out . is_done () }) ; has_match } }
+    };
+}
+
+impl_27!()

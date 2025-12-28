@@ -1,0 +1,7 @@
+macro_rules! parse_hexadecimal {
+    () => {
+        # [test] fn parse_hexadecimal () { check ("0x0" , 0x0 , Hexadecimal , "0" , None) ; check ("0x1" , 0x1 , Hexadecimal , "1" , None) ; check ("0x9" , 0x9 , Hexadecimal , "9" , None) ; check ("0xa" , 0xa , Hexadecimal , "a" , None) ; check ("0xf" , 0xf , Hexadecimal , "f" , None) ; check ("0x17" , 0x17 , Hexadecimal , "17" , None) ; check ("0x1b" , 0x1b , Hexadecimal , "1b" , None) ; check ("0x123" , 0x123 , Hexadecimal , "123" , None) ; check ("0xace" , 0xace , Hexadecimal , "ace" , None) ; check ("0xfdb971" , 0xfdb971 , Hexadecimal , "fdb971" , None) ; check ("0xa_54_f" , 0xa_54_f , Hexadecimal , "a_54_f" , None) ; check ("0x6d_" , 0x6d_ , Hexadecimal , "6d_" , None) ; check ("0xA" , 0xA , Hexadecimal , "A" , None) ; check ("0xF" , 0xF , Hexadecimal , "F" , None) ; check ("0x17" , 0x17 , Hexadecimal , "17" , None) ; check ("0x1B" , 0x1B , Hexadecimal , "1B" , None) ; check ("0x123" , 0x123 , Hexadecimal , "123" , None) ; check ("0xACE" , 0xACE , Hexadecimal , "ACE" , None) ; check ("0xFDB971" , 0xFDB971 , Hexadecimal , "FDB971" , None) ; check ("0xA_54_F" , 0xA_54_F , Hexadecimal , "A_54_F" , None) ; check ("0x6D_" , 0x6D_ , Hexadecimal , "6D_" , None) ; check ("0xFdB97a1" , 0xFdB97a1 , Hexadecimal , "FdB97a1" , None) ; check ("0xfdB97A1" , 0xfdB97A1 , Hexadecimal , "fdB97A1" , None) ; check ("0x40u16" , 0x40u16 , Hexadecimal , "40" , Some (Ty :: U16)) ; check ("0xffi128" , 0xffi128 , Hexadecimal , "ff" , Some (Ty :: I128)) ; }
+    };
+}
+
+parse_hexadecimal!()

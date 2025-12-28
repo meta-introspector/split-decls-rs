@@ -1,15 +1,13 @@
 macro_rules! deps {
     () => {
-        PasswordParams!();
-        PasswordClient!();
-        PasswordClientBuilder!();
+        BasicClient!();
     };
 }
 
 macro_rules! impl_23 {
     () => {
         deps!();
-        impl PasswordClient { # [doc = " Builds a new `PasswordClient`."] # [doc = ""] # [doc = " See example at [`PasswordClientBuilder`]."] pub fn builder () -> PasswordClientBuilder { PasswordClientBuilder :: default () } # [doc = " Responds to the challenge with the supplied parameters."] # [doc = ""] # [doc = " The caller should use the returned string as an `Authorization` or"] # [doc = " `Proxy-Authorization` header value."] # [allow (unused_variables)] pub fn respond (& mut self , p : & PasswordParams) -> Result < String , String > { match self { # [cfg (feature = "basic-scheme")] Self :: Basic (c) => Ok (c . respond (p . username , p . password)) , # [cfg (feature = "digest-scheme")] Self :: Digest (c) => c . respond (p) , # [cfg (not (any (feature = "basic-scheme" , feature = "digest-scheme")))] _ => unreachable ! () , } } }
+        impl BasicClient { pub fn realm (& self) -> & str { & self . realm } # [doc = " Responds to the challenge with the supplied parameters."] # [doc = ""] # [doc = " This is functionally identical to [`encode_credentials`]; no parameters"] # [doc = " of the `BasicClient` are needed to produce the credentials."] # [inline] pub fn respond (& self , username : & str , password : & str) -> String { encode_credentials (username , password) } }
     };
 }
 

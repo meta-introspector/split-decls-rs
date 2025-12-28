@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        InvalidLength!();
         IvSizeUser!();
-        Iv!();
         InnerUser!();
+        InvalidLength!();
+        Iv!();
     };
 }
 

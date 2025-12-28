@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Interned!();
+        TaggedArcPtr!();
     };
 }
 
 macro_rules! impl_11 {
     () => {
         deps!();
-        impl Eq for Interned < str > { }
+        unsafe impl Send for TaggedArcPtr { }
     };
 }
 

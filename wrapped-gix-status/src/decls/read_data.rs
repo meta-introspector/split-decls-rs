@@ -1,0 +1,7 @@
+macro_rules! read_data {
+    () => {
+        # [doc = ""] pub mod read_data { use std :: sync :: atomic :: Ordering ; use gix_filter :: pipeline :: convert :: ToGitOutcome ; use crate :: AtomicU64 ; # [doc = " A stream with worktree file data."] pub struct Stream < 'a > { pub (crate) inner : ToGitOutcome < 'a , std :: fs :: File > , pub (crate) bytes : Option < & 'a AtomicU64 > , pub (crate) len : Option < u64 > , } impl < 'a > Stream < 'a > { # [doc = " Return the underlying byte-buffer if there is one."] # [doc = ""] # [doc = " If `None`, read from this instance like a stream."] # [doc = " Note that this method should only be called once to assure proper accounting of the amount of bytes read."] pub fn as_bytes (& self) -> Option < & 'a [u8] > { self . inner . as_bytes () . inspect (| v | { if let Some (bytes) = self . bytes { bytes . fetch_add (v . len () as u64 , Ordering :: Relaxed) ; } }) } # [doc = " Return the size of the stream in bytes if it is known in advance."] pub fn size (& self) -> Option < u64 > { self . len } } impl std :: io :: Read for Stream < '_ > { fn read (& mut self , buf : & mut [u8]) -> std :: io :: Result < usize > { let n = self . inner . read (buf) ? ; if let Some (bytes) = self . bytes { bytes . fetch_add (n as u64 , Ordering :: Relaxed) ; } Ok (n) } } }
+    };
+}
+
+read_data!()

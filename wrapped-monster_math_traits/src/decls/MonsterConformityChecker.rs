@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        MonsterConstants!();
-        BottPeriodicityTrait!();
         Declaration!();
+        BottPeriodicityTrait!();
+        MonsterConstants!();
     };
 }
 

@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        StreamFuture!();
+    };
+}
+
+macro_rules! impl_376 {
+    () => {
+        deps!();
+        impl < St : Stream + Unpin > StreamFuture < St > { pub (super) fn new (stream : St) -> Self { Self { stream : Some (stream) } } # [doc = " Acquires a reference to the underlying stream that this combinator is"] # [doc = " pulling from."] # [doc = ""] # [doc = " This method returns an `Option` to account for the fact that `StreamFuture`'s"] # [doc = " implementation of `Future::poll` consumes the underlying stream during polling"] # [doc = " in order to return it to the caller of `Future::poll` if the stream yielded"] # [doc = " an element."] pub fn get_ref (& self) -> Option < & St > { self . stream . as_ref () } # [doc = " Acquires a mutable reference to the underlying stream that this"] # [doc = " combinator is pulling from."] # [doc = ""] # [doc = " Note that care must be taken to avoid tampering with the state of the"] # [doc = " stream which may otherwise confuse this combinator."] # [doc = ""] # [doc = " This method returns an `Option` to account for the fact that `StreamFuture`'s"] # [doc = " implementation of `Future::poll` consumes the underlying stream during polling"] # [doc = " in order to return it to the caller of `Future::poll` if the stream yielded"] # [doc = " an element."] pub fn get_mut (& mut self) -> Option < & mut St > { self . stream . as_mut () } # [doc = " Acquires a pinned mutable reference to the underlying stream that this"] # [doc = " combinator is pulling from."] # [doc = ""] # [doc = " Note that care must be taken to avoid tampering with the state of the"] # [doc = " stream which may otherwise confuse this combinator."] # [doc = ""] # [doc = " This method returns an `Option` to account for the fact that `StreamFuture`'s"] # [doc = " implementation of `Future::poll` consumes the underlying stream during polling"] # [doc = " in order to return it to the caller of `Future::poll` if the stream yielded"] # [doc = " an element."] pub fn get_pin_mut (self : Pin < & mut Self >) -> Option < Pin < & mut St > > { self . get_mut () . stream . as_mut () . map (Pin :: new) } # [doc = " Consumes this combinator, returning the underlying stream."] # [doc = ""] # [doc = " Note that this may discard intermediate state of this combinator, so"] # [doc = " care should be taken to avoid losing resources when this is called."] # [doc = ""] # [doc = " This method returns an `Option` to account for the fact that `StreamFuture`'s"] # [doc = " implementation of `Future::poll` consumes the underlying stream during polling"] # [doc = " in order to return it to the caller of `Future::poll` if the stream yielded"] # [doc = " an element."] pub fn into_inner (self) -> Option < St > { self . stream } }
+    };
+}
+
+impl_376!()

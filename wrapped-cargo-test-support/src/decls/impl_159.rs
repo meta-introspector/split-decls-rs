@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        Execs!();
+    };
+}
+
+macro_rules! impl_159 {
+    () => {
+        deps!();
+        # [doc = " # Configure the process"] impl Execs { # [doc = " Forward subordinate process stdout/stderr to the terminal."] # [doc = " Useful for printf debugging of the tests."] # [doc = " CAUTION: CI will fail if you leave this in your test!"] # [allow (unused)] pub fn stream (& mut self) -> & mut Self { self . stream_output = true ; self } pub fn arg < T : AsRef < OsStr > > (& mut self , arg : T) -> & mut Self { if let Some (ref mut p) = self . process_builder { p . arg (arg) ; } self } pub fn args < T : AsRef < OsStr > > (& mut self , args : & [T]) -> & mut Self { if let Some (ref mut p) = self . process_builder { p . args (args) ; } self } pub fn cwd < T : AsRef < OsStr > > (& mut self , path : T) -> & mut Self { if let Some (ref mut p) = self . process_builder { if let Some (cwd) = p . get_cwd () { let new_path = cwd . join (path . as_ref ()) ; p . cwd (new_path) ; } else { p . cwd (path) ; } } self } pub fn env < T : AsRef < OsStr > > (& mut self , key : & str , val : T) -> & mut Self { if let Some (ref mut p) = self . process_builder { p . env (key , val) ; } self } pub fn env_remove (& mut self , key : & str) -> & mut Self { if let Some (ref mut p) = self . process_builder { p . env_remove (key) ; } self } # [doc = " Enables nightly features for testing"] # [doc = ""] # [doc = " The list of reasons should be why nightly cargo is needed. If it is"] # [doc = " because of an unstable feature put the name of the feature as the reason,"] # [doc = " e.g. `&[\"print-im-a-teapot\"]`"] pub fn masquerade_as_nightly_cargo (& mut self , reasons : & [& str]) -> & mut Self { if let Some (ref mut p) = self . process_builder { p . masquerade_as_nightly_cargo (reasons) ; } self } # [doc = " Overrides the crates.io URL for testing."] # [doc = ""] # [doc = " Can be used for testing crates-io functionality where alt registries"] # [doc = " cannot be used."] pub fn replace_crates_io (& mut self , url : & Url) -> & mut Self { if let Some (ref mut p) = self . process_builder { p . env ("__CARGO_TEST_CRATES_IO_URL_DO_NOT_USE_THIS" , url . as_str ()) ; } self } pub fn overlay_registry (& mut self , url : & Url , path : & str) -> & mut Self { if let Some (ref mut p) = self . process_builder { let env_value = format ! ("{}={}" , url , path) ; p . env ("__CARGO_TEST_DEPENDENCY_CONFUSION_VULNERABILITY_DO_NOT_USE_THIS" , env_value ,) ; } self } pub fn enable_split_debuginfo_packed (& mut self) -> & mut Self { self . env ("CARGO_PROFILE_DEV_SPLIT_DEBUGINFO" , "packed") . env ("CARGO_PROFILE_TEST_SPLIT_DEBUGINFO" , "packed") . env ("CARGO_PROFILE_RELEASE_SPLIT_DEBUGINFO" , "packed") . env ("CARGO_PROFILE_BENCH_SPLIT_DEBUGINFO" , "packed") ; self } pub fn enable_mac_dsym (& mut self) -> & mut Self { if cfg ! (target_os = "macos") { return self . enable_split_debuginfo_packed () ; } self } }
+    };
+}
+
+impl_159!()

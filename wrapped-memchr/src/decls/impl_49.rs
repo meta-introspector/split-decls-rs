@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        Runner!();
+    };
+}
+
+macro_rules! impl_49 {
+    () => {
+        deps!();
+        impl Runner { # [doc = " Create a new test runner for forward and reverse substring search"] # [doc = " implementations."] pub (crate) fn new () -> Runner { Runner { fwd : None , rev : None } } # [doc = " Run all tests. This panics on the first failure."] # [doc = ""] # [doc = " If the implementation being tested returns `None` for a particular"] # [doc = " haystack/needle combination, then that test is skipped."] # [doc = ""] # [doc = " This runs tests on both the forward and reverse implementations given."] # [doc = " If either (or both) are missing, then tests for that implementation are"] # [doc = " skipped."] pub (crate) fn run (self) { if let Some (mut fwd) = self . fwd { for seed in SEEDS . iter () { for t in seed . generate () { match fwd (t . haystack . as_bytes () , t . needle . as_bytes ()) { None => continue , Some (result) => { assert_eq ! (t . fwd , result , "FORWARD, needle: {:?}, haystack: {:?}" , t . needle , t . haystack ,) ; } } } } } if let Some (mut rev) = self . rev { for seed in SEEDS . iter () { for t in seed . generate () { match rev (t . haystack . as_bytes () , t . needle . as_bytes ()) { None => continue , Some (result) => { assert_eq ! (t . rev , result , "REVERSE, needle: {:?}, haystack: {:?}" , t . needle , t . haystack ,) ; } } } } } } # [doc = " Set the implementation for forward substring search."] # [doc = ""] # [doc = " If the closure returns `None`, then it is assumed that the given"] # [doc = " test cannot be applied to the particular implementation and it is"] # [doc = " skipped. For example, if a particular implementation only supports"] # [doc = " needles or haystacks for some minimum length."] # [doc = ""] # [doc = " If this is not set, then forward substring search is not tested."] pub (crate) fn fwd (mut self , search : impl FnMut (& [u8] , & [u8]) -> Option < Option < usize > > + 'static ,) -> Runner { self . fwd = Some (Box :: new (search)) ; self } # [doc = " Set the implementation for reverse substring search."] # [doc = ""] # [doc = " If the closure returns `None`, then it is assumed that the given"] # [doc = " test cannot be applied to the particular implementation and it is"] # [doc = " skipped. For example, if a particular implementation only supports"] # [doc = " needles or haystacks for some minimum length."] # [doc = ""] # [doc = " If this is not set, then reverse substring search is not tested."] pub (crate) fn rev (mut self , search : impl FnMut (& [u8] , & [u8]) -> Option < Option < usize > > + 'static ,) -> Runner { self . rev = Some (Box :: new (search)) ; self } }
+    };
+}
+
+impl_49!()

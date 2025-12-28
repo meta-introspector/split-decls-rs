@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         DirectoryRoot!();
-        Result!();
         ArgsInHash!();
+        Result!();
     };
 }
 

@@ -1,0 +1,19 @@
+macro_rules! deps {
+    () => {
+        NaiveDate!();
+        Local!();
+        FixedOffset!();
+        Utc!();
+        Duration!();
+        DateTime!();
+    };
+}
+
+macro_rules! test_from_system_time {
+    () => {
+        deps!();
+        # [test] # [cfg (all (feature = "std" , not (all (target_arch = "wasm32" , target_os = "wasi"))))] fn test_from_system_time () { use std :: time :: { Duration , SystemTime , UNIX_EPOCH } ; let nanos = 999_999_000 ; let epoch = Utc . with_ymd_and_hms (1970 , 1 , 1 , 0 , 0 , 0) . unwrap () ; assert_eq ! (DateTime ::< Utc >:: from (UNIX_EPOCH) , epoch) ; assert_eq ! (DateTime ::< Utc >:: from (UNIX_EPOCH + Duration :: new (999_999_999 , nanos)) , Utc . from_local_datetime (& NaiveDate :: from_ymd_opt (2001 , 9 , 9) . unwrap () . and_hms_nano_opt (1 , 46 , 39 , nanos) . unwrap ()) . unwrap ()) ; assert_eq ! (DateTime ::< Utc >:: from (UNIX_EPOCH - Duration :: new (999_999_999 , nanos)) , Utc . from_local_datetime (& NaiveDate :: from_ymd_opt (1938 , 4 , 24) . unwrap () . and_hms_nano_opt (22 , 13 , 20 , 1_000) . unwrap ()) . unwrap ()) ; assert_eq ! (SystemTime :: from (epoch) , UNIX_EPOCH) ; assert_eq ! (SystemTime :: from (Utc . from_local_datetime (& NaiveDate :: from_ymd_opt (2001 , 9 , 9) . unwrap () . and_hms_nano_opt (1 , 46 , 39 , nanos) . unwrap ()) . unwrap ()) , UNIX_EPOCH + Duration :: new (999_999_999 , nanos)) ; assert_eq ! (SystemTime :: from (Utc . from_local_datetime (& NaiveDate :: from_ymd_opt (1938 , 4 , 24) . unwrap () . and_hms_nano_opt (22 , 13 , 20 , 1_000) . unwrap ()) . unwrap ()) , UNIX_EPOCH - Duration :: new (999_999_999 , nanos)) ; # [cfg (feature = "clock")] { assert_eq ! (SystemTime :: from (epoch . with_timezone (& Local)) , UNIX_EPOCH) ; } assert_eq ! (SystemTime :: from (epoch . with_timezone (& FixedOffset :: east_opt (32400) . unwrap ())) , UNIX_EPOCH) ; assert_eq ! (SystemTime :: from (epoch . with_timezone (& FixedOffset :: west_opt (28800) . unwrap ())) , UNIX_EPOCH) ; }
+    };
+}
+
+test_from_system_time!()

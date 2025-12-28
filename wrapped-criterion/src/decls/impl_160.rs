@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        DurationFormatter!();
+    };
+}
+
+macro_rules! impl_160 {
+    () => {
+        deps!();
+        impl DurationFormatter { fn bytes_per_second (& self , bytes : f64 , typical : f64 , values : & mut [f64]) -> & 'static str { let bytes_per_second = bytes * (1e9 / typical) ; let (denominator , unit) = if bytes_per_second < 1024.0 { (1.0 , "  B/s") } else if bytes_per_second < 1024.0 * 1024.0 { (1024.0 , "KiB/s") } else if bytes_per_second < 1024.0 * 1024.0 * 1024.0 { (1024.0 * 1024.0 , "MiB/s") } else { (1024.0 * 1024.0 * 1024.0 , "GiB/s") } ; for val in values { let bytes_per_second = bytes * (1e9 / * val) ; * val = bytes_per_second / denominator ; } unit } fn bytes_per_second_decimal (& self , bytes : f64 , typical : f64 , values : & mut [f64] ,) -> & 'static str { let bytes_per_second = bytes * (1e9 / typical) ; let (denominator , unit) = if bytes_per_second < 1000.0 { (1.0 , "  B/s") } else if bytes_per_second < 1000.0 * 1000.0 { (1000.0 , "KB/s") } else if bytes_per_second < 1000.0 * 1000.0 * 1000.0 { (1000.0 * 1000.0 , "MB/s") } else { (1000.0 * 1000.0 * 1000.0 , "GB/s") } ; for val in values { let bytes_per_second = bytes * (1e9 / * val) ; * val = bytes_per_second / denominator ; } unit } fn elements_per_second (& self , elems : f64 , typical : f64 , values : & mut [f64]) -> & 'static str { let elems_per_second = elems * (1e9 / typical) ; let (denominator , unit) = if elems_per_second < 1000.0 { (1.0 , " elem/s") } else if elems_per_second < 1000.0 * 1000.0 { (1000.0 , "Kelem/s") } else if elems_per_second < 1000.0 * 1000.0 * 1000.0 { (1000.0 * 1000.0 , "Melem/s") } else { (1000.0 * 1000.0 * 1000.0 , "Gelem/s") } ; for val in values { let elems_per_second = elems * (1e9 / * val) ; * val = elems_per_second / denominator ; } unit } fn bits_per_second (& self , bits : f64 , typical : f64 , values : & mut [f64]) -> & 'static str { let bits_per_second = bits * (1e9 / typical) ; let (denominator , unit) = if bits_per_second < 1000.0 { (1.0 , "  b/s") } else if bits_per_second < 1000.0 * 1000.0 { (1000.0 , "Kb/s") } else if bits_per_second < 1000.0 * 1000.0 * 1000.0 { (1000.0 * 1000.0 , "Mb/s") } else { (1000.0 * 1000.0 * 1000.0 , "Gb/s") } ; for val in values { let bits_per_second = bits * (1e9 / * val) ; * val = bits_per_second / denominator ; } unit } }
+    };
+}
+
+impl_160!()

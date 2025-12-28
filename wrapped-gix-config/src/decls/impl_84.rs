@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        Section!();
+        Body!();
+    };
+}
+
+macro_rules! impl_84 {
+    () => {
+        deps!();
+        impl < 'a > Deref for Section < 'a > { type Target = Body < 'a > ; fn deref (& self) -> & Self :: Target { & self . body } }
+    };
+}
+
+impl_84!()

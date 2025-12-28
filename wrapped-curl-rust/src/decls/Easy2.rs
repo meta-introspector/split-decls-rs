@@ -1,0 +1,17 @@
+macro_rules! deps {
+    () => {
+        Inner!();
+        WriteError!();
+        Handler!();
+        Easy!();
+    };
+}
+
+macro_rules! Easy2 {
+    () => {
+        deps!();
+        # [doc = " Raw bindings to a libcurl \"easy session\"."] # [doc = ""] # [doc = " This type corresponds to the `CURL` type in libcurl, and is probably what"] # [doc = " you want for just sending off a simple HTTP request and fetching a response."] # [doc = " Each easy handle can be thought of as a large builder before calling the"] # [doc = " final `perform` function."] # [doc = ""] # [doc = " There are many many configuration options for each `Easy2` handle, and they"] # [doc = " should all have their own documentation indicating what it affects and how"] # [doc = " it interacts with other options. Some implementations of libcurl can use"] # [doc = " this handle to interact with many different protocols, although by default"] # [doc = " this crate only guarantees the HTTP/HTTPS protocols working."] # [doc = ""] # [doc = " Note that almost all methods on this structure which configure various"] # [doc = " properties return a `Result`. This is largely used to detect whether the"] # [doc = " underlying implementation of libcurl actually implements the option being"] # [doc = " requested. If you're linked to a version of libcurl which doesn't support"] # [doc = " the option, then an error will be returned. Some options also perform some"] # [doc = " validation when they're set, and the error is returned through this vector."] # [doc = ""] # [doc = " Note that historically this library contained an `Easy` handle so this one's"] # [doc = " called `Easy2`. The major difference between the `Easy` type is that an"] # [doc = " `Easy2` structure uses a trait instead of closures for all of the callbacks"] # [doc = " that curl can invoke. The `Easy` type is actually built on top of this"] # [doc = " `Easy` type, and this `Easy2` type can be more flexible in some situations"] # [doc = " due to the generic parameter."] # [doc = ""] # [doc = " There's not necessarily a right answer for which type is correct to use, but"] # [doc = " as a general rule of thumb `Easy` is typically a reasonable choice for"] # [doc = " synchronous I/O and `Easy2` is a good choice for asynchronous I/O."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " use curl::easy::{Easy2, Handler, WriteError};"] # [doc = ""] # [doc = " struct Collector(Vec<u8>);"] # [doc = ""] # [doc = " impl Handler for Collector {"] # [doc = "     fn write(&mut self, data: &[u8]) -> Result<usize, WriteError> {"] # [doc = "         self.0.extend_from_slice(data);"] # [doc = "         Ok(data.len())"] # [doc = "     }"] # [doc = " }"] # [doc = ""] # [doc = " let mut easy = Easy2::new(Collector(Vec::new()));"] # [doc = " easy.get(true).unwrap();"] # [doc = " easy.url(\"https://rust-lang.org/\").unwrap();"] # [doc = " easy.perform().unwrap();"] # [doc = ""] # [doc = " assert_eq!(easy.response_code().unwrap(), 200);"] # [doc = " let contents = easy.get_ref();"] # [doc = " println!(\"{}\", String::from_utf8_lossy(&contents.0));"] # [doc = " ```"] pub struct Easy2 < H > { inner : Box < Inner < H > > , }
+    };
+}
+
+Easy2!()

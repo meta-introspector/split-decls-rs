@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        Box!();
+    };
+}
+
+macro_rules! error {
+    () => {
+        deps!();
+        # [cfg (feature = "std")] mod error { use std :: error :: Error ; use super :: Box ; # [cfg (not (no_global_oom_handling))] impl < 'a , E : Error + 'a > From < E > for Box < dyn Error + 'a > { # [doc = " Converts a type of [`Error`] into a box of dyn [`Error`]."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " use std::error::Error;"] # [doc = " use std::fmt;"] # [doc = " use std::mem;"] # [doc = ""] # [doc = " use allocator_api2::boxed::Box;"] # [doc = ""] # [doc = " #[derive(Debug)]"] # [doc = " struct AnError;"] # [doc = ""] # [doc = " impl fmt::Display for AnError {"] # [doc = "     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {"] # [doc = "         write!(f, \"An error\")"] # [doc = "     }"] # [doc = " }"] # [doc = ""] # [doc = " impl Error for AnError {}"] # [doc = ""] # [doc = " let an_error = AnError;"] # [doc = " assert!(0 == mem::size_of_val(&an_error));"] # [doc = " let a_boxed_error = Box::<dyn Error>::from(an_error);"] # [doc = " assert!(mem::size_of::<Box<dyn Error>>() == mem::size_of_val(&a_boxed_error))"] # [doc = " ```"] # [inline (always)] fn from (err : E) -> Box < dyn Error + 'a > { unsafe { Box :: from_raw (Box :: leak (Box :: new (err))) } } } # [cfg (not (no_global_oom_handling))] impl < 'a , E : Error + Send + Sync + 'a > From < E > for Box < dyn Error + Send + Sync + 'a > { # [doc = " Converts a type of [`Error`] + [`Send`] + [`Sync`] into a box of"] # [doc = " dyn [`Error`] + [`Send`] + [`Sync`]."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " use std::error::Error;"] # [doc = " use std::fmt;"] # [doc = " use std::mem;"] # [doc = ""] # [doc = " use allocator_api2::boxed::Box;"] # [doc = ""] # [doc = " #[derive(Debug)]"] # [doc = " struct AnError;"] # [doc = ""] # [doc = " impl fmt::Display for AnError {"] # [doc = "     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {"] # [doc = "         write!(f, \"An error\")"] # [doc = "     }"] # [doc = " }"] # [doc = ""] # [doc = " impl Error for AnError {}"] # [doc = ""] # [doc = " unsafe impl Send for AnError {}"] # [doc = ""] # [doc = " unsafe impl Sync for AnError {}"] # [doc = ""] # [doc = " let an_error = AnError;"] # [doc = " assert!(0 == mem::size_of_val(&an_error));"] # [doc = " let a_boxed_error = Box::<dyn Error + Send + Sync>::from(an_error);"] # [doc = " assert!("] # [doc = "     mem::size_of::<Box<dyn Error + Send + Sync>>() == mem::size_of_val(&a_boxed_error))"] # [doc = " ```"] # [inline (always)] fn from (err : E) -> Box < dyn Error + Send + Sync + 'a > { unsafe { Box :: from_raw (Box :: leak (Box :: new (err))) } } } impl < T : Error > Error for Box < T > { # [inline (always)] fn source (& self) -> Option < & (dyn Error + 'static) > { Error :: source (& * * self) } } }
+    };
+}
+
+error!()

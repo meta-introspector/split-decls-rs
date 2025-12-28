@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        BinaryHeapInner!();
+        Max!();
+        Cell!();
+    };
+}
+
+macro_rules! BinaryHeap {
+    () => {
+        deps!();
+        # [doc = " A priority queue implemented with a binary heap."] # [doc = ""] # [doc = " This can be either a min-heap or a max-heap."] # [doc = ""] # [doc = " It is a logic error for an item to be modified in such a way that the item's ordering relative"] # [doc = " to any other item, as determined by the `Ord` trait, changes while it is in the heap. This is"] # [doc = " normally only possible through `Cell`, `RefCell`, global state, I/O, or unsafe code."] # [doc = ""] # [doc = " ```"] # [doc = " use heapless::binary_heap::{BinaryHeap, Max};"] # [doc = ""] # [doc = " let mut heap: BinaryHeap<_, Max, 8> = BinaryHeap::new();"] # [doc = ""] # [doc = " // We can use peek to look at the next item in the heap. In this case,"] # [doc = " // there's no items in there yet so we get None."] # [doc = " assert_eq!(heap.peek(), None);"] # [doc = ""] # [doc = " // Let's add some scores..."] # [doc = " heap.push(1).unwrap();"] # [doc = " heap.push(5).unwrap();"] # [doc = " heap.push(2).unwrap();"] # [doc = ""] # [doc = " // Now peek shows the most important item in the heap."] # [doc = " assert_eq!(heap.peek(), Some(&5));"] # [doc = ""] # [doc = " // We can check the length of a heap."] # [doc = " assert_eq!(heap.len(), 3);"] # [doc = ""] # [doc = " // We can iterate over the items in the heap, although they are returned in"] # [doc = " // a random order."] # [doc = " for x in &heap {"] # [doc = "     println!(\"{}\", x);"] # [doc = " }"] # [doc = ""] # [doc = " // If we instead pop these scores, they should come back in order."] # [doc = " assert_eq!(heap.pop(), Some(5));"] # [doc = " assert_eq!(heap.pop(), Some(2));"] # [doc = " assert_eq!(heap.pop(), Some(1));"] # [doc = " assert_eq!(heap.pop(), None);"] # [doc = ""] # [doc = " // We can clear the heap of any remaining items."] # [doc = " heap.clear();"] # [doc = ""] # [doc = " // The heap should now be empty."] # [doc = " assert!(heap.is_empty())"] # [doc = " ```"] pub type BinaryHeap < T , K , const N : usize > = BinaryHeapInner < T , K , OwnedVecStorage < T , N > > ;
+    };
+}
+
+BinaryHeap!()

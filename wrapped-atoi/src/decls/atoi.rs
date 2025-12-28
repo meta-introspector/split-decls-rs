@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        FromRadix10Signed!();
         FromRadix10Checked!();
-        FromRadix10!();
+        FromRadix10Signed!();
         FromRadix10SignedChecked!();
+        FromRadix10!();
     };
 }
 

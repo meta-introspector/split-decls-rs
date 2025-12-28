@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        MappedRwLockReadGuard!();
+        RawRwLock!();
+    };
+}
+
+macro_rules! impl_185 {
+    () => {
+        deps!();
+        impl < 'a , R : RawRwLock + 'a , T : ? Sized + 'a > MappedRwLockReadGuard < 'a , R , T > { # [doc = " Make a new `MappedRwLockReadGuard` for a component of the locked data."] # [doc = ""] # [doc = " This operation cannot fail as the `MappedRwLockReadGuard` passed"] # [doc = " in already locked the data."] # [doc = ""] # [doc = " This is an associated function that needs to be"] # [doc = " used as `MappedRwLockReadGuard::map(...)`. A method would interfere with methods of"] # [doc = " the same name on the contents of the locked data."] # [inline] pub fn map < U : ? Sized , F > (s : Self , f : F) -> MappedRwLockReadGuard < 'a , R , U > where F : FnOnce (& T) -> & U , { let raw = s . raw ; let data = f (unsafe { & * s . data }) ; mem :: forget (s) ; MappedRwLockReadGuard { raw , data , marker : PhantomData , } } # [doc = " Attempts to make  a new `MappedRwLockReadGuard` for a component of the"] # [doc = " locked data. The original guard is return if the closure returns `None`."] # [doc = ""] # [doc = " This operation cannot fail as the `MappedRwLockReadGuard` passed"] # [doc = " in already locked the data."] # [doc = ""] # [doc = " This is an associated function that needs to be"] # [doc = " used as `MappedRwLockReadGuard::try_map(...)`. A method would interfere with methods of"] # [doc = " the same name on the contents of the locked data."] # [inline] pub fn try_map < U : ? Sized , F > (s : Self , f : F) -> Result < MappedRwLockReadGuard < 'a , R , U > , Self > where F : FnOnce (& T) -> Option < & U > , { let raw = s . raw ; let data = match f (unsafe { & * s . data }) { Some (data) => data , None => return Err (s) , } ; mem :: forget (s) ; Ok (MappedRwLockReadGuard { raw , data , marker : PhantomData , }) } # [doc = " Attempts to make  a new `MappedRwLockReadGuard` for a component of the"] # [doc = " locked data. The original guard is returned alongside arbitrary user data"] # [doc = " if the closure returns `Err`."] # [doc = ""] # [doc = " This operation cannot fail as the `MappedRwLockReadGuard` passed"] # [doc = " in already locked the data."] # [doc = ""] # [doc = " This is an associated function that needs to be"] # [doc = " used as `MappedRwLockReadGuard::try_map_or_err(...)`. A method would interfere with methods of"] # [doc = " the same name on the contents of the locked data."] # [inline] pub fn try_map_or_else < U : ? Sized , F , E > (s : Self , f : F ,) -> Result < MappedRwLockReadGuard < 'a , R , U > , (Self , E) > where F : FnOnce (& T) -> Result < & U , E > , { let raw = s . raw ; let data = match f (unsafe { & * s . data }) { Ok (data) => data , Err (e) => return Err ((s , e)) , } ; mem :: forget (s) ; Ok (MappedRwLockReadGuard { raw , data , marker : PhantomData , }) } }
+    };
+}
+
+impl_185!()

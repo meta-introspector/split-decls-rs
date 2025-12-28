@@ -1,0 +1,22 @@
+macro_rules! deps {
+    () => {
+        DebugAddrIndex!();
+        Error!();
+        RangeListsFormat!();
+        Result!();
+        RawRange!();
+        Reader!();
+        RawRngListEntry!();
+        Encoding!();
+        ReaderOffset!();
+    };
+}
+
+macro_rules! impl_570 {
+    () => {
+        deps!();
+        impl < T : ReaderOffset > RawRngListEntry < T > { # [doc = " Parse a range entry from `.debug_rnglists`"] fn parse < R : Reader < Offset = T > > (input : & mut R , encoding : Encoding , format : RangeListsFormat ,) -> Result < Option < Self > > { Ok (match format { RangeListsFormat :: Bare => { let range = RawRange :: parse (input , encoding . address_size) ? ; if range . is_end () { None } else if range . is_base_address (encoding . address_size) { Some (RawRngListEntry :: BaseAddress { addr : range . end }) } else { Some (RawRngListEntry :: AddressOrOffsetPair { begin : range . begin , end : range . end , }) } } RangeListsFormat :: Rle => match constants :: DwRle (input . read_u8 () ?) { constants :: DW_RLE_end_of_list => None , constants :: DW_RLE_base_addressx => Some (RawRngListEntry :: BaseAddressx { addr : DebugAddrIndex (input . read_uleb128 () . and_then (R :: Offset :: from_u64) ?) , }) , constants :: DW_RLE_startx_endx => Some (RawRngListEntry :: StartxEndx { begin : DebugAddrIndex (input . read_uleb128 () . and_then (R :: Offset :: from_u64) ?) , end : DebugAddrIndex (input . read_uleb128 () . and_then (R :: Offset :: from_u64) ?) , }) , constants :: DW_RLE_startx_length => Some (RawRngListEntry :: StartxLength { begin : DebugAddrIndex (input . read_uleb128 () . and_then (R :: Offset :: from_u64) ?) , length : input . read_uleb128 () ? , }) , constants :: DW_RLE_offset_pair => Some (RawRngListEntry :: OffsetPair { begin : input . read_uleb128 () ? , end : input . read_uleb128 () ? , }) , constants :: DW_RLE_base_address => Some (RawRngListEntry :: BaseAddress { addr : input . read_address (encoding . address_size) ? , }) , constants :: DW_RLE_start_end => Some (RawRngListEntry :: StartEnd { begin : input . read_address (encoding . address_size) ? , end : input . read_address (encoding . address_size) ? , }) , constants :: DW_RLE_start_length => Some (RawRngListEntry :: StartLength { begin : input . read_address (encoding . address_size) ? , length : input . read_uleb128 () ? , }) , entry => { return Err (Error :: UnknownRangeListsEntry (entry)) ; } } , }) } }
+    };
+}
+
+impl_570!()

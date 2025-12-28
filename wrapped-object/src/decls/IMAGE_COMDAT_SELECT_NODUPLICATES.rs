@@ -1,0 +1,7 @@
+macro_rules! IMAGE_COMDAT_SELECT_NODUPLICATES {
+    () => {
+        pub const IMAGE_COMDAT_SELECT_NODUPLICATES : u8 = 1 ;
+    };
+}
+
+IMAGE_COMDAT_SELECT_NODUPLICATES!()

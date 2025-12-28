@@ -1,0 +1,24 @@
+macro_rules! deps {
+    () => {
+        UnsignedInteger!();
+        ExtraHeader!();
+        ProxyAuthMethod!();
+        FollowRedirects!();
+        SslVersion!();
+        String!();
+        Http!();
+        Tree!();
+        Path!();
+        Boolean!();
+        Version!();
+    };
+}
+
+macro_rules! impl_662 {
+    () => {
+        deps!();
+        impl Http { # [doc = " The `http.sslVersion` key."] pub const SSL_VERSION : SslVersion = SslVersion :: new_ssl_version ("sslVersion" , & config :: Tree :: HTTP) . with_environment_override ("GIT_SSL_VERSION") . with_deviation ("accepts the new 'default' value which means to use the curl default just like the empty string does" ,) ; # [doc = " The `http.sslVerify` key."] pub const SSL_VERIFY : keys :: Boolean = keys :: Boolean :: new_boolean ("sslVerify" , & config :: Tree :: HTTP) . with_note ("also see the `gitoxide.http.sslNoVerify` key") ; # [doc = " The `http.proxy` key."] pub const PROXY : keys :: String = keys :: String :: new_string ("proxy" , & config :: Tree :: HTTP) . with_deviation ("fails on strings with illformed UTF-8") ; # [doc = " The `http.proxyAuthMethod` key."] pub const PROXY_AUTH_METHOD : ProxyAuthMethod = ProxyAuthMethod :: new_proxy_auth_method ("proxyAuthMethod" , & config :: Tree :: HTTP) . with_deviation ("implemented like git, but never actually tried") ; # [doc = " The `http.version` key."] pub const VERSION : Version = Version :: new_with_validate ("version" , & config :: Tree :: HTTP , validate :: Version) . with_deviation ("fails on illformed UTF-8") ; # [doc = " The `http.userAgent` key."] pub const USER_AGENT : keys :: String = keys :: String :: new_string ("userAgent" , & config :: Tree :: HTTP) . with_deviation ("fails on illformed UTF-8") ; # [doc = " The `http.extraHeader` key."] pub const EXTRA_HEADER : ExtraHeader = ExtraHeader :: new_with_validate ("extraHeader" , & config :: Tree :: HTTP , validate :: ExtraHeader) . with_deviation ("fails on illformed UTF-8, without leniency") ; # [doc = " The `http.followRedirects` key."] pub const FOLLOW_REDIRECTS : FollowRedirects = FollowRedirects :: new_with_validate ("followRedirects" , & config :: Tree :: HTTP , validate :: FollowRedirects) ; # [doc = " The `http.lowSpeedTime` key."] pub const LOW_SPEED_TIME : keys :: UnsignedInteger = keys :: UnsignedInteger :: new_unsigned_integer ("lowSpeedTime" , & config :: Tree :: HTTP) . with_deviation ("fails on negative values") ; # [doc = " The `http.lowSpeedLimit` key."] pub const LOW_SPEED_LIMIT : keys :: UnsignedInteger = keys :: UnsignedInteger :: new_unsigned_integer ("lowSpeedLimit" , & config :: Tree :: HTTP) . with_deviation ("fails on negative values") ; # [doc = " The `http.schannelUseSSLCAInfo` key."] pub const SCHANNEL_USE_SSL_CA_INFO : keys :: Boolean = keys :: Boolean :: new_boolean ("schannelUseSSLCAInfo" , & config :: Tree :: HTTP) . with_deviation ("only used as switch internally to turn off using the sslCAInfo, unconditionally. If unset, it has no effect, whereas in `git` it defaults to false.") ; # [doc = " The `http.sslCAInfo` key."] pub const SSL_CA_INFO : keys :: Path = keys :: Path :: new_path ("sslCAInfo" , & config :: Tree :: HTTP) . with_environment_override ("GIT_SSL_CAINFO") ; # [doc = " The `http.schannelCheckRevoke` key."] pub const SCHANNEL_CHECK_REVOKE : keys :: Boolean = keys :: Boolean :: new_boolean ("schannelCheckRevoke" , & config :: Tree :: HTTP) ; }
+    };
+}
+
+impl_662!()

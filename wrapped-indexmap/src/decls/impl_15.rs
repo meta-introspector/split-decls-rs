@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Bucket!();
+        IndexMap!();
     };
 }
 
 macro_rules! impl_15 {
     () => {
         deps!();
-        impl < K , V > Bucket < K , V > { fn key_ref (& self) -> & K { & self . key } fn value_ref (& self) -> & V { & self . value } fn value_mut (& mut self) -> & mut V { & mut self . value } fn key (self) -> K { self . key } fn value (self) -> V { self . value } fn key_value (self) -> (K , V) { (self . key , self . value) } fn refs (& self) -> (& K , & V) { (& self . key , & self . value) } fn ref_mut (& mut self) -> (& K , & mut V) { (& self . key , & mut self . value) } fn muts (& mut self) -> (& mut K , & mut V) { (& mut self . key , & mut self . value) } }
+        # [doc = " <div class=\"stab deprecated\"><span class=\"emoji\">👎</span><span>Deprecated: use borsh's <code>indexmap</code> feature instead.</span></div>"] impl < K , V , S > BorshDeserialize for IndexMap < K , V , S > where K : BorshDeserialize + Eq + Hash , V : BorshDeserialize , S : BuildHasher + Default , { # [inline] fn deserialize_reader < R : Read > (reader : & mut R) -> Result < Self > { check_zst :: < K > () ? ; let vec = < Vec < (K , V) > > :: deserialize_reader (reader) ? ; Ok (vec . into_iter () . collect :: < IndexMap < K , V , S > > ()) } }
     };
 }
 

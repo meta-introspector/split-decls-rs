@@ -1,5 +1,12 @@
+macro_rules! deps {
+    () => {
+        FromHexError!();
+    };
+}
+
 macro_rules! decode_to_slice {
     () => {
+        deps!();
         # [doc = " Decode a hex string into a mutable bytes slice."] # [doc = ""] # [doc = " Both, upper and lower case characters are valid in the input string and can"] # [doc = " even be mixed (e.g. `f9b4ca`, `F9B4CA` and `f9B4Ca` are all valid strings)."] # [doc = ""] # [doc = " # Example"] # [doc = ""] # [doc = " ```"] # [doc = " let mut bytes = [0u8; 4];"] # [doc = " assert_eq!(hex::decode_to_slice(\"6b697769\", &mut bytes as &mut [u8]), Ok(()));"] # [doc = " assert_eq!(&bytes, b\"kiwi\");"] # [doc = " ```"] # [inline] pub fn decode_to_slice < T : AsRef < [u8] > > (data : T , out : & mut [u8]) -> Result < () , FromHexError > { let data = data . as_ref () ; if data . len () % 2 != 0 { return Err (FromHexError :: OddLength) ; } if data . len () / 2 != out . len () { return Err (FromHexError :: InvalidStringLength) ; } for (i , (data , byte)) in data . chunks_exact (2) . zip (out) . enumerate () { * byte = val (data , 2 * i) ? ; } Ok (()) }
     };
 }

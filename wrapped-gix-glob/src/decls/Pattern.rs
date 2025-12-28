@@ -1,6 +1,13 @@
+macro_rules! deps {
+    () => {
+        Mapping!();
+    };
+}
+
 macro_rules! Pattern {
     () => {
-        # [doc = " A glob pattern optimized for matching paths relative to a root directory."] # [doc = ""] # [doc = " For normal globbing, use [`wildmatch()`] instead."] # [derive (PartialEq , Eq , Debug , Hash , Ord , PartialOrd , Clone)] # [cfg_attr (feature = "serde" , derive (serde :: Serialize , serde :: Deserialize))] pub struct Pattern { # [doc = " the actual pattern bytes"] pub text : BString , # [doc = " Additional information to help accelerate pattern matching."] pub mode : pattern :: Mode , # [doc = " The position in `text` with the first wildcard character, or `None` if there is no wildcard at all."] pub first_wildcard_pos : Option < usize > , }
+        deps!();
+        # [doc = " A trait to convert bytes into patterns and their associated value."] # [doc = ""] # [doc = " This is used for `gitattributes` which have a value, and `gitignore` which don't."] pub trait Pattern : Clone + PartialEq + Eq + std :: fmt :: Debug + std :: hash :: Hash + Ord + PartialOrd + Default { # [doc = " The value associated with a pattern."] type Value : PartialEq + Eq + std :: fmt :: Debug + std :: hash :: Hash + Ord + PartialOrd + Clone ; # [doc = " Parse all patterns in `bytes` line by line, ignoring lines with errors, and collect them."] fn bytes_to_patterns (& self , bytes : & [u8] , source : & Path) -> Vec < pattern :: Mapping < Self :: Value > > ; }
     };
 }
 

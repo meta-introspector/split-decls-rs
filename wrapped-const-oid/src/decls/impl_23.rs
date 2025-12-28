@@ -1,14 +1,19 @@
 macro_rules! deps {
     () => {
-        ObjectIdentifierRef!();
+        State!();
+        Result!();
         ObjectIdentifier!();
+        Error!();
+        Buffer!();
+        Arc!();
+        Encoder!();
     };
 }
 
 macro_rules! impl_23 {
     () => {
         deps!();
-        impl ObjectIdentifierRef { # [doc = " Create an [`ObjectIdentifierRef`], validating that the provided byte slice contains a valid"] # [doc = " BER/DER encoding."] pub fn from_bytes (ber : & [u8]) -> Result < & Self > { let mut arcs = Arcs :: new (ber) ; while arcs . try_next () ? . is_some () { } Ok (Self :: from_bytes_unchecked (ber)) } # [doc = " Create an [`ObjectIdentifierRef`] from the given byte slice without first checking that it"] # [doc = " contains valid BER/DER."] pub (crate) const fn from_bytes_unchecked (ber : & [u8]) -> & Self { debug_assert ! (! ber . is_empty ()) ; # [allow (unsafe_code)] unsafe { & * (ber as * const [u8] as * const ObjectIdentifierRef) } } # [doc = " Get the BER/DER serialization of this OID as bytes."] # [doc = ""] # [doc = " Note that this encoding omits the ASN.1 tag/length, and only contains the value portion of"] # [doc = " the encoded OID."] pub const fn as_bytes (& self) -> & [u8] { & self . ber } # [doc = " Return the arc with the given index, if it exists."] pub fn arc (& self , index : usize) -> Option < Arc > { self . arcs () . nth (index) } # [doc = " Iterate over the arcs (a.k.a. nodes) of an [`ObjectIdentifier`]."] # [doc = ""] # [doc = " Returns [`Arcs`], an iterator over [`Arc`] values."] pub fn arcs (& self) -> Arcs < '_ > { Arcs :: new (self . ber . as_ref ()) } # [doc = " Get the length of this [`ObjectIdentifier`] in arcs."] pub fn len (& self) -> usize { self . arcs () . count () } }
+        impl < const MAX_SIZE : usize > Encoder < MAX_SIZE > { # [doc = " Create a new encoder initialized to an empty default state."] pub (crate) const fn new () -> Self { Self { state : State :: Initial , bytes : [0u8 ; MAX_SIZE] , cursor : 0 , } } # [doc = " Extend an existing OID."] pub (crate) const fn extend (oid : ObjectIdentifier < MAX_SIZE >) -> Self { Self { state : State :: Body , bytes : oid . ber . bytes , cursor : oid . ber . length as usize , } } # [doc = " Encode an [`Arc`] as base 128 into the internal buffer."] pub (crate) const fn arc (mut self , arc : Arc) -> Result < Self > { match self . state { State :: Initial => { if arc > ARC_MAX_FIRST { return Err (Error :: ArcInvalid { arc }) ; } self . state = State :: FirstArc (arc) ; Ok (self) } State :: FirstArc (first_arc) => { if arc > ARC_MAX_SECOND { return Err (Error :: ArcInvalid { arc }) ; } self . state = State :: Body ; self . bytes [0] = checked_add ! (checked_mul ! (checked_add ! (ARC_MAX_SECOND , 1) , first_arc) , arc) as u8 ; self . cursor = 1 ; Ok (self) } State :: Body => self . encode_base128 (arc) , } } # [doc = " Finish encoding an OID."] pub (crate) const fn finish (self) -> Result < ObjectIdentifier < MAX_SIZE > > { if self . cursor == 0 { return Err (Error :: Empty) ; } let ber = Buffer { bytes : self . bytes , length : self . cursor as u8 , } ; Ok (ObjectIdentifier { ber }) } # [doc = " Encode base 128."] const fn encode_base128 (mut self , arc : Arc) -> Result < Self > { let nbytes = base128_len (arc) ; let end_pos = checked_add ! (self . cursor , nbytes) ; if end_pos > MAX_SIZE { return Err (Error :: Length) ; } let mut i = 0 ; while i < nbytes { self . bytes [self . cursor] = match base128_byte (arc , i , nbytes) { Ok (byte) => byte , Err (e) => return Err (e) , } ; self . cursor = checked_add ! (self . cursor , 1) ; i = checked_add ! (i , 1) ; } Ok (self) } }
     };
 }
 

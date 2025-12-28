@@ -1,14 +1,13 @@
 macro_rules! deps {
     () => {
-        Utf8PathBuf!();
-        Utf8Path!();
+        FromOsStringError!();
     };
 }
 
 macro_rules! impl_113 {
     () => {
         deps!();
-        impl ToOwned for Utf8Path { type Owned = Utf8PathBuf ; # [inline] fn to_owned (& self) -> Utf8PathBuf { self . to_path_buf () } }
+        impl fmt :: Display for FromOsStringError { fn fmt (& self , f : & mut fmt :: Formatter) -> fmt :: Result { write ! (f , "OsString contains invalid UTF-8: {}" , PathBuf :: from (& self . os_string) . display ()) } }
     };
 }
 

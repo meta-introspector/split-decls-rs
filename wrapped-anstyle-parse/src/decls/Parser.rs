@@ -2,6 +2,8 @@ macro_rules! deps {
     () => {
         Perform!();
         DefaultCharAccumulator!();
+        State!();
+        Params!();
     };
 }
 

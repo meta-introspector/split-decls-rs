@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        UnifiedDiffPrinter!();
+        UnifiedDiff!();
+    };
+}
+
+macro_rules! impl_83 {
+    () => {
+        deps!();
+        impl < P : UnifiedDiffPrinter > Display for UnifiedDiff < '_ , P > { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { let first_hunk = self . diff . hunks () . next () . unwrap_or_default () ; let mut pos = first_hunk . before . start . saturating_sub (self . config . context_len) ; let mut before_context_start = pos ; let mut after_context_start = first_hunk . after . start . saturating_sub (self . config . context_len) ; let mut before_context_len = 0 ; let mut after_context_len = 0 ; let mut buffer = String :: new () ; for hunk in self . diff . hunks () { if hunk . before . start - pos > 2 * self . config . context_len { if ! buffer . is_empty () { let end = (pos + self . config . context_len) . min (self . before . len () as u32) ; self . printer . display_header (& mut * f , before_context_start , after_context_start , before_context_len + end - pos , after_context_len + end - pos ,) ? ; write ! (f , "{buffer}") ? ; for & token in & self . before [pos as usize .. end as usize] { self . printer . display_context_token (& mut * f , token) ? ; } buffer . clear () ; } pos = hunk . before . start - self . config . context_len ; before_context_start = pos ; after_context_start = hunk . after . start - self . config . context_len ; before_context_len = 0 ; after_context_len = 0 ; } for & token in & self . before [pos as usize .. hunk . before . start as usize] { self . printer . display_context_token (& mut buffer , token) ? ; } let context_len = hunk . before . start - pos ; before_context_len += hunk . before . len () as u32 + context_len ; after_context_len += hunk . after . len () as u32 + context_len ; self . printer . display_hunk (& mut buffer , & self . before [hunk . before . start as usize .. hunk . before . end as usize] , & self . after [hunk . after . start as usize .. hunk . after . end as usize] ,) ? ; pos = hunk . before . end ; } if ! buffer . is_empty () { let end = (pos + self . config . context_len) . min (self . before . len () as u32) ; self . printer . display_header (& mut * f , before_context_start , after_context_start , before_context_len + end - pos , after_context_len + end - pos ,) ? ; write ! (f , "{buffer}") ? ; for & token in & self . before [pos as usize .. end as usize] { self . printer . display_context_token (& mut * f , token) ? ; } buffer . clear () ; } Ok (()) } }
+    };
+}
+
+impl_83!()

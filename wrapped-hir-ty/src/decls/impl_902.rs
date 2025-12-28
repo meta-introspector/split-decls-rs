@@ -1,0 +1,23 @@
+macro_rules! deps {
+    () => {
+        LocalId!();
+        Place!();
+        BasicBlock!();
+        OperandKind!();
+        Operand!();
+        StatementKind!();
+        Rvalue!();
+        TerminatorKind!();
+        ProjectionStore!();
+        MirBody!();
+    };
+}
+
+macro_rules! impl_902 {
+    () => {
+        deps!();
+        impl < 'db > MirBody < 'db > { pub fn local_to_binding_map (& self) -> ArenaMap < LocalId < 'db > , BindingId > { self . binding_locals . iter () . map (| (it , y) | (* y , it)) . collect () } fn walk_places (& mut self , mut f : impl FnMut (& mut Place < 'db > , & mut ProjectionStore < 'db >)) { fn for_operand < 'db > (op : & mut Operand < 'db > , f : & mut impl FnMut (& mut Place < 'db > , & mut ProjectionStore < 'db >) , store : & mut ProjectionStore < 'db > ,) { match & mut op . kind { OperandKind :: Copy (p) | OperandKind :: Move (p) => { f (p , store) ; } OperandKind :: Constant { .. } | OperandKind :: Static (_) => () , } } for (_ , block) in self . basic_blocks . iter_mut () { for statement in & mut block . statements { match & mut statement . kind { StatementKind :: Assign (p , r) => { f (p , & mut self . projection_store) ; match r { Rvalue :: ShallowInitBoxWithAlloc (_) => () , Rvalue :: ShallowInitBox (o , _) | Rvalue :: UnaryOp (_ , o) | Rvalue :: Cast (_ , o , _) | Rvalue :: Repeat (o , _) | Rvalue :: Use (o) => for_operand (o , & mut f , & mut self . projection_store) , Rvalue :: CopyForDeref (p) | Rvalue :: Discriminant (p) | Rvalue :: Len (p) | Rvalue :: Ref (_ , p) => f (p , & mut self . projection_store) , Rvalue :: CheckedBinaryOp (_ , o1 , o2) => { for_operand (o1 , & mut f , & mut self . projection_store) ; for_operand (o2 , & mut f , & mut self . projection_store) ; } Rvalue :: Aggregate (_ , ops) => { for op in ops . iter_mut () { for_operand (op , & mut f , & mut self . projection_store) ; } } Rvalue :: ThreadLocalRef (n) | Rvalue :: AddressOf (n) | Rvalue :: BinaryOp (n) | Rvalue :: NullaryOp (n) => match * n { } , } } StatementKind :: FakeRead (p) | StatementKind :: Deinit (p) => { f (p , & mut self . projection_store) } StatementKind :: StorageLive (_) | StatementKind :: StorageDead (_) | StatementKind :: Nop => () , } } match & mut block . terminator { Some (x) => match & mut x . kind { TerminatorKind :: SwitchInt { discr , .. } => { for_operand (discr , & mut f , & mut self . projection_store) } TerminatorKind :: FalseEdge { .. } | TerminatorKind :: FalseUnwind { .. } | TerminatorKind :: Goto { .. } | TerminatorKind :: UnwindResume | TerminatorKind :: CoroutineDrop | TerminatorKind :: Abort | TerminatorKind :: Return | TerminatorKind :: Unreachable => () , TerminatorKind :: Drop { place , .. } => { f (place , & mut self . projection_store) ; } TerminatorKind :: DropAndReplace { place , value , .. } => { f (place , & mut self . projection_store) ; for_operand (value , & mut f , & mut self . projection_store) ; } TerminatorKind :: Call { func , args , destination , .. } => { for_operand (func , & mut f , & mut self . projection_store) ; args . iter_mut () . for_each (| x | for_operand (x , & mut f , & mut self . projection_store)) ; f (destination , & mut self . projection_store) ; } TerminatorKind :: Assert { cond , .. } => { for_operand (cond , & mut f , & mut self . projection_store) ; } TerminatorKind :: Yield { value , resume_arg , .. } => { for_operand (value , & mut f , & mut self . projection_store) ; f (resume_arg , & mut self . projection_store) ; } } , None => () , } } } fn shrink_to_fit (& mut self) { let MirBody { basic_blocks , locals , start_block : _ , owner : _ , binding_locals , param_locals , closures , projection_store , } = self ; projection_store . shrink_to_fit () ; basic_blocks . shrink_to_fit () ; locals . shrink_to_fit () ; binding_locals . shrink_to_fit () ; param_locals . shrink_to_fit () ; closures . shrink_to_fit () ; for (_ , b) in basic_blocks . iter_mut () { let BasicBlock { statements , terminator : _ , is_cleanup : _ } = b ; statements . shrink_to_fit () ; } } }
+    };
+}
+
+impl_902!()

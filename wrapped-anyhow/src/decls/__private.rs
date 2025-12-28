@@ -1,6 +1,11 @@
 macro_rules! deps {
     () => {
+        BothDebug!();
         Result!();
+        TraitKind!();
+        BoxedKind!();
+        NotBothDebug!();
+        AdhocKind!();
         Error!();
     };
 }

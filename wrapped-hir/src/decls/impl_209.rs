@@ -1,15 +1,13 @@
 macro_rules! deps {
     () => {
-        Trait!();
-        Crate!();
-        HasCrate!();
+        TypeOrConstParam!();
     };
 }
 
 macro_rules! impl_209 {
     () => {
         deps!();
-        impl HasCrate for Trait { fn krate (& self , db : & dyn HirDatabase) -> Crate { self . module (db) . krate () } }
+        impl < 'db > HirDisplay < 'db > for TypeOrConstParam { fn hir_fmt (& self , f : & mut HirFormatter < '_ , 'db >) -> Result < () , HirDisplayError > { match self . split (f . db) { either :: Either :: Left (it) => it . hir_fmt (f) , either :: Either :: Right (it) => it . hir_fmt (f) , } } }
     };
 }
 

@@ -1,16 +1,32 @@
 macro_rules! deps {
     () => {
+        BuiltinType!();
+        ConstParam!();
+        TypeParam!();
+        GenericParam!();
+        PathResolution!();
         Function!();
-        SelfParam!();
-        Type!();
-        Access!();
+        Adt!();
+        Trait!();
+        ToolModule!();
+        Const!();
+        Macro!();
+        TypeAlias!();
+        BuiltinAttr!();
+        Module!();
+        Local!();
+        TypeNs!();
+        DeriveHelper!();
+        ModuleDef!();
+        Variant!();
+        Static!();
     };
 }
 
 macro_rules! impl_75 {
     () => {
         deps!();
-        impl SelfParam { pub fn access (self , db : & dyn HirDatabase) -> Access { let func_data = db . function_signature (self . func) ; func_data . params . first () . map (| & param | match & func_data . store [param] { TypeRef :: Reference (ref_) => match ref_ . mutability { hir_def :: type_ref :: Mutability :: Shared => Access :: Shared , hir_def :: type_ref :: Mutability :: Mut => Access :: Exclusive , } , _ => Access :: Owned , }) . unwrap_or (Access :: Owned) } pub fn parent_fn (& self) -> Function { Function :: from (self . func) } pub fn ty < 'db > (& self , db : & 'db dyn HirDatabase) -> Type < 'db > { let callable_sig = db . callable_item_signature (self . func . into ()) . instantiate_identity () . skip_binder () ; let environment = db . trait_environment (self . func . into ()) ; let ty = callable_sig . inputs () . as_slice () [0] ; Type { env : environment , ty } } pub fn ty_with_args < 'db > (& self , db : & 'db dyn HirDatabase , generics : impl Iterator < Item = Type < 'db > > ,) -> Type < 'db > { let interner = DbInterner :: new_with (db , None , None) ; let args = generic_args_from_tys (interner , self . func . into () , generics . map (| ty | ty . ty)) ; let callable_sig = db . callable_item_signature (self . func . into ()) . instantiate (interner , args) . skip_binder () ; let environment = db . trait_environment (self . func . into ()) ; let ty = callable_sig . inputs () . as_slice () [0] ; Type { env : environment , ty } } }
+        impl PathResolution { pub (crate) fn in_type_ns (& self) -> Option < TypeNs > { match self { PathResolution :: Def (ModuleDef :: Adt (adt)) => Some (TypeNs :: AdtId ((* adt) . into ())) , PathResolution :: Def (ModuleDef :: BuiltinType (builtin)) => { Some (TypeNs :: BuiltinType ((* builtin) . into ())) } PathResolution :: Def (ModuleDef :: Const (_) | ModuleDef :: Variant (_) | ModuleDef :: Macro (_) | ModuleDef :: Function (_) | ModuleDef :: Module (_) | ModuleDef :: Static (_) | ModuleDef :: Trait (_) ,) => None , PathResolution :: Def (ModuleDef :: TypeAlias (alias)) => { Some (TypeNs :: TypeAliasId ((* alias) . into ())) } PathResolution :: BuiltinAttr (_) | PathResolution :: ToolModule (_) | PathResolution :: Local (_) | PathResolution :: DeriveHelper (_) | PathResolution :: ConstParam (_) => None , PathResolution :: TypeParam (param) => Some (TypeNs :: GenericParam ((* param) . into ())) , PathResolution :: SelfType (impl_def) => Some (TypeNs :: SelfType ((* impl_def) . into ())) , } } }
     };
 }
 

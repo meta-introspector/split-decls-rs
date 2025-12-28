@@ -1,14 +1,13 @@
 macro_rules! deps {
     () => {
-        Iterator!();
-        DoubleEndedFallibleIterator!();
+        Map!();
     };
 }
 
 macro_rules! impl_56 {
     () => {
         deps!();
-        impl < I > DoubleEndedIterator for Iterator < I > where I : DoubleEndedFallibleIterator , { # [inline] fn next_back (& mut self) -> Option < Result < I :: Item , I :: Error > > { match self . 0 . next_back () { Ok (Some (v)) => Some (Ok (v)) , Ok (None) => None , Err (e) => Some (Err (e)) , } } }
+        impl < I : core :: fmt :: Debug , F > core :: fmt :: Debug for Map < I , F > { fn fmt (& self , f : & mut core :: fmt :: Formatter < '_ >) -> core :: fmt :: Result { f . debug_struct ("Map") . field ("iter" , & self . it) . finish () } }
     };
 }
 

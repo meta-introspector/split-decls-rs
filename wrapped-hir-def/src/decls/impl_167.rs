@@ -1,15 +1,14 @@
 macro_rules! deps {
     () => {
-        HasModule!();
-        VariantId!();
-        ModuleId!();
+        ImportAliasDisplay!();
+        ImportAlias!();
     };
 }
 
 macro_rules! impl_167 {
     () => {
         deps!();
-        impl HasModule for VariantId { fn module (& self , db : & dyn DefDatabase) -> ModuleId { match * self { VariantId :: EnumVariantId (it) => it . module (db) , VariantId :: StructId (it) => it . module (db) , VariantId :: UnionId (it) => it . module (db) , } } }
+        impl ImportAlias { pub fn display (& self , edition : Edition) -> impl fmt :: Display + '_ { ImportAliasDisplay { value : self , edition } } }
     };
 }
 

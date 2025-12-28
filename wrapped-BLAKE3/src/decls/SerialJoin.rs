@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        Join!();
+    };
+}
+
+macro_rules! SerialJoin {
+    () => {
+        deps!();
+        # [doc = " The trivial, serial implementation of `Join`. The left and right sides are"] # [doc = " executed one after the other, on the calling thread. The standalone hashing"] # [doc = " functions and the `Hasher::update` method use this implementation"] # [doc = " internally."] # [doc = ""] # [doc = " See the [`join` module docs](index.html) for more details."] pub enum SerialJoin { }
+    };
+}
+
+SerialJoin!()

@@ -1,6 +1,6 @@
 macro_rules! repository {
     () => {
-        pub mod repository ;
+        mod repository ;
     };
 }
 

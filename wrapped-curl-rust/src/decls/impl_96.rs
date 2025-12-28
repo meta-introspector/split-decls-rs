@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        PostRedirections!();
+    };
+}
+
+macro_rules! impl_96 {
+    () => {
+        deps!();
+        impl PostRedirections { # [doc = " Create an empty PostRedirection setting with no flags set."] pub fn new () -> PostRedirections { PostRedirections { bits : 0 } } # [doc = " Configure POST method behaviour on a 301 redirect. Setting the value"] # [doc = " to true will preserve the method when following the redirect, else"] # [doc = " the method is changed to GET."] pub fn redirect_301 (& mut self , on : bool) -> & mut PostRedirections { self . flag (curl_sys :: CURL_REDIR_POST_301 , on) } # [doc = " Configure POST method behaviour on a 302 redirect. Setting the value"] # [doc = " to true will preserve the method when following the redirect, else"] # [doc = " the method is changed to GET."] pub fn redirect_302 (& mut self , on : bool) -> & mut PostRedirections { self . flag (curl_sys :: CURL_REDIR_POST_302 , on) } # [doc = " Configure POST method behaviour on a 303 redirect. Setting the value"] # [doc = " to true will preserve the method when following the redirect, else"] # [doc = " the method is changed to GET."] pub fn redirect_303 (& mut self , on : bool) -> & mut PostRedirections { self . flag (curl_sys :: CURL_REDIR_POST_303 , on) } # [doc = " Configure POST method behaviour for all redirects. Setting the value"] # [doc = " to true will preserve the method when following the redirect, else"] # [doc = " the method is changed to GET."] pub fn redirect_all (& mut self , on : bool) -> & mut PostRedirections { self . flag (curl_sys :: CURL_REDIR_POST_ALL , on) } fn flag (& mut self , bit : c_ulong , on : bool) -> & mut PostRedirections { if on { self . bits |= bit ; } else { self . bits &= ! bit ; } self } }
+    };
+}
+
+impl_96!()

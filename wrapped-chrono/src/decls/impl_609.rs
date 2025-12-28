@@ -1,0 +1,22 @@
+macro_rules! deps {
+    () => {
+        Error!();
+        NaiveDateTime!();
+        TransitionRule!();
+        AlternateTime!();
+        Cursor!();
+        RuleDay!();
+        Fixed!();
+        LocalTimeType!();
+        MappedLocalTime!();
+    };
+}
+
+macro_rules! impl_609 {
+    () => {
+        deps!();
+        impl TransitionRule { # [doc = " Parse a POSIX TZ string containing a time zone description, as described in [the POSIX documentation of the `TZ` environment variable](https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap08.html)."] # [doc = ""] # [doc = " TZ string extensions from [RFC 8536](https://datatracker.ietf.org/doc/html/rfc8536#section-3.3.1) may be used."] pub (super) fn from_tz_string (tz_string : & [u8] , use_string_extensions : bool ,) -> Result < Self , Error > { let mut cursor = Cursor :: new (tz_string) ; let std_time_zone = Some (parse_name (& mut cursor) ?) ; let std_offset = parse_offset (& mut cursor) ? ; if cursor . is_empty () { return Ok (LocalTimeType :: new (- std_offset , false , std_time_zone) ? . into ()) ; } let dst_time_zone = Some (parse_name (& mut cursor) ?) ; let dst_offset = match cursor . peek () { Some (& b',') => std_offset - 3600 , Some (_) => parse_offset (& mut cursor) ? , None => { return Err (Error :: UnsupportedTzString ("DST start and end rules must be provided")) ; } } ; if cursor . is_empty () { return Err (Error :: UnsupportedTzString ("DST start and end rules must be provided")) ; } cursor . read_tag (b",") ? ; let (dst_start , dst_start_time) = RuleDay :: parse (& mut cursor , use_string_extensions) ? ; cursor . read_tag (b",") ? ; let (dst_end , dst_end_time) = RuleDay :: parse (& mut cursor , use_string_extensions) ? ; if ! cursor . is_empty () { return Err (Error :: InvalidTzString ("remaining data after parsing TZ string")) ; } Ok (AlternateTime :: new (LocalTimeType :: new (- std_offset , false , std_time_zone) ? , LocalTimeType :: new (- dst_offset , true , dst_time_zone) ? , dst_start , dst_start_time , dst_end , dst_end_time ,) ? . into ()) } # [doc = " Find the local time type associated to the transition rule at the specified Unix time in seconds"] pub (super) fn find_local_time_type (& self , unix_time : i64) -> Result < & LocalTimeType , Error > { match self { TransitionRule :: Fixed (local_time_type) => Ok (local_time_type) , TransitionRule :: Alternate (alternate_time) => { alternate_time . find_local_time_type (unix_time) } } } # [doc = " Find the local time type associated to the transition rule at the specified Unix time in seconds"] pub (super) fn find_local_time_type_from_local (& self , local_time : NaiveDateTime ,) -> Result < crate :: MappedLocalTime < LocalTimeType > , Error > { match self { TransitionRule :: Fixed (local_time_type) => { Ok (crate :: MappedLocalTime :: Single (* local_time_type)) } TransitionRule :: Alternate (alternate_time) => { alternate_time . find_local_time_type_from_local (local_time) } } } }
+    };
+}
+
+impl_609!()

@@ -1,0 +1,20 @@
+macro_rules! deps {
+    () => {
+        Result!();
+        ByteString!();
+        Error!();
+        Bytes!();
+        ImportObjectData!();
+        ReadRef!();
+        ImportObjectHeader!();
+    };
+}
+
+macro_rules! impl_274 {
+    () => {
+        deps!();
+        impl pe :: ImportObjectHeader { # [doc = " Read the short import header."] # [doc = ""] # [doc = " Also checks that the signature and version are valid."] # [doc = " Directly following this header will be the string data."] pub fn parse < 'data , R : ReadRef < 'data > > (data : R , offset : & mut u64) -> Result < & 'data Self > { let header = data . read :: < pe :: ImportObjectHeader > (offset) . read_error ("Invalid COFF import library header size") ? ; if header . sig1 . get (LE) != 0 || header . sig2 . get (LE) != pe :: IMPORT_OBJECT_HDR_SIG2 { Err (Error ("Invalid COFF import library header")) } else if header . version . get (LE) != 0 { Err (Error ("Unknown COFF import library header version")) } else { Ok (header) } } # [doc = " Parse the data following the header."] pub fn parse_data < 'data , R : ReadRef < 'data > > (& self , data : R , offset : & mut u64 ,) -> Result < ImportObjectData < 'data > > { let mut data = Bytes (data . read_bytes (offset , u64 :: from (self . size_of_data . get (LE))) . read_error ("Invalid COFF import library data size") ? ,) ; let symbol = data . read_string () . map (ByteString) . read_error ("Could not read COFF import library symbol name") ? ; let dll = data . read_string () . map (ByteString) . read_error ("Could not read COFF import library DLL name") ? ; let export = if self . name_type () == pe :: IMPORT_OBJECT_NAME_EXPORTAS { data . read_string () . map (ByteString) . map (Some) . read_error ("Could not read COFF import library export name") ? } else { None } ; Ok (ImportObjectData { symbol , dll , export , }) } # [doc = " The type of import."] # [doc = ""] # [doc = " This is one of the `IMPORT_OBJECT_*` constants."] pub fn import_type (& self) -> u16 { self . name_type . get (LE) & pe :: IMPORT_OBJECT_TYPE_MASK } # [doc = " The type of import name."] # [doc = ""] # [doc = " This is one of the `IMPORT_OBJECT_*` constants."] pub fn name_type (& self) -> u16 { (self . name_type . get (LE) >> pe :: IMPORT_OBJECT_NAME_SHIFT) & pe :: IMPORT_OBJECT_NAME_MASK } }
+    };
+}
+
+impl_274!()

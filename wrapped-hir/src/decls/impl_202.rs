@@ -1,7 +1,5 @@
 macro_rules! deps {
     () => {
-        HasCrate!();
-        Crate!();
         Field!();
     };
 }
@@ -9,7 +7,7 @@ macro_rules! deps {
 macro_rules! impl_202 {
     () => {
         deps!();
-        impl HasCrate for Field { fn krate (& self , db : & dyn HirDatabase) -> Crate { self . parent_def (db) . module (db) . krate () } }
+        impl < 'db > HirDisplay < 'db > for Field { fn hir_fmt (& self , f : & mut HirFormatter < '_ , 'db >) -> Result < () , HirDisplayError > { write_visibility (self . parent . module (f . db) . id , self . visibility (f . db) , f) ? ; write ! (f , "{}: " , self . name (f . db) . display (f . db , f . edition ())) ? ; self . ty (f . db) . hir_fmt (f) } }
     };
 }
 

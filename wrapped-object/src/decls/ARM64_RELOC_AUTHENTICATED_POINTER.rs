@@ -1,0 +1,7 @@
+macro_rules! ARM64_RELOC_AUTHENTICATED_POINTER {
+    () => {
+        pub const ARM64_RELOC_AUTHENTICATED_POINTER : u8 = 11 ;
+    };
+}
+
+ARM64_RELOC_AUTHENTICATED_POINTER!()

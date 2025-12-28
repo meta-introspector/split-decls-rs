@@ -1,0 +1,7 @@
+macro_rules! write_atomic {
+    () => {
+        # [doc = " Writes a file to disk atomically."] # [doc = ""] # [doc = " This uses `tempfile::persist` to accomplish atomic writes."] # [doc = " If the path is a symlink, it will follow the symlink and write to the actual target."] pub fn write_atomic < P : AsRef < Path > , C : AsRef < [u8] > > (path : P , contents : C) -> Result < () > { let path = path . as_ref () ; let resolved_path ; let path = if path . is_symlink () { resolved_path = fs :: read_link (path) . with_context (| | format ! ("failed to read symlink at `{}`" , path . display ())) ? ; & resolved_path } else { path } ; # [cfg (unix)] let perms = path . metadata () . ok () . map (| meta | { use std :: os :: unix :: fs :: PermissionsExt ; let mask = u32 :: from (libc :: S_IRWXU | libc :: S_IRWXG | libc :: S_IRWXO) ; let mode = meta . permissions () . mode () & mask ; std :: fs :: Permissions :: from_mode (mode) }) ; let mut tmp = TempFileBuilder :: new () . prefix (path . file_name () . unwrap ()) . tempfile_in (path . parent () . unwrap ()) ? ; tmp . write_all (contents . as_ref ()) ? ; # [cfg (unix)] if let Some (perms) = perms { tmp . as_file () . set_permissions (perms) ? ; } tmp . persist (path) ? ; Ok (()) }
+    };
+}
+
+write_atomic!()

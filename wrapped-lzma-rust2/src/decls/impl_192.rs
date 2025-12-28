@@ -1,0 +1,18 @@
+macro_rules! deps {
+    () => {
+        LengthCoder!();
+        Write!();
+        Result!();
+        LengthEncoder!();
+        RangeEncoder!();
+    };
+}
+
+macro_rules! impl_192 {
+    () => {
+        deps!();
+        impl LengthEncoder { pub (crate) fn new (pb : u32 , nice_len : usize) -> Self { let pos_states = 1usize << pb ; let counters = vec ! [0 ; pos_states] ; let len_symbols = (nice_len - MATCH_LEN_MIN + 1) . max (LOW_SYMBOLS + MID_SYMBOLS) ; let prices = vec ! [vec ! [0 ; len_symbols] ; pos_states] ; Self { coder : LengthCoder :: new () , counters , prices , } } fn reset (& mut self) { self . coder . reset () ; self . counters . fill (0) ; } fn encode < W : Write > (& mut self , len : u32 , pos_state : u32 , rc : & mut RangeEncoder < W > ,) -> crate :: Result < () > { let mut len = len as usize - MATCH_LEN_MIN ; if len < LOW_SYMBOLS { rc . encode_bit (& mut self . coder . choice , 0 , 0) ? ; rc . encode_bit_tree (& mut self . coder . low [pos_state as usize] , len as _) ? ; } else { rc . encode_bit (& mut self . coder . choice , 0 , 1) ? ; len -= LOW_SYMBOLS ; if len < MID_SYMBOLS { rc . encode_bit (& mut self . coder . choice , 1 , 0) ? ; rc . encode_bit_tree (& mut self . coder . mid [pos_state as usize] , len as _) ? ; } else { rc . encode_bit (& mut self . coder . choice , 1 , 1) ? ; rc . encode_bit_tree (& mut self . coder . high , (len - MID_SYMBOLS) as _) ? ; } } self . counters [pos_state as usize] = self . counters [pos_state as usize] . wrapping_sub (1) ; Ok (()) } pub (crate) fn get_price (& self , len : usize , pos_state : usize) -> u32 { self . prices [pos_state] [len - MATCH_LEN_MIN] } fn update_prices (& mut self) { for pos_state in 0 .. self . counters . len () { if self . counters [pos_state] <= 0 { self . counters [pos_state] = PRICE_UPDATE_INTERVAL as _ ; self . update_prices_with_state (pos_state) ; } } } fn update_prices_with_state (& mut self , pos_state : usize) { let mut choice0_price = RangeEncoder :: get_bit_price (self . coder . choice [0] as _ , 0) ; let mut start = 0 ; for i in start .. LOW_SYMBOLS { self . prices [pos_state] [i] = choice0_price + RangeEncoder :: get_bit_tree_price (& mut self . coder . low [pos_state] , i as _) ; } start = LOW_SYMBOLS ; choice0_price = RangeEncoder :: get_bit_price (self . coder . choice [0] as _ , 1) ; let mut choice1_price = RangeEncoder :: get_bit_price (self . coder . choice [1] as _ , 0) ; for i in start .. (LOW_SYMBOLS + MID_SYMBOLS) { self . prices [pos_state] [i] = choice0_price + choice1_price + RangeEncoder :: get_bit_tree_price (& mut self . coder . mid [pos_state] , (i - start) as u32 ,) ; } start = LOW_SYMBOLS + MID_SYMBOLS ; choice1_price = RangeEncoder :: get_bit_price (self . coder . choice [1] as _ , 1) ; for i in start .. self . prices [pos_state] . len () { self . prices [pos_state] [i] = choice0_price + choice1_price + RangeEncoder :: get_bit_tree_price (& mut self . coder . high , (i - start) as u32) } } }
+    };
+}
+
+impl_192!()

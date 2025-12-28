@@ -1,0 +1,7 @@
+macro_rules! arguments {
+    () => {
+        # [doc = " A module providing low-level primitives to flexibly perform various `fetch` related activities. Note that the typesystem isn't used"] # [doc = " to assure they are always performed in the right order, the caller has to follow some parts of the protocol itself."] # [doc = ""] # [doc = " ### Order for receiving a pack"] # [doc = ""] # [doc = " * [handshake](handshake())"] # [doc = " * **ls-refs**"] # [doc = "     * [get available refs by refspecs](RefMap::fetch())"] # [doc = " * **fetch pack**"] # [doc = "     * `negotiate` until a pack can be received (TBD)"] # [doc = " * [officially terminate the connection](crate::indicate_end_of_interaction())"] # [doc = "     - Consider wrapping the transport in [`SendFlushOnDrop`](crate::SendFlushOnDrop) to be sure the connection is terminated"] # [doc = "       gracefully even if there is an application error."] # [doc = ""] # [doc = " Note that this flow doesn't involve actually writing the pack, or indexing it. Nor does it contain machinery"] # [doc = " to write or update references based on the fetched remote references."] # [doc = ""] # [doc = " Also, when the server supports [version 2](crate::transport::Protocol::V2) of the protocol, then each of the listed commands,"] # [doc = " `ls-refs` and `fetch` can be invoked multiple times in any order."] mod arguments ;
+    };
+}
+
+arguments!()

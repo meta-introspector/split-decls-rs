@@ -1,8 +1,9 @@
 macro_rules! deps {
     () => {
-        Action!();
         RegistryInfo!();
         CredentialResponse!();
+        Error!();
+        Action!();
     };
 }
 

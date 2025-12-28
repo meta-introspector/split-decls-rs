@@ -1,0 +1,7 @@
+macro_rules! TINFL_STATUS_ADLER32_MISMATCH {
+    () => {
+        const TINFL_STATUS_ADLER32_MISMATCH : i32 = - 2 ;
+    };
+}
+
+TINFL_STATUS_ADLER32_MISMATCH!()

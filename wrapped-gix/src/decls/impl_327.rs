@@ -1,0 +1,22 @@
+macro_rules! deps {
+    () => {
+        Time!();
+        User!();
+        Commit!();
+        Any!();
+        Entity!();
+        Personas!();
+        String!();
+        Committer!();
+        Author!();
+    };
+}
+
+macro_rules! impl_327 {
+    () => {
+        deps!();
+        impl Personas { pub fn from_config_and_env (config : & gix_config :: File < '_ >) -> Self { fn entity_in_section (config : & gix_config :: File < '_ > , name_key : & keys :: Any , email_key : & keys :: Any , fallback : Option < (& keys :: Any , & keys :: Any) > ,) -> (Option < BString > , Option < BString >) { let fallback = fallback . and_then (| (name_key , email_key) | { debug_assert_eq ! (name_key . section . name () , email_key . section . name ()) ; config . section ("gitoxide" , Some (name_key . section . name () . into ())) . ok () . map (| section | (section , name_key , email_key)) }) ; (config . string (name_key) . or_else (| | fallback . as_ref () . and_then (| (s , name_key , _) | s . value (name_key . name))) . map (std :: borrow :: Cow :: into_owned) , config . string (email_key) . or_else (| | fallback . as_ref () . and_then (| (s , _ , email_key) | s . value (email_key . name))) . map (std :: borrow :: Cow :: into_owned) ,) } let parse_date = | key : & str , date : & keys :: Any | -> Option < String > { debug_assert_eq ! (key , date . logical_name () , "BUG: drift of expected name and actual name of the key (we hardcode it to save an allocation)") ; config . string (key) . map (std :: borrow :: Cow :: into_owned) . and_then (| config_date | { config_date . to_str () . ok () . and_then (| date | gix_date :: parse (date , Some (SystemTime :: now ())) . ok ()) }) . or_else (| | Some (gix_date :: Time :: now_local_or_utc ())) . map (| time | time . format_or_unix (gix_date :: time :: Format :: Raw)) } ; let fallback = (& gitoxide :: Committer :: NAME_FALLBACK , & gitoxide :: Committer :: EMAIL_FALLBACK ,) ; let (committer_name , committer_email) = entity_in_section (config , & Committer :: NAME , & Committer :: EMAIL , Some (fallback)) ; let fallback = (& gitoxide :: Author :: NAME_FALLBACK , & gitoxide :: Author :: EMAIL_FALLBACK) ; let (author_name , author_email) = entity_in_section (config , & Author :: NAME , & Author :: EMAIL , Some (fallback)) ; let (user_name , mut user_email) = entity_in_section (config , & User :: NAME , & User :: EMAIL , None) ; let committer_date = parse_date ("gitoxide.commit.committerDate" , & gitoxide :: Commit :: COMMITTER_DATE) ; let author_date = parse_date ("gitoxide.commit.authorDate" , & gitoxide :: Commit :: AUTHOR_DATE) ; user_email = user_email . or_else (| | { config . string (gitoxide :: User :: EMAIL_FALLBACK) . map (std :: borrow :: Cow :: into_owned) }) ; Personas { user : Entity { name : user_name , email : user_email , time : None , } , committer : Entity { name : committer_name , email : committer_email , time : committer_date , } , author : Entity { name : author_name , email : author_email , time : author_date , } , } } }
+    };
+}
+
+impl_327!()

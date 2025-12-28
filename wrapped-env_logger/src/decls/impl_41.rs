@@ -1,0 +1,18 @@
+macro_rules! deps {
+    () => {
+        Target!();
+        Builder!();
+        Writer!();
+        BufferWriter!();
+        WriteStyle!();
+    };
+}
+
+macro_rules! impl_41 {
+    () => {
+        deps!();
+        impl Builder { # [doc = " Initialize the writer builder with defaults."] pub (crate) fn new () -> Self { Builder { target : Default :: default () , write_style : Default :: default () , is_test : false , built : false , } } # [doc = " Set the target to write to."] pub (crate) fn target (& mut self , target : Target) -> & mut Self { self . target = target ; self } # [doc = " Parses a style choice string."] # [doc = ""] # [doc = " See the [Disabling colors] section for more details."] # [doc = ""] # [doc = " [Disabling colors]: ../index.html#disabling-colors"] pub (crate) fn parse_write_style (& mut self , write_style : & str) -> & mut Self { self . write_style (parse_write_style (write_style)) } # [doc = " Whether or not to print style characters when writing."] pub (crate) fn write_style (& mut self , write_style : WriteStyle) -> & mut Self { self . write_style = write_style ; self } # [doc = " Whether or not to capture logs for `cargo test`."] # [allow (clippy :: wrong_self_convention)] pub (crate) fn is_test (& mut self , is_test : bool) -> & mut Self { self . is_test = is_test ; self } # [doc = " Build a terminal writer."] pub (crate) fn build (& mut self) -> Writer { assert ! (! self . built , "attempt to re-use consumed builder") ; self . built = true ; let color_choice = self . write_style ; # [cfg (feature = "auto-color")] let color_choice = if color_choice == WriteStyle :: Auto { match & self . target { Target :: Stdout => anstream :: AutoStream :: choice (& io :: stdout ()) . into () , Target :: Stderr => anstream :: AutoStream :: choice (& io :: stderr ()) . into () , Target :: Pipe (_) => color_choice , } } else { color_choice } ; let color_choice = if color_choice == WriteStyle :: Auto { WriteStyle :: Never } else { color_choice } ; let writer = match mem :: take (& mut self . target) { Target :: Stdout => BufferWriter :: stdout (self . is_test , color_choice) , Target :: Stderr => BufferWriter :: stderr (self . is_test , color_choice) , Target :: Pipe (pipe) => BufferWriter :: pipe (Box :: new (Mutex :: new (pipe)) , color_choice) , } ; Writer { inner : writer } } }
+    };
+}
+
+impl_41!()

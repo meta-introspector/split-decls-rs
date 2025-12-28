@@ -1,0 +1,24 @@
+macro_rules! deps {
+    () => {
+        ErrorImpl!();
+        Serialize!();
+        SerializeSeq!();
+        Serializer!();
+        SerializeTupleStruct!();
+        SerializeMap!();
+        Result!();
+        SerializeTupleVariant!();
+        SerializeStruct!();
+        SerializeStructVariant!();
+        SerializeTuple!();
+    };
+}
+
+macro_rules! deref_erased_serializer {
+    () => {
+        deps!();
+        macro_rules ! deref_erased_serializer { (<$ T : ident > Serializer for $ ty : ty $ (where $ ($ where : tt) *) ?) => { impl <$ T > Serializer for $ ty $ (where $ ($ where) *) ? { fn erased_serialize_bool (& mut self , v : bool) { (** self) . erased_serialize_bool (v) ; } fn erased_serialize_i8 (& mut self , v : i8) { (** self) . erased_serialize_i8 (v) ; } fn erased_serialize_i16 (& mut self , v : i16) { (** self) . erased_serialize_i16 (v) ; } fn erased_serialize_i32 (& mut self , v : i32) { (** self) . erased_serialize_i32 (v) ; } fn erased_serialize_i64 (& mut self , v : i64) { (** self) . erased_serialize_i64 (v) ; } fn erased_serialize_i128 (& mut self , v : i128) { (** self) . erased_serialize_i128 (v) ; } fn erased_serialize_u8 (& mut self , v : u8) { (** self) . erased_serialize_u8 (v) ; } fn erased_serialize_u16 (& mut self , v : u16) { (** self) . erased_serialize_u16 (v) ; } fn erased_serialize_u32 (& mut self , v : u32) { (** self) . erased_serialize_u32 (v) ; } fn erased_serialize_u64 (& mut self , v : u64) { (** self) . erased_serialize_u64 (v) ; } fn erased_serialize_u128 (& mut self , v : u128) { (** self) . erased_serialize_u128 (v) ; } fn erased_serialize_f32 (& mut self , v : f32) { (** self) . erased_serialize_f32 (v) ; } fn erased_serialize_f64 (& mut self , v : f64) { (** self) . erased_serialize_f64 (v) ; } fn erased_serialize_char (& mut self , v : char) { (** self) . erased_serialize_char (v) ; } fn erased_serialize_str (& mut self , v : & str) { (** self) . erased_serialize_str (v) ; } fn erased_serialize_bytes (& mut self , v : & [u8]) { (** self) . erased_serialize_bytes (v) ; } fn erased_serialize_none (& mut self) { (** self) . erased_serialize_none () ; } fn erased_serialize_some (& mut self , value : & dyn Serialize) { (** self) . erased_serialize_some (value) ; } fn erased_serialize_unit (& mut self) { (** self) . erased_serialize_unit () ; } fn erased_serialize_unit_struct (& mut self , name : &'static str) { (** self) . erased_serialize_unit_struct (name) ; } fn erased_serialize_unit_variant (& mut self , name : &'static str , variant_index : u32 , variant : &'static str) { (** self) . erased_serialize_unit_variant (name , variant_index , variant) ; } fn erased_serialize_newtype_struct (& mut self , name : &'static str , value : & dyn Serialize) { (** self) . erased_serialize_newtype_struct (name , value) ; } fn erased_serialize_newtype_variant (& mut self , name : &'static str , variant_index : u32 , variant : &'static str , value : & dyn Serialize) { (** self) . erased_serialize_newtype_variant (name , variant_index , variant , value) ; } fn erased_serialize_seq (& mut self , len : Option < usize >) -> Result <& mut dyn SerializeSeq , ErrorImpl > { (** self) . erased_serialize_seq (len) } fn erased_serialize_tuple (& mut self , len : usize) -> Result <& mut dyn SerializeTuple , ErrorImpl > { (** self) . erased_serialize_tuple (len) } fn erased_serialize_tuple_struct (& mut self , name : &'static str , len : usize) -> Result <& mut dyn SerializeTupleStruct , ErrorImpl > { (** self) . erased_serialize_tuple_struct (name , len) } fn erased_serialize_tuple_variant (& mut self , name : &'static str , variant_index : u32 , variant : &'static str , len : usize) -> Result <& mut dyn SerializeTupleVariant , ErrorImpl > { (** self) . erased_serialize_tuple_variant (name , variant_index , variant , len) } fn erased_serialize_map (& mut self , len : Option < usize >) -> Result <& mut dyn SerializeMap , ErrorImpl > { (** self) . erased_serialize_map (len) } fn erased_serialize_struct (& mut self , name : &'static str , len : usize) -> Result <& mut dyn SerializeStruct , ErrorImpl > { (** self) . erased_serialize_struct (name , len) } fn erased_serialize_struct_variant (& mut self , name : &'static str , variant_index : u32 , variant : &'static str , len : usize) -> Result <& mut dyn SerializeStructVariant , ErrorImpl > { (** self) . erased_serialize_struct_variant (name , variant_index , variant , len) } fn erased_is_human_readable (& self) -> bool { (** self) . erased_is_human_readable () } fn erased_display_error (& self) -> & dyn Display { (** self) . erased_display_error () } } impl <$ T > sealed :: serializer :: Sealed for $ ty $ (where $ ($ where) *) ? { } } ; }
+    };
+}
+
+deref_erased_serializer!()

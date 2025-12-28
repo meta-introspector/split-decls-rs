@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        Limb!();
+        VecType!();
+        FastPathRadix!();
+    };
+}
+
+macro_rules! pow {
+    () => {
+        deps!();
+        # [doc = " MulAssign by a power of 5."] # [doc = ""] # [doc = " Theoretically..."] # [doc = ""] # [doc = " Use an exponentiation by squaring method, since it reduces the time"] # [doc = " complexity of the multiplication to ~`O(log(n))` for the squaring,"] # [doc = " and `O(n*m)` for the result. Since `m` is typically a lower-order"] # [doc = " factor, this significantly reduces the number of multiplications"] # [doc = " we need to do. Iteratively multiplying by small powers follows"] # [doc = " the nth triangular number series, which scales as `O(p^2)`, but"] # [doc = " where `p` is `n+m`. In short, it scales very poorly."] # [doc = ""] # [doc = " Practically...."] # [doc = ""] # [doc = " Exponentiation by Squaring:"] # [doc = "     running 2 tests"] # [doc = "     test bigcomp_f32_lexical ... bench:       1,018 ns/iter (+/- 78)"] # [doc = "     test bigcomp_f64_lexical ... bench:       3,639 ns/iter (+/- 1,007)"] # [doc = ""] # [doc = " Exponentiation by Iterative Small Powers:"] # [doc = "     running 2 tests"] # [doc = "     test bigcomp_f32_lexical ... bench:         518 ns/iter (+/- 31)"] # [doc = "     test bigcomp_f64_lexical ... bench:         583 ns/iter (+/- 47)"] # [doc = ""] # [doc = " Exponentiation by Iterative Large Powers (of 2):"] # [doc = "     running 2 tests"] # [doc = "     test bigcomp_f32_lexical ... bench:         671 ns/iter (+/- 31)"] # [doc = "     test bigcomp_f64_lexical ... bench:       1,394 ns/iter (+/- 47)"] # [doc = ""] # [doc = " The following benchmarks were run on `1 * 5^300`, using native `pow`,"] # [doc = " a version with only small powers, and one with pre-computed powers"] # [doc = " of `5^(3 * max_exp)`, rather than `5^(5 * max_exp)`."] # [doc = ""] # [doc = " However, using large powers is crucial for good performance for higher"] # [doc = " powers."] # [doc = "     pow/default             time:   [426.20 ns 427.96 ns 429.89 ns]"] # [doc = "     pow/small               time:   [2.9270 us 2.9411 us 2.9565 us]"] # [doc = "     pow/large:3             time:   [838.51 ns 842.21 ns 846.27 ns]"] # [doc = ""] # [doc = " Even using worst-case scenarios, exponentiation by squaring is"] # [doc = " significantly slower for our workloads. Just multiply by small powers,"] # [doc = " in simple cases, and use precalculated large powers in other cases."] # [doc = ""] # [doc = " Furthermore, using sufficiently big large powers is also crucial for"] # [doc = " performance. This is a tradeoff of binary size and performance, and"] # [doc = " using a single value at ~`5^(5 * max_exp)` seems optimal."] pub fn pow (x : & mut VecType , mut exp : u32) -> Option < () > { # [cfg (not (feature = "compact"))] { while exp >= LARGE_POW5_STEP { large_mul (x , & LARGE_POW5) ? ; exp -= LARGE_POW5_STEP ; } } let small_step = if LIMB_BITS == 32 { 13 } else { 27 } ; let max_native = (5 as Limb) . pow (small_step) ; while exp >= small_step { small_mul (x , max_native) ? ; exp -= small_step ; } if exp != 0 { let small_power = unsafe { int_pow_fast_path (exp as usize , FastPathRadix :: Five) } ; small_mul (x , small_power as Limb) ? ; } Some (()) }
+    };
+}
+
+pow!()

@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        DocCommentToken!();
+    };
+}
+
+macro_rules! impl_98 {
+    () => {
+        deps!();
+        impl DocCommentToken { pub (crate) fn get_definition_with_descend_at < T > (self , sema : & Semantics < '_ , RootDatabase > , offset : TextSize , mut cb : impl FnMut (Definition , SyntaxNode , TextRange) -> Option < T > ,) -> Option < T > { let DocCommentToken { prefix_len , doc_token } = self ; let original_start = doc_token . text_range () . start () ; let relative_comment_offset = offset - original_start - prefix_len ; sema . descend_into_macros (doc_token) . into_iter () . find_map (| t | { let (node , descended_prefix_len , is_inner) = match_ast ! { match t { ast :: Comment (comment) => { (t . parent () ?, TextSize :: try_from (comment . prefix () . len ()) . ok () ?, comment . is_inner ()) } , ast :: String (string) => { let attr = t . parent_ancestors () . find_map (ast :: Attr :: cast) ?; let attr_is_inner = attr . excl_token () . map (| excl | excl . kind () == BANG) . unwrap_or (false) ; (attr . syntax () . parent () ?, string . open_quote_text_range () ?. len () , attr_is_inner) } , _ => return None , } } ; let token_start = t . text_range () . start () ; let abs_in_expansion_offset = token_start + relative_comment_offset + descended_prefix_len ; let (attributes , def) = Self :: doc_attributes (sema , & node , is_inner) ? ; let (docs , doc_mapping) = docs_with_rangemap (sema . db , & attributes) ? ; let (in_expansion_range , link , ns , is_inner) = extract_definitions_from_docs (& docs) . into_iter () . find_map (| (range , link , ns) | { let (mapped , idx) = doc_mapping . map (range) ? ; (mapped . value . contains (abs_in_expansion_offset)) . then_some ((mapped . value , link , ns , idx . is_inner_attr ())) }) ? ; let in_expansion_relative_range = in_expansion_range - descended_prefix_len - token_start ; let absolute_range = in_expansion_relative_range + original_start + prefix_len ; let def = resolve_doc_path_for_def (sema . db , def , & link , ns , is_inner) ? ; cb (def , node , absolute_range) }) } # [doc = " When we hover a inner doc item, this find a attached definition."] # [doc = " ```"] # [doc = " // node == ITEM_LIST"] # [doc = " // node.parent == EXPR_BLOCK"] # [doc = " // node.parent().parent() == FN"] # [doc = " fn f() {"] # [doc = "    //! [`S$0`]"] # [doc = " }"] # [doc = " ```"] fn doc_attributes (sema : & Semantics < '_ , RootDatabase > , node : & SyntaxNode , is_inner_doc : bool ,) -> Option < (AttrsWithOwner , Definition) > { if is_inner_doc && node . kind () != SOURCE_FILE { let parent = node . parent () ? ; doc_attributes (sema , & parent) . or (doc_attributes (sema , & parent . parent () ?)) } else { doc_attributes (sema , node) } } }
+    };
+}
+
+impl_98!()

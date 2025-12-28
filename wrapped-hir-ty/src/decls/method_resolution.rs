@@ -1,6 +1,6 @@
 macro_rules! method_resolution {
     () => {
-        pub mod method_resolution ;
+        mod method_resolution ;
     };
 }
 

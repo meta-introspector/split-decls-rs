@@ -1,0 +1,22 @@
+macro_rules! deps {
+    () => {
+        Item!();
+        Read!();
+        Remote!();
+        Direction!();
+        Push!();
+        Error!();
+        Replace!();
+        Spec!();
+        Fetch!();
+    };
+}
+
+macro_rules! impl_973 {
+    () => {
+        deps!();
+        # [doc = " Modification"] impl Remote < '_ > { # [doc = " Read `url.<base>.insteadOf|pushInsteadOf` configuration variables and apply them to our urls, changing them in place."] # [doc = ""] # [doc = " This happens only once, and one if them may be changed even when reporting an error."] # [doc = " If both urls fail, only the first error (for fetch urls) is reported."] pub fn rewrite_urls (& mut self) -> Result < & mut Self , remote :: init :: Error > { let url_err = match remote :: init :: rewrite_url (& self . repo . config , self . url . as_ref () , remote :: Direction :: Fetch) { Ok (url) => { self . url_alias = url ; None } Err (err) => err . into () , } ; let push_url_err = match remote :: init :: rewrite_url (& self . repo . config , self . push_url . as_ref () , remote :: Direction :: Push) { Ok (url) => { self . push_url_alias = url ; None } Err (err) => err . into () , } ; url_err . or (push_url_err) . map (Err :: < & mut Self , _ >) . transpose () ? ; Ok (self) } # [doc = " Replace all currently set refspecs, typically from configuration, with the given `specs` for `direction`,"] # [doc = " or `None` if one of the input specs could not be parsed."] pub fn replace_refspecs < Spec > (& mut self , specs : impl IntoIterator < Item = Spec > , direction : remote :: Direction ,) -> Result < () , gix_refspec :: parse :: Error > where Spec : AsRef < BStr > , { use remote :: Direction :: * ; let specs : Vec < _ > = specs . into_iter () . map (| spec | { gix_refspec :: parse (spec . as_ref () , match direction { Push => gix_refspec :: parse :: Operation :: Push , Fetch => gix_refspec :: parse :: Operation :: Fetch , } ,) . map (| url | url . to_owned ()) }) . collect :: < Result < _ , _ > > () ? ; let dst = match direction { Push => & mut self . push_specs , Fetch => & mut self . fetch_specs , } ; * dst = specs ; Ok (()) } }
+    };
+}
+
+impl_973!()

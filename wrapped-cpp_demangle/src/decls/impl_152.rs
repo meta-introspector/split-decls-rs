@@ -1,0 +1,20 @@
+macro_rules! deps {
+    () => {
+        Parse!();
+        ParseContext!();
+        SubstitutionTable!();
+        IndexStr!();
+        CtorDtorName!();
+        Error!();
+        Result!();
+    };
+}
+
+macro_rules! impl_152 {
+    () => {
+        deps!();
+        impl Parse for CtorDtorName { fn parse < 'a , 'b > (ctx : & 'a ParseContext , subs : & 'a mut SubstitutionTable , input : IndexStr < 'b > ,) -> Result < (CtorDtorName , IndexStr < 'b >) > { try_begin_parse ! (stringify ! (CtorDtorName) , ctx , input) ; match input . peek () { Some (b'C') => { let mut tail = consume (b"C" , input) ? ; let inheriting = match tail . peek () { Some (b'I') => { tail = consume (b"I" , tail) ? ; true } _ => false , } ; let mut ctor_type : CtorDtorName = match tail . try_split_at (1) . as_ref () . map (| & (ref h , t) | (h . as_ref () , t)) { None => Err (error :: Error :: UnexpectedEnd) , Some ((b"1" , t)) => { tail = t ; Ok (CtorDtorName :: CompleteConstructor (None)) } Some ((b"2" , t)) => { tail = t ; Ok (CtorDtorName :: BaseConstructor (None)) } Some ((b"3" , t)) => { tail = t ; Ok (CtorDtorName :: CompleteAllocatingConstructor (None)) } Some ((b"4" , t)) => { tail = t ; Ok (CtorDtorName :: MaybeInChargeConstructor (None)) } _ => Err (error :: Error :: UnexpectedText) , } ? ; if inheriting { let (ty , tail) = TypeHandle :: parse (ctx , subs , tail) ? ; * ctor_type . inheriting_mut () = Some (ty) ; Ok ((ctor_type , tail)) } else { Ok ((ctor_type , tail)) } } Some (b'D') => { match input . try_split_at (2) . as_ref () . map (| & (ref h , t) | (h . as_ref () , t)) { Some ((b"D0" , tail)) => Ok ((CtorDtorName :: DeletingDestructor , tail)) , Some ((b"D1" , tail)) => Ok ((CtorDtorName :: CompleteDestructor , tail)) , Some ((b"D2" , tail)) => Ok ((CtorDtorName :: BaseDestructor , tail)) , Some ((b"D4" , tail)) => Ok ((CtorDtorName :: MaybeInChargeDestructor , tail)) , _ => Err (error :: Error :: UnexpectedText) , } } None => Err (error :: Error :: UnexpectedEnd) , _ => Err (error :: Error :: UnexpectedText) , } } }
+    };
+}
+
+impl_152!()

@@ -7,7 +7,7 @@ macro_rules! deps {
 macro_rules! impl_20 {
     () => {
         deps!();
-        # [doc = " Convert from `Result` to `Either` with `Ok => Right` and `Err => Left`."] impl < L , R > From < Result < R , L > > for Either < L , R > { fn from (r : Result < R , L >) -> Self { match r { Err (e) => Left (e) , Ok (o) => Right (o) , } } }
+        impl < L , R > ExactSizeIterator for Either < L , R > where L : ExactSizeIterator , R : ExactSizeIterator < Item = L :: Item > , { fn len (& self) -> usize { for_both ! (self , inner => inner . len ()) } }
     };
 }
 

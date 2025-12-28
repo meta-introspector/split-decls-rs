@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        HoverResult!();
+        HoverConfig!();
+    };
+}
+
+macro_rules! hover_for_definition {
+    () => {
+        deps!();
+        pub (crate) fn hover_for_definition (sema : & Semantics < '_ , RootDatabase > , file_id : FileId , def : Definition , subst : Option < GenericSubstitution < '_ > > , scope_node : & SyntaxNode , macro_arm : Option < u32 > , render_extras : bool , config : & HoverConfig < '_ > , edition : Edition , display_target : DisplayTarget ,) -> HoverResult { let famous_defs = match & def { Definition :: BuiltinType (_) => sema . scope (scope_node) . map (| it | FamousDefs (sema , it . krate ())) , _ => None , } ; let db = sema . db ; let def_ty = match def { Definition :: Local (it) => Some (it . ty (db)) , Definition :: GenericParam (hir :: GenericParam :: ConstParam (it)) => Some (it . ty (db)) , Definition :: GenericParam (hir :: GenericParam :: TypeParam (it)) => Some (it . ty (db)) , Definition :: Field (field) => Some (field . ty (db) . to_type (db)) , Definition :: TupleField (it) => Some (it . ty (db)) , Definition :: Function (it) => Some (it . ty (db)) , Definition :: Adt (it) => Some (it . ty (db)) , Definition :: Const (it) => Some (it . ty (db)) , Definition :: Static (it) => Some (it . ty (db)) , Definition :: TypeAlias (it) => Some (it . ty (db)) , Definition :: BuiltinType (it) => Some (it . ty (db)) , _ => None , } ; let notable_traits = def_ty . map (| ty | notable_traits (db , & ty)) . unwrap_or_default () ; let subst_types = subst . map (| subst | subst . types (db)) ; let (markup , range_map) = render :: definition (sema . db , def , famous_defs . as_ref () , & notable_traits , macro_arm , render_extras , subst_types . as_ref () , config , edition , display_target ,) ; HoverResult { markup : render :: process_markup (sema . db , def , & markup , range_map , config) , actions : [show_fn_references_action (sema , def) , show_implementations_action (sema , def) , runnable_action (sema , def , file_id) , goto_type_action_for_def (sema , def , & notable_traits , subst_types , edition) ,] . into_iter () . flatten () . collect () , } }
+    };
+}
+
+hover_for_definition!()

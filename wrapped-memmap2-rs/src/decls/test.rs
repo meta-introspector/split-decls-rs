@@ -1,9 +1,11 @@
 macro_rules! deps {
     () => {
-        RemapOptions!();
         Mmap!();
-        MmapMut!();
+        UncheckedAdvice!();
         MmapOptions!();
+        Advice!();
+        RemapOptions!();
+        MmapMut!();
     };
 }
 

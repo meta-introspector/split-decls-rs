@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        StringLit!();
+    };
+}
+
+macro_rules! invalid_unicode_escapes {
+    () => {
+        deps!();
+        # [test] fn invalid_unicode_escapes () { assert_err ! (StringLit , r#""\u""# , UnicodeEscapeWithoutBrace , 1 .. 3) ; assert_err ! (StringLit , r#""🦊\u ""# , UnicodeEscapeWithoutBrace , 5 .. 7) ; assert_err ! (StringLit , r#""\u3""# , UnicodeEscapeWithoutBrace , 1 .. 3) ; assert_err ! (StringLit , r#""\u{""# , UnterminatedUnicodeEscape , 1 .. 4) ; assert_err ! (StringLit , r#""\u{12""# , UnterminatedUnicodeEscape , 1 .. 6) ; assert_err ! (StringLit , r#""🦊\u{a0b""# , UnterminatedUnicodeEscape , 5 .. 11) ; assert_err ! (StringLit , r#""\u{a0_b  ""# , UnterminatedUnicodeEscape , 1 .. 10) ; assert_err ! (StringLit , r#""\u{_}నక్క""# , InvalidStartOfUnicodeEscape , 4) ; assert_err ! (StringLit , r#""\u{_5f}""# , InvalidStartOfUnicodeEscape , 4) ; assert_err ! (StringLit , r#""fox\u{x}""# , NonHexDigitInUnicodeEscape , 7) ; assert_err ! (StringLit , r#""\u{0x}🦊""# , NonHexDigitInUnicodeEscape , 5) ; assert_err ! (StringLit , r#""నక్క\u{3bx}""# , NonHexDigitInUnicodeEscape , 18) ; assert_err ! (StringLit , r#""\u{3b_x}лиса""# , NonHexDigitInUnicodeEscape , 7) ; assert_err ! (StringLit , r#""\u{4x_}""# , NonHexDigitInUnicodeEscape , 5) ; assert_err ! (StringLit , r#""\u{1234567}""# , TooManyDigitInUnicodeEscape , 10) ; assert_err ! (StringLit , r#""నక్క\u{1234567}🦊""# , TooManyDigitInUnicodeEscape , 22) ; assert_err ! (StringLit , r#""నక్క\u{1_23_4_56_7}""# , TooManyDigitInUnicodeEscape , 26) ; assert_err ! (StringLit , r#""\u{abcdef123}лиса""# , TooManyDigitInUnicodeEscape , 10) ; assert_err ! (StringLit , r#""\u{110000}fox""# , InvalidUnicodeEscapeChar , 1 .. 11) ; }
+    };
+}
+
+invalid_unicode_escapes!()

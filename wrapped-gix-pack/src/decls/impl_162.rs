@@ -1,0 +1,19 @@
+macro_rules! deps {
+    () => {
+        Entry!();
+        Error!();
+        Kind!();
+        Version!();
+        EntriesToBytesIter!();
+        Item!();
+    };
+}
+
+macro_rules! impl_162 {
+    () => {
+        deps!();
+        impl < I , W > EntriesToBytesIter < I , W > where I : Iterator < Item = Result < input :: Entry , input :: Error > > , W : std :: io :: Read + std :: io :: Write + std :: io :: Seek , { # [doc = " Create a new instance reading [entries][input::Entry] from an `input` iterator and write pack data bytes to"] # [doc = " `output` writer, resembling a pack of `version`. The amount of entries will be dynamically determined and"] # [doc = " the pack is completed once the last entry was written."] # [doc = " `object_hash` is the kind of hash to use for the pack checksum and maybe other places, depending on the version."] # [doc = ""] # [doc = " # Panics"] # [doc = ""] # [doc = " Not all combinations of `object_hash` and `version` are supported currently triggering assertion errors."] pub fn new (input : I , output : W , version : crate :: data :: Version , object_hash : gix_hash :: Kind) -> Self { assert ! (matches ! (version , crate :: data :: Version :: V2) , "currently only pack version 2 can be written" ,) ; assert ! (matches ! (object_hash , gix_hash :: Kind :: Sha1) , "currently only Sha1 is supported, right now we don't know how other hashes are encoded" ,) ; EntriesToBytesIter { input : input . peekable () , output , object_hash , num_entries : 0 , trailer : None , data_version : version , is_done : false , } } # [doc = " Returns the trailing hash over all ~ entries once done."] # [doc = " It's `None` if we are not yet done writing."] pub fn digest (& self) -> Option < gix_hash :: ObjectId > { self . trailer } fn next_inner (& mut self , entry : input :: Entry) -> Result < input :: Entry , gix_hash :: io :: Error > { if self . num_entries == 0 { let header_bytes = crate :: data :: header :: encode (self . data_version , 0) ; self . output . write_all (& header_bytes [..]) ? ; } self . num_entries += 1 ; entry . header . write_to (entry . decompressed_size , & mut self . output) ? ; self . output . write_all (entry . compressed . as_deref () . expect ("caller must configure generator to keep compressed bytes") ,) ? ; Ok (entry) } fn write_header_and_digest (& mut self , last_entry : Option < & mut input :: Entry >) -> Result < () , gix_hash :: io :: Error > { let header_bytes = crate :: data :: header :: encode (self . data_version , self . num_entries) ; let num_bytes_written = if last_entry . is_some () { self . output . stream_position () ? } else { header_bytes . len () as u64 } ; self . output . rewind () ? ; self . output . write_all (& header_bytes [..]) ? ; self . output . flush () ? ; self . output . rewind () ? ; let interrupt_never = std :: sync :: atomic :: AtomicBool :: new (false) ; let digest = gix_hash :: bytes (& mut self . output , num_bytes_written , self . object_hash , & mut gix_features :: progress :: Discard , & interrupt_never ,) ? ; self . output . write_all (digest . as_slice ()) ? ; self . output . flush () ? ; self . is_done = true ; if let Some (last_entry) = last_entry { last_entry . trailer = Some (digest) ; } self . trailer = Some (digest) ; Ok (()) } }
+    };
+}
+
+impl_162!()

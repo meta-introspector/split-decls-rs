@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        RenameResult!();
+    };
+}
+
+macro_rules! rename_to_self {
+    () => {
+        deps!();
+        fn rename_to_self (sema : & Semantics < '_ , RootDatabase > , local : hir :: Local ,) -> RenameResult < SourceChange > { if never ! (local . is_self (sema . db)) { bail ! ("rename_to_self invoked on self") ; } let fn_def = match local . parent (sema . db) { hir :: DefWithBody :: Function (func) => func , _ => bail ! ("Cannot rename local to self outside of function") , } ; if fn_def . self_param (sema . db) . is_some () { bail ! ("Method already has a self parameter") ; } let params = fn_def . assoc_fn_params (sema . db) ; let first_param = params . first () . ok_or_else (| | format_err ! ("Cannot rename local to self unless it is a parameter")) ? ; match first_param . as_local (sema . db) { Some (plocal) => { if plocal != local { bail ! ("Only the first parameter may be renamed to self") ; } } None => bail ! ("rename_to_self invoked on destructuring parameter") , } let assoc_item = fn_def . as_assoc_item (sema . db) . ok_or_else (| | format_err ! ("Cannot rename parameter to self for free function")) ? ; let impl_ = match assoc_item . container (sema . db) { hir :: AssocItemContainer :: Trait (_) => { bail ! ("Cannot rename parameter to self for trait functions") ; } hir :: AssocItemContainer :: Impl (impl_) => impl_ , } ; let first_param_ty = first_param . ty () ; let impl_ty = impl_ . self_ty (sema . db) ; let (ty , self_param) = if impl_ty . remove_ref () . is_some () { (first_param_ty . clone () , "self") } else { first_param_ty . remove_ref () . map_or ((first_param_ty . clone () , "self") , | ty | { (ty , if first_param_ty . is_mutable_reference () { "&mut self" } else { "&self" }) }) } ; if ty != impl_ty { bail ! ("Parameter type differs from impl block type") ; } let InFile { file_id , value : param_source } = sema . source (first_param . clone ()) . ok_or_else (| | format_err ! ("No source for parameter found")) ? ; let def = Definition :: Local (local) ; let usages = def . usages (sema) . all () ; let mut source_change = SourceChange :: default () ; source_change . extend (usages . iter () . map (| (file_id , references) | { (file_id . file_id (sema . db) , source_edit_from_references (sema . db , references , def , & Name :: new_symbol_root (sym :: self_) , file_id . edition (sema . db) ,) ,) })) ; source_change . insert_source_edit (file_id . original_file (sema . db) . file_id (sema . db) , TextEdit :: replace (param_source . syntax () . text_range () , String :: from (self_param)) ,) ; transform_assoc_fn_into_method_call (sema , & mut source_change , fn_def) ; Ok (source_change) }
+    };
+}
+
+rename_to_self!()

@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        Deserializer!();
+    };
+}
+
+macro_rules! impl_21 {
+    () => {
+        deps!();
+        impl < 'de > dyn Deserializer < 'de > { return_impl_trait ! { # [doc = " Convert any Serde `Deserializer` to a trait object."] # [doc = ""] # [doc = " ```rust"] # [doc = " use erased_serde::Deserializer;"] # [doc = " use std::collections::BTreeMap as Map;"] # [doc = ""] # [doc = " fn main() {"] # [doc = "     static JSON: &'static [u8] = br#\"{\"A\": 65, \"B\": 66}\"#;"] # [doc = "     static CBOR: &'static [u8] = &[162, 97, 65, 24, 65, 97, 66, 24, 66];"] # [doc = ""] # [doc = "     // Construct some deserializers."] # [doc = "     let json = &mut serde_json::Deserializer::from_slice(JSON);"] # [doc = "     let cbor = &mut serde_cbor::Deserializer::from_slice(CBOR);"] # [doc = ""] # [doc = "     // The values in this map are boxed trait objects, which is not possible"] # [doc = "     // with the normal serde::Deserializer because of object safety."] # [doc = "     let mut formats: Map<&str, Box<dyn Deserializer>> = Map::new();"] # [doc = "     formats.insert(\"json\", Box::new(<dyn Deserializer>::erase(json)));"] # [doc = "     formats.insert(\"cbor\", Box::new(<dyn Deserializer>::erase(cbor)));"] # [doc = ""] # [doc = "     // Pick a Deserializer out of the formats map."] # [doc = "     let format = formats.get_mut(\"json\").unwrap();"] # [doc = ""] # [doc = "     let data: Map<String, usize> = erased_serde::deserialize(format).unwrap();"] # [doc = ""] # [doc = "     println!(\"{}\", data[\"A\"] + data[\"B\"]);"] # [doc = " }"] # [doc = " ```"] pub fn erase < D > (deserializer : D) -> impl Deserializer <'de > [erase :: Deserializer < D >] where D : serde :: Deserializer <'de >, { erase :: Deserializer :: new (deserializer) } } }
+    };
+}
+
+impl_21!()

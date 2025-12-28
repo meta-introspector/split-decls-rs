@@ -1,6 +1,6 @@
 macro_rules! push {
     () => {
-        # [doc = ""] pub mod push ;
+        pub mod push ;
     };
 }
 

@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        IntoIter!();
+        HashMap!();
+    };
+}
+
+macro_rules! impl_338 {
+    () => {
+        deps!();
+        # [doc = " Inserts all new key-values from the iterator and replaces values with existing"] # [doc = " keys with new values returned from the iterator."] impl < 'a , K , V , S , A > Extend < & 'a (K , V) > for HashMap < K , V , S , A > where K : Eq + Hash + Copy , V : Copy , S : BuildHasher , A : Allocator , { # [doc = " Inserts all new key-values from the iterator to existing `HashMap<K, V, S, A>`."] # [doc = " Replace values with existing keys with new values returned from the iterator."] # [doc = " The keys and values must implement [`Copy`] trait."] # [doc = ""] # [doc = " [`Copy`]: https://doc.rust-lang.org/core/marker/trait.Copy.html"] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " use hashbrown::hash_map::HashMap;"] # [doc = ""] # [doc = " let mut map = HashMap::new();"] # [doc = " map.insert(1, 100);"] # [doc = ""] # [doc = " let arr = [(1, 1), (2, 2)];"] # [doc = " let some_iter = arr.iter();"] # [doc = " map.extend(some_iter);"] # [doc = " // Replace values with existing keys with new values returned from the iterator."] # [doc = " // So that the map.get(&1) doesn't return Some(&100)."] # [doc = " assert_eq!(map.get(&1), Some(&1));"] # [doc = ""] # [doc = " let some_vec: Vec<_> = vec![(3, 3), (4, 4)];"] # [doc = " map.extend(&some_vec);"] # [doc = ""] # [doc = " let some_arr = [(5, 5), (6, 6)];"] # [doc = " map.extend(&some_arr);"] # [doc = ""] # [doc = " let mut vec: Vec<_> = map.into_iter().collect();"] # [doc = " // The `IntoIter` iterator produces items in arbitrary order, so the"] # [doc = " // items must be sorted to test them against a sorted array."] # [doc = " vec.sort_unstable();"] # [doc = " assert_eq!(vec, [(1, 1), (2, 2), (3, 3), (4, 4), (5, 5), (6, 6)]);"] # [doc = " ```"] # [cfg_attr (feature = "inline-more" , inline)] fn extend < T : IntoIterator < Item = & 'a (K , V) > > (& mut self , iter : T) { self . extend (iter . into_iter () . map (| & (key , value) | (key , value))) ; } # [inline] # [cfg (feature = "nightly")] fn extend_one (& mut self , & (k , v) : & 'a (K , V)) { self . insert (k , v) ; } # [inline] # [cfg (feature = "nightly")] fn extend_reserve (& mut self , additional : usize) { Extend :: < (K , V) > :: extend_reserve (self , additional) ; } }
+    };
+}
+
+impl_338!()

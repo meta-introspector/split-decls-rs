@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        IntoArrayLength!();
+        ArrayLength!();
+    };
+}
+
+macro_rules! impl_161 {
+    () => {
+        deps!();
+        impl < const N : usize > IntoArrayLength for Const < N > where Const < N > : ToUInt , typenum :: U < N > : ArrayLength , { type ArrayLength = typenum :: U < N > ; }
+    };
+}
+
+impl_161!()

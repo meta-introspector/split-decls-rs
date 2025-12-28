@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        PropertyCodePointMap!();
+    };
+}
+
+macro_rules! impl_370 {
+    () => {
+        deps!();
+        impl < 'data , T : TrieValue > PropertyCodePointMap < 'data , T > { # [inline] pub (crate) fn get32 (& self , ch : u32) -> T { match * self { Self :: CodePointTrie (ref t) => t . get32 (ch) , } } # [inline] pub (crate) fn get (& self , c : char) -> T { match * self { Self :: CodePointTrie (ref t) => t . get (c) , } } # [inline] # [cfg (feature = "alloc")] pub (crate) fn try_into_converted < P > (self ,) -> Result < PropertyCodePointMap < 'data , P > , zerovec :: ule :: UleError > where P : TrieValue , { match self { Self :: CodePointTrie (t) => t . try_into_converted () . map (PropertyCodePointMap :: CodePointTrie) , } } # [inline] # [cfg (feature = "alloc")] pub (crate) fn get_set_for_value (& self , value : T) -> CodePointInversionList < 'static > { match * self { Self :: CodePointTrie (ref t) => t . get_set_for_value (value) , } } # [inline] pub (crate) fn iter_ranges (& self) -> impl Iterator < Item = CodePointMapRange < T > > + '_ { match * self { Self :: CodePointTrie (ref t) => t . iter_ranges () , } } # [inline] pub (crate) fn iter_ranges_mapped < 'a , U : Eq + 'a > (& 'a self , map : impl FnMut (T) -> U + Copy + 'a ,) -> impl Iterator < Item = CodePointMapRange < U > > + 'a { match * self { Self :: CodePointTrie (ref t) => t . iter_ranges_mapped (map) , } } # [inline] pub (crate) fn from_code_point_trie (trie : CodePointTrie < 'static , T >) -> Self { Self :: CodePointTrie (trie) } # [inline] pub (crate) fn as_code_point_trie (& self) -> Option < & CodePointTrie < 'data , T > > { match * self { Self :: CodePointTrie (ref t) => Some (t) , } } # [inline] pub (crate) fn to_code_point_trie (& self) -> CodePointTrie < '_ , T > { match * self { Self :: CodePointTrie (ref t) => ZeroFrom :: zero_from (t) , } } }
+    };
+}
+
+impl_370!()

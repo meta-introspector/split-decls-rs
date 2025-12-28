@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        Buf!();
+        Take!();
+        BufMut!();
+    };
+}
+
+macro_rules! impl_46 {
+    () => {
+        deps!();
+        impl < T > Take < T > { # [doc = " Consumes this `Take`, returning the underlying value."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```rust"] # [doc = " use bytes::{Buf, BufMut};"] # [doc = ""] # [doc = " let mut buf = b\"hello world\".take(2);"] # [doc = " let mut dst = vec![];"] # [doc = ""] # [doc = " dst.put(&mut buf);"] # [doc = " assert_eq!(*dst, b\"he\"[..]);"] # [doc = ""] # [doc = " let mut buf = buf.into_inner();"] # [doc = ""] # [doc = " dst.clear();"] # [doc = " dst.put(&mut buf);"] # [doc = " assert_eq!(*dst, b\"llo world\"[..]);"] # [doc = " ```"] pub fn into_inner (self) -> T { self . inner } # [doc = " Gets a reference to the underlying `Buf`."] # [doc = ""] # [doc = " It is inadvisable to directly read from the underlying `Buf`."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```rust"] # [doc = " use bytes::Buf;"] # [doc = ""] # [doc = " let buf = b\"hello world\".take(2);"] # [doc = ""] # [doc = " assert_eq!(11, buf.get_ref().remaining());"] # [doc = " ```"] pub fn get_ref (& self) -> & T { & self . inner } # [doc = " Gets a mutable reference to the underlying `Buf`."] # [doc = ""] # [doc = " It is inadvisable to directly read from the underlying `Buf`."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```rust"] # [doc = " use bytes::{Buf, BufMut};"] # [doc = ""] # [doc = " let mut buf = b\"hello world\".take(2);"] # [doc = " let mut dst = vec![];"] # [doc = ""] # [doc = " buf.get_mut().advance(2);"] # [doc = ""] # [doc = " dst.put(&mut buf);"] # [doc = " assert_eq!(*dst, b\"ll\"[..]);"] # [doc = " ```"] pub fn get_mut (& mut self) -> & mut T { & mut self . inner } # [doc = " Returns the maximum number of bytes that can be read."] # [doc = ""] # [doc = " # Note"] # [doc = ""] # [doc = " If the inner `Buf` has fewer bytes than indicated by this method then"] # [doc = " that is the actual number of available bytes."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```rust"] # [doc = " use bytes::Buf;"] # [doc = ""] # [doc = " let mut buf = b\"hello world\".take(2);"] # [doc = ""] # [doc = " assert_eq!(2, buf.limit());"] # [doc = " assert_eq!(b'h', buf.get_u8());"] # [doc = " assert_eq!(1, buf.limit());"] # [doc = " ```"] pub fn limit (& self) -> usize { self . limit } # [doc = " Sets the maximum number of bytes that can be read."] # [doc = ""] # [doc = " # Note"] # [doc = ""] # [doc = " If the inner `Buf` has fewer bytes than `lim` then that is the actual"] # [doc = " number of available bytes."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```rust"] # [doc = " use bytes::{Buf, BufMut};"] # [doc = ""] # [doc = " let mut buf = b\"hello world\".take(2);"] # [doc = " let mut dst = vec![];"] # [doc = ""] # [doc = " dst.put(&mut buf);"] # [doc = " assert_eq!(*dst, b\"he\"[..]);"] # [doc = ""] # [doc = " dst.clear();"] # [doc = ""] # [doc = " buf.set_limit(3);"] # [doc = " dst.put(&mut buf);"] # [doc = " assert_eq!(*dst, b\"llo\"[..]);"] # [doc = " ```"] pub fn set_limit (& mut self , lim : usize) { self . limit = lim } }
+    };
+}
+
+impl_46!()

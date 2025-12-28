@@ -1,0 +1,7 @@
+macro_rules! IMAGE_ENCLAVE_POLICY_DEBUGGABLE {
+    () => {
+        pub const IMAGE_ENCLAVE_POLICY_DEBUGGABLE : u32 = 0x0000_0001 ;
+    };
+}
+
+IMAGE_ENCLAVE_POLICY_DEBUGGABLE!()

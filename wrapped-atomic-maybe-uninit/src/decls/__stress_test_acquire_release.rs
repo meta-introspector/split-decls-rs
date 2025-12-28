@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        AtomicMaybeUninit!();
+    };
+}
+
+macro_rules! __stress_test_acquire_release {
+    () => {
+        deps!();
+        macro_rules ! __stress_test_acquire_release { (prepare) => { # [cfg (valgrind)] use std :: mem ; use std :: { mem :: MaybeUninit , sync :: atomic :: { AtomicUsize , Ordering } , thread , } ; # [cfg (valgrind)] use crate :: tests :: helper ::*; use crate :: { AtomicMaybeUninit , tests :: helper :: catch_unwind_on_weak_memory_arch as can_panic , } ; } ; (should_pass , $ ty : ident , $ write : ident , $ load_order : ident , $ store_order : ident) => { paste :: paste ! { # [test] # [cfg_attr (debug_assertions , ignore = "slow in some environments")] # [allow (clippy :: cast_possible_truncation)] fn [< load_ $ load_order : lower _ $ write _ $ store_order : lower >] () { __stress_test_acquire_release ! ($ ty , $ write , $ load_order , $ store_order) ; } } } ; (can_panic , $ ty : ident , $ write : ident , $ load_order : ident , $ store_order : ident) => { paste :: paste ! { # [test] # [ignore = "slow in some environments"] # [allow (clippy :: cast_possible_truncation)] fn [< load_ $ load_order : lower _ $ write _ $ store_order : lower >] () { can_panic ("a=" , || __stress_test_acquire_release ! ($ ty , $ write , $ load_order , $ store_order)) ; } } } ; ($ ty : ident , $ write : ident , $ load_order : ident , $ store_order : ident) => { { # [cfg (valgrind)] if cfg ! (target_arch = "riscv64") && mem :: size_of ::<$ ty > () <= 2 && stringify ! ($ write) == "swap" { return ; } let mut n : usize = 50_000 ; if $ ty :: try_from (n) . is_err () { n = ($ ty :: MAX as usize) . checked_add (1) . unwrap () ; } let a = & AtomicMaybeUninit ::<$ ty >:: new (MaybeUninit :: new (0)) ; # [cfg (valgrind)] if IMP_EMU_SUB_WORD_CAS && mem :: size_of ::<$ ty > () <= 2 && stringify ! ($ write) == "swap" { mark_aligned_defined (a) ; } let b = & AtomicUsize :: new (0) ; thread :: scope (| s | { s . spawn (|| { for i in 0 .. n { b . store (i , Ordering :: Relaxed) ; a .$ write (MaybeUninit :: new (i as $ ty) , Ordering ::$ store_order) ; } }) ; loop { let a = unsafe { a . load (Ordering ::$ load_order) . assume_init () } ; let b = b . load (Ordering :: Relaxed) ; assert ! (a as usize <= b , "a={},b={}" , a , b) ; if a as usize == n - 1 { break ; } } }) ; } } ; }
+    };
+}
+
+__stress_test_acquire_release!()

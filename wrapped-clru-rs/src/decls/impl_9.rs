@@ -1,14 +1,13 @@
 macro_rules! deps {
     () => {
-        CLruCacheIter!();
-        CLruCache!();
+        FixedSizeListIter!();
     };
 }
 
 macro_rules! impl_9 {
     () => {
         deps!();
-        impl < K , V , S , W : WeightScale < K , V > > CLruCache < K , V , S , W > { # [doc = " Returns an iterator visiting all entries in order."] # [doc = " The iterator element type is `(&'a K, &'a V)`."] pub fn iter (& self) -> CLruCacheIter < '_ , K , V > { CLruCacheIter { iter : self . storage . iter () , } } }
+        impl < 'a , T > Iterator for FixedSizeListIter < 'a , T > { type Item = (usize , & 'a T) ; fn next (& mut self) -> Option < Self :: Item > { if self . len > 0 { let front = self . front ; let node = self . list . node_ref (front) . unwrap () ; self . front = node . next ; self . len -= 1 ; Some ((front , & node . data)) } else { None } } fn size_hint (& self) -> (usize , Option < usize >) { (self . len , Some (self . len)) } }
     };
 }
 

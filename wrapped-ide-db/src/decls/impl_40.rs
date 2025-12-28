@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        SymbolKind!();
+        Definition!();
     };
 }
 
 macro_rules! impl_40 {
     () => {
         deps!();
-        impl From < hir :: MacroKind > for SymbolKind { fn from (it : hir :: MacroKind) -> Self { match it { hir :: MacroKind :: Declarative | hir :: MacroKind :: DeclarativeBuiltIn => SymbolKind :: Macro , hir :: MacroKind :: ProcMacro => SymbolKind :: ProcMacro , hir :: MacroKind :: Derive | hir :: MacroKind :: DeriveBuiltIn => SymbolKind :: Derive , hir :: MacroKind :: Attr | hir :: MacroKind :: AttrBuiltIn => SymbolKind :: Attribute , } } }
+        impl From < AssocItem > for Definition { fn from (assoc_item : AssocItem) -> Self { match assoc_item { AssocItem :: Function (it) => Definition :: Function (it) , AssocItem :: Const (it) => Definition :: Const (it) , AssocItem :: TypeAlias (it) => Definition :: TypeAlias (it) , } } }
     };
 }
 

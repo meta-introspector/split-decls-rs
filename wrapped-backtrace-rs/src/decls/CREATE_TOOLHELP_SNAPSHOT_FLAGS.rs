@@ -1,0 +1,7 @@
+macro_rules! CREATE_TOOLHELP_SNAPSHOT_FLAGS {
+    () => {
+        pub type CREATE_TOOLHELP_SNAPSHOT_FLAGS = u32 ;
+    };
+}
+
+CREATE_TOOLHELP_SNAPSHOT_FLAGS!()

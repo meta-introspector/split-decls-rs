@@ -1,8 +1,9 @@
 macro_rules! deps {
     () => {
-        CVWords!();
         Output!();
         CVBytes!();
+        Platform!();
+        CVWords!();
     };
 }
 

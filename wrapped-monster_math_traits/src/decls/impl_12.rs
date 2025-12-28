@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Declaration!();
         DummyHeckeOperator!();
         HeckeOperator!();
+        Declaration!();
     };
 }
 

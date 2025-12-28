@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        PrefilterKindFn!();
+    };
+}
+
+macro_rules! Prefilter {
+    () => {
+        deps!();
+        # [doc = " The implementation of a prefilter."] # [doc = ""] # [doc = " This type encapsulates dispatch to one of several possible choices for a"] # [doc = " prefilter. Generally speaking, all prefilters have the same approximate"] # [doc = " algorithm: they choose a couple of bytes from the needle that are believed"] # [doc = " to be rare, use a fast vector algorithm to look for those bytes and return"] # [doc = " positions as candidates for some substring search algorithm (currently only"] # [doc = " Two-Way) to confirm as a match or not."] # [doc = ""] # [doc = " The differences between the algorithms are actually at the vector"] # [doc = " implementation level. Namely, we need different routines based on both"] # [doc = " which target architecture we're on and what CPU features are supported."] # [doc = ""] # [doc = " The straight-forwardly obvious approach here is to use an enum, and make"] # [doc = " `Prefilter::find` do case analysis to determine which algorithm was"] # [doc = " selected and invoke it. However, I've observed that this leads to poor"] # [doc = " codegen in some cases, especially in latency sensitive benchmarks. That is,"] # [doc = " this approach comes with overhead that I wasn't able to eliminate."] # [doc = ""] # [doc = " The second obvious approach is to use dynamic dispatch with traits. Doing"] # [doc = " that in this context where `Prefilter` owns the selection generally"] # [doc = " requires heap allocation, and this code is designed to run in core-only"] # [doc = " environments."] # [doc = ""] # [doc = " So we settle on using a union (that's `PrefilterKind`) and a function"] # [doc = " pointer (that's `PrefilterKindFn`). We select the right function pointer"] # [doc = " based on which field in the union we set, and that function in turn"] # [doc = " knows which field of the union to access. The downside of this approach"] # [doc = " is that it forces us to think about safety, but the upside is that"] # [doc = " there are some nice latency improvements to benchmarks. (Especially the"] # [doc = " `memmem/sliceslice/short` benchmark.)"] # [doc = ""] # [doc = " In cases where we've selected a vector algorithm and the haystack given"] # [doc = " is too short, we fallback to the scalar version of `memchr` on the"] # [doc = " `rarest_byte`. (The scalar version of `memchr` is still better than a naive"] # [doc = " byte-at-a-time loop because it will read in `usize`-sized chunks at a"] # [doc = " time.)"] # [derive (Clone , Copy)] struct Prefilter { call : PrefilterKindFn , kind : PrefilterKind , rarest_byte : u8 , rarest_offset : u8 , }
+    };
+}
+
+Prefilter!()

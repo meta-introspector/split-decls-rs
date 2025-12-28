@@ -1,13 +1,14 @@
 macro_rules! deps {
     () => {
-        ParseOptions!();
+        AutoLogParse!();
+        IndexStr!();
     };
 }
 
 macro_rules! impl_8 {
     () => {
         deps!();
-        impl ParseOptions { # [doc = " Set the limit on recursion depth during the parsing phase. A low"] # [doc = " limit will cause valid symbols to be rejected, but a high limit may"] # [doc = " allow pathological symbols to overflow the stack during parsing."] # [doc = " The default value is 96, which will not overflow the stack even in"] # [doc = " a debug build."] pub fn recursion_limit (mut self , limit : u32) -> Self { self . recursion_limit = Some (NonZeroU32 :: new (limit) . expect ("Recursion limit must be > 0")) ; self } }
+        impl AutoLogParse { # [cfg (feature = "logging")] fn new (production : & 'static str , input : IndexStr < '_ >) -> AutoLogParse { LOG_DEPTH . with (| depth | { if * depth . borrow () == 0 { println ! () ; } let indent : String = (0 .. * depth . borrow () * 4) . map (| _ | ' ') . collect () ; log ! ("{}({} \"{}\" {}" , indent , production , String :: from_utf8_lossy (input . as_ref ()) , input . len () ,) ; * depth . borrow_mut () += 1 ; }) ; AutoLogParse } # [cfg (not (feature = "logging"))] # [inline (always)] fn new (_ : & 'static str , _ : IndexStr) -> AutoLogParse { AutoLogParse } }
     };
 }
 

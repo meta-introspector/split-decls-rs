@@ -1,14 +1,16 @@
 macro_rules! deps {
     () => {
-        FieldSource!();
-        TupleField!();
+        Variant!();
+        VariantDef!();
+        Struct!();
+        Union!();
     };
 }
 
 macro_rules! impl_34 {
     () => {
         deps!();
-        impl AstNode for FieldSource { fn can_cast (kind : syntax :: SyntaxKind) -> bool where Self : Sized , { ast :: RecordField :: can_cast (kind) || ast :: TupleField :: can_cast (kind) } fn cast (syntax : SyntaxNode) -> Option < Self > where Self : Sized , { if ast :: RecordField :: can_cast (syntax . kind ()) { < ast :: RecordField as AstNode > :: cast (syntax) . map (FieldSource :: Named) } else if ast :: TupleField :: can_cast (syntax . kind ()) { < ast :: TupleField as AstNode > :: cast (syntax) . map (FieldSource :: Pos) } else { None } } fn syntax (& self) -> & SyntaxNode { match self { FieldSource :: Named (it) => it . syntax () , FieldSource :: Pos (it) => it . syntax () , } } }
+        impl From < VariantId > for VariantDef { fn from (def : VariantId) -> Self { match def { VariantId :: StructId (it) => VariantDef :: Struct (it . into ()) , VariantId :: EnumVariantId (it) => VariantDef :: Variant (it . into ()) , VariantId :: UnionId (it) => VariantDef :: Union (it . into ()) , } } }
     };
 }
 

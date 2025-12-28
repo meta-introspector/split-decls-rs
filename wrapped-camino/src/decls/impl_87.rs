@@ -1,15 +1,14 @@
 macro_rules! deps {
     () => {
-        FromPathBufError!();
-        FromPathError!();
         Utf8PathBuf!();
+        Utf8Path!();
     };
 }
 
 macro_rules! impl_87 {
     () => {
         deps!();
-        impl FromPathBufError { # [doc = " Returns the [`Path`] slice that was attempted to be converted to [`Utf8PathBuf`]."] # [inline] pub fn as_path (& self) -> & Path { & self . path } # [doc = " Returns the [`PathBuf`] that was attempted to be converted to [`Utf8PathBuf`]."] # [inline] pub fn into_path_buf (self) -> PathBuf { self . path } # [doc = " Fetches a [`FromPathError`] for more about the conversion failure."] # [doc = ""] # [doc = " At the moment this struct does not contain any additional information, but is provided for"] # [doc = " completeness."] # [inline] pub fn from_path_error (& self) -> FromPathError { self . error } # [doc = " Converts self into a [`std::io::Error`] with kind"] # [doc = " [`InvalidData`](io::ErrorKind::InvalidData)."] # [doc = ""] # [doc = " Many users of [`FromPathBufError`] will want to convert it into an [`io::Error`]. This is a"] # [doc = " convenience method to do that."] pub fn into_io_error (self) -> io :: Error { io :: Error :: new (io :: ErrorKind :: InvalidData , self) } }
+        impl From < Utf8PathBuf > for Box < Utf8Path > { fn from (path : Utf8PathBuf) -> Box < Utf8Path > { path . into_boxed_path () } }
     };
 }
 

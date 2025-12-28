@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        BlockBuffer!();
-        BufferKind!();
+        Error!();
+        Block!();
     };
 }
 
 macro_rules! impl_21 {
     () => {
         deps!();
-        # [cfg (feature = "zeroize")] impl < BS : ArraySize , K : BufferKind > Zeroize for BlockBuffer < BS , K > { # [inline] fn zeroize (& mut self) { self . buffer . zeroize () ; self . pos . zeroize () ; } }
+        impl fmt :: Display for Error { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> Result < () , fmt :: Error > { f . write_str ("Block buffer error") } }
     };
 }
 

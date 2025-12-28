@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        DummySemanticHasher!();
-        SemanticHasher!();
         Declaration!();
+        SemanticHasher!();
+        DummySemanticHasher!();
     };
 }
 

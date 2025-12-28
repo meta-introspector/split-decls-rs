@@ -1,8 +1,9 @@
 macro_rules! deps {
     () => {
-        PackageId!();
         Edition!();
         Target!();
+        Dependency!();
+        PackageId!();
         Source!();
     };
 }

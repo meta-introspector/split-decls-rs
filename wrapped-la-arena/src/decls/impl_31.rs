@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Arena!();
+        Idx!();
     };
 }
 
 macro_rules! impl_31 {
     () => {
         deps!();
-        impl < T > Default for Arena < T > { fn default () -> Arena < T > { Arena { data : Vec :: new () } } }
+        impl < T > PartialEq for Idx < T > { fn eq (& self , other : & Idx < T >) -> bool { self . raw == other . raw } }
     };
 }
 

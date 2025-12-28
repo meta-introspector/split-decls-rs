@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        TryJoin!();
+    };
+}
+
+macro_rules! impl_376 {
+    () => {
+        deps!();
+        impl < Fut , T , E > Future for TryJoin < Fut , T , E > where Fut : Future < Output = Result < T , E > > , { type Output = Result < Vec < T > , E > ; # [inline] fn poll (self : Pin < & mut Self > , cx : & mut Context < '_ >) -> Poll < Self :: Output > { let this = self . project () ; assert ! (!* this . consumed , "Futures must not be polled after completing") ; let mut readiness = this . wakers . readiness () ; readiness . set_waker (cx . waker ()) ; if * this . pending != 0 && ! readiness . any_ready () { return Poll :: Pending ; } for (i , mut fut) in this . futures . iter () . enumerate () { if this . state [i] . is_pending () && readiness . clear_ready (i) { # [allow (clippy :: drop_non_drop)] drop (readiness) ; let mut cx = Context :: from_waker (this . wakers . get (i) . unwrap ()) ; if let Poll :: Ready (value) = unsafe { fut . as_mut () . map_unchecked_mut (| t | t . deref_mut ()) . poll (& mut cx) } { * this . pending -= 1 ; match value { Ok (value) => { this . items . write (i , value) ; this . state [i] . set_ready () ; unsafe { ManuallyDrop :: drop (fut . get_unchecked_mut ()) } ; } Err (err) => { * this . consumed = true ; this . state [i] . set_none () ; unsafe { ManuallyDrop :: drop (fut . get_unchecked_mut ()) } ; return Poll :: Ready (Err (err)) ; } } } readiness = this . wakers . readiness () ; } } if * this . pending == 0 { * this . consumed = true ; for state in this . state . iter_mut () { debug_assert ! (state . is_ready () , "Future should have reached a `Ready` state") ; state . set_none () ; } Poll :: Ready (Ok (unsafe { this . items . take () })) } else { Poll :: Pending } } }
+    };
+}
+
+impl_376!()

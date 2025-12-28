@@ -1,0 +1,21 @@
+macro_rules! deps {
+    () => {
+        Repository!();
+        Error!();
+        Iter!();
+        OwnedOrStaticAtomicBool!();
+        Options!();
+        Collect!();
+        IndexPersistedOrInMemory!();
+        Outcome!();
+    };
+}
+
+macro_rules! impl_115 {
+    () => {
+        deps!();
+        # [doc = " Lifecycle"] impl Iter { pub (crate) fn new (repo : & Repository , index : IndexPersistedOrInMemory , patterns : Vec < BString > , should_interrupt : OwnedOrStaticAtomicBool , options : dirwalk :: Options ,) -> Result < Iter , Error > { # [cfg (feature = "parallel")] { let repo = repo . clone () . into_sync () ; let (tx , rx) = std :: sync :: mpsc :: channel () ; let handle = std :: thread :: Builder :: new () . name ("gix::dirwalk::iter::producer" . into ()) . spawn ({ let should_interrupt = should_interrupt . clone () ; move | | -> Result < Outcome , dirwalk :: Error > { let repo : Repository = repo . into () ; let mut collect = Collect { tx } ; let out = repo . dirwalk (& index , patterns , & should_interrupt , options , & mut collect) ? ; Ok (Outcome { index , excludes : out . excludes . detach () , pathspec : out . pathspec . detach () . map_err (| err | { dirwalk :: Error :: Walk (gix_dir :: walk :: Error :: ReadDir { path : repo . git_dir () . to_owned () , source : err , }) }) ? , traversal_root : out . traversal_root , dirwalk : out . dirwalk , }) } }) ? ; Ok (Iter { rx_and_join : Some ((rx , handle)) , should_interrupt , out : None , }) } # [cfg (not (feature = "parallel"))] { let mut collect = Collect { items : Vec :: new () } ; let out = repo . dirwalk (& index , patterns , & should_interrupt , options , & mut collect) ? ; let out = Outcome { index , excludes : out . excludes . detach () , pathspec : out . pathspec . detach () ? , traversal_root : out . traversal_root , dirwalk : out . dirwalk , } ; Ok (Iter { items : collect . items . into_iter () , out : Some (out) , }) } } }
+    };
+}
+
+impl_115!()

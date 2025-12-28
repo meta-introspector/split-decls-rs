@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        OriginalHeaderOrder!();
+    };
+}
+
+macro_rules! impl_157 {
+    () => {
+        deps!();
+        # [cfg (all (feature = "http1" , feature = "ffi"))] impl OriginalHeaderOrder { pub (crate) fn default () -> Self { OriginalHeaderOrder { num_entries : HashMap :: new () , entry_order : Vec :: new () , } } pub (crate) fn insert (& mut self , name : HeaderName) { if ! self . num_entries . contains_key (& name) { let idx = 0 ; self . num_entries . insert (name . clone () , 1) ; self . entry_order . push ((name , idx)) ; } } pub (crate) fn append < N > (& mut self , name : N) where N : IntoHeaderName + Into < HeaderName > + Clone , { let name : HeaderName = name . into () ; let idx ; if self . num_entries . contains_key (& name) { idx = self . num_entries [& name] ; * self . num_entries . get_mut (& name) . unwrap () += 1 ; } else { idx = 0 ; self . num_entries . insert (name . clone () , 1) ; } self . entry_order . push ((name , idx)) ; } # [doc = " This returns an iterator that provides header names and indexes"] # [doc = " in the original order received."] # [doc = ""] # [doc = " # Examples"] # [doc = " ```no_run"] # [doc = " use hyper::ext::OriginalHeaderOrder;"] # [doc = " use hyper::header::{HeaderName, HeaderValue, HeaderMap};"] # [doc = ""] # [doc = " let mut h_order = OriginalHeaderOrder::default();"] # [doc = " let mut h_map = Headermap::new();"] # [doc = ""] # [doc = " let name1 = b\"Set-CookiE\";"] # [doc = " let value1 = b\"a=b\";"] # [doc = " h_map.append(name1);"] # [doc = " h_order.append(name1);"] # [doc = ""] # [doc = " let name2 = b\"Content-Encoding\";"] # [doc = " let value2 = b\"gzip\";"] # [doc = " h_map.append(name2, value2);"] # [doc = " h_order.append(name2);"] # [doc = ""] # [doc = " let name3 = b\"SET-COOKIE\";"] # [doc = " let value3 = b\"c=d\";"] # [doc = " h_map.append(name3, value3);"] # [doc = " h_order.append(name3)"] # [doc = ""] # [doc = " let mut iter = h_order.get_in_order()"] # [doc = ""] # [doc = " let (name, idx) = iter.next();"] # [doc = " assert_eq!(b\"a=b\", h_map.get_all(name).nth(idx).unwrap());"] # [doc = ""] # [doc = " let (name, idx) = iter.next();"] # [doc = " assert_eq!(b\"gzip\", h_map.get_all(name).nth(idx).unwrap());"] # [doc = ""] # [doc = " let (name, idx) = iter.next();"] # [doc = " assert_eq!(b\"c=d\", h_map.get_all(name).nth(idx).unwrap());"] # [doc = " ```"] pub (crate) fn get_in_order (& self) -> impl Iterator < Item = & (HeaderName , usize) > { self . entry_order . iter () } }
+    };
+}
+
+impl_157!()

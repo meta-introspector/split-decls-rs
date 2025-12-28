@@ -1,0 +1,19 @@
+macro_rules! deps {
+    () => {
+        Crel!();
+        Error!();
+        CrelIterator!();
+        Result!();
+        Bytes!();
+        CrelIteratorHeader!();
+    };
+}
+
+macro_rules! impl_378 {
+    () => {
+        deps!();
+        impl < 'data > CrelIterator < 'data > { # [doc = " Create a new CREL relocation iterator."] pub fn new (data : & 'data [u8]) -> Result < Self , Error > { const HEADER_ADDEND_BIT_MASK : u64 = 1 << 2 ; const HEADER_SHIFT_MASK : u64 = 0x3 ; let mut data = Bytes (data) ; let header = data . read_uleb128 () . read_error ("Invalid ELF CREL header") ? ; let count = header >> 3 ; let flag_bits = if header & HEADER_ADDEND_BIT_MASK != 0 { 3 } else { 2 } ; let shift = header & HEADER_SHIFT_MASK ; let is_rela = header & HEADER_ADDEND_BIT_MASK != 0 ; Ok (CrelIterator { data , header : CrelIteratorHeader { count : count as usize , flag_bits , shift , is_rela , } , state : Default :: default () , }) } # [doc = " True if the encoded relocations have addend."] pub fn is_rela (& self) -> bool { self . header . is_rela } # [doc = " Return the number of encoded relocations."] pub fn len (& self) -> usize { self . header . count - self . state . index } # [doc = " Return true if there are no more relocations to parse."] pub fn is_empty (& self) -> bool { self . header . count == self . state . index } fn parse (& mut self) -> read :: Result < Crel > { const DELTA_SYMBOL_INDEX_MASK : u8 = 1 << 0 ; const DELTA_TYPE_MASK : u8 = 1 << 1 ; const DELTA_ADDEND_MASK : u8 = 1 << 2 ; let byte = * self . data . read :: < u8 > () . read_error ("Cannot read offset and flags of CREL relocation") ? ; let flags = byte & ((1 << self . header . flag_bits) - 1) ; let mut delta_offset = u64 :: from (byte & 0x7f) >> self . header . flag_bits ; if byte & 0x80 != 0 { delta_offset |= self . data . read_uleb128 () . read_error ("Cannot read offset and flags of CREL relocation") ? << (7 - self . header . flag_bits) ; } self . state . offset = self . state . offset . wrapping_add (delta_offset) ; if flags & DELTA_SYMBOL_INDEX_MASK != 0 { let delta_symidx = self . data . read_sleb128 () . read_error ("Cannot read symidx of CREL relocation") ? ; self . state . symidx = self . state . symidx . wrapping_add (delta_symidx as u32) ; } if flags & DELTA_TYPE_MASK != 0 { let delta_typ = self . data . read_sleb128 () . read_error ("Cannot read type of CREL relocation") ? ; self . state . typ = self . state . typ . wrapping_add (delta_typ as u32) ; } if self . header . is_rela && flags & DELTA_ADDEND_MASK != 0 { let delta_addend = self . data . read_sleb128 () . read_error ("Cannot read addend of CREL relocation") ? ; self . state . addend = self . state . addend . wrapping_add (delta_addend) ; } self . state . index += 1 ; Ok (Crel { r_offset : self . state . offset << self . header . shift , r_sym : self . state . symidx , r_type : self . state . typ , r_addend : self . state . addend , }) } }
+    };
+}
+
+impl_378!()

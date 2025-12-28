@@ -1,13 +1,14 @@
 macro_rules! deps {
     () => {
-        FromOsStrError!();
+        FromPathError!();
+        Utf8Path!();
     };
 }
 
 macro_rules! impl_101 {
     () => {
         deps!();
-        impl error :: Error for FromOsStrError { fn source (& self) -> Option < & (dyn error :: Error + 'static) > { None } }
+        # [doc = " Converts a [`Path`] to a [`Utf8Path`]."] # [doc = ""] # [doc = " Returns [`FromPathError`] if the path is not valid UTF-8."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " use camino::Utf8Path;"] # [doc = " use std::convert::TryFrom;"] # [doc = " use std::ffi::OsStr;"] # [doc = " # #[cfg(unix)]"] # [doc = " use std::os::unix::ffi::OsStrExt;"] # [doc = " use std::path::Path;"] # [doc = ""] # [doc = " let unicode_path = Path::new(\"/valid/unicode\");"] # [doc = " <&Utf8Path>::try_from(unicode_path).expect(\"valid Unicode path succeeded\");"] # [doc = ""] # [doc = " // Paths on Unix can be non-UTF-8."] # [doc = " # #[cfg(unix)]"] # [doc = " let non_unicode_str = OsStr::from_bytes(b\"\\xFF\\xFF\\xFF\");"] # [doc = " # #[cfg(unix)]"] # [doc = " let non_unicode_path = Path::new(non_unicode_str);"] # [doc = " # #[cfg(unix)]"] # [doc = " assert!(<&Utf8Path>::try_from(non_unicode_path).is_err(), \"non-Unicode path failed\");"] # [doc = " ```"] impl < 'a > TryFrom < & 'a Path > for & 'a Utf8Path { type Error = FromPathError ; fn try_from (path : & 'a Path) -> Result < & 'a Utf8Path , Self :: Error > { Utf8Path :: from_path (path) . ok_or (FromPathError (())) } }
     };
 }
 

@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Trait!();
-        Static!();
+        Impl!();
         Const!();
         TypeAlias!();
-        Adt!();
-        Impl!();
         Function!();
+        Adt!();
+        Trait!();
+        Static!();
     };
 }
 

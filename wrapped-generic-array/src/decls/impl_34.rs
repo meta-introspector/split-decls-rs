@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        ArrayLength!();
         GenericArray!();
+        ArrayLength!();
     };
 }
 
 macro_rules! impl_34 {
     () => {
         deps!();
-        unsafe impl < T : Sync , N : ArrayLength > Sync for GenericArray < T , N > { }
+        impl < T , N : ArrayLength > AsRef < [T] > for GenericArray < T , N > { # [inline (always)] fn as_ref (& self) -> & [T] { self . as_slice () } }
     };
 }
 

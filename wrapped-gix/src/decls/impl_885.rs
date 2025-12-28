@@ -1,0 +1,21 @@
+macro_rules! deps {
+    () => {
+        Delegate!();
+        Tree!();
+        ObjectKindHint!();
+        Blob!();
+        Repository!();
+        Error!();
+        Commit!();
+        Kind!();
+    };
+}
+
+macro_rules! impl_885 {
+    () => {
+        deps!();
+        impl Delegate < '_ > { fn kind_implies_committish (& self) -> bool { self . kind . unwrap_or (gix_revision :: spec :: Kind :: IncludeReachable) != gix_revision :: spec :: Kind :: IncludeReachable } fn disambiguate_objects_by_fallback_hint (& mut self , hint : Option < ObjectKindHint >) { fn require_object_kind (repo : & Repository , obj : & gix_hash :: oid , kind : gix_object :: Kind) -> Result < () , Error > { let obj = repo . find_object (obj) ? ; if obj . kind == kind { Ok (()) } else { Err (Error :: ObjectKind { actual : obj . kind , expected : kind , oid : obj . id . attach (repo) . shorten_or_id () , }) } } if self . last_call_was_disambiguate_prefix [self . idx] { self . unset_disambiguate_call () ; if let Some (objs) = self . objs [self . idx] . as_mut () { let repo = self . repo ; let errors : Vec < _ > = match hint { Some (kind_hint) => match kind_hint { ObjectKindHint :: Treeish | ObjectKindHint :: Committish => { let kind = match kind_hint { ObjectKindHint :: Treeish => gix_object :: Kind :: Tree , ObjectKindHint :: Committish => gix_object :: Kind :: Commit , _ => unreachable ! ("BUG: we narrow possibilities above") , } ; objs . iter () . filter_map (| obj | peel (repo , obj , kind) . err () . map (| err | (* obj , err))) . collect () } ObjectKindHint :: Tree | ObjectKindHint :: Commit | ObjectKindHint :: Blob => { let kind = match kind_hint { ObjectKindHint :: Tree => gix_object :: Kind :: Tree , ObjectKindHint :: Commit => gix_object :: Kind :: Commit , ObjectKindHint :: Blob => gix_object :: Kind :: Blob , _ => unreachable ! ("BUG: we narrow possibilities above") , } ; objs . iter () . filter_map (| obj | require_object_kind (repo , obj , kind) . err () . map (| err | (* obj , err))) . collect () } } , None => return , } ; if errors . len () == objs . len () { self . err . extend (errors . into_iter () . map (| (_ , err) | err)) ; } else { for (obj , err) in errors { objs . remove (& obj) ; self . err . push (err) ; } } } } } fn follow_refs_to_objects_if_needed (& mut self) -> Option < () > { let repo = self . repo ; for (r , obj) in self . refs . iter () . zip (self . objs . iter_mut ()) { if let (Some (ref_) , obj_opt @ None) = (r , obj) { if let Some (id) = ref_ . target . try_id () . map (ToOwned :: to_owned) . or_else (| | { match ref_ . clone () . attach (repo) . peel_to_id () { Err (err) => { self . err . push (Error :: PeelToId { name : ref_ . name . clone () , source : err , }) ; None } Ok (id) => Some (id . detach ()) , } }) { obj_opt . get_or_insert_with (HashSet :: default) . insert (id) ; } } } Some (()) } fn unset_disambiguate_call (& mut self) { self . last_call_was_disambiguate_prefix [self . idx] = false ; } }
+    };
+}
+
+impl_885!()

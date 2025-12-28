@@ -1,13 +1,14 @@
 macro_rules! deps {
     () => {
-        GenericArrayImplOdd!();
+        ArrayLength!();
+        GenericArray!();
     };
 }
 
 macro_rules! impl_24 {
     () => {
         deps!();
-        impl < T : Copy , U : Copy > Copy for GenericArrayImplOdd < T , U > { }
+        impl < T : Default , N : ArrayLength > Default for GenericArray < T , N > { # [inline (always)] fn default () -> Self { Self :: generate (| _ | T :: default ()) } }
     };
 }
 

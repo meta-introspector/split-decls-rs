@@ -7,7 +7,7 @@ macro_rules! deps {
 macro_rules! impl_35 {
     () => {
         deps!();
-        impl < L , R , Target > AsMut < [Target] > for Either < L , R > where L : AsMut < [Target] > , R : AsMut < [Target] > , { fn as_mut (& mut self) -> & mut [Target] { for_both ! (self , inner => inner . as_mut ()) } }
+        impl < T , L , R > Either < (T , L) , (T , R) > { # [doc = " Factor out a homogeneous type from an either of pairs."] # [doc = ""] # [doc = " Here, the homogeneous type is the first element of the pairs."] # [doc = ""] # [doc = " ```"] # [doc = " use either::*;"] # [doc = " let left: Either<_, (u32, String)> = Left((123, vec![0]));"] # [doc = " assert_eq!(left.factor_first().0, 123);"] # [doc = ""] # [doc = " let right: Either<(u32, Vec<u8>), _> = Right((123, String::new()));"] # [doc = " assert_eq!(right.factor_first().0, 123);"] # [doc = " ```"] pub fn factor_first (self) -> (T , Either < L , R >) { match self { Left ((t , l)) => (t , Left (l)) , Right ((t , r)) => (t , Right (r)) , } } }
     };
 }
 

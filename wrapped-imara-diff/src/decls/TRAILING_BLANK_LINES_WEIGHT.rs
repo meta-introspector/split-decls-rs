@@ -1,0 +1,7 @@
+macro_rules! TRAILING_BLANK_LINES_WEIGHT {
+    () => {
+        const TRAILING_BLANK_LINES_WEIGHT : i32 = 6 ;
+    };
+}
+
+TRAILING_BLANK_LINES_WEIGHT!()

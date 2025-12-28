@@ -1,0 +1,23 @@
+macro_rules! deps {
+    () => {
+        Error!();
+        Default!();
+        Note!();
+        Connection!();
+        Prepare!();
+        Fetch!();
+        Direction!();
+        DryRun!();
+        WritePackedRefs!();
+        Options!();
+    };
+}
+
+macro_rules! impl_954 {
+    () => {
+        deps!();
+        impl < 'remote , 'repo , T > Connection < 'remote , 'repo , T > where T : Transport , { # [doc = " Perform a handshake with the remote and obtain a ref-map with `options`, and from there one"] # [doc = " Note that at this point, the `transport` should already be configured using the [`transport_mut()`][Self::transport_mut()]"] # [doc = " method, as it will be consumed here."] # [doc = ""] # [doc = " From there additional properties of the fetch can be adjusted to override the defaults that are configured via git-config."] # [doc = ""] # [doc = " # Async Experimental"] # [doc = ""] # [doc = " Note that this implementation is currently limited correctly in blocking mode only as it relies on Drop semantics to close the connection"] # [doc = " should the fetch not be performed. Furthermore, there the code doing the fetch is inherently blocking and it's not offloaded to a thread,"] # [doc = " making this call block the executor."] # [doc = " It's best to unblock it by placing it into its own thread or offload it should usage in an async context be truly required."] # [allow (clippy :: result_large_err)] # [gix_protocol :: maybe_async :: maybe_async] pub async fn prepare_fetch (mut self , progress : impl Progress , options : ref_map :: Options ,) -> Result < Prepare < 'remote , 'repo , T > , prepare :: Error > { if self . remote . refspecs (remote :: Direction :: Fetch) . is_empty () && options . extra_refspecs . is_empty () { return Err (prepare :: Error :: MissingRefSpecs) ; } let ref_map = self . ref_map_by_ref (progress , options) . await ? ; Ok (Prepare { con : Some (self) , ref_map , dry_run : DryRun :: No , reflog_message : None , write_packed_refs : WritePackedRefs :: Never , shallow : Default :: default () , }) } }
+    };
+}
+
+impl_954!()

@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        DashMap!();
+        OwningIter!();
     };
 }
 
 macro_rules! impl_18 {
     () => {
         deps!();
-        impl < K , V , S > Default for DashMap < K , V , S > where K : Eq + Hash , S : Default + BuildHasher + Clone , { fn default () -> Self { Self :: with_hasher (Default :: default ()) } }
+        impl < K : Eq + Hash > OwningIter < K > { pub (crate) fn new (inner : crate :: iter :: OwningIter < K , () >) -> Self { Self { inner } } }
     };
 }
 

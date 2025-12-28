@@ -1,0 +1,18 @@
+macro_rules! deps {
+    () => {
+        Error!();
+        Generator!();
+        Scope!();
+        ContextStack!();
+        Context!();
+    };
+}
+
+macro_rules! impl_45 {
+    () => {
+        deps!();
+        impl < 'a , A , T > Scope < '_ , 'a , A , T > { # [doc = " create a new scope object"] pub (crate) fn new (para : & 'a mut Option < A > , ret : & 'a mut Option < T >) -> Self { Scope { para , ret , scope : PhantomData , } } # [doc = " set current generator return value"] # [inline] fn set_ret (& mut self , v : T) { * self . ret = Some (v) ; } # [doc = " raw yield without catch passed in para"] # [inline] fn raw_yield (& mut self , env : & ContextStack , context : & mut Context , v : T) { if ! context . is_generator () { panic ! ("yield from none generator context") ; } self . set_ret (v) ; context . _ref -= 1 ; raw_yield_now (env , context) ; if context . _ref != 1 { std :: panic :: panic_any (Error :: Cancel) ; } } # [doc = " yield something without catch passed in para"] # [inline] pub fn yield_with (& mut self , v : T) { let env = ContextStack :: current () ; let context = env . top () ; self . raw_yield (& env , context , v) ; } # [doc = " get current generator send para"] # [inline] pub fn get_yield (& mut self) -> Option < A > { self . para . take () } # [doc = " yield and get the send para"] # [doc = " # Safety"] # [doc = " When yield out, the reference of the captured data must be still valid"] # [doc = " normally, you should always call the `drop` of the generator"] # [inline] pub unsafe fn yield_unsafe (& mut self , v : T) -> Option < A > { self . yield_with (v) ; atomic :: compiler_fence (atomic :: Ordering :: Acquire) ; self . get_yield () } # [doc = " `yield_from_unsafe`"] # [doc = " the from generator must has the same type as itself"] # [doc = " # Safety"] # [doc = " When yield out, the reference of the captured data must be still valid"] # [doc = " normally, you should always call the `drop` of the generator"] pub unsafe fn yield_from_unsafe (& mut self , mut g : Generator < A , T >) -> Option < A > { let env = ContextStack :: current () ; let context = env . top () ; let mut p = self . get_yield () ; while ! g . is_done () { match g . raw_send (p) { None => return None , Some (r) => self . raw_yield (& env , context , r) , } p = self . get_yield () ; } drop (g) ; p } }
+    };
+}
+
+impl_45!()

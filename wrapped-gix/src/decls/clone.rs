@@ -1,6 +1,6 @@
 macro_rules! clone {
     () => {
-        # [doc = ""] pub mod clone ;
+        mod clone ;
     };
 }
 

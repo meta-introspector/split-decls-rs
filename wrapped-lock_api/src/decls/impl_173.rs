@@ -1,0 +1,18 @@
+macro_rules! deps {
+    () => {
+        ArcRwLockUpgradableReadGuard!();
+        ArcRwLockWriteGuard!();
+        RawRwLockUpgrade!();
+        RwLock!();
+        RwLockUpgradableReadGuard!();
+    };
+}
+
+macro_rules! impl_173 {
+    () => {
+        deps!();
+        # [cfg (feature = "arc_lock")] impl < R : RawRwLockUpgrade , T : ? Sized > ArcRwLockUpgradableReadGuard < R , T > { # [doc = " Returns a reference to the rwlock, contained in its original `Arc`."] pub fn rwlock (s : & Self) -> & Arc < RwLock < R , T > > { & s . rwlock } # [doc = " Unlocks the `RwLock` and returns the `Arc` that was held by the [`ArcRwLockUpgradableReadGuard`]."] # [inline] pub fn into_arc (s : Self) -> Arc < RwLock < R , T > > { let s = ManuallyDrop :: new (s) ; unsafe { s . rwlock . raw . unlock_upgradable () ; ptr :: read (& s . rwlock) } } # [doc = " Temporarily unlocks the `RwLock` to execute the given function."] # [doc = ""] # [doc = " This is functionally identical to the `unlocked` method on [`RwLockUpgradableReadGuard`]."] # [inline] # [track_caller] pub fn unlocked < F , U > (s : & mut Self , f : F) -> U where F : FnOnce () -> U , { unsafe { s . rwlock . raw . unlock_upgradable () ; } defer ! (s . rwlock . raw . lock_upgradable ()) ; f () } # [doc = " Atomically upgrades an upgradable read lock lock into an exclusive write lock,"] # [doc = " blocking the current thread until it can be acquired."] # [track_caller] pub fn upgrade (s : Self) -> ArcRwLockWriteGuard < R , T > { unsafe { s . rwlock . raw . upgrade () ; } let s = ManuallyDrop :: new (s) ; let rwlock = unsafe { ptr :: read (& s . rwlock) } ; ArcRwLockWriteGuard { rwlock , marker : PhantomData , } } # [doc = " Tries to atomically upgrade an upgradable read lock into an exclusive write lock."] # [doc = ""] # [doc = " If the access could not be granted at this time, then the current guard is returned."] # [track_caller] pub fn try_upgrade (s : Self) -> Result < ArcRwLockWriteGuard < R , T > , Self > { if unsafe { s . rwlock . raw . try_upgrade () } { let s = ManuallyDrop :: new (s) ; let rwlock = unsafe { ptr :: read (& s . rwlock) } ; Ok (ArcRwLockWriteGuard { rwlock , marker : PhantomData , }) } else { Err (s) } } }
+    };
+}
+
+impl_173!()

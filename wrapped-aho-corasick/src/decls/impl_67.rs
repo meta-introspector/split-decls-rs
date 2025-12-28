@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        StateID!();
+        NFA!();
+    };
+}
+
+macro_rules! impl_67 {
+    () => {
+        deps!();
+        impl NFA { # [doc = " A sentinel state ID indicating that a search should stop once it has"] # [doc = " entered this state. When a search stops, it returns a match if one"] # [doc = " has been found, otherwise no match. A contiguous NFA always has an"] # [doc = " actual dead state at this ID."] const DEAD : StateID = StateID :: new_unchecked (0) ; # [doc = " Another sentinel state ID indicating that a search should move through"] # [doc = " current state's failure transition."] # [doc = ""] # [doc = " Note that unlike DEAD, this does not actually point to a valid state"] # [doc = " in a contiguous NFA. (noncontiguous::NFA::FAIL does point to a valid"] # [doc = " state.) Instead, this points to the position that is guaranteed to"] # [doc = " never be a valid state ID (by making sure it points to a place in the"] # [doc = " middle of the encoding of the DEAD state). Since we never need to"] # [doc = " actually look at the FAIL state itself, this works out."] # [doc = ""] # [doc = " By why do it this way? So that FAIL is a constant. I don't have any"] # [doc = " concrete evidence that this materially helps matters, but it's easy to"] # [doc = " do. The alternative would be making the FAIL ID point to the second"] # [doc = " state, which could be made a constant but is a little trickier to do."] # [doc = " The easiest path is to just make the FAIL state a runtime value, but"] # [doc = " since comparisons with FAIL occur in perf critical parts of the search,"] # [doc = " we want it to be as tight as possible and not waste any registers."] # [doc = ""] # [doc = " Very hand wavy... But the code complexity that results from this is"] # [doc = " very mild."] const FAIL : StateID = StateID :: new_unchecked (1) ; }
+    };
+}
+
+impl_67!()

@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        EntryRef!();
+        OccupiedEntryRef!();
+        RefMut!();
+    };
+}
+
+macro_rules! impl_46 {
+    () => {
+        deps!();
+        impl < 'a , 'q , K : Eq + Hash + From < & 'q Q > , Q , V > EntryRef < 'a , 'q , K , Q , V > { # [doc = " Get the key of the entry."] pub fn key (& self) -> & Q { match * self { EntryRef :: Occupied (ref entry) => entry . key () , EntryRef :: Vacant (ref entry) => entry . key () , } } # [doc = " Into the key of the entry."] pub fn into_key (self) -> K { match self { EntryRef :: Occupied (entry) => entry . into_key () , EntryRef :: Vacant (entry) => entry . into_key () , } } # [doc = " Return a mutable reference to the element if it exists,"] # [doc = " otherwise insert the default and return a mutable reference to that."] pub fn or_default (self) -> RefMut < 'a , K , V > where V : Default , { match self { EntryRef :: Occupied (entry) => entry . into_ref () , EntryRef :: Vacant (entry) => entry . insert (V :: default ()) , } } # [doc = " Return a mutable reference to the element if it exists,"] # [doc = " otherwise a provided value and return a mutable reference to that."] pub fn or_insert (self , value : V) -> RefMut < 'a , K , V > { match self { EntryRef :: Occupied (entry) => entry . into_ref () , EntryRef :: Vacant (entry) => entry . insert (value) , } } # [doc = " Return a mutable reference to the element if it exists,"] # [doc = " otherwise insert the result of a provided function and return a mutable reference to that."] pub fn or_insert_with (self , value : impl FnOnce () -> V) -> RefMut < 'a , K , V > { match self { EntryRef :: Occupied (entry) => entry . into_ref () , EntryRef :: Vacant (entry) => entry . insert (value ()) , } } pub fn or_try_insert_with < E > (self , value : impl FnOnce () -> Result < V , E > ,) -> Result < RefMut < 'a , K , V > , E > { match self { EntryRef :: Occupied (entry) => Ok (entry . into_ref ()) , EntryRef :: Vacant (entry) => Ok (entry . insert (value () ?)) , } } # [doc = " Sets the value of the entry, and returns a reference to the inserted value."] pub fn insert (self , value : V) -> RefMut < 'a , K , V > { match self { EntryRef :: Occupied (mut entry) => { entry . insert (value) ; entry . into_ref () } EntryRef :: Vacant (entry) => entry . insert (value) , } } # [doc = " Sets the value of the entry, and returns an OccupiedEntryRef."] # [doc = ""] # [doc = " If you are not interested in the occupied entry,"] # [doc = " consider [`insert`] as it doesn't need to clone the key."] # [doc = ""] # [doc = " [`insert`]: EntryRef::insert"] pub fn insert_entry (self , value : V) -> OccupiedEntryRef < 'a , 'q , K , Q , V > where K : Clone , { match self { EntryRef :: Occupied (mut entry) => { entry . insert (value) ; entry } EntryRef :: Vacant (entry) => entry . insert_entry (value) , } } }
+    };
+}
+
+impl_46!()

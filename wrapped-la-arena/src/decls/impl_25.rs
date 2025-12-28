@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        IdxRange!();
+        RawIdx!();
     };
 }
 
 macro_rules! impl_25 {
     () => {
         deps!();
-        impl < T > PartialEq for IdxRange < T > { fn eq (& self , other : & Self) -> bool { self . range == other . range } }
+        impl fmt :: Display for RawIdx { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { self . 0 . fmt (f) } }
     };
 }
 

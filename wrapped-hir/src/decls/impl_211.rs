@@ -1,15 +1,13 @@
 macro_rules! deps {
     () => {
-        Adt!();
-        Crate!();
-        HasCrate!();
+        LifetimeParam!();
     };
 }
 
 macro_rules! impl_211 {
     () => {
         deps!();
-        impl HasCrate for Adt { fn krate (& self , db : & dyn HirDatabase) -> Crate { self . module (db) . krate () } }
+        impl < 'db > HirDisplay < 'db > for LifetimeParam { fn hir_fmt (& self , f : & mut HirFormatter < '_ , 'db >) -> Result < () , HirDisplayError > { write ! (f , "{}" , self . name (f . db) . display (f . db , f . edition ())) } }
     };
 }
 

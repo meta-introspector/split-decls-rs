@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        FixedBitSet!();
+        Block!();
     };
 }
 
 macro_rules! impl_19 {
     () => {
         deps!();
-        impl Drop for FixedBitSet { fn drop (& mut self) { drop (unsafe { Vec :: from_raw_parts (self . data . as_ptr () , self . simd_block_len () , self . capacity) }) ; } }
+        impl BitXorAssign for Block { # [inline] fn bitxor_assign (& mut self , other : Self) { unsafe { self . 0 = _mm_xor_si128 (self . 0 , other . 0) } } }
     };
 }
 

@@ -1,5 +1,9 @@
 macro_rules! deps {
     () => {
+        Status!();
+        Property!();
+        PathspecMatch!();
+        Kind!();
         EntryRef!();
     };
 }

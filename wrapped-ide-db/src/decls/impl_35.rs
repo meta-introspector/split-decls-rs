@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        RootDatabase!();
+        Definition!();
     };
 }
 
 macro_rules! impl_35 {
     () => {
         deps!();
-        impl Default for RootDatabase { fn default () -> RootDatabase { RootDatabase :: new (None) } }
+        impl From < Impl > for Definition { fn from (impl_ : Impl) -> Self { Definition :: SelfType (impl_) } }
     };
 }
 

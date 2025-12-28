@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        MaxNumDigits!();
         FromRadix10SignedChecked!();
+        MaxNumDigits!();
         Sign!();
     };
 }

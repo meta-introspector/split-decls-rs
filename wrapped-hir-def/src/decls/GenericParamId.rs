@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         TypeParamId!();
-        LifetimeParamId!();
         ConstParamId!();
+        LifetimeParamId!();
     };
 }
 

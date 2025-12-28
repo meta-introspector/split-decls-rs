@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Errors!();
+        Config!();
     };
 }
 
 macro_rules! impl_8 {
     () => {
         deps!();
-        impl From < Errors > for Result < () , Errors > { fn from (e : Errors) -> Self { Err (e) } }
+        # [doc = " The defaults are that of _beStrict=false_ in the [WHATWG URL Standard](https://url.spec.whatwg.org/#idna)"] impl Default for Config { fn default () -> Self { Self { use_std3_ascii_rules : false , transitional_processing : false , check_hyphens : false , verify_dns_length : false , } } }
     };
 }
 

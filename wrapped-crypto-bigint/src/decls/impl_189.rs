@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        Uint!();
+        NonZeroUint!();
+    };
+}
+
+macro_rules! impl_189 {
+    () => {
+        deps!();
+        impl < const LIMBS : usize > NonZeroUint < LIMBS > { # [doc = " Creates a new non-zero integer in a const context."] # [doc = ""] # [doc = " In future versions of Rust it should be possible to replace this with"] # [doc = " `NonZero::new(…).unwrap()`"] # [doc = ""] # [doc = " # Panics"] # [doc = " - if the value is zero."] pub const fn new_unwrap (n : Uint < LIMBS >) -> Self { if n . is_nonzero () . is_true_vartime () { Self (n) } else { panic ! ("Invalid value: zero") } } # [doc = " Create a new [`NonZero<Uint>`] from the provided big endian hex string."] # [doc = ""] # [doc = " # Panics"] # [doc = " - if the hex is zero, malformed, or not zero-padded accordingly for the size."] pub const fn from_be_hex (hex : & str) -> Self { Self :: new_unwrap (Uint :: from_be_hex (hex)) } # [doc = " Create a new [`NonZero<Uint>`] from the provided little endian hex string."] # [doc = ""] # [doc = " # Panics"] # [doc = " - if the hex is zero, malformed, or not zero-padded accordingly for the size."] pub const fn from_le_hex (hex : & str) -> Self { Self :: new_unwrap (Uint :: from_le_hex (hex)) } # [doc = " Create a [`NonZeroUint`] from a [`NonZeroU8`] (const-friendly)"] pub const fn from_u8 (n : NonZeroU8) -> Self { Self (Uint :: from_u8 (n . get ())) } # [doc = " Create a [`NonZeroUint`] from a [`NonZeroU16`] (const-friendly)"] pub const fn from_u16 (n : NonZeroU16) -> Self { Self (Uint :: from_u16 (n . get ())) } # [doc = " Create a [`NonZeroUint`] from a [`NonZeroU32`] (const-friendly)"] pub const fn from_u32 (n : NonZeroU32) -> Self { Self (Uint :: from_u32 (n . get ())) } # [doc = " Create a [`NonZeroUint`] from a [`NonZeroU64`] (const-friendly)"] pub const fn from_u64 (n : NonZeroU64) -> Self { Self (Uint :: from_u64 (n . get ())) } # [doc = " Create a [`NonZeroUint`] from a [`NonZeroU128`] (const-friendly)"] pub const fn from_u128 (n : NonZeroU128) -> Self { Self (Uint :: from_u128 (n . get ())) } }
+    };
+}
+
+impl_189!()

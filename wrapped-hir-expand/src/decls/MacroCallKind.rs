@@ -1,8 +1,11 @@
 macro_rules! deps {
     () => {
+        EagerCallInfo!();
+        AttrId!();
+        Attr!();
         ExpandTo!();
         MacroCallId!();
-        EagerCallInfo!();
+        AstId!();
     };
 }
 

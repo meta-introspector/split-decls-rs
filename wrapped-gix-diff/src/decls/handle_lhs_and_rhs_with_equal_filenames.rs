@@ -1,0 +1,19 @@
+macro_rules! deps {
+    () => {
+        ChangeId!();
+        TreeInfoTuple!();
+        Relation!();
+        Change!();
+        Visit!();
+        Error!();
+    };
+}
+
+macro_rules! handle_lhs_and_rhs_with_equal_filenames {
+    () => {
+        deps!();
+        fn handle_lhs_and_rhs_with_equal_filenames (lhs : EntryRef < '_ > , rhs : EntryRef < '_ > , queue : & mut VecDeque < TreeInfoTuple > , change_id : & mut ChangeId , relation_to_propagate : Option < Relation > , delegate : & mut impl Visit ,) -> Result < () , Error > { match (lhs . mode . is_tree () , rhs . mode . is_tree ()) { (true , true) => { delegate . push_back_tracked_path_component (lhs . filename) ; if lhs . oid != rhs . oid && delegate . visit (Change :: Modification { previous_entry_mode : lhs . mode , previous_oid : lhs . oid . to_owned () , entry_mode : rhs . mode , oid : rhs . oid . to_owned () , }) . cancelled () { return Err (Error :: Cancelled) ; } queue . push_back ((Some (lhs . oid . to_owned ()) , Some (rhs . oid . to_owned ()) , relation_to_propagate ,)) ; } (_ , true) => { delegate . push_back_tracked_path_component (lhs . filename) ; if delegate . visit (Change :: Deletion { entry_mode : lhs . mode , oid : lhs . oid . to_owned () , relation : None , }) . cancelled () { return Err (Error :: Cancelled) ; } let relation = relation_to_propagate . or_else (| | { * change_id += 1 ; Some (Relation :: Parent (* change_id)) }) ; if delegate . visit (Change :: Addition { entry_mode : rhs . mode , oid : rhs . oid . to_owned () , relation , }) . cancelled () { return Err (Error :: Cancelled) ; } queue . push_back ((None , Some (rhs . oid . to_owned ()) , to_child (relation))) ; } (true , _) => { delegate . push_back_tracked_path_component (lhs . filename) ; let relation = relation_to_propagate . or_else (| | { * change_id += 1 ; Some (Relation :: Parent (* change_id)) }) ; if delegate . visit (Change :: Deletion { entry_mode : lhs . mode , oid : lhs . oid . to_owned () , relation , }) . cancelled () { return Err (Error :: Cancelled) ; } if delegate . visit (Change :: Addition { entry_mode : rhs . mode , oid : rhs . oid . to_owned () , relation : None , }) . cancelled () { return Err (Error :: Cancelled) ; } queue . push_back ((Some (lhs . oid . to_owned ()) , None , to_child (relation))) ; } (false , false) => { delegate . push_path_component (lhs . filename) ; debug_assert ! (lhs . mode . is_no_tree () && lhs . mode . is_no_tree ()) ; if (lhs . oid != rhs . oid || lhs . mode != rhs . mode) && delegate . visit (Change :: Modification { previous_entry_mode : lhs . mode , previous_oid : lhs . oid . to_owned () , entry_mode : rhs . mode , oid : rhs . oid . to_owned () , }) . cancelled () { return Err (Error :: Cancelled) ; } } } Ok (()) }
+    };
+}
+
+handle_lhs_and_rhs_with_equal_filenames!()

@@ -1,6 +1,5 @@
 macro_rules! deps {
     () => {
-        HasVisibility!();
         Field!();
     };
 }
@@ -8,7 +7,7 @@ macro_rules! deps {
 macro_rules! impl_36 {
     () => {
         deps!();
-        impl HasVisibility for Field { fn visibility (& self , db : & dyn HirDatabase) -> Visibility { let variant_data = VariantId :: from (self . parent) . fields (db) ; let visibility = & variant_data . fields () [self . id] . visibility ; let parent_id : hir_def :: VariantId = self . parent . into () ; Visibility :: resolve (db , & parent_id . resolver (db) , visibility) } }
+        impl From < Field > for FieldId { fn from (def : Field) -> Self { FieldId { parent : def . parent . into () , local_id : def . id } } }
     };
 }
 

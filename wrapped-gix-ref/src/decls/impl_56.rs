@@ -1,0 +1,22 @@
+macro_rules! deps {
+    () => {
+        PartialNameRef!();
+        LogChange!();
+        PreviousValue!();
+        RefLog!();
+        RefEdit!();
+        Target!();
+        RefEditsExt!();
+        Error!();
+        Change!();
+    };
+}
+
+macro_rules! impl_56 {
+    () => {
+        deps!();
+        impl < E > RefEditsExt < E > for Vec < E > where E : std :: borrow :: Borrow < RefEdit > + std :: borrow :: BorrowMut < RefEdit > , { fn assure_one_name_has_one_edit (& self) -> Result < () , BString > { let mut names : Vec < _ > = self . iter () . map (| e | & e . borrow () . name) . collect () ; names . sort () ; match names . windows (2) . find (| v | v [0] == v [1]) { Some (name) => Err (name [0] . as_bstr () . to_owned ()) , None => Ok (()) , } } fn extend_with_splits_of_symbolic_refs (& mut self , find : & mut dyn FnMut (& PartialNameRef) -> Option < Target > , make_entry : & mut dyn FnMut (usize , RefEdit) -> E ,) -> Result < () , std :: io :: Error > { let mut new_edits = Vec :: new () ; let mut first = 0 ; let mut round = 1 ; loop { for (eid , edit) in self [first ..] . iter_mut () . enumerate () . map (| (eid , v) | (eid + first , v)) { let edit = edit . borrow_mut () ; if ! edit . deref { continue ; } edit . deref = false ; if let Some (Target :: Symbolic (referent)) = find (edit . name . as_ref () . as_partial_name ()) { new_edits . push (make_entry (eid , match & mut edit . change { Change :: Delete { expected : previous , log : mode , } => { let current_mode = * mode ; * mode = RefLog :: Only ; RefEdit { change : Change :: Delete { expected : previous . clone () , log : current_mode , } , name : referent , deref : true , } } Change :: Update { log , expected , new } => { let current = std :: mem :: replace (log , LogChange { message : log . message . clone () , mode : RefLog :: Only , force_create_reflog : log . force_create_reflog , } ,) ; let next = std :: mem :: replace (expected , PreviousValue :: Any) ; RefEdit { change : Change :: Update { expected : next , new : new . clone () , log : current , } , name : referent , deref : true , } } } ,)) ; } } if new_edits . is_empty () { break Ok (()) ; } if round == 5 { break Err (std :: io :: Error :: new (std :: io :: ErrorKind :: WouldBlock , format ! ("Could not follow all splits after {round} rounds, assuming reference cycle") ,)) ; } round += 1 ; first = self . len () ; self . append (& mut new_edits) ; } } }
+    };
+}
+
+impl_56!()

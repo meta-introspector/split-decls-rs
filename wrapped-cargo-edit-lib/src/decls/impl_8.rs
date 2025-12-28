@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        MockCargoMetadataProvider!();
-        DummyMetadata!();
         CargoMetadataProvider!();
         AnyMetadata!();
+        DummyMetadata!();
+        MockCargoMetadataProvider!();
     };
 }
 

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Const!();
         Variant!();
         Static!();
+        Const!();
         Function!();
     };
 }

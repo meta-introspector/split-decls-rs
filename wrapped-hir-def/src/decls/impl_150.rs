@@ -1,14 +1,24 @@
 macro_rules! deps {
     () => {
-        AttrDefId!();
-        VariantId!();
+        Mod!();
+        DefDatabase!();
+        ItemTree!();
+        Trait!();
+        ItemTreeDataStats!();
+        Impl!();
+        MacroRules!();
+        Item!();
+        BigModItem!();
+        MacroCall!();
+        Attrs!();
+        SmallModItem!();
     };
 }
 
 macro_rules! impl_150 {
     () => {
         deps!();
-        impl From < VariantId > for AttrDefId { fn from (vid : VariantId) -> Self { match vid { VariantId :: EnumVariantId (id) => id . into () , VariantId :: StructId (id) => id . into () , VariantId :: UnionId (id) => id . into () , } } }
+        impl ItemTree { # [doc = " Returns an iterator over all items located at the top level of the `HirFileId` this"] # [doc = " `ItemTree` was created from."] pub (crate) fn top_level_items (& self) -> & [ModItemId] { & self . top_level } # [doc = " Returns the inner attributes of the source file."] pub (crate) fn top_level_raw_attrs (& self) -> & RawAttrs { & self . top_attrs } # [doc = " Returns the inner attributes of the source file."] pub (crate) fn top_level_attrs (& self , db : & dyn DefDatabase , krate : Crate) -> Attrs { Attrs :: expand_cfg_attr (db , krate , self . top_attrs . clone ()) } pub (crate) fn raw_attrs (& self , of : FileAstId < ast :: Item >) -> & RawAttrs { self . attrs . get (& of) . unwrap_or (& RawAttrs :: EMPTY) } pub (crate) fn attrs (& self , db : & dyn DefDatabase , krate : Crate , of : FileAstId < ast :: Item > ,) -> Attrs { Attrs :: expand_cfg_attr (db , krate , self . raw_attrs (of) . clone ()) } # [doc = " Returns a count of a few, expensive items."] # [doc = ""] # [doc = " For more detail, see [`ItemTreeDataStats`]."] pub fn item_tree_stats (& self) -> ItemTreeDataStats { let mut traits = 0 ; let mut impls = 0 ; let mut mods = 0 ; let mut macro_calls = 0 ; let mut macro_rules = 0 ; for item in self . small_data . values () { match item { SmallModItem :: Trait (_) => traits += 1 , SmallModItem :: Impl (_) => impls += 1 , SmallModItem :: MacroRules (_) => macro_rules += 1 , SmallModItem :: MacroCall (_) => macro_calls += 1 , _ => { } } } for item in self . big_data . values () { match item { BigModItem :: Mod (_) => mods += 1 , _ => { } } } ItemTreeDataStats { traits , impls , mods , macro_calls , macro_rules } } pub fn pretty_print (& self , db : & dyn DefDatabase , edition : Edition) -> String { pretty :: print_item_tree (db , self , edition) } fn shrink_to_fit (& mut self) { let ItemTree { top_level : _ , attrs , big_data , small_data , vis : _ , top_attrs : _ } = self ; attrs . shrink_to_fit () ; big_data . shrink_to_fit () ; small_data . shrink_to_fit () ; } }
     };
 }
 

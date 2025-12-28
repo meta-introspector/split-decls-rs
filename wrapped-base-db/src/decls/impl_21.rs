@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Nonce!();
+        CrateName!();
     };
 }
 
 macro_rules! impl_21 {
     () => {
         deps!();
-        impl Nonce { # [inline] pub fn new () -> Nonce { Nonce (NEXT_NONCE . fetch_add (1 , std :: sync :: atomic :: Ordering :: SeqCst)) } }
+        impl fmt :: Display for CrateName { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { self . 0 . fmt (f) } }
     };
 }
 

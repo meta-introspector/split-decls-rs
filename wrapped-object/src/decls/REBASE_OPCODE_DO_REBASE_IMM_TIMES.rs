@@ -1,0 +1,7 @@
+macro_rules! REBASE_OPCODE_DO_REBASE_IMM_TIMES {
+    () => {
+        pub const REBASE_OPCODE_DO_REBASE_IMM_TIMES : u8 = 0x50 ;
+    };
+}
+
+REBASE_OPCODE_DO_REBASE_IMM_TIMES!()

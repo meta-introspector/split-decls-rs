@@ -1,0 +1,21 @@
+macro_rules! deps {
+    () => {
+        ScalarType!();
+        Result!();
+        MetaTypeId!();
+        InputValueResult!();
+        MetaType!();
+        Scalar!();
+        Registry!();
+        InputType!();
+    };
+}
+
+macro_rules! scalar_internal {
+    () => {
+        deps!();
+        # [macro_export] # [doc (hidden)] macro_rules ! scalar_internal { ($ ty : ty , $ name : expr , $ desc : expr , $ specified_by_url : expr) => { impl $ crate :: ScalarType for $ ty { fn parse (value : $ crate :: Value) -> $ crate :: InputValueResult < Self > { :: std :: result :: Result :: Ok ($ crate :: from_value (value) ?) } fn to_value (& self) -> $ crate :: Value { $ crate :: to_value (self) . unwrap_or_else (| _ | $ crate :: Value :: Null) } } impl $ crate :: InputType for $ ty { type RawValueType = Self ; fn type_name () -> :: std :: borrow :: Cow <'static , :: std :: primitive :: str > { :: std :: borrow :: Cow :: Borrowed ($ name) } fn create_type_info (registry : & mut $ crate :: registry :: Registry ,) -> :: std :: string :: String { registry . create_input_type ::<$ ty , _ > ($ crate :: registry :: MetaTypeId :: Scalar , | _ | { $ crate :: registry :: MetaType :: Scalar { name : :: std :: borrow :: ToOwned :: to_owned ($ name) , description : $ desc , is_valid : :: std :: option :: Option :: Some (:: std :: sync :: Arc :: new (| value | { <$ ty as $ crate :: ScalarType >:: is_valid (value) })) , visible : :: std :: option :: Option :: None , inaccessible : false , tags : :: std :: default :: Default :: default () , specified_by_url : $ specified_by_url , directive_invocations : :: std :: vec :: Vec :: new () , requires_scopes : :: std :: vec :: Vec :: new () , } }) } fn parse (value : :: std :: option :: Option <$ crate :: Value >,) -> $ crate :: InputValueResult < Self > { <$ ty as $ crate :: ScalarType >:: parse (value . unwrap_or_default ()) } fn to_value (& self) -> $ crate :: Value { <$ ty as $ crate :: ScalarType >:: to_value (self) } fn as_raw_value (& self) -> :: std :: option :: Option <& Self :: RawValueType > { :: std :: option :: Option :: Some (self) } } $ crate :: scalar_internal_output ! ($ ty , $ name , $ desc , $ specified_by_url) ; } ; }
+    };
+}
+
+scalar_internal!()

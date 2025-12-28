@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        GlobWalker!();
         GlobWalkerBuilder!();
+        GlobWalker!();
     };
 }
 

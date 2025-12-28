@@ -1,0 +1,7 @@
+macro_rules! draw_violin_figure {
+    () => {
+        # [allow (clippy :: type_complexity)] fn draw_violin_figure < XR : AsRangedCoord < Value = f64 > , YR : AsRangedCoord < Value = f64 > > (root_area : DrawingArea < SVGBackend , Shift > , unit : & 'static str , x_range : XR , y_range : YR , data : Vec < (& str , Box < [f64] > , Box < [f64] >) > ,) where XR :: CoordDescType : PlottersValueFormatter < f64 > , YR :: CoordDescType : PlottersValueFormatter < f64 > , { let mut chart = ChartBuilder :: on (& root_area) . margin ((5) . percent ()) . set_label_area_size (LabelAreaPosition :: Left , (10) . percent_width () . min (60)) . set_label_area_size (LabelAreaPosition :: Bottom , (5) . percent_width () . min (40)) . build_cartesian_2d (x_range , y_range) . unwrap () ; chart . configure_mesh () . disable_mesh () . y_desc ("Input") . x_desc (format ! ("Average time ({})" , unit)) . y_label_style ((DEFAULT_FONT , 10)) . y_label_formatter (& | v : & f64 | data [v . round () as usize] . 0 . to_string ()) . y_labels (data . len ()) . draw () . unwrap () ; for (i , (_ , x , y)) in data . into_iter () . enumerate () { let base = i as f64 ; chart . draw_series (AreaSeries :: new (x . iter () . zip (y . iter ()) . map (| (x , y) | (* x , base + * y / 2.0)) , base , DARK_BLUE ,)) . unwrap () ; chart . draw_series (AreaSeries :: new (x . iter () . zip (y . iter ()) . map (| (x , y) | (* x , base - * y / 2.0)) , base , DARK_BLUE ,)) . unwrap () ; } }
+    };
+}
+
+draw_violin_figure!()

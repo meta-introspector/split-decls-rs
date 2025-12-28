@@ -1,0 +1,7 @@
+macro_rules! IMAGE_ENCLAVE_IMPORT_MATCH_IMAGE_ID {
+    () => {
+        pub const IMAGE_ENCLAVE_IMPORT_MATCH_IMAGE_ID : u32 = 0x0000_0004 ;
+    };
+}
+
+IMAGE_ENCLAVE_IMPORT_MATCH_IMAGE_ID!()

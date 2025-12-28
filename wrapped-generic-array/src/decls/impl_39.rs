@@ -1,14 +1,15 @@
 macro_rules! deps {
     () => {
         GenericArray!();
-        ArrayLength!();
+        ConstArrayLength!();
+        IntoArrayLength!();
     };
 }
 
 macro_rules! impl_39 {
     () => {
         deps!();
-        impl < T , N : ArrayLength > FromIterator < T > for GenericArray < T , N > { # [doc = " Create a `GenericArray` from an iterator."] # [doc = ""] # [doc = " Will panic if the number of elements is not exactly the array length."] # [doc = ""] # [doc = " See [`GenericArray::try_from_iter`] for a fallible alternative."] # [inline] fn from_iter < I > (iter : I) -> GenericArray < T , N > where I : IntoIterator < Item = T > , { match Self :: try_from_iter (iter) { Ok (res) => res , Err (_) => from_iter_length_fail (N :: USIZE) , } } }
+        impl < 'a , T , const N : usize > From < & 'a [T ; N] > for & 'a GenericArray < T , ConstArrayLength < N > > where Const < N > : IntoArrayLength , { # [inline (always)] fn from (slice : & 'a [T ; N]) -> Self { unsafe { & * (slice . as_ptr () as * const GenericArray < T , ConstArrayLength < N > >) } } }
     };
 }
 

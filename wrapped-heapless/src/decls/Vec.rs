@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        VecInner!();
+        VecView!();
+    };
+}
+
+macro_rules! Vec {
+    () => {
+        deps!();
+        # [doc = " A fixed capacity [`Vec`](https://doc.rust-lang.org/std/vec/struct.Vec.html)."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " use heapless::Vec;"] # [doc = ""] # [doc = " // A vector with a fixed capacity of 8 elements allocated on the stack"] # [doc = " let mut vec = Vec::<_, 8>::new();"] # [doc = " vec.push(1).unwrap();"] # [doc = " vec.push(2).unwrap();"] # [doc = ""] # [doc = " assert_eq!(vec.len(), 2);"] # [doc = " assert_eq!(vec[0], 1);"] # [doc = ""] # [doc = " assert_eq!(vec.pop(), Some(2));"] # [doc = " assert_eq!(vec.len(), 1);"] # [doc = ""] # [doc = " vec[0] = 7;"] # [doc = " assert_eq!(vec[0], 7);"] # [doc = ""] # [doc = " vec.extend([1, 2, 3].iter().cloned());"] # [doc = ""] # [doc = " for x in &vec {"] # [doc = "     println!(\"{}\", x);"] # [doc = " }"] # [doc = " assert_eq!(*vec, [7, 1, 2, 3]);"] # [doc = " ```"] # [doc = ""] # [doc = " In some cases, the const-generic might be cumbersome. `Vec` can coerce into a [`VecView`] to"] # [doc = " remove the need for the const-generic:"] # [doc = ""] # [doc = " ```rust"] # [doc = " use heapless::{Vec, VecView};"] # [doc = ""] # [doc = " let vec: Vec<u8, 10> = Vec::from_slice(&[1, 2, 3, 4]).unwrap();"] # [doc = " let view: &VecView<_, _> = &vec;"] # [doc = " ```"] # [doc = ""] # [doc = " For uncommmon capacity values, or in generic scenarios, you may have to provide the `LenT`"] # [doc = " generic yourself."] # [doc = ""] # [doc = " This should be the smallest unsigned integer type that your capacity fits in, or `usize` if you"] # [doc = " don't want to consider this."] pub type Vec < T , const N : usize , LenT = usize > = VecInner < T , LenT , OwnedVecStorage < T , N > > ;
+    };
+}
+
+Vec!()

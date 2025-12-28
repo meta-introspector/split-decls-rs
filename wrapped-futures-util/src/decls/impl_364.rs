@@ -1,0 +1,7 @@
+macro_rules! impl_364 {
+    () => {
+        impl < St , Fut , F > fmt :: Debug for ForEach < St , Fut , F > where St : fmt :: Debug , Fut : fmt :: Debug , { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { f . debug_struct ("ForEach") . field ("stream" , & self . stream) . field ("future" , & self . future) . finish () } }
+    };
+}
+
+impl_364!()

@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
+        Filter!();
+        Map!();
+        SkipWhile!();
+        Fuse!();
+        MapErr!();
         Skip!();
+        Take!();
+        TakeWhile!();
         FuseState!();
         MapRef!();
-        Fuse!();
-        Map!();
-        Take!();
-        Filter!();
-        MapErr!();
-        SkipWhile!();
-        TakeWhile!();
     };
 }
 

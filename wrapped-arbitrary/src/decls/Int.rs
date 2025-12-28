@@ -1,0 +1,7 @@
+macro_rules! Int {
+    () => {
+        # [doc = " A trait that is implemented for all of the primitive integers:"] # [doc = ""] # [doc = " * `u8`"] # [doc = " * `u16`"] # [doc = " * `u32`"] # [doc = " * `u64`"] # [doc = " * `u128`"] # [doc = " * `usize`"] # [doc = " * `i8`"] # [doc = " * `i16`"] # [doc = " * `i32`"] # [doc = " * `i64`"] # [doc = " * `i128`"] # [doc = " * `isize`"] # [doc = ""] # [doc = " Don't implement this trait yourself."] pub trait Int : Copy + std :: fmt :: Debug + PartialOrd + Ord + ops :: Sub < Self , Output = Self > + ops :: Rem < Self , Output = Self > + ops :: Shr < Self , Output = Self > + ops :: Shl < usize , Output = Self > + ops :: BitOr < Self , Output = Self > { # [doc (hidden)] type Unsigned : Int ; # [doc (hidden)] const ZERO : Self ; # [doc (hidden)] const ONE : Self ; # [doc (hidden)] const MAX : Self ; # [doc (hidden)] fn from_u8 (b : u8) -> Self ; # [doc (hidden)] fn from_usize (u : usize) -> Self ; # [doc (hidden)] fn checked_add (self , rhs : Self) -> Option < Self > ; # [doc (hidden)] fn wrapping_add (self , rhs : Self) -> Self ; # [doc (hidden)] fn wrapping_sub (self , rhs : Self) -> Self ; # [doc (hidden)] fn to_unsigned (self) -> Self :: Unsigned ; # [doc (hidden)] fn from_unsigned (unsigned : Self :: Unsigned) -> Self ; }
+    };
+}
+
+Int!()

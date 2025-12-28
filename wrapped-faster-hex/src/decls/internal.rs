@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        Error!();
+        CheckCase!();
+    };
+}
+
+macro_rules! internal {
+    () => {
+        deps!();
+        mod internal { use crate :: { decode :: { hex_decode_with_case , CheckCase } , encode :: hex_encode_custom , } ; # [cfg (feature = "alloc")] use alloc :: { borrow :: Cow , format , string :: ToString , vec } ; use core :: iter :: FromIterator ; use serde :: { de :: { Error , IntoDeserializer } , Deserializer , Serializer , } ; pub (crate) fn serialize < S , T > (data : T , serializer : S , with_prefix : bool , case : CheckCase ,) -> Result < S :: Ok , S :: Error > where S : Serializer , T : AsRef < [u8] > , { let src : & [u8] = data . as_ref () ; let mut dst_length = data . as_ref () . len () << 1 ; if with_prefix { dst_length += 2 ; } let mut dst = vec ! [0u8 ; dst_length] ; let mut dst_start = 0 ; if with_prefix { dst [0] = b'0' ; dst [1] = b'x' ; dst_start = 2 ; } hex_encode_custom (src , & mut dst [dst_start ..] , matches ! (case , CheckCase :: Upper)) . map_err (serde :: ser :: Error :: custom) ? ; serializer . serialize_str (unsafe { :: core :: str :: from_utf8_unchecked (& dst) }) } pub (crate) fn deserialize < 'de , D , T > (deserializer : D , with_prefix : bool , check_case : CheckCase ,) -> Result < T , D :: Error > where D : Deserializer < 'de > , T : FromIterator < u8 > , { let raw_src : Cow < str > = serde :: Deserialize :: deserialize (deserializer) ? ; if with_prefix && ! raw_src . starts_with ("0x") { return Err (D :: Error :: custom ("invalid prefix" . to_string ())) ; } let src : & [u8] = { if with_prefix { raw_src [2 ..] . as_bytes () } else { raw_src . as_bytes () } } ; if src . len () & 1 != 0 { return Err (D :: Error :: custom ("invalid length" . to_string ())) ; } let mut dst = vec ! [0 ; src . len () >> 1] ; hex_decode_with_case (src , & mut dst , check_case) . map_err (| e | Error :: custom (format ! ("{:?}" , e))) ? ; Ok (dst . into_iter () . collect ()) } pub (crate) fn serialize_option < S , T > (option_data : & Option < T > , serializer : S , with_prefix : bool , case : CheckCase ,) -> Result < S :: Ok , S :: Error > where S : Serializer , T : AsRef < [u8] > , { match option_data { Some (data) => serialize (data , serializer , with_prefix , case) , None => serializer . serialize_none () , } } pub (crate) fn deserialize_option < 'de , D , T > (deserializer : D , with_prefix : bool , check_case : CheckCase ,) -> Result < Option < T > , D :: Error > where D : Deserializer < 'de > , T : FromIterator < u8 > , { let option_str : Option < Cow < str > > = serde :: Deserialize :: deserialize (deserializer) ? ; match option_str { Some (raw_src) => { let des : Vec < u8 > = deserialize (raw_src . into_deserializer () , with_prefix , check_case) ? ; Ok (Some (des . into_iter () . collect ())) } None => Ok (None) , } } }
+    };
+}
+
+internal!()

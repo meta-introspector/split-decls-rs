@@ -1,6 +1,6 @@
 macro_rules! kde {
     () => {
-        mod kde ;
+        pub mod kde ;
     };
 }
 

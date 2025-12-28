@@ -1,14 +1,13 @@
 macro_rules! deps {
     () => {
-        BufferKind!();
-        Lazy!();
+        ReadBuffer!();
     };
 }
 
 macro_rules! impl_6 {
     () => {
         deps!();
-        impl BufferKind for Lazy { }
+        # [cfg (feature = "zeroize")] impl < BS : ArraySize > zeroize :: ZeroizeOnDrop for ReadBuffer < BS > { }
     };
 }
 

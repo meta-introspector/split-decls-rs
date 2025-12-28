@@ -1,8 +1,10 @@
 macro_rules! deps {
     () => {
+        Join!();
+        Output!();
+        Platform!();
         ChunkState!();
         CVWords!();
-        Output!();
     };
 }
 

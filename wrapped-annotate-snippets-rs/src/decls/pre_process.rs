@@ -1,0 +1,22 @@
+macro_rules! deps {
+    () => {
+        Padding!();
+        SourceMap!();
+        Origin!();
+        PreProcessedGroup!();
+        DisplaySuggestion!();
+        Element!();
+        Message!();
+        PreProcessedElement!();
+        Group!();
+    };
+}
+
+macro_rules! pre_process {
+    () => {
+        deps!();
+        fn pre_process < 'a > (groups : & 'a [Group < 'a >] ,) -> (usize , Option < & 'a Cow < 'a , str > > , Vec < PreProcessedGroup < 'a > >) { let mut max_line_num = 0 ; let mut og_primary_path = None ; let mut out = Vec :: with_capacity (groups . len ()) ; for group in groups { let mut elements = Vec :: with_capacity (group . elements . len ()) ; let mut primary_path = None ; let mut max_depth = 0 ; for element in & group . elements { match element { Element :: Message (message) => { elements . push (PreProcessedElement :: Message (message)) ; } Element :: Cause (cause) => { let sm = SourceMap :: new (& cause . source , cause . line_start) ; let (depth , annotated_lines) = sm . annotated_lines (cause . markers . clone () , cause . fold) ; if cause . fold { let end = cause . markers . iter () . map (| a | a . span . end) . max () . unwrap_or (cause . source . len ()) . min (cause . source . len ()) ; max_line_num = max (cause . line_start + newline_count (& cause . source [.. end]) , max_line_num ,) ; } else { max_line_num = max (cause . line_start + newline_count (& cause . source) , max_line_num ,) ; } if primary_path . is_none () { primary_path = Some (cause . path . as_ref ()) ; } max_depth = max (depth , max_depth) ; elements . push (PreProcessedElement :: Cause ((cause , sm , annotated_lines))) ; } Element :: Suggestion (suggestion) => { let sm = SourceMap :: new (& suggestion . source , suggestion . line_start) ; if let Some ((complete , patches , highlights)) = sm . splice_lines (suggestion . markers . clone () , suggestion . fold) { let display_suggestion = DisplaySuggestion :: new (& complete , & patches , & sm) ; if suggestion . fold { if let Some (first) = patches . first () { let (l_start , _) = sm . span_to_locations (first . original_span . clone ()) ; let nc = newline_count (& complete) ; let sugg_max_line_num = match display_suggestion { DisplaySuggestion :: Underline => l_start . line , DisplaySuggestion :: Diff => { let file_lines = sm . span_to_lines (first . span . clone ()) ; file_lines . last () . map_or (l_start . line + nc , | line | line . line_index) } DisplaySuggestion :: None => l_start . line + nc , DisplaySuggestion :: Add => l_start . line + nc , } ; max_line_num = max (sugg_max_line_num , max_line_num) ; } } else { max_line_num = max (suggestion . line_start + newline_count (& complete) , max_line_num ,) ; } elements . push (PreProcessedElement :: Suggestion ((suggestion , sm , (complete , patches , highlights) , display_suggestion ,))) ; } } Element :: Origin (origin) => { if primary_path . is_none () { primary_path = Some (Some (& origin . path)) ; } elements . push (PreProcessedElement :: Origin (origin)) ; } Element :: Padding (padding) => { elements . push (PreProcessedElement :: Padding (padding . clone ())) ; } } } let group = PreProcessedGroup { group , elements , primary_path : primary_path . unwrap_or_default () , max_depth , } ; if og_primary_path . is_none () && group . primary_path . is_some () { og_primary_path = group . primary_path ; } out . push (group) ; } (max_line_num , og_primary_path , out) }
+    };
+}
+
+pre_process!()

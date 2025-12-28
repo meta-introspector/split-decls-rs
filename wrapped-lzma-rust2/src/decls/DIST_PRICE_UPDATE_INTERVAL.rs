@@ -1,0 +1,7 @@
+macro_rules! DIST_PRICE_UPDATE_INTERVAL {
+    () => {
+        const DIST_PRICE_UPDATE_INTERVAL : u32 = FULL_DISTANCES as u32 ;
+    };
+}
+
+DIST_PRICE_UPDATE_INTERVAL!()

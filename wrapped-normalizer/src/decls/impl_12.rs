@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        CanonicalCombiningClass!();
+        CanonicalCombiningClassMap!();
     };
 }
 
 macro_rules! impl_12 {
     () => {
         deps!();
-        # [cfg (not (feature = "icu_properties"))] impl CanonicalCombiningClass { const fn from_icu4c_value (v : u8) -> Self { Self (v) } const fn to_icu4c_value (self) -> u8 { self . 0 } }
+        # [doc = " ✨ *Enabled with the `harfbuzz_traits` Cargo feature.*"] impl CombiningClassFunc for & '_ CanonicalCombiningClassMap { fn combining_class (& self , ch : char) -> u8 { CombiningClassFunc :: combining_class (& self . as_borrowed () , ch) } }
     };
 }
 

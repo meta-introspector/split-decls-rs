@@ -1,15 +1,13 @@
 macro_rules! deps {
     () => {
-        FallibleIterator!();
-        Flatten!();
-        IntoFallibleIterator!();
+        FoldStop!();
     };
 }
 
 macro_rules! impl_44 {
     () => {
         deps!();
-        impl < I > Clone for Flatten < I > where I : FallibleIterator + Clone , I :: Item : IntoFallibleIterator , < I :: Item as IntoFallibleIterator > :: IntoFallibleIter : Clone , { # [inline] fn clone (& self) -> Flatten < I > { Flatten { it : self . it . clone () , cur : self . cur . clone () , } } }
+        impl < T , E > From < E > for FoldStop < T , E > { # [inline] fn from (e : E) -> FoldStop < T , E > { FoldStop :: Err (e) } }
     };
 }
 

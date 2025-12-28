@@ -1,0 +1,21 @@
+macro_rules! deps {
+    () => {
+        Config!();
+        SearchKind!();
+        RabinKarp!();
+        ForceAlgorithm!();
+        Teddy!();
+        Patterns!();
+        Searcher!();
+        Builder!();
+    };
+}
+
+macro_rules! impl_110 {
+    () => {
+        deps!();
+        impl Builder { # [doc = " Create a new builder for constructing a multi-pattern searcher. This"] # [doc = " constructor uses the default configuration."] pub fn new () -> Builder { Builder :: from_config (Config :: new ()) } fn from_config (config : Config) -> Builder { Builder { config , inert : false , patterns : Patterns :: new () } } # [doc = " Build a searcher from the patterns added to this builder so far."] pub fn build (& self) -> Option < Searcher > { if self . inert || self . patterns . is_empty () { return None ; } let mut patterns = self . patterns . clone () ; patterns . set_match_kind (self . config . kind) ; let patterns = Arc :: new (patterns) ; let rabinkarp = RabinKarp :: new (& patterns) ; let (search_kind , minimum_len) = match self . config . force { None | Some (ForceAlgorithm :: Teddy) => { debug ! ("trying to build Teddy packed matcher") ; let teddy = match self . build_teddy (Arc :: clone (& patterns)) { None => return None , Some (teddy) => teddy , } ; let minimum_len = teddy . minimum_len () ; (SearchKind :: Teddy (teddy) , minimum_len) } Some (ForceAlgorithm :: RabinKarp) => { debug ! ("using Rabin-Karp packed matcher") ; (SearchKind :: RabinKarp , 0) } } ; Some (Searcher { patterns , rabinkarp , search_kind , minimum_len }) } fn build_teddy (& self , patterns : Arc < Patterns >) -> Option < teddy :: Searcher > { teddy :: Builder :: new () . only_256bit (self . config . only_teddy_256bit) . only_fat (self . config . only_teddy_fat) . heuristic_pattern_limits (self . config . heuristic_pattern_limits) . build (patterns) } # [doc = " Add the given pattern to this set to match."] # [doc = ""] # [doc = " The order in which patterns are added is significant. Namely, when"] # [doc = " using leftmost-first match semantics, then when multiple patterns can"] # [doc = " match at a particular location, the pattern that was added first is"] # [doc = " used as the match."] # [doc = ""] # [doc = " If the number of patterns added exceeds the amount supported by packed"] # [doc = " searchers, then the builder will stop accumulating patterns and render"] # [doc = " itself inert. At this point, constructing a searcher will always return"] # [doc = " `None`."] pub fn add < P : AsRef < [u8] > > (& mut self , pattern : P) -> & mut Builder { if self . inert { return self ; } else if self . patterns . len () >= PATTERN_LIMIT { self . inert = true ; self . patterns . reset () ; return self ; } assert ! (self . patterns . len () <= core :: u16 :: MAX as usize) ; let pattern = pattern . as_ref () ; if pattern . is_empty () { self . inert = true ; self . patterns . reset () ; return self ; } self . patterns . add (pattern) ; self } # [doc = " Add the given iterator of patterns to this set to match."] # [doc = ""] # [doc = " The iterator must yield elements that can be converted into a `&[u8]`."] # [doc = ""] # [doc = " The order in which patterns are added is significant. Namely, when"] # [doc = " using leftmost-first match semantics, then when multiple patterns can"] # [doc = " match at a particular location, the pattern that was added first is"] # [doc = " used as the match."] # [doc = ""] # [doc = " If the number of patterns added exceeds the amount supported by packed"] # [doc = " searchers, then the builder will stop accumulating patterns and render"] # [doc = " itself inert. At this point, constructing a searcher will always return"] # [doc = " `None`."] pub fn extend < I , P > (& mut self , patterns : I) -> & mut Builder where I : IntoIterator < Item = P > , P : AsRef < [u8] > , { for p in patterns { self . add (p) ; } self } # [doc = " Returns the number of patterns added to this builder."] pub fn len (& self) -> usize { self . patterns . len () } # [doc = " Returns the length, in bytes, of the shortest pattern added."] pub fn minimum_len (& self) -> usize { self . patterns . minimum_len () } }
+    };
+}
+
+impl_110!()

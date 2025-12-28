@@ -1,0 +1,7 @@
+macro_rules! RTL_VIRTUAL_UNWIND_HANDLER_TYPE {
+    () => {
+        pub type RTL_VIRTUAL_UNWIND_HANDLER_TYPE = u32 ;
+    };
+}
+
+RTL_VIRTUAL_UNWIND_HANDLER_TYPE!()

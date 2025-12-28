@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        NoHashHasher!();
-        BuildNoHashHasher!();
         IsEnabled!();
+        BuildNoHashHasher!();
+        NoHashHasher!();
     };
 }
 

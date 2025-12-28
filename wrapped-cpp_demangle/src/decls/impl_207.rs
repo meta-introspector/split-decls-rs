@@ -1,0 +1,21 @@
+macro_rules! deps {
+    () => {
+        LeafName!();
+        Result!();
+        UnnamedTypeName!();
+        ArgScope!();
+        TemplateArg!();
+        Error!();
+        Type!();
+        TemplateArgs!();
+    };
+}
+
+macro_rules! impl_207 {
+    () => {
+        deps!();
+        impl < 'subs > ArgScope < 'subs , 'subs > for UnnamedTypeName { fn leaf_name (& 'subs self) -> Result < LeafName < 'subs > > { Ok (LeafName :: UnnamedType (self)) } fn get_template_arg (& 'subs self , _ : usize ,) -> Result < (& 'subs TemplateArg , & 'subs TemplateArgs) > { Err (error :: Error :: BadTemplateArgReference) } fn get_function_arg (& 'subs self , _ : usize) -> Result < & 'subs Type > { Err (error :: Error :: BadFunctionArgReference) } }
+    };
+}
+
+impl_207!()

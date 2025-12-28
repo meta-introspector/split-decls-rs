@@ -1,6 +1,6 @@
 macro_rules! traits {
     () => {
-        pub mod traits ;
+        mod traits ;
     };
 }
 

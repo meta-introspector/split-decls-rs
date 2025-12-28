@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        VtUtf8Receiver!();
+        State!();
     };
 }
 
 macro_rules! impl_16 {
     () => {
         deps!();
-        # [cfg (feature = "utf8")] impl utf8 :: Receiver for VtUtf8Receiver < '_ > { fn codepoint (& mut self , c : char) { * self . 0 = Some (c) ; } fn invalid_sequence (& mut self) { * self . 0 = Some ('�') ; } }
+        impl TryFrom < u8 > for State { type Error = u8 ; # [inline (always)] fn try_from (raw : u8) -> Result < Self , Self :: Error > { STATES . get (raw as usize) . ok_or (raw) . copied () } }
     };
 }
 

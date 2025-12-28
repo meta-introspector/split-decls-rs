@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        Pod!();
+        UnalignedIter!();
+        SliceCopyIter!();
+    };
+}
+
+macro_rules! impl_77 {
+    () => {
+        deps!();
+        impl < 'a , T > UnalignedIter < 'a , T > { # [doc = " Create an `UnalignedIter` from `ptr` and `end`, which must be spaced"] # [doc = " an whole number of `T` offsets apart."] pub unsafe fn from_raw_parts (ptr : * const u8 , end : * const u8) -> Self { let len = end as usize - ptr as usize ; debug_assert_eq ! (len % size_of ::< T > () , 0) ; UnalignedIter { ptr : ptr , end : end , tail_end : end , ty : PhantomData , } } # [doc = " Create an `UnalignedIter` out of the slice of data, which"] # [doc = " iterates first in blocks of `T` (unaligned loads), and"] # [doc = " then leaves a tail of the remaining bytes."] pub fn from_slice (data : & 'a [u8]) -> Self where T : Pod , { unsafe { let ptr = data . as_ptr () ; let len = data . len () ; let sz = size_of :: < T > () as isize ; let end_block = ptr . offset (len as isize / sz * sz) ; let end = ptr . offset (len as isize) ; UnalignedIter { ptr : ptr , end : end_block , tail_end : end , ty : PhantomData , } } } # [doc = " Return a byte iterator of the remaining tail of the iterator;"] # [doc = " this can be called at any time, but in particular when the iterator"] # [doc = " has returned None."] pub fn tail (& self) -> SliceCopyIter < 'a , u8 > { unsafe { SliceCopyIter :: new (self . ptr , self . tail_end) } } # [doc = " Return `true` if the tail is not empty."] pub fn has_tail (& self) -> bool { self . ptr != self . tail_end } # [doc = " Return the next iterator element, without stepping the iterator."] pub fn peek_next (& self) -> Option < T > where T : Copy , { if self . ptr != self . end { unsafe { Some (ptr :: read_unaligned (self . ptr as * const T)) } } else { None } } }
+    };
+}
+
+impl_77!()

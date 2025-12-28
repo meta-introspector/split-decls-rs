@@ -1,0 +1,7 @@
+macro_rules! impl_serde_traits {
+    () => {
+        # [doc = " Macro that implements the `serde::{Serialize, Deserialize}` traits."] # [cfg (feature = "serde")] macro_rules ! impl_serde_traits (($ name : ident , $ bytes_function : ident) => (# [cfg_attr (docsrs , doc (cfg (feature = "serde")))] # [doc = " This type tries to serialize as a `&[u8]` would. Note that the serialized"] # [doc = " type likely does not have the same protections that Orion provides, such"] # [doc = " as constant-time operations. A good rule of thumb is to only serialize"] # [doc = " these types for storage. Don't operate on the serialized types."] impl serde :: Serialize for $ name { fn serialize < S > (& self , serializer : S) -> Result < S :: Ok , S :: Error > where S : serde :: ser :: Serializer , { let bytes : & [u8] = & self .$ bytes_function () ; bytes . serialize (serializer) } } # [cfg_attr (docsrs , doc (cfg (feature = "serde")))] # [doc = " This type tries to deserialize as a `Vec<u8>` would. If it succeeds, the digest"] # [doc = " will be built using `Self::from_slice`."] # [doc = ""] # [doc = " Note that **this allocates** once to store the referenced bytes on the heap."] impl <'de > serde :: Deserialize <'de > for $ name { fn deserialize < D > (deserializer : D) -> Result < Self , D :: Error > where D : serde :: de :: Deserializer <'de >, { let bytes = alloc :: vec :: Vec ::< u8 >:: deserialize (deserializer) ?; core :: convert :: TryFrom :: try_from (bytes . as_slice ()) . map_err (serde :: de :: Error :: custom) } })) ;
+    };
+}
+
+impl_serde_traits!()

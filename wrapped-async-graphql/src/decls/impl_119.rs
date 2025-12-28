@@ -1,0 +1,37 @@
+macro_rules! deps {
+    () => {
+        Union!();
+        SchemaEnv!();
+        SchemaBuilder!();
+        MetaType!();
+        SchemaInner!();
+        Directive!();
+        SchemaEnvInner!();
+        Object!();
+        ValidationMode!();
+        Schema!();
+        Subscription!();
+        OutputType!();
+        Mutation!();
+        CustomDirectiveFactory!();
+        Any!();
+        InputObject!();
+        Query!();
+        EmptyMutation!();
+        InputType!();
+        Scalar!();
+        EmptySubscription!();
+        ExtensionFactory!();
+        IntrospectionMode!();
+        Interface!();
+    };
+}
+
+macro_rules! impl_119 {
+    () => {
+        deps!();
+        impl < Query , Mutation , Subscription > SchemaBuilder < Query , Mutation , Subscription > { # [doc = " Manually register a input type in the schema."] # [doc = ""] # [doc = " You can use this function to register schema types that are not directly"] # [doc = " referenced."] # [must_use] pub fn register_input_type < T : InputType > (mut self) -> Self { T :: create_type_info (& mut self . registry) ; self } # [doc = " Manually register a output type in the schema."] # [doc = ""] # [doc = " You can use this function to register schema types that are not directly"] # [doc = " referenced."] # [must_use] pub fn register_output_type < T : OutputType > (mut self) -> Self { T :: create_type_info (& mut self . registry) ; self } # [doc = " Disable introspection queries."] # [must_use] pub fn disable_introspection (mut self) -> Self { self . registry . introspection_mode = IntrospectionMode :: Disabled ; self } # [doc = " Only process introspection queries, everything else is processed as an"] # [doc = " error."] # [must_use] pub fn introspection_only (mut self) -> Self { self . registry . introspection_mode = IntrospectionMode :: IntrospectionOnly ; self } # [doc = " Set the maximum complexity a query can have. By default, there is no"] # [doc = " limit."] # [must_use] pub fn limit_complexity (mut self , complexity : usize) -> Self { self . complexity = Some (complexity) ; self } # [doc = " Set the maximum depth a query can have. By default, there is no limit."] # [must_use] pub fn limit_depth (mut self , depth : usize) -> Self { self . depth = Some (depth) ; self } # [doc = " Set the maximum recursive depth a query can have. (default: 32)"] # [doc = ""] # [doc = " If the value is too large, stack overflow may occur, usually `32` is"] # [doc = " enough."] # [must_use] pub fn limit_recursive_depth (mut self , depth : usize) -> Self { self . recursive_depth = depth ; self } # [doc = " Set the maximum number of directives on a single field. (default: no"] # [doc = " limit)"] pub fn limit_directives (mut self , max_directives : usize) -> Self { self . max_directives = Some (max_directives) ; self } # [doc = " Add an extension to the schema."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```rust"] # [doc = " use async_graphql::*;"] # [doc = ""] # [doc = " struct Query;"] # [doc = ""] # [doc = " #[Object]"] # [doc = " impl Query {"] # [doc = "     async fn value(&self) -> i32 {"] # [doc = "         100"] # [doc = "     }"] # [doc = " }"] # [doc = ""] # [doc = " let schema = Schema::build(Query, EmptyMutation, EmptySubscription)"] # [doc = "     .extension(extensions::Logger)"] # [doc = "     .finish();"] # [doc = " ```"] # [must_use] pub fn extension (mut self , extension : impl ExtensionFactory) -> Self { self . extensions . push (Box :: new (extension)) ; self } # [doc = " Add a global data that can be accessed in the `Schema`. You access it"] # [doc = " with `Context::data`."] # [must_use] pub fn data < D : Any + Send + Sync > (mut self , data : D) -> Self { self . data . insert (data) ; self } # [doc = " Set the validation mode, default is `ValidationMode::Strict`."] # [must_use] pub fn validation_mode (mut self , validation_mode : ValidationMode) -> Self { self . validation_mode = validation_mode ; self } # [doc = " Enable federation, which is automatically enabled if the Query has least"] # [doc = " one entity definition."] # [must_use] pub fn enable_federation (mut self) -> Self { self . registry . enable_federation = true ; self } # [doc = " Make the Federation SDL include subscriptions."] # [doc = ""] # [doc = " Note: Not included by default, in order to be compatible with Apollo"] # [doc = " Server."] # [must_use] pub fn enable_subscription_in_federation (mut self) -> Self { self . registry . federation_subscription = true ; self } # [doc = " Override the name of the specified input type."] # [must_use] pub fn override_input_type_description < T : InputType > (mut self , desc : & 'static str) -> Self { self . registry . set_description (& * T :: type_name () , desc) ; self } # [doc = " Override the name of the specified output type."] # [must_use] pub fn override_output_type_description < T : OutputType > (mut self , desc : & 'static str) -> Self { self . registry . set_description (& * T :: type_name () , desc) ; self } # [doc = " Register a custom directive."] # [doc = ""] # [doc = " # Panics"] # [doc = ""] # [doc = " Panics if the directive with the same name is already registered."] # [must_use] pub fn directive < T : CustomDirectiveFactory > (mut self , directive : T) -> Self { let name = directive . name () ; let instance = Box :: new (directive) ; instance . register (& mut self . registry) ; if name == "skip" || name == "include" || self . custom_directives . insert (name . clone () . into () , instance) . is_some () { panic ! ("Directive `{}` already exists" , name) ; } self } # [doc = " Disable field suggestions."] # [must_use] pub fn disable_suggestions (mut self) -> Self { self . registry . enable_suggestions = false ; self } # [doc = " Make all fields sorted on introspection queries."] pub fn with_sorted_fields (mut self) -> Self { use crate :: registry :: MetaType ; for ty in self . registry . types . values_mut () { match ty { MetaType :: Object { fields , .. } | MetaType :: Interface { fields , .. } => { fields . sort_keys () ; } MetaType :: InputObject { input_fields , .. } => { input_fields . sort_keys () ; } MetaType :: Scalar { .. } | MetaType :: Enum { .. } | MetaType :: Union { .. } => { } } } self } # [doc = " Make all enum variants sorted on introspection queries."] pub fn with_sorted_enums (mut self) -> Self { use crate :: registry :: MetaType ; for ty in & mut self . registry . types . values_mut () { if let MetaType :: Enum { enum_values , .. } = ty { enum_values . sort_keys () ; } } self } # [doc = " Consumes this builder and returns a schema."] pub fn finish (mut self) -> Schema < Query , Mutation , Subscription > { if self . registry . enable_federation || self . registry . has_entities () { self . registry . create_federation_types () ; } Schema (Arc :: new (SchemaInner { validation_mode : self . validation_mode , query : self . query , mutation : self . mutation , subscription : self . subscription , complexity : self . complexity , depth : self . depth , recursive_depth : self . recursive_depth , max_directives : self . max_directives , extensions : self . extensions , env : SchemaEnv (Arc :: new (SchemaEnvInner { registry : self . registry , data : self . data , custom_directives : self . custom_directives , })) , })) } }
+    };
+}
+
+impl_119!()

@@ -1,0 +1,7 @@
+macro_rules! IMAGE_NUMBEROF_DIRECTORY_ENTRIES {
+    () => {
+        pub const IMAGE_NUMBEROF_DIRECTORY_ENTRIES : usize = 16 ;
+    };
+}
+
+IMAGE_NUMBEROF_DIRECTORY_ENTRIES!()

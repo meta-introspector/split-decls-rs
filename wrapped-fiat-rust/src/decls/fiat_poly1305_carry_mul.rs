@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        IndexConst!();
+    };
+}
+
+macro_rules! fiat_poly1305_carry_mul {
+    () => {
+        deps!();
+        # [doc = " The function fiat_poly1305_carry_mul multiplies two field elements and reduces the result."] # [doc = ""] # [doc = " Postconditions:"] # [doc = "   eval out1 mod m = (eval arg1 * eval arg2) mod m"] # [doc = ""] # [inline] pub const fn fiat_poly1305_carry_mul (mut out1 : & mut fiat_poly1305_tight_field_element , arg1 : & fiat_poly1305_loose_field_element , arg2 : & fiat_poly1305_loose_field_element) { let x1 : u128 = (((* IndexConst (arg1) . index (2)) as u128) * (((* IndexConst (arg2) . index (2)) * 0x5) as u128)) ; let x2 : u128 = (((* IndexConst (arg1) . index (2)) as u128) * (((* IndexConst (arg2) . index (1)) * 0xa) as u128)) ; let x3 : u128 = (((* IndexConst (arg1) . index (1)) as u128) * (((* IndexConst (arg2) . index (2)) * 0xa) as u128)) ; let x4 : u128 = (((* IndexConst (arg1) . index (2)) as u128) * ((* IndexConst (arg2) . index (0)) as u128)) ; let x5 : u128 = (((* IndexConst (arg1) . index (1)) as u128) * (((* IndexConst (arg2) . index (1)) * 0x2) as u128)) ; let x6 : u128 = (((* IndexConst (arg1) . index (1)) as u128) * ((* IndexConst (arg2) . index (0)) as u128)) ; let x7 : u128 = (((* IndexConst (arg1) . index (0)) as u128) * ((* IndexConst (arg2) . index (2)) as u128)) ; let x8 : u128 = (((* IndexConst (arg1) . index (0)) as u128) * ((* IndexConst (arg2) . index (1)) as u128)) ; let x9 : u128 = (((* IndexConst (arg1) . index (0)) as u128) * ((* IndexConst (arg2) . index (0)) as u128)) ; let x10 : u128 = (x9 + (x3 + x2)) ; let x11 : u64 = ((x10 >> 44) as u64) ; let x12 : u64 = ((x10 & (0xfffffffffff as u128)) as u64) ; let x13 : u128 = (x7 + (x5 + x4)) ; let x14 : u128 = (x8 + (x6 + x1)) ; let x15 : u128 = ((x11 as u128) + x14) ; let x16 : u64 = ((x15 >> 43) as u64) ; let x17 : u64 = ((x15 & (0x7ffffffffff as u128)) as u64) ; let x18 : u128 = ((x16 as u128) + x13) ; let x19 : u64 = ((x18 >> 43) as u64) ; let x20 : u64 = ((x18 & (0x7ffffffffff as u128)) as u64) ; let x21 : u64 = (x19 * 0x5) ; let x22 : u64 = (x12 + x21) ; let x23 : u64 = (x22 >> 44) ; let x24 : u64 = (x22 & 0xfffffffffff) ; let x25 : u64 = (x23 + x17) ; let x26 : fiat_poly1305_u1 = ((x25 >> 43) as fiat_poly1305_u1) ; let x27 : u64 = (x25 & 0x7ffffffffff) ; let x28 : u64 = ((x26 as u64) + x20) ; * IndexConst (& mut out1) . index_mut (0) = x24 ; * IndexConst (& mut out1) . index_mut (1) = x27 ; * IndexConst (& mut out1) . index_mut (2) = x28 ; }
+    };
+}
+
+fiat_poly1305_carry_mul!()

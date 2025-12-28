@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        Atomic!();
+        Local!();
+    };
+}
+
+macro_rules! Guard {
+    () => {
+        deps!();
+        # [doc = " A guard that keeps the current thread pinned."] # [doc = ""] # [doc = " # Pinning"] # [doc = ""] # [doc = " The current thread is pinned by calling [`pin`], which returns a new guard:"] # [doc = ""] # [doc = " ```"] # [doc = " use crossbeam_epoch as epoch;"] # [doc = ""] # [doc = " // It is often convenient to prefix a call to `pin` with a `&` in order to create a reference."] # [doc = " // This is not really necessary, but makes passing references to the guard a bit easier."] # [doc = " let guard = &epoch::pin();"] # [doc = " ```"] # [doc = ""] # [doc = " When a guard gets dropped, the current thread is automatically unpinned."] # [doc = ""] # [doc = " # Pointers on the stack"] # [doc = ""] # [doc = " Having a guard allows us to create pointers on the stack to heap-allocated objects."] # [doc = " For example:"] # [doc = ""] # [doc = " ```"] # [doc = " use crossbeam_epoch::{self as epoch, Atomic};"] # [doc = " use std::sync::atomic::Ordering::SeqCst;"] # [doc = ""] # [doc = " // Create a heap-allocated number."] # [doc = " let a = Atomic::new(777);"] # [doc = ""] # [doc = " // Pin the current thread."] # [doc = " let guard = &epoch::pin();"] # [doc = ""] # [doc = " // Load the heap-allocated object and create pointer `p` on the stack."] # [doc = " let p = a.load(SeqCst, guard);"] # [doc = ""] # [doc = " // Dereference the pointer and print the value:"] # [doc = " if let Some(num) = unsafe { p.as_ref() } {"] # [doc = "     println!(\"The number is {}.\", num);"] # [doc = " }"] # [doc = " # unsafe { drop(a.into_owned()); } // avoid leak"] # [doc = " ```"] # [doc = ""] # [doc = " # Multiple guards"] # [doc = ""] # [doc = " Pinning is reentrant and it is perfectly legal to create multiple guards. In that case, the"] # [doc = " thread will actually be pinned only when the first guard is created and unpinned when the last"] # [doc = " one is dropped:"] # [doc = ""] # [doc = " ```"] # [doc = " use crossbeam_epoch as epoch;"] # [doc = ""] # [doc = " let guard1 = epoch::pin();"] # [doc = " let guard2 = epoch::pin();"] # [doc = " assert!(epoch::is_pinned());"] # [doc = " drop(guard1);"] # [doc = " assert!(epoch::is_pinned());"] # [doc = " drop(guard2);"] # [doc = " assert!(!epoch::is_pinned());"] # [doc = " ```"] # [doc = ""] # [doc = " [`pin`]: super::pin"] pub struct Guard { pub (crate) local : * const Local , }
+    };
+}
+
+Guard!()

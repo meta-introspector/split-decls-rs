@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        GeneratedPatches!();
         PatchEntry!();
         WorkspaceInfo!();
-        GeneratedPatches!();
     };
 }
 

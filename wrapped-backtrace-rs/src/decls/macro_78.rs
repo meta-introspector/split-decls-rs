@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        HANDLE!();
+    };
+}
+
+macro_rules! macro_78 {
+    () => {
+        deps!();
+        windows_link :: link ! ("kernel32.dll" "system" fn GetCurrentProcess () -> HANDLE) ;
+    };
+}
+
+macro_78!()

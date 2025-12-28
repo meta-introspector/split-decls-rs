@@ -1,13 +1,14 @@
 macro_rules! deps {
     () => {
-        Equivalent!();
+        TagSliceExt!();
+        Tag!();
     };
 }
 
 macro_rules! impl_19 {
     () => {
         deps!();
-        # [cfg (not (feature = "equivalent"))] impl < Q : ? Sized , K : ? Sized > Equivalent < K > for Q where Q : Eq , K : core :: borrow :: Borrow < Q > , { fn equivalent (& self , key : & K) -> bool { self == key . borrow () } }
+        impl TagSliceExt for [Tag] { # [inline] fn fill_tag (& mut self , tag : Tag) { unsafe { self . as_mut_ptr () . write_bytes (tag . 0 , self . len ()) } } }
     };
 }
 

@@ -1,0 +1,7 @@
+macro_rules! COR_ILMETHOD_SECT_SMALL_MAX_DATASIZE {
+    () => {
+        pub const COR_ILMETHOD_SECT_SMALL_MAX_DATASIZE : u16 = 0xFF ;
+    };
+}
+
+COR_ILMETHOD_SECT_SMALL_MAX_DATASIZE!()

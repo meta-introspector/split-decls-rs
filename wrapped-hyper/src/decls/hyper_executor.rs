@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        TaskFuture!();
+        ExecWaker!();
+    };
+}
+
+macro_rules! hyper_executor {
+    () => {
+        deps!();
+        # [doc = " A task executor for `hyper_task`s."] # [doc = ""] # [doc = " A task is a unit of work that may be blocked on IO, and can be polled to"] # [doc = " make progress on that work."] # [doc = ""] # [doc = " An executor can hold many tasks, included from unrelated HTTP connections."] # [doc = " An executor is single threaded. Typically you might have one executor per"] # [doc = " thread. Or, for simplicity, you may choose one executor per connection."] # [doc = ""] # [doc = " Progress on tasks happens only when `hyper_executor_poll` is called, and only"] # [doc = " on tasks whose corresponding `hyper_waker` has been called to indicate they"] # [doc = " are ready to make progress (for instance, because the OS has indicated there"] # [doc = " is more data to read or more buffer space available to write)."] # [doc = ""] # [doc = " Deadlock potential: `hyper_executor_poll` must not be called from within a task's"] # [doc = " callback. Doing so will result in a deadlock."] # [doc = ""] # [doc = " Methods:"] # [doc = ""] # [doc = " - hyper_executor_new:  Creates a new task executor."] # [doc = " - hyper_executor_push: Push a task onto the executor."] # [doc = " - hyper_executor_poll: Polls the executor, trying to make progress on any tasks that have notified that they are ready again."] # [doc = " - hyper_executor_free: Frees an executor and any incomplete tasks still part of it."] pub struct hyper_executor { # [doc = " The executor of all task futures."] # [doc = ""] # [doc = " There should never be contention on the mutex, as it is only locked"] # [doc = " to drive the futures. However, we cannot guarantee proper usage from"] # [doc = " `hyper_executor_poll()`, which in C could potentially be called inside"] # [doc = " one of the stored futures. The mutex isn't re-entrant, so doing so"] # [doc = " would result in a deadlock, but that's better than data corruption."] driver : Mutex < FuturesUnordered < TaskFuture > > , # [doc = " The queue of futures that need to be pushed into the `driver`."] # [doc = ""] # [doc = " This is has a separate mutex since `spawn` could be called from inside"] # [doc = " a future, which would mean the driver's mutex is already locked."] spawn_queue : Mutex < Vec < TaskFuture > > , # [doc = " This is used to track when a future calls `wake` while we are within"] # [doc = " `hyper_executor::poll_next`."] is_woken : Arc < ExecWaker > , }
+    };
+}
+
+hyper_executor!()

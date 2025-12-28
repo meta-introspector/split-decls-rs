@@ -1,32 +1,32 @@
 macro_rules! deps {
     () => {
-        Enumerate!();
-        SkipWhile!();
-        Cycle!();
-        StepBy!();
-        FoldStop!();
-        Chain!();
-        Map!();
-        Inspect!();
-        Skip!();
-        Iterator!();
-        TakeWhile!();
-        Take!();
-        Peekable!();
-        Rev!();
-        Fuse!();
-        Scan!();
-        Unwrap!();
-        DoubleEndedFallibleIterator!();
-        Zip!();
-        Filter!();
-        IntoFallibleIterator!();
-        ChainState!();
-        FlatMap!();
-        MapErr!();
-        Cloned!();
-        Flatten!();
         FilterMap!();
+        TakeWhile!();
+        Skip!();
+        FoldStop!();
+        Scan!();
+        Chain!();
+        StepBy!();
+        Filter!();
+        Take!();
+        Fuse!();
+        Iterator!();
+        Enumerate!();
+        Zip!();
+        ChainState!();
+        Map!();
+        Cloned!();
+        Inspect!();
+        Cycle!();
+        Peekable!();
+        DoubleEndedFallibleIterator!();
+        IntoFallibleIterator!();
+        FlatMap!();
+        Rev!();
+        Flatten!();
+        MapErr!();
+        Unwrap!();
+        SkipWhile!();
     };
 }
 

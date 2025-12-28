@@ -1,14 +1,13 @@
 macro_rules! deps {
     () => {
-        Name!();
-        ConstValue!();
+        Extensions!();
     };
 }
 
 macro_rules! impl_30 {
     () => {
         deps!();
-        impl From < Name > for ConstValue { # [inline] fn from (value : Name) -> Self { ConstValue :: Enum (value) } }
+        impl < 'de > Deserialize < 'de > for Extensions { fn deserialize < D : Deserializer < 'de > > (deserializer : D) -> Result < Self , D :: Error > { Ok (Self (< Option < HashMap < _ , _ > > > :: deserialize (deserializer) ? . unwrap_or_default () ,)) } }
     };
 }
 

@@ -7,7 +7,7 @@ macro_rules! deps {
 macro_rules! impl_19 {
     () => {
         deps!();
-        impl < L , R > Either < & mut L , & mut R > { # [doc = " Maps an `Either<&mut L, &mut R>` to an `Either<L, R>` by cloning the contents of"] # [doc = " either branch."] pub fn cloned (self) -> Either < L , R > where L : Clone , R : Clone , { map_either ! (self , inner => inner . clone ()) } # [doc = " Maps an `Either<&mut L, &mut R>` to an `Either<L, R>` by copying the contents of"] # [doc = " either branch."] pub fn copied (self) -> Either < L , R > where L : Copy , R : Copy , { map_either ! (self , inner => * inner) } }
+        impl < L , R > DoubleEndedIterator for Either < L , R > where L : DoubleEndedIterator , R : DoubleEndedIterator < Item = L :: Item > , { fn next_back (& mut self) -> Option < Self :: Item > { for_both ! (self , inner => inner . next_back ()) } fn nth_back (& mut self , n : usize) -> Option < Self :: Item > { for_both ! (self , inner => inner . nth_back (n)) } fn rfold < Acc , G > (self , init : Acc , f : G) -> Acc where G : FnMut (Acc , Self :: Item) -> Acc , { for_both ! (self , inner => inner . rfold (init , f)) } fn rfind < P > (& mut self , predicate : P) -> Option < Self :: Item > where P : FnMut (& Self :: Item) -> bool , { for_both ! (self , inner => inner . rfind (predicate)) } }
     };
 }
 

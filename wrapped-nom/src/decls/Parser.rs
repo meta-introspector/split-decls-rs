@@ -1,0 +1,32 @@
+macro_rules! deps {
+    () => {
+        Emit!();
+        FlatMap!();
+        Error!();
+        Or!();
+        Complete!();
+        PResult!();
+        MapOpt!();
+        OutputM!();
+        FromExternalError!();
+        Input!();
+        OutputMode!();
+        MapRes!();
+        IResult!();
+        Map!();
+        Streaming!();
+        Into!();
+        ParseError!();
+        AndThen!();
+        And!();
+    };
+}
+
+macro_rules! Parser {
+    () => {
+        deps!();
+        # [doc = " All nom parsers implement this trait"] pub trait Parser < Input > { # [doc = " Type of the produced value"] type Output ; # [doc = " Error type of this parser"] type Error : ParseError < Input > ; # [doc = " A parser takes in input type, and returns a `Result` containing"] # [doc = " either the remaining input and the output value, or an error"] # [inline] fn parse (& mut self , input : Input) -> IResult < Input , Self :: Output , Self :: Error > { self . process :: < OutputM < Emit , Emit , Streaming > > (input) } # [doc = " A parser takes in input type, and returns a `Result` containing"] # [doc = " either the remaining input and the output value, or an error"] # [inline] fn parse_complete (& mut self , input : Input) -> IResult < Input , Self :: Output , Self :: Error > { self . process :: < OutputM < Emit , Emit , Complete > > (input) } # [doc = " A parser takes in input type, and returns a `Result` containing"] # [doc = " either the remaining input and the output value, or an error"] fn process < OM : OutputMode > (& mut self , input : Input ,) -> PResult < OM , Input , Self :: Output , Self :: Error > ; # [doc = " Maps a function over the result of a parser"] fn map < G , O2 > (self , g : G) -> Map < Self , G > where G : FnMut (Self :: Output) -> O2 , Self : core :: marker :: Sized , { Map { f : self , g } } # [doc = " Applies a function returning a `Result` over the result of a parser."] fn map_res < G , O2 , E2 > (self , g : G) -> MapRes < Self , G > where G : FnMut (Self :: Output) -> Result < O2 , E2 > , Self :: Error : FromExternalError < Input , E2 > , Self : core :: marker :: Sized , { MapRes { f : self , g } } # [doc = " Applies a function returning an `Option` over the result of a parser."] fn map_opt < G , O2 > (self , g : G) -> MapOpt < Self , G > where G : FnMut (Self :: Output) -> Option < O2 > , Self : core :: marker :: Sized , { MapOpt { f : self , g } } # [doc = " Creates a second parser from the output of the first one, then apply over the rest of the input"] fn flat_map < G , H > (self , g : G) -> FlatMap < Self , G > where G : FnMut (Self :: Output) -> H , H : Parser < Input , Error = Self :: Error > , Self : core :: marker :: Sized , { FlatMap { f : self , g } } # [doc = " Applies a second parser over the output of the first one"] fn and_then < G > (self , g : G) -> AndThen < Self , G > where G : Parser < Self :: Output , Error = Self :: Error > , Self : core :: marker :: Sized , { AndThen { f : self , g } } # [doc = " Applies a second parser after the first one, return their results as a tuple"] fn and < G , O2 > (self , g : G) -> And < Self , G > where G : Parser < Input , Output = O2 , Error = Self :: Error > , Self : core :: marker :: Sized , { And { f : self , g } } # [doc = " Applies a second parser over the input if the first one failed"] fn or < G > (self , g : G) -> Or < Self , G > where G : Parser < Input , Output = Self :: Output , Error = Self :: Error > , Self : core :: marker :: Sized , { Or { f : self , g } } # [doc = " automatically converts the parser's output and error values to another type, as long as they"] # [doc = " implement the `From` trait"] fn into < O2 : From < Self :: Output > , E2 : From < Self :: Error > > (self) -> Into < Self , O2 , E2 > where Self : core :: marker :: Sized , { Into { f : self , phantom_out2 : core :: marker :: PhantomData , phantom_err2 : core :: marker :: PhantomData , } } }
+    };
+}
+
+Parser!()

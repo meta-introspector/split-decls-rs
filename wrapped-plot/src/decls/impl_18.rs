@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        Figure!();
-        Font!();
+        Display!();
+        Order!();
     };
 }
 
 macro_rules! impl_18 {
     () => {
         deps!();
-        impl Set < Font > for Figure { # [doc = " Changes the font"] fn set (& mut self , font : Font) -> & mut Figure { self . font = Some (font . 0) ; self } }
+        impl Display < & 'static str > for Order { fn display (& self) -> & 'static str { match * self { Order :: TextSample => "noreverse" , Order :: SampleText => "reverse" , } } }
     };
 }
 

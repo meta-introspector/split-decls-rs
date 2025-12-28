@@ -1,0 +1,7 @@
+macro_rules! convert_utf16_to_utf8_partial_tail {
+    () => {
+        # [inline (never)] pub fn convert_utf16_to_utf8_partial_tail (src : & [u16] , dst : & mut [u8]) -> (usize , usize) { let mut read = 0 ; let mut written = 0 ; let mut unit = src [read] ; if unit < 0x800 { loop { if unit < 0x80 { if written >= dst . len () { return (read , written) ; } read += 1 ; dst [written] = unit as u8 ; written += 1 ; } else if unit < 0x800 { if written + 2 > dst . len () { return (read , written) ; } read += 1 ; dst [written] = (unit >> 6) as u8 | 0xC0u8 ; written += 1 ; dst [written] = (unit & 0x3F) as u8 | 0x80u8 ; written += 1 ; } else { return (read , written) ; } if read >= src . len () { debug_assert_eq ! (read , src . len ()) ; return (read , written) ; } unit = src [read] ; } } if written + 3 > dst . len () { return (read , written) ; } read += 1 ; let unit_minus_surrogate_start = unit . wrapping_sub (0xD800) ; if unit_minus_surrogate_start <= (0xDFFF - 0xD800) { if unit_minus_surrogate_start <= (0xDBFF - 0xD800) { if read >= src . len () { unit = 0xFFFD ; } else { let second = src [read] ; if in_inclusive_range16 (second , 0xDC00 , 0xDFFF) { read -= 1 ; return (read , written) ; } unit = 0xFFFD ; } } else { unit = 0xFFFD ; } } dst [written] = (unit >> 12) as u8 | 0xE0u8 ; written += 1 ; dst [written] = ((unit & 0xFC0) >> 6) as u8 | 0x80u8 ; written += 1 ; dst [written] = (unit & 0x3F) as u8 | 0x80u8 ; written += 1 ; debug_assert_eq ! (written , dst . len ()) ; (read , written) }
+    };
+}
+
+convert_utf16_to_utf8_partial_tail!()

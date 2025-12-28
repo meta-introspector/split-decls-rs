@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        LineReader!();
+        Encoding!();
+        Error!();
+    };
+}
+
+macro_rules! impl_20 {
+    () => {
+        deps!();
+        impl < 'i > LineReader < 'i > { # [doc = " Create a new reader which operates over continugous unwrapped data."] fn new_unwrapped (bytes : & 'i [u8]) -> Result < Self , Error > { if bytes . is_empty () { Err (InvalidLength) } else { Ok (Self { remaining : bytes , line_width : None , }) } } # [doc = " Create a new reader which operates over linewrapped data."] fn new_wrapped (bytes : & 'i [u8] , line_width : usize) -> Result < Self , Error > { if line_width < MIN_LINE_WIDTH { return Err (InvalidLength) ; } let mut reader = Self :: new_unwrapped (bytes) ? ; reader . line_width = Some (line_width) ; Ok (reader) } # [doc = " Is this line reader empty?"] fn is_empty (& self) -> bool { self . remaining . is_empty () } # [doc = " Get the total length of the data decoded from this line reader."] fn decoded_len < E : Encoding > (& self) -> Result < usize , Error > { let mut buffer = [0u8 ; 4] ; let mut lines = self . clone () ; let mut line = match lines . next () . transpose () ? { Some (l) => l , None => return Ok (0) , } ; let mut base64_len = 0usize ; loop { base64_len = base64_len . checked_add (line . len ()) . ok_or (InvalidLength) ? ; match lines . next () . transpose () ? { Some (l) => { buffer . copy_from_slice (line . slice_tail (4) ?) ; line = l } None => { let base64_last_block_len = match base64_len % 4 { 0 => 4 , n => n , } ; let decoded_len = encoding :: decoded_len (base64_len . checked_sub (base64_last_block_len) . ok_or (InvalidLength) ? ,) ; let mut out = [0u8 ; 3] ; let last_block_len = if line . len () < base64_last_block_len { let buffered_part_len = base64_last_block_len . checked_sub (line . len ()) . ok_or (InvalidLength) ? ; let offset = 4usize . checked_sub (buffered_part_len) . ok_or (InvalidLength) ? ; for i in 0 .. buffered_part_len { buffer [i] = buffer [offset . checked_add (i) . ok_or (InvalidLength) ?] ; } buffer [buffered_part_len ..] [.. line . len ()] . copy_from_slice (line . remaining) ; let buffer_len = buffered_part_len . checked_add (line . len ()) . ok_or (InvalidLength) ? ; E :: decode (& buffer [.. buffer_len] , & mut out) ? . len () } else { let last_block = line . slice_tail (base64_last_block_len) ? ; E :: decode (last_block , & mut out) ? . len () } ; return decoded_len . checked_add (last_block_len) . ok_or (InvalidLength) ; } } } } }
+    };
+}
+
+impl_20!()

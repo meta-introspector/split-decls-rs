@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        OutOfRange!();
+        TimeDelta!();
     };
 }
 
 macro_rules! impl_17 {
     () => {
         deps!();
-        impl OutOfRange { const fn new () -> OutOfRange { OutOfRange { _private : () } } }
+        impl AddAssign for TimeDelta { fn add_assign (& mut self , rhs : TimeDelta) { let new = self . checked_add (& rhs) . expect ("`TimeDelta + TimeDelta` overflowed") ; * self = new ; } }
     };
 }
 

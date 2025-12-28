@@ -1,5 +1,7 @@
 macro_rules! deps {
     () => {
+        MaxOverhead!();
+        MaxSize!();
         Signature!();
         EcdsaCurve!();
     };
@@ -8,7 +10,7 @@ macro_rules! deps {
 macro_rules! impl_31 {
     () => {
         deps!();
-        # [doc = " ECDSA `AlgorithmIdentifier` which identifies the digest used by default"] # [doc = " with the `Signer` and `Verifier` traits."] # [cfg (feature = "pkcs8")] impl < C > AssociatedAlgorithmIdentifier for Signature < C > where C : EcdsaCurve , Self : AssociatedOid , { type Params = AnyRef < 'static > ; const ALGORITHM_IDENTIFIER : AlgorithmIdentifierRef < 'static > = AlgorithmIdentifierRef { oid : Self :: OID , parameters : None , } ; }
+        # [cfg (feature = "alloc")] impl < C > SignatureEncoding for Signature < C > where C : EcdsaCurve , MaxSize < C > : ArraySize , < FieldBytesSize < C > as Add > :: Output : Add < MaxOverhead > + ArraySize , { type Repr = Box < [u8] > ; fn to_vec (& self) -> Vec < u8 > { self . as_bytes () . into () } }
     };
 }
 

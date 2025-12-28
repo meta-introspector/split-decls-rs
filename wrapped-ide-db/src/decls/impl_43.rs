@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        SnippetCap!();
+        Definition!();
     };
 }
 
 macro_rules! impl_43 {
     () => {
         deps!();
-        impl SnippetCap { pub const fn new (allow_snippets : bool) -> Option < SnippetCap > { if allow_snippets { Some (SnippetCap { _private : () }) } else { None } } }
+        impl From < DocLinkDef > for Definition { fn from (def : DocLinkDef) -> Self { match def { DocLinkDef :: ModuleDef (it) => it . into () , DocLinkDef :: Field (it) => it . into () , DocLinkDef :: SelfType (it) => it . into () , } } }
     };
 }
 

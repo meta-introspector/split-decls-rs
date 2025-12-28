@@ -1,14 +1,16 @@
 macro_rules! deps {
     () => {
-        Error!();
-        ErrorPositions!();
+        OperationsIter!();
+        OperationsIterInner!();
+        OperationDefinition!();
+        Positioned!();
     };
 }
 
 macro_rules! impl_4 {
     () => {
         deps!();
-        impl Error { # [doc = " Get an iterator over the positions of the error."] # [doc = ""] # [doc = " The iterator is ordered from most important to least important position."] # [must_use] pub fn positions (& self) -> ErrorPositions { match self { Self :: Syntax { start , end : Some (end) , .. } => ErrorPositions :: new_2 (* start , * end) , Self :: Syntax { start , .. } => ErrorPositions :: new_1 (* start) , Self :: MultipleRoots { schema , pos , .. } => ErrorPositions :: new_2 (* pos , * schema) , Self :: MissingQueryRoot { pos } => ErrorPositions :: new_1 (* pos) , Self :: MultipleOperations { anonymous , operation , } => ErrorPositions :: new_2 (* anonymous , * operation) , Self :: OperationDuplicated { first , second , .. } => { ErrorPositions :: new_2 (* second , * first) } Self :: FragmentDuplicated { first , second , .. } => { ErrorPositions :: new_2 (* second , * first) } Self :: MissingOperation => ErrorPositions :: new_0 () , Self :: RecursionLimitExceeded => ErrorPositions :: new_0 () , } } }
+        impl < 'a > Iterator for OperationsIter < 'a > { type Item = (Option < & 'a Name > , & 'a Positioned < OperationDefinition >) ; fn next (& mut self) -> Option < Self :: Item > { match & mut self . 0 { OperationsIterInner :: Single (op) => op . take () . map (| op | (None , op)) , OperationsIterInner :: Multiple (iter) => iter . next () . map (| (name , op) | (Some (name) , op)) , } } fn size_hint (& self) -> (usize , Option < usize >) { let size = self . len () ; (size , Some (size)) } }
     };
 }
 

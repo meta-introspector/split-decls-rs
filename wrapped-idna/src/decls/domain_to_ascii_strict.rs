@@ -1,6 +1,10 @@
 macro_rules! deps {
     () => {
+        Hyphens!();
+        AsciiDenyList!();
+        DnsLength!();
         Errors!();
+        Uts46!();
     };
 }
 

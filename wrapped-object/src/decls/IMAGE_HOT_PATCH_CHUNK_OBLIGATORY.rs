@@ -1,0 +1,7 @@
+macro_rules! IMAGE_HOT_PATCH_CHUNK_OBLIGATORY {
+    () => {
+        pub const IMAGE_HOT_PATCH_CHUNK_OBLIGATORY : u32 = 0x4000_0000 ;
+    };
+}
+
+IMAGE_HOT_PATCH_CHUNK_OBLIGATORY!()

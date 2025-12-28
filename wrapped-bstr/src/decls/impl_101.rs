@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        Lines!();
+        ByteSlice!();
+        LinesWithTerminator!();
+    };
+}
+
+macro_rules! impl_101 {
+    () => {
+        deps!();
+        impl < 'a > Lines < 'a > { fn new (bytes : & 'a [u8]) -> Lines < 'a > { Lines { it : LinesWithTerminator :: new (bytes) } } # [doc = " Return a copy of the rest of the underlying bytes without affecting the"] # [doc = " iterator itself."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " Basic usage:"] # [doc = ""] # [doc = " ```"] # [doc = " use bstr::{B, ByteSlice};"] # [doc = ""] # [doc = " let s = b\"\\"] # [doc = " foo"] # [doc = " bar\\r"] # [doc = " baz\";"] # [doc = " let mut lines = s.lines();"] # [doc = " assert_eq!(lines.next(), Some(B(\"foo\")));"] # [doc = " assert_eq!(lines.as_bytes(), B(\"bar\\r\\nbaz\"));"] # [doc = " ```"] pub fn as_bytes (& self) -> & 'a [u8] { self . it . bytes } }
+    };
+}
+
+impl_101!()

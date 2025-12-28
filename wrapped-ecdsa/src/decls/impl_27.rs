@@ -1,15 +1,16 @@
 macro_rules! deps {
     () => {
-        EcdsaCurve!();
         Signature!();
-        SignatureSize!();
+        EcdsaCurve!();
+        MaxSize!();
+        MaxOverhead!();
     };
 }
 
 macro_rules! impl_27 {
     () => {
         deps!();
-        impl < C > fmt :: LowerHex for Signature < C > where C : EcdsaCurve , SignatureSize < C > : ArraySize , { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { for byte in self . to_bytes () { write ! (f , "{byte:02x}") ? ; } Ok (()) } }
+        impl < C > From < crate :: Signature < C > > for Signature < C > where C : EcdsaCurve , MaxSize < C > : ArraySize , < FieldBytesSize < C > as Add > :: Output : Add < MaxOverhead > + ArraySize , { fn from (sig : crate :: Signature < C >) -> Signature < C > { sig . to_der () } }
     };
 }
 

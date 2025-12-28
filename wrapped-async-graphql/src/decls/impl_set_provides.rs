@@ -1,0 +1,7 @@
+macro_rules! impl_set_provides {
+    () => {
+        macro_rules ! impl_set_provides { () => { # [doc = " Annotate the expected returned fieldset from a field on a base type that"] # [doc = " is guaranteed to be selectable by the gateway."] # [inline] pub fn provides (self , fields : impl Into < String >) -> Self { Self { provides : Some (fields . into ()) , .. self } } } ; }
+    };
+}
+
+impl_set_provides!()

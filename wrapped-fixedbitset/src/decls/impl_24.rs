@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Difference!();
+        Block!();
     };
 }
 
 macro_rules! impl_24 {
     () => {
         deps!();
-        impl < 'a > DoubleEndedIterator for Difference < 'a > { fn next_back (& mut self) -> Option < Self :: Item > { self . iter . by_ref () . rev () . find (| & nxt | ! self . other . contains (nxt)) } }
+        impl Not for Block { type Output = Block ; # [inline] fn not (self) -> Self :: Output { unsafe { Self (_mm256_xor_pd (self . 0 , Self :: ALL . 0)) } } }
     };
 }
 

@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        Timelike!();
+        NaiveDate!();
+    };
+}
+
+macro_rules! SubsecRound {
+    () => {
+        deps!();
+        # [doc = " Extension trait for subsecond rounding or truncation to a maximum number"] # [doc = " of digits. Rounding can be used to decrease the error variance when"] # [doc = " serializing/persisting to lower precision. Truncation is the default"] # [doc = " behavior in Chrono display formatting.  Either can be used to guarantee"] # [doc = " equality (e.g. for testing) when round-tripping through a lower precision"] # [doc = " format."] pub trait SubsecRound { # [doc = " Return a copy rounded to the specified number of subsecond digits. With"] # [doc = " 9 or more digits, self is returned unmodified. Halfway values are"] # [doc = " rounded up (away from zero)."] # [doc = ""] # [doc = " # Example"] # [doc = " ``` rust"] # [doc = " # use chrono::{SubsecRound, Timelike, NaiveDate};"] # [doc = " let dt = NaiveDate::from_ymd_opt(2018, 1, 11)"] # [doc = "     .unwrap()"] # [doc = "     .and_hms_milli_opt(12, 0, 0, 154)"] # [doc = "     .unwrap()"] # [doc = "     .and_utc();"] # [doc = " assert_eq!(dt.round_subsecs(2).nanosecond(), 150_000_000);"] # [doc = " assert_eq!(dt.round_subsecs(1).nanosecond(), 200_000_000);"] # [doc = " ```"] fn round_subsecs (self , digits : u16) -> Self ; # [doc = " Return a copy truncated to the specified number of subsecond"] # [doc = " digits. With 9 or more digits, self is returned unmodified."] # [doc = ""] # [doc = " # Example"] # [doc = " ``` rust"] # [doc = " # use chrono::{SubsecRound, Timelike, NaiveDate};"] # [doc = " let dt = NaiveDate::from_ymd_opt(2018, 1, 11)"] # [doc = "     .unwrap()"] # [doc = "     .and_hms_milli_opt(12, 0, 0, 154)"] # [doc = "     .unwrap()"] # [doc = "     .and_utc();"] # [doc = " assert_eq!(dt.trunc_subsecs(2).nanosecond(), 150_000_000);"] # [doc = " assert_eq!(dt.trunc_subsecs(1).nanosecond(), 100_000_000);"] # [doc = " ```"] fn trunc_subsecs (self , digits : u16) -> Self ; }
+    };
+}
+
+SubsecRound!()

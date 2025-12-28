@@ -1,0 +1,22 @@
+macro_rules! deps {
+    () => {
+        Input!();
+        ErrorKind!();
+        OutputMode!();
+        Error!();
+        ParseError!();
+        Needed!();
+        IResult!();
+        Err!();
+        PResult!();
+    };
+}
+
+macro_rules! impl_305 {
+    () => {
+        deps!();
+        impl < 'a > Input for & 'a str { type Item = char ; type Iter = Chars < 'a > ; type IterIndices = CharIndices < 'a > ; fn input_len (& self) -> usize { self . len () } # [inline] fn take (& self , index : usize) -> Self { & self [.. index] } # [inline] fn take_from (& self , index : usize) -> Self { & self [index ..] } # [inline] fn take_split (& self , index : usize) -> (Self , Self) { let (prefix , suffix) = self . split_at (index) ; (suffix , prefix) } fn position < P > (& self , predicate : P) -> Option < usize > where P : Fn (Self :: Item) -> bool , { self . find (predicate) } # [inline] fn iter_elements (& self) -> Self :: Iter { self . chars () } # [inline] fn iter_indices (& self) -> Self :: IterIndices { self . char_indices () } # [inline] fn slice_index (& self , count : usize) -> Result < usize , Needed > { let mut cnt = 0 ; for (index , _) in self . char_indices () { if cnt == count { return Ok (index) ; } cnt += 1 ; } if cnt == count { return Ok (self . len ()) ; } Err (Needed :: Unknown) } # [inline (always)] fn split_at_position < P , E : ParseError < Self > > (& self , predicate : P) -> IResult < Self , Self , E > where P : Fn (Self :: Item) -> bool , { match self . find (predicate) { Some (i) => { let (str1 , str2) = self . split_at (i) ; Ok ((str2 , str1)) } None => Err (Err :: Incomplete (Needed :: new (1))) , } } # [inline (always)] fn split_at_position1 < P , E : ParseError < Self > > (& self , predicate : P , e : ErrorKind ,) -> IResult < Self , Self , E > where P : Fn (Self :: Item) -> bool , { match self . find (predicate) { Some (0) => Err (Err :: Error (E :: from_error_kind (self , e))) , Some (i) => { let (str1 , str2) = self . split_at (i) ; Ok ((str2 , str1)) } None => Err (Err :: Incomplete (Needed :: new (1))) , } } # [inline (always)] fn split_at_position_complete < P , E : ParseError < Self > > (& self , predicate : P ,) -> IResult < Self , Self , E > where P : Fn (Self :: Item) -> bool , { match self . find (predicate) { Some (i) => { let (str1 , str2) = self . split_at (i) ; Ok ((str2 , str1)) } None => Ok (self . take_split (self . input_len ())) , } } # [inline (always)] fn split_at_position1_complete < P , E : ParseError < Self > > (& self , predicate : P , e : ErrorKind ,) -> IResult < Self , Self , E > where P : Fn (Self :: Item) -> bool , { match self . find (predicate) { Some (0) => Err (Err :: Error (E :: from_error_kind (self , e))) , Some (i) => { let (str1 , str2) = self . split_at (i) ; Ok ((str2 , str1)) } None => { if self . is_empty () { Err (Err :: Error (E :: from_error_kind (self , e))) } else { let (str1 , str2) = self . split_at (self . len ()) ; Ok ((str2 , str1)) } } } } # [doc = " mode version of split_at_position"] # [inline (always)] fn split_at_position_mode < OM : crate :: OutputMode , P , E : ParseError < Self > > (& self , predicate : P ,) -> crate :: PResult < OM , Self , Self , E > where P : Fn (Self :: Item) -> bool , { match self . find (predicate) { Some (n) => unsafe { Ok ((self . get_unchecked (n ..) , OM :: Output :: bind (| | self . get_unchecked (.. n)) ,)) } , None => { if OM :: Incomplete :: is_streaming () { Err (Err :: Incomplete (Needed :: new (1))) } else { unsafe { Ok ((self . get_unchecked (self . len () ..) , OM :: Output :: bind (| | self . get_unchecked (.. self . len ())) ,)) } } } } } # [doc = " mode version of split_at_position"] # [inline (always)] fn split_at_position_mode1 < OM : crate :: OutputMode , P , E : ParseError < Self > > (& self , predicate : P , e : ErrorKind ,) -> crate :: PResult < OM , Self , Self , E > where P : Fn (Self :: Item) -> bool , { match self . find (predicate) { Some (0) => Err (Err :: Error (OM :: Error :: bind (| | E :: from_error_kind (self , e)))) , Some (n) => unsafe { Ok ((self . get_unchecked (n ..) , OM :: Output :: bind (| | self . get_unchecked (.. n)) ,)) } , None => { if OM :: Incomplete :: is_streaming () { Err (Err :: Incomplete (Needed :: new (1))) } else if self . is_empty () { Err (Err :: Error (OM :: Error :: bind (| | E :: from_error_kind (self , e)))) } else { unsafe { Ok ((self . get_unchecked (self . len () ..) , OM :: Output :: bind (| | self . get_unchecked (.. self . len ())) ,)) } } } } } }
+    };
+}
+
+impl_305!()

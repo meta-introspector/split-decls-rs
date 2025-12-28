@@ -1,0 +1,21 @@
+macro_rules! deps {
+    () => {
+        LineSequence!();
+        Lines!();
+        UnitRef!();
+        Result!();
+        LineRow!();
+        Error!();
+        Location!();
+        LineLocationRangeIter!();
+    };
+}
+
+macro_rules! impl_40 {
+    () => {
+        deps!();
+        impl Lines { fn parse < R : gimli :: Reader > (dw_unit : gimli :: UnitRef < R > , ilnp : gimli :: IncompleteLineProgram < R , R :: Offset > ,) -> Result < Self , Error > { let mut sequences = Vec :: new () ; let mut sequence_rows = Vec :: < LineRow > :: new () ; let mut rows = ilnp . rows () ; while let Some ((_ , row)) = rows . next_row () ? { if row . end_sequence () { if let Some (start) = sequence_rows . first () . map (| x | x . address) { let end = row . address () ; let mut rows = Vec :: new () ; mem :: swap (& mut rows , & mut sequence_rows) ; if start < end { sequences . push (LineSequence { start , end , rows : rows . into_boxed_slice () , }) ; } } continue ; } let address = row . address () ; let file_index = row . file_index () ; let line = row . line () . map (NonZeroU64 :: get) . unwrap_or (0) as u32 ; let column = match row . column () { gimli :: ColumnType :: LeftEdge => 0 , gimli :: ColumnType :: Column (x) => x . get () as u32 , } ; if let Some (last_row) = sequence_rows . last_mut () { if last_row . address == address { last_row . file_index = file_index ; last_row . line = line ; last_row . column = column ; continue ; } } sequence_rows . push (LineRow { address , file_index , line , column , }) ; } sequences . sort_unstable_by_key (| x | x . start) ; let mut files = Vec :: new () ; let header = rows . header () ; match header . file (0) { Some (file) => files . push (render_file (dw_unit , file , header) ?) , None => files . push (String :: from ("")) , } let mut index = 1 ; while let Some (file) = header . file (index) { files . push (render_file (dw_unit , file , header) ?) ; index += 1 ; } Ok (Self { files : files . into_boxed_slice () , sequences : sequences . into_boxed_slice () , }) } pub (crate) fn file (& self , index : u64) -> Option < & str > { self . files . get (index as usize) . map (String :: as_str) } pub (crate) fn ranges (& self) -> impl Iterator < Item = gimli :: Range > + '_ { self . sequences . iter () . map (| sequence | gimli :: Range { begin : sequence . start , end : sequence . end , }) } fn row_location (& self , row : & LineRow) -> Location < '_ > { let file = self . files . get (row . file_index as usize) . map (String :: as_str) ; Location { file , line : if row . line != 0 { Some (row . line) } else { None } , column : if row . line != 0 { Some (row . column) } else { None } , } } pub (crate) fn find_location (& self , probe : u64) -> Result < Option < Location < '_ > > , Error > { let seq_idx = self . sequences . binary_search_by (| sequence | { if probe < sequence . start { Ordering :: Greater } else if probe >= sequence . end { Ordering :: Less } else { Ordering :: Equal } }) ; let seq_idx = match seq_idx { Ok (x) => x , Err (_) => return Ok (None) , } ; let sequence = & self . sequences [seq_idx] ; let idx = sequence . rows . binary_search_by (| row | row . address . cmp (& probe)) ; let idx = match idx { Ok (x) => x , Err (0) => return Ok (None) , Err (x) => x - 1 , } ; Ok (Some (self . row_location (& sequence . rows [idx]))) } pub (crate) fn find_location_range (& self , probe_low : u64 , probe_high : u64 ,) -> Result < LineLocationRangeIter < '_ > , Error > { let seq_idx = self . sequences . binary_search_by (| sequence | { if probe_low < sequence . start { Ordering :: Greater } else if probe_low >= sequence . end { Ordering :: Less } else { Ordering :: Equal } }) ; let seq_idx = match seq_idx { Ok (x) => x , Err (x) => x , } ; let row_idx = if let Some (seq) = self . sequences . get (seq_idx) { let idx = seq . rows . binary_search_by (| row | row . address . cmp (& probe_low)) ; match idx { Ok (x) => x , Err (0) => 0 , Err (x) => x - 1 , } } else { 0 } ; Ok (LineLocationRangeIter { lines : self , seq_idx , row_idx , probe_high , }) } }
+    };
+}
+
+impl_40!()

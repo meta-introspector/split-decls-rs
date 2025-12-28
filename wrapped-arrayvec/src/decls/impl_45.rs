@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        CapacityError!();
+        ArrayVec!();
+    };
+}
+
+macro_rules! impl_45 {
+    () => {
+        deps!();
+        # [doc = " Try to create an `ArrayVec` from a slice. This will return an error if the slice was too big to"] # [doc = " fit."] # [doc = ""] # [doc = " ```"] # [doc = " use arrayvec::ArrayVec;"] # [doc = " use std::convert::TryInto as _;"] # [doc = ""] # [doc = " let array: ArrayVec<_, 4> = (&[1, 2, 3] as &[_]).try_into().unwrap();"] # [doc = " assert_eq!(array.len(), 3);"] # [doc = " assert_eq!(array.capacity(), 4);"] # [doc = " ```"] impl < T , const CAP : usize > std :: convert :: TryFrom < & [T] > for ArrayVec < T , CAP > where T : Clone , { type Error = CapacityError ; fn try_from (slice : & [T]) -> Result < Self , Self :: Error > { if Self :: CAPACITY < slice . len () { Err (CapacityError :: new (())) } else { let mut array = Self :: new () ; array . extend_from_slice (slice) ; Ok (array) } } }
+    };
+}
+
+impl_45!()

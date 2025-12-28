@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        WeakKeyError!();
+        BlockSizeUser!();
     };
 }
 
 macro_rules! impl_35 {
     () => {
         deps!();
-        impl core :: error :: Error for WeakKeyError { }
+        impl < T : BlockSizeUser > BlockSizeUser for & mut T { type BlockSize = T :: BlockSize ; }
     };
 }
 

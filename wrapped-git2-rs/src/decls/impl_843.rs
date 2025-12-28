@@ -1,0 +1,22 @@
+macro_rules! deps {
+    () => {
+        Note!();
+        Binding!();
+        TreeEntry!();
+        Oid!();
+        Tree!();
+        TreeBuilder!();
+        IntoCString!();
+        Error!();
+        FilterCb!();
+    };
+}
+
+macro_rules! impl_843 {
+    () => {
+        deps!();
+        impl < 'repo > TreeBuilder < 'repo > { # [doc = " Clear all the entries in the builder"] pub fn clear (& mut self) -> Result < () , Error > { unsafe { try_call ! (raw :: git_treebuilder_clear (self . raw)) ; } Ok (()) } # [doc = " Get the number of entries"] pub fn len (& self) -> usize { unsafe { raw :: git_treebuilder_entrycount (self . raw) as usize } } # [doc = " Return `true` if there is no entry"] pub fn is_empty (& self) -> bool { self . len () == 0 } # [doc = " Get en entry from the builder from its filename"] pub fn get < P > (& self , filename : P) -> Result < Option < TreeEntry < '_ > > , Error > where P : IntoCString , { let filename = filename . into_c_string () ? ; unsafe { let ret = raw :: git_treebuilder_get (self . raw , filename . as_ptr ()) ; if ret . is_null () { Ok (None) } else { Ok (Some (tree :: entry_from_raw_const (ret))) } } } # [doc = " Add or update an entry in the builder"] # [doc = ""] # [doc = " No attempt is made to ensure that the provided Oid points to"] # [doc = " an object of a reasonable type (or any object at all)."] # [doc = ""] # [doc = " The mode given must be one of 0o040000, 0o100644, 0o100755, 0o120000 or"] # [doc = " 0o160000 currently."] pub fn insert < P : IntoCString > (& mut self , filename : P , oid : Oid , filemode : i32 ,) -> Result < TreeEntry < '_ > , Error > { let filename = filename . into_c_string () ? ; let filemode = filemode as raw :: git_filemode_t ; let mut ret = ptr :: null () ; unsafe { try_call ! (raw :: git_treebuilder_insert (& mut ret , self . raw , filename , oid . raw () , filemode)) ; Ok (tree :: entry_from_raw_const (ret)) } } # [doc = " Remove an entry from the builder by its filename"] pub fn remove < P : IntoCString > (& mut self , filename : P) -> Result < () , Error > { let filename = filename . into_c_string () ? ; unsafe { try_call ! (raw :: git_treebuilder_remove (self . raw , filename)) ; } Ok (()) } # [doc = " Selectively remove entries from the tree"] # [doc = ""] # [doc = " Values for which the filter returns `true` will be kept.  Note"] # [doc = " that this behavior is different from the libgit2 C interface."] pub fn filter < F > (& mut self , mut filter : F) -> Result < () , Error > where F : FnMut (& TreeEntry < '_ >) -> bool , { let mut cb : & mut FilterCb < '_ > = & mut filter ; let ptr = & mut cb as * mut _ ; let cb : raw :: git_treebuilder_filter_cb = Some (filter_cb) ; unsafe { try_call ! (raw :: git_treebuilder_filter (self . raw , cb , ptr as * mut _)) ; panic :: check () ; } Ok (()) } # [doc = " Write the contents of the TreeBuilder as a Tree object and"] # [doc = " return its Oid"] pub fn write (& self) -> Result < Oid , Error > { let mut raw = raw :: git_oid { id : [0 ; raw :: GIT_OID_RAWSZ] , } ; unsafe { try_call ! (raw :: git_treebuilder_write (& mut raw , self . raw ())) ; Ok (Binding :: from_raw (& raw as * const _)) } } }
+    };
+}
+
+impl_843!()

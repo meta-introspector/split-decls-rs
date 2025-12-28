@@ -1,14 +1,15 @@
 macro_rules! deps {
     () => {
-        LengthError!();
+        GenericArrayIter!();
         GenericArray!();
+        ArrayLength!();
     };
 }
 
 macro_rules! impl_49 {
     () => {
         deps!();
-        impl core :: fmt :: Display for LengthError { fn fmt (& self , f : & mut core :: fmt :: Formatter < '_ >) -> core :: fmt :: Result { f . write_str ("LengthError: Slice or iterator does not match GenericArray length") } }
+        impl < T , N : ArrayLength > IntoIterator for GenericArray < T , N > { type Item = T ; type IntoIter = GenericArrayIter < T , N > ; # [inline] fn into_iter (self) -> Self :: IntoIter { GenericArrayIter { array : ManuallyDrop :: new (self) , index : 0 , index_back : N :: USIZE , } } }
     };
 }
 

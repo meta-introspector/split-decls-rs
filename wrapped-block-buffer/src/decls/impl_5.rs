@@ -1,14 +1,13 @@
 macro_rules! deps {
     () => {
-        Eager!();
-        BufferKind!();
+        ReadBuffer!();
     };
 }
 
 macro_rules! impl_5 {
     () => {
         deps!();
-        impl BufferKind for Eager { }
+        # [cfg (feature = "zeroize")] impl < BS : ArraySize > Drop for ReadBuffer < BS > { fn drop (& mut self) { use zeroize :: Zeroize ; self . buffer . zeroize () ; } }
     };
 }
 

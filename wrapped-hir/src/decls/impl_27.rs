@@ -1,14 +1,23 @@
 macro_rules! deps {
     () => {
-        HasVisibility!();
+        Macro!();
+        ModuleDef!();
+        Static!();
+        Trait!();
+        Function!();
+        Variant!();
+        Adt!();
+        BuiltinType!();
         Module!();
+        Const!();
+        TypeAlias!();
     };
 }
 
 macro_rules! impl_27 {
     () => {
         deps!();
-        impl HasVisibility for Module { fn visibility (& self , db : & dyn HirDatabase) -> Visibility { let def_map = self . id . def_map (db) ; let module_data = & def_map [self . id . local_id] ; module_data . visibility } }
+        impl From < ModuleDef > for ModuleDefId { fn from (id : ModuleDef) -> Self { match id { ModuleDef :: Module (it) => ModuleDefId :: ModuleId (it . into ()) , ModuleDef :: Function (it) => ModuleDefId :: FunctionId (it . into ()) , ModuleDef :: Adt (it) => ModuleDefId :: AdtId (it . into ()) , ModuleDef :: Variant (it) => ModuleDefId :: EnumVariantId (it . into ()) , ModuleDef :: Const (it) => ModuleDefId :: ConstId (it . into ()) , ModuleDef :: Static (it) => ModuleDefId :: StaticId (it . into ()) , ModuleDef :: Trait (it) => ModuleDefId :: TraitId (it . into ()) , ModuleDef :: TypeAlias (it) => ModuleDefId :: TypeAliasId (it . into ()) , ModuleDef :: BuiltinType (it) => ModuleDefId :: BuiltinType (it . into ()) , ModuleDef :: Macro (it) => ModuleDefId :: MacroId (it . into ()) , } } }
     };
 }
 

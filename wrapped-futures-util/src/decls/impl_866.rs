@@ -1,0 +1,17 @@
+macro_rules! deps {
+    () => {
+        Empty!();
+        ReadyToRunQueue!();
+        Task!();
+        Dequeue!();
+    };
+}
+
+macro_rules! impl_866 {
+    () => {
+        deps!();
+        # [doc = " An MPSC queue into which the tasks containing the futures are inserted"] # [doc = " whenever the future inside is scheduled for polling."] impl < Fut > ReadyToRunQueue < Fut > { # [doc = " The enqueue function from the 1024cores intrusive MPSC queue algorithm."] pub (super) fn enqueue (& self , task : * const Task < Fut >) { unsafe { debug_assert ! ((* task) . queued . load (Relaxed)) ; (* task) . next_ready_to_run . store (ptr :: null_mut () , Relaxed) ; let task = task as * mut _ ; let prev = self . head . swap (task , AcqRel) ; (* prev) . next_ready_to_run . store (task , Release) ; } } # [doc = " The dequeue function from the 1024cores intrusive MPSC queue algorithm"] # [doc = ""] # [doc = " Note that this is unsafe as it required mutual exclusion (only one"] # [doc = " thread can call this) to be guaranteed elsewhere."] pub (super) unsafe fn dequeue (& self) -> Dequeue < Fut > { unsafe { let mut tail = * self . tail . get () ; let mut next = (* tail) . next_ready_to_run . load (Acquire) ; if tail == self . stub () { if next . is_null () { return Dequeue :: Empty ; } * self . tail . get () = next ; tail = next ; next = (* next) . next_ready_to_run . load (Acquire) ; } if ! next . is_null () { * self . tail . get () = next ; debug_assert ! (tail != self . stub ()) ; return Dequeue :: Data (tail) ; } if ! core :: ptr :: eq (self . head . load (Acquire) , tail) { return Dequeue :: Inconsistent ; } self . enqueue (self . stub ()) ; next = (* tail) . next_ready_to_run . load (Acquire) ; if ! next . is_null () { * self . tail . get () = next ; return Dequeue :: Data (tail) ; } Dequeue :: Inconsistent } } pub (super) fn stub (& self) -> * const Task < Fut > { Arc :: as_ptr (& self . stub) } }
+    };
+}
+
+impl_866!()

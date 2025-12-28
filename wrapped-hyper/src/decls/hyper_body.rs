@@ -1,0 +1,7 @@
+macro_rules! hyper_body {
+    () => {
+        # [doc = " A streaming HTTP body."] # [doc = ""] # [doc = " This is used both for sending requests (with `hyper_request_set_body`) and"] # [doc = " for receiving responses (with `hyper_response_body`)."] # [doc = ""] # [doc = " For outgoing request bodies, call `hyper_body_set_data_func` to provide the"] # [doc = " data."] # [doc = ""] # [doc = " For incoming response bodies, call `hyper_body_data` to get a task that will"] # [doc = " yield a chunk of data each time it is polled. That task must be then be"] # [doc = " added to the executor with `hyper_executor_push`."] # [doc = ""] # [doc = " Methods:"] # [doc = ""] # [doc = " - hyper_body_new:           Create a new “empty” body."] # [doc = " - hyper_body_set_userdata:  Set userdata on this body, which will be passed to callback functions."] # [doc = " - hyper_body_set_data_func: Set the data callback for this body."] # [doc = " - hyper_body_data:          Creates a task that will poll a response body for the next buffer of data."] # [doc = " - hyper_body_foreach:       Creates a task to execute the callback with each body chunk received."] # [doc = " - hyper_body_free:          Free a body."] pub struct hyper_body (pub (super) IncomingBody) ;
+    };
+}
+
+hyper_body!()

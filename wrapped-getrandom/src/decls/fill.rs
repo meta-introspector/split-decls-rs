@@ -1,5 +1,12 @@
+macro_rules! deps {
+    () => {
+        Error!();
+    };
+}
+
 macro_rules! fill {
     () => {
+        deps!();
         # [doc = " Fill `dest` with random bytes from the system's preferred random number source."] # [doc = ""] # [doc = " This function returns an error on any failure, including partial reads. We"] # [doc = " make no guarantees regarding the contents of `dest` on error. If `dest` is"] # [doc = " empty, `getrandom` immediately returns success, making no calls to the"] # [doc = " underlying operating system."] # [doc = ""] # [doc = " Blocking is possible, at least during early boot; see module documentation."] # [doc = ""] # [doc = " In general, `getrandom` will be fast enough for interactive usage, though"] # [doc = " significantly slower than a user-space CSPRNG; for the latter consider"] # [doc = " [`rand::thread_rng`](https://docs.rs/rand/*/rand/fn.thread_rng.html)."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " # fn main() -> Result<(), getrandom::Error> {"] # [doc = " let mut buf = [0u8; 32];"] # [doc = " getrandom::fill(&mut buf)?;"] # [doc = " # Ok(()) }"] # [doc = " ```"] # [inline] pub fn fill (dest : & mut [u8]) -> Result < () , Error > { fill_uninit (unsafe { util :: slice_as_uninit_mut (dest) }) ? ; Ok (()) }
     };
 }

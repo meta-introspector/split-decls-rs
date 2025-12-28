@@ -1,15 +1,18 @@
 macro_rules! deps {
     () => {
-        SignatureSize!();
         Signature!();
         EcdsaCurve!();
+        MaxOverhead!();
+        SignatureRef!();
+        SignatureBytes!();
+        MaxSize!();
     };
 }
 
 macro_rules! impl_20 {
     () => {
         deps!();
-        # [cfg (feature = "algorithm")] impl < C > Signature < C > where C : EcdsaCurve + CurveArithmetic , SignatureSize < C > : ArraySize , { # [doc = " Get the `r` component of this signature"] pub fn r (& self) -> NonZeroScalar < C > { NonZeroScalar :: new (self . r . into ()) . unwrap () } # [doc = " Get the `s` component of this signature"] pub fn s (& self) -> NonZeroScalar < C > { NonZeroScalar :: new (self . s . into ()) . unwrap () } # [doc = " Split the signature into its `r` and `s` scalars."] pub fn split_scalars (& self) -> (NonZeroScalar < C > , NonZeroScalar < C >) { (self . r () , self . s ()) } # [doc = " Normalize signature into \"low S\" form as described in"] # [doc = " [BIP 0062: Dealing with Malleability][1]."] # [doc = ""] # [doc = " [1]: https://github.com/bitcoin/bips/blob/master/bip-0062.mediawiki"] pub fn normalize_s (& self) -> Self { let mut result = self . clone () ; let s_inv = ScalarValue :: from (- self . s ()) ; result . s . conditional_assign (& s_inv , self . s . is_high ()) ; result } }
+        # [allow (clippy :: len_without_is_empty)] impl < C > Signature < C > where C : EcdsaCurve , MaxSize < C > : ArraySize , < FieldBytesSize < C > as Add > :: Output : Add < MaxOverhead > + ArraySize , { # [doc = " Parse signature from DER-encoded bytes."] pub fn from_bytes (input : & [u8]) -> Result < Self > { let SignatureRef { r , s } = SignatureRef :: from_der (input) . map_err (| _ | Error :: new ()) ? ; if r . as_bytes () . len () > C :: FieldBytesSize :: USIZE || s . as_bytes () . len () > C :: FieldBytesSize :: USIZE { return Err (Error :: new ()) ; } let r_range = find_scalar_range (input , r . as_bytes ()) ? ; let s_range = find_scalar_range (input , s . as_bytes ()) ? ; if s_range . end != input . len () { return Err (Error :: new ()) ; } let mut bytes = SignatureBytes :: < C > :: default () ; bytes [.. s_range . end] . copy_from_slice (input) ; Ok (Signature { bytes , r_range , s_range , }) } # [doc = " Create an ASN.1 DER encoded signature from big endian `r` and `s` scalar"] # [doc = " components."] pub (crate) fn from_components (r : & [u8] , s : & [u8]) -> der :: Result < Self > { let sig = SignatureRef { r : UintRef :: new (r) ? , s : UintRef :: new (s) ? , } ; let mut bytes = SignatureBytes :: < C > :: default () ; sig . encode_to_slice (& mut bytes) ? . try_into () . map_err (| _ | Tag :: Sequence . value_error () . into ()) } # [doc = " Borrow this signature as a byte slice"] pub fn as_bytes (& self) -> & [u8] { & self . bytes . as_slice () [.. self . len ()] } # [doc = " Serialize this signature as a boxed byte slice"] # [cfg (feature = "alloc")] pub fn to_bytes (& self) -> Box < [u8] > { self . as_bytes () . to_vec () . into_boxed_slice () } # [doc = " Get the length of the signature in bytes"] pub fn len (& self) -> usize { self . s_range . end } # [doc = " Get the `r` component of the signature (leading zeros removed)"] pub (crate) fn r (& self) -> & [u8] { & self . bytes [self . r_range . clone ()] } # [doc = " Get the `s` component of the signature (leading zeros removed)"] pub (crate) fn s (& self) -> & [u8] { & self . bytes [self . s_range . clone ()] } }
     };
 }
 

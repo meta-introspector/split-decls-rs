@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        CfgExpr!();
+        DnfExpr!();
+        CfgOptions!();
+    };
+}
+
+macro_rules! check_why_inactive {
+    () => {
+        deps!();
+        fn check_why_inactive (input : & str , opts : & CfgOptions , expect : Expect) { let source_file = ast :: SourceFile :: parse (input , Edition :: CURRENT) . ok () . unwrap () ; let tt = source_file . syntax () . descendants () . find_map (ast :: TokenTree :: cast) . unwrap () ; let tt = syntax_node_to_token_tree (tt . syntax () , DummyTestSpanMap , DUMMY , DocCommentDesugarMode :: ProcMacro ,) ; let cfg = CfgExpr :: parse (& tt) ; let dnf = DnfExpr :: new (& cfg) ; let why_inactive = dnf . why_inactive (opts) . unwrap () . to_string () ; expect . assert_eq (& why_inactive) ; }
+    };
+}
+
+check_why_inactive!()

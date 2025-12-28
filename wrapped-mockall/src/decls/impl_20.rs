@@ -1,13 +1,15 @@
 macro_rules! deps {
     () => {
-        TimesRange!();
+        ArgPrinter!();
+        ViaNothing!();
+        NothingPrint!();
     };
 }
 
 macro_rules! impl_20 {
     () => {
         deps!();
-        impl From < RangeFrom < usize > > for TimesRange { fn from (r : RangeFrom < usize >) -> TimesRange { TimesRange (r . start .. usize :: MAX) } }
+        impl < T > ViaNothing for ArgPrinter < '_ , T > { fn debug_string (& self) -> NothingPrint { NothingPrint } }
     };
 }
 

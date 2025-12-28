@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Tree!();
-        Blob!();
         Commit!();
+        Tree!();
         Tag!();
+        Blob!();
     };
 }
 

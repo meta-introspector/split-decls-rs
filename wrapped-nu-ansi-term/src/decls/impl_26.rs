@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        Difference!();
+        Style!();
+    };
+}
+
+macro_rules! impl_26 {
+    () => {
+        deps!();
+        impl Difference { # [doc = " Compute the 'style difference' required to turn an existing style into"] # [doc = " the given, second style."] # [doc = ""] # [doc = " For example, to turn green text into green bold text, it's redundant"] # [doc = " to write a reset command then a second green+bold command, instead of"] # [doc = " just writing one bold command. This method should see that both styles"] # [doc = " use the foreground color green, and reduce it to a single command."] # [doc = ""] # [doc = " This method returns an enum value because it's not actually always"] # [doc = " possible to turn one style into another: for example, text could be"] # [doc = " made bold and underlined, but you can't remove the bold property"] # [doc = " without also removing the underline property. So when this has to"] # [doc = " happen, this function returns None, meaning that the entire set of"] # [doc = " styles should be reset and begun again."] pub fn between (first : & Style , next : & Style) -> Difference { use self :: Difference :: * ; if first == next { return Empty ; } if first . is_bold && ! next . is_bold { return Reset ; } if first . is_dimmed && ! next . is_dimmed { return Reset ; } if first . is_italic && ! next . is_italic { return Reset ; } if first . is_underline && ! next . is_underline { return Reset ; } if first . is_blink && ! next . is_blink { return Reset ; } if first . is_reverse && ! next . is_reverse { return Reset ; } if first . is_hidden && ! next . is_hidden { return Reset ; } if first . is_strikethrough && ! next . is_strikethrough { return Reset ; } if first . foreground . is_some () && next . foreground . is_none () { return Reset ; } if first . background . is_some () && next . background . is_none () { return Reset ; } let mut extra_styles = Style :: default () ; if first . is_bold != next . is_bold { extra_styles . is_bold = true ; } if first . is_dimmed != next . is_dimmed { extra_styles . is_dimmed = true ; } if first . is_italic != next . is_italic { extra_styles . is_italic = true ; } if first . is_underline != next . is_underline { extra_styles . is_underline = true ; } if first . is_blink != next . is_blink { extra_styles . is_blink = true ; } if first . is_reverse != next . is_reverse { extra_styles . is_reverse = true ; } if first . is_hidden != next . is_hidden { extra_styles . is_hidden = true ; } if first . is_strikethrough != next . is_strikethrough { extra_styles . is_strikethrough = true ; } if first . foreground != next . foreground { extra_styles . foreground = next . foreground ; } if first . background != next . background { extra_styles . background = next . background ; } ExtraStyles (extra_styles) } }
+    };
+}
+
+impl_26!()

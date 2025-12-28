@@ -1,13 +1,21 @@
 macro_rules! deps {
     () => {
-        ConfigLevel!();
+        FileMode!();
+        IntoCString!();
+        Repository!();
+        Oid!();
+        Note!();
+        TreeUpdateBuilder!();
+        Tree!();
+        Error!();
+        Binding!();
     };
 }
 
 macro_rules! impl_104 {
     () => {
         deps!();
-        impl ConfigLevel { # [doc = " Converts a raw configuration level to a ConfigLevel"] pub fn from_raw (raw : raw :: git_config_level_t) -> ConfigLevel { match raw { raw :: GIT_CONFIG_LEVEL_PROGRAMDATA => ConfigLevel :: ProgramData , raw :: GIT_CONFIG_LEVEL_SYSTEM => ConfigLevel :: System , raw :: GIT_CONFIG_LEVEL_XDG => ConfigLevel :: XDG , raw :: GIT_CONFIG_LEVEL_GLOBAL => ConfigLevel :: Global , raw :: GIT_CONFIG_LEVEL_LOCAL => ConfigLevel :: Local , raw :: GIT_CONFIG_LEVEL_WORKTREE => ConfigLevel :: Worktree , raw :: GIT_CONFIG_LEVEL_APP => ConfigLevel :: App , raw :: GIT_CONFIG_HIGHEST_LEVEL => ConfigLevel :: Highest , n => panic ! ("unknown config level: {}" , n) , } } }
+        impl TreeUpdateBuilder { # [doc = " Create a new empty series of updates."] pub fn new () -> Self { Self { updates : Vec :: new () , paths : Vec :: new () , } } # [doc = " Add an update removing the specified `path` from a tree."] pub fn remove < T : IntoCString > (& mut self , path : T) -> & mut Self { let path = util :: cstring_to_repo_path (path) . unwrap () ; let path_ptr = path . as_ptr () ; self . paths . push (path) ; self . updates . push (raw :: git_tree_update { action : raw :: GIT_TREE_UPDATE_REMOVE , id : raw :: git_oid { id : [0 ; raw :: GIT_OID_RAWSZ] , } , filemode : raw :: GIT_FILEMODE_UNREADABLE , path : path_ptr , }) ; self } # [doc = " Add an update setting the specified `path` to a specific Oid, whether it currently exists"] # [doc = " or not."] # [doc = ""] # [doc = " Note that libgit2 does not support an upsert of a previously removed path, or an upsert"] # [doc = " that changes the type of an object (such as from tree to blob or vice versa)."] pub fn upsert < T : IntoCString > (& mut self , path : T , id : Oid , filemode : FileMode) -> & mut Self { let path = util :: cstring_to_repo_path (path) . unwrap () ; let path_ptr = path . as_ptr () ; self . paths . push (path) ; self . updates . push (raw :: git_tree_update { action : raw :: GIT_TREE_UPDATE_UPSERT , id : unsafe { * id . raw () } , filemode : u32 :: from (filemode) as raw :: git_filemode_t , path : path_ptr , }) ; self } # [doc = " Create a new tree from the specified baseline and this series of updates."] # [doc = ""] # [doc = " The baseline tree must exist in the specified repository."] pub fn create_updated (& mut self , repo : & Repository , baseline : & Tree < '_ >) -> Result < Oid , Error > { let mut ret = raw :: git_oid { id : [0 ; raw :: GIT_OID_RAWSZ] , } ; unsafe { try_call ! (raw :: git_tree_create_updated (& mut ret , repo . raw () , baseline . raw () , self . updates . len () , self . updates . as_ptr ())) ; Ok (Binding :: from_raw (& ret as * const _)) } } }
     };
 }
 

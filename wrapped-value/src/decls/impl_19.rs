@@ -1,13 +1,15 @@
 macro_rules! deps {
     () => {
+        MapDeserializer!();
         Name!();
+        ConstValue!();
     };
 }
 
 macro_rules! impl_19 {
     () => {
         deps!();
-        impl < 'de > Deserialize < 'de > for Name { fn deserialize < D : Deserializer < 'de > > (deserializer : D) -> Result < Self , D :: Error > { Ok (Self (String :: deserialize (deserializer) ? . into_boxed_str () . into () ,)) } }
+        impl MapDeserializer { # [inline] fn new (map : IndexMap < Name , ConstValue >) -> Self { MapDeserializer { iter : map . into_iter () , value : None , } } }
     };
 }
 

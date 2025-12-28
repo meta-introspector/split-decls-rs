@@ -1,7 +1,8 @@
 macro_rules! deps {
     () => {
-        ModuleId!();
         MacroExpander!();
+        MacroRules!();
+        ModuleId!();
     };
 }
 

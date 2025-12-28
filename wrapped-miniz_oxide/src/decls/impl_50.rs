@@ -1,0 +1,22 @@
+macro_rules! deps {
+    () => {
+        LZOxide!();
+        CompressorOxide!();
+        DictOxide!();
+        ParamsOxide!();
+        CompressionLevel!();
+        TDEFLStatus!();
+        CompressionStrategy!();
+        DataFormat!();
+        HuffmanOxide!();
+    };
+}
+
+macro_rules! impl_50 {
+    () => {
+        deps!();
+        impl CompressorOxide { # [doc = " Create a new `CompressorOxide` with the given flags."] # [doc = ""] # [doc = " # Notes"] # [doc = " This function may be changed to take different parameters in the future."] pub fn new (flags : u32) -> Self { CompressorOxide { lz : LZOxide :: new () , params : ParamsOxide :: new (flags) , huff : Box :: default () , dict : DictOxide :: new (flags) , } } # [doc = " Get the adler32 checksum of the currently encoded data."] pub const fn adler32 (& self) -> u32 { self . params . adler32 } # [doc = " Get the return status of the previous [`compress`](fn.compress.html)"] # [doc = " call with this compressor."] pub const fn prev_return_status (& self) -> TDEFLStatus { self . params . prev_return_status } # [doc = " Get the raw compressor flags."] # [doc = ""] # [doc = " # Notes"] # [doc = " This function may be deprecated or changed in the future to use more rust-style flags."] pub const fn flags (& self) -> i32 { self . params . flags as i32 } # [doc = " Returns whether the compressor is wrapping the data in a zlib format or not."] pub const fn data_format (& self) -> DataFormat { if (self . params . flags & TDEFL_WRITE_ZLIB_HEADER) != 0 { DataFormat :: Zlib } else { DataFormat :: Raw } } # [doc = " Reset the state of the compressor, keeping the same parameters."] # [doc = ""] # [doc = " This avoids re-allocating data."] pub fn reset (& mut self) { self . lz = LZOxide :: new () ; self . params . reset () ; * self . huff = HuffmanOxide :: default () ; self . dict . reset () ; } # [doc = " Set the compression level of the compressor."] # [doc = ""] # [doc = " Using this to change level after compression has started is supported."] # [doc = " # Notes"] # [doc = " The compression strategy will be reset to the default one when this is called."] pub fn set_compression_level (& mut self , level : CompressionLevel) { let format = self . data_format () ; self . set_format_and_level (format , level as u8) ; } # [doc = " Set the compression level of the compressor using an integer value."] # [doc = ""] # [doc = " Using this to change level after compression has started is supported."] # [doc = " # Notes"] # [doc = " The compression strategy will be reset to the default one when this is called."] pub fn set_compression_level_raw (& mut self , level : u8) { let format = self . data_format () ; self . set_format_and_level (format , level) ; } # [doc = " Update the compression settings of the compressor."] # [doc = ""] # [doc = " Changing the `DataFormat` after compression has started will result in"] # [doc = " a corrupted stream."] # [doc = ""] # [doc = " # Notes"] # [doc = " This function mainly intended for setting the initial settings after e.g creating with"] # [doc = " `default` or after calling `CompressorOxide::reset()`, and behaviour may be changed"] # [doc = " to disallow calling it after starting compression in the future."] pub fn set_format_and_level (& mut self , data_format : DataFormat , level : u8) { let flags = create_comp_flags_from_zip_params (level . into () , data_format . to_window_bits () , CompressionStrategy :: Default as i32 ,) ; self . params . update_flags (flags) ; self . dict . update_flags (flags) ; } }
+    };
+}
+
+impl_50!()

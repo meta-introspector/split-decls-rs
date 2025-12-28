@@ -1,0 +1,19 @@
+macro_rules! deps {
+    () => {
+        Position!();
+        Error!();
+        ParentIteratorState!();
+        ParentEdge!();
+        Parents!();
+        ExtraEdge!();
+    };
+}
+
+macro_rules! impl_20 {
+    () => {
+        deps!();
+        impl Iterator for Parents < '_ > { type Item = Result < Position , Error > ; fn next (& mut self) -> Option < Self :: Item > { let state = std :: mem :: replace (& mut self . state , ParentIteratorState :: Exhausted) ; match state { ParentIteratorState :: First => match self . commit_data . parent1 { ParentEdge :: None => match self . commit_data . parent2 { ParentEdge :: None => None , _ => Some (Err (Error :: SecondParentWithoutFirstParent (self . commit_data . id () . into ()))) , } , ParentEdge :: GraphPosition (pos) => { self . state = ParentIteratorState :: Second ; Some (Ok (pos)) } ParentEdge :: ExtraEdgeIndex (_) => { Some (Err (Error :: FirstParentIsExtraEdgeIndex (self . commit_data . id () . into ()))) } } , ParentIteratorState :: Second => match self . commit_data . parent2 { ParentEdge :: None => None , ParentEdge :: GraphPosition (pos) => Some (Ok (pos)) , ParentEdge :: ExtraEdgeIndex (extra_edge_index) => { if let Some (extra_edges_list) = self . commit_data . file . extra_edges_data () { let start_offset : usize = extra_edge_index . try_into () . expect ("an architecture able to hold 32 bits of integer") ; let start_offset = start_offset . checked_mul (4) . expect ("an extended edge index small enough to fit in usize") ; if let Some (tail) = extra_edges_list . get (start_offset ..) { self . state = ParentIteratorState :: Extra (tail . chunks (4)) ; self . next () } else { Some (Err (Error :: ExtraEdgesListOverflow (self . commit_data . id () . into ()))) } } else { Some (Err (Error :: MissingExtraEdgesList (self . commit_data . id () . into ()))) } } } , ParentIteratorState :: Extra (mut chunks) => { if let Some (chunk) = chunks . next () { let extra_edge = read_u32 (chunk) ; match ExtraEdge :: from_raw (extra_edge) { ExtraEdge :: Internal (pos) => { self . state = ParentIteratorState :: Extra (chunks) ; Some (Ok (pos)) } ExtraEdge :: Last (pos) => Some (Ok (pos)) , } } else { Some (Err (Error :: ExtraEdgesListOverflow (self . commit_data . id () . into ()))) } } ParentIteratorState :: Exhausted => None , } } fn size_hint (& self) -> (usize , Option < usize >) { match (& self . state , self . commit_data . parent1 , self . commit_data . parent2) { (ParentIteratorState :: First , ParentEdge :: None , ParentEdge :: None) => (0 , Some (0)) , (ParentIteratorState :: First , ParentEdge :: None , _) => (1 , Some (1)) , (ParentIteratorState :: First , ParentEdge :: GraphPosition (_) , ParentEdge :: None) => (1 , Some (1)) , (ParentIteratorState :: First , ParentEdge :: GraphPosition (_) , ParentEdge :: GraphPosition (_)) => (2 , Some (2)) , (ParentIteratorState :: First , ParentEdge :: GraphPosition (_) , ParentEdge :: ExtraEdgeIndex (_)) => (3 , None) , (ParentIteratorState :: First , ParentEdge :: ExtraEdgeIndex (_) , _) => (1 , Some (1)) , (ParentIteratorState :: Second , _ , ParentEdge :: None) => (0 , Some (0)) , (ParentIteratorState :: Second , _ , ParentEdge :: GraphPosition (_)) => (1 , Some (1)) , (ParentIteratorState :: Second , _ , ParentEdge :: ExtraEdgeIndex (_)) => (2 , None) , (ParentIteratorState :: Extra (_) , _ , _) => (1 , None) , (ParentIteratorState :: Exhausted , _ , _) => (0 , Some (0)) , } } }
+    };
+}
+
+impl_20!()

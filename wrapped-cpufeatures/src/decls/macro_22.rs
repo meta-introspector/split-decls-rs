@@ -1,0 +1,7 @@
+macro_rules! macro_22 {
+    () => {
+        __expand_check_macro ! { ("sse3" , "" , 0 , ecx , 0) , ("pclmulqdq" , "" , 0 , ecx , 1) , ("ssse3" , "" , 0 , ecx , 9) , ("fma" , "ymm" , 0 , ecx , 12 , 0 , ecx , 28) , ("sse4.1" , "" , 0 , ecx , 19) , ("sse4.2" , "" , 0 , ecx , 20) , ("popcnt" , "" , 0 , ecx , 23) , ("aes" , "" , 0 , ecx , 25) , ("avx" , "xmm" , 0 , ecx , 28) , ("rdrand" , "" , 0 , ecx , 30) , ("mmx" , "" , 0 , edx , 23) , ("sse" , "" , 0 , edx , 25) , ("sse2" , "" , 0 , edx , 26) , ("sgx" , "" , 1 , ebx , 2) , ("bmi1" , "" , 1 , ebx , 3) , ("bmi2" , "" , 1 , ebx , 8) , ("avx2" , "ymm" , 1 , ebx , 5 , 0 , ecx , 28) , ("avx512f" , "zmm" , 1 , ebx , 16) , ("avx512dq" , "zmm" , 1 , ebx , 17) , ("rdseed" , "" , 1 , ebx , 18) , ("adx" , "" , 1 , ebx , 19) , ("avx512ifma" , "zmm" , 1 , ebx , 21) , ("avx512pf" , "zmm" , 1 , ebx , 26) , ("avx512er" , "zmm" , 1 , ebx , 27) , ("avx512cd" , "zmm" , 1 , ebx , 28) , ("sha" , "" , 1 , ebx , 29) , ("avx512bw" , "zmm" , 1 , ebx , 30) , ("avx512vl" , "zmm" , 1 , ebx , 31) , ("avx512vbmi" , "zmm" , 1 , ecx , 1) , ("avx512vbmi2" , "zmm" , 1 , ecx , 6) , ("gfni" , "zmm" , 1 , ecx , 8) , ("vaes" , "zmm" , 1 , ecx , 9) , ("vpclmulqdq" , "zmm" , 1 , ecx , 10) , ("avx512bitalg" , "zmm" , 1 , ecx , 12) , ("avx512vpopcntdq" , "zmm" , 1 , ecx , 14) , ("sha512" , "ymm" , 2 , eax , 0) , ("sm3" , "xmm" , 2 , eax , 1) , ("sm4" , "ymm" , 2 , eax , 2) , }
+    };
+}
+
+macro_22!()

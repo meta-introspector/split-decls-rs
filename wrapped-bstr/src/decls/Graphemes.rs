@@ -1,0 +1,7 @@
+macro_rules! Graphemes {
+    () => {
+        # [doc = " An iterator over grapheme clusters in a byte string."] # [doc = ""] # [doc = " This iterator is typically constructed by"] # [doc = " [`ByteSlice::graphemes`](trait.ByteSlice.html#method.graphemes)."] # [doc = ""] # [doc = " Unicode defines a grapheme cluster as an *approximation* to a single user"] # [doc = " visible character. A grapheme cluster, or just \"grapheme,\" is made up of"] # [doc = " one or more codepoints. For end user oriented tasks, one should generally"] # [doc = " prefer using graphemes instead of [`Chars`](struct.Chars.html), which"] # [doc = " always yields one codepoint at a time."] # [doc = ""] # [doc = " Since graphemes are made up of one or more codepoints, this iterator yields"] # [doc = " `&str` elements. When invalid UTF-8 is encountered, replacement codepoints"] # [doc = " are [substituted](index.html#handling-of-invalid-utf-8)."] # [doc = ""] # [doc = " This iterator can be used in reverse. When reversed, exactly the same"] # [doc = " set of grapheme clusters are yielded, but in reverse order."] # [doc = ""] # [doc = " This iterator only yields *extended* grapheme clusters, in accordance with"] # [doc = " [UAX #29](https://www.unicode.org/reports/tr29/tr29-33.html#Grapheme_Cluster_Boundaries)."] # [derive (Clone , Debug)] pub struct Graphemes < 'a > { bs : & 'a [u8] , }
+    };
+}
+
+Graphemes!()

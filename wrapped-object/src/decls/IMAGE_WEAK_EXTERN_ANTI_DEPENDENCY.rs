@@ -1,0 +1,7 @@
+macro_rules! IMAGE_WEAK_EXTERN_ANTI_DEPENDENCY {
+    () => {
+        pub const IMAGE_WEAK_EXTERN_ANTI_DEPENDENCY : u32 = 4 ;
+    };
+}
+
+IMAGE_WEAK_EXTERN_ANTI_DEPENDENCY!()

@@ -1,0 +1,22 @@
+macro_rules! deps {
+    () => {
+        ServerError!();
+        ServerResult!();
+        ContextSelectionSet!();
+        Field!();
+        BoxFieldFuture!();
+        FieldValue!();
+        Object!();
+        IntrospectionMode!();
+        Schema!();
+    };
+}
+
+macro_rules! collect_fields {
+    () => {
+        deps!();
+        fn collect_fields < 'a > (fields : & mut Vec < BoxFieldFuture < 'a > > , schema : & 'a Schema , object : & 'a Object , ctx : & ContextSelectionSet < 'a > , parent_value : & 'a FieldValue ,) -> ServerResult < () > { for selection in & ctx . item . node . items { match & selection . node { Selection :: Field (field) => { if field . node . name . node == "__typename" { collect_typename_field (fields , object , field) ; continue ; } if object . name == schema . 0 . env . registry . query_type && matches ! (ctx . schema_env . registry . introspection_mode , IntrospectionMode :: Enabled | IntrospectionMode :: IntrospectionOnly) && matches ! (ctx . query_env . introspection_mode , IntrospectionMode :: Enabled | IntrospectionMode :: IntrospectionOnly ,) { if field . node . name . node == "__schema" { collect_schema_field (fields , ctx , field) ; continue ; } else if field . node . name . node == "__type" { collect_type_field (fields , ctx , field) ; continue ; } else if ctx . schema_env . registry . enable_federation && field . node . name . node == "_service" { collect_service_field (fields , ctx , field) ; continue ; } else if ctx . schema_env . registry . enable_federation && field . node . name . node == "_entities" { collect_entities_field (fields , schema , ctx , parent_value , field) ; continue ; } } if ctx . schema_env . registry . introspection_mode == IntrospectionMode :: IntrospectionOnly || ctx . query_env . introspection_mode == IntrospectionMode :: IntrospectionOnly { fields . push (async move { Ok ((field . node . response_key () . node . clone () , Value :: Null)) } . boxed () ,) ; continue ; } if let Some (field_def) = object . fields . get (field . node . name . node . as_str ()) { collect_field (fields , schema , object , ctx , parent_value , field_def , field) ; } } selection => { let (type_condition , selection_set) = match selection { Selection :: Field (_) => unreachable ! () , Selection :: FragmentSpread (spread) => { let fragment = ctx . query_env . fragments . get (& spread . node . fragment_name . node) ; let fragment = match fragment { Some (fragment) => fragment , None => { return Err (ServerError :: new (format ! ("Unknown fragment \"{}\"." , spread . node . fragment_name . node) , Some (spread . pos) ,)) ; } } ; (Some (& fragment . node . type_condition) , & fragment . node . selection_set ,) } Selection :: InlineFragment (fragment) => (fragment . node . type_condition . as_ref () , & fragment . node . selection_set ,) , } ; let type_condition = type_condition . map (| condition | condition . node . on . node . as_str ()) ; let introspection_type_name = & object . name ; let type_condition_matched = match type_condition { None => true , Some (type_condition) if type_condition == introspection_type_name => true , Some (type_condition) if object . implements . contains (type_condition) => true , _ => false , } ; if type_condition_matched { collect_fields (fields , schema , object , & ctx . with_selection_set (selection_set) , parent_value ,) ? ; } } } } Ok (()) }
+    };
+}
+
+collect_fields!()

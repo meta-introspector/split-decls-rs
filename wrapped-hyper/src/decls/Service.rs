@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        Response!();
+        Result!();
+        Error!();
+    };
+}
+
+macro_rules! Service {
+    () => {
+        deps!();
+        # [doc = " An asynchronous function from a `Request` to a `Response`."] # [doc = ""] # [doc = " The `Service` trait is a simplified interface making it easy to write"] # [doc = " network applications in a modular and reusable way, decoupled from the"] # [doc = " underlying protocol."] # [doc = ""] # [doc = " # Functional"] # [doc = ""] # [doc = " A `Service` is a function of a `Request`. It immediately returns a"] # [doc = " [`Future`] representing the eventual completion of processing the"] # [doc = " request. The actual request processing may happen at any time in the"] # [doc = " future, on any thread or executor. The processing may depend on calling"] # [doc = " other services. At some point in the future, the processing will complete,"] # [doc = " and the [`Future`] will resolve to a response or an error."] # [doc = ""] # [doc = " At a high level, the `Service::call` function represents an RPC request. The"] # [doc = " `Service` value can be a server or a client."] # [doc = ""] # [doc = " # Utilities"] # [doc = ""] # [doc = " The [`hyper-util`][util] crate provides facilities to bridge this trait to"] # [doc = " other libraries, such as [`tower`][tower], which might provide their"] # [doc = " own `Service` variants."] # [doc = ""] # [doc = " See [`hyper_util::service`][util-service] for more information."] # [doc = ""] # [doc = " [tower]: https://docs.rs/tower"] # [doc = " [util]: https://docs.rs/hyper-util"] # [doc = " [util-service]: https://docs.rs/hyper-util/latest/hyper_util/service/index.html"] pub trait Service < Request > { # [doc = " Responses given by the service."] type Response ; # [doc = " Errors produced by the service."] # [doc = ""] # [doc = " Note: Returning an `Error` to a hyper server, the behavior depends on the"] # [doc = " protocol. In most cases, hyper will cause the connection to be abruptly aborted."] # [doc = " It will abort the request however the protocol allows, either with some sort of RST_STREAM,"] # [doc = " or killing the connection if that doesn't exist."] type Error ; # [doc = " The future response value."] type Future : Future < Output = Result < Self :: Response , Self :: Error > > ; # [doc = " Process the request and return the response asynchronously."] # [doc = " `call` takes `&self` instead of `mut &self` because:"] # [doc = " - It prepares the way for async fn,"] # [doc = "   since then the future only borrows `&self`, and thus a Service can concurrently handle"] # [doc = "   multiple outstanding requests at once."] # [doc = " - It's clearer that Services can likely be cloned."] # [doc = " - To share state across clones, you generally need `Arc<Mutex<_>>`"] # [doc = "   That means you're not really using the `&mut self` and could do with a `&self`."] # [doc = "   The discussion on this is here: <https://github.com/hyperium/hyper/issues/3040>"] fn call (& self , req : Request) -> Self :: Future ; }
+    };
+}
+
+Service!()

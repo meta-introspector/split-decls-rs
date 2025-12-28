@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        Item!();
+    };
+}
+
+macro_rules! args_os_opt {
+    () => {
+        deps!();
+        # [doc = " Like [`args_os()`], but with the `precompose_unicode` parameter akin to `core.precomposeUnicode` in the Git configuration."] pub fn args_os_opt (precompose_unicode : bool) -> impl Iterator < Item = OsString > { std :: env :: args_os () . map (move | arg | { if precompose_unicode { gix_utils :: str :: precompose_os_string (arg . into ()) . into_owned () } else { arg } }) }
+    };
+}
+
+args_os_opt!()

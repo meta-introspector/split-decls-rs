@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        FluentAttribute!();
+        FluentBundle!();
+    };
+}
+
+macro_rules! FluentMessage {
+    () => {
+        deps!();
+        # [doc = " [`FluentMessage`] is a basic translation unit of the Fluent system."] # [doc = ""] # [doc = " The instance of a message is returned from the"] # [doc = " [`FluentBundle::get_message`](crate::bundle::FluentBundle::get_message)"] # [doc = " method, for the lifetime of the [`FluentBundle`](crate::bundle::FluentBundle) instance."] # [doc = ""] # [doc = " # Example"] # [doc = ""] # [doc = " ```"] # [doc = " use fluent_bundle::{FluentResource, FluentBundle};"] # [doc = ""] # [doc = " let source = r#\""] # [doc = ""] # [doc = " hello-world = Hello World!"] # [doc = ""] # [doc = " \"#;"] # [doc = ""] # [doc = " let resource = FluentResource::try_new(source.to_string())"] # [doc = "     .expect(\"Failed to parse the resource.\");"] # [doc = ""] # [doc = " let mut bundle = FluentBundle::default();"] # [doc = " bundle.add_resource(resource)"] # [doc = "     .expect(\"Failed to add a resource.\");"] # [doc = ""] # [doc = " let msg = bundle.get_message(\"hello-world\")"] # [doc = "     .expect(\"Failed to retrieve a message.\");"] # [doc = ""] # [doc = " assert!(msg.value().is_some());"] # [doc = " ```"] # [doc = ""] # [doc = " That value can be then passed to"] # [doc = " [`FluentBundle::format_pattern`](crate::bundle::FluentBundle::format_pattern) to be formatted"] # [doc = " within the context of a given [`FluentBundle`](crate::bundle::FluentBundle) instance."] # [doc = ""] # [doc = " # Compound Message"] # [doc = ""] # [doc = " A message may contain a `value`, but it can also contain a list of [`FluentAttribute`] elements."] # [doc = ""] # [doc = " If a message contains attributes, it is called a \"compound\" message."] # [doc = ""] # [doc = " In such case, the message contains a list of key-value attributes that represent"] # [doc = " different translation values associated with a single translation unit."] # [doc = ""] # [doc = " This is useful for scenarios where a [`FluentMessage`] is associated with a"] # [doc = " complex User Interface widget which has multiple attributes that need to be translated."] # [doc = " ```text"] # [doc = " confirm-modal = Are you sure?"] # [doc = "     .confirm = Yes"] # [doc = "     .cancel = No"] # [doc = "     .tooltip = Closing the window will lose all unsaved data."] # [doc = " ```"] # [derive (Debug , PartialEq)] pub struct FluentMessage < 'm > { node : & 'm ast :: Message < & 'm str > , }
+    };
+}
+
+FluentMessage!()

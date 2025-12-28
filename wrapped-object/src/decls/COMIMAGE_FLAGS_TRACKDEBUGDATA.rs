@@ -1,0 +1,7 @@
+macro_rules! COMIMAGE_FLAGS_TRACKDEBUGDATA {
+    () => {
+        pub const COMIMAGE_FLAGS_TRACKDEBUGDATA : u32 = 0x0001_0000 ;
+    };
+}
+
+COMIMAGE_FLAGS_TRACKDEBUGDATA!()

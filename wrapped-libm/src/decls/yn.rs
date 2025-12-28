@@ -1,0 +1,7 @@
+macro_rules! yn {
+    () => {
+        # [doc = " Integer order of the [Bessel function](https://en.wikipedia.org/wiki/Bessel_function) of the second kind (f64)."] # [cfg_attr (assert_no_panic , no_panic :: no_panic)] pub fn yn (n : i32 , x : f64) -> f64 { let mut ix : u32 ; let lx : u32 ; let mut ib : u32 ; let nm1 : i32 ; let mut sign : bool ; let mut i : i32 ; let mut a : f64 ; let mut b : f64 ; let mut temp : f64 ; ix = get_high_word (x) ; lx = get_low_word (x) ; sign = (ix >> 31) != 0 ; ix &= 0x7fffffff ; if ix | ((lx | (! lx) . wrapping_add (1)) >> 31) > 0x7ff00000 { return x ; } if sign && (ix | lx) != 0 { return 0.0 / 0.0 ; } if ix == 0x7ff00000 { return 0.0 ; } if n == 0 { return y0 (x) ; } if n < 0 { nm1 = - (n + 1) ; sign = (n & 1) != 0 ; } else { nm1 = n - 1 ; sign = false ; } if nm1 == 0 { if sign { return - y1 (x) ; } else { return y1 (x) ; } } if ix >= 0x52d00000 { temp = match nm1 & 3 { 0 => - sin (x) - cos (x) , 1 => - sin (x) + cos (x) , 2 => sin (x) + cos (x) , _ => sin (x) - cos (x) , } ; b = INVSQRTPI * temp / sqrt (x) ; } else { a = y0 (x) ; b = y1 (x) ; ib = get_high_word (b) ; i = 0 ; while i < nm1 && ib != 0xfff00000 { i += 1 ; temp = b ; b = (2.0 * (i as f64) / x) * b - a ; ib = get_high_word (b) ; a = temp ; } } if sign { - b } else { b } }
+    };
+}
+
+yn!()

@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        Matcher!();
+    };
+}
+
+macro_rules! impl_30 {
+    () => {
+        deps!();
+        impl ToTokens for Matcher < '_ > { fn to_tokens (& self , tokens : & mut TokenStream) { let (ig , tg , wc) = self . f . cgenerics . split_for_impl () ; let argnames = & self . f . argnames ; let braces = argnames . iter () . fold (String :: new () , | mut acc , _argname | { if acc . is_empty () { acc . push_str ("{}") ; } else { acc . push_str (", {}") ; } acc }) ; let fn_params = & self . f . fn_params ; let hrtb = self . f . hrtb () ; let indices = (0 .. argnames . len ()) . map (| i | { syn :: Index :: from (i) }) . collect :: < Vec < _ > > () ; let lg = lifetimes_to_generics (& self . f . alifetimes) ; let pred_matches = argnames . iter () . enumerate () . map (| (i , argname) | { let idx = syn :: Index :: from (i) ; quote ! (__mockall_pred .# idx . eval (# argname) ,) }) . collect :: < TokenStream > () ; let preds = if self . f . concretize { quote ! (()) } else { self . f . predty . iter () . map (| t | quote ! (Box < dyn # hrtb :: mockall :: Predicate <# t > + :: std :: marker :: Send >,)) . collect :: < TokenStream > () } ; let predty = & self . f . predty ; let refpredty = & self . f . refpredty ; let predmatches_body = if self . f . concretize { quote ! () } else { quote ! (Matcher :: Pred (__mockall_pred) => [# pred_matches] . iter () . all (| __mockall_x | * __mockall_x) ,) } ; let preddbg_body = if self . f . concretize { quote ! () } else { quote ! (Matcher :: Pred (__mockall_p) => { write ! (__mockall_fmt , # braces , # (__mockall_p .# indices ,) *) }) } ; quote ! (enum Matcher # ig # wc { Always , Func (Box < dyn # hrtb Fn (# (# refpredty ,) *) -> bool + :: std :: marker :: Send >) , FuncSt (:: mockall :: Fragile < Box < dyn # hrtb Fn (# (# refpredty ,) *) -> bool >>) , Pred (Box < (# preds) >) , _Phantom (Box < dyn Fn (# (# fn_params ,) *) + :: std :: marker :: Send >) } impl # ig Matcher # tg # wc { # [allow (clippy :: ptr_arg)] # [allow (clippy :: ref_option)] fn matches # lg (& self , # (# argnames : &# predty ,) *) -> bool { match self { Matcher :: Always => true , Matcher :: Func (__mockall_f) => __mockall_f (# (# argnames ,) *) , Matcher :: FuncSt (__mockall_f) => (__mockall_f . get ()) (# (# argnames ,) *) , # predmatches_body _ => unreachable ! () } } } impl # ig Default for Matcher # tg # wc { # [allow (unused_variables)] fn default () -> Self { Matcher :: Always } } impl # ig :: std :: fmt :: Display for Matcher # tg # wc { fn fmt (& self , __mockall_fmt : & mut :: std :: fmt :: Formatter <'_ >) -> :: std :: fmt :: Result { match self { Matcher :: Always => write ! (__mockall_fmt , "<anything>") , Matcher :: Func (_) => write ! (__mockall_fmt , "<function>") , Matcher :: FuncSt (_) => write ! (__mockall_fmt , "<single threaded function>") , # preddbg_body _ => unreachable ! () , } } }) . to_tokens (tokens) ; } }
+    };
+}
+
+impl_30!()

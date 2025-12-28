@@ -1,0 +1,7 @@
+macro_rules! const_eval {
+    () => {
+        # [doc = " Const block emulation without depending on real const block which requires Rust 1.79."] macro_rules ! const_eval { ($ (const $ const_params : ident : $ ty : ty) ,+ => $ ret : ty { $ ($ tt : tt) * }) => { { struct _Tmp <$ (const $ const_params : $ ty ,) *>; impl <$ (const $ const_params : $ ty ,) *> _Tmp <$ ($ const_params ,) *> { const _VAL : $ ret = { $ ($ tt) * } ; } _Tmp ::<$ ($ const_params ,) *>:: _VAL } } ; ($ ($ ty_params : ident $ (: ? Sized $ (+ $ bounds : path) ?) ?) ,+ => $ ret : ty { $ ($ tt : tt) * }) => { { struct _Tmp <$ ($ ty_params $ (: ? Sized $ (+ $ bounds) ?) ?) ,+> ($ (:: core :: marker :: PhantomData <$ ty_params >) ,+) ; impl <$ ($ ty_params $ (: ? Sized $ (+ $ bounds) ?) ?) ,+> _Tmp <$ ($ ty_params ,) *> { const _VAL : $ ret = { $ ($ tt) * } ; } _Tmp ::<$ ($ ty_params ,) *>:: _VAL } } ; ($ ($ ty_params : ident $ (: $ bounds : path) ?) ,+ => $ ret : ty { $ ($ tt : tt) * }) => { { struct _Tmp <$ ($ ty_params $ (: $ bounds) ?) ,+> ($ (:: core :: marker :: PhantomData <$ ty_params >) ,+) ; impl <$ ($ ty_params $ (: $ bounds) ?) ,+> _Tmp <$ ($ ty_params ,) *> { const _VAL : $ ret = { $ ($ tt) * } ; } _Tmp ::<$ ($ ty_params ,) *>:: _VAL } } ; (=> $ ret : ty { $ ($ tt : tt) * }) => { { const _VAL : $ ret = { $ ($ tt) * } ; _VAL } } ; }
+    };
+}
+
+const_eval!()

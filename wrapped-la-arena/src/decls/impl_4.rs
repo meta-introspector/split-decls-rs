@@ -1,13 +1,14 @@
 macro_rules! deps {
     () => {
-        RawIdx!();
+        ArenaMap!();
+        Idx!();
     };
 }
 
 macro_rules! impl_4 {
     () => {
         deps!();
-        impl From < u32 > for RawIdx { # [inline] fn from (idx : u32) -> RawIdx { RawIdx (idx) } }
+        impl < T , V > Default for ArenaMap < Idx < V > , T > { fn default () -> Self { Self :: new () } }
     };
 }
 

@@ -1,0 +1,21 @@
+macro_rules! deps {
+    () => {
+        Expression!();
+        Result!();
+        IndexStr!();
+        OperatorName!();
+        Error!();
+        SourceName!();
+        SubstitutionTable!();
+        ParseContext!();
+    };
+}
+
+macro_rules! impl_139 {
+    () => {
+        deps!();
+        impl OperatorName { fn starts_with (byte : u8) -> bool { byte == b'c' || byte == b'l' || byte == b'v' || SimpleOperatorName :: starts_with (byte) } fn arity (& self) -> u8 { match self { & OperatorName :: Cast (_) | & OperatorName :: Conversion (_) | & OperatorName :: Literal (_) => 1 , & OperatorName :: Simple (ref s) => s . arity () , & OperatorName :: VendorExtension (arity , _) => arity , } } fn parse_from_expr < 'a , 'b > (ctx : & 'a ParseContext , subs : & 'a mut SubstitutionTable , input : IndexStr < 'b > ,) -> Result < (Expression , IndexStr < 'b >) > { let (operator , tail) = OperatorName :: parse_internal (ctx , subs , input , true) ? ; let arity = operator . arity () ; if arity == 1 { let (first , tail) = Expression :: parse (ctx , subs , tail) ? ; let expr = Expression :: Unary (operator , Box :: new (first)) ; Ok ((expr , tail)) } else if arity == 2 { let (first , tail) = Expression :: parse (ctx , subs , tail) ? ; let (second , tail) = Expression :: parse (ctx , subs , tail) ? ; let expr = Expression :: Binary (operator , Box :: new (first) , Box :: new (second)) ; Ok ((expr , tail)) } else if arity == 3 { let (first , tail) = Expression :: parse (ctx , subs , tail) ? ; let (second , tail) = Expression :: parse (ctx , subs , tail) ? ; let (third , tail) = Expression :: parse (ctx , subs , tail) ? ; let expr = Expression :: Ternary (operator , Box :: new (first) , Box :: new (second) , Box :: new (third)) ; Ok ((expr , tail)) } else { Err (error :: Error :: UnexpectedText) } } fn parse_internal < 'a , 'b > (ctx : & 'a ParseContext , subs : & 'a mut SubstitutionTable , input : IndexStr < 'b > , from_expr : bool ,) -> Result < (OperatorName , IndexStr < 'b >) > { try_begin_parse ! ("OperatorName" , ctx , input) ; if let Ok ((simple , tail)) = try_recurse ! (SimpleOperatorName :: parse (ctx , subs , input)) { return Ok ((OperatorName :: Simple (simple) , tail)) ; } if let Ok (tail) = consume (b"cv" , input) { let previously_in_conversion = ctx . set_in_conversion (! from_expr) ; let parse_result = TypeHandle :: parse (ctx , subs , tail) ; ctx . set_in_conversion (previously_in_conversion) ; let (ty , tail) = parse_result ? ; if from_expr { return Ok ((OperatorName :: Cast (ty) , tail)) ; } else { return Ok ((OperatorName :: Conversion (ty) , tail)) ; } } if let Ok (tail) = consume (b"li" , input) { let (name , tail) = SourceName :: parse (ctx , subs , tail) ? ; return Ok ((OperatorName :: Literal (name) , tail)) ; } let tail = consume (b"v" , input) ? ; let (arity , tail) = match tail . peek () { Some (c) if b'0' <= c && c <= b'9' => (c - b'0' , tail . range_from (1 ..)) , None => return Err (error :: Error :: UnexpectedEnd) , _ => return Err (error :: Error :: UnexpectedText) , } ; let (name , tail) = SourceName :: parse (ctx , subs , tail) ? ; Ok ((OperatorName :: VendorExtension (arity , name) , tail)) } }
+    };
+}
+
+impl_139!()

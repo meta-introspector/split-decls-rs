@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Bucket!();
+        IndexMap!();
     };
 }
 
 macro_rules! impl_14 {
     () => {
         deps!();
-        impl < K , V > Clone for Bucket < K , V > where K : Clone , V : Clone , { fn clone (& self) -> Self { Bucket { hash : self . hash , key : self . key . clone () , value : self . value . clone () , } } fn clone_from (& mut self , other : & Self) { self . hash = other . hash ; self . key . clone_from (& other . key) ; self . value . clone_from (& other . value) ; } }
+        # [doc = " <div class=\"stab deprecated\"><span class=\"emoji\">👎</span><span>Deprecated: use borsh's <code>indexmap</code> feature instead.</span></div>"] impl < K , V , S > BorshSerialize for IndexMap < K , V , S > where K : BorshSerialize , V : BorshSerialize , { # [inline] fn serialize < W : Write > (& self , writer : & mut W) -> Result < () > { check_zst :: < K > () ? ; let iterator = self . iter () ; u32 :: try_from (iterator . len ()) . map_err (| _ | ErrorKind :: InvalidData) ? . serialize (writer) ? ; for (key , value) in iterator { key . serialize (writer) ? ; value . serialize (writer) ? ; } Ok (()) } }
     };
 }
 

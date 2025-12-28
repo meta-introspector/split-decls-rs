@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        DateTime!();
+        Utc!();
+        Date!();
+    };
+}
+
+macro_rules! impl_665 {
+    () => {
+        deps!();
+        # [cfg (feature = "now")] impl Utc { # [doc = " Returns a `Date` which corresponds to the current date."] # [deprecated (since = "0.4.23" , note = "use `Utc::now()` instead, potentially with `.date_naive()`")] # [allow (deprecated)] # [must_use] pub fn today () -> Date < Utc > { Utc :: now () . date () } # [doc = " Returns a `DateTime<Utc>` which corresponds to the current date and time in UTC."] # [doc = ""] # [doc = " See also the similar [`Local::now()`] which returns `DateTime<Local>`, i.e. the local date"] # [doc = " and time including offset from UTC."] # [doc = ""] # [doc = " [`Local::now()`]: crate::Local::now"] # [doc = ""] # [doc = " # Example"] # [doc = ""] # [doc = " ```"] # [doc = " # #![allow(unused_variables)]"] # [doc = " # use chrono::{FixedOffset, Utc};"] # [doc = " // Current time in UTC"] # [doc = " let now_utc = Utc::now();"] # [doc = ""] # [doc = " // Current date in UTC"] # [doc = " let today_utc = now_utc.date_naive();"] # [doc = ""] # [doc = " // Current time in some timezone (let's use +05:00)"] # [doc = " let offset = FixedOffset::east_opt(5 * 60 * 60).unwrap();"] # [doc = " let now_with_offset = Utc::now().with_timezone(&offset);"] # [doc = " ```"] # [cfg (not (all (target_arch = "wasm32" , feature = "wasmbind" , not (any (target_os = "emscripten" , target_os = "wasi" , target_os = "linux")))))] # [must_use] pub fn now () -> DateTime < Utc > { let now = SystemTime :: now () . duration_since (UNIX_EPOCH) . expect ("system time before Unix epoch") ; DateTime :: from_timestamp (now . as_secs () as i64 , now . subsec_nanos ()) . unwrap () } # [doc = " Returns a `DateTime` which corresponds to the current date and time."] # [cfg (all (target_arch = "wasm32" , feature = "wasmbind" , not (any (target_os = "emscripten" , target_os = "wasi" , target_os = "linux"))))] # [must_use] pub fn now () -> DateTime < Utc > { let now = js_sys :: Date :: new_0 () ; DateTime :: < Utc > :: from (now) } }
+    };
+}
+
+impl_665!()

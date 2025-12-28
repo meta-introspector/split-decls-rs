@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        NaiveTime!();
+        TimeDelta!();
+    };
+}
+
+macro_rules! test_time_add {
+    () => {
+        deps!();
+        # [test] fn test_time_add () { macro_rules ! check { ($ lhs : expr , $ rhs : expr , $ sum : expr) => { { assert_eq ! ($ lhs + $ rhs , $ sum) ; } } ; } let hmsm = | h , m , s , ms | NaiveTime :: from_hms_milli_opt (h , m , s , ms) . unwrap () ; check ! (hmsm (3 , 5 , 59 , 900) , TimeDelta :: zero () , hmsm (3 , 5 , 59 , 900)) ; check ! (hmsm (3 , 5 , 59 , 900) , TimeDelta :: try_milliseconds (100) . unwrap () , hmsm (3 , 6 , 0 , 0)) ; check ! (hmsm (3 , 5 , 59 , 1_300) , TimeDelta :: try_milliseconds (- 1800) . unwrap () , hmsm (3 , 5 , 58 , 500)) ; check ! (hmsm (3 , 5 , 59 , 1_300) , TimeDelta :: try_milliseconds (- 800) . unwrap () , hmsm (3 , 5 , 59 , 500)) ; check ! (hmsm (3 , 5 , 59 , 1_300) , TimeDelta :: try_milliseconds (- 100) . unwrap () , hmsm (3 , 5 , 59 , 1_200)) ; check ! (hmsm (3 , 5 , 59 , 1_300) , TimeDelta :: try_milliseconds (100) . unwrap () , hmsm (3 , 5 , 59 , 1_400)) ; check ! (hmsm (3 , 5 , 59 , 1_300) , TimeDelta :: try_milliseconds (800) . unwrap () , hmsm (3 , 6 , 0 , 100)) ; check ! (hmsm (3 , 5 , 59 , 1_300) , TimeDelta :: try_milliseconds (1800) . unwrap () , hmsm (3 , 6 , 1 , 100)) ; check ! (hmsm (3 , 5 , 59 , 900) , TimeDelta :: try_seconds (86399) . unwrap () , hmsm (3 , 5 , 58 , 900)) ; check ! (hmsm (3 , 5 , 59 , 900) , TimeDelta :: try_seconds (- 86399) . unwrap () , hmsm (3 , 6 , 0 , 900)) ; check ! (hmsm (3 , 5 , 59 , 900) , TimeDelta :: try_days (12345) . unwrap () , hmsm (3 , 5 , 59 , 900)) ; check ! (hmsm (3 , 5 , 59 , 1_300) , TimeDelta :: try_days (1) . unwrap () , hmsm (3 , 5 , 59 , 300)) ; check ! (hmsm (3 , 5 , 59 , 1_300) , TimeDelta :: try_days (- 1) . unwrap () , hmsm (3 , 6 , 0 , 300)) ; check ! (hmsm (0 , 0 , 0 , 0) , TimeDelta :: try_milliseconds (- 990) . unwrap () , hmsm (23 , 59 , 59 , 10)) ; check ! (hmsm (0 , 0 , 0 , 0) , TimeDelta :: try_milliseconds (- 9990) . unwrap () , hmsm (23 , 59 , 50 , 10)) ; }
+    };
+}
+
+test_time_add!()

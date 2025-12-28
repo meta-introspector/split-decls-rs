@@ -1,0 +1,7 @@
+macro_rules! EXPORT_SYMBOL_FLAGS_WEAK_DEFINITION {
+    () => {
+        pub const EXPORT_SYMBOL_FLAGS_WEAK_DEFINITION : u8 = 0x04 ;
+    };
+}
+
+EXPORT_SYMBOL_FLAGS_WEAK_DEFINITION!()

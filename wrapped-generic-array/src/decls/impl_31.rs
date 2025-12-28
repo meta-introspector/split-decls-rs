@@ -1,15 +1,14 @@
 macro_rules! deps {
     () => {
+        GenericArray!();
         ArrayLength!();
-        GenericArrayImplOdd!();
-        IsWithinUsizeBound!();
     };
 }
 
 macro_rules! impl_31 {
     () => {
         deps!();
-        unsafe impl < N : ArrayLength > ArrayLength for UInt < N , B1 > where Self : IsWithinUsizeBound , { # [doc (hidden)] type ArrayType < T > = GenericArrayImplOdd < T , N :: ArrayType < T > > ; }
+        impl < T : Debug , N : ArrayLength > Debug for GenericArray < T , N > { fn fmt (& self , fmt : & mut fmt :: Formatter) -> fmt :: Result { self . as_slice () . fmt (fmt) } }
     };
 }
 

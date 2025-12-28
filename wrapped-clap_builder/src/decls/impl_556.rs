@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        Parser!();
+        HelpTemplate!();
+    };
+}
+
+macro_rules! impl_556 {
+    () => {
+        deps!();
+        # [doc = " Basic template methods"] impl HelpTemplate < '_ , '_ > { # [doc = " Writes binary name of a Parser Object to the wrapped stream."] fn write_display_name (& mut self) { debug ! ("HelpTemplate::write_display_name") ; let display_name = wrap (& self . cmd . get_display_name () . unwrap_or_else (| | self . cmd . get_name ()) . replace ("{n}" , "\n") , self . term_w ,) ; self . writer . push_string (display_name) ; } # [doc = " Writes binary name of a Parser Object to the wrapped stream."] # [cfg (not (feature = "unstable-v5"))] fn write_bin_name (& mut self) { debug ! ("HelpTemplate::write_bin_name") ; let bin_name = if let Some (bn) = self . cmd . get_bin_name () { if bn . contains (' ') { bn . replace (' ' , "-") } else { wrap (& self . cmd . get_name () . replace ("{n}" , "\n") , self . term_w) } } else { wrap (& self . cmd . get_name () . replace ("{n}" , "\n") , self . term_w) } ; self . writer . push_string (bin_name) ; } fn write_version (& mut self) { let version = self . cmd . get_version () . or_else (| | self . cmd . get_long_version ()) ; if let Some (output) = version { self . writer . push_string (wrap (output , self . term_w)) ; } } fn write_author (& mut self , before_new_line : bool , after_new_line : bool) { if let Some (author) = self . cmd . get_author () { if before_new_line { self . writer . push_str ("\n") ; } self . writer . push_string (wrap (author , self . term_w)) ; if after_new_line { self . writer . push_str ("\n") ; } } } fn write_about (& mut self , before_new_line : bool , after_new_line : bool) { let about = if self . use_long { self . cmd . get_long_about () . or_else (| | self . cmd . get_about ()) } else { self . cmd . get_about () } ; if let Some (output) = about { if before_new_line { self . writer . push_str ("\n") ; } let mut output = output . clone () ; output . replace_newline_var () ; output . wrap (self . term_w) ; self . writer . push_styled (& output) ; if after_new_line { self . writer . push_str ("\n") ; } } } fn write_before_help (& mut self) { debug ! ("HelpTemplate::write_before_help") ; let before_help = if self . use_long { self . cmd . get_before_long_help () . or_else (| | self . cmd . get_before_help ()) } else { self . cmd . get_before_help () } ; if let Some (output) = before_help { let mut output = output . clone () ; output . replace_newline_var () ; output . wrap (self . term_w) ; self . writer . push_styled (& output) ; self . writer . push_str ("\n\n") ; } } fn write_after_help (& mut self) { debug ! ("HelpTemplate::write_after_help") ; let after_help = if self . use_long { self . cmd . get_after_long_help () . or_else (| | self . cmd . get_after_help ()) } else { self . cmd . get_after_help () } ; if let Some (output) = after_help { self . writer . push_str ("\n\n") ; let mut output = output . clone () ; output . replace_newline_var () ; output . wrap (self . term_w) ; self . writer . push_styled (& output) ; } } }
+    };
+}
+
+impl_556!()

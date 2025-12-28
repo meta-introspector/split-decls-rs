@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        Iter!();
+        Outcome!();
+        Error!();
+    };
+}
+
+macro_rules! all {
+    () => {
+        deps!();
+        pub (crate) fn all (maybe_beginning_of_extensions : & [u8] , object_hash : gix_hash :: Kind ,) -> Result < (Outcome , & [u8]) , Error > { let mut ext_iter = match extension :: Iter :: new_without_checksum (maybe_beginning_of_extensions , object_hash) { Some (iter) => iter , None => return Ok ((Outcome :: default () , maybe_beginning_of_extensions)) , } ; let mut ext = Outcome :: default () ; for (signature , ext_data) in ext_iter . by_ref () { match signature { extension :: tree :: SIGNATURE => { ext . tree = extension :: tree :: decode (ext_data , object_hash) ; } extension :: resolve_undo :: SIGNATURE => { ext . resolve_undo = extension :: resolve_undo :: decode (ext_data , object_hash) ; } extension :: untracked_cache :: SIGNATURE => { ext . untracked = extension :: untracked_cache :: decode (ext_data , object_hash) ; } extension :: fs_monitor :: SIGNATURE => { ext . fs_monitor = extension :: fs_monitor :: decode (ext_data) ; } extension :: end_of_index_entry :: SIGNATURE => { ext . end_of_index = true ; } extension :: index_entry_offset_table :: SIGNATURE => { ext . offset_table = true ; } mandatory if mandatory [0] . is_ascii_lowercase () => match mandatory { extension :: link :: SIGNATURE => ext . link = extension :: link :: decode (ext_data , object_hash) ? . into () , extension :: sparse :: SIGNATURE => { if ! ext_data . is_empty () { return Err (Error :: MandatoryUnimplemented { signature : mandatory }) ; } ext . is_sparse = true ; } unknown => return Err (Error :: MandatoryUnimplemented { signature : unknown }) , } , _unknown => { } } } Ok ((ext , & maybe_beginning_of_extensions [ext_iter . consumed ..])) }
+    };
+}
+
+all!()

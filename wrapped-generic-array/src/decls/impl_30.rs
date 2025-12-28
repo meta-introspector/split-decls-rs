@@ -1,15 +1,14 @@
 macro_rules! deps {
     () => {
-        IsWithinUsizeBound!();
-        GenericArrayImplEven!();
         ArrayLength!();
+        GenericArray!();
     };
 }
 
 macro_rules! impl_30 {
     () => {
         deps!();
-        unsafe impl < N : ArrayLength > ArrayLength for UInt < N , B0 > where Self : IsWithinUsizeBound , { # [doc (hidden)] type ArrayType < T > = GenericArrayImplEven < T , N :: ArrayType < T > > ; }
+        impl < T : Ord , N : ArrayLength > Ord for GenericArray < T , N > { # [inline (always)] fn cmp (& self , other : & GenericArray < T , N >) -> Ordering { Ord :: cmp (self . as_slice () , other . as_slice ()) } }
     };
 }
 

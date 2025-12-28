@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        StringTable!();
+        StringId!();
+    };
+}
+
+macro_rules! impl_1018 {
+    () => {
+        deps!();
+        impl < 'a > StringTable < 'a > { # [doc = " Add a string to the string table."] # [doc = ""] # [doc = " Panics if the string table has already been written, or"] # [doc = " if the string contains a null byte."] pub fn add (& mut self , string : & 'a [u8]) -> StringId { assert ! (self . offsets . is_empty ()) ; assert ! (! string . contains (& 0)) ; let id = self . strings . insert_full (string) . 0 ; StringId (id) } # [doc = " Return the id of the given string."] # [doc = ""] # [doc = " Panics if the string is not in the string table."] # [allow (dead_code)] pub fn get_id (& self , string : & [u8]) -> StringId { let id = self . strings . get_index_of (string) . unwrap () ; StringId (id) } # [doc = " Return the string for the given id."] # [doc = ""] # [doc = " Panics if the string is not in the string table."] # [allow (dead_code)] pub fn get_string (& self , id : StringId) -> & 'a [u8] { self . strings . get_index (id . 0) . unwrap () } # [doc = " Return the offset of the given string."] # [doc = ""] # [doc = " Panics if the string table has not been written, or"] # [doc = " if the string is not in the string table."] pub fn get_offset (& self , id : StringId) -> usize { self . offsets [id . 0] } # [doc = " Append the string table to the given `Vec`, and"] # [doc = " calculate the list of string offsets."] # [doc = ""] # [doc = " `base` is the initial string table offset. For example,"] # [doc = " this should be 1 for ELF, to account for the initial"] # [doc = " null byte (which must have been written by the caller)."] # [doc = ""] # [doc = " Panics if the string table has already been written."] pub fn write (& mut self , base : usize , w : & mut Vec < u8 >) { assert ! (self . offsets . is_empty ()) ; let mut ids : Vec < _ > = (0 .. self . strings . len ()) . collect () ; sort (& mut ids , 1 , & self . strings) ; self . offsets = vec ! [0 ; ids . len ()] ; let mut offset = base ; let mut previous = & [] [..] ; for id in ids { let string = self . strings . get_index (id) . unwrap () ; if previous . ends_with (string) { self . offsets [id] = offset - string . len () - 1 ; } else { self . offsets [id] = offset ; w . extend_from_slice (string) ; w . push (0) ; offset += string . len () + 1 ; previous = string ; } } } # [doc = " Calculate the size in bytes of the string table."] # [doc = ""] # [doc = " `base` is the initial string table offset. For example,"] # [doc = " this should be 1 for ELF, to account for the initial"] # [doc = " null byte."] # [allow (dead_code)] pub fn size (& self , base : usize) -> usize { let mut ids : Vec < _ > = (0 .. self . strings . len ()) . collect () ; sort (& mut ids , 1 , & self . strings) ; let mut size = base ; let mut previous = & [] [..] ; for id in ids { let string = self . strings . get_index (id) . unwrap () ; if ! previous . ends_with (string) { size += string . len () + 1 ; previous = string ; } } size } }
+    };
+}
+
+impl_1018!()

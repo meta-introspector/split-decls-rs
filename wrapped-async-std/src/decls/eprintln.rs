@@ -1,0 +1,7 @@
+macro_rules! eprintln {
+    () => {
+        # [doc = " Prints to the standard error, with a newline."] # [doc = ""] # [doc = " Equivalent to the [`println!`] macro, except that output goes to"] # [doc = " [`io::stderr`] instead of `io::stdout`. See [`println!`] for"] # [doc = " example usage."] # [doc = ""] # [doc = " Use `eprintln!` only for error and progress messages. Use `println!`"] # [doc = " instead for the primary output of your program."] # [doc = ""] # [doc = " [`io::stderr`]: io/struct.Stderr.html"] # [doc = " [`println!`]: macro.println.html"] # [doc = ""] # [doc = " # Panics"] # [doc = ""] # [doc = " Panics if writing to `io::stderr` fails."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " # async_std::task::block_on(async {"] # [doc = " #"] # [doc = " use async_std::eprintln;"] # [doc = ""] # [doc = " eprintln!(\"Error: Could not complete task\").await;"] # [doc = " #"] # [doc = " # })"] # [doc = " ```"] # [cfg (feature = "unstable")] # [cfg_attr (feature = "docs" , doc (cfg (unstable)))] # [macro_export] macro_rules ! eprintln { () => (async { $ crate :: eprint ! ("\n") . await ; }) ; ($ ($ arg : tt) *) => (async { $ crate :: io :: _eprint (format_args ! ($ ($ arg) *)) . await ; $ crate :: io :: _eprint (format_args ! ("\n")) . await ; }) ; }
+    };
+}
+
+eprintln!()

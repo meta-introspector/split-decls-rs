@@ -1,8 +1,9 @@
 macro_rules! deps {
     () => {
         ChunkState!();
-        CVWords!();
         IncrementCounter!();
+        CVWords!();
+        Platform!();
     };
 }
 

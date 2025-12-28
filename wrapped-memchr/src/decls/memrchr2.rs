@@ -1,0 +1,7 @@
+macro_rules! memrchr2 {
+    () => {
+        # [doc = " Search for the last occurrence of two possible bytes in a haystack."] # [doc = ""] # [doc = " This returns the index corresponding to the last occurrence of one of the"] # [doc = " needle bytes in `haystack`, or `None` if one is not found. If an index is"] # [doc = " returned, it is guaranteed to be less than `haystack.len()`."] # [doc = ""] # [doc = " While this is semantically the same as something like"] # [doc = " `haystack.iter().rposition(|&b| b == needle1 || b == needle2)`, this"] # [doc = " routine will attempt to use highly optimized vector operations that can be"] # [doc = " an order of magnitude faster (or more)."] # [doc = ""] # [doc = " # Example"] # [doc = ""] # [doc = " This shows how to find the last position of one of two possible bytes in a"] # [doc = " haystack."] # [doc = ""] # [doc = " ```"] # [doc = " use memchr::memrchr2;"] # [doc = ""] # [doc = " let haystack = b\"the quick brown fox\";"] # [doc = " assert_eq!(memrchr2(b'k', b'o', haystack), Some(17));"] # [doc = " ```"] # [inline] pub fn memrchr2 (needle1 : u8 , needle2 : u8 , haystack : & [u8]) -> Option < usize > { unsafe { generic :: search_slice_with_raw (haystack , | start , end | { memrchr2_raw (needle1 , needle2 , start , end) }) } }
+    };
+}
+
+memrchr2!()

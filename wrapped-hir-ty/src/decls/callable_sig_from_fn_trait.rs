@@ -1,5 +1,12 @@
 macro_rules! deps {
     () => {
+        PolyFnSig!();
+        FnTrait!();
+        TraitEnvironment!();
+        FnSig!();
+        AliasTy!();
+        HirDatabase!();
+        Binder!();
         FnAbi!();
     };
 }

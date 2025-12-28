@@ -1,0 +1,7 @@
+macro_rules! REBASE_OPCODE_DO_REBASE_ULEB_TIMES {
+    () => {
+        pub const REBASE_OPCODE_DO_REBASE_ULEB_TIMES : u8 = 0x60 ;
+    };
+}
+
+REBASE_OPCODE_DO_REBASE_ULEB_TIMES!()

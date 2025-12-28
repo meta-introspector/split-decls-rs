@@ -1,0 +1,23 @@
+macro_rules! deps {
+    () => {
+        ImportTable!();
+        Bytes!();
+        ImportDescriptorIterator!();
+        U16Bytes!();
+        ImportThunkList!();
+        Name!();
+        Result!();
+        ImageNtHeaders!();
+        ImageThunkData!();
+        Import!();
+    };
+}
+
+macro_rules! impl_695 {
+    () => {
+        deps!();
+        impl < 'data > ImportTable < 'data > { # [doc = " Create a new import table parser."] # [doc = ""] # [doc = " The import descriptors start at `import_address`."] # [doc = " The size declared in the `IMAGE_DIRECTORY_ENTRY_IMPORT` data directory is"] # [doc = " ignored by the Windows loader, and so descriptors will be parsed until a null entry."] # [doc = ""] # [doc = " `section_data` should be from the section containing `import_address`, and"] # [doc = " `section_address` should be the address of that section. Pointers within the"] # [doc = " descriptors and thunks may point to anywhere within the section data."] pub fn new (section_data : & 'data [u8] , section_address : u32 , import_address : u32) -> Self { ImportTable { section_data : Bytes (section_data) , section_address , import_address , } } # [doc = " Return an iterator for the import descriptors."] pub fn descriptors (& self) -> Result < ImportDescriptorIterator < 'data > > { let offset = self . import_address . wrapping_sub (self . section_address) ; let mut data = self . section_data ; data . skip (offset as usize) . read_error ("Invalid PE import descriptor address") ? ; Ok (ImportDescriptorIterator { data , null : false }) } # [doc = " Return a library name given its address."] # [doc = ""] # [doc = " This address may be from [`pe::ImageImportDescriptor::name`]."] pub fn name (& self , address : u32) -> Result < & 'data [u8] > { self . section_data . read_string_at (address . wrapping_sub (self . section_address) as usize) . read_error ("Invalid PE import descriptor name") } # [doc = " Return a list of thunks given its address."] # [doc = ""] # [doc = " This address may be from [`pe::ImageImportDescriptor::original_first_thunk`]"] # [doc = " or [`pe::ImageImportDescriptor::first_thunk`]."] pub fn thunks (& self , address : u32) -> Result < ImportThunkList < 'data > > { let offset = address . wrapping_sub (self . section_address) ; let mut data = self . section_data ; data . skip (offset as usize) . read_error ("Invalid PE import thunk table address") ? ; Ok (ImportThunkList { data }) } # [doc = " Parse a thunk."] pub fn import < Pe : ImageNtHeaders > (& self , thunk : Pe :: ImageThunkData) -> Result < Import < 'data > > { if thunk . is_ordinal () { Ok (Import :: Ordinal (thunk . ordinal ())) } else { let (hint , name) = self . hint_name (thunk . address ()) ? ; Ok (Import :: Name (hint , name)) } } # [doc = " Return the hint and name at the given address."] # [doc = ""] # [doc = " This address may be from [`pe::ImageThunkData32`] or [`pe::ImageThunkData64`]."] # [doc = ""] # [doc = " The hint is an index into the export name pointer table in the target library."] pub fn hint_name (& self , address : u32) -> Result < (u16 , & 'data [u8]) > { let offset = address . wrapping_sub (self . section_address) ; let mut data = self . section_data ; data . skip (offset as usize) . read_error ("Invalid PE import thunk address") ? ; let hint = data . read :: < U16Bytes < LE > > () . read_error ("Missing PE import thunk hint") ? . get (LE) ; let name = data . read_string () . read_error ("Missing PE import thunk name") ? ; Ok ((hint , name)) } }
+    };
+}
+
+impl_695!()

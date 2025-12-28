@@ -1,0 +1,28 @@
+macro_rules! deps {
+    () => {
+        Error!();
+        ReadRef!();
+        Result!();
+        FileHeader!();
+        SymbolIndex!();
+        SectionIndex!();
+        Sym!();
+        StringTable!();
+        Endian!();
+        SymbolTable!();
+        Item!();
+        SymbolMap!();
+        SectionHeader!();
+        SectionTable!();
+        SymbolMapEntry!();
+    };
+}
+
+macro_rules! impl_323 {
+    () => {
+        deps!();
+        impl < 'data , Elf : FileHeader , R : ReadRef < 'data > > SymbolTable < 'data , Elf , R > { # [doc = " Parse the given symbol table section."] pub fn parse (endian : Elf :: Endian , data : R , sections : & SectionTable < 'data , Elf , R > , section_index : SectionIndex , section : & Elf :: SectionHeader ,) -> read :: Result < SymbolTable < 'data , Elf , R > > { debug_assert ! (section . sh_type (endian) == elf :: SHT_DYNSYM || section . sh_type (endian) == elf :: SHT_SYMTAB) ; let symbols = section . data_as_array (endian , data) . read_error ("Invalid ELF symbol table data") ? ; let link = SectionIndex (section . sh_link (endian) as usize) ; let strings = sections . strings (endian , data , link) ? ; let mut shndx_section = SectionIndex (0) ; let mut shndx = & [] [..] ; for (i , s) in sections . enumerate () { if s . sh_type (endian) == elf :: SHT_SYMTAB_SHNDX && s . link (endian) == section_index { shndx_section = i ; shndx = s . data_as_array (endian , data) . read_error ("Invalid ELF symtab_shndx data") ? ; } } Ok (SymbolTable { section : section_index , string_section : link , symbols , strings , shndx , shndx_section , }) } # [doc = " Return the section index of this symbol table."] # [inline] pub fn section (& self) -> SectionIndex { self . section } # [doc = " Return the section index of the shndx table."] # [inline] pub fn shndx_section (& self) -> SectionIndex { self . shndx_section } # [doc = " Return the section index of the linked string table."] # [inline] pub fn string_section (& self) -> SectionIndex { self . string_section } # [doc = " Return the string table used for the symbol names."] # [inline] pub fn strings (& self) -> StringTable < 'data , R > { self . strings } # [doc = " Return the symbol table."] # [inline] pub fn symbols (& self) -> & 'data [Elf :: Sym] { self . symbols } # [doc = " Iterate over the symbols."] # [doc = ""] # [doc = " This includes the null symbol at index 0, which you will usually need to skip."] # [inline] pub fn iter (& self) -> slice :: Iter < 'data , Elf :: Sym > { self . symbols . iter () } # [doc = " Iterate over the symbols and their indices."] # [doc = ""] # [doc = " This includes the null symbol at index 0, which you will usually need to skip."] # [inline] pub fn enumerate (& self) -> impl Iterator < Item = (SymbolIndex , & 'data Elf :: Sym) > { self . symbols . iter () . enumerate () . map (| (i , sym) | (SymbolIndex (i) , sym)) } # [doc = " Return true if the symbol table is empty."] # [inline] pub fn is_empty (& self) -> bool { self . symbols . is_empty () } # [doc = " The number of symbols."] # [inline] pub fn len (& self) -> usize { self . symbols . len () } # [doc = " Get the symbol at the given index."] # [doc = ""] # [doc = " Returns an error for null entry at index 0."] pub fn symbol (& self , index : SymbolIndex) -> read :: Result < & 'data Elf :: Sym > { if index == SymbolIndex (0) { return Err (read :: Error ("Invalid ELF symbol index")) ; } self . symbols . get (index . 0) . read_error ("Invalid ELF symbol index") } # [doc = " Return the extended section index for the given symbol if present."] # [inline] pub fn shndx (& self , endian : Elf :: Endian , index : SymbolIndex) -> Option < u32 > { self . shndx . get (index . 0) . map (| x | x . get (endian)) } # [doc = " Return the section index for the given symbol."] # [doc = ""] # [doc = " This uses the extended section index if present."] pub fn symbol_section (& self , endian : Elf :: Endian , symbol : & Elf :: Sym , index : SymbolIndex ,) -> read :: Result < Option < SectionIndex > > { match symbol . st_shndx (endian) { elf :: SHN_UNDEF => Ok (None) , elf :: SHN_XINDEX => { let shndx = self . shndx (endian , index) . read_error ("Missing ELF symbol extended index") ? ; if shndx == 0 { Ok (None) } else { Ok (Some (SectionIndex (shndx as usize))) } } shndx if shndx < elf :: SHN_LORESERVE => Ok (Some (SectionIndex (shndx . into ()))) , _ => Ok (None) , } } # [doc = " Return the symbol name for the given symbol."] pub fn symbol_name (& self , endian : Elf :: Endian , symbol : & Elf :: Sym) -> read :: Result < & 'data [u8] > { symbol . name (endian , self . strings) } # [doc = " Construct a map from addresses to a user-defined map entry."] pub fn map < Entry : SymbolMapEntry , F : Fn (& 'data Elf :: Sym) -> Option < Entry > > (& self , endian : Elf :: Endian , f : F ,) -> SymbolMap < Entry > { let mut symbols = Vec :: with_capacity (self . symbols . len ()) ; for symbol in self . symbols { if ! symbol . is_definition (endian) { continue ; } if let Some (entry) = f (symbol) { symbols . push (entry) ; } } SymbolMap :: new (symbols) } }
+    };
+}
+
+impl_323!()

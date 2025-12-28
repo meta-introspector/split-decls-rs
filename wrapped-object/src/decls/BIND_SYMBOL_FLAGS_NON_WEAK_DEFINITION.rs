@@ -1,0 +1,7 @@
+macro_rules! BIND_SYMBOL_FLAGS_NON_WEAK_DEFINITION {
+    () => {
+        pub const BIND_SYMBOL_FLAGS_NON_WEAK_DEFINITION : u8 = 0x8 ;
+    };
+}
+
+BIND_SYMBOL_FLAGS_NON_WEAK_DEFINITION!()

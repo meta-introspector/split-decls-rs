@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Function!();
-        Struct!();
         Closure!();
+        Struct!();
         Variant!();
+        Function!();
     };
 }
 

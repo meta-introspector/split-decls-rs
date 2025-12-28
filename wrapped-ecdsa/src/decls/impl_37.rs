@@ -1,15 +1,13 @@
 macro_rules! deps {
     () => {
-        SignatureWithOid!();
-        SignatureSize!();
-        EcdsaCurve!();
+        SignatureRef!();
     };
 }
 
 macro_rules! impl_37 {
     () => {
         deps!();
-        # [cfg (feature = "digest")] impl < C > Copy for SignatureWithOid < C > where C : EcdsaCurve , SignatureSize < C > : ArraySize , < SignatureSize < C > as ArraySize > :: ArrayType < u8 > : Copy , { }
+        impl < 'a > DecodeValue < 'a > for SignatureRef < 'a > { type Error = der :: Error ; fn decode_value < R : Reader < 'a > > (reader : & mut R , _header : Header) -> der :: Result < Self > { Ok (Self { r : UintRef :: decode (reader) ? , s : UintRef :: decode (reader) ? , }) } }
     };
 }
 

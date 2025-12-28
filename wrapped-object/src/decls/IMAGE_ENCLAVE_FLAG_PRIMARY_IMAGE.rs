@@ -1,0 +1,7 @@
+macro_rules! IMAGE_ENCLAVE_FLAG_PRIMARY_IMAGE {
+    () => {
+        pub const IMAGE_ENCLAVE_FLAG_PRIMARY_IMAGE : u32 = 0x0000_0001 ;
+    };
+}
+
+IMAGE_ENCLAVE_FLAG_PRIMARY_IMAGE!()

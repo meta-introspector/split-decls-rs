@@ -1,13 +1,14 @@
 macro_rules! deps {
     () => {
-        DbPanicContext!();
+        CrateName!();
+        CrateDisplayName!();
     };
 }
 
 macro_rules! impl_30 {
     () => {
         deps!();
-        impl Drop for DbPanicContext { fn drop (& mut self) { Self :: with_ctx (| ctx | assert ! (ctx . pop () . is_some ())) ; } }
+        impl From < CrateName > for CrateDisplayName { fn from (crate_name : CrateName) -> CrateDisplayName { let canonical_name = crate_name . 0 . clone () ; CrateDisplayName { crate_name , canonical_name } } }
     };
 }
 

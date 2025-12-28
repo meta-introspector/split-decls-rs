@@ -1,0 +1,18 @@
+macro_rules! deps {
+    () => {
+        Err!();
+        Error!();
+        Needed!();
+        ErrorKind!();
+        IResult!();
+    };
+}
+
+macro_rules! separated_list0_test {
+    () => {
+        deps!();
+        # [test] # [cfg (feature = "alloc")] fn separated_list0_test () { use core :: num :: NonZeroUsize ; fn multi (i : & [u8]) -> IResult < & [u8] , Vec < & [u8] > > { separated_list0 (tag (",") , tag ("abcd")) . parse (i) } fn multi_empty (i : & [u8]) -> IResult < & [u8] , Vec < & [u8] > > { separated_list0 (tag (",") , tag ("")) . parse (i) } fn empty_sep (i : & [u8]) -> IResult < & [u8] , Vec < & [u8] > > { separated_list0 (tag ("") , tag ("abc")) . parse (i) } fn multi_longsep (i : & [u8]) -> IResult < & [u8] , Vec < & [u8] > > { separated_list0 (tag ("..") , tag ("abcd")) . parse (i) } fn empty_both (i : & [u8]) -> IResult < & [u8] , Vec < & [u8] > > { separated_list0 (tag ("") , tag ("")) . parse (i) } let a = & b"abcdef" [..] ; let b = & b"abcd,abcdef" [..] ; let c = & b"azerty" [..] ; let d = & b",,abc" [..] ; let e = & b"abcd,abcd,ef" [..] ; let f = & b"abc" [..] ; let g = & b"abcd." [..] ; let h = & b"abcd,abc" [..] ; let i = & b"abcabc" [..] ; let res1 = vec ! [& b"abcd" [..]] ; assert_eq ! (multi (a) , Ok ((& b"ef" [..] , res1))) ; let res2 = vec ! [& b"abcd" [..] , & b"abcd" [..]] ; assert_eq ! (multi (b) , Ok ((& b"ef" [..] , res2))) ; assert_eq ! (multi (c) , Ok ((& b"azerty" [..] , Vec :: new ()))) ; let res3 = vec ! [& b"" [..] , & b"" [..] , & b"" [..]] ; assert_eq ! (multi_empty (d) , Ok ((& b"abc" [..] , res3))) ; assert_eq ! (empty_sep (i) , Err (Err :: Incomplete (Needed :: Size (NonZeroUsize :: new (3) . unwrap ())))) ; assert_eq ! (empty_both (i) , Err (Err :: Error (error_position ! (i , ErrorKind :: SeparatedList)))) ; let res4 = vec ! [& b"abcd" [..] , & b"abcd" [..]] ; assert_eq ! (multi (e) , Ok ((& b",ef" [..] , res4))) ; assert_eq ! (multi (f) , Err (Err :: Incomplete (Needed :: new (1)))) ; assert_eq ! (multi_longsep (g) , Err (Err :: Incomplete (Needed :: new (1)))) ; assert_eq ! (multi (h) , Err (Err :: Incomplete (Needed :: new (1)))) ; }
+    };
+}
+
+separated_list0_test!()

@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        Easy2!();
+        Callbacks!();
+        EasyData!();
+    };
+}
+
+macro_rules! Easy {
+    () => {
+        deps!();
+        # [doc = " Raw bindings to a libcurl \"easy session\"."] # [doc = ""] # [doc = " This type is the same as the `Easy2` type in this library except that it"] # [doc = " does not contain a type parameter. Callbacks from curl are all controlled"] # [doc = " via closures on this `Easy` type, and this type namely has a `transfer`"] # [doc = " method as well for ergonomic management of these callbacks."] # [doc = ""] # [doc = " There's not necessarily a right answer for which type is correct to use, but"] # [doc = " as a general rule of thumb `Easy` is typically a reasonable choice for"] # [doc = " synchronous I/O and `Easy2` is a good choice for asynchronous I/O."] # [doc = ""] # [doc = " ## Examples"] # [doc = ""] # [doc = " Creating a handle which can be used later"] # [doc = ""] # [doc = " ```"] # [doc = " use curl::easy::Easy;"] # [doc = ""] # [doc = " let handle = Easy::new();"] # [doc = " ```"] # [doc = ""] # [doc = " Send an HTTP request, writing the response to stdout."] # [doc = ""] # [doc = " ```"] # [doc = " use std::io::{stdout, Write};"] # [doc = ""] # [doc = " use curl::easy::Easy;"] # [doc = ""] # [doc = " let mut handle = Easy::new();"] # [doc = " handle.url(\"https://www.rust-lang.org/\").unwrap();"] # [doc = " handle.write_function(|data| {"] # [doc = "     stdout().write_all(data).unwrap();"] # [doc = "     Ok(data.len())"] # [doc = " }).unwrap();"] # [doc = " handle.perform().unwrap();"] # [doc = " ```"] # [doc = ""] # [doc = " Collect all output of an HTTP request to a vector."] # [doc = ""] # [doc = " ```"] # [doc = " use curl::easy::Easy;"] # [doc = ""] # [doc = " let mut data = Vec::new();"] # [doc = " let mut handle = Easy::new();"] # [doc = " handle.url(\"https://www.rust-lang.org/\").unwrap();"] # [doc = " {"] # [doc = "     let mut transfer = handle.transfer();"] # [doc = "     transfer.write_function(|new_data| {"] # [doc = "         data.extend_from_slice(new_data);"] # [doc = "         Ok(new_data.len())"] # [doc = "     }).unwrap();"] # [doc = "     transfer.perform().unwrap();"] # [doc = " }"] # [doc = " println!(\"{:?}\", data);"] # [doc = " ```"] # [doc = ""] # [doc = " More examples of various properties of an HTTP request can be found on the"] # [doc = " specific methods as well."] # [derive (Debug)] pub struct Easy { inner : Easy2 < EasyData > , }
+    };
+}
+
+Easy!()

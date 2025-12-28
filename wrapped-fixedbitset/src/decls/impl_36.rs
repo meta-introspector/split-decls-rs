@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Union!();
+        Block!();
     };
 }
 
 macro_rules! impl_36 {
     () => {
         deps!();
-        impl < 'a > DoubleEndedIterator for Union < 'a > { fn next_back (& mut self) -> Option < Self :: Item > { self . iter . next_back () } }
+        impl BitAnd for Block { type Output = Block ; # [inline] fn bitand (self , other : Self) -> Self :: Output { unsafe { Self (_mm256_and_si256 (self . 0 , other . 0)) } } }
     };
 }
 

@@ -1,14 +1,13 @@
 macro_rules! deps {
     () => {
-        ObjectIdentifier!();
-        ObjectIdentifierRef!();
+        RootArcs!();
     };
 }
 
 macro_rules! impl_15 {
     () => {
         deps!();
-        impl < const MAX_SIZE : usize > Deref for ObjectIdentifier < MAX_SIZE > { type Target = ObjectIdentifierRef ; fn deref (& self) -> & ObjectIdentifierRef { self . as_oid_ref () } }
+        impl From < RootArcs > for u8 { fn from (root_arcs : RootArcs) -> u8 { root_arcs . 0 } }
     };
 }
 

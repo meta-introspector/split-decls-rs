@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Workspace!();
         PatchSection!();
         Package!();
+        Workspace!();
         Dependency!();
     };
 }

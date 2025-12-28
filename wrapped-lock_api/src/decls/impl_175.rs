@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        ArcRwLockReadGuard!();
+        RawRwLockUpgradeDowngrade!();
+        ArcRwLockUpgradableReadGuard!();
+    };
+}
+
+macro_rules! impl_175 {
+    () => {
+        deps!();
+        # [cfg (feature = "arc_lock")] impl < R : RawRwLockUpgradeDowngrade , T : ? Sized > ArcRwLockUpgradableReadGuard < R , T > { # [doc = " Atomically downgrades an upgradable read lock lock into a shared read lock"] # [doc = " without allowing any writers to take exclusive access of the lock in the"] # [doc = " meantime."] # [doc = ""] # [doc = " Note that if there are any writers currently waiting to take the lock"] # [doc = " then other readers may not be able to acquire the lock even if it was"] # [doc = " downgraded."] # [track_caller] pub fn downgrade (s : Self) -> ArcRwLockReadGuard < R , T > { unsafe { s . rwlock . raw . downgrade_upgradable () ; } let s = ManuallyDrop :: new (s) ; let rwlock = unsafe { ptr :: read (& s . rwlock) } ; ArcRwLockReadGuard { rwlock , marker : PhantomData , } } # [doc = " First, atomically upgrades an upgradable read lock lock into an exclusive write lock,"] # [doc = " blocking the current thread until it can be acquired."] # [doc = ""] # [doc = " Then, calls the provided closure with an exclusive reference to the lock's data."] # [doc = ""] # [doc = " Finally, atomically downgrades the lock back to an upgradable read lock."] # [doc = " The closure's return value is returned."] # [doc = ""] # [doc = " This function only requires a mutable reference to the guard, unlike"] # [doc = " `upgrade` which takes the guard by value."] # [track_caller] pub fn with_upgraded < Ret , F : FnOnce (& mut T) -> Ret > (& mut self , f : F) -> Ret { unsafe { self . rwlock . raw . upgrade () ; } defer ! (unsafe { self . rwlock . raw . downgrade_to_upgradable () }) ; f (unsafe { & mut * self . rwlock . data . get () }) } # [doc = " First, tries to atomically upgrade an upgradable read lock into an exclusive write lock."] # [doc = ""] # [doc = " If the access could not be granted at this time, then `None` is returned."] # [doc = ""] # [doc = " Otherwise, calls the provided closure with an exclusive reference to the lock's data,"] # [doc = " and finally downgrades the lock back to an upgradable read lock."] # [doc = " The closure's return value is wrapped in `Some` and returned."] # [doc = ""] # [doc = " This function only requires a mutable reference to the guard, unlike"] # [doc = " `try_upgrade` which takes the guard by value."] # [track_caller] pub fn try_with_upgraded < Ret , F : FnOnce (& mut T) -> Ret > (& mut self , f : F) -> Option < Ret > { if unsafe { self . rwlock . raw . try_upgrade () } { defer ! (unsafe { self . rwlock . raw . downgrade_to_upgradable () }) ; Some (f (unsafe { & mut * self . rwlock . data . get () })) } else { None } } }
+    };
+}
+
+impl_175!()

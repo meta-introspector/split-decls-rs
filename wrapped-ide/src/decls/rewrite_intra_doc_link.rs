@@ -1,0 +1,7 @@
+macro_rules! rewrite_intra_doc_link {
+    () => {
+        fn rewrite_intra_doc_link (db : & RootDatabase , def : Definition , target : & str , title : & str , is_inner_doc : bool , link_type : LinkType ,) -> Option < (String , String) > { let (link , ns) = parse_intra_doc_link (target) ; let (link , anchor) = match link . split_once ('#') { Some ((new_link , anchor)) => (new_link , Some (anchor)) , None => (link , None) , } ; let resolved = resolve_doc_path_for_def (db , def , link , ns , is_inner_doc) ? ; let mut url = get_doc_base_urls (db , resolved , None , None) . 0 ? ; let (_ , file , frag) = filename_and_frag_for_def (db , resolved) ? ; if let Some (path) = mod_path_of_def (db , resolved) { url = url . join (& path) . ok () ? ; } let frag = anchor . or (frag . as_deref ()) ; url = url . join (& file) . ok () ? ; url . set_fragment (frag) ; let title = match link_type { LinkType :: Email | LinkType :: Autolink | LinkType :: Shortcut | LinkType :: Collapsed | LinkType :: Reference | LinkType :: Inline => title . to_owned () , LinkType :: ShortcutUnknown | LinkType :: CollapsedUnknown | LinkType :: ReferenceUnknown => { strip_prefixes_suffixes (title) . to_owned () } } ; Some ((url . into () , title)) }
+    };
+}
+
+rewrite_intra_doc_link!()

@@ -1,0 +1,22 @@
+macro_rules! deps {
+    () => {
+        SubstitutionTable!();
+        ArgScopeStack!();
+        DemangleAsInner!();
+        DemangleState!();
+        Result!();
+        DemangleWrite!();
+        DemangleContext!();
+        DemangleNodeType!();
+        DemangleOptions!();
+    };
+}
+
+macro_rules! impl_41 {
+    () => {
+        deps!();
+        impl < 'a , W > DemangleContext < 'a , W > where W : 'a + DemangleWrite , { # [doc = " Construct a new `DemangleContext`."] pub fn new (subs : & 'a SubstitutionTable , input : & 'a [u8] , options : DemangleOptions , out : & 'a mut W ,) -> DemangleContext < 'a , W > { DemangleContext { subs : subs , max_recursion : options . recursion_limit . map (| v | v . get ()) . unwrap_or (128) , inner : vec ! [] , input : input , source_name : None , out : out , bytes_written : 0 , last_char_written : None , is_lambda_arg : false , is_template_prefix : false , is_template_prefix_in_nested_name : false , is_template_argument_pack : false , is_explicit_obj_param : false , show_params : ! options . no_params , show_return_type : ! options . no_return_type , show_expression_literal_types : ! options . hide_expression_literal_types , state : Cell :: new (DemangleState { recursion_level : 0 }) , } } # [doc = " Get the current recursion level for this context."] pub fn recursion_level (& self) -> u32 { self . state . get () . recursion_level } # [inline] fn enter_recursion (& self) -> fmt :: Result { let mut state = self . state . get () ; let new_recursion_level = state . recursion_level + 1 ; if new_recursion_level >= self . max_recursion { log ! ("Hit too much recursion at level {}" , self . max_recursion) ; Err (Default :: default ()) } else { state . recursion_level = new_recursion_level ; self . state . set (state) ; Ok (()) } } # [inline] fn exit_recursion (& self) { let mut state = self . state . get () ; debug_assert ! (state . recursion_level >= 1) ; state . recursion_level -= 1 ; self . state . set (state) ; } # [inline] fn ensure (& mut self , ch : char) -> fmt :: Result { if self . last_char_written == Some (ch) { Ok (()) } else { write ! (self , "{}" , ch) ? ; Ok (()) } } # [inline] fn ensure_space (& mut self) -> fmt :: Result { self . ensure (' ') } # [inline] fn push_inner (& mut self , item : & 'a dyn DemangleAsInner < 'a , W >) { log ! ("DemangleContext::push_inner: {:?}" , item) ; self . inner . push (item) ; } # [inline] fn pop_inner (& mut self) -> Option < & 'a dyn DemangleAsInner < 'a , W > > { let popped = self . inner . pop () ; log ! ("DemangleContext::pop_inner: {:?}" , popped) ; popped } # [inline] fn pop_inner_if (& mut self , inner : & 'a dyn DemangleAsInner < 'a , W >) -> bool { let last = match self . inner . last () { None => return false , Some (last) => * last , } ; if ptr :: eq (last , inner) { self . inner . pop () ; true } else { false } } fn demangle_inner_prefixes < 'prev > (& mut self , scope : Option < ArgScopeStack < 'prev , 'a > > ,) -> fmt :: Result { log ! ("DemangleContext::demangle_inner_prefixes") ; let mut new_inner = vec ! [] ; while let Some (inner) = self . pop_inner () { if inner . downcast_to_function_type () . map_or (false , | f | ! f . cv_qualifiers . is_empty ()) { log ! ("DemangleContext::demangle_inner_prefixes: not a prefix, saving: {:?}" , inner) ; new_inner . push (inner) ; } else { log ! ("DemangleContext::demangle_inner_prefixes: demangling prefix: {:?}" , inner) ; inner . demangle_as_inner (self , scope) ? ; } } new_inner . reverse () ; self . inner = new_inner ; Ok (()) } fn demangle_inners < 'prev > (& mut self , scope : Option < ArgScopeStack < 'prev , 'a > >) -> fmt :: Result { while let Some (inner) = self . pop_inner () { inner . demangle_as_inner (self , scope) ? ; } Ok (()) } fn set_source_name (& mut self , start : usize , end : usize) { let ident = & self . input [start .. end] ; self . source_name = str :: from_utf8 (ident) . ok () ; } fn push_demangle_node (& mut self , t : DemangleNodeType) { self . out . push_demangle_node (t) ; } # [doc = " This should not be called on error paths."] # [doc = " pop_inner_if already doesn't balance if there are errors."] fn pop_demangle_node (& mut self) { self . out . pop_demangle_node () ; } }
+    };
+}
+
+impl_41!()

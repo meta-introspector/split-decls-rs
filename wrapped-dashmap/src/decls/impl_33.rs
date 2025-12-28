@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        DashMap!();
+        RawRwLock!();
     };
 }
 
 macro_rules! impl_33 {
     () => {
         deps!();
-        impl < K : Eq + Hash , V , S : BuildHasher + Clone + Default > FromIterator < (K , V) > for DashMap < K , V , S > { fn from_iter < I : IntoIterator < Item = (K , V) > > (intoiter : I) -> Self { let mut map = DashMap :: default () ; map . extend (intoiter) ; map } }
+        unsafe impl lock_api :: RawRwLockDowngrade for RawRwLock { # [inline] unsafe fn downgrade (& self) { let state = self . state . fetch_and (ONE_READER | WRITERS_PARKED , Ordering :: Release) ; if state & READERS_PARKED != 0 { parking_lot_core :: unpark_all ((self as * const _ as usize) + 1 , UnparkToken (0)) ; } } }
     };
 }
 

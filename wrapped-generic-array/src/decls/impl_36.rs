@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        GenericArray!();
         ArrayLength!();
+        GenericArray!();
     };
 }
 
 macro_rules! impl_36 {
     () => {
         deps!();
-        impl < T , N : ArrayLength > DerefMut for GenericArray < T , N > { # [inline (always)] fn deref_mut (& mut self) -> & mut [T] { GenericArray :: as_mut_slice (self) } }
+        impl < T : Hash , N : ArrayLength > Hash for GenericArray < T , N > { # [inline] fn hash < H > (& self , state : & mut H) where H : Hasher , { Hash :: hash (self . as_slice () , state) } }
     };
 }
 

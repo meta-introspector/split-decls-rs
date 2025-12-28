@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         ConjugacyClassAxiom!();
-        Declaration!();
         DummyConjugacyClassAxiom!();
+        Declaration!();
     };
 }
 

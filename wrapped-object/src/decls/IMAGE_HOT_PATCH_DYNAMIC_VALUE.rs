@@ -1,0 +1,7 @@
+macro_rules! IMAGE_HOT_PATCH_DYNAMIC_VALUE {
+    () => {
+        pub const IMAGE_HOT_PATCH_DYNAMIC_VALUE : u32 = 0x0007_8000 ;
+    };
+}
+
+IMAGE_HOT_PATCH_DYNAMIC_VALUE!()

@@ -1,6 +1,6 @@
 macro_rules! raw {
     () => {
-        mod raw ;
+        pub (crate) mod raw ;
     };
 }
 

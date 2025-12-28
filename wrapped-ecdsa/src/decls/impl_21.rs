@@ -2,14 +2,15 @@ macro_rules! deps {
     () => {
         Signature!();
         EcdsaCurve!();
-        SignatureSize!();
+        MaxSize!();
+        MaxOverhead!();
     };
 }
 
 macro_rules! impl_21 {
     () => {
         deps!();
-        impl < C > Copy for Signature < C > where C : EcdsaCurve , SignatureSize < C > : ArraySize , < SignatureSize < C > as ArraySize > :: ArrayType < u8 > : Copy , { }
+        impl < C > AsRef < [u8] > for Signature < C > where C : EcdsaCurve , MaxSize < C > : ArraySize , < FieldBytesSize < C > as Add > :: Output : Add < MaxOverhead > + ArraySize , { fn as_ref (& self) -> & [u8] { self . as_bytes () } }
     };
 }
 

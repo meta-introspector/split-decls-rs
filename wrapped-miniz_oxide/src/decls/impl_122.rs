@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        BitBuffer!();
+        HuffmanTable!();
+    };
+}
+
+macro_rules! impl_122 {
+    () => {
+        deps!();
+        impl HuffmanTable { const fn new () -> HuffmanTable { HuffmanTable { look_up : [0 ; FAST_LOOKUP_SIZE as usize] , tree : [0 ; MAX_HUFF_TREE_SIZE] , } } # [doc = " Look for a symbol in the fast lookup table."] # [doc = " The symbol is stored in the lower 9 bits, the length in the next 6."] # [doc = " If the returned value is negative, the code wasn't found in the"] # [doc = " fast lookup table and the full tree has to be traversed to find the code."] # [inline] fn fast_lookup (& self , bit_buf : BitBuffer) -> i16 { self . look_up [(bit_buf & BitBuffer :: from (FAST_LOOKUP_SIZE - 1)) as usize] } # [doc = " Get the symbol and the code length from the huffman tree."] # [inline] fn tree_lookup (& self , fast_symbol : i32 , bit_buf : BitBuffer , mut code_len : u8) -> (i32 , u32) { let mut symbol = fast_symbol ; loop { let tree_index = (! symbol + ((bit_buf >> code_len) & 1) as i32) as usize ; debug_assert ! (tree_index < self . tree . len ()) ; symbol = i32 :: from (self . tree . get (tree_index) . copied () . unwrap_or (i16 :: MAX)) ; code_len += 1 ; if symbol >= 0 { break ; } } (symbol , u32 :: from (code_len)) } # [inline] # [doc = " Look up a symbol and code length from the bits in the provided bit buffer."] # [doc = ""] # [doc = " Returns Some(symbol, length) on success,"] # [doc = " None if the length is 0."] # [doc = ""] # [doc = " It's possible we could avoid checking for 0 if we can guarantee a sane table."] # [doc = " TODO: Check if a smaller type for code_len helps performance."] fn lookup (& self , bit_buf : BitBuffer) -> (i32 , u32) { let symbol = self . fast_lookup (bit_buf) . into () ; if symbol >= 0 { let length = (symbol >> 9) as u32 ; (symbol , length) } else { self . tree_lookup (symbol , bit_buf , FAST_LOOKUP_BITS) } } }
+    };
+}
+
+impl_122!()

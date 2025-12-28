@@ -1,13 +1,16 @@
 macro_rules! deps {
     () => {
         Guard!();
+        Access!();
+        DynGuard!();
+        DynAccess!();
     };
 }
 
 macro_rules! impl_15 {
     () => {
         deps!();
-        impl < T : Default + RefCnt , S : Strategy < T > > Default for Guard < T , S > { fn default () -> Self { Self :: from (T :: default ()) } }
+        impl < T , A > DynAccess < T > for A where A : Access < T > , A :: Guard : 'static , { fn load (& self) -> DynGuard < T > { DynGuard (Box :: new (Access :: load (self))) } }
     };
 }
 

@@ -1,0 +1,7 @@
+macro_rules! DYLD_CACHE_SLIDE_PAGE_ATTR_NO_REBASE {
+    () => {
+        pub const DYLD_CACHE_SLIDE_PAGE_ATTR_NO_REBASE : u16 = 0x4000 ;
+    };
+}
+
+DYLD_CACHE_SLIDE_PAGE_ATTR_NO_REBASE!()

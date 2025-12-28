@@ -1,13 +1,14 @@
 macro_rules! deps {
     () => {
-        Iter!();
+        Utf8Components!();
+        Utf8Component!();
     };
 }
 
 macro_rules! impl_38 {
     () => {
         deps!();
-        impl FusedIterator for Iter < '_ > { }
+        impl < 'a > Iterator for Utf8Components < 'a > { type Item = Utf8Component < 'a > ; # [inline] fn next (& mut self) -> Option < Self :: Item > { self . 0 . next () . map (| component | { unsafe { Utf8Component :: new (component) } }) } }
     };
 }
 

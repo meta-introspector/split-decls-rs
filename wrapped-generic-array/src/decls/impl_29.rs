@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        IsWithinUsizeBound!();
-        MaxArrayLengthP1!();
+        ArrayLength!();
+        GenericArray!();
     };
 }
 
 macro_rules! impl_29 {
     () => {
         deps!();
-        impl < N > IsWithinUsizeBound for N where N : typenum :: IsLess < MaxArrayLengthP1 , Output = typenum :: consts :: True > { }
+        impl < T : PartialOrd , N : ArrayLength > PartialOrd for GenericArray < T , N > { # [inline (always)] fn partial_cmp (& self , other : & GenericArray < T , N >) -> Option < Ordering > { PartialOrd :: partial_cmp (self . as_slice () , other . as_slice ()) } }
     };
 }
 

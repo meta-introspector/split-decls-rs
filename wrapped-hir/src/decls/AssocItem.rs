@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Const!();
-        Function!();
         TypeAlias!();
+        Function!();
     };
 }
 

@@ -1,0 +1,19 @@
+macro_rules! deps {
+    () => {
+        Conflict!();
+        ResolutionFailure!();
+        Resolution!();
+        ConflictIndexEntryPathHint!();
+        ConflictIndexEntry!();
+        ConflictMapping!();
+    };
+}
+
+macro_rules! impl_145 {
+    () => {
+        deps!();
+        impl Conflict { pub (super) fn without_resolution (resolution : ResolutionFailure , changes : (& Change , & Change , ConflictMapping , ConflictMapping) , entries : [Option < ConflictIndexEntry > ; 3] ,) -> Self { Conflict :: maybe_resolved (Err (resolution) , changes , entries) } pub (super) fn with_resolution (resolution : Resolution , changes : (& Change , & Change , ConflictMapping , ConflictMapping) , entries : [Option < ConflictIndexEntry > ; 3] ,) -> Self { Conflict :: maybe_resolved (Ok (resolution) , changes , entries) } fn maybe_resolved (resolution : Result < Resolution , ResolutionFailure > , (ours , theirs , map , outer_map) : (& Change , & Change , ConflictMapping , ConflictMapping) , entries : [Option < ConflictIndexEntry > ; 3] ,) -> Self { Conflict { resolution , ours : ours . clone () , theirs : theirs . clone () , entries , map : map . to_global (outer_map) , } } pub (super) fn unknown (changes : (& Change , & Change , ConflictMapping , ConflictMapping)) -> Self { let (source_mode , source_id) = changes . 0 . source_entry_mode_and_id () ; let (our_mode , our_id) = changes . 0 . entry_mode_and_id () ; let (their_mode , their_id) = changes . 1 . entry_mode_and_id () ; let entries = [Some (ConflictIndexEntry { mode : source_mode , id : source_id . into () , path_hint : Some (ConflictIndexEntryPathHint :: Source) , }) , Some (ConflictIndexEntry { mode : our_mode , id : our_id . into () , path_hint : Some (ConflictIndexEntryPathHint :: Current) , }) , Some (ConflictIndexEntry { mode : their_mode , id : their_id . into () , path_hint : Some (ConflictIndexEntryPathHint :: RenamedOrTheirs) , }) ,] ; Conflict :: maybe_resolved (Err (ResolutionFailure :: Unknown) , changes , entries) } }
+    };
+}
+
+impl_145!()

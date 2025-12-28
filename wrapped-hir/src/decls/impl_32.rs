@@ -1,14 +1,20 @@
 macro_rules! deps {
     () => {
-        Type!();
-        TupleField!();
+        Impl!();
+        GenericDef!();
+        Adt!();
+        Trait!();
+        TypeAlias!();
+        Function!();
+        Const!();
+        Static!();
     };
 }
 
 macro_rules! impl_32 {
     () => {
         deps!();
-        impl TupleField { pub fn name (& self) -> Name { Name :: new_tuple_field (self . index as usize) } pub fn ty < 'db > (& self , db : & 'db dyn HirDatabase) -> Type < 'db > { let interner = DbInterner :: new_with (db , None , None) ; let ty = db . infer (self . owner) . tuple_field_access_type (self . tuple) . as_slice () . get (self . index as usize) . copied () . unwrap_or_else (| | Ty :: new_error (interner , ErrorGuaranteed)) ; Type { env : db . trait_environment_for_body (self . owner) , ty } } }
+        impl From < GenericDefId > for GenericDef { fn from (def : GenericDefId) -> Self { match def { GenericDefId :: FunctionId (it) => GenericDef :: Function (it . into ()) , GenericDefId :: AdtId (it) => GenericDef :: Adt (it . into ()) , GenericDefId :: TraitId (it) => GenericDef :: Trait (it . into ()) , GenericDefId :: TypeAliasId (it) => GenericDef :: TypeAlias (it . into ()) , GenericDefId :: ImplId (it) => GenericDef :: Impl (it . into ()) , GenericDefId :: ConstId (it) => GenericDef :: Const (it . into ()) , GenericDefId :: StaticId (it) => GenericDef :: Static (it . into ()) , } } }
     };
 }
 

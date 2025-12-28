@@ -1,0 +1,7 @@
+macro_rules! R_SHARC_DATA16_V3 {
+    () => {
+        # [doc = " 16-bit absolute address in bits 39:24 of a 48-bit instr"] # [doc = ""] # [doc = " Targets:"] # [doc = ""] # [doc = " * Type 12a"] pub const R_SHARC_DATA16_V3 : u32 = 0x11 ;
+    };
+}
+
+R_SHARC_DATA16_V3!()

@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        RangedU64ValueParser!();
+        RangedI64ValueParser!();
+        ValueParser!();
+    };
+}
+
+macro_rules! impl_259 {
+    () => {
+        deps!();
+        # [doc = " Create an `i64` [`ValueParser`] from a `..=M` range"] # [doc = ""] # [doc = " See [`RangedI64ValueParser`] for more control over the output type."] # [doc = ""] # [doc = " See also [`RangedU64ValueParser`]"] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```rust"] # [doc = " # use clap_builder as clap;"] # [doc = " let mut cmd = clap::Command::new(\"raw\")"] # [doc = "     .arg("] # [doc = "         clap::Arg::new(\"port\")"] # [doc = "             .long(\"port\")"] # [doc = "             .value_parser(..=3000)"] # [doc = "             .action(clap::ArgAction::Set)"] # [doc = "             .required(true)"] # [doc = "     );"] # [doc = ""] # [doc = " let m = cmd.try_get_matches_from_mut([\"cmd\", \"--port\", \"80\"]).unwrap();"] # [doc = " let port: i64 = *m.get_one(\"port\")"] # [doc = "     .expect(\"required\");"] # [doc = " assert_eq!(port, 80);"] # [doc = " ```"] impl From < std :: ops :: RangeToInclusive < i64 > > for ValueParser { fn from (value : std :: ops :: RangeToInclusive < i64 >) -> Self { let inner = RangedI64ValueParser :: < i64 > :: new () . range (..= value . end) ; Self :: from (inner) } }
+    };
+}
+
+impl_259!()

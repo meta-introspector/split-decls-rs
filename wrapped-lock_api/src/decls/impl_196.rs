@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        RawRwLockFair!();
+        MappedRwLockWriteGuard!();
+        RwLock!();
+    };
+}
+
+macro_rules! impl_196 {
+    () => {
+        deps!();
+        impl < 'a , R : RawRwLockFair + 'a , T : ? Sized + 'a > MappedRwLockWriteGuard < 'a , R , T > { # [doc = " Unlocks the `RwLock` using a fair unlock protocol."] # [doc = ""] # [doc = " By default, `RwLock` is unfair and allow the current thread to re-lock"] # [doc = " the `RwLock` before another has the chance to acquire the lock, even if"] # [doc = " that thread has been blocked on the `RwLock` for a long time. This is"] # [doc = " the default because it allows much higher throughput as it avoids"] # [doc = " forcing a context switch on every `RwLock` unlock. This can result in one"] # [doc = " thread acquiring a `RwLock` many more times than other threads."] # [doc = ""] # [doc = " However in some cases it can be beneficial to ensure fairness by forcing"] # [doc = " the lock to pass on to a waiting thread if there is one. This is done by"] # [doc = " using this method instead of dropping the `MappedRwLockWriteGuard` normally."] # [inline] # [track_caller] pub fn unlock_fair (s : Self) { unsafe { s . raw . unlock_exclusive_fair () ; } mem :: forget (s) ; } }
+    };
+}
+
+impl_196!()

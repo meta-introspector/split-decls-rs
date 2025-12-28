@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        Strategy!();
+        ArcSwapAny!();
+    };
+}
+
+macro_rules! impl_157 {
+    () => {
+        deps!();
+        impl < T , S : Strategy < Option < Arc < T > > > > ArcSwapAny < Option < Arc < T > > , S > { # [doc = " A convenience constructor directly from a pointed-to value."] # [doc = ""] # [doc = " This just allocates the `Arc` under the hood."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```rust"] # [doc = " use arc_swap::ArcSwapOption;"] # [doc = ""] # [doc = " let empty: ArcSwapOption<usize> = ArcSwapOption::from_pointee(None);"] # [doc = " assert!(empty.load().is_none());"] # [doc = " let non_empty: ArcSwapOption<usize> = ArcSwapOption::from_pointee(42);"] # [doc = " assert_eq!(42, **non_empty.load().as_ref().unwrap());"] # [doc = " ```"] pub fn from_pointee < V : Into < Option < T > > > (val : V) -> Self where S : Default , { Self :: new (val . into () . map (Arc :: new)) } # [doc = " A convenience constructor for an empty value."] # [doc = ""] # [doc = " This is equivalent to `ArcSwapOption::new(None)`."] pub fn empty () -> Self where S : Default , { Self :: new (None) } }
+    };
+}
+
+impl_157!()

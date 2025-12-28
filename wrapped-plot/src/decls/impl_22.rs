@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        Terminal!();
-        Figure!();
+        Vertical!();
+        Display!();
     };
 }
 
 macro_rules! impl_22 {
     () => {
         deps!();
-        impl Set < Terminal > for Figure { # [doc = " Changes the output terminal"] # [doc = ""] # [doc = " **Note** By default, the terminal is set to `Svg`"] fn set (& mut self , terminal : Terminal) -> & mut Figure { self . terminal = terminal ; self } }
+        impl Display < & 'static str > for Vertical { fn display (& self) -> & 'static str { match * self { Vertical :: Bottom => "bottom" , Vertical :: Center => "center" , Vertical :: Top => "top" , } } }
     };
 }
 

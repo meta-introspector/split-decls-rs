@@ -1,0 +1,17 @@
+macro_rules! deps {
+    () => {
+        NodeReservation!();
+        Debt!();
+        Access!();
+        Node!();
+    };
+}
+
+macro_rules! impl_76 {
+    () => {
+        deps!();
+        impl Node { # [doc = " Goes through the debt linked list."] # [doc = ""] # [doc = " This traverses the linked list, calling the closure on each node. If the closure returns"] # [doc = " `Some`, it terminates with that value early, otherwise it runs to the end."] pub (crate) fn traverse < R , F : FnMut (& 'static Node) -> Option < R > > (mut f : F) -> Option < R > { let mut current = unsafe { LIST_HEAD . load (SeqCst) . as_ref () } ; while let Some (node) = current { let result = f (node) ; if result . is_some () { return result ; } current = unsafe { node . next . as_ref () } ; } None } # [doc = " Put the current thread node into cooldown"] fn start_cooldown (& self) { let _reservation = self . reserve_writer () ; assert_eq ! (NODE_USED , self . in_use . swap (NODE_COOLDOWN , Release)) ; } # [doc = " Perform a cooldown if the node is ready."] # [doc = ""] # [doc = " See the ABA protection at the [helping]."] fn check_cooldown (& self) { if self . in_use . load (Acquire) == NODE_COOLDOWN { if self . active_writers . load (Relaxed) == 0 { let _ = self . in_use . compare_exchange (NODE_COOLDOWN , NODE_UNUSED , Relaxed , Relaxed) ; } } } # [doc = " Mark this node that a writer is currently playing with it."] pub fn reserve_writer (& self) -> NodeReservation { self . active_writers . fetch_add (1 , Acquire) ; NodeReservation (self) } # [doc = " \"Allocate\" a node."] # [doc = ""] # [doc = " Either a new one is created, or previous one is reused. The node is claimed to become"] # [doc = " in_use."] fn get () -> & 'static Self { Self :: traverse (| node | { node . check_cooldown () ; if node . in_use . compare_exchange (NODE_UNUSED , NODE_USED , SeqCst , Relaxed) . is_ok () { Some (node) } else { None } }) . unwrap_or_else (| | { let node = Box :: leak (Box :: < Node > :: default ()) ; node . helping . init () ; let mut head = LIST_HEAD . load (Relaxed) ; loop { node . next = head ; if let Err (old) = LIST_HEAD . compare_exchange_weak (head , node , SeqCst , Relaxed ,) { head = old ; } else { return node ; } } }) } # [doc = " Iterate over the fast slots."] pub (crate) fn fast_slots (& self) -> Iter < Debt > { self . fast . into_iter () } # [doc = " Access the helping slot."] pub (crate) fn helping_slot (& self) -> & Debt { self . helping . slot () } }
+    };
+}
+
+impl_76!()

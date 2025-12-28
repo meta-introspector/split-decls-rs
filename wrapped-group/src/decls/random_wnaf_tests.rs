@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        WnafGroup!();
+        Wnaf!();
+    };
+}
+
+macro_rules! random_wnaf_tests {
+    () => {
+        deps!();
+        pub fn random_wnaf_tests < G : WnafGroup > () { use crate :: wnaf :: * ; let mut rng = XorShiftRng :: from_seed ([0x59 , 0x62 , 0xbe , 0x5d , 0x76 , 0x3d , 0x31 , 0x8d , 0x17 , 0xdb , 0x37 , 0x32 , 0x54 , 0x06 , 0xbc , 0xe5 ,]) ; { let mut table = vec ! [] ; let mut wnaf = vec ! [] ; for w in 2 .. 14 { for _ in 0 .. 100 { let g = G :: random (& mut rng) ; let s = G :: Scalar :: random (& mut rng) ; let mut g1 = g ; g1 . mul_assign (s) ; wnaf_table (& mut table , g , w) ; wnaf_form (& mut wnaf , s . to_repr () , w) ; let g2 = wnaf_exp (& table , & wnaf) ; assert_eq ! (g1 , g2) ; } } } { fn only_compiles_if_send < S : Send > (_ : & S) { } for _ in 0 .. 100 { let g = G :: random (& mut rng) ; let s = G :: Scalar :: random (& mut rng) ; let mut g1 = g ; g1 . mul_assign (s) ; let g2 = { let mut wnaf = Wnaf :: new () ; wnaf . base (g , 1) . scalar (& s) } ; let g3 = { let mut wnaf = Wnaf :: new () ; wnaf . scalar (& s) . base (g) } ; let g4 = { let mut wnaf = Wnaf :: new () ; let mut shared = wnaf . base (g , 1) . shared () ; only_compiles_if_send (& shared) ; shared . scalar (& s) } ; let g5 = { let mut wnaf = Wnaf :: new () ; let mut shared = wnaf . scalar (& s) . shared () ; only_compiles_if_send (& shared) ; shared . base (g) } ; let g6 = { let mut wnaf = Wnaf :: new () ; { wnaf . base (G :: random (& mut rng) , 1) . scalar (& G :: Scalar :: random (& mut rng)) ; } wnaf . base (g , 1) . scalar (& s) } ; let g7 = { let mut wnaf = Wnaf :: new () ; { wnaf . base (G :: random (& mut rng) , 1) . scalar (& G :: Scalar :: random (& mut rng)) ; } wnaf . scalar (& s) . base (g) } ; let g8 = { let mut wnaf = Wnaf :: new () ; { wnaf . base (G :: random (& mut rng) , 1) . scalar (& G :: Scalar :: random (& mut rng)) ; } let mut shared = wnaf . base (g , 1) . shared () ; only_compiles_if_send (& shared) ; shared . scalar (& s) } ; let g9 = { let mut wnaf = Wnaf :: new () ; { wnaf . base (G :: random (& mut rng) , 1) . scalar (& G :: Scalar :: random (& mut rng)) ; } let mut shared = wnaf . scalar (& s) . shared () ; only_compiles_if_send (& shared) ; shared . base (g) } ; assert_eq ! (g1 , g2) ; assert_eq ! (g1 , g3) ; assert_eq ! (g1 , g4) ; assert_eq ! (g1 , g5) ; assert_eq ! (g1 , g6) ; assert_eq ! (g1 , g7) ; assert_eq ! (g1 , g8) ; assert_eq ! (g1 , g9) ; } } }
+    };
+}
+
+random_wnaf_tests!()

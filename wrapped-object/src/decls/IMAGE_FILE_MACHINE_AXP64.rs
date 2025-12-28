@@ -1,0 +1,7 @@
+macro_rules! IMAGE_FILE_MACHINE_AXP64 {
+    () => {
+        pub const IMAGE_FILE_MACHINE_AXP64 : u16 = IMAGE_FILE_MACHINE_ALPHA64 ;
+    };
+}
+
+IMAGE_FILE_MACHINE_AXP64!()

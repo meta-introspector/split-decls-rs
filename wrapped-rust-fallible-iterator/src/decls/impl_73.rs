@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        FallibleIterator!();
-        SkipWhile!();
+        IntoFallible!();
+        DoubleEndedFallibleIterator!();
     };
 }
 
 macro_rules! impl_73 {
     () => {
         deps!();
-        impl < I , P > FallibleIterator for SkipWhile < I , P > where I : FallibleIterator , P : FnMut (& I :: Item) -> Result < bool , I :: Error > , { type Item = I :: Item ; type Error = I :: Error ; # [inline] fn next (& mut self) -> Result < Option < I :: Item > , I :: Error > { let flag = & mut self . flag ; let pred = & mut self . predicate ; self . it . find (move | x | { if * flag || ! pred (x) ? { * flag = true ; Ok (true) } else { Ok (false) } }) } # [inline] fn size_hint (& self) -> (usize , Option < usize >) { let hint = self . it . size_hint () ; if self . flag { hint } else { (0 , hint . 1) } } }
+        impl < T , I > DoubleEndedFallibleIterator for IntoFallible < I > where I : DoubleEndedIterator < Item = T > , { # [inline] fn next_back (& mut self) -> Result < Option < T > , Infallible > { Ok (self . 0 . next_back ()) } # [inline] fn try_rfold < B , E2 , F > (& mut self , init : B , f : F) -> Result < B , E2 > where E2 : From < Infallible > , F : FnMut (B , T) -> Result < B , E2 > , { self . 0 . try_rfold (init , f) } }
     };
 }
 

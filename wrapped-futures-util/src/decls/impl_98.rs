@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        Shared!();
+        WeakShared!();
+    };
+}
+
+macro_rules! impl_98 {
+    () => {
+        deps!();
+        impl < Fut > Shared < Fut > where Fut : Future , { # [doc = " Returns [`Some`] containing a reference to this [`Shared`]'s output if"] # [doc = " it has already been computed by a clone or [`None`] if it hasn't been"] # [doc = " computed yet or this [`Shared`] already returned its output from"] # [doc = " [`poll`](Future::poll)."] pub fn peek (& self) -> Option < & Fut :: Output > { if let Some (inner) = self . inner . as_ref () { match inner . notifier . state . load (SeqCst) { COMPLETE => unsafe { return Some (inner . output ()) } , POISONED => panic ! ("inner future panicked during poll") , _ => { } } } None } # [doc = " Creates a new [`WeakShared`] for this [`Shared`]."] # [doc = ""] # [doc = " Returns [`None`] if it has already been polled to completion."] pub fn downgrade (& self) -> Option < WeakShared < Fut > > { if let Some (inner) = self . inner . as_ref () { return Some (WeakShared (Arc :: downgrade (inner))) ; } None } # [doc = " Gets the number of strong pointers to this allocation."] # [doc = ""] # [doc = " Returns [`None`] if it has already been polled to completion."] # [doc = ""] # [doc = " # Safety"] # [doc = ""] # [doc = " This method by itself is safe, but using it correctly requires extra care. Another thread"] # [doc = " can change the strong count at any time, including potentially between calling this method"] # [doc = " and acting on the result."] pub fn strong_count (& self) -> Option < usize > { self . inner . as_ref () . map (Arc :: strong_count) } # [doc = " Gets the number of weak pointers to this allocation."] # [doc = ""] # [doc = " Returns [`None`] if it has already been polled to completion."] # [doc = ""] # [doc = " # Safety"] # [doc = ""] # [doc = " This method by itself is safe, but using it correctly requires extra care. Another thread"] # [doc = " can change the weak count at any time, including potentially between calling this method"] # [doc = " and acting on the result."] pub fn weak_count (& self) -> Option < usize > { self . inner . as_ref () . map (Arc :: weak_count) } # [doc = " Hashes the internal state of this `Shared` in a way that's compatible with `ptr_eq`."] pub fn ptr_hash < H : Hasher > (& self , state : & mut H) { match self . inner . as_ref () { Some (arc) => { state . write_u8 (1) ; ptr :: hash (Arc :: as_ptr (arc) , state) ; } None => { state . write_u8 (0) ; } } } # [doc = " Returns `true` if the two `Shared`s point to the same future (in a vein similar to"] # [doc = " `Arc::ptr_eq`)."] # [doc = ""] # [doc = " Returns `false` if either `Shared` has terminated."] pub fn ptr_eq (& self , rhs : & Self) -> bool { let lhs = match self . inner . as_ref () { Some (lhs) => lhs , None => return false , } ; let rhs = match rhs . inner . as_ref () { Some (rhs) => rhs , None => return false , } ; Arc :: ptr_eq (lhs , rhs) } }
+    };
+}
+
+impl_98!()

@@ -1,0 +1,19 @@
+macro_rules! deps {
+    () => {
+        Remote!();
+        Name!();
+        Note!();
+        Item!();
+        PrepareFetch!();
+        Error!();
+    };
+}
+
+macro_rules! impl_90 {
+    () => {
+        deps!();
+        # [doc = " Builder"] impl PrepareFetch { # [doc = " Use `f` to apply arbitrary changes to the remote that is about to be used to fetch a pack."] # [doc = ""] # [doc = " The passed in `remote` will be un-named and pre-configured to be a default remote as we know it from git-clone."] # [doc = " It is not yet present in the configuration of the repository,"] # [doc = " but each change it will eventually be written to the configuration prior to performing a the fetch operation,"] # [doc = " _all changes done in `f()` will be persisted_."] # [doc = ""] # [doc = " It can also be used to configure additional options, like those for fetching tags. Note that"] # [doc = " [`with_fetch_tags()`](crate::Remote::with_fetch_tags()) should be called here to configure the clone as desired."] # [doc = " Otherwise, a clone is configured to be complete and fetches all tags, not only those reachable from all branches."] pub fn configure_remote (mut self , f : impl FnMut (crate :: Remote < '_ >) -> Result < crate :: Remote < '_ > , Box < dyn std :: error :: Error + Send + Sync > > + 'static ,) -> Self { self . configure_remote = Some (Box :: new (f)) ; self } # [doc = " Set the remote's name to the given value after it was configured using the function provided via"] # [doc = " [`configure_remote()`](Self::configure_remote())."] # [doc = ""] # [doc = " If not set here, it defaults to `origin` or the value of `clone.defaultRemoteName`."] pub fn with_remote_name (mut self , name : impl Into < BString >) -> Result < Self , crate :: remote :: name :: Error > { self . remote_name = Some (crate :: remote :: name :: validated (name) ?) ; Ok (self) } # [doc = " Make this clone a shallow one with the respective choice of shallow-ness."] pub fn with_shallow (mut self , shallow : crate :: remote :: fetch :: Shallow) -> Self { self . shallow = shallow ; self } # [doc = " Apply the given configuration `values` right before readying the actual fetch from the remote."] # [doc = " The configuration is marked with [source API](gix_config::Source::Api), and will not be written back, it's"] # [doc = " retained only in memory."] pub fn with_in_memory_config_overrides (mut self , values : impl IntoIterator < Item = impl Into < BString > >) -> Self { self . config_overrides = values . into_iter () . map (Into :: into) . collect () ; self } # [doc = " Set the `name` of the reference to check out, instead of the remote `HEAD`."] # [doc = " If `None`, the `HEAD` will be used, which is the default."] # [doc = ""] # [doc = " Note that `name` should be a partial name like `main` or `feat/one`, but can be a full ref name."] # [doc = " If a branch on the remote matches, it will automatically be retrieved even without a refspec."] pub fn with_ref_name < 'a , Name , E > (mut self , name : Option < Name >) -> Result < Self , E > where Name : TryInto < & 'a gix_ref :: PartialNameRef , Error = E > , { self . ref_name = name . map (TryInto :: try_into) . transpose () ? . map (ToOwned :: to_owned) ; Ok (self) } }
+    };
+}
+
+impl_90!()

@@ -1,0 +1,17 @@
+macro_rules! deps {
+    () => {
+        TDEFLFlush!();
+        CompressorOxide!();
+        CallbackOxide!();
+        TDEFLStatus!();
+    };
+}
+
+macro_rules! compress_inner {
+    () => {
+        deps!();
+        fn compress_inner (d : & mut CompressorOxide , callback : & mut CallbackOxide , flush : TDEFLFlush ,) -> (TDEFLStatus , usize , usize) { d . params . out_buf_ofs = 0 ; d . params . src_pos = 0 ; let prev_ok = d . params . prev_return_status == TDEFLStatus :: Okay ; let flush_finish_once = d . params . flush != TDEFLFlush :: Finish || flush == TDEFLFlush :: Finish ; d . params . flush = flush ; if ! prev_ok || ! flush_finish_once { d . params . prev_return_status = TDEFLStatus :: BadParam ; return (d . params . prev_return_status , 0 , 0) ; } if d . params . flush_remaining != 0 || d . params . finished { let res = flush_output_buffer (callback , & mut d . params) ; d . params . prev_return_status = res . 0 ; return res ; } let one_probe = d . params . flags & MAX_PROBES_MASK == 1 ; let greedy = d . params . flags & TDEFL_GREEDY_PARSING_FLAG != 0 ; let filter_or_rle = d . params . flags & (TDEFL_FILTER_MATCHES | TDEFL_FORCE_ALL_RAW_BLOCKS) != 0 ; let raw = d . params . flags & TDEFL_FORCE_ALL_RAW_BLOCKS != 0 ; let compress_success = if raw { compress_stored (d , callback) } else if one_probe && greedy && ! filter_or_rle { compress_fast (d , callback) } else { compress_normal (d , callback) } ; if ! compress_success { return (d . params . prev_return_status , d . params . src_pos , d . params . out_buf_ofs ,) ; } if let Some (in_buf) = callback . in_buf { if d . params . flags & (TDEFL_WRITE_ZLIB_HEADER | TDEFL_COMPUTE_ADLER32) != 0 { d . params . adler32 = update_adler32 (d . params . adler32 , & in_buf [.. d . params . src_pos]) ; } } let flush_none = d . params . flush == TDEFLFlush :: None ; let in_left = callback . in_buf . map_or (0 , | buf | buf . len ()) - d . params . src_pos ; let remaining = in_left != 0 || d . params . flush_remaining != 0 ; if ! flush_none && d . dict . lookahead_size == 0 && ! remaining { let flush = d . params . flush ; match flush_block (d , callback , flush) { Err (_) => { d . params . prev_return_status = TDEFLStatus :: PutBufFailed ; return (d . params . prev_return_status , d . params . src_pos , d . params . out_buf_ofs ,) ; } Ok (x) if x < 0 => { return (d . params . prev_return_status , d . params . src_pos , d . params . out_buf_ofs ,) } _ => { d . params . finished = d . params . flush == TDEFLFlush :: Finish ; if d . params . flush == TDEFLFlush :: Full { d . dict . b . hash . fill (0) ; d . dict . b . next . fill (0) ; d . dict . size = 0 ; } } } } let res = flush_output_buffer (callback , & mut d . params) ; d . params . prev_return_status = res . 0 ; res }
+    };
+}
+
+compress_inner!()

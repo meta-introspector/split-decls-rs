@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        OutOfRange!();
+        TimeDelta!();
     };
 }
 
 macro_rules! impl_19 {
     () => {
         deps!();
-        impl fmt :: Debug for OutOfRange { fn fmt (& self , f : & mut fmt :: Formatter) -> fmt :: Result { write ! (f , "out of range") } }
+        impl Mul < i32 > for TimeDelta { type Output = TimeDelta ; fn mul (self , rhs : i32) -> TimeDelta { self . checked_mul (rhs) . expect ("`TimeDelta * i32` overflowed") } }
     };
 }
 

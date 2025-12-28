@@ -1,0 +1,17 @@
+macro_rules! deps {
+    () => {
+        RawVec!();
+        TryReserveError!();
+        Allocator!();
+        AllocError!();
+    };
+}
+
+macro_rules! impl_94 {
+    () => {
+        deps!();
+        impl < T , A : Allocator > RawVec < T , A > { # [doc = " Returns if the buffer needs to grow to fulfill the needed extra capacity."] # [doc = " Mainly used to make inlining reserve-calls possible without inlining `grow`."] # [inline (always)] fn needs_to_grow (& self , len : usize , additional : usize) -> bool { additional > self . capacity () . wrapping_sub (len) } # [inline (always)] fn set_ptr_and_cap (& mut self , ptr : NonNull < [u8] > , cap : usize) { self . ptr = unsafe { NonNull :: new_unchecked (ptr . cast () . as_ptr ()) } ; self . cap = cap ; } # [inline (always)] fn grow_amortized (& mut self , len : usize , additional : usize) -> Result < () , TryReserveError > { debug_assert ! (additional > 0) ; if mem :: size_of :: < T > () == 0 { return Err (CapacityOverflow . into ()) ; } let required_cap = len . checked_add (additional) . ok_or (CapacityOverflow) ? ; let cap = cmp :: max (self . cap * 2 , required_cap) ; let cap = cmp :: max (Self :: MIN_NON_ZERO_CAP , cap) ; let new_layout = Layout :: array :: < T > (cap) ; let ptr = finish_grow (new_layout , self . current_memory () , & mut self . alloc) ? ; self . set_ptr_and_cap (ptr , cap) ; Ok (()) } # [inline (always)] fn grow_exact (& mut self , len : usize , additional : usize) -> Result < () , TryReserveError > { if mem :: size_of :: < T > () == 0 { return Err (CapacityOverflow . into ()) ; } let cap = len . checked_add (additional) . ok_or (CapacityOverflow) ? ; let new_layout = Layout :: array :: < T > (cap) ; let ptr = finish_grow (new_layout , self . current_memory () , & mut self . alloc) ? ; self . set_ptr_and_cap (ptr , cap) ; Ok (()) } # [cfg (not (no_global_oom_handling))] # [inline (always)] fn shrink (& mut self , cap : usize) -> Result < () , TryReserveError > { assert ! (cap <= self . capacity () , "Tried to shrink to a larger capacity") ; let (ptr , layout) = if let Some (mem) = self . current_memory () { mem } else { return Ok (()) ; } ; let ptr = unsafe { let new_layout = Layout :: array :: < T > (cap) . unwrap_unchecked () ; self . alloc . shrink (ptr , layout , new_layout) . map_err (| _ | AllocError { layout : new_layout , non_exhaustive : () , }) ? } ; self . set_ptr_and_cap (ptr , cap) ; Ok (()) } }
+    };
+}
+
+impl_94!()

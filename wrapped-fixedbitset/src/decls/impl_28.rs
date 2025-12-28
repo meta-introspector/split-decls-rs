@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        SymmetricDifference!();
+        Block!();
     };
 }
 
 macro_rules! impl_28 {
     () => {
         deps!();
-        impl < 'a > DoubleEndedIterator for SymmetricDifference < 'a > { fn next_back (& mut self) -> Option < Self :: Item > { self . iter . next_back () } }
+        impl BitOrAssign for Block { # [inline] fn bitor_assign (& mut self , other : Self) { unsafe { self . 0 = _mm256_or_pd (self . 0 , other . 0) ; } } }
     };
 }
 

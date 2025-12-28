@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        Repository!();
+        Note!();
+        Error!();
+    };
+}
+
+macro_rules! impl_322 {
+    () => {
+        deps!();
+        impl crate :: Repository { # [doc = " Create a graph data-structure capable of accelerating graph traversals and storing state of type `T` with each commit"] # [doc = " it encountered."] # [doc = ""] # [doc = " Note that the `cache` will be used if present, and it's best obtained with"] # [doc = " [`commit_graph_if_enabled()`](crate::Repository::commit_graph_if_enabled())."] # [doc = ""] # [doc = " Note that a commitgraph is only allowed to be used if `core.commitGraph` is true (the default), and that configuration errors are"] # [doc = " ignored as well."] # [doc = ""] # [doc = " ### Performance"] # [doc = ""] # [doc = " Note that the [Graph][gix_revwalk::Graph] can be sensitive to various object database settings that may affect the performance"] # [doc = " of the commit walk."] pub fn revision_graph < 'cache , T > (& self , cache : Option < & 'cache gix_commitgraph :: Graph > ,) -> gix_revwalk :: Graph < '_ , 'cache , T > { gix_revwalk :: Graph :: new (& self . objects , cache) } # [doc = " Return a cache for commits and their graph structure, as managed by `git commit-graph`, for accelerating commit walks on"] # [doc = " a low level."] # [doc = ""] # [doc = " Note that [`revision_graph()`][crate::Repository::revision_graph()] should be preferred for general purpose walks that don't"] # [doc = " rely on the actual commit cache to be present, while leveraging the commit-graph if possible."] pub fn commit_graph (& self) -> Result < gix_commitgraph :: Graph , gix_commitgraph :: init :: Error > { gix_commitgraph :: at (self . objects . store_ref () . path () . join ("info")) } # [doc = " Return a newly opened commit-graph if it is available *and* enabled in the Git configuration."] pub fn commit_graph_if_enabled (& self ,) -> Result < Option < gix_commitgraph :: Graph > , super :: commit_graph_if_enabled :: Error > { Ok (self . config . may_use_commit_graph () ? . then (| | gix_commitgraph :: at (self . objects . store_ref () . path () . join ("info"))) . transpose () . or_else (| err | match err { gix_commitgraph :: init :: Error :: Io { err , .. } if err . kind () == std :: io :: ErrorKind :: NotFound => Ok (None) , _ => Err (err) , }) ?) } }
+    };
+}
+
+impl_322!()

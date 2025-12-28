@@ -1,0 +1,7 @@
+macro_rules! get_args_of {
+    () => {
+        fn get_args_of (parent : & Command , p_global : Option < & Command >) -> String { debug ! ("get_args_of") ; let mut segments = vec ! [String :: from ("_arguments \"${_arguments_options[@]}\" : \\")] ; let opts = write_opts_of (parent , p_global) ; let flags = write_flags_of (parent , p_global) ; let positionals = write_positionals_of (parent) ; if ! opts . is_empty () { segments . push (opts) ; } if ! flags . is_empty () { segments . push (flags) ; } if ! positionals . is_empty () { segments . push (positionals) ; } if parent . has_subcommands () { let parent_bin_name = parent . get_bin_name () . expect ("crate::generate should have set the bin_name") ; let subcommand_bin_name = format ! ("\":: :_{name}_commands\" \\" , name = parent_bin_name . replace (' ' , "__")) ; segments . push (subcommand_bin_name) ; let subcommand_text = format ! ("\"*::: :->{name}\" \\" , name = parent . get_name ()) ; segments . push (subcommand_text) ; } else if parent . is_allow_external_subcommands_set () { segments . push (String :: from ("\"*::external_command:_default\" \\")) ; } segments . push (String :: from ("&& ret=0")) ; segments . join ("\n") }
+    };
+}
+
+get_args_of!()

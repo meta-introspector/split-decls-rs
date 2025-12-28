@@ -1,0 +1,7 @@
+macro_rules! IMAGE_WEAK_EXTERN_SEARCH_LIBRARY {
+    () => {
+        pub const IMAGE_WEAK_EXTERN_SEARCH_LIBRARY : u32 = 2 ;
+    };
+}
+
+IMAGE_WEAK_EXTERN_SEARCH_LIBRARY!()

@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Itertools!();
+        MapSpecialCaseFnInto!();
     };
 }
 
 macro_rules! impl_56 {
     () => {
         deps!();
-        impl < T > Itertools for T where T : Iterator + ? Sized { }
+        impl < U > std :: fmt :: Debug for MapSpecialCaseFnInto < U > { debug_fmt_fields ! (MapSpecialCaseFnInto , 0) ; }
     };
 }
 

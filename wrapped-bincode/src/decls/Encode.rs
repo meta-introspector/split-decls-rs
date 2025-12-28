@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        Encoder!();
+        EncodeError!();
+    };
+}
+
+macro_rules! Encode {
+    () => {
+        deps!();
+        # [doc = " Any source that can be encoded. This trait should be implemented for all types that you want to be able to use with any of the `encode_with` methods."] # [doc = ""] # [doc = " This trait will be automatically implemented if you enable the `derive` feature and add `#[derive(bincode::Encode)]` to your trait."] # [doc = ""] # [doc = " # Implementing this trait manually"] # [doc = ""] # [doc = " If you want to implement this trait for your type, the easiest way is to add a `#[derive(bincode::Encode)]`, build and check your `target/generated/bincode/` folder. This should generate a `<Struct name>_Encode.rs` file."] # [doc = ""] # [doc = " For this struct:"] # [doc = ""] # [doc = " ```"] # [doc = " struct Entity {"] # [doc = "     pub x: f32,"] # [doc = "     pub y: f32,"] # [doc = " }"] # [doc = " ```"] # [doc = " It will look something like:"] # [doc = ""] # [doc = " ```"] # [doc = " # struct Entity {"] # [doc = " #     pub x: f32,"] # [doc = " #     pub y: f32,"] # [doc = " # }"] # [doc = " impl bincode::Encode for Entity {"] # [doc = "     fn encode<E: bincode::enc::Encoder>("] # [doc = "         &self,"] # [doc = "         encoder: &mut E,"] # [doc = "     ) -> core::result::Result<(), bincode::error::EncodeError> {"] # [doc = "         bincode::Encode::encode(&self.x, encoder)?;"] # [doc = "         bincode::Encode::encode(&self.y, encoder)?;"] # [doc = "         Ok(())"] # [doc = "     }"] # [doc = " }"] # [doc = " ```"] # [doc = ""] # [doc = " From here you can add/remove fields, or add custom logic."] pub trait Encode { # [doc = " Encode a given type."] fn encode < E : Encoder > (& self , encoder : & mut E) -> Result < () , EncodeError > ; }
+    };
+}
+
+Encode!()

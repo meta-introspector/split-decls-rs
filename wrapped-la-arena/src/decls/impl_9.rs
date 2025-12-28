@@ -1,13 +1,15 @@
 macro_rules! deps {
     () => {
+        ArenaMap!();
         Idx!();
+        ArenaMapIter!();
     };
 }
 
 macro_rules! impl_9 {
     () => {
         deps!();
-        impl < T > PartialOrd for Idx < T > { fn partial_cmp (& self , other : & Self) -> Option < cmp :: Ordering > { Some (self . cmp (other)) } }
+        impl < T , V > ArenaMapIter < Idx < T > , V > { fn mapper ((idx , o) : (usize , Option < V >)) -> Option < (Idx < T > , V) > { Some ((ArenaMap :: < Idx < T > , V > :: from_idx (idx) , o ?)) } }
     };
 }
 

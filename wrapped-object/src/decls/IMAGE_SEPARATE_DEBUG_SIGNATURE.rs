@@ -1,0 +1,7 @@
+macro_rules! IMAGE_SEPARATE_DEBUG_SIGNATURE {
+    () => {
+        pub const IMAGE_SEPARATE_DEBUG_SIGNATURE : u16 = 0x4944 ;
+    };
+}
+
+IMAGE_SEPARATE_DEBUG_SIGNATURE!()

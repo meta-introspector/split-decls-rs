@@ -1,0 +1,7 @@
+macro_rules! IMAGE_COMDAT_SELECT_ASSOCIATIVE {
+    () => {
+        pub const IMAGE_COMDAT_SELECT_ASSOCIATIVE : u8 = 5 ;
+    };
+}
+
+IMAGE_COMDAT_SELECT_ASSOCIATIVE!()

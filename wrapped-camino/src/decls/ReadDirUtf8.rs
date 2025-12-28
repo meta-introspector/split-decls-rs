@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Utf8DirEntry!();
         FromPathBufError!();
+        Utf8DirEntry!();
     };
 }
 

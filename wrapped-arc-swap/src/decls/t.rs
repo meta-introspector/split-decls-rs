@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        ArcSwapOption!();
-        ArcSwapAny!();
-        ArcSwap!();
         Guard!();
+        ArcSwapAny!();
+        ArcSwapOption!();
+        ArcSwap!();
     };
 }
 

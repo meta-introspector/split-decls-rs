@@ -1,14 +1,13 @@
 macro_rules! deps {
     () => {
-        DefWithBodyId!();
-        VariantId!();
+        Key!();
     };
 }
 
 macro_rules! impl_132 {
     () => {
         deps!();
-        impl From < EnumVariantId > for DefWithBodyId { fn from (id : EnumVariantId) -> Self { DefWithBodyId :: VariantId (id) } }
+        impl < K , V , P > Clone for Key < K , V , P > { fn clone (& self) -> Key < K , V , P > { * self } }
     };
 }
 

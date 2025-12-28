@@ -1,13 +1,14 @@
 macro_rules! deps {
     () => {
-        GenericArrayImplEven!();
+        GenericArray!();
+        ArrayLength!();
     };
 }
 
 macro_rules! impl_21 {
     () => {
         deps!();
-        impl < T : Clone , U : Clone > Clone for GenericArrayImplEven < T , U > { # [inline (always)] fn clone (& self) -> GenericArrayImplEven < T , U > { unsafe { core :: hint :: unreachable_unchecked () } } }
+        impl < N : ArrayLength > fmt :: LowerHex for GenericArray < u8 , N > where N : Add < N > , Sum < N , N > : ArrayLength , { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { generic_hex :: < _ , false > (self , f) } }
     };
 }
 

@@ -1,5 +1,12 @@
+macro_rules! deps {
+    () => {
+        Description!();
+    };
+}
+
 macro_rules! derive_description {
     () => {
+        deps!();
         # [proc_macro_derive (Description , attributes (graphql))] pub fn derive_description (input : TokenStream) -> TokenStream { let desc_args = match args :: Description :: from_derive_input (& parse_macro_input ! (input as DeriveInput)) { Ok (desc_args) => desc_args , Err (err) => return TokenStream :: from (err . write_errors ()) , } ; match description :: generate (& desc_args) { Ok (expanded) => expanded , Err (err) => err . write_errors () . into () , } }
     };
 }

@@ -1,14 +1,13 @@
 macro_rules! deps {
     () => {
-        Interned!();
-        Internable!();
+        Symbol!();
     };
 }
 
 macro_rules! impl_15 {
     () => {
         deps!();
-        impl < T : Internable + ? Sized > Clone for Interned < T > { fn clone (& self) -> Self { Self { arc : self . arc . clone () } } }
+        impl fmt :: Debug for Symbol { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { self . as_str () . fmt (f) } }
     };
 }
 

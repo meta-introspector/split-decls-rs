@@ -7,7 +7,7 @@ macro_rules! deps {
 macro_rules! impl_24 {
     () => {
         deps!();
-        impl From < RangeToInclusive < usize > > for TimesRange { fn from (r : RangeToInclusive < usize >) -> TimesRange { TimesRange (0 .. r . end + 1) } }
+        impl From < Range < usize > > for TimesRange { fn from (r : Range < usize >) -> TimesRange { assert ! (r . end > r . start , "Backwards range") ; TimesRange (r) } }
     };
 }
 

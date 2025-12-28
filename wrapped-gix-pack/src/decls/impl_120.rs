@@ -1,0 +1,20 @@
+macro_rules! deps {
+    () => {
+        Tree!();
+        Header!();
+        Entry!();
+        Object!();
+        Error!();
+        Offset!();
+        Kind!();
+    };
+}
+
+macro_rules! impl_120 {
+    () => {
+        deps!();
+        # [doc = " Decoding"] impl data :: Entry { # [doc = " Decode an entry from the given entry data `d`, providing the `pack_offset` to allow tracking the start of the entry data section."] # [doc = ""] # [doc = " # Panics"] # [doc = ""] # [doc = " If we cannot understand the header, garbage data is likely to trigger this."] pub fn from_bytes (d : & [u8] , pack_offset : data :: Offset , hash_len : usize) -> Result < data :: Entry , Error > { let (type_id , size , mut consumed) = parse_header_info (d) ; use crate :: data :: entry :: Header :: * ; let object = match type_id { OFS_DELTA => { let (distance , leb_bytes) = leb64 (& d [consumed ..]) ; let delta = OfsDelta { base_distance : distance , } ; consumed += leb_bytes ; delta } REF_DELTA => { let delta = RefDelta { base_id : gix_hash :: ObjectId :: from_bytes_or_panic (& d [consumed ..] [.. hash_len]) , } ; consumed += hash_len ; delta } BLOB => Blob , TREE => Tree , COMMIT => Commit , TAG => Tag , other => return Err (Error { type_id : other }) , } ; Ok (data :: Entry { header : object , decompressed_size : size , data_offset : pack_offset + consumed as u64 , }) } # [doc = " Instantiate an `Entry` from the reader `r`, providing the `pack_offset` to allow tracking the start of the entry data section."] pub fn from_read (r : & mut dyn io :: Read , pack_offset : data :: Offset , hash_len : usize) -> io :: Result < data :: Entry > { let (type_id , size , mut consumed) = streaming_parse_header_info (r) ? ; use crate :: data :: entry :: Header :: * ; let object = match type_id { OFS_DELTA => { let (distance , leb_bytes) = leb64_from_read (r) ? ; let delta = OfsDelta { base_distance : distance , } ; consumed += leb_bytes ; delta } REF_DELTA => { let mut buf = gix_hash :: Kind :: buf () ; let hash = & mut buf [.. hash_len] ; r . read_exact (hash) ? ; # [allow (clippy :: redundant_slicing)] let delta = RefDelta { base_id : gix_hash :: ObjectId :: from_bytes_or_panic (& hash [..]) , } ; consumed += hash_len ; delta } BLOB => Blob , TREE => Tree , COMMIT => Commit , TAG => Tag , other => return Err (io :: Error :: other (format ! ("Object type {other} is unsupported"))) , } ; Ok (data :: Entry { header : object , decompressed_size : size , data_offset : pack_offset + consumed as u64 , }) } }
+    };
+}
+
+impl_120!()

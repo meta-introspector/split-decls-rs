@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        FromRadix16Checked!();
         FromRadix16!();
         MaxNumDigits!();
+        FromRadix16Checked!();
     };
 }
 

@@ -1,13 +1,14 @@
 macro_rules! deps {
     () => {
-        Utf8Components!();
+        Utf8Path!();
+        Utf8PathBuf!();
     };
 }
 
 macro_rules! impl_26 {
     () => {
         deps!();
-        impl AsRef < Path > for Utf8Components < '_ > { # [inline] fn as_ref (& self) -> & Path { self . as_path () . as_ref () } }
+        impl < P : AsRef < Utf8Path > > Extend < P > for Utf8PathBuf { fn extend < I : IntoIterator < Item = P > > (& mut self , iter : I) { for path in iter { self . push (path) ; } } }
     };
 }
 

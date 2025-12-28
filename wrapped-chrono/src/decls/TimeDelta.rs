@@ -1,0 +1,7 @@
+macro_rules! TimeDelta {
+    () => {
+        # [doc = " Time duration with nanosecond precision."] # [doc = ""] # [doc = " This also allows for negative durations; see individual methods for details."] # [doc = ""] # [doc = " A `TimeDelta` is represented internally as a complement of seconds and"] # [doc = " nanoseconds. The range is restricted to that of `i64` milliseconds, with the"] # [doc = " minimum value notably being set to `-i64::MAX` rather than allowing the full"] # [doc = " range of `i64::MIN`. This is to allow easy flipping of sign, so that for"] # [doc = " instance `abs()` can be called without any checks."] # [derive (Clone , Copy , Default , PartialEq , Eq , PartialOrd , Ord , Debug , Hash)] # [cfg_attr (any (feature = "rkyv" , feature = "rkyv-16" , feature = "rkyv-32" , feature = "rkyv-64") , derive (Archive , Deserialize , Serialize) , archive (compare (PartialEq , PartialOrd)) , archive_attr (derive (Clone , Copy , PartialEq , Eq , PartialOrd , Ord , Debug , Hash)))] # [cfg_attr (feature = "rkyv-validation" , archive (check_bytes))] # [cfg_attr (feature = "defmt" , derive (defmt :: Format))] pub struct TimeDelta { secs : i64 , nanos : i32 , }
+    };
+}
+
+TimeDelta!()

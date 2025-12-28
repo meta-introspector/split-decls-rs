@@ -1,5 +1,13 @@
+macro_rules! deps {
+    () => {
+        DateTime!();
+        Error!();
+    };
+}
+
 macro_rules! serde {
     () => {
+        deps!();
         # [doc = " Serialization/Deserialization with serde"] # [doc = ""] # [doc = " The [`DateTime`] type has default implementations for (de)serializing to/from the [RFC 3339]"] # [doc = " format. This module provides alternatives for serializing to timestamps."] # [doc = ""] # [doc = " The alternatives are for use with serde's [`with` annotation] combined with the module name."] # [doc = " Alternatively the individual `serialize` and `deserialize` functions in each module can be used"] # [doc = " with serde's [`serialize_with`] and [`deserialize_with`] annotations."] # [doc = ""] # [doc = " *Available on crate feature 'serde' only.*"] # [doc = ""] # [doc = " [RFC 3339]: https://tools.ietf.org/html/rfc3339"] # [doc = " [`with` annotation]: https://serde.rs/field-attrs.html#with"] # [doc = " [`serialize_with`]: https://serde.rs/field-attrs.html#serialize_with"] # [doc = " [`deserialize_with`]: https://serde.rs/field-attrs.html#deserialize_with"] # [cfg (feature = "serde")] pub mod serde { use core :: fmt ; use serde :: de ; pub use super :: datetime :: serde :: * ; # [doc = " Create a custom `de::Error` with `SerdeError::InvalidTimestamp`."] pub (crate) fn invalid_ts < E , T > (value : T) -> E where E : de :: Error , T : fmt :: Display , { E :: custom (SerdeError :: InvalidTimestamp (value)) } enum SerdeError < T : fmt :: Display > { InvalidTimestamp (T) , } impl < T : fmt :: Display > fmt :: Display for SerdeError < T > { fn fmt (& self , f : & mut fmt :: Formatter) -> fmt :: Result { match self { SerdeError :: InvalidTimestamp (ts) => { write ! (f , "value is not a legal timestamp: {ts}") } } } } }
     };
 }

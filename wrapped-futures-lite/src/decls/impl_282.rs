@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        Cursor!();
+    };
+}
+
+macro_rules! impl_282 {
+    () => {
+        deps!();
+        impl < R > Take < R > { # [doc = " Returns the number of bytes before this adapter will return EOF."] # [doc = ""] # [doc = " Note that EOF may be reached sooner if the underlying reader is shorter than the limit."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " use futures_lite::io::{AsyncReadExt, Cursor};"] # [doc = ""] # [doc = " let reader = Cursor::new(\"hello\");"] # [doc = ""] # [doc = " let reader = reader.take(3);"] # [doc = " assert_eq!(reader.limit(), 3);"] # [doc = " ```"] pub fn limit (& self) -> u64 { self . limit } # [doc = " Puts a limit on the number of bytes."] # [doc = ""] # [doc = " Changing the limit is equivalent to creating a new adapter with [`AsyncReadExt::take()`]."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " use futures_lite::io::{AsyncReadExt, Cursor};"] # [doc = ""] # [doc = " let reader = Cursor::new(\"hello\");"] # [doc = ""] # [doc = " let mut reader = reader.take(10);"] # [doc = " assert_eq!(reader.limit(), 10);"] # [doc = ""] # [doc = " reader.set_limit(3);"] # [doc = " assert_eq!(reader.limit(), 3);"] # [doc = " ```"] pub fn set_limit (& mut self , limit : u64) { self . limit = limit ; } # [doc = " Gets a reference to the underlying reader."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " use futures_lite::io::{AsyncReadExt, Cursor};"] # [doc = ""] # [doc = " let reader = Cursor::new(\"hello\");"] # [doc = ""] # [doc = " let reader = reader.take(3);"] # [doc = " let r = reader.get_ref();"] # [doc = " ```"] pub fn get_ref (& self) -> & R { & self . inner } # [doc = " Gets a mutable reference to the underlying reader."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " use futures_lite::io::{AsyncReadExt, Cursor};"] # [doc = ""] # [doc = " let reader = Cursor::new(\"hello\");"] # [doc = ""] # [doc = " let mut reader = reader.take(3);"] # [doc = " let r = reader.get_mut();"] # [doc = " ```"] pub fn get_mut (& mut self) -> & mut R { & mut self . inner } # [doc = " Unwraps the adapter, returning the underlying reader."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " use futures_lite::io::{AsyncReadExt, Cursor};"] # [doc = ""] # [doc = " let reader = Cursor::new(\"hello\");"] # [doc = ""] # [doc = " let reader = reader.take(3);"] # [doc = " let reader = reader.into_inner();"] # [doc = " ```"] pub fn into_inner (self) -> R { self . inner } }
+    };
+}
+
+impl_282!()

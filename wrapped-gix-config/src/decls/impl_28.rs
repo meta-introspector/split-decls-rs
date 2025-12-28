@@ -1,0 +1,19 @@
+macro_rules! deps {
+    () => {
+        Source!();
+        Error!();
+        KeyRef!();
+        File!();
+        Options!();
+        Metadata!();
+    };
+}
+
+macro_rules! impl_28 {
+    () => {
+        deps!();
+        # [doc = " Instantiation from environment variables"] impl File < 'static > { # [doc = " Generates a config from `GIT_CONFIG_*` environment variables or returns `Ok(None)` if no configuration was found."] # [doc = " See [`git-config`'s documentation] for more information on the environment variables in question."] # [doc = ""] # [doc = " With `options` configured, it's possible to resolve `include.path` or `includeIf.<condition>.path` directives as well."] # [doc = ""] # [doc = " [`git-config`'s documentation]: https://git-scm.com/docs/git-config#Documentation/git-config.txt-GITCONFIGCOUNT"] pub fn from_env (options : init :: Options < '_ >) -> Result < Option < File < 'static > > , Error > { use std :: env ; let count : usize = match env :: var ("GIT_CONFIG_COUNT") { Ok (v) => v . parse () . map_err (| _ | Error :: InvalidConfigCount { input : v }) ? , Err (_) => return Ok (None) , } ; if count == 0 { return Ok (None) ; } let meta = file :: Metadata { path : None , source : crate :: Source :: Env , level : 0 , trust : gix_sec :: Trust :: Full , } ; let mut config = File :: new (meta) ; for i in 0 .. count { let key = gix_path :: os_string_into_bstring (env :: var_os (format ! ("GIT_CONFIG_KEY_{i}")) . ok_or (Error :: InvalidKeyId { key_id : i }) ? ,) . map_err (| _ | Error :: IllformedUtf8 { index : i , kind : "key" }) ? ; let value = env :: var_os (format ! ("GIT_CONFIG_VALUE_{i}")) . ok_or (Error :: InvalidValueId { value_id : i }) ? ; let key = KeyRef :: parse_unvalidated (key . as_ref ()) . ok_or_else (| | Error :: InvalidKeyValue { key_id : i , key_val : key . to_string () , }) ? ; config . section_mut_or_create_new (key . section_name , key . subsection_name) ? . push (section :: ValueName :: try_from (key . value_name . to_owned ()) ? , Some (gix_path :: os_str_into_bstr (& value) . map_err (| _ | Error :: IllformedUtf8 { index : i , kind : "value" , }) ? . as_bytes () . into () ,) ,) ; } let mut buf = Vec :: new () ; init :: includes :: resolve (& mut config , & mut buf , options) ? ; Ok (Some (config)) } }
+    };
+}
+
+impl_28!()

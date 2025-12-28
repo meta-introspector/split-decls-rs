@@ -1,5 +1,12 @@
+macro_rules! deps {
+    () => {
+        Info!();
+    };
+}
+
 macro_rules! get {
     () => {
+        deps!();
         # [doc = " Returns information about the current operating system (type, version, edition, etc.)."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " use os_info;"] # [doc = ""] # [doc = " let info = os_info::get();"] # [doc = ""] # [doc = " // Print full information:"] # [doc = " println!(\"OS information: {info}\");"] # [doc = ""] # [doc = " // Print information separately:"] # [doc = " println!(\"Type: {}\", info.os_type());"] # [doc = " println!(\"Version: {}\", info.version());"] # [doc = " println!(\"Edition: {:?}\", info.edition());"] # [doc = " println!(\"Codename: {:?}\", info.codename());"] # [doc = " println!(\"Bitness: {}\", info.bitness());"] # [doc = " println!(\"Architecture: {:?}\", info.architecture());"] # [doc = " ```"] pub fn get () -> Info { imp :: current_platform () }
     };
 }

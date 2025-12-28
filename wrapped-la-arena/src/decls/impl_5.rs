@@ -1,13 +1,14 @@
 macro_rules! deps {
     () => {
-        RawIdx!();
+        Idx!();
+        ArenaMap!();
     };
 }
 
 macro_rules! impl_5 {
     () => {
         deps!();
-        impl fmt :: Debug for RawIdx { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { self . 0 . fmt (f) } }
+        impl < T , V > Extend < (Idx < V > , T) > for ArenaMap < Idx < V > , T > { fn extend < I : IntoIterator < Item = (Idx < V > , T) > > (& mut self , iter : I) { iter . into_iter () . for_each (move | (k , v) | { self . insert (k , v) ; }) ; } }
     };
 }
 

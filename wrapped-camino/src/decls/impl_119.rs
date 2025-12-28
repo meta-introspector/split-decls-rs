@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Utf8PathBuf!();
+        Utf8Path!();
     };
 }
 
 macro_rules! impl_119 {
     () => {
         deps!();
-        impl Ord for Utf8PathBuf { fn cmp (& self , other : & Utf8PathBuf) -> Ordering { self . components () . cmp (other . components ()) } }
+        impl AsRef < Utf8Path > for Utf8Path { # [inline] fn as_ref (& self) -> & Utf8Path { self } }
     };
 }
 

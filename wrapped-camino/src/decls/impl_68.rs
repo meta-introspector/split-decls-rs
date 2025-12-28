@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Utf8Path!();
+        Utf8PrefixComponent!();
     };
 }
 
 macro_rules! impl_68 {
     () => {
         deps!();
-        impl < 'a > From < & 'a Utf8Path > for Cow < 'a , Path > { fn from (path : & 'a Utf8Path) -> Cow < 'a , Path > { Cow :: Borrowed (path . as_ref ()) } }
+        impl fmt :: Debug for Utf8PrefixComponent < '_ > { fn fmt (& self , f : & mut fmt :: Formatter) -> fmt :: Result { fmt :: Debug :: fmt (& self . 0 , f) } }
     };
 }
 

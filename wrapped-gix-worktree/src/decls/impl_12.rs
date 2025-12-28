@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        StackDelegate!();
+        State!();
+        Stack!();
+    };
+}
+
+macro_rules! impl_12 {
+    () => {
+        deps!();
+        impl gix_fs :: stack :: Delegate for StackDelegate < '_ , '_ > { fn push_directory (& mut self , stack : & gix_fs :: Stack) -> std :: io :: Result < () > { self . statistics . delegate . push_directory += 1 ; let rela_dir_bstr = gix_path :: into_bstr (stack . current_relative ()) ; let rela_dir = gix_path :: to_unix_separators_on_windows (rela_dir_bstr) ; match & mut self . state { # [cfg (feature = "attributes")] State :: CreateDirectoryAndAttributesStack { attributes , .. } | State :: AttributesStack (attributes) => { attributes . push_directory (stack . root () , stack . current () , & rela_dir , self . buf , self . id_mappings , self . objects , & mut self . statistics . attributes ,) ? ; } # [cfg (feature = "attributes")] State :: AttributesAndIgnoreStack { ignore , attributes } => { attributes . push_directory (stack . root () , stack . current () , & rela_dir , self . buf , self . id_mappings , self . objects , & mut self . statistics . attributes ,) ? ; ignore . push_directory (stack . root () , stack . current () , & rela_dir , self . buf , self . id_mappings , self . objects , self . case , & mut self . statistics . ignore ,) ? ; } State :: IgnoreStack (ignore) => ignore . push_directory (stack . root () , stack . current () , & rela_dir , self . buf , self . id_mappings , self . objects , self . case , & mut self . statistics . ignore ,) ? , } Ok (()) } # [cfg_attr (not (feature = "attributes") , allow (unused_variables))] fn push (& mut self , is_last_component : bool , stack : & gix_fs :: Stack) -> std :: io :: Result < () > { self . statistics . delegate . push_element += 1 ; match & mut self . state { # [cfg (feature = "attributes")] State :: CreateDirectoryAndAttributesStack { unlink_on_collision , validate , attributes : _ , } => { validate_last_component (stack , self . mode , * validate) ? ; create_leading_directory (is_last_component , stack , self . mode , & mut self . statistics . delegate . num_mkdir_calls , * unlink_on_collision ,) ? ; } # [cfg (feature = "attributes")] State :: AttributesAndIgnoreStack { .. } | State :: AttributesStack (_) => { } State :: IgnoreStack (_) => { } } Ok (()) } fn pop_directory (& mut self) { self . statistics . delegate . pop_directory += 1 ; match & mut self . state { # [cfg (feature = "attributes")] State :: CreateDirectoryAndAttributesStack { attributes , .. } | State :: AttributesStack (attributes) => { attributes . pop_directory () ; } # [cfg (feature = "attributes")] State :: AttributesAndIgnoreStack { attributes , ignore } => { attributes . pop_directory () ; ignore . pop_directory () ; } State :: IgnoreStack (ignore) => { ignore . pop_directory () ; } } } }
+    };
+}
+
+impl_12!()

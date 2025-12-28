@@ -1,0 +1,7 @@
+macro_rules! select_implementation {
+    () => {
+        # [doc = " Choose between using an arch-specific implementation and the function body. Returns directly"] # [doc = " if the arch implementation is used, otherwise continue with the rest of the function."] # [doc = ""] # [doc = " Specify a `use_arch` meta field if an architecture-specific implementation is provided."] # [doc = " These live in the `math::arch::some_target_arch` module."] # [doc = ""] # [doc = " Specify a `use_arch_required` meta field if something architecture-specific must be used"] # [doc = " regardless of feature configuration (`force-soft-floats`)."] # [doc = ""] # [doc = " The passed meta options do not need to account for the `arch` target feature."] macro_rules ! select_implementation { (name : $ fn_name : ident , $ (use_arch : $ use_arch : meta ,) ? $ (use_arch_required : $ use_arch_required : meta ,) ? args : $ ($ arg : ident) ,+ ,) => { select_implementation ! { @ cfg $ ($ use_arch_required) ?; if true { return super :: arch ::$ fn_name ($ ($ arg) ,+) ; } } # [cfg (arch_enabled)] select_implementation ! { @ cfg $ ($ use_arch) ?; if true { return super :: arch ::$ fn_name ($ ($ arg) ,+) ; } } } ; (@ cfg ; $ ex : expr) => { } ; (@ cfg $ provided : meta ; $ ex : expr) => { # [cfg ($ provided)] $ ex } ; }
+    };
+}
+
+select_implementation!()

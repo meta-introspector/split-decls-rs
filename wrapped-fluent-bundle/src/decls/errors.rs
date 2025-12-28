@@ -1,6 +1,6 @@
 macro_rules! errors {
     () => {
-        mod errors ;
+        pub mod errors ;
     };
 }
 

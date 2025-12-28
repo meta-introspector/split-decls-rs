@@ -1,13 +1,14 @@
 macro_rules! deps {
     () => {
-        OutOfRange!();
+        Item!();
+        TimeDelta!();
     };
 }
 
 macro_rules! impl_22 {
     () => {
         deps!();
-        # [cfg (all (not (feature = "std") , feature = "core-error"))] impl core :: error :: Error for OutOfRange { }
+        impl core :: iter :: Sum < TimeDelta > for TimeDelta { fn sum < I : Iterator < Item = TimeDelta > > (iter : I) -> TimeDelta { iter . fold (TimeDelta :: zero () , | acc , x | acc + x) } }
     };
 }
 

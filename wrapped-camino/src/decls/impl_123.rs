@@ -7,7 +7,7 @@ macro_rules! deps {
 macro_rules! impl_123 {
     () => {
         deps!();
-        impl PartialOrd for Utf8Path { # [inline] fn partial_cmp (& self , other : & Utf8Path) -> Option < Ordering > { Some (self . cmp (other)) } }
+        impl AsRef < Path > for Utf8Path { # [inline] fn as_ref (& self) -> & Path { & self . 0 } }
     };
 }
 

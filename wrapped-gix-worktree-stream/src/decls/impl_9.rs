@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        AdditionalEntry!();
-        Stream!();
+        Error!();
+        Entry!();
     };
 }
 
 macro_rules! impl_9 {
     () => {
         deps!();
-        impl Stream { pub (crate) fn new () -> (Stream , gix_features :: io :: pipe :: Writer , std :: sync :: mpsc :: Receiver < AdditionalEntry > ,) { let in_flight_writes = (2 + 1) * 32 ; let (write , read) = gix_features :: io :: pipe :: unidirectional (in_flight_writes) ; let (tx_entries , rx_entries) = std :: sync :: mpsc :: channel () ; (Stream { read : utils :: Read :: Known (read) , extra_entries : Some (tx_entries) , path_buf : Some (Vec :: with_capacity (1024) . into ()) , err : Default :: default () , buf : std :: iter :: repeat_n (0 , u16 :: MAX as usize) . collect () , pos : 0 , filled : 0 , } , write , rx_entries ,) } }
+        impl std :: io :: Read for Entry < '_ > { fn read (& mut self , buf : & mut [u8]) -> std :: io :: Result < usize > { let buf_len = buf . len () ; if let Some (err) = self . parent . err . lock () . take () { return Err (std :: io :: Error :: other (err)) ; } let bytes_read = match self . remaining . as_mut () { None => { let input = self . fill_buf () ? ; let nb = input . len () . min (buf . len ()) ; buf [.. nb] . copy_from_slice (& input [.. nb]) ; self . parent . pos += nb ; nb } Some (remaining) => { let bytes_read = self . parent . read . read (& mut buf [.. buf_len . min (* remaining)]) ? ; * remaining -= bytes_read ; bytes_read } } ; if bytes_read == 0 { self . remaining = Some (0) ; } Ok (bytes_read) } }
     };
 }
 

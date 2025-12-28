@@ -1,0 +1,17 @@
+macro_rules! deps {
+    () => {
+        Box!();
+        Global!();
+        Vec!();
+        Allocator!();
+    };
+}
+
+macro_rules! SliceExt {
+    () => {
+        deps!();
+        # [doc = " Slice methods that use `Box` and `Vec` from this crate."] pub trait SliceExt < T > { # [doc = " Copies `self` into a new `Vec`."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " use allocator_api2::SliceExt;"] # [doc = ""] # [doc = " let s = [10, 40, 30];"] # [doc = " let x = SliceExt::to_vec(&s[..]);"] # [doc = " // Here, `s` and `x` can be modified independently."] # [doc = " ```"] # [cfg (not (no_global_oom_handling))] # [inline (always)] fn to_vec (& self) -> Vec < T , Global > where T : Clone , { self . to_vec_in (Global) } # [doc = " Copies `self` into a new `Vec` with an allocator."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " use allocator_api2::{SliceExt, alloc::System};"] # [doc = ""] # [doc = " let s = [10, 40, 30];"] # [doc = " let x = SliceExt::to_vec_in(&s[..], System);"] # [doc = " // Here, `s` and `x` can be modified independently."] # [doc = " ```"] # [cfg (not (no_global_oom_handling))] fn to_vec_in < A : Allocator > (& self , alloc : A) -> Vec < T , A > where T : Clone ; # [doc = " Creates a vector by copying a slice `n` times."] # [doc = ""] # [doc = " # Panics"] # [doc = ""] # [doc = " This function will panic if the capacity would overflow."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " Basic usage:"] # [doc = ""] # [doc = " ```"] # [doc = " use allocator_api2::{SliceExt, vec};"] # [doc = ""] # [doc = " assert_eq!(SliceExt::repeat(&[1, 2][..], 3), vec![1, 2, 1, 2, 1, 2]);"] # [doc = " ```"] # [doc = ""] # [doc = " A panic upon overflow:"] # [doc = ""] # [doc = " ```should_panic"] # [doc = " // this will panic at runtime"] # [doc = " b\"0123456789abcdef\".repeat(usize::MAX);"] # [doc = " ```"] fn repeat (& self , n : usize) -> Vec < T , Global > where T : Copy ; }
+    };
+}
+
+SliceExt!()

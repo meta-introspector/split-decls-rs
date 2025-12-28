@@ -1,14 +1,15 @@
 macro_rules! deps {
     () => {
+        ConstArrayLength!();
+        IntoArrayLength!();
         GenericArray!();
-        ArrayLength!();
     };
 }
 
 macro_rules! impl_37 {
     () => {
         deps!();
-        impl < 'a , T : 'a , N : ArrayLength > IntoIterator for & 'a GenericArray < T , N > { type IntoIter = slice :: Iter < 'a , T > ; type Item = & 'a T ; # [inline] fn into_iter (self : & 'a GenericArray < T , N >) -> Self :: IntoIter { self . as_slice () . iter () } }
+        impl < T , const N : usize > From < [T ; N] > for GenericArray < T , ConstArrayLength < N > > where Const < N > : IntoArrayLength , { # [inline (always)] fn from (value : [T ; N]) -> Self { GenericArray :: from_array (value) } }
     };
 }
 

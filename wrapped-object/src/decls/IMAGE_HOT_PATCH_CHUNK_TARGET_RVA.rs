@@ -1,0 +1,7 @@
+macro_rules! IMAGE_HOT_PATCH_CHUNK_TARGET_RVA {
+    () => {
+        pub const IMAGE_HOT_PATCH_CHUNK_TARGET_RVA : u32 = 0x0000_4000 ;
+    };
+}
+
+IMAGE_HOT_PATCH_CHUNK_TARGET_RVA!()

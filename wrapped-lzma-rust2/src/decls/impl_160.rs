@@ -1,0 +1,17 @@
+macro_rules! deps {
+    () => {
+        IndexRecord!();
+        Index!();
+        Read!();
+        Result!();
+    };
+}
+
+macro_rules! impl_160 {
+    () => {
+        deps!();
+        impl Index { pub (crate) fn parse < R : Read > (reader : & mut R) -> crate :: Result < Index > { let number_of_records = parse_multibyte_integer_from_reader (reader) ? ; let mut records = Vec :: new () ; records . try_reserve_exact (number_of_records as usize) ? ; for _ in 0 .. number_of_records { let unpadded_size = parse_multibyte_integer_from_reader (reader) ? ; let uncompressed_size = parse_multibyte_integer_from_reader (reader) ? ; if unpadded_size == 0 { return Err (error_invalid_data ("invalid index record unpadded size")) ; } records . push (IndexRecord { unpadded_size , uncompressed_size , }) ; } let mut bytes_read = 1 ; bytes_read += count_multibyte_integer_size_for_value (number_of_records) ; for record in & records { bytes_read += count_multibyte_integer_size_for_value (record . unpadded_size) ; bytes_read += count_multibyte_integer_size_for_value (record . uncompressed_size) ; } let padding_needed = (4 - (bytes_read % 4)) % 4 ; if padding_needed > 0 { let mut padding_buf = [0u8 ; 3] ; reader . read_exact (& mut padding_buf [.. padding_needed]) ? ; if ! padding_buf [.. padding_needed] . iter () . all (| & b | b == 0) { return Err (error_invalid_data ("invalid index padding")) ; } } let expected_crc = reader . read_u32 () ? ; let mut crc = CRC32 . digest () ; crc . update (& [0]) ; let mut temp_buf = [0u8 ; 10] ; let size = encode_multibyte_integer (number_of_records , & mut temp_buf) ? ; crc . update (& temp_buf [.. size]) ; for record in & records { let size = encode_multibyte_integer (record . unpadded_size , & mut temp_buf) ? ; crc . update (& temp_buf [.. size]) ; let size = encode_multibyte_integer (record . uncompressed_size , & mut temp_buf) ? ; crc . update (& temp_buf [.. size]) ; } update_crc_with_padding (& mut crc , padding_needed) ; if expected_crc != crc . finalize () { return Err (error_invalid_data ("index CRC32 mismatch")) ; } Ok (Index { number_of_records , records , }) } }
+    };
+}
+
+impl_160!()

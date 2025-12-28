@@ -1,15 +1,17 @@
 macro_rules! deps {
     () => {
-        EcdsaCurve!();
         Signature!();
-        SignatureSize!();
+        SignatureBytes!();
+        EcdsaCurve!();
+        MaxSize!();
+        MaxOverhead!();
     };
 }
 
 macro_rules! impl_29 {
     () => {
         deps!();
-        # [cfg (feature = "algorithm")] impl < C > str :: FromStr for Signature < C > where C : EcdsaCurve + CurveArithmetic , SignatureSize < C > : ArraySize , { type Err = Error ; fn from_str (hex : & str) -> Result < Self > { if hex . len () != C :: FieldBytesSize :: USIZE * 4 { return Err (Error :: new ()) ; } if ! hex . as_bytes () . iter () . all (| & byte | matches ! (byte , b'0' ..= b'9' | b'a' ..= b'z' | b'A' ..= b'Z')) { return Err (Error :: new ()) ; } let (r_hex , s_hex) = hex . split_at (C :: FieldBytesSize :: USIZE * 2) ; let r = r_hex . parse :: < NonZeroScalar < C > > () . map_err (| _ | Error :: new ()) ? ; let s = s_hex . parse :: < NonZeroScalar < C > > () . map_err (| _ | Error :: new ()) ? ; Self :: from_scalars (r , s) } }
+        impl < C > TryFrom < Signature < C > > for crate :: Signature < C > where C : EcdsaCurve , MaxSize < C > : ArraySize , < FieldBytesSize < C > as Add > :: Output : Add < MaxOverhead > + ArraySize , { type Error = Error ; fn try_from (sig : Signature < C >) -> Result < super :: Signature < C > > { let mut bytes = super :: SignatureBytes :: < C > :: default () ; let r_begin = C :: FieldBytesSize :: USIZE . saturating_sub (sig . r () . len ()) ; let s_begin = bytes . len () . saturating_sub (sig . s () . len ()) ; bytes [r_begin .. C :: FieldBytesSize :: USIZE] . copy_from_slice (sig . r ()) ; bytes [s_begin ..] . copy_from_slice (sig . s ()) ; Self :: try_from (bytes . as_slice ()) } }
     };
 }
 

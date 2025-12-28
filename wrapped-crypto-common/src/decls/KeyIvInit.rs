@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         IvSizeUser!();
-        Key!();
-        KeySizeUser!();
-        InvalidLength!();
         Iv!();
+        KeySizeUser!();
+        Key!();
+        InvalidLength!();
         WeakKeyError!();
     };
 }

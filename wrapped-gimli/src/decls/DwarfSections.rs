@@ -1,0 +1,31 @@
+macro_rules! deps {
+    () => {
+        DebugStrOffsets!();
+        DebugRanges!();
+        Dwarf!();
+        DebugLoc!();
+        DebugMacinfo!();
+        DebugLocLists!();
+        DebugAranges!();
+        DebugMacro!();
+        DebugRngLists!();
+        Reader!();
+        DebugLineStr!();
+        DebugLine!();
+        DebugAbbrev!();
+        DebugTypes!();
+        Result!();
+        DebugInfo!();
+        DebugAddr!();
+        DebugStr!();
+    };
+}
+
+macro_rules! DwarfSections {
+    () => {
+        deps!();
+        # [doc = " All of the commonly used DWARF sections."] # [doc = ""] # [doc = " This is useful for storing sections when `T` does not implement `Reader`."] # [doc = " It can be used to create a `Dwarf` that references the data in `self`."] # [doc = " If `T` does implement `Reader`, then use `Dwarf` directly."] # [doc = ""] # [doc = " ## Example Usage"] # [doc = ""] # [doc = " It can be useful to load DWARF sections into owned data structures,"] # [doc = " such as `Vec`. However, we do not implement the `Reader` trait"] # [doc = " for `Vec`, because it would be very inefficient, but this trait"] # [doc = " is required for all of the methods that parse the DWARF data."] # [doc = " So we first load the DWARF sections into `Vec`s, and then use"] # [doc = " `borrow` to create `Reader`s that reference the data."] # [doc = ""] # [doc = " ```rust,no_run"] # [doc = " # fn example() -> Result<(), gimli::Error> {"] # [doc = " # let loader = |name| -> Result<_, gimli::Error> { unimplemented!() };"] # [doc = " // Read the DWARF sections into `Vec`s with whatever object loader you're using."] # [doc = " let dwarf_sections: gimli::DwarfSections<Vec<u8>> = gimli::DwarfSections::load(loader)?;"] # [doc = " // Create references to the DWARF sections."] # [doc = " let dwarf: gimli::Dwarf<_> = dwarf_sections.borrow(|section| {"] # [doc = "     gimli::EndianSlice::new(&section, gimli::LittleEndian)"] # [doc = " });"] # [doc = " # unreachable!()"] # [doc = " # }"] # [doc = " ```"] # [derive (Debug , Default)] pub struct DwarfSections < T > { # [doc = " The `.debug_abbrev` section."] pub debug_abbrev : DebugAbbrev < T > , # [doc = " The `.debug_addr` section."] pub debug_addr : DebugAddr < T > , # [doc = " The `.debug_aranges` section."] pub debug_aranges : DebugAranges < T > , # [doc = " The `.debug_info` section."] pub debug_info : DebugInfo < T > , # [doc = " The `.debug_line` section."] pub debug_line : DebugLine < T > , # [doc = " The `.debug_line_str` section."] pub debug_line_str : DebugLineStr < T > , # [doc = " The `.debug_macinfo` section."] pub debug_macinfo : DebugMacinfo < T > , # [doc = " The `.debug_macro` section."] pub debug_macro : DebugMacro < T > , # [doc = " The `.debug_str` section."] pub debug_str : DebugStr < T > , # [doc = " The `.debug_str_offsets` section."] pub debug_str_offsets : DebugStrOffsets < T > , # [doc = " The `.debug_types` section."] pub debug_types : DebugTypes < T > , # [doc = " The `.debug_loc` section."] pub debug_loc : DebugLoc < T > , # [doc = " The `.debug_loclists` section."] pub debug_loclists : DebugLocLists < T > , # [doc = " The `.debug_ranges` section."] pub debug_ranges : DebugRanges < T > , # [doc = " The `.debug_rnglists` section."] pub debug_rnglists : DebugRngLists < T > , }
+    };
+}
+
+DwarfSections!()

@@ -1,6 +1,6 @@
 macro_rules! macro_17 {
     () => {
-        impl_Integer ! (u64 [len = 20] as u64) ;
+        impl_Integer ! (u32 [len = 10] as u32) ;
     };
 }
 

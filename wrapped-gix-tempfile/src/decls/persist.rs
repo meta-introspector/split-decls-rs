@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        Closed!();
+        Handle!();
+        Writable!();
+    };
+}
+
+macro_rules! persist {
+    () => {
+        deps!();
+        # [doc = ""] pub mod persist { use std :: path :: Path ; use crate :: { handle :: { expect_none , Closed , Writable } , Handle , REGISTRY , } ; mod error { use std :: fmt :: { self , Debug , Display } ; use crate :: Handle ; # [doc = " The error returned by various [`persist(…)`][Handle<crate::handle::Writable>::persist()] methods"] # [derive (Debug)] pub struct Error < T : Debug > { # [doc = " The io error that prevented the attempt to succeed"] pub error : std :: io :: Error , # [doc = " The registered handle to the tempfile which couldn't be persisted."] pub handle : Handle < T > , } impl < T : Debug > Display for Error < T > { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { Display :: fmt (& self . error , f) } } impl < T : Debug > std :: error :: Error for Error < T > { fn source (& self) -> Option < & (dyn std :: error :: Error + 'static) > { self . error . source () } } } pub use error :: Error ; impl Handle < Writable > { # [doc = " Persist this tempfile to replace the file at the given `path` if necessary, in a way that recovers the original instance"] # [doc = " on error or returns the open now persisted former tempfile."] # [doc = " Note that it might not exist anymore if an interrupt handler managed to steal it and allowed the program to return to"] # [doc = " its normal flow."] pub fn persist (self , path : impl AsRef < Path >) -> Result < Option < std :: fs :: File > , Error < Writable > > { let res = REGISTRY . remove (& self . id) ; match res . and_then (| (_k , v) | v . map (| v | v . persist (path))) { Some (Ok (Some (file))) => { std :: mem :: forget (self) ; Ok (Some (file)) } None => { std :: mem :: forget (self) ; Ok (None) } Some (Err ((err , tempfile))) => { expect_none (REGISTRY . insert (self . id , Some (tempfile))) ; Err (Error :: < Writable > { error : err , handle : self , }) } Some (Ok (None)) => unreachable ! ("no open files in an open handle") , } } } impl Handle < Closed > { # [doc = " Persist this tempfile to replace the file at the given `path` if necessary, in a way that recovers the original instance"] # [doc = " on error."] pub fn persist (self , path : impl AsRef < Path >) -> Result < () , Error < Closed > > { let res = REGISTRY . remove (& self . id) ; match res . and_then (| (_k , v) | v . map (| v | v . persist (path))) { None | Some (Ok (None)) => { std :: mem :: forget (self) ; Ok (()) } Some (Err ((err , tempfile))) => { expect_none (REGISTRY . insert (self . id , Some (tempfile))) ; Err (Error :: < Closed > { error : err , handle : self , }) } Some (Ok (Some (_file))) => unreachable ! ("no open files in a closed handle") , } } } }
+    };
+}
+
+persist!()

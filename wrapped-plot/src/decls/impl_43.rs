@@ -1,13 +1,15 @@
 macro_rules! deps {
     () => {
-        Grid!();
+        Set!();
+        Properties!();
+        Label!();
     };
 }
 
 macro_rules! impl_43 {
     () => {
         deps!();
-        impl Grid { fn next (self) -> Option < Grid > { use crate :: Grid :: * ; match self { Major => Some (Minor) , Minor => None , } } }
+        impl Set < Label > for Properties { # [doc = " Sets the legend label"] fn set (& mut self , label : Label) -> & mut Properties { self . label = Some (label . 0) ; self } }
     };
 }
 

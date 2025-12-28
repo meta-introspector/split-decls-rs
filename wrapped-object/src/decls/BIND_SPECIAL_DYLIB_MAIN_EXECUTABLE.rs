@@ -1,0 +1,7 @@
+macro_rules! BIND_SPECIAL_DYLIB_MAIN_EXECUTABLE {
+    () => {
+        pub const BIND_SPECIAL_DYLIB_MAIN_EXECUTABLE : i8 = - 1 ;
+    };
+}
+
+BIND_SPECIAL_DYLIB_MAIN_EXECUTABLE!()

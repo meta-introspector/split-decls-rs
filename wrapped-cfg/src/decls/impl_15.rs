@@ -1,13 +1,15 @@
 macro_rules! deps {
     () => {
-        InactiveReason!();
+        Literal!();
+        CfgExpr!();
+        Conjunction!();
     };
 }
 
 macro_rules! impl_15 {
     () => {
         deps!();
-        impl fmt :: Display for InactiveReason { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { if ! self . enabled . is_empty () { for (i , atom) in self . enabled . iter () . enumerate () { let sep = match i { 0 => "" , _ if i == self . enabled . len () - 1 => " and " , _ => ", " , } ; f . write_str (sep) ? ; atom . fmt (f) ? ; } let is_are = if self . enabled . len () == 1 { "is" } else { "are" } ; write ! (f , " {is_are} enabled") ? ; if ! self . disabled . is_empty () { f . write_str (" and ") ? ; } } if ! self . disabled . is_empty () { for (i , atom) in self . disabled . iter () . enumerate () { let sep = match i { 0 => "" , _ if i == self . disabled . len () - 1 => " and " , _ => ", " , } ; f . write_str (sep) ? ; atom . fmt (f) ? ; } let is_are = if self . disabled . len () == 1 { "is" } else { "are" } ; write ! (f , " {is_are} disabled") ? ; } Ok (()) } }
+        impl Conjunction { fn new (parts : Box < [CfgExpr] >) -> Self { let mut literals = Vec :: new () ; for part in parts . into_vec () { match part { CfgExpr :: Invalid | CfgExpr :: Atom (_) | CfgExpr :: Not (_) => { literals . push (Literal :: new (part)) ; } CfgExpr :: All (conj) => { literals . extend (Conjunction :: new (conj) . literals) ; } CfgExpr :: Any (_) => unreachable ! ("disjunction in conjunction") , } } Self { literals } } }
     };
 }
 

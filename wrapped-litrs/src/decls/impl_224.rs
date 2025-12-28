@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        Buffer!();
+        StringLit!();
+        ParseError!();
+    };
+}
+
+macro_rules! impl_224 {
+    () => {
+        deps!();
+        impl < B : Buffer > StringLit < B > { # [doc = " Parses the input as a (raw) string literal. Returns an error if the"] # [doc = " input is invalid or represents a different kind of literal."] pub fn parse (input : B) -> Result < Self , ParseError > { match first_byte_or_empty (& input) ? { b'r' | b'"' => { let (value , num_hashes , start_suffix) = parse_impl (& input) ? ; Ok (Self { raw : input , value , num_hashes , start_suffix }) } _ => Err (perr (0 , InvalidStringLiteralStart)) , } } # [doc = " Returns the string value this literal represents (where all escapes have"] # [doc = " been turned into their respective values)."] pub fn value (& self) -> & str { self . value . as_deref () . unwrap_or (& self . raw [self . inner_range ()]) } # [doc = " Like `value` but returns a potentially owned version of the value."] # [doc = ""] # [doc = " The return value is either `String` if `B = String`, or"] # [doc = " `Cow<'a, str>` if `B = &'a str`."] pub fn into_value (self) -> B :: Cow { let inner_range = self . inner_range () ; let Self { raw , value , .. } = self ; value . map (B :: Cow :: from) . unwrap_or_else (| | raw . cut (inner_range) . into_cow ()) } # [doc = " The optional suffix. Returns `\"\"` if the suffix is empty/does not exist."] pub fn suffix (& self) -> & str { & (* self . raw) [self . start_suffix ..] } # [doc = " Returns whether this literal is a raw string literal (starting with"] # [doc = " `r`)."] pub fn is_raw_string (& self) -> bool { self . num_hashes . is_some () } # [doc = " Returns the raw input that was passed to `parse`."] pub fn raw_input (& self) -> & str { & self . raw } # [doc = " Returns the raw input that was passed to `parse`, potentially owned."] pub fn into_raw_input (self) -> B { self . raw } # [doc = " The range within `self.raw` that excludes the quotes and potential `r#`."] fn inner_range (& self) -> Range < usize > { match self . num_hashes { None => 1 .. self . start_suffix - 1 , Some (n) => 1 + n as usize + 1 .. self . start_suffix - n as usize - 1 , } } }
+    };
+}
+
+impl_224!()

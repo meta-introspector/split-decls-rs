@@ -1,0 +1,17 @@
+macro_rules! deps {
+    () => {
+        RebaseOptions!();
+        MergeOptions!();
+        Note!();
+        CheckoutBuilder!();
+    };
+}
+
+macro_rules! impl_586 {
+    () => {
+        deps!();
+        impl < 'cb > RebaseOptions < 'cb > { # [doc = " Creates a new default set of rebase options."] pub fn new () -> RebaseOptions < 'cb > { let mut opts = RebaseOptions { raw : unsafe { mem :: zeroed () } , rewrite_notes_ref : None , merge_options : None , checkout_options : None , } ; assert_eq ! (unsafe { raw :: git_rebase_init_options (& mut opts . raw , 1) } , 0) ; opts } # [doc = " Used by `Repository::rebase`, this will instruct other clients working on this"] # [doc = " rebase that you want a quiet rebase experience, which they may choose to"] # [doc = " provide in an application-specific manner. This has no effect upon"] # [doc = " libgit2 directly, but is provided for interoperability between Git"] # [doc = " tools."] pub fn quiet (& mut self , quiet : bool) -> & mut RebaseOptions < 'cb > { self . raw . quiet = quiet as i32 ; self } # [doc = " Used by `Repository::rebase`, this will begin an in-memory rebase,"] # [doc = " which will allow callers to step through the rebase operations and"] # [doc = " commit the rebased changes, but will not rewind HEAD or update the"] # [doc = " repository to be in a rebasing state.  This will not interfere with"] # [doc = " the working directory (if there is one)."] pub fn inmemory (& mut self , inmemory : bool) -> & mut RebaseOptions < 'cb > { self . raw . inmemory = inmemory as i32 ; self } # [doc = " Used by `finish()`, this is the name of the notes reference"] # [doc = " used to rewrite notes for rebased commits when finishing the rebase;"] # [doc = " if NULL, the contents of the configuration option `notes.rewriteRef`"] # [doc = " is examined, unless the configuration option `notes.rewrite.rebase`"] # [doc = " is set to false.  If `notes.rewriteRef` is also NULL, notes will"] # [doc = " not be rewritten."] pub fn rewrite_notes_ref (& mut self , rewrite_notes_ref : & str) -> & mut RebaseOptions < 'cb > { self . rewrite_notes_ref = Some (CString :: new (rewrite_notes_ref) . unwrap ()) ; self } # [doc = " Options to control how trees are merged during `next()`."] pub fn merge_options (& mut self , opts : MergeOptions) -> & mut RebaseOptions < 'cb > { self . merge_options = Some (opts) ; self } # [doc = " Options to control how files are written during `Repository::rebase`,"] # [doc = " `next()` and `abort()`. Note that a minimum strategy of"] # [doc = " `GIT_CHECKOUT_SAFE` is defaulted in `init` and `next`, and a minimum"] # [doc = " strategy of `GIT_CHECKOUT_FORCE` is defaulted in `abort` to match git"] # [doc = " semantics."] pub fn checkout_options (& mut self , opts : CheckoutBuilder < 'cb >) -> & mut RebaseOptions < 'cb > { self . checkout_options = Some (opts) ; self } # [doc = " Acquire a pointer to the underlying raw options."] pub fn raw (& mut self) -> * const raw :: git_rebase_options { unsafe { if let Some (opts) = self . merge_options . as_mut () . take () { ptr :: copy_nonoverlapping (opts . raw () , & mut self . raw . merge_options , 1) ; } if let Some (opts) = self . checkout_options . as_mut () { opts . configure (& mut self . raw . checkout_options) ; } self . raw . rewrite_notes_ref = self . rewrite_notes_ref . as_ref () . map (| s | s . as_ptr ()) . unwrap_or (ptr :: null ()) ; } & self . raw } }
+    };
+}
+
+impl_586!()

@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        CompletionItemKind!();
+    };
+}
+
+macro_rules! res_to_kind {
+    () => {
+        deps!();
+        fn res_to_kind (resolution : ScopeDef) -> CompletionItemKind { use hir :: ModuleDef :: * ; match resolution { ScopeDef :: Unknown => CompletionItemKind :: UnresolvedReference , ScopeDef :: ModuleDef (Function (_)) => CompletionItemKind :: SymbolKind (SymbolKind :: Function) , ScopeDef :: ModuleDef (Variant (_)) => CompletionItemKind :: SymbolKind (SymbolKind :: Variant) , ScopeDef :: ModuleDef (Macro (_)) => CompletionItemKind :: SymbolKind (SymbolKind :: Macro) , ScopeDef :: ModuleDef (Module (..)) => CompletionItemKind :: SymbolKind (SymbolKind :: Module) , ScopeDef :: ModuleDef (Adt (adt)) => CompletionItemKind :: SymbolKind (match adt { hir :: Adt :: Struct (_) => SymbolKind :: Struct , hir :: Adt :: Union (_) => SymbolKind :: Union , hir :: Adt :: Enum (_) => SymbolKind :: Enum , }) , ScopeDef :: ModuleDef (Const (..)) => CompletionItemKind :: SymbolKind (SymbolKind :: Const) , ScopeDef :: ModuleDef (Static (..)) => CompletionItemKind :: SymbolKind (SymbolKind :: Static) , ScopeDef :: ModuleDef (Trait (..)) => CompletionItemKind :: SymbolKind (SymbolKind :: Trait) , ScopeDef :: ModuleDef (TypeAlias (..)) => CompletionItemKind :: SymbolKind (SymbolKind :: TypeAlias) , ScopeDef :: ModuleDef (BuiltinType (..)) => CompletionItemKind :: BuiltinType , ScopeDef :: GenericParam (param) => CompletionItemKind :: SymbolKind (match param { hir :: GenericParam :: TypeParam (_) => SymbolKind :: TypeParam , hir :: GenericParam :: ConstParam (_) => SymbolKind :: ConstParam , hir :: GenericParam :: LifetimeParam (_) => SymbolKind :: LifetimeParam , }) , ScopeDef :: Local (..) => CompletionItemKind :: SymbolKind (SymbolKind :: Local) , ScopeDef :: Label (..) => CompletionItemKind :: SymbolKind (SymbolKind :: Label) , ScopeDef :: AdtSelfType (..) | ScopeDef :: ImplSelfType (..) => { CompletionItemKind :: SymbolKind (SymbolKind :: SelfParam) } } }
+    };
+}
+
+res_to_kind!()

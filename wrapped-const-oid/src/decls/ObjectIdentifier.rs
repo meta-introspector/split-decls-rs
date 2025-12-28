@@ -1,5 +1,12 @@
+macro_rules! deps {
+    () => {
+        Buffer!();
+    };
+}
+
 macro_rules! ObjectIdentifier {
     () => {
+        deps!();
         # [doc = " Object identifier (OID)."] # [doc = ""] # [doc = " OIDs are hierarchical structures consisting of \"arcs\", i.e. integer"] # [doc = " identifiers."] # [doc = ""] # [doc = " # Validity"] # [doc = ""] # [doc = " In order for an OID to be considered valid by this library, it must meet"] # [doc = " the following criteria:"] # [doc = ""] # [doc = " - The OID MUST have at least 3 arcs"] # [doc = " - The first arc MUST be within the range 0-2"] # [doc = " - The second arc MUST be within the range 0-39"] # [doc = " - The BER/DER encoding of the OID MUST be shorter than"] # [doc = "   [`ObjectIdentifier::MAX_SIZE`]"] # [derive (Clone , Copy , Eq , Hash , PartialEq , PartialOrd , Ord)] pub struct ObjectIdentifier < const MAX_SIZE : usize = DEFAULT_MAX_SIZE > { # [doc = " Buffer containing BER/DER-serialized bytes (sans ASN.1 tag/length)"] ber : Buffer < MAX_SIZE > , }
     };
 }

@@ -1,15 +1,14 @@
 macro_rules! deps {
     () => {
         ArrayLength!();
-        LengthError!();
-        GenericArray!();
+        GenericArrayIter!();
     };
 }
 
 macro_rules! impl_50 {
     () => {
         deps!();
-        impl < 'a , T , N : ArrayLength > TryFrom < & 'a [T] > for & 'a GenericArray < T , N > { type Error = LengthError ; # [inline (always)] fn try_from (slice : & 'a [T]) -> Result < Self , Self :: Error > { GenericArray :: try_from_slice (slice) } }
+        impl < T : fmt :: Debug , N : ArrayLength > fmt :: Debug for GenericArrayIter < T , N > { fn fmt (& self , f : & mut fmt :: Formatter) -> fmt :: Result { f . debug_tuple ("GenericArrayIter") . field (& self . as_slice ()) . finish () } }
     };
 }
 

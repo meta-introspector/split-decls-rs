@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        Type!();
+    };
+}
+
+macro_rules! impl_42 {
+    () => {
+        deps!();
+        impl Display for Type { fn fmt (& self , f : & mut Formatter) -> fmt :: Result { match * self { Type :: Alpaquita => write ! (f , "Alpaquita Linux") , Type :: Alpine => write ! (f , "Alpine Linux") , Type :: AlmaLinux => write ! (f , "AlmaLinux") , Type :: ALTLinux => write ! (f , "ALT Linux") , Type :: Amazon => write ! (f , "Amazon Linux AMI") , Type :: AOSC => write ! (f , "AOSC OS") , Type :: Arch => write ! (f , "Arch Linux") , Type :: Bluefin => write ! (f , "Bluefin") , Type :: CachyOS => write ! (f , "CachyOS Linux") , Type :: Artix => write ! (f , "Artix Linux") , Type :: DragonFly => write ! (f , "DragonFly BSD") , Type :: Elementary => write ! (f , "Elementary OS") , Type :: Garuda => write ! (f , "Garuda Linux") , Type :: Gentoo => write ! (f , "Gentoo Linux") , Type :: Illumos => write ! (f , "illumos") , Type :: Ios => write ! (f , "iOS") , Type :: Kali => write ! (f , "Kali Linux") , Type :: Macos => write ! (f , "Mac OS") , Type :: MidnightBSD => write ! (f , "Midnight BSD") , Type :: Mint => write ! (f , "Linux Mint") , Type :: Nobara => write ! (f , "Nobara Linux") , Type :: openEuler => write ! (f , "EulerOS") , Type :: OracleLinux => write ! (f , "Oracle Linux") , Type :: Pop => write ! (f , "Pop!_OS") , Type :: Raspbian => write ! (f , "Raspberry Pi OS") , Type :: Redhat => write ! (f , "Red Hat Linux") , Type :: RedHatEnterprise => write ! (f , "Red Hat Enterprise Linux") , Type :: RockyLinux => write ! (f , "Rocky Linux") , Type :: SUSE => write ! (f , "SUSE Linux Enterprise Server") , Type :: Ultramarine => write ! (f , "Ultramarine Linux") , Type :: Uos => write ! (f , "UOS") , Type :: Void => write ! (f , "Void Linux") , Type :: Zorin => write ! (f , "Zorin OS") , _ => write ! (f , "{self:?}") , } } }
+    };
+}
+
+impl_42!()

@@ -1,14 +1,13 @@
 macro_rules! deps {
     () => {
-        Utf8Path!();
-        Utf8PathBuf!();
+        Utf8Component!();
     };
 }
 
 macro_rules! impl_61 {
     () => {
         deps!();
-        impl < T : ? Sized + AsRef < str > > From < & T > for Box < Utf8Path > { fn from (s : & T) -> Box < Utf8Path > { Utf8PathBuf :: from (s) . into_boxed_path () } }
+        impl AsRef < Path > for Utf8Component < '_ > { # [inline] fn as_ref (& self) -> & Path { self . as_os_str () . as_ref () } }
     };
 }
 

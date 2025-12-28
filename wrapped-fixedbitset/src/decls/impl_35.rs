@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Union!();
+        Block!();
     };
 }
 
 macro_rules! impl_35 {
     () => {
         deps!();
-        impl < 'a > Iterator for Union < 'a > { type Item = usize ; # [inline] fn next (& mut self) -> Option < Self :: Item > { self . iter . next () } # [inline] fn size_hint (& self) -> (usize , Option < usize >) { self . iter . size_hint () } }
+        impl Not for Block { type Output = Block ; # [inline] fn not (self) -> Self :: Output { unsafe { Self (_mm256_xor_si256 (self . 0 , Self :: ALL . 0)) } } }
     };
 }
 

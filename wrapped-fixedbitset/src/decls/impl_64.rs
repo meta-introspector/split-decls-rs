@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        FixedBitSet!();
+        IndexRange!();
     };
 }
 
 macro_rules! impl_64 {
     () => {
         deps!();
-        impl BitOrAssign for FixedBitSet { fn bitor_assign (& mut self , other : Self) { self . union_with (& other) ; } }
+        impl < T : Copy > IndexRange < T > for RangeFrom < T > { # [inline] fn start (& self) -> Option < T > { Some (self . start) } }
     };
 }
 

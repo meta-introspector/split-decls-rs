@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        SymmetricDifference!();
+        Block!();
     };
 }
 
 macro_rules! impl_27 {
     () => {
         deps!();
-        impl < 'a > Iterator for SymmetricDifference < 'a > { type Item = usize ; # [inline] fn next (& mut self) -> Option < Self :: Item > { self . iter . next () } # [inline] fn size_hint (& self) -> (usize , Option < usize >) { self . iter . size_hint () } }
+        impl BitOr for Block { type Output = Block ; # [inline] fn bitor (self , other : Self) -> Self :: Output { unsafe { Self (_mm256_or_pd (self . 0 , other . 0)) } } }
     };
 }
 

@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        Span!();
+        BoolLit!();
+    };
+}
+
+macro_rules! impl_bool_lit_to_pm_lit {
+    () => {
+        deps!();
+        macro_rules ! impl_bool_lit_to_pm_lit { ([$ ($ prefix : tt) *] =>) => { impl From < crate :: BoolLit > for $ ($ prefix) * Ident { fn from (l : crate :: BoolLit) -> Self { Self :: new (l . as_str () , $ ($ prefix) * Span :: call_site ()) } } } ; }
+    };
+}
+
+impl_bool_lit_to_pm_lit!()

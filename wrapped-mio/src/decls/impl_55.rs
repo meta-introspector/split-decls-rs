@@ -1,0 +1,17 @@
+macro_rules! deps {
+    () => {
+        Event!();
+        Events!();
+        Poll!();
+        Iter!();
+    };
+}
+
+macro_rules! impl_55 {
+    () => {
+        deps!();
+        impl Events { # [doc = " Return a new `Events` capable of holding up to `capacity` events."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " use mio::Events;"] # [doc = ""] # [doc = " let events = Events::with_capacity(1024);"] # [doc = " assert_eq!(1024, events.capacity());"] # [doc = " ```"] pub fn with_capacity (capacity : usize) -> Events { Events { inner : sys :: Events :: with_capacity (capacity) , } } # [doc = " Returns the number of `Event` values that `self` can hold."] # [doc = ""] # [doc = " ```"] # [doc = " use mio::Events;"] # [doc = ""] # [doc = " let events = Events::with_capacity(1024);"] # [doc = " assert_eq!(1024, events.capacity());"] # [doc = " ```"] pub fn capacity (& self) -> usize { self . inner . capacity () } # [doc = " Returns `true` if `self` contains no `Event` values."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " use mio::Events;"] # [doc = ""] # [doc = " let events = Events::with_capacity(1024);"] # [doc = " assert!(events.is_empty());"] # [doc = " ```"] pub fn is_empty (& self) -> bool { self . inner . is_empty () } # [doc = " Returns an iterator over the `Event` values."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [cfg_attr (feature = "os-poll" , doc = "```")] # [cfg_attr (not (feature = "os-poll") , doc = "```ignore")] # [doc = " # use std::error::Error;"] # [doc = " # fn main() -> Result<(), Box<dyn Error>> {"] # [doc = " use mio::{Events, Poll};"] # [doc = " use std::time::Duration;"] # [doc = ""] # [doc = " let mut events = Events::with_capacity(1024);"] # [doc = " let mut poll = Poll::new()?;"] # [doc = ""] # [doc = " // Register handles with `poll`."] # [doc = ""] # [doc = " poll.poll(&mut events, Some(Duration::from_millis(100)))?;"] # [doc = ""] # [doc = " for event in events.iter() {"] # [doc = "     println!(\"Got an event for {:?}\", event.token());"] # [doc = " }"] # [doc = " #     Ok(())"] # [doc = " # }"] # [doc = " ```"] pub fn iter (& self) -> Iter < '_ > { Iter { inner : self , pos : 0 , } } # [doc = " Clearing all `Event` values from container explicitly."] # [doc = ""] # [doc = " # Notes"] # [doc = ""] # [doc = " Events are cleared before every `poll`, so it is not required to call"] # [doc = " this manually."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [cfg_attr (feature = "os-poll" , doc = "```")] # [cfg_attr (not (feature = "os-poll") , doc = "```ignore")] # [doc = " # use std::error::Error;"] # [doc = " # fn main() -> Result<(), Box<dyn Error>> {"] # [doc = " use mio::{Events, Poll};"] # [doc = " use std::time::Duration;"] # [doc = ""] # [doc = " let mut events = Events::with_capacity(1024);"] # [doc = " let mut poll = Poll::new()?;"] # [doc = ""] # [doc = " // Register handles with `poll`."] # [doc = ""] # [doc = " poll.poll(&mut events, Some(Duration::from_millis(100)))?;"] # [doc = ""] # [doc = " // Clear all events."] # [doc = " events.clear();"] # [doc = " assert!(events.is_empty());"] # [doc = " #     Ok(())"] # [doc = " # }"] # [doc = " ```"] pub fn clear (& mut self) { self . inner . clear () ; } # [doc = " Returns the inner `sys::Events`."] pub (crate) fn sys (& mut self) -> & mut sys :: Events { & mut self . inner } }
+    };
+}
+
+impl_55!()

@@ -1,15 +1,14 @@
 macro_rules! deps {
     () => {
+        IdxRange!();
         Idx!();
-        Arena!();
-        IntoIter!();
     };
 }
 
 macro_rules! impl_38 {
     () => {
         deps!();
-        impl < T > IntoIterator for Arena < T > { type Item = (Idx < T > , T) ; type IntoIter = IntoIter < T > ; fn into_iter (self) -> Self :: IntoIter { IntoIter (self . data . into_iter () . enumerate ()) } }
+        impl < T > Iterator for IdxRange < T > { type Item = Idx < T > ; fn next (& mut self) -> Option < Self :: Item > { self . range . next () . map (| raw | Idx :: from_raw (raw . into ())) } fn size_hint (& self) -> (usize , Option < usize >) { self . range . size_hint () } fn count (self) -> usize where Self : Sized , { self . range . count () } fn last (self) -> Option < Self :: Item > where Self : Sized , { self . range . last () . map (| raw | Idx :: from_raw (raw . into ())) } fn nth (& mut self , n : usize) -> Option < Self :: Item > { self . range . nth (n) . map (| raw | Idx :: from_raw (raw . into ())) } }
     };
 }
 

@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        Match!();
+        Automaton!();
+        StateID!();
+    };
+}
+
+macro_rules! get_match {
+    () => {
+        deps!();
+        # [inline (always)] fn get_match < A : Automaton + ? Sized > (aut : & A , sid : StateID , index : usize , at : usize ,) -> Match { let pid = aut . match_pattern (sid , index) ; let len = aut . pattern_len (pid) ; Match :: new (pid , (at - len) .. at) }
+    };
+}
+
+get_match!()

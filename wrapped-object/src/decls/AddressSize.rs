@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        U16!();
+        U32!();
+        U64!();
+    };
+}
+
+macro_rules! AddressSize {
+    () => {
+        deps!();
+        # [doc = " The size of an address value for an architecture."] # [doc = ""] # [doc = " This may differ from the address size supported by the file format (such as for COFF)."] # [allow (missing_docs)] # [derive (Debug , Clone , Copy , PartialEq , Eq , Hash)] # [non_exhaustive] # [repr (u8)] pub enum AddressSize { U8 = 1 , U16 = 2 , U32 = 4 , U64 = 8 , }
+    };
+}
+
+AddressSize!()

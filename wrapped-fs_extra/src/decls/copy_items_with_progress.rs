@@ -1,6 +1,11 @@
 macro_rules! deps {
     () => {
+        ErrorKind!();
+        TransitProcessResult!();
         TransitProcess!();
+        TransitState!();
+        CopyOptions!();
+        Result!();
     };
 }
 

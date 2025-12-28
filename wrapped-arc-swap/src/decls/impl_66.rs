@@ -1,0 +1,18 @@
+macro_rules! deps {
+    () => {
+        Slots!();
+        Handover!();
+        RefCnt!();
+        Debt!();
+        Local!();
+    };
+}
+
+macro_rules! impl_66 {
+    () => {
+        deps!();
+        impl Slots { pub (super) fn slot (& self) -> & Debt { & self . slot } pub (super) fn get_debt (& self , ptr : usize , local : & Local) -> (usize , bool) { let gen = local . generation . get () . wrapping_add (4) ; debug_assert_eq ! (gen & GEN_TAG , 0) ; local . generation . set (gen) ; let discard = gen == 0 ; let gen = gen | GEN_TAG ; self . active_addr . store (ptr , SeqCst) ; let prev = self . control . swap (gen , SeqCst) ; debug_assert_eq ! (IDLE , prev , "Left control in wrong state") ; (gen , discard) } pub (super) fn help < R , T > (& self , who : & Self , storage_addr : usize , replacement : & R) where T : RefCnt , R : Fn () -> T , { debug_assert_eq ! (IDLE , self . control . load (Relaxed)) ; let mut control = who . control . load (SeqCst) ; loop { match control & TAG_MASK { IDLE if control == IDLE => break , REPLACEMENT_TAG => break , GEN_TAG => { debug_assert ! (! ptr :: eq (self , who) , "Refusing to help myself, makes no sense") ; let active_addr = who . active_addr . load (SeqCst) ; if active_addr != storage_addr { let new_control = who . control . load (SeqCst) ; if new_control == control { break ; } else { control = new_control ; continue ; } } let replacement = replacement () ; let replace_addr = T :: as_ptr (& replacement) as usize ; let their_space = who . space_offer . load (SeqCst) ; let my_space = self . space_offer . load (SeqCst) ; unsafe { (* my_space) . 0 . store (replace_addr , SeqCst) ; } assert_eq ! (my_space as usize & TAG_MASK , 0) ; let space_addr = (my_space as usize) | REPLACEMENT_TAG ; match who . control . compare_exchange (control , space_addr , SeqCst , SeqCst) { Ok (_) => { self . space_offer . store (their_space , SeqCst) ; T :: into_ptr (replacement) ; break ; } Err (new_control) => { control = new_control ; } } } _ => unreachable ! ("Invalid control value {:X}" , control) , } } } pub (super) fn init (& mut self) { * self . space_offer . get_mut () = & mut self . handover ; } pub (super) fn confirm (& self , gen : usize , ptr : usize) -> Result < () , usize > { let prev = self . slot . 0 . swap (ptr , SeqCst) ; debug_assert_eq ! (Debt :: NONE , prev) ; let control = self . control . swap (IDLE , SeqCst) ; if control == gen { Ok (()) } else { debug_assert_eq ! (control & TAG_MASK , REPLACEMENT_TAG) ; let handover = (control & ! TAG_MASK) as * mut Handover ; let replacement = unsafe { & * handover } . 0 . load (SeqCst) ; self . space_offer . store (handover , SeqCst) ; Err (replacement) } } }
+    };
+}
+
+impl_66!()

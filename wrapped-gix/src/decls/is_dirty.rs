@@ -1,0 +1,19 @@
+macro_rules! deps {
+    () => {
+        TrackRenames!();
+        Note!();
+        Error!();
+        Submodule!();
+        Action!();
+        Repository!();
+    };
+}
+
+macro_rules! is_dirty {
+    () => {
+        deps!();
+        # [doc = ""] pub mod is_dirty { use std :: convert :: Infallible ; use crate :: Repository ; # [doc = " The error returned by [Repository::is_dirty()]."] # [derive (Debug , thiserror :: Error)] # [allow (missing_docs)] pub enum Error { # [error (transparent)] StatusPlatform (# [from] crate :: status :: Error) , # [error (transparent)] CreateStatusIterator (# [from] crate :: status :: into_iter :: Error) , # [error (transparent)] TreeIndexStatus (# [from] crate :: status :: tree_index :: Error) , # [error (transparent)] HeadTreeId (# [from] crate :: reference :: head_tree_id :: Error) , # [error (transparent)] OpenWorktreeIndex (# [from] crate :: worktree :: open_index :: Error) , } impl Repository { # [doc = " Returns `true` if the repository is dirty."] # [doc = " This means it's changed in one of the following ways:"] # [doc = ""] # [doc = " * the index was changed in comparison to its working tree"] # [doc = " * the working tree was changed in comparison to the index"] # [doc = " * submodules are taken in consideration, along with their `ignore` and `isActive` configuration"] # [doc = ""] # [doc = " Note that *untracked files* do *not* affect this flag."] pub fn is_dirty (& self) -> Result < bool , Error > { { let head_tree_id = self . head_tree_id () ? ; let mut index_is_dirty = false ; self . tree_index_status (& head_tree_id , & * self . index_or_empty () ? , None , crate :: status :: tree_index :: TrackRenames :: Disabled , | _ , _ , _ | { index_is_dirty = true ; Ok :: < _ , Infallible > (gix_diff :: index :: Action :: Cancel) } ,) ? ; if index_is_dirty { return Ok (true) ; } } let is_dirty = self . status (gix_features :: progress :: Discard) ? . index_worktree_rewrites (None) . index_worktree_submodules (crate :: status :: Submodule :: AsConfigured { check_dirty : true }) . index_worktree_options_mut (| opts | { opts . dirwalk_options = None ; }) . into_index_worktree_iter (Vec :: new ()) ? . take_while (Result :: is_ok) . next () . is_some () ; Ok (is_dirty) } } }
+    };
+}
+
+is_dirty!()

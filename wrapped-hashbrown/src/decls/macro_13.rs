@@ -1,0 +1,7 @@
+macro_rules! macro_13 {
+    () => {
+        cfg_if ! { if # [cfg (all (target_feature = "sse2" , any (target_arch = "x86" , target_arch = "x86_64") , not (miri) ,))] { mod sse2 ; use sse2 as imp ; } else if # [cfg (all (target_arch = "aarch64" , target_feature = "neon" , target_endian = "little" , not (miri) ,))] { mod neon ; use neon as imp ; } else if # [cfg (all (feature = "nightly" , target_arch = "loongarch64" , target_feature = "lsx" , not (miri) ,))] { mod lsx ; use lsx as imp ; } else { mod generic ; use generic as imp ; } }
+    };
+}
+
+macro_13!()

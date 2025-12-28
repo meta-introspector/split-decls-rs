@@ -1,7 +1,9 @@
 macro_rules! deps {
     () => {
-        LoginOptions!();
         RegistryInfo!();
+        Error!();
+        LoginOptions!();
+        Secret!();
     };
 }
 

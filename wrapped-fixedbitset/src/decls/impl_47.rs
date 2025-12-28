@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Ones!();
+        Block!();
     };
 }
 
 macro_rules! impl_47 {
     () => {
         deps!();
-        impl < 'a > FusedIterator for Ones < 'a > { }
+        impl BitAnd for Block { type Output = Block ; # [inline] fn bitand (self , other : Self) -> Self :: Output { Self (v128_and (self . 0 , other . 0)) } }
     };
 }
 

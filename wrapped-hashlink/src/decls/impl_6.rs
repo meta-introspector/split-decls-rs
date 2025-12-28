@@ -1,14 +1,15 @@
 macro_rules! deps {
     () => {
-        DefaultHasher!();
-        DefaultHashBuilder!();
+        RawEntryBuilderMut!();
+        LinkedHashMap!();
+        RawEntryBuilder!();
     };
 }
 
 macro_rules! impl_6 {
     () => {
         deps!();
-        impl BuildHasher for DefaultHashBuilder { type Hasher = DefaultHasher ; # [inline] fn build_hasher (& self) -> Self :: Hasher { DefaultHasher (self . 0 . build_hasher ()) } }
+        impl < K , V , S > LinkedHashMap < K , V , S > where S : BuildHasher , { # [inline] pub fn raw_entry (& self) -> RawEntryBuilder < '_ , K , V , S > { RawEntryBuilder { map : self } } # [inline] pub fn raw_entry_mut (& mut self) -> RawEntryBuilderMut < '_ , K , V , S > { RawEntryBuilderMut { map : self } } }
     };
 }
 

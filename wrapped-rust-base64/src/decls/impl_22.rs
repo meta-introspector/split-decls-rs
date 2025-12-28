@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        Engine!();
+        DecoderReader!();
+    };
+}
+
+macro_rules! impl_22 {
+    () => {
+        deps!();
+        impl < 'e , E : Engine , R : io :: Read > io :: Read for DecoderReader < 'e , E , R > { # [doc = " Decode input from the wrapped reader."] # [doc = ""] # [doc = " Under non-error circumstances, this returns `Ok` with the value being the number of bytes"] # [doc = " written in `buf`."] # [doc = ""] # [doc = " Where possible, this function buffers base64 to minimize the number of `read()` calls to the"] # [doc = " delegate reader."] # [doc = ""] # [doc = " # Errors"] # [doc = ""] # [doc = " Any errors emitted by the delegate reader are returned. Decoding errors due to invalid"] # [doc = " base64 are also possible, and will have `io::ErrorKind::InvalidData`."] fn read (& mut self , buf : & mut [u8]) -> io :: Result < usize > { if buf . is_empty () { return Ok (0) ; } debug_assert ! (self . b64_offset <= BUF_SIZE) ; debug_assert ! (self . b64_offset + self . b64_len <= BUF_SIZE) ; debug_assert ! (if self . b64_offset == BUF_SIZE { self . b64_len == 0 } else { self . b64_len <= BUF_SIZE }) ; debug_assert ! (if self . decoded_len == 0 { self . decoded_offset <= DECODED_CHUNK_SIZE } else { self . decoded_offset < DECODED_CHUNK_SIZE }) ; debug_assert ! (self . decoded_len < DECODED_CHUNK_SIZE) ; debug_assert ! (self . decoded_len + self . decoded_offset <= DECODED_CHUNK_SIZE) ; if self . decoded_len > 0 { self . flush_decoded_buf (buf) } else { let mut at_eof = false ; while self . b64_len < BASE64_CHUNK_SIZE { self . b64_buffer . copy_within (self . b64_offset .. self . b64_offset + self . b64_len , 0) ; self . b64_offset = 0 ; let read = self . read_from_delegate () ? ; if read == 0 { at_eof = true ; break ; } } if self . b64_len == 0 { debug_assert ! (at_eof) ; return Ok (0) ; } ; debug_assert ! (if at_eof { self . b64_len > 0 } else { self . b64_len >= BASE64_CHUNK_SIZE }) ; debug_assert_eq ! (0 , self . decoded_len) ; if buf . len () < DECODED_CHUNK_SIZE { let mut decoded_chunk = [0_u8 ; DECODED_CHUNK_SIZE] ; let to_decode = cmp :: min (self . b64_len , BASE64_CHUNK_SIZE) ; let decoded = self . decode_to_buf (to_decode , & mut decoded_chunk [..]) ? ; self . decoded_chunk_buffer [.. decoded] . copy_from_slice (& decoded_chunk [.. decoded]) ; self . decoded_offset = 0 ; self . decoded_len = decoded ; debug_assert ! (decoded <= 3) ; self . flush_decoded_buf (buf) } else { let b64_bytes_that_can_decode_into_buf = (buf . len () / DECODED_CHUNK_SIZE) . checked_mul (BASE64_CHUNK_SIZE) . expect ("too many chunks") ; debug_assert ! (b64_bytes_that_can_decode_into_buf >= BASE64_CHUNK_SIZE) ; let b64_bytes_available_to_decode = if at_eof { self . b64_len } else { self . b64_len - self . b64_len % 4 } ; let actual_decode_len = cmp :: min (b64_bytes_that_can_decode_into_buf , b64_bytes_available_to_decode ,) ; self . decode_to_buf (actual_decode_len , buf) } } } }
+    };
+}
+
+impl_22!()

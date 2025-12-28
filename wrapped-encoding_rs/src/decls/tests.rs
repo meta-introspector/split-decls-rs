@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Encoding!();
+        DecoderResult!();
         Demo!();
         CoderResult!();
-        DecoderResult!();
     };
 }
 

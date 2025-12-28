@@ -1,0 +1,90 @@
+macro_rules! deps {
+    () => {
+        ImageCoffSymbolsHeader!();
+        ImageDynamicRelocation32V2!();
+        ImageNtHeaders64!();
+        ImageEnclaveConfig64!();
+        ImageHotPatchHashes!();
+        ImageArmRuntimeFunctionEntry!();
+        ImageEpilogueDynamicRelocationHeader!();
+        ImageAuxSymbolFunction!();
+        ImageLinenumber!();
+        ImageBoundForwarderRef!();
+        ImageNtHeaders32!();
+        ImageDelayloadDescriptor!();
+        ImageResourceDirStringU!();
+        ImageVxdHeader!();
+        ImageArm64RuntimeFunctionEntry!();
+        ImageEnclaveConfig32!();
+        ImageFunctionEntry!();
+        ImageHotPatchBase!();
+        ImageResourceDirectoryEntry!();
+        ImageImportDescriptor!();
+        ImageBoundImportDescriptor!();
+        NonPagedDebugInfo!();
+        ImageBaseRelocation!();
+        ImageFileHeader!();
+        AnonObjectHeaderBigobj!();
+        ImageDynamicRelocationTable!();
+        ImageEnclaveImport!();
+        ImageSymbol!();
+        ImageLoadConfigDirectory64!();
+        ImageDebugMisc!();
+        ImageHotPatchInfo!();
+        ImageRuntimeFunctionEntry!();
+        ImportObjectHeader!();
+        ImageRomHeaders!();
+        AnonObjectHeader!();
+        ImageDataDirectory!();
+        ImageAuxSymbolCrc!();
+        ImageOptionalHeader32!();
+        ImageAlphaRuntimeFunctionEntry!();
+        ImageImportByName!();
+        ImageFunctionEntry64!();
+        ImageTlsDirectory32!();
+        ImageAlpha64RuntimeFunctionEntry!();
+        ImageAuxSymbolTokenDef!();
+        ImageAuxSymbolWeak!();
+        ImageResourceDirectory!();
+        ImageResourceDataEntry!();
+        ImageRelocation!();
+        ImageSeparateDebugHeader!();
+        ImageLoadConfigDirectory32!();
+        ImageAuxSymbolSection!();
+        ImageDynamicRelocation32!();
+        ImageAuxSymbolFunctionBeginEnd!();
+        MaskedRichHeaderEntry!();
+        ImageSymbolEx!();
+        ImageSymbolExBytes!();
+        ImageThunkData64!();
+        ImageTlsDirectory64!();
+        ImageLoadConfigCodeIntegrity!();
+        ImageDynamicRelocation64!();
+        ImageCor20Header!();
+        ImageDebugDirectory!();
+        ImagePrologueDynamicRelocationHeader!();
+        ImageExportDirectory!();
+        ImageOs2Header!();
+        ImageSymbolBytes!();
+        ImageOptionalHeader64!();
+        ImageArchiveMemberHeader!();
+        ImageSectionHeader!();
+        ImageResourceDirectoryString!();
+        ImageArchitectureEntry!();
+        ImageThunkData32!();
+        ImageRomOptionalHeader!();
+        AnonObjectHeaderV2!();
+        Guid!();
+        ImageDynamicRelocation64V2!();
+        ImageDosHeader!();
+    };
+}
+
+macro_rules! macro_5515 {
+    () => {
+        deps!();
+        unsafe_impl_pod ! (ImageDosHeader , ImageOs2Header , ImageVxdHeader , ImageFileHeader , ImageDataDirectory , ImageOptionalHeader32 , ImageRomOptionalHeader , ImageOptionalHeader64 , ImageNtHeaders64 , ImageNtHeaders32 , ImageRomHeaders , Guid , AnonObjectHeader , AnonObjectHeaderV2 , AnonObjectHeaderBigobj , ImageSectionHeader , ImageSymbol , ImageSymbolBytes , ImageSymbolEx , ImageSymbolExBytes , ImageAuxSymbolTokenDef , ImageAuxSymbolFunction , ImageAuxSymbolFunctionBeginEnd , ImageAuxSymbolWeak , ImageAuxSymbolSection , ImageAuxSymbolCrc , ImageRelocation , ImageLinenumber , ImageBaseRelocation , ImageArchiveMemberHeader , ImageExportDirectory , ImageImportByName , ImageThunkData64 , ImageThunkData32 , ImageTlsDirectory64 , ImageTlsDirectory32 , ImageImportDescriptor , ImageBoundImportDescriptor , ImageBoundForwarderRef , ImageDelayloadDescriptor , ImageResourceDirectory , ImageResourceDirectoryEntry , ImageResourceDirectoryString , ImageResourceDirStringU , ImageResourceDataEntry , ImageLoadConfigCodeIntegrity , ImageDynamicRelocationTable , ImageDynamicRelocation32 , ImageDynamicRelocation64 , ImageDynamicRelocation32V2 , ImageDynamicRelocation64V2 , ImagePrologueDynamicRelocationHeader , ImageEpilogueDynamicRelocationHeader , ImageLoadConfigDirectory32 , ImageLoadConfigDirectory64 , ImageHotPatchInfo , ImageHotPatchBase , ImageHotPatchHashes , ImageArmRuntimeFunctionEntry , ImageArm64RuntimeFunctionEntry , ImageAlpha64RuntimeFunctionEntry , ImageAlphaRuntimeFunctionEntry , ImageRuntimeFunctionEntry , ImageEnclaveConfig32 , ImageEnclaveConfig64 , ImageEnclaveImport , ImageDebugDirectory , ImageCoffSymbolsHeader , ImageDebugMisc , ImageFunctionEntry , ImageFunctionEntry64 , ImageSeparateDebugHeader , NonPagedDebugInfo , ImageArchitectureEntry , ImportObjectHeader , ImageCor20Header , MaskedRichHeaderEntry ,) ;
+    };
+}
+
+macro_5515!()

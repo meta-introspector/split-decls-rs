@@ -1,0 +1,22 @@
+macro_rules! deps {
+    () => {
+        FnvIndexSet!();
+        Encoding!();
+        LineEncoding!();
+        LineString!();
+        FnvIndexMap!();
+        DirectoryId!();
+        FileInfo!();
+        LineRow!();
+        LineInstruction!();
+    };
+}
+
+macro_rules! LineProgram {
+    () => {
+        deps!();
+        # [doc = " A line number program."] # [derive (Debug , Clone)] pub struct LineProgram { # [doc = " True if this line program was created with `LineProgram::none()`."] none : bool , encoding : Encoding , line_encoding : LineEncoding , # [doc = " A list of source directory path names."] # [doc = ""] # [doc = " If a path is relative, then the directory is located relative to the working"] # [doc = " directory of the compilation unit."] # [doc = ""] # [doc = " The first entry is for the working directory of the compilation unit."] directories : FnvIndexSet < LineString > , # [doc = " A list of source file entries."] # [doc = ""] # [doc = " Each entry has a path name and a directory."] # [doc = ""] # [doc = " If a path is a relative, then the file is located relative to the"] # [doc = " directory. Otherwise the directory is meaningless."] # [doc = ""] # [doc = " Does not include comp_file, even for version >= 5."] files : FnvIndexMap < (LineString , DirectoryId) , FileInfo > , # [doc = " True if the file entries may have valid timestamps."] # [doc = ""] # [doc = " Entries may still have a timestamp of 0 even if this is set."] # [doc = " For version <= 4, this is ignored."] # [doc = " For version 5, this controls whether to emit `DW_LNCT_timestamp`."] pub file_has_timestamp : bool , # [doc = " True if the file entries may have valid sizes."] # [doc = ""] # [doc = " Entries may still have a size of 0 even if this is set."] # [doc = " For version <= 4, this is ignored."] # [doc = " For version 5, this controls whether to emit `DW_LNCT_size`."] pub file_has_size : bool , # [doc = " True if the file entries have valid MD5 checksums."] # [doc = ""] # [doc = " For version <= 4, this is ignored."] # [doc = " For version 5, this controls whether to emit `DW_LNCT_MD5`."] pub file_has_md5 : bool , # [doc = " True if the file entries have embedded source code."] # [doc = ""] # [doc = " For version <= 4, this is ignored."] # [doc = " For version 5, this controls whether to emit `DW_LNCT_LLVM_source`."] pub file_has_source : bool , prev_row : LineRow , row : LineRow , instructions : Vec < LineInstruction > , in_sequence : bool , }
+    };
+}
+
+LineProgram!()

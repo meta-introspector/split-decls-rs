@@ -1,0 +1,23 @@
+macro_rules! deps {
+    () => {
+        Error!();
+        TreeWalkCbData!();
+        TreeEntry!();
+        TreeIter!();
+        Tree!();
+        Oid!();
+        TreeWalkResult!();
+        Object!();
+        Binding!();
+        TreeWalkMode!();
+    };
+}
+
+macro_rules! impl_818 {
+    () => {
+        deps!();
+        impl < 'repo > Tree < 'repo > { # [doc = " Get the id (SHA1) of a repository object"] pub fn id (& self) -> Oid { unsafe { Binding :: from_raw (raw :: git_tree_id (& * self . raw)) } } # [doc = " Get the number of entries listed in this tree."] pub fn len (& self) -> usize { unsafe { raw :: git_tree_entrycount (& * self . raw) as usize } } # [doc = " Return `true` if there is not entry"] pub fn is_empty (& self) -> bool { self . len () == 0 } # [doc = " Returns an iterator over the entries in this tree."] pub fn iter (& self) -> TreeIter < '_ > { TreeIter { range : 0 .. self . len () , tree : self , } } # [doc = " Traverse the entries in a tree and its subtrees in post or pre-order."] # [doc = " The callback function will be run on each node of the tree that's"] # [doc = " walked. The return code of this function will determine how the walk"] # [doc = " continues."] # [doc = ""] # [doc = " libgit2 requires that the callback be an integer, where 0 indicates a"] # [doc = " successful visit, 1 skips the node, and -1 aborts the traversal completely."] # [doc = " You may opt to use the enum [`TreeWalkResult`] instead."] # [doc = ""] # [doc = " ```ignore"] # [doc = " let mut ct = 0;"] # [doc = " tree.walk(TreeWalkMode::PreOrder, |_, entry| {"] # [doc = "     assert_eq!(entry.name(), Some(\"foo\"));"] # [doc = "     ct += 1;"] # [doc = "     TreeWalkResult::Ok"] # [doc = " }).unwrap();"] # [doc = " assert_eq!(ct, 1);"] # [doc = " ```"] # [doc = ""] # [doc = " See [libgit2 documentation][1] for more information."] # [doc = ""] # [doc = " [1]: https://libgit2.org/libgit2/#HEAD/group/tree/git_tree_walk"] pub fn walk < C , T > (& self , mode : TreeWalkMode , mut callback : C) -> Result < () , Error > where C : FnMut (& str , & TreeEntry < '_ >) -> T , T : Into < i32 > , { unsafe { let mut data = TreeWalkCbData { callback : & mut callback , } ; try_call ! (raw :: git_tree_walk (self . raw () , mode as raw :: git_treewalk_mode , treewalk_cb ::< T >, & mut data as * mut _ as * mut c_void)) ; Ok (()) } } # [doc = " Lookup a tree entry by SHA value."] pub fn get_id (& self , id : Oid) -> Option < TreeEntry < '_ > > { unsafe { let ptr = raw :: git_tree_entry_byid (& * self . raw () , & * id . raw ()) ; if ptr . is_null () { None } else { Some (entry_from_raw_const (ptr)) } } } # [doc = " Lookup a tree entry by its position in the tree"] pub fn get (& self , n : usize) -> Option < TreeEntry < '_ > > { unsafe { let ptr = raw :: git_tree_entry_byindex (& * self . raw () , n as libc :: size_t) ; if ptr . is_null () { None } else { Some (entry_from_raw_const (ptr)) } } } # [doc = " Lookup a tree entry by its filename"] pub fn get_name (& self , filename : & str) -> Option < TreeEntry < '_ > > { self . get_name_bytes (filename . as_bytes ()) } # [doc = " Lookup a tree entry by its filename, specified as bytes."] # [doc = ""] # [doc = " This allows for non-UTF-8 filenames."] pub fn get_name_bytes (& self , filename : & [u8]) -> Option < TreeEntry < '_ > > { let filename = CString :: new (filename) . unwrap () ; unsafe { let ptr = call ! (raw :: git_tree_entry_byname (&* self . raw () , filename)) ; if ptr . is_null () { None } else { Some (entry_from_raw_const (ptr)) } } } # [doc = " Retrieve a tree entry contained in a tree or in any of its subtrees,"] # [doc = " given its relative path."] pub fn get_path (& self , path : & Path) -> Result < TreeEntry < 'static > , Error > { let path = path_to_repo_path (path) ? ; let mut ret = ptr :: null_mut () ; unsafe { try_call ! (raw :: git_tree_entry_bypath (& mut ret , &* self . raw () , path)) ; Ok (Binding :: from_raw (ret)) } } # [doc = " Casts this Tree to be usable as an `Object`"] pub fn as_object (& self) -> & Object < 'repo > { unsafe { & * (self as * const _ as * const Object < 'repo >) } } # [doc = " Consumes this Tree to be returned as an `Object`"] pub fn into_object (self) -> Object < 'repo > { assert_eq ! (mem :: size_of_val (& self) , mem :: size_of ::< Object <'_ >> ()) ; unsafe { mem :: transmute (self) } } }
+    };
+}
+
+impl_818!()

@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        Task!();
+    };
+}
+
+macro_rules! impl_38 {
+    () => {
+        deps!();
+        impl Task { # [doc = " Actually run the task (invoking `poll` on the future) on the current"] # [doc = " thread."] fn run (self) { let Self { mut future , wake_handle , mut exec } = self ; let waker = waker_ref (& wake_handle) ; let mut cx = Context :: from_waker (& waker) ; unsafe { wake_handle . mutex . start_poll () ; loop { let res = future . poll_unpin (& mut cx) ; match res { Poll :: Pending => { } Poll :: Ready (()) => return wake_handle . mutex . complete () , } let task = Self { future , wake_handle : wake_handle . clone () , exec } ; match wake_handle . mutex . wait (task) { Ok (()) => return , Err (task) => { future = task . future ; exec = task . exec ; } } } } } }
+    };
+}
+
+impl_38!()

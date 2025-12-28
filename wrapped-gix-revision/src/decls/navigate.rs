@@ -1,0 +1,20 @@
+macro_rules! deps {
+    () => {
+        PeelTo!();
+        Navigate!();
+        Revision!();
+        Kind!();
+        Error!();
+        Traversal!();
+        Delegate!();
+    };
+}
+
+macro_rules! navigate {
+    () => {
+        deps!();
+        fn navigate < 'a , T > (input : & 'a BStr , delegate : & mut InterceptRev < '_ , T >) -> Result < & 'a BStr , Error > where T : Delegate , { use delegate :: { Kind , Navigate , Revision } ; let mut cursor = 0 ; while let Some (b) = input . get (cursor) { cursor += 1 ; match * b { b'~' => { let (number , consumed) = input . get (cursor ..) . and_then (| past_sep | try_parse_usize (past_sep . as_bstr ()) . transpose ()) . transpose () ? . unwrap_or ((1 , 0)) ; if number != 0 { delegate . traverse (delegate :: Traversal :: NthAncestor (number)) . ok_or (Error :: Delegate) ? ; } cursor += consumed ; } b'^' => { let past_sep = input . get (cursor ..) ; if let Some ((number , negative , consumed)) = past_sep . and_then (| past_sep | try_parse_isize (past_sep . as_bstr ()) . transpose ()) . transpose () ? { if negative { delegate . traverse (delegate :: Traversal :: NthParent (number . checked_mul (- 1) . ok_or_else (| | Error :: InvalidNumber { input : past_sep . expect ("present") . into () , }) ? . try_into () . expect ("non-negative") ,)) . ok_or (Error :: Delegate) ? ; delegate . kind (spec :: Kind :: RangeBetween) . ok_or (Error :: Delegate) ? ; if let Some ((prefix , hint)) = delegate . last_prefix . take () { match hint { Some (hint) => delegate . disambiguate_prefix (prefix , hint . to_ref () . into ()) , None => delegate . disambiguate_prefix (prefix , None) , } . ok_or (Error :: Delegate) ? ; } else if let Some (name) = delegate . last_ref . take () { delegate . find_ref (name . as_bstr ()) . ok_or (Error :: Delegate) ? ; } else { return Err (Error :: UnconsumedInput { input : input [cursor ..] . into () , }) ; } delegate . done () ; cursor += consumed ; return Ok (input [cursor ..] . as_bstr ()) ; } else if number == 0 { delegate . peel_until (delegate :: PeelTo :: ObjectKind (gix_object :: Kind :: Commit)) } else { delegate . traverse (delegate :: Traversal :: NthParent (number . try_into () . expect ("positive number") ,)) } . ok_or (Error :: Delegate) ? ; cursor += consumed ; } else if let Some ((kind , _rest , consumed)) = past_sep . and_then (| past_sep | parens (past_sep) . transpose ()) . transpose () ? { cursor += consumed ; let target = match kind . as_ref () . as_bytes () { b"commit" => delegate :: PeelTo :: ObjectKind (gix_object :: Kind :: Commit) , b"tag" => delegate :: PeelTo :: ObjectKind (gix_object :: Kind :: Tag) , b"tree" => delegate :: PeelTo :: ObjectKind (gix_object :: Kind :: Tree) , b"blob" => delegate :: PeelTo :: ObjectKind (gix_object :: Kind :: Blob) , b"object" => delegate :: PeelTo :: ValidObject , b"" => delegate :: PeelTo :: RecursiveTagObject , regex if regex . starts_with (b"/") => { let (regex , negated) = parse_regex_prefix (regex [1 ..] . as_bstr ()) ? ; if ! regex . is_empty () { delegate . find (regex , negated) . ok_or (Error :: Delegate) ? ; } continue ; } invalid => return Err (Error :: InvalidObject { input : invalid . into () }) , } ; delegate . peel_until (target) . ok_or (Error :: Delegate) ? ; } else if past_sep . and_then (< [_] > :: first) == Some (& b'!') { delegate . kind (spec :: Kind :: ExcludeReachableFromParents) . ok_or (Error :: Delegate) ? ; delegate . done () ; return Ok (input [cursor + 1 ..] . as_bstr ()) ; } else if past_sep . and_then (< [_] > :: first) == Some (& b'@') { delegate . kind (spec :: Kind :: IncludeReachableFromParents) . ok_or (Error :: Delegate) ? ; delegate . done () ; return Ok (input [cursor + 1 ..] . as_bstr ()) ; } else { delegate . traverse (delegate :: Traversal :: NthParent (1)) . ok_or (Error :: Delegate) ? ; } } b':' => { delegate . peel_until (delegate :: PeelTo :: Path (input [cursor ..] . as_bstr ())) . ok_or (Error :: Delegate) ? ; return Ok ("" . into ()) ; } _ => return Ok (input [cursor - 1 ..] . as_bstr ()) , } } Ok ("" . into ()) }
+    };
+}
+
+navigate!()

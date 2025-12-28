@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Blob!();
+        BlobRef!();
+        Tree!();
         CommitRef!();
+        Commit!();
+        Tag!();
         TagRef!();
         TreeRef!();
-        BlobRef!();
-        Commit!();
-        Tree!();
-        Tag!();
+        Blob!();
     };
 }
 

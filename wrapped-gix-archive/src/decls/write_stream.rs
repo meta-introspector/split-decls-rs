@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        Format!();
+        Error!();
+        Options!();
+    };
+}
+
+macro_rules! write_stream {
+    () => {
+        deps!();
+        # [doc = " Write all stream entries in `stream` as provided by `next_entry(stream)` to `out` configured according to `opts` which"] # [doc = " also includes the streaming format."] # [doc = ""] # [doc = " ### Performance"] # [doc = ""] # [doc = " * The caller should be sure `out` is fast enough. If in doubt, wrap in [`std::io::BufWriter`]."] # [doc = " * Further, big files aren't suitable for archival into `tar` archives as they require the size of the stream to be known"] # [doc = "   prior to writing the header of each entry."] # [cfg_attr (not (feature = "tar") , allow (unused_mut , unused_variables))] pub fn write_stream < NextFn > (stream : & mut Stream , mut next_entry : NextFn , out : impl std :: io :: Write , opts : Options ,) -> Result < () , Error > where NextFn : FnMut (& mut Stream) -> Result < Option < Entry < '_ > > , gix_worktree_stream :: entry :: Error > , { if opts . format == Format :: InternalTransientNonPersistable { return Err (Error :: InternalFormatMustNotPersist) ; } # [cfg (any (feature = "tar" , feature = "tar_gz"))] { enum State < W : std :: io :: Write > { # [cfg (feature = "tar")] Tar ((tar :: Builder < W > , Vec < u8 >)) , # [cfg (feature = "tar_gz")] TarGz ((tar :: Builder < flate2 :: write :: GzEncoder < W > > , Vec < u8 >)) , } impl < W : std :: io :: Write > State < W > { pub fn new (format : Format , mtime : gix_date :: SecondsSinceUnixEpoch , out : W) -> Result < Self , Error > { Ok (match format { Format :: InternalTransientNonPersistable => unreachable ! ("handled earlier") , Format :: Zip { .. } => return Err (Error :: ZipWithoutSeek) , # [cfg (feature = "tar")] Format :: Tar => { # [cfg (feature = "tar")] { State :: Tar (({ let mut ar = tar :: Builder :: new (out) ; ar . mode (tar :: HeaderMode :: Deterministic) ; ar } , Vec :: with_capacity (64 * 1024) ,)) } # [cfg (not (feature = "tar"))] { Err (Error :: SupportNotCompiledIn { wanted : Format :: Tar }) } } Format :: TarGz { compression_level } => { # [cfg (feature = "tar_gz")] { State :: TarGz (({ let gz = flate2 :: GzBuilder :: new () . mtime (mtime as u32) . write (out , match compression_level { None => flate2 :: Compression :: default () , Some (level) => flate2 :: Compression :: new (u32 :: from (level)) , } ,) ; let mut ar = tar :: Builder :: new (gz) ; ar . mode (tar :: HeaderMode :: Deterministic) ; ar } , Vec :: with_capacity (64 * 1024) ,)) } # [cfg (not (feature = "tar_gz"))] { Err (Error :: SupportNotCompiledIn { wanted : Format :: TarGz }) } } }) } } let mut state = State :: new (opts . format , opts . modification_time , out) ? ; while let Some (entry) = next_entry (stream) ? { match & mut state { # [cfg (feature = "tar")] State :: Tar ((ar , buf)) => { append_tar_entry (ar , buf , entry , opts . modification_time , & opts) ? ; } # [cfg (feature = "tar_gz")] State :: TarGz ((ar , buf)) => { append_tar_entry (ar , buf , entry , opts . modification_time , & opts) ? ; } } } match state { # [cfg (feature = "tar")] State :: Tar ((mut ar , _)) => { ar . finish () ? ; } # [cfg (feature = "tar_gz")] State :: TarGz ((ar , _)) => { ar . into_inner () ? . finish () ? ; } } } Ok (()) }
+    };
+}
+
+write_stream!()

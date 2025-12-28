@@ -1,0 +1,17 @@
+macro_rules! deps {
+    () => {
+        ByteClassIter!();
+        ByteClasses!();
+        ByteClassElements!();
+        ByteClassElementRanges!();
+    };
+}
+
+macro_rules! impl_312 {
+    () => {
+        deps!();
+        impl ByteClasses { # [doc = " Creates a new set of equivalence classes where all bytes are mapped to"] # [doc = " the same class."] pub (crate) fn empty () -> ByteClasses { ByteClasses ([0 ; 256]) } # [doc = " Creates a new set of equivalence classes where each byte belongs to"] # [doc = " its own equivalence class."] pub (crate) fn singletons () -> ByteClasses { let mut classes = ByteClasses :: empty () ; for b in 0 ..= 255 { classes . set (b , b) ; } classes } # [doc = " Set the equivalence class for the given byte."] # [inline] pub (crate) fn set (& mut self , byte : u8 , class : u8) { self . 0 [usize :: from (byte)] = class ; } # [doc = " Get the equivalence class for the given byte."] # [inline] pub (crate) fn get (& self , byte : u8) -> u8 { self . 0 [usize :: from (byte)] } # [doc = " Return the total number of elements in the alphabet represented by"] # [doc = " these equivalence classes. Equivalently, this returns the total number"] # [doc = " of equivalence classes."] # [inline] pub (crate) fn alphabet_len (& self) -> usize { usize :: from (self . 0 [255]) + 1 } # [doc = " Returns the stride, as a base-2 exponent, required for these"] # [doc = " equivalence classes."] # [doc = ""] # [doc = " The stride is always the smallest power of 2 that is greater than or"] # [doc = " equal to the alphabet length. This is done so that converting between"] # [doc = " state IDs and indices can be done with shifts alone, which is much"] # [doc = " faster than integer division. The \"stride2\" is the exponent. i.e.,"] # [doc = " `2^stride2 = stride`."] pub (crate) fn stride2 (& self) -> usize { let zeros = self . alphabet_len () . next_power_of_two () . trailing_zeros () ; usize :: try_from (zeros) . unwrap () } # [doc = " Returns the stride for these equivalence classes, which corresponds"] # [doc = " to the smallest power of 2 greater than or equal to the number of"] # [doc = " equivalence classes."] pub (crate) fn stride (& self) -> usize { 1 << self . stride2 () } # [doc = " Returns true if and only if every byte in this class maps to its own"] # [doc = " equivalence class. Equivalently, there are 257 equivalence classes"] # [doc = " and each class contains exactly one byte (plus the special EOI class)."] # [inline] pub (crate) fn is_singleton (& self) -> bool { self . alphabet_len () == 256 } # [doc = " Returns an iterator over all equivalence classes in this set."] pub (crate) fn iter (& self) -> ByteClassIter { ByteClassIter { it : 0 .. self . alphabet_len () } } # [doc = " Returns an iterator of the bytes in the given equivalence class."] pub (crate) fn elements (& self , class : u8) -> ByteClassElements < '_ > { ByteClassElements { classes : self , class , bytes : 0 ..= 255 } } # [doc = " Returns an iterator of byte ranges in the given equivalence class."] # [doc = ""] # [doc = " That is, a sequence of contiguous ranges are returned. Typically, every"] # [doc = " class maps to a single contiguous range."] fn element_ranges (& self , class : u8) -> ByteClassElementRanges < '_ > { ByteClassElementRanges { elements : self . elements (class) , range : None } } }
+    };
+}
+
+impl_312!()

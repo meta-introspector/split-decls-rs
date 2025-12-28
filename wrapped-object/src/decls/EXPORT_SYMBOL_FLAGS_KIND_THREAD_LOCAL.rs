@@ -1,0 +1,7 @@
+macro_rules! EXPORT_SYMBOL_FLAGS_KIND_THREAD_LOCAL {
+    () => {
+        pub const EXPORT_SYMBOL_FLAGS_KIND_THREAD_LOCAL : u8 = 0x01 ;
+    };
+}
+
+EXPORT_SYMBOL_FLAGS_KIND_THREAD_LOCAL!()

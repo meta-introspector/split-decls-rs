@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Utf8Components!();
+        Utf8PathBuf!();
     };
 }
 
 macro_rules! impl_24 {
     () => {
         deps!();
-        impl fmt :: Debug for Utf8Components < '_ > { fn fmt (& self , f : & mut fmt :: Formatter) -> fmt :: Result { fmt :: Debug :: fmt (& self . 0 , f) } }
+        impl fmt :: Debug for Utf8PathBuf { fn fmt (& self , f : & mut fmt :: Formatter) -> fmt :: Result { fmt :: Debug :: fmt (& * * self , f) } }
     };
 }
 

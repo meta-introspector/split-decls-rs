@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         IntlMemoizer!();
-        IntlLangMemoizer!();
         Memoizable!();
+        IntlLangMemoizer!();
     };
 }
 

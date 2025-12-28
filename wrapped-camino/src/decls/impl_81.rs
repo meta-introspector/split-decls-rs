@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Utf8PathBuf!();
+        Utf8Path!();
     };
 }
 
 macro_rules! impl_81 {
     () => {
         deps!();
-        impl < 'a > From < Utf8PathBuf > for Cow < 'a , Path > { fn from (path : Utf8PathBuf) -> Cow < 'a , Path > { PathBuf :: from (path) . into () } }
+        impl < 'a > From < & 'a Utf8Path > for Cow < 'a , Utf8Path > { fn from (path : & 'a Utf8Path) -> Cow < 'a , Utf8Path > { Cow :: Borrowed (path) } }
     };
 }
 

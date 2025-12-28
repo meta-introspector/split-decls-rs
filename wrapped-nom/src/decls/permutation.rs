@@ -1,0 +1,19 @@
+macro_rules! deps {
+    () => {
+        IResult!();
+        Needed!();
+        ErrorKind!();
+        Parser!();
+        Permutation!();
+        ParseError!();
+    };
+}
+
+macro_rules! permutation {
+    () => {
+        deps!();
+        # [doc = " Applies a list of parsers in any order."] # [doc = ""] # [doc = " Permutation will succeed if all of the child parsers succeeded."] # [doc = " It takes as argument a tuple of parsers, and returns a"] # [doc = " tuple of the parser results."] # [doc = ""] # [doc = " ```rust"] # [doc = " # use nom::{Err,error::{Error, ErrorKind}, Needed, IResult, Parser};"] # [doc = " use nom::character::complete::{alpha1, digit1};"] # [doc = " use nom::branch::permutation;"] # [doc = " # fn main() {"] # [doc = " fn parser(input: &str) -> IResult<&str, (&str, &str)> {"] # [doc = "   permutation((alpha1, digit1)).parse(input)"] # [doc = " }"] # [doc = ""] # [doc = " // permutation recognizes alphabetic characters then digit"] # [doc = " assert_eq!(parser(\"abc123\"), Ok((\"\", (\"abc\", \"123\"))));"] # [doc = ""] # [doc = " // but also in inverse order"] # [doc = " assert_eq!(parser(\"123abc\"), Ok((\"\", (\"abc\", \"123\"))));"] # [doc = ""] # [doc = " // it will fail if one of the parsers failed"] # [doc = " assert_eq!(parser(\"abc;\"), Err(Err::Error(Error::new(\";\", ErrorKind::Digit))));"] # [doc = " # }"] # [doc = " ```"] # [doc = ""] # [doc = " The parsers are applied greedily: if there are multiple unapplied parsers"] # [doc = " that could parse the next slice of input, the first one is used."] # [doc = " ```rust"] # [doc = " # use nom::{Err, error::{Error, ErrorKind}, IResult, Parser};"] # [doc = " use nom::branch::permutation;"] # [doc = " use nom::character::complete::{anychar, char};"] # [doc = ""] # [doc = " fn parser(input: &str) -> IResult<&str, (char, char)> {"] # [doc = "   permutation((anychar, char('a'))).parse(input)"] # [doc = " }"] # [doc = ""] # [doc = " // anychar parses 'b', then char('a') parses 'a'"] # [doc = " assert_eq!(parser(\"ba\"), Ok((\"\", ('b', 'a'))));"] # [doc = ""] # [doc = " // anychar parses 'a', then char('a') fails on 'b',"] # [doc = " // even though char('a') followed by anychar would succeed"] # [doc = " assert_eq!(parser(\"ab\"), Err(Err::Error(Error::new(\"b\", ErrorKind::Char))));"] # [doc = " ```"] # [doc = ""] pub fn permutation < I : Clone , E : ParseError < I > , List > (list : List) -> Permutation < List , E > { Permutation { parser : list , e : PhantomData , } }
+    };
+}
+
+permutation!()

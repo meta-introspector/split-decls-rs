@@ -1,0 +1,7 @@
+macro_rules! macro_709 {
+    () => {
+        cursor_type_int_impl ! { isize i8 i16 i32 i64 i128 usize u8 u16 u32 u64 u128 }
+    };
+}
+
+macro_709!()

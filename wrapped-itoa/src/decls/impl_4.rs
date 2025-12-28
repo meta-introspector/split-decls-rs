@@ -7,7 +7,7 @@ macro_rules! deps {
 macro_rules! impl_4 {
     () => {
         deps!();
-        # [allow (clippy :: non_canonical_clone_impl)] impl Clone for Buffer { # [inline] fn clone (& self) -> Self { Buffer :: new () } }
+        impl Default for Buffer { # [inline] fn default () -> Buffer { Buffer :: new () } }
     };
 }
 

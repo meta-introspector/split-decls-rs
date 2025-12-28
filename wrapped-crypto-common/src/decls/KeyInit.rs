@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        InvalidLength!();
+        KeySizeUser!();
         Key!();
         WeakKeyError!();
-        KeySizeUser!();
-        InvalidLength!();
     };
 }
 

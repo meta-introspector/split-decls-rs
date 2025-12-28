@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        Socket!();
+        WaitFd!();
+    };
+}
+
+macro_rules! impl_148 {
+    () => {
+        deps!();
+        impl WaitFd { # [doc = " Constructs an empty (invalid) WaitFd."] pub fn new () -> WaitFd { WaitFd { inner : curl_sys :: curl_waitfd { fd : 0 , events : 0 , revents : 0 , } , } } # [doc = " Set the file descriptor to wait for."] pub fn set_fd (& mut self , fd : Socket) { self . inner . fd = fd ; } # [doc = " Indicate that the socket should poll on read events such as new data"] # [doc = " received."] # [doc = ""] # [doc = " Corresponds to `CURL_WAIT_POLLIN`."] pub fn poll_on_read (& mut self , val : bool) -> & mut WaitFd { self . flag (curl_sys :: CURL_WAIT_POLLIN , val) } # [doc = " Indicate that the socket should poll on high priority read events such"] # [doc = " as out of band data."] # [doc = ""] # [doc = " Corresponds to `CURL_WAIT_POLLPRI`."] pub fn poll_on_priority_read (& mut self , val : bool) -> & mut WaitFd { self . flag (curl_sys :: CURL_WAIT_POLLPRI , val) } # [doc = " Indicate that the socket should poll on write events such as the socket"] # [doc = " being clear to write without blocking."] # [doc = ""] # [doc = " Corresponds to `CURL_WAIT_POLLOUT`."] pub fn poll_on_write (& mut self , val : bool) -> & mut WaitFd { self . flag (curl_sys :: CURL_WAIT_POLLOUT , val) } fn flag (& mut self , flag : c_short , val : bool) -> & mut WaitFd { if val { self . inner . events |= flag ; } else { self . inner . events &= ! flag ; } self } # [doc = " After a call to `wait`, returns `true` if `poll_on_read` was set and a"] # [doc = " read event occured."] pub fn received_read (& self) -> bool { self . inner . revents & curl_sys :: CURL_WAIT_POLLIN == curl_sys :: CURL_WAIT_POLLIN } # [doc = " After a call to `wait`, returns `true` if `poll_on_priority_read` was set and a"] # [doc = " priority read event occured."] pub fn received_priority_read (& self) -> bool { self . inner . revents & curl_sys :: CURL_WAIT_POLLPRI == curl_sys :: CURL_WAIT_POLLPRI } # [doc = " After a call to `wait`, returns `true` if `poll_on_write` was set and a"] # [doc = " write event occured."] pub fn received_write (& self) -> bool { self . inner . revents & curl_sys :: CURL_WAIT_POLLOUT == curl_sys :: CURL_WAIT_POLLOUT } }
+    };
+}
+
+impl_148!()

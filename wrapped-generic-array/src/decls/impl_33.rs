@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        GenericArray!();
         ArrayLength!();
+        GenericArray!();
     };
 }
 
 macro_rules! impl_33 {
     () => {
         deps!();
-        unsafe impl < T : Send , N : ArrayLength > Send for GenericArray < T , N > { }
+        impl < T , N : ArrayLength > BorrowMut < [T] > for GenericArray < T , N > { # [inline (always)] fn borrow_mut (& mut self) -> & mut [T] { self . as_mut_slice () } }
     };
 }
 

@@ -1,14 +1,13 @@
 macro_rules! deps {
     () => {
-        HasVisibility!();
-        Const!();
+        Semantics!();
     };
 }
 
 macro_rules! impl_82 {
     () => {
         deps!();
-        impl HasVisibility for Const { fn visibility (& self , db : & dyn HirDatabase) -> Visibility { db . assoc_visibility (self . id . into ()) } }
+        impl < DB : ? Sized > fmt :: Debug for Semantics < '_ , DB > { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { write ! (f , "Semantics {{ ... }}") } }
     };
 }
 

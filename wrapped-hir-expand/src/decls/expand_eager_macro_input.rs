@@ -1,0 +1,26 @@
+macro_rules! deps {
+    () => {
+        MacroCallId!();
+        ExpandResult!();
+        ModPath!();
+        MacroDefId!();
+        EagerCallBackFn!();
+        EagerCallInfo!();
+        MacroCallKind!();
+        InFile!();
+        AstId!();
+        ExpansionSpanMap!();
+        MacroCallLoc!();
+        ExpandTo!();
+        ExpandDatabase!();
+    };
+}
+
+macro_rules! expand_eager_macro_input {
+    () => {
+        deps!();
+        pub fn expand_eager_macro_input (db : & dyn ExpandDatabase , krate : Crate , macro_call : & ast :: MacroCall , ast_id : AstId < ast :: MacroCall > , def : MacroDefId , call_site : SyntaxContext , resolver : & dyn Fn (& ModPath) -> Option < MacroDefId > , eager_callback : EagerCallBackFn < '_ > ,) -> ExpandResult < Option < MacroCallId > > { let expand_to = ExpandTo :: from_call_site (macro_call) ; let loc = MacroCallLoc { def , krate , kind : MacroCallKind :: FnLike { ast_id , expand_to : ExpandTo :: Expr , eager : None } , ctxt : call_site , } ; let arg_id = db . intern_macro_call (loc) ; # [allow (deprecated)] let (_ , _ , span) = db . macro_arg (arg_id) ; let ExpandResult { value : (arg_exp , arg_exp_map) , err : parse_err } = db . parse_macro_expansion (arg_id) ; let mut arg_map = ExpansionSpanMap :: empty () ; let ExpandResult { value : expanded_eager_input , err } = { eager_macro_recur (db , & arg_exp_map , & mut arg_map , TextSize :: new (0) , InFile :: new (arg_id . into () , arg_exp . syntax_node ()) , krate , call_site , resolver , eager_callback ,) } ; let err = parse_err . or (err) ; if cfg ! (debug_assertions) { arg_map . finish () ; } let Some ((expanded_eager_input , _mapping)) = expanded_eager_input else { return ExpandResult { value : None , err } ; } ; let mut subtree = syntax_bridge :: syntax_node_to_token_tree (& expanded_eager_input , arg_map , span , DocCommentDesugarMode :: Mbe ,) ; subtree . top_subtree_delimiter_mut () . kind = crate :: tt :: DelimiterKind :: Invisible ; let loc = MacroCallLoc { def , krate , kind : MacroCallKind :: FnLike { ast_id , expand_to , eager : Some (Arc :: new (EagerCallInfo { arg : Arc :: new (subtree) , arg_id , error : err . clone () , span , })) , } , ctxt : call_site , } ; ExpandResult { value : Some (db . intern_macro_call (loc)) , err } }
+    };
+}
+
+expand_eager_macro_input!()

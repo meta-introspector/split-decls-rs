@@ -1,13 +1,14 @@
 macro_rules! deps {
     () => {
-        GenericArrayImplOdd!();
+        ArrayLength!();
+        GenericArray!();
     };
 }
 
 macro_rules! impl_26 {
     () => {
         deps!();
-        impl < T , U > Sealed for GenericArrayImplOdd < T , U > { }
+        impl < T : Copy , N : ArrayLength > Copy for GenericArray < T , N > where N :: ArrayType < T > : Copy { }
     };
 }
 

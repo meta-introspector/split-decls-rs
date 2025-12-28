@@ -1,0 +1,7 @@
+macro_rules! IMAGE_SUBSYSTEM_XBOX_CODE_CATALOG {
+    () => {
+        pub const IMAGE_SUBSYSTEM_XBOX_CODE_CATALOG : u16 = 17 ;
+    };
+}
+
+IMAGE_SUBSYSTEM_XBOX_CODE_CATALOG!()

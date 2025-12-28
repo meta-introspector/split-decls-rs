@@ -1,14 +1,15 @@
 macro_rules! deps {
     () => {
         FallibleIterator!();
-        Skip!();
+        IntoFallible!();
+        Iterator!();
     };
 }
 
 macro_rules! impl_71 {
     () => {
         deps!();
-        impl < I > FallibleIterator for Skip < I > where I : FallibleIterator , { type Item = I :: Item ; type Error = I :: Error ; # [inline] fn next (& mut self) -> Result < Option < I :: Item > , I :: Error > { if self . n == 0 { self . it . next () } else { let n = self . n ; self . n = 0 ; self . it . nth (n) } } # [inline] fn size_hint (& self) -> (usize , Option < usize >) { let hint = self . it . size_hint () ; (hint . 0 . saturating_sub (self . n) , hint . 1 . map (| x | x . saturating_sub (self . n)) ,) } }
+        impl < T , I > FallibleIterator for IntoFallible < I > where I : iter :: Iterator < Item = T > , { type Item = T ; type Error = Infallible ; # [inline] fn next (& mut self) -> Result < Option < T > , Self :: Error > { Ok (self . 0 . next ()) } # [inline] fn size_hint (& self) -> (usize , Option < usize >) { self . 0 . size_hint () } # [inline] fn try_fold < B , E2 , F > (& mut self , init : B , f : F) -> Result < B , E2 > where E2 : From < Infallible > , F : FnMut (B , T) -> Result < B , E2 > , { self . 0 . try_fold (init , f) } }
     };
 }
 

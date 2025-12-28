@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        IdxRange!();
+        RawIdx!();
     };
 }
 
 macro_rules! impl_24 {
     () => {
         deps!();
-        impl < T > Clone for IdxRange < T > { fn clone (& self) -> Self { Self { range : self . range . clone () , _p : PhantomData } } }
+        impl fmt :: Debug for RawIdx { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { self . 0 . fmt (f) } }
     };
 }
 

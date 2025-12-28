@@ -1,0 +1,7 @@
+macro_rules! BIND_OPCODE_DO_BIND_ADD_ADDR_IMM_SCALED {
+    () => {
+        pub const BIND_OPCODE_DO_BIND_ADD_ADDR_IMM_SCALED : u8 = 0xB0 ;
+    };
+}
+
+BIND_OPCODE_DO_BIND_ADD_ADDR_IMM_SCALED!()

@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        Allocator!();
+        Vec!();
+        Global!();
+    };
+}
+
+macro_rules! RawVec {
+    () => {
+        deps!();
+        # [doc = " A low-level utility for more ergonomically allocating, reallocating, and deallocating"] # [doc = " a buffer of memory on the heap without having to worry about all the corner cases"] # [doc = " involved. This type is excellent for building your own data structures like Vec and VecDeque."] # [doc = " In particular:"] # [doc = ""] # [doc = " * Produces `NonNull::dangling()` on zero-sized types."] # [doc = " * Produces `NonNull::dangling()` on zero-length allocations."] # [doc = " * Avoids freeing `NonNull::dangling()`."] # [doc = " * Catches all overflows in capacity computations (promotes them to \"capacity overflow\" panics)."] # [doc = " * Guards against 32-bit systems allocating more than isize::MAX bytes."] # [doc = " * Guards against overflowing your length."] # [doc = " * Calls `handle_alloc_error` for fallible allocations."] # [doc = " * Contains a `ptr::NonNull` and thus endows the user with all related benefits."] # [doc = " * Uses the excess returned from the allocator to use the largest available capacity."] # [doc = ""] # [doc = " This type does not in anyway inspect the memory that it manages. When dropped it *will*"] # [doc = " free its memory, but it *won't* try to drop its contents. It is up to the user of `RawVec`"] # [doc = " to handle the actual things *stored* inside of a `RawVec`."] # [doc = ""] # [doc = " Note that the excess of a zero-sized types is always infinite, so `capacity()` always returns"] # [doc = " `usize::MAX`. This means that you need to be careful when round-tripping this type with a"] # [doc = " `Box<[T]>`, since `capacity()` won't yield the length."] # [allow (missing_debug_implementations)] pub (crate) struct RawVec < T , A : Allocator = Global > { ptr : NonNull < T > , cap : usize , alloc : A , }
+    };
+}
+
+RawVec!()

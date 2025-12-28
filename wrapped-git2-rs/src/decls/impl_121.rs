@@ -1,6 +1,13 @@
+macro_rules! deps {
+    () => {
+        OidArray!();
+    };
+}
+
 macro_rules! impl_121 {
     () => {
-        impl Default for PathspecFlags { fn default () -> Self { PathspecFlags :: DEFAULT } }
+        deps!();
+        impl Drop for OidArray { fn drop (& mut self) { unsafe { raw :: git_oidarray_free (& mut self . raw) } } }
     };
 }
 

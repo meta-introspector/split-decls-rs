@@ -1,5 +1,12 @@
+macro_rules! deps {
+    () => {
+        Copies!();
+    };
+}
+
 macro_rules! Rewrites {
     () => {
+        deps!();
         # [doc = " A structure to capture how to perform rename and copy tracking, used by the [rewrites::Tracker]."] # [derive (Debug , Copy , Clone , PartialEq)] # [cfg (feature = "blob")] pub struct Rewrites { # [doc = " If `Some(…)`, also find copies. `None` is the default which does not try to detect copies at all."] # [doc = ""] # [doc = " Note that this is an even more expensive operation than detecting renames stemming from additions and deletions"] # [doc = " as the resulting set to search through is usually larger."] pub copies : Option < rewrites :: Copies > , # [doc = " The percentage of similarity needed for files to be considered renamed, defaulting to `Some(0.5)`."] # [doc = " This field is similar to `git diff -M50%`."] # [doc = ""] # [doc = " If `None`, files are only considered equal if their content matches 100%."] # [doc = " Note that values greater than 1.0 have no different effect than 1.0."] pub percentage : Option < f32 > , # [doc = " The amount of files to consider for fuzzy rename or copy tracking. Defaults to 1000, meaning that only 1000*1000"] # [doc = " combinations can be tested for fuzzy matches, i.e. the ones that try to find matches by comparing similarity."] # [doc = " If 0, there is no limit."] # [doc = ""] # [doc = " If the limit would not be enough to test the entire set of combinations, the algorithm will trade in precision and not"] # [doc = " run the fuzzy version of identity tests at all. That way results are never partial."] pub limit : usize , # [doc = " If `true`, empty blobs will be tracked. If `false`, they do not participate in rename tracking."] # [doc = ""] # [doc = " Leaving this off usually leads to better results as empty files don't have a unique-enough identity."] pub track_empty : bool , }
     };
 }

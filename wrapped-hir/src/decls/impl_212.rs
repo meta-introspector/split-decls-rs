@@ -1,15 +1,13 @@
 macro_rules! deps {
     () => {
-        Crate!();
-        HasCrate!();
-        Impl!();
+        ConstParam!();
     };
 }
 
 macro_rules! impl_212 {
     () => {
         deps!();
-        impl HasCrate for Impl { fn krate (& self , db : & dyn HirDatabase) -> Crate { self . module (db) . krate () } }
+        impl < 'db > HirDisplay < 'db > for ConstParam { fn hir_fmt (& self , f : & mut HirFormatter < '_ , 'db >) -> Result < () , HirDisplayError > { write ! (f , "const {}: " , self . name (f . db) . display (f . db , f . edition ())) ? ; self . ty (f . db) . hir_fmt (f) } }
     };
 }
 

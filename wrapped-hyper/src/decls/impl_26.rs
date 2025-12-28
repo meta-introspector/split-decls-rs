@@ -1,0 +1,18 @@
+macro_rules! deps {
+    () => {
+        Incoming!();
+        Result!();
+        DecodedLength!();
+        Kind!();
+        Error!();
+    };
+}
+
+macro_rules! impl_26 {
+    () => {
+        deps!();
+        impl Body for Incoming { type Data = Bytes ; type Error = crate :: Error ; fn poll_frame (# [cfg_attr (not (all (any (feature = "http1" , feature = "http2") , any (feature = "client" , feature = "server"))) , allow (unused_mut))] mut self : Pin < & mut Self > , # [cfg_attr (not (all (any (feature = "http1" , feature = "http2") , any (feature = "client" , feature = "server"))) , allow (unused_variables))] cx : & mut Context < '_ > ,) -> Poll < Option < Result < Frame < Self :: Data > , Self :: Error > > > { match self . kind { Kind :: Empty => Poll :: Ready (None) , # [cfg (all (feature = "http1" , any (feature = "client" , feature = "server")))] Kind :: Chan { content_length : ref mut len , ref mut data_rx , ref mut want_tx , ref mut trailers_rx , } => { want_tx . send (WANT_READY) ; if ! data_rx . is_terminated () { if let Some (chunk) = ready ! (Pin :: new (data_rx) . poll_next (cx) ?) { len . sub_if (chunk . len () as u64) ; return Poll :: Ready (Some (Ok (Frame :: data (chunk)))) ; } } match ready ! (Pin :: new (trailers_rx) . poll (cx)) { Ok (t) => Poll :: Ready (Some (Ok (Frame :: trailers (t)))) , Err (_) => Poll :: Ready (None) , } } # [cfg (all (feature = "http2" , any (feature = "client" , feature = "server")))] Kind :: H2 { ref mut data_done , ref ping , recv : ref mut h2 , content_length : ref mut len , } => { if ! * data_done { match ready ! (h2 . poll_data (cx)) { Some (Ok (bytes)) => { let _ = h2 . flow_control () . release_capacity (bytes . len ()) ; len . sub_if (bytes . len () as u64) ; ping . record_data (bytes . len ()) ; return Poll :: Ready (Some (Ok (Frame :: data (bytes)))) ; } Some (Err (e)) => { return match e . reason () { Some (h2 :: Reason :: NO_ERROR) | Some (h2 :: Reason :: CANCEL) => { Poll :: Ready (None) } _ => Poll :: Ready (Some (Err (crate :: Error :: new_body (e)))) , } ; } None => { * data_done = true ; } } } match ready ! (h2 . poll_trailers (cx)) { Ok (t) => { ping . record_non_data () ; Poll :: Ready (Ok (t . map (Frame :: trailers)) . transpose ()) } Err (e) => Poll :: Ready (Some (Err (crate :: Error :: new_h2 (e)))) , } } # [cfg (feature = "ffi")] Kind :: Ffi (ref mut body) => body . poll_data (cx) , } } fn is_end_stream (& self) -> bool { match self . kind { Kind :: Empty => true , # [cfg (all (feature = "http1" , any (feature = "client" , feature = "server")))] Kind :: Chan { content_length , .. } => content_length == DecodedLength :: ZERO , # [cfg (all (feature = "http2" , any (feature = "client" , feature = "server")))] Kind :: H2 { recv : ref h2 , .. } => h2 . is_end_stream () , # [cfg (feature = "ffi")] Kind :: Ffi (..) => false , } } fn size_hint (& self) -> SizeHint { # [cfg (all (any (feature = "http1" , feature = "http2") , any (feature = "client" , feature = "server")))] fn opt_len (decoded_length : DecodedLength) -> SizeHint { if let Some (content_length) = decoded_length . into_opt () { SizeHint :: with_exact (content_length) } else { SizeHint :: default () } } match self . kind { Kind :: Empty => SizeHint :: with_exact (0) , # [cfg (all (feature = "http1" , any (feature = "client" , feature = "server")))] Kind :: Chan { content_length , .. } => opt_len (content_length) , # [cfg (all (feature = "http2" , any (feature = "client" , feature = "server")))] Kind :: H2 { content_length , .. } => opt_len (content_length) , # [cfg (feature = "ffi")] Kind :: Ffi (..) => SizeHint :: default () , } } }
+    };
+}
+
+impl_26!()

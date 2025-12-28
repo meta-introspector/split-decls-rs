@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        ParseError!();
+        EscapeContainer!();
+    };
+}
+
+macro_rules! unescape_string {
+    () => {
+        deps!();
+        # [doc = " Unescapes a whole string or byte string."] # [inline (never)] pub (crate) fn unescape_string < C : EscapeContainer > (input : & str , offset : usize , unicode : bool , byte_escapes : bool , allow_nul : bool ,) -> Result < (Option < C > , usize) , ParseError > { let mut closing_quote_pos = None ; let mut i = offset ; let mut end_last_escape = offset ; let mut value = C :: new () ; while i < input . len () { match input . as_bytes () [i] { b'\\' if input . as_bytes () . get (i + 1) == Some (& b'\n') => { value . push_str (& input [end_last_escape .. i]) ; let end_escape = input [i + 2 ..] . bytes () . position (| b | ! is_string_continue_skipable_whitespace (b)) . ok_or (perr (None , UnterminatedString)) ? ; i += 2 + end_escape ; end_last_escape = i ; } b'\\' => { let rest = & input [i .. input . len () - 1] ; let (c , len) = unescape (rest , unicode , byte_escapes , allow_nul) . map_err (| e | e . offset_span (i)) ? ; value . push_str (& input [end_last_escape .. i]) ; value . push (c) ; i += len ; end_last_escape = i ; } b'\r' => return Err (perr (i , CarriageReturn)) , b'"' => { closing_quote_pos = Some (i) ; break ; } b'\0' if ! allow_nul => return Err (perr (i , NulByte)) , b if ! unicode && ! b . is_ascii () => return Err (perr (i , NonAsciiInByteLiteral)) , _ => i += 1 , } } let closing_quote_pos = closing_quote_pos . ok_or (perr (None , UnterminatedString)) ? ; let start_suffix = closing_quote_pos + 1 ; let suffix = & input [start_suffix ..] ; check_suffix (suffix) . map_err (| kind | perr (start_suffix , kind)) ? ; let value = if value . is_empty () { None } else { value . push_str (& input [end_last_escape .. closing_quote_pos]) ; Some (value) } ; Ok ((value , start_suffix)) }
+    };
+}
+
+unescape_string!()

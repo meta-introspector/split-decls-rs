@@ -2,6 +2,7 @@ macro_rules! deps {
     () => {
         Graph!();
         Error!();
+        Mark!();
     };
 }
 

@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        Stack!();
+        SysStack!();
+        StackBox!();
+    };
+}
+
+macro_rules! impl_68 {
+    () => {
+        deps!();
+        impl Stack { # [doc = " Allocate a new stack of `size`. If size = 0, this is a `dummy_stack`"] pub fn new (size : usize) -> Stack { let track = (size & 1) != 0 ; let bytes = usize :: max (size * std :: mem :: size_of :: < usize > () , SysStack :: min_size ()) ; let buf = SysStack :: allocate (bytes , true) . expect ("failed to alloc sys stack") ; let stk = Stack { buf } ; let count = if track { stk . size () } else { 8 } ; unsafe { let buf = stk . buf . bottom as * mut usize ; ptr :: write_bytes (buf , 0xEE , count) ; } let offset = stk . get_offset () ; unsafe { * offset = 1 } ; stk } # [doc = " get used stack size"] pub fn get_used_size (& self) -> usize { let mut offset : usize = 0 ; unsafe { let mut magic : usize = 0xEE ; ptr :: write_bytes (& mut magic , 0xEE , 1) ; let mut ptr = self . buf . bottom as * mut usize ; while * ptr == magic { offset += 1 ; ptr = ptr . offset (1) ; } } let cap = self . size () ; cap - offset } # [doc = " get the stack cap"] # [inline] pub fn size (& self) -> usize { self . buf . len () / std :: mem :: size_of :: < usize > () } # [doc = " Point to the high end of the allocated stack"] pub fn end (& self) -> * mut usize { let offset = self . get_offset () ; unsafe { (self . buf . top as * mut usize) . offset (0 - * offset as isize) } } # [doc = " Point to the low end of the allocated stack"] pub fn begin (& self) -> * mut usize { self . buf . bottom as * mut _ } # [doc = " alloc buffer on this stack"] pub fn alloc_uninit_box < T > (& mut self) -> MaybeUninit < StackBox < T > > { StackBox :: < T > :: new_uninit (self , 1) } fn get_offset (& self) -> * mut usize { unsafe { (self . buf . top as * mut usize) . offset (- 1) } } fn drop_stack (& self) { if self . buf . len () == 0 { return ; } let page_size = sys :: page_size () ; let guard = (self . buf . bottom as usize - page_size) as * mut c_void ; let size_with_guard = self . buf . len () + page_size ; unsafe { sys :: deallocate_stack (guard , size_with_guard) ; } } fn shadow_clone (& self) -> Self { Stack { buf : SysStack { top : self . buf . top , bottom : self . buf . bottom , } , } } }
+    };
+}
+
+impl_68!()

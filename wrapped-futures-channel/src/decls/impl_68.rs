@@ -1,0 +1,19 @@
+macro_rules! deps {
+    () => {
+        SendErrorKind!();
+        UnboundedReceiver!();
+        SendError!();
+        UnboundedSender!();
+        TrySendError!();
+        UnboundedSenderInner!();
+    };
+}
+
+macro_rules! impl_68 {
+    () => {
+        deps!();
+        impl < T > UnboundedSender < T > { # [doc = " Check if the channel is ready to receive a message."] pub fn poll_ready (& self , _ : & mut Context < '_ >) -> Poll < Result < () , SendError > > { let inner = self . 0 . as_ref () . ok_or (SendError { kind : SendErrorKind :: Disconnected }) ? ; inner . poll_ready_nb () } # [doc = " Returns whether this channel is closed without needing a context."] pub fn is_closed (& self) -> bool { self . 0 . as_ref () . map (UnboundedSenderInner :: is_closed) . unwrap_or (true) } # [doc = " Closes this channel from the sender side, preventing any new messages."] pub fn close_channel (& self) { if let Some (inner) = & self . 0 { inner . close_channel () ; } } # [doc = " Disconnects this sender from the channel, closing it if there are no more senders left."] pub fn disconnect (& mut self) { self . 0 = None ; } fn do_send_nb (& self , msg : T) -> Result < () , TrySendError < T > > { if let Some (inner) = & self . 0 { if inner . inc_num_messages () . is_some () { inner . queue_push_and_signal (msg) ; return Ok (()) ; } } Err (TrySendError { err : SendError { kind : SendErrorKind :: Disconnected } , val : msg }) } # [doc = " Send a message on the channel."] # [doc = ""] # [doc = " This method should only be called after `poll_ready` has been used to"] # [doc = " verify that the channel is ready to receive a message."] pub fn start_send (& mut self , msg : T) -> Result < () , SendError > { self . do_send_nb (msg) . map_err (| e | e . err) } # [doc = " Sends a message along this channel."] # [doc = ""] # [doc = " This is an unbounded sender, so this function differs from `Sink::send`"] # [doc = " by ensuring the return type reflects that the channel is always ready to"] # [doc = " receive messages."] pub fn unbounded_send (& self , msg : T) -> Result < () , TrySendError < T > > { self . do_send_nb (msg) } # [doc = " Returns whether the senders send to the same receiver."] pub fn same_receiver (& self , other : & Self) -> bool { match (& self . 0 , & other . 0) { (Some (inner) , Some (other)) => inner . same_receiver (other) , _ => false , } } # [doc = " Returns whether the sender send to this receiver."] pub fn is_connected_to (& self , receiver : & UnboundedReceiver < T >) -> bool { match (& self . 0 , & receiver . inner) { (Some (inner) , Some (receiver)) => inner . is_connected_to (receiver) , _ => false , } } # [doc = " Hashes the receiver into the provided hasher"] pub fn hash_receiver < H > (& self , hasher : & mut H) where H : std :: hash :: Hasher , { use std :: hash :: Hash ; let ptr = self . 0 . as_ref () . map (| inner | inner . ptr ()) ; ptr . hash (hasher) ; } # [doc = " Return the number of messages in the queue or 0 if channel is disconnected."] pub fn len (& self) -> usize { if let Some (sender) = & self . 0 { decode_state (sender . inner . state . load (SeqCst)) . num_messages } else { 0 } } # [doc = " Return false is channel has no queued messages, true otherwise."] pub fn is_empty (& self) -> bool { self . len () == 0 } }
+    };
+}
+
+impl_68!()

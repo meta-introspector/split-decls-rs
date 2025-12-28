@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Arena!();
+        Idx!();
     };
 }
 
 macro_rules! impl_28 {
     () => {
         deps!();
-        impl < T : fmt :: Debug > fmt :: Debug for Arena < T > { fn fmt (& self , fmt : & mut fmt :: Formatter < '_ >) -> fmt :: Result { fmt . debug_struct ("Arena") . field ("len" , & self . len ()) . field ("data" , & self . data) . finish () } }
+        impl < T > PartialOrd for Idx < T > { fn partial_cmp (& self , other : & Self) -> Option < cmp :: Ordering > { Some (self . cmp (other)) } }
     };
 }
 

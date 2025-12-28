@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        TimeValLike!();
+        TimeVal!();
+    };
+}
+
+macro_rules! impl_182 {
+    () => {
+        deps!();
+        impl TimeValLike for TimeVal { # [inline] fn seconds (seconds : i64) -> TimeVal { assert ! ((TV_MIN_SECONDS ..= TV_MAX_SECONDS) . contains (& seconds) , "TimeVal out of bounds; seconds={seconds}") ; # [cfg_attr (any (target_env = "musl" , target_env = "ohos") , allow (deprecated))] TimeVal (timeval { tv_sec : seconds as time_t , tv_usec : 0 , }) } # [inline] fn milliseconds (milliseconds : i64) -> TimeVal { let microseconds = milliseconds . checked_mul (1_000) . expect ("TimeVal::milliseconds out of bounds") ; TimeVal :: microseconds (microseconds) } # [doc = " Makes a new `TimeVal` with given number of microseconds."] # [inline] fn microseconds (microseconds : i64) -> TimeVal { let (secs , micros) = div_mod_floor_64 (microseconds , MICROS_PER_SEC) ; assert ! ((TV_MIN_SECONDS ..= TV_MAX_SECONDS) . contains (& secs) , "TimeVal out of bounds") ; # [cfg_attr (any (target_env = "musl" , target_env = "ohos") , allow (deprecated))] TimeVal (timeval { tv_sec : secs as time_t , tv_usec : micros as suseconds_t , }) } # [doc = " Makes a new `TimeVal` with given number of nanoseconds.  Some precision"] # [doc = " will be lost"] # [inline] fn nanoseconds (nanoseconds : i64) -> TimeVal { let microseconds = nanoseconds / 1000 ; let (secs , micros) = div_mod_floor_64 (microseconds , MICROS_PER_SEC) ; assert ! ((TV_MIN_SECONDS ..= TV_MAX_SECONDS) . contains (& secs) , "TimeVal out of bounds") ; # [cfg_attr (any (target_env = "musl" , target_env = "ohos") , allow (deprecated))] TimeVal (timeval { tv_sec : secs as time_t , tv_usec : micros as suseconds_t , }) } # [allow (clippy :: unnecessary_cast)] fn num_seconds (& self) -> i64 { if self . tv_sec () < 0 && self . tv_usec () > 0 { (self . tv_sec () + 1) as i64 } else { self . tv_sec () as i64 } } fn num_milliseconds (& self) -> i64 { self . num_microseconds () / 1_000 } # [allow (clippy :: unnecessary_cast)] fn num_microseconds (& self) -> i64 { let secs = self . num_seconds () * 1_000_000 ; let usec = self . micros_mod_sec () ; secs + usec as i64 } fn num_nanoseconds (& self) -> i64 { self . num_microseconds () * 1_000 } }
+    };
+}
+
+impl_182!()

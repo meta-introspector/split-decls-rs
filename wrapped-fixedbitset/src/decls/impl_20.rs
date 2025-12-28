@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        FixedBitSet!();
+        Block!();
     };
 }
 
 macro_rules! impl_20 {
     () => {
         deps!();
-        impl Binary for FixedBitSet { fn fmt (& self , f : & mut Formatter < '_ >) -> Result < () , Error > { if f . alternate () { f . write_str ("0b") ? ; } for i in 0 .. self . length { if self [i] { f . write_char ('1') ? ; } else { f . write_char ('0') ? ; } } Ok (()) } }
+        impl PartialEq for Block { # [inline] fn eq (& self , other : & Self) -> bool { unsafe { # [cfg (not (target_feature = "sse4.1"))] { _mm_movemask_epi8 (_mm_cmpeq_epi8 (self . 0 , other . 0)) == 0xffff } # [cfg (target_feature = "sse4.1")] { let neq = _mm_xor_si128 (self . 0 , other . 0) ; _mm_test_all_zeros (neq , neq) == 1 } } } }
     };
 }
 

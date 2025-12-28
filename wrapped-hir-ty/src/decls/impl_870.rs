@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        DisplayTarget!();
+        ProjectionElem!();
+        InternedClosureId!();
+    };
+}
+
+macro_rules! impl_870 {
+    () => {
+        deps!();
+        impl < V , T > ProjectionElem < V , T > { pub fn projected_ty < 'db > (& self , infcx : & InferCtxt < 'db > , mut base : Ty < 'db > , closure_field : impl FnOnce (InternedClosureId , GenericArgs < 'db > , usize) -> Ty < 'db > , krate : Crate ,) -> Ty < 'db > { let interner = infcx . interner ; let db = interner . db ; if base . is_ty_error () { return Ty :: new_error (interner , ErrorGuaranteed) ; } if matches ! (base . kind () , TyKind :: Alias (..)) { let mut ocx = ObligationCtxt :: new (infcx) ; let env = ParamEnv :: empty () ; match ocx . structurally_normalize_ty (& ObligationCause :: dummy () , env , base) { Ok (it) => base = it , Err (_) => return Ty :: new_error (interner , ErrorGuaranteed) , } } match self { ProjectionElem :: Deref => match base . kind () { TyKind :: RawPtr (inner , _) | TyKind :: Ref (_ , inner , _) => inner , TyKind :: Adt (adt_def , subst) if adt_def . is_box () => subst . type_at (0) , _ => { never ! ("Overloaded deref on type {} is not a projection" , base . display (db , DisplayTarget :: from_crate (db , krate))) ; Ty :: new_error (interner , ErrorGuaranteed) } } , ProjectionElem :: Field (Either :: Left (f)) => match base . kind () { TyKind :: Adt (_ , subst) => { db . field_types (f . parent) [f . local_id] . instantiate (interner , subst) } ty => { never ! ("Only adt has field, found {:?}" , ty) ; Ty :: new_error (interner , ErrorGuaranteed) } } , ProjectionElem :: Field (Either :: Right (f)) => match base . kind () { TyKind :: Tuple (subst) => { subst . as_slice () . get (f . index as usize) . copied () . unwrap_or_else (| | { never ! ("Out of bound tuple field") ; Ty :: new_error (interner , ErrorGuaranteed) }) } ty => { never ! ("Only tuple has tuple field: {:?}" , ty) ; Ty :: new_error (interner , ErrorGuaranteed) } } , ProjectionElem :: ClosureField (f) => match base . kind () { TyKind :: Closure (id , subst) => closure_field (id . 0 , subst , * f) , _ => { never ! ("Only closure has closure field") ; Ty :: new_error (interner , ErrorGuaranteed) } } , ProjectionElem :: ConstantIndex { .. } | ProjectionElem :: Index (_) => match base . kind () { TyKind :: Array (inner , _) | TyKind :: Slice (inner) => inner , _ => { never ! ("Overloaded index is not a projection") ; Ty :: new_error (interner , ErrorGuaranteed) } } , & ProjectionElem :: Subslice { from , to } => match base . kind () { TyKind :: Array (inner , c) => { let next_c = usize_const (db , match try_const_usize (db , c) { None => None , Some (x) => x . checked_sub (u128 :: from (from + to)) , } , krate ,) ; Ty :: new_array_with_const_len (interner , inner , next_c) } TyKind :: Slice (_) => base , _ => { never ! ("Subslice projection should only happen on slice and array") ; Ty :: new_error (interner , ErrorGuaranteed) } } , ProjectionElem :: OpaqueCast (_) => { never ! ("We don't emit these yet") ; Ty :: new_error (interner , ErrorGuaranteed) } } } }
+    };
+}
+
+impl_870!()

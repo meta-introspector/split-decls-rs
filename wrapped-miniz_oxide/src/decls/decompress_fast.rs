@@ -1,0 +1,19 @@
+macro_rules! deps {
+    () => {
+        State!();
+        LocalVars!();
+        TINFLStatus!();
+        DecompressorOxide!();
+        OutputBuffer!();
+        InputWrapper!();
+    };
+}
+
+macro_rules! decompress_fast {
+    () => {
+        deps!();
+        # [doc = " Fast inner decompression loop which is run  while there is at least"] # [doc = " 259 bytes left in the output buffer, and at least 6 bytes left in the input buffer"] # [doc = " (The maximum one match would need + 1)."] # [doc = ""] # [doc = " This was inspired by a similar optimization in zlib, which uses this info to do"] # [doc = " faster unchecked copies of multiple bytes at a time."] # [doc = " Currently we don't do this here, but this function does avoid having to jump through the"] # [doc = " big match loop on each state change(as rust does not have fallthrough or gotos at the moment),"] # [doc = " and already improves decompression speed a fair bit."] fn decompress_fast (r : & mut DecompressorOxide , in_iter : & mut InputWrapper , out_buf : & mut OutputBuffer , flags : u32 , local_vars : & mut LocalVars , out_buf_size_mask : usize ,) -> (TINFLStatus , State) { let mut l = * local_vars ; let mut state ; let status : TINFLStatus = 'o : loop { state = State :: DecodeLitlen ; loop { if out_buf . bytes_left () < 259 || in_iter . bytes_left () < 14 { state = State :: DecodeLitlen ; break 'o TINFLStatus :: Done ; } fill_bit_buffer (& mut l , in_iter) ; let (symbol , code_len) = r . tables [LITLEN_TABLE] . lookup (l . bit_buf) ; l . counter = symbol as u32 ; l . bit_buf >>= code_len ; l . num_bits -= code_len ; if (l . counter & 256) != 0 { break ; } else { if cfg ! (not (target_pointer_width = "64")) { fill_bit_buffer (& mut l , in_iter) ; } let (symbol , code_len) = r . tables [LITLEN_TABLE] . lookup (l . bit_buf) ; l . bit_buf >>= code_len ; l . num_bits -= code_len ; out_buf . write_byte (l . counter as u8) ; if (symbol & 256) != 0 { l . counter = symbol as u32 ; break ; } else { out_buf . write_byte (symbol as u8) ; } } } l . counter &= 511 ; if l . counter == 256 { state . begin (BlockDone) ; break 'o TINFLStatus :: Done ; } else if l . counter > 285 { state . begin (InvalidLitlen) ; break 'o TINFLStatus :: Failed ; } else { l . num_extra = LENGTH_EXTRA [(l . counter - 257) as usize & BASE_EXTRA_MASK] ; l . counter = u32 :: from (LENGTH_BASE [(l . counter - 257) as usize & BASE_EXTRA_MASK]) ; fill_bit_buffer (& mut l , in_iter) ; if l . num_extra != 0 { let extra_bits = l . bit_buf & ((1 << l . num_extra) - 1) ; l . bit_buf >>= l . num_extra ; l . num_bits -= u32 :: from (l . num_extra) ; l . counter += extra_bits as u32 ; } if cfg ! (not (target_pointer_width = "64")) { fill_bit_buffer (& mut l , in_iter) ; } let (mut symbol , code_len) = r . tables [DIST_TABLE] . lookup (l . bit_buf) ; symbol &= 511 ; l . bit_buf >>= code_len ; l . num_bits -= code_len ; if symbol > 29 { state . begin (InvalidDist) ; break 'o TINFLStatus :: Failed ; } l . num_extra = num_extra_bits_for_distance_code (symbol as u8) ; l . dist = u32 :: from (DIST_BASE [symbol as usize]) ; if l . num_extra != 0 { fill_bit_buffer (& mut l , in_iter) ; let extra_bits = l . bit_buf & ((1 << l . num_extra) - 1) ; l . bit_buf >>= l . num_extra ; l . num_bits -= u32 :: from (l . num_extra) ; l . dist += extra_bits as u32 ; } let position = out_buf . position () ; if (l . dist as usize > out_buf . position () && (flags & TINFL_FLAG_USING_NON_WRAPPING_OUTPUT_BUF != 0)) || (l . dist as usize > out_buf . get_ref () . len ()) { state . begin (DistanceOutOfBounds) ; break TINFLStatus :: Failed ; } apply_match (out_buf . get_mut () , position , l . dist as usize , l . counter as usize , out_buf_size_mask ,) ; out_buf . set_position (position + l . counter as usize) ; } } ; * local_vars = l ; (status , state) }
+    };
+}
+
+decompress_fast!()

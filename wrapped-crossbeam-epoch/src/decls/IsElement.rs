@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        Guard!();
+        Entry!();
+    };
+}
+
+macro_rules! IsElement {
+    () => {
+        deps!();
+        # [doc = " Implementing this trait asserts that the type `T` can be used as an element in the intrusive"] # [doc = " linked list defined in this module. `T` has to contain (or otherwise be linked to) an instance"] # [doc = " of `Entry`."] # [doc = ""] # [doc = " # Example"] # [doc = ""] # [doc = " ```ignore"] # [doc = " struct A {"] # [doc = "     entry: Entry,"] # [doc = "     data: usize,"] # [doc = " }"] # [doc = ""] # [doc = " impl IsElement<A> for A {"] # [doc = "     fn entry_of(a: &A) -> &Entry {"] # [doc = "         let entry_ptr = ((a as usize) + offset_of!(A, entry)) as *const Entry;"] # [doc = "         unsafe { &*entry_ptr }"] # [doc = "     }"] # [doc = ""] # [doc = "     unsafe fn element_of(entry: &Entry) -> &T {"] # [doc = "         let elem_ptr = ((entry as usize) - offset_of!(A, entry)) as *const T;"] # [doc = "         &*elem_ptr"] # [doc = "     }"] # [doc = ""] # [doc = "     unsafe fn finalize(entry: &Entry, guard: &Guard) {"] # [doc = "         guard.defer_destroy(Shared::from(Self::element_of(entry) as *const _));"] # [doc = "     }"] # [doc = " }"] # [doc = " ```"] # [doc = ""] # [doc = " This trait is implemented on a type separate from `T` (although it can be just `T`), because"] # [doc = " one type might be placeable into multiple lists, in which case it would require multiple"] # [doc = " implementations of `IsElement`. In such cases, each struct implementing `IsElement<T>`"] # [doc = " represents a distinct `Entry` in `T`."] # [doc = ""] # [doc = " For example, we can insert the following struct into two lists using `entry1` for one"] # [doc = " and `entry2` for the other:"] # [doc = ""] # [doc = " ```ignore"] # [doc = " struct B {"] # [doc = "     entry1: Entry,"] # [doc = "     entry2: Entry,"] # [doc = "     data: usize,"] # [doc = " }"] # [doc = " ```"] # [doc = ""] pub (crate) trait IsElement < T > { # [doc = " Returns a reference to this element's `Entry`."] fn entry_of (_ : & T) -> & Entry ; # [doc = " Given a reference to an element's entry, returns that element."] # [doc = ""] # [doc = " ```ignore"] # [doc = " let elem = ListElement::new();"] # [doc = " assert_eq!(elem.entry_of(),"] # [doc = "            unsafe { ListElement::element_of(elem.entry_of()) } );"] # [doc = " ```"] # [doc = ""] # [doc = " # Safety"] # [doc = ""] # [doc = " The caller has to guarantee that the `Entry` is called with was retrieved from an instance"] # [doc = " of the element type (`T`)."] unsafe fn element_of (_ : & Entry) -> & T ; # [doc = " The function that is called when an entry is unlinked from list."] # [doc = ""] # [doc = " # Safety"] # [doc = ""] # [doc = " The caller has to guarantee that the `Entry` is called with was retrieved from an instance"] # [doc = " of the element type (`T`)."] unsafe fn finalize (_ : & Entry , _ : & Guard) ; }
+    };
+}
+
+IsElement!()

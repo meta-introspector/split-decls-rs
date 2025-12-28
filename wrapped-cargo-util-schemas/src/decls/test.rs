@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        RustVersion!();
+        PartialVersion!();
+        Result!();
+    };
+}
+
+macro_rules! test {
+    () => {
+        deps!();
+        # [cfg (test)] mod test { use super :: * ; use snapbox :: prelude :: * ; use snapbox :: str ; # [test] fn is_compatible_with_rustc () { let cases = & [("1" , "1.70.0" , true) , ("1.30" , "1.70.0" , true) , ("1.30.10" , "1.70.0" , true) , ("1.70" , "1.70.0" , true) , ("1.70.0" , "1.70.0" , true) , ("1.70.1" , "1.70.0" , false) , ("1.70" , "1.70.0-nightly" , true) , ("1.70.0" , "1.70.0-nightly" , true) , ("1.71" , "1.70.0" , false) , ("2" , "1.70.0" , false) ,] ; let mut passed = true ; for (msrv , rustc , expected) in cases { let msrv : RustVersion = msrv . parse () . unwrap () ; let rustc = PartialVersion :: from (semver :: Version :: parse (rustc) . unwrap ()) ; if msrv . is_compatible_with (& rustc) != * expected { println ! ("failed: {msrv} is_compatible_with {rustc} == {expected}") ; passed = false ; } } assert ! (passed) ; } # [test] fn is_compatible_with_workspace_msrv () { let cases = & [("1" , "1" , true) , ("1" , "1.70" , true) , ("1" , "1.70.0" , true) , ("1.30" , "1" , false) , ("1.30" , "1.70" , true) , ("1.30" , "1.70.0" , true) , ("1.30.10" , "1" , false) , ("1.30.10" , "1.70" , true) , ("1.30.10" , "1.70.0" , true) , ("1.70" , "1" , false) , ("1.70" , "1.70" , true) , ("1.70" , "1.70.0" , true) , ("1.70.0" , "1" , false) , ("1.70.0" , "1.70" , true) , ("1.70.0" , "1.70.0" , true) , ("1.70.1" , "1" , false) , ("1.70.1" , "1.70" , false) , ("1.70.1" , "1.70.0" , false) , ("1.71" , "1" , false) , ("1.71" , "1.70" , false) , ("1.71" , "1.70.0" , false) , ("2" , "1.70.0" , false) ,] ; let mut passed = true ; for (dep_msrv , ws_msrv , expected) in cases { let dep_msrv : RustVersion = dep_msrv . parse () . unwrap () ; let ws_msrv = ws_msrv . parse :: < RustVersion > () . unwrap () . into_partial () ; if dep_msrv . is_compatible_with (& ws_msrv) != * expected { println ! ("failed: {dep_msrv} is_compatible_with {ws_msrv} == {expected}") ; passed = false ; } } assert ! (passed) ; } # [test] fn parse_errors () { let cases = & [("^1.43" , str ! [[r#"unexpected version requirement, expected a version like "1.32""#]] ,) , ("1.43.0-beta.1" , str ! [[r#"unexpected prerelease field, expected a version like "1.32""#]] ,) , ("1.43-beta.1" , str ! [[r#"unexpected prerelease field, expected a version like "1.32""#]] ,) , ("x" , str ! [[r#"unexpected version requirement, expected a version like "1.32""#]] ,) , ("1.x" , str ! [[r#"unexpected version requirement, expected a version like "1.32""#]] ,) , ("1.1.x" , str ! [[r#"unexpected version requirement, expected a version like "1.32""#]] ,) , ("foodaddle" , str ! [[r#"expected a version like "1.32""#]]) ,] ; for (input , expected) in cases { let actual : Result < RustVersion , _ > = input . parse () ; let actual = match actual { Ok (result) => format ! ("didn't fail: {result:?}") , Err (err) => err . to_string () , } ; snapbox :: assert_data_eq ! (actual , expected . clone () . raw ()) ; } } }
+    };
+}
+
+test!()

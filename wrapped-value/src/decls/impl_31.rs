@@ -1,5 +1,6 @@
 macro_rules! deps {
     () => {
+        Extensions!();
         ConstValue!();
     };
 }
@@ -7,7 +8,7 @@ macro_rules! deps {
 macro_rules! impl_31 {
     () => {
         deps!();
-        impl < 'a > From < & 'a str > for ConstValue { # [inline] fn from (value : & 'a str) -> Self { ConstValue :: String (value . into ()) } }
+        impl Deref for Extensions { type Target = HashMap < String , crate :: ConstValue > ; fn deref (& self) -> & Self :: Target { & self . 0 } }
     };
 }
 

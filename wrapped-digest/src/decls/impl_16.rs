@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        InvalidOutputSize!();
+        MacError!();
     };
 }
 
 macro_rules! impl_16 {
     () => {
         deps!();
-        impl fmt :: Display for InvalidOutputSize { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { f . write_str ("invalid output size") } }
+        impl fmt :: Display for MacError { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { f . write_str ("MAC tag mismatch") } }
     };
 }
 

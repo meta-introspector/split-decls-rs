@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        ReadRef!();
+        AnonObjectHeader!();
+        Result!();
+    };
+}
+
+macro_rules! anon_object_class_id {
+    () => {
+        deps!();
+        # [doc = " Read the `class_id` field from a [`pe::AnonObjectHeader`]."] # [doc = ""] # [doc = " This can be used to determine the format of the header."] pub fn anon_object_class_id < 'data , R : ReadRef < 'data > > (data : R) -> Result < pe :: ClsId > { let header = data . read_at :: < pe :: AnonObjectHeader > (0) . read_error ("Invalid anon object header size or alignment") ? ; Ok (header . class_id) }
+    };
+}
+
+anon_object_class_id!()

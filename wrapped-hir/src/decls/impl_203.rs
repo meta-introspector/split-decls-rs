@@ -1,15 +1,13 @@
 macro_rules! deps {
     () => {
-        HasCrate!();
-        Crate!();
-        Variant!();
+        TupleField!();
     };
 }
 
 macro_rules! impl_203 {
     () => {
         deps!();
-        impl HasCrate for Variant { fn krate (& self , db : & dyn HirDatabase) -> Crate { self . module (db) . krate () } }
+        impl < 'db > HirDisplay < 'db > for TupleField { fn hir_fmt (& self , f : & mut HirFormatter < '_ , 'db >) -> Result < () , HirDisplayError > { write ! (f , "pub {}: " , self . name () . display (f . db , f . edition ())) ? ; self . ty (f . db) . hir_fmt (f) } }
     };
 }
 

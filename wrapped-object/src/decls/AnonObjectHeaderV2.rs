@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        U32!();
+        U16!();
+    };
+}
+
+macro_rules! AnonObjectHeaderV2 {
+    () => {
+        deps!();
+        # [derive (Debug , Clone , Copy)] # [repr (C)] pub struct AnonObjectHeaderV2 { # [doc = " Must be IMAGE_FILE_MACHINE_UNKNOWN"] pub sig1 : U16 < LE > , # [doc = " Must be 0xffff"] pub sig2 : U16 < LE > , # [doc = " >= 2 (implies the Flags field is present - otherwise V1)"] pub version : U16 < LE > , pub machine : U16 < LE > , pub time_date_stamp : U32 < LE > , # [doc = " Used to invoke CoCreateInstance"] pub class_id : ClsId , # [doc = " Size of data that follows the header"] pub size_of_data : U32 < LE > , # [doc = " 0x1 -> contains metadata"] pub flags : U32 < LE > , # [doc = " Size of CLR metadata"] pub meta_data_size : U32 < LE > , # [doc = " Offset of CLR metadata"] pub meta_data_offset : U32 < LE > , }
+    };
+}
+
+AnonObjectHeaderV2!()

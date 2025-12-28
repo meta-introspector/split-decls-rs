@@ -1,0 +1,17 @@
+macro_rules! deps {
+    () => {
+        Bits!();
+        Flag!();
+        BitFlags!();
+        Flags!();
+    };
+}
+
+macro_rules! __impl_public_bitflags {
+    () => {
+        deps!();
+        # [doc = " Implement functions on the public (user-facing) bitflags type."] # [doc = ""] # [doc = " We need to be careful about adding new methods and trait implementations here because they"] # [doc = " could conflict with items added by the end-user."] # [macro_export] # [doc (hidden)] macro_rules ! __impl_public_bitflags { ($ (# [$ outer : meta]) * $ BitFlags : ident : $ T : ty , $ PublicBitFlags : ident { $ ($ (# [$ inner : ident $ ($ args : tt) *]) * const $ Flag : tt = $ value : expr ;) * }) => { $ crate :: __impl_bitflags ! { params : self , bits , name , other , value ; $ (# [$ outer]) * $ BitFlags : $ T { fn empty () { Self (<$ T as $ crate :: Bits >:: EMPTY) } fn all () { let mut truncated = <$ T as $ crate :: Bits >:: EMPTY ; let mut i = 0 ; $ ($ crate :: __bitflags_expr_safe_attrs ! ($ (# [$ inner $ ($ args) *]) * { { let flag = <$ PublicBitFlags as $ crate :: Flags >:: FLAGS [i] . value () . bits () ; truncated = truncated | flag ; i += 1 ; } }) ;) * let _ = i ; Self (truncated) } fn bits (& self) { self . 0 } fn from_bits (bits) { let truncated = Self :: from_bits_truncate (bits) . 0 ; if truncated == bits { $ crate :: __private :: core :: option :: Option :: Some (Self (bits)) } else { $ crate :: __private :: core :: option :: Option :: None } } fn from_bits_truncate (bits) { Self (bits & Self :: all () . 0) } fn from_bits_retain (bits) { Self (bits) } fn from_name (name) { $ ($ crate :: __bitflags_flag ! ({ name : $ Flag , named : { $ crate :: __bitflags_expr_safe_attrs ! ($ (# [$ inner $ ($ args) *]) * { if name == $ crate :: __private :: core :: stringify ! ($ Flag) { return $ crate :: __private :: core :: option :: Option :: Some (Self ($ PublicBitFlags ::$ Flag . bits ())) ; } }) ; } , unnamed : { } , }) ;) * let _ = name ; $ crate :: __private :: core :: option :: Option :: None } fn is_empty (& self) { self . 0 == <$ T as $ crate :: Bits >:: EMPTY } fn is_all (& self) { Self :: all () . 0 | self . 0 == self . 0 } fn intersects (& self , other) { self . 0 & other . 0 != <$ T as $ crate :: Bits >:: EMPTY } fn contains (& self , other) { self . 0 & other . 0 == other . 0 } fn insert (& mut self , other) { * self = Self (self . 0) . union (other) ; } fn remove (& mut self , other) { * self = Self (self . 0) . difference (other) ; } fn toggle (& mut self , other) { * self = Self (self . 0) . symmetric_difference (other) ; } fn set (& mut self , other , value) { if value { self . insert (other) ; } else { self . remove (other) ; } } fn intersection (self , other) { Self (self . 0 & other . 0) } fn union (self , other) { Self (self . 0 | other . 0) } fn difference (self , other) { Self (self . 0 & ! other . 0) } fn symmetric_difference (self , other) { Self (self . 0 ^ other . 0) } fn complement (self) { Self :: from_bits_truncate (! self . 0) } } } } ; }
+    };
+}
+
+__impl_public_bitflags!()

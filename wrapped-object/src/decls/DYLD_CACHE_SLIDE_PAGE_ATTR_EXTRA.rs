@@ -1,0 +1,7 @@
+macro_rules! DYLD_CACHE_SLIDE_PAGE_ATTR_EXTRA {
+    () => {
+        pub const DYLD_CACHE_SLIDE_PAGE_ATTR_EXTRA : u16 = 0x8000 ;
+    };
+}
+
+DYLD_CACHE_SLIDE_PAGE_ATTR_EXTRA!()

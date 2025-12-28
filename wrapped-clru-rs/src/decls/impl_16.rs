@@ -1,14 +1,13 @@
 macro_rules! deps {
     () => {
-        CLruCache!();
-        CLruCacheIter!();
+        FixedSizeListIterMut!();
     };
 }
 
 macro_rules! impl_16 {
     () => {
         deps!();
-        impl < 'a , K , V , S , W : WeightScale < K , V > > IntoIterator for & 'a CLruCache < K , V , S , W > { type Item = (& 'a K , & 'a V) ; type IntoIter = CLruCacheIter < 'a , K , V > ; # [inline] fn into_iter (self) -> CLruCacheIter < 'a , K , V > { self . iter () } }
+        impl < T > ExactSizeIterator for FixedSizeListIterMut < '_ , T > { fn len (& self) -> usize { self . size_hint () . 0 } }
     };
 }
 

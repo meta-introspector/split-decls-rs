@@ -1,13 +1,14 @@
 macro_rules! deps {
     () => {
-        Arena!();
+        IdxRange!();
+        Idx!();
     };
 }
 
 macro_rules! impl_39 {
     () => {
         deps!();
-        impl < T > Extend < T > for Arena < T > { fn extend < II : IntoIterator < Item = T > > (& mut self , iter : II) { for t in iter { self . alloc (t) ; } } }
+        impl < T > DoubleEndedIterator for IdxRange < T > { fn next_back (& mut self) -> Option < Self :: Item > { self . range . next_back () . map (| raw | Idx :: from_raw (raw . into ())) } }
     };
 }
 

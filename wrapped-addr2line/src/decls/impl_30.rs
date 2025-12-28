@@ -1,0 +1,20 @@
+macro_rules! deps {
+    () => {
+        InlinedFunctionAddress!();
+        Result!();
+        Function!();
+        InlinedState!();
+        RangeAttributes!();
+        InlinedFunction!();
+        Error!();
+    };
+}
+
+macro_rules! impl_30 {
+    () => {
+        deps!();
+        impl < R : gimli :: Reader > InlinedFunction < R > { fn parse (state : & mut InlinedState < R > , dw_die_offset : gimli :: UnitOffset < R :: Offset > , abbrev : & gimli :: Abbreviation , depth : isize , inlined_depth : usize ,) -> Result < () , Error > { let unit = state . unit ; let mut ranges = RangeAttributes :: default () ; let mut name = None ; let mut call_file = None ; let mut call_line = 0 ; let mut call_column = 0 ; for spec in abbrev . attributes () { match state . entries . read_attribute (* spec) { Ok (ref attr) => match attr . name () { gimli :: DW_AT_low_pc => match attr . value () { gimli :: AttributeValue :: Addr (val) => ranges . low_pc = Some (val) , gimli :: AttributeValue :: DebugAddrIndex (index) => { ranges . low_pc = Some (unit . address (index) ?) ; } _ => { } } , gimli :: DW_AT_high_pc => match attr . value () { gimli :: AttributeValue :: Addr (val) => ranges . high_pc = Some (val) , gimli :: AttributeValue :: DebugAddrIndex (index) => { ranges . high_pc = Some (unit . address (index) ?) ; } gimli :: AttributeValue :: Udata (val) => ranges . size = Some (val) , _ => { } } , gimli :: DW_AT_ranges => { ranges . ranges_offset = unit . attr_ranges_offset (attr . value ()) ? ; } gimli :: DW_AT_linkage_name | gimli :: DW_AT_MIPS_linkage_name => { if let Ok (val) = unit . attr_string (attr . value ()) { name = Some (val) ; } } gimli :: DW_AT_name => { if name . is_none () { name = unit . attr_string (attr . value ()) . ok () ; } } gimli :: DW_AT_abstract_origin | gimli :: DW_AT_specification => { if name . is_none () { name = name_attr (attr . value () , state . file , unit , state . ctx , 16) ? ; } } gimli :: DW_AT_call_file => { if let gimli :: AttributeValue :: FileIndex (fi) = attr . value () { if fi > 0 || unit . header . version () >= 5 { call_file = Some (fi) ; } } } gimli :: DW_AT_call_line => { call_line = attr . udata_value () . unwrap_or (0) as u32 ; } gimli :: DW_AT_call_column => { call_column = attr . udata_value () . unwrap_or (0) as u32 ; } _ => { } } , Err (e) => return Err (e) , } } let function_index = state . functions . len () ; state . functions . push (InlinedFunction { dw_die_offset , name , call_file , call_line , call_column , }) ; ranges . for_each_range (unit , | range | { state . addresses . push (InlinedFunctionAddress { range , call_depth : inlined_depth , function : function_index , }) ; }) ? ; Function :: parse_children (state , depth , inlined_depth + 1) } }
+    };
+}
+
+impl_30!()

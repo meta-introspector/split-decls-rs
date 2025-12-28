@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        Margin!();
+    };
+}
+
+macro_rules! impl_83 {
+    () => {
+        deps!();
+        impl Margin { pub (crate) fn new (whitespace_left : usize , span_left : usize , span_right : usize , label_right : usize , term_width : usize , max_line_len : usize ,) -> Self { let mut m = Margin { whitespace_left : whitespace_left . saturating_sub (ELLIPSIS_PASSING) , span_left : span_left . saturating_sub (ELLIPSIS_PASSING) , span_right : span_right + ELLIPSIS_PASSING , computed_left : 0 , computed_right : 0 , term_width , label_right : label_right + ELLIPSIS_PASSING , } ; m . compute (max_line_len) ; m } pub (crate) fn was_cut_left (& self) -> bool { self . computed_left > 0 } fn compute (& mut self , max_line_len : usize) { self . computed_left = if self . whitespace_left > LONG_WHITESPACE { self . whitespace_left - (LONG_WHITESPACE - LONG_WHITESPACE_PADDING) } else { 0 } ; self . computed_right = max (max_line_len , self . computed_left) ; if self . computed_right - self . computed_left > self . term_width { if self . label_right . saturating_sub (self . whitespace_left) <= self . term_width && self . label_right >= self . whitespace_left { self . computed_left = self . whitespace_left ; self . computed_right = self . computed_left + self . term_width ; } else if self . label_right - self . span_left <= self . term_width { let padding_left = (self . term_width - (self . label_right - self . span_left)) / 2 ; self . computed_left = self . span_left . saturating_sub (padding_left) ; self . computed_right = self . computed_left + self . term_width ; } else if self . span_right - self . span_left <= self . term_width { let padding_left = (self . term_width - (self . span_right - self . span_left)) / 5 * 2 ; self . computed_left = self . span_left . saturating_sub (padding_left) ; self . computed_right = self . computed_left + self . term_width ; } else { self . computed_left = self . span_left ; self . computed_right = self . span_right ; } } } pub (crate) fn left (& self , line_len : usize) -> usize { min (self . computed_left , line_len) } pub (crate) fn right (& self , line_len : usize) -> usize { if line_len . saturating_sub (self . computed_left) <= self . term_width { line_len } else { min (line_len , self . computed_right) } } }
+    };
+}
+
+impl_83!()

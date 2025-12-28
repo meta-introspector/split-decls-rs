@@ -1,0 +1,18 @@
+macro_rules! deps {
+    () => {
+        Names!();
+        Direction!();
+        Push!();
+        Repository!();
+        Remote!();
+    };
+}
+
+macro_rules! impl_301 {
+    () => {
+        deps!();
+        # [doc = " Query configuration related to remotes."] impl crate :: Repository { # [doc = " Returns a sorted list unique of symbolic names of remotes that"] # [doc = " we deem [trustworthy][crate::open::Options::filter_config_section()]."] pub fn remote_names (& self) -> remote :: Names < '_ > { self . config . resolved . sections_by_name (Remote . name ()) . map (| it | { let filter = self . filter_config_section () ; it . filter (move | s | filter (s . meta ())) . filter_map (| section | section . header () . subsection_name () . map (Cow :: Borrowed)) . collect () }) . unwrap_or_default () } # [doc = " Obtain the branch-independent name for a remote for use in the given `direction`, or `None` if it could not be determined."] # [doc = ""] # [doc = " For _fetching_, use the only configured remote, or default to `origin` if it exists."] # [doc = " For _pushing_, use the `remote.pushDefault` trusted configuration key, or fall back to the rules for _fetching_."] # [doc = ""] # [doc = " # Notes"] # [doc = ""] # [doc = " It's up to the caller to determine what to do if the current `head` is unborn or detached."] pub fn remote_default_name (& self , direction : remote :: Direction) -> Option < Cow < '_ , BStr > > { let name = (direction == remote :: Direction :: Push) . then (| | { self . config . resolved . string_filter (Remote :: PUSH_DEFAULT , & mut self . filter_config_section ()) }) . flatten () ; name . or_else (| | { let names = self . remote_names () ; match names . len () { 0 => None , 1 => names . into_iter () . next () , _more_than_one => { let origin = Cow :: Borrowed ("origin" . into ()) ; names . contains (& origin) . then_some (origin) } } }) } }
+    };
+}
+
+impl_301!()

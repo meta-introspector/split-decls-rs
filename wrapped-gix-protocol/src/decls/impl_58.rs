@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        Source!();
+        Ref!();
+    };
+}
+
+macro_rules! impl_58 {
+    () => {
+        deps!();
+        impl Source { # [doc = " Return either the direct object id we refer to or the direct target that a reference refers to."] # [doc = " The latter may be a direct or a symbolic reference."] # [doc = " If unborn, `None` is returned."] pub fn as_id (& self) -> Option < & gix_hash :: oid > { match self { Source :: ObjectId (id) => Some (id) , Source :: Ref (r) => r . unpack () . 1 , } } # [doc = " Return the target that this symbolic ref is pointing to, or `None` if it is no symbolic ref."] pub fn as_target (& self) -> Option < & bstr :: BStr > { match self { Source :: ObjectId (_) => None , Source :: Ref (r) => match r { crate :: handshake :: Ref :: Peeled { .. } | crate :: handshake :: Ref :: Direct { .. } => None , crate :: handshake :: Ref :: Symbolic { target , .. } | crate :: handshake :: Ref :: Unborn { target , .. } => { Some (target . as_ref ()) } } , } } # [doc = " Returns the peeled id of this instance, that is the object that can't be de-referenced anymore."] pub fn peeled_id (& self) -> Option < & gix_hash :: oid > { match self { Source :: ObjectId (id) => Some (id) , Source :: Ref (r) => { let (_name , target , peeled) = r . unpack () ; peeled . or (target) } } } # [doc = " Return ourselves as the full name of the reference we represent, or `None` if this source isn't a reference but an object."] pub fn as_name (& self) -> Option < & bstr :: BStr > { match self { Source :: ObjectId (_) => None , Source :: Ref (r) => match r { crate :: handshake :: Ref :: Unborn { full_ref_name , .. } | crate :: handshake :: Ref :: Symbolic { full_ref_name , .. } | crate :: handshake :: Ref :: Direct { full_ref_name , .. } | crate :: handshake :: Ref :: Peeled { full_ref_name , .. } => Some (full_ref_name . as_ref ()) , } , } } }
+    };
+}
+
+impl_58!()

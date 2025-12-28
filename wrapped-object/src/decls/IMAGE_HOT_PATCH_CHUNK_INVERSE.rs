@@ -1,0 +1,7 @@
+macro_rules! IMAGE_HOT_PATCH_CHUNK_INVERSE {
+    () => {
+        pub const IMAGE_HOT_PATCH_CHUNK_INVERSE : u32 = 0x8000_0000 ;
+    };
+}
+
+IMAGE_HOT_PATCH_CHUNK_INVERSE!()

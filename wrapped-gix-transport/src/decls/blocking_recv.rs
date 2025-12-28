@@ -1,0 +1,17 @@
+macro_rules! deps {
+    () => {
+        Protocol!();
+        ReadlineBufRead!();
+        Error!();
+        Capabilities!();
+    };
+}
+
+macro_rules! blocking_recv {
+    () => {
+        deps!();
+        # [doc = ""] # [cfg (feature = "blocking-client")] pub mod blocking_recv { use std :: io ; use bstr :: ByteVec ; use crate :: { client :: { self , blocking_io :: ReadlineBufRead , Capabilities } , packetline :: blocking_io :: StreamingPeekableIter , Protocol , } ; # [doc = " The information provided by the server upon first connection."] pub struct Handshake < 'a > { # [doc = " The [`Capabilities`] the remote advertised."] pub capabilities : Capabilities , # [doc = " The remote refs as a [`io::BufRead`]."] # [doc = ""] # [doc = " This is `Some` only when protocol v1 is used. The [`io::BufRead`] must be exhausted by"] # [doc = " the caller."] pub refs : Option < Box < dyn ReadlineBufRead + 'a > > , # [doc = " The [`Protocol`] the remote advertised."] pub protocol : Protocol , } impl Handshake < '_ > { # [doc = " Read the capabilities and version advertisement from the given packetline reader."] # [doc = ""] # [doc = " If [`Protocol::V1`] was requested, or the remote decided to downgrade, the remote refs"] # [doc = " advertisement will also be included in the [`Handshake`]."] pub fn from_lines_with_version_detection < T : io :: Read > (rd : & mut StreamingPeekableIter < T > ,) -> Result < Handshake < '_ > , client :: Error > { rd . fail_on_err_lines (true) ; Ok (match rd . peek_line () { Some (line) => { let line = line ? ? . as_text () . ok_or (client :: Error :: ExpectedLine ("text")) ? ; let version = Capabilities :: extract_protocol (line) ? ; match version { Protocol :: V0 => unreachable ! ("already handled in `None` case") , Protocol :: V1 => { let (capabilities , delimiter_position) = Capabilities :: from_bytes (line . 0) ? ; rd . peek_buffer_replace_and_truncate (delimiter_position , b'\n') ; Handshake { capabilities , refs : Some (Box :: new (rd . as_read ())) , protocol : Protocol :: V1 , } } Protocol :: V2 => Handshake { capabilities : { let mut rd = rd . as_read () ; let mut buf = Vec :: new () ; while let Some (line) = rd . read_data_line () { let line = line ? ? ; match line . as_bstr () { Some (line) => { buf . push_str (line) ; if buf . last () != Some (& b'\n') { buf . push (b'\n') ; } } None => break , } } Capabilities :: from_lines (buf . into ()) ? } , refs : None , protocol : Protocol :: V2 , } , } } None => Handshake { capabilities : Capabilities :: default () , refs : Some (Box :: new (rd . as_read ())) , protocol : Protocol :: V0 , } , }) } } }
+    };
+}
+
+blocking_recv!()

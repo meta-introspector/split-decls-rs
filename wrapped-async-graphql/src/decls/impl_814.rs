@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        UploadValue!();
+        Result!();
+    };
+}
+
+macro_rules! impl_814 {
+    () => {
+        deps!();
+        impl UploadValue { # [doc = " Attempt to clone the upload value. This type's `Clone` implementation"] # [doc = " simply calls this and panics on failure."] # [doc = ""] # [doc = " # Errors"] # [doc = ""] # [doc = " Fails if cloning the inner `File` fails."] pub fn try_clone (& self) -> std :: io :: Result < Self > { # [cfg (feature = "tempfile")] { Ok (Self { filename : self . filename . clone () , content_type : self . content_type . clone () , content : self . content . try_clone () ? , }) } # [cfg (not (feature = "tempfile"))] { Ok (Self { filename : self . filename . clone () , content_type : self . content_type . clone () , content : self . content . clone () , }) } } # [doc = " Convert to a `Read`."] # [doc = ""] # [doc = " **Note**: this is a *synchronous/blocking* reader."] pub fn into_read (self) -> impl Read + Sync + Send + 'static { # [cfg (feature = "tempfile")] { self . content } # [cfg (not (feature = "tempfile"))] { std :: io :: Cursor :: new (self . content) } } # [doc = " Convert to a `AsyncRead`."] # [cfg (feature = "unblock")] # [cfg_attr (docsrs , doc (cfg (feature = "unblock")))] pub fn into_async_read (self) -> impl AsyncRead + Sync + Send + 'static { # [cfg (feature = "tempfile")] { blocking :: Unblock :: new (self . content) } # [cfg (not (feature = "tempfile"))] { std :: io :: Cursor :: new (self . content) } } # [doc = " Returns the size of the file, in bytes."] pub fn size (& self) -> std :: io :: Result < u64 > { # [cfg (feature = "tempfile")] { self . content . metadata () . map (| meta | meta . len ()) } # [cfg (not (feature = "tempfile"))] { Ok (self . content . len () as u64) } } }
+    };
+}
+
+impl_814!()

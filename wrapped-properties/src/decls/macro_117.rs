@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        LineBreak!();
+    };
+}
+
+macro_rules! macro_117 {
+    () => {
+        deps!();
+        create_const_array ! { # [allow (missing_docs)] # [allow (non_upper_case_globals)] impl LineBreak { pub const Unknown : LineBreak = LineBreak (0) ; pub const Ambiguous : LineBreak = LineBreak (1) ; pub const Alphabetic : LineBreak = LineBreak (2) ; pub const BreakBoth : LineBreak = LineBreak (3) ; pub const BreakAfter : LineBreak = LineBreak (4) ; pub const BreakBefore : LineBreak = LineBreak (5) ; pub const MandatoryBreak : LineBreak = LineBreak (6) ; pub const ContingentBreak : LineBreak = LineBreak (7) ; pub const ClosePunctuation : LineBreak = LineBreak (8) ; pub const CombiningMark : LineBreak = LineBreak (9) ; pub const CarriageReturn : LineBreak = LineBreak (10) ; pub const Exclamation : LineBreak = LineBreak (11) ; pub const Glue : LineBreak = LineBreak (12) ; pub const Hyphen : LineBreak = LineBreak (13) ; pub const Ideographic : LineBreak = LineBreak (14) ; pub const Inseparable : LineBreak = LineBreak (15) ; pub const InfixNumeric : LineBreak = LineBreak (16) ; pub const LineFeed : LineBreak = LineBreak (17) ; pub const Nonstarter : LineBreak = LineBreak (18) ; pub const Numeric : LineBreak = LineBreak (19) ; pub const OpenPunctuation : LineBreak = LineBreak (20) ; pub const PostfixNumeric : LineBreak = LineBreak (21) ; pub const PrefixNumeric : LineBreak = LineBreak (22) ; pub const Quotation : LineBreak = LineBreak (23) ; pub const ComplexContext : LineBreak = LineBreak (24) ; pub const Surrogate : LineBreak = LineBreak (25) ; pub const Space : LineBreak = LineBreak (26) ; pub const BreakSymbols : LineBreak = LineBreak (27) ; pub const ZWSpace : LineBreak = LineBreak (28) ; pub const NextLine : LineBreak = LineBreak (29) ; pub const WordJoiner : LineBreak = LineBreak (30) ; pub const H2 : LineBreak = LineBreak (31) ; pub const H3 : LineBreak = LineBreak (32) ; pub const JL : LineBreak = LineBreak (33) ; pub const JT : LineBreak = LineBreak (34) ; pub const JV : LineBreak = LineBreak (35) ; pub const CloseParenthesis : LineBreak = LineBreak (36) ; pub const ConditionalJapaneseStarter : LineBreak = LineBreak (37) ; pub const HebrewLetter : LineBreak = LineBreak (38) ; pub const RegionalIndicator : LineBreak = LineBreak (39) ; pub const EBase : LineBreak = LineBreak (40) ; pub const EModifier : LineBreak = LineBreak (41) ; pub const ZWJ : LineBreak = LineBreak (42) ; pub const Aksara : LineBreak = LineBreak (43) ; pub const AksaraPrebase : LineBreak = LineBreak (44) ; pub const AksaraStart : LineBreak = LineBreak (45) ; pub const ViramaFinal : LineBreak = LineBreak (46) ; pub const Virama : LineBreak = LineBreak (47) ; pub const UnambiguousHyphen : LineBreak = LineBreak (48) ; } }
+    };
+}
+
+macro_117!()

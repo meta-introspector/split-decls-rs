@@ -1,6 +1,14 @@
 macro_rules! deps {
     () => {
+        FloatLit!();
+        IntegerLit!();
+        ByteStringLit!();
         Buffer!();
+        CharLit!();
+        BoolLit!();
+        StringLit!();
+        ByteLit!();
+        CStringLit!();
     };
 }
 

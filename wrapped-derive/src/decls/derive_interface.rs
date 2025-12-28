@@ -1,5 +1,12 @@
+macro_rules! deps {
+    () => {
+        Interface!();
+    };
+}
+
 macro_rules! derive_interface {
     () => {
+        deps!();
         # [proc_macro_derive (Interface , attributes (graphql))] pub fn derive_interface (input : TokenStream) -> TokenStream { let interface_args = match args :: Interface :: from_derive_input (& parse_macro_input ! (input as DeriveInput)) { Ok (interface_args) => interface_args , Err (err) => return TokenStream :: from (err . write_errors ()) , } ; match interface :: generate (& interface_args) { Ok (expanded) => expanded , Err (err) => err . write_errors () . into () , } }
     };
 }

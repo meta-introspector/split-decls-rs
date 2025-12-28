@@ -1,13 +1,14 @@
 macro_rules! deps {
     () => {
-        MatchDebugInfo!();
+        Token!();
+        Phase!();
     };
 }
 
 macro_rules! impl_20 {
     () => {
         deps!();
-        # [cfg (test)] impl MatchDebugInfo { pub fn match_failure_reason (& self) -> Option < & str > { self . matched . as_ref () . err () . map (| r | r . reason . as_str ()) } }
+        impl Phase < '_ > { fn next_non_trivial (& mut self , code_it : & mut SyntaxElementChildren) -> Option < SyntaxElement > { loop { let c = code_it . next () ; if let Some (SyntaxElement :: Token (t)) = & c { self . record_ignored_comments (t) ; if t . kind () . is_trivia () { continue ; } } return c ; } } fn record_ignored_comments (& mut self , token : & SyntaxToken) { if token . kind () == SyntaxKind :: COMMENT && let Phase :: Second (match_out) = self && let Some (comment) = ast :: Comment :: cast (token . clone ()) { match_out . ignored_comments . push (comment) ; } } }
     };
 }
 

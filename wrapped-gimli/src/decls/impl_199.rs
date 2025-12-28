@@ -1,0 +1,21 @@
+macro_rules! deps {
+    () => {
+        Section!();
+        Result!();
+        Reader!();
+        BaseAddresses!();
+        UnwindSection!();
+        Error!();
+        Augmentation!();
+        PointerEncodingParameters!();
+    };
+}
+
+macro_rules! impl_199 {
+    () => {
+        deps!();
+        impl Augmentation { fn parse < Section , R > (augmentation_str : & mut R , bases : & BaseAddresses , address_size : u8 , section : & Section , input : & mut R ,) -> Result < Augmentation > where R : Reader , Section : UnwindSection < R > , { debug_assert ! (! augmentation_str . is_empty () , "Augmentation::parse should only be called if we have an augmentation") ; let mut augmentation = Augmentation :: default () ; let mut parsed_first = false ; let mut data = None ; while ! augmentation_str . is_empty () { let ch = augmentation_str . read_u8 () ? ; match ch { b'z' => { if parsed_first { return Err (Error :: UnknownAugmentation) ; } let augmentation_length = input . read_uleb128 () . and_then (R :: Offset :: from_u64) ? ; data = Some (input . split (augmentation_length) ?) ; } b'L' => { let rest = data . as_mut () . ok_or (Error :: UnknownAugmentation) ? ; let encoding = parse_pointer_encoding (rest) ? ; augmentation . lsda = Some (encoding) ; } b'P' => { let rest = data . as_mut () . ok_or (Error :: UnknownAugmentation) ? ; let encoding = parse_pointer_encoding (rest) ? ; let parameters = PointerEncodingParameters { bases : & bases . eh_frame , func_base : None , address_size , section : section . section () , } ; let personality = parse_encoded_pointer (encoding , & parameters , rest) ? ; augmentation . personality = Some ((encoding , personality)) ; } b'R' => { let rest = data . as_mut () . ok_or (Error :: UnknownAugmentation) ? ; let encoding = parse_pointer_encoding (rest) ? ; augmentation . fde_address_encoding = Some (encoding) ; } b'S' => augmentation . is_signal_trampoline = true , _ => return Err (Error :: UnknownAugmentation) , } parsed_first = true ; } Ok (augmentation) } }
+    };
+}
+
+impl_199!()

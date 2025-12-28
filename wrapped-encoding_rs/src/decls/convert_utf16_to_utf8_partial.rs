@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        Encoding!();
+    };
+}
+
+macro_rules! convert_utf16_to_utf8_partial {
+    () => {
+        deps!();
+        # [doc = " Converts potentially-invalid UTF-16 to valid UTF-8 with errors replaced"] # [doc = " with the REPLACEMENT CHARACTER with potentially insufficient output"] # [doc = " space."] # [doc = ""] # [doc = " Returns the number of code units read and the number of bytes written."] # [doc = ""] # [doc = " Guarantees that the bytes in the destination beyond the number of"] # [doc = " bytes claimed as written by the second item of the return tuple"] # [doc = " are left unmodified."] # [doc = ""] # [doc = " Not all code units are read if there isn't enough output space."] # [doc = ""] # [doc = " Note  that this method isn't designed for general streamability but for"] # [doc = " not allocating memory for the worst case up front. Specifically,"] # [doc = " if the input starts with or ends with an unpaired surrogate, those are"] # [doc = " replaced with the REPLACEMENT CHARACTER."] # [doc = ""] # [doc = " Matches the semantics of `TextEncoder.encodeInto()` from the"] # [doc = " Encoding Standard."] # [doc = ""] # [doc = " # Safety"] # [doc = ""] # [doc = " If you want to convert into a `&mut str`, use"] # [doc = " `convert_utf16_to_str_partial()` instead of using this function"] # [doc = " together with the `unsafe` method `as_bytes_mut()` on `&mut str`."] # [inline (always)] pub fn convert_utf16_to_utf8_partial (src : & [u16] , dst : & mut [u8]) -> (usize , usize) { let (read , written) = convert_utf16_to_utf8_partial_inner (src , dst) ; if likely (read == src . len ()) { return (read , written) ; } let (tail_read , tail_written) = convert_utf16_to_utf8_partial_tail (& src [read ..] , & mut dst [written ..]) ; (read + tail_read , written + tail_written) }
+    };
+}
+
+convert_utf16_to_utf8_partial!()

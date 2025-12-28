@@ -1,5 +1,7 @@
 macro_rules! deps {
     () => {
+        IteratorIndex!();
+        HomogeneousTuple!();
         Itertools!();
     };
 }

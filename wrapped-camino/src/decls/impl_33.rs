@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Iter!();
+        Utf8Ancestors!();
     };
 }
 
 macro_rules! impl_33 {
     () => {
         deps!();
-        impl AsRef < Path > for Iter < '_ > { # [inline] fn as_ref (& self) -> & Path { self . as_path () . as_ref () } }
+        impl fmt :: Debug for Utf8Ancestors < '_ > { fn fmt (& self , f : & mut fmt :: Formatter) -> fmt :: Result { fmt :: Debug :: fmt (& self . 0 , f) } }
     };
 }
 

@@ -1,0 +1,7 @@
+macro_rules! check_doc_test {
+    () => {
+        # [track_caller] fn check_doc_test (assist_id : & str , before : & str , after : & str) { let after = trim_indent (after) ; let (db , file_id , selection) = RootDatabase :: with_range_or_offset (before) ; let before = db . file_text (file_id . file_id (& db)) . text (& db) . to_string () ; let frange = ide_db :: FileRange { file_id : file_id . file_id (& db) , range : selection . into () } ; let assist = assists (& db , & TEST_CONFIG , AssistResolveStrategy :: All , frange) . into_iter () . find (| assist | assist . id . 0 == assist_id) . unwrap_or_else (| | { panic ! ("\n\nAssist is not applicable: {}\nAvailable assists: {}" , assist_id , assists (& db , & TEST_CONFIG , AssistResolveStrategy :: None , frange) . into_iter () . map (| assist | assist . id . 0) . collect ::< Vec < _ >> () . join (", ")) }) ; let actual = { let source_change = assist . source_change . filter (| it | ! it . source_file_edits . is_empty () || ! it . file_system_edits . is_empty ()) . expect ("Assist did not contain any source changes") ; let mut actual = before ; if let Some ((source_file_edit , snippet_edit)) = source_change . get_source_and_snippet_edit (file_id . file_id (& db)) { source_file_edit . apply (& mut actual) ; if let Some (snippet_edit) = snippet_edit { snippet_edit . apply (& mut actual) ; } } actual } ; assert_eq_text ! (& after , & actual) ; }
+    };
+}
+
+check_doc_test!()

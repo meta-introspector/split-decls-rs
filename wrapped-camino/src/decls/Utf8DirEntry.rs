@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ReadDirUtf8!();
         Utf8PathBuf!();
+        ReadDirUtf8!();
     };
 }
 

@@ -1,0 +1,7 @@
+macro_rules! dealloc {
+    () => {
+        # [doc = " Deallocate memory with the global allocator."] # [doc = ""] # [doc = " This is equivalent to the standard library's [`std::alloc::dealloc`],"] # [doc = " but with the addition of leak tracking for allocated objects. Loom's leak"] # [doc = " tracking may report false positives if allocations allocated with"] # [doc = " [`loom::alloc::alloc`] or [`loom::alloc::alloc_zeroed`] are deallocated via"] # [doc = " [`std::alloc::dealloc`] rather than by this function."] # [doc = ""] # [doc = " This function forwards calls to the [`GlobalAlloc::dealloc`] method"] # [doc = " of the allocator registered with the `#[global_allocator]` attribute"] # [doc = " if there is one, or the `std` crate’s default."] # [doc = ""] # [doc = " # Safety"] # [doc = ""] # [doc = " See [`GlobalAlloc::dealloc`]."] # [doc = ""] # [doc = " [`GlobalAlloc::dealloc`]: std::alloc::GlobalAlloc::dealloc"] # [doc = " [`loom::alloc::alloc`]: crate::alloc::alloc"] # [doc = " [`loom::alloc::alloc_zeroed`]: crate::alloc::alloc_zeroed"] # [track_caller] pub unsafe fn dealloc (ptr : * mut u8 , layout : Layout) { rt :: dealloc (ptr , location ! ()) ; std :: alloc :: dealloc (ptr , layout) }
+    };
+}
+
+dealloc!()

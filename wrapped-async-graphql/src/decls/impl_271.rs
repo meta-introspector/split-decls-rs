@@ -1,0 +1,18 @@
+macro_rules! deps {
+    () => {
+        MetaTypeName!();
+        Visitor!();
+        Scope!();
+        VariableInAllowedPosition!();
+        VisitorContext!();
+    };
+}
+
+macro_rules! impl_271 {
+    () => {
+        deps!();
+        impl < 'a > Visitor < 'a > for VariableInAllowedPosition < 'a > { fn exit_document (& mut self , ctx : & mut VisitorContext < 'a > , _doc : & 'a ExecutableDocument) { for (op_scope , var_defs) in & self . variable_defs { self . collect_incorrect_usages (op_scope , var_defs , ctx , & mut HashSet :: new ()) ; } } fn enter_operation_definition (& mut self , _ctx : & mut VisitorContext < 'a > , name : Option < & 'a Name > , _operation_definition : & 'a Positioned < OperationDefinition > ,) { self . current_scope = Some (Scope :: Operation (name . map (Name :: as_str))) ; } fn enter_fragment_definition (& mut self , _ctx : & mut VisitorContext < 'a > , name : & 'a Name , _fragment_definition : & 'a Positioned < FragmentDefinition > ,) { self . current_scope = Some (Scope :: Fragment (name)) ; } fn enter_variable_definition (& mut self , _ctx : & mut VisitorContext < 'a > , variable_definition : & 'a Positioned < VariableDefinition > ,) { if let Some (ref scope) = self . current_scope { self . variable_defs . entry (* scope) . or_default () . push (variable_definition) ; } } fn enter_fragment_spread (& mut self , _ctx : & mut VisitorContext < 'a > , fragment_spread : & 'a Positioned < FragmentSpread > ,) { if let Some (ref scope) = self . current_scope { self . spreads . entry (* scope) . or_default () . insert (& fragment_spread . node . fragment_name . node) ; } } fn enter_input_value (& mut self , _ctx : & mut VisitorContext < 'a > , pos : Pos , expected_type : & Option < MetaTypeName < 'a > > , value : & 'a Value ,) { if let Value :: Variable (name) = value { if let Some (expected_type) = expected_type { if let Some (scope) = & self . current_scope { self . variable_usages . entry (* scope) . or_default () . push ((name , pos , * expected_type ,)) ; } } } } }
+    };
+}
+
+impl_271!()

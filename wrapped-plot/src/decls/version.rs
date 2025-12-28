@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        VersionError!();
         Version!();
+        VersionError!();
     };
 }
 

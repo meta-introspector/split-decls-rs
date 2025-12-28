@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        ViewStorage!();
+        LinearMapInner!();
+    };
+}
+
+macro_rules! LinearMapView {
+    () => {
+        deps!();
+        # [doc = " A dynamic capacity map/dictionary that performs lookups via linear search."] # [doc = ""] # [doc = " Note that as this map doesn't use hashing so most operations are *O*(n) instead of *O*(1)."] pub type LinearMapView < K , V > = LinearMapInner < K , V , ViewStorage < K , V > > ;
+    };
+}
+
+LinearMapView!()

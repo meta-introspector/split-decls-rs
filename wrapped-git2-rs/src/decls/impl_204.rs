@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        BlameOptions!();
+        Oid!();
+        Binding!();
+    };
+}
+
+macro_rules! impl_204 {
+    () => {
+        deps!();
+        impl BlameOptions { # [doc = " Initialize options"] pub fn new () -> BlameOptions { unsafe { let mut raw : raw :: git_blame_options = mem :: zeroed () ; assert_eq ! (raw :: git_blame_init_options (& mut raw , raw :: GIT_BLAME_OPTIONS_VERSION) , 0) ; Binding :: from_raw (& raw as * const _ as * mut _) } } fn flag (& mut self , opt : u32 , val : bool) -> & mut BlameOptions { if val { self . raw . flags |= opt ; } else { self . raw . flags &= ! opt ; } self } # [doc = " Track lines that have moved within a file."] pub fn track_copies_same_file (& mut self , opt : bool) -> & mut BlameOptions { self . flag (raw :: GIT_BLAME_TRACK_COPIES_SAME_FILE , opt) } # [doc = " Track lines that have moved across files in the same commit."] pub fn track_copies_same_commit_moves (& mut self , opt : bool) -> & mut BlameOptions { self . flag (raw :: GIT_BLAME_TRACK_COPIES_SAME_COMMIT_MOVES , opt) } # [doc = " Track lines that have been copied from another file that exists"] # [doc = " in the same commit."] pub fn track_copies_same_commit_copies (& mut self , opt : bool) -> & mut BlameOptions { self . flag (raw :: GIT_BLAME_TRACK_COPIES_SAME_COMMIT_COPIES , opt) } # [doc = " Track lines that have been copied from another file that exists"] # [doc = " in any commit."] pub fn track_copies_any_commit_copies (& mut self , opt : bool) -> & mut BlameOptions { self . flag (raw :: GIT_BLAME_TRACK_COPIES_ANY_COMMIT_COPIES , opt) } # [doc = " Restrict the search of commits to those reachable following only"] # [doc = " the first parents."] pub fn first_parent (& mut self , opt : bool) -> & mut BlameOptions { self . flag (raw :: GIT_BLAME_FIRST_PARENT , opt) } # [doc = " Use mailmap file to map author and committer names and email addresses"] # [doc = " to canonical real names and email addresses. The mailmap will be read"] # [doc = " from the working directory, or HEAD in a bare repository."] pub fn use_mailmap (& mut self , opt : bool) -> & mut BlameOptions { self . flag (raw :: GIT_BLAME_USE_MAILMAP , opt) } # [doc = " Ignore whitespace differences."] pub fn ignore_whitespace (& mut self , opt : bool) -> & mut BlameOptions { self . flag (raw :: GIT_BLAME_IGNORE_WHITESPACE , opt) } # [doc = " Setter for the id of the newest commit to consider."] pub fn newest_commit (& mut self , id : Oid) -> & mut BlameOptions { unsafe { self . raw . newest_commit = * id . raw () ; } self } # [doc = " Setter for the id of the oldest commit to consider."] pub fn oldest_commit (& mut self , id : Oid) -> & mut BlameOptions { unsafe { self . raw . oldest_commit = * id . raw () ; } self } # [doc = " The first line in the file to blame."] pub fn min_line (& mut self , lineno : usize) -> & mut BlameOptions { self . raw . min_line = lineno ; self } # [doc = " The last line in the file to blame."] pub fn max_line (& mut self , lineno : usize) -> & mut BlameOptions { self . raw . max_line = lineno ; self } }
+    };
+}
+
+impl_204!()

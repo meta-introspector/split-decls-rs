@@ -1,0 +1,7 @@
+macro_rules! IMAGE_SUBSYSTEM_EFI_RUNTIME_DRIVER {
+    () => {
+        pub const IMAGE_SUBSYSTEM_EFI_RUNTIME_DRIVER : u16 = 12 ;
+    };
+}
+
+IMAGE_SUBSYSTEM_EFI_RUNTIME_DRIVER!()

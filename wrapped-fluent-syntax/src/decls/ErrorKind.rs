@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        Term!();
+        Message!();
+        ParserError!();
+    };
+}
+
+macro_rules! ErrorKind {
+    () => {
+        deps!();
+        # [doc = " Kind of an error associated with the [`ParserError`]."] # [derive (Clone , Debug , Eq , Error , PartialEq)] pub enum ErrorKind { # [error ("Expected a token starting with \"{0}\"")] ExpectedToken (char) , # [error ("Expected one of \"{range}\"")] ExpectedCharRange { range : String } , # [error ("Expected a message field for \"{entry_id}\"")] ExpectedMessageField { entry_id : String } , # [error ("Expected a term field for \"{entry_id}\"")] ExpectedTermField { entry_id : String } , # [error ("Callee is not allowed here")] ForbiddenCallee , # [error ("The select expression must have a default variant")] MissingDefaultVariant , # [error ("Expected a value")] MissingValue , # [error ("A select expression can only have one default variant")] MultipleDefaultVariants , # [error ("Message references can't be used as a selector")] MessageReferenceAsSelector , # [error ("Term references can't be used as a selector")] TermReferenceAsSelector , # [error ("Message attributes can't be used as a selector")] MessageAttributeAsSelector , # [error ("Term attributes can't be used as a selector")] TermAttributeAsPlaceable , # [error ("Unterminated string literal")] UnterminatedStringLiteral , # [error ("Positional arguments must come before named arguments")] PositionalArgumentFollowsNamed , # [error ("The \"{0}\" argument appears twice")] DuplicatedNamedArgument (String) , # [error ("Unknown escape sequence")] UnknownEscapeSequence (String) , # [error ("Invalid unicode escape sequence, \"{0}\"")] InvalidUnicodeEscapeSequence (String) , # [error ("Unbalanced closing brace")] UnbalancedClosingBrace , # [error ("Expected an inline expression")] ExpectedInlineExpression , # [error ("Expected a simple expression as selector")] ExpectedSimpleExpressionAsSelector , # [error ("Expected a string or number literal")] ExpectedLiteral , }
+    };
+}
+
+ErrorKind!()

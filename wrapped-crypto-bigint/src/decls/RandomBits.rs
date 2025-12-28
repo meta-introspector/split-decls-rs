@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        RandomBitsError!();
+        Random!();
+    };
+}
+
+macro_rules! RandomBits {
+    () => {
+        deps!();
+        # [doc = " Random bits generation support."] # [cfg (feature = "rand_core")] pub trait RandomBits : Sized { # [doc = " Generate a random value in range `[0, 2^bit_length)`."] # [doc = ""] # [doc = " A wrapper for [`RandomBits::try_random_bits`] that panics on error."] fn random_bits < R : TryRngCore + ? Sized > (rng : & mut R , bit_length : u32) -> Self { Self :: try_random_bits (rng , bit_length) . expect ("try_random_bits() failed") } # [doc = " Generate a random value in range `[0, 2^bit_length)`."] # [doc = ""] # [doc = " This method is variable time wrt `bit_length`."] # [doc = ""] # [doc = " If `rng` is a CSRNG, the generation is cryptographically secure as well."] fn try_random_bits < R : TryRngCore + ? Sized > (rng : & mut R , bit_length : u32 ,) -> Result < Self , RandomBitsError < R :: Error > > ; # [doc = " Generate a random value in range `[0, 2^bit_length)`,"] # [doc = " returning an integer with the closest available size to `bits_precision`"] # [doc = " (if the implementing type supports runtime sizing)."] # [doc = ""] # [doc = " A wrapper for [`RandomBits::try_random_bits_with_precision`] that panics on error."] fn random_bits_with_precision < R : TryRngCore + ? Sized > (rng : & mut R , bit_length : u32 , bits_precision : u32 ,) -> Self { Self :: try_random_bits_with_precision (rng , bit_length , bits_precision) . expect ("try_random_bits_with_precision() failed") } # [doc = " Generate a random value in range `[0, 2^bit_length)`,"] # [doc = " returning an integer with the closest available size to `bits_precision`"] # [doc = " (if the implementing type supports runtime sizing)."] # [doc = ""] # [doc = " This method is variable time wrt `bit_length`."] # [doc = ""] # [doc = " If `rng` is a CSRNG, the generation is cryptographically secure as well."] fn try_random_bits_with_precision < R : TryRngCore + ? Sized > (rng : & mut R , bit_length : u32 , bits_precision : u32 ,) -> Result < Self , RandomBitsError < R :: Error > > ; }
+    };
+}
+
+RandomBits!()

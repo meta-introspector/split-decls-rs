@@ -1,0 +1,17 @@
+macro_rules! deps {
+    () => {
+        Error!();
+        Options!();
+        File!();
+        Source!();
+    };
+}
+
+macro_rules! impl_24 {
+    () => {
+        deps!();
+        # [doc = " An easy way to provide complete configuration for a repository."] impl File < 'static > { # [doc = " This configuration type includes the following sources, in order of precedence:"] # [doc = ""] # [doc = " - globals"] # [doc = " - repository-local by loading `dir`/config"] # [doc = " - worktree by loading `dir`/config.worktree"] # [doc = " - environment"] # [doc = ""] # [doc = " Note that `dir` is the `.git` dir to load the configuration from, not the configuration file."] # [doc = ""] # [doc = " Includes will be resolved within limits as some information like the git installation directory is missing to interpolate"] # [doc = " paths with as well as git repository information like the branch name."] pub fn from_git_dir (dir : std :: path :: PathBuf) -> Result < File < 'static > , from_git_dir :: Error > { let (mut local , git_dir) = { let source = Source :: Local ; let mut path = dir ; path . push (source . storage_location (& mut gix_path :: env :: var) . expect ("location available for local") ,) ; let local = Self :: from_path_no_includes (path . clone () , source) ? ; path . pop () ; (local , path) } ; let worktree = match local . boolean ("extensions.worktreeConfig") { Some (Ok (worktree_config)) => worktree_config . then (| | { let source = Source :: Worktree ; let path = git_dir . join (source . storage_location (& mut gix_path :: env :: var) . expect ("location available for worktree") ,) ; Self :: from_path_no_includes (path , source) }) , _ => None , } . transpose () ? ; let home = gix_path :: env :: home_dir () ; let options = init :: Options { includes : init :: includes :: Options :: follow (path :: interpolate :: Context { home_dir : home . as_deref () , .. Default :: default () } , init :: includes :: conditional :: Context { git_dir : Some (git_dir . as_ref ()) , branch_name : None , } ,) , .. Default :: default () } ; let mut globals = Self :: from_globals () ? ; globals . resolve_includes (options) ? ; local . resolve_includes (options) ? ; globals . append (local) ; if let Some (mut worktree) = worktree { worktree . resolve_includes (options) ? ; globals . append (worktree) ; } globals . append (Self :: from_environment_overrides () ?) ; Ok (globals) } }
+    };
+}
+
+impl_24!()

@@ -1,5 +1,6 @@
 macro_rules! deps {
     () => {
+        Properties!();
         Plot!();
         Terminal!();
     };

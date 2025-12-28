@@ -1,0 +1,17 @@
+macro_rules! deps {
+    () => {
+        Node!();
+        RefCnt!();
+        LocalNode!();
+        Debt!();
+    };
+}
+
+macro_rules! impl_78 {
+    () => {
+        deps!();
+        impl LocalNode { # [cfg (not (feature = "experimental-thread-local"))] pub (crate) fn with < R , F : FnOnce (& LocalNode) -> R > (f : F) -> R { let f = Cell :: new (Some (f)) ; THREAD_HEAD . try_with (| head | { if head . node . get () . is_none () { head . node . set (Some (Node :: get ())) ; } let f = f . take () . unwrap () ; f (head) }) . unwrap_or_else (| _ | { let tmp_node = LocalNode { node : Cell :: new (Some (Node :: get ())) , fast : FastLocal :: default () , helping : HelpingLocal :: default () , } ; let f = f . take () . unwrap () ; f (& tmp_node) }) } # [cfg (feature = "experimental-thread-local")] pub (crate) fn with < R , F : FnOnce (& LocalNode) -> R > (f : F) -> R { let thread_head = THREAD_HEAD . get_or_init (| | LocalNode { node : Cell :: new (None) , fast : FastLocal :: default () , helping : HelpingLocal :: default () , }) ; if thread_head . node . get () . is_none () { thread_head . node . set (Some (Node :: get ())) ; } f (& thread_head) } # [doc = " Creates a new debt."] # [doc = ""] # [doc = " This stores the debt of the given pointer (untyped, casted into an usize) and returns a"] # [doc = " reference to that slot, or gives up with `None` if all the slots are currently full."] # [inline] pub (crate) fn new_fast (& self , ptr : usize) -> Option < & 'static Debt > { let node = & self . node . get () . expect ("LocalNode::with ensures it is set") ; debug_assert_eq ! (node . in_use . load (Relaxed) , NODE_USED) ; node . fast . get_debt (ptr , & self . fast) } # [doc = " Initializes a helping slot transaction."] # [doc = ""] # [doc = " Returns the generation (with tag)."] pub (crate) fn new_helping (& self , ptr : usize) -> usize { let node = & self . node . get () . expect ("LocalNode::with ensures it is set") ; debug_assert_eq ! (node . in_use . load (Relaxed) , NODE_USED) ; let (gen , discard) = node . helping . get_debt (ptr , & self . helping) ; if discard { node . start_cooldown () ; self . node . take () ; } gen } # [doc = " Confirm the helping transaction."] # [doc = ""] # [doc = " The generation comes from previous new_helping."] # [doc = ""] # [doc = " Will either return a debt with the pointer, or a debt to pay and a replacement (already"] # [doc = " protected) address."] pub (crate) fn confirm_helping (& self , gen : usize , ptr : usize ,) -> Result < & 'static Debt , (& 'static Debt , usize) > { let node = & self . node . get () . expect ("LocalNode::with ensures it is set") ; debug_assert_eq ! (node . in_use . load (Relaxed) , NODE_USED) ; let slot = node . helping_slot () ; node . helping . confirm (gen , ptr) . map (| () | slot) . map_err (| repl | (slot , repl)) } # [doc = " The writer side of a helping slot."] # [doc = ""] # [doc = " This potentially helps the `who` node (uses self as the local node, which must be"] # [doc = " different) by loading the address that one is trying to load."] pub (super) fn help < R , T > (& self , who : & Node , storage_addr : usize , replacement : & R) where T : RefCnt , R : Fn () -> T , { let node = & self . node . get () . expect ("LocalNode::with ensures it is set") ; debug_assert_eq ! (node . in_use . load (Relaxed) , NODE_USED) ; node . helping . help (& who . helping , storage_addr , replacement) } }
+    };
+}
+
+impl_78!()

@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        Context!();
+    };
+}
+
+macro_rules! impl_28 {
+    () => {
+        deps!();
+        impl ToTokens for Context < '_ > { fn to_tokens (& self , tokens : & mut TokenStream) { if ! self . f . is_static { return ; } let ltdef = LifetimeParam :: new (Lifetime :: new ("'__mockall_lt" , Span :: call_site ())) ; let mut egenerics = self . f . egenerics . clone () ; egenerics . lt_token . get_or_insert (< Token ! [<] > :: default ()) ; egenerics . params . push (GenericParam :: Lifetime (ltdef)) ; egenerics . gt_token . get_or_insert (< Token ! [>] > :: default ()) ; let (_ , e_tg , _) = egenerics . split_for_impl () ; let (ty_ig , ty_tg , ty_wc) = self . f . type_generics . split_for_impl () ; let mut meth_generics = self . f . call_generics . clone () ; let ltdef = LifetimeParam :: new (Lifetime :: new ("'__mockall_lt" , Span :: call_site ())) ; meth_generics . params . push (GenericParam :: Lifetime (ltdef)) ; let (meth_ig , _meth_tg , meth_wc) = meth_generics . split_for_impl () ; let ctx_fn_params = self . f . struct_generics . type_params () . map (| tp | tp . ident . clone ()) . collect :: < Punctuated :: < Ident , Token ! [,] > > () ; let v = & self . f . privmod_vis ; # [cfg (not (feature = "nightly_derive"))] let must_use = quote ! (# [must_use = "Must set return value when not using the \"nightly\" feature"]) ; # [cfg (feature = "nightly_derive")] let must_use = quote ! () ; quote ! (# [doc = " Manages the context for expectations of static methods."] # [doc = ""] # [doc = " Expectations on this method will be validated and cleared when"] # [doc = " the `Context` object drops.  The `Context` object does *not*"] # [doc = " provide any form of synchronization, so multiple tests that set"] # [doc = " expectations on the same static method must provide their own."] # [must_use = "Context only serves to create expectations"] # v struct Context # ty_ig # ty_wc { _phantom : :: std :: marker :: PhantomData < Box < dyn Fn (# ctx_fn_params) + :: std :: marker :: Send > > } impl # ty_ig Context # ty_tg # ty_wc { # [doc = " Verify that all current expectations for this method are"] # [doc = " satisfied and clear them."] # v fn checkpoint (& self) { Self :: do_checkpoint () } # [doc (hidden)] # v fn do_checkpoint () { let __mockall_timeses = get_expectations () . lock () . unwrap () . checkpoint () . collect ::< Vec < _ >> () ; } # [doc = " Create a new expectation for this method."] # must_use # v fn expect # meth_ig (& self ,) -> ExpectationGuard # e_tg # meth_wc { ExpectationGuard :: new (get_expectations () . lock () . unwrap ()) } } impl # ty_ig Default for Context # ty_tg # ty_wc { fn default () -> Self { Context { _phantom : std :: marker :: PhantomData } } } impl # ty_ig Drop for Context # ty_tg # ty_wc { fn drop (& mut self) { if ! :: std :: thread :: panicking () { Self :: do_checkpoint () ; } } }) . to_tokens (tokens) ; } }
+    };
+}
+
+impl_28!()

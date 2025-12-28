@@ -1,0 +1,7 @@
+macro_rules! memchr2 {
+    () => {
+        # [doc = " Search for the first occurrence of two possible bytes in a haystack."] # [doc = ""] # [doc = " This returns the index corresponding to the first occurrence of one of the"] # [doc = " needle bytes in `haystack`, or `None` if one is not found. If an index is"] # [doc = " returned, it is guaranteed to be less than `haystack.len()`."] # [doc = ""] # [doc = " While this is semantically the same as something like"] # [doc = " `haystack.iter().position(|&b| b == needle1 || b == needle2)`, this routine"] # [doc = " will attempt to use highly optimized vector operations that can be an order"] # [doc = " of magnitude faster (or more)."] # [doc = ""] # [doc = " # Example"] # [doc = ""] # [doc = " This shows how to find the first position of one of two possible bytes in a"] # [doc = " haystack."] # [doc = ""] # [doc = " ```"] # [doc = " use memchr::memchr2;"] # [doc = ""] # [doc = " let haystack = b\"the quick brown fox\";"] # [doc = " assert_eq!(memchr2(b'k', b'q', haystack), Some(4));"] # [doc = " ```"] # [inline] pub fn memchr2 (needle1 : u8 , needle2 : u8 , haystack : & [u8]) -> Option < usize > { unsafe { generic :: search_slice_with_raw (haystack , | start , end | { memchr2_raw (needle1 , needle2 , start , end) }) } }
+    };
+}
+
+memchr2!()

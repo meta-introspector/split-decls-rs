@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        Ref!();
+        Error!();
+    };
+}
+
+macro_rules! parse_v2 {
+    () => {
+        deps!();
+        pub (in crate :: handshake :: refs) fn parse_v2 (line : & BStr) -> Result < Ref , Error > { let trimmed = line . trim_end () ; let mut tokens = trimmed . splitn (4 , | b | * b == b' ') ; match (tokens . next () , tokens . next ()) { (Some (hex_hash) , Some (path)) => { let id = if hex_hash == b"unborn" { None } else { Some (gix_hash :: ObjectId :: from_hex (hex_hash . as_bytes ()) ?) } ; if path . is_empty () { return Err (Error :: MalformedV2RefLine (trimmed . to_owned () . into ())) ; } let mut symref_target = None ; let mut peeled = None ; for attribute in tokens . by_ref () . take (2) { let mut tokens = attribute . splitn (2 , | b | * b == b':') ; match (tokens . next () , tokens . next ()) { (Some (attribute) , Some (value)) => { if value . is_empty () { return Err (Error :: MalformedV2RefLine (trimmed . to_owned () . into ())) ; } match attribute { b"peeled" => { peeled = Some (gix_hash :: ObjectId :: from_hex (value . as_bytes ()) ?) ; } b"symref-target" => { symref_target = Some (value) ; } _ => { return Err (Error :: UnknownAttribute { attribute : attribute . to_owned () . into () , line : trimmed . to_owned () . into () , }) } } } _ => return Err (Error :: MalformedV2RefLine (trimmed . to_owned () . into ())) , } } if tokens . next () . is_some () { return Err (Error :: MalformedV2RefLine (trimmed . to_owned () . into ())) ; } Ok (match (symref_target , peeled) { (Some (target_name) , peeled) => match target_name { b"(null)" => match peeled { None => Ref :: Direct { full_ref_name : path . into () , object : id . ok_or (Error :: InvariantViolation { message : "got 'unborn' while (null) was a symref target" , }) ? , } , Some (peeled) => Ref :: Peeled { full_ref_name : path . into () , object : peeled , tag : id . ok_or (Error :: InvariantViolation { message : "got 'unborn' while (null) was a symref target" , }) ? , } , } , name => match id { Some (id) => Ref :: Symbolic { full_ref_name : path . into () , tag : peeled . map (| _ | id) , object : peeled . unwrap_or (id) , target : name . into () , } , None => Ref :: Unborn { full_ref_name : path . into () , target : name . into () , } , } , } , (None , Some (peeled)) => Ref :: Peeled { full_ref_name : path . into () , object : peeled , tag : id . ok_or (Error :: InvariantViolation { message : "got 'unborn' as tag target" , }) ? , } , (None , None) => Ref :: Direct { object : id . ok_or (Error :: InvariantViolation { message : "got 'unborn' as object name of direct reference" , }) ? , full_ref_name : path . into () , } , }) } _ => Err (Error :: MalformedV2RefLine (trimmed . to_owned () . into ())) , } }
+    };
+}
+
+parse_v2!()

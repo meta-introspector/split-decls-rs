@@ -1,0 +1,41 @@
+macro_rules! deps {
+    () => {
+        Pack!();
+        Index!();
+        Committer!();
+        Http!();
+        Protocol!();
+        Core!();
+        Ssh!();
+        Default!();
+        Safe!();
+        Credential!();
+        Checkout!();
+        Init!();
+        Section!();
+        Mailmap!();
+        Author!();
+        Push!();
+        Url!();
+        Diff!();
+        Merge!();
+        User!();
+        Tree!();
+        Branch!();
+        Extensions!();
+        Clone!();
+        Fetch!();
+        Gitoxide!();
+        Status!();
+        Remote!();
+    };
+}
+
+macro_rules! root {
+    () => {
+        deps!();
+        pub (crate) mod root { use super :: sections ; use crate :: config :: tree :: Section ; # [doc = " The root of the configuration tree, suitable to discover all sub-sections at runtime or compile time."] # [derive (Copy , Clone , Default)] pub struct Tree ; impl Tree { # [doc = " The `author` section."] pub const AUTHOR : sections :: Author = sections :: Author ; # [doc = " The `branch` section."] pub const BRANCH : sections :: Branch = sections :: Branch ; # [doc = " The `checkout` section."] pub const CHECKOUT : sections :: Checkout = sections :: Checkout ; # [doc = " The `clone` section."] pub const CLONE : sections :: Clone = sections :: Clone ; # [doc = " The `committer` section."] pub const COMMITTER : sections :: Committer = sections :: Committer ; # [doc = " The `core` section."] pub const CORE : sections :: Core = sections :: Core ; # [doc = " The `credential` section."] pub const CREDENTIAL : sections :: Credential = sections :: Credential ; # [doc = " The `diff` section."] # [cfg (feature = "blob-diff")] pub const DIFF : sections :: Diff = sections :: Diff ; # [doc = " The `extensions` section."] pub const EXTENSIONS : sections :: Extensions = sections :: Extensions ; # [doc = " The `fetch` section."] pub const FETCH : sections :: Fetch = sections :: Fetch ; # [doc = " The `gitoxide` section."] pub const GITOXIDE : sections :: Gitoxide = sections :: Gitoxide ; # [doc = " The `http` section."] pub const HTTP : sections :: Http = sections :: Http ; # [doc = " The `index` section."] pub const INDEX : sections :: Index = sections :: Index ; # [doc = " The `init` section."] pub const INIT : sections :: Init = sections :: Init ; # [doc = " The `mailmap` section."] pub const MAILMAP : sections :: Mailmap = sections :: Mailmap ; # [doc = " The `merge` section."] pub const MERGE : sections :: Merge = sections :: Merge ; # [doc = " The `pack` section."] pub const PACK : sections :: Pack = sections :: Pack ; # [doc = " The `protocol` section."] pub const PROTOCOL : sections :: Protocol = sections :: Protocol ; # [doc = " The `push` section."] pub const PUSH : sections :: Push = sections :: Push ; # [doc = " The `remote` section."] pub const REMOTE : sections :: Remote = sections :: Remote ; # [doc = " The `safe` section."] pub const SAFE : sections :: Safe = sections :: Safe ; # [doc = " The `ssh` section."] pub const SSH : sections :: Ssh = sections :: Ssh ; # [doc = " The `status` section."] # [cfg (feature = "status")] pub const STATUS : sections :: Status = sections :: Status ; # [doc = " The `user` section."] pub const USER : sections :: User = sections :: User ; # [doc = " The `url` section."] pub const URL : sections :: Url = sections :: Url ; # [doc = " List all available sections."] pub fn sections (& self) -> & [& dyn Section] { & [& Self :: AUTHOR , & Self :: BRANCH , & Self :: CHECKOUT , & Self :: CLONE , & Self :: COMMITTER , & Self :: CORE , & Self :: CREDENTIAL , # [cfg (feature = "blob-diff")] & Self :: DIFF , & Self :: EXTENSIONS , & Self :: FETCH , & Self :: GITOXIDE , & Self :: HTTP , & Self :: INDEX , & Self :: INIT , & Self :: MAILMAP , & Self :: MERGE , & Self :: PACK , & Self :: PROTOCOL , & Self :: PUSH , & Self :: REMOTE , & Self :: SAFE , & Self :: SSH , # [cfg (feature = "status")] & Self :: STATUS , & Self :: USER , & Self :: URL ,] } } }
+    };
+}
+
+root!()

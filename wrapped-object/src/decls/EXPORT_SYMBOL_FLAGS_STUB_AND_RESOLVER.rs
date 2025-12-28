@@ -1,0 +1,7 @@
+macro_rules! EXPORT_SYMBOL_FLAGS_STUB_AND_RESOLVER {
+    () => {
+        pub const EXPORT_SYMBOL_FLAGS_STUB_AND_RESOLVER : u8 = 0x10 ;
+    };
+}
+
+EXPORT_SYMBOL_FLAGS_STUB_AND_RESOLVER!()

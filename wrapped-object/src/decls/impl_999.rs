@@ -1,0 +1,30 @@
+macro_rules! deps {
+    () => {
+        BigEndian!();
+        SectionHeader!();
+        MachHeader64!();
+        SegmentCommand!();
+        U32!();
+        U16!();
+        SegmentCommand64!();
+        U64Bytes!();
+        Section64!();
+        MachHeader!();
+        Nlist!();
+        MachO64!();
+        Nlist64!();
+        WritableBuffer!();
+        U64!();
+        MachO!();
+        Endian!();
+    };
+}
+
+macro_rules! impl_999 {
+    () => {
+        deps!();
+        impl < E : Endian > MachO for MachO64 < E > { fn mach_header_size (& self) -> usize { mem :: size_of :: < macho :: MachHeader64 < E > > () } fn segment_command_size (& self) -> usize { mem :: size_of :: < macho :: SegmentCommand64 < E > > () } fn section_header_size (& self) -> usize { mem :: size_of :: < macho :: Section64 < E > > () } fn nlist_size (& self) -> usize { mem :: size_of :: < macho :: Nlist64 < E > > () } fn write_mach_header (& self , buffer : & mut dyn WritableBuffer , header : MachHeader) { let endian = self . endian ; let magic = if endian . is_big_endian () { macho :: MH_MAGIC_64 } else { macho :: MH_CIGAM_64 } ; let header = macho :: MachHeader64 { magic : U32 :: new (BigEndian , magic) , cputype : U32 :: new (endian , header . cputype) , cpusubtype : U32 :: new (endian , header . cpusubtype) , filetype : U32 :: new (endian , header . filetype) , ncmds : U32 :: new (endian , header . ncmds) , sizeofcmds : U32 :: new (endian , header . sizeofcmds) , flags : U32 :: new (endian , header . flags) , reserved : U32 :: default () , } ; buffer . write (& header) ; } fn write_segment_command (& self , buffer : & mut dyn WritableBuffer , segment : SegmentCommand) { let endian = self . endian ; let segment = macho :: SegmentCommand64 { cmd : U32 :: new (endian , macho :: LC_SEGMENT_64) , cmdsize : U32 :: new (endian , segment . cmdsize) , segname : segment . segname , vmaddr : U64 :: new (endian , segment . vmaddr) , vmsize : U64 :: new (endian , segment . vmsize) , fileoff : U64 :: new (endian , segment . fileoff) , filesize : U64 :: new (endian , segment . filesize) , maxprot : U32 :: new (endian , segment . maxprot) , initprot : U32 :: new (endian , segment . initprot) , nsects : U32 :: new (endian , segment . nsects) , flags : U32 :: new (endian , segment . flags) , } ; buffer . write (& segment) ; } fn write_section (& self , buffer : & mut dyn WritableBuffer , section : SectionHeader) { let endian = self . endian ; let section = macho :: Section64 { sectname : section . sectname , segname : section . segname , addr : U64 :: new (endian , section . addr) , size : U64 :: new (endian , section . size) , offset : U32 :: new (endian , section . offset) , align : U32 :: new (endian , section . align) , reloff : U32 :: new (endian , section . reloff) , nreloc : U32 :: new (endian , section . nreloc) , flags : U32 :: new (endian , section . flags) , reserved1 : U32 :: default () , reserved2 : U32 :: default () , reserved3 : U32 :: default () , } ; buffer . write (& section) ; } fn write_nlist (& self , buffer : & mut dyn WritableBuffer , nlist : Nlist) { let endian = self . endian ; let nlist = macho :: Nlist64 { n_strx : U32 :: new (endian , nlist . n_strx) , n_type : nlist . n_type , n_sect : nlist . n_sect , n_desc : U16 :: new (endian , nlist . n_desc) , n_value : U64Bytes :: new (endian , nlist . n_value) , } ; buffer . write (& nlist) ; } }
+    };
+}
+
+impl_999!()

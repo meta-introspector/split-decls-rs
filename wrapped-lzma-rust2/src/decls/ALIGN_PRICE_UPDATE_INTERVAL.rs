@@ -1,0 +1,7 @@
+macro_rules! ALIGN_PRICE_UPDATE_INTERVAL {
+    () => {
+        const ALIGN_PRICE_UPDATE_INTERVAL : u32 = ALIGN_SIZE as u32 ;
+    };
+}
+
+ALIGN_PRICE_UPDATE_INTERVAL!()

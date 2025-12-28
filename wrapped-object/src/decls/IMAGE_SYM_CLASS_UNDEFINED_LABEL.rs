@@ -1,0 +1,7 @@
+macro_rules! IMAGE_SYM_CLASS_UNDEFINED_LABEL {
+    () => {
+        pub const IMAGE_SYM_CLASS_UNDEFINED_LABEL : u8 = 0x07 ;
+    };
+}
+
+IMAGE_SYM_CLASS_UNDEFINED_LABEL!()

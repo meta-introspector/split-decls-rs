@@ -1,0 +1,21 @@
+macro_rules! deps {
+    () => {
+        RingElementNTT!();
+        Sha3_256!();
+        RingElement!();
+        PkeParameters!();
+        FieldElement!();
+        EncapKey!();
+        ByteSerialization!();
+        UnknownCryptoError!();
+    };
+}
+
+macro_rules! impl_470 {
+    () => {
+        deps!();
+        impl < const K : usize , const ENCODED_SIZE : usize , Pke : PkeParameters > EncapKey < K , ENCODED_SIZE , Pke > { pub (crate) fn from_slice (slice : & [u8]) -> Result < Self , UnknownCryptoError > { Pke :: encapsulation_key_check (slice) ? ; let mut t_hat = [RingElementNTT :: zero () ; K] ; let mut rho = [0u8 ; 32] ; let ek_len = slice . len () - 32 ; rho . copy_from_slice (& slice [ek_len ..]) ; for (poly_decoded , ek_part) in t_hat . iter_mut () . zip (slice [.. ek_len] . chunks_exact (ENCODE_SIZE_POLY)) { ByteSerialization :: decode_12 (ek_part , & mut poly_decoded . coefficients) ; } let mut mat_a = [[RingElementNTT :: zero () ; K] ; K] ; for (i , row) in mat_a . iter_mut () . enumerate () { for (j , re) in row . iter_mut () . enumerate () { * re = sample_ntt (& rho , & [j as u8 , i as u8]) ? ; } } let h_ek = Sha3_256 :: digest (slice) ? ; Ok (Self { bytes : slice . try_into () . unwrap () , h_ek : h_ek . value , t_hat , mat_a , _phantom : PhantomData , }) } # [doc = " FIPS-203, Algorithm 14."] # [doc = ""] # [doc = " k \\in [2, 3, 4]"] fn encrypt (& self , m : & [u8] , r : & [u8] , c : & mut [u8]) -> Result < () , UnknownCryptoError > { debug_assert_eq ! (m . len () , 32) ; debug_assert_eq ! (r . len () , 32) ; debug_assert_eq ! (Pke :: K , K) ; debug_assert_eq ! (self . bytes . len () , Pke :: EK_SIZE) ; debug_assert_eq ! (c . len () , Pke :: CIPHERTEXT_SIZE) ; let mut n = 0 ; let mut y = [RingElement :: zero () ; K] ; for y_re in y . iter_mut () . take (Pke :: K) { * y_re = Pke :: sample_poly_cbd_eta1 (r , n) ? ; n += 1 ; } let mut e1 = [RingElement :: zero () ; K] ; for e1_re in e1 . iter_mut () . take (Pke :: K) { * e1_re = Pke :: sample_poly_cbd_eta2 (r , n) ? ; n += 1 ; } let mut e2 : RingElement = Pke :: sample_poly_cbd_eta2 (r , n) ? ; let mut y_hat = [RingElementNTT :: zero () ; K] ; for i in 0 .. Pke :: K { y_hat [i] = to_ntt (& y [i]) ; } y . zeroize () ; let mut u = [RingElement :: zero () ; K] ; let mut tmp = mat_mul_vec_transposed :: < K > (& self . mat_a , & y_hat) ; for (u_poly , tmp_poly) in u . iter_mut () . zip (tmp . iter ()) { * u_poly = inverse_ntt (tmp_poly) ; } tmp . zeroize () ; for (uelem , e1elem) in u . iter_mut () . zip (e1 . iter ()) { * uelem = * uelem + * e1elem ; } e1 . zeroize () ; let mut mu = RingElement :: zero () ; ByteSerialization :: decode_1 (m , & mut mu . coefficients) ; for re in mu . coefficients . iter_mut () { * re = FieldElement :: decompress (re . 0 , 1) ; } let mut product = RingElementNTT :: zero () ; for (th , yh) in self . t_hat . iter () . zip (y_hat . iter ()) { product += * th * * yh ; } let mut v = inverse_ntt (& product) ; v = v + e2 ; v = v + mu ; y_hat . zeroize () ; e2 . zeroize () ; mu . zeroize () ; product . zeroize () ; for re in u . iter_mut () { for fe in re . coefficients . iter_mut () { * fe = FieldElement :: new (fe . compress (Pke :: D_U)) ; } } debug_assert_eq ! (Pke :: ENCODE_SIZE_D_U * Pke :: K + Pke :: ENCODE_SIZE_D_V , Pke :: CIPHERTEXT_SIZE) ; for (c1_part , u_poly) in c . chunks_mut (Pke :: ENCODE_SIZE_D_U) . take (Pke :: K) . zip (u . iter ()) { Pke :: encode_du (& u_poly . coefficients , c1_part) ; } u . zeroize () ; for fe in v . coefficients . iter_mut () { * fe = FieldElement :: new (fe . compress (Pke :: D_V)) ; } Pke :: encode_dv (& v . coefficients , & mut c [Pke :: CIPHERTEXT_SIZE - Pke :: ENCODE_SIZE_D_V .. Pke :: CIPHERTEXT_SIZE] ,) ; v . zeroize () ; Ok (()) } # [doc = " FIPS-203, Algorithm 17."] # [doc = " - encapsulation key ek ∈ B^{384k+32}."] # [doc = " - randomness m ∈ B^{32}."] # [doc = " - decapsulation key dk ∈ B^{768k+96}."] pub (crate) fn mlkem_encap_internal (& self , m : & [u8] , c : & mut [u8] ,) -> Result < [u8 ; 32] , UnknownCryptoError > { if m . len () != 32 { return Err (UnknownCryptoError) ; } let (k , r) = g (& [m , self . h_ek . as_ref ()]) ; self . encrypt (m , r . as_ref () , c) ? ; Ok (k) } }
+    };
+}
+
+impl_470!()

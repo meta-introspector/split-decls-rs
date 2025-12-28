@@ -1,0 +1,19 @@
+macro_rules! deps {
+    () => {
+        GenericPredicates!();
+        Binder!();
+        HirDatabase!();
+        EarlyBinder!();
+        FnSig!();
+        TypingMode!();
+    };
+}
+
+macro_rules! receiver_is_dispatchable {
+    () => {
+        deps!();
+        fn receiver_is_dispatchable < 'db > (db : & dyn HirDatabase , trait_ : TraitId , func : FunctionId , sig : & EarlyBinder < 'db , Binder < 'db , rustc_type_ir :: FnSig < DbInterner < 'db > > > > ,) -> bool { let sig = sig . instantiate_identity () ; let interner : DbInterner < '_ > = DbInterner :: new_with (db , Some (trait_ . krate (db)) , None) ; let self_param_id = TypeParamId :: from_unchecked (TypeOrConstParamId { parent : trait_ . into () , local_id : LocalTypeOrConstParamId :: from_raw (la_arena :: RawIdx :: from_u32 (0)) , }) ; let self_param_ty = Ty :: new (interner , rustc_type_ir :: TyKind :: Param (ParamTy { index : 0 , id : self_param_id })) ; if sig . inputs () . iter () . next () . is_some_and (| p | p . skip_binder () == self_param_ty) { return true ; } let Some (& receiver_ty) = sig . inputs () . skip_binder () . as_slice () . first () else { return false ; } ; let krate = func . module (db) . krate () ; let traits = (LangItem :: Unsize . resolve_trait (db , krate) , LangItem :: DispatchFromDyn . resolve_trait (db , krate) ,) ; let (Some (unsize_did) , Some (dispatch_from_dyn_did)) = traits else { return false ; } ; let meta_sized_did = LangItem :: MetaSized . resolve_trait (db , krate) ; let Some (meta_sized_did) = meta_sized_did else { return false ; } ; let unsized_self_ty = Ty :: new_param (interner , self_param_id , u32 :: MAX) ; let unsized_receiver_ty = receiver_for_self_ty (interner , func , receiver_ty , unsized_self_ty) ; let param_env = { let generic_predicates = GenericPredicates :: query_all (db , func . into ()) ; let unsize_predicate = TraitRef :: new (interner , unsize_did . into () , [self_param_ty , unsized_self_ty]) ; let args = GenericArgs :: for_item (interner , trait_ . into () , | index , kind , _ | { if index == 0 { unsized_self_ty . into () } else { mk_param (interner , index , kind) } }) ; let trait_predicate = TraitRef :: new_from_args (interner , trait_ . into () , args) ; let meta_sized_predicate = TraitRef :: new (interner , meta_sized_did . into () , [unsized_self_ty]) ; ParamEnv { clauses : Clauses :: new_from_iter (interner , generic_predicates . iter_identity_copied () . chain ([unsize_predicate . upcast (interner) , trait_predicate . upcast (interner) , meta_sized_predicate . upcast (interner) ,]) ,) , } } ; let predicate = TraitRef :: new (interner , dispatch_from_dyn_did . into () , [receiver_ty , unsized_receiver_ty]) ; let goal = Goal :: new (interner , param_env , predicate) ; let infcx = interner . infer_ctxt () . build (TypingMode :: non_body_analysis ()) ; let res = next_trait_solve_in_ctxt (& infcx , goal) ; res . map_or (false , | res | matches ! (res . 1 , rustc_type_ir :: solve :: Certainty :: Yes)) }
+    };
+}
+
+receiver_is_dispatchable!()

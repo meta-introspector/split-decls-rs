@@ -1,0 +1,7 @@
+macro_rules! macro_186 {
+    () => {
+        make_binary_property ! { name : "Id_Continue" ; short_name : "IDC" ; ident : IdContinue ; data_marker : crate :: provider :: PropertyBinaryIdContinueV1 ; singleton : SINGLETON_PROPERTY_BINARY_ID_CONTINUE_V1 ; # [doc = " Characters that can come after the first character in an identifier."] # [doc = ""] # [doc = " If using NFKC to"] # [doc = " fold differences between characters, use [`XidContinue`] instead.  See"] # [doc = " [`Unicode Standard Annex #31`](https://www.unicode.org/reports/tr31/tr31-35.html) for"] # [doc = " more details."] # [doc = ""] # [doc = " # Example"] # [doc = ""] # [doc = " ```"] # [doc = " use icu::properties::CodePointSetData;"] # [doc = " use icu::properties::props::IdContinue;"] # [doc = ""] # [doc = " let id_continue = CodePointSetData::new::<IdContinue>();"] # [doc = ""] # [doc = " assert!(id_continue.contains('x'));"] # [doc = " assert!(id_continue.contains('1'));"] # [doc = " assert!(id_continue.contains('_'));"] # [doc = " assert!(id_continue.contains('ߝ'));  // U+07DD NKO LETTER FA"] # [doc = " assert!(!id_continue.contains('ⓧ'));  // U+24E7 CIRCLED LATIN SMALL LETTER X"] # [doc = " assert!(id_continue.contains('\\u{FC5E}'));  // ARABIC LIGATURE SHADDA WITH DAMMATAN ISOLATED FORM"] # [doc = " ```"] }
+    };
+}
+
+macro_186!()

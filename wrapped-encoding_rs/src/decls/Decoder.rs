@@ -1,7 +1,9 @@
 macro_rules! deps {
     () => {
-        DecoderLifeCycle!();
+        Unicode!();
+        VariantDecoder!();
         Encoding!();
+        DecoderLifeCycle!();
     };
 }
 

@@ -1,6 +1,8 @@
 macro_rules! deps {
     () => {
+        Entry!();
         IoUring!();
+        EntryMarker!();
     };
 }
 

@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        OutOfRange!();
+        TimeDelta!();
     };
 }
 
 macro_rules! impl_18 {
     () => {
         deps!();
-        impl fmt :: Display for OutOfRange { fn fmt (& self , f : & mut fmt :: Formatter) -> fmt :: Result { write ! (f , "out of range") } }
+        impl SubAssign for TimeDelta { fn sub_assign (& mut self , rhs : TimeDelta) { let new = self . checked_sub (& rhs) . expect ("`TimeDelta - TimeDelta` overflowed") ; * self = new ; } }
     };
 }
 

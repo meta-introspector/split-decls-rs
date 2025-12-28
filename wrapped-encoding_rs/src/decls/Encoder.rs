@@ -1,6 +1,8 @@
 macro_rules! deps {
     () => {
         Encoding!();
+        VariantEncoder!();
+        Unicode!();
     };
 }
 

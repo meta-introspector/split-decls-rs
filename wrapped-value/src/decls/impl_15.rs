@@ -1,13 +1,14 @@
 macro_rules! deps {
     () => {
-        Name!();
+        SeqDeserializer!();
+        ConstValue!();
     };
 }
 
 macro_rules! impl_15 {
     () => {
         deps!();
-        impl PartialEq < Name > for String { fn eq (& self , other : & Name) -> bool { self == other . as_str () } }
+        impl SeqDeserializer { fn new (vec : Vec < ConstValue >) -> Self { SeqDeserializer { iter : vec . into_iter () , } } }
     };
 }
 

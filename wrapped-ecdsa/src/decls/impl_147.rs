@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        EcdsaCurve!();
+        Signature!();
+        SignatureSize!();
+    };
+}
+
+macro_rules! impl_147 {
+    () => {
+        deps!();
+        impl < C > Copy for Signature < C > where C : EcdsaCurve , SignatureSize < C > : ArraySize , < SignatureSize < C > as ArraySize > :: ArrayType < u8 > : Copy , { }
+    };
+}
+
+impl_147!()

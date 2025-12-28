@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        CopySource!();
+    };
+}
+
+macro_rules! Copies {
+    () => {
+        deps!();
+        # [doc = " Under which circumstances we consider a file to be a copy."] # [derive (Debug , Copy , Clone , PartialEq)] pub struct Copies { # [doc = " The set of files to search when finding the source of copies."] pub source : CopySource , # [doc = " Equivalent to [`Rewrites::percentage`], but used for copy tracking."] # [doc = ""] # [doc = " Useful to have similarity-based rename tracking and cheaper copy tracking."] pub percentage : Option < f32 > , }
+    };
+}
+
+Copies!()

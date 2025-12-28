@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        PatternToken!();
-        MatchOptions!();
-        GlobError!();
         Pattern!();
         PathWrapper!();
+        GlobError!();
+        MatchOptions!();
+        PatternToken!();
     };
 }
 

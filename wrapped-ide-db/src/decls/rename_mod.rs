@@ -1,0 +1,20 @@
+macro_rules! deps {
+    () => {
+        IdentifierKind!();
+        Result!();
+        RootDatabase!();
+        TextEdit!();
+        SourceChange!();
+        FileSystemEdit!();
+        Definition!();
+    };
+}
+
+macro_rules! rename_mod {
+    () => {
+        deps!();
+        fn rename_mod (sema : & Semantics < '_ , RootDatabase > , module : hir :: Module , new_name : & str ,) -> Result < SourceChange > { let mut source_change = SourceChange :: default () ; if module . is_crate_root () { return Ok (source_change) ; } let InFile { file_id , value : def_source } = module . definition_source (sema . db) ; let edition = file_id . edition (sema . db) ; let (new_name , kind) = IdentifierKind :: classify (edition , new_name) ? ; if kind != IdentifierKind :: Ident { bail ! ("Invalid name `{0}`: cannot rename module to {0}" , new_name . display (sema . db , edition)) ; } if let ModuleSource :: SourceFile (..) = def_source { let anchor = file_id . original_file (sema . db) . file_id (sema . db) ; let is_mod_rs = module . is_mod_rs (sema . db) ; let has_detached_child = module . children (sema . db) . any (| child | ! child . is_inline (sema . db)) ; if ! is_mod_rs { let path = format ! ("{}.rs" , new_name . as_str ()) ; let dst = AnchoredPathBuf { anchor , path } ; source_change . push_file_system_edit (FileSystemEdit :: MoveFile { src : anchor , dst }) } let dir_paths = match (is_mod_rs , has_detached_child , module . name (sema . db)) { (true , _ , Some (mod_name)) => { Some ((format ! ("../{}" , mod_name . as_str ()) , format ! ("../{}" , new_name . as_str ()))) } (false , true , Some (mod_name)) => { Some ((mod_name . as_str () . to_owned () , new_name . as_str () . to_owned ())) } _ => None , } ; if let Some ((src , dst)) = dir_paths { let src = AnchoredPathBuf { anchor , path : src } ; let dst = AnchoredPathBuf { anchor , path : dst } ; source_change . push_file_system_edit (FileSystemEdit :: MoveDir { src , src_id : anchor , dst , }) } } if let Some (src) = module . declaration_source (sema . db) { let file_id = src . file_id . original_file (sema . db) ; match src . value . name () { Some (name) => { if let Some (file_range) = src . with_value (name . syntax ()) . original_file_range_opt (sema . db) . map (TupleExt :: head) { let new_name = new_name . display (sema . db , edition) . to_string () ; source_change . insert_source_edit (file_id . file_id (sema . db) , TextEdit :: replace (file_range . range , new_name) ,) } ; } _ => never ! ("Module source node is missing a name") , } } let def = Definition :: Module (module) ; let usages = def . usages (sema) . all () ; let ref_edits = usages . iter () . map (| (file_id , references) | { let edition = file_id . edition (sema . db) ; (file_id . file_id (sema . db) , source_edit_from_references (sema . db , references , def , & new_name , edition) ,) }) ; source_change . extend (ref_edits) ; Ok (source_change) }
+    };
+}
+
+rename_mod!()

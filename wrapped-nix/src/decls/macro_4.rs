@@ -1,6 +1,6 @@
 macro_rules! macro_4 {
     () => {
-        feature ! { #! [feature = "feature"] # [deny (missing_docs)] pub mod features ; }
+        # [cfg (not (target_os = "redox"))] feature ! { #! [feature = "dir"] pub mod dir ; }
     };
 }
 

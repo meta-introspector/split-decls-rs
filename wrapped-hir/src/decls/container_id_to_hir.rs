@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Module!();
         ItemContainer!();
-        Impl!();
-        ExternBlock!();
         Trait!();
+        Module!();
+        ExternBlock!();
+        Impl!();
     };
 }
 

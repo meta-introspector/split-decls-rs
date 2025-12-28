@@ -1,15 +1,16 @@
 macro_rules! deps {
     () => {
-        Signature!();
+        MaxSize!();
+        MaxOverhead!();
         EcdsaCurve!();
-        SignatureSize!();
+        Signature!();
     };
 }
 
 macro_rules! impl_26 {
     () => {
         deps!();
-        impl < C > fmt :: Display for Signature < C > where C : EcdsaCurve , SignatureSize < C > : ArraySize , { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { write ! (f , "{self:X}") } }
+        impl < C > FixedTag for Signature < C > where C : EcdsaCurve , MaxSize < C > : ArraySize , < FieldBytesSize < C > as Add > :: Output : Add < MaxOverhead > + ArraySize , { const TAG : Tag = Tag :: Sequence ; }
     };
 }
 

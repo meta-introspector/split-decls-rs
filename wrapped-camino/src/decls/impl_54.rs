@@ -1,14 +1,13 @@
 macro_rules! deps {
     () => {
-        Utf8DirEntry!();
-        ReadDirUtf8!();
+        Iter!();
     };
 }
 
 macro_rules! impl_54 {
     () => {
         deps!();
-        impl Iterator for ReadDirUtf8 { type Item = io :: Result < Utf8DirEntry > ; fn next (& mut self) -> Option < io :: Result < Utf8DirEntry > > { self . inner . next () . map (| entry | entry . and_then (Utf8DirEntry :: new)) } }
+        impl < 'a > DoubleEndedIterator for Iter < 'a > { # [inline] fn next_back (& mut self) -> Option < & 'a str > { self . inner . next_back () . map (| component | component . as_str ()) } }
     };
 }
 

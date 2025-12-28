@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        MockableStruct!();
+        Attrs!();
+    };
+}
+
+macro_rules! impl_105 {
+    () => {
+        deps!();
+        impl From < ItemImpl > for MockableStruct { fn from (mut item_impl : ItemImpl) -> MockableStruct { let name = match & * item_impl . self_ty { Type :: Path (type_path) => { let n = find_ident_from_path (& type_path . path) . 0 ; let self_generics = & type_path . path . segments . last () . unwrap () . arguments ; if let PathArguments :: AngleBracketed (abga) = & self_generics { if item_impl . generics . params . len () != abga . args . len () { compile_error (item_impl . span () , "automock does not currently support structs with elided lifetimes") ; } } gen_mock_ident (& n) } , x => { compile_error (x . span () , "mockall_derive only supports mocking traits and structs") ; Ident :: new ("" , Span :: call_site ()) } } ; let mut attrs = item_impl . attrs . clone () ; attrs . push (derive_debug ()) ; let mut consts = Vec :: new () ; let generics = item_impl . generics . clone () ; let mut methods = Vec :: new () ; let vis = Visibility :: Public (Token ! [pub] (Span :: call_site ())) ; let mut impls = Vec :: new () ; if let Some ((bang , _path , _)) = & item_impl . trait_ { if bang . is_some () { compile_error (bang . span () , "Unsupported by automock") ; } let mut attrs = Attrs :: default () ; for item in item_impl . items . iter () { match item { ImplItem :: Const (_iic) => () , ImplItem :: Fn (_meth) => () , ImplItem :: Type (ty) => { attrs . attrs . insert (ty . ident . clone () , ty . ty . clone ()) ; } , x => compile_error (x . span () , "Unsupported by automock") } } attrs . substitute_item_impl (& mut item_impl) ; impls . push (mockable_item_impl (item_impl , & name , & generics)) ; } else { for item in item_impl . items . into_iter () { match item { ImplItem :: Fn (mut meth) => { mockable_method (& mut meth , & name , & item_impl . generics) ; methods . push (meth) } , ImplItem :: Const (iic) => consts . push (iic) , x => compile_error (x . span () , "Unsupported by Mockall in this context") , } } } ; MockableStruct { attrs , consts , generics , methods , name , vis , impls , } } }
+    };
+}
+
+impl_105!()

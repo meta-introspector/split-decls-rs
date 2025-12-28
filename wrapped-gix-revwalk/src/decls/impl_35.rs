@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        PriorityQueue!();
+        Item!();
+    };
+}
+
+macro_rules! impl_35 {
+    () => {
+        deps!();
+        impl < K : Ord , T > PriorityQueue < K , T > { # [doc = " Create a new instance."] pub fn new () -> Self { PriorityQueue (Default :: default ()) } # [doc = " Insert `value` so that it is ordered according to `key`."] pub fn insert (& mut self , key : K , value : T) { self . 0 . push (Item { key , value }) ; } # [doc = " Pop the highest-priority item value off the queue."] pub fn pop_value (& mut self) -> Option < T > { self . 0 . pop () . map (| t | t . value) } # [doc = " Pop the highest-priority item key and value off the queue."] pub fn pop (& mut self) -> Option < (K , T) > { self . 0 . pop () . map (| t | (t . key , t . value)) } # [doc = " Iterate all items ordered from highest to lowest priority."] pub fn iter_unordered (& self) -> impl Iterator < Item = & T > { self . 0 . iter () . map (| t | & t . value) } # [doc = " Turn this instance into an iterator over its keys and values in arbitrary order."] pub fn into_iter_unordered (self) -> impl Iterator < Item = (K , T) > { self . 0 . into_vec () . into_iter () . map (| item | (item . key , item . value)) } # [doc = " Return true if the queue is empty."] pub fn is_empty (& self) -> bool { self . 0 . is_empty () } # [doc = " Return true the amount of items on the queue."] pub fn len (& self) -> usize { self . 0 . len () } # [doc = " Returns the greatest item `(K, T)` tuple, as ordered by `K`, if the queue is not empty, without removing it."] pub fn peek (& self) -> Option < (& K , & T) > { self . 0 . peek () . map (| e | (& e . key , & e . value)) } # [doc = " Drop all items from the queue, without changing its capacity."] pub fn clear (& mut self) { self . 0 . clear () ; } }
+    };
+}
+
+impl_35!()

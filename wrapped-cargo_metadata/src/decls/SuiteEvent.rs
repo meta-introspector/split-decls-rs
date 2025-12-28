@@ -1,0 +1,7 @@
+macro_rules! SuiteEvent {
+    () => {
+        # [doc = " Suite related event"] # [derive (Debug , PartialEq , Deserialize , Serialize)] # [serde (tag = "event")] # [serde (rename_all = "lowercase")] # [doc = " Suite event"] pub enum SuiteEvent { # [doc = " emitted on the start of a test run, and the start of the doctests"] Started { # [doc = " number of tests in this suite"] test_count : usize , } , # [doc = " the suite has finished"] Ok { # [doc = " the number of tests that passed"] passed : usize , # [doc = " the number of tests that failed"] failed : usize , # [doc = " number of tests that were ignored"] ignored : usize , # [doc = " number of benchmarks run"] measured : usize , # [doc = " i think this is based on what you specify in the cargo test argument"] filtered_out : usize , # [doc = " how long the suite took to run"] exec_time : f32 , } , # [doc = " the suite has at least one failing test"] Failed { # [doc = " the number of tests that passed"] passed : usize , # [doc = " the number of tests that failed"] failed : usize , # [doc = " number of tests that were ignored"] ignored : usize , # [doc = " i think its something to do with benchmarks?"] measured : usize , # [doc = " i think this is based on what you specify in the cargo test argument"] filtered_out : usize , # [doc = " how long the suite took to run"] exec_time : f32 , } , }
+    };
+}
+
+SuiteEvent!()

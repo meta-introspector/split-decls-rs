@@ -1,13 +1,14 @@
 macro_rules! deps {
     () => {
-        RawIdx!();
+        ArenaMap!();
+        Idx!();
     };
 }
 
 macro_rules! impl_3 {
     () => {
         deps!();
-        impl From < RawIdx > for u32 { # [inline] fn from (raw : RawIdx) -> u32 { raw . 0 } }
+        impl < T , V > std :: ops :: IndexMut < Idx < V > > for ArenaMap < Idx < V > , T > { fn index_mut (& mut self , idx : Idx < V >) -> & mut T { self . v [Self :: to_idx (idx)] . as_mut () . unwrap () } }
     };
 }
 

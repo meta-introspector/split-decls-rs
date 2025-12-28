@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        GetDisjointMutError!();
+        IndexMap!();
     };
 }
 
 macro_rules! impl_22 {
     () => {
         deps!();
-        impl core :: fmt :: Display for GetDisjointMutError { fn fmt (& self , f : & mut core :: fmt :: Formatter < '_ >) -> core :: fmt :: Result { let msg = match self { GetDisjointMutError :: IndexOutOfBounds => "an index is out of bounds" , GetDisjointMutError :: OverlappingIndices => "there were overlapping indices" , } ; core :: fmt :: Display :: fmt (msg , f) } }
+        impl < K , V , S > Serialize for IndexMap < K , V , S > where K : Serialize , V : Serialize , { fn serialize < T > (& self , serializer : T) -> Result < T :: Ok , T :: Error > where T : Serializer , { serializer . collect_map (self) } }
     };
 }
 

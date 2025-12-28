@@ -1,0 +1,17 @@
+macro_rules! deps {
+    () => {
+        Platform!();
+        ResourceKind!();
+        ChangeRef!();
+        Error!();
+    };
+}
+
+macro_rules! impl_64 {
+    () => {
+        deps!();
+        impl crate :: blob :: Platform { # [doc = " Set ourselves up to produces blob-diffs from `change`, so this platform can be used to produce diffs easily."] # [doc = " `objects` are used to fetch object data as needed."] # [doc = ""] # [doc = " ### Warning about Memory Consumption"] # [doc = ""] # [doc = " This instance only grows, so one should call [`crate::blob::Platform::clear_resource_cache`] occasionally."] pub fn set_resource_by_change (& mut self , change : ChangeRef < '_ > , objects : & impl gix_object :: FindObjectOrHeader ,) -> Result < & mut Self , crate :: blob :: platform :: set_resource :: Error > { match change { ChangeRef :: Addition { location , relation : _ , entry_mode , id , } => { self . set_resource (id . kind () . null () , entry_mode . kind () , location , ResourceKind :: OldOrSource , objects ,) ? ; self . set_resource (id , entry_mode . kind () , location , ResourceKind :: NewOrDestination , objects) ? ; } ChangeRef :: Deletion { location , relation : _ , entry_mode , id , } => { self . set_resource (id , entry_mode . kind () , location , ResourceKind :: OldOrSource , objects) ? ; self . set_resource (id . kind () . null () , entry_mode . kind () , location , ResourceKind :: NewOrDestination , objects ,) ? ; } ChangeRef :: Modification { location , previous_entry_mode , previous_id , entry_mode , id , } => { self . set_resource (previous_id , previous_entry_mode . kind () , location , ResourceKind :: OldOrSource , objects ,) ? ; self . set_resource (id , entry_mode . kind () , location , ResourceKind :: NewOrDestination , objects) ? ; } ChangeRef :: Rewrite { source_location , source_relation : _ , source_entry_mode , source_id , entry_mode , id , location , relation : _ , diff : _ , copy : _ , } => { self . set_resource (source_id , source_entry_mode . kind () , source_location , ResourceKind :: OldOrSource , objects ,) ? ; self . set_resource (id , entry_mode . kind () , location , ResourceKind :: NewOrDestination , objects) ? ; } } Ok (self) } }
+    };
+}
+
+impl_64!()

@@ -1,0 +1,26 @@
+macro_rules! deps {
+    () => {
+        Object!();
+        Scalar!();
+        Context!();
+        Subscription!();
+        Upload!();
+        FieldValue!();
+        ServerResult!();
+        FieldValueInner!();
+        Interface!();
+        InputObject!();
+        Schema!();
+        Union!();
+        Error!();
+    };
+}
+
+macro_rules! resolve_value {
+    () => {
+        deps!();
+        async fn resolve_value (schema : & Schema , ctx : & Context < '_ > , field_type : & Type , value : & FieldValue < '_ > ,) -> ServerResult < Option < Value > > { match (field_type , & value . 0) { (Type :: Scalar (scalar) , FieldValueInner :: Value (value)) if scalar . validate (value) => { Ok (Some (value . clone ())) } (Type :: Scalar (scalar) , _) => Err (ctx . set_error_path (Error :: new (format ! ("internal: invalid value for scalar \"{}\", expected \"FieldValue::Value\"" , scalar . name)) . into_server_error (ctx . item . pos) ,)) , (Type :: Object (object) , _) => { resolve_container (schema , object , & ctx . with_selection_set (& ctx . item . node . selection_set) , value , true ,) . await } (Type :: InputObject (obj) , _) => Err (ctx . set_error_path (Error :: new (format ! ("internal: cannot use input object \"{}\" as output value" , obj . name)) . into_server_error (ctx . item . pos) ,)) , (Type :: Enum (e) , FieldValueInner :: Value (Value :: Enum (name))) => { if ! e . enum_values . contains_key (name . as_str ()) { return Err (ctx . set_error_path (Error :: new (format ! ("internal: invalid item for enum \"{}\"" , e . name)) . into_server_error (ctx . item . pos) ,)) ; } Ok (Some (Value :: Enum (name . clone ()))) } (Type :: Enum (e) , FieldValueInner :: Value (Value :: String (name))) => { if ! e . enum_values . contains_key (name) { return Err (ctx . set_error_path (Error :: new (format ! ("internal: invalid item for enum \"{}\"" , e . name)) . into_server_error (ctx . item . pos) ,)) ; } Ok (Some (Value :: Enum (Name :: new (name)))) } (Type :: Enum (e) , _) => Err (ctx . set_error_path (Error :: new (format ! ("internal: invalid item for enum \"{}\"" , e . name)) . into_server_error (ctx . item . pos) ,)) , (Type :: Interface (interface) , FieldValueInner :: WithType { value , ty }) => { let is_contains_obj = schema . 0 . env . registry . types . get (& interface . name) . and_then (| meta_type | { meta_type . possible_types () . map (| possible_types | possible_types . contains (ty . as_ref ())) }) . unwrap_or_default () ; if ! is_contains_obj { return Err (ctx . set_error_path (Error :: new (format ! ("internal: object \"{}\" does not implement interface \"{}\"" , ty , interface . name ,)) . into_server_error (ctx . item . pos) ,)) ; } let object_type = schema . 0 . types . get (ty . as_ref ()) . ok_or_else (| | { ctx . set_error_path (Error :: new (format ! ("internal: object \"{}\" does not registered" , ty)) . into_server_error (ctx . item . pos) ,) }) ? . as_object () . ok_or_else (| | { ctx . set_error_path (Error :: new (format ! ("internal: type \"{}\" is not object" , ty)) . into_server_error (ctx . item . pos) ,) }) ? ; resolve_container (schema , object_type , & ctx . with_selection_set (& ctx . item . node . selection_set) , value , true ,) . await } (Type :: Interface (interface) , _) => Err (ctx . set_error_path (Error :: new (format ! ("internal: invalid value for interface \"{}\", expected \"FieldValue::WithType\"" , interface . name)) . into_server_error (ctx . item . pos) ,)) , (Type :: Union (union) , FieldValueInner :: WithType { value , ty }) => { if ! union . possible_types . contains (ty . as_ref ()) { return Err (ctx . set_error_path (Error :: new (format ! ("internal: union \"{}\" does not contain object \"{}\"" , union . name , ty ,)) . into_server_error (ctx . item . pos) ,)) ; } let object_type = schema . 0 . types . get (ty . as_ref ()) . ok_or_else (| | { ctx . set_error_path (Error :: new (format ! ("internal: object \"{}\" does not registered" , ty)) . into_server_error (ctx . item . pos) ,) }) ? . as_object () . ok_or_else (| | { ctx . set_error_path (Error :: new (format ! ("internal: type \"{}\" is not object" , ty)) . into_server_error (ctx . item . pos) ,) }) ? ; resolve_container (schema , object_type , & ctx . with_selection_set (& ctx . item . node . selection_set) , value , true ,) . await } (Type :: Union (union) , _) => Err (ctx . set_error_path (Error :: new (format ! ("internal: invalid value for union \"{}\", expected \"FieldValue::WithType\"" , union . name)) . into_server_error (ctx . item . pos) ,)) , (Type :: Subscription (subscription) , _) => Err (ctx . set_error_path (Error :: new (format ! ("internal: cannot use subscription \"{}\" as output value" , subscription . name)) . into_server_error (ctx . item . pos) ,)) , (Type :: Upload , _) => Err (ctx . set_error_path (Error :: new ("internal: cannot use upload as output value") . into_server_error (ctx . item . pos) ,)) , } }
+    };
+}
+
+resolve_value!()

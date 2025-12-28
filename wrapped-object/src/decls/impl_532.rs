@@ -1,0 +1,50 @@
+macro_rules! deps {
+    () => {
+        DynamicRelocationIterator!();
+        MachOSection!();
+        SymbolTable!();
+        Dynamic!();
+        ObjectMap!();
+        MachOSegment!();
+        ReadRef!();
+        Import!();
+        ComdatIterator!();
+        ObjectKind!();
+        MachOSymbolTable!();
+        SubArchitecture!();
+        MachO!();
+        Segment!();
+        Export!();
+        Object!();
+        SymbolIndex!();
+        SymbolIterator!();
+        Architecture!();
+        FileFlags!();
+        Comdat!();
+        MachOSegmentIterator!();
+        SegmentIterator!();
+        SectionIterator!();
+        MachHeader!();
+        Symbol!();
+        MachOFile!();
+        NoDynamicRelocationIterator!();
+        MachOSymbol!();
+        MachOComdat!();
+        Result!();
+        Section!();
+        MachOSymbolIterator!();
+        MachOComdatIterator!();
+        SectionIndex!();
+        MachOSectionIterator!();
+        ByteString!();
+    };
+}
+
+macro_rules! impl_532 {
+    () => {
+        deps!();
+        impl < 'data , Mach , R > Object < 'data > for MachOFile < 'data , Mach , R > where Mach : MachHeader , R : ReadRef < 'data > , { type Segment < 'file > = MachOSegment < 'data , 'file , Mach , R > where Self : 'file , 'data : 'file ; type SegmentIterator < 'file > = MachOSegmentIterator < 'data , 'file , Mach , R > where Self : 'file , 'data : 'file ; type Section < 'file > = MachOSection < 'data , 'file , Mach , R > where Self : 'file , 'data : 'file ; type SectionIterator < 'file > = MachOSectionIterator < 'data , 'file , Mach , R > where Self : 'file , 'data : 'file ; type Comdat < 'file > = MachOComdat < 'data , 'file , Mach , R > where Self : 'file , 'data : 'file ; type ComdatIterator < 'file > = MachOComdatIterator < 'data , 'file , Mach , R > where Self : 'file , 'data : 'file ; type Symbol < 'file > = MachOSymbol < 'data , 'file , Mach , R > where Self : 'file , 'data : 'file ; type SymbolIterator < 'file > = MachOSymbolIterator < 'data , 'file , Mach , R > where Self : 'file , 'data : 'file ; type SymbolTable < 'file > = MachOSymbolTable < 'data , 'file , Mach , R > where Self : 'file , 'data : 'file ; type DynamicRelocationIterator < 'file > = NoDynamicRelocationIterator where Self : 'file , 'data : 'file ; fn architecture (& self) -> Architecture { match self . header . cputype (self . endian) { macho :: CPU_TYPE_ARM => Architecture :: Arm , macho :: CPU_TYPE_ARM64 => Architecture :: Aarch64 , macho :: CPU_TYPE_ARM64_32 => Architecture :: Aarch64_Ilp32 , macho :: CPU_TYPE_X86 => Architecture :: I386 , macho :: CPU_TYPE_X86_64 => Architecture :: X86_64 , macho :: CPU_TYPE_MIPS => Architecture :: Mips , macho :: CPU_TYPE_POWERPC => Architecture :: PowerPc , macho :: CPU_TYPE_POWERPC64 => Architecture :: PowerPc64 , _ => Architecture :: Unknown , } } fn sub_architecture (& self) -> Option < SubArchitecture > { match (self . header . cputype (self . endian) , self . header . cpusubtype (self . endian) ,) { (macho :: CPU_TYPE_ARM64 , macho :: CPU_SUBTYPE_ARM64E) => Some (SubArchitecture :: Arm64E) , _ => None , } } # [inline] fn is_little_endian (& self) -> bool { self . header . is_little_endian () } # [inline] fn is_64 (& self) -> bool { self . header . is_type_64 () } fn kind (& self) -> ObjectKind { match self . header . filetype (self . endian) { macho :: MH_OBJECT => ObjectKind :: Relocatable , macho :: MH_EXECUTE => ObjectKind :: Executable , macho :: MH_CORE => ObjectKind :: Core , macho :: MH_DYLIB => ObjectKind :: Dynamic , _ => ObjectKind :: Unknown , } } fn segments (& self) -> MachOSegmentIterator < 'data , '_ , Mach , R > { MachOSegmentIterator { file : self , iter : self . segments . iter () , } } fn section_by_name_bytes < 'file > (& 'file self , section_name : & [u8] ,) -> Option < MachOSection < 'data , 'file , Mach , R > > { let make_prefix_matcher = | query_prefix : & 'static [u8] , name_prefix : & 'static [u8] | { const MAX_SECTION_NAME_LEN : usize = 16 ; let suffix = section_name . strip_prefix (query_prefix) . map (| suffix | { let max_len = MAX_SECTION_NAME_LEN - name_prefix . len () ; & suffix [.. suffix . len () . min (max_len)] }) ; move | name : & [u8] | suffix . is_some () && name . strip_prefix (name_prefix) == suffix } ; let matches_underscores_prefix = make_prefix_matcher (b"." , b"__") ; let matches_zdebug_prefix = make_prefix_matcher (b".debug_" , b"__zdebug_") ; self . sections () . find (| section | { section . name_bytes () . map_or (false , | name | { name == section_name || matches_underscores_prefix (name) || matches_zdebug_prefix (name) }) }) } fn section_by_index (& self , index : SectionIndex) -> Result < MachOSection < 'data , '_ , Mach , R > > { let internal = * self . section_internal (index) ? ; Ok (MachOSection { file : self , internal , }) } fn sections (& self) -> MachOSectionIterator < 'data , '_ , Mach , R > { MachOSectionIterator { file : self , iter : self . sections . iter () , } } fn comdats (& self) -> MachOComdatIterator < 'data , '_ , Mach , R > { MachOComdatIterator { file : self } } fn symbol_by_index (& self , index : SymbolIndex) -> Result < MachOSymbol < 'data , '_ , Mach , R > > { let nlist = self . symbols . symbol (index) ? ; MachOSymbol :: new (self , index , nlist) . read_error ("Unsupported Mach-O symbol index") } fn symbols (& self) -> MachOSymbolIterator < 'data , '_ , Mach , R > { MachOSymbolIterator :: new (self) } # [inline] fn symbol_table (& self) -> Option < MachOSymbolTable < 'data , '_ , Mach , R > > { Some (MachOSymbolTable { file : self }) } fn dynamic_symbols (& self) -> MachOSymbolIterator < 'data , '_ , Mach , R > { MachOSymbolIterator :: empty (self) } # [inline] fn dynamic_symbol_table (& self) -> Option < MachOSymbolTable < 'data , '_ , Mach , R > > { None } fn object_map (& self) -> ObjectMap < 'data > { self . symbols . object_map (self . endian) } fn imports (& self) -> Result < Vec < Import < 'data > > > { let mut dysymtab = None ; let mut libraries = Vec :: new () ; let twolevel = self . header . flags (self . endian) & macho :: MH_TWOLEVEL != 0 ; if twolevel { libraries . push (& [] [..]) ; } let mut commands = self . header . load_commands (self . endian , self . data , self . header_offset) ? ; while let Some (command) = commands . next () ? { if let Some (command) = command . dysymtab () ? { dysymtab = Some (command) ; } if twolevel { if let Some (dylib) = command . dylib () ? { libraries . push (command . string (self . endian , dylib . dylib . name) ?) ; } } } let mut imports = Vec :: new () ; if let Some (dysymtab) = dysymtab { let index = dysymtab . iundefsym . get (self . endian) as usize ; let number = dysymtab . nundefsym . get (self . endian) as usize ; for i in index .. (index . wrapping_add (number)) { let symbol = self . symbols . symbol (SymbolIndex (i)) ? ; let name = symbol . name (self . endian , self . symbols . strings ()) ? ; let library = if twolevel { libraries . get (symbol . library_ordinal (self . endian) as usize) . copied () . read_error ("Invalid Mach-O symbol library ordinal") ? } else { & [] } ; imports . push (Import { name : ByteString (name) , library : ByteString (library) , }) ; } } Ok (imports) } fn exports (& self) -> Result < Vec < Export < 'data > > > { let mut dysymtab = None ; let mut commands = self . header . load_commands (self . endian , self . data , self . header_offset) ? ; while let Some (command) = commands . next () ? { if let Some (command) = command . dysymtab () ? { dysymtab = Some (command) ; break ; } } let mut exports = Vec :: new () ; if let Some (dysymtab) = dysymtab { let index = dysymtab . iextdefsym . get (self . endian) as usize ; let number = dysymtab . nextdefsym . get (self . endian) as usize ; for i in index .. (index . wrapping_add (number)) { let symbol = self . symbols . symbol (SymbolIndex (i)) ? ; let name = symbol . name (self . endian , self . symbols . strings ()) ? ; let address = symbol . n_value (self . endian) . into () ; exports . push (Export { name : ByteString (name) , address , }) ; } } Ok (exports) } # [inline] fn dynamic_relocations (& self) -> Option < NoDynamicRelocationIterator > { None } fn has_debug_symbols (& self) -> bool { self . section_by_name (".debug_info") . is_some () } fn mach_uuid (& self) -> Result < Option < [u8 ; 16] > > { self . header . uuid (self . endian , self . data , self . header_offset) } fn relative_address_base (& self) -> u64 { 0 } fn entry (& self) -> u64 { if let Ok (mut commands) = self . header . load_commands (self . endian , self . data , self . header_offset) { while let Ok (Some (command)) = commands . next () { if let Ok (Some (command)) = command . entry_point () { return command . entryoff . get (self . endian) ; } } } 0 } fn flags (& self) -> FileFlags { FileFlags :: MachO { flags : self . header . flags (self . endian) , } } }
+    };
+}
+
+impl_532!()

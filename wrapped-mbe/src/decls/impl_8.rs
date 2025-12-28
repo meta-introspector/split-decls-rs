@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        ParseError!();
+        Fragment!();
     };
 }
 
 macro_rules! impl_8 {
     () => {
         deps!();
-        impl fmt :: Display for ParseError { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { match self { ParseError :: UnexpectedToken (it) => f . write_str (it) , ParseError :: Expected (it) => f . write_str (it) , ParseError :: InvalidRepeat => f . write_str ("invalid repeat") , ParseError :: RepetitionEmptyTokenTree => f . write_str ("empty token tree in repetition") , } } }
+        impl Fragment < '_ > { fn is_empty (& self) -> bool { match self { Fragment :: Empty => true , Fragment :: Tokens (it) => it . len () == 0 , Fragment :: Expr (it) => it . len () == 0 , Fragment :: Path (it) => it . len () == 0 , Fragment :: TokensOwned (it) => it . 0 . is_empty () , } } }
     };
 }
 

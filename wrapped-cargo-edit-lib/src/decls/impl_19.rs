@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        CargoMetadataProvider!();
         CargoEditAdapter!();
         CargoEditAdapterImpl!();
+        CargoMetadataProvider!();
     };
 }
 

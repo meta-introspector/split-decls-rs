@@ -1,0 +1,7 @@
+macro_rules! IMAGE_SIZEOF_ARCHIVE_MEMBER_HDR {
+    () => {
+        pub const IMAGE_SIZEOF_ARCHIVE_MEMBER_HDR : u16 = 60 ;
+    };
+}
+
+IMAGE_SIZEOF_ARCHIVE_MEMBER_HDR!()

@@ -1,0 +1,18 @@
+macro_rules! deps {
+    () => {
+        ReentrantMutexGuard!();
+        GetThreadId!();
+        ReentrantMutex!();
+        RawMutex!();
+        MappedReentrantMutexGuard!();
+    };
+}
+
+macro_rules! impl_73 {
+    () => {
+        deps!();
+        impl < 'a , R : RawMutex + 'a , G : GetThreadId + 'a , T : ? Sized + 'a > ReentrantMutexGuard < 'a , R , G , T > { # [doc = " Returns a reference to the original `ReentrantMutex` object."] pub fn remutex (s : & Self) -> & 'a ReentrantMutex < R , G , T > { s . remutex } # [doc = " Makes a new `MappedReentrantMutexGuard` for a component of the locked data."] # [doc = ""] # [doc = " This operation cannot fail as the `ReentrantMutexGuard` passed"] # [doc = " in already locked the mutex."] # [doc = ""] # [doc = " This is an associated function that needs to be"] # [doc = " used as `ReentrantMutexGuard::map(...)`. A method would interfere with methods of"] # [doc = " the same name on the contents of the locked data."] # [inline] pub fn map < U : ? Sized , F > (s : Self , f : F) -> MappedReentrantMutexGuard < 'a , R , G , U > where F : FnOnce (& T) -> & U , { let raw = & s . remutex . raw ; let data = f (unsafe { & * s . remutex . data . get () }) ; mem :: forget (s) ; MappedReentrantMutexGuard { raw , data , marker : PhantomData , } } # [doc = " Attempts to make  a new `MappedReentrantMutexGuard` for a component of the"] # [doc = " locked data. The original guard is return if the closure returns `None`."] # [doc = ""] # [doc = " This operation cannot fail as the `ReentrantMutexGuard` passed"] # [doc = " in already locked the mutex."] # [doc = ""] # [doc = " This is an associated function that needs to be"] # [doc = " used as `ReentrantMutexGuard::try_map(...)`. A method would interfere with methods of"] # [doc = " the same name on the contents of the locked data."] # [inline] pub fn try_map < U : ? Sized , F > (s : Self , f : F ,) -> Result < MappedReentrantMutexGuard < 'a , R , G , U > , Self > where F : FnOnce (& T) -> Option < & U > , { let raw = & s . remutex . raw ; let data = match f (unsafe { & * s . remutex . data . get () }) { Some (data) => data , None => return Err (s) , } ; mem :: forget (s) ; Ok (MappedReentrantMutexGuard { raw , data , marker : PhantomData , }) } # [doc = " Attempts to make  a new `MappedReentrantMutexGuard` for a component of the"] # [doc = " locked data. The original guard is returned alongside arbitrary user data"] # [doc = " if the closure returns `Err`."] # [doc = ""] # [doc = " This operation cannot fail as the `ReentrantMutexGuard` passed"] # [doc = " in already locked the mutex."] # [doc = ""] # [doc = " This is an associated function that needs to be"] # [doc = " used as `ReentrantMutexGuard::try_map_or_err(...)`. A method would interfere with methods of"] # [doc = " the same name on the contents of the locked data."] # [inline] pub fn try_map_or_err < U : ? Sized , F , E > (s : Self , f : F ,) -> Result < MappedReentrantMutexGuard < 'a , R , G , U > , (Self , E) > where F : FnOnce (& T) -> Result < & U , E > , { let raw = & s . remutex . raw ; let data = match f (unsafe { & * s . remutex . data . get () }) { Ok (data) => data , Err (e) => return Err ((s , e)) , } ; mem :: forget (s) ; Ok (MappedReentrantMutexGuard { raw , data , marker : PhantomData , }) } # [doc = " Temporarily unlocks the mutex to execute the given function."] # [doc = ""] # [doc = " This is safe because `&mut` guarantees that there exist no other"] # [doc = " references to the data protected by the mutex."] # [inline] # [track_caller] pub fn unlocked < F , U > (s : & mut Self , f : F) -> U where F : FnOnce () -> U , { unsafe { s . remutex . raw . unlock () ; } defer ! (s . remutex . raw . lock ()) ; f () } }
+    };
+}
+
+impl_73!()

@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        GetTimezoneError!();
+    };
+}
+
+macro_rules! impl_11 {
+    () => {
+        deps!();
+        impl From < std :: io :: Error > for GetTimezoneError { fn from (orig : std :: io :: Error) -> Self { GetTimezoneError :: IoError (orig) } }
+    };
+}
+
+impl_11!()

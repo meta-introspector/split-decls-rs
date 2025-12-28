@@ -1,0 +1,7 @@
+macro_rules! REBASE_OPCODE_DO_REBASE_ADD_ADDR_ULEB {
+    () => {
+        pub const REBASE_OPCODE_DO_REBASE_ADD_ADDR_ULEB : u8 = 0x70 ;
+    };
+}
+
+REBASE_OPCODE_DO_REBASE_ADD_ADDR_ULEB!()

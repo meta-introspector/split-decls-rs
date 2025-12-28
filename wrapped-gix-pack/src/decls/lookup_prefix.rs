@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        EntryIndex!();
+        PrefixLookupResult!();
+    };
+}
+
+macro_rules! lookup_prefix {
+    () => {
+        deps!();
+        pub (crate) fn lookup_prefix < 'a > (prefix : gix_hash :: Prefix , candidates : Option < & mut Range < EntryIndex > > , fan : & [u32 ; FAN_LEN] , oid_at_index : & dyn Fn (EntryIndex) -> & 'a gix_hash :: oid , num_objects : u32 ,) -> Option < PrefixLookupResult > { let first_byte = prefix . as_oid () . first_byte () as usize ; let mut upper_bound = fan [first_byte] ; let mut lower_bound = if first_byte != 0 { fan [first_byte - 1] } else { 0 } ; while lower_bound < upper_bound { let mid = (lower_bound + upper_bound) / 2 ; let mid_sha = oid_at_index (mid) ; use std :: cmp :: Ordering :: * ; match prefix . cmp_oid (mid_sha) { Less => upper_bound = mid , Equal => match candidates { Some (candidates) => { let first_past_entry = ((0 .. mid) . rev ()) . take_while (| prev | prefix . cmp_oid (oid_at_index (* prev)) == Equal) . last () ; let last_future_entry = ((mid + 1) .. num_objects) . take_while (| next | prefix . cmp_oid (oid_at_index (* next)) == Equal) . last () ; * candidates = match (first_past_entry , last_future_entry) { (Some (first) , Some (last)) => first .. last + 1 , (Some (first) , None) => first .. mid + 1 , (None , Some (last)) => mid .. last + 1 , (None , None) => mid .. mid + 1 , } ; return if candidates . len () > 1 { Some (Err (())) } else { Some (Ok (mid)) } ; } None => { let next = mid + 1 ; if next < num_objects && prefix . cmp_oid (oid_at_index (next)) == Equal { return Some (Err (())) ; } if mid != 0 && prefix . cmp_oid (oid_at_index (mid - 1)) == Equal { return Some (Err (())) ; } return Some (Ok (mid)) ; } } , Greater => lower_bound = mid + 1 , } } if let Some (candidates) = candidates { * candidates = 0 .. 0 ; } None }
+    };
+}
+
+lookup_prefix!()

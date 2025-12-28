@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        DummyRustAstParser!();
-        RustAstParser!();
         Declaration!();
+        RustAstParser!();
+        DummyRustAstParser!();
     };
 }
 

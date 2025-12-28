@@ -1,7 +1,8 @@
 macro_rules! deps {
     () => {
-        Hkdf!();
+        HmacImpl!();
         SimpleHkdf!();
+        Hkdf!();
     };
 }
 

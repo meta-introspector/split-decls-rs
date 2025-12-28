@@ -1,0 +1,26 @@
+macro_rules! deps {
+    () => {
+        Streaming!();
+        Offset!();
+        Float!();
+        AsBytes!();
+        Error!();
+        Input!();
+        Needed!();
+        Compare!();
+        Err!();
+        ErrorKind!();
+        ParseError!();
+        IResult!();
+        AsChar!();
+    };
+}
+
+macro_rules! recognize_float_parts {
+    () => {
+        deps!();
+        # [doc = " Recognizes a floating point number in text format"] # [doc = ""] # [doc = " It returns a tuple of (`sign`, `integer part`, `fraction part` and `exponent`) of the input"] # [doc = " data."] # [doc = ""] # [doc = " *Streaming version*: Will return `Err(nom::Err::Incomplete(_))` if there is not enough data."] # [doc = ""] pub fn recognize_float_parts < T , E : ParseError < T > > (input : T) -> IResult < T , (bool , T , T , i32) , E > where T : Clone + Offset , T : Input , < T as Input > :: Item : AsChar , T : for < 'a > Compare < & 'a [u8] > , T : AsBytes , { let (i , sign) = sign (input . clone ()) ? ; let (i , zeroes) = match i . as_bytes () . iter () . position (| c | * c != b'0') { Some (index) => i . take_split (index) , None => i . take_split (i . input_len ()) , } ; let (i , mut integer) = match i . as_bytes () . iter () . position (| c | ! (* c >= b'0' && * c <= b'9')) { Some (index) => i . take_split (index) , None => i . take_split (i . input_len ()) , } ; if integer . input_len () == 0 && zeroes . input_len () > 0 { integer = zeroes . take_from (zeroes . input_len () - 1) ; } let (i , opt_dot) = opt (tag (& b"." [..])) . parse (i) ? ; let (i , fraction) = if opt_dot . is_none () { let i2 = i . clone () ; (i2 , i . take (0)) } else { let mut zero_count = 0usize ; let mut position = None ; for (pos , c) in i . as_bytes () . iter () . enumerate () { if * c >= b'0' && * c <= b'9' { if * c == b'0' { zero_count += 1 ; } else { zero_count = 0 ; } } else { position = Some (pos) ; break ; } } let position = match position { Some (p) => p , None => return Err (Err :: Incomplete (Needed :: new (1))) , } ; let index = if zero_count == 0 { position } else if zero_count == position { position - zero_count + 1 } else { position - zero_count } ; (i . take_from (position) , i . take (index)) } ; if integer . input_len () == 0 && fraction . input_len () == 0 { return Err (Err :: Error (E :: from_error_kind (input , ErrorKind :: Float))) ; } let i2 = i . clone () ; let (i , e) = match i . as_bytes () . iter () . next () { Some (b'e') => (i . take_from (1) , true) , Some (b'E') => (i . take_from (1) , true) , _ => (i , false) , } ; let (i , exp) = if e { cut (crate :: character :: streaming :: i32) . parse (i) ? } else { (i2 , 0) } ; Ok ((i , (sign , integer , fraction , exp))) }
+    };
+}
+
+recognize_float_parts!()

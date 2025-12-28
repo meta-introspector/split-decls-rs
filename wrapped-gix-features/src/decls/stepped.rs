@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        Reduce!();
+        Finalize!();
+    };
+}
+
+macro_rules! stepped {
+    () => {
+        deps!();
+        # [cfg (not (feature = "parallel"))] mod stepped { # [doc = " An iterator adaptor to allow running computations using [`in_parallel()`][crate::parallel::in_parallel()] in a step-wise manner, see the [module docs][crate::parallel]"] # [doc = " for details."] pub struct Stepwise < InputIter , ConsumeFn , ThreadState , Reduce > { input : InputIter , consume : ConsumeFn , thread_state : ThreadState , reducer : Reduce , } impl < InputIter , ConsumeFn , Reduce , I , O , S > Stepwise < InputIter , ConsumeFn , S , Reduce > where InputIter : Iterator < Item = I > , ConsumeFn : Fn (I , & mut S) -> O , Reduce : super :: Reduce < Input = O > , { # [doc = " Instantiate a new iterator."] # [doc = " For a description of parameters, see [`in_parallel()`][crate::parallel::in_parallel()]."] pub fn new < ThreadStateFn > (input : InputIter , _thread_limit : Option < usize > , new_thread_state : ThreadStateFn , consume : ConsumeFn , reducer : Reduce ,) -> Self where ThreadStateFn : Fn (usize) -> S , { Stepwise { input , consume , thread_state : new_thread_state (0) , reducer , } } # [doc = " Consume the iterator by finishing its iteration and calling [`Reduce::finalize()`][crate::parallel::Reduce::finalize()]."] pub fn finalize (mut self) -> Result < Reduce :: Output , Reduce :: Error > { for value in self . by_ref () { drop (value ?) ; } self . reducer . finalize () } } impl < InputIter , ConsumeFn , ThreadState , Reduce , I , O > Iterator for Stepwise < InputIter , ConsumeFn , ThreadState , Reduce > where InputIter : Iterator < Item = I > , ConsumeFn : Fn (I , & mut ThreadState) -> O , Reduce : super :: Reduce < Input = O > , { type Item = Result < Reduce :: FeedProduce , Reduce :: Error > ; fn next (& mut self) -> Option < < Self as Iterator > :: Item > { self . input . next () . map (| input | self . reducer . feed ((self . consume) (input , & mut self . thread_state))) } } impl < InputIter , ConsumeFn , R , I , O , S > super :: Finalize for Stepwise < InputIter , ConsumeFn , S , R > where InputIter : Iterator < Item = I > , ConsumeFn : Fn (I , & mut S) -> O , R : super :: Reduce < Input = O > , { type Reduce = R ; fn finalize (self ,) -> Result < < < Self as super :: Finalize > :: Reduce as super :: Reduce > :: Output , < < Self as super :: Finalize > :: Reduce as super :: Reduce > :: Error , > { Stepwise :: finalize (self) } } }
+    };
+}
+
+stepped!()

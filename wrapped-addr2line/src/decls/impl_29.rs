@@ -1,0 +1,21 @@
+macro_rules! deps {
+    () => {
+        Error!();
+        Context!();
+        InlinedState!();
+        InlinedFunction!();
+        Function!();
+        DebugFile!();
+        UnitRef!();
+        Result!();
+    };
+}
+
+macro_rules! impl_29 {
+    () => {
+        deps!();
+        impl < R : gimli :: Reader > Function < R > { fn parse (dw_die_offset : gimli :: UnitOffset < R :: Offset > , file : DebugFile , unit : gimli :: UnitRef < R > , ctx : & Context < R > ,) -> Result < Self , Error > { let mut entries = unit . entries_raw (Some (dw_die_offset)) ? ; let depth = entries . next_depth () ; let abbrev = entries . read_abbreviation () ? . unwrap () ; debug_assert_eq ! (abbrev . tag () , gimli :: DW_TAG_subprogram) ; let mut name = None ; for spec in abbrev . attributes () { match entries . read_attribute (* spec) { Ok (ref attr) => { match attr . name () { gimli :: DW_AT_linkage_name | gimli :: DW_AT_MIPS_linkage_name => { if let Ok (val) = unit . attr_string (attr . value ()) { name = Some (val) ; } } gimli :: DW_AT_name => { if name . is_none () { name = unit . attr_string (attr . value ()) . ok () ; } } gimli :: DW_AT_abstract_origin | gimli :: DW_AT_specification => { if name . is_none () { name = name_attr (attr . value () , file , unit , ctx , 16) ? ; } } _ => { } } ; } Err (e) => return Err (e) , } } let mut state = InlinedState { entries , functions : Vec :: new () , addresses : Vec :: new () , file , unit , ctx , } ; Function :: parse_children (& mut state , depth , 0) ? ; state . addresses . sort_unstable_by (| r1 , r2 | { if r1 . call_depth < r2 . call_depth { Ordering :: Less } else if r1 . call_depth > r2 . call_depth { Ordering :: Greater } else if r1 . range . begin < r2 . range . begin { Ordering :: Less } else if r1 . range . begin > r2 . range . begin { Ordering :: Greater } else { Ordering :: Equal } }) ; Ok (Function { dw_die_offset , name , inlined_functions : state . functions . into_boxed_slice () , inlined_addresses : state . addresses . into_boxed_slice () , }) } fn parse_children (state : & mut InlinedState < R > , depth : isize , inlined_depth : usize ,) -> Result < () , Error > { loop { let dw_die_offset = state . entries . next_offset () ; let next_depth = state . entries . next_depth () ; if next_depth <= depth { return Ok (()) ; } if let Some (abbrev) = state . entries . read_abbreviation () ? { match abbrev . tag () { gimli :: DW_TAG_subprogram => { Function :: skip (& mut state . entries , abbrev , next_depth) ? ; } gimli :: DW_TAG_inlined_subroutine => { InlinedFunction :: parse (state , dw_die_offset , abbrev , next_depth , inlined_depth ,) ? ; } _ => { state . entries . skip_attributes (abbrev . attributes ()) ? ; } } } } } fn skip (entries : & mut gimli :: EntriesRaw < '_ , '_ , R > , abbrev : & gimli :: Abbreviation , depth : isize ,) -> Result < () , Error > { entries . skip_attributes (abbrev . attributes ()) ? ; while entries . next_depth () > depth { if let Some (abbrev) = entries . read_abbreviation () ? { entries . skip_attributes (abbrev . attributes ()) ? ; } } Ok (()) } # [doc = " Build the list of inlined functions that contain `probe`."] pub (crate) fn find_inlined_functions (& self , probe : u64 ,) -> maybe_small :: Vec < & InlinedFunction < R > > { let mut inlined_functions = maybe_small :: Vec :: new () ; let mut inlined_addresses = & self . inlined_addresses [..] ; loop { let current_depth = inlined_functions . len () ; let search = inlined_addresses . binary_search_by (| range | { if range . call_depth > current_depth { Ordering :: Greater } else if range . call_depth < current_depth { Ordering :: Less } else if range . range . begin > probe { Ordering :: Greater } else if range . range . end <= probe { Ordering :: Less } else { Ordering :: Equal } }) ; if let Ok (index) = search { let function_index = inlined_addresses [index] . function ; inlined_functions . push (& self . inlined_functions [function_index]) ; inlined_addresses = & inlined_addresses [index + 1 ..] ; } else { break ; } } inlined_functions } }
+    };
+}
+
+impl_29!()

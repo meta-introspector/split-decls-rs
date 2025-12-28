@@ -1,0 +1,23 @@
+macro_rules! deps {
+    () => {
+        Error!();
+        FrameDescriptionEntry!();
+        CommonInformationEntry!();
+        UnwindSection!();
+        PartialFrameDescriptionEntry!();
+        Reader!();
+        Result!();
+        BaseAddresses!();
+        Section!();
+        CieOrFde!();
+    };
+}
+
+macro_rules! impl_206 {
+    () => {
+        deps!();
+        impl < 'bases , Section , R > PartialFrameDescriptionEntry < 'bases , Section , R > where R : Reader , Section : UnwindSection < R > , { fn parse_partial (section : & Section , bases : & 'bases BaseAddresses , input : & mut R ,) -> Result < PartialFrameDescriptionEntry < 'bases , Section , R > > { match parse_cfi_entry (bases , section , input) ? { Some (CieOrFde :: Cie (_)) => Err (Error :: NotFdePointer) , Some (CieOrFde :: Fde (partial)) => Ok (partial) , None => Err (Error :: NoEntryAtGivenOffset) , } } # [doc = " Fully parse this FDE."] # [doc = ""] # [doc = " You must provide a function get its associated CIE (either by parsing it"] # [doc = " on demand, or looking it up in some table mapping offsets to CIEs that"] # [doc = " you've already parsed, etc.)"] pub fn parse < F > (& self , get_cie : F) -> Result < FrameDescriptionEntry < R > > where F : FnMut (& Section , & BaseAddresses , Section :: Offset) -> Result < CommonInformationEntry < R > > , { FrameDescriptionEntry :: parse_rest (self . offset , self . length , self . format , self . cie_offset , self . rest . clone () , & self . section , self . bases , get_cie ,) } # [doc = " Get the offset of this entry from the start of its containing section."] pub fn offset (& self) -> R :: Offset { self . offset } # [doc = " Get the offset of this FDE's CIE."] pub fn cie_offset (& self) -> Section :: Offset { self . cie_offset } # [doc = " > A constant that gives the number of bytes of the header and"] # [doc = " > instruction stream for this function, not including the length field"] # [doc = " > itself (see Section 7.2.2). The size of the length field plus the value"] # [doc = " > of length must be an integral multiple of the address size."] pub fn entry_len (& self) -> R :: Offset { self . length } }
+    };
+}
+
+impl_206!()

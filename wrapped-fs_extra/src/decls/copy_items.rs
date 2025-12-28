@@ -1,5 +1,14 @@
+macro_rules! deps {
+    () => {
+        Result!();
+        ErrorKind!();
+        CopyOptions!();
+    };
+}
+
 macro_rules! copy_items {
     () => {
+        deps!();
         # [doc = " Copies a list of directories and files to another place recursively. This function will"] # [doc = " also copy the permission bits of the original files to destination files (not for"] # [doc = " directories)."] # [doc = ""] # [doc = " # Errors"] # [doc = ""] # [doc = " This function will return an error in the following situations, but is not limited to just"] # [doc = " these case:"] # [doc = ""] # [doc = " * List `from` contains  file or directory does not exist."] # [doc = ""] # [doc = " * List `from` contains  file or directory with invalid name."] # [doc = ""] # [doc = " * The current process does not have the permission to access to file from `lists from` or"] # [doc = " `to`."] # [doc = ""] # [doc = " # Example"] # [doc = ""] # [doc = " ```rust,ignore"] # [doc = "  extern crate fs_extra;"] # [doc = "  use fs_extra::dir::copy;"] # [doc = ""] # [doc = "  let options = dir::CopyOptions::new(); //Initialize default values for CopyOptions"] # [doc = ""] # [doc = "  // copy dir1 and file1.txt to target/dir1 and target/file1.txt"] # [doc = "  let mut from_paths = Vec::new();"] # [doc = "  from_paths.push(\"source/dir1\");"] # [doc = "  from_paths.push(\"source/file.txt\");"] # [doc = "  copy_items(&from_paths, \"target\", &options)?;"] # [doc = " ```"] # [doc = ""] pub fn copy_items < P , Q > (from : & [P] , to : Q , options : & dir :: CopyOptions) -> Result < u64 > where P : AsRef < Path > , Q : AsRef < Path > , { let mut result : u64 = 0 ; if options . content_only { err ! ("Options 'content_only' not acccess for copy_items function" , ErrorKind :: Other) ; } for item in from { let item = item . as_ref () ; if item . is_dir () { result += dir :: copy (item , & to , options) ? ; } else if let Some (file_name) = item . file_name () { if let Some (file_name) = file_name . to_str () { let file_options = file :: CopyOptions { overwrite : options . overwrite , skip_exist : options . skip_exist , .. Default :: default () } ; result += file :: copy (item , to . as_ref () . join (file_name) , & file_options) ? ; } } else { err ! ("Invalid file name" , ErrorKind :: InvalidFileName) ; } } Ok (result) }
     };
 }

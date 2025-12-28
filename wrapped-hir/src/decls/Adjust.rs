@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        OverloadedDeref!();
         AutoBorrow!();
+        OverloadedDeref!();
     };
 }
 

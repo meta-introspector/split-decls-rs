@@ -1,0 +1,17 @@
+macro_rules! deps {
+    () => {
+        DFA!();
+        AhoCorasickKind!();
+        AhoCorasickBuilder!();
+        StartKind!();
+    };
+}
+
+macro_rules! testcombo {
+    () => {
+        deps!();
+        macro_rules ! testcombo { ($ name : ident , $ collection : expr , $ kind : ident) => { mod $ name { use super ::*; testconfig ! (default , $ collection , $ kind , | _ | ()) ; testconfig ! (nfa_default , $ collection , $ kind , | b : & mut AhoCorasickBuilder | { b . kind (Some (AhoCorasickKind :: NoncontiguousNFA)) ; }) ; testconfig ! (nfa_noncontig_no_prefilter , $ collection , $ kind , | b : & mut AhoCorasickBuilder | { b . kind (Some (AhoCorasickKind :: NoncontiguousNFA)) . prefilter (false) ; }) ; testconfig ! (nfa_noncontig_all_sparse , $ collection , $ kind , | b : & mut AhoCorasickBuilder | { b . kind (Some (AhoCorasickKind :: NoncontiguousNFA)) . dense_depth (0) ; }) ; testconfig ! (nfa_noncontig_all_dense , $ collection , $ kind , | b : & mut AhoCorasickBuilder | { b . kind (Some (AhoCorasickKind :: NoncontiguousNFA)) . dense_depth (usize :: MAX) ; }) ; testconfig ! (nfa_contig_default , $ collection , $ kind , | b : & mut AhoCorasickBuilder | { b . kind (Some (AhoCorasickKind :: ContiguousNFA)) ; }) ; testconfig ! (nfa_contig_no_prefilter , $ collection , $ kind , | b : & mut AhoCorasickBuilder | { b . kind (Some (AhoCorasickKind :: ContiguousNFA)) . prefilter (false) ; }) ; testconfig ! (nfa_contig_all_sparse , $ collection , $ kind , | b : & mut AhoCorasickBuilder | { b . kind (Some (AhoCorasickKind :: ContiguousNFA)) . dense_depth (0) ; }) ; testconfig ! (nfa_contig_all_dense , $ collection , $ kind , | b : & mut AhoCorasickBuilder | { b . kind (Some (AhoCorasickKind :: ContiguousNFA)) . dense_depth (usize :: MAX) ; }) ; testconfig ! (nfa_contig_no_byte_class , $ collection , $ kind , | b : & mut AhoCorasickBuilder | { b . kind (Some (AhoCorasickKind :: ContiguousNFA)) . byte_classes (false) ; }) ; testconfig ! (dfa_default , $ collection , $ kind , | b : & mut AhoCorasickBuilder | { b . kind (Some (AhoCorasickKind :: DFA)) ; }) ; testconfig ! (dfa_start_both , $ collection , $ kind , | b : & mut AhoCorasickBuilder | { b . kind (Some (AhoCorasickKind :: DFA)) . start_kind (StartKind :: Both) ; }) ; testconfig ! (dfa_no_prefilter , $ collection , $ kind , | b : & mut AhoCorasickBuilder | { b . kind (Some (AhoCorasickKind :: DFA)) . prefilter (false) ; }) ; testconfig ! (dfa_start_both_no_prefilter , $ collection , $ kind , | b : & mut AhoCorasickBuilder | { b . kind (Some (AhoCorasickKind :: DFA)) . start_kind (StartKind :: Both) . prefilter (false) ; }) ; testconfig ! (dfa_no_byte_class , $ collection , $ kind , | b : & mut AhoCorasickBuilder | { b . kind (Some (AhoCorasickKind :: DFA)) . byte_classes (false) ; }) ; testconfig ! (dfa_start_both_no_byte_class , $ collection , $ kind , | b : & mut AhoCorasickBuilder | { b . kind (Some (AhoCorasickKind :: DFA)) . start_kind (StartKind :: Both) . byte_classes (false) ; }) ; } } ; }
+    };
+}
+
+testcombo!()

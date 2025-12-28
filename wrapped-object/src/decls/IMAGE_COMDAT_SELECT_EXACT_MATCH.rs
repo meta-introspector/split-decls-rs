@@ -1,0 +1,7 @@
+macro_rules! IMAGE_COMDAT_SELECT_EXACT_MATCH {
+    () => {
+        pub const IMAGE_COMDAT_SELECT_EXACT_MATCH : u8 = 4 ;
+    };
+}
+
+IMAGE_COMDAT_SELECT_EXACT_MATCH!()

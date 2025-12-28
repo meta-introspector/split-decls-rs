@@ -1,0 +1,7 @@
+macro_rules! REFERENCE_FLAG_PRIVATE_DEFINED {
+    () => {
+        pub const REFERENCE_FLAG_PRIVATE_DEFINED : u16 = 3 ;
+    };
+}
+
+REFERENCE_FLAG_PRIVATE_DEFINED!()

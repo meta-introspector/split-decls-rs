@@ -1,7 +1,10 @@
 macro_rules! deps {
     () => {
-        Parameters!();
+        EntryMarker!();
         MemoryMap!();
+        Parameters!();
+        Entry!();
+        Inner!();
     };
 }
 

@@ -1,16 +1,13 @@
 macro_rules! deps {
     () => {
-        Module!();
-        Union!();
-        HasContainer!();
-        ItemContainer!();
+        TraitRef!();
     };
 }
 
 macro_rules! impl_219 {
     () => {
         deps!();
-        impl HasContainer for Union { fn container (& self , db : & dyn HirDatabase) -> ItemContainer { ItemContainer :: Module (Module { id : self . id . lookup (db) . container }) } }
+        impl < 'db > HirDisplay < 'db > for TraitRef < 'db > { fn hir_fmt (& self , f : & mut HirFormatter < '_ , 'db >) -> Result < () , HirDisplayError > { self . trait_ref . hir_fmt (f) } }
     };
 }
 

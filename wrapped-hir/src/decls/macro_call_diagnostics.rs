@@ -1,5 +1,13 @@
+macro_rules! deps {
+    () => {
+        MacroError!();
+        MacroExpansionParseError!();
+    };
+}
+
 macro_rules! macro_call_diagnostics {
     () => {
+        deps!();
         fn macro_call_diagnostics < 'db > (db : & 'db dyn HirDatabase , macro_call_id : MacroCallId , acc : & mut Vec < AnyDiagnostic < 'db > > ,) { let Some (e) = db . parse_macro_expansion_error (macro_call_id) else { return ; } ; let ValueResult { value : parse_errors , err } = & * e ; if let Some (err) = err { let loc = db . lookup_intern_macro_call (macro_call_id) ; let file_id = loc . kind . file_id () ; let node = InFile :: new (file_id , db . ast_id_map (file_id) . get_erased (loc . kind . erased_ast_id ())) ; let RenderedExpandError { message , error , kind } = err . render_to_string (db) ; let editioned_file_id = EditionedFileId :: from_span (db , err . span () . anchor . file_id) ; let precise_location = if editioned_file_id == file_id { Some (err . span () . range + db . ast_id_map (editioned_file_id . into ()) . get_erased (err . span () . anchor . ast_id) . text_range () . start () ,) } else { None } ; acc . push (MacroError { node , precise_location , message , error , kind } . into ()) ; } if ! parse_errors . is_empty () { let loc = db . lookup_intern_macro_call (macro_call_id) ; let (node , precise_location) = precise_macro_call_location (& loc . kind , db) ; acc . push (MacroExpansionParseError { node , precise_location , errors : parse_errors . clone () } . into () ,) } }
     };
 }

@@ -1,0 +1,18 @@
+macro_rules! deps {
+    () => {
+        Gb18030Encoder!();
+        Encoding!();
+        Encoder!();
+        VariantEncoder!();
+        EncoderResult!();
+    };
+}
+
+macro_rules! impl_98 {
+    () => {
+        deps!();
+        impl Gb18030Encoder { pub fn new (encoding : & 'static Encoding , extended_range : bool) -> Encoder { Encoder :: new (encoding , VariantEncoder :: Gb18030 (Gb18030Encoder { extended : extended_range , }) ,) } pub fn max_buffer_length_from_utf16_without_replacement (& self , u16_length : usize ,) -> Option < usize > { if self . extended { u16_length . checked_mul (4) } else { checked_add (2 , u16_length . checked_mul (2)) } } pub fn max_buffer_length_from_utf8_without_replacement (& self , byte_length : usize ,) -> Option < usize > { if self . extended { checked_add (2 , byte_length . checked_mul (2)) } else { byte_length . checked_add (3) } } ascii_compatible_encoder_functions ! ({ let bmp_minus_unified_start = bmp . wrapping_sub (0x4E00) ; if bmp_minus_unified_start < (0x9FA6 - 0x4E00) { let (lead , trail) = encode_hanzi (bmp , bmp_minus_unified_start) ; handle . write_two (lead , trail) } else if bmp == 0xE5E5 { return (EncoderResult :: unmappable_from_bmp (bmp) , source . consumed () , handle . written () ,) ; } else if bmp == 0x20AC && ! self . extended { handle . write_one (0x80u8) } else { match gbk_encode_non_unified (bmp) { Some ((lead , trail)) => handle . write_two (lead as u8 , trail as u8) , None => { if ! self . extended { return (EncoderResult :: unmappable_from_bmp (bmp) , source . consumed () , handle . written () ,) ; } let range_pointer = gb18030_range_encode (bmp) ; let first = range_pointer / (10 * 126 * 10) ; let rem_first = range_pointer % (10 * 126 * 10) ; let second = rem_first / (10 * 126) ; let rem_second = rem_first % (10 * 126) ; let third = rem_second / 10 ; let fourth = rem_second % 10 ; handle . write_four ((first + 0x81) as u8 , (second + 0x30) as u8 , (third + 0x81) as u8 , (fourth + 0x30) as u8 ,) } } } } , { if ! self . extended { return (EncoderResult :: Unmappable (astral) , source . consumed () , handle . written () ,) ; } let range_pointer = astral as usize + (189_000usize - 0x1_0000usize) ; let first = range_pointer / (10 * 126 * 10) ; let rem_first = range_pointer % (10 * 126 * 10) ; let second = rem_first / (10 * 126) ; let rem_second = rem_first % (10 * 126) ; let third = rem_second / 10 ; let fourth = rem_second % 10 ; handle . write_four ((first + 0x81) as u8 , (second + 0x30) as u8 , (third + 0x81) as u8 , (fourth + 0x30) as u8 ,) } , bmp , astral , self , source , handle , copy_ascii_to_check_space_four , check_space_four , false) ; }
+    };
+}
+
+impl_98!()

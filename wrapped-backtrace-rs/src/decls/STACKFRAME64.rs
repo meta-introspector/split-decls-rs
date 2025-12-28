@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        ADDRESS64!();
+        KDHELP64!();
+        BOOL!();
+    };
+}
+
+macro_rules! STACKFRAME64 {
+    () => {
+        deps!();
+        # [repr (C)] # [derive (Clone , Copy)] pub struct STACKFRAME64 { pub AddrPC : ADDRESS64 , pub AddrReturn : ADDRESS64 , pub AddrFrame : ADDRESS64 , pub AddrStack : ADDRESS64 , pub AddrBStore : ADDRESS64 , pub FuncTableEntry : * mut core :: ffi :: c_void , pub Params : [u64 ; 4] , pub Far : BOOL , pub Virtual : BOOL , pub Reserved : [u64 ; 3] , pub KdHelp : KDHELP64 , }
+    };
+}
+
+STACKFRAME64!()

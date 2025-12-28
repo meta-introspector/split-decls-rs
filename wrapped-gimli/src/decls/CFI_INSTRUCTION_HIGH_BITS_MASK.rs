@@ -1,0 +1,7 @@
+macro_rules! CFI_INSTRUCTION_HIGH_BITS_MASK {
+    () => {
+        const CFI_INSTRUCTION_HIGH_BITS_MASK : u8 = 0b1100_0000 ;
+    };
+}
+
+CFI_INSTRUCTION_HIGH_BITS_MASK!()

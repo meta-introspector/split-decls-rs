@@ -1,0 +1,17 @@
+macro_rules! deps {
+    () => {
+        Context!();
+        Result!();
+        Error!();
+        Action!();
+    };
+}
+
+macro_rules! function {
+    () => {
+        deps!();
+        pub (crate) mod function { use std :: ffi :: OsString ; use crate :: { program :: main :: { Action , Error } , protocol :: Context , } ; # [doc = " Invoke a custom credentials helper which receives program `args`, with the first argument being the"] # [doc = " action to perform (as opposed to the program name)."] # [doc = " Then read context information from `stdin` and if the action is `Action::Get`, then write the result to `stdout`."] # [doc = " `credentials` is the API version of such call, where`Ok(Some(context))` returns credentials, and `Ok(None)` indicates"] # [doc = " no credentials could be found for `url`, which is always set when called."] # [doc = ""] # [doc = " Call this function from a programs `main`, passing `std::env::args_os()`, `stdin()` and `stdout` accordingly, along with"] # [doc = " your own helper implementation."] pub fn main < CredentialsFn , E > (args : impl IntoIterator < Item = OsString > , mut stdin : impl std :: io :: Read , stdout : impl std :: io :: Write , credentials : CredentialsFn ,) -> Result < () , Error > where CredentialsFn : FnOnce (Action , Context) -> Result < Option < Context > , E > , E : std :: error :: Error + Send + Sync + 'static , { let action : Action = args . into_iter () . next () . ok_or (Error :: ActionMissing) ? . try_into () ? ; let mut buf = Vec :: < u8 > :: with_capacity (512) ; stdin . read_to_end (& mut buf) ? ; let ctx = Context :: from_bytes (& buf) ? ; if ctx . url . is_none () && (ctx . protocol . is_none () || ctx . host . is_none ()) { return Err (Error :: UrlMissing) ; } let res = credentials (action , ctx . clone ()) . map_err (| err | Error :: Helper { source : Box :: new (err) }) ? ; match (action , res) { (Action :: Get , None) => { let ctx_for_error = ctx ; let url = ctx_for_error . url . clone () . or_else (| | ctx_for_error . to_url ()) . expect ("URL is available either directly or via protocol+host which we checked for") ; return Err (Error :: CredentialsMissing { url }) ; } (Action :: Get , Some (ctx)) => ctx . write_to (stdout) ? , (Action :: Erase | Action :: Store , None) => { } (Action :: Erase | Action :: Store , Some (_)) => { panic ! ("BUG: credentials helper must not return context for erase or store actions") } } Ok (()) } }
+    };
+}
+
+function!()

@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        StoreSlice!();
+    };
+}
+
+macro_rules! impl_12 {
+    () => {
+        deps!();
+        impl < K : ? Sized , V : ? Sized , S > LiteMap < K , V , S > where S : StoreSlice < K , V > , { # [doc = " Creates a new [`LiteMap`] from a range of the current [`LiteMap`]."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " use litemap::LiteMap;"] # [doc = ""] # [doc = " let mut map = LiteMap::new_vec();"] # [doc = " map.insert(1, \"one\");"] # [doc = " map.insert(2, \"two\");"] # [doc = " map.insert(3, \"three\");"] # [doc = ""] # [doc = " let mut sub_map = map.get_indexed_range(1..3).expect(\"valid range\");"] # [doc = " assert_eq!(sub_map.get(&1), None);"] # [doc = " assert_eq!(sub_map.get(&2), Some(&\"two\"));"] # [doc = " assert_eq!(sub_map.get(&3), Some(&\"three\"));"] # [doc = " ```"] pub fn get_indexed_range (& self , range : Range < usize >) -> Option < LiteMap < K , V , & S :: Slice > > { let subslice = self . values . lm_get_range (range) ? ; Some (LiteMap { values : subslice , _key_type : PhantomData , _value_type : PhantomData , }) } # [doc = " Borrows this [`LiteMap`] as one of its slice type."] # [doc = ""] # [doc = " This can be useful in situations where you need a `LiteMap` by value but do not want"] # [doc = " to clone the owned version."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " use litemap::LiteMap;"] # [doc = ""] # [doc = " let mut map = LiteMap::new_vec();"] # [doc = " map.insert(1, \"one\");"] # [doc = " map.insert(2, \"two\");"] # [doc = ""] # [doc = " let borrowed_map = map.as_sliced();"] # [doc = " assert_eq!(borrowed_map.get(&1), Some(&\"one\"));"] # [doc = " assert_eq!(borrowed_map.get(&2), Some(&\"two\"));"] # [doc = " ```"] pub fn as_sliced (& self) -> LiteMap < K , V , & S :: Slice > { # [expect (clippy :: unwrap_used)] let subslice = self . values . lm_get_range (0 .. self . len ()) . unwrap () ; LiteMap { values : subslice , _key_type : PhantomData , _value_type : PhantomData , } } # [doc = " Borrows the backing buffer of this [`LiteMap`] as its slice type."] # [doc = ""] # [doc = " The slice will be sorted."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " use litemap::LiteMap;"] # [doc = ""] # [doc = " let mut map = LiteMap::new_vec();"] # [doc = " map.insert(1, \"one\");"] # [doc = " map.insert(2, \"two\");"] # [doc = ""] # [doc = " let slice = map.as_slice();"] # [doc = " assert_eq!(slice, &[(1, \"one\"), (2, \"two\")]);"] # [doc = " ```"] pub fn as_slice (& self) -> & S :: Slice { # [expect (clippy :: unwrap_used)] self . values . lm_get_range (0 .. self . len ()) . unwrap () } }
+    };
+}
+
+impl_12!()

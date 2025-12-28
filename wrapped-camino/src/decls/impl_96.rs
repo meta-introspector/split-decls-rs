@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        FromOsStringError!();
+        Utf8PathBuf!();
     };
 }
 
 macro_rules! impl_96 {
     () => {
         deps!();
-        impl fmt :: Display for FromOsStringError { fn fmt (& self , f : & mut fmt :: Formatter) -> fmt :: Result { write ! (f , "OsString contains invalid UTF-8: {}" , PathBuf :: from (& self . os_string) . display ()) } }
+        impl From < Utf8PathBuf > for Arc < Path > { fn from (path : Utf8PathBuf) -> Arc < Path > { PathBuf :: from (path) . into () } }
     };
 }
 

@@ -1,0 +1,7 @@
+macro_rules! Pagerank {
+    () => {
+        # [doc = " A structure for managing and computing PageRank scores for nodes in a graph."] # [doc = ""] # [doc = " The Pagerank struct supports adding nodes and directed edges, and provides"] # [doc = " a method to compute the PageRank scores for all nodes using the PageRank algorithm."] # [doc = " It internally maintains mappings between node identifiers and their indices in vectors"] # [doc = " that store the graph's adjacency information."] # [doc = ""] # [doc = " Fields:"] # [doc = " - in_links: A vector of vectors where each sub-vector contains the indices of nodes"] # [doc = "   that have an outgoing link to the node at the corresponding index."] # [doc = " - number_out_links: A vector where each element is the number of outgoing links"] # [doc = "   from the node at the corresponding index."] # [doc = " - current_available_index: The next available index for assigning to a new node."] # [doc = " - key_to_index: A mapping from node identifiers to their indices in the graph vectors."] # [doc = " - index_to_key: A mapping from indices in the graph vectors to node identifiers."] # [doc = " - capacity: The maximum number of nodes the Pagerank instance can handle.// and managing the underlying graph data."] pub struct Pagerank { in_links : Vec < Vec < usize > > , number_out_links : Vec < usize > , current_available_index : usize , key_to_index : HashMap < usize , usize > , index_to_key : HashMap < usize , usize > , capacity : usize , }
+    };
+}
+
+Pagerank!()

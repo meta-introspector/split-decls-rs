@@ -1,0 +1,7 @@
+macro_rules! GNU_PROPERTY_AARCH64_FEATURE_1_BTI {
+    () => {
+        pub const GNU_PROPERTY_AARCH64_FEATURE_1_BTI : u32 = 1 << 0 ;
+    };
+}
+
+GNU_PROPERTY_AARCH64_FEATURE_1_BTI!()

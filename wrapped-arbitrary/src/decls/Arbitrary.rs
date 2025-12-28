@@ -1,5 +1,7 @@
 macro_rules! deps {
     () => {
+        Result!();
+        Unstructured!();
         MaxRecursionReached!();
     };
 }

@@ -1,6 +1,9 @@
 macro_rules! deps {
     () => {
+        FixedSizeList!();
         CLruNode!();
+        WeightScale!();
+        ZeroWeightScale!();
     };
 }
 

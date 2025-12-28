@@ -1,7 +1,9 @@
 macro_rules! deps {
     () => {
+        MangledName!();
         BorrowedSymbol!();
         OwnedSymbol!();
+        SubstitutionTable!();
     };
 }
 

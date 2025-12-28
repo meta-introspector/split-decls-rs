@@ -1,0 +1,7 @@
+macro_rules! GNU_PROPERTY_AARCH64_FEATURE_1_PAC {
+    () => {
+        pub const GNU_PROPERTY_AARCH64_FEATURE_1_PAC : u32 = 1 << 1 ;
+    };
+}
+
+GNU_PROPERTY_AARCH64_FEATURE_1_PAC!()

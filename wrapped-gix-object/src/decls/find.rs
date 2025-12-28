@@ -1,6 +1,6 @@
 macro_rules! find {
     () => {
-        # [doc = ""] pub mod find ;
+        mod find ;
     };
 }
 

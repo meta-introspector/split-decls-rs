@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        ArcSwapAny!();
+        ConstantDeref!();
     };
 }
 
 macro_rules! impl_24 {
     () => {
         deps!();
-        impl < T : RefCnt + Default , S : Default + Strategy < T > > Default for ArcSwapAny < T , S > { fn default () -> Self { Self :: new (T :: default ()) } }
+        impl < T > Deref for ConstantDeref < T > { type Target = T ; fn deref (& self) -> & T { & self . 0 } }
     };
 }
 

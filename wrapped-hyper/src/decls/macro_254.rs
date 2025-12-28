@@ -1,0 +1,7 @@
+macro_rules! macro_254 {
+    () => {
+        ffi_fn ! { # [doc = " Free this buffer."] # [doc = ""] # [doc = " This should be used for any buffer once it is no longer needed."] fn hyper_buf_free (buf : * mut hyper_buf) { drop (unsafe { Box :: from_raw (buf) }) ; } }
+    };
+}
+
+macro_254!()

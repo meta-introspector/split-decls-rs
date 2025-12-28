@@ -1,0 +1,20 @@
+macro_rules! deps {
+    () => {
+        EntryIndex!();
+        Error!();
+        Outcome!();
+        ProgressId!();
+        Statistics!();
+        Id!();
+        Object!();
+    };
+}
+
+macro_rules! integrity {
+    () => {
+        deps!();
+        # [doc = ""] pub mod integrity { use crate :: multi_index :: EntryIndex ; # [doc = " Returned by [`multi_index::File::verify_integrity()`][crate::multi_index::File::verify_integrity()]."] # [derive (thiserror :: Error , Debug)] # [allow (missing_docs)] pub enum Error { # [error ("Object {id} should be at pack-offset {expected_pack_offset} but was found at {actual_pack_offset}")] PackOffsetMismatch { id : gix_hash :: ObjectId , expected_pack_offset : u64 , actual_pack_offset : u64 , } , # [error (transparent)] MultiIndexChecksum (# [from] crate :: multi_index :: verify :: checksum :: Error) , # [error (transparent)] IndexIntegrity (# [from] crate :: index :: verify :: integrity :: Error) , # [error (transparent)] BundleInit (# [from] crate :: bundle :: init :: Error) , # [error ("Counted {actual} objects, but expected {expected} as per multi-index")] UnexpectedObjectCount { actual : usize , expected : usize } , # [error ("{id} wasn't found in the index referenced in the multi-pack index")] OidNotFound { id : gix_hash :: ObjectId } , # [error ("The object id at multi-index entry {index} wasn't in order")] OutOfOrder { index : EntryIndex } , # [error ("The fan at index {index} is out of order as it's larger then the following value.")] Fan { index : usize } , # [error ("The multi-index claims to have no objects")] Empty , # [error ("Interrupted")] Interrupted , } # [doc = " Returned by [`multi_index::File::verify_integrity()`][crate::multi_index::File::verify_integrity()]."] pub struct Outcome { # [doc = " The computed checksum of the multi-index which matched the stored one."] pub actual_index_checksum : gix_hash :: ObjectId , # [doc = " The for each entry in [`index_names()`][super::File::index_names()] provide the corresponding pack traversal outcome."] pub pack_traverse_statistics : Vec < crate :: index :: traverse :: Statistics > , } # [doc = " The progress ids used in [`multi_index::File::verify_integrity()`][crate::multi_index::File::verify_integrity()]."] # [doc = ""] # [doc = " Use this information to selectively extract the progress of interest in case the parent application has custom visualization."] # [derive (Debug , Copy , Clone)] pub enum ProgressId { # [doc = " The amount of bytes read to verify the multi-index checksum."] ChecksumBytes , # [doc = " The amount of objects whose offset has been checked."] ObjectOffsets , } impl From < ProgressId > for gix_features :: progress :: Id { fn from (v : ProgressId) -> Self { match v { ProgressId :: ChecksumBytes => * b"MVCK" , ProgressId :: ObjectOffsets => * b"MVOF" , } } } }
+    };
+}
+
+integrity!()

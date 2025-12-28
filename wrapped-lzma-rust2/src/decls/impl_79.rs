@@ -1,14 +1,13 @@
 macro_rules! deps {
     () => {
-        CountingWriter!();
-        Result!();
+        Lzma2Reader!();
     };
 }
 
 macro_rules! impl_79 {
     () => {
         deps!();
-        # [cfg (feature = "encoder")] impl < W : Write > Write for CountingWriter < W > { fn write (& mut self , buf : & [u8]) -> Result < usize > { let bytes_written = self . inner . write (buf) ? ; self . bytes_written += bytes_written as u64 ; Ok (bytes_written) } fn flush (& mut self) -> Result < () > { self . inner . flush () } }
+        impl < R > Lzma2Reader < R > { # [doc = " Unwraps the reader, returning the underlying reader."] pub fn into_inner (self) -> R { self . inner } # [doc = " Returns a reference to the inner reader."] pub fn inner (& self) -> & R { & self . inner } # [doc = " Returns a mutable reference to the inner reader."] pub fn inner_mut (& mut self) -> & mut R { & mut self . inner } }
     };
 }
 

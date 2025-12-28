@@ -1,13 +1,14 @@
 macro_rules! deps {
     () => {
-        IoUring!();
+        CompletionQueue!();
+        EntryMarker!();
     };
 }
 
 macro_rules! impl_20 {
     () => {
         deps!();
-        impl < S : squeue :: EntryMarker , C : cqueue :: EntryMarker > AsRawFd for IoUring < S , C > { fn as_raw_fd (& self) -> RawFd { self . fd . as_raw_fd () } }
+        impl < E : EntryMarker > Iterator for CompletionQueue < '_ , E > { type Item = E ; # [inline] fn next (& mut self) -> Option < Self :: Item > { if self . head != self . tail { Some (unsafe { self . pop () }) } else { None } } # [inline] fn size_hint (& self) -> (usize , Option < usize >) { (self . len () , Some (self . len ())) } }
     };
 }
 

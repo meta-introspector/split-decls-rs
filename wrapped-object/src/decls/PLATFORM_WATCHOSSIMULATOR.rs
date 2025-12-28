@@ -1,0 +1,7 @@
+macro_rules! PLATFORM_WATCHOSSIMULATOR {
+    () => {
+        pub const PLATFORM_WATCHOSSIMULATOR : u32 = 9 ;
+    };
+}
+
+PLATFORM_WATCHOSSIMULATOR!()

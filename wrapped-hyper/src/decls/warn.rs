@@ -1,0 +1,7 @@
+macro_rules! warn {
+    () => {
+        macro_rules ! warn { ($ ($ arg : tt) *) => { # [cfg (feature = "tracing")] { tracing :: warn ! ($ ($ arg) +) ; } } }
+    };
+}
+
+warn!()

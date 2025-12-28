@@ -1,0 +1,17 @@
+macro_rules! deps {
+    () => {
+        File!();
+        Commit!();
+        Error!();
+        Outcome!();
+    };
+}
+
+macro_rules! impl_36 {
+    () => {
+        deps!();
+        # [doc = " Verification"] impl File { # [doc = " Returns the trailing checksum over the entire content of this file."] pub fn checksum (& self) -> & gix_hash :: oid { gix_hash :: oid :: from_bytes_unchecked (& self . data [self . data . len () - self . hash_len ..]) } # [doc = " Traverse all [commits][file::Commit] stored in this file and call `processor(commit) -> Result<(), Error>` on it."] # [doc = ""] # [doc = " If the `processor` fails, the iteration will be stopped and the entire call results in the respective error."] pub fn traverse < 'a , E , Processor > (& 'a self , mut processor : Processor) -> Result < Outcome , Error < E > > where E : std :: error :: Error + 'static , Processor : FnMut (& file :: Commit < 'a >) -> Result < () , E > , { self . verify_checksum () ? ; verify_split_chain_filename_hash (& self . path , self . checksum ()) . map_err (Error :: Filename) ? ; let null_id = self . object_hash () . null_ref () ; let mut stats = Outcome { max_generation : 0 , max_parents : 0 , min_generation : GENERATION_NUMBER_INFINITY , num_commits : self . num_commits () , parent_counts : HashMap :: new () , } ; let mut prev_id : & gix_hash :: oid = null_id ; for commit in self . iter_commits () { if commit . id () <= prev_id { if commit . id () == null_id { return Err (Error :: CommitId { pos : commit . position () , id : commit . id () . into () , }) ; } return Err (Error :: CommitsOutOfOrder { pos : commit . position () , id : commit . id () . into () , predecessor_id : prev_id . into () , }) ; } if commit . root_tree_id () == null_id { return Err (Error :: RootTreeId { id : commit . id () . into () , root_tree_id : commit . root_tree_id () . into () , }) ; } if commit . generation () > GENERATION_NUMBER_MAX { return Err (Error :: Generation { generation : commit . generation () , id : commit . id () . into () , }) ; } processor (& commit) . map_err (Error :: Processor) ? ; stats . max_generation = max (stats . max_generation , commit . generation ()) ; stats . min_generation = min (stats . min_generation , commit . generation ()) ; let parent_count = commit . iter_parents () . try_fold (0u32 , | acc , pos | pos . map (| _ | acc + 1)) . map_err (Error :: Commit) ? ; * stats . parent_counts . entry (parent_count) . or_insert (0) += 1 ; prev_id = commit . id () ; } if stats . min_generation == GENERATION_NUMBER_INFINITY { stats . min_generation = 0 ; } Ok (stats) } # [doc = " Assure the [`checksum`][File::checksum()] matches the actual checksum over all content of this file, excluding the trailing"] # [doc = " checksum itself."] # [doc = ""] # [doc = " Return the actual checksum on success or [`checksum::Error`] if there is a mismatch."] pub fn verify_checksum (& self) -> Result < gix_hash :: ObjectId , checksum :: Error > { let data_len_without_trailer = self . data . len () - self . hash_len ; let mut hasher = gix_hash :: hasher (self . object_hash ()) ; hasher . update (& self . data [.. data_len_without_trailer]) ; let actual = hasher . try_finalize () ? ; actual . verify (self . checksum ()) ? ; Ok (actual) } }
+    };
+}
+
+impl_36!()

@@ -1,17 +1,14 @@
 macro_rules! deps {
     () => {
-        Struct!();
-        HasVisibility!();
-        Adt!();
-        Union!();
-        Enum!();
+        HasSource!();
+        Macro!();
     };
 }
 
 macro_rules! impl_60 {
     () => {
         deps!();
-        impl HasVisibility for Adt { fn visibility (& self , db : & dyn HirDatabase) -> Visibility { match self { Adt :: Struct (it) => it . visibility (db) , Adt :: Union (it) => it . visibility (db) , Adt :: Enum (it) => it . visibility (db) , } } }
+        impl HasSource for Macro { type Ast = Either < ast :: Macro , ast :: Fn > ; fn source (self , db : & dyn HirDatabase) -> Option < InFile < Self :: Ast > > { match self . id { MacroId :: Macro2Id (it) => { Some (it . lookup (db) . source (db) . map (ast :: Macro :: MacroDef) . map (Either :: Left)) } MacroId :: MacroRulesId (it) => { Some (it . lookup (db) . source (db) . map (ast :: Macro :: MacroRules) . map (Either :: Left)) } MacroId :: ProcMacroId (it) => Some (it . lookup (db) . source (db) . map (Either :: Right)) , } } }
     };
 }
 

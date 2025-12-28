@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        NaiveDate!();
+    };
+}
+
+macro_rules! test_date_with_fields {
+    () => {
+        deps!();
+        # [test] fn test_date_with_fields () { let d = NaiveDate :: from_ymd_opt (2000 , 2 , 29) . unwrap () ; assert_eq ! (d . with_year (- 400) , Some (NaiveDate :: from_ymd_opt (- 400 , 2 , 29) . unwrap ())) ; assert_eq ! (d . with_year (- 100) , None) ; assert_eq ! (d . with_year (1600) , Some (NaiveDate :: from_ymd_opt (1600 , 2 , 29) . unwrap ())) ; assert_eq ! (d . with_year (1900) , None) ; assert_eq ! (d . with_year (2000) , Some (NaiveDate :: from_ymd_opt (2000 , 2 , 29) . unwrap ())) ; assert_eq ! (d . with_year (2001) , None) ; assert_eq ! (d . with_year (2004) , Some (NaiveDate :: from_ymd_opt (2004 , 2 , 29) . unwrap ())) ; assert_eq ! (d . with_year (i32 :: MAX) , None) ; let d = NaiveDate :: from_ymd_opt (2000 , 4 , 30) . unwrap () ; assert_eq ! (d . with_month (0) , None) ; assert_eq ! (d . with_month (1) , Some (NaiveDate :: from_ymd_opt (2000 , 1 , 30) . unwrap ())) ; assert_eq ! (d . with_month (2) , None) ; assert_eq ! (d . with_month (3) , Some (NaiveDate :: from_ymd_opt (2000 , 3 , 30) . unwrap ())) ; assert_eq ! (d . with_month (4) , Some (NaiveDate :: from_ymd_opt (2000 , 4 , 30) . unwrap ())) ; assert_eq ! (d . with_month (12) , Some (NaiveDate :: from_ymd_opt (2000 , 12 , 30) . unwrap ())) ; assert_eq ! (d . with_month (13) , None) ; assert_eq ! (d . with_month (u32 :: MAX) , None) ; let d = NaiveDate :: from_ymd_opt (2000 , 2 , 8) . unwrap () ; assert_eq ! (d . with_day (0) , None) ; assert_eq ! (d . with_day (1) , Some (NaiveDate :: from_ymd_opt (2000 , 2 , 1) . unwrap ())) ; assert_eq ! (d . with_day (29) , Some (NaiveDate :: from_ymd_opt (2000 , 2 , 29) . unwrap ())) ; assert_eq ! (d . with_day (30) , None) ; assert_eq ! (d . with_day (u32 :: MAX) , None) ; }
+    };
+}
+
+test_date_with_fields!()

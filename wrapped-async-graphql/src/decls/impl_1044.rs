@@ -1,0 +1,22 @@
+macro_rules! deps {
+    () => {
+        MetaTypeId!();
+        Object!();
+        MetaField!();
+        InputObject!();
+        Union!();
+        Scalar!();
+        Context!();
+        Interface!();
+        MetaType!();
+    };
+}
+
+macro_rules! impl_1044 {
+    () => {
+        deps!();
+        impl MetaType { # [inline] pub fn type_id (& self) -> MetaTypeId { match self { MetaType :: Scalar { .. } => MetaTypeId :: Scalar , MetaType :: Object { .. } => MetaTypeId :: Object , MetaType :: Interface { .. } => MetaTypeId :: Interface , MetaType :: Union { .. } => MetaTypeId :: Union , MetaType :: Enum { .. } => MetaTypeId :: Enum , MetaType :: InputObject { .. } => MetaTypeId :: InputObject , } } # [inline] pub fn field_by_name (& self , name : & str) -> Option < & MetaField > { self . fields () . and_then (| fields | fields . get (name)) } # [inline] pub fn fields (& self) -> Option < & IndexMap < String , MetaField > > { match self { MetaType :: Object { fields , .. } => Some (& fields) , MetaType :: Interface { fields , .. } => Some (& fields) , _ => None , } } # [inline] pub fn is_visible (& self , ctx : & Context < '_ >) -> bool { let visible = match self { MetaType :: Scalar { visible , .. } => visible , MetaType :: Object { visible , .. } => visible , MetaType :: Interface { visible , .. } => visible , MetaType :: Union { visible , .. } => visible , MetaType :: Enum { visible , .. } => visible , MetaType :: InputObject { visible , .. } => visible , } ; is_visible (ctx , visible) } # [inline] pub fn name (& self) -> & str { match self { MetaType :: Scalar { name , .. } => & name , MetaType :: Object { name , .. } => name , MetaType :: Interface { name , .. } => name , MetaType :: Union { name , .. } => name , MetaType :: Enum { name , .. } => name , MetaType :: InputObject { name , .. } => name , } } # [inline] pub fn is_composite (& self) -> bool { matches ! (self , MetaType :: Object { .. } | MetaType :: Interface { .. } | MetaType :: Union { .. }) } # [inline] pub fn is_abstract (& self) -> bool { matches ! (self , MetaType :: Interface { .. } | MetaType :: Union { .. }) } # [inline] pub fn is_leaf (& self) -> bool { matches ! (self , MetaType :: Enum { .. } | MetaType :: Scalar { .. }) } # [inline] pub fn is_input (& self) -> bool { matches ! (self , MetaType :: Enum { .. } | MetaType :: Scalar { .. } | MetaType :: InputObject { .. }) } # [inline] pub fn is_possible_type (& self , type_name : & str) -> bool { match self { MetaType :: Interface { possible_types , .. } => possible_types . contains (type_name) , MetaType :: Union { possible_types , .. } => possible_types . contains (type_name) , MetaType :: Object { name , .. } => name == type_name , _ => false , } } # [inline] pub fn possible_types (& self) -> Option < & IndexSet < String > > { match self { MetaType :: Interface { possible_types , .. } => Some (possible_types) , MetaType :: Union { possible_types , .. } => Some (possible_types) , _ => None , } } pub fn type_overlap (& self , ty : & MetaType) -> bool { if std :: ptr :: eq (self , ty) { return true ; } match (self . is_abstract () , ty . is_abstract ()) { (true , true) => self . possible_types () . iter () . copied () . flatten () . any (| type_name | ty . is_possible_type (type_name)) , (true , false) => self . is_possible_type (ty . name ()) , (false , true) => ty . is_possible_type (self . name ()) , (false , false) => false , } } pub fn rust_typename (& self) -> Option < & 'static str > { match self { MetaType :: Scalar { .. } => None , MetaType :: Object { rust_typename , .. } => * rust_typename , MetaType :: Interface { rust_typename , .. } => * rust_typename , MetaType :: Union { rust_typename , .. } => * rust_typename , MetaType :: Enum { rust_typename , .. } => * rust_typename , MetaType :: InputObject { rust_typename , .. } => * rust_typename , } } }
+    };
+}
+
+impl_1044!()

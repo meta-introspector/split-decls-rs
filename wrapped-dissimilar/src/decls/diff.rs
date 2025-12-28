@@ -1,5 +1,6 @@
 macro_rules! deps {
     () => {
+        Range!();
         Chunk!();
         Diff!();
     };

@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        AltairConfigOptions!();
+        AltairSource!();
+        ToJsonHelper!();
+    };
+}
+
+macro_rules! impl_598 {
+    () => {
+        deps!();
+        impl < 'a > AltairSource < 'a > { # [doc = " Creates a builder for constructing an Altair HTML page."] pub fn build () -> AltairSource < 'a > { Default :: default () } # [doc = " Sets the html document title."] pub fn title (self , title : & 'a str) -> AltairSource < 'a > { AltairSource { title : Some (title) , .. self } } # [doc = " Sets the [Altair options](https://github.com/altair-graphql/altair?tab=readme-ov-file#configuration-options)."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " With on-the-fly options:"] # [doc = " ```rust"] # [doc = " use async_graphql::http::*;"] # [doc = " use serde_json::json;"] # [doc = ""] # [doc = " AltairSource::build()"] # [doc = "     .options(json!({"] # [doc = "         \"endpointURL\": \"/\","] # [doc = "         \"subscriptionsEndpoint\": \"/ws\","] # [doc = "         \"subscriptionsProtocol\": \"wss\","] # [doc = "     }))"] # [doc = "     .finish();"] # [doc = " ```"] # [doc = ""] # [doc = " With strongly-typed [AltairConfigOptions], useful when reading options"] # [doc = " from config files: ```rust"] # [doc = " use async_graphql::http::*;"] # [doc = ""] # [doc = " AltairSource::build()"] # [doc = "     .options(AltairConfigOptions {"] # [doc = "         window_options: Some(AltairWindowOptions {"] # [doc = "             endpoint_url: Some(\"/\".to_owned()),"] # [doc = "             subscriptions_endpoint: Some(\"/ws\".to_owned()),"] # [doc = "             subscriptions_protocol: Some(\"wss\".to_owned()),"] # [doc = "             ..Default::default()"] # [doc = "         }),"] # [doc = "         ..Default::default()"] # [doc = "     })"] # [doc = "     .finish();"] # [doc = " ```"] pub fn options < T : Serialize > (self , options : T) -> AltairSource < 'a > { AltairSource { options : Some (serde_json :: to_value (options) . expect ("Failed to serialize options")) , .. self } } # [doc = " Returns an Altair HTML page."] pub fn finish (self) -> String { let mut handlebars = Handlebars :: new () ; handlebars . register_helper ("toJson" , Box :: new (ToJsonHelper)) ; handlebars . register_template_string ("altair_source" , include_str ! ("./altair_source.hbs")) . expect ("Failed to register template") ; handlebars . render ("altair_source" , & self) . expect ("Failed to render template") } }
+    };
+}
+
+impl_598!()

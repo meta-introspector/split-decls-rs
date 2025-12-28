@@ -1,0 +1,7 @@
+macro_rules! HttpVersion {
+    () => {
+        # [doc = " Possible values to pass to the `http_version` method."] # [non_exhaustive] # [derive (Debug , Clone , Copy)] pub enum HttpVersion { # [doc = " We don't care what http version to use, and we'd like the library to"] # [doc = " choose the best possible for us."] Any = curl_sys :: CURL_HTTP_VERSION_NONE as isize , # [doc = " Please use HTTP 1.0 in the request"] V10 = curl_sys :: CURL_HTTP_VERSION_1_0 as isize , # [doc = " Please use HTTP 1.1 in the request"] V11 = curl_sys :: CURL_HTTP_VERSION_1_1 as isize , # [doc = " Please use HTTP 2 in the request"] # [doc = " (Added in CURL 7.33.0)"] V2 = curl_sys :: CURL_HTTP_VERSION_2_0 as isize , # [doc = " Use version 2 for HTTPS, version 1.1 for HTTP"] # [doc = " (Added in CURL 7.47.0)"] V2TLS = curl_sys :: CURL_HTTP_VERSION_2TLS as isize , # [doc = " Please use HTTP 2 without HTTP/1.1 Upgrade"] # [doc = " (Added in CURL 7.49.0)"] V2PriorKnowledge = curl_sys :: CURL_HTTP_VERSION_2_PRIOR_KNOWLEDGE as isize , # [doc = " Setting this value will make libcurl attempt to use HTTP/3 directly to"] # [doc = " server given in the URL but fallback to earlier HTTP versions if the HTTP/3"] # [doc = " connection establishment fails."] # [doc = ""] # [doc = " Note: the meaning of this settings depends on the linked libcurl."] # [doc = " For CURL < 7.88.0, there is no fallback if HTTP/3 connection fails."] # [doc = ""] # [doc = " (Added in CURL 7.66.0)"] V3 = curl_sys :: CURL_HTTP_VERSION_3 as isize , }
+    };
+}
+
+HttpVersion!()

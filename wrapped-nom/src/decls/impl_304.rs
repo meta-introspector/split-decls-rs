@@ -1,0 +1,22 @@
+macro_rules! deps {
+    () => {
+        Error!();
+        OutputMode!();
+        Input!();
+        IResult!();
+        Needed!();
+        PResult!();
+        ErrorKind!();
+        Err!();
+        ParseError!();
+    };
+}
+
+macro_rules! impl_304 {
+    () => {
+        deps!();
+        impl < 'a > Input for & 'a [u8] { type Item = u8 ; type Iter = Copied < Iter < 'a , u8 > > ; type IterIndices = Enumerate < Self :: Iter > ; fn input_len (& self) -> usize { self . len () } # [inline] fn take (& self , index : usize) -> Self { & self [0 .. index] } fn take_from (& self , index : usize) -> Self { & self [index ..] } # [inline] fn take_split (& self , index : usize) -> (Self , Self) { let (prefix , suffix) = self . split_at (index) ; (suffix , prefix) } # [inline] fn position < P > (& self , predicate : P) -> Option < usize > where P : Fn (Self :: Item) -> bool , { self . iter () . position (| b | predicate (* b)) } # [inline] fn iter_elements (& self) -> Self :: Iter { self . iter () . copied () } # [inline] fn iter_indices (& self) -> Self :: IterIndices { self . iter_elements () . enumerate () } # [inline] fn slice_index (& self , count : usize) -> Result < usize , Needed > { if self . len () >= count { Ok (count) } else { Err (Needed :: new (count - self . len ())) } } # [inline (always)] fn split_at_position < P , E : ParseError < Self > > (& self , predicate : P) -> IResult < Self , Self , E > where P : Fn (Self :: Item) -> bool , { match self . iter () . position (| c | predicate (* c)) { Some (i) => Ok (self . take_split (i)) , None => Err (Err :: Incomplete (Needed :: new (1))) , } } # [inline (always)] fn split_at_position1 < P , E : ParseError < Self > > (& self , predicate : P , e : ErrorKind ,) -> IResult < Self , Self , E > where P : Fn (Self :: Item) -> bool , { match self . iter () . position (| c | predicate (* c)) { Some (0) => Err (Err :: Error (E :: from_error_kind (self , e))) , Some (i) => Ok (self . take_split (i)) , None => Err (Err :: Incomplete (Needed :: new (1))) , } } fn split_at_position_complete < P , E : ParseError < Self > > (& self , predicate : P ,) -> IResult < Self , Self , E > where P : Fn (Self :: Item) -> bool , { match self . iter () . position (| c | predicate (* c)) { Some (i) => Ok (self . take_split (i)) , None => Ok (self . take_split (self . len ())) , } } # [inline (always)] fn split_at_position1_complete < P , E : ParseError < Self > > (& self , predicate : P , e : ErrorKind ,) -> IResult < Self , Self , E > where P : Fn (Self :: Item) -> bool , { match self . iter () . position (| c | predicate (* c)) { Some (0) => Err (Err :: Error (E :: from_error_kind (self , e))) , Some (i) => Ok (self . take_split (i)) , None => { if self . is_empty () { Err (Err :: Error (E :: from_error_kind (self , e))) } else { Ok (self . take_split (self . len ())) } } } } # [doc = " mode version of split_at_position"] # [inline (always)] fn split_at_position_mode < OM : crate :: OutputMode , P , E : ParseError < Self > > (& self , predicate : P ,) -> crate :: PResult < OM , Self , Self , E > where P : Fn (Self :: Item) -> bool , { match self . iter () . position (| c | predicate (* c)) { Some (n) => Ok ((self . take_from (n) , OM :: Output :: bind (| | self . take (n)))) , None => { if OM :: Incomplete :: is_streaming () { Err (Err :: Incomplete (Needed :: new (1))) } else { Ok ((self . take_from (self . len ()) , OM :: Output :: bind (| | self . take (self . len ())) ,)) } } } } # [doc = " mode version of split_at_position"] # [inline (always)] fn split_at_position_mode1 < OM : crate :: OutputMode , P , E : ParseError < Self > > (& self , predicate : P , e : ErrorKind ,) -> crate :: PResult < OM , Self , Self , E > where P : Fn (Self :: Item) -> bool , { match self . iter () . position (| c | predicate (* c)) { Some (0) => Err (Err :: Error (OM :: Error :: bind (| | E :: from_error_kind (self , e)))) , Some (n) => Ok ((self . take_from (n) , OM :: Output :: bind (| | self . take (n)))) , None => { if OM :: Incomplete :: is_streaming () { Err (Err :: Incomplete (Needed :: new (1))) } else if self . is_empty () { Err (Err :: Error (OM :: Error :: bind (| | E :: from_error_kind (self , e)))) } else { Ok ((self . take_from (self . len ()) , OM :: Output :: bind (| | self . take (self . len ())) ,)) } } } } }
+    };
+}
+
+impl_304!()

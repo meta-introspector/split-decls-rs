@@ -1,0 +1,19 @@
+macro_rules! deps {
+    () => {
+        LzDecoder!();
+        RangeDecoder!();
+        LzmaDecoder!();
+        Read!();
+        Result!();
+        Lzma2Reader!();
+    };
+}
+
+macro_rules! impl_80 {
+    () => {
+        deps!();
+        impl < R : Read > Lzma2Reader < R > { # [doc = " Create a new LZMA2 reader."] # [doc = " `inner` is the reader to read compressed data from."] # [doc = " `dict_size` is the dictionary size in bytes."] pub fn new (inner : R , dict_size : u32 , preset_dict : Option < & [u8] >) -> Self { let has_preset = preset_dict . as_ref () . map (| a | ! a . is_empty ()) . unwrap_or (false) ; let lz = LzDecoder :: new (get_dict_size (dict_size) as _ , preset_dict) ; let rc = RangeDecoder :: new_buffer (COMPRESSED_SIZE_MAX as _) ; Self { inner , lz , rc , lzma : None , uncompressed_size : 0 , is_lzma_chunk : false , need_dict_reset : ! has_preset , need_props : true , end_reached : false , } } fn decode_chunk_header (& mut self) -> crate :: Result < () > { let control = self . inner . read_u8 () ? ; if control == 0x00 { self . end_reached = true ; return Ok (()) ; } if control >= 0xE0 || control == 0x01 { self . need_props = true ; self . need_dict_reset = false ; self . lz . reset () ; } else if self . need_dict_reset { return Err (error_invalid_input ("corrupted input data (LZMA2:0)")) ; } if control >= 0x80 { self . is_lzma_chunk = true ; self . uncompressed_size = ((control & 0x1F) as usize) << 16 ; self . uncompressed_size += self . inner . read_u16_be () ? as usize + 1 ; let compressed_size = self . inner . read_u16_be () ? as usize + 1 ; if control >= 0xC0 { self . need_props = false ; self . decode_props () ? ; } else if self . need_props { return Err (error_invalid_input ("corrupted input data (LZMA2:1)")) ; } else if control >= 0xA0 { if let Some (l) = self . lzma . as_mut () { l . reset () } } self . rc . prepare (& mut self . inner , compressed_size) ? ; } else if control > 0x02 { return Err (error_invalid_input ("corrupted input data (LZMA2:2)")) ; } else { self . is_lzma_chunk = false ; self . uncompressed_size = (self . inner . read_u16_be () ? as usize) + 1 ; } Ok (()) } # [doc = " Reads the next props and re-creates the state by creating a new decoder."] fn decode_props (& mut self) -> crate :: Result < () > { let props = self . inner . read_u8 () ? ; if props > (4 * 5 + 4) * 9 + 8 { return Err (error_invalid_input ("corrupted input data (LZMA2:3)")) ; } let pb = props / (9 * 5) ; let props = props - pb * 9 * 5 ; let lp = props / 9 ; let lc = props - lp * 9 ; if lc + lp > 4 { return Err (error_invalid_input ("corrupted input data (LZMA2:4)")) ; } self . lzma = Some (LzmaDecoder :: new (lc as _ , lp as _ , pb as _)) ; Ok (()) } }
+    };
+}
+
+impl_80!()

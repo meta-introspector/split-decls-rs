@@ -7,7 +7,7 @@ macro_rules! deps {
 macro_rules! impl_38 {
     () => {
         deps!();
-        # [cfg (any (test , feature = "std"))] # [doc = " `Either` implements `Error` if *both* `L` and `R` implement it."] # [doc = ""] # [doc = " Requires crate feature `\"std\"`"] impl < L , R > Error for Either < L , R > where L : Error , R : Error , { fn source (& self) -> Option < & (dyn Error + 'static) > { for_both ! (self , inner => inner . source ()) } # [allow (deprecated)] fn description (& self) -> & str { for_both ! (self , inner => inner . description ()) } # [allow (deprecated)] fn cause (& self) -> Option < & dyn Error > { for_both ! (self , inner => inner . cause ()) } }
+        impl < L , R > Either < & L , & R > { # [doc = " Maps an `Either<&L, &R>` to an `Either<L, R>` by cloning the contents of"] # [doc = " either branch."] pub fn cloned (self) -> Either < L , R > where L : Clone , R : Clone , { map_either ! (self , inner => inner . clone ()) } # [doc = " Maps an `Either<&L, &R>` to an `Either<L, R>` by copying the contents of"] # [doc = " either branch."] pub fn copied (self) -> Either < L , R > where L : Copy , R : Copy , { map_either ! (self , inner => * inner) } }
     };
 }
 

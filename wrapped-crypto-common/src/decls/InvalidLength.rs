@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        InnerIvInit!();
         KeyIvInit!();
         KeyInit!();
+        InnerIvInit!();
     };
 }
 

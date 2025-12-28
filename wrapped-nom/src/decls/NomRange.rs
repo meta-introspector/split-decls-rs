@@ -1,0 +1,7 @@
+macro_rules! NomRange {
+    () => {
+        # [doc = " Abstractions for range-like types."] pub trait NomRange < Idx > { # [doc = " The saturating iterator type."] type Saturating : Iterator < Item = Idx > ; # [doc = " The bounded iterator type."] type Bounded : Iterator < Item = Idx > ; # [doc = " `true` if `item` is contained in the range."] fn contains (& self , item : & Idx) -> bool ; # [doc = " Returns the bounds of this range."] fn bounds (& self) -> (Bound < Idx > , Bound < Idx >) ; # [doc = " `true` if the range is inverted."] fn is_inverted (& self) -> bool ; # [doc = " Creates a saturating iterator."] # [doc = " A saturating iterator counts the number of iterations starting from 0 up to the upper bound of this range."] # [doc = " If the upper bound is infinite the iterator saturates at the largest representable value of its type and"] # [doc = " returns it for all further elements."] fn saturating_iter (& self) -> Self :: Saturating ; # [doc = " Creates a bounded iterator."] # [doc = " A bounded iterator counts the number of iterations starting from 0 up to the upper bound of this range."] # [doc = " If the upper bounds is infinite the iterator counts up until the amount of iterations has reached the"] # [doc = " largest representable value of its type and then returns `None` for all further elements."] fn bounded_iter (& self) -> Self :: Bounded ; }
+    };
+}
+
+NomRange!()

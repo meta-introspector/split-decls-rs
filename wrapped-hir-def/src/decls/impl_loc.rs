@@ -1,8 +1,9 @@
 macro_rules! deps {
     () => {
-        HasModule!();
-        AstIdLoc!();
         ModuleId!();
+        AstIdLoc!();
+        HasModule!();
+        DefDatabase!();
     };
 }
 

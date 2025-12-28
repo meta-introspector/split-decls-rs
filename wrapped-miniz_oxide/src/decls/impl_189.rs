@@ -1,0 +1,19 @@
+macro_rules! deps {
+    () => {
+        DecompressorOxide!();
+        TINFLStatus!();
+        InflateState!();
+        DataFormat!();
+        FullReset!();
+        ResetPolicy!();
+    };
+}
+
+macro_rules! impl_189 {
+    () => {
+        deps!();
+        impl InflateState { # [doc = " Create a new state."] # [doc = ""] # [doc = " Note that this struct is quite large due to internal buffers, and as such storing it on"] # [doc = " the stack is not recommended."] # [doc = ""] # [doc = " # Parameters"] # [doc = " `data_format`: Determines whether the compressed data is assumed to wrapped with zlib"] # [doc = " metadata."] pub fn new (data_format : DataFormat) -> InflateState { InflateState { data_format , .. Default :: default () } } # [doc = " Create a new state on the heap."] # [doc = ""] # [doc = " # Parameters"] # [doc = " `data_format`: Determines whether the compressed data is assumed to wrapped with zlib"] # [doc = " metadata."] # [cfg (feature = "with-alloc")] pub fn new_boxed (data_format : DataFormat) -> Box < InflateState > { let mut b : Box < InflateState > = Box :: default () ; b . data_format = data_format ; b } # [doc = " Access the innner decompressor."] pub fn decompressor (& mut self) -> & mut DecompressorOxide { & mut self . decomp } # [doc = " Return the status of the last call to `inflate` with this `InflateState`."] pub const fn last_status (& self) -> TINFLStatus { self . last_status } # [doc = " Create a new state using miniz/zlib style window bits parameter."] # [doc = ""] # [doc = " The decompressor does not support different window sizes. As such,"] # [doc = " any positive (>0) value will set the zlib header flag, while a negative one"] # [doc = " will not."] # [cfg (feature = "with-alloc")] pub fn new_boxed_with_window_bits (window_bits : i32) -> Box < InflateState > { let mut b : Box < InflateState > = Box :: default () ; b . data_format = DataFormat :: from_window_bits (window_bits) ; b } # [inline] # [doc = " Reset the decompressor without re-allocating memory, using the given"] # [doc = " data format."] pub fn reset (& mut self , data_format : DataFormat) { self . reset_as (FullReset (data_format)) ; } # [inline] # [doc = " Resets the state according to specified policy."] pub fn reset_as < T : ResetPolicy > (& mut self , policy : T) { policy . reset (self) } }
+    };
+}
+
+impl_189!()

@@ -2,9 +2,9 @@ macro_rules! deps {
     () => {
         Label!();
         ModuleDef!();
+        Impl!();
         Adt!();
         Local!();
-        Impl!();
         GenericParam!();
     };
 }

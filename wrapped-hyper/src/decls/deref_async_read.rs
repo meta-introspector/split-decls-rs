@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        Result!();
+        ReadBufCursor!();
+    };
+}
+
+macro_rules! deref_async_read {
+    () => {
+        deps!();
+        macro_rules ! deref_async_read { () => { fn poll_read (mut self : Pin <& mut Self >, cx : & mut Context <'_ >, buf : ReadBufCursor <'_ >,) -> Poll < std :: io :: Result < () >> { Pin :: new (& mut ** self) . poll_read (cx , buf) } } ; }
+    };
+}
+
+deref_async_read!()

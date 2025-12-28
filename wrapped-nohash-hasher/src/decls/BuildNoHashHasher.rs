@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        IntMap!();
         IntSet!();
         NoHashHasher!();
-        IntMap!();
     };
 }
 

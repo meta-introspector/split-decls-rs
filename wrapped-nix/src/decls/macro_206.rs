@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        Result!();
+    };
+}
+
+macro_rules! macro_206 {
+    () => {
+        deps!();
+        feature ! { #! [feature = "user"] # [doc = " User identifier"] # [doc = ""] # [doc = " Newtype pattern around `uid_t` (which is just alias). It prevents bugs caused by accidentally"] # [doc = " passing wrong value."] # [derive (Debug , Copy , Clone , Eq , PartialEq , Hash)] pub struct Uid (uid_t) ; impl Uid { # [doc = " Creates `Uid` from raw `uid_t`."] pub const fn from_raw (uid : uid_t) -> Self { Uid (uid) } # [doc = " Returns Uid of calling process. This is practically a more Rusty alias for `getuid`."] # [doc (alias ("getuid"))] pub fn current () -> Self { getuid () } # [doc = " Returns effective Uid of calling process. This is practically a more Rusty alias for `geteuid`."] # [doc (alias ("geteuid"))] pub fn effective () -> Self { geteuid () } # [doc = " Returns true if the `Uid` represents privileged user - root. (If it equals zero.)"] pub const fn is_root (self) -> bool { self . 0 == ROOT . 0 } # [doc = " Get the raw `uid_t` wrapped by `self`."] pub const fn as_raw (self) -> uid_t { self . 0 } } impl From < Uid > for uid_t { fn from (uid : Uid) -> Self { uid . 0 } } impl From < uid_t > for Uid { fn from (uid : uid_t) -> Self { Uid (uid) } } impl fmt :: Display for Uid { fn fmt (& self , f : & mut fmt :: Formatter) -> fmt :: Result { fmt :: Display :: fmt (& self . 0 , f) } } # [doc = " Constant for UID = 0"] pub const ROOT : Uid = Uid (0) ; # [doc = " Group identifier"] # [doc = ""] # [doc = " Newtype pattern around `gid_t` (which is just alias). It prevents bugs caused by accidentally"] # [doc = " passing wrong value."] # [derive (Debug , Copy , Clone , Eq , PartialEq , Hash)] pub struct Gid (gid_t) ; impl Gid { # [doc = " Creates `Gid` from raw `gid_t`."] pub const fn from_raw (gid : gid_t) -> Self { Gid (gid) } # [doc = " Returns Gid of calling process. This is practically a more Rusty alias for `getgid`."] # [doc (alias ("getgid"))] pub fn current () -> Self { getgid () } # [doc = " Returns effective Gid of calling process. This is practically a more Rusty alias for `getegid`."] # [doc (alias ("getegid"))] pub fn effective () -> Self { getegid () } # [doc = " Get the raw `gid_t` wrapped by `self`."] pub const fn as_raw (self) -> gid_t { self . 0 } } impl From < Gid > for gid_t { fn from (gid : Gid) -> Self { gid . 0 } } impl From < gid_t > for Gid { fn from (gid : gid_t) -> Self { Gid (gid) } } impl fmt :: Display for Gid { fn fmt (& self , f : & mut fmt :: Formatter) -> fmt :: Result { fmt :: Display :: fmt (& self . 0 , f) } } }
+    };
+}
+
+macro_206!()

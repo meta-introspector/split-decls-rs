@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        CargoMetadataProvider!();
         WorkspaceInfoProvider!();
-        CargoConfigGeneratorImpl!();
+        CargoMetadataProvider!();
         WorkspaceInfo!();
+        CargoConfigGeneratorImpl!();
     };
 }
 

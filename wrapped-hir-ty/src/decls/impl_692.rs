@@ -1,0 +1,17 @@
+macro_rules! deps {
+    () => {
+        MethodCallee!();
+        Binder!();
+        TreatNotYetDefinedOpaques!();
+        GenericPredicates!();
+    };
+}
+
+macro_rules! impl_692 {
+    () => {
+        deps!();
+        impl < 'db > InferenceTable < 'db > { # [doc = " `lookup_method_in_trait` is used for overloaded operators."] # [doc = " It does a very narrow slice of what the normal probe/confirm path does."] # [doc = " In particular, it doesn't really do any probing: it simply constructs"] # [doc = " an obligation for a particular trait with the given self type and checks"] # [doc = " whether that trait is implemented."] # [instrument (level = "debug" , skip (self))] pub (super) fn lookup_method_for_operator (& self , cause : ObligationCause , method_name : Symbol , trait_def_id : TraitId , self_ty : Ty < 'db > , opt_rhs_ty : Option < Ty < 'db > > , treat_opaques : TreatNotYetDefinedOpaques ,) -> Option < InferOk < 'db , MethodCallee < 'db > > > { let args = GenericArgs :: for_item (self . interner () , trait_def_id . into () , | param_idx , param_id , _ | match param_id { GenericParamId :: LifetimeParamId (_) | GenericParamId :: ConstParamId (_) => { unreachable ! ("did not expect operator trait to have lifetime/const") } GenericParamId :: TypeParamId (_) => { if param_idx == 0 { self_ty . into () } else if let Some (rhs_ty) = opt_rhs_ty { assert_eq ! (param_idx , 1 , "did not expect >1 param on operator trait") ; rhs_ty . into () } else { self . next_var_for_param (param_id) } } } ,) ; let obligation = Obligation :: new (self . interner () , cause , self . trait_env . env , TraitRef :: new_from_args (self . interner () , trait_def_id . into () , args) ,) ; let matches_trait = match treat_opaques { TreatNotYetDefinedOpaques :: AsInfer => self . infer_ctxt . predicate_may_hold (& obligation) , TreatNotYetDefinedOpaques :: AsRigid => { self . infer_ctxt . predicate_may_hold_opaque_types_jank (& obligation) } } ; if ! matches_trait { debug ! ("--> Cannot match obligation") ; return None ; } let interner = self . interner () ; let Some (method_item) = trait_def_id . trait_items (self . db) . method_by_name (& Name :: new_symbol_root (method_name)) else { panic ! ("expected associated item for operator trait") } ; let def_id = method_item ; debug ! ("lookup_in_trait_adjusted: method_item={:?}" , method_item) ; let mut obligations = PredicateObligations :: new () ; let fn_sig = self . db . callable_item_signature (method_item . into ()) . instantiate (interner , args) ; let fn_sig = self . infer_ctxt . instantiate_binder_with_fresh_vars (BoundRegionConversionTime :: FnCall , fn_sig) ; let bounds = GenericPredicates :: query_all (self . db , method_item . into ()) ; let bounds = clauses_as_obligations (bounds . iter_instantiated_copied (interner , args . as_slice ()) , ObligationCause :: new () , self . trait_env . env ,) ; obligations . extend (bounds) ; debug ! ("lookup_method_in_trait: matched method fn_sig={:?} obligation={:?}" , fn_sig , obligation) ; for ty in fn_sig . inputs_and_output { obligations . push (Obligation :: new (interner , obligation . cause . clone () , self . trait_env . env , Binder :: dummy (PredicateKind :: Clause (ClauseKind :: WellFormed (ty . into ()))) ,)) ; } let callee = MethodCallee { def_id , args , sig : fn_sig } ; debug ! ("callee = {:?}" , callee) ; Some (InferOk { obligations , value : callee }) } }
+    };
+}
+
+impl_692!()

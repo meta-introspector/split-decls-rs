@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        Result!();
+    };
+}
+
+macro_rules! macro_222 {
+    () => {
+        deps!();
+        feature ! { #! [feature = "user"] # [doc = " Get a real user ID"] # [doc = ""] # [doc = " See also [getuid(2)](https://pubs.opengroup.org/onlinepubs/9699919799/functions/getuid.html)"] # [inline] pub fn getuid () -> Uid { Uid (unsafe { libc :: getuid () }) } # [doc = " Get the effective user ID"] # [doc = ""] # [doc = " See also [geteuid(2)](https://pubs.opengroup.org/onlinepubs/9699919799/functions/geteuid.html)"] # [inline] pub fn geteuid () -> Uid { Uid (unsafe { libc :: geteuid () }) } # [doc = " Get the real group ID"] # [doc = ""] # [doc = " See also [getgid(2)](https://pubs.opengroup.org/onlinepubs/9699919799/functions/getgid.html)"] # [inline] pub fn getgid () -> Gid { Gid (unsafe { libc :: getgid () }) } # [doc = " Get the effective group ID"] # [doc = ""] # [doc = " See also [getegid(2)](https://pubs.opengroup.org/onlinepubs/9699919799/functions/getegid.html)"] # [inline] pub fn getegid () -> Gid { Gid (unsafe { libc :: getegid () }) } # [doc = " Set the effective user ID"] # [doc = ""] # [doc = " See also [seteuid(2)](https://pubs.opengroup.org/onlinepubs/9699919799/functions/seteuid.html)"] # [inline] pub fn seteuid (euid : Uid) -> Result < () > { let res = unsafe { libc :: seteuid (euid . into ()) } ; Errno :: result (res) . map (drop) } # [doc = " Set the effective group ID"] # [doc = ""] # [doc = " See also [setegid(2)](https://pubs.opengroup.org/onlinepubs/9699919799/functions/setegid.html)"] # [inline] pub fn setegid (egid : Gid) -> Result < () > { let res = unsafe { libc :: setegid (egid . into ()) } ; Errno :: result (res) . map (drop) } # [doc = " Set the user ID"] # [doc = ""] # [doc = " See also [setuid(2)](https://pubs.opengroup.org/onlinepubs/9699919799/functions/setuid.html)"] # [inline] pub fn setuid (uid : Uid) -> Result < () > { let res = unsafe { libc :: setuid (uid . into ()) } ; Errno :: result (res) . map (drop) } # [doc = " Set the group ID"] # [doc = ""] # [doc = " See also [setgid(2)](https://pubs.opengroup.org/onlinepubs/9699919799/functions/setgid.html)"] # [inline] pub fn setgid (gid : Gid) -> Result < () > { let res = unsafe { libc :: setgid (gid . into ()) } ; Errno :: result (res) . map (drop) } }
+    };
+}
+
+macro_222!()

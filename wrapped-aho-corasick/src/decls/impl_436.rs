@@ -1,0 +1,17 @@
+macro_rules! deps {
+    () => {
+        Remapper!();
+        Remappable!();
+        IndexMapper!();
+        StateID!();
+    };
+}
+
+macro_rules! impl_436 {
+    () => {
+        deps!();
+        impl Remapper { # [doc = " Create a new remapper from the given remappable implementation. The"] # [doc = " remapper can then be used to swap states. The remappable value given"] # [doc = " here must the same one given to `swap` and `remap`."] # [doc = ""] # [doc = " The given stride should be the stride of the transition table expressed"] # [doc = " as a power of 2. This stride is used to map between state IDs and state"] # [doc = " indices. If state IDs and state indices are equivalent, then provide"] # [doc = " a `stride2` of `0`, which acts as an identity."] pub (crate) fn new (r : & impl Remappable , stride2 : usize) -> Remapper { let idx = IndexMapper { stride2 } ; let map = (0 .. r . state_len ()) . map (| i | idx . to_state_id (i)) . collect () ; Remapper { map , idx } } # [doc = " Swap two states. Once this is called, callers must follow through to"] # [doc = " call `remap`, or else it's possible for the underlying remappable"] # [doc = " value to be in a corrupt state."] pub (crate) fn swap (& mut self , r : & mut impl Remappable , id1 : StateID , id2 : StateID ,) { if id1 == id2 { return ; } r . swap_states (id1 , id2) ; self . map . swap (self . idx . to_index (id1) , self . idx . to_index (id2)) ; } # [doc = " Complete the remapping process by rewriting all state IDs in the"] # [doc = " remappable value according to the swaps performed."] pub (crate) fn remap (mut self , r : & mut impl Remappable) { let oldmap = self . map . clone () ; for i in 0 .. r . state_len () { let cur_id = self . idx . to_state_id (i) ; let mut new_id = oldmap [i] ; if cur_id == new_id { continue ; } loop { let id = oldmap [self . idx . to_index (new_id)] ; if cur_id == id { self . map [i] = new_id ; break ; } new_id = id ; } } r . remap (| sid | self . map [self . idx . to_index (sid)]) ; } }
+    };
+}
+
+impl_436!()

@@ -1,0 +1,7 @@
+macro_rules! EXPORT_SYMBOL_FLAGS_KIND_REGULAR {
+    () => {
+        pub const EXPORT_SYMBOL_FLAGS_KIND_REGULAR : u8 = 0x00 ;
+    };
+}
+
+EXPORT_SYMBOL_FLAGS_KIND_REGULAR!()

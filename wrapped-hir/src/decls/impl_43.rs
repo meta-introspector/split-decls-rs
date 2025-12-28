@@ -1,17 +1,13 @@
 macro_rules! deps {
     () => {
-        Type!();
-        StructKind!();
-        Module!();
-        Field!();
-        Union!();
+        BuiltinType!();
     };
 }
 
 macro_rules! impl_43 {
     () => {
         deps!();
-        impl Union { pub fn name (self , db : & dyn HirDatabase) -> Name { db . union_signature (self . id) . name . clone () } pub fn module (self , db : & dyn HirDatabase) -> Module { Module { id : self . id . lookup (db) . container } } pub fn ty (self , db : & dyn HirDatabase) -> Type < '_ > { Type :: from_def (db , self . id) } pub fn ty_params (self , db : & dyn HirDatabase) -> Type < '_ > { Type :: from_def_params (db , self . id) } pub fn constructor_ty (self , db : & dyn HirDatabase) -> Type < '_ > { Type :: from_value_def (db , self . id) } pub fn kind (self , db : & dyn HirDatabase) -> StructKind { match self . id . fields (db) . shape { hir_def :: item_tree :: FieldsShape :: Record => StructKind :: Record , hir_def :: item_tree :: FieldsShape :: Tuple => StructKind :: Tuple , hir_def :: item_tree :: FieldsShape :: Unit => StructKind :: Unit , } } pub fn fields (self , db : & dyn HirDatabase) -> Vec < Field > { self . id . fields (db) . fields () . iter () . map (| (id , _) | Field { parent : self . into () , id }) . collect () } pub fn is_unstable (self , db : & dyn HirDatabase) -> bool { db . attrs (self . id . into ()) . is_unstable () } }
+        impl From < hir_def :: builtin_type :: BuiltinType > for BuiltinType { fn from (inner : hir_def :: builtin_type :: BuiltinType) -> Self { Self { inner } } }
     };
 }
 

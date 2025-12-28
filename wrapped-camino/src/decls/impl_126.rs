@@ -1,14 +1,13 @@
 macro_rules! deps {
     () => {
-        Iter!();
-        Utf8Path!();
+        Utf8PathBuf!();
     };
 }
 
 macro_rules! impl_126 {
     () => {
         deps!();
-        impl < 'a > IntoIterator for & 'a Utf8Path { type Item = & 'a str ; type IntoIter = Iter < 'a > ; # [inline] fn into_iter (self) -> Iter < 'a > { self . iter () } }
+        impl AsRef < str > for Utf8PathBuf { # [inline] fn as_ref (& self) -> & str { self . as_str () } }
     };
 }
 

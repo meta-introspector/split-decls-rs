@@ -7,7 +7,7 @@ macro_rules! deps {
 macro_rules! impl_77 {
     () => {
         deps!();
-        impl From < Utf8PathBuf > for PathBuf { fn from (path : Utf8PathBuf) -> PathBuf { path . 0 } }
+        impl < T : ? Sized + AsRef < str > > From < & T > for Utf8PathBuf { fn from (s : & T) -> Utf8PathBuf { Utf8PathBuf :: from (s . as_ref () . to_owned ()) } }
     };
 }
 

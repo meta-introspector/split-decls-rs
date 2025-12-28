@@ -1,13 +1,14 @@
 macro_rules! deps {
     () => {
-        FromPathError!();
+        Utf8PathBuf!();
+        Utf8Path!();
     };
 }
 
 macro_rules! impl_92 {
     () => {
         deps!();
-        impl fmt :: Display for FromPathError { fn fmt (& self , f : & mut fmt :: Formatter) -> fmt :: Result { write ! (f , "Path contains invalid UTF-8") } }
+        impl From < Utf8PathBuf > for Arc < Utf8Path > { fn from (path : Utf8PathBuf) -> Arc < Utf8Path > { let arc : Arc < Path > = Arc :: from (path . 0) ; let ptr = Arc :: into_raw (arc) as * const Utf8Path ; unsafe { Arc :: from_raw (ptr) } } }
     };
 }
 

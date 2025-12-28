@@ -1,0 +1,17 @@
+macro_rules! deps {
+    () => {
+        ComposingNormalizer!();
+        DecomposingNormalizerBorrowed!();
+        ComposingNormalizerBorrowed!();
+        Baked!();
+    };
+}
+
+macro_rules! impl_124 {
+    () => {
+        deps!();
+        impl ComposingNormalizerBorrowed < 'static > { # [doc = " Cheaply converts a [`ComposingNormalizerBorrowed<'static>`] into a [`ComposingNormalizer`]."] # [doc = ""] # [doc = " Note: Due to branching and indirection, using [`ComposingNormalizer`] might inhibit some"] # [doc = " compile-time optimizations that are possible with [`ComposingNormalizerBorrowed`]."] pub const fn static_to_owned (self) -> ComposingNormalizer { ComposingNormalizer { decomposing_normalizer : self . decomposing_normalizer . static_to_owned () , canonical_compositions : DataPayload :: from_static_ref (self . canonical_compositions) , } } # [doc = " NFC constructor using compiled data."] # [doc = ""] # [doc = " ✨ *Enabled with the `compiled_data` Cargo feature.*"] # [doc = ""] # [doc = " [📚 Help choosing a constructor](icu_provider::constructors)"] # [cfg (feature = "compiled_data")] pub const fn new_nfc () -> Self { ComposingNormalizerBorrowed { decomposing_normalizer : DecomposingNormalizerBorrowed :: new_nfd () , canonical_compositions : crate :: provider :: Baked :: SINGLETON_NORMALIZER_NFC_V1 , } } # [doc = " NFKC constructor using compiled data."] # [doc = ""] # [doc = " ✨ *Enabled with the `compiled_data` Cargo feature.*"] # [doc = ""] # [doc = " [📚 Help choosing a constructor](icu_provider::constructors)"] # [cfg (feature = "compiled_data")] pub const fn new_nfkc () -> Self { ComposingNormalizerBorrowed { decomposing_normalizer : DecomposingNormalizerBorrowed :: new_nfkd () , canonical_compositions : crate :: provider :: Baked :: SINGLETON_NORMALIZER_NFC_V1 , } } # [doc = " This is a special building block normalization for IDNA that implements parts of the Map"] # [doc = " step and the following Normalize step."] # [doc = ""] # [doc = " Warning: In this normalization, U+0345 COMBINING GREEK YPOGEGRAMMENI exhibits a behavior"] # [doc = " that no character in Unicode exhibits in NFD, NFKD, NFC, or NFKC: Case folding turns"] # [doc = " U+0345 from a reordered character into a non-reordered character before reordering happens."] # [doc = " Therefore, the output of this normalization may differ for different inputs that are"] # [doc = " canonically equivalents with each other if they differ by how U+0345 is ordered relative"] # [doc = " to other reorderable characters."] # [cfg (feature = "compiled_data")] pub (crate) const fn new_uts46 () -> Self { ComposingNormalizerBorrowed { decomposing_normalizer : DecomposingNormalizerBorrowed :: new_uts46_decomposed () , canonical_compositions : crate :: provider :: Baked :: SINGLETON_NORMALIZER_NFC_V1 , } } }
+    };
+}
+
+impl_124!()

@@ -1,0 +1,7 @@
+macro_rules! empty_depth_first {
+    () => {
+        # [doc = " Delete all empty directories reachable from `delete_dir` from empty leaves moving upward to and including `delete_dir`."] # [doc = ""] # [doc = " If any encountered directory contains a file the entire operation is aborted."] # [doc = " Please note that this is inherently racy and no attempts are made to counter that, which will allow creators to win"] # [doc = " as long as they retry."] pub fn empty_depth_first (delete_dir : PathBuf) -> std :: io :: Result < () > { if let Ok (()) = std :: fs :: remove_dir (& delete_dir) { return Ok (()) ; } let mut stack = vec ! [delete_dir] ; let mut next_to_push = Vec :: new () ; while let Some (dir_to_delete) = stack . pop () { let mut num_entries = 0 ; for entry in std :: fs :: read_dir (& dir_to_delete) ? { num_entries += 1 ; let entry = entry ? ; if entry . file_type () ? . is_dir () { next_to_push . push (entry . path ()) ; } else { return Err (std :: io :: Error :: other ("Directory not empty")) ; } } if num_entries == 0 { std :: fs :: remove_dir (& dir_to_delete) ? ; } else { stack . push (dir_to_delete) ; stack . append (& mut next_to_push) ; } } Ok (()) }
+    };
+}
+
+empty_depth_first!()

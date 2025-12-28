@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        NaiveDateTime!();
+        NaiveDate!();
+        TimeDelta!();
+    };
+}
+
+macro_rules! impl_431 {
+    () => {
+        deps!();
+        # [doc = " Subtracts another `NaiveDateTime` from the current date and time."] # [doc = " This does not overflow or underflow at all."] # [doc = ""] # [doc = " As a part of Chrono's [leap second handling](./struct.NaiveTime.html#leap-second-handling),"] # [doc = " the subtraction assumes that **there is no leap second ever**,"] # [doc = " except when any of the `NaiveDateTime`s themselves represents a leap second"] # [doc = " in which case the assumption becomes that"] # [doc = " **there are exactly one (or two) leap second(s) ever**."] # [doc = ""] # [doc = " The implementation is a wrapper around [`NaiveDateTime::signed_duration_since`]."] # [doc = ""] # [doc = " # Example"] # [doc = ""] # [doc = " ```"] # [doc = " use chrono::{NaiveDate, TimeDelta};"] # [doc = ""] # [doc = " let from_ymd = |y, m, d| NaiveDate::from_ymd_opt(y, m, d).unwrap();"] # [doc = ""] # [doc = " let d = from_ymd(2016, 7, 8);"] # [doc = " assert_eq!("] # [doc = "     d.and_hms_opt(3, 5, 7).unwrap() - d.and_hms_opt(2, 4, 6).unwrap(),"] # [doc = "     TimeDelta::try_seconds(3600 + 60 + 1).unwrap()"] # [doc = " );"] # [doc = ""] # [doc = " // July 8 is 190th day in the year 2016"] # [doc = " let d0 = from_ymd(2016, 1, 1);"] # [doc = " assert_eq!("] # [doc = "     d.and_hms_milli_opt(0, 7, 6, 500).unwrap() - d0.and_hms_opt(0, 0, 0).unwrap(),"] # [doc = "     TimeDelta::try_seconds(189 * 86_400 + 7 * 60 + 6).unwrap()"] # [doc = "         + TimeDelta::try_milliseconds(500).unwrap()"] # [doc = " );"] # [doc = " ```"] # [doc = ""] # [doc = " Leap seconds are handled, but the subtraction assumes that no other leap"] # [doc = " seconds happened."] # [doc = ""] # [doc = " ```"] # [doc = " # use chrono::{TimeDelta, NaiveDate};"] # [doc = " # let from_ymd = |y, m, d| NaiveDate::from_ymd_opt(y, m, d).unwrap();"] # [doc = " let leap = from_ymd(2015, 6, 30).and_hms_milli_opt(23, 59, 59, 1_500).unwrap();"] # [doc = " assert_eq!("] # [doc = "     leap - from_ymd(2015, 6, 30).and_hms_opt(23, 0, 0).unwrap(),"] # [doc = "     TimeDelta::try_seconds(3600).unwrap() + TimeDelta::try_milliseconds(500).unwrap()"] # [doc = " );"] # [doc = " assert_eq!("] # [doc = "     from_ymd(2015, 7, 1).and_hms_opt(1, 0, 0).unwrap() - leap,"] # [doc = "     TimeDelta::try_seconds(3600).unwrap() - TimeDelta::try_milliseconds(500).unwrap()"] # [doc = " );"] # [doc = " ```"] impl Sub < NaiveDateTime > for NaiveDateTime { type Output = TimeDelta ; # [inline] fn sub (self , rhs : NaiveDateTime) -> TimeDelta { self . signed_duration_since (rhs) } }
+    };
+}
+
+impl_431!()

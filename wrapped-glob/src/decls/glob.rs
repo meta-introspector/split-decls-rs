@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         PatternError!();
-        GlobResult!();
         MatchOptions!();
         Paths!();
+        GlobResult!();
     };
 }
 

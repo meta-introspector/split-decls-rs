@@ -1,0 +1,7 @@
+macro_rules! _link_or_copy {
+    () => {
+        fn _link_or_copy (src : & Path , dst : & Path) -> Result < () > { tracing :: debug ! ("linking {} to {}" , src . display () , dst . display ()) ; if same_file :: is_same_file (src , dst) . unwrap_or (false) { return Ok (()) ; } if fs :: symlink_metadata (dst) . is_ok () { remove_file (& dst) ? ; } let link_result = if src . is_dir () { # [cfg (unix)] use std :: os :: unix :: fs :: symlink ; # [cfg (windows)] use std :: os :: windows :: fs :: symlink_dir as symlink ; let dst_dir = dst . parent () . unwrap () ; let src = if src . starts_with (dst_dir) { src . strip_prefix (dst_dir) . unwrap () } else { src } ; symlink (src , dst) } else { if cfg ! (target_os = "macos") { fs :: copy (src , dst) . map_or_else (| e | { if e . raw_os_error () . map_or (false , | os_err | os_err == 35) { tracing :: info ! ("copy failed {e:?}. falling back to fs::hard_link") ; fs :: hard_link (src , dst) } else { Err (e) } } , | _ | Ok (()) ,) } else { fs :: hard_link (src , dst) } } ; link_result . or_else (| err | { tracing :: debug ! ("link failed {}. falling back to fs::copy" , err) ; fs :: copy (src , dst) . map (| _ | ()) }) . with_context (| | { format ! ("failed to link or copy `{}` to `{}`" , src . display () , dst . display ()) }) ? ; Ok (()) }
+    };
+}
+
+_link_or_copy!()

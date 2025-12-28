@@ -1,13 +1,14 @@
 macro_rules! deps {
     () => {
-        RawIdx!();
+        Idx!();
+        ArenaMap!();
     };
 }
 
 macro_rules! impl_2 {
     () => {
         deps!();
-        impl RawIdx { # [doc = " Constructs a [`RawIdx`] from a u32."] pub const fn from_u32 (u32 : u32) -> Self { RawIdx (u32) } # [doc = " Deconstructs a [`RawIdx`] into the underlying u32."] pub const fn into_u32 (self) -> u32 { self . 0 } }
+        impl < T , V > std :: ops :: Index < Idx < V > > for ArenaMap < Idx < V > , T > { type Output = T ; fn index (& self , idx : Idx < V >) -> & T { self . v [Self :: to_idx (idx)] . as_ref () . unwrap () } }
     };
 }
 

@@ -1,0 +1,20 @@
+macro_rules! deps {
+    () => {
+        MutableIndexAndPack!();
+        Options!();
+        Store!();
+        Error!();
+        PackId!();
+        Slots!();
+        SlotMapIndex!();
+    };
+}
+
+macro_rules! impl_35 {
+    () => {
+        deps!();
+        impl Store { # [doc = " Open the store at `objects_dir` (containing loose objects and `packs/`), which must only be a directory for"] # [doc = " the store to be created without any additional work being done."] # [doc = " `slots` defines how many multi-pack-indices as well as indices we can know about at a time, which includes"] # [doc = " the allowance for all additional object databases coming in via `alternates` as well."] # [doc = " Note that the `slots` isn't used for packs, these are included with their multi-index or index respectively."] # [doc = " For example, In a repository with 250m objects and geometric packing one would expect 27 index/pack pairs,"] # [doc = " or a single multi-pack index."] # [doc = " `replacements` is an iterator over pairs of old and new object ids for replacement support."] # [doc = " This means that when asking for object `X`, one will receive object `X-replaced` given an iterator like `Some((X, X-replaced))`."] pub fn at_opts (objects_dir : PathBuf , replacements : & mut dyn Iterator < Item = (gix_hash :: ObjectId , gix_hash :: ObjectId) > , Options { slots , object_hash , use_multi_pack_index , current_dir , } : Options ,) -> std :: io :: Result < Self > { let _span = gix_features :: trace :: detail ! ("gix_odb::Store::at()") ; let current_dir = current_dir . map_or_else (| | { gix_fs :: current_dir (false) } , Ok ,) ? ; if ! objects_dir . is_dir () { return Err (std :: io :: Error :: other (format ! ("'{}' wasn't a directory" , objects_dir . display ()))) ; } let slot_count = match slots { Slots :: Given (n) => n as usize , Slots :: AsNeededByDiskState { multiplier , minimum } => { let mut db_paths = crate :: alternate :: resolve (objects_dir . clone () , & current_dir) . map_err (std :: io :: Error :: other) ? ; db_paths . insert (0 , objects_dir . clone ()) ; let num_slots = Store :: collect_indices_and_mtime_sorted_by_size (db_paths , None , None) . map_err (std :: io :: Error :: other) ? . len () ; let candidate = ((num_slots as f32 * multiplier) as usize) . max (minimum) ; if candidate > crate :: store :: types :: PackId :: max_indices () { num_slots } else { candidate } } } ; if slot_count > crate :: store :: types :: PackId :: max_indices () { return Err (std :: io :: Error :: other (format ! ("Cannot use more than 2^15-1 slots, got {slot_count}"))) ; } let mut replacements : Vec < _ > = replacements . collect () ; replacements . sort_by (| a , b | a . 0 . cmp (& b . 0)) ; Ok (Store { current_dir , write : Default :: default () , replacements , path : objects_dir , files : Vec :: from_iter (std :: iter :: repeat_with (MutableIndexAndPack :: default) . take (slot_count)) , index : ArcSwap :: new (Arc :: new (SlotMapIndex :: default ())) , use_multi_pack_index , object_hash , num_handles_stable : Default :: default () , num_handles_unstable : Default :: default () , num_disk_state_consolidation : Default :: default () , }) } }
+    };
+}
+
+impl_35!()

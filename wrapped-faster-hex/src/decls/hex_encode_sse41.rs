@@ -1,0 +1,7 @@
+macro_rules! hex_encode_sse41 {
+    () => {
+        # [target_feature (enable = "sse4.1")] # [cfg (any (target_arch = "x86" , target_arch = "x86_64"))] unsafe fn hex_encode_sse41 (mut src : & [u8] , dst : & mut [u8] , upper_case : bool) { let ascii_zero = _mm_set1_epi8 (b'0' as i8) ; let nines = _mm_set1_epi8 (9) ; let ascii_a = if upper_case { _mm_set1_epi8 ((b'A' - 9 - 1) as i8) } else { _mm_set1_epi8 ((b'a' - 9 - 1) as i8) } ; let and4bits = _mm_set1_epi8 (0xf) ; let mut i = 0_isize ; while src . len () >= 16 { let invec = _mm_loadu_si128 (src . as_ptr () as * const _) ; let masked1 = _mm_and_si128 (invec , and4bits) ; let masked2 = _mm_and_si128 (_mm_srli_epi64 (invec , 4) , and4bits) ; let cmpmask1 = _mm_cmpgt_epi8 (masked1 , nines) ; let cmpmask2 = _mm_cmpgt_epi8 (masked2 , nines) ; let masked1 = _mm_add_epi8 (masked1 , _mm_blendv_epi8 (ascii_zero , ascii_a , cmpmask1)) ; let masked2 = _mm_add_epi8 (masked2 , _mm_blendv_epi8 (ascii_zero , ascii_a , cmpmask2)) ; let res1 = _mm_unpacklo_epi8 (masked2 , masked1) ; let res2 = _mm_unpackhi_epi8 (masked2 , masked1) ; _mm_storeu_si128 (dst . as_mut_ptr () . offset (i * 2) as * mut _ , res1) ; _mm_storeu_si128 (dst . as_mut_ptr () . offset (i * 2 + 16) as * mut _ , res2) ; src = & src [16 ..] ; i += 16 ; } let i = i as usize ; hex_encode_custom_case_fallback (src , & mut dst [i * 2 ..] , upper_case) ; }
+    };
+}
+
+hex_encode_sse41!()

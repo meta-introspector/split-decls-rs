@@ -1,0 +1,7 @@
+macro_rules! IMAGE_REL_AM_REL32_2 {
+    () => {
+        pub const IMAGE_REL_AM_REL32_2 : u16 = 0x0006 ;
+    };
+}
+
+IMAGE_REL_AM_REL32_2!()

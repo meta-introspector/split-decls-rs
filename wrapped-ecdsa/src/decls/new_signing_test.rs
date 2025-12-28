@@ -1,0 +1,7 @@
+macro_rules! new_signing_test {
+    () => {
+        # [doc = " Define ECDSA signing test."] # [macro_export] macro_rules ! new_signing_test { ($ curve : path , $ vectors : expr) => { use $ crate :: { elliptic_curve :: { Curve , CurveArithmetic , FieldBytes , NonZeroScalar , Scalar , array :: { Array , typenum :: Unsigned } , bigint :: Encoding , group :: ff :: PrimeField , } , hazmat :: sign_prehashed , } ; fn decode_scalar (bytes : & [u8]) -> Option < NonZeroScalar <$ curve >> { if bytes . len () == <$ curve as Curve >:: FieldBytesSize :: USIZE { NonZeroScalar ::<$ curve >:: from_repr (bytes . try_into () . unwrap ()) . into () } else { None } } # [test] fn ecdsa_signing () { for vector in $ vectors { let d = decode_scalar (vector . d) . expect ("invalid vector.d") ; let k = decode_scalar (vector . k) . expect ("invalid vector.m") ; assert_eq ! (<$ curve as Curve >:: FieldBytesSize :: USIZE , vector . m . len () , "invalid vector.m (must be field-sized digest)") ; let z = FieldBytes ::<$ curve >:: try_from (vector . m) . unwrap () ; let sig = sign_prehashed ::<$ curve > (& d , & k , & z) . expect ("ECDSA sign failed") . 0 ; assert_eq ! (vector . r , sig . r () . to_bytes () . as_slice ()) ; assert_eq ! (vector . s , sig . s () . to_bytes () . as_slice ()) ; } } } ; }
+    };
+}
+
+new_signing_test!()

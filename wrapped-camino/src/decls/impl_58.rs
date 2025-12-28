@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Utf8PathBuf!();
+        Utf8Component!();
     };
 }
 
 macro_rules! impl_58 {
     () => {
         deps!();
-        impl FromStr for Utf8PathBuf { type Err = Infallible ; fn from_str (s : & str) -> Result < Self , Self :: Err > { Ok (Utf8PathBuf (s . into ())) } }
+        impl fmt :: Debug for Utf8Component < '_ > { fn fmt (& self , f : & mut fmt :: Formatter) -> fmt :: Result { fmt :: Debug :: fmt (self . as_os_str () , f) } }
     };
 }
 

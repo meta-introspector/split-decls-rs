@@ -1,19 +1,17 @@
 macro_rules! deps {
     () => {
-        BorrowedSymbol!();
+        ParseContextState!();
         ParseOptions!();
-        Symbol!();
+        ParseContext!();
+        Result!();
+        Error!();
     };
 }
 
 macro_rules! impl_18 {
     () => {
         deps!();
-        impl < 'a , T > Symbol < & 'a T > where T : AsRef < [u8] > + ? Sized , { # [doc = " Parse a mangled symbol from input and return it and the trailing tail of"] # [doc = " bytes that come after the symbol, with the default options."] # [doc = ""] # [doc = " While `Symbol::new` will return an error if there is unexpected trailing"] # [doc = " bytes, `with_tail` simply returns the trailing bytes along with the"] # [doc = " parsed symbol."] # [doc = ""] # [doc = " ```"] # [doc = " use cpp_demangle::BorrowedSymbol;"] # [doc = ""] # [doc = " let mangled = b\"_ZN5space3fooEibc and some trailing junk\";"] # [doc = ""] # [doc = " let (sym, tail) = BorrowedSymbol::with_tail(&mangled[..])"] # [doc = "     .expect(\"Could not parse mangled symbol!\");"] # [doc = ""] # [doc = " assert_eq!(tail, b\" and some trailing junk\");"] # [doc = ""] # [doc = " let demangled = sym.demangle().unwrap();"] # [doc = " assert_eq!(demangled, \"space::foo(int, bool, char)\");"] # [doc = " ```"] # [inline] pub fn with_tail (input : & 'a T) -> Result < (BorrowedSymbol < 'a > , & 'a [u8]) > { Self :: with_tail_and_options (input , & Default :: default ()) } # [doc = " Parse a mangled symbol from input and return it and the trailing tail of"] # [doc = " bytes that come after the symbol."] # [doc = ""] # [doc = " While `Symbol::new_with_options` will return an error if there is"] # [doc = " unexpected trailing bytes, `with_tail_and_options` simply returns the"] # [doc = " trailing bytes along with the parsed symbol."] # [doc = ""] # [doc = " ```"] # [doc = " use cpp_demangle::{BorrowedSymbol, ParseOptions};"] # [doc = ""] # [doc = " let mangled = b\"_ZN5space3fooEibc and some trailing junk\";"] # [doc = ""] # [doc = " let parse_options = ParseOptions::default()"] # [doc = "     .recursion_limit(1024);"] # [doc = ""] # [doc = " let (sym, tail) = BorrowedSymbol::with_tail_and_options(&mangled[..], &parse_options)"] # [doc = "     .expect(\"Could not parse mangled symbol!\");"] # [doc = ""] # [doc = " assert_eq!(tail, b\" and some trailing junk\");"] # [doc = ""] # [doc = " let demangled = sym.demangle().unwrap();"] # [doc = " assert_eq!(demangled, \"space::foo(int, bool, char)\");"] # [doc = " ```"] pub fn with_tail_and_options (input : & 'a T , options : & ParseOptions ,) -> Result < (BorrowedSymbol < 'a > , & 'a [u8]) > { let mut substitutions = subs :: SubstitutionTable :: new () ; let ctx = ParseContext :: new (* options) ; let idx_str = IndexStr :: new (input . as_ref ()) ; let (parsed , tail) = ast :: MangledName :: parse (& ctx , & mut substitutions , idx_str) ? ; debug_assert ! (ctx . recursion_level () == 0) ; let symbol = Symbol { raw : input . as_ref () , substitutions : substitutions , parsed : parsed , } ; log ! ("Successfully parsed '{}' as
-
-AST = {:#?}
-
-substitutions = {:#?}" , String :: from_utf8_lossy (symbol . raw) , symbol . parsed , symbol . substitutions) ; Ok ((symbol , tail . into ())) } }
+        impl ParseContext { # [doc = " Construct a new `ParseContext`."] pub fn new (options : ParseOptions) -> ParseContext { ParseContext { max_recursion : options . recursion_limit . map (| v | v . get ()) . unwrap_or (96) , state : Cell :: new (ParseContextState :: default ()) , } } # [doc = " Get the current recursion level for this context."] pub fn recursion_level (& self) -> u32 { self . state . get () . recursion_level } # [inline] fn enter_recursion (& self) -> error :: Result < () > { let mut state = self . state . get () ; let new_recursion_level = state . recursion_level + 1 ; if new_recursion_level >= self . max_recursion { log ! ("Hit too much recursion at level {}" , self . max_recursion) ; Err (error :: Error :: TooMuchRecursion) } else { state . recursion_level = new_recursion_level ; self . state . set (state) ; Ok (()) } } # [inline] fn exit_recursion (& self) { let mut state = self . state . get () ; debug_assert ! (state . recursion_level >= 1) ; state . recursion_level -= 1 ; self . state . set (state) ; } # [inline] fn in_conversion (& self) -> bool { self . state . get () . in_conversion } fn set_in_conversion (& self , in_conversion : bool) -> bool { let mut state = self . state . get () ; let previously_in_conversion = state . in_conversion ; state . in_conversion = in_conversion ; self . state . set (state) ; previously_in_conversion } }
     };
 }
 

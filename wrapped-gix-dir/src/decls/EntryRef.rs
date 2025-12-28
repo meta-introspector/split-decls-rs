@@ -1,6 +1,10 @@
 macro_rules! deps {
     () => {
+        Status!();
         Entry!();
+        PathspecMatch!();
+        Property!();
+        Kind!();
     };
 }
 

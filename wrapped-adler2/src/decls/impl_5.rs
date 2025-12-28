@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Adler32!();
+        U32X4!();
     };
 }
 
 macro_rules! impl_5 {
     () => {
         deps!();
-        impl Hasher for Adler32 { # [inline] fn finish (& self) -> u64 { u64 :: from (self . checksum ()) } fn write (& mut self , bytes : & [u8]) { self . write_slice (bytes) ; } }
+        impl RemAssign < u32 > for U32X4 { # [inline] fn rem_assign (& mut self , quotient : u32) { self . 0 [0] %= quotient ; self . 0 [1] %= quotient ; self . 0 [2] %= quotient ; self . 0 [3] %= quotient ; } }
     };
 }
 

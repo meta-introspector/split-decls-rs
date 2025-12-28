@@ -1,16 +1,14 @@
 macro_rules! deps {
     () => {
-        VariantId!();
-        ModuleId!();
-        HasModule!();
-        DefWithBodyId!();
+        ImportAliasDisplay!();
+        ImportAlias!();
     };
 }
 
 macro_rules! impl_169 {
     () => {
         deps!();
-        impl HasModule for DefWithBodyId { fn module (& self , db : & dyn DefDatabase) -> ModuleId { match self { DefWithBodyId :: FunctionId (it) => it . module (db) , DefWithBodyId :: StaticId (it) => it . module (db) , DefWithBodyId :: ConstId (it) => it . module (db) , DefWithBodyId :: VariantId (it) => it . module (db) , } } }
+        impl fmt :: Display for ImportAliasDisplay < '_ > { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { match self . value { ImportAlias :: Underscore => f . write_str ("_") , ImportAlias :: Alias (name) => fmt :: Display :: fmt (& name . display_no_db (self . edition) , f) , } } }
     };
 }
 

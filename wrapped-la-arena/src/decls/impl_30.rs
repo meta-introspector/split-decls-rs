@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Arena!();
+        Idx!();
     };
 }
 
 macro_rules! impl_30 {
     () => {
         deps!();
-        impl < T > AsMut < [T] > for Arena < T > { fn as_mut (& mut self) -> & mut [T] { self . data . as_mut () } }
+        impl < T > Copy for Idx < T > { }
     };
 }
 

@@ -1,6 +1,6 @@
 macro_rules! body {
     () => {
-        pub mod body ;
+        mod body ;
     };
 }
 

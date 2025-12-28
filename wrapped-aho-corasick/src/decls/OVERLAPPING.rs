@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        SearchTest!();
+    };
+}
+
+macro_rules! OVERLAPPING {
+    () => {
+        deps!();
+        # [doc = " Tests for overlapping match semantics."] # [doc = ""] # [doc = " This only supports standard match semantics, since leftmost-{first,longest}"] # [doc = " do not support overlapping matches."] const OVERLAPPING : & 'static [SearchTest] = & [t ! (over000 , & ["abcd" , "bcd" , "cd" , "b"] , "abcd" , & [(3 , 1 , 2) , (0 , 0 , 4) , (1 , 1 , 4) , (2 , 2 , 4) ,]) , t ! (over010 , & ["bcd" , "cd" , "b" , "abcd"] , "abcd" , & [(2 , 1 , 2) , (3 , 0 , 4) , (0 , 1 , 4) , (1 , 2 , 4) ,]) , t ! (over020 , & ["abcd" , "bcd" , "cd"] , "abcd" , & [(0 , 0 , 4) , (1 , 1 , 4) , (2 , 2 , 4) ,]) , t ! (over030 , & ["bcd" , "abcd" , "cd"] , "abcd" , & [(1 , 0 , 4) , (0 , 1 , 4) , (2 , 2 , 4) ,]) , t ! (over040 , & ["bcd" , "cd" , "abcd"] , "abcd" , & [(2 , 0 , 4) , (0 , 1 , 4) , (1 , 2 , 4) ,]) , t ! (over050 , & ["abc" , "bc"] , "zazabcz" , & [(0 , 3 , 6) , (1 , 4 , 6) ,]) , t ! (over100 , & ["ab" , "ba"] , "abababa" , & [(0 , 0 , 2) , (1 , 1 , 3) , (0 , 2 , 4) , (1 , 3 , 5) , (0 , 4 , 6) , (1 , 5 , 7) ,]) , t ! (over200 , & ["foo" , "foo"] , "foobarfoo" , & [(0 , 0 , 3) , (1 , 0 , 3) , (0 , 6 , 9) , (1 , 6 , 9) ,]) , t ! (over300 , & ["" , ""] , "" , & [(0 , 0 , 0) , (1 , 0 , 0) ,]) , t ! (over310 , & ["" , ""] , "a" , & [(0 , 0 , 0) , (1 , 0 , 0) , (0 , 1 , 1) , (1 , 1 , 1) ,]) , t ! (over320 , & ["" , "a"] , "a" , & [(0 , 0 , 0) , (1 , 0 , 1) , (0 , 1 , 1) ,]) , t ! (over330 , & ["" , "a" , ""] , "a" , & [(0 , 0 , 0) , (2 , 0 , 0) , (1 , 0 , 1) , (0 , 1 , 1) , (2 , 1 , 1) ,]) , t ! (over340 , & ["a" , "" , ""] , "a" , & [(1 , 0 , 0) , (2 , 0 , 0) , (0 , 0 , 1) , (1 , 1 , 1) , (2 , 1 , 1) ,]) , t ! (over350 , & ["" , "" , "a"] , "a" , & [(0 , 0 , 0) , (1 , 0 , 0) , (2 , 0 , 1) , (0 , 1 , 1) , (1 , 1 , 1) ,]) , t ! (over360 , & ["foo" , "foofoo"] , "foofoo" , & [(0 , 0 , 3) , (1 , 0 , 6) , (0 , 3 , 6)]) ,] ;
+    };
+}
+
+OVERLAPPING!()

@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Union!();
+        Block!();
     };
 }
 
 macro_rules! impl_37 {
     () => {
         deps!();
-        impl < 'a > FusedIterator for Union < 'a > { }
+        impl BitAndAssign for Block { # [inline] fn bitand_assign (& mut self , other : Self) { unsafe { self . 0 = _mm256_and_si256 (self . 0 , other . 0) ; } } }
     };
 }
 

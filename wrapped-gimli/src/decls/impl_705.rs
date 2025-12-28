@@ -1,0 +1,28 @@
+macro_rules! deps {
+    () => {
+        SectionId!();
+        Writer!();
+        DebugInfo!();
+        DebugLocLists!();
+        DebugLoc!();
+        DebugRanges!();
+        DebugFrame!();
+        DebugLineStr!();
+        Result!();
+        EhFrame!();
+        DebugLine!();
+        DebugRngLists!();
+        DebugStr!();
+        DebugAbbrev!();
+        Sections!();
+    };
+}
+
+macro_rules! impl_705 {
+    () => {
+        deps!();
+        impl < W : Writer > Sections < W > { # [doc = " Get the section with the given `id`."] pub fn get (& self , id : SectionId) -> Option < & W > { match id { SectionId :: DebugAbbrev => Some (& self . debug_abbrev . 0) , SectionId :: DebugInfo => Some (& self . debug_info . 0) , SectionId :: DebugLine => Some (& self . debug_line . 0) , SectionId :: DebugLineStr => Some (& self . debug_line_str . 0) , SectionId :: DebugRanges => Some (& self . debug_ranges . 0) , SectionId :: DebugRngLists => Some (& self . debug_rnglists . 0) , SectionId :: DebugLoc => Some (& self . debug_loc . 0) , SectionId :: DebugLocLists => Some (& self . debug_loclists . 0) , SectionId :: DebugStr => Some (& self . debug_str . 0) , SectionId :: DebugFrame => Some (& self . debug_frame . 0) , SectionId :: EhFrame => Some (& self . eh_frame . 0) , _ => None , } } # [doc = " Get the section with the given `id`."] pub fn get_mut (& mut self , id : SectionId) -> Option < & mut W > { match id { SectionId :: DebugAbbrev => Some (& mut self . debug_abbrev . 0) , SectionId :: DebugInfo => Some (& mut self . debug_info . 0) , SectionId :: DebugLine => Some (& mut self . debug_line . 0) , SectionId :: DebugLineStr => Some (& mut self . debug_line_str . 0) , SectionId :: DebugRanges => Some (& mut self . debug_ranges . 0) , SectionId :: DebugRngLists => Some (& mut self . debug_rnglists . 0) , SectionId :: DebugLoc => Some (& mut self . debug_loc . 0) , SectionId :: DebugLocLists => Some (& mut self . debug_loclists . 0) , SectionId :: DebugStr => Some (& mut self . debug_str . 0) , SectionId :: DebugFrame => Some (& mut self . debug_frame . 0) , SectionId :: EhFrame => Some (& mut self . eh_frame . 0) , _ => None , } } # [doc = " For each section, call `f` once with a shared reference."] pub fn for_each < 'a , F , E > (& 'a self , mut f : F) -> result :: Result < () , E > where F : FnMut (SectionId , & 'a W) -> result :: Result < () , E > , { macro_rules ! f { ($ s : expr) => { f ($ s . id () , &$ s) } ; } f ! (self . debug_abbrev) ? ; f ! (self . debug_str) ? ; f ! (self . debug_line_str) ? ; f ! (self . debug_line) ? ; f ! (self . debug_ranges) ? ; f ! (self . debug_rnglists) ? ; f ! (self . debug_loc) ? ; f ! (self . debug_loclists) ? ; f ! (self . debug_info) ? ; f ! (self . debug_frame) ? ; f ! (self . eh_frame) ? ; Ok (()) } # [doc = " For each section, call `f` once with a mutable reference."] pub fn for_each_mut < 'a , F , E > (& 'a mut self , mut f : F) -> result :: Result < () , E > where F : FnMut (SectionId , & 'a mut W) -> result :: Result < () , E > , { macro_rules ! f { ($ s : expr) => { f ($ s . id () , & mut $ s) } ; } f ! (self . debug_abbrev) ? ; f ! (self . debug_str) ? ; f ! (self . debug_line_str) ? ; f ! (self . debug_line) ? ; f ! (self . debug_ranges) ? ; f ! (self . debug_rnglists) ? ; f ! (self . debug_loc) ? ; f ! (self . debug_loclists) ? ; f ! (self . debug_info) ? ; f ! (self . debug_frame) ? ; f ! (self . eh_frame) ? ; Ok (()) } }
+    };
+}
+
+impl_705!()

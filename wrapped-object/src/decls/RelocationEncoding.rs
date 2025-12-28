@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        RelocationKind!();
+    };
+}
+
+macro_rules! RelocationEncoding {
+    () => {
+        deps!();
+        # [doc = " Information about how the result of the relocation operation is encoded in the place."] # [doc = ""] # [doc = " This is usually architecture specific, such as specifying an addressing mode or"] # [doc = " a specific instruction."] # [derive (Debug , Clone , Copy , PartialEq , Eq , Hash)] # [non_exhaustive] pub enum RelocationEncoding { # [doc = " The relocation encoding is unknown."] Unknown , # [doc = " Generic encoding."] Generic , # [doc = " x86 sign extension at runtime."] # [doc = ""] # [doc = " Used with `RelocationKind::Absolute`."] X86Signed , # [doc = " x86 rip-relative addressing."] # [doc = ""] # [doc = " The `RelocationKind` must be PC relative."] X86RipRelative , # [doc = " x86 rip-relative addressing in movq instruction."] # [doc = ""] # [doc = " The `RelocationKind` must be PC relative."] X86RipRelativeMovq , # [doc = " x86 branch instruction."] # [doc = ""] # [doc = " The `RelocationKind` must be PC relative."] X86Branch , # [doc = " s390x PC-relative offset shifted right by one bit."] # [doc = ""] # [doc = " The `RelocationKind` must be PC relative."] S390xDbl , # [doc = " AArch64 call target."] # [doc = ""] # [doc = " The `RelocationKind` must be PC relative."] AArch64Call , # [doc = " LoongArch branch offset with two trailing zeros."] # [doc = ""] # [doc = " The `RelocationKind` must be PC relative."] LoongArchBranch , # [doc = " SHARC+ 48-bit Type A instruction"] # [doc = ""] # [doc = " Represents these possible variants, each with a corresponding"] # [doc = " `R_SHARC_*` constant:"] # [doc = ""] # [doc = " * 24-bit absolute address"] # [doc = " * 32-bit absolute address"] # [doc = " * 6-bit relative address"] # [doc = " * 24-bit relative address"] # [doc = " * 6-bit absolute address in the immediate value field"] # [doc = " * 16-bit absolute address in the immediate value field"] SharcTypeA , # [doc = " SHARC+ 32-bit Type B instruction"] # [doc = ""] # [doc = " Represents these possible variants, each with a corresponding"] # [doc = " `R_SHARC_*` constant:"] # [doc = ""] # [doc = " * 6-bit absolute address in the immediate value field"] # [doc = " * 7-bit absolute address in the immediate value field"] # [doc = " * 16-bit absolute address"] # [doc = " * 6-bit relative address"] SharcTypeB , # [doc = " E2K 64-bit value stored in two LTS"] # [doc = ""] # [doc = " Memory representation:"] # [doc = " ```text"] # [doc = " 0: LTS1 = value[63:32]"] # [doc = " 4: LTS0 = value[31:0]"] # [doc = " ```"] E2KLit , # [doc = " E2K 28-bit value stored in CS0"] E2KDisp , }
+    };
+}
+
+RelocationEncoding!()

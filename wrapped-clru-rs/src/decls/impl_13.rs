@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        CLruNode!();
-        CLruCacheIter!();
+        FixedSizeListNode!();
+        FixedSizeListIterMut!();
     };
 }
 
 macro_rules! impl_13 {
     () => {
         deps!();
-        impl < 'a , K , V > Iterator for CLruCacheIter < 'a , K , V > { type Item = (& 'a K , & 'a V) ; fn next (& mut self) -> Option < Self :: Item > { self . iter . next () . map (| (_ , CLruNode { key , value }) | (key . borrow () , value)) } fn size_hint (& self) -> (usize , Option < usize >) { self . iter . size_hint () } }
+        impl < 'a , T > FixedSizeListIterMut < 'a , T > { # [allow (unsafe_code)] fn new (slice : & 'a mut [Option < FixedSizeListNode < T > >] , front : usize , back : usize , len : usize ,) -> Self { let ptr = slice . as_mut_ptr () ; Self { ptr : unsafe { NonNull :: new_unchecked (ptr) } , front , back , len , _marker : std :: marker :: PhantomData , } } }
     };
 }
 

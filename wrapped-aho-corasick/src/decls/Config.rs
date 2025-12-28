@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        MatchKind!();
+        PatternID!();
+        ForceAlgorithm!();
+    };
+}
+
+macro_rules! Config {
+    () => {
+        deps!();
+        # [doc = " The configuration for a packed multiple pattern searcher."] # [doc = ""] # [doc = " The configuration is currently limited only to being able to select the"] # [doc = " match semantics (leftmost-first or leftmost-longest) of a searcher. In the"] # [doc = " future, more knobs may be made available."] # [doc = ""] # [doc = " A configuration produces a [`packed::Builder`](Builder), which in turn can"] # [doc = " be used to construct a [`packed::Searcher`](Searcher) for searching."] # [doc = ""] # [doc = " # Example"] # [doc = ""] # [doc = " This example shows how to use leftmost-longest semantics instead of the"] # [doc = " default (leftmost-first)."] # [doc = ""] # [doc = " ```"] # [doc = " use aho_corasick::{packed::{Config, MatchKind}, PatternID};"] # [doc = ""] # [doc = " # fn example() -> Option<()> {"] # [doc = " let searcher = Config::new()"] # [doc = "     .match_kind(MatchKind::LeftmostLongest)"] # [doc = "     .builder()"] # [doc = "     .add(\"foo\")"] # [doc = "     .add(\"foobar\")"] # [doc = "     .build()?;"] # [doc = " let matches: Vec<PatternID> = searcher"] # [doc = "     .find_iter(\"foobar\")"] # [doc = "     .map(|mat| mat.pattern())"] # [doc = "     .collect();"] # [doc = " assert_eq!(vec![PatternID::must(1)], matches);"] # [doc = " # Some(()) }"] # [doc = " # if cfg!(all(feature = \"std\", any("] # [doc = " #     target_arch = \"x86_64\", target_arch = \"aarch64\","] # [doc = " # ))) {"] # [doc = " #     example().unwrap()"] # [doc = " # } else {"] # [doc = " #     assert!(example().is_none());"] # [doc = " # }"] # [doc = " ```"] # [derive (Clone , Debug)] pub struct Config { kind : MatchKind , force : Option < ForceAlgorithm > , only_teddy_fat : Option < bool > , only_teddy_256bit : Option < bool > , heuristic_pattern_limits : bool , }
+    };
+}
+
+Config!()

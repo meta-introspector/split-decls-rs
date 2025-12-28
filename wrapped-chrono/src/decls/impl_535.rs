@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        TimeZone!();
+        FixedOffset!();
+    };
+}
+
+macro_rules! impl_535 {
+    () => {
+        deps!();
+        impl FixedOffset { # [doc = " Makes a new `FixedOffset` for the Eastern Hemisphere with given timezone difference."] # [doc = " The negative `secs` means the Western Hemisphere."] # [doc = ""] # [doc = " Panics on the out-of-bound `secs`."] # [deprecated (since = "0.4.23" , note = "use `east_opt()` instead")] # [must_use] pub fn east (secs : i32) -> FixedOffset { FixedOffset :: east_opt (secs) . expect ("FixedOffset::east out of bounds") } # [doc = " Makes a new `FixedOffset` for the Eastern Hemisphere with given timezone difference."] # [doc = " The negative `secs` means the Western Hemisphere."] # [doc = ""] # [doc = " Returns `None` on the out-of-bound `secs`."] # [doc = ""] # [doc = " # Example"] # [doc = ""] # [doc = " ```"] # [doc = " # #[cfg(feature = \"alloc\")] {"] # [doc = " use chrono::{FixedOffset, TimeZone};"] # [doc = " let hour = 3600;"] # [doc = " let datetime ="] # [doc = "     FixedOffset::east_opt(5 * hour).unwrap().with_ymd_and_hms(2016, 11, 08, 0, 0, 0).unwrap();"] # [doc = " assert_eq!(&datetime.to_rfc3339(), \"2016-11-08T00:00:00+05:00\")"] # [doc = " # }"] # [doc = " ```"] # [must_use] pub const fn east_opt (secs : i32) -> Option < FixedOffset > { if - 86_400 < secs && secs < 86_400 { Some (FixedOffset { local_minus_utc : secs }) } else { None } } # [doc = " Makes a new `FixedOffset` for the Western Hemisphere with given timezone difference."] # [doc = " The negative `secs` means the Eastern Hemisphere."] # [doc = ""] # [doc = " Panics on the out-of-bound `secs`."] # [deprecated (since = "0.4.23" , note = "use `west_opt()` instead")] # [must_use] pub fn west (secs : i32) -> FixedOffset { FixedOffset :: west_opt (secs) . expect ("FixedOffset::west out of bounds") } # [doc = " Makes a new `FixedOffset` for the Western Hemisphere with given timezone difference."] # [doc = " The negative `secs` means the Eastern Hemisphere."] # [doc = ""] # [doc = " Returns `None` on the out-of-bound `secs`."] # [doc = ""] # [doc = " # Example"] # [doc = ""] # [doc = " ```"] # [doc = " # #[cfg(feature = \"alloc\")] {"] # [doc = " use chrono::{FixedOffset, TimeZone};"] # [doc = " let hour = 3600;"] # [doc = " let datetime ="] # [doc = "     FixedOffset::west_opt(5 * hour).unwrap().with_ymd_and_hms(2016, 11, 08, 0, 0, 0).unwrap();"] # [doc = " assert_eq!(&datetime.to_rfc3339(), \"2016-11-08T00:00:00-05:00\")"] # [doc = " # }"] # [doc = " ```"] # [must_use] pub const fn west_opt (secs : i32) -> Option < FixedOffset > { if - 86_400 < secs && secs < 86_400 { Some (FixedOffset { local_minus_utc : - secs }) } else { None } } # [doc = " Returns the number of seconds to add to convert from UTC to the local time."] # [inline] pub const fn local_minus_utc (& self) -> i32 { self . local_minus_utc } # [doc = " Returns the number of seconds to add to convert from the local time to UTC."] # [inline] pub const fn utc_minus_local (& self) -> i32 { - self . local_minus_utc } }
+    };
+}
+
+impl_535!()

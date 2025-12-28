@@ -1,0 +1,7 @@
+macro_rules! IMAGE_RESOURCE_DATA_IS_DIRECTORY {
+    () => {
+        pub const IMAGE_RESOURCE_DATA_IS_DIRECTORY : u32 = 0x8000_0000 ;
+    };
+}
+
+IMAGE_RESOURCE_DATA_IS_DIRECTORY!()

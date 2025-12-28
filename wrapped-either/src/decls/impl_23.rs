@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Either!();
+        IterEither!();
     };
 }
 
 macro_rules! impl_23 {
     () => {
         deps!();
-        # [cfg (any (test , feature = "std"))] # [doc = " `Either<L, R>` implements `Read` if both `L` and `R` do."] # [doc = ""] # [doc = " Requires crate feature `\"std\"`"] impl < L , R > Read for Either < L , R > where L : Read , R : Read , { fn read (& mut self , buf : & mut [u8]) -> io :: Result < usize > { for_both ! (self , inner => inner . read (buf)) } fn read_exact (& mut self , buf : & mut [u8]) -> io :: Result < () > { for_both ! (self , inner => inner . read_exact (buf)) } fn read_to_end (& mut self , buf : & mut std :: vec :: Vec < u8 >) -> io :: Result < usize > { for_both ! (self , inner => inner . read_to_end (buf)) } fn read_to_string (& mut self , buf : & mut std :: string :: String) -> io :: Result < usize > { for_both ! (self , inner => inner . read_to_string (buf)) } }
+        impl < L , R > DoubleEndedIterator for IterEither < L , R > where L : DoubleEndedIterator , R : DoubleEndedIterator , { fn next_back (& mut self) -> Option < Self :: Item > { Some (map_either ! (self . inner , ref mut inner => inner . next_back () ?)) } fn nth_back (& mut self , n : usize) -> Option < Self :: Item > { Some (map_either ! (self . inner , ref mut inner => inner . nth_back (n) ?)) } fn rfold < Acc , G > (self , init : Acc , f : G) -> Acc where G : FnMut (Acc , Self :: Item) -> Acc , { wrap_either ! (self . inner => . rfold (init , f)) } fn rfind < P > (& mut self , predicate : P) -> Option < Self :: Item > where P : FnMut (& Self :: Item) -> bool , { wrap_either ! (& mut self . inner => . rfind (predicate)) } }
     };
 }
 

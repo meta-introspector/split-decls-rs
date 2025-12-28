@@ -1,0 +1,17 @@
+macro_rules! deps {
+    () => {
+        MockItemContent!();
+        Builder!();
+        MockItemModule!();
+        MockableModule!();
+    };
+}
+
+macro_rules! impl_59 {
+    () => {
+        deps!();
+        impl From < MockableModule > for MockItemModule { fn from (mod_ : MockableModule) -> MockItemModule { let mock_ident = mod_ . mock_ident . clone () ; let orig_ident = mod_ . orig_ident ; let mut content = Vec :: new () ; for item in mod_ . content . into_iter () { let span = item . span () ; match item { Item :: ExternCrate (_) | Item :: Impl (_) => { } , Item :: Static (is) => { content . push (MockItemContent :: Tokens (is . into_token_stream ())) ; } , Item :: Const (ic) => { content . push (MockItemContent :: Tokens (ic . into_token_stream ())) ; } , Item :: Fn (f) => { let mf = mock_function :: Builder :: new (& f . sig , & f . vis) . attrs (& f . attrs) . parent (& mock_ident) . levels (1) . call_levels (0) . build () ; content . push (MockItemContent :: Fn (Box :: new (mf))) ; } , Item :: ForeignMod (ifm) => { for item in ifm . items { if let ForeignItem :: Fn (mut f) = item { f . sig . unsafety = Some (Token ! [unsafe] (f . span ())) ; let needs_c_unwind = if let Some (n) = & ifm . abi . name { n . value () == "C" } else { false } ; f . sig . abi = Some (if needs_c_unwind { Abi { extern_token : ifm . abi . extern_token , name : Some (LitStr :: new ("C-unwind" , ifm . abi . name . span ())) } } else { ifm . abi . clone () }) ; let mf = mock_function :: Builder :: new (& f . sig , & f . vis) . attrs (& f . attrs) . parent (& mock_ident) . levels (1) . call_levels (0) . build () ; content . push (MockItemContent :: Fn (Box :: new (mf))) ; } else { compile_error (item . span () , "Mockall does not yet support  this type in this position.  Please open an issue with your use case at https://github.com/asomers/mockall") ; } } } , Item :: Mod (_) | Item :: Struct (_) | Item :: Enum (_) | Item :: Union (_) | Item :: Trait (_) => { compile_error (span , "Mockall does not yet support deriving nested mocks") ; } , Item :: Type (ty) => { content . push (MockItemContent :: Tokens (ty . into_token_stream ())) ; } , Item :: TraitAlias (ta) => { content . push (MockItemContent :: Tokens (ta . into_token_stream ())) ; } , Item :: Use (u) => { content . push (MockItemContent :: Tokens (u . into_token_stream ())) ; } , _ => compile_error (span , "Unsupported item") } } MockItemModule { attrs : mod_ . attrs , vis : mod_ . vis , mock_ident : mod_ . mock_ident , orig_ident , content } } }
+    };
+}
+
+impl_59!()

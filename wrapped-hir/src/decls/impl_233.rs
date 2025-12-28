@@ -1,14 +1,18 @@
 macro_rules! deps {
     () => {
-        AssocItem!();
-        PathCandidateCallback!();
+        Union!();
+        Struct!();
+        VariantDef!();
+        Adt!();
+        ModuleDef!();
+        Variant!();
     };
 }
 
 macro_rules! impl_233 {
     () => {
         deps!();
-        impl < F > PathCandidateCallback for F where F : FnMut (AssocItem) -> ControlFlow < () > , { fn on_inherent_item (& mut self , item : AssocItem) -> ControlFlow < () > { self (item) } fn on_trait_item (& mut self , item : AssocItem) -> ControlFlow < () > { self (item) } }
+        impl From < VariantDef > for ModuleDef { fn from (var : VariantDef) -> Self { match var { VariantDef :: Struct (t) => Adt :: from (t) . into () , VariantDef :: Union (t) => Adt :: from (t) . into () , VariantDef :: Variant (t) => t . into () , } } }
     };
 }
 

@@ -1,0 +1,7 @@
+macro_rules! IMAGE_REL_ALPHA_INLINE_REFLONG {
+    () => {
+        pub const IMAGE_REL_ALPHA_INLINE_REFLONG : u16 = 0x0009 ;
+    };
+}
+
+IMAGE_REL_ALPHA_INLINE_REFLONG!()

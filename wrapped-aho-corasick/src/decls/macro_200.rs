@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        Config!();
+        MatchKind!();
+    };
+}
+
+macro_rules! macro_200 {
+    () => {
+        deps!();
+        testconfig ! (search_teddy_fat_leftmost_longest , PACKED_LEFTMOST_LONGEST , | c : & mut Config | { c . only_teddy (true) . match_kind (MatchKind :: LeftmostLongest) ; # [cfg (target_arch = "x86_64")] if std :: is_x86_feature_detected ! ("avx2") { c . only_teddy_fat (Some (true)) ; } }) ;
+    };
+}
+
+macro_200!()

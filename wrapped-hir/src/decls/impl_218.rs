@@ -1,16 +1,13 @@
 macro_rules! deps {
     () => {
-        HasContainer!();
-        ItemContainer!();
-        Module!();
-        Struct!();
+        Static!();
     };
 }
 
 macro_rules! impl_218 {
     () => {
         deps!();
-        impl HasContainer for Struct { fn container (& self , db : & dyn HirDatabase) -> ItemContainer { ItemContainer :: Module (Module { id : self . id . lookup (db) . container }) } }
+        impl < 'db > HirDisplay < 'db > for Static { fn hir_fmt (& self , f : & mut HirFormatter < '_ , 'db >) -> Result < () , HirDisplayError > { write_visibility (self . module (f . db) . id , self . visibility (f . db) , f) ? ; let data = f . db . static_signature (self . id) ; f . write_str ("static ") ? ; if data . flags . contains (StaticFlags :: MUTABLE) { f . write_str ("mut ") ? ; } write ! (f , "{}: " , data . name . display (f . db , f . edition ())) ? ; data . type_ref . hir_fmt (f , & data . store) ? ; Ok (()) } }
     };
 }
 

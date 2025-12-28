@@ -1,5 +1,6 @@
 macro_rules! deps {
     () => {
+        GenericArray!();
         ArrayLength!();
     };
 }
@@ -7,7 +8,7 @@ macro_rules! deps {
 macro_rules! impl_13 {
     () => {
         deps!();
-        unsafe impl ArrayLength for UTerm { # [doc (hidden)] type ArrayType < T > = [T ; 0] ; }
+        impl < T , N : ArrayLength + ArraySize > AsRef < HybridArray < T , N > > for GenericArray < T , N > { # [inline (always)] fn as_ref (& self) -> & HybridArray < T , N > { self . as_ha0_4 () } }
     };
 }
 

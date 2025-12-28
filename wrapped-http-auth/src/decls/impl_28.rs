@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        ParamValue!();
+        Qop!();
     };
 }
 
 macro_rules! impl_28 {
     () => {
         deps!();
-        impl std :: fmt :: Debug for ParamValue < '_ > { fn fmt (& self , f : & mut std :: fmt :: Formatter < '_ >) -> std :: fmt :: Result { write ! (f , "\"{}\"" , self . escaped) } }
+        impl Qop { # [doc = " Returns a string form as expected over the wire."] fn as_str (self) -> & 'static str { match self { Qop :: Auth => "auth" , Qop :: AuthInt => "auth-int" , } } }
     };
 }
 

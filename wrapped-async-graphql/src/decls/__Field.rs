@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        Field!();
+        MetaField!();
+        Registry!();
+    };
+}
+
+macro_rules! __Field {
+    () => {
+        deps!();
+        pub struct __Field < 'a > { pub registry : & 'a registry :: Registry , pub visible_types : & 'a HashSet < & 'a str > , pub field : & 'a registry :: MetaField , }
+    };
+}
+
+__Field!()

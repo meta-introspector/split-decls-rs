@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        Issue!();
+        Error!();
+        Fix!();
+    };
+}
+
+macro_rules! impl_37 {
+    () => {
+        deps!();
+        impl match_lhs :: Outcome < '_ , '_ > { # [doc = " Validate all mappings or dissolve them into an error stating the discovered issues."] # [doc = " Return `(modified self, issues)` providing a fixed-up set of mappings in `self` with the fixed `issues`"] # [doc = " provided as part of it."] # [doc = " Terminal issues are communicated using the [`Error`] type accordingly."] pub fn validated (mut self) -> Result < (Self , Vec < Fix >) , Error > { let mut sources_by_destinations = BTreeMap :: new () ; for (dst , (spec_index , src)) in self . mappings . iter () . filter_map (| m | m . rhs . as_ref () . map (| dst | (dst . as_ref () , (m . spec_index , & m . lhs)))) { let sources = sources_by_destinations . entry (dst) . or_insert_with (Vec :: new) ; if ! sources . iter () . any (| (_ , lhs) | lhs == & src) { sources . push ((spec_index , src)) ; } } let mut issues = Vec :: new () ; for (dst , conflicting_sources) in sources_by_destinations . into_iter () . filter (| (_ , v) | v . len () > 1) { issues . push (Issue :: Conflict { destination_full_ref_name : dst . to_owned () , specs : conflicting_sources . iter () . map (| (spec_idx , _) | self . group . specs [* spec_idx] . to_bstring ()) . collect () , sources : conflicting_sources . into_iter () . map (| (_ , src) | src . clone () . into_owned ()) . collect () , }) ; } if ! issues . is_empty () { Err (Error { issues }) } else { let mut fixed = Vec :: new () ; let group = & self . group ; self . mappings . retain (| m | match m . rhs . as_ref () { Some (dst) => { if dst . starts_with (b"refs/") || dst . as_ref () == "HEAD" { true } else { fixed . push (Fix :: MappingWithPartialDestinationRemoved { name : dst . as_ref () . to_owned () , spec : group . specs [m . spec_index] . to_owned () , }) ; false } } None => true , }) ; Ok ((self , fixed)) } } }
+    };
+}
+
+impl_37!()

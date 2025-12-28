@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        Bigint!();
+        Limb!();
+    };
+}
+
+macro_rules! parse_mantissa {
+    () => {
+        deps!();
+        # [doc = " Parse the full mantissa into a big integer."] # [doc = ""] # [doc = " Returns the parsed mantissa and the number of digits in the mantissa."] # [doc = " The max digits is the maximum number of digits plus one."] pub fn parse_mantissa < 'a , Iter1 , Iter2 > (mut integer : Iter1 , mut fraction : Iter2 , max_digits : usize ,) -> (Bigint , usize) where Iter1 : Iterator < Item = & 'a u8 > + Clone , Iter2 : Iterator < Item = & 'a u8 > + Clone , { let mut counter : usize = 0 ; let mut count : usize = 0 ; let mut value : Limb = 0 ; let mut result = Bigint :: new () ; let step : usize = if LIMB_BITS == 32 { 9 } else { 19 } ; let max_native = (10 as Limb) . pow (step as u32) ; 'integer : loop { while counter < step && count < max_digits { if let Some (& c) = integer . next () { add_digit ! (c , value , counter , count) ; } else { break 'integer ; } } if count == max_digits { add_temporary ! (@ end format , result , counter , value) ; round_up_nonzero ! (format , integer , result , count) ; round_up_nonzero ! (format , fraction , result , count) ; return (result , count) ; } else { add_temporary ! (@ max format , result , counter , value , max_native) ; } } if count == 0 { for & c in & mut fraction { if c != b'0' { add_digit ! (c , value , counter , count) ; break ; } } } 'fraction : loop { while counter < step && count < max_digits { if let Some (& c) = fraction . next () { add_digit ! (c , value , counter , count) ; } else { break 'fraction ; } } if count == max_digits { add_temporary ! (@ end format , result , counter , value) ; round_up_nonzero ! (format , fraction , result , count) ; return (result , count) ; } else { add_temporary ! (@ max format , result , counter , value , max_native) ; } } add_temporary ! (@ end format , result , counter , value) ; (result , count) }
+    };
+}
+
+parse_mantissa!()

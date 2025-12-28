@@ -1,6 +1,6 @@
 macro_rules! diagnostics {
     () => {
-        pub mod diagnostics ;
+        mod diagnostics ;
     };
 }
 

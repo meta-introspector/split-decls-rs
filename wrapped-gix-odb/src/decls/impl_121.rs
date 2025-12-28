@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        CompressedTempfile!();
+        Store!();
+        Error!();
+    };
+}
+
+macro_rules! impl_121 {
+    () => {
+        deps!();
+        impl Store { fn dest (& self) -> Result < gix_hash :: io :: Write < CompressedTempfile > , Error > { # [cfg_attr (not (unix) , allow (unused_mut))] let mut builder = tempfile :: Builder :: new () ; # [cfg (unix)] { use std :: os :: unix :: fs :: PermissionsExt ; let perms = std :: fs :: Permissions :: from_mode (0o444) ; builder . permissions (perms) ; } Ok (gix_hash :: io :: Write :: new (deflate :: Write :: new (builder . tempfile_in (& self . path) . map_err (| err | Error :: Io { source : err . into () , message : "create named temp file in" , path : self . path . to_owned () , }) ?) , self . object_hash ,)) } fn finalize_object (& self , gix_hash :: io :: Write { hash , inner : file } : gix_hash :: io :: Write < CompressedTempfile > ,) -> Result < gix_hash :: ObjectId , Error > { let id = hash . try_finalize () . map_err (| err | Error :: Io { source : err . into () , message : "hash tempfile in" , path : self . path . to_owned () , }) ? ; let object_path = loose :: hash_path (& id , self . path . clone ()) ; let object_dir = object_path . parent () . expect ("each object path has a 1 hex-bytes directory") ; if let Err (err) = fs :: create_dir (object_dir) { match err . kind () { io :: ErrorKind :: AlreadyExists => { } _ => return Err (err . into ()) , } } let file = file . into_inner () ; let res = file . persist (& object_path) ; # [cfg (windows)] if let Err (err) = & res { if err . error . kind () == std :: io :: ErrorKind :: PermissionDenied || err . error . kind () == std :: io :: ErrorKind :: AlreadyExists { return Ok (id) ; } } res . map_err (| err | Error :: Persist { source : err , target : object_path , }) ? ; Ok (id) } }
+    };
+}
+
+impl_121!()

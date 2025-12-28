@@ -1,14 +1,13 @@
 macro_rules! deps {
     () => {
-        IdxRange!();
-        Arena!();
+        Idx!();
     };
 }
 
 macro_rules! impl_34 {
     () => {
         deps!();
-        impl < T > Index < IdxRange < T > > for Arena < T > { type Output = [T] ; fn index (& self , range : IdxRange < T >) -> & [T] { let start = range . range . start as usize ; let end = range . range . end as usize ; & self . data [start .. end] } }
+        impl < T > fmt :: Debug for Idx < T > { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { let mut type_name = std :: any :: type_name :: < T > () ; if let Some (idx) = type_name . rfind (':') { type_name = & type_name [idx + 1 ..] ; } write ! (f , "Idx::<{}>({})" , type_name , self . raw) } }
     };
 }
 

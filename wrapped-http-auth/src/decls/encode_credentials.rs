@@ -1,0 +1,7 @@
+macro_rules! encode_credentials {
+    () => {
+        # [doc = " Encodes the given credentials."] # [doc = ""] # [doc = " This can be used to preemptively send `Basic` authentication, without"] # [doc = " sending an unauthenticated request and waiting for a `401 Unauthorized`"] # [doc = " response."] # [doc = ""] # [doc = " The caller should use the returned string as an `Authorization` or"] # [doc = " `Proxy-Authorization` header value."] # [doc = ""] # [doc = " The caller is responsible for `username` and `password` being in the"] # [doc = " correct format. Servers may expect arguments to be in Unicode"] # [doc = " Normalization Form C as noted in [RFC 7617 section"] # [doc = " 2.1](https://datatracker.ietf.org/doc/html/rfc7617#section-2.1)."] # [doc = ""] # [doc = " ```rust"] # [doc = " assert_eq!("] # [doc = "     http_auth::basic::encode_credentials(\"Aladdin\", \"open sesame\"),"] # [doc = "     \"Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==\","] # [doc = " );"] pub fn encode_credentials (username : & str , password : & str) -> String { use base64 :: Engine as _ ; let user_pass = format ! ("{}:{}" , username , password) ; const PREFIX : & str = "Basic " ; let mut value = String :: with_capacity (PREFIX . len () + base64_encoded_len (user_pass . len ())) ; value . push_str (PREFIX) ; base64 :: engine :: general_purpose :: STANDARD . encode_string (& user_pass [..] , & mut value) ; value }
+    };
+}
+
+encode_credentials!()

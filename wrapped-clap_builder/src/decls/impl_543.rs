@@ -1,0 +1,17 @@
+macro_rules! deps {
+    () => {
+        Arg!();
+        MKeyMap!();
+        KeyType!();
+        Id!();
+    };
+}
+
+macro_rules! impl_543 {
+    () => {
+        deps!();
+        impl MKeyMap { # [doc = " If any arg has corresponding key in this map, we can search the key with"] # [doc = " `u64` (for positional argument), `char` (for short flag), `&str` and `OsString`"] # [doc = " (for long flag)"] pub (crate) fn contains < K > (& self , key : K) -> bool where KeyType : PartialEq < K > , { self . keys . iter () . any (| x | x . key == key) } # [doc = " Push an argument in the map."] pub (crate) fn push (& mut self , new_arg : Arg) { self . args . push (new_arg) ; } # [doc = " Find the arg have corresponding key in this map, we can search the key"] # [doc = " with `u64` (for positional argument), `char` (for short flag), `&str` and"] # [doc = " `OsString` (for long flag)"] pub (crate) fn get < K : ? Sized > (& self , key : & K) -> Option < & Arg > where KeyType : PartialEq < K > , { self . keys . iter () . find (| k | & k . key == key) . map (| k | & self . args [k . index]) } # [doc = " Return iterators of all keys."] pub (crate) fn keys (& self) -> impl Iterator < Item = & KeyType > { self . keys . iter () . map (| x | & x . key) } # [doc = " Return iterators of all args."] pub (crate) fn args (& self) -> impl Iterator < Item = & Arg > { self . args . iter () } # [doc = " Return mutable iterators of all args."] pub (crate) fn args_mut (& mut self) -> impl Iterator < Item = & mut Arg > { self . args . iter_mut () } # [doc = " Mutate every argument."] pub (crate) fn mut_args < F > (& mut self , f : F) where F : FnMut (Arg) -> Arg , { let mut args = std :: mem :: take (& mut self . args) ; self . args . extend (args . drain (..) . map (f)) ; } # [doc = " We need a lazy build here since some we may change args after creating"] # [doc = " the map, you can checkout who uses `args_mut`."] pub (crate) fn _build (& mut self) { self . keys . reserve (self . args . len ()) ; for (i , arg) in self . args . iter () . enumerate () { append_keys (& mut self . keys , arg , i) ; } } # [doc = " Remove an arg in the graph by Id, usually used by `mut_arg`. Return"] # [doc = " `Some(arg)` if removed."] pub (crate) fn remove_by_name (& mut self , name : & str) -> Option < Arg > { self . args . iter () . position (| arg | arg . id == name) . map (| i | self . args . remove (i)) } }
+    };
+}
+
+impl_543!()

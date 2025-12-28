@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Difference!();
+        Block!();
     };
 }
 
 macro_rules! impl_23 {
     () => {
         deps!();
-        impl < 'a > Iterator for Difference < 'a > { type Item = usize ; # [inline] fn next (& mut self) -> Option < Self :: Item > { self . iter . by_ref () . find (| & nxt | ! self . other . contains (nxt)) } # [inline] fn size_hint (& self) -> (usize , Option < usize >) { self . iter . size_hint () } }
+        impl Block { # [inline] pub fn is_empty (self) -> bool { unsafe { let value = _mm256_castpd_si256 (self . 0) ; _mm256_testz_si256 (value , value) == 1 } } # [inline] pub fn andnot (self , other : Self) -> Self { unsafe { Self (_mm256_andnot_pd (other . 0 , self . 0)) } } }
     };
 }
 

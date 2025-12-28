@@ -1,20 +1,14 @@
 macro_rules! deps {
     () => {
-        Module!();
-        Variant!();
-        Enum!();
-        StructKind!();
-        InstantiatedVariant!();
-        Field!();
-        Type!();
-        Layout!();
+        Union!();
+        HasSource!();
     };
 }
 
 macro_rules! impl_52 {
     () => {
         deps!();
-        impl Variant { pub fn module (self , db : & dyn HirDatabase) -> Module { Module { id : self . id . module (db) } } pub fn parent_enum (self , db : & dyn HirDatabase) -> Enum { self . id . lookup (db) . parent . into () } pub fn constructor_ty (self , db : & dyn HirDatabase) -> Type < '_ > { Type :: from_value_def (db , self . id) } pub fn name (self , db : & dyn HirDatabase) -> Name { let lookup = self . id . lookup (db) ; let enum_ = lookup . parent ; enum_ . enum_variants (db) . variants [lookup . index as usize] . 1 . clone () } pub fn fields (self , db : & dyn HirDatabase) -> Vec < Field > { self . id . fields (db) . fields () . iter () . map (| (id , _) | Field { parent : self . into () , id }) . collect () } pub fn kind (self , db : & dyn HirDatabase) -> StructKind { match self . id . fields (db) . shape { hir_def :: item_tree :: FieldsShape :: Record => StructKind :: Record , hir_def :: item_tree :: FieldsShape :: Tuple => StructKind :: Tuple , hir_def :: item_tree :: FieldsShape :: Unit => StructKind :: Unit , } } pub fn value (self , db : & dyn HirDatabase) -> Option < ast :: Expr > { self . source (db) ? . value . expr () } pub fn eval (self , db : & dyn HirDatabase) -> Result < i128 , ConstEvalError < '_ > > { db . const_eval_discriminant (self . into ()) } pub fn layout (& self , db : & dyn HirDatabase) -> Result < Layout , LayoutError > { let parent_enum = self . parent_enum (db) ; let parent_layout = parent_enum . layout (db) ? ; Ok (match & parent_layout . 0 . variants { layout :: Variants :: Multiple { variants , .. } => Layout ({ let lookup = self . id . lookup (db) ; let rustc_enum_variant_idx = RustcEnumVariantIdx (lookup . index as usize) ; Arc :: new (variants [rustc_enum_variant_idx] . clone ()) } , db . target_data_layout (parent_enum . krate (db) . into ()) . unwrap () ,) , _ => parent_layout , }) } pub fn is_unstable (self , db : & dyn HirDatabase) -> bool { db . attrs (self . id . into ()) . is_unstable () } pub fn instantiate_infer < 'db > (self , infer_ctxt : & InferCtxt < 'db >) -> InstantiatedVariant < 'db > { let args = infer_ctxt . fresh_args_for_item (self . parent_enum (infer_ctxt . interner . db ()) . id . into ()) ; InstantiatedVariant { inner : self , args } } }
+        impl HasSource for Union { type Ast = ast :: Union ; fn source (self , db : & dyn HirDatabase) -> Option < InFile < Self :: Ast > > { Some (self . id . lookup (db) . source (db)) } }
     };
 }
 

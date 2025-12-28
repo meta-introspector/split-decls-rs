@@ -7,7 +7,7 @@ macro_rules! deps {
 macro_rules! impl_23 {
     () => {
         deps!();
-        impl From < RangeTo < usize > > for TimesRange { fn from (r : RangeTo < usize >) -> TimesRange { TimesRange (0 .. r . end) } }
+        impl From < usize > for TimesRange { fn from (n : usize) -> TimesRange { TimesRange (n .. (n + 1)) } }
     };
 }
 

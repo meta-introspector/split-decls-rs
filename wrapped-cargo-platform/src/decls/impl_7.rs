@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Platform!();
+        Ident!();
     };
 }
 
 macro_rules! impl_7 {
     () => {
         deps!();
-        impl fmt :: Display for Platform { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { match * self { Platform :: Name (ref n) => n . fmt (f) , Platform :: Cfg (ref e) => write ! (f , "cfg({})" , e) , } } }
+        impl Ident { pub fn as_str (& self) -> & str { & self . name } }
     };
 }
 

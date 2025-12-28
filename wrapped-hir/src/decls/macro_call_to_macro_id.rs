@@ -1,0 +1,7 @@
+macro_rules! macro_call_to_macro_id {
+    () => {
+        fn macro_call_to_macro_id (ctx : & mut SourceToDefCtx < '_ , '_ > , macro_call_id : MacroCallId ,) -> Option < MacroId > { let db : & dyn ExpandDatabase = ctx . db ; let loc = db . lookup_intern_macro_call (macro_call_id) ; match loc . def . ast_id () { Either :: Left (it) => { let node = match it . file_id { HirFileId :: FileId (file_id) => { it . to_ptr (db) . to_node (& db . parse (file_id) . syntax_node ()) } HirFileId :: MacroFile (macro_file) => { let expansion_info = ctx . cache . get_or_insert_expansion (ctx . db , macro_file) ; it . to_ptr (db) . to_node (& expansion_info . expanded () . value) } } ; ctx . macro_to_def (InFile :: new (it . file_id , & node)) } Either :: Right (it) => { let node = match it . file_id { HirFileId :: FileId (file_id) => { it . to_ptr (db) . to_node (& db . parse (file_id) . syntax_node ()) } HirFileId :: MacroFile (macro_file) => { let expansion_info = ctx . cache . get_or_insert_expansion (ctx . db , macro_file) ; it . to_ptr (db) . to_node (& expansion_info . expanded () . value) } } ; ctx . proc_macro_to_def (InFile :: new (it . file_id , & node)) } } }
+    };
+}
+
+macro_call_to_macro_id!()

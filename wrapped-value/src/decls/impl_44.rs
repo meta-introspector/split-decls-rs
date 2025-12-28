@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Value!();
+        SerializerError!();
     };
 }
 
 macro_rules! impl_44 {
     () => {
         deps!();
-        impl Default for Value { fn default () -> Self { Self :: Null } }
+        impl ser :: Error for SerializerError { fn custom < T : fmt :: Display > (msg : T) -> SerializerError { SerializerError (msg . to_string ()) } }
     };
 }
 

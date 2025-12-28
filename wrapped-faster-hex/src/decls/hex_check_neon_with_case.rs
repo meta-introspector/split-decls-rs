@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        CheckCase!();
+    };
+}
+
+macro_rules! hex_check_neon_with_case {
+    () => {
+        deps!();
+        # [target_feature (enable = "neon")] # [cfg (target_arch = "aarch64")] pub unsafe fn hex_check_neon_with_case (mut src : & [u8] , check_case : CheckCase) -> bool { let ascii_zero = vdupq_n_u8 (b'0' - 1) ; let ascii_nine = vdupq_n_u8 (b'9' + 1) ; let ascii_ua = vdupq_n_u8 (b'A' - 1) ; let ascii_uf = vdupq_n_u8 (b'F' + 1) ; let ascii_la = vdupq_n_u8 (b'a' - 1) ; let ascii_lf = vdupq_n_u8 (b'f' + 1) ; while src . len () >= 16 { let unchecked = vld1q_u8 (src . as_ptr () as * const _) ; let gt0 = vcgtq_u8 (unchecked , ascii_zero) ; let lt9 = vcltq_u8 (unchecked , ascii_nine) ; let valid_digit = vandq_u8 (gt0 , lt9) ; let (valid_la_lf , valid_ua_uf) = match check_case { CheckCase :: None => { let gtua = vcgtq_u8 (unchecked , ascii_ua) ; let ltuf = vcltq_u8 (unchecked , ascii_uf) ; let gtla = vcgtq_u8 (unchecked , ascii_la) ; let ltlf = vcltq_u8 (unchecked , ascii_lf) ; (Some (vandq_u8 (gtla , ltlf)) , Some (vandq_u8 (gtua , ltuf))) } CheckCase :: Lower => { let gtla = vcgtq_u8 (unchecked , ascii_la) ; let ltlf = vcltq_u8 (unchecked , ascii_lf) ; (Some (vandq_u8 (gtla , ltlf)) , None) } CheckCase :: Upper => { let gtua = vcgtq_u8 (unchecked , ascii_ua) ; let ltuf = vcltq_u8 (unchecked , ascii_uf) ; (None , Some (vandq_u8 (gtua , ltuf))) } } ; let valid_letter = match (valid_la_lf , valid_ua_uf) { (Some (valid_lower) , Some (valid_upper)) => vorrq_u8 (valid_lower , valid_upper) , (Some (valid_lower) , None) => valid_lower , (None , Some (valid_upper)) => valid_upper , _ => unreachable ! () , } ; let ret = vminvq_u8 (vorrq_u8 (valid_digit , valid_letter)) ; if ret == 0 { return false ; } src = & src [16 ..] ; } hex_check_fallback_with_case (src , check_case) }
+    };
+}
+
+hex_check_neon_with_case!()

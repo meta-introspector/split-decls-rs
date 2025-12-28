@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         MonsterConformityChecker!();
         DummyMonsterConformityChecker!();
-        Declaration!();
         BottPeriodicityTrait!();
+        Declaration!();
         MonsterConstants!();
     };
 }

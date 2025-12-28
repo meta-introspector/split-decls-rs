@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ExportConfig!();
         DeclRefactoringConfig!();
+        ExportConfig!();
         RefactorMeta!();
         SplitRule!();
     };

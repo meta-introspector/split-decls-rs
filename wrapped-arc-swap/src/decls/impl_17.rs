@@ -1,5 +1,9 @@
 macro_rules! deps {
     () => {
+        AccessConvert!();
+        DynGuard!();
+        Access!();
+        DynAccess!();
         Guard!();
     };
 }
@@ -7,7 +11,7 @@ macro_rules! deps {
 macro_rules! impl_17 {
     () => {
         deps!();
-        impl < T : Display + RefCnt , S : Strategy < T > > Display for Guard < T , S > { fn fmt (& self , formatter : & mut Formatter) -> FmtResult { self . deref () . fmt (formatter) } }
+        impl < T , D > Access < T > for AccessConvert < D > where D : Deref , D :: Target : DynAccess < T > , { type Guard = DynGuard < T > ; fn load (& self) -> Self :: Guard { self . 0 . load () } }
     };
 }
 

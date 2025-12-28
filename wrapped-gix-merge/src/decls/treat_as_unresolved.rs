@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        ContentMerge!();
+        TreatAsUnresolved!();
+    };
+}
+
+macro_rules! treat_as_unresolved {
+    () => {
+        deps!();
+        # [doc = ""] pub mod treat_as_unresolved { use crate :: tree :: TreatAsUnresolved ; # [doc = " Which kind of content merges should be considered unresolved?"] # [derive (Default , Debug , Copy , Clone , Eq , PartialEq , Ord , PartialOrd , Hash)] pub enum ContentMerge { # [doc = " Content merges that still show conflict markers."] # [default] Markers , # [doc = " Content merges who would have conflicted if it wasn't for a"] # [doc = " [resolution strategy](crate::blob::builtin_driver::text::Conflict::ResolveWithOurs)."] ForcedResolution , } # [doc = " Which kind of tree merges should be considered unresolved?"] # [derive (Default , Debug , Copy , Clone , Eq , PartialEq , Ord , PartialOrd , Hash)] pub enum TreeMerge { # [doc = " All failed renames."] Undecidable , # [doc = " All failed renames, and the ones where a tree item was renamed to avoid a clash."] # [default] EvasiveRenames , # [doc = " All of `EvasiveRenames`, and tree merges that would have conflicted but which were resolved"] # [doc = " with a [resolution strategy](super::ResolveWith)."] ForcedResolution , } # [doc = " Instantiation/Presets"] impl TreatAsUnresolved { # [doc = " Return an instance with the highest sensitivity to what should be considered unresolved as it"] # [doc = " includes entries which have been resolved using a [merge strategy](super::ResolveWith)."] pub fn forced_resolution () -> Self { Self { content_merge : ContentMerge :: ForcedResolution , tree_merge : TreeMerge :: ForcedResolution , } } # [doc = " Return an instance that considers unresolved any conflict that Git would also consider unresolved."] # [doc = " This is the same as the `default()` implementation."] pub fn git () -> Self { Self :: default () } # [doc = " Only undecidable tree merges and conflict markers are considered unresolved."] # [doc = " This also means that renamed entries to make space for a conflicting one is considered acceptable,"] # [doc = " making this preset the most lenient."] pub fn undecidable () -> Self { Self { content_merge : ContentMerge :: Markers , tree_merge : TreeMerge :: Undecidable , } } } }
+    };
+}
+
+treat_as_unresolved!()

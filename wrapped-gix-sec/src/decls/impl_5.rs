@@ -1,6 +1,14 @@
+macro_rules! deps {
+    () => {
+        Mapping!();
+        Trust!();
+    };
+}
+
 macro_rules! impl_5 {
     () => {
-        impl Display for ReadWrite { fn fmt (& self , f : & mut Formatter < '_ >) -> std :: fmt :: Result { std :: fmt :: Debug :: fmt (self , f) } }
+        deps!();
+        impl < T > Mapping < T > { # [doc = " Obtain the value for the given trust `level`."] pub fn by_level (& self , level : Trust) -> & T { match level { Trust :: Full => & self . full , Trust :: Reduced => & self . reduced , } } # [doc = " Obtain the value for the given `level` once."] pub fn into_value_by_level (self , level : Trust) -> T { match level { Trust :: Full => self . full , Trust :: Reduced => self . reduced , } } }
     };
 }
 

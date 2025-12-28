@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        Buffer!();
+    };
+}
+
+macro_rules! impl_6 {
+    () => {
+        deps!();
+        impl < T > Buffer < T > { # [doc = " Allocates a new buffer with the specified capacity."] fn alloc (cap : usize) -> Self { debug_assert_eq ! (cap , cap . next_power_of_two ()) ; let ptr = Box :: into_raw ((0 .. cap) . map (| _ | MaybeUninit :: < T > :: uninit ()) . collect :: < Box < [_] > > () ,) . cast :: < T > () ; Self { ptr , cap } } # [doc = " Deallocates the buffer."] unsafe fn dealloc (self) { drop (unsafe { Box :: from_raw (ptr :: slice_from_raw_parts_mut (self . ptr . cast :: < MaybeUninit < T > > () , self . cap ,)) }) ; } # [doc = " Returns a pointer to the task at the specified `index`."] unsafe fn at (& self , index : isize) -> * mut T { unsafe { self . ptr . offset (index & (self . cap - 1) as isize) } } # [doc = " Writes `task` into the specified `index`."] # [doc = ""] # [doc = " This method might be concurrently called with another `read` at the same index, which is"] # [doc = " technically speaking a data race and therefore UB. We should use an atomic store here, but"] # [doc = " that would be more expensive and difficult to implement generically for all types `T`."] # [doc = " Hence, as a hack, we use a volatile write instead."] unsafe fn write (& self , index : isize , task : MaybeUninit < T >) { unsafe { ptr :: write_volatile (self . at (index) . cast :: < MaybeUninit < T > > () , task) } } # [doc = " Reads a task from the specified `index`."] # [doc = ""] # [doc = " This method might be concurrently called with another `write` at the same index, which is"] # [doc = " technically speaking a data race and therefore UB. We should use an atomic load here, but"] # [doc = " that would be more expensive and difficult to implement generically for all types `T`."] # [doc = " Hence, as a hack, we use a volatile load instead."] unsafe fn read (& self , index : isize) -> MaybeUninit < T > { unsafe { ptr :: read_volatile (self . at (index) . cast :: < MaybeUninit < T > > ()) } } }
+    };
+}
+
+impl_6!()

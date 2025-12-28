@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        Action!();
+        Program!();
+        Kind!();
+    };
+}
+
+macro_rules! impl_24 {
+    () => {
+        deps!();
+        # [doc = " Initialization"] impl Program { # [doc = " Create a new program of the given `kind`."] pub fn from_kind (kind : Kind) -> Self { Program { kind , child : None , stderr : true , } } # [doc = " Parse the given input as per the custom helper definition, supporting `!<script>`, `name` and `/absolute/name`, the latter two"] # [doc = " also support arguments which are ignored here."] pub fn from_custom_definition (input : impl Into < BString >) -> Self { fn from_custom_definition_inner (mut input : BString) -> Program { let kind = if input . starts_with (b"!") { input . remove (0) ; Kind :: ExternalShellScript (input) } else { let path = gix_path :: from_bstr (input . find_byte (b' ') . map_or (input . as_slice () , | pos | & input [.. pos]) . as_bstr () ,) ; if gix_path :: is_absolute (path) { Kind :: ExternalPath { path_and_args : input } } else { Kind :: ExternalName { name_and_args : input } } } ; Program { kind , child : None , stderr : true , } } from_custom_definition_inner (input . into ()) } # [doc = " Convert the program into the respective command, suitable to invoke `action`."] pub fn to_command (& self , action : & helper :: Action) -> std :: process :: Command { let git_program = gix_path :: env :: exe_invocation () ; let mut cmd = match & self . kind { Kind :: Builtin => { let mut cmd = Command :: from (gix_command :: prepare (git_program)) ; cmd . arg ("credential") . arg (action . as_arg (false)) ; cmd } Kind :: ExternalName { name_and_args } => { let mut args = name_and_args . clone () ; args . insert_str (0 , "credential-") ; args . insert_str (0 , " ") ; args . insert_str (0 , git_program . to_string_lossy () . as_ref ()) ; gix_command :: prepare (gix_path :: from_bstr (args . as_bstr ()) . into_owned ()) . arg (action . as_arg (true)) . command_may_be_shell_script_allow_manual_argument_splitting () . into () } Kind :: ExternalShellScript (for_shell) | Kind :: ExternalPath { path_and_args : for_shell , } => gix_command :: prepare (gix_path :: from_bstr (for_shell . as_bstr ()) . as_ref ()) . command_may_be_shell_script () . arg (action . as_arg (true)) . into () , } ; cmd . stdin (Stdio :: piped ()) . stdout (if action . expects_output () { Stdio :: piped () } else { Stdio :: null () }) . stderr (if self . stderr { Stdio :: inherit () } else { Stdio :: null () }) ; cmd } }
+    };
+}
+
+impl_24!()

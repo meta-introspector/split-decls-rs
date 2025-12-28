@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        ParseIntegerError!();
+        ErrorKind!();
+        MinNumTraits!();
+    };
+}
+
+macro_rules! to_unsigned_with_radix {
+    () => {
+        deps!();
+        # [doc = " Converts a byte slice in a given base to an integer. Signs are not allowed."] # [doc = ""] # [doc = " # Errors"] # [doc = ""] # [doc = " Returns [`ParseIntegerError`] for any of the following conditions:"] # [doc = ""] # [doc = " * `bytes` is empty"] # [doc = " * not all characters of `bytes` are `0-9`, `a-z` or `A-Z`"] # [doc = " * not all characters refer to digits in the given `radix`"] # [doc = " * the number overflows `I`"] # [doc = ""] # [doc = " # Panics"] # [doc = ""] # [doc = " Panics if `radix` is not in the range `2..=36` (or in the pathological"] # [doc = " case that there is no representation of `radix` in `I`)."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " # use gix_utils::btoi::to_unsigned_with_radix;"] # [doc = " assert_eq!(Ok(255), to_unsigned_with_radix(b\"ff\", 16));"] # [doc = " assert_eq!(Ok(42), to_unsigned_with_radix(b\"101010\", 2));"] # [doc = " ```"] pub fn to_unsigned_with_radix < I : MinNumTraits > (bytes : & [u8] , radix : u32) -> Result < I , ParseIntegerError > { assert ! ((2 ..= 36) . contains (& radix) , "radix must lie in the range 2..=36, found {radix}") ; let base = I :: from_u32 (radix) . expect ("radix can be represented as integer") ; if bytes . is_empty () { return Err (ParseIntegerError { kind : ErrorKind :: Empty }) ; } let mut result = I :: ZERO ; for & digit in bytes { let x = match char :: from (digit) . to_digit (radix) . and_then (I :: from_u32) { Some (x) => x , None => { return Err (ParseIntegerError { kind : ErrorKind :: InvalidDigit , }) } } ; result = match result . checked_mul (base) { Some (result) => result , None => { return Err (ParseIntegerError { kind : ErrorKind :: Overflow , }) } } ; result = match result . checked_add (x) { Some (result) => result , None => { return Err (ParseIntegerError { kind : ErrorKind :: Overflow , }) } } ; } Ok (result) }
+    };
+}
+
+to_unsigned_with_radix!()

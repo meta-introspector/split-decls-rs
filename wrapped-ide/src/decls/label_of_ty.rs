@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        InlayHintsConfig!();
+        InlayHintLabel!();
+        InlayHintLabelBuilder!();
+    };
+}
+
+macro_rules! label_of_ty {
+    () => {
+        deps!();
+        fn label_of_ty (famous_defs @ FamousDefs (sema , _) : & FamousDefs < '_ , '_ > , config : & InlayHintsConfig < '_ > , ty : & hir :: Type < '_ > , display_target : DisplayTarget ,) -> Option < InlayHintLabel > { fn rec (sema : & Semantics < '_ , RootDatabase > , famous_defs : & FamousDefs < '_ , '_ > , mut max_length : Option < usize > , ty : & hir :: Type < '_ > , label_builder : & mut InlayHintLabelBuilder < '_ > , config : & InlayHintsConfig < '_ > , display_target : DisplayTarget ,) -> Result < () , HirDisplayError > { hir :: attach_db (sema . db , | | { let iter_item_type = hint_iterator (sema , famous_defs , ty) ; match iter_item_type { Some ((iter_trait , item , ty)) => { const LABEL_START : & str = "impl " ; const LABEL_ITERATOR : & str = "Iterator" ; const LABEL_MIDDLE : & str = "<" ; const LABEL_ITEM : & str = "Item" ; const LABEL_MIDDLE2 : & str = " = " ; const LABEL_END : & str = ">" ; max_length = max_length . map (| len | { len . saturating_sub (LABEL_START . len () + LABEL_ITERATOR . len () + LABEL_MIDDLE . len () + LABEL_MIDDLE2 . len () + LABEL_END . len () ,) }) ; label_builder . write_str (LABEL_START) ? ; label_builder . start_location_link (ModuleDef :: from (iter_trait) . into ()) ; label_builder . write_str (LABEL_ITERATOR) ? ; label_builder . end_location_link () ; label_builder . write_str (LABEL_MIDDLE) ? ; label_builder . start_location_link (ModuleDef :: from (item) . into ()) ; label_builder . write_str (LABEL_ITEM) ? ; label_builder . end_location_link () ; label_builder . write_str (LABEL_MIDDLE2) ? ; rec (sema , famous_defs , max_length , & ty , label_builder , config , display_target) ? ; label_builder . write_str (LABEL_END) ? ; Ok (()) } None => ty . display_truncated (sema . db , max_length , display_target) . with_closure_style (config . closure_style) . write_to (label_builder) , } }) } let mut label_builder = InlayHintLabelBuilder { sema , last_part : String :: new () , location : None , result : InlayHintLabel :: default () , resolve : config . fields_to_resolve . resolve_label_location , } ; let _ = rec (sema , famous_defs , config . max_length , ty , & mut label_builder , config , display_target) ; let r = label_builder . finish () ; Some (r) }
+    };
+}
+
+label_of_ty!()

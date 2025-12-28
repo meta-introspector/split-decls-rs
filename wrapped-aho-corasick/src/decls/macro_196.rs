@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        Config!();
+        MatchKind!();
+    };
+}
+
+macro_rules! macro_196 {
+    () => {
+        deps!();
+        testconfig ! (search_teddy_ssse3_leftmost_longest , PACKED_LEFTMOST_LONGEST , | c : & mut Config | { c . only_teddy (true) . match_kind (MatchKind :: LeftmostLongest) ; # [cfg (target_arch = "x86_64")] if std :: is_x86_feature_detected ! ("ssse3") { c . only_teddy_256bit (Some (false)) ; } }) ;
+    };
+}
+
+macro_196!()

@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        CompleteEnv!();
+    };
+}
+
+macro_rules! EnvCompleter {
+    () => {
+        deps!();
+        # [doc = " Shell-integration for completions"] # [doc = ""] # [doc = " This will generally be called by [`CompleteEnv`]."] # [doc = ""] # [doc = " This handles adapting between the shell and [`completer`][crate::engine::complete()]."] # [doc = " A `EnvCompleter` can choose how much of that lives within the registration script or"] # [doc = " lives in [`EnvCompleter::write_complete`]."] pub trait EnvCompleter { # [doc = " Canonical name for this shell"] # [doc = ""] # [doc = " **Post-conditions:**"] # [doc = " ```rust,ignore"] # [doc = " assert!(completer.is(completer.name()));"] # [doc = " ```"] fn name (& self) -> & 'static str ; # [doc = " Whether the name matches this shell"] # [doc = ""] # [doc = " This should match [`EnvCompleter::name`] and any alternative names, particularly used by"] # [doc = " `$SHELL`."] fn is (& self , name : & str) -> bool ; # [doc = " Register for completions"] # [doc = ""] # [doc = " Write the `buf` the logic needed for calling into `<VAR>=<shell> <cmd> --`, passing needed"] # [doc = " arguments to [`EnvCompleter::write_complete`] through the environment."] # [doc = ""] # [doc = " - `var`: see [`CompleteEnv::var`]"] # [doc = " - `name`: an identifier to use in the script"] # [doc = " - `bin`: see [`CompleteEnv::bin`]"] # [doc = " - `completer`: see [`CompleteEnv::completer`]"] # [doc = ""] # [doc = " <div class=\"warning\">"] # [doc = ""] # [doc = " **WARNING:** There are no stability guarantees between the call to"] # [doc = " [`EnvCompleter::write_complete`] that this generates and actually calling [`EnvCompleter::write_complete`]."] # [doc = " Caching the results of this call may result in invalid or no completions to be generated."] # [doc = ""] # [doc = " </div>"] fn write_registration (& self , var : & str , name : & str , bin : & str , completer : & str , buf : & mut dyn std :: io :: Write ,) -> Result < () , std :: io :: Error > ; # [doc = " Complete the given command"] # [doc = ""] # [doc = " Adapt information from arguments and [`EnvCompleter::write_registration`]-defined env"] # [doc = " variables to what is needed for [`completer`][crate::engine::complete()]."] # [doc = ""] # [doc = " Write out the [`CompletionCandidate`][crate::engine::CompletionCandidate]s in a way the shell will understand."] fn write_complete (& self , cmd : & mut clap :: Command , args : Vec < OsString > , current_dir : Option < & std :: path :: Path > , buf : & mut dyn std :: io :: Write ,) -> Result < () , std :: io :: Error > ; }
+    };
+}
+
+EnvCompleter!()

@@ -1,0 +1,19 @@
+macro_rules! deps {
+    () => {
+        PostResponse!();
+        Error!();
+        Response!();
+        PostBodyDataKind!();
+        Remote!();
+        Request!();
+    };
+}
+
+macro_rules! impl_72 {
+    () => {
+        deps!();
+        # [doc = " utilities"] impl Remote { fn restore_thread_after_failure (& mut self) -> http :: Error { let err_that_brought_thread_down = self . handle . take () . expect ("thread handle present") . join () . expect ("handler thread should never panic") . expect_err ("something should have gone wrong with curl (we join on error only)") ; * self = Remote :: default () ; http :: Error :: InitHttpClient { source : Box :: new (err_that_brought_thread_down) , } } fn make_request (& mut self , url : & str , base_url : & str , headers : impl IntoIterator < Item = impl AsRef < str > > , upload_body_kind : Option < PostBodyDataKind > ,) -> Result < http :: PostResponse < pipe :: Reader , pipe :: Reader , pipe :: Writer > , http :: Error > { let mut header_map = reqwest :: header :: HeaderMap :: new () ; for header_line in headers { let header_line = header_line . as_ref () ; let colon_pos = header_line . find (':') . expect ("header line must contain a colon to separate key and value") ; let header_name = & header_line [.. colon_pos] ; let value = & header_line [colon_pos + 1 ..] ; match reqwest :: header :: HeaderName :: from_str (header_name) . ok () . zip (reqwest :: header :: HeaderValue :: try_from (value . trim ()) . ok ()) { Some ((key , val)) => header_map . insert (key , val) , None => continue , } ; } if self . request . send (Request { url : url . to_owned () , base_url : base_url . to_owned () , headers : header_map , upload_body_kind , config : self . config . clone () , }) . is_err () { return Err (self . restore_thread_after_failure ()) ; } let Response { headers , body , upload_body , } = match self . response . recv () { Ok (res) => res , Err (_) => { return Err (self . restore_thread_after_failure ()) ; } } ; Ok (http :: PostResponse { post_body : upload_body , headers , body , }) } }
+    };
+}
+
+impl_72!()

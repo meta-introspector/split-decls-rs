@@ -1,0 +1,17 @@
+macro_rules! deps {
+    () => {
+        Connection!();
+        Note!();
+        Any!();
+        Action!();
+    };
+}
+
+macro_rules! impl_935 {
+    () => {
+        deps!();
+        # [doc = " Builder"] impl < 'a , T > Connection < 'a , '_ , T > where T : Transport , { # [doc = " Set a custom credentials callback to provide credentials if the remotes require authentication."] # [doc = ""] # [doc = " Otherwise, we will use the git configuration to perform the same task as the `git credential` helper program,"] # [doc = " which is calling other helper programs in succession while resorting to a prompt to obtain credentials from the"] # [doc = " user."] # [doc = ""] # [doc = " A custom function may also be used to prevent accessing resources with authentication."] # [doc = ""] # [doc = " Use the [`configured_credentials()`](Connection::configured_credentials()) method to obtain the implementation"] # [doc = " that would otherwise be used, which can be useful to proxy the default configuration and obtain information about the"] # [doc = " URLs to authenticate with."] pub fn with_credentials (mut self , helper : impl FnMut (gix_credentials :: helper :: Action) -> gix_credentials :: protocol :: Result + 'a ,) -> Self { self . authenticate = Some (Box :: new (helper)) ; self } # [doc = " Provide configuration to be used before the first handshake is conducted."] # [doc = " It's typically created by initializing it with [`Repository::transport_options()`](crate::Repository::transport_options()),"] # [doc = " which is also the default if this isn't set explicitly. Note that all the default configuration is created from `git`"] # [doc = " configuration, which can also be manipulated through overrides to affect the default configuration."] # [doc = ""] # [doc = " Use this method to provide transport configuration with custom backend configuration that is not configurable by other means and"] # [doc = " custom to the application at hand."] pub fn with_transport_options (mut self , config : Box < dyn std :: any :: Any >) -> Self { self . transport_options = Some (config) ; self } }
+    };
+}
+
+impl_935!()

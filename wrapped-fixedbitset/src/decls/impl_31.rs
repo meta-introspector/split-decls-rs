@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Intersection!();
+        Block!();
     };
 }
 
 macro_rules! impl_31 {
     () => {
         deps!();
-        impl < 'a > Iterator for Intersection < 'a > { type Item = usize ; # [inline] fn next (& mut self) -> Option < Self :: Item > { self . iter . by_ref () . find (| & nxt | self . other . contains (nxt)) } # [inline] fn size_hint (& self) -> (usize , Option < usize >) { self . iter . size_hint () } }
+        impl PartialEq for Block { # [inline] fn eq (& self , other : & Self) -> bool { unsafe { let new = _mm256_xor_pd (self . 0 , other . 0) ; let neq = _mm256_castpd_si256 (new) ; _mm256_testz_si256 (neq , neq) == 1 } } }
     };
 }
 

@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Utf8Path!();
+        FromPathBufError!();
     };
 }
 
 macro_rules! impl_106 {
     () => {
         deps!();
-        impl AsRef < Path > for Utf8Path { # [inline] fn as_ref (& self) -> & Path { & self . 0 } }
+        impl error :: Error for FromPathBufError { fn source (& self) -> Option < & (dyn error :: Error + 'static) > { Some (& self . error) } }
     };
 }
 

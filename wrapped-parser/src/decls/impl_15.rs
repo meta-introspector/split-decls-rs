@@ -1,15 +1,14 @@
 macro_rules! deps {
     () => {
-        ErrorPositions!();
-        Error!();
-        Result!();
+        Span!();
+        FrontmatterError!();
     };
 }
 
 macro_rules! impl_15 {
     () => {
         deps!();
-        impl Serialize for ErrorPositions { fn serialize < S : Serializer > (& self , serializer : S) -> std :: result :: Result < S :: Ok , S :: Error > { serializer . collect_seq (self . clone ()) } }
+        impl FrontmatterError { pub fn new (message : impl Into < String > , span : Span) -> Self { Self { message : message . into () , primary_span : span , visible_spans : Vec :: new () } } pub fn push_visible_span (mut self , span : Span) -> Self { self . visible_spans . push (span) ; self } pub fn message (& self) -> & str { self . message . as_str () } pub fn primary_span (& self) -> Span { self . primary_span . clone () } pub fn visible_spans (& self) -> & [Span] { & self . visible_spans } }
     };
 }
 

@@ -1,0 +1,7 @@
+macro_rules! CARGO_ENCODED_RUSTFLAGS {
+    () => {
+        const CARGO_ENCODED_RUSTFLAGS : & str = "CARGO_ENCODED_RUSTFLAGS" ;
+    };
+}
+
+CARGO_ENCODED_RUSTFLAGS!()

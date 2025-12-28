@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Diagnostic!();
         DiagnosticCode!();
         DiagnosticsConfig!();
+        Diagnostic!();
     };
 }
 

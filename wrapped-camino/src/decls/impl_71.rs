@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        Utf8PathBuf!();
-        Utf8Path!();
+        ReadDirUtf8!();
+        Utf8DirEntry!();
     };
 }
 
 macro_rules! impl_71 {
     () => {
         deps!();
-        impl < 'a > From < Cow < 'a , Utf8Path > > for Utf8PathBuf { fn from (path : Cow < 'a , Utf8Path >) -> Utf8PathBuf { path . into_owned () } }
+        impl Iterator for ReadDirUtf8 { type Item = io :: Result < Utf8DirEntry > ; fn next (& mut self) -> Option < io :: Result < Utf8DirEntry > > { self . inner . next () . map (| entry | entry . and_then (Utf8DirEntry :: new)) } }
     };
 }
 

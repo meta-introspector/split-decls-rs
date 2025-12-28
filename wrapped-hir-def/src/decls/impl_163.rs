@@ -1,14 +1,16 @@
 macro_rules! deps {
     () => {
-        ModuleId!();
-        HasModule!();
+        RawVisibilityId!();
+        VisibilityExplicitness!();
+        RawVisibility!();
+        ItemTree!();
     };
 }
 
 macro_rules! impl_163 {
     () => {
         deps!();
-        impl HasModule for Macro2Id { # [inline] fn module (& self , db : & dyn DefDatabase) -> ModuleId { self . lookup (db) . container } }
+        impl Index < RawVisibilityId > for ItemTree { type Output = RawVisibility ; fn index (& self , index : RawVisibilityId) -> & Self :: Output { static VIS_PUB : RawVisibility = RawVisibility :: Public ; static VIS_PRIV_IMPLICIT : RawVisibility = RawVisibility :: PubSelf (VisibilityExplicitness :: Implicit) ; static VIS_PRIV_EXPLICIT : RawVisibility = RawVisibility :: PubSelf (VisibilityExplicitness :: Explicit) ; static VIS_PUB_CRATE : RawVisibility = RawVisibility :: PubCrate ; match index { RawVisibilityId :: PRIV_IMPLICIT => & VIS_PRIV_IMPLICIT , RawVisibilityId :: PRIV_EXPLICIT => & VIS_PRIV_EXPLICIT , RawVisibilityId :: PUB => & VIS_PUB , RawVisibilityId :: PUB_CRATE => & VIS_PUB_CRATE , _ => & self . vis . arena [index . 0 as usize] , } } }
     };
 }
 

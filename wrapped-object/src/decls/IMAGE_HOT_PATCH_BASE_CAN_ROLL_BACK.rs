@@ -1,0 +1,7 @@
+macro_rules! IMAGE_HOT_PATCH_BASE_CAN_ROLL_BACK {
+    () => {
+        pub const IMAGE_HOT_PATCH_BASE_CAN_ROLL_BACK : u32 = 0x0000_0002 ;
+    };
+}
+
+IMAGE_HOT_PATCH_BASE_CAN_ROLL_BACK!()

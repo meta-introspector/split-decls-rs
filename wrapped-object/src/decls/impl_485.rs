@@ -1,0 +1,27 @@
+macro_rules! deps {
+    () => {
+        DyldCacheRelocationIteratorV5!();
+        DyldCacheSlideInfo!();
+        DyldCacheMappingVersion!();
+        DyldCacheRelocationIteratorV3!();
+        DyldCacheMapping!();
+        ReadRef!();
+        DyldCacheRelocationIterator!();
+        DyldCacheRelocationIteratorVersion!();
+        DyldCacheRelocationIteratorV2!();
+        Endian!();
+        RelocationStateV3!();
+        RelocationStateV5!();
+        RelocationStateV2!();
+        Result!();
+    };
+}
+
+macro_rules! impl_485 {
+    () => {
+        deps!();
+        impl < 'data , E , R > DyldCacheMapping < 'data , E , R > where E : Endian , R : ReadRef < 'data > , { # [doc = " The mapping address"] pub fn address (& self) -> u64 { match self . info { DyldCacheMappingVersion :: V1 (info) => info . address . get (self . endian) , DyldCacheMappingVersion :: V2 (info) => info . address . get (self . endian) , } } # [doc = " The mapping size"] pub fn size (& self) -> u64 { match self . info { DyldCacheMappingVersion :: V1 (info) => info . size . get (self . endian) , DyldCacheMappingVersion :: V2 (info) => info . size . get (self . endian) , } } # [doc = " The mapping file offset"] pub fn file_offset (& self) -> u64 { match self . info { DyldCacheMappingVersion :: V1 (info) => info . file_offset . get (self . endian) , DyldCacheMappingVersion :: V2 (info) => info . file_offset . get (self . endian) , } } # [doc = " The mapping maximum protection"] pub fn max_prot (& self) -> u32 { match self . info { DyldCacheMappingVersion :: V1 (info) => info . max_prot . get (self . endian) , DyldCacheMappingVersion :: V2 (info) => info . max_prot . get (self . endian) , } } # [doc = " The mapping initial protection"] pub fn init_prot (& self) -> u32 { match self . info { DyldCacheMappingVersion :: V1 (info) => info . init_prot . get (self . endian) , DyldCacheMappingVersion :: V2 (info) => info . init_prot . get (self . endian) , } } # [doc = " The mapping data"] pub fn data (& self) -> Result < & 'data [u8] > { self . data . read_bytes_at (self . file_offset () , self . size ()) . read_error ("Failed to read bytes for mapping") } # [doc = " Relocations for the mapping"] pub fn relocations (& self) -> Result < DyldCacheRelocationIterator < 'data , E , R > > { let data = self . data ; let endian = self . endian ; let version = match self . info { DyldCacheMappingVersion :: V1 (_) => DyldCacheRelocationIteratorVersion :: None , DyldCacheMappingVersion :: V2 (mapping) => match mapping . slide (self . endian , self . data) ? { DyldCacheSlideInfo :: None => DyldCacheRelocationIteratorVersion :: None , DyldCacheSlideInfo :: V2 { slide , page_starts , page_extras , } => { let delta_mask = slide . delta_mask . get (endian) ; let delta_shift = delta_mask . trailing_zeros () ; DyldCacheRelocationIteratorVersion :: V2 (DyldCacheRelocationIteratorV2 { data , endian , mapping_file_offset : mapping . file_offset . get (endian) , page_size : slide . page_size . get (endian) . into () , delta_mask , delta_shift , value_add : slide . value_add . get (endian) , page_starts , page_extras , state : RelocationStateV2 :: Start , start_index : 0 , extra_index : 0 , page_offset : 0 , offset : 0 , }) } DyldCacheSlideInfo :: V3 { slide , page_starts } => { DyldCacheRelocationIteratorVersion :: V3 (DyldCacheRelocationIteratorV3 { data , endian , mapping_file_offset : mapping . file_offset . get (endian) , page_size : slide . page_size . get (endian) . into () , auth_value_add : slide . auth_value_add . get (endian) , page_starts , state : RelocationStateV3 :: Start , start_index : 0 , offset : 0 , }) } DyldCacheSlideInfo :: V5 { slide , page_starts } => { DyldCacheRelocationIteratorVersion :: V5 (DyldCacheRelocationIteratorV5 { data , endian , mapping_file_offset : mapping . file_offset . get (endian) , page_size : slide . page_size . get (endian) . into () , value_add : slide . value_add . get (endian) , page_starts , state : RelocationStateV5 :: Start , start_index : 0 , offset : 0 , }) } } , } ; Ok (DyldCacheRelocationIterator { version }) } }
+    };
+}
+
+impl_485!()

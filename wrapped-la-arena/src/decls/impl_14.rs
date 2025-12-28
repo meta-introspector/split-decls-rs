@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Idx!();
+        Entry!();
     };
 }
 
 macro_rules! impl_14 {
     () => {
         deps!();
-        impl < T > Hash for Idx < T > { fn hash < H : Hasher > (& self , state : & mut H) { self . raw . hash (state) ; } }
+        impl < 'a , IDX , V > Entry < 'a , IDX , V > where V : Default , { # [doc = " Ensures a value is in the entry by inserting the default value if empty, and returns a mutable reference"] # [doc = " to the value in the entry."] # [allow (clippy :: unwrap_or_default)] pub fn or_default (self) -> & 'a mut V { self . or_insert_with (Default :: default) } }
     };
 }
 

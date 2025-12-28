@@ -1,0 +1,17 @@
+macro_rules! deps {
+    () => {
+        Match!();
+        Fat!();
+        Mask!();
+        FatVector!();
+    };
+}
+
+macro_rules! impl_159 {
+    () => {
+        deps!();
+        impl < V : FatVector > Fat < V , 1 > { # [doc = " Look for an occurrences of the patterns in this finder in the haystack"] # [doc = " given by the `start` and `end` pointers."] # [doc = ""] # [doc = " If no match could be found, then `None` is returned."] # [doc = ""] # [doc = " # Safety"] # [doc = ""] # [doc = " The given pointers representing the haystack must be valid to read"] # [doc = " from. They must also point to a region of memory that is at least the"] # [doc = " minimum length required by this searcher."] # [doc = ""] # [doc = " Callers must ensure that this is okay to call in the current target for"] # [doc = " the current CPU."] # [inline (always)] pub (crate) unsafe fn find (& self , start : * const u8 , end : * const u8 ,) -> Option < Match > { let len = end . distance (start) ; debug_assert ! (len >= self . minimum_len ()) ; let mut cur = start ; while cur <= end . sub (V :: Half :: BYTES) { if let Some (m) = self . find_one (cur , end) { return Some (m) ; } cur = cur . add (V :: Half :: BYTES) ; } if cur < end { cur = end . sub (V :: Half :: BYTES) ; if let Some (m) = self . find_one (cur , end) { return Some (m) ; } } None } # [doc = " Look for a match starting at the `V::BYTES` at and after `cur`. If"] # [doc = " there isn't one, then `None` is returned."] # [doc = ""] # [doc = " # Safety"] # [doc = ""] # [doc = " The given pointers representing the haystack must be valid to read"] # [doc = " from. They must also point to a region of memory that is at least the"] # [doc = " minimum length required by this searcher."] # [doc = ""] # [doc = " Callers must ensure that this is okay to call in the current target for"] # [doc = " the current CPU."] # [inline (always)] unsafe fn find_one (& self , cur : * const u8 , end : * const u8 ,) -> Option < Match > { let c = self . candidate (cur) ; if ! c . is_zero () { if let Some (m) = self . teddy . verify (cur , end , c) { return Some (m) ; } } None } # [doc = " Look for a candidate match (represented as a vector) starting at the"] # [doc = " `V::BYTES` at and after `cur`. If there isn't one, then a vector with"] # [doc = " all bits set to zero is returned."] # [doc = ""] # [doc = " # Safety"] # [doc = ""] # [doc = " The given pointer representing the haystack must be valid to read"] # [doc = " from."] # [doc = ""] # [doc = " Callers must ensure that this is okay to call in the current target for"] # [doc = " the current CPU."] # [inline (always)] unsafe fn candidate (& self , cur : * const u8) -> V { let chunk = V :: load_half_unaligned (cur) ; Mask :: members1 (chunk , self . masks) } }
+    };
+}
+
+impl_159!()

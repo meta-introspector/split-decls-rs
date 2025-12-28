@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        FastPathRadix!();
+        Number!();
+        Float!();
+    };
+}
+
+macro_rules! impl_105 {
+    () => {
+        deps!();
+        impl Number { # [doc = " Detect if the float can be accurately reconstructed from native floats."] # [inline] pub fn is_fast_path < F : Float > (& self) -> bool { F :: MIN_EXPONENT_FAST_PATH <= self . exponent && self . exponent <= F :: MAX_EXPONENT_DISGUISED_FAST_PATH && self . mantissa <= F :: MAX_MANTISSA_FAST_PATH && ! self . many_digits } # [doc = " The fast path algorithmn using machine-sized integers and floats."] # [doc = ""] # [doc = " This is extracted into a separate function so that it can be attempted before constructing"] # [doc = " a Decimal. This only works if both the mantissa and the exponent"] # [doc = " can be exactly represented as a machine float, since IEE-754 guarantees"] # [doc = " no rounding will occur."] # [doc = ""] # [doc = " There is an exception: disguised fast-path cases, where we can shift"] # [doc = " powers-of-10 from the exponent to the significant digits."] pub fn try_fast_path < F : Float > (& self) -> Option < F > { # [cfg (feature = "nightly")] let _cw = set_precision :: < F > () ; if self . is_fast_path :: < F > () { let max_exponent = F :: MAX_EXPONENT_FAST_PATH ; Some (if self . exponent <= max_exponent { let value = F :: from_u64 (self . mantissa) ; if self . exponent < 0 { value / unsafe { F :: pow_fast_path ((- self . exponent) as _) } } else { value * unsafe { F :: pow_fast_path (self . exponent as _) } } } else { let shift = self . exponent - max_exponent ; let int_power = unsafe { int_pow_fast_path (shift as usize , FastPathRadix :: Ten) } ; let mantissa = self . mantissa . checked_mul (int_power) ? ; if mantissa > F :: MAX_MANTISSA_FAST_PATH { return None ; } F :: from_u64 (mantissa) * unsafe { F :: pow_fast_path (max_exponent as _) } }) } else { None } } }
+    };
+}
+
+impl_105!()

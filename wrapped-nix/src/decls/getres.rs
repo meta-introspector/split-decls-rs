@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        Result!();
+    };
+}
+
+macro_rules! getres {
+    () => {
+        deps!();
+        # [cfg (any (linux_android , freebsdlike , target_os = "openbsd"))] mod getres { feature ! { #! [feature = "user"] use super :: { Gid , Uid } ; use crate :: errno :: Errno ; use crate :: Result ; # [doc = " Real, effective and saved user IDs."] # [derive (Debug , Copy , Clone , Eq , PartialEq)] pub struct ResUid { # [doc = " Real UID"] pub real : Uid , # [doc = " Effective UID"] pub effective : Uid , # [doc = " Saved UID"] pub saved : Uid , } # [doc = " Real, effective and saved group IDs."] # [derive (Debug , Copy , Clone , Eq , PartialEq)] pub struct ResGid { # [doc = " Real GID"] pub real : Gid , # [doc = " Effective GID"] pub effective : Gid , # [doc = " Saved GID"] pub saved : Gid , } # [doc = " Gets the real, effective, and saved user IDs."] # [doc = ""] # [doc = " ([see getresuid(2)](http://man7.org/linux/man-pages/man2/getresuid.2.html))"] # [doc = ""] # [doc = " #Returns"] # [doc = ""] # [doc = " - `Ok((Uid, Uid, Uid))`: tuple of real, effective and saved uids on success."] # [doc = " - `Err(x)`: libc error code on failure."] # [doc = ""] # [inline] pub fn getresuid () -> Result < ResUid > { let mut ruid = libc :: uid_t :: MAX ; let mut euid = libc :: uid_t :: MAX ; let mut suid = libc :: uid_t :: MAX ; let res = unsafe { libc :: getresuid (& mut ruid , & mut euid , & mut suid) } ; Errno :: result (res) . map (| _ | ResUid { real : Uid (ruid) , effective : Uid (euid) , saved : Uid (suid) , }) } # [doc = " Gets the real, effective, and saved group IDs."] # [doc = ""] # [doc = " ([see getresgid(2)](http://man7.org/linux/man-pages/man2/getresgid.2.html))"] # [doc = ""] # [doc = " #Returns"] # [doc = ""] # [doc = " - `Ok((Gid, Gid, Gid))`: tuple of real, effective and saved gids on success."] # [doc = " - `Err(x)`: libc error code on failure."] # [doc = ""] # [inline] pub fn getresgid () -> Result < ResGid > { let mut rgid = libc :: gid_t :: MAX ; let mut egid = libc :: gid_t :: MAX ; let mut sgid = libc :: gid_t :: MAX ; let res = unsafe { libc :: getresgid (& mut rgid , & mut egid , & mut sgid) } ; Errno :: result (res) . map (| _ | ResGid { real : Gid (rgid) , effective : Gid (egid) , saved : Gid (sgid) , }) } } }
+    };
+}
+
+getres!()

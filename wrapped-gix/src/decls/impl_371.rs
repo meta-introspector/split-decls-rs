@@ -1,0 +1,17 @@
+macro_rules! deps {
+    () => {
+        Merge!();
+        Repository!();
+        InProgress!();
+        Note!();
+    };
+}
+
+macro_rules! impl_371 {
+    () => {
+        deps!();
+        impl crate :: Repository { # [doc = " Returns the status of an in progress operation on a repository or [`None`]"] # [doc = " if no operation is currently in progress."] # [doc = ""] # [doc = " Note to be confused with the repositories 'status'."] pub fn state (& self) -> Option < state :: InProgress > { let git_dir = self . path () ; if git_dir . join ("rebase-apply/applying") . is_file () { Some (state :: InProgress :: ApplyMailbox) } else if git_dir . join ("rebase-apply/rebasing") . is_file () { Some (state :: InProgress :: Rebase) } else if git_dir . join ("rebase-apply") . is_dir () { Some (state :: InProgress :: ApplyMailboxRebase) } else if git_dir . join ("rebase-merge/interactive") . is_file () { Some (state :: InProgress :: RebaseInteractive) } else if git_dir . join ("rebase-merge") . is_dir () { Some (state :: InProgress :: Rebase) } else if git_dir . join ("CHERRY_PICK_HEAD") . is_file () { if git_dir . join ("sequencer/todo") . is_file () { Some (state :: InProgress :: CherryPickSequence) } else { Some (state :: InProgress :: CherryPick) } } else if git_dir . join ("MERGE_HEAD") . is_file () { Some (state :: InProgress :: Merge) } else if git_dir . join ("BISECT_LOG") . is_file () { Some (state :: InProgress :: Bisect) } else if git_dir . join ("REVERT_HEAD") . is_file () { if git_dir . join ("sequencer/todo") . is_file () { Some (state :: InProgress :: RevertSequence) } else { Some (state :: InProgress :: Revert) } } else { None } } }
+    };
+}
+
+impl_371!()

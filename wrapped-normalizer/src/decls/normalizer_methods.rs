@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        IsNormalizedSinkUtf8!();
         IsNormalizedSinkUtf16!();
         IsNormalizedSinkStr!();
+        IsNormalizedSinkUtf8!();
     };
 }
 

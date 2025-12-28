@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Zeroes!();
+        Block!();
     };
 }
 
 macro_rules! impl_50 {
     () => {
         deps!();
-        impl < 'a > FusedIterator for Zeroes < 'a > { }
+        impl BitOrAssign for Block { # [inline] fn bitor_assign (& mut self , other : Self) { self . 0 = v128_or (self . 0 , other . 0) ; } }
     };
 }
 

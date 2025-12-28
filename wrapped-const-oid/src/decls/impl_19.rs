@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        ObjectIdentifier!();
+        Buffer!();
     };
 }
 
 macro_rules! impl_19 {
     () => {
         deps!();
-        impl < const MAX_SIZE : usize > fmt :: Debug for ObjectIdentifier < MAX_SIZE > { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { write ! (f , "ObjectIdentifier({self})") } }
+        impl < const SIZE : usize > AsRef < [u8] > for Buffer < SIZE > { fn as_ref (& self) -> & [u8] { self . as_bytes () } }
     };
 }
 

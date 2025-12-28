@@ -1,0 +1,23 @@
+macro_rules! deps {
+    () => {
+        QueryEnvInner!();
+        Data!();
+        Request!();
+        Result!();
+        QueryEnv!();
+        ValidationMode!();
+        Extensions!();
+        Registry!();
+        CacheControl!();
+        ServerError!();
+    };
+}
+
+macro_rules! prepare_request {
+    () => {
+        deps!();
+        # [allow (clippy :: too_many_arguments)] pub (crate) async fn prepare_request (mut extensions : Extensions , request : Request , session_data : Arc < Data > , registry : & Registry , validation_mode : ValidationMode , recursive_depth : usize , max_directives : Option < usize > , complexity : Option < usize > , depth : Option < usize > ,) -> Result < (QueryEnv , CacheControl) , Vec < ServerError > > { let mut request = extensions . prepare_request (request) . await ? ; let query_data = Arc :: new (std :: mem :: take (& mut request . data)) ; extensions . attach_query_data (query_data . clone ()) ; let mut document = { let query = & request . query ; let parsed_doc = request . parsed_query . take () ; let fut_parse = Box :: pin (async move { let doc = match parsed_doc { Some (parsed_doc) => parsed_doc , None => parse_query (query) ? , } ; check_recursive_depth (& doc , recursive_depth) ? ; if let Some (max_directives) = max_directives { check_max_directives (& doc , max_directives) ? ; } Ok (doc) }) ; extensions . parse_query (query , & request . variables , & mut * fut_parse) . await ? } ; let validation_result = { let validation_fut = Box :: pin (async { check_rules (registry , & document , Some (& request . variables) , validation_mode , complexity , depth ,) }) ; extensions . validation (& mut * validation_fut) . await ? } ; let operation = if let Some (operation_name) = & request . operation_name { match document . operations { DocumentOperations :: Single (_) => None , DocumentOperations :: Multiple (mut operations) => operations . remove (operation_name . as_str ()) . map (| operation | (Some (operation_name . clone ()) , operation)) , } . ok_or_else (| | { ServerError :: new (format ! (r#"Unknown operation named "{}""# , operation_name) , None ,) }) } else { match document . operations { DocumentOperations :: Single (operation) => Ok ((None , operation)) , DocumentOperations :: Multiple (map) if map . len () == 1 => { let (operation_name , operation) = map . into_iter () . next () . unwrap () ; Ok ((Some (operation_name . to_string ()) , operation)) } DocumentOperations :: Multiple (_) => Err (ServerError :: new ("Operation name required in request." , None ,)) , } } ; let (operation_name , mut operation) = operation . map_err (| err | vec ! [err]) ? ; for fragment in document . fragments . values_mut () { remove_skipped_selection (& mut fragment . node . selection_set . node , & request . variables) ; } remove_skipped_selection (& mut operation . node . selection_set . node , & request . variables) ; let env = QueryEnvInner { extensions , variables : request . variables , operation_name , operation , fragments : document . fragments , uploads : request . uploads , session_data , query_data , http_headers : Default :: default () , introspection_mode : request . introspection_mode , errors : Default :: default () , } ; Ok ((QueryEnv :: new (env) , validation_result . cache_control)) }
+    };
+}
+
+prepare_request!()

@@ -1,0 +1,7 @@
+macro_rules! BIND_OPCODE_SET_DYLIB_ORDINAL_ULEB {
+    () => {
+        pub const BIND_OPCODE_SET_DYLIB_ORDINAL_ULEB : u8 = 0x20 ;
+    };
+}
+
+BIND_OPCODE_SET_DYLIB_ORDINAL_ULEB!()

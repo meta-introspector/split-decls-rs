@@ -1,5 +1,6 @@
 macro_rules! deps {
     () => {
+        IterEither!();
         Either!();
     };
 }
@@ -7,7 +8,7 @@ macro_rules! deps {
 macro_rules! impl_22 {
     () => {
         deps!();
-        # [doc = " `Either<L, R>` is a future if both `L` and `R` are futures."] impl < L , R > Future for Either < L , R > where L : Future , R : Future < Output = L :: Output > , { type Output = L :: Output ; fn poll (self : Pin < & mut Self > , cx : & mut core :: task :: Context < '_ > ,) -> core :: task :: Poll < Self :: Output > { for_both ! (self . as_pin_mut () , inner => inner . poll (cx)) } }
+        impl < L , R > Iterator for IterEither < L , R > where L : Iterator , R : Iterator , { type Item = Either < L :: Item , R :: Item > ; fn next (& mut self) -> Option < Self :: Item > { Some (map_either ! (self . inner , ref mut inner => inner . next () ?)) } fn size_hint (& self) -> (usize , Option < usize >) { for_both ! (self . inner , ref inner => inner . size_hint ()) } fn fold < Acc , G > (self , init : Acc , f : G) -> Acc where G : FnMut (Acc , Self :: Item) -> Acc , { wrap_either ! (self . inner => . fold (init , f)) } fn for_each < F > (self , f : F) where F : FnMut (Self :: Item) , { wrap_either ! (self . inner => . for_each (f)) } fn count (self) -> usize { for_both ! (self . inner , inner => inner . count ()) } fn last (self) -> Option < Self :: Item > { Some (map_either ! (self . inner , inner => inner . last () ?)) } fn nth (& mut self , n : usize) -> Option < Self :: Item > { Some (map_either ! (self . inner , ref mut inner => inner . nth (n) ?)) } fn collect < B > (self) -> B where B : iter :: FromIterator < Self :: Item > , { wrap_either ! (self . inner => . collect ()) } fn partition < B , F > (self , f : F) -> (B , B) where B : Default + Extend < Self :: Item > , F : FnMut (& Self :: Item) -> bool , { wrap_either ! (self . inner => . partition (f)) } fn all < F > (& mut self , f : F) -> bool where F : FnMut (Self :: Item) -> bool , { wrap_either ! (& mut self . inner => . all (f)) } fn any < F > (& mut self , f : F) -> bool where F : FnMut (Self :: Item) -> bool , { wrap_either ! (& mut self . inner => . any (f)) } fn find < P > (& mut self , predicate : P) -> Option < Self :: Item > where P : FnMut (& Self :: Item) -> bool , { wrap_either ! (& mut self . inner => . find (predicate)) } fn find_map < B , F > (& mut self , f : F) -> Option < B > where F : FnMut (Self :: Item) -> Option < B > , { wrap_either ! (& mut self . inner => . find_map (f)) } fn position < P > (& mut self , predicate : P) -> Option < usize > where P : FnMut (Self :: Item) -> bool , { wrap_either ! (& mut self . inner => . position (predicate)) } }
     };
 }
 

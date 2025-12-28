@@ -1,0 +1,7 @@
+macro_rules! BIND_OPCODE_SET_SEGMENT_AND_OFFSET_ULEB {
+    () => {
+        pub const BIND_OPCODE_SET_SEGMENT_AND_OFFSET_ULEB : u8 = 0x70 ;
+    };
+}
+
+BIND_OPCODE_SET_SEGMENT_AND_OFFSET_ULEB!()

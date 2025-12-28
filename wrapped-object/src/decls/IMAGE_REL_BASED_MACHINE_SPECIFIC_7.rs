@@ -1,0 +1,7 @@
+macro_rules! IMAGE_REL_BASED_MACHINE_SPECIFIC_7 {
+    () => {
+        pub const IMAGE_REL_BASED_MACHINE_SPECIFIC_7 : u16 = 7 ;
+    };
+}
+
+IMAGE_REL_BASED_MACHINE_SPECIFIC_7!()

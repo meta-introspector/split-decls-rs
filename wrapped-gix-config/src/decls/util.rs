@@ -1,0 +1,17 @@
+macro_rules! deps {
+    () => {
+        Whitespace!();
+        Comment!();
+        Header!();
+        Event!();
+    };
+}
+
+macro_rules! util {
+    () => {
+        deps!();
+        pub (crate) mod util { # ! [doc = " This module is only included for tests, and contains common unit test helper"] # ! [doc = " functions."] use std :: borrow :: Cow ; use crate :: parse :: { section , Comment , Event } ; pub fn section_header (name : & str , subsection : impl Into < Option < (& 'static str , & 'static str) > > ,) -> section :: Header < '_ > { let name = section :: Name :: try_from (name) . unwrap () ; if let Some ((separator , subsection_name)) = subsection . into () { section :: Header { name , separator : Some (Cow :: Borrowed (separator . into ())) , subsection_name : Some (Cow :: Borrowed (subsection_name . into ())) , } } else { section :: Header { name , separator : None , subsection_name : None , } } } pub (crate) fn name_event (name : & 'static str) -> Event < 'static > { Event :: SectionValueName (section :: ValueName (Cow :: Borrowed (name . into ()))) } pub (crate) fn value_event (value : & 'static str) -> Event < 'static > { Event :: Value (Cow :: Borrowed (value . into ())) } pub (crate) fn value_not_done_event (value : & 'static str) -> Event < 'static > { Event :: ValueNotDone (Cow :: Borrowed (value . into ())) } pub (crate) fn value_done_event (value : & 'static str) -> Event < 'static > { Event :: ValueDone (Cow :: Borrowed (value . into ())) } pub (crate) fn newline_event () -> Event < 'static > { newline_custom_event ("\n") } pub (crate) fn newline_custom_event (value : & 'static str) -> Event < 'static > { Event :: Newline (Cow :: Borrowed (value . into ())) } pub (crate) fn whitespace_event (value : & 'static str) -> Event < 'static > { Event :: Whitespace (Cow :: Borrowed (value . into ())) } pub (crate) fn comment_event (tag : char , msg : & 'static str) -> Event < 'static > { Event :: Comment (comment (tag , msg)) } pub (crate) fn comment (comment_tag : char , comment : & 'static str) -> Comment < 'static > { Comment { tag : comment_tag as u8 , text : Cow :: Borrowed (comment . into ()) , } } pub (crate) const fn fully_consumed < T > (t : T) -> (& 'static [u8] , T) { (& [] , t) } }
+    };
+}
+
+util!()

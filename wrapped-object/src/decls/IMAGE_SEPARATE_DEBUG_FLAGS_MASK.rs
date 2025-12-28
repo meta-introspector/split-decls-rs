@@ -1,0 +1,7 @@
+macro_rules! IMAGE_SEPARATE_DEBUG_FLAGS_MASK {
+    () => {
+        pub const IMAGE_SEPARATE_DEBUG_FLAGS_MASK : u16 = 0x8000 ;
+    };
+}
+
+IMAGE_SEPARATE_DEBUG_FLAGS_MASK!()

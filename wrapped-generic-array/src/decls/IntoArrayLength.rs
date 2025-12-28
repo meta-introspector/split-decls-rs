@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ConstArrayLength!();
         ArrayLength!();
+        ConstArrayLength!();
     };
 }
 

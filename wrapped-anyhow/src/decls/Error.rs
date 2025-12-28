@@ -1,7 +1,9 @@
 macro_rules! deps {
     () => {
+        ErrorImpl!();
         Result!();
         Ok!();
+        Own!();
     };
 }
 

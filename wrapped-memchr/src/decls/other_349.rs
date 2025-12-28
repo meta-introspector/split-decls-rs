@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        Finder!();
+    };
+}
+
+macro_rules! other_349 {
+    () => {
+        deps!();
+        # [doc = " A union indicating one of several possible prefilters that are in active"] # [doc = " use."] # [doc = ""] # [doc = " This union should only be read by one of the functions prefixed with"] # [doc = " `prefilter_kind_`. Namely, the correct function is meant to be paired with"] # [doc = " the union by the caller, such that the function always reads from the"] # [doc = " designated union field."] # [derive (Clone , Copy)] union PrefilterKind { fallback : crate :: arch :: all :: packedpair :: Finder , # [cfg (all (target_arch = "x86_64" , target_feature = "sse2"))] sse2 : crate :: arch :: x86_64 :: sse2 :: packedpair :: Finder , # [cfg (all (target_arch = "x86_64" , target_feature = "sse2"))] avx2 : crate :: arch :: x86_64 :: avx2 :: packedpair :: Finder , # [cfg (all (target_arch = "wasm32" , target_feature = "simd128"))] simd128 : crate :: arch :: wasm32 :: simd128 :: packedpair :: Finder , # [cfg (target_arch = "aarch64")] neon : crate :: arch :: aarch64 :: neon :: packedpair :: Finder , }
+    };
+}
+
+other_349!()

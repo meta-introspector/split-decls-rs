@@ -1,0 +1,7 @@
+macro_rules! macro_146 {
+    () => {
+        DEFINE_GUID ! { CLSID_SetupConfiguration , 0x177f0c4a , 0x1cd3 , 0x4de7 , 0xa3 , 0x2c , 0x71 , 0xdb , 0xbb , 0x9f , 0xa3 , 0x6d }
+    };
+}
+
+macro_146!()
