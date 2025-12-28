@@ -16,9 +16,7 @@ macro_rules! partition_module {
             use llm_macros::{llm_error_message, llm_context};
             
             // Import real implementations from wrapped crates
-            include!("../../output2/wrapped-mockall_derive/src/decls/demutify_arg.rs");
-            include!("../../output2/wrapped-mockall_derive/src/decls/compile_error.rs");
-            include!("../../output2/wrapped-mockall_derive/src/decls/pat_is_self.rs");
+            include!("output2/wrapped-mockall_derive/src/decls/demutify_arg.rs");
             
             // Import syn types and functions
             use quote::*;
@@ -29,7 +27,6 @@ macro_rules! partition_module {
             };
             use syn::punctuated::Punctuated;
             use proc_macro2::TokenStream;
-            use std::collections::HashMap;
             
             // Import real types from wrapped crates instead of stubs
             #[derive(Hash, Eq, PartialEq, Clone)]

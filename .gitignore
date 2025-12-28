@@ -3,12 +3,14 @@
 partition1-crate/target/
 llm_macros/target/
 *.log
+**/*.log
 
 # Editor backup files
 *~
 #*#
 .#*
 *.bak
+*.tmp
 
 # OS generated files
 .DS_Store
@@ -39,3 +41,11 @@ output2/\#*
 /lib_error.log
 /sparql_error.log
 simple-split/target
+
+# Test outputs and partition files
+output/
+output2/
+output3/
+output4/
+partition_*.rs
+partition1-crate/

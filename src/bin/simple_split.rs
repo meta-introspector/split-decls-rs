@@ -243,7 +243,7 @@ fn main() -> Result<()> {
         content.push_str(&format!("        {}\n", decl_info.item_tokens));
         content.push_str("    };\n");
         content.push_str("}\n\n");
-        content.push_str(&format!("{}!()", name));
+        content.push_str(&format!("{}!();", name));
         
         let file_path = output_dir.join(format!("{}.rs", name));
         println!("  💾 Writing declaration file: {}", file_path.display());
