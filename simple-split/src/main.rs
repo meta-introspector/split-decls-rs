@@ -100,11 +100,20 @@ fn split_crate(crate_path: &Path) -> Result<()> {
                         _ => continue,
                     };
                     
-                    let wrapped = format!(
-                        "use serde::{{Deserialize, Serialize}};\nuse std::collections::HashMap;\n\nmkdecl{}! {{\n{}\n}}",
-                        decl_type,
-                        item.to_token_stream()
-                    );
+                    let wrapped = if decl_type == "fn" {
+                        format!(
+                            "use serde::{{Deserialize, Serialize}};\nuse std::collections::HashMap;\n\nmkdecl{}! {{\nprintln!(\"🔧 Calling function: {}\");\n{}\n}}",
+                            decl_type,
+                            name,
+                            item.to_token_stream()
+                        )
+                    } else {
+                        format!(
+                            "use serde::{{Deserialize, Serialize}};\nuse std::collections::HashMap;\n\nmkdecl{}! {{\n{}\n}}",
+                            decl_type,
+                            item.to_token_stream()
+                        )
+                    };
                     
                     let decl_size = wrapped.len();
                     let complexity = match decl_size {

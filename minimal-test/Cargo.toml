@@ -1,0 +1,27 @@
+[package]
+name = "minimal-test"
+version = "0.1.0"
+edition = "2021"
+
+[workspace]
+
+[dependencies]
+paste = "1.0"
+anyhow = "1.0"
+split-decls-rs = { path = "../" }
+
+[patch.crates-io]
+proc-macro2 = { path = "../../proc-macro2" }
+quote = { path = "../../quote" }
+syn = { path = "../../syn" }
+serde = { path = "../../serde/serde" }
+serde_core = { path = "../../serde/serde_core" }
+serde_derive = { path = "../../serde/serde_derive" }
+serde_spanned = { path = "../../toml/crates/serde_spanned" }
+rayon = { path = "../../rayon" }
+rayon-core = { path = "../../rayon/rayon-core" }
+toml = { path = "../../toml/crates/toml" }
+toml_datetime = { path = "../../toml/crates/toml_datetime" }
+toml_edit = { path = "../../toml/crates/toml_edit" }
+introspector_decl_core = { path = "../../patch-build-rs/introspector_decl_core" }
+introspector_macro_helpers = { path = "../../patch-build-rs/introspector_macro_helpers" }

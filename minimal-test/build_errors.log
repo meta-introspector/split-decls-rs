@@ -1,0 +1,550 @@
+error[E0308]: mismatched types
+error[E0277]: the trait bound `proc_macro2::TokenStream: quote::ToTokens` is not satisfied
+   = note: this error originates in the macro `$crate::quote` which comes from the expansion of the macro `quote` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+    = note: this error originates in the macro `dispatch_wrap_logic` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0277]: the trait bound `proc_macro2::TokenStream: quote::ToTokens` is not satisfied
+   = note: this error originates in the macro `$crate::quote` which comes from the expansion of the macro `quote` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0277]: the trait bound `proc_macro2::TokenStream: quote::ToTokens` is not satisfied
+    = note: this error originates in the macro `$crate::quote` which comes from the expansion of the macro `quote` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0277]: the trait bound `TokenStream: From<proc_macro2::TokenStream>` is not satisfied
+error[E0277]: the trait bound `proc_macro2::TokenStream: quote::ToTokens` is not satisfied
+    = note: this error originates in the macro `$crate::quote` which comes from the expansion of the macro `quote` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0277]: the trait bound `TokenStream: From<proc_macro2::TokenStream>` is not satisfied
+error[E0277]: the trait bound `TokenStream: From<proc_macro2::TokenStream>` is not satisfied
+error[E0277]: the trait bound `TokenStream: From<proc_macro2::TokenStream>` is not satisfied
+Some errors have detailed explanations: E0277, E0308.
+For more information about an error, try `rustc --explain E0277`.
+For more information about this error, try `rustc --explain E0277`.
+error: could not compile `split-decls-syscall-macros` (lib) due to 4 previous errors
+warning: build failed, waiting for other jobs to finish...
+error: could not compile `introspector_decl_core` (lib) due to 9 previous errors; 1 warning emitted
+error: could not compile `introspector_decl_core` (lib) due to 9 previous errors; 1 warning emitted
+error[E0053]: method `to_tokens` has an incompatible type for trait
+error[E0053]: method `to_tokens` has an incompatible type for trait
+error[E0053]: method `to_tokens` has an incompatible type for trait
+error[E0053]: method `to_tokens` has an incompatible type for trait
+error[E0053]: method `to_tokens` has an incompatible type for trait
+error[E0053]: method `to_tokens` has an incompatible type for trait
+error[E0053]: method `to_tokens` has an incompatible type for trait
+error[E0308]: mismatched types
+error[E0308]: mismatched types
+error[E0308]: mismatched types
+error[E0277]: the trait bound `proc_macro2::TokenStream: quote::ToTokens` is not satisfied
+121 |             self.cx.error_spanned_by(dup_token, msg);
+note: required by a bound in `Ctxt::error_spanned_by`
+ 31 |     pub fn error_spanned_by<A: ToTokens, T: Display>(&self, obj: A, msg: T) {
+    |                                ^^^^^^^^ required by this bound in `Ctxt::error_spanned_by`
+error[E0277]: the trait bound `proc_macro2::TokenTree: Parse` is not satisfied
+error[E0277]: the trait bound `proc_macro2::TokenTree: CustomToken` is not satisfied
+error[E0277]: the trait bound `name::Name: From<&syn::Ident>` is not satisfied
+error[E0277]: the trait bound `proc_macro2::TokenStream: quote::ToTokens` is not satisfied
+657 |             cx.error_spanned_by(untagged_tokens, msg);
+note: required by a bound in `Ctxt::error_spanned_by`
+ 31 |     pub fn error_spanned_by<A: ToTokens, T: Display>(&self, obj: A, msg: T) {
+    |                                ^^^^^^^^ required by this bound in `Ctxt::error_spanned_by`
+error[E0277]: the trait bound `proc_macro2::TokenStream: quote::ToTokens` is not satisfied
+658 |             cx.error_spanned_by(tag_tokens, msg);
+note: required by a bound in `Ctxt::error_spanned_by`
+ 31 |     pub fn error_spanned_by<A: ToTokens, T: Display>(&self, obj: A, msg: T) {
+    |                                ^^^^^^^^ required by this bound in `Ctxt::error_spanned_by`
+error[E0277]: the trait bound `proc_macro2::TokenStream: quote::ToTokens` is not satisfied
+663 |             cx.error_spanned_by(content_tokens, msg);
+note: required by a bound in `Ctxt::error_spanned_by`
+ 31 |     pub fn error_spanned_by<A: ToTokens, T: Display>(&self, obj: A, msg: T) {
+    |                                ^^^^^^^^ required by this bound in `Ctxt::error_spanned_by`
+error[E0277]: the trait bound `proc_macro2::TokenStream: quote::ToTokens` is not satisfied
+668 |             cx.error_spanned_by(untagged_tokens, msg);
+note: required by a bound in `Ctxt::error_spanned_by`
+ 31 |     pub fn error_spanned_by<A: ToTokens, T: Display>(&self, obj: A, msg: T) {
+    |                                ^^^^^^^^ required by this bound in `Ctxt::error_spanned_by`
+error[E0277]: the trait bound `proc_macro2::TokenStream: quote::ToTokens` is not satisfied
+669 |             cx.error_spanned_by(content_tokens, msg);
+note: required by a bound in `Ctxt::error_spanned_by`
+ 31 |     pub fn error_spanned_by<A: ToTokens, T: Display>(&self, obj: A, msg: T) {
+    |                                ^^^^^^^^ required by this bound in `Ctxt::error_spanned_by`
+error[E0277]: the trait bound `proc_macro2::TokenStream: quote::ToTokens` is not satisfied
+675 |             cx.error_spanned_by(untagged_tokens, msg);
+note: required by a bound in `Ctxt::error_spanned_by`
+ 31 |     pub fn error_spanned_by<A: ToTokens, T: Display>(&self, obj: A, msg: T) {
+    |                                ^^^^^^^^ required by this bound in `Ctxt::error_spanned_by`
+error[E0277]: the trait bound `proc_macro2::TokenStream: quote::ToTokens` is not satisfied
+676 |             cx.error_spanned_by(tag_tokens, msg);
+note: required by a bound in `Ctxt::error_spanned_by`
+ 31 |     pub fn error_spanned_by<A: ToTokens, T: Display>(&self, obj: A, msg: T) {
+    |                                ^^^^^^^^ required by this bound in `Ctxt::error_spanned_by`
+error[E0277]: the trait bound `proc_macro2::TokenStream: quote::ToTokens` is not satisfied
+677 |             cx.error_spanned_by(content_tokens, msg);
+note: required by a bound in `Ctxt::error_spanned_by`
+ 31 |     pub fn error_spanned_by<A: ToTokens, T: Display>(&self, obj: A, msg: T) {
+    |                                ^^^^^^^^ required by this bound in `Ctxt::error_spanned_by`
+error[E0277]: the trait bound `proc_macro2::TokenStream: quote::ToTokens` is not satisfied
+698 |             cx.error_spanned_by(field_identifier_tokens, msg);
+note: required by a bound in `Ctxt::error_spanned_by`
+ 31 |     pub fn error_spanned_by<A: ToTokens, T: Display>(&self, obj: A, msg: T) {
+    |                                ^^^^^^^^ required by this bound in `Ctxt::error_spanned_by`
+error[E0277]: the trait bound `proc_macro2::TokenStream: quote::ToTokens` is not satisfied
+699 |             cx.error_spanned_by(variant_identifier_tokens, msg);
+note: required by a bound in `Ctxt::error_spanned_by`
+ 31 |     pub fn error_spanned_by<A: ToTokens, T: Display>(&self, obj: A, msg: T) {
+    |                                ^^^^^^^^ required by this bound in `Ctxt::error_spanned_by`
+error[E0277]: the trait bound `name::Name: From<&syn::Ident>` is not satisfied
+error[E0277]: the trait bound `name::Name: From<&syn::Ident>` is not satisfied
+error[E0308]: mismatched types
+error[E0308]: mismatched types
+error[E0308]: mismatched types
+error[E0308]: mismatched types
+error[E0308]: mismatched types
+error[E0308]: mismatched types
+error[E0308]: mismatched types
+error[E0308]: mismatched types
+error[E0308]: mismatched types
+error[E0308]: mismatched types
+error[E0308]: mismatched types
+error[E0308]: mismatched types
+error[E0308]: mismatched types
+error[E0308]: mismatched types
+error[E0308]: mismatched types
+error[E0308]: mismatched types
+error[E0308]: mismatched types
+error[E0308]: mismatched types
+error[E0599]: the method `to_tokens` exists for reference `&proc_macro2::TokenStream`, but its trait bounds were not satisfied
+error[E0599]: the method `to_tokens` exists for reference `&proc_macro2::TokenStream`, but its trait bounds were not satisfied
+error[E0308]: mismatched types
+    = note: this error originates in the macro `define_delimiters` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0599]: the method `to_tokens` exists for reference `&proc_macro2::TokenStream`, but its trait bounds were not satisfied
+error[E0599]: the method `to_tokens` exists for reference `&proc_macro2::TokenStream`, but its trait bounds were not satisfied
+error[E0599]: the method `to_tokens` exists for reference `&proc_macro2::TokenStream`, but its trait bounds were not satisfied
+error[E0308]: mismatched types
+error[E0599]: the method `to_tokens` exists for reference `&proc_macro2::TokenStream`, but its trait bounds were not satisfied
+error[E0308]: mismatched types
+    = note: this error originates in the macro `define_delimiters` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+error[E0308]: mismatched types
+error[E0308]: mismatched types
+error[E0277]: the trait bound `proc_macro2::TokenStream: quote::ToTokens` is not satisfied
+    = note: this error originates in the macro `$crate::quote_token_with_context` which comes from the expansion of the macro `quote_block` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+    = note: this error originates in the macro `quote` which comes from the expansion of the macro `quote_block` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0277]: the trait bound `proc_macro2::TokenStream: quote::ToTokens` is not satisfied
+    = note: this error originates in the macro `$crate::quote_token_with_context` which comes from the expansion of the macro `quote_block` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+    = note: this error originates in the macro `quote` which comes from the expansion of the macro `quote_block` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0277]: the trait bound `proc_macro2::TokenStream: quote::ToTokens` is not satisfied
+    = note: this error originates in the macro `$crate::quote_token_with_context` which comes from the expansion of the macro `quote_block` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+    = note: this error originates in the macro `quote` which comes from the expansion of the macro `quote_block` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+    = note: this error originates in the macro `quote` which comes from the expansion of the macro `quote_block` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+    = note: this error originates in the macro `quote` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+    = note: this error originates in the macro `quote` which comes from the expansion of the macro `quote_block` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+    = note: this error originates in the macro `quote` which comes from the expansion of the macro `quote_expr` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0277]: the trait bound `proc_macro2::TokenStream: quote::ToTokens` is not satisfied
+    = note: this error originates in the macro `$crate::quote_token_with_context` which comes from the expansion of the macro `quote_block` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+    = note: this error originates in the macro `quote` which comes from the expansion of the macro `quote_block` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0277]: the trait bound `proc_macro2::TokenStream: quote::ToTokens` is not satisfied
+   = note: this error originates in the macro `$crate::quote_token_with_context` which comes from the expansion of the macro `quote_block` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+    = note: this error originates in the macro `quote` which comes from the expansion of the macro `quote_block` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0277]: the trait bound `proc_macro2::TokenStream: quote::ToTokens` is not satisfied
+   = note: this error originates in the macro `$crate::quote_token_with_context` which comes from the expansion of the macro `quote_block` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+    = note: this error originates in the macro `quote` which comes from the expansion of the macro `quote_block` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+    = note: this error originates in the macro `quote` which comes from the expansion of the macro `quote_block` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0277]: the trait bound `proc_macro2::TokenStream: quote::ToTokens` is not satisfied
+47 | |         let __deserializer = _serde::#private::de::ContentRefDeserializer::<__D::Error>::new(&__content);
+57 | |         _serde::#private::Err(_serde::de::Error::custom(#fallthrough_msg))
+   = note: this error originates in the macro `$crate::quote_token_with_context` which comes from the expansion of the macro `quote_block` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+ 47 | |         let __deserializer = _serde::#private::de::ContentRefDeserializer::<__D::Error>::new(&__content);
+ 57 | |         _serde::#private::Err(_serde::de::Error::custom(#fallthrough_msg))
+    = note: this error originates in the macro `quote` which comes from the expansion of the macro `quote_block` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0277]: the trait bound `proc_macro2::TokenStream: quote::ToTokens` is not satisfied
+   = note: this error originates in the macro `$crate::quote_token_with_context` which comes from the expansion of the macro `quote_block` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+    = note: this error originates in the macro `quote` which comes from the expansion of the macro `quote_block` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+    = note: this error originates in the macro `quote` which comes from the expansion of the macro `quote_expr` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+    = note: this error originates in the macro `quote` which comes from the expansion of the macro `quote_expr` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+    = note: this error originates in the macro `quote` which comes from the expansion of the macro `quote_block` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: arguments to this function are incorrect
+error[E0308]: mismatched types
+    = note: this error originates in the macro `quote` which comes from the expansion of the macro `quote_block` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+error[E0277]: the trait bound `proc_macro2::TokenStream: quote::ToTokens` is not satisfied
+    = note: this error originates in the macro `$crate::quote_token_with_context` which comes from the expansion of the macro `quote_block` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+    = note: this error originates in the macro `quote` which comes from the expansion of the macro `quote_block` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0599]: the method `quote_into_iter` exists for reference `&proc_macro2::TokenStream`, but its trait bounds were not satisfied
+    = note: this error originates in the macro `$crate::quote_bind_into_iter` which comes from the expansion of the macro `quote` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0599]: the method `quote_into_iter` exists for reference `&proc_macro2::TokenStream`, but its trait bounds were not satisfied
+    = note: this error originates in the macro `$crate::quote_bind_into_iter` which comes from the expansion of the macro `quote` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0277]: the trait bound `proc_macro2::Literal: quote::ToTokens` is not satisfied
+    = note: this error originates in the macro `$crate::quote_token_with_context` which comes from the expansion of the macro `quote` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: `if` and `else` have incompatible types
+263 | |             _serde::#private::Err(_serde::de::Error::unknown_variant(__value, VARIANTS))
+error[E0277]: the trait bound `proc_macro2::TokenStream: quote::ToTokens` is not satisfied
+    = note: this error originates in the macro `$crate::quote_token_with_context` which comes from the expansion of the macro `quote` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: `if` and `else` have incompatible types
+error[E0277]: the trait bound `proc_macro2::TokenStream: quote::ToTokens` is not satisfied
+412 | |                 __E: _serde::de::Error,
+    = note: this error originates in the macro `$crate::quote_token_with_context` which comes from the expansion of the macro `quote` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+    = note: this error originates in the macro `quote` which comes from the expansion of the macro `quote_block` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+error[E0308]: mismatched types
+error[E0308]: mismatched types
+    = note: this error originates in the macro `quote` which comes from the expansion of the macro `quote_block` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0277]: the trait bound `proc_macro2::TokenStream: quote::ToTokens` is not satisfied
+    = note: this error originates in the macro `$crate::quote_token_with_context` which comes from the expansion of the macro `quote` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0277]: the trait bound `proc_macro2::TokenStream: quote::ToTokens` is not satisfied
+    = note: this error originates in the macro `$crate::quote_token_with_context` which comes from the expansion of the macro `quote` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+    = note: this error originates in the macro `quote` which comes from the expansion of the macro `quote_block` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: arguments to this function are incorrect
+error[E0308]: mismatched types
+error[E0308]: mismatched types
+error[E0277]: the trait bound `proc_macro2::TokenStream: quote::ToTokens` is not satisfied
+    = note: this error originates in the macro `$crate::quote_token_with_context` which comes from the expansion of the macro `quote_block` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+    = note: this error originates in the macro `quote` which comes from the expansion of the macro `quote_block` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0277]: the trait bound `proc_macro2::TokenStream: quote::ToTokens` is not satisfied
+    = note: this error originates in the macro `$crate::quote_token_with_context` which comes from the expansion of the macro `quote` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+174 | |         fn visit_newtype_struct<__E>(self, #deserializer_var: __E) -> _serde::#private::Result<Self::Value, __E::Error>
+    = note: this error originates in the macro `quote` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+    = note: this error originates in the macro `quote` which comes from the expansion of the macro `quote_block` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0277]: the trait bound `proc_macro2::TokenStream: quote::ToTokens` is not satisfied
+   = note: this error originates in the macro `$crate::quote_token_with_context` which comes from the expansion of the macro `quote` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0277]: the trait bound `proc_macro2::TokenStream: quote::ToTokens` is not satisfied
+   = note: this error originates in the macro `$crate::quote_token_with_context` which comes from the expansion of the macro `quote` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0277]: the trait bound `proc_macro2::TokenStream: quote::ToTokens` is not satisfied
+   = note: this error originates in the macro `$crate::quote_token_with_context` which comes from the expansion of the macro `quote` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+error[E0308]: mismatched types
+error[E0308]: mismatched types
+error[E0308]: mismatched types
+error[E0308]: mismatched types
+    = note: this error originates in the macro `quote` which comes from the expansion of the macro `quote_block` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+    = note: this error originates in the macro `quote` which comes from the expansion of the macro `quote_block` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+439 | |             |v| _serde::#private::TryFrom::try_from(v).map_err(_serde::de::Error::custom))
+    = note: this error originates in the macro `quote` which comes from the expansion of the macro `quote_block` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0277]: the trait bound `proc_macro2::TokenStream: quote::ToTokens` is not satisfied
+    = note: this error originates in the macro `$crate::quote_token_with_context` which comes from the expansion of the macro `quote` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0277]: the trait bound `proc_macro2::TokenStream: quote::ToTokens` is not satisfied
+    = note: this error originates in the macro `$crate::quote_token_with_context` which comes from the expansion of the macro `quote` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0277]: the trait bound `proc_macro2::TokenStream: quote::ToTokens` is not satisfied
+    = note: this error originates in the macro `$crate::quote_token_with_context` which comes from the expansion of the macro `quote` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0277]: the trait bound `proc_macro2::TokenStream: quote::ToTokens` is not satisfied
+    = note: this error originates in the macro `$crate::quote_token_with_context` which comes from the expansion of the macro `quote` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+    = note: this error originates in the macro `quote` which comes from the expansion of the macro `quote_block` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+error[E0277]: the trait bound `proc_macro2::TokenStream: quote::ToTokens` is not satisfied
+    = note: this error originates in the macro `$crate::quote_token_with_context` which comes from the expansion of the macro `quote` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+error[E0308]: mismatched types
+error[E0308]: mismatched types
+    = note: this error originates in the macro `quote` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+error[E0308]: mismatched types
+    = note: this error originates in the macro `quote` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+    = note: this error originates in the macro `quote` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+    = note: this error originates in the macro `quote` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+    = note: this error originates in the macro `quote` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+    = note: this error originates in the macro `quote` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+    = note: this error originates in the macro `quote` which comes from the expansion of the macro `quote_expr` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+    = note: this error originates in the macro `quote_spanned` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+    = note: this error originates in the macro `quote` which comes from the expansion of the macro `quote_expr` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+    = note: this error originates in the macro `quote` which comes from the expansion of the macro `quote_expr` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+802 | |                 return _serde::#private::Err(<__A::Error as _serde::de::Error>::missing_field(#name))
+    = note: this error originates in the macro `quote` which comes from the expansion of the macro `quote_expr` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0277]: the trait bound `proc_macro2::TokenStream: quote::ToTokens` is not satisfied
+    = note: this error originates in the macro `$crate::quote_token_with_context_spanned` which comes from the expansion of the macro `quote_spanned` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+    = note: this error originates in the macro `quote_spanned` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0277]: the trait bound `proc_macro2::TokenStream: quote::ToTokens` is not satisfied
+    = note: this error originates in the macro `$crate::quote_token_with_context_spanned` which comes from the expansion of the macro `quote_spanned` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+    = note: this error originates in the macro `quote_spanned` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0277]: the trait bound `proc_macro2::TokenStream: quote::ToTokens` is not satisfied
+    = note: this error originates in the macro `$crate::quote_token_with_context` which comes from the expansion of the macro `quote` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+    = note: this error originates in the macro `quote` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+836 | |             return _serde::#private::Err(_serde::de::Error::invalid_length(#index, &#expecting))
+    = note: this error originates in the macro `quote` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+error[E0308]: mismatched types
+error[E0308]: mismatched types
+error[E0308]: mismatched types
+    = note: this error originates in the macro `quote` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0277]: the trait bound `proc_macro2::TokenStream: quote::ToTokens` is not satisfied
+   = note: this error originates in the macro `$crate::quote_token_with_context` which comes from the expansion of the macro `quote` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+    = note: this error originates in the macro `quote` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0277]: the trait bound `proc_macro2::TokenStream: quote::ToTokens` is not satisfied
+   = note: this error originates in the macro `$crate::quote_token_with_context` which comes from the expansion of the macro `quote` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+    = note: this error originates in the macro `quote` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: `match` arms have incompatible types
+    = note: this error originates in the macro `quote` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+    = note: this error originates in the macro `quote` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+    = note: this error originates in the macro `quote` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+    = note: this error originates in the macro `quote` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+    = note: this error originates in the macro `quote` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+    = note: this error originates in the macro `quote` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0277]: the trait bound `proc_macro2::TokenStream: quote::ToTokens` is not satisfied
+   = note: this error originates in the macro `$crate::quote_token_with_context` which comes from the expansion of the macro `quote` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0277]: the trait bound `proc_macro2::TokenStream: quote::ToTokens` is not satisfied
+   = note: this error originates in the macro `$crate::quote_token_with_context` which comes from the expansion of the macro `quote` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0277]: the trait bound `proc_macro2::TokenStream: quote::ToTokens` is not satisfied
+   = note: this error originates in the macro `$crate::quote_token_with_context` which comes from the expansion of the macro `quote` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+error[E0308]: mismatched types
+error[E0308]: mismatched types
+error[E0308]: mismatched types
+    = note: this error originates in the macro `quote` which comes from the expansion of the macro `quote_block` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+    = note: this error originates in the macro `quote` which comes from the expansion of the macro `quote_block` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+    = note: this error originates in the macro `quote` which comes from the expansion of the macro `quote_expr` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+error[E0277]: the trait bound `proc_macro2::TokenStream: quote::ToTokens` is not satisfied
+    = note: this error originates in the macro `$crate::quote_token_with_context` which comes from the expansion of the macro `quote_expr` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+    = note: this error originates in the macro `quote` which comes from the expansion of the macro `quote_expr` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+error[E0277]: the trait bound `proc_macro2::TokenStream: quote::ToTokens` is not satisfied
+    = note: this error originates in the macro `$crate::quote` which comes from the expansion of the macro `quote` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0277]: the trait bound `proc_macro2::TokenStream: quote::ToTokens` is not satisfied
+    = note: this error originates in the macro `$crate::quote_token_with_context` which comes from the expansion of the macro `quote_block` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0277]: the trait bound `proc_macro2::TokenStream: quote::ToTokens` is not satisfied
+    = note: this error originates in the macro `$crate::quote_token_with_context` which comes from the expansion of the macro `quote_block` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+    = note: this error originates in the macro `quote` which comes from the expansion of the macro `quote_block` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0277]: the trait bound `proc_macro2::TokenStream: quote::ToTokens` is not satisfied
+    = note: this error originates in the macro `$crate::quote_token_with_context` which comes from the expansion of the macro `quote` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+    = note: this error originates in the macro `quote` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0277]: the trait bound `proc_macro2::TokenStream: quote::ToTokens` is not satisfied
+    = note: this error originates in the macro `$crate::quote` which comes from the expansion of the macro `quote` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0277]: the trait bound `proc_macro2::TokenStream: quote::ToTokens` is not satisfied
+    = note: this error originates in the macro `$crate::quote_token_with_context` which comes from the expansion of the macro `quote_block` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0277]: the trait bound `proc_macro2::TokenStream: quote::ToTokens` is not satisfied
+    = note: this error originates in the macro `$crate::quote_token_with_context` which comes from the expansion of the macro `quote_block` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0277]: the trait bound `proc_macro2::TokenStream: quote::ToTokens` is not satisfied
+    = note: this error originates in the macro `$crate::quote_token_with_context` which comes from the expansion of the macro `quote_block` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+    = note: this error originates in the macro `quote` which comes from the expansion of the macro `quote_block` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0277]: the trait bound `proc_macro2::TokenStream: quote::ToTokens` is not satisfied
+    = note: this error originates in the macro `$crate::quote_token_with_context` which comes from the expansion of the macro `quote_block` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0277]: the trait bound `proc_macro2::TokenStream: quote::ToTokens` is not satisfied
+    = note: this error originates in the macro `$crate::quote_token_with_context` which comes from the expansion of the macro `quote_block` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0277]: the trait bound `proc_macro2::TokenStream: quote::ToTokens` is not satisfied
+    = note: this error originates in the macro `$crate::quote_token_with_context` which comes from the expansion of the macro `quote_block` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+    = note: this error originates in the macro `quote` which comes from the expansion of the macro `quote_block` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+409 | | ...       ref unrecognized => _serde::#private::Err(_serde::ser::Error::custom(_serde::#private::ser::CannotSerializeVariant(unrecognized...
+    = note: this error originates in the macro `quote` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0277]: the trait bound `proc_macro2::TokenStream: quote::ToTokens` is not satisfied
+    = note: this error originates in the macro `$crate::quote_token_with_context` which comes from the expansion of the macro `quote_expr` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+    = note: this error originates in the macro `quote` which comes from the expansion of the macro `quote_expr` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+    = note: this error originates in the macro `quote` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+error[E0308]: mismatched types
+    = note: this error originates in the macro `quote` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0277]: the trait bound `proc_macro2::TokenStream: quote::ToTokens` is not satisfied
+    = note: this error originates in the macro `$crate::quote_token_with_context` which comes from the expansion of the macro `quote_expr` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+    = note: this error originates in the macro `quote` which comes from the expansion of the macro `quote_expr` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+    = note: this error originates in the macro `quote` which comes from the expansion of the macro `quote_expr` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+error[E0308]: mismatched types
+error[E0308]: mismatched types
+    = note: this error originates in the macro `quote` which comes from the expansion of the macro `quote_expr` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0277]: the trait bound `proc_macro2::TokenStream: quote::ToTokens` is not satisfied
+    = note: this error originates in the macro `$crate::quote_token_with_context` which comes from the expansion of the macro `quote_expr` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+    = note: this error originates in the macro `quote` which comes from the expansion of the macro `quote_expr` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+    = note: this error originates in the macro `quote` which comes from the expansion of the macro `quote_block` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+error[E0308]: mismatched types
+error[E0308]: mismatched types
+    = note: this error originates in the macro `quote` which comes from the expansion of the macro `quote_expr` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0277]: the trait bound `proc_macro2::TokenStream: quote::ToTokens` is not satisfied
+    = note: this error originates in the macro `$crate::quote_token_with_context` which comes from the expansion of the macro `quote_expr` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+    = note: this error originates in the macro `quote` which comes from the expansion of the macro `quote_expr` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+    = note: this error originates in the macro `quote` which comes from the expansion of the macro `quote_block` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+error[E0308]: mismatched types
+error[E0308]: mismatched types
+    = note: this error originates in the macro `quote` which comes from the expansion of the macro `quote_block` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+error[E0308]: mismatched types
+error[E0308]: mismatched types
+    = note: this error originates in the macro `quote` which comes from the expansion of the macro `quote_block` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0277]: the trait bound `proc_macro2::TokenStream: quote::ToTokens` is not satisfied
+    = note: this error originates in the macro `$crate::quote_token_with_context` which comes from the expansion of the macro `quote_expr` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+    = note: this error originates in the macro `quote` which comes from the expansion of the macro `quote_expr` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+    = note: this error originates in the macro `quote` which comes from the expansion of the macro `quote_expr` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+error[E0308]: mismatched types
+error[E0308]: mismatched types
+    = note: this error originates in the macro `quote` which comes from the expansion of the macro `quote_expr` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+error[E0277]: the trait bound `proc_macro2::TokenStream: quote::ToTokens` is not satisfied
+    = note: this error originates in the macro `$crate::quote_token_with_context` which comes from the expansion of the macro `quote_block` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0277]: the trait bound `proc_macro2::TokenStream: quote::ToTokens` is not satisfied
+    = note: this error originates in the macro `$crate::quote_token_with_context` which comes from the expansion of the macro `quote_block` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+    = note: this error originates in the macro `quote` which comes from the expansion of the macro `quote_block` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0277]: the trait bound `proc_macro2::TokenStream: quote::ToTokens` is not satisfied
+    = note: this error originates in the macro `$crate::quote_token_with_context` which comes from the expansion of the macro `quote_block` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0277]: the trait bound `proc_macro2::TokenStream: quote::ToTokens` is not satisfied
+    = note: this error originates in the macro `$crate::quote_token_with_context` which comes from the expansion of the macro `quote_block` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+    = note: this error originates in the macro `quote` which comes from the expansion of the macro `quote_block` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0277]: the trait bound `proc_macro2::TokenStream: quote::ToTokens` is not satisfied
+    = note: this error originates in the macro `$crate::quote_token_with_context` which comes from the expansion of the macro `quote_block` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0277]: the trait bound `proc_macro2::TokenStream: quote::ToTokens` is not satisfied
+    = note: this error originates in the macro `$crate::quote_token_with_context` which comes from the expansion of the macro `quote_block` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+    = note: this error originates in the macro `quote` which comes from the expansion of the macro `quote_block` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0277]: the trait bound `proc_macro2::TokenStream: quote::ToTokens` is not satisfied
+    = note: this error originates in the macro `$crate::quote_token_with_context` which comes from the expansion of the macro `quote_block` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+    = note: this error originates in the macro `quote` which comes from the expansion of the macro `quote_block` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0277]: the trait bound `proc_macro2::TokenStream: quote::ToTokens` is not satisfied
+    = note: this error originates in the macro `$crate::quote_token_with_context` which comes from the expansion of the macro `quote_block` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0277]: the trait bound `proc_macro2::TokenStream: quote::ToTokens` is not satisfied
+    = note: this error originates in the macro `$crate::quote_token_with_context` which comes from the expansion of the macro `quote_block` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+    = note: this error originates in the macro `quote` which comes from the expansion of the macro `quote_block` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0277]: the trait bound `proc_macro2::TokenStream: quote::ToTokens` is not satisfied
+     = note: this error originates in the macro `$crate::quote_token_with_context` which comes from the expansion of the macro `quote_block` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0277]: the trait bound `proc_macro2::TokenStream: quote::ToTokens` is not satisfied
+     = note: this error originates in the macro `$crate::quote_token_with_context` which comes from the expansion of the macro `quote_block` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+     = note: this error originates in the macro `quote` which comes from the expansion of the macro `quote_block` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0277]: the trait bound `proc_macro2::TokenStream: quote::ToTokens` is not satisfied
+     = note: this error originates in the macro `$crate::quote_token_with_context` which comes from the expansion of the macro `quote_block` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0277]: the trait bound `proc_macro2::TokenStream: quote::ToTokens` is not satisfied
+     = note: this error originates in the macro `$crate::quote_token_with_context` which comes from the expansion of the macro `quote_block` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+     = note: this error originates in the macro `quote` which comes from the expansion of the macro `quote_block` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0277]: the trait bound `proc_macro2::TokenStream: quote::ToTokens` is not satisfied
+     = note: this error originates in the macro `$crate::quote_token_with_context` which comes from the expansion of the macro `quote_block` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0277]: the trait bound `proc_macro2::TokenStream: quote::ToTokens` is not satisfied
+     = note: this error originates in the macro `$crate::quote_token_with_context` which comes from the expansion of the macro `quote_block` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+     = note: this error originates in the macro `quote` which comes from the expansion of the macro `quote_block` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+error[E0308]: mismatched types
+error[E0308]: `if` and `else` have incompatible types
+error[E0308]: mismatched types
+error[E0277]: the trait bound `proc_macro2::TokenStream: quote::ToTokens` is not satisfied
+     = note: this error originates in the macro `$crate::quote_token_with_context` which comes from the expansion of the macro `quote` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0277]: a value of type `Vec<proc_macro2::TokenStream>` cannot be built from an iterator over elements of type `proc_macro2::TokenStream`
+error[E0308]: `if` and `else` have incompatible types
+error[E0308]: mismatched types
+error[E0277]: the trait bound `proc_macro2::TokenStream: quote::ToTokens` is not satisfied
+     = note: this error originates in the macro `$crate::quote_token_with_context` which comes from the expansion of the macro `quote` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+error[E0277]: the trait bound `proc_macro2::TokenStream: quote::ToTokens` is not satisfied
+     = note: this error originates in the macro `$crate::quote_token_with_context` which comes from the expansion of the macro `quote` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0277]: a value of type `Vec<proc_macro2::TokenStream>` cannot be built from an iterator over elements of type `proc_macro2::TokenStream`
+error[E0277]: the trait bound `proc_macro2::TokenStream: quote::ToTokens` is not satisfied
+     = note: this error originates in the macro `quote` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+     = note: this error originates in the macro `quote` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+error[E0308]: mismatched types
+error[E0308]: mismatched types
+error[E0277]: the trait bound `proc_macro2::TokenStream: quote::ToTokens` is not satisfied
+     = note: this error originates in the macro `$crate::quote_token_with_context` which comes from the expansion of the macro `quote` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+     = note: this error originates in the macro `quote` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+     = note: this error originates in the macro `quote` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+     = note: this error originates in the macro `quote` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+     = note: this error originates in the macro `quote` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+     = note: this error originates in the macro `quote` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+     = note: this error originates in the macro `quote` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+     = note: this error originates in the macro `quote_spanned` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+     = note: this error originates in the macro `quote_spanned` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+     = note: this error originates in the macro `quote_spanned` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+     = note: this error originates in the macro `quote_spanned` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+     = note: this error originates in the macro `quote_spanned` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+     = note: this error originates in the macro `quote_spanned` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+     = note: this error originates in the macro `quote_spanned` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+     = note: this error originates in the macro `quote_spanned` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+     = note: this error originates in the macro `quote_spanned` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+     = note: this error originates in the macro `quote_spanned` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+     = note: this error originates in the macro `quote_spanned` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+     = note: this error originates in the macro `quote_spanned` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+     = note: this error originates in the macro `quote_spanned` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+     = note: this error originates in the macro `quote_spanned` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+     = note: this error originates in the macro `quote_spanned` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0308]: mismatched types
+     = note: this error originates in the macro `quote_spanned` (in Nightly builds, run with -Z macro-backtrace for more info)
+error[E0599]: no method named `append` found for mutable reference `&mut proc_macro2::TokenStream` in the current scope
+error[E0271]: expected `into_compile_error` to return `TokenStream`, but it returns `TokenStream`
+117 |         .unwrap_or_else(syn::Error::into_compile_error)
+error[E0271]: expected `into_compile_error` to return `TokenStream`, but it returns `TokenStream`
+125 |         .unwrap_or_else(syn::Error::into_compile_error)
+Some errors have detailed explanations: E0053, E0271, E0277, E0308, E0599.
+For more information about an error, try `rustc --explain E0053`.
+error: could not compile `serde_derive` (lib) due to 294 previous errors
