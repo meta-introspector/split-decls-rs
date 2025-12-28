@@ -1,5 +1,8 @@
 # Generated files
 /target/
+partition1-crate/target/
+llm_macros/target/
+*.log
 
 # Editor backup files
 *~
