@@ -24,6 +24,33 @@ pub fn process_module_recursively(
     dry_run: bool,
     module_not_found_errors: &mut Vec<ModuleNotFoundReport>, // New parameter
 ) -> Result<()> {
+    process_module_recursively_with_depth(
+        paths, config, mod_name, parent_path, collected_module_names,
+        item_count, common_uses, dry_run, module_not_found_errors, 0
+    )
+}
+
+fn process_module_recursively_with_depth(
+    paths: &CratePaths,
+    config: &SplitDeclsConfig,
+    mod_name: &str,
+    parent_path: &str,
+    collected_module_names: &mut Vec<Ident>,
+    item_count: &mut usize,
+    common_uses: &TokenStream,
+    dry_run: bool,
+    module_not_found_errors: &mut Vec<ModuleNotFoundReport>,
+    depth: usize,
+) -> Result<()> {
+    const MAX_RECURSION_DEPTH: usize = 3;
+    
+    if depth > MAX_RECURSION_DEPTH {
+        eprintln!("WARNING: Maximum recursion depth ({}) reached for module '{}' at path '{}'. Skipping to prevent stack overflow.", 
+                 MAX_RECURSION_DEPTH, mod_name, parent_path);
+        return Ok(());
+    }
+    
+    eprintln!("DEBUG: Processing module '{}' at depth {} (path: '{}')", mod_name, depth, parent_path);
     let src_dir = paths.crate_path.join("src");
     let sanitized_mod_name = if mod_name.starts_with("r#") {
         &mod_name[2..]
@@ -138,7 +165,7 @@ pub fn process_module_recursively(
             let module_name_str = format!("{}_decls_{}_{}", 
                 crate_name_sanitized, 
                 full_path.replace("-", "_").replace(".", "_"),
-                decl.name
+                decl.name.replace("#", "hash").replace("[", "bracket").replace("]", "bracket").replace("(", "paren").replace(")", "paren").replace(" ", "_").replace("-", "_")
             );
             let module_name_ident = Ident::new(&module_name_str, Span::call_site());
             collected_module_names.push(module_name_ident.clone());
@@ -169,7 +196,7 @@ pub fn process_module_recursively(
                 format!("{}_{}", parent_path, sanitized_mod_name)
             };
             
-            process_module_recursively(
+            process_module_recursively_with_depth(
                 paths,
                 config,
                 nested_mod_name,
@@ -179,6 +206,7 @@ pub fn process_module_recursively(
                 common_uses,
                 dry_run,
                 module_not_found_errors, // Pass the new parameter
+                depth + 1, // Increment depth
             )?;
         }
         if let syn::Item::Mod(item_mod) = item {

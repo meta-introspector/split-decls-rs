@@ -211,7 +211,7 @@ fn process_all_rust_files(
                 let module_name_str = format!("{}_decls_{}_{}", 
                     crate_name_sanitized, 
                     path_str.replace("-", "_").replace(".", "_"),
-                    decl.name
+                    decl.name.replace("#", "hash").replace("[", "bracket").replace("]", "bracket").replace("(", "paren").replace(")", "paren").replace(" ", "_").replace("-", "_")
                 );
                 let module_name_ident = Ident::new(&module_name_str, Span::call_site());
                 collected_module_names.push(module_name_ident.clone());

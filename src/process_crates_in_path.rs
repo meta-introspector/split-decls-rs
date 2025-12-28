@@ -6,7 +6,6 @@ use crate::process_crate::process_crate;
 /// Process all crates in a given path, applying the split-decls transformation.
 pub fn process_crates_in_path(
     root_path: &Path,
-    current_crate_name: &str,
     global_config: &SplitDeclsConfig,
     _is_rustc_source: bool,
     dry_run: bool,
@@ -22,19 +21,18 @@ pub fn process_crates_in_path(
     // This would include:
     // 1. Walk through directories
     // 2. Find Cargo.toml files
-    // 3. Skip the current crate
-    // 4. Process each found crate
+    // 3. Process each found crate (including self)
+    // 4. Apply split-decls transformation
     
-    // For now, just process the root path as a single crate if it has a Cargo.toml
+    // Process the root path as a single crate if it has a Cargo.toml
     let cargo_toml_path = root_path.join("Cargo.toml");
     if cargo_toml_path.exists() {
-        let crate_name = root_path.file_name()
+        let _crate_name = root_path.file_name()
             .and_then(|n| n.to_str())
             .unwrap_or("unknown");
             
-        if crate_name != current_crate_name {
-            process_crate(root_path, global_config, dry_run)?;
-        }
+        // Process ALL crates including the current one - no filtering
+        process_crate(root_path, global_config, dry_run)?;
     }
     
     Ok(())

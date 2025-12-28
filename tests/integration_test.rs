@@ -85,7 +85,6 @@ fn integration_test_unimacro_derive_build() -> Result<()> {
 
     process_crates_in_path(
         &temp_path,         // Root path for processing crates (this is now the workspace root)
-        "split-decls-rs",   // Current crate name (to skip itself)
         &global_config,     // Global config
         false,              // Not rustc source
         false,              // dry_run = false for actual execution
