@@ -193,18 +193,18 @@ fn process_all_rust_files(
             
             println!("    📋 Item {}: {} ({})", item_index + 1, item_index + 1, 
                      match &item {
-                         syn::Item::Fn(f) => format!("fn {}", f.sig.ident),
-                         syn::Item::Struct(s) => format!("struct {}", s.ident),
-                         syn::Item::Enum(e) => format!("enum {}", e.ident),
-                         syn::Item::Impl(_) => "impl".to_string(),
-                         syn::Item::Trait(t) => format!("trait {}", t.ident),
-                         syn::Item::Const(c) => format!("const {}", c.ident),
-                         syn::Item::Static(s) => format!("static {}", s.ident),
-                         syn::Item::Type(t) => format!("type {}", t.ident),
-                         syn::Item::Mod(m) => format!("mod {}", m.ident.to_string()),
-                         syn::Item::Use(_) => "use".to_string(),
-                         syn::Item::Macro(m) => format!("macro {}", m.ident.as_ref().map_or("_".to_string(), |i| i.to_string())),
-                         _ => "other".to_string(),
+                         syn::Item::Fn(_) => "fn",
+                         syn::Item::Struct(_) => "struct", 
+                         syn::Item::Enum(_) => "enum",
+                         syn::Item::Impl(_) => "impl",
+                         syn::Item::Trait(_) => "trait",
+                         syn::Item::Const(_) => "const",
+                         syn::Item::Static(_) => "static",
+                         syn::Item::Type(_) => "type",
+                         syn::Item::Mod(_) => "mod",
+                         syn::Item::Use(_) => "use",
+                         syn::Item::Macro(_) => "macro",
+                         _ => "other",
                      });
             
             if let Some(decl) = declaration_extractor::extract_single_declaration(item, *item_count) {

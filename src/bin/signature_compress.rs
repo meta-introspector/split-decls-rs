@@ -126,7 +126,7 @@ fn generate_signature_mappings(compressor: &SignatureCompressor, output_file: &s
     
     output.push_str("## Prime Number Assignments (2 = most common)\n");
     let mut prime_assignments: Vec<_> = compressor.prime_assignments.iter().collect();
-    prime_assignments.sort_by_key(|(_, &prime)| prime);
+    prime_assignments.sort_by_key(|&(_, &prime)| prime);
     
     for (signature, &prime) in prime_assignments {
         let frequency = compressor.frequency_map.get(signature).unwrap_or(&0);
@@ -212,11 +212,11 @@ fn demonstrate_compression(compressor: &SignatureCompressor) {
     
     println!("\n🎲 Rarest signatures (highest primes):");
     let mut prime_sorted: Vec<_> = compressor.prime_assignments.iter().collect();
-    prime_sorted.sort_by_key(|(_, &prime)| std::cmp::Reverse(prime));
+    prime_sorted.sort_by_key(|&(_, &prime)| std::cmp::Reverse(prime));
     
     for (signature, &prime) in prime_sorted.iter().take(3) {
-        let frequency = compressor.frequency_map.get(*signature).unwrap_or(&0);
-        let emoji = compressor.emoji_assignments.get(*signature).unwrap_or(&default_emoji);
+        let frequency = compressor.frequency_map.get(&signature).unwrap_or(&0);
+        let emoji = compressor.emoji_assignments.get(&signature).unwrap_or(&default_emoji);
         println!("  {} {} → {} (freq: {})", emoji, signature, prime, frequency);
     }
 }
