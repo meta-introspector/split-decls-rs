@@ -2,7 +2,8 @@ use anyhow::{Context, Result};
 use std::path::{Path, PathBuf};
 use split_decls_types::SplitDeclsConfig;
 use walkdir::WalkDir; // Added for finding Cargo.toml files
-use rayon::prelude::*; // Added for parallel processing
+    // DISABLED: Make single-threaded to debug stack overflow
+    // use rayon::prelude::*; // Added for parallel processing
 use crate::setup_crate_paths;
 use crate::eager_splitter; // Added eager_splitter and CratePaths
 //use crate::paths::{CratePaths, setup_crate_paths};
@@ -43,8 +44,8 @@ pub fn process_ecosystem(
         println!("Found {} Cargo.toml files.", cargo_toml_paths.len());
     }
 
-    // Parallel processing of crates
-    cargo_toml_paths.par_iter().try_for_each(|cargo_toml_path| {
+    // Single-threaded processing to debug stack overflow
+    cargo_toml_paths.iter().try_for_each(|cargo_toml_path| {
         let crate_path = cargo_toml_path.parent().unwrap().to_path_buf();
         if verbose {
             println!("Processing crate: {}", crate_path.display());

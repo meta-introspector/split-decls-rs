@@ -37,7 +37,8 @@ pub fn handle_multi_crate_wrapping(
 ", dep_name, format_toml_value_for_dependency_string(dep_value)));
     }
 
-    use rayon::prelude::*;
+    // DISABLED: Make single-threaded to debug stack overflow
+    // use rayon::prelude::*;
     
     println!("🔍 PROCESSING {} CRATES FROM CONFIG:", global_config.wrapping.crates.len());
     println!("📂 SCAN ROOT DIRECTORY: {}", scan_root.display());
@@ -45,7 +46,7 @@ pub fn handle_multi_crate_wrapping(
         println!("   {}: {}", i + 1, crate_name);
     }
     
-    let processed_crates: Vec<(Option<String>, Vec<crate::eager_splitter::ModuleNotFoundReport>)> = global_config.wrapping.crates.par_iter().map(|crate_name| {
+    let processed_crates: Vec<(Option<String>, Vec<crate::eager_splitter::ModuleNotFoundReport>)> = global_config.wrapping.crates.iter().map(|crate_name| {
         println!("🚀 STARTING CRATE: {}", crate_name);
         let mut found_cargo_toml_path: Option<PathBuf> = None;
         let mut crate_errors: Vec<crate::eager_splitter::ModuleNotFoundReport> = Vec::new(); // Per-crate error collector
