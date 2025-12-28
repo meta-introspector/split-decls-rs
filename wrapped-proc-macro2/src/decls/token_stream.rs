@@ -2,6 +2,8 @@ macro_rules! deps {
     () => {
         TokenStream!();
         TokenTree!();
+        ProcMacroAutoTraits!();
+        TokenTreeIter!();
     };
 }
 

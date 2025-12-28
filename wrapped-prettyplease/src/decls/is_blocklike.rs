@@ -1,0 +1,7 @@
+macro_rules! is_blocklike {
+    () => {
+        fn is_blocklike (expr : & Expr) -> bool { match expr { # ! [cfg_attr (all (test , exhaustive) , deny (non_exhaustive_omitted_patterns))] Expr :: Array (ExprArray { attrs , .. }) | Expr :: Async (ExprAsync { attrs , .. }) | Expr :: Block (ExprBlock { attrs , .. }) | Expr :: Closure (ExprClosure { attrs , .. }) | Expr :: Const (ExprConst { attrs , .. }) | Expr :: Struct (ExprStruct { attrs , .. }) | Expr :: TryBlock (ExprTryBlock { attrs , .. }) | Expr :: Tuple (ExprTuple { attrs , .. }) | Expr :: Unsafe (ExprUnsafe { attrs , .. }) => ! attr :: has_outer (attrs) , Expr :: Assign (_) | Expr :: Await (_) | Expr :: Binary (_) | Expr :: Break (_) | Expr :: Call (_) | Expr :: Cast (_) | Expr :: Continue (_) | Expr :: Field (_) | Expr :: ForLoop (_) | Expr :: If (_) | Expr :: Index (_) | Expr :: Infer (_) | Expr :: Let (_) | Expr :: Lit (_) | Expr :: Loop (_) | Expr :: Macro (_) | Expr :: Match (_) | Expr :: MethodCall (_) | Expr :: Paren (_) | Expr :: Path (_) | Expr :: Range (_) | Expr :: RawAddr (_) | Expr :: Reference (_) | Expr :: Repeat (_) | Expr :: Return (_) | Expr :: Try (_) | Expr :: Unary (_) | Expr :: Verbatim (_) | Expr :: While (_) | Expr :: Yield (_) => false , Expr :: Group (e) => is_blocklike (& e . expr) , _ => false , } }
+    };
+}
+
+is_blocklike!()

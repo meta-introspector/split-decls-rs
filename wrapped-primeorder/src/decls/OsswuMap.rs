@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        OsswuMapParams!();
+        Sgn0!();
+    };
+}
+
+macro_rules! OsswuMap {
+    () => {
+        deps!();
+        # [doc = " The optimized simplified Shallue-van de Woestijne-Ulas method"] # [doc = " for mapping elliptic curve scalars to affine points."] pub trait OsswuMap : Field + Sgn0 { # [doc = " The OSSWU parameters for mapping the field to affine points."] # [doc = " For Weierstrass curves having A==0 or B==0, the parameters"] # [doc = " should be for isogeny where A≠0 and B≠0."] const PARAMS : OsswuMapParams < Self > ; # [doc = " Optimized sqrt_ratio for q = 3 mod 4."] fn sqrt_ratio_3mod4 (u : Self , v : Self) -> (Choice , Self) { let tv1 = v . square () ; let tv2 = u * v ; let tv1 = tv1 * tv2 ; let y1 = tv1 . pow_vartime (Self :: PARAMS . c1) ; let y1 = y1 * tv2 ; let y2 = y1 * Self :: PARAMS . c2 ; let tv3 = y1 . square () ; let tv3 = tv3 * v ; let is_qr = tv3 . ct_eq (& u) ; let y = ConditionallySelectable :: conditional_select (& y2 , & y1 , is_qr) ; (is_qr , y) } # [doc = " Convert this field element into an affine point on the elliptic curve"] # [doc = " returning (X, Y). For Weierstrass curves having A==0 or B==0"] # [doc = " the result is a point on an isogeny."] fn osswu (& self) -> (Self , Self) { let tv1 = self . square () ; let tv1 = Self :: PARAMS . z * tv1 ; let tv2 = tv1 . square () ; let tv2 = tv2 + tv1 ; let tv3 = tv2 + Self :: ONE ; let tv3 = Self :: PARAMS . map_b * tv3 ; let tv4 = ConditionallySelectable :: conditional_select (& Self :: PARAMS . z , & - tv2 , ! Field :: is_zero (& tv2) ,) ; let tv4 = Self :: PARAMS . map_a * tv4 ; let tv2 = tv3 . square () ; let tv6 = tv4 . square () ; let tv5 = Self :: PARAMS . map_a * tv6 ; let tv2 = tv2 + tv5 ; let tv2 = tv2 * tv3 ; let tv6 = tv6 * tv4 ; let tv5 = Self :: PARAMS . map_b * tv6 ; let tv2 = tv2 + tv5 ; let x = tv1 * tv3 ; let (is_gx1_square , y1) = Self :: sqrt_ratio_3mod4 (tv2 , tv6) ; let y = tv1 * self ; let y = y * y1 ; let x = ConditionallySelectable :: conditional_select (& x , & tv3 , is_gx1_square) ; let y = ConditionallySelectable :: conditional_select (& y , & y1 , is_gx1_square) ; let e1 = self . sgn0 () . ct_eq (& y . sgn0 ()) ; let y = ConditionallySelectable :: conditional_select (& - y , & y , e1) ; let x = x * tv4 . invert () . unwrap () ; (x , y) } }
+    };
+}
+
+OsswuMap!()

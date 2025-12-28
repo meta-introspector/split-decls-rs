@@ -1,0 +1,17 @@
+macro_rules! deps {
+    () => {
+        GraphRef!();
+        DfsPostOrder!();
+        Create!();
+        VisitMap!();
+    };
+}
+
+macro_rules! impl_47 {
+    () => {
+        deps!();
+        impl < N , VM > DfsPostOrder < N , VM > where N : Copy + PartialEq , VM : VisitMap < N > , { # [doc = " Create a new `DfsPostOrder` using the graph's visitor map, and put"] # [doc = " `start` in the stack of nodes to visit."] pub fn new < G > (graph : G , start : N) -> Self where G : GraphRef + Visitable < NodeId = N , Map = VM > , { let mut dfs = Self :: empty (graph) ; dfs . move_to (start) ; dfs } # [doc = " Create a new `DfsPostOrder` using the graph's visitor map, and no stack."] pub fn empty < G > (graph : G) -> Self where G : GraphRef + Visitable < NodeId = N , Map = VM > , { DfsPostOrder { stack : Vec :: new () , discovered : graph . visit_map () , finished : graph . visit_map () , } } # [doc = " Clear the visit state"] pub fn reset < G > (& mut self , graph : G) where G : GraphRef + Visitable < NodeId = N , Map = VM > , { graph . reset_map (& mut self . discovered) ; graph . reset_map (& mut self . finished) ; self . stack . clear () ; } # [doc = " Keep the discovered and finished map, but clear the visit stack and restart"] # [doc = " the dfs from a particular node."] pub fn move_to (& mut self , start : N) { self . stack . clear () ; self . stack . push (start) ; } # [doc = " Return the next node in the traversal, or `None` if the traversal is done."] pub fn next < G > (& mut self , graph : G) -> Option < N > where G : IntoNeighbors < NodeId = N > , { while let Some (& nx) = self . stack . last () { if self . discovered . visit (nx) { for succ in graph . neighbors (nx) { if ! self . discovered . is_visited (& succ) { self . stack . push (succ) ; } } } else { self . stack . pop () ; if self . finished . visit (nx) { return Some (nx) ; } } } None } }
+    };
+}
+
+impl_47!()

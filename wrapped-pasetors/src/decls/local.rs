@@ -1,5 +1,21 @@
+macro_rules! deps {
+    () => {
+        UntrustedToken!();
+        Error!();
+        TrustedToken!();
+        LocalToken!();
+        SymmetricKey!();
+        ClaimsValidationRules!();
+        Footer!();
+        V4!();
+        Claims!();
+        Local!();
+    };
+}
+
 macro_rules! local {
     () => {
+        deps!();
         # [cfg_attr (docsrs , doc (cfg (all (feature = "std" , feature = "v4"))))] # [cfg (all (feature = "std" , feature = "v4"))] # [doc = " PASETO local tokens with [`version4`], using [`claims::Claims`]."] pub mod local { use super :: * ; use crate :: claims :: { Claims , ClaimsValidationRules } ; use crate :: errors :: Error ; use crate :: footer :: Footer ; use crate :: keys :: SymmetricKey ; use crate :: token :: { TrustedToken , UntrustedToken } ; use crate :: version4 :: V4 ; # [doc = " Create a local token using the latest PASETO version (v4)."] pub fn encrypt (secret_key : & SymmetricKey < V4 > , message : & Claims , footer : Option < & Footer > , implicit_assert : Option < & [u8] > ,) -> Result < String , Error > { match footer { Some (f) => version4 :: LocalToken :: encrypt (secret_key , message . to_string () ? . as_bytes () , Some (f . to_string () ? . as_bytes ()) , implicit_assert ,) , None => version4 :: LocalToken :: encrypt (secret_key , message . to_string () ? . as_bytes () , None , implicit_assert ,) , } } # [doc = " Verify a local token using the latest PASETO version (v4). If verification passes,"] # [doc = " validate the claims according to the `validation_rules`."] pub fn decrypt (secret_key : & SymmetricKey < V4 > , token : & UntrustedToken < Local , V4 > , validation_rules : & ClaimsValidationRules , footer : Option < & Footer > , implicit_assert : Option < & [u8] > ,) -> Result < TrustedToken , Error > { let mut trusted_token = match footer { Some (f) => version4 :: LocalToken :: decrypt (secret_key , token , Some (f . to_string () ? . as_bytes ()) , implicit_assert ,) ? , None => version4 :: LocalToken :: decrypt (secret_key , token , None , implicit_assert) ? , } ; let claims = Claims :: from_string (trusted_token . payload ()) ? ; validation_rules . validate_claims (& claims) ? ; trusted_token . set_payload_claims (claims) ; Ok (trusted_token) } }
     };
 }

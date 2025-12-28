@@ -1,0 +1,17 @@
+macro_rules! deps {
+    () => {
+        Matching!();
+        EdgeType!();
+        Graph!();
+        Subgraph!();
+    };
+}
+
+macro_rules! is_isomorphic_subgraph {
+    () => {
+        deps!();
+        # [doc = " Return `true` if `g0` is isomorphic to a subgraph of `g1`."] # [doc = ""] # [doc = " Using the VF2 algorithm, only matching graph syntactically (graph"] # [doc = " structure)."] # [doc = ""] # [doc = " The graphs should not be [multigraphs]."] # [doc = ""] # [doc = " # Subgraph isomorphism"] # [doc = ""] # [doc = " (adapted from [`networkx` documentation][networkx_vf2])"] # [doc = ""] # [doc = " Graph theory literature can be ambiguous about the meaning of the above statement,"] # [doc = " and we seek to clarify it now."] # [doc = ""] # [doc = " In the VF2 literature, a mapping **M** is said to be a *graph-subgraph isomorphism*"] # [doc = " iff **M** is an isomorphism between **G2** and a subgraph of **G1**. Thus, to say"] # [doc = " that **G1** and **G2** are graph-subgraph isomorphic is to say that a subgraph of"] # [doc = " **G1** is isomorphic to **G2**."] # [doc = ""] # [doc = " Other literature uses the phrase ‘subgraph isomorphic’ as in"] # [doc = " ‘**G1** does not have a subgraph isomorphic to **G2**’. Another use is as an in adverb"] # [doc = " for isomorphic. Thus, to say that **G1** and **G2** are subgraph isomorphic is to say"] # [doc = " that a subgraph of **G1** is isomorphic to **G2**."] # [doc = ""] # [doc = " Finally, the term ‘subgraph’ can have multiple meanings. In this context,"] # [doc = " ‘subgraph’ always means a ‘node-induced subgraph’. Edge-induced subgraph"] # [doc = " isomorphisms are not directly supported. For subgraphs which are not"] # [doc = " induced, the term ‘monomorphism’ is preferred over ‘isomorphism’."] # [doc = ""] # [doc = " **Reference**"] # [doc = ""] # [doc = " * Luigi P. Cordella, Pasquale Foggia, Carlo Sansone, Mario Vento;"] # [doc = "   *A (Sub)Graph Isomorphism Algorithm for Matching Large Graphs*"] # [doc = ""] # [doc = " [networkx_vf2]: https://networkx.github.io/documentation/stable/reference/algorithms/isomorphism.vf2.html"] # [doc = " [multigraphs]: https://en.wikipedia.org/wiki/Multigraph"] pub fn is_isomorphic_subgraph < G0 , G1 > (g0 : G0 , g1 : G1) -> bool where G0 : NodeCompactIndexable + EdgeCount + GetAdjacencyMatrix + GraphProp + IntoNeighborsDirected , G1 : NodeCompactIndexable + EdgeCount + GetAdjacencyMatrix + GraphProp < EdgeType = G0 :: EdgeType > + IntoNeighborsDirected , { if g0 . node_count () > g1 . node_count () || g0 . edge_count () > g1 . edge_count () { return false ; } self :: matching :: GraphMatcher :: new (& g0 , & g1 , & mut NoSemanticMatch , & mut NoSemanticMatch , true) . next () . is_some () }
+    };
+}
+
+is_isomorphic_subgraph!()

@@ -1,0 +1,21 @@
+macro_rules! deps {
+    () => {
+        UntrustedToken!();
+        V3!();
+        PublicToken!();
+        TrustedToken!();
+        Public!();
+        AsymmetricPublicKey!();
+        AsymmetricSecretKey!();
+        Error!();
+    };
+}
+
+macro_rules! impl_101 {
+    () => {
+        deps!();
+        impl PublicToken { # [doc = " The header and purpose for the public token: `v3.public.`."] pub const HEADER : & 'static str = "v3.public." ; # [doc = " Create a public token."] # [doc = ""] # [doc = " The `secret_key` **must** be in big-endian."] pub fn sign (secret_key : & AsymmetricSecretKey < V3 > , message : & [u8] , footer : Option < & [u8] > , implicit_assert : Option < & [u8] > ,) -> Result < String , Error > { if message . is_empty () { return Err (Error :: EmptyPayload) ; } let signing_key = SigningKey :: from_bytes (secret_key . as_bytes () . into ()) . map_err (| _ | Error :: Key) ? ; let public_key = VerifyingKey :: from (& signing_key) . to_encoded_point (true) ; let f = footer . unwrap_or (& []) ; let i = implicit_assert . unwrap_or (& []) ; let m2 = pae :: pae (& [public_key . as_ref () , Self :: HEADER . as_bytes () , message , f , i]) ? ; let mut msg_digest = sha2 :: Sha384 :: new () ; msg_digest . update (m2) ; let sig : Signature = signing_key . try_sign_digest (msg_digest) . map_err (| _ | Error :: Signing) ? ; debug_assert_eq ! (sig . to_bytes () . len () , V3 :: PUBLIC_SIG) ; let mut m_sig : Vec < u8 > = Vec :: from (message) ; m_sig . extend_from_slice (& sig . to_bytes ()) ; let token_no_footer = format ! ("{}{}" , Self :: HEADER , encode_b64 (m_sig) ?) ; if f . is_empty () { Ok (token_no_footer) } else { Ok (format ! ("{}.{}" , token_no_footer , encode_b64 (f) ?)) } } # [doc = " Verify a public token."] # [doc = ""] # [doc = " The `public_key` **must** be in big-endian."] # [doc = ""] # [doc = " If `footer.is_none()`, then it will be validated but not compared to a known value."] # [doc = " If `footer.is_some()`, then it will be validated AND compared to the known value."] pub fn verify (public_key : & AsymmetricPublicKey < V3 > , token : & UntrustedToken < Public , V3 > , footer : Option < & [u8] > , implicit_assert : Option < & [u8] > ,) -> Result < TrustedToken , Error > { validate_footer_untrusted_token (token , footer) ? ; let f = token . untrusted_footer () ; let i = implicit_assert . unwrap_or (& []) ; let sm = token . untrusted_message () ; let m = token . untrusted_payload () ; let s = Signature :: try_from (sm [m . len () .. m . len () + V3 :: PUBLIC_SIG] . as_ref ()) . map_err (| _ | Error :: TokenValidation) ? ; let m2 = pae :: pae (& [public_key . as_bytes () , Self :: HEADER . as_bytes () , m , f , i]) ? ; let verifying_key = VerifyingKey :: from_sec1_bytes (public_key . as_bytes ()) . map_err (| _ | Error :: Key) ? ; let mut msg_digest = sha2 :: Sha384 :: new () ; msg_digest . update (m2) ; verifying_key . verify_digest (msg_digest , & s) . map_err (| _ | Error :: TokenValidation) ? ; TrustedToken :: _new (Self :: HEADER , m , f , i) } }
+    };
+}
+
+impl_101!()

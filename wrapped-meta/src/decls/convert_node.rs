@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        Expr!();
+        ParserExpr!();
+        ParserNode!();
+    };
+}
+
+macro_rules! convert_node {
+    () => {
+        deps!();
+        fn convert_node (node : ParserNode < '_ >) -> Expr { match node . expr { ParserExpr :: Str (string) => Expr :: Str (string) , ParserExpr :: Insens (string) => Expr :: Insens (string) , ParserExpr :: Range (start , end) => Expr :: Range (start , end) , ParserExpr :: Ident (ident) => Expr :: Ident (ident) , ParserExpr :: PeekSlice (start , end) => Expr :: PeekSlice (start , end) , ParserExpr :: PosPred (node) => Expr :: PosPred (Box :: new (convert_node (* node))) , ParserExpr :: NegPred (node) => Expr :: NegPred (Box :: new (convert_node (* node))) , ParserExpr :: Seq (node1 , node2) => Expr :: Seq (Box :: new (convert_node (* node1)) , Box :: new (convert_node (* node2)) ,) , ParserExpr :: Choice (node1 , node2) => Expr :: Choice (Box :: new (convert_node (* node1)) , Box :: new (convert_node (* node2)) ,) , ParserExpr :: Opt (node) => Expr :: Opt (Box :: new (convert_node (* node))) , ParserExpr :: Rep (node) => Expr :: Rep (Box :: new (convert_node (* node))) , ParserExpr :: RepOnce (node) => Expr :: RepOnce (Box :: new (convert_node (* node))) , ParserExpr :: RepExact (node , num) => Expr :: RepExact (Box :: new (convert_node (* node)) , num) , ParserExpr :: RepMin (node , max) => Expr :: RepMin (Box :: new (convert_node (* node)) , max) , ParserExpr :: RepMax (node , max) => Expr :: RepMax (Box :: new (convert_node (* node)) , max) , ParserExpr :: RepMinMax (node , min , max) => { Expr :: RepMinMax (Box :: new (convert_node (* node)) , min , max) } ParserExpr :: Push (node) => Expr :: Push (Box :: new (convert_node (* node))) , # [cfg (feature = "grammar-extras")] ParserExpr :: PushLiteral (string) => Expr :: PushLiteral (string) , # [cfg (feature = "grammar-extras")] ParserExpr :: NodeTag (node , tag) => Expr :: NodeTag (Box :: new (convert_node (* node)) , tag) , } }
+    };
+}
+
+convert_node!()

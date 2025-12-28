@@ -1,0 +1,7 @@
+macro_rules! macro_109 {
+    () => {
+        trait_template ! { # [doc = " A graph with a known edge count."] # [allow (clippy :: needless_arbitrary_self_type)] pub trait EdgeCount : GraphBase { @ section self # [doc = " Return the number of edges in the graph."] fn edge_count (self : & Self) -> usize ; } }
+    };
+}
+
+macro_109!()

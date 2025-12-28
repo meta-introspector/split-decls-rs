@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        EdgeType!();
-        Directed!();
+        ControlFlow!();
+        Control!();
     };
 }
 
 macro_rules! impl_35 {
     () => {
         deps!();
-        impl EdgeType for Directed { # [inline] fn is_directed () -> bool { true } }
+        impl < B > ControlFlow for Control < B > { fn continuing () -> Self { Control :: Continue } fn should_break (& self) -> bool { matches ! (* self , Control :: Break (_)) } fn should_prune (& self) -> bool { matches ! (* self , Control :: Prune) } }
     };
 }
 

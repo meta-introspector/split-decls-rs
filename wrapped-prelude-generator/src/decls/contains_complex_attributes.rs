@@ -1,0 +1,7 @@
+macro_rules! contains_complex_attributes {
+    () => {
+        fn contains_complex_attributes (structure : & ItemStruct) -> bool { structure . attrs . iter () . any (| attr | { if attr . path () . is_ident ("derive") { if let Meta :: List (meta_list) = & attr . meta { let tokens_str = meta_list . tokens . to_string () ; tokens_str . contains ("Parser") || tokens_str . contains ("Serialize") || tokens_str . contains ("Deserialize") } else { false } } else { false } }) }
+    };
+}
+
+contains_complex_attributes!()

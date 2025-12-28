@@ -1,0 +1,17 @@
+macro_rules! deps {
+    () => {
+        List!();
+        UnweightedList!();
+        IndexType!();
+        Time!();
+    };
+}
+
+macro_rules! dag_transitive_reduction_closure {
+    () => {
+        deps!();
+        # [doc = " Computes the transitive reduction and closure of a DAG."] # [doc = ""] # [doc = " The algorithm implemented here comes from [On the calculation of"] # [doc = " transitive reduction-closure of"] # [doc = " orders](https://www.sciencedirect.com/science/article/pii/0012365X9390164O) by Habib, Morvan"] # [doc = " and Rampon."] # [doc = ""] # [doc = " # Arguments"] # [doc = " * `g`: an input graph in a very specific format: an adjacency"] # [doc = "   list such that node indices are a toposort, and the neighbors of all nodes are stored in topological order."] # [doc = "   To get such a representation, use the function [`dag_to_toposorted_adjacency_list`]."] # [doc = ""] # [doc = " # Returns"] # [doc = " The output is the pair of the transitive reduction and the transitive closure."] # [doc = ""] # [doc = " # Complexity"] # [doc = " * Time complexity: **O(|V| + \\sum_{(x, y) \\in Er} d(y))** where **d(y)**"] # [doc = "   denotes the outgoing degree of **y** in the transitive closure of **G**"] # [doc = "   and **Er** the edge set of the transitive reduction."] # [doc = "   This is still **O(|V|³)** in the worst case like the naive algorithm but"] # [doc = "   should perform better for some classes of graphs."] # [doc = " * Auxiliary space: **O(|E|)**."] # [doc = ""] # [doc = " where **|V|** is the number of nodes and **|E|** is the number of edges."] pub fn dag_transitive_reduction_closure < E , Ix : IndexType > (g : & List < E , Ix > ,) -> (UnweightedList < Ix > , UnweightedList < Ix >) { let mut tred = List :: with_capacity (g . node_count ()) ; let mut tclos = List :: with_capacity (g . node_count ()) ; let mut mark = FixedBitSet :: with_capacity (g . node_count ()) ; for i in g . node_indices () { tred . add_node () ; tclos . add_node_with_capacity (g . neighbors (i) . len ()) ; } for i in g . node_indices () . rev () { for x in g . neighbors (i) { if ! mark [x . index ()] { tred . add_edge (i , x , ()) ; tclos . add_edge (i , x , ()) ; for e in tclos . edge_indices_from (x) { let y = tclos . edge_endpoints (e) . unwrap () . 1 ; if ! mark [y . index ()] { mark . insert (y . index ()) ; tclos . add_edge (i , y , ()) ; } } } } for y in tclos . neighbors (i) { mark . set (y . index () , false) ; } } (tred , tclos) }
+    };
+}
+
+dag_transitive_reduction_closure!()

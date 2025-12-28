@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        Rule!();
+    };
+}
+
+macro_rules! Expr {
+    () => {
+        deps!();
+        # [doc = " All possible rule expressions"] # [doc = ""] # [doc = " # Warning: Semantic Versioning"] # [doc = " There may be non-breaking changes to the meta-grammar"] # [doc = " between minor versions. Those non-breaking changes, however,"] # [doc = " may translate into semver-breaking changes due to the additional variants"] # [doc = " propagated from the `Rule` enum. This is a known issue and will be fixed in the"] # [doc = " future (e.g. by increasing MSRV and non_exhaustive annotations)."] # [derive (Clone , Debug , Eq , PartialEq)] pub enum Expr { # [doc = " Matches an exact string, e.g. `\"a\"`"] Str (String) , # [doc = " Matches an exact string, case insensitively (ASCII only), e.g. `^\"a\"`"] Insens (String) , # [doc = " Matches one character in the range, e.g. `'a'..'z'`"] Range (String , String) , # [doc = " Matches the rule with the given name, e.g. `a`"] Ident (String) , # [doc = " Matches a custom part of the stack, e.g. `PEEK[..]`"] PeekSlice (i32 , Option < i32 >) , # [doc = " Positive lookahead; matches expression without making progress, e.g. `&e`"] PosPred (Box < Expr >) , # [doc = " Negative lookahead; matches if expression doesn't match, without making progress, e.g. `!e`"] NegPred (Box < Expr >) , # [doc = " Matches a sequence of two expressions, e.g. `e1 ~ e2`"] Seq (Box < Expr > , Box < Expr >) , # [doc = " Matches either of two expressions, e.g. `e1 | e2`"] Choice (Box < Expr > , Box < Expr >) , # [doc = " Optionally matches an expression, e.g. `e?`"] Opt (Box < Expr >) , # [doc = " Matches an expression zero or more times, e.g. `e*`"] Rep (Box < Expr >) , # [doc = " Matches an expression one or more times, e.g. `e+`"] RepOnce (Box < Expr >) , # [doc = " Matches an expression an exact number of times, e.g. `e{n}`"] RepExact (Box < Expr > , u32) , # [doc = " Matches an expression at least a number of times, e.g. `e{n,}`"] RepMin (Box < Expr > , u32) , # [doc = " Matches an expression at most a number of times, e.g. `e{,n}`"] RepMax (Box < Expr > , u32) , # [doc = " Matches an expression a number of times within a range, e.g. `e{m, n}`"] RepMinMax (Box < Expr > , u32 , u32) , # [doc = " Continues to match expressions until one of the strings in the `Vec` is found"] Skip (Vec < String >) , # [doc = " Matches an expression and pushes it to the stack, e.g. `push(e)`"] Push (Box < Expr >) , # [doc = " Pushes a literal string to the stack, e.g. `push_literal(\"a\")`"] # [cfg (feature = "grammar-extras")] PushLiteral (String) , # [doc = " Matches an expression and assigns a label to it, e.g. #label = exp"] # [cfg (feature = "grammar-extras")] NodeTag (Box < Expr > , String) , }
+    };
+}
+
+Expr!()

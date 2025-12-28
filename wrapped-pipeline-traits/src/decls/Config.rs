@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
+        DistConfig!();
+        LlvmConfig!();
+        BuildConfig!();
         EnvConfig!();
         NixConfig!();
-        BuildConfig!();
-        BinsConfig!();
-        InstallConfig!();
         RustConfig!();
-        DistConfig!();
         ChangeIdConfig!();
-        LlvmConfig!();
+        InstallConfig!();
         ModuleExportsConfig!();
+        BinsConfig!();
     };
 }
 

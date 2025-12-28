@@ -1,0 +1,7 @@
+macro_rules! purchase_blocks_impl {
+    () => {
+        # [decl2 (fn , name = "purchase_blocks_impl" , vis = "pub" , hash = "6fdf3669")] pub fn purchase_blocks_impl (input : TokenStream) -> TokenStream { let input_str = parse_macro_input ! (input as LitStr) ; let api_provider = input_str . value () ; quote ! { { use std :: process :: Command ; println ! ("cargo:warning=🔗 Purchasing Solana blocks from: {}" , # api_provider) ; let curl_result = Command :: new ("curl") . args (& ["-s" , "-H" , "Content-Type: application/json" , "-d" , r#"{"jsonrpc":"2.0","id":1,"method":"getRecentBlockhash"}"# , & format ! ("https://{}/api" , # api_provider)]) . output () ; let block_data = match curl_result { Ok (output) => String :: from_utf8_lossy (& output . stdout) . to_string () , Err (_) => r#"{"result":{"value":{"blockhash":"11111111111111111111111111111111","feeCalculator":{"lamportsPerSignature":5000}}}}"# . to_string () } ; let block_hash = block_data . split ("blockhash") . nth (1) . and_then (| s | s . split ('"') . nth (2)) . unwrap_or ("sample_block_hash") ; println ! ("cargo:warning=📦 Acquired block: {}" , & block_hash [.. 8]) ; block_data } } . into () }
+    };
+}
+
+purchase_blocks_impl!()

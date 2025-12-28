@@ -1,0 +1,17 @@
+macro_rules! deps {
+    () => {
+        DfsSpace!();
+        Reversed!();
+        Cycle!();
+        Time!();
+    };
+}
+
+macro_rules! toposort {
+    () => {
+        deps!();
+        # [doc = " Perform a topological sort of a directed graph."] # [doc = ""] # [doc = " `toposort` returns `Err` on graphs with cycles."] # [doc = " To handle graphs with cycles, use the one of scc algorithms or"] # [doc = " [`DfsPostOrder`](struct@crate::visit::DfsPostOrder)"] # [doc = "   instead of this function."] # [doc = ""] # [doc = " The implementation is iterative."] # [doc = ""] # [doc = " # Arguments"] # [doc = " * `g`: an acyclic directed graph."] # [doc = " * `space`: optional [`DfsSpace`]. If `space` is not `None`,"] # [doc = "   it is used instead of creating a new workspace for graph traversal."] # [doc = ""] # [doc = " # Returns"] # [doc = " * `Ok`: a vector of nodes in topological order: each node is ordered before its successors"] # [doc = "   (if the graph was acyclic)."] # [doc = " * `Err`: [`Cycle`] if the graph was not acyclic. Self loops are also cycles this case."] # [doc = ""] # [doc = " # Complexity"] # [doc = " * Time complexity: **O(|V| + |E|)**."] # [doc = " * Auxiliary space: **O(|V|)**."] # [doc = ""] # [doc = " where **|V|** is the number of nodes and **|E|** is the number of edges."] pub fn toposort < G > (g : G , space : Option < & mut DfsSpace < G :: NodeId , G :: Map > > ,) -> Result < Vec < G :: NodeId > , Cycle < G :: NodeId > > where G : IntoNeighborsDirected + IntoNodeIdentifiers + Visitable , { with_dfs (g , space , | dfs | { dfs . reset (g) ; let mut finished = g . visit_map () ; let mut finish_stack = Vec :: new () ; for i in g . node_identifiers () { if dfs . discovered . is_visited (& i) { continue ; } dfs . stack . push (i) ; while let Some (& nx) = dfs . stack . last () { if dfs . discovered . visit (nx) { for succ in g . neighbors (nx) { if succ == nx { return Err (Cycle (nx)) ; } if ! dfs . discovered . is_visited (& succ) { dfs . stack . push (succ) ; } } } else { dfs . stack . pop () ; if finished . visit (nx) { finish_stack . push (nx) ; } } } } finish_stack . reverse () ; dfs . reset (g) ; for & i in & finish_stack { dfs . move_to (i) ; let mut cycle = false ; while let Some (j) = dfs . next (Reversed (g)) { if cycle { return Err (Cycle (j)) ; } cycle = true ; } } Ok (finish_stack) }) }
+    };
+}
+
+toposort!()

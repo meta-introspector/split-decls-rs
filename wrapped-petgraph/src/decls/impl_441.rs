@@ -1,0 +1,18 @@
+macro_rules! deps {
+    () => {
+        Node!();
+        MinSpanningTreePrim!();
+        MinScored!();
+        Edge!();
+        Element!();
+    };
+}
+
+macro_rules! impl_441 {
+    () => {
+        deps!();
+        impl < G > Iterator for MinSpanningTreePrim < G > where G : IntoNodeReferences + IntoEdges + NodeIndexable , G :: NodeWeight : Clone , G :: EdgeWeight : Clone + PartialOrd , { type Item = Element < G :: NodeWeight , G :: EdgeWeight > ; fn next (& mut self) -> Option < Self :: Item > { let g = self . graph ; if let Some (ref mut iter) = self . node_ids { if let Some (node) = iter . next () { self . node_map . insert (g . to_index (node . id ()) , self . node_count) ; self . node_count += 1 ; return Some (Element :: Node { weight : node . weight () . clone () , }) ; } } self . node_ids = None ; if let Some (initial_node) = self . initial_node { let initial_node_index = g . to_index (initial_node . id ()) ; self . nodes_taken . insert (initial_node_index) ; let initial_edges = g . edges (initial_node . id ()) ; for edge in initial_edges { self . sort_edges . push (MinScored (edge . weight () . clone () , (edge . source () , edge . target ()) ,)) ; } } ; self . initial_node = None ; if self . nodes_taken . len () == self . node_count { self . sort_edges . clear () ; } ; while let Some (MinScored (score , (source , target))) = self . sort_edges . pop () { let (source_index , target_index) = (g . to_index (source) , g . to_index (target)) ; if self . nodes_taken . contains (& target_index) { continue ; } self . nodes_taken . insert (target_index) ; for edge in g . edges (target) { self . sort_edges . push (MinScored (edge . weight () . clone () , (edge . source () , edge . target ()) ,)) ; } let (& source_order , & target_order) = match (self . node_map . get (& source_index) , self . node_map . get (& target_index) ,) { (Some (source_order) , Some (target_order)) => (source_order , target_order) , _ => panic ! ("Edge references unknown node") , } ; return Some (Element :: Edge { source : source_order , target : target_order , weight : score , }) ; } None } }
+    };
+}
+
+impl_441!()

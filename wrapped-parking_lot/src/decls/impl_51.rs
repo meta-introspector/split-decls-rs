@@ -1,0 +1,14 @@
+macro_rules! deps {
+    () => {
+        RawMutex!();
+    };
+}
+
+macro_rules! impl_51 {
+    () => {
+        deps!();
+        impl RawMutex { # [inline] pub (crate) fn mark_parked_if_locked (& self) -> bool { let mut state = self . state . load (Ordering :: Relaxed) ; loop { if state & LOCKED_BIT == 0 { return false ; } match self . state . compare_exchange_weak (state , state | PARKED_BIT , Ordering :: Relaxed , Ordering :: Relaxed ,) { Ok (_) => return true , Err (x) => state = x , } } } # [inline] pub (crate) fn mark_parked (& self) { self . state . fetch_or (PARKED_BIT , Ordering :: Relaxed) ; } # [cold] fn lock_slow (& self , timeout : Option < Instant >) -> bool { let mut spinwait = SpinWait :: new () ; let mut state = self . state . load (Ordering :: Relaxed) ; loop { if state & LOCKED_BIT == 0 { match self . state . compare_exchange_weak (state , state | LOCKED_BIT , Ordering :: Acquire , Ordering :: Relaxed ,) { Ok (_) => return true , Err (x) => state = x , } continue ; } if state & PARKED_BIT == 0 && spinwait . spin () { state = self . state . load (Ordering :: Relaxed) ; continue ; } if state & PARKED_BIT == 0 { if let Err (x) = self . state . compare_exchange_weak (state , state | PARKED_BIT , Ordering :: Relaxed , Ordering :: Relaxed ,) { state = x ; continue ; } } let addr = self as * const _ as usize ; let validate = | | self . state . load (Ordering :: Relaxed) == LOCKED_BIT | PARKED_BIT ; let before_sleep = | | { } ; let timed_out = | _ , was_last_thread | { if was_last_thread { self . state . fetch_and (! PARKED_BIT , Ordering :: Relaxed) ; } } ; match unsafe { parking_lot_core :: park (addr , validate , before_sleep , timed_out , DEFAULT_PARK_TOKEN , timeout ,) } { ParkResult :: Unparked (TOKEN_HANDOFF) => return true , ParkResult :: Unparked (_) => () , ParkResult :: Invalid => () , ParkResult :: TimedOut => return false , } spinwait . reset () ; state = self . state . load (Ordering :: Relaxed) ; } } # [cold] fn unlock_slow (& self , force_fair : bool) { let addr = self as * const _ as usize ; let callback = | result : UnparkResult | { if result . unparked_threads != 0 && (force_fair || result . be_fair) { if ! result . have_more_threads { self . state . store (LOCKED_BIT , Ordering :: Relaxed) ; } return TOKEN_HANDOFF ; } if result . have_more_threads { self . state . store (PARKED_BIT , Ordering :: Release) ; } else { self . state . store (0 , Ordering :: Release) ; } TOKEN_NORMAL } ; unsafe { parking_lot_core :: unpark_one (addr , callback) ; } } # [cold] fn bump_slow (& self) { # [cfg (feature = "deadlock_detection")] unsafe { deadlock :: release_resource (self as * const _ as usize) } ; self . unlock_slow (true) ; self . lock () ; } }
+    };
+}
+
+impl_51!()

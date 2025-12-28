@@ -1,0 +1,7 @@
+macro_rules! generate_skip {
+    () => {
+        fn generate_skip (rules : & [OptimizedRule]) -> TokenStream { let whitespace = rules . iter () . any (| rule | rule . name == "WHITESPACE") ; let comment = rules . iter () . any (| rule | rule . name == "COMMENT") ; match (whitespace , comment) { (false , false) => generate_rule ! (skip , Ok (state)) , (true , false) => generate_rule ! (skip , if state . atomicity () == :: pest :: Atomicity :: NonAtomic { state . repeat (| state | super :: visible :: WHITESPACE (state)) } else { Ok (state) }) , (false , true) => generate_rule ! (skip , if state . atomicity () == :: pest :: Atomicity :: NonAtomic { state . repeat (| state | super :: visible :: COMMENT (state)) } else { Ok (state) }) , (true , true) => generate_rule ! (skip , if state . atomicity () == :: pest :: Atomicity :: NonAtomic { state . sequence (| state | { state . repeat (| state | super :: visible :: WHITESPACE (state)) . and_then (| state | { state . repeat (| state | { state . sequence (| state | { super :: visible :: COMMENT (state) . and_then (| state | { state . repeat (| state | super :: visible :: WHITESPACE (state)) }) }) }) }) }) } else { Ok (state) }) , } }
+    };
+}
+
+generate_skip!()

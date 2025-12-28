@@ -1,0 +1,7 @@
+macro_rules! backpack_fill_impl {
+    () => {
+        # [decl (fn , name = "backpack_fill_impl" , vis = "pub" , hash = "184edd62")] pub fn backpack_fill_impl (input : TokenStream) -> TokenStream { let input_str = parse_macro_input ! (input as LitStr) ; let items_data = input_str . value () ; quote ! { { println ! ("cargo:warning=🎒 Solving context window knapsack problem") ; let items : Vec < (& str , u32 , u32) > = # items_data . split (',') . filter_map (| item | { let parts : Vec <& str > = item . split (':') . collect () ; if parts . len () == 3 { Some ((parts [0] , parts [1] . parse () . unwrap_or (1) , parts [2] . parse () . unwrap_or (1))) } else { None } }) . collect () ; let capacity = 4096 ; let n = items . len () ; let mut dp = vec ! [vec ! [0u32 ; capacity + 1] ; n + 1] ; for i in 1 ..= n { let (_ , weight , value) = items [i - 1] ; for w in 0 ..= capacity { if weight <= w as u32 { dp [i] [w] = dp [i - 1] [w] . max (dp [i - 1] [w - weight as usize] + value) ; } else { dp [i] [w] = dp [i - 1] [w] ; } } } let max_value = dp [n] [capacity] ; let knapsack_result = format ! ("KnapsackSolution {{ capacity: {}, items: {}, max_value: {}, efficiency: {:.2} }}" , capacity , n , max_value , max_value as f64 / capacity as f64) ; println ! ("cargo:warning=📊 Optimal context: {} value in {} tokens" , max_value , capacity) ; knapsack_result } } . into () }
+    };
+}
+
+backpack_fill_impl!()

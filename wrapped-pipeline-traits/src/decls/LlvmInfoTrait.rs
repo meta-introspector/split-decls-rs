@@ -1,0 +1,7 @@
+macro_rules! LlvmInfoTrait {
+    () => {
+        pub trait LlvmInfoTrait : Send + Sync + Debug { fn ir_version (& self) -> Option < & str > ; fn target_triple (& self) -> Option < & str > ; }
+    };
+}
+
+LlvmInfoTrait!()

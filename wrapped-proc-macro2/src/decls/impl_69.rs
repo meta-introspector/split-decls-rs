@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Literal!();
+        RcVec!();
     };
 }
 
 macro_rules! impl_69 {
     () => {
         deps!();
-        impl Debug for Literal { fn fmt (& self , f : & mut fmt :: Formatter) -> fmt :: Result { Debug :: fmt (& self . inner , f) } }
+        impl < T > RefUnwindSafe for RcVec < T > where T : RefUnwindSafe { }
     };
 }
 

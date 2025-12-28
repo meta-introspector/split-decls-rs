@@ -1,0 +1,7 @@
+macro_rules! ReversedEdgeReference {
+    () => {
+        # [doc = " A reversed edge reference"] # [derive (Copy , Clone , Debug)] pub struct ReversedEdgeReference < R > (R) ;
+    };
+}
+
+ReversedEdgeReference!()

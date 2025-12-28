@@ -1,0 +1,7 @@
+macro_rules! tokenize_ident_to_subwords {
+    () => {
+        pub fn tokenize_ident_to_subwords (ident_str : & str) -> Vec < String > { RE_SPLIT_IDENT . split (ident_str) . filter (| s | ! s . is_empty ()) . map (| s | s . to_lowercase ()) . collect () }
+    };
+}
+
+tokenize_ident_to_subwords!()

@@ -1,0 +1,7 @@
+macro_rules! PotentialCodePoint {
+    () => {
+        # [doc = " A 24-bit numeric data type that is expected to be a Unicode scalar value, but is not"] # [doc = " validated as such."] # [doc = ""] # [doc = " Use this type instead of `char` when you want to deal with data that is expected to be valid"] # [doc = " Unicode scalar values, but you want control over when or if you validate that assumption."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " use potential_utf::PotentialCodePoint;"] # [doc = ""] # [doc = " assert_eq!(PotentialCodePoint::from_u24(0x68).try_to_char(), Ok('h'));"] # [doc = " assert_eq!(PotentialCodePoint::from_char('i').try_to_char(), Ok('i'));"] # [doc = " assert_eq!("] # [doc = "     PotentialCodePoint::from_u24(0x1F44B).try_to_char(),"] # [doc = "     Ok('👋')"] # [doc = " );"] # [doc = ""] # [doc = " assert!(PotentialCodePoint::from_u24(0xDE01).try_to_char().is_err());"] # [doc = " assert_eq!("] # [doc = "     PotentialCodePoint::from_u24(0xDE01).to_char_lossy(),"] # [doc = "     char::REPLACEMENT_CHARACTER"] # [doc = " );"] # [doc = " ```"] # [repr (transparent)] # [allow (clippy :: exhaustive_structs)] # [derive (PartialEq , Eq , Clone , Copy , Hash)] pub struct PotentialCodePoint ([u8 ; 3]) ;
+    };
+}
+
+PotentialCodePoint!()

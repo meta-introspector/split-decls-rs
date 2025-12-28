@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        EdgeRef!();
+        PositiveMeasure!();
+    };
+}
+
+macro_rules! find_augmenting_path {
+    () => {
+        deps!();
+        # [doc = " Makes a DFS to find an augmenting path from source to destination vertex"] # [doc = " using previously computed `edge_levels` from level graph."] # [doc = ""] # [doc = " Returns a boolean indicating if an augmenting path to destination was found."] fn find_augmenting_path < G > (network : G , source : G :: NodeId , destination : G :: NodeId , flows : & [G :: EdgeWeight] , level_edges : & mut [Vec < G :: EdgeRef >] , visited : & mut G :: Map , edge_to : & mut [Option < G :: EdgeRef >] ,) -> bool where G : IntoEdges + NodeIndexable + EdgeIndexable + Visitable , G :: EdgeWeight : Sub < Output = G :: EdgeWeight > + PositiveMeasure , { network . reset_map (visited) ; let mut level_edges_i = vec ! [0 ; level_edges . len ()] ; let mut dfs_stack = Vec :: new () ; dfs_stack . push (source) ; visited . visit (source) ; while let Some (& vertex) = dfs_stack . last () { let vertex_index = NodeIndexable :: to_index (& network , vertex) ; let mut found_next = false ; while level_edges_i [vertex_index] < level_edges [vertex_index] . len () { let curr_level_edges_i = level_edges_i [vertex_index] ; let edge = level_edges [vertex_index] [curr_level_edges_i] ; let next_vertex = other_endpoint (& network , edge , vertex) ; let edge_index : usize = EdgeIndexable :: to_index (& network , edge . id ()) ; let residual_cap = residual_capacity (& network , edge , next_vertex , flows [edge_index]) ; if residual_cap == G :: EdgeWeight :: zero () { level_edges [vertex_index] . swap_remove (curr_level_edges_i) ; continue ; } if ! visited . is_visited (& next_vertex) { let next_vertex_index = NodeIndexable :: to_index (& network , next_vertex) ; edge_to [next_vertex_index] = Some (edge) ; if destination == next_vertex { return true ; } dfs_stack . push (next_vertex) ; visited . visit (next_vertex) ; found_next = true ; break ; } level_edges_i [vertex_index] += 1 ; } if ! found_next { dfs_stack . pop () ; } } false }
+    };
+}
+
+find_augmenting_path!()

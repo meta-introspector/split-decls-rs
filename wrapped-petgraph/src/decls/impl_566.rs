@@ -1,0 +1,17 @@
+macro_rules! deps {
+    () => {
+        RankDir!();
+        Escaped!();
+        Dot!();
+        FnFmt!();
+    };
+}
+
+macro_rules! impl_566 {
+    () => {
+        deps!();
+        # [doc = " A low-level function allows specifying fmt functions for nodes and edges separately."] impl < G > Dot < '_ , G > where G : IntoNodeReferences + IntoEdgeReferences + NodeIndexable + GraphProp , { pub fn graph_fmt < NF , EF > (& self , f : & mut fmt :: Formatter , node_fmt : NF , edge_fmt : EF ,) -> fmt :: Result where NF : Fn (& G :: NodeWeight , & mut fmt :: Formatter) -> fmt :: Result , EF : Fn (& G :: EdgeWeight , & mut fmt :: Formatter) -> fmt :: Result , { let g = self . graph ; if ! self . config . GraphContentOnly { writeln ! (f , "{} {{" , TYPE [g . is_directed () as usize]) ? ; } if let Some (rank_dir) = & self . config . RankDir { let value = match rank_dir { RankDir :: TB => "TB" , RankDir :: BT => "BT" , RankDir :: LR => "LR" , RankDir :: RL => "RL" , } ; writeln ! (f , "{INDENT}rankdir=\"{value}\"") ? ; } for node in g . node_references () { write ! (f , "{}{} [ " , INDENT , g . to_index (node . id ()) ,) ? ; if ! self . config . NodeNoLabel { write ! (f , "label = \"") ? ; if self . config . NodeIndexLabel { write ! (f , "{}" , g . to_index (node . id ())) ? ; } else { Escaped (FnFmt (node . weight () , & node_fmt)) . fmt (f) ? ; } write ! (f , "\" ") ? ; } writeln ! (f , "{}]" , (self . get_node_attributes) (g , node)) ? ; } for (i , edge) in g . edge_references () . enumerate () { write ! (f , "{}{} {} {} [ " , INDENT , g . to_index (edge . source ()) , EDGE [g . is_directed () as usize] , g . to_index (edge . target ()) ,) ? ; if ! self . config . EdgeNoLabel { write ! (f , "label = \"") ? ; if self . config . EdgeIndexLabel { write ! (f , "{i}") ? ; } else { Escaped (FnFmt (edge . weight () , & edge_fmt)) . fmt (f) ? ; } write ! (f , "\" ") ? ; } writeln ! (f , "{}]" , (self . get_edge_attributes) (g , edge)) ? ; } if ! self . config . GraphContentOnly { writeln ! (f , "}}") ? ; } Ok (()) } }
+    };
+}
+
+impl_566!()

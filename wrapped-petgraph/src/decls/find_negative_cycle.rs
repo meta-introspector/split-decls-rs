@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        Time!();
+        Graph!();
+        FloatMeasure!();
+    };
+}
+
+macro_rules! find_negative_cycle {
+    () => {
+        deps!();
+        # [doc = " Find the path of a negative cycle reachable from node `source`."] # [doc = ""] # [doc = " Using the [find_negative_cycle][nc]; will search the graph for negative cycles using"] # [doc = " [Bellman–Ford algorithm][bf]. If no negative cycle is found the function will return `None`."] # [doc = ""] # [doc = " If a negative cycle is found from source, return one vec with a path of `NodeId`s."] # [doc = ""] # [doc = " # Arguments"] # [doc = " * `g`: graph."] # [doc = " * `source`: the source node."] # [doc = ""] # [doc = " # Returns"] # [doc = " * `Some(Vec<G::NodeId>)` - the path of the negative cycle (if found)."] # [doc = " * `None` - if `g` doesn't contain negative cycles reachable from `source`."] # [doc = ""] # [doc = " # Complexity"] # [doc = " * Time complexity: **O(|V||E|)**."] # [doc = " * Auxiliary space: **O(|V|)**."] # [doc = ""] # [doc = " where **|V|** is the number of nodes and **|E|** is the number of edges."] # [doc = ""] # [doc = ""] # [doc = " [nc]: https://blogs.asarkar.com/assets/docs/algorithms-curated/Negative-Weight%20Cycle%20Algorithms%20-%20Huang.pdf"] # [doc = " [bf]: https://en.wikipedia.org/wiki/Bellman%E2%80%93Ford_algorithm"] # [doc = ""] # [doc = " # Example"] # [doc = " ```rust"] # [doc = " use petgraph::Graph;"] # [doc = " use petgraph::algo::find_negative_cycle;"] # [doc = " use petgraph::prelude::*;"] # [doc = ""] # [doc = " let graph_with_neg_cycle = Graph::<(), f32, Directed>::from_edges(&["] # [doc = "         (0, 1, 1.),"] # [doc = "         (0, 2, 1.),"] # [doc = "         (0, 3, 1.),"] # [doc = "         (1, 3, 1.),"] # [doc = "         (2, 1, 1.),"] # [doc = "         (3, 2, -3.),"] # [doc = " ]);"] # [doc = ""] # [doc = " let path = find_negative_cycle(&graph_with_neg_cycle, NodeIndex::new(0));"] # [doc = " assert_eq!("] # [doc = "     path,"] # [doc = "     Some([NodeIndex::new(1), NodeIndex::new(3), NodeIndex::new(2)].to_vec())"] # [doc = " );"] # [doc = " ```"] pub fn find_negative_cycle < G > (g : G , source : G :: NodeId) -> Option < Vec < G :: NodeId > > where G : NodeCount + IntoNodeIdentifiers + IntoEdges + NodeIndexable + Visitable , G :: EdgeWeight : FloatMeasure , { let ix = | i | g . to_index (i) ; let mut path = Vec :: < G :: NodeId > :: new () ; let (distance , predecessor) = bellman_ford_initialize_relax (g , source) ; 'outer : for i in g . node_identifiers () { for edge in g . edges (i) { let j = edge . target () ; let w = * edge . weight () ; if distance [ix (i)] + w < distance [ix (j)] { let start = j ; let mut node = start ; let mut visited = g . visit_map () ; loop { let ancestor = match predecessor [ix (node)] { Some (predecessor_node) => predecessor_node , None => node , } ; if ancestor == start { path . push (ancestor) ; break ; } else if visited . is_visited (& ancestor) { let pos = path . iter () . position (| & p | p == ancestor) . expect ("we should always have a position") ; path = path [pos .. path . len ()] . to_vec () ; break ; } path . push (ancestor) ; visited . visit (ancestor) ; node = ancestor ; } break 'outer ; } } } if ! path . is_empty () { path . reverse () ; Some (path) } else { None } }
+    };
+}
+
+find_negative_cycle!()

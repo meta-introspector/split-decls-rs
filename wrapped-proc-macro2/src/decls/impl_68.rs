@@ -1,14 +1,13 @@
 macro_rules! deps {
     () => {
-        LexError!();
-        Literal!();
+        RcVecIntoIter!();
     };
 }
 
 macro_rules! impl_68 {
     () => {
         deps!();
-        impl FromStr for Literal { type Err = LexError ; fn from_str (repr : & str) -> Result < Self , LexError > { match imp :: Literal :: from_str_checked (repr) { Ok (lit) => Ok (Literal :: _new (lit)) , Err (lex) => Err (LexError { inner : lex , _marker : MARKER , }) , } } }
+        impl < T > Iterator for RcVecIntoIter < T > { type Item = T ; fn next (& mut self) -> Option < Self :: Item > { self . inner . next () } fn size_hint (& self) -> (usize , Option < usize >) { self . inner . size_hint () } }
     };
 }
 

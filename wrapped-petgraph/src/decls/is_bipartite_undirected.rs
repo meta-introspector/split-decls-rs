@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        VisitMap!();
+        Time!();
+        GraphRef!();
+    };
+}
+
+macro_rules! is_bipartite_undirected {
+    () => {
+        deps!();
+        # [doc = " Return `true` if the graph\\* is bipartite."] # [doc = ""] # [doc = " A graph is bipartite if its nodes can be divided into"] # [doc = " two disjoint and indepedent sets U and V such that every edge connects U to one in V."] # [doc = ""] # [doc = " This algorithm implements 2-coloring algorithm based on the BFS algorithm."] # [doc = " Always treats the input graph as if undirected."] # [doc = ""] # [doc = " \\* The algorithm checks only the subgraph that is reachable from the `start`."] # [doc = ""] # [doc = " # Arguments"] # [doc = " * `g`: an input graph."] # [doc = " * `start`: some node of the graph."] # [doc = ""] # [doc = " # Returns"] # [doc = " * `true`: if the subgraph accessible from the start node is bipartite."] # [doc = " * `false`: if such a subgraph is not bipartite."] # [doc = ""] # [doc = " # Complexity"] # [doc = " * Time complexity: **O(|V| + |E|)**."] # [doc = " * Auxiliary space: **O(|V|)**."] # [doc = ""] # [doc = " where **|V|** is the number of nodes and **|E|** is the number of edges."] pub fn is_bipartite_undirected < G , N , VM > (g : G , start : N) -> bool where G : GraphRef + Visitable < NodeId = N , Map = VM > + IntoNeighbors < NodeId = N > , N : Copy + PartialEq + core :: fmt :: Debug , VM : VisitMap < N > , { let mut red = g . visit_map () ; red . visit (start) ; let mut blue = g . visit_map () ; let mut stack = :: alloc :: collections :: VecDeque :: new () ; stack . push_front (start) ; while let Some (node) = stack . pop_front () { let is_red = red . is_visited (& node) ; let is_blue = blue . is_visited (& node) ; assert ! (is_red ^ is_blue) ; for neighbour in g . neighbors (node) { let is_neigbour_red = red . is_visited (& neighbour) ; let is_neigbour_blue = blue . is_visited (& neighbour) ; if (is_red && is_neigbour_red) || (is_blue && is_neigbour_blue) { return false ; } if ! is_neigbour_red && ! is_neigbour_blue { match (is_red , is_blue) { (true , false) => { blue . visit (neighbour) ; } (false , true) => { red . visit (neighbour) ; } (_ , _) => { panic ! ("Invariant doesn't hold") ; } } stack . push_back (neighbour) ; } } } true }
+    };
+}
+
+is_bipartite_undirected!()

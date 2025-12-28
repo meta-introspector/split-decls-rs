@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        PrimeCurveParams!();
+        ProjectivePoint!();
+    };
+}
+
+macro_rules! impl_101 {
+    () => {
+        deps!();
+        impl < C > SubAssign < & ProjectivePoint < C > > for ProjectivePoint < C > where C : PrimeCurveParams , { fn sub_assign (& mut self , rhs : & ProjectivePoint < C >) { * self = ProjectivePoint :: sub (self , rhs) ; } }
+    };
+}
+
+impl_101!()

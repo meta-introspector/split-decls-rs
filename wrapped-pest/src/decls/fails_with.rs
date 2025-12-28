@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        InputLocation!();
+        ErrorVariant!();
+        Parser!();
+    };
+}
+
+macro_rules! fails_with {
+    () => {
+        deps!();
+        # [doc = " Testing tool that compares produced errors."] # [doc = ""] # [doc = " This macro takes several arguments:"] # [doc = ""] # [doc = " * `parser` - name of the data structure implementing `Parser`"] # [doc = " * `input` - input to be tested against"] # [doc = " * `rule` - `Rule` which will be run"] # [doc = " * `positives` - positive `Rule` attempts that failed"] # [doc = " * `negatives` - negative `Rule` attempts that failed"] # [doc = " * `pos` - byte position of failure"] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " # #[macro_use]"] # [doc = " # extern crate pest;"] # [doc = " # use pest::Parser;"] # [doc = " # use pest::error::Error;"] # [doc = " # use pest::iterators::Pairs;"] # [doc = " # fn main() {"] # [doc = " # #[allow(non_camel_case_types)]"] # [doc = " # #[derive(Clone, Copy, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]"] # [doc = " # enum Rule {"] # [doc = " #     a,"] # [doc = " #     b,"] # [doc = " #     c"] # [doc = " # }"] # [doc = " #"] # [doc = " # struct AbcParser;"] # [doc = " #"] # [doc = " # impl Parser<Rule> for AbcParser {"] # [doc = " #     fn parse<'i>(_: Rule, input: &'i str) -> Result<Pairs<'i, Rule>, Error<Rule>> {"] # [doc = " #         pest::state(input, |state| {"] # [doc = " #             state.rule(Rule::a, |state| {"] # [doc = " #                 state.skip(1).unwrap().rule(Rule::b, |s| {"] # [doc = " #                     s.skip(1)"] # [doc = " #                 }).unwrap().skip(1)"] # [doc = " #             }).and_then(|state| {"] # [doc = " #                 state.skip(1).unwrap().rule(Rule::c, |s| {"] # [doc = " #                     s.match_string(\"e\")"] # [doc = " #                 })"] # [doc = " #             })"] # [doc = " #         })"] # [doc = " #     }"] # [doc = " # }"] # [doc = " fails_with! {"] # [doc = "     parser: AbcParser,"] # [doc = "     input: \"abcdf\","] # [doc = "     rule: Rule::a,"] # [doc = "     positives: vec![Rule::c],"] # [doc = "     negatives: vec![],"] # [doc = "     pos: 4"] # [doc = " };"] # [doc = " # }"] # [doc = " ```"] # [macro_export] macro_rules ! fails_with { (parser : $ parser : ident , input : $ string : expr , rule : $ rules : tt :: $ rule : tt , positives : $ positives : expr , negatives : $ negatives : expr , pos : $ pos : expr) => { # [allow (unused_mut)] { use $ crate :: Parser ; let error = $ parser :: parse ($ rules ::$ rule , $ string) . unwrap_err () ; match error . variant { $ crate :: error :: ErrorVariant :: ParsingError { positives , negatives , } => { assert_eq ! (positives , $ positives , "positives") ; assert_eq ! (negatives , $ negatives , "negatives") ; } _ => unreachable ! () , } ; match error . location { $ crate :: error :: InputLocation :: Pos (pos) => assert_eq ! (pos , $ pos , "pos") , _ => unreachable ! () , } } } ; }
+    };
+}
+
+fails_with!()

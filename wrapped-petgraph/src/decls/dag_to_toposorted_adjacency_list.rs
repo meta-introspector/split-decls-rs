@@ -1,0 +1,21 @@
+macro_rules! deps {
+    () => {
+        Directed!();
+        NodeIndex!();
+        IndexType!();
+        List!();
+        UnweightedList!();
+        Direction!();
+        Node!();
+        Time!();
+    };
+}
+
+macro_rules! dag_to_toposorted_adjacency_list {
+    () => {
+        deps!();
+        # [doc = " Creates a representation of the same graph respecting topological order for use in `tred::dag_transitive_reduction_closure`."] # [doc = ""] # [doc = " # Arguments"] # [doc = " * `g`: a directed acyclic graph."] # [doc = " * `toposort`: a topological order on the node indices of `g` (for example obtained from [`toposort`](fn@crate::algo::toposort))."] # [doc = ""] # [doc = " # Returns"] # [doc = " Returns a tuple of:"] # [doc = " * [`UnweightedList`](type@crate::adj::UnweightedList) `res` graph."] # [doc = " * `Vec`: reciprocal of the topological sort `revmap`."] # [doc = ""] # [doc = " `res` is the same graph as `g` with the following differences:"] # [doc = " * Node and edge weights are stripped,"] # [doc = " * Node indices are replaced by the corresponding rank in `toposort`,"] # [doc = " * Iterating on the neighbors of a node respects topological order."] # [doc = ""] # [doc = " `revmap` is handy to get back to map indices in `g` to indices in `res`."] # [doc = ""] # [doc = " # Complexity"] # [doc = " * Time complexity: **O(|V| + |E|)**."] # [doc = " * Auxiliary space: **O(|V| + |E|)**."] # [doc = ""] # [doc = " where **|V|** is the number of nodes and **|E|** is the number of edges."] # [doc = ""] # [doc = " # Example"] # [doc = ""] # [doc = " ```rust"] # [doc = " use petgraph::prelude::*;"] # [doc = " use petgraph::graph::DefaultIx;"] # [doc = " use petgraph::visit::IntoNeighbors;"] # [doc = " use petgraph::algo::tred::dag_to_toposorted_adjacency_list;"] # [doc = ""] # [doc = " let mut g = Graph::<&str, (), Directed, DefaultIx>::new();"] # [doc = " let second = g.add_node(\"second child\");"] # [doc = " let top = g.add_node(\"top\");"] # [doc = " let first = g.add_node(\"first child\");"] # [doc = " g.extend_with_edges(&[(top, second), (top, first), (first, second)]);"] # [doc = ""] # [doc = " let toposort = vec![top, first, second];"] # [doc = ""] # [doc = " let (res, revmap) = dag_to_toposorted_adjacency_list(&g, &toposort);"] # [doc = ""] # [doc = " // let's compute the children of top in topological order"] # [doc = " let children: Vec<NodeIndex> = res"] # [doc = "     .neighbors(revmap[top.index()])"] # [doc = "     .map(|ix: NodeIndex| toposort[ix.index()])"] # [doc = "     .collect();"] # [doc = " assert_eq!(children, vec![first, second])"] # [doc = " ```"] pub fn dag_to_toposorted_adjacency_list < G , Ix : IndexType > (g : G , toposort : & [G :: NodeId] ,) -> (UnweightedList < Ix > , Vec < Ix >) where G : GraphBase + IntoNeighborsDirected + NodeCompactIndexable + NodeCount , G :: NodeId : IndexType , { let mut res = List :: with_capacity (g . node_count ()) ; let mut revmap = vec ! [Ix :: default () ; g . node_bound ()] ; for (ix , & old_ix) in toposort . iter () . enumerate () { let ix = Ix :: new (ix) ; revmap [old_ix . index ()] = ix ; let iter = g . neighbors_directed (old_ix , Direction :: Incoming) ; let new_ix : Ix = res . add_node_with_capacity (iter . size_hint () . 0) ; debug_assert_eq ! (new_ix . index () , ix . index ()) ; for old_pre in iter { let pre : Ix = revmap [old_pre . index ()] ; res . add_edge (pre , ix , ()) ; } } (res , revmap) }
+    };
+}
+
+dag_to_toposorted_adjacency_list!()

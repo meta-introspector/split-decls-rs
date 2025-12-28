@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        Mutex!();
+        RawMutex!();
+    };
+}
+
+macro_rules! Condvar {
+    () => {
+        deps!();
+        # [doc = " A Condition Variable"] # [doc = ""] # [doc = " Condition variables represent the ability to block a thread such that it"] # [doc = " consumes no CPU time while waiting for an event to occur. Condition"] # [doc = " variables are typically associated with a boolean predicate (a condition)"] # [doc = " and a mutex. The predicate is always verified inside of the mutex before"] # [doc = " determining that thread must block."] # [doc = ""] # [doc = " Note that this module places one additional restriction over the system"] # [doc = " condition variables: each condvar can be used with only one mutex at a"] # [doc = " time. Any attempt to use multiple mutexes on the same condition variable"] # [doc = " simultaneously will result in a runtime panic. However it is possible to"] # [doc = " switch to a different mutex if there are no threads currently waiting on"] # [doc = " the condition variable."] # [doc = ""] # [doc = " # Differences from the standard library `Condvar`"] # [doc = ""] # [doc = " - No spurious wakeups: A wait will only return a non-timeout result if it"] # [doc = "   was woken up by `notify_one` or `notify_all`."] # [doc = " - `Condvar::notify_all` will only wake up a single thread, the rest are"] # [doc = "   requeued to wait for the `Mutex` to be unlocked by the thread that was"] # [doc = "   woken up."] # [doc = " - Only requires 1 word of space, whereas the standard library boxes the"] # [doc = "   `Condvar` due to platform limitations."] # [doc = " - Can be statically constructed."] # [doc = " - Does not require any drop glue when dropped."] # [doc = " - Inline fast path for the uncontended case."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " use parking_lot::{Mutex, Condvar};"] # [doc = " use std::sync::Arc;"] # [doc = " use std::thread;"] # [doc = ""] # [doc = " let pair = Arc::new((Mutex::new(false), Condvar::new()));"] # [doc = " let pair2 = pair.clone();"] # [doc = ""] # [doc = " // Inside of our lock, spawn a new thread, and then wait for it to start"] # [doc = " thread::spawn(move|| {"] # [doc = "     let &(ref lock, ref cvar) = &*pair2;"] # [doc = "     let mut started = lock.lock();"] # [doc = "     *started = true;"] # [doc = "     cvar.notify_one();"] # [doc = " });"] # [doc = ""] # [doc = " // wait for the thread to start up"] # [doc = " let &(ref lock, ref cvar) = &*pair;"] # [doc = " let mut started = lock.lock();"] # [doc = " if !*started {"] # [doc = "     cvar.wait(&mut started);"] # [doc = " }"] # [doc = " // Note that we used an if instead of a while loop above. This is only"] # [doc = " // possible because parking_lot's Condvar will never spuriously wake up."] # [doc = " // This means that wait() will only return after notify_one or notify_all is"] # [doc = " // called."] # [doc = " ```"] pub struct Condvar { state : AtomicPtr < RawMutex > , }
+    };
+}
+
+Condvar!()

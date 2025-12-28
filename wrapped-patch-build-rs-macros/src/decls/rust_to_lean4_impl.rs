@@ -1,0 +1,7 @@
+macro_rules! rust_to_lean4_impl {
+    () => {
+        # [decl (fn , name = "rust_to_lean4_impl" , vis = "pub" , hash = "2a31cbbd")] pub fn rust_to_lean4_impl (input : TokenStream) -> TokenStream { let input_str = parse_macro_input ! (input as LitStr) ; let rust_macro = input_str . value () ; quote ! { { println ! ("cargo:warning=🪞 Mirroring Rust → Lean4 syntax") ; let lean4_syntax = if # rust_macro . contains ("struct") { let struct_name = # rust_macro . split_whitespace () . find (|& word | word . chars () . next () . unwrap_or ('a') . is_uppercase ()) . unwrap_or ("Unknown") ; format ! ("structure {} where" , struct_name) } else if # rust_macro . contains ("fn") { let fn_name = # rust_macro . split ("fn ") . nth (1) . and_then (| s | s . split ('(') . next ()) . unwrap_or ("unknown") ; format ! ("def {} : Type := sorry" , fn_name) } else if # rust_macro . contains ("impl") { let impl_type = # rust_macro . split ("impl ") . nth (1) . and_then (| s | s . split_whitespace () . next ()) . unwrap_or ("Unknown") ; format ! ("instance : HasMul {} where mul := sorry" , impl_type) } else { format ! ("-- Lean4 equivalent of: {}" , # rust_macro) } ; lean4_syntax } } . into () }
+    };
+}
+
+rust_to_lean4_impl!()

@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        NeighborIterDirection!();
+        EdgeType!();
+        Nullable!();
+    };
+}
+
+macro_rules! Edges {
+    () => {
+        deps!();
+        # [doc = " Iterator over the edges of from or to a node"] # [doc = ""] # [doc = " Created with [`.edges()`][1], [`.edges_directed()`][2]."] # [doc = ""] # [doc = " [1]: struct.MatrixGraph.html#method.edges"] # [doc = " [2]: struct.MatrixGraph.html#method.edges_directed"] # [derive (Debug , Clone)] pub struct Edges < 'a , Ty : EdgeType , Null : 'a + Nullable , Ix > { iter_direction : NeighborIterDirection , node_adjacencies : & 'a [Null] , node_capacity : usize , row : usize , column : usize , ty : PhantomData < Ty > , ix : PhantomData < Ix > , }
+    };
+}
+
+Edges!()

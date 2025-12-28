@@ -1,14 +1,13 @@
 macro_rules! deps {
     () => {
-        ProcMacroSrv!();
-        EnvSnapshot!();
+        LoadProcMacroDylibError!();
     };
 }
 
 macro_rules! impl_9 {
     () => {
         deps!();
-        impl < 'env > ProcMacroSrv < 'env > { pub fn new (env : & 'env EnvSnapshot) -> Self { Self { expanders : Default :: default () , env , temp_dir : TempDir :: with_prefix ("proc-macro-srv") . unwrap () , } } }
+        impl fmt :: Display for LoadProcMacroDylibError { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { match self { Self :: Io (e) => e . fmt (f) , Self :: AbiMismatch (v) => { use crate :: RUSTC_VERSION_STRING ; write ! (f , "mismatched ABI expected: `{RUSTC_VERSION_STRING}`, got `{v}`") } Self :: LibLoading (e) => e . fmt (f) , } } }
     };
 }
 

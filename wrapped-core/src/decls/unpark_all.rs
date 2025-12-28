@@ -1,0 +1,15 @@
+macro_rules! deps {
+    () => {
+        ThreadParkerT!();
+        UnparkToken!();
+    };
+}
+
+macro_rules! unpark_all {
+    () => {
+        deps!();
+        # [doc = " Unparks all threads in the queue associated with the given key."] # [doc = ""] # [doc = " The given `UnparkToken` is passed to all unparked threads."] # [doc = ""] # [doc = " This function returns the number of threads that were unparked."] # [doc = ""] # [doc = " # Safety"] # [doc = ""] # [doc = " You should only call this function with an address that you control, since"] # [doc = " you could otherwise interfere with the operation of other synchronization"] # [doc = " primitives."] # [doc = ""] # [doc = " The `parking_lot` functions are not re-entrant and calling this method"] # [doc = " from the context of an asynchronous signal handler may result in undefined"] # [doc = " behavior, including corruption of internal state and/or deadlocks."] # [inline] pub unsafe fn unpark_all (key : usize , unpark_token : UnparkToken) -> usize { let bucket = lock_bucket (key) ; let mut link = & bucket . queue_head ; let mut current = bucket . queue_head . get () ; let mut previous = ptr :: null () ; let mut threads = SmallVec :: < < ThreadParker as ThreadParkerT > :: UnparkHandle , 8 > :: new () ; while ! current . is_null () { if (* current) . key . load (Ordering :: Relaxed) == key { let next = (* current) . next_in_queue . get () ; link . set (next) ; if bucket . queue_tail . get () == current { bucket . queue_tail . set (previous) ; } (* current) . unpark_token . set (unpark_token) ; threads . push ((* current) . parker . unpark_lock ()) ; current = next ; } else { link = & (* current) . next_in_queue ; previous = current ; current = link . get () ; } } bucket . mutex . unlock () ; let num_threads = threads . len () ; for handle in threads . into_iter () { handle . unpark () ; } num_threads }
+    };
+}
+
+unpark_all!()

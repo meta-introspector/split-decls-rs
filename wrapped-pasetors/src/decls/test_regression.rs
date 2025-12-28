@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        UncompressedPublicKey!();
+        AsymmetricPublicKey!();
+        V3!();
+    };
+}
+
+macro_rules! test_regression {
+    () => {
+        deps!();
+        # [cfg (test)] mod test_regression { use super :: * ; use crate :: keys :: AsymmetricPublicKey ; use core :: convert :: TryFrom ; use p384 :: elliptic_curve :: sec1 :: ToEncodedPoint ; # [test] fn fuzzer_regression_1 () { let pk_bytes : [u8 ; 97] = [4 , 0 , 205 , 193 , 144 , 253 , 175 , 61 , 67 , 178 , 31 , 65 , 80 , 197 , 219 , 197 , 12 , 136 , 239 , 15 , 12 , 155 , 112 , 129 , 17 , 35 , 64 , 33 , 149 , 251 , 222 , 174 , 69 , 197 , 171 , 176 , 115 , 67 , 144 , 76 , 135 , 147 , 21 , 48 , 196 , 235 , 169 , 93 , 34 , 100 , 63 , 20 , 128 , 61 , 191 , 214 , 161 , 240 , 38 , 228 , 74 , 250 , 91 , 185 , 68 , 243 , 172 , 203 , 43 , 174 , 99 , 230 , 231 , 239 , 161 , 78 , 148 , 160 , 170 , 87 , 200 , 24 , 220 , 196 , 53 , 107 , 22 , 85 , 59 , 227 , 237 , 150 , 83 , 81 , 41 , 2 , 132 ,] ; let uc_pk = UncompressedPublicKey :: try_from (pk_bytes . as_ref ()) . unwrap () ; assert_eq ! (& pk_bytes , & uc_pk . 0 . to_encoded_point (false) . as_ref ()) ; let c_pk = AsymmetricPublicKey :: < V3 > :: try_from (& uc_pk) . unwrap () ; assert_eq ! (& c_pk . as_bytes () [1 ..] , & pk_bytes [1 .. 49]) ; let round = UncompressedPublicKey :: try_from (& c_pk) . unwrap () ; assert_eq ! (round . 0 . to_encoded_point (false) . as_ref () , pk_bytes) ; } # [test] fn fuzzer_regression_2 () { let data : [u8 ; 49] = [2 , 0 , 49 , 49 , 49 , 49 , 49 , 49 , 49 , 49 , 49 , 49 , 49 , 49 , 49 , 49 , 49 , 49 , 49 , 49 , 49 , 49 , 49 , 49 , 49 , 49 , 49 , 49 , 49 , 49 , 49 , 49 , 49 , 49 , 49 , 49 , 49 , 49 , 49 , 49 , 49 , 49 , 49 , 49 , 49 , 49 , 49 , 49 , 49 ,] ; if let Ok (compressed_pk) = AsymmetricPublicKey :: < V3 > :: from (& data) { if let Ok (uncompressed) = UncompressedPublicKey :: try_from (& compressed_pk) { assert_eq ! (AsymmetricPublicKey ::< V3 >:: try_from (& uncompressed) . unwrap () . as_bytes () , compressed_pk . as_bytes ()) ; } } } # [test] fn fuzzer_regression_3 () { let data : [u8 ; 49] = [2 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 1 ,] ; if let Ok (compressed_pk) = AsymmetricPublicKey :: < V3 > :: from (& data) { if let Ok (uncompressed) = UncompressedPublicKey :: try_from (& compressed_pk) { assert_eq ! (AsymmetricPublicKey ::< V3 >:: try_from (& uncompressed) . unwrap () . as_bytes () , compressed_pk . as_bytes ()) ; } } } }
+    };
+}
+
+test_regression!()

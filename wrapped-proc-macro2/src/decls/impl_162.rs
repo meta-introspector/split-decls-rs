@@ -1,0 +1,16 @@
+macro_rules! deps {
+    () => {
+        CheckRaw!();
+        NonZeroChar!();
+        EscapeError!();
+    };
+}
+
+macro_rules! impl_162 {
+    () => {
+        deps!();
+        impl CheckRaw for CStr { type RawUnit = NonZeroChar ; # [inline] fn char2raw_unit (c : char) -> Result < Self :: RawUnit , EscapeError > { NonZeroChar :: new (c) . ok_or (EscapeError :: NulInCStr) } }
+    };
+}
+
+impl_162!()
