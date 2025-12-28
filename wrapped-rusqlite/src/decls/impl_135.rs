@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         Wal!();
+        Authorization!();
+        Connection!();
         Result!();
         Action!();
-        Connection!();
-        Authorization!();
         AuthContext!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! impl_135 {
     };
 }
 
-impl_135!()
+impl_135!();

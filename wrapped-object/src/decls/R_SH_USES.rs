@@ -4,4 +4,4 @@ macro_rules! R_SH_USES {
     };
 }
 
-R_SH_USES!()
+R_SH_USES!();

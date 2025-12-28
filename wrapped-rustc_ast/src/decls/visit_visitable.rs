@@ -11,4 +11,4 @@ macro_rules! visit_visitable {
     };
 }
 
-visit_visitable!()
+visit_visitable!();

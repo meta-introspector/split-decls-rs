@@ -11,4 +11,4 @@ macro_rules! PF_ARM_SB {
     };
 }
 
-PF_ARM_SB!()
+PF_ARM_SB!();

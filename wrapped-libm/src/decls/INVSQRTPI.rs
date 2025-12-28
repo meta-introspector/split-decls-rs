@@ -4,4 +4,4 @@ macro_rules! INVSQRTPI {
     };
 }
 
-INVSQRTPI!()
+INVSQRTPI!();

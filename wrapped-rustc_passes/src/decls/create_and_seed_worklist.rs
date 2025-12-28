@@ -11,4 +11,4 @@ macro_rules! create_and_seed_worklist {
     };
 }
 
-create_and_seed_worklist!()
+create_and_seed_worklist!();

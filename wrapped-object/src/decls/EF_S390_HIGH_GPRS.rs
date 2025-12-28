@@ -4,4 +4,4 @@ macro_rules! EF_S390_HIGH_GPRS {
     };
 }
 
-EF_S390_HIGH_GPRS!()
+EF_S390_HIGH_GPRS!();

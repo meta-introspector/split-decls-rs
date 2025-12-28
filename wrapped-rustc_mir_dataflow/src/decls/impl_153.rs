@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Direction!();
-        Analysis!();
-        TransferFunction!();
-        MaybeLiveLocals!();
         Backward!();
+        MaybeLiveLocals!();
+        Analysis!();
+        Direction!();
+        TransferFunction!();
         YieldResumeEffect!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! impl_153 {
     };
 }
 
-impl_153!()
+impl_153!();

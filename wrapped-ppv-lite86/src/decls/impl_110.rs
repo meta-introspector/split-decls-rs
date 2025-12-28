@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        RotateEachWord32!();
         NoS3!();
+        RotateEachWord32!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_110 {
     };
 }
 
-impl_110!()
+impl_110!();

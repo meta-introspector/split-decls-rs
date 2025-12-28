@@ -4,4 +4,4 @@ macro_rules! DebuginfoLocals {
     };
 }
 
-DebuginfoLocals!()
+DebuginfoLocals!();

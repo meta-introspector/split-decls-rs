@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Table!();
         Error!();
+        Table!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_374 {
     };
 }
 
-impl_374!()
+impl_374!();

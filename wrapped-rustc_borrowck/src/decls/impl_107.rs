@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        TypeOpInfo!();
         HigherRankedLifetimeError!();
         AscribeUserTypeQuery!();
+        TypeOpInfo!();
         MirBorrowckCtxt!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_107 {
     };
 }
 
-impl_107!()
+impl_107!();

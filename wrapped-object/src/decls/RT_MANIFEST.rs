@@ -4,4 +4,4 @@ macro_rules! RT_MANIFEST {
     };
 }
 
-RT_MANIFEST!()
+RT_MANIFEST!();

@@ -12,4 +12,4 @@ macro_rules! ser_stable_graph_edges {
     };
 }
 
-ser_stable_graph_edges!()
+ser_stable_graph_edges!();

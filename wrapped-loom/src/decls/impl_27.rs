@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        State!();
-        Arc!();
         Synchronize!();
+        Arc!();
         Action!();
+        State!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_27 {
     };
 }
 
-impl_27!()
+impl_27!();

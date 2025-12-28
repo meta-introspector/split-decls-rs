@@ -4,4 +4,4 @@ macro_rules! R_RISCV_GPREL_I {
     };
 }
 
-R_RISCV_GPREL_I!()
+R_RISCV_GPREL_I!();

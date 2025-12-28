@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        TraitRefHelpers!();
-        TraitRef!();
         BridgeTys!();
-        RustcInternal!();
         InternalCx!();
+        TraitRef!();
+        RustcInternal!();
+        TraitRefHelpers!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_82 {
     };
 }
 
-impl_82!()
+impl_82!();

@@ -11,4 +11,4 @@ macro_rules! codegen_wasm_try {
     };
 }
 
-codegen_wasm_try!()
+codegen_wasm_try!();

@@ -4,4 +4,4 @@ macro_rules! IntoU64 {
     };
 }
 
-IntoU64!()
+IntoU64!();

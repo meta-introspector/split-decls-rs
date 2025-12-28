@@ -4,4 +4,4 @@ macro_rules! alt_trait {
     };
 }
 
-alt_trait!()
+alt_trait!();

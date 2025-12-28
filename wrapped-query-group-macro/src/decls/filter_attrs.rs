@@ -11,4 +11,4 @@ macro_rules! filter_attrs {
     };
 }
 
-filter_attrs!()
+filter_attrs!();

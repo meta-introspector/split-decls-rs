@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        MoveData!();
+        MovePathLookup!();
         LocationMap!();
         MoveDataBuilder!();
-        MovePathLookup!();
-        MoveData!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_206 {
     };
 }
 
-impl_206!()
+impl_206!();

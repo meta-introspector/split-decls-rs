@@ -12,4 +12,4 @@ macro_rules! define_delimiters {
     };
 }
 
-define_delimiters!()
+define_delimiters!();

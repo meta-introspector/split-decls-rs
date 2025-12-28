@@ -4,4 +4,4 @@ macro_rules! get_host_cpu_name {
     };
 }
 
-get_host_cpu_name!()
+get_host_cpu_name!();

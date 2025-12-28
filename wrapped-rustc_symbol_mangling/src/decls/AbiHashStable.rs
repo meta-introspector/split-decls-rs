@@ -4,4 +4,4 @@ macro_rules! AbiHashStable {
     };
 }
 
-AbiHashStable!()
+AbiHashStable!();

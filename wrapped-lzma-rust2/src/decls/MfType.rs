@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Bt4!();
         Hc4!();
+        Bt4!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! MfType {
     };
 }
 
-MfType!()
+MfType!();

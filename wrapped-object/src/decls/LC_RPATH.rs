@@ -4,4 +4,4 @@ macro_rules! LC_RPATH {
     };
 }
 
-LC_RPATH!()
+LC_RPATH!();

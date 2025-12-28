@@ -4,4 +4,4 @@ macro_rules! target_config {
     };
 }
 
-target_config!()
+target_config!();

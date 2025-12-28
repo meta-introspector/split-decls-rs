@@ -4,4 +4,4 @@ macro_rules! build_adt_ctor {
     };
 }
 
-build_adt_ctor!()
+build_adt_ctor!();

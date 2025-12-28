@@ -4,4 +4,4 @@ macro_rules! R_SH_LABEL {
     };
 }
 
-R_SH_LABEL!()
+R_SH_LABEL!();

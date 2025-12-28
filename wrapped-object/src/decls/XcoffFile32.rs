@@ -12,4 +12,4 @@ macro_rules! XcoffFile32 {
     };
 }
 
-XcoffFile32!()
+XcoffFile32!();

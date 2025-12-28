@@ -4,4 +4,4 @@ macro_rules! check_abi {
     };
 }
 
-check_abi!()
+check_abi!();

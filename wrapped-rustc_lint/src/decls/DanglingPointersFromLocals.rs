@@ -4,4 +4,4 @@ macro_rules! DanglingPointersFromLocals {
     };
 }
 
-DanglingPointersFromLocals!()
+DanglingPointersFromLocals!();

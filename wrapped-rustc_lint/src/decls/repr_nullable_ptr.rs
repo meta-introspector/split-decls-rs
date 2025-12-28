@@ -4,4 +4,4 @@ macro_rules! repr_nullable_ptr {
     };
 }
 
-repr_nullable_ptr!()
+repr_nullable_ptr!();

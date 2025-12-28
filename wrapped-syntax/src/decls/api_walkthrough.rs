@@ -24,4 +24,4 @@ macro_rules! api_walkthrough {
     };
 }
 
-api_walkthrough!()
+api_walkthrough!();

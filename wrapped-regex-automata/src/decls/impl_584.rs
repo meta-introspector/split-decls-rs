@@ -1,17 +1,17 @@
 macro_rules! deps {
     () => {
+        ByteClassIter!();
+        DeserializeError!();
+        Unit!();
+        UnitKind!();
+        U8!();
         ByteClassElementRanges!();
         DFA!();
-        UnitKind!();
-        DeserializeError!();
-        ByteClassIter!();
-        U8!();
-        SerializeError!();
-        Unit!();
-        ByteClasses!();
-        ByteClassElements!();
-        ByteClassRepresentatives!();
         NFA!();
+        ByteClassElements!();
+        ByteClasses!();
+        ByteClassRepresentatives!();
+        SerializeError!();
     };
 }
 
@@ -22,4 +22,4 @@ macro_rules! impl_584 {
     };
 }
 
-impl_584!()
+impl_584!();

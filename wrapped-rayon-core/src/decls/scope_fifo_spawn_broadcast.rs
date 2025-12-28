@@ -4,4 +4,4 @@ macro_rules! scope_fifo_spawn_broadcast {
     };
 }
 
-scope_fifo_spawn_broadcast!()
+scope_fifo_spawn_broadcast!();

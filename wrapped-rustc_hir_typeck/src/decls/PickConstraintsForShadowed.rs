@@ -11,4 +11,4 @@ macro_rules! PickConstraintsForShadowed {
     };
 }
 
-PickConstraintsForShadowed!()
+PickConstraintsForShadowed!();

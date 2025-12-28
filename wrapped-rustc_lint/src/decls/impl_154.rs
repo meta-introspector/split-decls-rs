@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        LateContext!();
         DefaultCouldBeDerived!();
+        LateContext!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_154 {
     };
 }
 
-impl_154!()
+impl_154!();

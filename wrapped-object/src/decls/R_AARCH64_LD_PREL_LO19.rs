@@ -4,4 +4,4 @@ macro_rules! R_AARCH64_LD_PREL_LO19 {
     };
 }
 
-R_AARCH64_LD_PREL_LO19!()
+R_AARCH64_LD_PREL_LO19!();

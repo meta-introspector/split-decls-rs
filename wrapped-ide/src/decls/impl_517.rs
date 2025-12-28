@@ -1,41 +1,41 @@
 macro_rules! deps {
     () => {
-        Analysis!();
         CallHierarchyConfig!();
-        NavigationTarget!();
-        GotoDefinitionConfig!();
-        Runnable!();
         RangeInfo!();
+        NavigationTarget!();
         ExpandedMacro!();
-        InlayHintsConfig!();
-        HoverResult!();
-        HighlightConfig!();
-        FileStructureConfig!();
-        MonikerResult!();
-        SignatureHelp!();
-        CallItem!();
-        HighlightRelatedConfig!();
-        Fold!();
-        FindAllRefsConfig!();
-        CrateInfo!();
         Direction!();
-        HoverConfig!();
-        TestItem!();
         InlayHint!();
-        DocumentationLinks!();
-        StructureNode!();
-        HighlightedRange!();
-        Cancellable!();
-        UpmappingResult!();
-        AnalysisHost!();
-        RenameConfig!();
-        RecursiveMemoryLayout!();
-        ReferenceSearchResult!();
+        InlayHintsConfig!();
         HlRange!();
-        JoinLinesConfig!();
-        Annotation!();
-        AnnotationConfig!();
+        Analysis!();
+        HighlightedRange!();
+        RecursiveMemoryLayout!();
+        Fold!();
+        FileStructureConfig!();
+        Cancellable!();
+        TestItem!();
+        GotoDefinitionConfig!();
+        CrateInfo!();
+        RenameConfig!();
+        ReferenceSearchResult!();
+        SignatureHelp!();
         GotoImplementationConfig!();
+        MonikerResult!();
+        FindAllRefsConfig!();
+        Annotation!();
+        UpmappingResult!();
+        StructureNode!();
+        HoverConfig!();
+        HighlightRelatedConfig!();
+        Runnable!();
+        DocumentationLinks!();
+        AnnotationConfig!();
+        CallItem!();
+        AnalysisHost!();
+        HighlightConfig!();
+        JoinLinesConfig!();
+        HoverResult!();
     };
 }
 
@@ -46,4 +46,4 @@ macro_rules! impl_517 {
     };
 }
 
-impl_517!()
+impl_517!();

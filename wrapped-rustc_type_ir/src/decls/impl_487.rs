@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        TypeVisitable!();
         Interner!();
         TypeVisitor!();
+        TypeVisitable!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_487 {
     };
 }
 
-impl_487!()
+impl_487!();

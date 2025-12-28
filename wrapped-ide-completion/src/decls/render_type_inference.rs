@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        CompletionItem!();
-        CompletionContext!();
-        CompletionRelevanceTypeMatch!();
-        CompletionItemKind!();
         CompletionRelevance!();
+        CompletionItemKind!();
+        CompletionRelevanceTypeMatch!();
+        CompletionContext!();
+        CompletionItem!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! render_type_inference {
     };
 }
 
-render_type_inference!()
+render_type_inference!();

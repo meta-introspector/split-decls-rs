@@ -4,4 +4,4 @@ macro_rules! sqrtf {
     };
 }
 
-sqrtf!()
+sqrtf!();

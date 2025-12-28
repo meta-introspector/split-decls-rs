@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Tera!();
         Context!();
+        Tera!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! can_use_concat_to_push_to_array {
     };
 }
 
-can_use_concat_to_push_to_array!()
+can_use_concat_to_push_to_array!();

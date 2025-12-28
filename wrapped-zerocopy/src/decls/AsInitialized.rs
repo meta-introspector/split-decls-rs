@@ -4,4 +4,4 @@ macro_rules! AsInitialized {
     };
 }
 
-AsInitialized!()
+AsInitialized!();

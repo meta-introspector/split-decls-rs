@@ -4,4 +4,4 @@ macro_rules! DIST_BASE {
     };
 }
 
-DIST_BASE!()
+DIST_BASE!();

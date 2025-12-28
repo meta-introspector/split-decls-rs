@@ -4,4 +4,4 @@ macro_rules! __cmsg_space {
     };
 }
 
-__cmsg_space!()
+__cmsg_space!();

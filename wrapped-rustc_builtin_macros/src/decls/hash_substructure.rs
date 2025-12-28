@@ -12,4 +12,4 @@ macro_rules! hash_substructure {
     };
 }
 
-hash_substructure!()
+hash_substructure!();

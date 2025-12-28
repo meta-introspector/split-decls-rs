@@ -4,4 +4,4 @@ macro_rules! R_SPARC_TLS_GD_ADD {
     };
 }
 
-R_SPARC_TLS_GD_ADD!()
+R_SPARC_TLS_GD_ADD!();

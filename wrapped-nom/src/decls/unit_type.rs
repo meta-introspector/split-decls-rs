@@ -11,4 +11,4 @@ macro_rules! unit_type {
     };
 }
 
-unit_type!()
+unit_type!();

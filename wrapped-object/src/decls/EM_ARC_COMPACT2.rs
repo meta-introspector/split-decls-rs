@@ -4,4 +4,4 @@ macro_rules! EM_ARC_COMPACT2 {
     };
 }
 
-EM_ARC_COMPACT2!()
+EM_ARC_COMPACT2!();

@@ -4,4 +4,4 @@ macro_rules! fse_decoder {
     };
 }
 
-fse_decoder!()
+fse_decoder!();

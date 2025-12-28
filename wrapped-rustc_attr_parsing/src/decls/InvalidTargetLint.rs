@@ -4,4 +4,4 @@ macro_rules! InvalidTargetLint {
     };
 }
 
-InvalidTargetLint!()
+InvalidTargetLint!();

@@ -4,4 +4,4 @@ macro_rules! replace_all_git_hub_actions {
     };
 }
 
-replace_all_git_hub_actions!()
+replace_all_git_hub_actions!();

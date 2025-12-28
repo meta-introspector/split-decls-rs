@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        DyldCacheMappingSlice!();
         Endianness!();
-        ReadRef!();
         Endian!();
+        ReadRef!();
+        DyldCacheMappingSlice!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! DyldFile {
     };
 }
 
-DyldFile!()
+DyldFile!();

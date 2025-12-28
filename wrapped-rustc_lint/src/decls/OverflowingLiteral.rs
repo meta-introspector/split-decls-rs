@@ -4,4 +4,4 @@ macro_rules! OverflowingLiteral {
     };
 }
 
-OverflowingLiteral!()
+OverflowingLiteral!();

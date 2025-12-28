@@ -4,4 +4,4 @@ macro_rules! DocAliasBadLocation {
     };
 }
 
-DocAliasBadLocation!()
+DocAliasBadLocation!();

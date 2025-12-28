@@ -4,4 +4,4 @@ macro_rules! PT_GNU_SFRAME {
     };
 }
 
-PT_GNU_SFRAME!()
+PT_GNU_SFRAME!();

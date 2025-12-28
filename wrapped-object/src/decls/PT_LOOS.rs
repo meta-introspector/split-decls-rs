@@ -4,4 +4,4 @@ macro_rules! PT_LOOS {
     };
 }
 
-PT_LOOS!()
+PT_LOOS!();

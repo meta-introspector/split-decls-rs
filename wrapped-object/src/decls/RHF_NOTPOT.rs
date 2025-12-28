@@ -4,4 +4,4 @@ macro_rules! RHF_NOTPOT {
     };
 }
 
-RHF_NOTPOT!()
+RHF_NOTPOT!();

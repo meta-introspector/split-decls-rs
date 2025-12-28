@@ -4,4 +4,4 @@ macro_rules! BIND_TYPE_POINTER {
     };
 }
 
-BIND_TYPE_POINTER!()
+BIND_TYPE_POINTER!();

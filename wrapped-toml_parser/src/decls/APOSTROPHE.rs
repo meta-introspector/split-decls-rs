@@ -4,4 +4,4 @@ macro_rules! APOSTROPHE {
     };
 }
 
-APOSTROPHE!()
+APOSTROPHE!();

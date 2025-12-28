@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ChangeAnnotationId!();
         Indel!();
+        ChangeAnnotationId!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! TextEditBuilder {
     };
 }
 
-TextEditBuilder!()
+TextEditBuilder!();

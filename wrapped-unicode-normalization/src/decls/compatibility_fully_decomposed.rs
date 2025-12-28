@@ -4,4 +4,4 @@ macro_rules! compatibility_fully_decomposed {
     };
 }
 
-compatibility_fully_decomposed!()
+compatibility_fully_decomposed!();

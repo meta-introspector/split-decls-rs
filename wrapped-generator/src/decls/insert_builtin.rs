@@ -4,4 +4,4 @@ macro_rules! insert_builtin {
     };
 }
 
-insert_builtin!()
+insert_builtin!();

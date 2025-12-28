@@ -4,4 +4,4 @@ macro_rules! C_MOE {
     };
 }
 
-C_MOE!()
+C_MOE!();

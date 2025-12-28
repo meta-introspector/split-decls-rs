@@ -4,4 +4,4 @@ macro_rules! InlineAsmType {
     };
 }
 
-InlineAsmType!()
+InlineAsmType!();

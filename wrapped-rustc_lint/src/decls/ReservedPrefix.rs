@@ -4,4 +4,4 @@ macro_rules! ReservedPrefix {
     };
 }
 
-ReservedPrefix!()
+ReservedPrefix!();

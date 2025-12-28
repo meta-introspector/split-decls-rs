@@ -4,4 +4,4 @@ macro_rules! EM_TI_C5500 {
     };
 }
 
-EM_TI_C5500!()
+EM_TI_C5500!();

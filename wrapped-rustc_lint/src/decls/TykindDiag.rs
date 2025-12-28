@@ -4,4 +4,4 @@ macro_rules! TykindDiag {
     };
 }
 
-TykindDiag!()
+TykindDiag!();

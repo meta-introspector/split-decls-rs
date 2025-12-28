@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Registry!();
         AbortIfPanic!();
+        Registry!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! spawn_in {
     };
 }
 
-spawn_in!()
+spawn_in!();

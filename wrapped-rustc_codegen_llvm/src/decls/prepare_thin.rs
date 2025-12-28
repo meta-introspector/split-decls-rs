@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ModuleLlvm!();
         ThinBuffer!();
+        ModuleLlvm!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! prepare_thin {
     };
 }
 
-prepare_thin!()
+prepare_thin!();

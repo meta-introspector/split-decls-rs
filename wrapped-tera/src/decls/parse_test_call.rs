@@ -11,4 +11,4 @@ macro_rules! parse_test_call {
     };
 }
 
-parse_test_call!()
+parse_test_call!();

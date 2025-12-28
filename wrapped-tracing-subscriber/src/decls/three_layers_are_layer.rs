@@ -11,4 +11,4 @@ macro_rules! three_layers_are_layer {
     };
 }
 
-three_layers_are_layer!()
+three_layers_are_layer!();

@@ -4,4 +4,4 @@ macro_rules! supersuperfy_path {
     };
 }
 
-supersuperfy_path!()
+supersuperfy_path!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        PpAnn!();
-        Printer!();
-        Comments!();
         State!();
+        PpAnn!();
+        Comments!();
+        Printer!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! print_crate {
     };
 }
 
-print_crate!()
+print_crate!();

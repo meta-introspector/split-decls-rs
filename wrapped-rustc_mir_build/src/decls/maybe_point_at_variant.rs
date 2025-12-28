@@ -11,4 +11,4 @@ macro_rules! maybe_point_at_variant {
     };
 }
 
-maybe_point_at_variant!()
+maybe_point_at_variant!();

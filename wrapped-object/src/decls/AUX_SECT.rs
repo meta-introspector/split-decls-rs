@@ -4,4 +4,4 @@ macro_rules! AUX_SECT {
     };
 }
 
-AUX_SECT!()
+AUX_SECT!();

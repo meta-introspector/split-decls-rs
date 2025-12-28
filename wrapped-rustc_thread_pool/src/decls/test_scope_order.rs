@@ -11,4 +11,4 @@ macro_rules! test_scope_order {
     };
 }
 
-test_scope_order!()
+test_scope_order!();

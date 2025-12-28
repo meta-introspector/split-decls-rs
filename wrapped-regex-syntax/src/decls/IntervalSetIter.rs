@@ -4,4 +4,4 @@ macro_rules! IntervalSetIter {
     };
 }
 
-IntervalSetIter!()
+IntervalSetIter!();

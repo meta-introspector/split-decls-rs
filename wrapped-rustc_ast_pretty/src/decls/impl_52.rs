@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
+        State!();
         AnnNode!();
         NoAnn!();
         Breaks!();
-        MacHeader!();
-        Printer!();
         BoxMarker!();
-        State!();
+        Printer!();
+        MacHeader!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_52 {
     };
 }
 
-impl_52!()
+impl_52!();

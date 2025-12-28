@@ -4,4 +4,4 @@ macro_rules! ALIGN_GNU_VERSYM {
     };
 }
 
-ALIGN_GNU_VERSYM!()
+ALIGN_GNU_VERSYM!();

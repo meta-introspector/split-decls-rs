@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Interner!();
-        Region!();
         GenericArgs!();
+        Region!();
+        Interner!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! RegionKind {
     };
 }
 
-RegionKind!()
+RegionKind!();

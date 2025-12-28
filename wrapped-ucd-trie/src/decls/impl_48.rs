@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Result!();
+        TrieSetSlice!();
         TrieSetOwned!();
         Error!();
-        TrieSetSlice!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_48 {
     };
 }
 
-impl_48!()
+impl_48!();

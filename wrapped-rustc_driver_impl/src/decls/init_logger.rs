@@ -4,4 +4,4 @@ macro_rules! init_logger {
     };
 }
 
-init_logger!()
+init_logger!();

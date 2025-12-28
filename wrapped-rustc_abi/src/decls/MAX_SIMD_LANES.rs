@@ -4,4 +4,4 @@ macro_rules! MAX_SIMD_LANES {
     };
 }
 
-MAX_SIMD_LANES!()
+MAX_SIMD_LANES!();

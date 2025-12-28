@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        ProducerCallback!();
-        Producer!();
-        Consumer!();
-        IndexedParallelIterator!();
-        IntersperseConsumer!();
         IntersperseProducer!();
         Intersperse!();
+        Consumer!();
+        IntersperseConsumer!();
+        ProducerCallback!();
+        Producer!();
+        IndexedParallelIterator!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_646 {
     };
 }
 
-impl_646!()
+impl_646!();

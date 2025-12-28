@@ -4,4 +4,4 @@ macro_rules! is_session_directory {
     };
 }
 
-is_session_directory!()
+is_session_directory!();

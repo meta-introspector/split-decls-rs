@@ -4,4 +4,4 @@ macro_rules! op {
     };
 }
 
-op!()
+op!();

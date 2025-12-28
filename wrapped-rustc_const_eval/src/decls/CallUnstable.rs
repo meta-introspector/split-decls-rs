@@ -4,4 +4,4 @@ macro_rules! CallUnstable {
     };
 }
 
-CallUnstable!()
+CallUnstable!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        SymbolTable!();
-        FileHeader!();
-        ReadRef!();
         Endian!();
+        FileHeader!();
+        SymbolTable!();
+        ReadRef!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! ElfSymbolTable {
     };
 }
 
-ElfSymbolTable!()
+ElfSymbolTable!();

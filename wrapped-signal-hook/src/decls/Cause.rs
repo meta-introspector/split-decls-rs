@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Sent!();
         Chld!();
+        Sent!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Cause {
     };
 }
 
-Cause!()
+Cause!();

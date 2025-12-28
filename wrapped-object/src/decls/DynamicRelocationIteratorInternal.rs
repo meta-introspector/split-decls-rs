@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        ReadRef!();
-        Endianness!();
         ElfDynamicRelocationIterator32!();
+        Endianness!();
         ElfDynamicRelocationIterator64!();
+        ReadRef!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! DynamicRelocationIteratorInternal {
     };
 }
 
-DynamicRelocationIteratorInternal!()
+DynamicRelocationIteratorInternal!();

@@ -12,4 +12,4 @@ macro_rules! X86_FEATURES {
     };
 }
 
-X86_FEATURES!()
+X86_FEATURES!();

@@ -11,4 +11,4 @@ macro_rules! MAX_SECTION_ID {
     };
 }
 
-MAX_SECTION_ID!()
+MAX_SECTION_ID!();

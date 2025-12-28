@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Result!();
         SocketType!();
+        Result!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! socket_type {
     };
 }
 
-socket_type!()
+socket_type!();

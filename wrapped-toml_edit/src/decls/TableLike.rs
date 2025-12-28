@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
+        Item!();
+        Table!();
         Value!();
+        Key!();
+        Entry!();
+        InlineTable!();
         Iter!();
         IterMut!();
-        Entry!();
-        Key!();
-        Table!();
-        InlineTable!();
         KeyMut!();
-        Item!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! TableLike {
     };
 }
 
-TableLike!()
+TableLike!();

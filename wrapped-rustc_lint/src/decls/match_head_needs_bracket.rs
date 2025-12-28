@@ -4,4 +4,4 @@ macro_rules! match_head_needs_bracket {
     };
 }
 
-match_head_needs_bracket!()
+match_head_needs_bracket!();

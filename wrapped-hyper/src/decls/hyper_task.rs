@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        UserDataPointer!();
         BoxFuture!();
         BoxAny!();
-        UserDataPointer!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! hyper_task {
     };
 }
 
-hyper_task!()
+hyper_task!();

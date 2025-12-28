@@ -4,4 +4,4 @@ macro_rules! S_ATTR_STRIP_STATIC_SYMS {
     };
 }
 
-S_ATTR_STRIP_STATIC_SYMS!()
+S_ATTR_STRIP_STATIC_SYMS!();

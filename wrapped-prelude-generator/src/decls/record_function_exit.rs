@@ -4,4 +4,4 @@ macro_rules! record_function_exit {
     };
 }
 
-record_function_exit!()
+record_function_exit!();

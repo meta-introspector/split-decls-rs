@@ -4,4 +4,4 @@ macro_rules! replace_cargo {
     };
 }
 
-replace_cargo!()
+replace_cargo!();

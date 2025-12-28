@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        WhichCaptures!();
         NFA!();
+        WhichCaptures!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_468 {
     };
 }
 
-impl_468!()
+impl_468!();

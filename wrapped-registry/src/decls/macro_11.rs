@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         WIN32_ERROR!();
-        PCWSTR!();
         HKEY!();
+        PCWSTR!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! macro_11 {
     };
 }
 
-macro_11!()
+macro_11!();

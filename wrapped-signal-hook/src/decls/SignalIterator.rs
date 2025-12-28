@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Exfiltrator!();
         Pending!();
+        Exfiltrator!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! SignalIterator {
     };
 }
 
-SignalIterator!()
+SignalIterator!();

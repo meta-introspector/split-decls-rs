@@ -11,4 +11,4 @@ macro_rules! try_visit {
     };
 }
 
-try_visit!()
+try_visit!();

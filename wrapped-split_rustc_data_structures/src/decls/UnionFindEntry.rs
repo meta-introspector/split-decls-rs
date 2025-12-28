@@ -4,4 +4,4 @@ macro_rules! UnionFindEntry {
     };
 }
 
-UnionFindEntry!()
+UnionFindEntry!();

@@ -2,9 +2,9 @@ macro_rules! deps {
     () => {
         ItemKind!();
         UseKind!();
-        Mod!();
         Impl!();
         Generics!();
+        Mod!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_325 {
     };
 }
 
-impl_325!()
+impl_325!();

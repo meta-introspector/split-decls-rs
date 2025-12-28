@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        FrameDecoderState!();
         Write!();
+        FrameDecoderState!();
         Read!();
         Dictionary!();
     };
@@ -14,4 +14,4 @@ macro_rules! FrameDecoder {
     };
 }
 
-FrameDecoder!()
+FrameDecoder!();

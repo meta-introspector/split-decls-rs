@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        LinkRlibError!();
         CrateInfo!();
+        LinkRlibError!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! each_linked_rlib {
     };
 }
 
-each_linked_rlib!()
+each_linked_rlib!();

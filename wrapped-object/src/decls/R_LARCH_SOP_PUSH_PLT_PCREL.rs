@@ -4,4 +4,4 @@ macro_rules! R_LARCH_SOP_PUSH_PLT_PCREL {
     };
 }
 
-R_LARCH_SOP_PUSH_PLT_PCREL!()
+R_LARCH_SOP_PUSH_PLT_PCREL!();

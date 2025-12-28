@@ -11,4 +11,4 @@ macro_rules! many0_count_test {
     };
 }
 
-many0_count_test!()
+many0_count_test!();

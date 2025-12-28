@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DropCounter!();
         TypedArena!();
+        DropCounter!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! test_typed_arena_drop_count {
     };
 }
 
-test_typed_arena_drop_count!()
+test_typed_arena_drop_count!();

@@ -4,4 +4,4 @@ macro_rules! Spurious {
     };
 }
 
-Spurious!()
+Spurious!();

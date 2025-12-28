@@ -4,4 +4,4 @@ macro_rules! OptionalActions {
     };
 }
 
-OptionalActions!()
+OptionalActions!();

@@ -4,4 +4,4 @@ macro_rules! MinReset {
     };
 }
 
-MinReset!()
+MinReset!();

@@ -11,4 +11,4 @@ macro_rules! SIZE_MASK {
     };
 }
 
-SIZE_MASK!()
+SIZE_MASK!();

@@ -11,4 +11,4 @@ macro_rules! merge_codegen_units {
     };
 }
 
-merge_codegen_units!()
+merge_codegen_units!();

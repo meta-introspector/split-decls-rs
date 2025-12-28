@@ -4,4 +4,4 @@ macro_rules! Cancelled {
     };
 }
 
-Cancelled!()
+Cancelled!();

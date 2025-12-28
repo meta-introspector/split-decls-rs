@@ -4,4 +4,4 @@ macro_rules! depth_limit {
     };
 }
 
-depth_limit!()
+depth_limit!();

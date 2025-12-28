@@ -4,4 +4,4 @@ macro_rules! NT_S390_GS_CB {
     };
 }
 
-NT_S390_GS_CB!()
+NT_S390_GS_CB!();

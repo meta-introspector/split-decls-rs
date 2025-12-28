@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
+        ParseError!();
         Parser!();
-        Input!();
-        Needed!();
         FoldManyMN!();
         Error!();
-        ParseError!();
+        Input!();
+        Needed!();
         IResult!();
     };
 }
@@ -17,4 +17,4 @@ macro_rules! fold_many_m_n {
     };
 }
 
-fold_many_m_n!()
+fold_many_m_n!();

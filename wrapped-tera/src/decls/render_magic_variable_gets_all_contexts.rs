@@ -17,4 +17,4 @@ macro_rules! render_magic_variable_gets_all_contexts {
     };
 }
 
-render_magic_variable_gets_all_contexts!()
+render_magic_variable_gets_all_contexts!();

@@ -4,4 +4,4 @@ macro_rules! dump_mir {
     };
 }
 
-dump_mir!()
+dump_mir!();

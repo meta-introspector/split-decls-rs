@@ -12,4 +12,4 @@ macro_rules! visit_implementation_of_drop {
     };
 }
 
-visit_implementation_of_drop!()
+visit_implementation_of_drop!();

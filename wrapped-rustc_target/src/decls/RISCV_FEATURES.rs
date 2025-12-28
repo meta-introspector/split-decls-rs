@@ -13,4 +13,4 @@ macro_rules! RISCV_FEATURES {
     };
 }
 
-RISCV_FEATURES!()
+RISCV_FEATURES!();

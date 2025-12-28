@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        RcVecBuilder!();
         TokenTree!();
+        RcVecBuilder!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! TokenStreamBuilder {
     };
 }
 
-TokenStreamBuilder!()
+TokenStreamBuilder!();

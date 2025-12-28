@@ -4,4 +4,4 @@ macro_rules! coshf {
     };
 }
 
-coshf!()
+coshf!();

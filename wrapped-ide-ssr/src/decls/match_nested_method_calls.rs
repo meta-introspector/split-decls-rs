@@ -4,4 +4,4 @@ macro_rules! match_nested_method_calls {
     };
 }
 
-match_nested_method_calls!()
+match_nested_method_calls!();

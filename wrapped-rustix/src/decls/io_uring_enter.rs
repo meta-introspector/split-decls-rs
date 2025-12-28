@@ -11,4 +11,4 @@ macro_rules! io_uring_enter {
     };
 }
 
-io_uring_enter!()
+io_uring_enter!();

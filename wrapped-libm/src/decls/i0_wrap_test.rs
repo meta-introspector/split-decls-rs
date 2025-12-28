@@ -4,4 +4,4 @@ macro_rules! i0_wrap_test {
     };
 }
 
-i0_wrap_test!()
+i0_wrap_test!();

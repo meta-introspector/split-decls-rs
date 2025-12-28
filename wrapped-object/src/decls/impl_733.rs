@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        ReadRef!();
-        MaskedRichHeaderEntry!();
         U32!();
-        Item!();
         RichHeaderEntry!();
+        MaskedRichHeaderEntry!();
         Bytes!();
+        ReadRef!();
         RichHeaderInfo!();
+        Item!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_733 {
     };
 }
 
-impl_733!()
+impl_733!();

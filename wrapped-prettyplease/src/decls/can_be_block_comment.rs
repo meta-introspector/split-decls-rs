@@ -4,4 +4,4 @@ macro_rules! can_be_block_comment {
     };
 }
 
-can_be_block_comment!()
+can_be_block_comment!();

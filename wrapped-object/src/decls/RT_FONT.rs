@@ -4,4 +4,4 @@ macro_rules! RT_FONT {
     };
 }
 
-RT_FONT!()
+RT_FONT!();

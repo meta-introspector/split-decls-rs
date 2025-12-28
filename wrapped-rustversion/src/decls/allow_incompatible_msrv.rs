@@ -4,4 +4,4 @@ macro_rules! allow_incompatible_msrv {
     };
 }
 
-allow_incompatible_msrv!()
+allow_incompatible_msrv!();

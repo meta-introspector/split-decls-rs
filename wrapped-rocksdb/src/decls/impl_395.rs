@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        SnapshotWithThreadMode!();
         DBAccess!();
+        SnapshotWithThreadMode!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_395 {
     };
 }
 
-impl_395!()
+impl_395!();

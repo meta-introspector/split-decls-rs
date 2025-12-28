@@ -11,4 +11,4 @@ macro_rules! subgraph_isomorphisms_iter {
     };
 }
 
-subgraph_isomorphisms_iter!()
+subgraph_isomorphisms_iter!();

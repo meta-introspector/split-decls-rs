@@ -11,4 +11,4 @@ macro_rules! open_ciphertext_with_tag_length {
     };
 }
 
-open_ciphertext_with_tag_length!()
+open_ciphertext_with_tag_length!();

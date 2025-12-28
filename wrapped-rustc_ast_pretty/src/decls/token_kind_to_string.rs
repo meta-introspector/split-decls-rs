@@ -11,4 +11,4 @@ macro_rules! token_kind_to_string {
     };
 }
 
-token_kind_to_string!()
+token_kind_to_string!();

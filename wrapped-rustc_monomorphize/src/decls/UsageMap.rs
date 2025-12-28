@@ -4,4 +4,4 @@ macro_rules! UsageMap {
     };
 }
 
-UsageMap!()
+UsageMap!();

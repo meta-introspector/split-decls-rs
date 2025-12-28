@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Write!();
         IndexRecord!();
         CheckType!();
-        Write!();
         Result!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! write_xz_stream_footer {
     };
 }
 
-write_xz_stream_footer!()
+write_xz_stream_footer!();

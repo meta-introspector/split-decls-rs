@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        FSETable!();
         FSEScratch!();
+        FSETable!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_175 {
     };
 }
 
-impl_175!()
+impl_175!();

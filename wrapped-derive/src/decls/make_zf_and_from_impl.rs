@@ -12,4 +12,4 @@ macro_rules! make_zf_and_from_impl {
     };
 }
 
-make_zf_and_from_impl!()
+make_zf_and_from_impl!();

@@ -28,4 +28,4 @@ macro_rules! replace_autoref_mut {
     };
 }
 
-replace_autoref_mut!()
+replace_autoref_mut!();

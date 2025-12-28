@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Builder!();
-        Input!();
-        Output!();
-        State!();
         LexedStr!();
-        StrStep!();
+        Input!();
+        State!();
         Step!();
+        StrStep!();
+        Builder!();
+        Output!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_77 {
     };
 }
 
-impl_77!()
+impl_77!();

@@ -4,4 +4,4 @@ macro_rules! FIRST_GLOBAL_INDEX {
     };
 }
 
-FIRST_GLOBAL_INDEX!()
+FIRST_GLOBAL_INDEX!();

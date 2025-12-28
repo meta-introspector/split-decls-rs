@@ -4,4 +4,4 @@ macro_rules! rendered_precise_capturing_args {
     };
 }
 
-rendered_precise_capturing_args!()
+rendered_precise_capturing_args!();

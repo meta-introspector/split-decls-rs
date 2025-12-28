@@ -4,4 +4,4 @@ macro_rules! check_feature_dependent_abi {
     };
 }
 
-check_feature_dependent_abi!()
+check_feature_dependent_abi!();

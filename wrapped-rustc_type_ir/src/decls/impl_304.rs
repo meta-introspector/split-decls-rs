@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        FallibleTypeFolder!();
         TypeFoldable!();
         Interner!();
+        FallibleTypeFolder!();
         TypeFolder!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_304 {
     };
 }
 
-impl_304!()
+impl_304!();

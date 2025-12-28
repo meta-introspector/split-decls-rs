@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        SampleUniform!();
         Error!();
         SampleRange!();
+        SampleUniform!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_173 {
     };
 }
 
-impl_173!()
+impl_173!();

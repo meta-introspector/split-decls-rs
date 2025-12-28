@@ -4,4 +4,4 @@ macro_rules! DT_MIPS_HIDDEN_GOTIDX {
     };
 }
 
-DT_MIPS_HIDDEN_GOTIDX!()
+DT_MIPS_HIDDEN_GOTIDX!();

@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        LookSet!();
-        UnicodeWordBoundaryError!();
         Start!();
-        LookMatcher!();
-        Look!();
-        DebugByte!();
-        ByteClassSet!();
         Split!();
+        LookSet!();
+        DebugByte!();
+        UnicodeWordBoundaryError!();
+        Look!();
+        ByteClassSet!();
+        LookMatcher!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_693 {
     };
 }
 
-impl_693!()
+impl_693!();

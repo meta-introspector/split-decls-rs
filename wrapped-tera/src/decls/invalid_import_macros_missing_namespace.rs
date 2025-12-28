@@ -4,4 +4,4 @@ macro_rules! invalid_import_macros_missing_namespace {
     };
 }
 
-invalid_import_macros_missing_namespace!()
+invalid_import_macros_missing_namespace!();

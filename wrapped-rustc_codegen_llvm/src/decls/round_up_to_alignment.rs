@@ -11,4 +11,4 @@ macro_rules! round_up_to_alignment {
     };
 }
 
-round_up_to_alignment!()
+round_up_to_alignment!();

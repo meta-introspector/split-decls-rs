@@ -4,4 +4,4 @@ macro_rules! required_hashes {
     };
 }
 
-required_hashes!()
+required_hashes!();

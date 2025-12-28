@@ -4,4 +4,4 @@ macro_rules! R_XTENSA_GLOB_DAT {
     };
 }
 
-R_XTENSA_GLOB_DAT!()
+R_XTENSA_GLOB_DAT!();

@@ -4,4 +4,4 @@ macro_rules! BreakInsideClosure {
     };
 }
 
-BreakInsideClosure!()
+BreakInsideClosure!();

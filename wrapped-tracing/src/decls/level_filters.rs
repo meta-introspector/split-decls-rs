@@ -4,4 +4,4 @@ macro_rules! level_filters {
     };
 }
 
-level_filters!()
+level_filters!();

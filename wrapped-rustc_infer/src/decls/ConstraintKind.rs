@@ -4,4 +4,4 @@ macro_rules! ConstraintKind {
     };
 }
 
-ConstraintKind!()
+ConstraintKind!();

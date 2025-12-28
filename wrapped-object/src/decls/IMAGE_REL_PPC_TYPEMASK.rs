@@ -4,4 +4,4 @@ macro_rules! IMAGE_REL_PPC_TYPEMASK {
     };
 }
 
-IMAGE_REL_PPC_TYPEMASK!()
+IMAGE_REL_PPC_TYPEMASK!();

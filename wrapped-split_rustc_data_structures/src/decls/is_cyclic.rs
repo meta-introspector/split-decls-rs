@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         StartNode!();
-        TriColorDepthFirstSearch!();
-        DirectedGraph!();
         Successors!();
+        TriColorDepthFirstSearch!();
         CycleDetector!();
+        DirectedGraph!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! is_cyclic {
     };
 }
 
-is_cyclic!()
+is_cyclic!();

@@ -1,20 +1,20 @@
 macro_rules! deps {
     () => {
+        ItemKind!();
+        AutorefOrPtrAdjustment!();
+        MissingParenthesesInRange!();
+        CandidateTraitNote!();
+        ProbeScope!();
+        IsSuggestion!();
+        NoAssociatedItem!();
+        FnCtxt!();
+        NoMatchData!();
+        CandidateSource!();
+        SelfSource!();
+        Expectation!();
+        AddMissingParenthesesInRange!();
         MethodError!();
         Mode!();
-        FnCtxt!();
-        AutorefOrPtrAdjustment!();
-        CandidateSource!();
-        NoAssociatedItem!();
-        ProbeScope!();
-        NoMatchData!();
-        IsSuggestion!();
-        Expectation!();
-        SelfSource!();
-        MissingParenthesesInRange!();
-        ItemKind!();
-        CandidateTraitNote!();
-        AddMissingParenthesesInRange!();
     };
 }
 
@@ -52,4 +52,4 @@ macro_rules! impl_274 {
     };
 }
 
-impl_274!()
+impl_274!();

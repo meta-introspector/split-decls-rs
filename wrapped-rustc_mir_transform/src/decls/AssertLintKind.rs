@@ -4,4 +4,4 @@ macro_rules! AssertLintKind {
     };
 }
 
-AssertLintKind!()
+AssertLintKind!();

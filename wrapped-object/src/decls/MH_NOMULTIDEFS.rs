@@ -4,4 +4,4 @@ macro_rules! MH_NOMULTIDEFS {
     };
 }
 
-MH_NOMULTIDEFS!()
+MH_NOMULTIDEFS!();

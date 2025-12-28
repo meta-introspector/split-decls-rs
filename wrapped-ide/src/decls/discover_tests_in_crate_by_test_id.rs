@@ -11,4 +11,4 @@ macro_rules! discover_tests_in_crate_by_test_id {
     };
 }
 
-discover_tests_in_crate_by_test_id!()
+discover_tests_in_crate_by_test_id!();

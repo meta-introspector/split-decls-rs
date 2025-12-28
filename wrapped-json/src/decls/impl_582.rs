@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        StrRead!();
         SliceRead!();
+        StrRead!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_582 {
     };
 }
 
-impl_582!()
+impl_582!();

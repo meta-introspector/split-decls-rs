@@ -4,4 +4,4 @@ macro_rules! lints_that_dont_need_to_run {
     };
 }
 
-lints_that_dont_need_to_run!()
+lints_that_dont_need_to_run!();

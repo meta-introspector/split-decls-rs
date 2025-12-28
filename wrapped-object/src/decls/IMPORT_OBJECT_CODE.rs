@@ -4,4 +4,4 @@ macro_rules! IMPORT_OBJECT_CODE {
     };
 }
 
-IMPORT_OBJECT_CODE!()
+IMPORT_OBJECT_CODE!();

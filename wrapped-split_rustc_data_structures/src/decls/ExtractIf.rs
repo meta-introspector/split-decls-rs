@@ -4,4 +4,4 @@ macro_rules! ExtractIf {
     };
 }
 
-ExtractIf!()
+ExtractIf!();

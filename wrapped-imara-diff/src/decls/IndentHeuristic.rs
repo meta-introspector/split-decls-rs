@@ -4,4 +4,4 @@ macro_rules! IndentHeuristic {
     };
 }
 
-IndentHeuristic!()
+IndentHeuristic!();

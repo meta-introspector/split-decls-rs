@@ -11,4 +11,4 @@ macro_rules! cmp_assuming_same_buffer {
     };
 }
 
-cmp_assuming_same_buffer!()
+cmp_assuming_same_buffer!();

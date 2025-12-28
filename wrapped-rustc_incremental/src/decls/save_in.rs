@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        DeleteOld!();
-        CreateNew!();
         WriteNew!();
+        CreateNew!();
         Ok!();
+        DeleteOld!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! save_in {
     };
 }
 
-save_in!()
+save_in!();

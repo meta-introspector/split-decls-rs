@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        SerializationSink!();
-        BackingStorage!();
         SharedState!();
-        PageTag!();
         SerializationSinkInner!();
+        SerializationSink!();
         SerializationSinkBuilder!();
+        BackingStorage!();
+        PageTag!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_61 {
     };
 }
 
-impl_61!()
+impl_61!();

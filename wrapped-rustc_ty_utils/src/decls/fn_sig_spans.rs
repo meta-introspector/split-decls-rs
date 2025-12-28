@@ -4,4 +4,4 @@ macro_rules! fn_sig_spans {
     };
 }
 
-fn_sig_spans!()
+fn_sig_spans!();

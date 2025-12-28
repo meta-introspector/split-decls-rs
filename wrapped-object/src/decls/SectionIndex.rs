@@ -4,4 +4,4 @@ macro_rules! SectionIndex {
     };
 }
 
-SectionIndex!()
+SectionIndex!();

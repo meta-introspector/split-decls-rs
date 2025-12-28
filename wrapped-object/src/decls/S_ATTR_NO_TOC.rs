@@ -4,4 +4,4 @@ macro_rules! S_ATTR_NO_TOC {
     };
 }
 
-S_ATTR_NO_TOC!()
+S_ATTR_NO_TOC!();

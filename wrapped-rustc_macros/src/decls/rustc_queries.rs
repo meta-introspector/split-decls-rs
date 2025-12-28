@@ -4,4 +4,4 @@ macro_rules! rustc_queries {
     };
 }
 
-rustc_queries!()
+rustc_queries!();

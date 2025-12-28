@@ -4,4 +4,4 @@ macro_rules! crate_graph_dedup_identical {
     };
 }
 
-crate_graph_dedup_identical!()
+crate_graph_dedup_identical!();

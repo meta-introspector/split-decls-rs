@@ -4,4 +4,4 @@ macro_rules! BIND_TYPE_TEXT_PCREL32 {
     };
 }
 
-BIND_TYPE_TEXT_PCREL32!()
+BIND_TYPE_TEXT_PCREL32!();

@@ -4,4 +4,4 @@ macro_rules! make_req_fns {
     };
 }
 
-make_req_fns!()
+make_req_fns!();

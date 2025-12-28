@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Direction!();
-        Backward!();
-        DebugWithContext!();
-        Forward!();
-        JoinSemiLattice!();
         AnalysisAndResults!();
+        Forward!();
+        Direction!();
+        DebugWithContext!();
+        Backward!();
+        JoinSemiLattice!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! Analysis {
     };
 }
 
-Analysis!()
+Analysis!();

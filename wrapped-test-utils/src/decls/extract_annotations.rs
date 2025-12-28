@@ -11,4 +11,4 @@ macro_rules! extract_annotations {
     };
 }
 
-extract_annotations!()
+extract_annotations!();

@@ -12,4 +12,4 @@ macro_rules! parse_lit_into_where {
     };
 }
 
-parse_lit_into_where!()
+parse_lit_into_where!();

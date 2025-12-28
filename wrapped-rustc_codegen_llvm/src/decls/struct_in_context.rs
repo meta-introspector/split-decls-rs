@@ -4,4 +4,4 @@ macro_rules! struct_in_context {
     };
 }
 
-struct_in_context!()
+struct_in_context!();

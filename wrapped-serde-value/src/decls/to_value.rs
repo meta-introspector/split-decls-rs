@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Value!();
         SerializerError!();
+        Value!();
         Serializer!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! to_value {
     };
 }
 
-to_value!()
+to_value!();

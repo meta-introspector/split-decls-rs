@@ -4,4 +4,4 @@ macro_rules! fix_cfg_format_string {
     };
 }
 
-fix_cfg_format_string!()
+fix_cfg_format_string!();

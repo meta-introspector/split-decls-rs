@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         ParseFunctor!();
-        Args!();
         Config!();
+        Args!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! run_category_pipeline {
     };
 }
 
-run_category_pipeline!()
+run_category_pipeline!();

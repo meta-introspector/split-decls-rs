@@ -4,4 +4,4 @@ macro_rules! DROPLESS_ALIGNMENT {
     };
 }
 
-DROPLESS_ALIGNMENT!()
+DROPLESS_ALIGNMENT!();

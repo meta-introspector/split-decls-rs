@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Mutex!();
-        RawMutex!();
         MutexGuard!();
+        RawMutex!();
         MappedMutexGuard!();
+        Mutex!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_23 {
     };
 }
 
-impl_23!()
+impl_23!();

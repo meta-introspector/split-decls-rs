@@ -11,4 +11,4 @@ macro_rules! add_sanitizer_libraries {
     };
 }
 
-add_sanitizer_libraries!()
+add_sanitizer_libraries!();

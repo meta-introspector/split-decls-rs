@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        ClassBracketed!();
         ClassSetBinaryOpKind!();
-        ClassSet!();
+        ClassBracketed!();
         ClassSetUnion!();
+        ClassSet!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! ClassState {
     };
 }
 
-ClassState!()
+ClassState!();

@@ -11,4 +11,4 @@ macro_rules! E_INVALIDARG {
     };
 }
 
-E_INVALIDARG!()
+E_INVALIDARG!();

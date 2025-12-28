@@ -12,4 +12,4 @@ macro_rules! ssr_struct_lit {
     };
 }
 
-ssr_struct_lit!()
+ssr_struct_lit!();

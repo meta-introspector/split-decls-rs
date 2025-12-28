@@ -11,4 +11,4 @@ macro_rules! new_ascii_word_bound_indices {
     };
 }
 
-new_ascii_word_bound_indices!()
+new_ascii_word_bound_indices!();

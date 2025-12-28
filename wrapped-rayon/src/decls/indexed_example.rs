@@ -11,4 +11,4 @@ macro_rules! indexed_example {
     };
 }
 
-indexed_example!()
+indexed_example!();

@@ -4,4 +4,4 @@ macro_rules! run_required_analyses {
     };
 }
 
-run_required_analyses!()
+run_required_analyses!();

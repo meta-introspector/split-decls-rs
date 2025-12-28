@@ -61,4 +61,4 @@ impl<F: Field> RustcMorphismCircuit<F> {{
     };
 }
 
-plonk_circuit_impl!()
+plonk_circuit_impl!();

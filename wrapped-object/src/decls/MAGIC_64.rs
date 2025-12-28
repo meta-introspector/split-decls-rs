@@ -4,4 +4,4 @@ macro_rules! MAGIC_64 {
     };
 }
 
-MAGIC_64!()
+MAGIC_64!();

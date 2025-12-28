@@ -11,4 +11,4 @@ macro_rules! token_set_works_for_tokens {
     };
 }
 
-token_set_works_for_tokens!()
+token_set_works_for_tokens!();

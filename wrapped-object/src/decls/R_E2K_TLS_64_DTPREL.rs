@@ -4,4 +4,4 @@ macro_rules! R_E2K_TLS_64_DTPREL {
     };
 }
 
-R_E2K_TLS_64_DTPREL!()
+R_E2K_TLS_64_DTPREL!();

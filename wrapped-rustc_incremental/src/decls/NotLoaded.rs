@@ -4,4 +4,4 @@ macro_rules! NotLoaded {
     };
 }
 
-NotLoaded!()
+NotLoaded!();

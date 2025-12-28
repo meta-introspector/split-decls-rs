@@ -11,4 +11,4 @@ macro_rules! read_buf_window {
     };
 }
 
-read_buf_window!()
+read_buf_window!();

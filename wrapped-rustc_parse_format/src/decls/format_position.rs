@@ -11,4 +11,4 @@ macro_rules! format_position {
     };
 }
 
-format_position!()
+format_position!();

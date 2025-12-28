@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        PrivateDiv!();
-        UInt!();
-        Len!();
-        Bit!();
-        Sub1!();
         B1!();
         UTerm!();
         Length!();
-        Unsigned!();
+        Len!();
+        Bit!();
+        PrivateDiv!();
         PrivateDivRem!();
+        Sub1!();
+        Unsigned!();
+        UInt!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_473 {
     };
 }
 
-impl_473!()
+impl_473!();

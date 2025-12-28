@@ -4,4 +4,4 @@ macro_rules! resolver_for_lowering_raw {
     };
 }
 
-resolver_for_lowering_raw!()
+resolver_for_lowering_raw!();

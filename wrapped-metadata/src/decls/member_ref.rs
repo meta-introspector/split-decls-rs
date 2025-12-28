@@ -4,4 +4,4 @@ macro_rules! member_ref {
     };
 }
 
-member_ref!()
+member_ref!();

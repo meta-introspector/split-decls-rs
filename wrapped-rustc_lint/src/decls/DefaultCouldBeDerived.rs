@@ -4,4 +4,4 @@ macro_rules! DefaultCouldBeDerived {
     };
 }
 
-DefaultCouldBeDerived!()
+DefaultCouldBeDerived!();

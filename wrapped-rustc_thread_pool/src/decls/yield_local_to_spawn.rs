@@ -4,4 +4,4 @@ macro_rules! yield_local_to_spawn {
     };
 }
 
-yield_local_to_spawn!()
+yield_local_to_spawn!();

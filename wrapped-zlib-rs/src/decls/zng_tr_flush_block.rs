@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Strategy!();
-        TreeDesc!();
-        DeflateStream!();
         State!();
-        BlockType!();
+        DeflateStream!();
         DataType!();
+        TreeDesc!();
+        Strategy!();
+        BlockType!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! zng_tr_flush_block {
     };
 }
 
-zng_tr_flush_block!()
+zng_tr_flush_block!();

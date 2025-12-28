@@ -11,4 +11,4 @@ macro_rules! is_normalized {
     };
 }
 
-is_normalized!()
+is_normalized!();

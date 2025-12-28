@@ -4,4 +4,4 @@ macro_rules! LiteralOutOfRange {
     };
 }
 
-LiteralOutOfRange!()
+LiteralOutOfRange!();

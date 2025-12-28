@@ -11,4 +11,4 @@ macro_rules! distinct_backtrace_field {
     };
 }
 
-distinct_backtrace_field!()
+distinct_backtrace_field!();

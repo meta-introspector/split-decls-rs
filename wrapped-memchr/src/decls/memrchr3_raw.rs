@@ -11,4 +11,4 @@ macro_rules! memrchr3_raw {
     };
 }
 
-memrchr3_raw!()
+memrchr3_raw!();

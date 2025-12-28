@@ -4,4 +4,4 @@ macro_rules! lean4_patch {
     };
 }
 
-lean4_patch!()
+lean4_patch!();

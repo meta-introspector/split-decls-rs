@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        ReceiverValidityError!();
-        InvalidReceiverTyHint!();
+        InvalidReceiverTyNoArbitrarySelfTypes!();
+        InvalidGenericReceiverTy!();
         InvalidReceiverTy!();
         WfCheckingCtxt!();
-        InvalidGenericReceiverTy!();
         ArbitrarySelfTypesLevel!();
-        InvalidReceiverTyNoArbitrarySelfTypes!();
+        ReceiverValidityError!();
+        InvalidReceiverTyHint!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! check_method_receiver {
     };
 }
 
-check_method_receiver!()
+check_method_receiver!();

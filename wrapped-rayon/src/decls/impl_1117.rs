@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         IntoParallelIterator!();
-        Iter!();
         IntoIter!();
+        Iter!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_1117 {
     };
 }
 
-impl_1117!()
+impl_1117!();

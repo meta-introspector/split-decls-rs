@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        CanonicalDecompositionBorrowed!();
         CanonicalDecomposition!();
+        CanonicalDecompositionBorrowed!();
         Baked!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_24 {
     };
 }
 
-impl_24!()
+impl_24!();

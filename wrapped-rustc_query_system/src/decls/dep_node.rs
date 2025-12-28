@@ -4,4 +4,4 @@ macro_rules! dep_node {
     };
 }
 
-dep_node!()
+dep_node!();

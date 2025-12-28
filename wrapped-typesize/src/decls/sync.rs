@@ -4,4 +4,4 @@ macro_rules! sync {
     };
 }
 
-sync!()
+sync!();

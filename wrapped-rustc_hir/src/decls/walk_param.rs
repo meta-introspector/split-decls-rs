@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Visitor!();
         Param!();
+        Visitor!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! walk_param {
     };
 }
 
-walk_param!()
+walk_param!();

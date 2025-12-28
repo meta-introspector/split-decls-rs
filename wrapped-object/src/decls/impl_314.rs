@@ -1,17 +1,17 @@
 macro_rules! deps {
     () => {
-        ElfSection!();
-        ReadRef!();
-        SectionIndex!();
-        Result!();
-        CompressedFileRange!();
-        CompressionFormat!();
-        SectionHeader!();
-        Rel!();
-        ElfFile!();
-        Error!();
-        Rela!();
         FileHeader!();
+        ElfFile!();
+        Result!();
+        Rel!();
+        ElfSection!();
+        Error!();
+        CompressedFileRange!();
+        Rela!();
+        ReadRef!();
+        SectionHeader!();
+        SectionIndex!();
+        CompressionFormat!();
     };
 }
 
@@ -22,4 +22,4 @@ macro_rules! impl_314 {
     };
 }
 
-impl_314!()
+impl_314!();

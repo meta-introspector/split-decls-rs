@@ -4,4 +4,4 @@ macro_rules! DW_TAG_auto_variable {
     };
 }
 
-DW_TAG_auto_variable!()
+DW_TAG_auto_variable!();

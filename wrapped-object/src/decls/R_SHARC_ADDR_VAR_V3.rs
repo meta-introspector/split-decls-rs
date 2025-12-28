@@ -4,4 +4,4 @@ macro_rules! R_SHARC_ADDR_VAR_V3 {
     };
 }
 
-R_SHARC_ADDR_VAR_V3!()
+R_SHARC_ADDR_VAR_V3!();

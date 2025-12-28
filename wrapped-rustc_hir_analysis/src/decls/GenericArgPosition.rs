@@ -4,4 +4,4 @@ macro_rules! GenericArgPosition {
     };
 }
 
-GenericArgPosition!()
+GenericArgPosition!();

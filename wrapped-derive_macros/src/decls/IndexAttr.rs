@@ -4,4 +4,4 @@ macro_rules! IndexAttr {
     };
 }
 
-IndexAttr!()
+IndexAttr!();

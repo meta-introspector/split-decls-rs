@@ -4,4 +4,4 @@ macro_rules! STO_MIPS_PLT {
     };
 }
 
-STO_MIPS_PLT!()
+STO_MIPS_PLT!();

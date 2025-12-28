@@ -4,4 +4,4 @@ macro_rules! is_enum_lit_name_ref {
     };
 }
 
-is_enum_lit_name_ref!()
+is_enum_lit_name_ref!();

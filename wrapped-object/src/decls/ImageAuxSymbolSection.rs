@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        U32Bytes!();
-        ImageSymbol!();
         U16Bytes!();
+        ImageSymbol!();
+        U32Bytes!();
         ImageSymbolEx!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! ImageAuxSymbolSection {
     };
 }
 
-ImageAuxSymbolSection!()
+ImageAuxSymbolSection!();

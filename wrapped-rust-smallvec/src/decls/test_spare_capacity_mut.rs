@@ -11,4 +11,4 @@ macro_rules! test_spare_capacity_mut {
     };
 }
 
-test_spare_capacity_mut!()
+test_spare_capacity_mut!();

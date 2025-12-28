@@ -4,4 +4,4 @@ macro_rules! RT_GROUP_CURSOR {
     };
 }
 
-RT_GROUP_CURSOR!()
+RT_GROUP_CURSOR!();

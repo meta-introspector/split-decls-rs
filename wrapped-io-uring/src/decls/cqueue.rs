@@ -4,4 +4,4 @@ macro_rules! cqueue {
     };
 }
 
-cqueue!()
+cqueue!();

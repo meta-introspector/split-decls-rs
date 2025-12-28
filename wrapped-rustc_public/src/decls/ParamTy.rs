@@ -4,4 +4,4 @@ macro_rules! ParamTy {
     };
 }
 
-ParamTy!()
+ParamTy!();

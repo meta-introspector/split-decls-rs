@@ -4,4 +4,4 @@ macro_rules! SectionOffsets {
     };
 }
 
-SectionOffsets!()
+SectionOffsets!();

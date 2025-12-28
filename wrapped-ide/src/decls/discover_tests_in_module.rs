@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        TestItem!();
-        TestItemKind!();
         NavigationTarget!();
+        TestItemKind!();
+        TestItem!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! discover_tests_in_module {
     };
 }
 
-discover_tests_in_module!()
+discover_tests_in_module!();

@@ -12,4 +12,4 @@ macro_rules! can_set_variables_in_included_templates {
     };
 }
 
-can_set_variables_in_included_templates!()
+can_set_variables_in_included_templates!();

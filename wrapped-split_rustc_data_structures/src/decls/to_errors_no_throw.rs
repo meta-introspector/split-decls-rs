@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        TestOutcome!();
         ObligationForest!();
         ProcessResult!();
-        TestOutcome!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! to_errors_no_throw {
     };
 }
 
-to_errors_no_throw!()
+to_errors_no_throw!();

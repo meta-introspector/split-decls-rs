@@ -4,4 +4,4 @@ macro_rules! intrinsicck {
     };
 }
 
-intrinsicck!()
+intrinsicck!();

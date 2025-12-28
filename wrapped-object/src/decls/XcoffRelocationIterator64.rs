@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        FileHeader64!();
         XcoffRelocationIterator!();
+        FileHeader64!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! XcoffRelocationIterator64 {
     };
 }
 
-XcoffRelocationIterator64!()
+XcoffRelocationIterator64!();

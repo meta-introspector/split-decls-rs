@@ -4,4 +4,4 @@ macro_rules! Condvar {
     };
 }
 
-Condvar!()
+Condvar!();

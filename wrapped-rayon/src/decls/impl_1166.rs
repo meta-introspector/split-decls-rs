@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        ChunksExactMutProducer!();
         ProducerCallback!();
+        ChunksExactMutProducer!();
+        ChunksExactMut!();
         IndexedParallelIterator!();
         Consumer!();
-        ChunksExactMut!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_1166 {
     };
 }
 
-impl_1166!()
+impl_1166!();

@@ -4,4 +4,4 @@ macro_rules! cfg {
     };
 }
 
-cfg!()
+cfg!();

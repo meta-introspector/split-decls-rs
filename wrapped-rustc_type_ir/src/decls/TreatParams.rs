@@ -4,4 +4,4 @@ macro_rules! TreatParams {
     };
 }
 
-TreatParams!()
+TreatParams!();

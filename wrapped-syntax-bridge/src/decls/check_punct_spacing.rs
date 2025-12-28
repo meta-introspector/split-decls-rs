@@ -11,4 +11,4 @@ macro_rules! check_punct_spacing {
     };
 }
 
-check_punct_spacing!()
+check_punct_spacing!();

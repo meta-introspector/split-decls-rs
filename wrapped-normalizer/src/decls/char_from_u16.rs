@@ -4,4 +4,4 @@ macro_rules! char_from_u16 {
     };
 }
 
-char_from_u16!()
+char_from_u16!();

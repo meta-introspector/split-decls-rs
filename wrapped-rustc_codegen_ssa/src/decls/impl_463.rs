@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        BuilderMethods!();
         FunctionCx!();
+        BuilderMethods!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_463 {
     };
 }
 
-impl_463!()
+impl_463!();

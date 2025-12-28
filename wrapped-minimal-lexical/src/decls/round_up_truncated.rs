@@ -4,4 +4,4 @@ macro_rules! round_up_truncated {
     };
 }
 
-round_up_truncated!()
+round_up_truncated!();

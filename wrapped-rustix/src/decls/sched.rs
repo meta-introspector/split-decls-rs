@@ -4,4 +4,4 @@ macro_rules! sched {
     };
 }
 
-sched!()
+sched!();

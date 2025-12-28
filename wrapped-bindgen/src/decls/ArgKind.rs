@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Filter!();
-        Reference!();
         Derive!();
+        Reference!();
+        Filter!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! ArgKind {
     };
 }
 
-ArgKind!()
+ArgKind!();

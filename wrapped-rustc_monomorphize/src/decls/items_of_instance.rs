@@ -4,4 +4,4 @@ macro_rules! items_of_instance {
     };
 }
 
-items_of_instance!()
+items_of_instance!();

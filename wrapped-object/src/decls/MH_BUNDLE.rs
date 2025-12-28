@@ -4,4 +4,4 @@ macro_rules! MH_BUNDLE {
     };
 }
 
-MH_BUNDLE!()
+MH_BUNDLE!();

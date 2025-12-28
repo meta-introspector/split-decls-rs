@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Env!();
         Bin!();
         SpawnStatus!();
         CommandStatus!();
+        Env!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! Case {
     };
 }
 
-Case!()
+Case!();

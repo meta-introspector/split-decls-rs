@@ -11,4 +11,4 @@ macro_rules! add_set_values_in_context {
     };
 }
 
-add_set_values_in_context!()
+add_set_values_in_context!();

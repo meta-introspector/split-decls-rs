@@ -4,4 +4,4 @@ macro_rules! Printer {
     };
 }
 
-Printer!()
+Printer!();

@@ -4,4 +4,4 @@ macro_rules! libz_rs_sys_version {
     };
 }
 
-libz_rs_sys_version!()
+libz_rs_sys_version!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         NodeTrait!();
-        Direction!();
         EdgeType!();
         NeighborsDirected!();
+        Direction!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! EdgesDirected {
     };
 }
 
-EdgesDirected!()
+EdgesDirected!();

@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        InlineTable!();
-        Decor!();
-        RawString!();
-        Item!();
-        Value!();
-        KeyMut!();
         Table!();
         Key!();
+        Item!();
+        InlineTable!();
+        RawString!();
+        Decor!();
+        Value!();
+        KeyMut!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_91 {
     };
 }
 
-impl_91!()
+impl_91!();

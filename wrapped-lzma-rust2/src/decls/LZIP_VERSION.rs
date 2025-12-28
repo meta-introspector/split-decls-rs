@@ -4,4 +4,4 @@ macro_rules! LZIP_VERSION {
     };
 }
 
-LZIP_VERSION!()
+LZIP_VERSION!();

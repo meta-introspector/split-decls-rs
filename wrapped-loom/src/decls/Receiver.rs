@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Arc!();
         Channel!();
+        Arc!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Receiver {
     };
 }
 
-Receiver!()
+Receiver!();

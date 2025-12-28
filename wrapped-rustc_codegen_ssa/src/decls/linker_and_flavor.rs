@@ -11,4 +11,4 @@ macro_rules! linker_and_flavor {
     };
 }
 
-linker_and_flavor!()
+linker_and_flavor!();

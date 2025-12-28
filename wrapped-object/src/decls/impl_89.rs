@@ -3,8 +3,8 @@ macro_rules! deps {
         ReadCacheOps!();
         ReadCacheInternal!();
         ReadCache!();
-        ReadRef!();
         ReadCacheRange!();
+        ReadRef!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_89 {
     };
 }
 
-impl_89!()
+impl_89!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        LzmaWriter!();
-        Write!();
         Result!();
+        Write!();
+        LzmaWriter!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_226 {
     };
 }
 
-impl_226!()
+impl_226!();

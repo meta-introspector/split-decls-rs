@@ -4,4 +4,4 @@ macro_rules! PreDefineCodegenMethods {
     };
 }
 
-PreDefineCodegenMethods!()
+PreDefineCodegenMethods!();

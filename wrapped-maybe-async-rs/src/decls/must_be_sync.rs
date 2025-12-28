@@ -11,4 +11,4 @@ macro_rules! must_be_sync {
     };
 }
 
-must_be_sync!()
+must_be_sync!();

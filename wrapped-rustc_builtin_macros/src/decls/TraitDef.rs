@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Ty!();
         MethodDef!();
+        Ty!();
         Path!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! TraitDef {
     };
 }
 
-TraitDef!()
+TraitDef!();

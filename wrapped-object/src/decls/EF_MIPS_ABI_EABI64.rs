@@ -4,4 +4,4 @@ macro_rules! EF_MIPS_ABI_EABI64 {
     };
 }
 
-EF_MIPS_ABI_EABI64!()
+EF_MIPS_ABI_EABI64!();

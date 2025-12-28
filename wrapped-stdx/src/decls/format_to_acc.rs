@@ -4,4 +4,4 @@ macro_rules! format_to_acc {
     };
 }
 
-format_to_acc!()
+format_to_acc!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        OrderBy!();
         OrderByIter!();
+        OrderBy!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_559 {
     };
 }
 
-impl_559!()
+impl_559!();

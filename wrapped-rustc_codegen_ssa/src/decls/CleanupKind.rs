@@ -4,4 +4,4 @@ macro_rules! CleanupKind {
     };
 }
 
-CleanupKind!()
+CleanupKind!();

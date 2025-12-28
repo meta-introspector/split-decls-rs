@@ -12,4 +12,4 @@ macro_rules! non_lazy_bind_attr {
     };
 }
 
-non_lazy_bind_attr!()
+non_lazy_bind_attr!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        U64!();
-        U32!();
         U16!();
+        U32!();
+        U64!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! FileHeader64 {
     };
 }
 
-FileHeader64!()
+FileHeader64!();

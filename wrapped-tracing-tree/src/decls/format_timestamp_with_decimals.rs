@@ -4,4 +4,4 @@ macro_rules! format_timestamp_with_decimals {
     };
 }
 
-format_timestamp_with_decimals!()
+format_timestamp_with_decimals!();

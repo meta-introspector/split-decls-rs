@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Statement!();
         Result!();
         Params!();
+        Statement!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_170 {
     };
 }
 
-impl_170!()
+impl_170!();

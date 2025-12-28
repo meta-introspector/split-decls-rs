@@ -11,4 +11,4 @@ macro_rules! cargo_target_dir {
     };
 }
 
-cargo_target_dir!()
+cargo_target_dir!();

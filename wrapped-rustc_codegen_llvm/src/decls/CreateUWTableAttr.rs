@@ -4,4 +4,4 @@ macro_rules! CreateUWTableAttr {
     };
 }
 
-CreateUWTableAttr!()
+CreateUWTableAttr!();

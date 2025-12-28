@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Assoc!();
-        PrecClimber!();
         RuleType!();
+        PrecClimber!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Operator {
     };
 }
 
-Operator!()
+Operator!();

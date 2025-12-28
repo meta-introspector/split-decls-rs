@@ -11,4 +11,4 @@ macro_rules! set_ip_add_membership {
     };
 }
 
-set_ip_add_membership!()
+set_ip_add_membership!();

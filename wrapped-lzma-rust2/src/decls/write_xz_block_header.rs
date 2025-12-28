@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Write!();
-        FilterConfig!();
         Result!();
+        FilterConfig!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! write_xz_block_header {
     };
 }
 
-write_xz_block_header!()
+write_xz_block_header!();

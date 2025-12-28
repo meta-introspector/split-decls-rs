@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Error!();
-        Result!();
-        SortNumbers!();
-        SortStrategy!();
-        SortBools!();
-        SortArrays!();
         SortStrings!();
+        Result!();
+        SortArrays!();
+        SortStrategy!();
+        SortNumbers!();
+        SortBools!();
+        Error!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! get_sort_strategy_for_type {
     };
 }
 
-get_sort_strategy_for_type!()
+get_sort_strategy_for_type!();

@@ -4,4 +4,4 @@ macro_rules! EF_RISCV_FLOAT_ABI_QUAD {
     };
 }
 
-EF_RISCV_FLOAT_ABI_QUAD!()
+EF_RISCV_FLOAT_ABI_QUAD!();

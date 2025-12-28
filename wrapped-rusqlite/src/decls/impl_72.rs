@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Name!();
         InnerConnection!();
         Result!();
-        Name!();
         Connection!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_72 {
     };
 }
 
-impl_72!()
+impl_72!();

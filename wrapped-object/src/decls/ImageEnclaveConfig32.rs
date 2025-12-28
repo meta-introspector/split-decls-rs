@@ -11,4 +11,4 @@ macro_rules! ImageEnclaveConfig32 {
     };
 }
 
-ImageEnclaveConfig32!()
+ImageEnclaveConfig32!();

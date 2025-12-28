@@ -4,4 +4,4 @@ macro_rules! test_is_combining_mark_ascii {
     };
 }
 
-test_is_combining_mark_ascii!()
+test_is_combining_mark_ascii!();

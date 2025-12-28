@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        RawRepr!();
         CompoundRepr!();
         AlignRepr!();
+        RawRepr!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! FromRawReprError {
     };
 }
 
-FromRawReprError!()
+FromRawReprError!();

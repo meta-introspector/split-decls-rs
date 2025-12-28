@@ -4,4 +4,4 @@ macro_rules! mips64 {
     };
 }
 
-mips64!()
+mips64!();

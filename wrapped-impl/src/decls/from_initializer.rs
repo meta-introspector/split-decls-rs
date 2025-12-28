@@ -12,4 +12,4 @@ macro_rules! from_initializer {
     };
 }
 
-from_initializer!()
+from_initializer!();

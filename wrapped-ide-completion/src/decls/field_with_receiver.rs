@@ -4,4 +4,4 @@ macro_rules! field_with_receiver {
     };
 }
 
-field_with_receiver!()
+field_with_receiver!();

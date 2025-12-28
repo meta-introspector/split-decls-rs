@@ -4,4 +4,4 @@ macro_rules! proc_macro_span {
     };
 }
 
-proc_macro_span!()
+proc_macro_span!();

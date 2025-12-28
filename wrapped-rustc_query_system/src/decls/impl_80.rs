@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        SerializedDepGraph!();
         DepNode!();
+        SerializedDepGraph!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_80 {
     };
 }
 
-impl_80!()
+impl_80!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        ValueRef!();
-        Null!();
         Value!();
+        Null!();
+        ValueRef!();
         Blob!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_507 {
     };
 }
 
-impl_507!()
+impl_507!();

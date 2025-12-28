@@ -4,4 +4,4 @@ macro_rules! _REP_LIT_LIT {
     };
 }
 
-_REP_LIT_LIT!()
+_REP_LIT_LIT!();

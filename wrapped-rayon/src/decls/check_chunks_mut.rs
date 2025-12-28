@@ -4,4 +4,4 @@ macro_rules! check_chunks_mut {
     };
 }
 
-check_chunks_mut!()
+check_chunks_mut!();

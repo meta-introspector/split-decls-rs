@@ -12,4 +12,4 @@ macro_rules! add_order_independent_options {
     };
 }
 
-add_order_independent_options!()
+add_order_independent_options!();

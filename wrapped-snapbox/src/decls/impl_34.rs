@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Assert!();
-        Palette!();
         Redactions!();
+        Palette!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_34 {
     };
 }
 
-impl_34!()
+impl_34!();

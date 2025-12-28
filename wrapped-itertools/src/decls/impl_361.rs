@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        MergeBy!();
         OrderingOrBool!();
+        MergeBy!();
         SizeHint!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_361 {
     };
 }
 
-impl_361!()
+impl_361!();

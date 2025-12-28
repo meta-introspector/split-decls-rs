@@ -4,4 +4,4 @@ macro_rules! FnKind {
     };
 }
 
-FnKind!()
+FnKind!();

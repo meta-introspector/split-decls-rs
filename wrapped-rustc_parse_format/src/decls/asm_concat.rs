@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Piece!();
-        Parser!();
         ParseMode!();
+        Parser!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! asm_concat {
     };
 }
 
-asm_concat!()
+asm_concat!();

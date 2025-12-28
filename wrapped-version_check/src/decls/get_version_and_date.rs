@@ -4,4 +4,4 @@ macro_rules! get_version_and_date {
     };
 }
 
-get_version_and_date!()
+get_version_and_date!();

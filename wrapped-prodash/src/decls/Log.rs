@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Id!();
-        Unit!();
         NestedProgress!();
         StepShared!();
+        Unit!();
+        Id!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! Log {
     };
 }
 
-Log!()
+Log!();

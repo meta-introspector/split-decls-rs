@@ -4,4 +4,4 @@ macro_rules! PR_SET_MM_ARG_START {
     };
 }
 
-PR_SET_MM_ARG_START!()
+PR_SET_MM_ARG_START!();

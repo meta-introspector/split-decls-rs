@@ -4,4 +4,4 @@ macro_rules! R_MIPS_SHIFT6 {
     };
 }
 
-R_MIPS_SHIFT6!()
+R_MIPS_SHIFT6!();

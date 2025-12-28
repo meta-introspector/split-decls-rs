@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ImageNtHeaders32!();
         PeFile32!();
+        ImageNtHeaders32!();
         PeComdat!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! PeComdat32 {
     };
 }
 
-PeComdat32!()
+PeComdat32!();

@@ -4,4 +4,4 @@ macro_rules! R_PPC64_COPY {
     };
 }
 
-R_PPC64_COPY!()
+R_PPC64_COPY!();

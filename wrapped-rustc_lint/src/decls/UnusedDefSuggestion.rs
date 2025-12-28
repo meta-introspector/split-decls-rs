@@ -4,4 +4,4 @@ macro_rules! UnusedDefSuggestion {
     };
 }
 
-UnusedDefSuggestion!()
+UnusedDefSuggestion!();

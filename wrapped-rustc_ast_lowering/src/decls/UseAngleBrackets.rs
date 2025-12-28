@@ -4,4 +4,4 @@ macro_rules! UseAngleBrackets {
     };
 }
 
-UseAngleBrackets!()
+UseAngleBrackets!();

@@ -4,4 +4,4 @@ macro_rules! remap_mir_for_const_eval_select {
     };
 }
 
-remap_mir_for_const_eval_select!()
+remap_mir_for_const_eval_select!();

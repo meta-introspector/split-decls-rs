@@ -4,4 +4,4 @@ macro_rules! RingBuffer {
     };
 }
 
-RingBuffer!()
+RingBuffer!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Cx!();
         PathKind!();
         StackEntry!();
-        Cx!();
         Stack!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_131 {
     };
 }
 
-impl_131!()
+impl_131!();

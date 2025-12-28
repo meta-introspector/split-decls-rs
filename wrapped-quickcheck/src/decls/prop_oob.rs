@@ -12,4 +12,4 @@ macro_rules! prop_oob {
     };
 }
 
-prop_oob!()
+prop_oob!();

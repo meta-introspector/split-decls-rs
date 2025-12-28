@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        NodeIdentifiers!();
         GraphRef!();
+        NodeIdentifiers!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! macro_76 {
     };
 }
 
-macro_76!()
+macro_76!();

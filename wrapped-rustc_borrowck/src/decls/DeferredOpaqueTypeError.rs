@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        RegionErrors!();
         LifetimeMismatchOpaqueParam!();
+        RegionErrors!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! DeferredOpaqueTypeError {
     };
 }
 
-DeferredOpaqueTypeError!()
+DeferredOpaqueTypeError!();

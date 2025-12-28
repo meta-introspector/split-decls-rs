@@ -4,4 +4,4 @@ macro_rules! HKEY {
     };
 }
 
-HKEY!()
+HKEY!();

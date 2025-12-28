@@ -4,4 +4,4 @@ macro_rules! LifetimeSyntax {
     };
 }
 
-LifetimeSyntax!()
+LifetimeSyntax!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Span!();
         BoolLit!();
+        Span!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_bool_lit_to_pm_lit {
     };
 }
 
-impl_bool_lit_to_pm_lit!()
+impl_bool_lit_to_pm_lit!();

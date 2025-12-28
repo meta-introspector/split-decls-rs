@@ -4,4 +4,4 @@ macro_rules! LC_REEXPORT_DYLIB {
     };
 }
 
-LC_REEXPORT_DYLIB!()
+LC_REEXPORT_DYLIB!();

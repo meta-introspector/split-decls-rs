@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         PatKind!();
-        Walkable!();
         LazyAttrTokenStream!();
+        Walkable!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Pat {
     };
 }
 
-Pat!()
+Pat!();

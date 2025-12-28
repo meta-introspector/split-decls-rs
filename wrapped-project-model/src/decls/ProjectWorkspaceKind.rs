@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         ProjectJson!();
-        CargoWorkspace!();
-        ManifestPath!();
         WorkspaceBuildScripts!();
+        ManifestPath!();
+        CargoWorkspace!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! ProjectWorkspaceKind {
     };
 }
 
-ProjectWorkspaceKind!()
+ProjectWorkspaceKind!();

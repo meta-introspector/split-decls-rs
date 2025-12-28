@@ -4,4 +4,4 @@ macro_rules! cargo_info {
     };
 }
 
-cargo_info!()
+cargo_info!();

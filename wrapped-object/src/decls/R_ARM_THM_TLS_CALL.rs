@@ -4,4 +4,4 @@ macro_rules! R_ARM_THM_TLS_CALL {
     };
 }
 
-R_ARM_THM_TLS_CALL!()
+R_ARM_THM_TLS_CALL!();

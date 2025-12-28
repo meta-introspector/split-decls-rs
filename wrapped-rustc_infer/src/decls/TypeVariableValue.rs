@@ -4,4 +4,4 @@ macro_rules! TypeVariableValue {
     };
 }
 
-TypeVariableValue!()
+TypeVariableValue!();

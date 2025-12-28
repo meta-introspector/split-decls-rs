@@ -4,4 +4,4 @@ macro_rules! check_struct_field {
     };
 }
 
-check_struct_field!()
+check_struct_field!();

@@ -52,4 +52,4 @@ macro_rules! register_builtins {
     };
 }
 
-register_builtins!()
+register_builtins!();

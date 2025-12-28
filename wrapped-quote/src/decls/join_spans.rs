@@ -4,4 +4,4 @@ macro_rules! join_spans {
     };
 }
 
-join_spans!()
+join_spans!();

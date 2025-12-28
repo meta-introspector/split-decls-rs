@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        IncorrectReprFormatGenericCause!();
         MetaItemParser!();
-        ArgParser!();
-        InvalidReprAlignNeedArg!();
-        InvalidReprHintNoParen!();
         AlignKind!();
-        IncorrectReprFormatGeneric!();
-        Stage!();
         AcceptContext!();
+        InvalidReprAlignNeedArg!();
         UnrecognizedReprHint!();
+        ArgParser!();
+        InvalidReprHintNoParen!();
         InvalidReprHintNoValue!();
+        Stage!();
+        IncorrectReprFormatGenericCause!();
+        IncorrectReprFormatGeneric!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! parse_repr {
     };
 }
 
-parse_repr!()
+parse_repr!();

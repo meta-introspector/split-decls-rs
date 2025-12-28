@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        StrRead!();
-        SliceRead!();
         StreamDeserializer!();
-        Position!();
-        Reference!();
         Value!();
-        Result!();
+        SliceRead!();
         RawValue!();
+        Reference!();
+        Result!();
+        Position!();
         IoRead!();
+        StrRead!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! Read {
     };
 }
 
-Read!()
+Read!();

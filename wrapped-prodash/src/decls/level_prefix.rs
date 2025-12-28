@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         SiblingLocation!();
-        Key!();
         Task!();
+        Key!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! level_prefix {
     };
 }
 
-level_prefix!()
+level_prefix!();

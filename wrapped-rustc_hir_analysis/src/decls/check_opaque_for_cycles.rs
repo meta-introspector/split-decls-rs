@@ -4,4 +4,4 @@ macro_rules! check_opaque_for_cycles {
     };
 }
 
-check_opaque_for_cycles!()
+check_opaque_for_cycles!();

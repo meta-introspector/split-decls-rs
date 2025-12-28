@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Unit!();
         Kind!();
         Mode!();
-        Unit!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! label_and_mode {
     };
 }
 
-label_and_mode!()
+label_and_mode!();

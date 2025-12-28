@@ -11,4 +11,4 @@ macro_rules! str_normalize_pattern_shorter {
     };
 }
 
-str_normalize_pattern_shorter!()
+str_normalize_pattern_shorter!();

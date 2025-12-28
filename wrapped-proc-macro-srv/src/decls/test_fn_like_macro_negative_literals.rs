@@ -58,4 +58,4 @@ macro_rules! test_fn_like_macro_negative_literals {
     };
 }
 
-test_fn_like_macro_negative_literals!()
+test_fn_like_macro_negative_literals!();

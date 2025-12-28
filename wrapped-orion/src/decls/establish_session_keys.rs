@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        UnknownCryptoError!();
         Blake2b!();
         PublicKey!();
+        UnknownCryptoError!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! establish_session_keys {
     };
 }
 
-establish_session_keys!()
+establish_session_keys!();

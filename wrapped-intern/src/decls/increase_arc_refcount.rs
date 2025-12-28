@@ -11,4 +11,4 @@ macro_rules! increase_arc_refcount {
     };
 }
 
-increase_arc_refcount!()
+increase_arc_refcount!();

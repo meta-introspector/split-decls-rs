@@ -4,4 +4,4 @@ macro_rules! do_double {
     };
 }
 
-do_double!()
+do_double!();

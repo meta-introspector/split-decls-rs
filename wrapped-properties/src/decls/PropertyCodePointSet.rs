@@ -4,4 +4,4 @@ macro_rules! PropertyCodePointSet {
     };
 }
 
-PropertyCodePointSet!()
+PropertyCodePointSet!();

@@ -4,4 +4,4 @@ macro_rules! filter_edges {
     };
 }
 
-filter_edges!()
+filter_edges!();

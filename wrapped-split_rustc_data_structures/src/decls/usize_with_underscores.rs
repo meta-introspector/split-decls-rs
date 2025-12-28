@@ -4,4 +4,4 @@ macro_rules! usize_with_underscores {
     };
 }
 
-usize_with_underscores!()
+usize_with_underscores!();

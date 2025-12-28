@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        EventIdBuilder!();
-        Profiler!();
-        EventId!();
         StringId!();
+        EventIdBuilder!();
         StringComponent!();
+        EventId!();
+        Profiler!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_22 {
     };
 }
 
-impl_22!()
+impl_22!();

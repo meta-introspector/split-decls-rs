@@ -11,4 +11,4 @@ macro_rules! _readlink {
     };
 }
 
-_readlink!()
+_readlink!();

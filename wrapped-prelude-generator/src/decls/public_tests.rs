@@ -4,4 +4,4 @@ macro_rules! public_tests {
     };
 }
 
-public_tests!()
+public_tests!();

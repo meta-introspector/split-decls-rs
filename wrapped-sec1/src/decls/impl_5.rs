@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        ModulusSize!();
-        EncodedPoint!();
-        Coordinates!();
         Error!();
-        Result!();
         Tag!();
+        Coordinates!();
+        EncodedPoint!();
+        ModulusSize!();
+        Result!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_5 {
     };
 }
 
-impl_5!()
+impl_5!();

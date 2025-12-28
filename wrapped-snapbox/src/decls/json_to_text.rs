@@ -12,4 +12,4 @@ macro_rules! json_to_text {
     };
 }
 
-json_to_text!()
+json_to_text!();

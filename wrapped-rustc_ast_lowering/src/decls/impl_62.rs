@@ -1,27 +1,27 @@
 macro_rules! deps {
     () => {
-        InclusiveRangeWithNoEnd!();
-        InvalidLegacyConstGenericArg!();
-        UseConstGenericArg!();
-        ParamMode!();
-        NeverPatternWithGuard!();
-        NeverPatternWithBody!();
-        FutureKind!();
-        WillCreateDefIdsVisitor!();
-        ImplTraitPosition!();
-        AsyncCoroutinesNotSupported!();
-        ImplTraitContext!();
-        GenericArgsMode!();
-        ClosureCannotBeStatic!();
-        AwaitOnlyInAsyncFnAndBlocks!();
         FnDeclKind!();
+        MatchArmWithNoBody!();
         LoweringContext!();
+        NeverPatternWithBody!();
+        InvalidLegacyConstGenericArg!();
+        ImplTraitPosition!();
         AllowReturnTypeNotation!();
         YieldInClosure!();
-        CoroutineTooManyParameters!();
-        FunctionalRecordUpdateDestructuringAssignment!();
-        MatchArmWithNoBody!();
+        WillCreateDefIdsVisitor!();
+        NeverPatternWithGuard!();
+        FutureKind!();
+        AsyncCoroutinesNotSupported!();
+        ImplTraitContext!();
         UnderscoreExprLhsAssign!();
+        GenericArgsMode!();
+        UseConstGenericArg!();
+        ParamMode!();
+        FunctionalRecordUpdateDestructuringAssignment!();
+        InclusiveRangeWithNoEnd!();
+        AwaitOnlyInAsyncFnAndBlocks!();
+        ClosureCannotBeStatic!();
+        CoroutineTooManyParameters!();
     };
 }
 
@@ -32,4 +32,4 @@ macro_rules! impl_62 {
     };
 }
 
-impl_62!()
+impl_62!();

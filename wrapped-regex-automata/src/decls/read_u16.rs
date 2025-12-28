@@ -4,4 +4,4 @@ macro_rules! read_u16 {
     };
 }
 
-read_u16!()
+read_u16!();

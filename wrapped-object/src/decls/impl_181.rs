@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Result!();
-        Header!();
         ReadRef!();
-        Error!();
         ArchiveMember!();
-        AixHeader!();
+        Result!();
         MemberHeader!();
+        Header!();
+        AixHeader!();
+        Error!();
         AixMemberOffset!();
     };
 }
@@ -18,4 +18,4 @@ macro_rules! impl_181 {
     };
 }
 
-impl_181!()
+impl_181!();

@@ -4,4 +4,4 @@ macro_rules! NT_S390_CTRS {
     };
 }
 
-NT_S390_CTRS!()
+NT_S390_CTRS!();

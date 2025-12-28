@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        UnsupportedLiteralReason!();
         UnsupportedLiteral!();
+        UnsupportedLiteralReason!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_333 {
     };
 }
 
-impl_333!()
+impl_333!();

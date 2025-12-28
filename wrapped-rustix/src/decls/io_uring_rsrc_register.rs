@@ -4,4 +4,4 @@ macro_rules! io_uring_rsrc_register {
     };
 }
 
-io_uring_rsrc_register!()
+io_uring_rsrc_register!();

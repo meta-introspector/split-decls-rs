@@ -4,4 +4,4 @@ macro_rules! cfg_unstable_metrics {
     };
 }
 
-cfg_unstable_metrics!()
+cfg_unstable_metrics!();

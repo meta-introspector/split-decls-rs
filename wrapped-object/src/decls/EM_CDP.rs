@@ -4,4 +4,4 @@ macro_rules! EM_CDP {
     };
 }
 
-EM_CDP!()
+EM_CDP!();

@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        IntoJson!();
-        DataInner!();
-        ToDebug!();
         Error!();
-        DataFormat!();
-        Data!();
-        DataError!();
+        DataInner!();
+        IntoJson!();
         FilterSet!();
         IntoData!();
+        Data!();
+        DataError!();
+        DataFormat!();
+        ToDebug!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_134 {
     };
 }
 
-impl_134!()
+impl_134!();

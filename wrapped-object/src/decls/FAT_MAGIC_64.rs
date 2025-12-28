@@ -4,4 +4,4 @@ macro_rules! FAT_MAGIC_64 {
     };
 }
 
-FAT_MAGIC_64!()
+FAT_MAGIC_64!();

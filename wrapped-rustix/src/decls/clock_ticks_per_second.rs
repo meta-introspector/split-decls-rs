@@ -4,4 +4,4 @@ macro_rules! clock_ticks_per_second {
     };
 }
 
-clock_ticks_per_second!()
+clock_ticks_per_second!();

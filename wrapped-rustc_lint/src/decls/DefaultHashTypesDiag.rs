@@ -4,4 +4,4 @@ macro_rules! DefaultHashTypesDiag {
     };
 }
 
-DefaultHashTypesDiag!()
+DefaultHashTypesDiag!();

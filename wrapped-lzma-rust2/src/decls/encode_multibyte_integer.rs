@@ -11,4 +11,4 @@ macro_rules! encode_multibyte_integer {
     };
 }
 
-encode_multibyte_integer!()
+encode_multibyte_integer!();

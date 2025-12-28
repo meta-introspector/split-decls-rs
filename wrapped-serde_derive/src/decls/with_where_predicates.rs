@@ -4,4 +4,4 @@ macro_rules! with_where_predicates {
     };
 }
 
-with_where_predicates!()
+with_where_predicates!();

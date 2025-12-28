@@ -11,4 +11,4 @@ macro_rules! is_nfc_quick {
     };
 }
 
-is_nfc_quick!()
+is_nfc_quick!();

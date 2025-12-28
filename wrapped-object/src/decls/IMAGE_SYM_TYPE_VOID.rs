@@ -4,4 +4,4 @@ macro_rules! IMAGE_SYM_TYPE_VOID {
     };
 }
 
-IMAGE_SYM_TYPE_VOID!()
+IMAGE_SYM_TYPE_VOID!();

@@ -11,4 +11,4 @@ macro_rules! assert_subset_matches {
     };
 }
 
-assert_subset_matches!()
+assert_subset_matches!();

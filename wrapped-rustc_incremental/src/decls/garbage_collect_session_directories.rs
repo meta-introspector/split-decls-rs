@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        FinalizedGcFailed!();
         InvalidGcFailed!();
         Ok!();
-        FinalizedGcFailed!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! garbage_collect_session_directories {
     };
 }
 
-garbage_collect_session_directories!()
+garbage_collect_session_directories!();

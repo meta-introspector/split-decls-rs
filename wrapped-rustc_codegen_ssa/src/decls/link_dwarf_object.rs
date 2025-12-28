@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        CodegenResults!();
         ThorinErrorWrapper!();
+        CodegenResults!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! link_dwarf_object {
     };
 }
 
-link_dwarf_object!()
+link_dwarf_object!();

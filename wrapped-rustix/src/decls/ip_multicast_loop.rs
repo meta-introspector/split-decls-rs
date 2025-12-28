@@ -11,4 +11,4 @@ macro_rules! ip_multicast_loop {
     };
 }
 
-ip_multicast_loop!()
+ip_multicast_loop!();

@@ -4,4 +4,4 @@ macro_rules! YieldExprOutsideOfCoroutine {
     };
 }
 
-YieldExprOutsideOfCoroutine!()
+YieldExprOutsideOfCoroutine!();

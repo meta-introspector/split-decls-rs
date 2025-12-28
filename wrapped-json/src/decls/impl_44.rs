@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Read!();
         MapKey!();
+        Read!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_44 {
     };
 }
 
-impl_44!()
+impl_44!();

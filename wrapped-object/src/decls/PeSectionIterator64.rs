@@ -12,4 +12,4 @@ macro_rules! PeSectionIterator64 {
     };
 }
 
-PeSectionIterator64!()
+PeSectionIterator64!();

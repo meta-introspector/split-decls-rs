@@ -4,4 +4,4 @@ macro_rules! ref_slice_mut {
     };
 }
 
-ref_slice_mut!()
+ref_slice_mut!();

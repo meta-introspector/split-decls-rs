@@ -4,4 +4,4 @@ macro_rules! AtomicOrderingFence {
     };
 }
 
-AtomicOrderingFence!()
+AtomicOrderingFence!();

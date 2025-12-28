@@ -4,4 +4,4 @@ macro_rules! derive_debug {
     };
 }
 
-derive_debug!()
+derive_debug!();

@@ -13,4 +13,4 @@ macro_rules! collect_roots {
     };
 }
 
-collect_roots!()
+collect_roots!();

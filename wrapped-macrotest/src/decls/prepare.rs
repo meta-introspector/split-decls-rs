@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Error!();
-        ExpandedTest!();
         Project!();
+        ExpandedTest!();
         Result!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! prepare {
     };
 }
 
-prepare!()
+prepare!();

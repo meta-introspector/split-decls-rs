@@ -11,4 +11,4 @@ macro_rules! collect_bounds {
     };
 }
 
-collect_bounds!()
+collect_bounds!();

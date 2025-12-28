@@ -5,4 +5,4 @@ linux, on `aarch64`, `x86` and `x86_64`.") ;
     };
 }
 
-macro_4!()
+macro_4!();

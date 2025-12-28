@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Interner!();
-        Goal!();
-        GenericArg!();
         CanonicalState!();
-        Probe!();
         Predicate!();
+        Interner!();
+        Probe!();
+        GenericArg!();
         QueryResult!();
         CanonicalVarValues!();
+        Goal!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! GoalEvaluation {
     };
 }
 
-GoalEvaluation!()
+GoalEvaluation!();

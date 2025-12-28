@@ -11,4 +11,4 @@ macro_rules! ArchiveMember {
     };
 }
 
-ArchiveMember!()
+ArchiveMember!();

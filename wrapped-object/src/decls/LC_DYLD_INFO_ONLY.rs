@@ -4,4 +4,4 @@ macro_rules! LC_DYLD_INFO_ONLY {
     };
 }
 
-LC_DYLD_INFO_ONLY!()
+LC_DYLD_INFO_ONLY!();

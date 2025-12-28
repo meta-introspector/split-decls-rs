@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Result!();
-        NoArg!();
         Opcode!();
+        NoArg!();
+        Result!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_451 {
     };
 }
 
-impl_451!()
+impl_451!();

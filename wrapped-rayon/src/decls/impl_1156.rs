@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        IntoIter!();
-        ChunksExact!();
-        Producer!();
         ChunksExactProducer!();
+        IntoIter!();
+        Producer!();
+        ChunksExact!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_1156 {
     };
 }
 
-impl_1156!()
+impl_1156!();

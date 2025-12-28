@@ -4,4 +4,4 @@ macro_rules! LINE_HORIZ {
     };
 }
 
-LINE_HORIZ!()
+LINE_HORIZ!();

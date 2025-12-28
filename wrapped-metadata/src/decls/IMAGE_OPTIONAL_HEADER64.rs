@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         IMAGE_DLL_CHARACTERISTICS!();
-        IMAGE_SUBSYSTEM!();
         IMAGE_OPTIONAL_HEADER_MAGIC!();
+        IMAGE_SUBSYSTEM!();
         IMAGE_DATA_DIRECTORY!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! IMAGE_OPTIONAL_HEADER64 {
     };
 }
 
-IMAGE_OPTIONAL_HEADER64!()
+IMAGE_OPTIONAL_HEADER64!();

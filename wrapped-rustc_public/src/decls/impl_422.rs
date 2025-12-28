@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        GenericArgs!();
-        TraitRef!();
         GenericArgKind!();
+        GenericArgs!();
         Ty!();
+        TraitRef!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_422 {
     };
 }
 
-impl_422!()
+impl_422!();

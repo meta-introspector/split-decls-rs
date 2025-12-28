@@ -4,4 +4,4 @@ macro_rules! rwu_table {
     };
 }
 
-rwu_table!()
+rwu_table!();

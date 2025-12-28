@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        LinkerFlavorCli!();
         StaticCow!();
+        LinkerFlavorCli!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! LinkArgsCli {
     };
 }
 
-LinkArgsCli!()
+LinkArgsCli!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Ok!();
         Finalize!();
         DeleteFull!();
-        Ok!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! finalize_session_directory {
     };
 }
 
-finalize_session_directory!()
+finalize_session_directory!();

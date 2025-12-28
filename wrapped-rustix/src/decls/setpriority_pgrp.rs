@@ -12,4 +12,4 @@ macro_rules! setpriority_pgrp {
     };
 }
 
-setpriority_pgrp!()
+setpriority_pgrp!();

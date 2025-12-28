@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Layer!();
         FilterFn!();
         Context!();
+        Layer!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_60 {
     };
 }
 
-impl_60!()
+impl_60!();

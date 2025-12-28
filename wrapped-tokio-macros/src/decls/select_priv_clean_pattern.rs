@@ -4,4 +4,4 @@ macro_rules! select_priv_clean_pattern {
     };
 }
 
-select_priv_clean_pattern!()
+select_priv_clean_pattern!();

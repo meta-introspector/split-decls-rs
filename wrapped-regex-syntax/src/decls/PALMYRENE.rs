@@ -4,4 +4,4 @@ macro_rules! PALMYRENE {
     };
 }
 
-PALMYRENE!()
+PALMYRENE!();

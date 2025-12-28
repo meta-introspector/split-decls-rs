@@ -4,4 +4,4 @@ macro_rules! IndexOccupiedEntry {
     };
 }
 
-IndexOccupiedEntry!()
+IndexOccupiedEntry!();

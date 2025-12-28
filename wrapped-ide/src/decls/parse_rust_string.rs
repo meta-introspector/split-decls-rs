@@ -12,4 +12,4 @@ macro_rules! parse_rust_string {
     };
 }
 
-parse_rust_string!()
+parse_rust_string!();

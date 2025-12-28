@@ -4,4 +4,4 @@ macro_rules! diagnostics_registry {
     };
 }
 
-diagnostics_registry!()
+diagnostics_registry!();

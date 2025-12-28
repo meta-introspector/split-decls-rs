@@ -11,4 +11,4 @@ macro_rules! update_derive {
     };
 }
 
-update_derive!()
+update_derive!();

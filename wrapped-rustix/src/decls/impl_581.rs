@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        UCred!();
         AncillaryDrain!();
         RecvAncillaryMessage!();
-        AncillaryIter!();
-        UCred!();
         RecvAncillaryBuffer!();
+        AncillaryIter!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_581 {
     };
 }
 
-impl_581!()
+impl_581!();

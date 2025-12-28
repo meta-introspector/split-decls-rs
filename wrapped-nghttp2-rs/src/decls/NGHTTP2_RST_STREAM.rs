@@ -4,4 +4,4 @@ macro_rules! NGHTTP2_RST_STREAM {
     };
 }
 
-NGHTTP2_RST_STREAM!()
+NGHTTP2_RST_STREAM!();

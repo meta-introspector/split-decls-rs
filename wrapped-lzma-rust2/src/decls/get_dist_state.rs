@@ -4,4 +4,4 @@ macro_rules! get_dist_state {
     };
 }
 
-get_dist_state!()
+get_dist_state!();

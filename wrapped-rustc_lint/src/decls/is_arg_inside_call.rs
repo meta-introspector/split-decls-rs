@@ -4,4 +4,4 @@ macro_rules! is_arg_inside_call {
     };
 }
 
-is_arg_inside_call!()
+is_arg_inside_call!();

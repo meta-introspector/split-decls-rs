@@ -4,4 +4,4 @@ macro_rules! durability {
     };
 }
 
-durability!()
+durability!();

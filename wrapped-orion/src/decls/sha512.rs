@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        UnknownCryptoError!();
         Sha512!();
+        UnknownCryptoError!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! sha512 {
     };
 }
 
-sha512!()
+sha512!();

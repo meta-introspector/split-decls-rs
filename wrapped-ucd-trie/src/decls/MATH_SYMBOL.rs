@@ -4,4 +4,4 @@ macro_rules! MATH_SYMBOL {
     };
 }
 
-MATH_SYMBOL!()
+MATH_SYMBOL!();

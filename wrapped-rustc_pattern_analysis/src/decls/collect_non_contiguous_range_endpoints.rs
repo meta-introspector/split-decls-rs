@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Matrix!();
-        Constructor!();
-        PatOrWild!();
-        PatCx!();
         IntRange!();
+        PatCx!();
+        Constructor!();
+        Matrix!();
+        PatOrWild!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! collect_non_contiguous_range_endpoints {
     };
 }
 
-collect_non_contiguous_range_endpoints!()
+collect_non_contiguous_range_endpoints!();

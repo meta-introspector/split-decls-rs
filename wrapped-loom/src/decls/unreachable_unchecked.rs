@@ -4,4 +4,4 @@ macro_rules! unreachable_unchecked {
     };
 }
 
-unreachable_unchecked!()
+unreachable_unchecked!();

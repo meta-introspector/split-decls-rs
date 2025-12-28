@@ -4,4 +4,4 @@ macro_rules! find_defs {
     };
 }
 
-find_defs!()
+find_defs!();

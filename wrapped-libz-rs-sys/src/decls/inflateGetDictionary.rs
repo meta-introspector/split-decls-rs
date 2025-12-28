@@ -4,4 +4,4 @@ macro_rules! inflateGetDictionary {
     };
 }
 
-inflateGetDictionary!()
+inflateGetDictionary!();

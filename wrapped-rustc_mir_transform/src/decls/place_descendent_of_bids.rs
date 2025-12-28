@@ -4,4 +4,4 @@ macro_rules! place_descendent_of_bids {
     };
 }
 
-place_descendent_of_bids!()
+place_descendent_of_bids!();

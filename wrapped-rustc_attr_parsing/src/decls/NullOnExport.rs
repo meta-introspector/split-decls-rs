@@ -4,4 +4,4 @@ macro_rules! NullOnExport {
     };
 }
 
-NullOnExport!()
+NullOnExport!();

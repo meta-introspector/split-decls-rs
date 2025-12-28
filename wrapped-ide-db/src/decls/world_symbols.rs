@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        RootDatabase!();
-        SymbolIndex!();
-        LibraryRoots!();
         Query!();
+        LibraryRoots!();
+        SymbolIndex!();
         LocalRoots!();
+        RootDatabase!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! world_symbols {
     };
 }
 
-world_symbols!()
+world_symbols!();

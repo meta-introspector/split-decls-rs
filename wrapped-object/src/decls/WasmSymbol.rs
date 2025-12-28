@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        WasmFile!();
         ObjectSymbol!();
-        SymbolIndex!();
         WasmSymbolInternal!();
+        SymbolIndex!();
+        WasmFile!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! WasmSymbol {
     };
 }
 
-WasmSymbol!()
+WasmSymbol!();

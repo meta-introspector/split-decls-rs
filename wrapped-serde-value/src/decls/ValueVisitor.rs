@@ -4,4 +4,4 @@ macro_rules! ValueVisitor {
     };
 }
 
-ValueVisitor!()
+ValueVisitor!();

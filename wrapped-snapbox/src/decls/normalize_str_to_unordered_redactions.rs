@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        LinesWithTerminator!();
         Redactions!();
+        LinesWithTerminator!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! normalize_str_to_unordered_redactions {
     };
 }
 
-normalize_str_to_unordered_redactions!()
+normalize_str_to_unordered_redactions!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Events!();
         Poll!();
+        Events!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Iter {
     };
 }
 
-Iter!()
+Iter!();

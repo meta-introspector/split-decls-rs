@@ -4,4 +4,4 @@ macro_rules! RawSocketType {
     };
 }
 
-RawSocketType!()
+RawSocketType!();

@@ -11,4 +11,4 @@ macro_rules! bitwise {
     };
 }
 
-bitwise!()
+bitwise!();

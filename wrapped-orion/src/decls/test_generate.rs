@@ -4,4 +4,4 @@ macro_rules! test_generate {
     };
 }
 
-test_generate!()
+test_generate!();

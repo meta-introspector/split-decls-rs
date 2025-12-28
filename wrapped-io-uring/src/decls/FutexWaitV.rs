@@ -4,4 +4,4 @@ macro_rules! FutexWaitV {
     };
 }
 
-FutexWaitV!()
+FutexWaitV!();

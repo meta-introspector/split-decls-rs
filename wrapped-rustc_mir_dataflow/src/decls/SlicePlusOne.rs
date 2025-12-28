@@ -4,4 +4,4 @@ macro_rules! SlicePlusOne {
     };
 }
 
-SlicePlusOne!()
+SlicePlusOne!();

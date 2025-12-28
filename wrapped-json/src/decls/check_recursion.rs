@@ -11,4 +11,4 @@ macro_rules! check_recursion {
     };
 }
 
-check_recursion!()
+check_recursion!();

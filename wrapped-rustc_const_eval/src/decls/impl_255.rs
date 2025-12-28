@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        Memory!();
+        Machine!();
         MemoryKind!();
+        FnVal!();
         AllocRef!();
         AllocKind!();
-        DumpAllocs!();
-        Machine!();
-        FnVal!();
-        InterpCx!();
-        AllocRefMut!();
         AllocInfo!();
+        InterpCx!();
+        DumpAllocs!();
+        Memory!();
+        AllocRefMut!();
     };
 }
 
@@ -22,4 +22,4 @@ macro_rules! impl_255 {
     };
 }
 
-impl_255!()
+impl_255!();

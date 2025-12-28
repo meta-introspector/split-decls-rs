@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        IAsyncOperation!();
         AsyncOperationCompletedHandlerBox!();
+        AsyncOperationCompletedHandler_Vtbl!();
         AsyncOperationCompletedHandler!();
         AsyncStatus!();
-        AsyncOperationCompletedHandler_Vtbl!();
+        IAsyncOperation!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_27 {
     };
 }
 
-impl_27!()
+impl_27!();

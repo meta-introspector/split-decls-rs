@@ -11,4 +11,4 @@ macro_rules! is_max_date {
     };
 }
 
-is_max_date!()
+is_max_date!();

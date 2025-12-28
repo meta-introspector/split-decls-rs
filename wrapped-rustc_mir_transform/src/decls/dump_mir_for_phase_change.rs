@@ -4,4 +4,4 @@ macro_rules! dump_mir_for_phase_change {
     };
 }
 
-dump_mir_for_phase_change!()
+dump_mir_for_phase_change!();

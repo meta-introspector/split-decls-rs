@@ -4,4 +4,4 @@ macro_rules! AsyncDropWithoutSyncDrop {
     };
 }
 
-AsyncDropWithoutSyncDrop!()
+AsyncDropWithoutSyncDrop!();

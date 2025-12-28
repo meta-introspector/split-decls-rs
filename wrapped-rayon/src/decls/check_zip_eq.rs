@@ -4,4 +4,4 @@ macro_rules! check_zip_eq {
     };
 }
 
-check_zip_eq!()
+check_zip_eq!();

@@ -4,4 +4,4 @@ macro_rules! groupbylazy {
     };
 }
 
-groupbylazy!()
+groupbylazy!();

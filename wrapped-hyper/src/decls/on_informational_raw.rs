@@ -12,4 +12,4 @@ macro_rules! on_informational_raw {
     };
 }
 
-on_informational_raw!()
+on_informational_raw!();

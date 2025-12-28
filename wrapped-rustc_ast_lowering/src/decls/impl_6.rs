@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        LoweringContext!();
         SelfResolver!();
+        LoweringContext!();
         DelegationResults!();
-        ImplTraitContext!();
         ImplTraitPosition!();
-        ParamMode!();
+        ImplTraitContext!();
         GenericArgsMode!();
+        ParamMode!();
         AllowReturnTypeNotation!();
     };
 }
@@ -18,4 +18,4 @@ macro_rules! impl_6 {
     };
 }
 
-impl_6!()
+impl_6!();

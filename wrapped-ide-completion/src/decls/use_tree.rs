@@ -4,4 +4,4 @@ macro_rules! use_tree {
     };
 }
 
-use_tree!()
+use_tree!();

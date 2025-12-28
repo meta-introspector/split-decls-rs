@@ -11,4 +11,4 @@ macro_rules! override_temp_dir {
     };
 }
 
-override_temp_dir!()
+override_temp_dir!();

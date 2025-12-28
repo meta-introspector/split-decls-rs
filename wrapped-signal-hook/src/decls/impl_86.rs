@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Chld!();
-        Sent!();
         ICause!();
+        Chld!();
         Cause!();
+        Sent!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_86 {
     };
 }
 
-impl_86!()
+impl_86!();

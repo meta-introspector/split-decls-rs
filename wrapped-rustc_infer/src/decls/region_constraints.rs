@@ -4,4 +4,4 @@ macro_rules! region_constraints {
     };
 }
 
-region_constraints!()
+region_constraints!();

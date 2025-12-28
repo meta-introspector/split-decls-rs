@@ -12,4 +12,4 @@ macro_rules! matches_to_edit {
     };
 }
 
-matches_to_edit!()
+matches_to_edit!();

@@ -4,4 +4,4 @@ macro_rules! R_NIOS2_GNU_VTINHERIT {
     };
 }
 
-R_NIOS2_GNU_VTINHERIT!()
+R_NIOS2_GNU_VTINHERIT!();

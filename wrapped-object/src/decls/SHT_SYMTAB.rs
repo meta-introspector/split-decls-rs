@@ -11,4 +11,4 @@ macro_rules! SHT_SYMTAB {
     };
 }
 
-SHT_SYMTAB!()
+SHT_SYMTAB!();

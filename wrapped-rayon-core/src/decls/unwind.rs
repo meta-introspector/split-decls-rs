@@ -4,4 +4,4 @@ macro_rules! unwind {
     };
 }
 
-unwind!()
+unwind!();

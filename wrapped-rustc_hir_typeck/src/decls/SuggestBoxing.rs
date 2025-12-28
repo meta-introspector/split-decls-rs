@@ -4,4 +4,4 @@ macro_rules! SuggestBoxing {
     };
 }
 
-SuggestBoxing!()
+SuggestBoxing!();

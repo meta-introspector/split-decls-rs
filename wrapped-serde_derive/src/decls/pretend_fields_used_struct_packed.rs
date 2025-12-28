@@ -12,4 +12,4 @@ macro_rules! pretend_fields_used_struct_packed {
     };
 }
 
-pretend_fields_used_struct_packed!()
+pretend_fields_used_struct_packed!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        SectionId!();
         ComdatKind!();
         SymbolId!();
+        SectionId!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Comdat {
     };
 }
 
-Comdat!()
+Comdat!();

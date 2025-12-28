@@ -4,4 +4,4 @@ macro_rules! ODK_NULL {
     };
 }
 
-ODK_NULL!()
+ODK_NULL!();

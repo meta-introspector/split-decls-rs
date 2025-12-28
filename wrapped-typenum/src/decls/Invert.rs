@@ -4,4 +4,4 @@ macro_rules! Invert {
     };
 }
 
-Invert!()
+Invert!();

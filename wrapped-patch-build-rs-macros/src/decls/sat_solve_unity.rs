@@ -4,4 +4,4 @@ macro_rules! sat_solve_unity {
     };
 }
 
-sat_solve_unity!()
+sat_solve_unity!();

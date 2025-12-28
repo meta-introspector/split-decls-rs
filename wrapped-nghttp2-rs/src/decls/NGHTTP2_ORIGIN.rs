@@ -4,4 +4,4 @@ macro_rules! NGHTTP2_ORIGIN {
     };
 }
 
-NGHTTP2_ORIGIN!()
+NGHTTP2_ORIGIN!();

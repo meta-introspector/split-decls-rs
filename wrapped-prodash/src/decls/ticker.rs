@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Duration!();
         Item!();
+        Duration!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! ticker {
     };
 }
 
-ticker!()
+ticker!();

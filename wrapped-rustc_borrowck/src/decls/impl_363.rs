@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        RegionElement!();
         ToElementIndex!();
-        PlaceholderIndices!();
         RegionValues!();
         LivenessValues!();
-        RegionElement!();
+        PlaceholderIndices!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_363 {
     };
 }
 
-impl_363!()
+impl_363!();

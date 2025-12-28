@@ -4,4 +4,4 @@ macro_rules! Palette {
     };
 }
 
-Palette!()
+Palette!();

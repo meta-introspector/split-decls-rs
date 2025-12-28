@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Reference!();
         Maybe!();
         TryFromBytes!();
-        Reference!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! unsafe_impl {
     };
 }
 
-unsafe_impl!()
+unsafe_impl!();

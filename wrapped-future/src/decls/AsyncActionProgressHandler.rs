@@ -4,4 +4,4 @@ macro_rules! AsyncActionProgressHandler {
     };
 }
 
-AsyncActionProgressHandler!()
+AsyncActionProgressHandler!();

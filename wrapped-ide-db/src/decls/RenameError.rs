@@ -4,4 +4,4 @@ macro_rules! RenameError {
     };
 }
 
-RenameError!()
+RenameError!();

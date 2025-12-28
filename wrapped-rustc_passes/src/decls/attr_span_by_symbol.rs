@@ -11,4 +11,4 @@ macro_rules! attr_span_by_symbol {
     };
 }
 
-attr_span_by_symbol!()
+attr_span_by_symbol!();

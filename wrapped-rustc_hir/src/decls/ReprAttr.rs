@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        PrintAttribute!();
         IntType!();
+        PrintAttribute!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! ReprAttr {
     };
 }
 
-ReprAttr!()
+ReprAttr!();

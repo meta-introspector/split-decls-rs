@@ -4,4 +4,4 @@ macro_rules! coherence {
     };
 }
 
-coherence!()
+coherence!();

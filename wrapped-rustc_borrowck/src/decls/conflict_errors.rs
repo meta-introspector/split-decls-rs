@@ -4,4 +4,4 @@ macro_rules! conflict_errors {
     };
 }
 
-conflict_errors!()
+conflict_errors!();

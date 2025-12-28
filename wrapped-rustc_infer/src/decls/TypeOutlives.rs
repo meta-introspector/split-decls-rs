@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        TypeOutlivesDelegate!();
         VerifyBoundCx!();
+        TypeOutlivesDelegate!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! TypeOutlives {
     };
 }
 
-TypeOutlives!()
+TypeOutlives!();

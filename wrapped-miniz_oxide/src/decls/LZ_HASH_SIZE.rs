@@ -4,4 +4,4 @@ macro_rules! LZ_HASH_SIZE {
     };
 }
 
-LZ_HASH_SIZE!()
+LZ_HASH_SIZE!();

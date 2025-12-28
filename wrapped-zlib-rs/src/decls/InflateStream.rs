@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Bytef!();
         Allocator!();
         State!();
+        Bytef!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! InflateStream {
     };
 }
 
-InflateStream!()
+InflateStream!();

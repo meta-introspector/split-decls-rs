@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        InferCtxt!();
         OpportunisticVarResolver!();
+        InferCtxt!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_178 {
     };
 }
 
-impl_178!()
+impl_178!();

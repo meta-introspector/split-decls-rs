@@ -4,4 +4,4 @@ macro_rules! R_LARCH_SOP_PUSH_TLS_TPREL {
     };
 }
 
-R_LARCH_SOP_PUSH_TLS_TPREL!()
+R_LARCH_SOP_PUSH_TLS_TPREL!();

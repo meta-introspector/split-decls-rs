@@ -11,4 +11,4 @@ macro_rules! scientific_exponent {
     };
 }
 
-scientific_exponent!()
+scientific_exponent!();

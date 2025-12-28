@@ -4,4 +4,4 @@ macro_rules! is_doc_alias_attrs_contain_symbol {
     };
 }
 
-is_doc_alias_attrs_contain_symbol!()
+is_doc_alias_attrs_contain_symbol!();

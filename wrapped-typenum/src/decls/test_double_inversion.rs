@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Invert!();
         Unsigned!();
+        Invert!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! test_double_inversion {
     };
 }
 
-test_double_inversion!()
+test_double_inversion!();

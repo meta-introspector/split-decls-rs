@@ -4,4 +4,4 @@ macro_rules! SG_FVMLIB {
     };
 }
 
-SG_FVMLIB!()
+SG_FVMLIB!();

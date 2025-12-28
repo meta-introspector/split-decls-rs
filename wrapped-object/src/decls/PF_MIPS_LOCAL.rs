@@ -4,4 +4,4 @@ macro_rules! PF_MIPS_LOCAL {
     };
 }
 
-PF_MIPS_LOCAL!()
+PF_MIPS_LOCAL!();

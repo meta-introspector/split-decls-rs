@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
+        PanicFuseConsumer!();
+        Folder!();
         Consumer!();
         PanicFuseFolder!();
-        PanicFuseConsumer!();
-        Reducer!();
         PanicFuseReducer!();
-        Folder!();
+        Reducer!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_750 {
     };
 }
 
-impl_750!()
+impl_750!();

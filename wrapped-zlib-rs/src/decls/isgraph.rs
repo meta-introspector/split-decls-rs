@@ -4,4 +4,4 @@ macro_rules! isgraph {
     };
 }
 
-isgraph!()
+isgraph!();

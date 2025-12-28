@@ -4,4 +4,4 @@ macro_rules! bytes_to_bits {
     };
 }
 
-bytes_to_bits!()
+bytes_to_bits!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         State!();
-        RawValue!();
-        Serializer!();
         Number!();
+        Serializer!();
+        RawValue!();
         Map!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! Compound {
     };
 }
 
-Compound!()
+Compound!();

@@ -4,4 +4,4 @@ macro_rules! R_MIPS_GPREL32 {
     };
 }
 
-R_MIPS_GPREL32!()
+R_MIPS_GPREL32!();

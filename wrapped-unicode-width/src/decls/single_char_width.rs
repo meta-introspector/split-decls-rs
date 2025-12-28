@@ -4,4 +4,4 @@ macro_rules! single_char_width {
     };
 }
 
-single_char_width!()
+single_char_width!();

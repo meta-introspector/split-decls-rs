@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Parameters!();
-        Data!();
         Fragment!();
-        Container!();
         Default!();
+        Data!();
+        Container!();
+        Parameters!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! deserialize_transparent {
     };
 }
 
-deserialize_transparent!()
+deserialize_transparent!();

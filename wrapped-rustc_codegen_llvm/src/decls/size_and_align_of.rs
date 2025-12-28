@@ -4,4 +4,4 @@ macro_rules! size_and_align_of {
     };
 }
 
-size_and_align_of!()
+size_and_align_of!();

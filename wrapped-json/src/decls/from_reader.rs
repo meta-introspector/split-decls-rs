@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        Read!();
+        Deserializer!();
+        Result!();
         Error!();
         IoRead!();
-        Read!();
-        Result!();
-        Deserializer!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! from_reader {
     };
 }
 
-from_reader!()
+from_reader!();

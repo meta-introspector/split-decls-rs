@@ -11,4 +11,4 @@ macro_rules! insert_reference_to_gdb_debug_scripts_section_global {
     };
 }
 
-insert_reference_to_gdb_debug_scripts_section_global!()
+insert_reference_to_gdb_debug_scripts_section_global!();

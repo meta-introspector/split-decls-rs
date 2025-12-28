@@ -4,4 +4,4 @@ macro_rules! PROC_TRACE_CTL {
     };
 }
 
-PROC_TRACE_CTL!()
+PROC_TRACE_CTL!();

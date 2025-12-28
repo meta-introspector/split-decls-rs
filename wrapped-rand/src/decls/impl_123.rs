@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Rng!();
-        Choose!();
         SampleString!();
+        Choose!();
+        Rng!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_123 {
     };
 }
 
-impl_123!()
+impl_123!();

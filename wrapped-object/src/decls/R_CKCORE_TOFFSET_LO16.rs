@@ -4,4 +4,4 @@ macro_rules! R_CKCORE_TOFFSET_LO16 {
     };
 }
 
-R_CKCORE_TOFFSET_LO16!()
+R_CKCORE_TOFFSET_LO16!();

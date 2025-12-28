@@ -4,4 +4,4 @@ macro_rules! linux_gnu {
     };
 }
 
-linux_gnu!()
+linux_gnu!();

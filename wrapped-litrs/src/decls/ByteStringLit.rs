@@ -11,4 +11,4 @@ macro_rules! ByteStringLit {
     };
 }
 
-ByteStringLit!()
+ByteStringLit!();

@@ -4,4 +4,4 @@ macro_rules! valtrees {
     };
 }
 
-valtrees!()
+valtrees!();

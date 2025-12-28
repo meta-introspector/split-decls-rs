@@ -11,4 +11,4 @@ macro_rules! socket_cookie {
     };
 }
 
-socket_cookie!()
+socket_cookie!();

@@ -4,4 +4,4 @@ macro_rules! PARENT_TAG {
     };
 }
 
-PARENT_TAG!()
+PARENT_TAG!();

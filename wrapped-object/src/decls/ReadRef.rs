@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Object!();
-        Result!();
         Pod!();
+        Result!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! ReadRef {
     };
 }
 
-ReadRef!()
+ReadRef!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        NoHashHasher!();
         BuildNoHashHasher!();
         IsEnabled!();
+        NoHashHasher!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! IntSet {
     };
 }
 
-IntSet!()
+IntSet!();

@@ -4,4 +4,4 @@ macro_rules! IVLN2_L {
     };
 }
 
-IVLN2_L!()
+IVLN2_L!();

@@ -4,4 +4,4 @@ macro_rules! UNQUOTED_STRING {
     };
 }
 
-UNQUOTED_STRING!()
+UNQUOTED_STRING!();

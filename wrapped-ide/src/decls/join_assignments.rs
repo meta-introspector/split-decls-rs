@@ -4,4 +4,4 @@ macro_rules! join_assignments {
     };
 }
 
-join_assignments!()
+join_assignments!();

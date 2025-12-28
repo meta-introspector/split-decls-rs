@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        CanonicalizeQueryResponse!();
-        Canonicalizer!();
         CanonicalizeFreeRegionsOtherThanStatic!();
-        CanonicalizeUserTypeAnnotation!();
-        InferCtxt!();
         CanonicalizeAllFreeRegions!();
+        CanonicalizeUserTypeAnnotation!();
+        Canonicalizer!();
+        InferCtxt!();
+        CanonicalizeQueryResponse!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_23 {
     };
 }
 
-impl_23!()
+impl_23!();

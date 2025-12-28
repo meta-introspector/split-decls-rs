@@ -4,4 +4,4 @@ macro_rules! cancelled {
     };
 }
 
-cancelled!()
+cancelled!();

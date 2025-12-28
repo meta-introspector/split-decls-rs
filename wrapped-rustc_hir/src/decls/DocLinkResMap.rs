@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Res!();
         Namespace!();
+        Res!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! DocLinkResMap {
     };
 }
 
-DocLinkResMap!()
+DocLinkResMap!();

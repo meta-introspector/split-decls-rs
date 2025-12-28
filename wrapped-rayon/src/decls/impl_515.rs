@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Reducer!();
         IntoParallelIterator!();
+        Reducer!();
         FlatMapConsumer!();
         UnindexedConsumer!();
     };
@@ -14,4 +14,4 @@ macro_rules! impl_515 {
     };
 }
 
-impl_515!()
+impl_515!();

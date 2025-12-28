@@ -26,4 +26,4 @@ fn main() {
     };
 }
 
-mkbuildrs_impl!()
+mkbuildrs_impl!();

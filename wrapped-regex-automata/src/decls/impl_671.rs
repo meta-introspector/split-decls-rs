@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Captures!();
+        MatchError!();
         TryCapturesIter!();
         Input!();
-        MatchError!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_671 {
     };
 }
 
-impl_671!()
+impl_671!();

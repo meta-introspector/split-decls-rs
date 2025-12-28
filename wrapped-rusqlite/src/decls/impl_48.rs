@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Blob!();
         Result!();
         Error!();
-        Blob!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_48 {
     };
 }
 
-impl_48!()
+impl_48!();

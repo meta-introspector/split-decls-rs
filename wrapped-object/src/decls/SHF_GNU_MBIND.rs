@@ -4,4 +4,4 @@ macro_rules! SHF_GNU_MBIND {
     };
 }
 
-SHF_GNU_MBIND!()
+SHF_GNU_MBIND!();

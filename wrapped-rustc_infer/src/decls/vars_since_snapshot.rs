@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        UndoLog!();
         UnificationTable!();
+        UndoLog!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! vars_since_snapshot {
     };
 }
 
-vars_since_snapshot!()
+vars_since_snapshot!();

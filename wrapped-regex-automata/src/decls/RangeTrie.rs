@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        NextDupe!();
         NextInsert!();
         NextIter!();
+        NextDupe!();
         State!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! RangeTrie {
     };
 }
 
-RangeTrie!()
+RangeTrie!();

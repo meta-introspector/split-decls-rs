@@ -4,4 +4,4 @@ macro_rules! MissingOneOfTraitItem {
     };
 }
 
-MissingOneOfTraitItem!()
+MissingOneOfTraitItem!();

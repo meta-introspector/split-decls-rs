@@ -4,4 +4,4 @@ macro_rules! AssocKindMismatchWrapInBracesSugg {
     };
 }
 
-AssocKindMismatchWrapInBracesSugg!()
+AssocKindMismatchWrapInBracesSugg!();

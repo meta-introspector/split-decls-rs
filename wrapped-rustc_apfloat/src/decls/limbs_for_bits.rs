@@ -4,4 +4,4 @@ macro_rules! limbs_for_bits {
     };
 }
 
-limbs_for_bits!()
+limbs_for_bits!();

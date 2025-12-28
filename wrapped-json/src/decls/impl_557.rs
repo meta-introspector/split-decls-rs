@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Error!();
-        NumberFieldDeserializer!();
-        Value!();
-        Deserializer!();
         Result!();
+        Error!();
+        Deserializer!();
+        Value!();
+        NumberFieldDeserializer!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_557 {
     };
 }
 
-impl_557!()
+impl_557!();

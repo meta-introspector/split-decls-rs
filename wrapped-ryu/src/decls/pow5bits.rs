@@ -4,4 +4,4 @@ macro_rules! pow5bits {
     };
 }
 
-pow5bits!()
+pow5bits!();

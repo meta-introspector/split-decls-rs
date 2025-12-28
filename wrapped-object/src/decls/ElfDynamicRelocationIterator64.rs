@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Endian!();
         FileHeader64!();
         ElfDynamicRelocationIterator!();
+        Endian!();
         Endianness!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! ElfDynamicRelocationIterator64 {
     };
 }
 
-ElfDynamicRelocationIterator64!()
+ElfDynamicRelocationIterator64!();

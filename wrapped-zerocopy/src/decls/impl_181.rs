@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
         ConvertError!();
-        Unaligned!();
-        AlignmentError!();
-        Alignment!();
-        KnownLayout!();
         Validity!();
+        Unaligned!();
         Immutable!();
+        KnownLayout!();
+        Alignment!();
+        AlignmentError!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_181 {
     };
 }
 
-impl_181!()
+impl_181!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        MockObligationCause!();
         MockObligationCauseCode!();
-        Span!();
         LocalDefId!();
+        Span!();
+        MockObligationCause!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_43 {
     };
 }
 
-impl_43!()
+impl_43!();

@@ -4,4 +4,4 @@ macro_rules! R_CKCORE_GOTPC {
     };
 }
 
-R_CKCORE_GOTPC!()
+R_CKCORE_GOTPC!();

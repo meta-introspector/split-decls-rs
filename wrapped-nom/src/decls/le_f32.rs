@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Parser!();
-        Error!();
         Streaming!();
-        Needed!();
         ParseError!();
         Input!();
+        Parser!();
+        Needed!();
+        Error!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! le_f32 {
     };
 }
 
-le_f32!()
+le_f32!();

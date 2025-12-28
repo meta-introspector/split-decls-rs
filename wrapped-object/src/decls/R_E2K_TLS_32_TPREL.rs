@@ -4,4 +4,4 @@ macro_rules! R_E2K_TLS_32_TPREL {
     };
 }
 
-R_E2K_TLS_32_TPREL!()
+R_E2K_TLS_32_TPREL!();

@@ -4,4 +4,4 @@ macro_rules! R_XTENSA_JMP_SLOT {
     };
 }
 
-R_XTENSA_JMP_SLOT!()
+R_XTENSA_JMP_SLOT!();

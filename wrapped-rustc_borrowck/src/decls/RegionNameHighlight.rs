@@ -4,4 +4,4 @@ macro_rules! RegionNameHighlight {
     };
 }
 
-RegionNameHighlight!()
+RegionNameHighlight!();

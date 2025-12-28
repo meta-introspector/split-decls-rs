@@ -4,4 +4,4 @@ macro_rules! R_AARCH64_MOVW_GOTOFF_G1 {
     };
 }
 
-R_AARCH64_MOVW_GOTOFF_G1!()
+R_AARCH64_MOVW_GOTOFF_G1!();

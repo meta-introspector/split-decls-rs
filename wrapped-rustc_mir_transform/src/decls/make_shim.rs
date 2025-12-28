@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Optimizations!();
         DerefSource!();
+        Optimizations!();
         Adjustment!();
         CallKind!();
     };
@@ -14,4 +14,4 @@ macro_rules! make_shim {
     };
 }
 
-make_shim!()
+make_shim!();

@@ -11,4 +11,4 @@ macro_rules! encode_simple {
     };
 }
 
-encode_simple!()
+encode_simple!();

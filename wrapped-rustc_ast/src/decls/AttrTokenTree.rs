@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Token!();
         DelimSpacing!();
-        Spacing!();
         AttrsTarget!();
-        TokenTree!();
-        AttrTokenStream!();
-        DelimSpan!();
         Delimiter!();
+        Token!();
+        Spacing!();
+        TokenTree!();
+        DelimSpan!();
+        AttrTokenStream!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! AttrTokenTree {
     };
 }
 
-AttrTokenTree!()
+AttrTokenTree!();

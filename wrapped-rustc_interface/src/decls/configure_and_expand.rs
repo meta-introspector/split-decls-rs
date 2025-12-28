@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        ProcMacroCratePanicAbort!();
         MixedProcMacroCrate!();
         MixedBinCrate!();
+        ProcMacroCratePanicAbort!();
         LintStoreExpandImpl!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! configure_and_expand {
     };
 }
 
-configure_and_expand!()
+configure_and_expand!();

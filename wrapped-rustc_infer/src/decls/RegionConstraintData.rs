@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Verify!();
         Constraint!();
         SubregionOrigin!();
+        Verify!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! RegionConstraintData {
     };
 }
 
-RegionConstraintData!()
+RegionConstraintData!();

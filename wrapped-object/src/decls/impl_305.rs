@@ -1,26 +1,26 @@
 macro_rules! deps {
     () => {
-        SymbolTable!();
-        Versym!();
-        Endian!();
-        Result!();
-        StringTable!();
-        ReadRef!();
-        VerneedIterator!();
-        FileHeader!();
-        SectionHeader!();
-        Dyn!();
-        HashTable!();
-        GnuHashHeader!();
-        SectionTable!();
-        VersionTable!();
-        RelocationSections!();
-        HashHeader!();
         GnuHashTable!();
-        Item!();
-        Error!();
+        Endian!();
+        FileHeader!();
+        HashTable!();
+        RelocationSections!();
+        Result!();
+        SectionHeader!();
+        SectionTable!();
+        HashHeader!();
+        VerneedIterator!();
+        VersionTable!();
         SectionIndex!();
+        Error!();
         VerdefIterator!();
+        Versym!();
+        StringTable!();
+        SymbolTable!();
+        ReadRef!();
+        Item!();
+        GnuHashHeader!();
+        Dyn!();
     };
 }
 
@@ -31,4 +31,4 @@ macro_rules! impl_305 {
     };
 }
 
-impl_305!()
+impl_305!();

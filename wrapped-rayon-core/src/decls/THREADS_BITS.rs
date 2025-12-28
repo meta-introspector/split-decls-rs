@@ -4,4 +4,4 @@ macro_rules! THREADS_BITS {
     };
 }
 
-THREADS_BITS!()
+THREADS_BITS!();

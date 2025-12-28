@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        UnusedDefSuggestion!();
         LateContext!();
+        UnusedDefSuggestion!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! UnusedDef {
     };
 }
 
-UnusedDef!()
+UnusedDef!();

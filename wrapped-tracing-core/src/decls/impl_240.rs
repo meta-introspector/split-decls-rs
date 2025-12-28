@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Current!();
         Id!();
         CurrentInner!();
+        Current!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_240 {
     };
 }
 
-impl_240!()
+impl_240!();

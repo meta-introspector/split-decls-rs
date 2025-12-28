@@ -7,4 +7,4 @@ macro_rules! usage {
     };
 }
 
-usage!()
+usage!();

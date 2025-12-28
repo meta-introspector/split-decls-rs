@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        MetadataKindId!();
-        SCx!();
         GenericCx!();
+        SCx!();
+        MetadataKindId!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_225 {
     };
 }
 
-impl_225!()
+impl_225!();

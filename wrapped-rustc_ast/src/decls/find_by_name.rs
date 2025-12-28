@@ -11,4 +11,4 @@ macro_rules! find_by_name {
     };
 }
 
-find_by_name!()
+find_by_name!();

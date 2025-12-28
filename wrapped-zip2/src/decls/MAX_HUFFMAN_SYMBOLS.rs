@@ -4,4 +4,4 @@ macro_rules! MAX_HUFFMAN_SYMBOLS {
     };
 }
 
-MAX_HUFFMAN_SYMBOLS!()
+MAX_HUFFMAN_SYMBOLS!();

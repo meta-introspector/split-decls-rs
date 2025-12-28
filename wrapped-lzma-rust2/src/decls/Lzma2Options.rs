@@ -11,4 +11,4 @@ macro_rules! Lzma2Options {
     };
 }
 
-Lzma2Options!()
+Lzma2Options!();

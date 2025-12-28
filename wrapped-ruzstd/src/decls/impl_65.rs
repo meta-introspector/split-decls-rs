@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        FSETableError!();
         DictionaryDecodeError!();
-        HuffmanTableError!();
+        FSETableError!();
         Error!();
+        HuffmanTableError!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_65 {
     };
 }
 
-impl_65!()
+impl_65!();

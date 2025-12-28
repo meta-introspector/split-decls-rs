@@ -4,4 +4,4 @@ macro_rules! SetUniqueComdat {
     };
 }
 
-SetUniqueComdat!()
+SetUniqueComdat!();

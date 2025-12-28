@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        QueryCtxt!();
+        DynamicConfig!();
         QueryKeyStringCache!();
         QueryConfigRestored!();
-        DynamicConfig!();
-        QueryCtxt!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! define_queries {
     };
 }
 
-define_queries!()
+define_queries!();

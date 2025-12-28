@@ -12,4 +12,4 @@ macro_rules! ImageTlsDirectory64 {
     };
 }
 
-ImageTlsDirectory64!()
+ImageTlsDirectory64!();

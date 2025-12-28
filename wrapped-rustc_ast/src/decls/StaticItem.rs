@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Walkable!();
-        Path!();
-        Ty!();
-        Expr!();
         Safety!();
+        Ty!();
+        Path!();
+        Walkable!();
+        Expr!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! StaticItem {
     };
 }
 
-StaticItem!()
+StaticItem!();

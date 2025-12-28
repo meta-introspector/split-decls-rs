@@ -4,4 +4,4 @@ macro_rules! CHAKMA {
     };
 }
 
-CHAKMA!()
+CHAKMA!();

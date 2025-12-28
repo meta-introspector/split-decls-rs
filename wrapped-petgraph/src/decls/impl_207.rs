@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        MaybeReversedEdgeReference!();
         UndirectedAdaptor!();
         EdgeReferences!();
         EdgeRef!();
         MaybeReversedEdgeReferences!();
-        MaybeReversedEdgeReference!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_207 {
     };
 }
 
-impl_207!()
+impl_207!();

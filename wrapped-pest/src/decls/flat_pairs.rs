@@ -4,4 +4,4 @@ macro_rules! flat_pairs {
     };
 }
 
-flat_pairs!()
+flat_pairs!();

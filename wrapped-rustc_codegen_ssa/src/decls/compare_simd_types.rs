@@ -11,4 +11,4 @@ macro_rules! compare_simd_types {
     };
 }
 
-compare_simd_types!()
+compare_simd_types!();

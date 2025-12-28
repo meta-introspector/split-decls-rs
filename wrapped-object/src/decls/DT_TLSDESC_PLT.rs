@@ -4,4 +4,4 @@ macro_rules! DT_TLSDESC_PLT {
     };
 }
 
-DT_TLSDESC_PLT!()
+DT_TLSDESC_PLT!();

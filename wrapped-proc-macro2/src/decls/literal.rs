@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Literal!();
         Cursor!();
         PResult!();
+        Literal!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! literal {
     };
 }
 
-literal!()
+literal!();

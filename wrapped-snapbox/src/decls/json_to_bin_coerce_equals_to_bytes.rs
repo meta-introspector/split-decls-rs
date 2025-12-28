@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Data!();
         DataFormat!();
+        Data!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! json_to_bin_coerce_equals_to_bytes {
     };
 }
 
-json_to_bin_coerce_equals_to_bytes!()
+json_to_bin_coerce_equals_to_bytes!();

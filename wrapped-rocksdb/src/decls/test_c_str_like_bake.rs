@@ -12,4 +12,4 @@ macro_rules! test_c_str_like_bake {
     };
 }
 
-test_c_str_like_bake!()
+test_c_str_like_bake!();

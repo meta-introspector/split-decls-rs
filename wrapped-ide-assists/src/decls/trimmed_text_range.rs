@@ -4,4 +4,4 @@ macro_rules! trimmed_text_range {
     };
 }
 
-trimmed_text_range!()
+trimmed_text_range!();

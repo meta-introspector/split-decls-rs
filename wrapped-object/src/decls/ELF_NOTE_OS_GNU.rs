@@ -4,4 +4,4 @@ macro_rules! ELF_NOTE_OS_GNU {
     };
 }
 
-ELF_NOTE_OS_GNU!()
+ELF_NOTE_OS_GNU!();

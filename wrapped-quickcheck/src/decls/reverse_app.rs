@@ -4,4 +4,4 @@ macro_rules! reverse_app {
     };
 }
 
-reverse_app!()
+reverse_app!();

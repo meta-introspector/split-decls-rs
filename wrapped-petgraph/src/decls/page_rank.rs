@@ -4,4 +4,4 @@ macro_rules! page_rank {
     };
 }
 
-page_rank!()
+page_rank!();

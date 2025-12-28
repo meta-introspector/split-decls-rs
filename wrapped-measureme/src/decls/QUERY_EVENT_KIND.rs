@@ -4,4 +4,4 @@ macro_rules! QUERY_EVENT_KIND {
     };
 }
 
-QUERY_EVENT_KIND!()
+QUERY_EVENT_KIND!();

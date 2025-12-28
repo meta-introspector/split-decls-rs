@@ -4,4 +4,4 @@ macro_rules! RT_RCDATA {
     };
 }
 
-RT_RCDATA!()
+RT_RCDATA!();

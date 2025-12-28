@@ -11,4 +11,4 @@ macro_rules! flush_pending {
     };
 }
 
-flush_pending!()
+flush_pending!();

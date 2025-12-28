@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Result!();
-        Error!();
         Column!();
+        Error!();
         ColumnMetadata!();
         Statement!();
+        Result!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_79 {
     };
 }
 
-impl_79!()
+impl_79!();

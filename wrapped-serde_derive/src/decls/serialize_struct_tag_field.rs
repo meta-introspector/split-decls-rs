@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        StructTrait!();
-        TagType!();
         Container!();
+        TagType!();
+        StructTrait!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! serialize_struct_tag_field {
     };
 }
 
-serialize_struct_tag_field!()
+serialize_struct_tag_field!();

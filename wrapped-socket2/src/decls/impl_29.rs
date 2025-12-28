@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Domain!();
         TcpKeepalive!();
-        Socket!();
         Type!();
+        Domain!();
+        Socket!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_29 {
     };
 }
 
-impl_29!()
+impl_29!();

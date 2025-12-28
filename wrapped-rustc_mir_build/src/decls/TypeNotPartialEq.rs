@@ -4,4 +4,4 @@ macro_rules! TypeNotPartialEq {
     };
 }
 
-TypeNotPartialEq!()
+TypeNotPartialEq!();

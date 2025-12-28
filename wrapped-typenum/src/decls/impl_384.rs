@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        PrivateAndOut!();
+        B1!();
         Unsigned!();
         UInt!();
-        B1!();
         PrivateAnd!();
         B0!();
+        PrivateAndOut!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_384 {
     };
 }
 
-impl_384!()
+impl_384!();

@@ -1,19 +1,19 @@
 macro_rules! deps {
     () => {
-        SectionHeader32!();
-        SectionHeader!();
-        Symbol!();
-        Rel!();
-        Rel32!();
-        Symbol32!();
-        FileAux!();
+        FileHeader32!();
         FileAux32!();
-        CsectAux32!();
+        FileHeader!();
+        SectionHeader32!();
+        FileAux!();
         AuxHeader!();
+        Symbol32!();
+        CsectAux32!();
+        Rel!();
         CsectAux!();
         AuxHeader32!();
-        FileHeader!();
-        FileHeader32!();
+        Symbol!();
+        SectionHeader!();
+        Rel32!();
     };
 }
 
@@ -24,4 +24,4 @@ macro_rules! impl_782 {
     };
 }
 
-impl_782!()
+impl_782!();

@@ -4,4 +4,4 @@ macro_rules! STYP_TDATA {
     };
 }
 
-STYP_TDATA!()
+STYP_TDATA!();

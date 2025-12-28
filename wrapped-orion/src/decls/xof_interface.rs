@@ -4,4 +4,4 @@ macro_rules! xof_interface {
     };
 }
 
-xof_interface!()
+xof_interface!();

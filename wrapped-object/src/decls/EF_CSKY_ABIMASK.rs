@@ -4,4 +4,4 @@ macro_rules! EF_CSKY_ABIMASK {
     };
 }
 
-EF_CSKY_ABIMASK!()
+EF_CSKY_ABIMASK!();

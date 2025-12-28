@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Dispatch!();
         Kind!();
+        Dispatch!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! GLOBAL_DISPATCH {
     };
 }
 
-GLOBAL_DISPATCH!()
+GLOBAL_DISPATCH!();

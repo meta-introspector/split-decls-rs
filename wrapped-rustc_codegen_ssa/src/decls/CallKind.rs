@@ -4,4 +4,4 @@ macro_rules! CallKind {
     };
 }
 
-CallKind!()
+CallKind!();

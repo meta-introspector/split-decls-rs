@@ -4,4 +4,4 @@ macro_rules! NUM_RAND_CHARS {
     };
 }
 
-NUM_RAND_CHARS!()
+NUM_RAND_CHARS!();

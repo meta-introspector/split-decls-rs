@@ -4,4 +4,4 @@ macro_rules! query_context {
     };
 }
 
-query_context!()
+query_context!();

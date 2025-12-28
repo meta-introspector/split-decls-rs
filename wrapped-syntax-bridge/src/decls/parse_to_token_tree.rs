@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DocCommentDesugarMode!();
         RawConverter!();
+        DocCommentDesugarMode!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! parse_to_token_tree {
     };
 }
 
-parse_to_token_tree!()
+parse_to_token_tree!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        LateContext!();
         PatternKind!();
+        LateContext!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! borrow_or_assign {
     };
 }
 
-borrow_or_assign!()
+borrow_or_assign!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        SplitProducer!();
         SplitTerminatorProducer!();
+        SplitProducer!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_1318 {
     };
 }
 
-impl_1318!()
+impl_1318!();

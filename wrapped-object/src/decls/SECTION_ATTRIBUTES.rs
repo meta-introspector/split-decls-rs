@@ -4,4 +4,4 @@ macro_rules! SECTION_ATTRIBUTES {
     };
 }
 
-SECTION_ATTRIBUTES!()
+SECTION_ATTRIBUTES!();

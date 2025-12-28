@@ -4,4 +4,4 @@ macro_rules! GenericMachine {
     };
 }
 
-GenericMachine!()
+GenericMachine!();

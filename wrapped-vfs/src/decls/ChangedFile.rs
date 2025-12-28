@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        FileId!();
         Vfs!();
         Change!();
-        FileId!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! ChangedFile {
     };
 }
 
-ChangedFile!()
+ChangedFile!();

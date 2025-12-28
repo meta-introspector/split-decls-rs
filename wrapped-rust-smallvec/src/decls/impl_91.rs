@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        SmallVec!();
         Drain!();
+        SmallVec!();
         DropGuard!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_91 {
     };
 }
 
-impl_91!()
+impl_91!();

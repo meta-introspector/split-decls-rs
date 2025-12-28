@@ -4,4 +4,4 @@ macro_rules! expect_optional_utf8 {
     };
 }
 
-expect_optional_utf8!()
+expect_optional_utf8!();

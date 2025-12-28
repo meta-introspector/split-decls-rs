@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        BlockType!();
-        CompressState!();
         BlockHeader!();
+        CompressState!();
+        BlockType!();
         Matcher!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! compress_fastest {
     };
 }
 
-compress_fastest!()
+compress_fastest!();

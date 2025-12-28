@@ -4,4 +4,4 @@ macro_rules! IllFormedAttributeInputLint {
     };
 }
 
-IllFormedAttributeInputLint!()
+IllFormedAttributeInputLint!();

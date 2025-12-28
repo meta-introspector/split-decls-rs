@@ -4,4 +4,4 @@ macro_rules! ScopedKey {
     };
 }
 
-ScopedKey!()
+ScopedKey!();

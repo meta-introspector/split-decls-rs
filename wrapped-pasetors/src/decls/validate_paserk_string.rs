@@ -11,4 +11,4 @@ macro_rules! validate_paserk_string {
     };
 }
 
-validate_paserk_string!()
+validate_paserk_string!();

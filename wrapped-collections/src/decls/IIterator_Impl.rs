@@ -4,4 +4,4 @@ macro_rules! IIterator_Impl {
     };
 }
 
-IIterator_Impl!()
+IIterator_Impl!();

@@ -4,4 +4,4 @@ macro_rules! ALPHANUMERIC_ONLY {
     };
 }
 
-ALPHANUMERIC_ONLY!()
+ALPHANUMERIC_ONLY!();

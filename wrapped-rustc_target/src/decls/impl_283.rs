@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
+        ArgExtension!();
         ABI!();
         ArgAttributes!();
+        CastTarget!();
         Memory!();
         PassMode!();
-        CastTarget!();
-        ArgExtension!();
         ArgAbi!();
     };
 }
@@ -17,4 +17,4 @@ macro_rules! impl_283 {
     };
 }
 
-impl_283!()
+impl_283!();

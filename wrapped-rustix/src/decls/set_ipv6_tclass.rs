@@ -11,4 +11,4 @@ macro_rules! set_ipv6_tclass {
     };
 }
 
-set_ipv6_tclass!()
+set_ipv6_tclass!();

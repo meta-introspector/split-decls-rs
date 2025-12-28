@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        GetBitsError!();
-        FSEDecoderError!();
         FSETableError!();
+        FSEDecoderError!();
+        GetBitsError!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! DecodeSequenceError {
     };
 }
 
-DecodeSequenceError!()
+DecodeSequenceError!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        HirTyLowerer!();
         PlaceholderNotAllowedItemSignatures!();
+        HirTyLowerer!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! bad_placeholder {
     };
 }
 
-bad_placeholder!()
+bad_placeholder!();

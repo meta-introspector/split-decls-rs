@@ -4,4 +4,4 @@ macro_rules! LocationSet {
     };
 }
 
-LocationSet!()
+LocationSet!();

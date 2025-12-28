@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        UnindexedConsumer!();
         BlocksCallback!();
-        Producer!();
         ProducerCallback!();
+        UnindexedConsumer!();
+        Producer!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_293 {
     };
 }
 
-impl_293!()
+impl_293!();

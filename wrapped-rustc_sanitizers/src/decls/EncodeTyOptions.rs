@@ -4,4 +4,4 @@ macro_rules! EncodeTyOptions {
     };
 }
 
-EncodeTyOptions!()
+EncodeTyOptions!();

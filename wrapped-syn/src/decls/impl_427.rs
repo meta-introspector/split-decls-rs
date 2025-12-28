@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        ParseStream!();
-        Error!();
         Result!();
         Parse!();
         LitIntRepr!();
+        ParseStream!();
+        Error!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_427 {
     };
 }
 
-impl_427!()
+impl_427!();

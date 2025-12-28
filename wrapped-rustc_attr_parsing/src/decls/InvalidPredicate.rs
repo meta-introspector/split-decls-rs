@@ -4,4 +4,4 @@ macro_rules! InvalidPredicate {
     };
 }
 
-InvalidPredicate!()
+InvalidPredicate!();

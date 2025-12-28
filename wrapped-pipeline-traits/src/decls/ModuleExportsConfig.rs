@@ -4,4 +4,4 @@ macro_rules! ModuleExportsConfig {
     };
 }
 
-ModuleExportsConfig!()
+ModuleExportsConfig!();

@@ -4,4 +4,4 @@ macro_rules! SENTINEL_METADATA {
     };
 }
 
-SENTINEL_METADATA!()
+SENTINEL_METADATA!();

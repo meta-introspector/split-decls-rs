@@ -4,4 +4,4 @@ macro_rules! LARGE_POW5 {
     };
 }
 
-LARGE_POW5!()
+LARGE_POW5!();

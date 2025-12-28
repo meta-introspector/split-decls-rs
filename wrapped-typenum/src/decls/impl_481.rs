@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
         PrivateDivIf!();
-        Greater!();
-        SetBit!();
         SetBitOut!();
+        Internal!();
+        SetBit!();
+        Greater!();
         B1!();
         Diff!();
-        Internal!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_481 {
     };
 }
 
-impl_481!()
+impl_481!();

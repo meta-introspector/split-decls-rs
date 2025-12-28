@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Builder!();
-        NeedsTemporary!();
         BlockAnd!();
+        Builder!();
         Category!();
+        NeedsTemporary!();
         Scope!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_57 {
     };
 }
 
-impl_57!()
+impl_57!();

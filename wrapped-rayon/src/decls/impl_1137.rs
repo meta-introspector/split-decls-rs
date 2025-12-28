@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        ChunkBy!();
-        UnindexedConsumer!();
         ChunkByProducer!();
+        UnindexedConsumer!();
         ParallelIterator!();
+        ChunkBy!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_1137 {
     };
 }
 
-impl_1137!()
+impl_1137!();

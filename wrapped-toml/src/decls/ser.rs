@@ -4,4 +4,4 @@ macro_rules! ser {
     };
 }
 
-ser!()
+ser!();

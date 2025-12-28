@@ -4,4 +4,4 @@ macro_rules! ArenaMap {
     };
 }
 
-ArenaMap!()
+ArenaMap!();

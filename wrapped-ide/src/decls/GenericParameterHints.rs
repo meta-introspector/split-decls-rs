@@ -4,4 +4,4 @@ macro_rules! GenericParameterHints {
     };
 }
 
-GenericParameterHints!()
+GenericParameterHints!();

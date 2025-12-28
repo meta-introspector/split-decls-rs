@@ -12,4 +12,4 @@ macro_rules! walk_inline_const {
     };
 }
 
-walk_inline_const!()
+walk_inline_const!();

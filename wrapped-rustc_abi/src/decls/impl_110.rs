@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Variants!();
-        LayoutData!();
         FieldsShape!();
+        LayoutData!();
+        Variants!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_110 {
     };
 }
 
-impl_110!()
+impl_110!();

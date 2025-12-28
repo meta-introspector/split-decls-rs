@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        AttrVec!();
         Ty!();
         Pat!();
+        AttrVec!();
         Walkable!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! Param {
     };
 }
 
-Param!()
+Param!();

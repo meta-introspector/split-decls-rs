@@ -4,4 +4,4 @@ macro_rules! hstring_builder {
     };
 }
 
-hstring_builder!()
+hstring_builder!();

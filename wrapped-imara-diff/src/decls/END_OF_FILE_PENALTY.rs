@@ -4,4 +4,4 @@ macro_rules! END_OF_FILE_PENALTY {
     };
 }
 
-END_OF_FILE_PENALTY!()
+END_OF_FILE_PENALTY!();

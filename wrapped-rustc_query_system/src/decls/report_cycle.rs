@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Alias!();
-        CycleStack!();
-        StackCount!();
         CycleUsage!();
         Cycle!();
+        StackCount!();
+        CycleStack!();
         CycleError!();
+        Alias!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! report_cycle {
     };
 }
 
-report_cycle!()
+report_cycle!();

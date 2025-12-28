@@ -4,4 +4,4 @@ macro_rules! NT_PSINFO {
     };
 }
 
-NT_PSINFO!()
+NT_PSINFO!();

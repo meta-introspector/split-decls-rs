@@ -11,4 +11,4 @@ macro_rules! rename_path_with_retry {
     };
 }
 
-rename_path_with_retry!()
+rename_path_with_retry!();

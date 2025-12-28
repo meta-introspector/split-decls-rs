@@ -4,4 +4,4 @@ macro_rules! MockObligationCause {
     };
 }
 
-MockObligationCause!()
+MockObligationCause!();

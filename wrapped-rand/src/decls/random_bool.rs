@@ -4,4 +4,4 @@ macro_rules! random_bool {
     };
 }
 
-random_bool!()
+random_bool!();

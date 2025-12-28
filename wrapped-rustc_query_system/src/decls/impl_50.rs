@@ -1,21 +1,21 @@
 macro_rules! deps {
     () => {
+        HasDepContext!();
+        Deps!();
+        DepNodeColor!();
+        DepGraphData!();
+        DepGraphQuery!();
         CurrentDepGraph!();
+        EdgesVec!();
+        DepNodeColorMap!();
+        WorkProductMap!();
+        TaskDepsRef!();
+        StableHashingContext!();
         DepKind!();
         DepGraph!();
-        HasDepContext!();
-        EdgesVec!();
-        DepGraphData!();
-        DepNode!();
-        DepGraphQuery!();
-        WorkProductMap!();
-        StableHashingContext!();
-        Deps!();
-        TaskDeps!();
-        DepNodeColor!();
-        DepNodeColorMap!();
         SerializedDepGraph!();
-        TaskDepsRef!();
+        TaskDeps!();
+        DepNode!();
         DepContext!();
     };
 }
@@ -27,4 +27,4 @@ macro_rules! impl_50 {
     };
 }
 
-impl_50!()
+impl_50!();

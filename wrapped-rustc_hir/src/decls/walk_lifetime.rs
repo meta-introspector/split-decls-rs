@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Lifetime!();
         Visitor!();
+        Lifetime!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! walk_lifetime {
     };
 }
 
-walk_lifetime!()
+walk_lifetime!();

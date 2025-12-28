@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Rel!();
-        Rel32!();
         Endian!();
+        Rel32!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_362 {
     };
 }
 
-impl_362!()
+impl_362!();

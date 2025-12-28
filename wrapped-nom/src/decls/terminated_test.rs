@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Tag!();
-        Needed!();
-        Err!();
-        Error!();
         ErrorKind!();
+        Err!();
+        Tag!();
         IResult!();
+        Needed!();
+        Error!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! terminated_test {
     };
 }
 
-terminated_test!()
+terminated_test!();

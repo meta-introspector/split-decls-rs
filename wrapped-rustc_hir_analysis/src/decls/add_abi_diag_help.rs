@@ -5,4 +5,4 @@ macro_rules! add_abi_diag_help {
     };
 }
 
-add_abi_diag_help!()
+add_abi_diag_help!();

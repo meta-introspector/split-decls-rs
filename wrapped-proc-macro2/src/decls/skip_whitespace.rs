@@ -12,4 +12,4 @@ macro_rules! skip_whitespace {
     };
 }
 
-skip_whitespace!()
+skip_whitespace!();

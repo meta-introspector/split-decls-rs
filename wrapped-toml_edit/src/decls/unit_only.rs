@@ -11,4 +11,4 @@ macro_rules! unit_only {
     };
 }
 
-unit_only!()
+unit_only!();

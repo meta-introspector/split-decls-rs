@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        LateContext!();
         RuntimeCombinedLateLintPass!();
+        LateContext!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! late_lint_mod {
     };
 }
 
-late_lint_mod!()
+late_lint_mod!();

@@ -4,4 +4,4 @@ macro_rules! MapValueSerializer {
     };
 }
 
-MapValueSerializer!()
+MapValueSerializer!();

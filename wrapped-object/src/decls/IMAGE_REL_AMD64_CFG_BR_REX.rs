@@ -4,4 +4,4 @@ macro_rules! IMAGE_REL_AMD64_CFG_BR_REX {
     };
 }
 
-IMAGE_REL_AMD64_CFG_BR_REX!()
+IMAGE_REL_AMD64_CFG_BR_REX!();

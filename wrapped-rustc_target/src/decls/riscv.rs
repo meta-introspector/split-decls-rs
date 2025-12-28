@@ -4,4 +4,4 @@ macro_rules! riscv {
     };
 }
 
-riscv!()
+riscv!();

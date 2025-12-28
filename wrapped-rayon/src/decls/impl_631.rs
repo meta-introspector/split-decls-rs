@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        InterleaveProducer!();
         Producer!();
+        InterleaveProducer!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_631 {
     };
 }
 
-impl_631!()
+impl_631!();

@@ -4,4 +4,4 @@ macro_rules! ARABIC {
     };
 }
 
-ARABIC!()
+ARABIC!();

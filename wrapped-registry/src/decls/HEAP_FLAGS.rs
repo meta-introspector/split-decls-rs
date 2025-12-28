@@ -4,4 +4,4 @@ macro_rules! HEAP_FLAGS {
     };
 }
 
-HEAP_FLAGS!()
+HEAP_FLAGS!();

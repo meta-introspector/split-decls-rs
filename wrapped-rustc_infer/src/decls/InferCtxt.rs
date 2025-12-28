@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ObligationInspector!();
         LexicalRegionResolutions!();
+        ObligationInspector!();
         InferCtxtInner!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! InferCtxt {
     };
 }
 
-InferCtxt!()
+InferCtxt!();

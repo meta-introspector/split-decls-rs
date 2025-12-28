@@ -4,4 +4,4 @@ macro_rules! is_inner {
     };
 }
 
-is_inner!()
+is_inner!();

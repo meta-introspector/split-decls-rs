@@ -4,4 +4,4 @@ macro_rules! passes {
     };
 }
 
-passes!()
+passes!();

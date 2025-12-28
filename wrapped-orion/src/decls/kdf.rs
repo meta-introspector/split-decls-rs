@@ -4,4 +4,4 @@ macro_rules! kdf {
     };
 }
 
-kdf!()
+kdf!();

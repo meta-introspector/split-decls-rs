@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Version!();
-        U32!();
-        U16!();
         Endian!();
+        U32!();
+        Version!();
+        U16!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! Verdef {
     };
 }
 
-Verdef!()
+Verdef!();

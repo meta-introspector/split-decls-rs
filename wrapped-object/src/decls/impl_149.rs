@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Comdat!();
         ReadRef!();
+        Comdat!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_149 {
     };
 }
 
-impl_149!()
+impl_149!();

@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        WS!();
+        MathExpr!();
+        Node!();
         ExprVal!();
         MathOperator!();
-        MathExpr!();
+        WS!();
         Expr!();
-        Node!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! parse_variable_tag_lit_math_expression_with_parentheses {
     };
 }
 
-parse_variable_tag_lit_math_expression_with_parentheses!()
+parse_variable_tag_lit_math_expression_with_parentheses!();

@@ -10,4 +10,4 @@ macro_rules! historical_data {{
     };
 }
 
-load_historical_impl!()
+load_historical_impl!();

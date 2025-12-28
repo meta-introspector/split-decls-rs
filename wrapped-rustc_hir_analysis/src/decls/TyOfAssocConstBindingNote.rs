@@ -4,4 +4,4 @@ macro_rules! TyOfAssocConstBindingNote {
     };
 }
 
-TyOfAssocConstBindingNote!()
+TyOfAssocConstBindingNote!();

@@ -4,4 +4,4 @@ macro_rules! DumpableBehavior {
     };
 }
 
-DumpableBehavior!()
+DumpableBehavior!();

@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
+        AnonConst!();
+        DefPathData!();
+        Variant!();
+        Mod!();
         DefKind!();
         CtorOf!();
         OpaqueTy!();
-        AnonConst!();
-        Mod!();
-        Namespace!();
-        DefPathData!();
-        Impl!();
         CtorKind!();
+        Namespace!();
         Closure!();
-        Variant!();
+        Impl!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_59 {
     };
 }
 
-impl_59!()
+impl_59!();

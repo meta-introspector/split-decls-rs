@@ -4,4 +4,4 @@ macro_rules! RustcLayoutScalarValidRangeEnd {
     };
 }
 
-RustcLayoutScalarValidRangeEnd!()
+RustcLayoutScalarValidRangeEnd!();

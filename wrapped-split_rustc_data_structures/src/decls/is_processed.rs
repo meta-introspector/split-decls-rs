@@ -4,4 +4,4 @@ macro_rules! is_processed {
     };
 }
 
-is_processed!()
+is_processed!();

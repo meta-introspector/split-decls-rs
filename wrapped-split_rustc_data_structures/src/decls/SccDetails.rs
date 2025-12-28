@@ -4,4 +4,4 @@ macro_rules! SccDetails {
     };
 }
 
-SccDetails!()
+SccDetails!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Walkable!();
         GenericArg!();
         AssocItemConstraint!();
-        Walkable!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! AngleBracketedArg {
     };
 }
 
-AngleBracketedArg!()
+AngleBracketedArg!();

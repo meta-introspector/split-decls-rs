@@ -4,4 +4,4 @@ macro_rules! TIME_FORMAT {
     };
 }
 
-TIME_FORMAT!()
+TIME_FORMAT!();

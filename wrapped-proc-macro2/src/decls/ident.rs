@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Ident!();
         Cursor!();
         Reject!();
-        Ident!();
         PResult!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! ident {
     };
 }
 
-ident!()
+ident!();

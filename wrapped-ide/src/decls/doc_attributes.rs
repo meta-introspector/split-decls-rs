@@ -4,4 +4,4 @@ macro_rules! doc_attributes {
     };
 }
 
-doc_attributes!()
+doc_attributes!();

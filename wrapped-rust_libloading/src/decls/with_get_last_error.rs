@@ -12,4 +12,4 @@ macro_rules! with_get_last_error {
     };
 }
 
-with_get_last_error!()
+with_get_last_error!();

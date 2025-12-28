@@ -4,4 +4,4 @@ macro_rules! R_ARM_THM_XPC22 {
     };
 }
 
-R_ARM_THM_XPC22!()
+R_ARM_THM_XPC22!();

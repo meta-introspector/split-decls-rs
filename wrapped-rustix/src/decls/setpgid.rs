@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Result!();
         Pid!();
+        Result!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! setpgid {
     };
 }
 
-setpgid!()
+setpgid!();

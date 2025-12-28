@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Error!();
         Value!();
         Result!();
+        Error!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! from_value {
     };
 }
 
-from_value!()
+from_value!();

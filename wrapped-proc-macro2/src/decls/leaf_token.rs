@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        PResult!();
         TokenTree!();
-        Literal!();
-        Ident!();
         Punct!();
         Reject!();
+        Literal!();
+        Ident!();
+        PResult!();
         Cursor!();
     };
 }
@@ -17,4 +17,4 @@ macro_rules! leaf_token {
     };
 }
 
-leaf_token!()
+leaf_token!();

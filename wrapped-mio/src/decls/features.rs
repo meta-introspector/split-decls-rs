@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Registry!();
-        Waker!();
         Poll!();
+        Waker!();
+        Registry!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! features {
     };
 }
 
-features!()
+features!();

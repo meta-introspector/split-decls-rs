@@ -4,4 +4,4 @@ macro_rules! bignum {
     };
 }
 
-bignum!()
+bignum!();

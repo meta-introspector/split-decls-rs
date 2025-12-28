@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        TomlError!();
         Error!();
+        TomlError!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_350 {
     };
 }
 
-impl_350!()
+impl_350!();

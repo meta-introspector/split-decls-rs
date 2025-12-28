@@ -4,4 +4,4 @@ macro_rules! VM_PROT_EXECUTE {
     };
 }
 
-VM_PROT_EXECUTE!()
+VM_PROT_EXECUTE!();

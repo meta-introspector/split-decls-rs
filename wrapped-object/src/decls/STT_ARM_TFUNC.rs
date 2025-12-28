@@ -4,4 +4,4 @@ macro_rules! STT_ARM_TFUNC {
     };
 }
 
-STT_ARM_TFUNC!()
+STT_ARM_TFUNC!();

@@ -4,4 +4,4 @@ macro_rules! const_assert_ne {
     };
 }
 
-const_assert_ne!()
+const_assert_ne!();

@@ -4,4 +4,4 @@ macro_rules! split_at_unchecked {
     };
 }
 
-split_at_unchecked!()
+split_at_unchecked!();

@@ -4,4 +4,4 @@ macro_rules! get_files {
     };
 }
 
-get_files!()
+get_files!();

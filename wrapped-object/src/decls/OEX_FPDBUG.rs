@@ -4,4 +4,4 @@ macro_rules! OEX_FPDBUG {
     };
 }
 
-OEX_FPDBUG!()
+OEX_FPDBUG!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        IsEnabled!();
-        BuildNoHashHasher!();
         NoHashHasher!();
+        BuildNoHashHasher!();
+        IsEnabled!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! IntMap {
     };
 }
 
-IntMap!()
+IntMap!();

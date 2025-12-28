@@ -4,4 +4,4 @@ macro_rules! PatternIterator {
     };
 }
 
-PatternIterator!()
+PatternIterator!();

@@ -11,4 +11,4 @@ macro_rules! fmt_index {
     };
 }
 
-fmt_index!()
+fmt_index!();

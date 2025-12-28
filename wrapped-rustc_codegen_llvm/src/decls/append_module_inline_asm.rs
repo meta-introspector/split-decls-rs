@@ -4,4 +4,4 @@ macro_rules! append_module_inline_asm {
     };
 }
 
-append_module_inline_asm!()
+append_module_inline_asm!();

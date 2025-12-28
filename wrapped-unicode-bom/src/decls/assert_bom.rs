@@ -11,4 +11,4 @@ macro_rules! assert_bom {
     };
 }
 
-assert_bom!()
+assert_bom!();

@@ -4,4 +4,4 @@ macro_rules! NestedUsedBlock {
     };
 }
 
-NestedUsedBlock!()
+NestedUsedBlock!();

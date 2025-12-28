@@ -4,4 +4,4 @@ macro_rules! if_log_enabled {
     };
 }
 
-if_log_enabled!()
+if_log_enabled!();

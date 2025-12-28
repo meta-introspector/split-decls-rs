@@ -4,4 +4,4 @@ macro_rules! precedence {
     };
 }
 
-precedence!()
+precedence!();

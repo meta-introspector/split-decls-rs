@@ -4,4 +4,4 @@ macro_rules! SB7 {
     };
 }
 
-SB7!()
+SB7!();

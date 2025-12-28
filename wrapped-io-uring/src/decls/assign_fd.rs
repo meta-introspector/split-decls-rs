@@ -12,4 +12,4 @@ macro_rules! assign_fd {
     };
 }
 
-assign_fd!()
+assign_fd!();

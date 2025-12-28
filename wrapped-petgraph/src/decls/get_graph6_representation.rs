@@ -4,4 +4,4 @@ macro_rules! get_graph6_representation {
     };
 }
 
-get_graph6_representation!()
+get_graph6_representation!();

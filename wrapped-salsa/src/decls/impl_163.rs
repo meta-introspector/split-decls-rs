@@ -1,18 +1,18 @@
 macro_rules! deps {
     () => {
-        Zalsa!();
+        Runtime!();
         IngredientIndex!();
         Id!();
-        Value!();
-        IngredientImpl!();
-        Durability!();
-        Runtime!();
-        ZalsaLocal!();
-        Configuration!();
-        FromIdWithDb!();
         StructEntry!();
+        FromIdWithDb!();
+        ZalsaLocal!();
         Table!();
         DatabaseKeyIndex!();
+        Value!();
+        Durability!();
+        IngredientImpl!();
+        Configuration!();
+        Zalsa!();
     };
 }
 
@@ -23,4 +23,4 @@ macro_rules! impl_163 {
     };
 }
 
-impl_163!()
+impl_163!();

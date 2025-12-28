@@ -4,4 +4,4 @@ macro_rules! TransformFn {
     };
 }
 
-TransformFn!()
+TransformFn!();

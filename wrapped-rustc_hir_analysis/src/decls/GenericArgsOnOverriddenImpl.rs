@@ -4,4 +4,4 @@ macro_rules! GenericArgsOnOverriddenImpl {
     };
 }
 
-GenericArgsOnOverriddenImpl!()
+GenericArgsOnOverriddenImpl!();

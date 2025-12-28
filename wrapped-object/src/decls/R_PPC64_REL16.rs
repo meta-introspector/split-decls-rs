@@ -4,4 +4,4 @@ macro_rules! R_PPC64_REL16 {
     };
 }
 
-R_PPC64_REL16!()
+R_PPC64_REL16!();

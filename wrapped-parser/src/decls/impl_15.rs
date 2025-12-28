@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        Field!();
-        Positioned!();
+        Span!();
+        FrontmatterError!();
     };
 }
 
 macro_rules! impl_15 {
     () => {
         deps!();
-        impl Field { # [doc = " Get the response key of the field. This is the alias if present and the"] # [doc = " name otherwise."] # [must_use] pub fn response_key (& self) -> & Positioned < Name > { self . alias . as_ref () . unwrap_or (& self . name) } # [doc = " Get the value of the argument with the specified name."] # [must_use] pub fn get_argument (& self , name : & str) -> Option < & Positioned < Value > > { self . arguments . iter () . find (| item | item . 0 . node == name) . map (| item | & item . 1) } }
+        impl FrontmatterError { pub fn new (message : impl Into < String > , span : Span) -> Self { Self { message : message . into () , primary_span : span , visible_spans : Vec :: new () } } pub fn push_visible_span (mut self , span : Span) -> Self { self . visible_spans . push (span) ; self } pub fn message (& self) -> & str { self . message . as_str () } pub fn primary_span (& self) -> Span { self . primary_span . clone () } pub fn visible_spans (& self) -> & [Span] { & self . visible_spans } }
     };
 }
 

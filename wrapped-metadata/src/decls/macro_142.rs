@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         ModuleRef!();
-        Module!();
         AssemblyRef!();
         TypeRef!();
+        Module!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! macro_142 {
     };
 }
 
-macro_142!()
+macro_142!();

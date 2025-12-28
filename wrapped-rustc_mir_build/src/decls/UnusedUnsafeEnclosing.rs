@@ -4,4 +4,4 @@ macro_rules! UnusedUnsafeEnclosing {
     };
 }
 
-UnusedUnsafeEnclosing!()
+UnusedUnsafeEnclosing!();

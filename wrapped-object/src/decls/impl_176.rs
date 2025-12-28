@@ -1,18 +1,18 @@
 macro_rules! deps {
     () => {
-        ArchiveMemberIterator!();
+        ArchiveKind!();
+        AixMemberOffset!();
+        ArchiveSymbolIterator!();
         AixFileHeader!();
-        ArchiveMember!();
-        ArchiveFile!();
+        Bytes!();
+        ArchiveOffset!();
         ReadRef!();
         Error!();
-        ArchiveOffset!();
-        Bytes!();
-        ArchiveSymbolIterator!();
+        ArchiveMemberIterator!();
+        ArchiveMember!();
         Result!();
         Members!();
-        AixMemberOffset!();
-        ArchiveKind!();
+        ArchiveFile!();
     };
 }
 
@@ -23,4 +23,4 @@ macro_rules! impl_176 {
     };
 }
 
-impl_176!()
+impl_176!();

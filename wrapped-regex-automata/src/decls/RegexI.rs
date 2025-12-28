@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Regex!();
         Cache!();
-        Pool!();
-        RegexInfo!();
         Strategy!();
+        Regex!();
+        RegexInfo!();
+        Pool!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! RegexI {
     };
 }
 
-RegexI!()
+RegexI!();

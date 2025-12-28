@@ -11,4 +11,4 @@ macro_rules! get_single_expr_from_tts {
     };
 }
 
-get_single_expr_from_tts!()
+get_single_expr_from_tts!();

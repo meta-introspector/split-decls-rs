@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        FileType!();
-        LlvmError!();
         LLVMRustResult!();
+        LlvmError!();
+        FileType!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! write_output_file {
     };
 }
 
-write_output_file!()
+write_output_file!();

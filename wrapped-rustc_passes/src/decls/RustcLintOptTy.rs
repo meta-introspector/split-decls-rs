@@ -4,4 +4,4 @@ macro_rules! RustcLintOptTy {
     };
 }
 
-RustcLintOptTy!()
+RustcLintOptTy!();

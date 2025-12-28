@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        FromAttrsError!();
         FromRawReprsError!();
-        AlignRepr!();
-        UnsupportedReprError!();
-        CompoundRepr!();
+        EnumRepr!();
         StructUnionRepr!();
         PrimitiveRepr!();
         Repr!();
-        EnumRepr!();
+        CompoundRepr!();
+        AlignRepr!();
+        FromAttrsError!();
+        UnsupportedReprError!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! tests {
     };
 }
 
-tests!()
+tests!();

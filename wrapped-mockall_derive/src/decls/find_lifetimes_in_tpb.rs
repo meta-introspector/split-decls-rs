@@ -11,4 +11,4 @@ macro_rules! find_lifetimes_in_tpb {
     };
 }
 
-find_lifetimes_in_tpb!()
+find_lifetimes_in_tpb!();

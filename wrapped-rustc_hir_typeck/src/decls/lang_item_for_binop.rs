@@ -11,4 +11,4 @@ macro_rules! lang_item_for_binop {
     };
 }
 
-lang_item_for_binop!()
+lang_item_for_binop!();

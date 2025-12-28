@@ -11,4 +11,4 @@ macro_rules! simple_array {
     };
 }
 
-simple_array!()
+simple_array!();

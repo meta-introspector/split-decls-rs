@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        NodeData!();
-        Green!();
-        SyntaxToken!();
-        SyntaxNode!();
         SyntaxElement!();
         SyntaxKind!();
-        TokenAtOffset!();
         NodeOrToken!();
+        SyntaxToken!();
+        NodeData!();
+        SyntaxNode!();
+        TokenAtOffset!();
+        Green!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_23 {
     };
 }
 
-impl_23!()
+impl_23!();

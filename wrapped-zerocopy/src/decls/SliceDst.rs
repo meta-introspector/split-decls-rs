@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        KnownLayout!();
         FromBytes!();
         IntoBytes!();
-        KnownLayout!();
         Immutable!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! SliceDst {
     };
 }
 
-SliceDst!()
+SliceDst!();

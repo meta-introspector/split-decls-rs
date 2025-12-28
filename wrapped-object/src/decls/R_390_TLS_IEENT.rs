@@ -4,4 +4,4 @@ macro_rules! R_390_TLS_IEENT {
     };
 }
 
-R_390_TLS_IEENT!()
+R_390_TLS_IEENT!();

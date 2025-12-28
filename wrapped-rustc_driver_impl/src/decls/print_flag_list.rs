@@ -4,4 +4,4 @@ macro_rules! print_flag_list {
     };
 }
 
-print_flag_list!()
+print_flag_list!();

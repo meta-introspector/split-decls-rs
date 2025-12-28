@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        UnconstrainedGenericParameter!();
         Parameter!();
+        UnconstrainedGenericParameter!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! enforce_impl_non_lifetime_params_are_constrained {
     };
 }
 
-enforce_impl_non_lifetime_params_are_constrained!()
+enforce_impl_non_lifetime_params_are_constrained!();

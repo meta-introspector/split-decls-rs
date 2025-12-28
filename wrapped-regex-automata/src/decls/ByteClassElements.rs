@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Unit!();
         ByteClasses!();
+        Unit!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! ByteClassElements {
     };
 }
 
-ByteClassElements!()
+ByteClassElements!();

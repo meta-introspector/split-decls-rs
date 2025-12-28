@@ -4,4 +4,4 @@ macro_rules! check_map_indexed {
     };
 }
 
-check_map_indexed!()
+check_map_indexed!();

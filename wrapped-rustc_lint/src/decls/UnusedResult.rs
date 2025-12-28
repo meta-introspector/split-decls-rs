@@ -4,4 +4,4 @@ macro_rules! UnusedResult {
     };
 }
 
-UnusedResult!()
+UnusedResult!();

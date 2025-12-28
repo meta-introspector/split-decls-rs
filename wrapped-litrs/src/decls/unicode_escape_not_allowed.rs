@@ -11,4 +11,4 @@ macro_rules! unicode_escape_not_allowed {
     };
 }
 
-unicode_escape_not_allowed!()
+unicode_escape_not_allowed!();

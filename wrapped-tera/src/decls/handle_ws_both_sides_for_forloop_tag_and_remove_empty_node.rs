@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        ExprVal!();
         WS!();
         Node!();
         Forloop!();
+        ExprVal!();
         Expr!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! handle_ws_both_sides_for_forloop_tag_and_remove_empty_node {
     };
 }
 
-handle_ws_both_sides_for_forloop_tag_and_remove_empty_node!()
+handle_ws_both_sides_for_forloop_tag_and_remove_empty_node!();

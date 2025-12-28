@@ -4,4 +4,4 @@ macro_rules! AstHygieneAnn {
     };
 }
 
-AstHygieneAnn!()
+AstHygieneAnn!();

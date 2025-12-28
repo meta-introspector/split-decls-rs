@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         QueryContext!();
-        Value!();
         QueryJobId!();
+        Value!();
         QueryConfig!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! execute_job_non_incr {
     };
 }
 
-execute_job_non_incr!()
+execute_job_non_incr!();

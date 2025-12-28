@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        RequestId!();
-        Request!();
-        Notification!();
-        Connection!();
-        Message!();
         ProtocolError!();
+        Request!();
+        Message!();
+        Connection!();
+        RequestId!();
+        Notification!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! tests {
     };
 }
 
-tests!()
+tests!();

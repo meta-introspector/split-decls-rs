@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        SCx!();
         GenericCx!();
+        SCx!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_372 {
     };
 }
 
-impl_372!()
+impl_372!();

@@ -4,4 +4,4 @@ macro_rules! cfg_os_ext {
     };
 }
 
-cfg_os_ext!()
+cfg_os_ext!();

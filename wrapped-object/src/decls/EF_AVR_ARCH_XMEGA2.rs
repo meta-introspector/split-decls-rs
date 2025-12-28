@@ -4,4 +4,4 @@ macro_rules! EF_AVR_ARCH_XMEGA2 {
     };
 }
 
-EF_AVR_ARCH_XMEGA2!()
+EF_AVR_ARCH_XMEGA2!();

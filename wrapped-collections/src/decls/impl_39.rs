@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        IKeyValuePair!();
-        IMapView!();
-        IIterable!();
-        IIterator!();
         IMap!();
+        IIterator!();
+        IIterable!();
+        IMapView!();
+        IKeyValuePair!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_39 {
     };
 }
 
-impl_39!()
+impl_39!();

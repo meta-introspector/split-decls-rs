@@ -4,4 +4,4 @@ macro_rules! algo {
     };
 }
 
-algo!()
+algo!();

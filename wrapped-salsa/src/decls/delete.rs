@@ -4,4 +4,4 @@ macro_rules! delete {
     };
 }
 
-delete!()
+delete!();

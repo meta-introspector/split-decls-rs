@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ExpressionInfo!();
         EnumLatticeInfo!();
+        ExpressionInfo!();
         ImplLatticeInfo!();
         StructLatticeInfo!();
     };
@@ -18,4 +18,4 @@ macro_rules! generate_report {
     };
 }
 
-generate_report!()
+generate_report!();

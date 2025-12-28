@@ -11,4 +11,4 @@ macro_rules! Sha1 {
     };
 }
 
-Sha1!()
+Sha1!();

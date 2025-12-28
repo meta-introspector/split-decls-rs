@@ -11,4 +11,4 @@ macro_rules! impls_for_ty {
     };
 }
 
-impls_for_ty!()
+impls_for_ty!();

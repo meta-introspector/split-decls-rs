@@ -4,4 +4,4 @@ macro_rules! DropImplOnWrongItem {
     };
 }
 
-DropImplOnWrongItem!()
+DropImplOnWrongItem!();

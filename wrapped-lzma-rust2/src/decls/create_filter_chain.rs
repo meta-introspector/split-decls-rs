@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        FilterType!();
         Lzma2Reader!();
         Read!();
-        FilterType!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! create_filter_chain {
     };
 }
 
-create_filter_chain!()
+create_filter_chain!();

@@ -1,20 +1,20 @@
 macro_rules! deps {
     () => {
-        BlockDecoder!();
         BlockHeader!();
-        DecodeSequenceError!();
+        LiteralsSectionType!();
+        SequencesHeader!();
+        BlockTypeError!();
+        Read!();
         BlockSizeError!();
-        DecompressBlockError!();
         BlockType!();
         DecoderScratch!();
-        Read!();
         LiteralsSection!();
-        DecodeBlockContentError!();
+        BlockDecoder!();
         DecoderState!();
-        SequencesHeader!();
+        DecodeBlockContentError!();
         BlockHeaderReadError!();
-        BlockTypeError!();
-        LiteralsSectionType!();
+        DecodeSequenceError!();
+        DecompressBlockError!();
     };
 }
 
@@ -25,4 +25,4 @@ macro_rules! impl_137 {
     };
 }
 
-impl_137!()
+impl_137!();

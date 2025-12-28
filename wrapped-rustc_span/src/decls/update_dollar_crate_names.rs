@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        SyntaxContext!();
         HygieneData!();
+        SyntaxContext!();
         Symbol!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! update_dollar_crate_names {
     };
 }
 
-update_dollar_crate_names!()
+update_dollar_crate_names!();

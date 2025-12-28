@@ -4,4 +4,4 @@ macro_rules! TRAILER_SIZE {
     };
 }
 
-TRAILER_SIZE!()
+TRAILER_SIZE!();

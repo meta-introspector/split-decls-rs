@@ -4,4 +4,4 @@ macro_rules! DF_1_PIE {
     };
 }
 
-DF_1_PIE!()
+DF_1_PIE!();

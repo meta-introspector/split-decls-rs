@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         Span!();
         SourceMap!();
-        HashStableContext!();
         SourceFile!();
+        HashStableContext!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_341 {
     };
 }
 
-impl_341!()
+impl_341!();

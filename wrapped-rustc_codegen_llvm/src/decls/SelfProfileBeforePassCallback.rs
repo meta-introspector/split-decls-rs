@@ -4,4 +4,4 @@ macro_rules! SelfProfileBeforePassCallback {
     };
 }
 
-SelfProfileBeforePassCallback!()
+SelfProfileBeforePassCallback!();

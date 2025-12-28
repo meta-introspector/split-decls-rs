@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        StaticValue!();
+        Lazy!();
         StaticKeyId!();
         Set!();
-        Lazy!();
+        StaticValue!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_149 {
     };
 }
 
-impl_149!()
+impl_149!();

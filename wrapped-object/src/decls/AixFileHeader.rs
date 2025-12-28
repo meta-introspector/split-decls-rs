@@ -4,4 +4,4 @@ macro_rules! AixFileHeader {
     };
 }
 
-AixFileHeader!()
+AixFileHeader!();

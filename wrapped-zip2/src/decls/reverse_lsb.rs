@@ -4,4 +4,4 @@ macro_rules! reverse_lsb {
     };
 }
 
-reverse_lsb!()
+reverse_lsb!();

@@ -4,4 +4,4 @@ macro_rules! OLD_ITALIC {
     };
 }
 
-OLD_ITALIC!()
+OLD_ITALIC!();

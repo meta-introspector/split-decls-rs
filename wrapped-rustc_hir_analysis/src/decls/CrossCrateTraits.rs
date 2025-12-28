@@ -4,4 +4,4 @@ macro_rules! CrossCrateTraits {
     };
 }
 
-CrossCrateTraits!()
+CrossCrateTraits!();

@@ -4,4 +4,4 @@ macro_rules! documentation_for_definition {
     };
 }
 
-documentation_for_definition!()
+documentation_for_definition!();

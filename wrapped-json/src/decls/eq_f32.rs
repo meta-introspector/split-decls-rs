@@ -12,4 +12,4 @@ macro_rules! eq_f32 {
     };
 }
 
-eq_f32!()
+eq_f32!();

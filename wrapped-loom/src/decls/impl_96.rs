@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Arc!();
         Action!();
+        Arc!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_96 {
     };
 }
 
-impl_96!()
+impl_96!();

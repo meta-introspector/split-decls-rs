@@ -4,4 +4,4 @@ macro_rules! DocAliasNotStringLiteral {
     };
 }
 
-DocAliasNotStringLiteral!()
+DocAliasNotStringLiteral!();

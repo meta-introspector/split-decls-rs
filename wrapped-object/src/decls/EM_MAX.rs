@@ -4,4 +4,4 @@ macro_rules! EM_MAX {
     };
 }
 
-EM_MAX!()
+EM_MAX!();

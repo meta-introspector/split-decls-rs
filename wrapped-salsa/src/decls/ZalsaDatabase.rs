@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Zalsa!();
         ZalsaLocal!();
         RawDatabase!();
+        Zalsa!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! ZalsaDatabase {
     };
 }
 
-ZalsaDatabase!()
+ZalsaDatabase!();

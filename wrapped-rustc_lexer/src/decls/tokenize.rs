@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         TokenKind!();
-        Token!();
-        Cursor!();
         FrontmatterAllowed!();
+        Cursor!();
+        Token!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! tokenize {
     };
 }
 
-tokenize!()
+tokenize!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        TrailingSliceLayout!();
         SliceDst!();
+        TrailingSliceLayout!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! SizeInfo {
     };
 }
 
-SizeInfo!()
+SizeInfo!();

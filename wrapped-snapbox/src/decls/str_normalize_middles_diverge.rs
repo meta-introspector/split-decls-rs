@@ -11,4 +11,4 @@ macro_rules! str_normalize_middles_diverge {
     };
 }
 
-str_normalize_middles_diverge!()
+str_normalize_middles_diverge!();

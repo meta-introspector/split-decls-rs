@@ -4,4 +4,4 @@ macro_rules! static_visibility {
     };
 }
 
-static_visibility!()
+static_visibility!();

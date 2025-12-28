@@ -4,4 +4,4 @@ macro_rules! C_PSYM {
     };
 }
 
-C_PSYM!()
+C_PSYM!();

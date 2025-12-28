@@ -4,4 +4,4 @@ macro_rules! interpolate {
     };
 }
 
-interpolate!()
+interpolate!();

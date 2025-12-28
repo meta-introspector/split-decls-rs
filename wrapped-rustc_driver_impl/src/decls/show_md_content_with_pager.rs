@@ -4,4 +4,4 @@ macro_rules! show_md_content_with_pager {
     };
 }
 
-show_md_content_with_pager!()
+show_md_content_with_pager!();

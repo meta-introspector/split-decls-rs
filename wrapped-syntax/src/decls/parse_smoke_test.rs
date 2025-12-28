@@ -8,4 +8,4 @@ fn main() {
     };
 }
 
-parse_smoke_test!()
+parse_smoke_test!();

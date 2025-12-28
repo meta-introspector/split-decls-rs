@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        DFA!();
-        Config!();
-        State!();
-        Utf8State!();
-        Match!();
-        Utf8SuffixMap!();
         NFA!();
+        Utf8SuffixMap!();
+        Match!();
+        Config!();
         RangeTrie!();
         Builder!();
+        DFA!();
+        State!();
+        Utf8State!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! Compiler {
     };
 }
 
-Compiler!()
+Compiler!();

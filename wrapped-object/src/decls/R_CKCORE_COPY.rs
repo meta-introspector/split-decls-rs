@@ -4,4 +4,4 @@ macro_rules! R_CKCORE_COPY {
     };
 }
 
-R_CKCORE_COPY!()
+R_CKCORE_COPY!();

@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        Input!();
-        ByteSet!();
-        Flags!();
         Transitions!();
-        DeserializeError!();
-        StartTable!();
         DFA!();
         HalfMatch!();
         Special!();
+        ByteSet!();
+        StartTable!();
+        DeserializeError!();
+        Input!();
+        Flags!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_122 {
     };
 }
 
-impl_122!()
+impl_122!();

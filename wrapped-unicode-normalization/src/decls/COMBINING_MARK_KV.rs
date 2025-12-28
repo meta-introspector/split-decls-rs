@@ -4,4 +4,4 @@ macro_rules! COMBINING_MARK_KV {
     };
 }
 
-COMBINING_MARK_KV!()
+COMBINING_MARK_KV!();

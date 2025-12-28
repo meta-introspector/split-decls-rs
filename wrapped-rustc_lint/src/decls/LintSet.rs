@@ -4,4 +4,4 @@ macro_rules! LintSet {
     };
 }
 
-LintSet!()
+LintSet!();

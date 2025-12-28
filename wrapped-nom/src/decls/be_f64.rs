@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        ParseError!();
-        Streaming!();
-        Input!();
         Needed!();
         Parser!();
+        ParseError!();
         Error!();
+        Input!();
+        Streaming!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! be_f64 {
     };
 }
 
-be_f64!()
+be_f64!();

@@ -4,4 +4,4 @@ macro_rules! ExpectedPointerMutability {
     };
 }
 
-ExpectedPointerMutability!()
+ExpectedPointerMutability!();

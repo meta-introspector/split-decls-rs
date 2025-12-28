@@ -4,4 +4,4 @@ macro_rules! RT_PLUGPLAY {
     };
 }
 
-RT_PLUGPLAY!()
+RT_PLUGPLAY!();

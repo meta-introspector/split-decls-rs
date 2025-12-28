@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ThreadParkerT!();
         UnparkToken!();
+        ThreadParkerT!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! unpark_all {
     };
 }
 
-unpark_all!()
+unpark_all!();

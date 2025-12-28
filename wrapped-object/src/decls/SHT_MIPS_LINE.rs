@@ -4,4 +4,4 @@ macro_rules! SHT_MIPS_LINE {
     };
 }
 
-SHT_MIPS_LINE!()
+SHT_MIPS_LINE!();

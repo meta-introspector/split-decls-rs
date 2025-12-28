@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Compound!();
+        Error!();
         Result!();
         Formatter!();
-        Error!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_198 {
     };
 }
 
-impl_198!()
+impl_198!();

@@ -12,4 +12,4 @@ macro_rules! pivot_root {
     };
 }
 
-pivot_root!()
+pivot_root!();

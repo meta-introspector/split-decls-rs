@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Value!();
+        EnumDeserializer!();
         Unexpected!();
         ValueDeserializer!();
-        EnumDeserializer!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_15 {
     };
 }
 
-impl_15!()
+impl_15!();

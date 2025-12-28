@@ -4,4 +4,4 @@ macro_rules! DONE_BIT {
     };
 }
 
-DONE_BIT!()
+DONE_BIT!();

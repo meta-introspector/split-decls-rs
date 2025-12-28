@@ -4,4 +4,4 @@ macro_rules! GenericArgsCtor {
     };
 }
 
-GenericArgsCtor!()
+GenericArgsCtor!();

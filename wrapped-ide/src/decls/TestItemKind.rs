@@ -4,4 +4,4 @@ macro_rules! TestItemKind {
     };
 }
 
-TestItemKind!()
+TestItemKind!();

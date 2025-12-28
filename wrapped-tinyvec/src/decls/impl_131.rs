@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Array!();
         TinyVec!();
+        Array!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_131 {
     };
 }
 
-impl_131!()
+impl_131!();

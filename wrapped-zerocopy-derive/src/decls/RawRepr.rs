@@ -4,4 +4,4 @@ macro_rules! RawRepr {
     };
 }
 
-RawRepr!()
+RawRepr!();

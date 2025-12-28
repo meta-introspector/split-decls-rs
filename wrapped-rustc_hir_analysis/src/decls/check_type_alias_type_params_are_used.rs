@@ -12,4 +12,4 @@ macro_rules! check_type_alias_type_params_are_used {
     };
 }
 
-check_type_alias_type_params_are_used!()
+check_type_alias_type_params_are_used!();

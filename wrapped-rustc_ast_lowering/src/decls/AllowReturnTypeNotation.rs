@@ -4,4 +4,4 @@ macro_rules! AllowReturnTypeNotation {
     };
 }
 
-AllowReturnTypeNotation!()
+AllowReturnTypeNotation!();

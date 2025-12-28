@@ -11,4 +11,4 @@ macro_rules! is_isomorphic_subgraph_matching {
     };
 }
 
-is_isomorphic_subgraph_matching!()
+is_isomorphic_subgraph_matching!();

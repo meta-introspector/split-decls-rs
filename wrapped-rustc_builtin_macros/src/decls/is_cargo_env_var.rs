@@ -4,4 +4,4 @@ macro_rules! is_cargo_env_var {
     };
 }
 
-is_cargo_env_var!()
+is_cargo_env_var!();

@@ -11,4 +11,4 @@ macro_rules! error_out_of_memory {
     };
 }
 
-error_out_of_memory!()
+error_out_of_memory!();

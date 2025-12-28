@@ -4,4 +4,4 @@ macro_rules! SECT_OBJC_SYMBOLS {
     };
 }
 
-SECT_OBJC_SYMBOLS!()
+SECT_OBJC_SYMBOLS!();

@@ -48,4 +48,4 @@ Token {
     };
 }
 
-test_lex_comment!()
+test_lex_comment!();

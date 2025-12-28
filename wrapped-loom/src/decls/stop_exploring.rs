@@ -4,4 +4,4 @@ macro_rules! stop_exploring {
     };
 }
 
-stop_exploring!()
+stop_exploring!();

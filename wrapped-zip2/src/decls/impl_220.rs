@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        ZipError!();
         Magic!();
         ZipDataDescriptorBlock!();
         FixedSizeBlock!();
-        ZipError!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_220 {
     };
 }
 
-impl_220!()
+impl_220!();

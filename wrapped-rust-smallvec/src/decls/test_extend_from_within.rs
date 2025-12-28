@@ -11,4 +11,4 @@ macro_rules! test_extend_from_within {
     };
 }
 
-test_extend_from_within!()
+test_extend_from_within!();

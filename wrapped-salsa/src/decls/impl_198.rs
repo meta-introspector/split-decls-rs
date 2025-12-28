@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Revision!();
         RevisionQueue!();
+        Revision!();
         Configuration!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_198 {
     };
 }
 
-impl_198!()
+impl_198!();

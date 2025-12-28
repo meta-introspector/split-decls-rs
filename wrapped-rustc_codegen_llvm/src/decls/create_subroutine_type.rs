@@ -12,4 +12,4 @@ macro_rules! create_subroutine_type {
     };
 }
 
-create_subroutine_type!()
+create_subroutine_type!();

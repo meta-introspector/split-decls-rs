@@ -4,4 +4,4 @@ macro_rules! transparent_newtype_field {
     };
 }
 
-transparent_newtype_field!()
+transparent_newtype_field!();

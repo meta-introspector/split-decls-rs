@@ -4,4 +4,4 @@ macro_rules! LOG10_2HI {
     };
 }
 
-LOG10_2HI!()
+LOG10_2HI!();

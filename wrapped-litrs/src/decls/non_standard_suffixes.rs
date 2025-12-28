@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        FromIntegerLiteral!();
         IntegerLit!();
         IntegerBase!();
-        FromIntegerLiteral!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! non_standard_suffixes {
     };
 }
 
-non_standard_suffixes!()
+non_standard_suffixes!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        JarImpl!();
         Configuration!();
+        JarImpl!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_353 {
     };
 }
 
-impl_353!()
+impl_353!();

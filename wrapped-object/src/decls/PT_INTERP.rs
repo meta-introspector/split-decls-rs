@@ -4,4 +4,4 @@ macro_rules! PT_INTERP {
     };
 }
 
-PT_INTERP!()
+PT_INTERP!();

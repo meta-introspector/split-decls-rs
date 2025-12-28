@@ -4,4 +4,4 @@ macro_rules! liveness {
     };
 }
 
-liveness!()
+liveness!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Ty!();
-        Term!();
-        AssocItemConstraint!();
         Visitor!();
+        Term!();
+        Ty!();
+        AssocItemConstraint!();
         AssocItemConstraintKind!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! walk_assoc_item_constraint {
     };
 }
 
-walk_assoc_item_constraint!()
+walk_assoc_item_constraint!();

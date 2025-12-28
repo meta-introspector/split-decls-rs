@@ -4,4 +4,4 @@ macro_rules! label {
     };
 }
 
-label!()
+label!();

@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
+        WitnessMatrix!();
+        Constructor!();
         WitnessStack!();
         WitnessPat!();
-        Constructor!();
         PatCx!();
         PlaceCtxt!();
-        WitnessMatrix!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_118 {
     };
 }
 
-impl_118!()
+impl_118!();

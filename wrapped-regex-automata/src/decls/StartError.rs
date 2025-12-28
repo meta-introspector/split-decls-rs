@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         DFA!();
-        CacheError!();
-        Cache!();
         Anchored!();
+        Cache!();
+        CacheError!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! StartError {
     };
 }
 
-StartError!()
+StartError!();

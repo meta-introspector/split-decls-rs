@@ -12,4 +12,4 @@ macro_rules! wrap_serialize_variant_with {
     };
 }
 
-wrap_serialize_variant_with!()
+wrap_serialize_variant_with!();

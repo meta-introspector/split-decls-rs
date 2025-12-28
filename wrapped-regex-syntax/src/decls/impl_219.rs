@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Hir!();
-        Properties!();
         HirKind!();
+        Properties!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_219 {
     };
 }
 
-impl_219!()
+impl_219!();

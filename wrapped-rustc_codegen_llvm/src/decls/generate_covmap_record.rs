@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Linkage!();
         CodegenCx!();
         CovmapVersion!();
+        Linkage!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! generate_covmap_record {
     };
 }
 
-generate_covmap_record!()
+generate_covmap_record!();

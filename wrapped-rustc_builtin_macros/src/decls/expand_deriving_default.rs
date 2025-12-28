@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Bounds!();
-        FieldlessVariantsStrategy!();
         TraitDef!();
         DetectNonVariantDefaultAttr!();
+        Bounds!();
+        FieldlessVariantsStrategy!();
         MethodDef!();
         Path!();
     };
@@ -16,4 +16,4 @@ macro_rules! expand_deriving_default {
     };
 }
 
-expand_deriving_default!()
+expand_deriving_default!();

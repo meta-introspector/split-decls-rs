@@ -4,4 +4,4 @@ macro_rules! BASE_FN {
     };
 }
 
-BASE_FN!()
+BASE_FN!();

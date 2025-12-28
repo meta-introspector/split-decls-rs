@@ -4,4 +4,4 @@ macro_rules! HasBuilder {
     };
 }
 
-HasBuilder!()
+HasBuilder!();

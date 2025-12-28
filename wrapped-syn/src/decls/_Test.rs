@@ -11,4 +11,4 @@ macro_rules! _Test {
     };
 }
 
-_Test!()
+_Test!();

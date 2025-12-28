@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
+        LexicalRegionResolutions!();
+        RegionGraph!();
+        Constraint!();
         ConstraintKind!();
         RegionResolutionError!();
         RegionConstraintData!();
-        LexicalRegionResolutions!();
-        VarValue!();
-        RegionAndOrigin!();
-        Constraint!();
-        RegionGraph!();
-        LexicalResolver!();
         VerifyBound!();
+        VarValue!();
+        LexicalResolver!();
+        RegionAndOrigin!();
     };
 }
 
@@ -28,4 +28,4 @@ macro_rules! impl_68 {
     };
 }
 
-impl_68!()
+impl_68!();

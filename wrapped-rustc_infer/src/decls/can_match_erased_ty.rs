@@ -11,4 +11,4 @@ macro_rules! can_match_erased_ty {
     };
 }
 
-can_match_erased_ty!()
+can_match_erased_ty!();

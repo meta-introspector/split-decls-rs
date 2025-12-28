@@ -4,4 +4,4 @@ macro_rules! auxv {
     };
 }
 
-auxv!()
+auxv!();

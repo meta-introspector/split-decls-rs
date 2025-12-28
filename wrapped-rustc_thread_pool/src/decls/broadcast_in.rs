@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        LatchRef!();
-        BroadcastContext!();
         CountLatch!();
-        StackJob!();
-        Registry!();
+        BroadcastContext!();
+        LatchRef!();
         WorkerThread!();
+        Registry!();
+        StackJob!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! broadcast_in {
     };
 }
 
-broadcast_in!()
+broadcast_in!();

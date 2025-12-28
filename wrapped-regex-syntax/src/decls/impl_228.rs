@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         CaseFoldError!();
-        Bytes!();
-        Class!();
-        Error!();
         Result!();
+        Error!();
+        Class!();
+        Bytes!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_228 {
     };
 }
 
-impl_228!()
+impl_228!();

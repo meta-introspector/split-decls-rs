@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Memory!();
         X86Options!();
-        AbiKind!();
-        HasX86AbiOpt!();
         Flavor!();
-        FnAbi!();
+        AbiKind!();
         HasTargetSpec!();
+        HasX86AbiOpt!();
         PassMode!();
+        FnAbi!();
+        Memory!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_288 {
     };
 }
 
-impl_288!()
+impl_288!();

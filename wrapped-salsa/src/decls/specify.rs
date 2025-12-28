@@ -4,4 +4,4 @@ macro_rules! specify {
     };
 }
 
-specify!()
+specify!();

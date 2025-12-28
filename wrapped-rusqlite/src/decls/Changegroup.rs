@@ -4,4 +4,4 @@ macro_rules! Changegroup {
     };
 }
 
-Changegroup!()
+Changegroup!();

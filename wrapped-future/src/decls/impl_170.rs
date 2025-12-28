@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Operation!();
         IAsyncOperation!();
+        Operation!();
         SyncState!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_170 {
     };
 }
 
-impl_170!()
+impl_170!();

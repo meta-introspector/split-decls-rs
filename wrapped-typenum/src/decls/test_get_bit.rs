@@ -3,8 +3,8 @@ macro_rules! deps {
         B0!();
         Bit!();
         GetBitOut!();
-        Same!();
         B1!();
+        Same!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! test_get_bit {
     };
 }
 
-test_get_bit!()
+test_get_bit!();

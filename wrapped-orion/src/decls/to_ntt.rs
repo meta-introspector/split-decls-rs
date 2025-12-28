@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        RingElement!();
-        FieldElement!();
         RingElementNTT!();
+        FieldElement!();
+        RingElement!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! to_ntt {
     };
 }
 
-to_ntt!()
+to_ntt!();

@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        ArgParser!();
-        InvalidSince!();
-        Stage!();
         MissingFeature!();
-        UnsupportedLiteral!();
-        UnknownMetaItem!();
         UnsupportedLiteralReason!();
-        NonIdentFeature!();
-        MissingSince!();
         AcceptContext!();
+        UnknownMetaItem!();
+        UnsupportedLiteral!();
+        Stage!();
+        NonIdentFeature!();
+        InvalidSince!();
+        ArgParser!();
+        MissingSince!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! parse_stability {
     };
 }
 
-parse_stability!()
+parse_stability!();

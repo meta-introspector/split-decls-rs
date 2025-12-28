@@ -12,4 +12,4 @@ macro_rules! test_streaming_no_std {
     };
 }
 
-test_streaming_no_std!()
+test_streaming_no_std!();

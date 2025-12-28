@@ -4,4 +4,4 @@ macro_rules! crates_for {
     };
 }
 
-crates_for!()
+crates_for!();

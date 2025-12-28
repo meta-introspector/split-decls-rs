@@ -12,4 +12,4 @@ macro_rules! box_layer_is_layer {
     };
 }
 
-box_layer_is_layer!()
+box_layer_is_layer!();

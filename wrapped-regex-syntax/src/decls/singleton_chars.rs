@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Hir!();
         HirKind!();
         Literal!();
+        Hir!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! singleton_chars {
     };
 }
 
-singleton_chars!()
+singleton_chars!();

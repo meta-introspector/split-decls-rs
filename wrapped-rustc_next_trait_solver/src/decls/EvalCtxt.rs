@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        EvaluationStepBuilder!();
-        GoalStalledOn!();
-        SearchGraph!();
         CurrentGoalKind!();
         SolverDelegate!();
+        GoalStalledOn!();
+        EvaluationStepBuilder!();
+        SearchGraph!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! EvalCtxt {
     };
 }
 
-EvalCtxt!()
+EvalCtxt!();

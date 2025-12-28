@@ -4,4 +4,4 @@ macro_rules! io_uring_ptr {
     };
 }
 
-io_uring_ptr!()
+io_uring_ptr!();

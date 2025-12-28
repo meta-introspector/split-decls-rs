@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Addr!();
         SerializationSink!();
         StringId!();
+        Addr!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! serialize_index_entry {
     };
 }
 
-serialize_index_entry!()
+serialize_index_entry!();

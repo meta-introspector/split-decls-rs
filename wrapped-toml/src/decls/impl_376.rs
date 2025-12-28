@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         Deserializer!();
-        Map!();
-        Error!();
-        Table!();
         Value!();
+        Table!();
+        Error!();
+        Map!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_376 {
     };
 }
 
-impl_376!()
+impl_376!();

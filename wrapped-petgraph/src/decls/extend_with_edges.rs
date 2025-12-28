@@ -11,4 +11,4 @@ macro_rules! extend_with_edges {
     };
 }
 
-extend_with_edges!()
+extend_with_edges!();

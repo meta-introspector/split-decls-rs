@@ -12,4 +12,4 @@ macro_rules! compaction_filter_test {
     };
 }
 
-compaction_filter_test!()
+compaction_filter_test!();

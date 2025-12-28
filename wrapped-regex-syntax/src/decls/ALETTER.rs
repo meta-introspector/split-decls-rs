@@ -4,4 +4,4 @@ macro_rules! ALETTER {
     };
 }
 
-ALETTER!()
+ALETTER!();

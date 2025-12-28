@@ -11,4 +11,4 @@ macro_rules! socket_broadcast {
     };
 }
 
-socket_broadcast!()
+socket_broadcast!();

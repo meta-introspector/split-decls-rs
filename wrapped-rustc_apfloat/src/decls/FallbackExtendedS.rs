@@ -4,4 +4,4 @@ macro_rules! FallbackExtendedS {
     };
 }
 
-FallbackExtendedS!()
+FallbackExtendedS!();

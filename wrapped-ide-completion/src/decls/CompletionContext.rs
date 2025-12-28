@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        AutoImportExclusionType!();
-        CompletionConfig!();
         QualifierCtx!();
         CompleteSemicolon!();
+        CompletionConfig!();
+        AutoImportExclusionType!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! CompletionContext {
     };
 }
 
-CompletionContext!()
+CompletionContext!();

@@ -11,4 +11,4 @@ macro_rules! Add1 {
     };
 }
 
-Add1!()
+Add1!();

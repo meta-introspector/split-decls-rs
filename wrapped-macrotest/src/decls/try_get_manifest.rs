@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Result!();
         Manifest!();
+        Result!();
         Error!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! try_get_manifest {
     };
 }
 
-try_get_manifest!()
+try_get_manifest!();

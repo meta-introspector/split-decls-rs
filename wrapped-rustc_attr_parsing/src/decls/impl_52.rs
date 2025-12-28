@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
         SanitizeParser!();
-        AllowedTargets!();
-        AcceptContext!();
-        OnDuplicate!();
-        ArgParser!();
-        SingleAttributeParser!();
-        Stage!();
         AttributeOrder!();
+        AllowedTargets!();
+        ArgParser!();
+        AcceptContext!();
+        Stage!();
+        SingleAttributeParser!();
+        OnDuplicate!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_52 {
     };
 }
 
-impl_52!()
+impl_52!();

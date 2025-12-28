@@ -14,4 +14,4 @@ macro_rules! orphan {
     };
 }
 
-orphan!()
+orphan!();

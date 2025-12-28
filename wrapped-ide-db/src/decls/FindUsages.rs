@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Definition!();
-        SearchScope!();
         RootDatabase!();
+        SearchScope!();
+        Definition!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! FindUsages {
     };
 }
 
-FindUsages!()
+FindUsages!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        ReturnHint!();
-        TypeMap!();
         ParamHint!();
         Signature!();
+        ReturnHint!();
+        TypeMap!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! CppMethod {
     };
 }
 
-CppMethod!()
+CppMethod!();

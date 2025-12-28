@@ -4,4 +4,4 @@ macro_rules! type_extractor {
     };
 }
 
-type_extractor!()
+type_extractor!();

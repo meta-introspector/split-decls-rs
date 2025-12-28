@@ -12,4 +12,4 @@ macro_rules! find_node_at_offset {
     };
 }
 
-find_node_at_offset!()
+find_node_at_offset!();

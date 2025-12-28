@@ -11,4 +11,4 @@ macro_rules! make_invalid_casting_error {
     };
 }
 
-make_invalid_casting_error!()
+make_invalid_casting_error!();

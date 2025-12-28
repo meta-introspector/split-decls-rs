@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Float!();
-        Category!();
-        Semantics!();
         ExpInt!();
+        Float!();
+        Semantics!();
         Limb!();
+        Category!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! IeeeFloat {
     };
 }
 
-IeeeFloat!()
+IeeeFloat!();

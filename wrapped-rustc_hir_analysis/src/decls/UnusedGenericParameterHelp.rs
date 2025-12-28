@@ -4,4 +4,4 @@ macro_rules! UnusedGenericParameterHelp {
     };
 }
 
-UnusedGenericParameterHelp!()
+UnusedGenericParameterHelp!();

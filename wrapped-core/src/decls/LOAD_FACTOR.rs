@@ -4,4 +4,4 @@ macro_rules! LOAD_FACTOR {
     };
 }
 
-LOAD_FACTOR!()
+LOAD_FACTOR!();

@@ -11,4 +11,4 @@ macro_rules! classify_nonstarters {
     };
 }
 
-classify_nonstarters!()
+classify_nonstarters!();

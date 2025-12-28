@@ -4,4 +4,4 @@ macro_rules! binary_search_slice_test {
     };
 }
 
-binary_search_slice_test!()
+binary_search_slice_test!();

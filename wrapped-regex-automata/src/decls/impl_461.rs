@@ -1,20 +1,20 @@
 macro_rules! deps {
     () => {
+        LookMatcher!();
+        BuildError!();
+        Builder!();
+        StateID!();
+        Transition!();
+        SmallIndex!();
         Match!();
-        State!();
         SparseTransitions!();
         Span!();
-        BuildError!();
-        SmallIndex!();
-        StateID!();
-        Look!();
         Inner!();
-        NFA!();
-        Builder!();
         PatternID!();
-        Transition!();
+        State!();
+        NFA!();
         Start!();
-        LookMatcher!();
+        Look!();
     };
 }
 
@@ -28,4 +28,4 @@ macro_rules! impl_461 {
     };
 }
 
-impl_461!()
+impl_461!();

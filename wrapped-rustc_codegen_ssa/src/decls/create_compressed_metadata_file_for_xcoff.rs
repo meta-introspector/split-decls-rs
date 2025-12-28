@@ -4,4 +4,4 @@ macro_rules! create_compressed_metadata_file_for_xcoff {
     };
 }
 
-create_compressed_metadata_file_for_xcoff!()
+create_compressed_metadata_file_for_xcoff!();

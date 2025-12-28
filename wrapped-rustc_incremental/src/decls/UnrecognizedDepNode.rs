@@ -4,4 +4,4 @@ macro_rules! UnrecognizedDepNode {
     };
 }
 
-UnrecognizedDepNode!()
+UnrecognizedDepNode!();

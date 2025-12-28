@@ -4,4 +4,4 @@ macro_rules! string_len {
     };
 }
 
-string_len!()
+string_len!();

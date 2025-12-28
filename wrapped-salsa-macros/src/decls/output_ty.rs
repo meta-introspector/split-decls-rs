@@ -11,4 +11,4 @@ macro_rules! output_ty {
     };
 }
 
-output_ty!()
+output_ty!();

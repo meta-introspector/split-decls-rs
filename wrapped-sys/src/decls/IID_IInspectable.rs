@@ -11,4 +11,4 @@ macro_rules! IID_IInspectable {
     };
 }
 
-IID_IInspectable!()
+IID_IInspectable!();

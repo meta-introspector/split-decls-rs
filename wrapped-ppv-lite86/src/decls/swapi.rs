@@ -4,4 +4,4 @@ macro_rules! swapi {
     };
 }
 
-swapi!()
+swapi!();

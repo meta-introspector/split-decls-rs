@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         IntoIter!();
+        Folder!();
         Producer!();
         MinLenProducer!();
-        Folder!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_666 {
     };
 }
 
-impl_666!()
+impl_666!();

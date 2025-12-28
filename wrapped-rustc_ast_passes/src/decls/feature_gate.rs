@@ -4,4 +4,4 @@ macro_rules! feature_gate {
     };
 }
 
-feature_gate!()
+feature_gate!();

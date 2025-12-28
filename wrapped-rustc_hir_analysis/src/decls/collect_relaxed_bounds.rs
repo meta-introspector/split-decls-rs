@@ -4,4 +4,4 @@ macro_rules! collect_relaxed_bounds {
     };
 }
 
-collect_relaxed_bounds!()
+collect_relaxed_bounds!();

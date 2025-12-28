@@ -11,4 +11,4 @@ macro_rules! peeking_next_by_clone {
     };
 }
 
-peeking_next_by_clone!()
+peeking_next_by_clone!();

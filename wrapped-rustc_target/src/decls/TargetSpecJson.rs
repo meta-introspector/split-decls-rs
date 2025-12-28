@@ -1,18 +1,18 @@
 macro_rules! deps {
     () => {
-        SanitizerSet!();
-        LinkerFlavorCli!();
-        EndianWrapper!();
-        LinkSelfContainedDefault!();
-        TargetSpecJsonMetadata!();
         LinkSelfContainedComponentsWrapper!();
-        StaticCow!();
         TargetFamiliesJson!();
+        EndianWrapper!();
+        TargetSpecJsonMetadata!();
         CrtObjects!();
-        SmallDataThresholdSupport!();
-        ExternAbiWrapper!();
         StackProbeType!();
+        LinkSelfContainedDefault!();
+        StaticCow!();
+        LinkerFlavorCli!();
+        SmallDataThresholdSupport!();
         LinkArgsCli!();
+        ExternAbiWrapper!();
+        SanitizerSet!();
     };
 }
 
@@ -23,4 +23,4 @@ macro_rules! TargetSpecJson {
     };
 }
 
-TargetSpecJson!()
+TargetSpecJson!();

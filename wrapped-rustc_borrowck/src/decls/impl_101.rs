@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        PredicateQuery!();
-        HigherRankedErrorCause!();
         TypeOpInfo!();
-        HigherRankedLifetimeError!();
         MirBorrowckCtxt!();
+        PredicateQuery!();
+        HigherRankedLifetimeError!();
+        HigherRankedErrorCause!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_101 {
     };
 }
 
-impl_101!()
+impl_101!();

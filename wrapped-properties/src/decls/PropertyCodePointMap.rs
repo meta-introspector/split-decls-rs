@@ -4,4 +4,4 @@ macro_rules! PropertyCodePointMap {
     };
 }
 
-PropertyCodePointMap!()
+PropertyCodePointMap!();

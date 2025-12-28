@@ -11,4 +11,4 @@ macro_rules! PTP_SIMPLE_CALLBACK {
     };
 }
 
-PTP_SIMPLE_CALLBACK!()
+PTP_SIMPLE_CALLBACK!();

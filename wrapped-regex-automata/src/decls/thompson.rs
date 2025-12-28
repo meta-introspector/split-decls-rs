@@ -4,4 +4,4 @@ macro_rules! thompson {
     };
 }
 
-thompson!()
+thompson!();

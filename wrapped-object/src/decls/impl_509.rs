@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         Result!();
         ExportsTrieIterator!();
-        Item!();
         ExportSymbol!();
+        Item!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_509 {
     };
 }
 
-impl_509!()
+impl_509!();

@@ -4,4 +4,4 @@ macro_rules! AsmExplicitRegisterName {
     };
 }
 
-AsmExplicitRegisterName!()
+AsmExplicitRegisterName!();

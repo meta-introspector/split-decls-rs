@@ -4,4 +4,4 @@ macro_rules! coroutine_hidden_types {
     };
 }
 
-coroutine_hidden_types!()
+coroutine_hidden_types!();

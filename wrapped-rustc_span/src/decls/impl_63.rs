@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        ExpnKind!();
-        ExpnData!();
         Symbol!();
-        DesugaringKind!();
-        Transparency!();
         Edition!();
+        DesugaringKind!();
         HashStableContext!();
+        ExpnData!();
         Span!();
+        Transparency!();
+        ExpnKind!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_63 {
     };
 }
 
-impl_63!()
+impl_63!();

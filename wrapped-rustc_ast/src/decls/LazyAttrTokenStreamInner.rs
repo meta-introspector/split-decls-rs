@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        TokenCursor!();
-        Token!();
         NodeReplacement!();
         AttrTokenStream!();
+        Token!();
         Spacing!();
+        TokenCursor!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! LazyAttrTokenStreamInner {
     };
 }
 
-LazyAttrTokenStreamInner!()
+LazyAttrTokenStreamInner!();

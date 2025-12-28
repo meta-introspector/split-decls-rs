@@ -4,4 +4,4 @@ macro_rules! NT_S390_TODCMP {
     };
 }
 
-NT_S390_TODCMP!()
+NT_S390_TODCMP!();

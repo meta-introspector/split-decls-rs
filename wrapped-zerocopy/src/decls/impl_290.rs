@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        CastType!();
-        SizeInfo!();
-        Alignment!();
-        DstLayout!();
-        SliceDst!();
-        MetadataCastError!();
         TrailingSliceLayout!();
+        MetadataCastError!();
+        DstLayout!();
+        Alignment!();
+        SizeInfo!();
+        CastType!();
+        SliceDst!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_290 {
     };
 }
 
-impl_290!()
+impl_290!();

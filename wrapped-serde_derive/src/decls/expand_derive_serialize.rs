@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Stmts!();
-        Container!();
-        Derive!();
         Parameters!();
+        Derive!();
+        Container!();
         Ctxt!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! expand_derive_serialize {
     };
 }
 
-expand_derive_serialize!()
+expand_derive_serialize!();

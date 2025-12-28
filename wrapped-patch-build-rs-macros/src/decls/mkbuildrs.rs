@@ -4,4 +4,4 @@ macro_rules! mkbuildrs {
     };
 }
 
-mkbuildrs!()
+mkbuildrs!();

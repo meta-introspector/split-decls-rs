@@ -12,4 +12,4 @@ macro_rules! def_reg_class {
     };
 }
 
-def_reg_class!()
+def_reg_class!();

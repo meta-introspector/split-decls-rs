@@ -4,4 +4,4 @@ macro_rules! uses_vector_registers {
     };
 }
 
-uses_vector_registers!()
+uses_vector_registers!();

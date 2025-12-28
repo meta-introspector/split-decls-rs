@@ -4,4 +4,4 @@ macro_rules! InactiveVariants {
     };
 }
 
-InactiveVariants!()
+InactiveVariants!();

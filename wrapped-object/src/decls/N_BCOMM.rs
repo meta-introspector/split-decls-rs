@@ -4,4 +4,4 @@ macro_rules! N_BCOMM {
     };
 }
 
-N_BCOMM!()
+N_BCOMM!();

@@ -4,4 +4,4 @@ macro_rules! SNAPSHOT_TEST_MACROS {
     };
 }
 
-SNAPSHOT_TEST_MACROS!()
+SNAPSHOT_TEST_MACROS!();

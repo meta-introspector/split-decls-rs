@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        AllowedTargets!();
         NoArgsAttributeParser!();
         ConstStabilityIndirectParser!();
-        OnDuplicate!();
-        AllowedTargets!();
         Stage!();
+        OnDuplicate!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_190 {
     };
 }
 
-impl_190!()
+impl_190!();

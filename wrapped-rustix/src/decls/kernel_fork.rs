@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Fork!();
         Result!();
+        Fork!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! kernel_fork {
     };
 }
 
-kernel_fork!()
+kernel_fork!();

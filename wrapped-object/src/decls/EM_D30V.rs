@@ -4,4 +4,4 @@ macro_rules! EM_D30V {
     };
 }
 
-EM_D30V!()
+EM_D30V!();

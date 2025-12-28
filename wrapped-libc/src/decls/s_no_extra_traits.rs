@@ -4,4 +4,4 @@ macro_rules! s_no_extra_traits {
     };
 }
 
-s_no_extra_traits!()
+s_no_extra_traits!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        DstLayout!();
-        Alignment!();
         MaybeUninit!();
+        DstLayout!();
         KnownLayout!();
         PointerMetadata!();
+        Alignment!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! unsafe_impl_known_layout {
     };
 }
 
-unsafe_impl_known_layout!()
+unsafe_impl_known_layout!();

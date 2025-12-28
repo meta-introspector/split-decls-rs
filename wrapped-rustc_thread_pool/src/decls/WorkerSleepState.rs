@@ -4,4 +4,4 @@ macro_rules! WorkerSleepState {
     };
 }
 
-WorkerSleepState!()
+WorkerSleepState!();

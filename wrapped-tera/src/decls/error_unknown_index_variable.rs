@@ -12,4 +12,4 @@ macro_rules! error_unknown_index_variable {
     };
 }
 
-error_unknown_index_variable!()
+error_unknown_index_variable!();

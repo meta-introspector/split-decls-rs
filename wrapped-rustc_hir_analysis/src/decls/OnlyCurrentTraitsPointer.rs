@@ -4,4 +4,4 @@ macro_rules! OnlyCurrentTraitsPointer {
     };
 }
 
-OnlyCurrentTraitsPointer!()
+OnlyCurrentTraitsPointer!();

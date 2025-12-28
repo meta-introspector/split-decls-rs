@@ -4,4 +4,4 @@ macro_rules! Counters {
     };
 }
 
-Counters!()
+Counters!();

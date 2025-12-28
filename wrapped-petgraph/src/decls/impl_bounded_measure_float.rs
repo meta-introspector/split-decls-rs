@@ -11,4 +11,4 @@ macro_rules! impl_bounded_measure_float {
     };
 }
 
-impl_bounded_measure_float!()
+impl_bounded_measure_float!();

@@ -11,4 +11,4 @@ macro_rules! gen_args {
     };
 }
 
-gen_args!()
+gen_args!();

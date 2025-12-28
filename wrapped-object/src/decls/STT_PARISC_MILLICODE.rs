@@ -4,4 +4,4 @@ macro_rules! STT_PARISC_MILLICODE {
     };
 }
 
-STT_PARISC_MILLICODE!()
+STT_PARISC_MILLICODE!();

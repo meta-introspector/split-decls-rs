@@ -4,4 +4,4 @@ macro_rules! assert_dep_graph {
     };
 }
 
-assert_dep_graph!()
+assert_dep_graph!();

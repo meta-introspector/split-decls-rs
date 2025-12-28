@@ -4,4 +4,4 @@ macro_rules! cwm {
     };
 }
 
-cwm!()
+cwm!();

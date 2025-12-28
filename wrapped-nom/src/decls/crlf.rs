@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        Streaming!();
         Needed!();
+        Streaming!();
         ParseError!();
-        CompareResult!();
+        Err!();
         IResult!();
         ErrorKind!();
-        Err!();
-        Input!();
         Compare!();
+        CompareResult!();
         Error!();
+        Input!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! crlf {
     };
 }
 
-crlf!()
+crlf!();

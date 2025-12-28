@@ -11,4 +11,4 @@ macro_rules! ImageFunctionEntry64 {
     };
 }
 
-ImageFunctionEntry64!()
+ImageFunctionEntry64!();

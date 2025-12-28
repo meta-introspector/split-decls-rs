@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        PlaceOp!();
         FnCtxt!();
+        PlaceOp!();
         MethodCallee!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_329 {
     };
 }
 
-impl_329!()
+impl_329!();

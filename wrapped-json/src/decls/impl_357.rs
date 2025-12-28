@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        RawValue!();
-        Value!();
-        RawValueEmitter!();
-        NumberValueEmitter!();
-        Number!();
         Result!();
+        Number!();
+        RawValueEmitter!();
         SerializeMap!();
-        Error!();
         Map!();
+        Error!();
+        Value!();
+        NumberValueEmitter!();
+        RawValue!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_357 {
     };
 }
 
-impl_357!()
+impl_357!();

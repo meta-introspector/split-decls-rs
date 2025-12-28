@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Successors!();
-        Node!();
-        DirectedGraph!();
-        Event!();
         NodeStatus!();
+        DirectedGraph!();
+        Node!();
+        Event!();
+        Successors!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! TriColorDepthFirstSearch {
     };
 }
 
-TriColorDepthFirstSearch!()
+TriColorDepthFirstSearch!();

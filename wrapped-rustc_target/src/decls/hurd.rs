@@ -4,4 +4,4 @@ macro_rules! hurd {
     };
 }
 
-hurd!()
+hurd!();

@@ -4,4 +4,4 @@ macro_rules! ProcMacroKind {
     };
 }
 
-ProcMacroKind!()
+ProcMacroKind!();

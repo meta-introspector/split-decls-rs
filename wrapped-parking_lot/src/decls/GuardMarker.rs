@@ -4,4 +4,4 @@ macro_rules! GuardMarker {
     };
 }
 
-GuardMarker!()
+GuardMarker!();

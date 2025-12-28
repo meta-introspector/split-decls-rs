@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        EnumRepr!();
-        ImplBlockBuilder!();
-        Trait!();
         FieldBounds!();
+        Trait!();
+        ImplBlockBuilder!();
+        EnumRepr!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! derive_unaligned_enum {
     };
 }
 
-derive_unaligned_enum!()
+derive_unaligned_enum!();

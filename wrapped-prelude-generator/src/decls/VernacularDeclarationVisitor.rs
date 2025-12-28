@@ -4,4 +4,4 @@ macro_rules! VernacularDeclarationVisitor {
     };
 }
 
-VernacularDeclarationVisitor!()
+VernacularDeclarationVisitor!();

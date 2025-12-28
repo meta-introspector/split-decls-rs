@@ -11,4 +11,4 @@ macro_rules! scan_raw_string {
     };
 }
 
-scan_raw_string!()
+scan_raw_string!();

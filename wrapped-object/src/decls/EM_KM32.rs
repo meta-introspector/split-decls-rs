@@ -4,4 +4,4 @@ macro_rules! EM_KM32 {
     };
 }
 
-EM_KM32!()
+EM_KM32!();

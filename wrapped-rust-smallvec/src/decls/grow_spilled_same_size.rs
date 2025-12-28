@@ -11,4 +11,4 @@ macro_rules! grow_spilled_same_size {
     };
 }
 
-grow_spilled_same_size!()
+grow_spilled_same_size!();

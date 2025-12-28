@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Result!();
-        JsonUnexpected!();
-        Float!();
         Formatter!();
+        JsonUnexpected!();
+        Result!();
+        Float!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_71 {
     };
 }
 
-impl_71!()
+impl_71!();

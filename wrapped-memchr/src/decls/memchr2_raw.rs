@@ -11,4 +11,4 @@ macro_rules! memchr2_raw {
     };
 }
 
-memchr2_raw!()
+memchr2_raw!();

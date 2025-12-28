@@ -4,4 +4,4 @@ macro_rules! EMOJI_MODIFIER {
     };
 }
 
-EMOJI_MODIFIER!()
+EMOJI_MODIFIER!();

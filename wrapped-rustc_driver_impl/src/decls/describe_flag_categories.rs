@@ -4,4 +4,4 @@ macro_rules! describe_flag_categories {
     };
 }
 
-describe_flag_categories!()
+describe_flag_categories!();

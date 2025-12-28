@@ -4,4 +4,4 @@ macro_rules! vec_graph {
     };
 }
 
-vec_graph!()
+vec_graph!();

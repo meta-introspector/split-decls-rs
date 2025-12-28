@@ -4,4 +4,4 @@ macro_rules! RcVecIntoIter {
     };
 }
 
-RcVecIntoIter!()
+RcVecIntoIter!();

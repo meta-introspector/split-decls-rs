@@ -4,4 +4,4 @@ macro_rules! MAGICAL_DUMP_VAR {
     };
 }
 
-MAGICAL_DUMP_VAR!()
+MAGICAL_DUMP_VAR!();

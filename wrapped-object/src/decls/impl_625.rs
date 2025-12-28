@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        MachHeader!();
         MachORelocationIterator!();
-        Result!();
+        MachHeader!();
         ReadRef!();
+        Result!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_625 {
     };
 }
 
-impl_625!()
+impl_625!();

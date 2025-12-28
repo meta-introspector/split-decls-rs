@@ -4,4 +4,4 @@ macro_rules! compress_to_vec_zlib {
     };
 }
 
-compress_to_vec_zlib!()
+compress_to_vec_zlib!();

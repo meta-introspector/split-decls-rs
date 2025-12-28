@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        End!();
         Cursor!();
         Entry!();
+        End!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! start_of_buffer {
     };
 }
 
-start_of_buffer!()
+start_of_buffer!();

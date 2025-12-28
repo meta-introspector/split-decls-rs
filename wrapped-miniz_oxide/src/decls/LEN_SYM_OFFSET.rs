@@ -4,4 +4,4 @@ macro_rules! LEN_SYM_OFFSET {
     };
 }
 
-LEN_SYM_OFFSET!()
+LEN_SYM_OFFSET!();

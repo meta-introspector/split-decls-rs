@@ -4,4 +4,4 @@ macro_rules! type_will_always_be_passed_directly {
     };
 }
 
-type_will_always_be_passed_directly!()
+type_will_always_be_passed_directly!();

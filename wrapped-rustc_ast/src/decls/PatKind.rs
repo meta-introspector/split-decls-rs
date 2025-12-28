@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
+        RangeEnd!();
+        BindingMode!();
+        Variant!();
+        Pat!();
+        PatField!();
         PatFieldsRest!();
+        QSelf!();
+        Path!();
         Walkable!();
         MacCall!();
-        BindingMode!();
-        PatField!();
-        QSelf!();
-        RangeEnd!();
-        Pat!();
         Expr!();
-        Variant!();
-        Path!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! PatKind {
     };
 }
 
-PatKind!()
+PatKind!();

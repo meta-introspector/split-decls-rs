@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        ImplTraitOvercapturesLint!();
-        ImplTraitRedundantCapturesLint!();
-        VisitOpaqueTypes!();
         ParamKind!();
+        ImplTraitRedundantCapturesLint!();
+        ImplTraitOvercapturesLint!();
+        VisitOpaqueTypes!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_254 {
     };
 }
 
-impl_254!()
+impl_254!();

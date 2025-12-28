@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Interner!();
-        TraitPredicate!();
         TraitRef!();
         UpcastFrom!();
+        Interner!();
+        TraitPredicate!();
         PredicatePolarity!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_351 {
     };
 }
 
-impl_351!()
+impl_351!();

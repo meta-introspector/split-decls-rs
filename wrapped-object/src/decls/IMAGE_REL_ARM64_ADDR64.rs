@@ -4,4 +4,4 @@ macro_rules! IMAGE_REL_ARM64_ADDR64 {
     };
 }
 
-IMAGE_REL_ARM64_ADDR64!()
+IMAGE_REL_ARM64_ADDR64!();

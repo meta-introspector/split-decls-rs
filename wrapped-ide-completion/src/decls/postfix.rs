@@ -4,4 +4,4 @@ macro_rules! postfix {
     };
 }
 
-postfix!()
+postfix!();

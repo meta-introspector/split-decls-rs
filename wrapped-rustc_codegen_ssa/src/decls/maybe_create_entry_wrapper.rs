@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        MultipleMainFunctions!();
         BuilderMethods!();
+        MultipleMainFunctions!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! maybe_create_entry_wrapper {
     };
 }
 
-maybe_create_entry_wrapper!()
+maybe_create_entry_wrapper!();

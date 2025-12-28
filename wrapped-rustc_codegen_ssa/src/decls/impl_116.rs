@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        VersionScriptWriteFailure!();
         LibDefWriteFailure!();
-        Ld64UnimplementedModifier!();
-        Command!();
         Linker!();
+        VersionScriptWriteFailure!();
         GccLinker!();
+        Command!();
+        Ld64UnimplementedModifier!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_116 {
     };
 }
 
-impl_116!()
+impl_116!();

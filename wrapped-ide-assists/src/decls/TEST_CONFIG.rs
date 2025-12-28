@@ -11,4 +11,4 @@ macro_rules! TEST_CONFIG {
     };
 }
 
-TEST_CONFIG!()
+TEST_CONFIG!();

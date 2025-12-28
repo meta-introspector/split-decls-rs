@@ -4,4 +4,4 @@ macro_rules! R_CKCORE_TLS_GD32 {
     };
 }
 
-R_CKCORE_TLS_GD32!()
+R_CKCORE_TLS_GD32!();

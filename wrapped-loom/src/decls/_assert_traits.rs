@@ -11,4 +11,4 @@ macro_rules! _assert_traits {
     };
 }
 
-_assert_traits!()
+_assert_traits!();

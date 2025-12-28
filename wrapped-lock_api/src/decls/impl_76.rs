@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ReentrantMutexGuard!();
         GetThreadId!();
+        ReentrantMutexGuard!();
         RawMutex!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_76 {
     };
 }
 
-impl_76!()
+impl_76!();

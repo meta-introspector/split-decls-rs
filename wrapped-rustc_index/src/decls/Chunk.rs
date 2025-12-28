@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Word!();
         ChunkSize!();
+        Word!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Chunk {
     };
 }
 
-Chunk!()
+Chunk!();

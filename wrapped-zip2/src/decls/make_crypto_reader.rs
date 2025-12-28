@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        ZipResult!();
-        ZipCryptoReader!();
         CompressionMethod!();
-        ZipError!();
+        CryptoReader!();
+        AesMode!();
         AesReader!();
         ZipCryptoValidator!();
+        ZipResult!();
         ZipFileData!();
-        AesMode!();
+        ZipCryptoReader!();
         AesVendorVersion!();
-        CryptoReader!();
+        ZipError!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! make_crypto_reader {
     };
 }
 
-make_crypto_reader!()
+make_crypto_reader!();

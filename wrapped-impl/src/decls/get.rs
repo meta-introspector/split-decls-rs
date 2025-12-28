@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Attrs!();
-        From!();
         Source!();
+        From!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! get {
     };
 }
 
-get!()
+get!();

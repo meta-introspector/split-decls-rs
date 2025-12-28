@@ -4,4 +4,4 @@ macro_rules! arithmetic {
     };
 }
 
-arithmetic!()
+arithmetic!();

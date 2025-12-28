@@ -11,4 +11,4 @@ macro_rules! sleeper_stop {
     };
 }
 
-sleeper_stop!()
+sleeper_stop!();

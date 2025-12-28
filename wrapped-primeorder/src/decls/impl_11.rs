@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        AffinePoint!();
         ProjectivePoint!();
         EquationAIsMinusThree!();
+        AffinePoint!();
         PrimeCurveParams!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_11 {
     };
 }
 
-impl_11!()
+impl_11!();

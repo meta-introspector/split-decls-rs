@@ -4,4 +4,4 @@ macro_rules! check_edit {
     };
 }
 
-check_edit!()
+check_edit!();

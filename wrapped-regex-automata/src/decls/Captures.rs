@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        PatternID!();
         NonMaxUsize!();
+        Span!();
         GroupInfo!();
         Regex!();
-        Span!();
-        PatternID!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! Captures {
     };
 }
 
-Captures!()
+Captures!();

@@ -4,4 +4,4 @@ macro_rules! MOVE_BLOCK_ALIGN {
     };
 }
 
-MOVE_BLOCK_ALIGN!()
+MOVE_BLOCK_ALIGN!();

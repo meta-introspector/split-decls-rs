@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Addr!();
-        Config!();
         Pack!();
+        Config!();
+        Addr!();
         Tid!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_166 {
     };
 }
 
-impl_166!()
+impl_166!();

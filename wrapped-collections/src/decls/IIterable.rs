@@ -4,4 +4,4 @@ macro_rules! IIterable {
     };
 }
 
-IIterable!()
+IIterable!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        ClassSetUnion!();
         ClassSet!();
-        ClassSetItem!();
         Span!();
+        ClassSetUnion!();
+        ClassSetItem!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_90 {
     };
 }
 
-impl_90!()
+impl_90!();

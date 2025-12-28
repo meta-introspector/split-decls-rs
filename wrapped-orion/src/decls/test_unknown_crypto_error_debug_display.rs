@@ -11,4 +11,4 @@ macro_rules! test_unknown_crypto_error_debug_display {
     };
 }
 
-test_unknown_crypto_error_debug_display!()
+test_unknown_crypto_error_debug_display!();

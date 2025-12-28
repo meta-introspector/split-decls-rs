@@ -32,4 +32,4 @@ macro_rules! replace_path_in_different_contexts {
     };
 }
 
-replace_path_in_different_contexts!()
+replace_path_in_different_contexts!();

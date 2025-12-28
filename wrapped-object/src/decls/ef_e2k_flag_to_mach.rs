@@ -4,4 +4,4 @@ macro_rules! ef_e2k_flag_to_mach {
     };
 }
 
-ef_e2k_flag_to_mach!()
+ef_e2k_flag_to_mach!();

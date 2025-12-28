@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        DFA!();
-        Config!();
-        GroupInfo!();
-        Match!();
-        Regex!();
-        PatternID!();
         Cache!();
+        DFA!();
+        PatternID!();
+        Match!();
         Captures!();
         Span!();
         Input!();
+        Regex!();
+        Config!();
+        GroupInfo!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_338 {
     };
 }
 
-impl_338!()
+impl_338!();

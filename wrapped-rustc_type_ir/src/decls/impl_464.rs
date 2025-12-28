@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        UnsafeBinderInner!();
         Interner!();
+        UnsafeBinderInner!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_464 {
     };
 }
 
-impl_464!()
+impl_464!();

@@ -11,4 +11,4 @@ macro_rules! generate_walk_flat_map_fns {
     };
 }
 
-generate_walk_flat_map_fns!()
+generate_walk_flat_map_fns!();

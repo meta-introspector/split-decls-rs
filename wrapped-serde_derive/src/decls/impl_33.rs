@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
         VecAttr!();
-        BoolAttr!();
-        Variant!();
         RenameRule!();
         Ctxt!();
-        MultiName!();
-        Name!();
-        RenameAllRules!();
-        BorrowAttribute!();
         Attr!();
+        BorrowAttribute!();
+        RenameAllRules!();
+        MultiName!();
+        Variant!();
+        BoolAttr!();
+        Name!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_33 {
     };
 }
 
-impl_33!()
+impl_33!();

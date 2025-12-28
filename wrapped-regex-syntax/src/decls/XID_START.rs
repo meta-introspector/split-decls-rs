@@ -4,4 +4,4 @@ macro_rules! XID_START {
     };
 }
 
-XID_START!()
+XID_START!();

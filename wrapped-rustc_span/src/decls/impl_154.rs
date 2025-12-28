@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         SpanData!();
-        Span!();
         InlineCtxt!();
         SyntaxContext!();
+        Span!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_154 {
     };
 }
 
-impl_154!()
+impl_154!();

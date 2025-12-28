@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Region!();
         Stable!();
         BoundVariableKind!();
         Ty!();
         BridgeTys!();
+        Region!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_182 {
     };
 }
 
-impl_182!()
+impl_182!();

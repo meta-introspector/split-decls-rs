@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        DecompressorOxide!();
         Action!();
         LocalVars!();
-        DecompressorOxide!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! init_tree {
     };
 }
 
-init_tree!()
+init_tree!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        FileHeader!();
-        Item!();
         XcoffComdatIterator!();
-        XcoffComdat!();
+        Item!();
+        FileHeader!();
         ReadRef!();
+        XcoffComdat!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_848 {
     };
 }
 
-impl_848!()
+impl_848!();

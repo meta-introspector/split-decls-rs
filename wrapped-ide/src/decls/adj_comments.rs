@@ -11,4 +11,4 @@ macro_rules! adj_comments {
     };
 }
 
-adj_comments!()
+adj_comments!();

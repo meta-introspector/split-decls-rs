@@ -4,4 +4,4 @@ macro_rules! wikipedia {
     };
 }
 
-wikipedia!()
+wikipedia!();

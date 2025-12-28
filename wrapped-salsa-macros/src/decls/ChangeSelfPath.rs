@@ -4,4 +4,4 @@ macro_rules! ChangeSelfPath {
     };
 }
 
-ChangeSelfPath!()
+ChangeSelfPath!();

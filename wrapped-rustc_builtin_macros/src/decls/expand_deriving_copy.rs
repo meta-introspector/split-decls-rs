@@ -11,4 +11,4 @@ macro_rules! expand_deriving_copy {
     };
 }
 
-expand_deriving_copy!()
+expand_deriving_copy!();

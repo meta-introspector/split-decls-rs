@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        Numeric!();
-        Atomic!();
-        Action!();
         Load!();
-        State!();
-        Ref!();
-        Store!();
         Synchronize!();
         Access!();
+        Store!();
+        State!();
+        Atomic!();
+        Ref!();
+        Action!();
+        Numeric!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_40 {
     };
 }
 
-impl_40!()
+impl_40!();

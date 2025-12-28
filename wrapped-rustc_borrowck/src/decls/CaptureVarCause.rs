@@ -4,4 +4,4 @@ macro_rules! CaptureVarCause {
     };
 }
 
-CaptureVarCause!()
+CaptureVarCause!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DFA!();
         NonMaxUsize!();
+        DFA!();
         Match!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! copy_match_to_slots {
     };
 }
 
-copy_match_to_slots!()
+copy_match_to_slots!();

@@ -12,4 +12,4 @@ macro_rules! capability_is_in_bounding_set {
     };
 }
 
-capability_is_in_bounding_set!()
+capability_is_in_bounding_set!();

@@ -4,4 +4,4 @@ macro_rules! MENDE_KIKAKUI {
     };
 }
 
-MENDE_KIKAKUI!()
+MENDE_KIKAKUI!();

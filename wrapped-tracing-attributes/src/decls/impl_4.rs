@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        ExprArg!();
-        InstrumentArgs!();
-        StrArg!();
-        Skips!();
         EventArgs!();
+        StrArg!();
+        InstrumentArgs!();
+        ExprArg!();
+        Skips!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_4 {
     };
 }
 
-impl_4!()
+impl_4!();

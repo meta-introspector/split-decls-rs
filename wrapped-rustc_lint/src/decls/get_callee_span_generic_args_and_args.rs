@@ -11,4 +11,4 @@ macro_rules! get_callee_span_generic_args_and_args {
     };
 }
 
-get_callee_span_generic_args_and_args!()
+get_callee_span_generic_args_and_args!();

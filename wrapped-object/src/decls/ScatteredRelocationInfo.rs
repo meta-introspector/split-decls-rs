@@ -4,4 +4,4 @@ macro_rules! ScatteredRelocationInfo {
     };
 }
 
-ScatteredRelocationInfo!()
+ScatteredRelocationInfo!();

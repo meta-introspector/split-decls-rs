@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         ElfSectionIterator!();
-        FileHeader!();
         ReadRef!();
+        FileHeader!();
         ElfFile!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_309 {
     };
 }
 
-impl_309!()
+impl_309!();

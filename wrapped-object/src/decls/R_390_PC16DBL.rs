@@ -4,4 +4,4 @@ macro_rules! R_390_PC16DBL {
     };
 }
 
-R_390_PC16DBL!()
+R_390_PC16DBL!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Piece!();
         Parser!();
+        Piece!();
         ParseMode!();
         Argument!();
     };
@@ -14,4 +14,4 @@ macro_rules! format_tab_empty {
     };
 }
 
-format_tab_empty!()
+format_tab_empty!();

@@ -4,4 +4,4 @@ macro_rules! oil {
     };
 }
 
-oil!()
+oil!();

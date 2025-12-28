@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Name!();
-        CargoMessage!();
-        CanonicalPath!();
-        Test!();
-        Stderr!();
-        Project!();
         ParsedOutputs!();
+        Project!();
+        CargoMessage!();
+        Test!();
         Context!();
+        Name!();
+        CanonicalPath!();
+        Stderr!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! parse_cargo_json {
     };
 }
 
-parse_cargo_json!()
+parse_cargo_json!();

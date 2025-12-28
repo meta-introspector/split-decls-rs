@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        IntPredicate!();
         Builder!();
+        IntPredicate!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! emit_powerpc_va_arg {
     };
 }
 
-emit_powerpc_va_arg!()
+emit_powerpc_va_arg!();

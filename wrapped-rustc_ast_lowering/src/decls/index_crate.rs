@@ -11,4 +11,4 @@ macro_rules! index_crate {
     };
 }
 
-index_crate!()
+index_crate!();

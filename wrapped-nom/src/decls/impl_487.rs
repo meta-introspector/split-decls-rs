@@ -1,18 +1,18 @@
 macro_rules! deps {
     () => {
-        ExtendInto!();
-        Needed!();
-        Offset!();
-        Parser!();
         Input!();
-        Error!();
-        EscapedTransform!();
         OutputMode!();
-        PResult!();
         Err!();
         ParseError!();
+        Parser!();
+        Error!();
         AsChar!();
+        Needed!();
         ErrorKind!();
+        ExtendInto!();
+        PResult!();
+        EscapedTransform!();
+        Offset!();
     };
 }
 
@@ -23,4 +23,4 @@ macro_rules! impl_487 {
     };
 }
 
-impl_487!()
+impl_487!();

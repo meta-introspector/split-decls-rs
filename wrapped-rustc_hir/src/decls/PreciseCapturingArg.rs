@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         PreciseCapturingArgKind!();
-        Lifetime!();
         PreciseCapturingNonLifetimeArg!();
+        Lifetime!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! PreciseCapturingArg {
     };
 }
 
-PreciseCapturingArg!()
+PreciseCapturingArg!();

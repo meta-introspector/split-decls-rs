@@ -11,4 +11,4 @@ macro_rules! check_assist_import_one {
     };
 }
 
-check_assist_import_one!()
+check_assist_import_one!();

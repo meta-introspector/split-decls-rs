@@ -12,4 +12,4 @@ macro_rules! can_inherit_macro_import_from_grandparent {
     };
 }
 
-can_inherit_macro_import_from_grandparent!()
+can_inherit_macro_import_from_grandparent!();

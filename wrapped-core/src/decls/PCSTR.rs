@@ -4,4 +4,4 @@ macro_rules! PCSTR {
     };
 }
 
-PCSTR!()
+PCSTR!();

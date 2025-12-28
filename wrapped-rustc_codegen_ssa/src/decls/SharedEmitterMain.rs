@@ -11,4 +11,4 @@ macro_rules! SharedEmitterMain {
     };
 }
 
-SharedEmitterMain!()
+SharedEmitterMain!();

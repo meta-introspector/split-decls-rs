@@ -13,4 +13,4 @@ macro_rules! from_buf_and_chars {
     };
 }
 
-from_buf_and_chars!()
+from_buf_and_chars!();

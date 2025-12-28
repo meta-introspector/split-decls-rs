@@ -4,4 +4,4 @@ macro_rules! AdtKind {
     };
 }
 
-AdtKind!()
+AdtKind!();

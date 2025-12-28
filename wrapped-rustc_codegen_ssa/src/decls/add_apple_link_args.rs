@@ -11,4 +11,4 @@ macro_rules! add_apple_link_args {
     };
 }
 
-add_apple_link_args!()
+add_apple_link_args!();

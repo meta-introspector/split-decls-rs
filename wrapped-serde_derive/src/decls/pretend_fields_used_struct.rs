@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Container!();
         Field!();
+        Container!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! pretend_fields_used_struct {
     };
 }
 
-pretend_fields_used_struct!()
+pretend_fields_used_struct!();

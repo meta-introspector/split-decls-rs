@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        LzmaEncoderModes!();
         Write!();
         RangeEncoder!();
         LzmaEncoder!();
+        LzmaEncoderModes!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! LzmaWriter {
     };
 }
 
-LzmaWriter!()
+LzmaWriter!();

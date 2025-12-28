@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        VarianceTermPtr!();
         InferredIndex!();
+        VarianceTermPtr!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! TermsContext {
     };
 }
 
-TermsContext!()
+TermsContext!();

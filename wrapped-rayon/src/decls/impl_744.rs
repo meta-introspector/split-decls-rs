@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         Producer!();
+        PanicFuseProducer!();
         IntoIter!();
         PanicFuseIter!();
         Folder!();
-        PanicFuseProducer!();
         PanicFuseFolder!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! impl_744 {
     };
 }
 
-impl_744!()
+impl_744!();

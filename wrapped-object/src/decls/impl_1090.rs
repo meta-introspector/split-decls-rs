@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Result!();
         ByteString!();
+        Result!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_1090 {
     };
 }
 
-impl_1090!()
+impl_1090!();

@@ -4,4 +4,4 @@ macro_rules! ra_fixture {
     };
 }
 
-ra_fixture!()
+ra_fixture!();

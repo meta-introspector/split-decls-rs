@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         Expect!();
         SpanState!();
-        NewSpan!();
         MockSubscriber!();
+        NewSpan!();
         Running!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_75 {
     };
 }
 
-impl_75!()
+impl_75!();

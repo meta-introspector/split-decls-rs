@@ -4,4 +4,4 @@ macro_rules! find_streak {
     };
 }
 
-find_streak!()
+find_streak!();

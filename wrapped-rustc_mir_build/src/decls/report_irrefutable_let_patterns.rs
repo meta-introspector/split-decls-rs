@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        IrrefutableLetPatternsWhileLet!();
-        IrrefutableLetPatternsIfLetGuard!();
-        LetSource!();
-        IrrefutableLetPatternsIfLet!();
         IrrefutableLetPatternsLetElse!();
+        LetSource!();
+        IrrefutableLetPatternsWhileLet!();
+        IrrefutableLetPatternsIfLet!();
+        IrrefutableLetPatternsIfLetGuard!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! report_irrefutable_let_patterns {
     };
 }
 
-report_irrefutable_let_patterns!()
+report_irrefutable_let_patterns!();

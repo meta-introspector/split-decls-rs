@@ -11,4 +11,4 @@ macro_rules! default_pool {
     };
 }
 
-default_pool!()
+default_pool!();

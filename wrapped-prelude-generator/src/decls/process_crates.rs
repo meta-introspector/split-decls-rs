@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Args!();
         FileProcessingResult!();
+        Args!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! process_crates {
     };
 }
 
-process_crates!()
+process_crates!();

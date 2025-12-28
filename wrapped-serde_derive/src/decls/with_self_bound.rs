@@ -11,4 +11,4 @@ macro_rules! with_self_bound {
     };
 }
 
-with_self_bound!()
+with_self_bound!();

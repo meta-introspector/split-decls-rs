@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        B1!();
-        B0!();
-        InternalMarker!();
         Cmp!();
+        B0!();
         Greater!();
+        B1!();
+        InternalMarker!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_24 {
     };
 }
 
-impl_24!()
+impl_24!();

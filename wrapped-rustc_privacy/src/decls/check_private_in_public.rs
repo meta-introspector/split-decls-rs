@@ -11,4 +11,4 @@ macro_rules! check_private_in_public {
     };
 }
 
-check_private_in_public!()
+check_private_in_public!();

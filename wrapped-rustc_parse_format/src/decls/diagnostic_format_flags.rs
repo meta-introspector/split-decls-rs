@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        FormatSpec!();
-        Parser!();
-        Piece!();
-        Argument!();
         ParseMode!();
+        Piece!();
+        FormatSpec!();
+        Argument!();
+        Parser!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! diagnostic_format_flags {
     };
 }
 
-diagnostic_format_flags!()
+diagnostic_format_flags!();

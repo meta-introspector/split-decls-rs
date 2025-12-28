@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        FnHeader!();
-        Closure!();
         Generics!();
         FnSig!();
+        Closure!();
+        FnHeader!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! FnKind {
     };
 }
 
-FnKind!()
+FnKind!();

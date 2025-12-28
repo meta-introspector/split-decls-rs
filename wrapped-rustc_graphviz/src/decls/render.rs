@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Node!();
+        GraphWalk!();
         Labeller!();
         Edge!();
-        GraphWalk!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! render {
     };
 }
 
-render!()
+render!();

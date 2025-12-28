@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Table!();
         Buffer!();
+        Table!();
         Style!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! SerializeDocumentTable {
     };
 }
 
-SerializeDocumentTable!()
+SerializeDocumentTable!();

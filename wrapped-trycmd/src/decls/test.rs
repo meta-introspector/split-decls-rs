@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Bin!();
-        JoinedArgs!();
+        TryCmd!();
+        CommandStatus!();
+        Step!();
         OneShot!();
         Env!();
-        CommandStatus!();
-        TryCmd!();
-        Step!();
+        Bin!();
+        JoinedArgs!();
         Args!();
     };
 }
@@ -157,4 +157,4 @@ bar
     };
 }
 
-test!()
+test!();

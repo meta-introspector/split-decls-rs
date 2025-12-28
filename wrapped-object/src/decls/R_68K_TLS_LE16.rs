@@ -4,4 +4,4 @@ macro_rules! R_68K_TLS_LE16 {
     };
 }
 
-R_68K_TLS_LE16!()
+R_68K_TLS_LE16!();

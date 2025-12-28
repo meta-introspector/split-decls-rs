@@ -11,4 +11,4 @@ macro_rules! validate_path_keywords {
     };
 }
 
-validate_path_keywords!()
+validate_path_keywords!();

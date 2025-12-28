@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Database!();
         Storage!();
+        Database!();
         ZalsaLocal!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_297 {
     };
 }
 
-impl_297!()
+impl_297!();

@@ -11,4 +11,4 @@ macro_rules! fallback_impl {
     };
 }
 
-fallback_impl!()
+fallback_impl!();

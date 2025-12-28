@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Index!();
         Map!();
         Value!();
+        Index!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_85 {
     };
 }
 
-impl_85!()
+impl_85!();

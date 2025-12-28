@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Configuration!();
         ValueShared!();
         Durability!();
-        Configuration!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_185 {
     };
 }
 
-impl_185!()
+impl_185!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Parameters!();
         Field!();
+        Parameters!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! get_member {
     };
 }
 
-get_member!()
+get_member!();

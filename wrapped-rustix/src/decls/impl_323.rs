@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        IncompleteArrayField!();
         Result!();
+        IncompleteArrayField!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_323 {
     };
 }
 
-impl_323!()
+impl_323!();

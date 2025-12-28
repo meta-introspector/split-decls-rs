@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        ThreadPoolBuilder!();
         ThreadPoolBuildError!();
-        ThreadSpawn!();
+        ThreadPoolBuilder!();
         ThreadPool!();
+        ThreadSpawn!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_338 {
     };
 }
 
-impl_338!()
+impl_338!();

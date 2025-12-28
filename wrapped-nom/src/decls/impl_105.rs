@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Err!();
         OutputMode!();
-        PResult!();
-        Error!();
+        Err!();
         Parser!();
+        Error!();
         Peek!();
+        PResult!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_105 {
     };
 }
 
-impl_105!()
+impl_105!();

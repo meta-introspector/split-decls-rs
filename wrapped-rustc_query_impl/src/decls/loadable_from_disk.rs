@@ -4,4 +4,4 @@ macro_rules! loadable_from_disk {
     };
 }
 
-loadable_from_disk!()
+loadable_from_disk!();

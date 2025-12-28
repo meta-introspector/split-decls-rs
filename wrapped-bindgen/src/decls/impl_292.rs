@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         Dependencies!();
         CppStruct!();
-        Value!();
         TypeMap!();
+        Value!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_292 {
     };
 }
 
-impl_292!()
+impl_292!();

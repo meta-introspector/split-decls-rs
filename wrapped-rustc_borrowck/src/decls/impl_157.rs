@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        RegionErrorKind!();
         RegionErrors!();
+        RegionErrorKind!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_157 {
     };
 }
 
-impl_157!()
+impl_157!();

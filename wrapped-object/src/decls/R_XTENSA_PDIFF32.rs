@@ -4,4 +4,4 @@ macro_rules! R_XTENSA_PDIFF32 {
     };
 }
 
-R_XTENSA_PDIFF32!()
+R_XTENSA_PDIFF32!();

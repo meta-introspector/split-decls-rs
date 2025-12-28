@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        FieldElement!();
         RingElementNTT!();
         Shake128!();
         UnknownCryptoError!();
+        FieldElement!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! sample_ntt {
     };
 }
 
-sample_ntt!()
+sample_ntt!();

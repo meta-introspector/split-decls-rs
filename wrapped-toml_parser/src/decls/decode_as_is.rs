@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Raw!();
-        ErrorSink!();
         StringBuilder!();
         ScalarKind!();
+        Raw!();
+        ErrorSink!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! decode_as_is {
     };
 }
 
-decode_as_is!()
+decode_as_is!();

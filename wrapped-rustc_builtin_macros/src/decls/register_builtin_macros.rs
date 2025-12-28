@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        ExpandRequires!();
-        ExpandEnsures!();
-        BuiltinDerive!();
         Expander!();
+        ExpandRequires!();
+        BuiltinDerive!();
+        ExpandEnsures!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! register_builtin_macros {
     };
 }
 
-register_builtin_macros!()
+register_builtin_macros!();

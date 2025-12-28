@@ -4,4 +4,4 @@ macro_rules! DuplicateMatcherBinding {
     };
 }
 
-DuplicateMatcherBinding!()
+DuplicateMatcherBinding!();

@@ -12,4 +12,4 @@ macro_rules! str_normalize_user_path {
     };
 }
 
-str_normalize_user_path!()
+str_normalize_user_path!();

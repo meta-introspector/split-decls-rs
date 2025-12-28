@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         Container!();
-        Fragment!();
         Parameters!();
-        TupleTrait!();
         Field!();
+        TupleTrait!();
+        Fragment!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! serialize_tuple_struct {
     };
 }
 
-serialize_tuple_struct!()
+serialize_tuple_struct!();

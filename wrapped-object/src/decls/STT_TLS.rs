@@ -11,4 +11,4 @@ macro_rules! STT_TLS {
     };
 }
 
-STT_TLS!()
+STT_TLS!();

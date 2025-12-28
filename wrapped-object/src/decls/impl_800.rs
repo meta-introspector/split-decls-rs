@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Result!();
-        SectionTable!();
         FileHeader!();
+        Result!();
         SectionHeader!();
-        ReadRef!();
         SectionIndex!();
+        SectionTable!();
+        ReadRef!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_800 {
     };
 }
 
-impl_800!()
+impl_800!();

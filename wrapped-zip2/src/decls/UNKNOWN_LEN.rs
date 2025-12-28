@@ -4,4 +4,4 @@ macro_rules! UNKNOWN_LEN {
     };
 }
 
-UNKNOWN_LEN!()
+UNKNOWN_LEN!();

@@ -4,4 +4,4 @@ macro_rules! RegisterClassOnlyClobber {
     };
 }
 
-RegisterClassOnlyClobber!()
+RegisterClassOnlyClobber!();

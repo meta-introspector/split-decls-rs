@@ -4,4 +4,4 @@ macro_rules! PR_GET_TIMERSLACK {
     };
 }
 
-PR_GET_TIMERSLACK!()
+PR_GET_TIMERSLACK!();

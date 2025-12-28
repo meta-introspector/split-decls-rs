@@ -4,4 +4,4 @@ macro_rules! stringify_punct {
     };
 }
 
-stringify_punct!()
+stringify_punct!();

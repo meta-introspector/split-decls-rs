@@ -4,4 +4,4 @@ macro_rules! CompilerHost {
     };
 }
 
-CompilerHost!()
+CompilerHost!();

@@ -12,4 +12,4 @@ macro_rules! regression_issue_83_signed {
     };
 }
 
-regression_issue_83_signed!()
+regression_issue_83_signed!();

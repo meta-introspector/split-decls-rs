@@ -4,4 +4,4 @@ macro_rules! PR_CAP_AMBIENT_LOWER {
     };
 }
 
-PR_CAP_AMBIENT_LOWER!()
+PR_CAP_AMBIENT_LOWER!();

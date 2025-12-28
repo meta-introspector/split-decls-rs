@@ -11,4 +11,4 @@ macro_rules! trim_start {
     };
 }
 
-trim_start!()
+trim_start!();

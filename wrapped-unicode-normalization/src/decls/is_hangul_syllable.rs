@@ -4,4 +4,4 @@ macro_rules! is_hangul_syllable {
     };
 }
 
-is_hangul_syllable!()
+is_hangul_syllable!();

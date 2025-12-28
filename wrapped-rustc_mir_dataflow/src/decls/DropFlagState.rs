@@ -4,4 +4,4 @@ macro_rules! DropFlagState {
     };
 }
 
-DropFlagState!()
+DropFlagState!();

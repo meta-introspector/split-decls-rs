@@ -2,9 +2,9 @@ macro_rules! deps {
     () => {
         Result!();
         DirRoot!();
-        DirFixture!();
         DirRootInner!();
         Error!();
+        DirFixture!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_194 {
     };
 }
 
-impl_194!()
+impl_194!();

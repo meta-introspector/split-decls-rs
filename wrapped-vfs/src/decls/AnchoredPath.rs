@@ -12,4 +12,4 @@ macro_rules! AnchoredPath {
     };
 }
 
-AnchoredPath!()
+AnchoredPath!();

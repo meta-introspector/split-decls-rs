@@ -4,4 +4,4 @@ macro_rules! SerializeLevel {
     };
 }
 
-SerializeLevel!()
+SerializeLevel!();

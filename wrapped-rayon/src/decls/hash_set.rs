@@ -4,4 +4,4 @@ macro_rules! hash_set {
     };
 }
 
-hash_set!()
+hash_set!();

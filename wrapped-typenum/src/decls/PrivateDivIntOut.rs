@@ -11,4 +11,4 @@ macro_rules! PrivateDivIntOut {
     };
 }
 
-PrivateDivIntOut!()
+PrivateDivIntOut!();

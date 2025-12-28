@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        NodeOrToken!();
         Delta!();
+        SyntaxElement!();
         SyntaxKind!();
         SyntaxNode!();
-        SyntaxElement!();
-        NodeData!();
-        Green!();
         AddToSllResult!();
+        Green!();
+        NodeOrToken!();
+        NodeData!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_20 {
     };
 }
 
-impl_20!()
+impl_20!();

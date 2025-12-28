@@ -4,4 +4,4 @@ macro_rules! parse_depth {
     };
 }
 
-parse_depth!()
+parse_depth!();

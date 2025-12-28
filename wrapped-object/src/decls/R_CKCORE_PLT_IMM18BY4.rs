@@ -4,4 +4,4 @@ macro_rules! R_CKCORE_PLT_IMM18BY4 {
     };
 }
 
-R_CKCORE_PLT_IMM18BY4!()
+R_CKCORE_PLT_IMM18BY4!();

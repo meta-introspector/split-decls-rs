@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        NewSpan!();
-        ActualAncestry!();
         ExpectedAncestry!();
+        NewSpan!();
         ExpectedFields!();
+        ActualAncestry!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_57 {
     };
 }
 
-impl_57!()
+impl_57!();

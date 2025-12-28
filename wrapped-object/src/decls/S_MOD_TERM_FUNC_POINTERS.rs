@@ -4,4 +4,4 @@ macro_rules! S_MOD_TERM_FUNC_POINTERS {
     };
 }
 
-S_MOD_TERM_FUNC_POINTERS!()
+S_MOD_TERM_FUNC_POINTERS!();

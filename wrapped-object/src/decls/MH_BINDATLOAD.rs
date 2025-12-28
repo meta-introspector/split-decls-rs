@@ -4,4 +4,4 @@ macro_rules! MH_BINDATLOAD {
     };
 }
 
-MH_BINDATLOAD!()
+MH_BINDATLOAD!();

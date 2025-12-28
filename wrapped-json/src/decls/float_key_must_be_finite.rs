@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Error!();
         ErrorCode!();
+        Error!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! float_key_must_be_finite {
     };
 }
 
-float_key_must_be_finite!()
+float_key_must_be_finite!();

@@ -4,4 +4,4 @@ macro_rules! late {
     };
 }
 
-late!()
+late!();

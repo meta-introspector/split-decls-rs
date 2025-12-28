@@ -4,4 +4,4 @@ macro_rules! WideChar {
     };
 }
 
-WideChar!()
+WideChar!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        FnCtxt!();
-        ConfirmContext!();
         Pick!();
+        ConfirmContext!();
         ConfirmResult!();
+        FnCtxt!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_246 {
     };
 }
 
-impl_246!()
+impl_246!();

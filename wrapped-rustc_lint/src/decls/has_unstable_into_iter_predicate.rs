@@ -11,4 +11,4 @@ macro_rules! has_unstable_into_iter_predicate {
     };
 }
 
-has_unstable_into_iter_predicate!()
+has_unstable_into_iter_predicate!();

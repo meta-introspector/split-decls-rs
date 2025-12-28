@@ -12,4 +12,4 @@ macro_rules! create_mono_items_for_default_impls {
     };
 }
 
-create_mono_items_for_default_impls!()
+create_mono_items_for_default_impls!();

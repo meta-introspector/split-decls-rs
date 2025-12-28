@@ -4,4 +4,4 @@ macro_rules! ImplConstStability {
     };
 }
 
-ImplConstStability!()
+ImplConstStability!();

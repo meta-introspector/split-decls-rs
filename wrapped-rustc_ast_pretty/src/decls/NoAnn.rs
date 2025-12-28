@@ -4,4 +4,4 @@ macro_rules! NoAnn {
     };
 }
 
-NoAnn!()
+NoAnn!();

@@ -12,4 +12,4 @@ macro_rules! validate_ident {
     };
 }
 
-validate_ident!()
+validate_ident!();

@@ -7,4 +7,4 @@ macro_rules! test_doc_comment_none {
     };
 }
 
-test_doc_comment_none!()
+test_doc_comment_none!();

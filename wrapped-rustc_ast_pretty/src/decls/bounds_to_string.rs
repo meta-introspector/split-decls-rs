@@ -11,4 +11,4 @@ macro_rules! bounds_to_string {
     };
 }
 
-bounds_to_string!()
+bounds_to_string!();

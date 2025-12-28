@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        IntoParallelRefIterator!();
         IntoParallelRefMutIterator!();
         IntoParallelIterator!();
-        IntoParallelRefIterator!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! MultiZip {
     };
 }
 
-MultiZip!()
+MultiZip!();

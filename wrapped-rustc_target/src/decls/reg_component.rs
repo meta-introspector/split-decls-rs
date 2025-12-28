@@ -11,4 +11,4 @@ macro_rules! reg_component {
     };
 }
 
-reg_component!()
+reg_component!();

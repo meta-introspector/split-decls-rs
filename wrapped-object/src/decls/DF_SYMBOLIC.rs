@@ -11,4 +11,4 @@ macro_rules! DF_SYMBOLIC {
     };
 }
 
-DF_SYMBOLIC!()
+DF_SYMBOLIC!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        CompressionLevel!();
-        MatchGeneratorDriver!();
         Sequence!();
+        CompressionLevel!();
         Matcher!();
+        MatchGeneratorDriver!();
         SuffixStore!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_250 {
     };
 }
 
-impl_250!()
+impl_250!();

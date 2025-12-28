@@ -11,4 +11,4 @@ macro_rules! resolve_expr {
     };
 }
 
-resolve_expr!()
+resolve_expr!();

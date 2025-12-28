@@ -4,4 +4,4 @@ macro_rules! voidpf {
     };
 }
 
-voidpf!()
+voidpf!();

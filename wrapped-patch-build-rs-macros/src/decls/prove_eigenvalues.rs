@@ -4,4 +4,4 @@ macro_rules! prove_eigenvalues {
     };
 }
 
-prove_eigenvalues!()
+prove_eigenvalues!();

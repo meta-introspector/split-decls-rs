@@ -4,4 +4,4 @@ macro_rules! trim_interior_trailing_spaces {
     };
 }
 
-trim_interior_trailing_spaces!()
+trim_interior_trailing_spaces!();

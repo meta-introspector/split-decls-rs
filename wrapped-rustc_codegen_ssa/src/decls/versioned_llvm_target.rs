@@ -4,4 +4,4 @@ macro_rules! versioned_llvm_target {
     };
 }
 
-versioned_llvm_target!()
+versioned_llvm_target!();

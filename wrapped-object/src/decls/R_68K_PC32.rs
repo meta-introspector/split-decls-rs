@@ -4,4 +4,4 @@ macro_rules! R_68K_PC32 {
     };
 }
 
-R_68K_PC32!()
+R_68K_PC32!();

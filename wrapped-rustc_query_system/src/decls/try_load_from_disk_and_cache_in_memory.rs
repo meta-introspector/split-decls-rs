@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         QueryContext!();
-        Deps!();
-        Value!();
+        DepNode!();
         DepGraphData!();
         QueryConfig!();
-        DepNode!();
+        Deps!();
+        Value!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! try_load_from_disk_and_cache_in_memory {
     };
 }
 
-try_load_from_disk_and_cache_in_memory!()
+try_load_from_disk_and_cache_in_memory!();

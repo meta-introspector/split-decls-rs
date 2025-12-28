@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Path!();
         Test!();
+        Path!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! TestCtxt {
     };
 }
 
-TestCtxt!()
+TestCtxt!();

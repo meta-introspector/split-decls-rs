@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         InlineTable!();
         Value!();
-        Visit!();
         Array!();
+        Visit!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! visit_value {
     };
 }
 
-visit_value!()
+visit_value!();

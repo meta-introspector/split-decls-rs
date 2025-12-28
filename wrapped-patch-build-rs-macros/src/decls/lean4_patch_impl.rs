@@ -78,4 +78,4 @@ end Lean.Expr
     };
 }
 
-lean4_patch_impl!()
+lean4_patch_impl!();

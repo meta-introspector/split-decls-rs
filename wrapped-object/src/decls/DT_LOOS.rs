@@ -4,4 +4,4 @@ macro_rules! DT_LOOS {
     };
 }
 
-DT_LOOS!()
+DT_LOOS!();

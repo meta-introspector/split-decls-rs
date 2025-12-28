@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        ResourceNameOrId!();
         Name!();
-        ResourceName!();
         Id!();
+        ResourceName!();
+        ResourceNameOrId!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_729 {
     };
 }
 
-impl_729!()
+impl_729!();

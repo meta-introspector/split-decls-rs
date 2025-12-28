@@ -4,4 +4,4 @@ macro_rules! ForbiddenBound {
     };
 }
 
-ForbiddenBound!()
+ForbiddenBound!();

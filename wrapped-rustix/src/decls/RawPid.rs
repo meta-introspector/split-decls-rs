@@ -4,4 +4,4 @@ macro_rules! RawPid {
     };
 }
 
-RawPid!()
+RawPid!();

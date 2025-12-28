@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        Reference!();
-        Transitions!();
-        Type!();
-        Dfa!();
-        State!();
-        Tree!();
-        Region!();
-        Byte!();
         Uninhabited!();
+        Reference!();
+        Byte!();
+        Type!();
+        Tree!();
+        Dfa!();
+        Region!();
+        State!();
+        Transitions!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_13 {
     };
 }
 
-impl_13!()
+impl_13!();

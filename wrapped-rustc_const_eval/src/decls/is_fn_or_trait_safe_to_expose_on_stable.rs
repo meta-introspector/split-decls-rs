@@ -4,4 +4,4 @@ macro_rules! is_fn_or_trait_safe_to_expose_on_stable {
     };
 }
 
-is_fn_or_trait_safe_to_expose_on_stable!()
+is_fn_or_trait_safe_to_expose_on_stable!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        HRESULT!();
         IUnknown_Vtbl!();
-        IUnknownImpl!();
         GUID!();
+        IUnknownImpl!();
+        HRESULT!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_208 {
     };
 }
 
-impl_208!()
+impl_208!();

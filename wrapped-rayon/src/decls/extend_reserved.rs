@@ -4,4 +4,4 @@ macro_rules! extend_reserved {
     };
 }
 
-extend_reserved!()
+extend_reserved!();

@@ -11,4 +11,4 @@ macro_rules! test_source {
     };
 }
 
-test_source!()
+test_source!();

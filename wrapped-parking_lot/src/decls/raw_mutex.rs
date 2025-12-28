@@ -4,4 +4,4 @@ macro_rules! raw_mutex {
     };
 }
 
-raw_mutex!()
+raw_mutex!();

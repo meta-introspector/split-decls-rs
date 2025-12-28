@@ -1,21 +1,21 @@
 macro_rules! deps {
     () => {
-        Variant!();
+        ScheduleDrops!();
+        Builder!();
         GuardFrameLocal!();
-        ArmHasGuard!();
-        Ascription!();
-        ForGuard!();
-        Binding!();
-        BlockAnd!();
-        BuiltMatchTree!();
+        DeclareLetBindings!();
+        MatchTreeSubBranch!();
         Scope!();
         LocalsForNode!();
-        Builder!();
-        GuardFrame!();
-        DeclareLetBindings!();
-        ScheduleDrops!();
-        MatchTreeSubBranch!();
+        BuiltMatchTree!();
+        BlockAnd!();
+        Ascription!();
         HasMatchGuard!();
+        Variant!();
+        GuardFrame!();
+        ArmHasGuard!();
+        ForGuard!();
+        Binding!();
     };
 }
 
@@ -26,4 +26,4 @@ macro_rules! impl_134 {
     };
 }
 
-impl_134!()
+impl_134!();

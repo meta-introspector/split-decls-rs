@@ -4,4 +4,4 @@ macro_rules! check_type {
     };
 }
 
-check_type!()
+check_type!();

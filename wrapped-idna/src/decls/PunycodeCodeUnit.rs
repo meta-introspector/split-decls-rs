@@ -4,4 +4,4 @@ macro_rules! PunycodeCodeUnit {
     };
 }
 
-PunycodeCodeUnit!()
+PunycodeCodeUnit!();

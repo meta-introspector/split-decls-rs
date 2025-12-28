@@ -11,4 +11,4 @@ macro_rules! local_crate {
     };
 }
 
-local_crate!()
+local_crate!();

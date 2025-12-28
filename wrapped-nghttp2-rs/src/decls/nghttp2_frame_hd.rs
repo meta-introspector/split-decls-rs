@@ -4,4 +4,4 @@ macro_rules! nghttp2_frame_hd {
     };
 }
 
-nghttp2_frame_hd!()
+nghttp2_frame_hd!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Linker!();
         Command!();
+        Linker!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! L4Bender {
     };
 }
 
-L4Bender!()
+L4Bender!();

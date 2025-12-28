@@ -11,4 +11,4 @@ macro_rules! disable_localization {
     };
 }
 
-disable_localization!()
+disable_localization!();

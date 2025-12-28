@@ -4,4 +4,4 @@ macro_rules! CharacterAndTrieValue {
     };
 }
 
-CharacterAndTrieValue!()
+CharacterAndTrieValue!();

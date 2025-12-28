@@ -4,4 +4,4 @@ macro_rules! ELF_NOTE_OS_SOLARIS2 {
     };
 }
 
-ELF_NOTE_OS_SOLARIS2!()
+ELF_NOTE_OS_SOLARIS2!();

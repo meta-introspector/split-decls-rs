@@ -25,4 +25,4 @@ pub fn process_instruction(
     };
 }
 
-ca_macro_impl!()
+ca_macro_impl!();

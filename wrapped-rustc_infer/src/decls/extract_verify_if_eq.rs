@@ -12,4 +12,4 @@ macro_rules! extract_verify_if_eq {
     };
 }
 
-extract_verify_if_eq!()
+extract_verify_if_eq!();

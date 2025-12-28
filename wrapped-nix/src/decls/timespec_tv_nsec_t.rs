@@ -4,4 +4,4 @@ macro_rules! timespec_tv_nsec_t {
     };
 }
 
-timespec_tv_nsec_t!()
+timespec_tv_nsec_t!();

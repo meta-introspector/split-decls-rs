@@ -4,4 +4,4 @@ macro_rules! default_client {
     };
 }
 
-default_client!()
+default_client!();

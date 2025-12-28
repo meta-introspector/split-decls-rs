@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Unique!();
+        UniqueBools!();
         Error!();
         UniqueStrings!();
-        Result!();
-        UniqueNumbers!();
-        UniqueBools!();
         UniqueStrategy!();
+        UniqueNumbers!();
+        Result!();
+        Unique!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! get_unique_strategy_for_type {
     };
 }
 
-get_unique_strategy_for_type!()
+get_unique_strategy_for_type!();

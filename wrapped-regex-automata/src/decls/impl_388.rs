@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        PatternID!();
-        PatternSet!();
-        NonMaxUsize!();
-        Strategy!();
-        Cache!();
-        ReverseAnchored!();
-        GroupInfo!();
-        Match!();
         Input!();
+        NonMaxUsize!();
+        GroupInfo!();
+        Cache!();
+        PatternSet!();
+        ReverseAnchored!();
+        Match!();
         HalfMatch!();
+        PatternID!();
+        Strategy!();
         Anchored!();
     };
 }
@@ -21,4 +21,4 @@ macro_rules! impl_388 {
     };
 }
 
-impl_388!()
+impl_388!();

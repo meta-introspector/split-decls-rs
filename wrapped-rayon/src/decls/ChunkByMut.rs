@@ -4,4 +4,4 @@ macro_rules! ChunkByMut {
     };
 }
 
-ChunkByMut!()
+ChunkByMut!();

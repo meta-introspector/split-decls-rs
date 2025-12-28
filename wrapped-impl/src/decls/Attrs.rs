@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Fmt!();
-        Source!();
-        From!();
         Transparent!();
+        From!();
+        Source!();
         Display!();
+        Fmt!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! Attrs {
     };
 }
 
-Attrs!()
+Attrs!();

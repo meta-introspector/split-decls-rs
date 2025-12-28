@@ -4,4 +4,4 @@ macro_rules! max_num_threads {
     };
 }
 
-max_num_threads!()
+max_num_threads!();

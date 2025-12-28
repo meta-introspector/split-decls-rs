@@ -4,4 +4,4 @@ macro_rules! CloneShimBuilder {
     };
 }
 
-CloneShimBuilder!()
+CloneShimBuilder!();

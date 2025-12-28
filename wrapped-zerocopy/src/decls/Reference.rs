@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Aliasing!();
-        Shared!();
         Exclusive!();
+        Shared!();
+        Aliasing!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Reference {
     };
 }
 
-Reference!()
+Reference!();

@@ -4,4 +4,4 @@ macro_rules! assert_elapsed {
     };
 }
 
-assert_elapsed!()
+assert_elapsed!();

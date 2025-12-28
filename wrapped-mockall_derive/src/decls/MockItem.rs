@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        MockItemStruct!();
         MockItemModule!();
+        MockItemStruct!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! MockItem {
     };
 }
 
-MockItem!()
+MockItem!();

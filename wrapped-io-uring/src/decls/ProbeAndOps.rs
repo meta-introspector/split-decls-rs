@@ -11,4 +11,4 @@ macro_rules! ProbeAndOps {
     };
 }
 
-ProbeAndOps!()
+ProbeAndOps!();

@@ -4,4 +4,4 @@ macro_rules! R_CKCORE_JUMP_SLOT {
     };
 }
 
-R_CKCORE_JUMP_SLOT!()
+R_CKCORE_JUMP_SLOT!();

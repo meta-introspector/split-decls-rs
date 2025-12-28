@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Expr!();
         Pat!();
         PatKind!();
+        Expr!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_182 {
     };
 }
 
-impl_182!()
+impl_182!();

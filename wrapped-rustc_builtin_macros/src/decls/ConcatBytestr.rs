@@ -4,4 +4,4 @@ macro_rules! ConcatBytestr {
     };
 }
 
-ConcatBytestr!()
+ConcatBytestr!();

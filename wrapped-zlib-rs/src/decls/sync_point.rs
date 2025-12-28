@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        InflateStream!();
         Mode!();
+        InflateStream!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! sync_point {
     };
 }
 
-sync_point!()
+sync_point!();

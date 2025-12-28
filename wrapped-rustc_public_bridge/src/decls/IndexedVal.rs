@@ -4,4 +4,4 @@ macro_rules! IndexedVal {
     };
 }
 
-IndexedVal!()
+IndexedVal!();

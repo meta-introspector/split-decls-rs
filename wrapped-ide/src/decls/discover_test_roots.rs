@@ -12,4 +12,4 @@ macro_rules! discover_test_roots {
     };
 }
 
-discover_test_roots!()
+discover_test_roots!();

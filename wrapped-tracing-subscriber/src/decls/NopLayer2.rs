@@ -4,4 +4,4 @@ macro_rules! NopLayer2 {
     };
 }
 
-NopLayer2!()
+NopLayer2!();

@@ -4,4 +4,4 @@ macro_rules! interest_cache_epoch {
     };
 }
 
-interest_cache_epoch!()
+interest_cache_epoch!();

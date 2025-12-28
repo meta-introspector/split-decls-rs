@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Item!();
         WasmRelocationIterator!();
         Relocation!();
+        Item!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_773 {
     };
 }
 
-impl_773!()
+impl_773!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Identity!();
-        Id!();
         AtomicIterationCount!();
+        Id!();
         CycleHeads!();
+        Identity!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! QueryRevisionsExtraInner {
     };
 }
 
-QueryRevisionsExtraInner!()
+QueryRevisionsExtraInner!();

@@ -4,4 +4,4 @@ macro_rules! DocMaskedNotExternCrateSelf {
     };
 }
 
-DocMaskedNotExternCrateSelf!()
+DocMaskedNotExternCrateSelf!();

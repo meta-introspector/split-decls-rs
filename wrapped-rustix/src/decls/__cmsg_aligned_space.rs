@@ -4,4 +4,4 @@ macro_rules! __cmsg_aligned_space {
     };
 }
 
-__cmsg_aligned_space!()
+__cmsg_aligned_space!();

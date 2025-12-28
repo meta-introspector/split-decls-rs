@@ -4,4 +4,4 @@ macro_rules! CARIAN {
     };
 }
 
-CARIAN!()
+CARIAN!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Mask!();
-        Vector!();
         MoveMask!();
+        Vector!();
+        Mask!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! aarch64neon {
     };
 }
 
-aarch64neon!()
+aarch64neon!();

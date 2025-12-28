@@ -4,4 +4,4 @@ macro_rules! REPS {
     };
 }
 
-REPS!()
+REPS!();

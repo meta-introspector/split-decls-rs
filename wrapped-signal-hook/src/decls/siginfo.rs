@@ -4,4 +4,4 @@ macro_rules! siginfo {
     };
 }
 
-siginfo!()
+siginfo!();

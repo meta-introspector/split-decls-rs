@@ -4,4 +4,4 @@ macro_rules! SHT_ARM_EXIDX {
     };
 }
 
-SHT_ARM_EXIDX!()
+SHT_ARM_EXIDX!();

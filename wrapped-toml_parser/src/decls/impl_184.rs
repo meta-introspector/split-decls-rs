@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        EventReceiver!();
         Source!();
         ValidateWhitespace!();
+        EventReceiver!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_184 {
     };
 }
 
-impl_184!()
+impl_184!();

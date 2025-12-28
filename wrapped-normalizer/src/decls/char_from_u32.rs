@@ -4,4 +4,4 @@ macro_rules! char_from_u32 {
     };
 }
 
-char_from_u32!()
+char_from_u32!();

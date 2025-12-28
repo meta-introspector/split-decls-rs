@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        AttributeExt!();
         EntryPointType!();
+        AttributeExt!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! entry_point_type {
     };
 }
 
-entry_point_type!()
+entry_point_type!();

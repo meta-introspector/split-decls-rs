@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Bridge!();
         AllocRangeHelpers!();
         CompilerCtxt!();
+        Bridge!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_41 {
     };
 }
 
-impl_41!()
+impl_41!();

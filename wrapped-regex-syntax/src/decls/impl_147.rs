@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        CaseFoldError!();
         Result!();
+        CaseFoldError!();
         IntervalSetIter!();
-        Interval!();
-        IntervalSet!();
         Bound!();
+        IntervalSet!();
+        Interval!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_147 {
     };
 }
 
-impl_147!()
+impl_147!();

@@ -4,4 +4,4 @@ macro_rules! recursively_reachable {
     };
 }
 
-recursively_reachable!()
+recursively_reachable!();

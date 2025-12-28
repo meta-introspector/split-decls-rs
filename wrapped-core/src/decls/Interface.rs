@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        IUnknown!();
-        InterfaceRef!();
-        GUID!();
+        ComObject!();
         HRESULT!();
         Weak!();
-        ComObject!();
-        IUnknownImpl!();
         ComObjectInner!();
+        IUnknownImpl!();
+        GUID!();
+        InterfaceRef!();
+        IUnknown!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! Interface {
     };
 }
 
-Interface!()
+Interface!();

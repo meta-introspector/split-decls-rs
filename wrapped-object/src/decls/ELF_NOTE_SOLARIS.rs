@@ -4,4 +4,4 @@ macro_rules! ELF_NOTE_SOLARIS {
     };
 }
 
-ELF_NOTE_SOLARIS!()
+ELF_NOTE_SOLARIS!();

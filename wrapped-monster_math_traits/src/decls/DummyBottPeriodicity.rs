@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        BottPeriodicityTrait!();
         BottPeriodicityData!();
+        BottPeriodicityTrait!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! DummyBottPeriodicity {
     };
 }
 
-DummyBottPeriodicity!()
+DummyBottPeriodicity!();

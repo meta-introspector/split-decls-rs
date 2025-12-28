@@ -4,4 +4,4 @@ macro_rules! atomic_u64 {
     };
 }
 
-atomic_u64!()
+atomic_u64!();

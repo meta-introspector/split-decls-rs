@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        RowIterator!();
-        GUID!();
         AsRow!();
-        Value!();
         HasAttributes!();
+        Value!();
+        GUID!();
+        RowIterator!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_471 {
     };
 }
 
-impl_471!()
+impl_471!();

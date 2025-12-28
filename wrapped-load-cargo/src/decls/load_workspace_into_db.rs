@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         ProcMacroServerChoice!();
-        ProjectFolders!();
         LoadCargoConfig!();
+        ProjectFolders!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! load_workspace_into_db {
     };
 }
 
-load_workspace_into_db!()
+load_workspace_into_db!();

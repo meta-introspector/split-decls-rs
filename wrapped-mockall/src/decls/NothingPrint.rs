@@ -4,4 +4,4 @@ macro_rules! NothingPrint {
     };
 }
 
-NothingPrint!()
+NothingPrint!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Position!();
-        ErrorKind!();
         BuildMetadata!();
         Version!();
+        Position!();
         Prerelease!();
+        ErrorKind!();
         Error!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! impl_61 {
     };
 }
 
-impl_61!()
+impl_61!();

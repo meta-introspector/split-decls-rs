@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        ParserNode!();
         Expr!();
         ParserExpr!();
-        ParserNode!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! convert_node {
     };
 }
 
-convert_node!()
+convert_node!();

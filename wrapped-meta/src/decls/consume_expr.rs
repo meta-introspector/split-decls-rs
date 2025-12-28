@@ -13,4 +13,4 @@ macro_rules! consume_expr {
     };
 }
 
-consume_expr!()
+consume_expr!();

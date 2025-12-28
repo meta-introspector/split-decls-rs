@@ -12,4 +12,4 @@ macro_rules! set_time_stamp_counter_readability {
     };
 }
 
-set_time_stamp_counter_readability!()
+set_time_stamp_counter_readability!();

@@ -4,4 +4,4 @@ macro_rules! inherit_stability {
     };
 }
 
-inherit_stability!()
+inherit_stability!();

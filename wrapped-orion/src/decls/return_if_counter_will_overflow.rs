@@ -11,4 +11,4 @@ macro_rules! return_if_counter_will_overflow {
     };
 }
 
-return_if_counter_will_overflow!()
+return_if_counter_will_overflow!();

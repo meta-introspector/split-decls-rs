@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Options!();
         InputStruct!();
+        Options!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! InputArgs {
     };
 }
 
-InputArgs!()
+InputArgs!();

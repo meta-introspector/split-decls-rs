@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        HomogeneousTuple!();
         Tuples!();
+        HomogeneousTuple!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! tuples {
     };
 }
 
-tuples!()
+tuples!();

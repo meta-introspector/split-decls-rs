@@ -4,4 +4,4 @@ macro_rules! c_api {
     };
 }
 
-c_api!()
+c_api!();

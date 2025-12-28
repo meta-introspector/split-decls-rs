@@ -4,4 +4,4 @@ macro_rules! json_expect_expr_comma {
     };
 }
 
-json_expect_expr_comma!()
+json_expect_expr_comma!();

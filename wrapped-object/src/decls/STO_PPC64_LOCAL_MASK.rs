@@ -4,4 +4,4 @@ macro_rules! STO_PPC64_LOCAL_MASK {
     };
 }
 
-STO_PPC64_LOCAL_MASK!()
+STO_PPC64_LOCAL_MASK!();

@@ -4,4 +4,4 @@ macro_rules! Folder {
     };
 }
 
-Folder!()
+Folder!();

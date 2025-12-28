@@ -4,4 +4,4 @@ macro_rules! Rust2024IncompatiblePatSugg {
     };
 }
 
-Rust2024IncompatiblePatSugg!()
+Rust2024IncompatiblePatSugg!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Category!();
         ParseError!();
-        Round!();
-        ExpInt!();
         StatusAnd!();
+        Category!();
+        ExpInt!();
+        Round!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! Float {
     };
 }
 
-Float!()
+Float!();

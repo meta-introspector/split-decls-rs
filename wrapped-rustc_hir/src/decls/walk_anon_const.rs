@@ -12,4 +12,4 @@ macro_rules! walk_anon_const {
     };
 }
 
-walk_anon_const!()
+walk_anon_const!();

@@ -4,4 +4,4 @@ macro_rules! ARM_RELOC_BR24 {
     };
 }
 
-ARM_RELOC_BR24!()
+ARM_RELOC_BR24!();

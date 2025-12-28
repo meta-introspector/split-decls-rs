@@ -4,4 +4,4 @@ macro_rules! cover {
     };
 }
 
-cover!()
+cover!();

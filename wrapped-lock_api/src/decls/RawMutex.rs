@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Mutex!();
         GuardSend!();
         GuardNoSend!();
+        Mutex!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! RawMutex {
     };
 }
 
-RawMutex!()
+RawMutex!();

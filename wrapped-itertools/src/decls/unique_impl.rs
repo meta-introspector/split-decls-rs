@@ -4,4 +4,4 @@ macro_rules! unique_impl {
     };
 }
 
-unique_impl!()
+unique_impl!();

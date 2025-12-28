@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Punct!();
-        Spacing!();
         TokenTree!();
         Span!();
+        Spacing!();
+        Punct!();
         RcVecMut!();
         Literal!();
     };
@@ -16,4 +16,4 @@ macro_rules! push_token_from_proc_macro {
     };
 }
 
-push_token_from_proc_macro!()
+push_token_from_proc_macro!();

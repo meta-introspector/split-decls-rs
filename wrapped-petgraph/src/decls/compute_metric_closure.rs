@@ -11,4 +11,4 @@ macro_rules! compute_metric_closure {
     };
 }
 
-compute_metric_closure!()
+compute_metric_closure!();

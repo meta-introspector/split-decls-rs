@@ -4,4 +4,4 @@ macro_rules! raw_byte_string {
     };
 }
 
-raw_byte_string!()
+raw_byte_string!();

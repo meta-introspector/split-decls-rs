@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        ClauseKind!();
+        Interner!();
         Ty!();
         Component!();
-        Region!();
+        ClauseKind!();
         OutlivesPredicate!();
-        Interner!();
+        Region!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! elaborate_component_to_clause {
     };
 }
 
-elaborate_component_to_clause!()
+elaborate_component_to_clause!();

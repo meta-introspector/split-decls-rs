@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        WhileSomeFolder!();
         Folder!();
+        WhileSomeFolder!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_1010 {
     };
 }
 
-impl_1010!()
+impl_1010!();

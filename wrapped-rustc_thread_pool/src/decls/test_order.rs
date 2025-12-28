@@ -11,4 +11,4 @@ macro_rules! test_order {
     };
 }
 
-test_order!()
+test_order!();

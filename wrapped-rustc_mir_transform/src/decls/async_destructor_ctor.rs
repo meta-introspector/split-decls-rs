@@ -4,4 +4,4 @@ macro_rules! async_destructor_ctor {
     };
 }
 
-async_destructor_ctor!()
+async_destructor_ctor!();

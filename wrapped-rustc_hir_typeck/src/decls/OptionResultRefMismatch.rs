@@ -4,4 +4,4 @@ macro_rules! OptionResultRefMismatch {
     };
 }
 
-OptionResultRefMismatch!()
+OptionResultRefMismatch!();

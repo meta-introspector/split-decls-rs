@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Result!();
         TimeStampCounterReadability!();
+        Result!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_961 {
     };
 }
 
-impl_961!()
+impl_961!();

@@ -19,4 +19,4 @@ macro_rules! str_normalize_expected_missing {
     };
 }
 
-str_normalize_expected_missing!()
+str_normalize_expected_missing!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        FileName!();
         StableCrateId!();
         StableSourceFileId!();
+        FileName!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_312 {
     };
 }
 
-impl_312!()
+impl_312!();

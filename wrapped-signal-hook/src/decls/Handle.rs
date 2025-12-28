@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        AddSignal!();
         DeliveryState!();
+        AddSignal!();
         SelfPipeWrite!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! Handle {
     };
 }
 
-Handle!()
+Handle!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        PositiveMeasure!();
         Direction!();
+        PositiveMeasure!();
         EdgeRef!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! has_augmented_path {
     };
 }
 
-has_augmented_path!()
+has_augmented_path!();

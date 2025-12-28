@@ -4,4 +4,4 @@ macro_rules! DetectionState {
     };
 }
 
-DetectionState!()
+DetectionState!();

@@ -4,4 +4,4 @@ macro_rules! fn_abi_of_instance {
     };
 }
 
-fn_abi_of_instance!()
+fn_abi_of_instance!();

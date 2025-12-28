@@ -4,4 +4,4 @@ macro_rules! PREPEND {
     };
 }
 
-PREPEND!()
+PREPEND!();

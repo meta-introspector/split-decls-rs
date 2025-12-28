@@ -4,4 +4,4 @@ macro_rules! level_to_log {
     };
 }
 
-level_to_log!()
+level_to_log!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Thread!();
-        Iter!();
-        Entry!();
-        RawIter!();
         ThreadLocal!();
+        Iter!();
+        RawIter!();
+        Thread!();
+        Entry!();
         IterMut!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! impl_31 {
     };
 }
 
-impl_31!()
+impl_31!();

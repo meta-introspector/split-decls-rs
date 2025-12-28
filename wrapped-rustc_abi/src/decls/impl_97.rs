@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
         WrappingRange!();
+        Size!();
+        Primitive!();
+        AbiAlign!();
         Integer!();
         HasDataLayout!();
-        AbiAlign!();
-        Primitive!();
         Scalar!();
-        Size!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_97 {
     };
 }
 
-impl_97!()
+impl_97!();

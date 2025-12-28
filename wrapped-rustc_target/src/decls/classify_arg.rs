@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        ArgAbi!();
         Memory!();
         Class!();
-        ArgAbi!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! classify_arg {
     };
 }
 
-classify_arg!()
+classify_arg!();

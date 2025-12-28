@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ClauseKind!();
         Interner!();
+        ClauseKind!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! supertrait_def_ids {
     };
 }
 
-supertrait_def_ids!()
+supertrait_def_ids!();

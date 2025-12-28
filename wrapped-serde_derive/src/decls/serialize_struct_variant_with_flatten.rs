@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        StructVariant!();
-        Name!();
-        StructTrait!();
-        Parameters!();
         Fragment!();
+        Name!();
+        Parameters!();
         Field!();
+        StructTrait!();
+        StructVariant!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! serialize_struct_variant_with_flatten {
     };
 }
 
-serialize_struct_variant_with_flatten!()
+serialize_struct_variant_with_flatten!();

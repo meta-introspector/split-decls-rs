@@ -11,4 +11,4 @@ macro_rules! membarrier_query {
     };
 }
 
-membarrier_query!()
+membarrier_query!();

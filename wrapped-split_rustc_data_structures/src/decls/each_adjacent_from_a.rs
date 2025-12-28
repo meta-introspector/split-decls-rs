@@ -11,4 +11,4 @@ macro_rules! each_adjacent_from_a {
     };
 }
 
-each_adjacent_from_a!()
+each_adjacent_from_a!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Ctxt!();
-        TagType!();
         Container!();
+        TagType!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! check_adjacent_tag_conflict {
     };
 }
 
-check_adjacent_tag_conflict!()
+check_adjacent_tag_conflict!();

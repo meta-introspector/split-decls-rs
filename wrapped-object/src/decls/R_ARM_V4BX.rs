@@ -4,4 +4,4 @@ macro_rules! R_ARM_V4BX {
     };
 }
 
-R_ARM_V4BX!()
+R_ARM_V4BX!();

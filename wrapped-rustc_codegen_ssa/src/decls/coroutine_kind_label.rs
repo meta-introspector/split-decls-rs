@@ -4,4 +4,4 @@ macro_rules! coroutine_kind_label {
     };
 }
 
-coroutine_kind_label!()
+coroutine_kind_label!();

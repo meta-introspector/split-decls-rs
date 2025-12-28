@@ -4,4 +4,4 @@ macro_rules! TwoPhaseActivation {
     };
 }
 
-TwoPhaseActivation!()
+TwoPhaseActivation!();

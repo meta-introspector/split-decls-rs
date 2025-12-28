@@ -11,4 +11,4 @@ macro_rules! ImageDynamicRelocation32 {
     };
 }
 
-ImageDynamicRelocation32!()
+ImageDynamicRelocation32!();

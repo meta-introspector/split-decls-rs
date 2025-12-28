@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         TestGraph!();
-        UsizeSccs!();
         Sccs!();
+        UsizeSccs!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! test_find_state_2 {
     };
 }
 
-test_find_state_2!()
+test_find_state_2!();

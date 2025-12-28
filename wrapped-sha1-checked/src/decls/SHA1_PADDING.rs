@@ -4,4 +4,4 @@ macro_rules! SHA1_PADDING {
     };
 }
 
-SHA1_PADDING!()
+SHA1_PADDING!();

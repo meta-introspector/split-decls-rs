@@ -4,4 +4,4 @@ macro_rules! ELFABIVERSION {
     };
 }
 
-ELFABIVERSION!()
+ELFABIVERSION!();

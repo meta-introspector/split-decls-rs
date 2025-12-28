@@ -14,4 +14,4 @@ where
     };
 }
 
-test_where_predicates!()
+test_where_predicates!();

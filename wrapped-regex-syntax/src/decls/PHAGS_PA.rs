@@ -4,4 +4,4 @@ macro_rules! PHAGS_PA {
     };
 }
 
-PHAGS_PA!()
+PHAGS_PA!();

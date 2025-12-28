@@ -4,4 +4,4 @@ macro_rules! ACC_USE {
     };
 }
 
-ACC_USE!()
+ACC_USE!();

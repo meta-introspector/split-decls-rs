@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         SharedState!();
-        EncounteredErrorWhileInstantiating!();
         MonoItems!();
+        EncounteredErrorWhileInstantiating!();
         EncounteredErrorWhileInstantiatingGlobalAsm!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! collect_items_rec {
     };
 }
 
-collect_items_rec!()
+collect_items_rec!();

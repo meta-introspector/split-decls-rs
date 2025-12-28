@@ -4,4 +4,4 @@ macro_rules! SB6 {
     };
 }
 
-SB6!()
+SB6!();

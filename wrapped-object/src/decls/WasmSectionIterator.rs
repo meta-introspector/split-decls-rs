@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        SectionHeader!();
         WasmFile!();
+        SectionHeader!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! WasmSectionIterator {
     };
 }
 
-WasmSectionIterator!()
+WasmSectionIterator!();

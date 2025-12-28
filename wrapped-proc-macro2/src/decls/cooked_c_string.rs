@@ -12,4 +12,4 @@ macro_rules! cooked_c_string {
     };
 }
 
-cooked_c_string!()
+cooked_c_string!();

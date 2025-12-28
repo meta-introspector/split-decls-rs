@@ -11,4 +11,4 @@ macro_rules! enforce_trait_manually_implementable {
     };
 }
 
-enforce_trait_manually_implementable!()
+enforce_trait_manually_implementable!();

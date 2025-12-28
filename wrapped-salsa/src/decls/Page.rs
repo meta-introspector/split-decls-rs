@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        SlotVTable!();
         IngredientIndex!();
+        SlotVTable!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Page {
     };
 }
 
-Page!()
+Page!();

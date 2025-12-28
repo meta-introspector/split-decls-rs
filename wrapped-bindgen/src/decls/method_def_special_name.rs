@@ -11,4 +11,4 @@ macro_rules! method_def_special_name {
     };
 }
 
-method_def_special_name!()
+method_def_special_name!();

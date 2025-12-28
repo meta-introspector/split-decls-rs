@@ -4,4 +4,4 @@ macro_rules! CallConv {
     };
 }
 
-CallConv!()
+CallConv!();

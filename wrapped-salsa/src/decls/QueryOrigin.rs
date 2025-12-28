@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        QueryOriginKind!();
         IngredientIndex!();
-        DatabaseKeyIndex!();
         QueryRevisions!();
         Id!();
+        QueryOriginKind!();
+        DatabaseKeyIndex!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! QueryOrigin {
     };
 }
 
-QueryOrigin!()
+QueryOrigin!();

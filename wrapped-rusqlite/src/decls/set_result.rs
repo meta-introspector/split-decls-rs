@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        ToSqlOutput!();
-        Null!();
-        Blob!();
         ValueRef!();
-        ZeroBlob!();
+        Blob!();
         Array!();
+        ToSqlOutput!();
+        ZeroBlob!();
+        Null!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! set_result {
     };
 }
 
-set_result!()
+set_result!();

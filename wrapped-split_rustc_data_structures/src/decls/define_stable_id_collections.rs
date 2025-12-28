@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        IndexEntry!();
         FxIndexMap!();
         FxIndexSet!();
+        IndexEntry!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! define_stable_id_collections {
     };
 }
 
-define_stable_id_collections!()
+define_stable_id_collections!();

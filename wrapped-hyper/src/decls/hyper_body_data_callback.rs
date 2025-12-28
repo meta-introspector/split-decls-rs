@@ -4,4 +4,4 @@ macro_rules! hyper_body_data_callback {
     };
 }
 
-hyper_body_data_callback!()
+hyper_body_data_callback!();

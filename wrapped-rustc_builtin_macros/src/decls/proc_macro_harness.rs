@@ -4,4 +4,4 @@ macro_rules! proc_macro_harness {
     };
 }
 
-proc_macro_harness!()
+proc_macro_harness!();

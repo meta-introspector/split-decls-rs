@@ -4,4 +4,4 @@ macro_rules! IceBugReportInternalFeature {
     };
 }
 
-IceBugReportInternalFeature!()
+IceBugReportInternalFeature!();

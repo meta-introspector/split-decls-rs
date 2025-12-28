@@ -4,4 +4,4 @@ macro_rules! RLinkWrongFileType {
     };
 }
 
-RLinkWrongFileType!()
+RLinkWrongFileType!();

@@ -4,4 +4,4 @@ macro_rules! test_from_bytes_union {
     };
 }
 
-test_from_bytes_union!()
+test_from_bytes_union!();

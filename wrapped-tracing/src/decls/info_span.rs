@@ -4,4 +4,4 @@ macro_rules! info_span {
     };
 }
 
-info_span!()
+info_span!();

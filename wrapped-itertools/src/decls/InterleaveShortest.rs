@@ -4,4 +4,4 @@ macro_rules! InterleaveShortest {
     };
 }
 
-InterleaveShortest!()
+InterleaveShortest!();

@@ -4,4 +4,4 @@ macro_rules! equal_range_by {
     };
 }
 
-equal_range_by!()
+equal_range_by!();

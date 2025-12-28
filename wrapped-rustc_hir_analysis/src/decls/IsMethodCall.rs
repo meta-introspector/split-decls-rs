@@ -4,4 +4,4 @@ macro_rules! IsMethodCall {
     };
 }
 
-IsMethodCall!()
+IsMethodCall!();

@@ -4,4 +4,4 @@ macro_rules! construct_secret_key_variable_size {
     };
 }
 
-construct_secret_key_variable_size!()
+construct_secret_key_variable_size!();

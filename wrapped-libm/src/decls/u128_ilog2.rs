@@ -4,4 +4,4 @@ macro_rules! u128_ilog2 {
     };
 }
 
-u128_ilog2!()
+u128_ilog2!();

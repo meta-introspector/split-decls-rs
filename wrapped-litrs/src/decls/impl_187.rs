@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         IntegerBase!();
+        IntegerLit!();
         ParseError!();
         Buffer!();
-        IntegerLit!();
         FromIntegerLiteral!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_187 {
     };
 }
 
-impl_187!()
+impl_187!();

@@ -11,4 +11,4 @@ macro_rules! unwrap_trivial_aggregate {
     };
 }
 
-unwrap_trivial_aggregate!()
+unwrap_trivial_aggregate!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        In!();
-        Expr!();
         Node!();
-        ExprVal!();
+        In!();
         WS!();
+        Expr!();
+        ExprVal!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! parse_negated_in_condition {
     };
 }
 
-parse_negated_in_condition!()
+parse_negated_in_condition!();

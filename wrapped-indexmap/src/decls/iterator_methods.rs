@@ -4,4 +4,4 @@ macro_rules! iterator_methods {
     };
 }
 
-iterator_methods!()
+iterator_methods!();

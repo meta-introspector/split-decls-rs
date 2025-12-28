@@ -4,4 +4,4 @@ macro_rules! if_wasm {
     };
 }
 
-if_wasm!()
+if_wasm!();

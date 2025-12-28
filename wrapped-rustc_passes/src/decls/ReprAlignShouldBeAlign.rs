@@ -4,4 +4,4 @@ macro_rules! ReprAlignShouldBeAlign {
     };
 }
 
-ReprAlignShouldBeAlign!()
+ReprAlignShouldBeAlign!();

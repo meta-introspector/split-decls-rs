@@ -4,4 +4,4 @@ macro_rules! impl_omitted_debug_trait {
     };
 }
 
-impl_omitted_debug_trait!()
+impl_omitted_debug_trait!();

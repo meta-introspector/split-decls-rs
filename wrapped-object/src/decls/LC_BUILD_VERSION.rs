@@ -4,4 +4,4 @@ macro_rules! LC_BUILD_VERSION {
     };
 }
 
-LC_BUILD_VERSION!()
+LC_BUILD_VERSION!();

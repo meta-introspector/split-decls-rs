@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        CachePoolFn!();
-        Pool!();
         Regex!();
+        Pool!();
+        CachePoolFn!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_339 {
     };
 }
 
-impl_339!()
+impl_339!();

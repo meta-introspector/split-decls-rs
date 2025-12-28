@@ -13,4 +13,4 @@ macro_rules! walk_use {
     };
 }
 
-walk_use!()
+walk_use!();

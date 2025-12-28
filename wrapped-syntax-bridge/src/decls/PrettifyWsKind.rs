@@ -4,4 +4,4 @@ macro_rules! PrettifyWsKind {
     };
 }
 
-PrettifyWsKind!()
+PrettifyWsKind!();

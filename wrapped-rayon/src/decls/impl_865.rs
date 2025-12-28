@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        SumConsumer!();
-        Reducer!();
-        Folder!();
         SumFolder!();
+        Reducer!();
         Consumer!();
+        Folder!();
+        SumConsumer!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_865 {
     };
 }
 
-impl_865!()
+impl_865!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Pid!();
         Result!();
+        Pid!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_1659 {
     };
 }
 
-impl_1659!()
+impl_1659!();

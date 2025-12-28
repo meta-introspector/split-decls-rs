@@ -1,19 +1,19 @@
 macro_rules! deps {
     () => {
-        RangeEnd!();
-        OpaqueId!();
-        RevealedTy!();
-        MaybeInfiniteInt!();
-        DeconstructedPat!();
-        PrivateUninhabitedField!();
-        IntRange!();
-        RustcPatCtxt!();
-        VariantVisibility!();
-        Slice!();
-        Constructor!();
-        SliceKind!();
         WitnessPat!();
+        OpaqueId!();
+        Constructor!();
+        RustcPatCtxt!();
         ConstructorSet!();
+        SliceKind!();
+        IntRange!();
+        RangeEnd!();
+        RevealedTy!();
+        PrivateUninhabitedField!();
+        MaybeInfiniteInt!();
+        Slice!();
+        VariantVisibility!();
+        DeconstructedPat!();
     };
 }
 
@@ -25,4 +25,4 @@ macro_rules! impl_80 {
     };
 }
 
-impl_80!()
+impl_80!();

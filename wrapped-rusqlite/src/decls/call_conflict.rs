@@ -13,4 +13,4 @@ macro_rules! call_conflict {
     };
 }
 
-call_conflict!()
+call_conflict!();

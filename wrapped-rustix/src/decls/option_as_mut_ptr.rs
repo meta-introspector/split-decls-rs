@@ -4,4 +4,4 @@ macro_rules! option_as_mut_ptr {
     };
 }
 
-option_as_mut_ptr!()
+option_as_mut_ptr!();

@@ -4,4 +4,4 @@ macro_rules! DF_1_NOW {
     };
 }
 
-DF_1_NOW!()
+DF_1_NOW!();

@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        If!();
-        MacroDefinition!();
-        Expr!();
-        FilterSection!();
-        Block!();
-        Set!();
         Tera!();
-        Forloop!();
+        MacroDefinition!();
+        If!();
+        Expr!();
         WS!();
+        Forloop!();
+        Block!();
+        FilterSection!();
+        Set!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! Node {
     };
 }
 
-Node!()
+Node!();

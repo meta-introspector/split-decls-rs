@@ -11,4 +11,4 @@ macro_rules! size_to_tag {
     };
 }
 
-size_to_tag!()
+size_to_tag!();

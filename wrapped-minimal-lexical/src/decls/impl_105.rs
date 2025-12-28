@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        FastPathRadix!();
         Number!();
+        FastPathRadix!();
         Float!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_105 {
     };
 }
 
-impl_105!()
+impl_105!();

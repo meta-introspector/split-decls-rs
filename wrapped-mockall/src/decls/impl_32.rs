@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ExpectedCalls!();
         Times!();
+        ExpectedCalls!();
         TimesRange!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_32 {
     };
 }
 
-impl_32!()
+impl_32!();

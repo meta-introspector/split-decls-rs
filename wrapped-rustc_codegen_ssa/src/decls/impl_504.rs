@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        OperandRefBuilder!();
         PlaceRef!();
-        BuilderMethods!();
-        OperandValue!();
+        OperandRefBuilder!();
         OperandValueBuilder!();
+        BuilderMethods!();
         OperandRef!();
+        OperandValue!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_504 {
     };
 }
 
-impl_504!()
+impl_504!();

@@ -1,18 +1,18 @@
 macro_rules! deps {
     () => {
-        Warnings!();
-        ArgKind!();
+        WarningBuilder!();
         Config!();
         TypeTree!();
-        Reader!();
-        File!();
-        ReferenceStage!();
-        TypeMap!();
         Filter!();
+        Reader!();
         Derive!();
-        Reference!();
-        WarningBuilder!();
+        TypeMap!();
+        ArgKind!();
+        File!();
+        Warnings!();
         References!();
+        ReferenceStage!();
+        Reference!();
     };
 }
 
@@ -23,4 +23,4 @@ macro_rules! bindgen {
     };
 }
 
-bindgen!()
+bindgen!();

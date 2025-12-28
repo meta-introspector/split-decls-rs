@@ -4,4 +4,4 @@ macro_rules! stream_mock {
     };
 }
 
-stream_mock!()
+stream_mock!();

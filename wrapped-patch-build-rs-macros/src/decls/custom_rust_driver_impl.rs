@@ -90,4 +90,4 @@ fi
     };
 }
 
-custom_rust_driver_impl!()
+custom_rust_driver_impl!();

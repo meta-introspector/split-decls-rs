@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Immutable!();
-        FromBytes!();
-        IntoBytes!();
         KnownLayout!();
+        IntoBytes!();
+        FromBytes!();
         Unaligned!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! Unalign {
     };
 }
 
-Unalign!()
+Unalign!();

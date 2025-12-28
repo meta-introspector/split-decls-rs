@@ -4,4 +4,4 @@ macro_rules! test_serde_impls {
     };
 }
 
-test_serde_impls!()
+test_serde_impls!();

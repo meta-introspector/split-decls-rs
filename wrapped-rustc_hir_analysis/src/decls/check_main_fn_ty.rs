@@ -2,10 +2,10 @@ macro_rules! deps {
     () => {
         MainFunctionGenericParameters!();
         WhereClauseOnMain!();
-        MainFunctionAsync!();
         MainFunctionReturnTypeGeneric!();
-        TrackCallerOnMain!();
         TargetFeatureOnMain!();
+        MainFunctionAsync!();
+        TrackCallerOnMain!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! check_main_fn_ty {
     };
 }
 
-check_main_fn_ty!()
+check_main_fn_ty!();

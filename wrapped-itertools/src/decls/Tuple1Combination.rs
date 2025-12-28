@@ -4,4 +4,4 @@ macro_rules! Tuple1Combination {
     };
 }
 
-Tuple1Combination!()
+Tuple1Combination!();

@@ -4,4 +4,4 @@ macro_rules! enums {
     };
 }
 
-enums!()
+enums!();

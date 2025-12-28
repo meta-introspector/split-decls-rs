@@ -4,4 +4,4 @@ macro_rules! EVENT_FILTERS_BY_NAME {
     };
 }
 
-EVENT_FILTERS_BY_NAME!()
+EVENT_FILTERS_BY_NAME!();

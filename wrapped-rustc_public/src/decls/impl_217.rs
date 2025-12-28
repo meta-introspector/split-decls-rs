@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Stable!();
         BridgeTys!();
         AssocKind!();
         AssocTypeData!();
+        Stable!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_217 {
     };
 }
 
-impl_217!()
+impl_217!();

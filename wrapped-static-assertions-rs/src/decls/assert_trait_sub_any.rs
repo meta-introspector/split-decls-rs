@@ -4,4 +4,4 @@ macro_rules! assert_trait_sub_any {
     };
 }
 
-assert_trait_sub_any!()
+assert_trait_sub_any!();

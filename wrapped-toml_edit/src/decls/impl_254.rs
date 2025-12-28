@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         RawString!();
-        Decor!();
         Value!();
         Array!();
+        Decor!();
         InlineTable!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_254 {
     };
 }
 
-impl_254!()
+impl_254!();

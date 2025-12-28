@@ -4,4 +4,4 @@ macro_rules! ReleaseThreadHandler {
     };
 }
 
-ReleaseThreadHandler!()
+ReleaseThreadHandler!();

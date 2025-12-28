@@ -4,4 +4,4 @@ macro_rules! upper_case_mask {
     };
 }
 
-upper_case_mask!()
+upper_case_mask!();

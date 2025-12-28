@@ -4,4 +4,4 @@ macro_rules! static_lt {
     };
 }
 
-static_lt!()
+static_lt!();

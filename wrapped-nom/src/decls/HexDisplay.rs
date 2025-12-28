@@ -4,4 +4,4 @@ macro_rules! HexDisplay {
     };
 }
 
-HexDisplay!()
+HexDisplay!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        CommentKind!();
         NormalAttr!();
+        CommentKind!();
         Walkable!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! AttrKind {
     };
 }
 
-AttrKind!()
+AttrKind!();

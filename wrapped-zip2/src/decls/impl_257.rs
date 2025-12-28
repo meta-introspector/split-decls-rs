@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        SwitchWriterFunction!();
-        MaybeEncrypted!();
-        ZipResult!();
-        GenericZipWriter!();
         Ppmd!();
-        Lzma!();
-        CompressionMethod!();
         ZipError!();
+        SwitchWriterFunction!();
+        GenericZipWriter!();
+        Lzma!();
+        ZipResult!();
+        MaybeEncrypted!();
+        CompressionMethod!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_257 {
     };
 }
 
-impl_257!()
+impl_257!();

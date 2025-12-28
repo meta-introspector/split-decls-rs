@@ -4,4 +4,4 @@ macro_rules! R_SPARC_DISP32 {
     };
 }
 
-R_SPARC_DISP32!()
+R_SPARC_DISP32!();

@@ -4,4 +4,4 @@ macro_rules! once {
     };
 }
 
-once!()
+once!();

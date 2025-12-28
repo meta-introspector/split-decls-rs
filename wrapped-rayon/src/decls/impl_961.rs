@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        UnEither!();
         Folder!();
         UnzipOp!();
-        UnEither!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_961 {
     };
 }
 
-impl_961!()
+impl_961!();

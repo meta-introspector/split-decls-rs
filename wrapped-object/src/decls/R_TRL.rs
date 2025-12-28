@@ -4,4 +4,4 @@ macro_rules! R_TRL {
     };
 }
 
-R_TRL!()
+R_TRL!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        LookupResult!();
         MoveData!();
+        LookupResult!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! on_lookup_result_bits {
     };
 }
 
-on_lookup_result_bits!()
+on_lookup_result_bits!();

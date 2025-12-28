@@ -4,4 +4,4 @@ macro_rules! EM_EXCESS {
     };
 }
 
-EM_EXCESS!()
+EM_EXCESS!();

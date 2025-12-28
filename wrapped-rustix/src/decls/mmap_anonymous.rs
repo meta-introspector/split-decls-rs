@@ -11,4 +11,4 @@ macro_rules! mmap_anonymous {
     };
 }
 
-mmap_anonymous!()
+mmap_anonymous!();

@@ -4,4 +4,4 @@ macro_rules! E_E2K_MACH_2C3 {
     };
 }
 
-E_E2K_MACH_2C3!()
+E_E2K_MACH_2C3!();

@@ -11,4 +11,4 @@ macro_rules! is_xtensa_aggregate {
     };
 }
 
-is_xtensa_aggregate!()
+is_xtensa_aggregate!();

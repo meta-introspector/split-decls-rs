@@ -4,4 +4,4 @@ macro_rules! R_386_TLS_GD_POP {
     };
 }
 
-R_386_TLS_GD_POP!()
+R_386_TLS_GD_POP!();

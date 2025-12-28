@@ -4,4 +4,4 @@ macro_rules! ImageSymbolBytes {
     };
 }
 
-ImageSymbolBytes!()
+ImageSymbolBytes!();

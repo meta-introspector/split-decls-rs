@@ -4,4 +4,4 @@ macro_rules! R_SHARC_PCRLONG_V3 {
     };
 }
 
-R_SHARC_PCRLONG_V3!()
+R_SHARC_PCRLONG_V3!();

@@ -4,4 +4,4 @@ macro_rules! FirstSeen {
     };
 }
 
-FirstSeen!()
+FirstSeen!();

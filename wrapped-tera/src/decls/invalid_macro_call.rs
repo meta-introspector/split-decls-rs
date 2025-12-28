@@ -4,4 +4,4 @@ macro_rules! invalid_macro_call {
     };
 }
 
-invalid_macro_call!()
+invalid_macro_call!();

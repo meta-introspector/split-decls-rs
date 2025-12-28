@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        Result!();
-        FilterNewlines!();
+        IntoData!();
         FilterPaths!();
         Styled!();
-        IntoData!();
-        Error!();
-        Data!();
-        Action!();
-        NormalizeToExpected!();
         Assert!();
+        Result!();
+        Action!();
+        Data!();
+        NormalizeToExpected!();
+        FilterNewlines!();
+        Error!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_30 {
     };
 }
 
-impl_30!()
+impl_30!();

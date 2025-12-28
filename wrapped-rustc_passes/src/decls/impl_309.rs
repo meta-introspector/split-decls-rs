@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ReachableContext!();
         Node!();
+        ReachableContext!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_309 {
     };
 }
 
-impl_309!()
+impl_309!();

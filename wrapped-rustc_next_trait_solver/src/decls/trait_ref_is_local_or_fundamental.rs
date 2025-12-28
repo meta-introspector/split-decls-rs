@@ -4,4 +4,4 @@ macro_rules! trait_ref_is_local_or_fundamental {
     };
 }
 
-trait_ref_is_local_or_fundamental!()
+trait_ref_is_local_or_fundamental!();

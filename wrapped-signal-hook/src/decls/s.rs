@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DefaultKind!();
         Details!();
+        DefaultKind!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! s {
     };
 }
 
-s!()
+s!();

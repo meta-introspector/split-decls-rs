@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        Valid!();
-        Maybe!();
-        Reference!();
-        FromBytes!();
-        TransmuteFrom!();
-        Exclusive!();
-        TryFromBytes!();
         FromZeros!();
-        BecauseExclusive!();
+        TryFromBytes!();
+        Maybe!();
         IntoBytes!();
+        Exclusive!();
+        BecauseExclusive!();
+        TransmuteFrom!();
+        Valid!();
+        FromBytes!();
+        Reference!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_for_transmute_from {
     };
 }
 
-impl_for_transmute_from!()
+impl_for_transmute_from!();

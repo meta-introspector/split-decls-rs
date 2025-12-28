@@ -4,4 +4,4 @@ macro_rules! RegionSnapshot {
     };
 }
 
-RegionSnapshot!()
+RegionSnapshot!();

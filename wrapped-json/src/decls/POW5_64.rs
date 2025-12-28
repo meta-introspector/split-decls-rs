@@ -4,4 +4,4 @@ macro_rules! POW5_64 {
     };
 }
 
-POW5_64!()
+POW5_64!();

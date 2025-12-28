@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        AutoDiffAttrs!();
         DiffMode!();
-        DiffActivity!();
         AutoDiffItem!();
+        AutoDiffAttrs!();
+        DiffActivity!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_324 {
     };
 }
 
-impl_324!()
+impl_324!();

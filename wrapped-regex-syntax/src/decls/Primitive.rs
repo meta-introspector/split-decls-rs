@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
+        Assertion!();
         ClassUnicode!();
         Span!();
+        Dot!();
         ClassPerl!();
         Literal!();
-        Assertion!();
-        Dot!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! Primitive {
     };
 }
 
-Primitive!()
+Primitive!();

@@ -4,4 +4,4 @@ macro_rules! invalid_continue_outside_loop {
     };
 }
 
-invalid_continue_outside_loop!()
+invalid_continue_outside_loop!();

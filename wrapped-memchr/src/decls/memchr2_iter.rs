@@ -11,4 +11,4 @@ macro_rules! memchr2_iter {
     };
 }
 
-memchr2_iter!()
+memchr2_iter!();

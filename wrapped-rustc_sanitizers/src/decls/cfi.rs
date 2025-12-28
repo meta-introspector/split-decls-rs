@@ -4,4 +4,4 @@ macro_rules! cfi {
     };
 }
 
-cfi!()
+cfi!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ImageSectionHeader!();
         SectionKind!();
+        ImageSectionHeader!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_223 {
     };
 }
 
-impl_223!()
+impl_223!();

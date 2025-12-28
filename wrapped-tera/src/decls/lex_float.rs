@@ -4,4 +4,4 @@ macro_rules! lex_float {
     };
 }
 
-lex_float!()
+lex_float!();

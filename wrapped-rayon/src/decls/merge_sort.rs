@@ -12,4 +12,4 @@ macro_rules! merge_sort {
     };
 }
 
-merge_sort!()
+merge_sort!();

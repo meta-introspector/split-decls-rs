@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Error!();
         BoxError!();
+        Error!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! into_io {
     };
 }
 
-into_io!()
+into_io!();

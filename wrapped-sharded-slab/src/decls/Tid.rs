@@ -4,4 +4,4 @@ macro_rules! Tid {
     };
 }
 
-Tid!()
+Tid!();

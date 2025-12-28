@@ -4,4 +4,4 @@ macro_rules! unicode_property_names {
     };
 }
 
-unicode_property_names!()
+unicode_property_names!();

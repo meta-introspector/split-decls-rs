@@ -4,4 +4,4 @@ macro_rules! LaterUseKind {
     };
 }
 
-LaterUseKind!()
+LaterUseKind!();

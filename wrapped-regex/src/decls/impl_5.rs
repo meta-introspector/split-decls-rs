@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        RegexSet!();
         Regex!();
         Builder!();
+        RegexSet!();
         Error!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_5 {
     };
 }
 
-impl_5!()
+impl_5!();

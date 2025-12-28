@@ -4,4 +4,4 @@ macro_rules! errmsg_to_string {
     };
 }
 
-errmsg_to_string!()
+errmsg_to_string!();

@@ -4,4 +4,4 @@ macro_rules! CheckReparse {
     };
 }
 
-CheckReparse!()
+CheckReparse!();

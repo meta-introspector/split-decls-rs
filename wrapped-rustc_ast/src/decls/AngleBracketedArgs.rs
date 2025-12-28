@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        AngleBracketedArg!();
         Walkable!();
+        AngleBracketedArg!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! AngleBracketedArgs {
     };
 }
 
-AngleBracketedArgs!()
+AngleBracketedArgs!();

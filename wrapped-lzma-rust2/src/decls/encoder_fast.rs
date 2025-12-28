@@ -4,4 +4,4 @@ macro_rules! encoder_fast {
     };
 }
 
-encoder_fast!()
+encoder_fast!();

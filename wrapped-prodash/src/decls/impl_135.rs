@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         What!();
+        DisplayValue!();
+        Step!();
         Throughput!();
         Kind!();
-        Step!();
-        DisplayValue!();
         Unit!();
         UnitDisplay!();
     };
@@ -17,4 +17,4 @@ macro_rules! impl_135 {
     };
 }
 
-impl_135!()
+impl_135!();

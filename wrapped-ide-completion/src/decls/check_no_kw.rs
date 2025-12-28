@@ -4,4 +4,4 @@ macro_rules! check_no_kw {
     };
 }
 
-check_no_kw!()
+check_no_kw!();

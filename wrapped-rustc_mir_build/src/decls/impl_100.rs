@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        TestCase!();
-        PlaceBase!();
         MatchPairTree!();
         FlatPat!();
-        FakeBorrowCollector!();
+        TestCase!();
         Binding!();
+        PlaceBase!();
         Candidate!();
+        FakeBorrowCollector!();
         SubpatternBindings!();
     };
 }
@@ -18,4 +18,4 @@ macro_rules! impl_100 {
     };
 }
 
-impl_100!()
+impl_100!();

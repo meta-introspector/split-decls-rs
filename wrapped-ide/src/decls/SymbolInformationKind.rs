@@ -4,4 +4,4 @@ macro_rules! SymbolInformationKind {
     };
 }
 
-SymbolInformationKind!()
+SymbolInformationKind!();

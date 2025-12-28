@@ -11,4 +11,4 @@ macro_rules! consume_rules {
     };
 }
 
-consume_rules!()
+consume_rules!();

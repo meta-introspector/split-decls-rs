@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        UnordMap!();
         Index!();
+        UnordMap!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_662 {
     };
 }
 
-impl_662!()
+impl_662!();

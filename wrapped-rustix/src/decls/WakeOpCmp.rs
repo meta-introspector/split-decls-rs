@@ -4,4 +4,4 @@ macro_rules! WakeOpCmp {
     };
 }
 
-WakeOpCmp!()
+WakeOpCmp!();

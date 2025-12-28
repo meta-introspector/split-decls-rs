@@ -4,4 +4,4 @@ macro_rules! EverInitializedPlacesDomain {
     };
 }
 
-EverInitializedPlacesDomain!()
+EverInitializedPlacesDomain!();

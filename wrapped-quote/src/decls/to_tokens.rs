@@ -4,4 +4,4 @@ macro_rules! to_tokens {
     };
 }
 
-to_tokens!()
+to_tokens!();

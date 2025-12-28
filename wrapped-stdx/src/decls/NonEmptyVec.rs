@@ -4,4 +4,4 @@ macro_rules! NonEmptyVec {
     };
 }
 
-NonEmptyVec!()
+NonEmptyVec!();

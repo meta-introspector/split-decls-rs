@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Param!();
         CanInto!();
         ParamValue!();
+        Param!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_180 {
     };
 }
 
-impl_180!()
+impl_180!();

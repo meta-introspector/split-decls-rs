@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        UniversalRegionsBuilder!();
-        BorrowckInferCtxt!();
-        DefiningTy!();
         RegionClassification!();
         UniversalRegions!();
         ClosureRegionRequirements!();
+        UniversalRegionsBuilder!();
+        BorrowckInferCtxt!();
+        DefiningTy!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_495 {
     };
 }
 
-impl_495!()
+impl_495!();

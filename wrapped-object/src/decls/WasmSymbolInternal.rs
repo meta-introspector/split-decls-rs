@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        SymbolKind!();
         SymbolSection!();
         SymbolScope!();
+        SymbolKind!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! WasmSymbolInternal {
     };
 }
 
-WasmSymbolInternal!()
+WasmSymbolInternal!();

@@ -11,4 +11,4 @@ macro_rules! emit_mermaid_nll_sccs {
     };
 }
 
-emit_mermaid_nll_sccs!()
+emit_mermaid_nll_sccs!();

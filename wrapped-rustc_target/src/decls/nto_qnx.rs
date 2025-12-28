@@ -4,4 +4,4 @@ macro_rules! nto_qnx {
     };
 }
 
-nto_qnx!()
+nto_qnx!();

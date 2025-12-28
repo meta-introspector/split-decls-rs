@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        Result!();
         ReadRef!();
-        MachOSegment!();
         MachOFile!();
         Segment!();
-        Result!();
+        MachOSegment!();
         MachHeader!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! impl_572 {
     };
 }
 
-impl_572!()
+impl_572!();

@@ -4,4 +4,4 @@ macro_rules! fat {
     };
 }
 
-fat!()
+fat!();

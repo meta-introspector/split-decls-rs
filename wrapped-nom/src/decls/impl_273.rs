@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        OutputMode!();
-        Fold!();
-        PResult!();
-        ErrorKind!();
-        Input!();
-        Parser!();
         Error!();
         NomRange!();
+        Parser!();
+        ErrorKind!();
+        Input!();
+        PResult!();
+        Fold!();
         Err!();
+        OutputMode!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_273 {
     };
 }
 
-impl_273!()
+impl_273!();

@@ -4,4 +4,4 @@ macro_rules! STB_GNU_UNIQUE {
     };
 }
 
-STB_GNU_UNIQUE!()
+STB_GNU_UNIQUE!();

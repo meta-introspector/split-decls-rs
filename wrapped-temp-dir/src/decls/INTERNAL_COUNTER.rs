@@ -4,4 +4,4 @@ macro_rules! INTERNAL_COUNTER {
     };
 }
 
-INTERNAL_COUNTER!()
+INTERNAL_COUNTER!();

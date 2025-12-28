@@ -4,4 +4,4 @@ macro_rules! Fallback_AD {
     };
 }
 
-Fallback_AD!()
+Fallback_AD!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Pool!();
         DontDropMe!();
+        Pool!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! dont_drop {
     };
 }
 
-dont_drop!()
+dont_drop!();

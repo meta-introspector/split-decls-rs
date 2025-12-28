@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        MaybeItemFnRef!();
         InstrumentArgs!();
+        MaybeItemFnRef!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! gen_function {
     };
 }
 
-gen_function!()
+gen_function!();

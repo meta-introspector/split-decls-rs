@@ -4,4 +4,4 @@ macro_rules! R_PARISC_PLABEL21L {
     };
 }
 
-R_PARISC_PLABEL21L!()
+R_PARISC_PLABEL21L!();

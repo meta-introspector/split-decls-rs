@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Result!();
         ReadBufCursor!();
+        Result!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! deref_async_read {
     };
 }
 
-deref_async_read!()
+deref_async_read!();

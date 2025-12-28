@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
+        Folder!();
+        ListVecFolder!();
+        Reducer!();
         Consumer!();
         ListReducer!();
-        ListVecFolder!();
         ListVecConsumer!();
-        Folder!();
-        Reducer!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_416 {
     };
 }
 
-impl_416!()
+impl_416!();

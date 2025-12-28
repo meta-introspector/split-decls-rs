@@ -12,4 +12,4 @@ macro_rules! on_simple_key {
     };
 }
 
-on_simple_key!()
+on_simple_key!();

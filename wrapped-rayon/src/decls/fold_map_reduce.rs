@@ -4,4 +4,4 @@ macro_rules! fold_map_reduce {
     };
 }
 
-fold_map_reduce!()
+fold_map_reduce!();

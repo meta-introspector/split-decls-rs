@@ -4,4 +4,4 @@ macro_rules! multiple_output_types_to_stdout {
     };
 }
 
-multiple_output_types_to_stdout!()
+multiple_output_types_to_stdout!();

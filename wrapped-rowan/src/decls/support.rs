@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Language!();
         AstChildren!();
         SyntaxNode!();
         SyntaxToken!();
         AstNode!();
+        Language!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! support {
     };
 }
 
-support!()
+support!();

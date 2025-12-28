@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        UnknownCryptoError!();
         PasswordHash!();
+        UnknownCryptoError!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_636 {
     };
 }
 
-impl_636!()
+impl_636!();

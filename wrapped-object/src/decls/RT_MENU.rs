@@ -4,4 +4,4 @@ macro_rules! RT_MENU {
     };
 }
 
-RT_MENU!()
+RT_MENU!();

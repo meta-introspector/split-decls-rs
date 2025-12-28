@@ -4,4 +4,4 @@ macro_rules! MustImplementOneOfAttribute {
     };
 }
 
-MustImplementOneOfAttribute!()
+MustImplementOneOfAttribute!();

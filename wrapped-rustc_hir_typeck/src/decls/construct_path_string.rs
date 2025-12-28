@@ -4,4 +4,4 @@ macro_rules! construct_path_string {
     };
 }
 
-construct_path_string!()
+construct_path_string!();

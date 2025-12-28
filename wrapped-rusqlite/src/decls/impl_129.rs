@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        AuthAction!();
         Transaction!();
         Savepoint!();
+        AuthAction!();
         TransactionOperation!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_129 {
     };
 }
 
-impl_129!()
+impl_129!();

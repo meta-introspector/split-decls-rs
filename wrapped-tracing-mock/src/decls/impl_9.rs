@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
         ExpectedAncestry!();
-        ExpectedId!();
-        ExpectedEvent!();
-        MockSubscriber!();
-        ExpectedMetadata!();
-        ExpectedSpan!();
         ActualAncestry!();
+        ExpectedSpan!();
         MockLayer!();
+        MockSubscriber!();
+        ExpectedId!();
+        ExpectedMetadata!();
         ExpectedFields!();
+        ExpectedEvent!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_9 {
     };
 }
 
-impl_9!()
+impl_9!();

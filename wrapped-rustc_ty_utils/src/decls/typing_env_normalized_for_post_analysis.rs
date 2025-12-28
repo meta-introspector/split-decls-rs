@@ -4,4 +4,4 @@ macro_rules! typing_env_normalized_for_post_analysis {
     };
 }
 
-typing_env_normalized_for_post_analysis!()
+typing_env_normalized_for_post_analysis!();

@@ -4,4 +4,4 @@ macro_rules! DatetimeKey {
     };
 }
 
-DatetimeKey!()
+DatetimeKey!();

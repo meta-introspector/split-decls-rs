@@ -4,4 +4,4 @@ macro_rules! R_NIOS2_CACHE_OPX {
     };
 }
 
-R_NIOS2_CACHE_OPX!()
+R_NIOS2_CACHE_OPX!();

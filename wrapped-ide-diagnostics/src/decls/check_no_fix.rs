@@ -11,4 +11,4 @@ macro_rules! check_no_fix {
     };
 }
 
-check_no_fix!()
+check_no_fix!();

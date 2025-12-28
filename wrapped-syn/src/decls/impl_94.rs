@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         Group!();
-        End!();
-        Entry!();
-        Cursor!();
         Lifetime!();
+        Cursor!();
+        Entry!();
+        End!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_94 {
     };
 }
 
-impl_94!()
+impl_94!();

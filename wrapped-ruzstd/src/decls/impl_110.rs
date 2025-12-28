@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        GetBitsError!();
-        HuffmanTableError!();
         FSEDecoderError!();
+        GetBitsError!();
         FSETableError!();
+        HuffmanTableError!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_110 {
     };
 }
 
-impl_110!()
+impl_110!();

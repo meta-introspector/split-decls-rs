@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         RegionInferenceContext!();
-        OutlivesConstraint!();
         Locations!();
+        OutlivesConstraint!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! emit_mermaid_nll_regions {
     };
 }
 
-emit_mermaid_nll_regions!()
+emit_mermaid_nll_regions!();

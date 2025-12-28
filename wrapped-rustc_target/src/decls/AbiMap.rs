@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Target!();
-        OsKind!();
         ABI!();
+        OsKind!();
         Arch!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! AbiMap {
     };
 }
 
-AbiMap!()
+AbiMap!();

@@ -4,4 +4,4 @@ macro_rules! atomic_usize {
     };
 }
 
-atomic_usize!()
+atomic_usize!();

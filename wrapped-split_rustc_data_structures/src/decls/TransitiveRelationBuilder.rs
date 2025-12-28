@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Edge!();
         FxIndexSet!();
+        Edge!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! TransitiveRelationBuilder {
     };
 }
 
-TransitiveRelationBuilder!()
+TransitiveRelationBuilder!();

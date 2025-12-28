@@ -11,4 +11,4 @@ macro_rules! get_key_span {
     };
 }
 
-get_key_span!()
+get_key_span!();

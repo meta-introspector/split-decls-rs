@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        DeValue!();
-        Error!();
-        Deserializer!();
         DeTable!();
-        ValueDeserializer!();
+        Deserializer!();
+        Error!();
         Table!();
+        ValueDeserializer!();
+        DeValue!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_156 {
     };
 }
 
-impl_156!()
+impl_156!();

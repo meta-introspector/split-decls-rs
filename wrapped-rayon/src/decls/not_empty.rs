@@ -4,4 +4,4 @@ macro_rules! not_empty {
     };
 }
 
-not_empty!()
+not_empty!();

@@ -4,4 +4,4 @@ macro_rules! add_digit {
     };
 }
 
-add_digit!()
+add_digit!();

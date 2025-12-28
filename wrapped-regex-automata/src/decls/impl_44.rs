@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Endian!();
-        PatternID!();
         DFA!();
         MatchStates!();
-        SerializeError!();
         StateID!();
+        PatternID!();
+        Endian!();
+        SerializeError!();
         DeserializeError!();
     };
 }
@@ -17,4 +17,4 @@ macro_rules! impl_44 {
     };
 }
 
-impl_44!()
+impl_44!();

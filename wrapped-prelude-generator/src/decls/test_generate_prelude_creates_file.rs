@@ -4,4 +4,4 @@ macro_rules! test_generate_prelude_creates_file {
     };
 }
 
-test_generate_prelude_creates_file!()
+test_generate_prelude_creates_file!();

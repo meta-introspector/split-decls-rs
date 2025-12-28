@@ -4,4 +4,4 @@ macro_rules! RustcLegacyConstGenericsIndexExceed {
     };
 }
 
-RustcLegacyConstGenericsIndexExceed!()
+RustcLegacyConstGenericsIndexExceed!();

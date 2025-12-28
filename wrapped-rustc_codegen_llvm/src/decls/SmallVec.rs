@@ -4,4 +4,4 @@ macro_rules! SmallVec {
     };
 }
 
-SmallVec!()
+SmallVec!();

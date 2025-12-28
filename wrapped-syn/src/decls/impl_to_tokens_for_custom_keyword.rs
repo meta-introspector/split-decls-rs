@@ -4,4 +4,4 @@ macro_rules! impl_to_tokens_for_custom_keyword {
     };
 }
 
-impl_to_tokens_for_custom_keyword!()
+impl_to_tokens_for_custom_keyword!();

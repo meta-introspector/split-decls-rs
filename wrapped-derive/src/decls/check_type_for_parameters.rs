@@ -11,4 +11,4 @@ macro_rules! check_type_for_parameters {
     };
 }
 
-check_type_for_parameters!()
+check_type_for_parameters!();

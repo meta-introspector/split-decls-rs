@@ -4,4 +4,4 @@ macro_rules! AllocKind {
     };
 }
 
-AllocKind!()
+AllocKind!();

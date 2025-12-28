@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Results!();
         CowMut!();
-        CursorPosition!();
         Analysis!();
+        CursorPosition!();
+        Results!();
         ResultsVisitor!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! ResultsCursor {
     };
 }
 
-ResultsCursor!()
+ResultsCursor!();

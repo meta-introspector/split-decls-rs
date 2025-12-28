@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
         StructLatticeInfo!();
-        EnumLatticeInfo!();
-        EnumVariantCoOccurrenceVisitor!();
-        ImplMethodCoOccurrenceVisitor!();
         ImplLatticeInfo!();
+        ImplMethodCoOccurrenceVisitor!();
+        EnumVariantCoOccurrenceVisitor!();
         StructFieldCoOccurrenceVisitor!();
         TypeUsageVisitor!();
+        EnumLatticeInfo!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_208 {
     };
 }
 
-impl_208!()
+impl_208!();

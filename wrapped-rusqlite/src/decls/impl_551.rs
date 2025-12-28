@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        IndexConstraint!();
-        IndexConstraintAndUsageIter!();
         IndexConstraintUsage!();
+        IndexConstraintAndUsageIter!();
+        IndexConstraint!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_551 {
     };
 }
 
-impl_551!()
+impl_551!();

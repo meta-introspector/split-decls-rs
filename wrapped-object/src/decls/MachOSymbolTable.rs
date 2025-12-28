@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        MachHeader!();
-        ReadRef!();
         MachOFile!();
+        ReadRef!();
+        MachHeader!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! MachOSymbolTable {
     };
 }
 
-MachOSymbolTable!()
+MachOSymbolTable!();

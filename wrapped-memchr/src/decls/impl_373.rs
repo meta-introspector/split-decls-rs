@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         CowBytes!();
-        FinderBuilder!();
         Finder!();
         PrefilterState!();
         FindIter!();
+        FinderBuilder!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_373 {
     };
 }
 
-impl_373!()
+impl_373!();

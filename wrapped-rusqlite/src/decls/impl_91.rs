@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        FromSql!();
         AuxInner!();
+        Context!();
+        ConnectionRef!();
+        Connection!();
+        SqlFnArg!();
+        Result!();
+        FromSql!();
+        FromSqlError!();
         ValueRef!();
         Error!();
-        Connection!();
-        Result!();
-        SqlFnArg!();
-        FromSqlError!();
-        ConnectionRef!();
-        Context!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_91 {
     };
 }
 
-impl_91!()
+impl_91!();

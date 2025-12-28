@@ -4,4 +4,4 @@ macro_rules! print_attribute {
     };
 }
 
-print_attribute!()
+print_attribute!();

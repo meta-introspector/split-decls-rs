@@ -12,4 +12,4 @@ macro_rules! visit_table_like_kv {
     };
 }
 
-visit_table_like_kv!()
+visit_table_like_kv!();

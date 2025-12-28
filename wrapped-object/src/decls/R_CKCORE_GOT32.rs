@@ -4,4 +4,4 @@ macro_rules! R_CKCORE_GOT32 {
     };
 }
 
-R_CKCORE_GOT32!()
+R_CKCORE_GOT32!();

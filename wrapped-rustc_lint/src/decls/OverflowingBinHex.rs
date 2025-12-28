@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        OverflowingBinHexSub!();
         OverflowingBinHexSign!();
+        OverflowingBinHexSub!();
         OverflowingBinHexSignBitSub!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! OverflowingBinHex {
     };
 }
 
-OverflowingBinHex!()
+OverflowingBinHex!();

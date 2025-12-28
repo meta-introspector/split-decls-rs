@@ -4,4 +4,4 @@ macro_rules! R_386_TLS_LDO_32 {
     };
 }
 
-R_386_TLS_LDO_32!()
+R_386_TLS_LDO_32!();

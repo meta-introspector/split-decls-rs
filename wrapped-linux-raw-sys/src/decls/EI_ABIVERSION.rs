@@ -4,4 +4,4 @@ macro_rules! EI_ABIVERSION {
     };
 }
 
-EI_ABIVERSION!()
+EI_ABIVERSION!();

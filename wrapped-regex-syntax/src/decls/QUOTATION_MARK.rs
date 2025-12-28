@@ -4,4 +4,4 @@ macro_rules! QUOTATION_MARK {
     };
 }
 
-QUOTATION_MARK!()
+QUOTATION_MARK!();

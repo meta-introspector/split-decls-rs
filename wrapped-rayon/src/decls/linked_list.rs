@@ -4,4 +4,4 @@ macro_rules! linked_list {
     };
 }
 
-linked_list!()
+linked_list!();

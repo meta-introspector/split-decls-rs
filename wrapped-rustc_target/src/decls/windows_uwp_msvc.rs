@@ -4,4 +4,4 @@ macro_rules! windows_uwp_msvc {
     };
 }
 
-windows_uwp_msvc!()
+windows_uwp_msvc!();

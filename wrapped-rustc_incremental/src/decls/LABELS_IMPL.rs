@@ -4,4 +4,4 @@ macro_rules! LABELS_IMPL {
     };
 }
 
-LABELS_IMPL!()
+LABELS_IMPL!();

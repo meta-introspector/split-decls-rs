@@ -4,4 +4,4 @@ macro_rules! tracked_impl {
     };
 }
 
-tracked_impl!()
+tracked_impl!();

@@ -4,4 +4,4 @@ macro_rules! R_RISCV_GOT32_PCREL {
     };
 }
 
-R_RISCV_GOT32_PCREL!()
+R_RISCV_GOT32_PCREL!();

@@ -4,4 +4,4 @@ macro_rules! sa_family_t {
     };
 }
 
-sa_family_t!()
+sa_family_t!();

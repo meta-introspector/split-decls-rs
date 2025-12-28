@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         PrivateXor!();
-        B0!();
-        PrivateXorOut!();
-        UInt!();
-        Unsigned!();
         B1!();
+        Unsigned!();
+        B0!();
+        UInt!();
+        PrivateXorOut!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_400 {
     };
 }
 
-impl_400!()
+impl_400!();

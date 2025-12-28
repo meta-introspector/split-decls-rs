@@ -4,4 +4,4 @@ macro_rules! Align8 {
     };
 }
 
-Align8!()
+Align8!();

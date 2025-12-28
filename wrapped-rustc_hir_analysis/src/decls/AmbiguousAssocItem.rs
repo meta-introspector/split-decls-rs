@@ -4,4 +4,4 @@ macro_rules! AmbiguousAssocItem {
     };
 }
 
-AmbiguousAssocItem!()
+AmbiguousAssocItem!();

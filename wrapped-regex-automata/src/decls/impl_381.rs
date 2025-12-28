@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        MatchKind!();
         Memchr3!();
-        Teddy!();
-        Memmem!();
-        RegexInfo!();
+        Choice!();
         Strategy!();
-        Memchr!();
+        MatchKind!();
+        RegexInfo!();
+        Memmem!();
+        Teddy!();
         ByteSet!();
         Pre!();
         AhoCorasick!();
-        Choice!();
+        Memchr!();
         Memchr2!();
     };
 }
@@ -23,4 +23,4 @@ macro_rules! impl_381 {
     };
 }
 
-impl_381!()
+impl_381!();

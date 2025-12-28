@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Interner!();
-        Ty!();
         TraitPredicate!();
+        Ty!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_349 {
     };
 }
 
-impl_349!()
+impl_349!();

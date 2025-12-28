@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        BuildMetadata!();
         Identifier!();
+        BuildMetadata!();
         Error!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_96 {
     };
 }
 
-impl_96!()
+impl_96!();

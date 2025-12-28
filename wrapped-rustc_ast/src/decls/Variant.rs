@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         AttrVec!();
-        Visibility!();
         VariantData!();
         AnonConst!();
+        Visibility!();
         Walkable!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! Variant {
     };
 }
 
-Variant!()
+Variant!();

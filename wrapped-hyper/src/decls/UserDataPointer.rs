@@ -4,4 +4,4 @@ macro_rules! UserDataPointer {
     };
 }
 
-UserDataPointer!()
+UserDataPointer!();

@@ -4,4 +4,4 @@ macro_rules! find_rustc_source {
     };
 }
 
-find_rustc_source!()
+find_rustc_source!();

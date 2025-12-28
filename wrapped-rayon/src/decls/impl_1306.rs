@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        ParallelIterator!();
         UnindexedConsumer!();
         EncodeUtf16Producer!();
+        ParallelIterator!();
         EncodeUtf16!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_1306 {
     };
 }
 
-impl_1306!()
+impl_1306!();

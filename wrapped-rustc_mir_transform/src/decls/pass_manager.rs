@@ -4,4 +4,4 @@ macro_rules! pass_manager {
     };
 }
 
-pass_manager!()
+pass_manager!();

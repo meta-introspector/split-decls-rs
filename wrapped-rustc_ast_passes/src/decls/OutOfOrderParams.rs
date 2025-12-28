@@ -4,4 +4,4 @@ macro_rules! OutOfOrderParams {
     };
 }
 
-OutOfOrderParams!()
+OutOfOrderParams!();

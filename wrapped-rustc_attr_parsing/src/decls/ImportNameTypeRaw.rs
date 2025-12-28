@@ -4,4 +4,4 @@ macro_rules! ImportNameTypeRaw {
     };
 }
 
-ImportNameTypeRaw!()
+ImportNameTypeRaw!();

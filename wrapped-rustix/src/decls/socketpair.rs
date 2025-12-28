@@ -4,4 +4,4 @@ macro_rules! socketpair {
     };
 }
 
-socketpair!()
+socketpair!();

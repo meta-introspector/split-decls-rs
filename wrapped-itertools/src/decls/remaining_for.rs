@@ -4,4 +4,4 @@ macro_rules! remaining_for {
     };
 }
 
-remaining_for!()
+remaining_for!();

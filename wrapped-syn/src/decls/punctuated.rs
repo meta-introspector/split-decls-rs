@@ -4,4 +4,4 @@ macro_rules! punctuated {
     };
 }
 
-punctuated!()
+punctuated!();

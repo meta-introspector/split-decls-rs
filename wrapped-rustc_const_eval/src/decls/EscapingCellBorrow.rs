@@ -4,4 +4,4 @@ macro_rules! EscapingCellBorrow {
     };
 }
 
-EscapingCellBorrow!()
+EscapingCellBorrow!();

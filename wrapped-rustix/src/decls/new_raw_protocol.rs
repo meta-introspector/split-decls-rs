@@ -11,4 +11,4 @@ macro_rules! new_raw_protocol {
     };
 }
 
-new_raw_protocol!()
+new_raw_protocol!();

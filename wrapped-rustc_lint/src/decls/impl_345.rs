@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
+        LintSet!();
         LintLevelSets!();
         TopDown!();
-        LintSet!();
         LintStore!();
-        BuilderPush!();
         LintLevelsBuilder!();
+        BuilderPush!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_345 {
     };
 }
 
-impl_345!()
+impl_345!();

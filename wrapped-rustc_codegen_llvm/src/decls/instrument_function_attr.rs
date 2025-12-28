@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        CreateAttrStringValue!();
+        CodegenCx!();
         CreateAttrString!();
         SmallVec!();
-        CodegenCx!();
-        CreateAttrStringValue!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! instrument_function_attr {
     };
 }
 
-instrument_function_attr!()
+instrument_function_attr!();

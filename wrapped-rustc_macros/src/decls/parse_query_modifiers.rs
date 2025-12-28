@@ -11,4 +11,4 @@ macro_rules! parse_query_modifiers {
     };
 }
 
-parse_query_modifiers!()
+parse_query_modifiers!();

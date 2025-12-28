@@ -11,4 +11,4 @@ macro_rules! handle_array_element {
     };
 }
 
-handle_array_element!()
+handle_array_element!();

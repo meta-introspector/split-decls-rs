@@ -4,4 +4,4 @@ macro_rules! TryReduceWithConsumer {
     };
 }
 
-TryReduceWithConsumer!()
+TryReduceWithConsumer!();

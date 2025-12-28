@@ -4,4 +4,4 @@ macro_rules! function_starts {
     };
 }
 
-function_starts!()
+function_starts!();

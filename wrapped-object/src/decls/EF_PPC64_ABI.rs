@@ -4,4 +4,4 @@ macro_rules! EF_PPC64_ABI {
     };
 }
 
-EF_PPC64_ABI!()
+EF_PPC64_ABI!();

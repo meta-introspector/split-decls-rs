@@ -4,4 +4,4 @@ macro_rules! coherent_trait {
     };
 }
 
-coherent_trait!()
+coherent_trait!();

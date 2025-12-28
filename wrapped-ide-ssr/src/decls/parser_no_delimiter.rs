@@ -4,4 +4,4 @@ macro_rules! parser_no_delimiter {
     };
 }
 
-parser_no_delimiter!()
+parser_no_delimiter!();

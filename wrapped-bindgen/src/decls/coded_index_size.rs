@@ -4,4 +4,4 @@ macro_rules! coded_index_size {
     };
 }
 
-coded_index_size!()
+coded_index_size!();

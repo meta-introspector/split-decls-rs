@@ -4,4 +4,4 @@ macro_rules! PropertyEnumToValueNameLookup {
     };
 }
 
-PropertyEnumToValueNameLookup!()
+PropertyEnumToValueNameLookup!();

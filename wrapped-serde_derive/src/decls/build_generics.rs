@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Variant!();
-        Field!();
         Container!();
+        Field!();
+        Variant!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! build_generics {
     };
 }
 
-build_generics!()
+build_generics!();

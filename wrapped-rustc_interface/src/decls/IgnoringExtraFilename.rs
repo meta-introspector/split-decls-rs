@@ -4,4 +4,4 @@ macro_rules! IgnoringExtraFilename {
     };
 }
 
-IgnoringExtraFilename!()
+IgnoringExtraFilename!();

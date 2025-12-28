@@ -4,4 +4,4 @@ macro_rules! opt_nonzero_u32 {
     };
 }
 
-opt_nonzero_u32!()
+opt_nonzero_u32!();

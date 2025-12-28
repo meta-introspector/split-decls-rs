@@ -4,4 +4,4 @@ macro_rules! level_macros {
     };
 }
 
-level_macros!()
+level_macros!();

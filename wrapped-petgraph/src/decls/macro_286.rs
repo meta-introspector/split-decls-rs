@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Neighbors!();
         IndexType!();
         NodeIndex!();
+        Neighbors!();
         RowIter!();
         WSuc!();
     };
@@ -15,4 +15,4 @@ macro_rules! macro_286 {
     };
 }
 
-macro_286!()
+macro_286!();

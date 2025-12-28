@@ -4,4 +4,4 @@ macro_rules! IMAGE_REL_SHM_PAIR {
     };
 }
 
-IMAGE_REL_SHM_PAIR!()
+IMAGE_REL_SHM_PAIR!();

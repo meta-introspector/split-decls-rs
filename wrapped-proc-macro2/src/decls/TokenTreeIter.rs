@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        TokenTree!();
         RcVecIntoIter!();
+        TokenTree!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! TokenTreeIter {
     };
 }
 
-TokenTreeIter!()
+TokenTreeIter!();

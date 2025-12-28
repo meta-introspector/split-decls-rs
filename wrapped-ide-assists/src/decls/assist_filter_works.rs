@@ -17,4 +17,4 @@ pub fn test_some_range(a: int) -> bool {
     };
 }
 
-assist_filter_works!()
+assist_filter_works!();

@@ -11,4 +11,4 @@ macro_rules! non_terminal_leaves {
     };
 }
 
-non_terminal_leaves!()
+non_terminal_leaves!();

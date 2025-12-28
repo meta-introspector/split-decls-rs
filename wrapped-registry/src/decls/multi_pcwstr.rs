@@ -11,4 +11,4 @@ macro_rules! multi_pcwstr {
     };
 }
 
-multi_pcwstr!()
+multi_pcwstr!();

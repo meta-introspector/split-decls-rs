@@ -4,4 +4,4 @@ macro_rules! DT_DEBUG {
     };
 }
 
-DT_DEBUG!()
+DT_DEBUG!();

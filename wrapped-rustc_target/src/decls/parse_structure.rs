@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Memory!();
         Sdata!();
+        Memory!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! parse_structure {
     };
 }
 
-parse_structure!()
+parse_structure!();

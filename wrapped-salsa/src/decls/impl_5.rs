@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
         IngredientImpl!();
+        Jar!();
+        Zalsa!();
         Accumulator!();
+        JarImpl!();
         IngredientIndex!();
         Ingredient!();
-        Jar!();
-        JarImpl!();
-        Zalsa!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_5 {
     };
 }
 
-impl_5!()
+impl_5!();

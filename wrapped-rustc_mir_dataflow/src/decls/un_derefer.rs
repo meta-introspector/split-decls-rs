@@ -4,4 +4,4 @@ macro_rules! un_derefer {
     };
 }
 
-un_derefer!()
+un_derefer!();

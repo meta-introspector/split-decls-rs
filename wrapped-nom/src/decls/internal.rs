@@ -4,4 +4,4 @@ macro_rules! internal {
     };
 }
 
-internal!()
+internal!();

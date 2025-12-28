@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Value!();
         Number!();
+        Error!();
+        Deserializer!();
         OwnedRawDeserializer!();
         Result!();
-        Deserializer!();
+        Value!();
         EnumDeserializer!();
-        Error!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_254 {
     };
 }
 
-impl_254!()
+impl_254!();

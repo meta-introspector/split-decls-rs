@@ -4,4 +4,4 @@ macro_rules! PredicateQuery {
     };
 }
 
-PredicateQuery!()
+PredicateQuery!();

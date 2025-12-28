@@ -11,4 +11,4 @@ macro_rules! Pcg64Mcg {
     };
 }
 
-Pcg64Mcg!()
+Pcg64Mcg!();

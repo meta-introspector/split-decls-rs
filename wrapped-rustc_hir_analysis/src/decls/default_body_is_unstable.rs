@@ -11,4 +11,4 @@ macro_rules! default_body_is_unstable {
     };
 }
 
-default_body_is_unstable!()
+default_body_is_unstable!();

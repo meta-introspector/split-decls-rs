@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ImportInfo!();
         VariableInfo!();
+        ImportInfo!();
         FunctionInfo!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! AstStatistics {
     };
 }
 
-AstStatistics!()
+AstStatistics!();

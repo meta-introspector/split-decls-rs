@@ -4,4 +4,4 @@ macro_rules! arena_vec {
     };
 }
 
-arena_vec!()
+arena_vec!();

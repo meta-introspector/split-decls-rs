@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Even!();
-        Gcf!();
         Gcd!();
         Odd!();
+        Even!();
         NonZero!();
+        Gcf!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_452 {
     };
 }
 
-impl_452!()
+impl_452!();

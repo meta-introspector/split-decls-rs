@@ -4,4 +4,4 @@ macro_rules! R_MN10300_GOTOFF16 {
     };
 }
 
-R_MN10300_GOTOFF16!()
+R_MN10300_GOTOFF16!();

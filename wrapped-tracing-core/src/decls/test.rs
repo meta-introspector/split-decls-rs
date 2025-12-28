@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Field!();
         Visit!();
-        Metadata!();
-        Kind!();
         Interest!();
-        Callsite!();
         Level!();
+        Field!();
         Empty!();
+        Callsite!();
+        Kind!();
+        Metadata!();
         Value!();
     };
 }
@@ -19,4 +19,4 @@ macro_rules! test {
     };
 }
 
-test!()
+test!();

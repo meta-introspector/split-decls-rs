@@ -4,4 +4,4 @@ macro_rules! EM_MN10200 {
     };
 }
 
-EM_MN10200!()
+EM_MN10200!();

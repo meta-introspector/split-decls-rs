@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Directed!();
         DefaultIx!();
+        Directed!();
         StableGraph!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! StableDiGraph {
     };
 }
 
-StableDiGraph!()
+StableDiGraph!();

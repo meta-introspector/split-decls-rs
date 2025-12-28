@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         Folder!();
-        WhileSomeConsumer!();
-        Consumer!();
         WhileSomeFolder!();
         Reducer!();
+        Consumer!();
+        WhileSomeConsumer!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_1007 {
     };
 }
 
-impl_1007!()
+impl_1007!();

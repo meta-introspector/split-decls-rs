@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        ExecuteSequencesError!();
-        LiteralsSectionParseError!();
+        DecompressLiteralsError!();
         DecodeSequenceError!();
+        ExecuteSequencesError!();
+        SequencesHeaderParseError!();
         Error!();
         DecompressBlockError!();
-        DecompressLiteralsError!();
-        SequencesHeaderParseError!();
+        LiteralsSectionParseError!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_50 {
     };
 }
 
-impl_50!()
+impl_50!();

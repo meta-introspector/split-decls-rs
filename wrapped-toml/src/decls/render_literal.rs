@@ -4,4 +4,4 @@ macro_rules! render_literal {
     };
 }
 
-render_literal!()
+render_literal!();

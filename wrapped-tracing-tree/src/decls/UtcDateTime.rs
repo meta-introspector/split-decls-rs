@@ -4,4 +4,4 @@ macro_rules! UtcDateTime {
     };
 }
 
-UtcDateTime!()
+UtcDateTime!();

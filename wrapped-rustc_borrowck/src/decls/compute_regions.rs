@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        BorrowCheckRootCtxt!();
+        BorrowckInferCtxt!();
         MirTypeckRegionConstraints!();
-        UniversalRegionRelations!();
+        RustcFacts!();
         PoloniusLocationTable!();
         PoloniusContext!();
-        BorrowSet!();
-        BorrowckInferCtxt!();
         RegionInferenceContext!();
         NllOutput!();
-        RustcFacts!();
+        BorrowSet!();
+        UniversalRegionRelations!();
+        BorrowCheckRootCtxt!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! compute_regions {
     };
 }
 
-compute_regions!()
+compute_regions!();

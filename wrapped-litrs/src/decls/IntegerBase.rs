@@ -4,4 +4,4 @@ macro_rules! IntegerBase {
     };
 }
 
-IntegerBase!()
+IntegerBase!();

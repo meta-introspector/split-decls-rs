@@ -4,4 +4,4 @@ macro_rules! LN10 {
     };
 }
 
-LN10!()
+LN10!();

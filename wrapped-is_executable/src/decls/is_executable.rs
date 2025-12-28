@@ -4,4 +4,4 @@ macro_rules! is_executable {
     };
 }
 
-is_executable!()
+is_executable!();

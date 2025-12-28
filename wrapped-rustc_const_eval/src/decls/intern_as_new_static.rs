@@ -11,4 +11,4 @@ macro_rules! intern_as_new_static {
     };
 }
 
-intern_as_new_static!()
+intern_as_new_static!();

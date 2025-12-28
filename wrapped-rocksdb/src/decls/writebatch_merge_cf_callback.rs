@@ -11,4 +11,4 @@ macro_rules! writebatch_merge_cf_callback {
     };
 }
 
-writebatch_merge_cf_callback!()
+writebatch_merge_cf_callback!();

@@ -4,4 +4,4 @@ macro_rules! icu_locale_from_unic_langid {
     };
 }
 
-icu_locale_from_unic_langid!()
+icu_locale_from_unic_langid!();

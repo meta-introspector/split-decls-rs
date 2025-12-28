@@ -11,4 +11,4 @@ macro_rules! opaque_types_defined_by {
     };
 }
 
-opaque_types_defined_by!()
+opaque_types_defined_by!();

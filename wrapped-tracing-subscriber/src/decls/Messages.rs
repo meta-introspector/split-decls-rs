@@ -4,4 +4,4 @@ macro_rules! Messages {
     };
 }
 
-Messages!()
+Messages!();

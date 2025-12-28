@@ -4,4 +4,4 @@ macro_rules! R_LARCH_ALIGN {
     };
 }
 
-R_LARCH_ALIGN!()
+R_LARCH_ALIGN!();

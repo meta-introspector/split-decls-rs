@@ -4,4 +4,4 @@ macro_rules! MayDangleParser {
     };
 }
 
-MayDangleParser!()
+MayDangleParser!();

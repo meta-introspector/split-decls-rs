@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Row!();
         Result!();
-        Sql!();
         ToSql!();
+        Sql!();
+        Row!();
         Connection!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_199 {
     };
 }
 
-impl_199!()
+impl_199!();

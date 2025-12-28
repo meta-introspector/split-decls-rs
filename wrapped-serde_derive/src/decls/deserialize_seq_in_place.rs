@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Parameters!();
         Expr!();
         Container!();
+        Parameters!();
+        Field!();
         Fragment!();
         Default!();
-        Field!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! deserialize_seq_in_place {
     };
 }
 
-deserialize_seq_in_place!()
+deserialize_seq_in_place!();

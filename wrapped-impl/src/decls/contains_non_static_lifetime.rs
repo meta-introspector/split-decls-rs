@@ -4,4 +4,4 @@ macro_rules! contains_non_static_lifetime {
     };
 }
 
-contains_non_static_lifetime!()
+contains_non_static_lifetime!();

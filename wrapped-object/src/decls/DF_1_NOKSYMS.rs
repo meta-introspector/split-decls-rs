@@ -4,4 +4,4 @@ macro_rules! DF_1_NOKSYMS {
     };
 }
 
-DF_1_NOKSYMS!()
+DF_1_NOKSYMS!();

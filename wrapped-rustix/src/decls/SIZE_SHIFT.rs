@@ -11,4 +11,4 @@ macro_rules! SIZE_SHIFT {
     };
 }
 
-SIZE_SHIFT!()
+SIZE_SHIFT!();

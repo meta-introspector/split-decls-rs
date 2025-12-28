@@ -4,4 +4,4 @@ macro_rules! name_for_constructor_search {
     };
 }
 
-name_for_constructor_search!()
+name_for_constructor_search!();

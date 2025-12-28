@@ -4,4 +4,4 @@ macro_rules! IMAGE_REL_IA64_TOKEN {
     };
 }
 
-IMAGE_REL_IA64_TOKEN!()
+IMAGE_REL_IA64_TOKEN!();

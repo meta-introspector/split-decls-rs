@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ReentrantMutex!();
         RwLock!();
+        ReentrantMutex!();
         Mutex!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! tests {
     };
 }
 
-tests!()
+tests!();

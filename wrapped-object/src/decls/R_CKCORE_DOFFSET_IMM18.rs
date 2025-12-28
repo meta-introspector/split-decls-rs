@@ -4,4 +4,4 @@ macro_rules! R_CKCORE_DOFFSET_IMM18 {
     };
 }
 
-R_CKCORE_DOFFSET_IMM18!()
+R_CKCORE_DOFFSET_IMM18!();

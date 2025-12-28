@@ -11,4 +11,4 @@ macro_rules! add_apple_sdk {
     };
 }
 
-add_apple_sdk!()
+add_apple_sdk!();

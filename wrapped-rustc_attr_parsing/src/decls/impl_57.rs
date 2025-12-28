@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         LimitInvalid!();
+        AcceptContext!();
         NameValueParser!();
         Stage!();
-        AcceptContext!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_57 {
     };
 }
 
-impl_57!()
+impl_57!();

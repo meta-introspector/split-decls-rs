@@ -4,4 +4,4 @@ macro_rules! PR_GET_SECUREBITS {
     };
 }
 
-PR_GET_SECUREBITS!()
+PR_GET_SECUREBITS!();

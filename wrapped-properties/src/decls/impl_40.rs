@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        NamedEnumeratedProperty!();
         PropertyNamesLongBorrowed!();
+        NamedEnumeratedProperty!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_40 {
     };
 }
 
-impl_40!()
+impl_40!();

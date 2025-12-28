@@ -4,4 +4,4 @@ macro_rules! SMALL_DIST_EXTRA {
     };
 }
 
-SMALL_DIST_EXTRA!()
+SMALL_DIST_EXTRA!();

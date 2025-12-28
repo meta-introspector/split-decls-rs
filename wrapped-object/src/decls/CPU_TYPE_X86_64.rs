@@ -4,4 +4,4 @@ macro_rules! CPU_TYPE_X86_64 {
     };
 }
 
-CPU_TYPE_X86_64!()
+CPU_TYPE_X86_64!();

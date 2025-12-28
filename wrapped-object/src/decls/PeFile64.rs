@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ImageNtHeaders64!();
         PeFile!();
+        ImageNtHeaders64!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! PeFile64 {
     };
 }
 
-PeFile64!()
+PeFile64!();

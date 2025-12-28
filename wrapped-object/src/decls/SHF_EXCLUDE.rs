@@ -4,4 +4,4 @@ macro_rules! SHF_EXCLUDE {
     };
 }
 
-SHF_EXCLUDE!()
+SHF_EXCLUDE!();

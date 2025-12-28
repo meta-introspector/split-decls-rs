@@ -4,4 +4,4 @@ macro_rules! lib_features {
     };
 }
 
-lib_features!()
+lib_features!();

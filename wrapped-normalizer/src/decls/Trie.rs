@@ -4,4 +4,4 @@ macro_rules! Trie {
     };
 }
 
-Trie!()
+Trie!();

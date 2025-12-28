@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         ArrayOfTables!();
-        Table!();
         Value!();
+        Table!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Item {
     };
 }
 
-Item!()
+Item!();

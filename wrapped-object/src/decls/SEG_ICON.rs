@@ -4,4 +4,4 @@ macro_rules! SEG_ICON {
     };
 }
 
-SEG_ICON!()
+SEG_ICON!();

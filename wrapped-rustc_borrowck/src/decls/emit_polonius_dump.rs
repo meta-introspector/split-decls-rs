@@ -13,4 +13,4 @@ macro_rules! emit_polonius_dump {
     };
 }
 
-emit_polonius_dump!()
+emit_polonius_dump!();

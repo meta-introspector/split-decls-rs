@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        BlockOrExpr!();
         Substructure!();
         Ty!();
-        TraitDef!();
-        CombineSubstructureFunc!();
         MethodDef!();
         FieldlessVariantsStrategy!();
-        FieldInfo!();
         SubstructureFields!();
+        BlockOrExpr!();
+        CombineSubstructureFunc!();
+        TraitDef!();
+        FieldInfo!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_126 {
     };
 }
 
-impl_126!()
+impl_126!();

@@ -4,4 +4,4 @@ macro_rules! HUFFMAN_LENGTH_ORDER {
     };
 }
 
-HUFFMAN_LENGTH_ORDER!()
+HUFFMAN_LENGTH_ORDER!();

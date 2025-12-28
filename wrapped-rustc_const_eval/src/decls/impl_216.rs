@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        PlacePrinter!();
-        FrameInfo!();
-        Memory!();
-        PlaceTy!();
-        Machine!();
-        InterpCx!();
-        MemPlaceMeta!();
         MPlaceTy!();
-        OpTy!();
         Frame!();
+        MemPlaceMeta!();
+        InterpCx!();
+        PlaceTy!();
         Projectable!();
+        OpTy!();
+        Memory!();
+        Machine!();
+        FrameInfo!();
+        PlacePrinter!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_216 {
     };
 }
 
-impl_216!()
+impl_216!();

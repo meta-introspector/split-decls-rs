@@ -4,4 +4,4 @@ macro_rules! MetadataPosition {
     };
 }
 
-MetadataPosition!()
+MetadataPosition!();

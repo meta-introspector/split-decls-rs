@@ -1,22 +1,22 @@
 macro_rules! deps {
     () => {
-        BadReturnTypeNotation!();
-        AssocTyParentheses!();
-        ImplTraitPosition!();
         MisplacedAssocTyBinding!();
-        RelaxedBoundPolicy!();
-        GenericArgsCtor!();
-        LoweringContext!();
-        FnDeclKind!();
-        SpanLowerer!();
         RelaxedBoundForbiddenReason!();
-        MisplacedImplTrait!();
-        RTNSuggestion!();
-        ImplTraitContext!();
+        AssocTyParentheses!();
         AssocTyParenthesesSub!();
         ParamMode!();
-        GenericParamDefaultInBinder!();
+        BadReturnTypeNotation!();
+        ImplTraitContext!();
+        ImplTraitPosition!();
+        SpanLowerer!();
+        MisplacedImplTrait!();
+        RelaxedBoundPolicy!();
         AllowReturnTypeNotation!();
+        GenericArgsCtor!();
+        RTNSuggestion!();
+        FnDeclKind!();
+        LoweringContext!();
+        GenericParamDefaultInBinder!();
         NoPreciseCapturesOnApit!();
     };
 }
@@ -29,4 +29,4 @@ macro_rules! impl_115 {
     };
 }
 
-impl_115!()
+impl_115!();

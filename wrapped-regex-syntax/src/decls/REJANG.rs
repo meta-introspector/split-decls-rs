@@ -4,4 +4,4 @@ macro_rules! REJANG {
     };
 }
 
-REJANG!()
+REJANG!();

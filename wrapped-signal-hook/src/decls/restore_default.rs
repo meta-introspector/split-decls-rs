@@ -4,4 +4,4 @@ macro_rules! restore_default {
     };
 }
 
-restore_default!()
+restore_default!();

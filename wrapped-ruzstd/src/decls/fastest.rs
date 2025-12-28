@@ -4,4 +4,4 @@ macro_rules! fastest {
     };
 }
 
-fastest!()
+fastest!();

@@ -4,4 +4,4 @@ macro_rules! INFLATE_FAST_MIN_LEFT {
     };
 }
 
-INFLATE_FAST_MIN_LEFT!()
+INFLATE_FAST_MIN_LEFT!();

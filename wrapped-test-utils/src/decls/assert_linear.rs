@@ -4,4 +4,4 @@ macro_rules! assert_linear {
     };
 }
 
-assert_linear!()
+assert_linear!();

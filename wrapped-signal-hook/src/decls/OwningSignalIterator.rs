@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        SignalIterator!();
         SignalDelivery!();
+        SignalIterator!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! OwningSignalIterator {
     };
 }
 
-OwningSignalIterator!()
+OwningSignalIterator!();

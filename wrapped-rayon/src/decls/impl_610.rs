@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        FromParallelIterator!();
         IntoParallelIterator!();
+        FromParallelIterator!();
         NoopConsumer!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_610 {
     };
 }
 
-impl_610!()
+impl_610!();

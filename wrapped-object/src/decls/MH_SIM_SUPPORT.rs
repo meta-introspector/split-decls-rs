@@ -4,4 +4,4 @@ macro_rules! MH_SIM_SUPPORT {
     };
 }
 
-MH_SIM_SUPPORT!()
+MH_SIM_SUPPORT!();

@@ -4,4 +4,4 @@ macro_rules! test_search_paths_tracking_hash_different_order {
     };
 }
 
-test_search_paths_tracking_hash_different_order!()
+test_search_paths_tracking_hash_different_order!();

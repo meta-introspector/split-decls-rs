@@ -4,4 +4,4 @@ macro_rules! SHT_MIPS_EVENTS {
     };
 }
 
-SHT_MIPS_EVENTS!()
+SHT_MIPS_EVENTS!();

@@ -4,4 +4,4 @@ macro_rules! release {
     };
 }
 
-release!()
+release!();

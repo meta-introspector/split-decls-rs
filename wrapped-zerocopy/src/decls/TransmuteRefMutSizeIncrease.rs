@@ -4,4 +4,4 @@ macro_rules! TransmuteRefMutSizeIncrease {
     };
 }
 
-TransmuteRefMutSizeIncrease!()
+TransmuteRefMutSizeIncrease!();

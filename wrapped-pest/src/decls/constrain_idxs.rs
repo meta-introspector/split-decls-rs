@@ -4,4 +4,4 @@ macro_rules! constrain_idxs {
     };
 }
 
-constrain_idxs!()
+constrain_idxs!();

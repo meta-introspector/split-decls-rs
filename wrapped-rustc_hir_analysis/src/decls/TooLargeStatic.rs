@@ -4,4 +4,4 @@ macro_rules! TooLargeStatic {
     };
 }
 
-TooLargeStatic!()
+TooLargeStatic!();

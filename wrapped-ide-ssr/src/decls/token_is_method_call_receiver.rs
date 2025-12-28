@@ -11,4 +11,4 @@ macro_rules! token_is_method_call_receiver {
     };
 }
 
-token_is_method_call_receiver!()
+token_is_method_call_receiver!();

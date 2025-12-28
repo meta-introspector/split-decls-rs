@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        IndexedParallelIterator!();
         Take!();
+        IndexedParallelIterator!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_872 {
     };
 }
 
-impl_872!()
+impl_872!();

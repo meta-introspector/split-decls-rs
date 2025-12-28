@@ -4,4 +4,4 @@ macro_rules! RED_ZONE {
     };
 }
 
-RED_ZONE!()
+RED_ZONE!();

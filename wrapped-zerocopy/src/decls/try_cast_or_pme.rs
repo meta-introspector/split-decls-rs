@@ -1,17 +1,17 @@
 macro_rules! deps {
     () => {
-        Aliasing!();
-        Valid!();
-        Unaligned!();
         Read!();
+        Initialized!();
+        Aliasing!();
         TryTransmuteFromPtr!();
-        Validity!();
+        Reference!();
+        Valid!();
+        Invariants!();
         ValidityError!();
         TryFromBytes!();
         Alignment!();
-        Invariants!();
-        Reference!();
-        Initialized!();
+        Validity!();
+        Unaligned!();
     };
 }
 
@@ -22,4 +22,4 @@ macro_rules! try_cast_or_pme {
     };
 }
 
-try_cast_or_pme!()
+try_cast_or_pme!();

@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Parser!();
-        Count!();
-        ErrorKind!();
-        IResult!();
         Needed!();
+        Count!();
         Error!();
+        ErrorKind!();
+        Parser!();
+        IResult!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! count {
     };
 }
 
-count!()
+count!();

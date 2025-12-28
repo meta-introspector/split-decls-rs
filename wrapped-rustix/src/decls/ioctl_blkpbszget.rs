@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Result!();
         Getter!();
+        Result!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! ioctl_blkpbszget {
     };
 }
 
-ioctl_blkpbszget!()
+ioctl_blkpbszget!();

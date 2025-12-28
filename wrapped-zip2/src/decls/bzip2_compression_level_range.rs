@@ -4,4 +4,4 @@ macro_rules! bzip2_compression_level_range {
     };
 }
 
-bzip2_compression_level_range!()
+bzip2_compression_level_range!();

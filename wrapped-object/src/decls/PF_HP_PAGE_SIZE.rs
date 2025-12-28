@@ -4,4 +4,4 @@ macro_rules! PF_HP_PAGE_SIZE {
     };
 }
 
-PF_HP_PAGE_SIZE!()
+PF_HP_PAGE_SIZE!();

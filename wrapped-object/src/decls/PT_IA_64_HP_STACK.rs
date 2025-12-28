@@ -4,4 +4,4 @@ macro_rules! PT_IA_64_HP_STACK {
     };
 }
 
-PT_IA_64_HP_STACK!()
+PT_IA_64_HP_STACK!();

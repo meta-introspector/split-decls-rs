@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         DatabaseKeyIndex!();
-        IdentityMap!();
         Identity!();
         TrackedEntry!();
         Id!();
+        IdentityMap!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_361 {
     };
 }
 
-impl_361!()
+impl_361!();

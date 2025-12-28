@@ -4,4 +4,4 @@ macro_rules! N_SOL {
     };
 }
 
-N_SOL!()
+N_SOL!();

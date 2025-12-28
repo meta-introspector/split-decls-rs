@@ -4,4 +4,4 @@ macro_rules! DT_BIND_NOW {
     };
 }
 
-DT_BIND_NOW!()
+DT_BIND_NOW!();

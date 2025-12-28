@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Endian!();
         Nlist!();
+        Endian!();
         Nlist32!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_618 {
     };
 }
 
-impl_618!()
+impl_618!();

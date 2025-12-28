@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        ValueRepr!();
-        Repr!();
         Decor!();
+        Repr!();
+        ValueRepr!();
         Formatted!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_213 {
     };
 }
 
-impl_213!()
+impl_213!();

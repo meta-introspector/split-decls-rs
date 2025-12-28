@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        LineColLocation!();
-        Error!();
-        Span!();
-        RulesCallStack!();
-        InputLocation!();
-        ParseAttempts!();
-        IsWhitespaceFn!();
         Position!();
+        ParseAttempts!();
+        InputLocation!();
+        IsWhitespaceFn!();
         RuleType!();
         ErrorVariant!();
+        Span!();
         RuleToMessageFn!();
+        RulesCallStack!();
+        LineColLocation!();
+        Error!();
     };
 }
 
@@ -39,4 +39,4 @@ macro_rules! impl_14 {
     };
 }
 
-impl_14!()
+impl_14!();

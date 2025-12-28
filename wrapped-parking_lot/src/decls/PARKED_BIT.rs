@@ -4,4 +4,4 @@ macro_rules! PARKED_BIT {
     };
 }
 
-PARKED_BIT!()
+PARKED_BIT!();

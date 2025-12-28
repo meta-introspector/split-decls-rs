@@ -12,4 +12,4 @@ macro_rules! render_macros_override_default_args {
     };
 }
 
-render_macros_override_default_args!()
+render_macros_override_default_args!();

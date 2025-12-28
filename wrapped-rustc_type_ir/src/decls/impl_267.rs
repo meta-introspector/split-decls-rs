@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        CanonicalVarKind!();
         Interner!();
+        CanonicalVarKind!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_267 {
     };
 }
 
-impl_267!()
+impl_267!();

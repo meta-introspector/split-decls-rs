@@ -2,11 +2,11 @@ macro_rules! deps {
     () => {
         IResult!();
         Streaming!();
+        Needed!();
+        ErrorKind!();
+        Input!();
         ParseError!();
         AsChar!();
-        Needed!();
-        Input!();
-        ErrorKind!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! alphanumeric1 {
     };
 }
 
-alphanumeric1!()
+alphanumeric1!();

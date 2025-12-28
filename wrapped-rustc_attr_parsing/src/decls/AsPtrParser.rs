@@ -4,4 +4,4 @@ macro_rules! AsPtrParser {
     };
 }
 
-AsPtrParser!()
+AsPtrParser!();

@@ -4,4 +4,4 @@ macro_rules! float_traits {
     };
 }
 
-float_traits!()
+float_traits!();

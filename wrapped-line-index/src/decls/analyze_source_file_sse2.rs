@@ -11,4 +11,4 @@ macro_rules! analyze_source_file_sse2 {
     };
 }
 
-analyze_source_file_sse2!()
+analyze_source_file_sse2!();

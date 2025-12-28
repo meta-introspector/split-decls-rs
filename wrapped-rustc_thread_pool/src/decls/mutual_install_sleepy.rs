@@ -11,4 +11,4 @@ macro_rules! mutual_install_sleepy {
     };
 }
 
-mutual_install_sleepy!()
+mutual_install_sleepy!();

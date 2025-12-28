@@ -4,4 +4,4 @@ macro_rules! log_cs {
     };
 }
 
-log_cs!()
+log_cs!();

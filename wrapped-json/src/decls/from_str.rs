@@ -12,4 +12,4 @@ macro_rules! from_str {
     };
 }
 
-from_str!()
+from_str!();

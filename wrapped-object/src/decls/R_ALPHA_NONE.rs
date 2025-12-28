@@ -4,4 +4,4 @@ macro_rules! R_ALPHA_NONE {
     };
 }
 
-R_ALPHA_NONE!()
+R_ALPHA_NONE!();

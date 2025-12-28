@@ -4,4 +4,4 @@ macro_rules! manifest {
     };
 }
 
-manifest!()
+manifest!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ThreadPoolBuilder!();
         ScopeFifo!();
+        ThreadPoolBuilder!();
         ThreadPool!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! nested_fifo_scopes {
     };
 }
 
-nested_fifo_scopes!()
+nested_fifo_scopes!();

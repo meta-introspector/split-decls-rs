@@ -4,4 +4,4 @@ macro_rules! CfgList {
     };
 }
 
-CfgList!()
+CfgList!();

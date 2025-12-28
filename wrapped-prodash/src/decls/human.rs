@@ -4,4 +4,4 @@ macro_rules! human {
     };
 }
 
-human!()
+human!();

@@ -12,4 +12,4 @@ macro_rules! parse_err {
     };
 }
 
-parse_err!()
+parse_err!();

@@ -4,4 +4,4 @@ macro_rules! weighted {
     };
 }
 
-weighted!()
+weighted!();

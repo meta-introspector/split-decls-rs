@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        StandardUniform!();
-        Open01!();
         IntoFloat!();
         Distribution!();
         OpenClosed01!();
         Rng!();
+        Open01!();
+        StandardUniform!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! float_impls {
     };
 }
 
-float_impls!()
+float_impls!();

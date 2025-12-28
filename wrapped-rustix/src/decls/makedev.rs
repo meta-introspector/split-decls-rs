@@ -4,4 +4,4 @@ macro_rules! makedev {
     };
 }
 
-makedev!()
+makedev!();

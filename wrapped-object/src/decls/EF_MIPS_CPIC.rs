@@ -4,4 +4,4 @@ macro_rules! EF_MIPS_CPIC {
     };
 }
 
-EF_MIPS_CPIC!()
+EF_MIPS_CPIC!();

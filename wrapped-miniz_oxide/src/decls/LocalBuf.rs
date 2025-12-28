@@ -4,4 +4,4 @@ macro_rules! LocalBuf {
     };
 }
 
-LocalBuf!()
+LocalBuf!();

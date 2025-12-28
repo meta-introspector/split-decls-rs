@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        Analysis!();
         DebugWithContext!();
+        Results!();
         StateDiffCollector!();
         OutputStyle!();
-        Results!();
-        Analysis!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_70 {
     };
 }
 
-impl_70!()
+impl_70!();

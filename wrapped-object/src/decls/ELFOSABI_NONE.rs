@@ -4,4 +4,4 @@ macro_rules! ELFOSABI_NONE {
     };
 }
 
-ELFOSABI_NONE!()
+ELFOSABI_NONE!();

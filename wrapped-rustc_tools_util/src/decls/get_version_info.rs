@@ -11,4 +11,4 @@ macro_rules! get_version_info {
     };
 }
 
-get_version_info!()
+get_version_info!();

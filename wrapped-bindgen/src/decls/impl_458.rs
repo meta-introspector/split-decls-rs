@@ -1,21 +1,21 @@
 macro_rules! deps {
     () => {
         Reader!();
-        CppStruct!();
-        CppConst!();
-        Literal!();
-        Type!();
-        Delegate!();
-        Category!();
-        File!();
-        CppInterface!();
-        Interface!();
-        InterfaceKind!();
-        CppFn!();
-        Remap!();
-        CppEnum!();
         Class!();
         CppDelegate!();
+        Delegate!();
+        CppInterface!();
+        CppConst!();
+        Remap!();
+        Literal!();
+        File!();
+        Interface!();
+        CppFn!();
+        Category!();
+        Type!();
+        InterfaceKind!();
+        CppStruct!();
+        CppEnum!();
     };
 }
 
@@ -26,4 +26,4 @@ macro_rules! impl_458 {
     };
 }
 
-impl_458!()
+impl_458!();

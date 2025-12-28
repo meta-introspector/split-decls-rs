@@ -4,4 +4,4 @@ macro_rules! builders {
     };
 }
 
-builders!()
+builders!();

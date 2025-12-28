@@ -4,4 +4,4 @@ macro_rules! sha512 {
     };
 }
 
-sha512!()
+sha512!();

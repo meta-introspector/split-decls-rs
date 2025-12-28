@@ -13,4 +13,4 @@ macro_rules! push_core_scheduling_cookie {
     };
 }
 
-push_core_scheduling_cookie!()
+push_core_scheduling_cookie!();

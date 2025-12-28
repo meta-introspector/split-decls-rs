@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Span!();
-        MixedUnit!();
         TokenStream!();
         Literal!();
+        Span!();
+        MixedUnit!();
         ConversionErrorKind!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_237 {
     };
 }
 
-impl_237!()
+impl_237!();

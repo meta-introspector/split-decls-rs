@@ -4,4 +4,4 @@ macro_rules! FCHECK_DIVISOR {
     };
 }
 
-FCHECK_DIVISOR!()
+FCHECK_DIVISOR!();

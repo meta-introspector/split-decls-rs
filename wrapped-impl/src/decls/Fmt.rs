@@ -4,4 +4,4 @@ macro_rules! Fmt {
     };
 }
 
-Fmt!()
+Fmt!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        QuickCheck!();
         TestResult!();
+        QuickCheck!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! all_tests_discarded_min_tests_passed_set {
     };
 }
 
-all_tests_discarded_min_tests_passed_set!()
+all_tests_discarded_min_tests_passed_set!();

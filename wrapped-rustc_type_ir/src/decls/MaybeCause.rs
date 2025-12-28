@@ -4,4 +4,4 @@ macro_rules! MaybeCause {
     };
 }
 
-MaybeCause!()
+MaybeCause!();

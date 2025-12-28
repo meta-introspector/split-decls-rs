@@ -4,4 +4,4 @@ macro_rules! EXISTS {
     };
 }
 
-EXISTS!()
+EXISTS!();

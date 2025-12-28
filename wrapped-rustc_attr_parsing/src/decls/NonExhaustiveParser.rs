@@ -4,4 +4,4 @@ macro_rules! NonExhaustiveParser {
     };
 }
 
-NonExhaustiveParser!()
+NonExhaustiveParser!();

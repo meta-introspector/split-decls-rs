@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        DFA!();
-        BuildError!();
         HalfMatch!();
         NE!();
-        StateID!();
-        StartTable!();
         Input!();
+        BuildError!();
         Transitions!();
+        StartTable!();
+        DFA!();
+        StateID!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_119 {
     };
 }
 
-impl_119!()
+impl_119!();

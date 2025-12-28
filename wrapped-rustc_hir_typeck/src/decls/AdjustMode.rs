@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        PeelKind!();
         Mode!();
+        PeelKind!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! AdjustMode {
     };
 }
 
-AdjustMode!()
+AdjustMode!();

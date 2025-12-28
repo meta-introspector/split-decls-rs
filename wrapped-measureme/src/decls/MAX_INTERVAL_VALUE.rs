@@ -4,4 +4,4 @@ macro_rules! MAX_INTERVAL_VALUE {
     };
 }
 
-MAX_INTERVAL_VALUE!()
+MAX_INTERVAL_VALUE!();

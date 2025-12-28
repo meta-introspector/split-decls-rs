@@ -4,4 +4,4 @@ macro_rules! NEEDS_CANONICAL {
     };
 }
 
-NEEDS_CANONICAL!()
+NEEDS_CANONICAL!();

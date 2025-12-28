@@ -4,4 +4,4 @@ macro_rules! constraint_conversion {
     };
 }
 
-constraint_conversion!()
+constraint_conversion!();

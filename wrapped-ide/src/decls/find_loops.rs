@@ -4,4 +4,4 @@ macro_rules! find_loops {
     };
 }
 
-find_loops!()
+find_loops!();

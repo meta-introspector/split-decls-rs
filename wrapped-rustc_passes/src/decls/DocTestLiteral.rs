@@ -4,4 +4,4 @@ macro_rules! DocTestLiteral {
     };
 }
 
-DocTestLiteral!()
+DocTestLiteral!();

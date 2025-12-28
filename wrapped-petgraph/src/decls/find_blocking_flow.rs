@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        EdgeRef!();
         PositiveMeasure!();
+        EdgeRef!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! find_blocking_flow {
     };
 }
 
-find_blocking_flow!()
+find_blocking_flow!();

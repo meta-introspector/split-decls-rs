@@ -4,4 +4,4 @@ macro_rules! IMAGE_REL_CEF_ADDR32NB {
     };
 }
 
-IMAGE_REL_CEF_ADDR32NB!()
+IMAGE_REL_CEF_ADDR32NB!();

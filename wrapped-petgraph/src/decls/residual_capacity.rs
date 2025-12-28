@@ -12,4 +12,4 @@ macro_rules! residual_capacity {
     };
 }
 
-residual_capacity!()
+residual_capacity!();

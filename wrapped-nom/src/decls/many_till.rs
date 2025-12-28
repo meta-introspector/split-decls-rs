@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        ManyTill!();
-        Error!();
-        IResult!();
-        ErrorKind!();
-        Needed!();
-        Input!();
-        ParseError!();
         Parser!();
+        ManyTill!();
+        Input!();
+        ErrorKind!();
+        Error!();
+        Needed!();
+        ParseError!();
+        IResult!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! many_till {
     };
 }
 
-many_till!()
+many_till!();

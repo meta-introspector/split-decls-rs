@@ -4,4 +4,4 @@ macro_rules! IMAGE_GUARD_RF_ENABLE {
     };
 }
 
-IMAGE_GUARD_RF_ENABLE!()
+IMAGE_GUARD_RF_ENABLE!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        RenamedFeature!();
-        ImpliedFeatureNotExist!();
         DuplicateFeatureErr!();
         UnknownFeature!();
+        ImpliedFeatureNotExist!();
+        RenamedFeature!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! check_unused_or_stable_features {
     };
 }
 
-check_unused_or_stable_features!()
+check_unused_or_stable_features!();

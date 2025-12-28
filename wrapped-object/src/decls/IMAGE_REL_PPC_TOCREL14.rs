@@ -4,4 +4,4 @@ macro_rules! IMAGE_REL_PPC_TOCREL14 {
     };
 }
 
-IMAGE_REL_PPC_TOCREL14!()
+IMAGE_REL_PPC_TOCREL14!();

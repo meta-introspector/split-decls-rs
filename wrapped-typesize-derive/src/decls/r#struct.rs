@@ -4,4 +4,4 @@ macro_rules! r#struct {
     };
 }
 
-r#struct!()
+r#struct!();

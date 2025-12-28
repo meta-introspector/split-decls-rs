@@ -4,4 +4,4 @@ macro_rules! STYP_EXCEPT {
     };
 }
 
-STYP_EXCEPT!()
+STYP_EXCEPT!();

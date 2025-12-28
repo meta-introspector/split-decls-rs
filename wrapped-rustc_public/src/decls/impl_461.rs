@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Visitable!();
-        Visitor!();
         Opaque!();
+        Visitor!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_461 {
     };
 }
 
-impl_461!()
+impl_461!();

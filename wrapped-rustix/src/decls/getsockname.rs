@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        SocketAddrAny!();
         Result!();
+        SocketAddrAny!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! getsockname {
     };
 }
 
-getsockname!()
+getsockname!();

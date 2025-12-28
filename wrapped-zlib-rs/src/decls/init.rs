@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        State!();
-        InflateStream!();
-        InflateConfig!();
         Allocator!();
         ReturnCode!();
+        InflateStream!();
+        State!();
+        InflateConfig!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! init {
     };
 }
 
-init!()
+init!();

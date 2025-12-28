@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Trait!();
         Type!();
+        Trait!();
         Walkable!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! BoundConstness {
     };
 }
 
-BoundConstness!()
+BoundConstness!();

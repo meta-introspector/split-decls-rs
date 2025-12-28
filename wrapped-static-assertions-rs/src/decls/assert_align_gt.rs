@@ -4,4 +4,4 @@ macro_rules! assert_align_gt {
     };
 }
 
-assert_align_gt!()
+assert_align_gt!();

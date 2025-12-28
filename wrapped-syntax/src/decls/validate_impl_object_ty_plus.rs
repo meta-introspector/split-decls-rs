@@ -11,4 +11,4 @@ macro_rules! validate_impl_object_ty_plus {
     };
 }
 
-validate_impl_object_ty_plus!()
+validate_impl_object_ty_plus!();

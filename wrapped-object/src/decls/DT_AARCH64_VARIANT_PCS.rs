@@ -4,4 +4,4 @@ macro_rules! DT_AARCH64_VARIANT_PCS {
     };
 }
 
-DT_AARCH64_VARIANT_PCS!()
+DT_AARCH64_VARIANT_PCS!();

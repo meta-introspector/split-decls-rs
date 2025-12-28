@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        StateData!();
         HasBottom!();
+        StateData!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_244 {
     };
 }
 
-impl_244!()
+impl_244!();

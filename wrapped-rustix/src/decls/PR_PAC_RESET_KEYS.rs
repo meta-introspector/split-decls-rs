@@ -4,4 +4,4 @@ macro_rules! PR_PAC_RESET_KEYS {
     };
 }
 
-PR_PAC_RESET_KEYS!()
+PR_PAC_RESET_KEYS!();

@@ -4,4 +4,4 @@ macro_rules! ExpandRequires {
     };
 }
 
-ExpandRequires!()
+ExpandRequires!();

@@ -4,4 +4,4 @@ macro_rules! ForceCaptureTraitArgs {
     };
 }
 
-ForceCaptureTraitArgs!()
+ForceCaptureTraitArgs!();

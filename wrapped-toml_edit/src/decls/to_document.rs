@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         ValueSerializer!();
+        Error!();
+        Value!();
         DocumentMut!();
         Item!();
-        Value!();
-        Error!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! to_document {
     };
 }
 
-to_document!()
+to_document!();

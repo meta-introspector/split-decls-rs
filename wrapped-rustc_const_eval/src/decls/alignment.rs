@@ -4,4 +4,4 @@ macro_rules! alignment {
     };
 }
 
-alignment!()
+alignment!();

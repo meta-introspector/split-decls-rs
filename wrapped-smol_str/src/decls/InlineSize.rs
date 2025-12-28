@@ -4,4 +4,4 @@ macro_rules! InlineSize {
     };
 }
 
-InlineSize!()
+InlineSize!();

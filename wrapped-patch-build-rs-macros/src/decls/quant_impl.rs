@@ -62,4 +62,4 @@ impl QuantStrategy {{
     };
 }
 
-quant_impl!()
+quant_impl!();

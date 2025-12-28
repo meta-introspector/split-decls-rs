@@ -4,4 +4,4 @@ macro_rules! netdevice {
     };
 }
 
-netdevice!()
+netdevice!();

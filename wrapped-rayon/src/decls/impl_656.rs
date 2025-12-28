@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Folder!();
+        IntersperseFolder!();
         Consumer!();
         Reducer!();
         IntersperseConsumer!();
-        IntersperseFolder!();
+        Folder!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_656 {
     };
 }
 
-impl_656!()
+impl_656!();

@@ -4,4 +4,4 @@ macro_rules! binding_mode {
     };
 }
 
-binding_mode!()
+binding_mode!();

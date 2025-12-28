@@ -4,4 +4,4 @@ macro_rules! check_negative_auto_trait_impl {
     };
 }
 
-check_negative_auto_trait_impl!()
+check_negative_auto_trait_impl!();

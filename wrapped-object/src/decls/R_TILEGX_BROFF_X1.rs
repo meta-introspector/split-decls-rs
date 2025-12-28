@@ -4,4 +4,4 @@ macro_rules! R_TILEGX_BROFF_X1 {
     };
 }
 
-R_TILEGX_BROFF_X1!()
+R_TILEGX_BROFF_X1!();

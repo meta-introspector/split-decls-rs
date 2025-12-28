@@ -4,4 +4,4 @@ macro_rules! NANDINAGARI {
     };
 }
 
-NANDINAGARI!()
+NANDINAGARI!();

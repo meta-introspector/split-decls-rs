@@ -1,17 +1,17 @@
 macro_rules! deps {
     () => {
         Compare!();
-        Err!();
+        Error!();
+        Tag!();
+        Input!();
         OutputMode!();
         CompareResult!();
         ErrorKind!();
-        Tag!();
-        Needed!();
-        PResult!();
         ParseError!();
-        Error!();
         Parser!();
-        Input!();
+        PResult!();
+        Needed!();
+        Err!();
     };
 }
 
@@ -22,4 +22,4 @@ macro_rules! impl_456 {
     };
 }
 
-impl_456!()
+impl_456!();

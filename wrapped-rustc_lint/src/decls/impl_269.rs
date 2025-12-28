@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        QueryInstability!();
         LateContext!();
+        QueryInstability!();
         QueryUntracked!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_269 {
     };
 }
 
-impl_269!()
+impl_269!();

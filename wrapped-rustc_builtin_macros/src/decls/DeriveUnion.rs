@@ -4,4 +4,4 @@ macro_rules! DeriveUnion {
     };
 }
 
-DeriveUnion!()
+DeriveUnion!();

@@ -4,4 +4,4 @@ macro_rules! MatchSource {
     };
 }
 
-MatchSource!()
+MatchSource!();

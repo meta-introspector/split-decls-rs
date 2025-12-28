@@ -13,4 +13,4 @@ macro_rules! trait_ref_is_knowable {
     };
 }
 
-trait_ref_is_knowable!()
+trait_ref_is_knowable!();

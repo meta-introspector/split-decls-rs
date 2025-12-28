@@ -4,4 +4,4 @@ macro_rules! SMALL_PATH_BUFFER_SIZE {
     };
 }
 
-SMALL_PATH_BUFFER_SIZE!()
+SMALL_PATH_BUFFER_SIZE!();

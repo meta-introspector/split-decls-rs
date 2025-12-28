@@ -4,4 +4,4 @@ macro_rules! check_coroutine_obligations {
     };
 }
 
-check_coroutine_obligations!()
+check_coroutine_obligations!();

@@ -4,4 +4,4 @@ macro_rules! check_sum_filtered_ints {
     };
 }
 
-check_sum_filtered_ints!()
+check_sum_filtered_ints!();

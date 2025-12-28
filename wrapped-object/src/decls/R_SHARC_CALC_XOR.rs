@@ -4,4 +4,4 @@ macro_rules! R_SHARC_CALC_XOR {
     };
 }
 
-R_SHARC_CALC_XOR!()
+R_SHARC_CALC_XOR!();

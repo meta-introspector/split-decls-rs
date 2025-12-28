@@ -4,4 +4,4 @@ macro_rules! write_mantissa_long {
     };
 }
 
-write_mantissa_long!()
+write_mantissa_long!();

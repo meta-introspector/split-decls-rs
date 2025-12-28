@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        JobFifo!();
-        XorShift64Star!();
         WorkerThread!();
         ThreadBuilder!();
+        JobFifo!();
+        XorShift64Star!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_123 {
     };
 }
 
-impl_123!()
+impl_123!();

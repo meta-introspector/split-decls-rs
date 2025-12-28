@@ -4,4 +4,4 @@ macro_rules! initialize_checked_jobserver {
     };
 }
 
-initialize_checked_jobserver!()
+initialize_checked_jobserver!();

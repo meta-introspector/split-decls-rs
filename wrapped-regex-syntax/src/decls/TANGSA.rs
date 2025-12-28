@@ -4,4 +4,4 @@ macro_rules! TANGSA {
     };
 }
 
-TANGSA!()
+TANGSA!();

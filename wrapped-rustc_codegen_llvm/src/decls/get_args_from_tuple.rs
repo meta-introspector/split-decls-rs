@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        PassMode!();
         Builder!();
+        PassMode!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! get_args_from_tuple {
     };
 }
 
-get_args_from_tuple!()
+get_args_from_tuple!();

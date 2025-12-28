@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        InlineAsmArch!();
         Target!();
         InlineAsmRegClass!();
         InlineAsmReg!();
+        InlineAsmArch!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! def_regs {
     };
 }
 
-def_regs!()
+def_regs!();

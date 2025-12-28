@@ -6,4 +6,4 @@ macro_rules! ssr_let_stmt_in_macro_match {
     };
 }
 
-ssr_let_stmt_in_macro_match!()
+ssr_let_stmt_in_macro_match!();

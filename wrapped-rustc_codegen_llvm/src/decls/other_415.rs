@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         MetadataKindId!();
-        Bool!();
-        LLVMRustVerifierFailureAction!();
-        Builder!();
         AttributeKind!();
+        LLVMRustVerifierFailureAction!();
+        Bool!();
+        Builder!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! other_415 {
     };
 }
 
-other_415!()
+other_415!();

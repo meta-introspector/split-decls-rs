@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ParsedRule!();
         RawPattern!();
+        ParsedRule!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! SsrRule {
     };
 }
 
-SsrRule!()
+SsrRule!();

@@ -4,4 +4,4 @@ macro_rules! NixInfo {
     };
 }
 
-NixInfo!()
+NixInfo!();

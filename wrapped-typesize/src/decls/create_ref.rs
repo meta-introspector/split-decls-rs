@@ -11,4 +11,4 @@ macro_rules! create_ref {
     };
 }
 
-create_ref!()
+create_ref!();

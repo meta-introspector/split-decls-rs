@@ -4,4 +4,4 @@ macro_rules! fabsf128 {
     };
 }
 
-fabsf128!()
+fabsf128!();

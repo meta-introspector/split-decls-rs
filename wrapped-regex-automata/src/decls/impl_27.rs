@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Anchored!();
         DFA!();
+        Anchored!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_27 {
     };
 }
 
-impl_27!()
+impl_27!();

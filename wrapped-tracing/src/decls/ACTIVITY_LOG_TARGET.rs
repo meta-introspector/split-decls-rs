@@ -4,4 +4,4 @@ macro_rules! ACTIVITY_LOG_TARGET {
     };
 }
 
-ACTIVITY_LOG_TARGET!()
+ACTIVITY_LOG_TARGET!();

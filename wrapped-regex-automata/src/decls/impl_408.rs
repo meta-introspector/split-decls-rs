@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         BoundedBacktracker!();
-        Cache!();
         BoundedBacktrackerCache!();
+        Cache!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_408 {
     };
 }
 
-impl_408!()
+impl_408!();

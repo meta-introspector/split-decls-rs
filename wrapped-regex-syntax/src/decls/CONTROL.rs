@@ -4,4 +4,4 @@ macro_rules! CONTROL {
     };
 }
 
-CONTROL!()
+CONTROL!();

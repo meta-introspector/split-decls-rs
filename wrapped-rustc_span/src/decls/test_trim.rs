@@ -12,4 +12,4 @@ macro_rules! test_trim {
     };
 }
 
-test_trim!()
+test_trim!();

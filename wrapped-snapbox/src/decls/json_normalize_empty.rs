@@ -12,4 +12,4 @@ macro_rules! json_normalize_empty {
     };
 }
 
-json_normalize_empty!()
+json_normalize_empty!();

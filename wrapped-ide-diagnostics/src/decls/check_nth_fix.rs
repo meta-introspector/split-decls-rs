@@ -11,4 +11,4 @@ macro_rules! check_nth_fix {
     };
 }
 
-check_nth_fix!()
+check_nth_fix!();

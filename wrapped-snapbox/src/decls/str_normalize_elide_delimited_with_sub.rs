@@ -11,4 +11,4 @@ macro_rules! str_normalize_elide_delimited_with_sub {
     };
 }
 
-str_normalize_elide_delimited_with_sub!()
+str_normalize_elide_delimited_with_sub!();

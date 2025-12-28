@@ -11,4 +11,4 @@ macro_rules! set_tcp_thin_linear_timeouts {
     };
 }
 
-set_tcp_thin_linear_timeouts!()
+set_tcp_thin_linear_timeouts!();

@@ -4,4 +4,4 @@ macro_rules! writer_mt {
     };
 }
 
-writer_mt!()
+writer_mt!();

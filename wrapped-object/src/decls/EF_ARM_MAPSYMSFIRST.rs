@@ -4,4 +4,4 @@ macro_rules! EF_ARM_MAPSYMSFIRST {
     };
 }
 
-EF_ARM_MAPSYMSFIRST!()
+EF_ARM_MAPSYMSFIRST!();

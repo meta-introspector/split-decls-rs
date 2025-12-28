@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        UpmapFromRaFixture!();
-        RaFixtureAnalysis!();
         Result!();
+        RaFixtureAnalysis!();
+        UpmapFromRaFixture!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_117 {
     };
 }
 
-impl_117!()
+impl_117!();

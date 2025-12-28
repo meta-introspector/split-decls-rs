@@ -4,4 +4,4 @@ macro_rules! ClosureReturnTypeHints {
     };
 }
 
-ClosureReturnTypeHints!()
+ClosureReturnTypeHints!();

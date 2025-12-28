@@ -4,4 +4,4 @@ macro_rules! IceBugReport {
     };
 }
 
-IceBugReport!()
+IceBugReport!();

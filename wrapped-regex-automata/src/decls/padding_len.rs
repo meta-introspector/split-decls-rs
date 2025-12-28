@@ -4,4 +4,4 @@ macro_rules! padding_len {
     };
 }
 
-padding_len!()
+padding_len!();

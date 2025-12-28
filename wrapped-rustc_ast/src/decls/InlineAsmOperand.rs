@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        Label!();
-        Expr!();
-        Inline!();
         Const!();
-        InlineAsmRegOrRegClass!();
-        AnonConst!();
-        Walkable!();
-        Block!();
+        Expr!();
         InlineAsmSym!();
+        Label!();
+        Inline!();
+        InlineAsmRegOrRegClass!();
+        Walkable!();
+        AnonConst!();
+        Block!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! InlineAsmOperand {
     };
 }
 
-InlineAsmOperand!()
+InlineAsmOperand!();

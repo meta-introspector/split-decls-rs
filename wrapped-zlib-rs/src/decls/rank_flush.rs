@@ -4,4 +4,4 @@ macro_rules! rank_flush {
     };
 }
 
-rank_flush!()
+rank_flush!();

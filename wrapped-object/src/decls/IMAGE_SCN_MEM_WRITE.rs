@@ -11,4 +11,4 @@ macro_rules! IMAGE_SCN_MEM_WRITE {
     };
 }
 
-IMAGE_SCN_MEM_WRITE!()
+IMAGE_SCN_MEM_WRITE!();

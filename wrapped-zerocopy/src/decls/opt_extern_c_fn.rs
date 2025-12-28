@@ -4,4 +4,4 @@ macro_rules! opt_extern_c_fn {
     };
 }
 
-opt_extern_c_fn!()
+opt_extern_c_fn!();

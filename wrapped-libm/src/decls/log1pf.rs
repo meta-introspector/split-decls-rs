@@ -4,4 +4,4 @@ macro_rules! log1pf {
     };
 }
 
-log1pf!()
+log1pf!();

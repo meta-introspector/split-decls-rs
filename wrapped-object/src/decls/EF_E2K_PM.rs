@@ -4,4 +4,4 @@ macro_rules! EF_E2K_PM {
     };
 }
 
-EF_E2K_PM!()
+EF_E2K_PM!();

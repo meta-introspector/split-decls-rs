@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Statement!();
         Result!();
+        Statement!();
         ToSql!();
         Params!();
     };
@@ -14,4 +14,4 @@ macro_rules! impl_166 {
     };
 }
 
-impl_166!()
+impl_166!();

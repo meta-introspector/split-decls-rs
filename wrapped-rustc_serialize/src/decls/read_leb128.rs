@@ -4,4 +4,4 @@ macro_rules! read_leb128 {
     };
 }
 
-read_leb128!()
+read_leb128!();

@@ -4,4 +4,4 @@ macro_rules! web_time {
     };
 }
 
-web_time!()
+web_time!();

@@ -4,4 +4,4 @@ macro_rules! LINE_VERT {
     };
 }
 
-LINE_VERT!()
+LINE_VERT!();

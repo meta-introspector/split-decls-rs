@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        SliceTransform!();
-        CStrLike!();
-        TransformFn!();
         InDomainFn!();
         TransformCallback!();
+        TransformFn!();
+        CStrLike!();
+        SliceTransform!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_382 {
     };
 }
 
-impl_382!()
+impl_382!();

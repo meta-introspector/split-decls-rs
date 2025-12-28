@@ -4,4 +4,4 @@ macro_rules! iter_fields {
     };
 }
 
-iter_fields!()
+iter_fields!();

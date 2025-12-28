@@ -4,4 +4,4 @@ macro_rules! FoldWhile {
     };
 }
 
-FoldWhile!()
+FoldWhile!();

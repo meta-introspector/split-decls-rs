@@ -4,4 +4,4 @@ macro_rules! ResponseError {
     };
 }
 
-ResponseError!()
+ResponseError!();

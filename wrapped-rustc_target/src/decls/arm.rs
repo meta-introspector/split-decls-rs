@@ -4,4 +4,4 @@ macro_rules! arm {
     };
 }
 
-arm!()
+arm!();

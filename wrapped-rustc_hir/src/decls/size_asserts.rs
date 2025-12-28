@@ -1,35 +1,35 @@
 macro_rules! deps {
     () => {
-        GenericArg!();
-        LetStmt!();
-        Res!();
         Block!();
-        GenericBound!();
-        Item!();
-        StmtKind!();
-        TraitItemKind!();
-        FnDecl!();
-        Ty!();
-        TraitItem!();
         Generics!();
-        ForeignItemKind!();
-        Pat!();
-        ExprKind!();
-        PathSegment!();
-        TyKind!();
-        Body!();
-        Path!();
-        Stmt!();
-        TraitImplHeader!();
-        PatKind!();
-        ImplItem!();
-        Expr!();
-        Impl!();
+        FnDecl!();
         ForeignItem!();
-        Param!();
-        ImplItemKind!();
+        ImplItem!();
+        GenericArg!();
         ItemKind!();
+        StmtKind!();
         QPath!();
+        Stmt!();
+        Body!();
+        PathSegment!();
+        Path!();
+        TraitImplHeader!();
+        Expr!();
+        GenericBound!();
+        ImplItemKind!();
+        Res!();
+        TraitItem!();
+        Param!();
+        Item!();
+        ExprKind!();
+        Pat!();
+        LetStmt!();
+        TraitItemKind!();
+        Ty!();
+        ForeignItemKind!();
+        TyKind!();
+        Impl!();
+        PatKind!();
     };
 }
 
@@ -40,4 +40,4 @@ macro_rules! size_asserts {
     };
 }
 
-size_asserts!()
+size_asserts!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Reject!();
-        Cursor!();
         PResult!();
+        Cursor!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! delimiter_of_raw_string {
     };
 }
 
-delimiter_of_raw_string!()
+delimiter_of_raw_string!();

@@ -4,4 +4,4 @@ macro_rules! define_float_conversion {
     };
 }
 
-define_float_conversion!()
+define_float_conversion!();

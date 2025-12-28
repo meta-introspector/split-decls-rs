@@ -11,4 +11,4 @@ macro_rules! test_extract_if {
     };
 }
 
-test_extract_if!()
+test_extract_if!();

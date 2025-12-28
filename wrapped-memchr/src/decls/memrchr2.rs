@@ -4,4 +4,4 @@ macro_rules! memrchr2 {
     };
 }
 
-memrchr2!()
+memrchr2!();

@@ -11,4 +11,4 @@ macro_rules! broadcast_pool {
     };
 }
 
-broadcast_pool!()
+broadcast_pool!();

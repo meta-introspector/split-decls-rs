@@ -12,4 +12,4 @@ macro_rules! ieee_semantics {
     };
 }
 
-ieee_semantics!()
+ieee_semantics!();

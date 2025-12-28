@@ -4,4 +4,4 @@ macro_rules! type_collector {
     };
 }
 
-type_collector!()
+type_collector!();

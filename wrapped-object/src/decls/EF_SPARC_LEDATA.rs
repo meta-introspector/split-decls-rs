@@ -4,4 +4,4 @@ macro_rules! EF_SPARC_LEDATA {
     };
 }
 
-EF_SPARC_LEDATA!()
+EF_SPARC_LEDATA!();

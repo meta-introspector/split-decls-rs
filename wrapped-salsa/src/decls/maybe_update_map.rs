@@ -4,4 +4,4 @@ macro_rules! maybe_update_map {
     };
 }
 
-maybe_update_map!()
+maybe_update_map!();

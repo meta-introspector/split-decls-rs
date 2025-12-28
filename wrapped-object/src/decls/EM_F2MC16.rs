@@ -4,4 +4,4 @@ macro_rules! EM_F2MC16 {
     };
 }
 
-EM_F2MC16!()
+EM_F2MC16!();

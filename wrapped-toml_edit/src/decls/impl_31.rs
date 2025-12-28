@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         Item!();
-        Iter!();
-        Document!();
-        RawString!();
         Table!();
+        Iter!();
+        RawString!();
+        Document!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_31 {
     };
 }
 
-impl_31!()
+impl_31!();

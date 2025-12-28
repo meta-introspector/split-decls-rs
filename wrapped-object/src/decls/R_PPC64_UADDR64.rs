@@ -4,4 +4,4 @@ macro_rules! R_PPC64_UADDR64 {
     };
 }
 
-R_PPC64_UADDR64!()
+R_PPC64_UADDR64!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ReadRef!();
         FileHeader!();
+        ReadRef!();
         XcoffFile!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_779 {
     };
 }
 
-impl_779!()
+impl_779!();

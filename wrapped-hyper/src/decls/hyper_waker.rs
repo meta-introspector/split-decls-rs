@@ -4,4 +4,4 @@ macro_rules! hyper_waker {
     };
 }
 
-hyper_waker!()
+hyper_waker!();

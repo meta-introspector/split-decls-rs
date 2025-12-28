@@ -1,24 +1,24 @@
 macro_rules! deps {
     () => {
-        CargoMetadataConfig!();
-        FetchMetadata!();
-        ProjectWorkspace!();
-        CargoConfigFile!();
-        CargoConfig!();
-        ProjectManifest!();
-        ProjectJson!();
-        WorkspaceBuildScripts!();
-        CargoFeatures!();
-        InvocationStrategy!();
-        FileLoader!();
         CargoWorkspace!();
-        ManifestPath!();
+        InvocationStrategy!();
+        ProjectJson!();
         RustLibSource!();
+        CargoMetadataConfig!();
+        ProjectManifest!();
+        CargoConfig!();
         ProjectWorkspaceKind!();
-        PackageRoot!();
-        RustLibSrcWorkspace!();
-        RustSourceWorkspaceConfig!();
+        ManifestPath!();
         Sysroot!();
+        CargoConfigFile!();
+        FetchMetadata!();
+        CargoFeatures!();
+        ProjectWorkspace!();
+        RustSourceWorkspaceConfig!();
+        RustLibSrcWorkspace!();
+        WorkspaceBuildScripts!();
+        PackageRoot!();
+        FileLoader!();
     };
 }
 
@@ -32,4 +32,4 @@ macro_rules! impl_101 {
     };
 }
 
-impl_101!()
+impl_101!();

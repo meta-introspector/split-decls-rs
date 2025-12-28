@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Scope!();
         DropTree!();
+        Scope!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! BreakableScope {
     };
 }
 
-BreakableScope!()
+BreakableScope!();

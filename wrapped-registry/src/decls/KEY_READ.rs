@@ -11,4 +11,4 @@ macro_rules! KEY_READ {
     };
 }
 
-KEY_READ!()
+KEY_READ!();

@@ -4,4 +4,4 @@ macro_rules! RChunksExactProducer {
     };
 }
 
-RChunksExactProducer!()
+RChunksExactProducer!();

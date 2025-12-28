@@ -11,4 +11,4 @@ macro_rules! get_declarations_by_module {
     };
 }
 
-get_declarations_by_module!()
+get_declarations_by_module!();

@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Formatter!();
-        Result!();
-        Number!();
-        Error!();
         Compound!();
+        Formatter!();
         RawValue!();
-        Map!();
+        Result!();
+        Error!();
         State!();
+        Number!();
+        Map!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_144 {
     };
 }
 
-impl_144!()
+impl_144!();

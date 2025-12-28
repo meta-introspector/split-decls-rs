@@ -4,4 +4,4 @@ macro_rules! AttrIdGenerator {
     };
 }
 
-AttrIdGenerator!()
+AttrIdGenerator!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Args!();
         BagOfWordsVisitor!();
+        Args!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! handle_analyze_bag_of_words {
     };
 }
 
-handle_analyze_bag_of_words!()
+handle_analyze_bag_of_words!();

@@ -4,4 +4,4 @@ macro_rules! A_MAX {
     };
 }
 
-A_MAX!()
+A_MAX!();

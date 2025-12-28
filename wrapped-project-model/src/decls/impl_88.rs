@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
         Sysroot!();
-        RustSourceWorkspaceConfig!();
-        FetchMetadata!();
         CargoMetadataConfig!();
         CargoWorkspace!();
-        RustLibSrcWorkspace!();
+        FetchMetadata!();
+        RustSourceWorkspaceConfig!();
         ManifestPath!();
+        RustLibSrcWorkspace!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_88 {
     };
 }
 
-impl_88!()
+impl_88!();

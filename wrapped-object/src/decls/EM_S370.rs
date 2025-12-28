@@ -4,4 +4,4 @@ macro_rules! EM_S370 {
     };
 }
 
-EM_S370!()
+EM_S370!();

@@ -4,4 +4,4 @@ macro_rules! IVector {
     };
 }
 
-IVector!()
+IVector!();

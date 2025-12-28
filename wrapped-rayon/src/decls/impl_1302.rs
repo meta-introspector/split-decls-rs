@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        ParallelIterator!();
-        BytesProducer!();
         UnindexedConsumer!();
+        ParallelIterator!();
         Bytes!();
+        BytesProducer!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_1302 {
     };
 }
 
-impl_1302!()
+impl_1302!();

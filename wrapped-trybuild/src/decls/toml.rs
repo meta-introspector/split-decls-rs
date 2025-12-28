@@ -4,4 +4,4 @@ macro_rules! toml {
     };
 }
 
-toml!()
+toml!();

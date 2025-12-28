@@ -11,4 +11,4 @@ macro_rules! default_dep_kind_debug {
     };
 }
 
-default_dep_kind_debug!()
+default_dep_kind_debug!();

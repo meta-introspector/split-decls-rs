@@ -12,4 +12,4 @@ macro_rules! handle_run_pipeline {
     };
 }
 
-handle_run_pipeline!()
+handle_run_pipeline!();

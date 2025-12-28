@@ -4,4 +4,4 @@ macro_rules! rotate_u128_right {
     };
 }
 
-rotate_u128_right!()
+rotate_u128_right!();

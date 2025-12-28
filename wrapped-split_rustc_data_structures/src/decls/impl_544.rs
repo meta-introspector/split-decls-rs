@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        HashStable!();
         StableOrd!();
+        HashStable!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_544 {
     };
 }
 
-impl_544!()
+impl_544!();

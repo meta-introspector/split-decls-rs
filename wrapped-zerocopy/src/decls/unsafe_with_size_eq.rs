@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        IntoBytes!();
-        FromZeros!();
-        SizeEq!();
-        TryFromBytes!();
-        KnownLayout!();
         FromBytes!();
-        Immutable!();
+        IntoBytes!();
         InvariantsEq!();
         PointerMetadata!();
+        TryFromBytes!();
+        Immutable!();
+        SizeEq!();
+        KnownLayout!();
+        FromZeros!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! unsafe_with_size_eq {
     };
 }
 
-unsafe_with_size_eq!()
+unsafe_with_size_eq!();

@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        Cause!();
-        TimedOut!();
-        Header!();
-        User!();
-        Service!();
-        Io!();
-        Kind!();
-        Error!();
-        ErrorImpl!();
         Parse!();
+        Io!();
+        User!();
+        TimedOut!();
+        Error!();
+        Kind!();
+        Header!();
+        Service!();
+        Cause!();
+        ErrorImpl!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_109 {
     };
 }
 
-impl_109!()
+impl_109!();

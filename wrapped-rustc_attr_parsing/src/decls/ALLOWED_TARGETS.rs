@@ -11,4 +11,4 @@ macro_rules! ALLOWED_TARGETS {
     };
 }
 
-ALLOWED_TARGETS!()
+ALLOWED_TARGETS!();

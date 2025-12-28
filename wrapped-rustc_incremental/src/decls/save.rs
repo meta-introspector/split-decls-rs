@@ -4,4 +4,4 @@ macro_rules! save {
     };
 }
 
-save!()
+save!();

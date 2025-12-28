@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        UnindexedConsumer!();
         FlattenConsumer!();
-        IntoParallelIterator!();
         Reducer!();
+        IntoParallelIterator!();
+        UnindexedConsumer!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_536 {
     };
 }
 
-impl_536!()
+impl_536!();

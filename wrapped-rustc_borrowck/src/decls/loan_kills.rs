@@ -4,4 +4,4 @@ macro_rules! loan_kills {
     };
 }
 
-loan_kills!()
+loan_kills!();

@@ -12,4 +12,4 @@ macro_rules! collect_extended {
     };
 }
 
-collect_extended!()
+collect_extended!();

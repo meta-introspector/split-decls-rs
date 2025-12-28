@@ -12,4 +12,4 @@ macro_rules! recognize_take_while {
     };
 }
 
-recognize_take_while!()
+recognize_take_while!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Running!();
         Cycle!();
+        Running!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! WaitForResult {
     };
 }
 
-WaitForResult!()
+WaitForResult!();

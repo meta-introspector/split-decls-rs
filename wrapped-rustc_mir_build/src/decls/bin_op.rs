@@ -4,4 +4,4 @@ macro_rules! bin_op {
     };
 }
 
-bin_op!()
+bin_op!();

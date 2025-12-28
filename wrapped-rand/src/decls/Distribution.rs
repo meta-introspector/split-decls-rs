@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         Rng!();
-        Uniform!();
         Iter!();
-        Map!();
-        StandardUniform!();
         Alphanumeric!();
+        Map!();
+        Uniform!();
+        StandardUniform!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! Distribution {
     };
 }
 
-Distribution!()
+Distribution!();

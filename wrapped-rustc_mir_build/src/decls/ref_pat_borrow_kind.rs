@@ -4,4 +4,4 @@ macro_rules! ref_pat_borrow_kind {
     };
 }
 
-ref_pat_borrow_kind!()
+ref_pat_borrow_kind!();

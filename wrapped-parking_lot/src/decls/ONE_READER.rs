@@ -4,4 +4,4 @@ macro_rules! ONE_READER {
     };
 }
 
-ONE_READER!()
+ONE_READER!();

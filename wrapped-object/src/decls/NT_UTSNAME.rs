@@ -4,4 +4,4 @@ macro_rules! NT_UTSNAME {
     };
 }
 
-NT_UTSNAME!()
+NT_UTSNAME!();

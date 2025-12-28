@@ -4,4 +4,4 @@ macro_rules! double_ended_take {
     };
 }
 
-double_ended_take!()
+double_ended_take!();

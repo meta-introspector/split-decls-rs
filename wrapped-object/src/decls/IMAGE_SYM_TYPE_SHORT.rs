@@ -4,4 +4,4 @@ macro_rules! IMAGE_SYM_TYPE_SHORT {
     };
 }
 
-IMAGE_SYM_TYPE_SHORT!()
+IMAGE_SYM_TYPE_SHORT!();

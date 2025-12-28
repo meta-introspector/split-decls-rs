@@ -4,4 +4,4 @@ macro_rules! FnQualifierInExtern {
     };
 }
 
-FnQualifierInExtern!()
+FnQualifierInExtern!();

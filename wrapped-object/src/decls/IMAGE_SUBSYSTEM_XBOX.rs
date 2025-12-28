@@ -4,4 +4,4 @@ macro_rules! IMAGE_SUBSYSTEM_XBOX {
     };
 }
 
-IMAGE_SUBSYSTEM_XBOX!()
+IMAGE_SUBSYSTEM_XBOX!();

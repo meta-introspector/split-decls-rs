@@ -4,4 +4,4 @@ macro_rules! is_option {
     };
 }
 
-is_option!()
+is_option!();

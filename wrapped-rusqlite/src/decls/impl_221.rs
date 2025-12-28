@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Statement!();
         Row!();
+        Statement!();
+        Error!();
         Result!();
         Rows!();
-        Error!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_221 {
     };
 }
 
-impl_221!()
+impl_221!();

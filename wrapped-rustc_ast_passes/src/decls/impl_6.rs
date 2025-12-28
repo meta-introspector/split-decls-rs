@@ -1,36 +1,36 @@
 macro_rules! deps {
     () => {
-        WhereClauseAfterTypeAlias!();
-        GenericDefaultTrailing!();
-        MissingUnsafeOnExtern!();
-        AstValidator!();
-        FieldlessUnion!();
+        WhereClauseBeforeTypeAliasSugg!();
         AssocFnWithoutBody!();
         PatternInBodiless!();
-        AssocTypeWithoutBody!();
-        UnsafeStatic!();
-        UnsafeItem!();
-        ConstWithoutBody!();
-        AssocConstWithoutBody!();
-        TildeConstReason!();
-        NegativeBoundWithParentheticalNotation!();
         UnsafeNegativeImpl!();
-        ObsoleteAuto!();
-        PreciseCapturingNotAllowedHere!();
-        TraitOrTraitImpl!();
-        TildeConstDisallowed!();
-        FnWithoutBody!();
-        NestedLifetimes!();
         ConstBoundTraitObject!();
-        SelfSemantic!();
-        VisibilityNotPermittedNote!();
-        ExternBlockSuggestion!();
-        ConstraintOnNegativeBound!();
-        TyAliasWithoutBody!();
-        ConstAndCoroutine!();
+        AssocConstWithoutBody!();
+        GenericDefaultTrailing!();
+        FnWithoutBody!();
+        TraitOrTraitImpl!();
         PatternInForeign!();
-        WhereClauseBeforeTypeAliasSugg!();
+        TildeConstReason!();
+        PreciseCapturingNotAllowedHere!();
+        UnsafeStatic!();
+        FieldlessUnion!();
+        WhereClauseAfterTypeAlias!();
+        SelfSemantic!();
+        ExternBlockSuggestion!();
+        NegativeBoundWithParentheticalNotation!();
+        VisibilityNotPermittedNote!();
+        NestedLifetimes!();
+        ConstraintOnNegativeBound!();
+        TildeConstDisallowed!();
+        ConstWithoutBody!();
+        AstValidator!();
         StaticWithoutBody!();
+        TyAliasWithoutBody!();
+        UnsafeItem!();
+        MissingUnsafeOnExtern!();
+        ObsoleteAuto!();
+        AssocTypeWithoutBody!();
+        ConstAndCoroutine!();
     };
 }
 
@@ -41,4 +41,4 @@ macro_rules! impl_6 {
     };
 }
 
-impl_6!()
+impl_6!();

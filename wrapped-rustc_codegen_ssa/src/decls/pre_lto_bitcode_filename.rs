@@ -4,4 +4,4 @@ macro_rules! pre_lto_bitcode_filename {
     };
 }
 
-pre_lto_bitcode_filename!()
+pre_lto_bitcode_filename!();

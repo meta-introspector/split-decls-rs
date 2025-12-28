@@ -11,4 +11,4 @@ macro_rules! analysis_is_send {
     };
 }
 
-analysis_is_send!()
+analysis_is_send!();

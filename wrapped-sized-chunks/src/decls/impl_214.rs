@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        RawIndex!();
-        Slice!();
-        Drain!();
-        Iter!();
         SliceMut!();
         IndexIter!();
+        Slice!();
         RingBuffer!();
+        RawIndex!();
+        Drain!();
         IterMut!();
+        Iter!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_214 {
     };
 }
 
-impl_214!()
+impl_214!();

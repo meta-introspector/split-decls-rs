@@ -4,4 +4,4 @@ macro_rules! ListVecConsumer {
     };
 }
 
-ListVecConsumer!()
+ListVecConsumer!();

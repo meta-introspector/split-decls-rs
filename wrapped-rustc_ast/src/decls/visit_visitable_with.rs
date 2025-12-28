@@ -11,4 +11,4 @@ macro_rules! visit_visitable_with {
     };
 }
 
-visit_visitable_with!()
+visit_visitable_with!();

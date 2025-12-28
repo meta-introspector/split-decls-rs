@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Compare!();
-        Input!();
         ParseError!();
+        Input!();
         IResult!();
+        Compare!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! sign {
     };
 }
 
-sign!()
+sign!();

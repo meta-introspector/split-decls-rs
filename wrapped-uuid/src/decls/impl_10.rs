@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Bytes!();
         Error!();
         ErrorKind!();
         Uuid!();
+        Bytes!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_10 {
     };
 }
 
-impl_10!()
+impl_10!();

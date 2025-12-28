@@ -4,4 +4,4 @@ macro_rules! RvalueFunc {
     };
 }
 
-RvalueFunc!()
+RvalueFunc!();

@@ -11,4 +11,4 @@ macro_rules! init_module {
     };
 }
 
-init_module!()
+init_module!();

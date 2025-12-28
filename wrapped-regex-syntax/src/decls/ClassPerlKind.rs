@@ -4,4 +4,4 @@ macro_rules! ClassPerlKind {
     };
 }
 
-ClassPerlKind!()
+ClassPerlKind!();

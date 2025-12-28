@@ -12,4 +12,4 @@ macro_rules! walk_fn_decl {
     };
 }
 
-walk_fn_decl!()
+walk_fn_decl!();

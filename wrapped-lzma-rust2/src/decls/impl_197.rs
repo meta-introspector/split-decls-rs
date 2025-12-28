@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         LzmaEncoderTrait!();
-        LzmaEncoder!();
         FastEncoderMode!();
+        LzmaEncoder!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_197 {
     };
 }
 
-impl_197!()
+impl_197!();

@@ -4,4 +4,4 @@ macro_rules! R_GL {
     };
 }
 
-R_GL!()
+R_GL!();

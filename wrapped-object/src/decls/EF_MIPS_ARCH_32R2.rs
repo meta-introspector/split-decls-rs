@@ -4,4 +4,4 @@ macro_rules! EF_MIPS_ARCH_32R2 {
     };
 }
 
-EF_MIPS_ARCH_32R2!()
+EF_MIPS_ARCH_32R2!();

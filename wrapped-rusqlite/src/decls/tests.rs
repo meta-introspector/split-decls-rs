@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        ToSql!();
         Connection!();
-        Blob!();
+        ToSql!();
         Null!();
         Result!();
+        Blob!();
     };
 }
 
@@ -50,4 +50,4 @@ macro_rules! tests {
     };
 }
 
-tests!()
+tests!();

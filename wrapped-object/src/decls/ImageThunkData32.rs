@@ -11,4 +11,4 @@ macro_rules! ImageThunkData32 {
     };
 }
 
-ImageThunkData32!()
+ImageThunkData32!();

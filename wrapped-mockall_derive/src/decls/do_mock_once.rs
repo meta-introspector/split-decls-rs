@@ -11,4 +11,4 @@ macro_rules! do_mock_once {
     };
 }
 
-do_mock_once!()
+do_mock_once!();

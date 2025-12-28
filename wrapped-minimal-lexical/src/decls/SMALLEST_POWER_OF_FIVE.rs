@@ -4,4 +4,4 @@ macro_rules! SMALLEST_POWER_OF_FIVE {
     };
 }
 
-SMALLEST_POWER_OF_FIVE!()
+SMALLEST_POWER_OF_FIVE!();

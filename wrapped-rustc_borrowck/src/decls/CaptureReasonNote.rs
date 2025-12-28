@@ -4,4 +4,4 @@ macro_rules! CaptureReasonNote {
     };
 }
 
-CaptureReasonNote!()
+CaptureReasonNote!();

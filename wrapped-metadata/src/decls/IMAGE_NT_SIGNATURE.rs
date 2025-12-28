@@ -4,4 +4,4 @@ macro_rules! IMAGE_NT_SIGNATURE {
     };
 }
 
-IMAGE_NT_SIGNATURE!()
+IMAGE_NT_SIGNATURE!();

@@ -4,4 +4,4 @@ macro_rules! NABATAEAN {
     };
 }
 
-NABATAEAN!()
+NABATAEAN!();

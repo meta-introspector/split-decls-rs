@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        PatCx!();
-        PlaceValidity!();
         Constructor!();
+        PlaceValidity!();
+        PatCx!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_98 {
     };
 }
 
-impl_98!()
+impl_98!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Regex!();
         RegexSet!();
+        Regex!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Builder {
     };
 }
 
-Builder!()
+Builder!();

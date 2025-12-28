@@ -4,4 +4,4 @@ macro_rules! DEFAULT_CM {
     };
 }
 
-DEFAULT_CM!()
+DEFAULT_CM!();

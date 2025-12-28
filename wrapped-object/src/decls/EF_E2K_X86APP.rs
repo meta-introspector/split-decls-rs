@@ -4,4 +4,4 @@ macro_rules! EF_E2K_X86APP {
     };
 }
 
-EF_E2K_X86APP!()
+EF_E2K_X86APP!();

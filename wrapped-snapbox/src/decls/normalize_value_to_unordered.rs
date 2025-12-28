@@ -4,4 +4,4 @@ macro_rules! normalize_value_to_unordered {
     };
 }
 
-normalize_value_to_unordered!()
+normalize_value_to_unordered!();

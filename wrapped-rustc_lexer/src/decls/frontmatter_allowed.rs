@@ -32,4 +32,4 @@ fn main() {}
     };
 }
 
-frontmatter_allowed!()
+frontmatter_allowed!();

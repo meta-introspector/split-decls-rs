@@ -4,4 +4,4 @@ macro_rules! Keypair {
     };
 }
 
-Keypair!()
+Keypair!();

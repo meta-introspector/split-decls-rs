@@ -4,4 +4,4 @@ macro_rules! warn_if_linked_with_gold {
     };
 }
 
-warn_if_linked_with_gold!()
+warn_if_linked_with_gold!();

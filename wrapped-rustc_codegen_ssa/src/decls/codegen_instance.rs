@@ -11,4 +11,4 @@ macro_rules! codegen_instance {
     };
 }
 
-codegen_instance!()
+codegen_instance!();

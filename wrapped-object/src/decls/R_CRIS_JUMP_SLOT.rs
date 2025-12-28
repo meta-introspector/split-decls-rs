@@ -4,4 +4,4 @@ macro_rules! R_CRIS_JUMP_SLOT {
     };
 }
 
-R_CRIS_JUMP_SLOT!()
+R_CRIS_JUMP_SLOT!();

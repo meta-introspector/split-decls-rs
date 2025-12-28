@@ -4,4 +4,4 @@ macro_rules! extern_crate {
     };
 }
 
-extern_crate!()
+extern_crate!();

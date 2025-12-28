@@ -4,4 +4,4 @@ macro_rules! d2s_small_table {
     };
 }
 
-d2s_small_table!()
+d2s_small_table!();

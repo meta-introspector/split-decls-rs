@@ -4,4 +4,4 @@ macro_rules! libc_internals {
     };
 }
 
-libc_internals!()
+libc_internals!();

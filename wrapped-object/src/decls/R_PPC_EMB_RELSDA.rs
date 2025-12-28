@@ -4,4 +4,4 @@ macro_rules! R_PPC_EMB_RELSDA {
     };
 }
 
-R_PPC_EMB_RELSDA!()
+R_PPC_EMB_RELSDA!();

@@ -4,4 +4,4 @@ macro_rules! getpath {
     };
 }
 
-getpath!()
+getpath!();

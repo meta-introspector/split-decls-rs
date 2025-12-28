@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Presence!();
         Slice!();
+        Presence!();
         SliceKind!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_14 {
     };
 }
 
-impl_14!()
+impl_14!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        MapSpecialCase!();
         GroupingMapFn!();
+        MapSpecialCase!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! MapForGrouping {
     };
 }
 
-MapForGrouping!()
+MapForGrouping!();

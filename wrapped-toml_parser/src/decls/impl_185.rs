@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         ValidateWhitespace!();
+        EventReceiver!();
         ErrorSink!();
         Encoding!();
-        EventReceiver!();
         Span!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_185 {
     };
 }
 
-impl_185!()
+impl_185!();

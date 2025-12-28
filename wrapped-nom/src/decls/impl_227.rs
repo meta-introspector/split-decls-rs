@@ -1,17 +1,17 @@
 macro_rules! deps {
     () => {
         Many1!();
-        Parser!();
-        Input!();
         OutputM!();
-        Err!();
-        ErrorKind!();
-        OutputMode!();
         PResult!();
-        Error!();
-        Many0!();
+        ErrorKind!();
         Emit!();
+        Input!();
         Check!();
+        Many0!();
+        Err!();
+        OutputMode!();
+        Error!();
+        Parser!();
     };
 }
 
@@ -22,4 +22,4 @@ macro_rules! impl_227 {
     };
 }
 
-impl_227!()
+impl_227!();

@@ -4,4 +4,4 @@ macro_rules! DetectNonGenericPointeeAttr {
     };
 }
 
-DetectNonGenericPointeeAttr!()
+DetectNonGenericPointeeAttr!();

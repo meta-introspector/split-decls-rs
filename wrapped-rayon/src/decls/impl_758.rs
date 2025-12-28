@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ParallelBridge!();
         IterBridge!();
+        ParallelBridge!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_758 {
     };
 }
 
-impl_758!()
+impl_758!();

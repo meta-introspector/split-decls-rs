@@ -11,4 +11,4 @@ macro_rules! IterInstantiated {
     };
 }
 
-IterInstantiated!()
+IterInstantiated!();

@@ -4,4 +4,4 @@ macro_rules! SSUBTYP_DWARNGE {
     };
 }
 
-SSUBTYP_DWARNGE!()
+SSUBTYP_DWARNGE!();

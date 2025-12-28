@@ -4,4 +4,4 @@ macro_rules! ENV_CERT_FILE {
     };
 }
 
-ENV_CERT_FILE!()
+ENV_CERT_FILE!();

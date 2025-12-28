@@ -4,4 +4,4 @@ macro_rules! SUID_DUMP_DISABLE {
     };
 }
 
-SUID_DUMP_DISABLE!()
+SUID_DUMP_DISABLE!();

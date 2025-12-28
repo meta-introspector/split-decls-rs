@@ -4,4 +4,4 @@ macro_rules! RustcToolTrait {
     };
 }
 
-RustcToolTrait!()
+RustcToolTrait!();

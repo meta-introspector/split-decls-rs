@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Value!();
-        Visit!();
-        Item!();
         Table!();
+        Visit!();
+        Value!();
         ArrayOfTables!();
+        Item!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! visit_item {
     };
 }
 
-visit_item!()
+visit_item!();

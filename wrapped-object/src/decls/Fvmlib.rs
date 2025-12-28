@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Endian!();
-        U32!();
         LcStr!();
+        U32!();
+        Endian!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Fvmlib {
     };
 }
 
-Fvmlib!()
+Fvmlib!();

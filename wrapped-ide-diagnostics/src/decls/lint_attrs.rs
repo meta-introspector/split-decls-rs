@@ -4,4 +4,4 @@ macro_rules! lint_attrs {
     };
 }
 
-lint_attrs!()
+lint_attrs!();

@@ -4,4 +4,4 @@ macro_rules! RE_SPLIT_IDENT {
     };
 }
 
-RE_SPLIT_IDENT!()
+RE_SPLIT_IDENT!();

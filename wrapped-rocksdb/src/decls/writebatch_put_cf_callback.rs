@@ -11,4 +11,4 @@ macro_rules! writebatch_put_cf_callback {
     };
 }
 
-writebatch_put_cf_callback!()
+writebatch_put_cf_callback!();

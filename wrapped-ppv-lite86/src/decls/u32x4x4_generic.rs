@@ -4,4 +4,4 @@ macro_rules! u32x4x4_generic {
     };
 }
 
-u32x4x4_generic!()
+u32x4x4_generic!();

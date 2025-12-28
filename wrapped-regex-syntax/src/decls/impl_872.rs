@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Utf8Sequence!();
         Utf8Sequences!();
+        Utf8Sequence!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_872 {
     };
 }
 
-impl_872!()
+impl_872!();

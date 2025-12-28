@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        PredecessorSets!();
         DfsPostOrder!();
+        PredecessorSets!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! simple_fast_post_order {
     };
 }
 
-simple_fast_post_order!()
+simple_fast_post_order!();

@@ -4,4 +4,4 @@ macro_rules! ident_from_token {
     };
 }
 
-ident_from_token!()
+ident_from_token!();

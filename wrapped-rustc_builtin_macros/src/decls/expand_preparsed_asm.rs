@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         AsmModifierInvalid!();
-        ExprToSpannedString!();
         ValidatedAsmArgs!();
         AsmNoMatchedArgumentName!();
+        ExprToSpannedString!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! expand_preparsed_asm {
     };
 }
 
-expand_preparsed_asm!()
+expand_preparsed_asm!();

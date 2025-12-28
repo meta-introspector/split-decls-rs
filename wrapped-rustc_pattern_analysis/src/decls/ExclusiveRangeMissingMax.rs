@@ -4,4 +4,4 @@ macro_rules! ExclusiveRangeMissingMax {
     };
 }
 
-ExclusiveRangeMissingMax!()
+ExclusiveRangeMissingMax!();

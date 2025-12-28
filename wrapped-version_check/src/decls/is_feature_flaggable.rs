@@ -11,4 +11,4 @@ macro_rules! is_feature_flaggable {
     };
 }
 
-is_feature_flaggable!()
+is_feature_flaggable!();

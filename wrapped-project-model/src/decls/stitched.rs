@@ -32,4 +32,4 @@ core" ; }
     };
 }
 
-stitched!()
+stitched!();

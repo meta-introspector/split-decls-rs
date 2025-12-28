@@ -11,4 +11,4 @@ macro_rules! probe_from_env {
     };
 }
 
-probe_from_env!()
+probe_from_env!();

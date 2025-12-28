@@ -4,4 +4,4 @@ macro_rules! ArmVer {
     };
 }
 
-ArmVer!()
+ArmVer!();

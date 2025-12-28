@@ -4,4 +4,4 @@ macro_rules! LL_NONE {
     };
 }
 
-LL_NONE!()
+LL_NONE!();

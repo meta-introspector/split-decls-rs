@@ -4,4 +4,4 @@ macro_rules! place_ext {
     };
 }
 
-place_ext!()
+place_ext!();

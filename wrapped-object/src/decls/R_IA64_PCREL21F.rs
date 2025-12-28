@@ -4,4 +4,4 @@ macro_rules! R_IA64_PCREL21F {
     };
 }
 
-R_IA64_PCREL21F!()
+R_IA64_PCREL21F!();

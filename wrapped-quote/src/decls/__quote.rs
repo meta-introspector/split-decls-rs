@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        TokenStreamExt!();
         ToTokens!();
+        TokenStreamExt!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! __quote {
     };
 }
 
-__quote!()
+__quote!();

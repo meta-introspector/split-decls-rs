@@ -4,4 +4,4 @@ macro_rules! align {
     };
 }
 
-align!()
+align!();

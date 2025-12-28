@@ -4,4 +4,4 @@ macro_rules! naive_adler32 {
     };
 }
 
-naive_adler32!()
+naive_adler32!();

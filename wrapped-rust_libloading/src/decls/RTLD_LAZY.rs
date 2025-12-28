@@ -4,4 +4,4 @@ macro_rules! RTLD_LAZY {
     };
 }
 
-RTLD_LAZY!()
+RTLD_LAZY!();

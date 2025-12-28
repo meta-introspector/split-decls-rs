@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Version!();
-        Channel!();
         Date!();
+        Channel!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! triple {
     };
 }
 
-triple!()
+triple!();

@@ -2,9 +2,9 @@ macro_rules! deps {
     () => {
         Params!();
         BindIndex!();
-        Statement!();
-        ToSql!();
         Result!();
+        ToSql!();
+        Statement!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_for_array_ref {
     };
 }
 
-impl_for_array_ref!()
+impl_for_array_ref!();

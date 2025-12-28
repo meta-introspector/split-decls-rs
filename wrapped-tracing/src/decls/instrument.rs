@@ -4,4 +4,4 @@ macro_rules! instrument {
     };
 }
 
-instrument!()
+instrument!();

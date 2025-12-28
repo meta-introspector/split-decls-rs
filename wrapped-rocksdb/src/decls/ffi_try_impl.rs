@@ -11,4 +11,4 @@ macro_rules! ffi_try_impl {
     };
 }
 
-ffi_try_impl!()
+ffi_try_impl!();

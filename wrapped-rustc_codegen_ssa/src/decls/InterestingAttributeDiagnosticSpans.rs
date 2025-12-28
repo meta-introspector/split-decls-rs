@@ -4,4 +4,4 @@ macro_rules! InterestingAttributeDiagnosticSpans {
     };
 }
 
-InterestingAttributeDiagnosticSpans!()
+InterestingAttributeDiagnosticSpans!();

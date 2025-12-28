@@ -4,4 +4,4 @@ macro_rules! track_span_parent {
     };
 }
 
-track_span_parent!()
+track_span_parent!();

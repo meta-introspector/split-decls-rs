@@ -4,4 +4,4 @@ macro_rules! Two {
     };
 }
 
-Two!()
+Two!();

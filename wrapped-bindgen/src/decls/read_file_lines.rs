@@ -11,4 +11,4 @@ macro_rules! read_file_lines {
     };
 }
 
-read_file_lines!()
+read_file_lines!();

@@ -4,4 +4,4 @@ macro_rules! R_E2K_ISLOCAL {
     };
 }
 
-R_E2K_ISLOCAL!()
+R_E2K_ISLOCAL!();

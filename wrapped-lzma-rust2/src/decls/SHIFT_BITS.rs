@@ -4,4 +4,4 @@ macro_rules! SHIFT_BITS {
     };
 }
 
-SHIFT_BITS!()
+SHIFT_BITS!();

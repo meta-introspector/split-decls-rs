@@ -4,4 +4,4 @@ macro_rules! IceVersion {
     };
 }
 
-IceVersion!()
+IceVersion!();

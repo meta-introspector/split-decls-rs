@@ -11,4 +11,4 @@ macro_rules! ImageAlpha64RuntimeFunctionEntry {
     };
 }
 
-ImageAlpha64RuntimeFunctionEntry!()
+ImageAlpha64RuntimeFunctionEntry!();

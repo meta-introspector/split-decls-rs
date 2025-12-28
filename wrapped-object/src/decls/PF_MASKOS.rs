@@ -4,4 +4,4 @@ macro_rules! PF_MASKOS {
     };
 }
 
-PF_MASKOS!()
+PF_MASKOS!();

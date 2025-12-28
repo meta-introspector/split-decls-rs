@@ -4,4 +4,4 @@ macro_rules! IMAGE_REL_ALPHA_REFQ3 {
     };
 }
 
-IMAGE_REL_ALPHA_REFQ3!()
+IMAGE_REL_ALPHA_REFQ3!();

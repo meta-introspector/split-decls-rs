@@ -4,4 +4,4 @@ macro_rules! counters {
     };
 }
 
-counters!()
+counters!();

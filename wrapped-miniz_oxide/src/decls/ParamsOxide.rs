@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        TDEFLStatus!();
         TDEFLFlush!();
         LocalBuf!();
+        TDEFLStatus!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! ParamsOxide {
     };
 }
 
-ParamsOxide!()
+ParamsOxide!();

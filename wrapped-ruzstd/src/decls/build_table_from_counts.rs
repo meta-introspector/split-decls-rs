@@ -11,4 +11,4 @@ macro_rules! build_table_from_counts {
     };
 }
 
-build_table_from_counts!()
+build_table_from_counts!();

@@ -4,4 +4,4 @@ macro_rules! OutDirError {
     };
 }
 
-OutDirError!()
+OutDirError!();

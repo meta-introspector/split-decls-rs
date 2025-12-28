@@ -4,4 +4,4 @@ macro_rules! RawDirEntry {
     };
 }
 
-RawDirEntry!()
+RawDirEntry!();

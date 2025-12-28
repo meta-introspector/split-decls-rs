@@ -4,4 +4,4 @@ macro_rules! is_enum_of_nonnullable_ptr {
     };
 }
 
-is_enum_of_nonnullable_ptr!()
+is_enum_of_nonnullable_ptr!();

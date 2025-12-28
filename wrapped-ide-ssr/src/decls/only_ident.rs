@@ -11,4 +11,4 @@ macro_rules! only_ident {
     };
 }
 
-only_ident!()
+only_ident!();

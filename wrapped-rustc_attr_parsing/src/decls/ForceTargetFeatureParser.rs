@@ -4,4 +4,4 @@ macro_rules! ForceTargetFeatureParser {
     };
 }
 
-ForceTargetFeatureParser!()
+ForceTargetFeatureParser!();

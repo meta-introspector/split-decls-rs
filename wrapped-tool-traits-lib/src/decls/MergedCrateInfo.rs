@@ -4,4 +4,4 @@ macro_rules! MergedCrateInfo {
     };
 }
 
-MergedCrateInfo!()
+MergedCrateInfo!();

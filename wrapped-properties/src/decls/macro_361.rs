@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        PropertyCodePointMap!();
         BidiMirroringGlyph!();
+        PropertyCodePointMap!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! macro_361 {
     };
 }
 
-macro_361!()
+macro_361!();

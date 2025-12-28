@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Node!();
-        Direction!();
         IndexType!();
+        Direction!();
+        Node!();
         DefaultIx!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! Externals {
     };
 }
 
-Externals!()
+Externals!();

@@ -12,4 +12,4 @@ macro_rules! least_common_ancestor_element {
     };
 }
 
-least_common_ancestor_element!()
+least_common_ancestor_element!();

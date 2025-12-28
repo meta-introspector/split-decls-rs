@@ -4,4 +4,4 @@ macro_rules! __pin_project_make_unpin_bound {
     };
 }
 
-__pin_project_make_unpin_bound!()
+__pin_project_make_unpin_bound!();

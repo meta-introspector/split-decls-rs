@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Value!();
         SeqRefDeserializer!();
+        Value!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_276 {
     };
 }
 
-impl_276!()
+impl_276!();

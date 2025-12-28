@@ -11,4 +11,4 @@ macro_rules! reserve_double_buffer_size {
     };
 }
 
-reserve_double_buffer_size!()
+reserve_double_buffer_size!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Error!();
         Kind!();
+        Error!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! url_invalid_uri {
     };
 }
 
-url_invalid_uri!()
+url_invalid_uri!();

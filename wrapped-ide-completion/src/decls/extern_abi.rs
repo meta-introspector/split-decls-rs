@@ -4,4 +4,4 @@ macro_rules! extern_abi {
     };
 }
 
-extern_abi!()
+extern_abi!();

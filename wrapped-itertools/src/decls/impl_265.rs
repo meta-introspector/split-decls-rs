@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Groups!();
-        ChunkBy!();
         Group!();
+        ChunkBy!();
+        Groups!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_265 {
     };
 }
 
-impl_265!()
+impl_265!();

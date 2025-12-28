@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        PrintAttribute!();
-        CfgEntry!();
-        PeImportNameType!();
         NativeLibKind!();
+        CfgEntry!();
+        PrintAttribute!();
+        PeImportNameType!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! LinkEntry {
     };
 }
 
-LinkEntry!()
+LinkEntry!();

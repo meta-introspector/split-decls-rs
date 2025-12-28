@@ -11,4 +11,4 @@ macro_rules! IS_WRITE_STOPPED {
     };
 }
 
-IS_WRITE_STOPPED!()
+IS_WRITE_STOPPED!();

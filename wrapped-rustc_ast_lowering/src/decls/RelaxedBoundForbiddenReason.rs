@@ -4,4 +4,4 @@ macro_rules! RelaxedBoundForbiddenReason {
     };
 }
 
-RelaxedBoundForbiddenReason!()
+RelaxedBoundForbiddenReason!();

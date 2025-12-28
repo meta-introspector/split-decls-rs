@@ -4,4 +4,4 @@ macro_rules! SHF_INFO_LINK {
     };
 }
 
-SHF_INFO_LINK!()
+SHF_INFO_LINK!();

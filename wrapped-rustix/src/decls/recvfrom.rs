@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Buffer!();
         SocketAddrAny!();
         Result!();
+        Buffer!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! recvfrom {
     };
 }
 
-recvfrom!()
+recvfrom!();

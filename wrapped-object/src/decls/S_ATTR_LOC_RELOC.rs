@@ -4,4 +4,4 @@ macro_rules! S_ATTR_LOC_RELOC {
     };
 }
 
-S_ATTR_LOC_RELOC!()
+S_ATTR_LOC_RELOC!();

@@ -4,4 +4,4 @@ macro_rules! execute_range {
     };
 }
 
-execute_range!()
+execute_range!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        BuildVersionCommand!();
         MachOBuildVersion!();
         Endianness!();
+        BuildVersionCommand!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_988 {
     };
 }
 
-impl_988!()
+impl_988!();

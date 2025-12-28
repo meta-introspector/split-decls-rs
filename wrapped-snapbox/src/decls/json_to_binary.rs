@@ -12,4 +12,4 @@ macro_rules! json_to_binary {
     };
 }
 
-json_to_binary!()
+json_to_binary!();

@@ -12,4 +12,4 @@ macro_rules! rbx_reserved {
     };
 }
 
-rbx_reserved!()
+rbx_reserved!();

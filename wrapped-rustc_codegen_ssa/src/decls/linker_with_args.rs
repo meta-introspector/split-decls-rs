@@ -14,4 +14,4 @@ macro_rules! linker_with_args {
     };
 }
 
-linker_with_args!()
+linker_with_args!();

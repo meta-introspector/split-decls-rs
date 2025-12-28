@@ -4,4 +4,4 @@ macro_rules! assert_subscriber {
     };
 }
 
-assert_subscriber!()
+assert_subscriber!();

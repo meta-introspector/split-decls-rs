@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        MergeFuncLR!();
         FuncLR!();
         MergeBy!();
-        MergeFuncLR!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! MergeJoinBy {
     };
 }
 
-MergeJoinBy!()
+MergeJoinBy!();

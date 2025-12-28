@@ -4,4 +4,4 @@ macro_rules! lookup_const_stability {
     };
 }
 
-lookup_const_stability!()
+lookup_const_stability!();

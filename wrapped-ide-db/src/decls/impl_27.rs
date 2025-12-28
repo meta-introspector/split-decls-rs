@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Definition!();
-        NameRefClass!();
-        RootDatabase!();
         OperatorClass!();
-        IdentClass!();
         NameClass!();
+        IdentClass!();
+        Definition!();
+        RootDatabase!();
+        NameRefClass!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_27 {
     };
 }
 
-impl_27!()
+impl_27!();

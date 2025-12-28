@@ -4,4 +4,4 @@ macro_rules! DocCommentToken {
     };
 }
 
-DocCommentToken!()
+DocCommentToken!();

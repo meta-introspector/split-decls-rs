@@ -11,4 +11,4 @@ macro_rules! hidden_export {
     };
 }
 
-hidden_export!()
+hidden_export!();

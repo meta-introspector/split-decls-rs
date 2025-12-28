@@ -4,4 +4,4 @@ macro_rules! deflatePrime {
     };
 }
 
-deflatePrime!()
+deflatePrime!();

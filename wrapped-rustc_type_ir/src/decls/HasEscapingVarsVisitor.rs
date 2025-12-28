@@ -4,4 +4,4 @@ macro_rules! HasEscapingVarsVisitor {
     };
 }
 
-HasEscapingVarsVisitor!()
+HasEscapingVarsVisitor!();

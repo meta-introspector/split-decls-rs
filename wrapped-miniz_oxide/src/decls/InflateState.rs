@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        DecompressorOxide!();
-        DataFormat!();
         TINFLStatus!();
+        DataFormat!();
+        DecompressorOxide!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! InflateState {
     };
 }
 
-InflateState!()
+InflateState!();

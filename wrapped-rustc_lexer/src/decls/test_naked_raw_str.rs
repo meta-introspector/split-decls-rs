@@ -4,4 +4,4 @@ macro_rules! test_naked_raw_str {
     };
 }
 
-test_naked_raw_str!()
+test_naked_raw_str!();

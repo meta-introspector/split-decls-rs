@@ -4,4 +4,4 @@ macro_rules! ubc_check {
     };
 }
 
-ubc_check!()
+ubc_check!();

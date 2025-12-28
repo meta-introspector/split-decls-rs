@@ -4,4 +4,4 @@ macro_rules! SHT_MIPS_MSYM {
     };
 }
 
-SHT_MIPS_MSYM!()
+SHT_MIPS_MSYM!();

@@ -12,4 +12,4 @@ macro_rules! borrow_conflicts_with_place {
     };
 }
 
-borrow_conflicts_with_place!()
+borrow_conflicts_with_place!();

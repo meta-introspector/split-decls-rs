@@ -11,4 +11,4 @@ macro_rules! has_errors {
     };
 }
 
-has_errors!()
+has_errors!();

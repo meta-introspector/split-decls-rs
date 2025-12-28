@@ -4,4 +4,4 @@ macro_rules! SHN_HIRESERVE {
     };
 }
 
-SHN_HIRESERVE!()
+SHN_HIRESERVE!();

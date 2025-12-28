@@ -4,4 +4,4 @@ macro_rules! is_short_ident {
     };
 }
 
-is_short_ident!()
+is_short_ident!();

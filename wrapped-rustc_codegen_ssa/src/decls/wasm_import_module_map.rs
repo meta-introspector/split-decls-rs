@@ -4,4 +4,4 @@ macro_rules! wasm_import_module_map {
     };
 }
 
-wasm_import_module_map!()
+wasm_import_module_map!();

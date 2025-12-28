@@ -4,4 +4,4 @@ macro_rules! U128_LO_MASK {
     };
 }
 
-U128_LO_MASK!()
+U128_LO_MASK!();

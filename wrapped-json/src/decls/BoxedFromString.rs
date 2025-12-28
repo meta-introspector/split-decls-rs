@@ -4,4 +4,4 @@ macro_rules! BoxedFromString {
     };
 }
 
-BoxedFromString!()
+BoxedFromString!();

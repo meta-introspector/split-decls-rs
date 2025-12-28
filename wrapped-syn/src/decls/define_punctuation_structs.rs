@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        IntoSpans!();
         Result!();
+        IntoSpans!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! define_punctuation_structs {
     };
 }
 
-define_punctuation_structs!()
+define_punctuation_structs!();

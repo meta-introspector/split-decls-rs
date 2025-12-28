@@ -11,4 +11,4 @@ macro_rules! test_exact_size_iterator {
     };
 }
 
-test_exact_size_iterator!()
+test_exact_size_iterator!();

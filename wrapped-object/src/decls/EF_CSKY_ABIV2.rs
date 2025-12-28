@@ -4,4 +4,4 @@ macro_rules! EF_CSKY_ABIV2 {
     };
 }
 
-EF_CSKY_ABIV2!()
+EF_CSKY_ABIV2!();

@@ -4,4 +4,4 @@ macro_rules! R_TILEPRO_IMM16_X0_TLS_IE_HI {
     };
 }
 
-R_TILEPRO_IMM16_X0_TLS_IE_HI!()
+R_TILEPRO_IMM16_X0_TLS_IE_HI!();

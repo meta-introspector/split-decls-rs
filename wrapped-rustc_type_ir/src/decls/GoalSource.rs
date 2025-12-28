@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Predicate!();
-        Const!();
         PathKind!();
+        Const!();
+        Predicate!();
         NormalizesTo!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! GoalSource {
     };
 }
 
-GoalSource!()
+GoalSource!();

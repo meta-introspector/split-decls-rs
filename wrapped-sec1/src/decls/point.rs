@@ -4,4 +4,4 @@ macro_rules! point {
     };
 }
 
-point!()
+point!();

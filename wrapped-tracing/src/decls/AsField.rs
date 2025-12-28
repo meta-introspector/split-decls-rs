@@ -4,4 +4,4 @@ macro_rules! AsField {
     };
 }
 
-AsField!()
+AsField!();

@@ -4,4 +4,4 @@ macro_rules! token_governance {
     };
 }
 
-token_governance!()
+token_governance!();

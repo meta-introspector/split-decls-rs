@@ -4,4 +4,4 @@ macro_rules! try_print_query_stack {
     };
 }
 
-try_print_query_stack!()
+try_print_query_stack!();

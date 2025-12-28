@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Repr!();
         PrimitiveRepr!();
+        Repr!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! EnumRepr {
     };
 }
 
-EnumRepr!()
+EnumRepr!();

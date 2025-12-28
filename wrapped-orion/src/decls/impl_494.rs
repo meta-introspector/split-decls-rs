@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        EncapsulationKey!();
-        EncapKey!();
-        UnknownCryptoError!();
         MlKem512Internal!();
+        UnknownCryptoError!();
+        EncapKey!();
         DecapsulationKey!();
+        EncapsulationKey!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_494 {
     };
 }
 
-impl_494!()
+impl_494!();

@@ -4,4 +4,4 @@ macro_rules! tuple_trait_inner {
     };
 }
 
-tuple_trait_inner!()
+tuple_trait_inner!();

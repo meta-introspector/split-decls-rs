@@ -4,4 +4,4 @@ macro_rules! set_value_name {
     };
 }
 
-set_value_name!()
+set_value_name!();

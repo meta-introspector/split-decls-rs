@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         FlattenIterConsumer!();
-        Consumer!();
         Folder!();
+        FlattenIterFolder!();
+        Consumer!();
         UnindexedConsumer!();
         Reducer!();
-        FlattenIterFolder!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_545 {
     };
 }
 
-impl_545!()
+impl_545!();

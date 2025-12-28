@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Table!();
         Style!();
         Buffer!();
+        Table!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! SerializeDocumentTupleVariant {
     };
 }
 
-SerializeDocumentTupleVariant!()
+SerializeDocumentTupleVariant!();

@@ -4,4 +4,4 @@ macro_rules! MacroInput {
     };
 }
 
-MacroInput!()
+MacroInput!();

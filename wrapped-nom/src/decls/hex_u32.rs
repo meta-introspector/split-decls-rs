@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
         IResult!();
-        ErrorKind!();
-        Input!();
-        Streaming!();
-        Needed!();
-        ParseError!();
         AsBytes!();
         AsChar!();
+        Streaming!();
+        ParseError!();
+        Needed!();
+        Input!();
+        ErrorKind!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! hex_u32 {
     };
 }
 
-hex_u32!()
+hex_u32!();

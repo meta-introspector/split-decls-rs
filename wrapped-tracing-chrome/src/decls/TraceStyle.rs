@@ -4,4 +4,4 @@ macro_rules! TraceStyle {
     };
 }
 
-TraceStyle!()
+TraceStyle!();

@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        Error!();
-        Needed!();
         Streaming!();
-        Err!();
+        Input!();
         CompareResult!();
+        ParseError!();
         Compare!();
         ErrorKind!();
-        Input!();
+        Err!();
+        Error!();
         IResult!();
-        ParseError!();
+        Needed!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! line_ending {
     };
 }
 
-line_ending!()
+line_ending!();

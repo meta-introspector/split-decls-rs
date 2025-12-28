@@ -4,4 +4,4 @@ macro_rules! sqlite_string {
     };
 }
 
-sqlite_string!()
+sqlite_string!();

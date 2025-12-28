@@ -4,4 +4,4 @@ macro_rules! R_CKCORE_PLT_HI16 {
     };
 }
 
-R_CKCORE_PLT_HI16!()
+R_CKCORE_PLT_HI16!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        UnusedMultiple!();
-        SingleAttributeParser!();
-        AcceptContext!();
         OnDuplicate!();
         Stage!();
+        SingleAttributeParser!();
+        AcceptContext!();
+        UnusedMultiple!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_248 {
     };
 }
 
-impl_248!()
+impl_248!();

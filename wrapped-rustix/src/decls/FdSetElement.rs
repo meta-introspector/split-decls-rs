@@ -4,4 +4,4 @@ macro_rules! FdSetElement {
     };
 }
 
-FdSetElement!()
+FdSetElement!();

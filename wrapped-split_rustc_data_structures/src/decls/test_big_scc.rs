@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        TestGraph!();
         Sccs!();
+        TestGraph!();
         UsizeSccs!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! test_big_scc {
     };
 }
 
-test_big_scc!()
+test_big_scc!();

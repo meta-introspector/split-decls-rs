@@ -4,4 +4,4 @@ macro_rules! current_rs {
     };
 }
 
-current_rs!()
+current_rs!();

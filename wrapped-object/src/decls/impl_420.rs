@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        Endian!();
         Sym!();
-        VersionTable!();
-        SymbolIndex!();
-        HashTable!();
-        HashHeader!();
-        SymbolTable!();
+        FileHeader!();
         Result!();
         ReadRef!();
+        VersionTable!();
+        Endian!();
         Version!();
-        FileHeader!();
+        SymbolTable!();
+        HashTable!();
+        SymbolIndex!();
+        HashHeader!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_420 {
     };
 }
 
-impl_420!()
+impl_420!();

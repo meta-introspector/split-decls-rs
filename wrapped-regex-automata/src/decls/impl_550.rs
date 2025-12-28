@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        SlotTable!();
-        ActiveStates!();
-        SparseSet!();
-        PikeVM!();
         Captures!();
+        PikeVM!();
+        SparseSet!();
+        ActiveStates!();
+        SlotTable!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_550 {
     };
 }
 
-impl_550!()
+impl_550!();

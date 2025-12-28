@@ -11,4 +11,4 @@ macro_rules! check_intrinsic_type {
     };
 }
 
-check_intrinsic_type!()
+check_intrinsic_type!();

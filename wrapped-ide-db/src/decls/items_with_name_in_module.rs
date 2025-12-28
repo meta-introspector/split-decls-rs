@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        RootDatabase!();
         Query!();
+        RootDatabase!();
         SymbolIndex!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! items_with_name_in_module {
     };
 }
 
-items_with_name_in_module!()
+items_with_name_in_module!();

@@ -4,4 +4,4 @@ macro_rules! CaptureArgLabel {
     };
 }
 
-CaptureArgLabel!()
+CaptureArgLabel!();

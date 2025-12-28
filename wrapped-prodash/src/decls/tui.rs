@@ -4,4 +4,4 @@ macro_rules! tui {
     };
 }
 
-tui!()
+tui!();

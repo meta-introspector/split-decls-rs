@@ -12,4 +12,4 @@ macro_rules! encode_predicate {
     };
 }
 
-encode_predicate!()
+encode_predicate!();

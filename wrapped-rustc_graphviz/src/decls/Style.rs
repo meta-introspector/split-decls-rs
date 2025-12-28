@@ -4,4 +4,4 @@ macro_rules! Style {
     };
 }
 
-Style!()
+Style!();

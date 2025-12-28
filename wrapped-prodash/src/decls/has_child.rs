@@ -12,4 +12,4 @@ macro_rules! has_child {
     };
 }
 
-has_child!()
+has_child!();

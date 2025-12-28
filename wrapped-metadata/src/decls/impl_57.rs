@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
+        HashType!();
+        Item!();
         Type!();
         TypeCategory!();
-        Item!();
         ItemIndex!();
         TypeIndex!();
-        HashType!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_57 {
     };
 }
 
-impl_57!()
+impl_57!();

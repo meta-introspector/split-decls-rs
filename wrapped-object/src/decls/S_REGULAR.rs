@@ -4,4 +4,4 @@ macro_rules! S_REGULAR {
     };
 }
 
-S_REGULAR!()
+S_REGULAR!();

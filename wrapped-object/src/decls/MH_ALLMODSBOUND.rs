@@ -4,4 +4,4 @@ macro_rules! MH_ALLMODSBOUND {
     };
 }
 
-MH_ALLMODSBOUND!()
+MH_ALLMODSBOUND!();

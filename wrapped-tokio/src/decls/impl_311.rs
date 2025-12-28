@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         PointersInner!();
-        UnsafeCell!();
         Pointers!();
+        UnsafeCell!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_311 {
     };
 }
 
-impl_311!()
+impl_311!();

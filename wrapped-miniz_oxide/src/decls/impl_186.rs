@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         FullReset!();
-        InflateState!();
         ResetPolicy!();
+        InflateState!();
         ZeroReset!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_186 {
     };
 }
 
-impl_186!()
+impl_186!();

@@ -11,4 +11,4 @@ macro_rules! CollectedPreludeInfo {
     };
 }
 
-CollectedPreludeInfo!()
+CollectedPreludeInfo!();

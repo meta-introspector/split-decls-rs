@@ -11,4 +11,4 @@ macro_rules! str_normalize_literals_match {
     };
 }
 
-str_normalize_literals_match!()
+str_normalize_literals_match!();

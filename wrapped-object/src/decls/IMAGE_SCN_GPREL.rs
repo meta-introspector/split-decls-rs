@@ -11,4 +11,4 @@ macro_rules! IMAGE_SCN_GPREL {
     };
 }
 
-IMAGE_SCN_GPREL!()
+IMAGE_SCN_GPREL!();

@@ -11,4 +11,4 @@ macro_rules! extend_type_not_partial_eq {
     };
 }
 
-extend_type_not_partial_eq!()
+extend_type_not_partial_eq!();

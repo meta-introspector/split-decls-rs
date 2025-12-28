@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        HwCounterType!();
         Instructions!();
-        InstructionsMinusIrqs!();
-        InstructionsMinusRaw0420!();
         Counter!();
+        InstructionsMinusRaw0420!();
+        HwCounterType!();
+        InstructionsMinusIrqs!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_11 {
     };
 }
 
-impl_11!()
+impl_11!();

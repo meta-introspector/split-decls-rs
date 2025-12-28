@@ -4,4 +4,4 @@ macro_rules! macos_link_environment_unmodified {
     };
 }
 
-macos_link_environment_unmodified!()
+macos_link_environment_unmodified!();

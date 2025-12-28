@@ -4,4 +4,4 @@ macro_rules! order_map {
     };
 }
 
-order_map!()
+order_map!();

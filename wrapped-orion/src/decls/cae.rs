@@ -4,4 +4,4 @@ macro_rules! cae {
     };
 }
 
-cae!()
+cae!();

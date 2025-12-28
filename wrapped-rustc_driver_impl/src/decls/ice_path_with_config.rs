@@ -4,4 +4,4 @@ macro_rules! ice_path_with_config {
     };
 }
 
-ice_path_with_config!()
+ice_path_with_config!();

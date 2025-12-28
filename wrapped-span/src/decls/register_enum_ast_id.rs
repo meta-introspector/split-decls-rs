@@ -11,4 +11,4 @@ macro_rules! register_enum_ast_id {
     };
 }
 
-register_enum_ast_id!()
+register_enum_ast_id!();

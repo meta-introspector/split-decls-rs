@@ -4,4 +4,4 @@ macro_rules! check_split {
     };
 }
 
-check_split!()
+check_split!();

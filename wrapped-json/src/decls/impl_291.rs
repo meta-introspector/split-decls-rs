@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        BorrowedCowStrDeserializer!();
         Deserializer!();
         Error!();
-        BorrowedCowStrDeserializer!();
         Result!();
         Value!();
     };
@@ -15,4 +15,4 @@ macro_rules! impl_291 {
     };
 }
 
-impl_291!()
+impl_291!();

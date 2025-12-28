@@ -4,4 +4,4 @@ macro_rules! R_MN10300_PCREL32 {
     };
 }
 
-R_MN10300_PCREL32!()
+R_MN10300_PCREL32!();

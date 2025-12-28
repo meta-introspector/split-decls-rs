@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         ReadRef!();
-        CoffHeader!();
-        CoffCommon!();
         ImageFileHeader!();
+        CoffCommon!();
+        CoffHeader!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! CoffSymbolTable {
     };
 }
 
-CoffSymbolTable!()
+CoffSymbolTable!();

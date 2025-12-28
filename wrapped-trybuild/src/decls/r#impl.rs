@@ -11,4 +11,4 @@ macro_rules! r#impl {
     };
 }
 
-r#impl!()
+r#impl!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ParseBuffer!();
         Unexpected!();
+        ParseBuffer!();
         TokenBuffer!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! tokens_to_parse_buffer {
     };
 }
 
-tokens_to_parse_buffer!()
+tokens_to_parse_buffer!();

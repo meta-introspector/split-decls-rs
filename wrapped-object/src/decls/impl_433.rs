@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Verdef!();
-        VerdefIterator!();
-        Result!();
-        FileHeader!();
         Item!();
+        Result!();
+        VerdefIterator!();
         Endian!();
         VerdauxIterator!();
+        FileHeader!();
+        Verdef!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_433 {
     };
 }
 
-impl_433!()
+impl_433!();

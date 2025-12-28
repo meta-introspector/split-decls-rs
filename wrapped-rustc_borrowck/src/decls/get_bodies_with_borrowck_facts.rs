@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        BodyWithBorrowckFacts!();
         ConsumerOptions!();
-        BorrowCheckRootCtxt!();
+        BodyWithBorrowckFacts!();
         BorrowckConsumer!();
+        BorrowCheckRootCtxt!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! get_bodies_with_borrowck_facts {
     };
 }
 
-get_bodies_with_borrowck_facts!()
+get_bodies_with_borrowck_facts!();

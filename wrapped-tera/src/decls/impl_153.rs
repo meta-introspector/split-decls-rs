@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Result!();
-        Unique!();
-        UniqueStrategy!();
         GetValue!();
+        Result!();
+        UniqueStrategy!();
+        Unique!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_153 {
     };
 }
 
-impl_153!()
+impl_153!();

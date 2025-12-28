@@ -4,4 +4,4 @@ macro_rules! PrimTy {
     };
 }
 
-PrimTy!()
+PrimTy!();

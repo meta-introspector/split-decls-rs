@@ -4,4 +4,4 @@ macro_rules! WANT_READY {
     };
 }
 
-WANT_READY!()
+WANT_READY!();

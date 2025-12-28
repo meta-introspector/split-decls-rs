@@ -4,4 +4,4 @@ macro_rules! find_registrar_symbol {
     };
 }
 
-find_registrar_symbol!()
+find_registrar_symbol!();

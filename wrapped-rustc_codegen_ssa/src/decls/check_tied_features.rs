@@ -4,4 +4,4 @@ macro_rules! check_tied_features {
     };
 }
 
-check_tied_features!()
+check_tied_features!();

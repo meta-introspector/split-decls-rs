@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Interned!();
-        SpanData!();
         Span!();
+        SpanData!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_157 {
     };
 }
 
-impl_157!()
+impl_157!();

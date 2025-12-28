@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        DepContext!();
         QueryCache!();
         Value!();
-        DepContext!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! try_get_cached {
     };
 }
 
-try_get_cached!()
+try_get_cached!();

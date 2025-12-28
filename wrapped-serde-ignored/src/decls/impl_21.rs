@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Deserializer!();
         TrackedSeed!();
+        Deserializer!();
         Path!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_21 {
     };
 }
 
-impl_21!()
+impl_21!();

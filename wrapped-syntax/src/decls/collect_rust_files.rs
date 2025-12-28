@@ -4,4 +4,4 @@ macro_rules! collect_rust_files {
     };
 }
 
-collect_rust_files!()
+collect_rust_files!();

@@ -4,4 +4,4 @@ macro_rules! deref_ty_if_possible {
     };
 }
 
-deref_ty_if_possible!()
+deref_ty_if_possible!();

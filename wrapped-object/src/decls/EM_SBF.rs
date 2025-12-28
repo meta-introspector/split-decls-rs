@@ -4,4 +4,4 @@ macro_rules! EM_SBF {
     };
 }
 
-EM_SBF!()
+EM_SBF!();

@@ -4,4 +4,4 @@ macro_rules! R_AARCH64_IRELATIVE {
     };
 }
 
-R_AARCH64_IRELATIVE!()
+R_AARCH64_IRELATIVE!();

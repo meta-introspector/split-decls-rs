@@ -16,4 +16,4 @@ macro_rules! query_key_hash_verify {
     };
 }
 
-query_key_hash_verify!()
+query_key_hash_verify!();

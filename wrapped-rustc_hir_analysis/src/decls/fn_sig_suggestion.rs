@@ -4,4 +4,4 @@ macro_rules! fn_sig_suggestion {
     };
 }
 
-fn_sig_suggestion!()
+fn_sig_suggestion!();

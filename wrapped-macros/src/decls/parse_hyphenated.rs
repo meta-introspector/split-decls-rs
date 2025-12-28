@@ -4,4 +4,4 @@ macro_rules! parse_hyphenated {
     };
 }
 
-parse_hyphenated!()
+parse_hyphenated!();

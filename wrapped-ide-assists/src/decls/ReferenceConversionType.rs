@@ -4,4 +4,4 @@ macro_rules! ReferenceConversionType {
     };
 }
 
-ReferenceConversionType!()
+ReferenceConversionType!();

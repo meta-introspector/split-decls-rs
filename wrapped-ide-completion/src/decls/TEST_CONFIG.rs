@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        CompletionConfig!();
         CompletionFieldsToResolve!();
         CallableSnippets!();
-        CompletionConfig!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! TEST_CONFIG {
     };
 }
 
-TEST_CONFIG!()
+TEST_CONFIG!();

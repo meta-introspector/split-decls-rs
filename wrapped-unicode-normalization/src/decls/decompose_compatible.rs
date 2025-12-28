@@ -4,4 +4,4 @@ macro_rules! decompose_compatible {
     };
 }
 
-decompose_compatible!()
+decompose_compatible!();

@@ -4,4 +4,4 @@ macro_rules! U8SliceExt {
     };
 }
 
-U8SliceExt!()
+U8SliceExt!();

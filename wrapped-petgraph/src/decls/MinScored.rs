@@ -4,4 +4,4 @@ macro_rules! MinScored {
     };
 }
 
-MinScored!()
+MinScored!();

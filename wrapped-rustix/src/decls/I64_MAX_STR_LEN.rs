@@ -4,4 +4,4 @@ macro_rules! I64_MAX_STR_LEN {
     };
 }
 
-I64_MAX_STR_LEN!()
+I64_MAX_STR_LEN!();

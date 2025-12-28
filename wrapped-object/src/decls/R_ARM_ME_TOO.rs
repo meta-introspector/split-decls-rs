@@ -4,4 +4,4 @@ macro_rules! R_ARM_ME_TOO {
     };
 }
 
-R_ARM_ME_TOO!()
+R_ARM_ME_TOO!();

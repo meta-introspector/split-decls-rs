@@ -4,4 +4,4 @@ macro_rules! inotify {
     };
 }
 
-inotify!()
+inotify!();

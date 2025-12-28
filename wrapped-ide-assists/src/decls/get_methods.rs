@@ -4,4 +4,4 @@ macro_rules! get_methods {
     };
 }
 
-get_methods!()
+get_methods!();

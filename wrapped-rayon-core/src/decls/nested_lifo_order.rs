@@ -4,4 +4,4 @@ macro_rules! nested_lifo_order {
     };
 }
 
-nested_lifo_order!()
+nested_lifo_order!();

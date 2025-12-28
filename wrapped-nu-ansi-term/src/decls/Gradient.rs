@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Color!();
         Rgb!();
+        Color!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Gradient {
     };
 }
 
-Gradient!()
+Gradient!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         QueryStackFrameExtra!();
-        QueryInfo!();
         QueryStackFrame!();
+        QueryInfo!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! CycleError {
     };
 }
 
-CycleError!()
+CycleError!();

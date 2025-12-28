@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        SerializeMap!();
         Compound!();
-        Map!();
-        Formatter!();
+        Result!();
+        SerializeMap!();
         Error!();
+        Number!();
+        MapKeySerializer!();
+        Formatter!();
+        Map!();
         State!();
         RawValue!();
-        Result!();
-        MapKeySerializer!();
-        Number!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_200 {
     };
 }
 
-impl_200!()
+impl_200!();

@@ -4,4 +4,4 @@ macro_rules! FieldInfo {
     };
 }
 
-FieldInfo!()
+FieldInfo!();

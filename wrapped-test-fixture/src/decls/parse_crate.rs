@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ForceNoneLangOrigin!();
         SourceRootKind!();
+        ForceNoneLangOrigin!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! parse_crate {
     };
 }
 
-parse_crate!()
+parse_crate!();

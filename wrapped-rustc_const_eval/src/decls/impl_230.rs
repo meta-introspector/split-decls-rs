@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Memory!();
-        DummyMachine!();
-        InterpCx!();
-        PlaceTy!();
         MemoryKind!();
+        InterpCx!();
+        DummyMachine!();
+        Memory!();
+        PlaceTy!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_230 {
     };
 }
 
-impl_230!()
+impl_230!();

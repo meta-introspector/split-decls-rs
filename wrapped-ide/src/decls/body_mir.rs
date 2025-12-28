@@ -4,4 +4,4 @@ macro_rules! body_mir {
     };
 }
 
-body_mir!()
+body_mir!();

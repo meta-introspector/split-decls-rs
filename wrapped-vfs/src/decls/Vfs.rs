@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        FileState!();
-        PathInterner!();
         ChangedFile!();
+        PathInterner!();
+        FileState!();
         FileId!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! Vfs {
     };
 }
 
-Vfs!()
+Vfs!();

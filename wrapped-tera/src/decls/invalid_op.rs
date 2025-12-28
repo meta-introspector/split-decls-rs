@@ -4,4 +4,4 @@ macro_rules! invalid_op {
     };
 }
 
-invalid_op!()
+invalid_op!();

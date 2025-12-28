@@ -4,4 +4,4 @@ macro_rules! RenameResult {
     };
 }
 
-RenameResult!()
+RenameResult!();

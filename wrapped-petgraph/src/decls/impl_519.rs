@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        IndexType!();
-        EdgeType!();
-        Csr!();
         Create!();
+        IndexType!();
+        Csr!();
+        EdgeType!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_519 {
     };
 }
 
-impl_519!()
+impl_519!();

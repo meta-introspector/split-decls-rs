@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        ZipLocalEntryBlock!();
+        ZipResult!();
         ZipFileData!();
         Magic!();
-        ZipFile!();
-        ZipResult!();
+        ZipLocalEntryBlock!();
         ZipError!();
+        ZipFile!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! read_zipfile_from_stream {
     };
 }
 
-read_zipfile_from_stream!()
+read_zipfile_from_stream!();

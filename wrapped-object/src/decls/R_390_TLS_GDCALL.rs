@@ -4,4 +4,4 @@ macro_rules! R_390_TLS_GDCALL {
     };
 }
 
-R_390_TLS_GDCALL!()
+R_390_TLS_GDCALL!();

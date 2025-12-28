@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        Punct!();
         Ident!();
         Group!();
         Literal!();
-        Punct!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! TokenTree {
     };
 }
 
-TokenTree!()
+TokenTree!();

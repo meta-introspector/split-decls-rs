@@ -11,4 +11,4 @@ macro_rules! secure_rand_bytes {
     };
 }
 
-secure_rand_bytes!()
+secure_rand_bytes!();

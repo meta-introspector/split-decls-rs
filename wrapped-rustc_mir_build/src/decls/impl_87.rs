@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        PlaceBuilder!();
+        Ascription!();
         Builder!();
         PatternExtraData!();
-        SubpatternBindings!();
-        PlaceBase!();
         TestCase!();
-        Variant!();
-        Binding!();
-        Ascription!();
+        PlaceBase!();
         MatchPairTree!();
+        Binding!();
+        PlaceBuilder!();
         FlatPat!();
+        SubpatternBindings!();
+        Variant!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_87 {
     };
 }
 
-impl_87!()
+impl_87!();

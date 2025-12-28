@@ -4,4 +4,4 @@ macro_rules! SuggestAnnotation {
     };
 }
 
-SuggestAnnotation!()
+SuggestAnnotation!();

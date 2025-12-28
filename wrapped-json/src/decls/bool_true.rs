@@ -4,4 +4,4 @@ macro_rules! bool_true {
     };
 }
 
-bool_true!()
+bool_true!();

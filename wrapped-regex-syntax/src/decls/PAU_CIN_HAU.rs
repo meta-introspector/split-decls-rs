@@ -4,4 +4,4 @@ macro_rules! PAU_CIN_HAU {
     };
 }
 
-PAU_CIN_HAU!()
+PAU_CIN_HAU!();

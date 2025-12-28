@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        AnsiGenericString!();
         Style!();
+        AnsiGenericString!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! AnsiString {
     };
 }
 
-AnsiString!()
+AnsiString!();

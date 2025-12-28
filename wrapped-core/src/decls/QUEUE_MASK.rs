@@ -4,4 +4,4 @@ macro_rules! QUEUE_MASK {
     };
 }
 
-QUEUE_MASK!()
+QUEUE_MASK!();

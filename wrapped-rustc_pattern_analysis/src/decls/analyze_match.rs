@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        PlaceValidity!();
         UsefulnessReport!();
+        PatternColumn!();
         RustcPatCtxt!();
         MatchArm!();
-        PatternColumn!();
-        PlaceValidity!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! analyze_match {
     };
 }
 
-analyze_match!()
+analyze_match!();

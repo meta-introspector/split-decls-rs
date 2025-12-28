@@ -4,4 +4,4 @@ macro_rules! Architecture {
     };
 }
 
-Architecture!()
+Architecture!();

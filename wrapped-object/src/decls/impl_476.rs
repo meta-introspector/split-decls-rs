@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        DyldCacheImageInfo!();
-        Error!();
-        Object!();
-        File!();
-        ReadRef!();
-        Endian!();
-        Result!();
         DyldCacheImage!();
+        File!();
+        DyldCacheImageInfo!();
+        Object!();
+        Result!();
+        ReadRef!();
+        Error!();
+        Endian!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_476 {
     };
 }
 
-impl_476!()
+impl_476!();

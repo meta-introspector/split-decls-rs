@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        TypeKind!();
         BuilderMethods!();
+        TypeKind!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! shift_mask_val {
     };
 }
 
-shift_mask_val!()
+shift_mask_val!();

@@ -4,4 +4,4 @@ macro_rules! write_filenames_to_buffer {
     };
 }
 
-write_filenames_to_buffer!()
+write_filenames_to_buffer!();

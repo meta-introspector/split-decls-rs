@@ -4,4 +4,4 @@ macro_rules! NUM_PROBES {
     };
 }
 
-NUM_PROBES!()
+NUM_PROBES!();

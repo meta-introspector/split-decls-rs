@@ -4,4 +4,4 @@ macro_rules! s_to_nanoseconds {
     };
 }
 
-s_to_nanoseconds!()
+s_to_nanoseconds!();

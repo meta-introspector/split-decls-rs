@@ -4,4 +4,4 @@ macro_rules! nightly {
     };
 }
 
-nightly!()
+nightly!();

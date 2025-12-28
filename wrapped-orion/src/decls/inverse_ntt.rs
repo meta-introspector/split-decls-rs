@@ -13,4 +13,4 @@ macro_rules! inverse_ntt {
     };
 }
 
-inverse_ntt!()
+inverse_ntt!();

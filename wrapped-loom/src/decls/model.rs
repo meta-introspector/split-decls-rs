@@ -4,4 +4,4 @@ macro_rules! model {
     };
 }
 
-model!()
+model!();

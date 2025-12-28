@@ -11,4 +11,4 @@ macro_rules! test_borrow {
     };
 }
 
-test_borrow!()
+test_borrow!();

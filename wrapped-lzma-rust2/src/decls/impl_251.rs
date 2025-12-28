@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Read!();
-        Result!();
         Lzma2ReaderMt!();
+        Result!();
+        Read!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_251 {
     };
 }
 
-impl_251!()
+impl_251!();

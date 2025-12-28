@@ -11,4 +11,4 @@ macro_rules! link_fmt {
     };
 }
 
-link_fmt!()
+link_fmt!();

@@ -4,4 +4,4 @@ macro_rules! EM_XIMO16 {
     };
 }
 
-EM_XIMO16!()
+EM_XIMO16!();

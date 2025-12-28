@@ -11,4 +11,4 @@ macro_rules! check_has_fix {
     };
 }
 
-check_has_fix!()
+check_has_fix!();

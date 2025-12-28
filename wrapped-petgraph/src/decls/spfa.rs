@@ -4,4 +4,4 @@ macro_rules! spfa {
     };
 }
 
-spfa!()
+spfa!();

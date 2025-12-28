@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DummySlot!();
         Revision!();
+        DummySlot!();
         Slot!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_337 {
     };
 }
 
-impl_337!()
+impl_337!();

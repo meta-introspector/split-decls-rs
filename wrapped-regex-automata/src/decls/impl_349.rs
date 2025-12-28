@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        CapturesMatches!();
         Captures!();
+        CapturesMatches!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_349 {
     };
 }
 
-impl_349!()
+impl_349!();

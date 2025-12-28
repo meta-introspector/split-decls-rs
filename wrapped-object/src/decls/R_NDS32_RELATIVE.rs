@@ -4,4 +4,4 @@ macro_rules! R_NDS32_RELATIVE {
     };
 }
 
-R_NDS32_RELATIVE!()
+R_NDS32_RELATIVE!();

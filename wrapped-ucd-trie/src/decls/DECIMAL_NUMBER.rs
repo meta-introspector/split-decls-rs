@@ -4,4 +4,4 @@ macro_rules! DECIMAL_NUMBER {
     };
 }
 
-DECIMAL_NUMBER!()
+DECIMAL_NUMBER!();

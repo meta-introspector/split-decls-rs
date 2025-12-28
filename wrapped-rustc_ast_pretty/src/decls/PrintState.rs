@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
+        Printer!();
         State!();
         Token!();
         BoxMarker!();
-        MacHeader!();
-        Breaks!();
-        Printer!();
         Comments!();
+        Breaks!();
+        MacHeader!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! PrintState {
     };
 }
 
-PrintState!()
+PrintState!();

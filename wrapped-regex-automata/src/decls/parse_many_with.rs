@@ -11,4 +11,4 @@ macro_rules! parse_many_with {
     };
 }
 
-parse_many_with!()
+parse_many_with!();

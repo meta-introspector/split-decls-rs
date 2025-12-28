@@ -4,4 +4,4 @@ macro_rules! SubTupleBinding {
     };
 }
 
-SubTupleBinding!()
+SubTupleBinding!();

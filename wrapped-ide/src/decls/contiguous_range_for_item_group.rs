@@ -11,4 +11,4 @@ macro_rules! contiguous_range_for_item_group {
     };
 }
 
-contiguous_range_for_item_group!()
+contiguous_range_for_item_group!();

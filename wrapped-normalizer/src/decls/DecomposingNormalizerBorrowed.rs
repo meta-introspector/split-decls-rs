@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DecompositionTables!();
         DecompositionData!();
+        DecompositionTables!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! DecomposingNormalizerBorrowed {
     };
 }
 
-DecomposingNormalizerBorrowed!()
+DecomposingNormalizerBorrowed!();

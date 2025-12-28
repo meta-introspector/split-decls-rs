@@ -4,4 +4,4 @@ macro_rules! insertion_sort_shift_left {
     };
 }
 
-insertion_sort_shift_left!()
+insertion_sort_shift_left!();

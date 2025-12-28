@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Locations!();
-        BorrowCheckRootCtxt!();
-        CollectRegionConstraintsResult!();
-        ClosureRegionRequirements!();
         ConstraintConversion!();
+        BorrowCheckRootCtxt!();
+        Locations!();
+        ClosureRegionRequirements!();
         BorrowckConsumer!();
+        CollectRegionConstraintsResult!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_392 {
     };
 }
 
-impl_392!()
+impl_392!();

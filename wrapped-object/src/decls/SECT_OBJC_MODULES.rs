@@ -4,4 +4,4 @@ macro_rules! SECT_OBJC_MODULES {
     };
 }
 
-SECT_OBJC_MODULES!()
+SECT_OBJC_MODULES!();

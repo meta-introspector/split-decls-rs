@@ -4,4 +4,4 @@ macro_rules! never {
     };
 }
 
-never!()
+never!();

@@ -4,4 +4,4 @@ macro_rules! generics_fuse {
     };
 }
 
-generics_fuse!()
+generics_fuse!();

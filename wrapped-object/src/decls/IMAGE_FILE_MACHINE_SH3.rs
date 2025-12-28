@@ -4,4 +4,4 @@ macro_rules! IMAGE_FILE_MACHINE_SH3 {
     };
 }
 
-IMAGE_FILE_MACHINE_SH3!()
+IMAGE_FILE_MACHINE_SH3!();

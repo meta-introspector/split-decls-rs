@@ -4,4 +4,4 @@ macro_rules! trees_tbl {
     };
 }
 
-trees_tbl!()
+trees_tbl!();

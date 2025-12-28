@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        RingBuffer!();
-        Error!();
-        Write!();
-        DecodeBufferError!();
         DecodeBuffer!();
+        DecodeBufferError!();
+        Error!();
+        RingBuffer!();
+        Write!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_141 {
     };
 }
 
-impl_141!()
+impl_141!();

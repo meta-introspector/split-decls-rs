@@ -4,4 +4,4 @@ macro_rules! UnsafeNegativeImpl {
     };
 }
 
-UnsafeNegativeImpl!()
+UnsafeNegativeImpl!();

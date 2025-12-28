@@ -11,4 +11,4 @@ macro_rules! _def {
     };
 }
 
-_def!()
+_def!();

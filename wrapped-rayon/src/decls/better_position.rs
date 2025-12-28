@@ -11,4 +11,4 @@ macro_rules! better_position {
     };
 }
 
-better_position!()
+better_position!();

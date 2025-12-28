@@ -4,4 +4,4 @@ macro_rules! ident_fragment {
     };
 }
 
-ident_fragment!()
+ident_fragment!();

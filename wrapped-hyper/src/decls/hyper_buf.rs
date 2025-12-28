@@ -4,4 +4,4 @@ macro_rules! hyper_buf {
     };
 }
 
-hyper_buf!()
+hyper_buf!();

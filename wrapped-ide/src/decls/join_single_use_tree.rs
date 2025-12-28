@@ -4,4 +4,4 @@ macro_rules! join_single_use_tree {
     };
 }
 
-join_single_use_tree!()
+join_single_use_tree!();

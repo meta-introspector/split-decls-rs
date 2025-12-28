@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Input!();
         Action!();
+        Input!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! BREAK_VALUE {
     };
 }
 
-BREAK_VALUE!()
+BREAK_VALUE!();

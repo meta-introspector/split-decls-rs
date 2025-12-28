@@ -12,4 +12,4 @@ macro_rules! emit_xtensa_va_arg {
     };
 }
 
-emit_xtensa_va_arg!()
+emit_xtensa_va_arg!();

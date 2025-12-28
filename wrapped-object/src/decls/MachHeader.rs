@@ -4,4 +4,4 @@ macro_rules! MachHeader {
     };
 }
 
-MachHeader!()
+MachHeader!();

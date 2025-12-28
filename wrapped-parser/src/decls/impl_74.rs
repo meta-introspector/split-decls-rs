@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        CompletedMarker!();
-        Event!();
         Marker!();
         Parser!();
+        Event!();
+        CompletedMarker!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_74 {
     };
 }
 
-impl_74!()
+impl_74!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        InlayHintLabelPart!();
         InlayHintLabelBuilder!();
         InlayHintLabel!();
+        InlayHintLabelPart!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_281 {
     };
 }
 
-impl_281!()
+impl_281!();

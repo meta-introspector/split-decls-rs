@@ -12,4 +12,4 @@ macro_rules! XcoffSegmentIterator32 {
     };
 }
 
-XcoffSegmentIterator32!()
+XcoffSegmentIterator32!();

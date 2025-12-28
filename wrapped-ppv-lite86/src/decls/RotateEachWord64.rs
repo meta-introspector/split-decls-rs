@@ -4,4 +4,4 @@ macro_rules! RotateEachWord64 {
     };
 }
 
-RotateEachWord64!()
+RotateEachWord64!();

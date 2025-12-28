@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Registry!();
         Scope!();
         CountLatch!();
-        Registry!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! ScopeBase {
     };
 }
 
-ScopeBase!()
+ScopeBase!();

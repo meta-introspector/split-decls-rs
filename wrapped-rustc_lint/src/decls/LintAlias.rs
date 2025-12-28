@@ -4,4 +4,4 @@ macro_rules! LintAlias {
     };
 }
 
-LintAlias!()
+LintAlias!();

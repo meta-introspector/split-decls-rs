@@ -4,4 +4,4 @@ macro_rules! WorkProduct {
     };
 }
 
-WorkProduct!()
+WorkProduct!();

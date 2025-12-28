@@ -4,4 +4,4 @@ macro_rules! lex_int {
     };
 }
 
-lex_int!()
+lex_int!();

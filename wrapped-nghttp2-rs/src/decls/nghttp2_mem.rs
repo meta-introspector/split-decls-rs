@@ -4,4 +4,4 @@ macro_rules! nghttp2_mem {
     };
 }
 
-nghttp2_mem!()
+nghttp2_mem!();

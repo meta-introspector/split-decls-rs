@@ -4,4 +4,4 @@ macro_rules! is_bin_digit {
     };
 }
 
-is_bin_digit!()
+is_bin_digit!();

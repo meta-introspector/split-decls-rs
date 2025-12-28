@@ -11,4 +11,4 @@ macro_rules! as_ref_arr {
     };
 }
 
-as_ref_arr!()
+as_ref_arr!();

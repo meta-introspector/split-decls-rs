@@ -4,4 +4,4 @@ macro_rules! MiscProperty {
     };
 }
 
-MiscProperty!()
+MiscProperty!();

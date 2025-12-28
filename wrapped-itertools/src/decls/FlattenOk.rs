@@ -4,4 +4,4 @@ macro_rules! FlattenOk {
     };
 }
 
-FlattenOk!()
+FlattenOk!();

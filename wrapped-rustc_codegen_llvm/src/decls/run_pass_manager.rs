@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        AutodiffStage!();
-        LlvmCodegenBackend!();
-        ModuleLlvm!();
-        OptStage!();
         SimpleCx!();
+        LlvmCodegenBackend!();
+        OptStage!();
+        ModuleLlvm!();
+        AutodiffStage!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! run_pass_manager {
     };
 }
 
-run_pass_manager!()
+run_pass_manager!();

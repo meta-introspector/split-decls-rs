@@ -4,4 +4,4 @@ macro_rules! DiagnosticHandlerTy {
     };
 }
 
-DiagnosticHandlerTy!()
+DiagnosticHandlerTy!();

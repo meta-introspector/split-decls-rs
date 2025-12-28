@@ -4,4 +4,4 @@ macro_rules! ParserNumber {
     };
 }
 
-ParserNumber!()
+ParserNumber!();

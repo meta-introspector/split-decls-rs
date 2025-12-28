@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        TyAlias!();
         Walkable!();
+        TyAlias!();
         WhereClause!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! TyAliasWhereClause {
     };
 }
 
-TyAliasWhereClause!()
+TyAliasWhereClause!();

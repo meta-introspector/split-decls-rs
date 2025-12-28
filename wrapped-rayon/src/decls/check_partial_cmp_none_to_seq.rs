@@ -4,4 +4,4 @@ macro_rules! check_partial_cmp_none_to_seq {
     };
 }
 
-check_partial_cmp_none_to_seq!()
+check_partial_cmp_none_to_seq!();

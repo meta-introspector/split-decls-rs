@@ -4,4 +4,4 @@ macro_rules! hyper_context {
     };
 }
 
-hyper_context!()
+hyper_context!();

@@ -11,4 +11,4 @@ macro_rules! replace_all {
     };
 }
 
-replace_all!()
+replace_all!();

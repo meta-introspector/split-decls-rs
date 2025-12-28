@@ -12,4 +12,4 @@ macro_rules! target_features_attr {
     };
 }
 
-target_features_attr!()
+target_features_attr!();

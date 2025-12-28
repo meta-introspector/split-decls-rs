@@ -4,4 +4,4 @@ macro_rules! R_68K_GLOB_DAT {
     };
 }
 
-R_68K_GLOB_DAT!()
+R_68K_GLOB_DAT!();

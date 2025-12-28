@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        MultiThreaded!();
-        ColumnFamily!();
-        DB!();
         ThreadMode!();
+        DB!();
+        ColumnFamily!();
+        MultiThreaded!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! SingleThreaded {
     };
 }
 
-SingleThreaded!()
+SingleThreaded!();

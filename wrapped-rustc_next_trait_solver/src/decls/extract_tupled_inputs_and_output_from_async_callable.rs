@@ -11,4 +11,4 @@ macro_rules! extract_tupled_inputs_and_output_from_async_callable {
     };
 }
 
-extract_tupled_inputs_and_output_from_async_callable!()
+extract_tupled_inputs_and_output_from_async_callable!();

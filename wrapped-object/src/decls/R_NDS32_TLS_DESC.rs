@@ -4,4 +4,4 @@ macro_rules! R_NDS32_TLS_DESC {
     };
 }
 
-R_NDS32_TLS_DESC!()
+R_NDS32_TLS_DESC!();

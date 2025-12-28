@@ -4,4 +4,4 @@ macro_rules! try_fold {
     };
 }
 
-try_fold!()
+try_fold!();

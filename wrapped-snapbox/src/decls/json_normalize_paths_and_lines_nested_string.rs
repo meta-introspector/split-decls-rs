@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        FilterPaths!();
         FilterNewlines!();
+        FilterPaths!();
         Data!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! json_normalize_paths_and_lines_nested_string {
     };
 }
 
-json_normalize_paths_and_lines_nested_string!()
+json_normalize_paths_and_lines_nested_string!();

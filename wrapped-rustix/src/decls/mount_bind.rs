@@ -12,4 +12,4 @@ macro_rules! mount_bind {
     };
 }
 
-mount_bind!()
+mount_bind!();

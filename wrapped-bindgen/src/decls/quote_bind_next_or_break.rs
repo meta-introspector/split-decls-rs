@@ -11,4 +11,4 @@ macro_rules! quote_bind_next_or_break {
     };
 }
 
-quote_bind_next_or_break!()
+quote_bind_next_or_break!();

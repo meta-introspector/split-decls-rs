@@ -4,4 +4,4 @@ macro_rules! u128_mulhi {
     };
 }
 
-u128_mulhi!()
+u128_mulhi!();

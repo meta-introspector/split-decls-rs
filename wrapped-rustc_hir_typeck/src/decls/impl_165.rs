@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Error!();
         TypeInformationCtxt!();
-        Delegate!();
         ExprUseVisitor!();
+        Delegate!();
+        Error!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_165 {
     };
 }
 
-impl_165!()
+impl_165!();

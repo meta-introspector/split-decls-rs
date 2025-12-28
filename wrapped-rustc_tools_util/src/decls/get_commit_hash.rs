@@ -4,4 +4,4 @@ macro_rules! get_commit_hash {
     };
 }
 
-get_commit_hash!()
+get_commit_hash!();

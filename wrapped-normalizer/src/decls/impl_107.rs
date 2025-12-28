@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         CharacterAndClass!();
+        CharacterAndTrieValue!();
         CanonicalCombiningClass!();
         Trie!();
-        CharacterAndTrieValue!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_107 {
     };
 }
 
-impl_107!()
+impl_107!();

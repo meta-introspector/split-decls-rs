@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        CrateInfo!();
         CompiledModule!();
+        CrateInfo!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! CodegenResults {
     };
 }
 
-CodegenResults!()
+CodegenResults!();

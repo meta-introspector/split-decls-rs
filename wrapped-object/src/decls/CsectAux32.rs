@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Symbol!();
-        U16!();
         U32!();
         Section!();
+        U16!();
+        Symbol!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! CsectAux32 {
     };
 }
 
-CsectAux32!()
+CsectAux32!();

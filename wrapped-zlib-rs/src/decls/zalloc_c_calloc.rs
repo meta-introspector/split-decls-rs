@@ -4,4 +4,4 @@ macro_rules! zalloc_c_calloc {
     };
 }
 
-zalloc_c_calloc!()
+zalloc_c_calloc!();

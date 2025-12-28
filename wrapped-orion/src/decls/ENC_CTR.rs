@@ -4,4 +4,4 @@ macro_rules! ENC_CTR {
     };
 }
 
-ENC_CTR!()
+ENC_CTR!();

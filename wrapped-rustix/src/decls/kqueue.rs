@@ -4,4 +4,4 @@ macro_rules! kqueue {
     };
 }
 
-kqueue!()
+kqueue!();

@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         CycleHeads!();
         NestedGoals!();
-        Cx!();
         StackEntry!();
+        Cx!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! EvaluationResult {
     };
 }
 
-EvaluationResult!()
+EvaluationResult!();

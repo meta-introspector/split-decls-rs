@@ -4,4 +4,4 @@ macro_rules! R_PARISC_TLS_IE21L {
     };
 }
 
-R_PARISC_TLS_IE21L!()
+R_PARISC_TLS_IE21L!();

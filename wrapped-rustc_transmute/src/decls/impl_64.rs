@@ -2,15 +2,15 @@ macro_rules! deps {
     () => {
         State!();
         Condition!();
-        Region!();
-        Answer!();
-        Type!();
+        QueryContext!();
         Quantifier!();
         MaybeTransmutableQuery!();
-        Dfa!();
-        QueryContext!();
-        Reason!();
         Reference!();
+        Dfa!();
+        Region!();
+        Reason!();
+        Type!();
+        Answer!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_64 {
     };
 }
 
-impl_64!()
+impl_64!();

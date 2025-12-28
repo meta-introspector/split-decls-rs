@@ -4,4 +4,4 @@ macro_rules! demangle_line {
     };
 }
 
-demangle_line!()
+demangle_line!();

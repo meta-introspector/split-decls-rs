@@ -3,8 +3,8 @@ macro_rules! deps {
         EdgeReferences!();
         EdgeType!();
         NodeTrait!();
-        GraphMap!();
         AllEdges!();
+        GraphMap!();
         EdgeRef!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! impl_938 {
     };
 }
 
-impl_938!()
+impl_938!();

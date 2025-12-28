@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        DyldCacheMappingAndSlideInfo!();
-        DyldCacheSlideInfo!();
+        U16!();
+        U32!();
         Endian!();
         DyldCacheSlideInfo3!();
-        U32!();
-        Error!();
-        ReadRef!();
-        DyldCacheSlideInfo2!();
         DyldCacheSlideInfo5!();
+        DyldCacheSlideInfo!();
+        DyldCacheMappingAndSlideInfo!();
+        ReadRef!();
         Result!();
-        U16!();
+        DyldCacheSlideInfo2!();
+        Error!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_505 {
     };
 }
 
-impl_505!()
+impl_505!();

@@ -4,4 +4,4 @@ macro_rules! take_while {
     };
 }
 
-take_while!()
+take_while!();

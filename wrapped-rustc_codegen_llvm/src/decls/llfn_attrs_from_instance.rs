@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
         MemoryEffects!();
-        CreateAttrStringValue!();
         CreateAttrString!();
-        CodegenCx!();
-        CreateAllocSizeAttr!();
-        CreateAllocKindAttr!();
-        AttributePlace!();
         SmallVec!();
+        CodegenCx!();
         AttributeKind!();
+        CreateAllocSizeAttr!();
+        AttributePlace!();
+        CreateAttrStringValue!();
+        CreateAllocKindAttr!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! llfn_attrs_from_instance {
     };
 }
 
-llfn_attrs_from_instance!()
+llfn_attrs_from_instance!();

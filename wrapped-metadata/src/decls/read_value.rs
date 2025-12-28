@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Value!();
-        Blob!();
         Type!();
+        Blob!();
+        Value!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! read_value {
     };
 }
 
-read_value!()
+read_value!();

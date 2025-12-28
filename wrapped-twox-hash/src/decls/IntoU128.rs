@@ -4,4 +4,4 @@ macro_rules! IntoU128 {
     };
 }
 
-IntoU128!()
+IntoU128!();

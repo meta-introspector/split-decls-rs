@@ -4,4 +4,4 @@ macro_rules! ImplTraitOvercapturesLint {
     };
 }
 
-ImplTraitOvercapturesLint!()
+ImplTraitOvercapturesLint!();

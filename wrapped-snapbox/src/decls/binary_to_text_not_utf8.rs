@@ -12,4 +12,4 @@ macro_rules! binary_to_text_not_utf8 {
     };
 }
 
-binary_to_text_not_utf8!()
+binary_to_text_not_utf8!();

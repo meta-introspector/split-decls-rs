@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Endianness!();
         ElfComdatSectionIterator!();
-        FileHeader64!();
         Endian!();
+        Endianness!();
+        FileHeader64!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! ElfComdatSectionIterator64 {
     };
 }
 
-ElfComdatSectionIterator64!()
+ElfComdatSectionIterator64!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        FileProcessingResult!();
         FileProcessingStatus!();
+        FileProcessingResult!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! test_generate_report_with_results {
     };
 }
 
-test_generate_report_with_results!()
+test_generate_report_with_results!();

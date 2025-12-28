@@ -4,4 +4,4 @@ macro_rules! create_default_writer {
     };
 }
 
-create_default_writer!()
+create_default_writer!();

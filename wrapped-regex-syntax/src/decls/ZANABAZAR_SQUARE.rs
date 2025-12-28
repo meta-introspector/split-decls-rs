@@ -4,4 +4,4 @@ macro_rules! ZANABAZAR_SQUARE {
     };
 }
 
-ZANABAZAR_SQUARE!()
+ZANABAZAR_SQUARE!();

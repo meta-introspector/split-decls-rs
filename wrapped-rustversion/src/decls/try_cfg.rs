@@ -11,4 +11,4 @@ macro_rules! try_cfg {
     };
 }
 
-try_cfg!()
+try_cfg!();

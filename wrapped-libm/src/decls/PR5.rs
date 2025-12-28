@@ -4,4 +4,4 @@ macro_rules! PR5 {
     };
 }
 
-PR5!()
+PR5!();

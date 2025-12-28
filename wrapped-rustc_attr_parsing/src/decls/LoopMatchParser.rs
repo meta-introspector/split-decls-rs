@@ -4,4 +4,4 @@ macro_rules! LoopMatchParser {
     };
 }
 
-LoopMatchParser!()
+LoopMatchParser!();

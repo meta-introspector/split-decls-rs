@@ -11,4 +11,4 @@ macro_rules! try_filter_trait_item_definition {
     };
 }
 
-try_filter_trait_item_definition!()
+try_filter_trait_item_definition!();

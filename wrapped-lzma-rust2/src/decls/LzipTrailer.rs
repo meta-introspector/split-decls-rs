@@ -4,4 +4,4 @@ macro_rules! LzipTrailer {
     };
 }
 
-LzipTrailer!()
+LzipTrailer!();

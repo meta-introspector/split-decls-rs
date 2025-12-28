@@ -4,4 +4,4 @@ macro_rules! PrivateDivInt {
     };
 }
 
-PrivateDivInt!()
+PrivateDivInt!();

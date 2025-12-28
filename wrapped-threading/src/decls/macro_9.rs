@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        TP_CALLBACK_ENVIRON_V3!();
         BOOL!();
+        TP_CALLBACK_ENVIRON_V3!();
         PTP_SIMPLE_CALLBACK!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! macro_9 {
     };
 }
 
-macro_9!()
+macro_9!();

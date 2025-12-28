@@ -4,4 +4,4 @@ macro_rules! FILE_MAGIC_TOP_LEVEL {
     };
 }
 
-FILE_MAGIC_TOP_LEVEL!()
+FILE_MAGIC_TOP_LEVEL!();

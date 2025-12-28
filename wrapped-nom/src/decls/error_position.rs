@@ -4,4 +4,4 @@ macro_rules! error_position {
     };
 }
 
-error_position!()
+error_position!();

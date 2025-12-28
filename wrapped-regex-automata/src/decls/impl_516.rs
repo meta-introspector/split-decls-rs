@@ -1,17 +1,17 @@
 macro_rules! deps {
     () => {
-        NFA!();
-        LookMatcher!();
-        Inner!();
-        Builder!();
-        StateID!();
         SparseSet!();
-        State!();
+        NFA!();
+        StateID!();
+        Inner!();
         Look!();
-        GroupInfo!();
-        Match!();
         GroupInfoError!();
+        Builder!();
         LookSet!();
+        LookMatcher!();
+        State!();
+        Match!();
+        GroupInfo!();
     };
 }
 
@@ -22,4 +22,4 @@ macro_rules! impl_516 {
     };
 }
 
-impl_516!()
+impl_516!();

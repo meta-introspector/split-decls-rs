@@ -4,4 +4,4 @@ macro_rules! preupdate_hook {
     };
 }
 
-preupdate_hook!()
+preupdate_hook!();

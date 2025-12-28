@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        OnDuplicate!();
+        Stage!();
         ProcMacroAttributeParser!();
         NoArgsAttributeParser!();
-        OnDuplicate!();
         AllowedTargets!();
-        Stage!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_144 {
     };
 }
 
-impl_144!()
+impl_144!();

@@ -12,4 +12,4 @@ macro_rules! DwarfAux32 {
     };
 }
 
-DwarfAux32!()
+DwarfAux32!();

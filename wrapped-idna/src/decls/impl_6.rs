@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        ErrorPolicy!();
-        Config!();
-        ProcessingError!();
+        Uts46!();
         Idna!();
         ProcessingSuccess!();
-        Uts46!();
+        Config!();
+        ErrorPolicy!();
+        ProcessingError!();
         Errors!();
     };
 }
@@ -17,4 +17,4 @@ macro_rules! impl_6 {
     };
 }
 
-impl_6!()
+impl_6!();

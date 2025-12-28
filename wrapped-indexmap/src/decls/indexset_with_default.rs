@@ -11,4 +11,4 @@ macro_rules! indexset_with_default {
     };
 }
 
-indexset_with_default!()
+indexset_with_default!();

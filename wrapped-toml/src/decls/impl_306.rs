@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Error!();
-        SerializationStrategy!();
-        SerializeMap!();
-        StructWalkValue!();
         Value!();
+        Error!();
+        StructWalkValue!();
+        SerializeMap!();
+        SerializationStrategy!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_306 {
     };
 }
 
-impl_306!()
+impl_306!();

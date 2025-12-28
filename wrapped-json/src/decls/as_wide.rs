@@ -12,4 +12,4 @@ macro_rules! as_wide {
     };
 }
 
-as_wide!()
+as_wide!();

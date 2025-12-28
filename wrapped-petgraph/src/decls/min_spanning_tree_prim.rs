@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Graph!();
         Time!();
-        UnGraph!();
         MinSpanningTreePrim!();
+        UnGraph!();
+        Graph!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! min_spanning_tree_prim {
     };
 }
 
-min_spanning_tree_prim!()
+min_spanning_tree_prim!();

@@ -11,4 +11,4 @@ macro_rules! add_block_eta {
     };
 }
 
-add_block_eta!()
+add_block_eta!();

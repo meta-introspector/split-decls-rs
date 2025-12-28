@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        CheckLiveDrops!();
         ConstCx!();
+        CheckLiveDrops!();
         Checker!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! check_live_drops {
     };
 }
 
-check_live_drops!()
+check_live_drops!();

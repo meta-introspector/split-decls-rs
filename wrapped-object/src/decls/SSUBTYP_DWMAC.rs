@@ -4,4 +4,4 @@ macro_rules! SSUBTYP_DWMAC {
     };
 }
 
-SSUBTYP_DWMAC!()
+SSUBTYP_DWMAC!();

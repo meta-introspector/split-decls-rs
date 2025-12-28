@@ -4,4 +4,4 @@ macro_rules! maximal_cliques {
     };
 }
 
-maximal_cliques!()
+maximal_cliques!();

@@ -4,4 +4,4 @@ macro_rules! lookup_ll_code {
     };
 }
 
-lookup_ll_code!()
+lookup_ll_code!();

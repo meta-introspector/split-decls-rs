@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         Deprecation!();
-        EncodeCrossCrate!();
         ConstStability!();
+        Path!();
         AttributeKind!();
         Stability!();
-        Path!();
+        EncodeCrossCrate!();
         Linkage!();
     };
 }
@@ -17,4 +17,4 @@ macro_rules! impl_33 {
     };
 }
 
-impl_33!()
+impl_33!();

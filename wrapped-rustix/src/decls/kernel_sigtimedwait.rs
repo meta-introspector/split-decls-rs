@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Timespec!();
         Result!();
         KernelSigSet!();
-        Timespec!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! kernel_sigtimedwait {
     };
 }
 
-kernel_sigtimedwait!()
+kernel_sigtimedwait!();

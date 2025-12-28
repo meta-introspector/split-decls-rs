@@ -11,4 +11,4 @@ macro_rules! test_reverse_after_remove_edges {
     };
 }
 
-test_reverse_after_remove_edges!()
+test_reverse_after_remove_edges!();

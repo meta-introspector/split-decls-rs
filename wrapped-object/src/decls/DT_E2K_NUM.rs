@@ -4,4 +4,4 @@ macro_rules! DT_E2K_NUM {
     };
 }
 
-DT_E2K_NUM!()
+DT_E2K_NUM!();

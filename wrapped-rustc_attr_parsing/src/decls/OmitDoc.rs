@@ -4,4 +4,4 @@ macro_rules! OmitDoc {
     };
 }
 
-OmitDoc!()
+OmitDoc!();

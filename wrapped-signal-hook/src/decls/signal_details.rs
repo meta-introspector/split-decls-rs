@@ -4,4 +4,4 @@ macro_rules! signal_details {
     };
 }
 
-signal_details!()
+signal_details!();

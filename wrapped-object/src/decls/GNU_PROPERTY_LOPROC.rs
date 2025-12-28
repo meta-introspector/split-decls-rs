@@ -4,4 +4,4 @@ macro_rules! GNU_PROPERTY_LOPROC {
     };
 }
 
-GNU_PROPERTY_LOPROC!()
+GNU_PROPERTY_LOPROC!();

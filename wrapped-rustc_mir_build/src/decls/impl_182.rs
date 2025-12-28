@@ -1,50 +1,50 @@
 macro_rules! deps {
     () => {
-        UnsafeNotInheritedNote!();
-        UnsafeOpInUnsafeFnAccessToUnionFieldRequiresUnsafe!();
-        UnsafeOpInUnsafeFnCallToFunctionWithRequiresUnsafe!();
-        UseOfMutableStaticRequiresUnsafe!();
-        UnsafeOpInUnsafeFnUseOfUnsafeFieldRequiresUnsafe!();
-        CallToUnsafeFunctionRequiresUnsafeNameless!();
-        UseOfInlineAssemblyRequiresUnsafeUnsafeOpInUnsafeFnAllowed!();
-        InitializingTypeWithRequiresUnsafe!();
-        UnsafeOpInUnsafeFnMutationOfLayoutConstrainedFieldRequiresUnsafe!();
-        InitializingTypeWithUnsafeFieldRequiresUnsafeUnsafeOpInUnsafeFnAllowed!();
-        UseOfExternStaticRequiresUnsafeUnsafeOpInUnsafeFnAllowed!();
-        UnsafeOpInUnsafeFnCallToUnsafeFunctionRequiresUnsafe!();
-        CallToUnsafeFunctionRequiresUnsafe!();
-        UseOfUnsafeFieldRequiresUnsafeUnsafeOpInUnsafeFnAllowed!();
-        UnsafeOpInUnsafeFnUseOfInlineAssemblyRequiresUnsafe!();
-        UnsafeOpInUnsafeFnInitializingTypeWithUnsafeFieldRequiresUnsafe!();
-        UseOfUnsafeFieldRequiresUnsafe!();
-        UseOfExternStaticRequiresUnsafe!();
-        InitializingTypeWithRequiresUnsafeUnsafeOpInUnsafeFnAllowed!();
-        UnsafeNotInheritedLintNote!();
-        AccessToUnionFieldRequiresUnsafeUnsafeOpInUnsafeFnAllowed!();
-        AccessToUnionFieldRequiresUnsafe!();
-        BorrowOfLayoutConstrainedFieldRequiresUnsafeUnsafeOpInUnsafeFnAllowed!();
-        UnsafeOpInUnsafeFnInitializingTypeWithRequiresUnsafe!();
-        UnsafeOpInUnsafeFnDerefOfRawPointerRequiresUnsafe!();
-        UnsafeOpInUnsafeFnUseOfMutableStaticRequiresUnsafe!();
-        UnsafeOpKind!();
-        DerefOfRawPointerRequiresUnsafeUnsafeOpInUnsafeFnAllowed!();
-        DerefOfRawPointerRequiresUnsafe!();
-        CallToFunctionWithRequiresUnsafeUnsafeOpInUnsafeFnAllowed!();
-        UnsafeBinderCastRequiresUnsafeUnsafeOpInUnsafeFnAllowed!();
-        MutationOfLayoutConstrainedFieldRequiresUnsafe!();
-        UnsafeOpInUnsafeFnCallToUnsafeFunctionRequiresUnsafeNameless!();
-        UseOfInlineAssemblyRequiresUnsafe!();
-        CallToFunctionWithRequiresUnsafe!();
-        UseOfMutableStaticRequiresUnsafeUnsafeOpInUnsafeFnAllowed!();
-        CallToUnsafeFunctionRequiresUnsafeNamelessUnsafeOpInUnsafeFnAllowed!();
-        UnsafeOpInUnsafeFnUseOfExternStaticRequiresUnsafe!();
         UnsafeOpInUnsafeFnBorrowOfLayoutConstrainedFieldRequiresUnsafe!();
-        BorrowOfLayoutConstrainedFieldRequiresUnsafe!();
-        UnsafeOpInUnsafeFnUnsafeBinderCastRequiresUnsafe!();
-        UnsafeBinderCastRequiresUnsafe!();
+        UnsafeOpInUnsafeFnUseOfInlineAssemblyRequiresUnsafe!();
+        UnsafeNotInheritedNote!();
+        UseOfExternStaticRequiresUnsafeUnsafeOpInUnsafeFnAllowed!();
         MutationOfLayoutConstrainedFieldRequiresUnsafeUnsafeOpInUnsafeFnAllowed!();
+        UnsafeBinderCastRequiresUnsafe!();
+        CallToUnsafeFunctionRequiresUnsafeNamelessUnsafeOpInUnsafeFnAllowed!();
+        UseOfMutableStaticRequiresUnsafeUnsafeOpInUnsafeFnAllowed!();
+        BorrowOfLayoutConstrainedFieldRequiresUnsafeUnsafeOpInUnsafeFnAllowed!();
+        UseOfUnsafeFieldRequiresUnsafeUnsafeOpInUnsafeFnAllowed!();
+        UseOfUnsafeFieldRequiresUnsafe!();
+        MutationOfLayoutConstrainedFieldRequiresUnsafe!();
+        UnsafeOpInUnsafeFnInitializingTypeWithRequiresUnsafe!();
+        DerefOfRawPointerRequiresUnsafe!();
+        UnsafeBinderCastRequiresUnsafeUnsafeOpInUnsafeFnAllowed!();
+        UnsafeOpInUnsafeFnDerefOfRawPointerRequiresUnsafe!();
+        CallToUnsafeFunctionRequiresUnsafeNameless!();
+        UnsafeOpInUnsafeFnAccessToUnionFieldRequiresUnsafe!();
         InitializingTypeWithUnsafeFieldRequiresUnsafe!();
         CallToUnsafeFunctionRequiresUnsafeUnsafeOpInUnsafeFnAllowed!();
+        InitializingTypeWithUnsafeFieldRequiresUnsafeUnsafeOpInUnsafeFnAllowed!();
+        UnsafeOpInUnsafeFnUseOfMutableStaticRequiresUnsafe!();
+        UnsafeOpInUnsafeFnInitializingTypeWithUnsafeFieldRequiresUnsafe!();
+        UnsafeOpInUnsafeFnUnsafeBinderCastRequiresUnsafe!();
+        UnsafeOpInUnsafeFnUseOfUnsafeFieldRequiresUnsafe!();
+        UnsafeOpInUnsafeFnMutationOfLayoutConstrainedFieldRequiresUnsafe!();
+        BorrowOfLayoutConstrainedFieldRequiresUnsafe!();
+        UseOfInlineAssemblyRequiresUnsafeUnsafeOpInUnsafeFnAllowed!();
+        InitializingTypeWithRequiresUnsafeUnsafeOpInUnsafeFnAllowed!();
+        CallToFunctionWithRequiresUnsafe!();
+        AccessToUnionFieldRequiresUnsafeUnsafeOpInUnsafeFnAllowed!();
+        UseOfInlineAssemblyRequiresUnsafe!();
+        UseOfExternStaticRequiresUnsafe!();
+        InitializingTypeWithRequiresUnsafe!();
+        CallToFunctionWithRequiresUnsafeUnsafeOpInUnsafeFnAllowed!();
+        UnsafeOpInUnsafeFnUseOfExternStaticRequiresUnsafe!();
+        UnsafeOpInUnsafeFnCallToUnsafeFunctionRequiresUnsafeNameless!();
+        CallToUnsafeFunctionRequiresUnsafe!();
+        UnsafeOpInUnsafeFnCallToUnsafeFunctionRequiresUnsafe!();
+        UnsafeNotInheritedLintNote!();
+        UnsafeOpKind!();
+        UnsafeOpInUnsafeFnCallToFunctionWithRequiresUnsafe!();
+        AccessToUnionFieldRequiresUnsafe!();
+        UseOfMutableStaticRequiresUnsafe!();
+        DerefOfRawPointerRequiresUnsafeUnsafeOpInUnsafeFnAllowed!();
     };
 }
 
@@ -55,4 +55,4 @@ macro_rules! impl_182 {
     };
 }
 
-impl_182!()
+impl_182!();

@@ -4,4 +4,4 @@ macro_rules! PWHASH_LENGTH {
     };
 }
 
-PWHASH_LENGTH!()
+PWHASH_LENGTH!();

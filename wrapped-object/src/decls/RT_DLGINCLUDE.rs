@@ -4,4 +4,4 @@ macro_rules! RT_DLGINCLUDE {
     };
 }
 
-RT_DLGINCLUDE!()
+RT_DLGINCLUDE!();

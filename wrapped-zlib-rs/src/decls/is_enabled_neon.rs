@@ -4,4 +4,4 @@ macro_rules! is_enabled_neon {
     };
 }
 
-is_enabled_neon!()
+is_enabled_neon!();

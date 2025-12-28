@@ -4,4 +4,4 @@ macro_rules! check_specialization_validity {
     };
 }
 
-check_specialization_validity!()
+check_specialization_validity!();

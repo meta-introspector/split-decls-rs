@@ -4,4 +4,4 @@ macro_rules! IMapView_Vtbl {
     };
 }
 
-IMapView_Vtbl!()
+IMapView_Vtbl!();

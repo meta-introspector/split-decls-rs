@@ -4,4 +4,4 @@ macro_rules! R_AARCH64_TLSDESC_CALL {
     };
 }
 
-R_AARCH64_TLSDESC_CALL!()
+R_AARCH64_TLSDESC_CALL!();

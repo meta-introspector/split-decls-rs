@@ -4,4 +4,4 @@ macro_rules! R_METAG_HIADDR16 {
     };
 }
 
-R_METAG_HIADDR16!()
+R_METAG_HIADDR16!();

@@ -4,4 +4,4 @@ macro_rules! IsExecutable {
     };
 }
 
-IsExecutable!()
+IsExecutable!();

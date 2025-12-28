@@ -4,4 +4,4 @@ macro_rules! has_rustc_mir_with {
     };
 }
 
-has_rustc_mir_with!()
+has_rustc_mir_with!();

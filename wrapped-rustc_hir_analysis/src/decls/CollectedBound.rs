@@ -4,4 +4,4 @@ macro_rules! CollectedBound {
     };
 }
 
-CollectedBound!()
+CollectedBound!();

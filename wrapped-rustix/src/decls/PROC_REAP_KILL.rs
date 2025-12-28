@@ -4,4 +4,4 @@ macro_rules! PROC_REAP_KILL {
     };
 }
 
-PROC_REAP_KILL!()
+PROC_REAP_KILL!();

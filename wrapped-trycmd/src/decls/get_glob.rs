@@ -4,4 +4,4 @@ macro_rules! get_glob {
     };
 }
 
-get_glob!()
+get_glob!();

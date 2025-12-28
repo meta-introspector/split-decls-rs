@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        SyntaxContext!();
+        HygieneData!();
         HygieneDecodeContext!();
         SyntaxContextKey!();
-        HygieneData!();
+        SyntaxContext!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! decode_syntax_context {
     };
 }
 
-decode_syntax_context!()
+decode_syntax_context!();

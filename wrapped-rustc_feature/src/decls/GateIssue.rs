@@ -4,4 +4,4 @@ macro_rules! GateIssue {
     };
 }
 
-GateIssue!()
+GateIssue!();

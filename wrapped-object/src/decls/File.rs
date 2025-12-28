@@ -1,21 +1,21 @@
 macro_rules! deps {
     () => {
-        ElfFile64!();
-        PeFile64!();
-        PeFile32!();
-        XcoffFile64!();
-        MachOFile32!();
-        Endianness!();
         XcoffFile32!();
-        CoffFile!();
-        MachO64!();
-        ReadRef!();
-        MachO32!();
         MachOFile64!();
-        WasmFile!();
-        Object!();
-        CoffBigFile!();
+        ReadRef!();
+        PeFile32!();
+        PeFile64!();
+        MachO32!();
         ElfFile32!();
+        MachOFile32!();
+        WasmFile!();
+        XcoffFile64!();
+        Endianness!();
+        MachO64!();
+        CoffBigFile!();
+        CoffFile!();
+        Object!();
+        ElfFile64!();
     };
 }
 
@@ -26,4 +26,4 @@ macro_rules! File {
     };
 }
 
-File!()
+File!();

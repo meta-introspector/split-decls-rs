@@ -4,4 +4,4 @@ macro_rules! fold_arc {
     };
 }
 
-fold_arc!()
+fold_arc!();

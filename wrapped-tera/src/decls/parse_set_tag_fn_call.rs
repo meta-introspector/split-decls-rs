@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Set!();
         WS!();
-        ExprVal!();
-        Node!();
-        FunctionCall!();
         Expr!();
+        Node!();
+        Set!();
+        ExprVal!();
+        FunctionCall!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! parse_set_tag_fn_call {
     };
 }
 
-parse_set_tag_fn_call!()
+parse_set_tag_fn_call!();

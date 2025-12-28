@@ -4,4 +4,4 @@ macro_rules! AsDerefSuggestion {
     };
 }
 
-AsDerefSuggestion!()
+AsDerefSuggestion!();

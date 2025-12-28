@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        ProducerCallback!();
-        EnumerateProducer!();
-        Enumerate!();
-        Consumer!();
         IndexedParallelIterator!();
         Producer!();
+        EnumerateProducer!();
+        ProducerCallback!();
+        Consumer!();
+        Enumerate!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_404 {
     };
 }
 
-impl_404!()
+impl_404!();

@@ -4,4 +4,4 @@ macro_rules! module_name_to_str {
     };
 }
 
-module_name_to_str!()
+module_name_to_str!();

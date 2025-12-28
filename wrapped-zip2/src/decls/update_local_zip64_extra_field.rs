@@ -13,4 +13,4 @@ macro_rules! update_local_zip64_extra_field {
     };
 }
 
-update_local_zip64_extra_field!()
+update_local_zip64_extra_field!();

@@ -12,4 +12,4 @@ macro_rules! dfs_debug {
     };
 }
 
-dfs_debug!()
+dfs_debug!();

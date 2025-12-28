@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Entry!();
         IterMut!();
-        Slab!();
         Iter!();
         GetDisjointMutError!();
+        Entry!();
+        Slab!();
         Drain!();
         VacantEntry!();
     };
@@ -17,4 +17,4 @@ macro_rules! impl_24 {
     };
 }
 
-impl_24!()
+impl_24!();

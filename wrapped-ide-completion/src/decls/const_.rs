@@ -4,4 +4,4 @@ macro_rules! const_ {
     };
 }
 
-const_!()
+const_!();

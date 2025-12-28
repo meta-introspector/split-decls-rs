@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        InterpCx!();
         CompileTimeMachine!();
+        InterpCx!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! report_eval_error {
     };
 }
 
-report_eval_error!()
+report_eval_error!();

@@ -11,4 +11,4 @@ macro_rules! SeparatedList1 {
     };
 }
 
-SeparatedList1!()
+SeparatedList1!();

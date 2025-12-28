@@ -4,4 +4,4 @@ macro_rules! sock_nonempty {
     };
 }
 
-sock_nonempty!()
+sock_nonempty!();

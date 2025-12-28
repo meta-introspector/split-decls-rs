@@ -4,4 +4,4 @@ macro_rules! try_extract_range {
     };
 }
 
-try_extract_range!()
+try_extract_range!();

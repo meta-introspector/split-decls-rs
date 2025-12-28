@@ -4,4 +4,4 @@ macro_rules! __pin_project_reconstruct {
     };
 }
 
-__pin_project_reconstruct!()
+__pin_project_reconstruct!();

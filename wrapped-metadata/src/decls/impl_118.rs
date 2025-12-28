@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        Attribute!();
-        GenericParam!();
-        InterfaceImpl!();
+        RowIterator!();
         TypeDef!();
         Field!();
-        RowIterator!();
-        MethodDef!();
-        TypeCategory!();
         ClassLayout!();
+        Attribute!();
+        InterfaceImpl!();
+        MethodDef!();
+        GenericParam!();
+        TypeCategory!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_118 {
     };
 }
 
-impl_118!()
+impl_118!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         ImplBlockBuilder!();
-        FieldBounds!();
-        StructUnionRepr!();
         Trait!();
+        StructUnionRepr!();
+        FieldBounds!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! derive_split_at_inner {
     };
 }
 
-derive_split_at_inner!()
+derive_split_at_inner!();

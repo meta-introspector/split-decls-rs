@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        VacantEntry!();
         Entry!();
         StoreMut!();
         OccupiedEntry!();
-        VacantEntry!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_53 {
     };
 }
 
-impl_53!()
+impl_53!();

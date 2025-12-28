@@ -4,4 +4,4 @@ macro_rules! PerfMetric {
     };
 }
 
-PerfMetric!()
+PerfMetric!();

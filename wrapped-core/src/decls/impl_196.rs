@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        ScopedHeap!();
         Interface!();
         ScopedInterface!();
-        ScopedHeap!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_196 {
     };
 }
 
-impl_196!()
+impl_196!();

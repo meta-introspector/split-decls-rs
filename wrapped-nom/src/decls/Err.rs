@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Error!();
         Finish!();
         Needed!();
+        Error!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Err {
     };
 }
 
-Err!()
+Err!();

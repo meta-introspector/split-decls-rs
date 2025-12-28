@@ -4,4 +4,4 @@ macro_rules! PT_HP_CORE_VERSION {
     };
 }
 
-PT_HP_CORE_VERSION!()
+PT_HP_CORE_VERSION!();

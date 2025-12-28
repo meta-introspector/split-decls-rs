@@ -4,4 +4,4 @@ macro_rules! LinkNameParser {
     };
 }
 
-LinkNameParser!()
+LinkNameParser!();

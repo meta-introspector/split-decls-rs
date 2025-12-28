@@ -4,4 +4,4 @@ macro_rules! __pin_project_parse_generics {
     };
 }
 
-__pin_project_parse_generics!()
+__pin_project_parse_generics!();

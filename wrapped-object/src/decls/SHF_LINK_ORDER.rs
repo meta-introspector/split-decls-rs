@@ -11,4 +11,4 @@ macro_rules! SHF_LINK_ORDER {
     };
 }
 
-SHF_LINK_ORDER!()
+SHF_LINK_ORDER!();

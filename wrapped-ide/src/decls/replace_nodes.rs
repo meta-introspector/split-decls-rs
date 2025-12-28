@@ -4,4 +4,4 @@ macro_rules! replace_nodes {
     };
 }
 
-replace_nodes!()
+replace_nodes!();

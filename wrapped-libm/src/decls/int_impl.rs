@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        MinInt!();
         Int!();
         OtherSign!();
-        MinInt!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! int_impl {
     };
 }
 
-int_impl!()
+int_impl!();

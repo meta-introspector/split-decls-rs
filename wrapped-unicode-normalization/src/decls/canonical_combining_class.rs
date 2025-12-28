@@ -4,4 +4,4 @@ macro_rules! canonical_combining_class {
     };
 }
 
-canonical_combining_class!()
+canonical_combining_class!();

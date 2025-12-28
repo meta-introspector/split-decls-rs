@@ -15,4 +15,4 @@ QED: The unitary morphism exists in the L-function quotient space.
     };
 }
 
-unity_proof_impl!()
+unity_proof_impl!();

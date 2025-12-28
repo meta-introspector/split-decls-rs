@@ -11,4 +11,4 @@ macro_rules! requires_comma_to_be_match_arm {
     };
 }
 
-requires_comma_to_be_match_arm!()
+requires_comma_to_be_match_arm!();

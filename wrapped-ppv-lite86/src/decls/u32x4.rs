@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        Store!();
-        Vec4!();
-        LaneWords4!();
-        StoreBytes!();
-        MultiLane!();
-        Machine!();
         ArithOps!();
         Words4!();
+        Machine!();
+        StoreBytes!();
+        Store!();
         BitOps32!();
+        Vec4!();
+        MultiLane!();
+        LaneWords4!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! u32x4 {
     };
 }
 
-u32x4!()
+u32x4!();

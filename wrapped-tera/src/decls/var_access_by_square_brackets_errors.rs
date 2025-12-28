@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Context!();
-        Tera!();
         Test!();
+        Tera!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! var_access_by_square_brackets_errors {
     };
 }
 
-var_access_by_square_brackets_errors!()
+var_access_by_square_brackets_errors!();

@@ -4,4 +4,4 @@ macro_rules! CrateNameDoesNotMatch {
     };
 }
 
-CrateNameDoesNotMatch!()
+CrateNameDoesNotMatch!();

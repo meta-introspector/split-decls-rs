@@ -4,4 +4,4 @@ macro_rules! KEY_WILDCARD {
     };
 }
 
-KEY_WILDCARD!()
+KEY_WILDCARD!();

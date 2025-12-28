@@ -4,4 +4,4 @@ macro_rules! pr_impl {
     };
 }
 
-pr_impl!()
+pr_impl!();

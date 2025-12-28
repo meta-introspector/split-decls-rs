@@ -4,4 +4,4 @@ macro_rules! ExpectedSig {
     };
 }
 
-ExpectedSig!()
+ExpectedSig!();

@@ -4,4 +4,4 @@ macro_rules! impl_fmt_traits {
     };
 }
 
-impl_fmt_traits!()
+impl_fmt_traits!();

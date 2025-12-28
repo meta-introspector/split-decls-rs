@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Context!();
         Tera!();
         Result!();
-        Context!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! render_template {
     };
 }
 
-render_template!()
+render_template!();

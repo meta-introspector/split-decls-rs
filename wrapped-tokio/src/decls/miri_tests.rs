@@ -4,4 +4,4 @@ macro_rules! miri_tests {
     };
 }
 
-miri_tests!()
+miri_tests!();

@@ -11,4 +11,4 @@ macro_rules! gen_codes {
     };
 }
 
-gen_codes!()
+gen_codes!();

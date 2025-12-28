@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Data!();
         DataFormat!();
+        Data!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! text_to_json_not_json {
     };
 }
 
-text_to_json_not_json!()
+text_to_json_not_json!();

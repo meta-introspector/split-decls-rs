@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
+        ParseAttempts!();
+        Token!();
         ParseAttempt!();
-        RulesCallStack!();
         RuleType!();
         ParsingToken!();
-        Token!();
-        ParseAttempts!();
+        RulesCallStack!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_107 {
     };
 }
 
-impl_107!()
+impl_107!();

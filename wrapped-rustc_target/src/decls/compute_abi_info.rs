@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        FnAbi!();
         HasTargetSpec!();
+        FnAbi!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! compute_abi_info {
     };
 }
 
-compute_abi_info!()
+compute_abi_info!();

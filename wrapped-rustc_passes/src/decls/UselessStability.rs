@@ -4,4 +4,4 @@ macro_rules! UselessStability {
     };
 }
 
-UselessStability!()
+UselessStability!();

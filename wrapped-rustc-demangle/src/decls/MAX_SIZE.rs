@@ -4,4 +4,4 @@ macro_rules! MAX_SIZE {
     };
 }
 
-MAX_SIZE!()
+MAX_SIZE!();

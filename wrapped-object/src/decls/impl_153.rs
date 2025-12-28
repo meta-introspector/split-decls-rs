@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        ComdatSectionIterator!();
         SectionIndex!();
         ReadRef!();
-        ComdatSectionIteratorInternal!();
         Item!();
-        ComdatSectionIterator!();
+        ComdatSectionIteratorInternal!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_153 {
     };
 }
 
-impl_153!()
+impl_153!();

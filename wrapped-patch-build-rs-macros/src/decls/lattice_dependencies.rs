@@ -4,4 +4,4 @@ macro_rules! lattice_dependencies {
     };
 }
 
-lattice_dependencies!()
+lattice_dependencies!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        PaddingCheck!();
-        FieldBounds!();
-        Trait!();
         DataExt!();
         SelfBounds!();
+        FieldBounds!();
+        Trait!();
+        PaddingCheck!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! ImplBlockBuilder {
     };
 }
 
-ImplBlockBuilder!()
+ImplBlockBuilder!();

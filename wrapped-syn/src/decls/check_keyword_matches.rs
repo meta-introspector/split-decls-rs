@@ -4,4 +4,4 @@ macro_rules! check_keyword_matches {
     };
 }
 
-check_keyword_matches!()
+check_keyword_matches!();

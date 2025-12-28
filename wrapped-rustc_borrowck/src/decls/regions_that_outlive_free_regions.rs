@@ -12,4 +12,4 @@ macro_rules! regions_that_outlive_free_regions {
     };
 }
 
-regions_that_outlive_free_regions!()
+regions_that_outlive_free_regions!();

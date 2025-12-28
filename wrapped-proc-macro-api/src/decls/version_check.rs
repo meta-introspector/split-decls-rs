@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ServerError!();
         ProcMacroServerProcess!();
+        ServerError!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! version_check {
     };
 }
 
-version_check!()
+version_check!();

@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         ErrorKind!();
-        Error!();
-        Needed!();
         IResult!();
-        Err!();
+        Error!();
         Tag!();
+        Err!();
+        Needed!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! peek_test {
     };
 }
 
-peek_test!()
+peek_test!();

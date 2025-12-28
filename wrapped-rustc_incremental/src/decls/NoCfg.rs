@@ -4,4 +4,4 @@ macro_rules! NoCfg {
     };
 }
 
-NoCfg!()
+NoCfg!();

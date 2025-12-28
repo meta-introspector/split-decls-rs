@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        ParserIterator!();
-        Err!();
         State!();
+        Err!();
+        ParserIterator!();
         IResult!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_132 {
     };
 }
 
-impl_132!()
+impl_132!();

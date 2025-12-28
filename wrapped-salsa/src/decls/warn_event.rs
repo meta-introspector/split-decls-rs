@@ -4,4 +4,4 @@ macro_rules! warn_event {
     };
 }
 
-warn_event!()
+warn_event!();

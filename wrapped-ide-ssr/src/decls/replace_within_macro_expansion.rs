@@ -16,4 +16,4 @@ macro_rules! replace_within_macro_expansion {
     };
 }
 
-replace_within_macro_expansion!()
+replace_within_macro_expansion!();

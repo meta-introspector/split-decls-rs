@@ -4,4 +4,4 @@ macro_rules! try_from {
     };
 }
 
-try_from!()
+try_from!();

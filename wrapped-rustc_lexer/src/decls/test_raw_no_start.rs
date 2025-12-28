@@ -4,4 +4,4 @@ macro_rules! test_raw_no_start {
     };
 }
 
-test_raw_no_start!()
+test_raw_no_start!();

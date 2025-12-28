@@ -4,4 +4,4 @@ macro_rules! MergeFuncLR {
     };
 }
 
-MergeFuncLR!()
+MergeFuncLR!();

@@ -25,4 +25,4 @@ env.NOT_AN_OBJECT = "value"
     };
 }
 
-parse_output_cargo_config_env_works!()
+parse_output_cargo_config_env_works!();

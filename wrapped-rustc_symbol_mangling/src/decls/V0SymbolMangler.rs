@@ -11,4 +11,4 @@ macro_rules! V0SymbolMangler {
     };
 }
 
-V0SymbolMangler!()
+V0SymbolMangler!();

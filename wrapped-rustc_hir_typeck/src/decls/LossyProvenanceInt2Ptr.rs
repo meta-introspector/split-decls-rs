@@ -11,4 +11,4 @@ macro_rules! LossyProvenanceInt2Ptr {
     };
 }
 
-LossyProvenanceInt2Ptr!()
+LossyProvenanceInt2Ptr!();

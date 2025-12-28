@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        GraphemeIncomplete!();
         GraphemeCursor!();
+        GraphemeIncomplete!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! test_grapheme_cursor_chunk_start_require_precontext {
     };
 }
 
-test_grapheme_cursor_chunk_start_require_precontext!()
+test_grapheme_cursor_chunk_start_require_precontext!();

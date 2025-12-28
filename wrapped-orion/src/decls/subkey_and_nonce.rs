@@ -4,4 +4,4 @@ macro_rules! subkey_and_nonce {
     };
 }
 
-subkey_and_nonce!()
+subkey_and_nonce!();

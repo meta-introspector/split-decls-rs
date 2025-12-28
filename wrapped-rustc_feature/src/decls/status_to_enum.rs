@@ -11,4 +11,4 @@ macro_rules! status_to_enum {
     };
 }
 
-status_to_enum!()
+status_to_enum!();

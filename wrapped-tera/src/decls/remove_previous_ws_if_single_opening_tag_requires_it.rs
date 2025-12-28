@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Node!();
         WS!();
+        Node!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! remove_previous_ws_if_single_opening_tag_requires_it {
     };
 }
 
-remove_previous_ws_if_single_opening_tag_requires_it!()
+remove_previous_ws_if_single_opening_tag_requires_it!();

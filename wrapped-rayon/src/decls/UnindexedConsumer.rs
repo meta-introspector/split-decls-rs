@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Consumer!();
         Reducer!();
+        Consumer!();
         Once!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! UnindexedConsumer {
     };
 }
 
-UnindexedConsumer!()
+UnindexedConsumer!();

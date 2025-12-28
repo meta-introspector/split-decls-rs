@@ -4,4 +4,4 @@ macro_rules! BHAIKSUKI {
     };
 }
 
-BHAIKSUKI!()
+BHAIKSUKI!();

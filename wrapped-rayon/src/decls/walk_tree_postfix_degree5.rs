@@ -4,4 +4,4 @@ macro_rules! walk_tree_postfix_degree5 {
     };
 }
 
-walk_tree_postfix_degree5!()
+walk_tree_postfix_degree5!();

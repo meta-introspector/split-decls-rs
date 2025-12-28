@@ -4,4 +4,4 @@ macro_rules! RepeatKind {
     };
 }
 
-RepeatKind!()
+RepeatKind!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        MachHeader64!();
         Endian!();
         Endianness!();
-        MachHeader64!();
         MachOSymbol!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! MachOSymbol64 {
     };
 }
 
-MachOSymbol64!()
+MachOSymbol64!();

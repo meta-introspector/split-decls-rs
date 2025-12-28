@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        VacantEntry!();
         ActionKind!();
+        VacantEntry!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! action_kind_strategy {
     };
 }
 
-action_kind_strategy!()
+action_kind_strategy!();

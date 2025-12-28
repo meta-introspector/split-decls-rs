@@ -4,4 +4,4 @@ macro_rules! truncf128 {
     };
 }
 
-truncf128!()
+truncf128!();

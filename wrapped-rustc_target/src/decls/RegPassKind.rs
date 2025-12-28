@@ -4,4 +4,4 @@ macro_rules! RegPassKind {
     };
 }
 
-RegPassKind!()
+RegPassKind!();

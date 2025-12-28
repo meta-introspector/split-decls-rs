@@ -4,4 +4,4 @@ macro_rules! DEFAULT_MAX_BRANCHES {
     };
 }
 
-DEFAULT_MAX_BRANCHES!()
+DEFAULT_MAX_BRANCHES!();

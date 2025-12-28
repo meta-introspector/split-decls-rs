@@ -11,4 +11,4 @@ macro_rules! parse_mode {
     };
 }
 
-parse_mode!()
+parse_mode!();

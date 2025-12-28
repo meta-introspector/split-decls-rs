@@ -11,4 +11,4 @@ macro_rules! wmul_impl {
     };
 }
 
-wmul_impl!()
+wmul_impl!();

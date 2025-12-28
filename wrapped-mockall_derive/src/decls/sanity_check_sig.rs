@@ -4,4 +4,4 @@ macro_rules! sanity_check_sig {
     };
 }
 
-sanity_check_sig!()
+sanity_check_sig!();

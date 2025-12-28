@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ArticulationPointTracker!();
         RecursionStep!();
+        ArticulationPointTracker!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! _dfs {
     };
 }
 
-_dfs!()
+_dfs!();

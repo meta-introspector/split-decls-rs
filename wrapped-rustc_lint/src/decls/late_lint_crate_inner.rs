@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        LateContext!();
         LateContextAndPass!();
+        LateContext!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! late_lint_crate_inner {
     };
 }
 
-late_lint_crate_inner!()
+late_lint_crate_inner!();

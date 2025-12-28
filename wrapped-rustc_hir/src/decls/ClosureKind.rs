@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        CoroutineKind!();
         CoroutineDesugaring!();
+        CoroutineKind!();
         Closure!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! ClosureKind {
     };
 }
 
-ClosureKind!()
+ClosureKind!();

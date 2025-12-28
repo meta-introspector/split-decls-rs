@@ -4,4 +4,4 @@ macro_rules! verify_file_header {
     };
 }
 
-verify_file_header!()
+verify_file_header!();

@@ -11,4 +11,4 @@ macro_rules! supported_targets {
     };
 }
 
-supported_targets!()
+supported_targets!();

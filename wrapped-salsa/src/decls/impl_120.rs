@@ -1,28 +1,28 @@
 macro_rules! deps {
     () => {
-        DatabaseKeyIndex!();
-        FxIndexSet!();
-        FxHashSet!();
-        IngredientImpl!();
-        IterationCount!();
-        Ingredient!();
-        JarKind!();
-        Configuration!();
-        Table!();
-        RawDatabase!();
-        IngredientIndex!();
-        Running!();
-        SalsaStructInDb!();
-        Id!();
-        CycleRecoveryStrategy!();
         Location!();
-        WaitForResult!();
+        CycleRecoveryStrategy!();
         Revision!();
-        Cycle!();
-        Zalsa!();
-        ProvisionalStatus!();
-        QueryEdge!();
+        FxHashSet!();
+        Id!();
+        DatabaseKeyIndex!();
         QueryOriginRef!();
+        IngredientImpl!();
+        JarKind!();
+        QueryEdge!();
+        Ingredient!();
+        ProvisionalStatus!();
+        RawDatabase!();
+        IterationCount!();
+        Table!();
+        Configuration!();
+        Zalsa!();
+        SalsaStructInDb!();
+        IngredientIndex!();
+        Cycle!();
+        WaitForResult!();
+        FxIndexSet!();
+        Running!();
     };
 }
 
@@ -33,4 +33,4 @@ macro_rules! impl_120 {
     };
 }
 
-impl_120!()
+impl_120!();

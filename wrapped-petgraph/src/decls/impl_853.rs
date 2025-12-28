@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        StableGraph!();
         EdgeType!();
         IndexType!();
-        StableGraph!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_853 {
     };
 }
 
-impl_853!()
+impl_853!();

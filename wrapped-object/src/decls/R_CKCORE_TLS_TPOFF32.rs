@@ -4,4 +4,4 @@ macro_rules! R_CKCORE_TLS_TPOFF32 {
     };
 }
 
-R_CKCORE_TLS_TPOFF32!()
+R_CKCORE_TLS_TPOFF32!();

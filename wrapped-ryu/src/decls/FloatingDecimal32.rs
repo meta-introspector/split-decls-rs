@@ -4,4 +4,4 @@ macro_rules! FloatingDecimal32 {
     };
 }
 
-FloatingDecimal32!()
+FloatingDecimal32!();

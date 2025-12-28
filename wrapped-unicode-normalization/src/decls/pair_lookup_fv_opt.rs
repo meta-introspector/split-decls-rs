@@ -4,4 +4,4 @@ macro_rules! pair_lookup_fv_opt {
     };
 }
 
-pair_lookup_fv_opt!()
+pair_lookup_fv_opt!();

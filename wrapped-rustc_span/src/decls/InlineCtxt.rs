@@ -4,4 +4,4 @@ macro_rules! InlineCtxt {
     };
 }
 
-InlineCtxt!()
+InlineCtxt!();

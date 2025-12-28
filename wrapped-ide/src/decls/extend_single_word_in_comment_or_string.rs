@@ -4,4 +4,4 @@ macro_rules! extend_single_word_in_comment_or_string {
     };
 }
 
-extend_single_word_in_comment_or_string!()
+extend_single_word_in_comment_or_string!();

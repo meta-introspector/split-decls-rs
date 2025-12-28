@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Graph!();
-        EdgeType!();
-        WalkNeighbors!();
-        IndexType!();
         NodeIndex!();
+        Graph!();
+        IndexType!();
         EdgeIndex!();
+        WalkNeighbors!();
+        EdgeType!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_722 {
     };
 }
 
-impl_722!()
+impl_722!();

@@ -11,4 +11,4 @@ macro_rules! is_ancestor_or_self {
     };
 }
 
-is_ancestor_or_self!()
+is_ancestor_or_self!();

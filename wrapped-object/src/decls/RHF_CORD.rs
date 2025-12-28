@@ -4,4 +4,4 @@ macro_rules! RHF_CORD {
     };
 }
 
-RHF_CORD!()
+RHF_CORD!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        AssertRequiresBoolean!();
-        AssertRequiresExpression!();
-        Assert!();
         AssertMissingComma!();
+        AssertRequiresExpression!();
+        AssertRequiresBoolean!();
+        Assert!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! parse_assert {
     };
 }
 
-parse_assert!()
+parse_assert!();

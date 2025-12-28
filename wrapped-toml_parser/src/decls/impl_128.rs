@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Lexer!();
-        Token!();
-        Span!();
         TokenKind!();
+        Span!();
+        Token!();
+        Lexer!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_128 {
     };
 }
 
-impl_128!()
+impl_128!();

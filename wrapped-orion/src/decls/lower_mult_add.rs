@@ -4,4 +4,4 @@ macro_rules! lower_mult_add {
     };
 }
 
-lower_mult_add!()
+lower_mult_add!();

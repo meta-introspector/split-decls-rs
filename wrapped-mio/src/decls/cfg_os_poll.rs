@@ -4,4 +4,4 @@ macro_rules! cfg_os_poll {
     };
 }
 
-cfg_os_poll!()
+cfg_os_poll!();

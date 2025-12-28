@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Directory!();
         Dependency!();
+        Directory!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! fix_dependencies {
     };
 }
 
-fix_dependencies!()
+fix_dependencies!();

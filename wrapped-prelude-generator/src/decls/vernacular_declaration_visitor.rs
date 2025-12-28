@@ -4,4 +4,4 @@ macro_rules! vernacular_declaration_visitor {
     };
 }
 
-vernacular_declaration_visitor!()
+vernacular_declaration_visitor!();

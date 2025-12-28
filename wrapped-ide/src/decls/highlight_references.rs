@@ -12,4 +12,4 @@ macro_rules! highlight_references {
     };
 }
 
-highlight_references!()
+highlight_references!();

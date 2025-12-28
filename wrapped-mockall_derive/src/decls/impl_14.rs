@@ -1,22 +1,22 @@
 macro_rules! deps {
     () => {
         RefRfunc!();
-        Context!();
-        AttrFormatter!();
-        ConcreteExpectationGuard!();
         GenericExpectations!();
-        RefExpectations!();
-        RefMutRfunc!();
-        StaticExpectation!();
-        Matcher!();
-        RefExpectation!();
-        RefMutExpectations!();
-        GenericExpectationGuard!();
-        StaticExpectations!();
-        Common!();
-        MockFunction!();
         RefMutExpectation!();
+        ConcreteExpectationGuard!();
+        StaticExpectations!();
         StaticRfunc!();
+        AttrFormatter!();
+        RefMutExpectations!();
+        StaticExpectation!();
+        RefExpectation!();
+        GenericExpectationGuard!();
+        Context!();
+        MockFunction!();
+        Common!();
+        RefExpectations!();
+        Matcher!();
+        RefMutRfunc!();
     };
 }
 
@@ -27,4 +27,4 @@ macro_rules! impl_14 {
     };
 }
 
-impl_14!()
+impl_14!();

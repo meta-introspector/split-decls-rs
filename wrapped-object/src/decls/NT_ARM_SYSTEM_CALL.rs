@@ -4,4 +4,4 @@ macro_rules! NT_ARM_SYSTEM_CALL {
     };
 }
 
-NT_ARM_SYSTEM_CALL!()
+NT_ARM_SYSTEM_CALL!();

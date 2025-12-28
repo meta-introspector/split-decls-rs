@@ -4,4 +4,4 @@ macro_rules! SALT_LENGTH {
     };
 }
 
-SALT_LENGTH!()
+SALT_LENGTH!();

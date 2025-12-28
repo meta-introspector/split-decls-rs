@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        IsLessOrEqual!();
         IsLess!();
-        IsGreater!();
         IsEqual!();
-        B1!();
+        IsLessOrEqual!();
         IsNotEqual!();
         IsGreaterOrEqual!();
+        IsGreater!();
+        B1!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! cmp {
     };
 }
 
-cmp!()
+cmp!();

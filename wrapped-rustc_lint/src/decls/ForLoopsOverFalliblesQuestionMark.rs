@@ -4,4 +4,4 @@ macro_rules! ForLoopsOverFalliblesQuestionMark {
     };
 }
 
-ForLoopsOverFalliblesQuestionMark!()
+ForLoopsOverFalliblesQuestionMark!();

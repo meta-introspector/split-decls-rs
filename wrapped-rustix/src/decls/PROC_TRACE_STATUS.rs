@@ -4,4 +4,4 @@ macro_rules! PROC_TRACE_STATUS {
     };
 }
 
-PROC_TRACE_STATUS!()
+PROC_TRACE_STATUS!();

@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        ExprUseVisitor!();
-        InferBorrowKind!();
-        InferredCaptureInformation!();
-        MigrationLintNote!();
-        UpvarMigrationInfo!();
-        MigrationWarningReason!();
-        NeededMigration!();
         FnCtxt!();
-        Error!();
         PlaceAncestryRelation!();
+        Error!();
+        MigrationLintNote!();
+        ExprUseVisitor!();
+        UpvarMigrationInfo!();
+        InferredCaptureInformation!();
+        NeededMigration!();
+        InferBorrowKind!();
+        MigrationWarningReason!();
     };
 }
 
@@ -25,4 +25,4 @@ macro_rules! impl_350 {
     };
 }
 
-impl_350!()
+impl_350!();

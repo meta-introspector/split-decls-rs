@@ -11,4 +11,4 @@ macro_rules! test_spill {
     };
 }
 
-test_spill!()
+test_spill!();

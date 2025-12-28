@@ -4,4 +4,4 @@ macro_rules! in_func {
     };
 }
 
-in_func!()
+in_func!();

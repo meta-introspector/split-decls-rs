@@ -13,4 +13,4 @@ macro_rules! XcoffComdatIterator {
     };
 }
 
-XcoffComdatIterator!()
+XcoffComdatIterator!();

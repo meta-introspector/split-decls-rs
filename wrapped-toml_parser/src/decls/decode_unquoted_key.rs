@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        ErrorSink!();
         Span!();
-        Expected!();
         StringBuilder!();
-        Raw!();
         ParseError!();
+        ErrorSink!();
+        Expected!();
+        Raw!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! decode_unquoted_key {
     };
 }
 
-decode_unquoted_key!()
+decode_unquoted_key!();

@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
+        UnusedAssociatedTypeBounds!();
         SelfInTypeAlias!();
         RegionInferReason!();
-        GenericArgCountMismatch!();
-        UnusedAssociatedTypeBounds!();
-        HirTyLowerer!();
         PredicateFilter!();
+        GenericArgCountMismatch!();
+        HirTyLowerer!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_445 {
     };
 }
 
-impl_445!()
+impl_445!();

@@ -4,4 +4,4 @@ macro_rules! TANGUT {
     };
 }
 
-TANGUT!()
+TANGUT!();

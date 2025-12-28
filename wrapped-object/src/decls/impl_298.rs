@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        ElfSegment!();
-        FileHeader!();
-        SegmentFlags!();
-        ObjectSegment!();
         Result!();
+        ObjectSegment!();
+        ElfSegment!();
+        SegmentFlags!();
         ReadRef!();
+        FileHeader!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_298 {
     };
 }
 
-impl_298!()
+impl_298!();

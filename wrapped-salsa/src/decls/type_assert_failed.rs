@@ -11,4 +11,4 @@ macro_rules! type_assert_failed {
     };
 }
 
-type_assert_failed!()
+type_assert_failed!();

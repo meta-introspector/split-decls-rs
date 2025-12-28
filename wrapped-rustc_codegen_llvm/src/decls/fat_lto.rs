@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        DiagnosticHandlers!();
         ModuleLlvm!();
+        LlvmError!();
+        DiagnosticHandlers!();
+        Linker!();
         LlvmCodegenBackend!();
         CodegenDiagnosticsStage!();
-        Linker!();
-        LlvmError!();
         ModuleBuffer!();
     };
 }
@@ -17,4 +17,4 @@ macro_rules! fat_lto {
     };
 }
 
-fat_lto!()
+fat_lto!();

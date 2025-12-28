@@ -20,4 +20,4 @@ pub fn validate_transaction(gas_price: u64) -> Result<(), &'static str> {{
     };
 }
 
-frontrun_block_impl!()
+frontrun_block_impl!();

@@ -4,4 +4,4 @@ macro_rules! PLATFORM_TVOS {
     };
 }
 
-PLATFORM_TVOS!()
+PLATFORM_TVOS!();

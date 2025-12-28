@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        FileHeader64!();
         XcoffSegmentIterator!();
+        FileHeader64!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! XcoffSegmentIterator64 {
     };
 }
 
-XcoffSegmentIterator64!()
+XcoffSegmentIterator64!();

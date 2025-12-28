@@ -12,4 +12,4 @@ macro_rules! json_normalize_actual_missing {
     };
 }
 
-json_normalize_actual_missing!()
+json_normalize_actual_missing!();

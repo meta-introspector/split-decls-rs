@@ -1,19 +1,19 @@
 macro_rules! deps {
     () => {
-        Transparency!();
-        DesugaringKind!();
         ExpnData!();
-        Edition!();
-        SourceMap!();
-        SyntaxContext!();
-        ExpnKind!();
-        LocalDefId!();
-        Symbol!();
         SpanData!();
-        Span!();
+        Transparency!();
+        ExpnKind!();
+        SyntaxContext!();
+        MacroKind!();
+        Symbol!();
+        SourceMap!();
         ExpnId!();
         InnerSpan!();
-        MacroKind!();
+        Edition!();
+        Span!();
+        LocalDefId!();
+        DesugaringKind!();
     };
 }
 
@@ -24,4 +24,4 @@ macro_rules! impl_264 {
     };
 }
 
-impl_264!()
+impl_264!();

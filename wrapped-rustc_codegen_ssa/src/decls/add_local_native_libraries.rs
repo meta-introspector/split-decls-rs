@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        CodegenResults!();
-        Linker!();
         ArchiveBuilderBuilder!();
+        Linker!();
+        CodegenResults!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! add_local_native_libraries {
     };
 }
 
-add_local_native_libraries!()
+add_local_native_libraries!();

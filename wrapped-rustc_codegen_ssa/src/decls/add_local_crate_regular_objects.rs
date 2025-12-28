@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        CodegenResults!();
         Linker!();
+        CodegenResults!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! add_local_crate_regular_objects {
     };
 }
 
-add_local_crate_regular_objects!()
+add_local_crate_regular_objects!();

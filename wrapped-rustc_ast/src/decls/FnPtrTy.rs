@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Walkable!();
-        Extern!();
-        Safety!();
-        GenericParam!();
         FnDecl!();
+        Safety!();
+        Extern!();
+        Walkable!();
+        GenericParam!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! FnPtrTy {
     };
 }
 
-FnPtrTy!()
+FnPtrTy!();

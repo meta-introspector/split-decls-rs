@@ -4,4 +4,4 @@ macro_rules! FilterElements {
     };
 }
 
-FilterElements!()
+FilterElements!();

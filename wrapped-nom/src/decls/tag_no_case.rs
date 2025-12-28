@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        Error!();
-        ParseError!();
         Needed!();
-        Input!();
-        Parser!();
-        IResult!();
-        Compare!();
-        TagNoCase!();
         ErrorKind!();
+        Error!();
+        TagNoCase!();
+        IResult!();
+        ParseError!();
+        Parser!();
+        Compare!();
+        Input!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! tag_no_case {
     };
 }
 
-tag_no_case!()
+tag_no_case!();

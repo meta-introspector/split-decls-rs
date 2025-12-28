@@ -4,4 +4,4 @@ macro_rules! tracked_fn {
     };
 }
 
-tracked_fn!()
+tracked_fn!();

@@ -4,4 +4,4 @@ macro_rules! EquationAIsMinusThree {
     };
 }
 
-EquationAIsMinusThree!()
+EquationAIsMinusThree!();

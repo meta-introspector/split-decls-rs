@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
+        ArgParser!();
+        PathParser!();
+        AcceptContext!();
         SingleAttributeParser!();
         AttributeOrder!();
-        PathParser!();
-        AllowedTargets!();
-        ArgParser!();
         OnDuplicate!();
-        AcceptContext!();
         Stage!();
+        AllowedTargets!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_138 {
     };
 }
 
-impl_138!()
+impl_138!();

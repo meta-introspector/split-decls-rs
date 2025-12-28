@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Event!();
-        Interest!();
-        Poll!();
-        Token!();
         Source!();
         Registry!();
+        Poll!();
         Waker!();
+        Event!();
+        Token!();
+        Interest!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_28 {
     };
 }
 
-impl_28!()
+impl_28!();

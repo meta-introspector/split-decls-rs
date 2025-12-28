@@ -11,4 +11,4 @@ macro_rules! DT_RELENT {
     };
 }
 
-DT_RELENT!()
+DT_RELENT!();

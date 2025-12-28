@@ -4,4 +4,4 @@ macro_rules! DT_SYMENT {
     };
 }
 
-DT_SYMENT!()
+DT_SYMENT!();

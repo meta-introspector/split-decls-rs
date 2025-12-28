@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
+        SolverDelegate!();
+        Ambiguous!();
+        GoalKind!();
+        Candidate!();
         AsyncCallableRelevantTypes!();
         EvalCtxt!();
-        GoalKind!();
-        Ambiguous!();
-        SolverDelegate!();
-        Candidate!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_117 {
     };
 }
 
-impl_117!()
+impl_117!();

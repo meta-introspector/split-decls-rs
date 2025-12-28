@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        SCx!();
         GenericBuilder!();
+        SCx!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! SBuilder {
     };
 }
 
-SBuilder!()
+SBuilder!();

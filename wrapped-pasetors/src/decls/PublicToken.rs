@@ -4,4 +4,4 @@ macro_rules! PublicToken {
     };
 }
 
-PublicToken!()
+PublicToken!();

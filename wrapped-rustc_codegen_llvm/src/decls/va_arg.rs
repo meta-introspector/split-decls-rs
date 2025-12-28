@@ -4,4 +4,4 @@ macro_rules! va_arg {
     };
 }
 
-va_arg!()
+va_arg!();

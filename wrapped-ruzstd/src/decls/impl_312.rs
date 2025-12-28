@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        BitWriter!();
         FSEEncoder!();
         FSETable!();
+        BitWriter!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_312 {
     };
 }
 
-impl_312!()
+impl_312!();

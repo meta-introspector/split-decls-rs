@@ -14,4 +14,4 @@ macro_rules! raw_string {
     };
 }
 
-raw_string!()
+raw_string!();

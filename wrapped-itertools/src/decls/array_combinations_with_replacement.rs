@@ -11,4 +11,4 @@ macro_rules! array_combinations_with_replacement {
     };
 }
 
-array_combinations_with_replacement!()
+array_combinations_with_replacement!();

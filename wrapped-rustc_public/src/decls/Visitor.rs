@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         TyConst!();
-        Ty!();
         Region!();
+        Ty!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Visitor {
     };
 }
 
-Visitor!()
+Visitor!();

@@ -11,4 +11,4 @@ macro_rules! decorate_inline_table {
     };
 }
 
-decorate_inline_table!()
+decorate_inline_table!();

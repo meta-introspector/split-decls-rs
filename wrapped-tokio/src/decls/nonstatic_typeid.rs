@@ -4,4 +4,4 @@ macro_rules! nonstatic_typeid {
     };
 }
 
-nonstatic_typeid!()
+nonstatic_typeid!();

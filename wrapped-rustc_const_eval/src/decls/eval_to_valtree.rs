@@ -11,4 +11,4 @@ macro_rules! eval_to_valtree {
     };
 }
 
-eval_to_valtree!()
+eval_to_valtree!();

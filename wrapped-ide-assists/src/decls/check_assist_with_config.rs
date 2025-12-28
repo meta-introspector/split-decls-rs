@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        AssistConfig!();
         ExpectedResult!();
+        AssistConfig!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! check_assist_with_config {
     };
 }
 
-check_assist_with_config!()
+check_assist_with_config!();

@@ -4,4 +4,4 @@ macro_rules! R_RISCV_PCREL_LO12_S {
     };
 }
 
-R_RISCV_PCREL_LO12_S!()
+R_RISCV_PCREL_LO12_S!();

@@ -11,4 +11,4 @@ macro_rules! collect_all_test_cases {
     };
 }
 
-collect_all_test_cases!()
+collect_all_test_cases!();

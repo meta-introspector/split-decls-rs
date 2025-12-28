@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        HashStable!();
         Steal!();
+        HashStable!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_554 {
     };
 }
 
-impl_554!()
+impl_554!();

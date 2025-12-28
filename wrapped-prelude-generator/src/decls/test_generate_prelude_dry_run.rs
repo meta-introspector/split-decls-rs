@@ -4,4 +4,4 @@ macro_rules! test_generate_prelude_dry_run {
     };
 }
 
-test_generate_prelude_dry_run!()
+test_generate_prelude_dry_run!();

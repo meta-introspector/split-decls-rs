@@ -11,4 +11,4 @@ macro_rules! default_ll_table {
     };
 }
 
-default_ll_table!()
+default_ll_table!();

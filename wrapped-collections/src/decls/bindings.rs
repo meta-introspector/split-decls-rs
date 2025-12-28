@@ -4,4 +4,4 @@ macro_rules! bindings {
     };
 }
 
-bindings!()
+bindings!();

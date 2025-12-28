@@ -4,4 +4,4 @@ macro_rules! handle_pipeline_result {
     };
 }
 
-handle_pipeline_result!()
+handle_pipeline_result!();

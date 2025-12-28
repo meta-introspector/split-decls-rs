@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Parens!();
-        Result!();
         ParseBuffer!();
+        Result!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! parse_parens {
     };
 }
 
-parse_parens!()
+parse_parens!();

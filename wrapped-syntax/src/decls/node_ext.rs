@@ -4,4 +4,4 @@ macro_rules! node_ext {
     };
 }
 
-node_ext!()
+node_ext!();

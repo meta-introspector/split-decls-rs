@@ -4,4 +4,4 @@ macro_rules! NGHTTP2_FLAG_NONE {
     };
 }
 
-NGHTTP2_FLAG_NONE!()
+NGHTTP2_FLAG_NONE!();

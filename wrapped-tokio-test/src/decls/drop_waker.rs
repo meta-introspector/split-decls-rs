@@ -4,4 +4,4 @@ macro_rules! drop_waker {
     };
 }
 
-drop_waker!()
+drop_waker!();

@@ -4,4 +4,4 @@ macro_rules! new_code_ident {
     };
 }
 
-new_code_ident!()
+new_code_ident!();

@@ -4,4 +4,4 @@ macro_rules! ELF_ST_VISIBILITY {
     };
 }
 
-ELF_ST_VISIBILITY!()
+ELF_ST_VISIBILITY!();

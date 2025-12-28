@@ -4,4 +4,4 @@ macro_rules! parse_boolean {
     };
 }
 
-parse_boolean!()
+parse_boolean!();

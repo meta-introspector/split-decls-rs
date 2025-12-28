@@ -4,4 +4,4 @@ macro_rules! ELFOSABI_OPENVMS {
     };
 }
 
-ELFOSABI_OPENVMS!()
+ELFOSABI_OPENVMS!();

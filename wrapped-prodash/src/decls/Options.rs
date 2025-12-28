@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Level!();
-        Throughput!();
         Duration!();
         Log!();
+        Throughput!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! Options {
     };
 }
 
-Options!()
+Options!();

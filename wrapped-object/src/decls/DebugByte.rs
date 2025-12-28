@@ -4,4 +4,4 @@ macro_rules! DebugByte {
     };
 }
 
-DebugByte!()
+DebugByte!();

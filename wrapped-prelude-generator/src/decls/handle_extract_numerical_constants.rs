@@ -11,4 +11,4 @@ macro_rules! handle_extract_numerical_constants {
     };
 }
 
-handle_extract_numerical_constants!()
+handle_extract_numerical_constants!();

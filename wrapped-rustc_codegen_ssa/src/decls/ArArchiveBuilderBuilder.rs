@@ -4,4 +4,4 @@ macro_rules! ArArchiveBuilderBuilder {
     };
 }
 
-ArArchiveBuilderBuilder!()
+ArArchiveBuilderBuilder!();

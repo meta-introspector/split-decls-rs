@@ -4,4 +4,4 @@ macro_rules! DT_FINI {
     };
 }
 
-DT_FINI!()
+DT_FINI!();

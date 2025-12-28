@@ -4,4 +4,4 @@ macro_rules! SHT_GNU_LIBLIST {
     };
 }
 
-SHT_GNU_LIBLIST!()
+SHT_GNU_LIBLIST!();

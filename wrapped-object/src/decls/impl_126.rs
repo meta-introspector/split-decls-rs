@@ -1,39 +1,39 @@
 macro_rules! deps {
     () => {
-        ReadRef!();
-        SectionInternal!();
-        Export!();
-        SymbolMap!();
-        ObjectKind!();
-        SymbolTable!();
-        SectionIndex!();
-        Symbol!();
-        SectionIterator!();
-        SymbolIterator!();
-        DynamicRelocationIterator!();
-        SubArchitecture!();
-        Result!();
-        Segment!();
-        SectionIteratorInternal!();
-        ObjectMap!();
-        Section!();
-        File!();
-        SymbolIteratorInternal!();
-        Import!();
-        SymbolMapName!();
-        Comdat!();
-        SymbolInternal!();
         SymbolTableInternal!();
-        CodeView!();
-        ComdatIterator!();
-        Object!();
-        FileFlags!();
+        ObjectMap!();
         DynamicRelocationIteratorInternal!();
-        Architecture!();
+        Import!();
+        Object!();
+        Result!();
+        FileFlags!();
+        Section!();
+        Segment!();
+        ObjectKind!();
         SegmentIteratorInternal!();
+        SymbolTable!();
+        SectionInternal!();
+        SymbolIteratorInternal!();
+        SymbolMap!();
+        CodeView!();
+        SectionIteratorInternal!();
+        Comdat!();
+        DynamicRelocationIterator!();
+        SymbolMapName!();
         ComdatIteratorInternal!();
+        SymbolIterator!();
+        ReadRef!();
         SymbolIndex!();
+        SymbolInternal!();
+        Export!();
+        SectionIndex!();
+        File!();
+        ComdatIterator!();
+        Architecture!();
+        Symbol!();
         SegmentIterator!();
+        SubArchitecture!();
+        SectionIterator!();
     };
 }
 
@@ -44,4 +44,4 @@ macro_rules! impl_126 {
     };
 }
 
-impl_126!()
+impl_126!();

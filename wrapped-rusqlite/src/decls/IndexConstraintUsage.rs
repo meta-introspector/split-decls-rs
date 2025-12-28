@@ -4,4 +4,4 @@ macro_rules! IndexConstraintUsage {
     };
 }
 
-IndexConstraintUsage!()
+IndexConstraintUsage!();

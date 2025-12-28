@@ -4,4 +4,4 @@ macro_rules! QR8 {
     };
 }
 
-QR8!()
+QR8!();

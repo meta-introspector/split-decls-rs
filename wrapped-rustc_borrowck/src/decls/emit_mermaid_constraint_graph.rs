@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         LivenessValues!();
-        LocalizedOutlivesConstraintSet!();
         BorrowSet!();
+        LocalizedOutlivesConstraintSet!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! emit_mermaid_constraint_graph {
     };
 }
 
-emit_mermaid_constraint_graph!()
+emit_mermaid_constraint_graph!();

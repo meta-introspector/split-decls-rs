@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ChecksumKind!();
         CodegenCx!();
+        ChecksumKind!();
         DIB!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! unknown_file_metadata {
     };
 }
 
-unknown_file_metadata!()
+unknown_file_metadata!();

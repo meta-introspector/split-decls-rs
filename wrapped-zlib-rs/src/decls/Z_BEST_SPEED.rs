@@ -4,4 +4,4 @@ macro_rules! Z_BEST_SPEED {
     };
 }
 
-Z_BEST_SPEED!()
+Z_BEST_SPEED!();

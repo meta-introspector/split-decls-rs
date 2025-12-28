@@ -4,4 +4,4 @@ macro_rules! lex_array {
     };
 }
 
-lex_array!()
+lex_array!();

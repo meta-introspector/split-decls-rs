@@ -1,18 +1,18 @@
 macro_rules! deps {
     () => {
-        Valid!();
-        Aligned!();
-        Split!();
-        Exclusive!();
-        Unaligned!();
-        Aliasing!();
-        Alignment!();
-        Shared!();
-        IntoBytes!();
-        Immutable!();
-        Invariants!();
-        Validity!();
         SplitAt!();
+        Validity!();
+        IntoBytes!();
+        Aliasing!();
+        Immutable!();
+        Alignment!();
+        Exclusive!();
+        Valid!();
+        Unaligned!();
+        Split!();
+        Aligned!();
+        Invariants!();
+        Shared!();
     };
 }
 
@@ -23,4 +23,4 @@ macro_rules! impl_404 {
     };
 }
 
-impl_404!()
+impl_404!();

@@ -4,4 +4,4 @@ macro_rules! Strings {
     };
 }
 
-Strings!()
+Strings!();

@@ -4,4 +4,4 @@ macro_rules! TakeAnyWhileConsumer {
     };
 }
 
-TakeAnyWhileConsumer!()
+TakeAnyWhileConsumer!();

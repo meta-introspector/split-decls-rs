@@ -4,4 +4,4 @@ macro_rules! PT_MIPS_RTPROC {
     };
 }
 
-PT_MIPS_RTPROC!()
+PT_MIPS_RTPROC!();

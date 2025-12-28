@@ -4,4 +4,4 @@ macro_rules! FollowerSet {
     };
 }
 
-FollowerSet!()
+FollowerSet!();

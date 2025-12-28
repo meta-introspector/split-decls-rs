@@ -4,4 +4,4 @@ macro_rules! PT_MIPS_ABIFLAGS {
     };
 }
 
-PT_MIPS_ABIFLAGS!()
+PT_MIPS_ABIFLAGS!();

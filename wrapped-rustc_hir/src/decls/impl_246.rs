@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        TraitItem!();
-        FnSig!();
-        TraitFn!();
-        Ty!();
-        TraitItemId!();
-        BodyId!();
-        GenericBounds!();
         TraitItemKind!();
+        TraitFn!();
+        TraitItem!();
+        TraitItemId!();
+        Ty!();
+        BodyId!();
+        FnSig!();
+        GenericBounds!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_246 {
     };
 }
 
-impl_246!()
+impl_246!();

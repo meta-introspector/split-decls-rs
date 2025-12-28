@@ -11,4 +11,4 @@ macro_rules! open_with_internal_xdg_open {
     };
 }
 
-open_with_internal_xdg_open!()
+open_with_internal_xdg_open!();

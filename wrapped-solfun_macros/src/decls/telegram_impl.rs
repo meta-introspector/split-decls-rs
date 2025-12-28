@@ -4,4 +4,4 @@ macro_rules! telegram_impl {
     };
 }
 
-telegram_impl!()
+telegram_impl!();

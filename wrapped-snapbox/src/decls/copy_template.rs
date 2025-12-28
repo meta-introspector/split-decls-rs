@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Result!();
         Error!();
         Walk!();
+        Result!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! copy_template {
     };
 }
 
-copy_template!()
+copy_template!();

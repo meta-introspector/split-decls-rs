@@ -4,4 +4,4 @@ macro_rules! PRIVATE_USE {
     };
 }
 
-PRIVATE_USE!()
+PRIVATE_USE!();

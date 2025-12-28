@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        BreakInsideCoroutine!();
         CheckLoopVisitor!();
-        BreakInsideClosure!();
-        UnlabeledInLabeledBlock!();
-        OutsideLoop!();
-        OutsideLoopSuggestion!();
-        BlockInfo!();
         BreakContextKind!();
+        BreakInsideCoroutine!();
+        BlockInfo!();
         Context!();
+        UnlabeledInLabeledBlock!();
+        BreakInsideClosure!();
+        OutsideLoopSuggestion!();
+        OutsideLoop!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_241 {
     };
 }
 
-impl_241!()
+impl_241!();

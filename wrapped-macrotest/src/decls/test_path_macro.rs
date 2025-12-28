@@ -11,4 +11,4 @@ macro_rules! test_path_macro {
     };
 }
 
-test_path_macro!()
+test_path_macro!();

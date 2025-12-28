@@ -4,4 +4,4 @@ macro_rules! TestRunnerInvalid {
     };
 }
 
-TestRunnerInvalid!()
+TestRunnerInvalid!();

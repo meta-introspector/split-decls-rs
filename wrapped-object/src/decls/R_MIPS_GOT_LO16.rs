@@ -4,4 +4,4 @@ macro_rules! R_MIPS_GOT_LO16 {
     };
 }
 
-R_MIPS_GOT_LO16!()
+R_MIPS_GOT_LO16!();

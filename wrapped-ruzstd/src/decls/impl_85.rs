@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ExecuteSequencesError!();
         DecodeBufferError!();
+        ExecuteSequencesError!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_85 {
     };
 }
 
-impl_85!()
+impl_85!();

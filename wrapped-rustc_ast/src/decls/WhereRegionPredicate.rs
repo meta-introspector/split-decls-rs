@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        GenericBounds!();
-        LifetimeCtxt!();
-        Walkable!();
-        BoundKind!();
         Lifetime!();
+        Walkable!();
+        LifetimeCtxt!();
+        BoundKind!();
+        GenericBounds!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! WhereRegionPredicate {
     };
 }
 
-WhereRegionPredicate!()
+WhereRegionPredicate!();

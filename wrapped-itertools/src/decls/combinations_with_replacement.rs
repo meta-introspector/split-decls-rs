@@ -4,4 +4,4 @@ macro_rules! combinations_with_replacement {
     };
 }
 
-combinations_with_replacement!()
+combinations_with_replacement!();

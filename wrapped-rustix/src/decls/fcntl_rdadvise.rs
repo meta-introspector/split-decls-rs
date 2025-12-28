@@ -11,4 +11,4 @@ macro_rules! fcntl_rdadvise {
     };
 }
 
-fcntl_rdadvise!()
+fcntl_rdadvise!();

@@ -4,4 +4,4 @@ macro_rules! DOUBLE_EXPONENT_BITS {
     };
 }
 
-DOUBLE_EXPONENT_BITS!()
+DOUBLE_EXPONENT_BITS!();

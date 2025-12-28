@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        AttributesSubsubsectionIterator!();
         Item!();
-        AttributesSubsubsection!();
         FileHeader!();
         Result!();
+        AttributesSubsubsection!();
+        AttributesSubsubsectionIterator!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_456 {
     };
 }
 
-impl_456!()
+impl_456!();

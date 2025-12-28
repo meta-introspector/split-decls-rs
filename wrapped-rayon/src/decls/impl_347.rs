@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        CollectReducer!();
         Consumer!();
+        CollectConsumer!();
+        Folder!();
+        CollectReducer!();
         Reducer!();
         CollectResult!();
-        Folder!();
-        CollectConsumer!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_347 {
     };
 }
 
-impl_347!()
+impl_347!();

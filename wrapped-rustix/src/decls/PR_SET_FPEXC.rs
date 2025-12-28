@@ -4,4 +4,4 @@ macro_rules! PR_SET_FPEXC {
     };
 }
 
-PR_SET_FPEXC!()
+PR_SET_FPEXC!();

@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Generation!();
         InitGuard!();
-        Config!();
+        Generation!();
+        Lifecycle!();
         RefCount!();
+        Config!();
         Guard!();
         LifecycleGen!();
-        Lifecycle!();
         State!();
     };
 }
@@ -18,4 +18,4 @@ macro_rules! impl_113 {
     };
 }
 
-impl_113!()
+impl_113!();

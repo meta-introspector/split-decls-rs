@@ -9,4 +9,4 @@ struct S{} {{
     };
 }
 
-big_struct_n!()
+big_struct_n!();

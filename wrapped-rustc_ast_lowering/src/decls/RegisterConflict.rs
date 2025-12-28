@@ -4,4 +4,4 @@ macro_rules! RegisterConflict {
     };
 }
 
-RegisterConflict!()
+RegisterConflict!();

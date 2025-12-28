@@ -4,4 +4,4 @@ macro_rules! free_regions {
     };
 }
 
-free_regions!()
+free_regions!();

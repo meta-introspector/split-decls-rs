@@ -4,4 +4,4 @@ macro_rules! StructureNodeKind {
     };
 }
 
-StructureNodeKind!()
+StructureNodeKind!();

@@ -4,4 +4,4 @@ macro_rules! OGHAM {
     };
 }
 
-OGHAM!()
+OGHAM!();

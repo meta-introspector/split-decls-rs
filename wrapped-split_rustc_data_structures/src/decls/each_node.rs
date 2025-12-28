@@ -4,4 +4,4 @@ macro_rules! each_node {
     };
 }
 
-each_node!()
+each_node!();

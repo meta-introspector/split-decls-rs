@@ -11,4 +11,4 @@ macro_rules! REG_OPTION_VOLATILE {
     };
 }
 
-REG_OPTION_VOLATILE!()
+REG_OPTION_VOLATILE!();

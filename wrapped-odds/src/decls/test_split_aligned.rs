@@ -4,4 +4,4 @@ macro_rules! test_split_aligned {
     };
 }
 
-test_split_aligned!()
+test_split_aligned!();

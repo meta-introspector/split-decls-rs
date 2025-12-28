@@ -4,4 +4,4 @@ macro_rules! InputStruct {
     };
 }
 
-InputStruct!()
+InputStruct!();

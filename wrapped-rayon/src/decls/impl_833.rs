@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        SkipAnyFolder!();
         Folder!();
+        SkipAnyFolder!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_833 {
     };
 }
 
-impl_833!()
+impl_833!();

@@ -11,4 +11,4 @@ macro_rules! R_ARM_TLS_DESC {
     };
 }
 
-R_ARM_TLS_DESC!()
+R_ARM_TLS_DESC!();

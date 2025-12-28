@@ -11,4 +11,4 @@ macro_rules! build_uuid {
     };
 }
 
-build_uuid!()
+build_uuid!();

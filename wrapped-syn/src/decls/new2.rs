@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        ErrorMessage!();
         Error!();
         ThreadBound!();
+        ErrorMessage!();
         SpanRange!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! new2 {
     };
 }
 
-new2!()
+new2!();

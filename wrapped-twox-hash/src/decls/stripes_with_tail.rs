@@ -4,4 +4,4 @@ macro_rules! stripes_with_tail {
     };
 }
 
-stripes_with_tail!()
+stripes_with_tail!();

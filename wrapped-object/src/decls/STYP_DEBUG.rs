@@ -4,4 +4,4 @@ macro_rules! STYP_DEBUG {
     };
 }
 
-STYP_DEBUG!()
+STYP_DEBUG!();

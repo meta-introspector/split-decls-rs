@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        ThompsonRef!();
         Transition!();
-        Utf8Compiler!();
         Utf8LastTransition!();
-        Utf8Node!();
-        Builder!();
+        ThompsonRef!();
         Utf8State!();
-        BuildError!();
+        Utf8Node!();
+        Utf8Compiler!();
         StateID!();
+        Builder!();
+        BuildError!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_478 {
     };
 }
 
-impl_478!()
+impl_478!();

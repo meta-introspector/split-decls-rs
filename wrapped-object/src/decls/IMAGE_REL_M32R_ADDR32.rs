@@ -4,4 +4,4 @@ macro_rules! IMAGE_REL_M32R_ADDR32 {
     };
 }
 
-IMAGE_REL_M32R_ADDR32!()
+IMAGE_REL_M32R_ADDR32!();

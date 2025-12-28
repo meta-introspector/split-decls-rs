@@ -4,4 +4,4 @@ macro_rules! UnusedVariableStringInterp {
     };
 }
 
-UnusedVariableStringInterp!()
+UnusedVariableStringInterp!();

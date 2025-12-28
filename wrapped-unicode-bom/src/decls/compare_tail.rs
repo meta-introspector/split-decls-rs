@@ -4,4 +4,4 @@ macro_rules! compare_tail {
     };
 }
 
-compare_tail!()
+compare_tail!();

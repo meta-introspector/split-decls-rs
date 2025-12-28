@@ -4,4 +4,4 @@ macro_rules! cwm_impl {
     };
 }
 
-cwm_impl!()
+cwm_impl!();

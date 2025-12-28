@@ -4,4 +4,4 @@ macro_rules! SimpleCaseFolder {
     };
 }
 
-SimpleCaseFolder!()
+SimpleCaseFolder!();

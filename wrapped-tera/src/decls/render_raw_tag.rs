@@ -11,4 +11,4 @@ macro_rules! render_raw_tag {
     };
 }
 
-render_raw_tag!()
+render_raw_tag!();

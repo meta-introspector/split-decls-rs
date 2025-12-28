@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        ConstraintConversion!();
         UniversalRegionRelations!();
         UniversalRegionRelationsBuilder!();
         Locations!();
         CreateResult!();
-        ConstraintConversion!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_434 {
     };
 }
 
-impl_434!()
+impl_434!();

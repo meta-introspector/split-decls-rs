@@ -11,4 +11,4 @@ macro_rules! for_each_field {
     };
 }
 
-for_each_field!()
+for_each_field!();

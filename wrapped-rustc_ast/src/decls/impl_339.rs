@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        FormatArgument!();
         FormatArgumentKind!();
         FormatArguments!();
+        FormatArgument!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_339 {
     };
 }
 
-impl_339!()
+impl_339!();

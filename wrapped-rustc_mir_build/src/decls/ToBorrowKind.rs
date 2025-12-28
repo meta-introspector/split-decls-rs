@@ -4,4 +4,4 @@ macro_rules! ToBorrowKind {
     };
 }
 
-ToBorrowKind!()
+ToBorrowKind!();

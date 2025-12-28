@@ -4,4 +4,4 @@ macro_rules! HasTypeFlagsVisitor {
     };
 }
 
-HasTypeFlagsVisitor!()
+HasTypeFlagsVisitor!();

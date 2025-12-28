@@ -4,4 +4,4 @@ macro_rules! CountingReader {
     };
 }
 
-CountingReader!()
+CountingReader!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        RwLockReadGuard!();
         RwLock!();
+        RwLockReadGuard!();
         RwLockWriteGuard!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_313 {
     };
 }
 
-impl_313!()
+impl_313!();

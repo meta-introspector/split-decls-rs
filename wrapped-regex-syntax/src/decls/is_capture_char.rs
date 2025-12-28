@@ -4,4 +4,4 @@ macro_rules! is_capture_char {
     };
 }
 
-is_capture_char!()
+is_capture_char!();

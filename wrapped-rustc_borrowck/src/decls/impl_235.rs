@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        WriteKind!();
-        LocalMutationIsAllowed!();
-        AccessDepth!();
         StorageDeadOrDrop!();
         LoanInvalidationsGenerator!();
+        LocalMutationIsAllowed!();
+        WriteKind!();
+        AccessDepth!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_235 {
     };
 }
 
-impl_235!()
+impl_235!();

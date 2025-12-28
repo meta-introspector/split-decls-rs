@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Ctxt!();
         Style!();
         Field!();
+        Ctxt!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! check_flatten_field {
     };
 }
 
-check_flatten_field!()
+check_flatten_field!();

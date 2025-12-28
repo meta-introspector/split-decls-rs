@@ -4,4 +4,4 @@ macro_rules! ON {
     };
 }
 
-ON!()
+ON!();

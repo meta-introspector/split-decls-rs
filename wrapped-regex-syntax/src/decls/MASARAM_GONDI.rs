@@ -4,4 +4,4 @@ macro_rules! MASARAM_GONDI {
     };
 }
 
-MASARAM_GONDI!()
+MASARAM_GONDI!();

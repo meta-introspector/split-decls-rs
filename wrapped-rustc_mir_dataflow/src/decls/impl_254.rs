@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        PlaceCollector!();
         TrackElem!();
+        PlaceCollector!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_254 {
     };
 }
 
-impl_254!()
+impl_254!();

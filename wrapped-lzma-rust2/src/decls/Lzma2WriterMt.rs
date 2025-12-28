@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Lzma2Options!();
         WorkPool!();
-        WorkUnit!();
+        Lzma2Options!();
         Write!();
+        WorkUnit!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! Lzma2WriterMt {
     };
 }
 
-Lzma2WriterMt!()
+Lzma2WriterMt!();

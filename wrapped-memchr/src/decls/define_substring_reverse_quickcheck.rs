@@ -4,4 +4,4 @@ macro_rules! define_substring_reverse_quickcheck {
     };
 }
 
-define_substring_reverse_quickcheck!()
+define_substring_reverse_quickcheck!();

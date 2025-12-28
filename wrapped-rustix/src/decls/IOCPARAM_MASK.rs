@@ -11,4 +11,4 @@ macro_rules! IOCPARAM_MASK {
     };
 }
 
-IOCPARAM_MASK!()
+IOCPARAM_MASK!();

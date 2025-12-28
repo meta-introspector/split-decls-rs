@@ -4,4 +4,4 @@ macro_rules! AssocItemQSelf {
     };
 }
 
-AssocItemQSelf!()
+AssocItemQSelf!();

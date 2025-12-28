@@ -4,4 +4,4 @@ macro_rules! not_testable_error {
     };
 }
 
-not_testable_error!()
+not_testable_error!();

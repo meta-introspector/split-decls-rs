@@ -4,4 +4,4 @@ macro_rules! PR2 {
     };
 }
 
-PR2!()
+PR2!();

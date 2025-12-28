@@ -4,4 +4,4 @@ macro_rules! C_HIDEXT {
     };
 }
 
-C_HIDEXT!()
+C_HIDEXT!();

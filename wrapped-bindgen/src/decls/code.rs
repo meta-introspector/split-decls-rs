@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Decode!();
-        Row!();
         File!();
+        Row!();
+        Decode!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! code {
     };
 }
 
-code!()
+code!();

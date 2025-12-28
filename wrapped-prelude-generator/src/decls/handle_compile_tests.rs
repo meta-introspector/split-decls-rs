@@ -11,4 +11,4 @@ macro_rules! handle_compile_tests {
     };
 }
 
-handle_compile_tests!()
+handle_compile_tests!();

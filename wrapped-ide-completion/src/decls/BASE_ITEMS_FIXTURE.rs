@@ -21,4 +21,4 @@ union Union { field: i32 }
     };
 }
 
-BASE_ITEMS_FIXTURE!()
+BASE_ITEMS_FIXTURE!();

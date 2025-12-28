@@ -4,4 +4,4 @@ macro_rules! TupleCollect {
     };
 }
 
-TupleCollect!()
+TupleCollect!();

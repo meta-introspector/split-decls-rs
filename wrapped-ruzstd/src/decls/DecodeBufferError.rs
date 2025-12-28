@@ -4,4 +4,4 @@ macro_rules! DecodeBufferError {
     };
 }
 
-DecodeBufferError!()
+DecodeBufferError!();

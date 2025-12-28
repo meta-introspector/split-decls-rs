@@ -4,4 +4,4 @@ macro_rules! visitable {
     };
 }
 
-visitable!()
+visitable!();

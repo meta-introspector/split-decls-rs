@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Error!();
         Mmap!();
-        OwnedSlice!();
         SelfProfiler!();
+        OwnedSlice!();
+        Error!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! macro_266 {
     };
 }
 
-macro_266!()
+macro_266!();

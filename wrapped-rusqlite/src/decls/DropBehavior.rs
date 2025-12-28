@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Savepoint!();
         Transaction!();
+        Savepoint!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! DropBehavior {
     };
 }
 
-DropBehavior!()
+DropBehavior!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        State!();
         InflateStream!();
+        State!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! end {
     };
 }
 
-end!()
+end!();

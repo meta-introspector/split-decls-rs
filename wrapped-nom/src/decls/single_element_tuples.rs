@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Error!();
         ErrorKind!();
         Err!();
         Parser!();
+        Error!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! single_element_tuples {
     };
 }
 
-single_element_tuples!()
+single_element_tuples!();

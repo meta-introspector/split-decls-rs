@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         ChangeFixture!();
-        SourceRootKind!();
         FileMeta!();
+        SourceRootKind!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_5 {
     };
 }
 
-impl_5!()
+impl_5!();

@@ -4,4 +4,4 @@ macro_rules! needs_drop {
     };
 }
 
-needs_drop!()
+needs_drop!();

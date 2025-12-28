@@ -4,4 +4,4 @@ macro_rules! make_vec {
     };
 }
 
-make_vec!()
+make_vec!();

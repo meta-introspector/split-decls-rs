@@ -4,4 +4,4 @@ macro_rules! blocking_check {
     };
 }
 
-blocking_check!()
+blocking_check!();

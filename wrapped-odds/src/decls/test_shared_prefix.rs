@@ -4,4 +4,4 @@ macro_rules! test_shared_prefix {
     };
 }
 
-test_shared_prefix!()
+test_shared_prefix!();

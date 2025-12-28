@@ -4,4 +4,4 @@ macro_rules! align_u32 {
     };
 }
 
-align_u32!()
+align_u32!();

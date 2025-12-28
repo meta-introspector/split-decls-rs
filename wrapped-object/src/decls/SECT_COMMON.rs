@@ -4,4 +4,4 @@ macro_rules! SECT_COMMON {
     };
 }
 
-SECT_COMMON!()
+SECT_COMMON!();

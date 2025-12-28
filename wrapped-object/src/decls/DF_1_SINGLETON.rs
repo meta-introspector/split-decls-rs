@@ -4,4 +4,4 @@ macro_rules! DF_1_SINGLETON {
     };
 }
 
-DF_1_SINGLETON!()
+DF_1_SINGLETON!();

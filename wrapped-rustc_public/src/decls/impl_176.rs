@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Stable!();
-        BridgeTys!();
         GenericArgKind!();
+        BridgeTys!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_176 {
     };
 }
 
-impl_176!()
+impl_176!();

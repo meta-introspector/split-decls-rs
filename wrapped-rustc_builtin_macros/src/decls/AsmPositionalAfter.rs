@@ -4,4 +4,4 @@ macro_rules! AsmPositionalAfter {
     };
 }
 
-AsmPositionalAfter!()
+AsmPositionalAfter!();

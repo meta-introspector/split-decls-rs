@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         HuffmanScratch!();
-        DictionaryDecodeError!();
         FSEScratch!();
+        DictionaryDecodeError!();
         Dictionary!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_147 {
     };
 }
 
-impl_147!()
+impl_147!();

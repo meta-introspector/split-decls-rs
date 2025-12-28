@@ -4,4 +4,4 @@ macro_rules! damerau_levenshtein {
     };
 }
 
-damerau_levenshtein!()
+damerau_levenshtein!();

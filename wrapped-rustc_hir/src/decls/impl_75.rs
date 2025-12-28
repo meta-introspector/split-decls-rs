@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        MacroKinds!();
-        PrimTy!();
-        Mod!();
-        Namespace!();
-        Res!();
-        CtorKind!();
         DefKind!();
+        Namespace!();
+        Mod!();
+        CtorKind!();
+        MacroKinds!();
+        Res!();
+        PrimTy!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_75 {
     };
 }
 
-impl_75!()
+impl_75!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Visitable!();
         Ty!();
+        Visitable!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! generate_list_visit_fns {
     };
 }
 
-generate_list_visit_fns!()
+generate_list_visit_fns!();

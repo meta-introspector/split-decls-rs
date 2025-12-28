@@ -12,4 +12,4 @@ macro_rules! process_blocks {
     };
 }
 
-process_blocks!()
+process_blocks!();

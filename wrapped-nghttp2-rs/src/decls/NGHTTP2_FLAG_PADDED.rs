@@ -4,4 +4,4 @@ macro_rules! NGHTTP2_FLAG_PADDED {
     };
 }
 
-NGHTTP2_FLAG_PADDED!()
+NGHTTP2_FLAG_PADDED!();

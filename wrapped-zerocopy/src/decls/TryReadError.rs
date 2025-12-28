@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        SizeError!();
-        ConvertError!();
         TryFromBytes!();
+        ConvertError!();
+        SizeError!();
         ValidityError!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! TryReadError {
     };
 }
 
-TryReadError!()
+TryReadError!();

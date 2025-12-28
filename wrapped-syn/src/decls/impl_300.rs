@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Lifetime!();
         LifetimesMut!();
+        Lifetime!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_300 {
     };
 }
 
-impl_300!()
+impl_300!();

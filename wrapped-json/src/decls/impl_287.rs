@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        Value!();
-        Number!();
-        KeyClass!();
-        KeyClassifier!();
-        RawValue!();
-        Result!();
-        Map!();
-        Error!();
         Formatter!();
+        Value!();
+        KeyClassifier!();
+        KeyClass!();
+        RawValue!();
+        Map!();
+        Result!();
+        Error!();
+        Number!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_287 {
     };
 }
 
-impl_287!()
+impl_287!();

@@ -1,18 +1,18 @@
 macro_rules! deps {
     () => {
         BigEndian!();
-        KnownLayout!();
-        FromBytes!();
-        IntoBytes!();
-        Unaligned!();
-        NativeEndian!();
-        ByteOrder!();
-        Order!();
         NetworkEndian!();
-        FromZeros!();
-        TryFromBytes!();
+        FromBytes!();
         LittleEndian!();
         Immutable!();
+        Order!();
+        NativeEndian!();
+        Unaligned!();
+        ByteOrder!();
+        FromZeros!();
+        TryFromBytes!();
+        IntoBytes!();
+        KnownLayout!();
     };
 }
 
@@ -49,4 +49,4 @@ example of how it can be used for parsing UDP packets.
     };
 }
 
-define_type!()
+define_type!();

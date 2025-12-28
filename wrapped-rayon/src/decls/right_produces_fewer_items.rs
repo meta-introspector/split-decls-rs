@@ -4,4 +4,4 @@ macro_rules! right_produces_fewer_items {
     };
 }
 
-right_produces_fewer_items!()
+right_produces_fewer_items!();

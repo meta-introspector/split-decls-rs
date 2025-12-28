@@ -1,18 +1,18 @@
 macro_rules! deps {
     () => {
-        DnsLength!();
-        ProcessingError!();
+        Errors!();
         InternalCaller!();
-        ProcessingSuccess!();
-        Hyphens!();
-        AlreadyAsciiLabel!();
+        DnsLength!();
         Decoder!();
+        Hyphens!();
         PunycodeClassification!();
         ErrorPolicy!();
-        Uts46!();
-        AsciiDenyList!();
         RtlNumeralState!();
-        Errors!();
+        ProcessingSuccess!();
+        Uts46!();
+        ProcessingError!();
+        AlreadyAsciiLabel!();
+        AsciiDenyList!();
     };
 }
 
@@ -23,4 +23,4 @@ macro_rules! impl_77 {
     };
 }
 
-impl_77!()
+impl_77!();

@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
+        TableHeader!();
         Table!();
+        DeValue!();
+        State!();
+        DeArray!();
+        Array!();
         Entry!();
         DeString!();
         TraceScope!();
-        State!();
-        TableHeader!();
-        Array!();
-        DeArray!();
-        DeValue!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_239 {
     };
 }
 
-impl_239!()
+impl_239!();

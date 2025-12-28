@@ -4,4 +4,4 @@ macro_rules! SECTION_ALIGNMENT {
     };
 }
 
-SECTION_ALIGNMENT!()
+SECTION_ALIGNMENT!();

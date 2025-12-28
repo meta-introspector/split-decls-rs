@@ -4,4 +4,4 @@ macro_rules! hash_ptr {
     };
 }
 
-hash_ptr!()
+hash_ptr!();

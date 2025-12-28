@@ -4,4 +4,4 @@ macro_rules! message_expansion_error {
     };
 }
 
-message_expansion_error!()
+message_expansion_error!();

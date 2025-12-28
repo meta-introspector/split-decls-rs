@@ -4,4 +4,4 @@ macro_rules! NT_LWPSINFO {
     };
 }
 
-NT_LWPSINFO!()
+NT_LWPSINFO!();

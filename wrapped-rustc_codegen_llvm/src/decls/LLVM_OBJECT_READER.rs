@@ -4,4 +4,4 @@ macro_rules! LLVM_OBJECT_READER {
     };
 }
 
-LLVM_OBJECT_READER!()
+LLVM_OBJECT_READER!();

@@ -11,4 +11,4 @@ macro_rules! safe_remove_file {
     };
 }
 
-safe_remove_file!()
+safe_remove_file!();

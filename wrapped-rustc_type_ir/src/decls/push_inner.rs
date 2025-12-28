@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        ConstKind!();
-        TermKind!();
-        Ty!();
+        ExistentialPredicate!();
         GenericArg!();
         GenericArgKind!();
-        TypeWalkerStack!();
-        ExistentialPredicate!();
-        Interner!();
+        TermKind!();
+        Ty!();
         Const!();
+        ConstKind!();
+        TypeWalkerStack!();
+        Interner!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! push_inner {
     };
 }
 
-push_inner!()
+push_inner!();

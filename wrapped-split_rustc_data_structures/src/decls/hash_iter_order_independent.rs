@@ -12,4 +12,4 @@ macro_rules! hash_iter_order_independent {
     };
 }
 
-hash_iter_order_independent!()
+hash_iter_order_independent!();

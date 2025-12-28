@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Node!();
-        GraphError!();
         Graph!();
+        GraphError!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_675 {
     };
 }
 
-impl_675!()
+impl_675!();

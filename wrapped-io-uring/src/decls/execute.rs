@@ -4,4 +4,4 @@ macro_rules! execute {
     };
 }
 
-execute!()
+execute!();

@@ -4,4 +4,4 @@ macro_rules! __pin_project_make_proj_field_ref {
     };
 }
 
-__pin_project_make_proj_field_ref!()
+__pin_project_make_proj_field_ref!();

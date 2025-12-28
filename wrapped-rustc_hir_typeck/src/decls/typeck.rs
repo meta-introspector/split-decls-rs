@@ -4,4 +4,4 @@ macro_rules! typeck {
     };
 }
 
-typeck!()
+typeck!();

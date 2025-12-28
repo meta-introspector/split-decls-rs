@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Error!();
         Filter!();
+        Error!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! try_get_value {
     };
 }
 
-try_get_value!()
+try_get_value!();

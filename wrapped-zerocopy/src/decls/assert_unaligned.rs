@@ -4,4 +4,4 @@ macro_rules! assert_unaligned {
     };
 }
 
-assert_unaligned!()
+assert_unaligned!();

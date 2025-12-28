@@ -4,4 +4,4 @@ macro_rules! ChangeAnnotation {
     };
 }
 
-ChangeAnnotation!()
+ChangeAnnotation!();

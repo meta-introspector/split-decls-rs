@@ -4,4 +4,4 @@ macro_rules! SHT_MIPS_EH_REGION {
     };
 }
 
-SHT_MIPS_EH_REGION!()
+SHT_MIPS_EH_REGION!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        MultiProduct!();
-        MultiProductIter!();
         MultiProductInner!();
+        MultiProductIter!();
+        MultiProduct!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! multi_cartesian_product {
     };
 }
 
-multi_cartesian_product!()
+multi_cartesian_product!();

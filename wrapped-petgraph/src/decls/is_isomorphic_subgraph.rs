@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Matching!();
         EdgeType!();
         Graph!();
         Subgraph!();
+        Matching!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! is_isomorphic_subgraph {
     };
 }
 
-is_isomorphic_subgraph!()
+is_isomorphic_subgraph!();

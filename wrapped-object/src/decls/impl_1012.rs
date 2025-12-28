@@ -1,47 +1,47 @@
 macro_rules! deps {
     () => {
-        RelocationKind!();
-        Error!();
-        SymbolId!();
-        U64!();
-        SectionHeader64!();
-        FileFlags!();
-        SymbolScope!();
-        SectionKind!();
-        SectionFlags!();
-        SectionId!();
-        AddressSize!();
-        SectionOffsets!();
-        Object!();
-        SectionHeader32!();
-        CsectAux32!();
-        RelocationFlags!();
-        U32!();
-        FileHeader64!();
-        FileHeader32!();
-        Symbol32!();
-        SymbolFlags!();
-        CsectAux64!();
-        SymbolKind!();
-        WritableBuffer!();
-        Symbol64!();
-        FileAux64!();
-        Section!();
-        Relocation!();
-        Rel32!();
-        GnuProperty!();
-        SymbolOffsets!();
-        Symbol!();
-        U16!();
-        SymbolSection!();
-        Rel64!();
-        I16!();
         StringTable!();
-        FileAux32!();
-        File!();
+        Rel32!();
+        Section!();
+        I16!();
+        Relocation!();
+        Symbol32!();
+        SectionHeader32!();
+        U64!();
+        CsectAux64!();
+        SymbolFlags!();
+        U32!();
+        WritableBuffer!();
+        SymbolOffsets!();
         Note!();
+        Rel64!();
+        Error!();
+        FileAux64!();
+        SectionHeader64!();
+        SectionId!();
+        SymbolScope!();
         StandardSection!();
+        FileAux32!();
+        Symbol!();
+        SymbolId!();
+        FileHeader32!();
+        File!();
+        FileHeader64!();
+        RelocationFlags!();
         Result!();
+        FileFlags!();
+        SymbolKind!();
+        AddressSize!();
+        Object!();
+        CsectAux32!();
+        U16!();
+        SectionFlags!();
+        GnuProperty!();
+        Symbol64!();
+        SymbolSection!();
+        RelocationKind!();
+        SectionOffsets!();
+        SectionKind!();
     };
 }
 
@@ -52,4 +52,4 @@ macro_rules! impl_1012 {
     };
 }
 
-impl_1012!()
+impl_1012!();

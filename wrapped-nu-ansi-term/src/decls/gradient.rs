@@ -4,4 +4,4 @@ macro_rules! gradient {
     };
 }
 
-gradient!()
+gradient!();

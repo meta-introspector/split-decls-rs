@@ -4,4 +4,4 @@ macro_rules! maybe_polyfill {
     };
 }
 
-maybe_polyfill!()
+maybe_polyfill!();

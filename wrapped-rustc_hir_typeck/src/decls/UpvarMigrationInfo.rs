@@ -4,4 +4,4 @@ macro_rules! UpvarMigrationInfo {
     };
 }
 
-UpvarMigrationInfo!()
+UpvarMigrationInfo!();

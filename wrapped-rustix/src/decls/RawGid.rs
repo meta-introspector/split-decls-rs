@@ -4,4 +4,4 @@ macro_rules! RawGid {
     };
 }
 
-RawGid!()
+RawGid!();

@@ -4,4 +4,4 @@ macro_rules! test_native_libs_tracking_hash_different_values {
     };
 }
 
-test_native_libs_tracking_hash_different_values!()
+test_native_libs_tracking_hash_different_values!();

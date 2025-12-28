@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Context!();
         Tera!();
+        Context!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! make_sure_not_to_delete_whitespaces {
     };
 }
 
-make_sure_not_to_delete_whitespaces!()
+make_sure_not_to_delete_whitespaces!();

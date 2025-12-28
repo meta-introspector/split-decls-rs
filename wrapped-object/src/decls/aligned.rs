@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
         Result!();
-        Pod!();
         U64!();
-        I64!();
-        I32!();
-        Endian!();
-        I16!();
-        U16!();
         U32!();
+        U16!();
+        I16!();
+        Endian!();
+        I64!();
+        Pod!();
+        I32!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! aligned {
     };
 }
 
-aligned!()
+aligned!();

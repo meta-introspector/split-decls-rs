@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        FileHeader32!();
         XcoffSectionIterator!();
+        FileHeader32!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! XcoffSectionIterator32 {
     };
 }
 
-XcoffSectionIterator32!()
+XcoffSectionIterator32!();

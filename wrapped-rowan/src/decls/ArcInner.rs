@@ -4,4 +4,4 @@ macro_rules! ArcInner {
     };
 }
 
-ArcInner!()
+ArcInner!();

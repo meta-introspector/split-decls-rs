@@ -4,4 +4,4 @@ macro_rules! fingerprint {
     };
 }
 
-fingerprint!()
+fingerprint!();

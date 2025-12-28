@@ -4,4 +4,4 @@ macro_rules! offset_of_union {
     };
 }
 
-offset_of_union!()
+offset_of_union!();

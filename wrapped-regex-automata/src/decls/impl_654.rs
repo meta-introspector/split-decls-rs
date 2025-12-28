@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        Match!();
-        MatchError!();
-        Searcher!();
-        DFA!();
-        TryCapturesIter!();
-        PikeVM!();
-        Input!();
         TryHalfMatchesIter!();
-        Captures!();
+        DFA!();
+        Input!();
+        Match!();
+        Searcher!();
+        MatchError!();
+        TryCapturesIter!();
         TryMatchesIter!();
+        Captures!();
         HalfMatch!();
+        PikeVM!();
     };
 }
 
@@ -23,4 +23,4 @@ macro_rules! impl_654 {
     };
 }
 
-impl_654!()
+impl_654!();

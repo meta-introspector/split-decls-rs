@@ -4,4 +4,4 @@ macro_rules! extract_definitions_from_docs {
     };
 }
 
-extract_definitions_from_docs!()
+extract_definitions_from_docs!();

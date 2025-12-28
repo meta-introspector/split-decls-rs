@@ -4,4 +4,4 @@ macro_rules! DEFAULT_VALUE_DECOR {
     };
 }
 
-DEFAULT_VALUE_DECOR!()
+DEFAULT_VALUE_DECOR!();

@@ -6,4 +6,4 @@ macro_rules! match_struct_instantiation {
     };
 }
 
-match_struct_instantiation!()
+match_struct_instantiation!();

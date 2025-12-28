@@ -4,4 +4,4 @@ macro_rules! discover_rust_lib_src_dir {
     };
 }
 
-discover_rust_lib_src_dir!()
+discover_rust_lib_src_dir!();

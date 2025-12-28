@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Entry!();
         Timespec!();
+        Entry!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! macro_59 {
     };
 }
 
-macro_59!()
+macro_59!();

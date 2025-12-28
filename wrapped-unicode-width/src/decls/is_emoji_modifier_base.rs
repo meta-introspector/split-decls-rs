@@ -4,4 +4,4 @@ macro_rules! is_emoji_modifier_base {
     };
 }
 
-is_emoji_modifier_base!()
+is_emoji_modifier_base!();

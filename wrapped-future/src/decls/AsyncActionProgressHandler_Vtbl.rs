@@ -4,4 +4,4 @@ macro_rules! AsyncActionProgressHandler_Vtbl {
     };
 }
 
-AsyncActionProgressHandler_Vtbl!()
+AsyncActionProgressHandler_Vtbl!();

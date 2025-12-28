@@ -4,4 +4,4 @@ macro_rules! ecc {
     };
 }
 
-ecc!()
+ecc!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Expr!();
-        WS!();
         Node!();
+        WS!();
+        Expr!();
         ExprVal!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! parse_variable_with_whitespace_trimming {
     };
 }
 
-parse_variable_with_whitespace_trimming!()
+parse_variable_with_whitespace_trimming!();

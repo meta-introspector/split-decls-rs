@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ValueRef!();
         PreUpdateOldValueAccessor!();
+        ValueRef!();
         Result!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_118 {
     };
 }
 
-impl_118!()
+impl_118!();

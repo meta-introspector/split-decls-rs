@@ -12,4 +12,4 @@ macro_rules! ioctl_getflags {
     };
 }
 
-ioctl_getflags!()
+ioctl_getflags!();

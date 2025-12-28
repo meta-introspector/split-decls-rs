@@ -11,4 +11,4 @@ macro_rules! print_disp {
     };
 }
 
-print_disp!()
+print_disp!();

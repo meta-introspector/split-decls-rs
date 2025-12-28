@@ -4,4 +4,4 @@ macro_rules! eigenform_verify {
     };
 }
 
-eigenform_verify!()
+eigenform_verify!();

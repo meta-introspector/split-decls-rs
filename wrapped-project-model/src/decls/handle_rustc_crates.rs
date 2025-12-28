@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        CfgOverrides!();
-        WorkspaceBuildScripts!();
-        TargetKind!();
         CargoWorkspace!();
-        FileLoader!();
+        CfgOverrides!();
         SysrootPublicDeps!();
         Package!();
+        FileLoader!();
+        WorkspaceBuildScripts!();
+        TargetKind!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! handle_rustc_crates {
     };
 }
 
-handle_rustc_crates!()
+handle_rustc_crates!();

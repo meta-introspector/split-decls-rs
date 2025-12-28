@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        IndexType!();
+        Graph!();
+        EdgeProperty!();
         SerGraph!();
         EdgeType!();
+        IndexType!();
         IntoSerializable!();
-        EdgeProperty!();
-        Graph!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_640 {
     };
 }
 
-impl_640!()
+impl_640!();

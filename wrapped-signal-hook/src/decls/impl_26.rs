@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        SignalIterator!();
-        SignalDelivery!();
         Pending!();
-        PollResult!();
         Exfiltrator!();
         Handle!();
+        SignalDelivery!();
+        SignalIterator!();
+        PollResult!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_26 {
     };
 }
 
-impl_26!()
+impl_26!();

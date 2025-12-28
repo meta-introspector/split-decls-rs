@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         Config!();
-        Slot!();
-        Shard!();
         Tid!();
+        Shard!();
         Clear!();
+        Slot!();
         Local!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! impl_153 {
     };
 }
 
-impl_153!()
+impl_153!();

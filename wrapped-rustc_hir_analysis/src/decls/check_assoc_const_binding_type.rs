@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         ParamInTyOfAssocConstBinding!();
-        HirTyLowerer!();
-        TyOfAssocConstBindingNote!();
         EscapingBoundVarInTyOfAssocConstBinding!();
         GenericParamAndBoundVarCollector!();
+        HirTyLowerer!();
+        TyOfAssocConstBindingNote!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! check_assoc_const_binding_type {
     };
 }
 
-check_assoc_const_binding_type!()
+check_assoc_const_binding_type!();

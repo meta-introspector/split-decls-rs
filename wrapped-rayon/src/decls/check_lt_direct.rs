@@ -4,4 +4,4 @@ macro_rules! check_lt_direct {
     };
 }
 
-check_lt_direct!()
+check_lt_direct!();

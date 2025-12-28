@@ -4,4 +4,4 @@ macro_rules! CanonicalCombiningClassMap {
     };
 }
 
-CanonicalCombiningClassMap!()
+CanonicalCombiningClassMap!();

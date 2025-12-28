@@ -4,4 +4,4 @@ macro_rules! zip_longest {
     };
 }
 
-zip_longest!()
+zip_longest!();

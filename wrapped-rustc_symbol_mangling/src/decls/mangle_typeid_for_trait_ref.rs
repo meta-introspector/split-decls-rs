@@ -11,4 +11,4 @@ macro_rules! mangle_typeid_for_trait_ref {
     };
 }
 
-mangle_typeid_for_trait_ref!()
+mangle_typeid_for_trait_ref!();

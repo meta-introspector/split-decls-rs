@@ -4,4 +4,4 @@ macro_rules! PR_PAC_GET_ENABLED_KEYS {
     };
 }
 
-PR_PAC_GET_ENABLED_KEYS!()
+PR_PAC_GET_ENABLED_KEYS!();

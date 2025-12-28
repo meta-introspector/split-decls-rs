@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        InstructionsMinusIrqs!();
         Instructions!();
+        InstructionsMinusIrqs!();
         InstructionsMinusRaw0420!();
         WallTime!();
         Counter!();
@@ -15,4 +15,4 @@ macro_rules! impl_3 {
     };
 }
 
-impl_3!()
+impl_3!();

@@ -4,4 +4,4 @@ macro_rules! REGION_START {
     };
 }
 
-REGION_START!()
+REGION_START!();

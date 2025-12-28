@@ -4,4 +4,4 @@ macro_rules! R_AARCH64_LD64_GOT_LO12_NC {
     };
 }
 
-R_AARCH64_LD64_GOT_LO12_NC!()
+R_AARCH64_LD64_GOT_LO12_NC!();

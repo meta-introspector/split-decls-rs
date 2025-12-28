@@ -4,4 +4,4 @@ macro_rules! INTERNAL_RETRY {
     };
 }
 
-INTERNAL_RETRY!()
+INTERNAL_RETRY!();

@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         Time!();
         ControlFlow!();
-        VisitMap!();
         DfsEvent!();
+        VisitMap!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! dfs_visitor {
     };
 }
 
-dfs_visitor!()
+dfs_visitor!();

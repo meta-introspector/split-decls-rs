@@ -4,4 +4,4 @@ macro_rules! DefiningTy {
     };
 }
 
-DefiningTy!()
+DefiningTy!();

@@ -4,4 +4,4 @@ macro_rules! MONGOLIAN {
     };
 }
 
-MONGOLIAN!()
+MONGOLIAN!();

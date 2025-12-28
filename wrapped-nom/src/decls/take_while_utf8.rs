@@ -13,4 +13,4 @@ macro_rules! take_while_utf8 {
     };
 }
 
-take_while_utf8!()
+take_while_utf8!();

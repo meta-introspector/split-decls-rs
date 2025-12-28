@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Command!();
         L4BenderExportingSymbolsUnimplemented!();
-        Linker!();
+        Command!();
         L4Bender!();
+        Linker!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_126 {
     };
 }
 
-impl_126!()
+impl_126!();

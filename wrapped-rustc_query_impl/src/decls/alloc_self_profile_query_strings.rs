@@ -11,4 +11,4 @@ macro_rules! alloc_self_profile_query_strings {
     };
 }
 
-alloc_self_profile_query_strings!()
+alloc_self_profile_query_strings!();

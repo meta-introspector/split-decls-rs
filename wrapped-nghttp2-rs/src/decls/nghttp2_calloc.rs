@@ -4,4 +4,4 @@ macro_rules! nghttp2_calloc {
     };
 }
 
-nghttp2_calloc!()
+nghttp2_calloc!();

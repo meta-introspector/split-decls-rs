@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        Error!();
+        ValueDeserializer!();
+        TableMapAccess!();
         KeyDeserializer!();
         Value!();
-        Error!();
-        TableMapAccess!();
-        ValueDeserializer!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_140 {
     };
 }
 
-impl_140!()
+impl_140!();

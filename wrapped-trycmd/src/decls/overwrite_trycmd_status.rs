@@ -12,4 +12,4 @@ macro_rules! overwrite_trycmd_status {
     };
 }
 
-overwrite_trycmd_status!()
+overwrite_trycmd_status!();

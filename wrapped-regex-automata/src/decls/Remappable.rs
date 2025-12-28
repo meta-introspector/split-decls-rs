@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         DFA!();
-        StateID!();
         Remapper!();
+        StateID!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Remappable {
     };
 }
 
-Remappable!()
+Remappable!();

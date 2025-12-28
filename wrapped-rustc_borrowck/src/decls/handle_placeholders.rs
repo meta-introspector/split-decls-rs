@@ -4,4 +4,4 @@ macro_rules! handle_placeholders {
     };
 }
 
-handle_placeholders!()
+handle_placeholders!();

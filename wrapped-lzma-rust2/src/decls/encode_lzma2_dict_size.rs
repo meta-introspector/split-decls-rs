@@ -11,4 +11,4 @@ macro_rules! encode_lzma2_dict_size {
     };
 }
 
-encode_lzma2_dict_size!()
+encode_lzma2_dict_size!();

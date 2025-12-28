@@ -4,4 +4,4 @@ macro_rules! framework {
     };
 }
 
-framework!()
+framework!();

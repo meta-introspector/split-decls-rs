@@ -11,4 +11,4 @@ macro_rules! method_to_assoc_fn_call_self_adjust {
     };
 }
 
-method_to_assoc_fn_call_self_adjust!()
+method_to_assoc_fn_call_self_adjust!();

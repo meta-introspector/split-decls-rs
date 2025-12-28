@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Config!();
-        Action!();
         Active!();
+        Action!();
         Slab!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! run {
     };
 }
 
-run!()
+run!();

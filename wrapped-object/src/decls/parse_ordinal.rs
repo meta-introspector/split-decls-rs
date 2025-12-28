@@ -4,4 +4,4 @@ macro_rules! parse_ordinal {
     };
 }
 
-parse_ordinal!()
+parse_ordinal!();

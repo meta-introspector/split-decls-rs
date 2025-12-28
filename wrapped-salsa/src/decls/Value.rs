@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Configuration!();
-        Memo!();
         Durability!();
+        Memo!();
         OptionalAtomicRevision!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! Value {
     };
 }
 
-Value!()
+Value!();

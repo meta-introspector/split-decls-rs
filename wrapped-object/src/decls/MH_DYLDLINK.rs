@@ -4,4 +4,4 @@ macro_rules! MH_DYLDLINK {
     };
 }
 
-MH_DYLDLINK!()
+MH_DYLDLINK!();

@@ -4,4 +4,4 @@ macro_rules! S_LITERAL_POINTERS {
     };
 }
 
-S_LITERAL_POINTERS!()
+S_LITERAL_POINTERS!();

@@ -4,4 +4,4 @@ macro_rules! tokenize_path {
     };
 }
 
-tokenize_path!()
+tokenize_path!();

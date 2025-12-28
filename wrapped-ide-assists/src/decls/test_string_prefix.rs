@@ -4,4 +4,4 @@ macro_rules! test_string_prefix {
     };
 }
 
-test_string_prefix!()
+test_string_prefix!();

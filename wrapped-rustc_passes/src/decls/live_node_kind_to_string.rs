@@ -11,4 +11,4 @@ macro_rules! live_node_kind_to_string {
     };
 }
 
-live_node_kind_to_string!()
+live_node_kind_to_string!();

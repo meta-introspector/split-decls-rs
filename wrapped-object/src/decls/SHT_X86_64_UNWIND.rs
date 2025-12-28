@@ -4,4 +4,4 @@ macro_rules! SHT_X86_64_UNWIND {
     };
 }
 
-SHT_X86_64_UNWIND!()
+SHT_X86_64_UNWIND!();

@@ -4,4 +4,4 @@ macro_rules! ELFOSABI_FREEBSD {
     };
 }
 
-ELFOSABI_FREEBSD!()
+ELFOSABI_FREEBSD!();

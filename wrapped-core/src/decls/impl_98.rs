@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        IUnknown_Vtbl!();
-        GUID!();
-        RefCount!();
-        HRESULT!();
         IWeakReferenceSource_Vtbl!();
-        IUnknown!();
-        TearOff!();
+        RefCount!();
         IWeakReference_Vtbl!();
+        GUID!();
+        IUnknown_Vtbl!();
+        TearOff!();
+        IUnknown!();
+        HRESULT!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_98 {
     };
 }
 
-impl_98!()
+impl_98!();

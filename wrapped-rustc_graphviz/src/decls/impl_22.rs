@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        LabelledGraph!();
-        Trivial!();
         Style!();
+        LabelledGraph!();
         Edge!();
+        Trivial!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_22 {
     };
 }
 
-impl_22!()
+impl_22!();

@@ -4,4 +4,4 @@ macro_rules! CHUNK_WORDS {
     };
 }
 
-CHUNK_WORDS!()
+CHUNK_WORDS!();

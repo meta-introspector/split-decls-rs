@@ -4,4 +4,4 @@ macro_rules! AssocContainer {
     };
 }
 
-AssocContainer!()
+AssocContainer!();

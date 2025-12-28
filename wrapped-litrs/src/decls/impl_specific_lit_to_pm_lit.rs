@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Buffer!();
         Literal!();
+        Buffer!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_specific_lit_to_pm_lit {
     };
 }
 
-impl_specific_lit_to_pm_lit!()
+impl_specific_lit_to_pm_lit!();

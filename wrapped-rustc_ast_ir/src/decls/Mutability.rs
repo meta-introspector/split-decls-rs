@@ -4,4 +4,4 @@ macro_rules! Mutability {
     };
 }
 
-Mutability!()
+Mutability!();

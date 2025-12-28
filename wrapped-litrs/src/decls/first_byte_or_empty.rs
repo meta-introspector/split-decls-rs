@@ -11,4 +11,4 @@ macro_rules! first_byte_or_empty {
     };
 }
 
-first_byte_or_empty!()
+first_byte_or_empty!();

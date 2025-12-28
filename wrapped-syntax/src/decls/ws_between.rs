@@ -12,4 +12,4 @@ macro_rules! ws_between {
     };
 }
 
-ws_between!()
+ws_between!();

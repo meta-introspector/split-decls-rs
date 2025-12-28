@@ -4,4 +4,4 @@ macro_rules! HEBREW_LETTER {
     };
 }
 
-HEBREW_LETTER!()
+HEBREW_LETTER!();

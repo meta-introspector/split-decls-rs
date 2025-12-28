@@ -12,4 +12,4 @@ macro_rules! get_type_args_from_arg_list {
     };
 }
 
-get_type_args_from_arg_list!()
+get_type_args_from_arg_list!();

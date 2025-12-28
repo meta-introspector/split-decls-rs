@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Svh!();
         HashStable!();
+        Svh!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_559 {
     };
 }
 
-impl_559!()
+impl_559!();

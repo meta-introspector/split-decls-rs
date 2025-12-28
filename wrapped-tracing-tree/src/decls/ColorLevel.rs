@@ -4,4 +4,4 @@ macro_rules! ColorLevel {
     };
 }
 
-ColorLevel!()
+ColorLevel!();

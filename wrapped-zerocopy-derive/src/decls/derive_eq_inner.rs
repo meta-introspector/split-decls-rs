@@ -11,4 +11,4 @@ macro_rules! derive_eq_inner {
     };
 }
 
-derive_eq_inner!()
+derive_eq_inner!();

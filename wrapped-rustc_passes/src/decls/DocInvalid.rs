@@ -4,4 +4,4 @@ macro_rules! DocInvalid {
     };
 }
 
-DocInvalid!()
+DocInvalid!();

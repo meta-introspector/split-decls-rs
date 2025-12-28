@@ -4,4 +4,4 @@ macro_rules! DBPath {
     };
 }
 
-DBPath!()
+DBPath!();

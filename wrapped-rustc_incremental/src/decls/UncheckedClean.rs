@@ -4,4 +4,4 @@ macro_rules! UncheckedClean {
     };
 }
 
-UncheckedClean!()
+UncheckedClean!();

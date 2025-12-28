@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        PeSegmentIterator!();
         ReadRef!();
-        Item!();
-        ImageNtHeaders!();
         PeSegment!();
+        ImageNtHeaders!();
+        Item!();
+        PeSegmentIterator!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_659 {
     };
 }
 
-impl_659!()
+impl_659!();

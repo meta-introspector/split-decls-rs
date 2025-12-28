@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ThreadPool!();
         Configuration!();
+        ThreadPool!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! check_thread_pool_new {
     };
 }
 
-check_thread_pool_new!()
+check_thread_pool_new!();

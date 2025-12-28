@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Workspace!();
         Patch!();
         RegistryPatch!();
+        Workspace!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! WorkspaceManifest {
     };
 }
 
-WorkspaceManifest!()
+WorkspaceManifest!();

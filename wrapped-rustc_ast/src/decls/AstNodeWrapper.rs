@@ -4,4 +4,4 @@ macro_rules! AstNodeWrapper {
     };
 }
 
-AstNodeWrapper!()
+AstNodeWrapper!();

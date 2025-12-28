@@ -11,4 +11,4 @@ macro_rules! get_relevant_span {
     };
 }
 
-get_relevant_span!()
+get_relevant_span!();

@@ -11,4 +11,4 @@ macro_rules! handler_panics_handled_correctly {
     };
 }
 
-handler_panics_handled_correctly!()
+handler_panics_handled_correctly!();

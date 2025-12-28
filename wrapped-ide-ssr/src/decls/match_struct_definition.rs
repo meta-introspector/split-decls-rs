@@ -7,4 +7,4 @@ macro_rules! match_struct_definition {
     };
 }
 
-match_struct_definition!()
+match_struct_definition!();

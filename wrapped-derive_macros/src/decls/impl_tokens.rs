@@ -4,4 +4,4 @@ macro_rules! impl_tokens {
     };
 }
 
-impl_tokens!()
+impl_tokens!();

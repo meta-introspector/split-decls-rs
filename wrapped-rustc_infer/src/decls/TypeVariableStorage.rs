@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        TyVidSubKey!();
         TypeVariableData!();
+        TyVidSubKey!();
         TyVidEqKey!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! TypeVariableStorage {
     };
 }
 
-TypeVariableStorage!()
+TypeVariableStorage!();

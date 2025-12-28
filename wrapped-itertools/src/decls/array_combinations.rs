@@ -11,4 +11,4 @@ macro_rules! array_combinations {
     };
 }
 
-array_combinations!()
+array_combinations!();

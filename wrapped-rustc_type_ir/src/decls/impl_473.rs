@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Interner!();
         FnHeader!();
+        Interner!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_473 {
     };
 }
 
-impl_473!()
+impl_473!();

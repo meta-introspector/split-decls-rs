@@ -4,4 +4,4 @@ macro_rules! cfg_signal_internal_and_unix {
     };
 }
 
-cfg_signal_internal_and_unix!()
+cfg_signal_internal_and_unix!();

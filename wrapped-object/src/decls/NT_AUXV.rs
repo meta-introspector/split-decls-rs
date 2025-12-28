@@ -4,4 +4,4 @@ macro_rules! NT_AUXV {
     };
 }
 
-NT_AUXV!()
+NT_AUXV!();

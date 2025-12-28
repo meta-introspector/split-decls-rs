@@ -4,4 +4,4 @@ macro_rules! VER_DEF_CURRENT {
     };
 }
 
-VER_DEF_CURRENT!()
+VER_DEF_CURRENT!();

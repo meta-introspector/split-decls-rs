@@ -11,4 +11,4 @@ macro_rules! reject_outside_std {
     };
 }
 
-reject_outside_std!()
+reject_outside_std!();

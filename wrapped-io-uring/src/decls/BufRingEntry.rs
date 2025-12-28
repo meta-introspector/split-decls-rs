@@ -4,4 +4,4 @@ macro_rules! BufRingEntry {
     };
 }
 
-BufRingEntry!()
+BufRingEntry!();

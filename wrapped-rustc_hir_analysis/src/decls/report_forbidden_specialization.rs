@@ -11,4 +11,4 @@ macro_rules! report_forbidden_specialization {
     };
 }
 
-report_forbidden_specialization!()
+report_forbidden_specialization!();

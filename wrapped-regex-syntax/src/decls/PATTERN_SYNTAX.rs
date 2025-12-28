@@ -4,4 +4,4 @@ macro_rules! PATTERN_SYNTAX {
     };
 }
 
-PATTERN_SYNTAX!()
+PATTERN_SYNTAX!();

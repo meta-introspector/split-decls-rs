@@ -4,4 +4,4 @@ macro_rules! service_span {
     };
 }
 
-service_span!()
+service_span!();

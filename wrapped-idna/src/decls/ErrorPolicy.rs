@@ -4,4 +4,4 @@ macro_rules! ErrorPolicy {
     };
 }
 
-ErrorPolicy!()
+ErrorPolicy!();

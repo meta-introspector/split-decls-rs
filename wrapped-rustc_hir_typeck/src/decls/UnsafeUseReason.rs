@@ -4,4 +4,4 @@ macro_rules! UnsafeUseReason {
     };
 }
 
-UnsafeUseReason!()
+UnsafeUseReason!();

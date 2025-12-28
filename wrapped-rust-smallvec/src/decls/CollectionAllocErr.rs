@@ -4,4 +4,4 @@ macro_rules! CollectionAllocErr {
     };
 }
 
-CollectionAllocErr!()
+CollectionAllocErr!();

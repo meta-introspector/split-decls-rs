@@ -1,34 +1,34 @@
 macro_rules! deps {
     () => {
+        Arm!();
+        BinOp!();
+        InlineAsm!();
+        Type!();
         Recovered!();
-        Block!();
-        Lit!();
         Expr!();
+        RangeLimits!();
         Pat!();
         ForLoopKind!();
-        BorrowKind!();
-        RangeLimits!();
-        MethodCall!();
-        YieldKind!();
-        FormatArgs!();
-        UnOp!();
-        AssignOp!();
-        InlineAsm!();
-        MatchKind!();
-        BinOp!();
-        Arm!();
-        CaptureBy!();
-        StructExpr!();
-        Type!();
-        AnonConst!();
-        Label!();
+        Block!();
         QSelf!();
-        GenBlockKind!();
-        Closure!();
-        Path!();
-        Ty!();
         MacCall!();
+        UnOp!();
+        Lit!();
+        Path!();
+        Label!();
+        StructExpr!();
+        AssignOp!();
+        Closure!();
+        BorrowKind!();
+        GenBlockKind!();
         UnsafeBinderCastKind!();
+        CaptureBy!();
+        AnonConst!();
+        YieldKind!();
+        MatchKind!();
+        FormatArgs!();
+        Ty!();
+        MethodCall!();
     };
 }
 
@@ -39,4 +39,4 @@ macro_rules! ExprKind {
     };
 }
 
-ExprKind!()
+ExprKind!();

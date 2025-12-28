@@ -4,4 +4,4 @@ macro_rules! allocate {
     };
 }
 
-allocate!()
+allocate!();

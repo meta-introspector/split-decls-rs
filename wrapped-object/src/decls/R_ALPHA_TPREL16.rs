@@ -4,4 +4,4 @@ macro_rules! R_ALPHA_TPREL16 {
     };
 }
 
-R_ALPHA_TPREL16!()
+R_ALPHA_TPREL16!();

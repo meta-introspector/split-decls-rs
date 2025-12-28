@@ -4,4 +4,4 @@ macro_rules! bcj2 {
     };
 }
 
-bcj2!()
+bcj2!();

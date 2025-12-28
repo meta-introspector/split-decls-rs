@@ -4,4 +4,4 @@ macro_rules! TF {
     };
 }
 
-TF!()
+TF!();

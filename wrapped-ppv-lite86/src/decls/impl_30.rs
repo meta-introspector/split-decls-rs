@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        StoreBytes!();
         BSwap!();
+        StoreBytes!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_30 {
     };
 }
 
-impl_30!()
+impl_30!();

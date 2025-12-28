@@ -11,4 +11,4 @@ macro_rules! test_invalid_grow {
     };
 }
 
-test_invalid_grow!()
+test_invalid_grow!();

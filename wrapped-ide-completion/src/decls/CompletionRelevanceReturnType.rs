@@ -11,4 +11,4 @@ macro_rules! CompletionRelevanceReturnType {
     };
 }
 
-CompletionRelevanceReturnType!()
+CompletionRelevanceReturnType!();

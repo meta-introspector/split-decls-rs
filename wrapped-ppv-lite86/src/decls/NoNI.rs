@@ -4,4 +4,4 @@ macro_rules! NoNI {
     };
 }
 
-NoNI!()
+NoNI!();

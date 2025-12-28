@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        TypeKind!();
-        CodegenCx!();
         Builder!();
+        CodegenCx!();
+        TypeKind!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! generic_simd_intrinsic {
     };
 }
 
-generic_simd_intrinsic!()
+generic_simd_intrinsic!();

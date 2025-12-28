@@ -4,4 +4,4 @@ macro_rules! all_except_most_recent {
     };
 }
 
-all_except_most_recent!()
+all_except_most_recent!();

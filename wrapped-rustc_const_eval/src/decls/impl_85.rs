@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
         ImmTy!();
-        FnArg!();
-        Immediate!();
-        Machine!();
-        Frame!();
-        PlaceTy!();
         OpTy!();
+        Frame!();
+        FnArg!();
+        PlaceTy!();
         DummyMachine!();
+        Immediate!();
         InterpCx!();
+        Machine!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_85 {
     };
 }
 
-impl_85!()
+impl_85!();

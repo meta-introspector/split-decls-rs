@@ -4,4 +4,4 @@ macro_rules! N_NO_DEAD_STRIP {
     };
 }
 
-N_NO_DEAD_STRIP!()
+N_NO_DEAD_STRIP!();

@@ -2,9 +2,9 @@ macro_rules! deps {
     () => {
         TryFromBytes!();
         ConvertError!();
-        SizeError!();
-        ValidityError!();
         AlignmentError!();
+        ValidityError!();
+        SizeError!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! TryCastError {
     };
 }
 
-TryCastError!()
+TryCastError!();

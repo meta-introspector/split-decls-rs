@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        DFA!();
-        SparseSets!();
-        StateID!();
         State!();
-        StateBuilderNFA!();
+        SparseSets!();
         NFA!();
-        MatchKind!();
         Unit!();
-        Match!();
         StateBuilderEmpty!();
+        Match!();
+        StateBuilderNFA!();
+        MatchKind!();
+        StateID!();
         Look!();
+        DFA!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! next {
     };
 }
 
-next!()
+next!();

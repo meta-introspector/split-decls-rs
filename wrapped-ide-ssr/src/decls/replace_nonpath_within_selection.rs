@@ -16,4 +16,4 @@ macro_rules! replace_nonpath_within_selection {
     };
 }
 
-replace_nonpath_within_selection!()
+replace_nonpath_within_selection!();

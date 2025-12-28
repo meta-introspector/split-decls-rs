@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Default!();
-        Variant!();
         Field!();
+        Variant!();
+        Default!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! requires_default {
     };
 }
 
-requires_default!()
+requires_default!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        ATerm!();
         NInt!();
         Unsigned!();
         NonZero!();
+        ATerm!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_547 {
     };
 }
 
-impl_547!()
+impl_547!();

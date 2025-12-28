@@ -4,4 +4,4 @@ macro_rules! lex_content {
     };
 }
 
-lex_content!()
+lex_content!();

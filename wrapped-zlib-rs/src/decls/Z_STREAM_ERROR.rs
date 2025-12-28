@@ -4,4 +4,4 @@ macro_rules! Z_STREAM_ERROR {
     };
 }
 
-Z_STREAM_ERROR!()
+Z_STREAM_ERROR!();

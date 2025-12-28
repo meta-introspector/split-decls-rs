@@ -4,4 +4,4 @@ macro_rules! CYPRIOT {
     };
 }
 
-CYPRIOT!()
+CYPRIOT!();

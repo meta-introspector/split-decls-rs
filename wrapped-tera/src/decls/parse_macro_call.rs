@@ -11,4 +11,4 @@ macro_rules! parse_macro_call {
     };
 }
 
-parse_macro_call!()
+parse_macro_call!();

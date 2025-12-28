@@ -11,4 +11,4 @@ macro_rules! eq_bool {
     };
 }
 
-eq_bool!()
+eq_bool!();

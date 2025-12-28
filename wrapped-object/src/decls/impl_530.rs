@@ -1,18 +1,18 @@
 macro_rules! deps {
     () => {
-        LoadCommandIterator!();
-        BuildVersionCommand!();
-        SectionIndex!();
-        Segment!();
         Endian!();
+        BuildVersionCommand!();
+        LoadCommandIterator!();
+        ReadRef!();
+        MachOFile!();
+        MachHeader!();
+        Segment!();
+        DyldCacheImage!();
+        SectionIndex!();
+        MachOSectionInternal!();
         MachOSegmentInternal!();
         Result!();
-        MachOFile!();
         SymbolTable!();
-        MachHeader!();
-        MachOSectionInternal!();
-        DyldCacheImage!();
-        ReadRef!();
     };
 }
 
@@ -23,4 +23,4 @@ macro_rules! impl_530 {
     };
 }
 
-impl_530!()
+impl_530!();

@@ -4,4 +4,4 @@ macro_rules! R_LARCH_MARK_LA {
     };
 }
 
-R_LARCH_MARK_LA!()
+R_LARCH_MARK_LA!();

@@ -4,4 +4,4 @@ macro_rules! const_generic_impl {
     };
 }
 
-const_generic_impl!()
+const_generic_impl!();

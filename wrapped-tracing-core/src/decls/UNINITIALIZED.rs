@@ -4,4 +4,4 @@ macro_rules! UNINITIALIZED {
     };
 }
 
-UNINITIALIZED!()
+UNINITIALIZED!();

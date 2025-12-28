@@ -4,4 +4,4 @@ macro_rules! R_NIOS2_JUMP_SLOT {
     };
 }
 
-R_NIOS2_JUMP_SLOT!()
+R_NIOS2_JUMP_SLOT!();

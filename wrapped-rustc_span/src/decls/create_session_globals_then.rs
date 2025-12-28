@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        SourceMapInputs!();
         Edition!();
         SessionGlobals!();
+        SourceMapInputs!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! create_session_globals_then {
     };
 }
 
-create_session_globals_then!()
+create_session_globals_then!();

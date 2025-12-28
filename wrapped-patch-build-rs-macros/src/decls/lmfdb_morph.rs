@@ -4,4 +4,4 @@ macro_rules! lmfdb_morph {
     };
 }
 
-lmfdb_morph!()
+lmfdb_morph!();

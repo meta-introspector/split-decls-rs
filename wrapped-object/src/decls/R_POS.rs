@@ -4,4 +4,4 @@ macro_rules! R_POS {
     };
 }
 
-R_POS!()
+R_POS!();

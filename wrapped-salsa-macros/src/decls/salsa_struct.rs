@@ -4,4 +4,4 @@ macro_rules! salsa_struct {
     };
 }
 
-salsa_struct!()
+salsa_struct!();

@@ -4,4 +4,4 @@ macro_rules! PUNYCODE_PREFIX_MASK {
     };
 }
 
-PUNYCODE_PREFIX_MASK!()
+PUNYCODE_PREFIX_MASK!();

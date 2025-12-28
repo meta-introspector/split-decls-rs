@@ -4,4 +4,4 @@ macro_rules! exit_group {
     };
 }
 
-exit_group!()
+exit_group!();

@@ -4,4 +4,4 @@ macro_rules! NotParam {
     };
 }
 
-NotParam!()
+NotParam!();

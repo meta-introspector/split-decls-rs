@@ -11,4 +11,4 @@ macro_rules! deserialize_from {
     };
 }
 
-deserialize_from!()
+deserialize_from!();

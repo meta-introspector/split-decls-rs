@@ -4,4 +4,4 @@ macro_rules! VTabConfig {
     };
 }
 
-VTabConfig!()
+VTabConfig!();

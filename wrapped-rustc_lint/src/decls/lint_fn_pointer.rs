@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         UnpredictableFunctionPointerComparisons!();
-        UnpredictableFunctionPointerComparisonsSuggestion!();
         LateContext!();
         ComparisonOp!();
+        UnpredictableFunctionPointerComparisonsSuggestion!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! lint_fn_pointer {
     };
 }
 
-lint_fn_pointer!()
+lint_fn_pointer!();

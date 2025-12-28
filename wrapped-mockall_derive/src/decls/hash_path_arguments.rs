@@ -4,4 +4,4 @@ macro_rules! hash_path_arguments {
     };
 }
 
-hash_path_arguments!()
+hash_path_arguments!();

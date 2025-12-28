@@ -11,4 +11,4 @@ macro_rules! rust_disconnect {
     };
 }
 
-rust_disconnect!()
+rust_disconnect!();

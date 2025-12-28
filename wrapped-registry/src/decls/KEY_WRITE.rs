@@ -11,4 +11,4 @@ macro_rules! KEY_WRITE {
     };
 }
 
-KEY_WRITE!()
+KEY_WRITE!();

@@ -11,4 +11,4 @@ macro_rules! test_truncate_references {
     };
 }
 
-test_truncate_references!()
+test_truncate_references!();

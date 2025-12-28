@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Pretty!();
         Error!();
+        Pretty!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! to_string_pretty {
     };
 }
 
-to_string_pretty!()
+to_string_pretty!();

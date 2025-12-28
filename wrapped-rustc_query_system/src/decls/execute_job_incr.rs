@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        QueryJobId!();
+        QueryConfig!();
         Value!();
         DepNode!();
         Deps!();
         DepGraphData!();
-        QueryConfig!();
         QueryContext!();
+        QueryJobId!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! execute_job_incr {
     };
 }
 
-execute_job_incr!()
+execute_job_incr!();

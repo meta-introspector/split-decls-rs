@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        ParallelDrainRange!();
         Iter!();
         ParallelIterator!();
-        ParallelDrainRange!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! ParallelDrainFull {
     };
 }
 
-ParallelDrainFull!()
+ParallelDrainFull!();

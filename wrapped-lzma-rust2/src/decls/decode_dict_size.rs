@@ -11,4 +11,4 @@ macro_rules! decode_dict_size {
     };
 }
 
-decode_dict_size!()
+decode_dict_size!();

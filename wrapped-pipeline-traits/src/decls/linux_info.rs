@@ -4,4 +4,4 @@ macro_rules! linux_info {
     };
 }
 
-linux_info!()
+linux_info!();

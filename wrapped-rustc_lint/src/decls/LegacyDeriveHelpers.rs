@@ -4,4 +4,4 @@ macro_rules! LegacyDeriveHelpers {
     };
 }
 
-LegacyDeriveHelpers!()
+LegacyDeriveHelpers!();

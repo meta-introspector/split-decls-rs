@@ -4,4 +4,4 @@ macro_rules! demutify_arg {
     };
 }
 
-demutify_arg!()
+demutify_arg!();

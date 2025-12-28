@@ -4,4 +4,4 @@ macro_rules! R_XTENSA_OP1 {
     };
 }
 
-R_XTENSA_OP1!()
+R_XTENSA_OP1!();

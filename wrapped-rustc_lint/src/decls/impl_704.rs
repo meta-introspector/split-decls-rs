@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        NonUpperCaseGlobalSubTool!();
+        NonUpperCaseGlobalSub!();
         LateContext!();
         NonUpperCaseGlobal!();
-        NonUpperCaseGlobalSub!();
+        NonUpperCaseGlobalSubTool!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_704 {
     };
 }
 
-impl_704!()
+impl_704!();

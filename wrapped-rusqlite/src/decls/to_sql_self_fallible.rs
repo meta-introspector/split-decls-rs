@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        ToSql!();
+        Result!();
+        Error!();
         ToSqlOutput!();
         Value!();
-        Error!();
-        Result!();
-        ToSql!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! to_sql_self_fallible {
     };
 }
 
-to_sql_self_fallible!()
+to_sql_self_fallible!();

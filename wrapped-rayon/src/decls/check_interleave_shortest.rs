@@ -4,4 +4,4 @@ macro_rules! check_interleave_shortest {
     };
 }
 
-check_interleave_shortest!()
+check_interleave_shortest!();

@@ -4,4 +4,4 @@ macro_rules! __pin_project_make_unsafe_field_proj {
     };
 }
 
-__pin_project_make_unsafe_field_proj!()
+__pin_project_make_unsafe_field_proj!();

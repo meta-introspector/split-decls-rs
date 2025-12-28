@@ -4,4 +4,4 @@ macro_rules! EM_XGATE {
     };
 }
 
-EM_XGATE!()
+EM_XGATE!();

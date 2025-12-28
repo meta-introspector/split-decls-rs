@@ -4,4 +4,4 @@ macro_rules! SHA384_BLOCKSIZE {
     };
 }
 
-SHA384_BLOCKSIZE!()
+SHA384_BLOCKSIZE!();

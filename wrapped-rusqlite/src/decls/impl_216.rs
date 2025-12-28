@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Map!();
-        Result!();
         Row!();
+        Result!();
+        Map!();
         Error!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_216 {
     };
 }
 
-impl_216!()
+impl_216!();

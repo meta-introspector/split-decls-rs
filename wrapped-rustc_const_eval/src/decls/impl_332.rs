@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Machine!();
         MPlaceTy!();
+        Machine!();
+        InterpCx!();
         OffsetMode!();
         MemPlaceMeta!();
-        InterpCx!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_332 {
     };
 }
 
-impl_332!()
+impl_332!();

@@ -4,4 +4,4 @@ macro_rules! ATAN_HI {
     };
 }
 
-ATAN_HI!()
+ATAN_HI!();

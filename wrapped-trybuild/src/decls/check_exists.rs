@@ -12,4 +12,4 @@ macro_rules! check_exists {
     };
 }
 
-check_exists!()
+check_exists!();

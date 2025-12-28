@@ -4,4 +4,4 @@ macro_rules! normalize_index {
     };
 }
 
-normalize_index!()
+normalize_index!();

@@ -4,4 +4,4 @@ macro_rules! MIN_MEMORY {
     };
 }
 
-MIN_MEMORY!()
+MIN_MEMORY!();

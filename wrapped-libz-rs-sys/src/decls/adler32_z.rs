@@ -4,4 +4,4 @@ macro_rules! adler32_z {
     };
 }
 
-adler32_z!()
+adler32_z!();

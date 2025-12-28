@@ -11,4 +11,4 @@ macro_rules! format_docs {
     };
 }
 
-format_docs!()
+format_docs!();

@@ -1,19 +1,19 @@
 macro_rules! deps {
     () => {
-        Param!();
-        ParamHint!();
-        TokenStream!();
-        MethodNames!();
         Config!();
-        ReturnHint!();
-        Cfg!();
         CppDelegate!();
         CppMethod!();
-        Type!();
-        Interface!();
+        Param!();
+        Cfg!();
+        ReturnHint!();
         Literal!();
-        GUID!();
         CppStruct!();
+        ParamHint!();
+        Type!();
+        TokenStream!();
+        Interface!();
+        GUID!();
+        MethodNames!();
     };
 }
 
@@ -24,4 +24,4 @@ macro_rules! impl_280 {
     };
 }
 
-impl_280!()
+impl_280!();

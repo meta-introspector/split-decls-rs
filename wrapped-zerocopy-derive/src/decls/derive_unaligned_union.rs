@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Trait!();
-        StructUnionRepr!();
         FieldBounds!();
+        StructUnionRepr!();
         ImplBlockBuilder!();
+        Trait!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! derive_unaligned_union {
     };
 }
 
-derive_unaligned_union!()
+derive_unaligned_union!();

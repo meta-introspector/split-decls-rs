@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        AttrStyle!();
-        Path!();
-        Safety!();
-        AttrVec!();
-        AttrArgs!();
-        Lit!();
-        Attribute!();
         AttrIdGenerator!();
+        Lit!();
         Expr!();
+        Path!();
+        AttrVec!();
+        AttrStyle!();
+        Safety!();
         ExprKind!();
+        AttrArgs!();
+        Attribute!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! mk_attr_name_value_str {
     };
 }
 
-mk_attr_name_value_str!()
+mk_attr_name_value_str!();

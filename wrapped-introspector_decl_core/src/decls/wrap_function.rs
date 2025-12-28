@@ -11,4 +11,4 @@ macro_rules! wrap_function {
     };
 }
 
-wrap_function!()
+wrap_function!();

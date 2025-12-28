@@ -4,4 +4,4 @@ macro_rules! SalsaAsRef {
     };
 }
 
-SalsaAsRef!()
+SalsaAsRef!();

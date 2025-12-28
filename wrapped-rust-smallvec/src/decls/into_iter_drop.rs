@@ -11,4 +11,4 @@ macro_rules! into_iter_drop {
     };
 }
 
-into_iter_drop!()
+into_iter_drop!();

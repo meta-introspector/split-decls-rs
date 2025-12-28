@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Replacement!();
         DiagnosticSpan!();
+        Replacement!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! collect_span {
     };
 }
 
-collect_span!()
+collect_span!();

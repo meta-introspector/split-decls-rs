@@ -4,4 +4,4 @@ macro_rules! mpsc_unbounded {
     };
 }
 
-mpsc_unbounded!()
+mpsc_unbounded!();

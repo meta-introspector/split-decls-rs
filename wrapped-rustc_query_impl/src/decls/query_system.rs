@@ -4,4 +4,4 @@ macro_rules! query_system {
     };
 }
 
-query_system!()
+query_system!();

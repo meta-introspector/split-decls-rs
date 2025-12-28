@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         InferenceFudger!();
+        At!();
         SnapshotVarData!();
         InferCtxt!();
-        At!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_189 {
     };
 }
 
-impl_189!()
+impl_189!();

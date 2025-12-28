@@ -4,4 +4,4 @@ macro_rules! compute_debuginfo_type_name {
     };
 }
 
-compute_debuginfo_type_name!()
+compute_debuginfo_type_name!();

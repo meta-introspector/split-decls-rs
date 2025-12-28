@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        UnsafeOpKind!();
         SafetyContext!();
-        UnusedUnsafeWarning!();
-        UnsafetyVisitor!();
+        UnsafeOpKind!();
         CallToDeprecatedSafeFnRequiresUnsafe!();
         NestedUsedBlock!();
-        CallToDeprecatedSafeFnRequiresUnsafeSub!();
+        UnsafetyVisitor!();
+        UnusedUnsafeWarning!();
         UnusedUnsafeEnclosing!();
+        CallToDeprecatedSafeFnRequiresUnsafeSub!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_173 {
     };
 }
 
-impl_173!()
+impl_173!();

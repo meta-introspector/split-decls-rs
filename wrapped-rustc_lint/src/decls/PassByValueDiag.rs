@@ -4,4 +4,4 @@ macro_rules! PassByValueDiag {
     };
 }
 
-PassByValueDiag!()
+PassByValueDiag!();

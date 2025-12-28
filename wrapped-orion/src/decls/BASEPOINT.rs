@@ -4,4 +4,4 @@ macro_rules! BASEPOINT {
     };
 }
 
-BASEPOINT!()
+BASEPOINT!();

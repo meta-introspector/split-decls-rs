@@ -4,4 +4,4 @@ macro_rules! validate_attr {
     };
 }
 
-validate_attr!()
+validate_attr!();

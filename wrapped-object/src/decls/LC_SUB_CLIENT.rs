@@ -4,4 +4,4 @@ macro_rules! LC_SUB_CLIENT {
     };
 }
 
-LC_SUB_CLIENT!()
+LC_SUB_CLIENT!();

@@ -4,4 +4,4 @@ macro_rules! ConfusableIdentifierPair {
     };
 }
 
-ConfusableIdentifierPair!()
+ConfusableIdentifierPair!();

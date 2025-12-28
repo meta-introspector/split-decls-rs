@@ -4,4 +4,4 @@ macro_rules! CPU_SUBTYPE_X86_64_H {
     };
 }
 
-CPU_SUBTYPE_X86_64_H!()
+CPU_SUBTYPE_X86_64_H!();

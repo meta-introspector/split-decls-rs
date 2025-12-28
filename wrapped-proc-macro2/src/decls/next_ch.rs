@@ -11,4 +11,4 @@ macro_rules! next_ch {
     };
 }
 
-next_ch!()
+next_ch!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Color!();
-        Rgb!();
         Style!();
+        Rgb!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! serde_json_tests {
     };
 }
 
-serde_json_tests!()
+serde_json_tests!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        SolverDelegate!();
-        GoalEvaluation!();
         EvalCtxt!();
+        GoalEvaluation!();
+        SolverDelegate!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! evaluate_root_goal_for_proof_tree {
     };
 }
 
-evaluate_root_goal_for_proof_tree!()
+evaluate_root_goal_for_proof_tree!();

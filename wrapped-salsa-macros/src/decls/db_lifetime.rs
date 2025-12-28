@@ -4,4 +4,4 @@ macro_rules! db_lifetime {
     };
 }
 
-db_lifetime!()
+db_lifetime!();

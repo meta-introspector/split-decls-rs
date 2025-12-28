@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DateTime!();
         DateTimeRangeError!();
+        DateTime!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_202 {
     };
 }
 
-impl_202!()
+impl_202!();

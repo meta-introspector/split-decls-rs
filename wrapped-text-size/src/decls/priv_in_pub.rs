@@ -4,4 +4,4 @@ macro_rules! priv_in_pub {
     };
 }
 
-priv_in_pub!()
+priv_in_pub!();

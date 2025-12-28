@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        Document!();
-        InlineTable!();
-        KeyMut!();
-        Array!();
-        Formatted!();
-        Value!();
-        TableLike!();
-        ArrayOfTables!();
-        DocumentMut!();
         Item!();
+        Array!();
+        Document!();
+        KeyMut!();
+        Value!();
+        ArrayOfTables!();
         Table!();
+        DocumentMut!();
+        InlineTable!();
+        TableLike!();
+        Formatted!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! VisitMut {
     };
 }
 
-VisitMut!()
+VisitMut!();

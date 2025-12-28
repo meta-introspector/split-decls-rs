@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        FileHeader64!();
         XcoffSymbolIterator!();
+        FileHeader64!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! XcoffSymbolIterator64 {
     };
 }
 
-XcoffSymbolIterator64!()
+XcoffSymbolIterator64!();

@@ -4,4 +4,4 @@ macro_rules! op_trait_as_method_name {
     };
 }
 
-op_trait_as_method_name!()
+op_trait_as_method_name!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        MirTypeckRegionConstraints!();
         UniversalRegionIndices!();
+        MirTypeckRegionConstraints!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_500 {
     };
 }
 
-impl_500!()
+impl_500!();

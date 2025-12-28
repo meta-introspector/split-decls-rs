@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Reducer!();
         UnzipReducer!();
+        Reducer!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_957 {
     };
 }
 
-impl_957!()
+impl_957!();

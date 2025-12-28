@@ -4,4 +4,4 @@ macro_rules! analysis {
     };
 }
 
-analysis!()
+analysis!();

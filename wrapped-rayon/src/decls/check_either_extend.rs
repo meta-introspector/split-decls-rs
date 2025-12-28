@@ -4,4 +4,4 @@ macro_rules! check_either_extend {
     };
 }
 
-check_either_extend!()
+check_either_extend!();

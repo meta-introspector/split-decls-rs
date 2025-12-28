@@ -4,4 +4,4 @@ macro_rules! REFERENCE_TYPE {
     };
 }
 
-REFERENCE_TYPE!()
+REFERENCE_TYPE!();

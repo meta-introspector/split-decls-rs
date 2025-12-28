@@ -4,4 +4,4 @@ macro_rules! LITERAL_CHAR {
     };
 }
 
-LITERAL_CHAR!()
+LITERAL_CHAR!();

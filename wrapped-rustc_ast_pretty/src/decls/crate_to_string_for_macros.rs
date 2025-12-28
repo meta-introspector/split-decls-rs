@@ -11,4 +11,4 @@ macro_rules! crate_to_string_for_macros {
     };
 }
 
-crate_to_string_for_macros!()
+crate_to_string_for_macros!();

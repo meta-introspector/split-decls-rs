@@ -4,4 +4,4 @@ macro_rules! quote_optional_tag_owned {
     };
 }
 
-quote_optional_tag_owned!()
+quote_optional_tag_owned!();

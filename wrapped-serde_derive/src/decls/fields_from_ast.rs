@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Default!();
         Field!();
+        Default!();
         Variant!();
         Ctxt!();
     };
@@ -14,4 +14,4 @@ macro_rules! fields_from_ast {
     };
 }
 
-fields_from_ast!()
+fields_from_ast!();

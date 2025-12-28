@@ -4,4 +4,4 @@ macro_rules! COMMENT_START_SYMBOL {
     };
 }
 
-COMMENT_START_SYMBOL!()
+COMMENT_START_SYMBOL!();

@@ -4,4 +4,4 @@ macro_rules! coalesce {
     };
 }
 
-coalesce!()
+coalesce!();

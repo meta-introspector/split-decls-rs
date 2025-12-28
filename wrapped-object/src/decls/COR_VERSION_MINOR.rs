@@ -4,4 +4,4 @@ macro_rules! COR_VERSION_MINOR {
     };
 }
 
-COR_VERSION_MINOR!()
+COR_VERSION_MINOR!();

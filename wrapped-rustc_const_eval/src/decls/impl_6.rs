@@ -1,17 +1,17 @@
 macro_rules! deps {
     () => {
-        NonConstOp!();
-        Checker!();
-        NeedsNonConstDrop!();
-        NeedsDrop!();
-        Place!();
-        LiveDrop!();
-        Status!();
-        CallUnstable!();
-        UnmarkedConstItemExposed!();
-        ConstCx!();
         ConstConditionsHold!();
+        NonConstOp!();
+        UnmarkedConstItemExposed!();
+        Checker!();
+        CallUnstable!();
+        NeedsDrop!();
+        Status!();
+        NeedsNonConstDrop!();
+        LiveDrop!();
+        Place!();
         DiagImportance!();
+        ConstCx!();
     };
 }
 
@@ -22,4 +22,4 @@ macro_rules! impl_6 {
     };
 }
 
-impl_6!()
+impl_6!();

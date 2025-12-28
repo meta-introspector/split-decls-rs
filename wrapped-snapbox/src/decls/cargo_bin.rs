@@ -4,4 +4,4 @@ macro_rules! cargo_bin {
     };
 }
 
-cargo_bin!()
+cargo_bin!();

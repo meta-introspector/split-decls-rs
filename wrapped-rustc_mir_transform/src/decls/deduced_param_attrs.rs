@@ -11,4 +11,4 @@ macro_rules! deduced_param_attrs {
     };
 }
 
-deduced_param_attrs!()
+deduced_param_attrs!();

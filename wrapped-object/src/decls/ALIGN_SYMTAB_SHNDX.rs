@@ -4,4 +4,4 @@ macro_rules! ALIGN_SYMTAB_SHNDX {
     };
 }
 
-ALIGN_SYMTAB_SHNDX!()
+ALIGN_SYMTAB_SHNDX!();

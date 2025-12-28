@@ -4,4 +4,4 @@ macro_rules! nghttp2_rcbuf {
     };
 }
 
-nghttp2_rcbuf!()
+nghttp2_rcbuf!();

@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        IntoParallelIterator!();
+        RepeatN!();
         Iter!();
+        IntoParallelIterator!();
         Repeat!();
         IndexedParallelIterator!();
         Zip!();
-        RepeatN!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_797 {
     };
 }
 
-impl_797!()
+impl_797!();

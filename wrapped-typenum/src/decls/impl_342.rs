@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Bit!();
         UInt!();
         Unsigned!();
+        Bit!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_342 {
     };
 }
 
-impl_342!()
+impl_342!();

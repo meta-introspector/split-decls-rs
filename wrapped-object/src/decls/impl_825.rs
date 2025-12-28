@@ -1,19 +1,19 @@
 macro_rules! deps {
     () => {
-        Result!();
-        Dynamic!();
-        Section!();
-        ObjectSymbol!();
-        ReadRef!();
-        SymbolFlags!();
-        SymbolKind!();
-        SectionIndex!();
-        FileHeader!();
-        SymbolSection!();
         XcoffSymbol!();
-        SymbolScope!();
-        File!();
+        SectionIndex!();
+        ObjectSymbol!();
         SymbolIndex!();
+        SymbolFlags!();
+        File!();
+        SymbolKind!();
+        Section!();
+        Result!();
+        FileHeader!();
+        Dynamic!();
+        SymbolScope!();
+        ReadRef!();
+        SymbolSection!();
     };
 }
 
@@ -24,4 +24,4 @@ macro_rules! impl_825 {
     };
 }
 
-impl_825!()
+impl_825!();

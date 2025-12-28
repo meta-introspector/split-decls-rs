@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        AsAddress!();
-        MetadataCastError!();
-        CastType!();
-        SizeError!();
-        CastError!();
-        AlignmentError!();
-        KnownLayout!();
         Alignment!();
+        AsAddress!();
+        SizeError!();
+        KnownLayout!();
         PointerMetadata!();
+        CastType!();
+        AlignmentError!();
+        CastError!();
+        MetadataCastError!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_311 {
     };
 }
 
-impl_311!()
+impl_311!();

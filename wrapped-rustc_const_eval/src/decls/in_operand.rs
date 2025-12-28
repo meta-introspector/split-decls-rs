@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Qualif!();
         ConstCx!();
         Operand!();
-        Qualif!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! in_operand {
     };
 }
 
-in_operand!()
+in_operand!();

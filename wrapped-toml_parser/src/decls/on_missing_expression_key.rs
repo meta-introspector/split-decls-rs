@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Token!();
+        ParseError!();
+        Stream!();
         Expected!();
         ErrorSink!();
+        Token!();
         EventReceiver!();
-        Stream!();
-        ParseError!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! on_missing_expression_key {
     };
 }
 
-on_missing_expression_key!()
+on_missing_expression_key!();

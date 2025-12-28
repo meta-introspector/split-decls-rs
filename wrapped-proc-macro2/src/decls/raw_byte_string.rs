@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Cursor!();
         Reject!();
+        Cursor!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! raw_byte_string {
     };
 }
 
-raw_byte_string!()
+raw_byte_string!();

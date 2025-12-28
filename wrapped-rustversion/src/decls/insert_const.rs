@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Result!();
         Qualifiers!();
+        Result!();
         Error!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! insert_const {
     };
 }
 
-insert_const!()
+insert_const!();

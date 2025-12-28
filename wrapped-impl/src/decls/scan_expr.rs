@@ -4,4 +4,4 @@ macro_rules! scan_expr {
     };
 }
 
-scan_expr!()
+scan_expr!();

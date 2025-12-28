@@ -4,4 +4,4 @@ macro_rules! type_usage_analyzer {
     };
 }
 
-type_usage_analyzer!()
+type_usage_analyzer!();

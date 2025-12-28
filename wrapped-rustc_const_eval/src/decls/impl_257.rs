@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Memory!();
         Machine!();
+        Memory!();
         DumpAllocs!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_257 {
     };
 }
 
-impl_257!()
+impl_257!();

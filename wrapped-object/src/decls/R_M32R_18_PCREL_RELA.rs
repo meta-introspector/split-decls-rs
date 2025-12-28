@@ -4,4 +4,4 @@ macro_rules! R_M32R_18_PCREL_RELA {
     };
 }
 
-R_M32R_18_PCREL_RELA!()
+R_M32R_18_PCREL_RELA!();

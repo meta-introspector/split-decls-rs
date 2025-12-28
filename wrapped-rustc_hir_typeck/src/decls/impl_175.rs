@@ -1,18 +1,18 @@
 macro_rules! deps {
     () => {
-        Diverges!();
-        MethodError!();
         SelfCtorFromOuterItem!();
-        BreakableCtxt!();
-        SelfCtorFromOuterItemLint!();
-        DeferredCallResolution!();
-        CtorIsPrivate!();
         ReplaceWithName!();
-        LoweredTy!();
-        Expectation!();
-        ItemKind!();
-        MethodCallee!();
         FnCtxt!();
+        BreakableCtxt!();
+        ItemKind!();
+        CtorIsPrivate!();
+        MethodCallee!();
+        Expectation!();
+        DeferredCallResolution!();
+        SelfCtorFromOuterItemLint!();
+        MethodError!();
+        Diverges!();
+        LoweredTy!();
     };
 }
 
@@ -23,4 +23,4 @@ macro_rules! impl_175 {
     };
 }
 
-impl_175!()
+impl_175!();

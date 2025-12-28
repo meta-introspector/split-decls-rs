@@ -1,18 +1,18 @@
 macro_rules! deps {
     () => {
-        Endian!();
-        U64!();
-        GnuHashTable!();
-        SymbolTable!();
         FileHeader!();
-        GnuHashHeader!();
         Version!();
         VersionTable!();
-        U32!();
         Result!();
         ReadRef!();
+        U64!();
         SymbolIndex!();
+        Endian!();
+        GnuHashHeader!();
+        U32!();
+        GnuHashTable!();
         Sym!();
+        SymbolTable!();
     };
 }
 
@@ -23,4 +23,4 @@ macro_rules! impl_422 {
     };
 }
 
-impl_422!()
+impl_422!();

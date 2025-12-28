@@ -4,4 +4,4 @@ macro_rules! map_links {
     };
 }
 
-map_links!()
+map_links!();

@@ -4,4 +4,4 @@ macro_rules! escape_utf8 {
     };
 }
 
-escape_utf8!()
+escape_utf8!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        WhereEqPredicate!();
         WhereBoundPredicate!();
+        WhereEqPredicate!();
         WhereRegionPredicate!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! WherePredicateKind {
     };
 }
 
-WherePredicateKind!()
+WherePredicateKind!();

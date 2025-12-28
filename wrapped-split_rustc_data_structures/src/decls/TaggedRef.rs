@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Tag!();
         Aligned!();
+        Tag!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! TaggedRef {
     };
 }
 
-TaggedRef!()
+TaggedRef!();

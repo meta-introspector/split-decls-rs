@@ -4,4 +4,4 @@ macro_rules! PF_HP_MODIFY {
     };
 }
 
-PF_HP_MODIFY!()
+PF_HP_MODIFY!();

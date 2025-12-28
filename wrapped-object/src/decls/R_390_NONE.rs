@@ -4,4 +4,4 @@ macro_rules! R_390_NONE {
     };
 }
 
-R_390_NONE!()
+R_390_NONE!();

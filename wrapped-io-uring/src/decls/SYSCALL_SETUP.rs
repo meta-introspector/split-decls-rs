@@ -4,4 +4,4 @@ macro_rules! SYSCALL_SETUP {
     };
 }
 
-SYSCALL_SETUP!()
+SYSCALL_SETUP!();

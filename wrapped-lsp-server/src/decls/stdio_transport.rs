@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Message!();
         IoThreads!();
         Notification!();
+        Message!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! stdio_transport {
     };
 }
 
-stdio_transport!()
+stdio_transport!();

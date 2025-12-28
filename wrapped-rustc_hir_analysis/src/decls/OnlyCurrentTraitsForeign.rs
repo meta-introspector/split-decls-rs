@@ -4,4 +4,4 @@ macro_rules! OnlyCurrentTraitsForeign {
     };
 }
 
-OnlyCurrentTraitsForeign!()
+OnlyCurrentTraitsForeign!();

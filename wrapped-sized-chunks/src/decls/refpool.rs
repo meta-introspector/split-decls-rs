@@ -4,4 +4,4 @@ macro_rules! refpool {
     };
 }
 
-refpool!()
+refpool!();

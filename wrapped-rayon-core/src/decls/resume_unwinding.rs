@@ -4,4 +4,4 @@ macro_rules! resume_unwinding {
     };
 }
 
-resume_unwinding!()
+resume_unwinding!();

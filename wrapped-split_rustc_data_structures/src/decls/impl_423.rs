@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        SnapshotMap!();
         UndoLog!();
+        SnapshotMap!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_423 {
     };
 }
 
-impl_423!()
+impl_423!();

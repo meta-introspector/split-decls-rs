@@ -4,4 +4,4 @@ macro_rules! MutexGuard {
     };
 }
 
-MutexGuard!()
+MutexGuard!();

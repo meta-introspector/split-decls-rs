@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        PeFile32!();
         PeComdatSectionIterator!();
         ImageNtHeaders32!();
-        PeFile32!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! PeComdatSectionIterator32 {
     };
 }
 
-PeComdatSectionIterator32!()
+PeComdatSectionIterator32!();

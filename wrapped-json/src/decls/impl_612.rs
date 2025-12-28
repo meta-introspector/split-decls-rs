@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Result!();
         Error!();
+        Result!();
         RawValue!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_612 {
     };
 }
 
-impl_612!()
+impl_612!();

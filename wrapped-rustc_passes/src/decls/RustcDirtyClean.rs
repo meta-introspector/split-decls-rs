@@ -4,4 +4,4 @@ macro_rules! RustcDirtyClean {
     };
 }
 
-RustcDirtyClean!()
+RustcDirtyClean!();

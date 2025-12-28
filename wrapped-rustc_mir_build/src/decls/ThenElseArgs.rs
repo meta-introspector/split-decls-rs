@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DeclareLetBindings!();
         Scope!();
+        DeclareLetBindings!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! ThenElseArgs {
     };
 }
 
-ThenElseArgs!()
+ThenElseArgs!();

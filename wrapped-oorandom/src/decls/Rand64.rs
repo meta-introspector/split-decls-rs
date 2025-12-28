@@ -4,4 +4,4 @@ macro_rules! Rand64 {
     };
 }
 
-Rand64!()
+Rand64!();

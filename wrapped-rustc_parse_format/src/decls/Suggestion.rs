@@ -4,4 +4,4 @@ macro_rules! Suggestion {
     };
 }
 
-Suggestion!()
+Suggestion!();

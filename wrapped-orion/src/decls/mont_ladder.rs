@@ -12,4 +12,4 @@ macro_rules! mont_ladder {
     };
 }
 
-mont_ladder!()
+mont_ladder!();

@@ -4,4 +4,4 @@ macro_rules! rich {
     };
 }
 
-rich!()
+rich!();

@@ -11,4 +11,4 @@ macro_rules! THIN_MAGIC {
     };
 }
 
-THIN_MAGIC!()
+THIN_MAGIC!();

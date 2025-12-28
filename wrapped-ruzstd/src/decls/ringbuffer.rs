@@ -4,4 +4,4 @@ macro_rules! ringbuffer {
     };
 }
 
-ringbuffer!()
+ringbuffer!();

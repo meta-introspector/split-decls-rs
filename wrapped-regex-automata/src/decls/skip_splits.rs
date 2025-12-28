@@ -12,4 +12,4 @@ macro_rules! skip_splits {
     };
 }
 
-skip_splits!()
+skip_splits!();

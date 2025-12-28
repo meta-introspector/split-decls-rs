@@ -4,4 +4,4 @@ macro_rules! CompactOptions {
     };
 }
 
-CompactOptions!()
+CompactOptions!();

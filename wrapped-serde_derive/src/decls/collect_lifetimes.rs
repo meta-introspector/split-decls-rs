@@ -4,4 +4,4 @@ macro_rules! collect_lifetimes {
     };
 }
 
-collect_lifetimes!()
+collect_lifetimes!();

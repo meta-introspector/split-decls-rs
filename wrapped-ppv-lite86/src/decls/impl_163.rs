@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        NoS3!();
         BSwap!();
+        NoS3!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_163 {
     };
 }
 
-impl_163!()
+impl_163!();

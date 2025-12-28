@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         Idx!();
         IdxRange!();
-        RawIdx!();
         Arena!();
+        RawIdx!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_48 {
     };
 }
 
-impl_48!()
+impl_48!();

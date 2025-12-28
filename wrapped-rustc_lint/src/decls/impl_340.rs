@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        LintLevelsProvider!();
         LintLevelQueryMap!();
+        LintLevelsProvider!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_340 {
     };
 }
 
-impl_340!()
+impl_340!();

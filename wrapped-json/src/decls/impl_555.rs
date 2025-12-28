@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        NumberDeserializer!();
-        NumberFieldDeserializer!();
-        MapAccess!();
         Value!();
+        MapAccess!();
         Result!();
         Error!();
+        NumberFieldDeserializer!();
+        NumberDeserializer!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_555 {
     };
 }
 
-impl_555!()
+impl_555!();

@@ -4,4 +4,4 @@ macro_rules! goto_declaration {
     };
 }
 
-goto_declaration!()
+goto_declaration!();

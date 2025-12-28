@@ -4,4 +4,4 @@ macro_rules! IntToWide {
     };
 }
 
-IntToWide!()
+IntToWide!();

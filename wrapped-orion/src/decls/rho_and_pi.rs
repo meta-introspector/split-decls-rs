@@ -4,4 +4,4 @@ macro_rules! rho_and_pi {
     };
 }
 
-rho_and_pi!()
+rho_and_pi!();

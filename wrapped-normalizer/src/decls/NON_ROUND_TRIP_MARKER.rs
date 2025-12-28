@@ -4,4 +4,4 @@ macro_rules! NON_ROUND_TRIP_MARKER {
     };
 }
 
-NON_ROUND_TRIP_MARKER!()
+NON_ROUND_TRIP_MARKER!();

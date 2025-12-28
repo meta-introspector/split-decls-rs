@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Pattern!();
+        DefId!();
+        RustcInternal!();
         Ty!();
         BoundVariableKind!();
-        DefId!();
+        Pattern!();
         Region!();
-        RustcInternal!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! InternalCx {
     };
 }
 
-InternalCx!()
+InternalCx!();

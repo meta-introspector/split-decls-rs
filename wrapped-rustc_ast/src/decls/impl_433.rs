@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        NodeRange!();
         ParserRange!();
+        NodeRange!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_433 {
     };
 }
 
-impl_433!()
+impl_433!();

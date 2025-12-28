@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        ThroughputOnDrop!();
-        Id!();
-        Step!();
-        NestedProgress!();
         Progress!();
         MessageLevel!();
+        NestedProgress!();
+        Step!();
+        ThroughputOnDrop!();
         Unit!();
+        Id!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_172 {
     };
 }
 
-impl_172!()
+impl_172!();

@@ -11,4 +11,4 @@ macro_rules! lower_ty {
     };
 }
 
-lower_ty!()
+lower_ty!();

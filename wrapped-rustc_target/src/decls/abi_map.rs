@@ -4,4 +4,4 @@ macro_rules! abi_map {
     };
 }
 
-abi_map!()
+abi_map!();

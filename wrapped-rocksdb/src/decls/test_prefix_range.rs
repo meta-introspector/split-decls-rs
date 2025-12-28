@@ -11,4 +11,4 @@ macro_rules! test_prefix_range {
     };
 }
 
-test_prefix_range!()
+test_prefix_range!();

@@ -11,4 +11,4 @@ macro_rules! Sha384 {
     };
 }
 
-Sha384!()
+Sha384!();

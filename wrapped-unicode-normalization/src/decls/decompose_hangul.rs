@@ -4,4 +4,4 @@ macro_rules! decompose_hangul {
     };
 }
 
-decompose_hangul!()
+decompose_hangul!();

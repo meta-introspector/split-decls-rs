@@ -4,4 +4,4 @@ macro_rules! DF_1_GROUP {
     };
 }
 
-DF_1_GROUP!()
+DF_1_GROUP!();

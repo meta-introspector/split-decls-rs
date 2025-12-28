@@ -11,4 +11,4 @@ macro_rules! generate_state {
     };
 }
 
-generate_state!()
+generate_state!();

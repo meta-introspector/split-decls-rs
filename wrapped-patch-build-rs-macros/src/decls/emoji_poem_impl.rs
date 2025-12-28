@@ -76,4 +76,4 @@ Unknown concept, infinite possibility
     };
 }
 
-emoji_poem_impl!()
+emoji_poem_impl!();

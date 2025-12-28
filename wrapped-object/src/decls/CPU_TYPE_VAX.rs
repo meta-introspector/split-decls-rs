@@ -4,4 +4,4 @@ macro_rules! CPU_TYPE_VAX {
     };
 }
 
-CPU_TYPE_VAX!()
+CPU_TYPE_VAX!();

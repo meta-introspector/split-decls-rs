@@ -4,4 +4,4 @@ macro_rules! to_s {
     };
 }
 
-to_s!()
+to_s!();

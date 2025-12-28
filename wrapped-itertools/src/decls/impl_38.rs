@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DedupPredicate!();
         CoalescePredicate!();
+        DedupPredicate!();
         DedupPredWithCount2CoalescePred!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_38 {
     };
 }
 
-impl_38!()
+impl_38!();

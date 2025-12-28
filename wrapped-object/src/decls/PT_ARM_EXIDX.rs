@@ -4,4 +4,4 @@ macro_rules! PT_ARM_EXIDX {
     };
 }
 
-PT_ARM_EXIDX!()
+PT_ARM_EXIDX!();

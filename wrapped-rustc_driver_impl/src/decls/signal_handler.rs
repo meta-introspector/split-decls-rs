@@ -4,4 +4,4 @@ macro_rules! signal_handler {
     };
 }
 
-signal_handler!()
+signal_handler!();

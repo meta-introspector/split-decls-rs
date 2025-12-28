@@ -11,4 +11,4 @@ macro_rules! is_nfkc {
     };
 }
 
-is_nfkc!()
+is_nfkc!();

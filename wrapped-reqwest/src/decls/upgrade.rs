@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        BoxError!();
         Kind!();
+        BoxError!();
         Error!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! upgrade {
     };
 }
 
-upgrade!()
+upgrade!();

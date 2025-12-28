@@ -4,4 +4,4 @@ macro_rules! VariableLengths {
     };
 }
 
-VariableLengths!()
+VariableLengths!();

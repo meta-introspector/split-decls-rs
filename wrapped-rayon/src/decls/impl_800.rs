@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        RepeatProducer!();
         UnindexedProducer!();
         Folder!();
-        RepeatProducer!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_800 {
     };
 }
 
-impl_800!()
+impl_800!();

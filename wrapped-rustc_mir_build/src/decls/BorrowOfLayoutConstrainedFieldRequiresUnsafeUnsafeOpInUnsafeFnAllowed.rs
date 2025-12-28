@@ -11,4 +11,4 @@ macro_rules! BorrowOfLayoutConstrainedFieldRequiresUnsafeUnsafeOpInUnsafeFnAllow
     };
 }
 
-BorrowOfLayoutConstrainedFieldRequiresUnsafeUnsafeOpInUnsafeFnAllowed!()
+BorrowOfLayoutConstrainedFieldRequiresUnsafeUnsafeOpInUnsafeFnAllowed!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Attribute!();
-        AttrVec!();
         HasAttrs!();
+        AttrVec!();
+        Attribute!();
         AstNodeWrapper!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_268 {
     };
 }
 
-impl_268!()
+impl_268!();

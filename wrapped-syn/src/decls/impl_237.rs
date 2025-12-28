@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Punctuated!();
-        Group!();
-        Result!();
         Parse!();
+        Result!();
         ParseStream!();
+        Group!();
         Lifetime!();
+        Punctuated!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_237 {
     };
 }
 
-impl_237!()
+impl_237!();

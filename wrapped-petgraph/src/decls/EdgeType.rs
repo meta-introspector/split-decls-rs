@@ -4,4 +4,4 @@ macro_rules! EdgeType {
     };
 }
 
-EdgeType!()
+EdgeType!();

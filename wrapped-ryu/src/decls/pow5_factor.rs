@@ -4,4 +4,4 @@ macro_rules! pow5_factor {
     };
 }
 
-pow5_factor!()
+pow5_factor!();

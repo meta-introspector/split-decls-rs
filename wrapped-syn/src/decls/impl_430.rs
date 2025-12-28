@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Error!();
         LitFloatRepr!();
         Result!();
-        Error!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_430 {
     };
 }
 
-impl_430!()
+impl_430!();

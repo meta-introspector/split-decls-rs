@@ -1,34 +1,34 @@
 macro_rules! deps {
     () => {
-        GatherLocalsVisitor!();
-        YieldExprOutsideOfCoroutine!();
-        CoroutineTypes!();
-        ItemKind!();
-        DynamicCoerceMany!();
-        CoerceMany!();
-        FnCtxt!();
-        Expectation!();
         BaseExpressionDoubleDotRemove!();
-        Needs!();
-        StructExprNonExhaustive!();
-        ReturnLikeStatementKind!();
-        BreakableCtxt!();
-        FieldMultiplySpecifiedInInitializer!();
-        NoFieldOnType!();
-        CantDereference!();
-        BaseExpressionDoubleDot!();
-        BaseExpressionDoubleDotAddExpr!();
-        ReturnStmtOutsideOfFnBody!();
-        TypeMismatchFruTypo!();
-        FunctionalRecordUpdateOnNonStruct!();
-        Error!();
-        NoFieldOnVariant!();
+        CoroutineTypes!();
         TupleArgumentsFlag!();
+        Needs!();
+        Error!();
+        BaseExpressionDoubleDotAddExpr!();
+        FunctionalRecordUpdateOnNonStruct!();
+        FieldMultiplySpecifiedInInitializer!();
         Diverges!();
-        HelpUseLatestEdition!();
+        BreakableCtxt!();
+        FnCtxt!();
+        ItemKind!();
+        BaseExpressionDoubleDot!();
+        ReturnStmtOutsideOfFnBody!();
+        YieldExprOutsideOfCoroutine!();
+        TypeMismatchFruTypo!();
         NakedAsmOutsideNakedFn!();
         CastCheck!();
+        NoFieldOnType!();
+        Expectation!();
+        CantDereference!();
+        ReturnLikeStatementKind!();
+        GatherLocalsVisitor!();
+        HelpUseLatestEdition!();
+        CoerceMany!();
+        NoFieldOnVariant!();
         AddressOfTemporaryTaken!();
+        DynamicCoerceMany!();
+        StructExprNonExhaustive!();
     };
 }
 
@@ -43,4 +43,4 @@ macro_rules! impl_151 {
     };
 }
 
-impl_151!()
+impl_151!();

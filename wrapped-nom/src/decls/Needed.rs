@@ -4,4 +4,4 @@ macro_rules! Needed {
     };
 }
 
-Needed!()
+Needed!();

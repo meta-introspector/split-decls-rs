@@ -4,4 +4,4 @@ macro_rules! QA2 {
     };
 }
 
-QA2!()
+QA2!();

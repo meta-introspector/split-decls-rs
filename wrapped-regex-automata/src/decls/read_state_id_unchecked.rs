@@ -11,4 +11,4 @@ macro_rules! read_state_id_unchecked {
     };
 }
 
-read_state_id_unchecked!()
+read_state_id_unchecked!();

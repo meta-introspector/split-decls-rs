@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Entry!();
         CancelBuilder!();
+        Entry!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! macro_90 {
     };
 }
 
-macro_90!()
+macro_90!();

@@ -4,4 +4,4 @@ macro_rules! OLD_PERSIAN {
     };
 }
 
-OLD_PERSIAN!()
+OLD_PERSIAN!();

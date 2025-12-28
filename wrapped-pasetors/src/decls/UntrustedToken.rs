@@ -4,4 +4,4 @@ macro_rules! UntrustedToken {
     };
 }
 
-UntrustedToken!()
+UntrustedToken!();

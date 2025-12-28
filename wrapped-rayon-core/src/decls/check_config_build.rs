@@ -11,4 +11,4 @@ macro_rules! check_config_build {
     };
 }
 
-check_config_build!()
+check_config_build!();

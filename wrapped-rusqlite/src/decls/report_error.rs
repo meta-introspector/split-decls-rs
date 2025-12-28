@@ -11,4 +11,4 @@ macro_rules! report_error {
     };
 }
 
-report_error!()
+report_error!();

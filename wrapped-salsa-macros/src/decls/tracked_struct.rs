@@ -4,4 +4,4 @@ macro_rules! tracked_struct {
     };
 }
 
-tracked_struct!()
+tracked_struct!();

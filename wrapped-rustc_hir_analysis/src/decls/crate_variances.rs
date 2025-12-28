@@ -4,4 +4,4 @@ macro_rules! crate_variances {
     };
 }
 
-crate_variances!()
+crate_variances!();

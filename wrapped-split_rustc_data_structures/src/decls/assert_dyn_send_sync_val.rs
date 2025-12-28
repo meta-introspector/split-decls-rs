@@ -12,4 +12,4 @@ macro_rules! assert_dyn_send_sync_val {
     };
 }
 
-assert_dyn_send_sync_val!()
+assert_dyn_send_sync_val!();

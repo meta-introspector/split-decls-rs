@@ -4,4 +4,4 @@ macro_rules! GNU_PROPERTY_1_NEEDED {
     };
 }
 
-GNU_PROPERTY_1_NEEDED!()
+GNU_PROPERTY_1_NEEDED!();

@@ -4,4 +4,4 @@ macro_rules! R_NDS32_JMP_SLOT {
     };
 }
 
-R_NDS32_JMP_SLOT!()
+R_NDS32_JMP_SLOT!();

@@ -4,4 +4,4 @@ macro_rules! pack_hash_index_and_kind {
     };
 }
 
-pack_hash_index_and_kind!()
+pack_hash_index_and_kind!();

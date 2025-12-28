@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         AesKind!();
-        AesCtrZipKeyStream!();
         AesCipher!();
+        AesCtrZipKeyStream!();
         Cipher!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_26 {
     };
 }
 
-impl_26!()
+impl_26!();

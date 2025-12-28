@@ -4,4 +4,4 @@ macro_rules! quote_bind_into_iter {
     };
 }
 
-quote_bind_into_iter!()
+quote_bind_into_iter!();

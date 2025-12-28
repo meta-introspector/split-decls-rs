@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        MachOSectionInternal!();
-        MachHeader!();
         ReadRef!();
+        MachOSectionInternal!();
         MachOFile!();
+        MachHeader!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! MachOSectionIterator {
     };
 }
 
-MachOSectionIterator!()
+MachOSectionIterator!();

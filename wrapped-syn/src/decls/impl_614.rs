@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        IterMut!();
-        IntoIter!();
         Punctuated!();
+        IntoIter!();
+        IterMut!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_614 {
     };
 }
 
-impl_614!()
+impl_614!();

@@ -14,4 +14,4 @@ diff (expected vs got):
     };
 }
 
-assert_eq_streams!()
+assert_eq_streams!();

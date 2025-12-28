@@ -4,4 +4,4 @@ macro_rules! PYTHON_ENCODE_SET {
     };
 }
 
-PYTHON_ENCODE_SET!()
+PYTHON_ENCODE_SET!();

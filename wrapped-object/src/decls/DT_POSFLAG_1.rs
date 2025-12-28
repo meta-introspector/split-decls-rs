@@ -4,4 +4,4 @@ macro_rules! DT_POSFLAG_1 {
     };
 }
 
-DT_POSFLAG_1!()
+DT_POSFLAG_1!();

@@ -4,4 +4,4 @@ macro_rules! R_CKCORE_ADDRGOT {
     };
 }
 
-R_CKCORE_ADDRGOT!()
+R_CKCORE_ADDRGOT!();

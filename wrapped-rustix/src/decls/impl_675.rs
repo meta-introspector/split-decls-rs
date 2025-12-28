@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Result!();
         InlinedName!();
+        Result!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_675 {
     };
 }
 
-impl_675!()
+impl_675!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         CheckAttrVisitor!();
-        UnsupportedAttributesInWhere!();
         ItemLike!();
+        UnsupportedAttributesInWhere!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_15 {
     };
 }
 
-impl_15!()
+impl_15!();

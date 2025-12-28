@@ -12,4 +12,4 @@ macro_rules! timerfd_settime {
     };
 }
 
-timerfd_settime!()
+timerfd_settime!();

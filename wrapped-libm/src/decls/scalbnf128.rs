@@ -4,4 +4,4 @@ macro_rules! scalbnf128 {
     };
 }
 
-scalbnf128!()
+scalbnf128!();

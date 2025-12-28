@@ -4,4 +4,4 @@ macro_rules! Quantifier {
     };
 }
 
-Quantifier!()
+Quantifier!();

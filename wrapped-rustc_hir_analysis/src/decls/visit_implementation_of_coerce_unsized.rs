@@ -11,4 +11,4 @@ macro_rules! visit_implementation_of_coerce_unsized {
     };
 }
 
-visit_implementation_of_coerce_unsized!()
+visit_implementation_of_coerce_unsized!();

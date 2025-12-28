@@ -4,4 +4,4 @@ macro_rules! RecompositionState {
     };
 }
 
-RecompositionState!()
+RecompositionState!();

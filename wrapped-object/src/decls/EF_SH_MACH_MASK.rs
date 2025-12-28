@@ -4,4 +4,4 @@ macro_rules! EF_SH_MACH_MASK {
     };
 }
 
-EF_SH_MACH_MASK!()
+EF_SH_MACH_MASK!();

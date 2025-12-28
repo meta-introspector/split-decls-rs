@@ -4,4 +4,4 @@ macro_rules! DT_ENCODING {
     };
 }
 
-DT_ENCODING!()
+DT_ENCODING!();

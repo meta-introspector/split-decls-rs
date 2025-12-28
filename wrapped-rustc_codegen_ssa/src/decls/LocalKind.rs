@@ -4,4 +4,4 @@ macro_rules! LocalKind {
     };
 }
 
-LocalKind!()
+LocalKind!();

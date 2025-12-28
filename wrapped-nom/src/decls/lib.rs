@@ -4,4 +4,4 @@ macro_rules! lib {
     };
 }
 
-lib!()
+lib!();

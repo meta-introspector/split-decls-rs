@@ -4,4 +4,4 @@ macro_rules! ticket_impl {
     };
 }
 
-ticket_impl!()
+ticket_impl!();

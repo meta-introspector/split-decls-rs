@@ -11,4 +11,4 @@ macro_rules! cancel_auto_extension {
     };
 }
 
-cancel_auto_extension!()
+cancel_auto_extension!();

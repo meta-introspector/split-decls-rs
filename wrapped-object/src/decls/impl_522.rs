@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
         ReadRef!();
+        Error!();
         FatHeader!();
         BigEndian!();
-        Error!();
         MachOFatFile!();
-        Result!();
         FatArch!();
+        Result!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_522 {
     };
 }
 
-impl_522!()
+impl_522!();

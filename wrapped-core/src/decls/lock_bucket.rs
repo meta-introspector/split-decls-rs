@@ -11,4 +11,4 @@ macro_rules! lock_bucket {
     };
 }
 
-lock_bucket!()
+lock_bucket!();

@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        AdtDefinedHere!();
         InterpretedAsConst!();
-        InterpretedAsConstSugg!();
+        AdtDefinedHere!();
         SuggestLet!();
-        Inform!();
         MiscPatternSuggestion!();
+        InterpretedAsConstSugg!();
+        Inform!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! PatternNotCovered {
     };
 }
 
-PatternNotCovered!()
+PatternNotCovered!();

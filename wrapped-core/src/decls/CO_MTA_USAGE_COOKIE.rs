@@ -4,4 +4,4 @@ macro_rules! CO_MTA_USAGE_COOKIE {
     };
 }
 
-CO_MTA_USAGE_COOKIE!()
+CO_MTA_USAGE_COOKIE!();

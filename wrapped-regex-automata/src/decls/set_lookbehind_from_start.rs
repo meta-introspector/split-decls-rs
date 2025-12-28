@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        StateBuilderMatches!();
-        NFA!();
-        Start!();
         Look!();
+        StateBuilderMatches!();
+        Start!();
+        NFA!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! set_lookbehind_from_start {
     };
 }
 
-set_lookbehind_from_start!()
+set_lookbehind_from_start!();

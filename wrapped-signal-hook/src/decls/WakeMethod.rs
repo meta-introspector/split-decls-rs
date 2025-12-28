@@ -4,4 +4,4 @@ macro_rules! WakeMethod {
     };
 }
 
-WakeMethod!()
+WakeMethod!();

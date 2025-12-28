@@ -4,4 +4,4 @@ macro_rules! LC_DYLIB_CODE_SIGN_DRS {
     };
 }
 
-LC_DYLIB_CODE_SIGN_DRS!()
+LC_DYLIB_CODE_SIGN_DRS!();

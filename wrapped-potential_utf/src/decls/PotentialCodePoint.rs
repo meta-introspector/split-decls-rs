@@ -4,4 +4,4 @@ macro_rules! PotentialCodePoint {
     };
 }
 
-PotentialCodePoint!()
+PotentialCodePoint!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Interner!();
-        TypeRelation!();
-        RelateResult!();
         TypeFoldable!();
+        TypeRelation!();
+        Interner!();
+        RelateResult!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! Relate {
     };
 }
 
-Relate!()
+Relate!();

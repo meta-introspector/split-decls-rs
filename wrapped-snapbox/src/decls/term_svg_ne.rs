@@ -22,4 +22,4 @@ irrelevant 2" . to_owned () ,)) ; assert_ne ! (left , right) ; }
     };
 }
 
-term_svg_ne!()
+term_svg_ne!();

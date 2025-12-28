@@ -4,4 +4,4 @@ macro_rules! EF_RISCV_TSO {
     };
 }
 
-EF_RISCV_TSO!()
+EF_RISCV_TSO!();

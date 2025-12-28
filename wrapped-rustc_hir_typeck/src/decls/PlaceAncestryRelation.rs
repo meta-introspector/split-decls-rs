@@ -4,4 +4,4 @@ macro_rules! PlaceAncestryRelation {
     };
 }
 
-PlaceAncestryRelation!()
+PlaceAncestryRelation!();

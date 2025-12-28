@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Config!();
         Slab!();
-        InitGuard!();
         DefaultConfig!();
+        Config!();
+        InitGuard!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! VacantEntry {
     };
 }
 
-VacantEntry!()
+VacantEntry!();

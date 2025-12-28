@@ -4,4 +4,4 @@ macro_rules! COMPRESSED_RED {
     };
 }
 
-COMPRESSED_RED!()
+COMPRESSED_RED!();

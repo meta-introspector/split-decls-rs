@@ -4,4 +4,4 @@ macro_rules! ProcMacroAutoTraits {
     };
 }
 
-ProcMacroAutoTraits!()
+ProcMacroAutoTraits!();

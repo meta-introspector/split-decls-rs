@@ -11,4 +11,4 @@ macro_rules! deallocate_bucket {
     };
 }
 
-deallocate_bucket!()
+deallocate_bucket!();

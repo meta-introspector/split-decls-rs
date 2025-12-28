@@ -4,4 +4,4 @@ macro_rules! mutability_errors {
     };
 }
 
-mutability_errors!()
+mutability_errors!();

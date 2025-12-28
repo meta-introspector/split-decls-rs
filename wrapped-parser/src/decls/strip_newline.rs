@@ -4,4 +4,4 @@ macro_rules! strip_newline {
     };
 }
 
-strip_newline!()
+strip_newline!();

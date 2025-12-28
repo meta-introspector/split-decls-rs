@@ -4,4 +4,4 @@ macro_rules! BIGINT_LIMBS {
     };
 }
 
-BIGINT_LIMBS!()
+BIGINT_LIMBS!();

@@ -4,4 +4,4 @@ macro_rules! VER_NT_WORKSTATION {
     };
 }
 
-VER_NT_WORKSTATION!()
+VER_NT_WORKSTATION!();

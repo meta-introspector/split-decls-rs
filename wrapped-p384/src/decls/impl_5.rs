@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        ProjectivePoint!();
-        AffinePoint!();
         NistP384!();
+        AffinePoint!();
+        ProjectivePoint!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_5 {
     };
 }
 
-impl_5!()
+impl_5!();

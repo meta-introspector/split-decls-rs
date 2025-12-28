@@ -4,4 +4,4 @@ macro_rules! gate_legacy {
     };
 }
 
-gate_legacy!()
+gate_legacy!();

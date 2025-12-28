@@ -4,4 +4,4 @@ macro_rules! max_scalar_value {
     };
 }
 
-max_scalar_value!()
+max_scalar_value!();

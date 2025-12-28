@@ -4,4 +4,4 @@ macro_rules! CTXT_INTERNED_MARKER {
     };
 }
 
-CTXT_INTERNED_MARKER!()
+CTXT_INTERNED_MARKER!();

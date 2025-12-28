@@ -13,4 +13,4 @@ macro_rules! bool_try_from_tt {
     };
 }
 
-bool_try_from_tt!()
+bool_try_from_tt!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Allocation!();
-        BridgeTys!();
         ProvenanceMap!();
+        BridgeTys!();
+        Allocation!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_525 {
     };
 }
 
-impl_525!()
+impl_525!();

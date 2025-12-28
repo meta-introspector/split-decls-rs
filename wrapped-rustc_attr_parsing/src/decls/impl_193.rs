@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        RustcPromotablePairing!();
-        ConstStabilityParser!();
-        Stage!();
         AllowedTargets!();
-        FinalizeContext!();
+        Stage!();
+        ConstStabilityParser!();
+        RustcPromotablePairing!();
         AttributeParser!();
         AcceptMapping!();
+        FinalizeContext!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_193 {
     };
 }
 
-impl_193!()
+impl_193!();

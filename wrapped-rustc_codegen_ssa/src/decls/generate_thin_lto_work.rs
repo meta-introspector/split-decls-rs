@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        SerializedModule!();
-        ExtraBackendMethods!();
-        CodegenContext!();
         WorkItem!();
         CachedModuleCodegen!();
+        ExtraBackendMethods!();
+        CodegenContext!();
+        SerializedModule!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! generate_thin_lto_work {
     };
 }
 
-generate_thin_lto_work!()
+generate_thin_lto_work!();

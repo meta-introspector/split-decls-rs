@@ -4,4 +4,4 @@ macro_rules! DT_VERDEF {
     };
 }
 
-DT_VERDEF!()
+DT_VERDEF!();

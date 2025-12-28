@@ -11,4 +11,4 @@ macro_rules! drop_token_no_child {
     };
 }
 
-drop_token_no_child!()
+drop_token_no_child!();

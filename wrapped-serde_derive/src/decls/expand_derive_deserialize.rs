@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Derive!();
-        Parameters!();
-        Container!();
         Stmts!();
+        Derive!();
+        Container!();
         Ctxt!();
+        Parameters!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! expand_derive_deserialize {
     };
 }
 
-expand_derive_deserialize!()
+expand_derive_deserialize!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        UInt!();
         UTerm!();
         B1!();
-        UInt!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_370 {
     };
 }
 
-impl_370!()
+impl_370!();

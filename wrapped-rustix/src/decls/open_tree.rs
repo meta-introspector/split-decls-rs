@@ -12,4 +12,4 @@ macro_rules! open_tree {
     };
 }
 
-open_tree!()
+open_tree!();

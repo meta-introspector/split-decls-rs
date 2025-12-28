@@ -4,4 +4,4 @@ macro_rules! CPU_TYPE_SPARC {
     };
 }
 
-CPU_TYPE_SPARC!()
+CPU_TYPE_SPARC!();

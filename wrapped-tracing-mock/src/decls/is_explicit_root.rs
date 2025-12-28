@@ -11,4 +11,4 @@ macro_rules! is_explicit_root {
     };
 }
 
-is_explicit_root!()
+is_explicit_root!();

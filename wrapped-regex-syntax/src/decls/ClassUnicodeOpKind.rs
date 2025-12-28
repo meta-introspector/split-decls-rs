@@ -4,4 +4,4 @@ macro_rules! ClassUnicodeOpKind {
     };
 }
 
-ClassUnicodeOpKind!()
+ClassUnicodeOpKind!();

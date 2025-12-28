@@ -12,4 +12,4 @@ macro_rules! from_bytes_mut {
     };
 }
 
-from_bytes_mut!()
+from_bytes_mut!();

@@ -1,17 +1,17 @@
 macro_rules! deps {
     () => {
-        Slot!();
-        FreeList!();
-        Generation!();
-        Slab!();
-        LifecycleGen!();
-        InitGuard!();
+        Config!();
         Lifecycle!();
         RefCount!();
         Guard!();
-        Pool!();
-        Config!();
         State!();
+        InitGuard!();
+        Slot!();
+        Slab!();
+        Generation!();
+        FreeList!();
+        LifecycleGen!();
+        Pool!();
     };
 }
 
@@ -22,4 +22,4 @@ macro_rules! impl_84 {
     };
 }
 
-impl_84!()
+impl_84!();

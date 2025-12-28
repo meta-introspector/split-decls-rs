@@ -11,4 +11,4 @@ macro_rules! unsize_ptr {
     };
 }
 
-unsize_ptr!()
+unsize_ptr!();

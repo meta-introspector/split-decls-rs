@@ -11,4 +11,4 @@ macro_rules! parse_optional_punct {
     };
 }
 
-parse_optional_punct!()
+parse_optional_punct!();

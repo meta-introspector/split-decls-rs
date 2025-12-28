@@ -4,4 +4,4 @@ macro_rules! is_false {
     };
 }
 
-is_false!()
+is_false!();

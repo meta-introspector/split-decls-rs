@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ByteClasses!();
         DFA!();
+        ByteClasses!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Transitions {
     };
 }
 
-Transitions!()
+Transitions!();

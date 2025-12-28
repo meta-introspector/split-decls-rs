@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        AddressFamily!();
         RawAddressFamily!();
+        AddressFamily!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_648 {
     };
 }
 
-impl_648!()
+impl_648!();

@@ -4,4 +4,4 @@ macro_rules! PlaceholderIndices {
     };
 }
 
-PlaceholderIndices!()
+PlaceholderIndices!();

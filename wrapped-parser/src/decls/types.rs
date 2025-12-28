@@ -1,6 +1,6 @@
 macro_rules! types {
     () => {
-        pub mod types ;
+        mod types ;
     };
 }
 

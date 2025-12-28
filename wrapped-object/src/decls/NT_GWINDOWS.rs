@@ -4,4 +4,4 @@ macro_rules! NT_GWINDOWS {
     };
 }
 
-NT_GWINDOWS!()
+NT_GWINDOWS!();

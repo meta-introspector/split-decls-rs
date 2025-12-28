@@ -4,4 +4,4 @@ macro_rules! R_390_GOT16 {
     };
 }
 
-R_390_GOT16!()
+R_390_GOT16!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         ImageDosHeader!();
-        Result!();
-        ReadRef!();
         Error!();
+        ReadRef!();
+        Result!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_647 {
     };
 }
 
-impl_647!()
+impl_647!();

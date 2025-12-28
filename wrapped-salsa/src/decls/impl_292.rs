@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        ZalsaLocal!();
-        StorageBuilder!();
-        Zalsa!();
-        Event!();
-        EventKind!();
-        StorageHandle!();
-        Storage!();
         Database!();
+        StorageBuilder!();
+        Event!();
+        ZalsaLocal!();
+        Storage!();
+        StorageHandle!();
+        Zalsa!();
+        EventKind!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_292 {
     };
 }
 
-impl_292!()
+impl_292!();

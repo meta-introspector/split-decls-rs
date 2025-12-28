@@ -11,4 +11,4 @@ macro_rules! get_single_str_spanned_from_tts {
     };
 }
 
-get_single_str_spanned_from_tts!()
+get_single_str_spanned_from_tts!();

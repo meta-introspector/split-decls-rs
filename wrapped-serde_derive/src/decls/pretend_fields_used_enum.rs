@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Container!();
         Variant!();
         Style!();
+        Container!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! pretend_fields_used_enum {
     };
 }
 
-pretend_fields_used_enum!()
+pretend_fields_used_enum!();

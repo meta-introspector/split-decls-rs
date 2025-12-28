@@ -4,4 +4,4 @@ macro_rules! remove_sections {
     };
 }
 
-remove_sections!()
+remove_sections!();

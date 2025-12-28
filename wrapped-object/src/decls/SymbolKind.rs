@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        File!();
         Section!();
+        File!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! SymbolKind {
     };
 }
 
-SymbolKind!()
+SymbolKind!();

@@ -4,4 +4,4 @@ macro_rules! compute_ws {
     };
 }
 
-compute_ws!()
+compute_ws!();

@@ -4,4 +4,4 @@ macro_rules! LifetimeMismatchOpaqueParam {
     };
 }
 
-LifetimeMismatchOpaqueParam!()
+LifetimeMismatchOpaqueParam!();

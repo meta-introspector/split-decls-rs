@@ -4,4 +4,4 @@ macro_rules! _memoffset__let_base_ptr {
     };
 }
 
-_memoffset__let_base_ptr!()
+_memoffset__let_base_ptr!();

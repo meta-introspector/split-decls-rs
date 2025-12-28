@@ -4,4 +4,4 @@ macro_rules! SignatureEncoding {
     };
 }
 
-SignatureEncoding!()
+SignatureEncoding!();

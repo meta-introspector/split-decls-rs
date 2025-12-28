@@ -4,4 +4,4 @@ macro_rules! wasm32 {
     };
 }
 
-wasm32!()
+wasm32!();

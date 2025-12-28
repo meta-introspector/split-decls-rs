@@ -4,4 +4,4 @@ macro_rules! combinations {
     };
 }
 
-combinations!()
+combinations!();

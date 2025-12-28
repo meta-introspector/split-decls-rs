@@ -4,4 +4,4 @@ macro_rules! get_new_lifetime_name {
     };
 }
 
-get_new_lifetime_name!()
+get_new_lifetime_name!();

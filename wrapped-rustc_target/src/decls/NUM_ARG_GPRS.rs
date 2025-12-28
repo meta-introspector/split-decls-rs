@@ -4,4 +4,4 @@ macro_rules! NUM_ARG_GPRS {
     };
 }
 
-NUM_ARG_GPRS!()
+NUM_ARG_GPRS!();

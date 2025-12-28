@@ -4,4 +4,4 @@ macro_rules! RustDetailsInfoTrait {
     };
 }
 
-RustDetailsInfoTrait!()
+RustDetailsInfoTrait!();

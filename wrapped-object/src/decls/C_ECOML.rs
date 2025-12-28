@@ -4,4 +4,4 @@ macro_rules! C_ECOML {
     };
 }
 
-C_ECOML!()
+C_ECOML!();

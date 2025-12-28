@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Deserializer!();
+        SeqAccess!();
         Wrap!();
         Path!();
-        SeqAccess!();
         MapAccess!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_10 {
     };
 }
 
-impl_10!()
+impl_10!();

@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        File!();
-        TypeIndex!();
-        Decode!();
-        Row!();
         Blob!();
+        Row!();
+        Decode!();
+        TypeIndex!();
         RowIterator!();
+        File!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! AsRow {
     };
 }
 
-AsRow!()
+AsRow!();

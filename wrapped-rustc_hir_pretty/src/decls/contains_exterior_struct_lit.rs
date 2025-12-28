@@ -4,4 +4,4 @@ macro_rules! contains_exterior_struct_lit {
     };
 }
 
-contains_exterior_struct_lit!()
+contains_exterior_struct_lit!();

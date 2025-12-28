@@ -4,4 +4,4 @@ macro_rules! FinalizedGcFailed {
     };
 }
 
-FinalizedGcFailed!()
+FinalizedGcFailed!();

@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        ValueSerializer!();
         Table!();
-        Value!();
-        Array!();
-        Error!();
         Index!();
+        Array!();
+        Value!();
+        Error!();
+        ValueSerializer!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_54 {
     };
 }
 
-impl_54!()
+impl_54!();

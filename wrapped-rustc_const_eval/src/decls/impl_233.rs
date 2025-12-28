@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
         ImmTy!();
-        InterpCx!();
-        MemoryKind!();
-        Coroutine!();
-        Machine!();
-        OpTy!();
         PlaceTy!();
+        OpTy!();
+        Coroutine!();
+        MemoryKind!();
+        Machine!();
+        InterpCx!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_233 {
     };
 }
 
-impl_233!()
+impl_233!();

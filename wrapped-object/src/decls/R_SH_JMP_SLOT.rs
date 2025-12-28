@@ -4,4 +4,4 @@ macro_rules! R_SH_JMP_SLOT {
     };
 }
 
-R_SH_JMP_SLOT!()
+R_SH_JMP_SLOT!();

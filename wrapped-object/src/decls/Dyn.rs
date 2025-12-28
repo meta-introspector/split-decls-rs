@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Pod!();
-        Result!();
-        StringTable!();
         ReadRef!();
+        StringTable!();
+        Pod!();
         Endian!();
+        Result!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! Dyn {
     };
 }
 
-Dyn!()
+Dyn!();

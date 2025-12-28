@@ -4,4 +4,4 @@ macro_rules! DT_AUXILIARY {
     };
 }
 
-DT_AUXILIARY!()
+DT_AUXILIARY!();

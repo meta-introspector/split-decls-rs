@@ -11,4 +11,4 @@ macro_rules! build_clone_shim {
     };
 }
 
-build_clone_shim!()
+build_clone_shim!();

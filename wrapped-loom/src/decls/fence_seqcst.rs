@@ -11,4 +11,4 @@ macro_rules! fence_seqcst {
     };
 }
 
-fence_seqcst!()
+fence_seqcst!();

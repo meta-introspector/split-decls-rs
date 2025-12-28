@@ -12,4 +12,4 @@ macro_rules! insert_remove {
     };
 }
 
-insert_remove!()
+insert_remove!();

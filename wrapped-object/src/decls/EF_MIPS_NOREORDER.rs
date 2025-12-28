@@ -4,4 +4,4 @@ macro_rules! EF_MIPS_NOREORDER {
     };
 }
 
-EF_MIPS_NOREORDER!()
+EF_MIPS_NOREORDER!();

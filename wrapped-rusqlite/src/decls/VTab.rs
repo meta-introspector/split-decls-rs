@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        IndexInfo!();
         VTabConnection!();
+        IndexInfo!();
         VTabCursor!();
         Result!();
     };
@@ -14,4 +14,4 @@ macro_rules! VTab {
     };
 }
 
-VTab!()
+VTab!();

@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        HasFieldMap!();
         DiagnosticDeriveError!();
-        AllowMultipleAlternatives!();
-        SubdiagnosticKind!();
-        Applicability!();
-        SuggestionKind!();
         List!();
+        SuggestionKind!();
+        AllowMultipleAlternatives!();
         SubdiagnosticVariant!();
+        SubdiagnosticKind!();
+        HasFieldMap!();
+        Applicability!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_66 {
     };
 }
 
-impl_66!()
+impl_66!();

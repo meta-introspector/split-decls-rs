@@ -4,4 +4,4 @@ macro_rules! NormalizedInputsAndOutput {
     };
 }
 
-NormalizedInputsAndOutput!()
+NormalizedInputsAndOutput!();

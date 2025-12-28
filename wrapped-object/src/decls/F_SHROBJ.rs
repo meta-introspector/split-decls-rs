@@ -4,4 +4,4 @@ macro_rules! F_SHROBJ {
     };
 }
 
-F_SHROBJ!()
+F_SHROBJ!();

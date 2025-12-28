@@ -4,4 +4,4 @@ macro_rules! gnu_hash {
     };
 }
 
-gnu_hash!()
+gnu_hash!();

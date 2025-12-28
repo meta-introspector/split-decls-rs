@@ -4,4 +4,4 @@ macro_rules! RT_DIALOG {
     };
 }
 
-RT_DIALOG!()
+RT_DIALOG!();

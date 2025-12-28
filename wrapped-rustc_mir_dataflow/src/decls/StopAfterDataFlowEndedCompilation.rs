@@ -4,4 +4,4 @@ macro_rules! StopAfterDataFlowEndedCompilation {
     };
 }
 
-StopAfterDataFlowEndedCompilation!()
+StopAfterDataFlowEndedCompilation!();

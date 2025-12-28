@@ -4,4 +4,4 @@ macro_rules! iter_format {
     };
 }
 
-iter_format!()
+iter_format!();

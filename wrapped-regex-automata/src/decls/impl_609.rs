@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Captures!();
         GroupInfo!();
         Span!();
-        Match!();
         GroupInfoPatternNames!();
+        Match!();
         PatternID!();
-        CapturesPatternIter!();
+        Captures!();
         PikeVM!();
+        CapturesPatternIter!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_609 {
     };
 }
 
-impl_609!()
+impl_609!();

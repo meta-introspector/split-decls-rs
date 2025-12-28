@@ -4,4 +4,4 @@ macro_rules! OHWA1_R4KEOP_CLEAN {
     };
 }
 
-OHWA1_R4KEOP_CLEAN!()
+OHWA1_R4KEOP_CLEAN!();

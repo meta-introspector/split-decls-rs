@@ -1,18 +1,18 @@
 macro_rules! deps {
     () => {
-        BidiPairedBracketType!();
-        WordBreak!();
-        BidiClass!();
-        HangulSyllableType!();
-        IndicSyllabicCategory!();
-        LineBreak!();
+        EastAsianWidth!();
         SentenceBreak!();
         Script!();
+        BidiPairedBracketType!();
         GraphemeClusterBreak!();
-        IndicConjunctBreak!();
-        EastAsianWidth!();
         VerticalOrientation!();
+        WordBreak!();
         JoiningType!();
+        HangulSyllableType!();
+        BidiClass!();
+        IndicConjunctBreak!();
+        IndicSyllabicCategory!();
+        LineBreak!();
     };
 }
 
@@ -23,4 +23,4 @@ macro_rules! EnumeratedProperty {
     };
 }
 
-EnumeratedProperty!()
+EnumeratedProperty!();

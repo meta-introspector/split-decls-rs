@@ -1,18 +1,18 @@
 macro_rules! deps {
     () => {
+        GenericParamKind!();
+        MethodKind!();
+        Impl!();
+        Variant!();
         Arm!();
         GenericParam!();
-        WherePredicate!();
-        Crate!();
-        GenericParamKind!();
-        Impl!();
-        MethodKind!();
-        PatField!();
-        Mod!();
         ExprField!();
-        Variant!();
+        WherePredicate!();
         Closure!();
+        PatField!();
         Param!();
+        Mod!();
+        Crate!();
     };
 }
 
@@ -23,4 +23,4 @@ macro_rules! Target {
     };
 }
 
-Target!()
+Target!();

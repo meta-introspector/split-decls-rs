@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Clear!();
-        Array!();
-        Pool!();
         Config!();
+        Pool!();
+        Array!();
+        Clear!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_11 {
     };
 }
 
-impl_11!()
+impl_11!();

@@ -11,4 +11,4 @@ macro_rules! to_sorted_vec {
     };
 }
 
-to_sorted_vec!()
+to_sorted_vec!();

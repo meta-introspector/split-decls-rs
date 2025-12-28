@@ -4,4 +4,4 @@ macro_rules! ReadBuf {
     };
 }
 
-ReadBuf!()
+ReadBuf!();

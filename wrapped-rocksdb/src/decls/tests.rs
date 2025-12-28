@@ -3,9 +3,9 @@ macro_rules! deps {
         Options!();
         MemtableFactory!();
         CompactionPri!();
+        WriteBufferManager!();
         Cache!();
         DB!();
-        WriteBufferManager!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! tests {
     };
 }
 
-tests!()
+tests!();

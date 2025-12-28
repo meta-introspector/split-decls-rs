@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Span!();
         Cursor!();
         LexError!();
+        Span!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! lex_error {
     };
 }
 
-lex_error!()
+lex_error!();

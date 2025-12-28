@@ -4,4 +4,4 @@ macro_rules! unit_bindings {
     };
 }
 
-unit_bindings!()
+unit_bindings!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        CombineAttributeParser!();
         AttributeParser!();
+        CombineAttributeParser!();
         Stage!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! Combine {
     };
 }
 
-Combine!()
+Combine!();

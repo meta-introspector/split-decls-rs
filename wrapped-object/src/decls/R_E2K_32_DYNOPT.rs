@@ -11,4 +11,4 @@ macro_rules! R_E2K_32_DYNOPT {
     };
 }
 
-R_E2K_32_DYNOPT!()
+R_E2K_32_DYNOPT!();

@@ -4,4 +4,4 @@ macro_rules! GURUNG_KHEMA {
     };
 }
 
-GURUNG_KHEMA!()
+GURUNG_KHEMA!();

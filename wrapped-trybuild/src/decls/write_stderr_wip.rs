@@ -4,4 +4,4 @@ macro_rules! write_stderr_wip {
     };
 }
 
-write_stderr_wip!()
+write_stderr_wip!();

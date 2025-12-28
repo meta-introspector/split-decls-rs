@@ -11,4 +11,4 @@ macro_rules! starting_with {
     };
 }
 
-starting_with!()
+starting_with!();

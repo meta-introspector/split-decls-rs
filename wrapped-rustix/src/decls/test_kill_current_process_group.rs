@@ -11,4 +11,4 @@ macro_rules! test_kill_current_process_group {
     };
 }
 
-test_kill_current_process_group!()
+test_kill_current_process_group!();

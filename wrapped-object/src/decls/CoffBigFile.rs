@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        CoffFile!();
         AnonObjectHeaderBigobj!();
+        CoffFile!();
         Object!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! CoffBigFile {
     };
 }
 
-CoffBigFile!()
+CoffBigFile!();

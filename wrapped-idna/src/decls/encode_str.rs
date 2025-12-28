@@ -11,4 +11,4 @@ macro_rules! encode_str {
     };
 }
 
-encode_str!()
+encode_str!();

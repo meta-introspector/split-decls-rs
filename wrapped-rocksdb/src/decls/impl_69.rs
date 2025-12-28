@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Decision!();
         CompactionFilterCallback!();
         CompactionFilterFn!();
+        Decision!();
         CompactionFilter!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_69 {
     };
 }
 
-impl_69!()
+impl_69!();

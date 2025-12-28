@@ -11,4 +11,4 @@ macro_rules! eq_f64 {
     };
 }
 
-eq_f64!()
+eq_f64!();

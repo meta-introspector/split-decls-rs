@@ -4,4 +4,4 @@ macro_rules! PreciseCapturingNotAllowedHere {
     };
 }
 
-PreciseCapturingNotAllowedHere!()
+PreciseCapturingNotAllowedHere!();

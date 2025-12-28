@@ -12,4 +12,4 @@ macro_rules! write_version {
     };
 }
 
-write_version!()
+write_version!();

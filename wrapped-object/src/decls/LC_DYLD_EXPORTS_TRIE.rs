@@ -11,4 +11,4 @@ macro_rules! LC_DYLD_EXPORTS_TRIE {
     };
 }
 
-LC_DYLD_EXPORTS_TRIE!()
+LC_DYLD_EXPORTS_TRIE!();

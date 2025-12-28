@@ -4,4 +4,4 @@ macro_rules! pwstr {
     };
 }
 
-pwstr!()
+pwstr!();

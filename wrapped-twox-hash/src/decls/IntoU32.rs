@@ -4,4 +4,4 @@ macro_rules! IntoU32 {
     };
 }
 
-IntoU32!()
+IntoU32!();

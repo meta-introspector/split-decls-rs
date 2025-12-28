@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         Endian!();
         ElfSegment!();
-        Endianness!();
         FileHeader64!();
+        Endianness!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! ElfSegment64 {
     };
 }
 
-ElfSegment64!()
+ElfSegment64!();

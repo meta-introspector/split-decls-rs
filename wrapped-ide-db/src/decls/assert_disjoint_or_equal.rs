@@ -11,4 +11,4 @@ macro_rules! assert_disjoint_or_equal {
     };
 }
 
-assert_disjoint_or_equal!()
+assert_disjoint_or_equal!();

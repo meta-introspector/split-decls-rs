@@ -4,4 +4,4 @@ macro_rules! DT_DEPAUDIT {
     };
 }
 
-DT_DEPAUDIT!()
+DT_DEPAUDIT!();

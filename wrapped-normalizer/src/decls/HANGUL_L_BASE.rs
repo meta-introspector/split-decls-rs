@@ -4,4 +4,4 @@ macro_rules! HANGUL_L_BASE {
     };
 }
 
-HANGUL_L_BASE!()
+HANGUL_L_BASE!();

@@ -4,4 +4,4 @@ macro_rules! BlockAnd {
     };
 }
 
-BlockAnd!()
+BlockAnd!();

@@ -4,4 +4,4 @@ macro_rules! TOKEN_NORMAL {
     };
 }
 
-TOKEN_NORMAL!()
+TOKEN_NORMAL!();

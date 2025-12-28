@@ -4,4 +4,4 @@ macro_rules! read_literal_array {
     };
 }
 
-read_literal_array!()
+read_literal_array!();

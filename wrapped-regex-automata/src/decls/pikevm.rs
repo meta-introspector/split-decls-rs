@@ -4,4 +4,4 @@ macro_rules! pikevm {
     };
 }
 
-pikevm!()
+pikevm!();

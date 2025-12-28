@@ -4,4 +4,4 @@ macro_rules! bits_for_tags {
     };
 }
 
-bits_for_tags!()
+bits_for_tags!();

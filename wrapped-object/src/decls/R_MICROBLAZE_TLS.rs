@@ -4,4 +4,4 @@ macro_rules! R_MICROBLAZE_TLS {
     };
 }
 
-R_MICROBLAZE_TLS!()
+R_MICROBLAZE_TLS!();

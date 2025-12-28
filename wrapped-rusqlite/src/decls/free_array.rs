@@ -11,4 +11,4 @@ macro_rules! free_array {
     };
 }
 
-free_array!()
+free_array!();

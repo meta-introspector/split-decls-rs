@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        TArr!();
         Diff!();
+        TArr!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_542 {
     };
 }
 
-impl_542!()
+impl_542!();

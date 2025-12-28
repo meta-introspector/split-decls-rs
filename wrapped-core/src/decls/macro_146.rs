@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        IUnknown!();
         IInspectable!();
+        IUnknown!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! macro_146 {
     };
 }
 
-macro_146!()
+macro_146!();

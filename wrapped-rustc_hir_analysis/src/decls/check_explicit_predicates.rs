@@ -16,4 +16,4 @@ macro_rules! check_explicit_predicates {
     };
 }
 
-check_explicit_predicates!()
+check_explicit_predicates!();

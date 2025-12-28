@@ -11,4 +11,4 @@ macro_rules! expander_to_proc_macro {
     };
 }
 
-expander_to_proc_macro!()
+expander_to_proc_macro!();

@@ -4,4 +4,4 @@ macro_rules! macho_is_arm64e {
     };
 }
 
-macho_is_arm64e!()
+macho_is_arm64e!();

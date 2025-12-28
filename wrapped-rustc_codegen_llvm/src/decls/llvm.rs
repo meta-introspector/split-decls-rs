@@ -4,4 +4,4 @@ macro_rules! llvm {
     };
 }
 
-llvm!()
+llvm!();

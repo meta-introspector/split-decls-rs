@@ -11,4 +11,4 @@ macro_rules! resumable_extend {
     };
 }
 
-resumable_extend!()
+resumable_extend!();

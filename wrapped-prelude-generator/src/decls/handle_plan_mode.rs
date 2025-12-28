@@ -12,4 +12,4 @@ macro_rules! handle_plan_mode {
     };
 }
 
-handle_plan_mode!()
+handle_plan_mode!();

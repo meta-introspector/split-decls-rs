@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
+        BecauseExclusive!();
+        CastType!();
+        TryFromBytes!();
         PointerMetadata!();
         IntoBytes!();
-        TryFromBytes!();
-        TryCastError!();
         KnownLayout!();
-        CastType!();
-        BecauseExclusive!();
+        TryCastError!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! try_mut_from_prefix_suffix {
     };
 }
 
-try_mut_from_prefix_suffix!()
+try_mut_from_prefix_suffix!();

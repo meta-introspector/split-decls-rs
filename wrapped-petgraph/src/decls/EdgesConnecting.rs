@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        EdgeType!();
         Edges!();
-        DefaultIx!();
         IndexType!();
+        EdgeType!();
+        DefaultIx!();
         NodeIndex!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! EdgesConnecting {
     };
 }
 
-EdgesConnecting!()
+EdgesConnecting!();

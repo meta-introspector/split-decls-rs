@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        ToGraph6!();
+        Undirected!();
         GraphMap!();
         NodeTrait!();
-        Undirected!();
+        ToGraph6!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_620 {
     };
 }
 
-impl_620!()
+impl_620!();

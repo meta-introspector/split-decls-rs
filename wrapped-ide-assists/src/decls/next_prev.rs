@@ -4,4 +4,4 @@ macro_rules! next_prev {
     };
 }
 
-next_prev!()
+next_prev!();

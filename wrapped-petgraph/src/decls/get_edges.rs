@@ -11,4 +11,4 @@ macro_rules! get_edges {
     };
 }
 
-get_edges!()
+get_edges!();

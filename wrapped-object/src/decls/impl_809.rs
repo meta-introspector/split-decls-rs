@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        FileHeader!();
-        ReadRef!();
-        Symbol!();
         Item!();
-        SymbolIndex!();
+        Symbol!();
+        FileHeader!();
         SymbolIterator!();
+        SymbolIndex!();
+        ReadRef!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_809 {
     };
 }
 
-impl_809!()
+impl_809!();

@@ -4,4 +4,4 @@ macro_rules! active_query {
     };
 }
 
-active_query!()
+active_query!();

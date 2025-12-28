@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        AstNode!();
+        SyntaxError!();
         SyntaxNode!();
         Parse!();
-        SyntaxError!();
-        AstNode!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_193 {
     };
 }
 
-impl_193!()
+impl_193!();

@@ -11,4 +11,4 @@ macro_rules! SERVICE_CONTEXT {
     };
 }
 
-SERVICE_CONTEXT!()
+SERVICE_CONTEXT!();

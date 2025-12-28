@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Table!();
         VersionFile!();
+        Table!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! VersionFiles {
     };
 }
 
-VersionFiles!()
+VersionFiles!();

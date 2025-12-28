@@ -4,4 +4,4 @@ macro_rules! MH_CIGAM {
     };
 }
 
-MH_CIGAM!()
+MH_CIGAM!();

@@ -12,4 +12,4 @@ macro_rules! enforce_impl_lifetime_params_are_constrained {
     };
 }
 
-enforce_impl_lifetime_params_are_constrained!()
+enforce_impl_lifetime_params_are_constrained!();

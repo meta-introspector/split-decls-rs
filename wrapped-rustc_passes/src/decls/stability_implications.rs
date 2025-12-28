@@ -4,4 +4,4 @@ macro_rules! stability_implications {
     };
 }
 
-stability_implications!()
+stability_implications!();

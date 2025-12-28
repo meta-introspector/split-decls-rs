@@ -4,4 +4,4 @@ macro_rules! SignalsInfo {
     };
 }
 
-SignalsInfo!()
+SignalsInfo!();

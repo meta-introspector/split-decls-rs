@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        TranslatorBuilder!();
         HirFrame!();
         Flags!();
-        TranslatorBuilder!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Translator {
     };
 }
 
-Translator!()
+Translator!();

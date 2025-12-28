@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         Walkable!();
-        Generics!();
-        Ty!();
         TyAliasWhereClauses!();
+        Generics!();
         BoundKind!();
         GenericBounds!();
+        Ty!();
         Defaultness!();
     };
 }
@@ -17,4 +17,4 @@ macro_rules! TyAlias {
     };
 }
 
-TyAlias!()
+TyAlias!();

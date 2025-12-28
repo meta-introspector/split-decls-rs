@@ -4,4 +4,4 @@ macro_rules! STB_HIPROC {
     };
 }
 
-STB_HIPROC!()
+STB_HIPROC!();

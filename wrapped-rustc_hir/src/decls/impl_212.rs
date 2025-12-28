@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        BodyOwnerKind!();
         Closure!();
+        BodyOwnerKind!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_212 {
     };
 }
 
-impl_212!()
+impl_212!();

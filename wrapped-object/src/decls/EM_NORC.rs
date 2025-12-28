@@ -4,4 +4,4 @@ macro_rules! EM_NORC {
     };
 }
 
-EM_NORC!()
+EM_NORC!();

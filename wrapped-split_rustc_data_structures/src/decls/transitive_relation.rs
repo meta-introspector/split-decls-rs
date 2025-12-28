@@ -4,4 +4,4 @@ macro_rules! transitive_relation {
     };
 }
 
-transitive_relation!()
+transitive_relation!();

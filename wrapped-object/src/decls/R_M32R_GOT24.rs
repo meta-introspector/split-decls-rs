@@ -4,4 +4,4 @@ macro_rules! R_M32R_GOT24 {
     };
 }
 
-R_M32R_GOT24!()
+R_M32R_GOT24!();

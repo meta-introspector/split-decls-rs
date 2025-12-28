@@ -12,4 +12,4 @@ macro_rules! IBMZ_FEATURES {
     };
 }
 
-IBMZ_FEATURES!()
+IBMZ_FEATURES!();

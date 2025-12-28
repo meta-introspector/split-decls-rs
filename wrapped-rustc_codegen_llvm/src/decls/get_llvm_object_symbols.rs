@@ -4,4 +4,4 @@ macro_rules! get_llvm_object_symbols {
     };
 }
 
-get_llvm_object_symbols!()
+get_llvm_object_symbols!();

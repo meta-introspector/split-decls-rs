@@ -4,4 +4,4 @@ macro_rules! LayoutConstrainedPlaceVisitor {
     };
 }
 
-LayoutConstrainedPlaceVisitor!()
+LayoutConstrainedPlaceVisitor!();

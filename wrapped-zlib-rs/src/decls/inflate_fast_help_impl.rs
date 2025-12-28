@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        State!();
         Flags!();
+        State!();
         Mode!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! inflate_fast_help_impl {
     };
 }
 
-inflate_fast_help_impl!()
+inflate_fast_help_impl!();

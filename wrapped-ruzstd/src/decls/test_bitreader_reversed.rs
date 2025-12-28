@@ -11,4 +11,4 @@ macro_rules! test_bitreader_reversed {
     };
 }
 
-test_bitreader_reversed!()
+test_bitreader_reversed!();

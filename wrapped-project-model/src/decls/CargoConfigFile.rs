@@ -4,4 +4,4 @@ macro_rules! CargoConfigFile {
     };
 }
 
-CargoConfigFile!()
+CargoConfigFile!();

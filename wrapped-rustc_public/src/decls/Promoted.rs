@@ -4,4 +4,4 @@ macro_rules! Promoted {
     };
 }
 
-Promoted!()
+Promoted!();

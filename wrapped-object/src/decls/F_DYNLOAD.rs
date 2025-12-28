@@ -4,4 +4,4 @@ macro_rules! F_DYNLOAD {
     };
 }
 
-F_DYNLOAD!()
+F_DYNLOAD!();

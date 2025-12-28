@@ -4,4 +4,4 @@ macro_rules! UnusedDocComment {
     };
 }
 
-UnusedDocComment!()
+UnusedDocComment!();

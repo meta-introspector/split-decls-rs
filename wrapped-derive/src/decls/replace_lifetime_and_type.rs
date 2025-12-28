@@ -4,4 +4,4 @@ macro_rules! replace_lifetime_and_type {
     };
 }
 
-replace_lifetime_and_type!()
+replace_lifetime_and_type!();

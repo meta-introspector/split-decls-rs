@@ -4,4 +4,4 @@ macro_rules! rename_fields {
     };
 }
 
-rename_fields!()
+rename_fields!();

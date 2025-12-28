@@ -4,4 +4,4 @@ macro_rules! Aligned64kAllocation {
     };
 }
 
-Aligned64kAllocation!()
+Aligned64kAllocation!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        IndexMap!();
         Bucket!();
+        IndexMap!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! ParKeys {
     };
 }
 
-ParKeys!()
+ParKeys!();

@@ -4,4 +4,4 @@ macro_rules! bit_writer {
     };
 }
 
-bit_writer!()
+bit_writer!();

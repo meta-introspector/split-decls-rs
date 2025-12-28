@@ -4,4 +4,4 @@ macro_rules! TeraParser {
     };
 }
 
-TeraParser!()
+TeraParser!();

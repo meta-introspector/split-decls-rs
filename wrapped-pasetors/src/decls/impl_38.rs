@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        AsymmetricSecretKey!();
-        V2!();
-        Error!();
         V4!();
+        V2!();
+        AsymmetricSecretKey!();
+        Error!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_38 {
     };
 }
 
-impl_38!()
+impl_38!();

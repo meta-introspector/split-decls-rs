@@ -11,4 +11,4 @@ macro_rules! get_multiple_renames {
     };
 }
 
-get_multiple_renames!()
+get_multiple_renames!();

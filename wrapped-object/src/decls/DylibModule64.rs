@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        U64!();
         Endian!();
         U32!();
+        U64!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! DylibModule64 {
     };
 }
 
-DylibModule64!()
+DylibModule64!();

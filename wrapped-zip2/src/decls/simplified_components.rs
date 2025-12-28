@@ -4,4 +4,4 @@ macro_rules! simplified_components {
     };
 }
 
-simplified_components!()
+simplified_components!();

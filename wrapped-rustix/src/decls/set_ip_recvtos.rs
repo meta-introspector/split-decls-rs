@@ -11,4 +11,4 @@ macro_rules! set_ip_recvtos {
     };
 }
 
-set_ip_recvtos!()
+set_ip_recvtos!();

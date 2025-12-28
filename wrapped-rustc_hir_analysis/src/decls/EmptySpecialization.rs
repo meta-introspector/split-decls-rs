@@ -4,4 +4,4 @@ macro_rules! EmptySpecialization {
     };
 }
 
-EmptySpecialization!()
+EmptySpecialization!();

@@ -4,4 +4,4 @@ macro_rules! OpenURI {
     };
 }
 
-OpenURI!()
+OpenURI!();

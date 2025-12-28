@@ -4,4 +4,4 @@ macro_rules! io_std {
     };
 }
 
-io_std!()
+io_std!();

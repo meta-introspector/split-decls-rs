@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Parser!();
-        Error!();
-        ParseError!();
-        Needed!();
         IResult!();
-        NomRange!();
-        Fold!();
         Input!();
+        Needed!();
+        Error!();
+        Parser!();
+        ParseError!();
+        Fold!();
+        NomRange!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! fold {
     };
 }
 
-fold!()
+fold!();

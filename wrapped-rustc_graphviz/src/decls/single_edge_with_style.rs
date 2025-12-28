@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        LabelledGraph!();
         Trivial!();
+        LabelledGraph!();
         Style!();
     };
 }
@@ -18,4 +18,4 @@ macro_rules! single_edge_with_style {
     };
 }
 
-single_edge_with_style!()
+single_edge_with_style!();

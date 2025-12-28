@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Value!();
-        HexBytes!();
-        DisplayValue!();
-        ValueSet!();
-        Field!();
-        Event!();
         Subscriber!();
+        Event!();
+        Value!();
+        DisplayValue!();
+        HexBytes!();
+        Field!();
+        ValueSet!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! Visit {
     };
 }
 
-Visit!()
+Visit!();

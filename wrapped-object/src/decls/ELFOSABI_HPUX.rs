@@ -4,4 +4,4 @@ macro_rules! ELFOSABI_HPUX {
     };
 }
 
-ELFOSABI_HPUX!()
+ELFOSABI_HPUX!();

@@ -4,4 +4,4 @@ macro_rules! free_boxed_value {
     };
 }
 
-free_boxed_value!()
+free_boxed_value!();

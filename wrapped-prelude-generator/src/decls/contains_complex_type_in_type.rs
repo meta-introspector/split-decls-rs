@@ -4,4 +4,4 @@ macro_rules! contains_complex_type_in_type {
     };
 }
 
-contains_complex_type_in_type!()
+contains_complex_type_in_type!();

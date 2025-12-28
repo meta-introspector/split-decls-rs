@@ -4,4 +4,4 @@ macro_rules! fragment {
     };
 }
 
-fragment!()
+fragment!();

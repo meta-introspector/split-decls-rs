@@ -11,4 +11,4 @@ macro_rules! HKEY_CURRENT_USER {
     };
 }
 
-HKEY_CURRENT_USER!()
+HKEY_CURRENT_USER!();

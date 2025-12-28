@@ -4,4 +4,4 @@ macro_rules! R_RISCV_TPREL_ADD {
     };
 }
 
-R_RISCV_TPREL_ADD!()
+R_RISCV_TPREL_ADD!();

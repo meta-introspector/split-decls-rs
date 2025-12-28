@@ -11,4 +11,4 @@ macro_rules! EphemeralSecret {
     };
 }
 
-EphemeralSecret!()
+EphemeralSecret!();

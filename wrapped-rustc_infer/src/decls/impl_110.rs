@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        PredicateObligations!();
-        Obligation!();
         InferCtxt!();
+        Obligation!();
+        PredicateObligations!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_110 {
     };
 }
 
-impl_110!()
+impl_110!();

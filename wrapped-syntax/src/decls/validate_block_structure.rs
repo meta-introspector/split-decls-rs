@@ -11,4 +11,4 @@ macro_rules! validate_block_structure {
     };
 }
 
-validate_block_structure!()
+validate_block_structure!();

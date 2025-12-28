@@ -13,4 +13,4 @@ macro_rules! print_markframe_trace {
     };
 }
 
-print_markframe_trace!()
+print_markframe_trace!();

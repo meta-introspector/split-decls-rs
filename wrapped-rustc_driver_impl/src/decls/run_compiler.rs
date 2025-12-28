@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        PrintExtra!();
         CantEmitMIR!();
         Callbacks!();
+        PrintExtra!();
         Compilation!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! run_compiler {
     };
 }
 
-run_compiler!()
+run_compiler!();

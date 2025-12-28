@@ -4,4 +4,4 @@ macro_rules! CodeGenOptLevel {
     };
 }
 
-CodeGenOptLevel!()
+CodeGenOptLevel!();

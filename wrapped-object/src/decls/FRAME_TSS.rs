@@ -4,4 +4,4 @@ macro_rules! FRAME_TSS {
     };
 }
 
-FRAME_TSS!()
+FRAME_TSS!();

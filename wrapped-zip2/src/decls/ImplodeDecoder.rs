@@ -4,4 +4,4 @@ macro_rules! ImplodeDecoder {
     };
 }
 
-ImplodeDecoder!()
+ImplodeDecoder!();

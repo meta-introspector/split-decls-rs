@@ -11,4 +11,4 @@ macro_rules! test_clone_from {
     };
 }
 
-test_clone_from!()
+test_clone_from!();

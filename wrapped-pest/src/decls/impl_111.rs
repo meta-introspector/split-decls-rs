@@ -1,19 +1,19 @@
 macro_rules! deps {
     () => {
-        Lookahead!();
         ParserState!();
-        SpanOrLiteral!();
-        Parser!();
-        Span!();
-        Position!();
-        ParseResult!();
+        QueueableToken!();
         Stack!();
+        Parser!();
+        Lookahead!();
         Atomicity!();
         MatchDir!();
-        RuleType!();
-        QueueableToken!();
-        ParsingToken!();
+        SpanOrLiteral!();
         ParseAttempts!();
+        Position!();
+        RuleType!();
+        ParseResult!();
+        ParsingToken!();
+        Span!();
     };
 }
 
@@ -24,4 +24,4 @@ macro_rules! impl_111 {
     };
 }
 
-impl_111!()
+impl_111!();

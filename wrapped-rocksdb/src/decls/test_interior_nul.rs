@@ -11,4 +11,4 @@ macro_rules! test_interior_nul {
     };
 }
 
-test_interior_nul!()
+test_interior_nul!();

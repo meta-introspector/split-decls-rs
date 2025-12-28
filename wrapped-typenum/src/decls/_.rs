@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        FoldMul!();
         ATerm!();
+        FoldMul!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! _ {
     };
 }
 
-_!()
+_!();

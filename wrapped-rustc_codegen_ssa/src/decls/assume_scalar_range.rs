@@ -11,4 +11,4 @@ macro_rules! assume_scalar_range {
     };
 }
 
-assume_scalar_range!()
+assume_scalar_range!();

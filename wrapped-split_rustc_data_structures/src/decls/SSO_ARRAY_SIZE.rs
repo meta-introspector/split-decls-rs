@@ -4,4 +4,4 @@ macro_rules! SSO_ARRAY_SIZE {
     };
 }
 
-SSO_ARRAY_SIZE!()
+SSO_ARRAY_SIZE!();

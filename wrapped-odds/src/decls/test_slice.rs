@@ -4,4 +4,4 @@ macro_rules! test_slice {
     };
 }
 
-test_slice!()
+test_slice!();

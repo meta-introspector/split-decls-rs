@@ -4,4 +4,4 @@ macro_rules! IgnoringOutDir {
     };
 }
 
-IgnoringOutDir!()
+IgnoringOutDir!();

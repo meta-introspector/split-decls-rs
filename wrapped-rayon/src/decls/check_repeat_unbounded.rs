@@ -4,4 +4,4 @@ macro_rules! check_repeat_unbounded {
     };
 }
 
-check_repeat_unbounded!()
+check_repeat_unbounded!();

@@ -4,4 +4,4 @@ macro_rules! RegionCtxt {
     };
 }
 
-RegionCtxt!()
+RegionCtxt!();

@@ -1,24 +1,24 @@
 macro_rules! deps {
     () => {
-        ValueRef!();
-        Array!();
-        AndThenRows!();
-        ToSql!();
-        Rows!();
         StatementStatus!();
-        RawStatement!();
+        ToSql!();
+        Row!();
         ToSqlOutput!();
         BindIndex!();
         Blob!();
+        ZeroBlob!();
+        Result!();
+        Connection!();
+        Rows!();
+        Array!();
         Error!();
         Statement!();
-        Connection!();
-        Result!();
-        Params!();
         MappedRows!();
         Null!();
-        Row!();
-        ZeroBlob!();
+        AndThenRows!();
+        Params!();
+        RawStatement!();
+        ValueRef!();
     };
 }
 
@@ -29,4 +29,4 @@ macro_rules! impl_275 {
     };
 }
 
-impl_275!()
+impl_275!();

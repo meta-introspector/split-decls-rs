@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Exfiltrator!();
         RefSignalIterator!();
+        Exfiltrator!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Forever {
     };
 }
 
-Forever!()
+Forever!();

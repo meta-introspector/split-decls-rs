@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Style!();
         Edge!();
+        Style!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! LabelledGraph {
     };
 }
 
-LabelledGraph!()
+LabelledGraph!();

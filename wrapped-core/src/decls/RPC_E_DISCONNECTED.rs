@@ -11,4 +11,4 @@ macro_rules! RPC_E_DISCONNECTED {
     };
 }
 
-RPC_E_DISCONNECTED!()
+RPC_E_DISCONNECTED!();

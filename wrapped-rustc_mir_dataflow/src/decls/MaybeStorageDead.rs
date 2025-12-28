@@ -4,4 +4,4 @@ macro_rules! MaybeStorageDead {
     };
 }
 
-MaybeStorageDead!()
+MaybeStorageDead!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        EventReceiver!();
-        TokenKind!();
-        Encoding!();
-        ErrorSink!();
         Stream!();
+        ErrorSink!();
+        TokenKind!();
+        EventReceiver!();
+        Encoding!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! opt_dot_keys {
     };
 }
 
-opt_dot_keys!()
+opt_dot_keys!();

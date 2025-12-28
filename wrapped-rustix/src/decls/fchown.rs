@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Gid!();
         Uid!();
+        Gid!();
         Result!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! fchown {
     };
 }
 
-fchown!()
+fchown!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        MirPass!();
         Lint!();
+        MirPass!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! MirLint {
     };
 }
 
-MirLint!()
+MirLint!();

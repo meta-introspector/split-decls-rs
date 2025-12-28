@@ -4,4 +4,4 @@ macro_rules! OnlyCastu8ToChar {
     };
 }
 
-OnlyCastu8ToChar!()
+OnlyCastu8ToChar!();

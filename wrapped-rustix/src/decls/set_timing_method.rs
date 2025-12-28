@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Result!();
         TimingMethod!();
+        Result!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! set_timing_method {
     };
 }
 
-set_timing_method!()
+set_timing_method!();

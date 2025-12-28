@@ -4,4 +4,4 @@ macro_rules! ResolvedPatKind {
     };
 }
 
-ResolvedPatKind!()
+ResolvedPatKind!();

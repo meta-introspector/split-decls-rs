@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Interner!();
         HostEffectPredicate!();
+        Interner!();
         Ty!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_392 {
     };
 }
 
-impl_392!()
+impl_392!();

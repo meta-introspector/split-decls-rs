@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Diagnostic!();
         DebugArgPath!();
+        Diagnostic!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! CopyPath {
     };
 }
 
-CopyPath!()
+CopyPath!();

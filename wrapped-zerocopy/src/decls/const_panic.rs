@@ -4,4 +4,4 @@ macro_rules! const_panic {
     };
 }
 
-const_panic!()
+const_panic!();

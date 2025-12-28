@@ -4,4 +4,4 @@ macro_rules! Subgraph {
     };
 }
 
-Subgraph!()
+Subgraph!();

@@ -4,4 +4,4 @@ macro_rules! DIST_CODE_LEN {
     };
 }
 
-DIST_CODE_LEN!()
+DIST_CODE_LEN!();

@@ -11,4 +11,4 @@ macro_rules! macro_264 {
     };
 }
 
-macro_264!()
+macro_264!();

@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        Ty!();
-        TypeVisitable!();
-        Interner!();
-        Predicate!();
-        HasEscapingVarsVisitor!();
-        Binder!();
-        TypeVisitor!();
         Const!();
+        Clauses!();
+        Interner!();
+        Binder!();
+        TypeVisitable!();
+        Ty!();
         FoundEscapingVars!();
         Region!();
-        Clauses!();
+        Predicate!();
+        TypeVisitor!();
+        HasEscapingVarsVisitor!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_507 {
     };
 }
 
-impl_507!()
+impl_507!();

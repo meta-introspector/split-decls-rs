@@ -1,23 +1,23 @@
 macro_rules! deps {
     () => {
-        Input!();
-        OverlappingState!();
-        MatchKind!();
-        MatchErrorKind!();
-        Start!();
-        Cache!();
-        ByteClasses!();
-        ByteSet!();
-        Anchored!();
-        DFA!();
-        BuildError!();
         PatternID!();
-        HalfMatch!();
-        MatchError!();
-        NFA!();
-        Config!();
-        Regex!();
+        ByteSet!();
+        Input!();
+        MatchErrorKind!();
+        Cache!();
+        DFA!();
         Prefilter!();
+        Start!();
+        Anchored!();
+        ByteClasses!();
+        Regex!();
+        MatchKind!();
+        MatchError!();
+        HalfMatch!();
+        Config!();
+        NFA!();
+        OverlappingState!();
+        BuildError!();
     };
 }
 
@@ -29,4 +29,4 @@ macro_rules! impl_242 {
     };
 }
 
-impl_242!()
+impl_242!();

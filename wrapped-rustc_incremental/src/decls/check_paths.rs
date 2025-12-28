@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Targets!();
+        Sources!();
         NoPath!();
         MissingIfThisChanged!();
         Ok!();
-        Sources!();
+        Targets!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! check_paths {
     };
 }
 
-check_paths!()
+check_paths!();

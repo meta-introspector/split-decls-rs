@@ -4,4 +4,4 @@ macro_rules! z_off64_t {
     };
 }
 
-z_off64_t!()
+z_off64_t!();

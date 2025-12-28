@@ -1,22 +1,22 @@
 macro_rules! deps {
     () => {
-        LinkRequiresName!();
-        IllFormedAttributeInput!();
         Stage!();
-        RawDylibNoNul!();
-        CombineAttributeParser!();
-        AllowedTargets!();
-        AsNeededCompatibility!();
-        LinkParser!();
-        WholeArchiveNeedsStatic!();
-        MultipleModifiers!();
-        ArgParser!();
-        IncompatibleWasmLink!();
-        ConvertFn!();
         InvalidLinkModifier!();
+        LinkParser!();
+        RawDylibNoNul!();
         BundleNeedsStatic!();
-        AcceptContext!();
+        IllFormedAttributeInput!();
+        ConvertFn!();
+        AllowedTargets!();
+        WholeArchiveNeedsStatic!();
+        AsNeededCompatibility!();
+        ArgParser!();
+        LinkRequiresName!();
         ImportNameTypeRaw!();
+        AcceptContext!();
+        CombineAttributeParser!();
+        MultipleModifiers!();
+        IncompatibleWasmLink!();
     };
 }
 
@@ -27,4 +27,4 @@ macro_rules! impl_88 {
     };
 }
 
-impl_88!()
+impl_88!();

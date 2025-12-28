@@ -4,4 +4,4 @@ macro_rules! MH_FORCE_FLAT {
     };
 }
 
-MH_FORCE_FLAT!()
+MH_FORCE_FLAT!();

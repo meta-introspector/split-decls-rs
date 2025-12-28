@@ -4,4 +4,4 @@ macro_rules! debug_reprs {
     };
 }
 
-debug_reprs!()
+debug_reprs!();

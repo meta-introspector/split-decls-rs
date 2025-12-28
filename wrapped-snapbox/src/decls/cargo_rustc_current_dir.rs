@@ -4,4 +4,4 @@ macro_rules! cargo_rustc_current_dir {
     };
 }
 
-cargo_rustc_current_dir!()
+cargo_rustc_current_dir!();

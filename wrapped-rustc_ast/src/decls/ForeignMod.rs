@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Walkable!();
-        Safety!();
-        StrLit!();
         ForeignItem!();
+        Walkable!();
+        StrLit!();
+        Safety!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! ForeignMod {
     };
 }
 
-ForeignMod!()
+ForeignMod!();

@@ -12,4 +12,4 @@ macro_rules! begin_test {
     };
 }
 
-begin_test!()
+begin_test!();

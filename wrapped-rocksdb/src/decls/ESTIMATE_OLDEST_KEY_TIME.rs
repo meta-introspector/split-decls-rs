@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        PropName!();
         DB!();
+        PropName!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! ESTIMATE_OLDEST_KEY_TIME {
     };
 }
 
-ESTIMATE_OLDEST_KEY_TIME!()
+ESTIMATE_OLDEST_KEY_TIME!();

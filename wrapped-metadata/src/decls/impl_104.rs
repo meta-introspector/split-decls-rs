@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Type!();
-        MethodDef!();
-        ImplMap!();
-        RowIterator!();
         TypeDef!();
+        RowIterator!();
+        MethodDef!();
+        Type!();
         Signature!();
+        ImplMap!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_104 {
     };
 }
 
-impl_104!()
+impl_104!();

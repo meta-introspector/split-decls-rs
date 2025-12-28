@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        IKeyValuePair_Vtbl!();
-        IKeyValuePair!();
         IKeyValuePair_Impl!();
+        IKeyValuePair!();
+        IKeyValuePair_Vtbl!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_31 {
     };
 }
 
-impl_31!()
+impl_31!();

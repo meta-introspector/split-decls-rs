@@ -4,4 +4,4 @@ macro_rules! CaptureReasonSuggest {
     };
 }
 
-CaptureReasonSuggest!()
+CaptureReasonSuggest!();

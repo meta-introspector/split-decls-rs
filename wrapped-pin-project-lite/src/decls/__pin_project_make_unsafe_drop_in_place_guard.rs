@@ -4,4 +4,4 @@ macro_rules! __pin_project_make_unsafe_drop_in_place_guard {
     };
 }
 
-__pin_project_make_unsafe_drop_in_place_guard!()
+__pin_project_make_unsafe_drop_in_place_guard!();

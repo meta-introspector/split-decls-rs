@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        GoalEvaluation!();
+        EvalCtxt!();
         SolverDelegate!();
         SolverDelegateEvalExt!();
-        EvalCtxt!();
+        GoalEvaluation!();
         GoalStalledOn!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_86 {
     };
 }
 
-impl_86!()
+impl_86!();

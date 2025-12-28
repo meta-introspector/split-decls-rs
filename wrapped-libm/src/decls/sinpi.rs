@@ -4,4 +4,4 @@ macro_rules! sinpi {
     };
 }
 
-sinpi!()
+sinpi!();

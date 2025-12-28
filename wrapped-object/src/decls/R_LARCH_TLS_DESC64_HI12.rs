@@ -4,4 +4,4 @@ macro_rules! R_LARCH_TLS_DESC64_HI12 {
     };
 }
 
-R_LARCH_TLS_DESC64_HI12!()
+R_LARCH_TLS_DESC64_HI12!();

@@ -4,4 +4,4 @@ macro_rules! R_RISCV_RELATIVE {
     };
 }
 
-R_RISCV_RELATIVE!()
+R_RISCV_RELATIVE!();

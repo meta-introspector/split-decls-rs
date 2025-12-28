@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ClockId!();
         Result!();
+        ClockId!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! get_txtime {
     };
 }
 
-get_txtime!()
+get_txtime!();

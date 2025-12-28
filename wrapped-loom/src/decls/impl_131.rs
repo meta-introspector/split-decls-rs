@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Action!();
-        Locked!();
         State!();
-        Synchronize!();
-        RwLock!();
-        Id!();
         Execution!();
+        Synchronize!();
+        Locked!();
+        Id!();
+        RwLock!();
+        Action!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_131 {
     };
 }
 
-impl_131!()
+impl_131!();

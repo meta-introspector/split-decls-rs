@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        NestedNormalizationGoals!();
-        GenericArg!();
+        OpaqueTypeKey!();
+        Ty!();
         Interner!();
         OutlivesPredicate!();
-        Ty!();
-        OpaqueTypeKey!();
+        NestedNormalizationGoals!();
+        GenericArg!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! ExternalConstraintsData {
     };
 }
 
-ExternalConstraintsData!()
+ExternalConstraintsData!();

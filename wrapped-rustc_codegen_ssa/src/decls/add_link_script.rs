@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        LinkScriptUnavailable!();
         LinkScriptWriteFailure!();
         Linker!();
-        LinkScriptUnavailable!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! add_link_script {
     };
 }
 
-add_link_script!()
+add_link_script!();

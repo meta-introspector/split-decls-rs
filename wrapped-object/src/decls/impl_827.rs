@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        ReadRef!();
         StringTable!();
+        ReadRef!();
         Result!();
-        Symbol!();
         Symbol64!();
+        Symbol!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_827 {
     };
 }
 
-impl_827!()
+impl_827!();

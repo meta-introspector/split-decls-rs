@@ -4,4 +4,4 @@ macro_rules! create_compressed_metadata_file {
     };
 }
 
-create_compressed_metadata_file!()
+create_compressed_metadata_file!();

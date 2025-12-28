@@ -4,4 +4,4 @@ macro_rules! SlotMemosMutFn {
     };
 }
 
-SlotMemosMutFn!()
+SlotMemosMutFn!();

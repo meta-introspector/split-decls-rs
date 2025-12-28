@@ -12,4 +12,4 @@ macro_rules! check_union_fields {
     };
 }
 
-check_union_fields!()
+check_union_fields!();

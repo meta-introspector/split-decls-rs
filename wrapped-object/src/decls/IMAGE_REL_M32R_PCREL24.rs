@@ -4,4 +4,4 @@ macro_rules! IMAGE_REL_M32R_PCREL24 {
     };
 }
 
-IMAGE_REL_M32R_PCREL24!()
+IMAGE_REL_M32R_PCREL24!();

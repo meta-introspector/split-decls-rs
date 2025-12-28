@@ -4,4 +4,4 @@ macro_rules! EM_ECOG2 {
     };
 }
 
-EM_ECOG2!()
+EM_ECOG2!();

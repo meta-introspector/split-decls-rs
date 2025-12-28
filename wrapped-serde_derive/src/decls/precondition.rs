@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Container!();
-        Variant!();
-        Identifier!();
         Field!();
         Ctxt!();
+        Container!();
+        Identifier!();
+        Variant!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! precondition {
     };
 }
 
-precondition!()
+precondition!();

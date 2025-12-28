@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        BorrowckInferCtxt!();
         AmpMutSugg!();
+        BorrowckInferCtxt!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! suggest_ampmut {
     };
 }
 
-suggest_ampmut!()
+suggest_ampmut!();

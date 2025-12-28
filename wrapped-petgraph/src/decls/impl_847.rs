@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        IndexType!();
         EdgeIndices!();
+        IndexType!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_847 {
     };
 }
 
-impl_847!()
+impl_847!();

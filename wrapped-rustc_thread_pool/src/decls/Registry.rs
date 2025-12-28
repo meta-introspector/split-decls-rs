@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        Sleep!();
-        StartHandler!();
         PanicHandler!();
-        ReleaseThreadHandler!();
-        ThreadInfo!();
         AcquireThreadHandler!();
+        JobRef!();
+        ReleaseThreadHandler!();
+        StartHandler!();
+        ThreadInfo!();
+        Sleep!();
         DeadlockHandler!();
         ExitHandler!();
-        JobRef!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! Registry {
     };
 }
 
-Registry!()
+Registry!();

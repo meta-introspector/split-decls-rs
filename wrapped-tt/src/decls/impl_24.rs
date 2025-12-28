@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Punct!();
-        Ident!();
-        Leaf!();
         Literal!();
+        Ident!();
+        Punct!();
+        Leaf!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_24 {
     };
 }
 
-impl_24!()
+impl_24!();

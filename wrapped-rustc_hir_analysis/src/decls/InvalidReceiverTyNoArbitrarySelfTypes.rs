@@ -4,4 +4,4 @@ macro_rules! InvalidReceiverTyNoArbitrarySelfTypes {
     };
 }
 
-InvalidReceiverTyNoArbitrarySelfTypes!()
+InvalidReceiverTyNoArbitrarySelfTypes!();

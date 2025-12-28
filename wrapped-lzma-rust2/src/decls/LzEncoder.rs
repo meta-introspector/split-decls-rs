@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Matches!();
         LzEncoderData!();
         MatchFinders!();
-        Matches!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! LzEncoder {
     };
 }
 
-LzEncoder!()
+LzEncoder!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Value!();
-        QueryCache!();
         DefIdCache!();
+        QueryCache!();
+        Value!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_198 {
     };
 }
 
-impl_198!()
+impl_198!();

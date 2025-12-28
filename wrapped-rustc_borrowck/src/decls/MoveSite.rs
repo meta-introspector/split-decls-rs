@@ -4,4 +4,4 @@ macro_rules! MoveSite {
     };
 }
 
-MoveSite!()
+MoveSite!();

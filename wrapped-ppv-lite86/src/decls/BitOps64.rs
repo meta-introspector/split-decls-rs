@@ -12,4 +12,4 @@ macro_rules! BitOps64 {
     };
 }
 
-BitOps64!()
+BitOps64!();

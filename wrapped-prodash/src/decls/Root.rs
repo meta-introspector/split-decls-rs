@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Message!();
-        Key!();
         WeakRoot!();
-        Task!();
+        Message!();
         MessageCopyState!();
+        Key!();
+        Task!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! Root {
     };
 }
 
-Root!()
+Root!();

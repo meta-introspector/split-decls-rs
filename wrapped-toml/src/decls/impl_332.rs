@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Style!();
-        Error!();
         SerializeTupleVariant!();
+        Style!();
         SerializeValueArray!();
+        Error!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_332 {
     };
 }
 
-impl_332!()
+impl_332!();

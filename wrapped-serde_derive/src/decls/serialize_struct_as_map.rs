@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Fragment!();
-        Container!();
-        Field!();
-        StructTrait!();
         Parameters!();
+        StructTrait!();
+        Fragment!();
+        Field!();
+        Container!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! serialize_struct_as_map {
     };
 }
 
-serialize_struct_as_map!()
+serialize_struct_as_map!();

@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Bit!();
-        Unsigned!();
-        NonZero!();
-        Z0!();
-        UInt!();
         PInt!();
-        Pow!();
         UTerm!();
+        UInt!();
+        Pow!();
+        Unsigned!();
+        Bit!();
+        Z0!();
+        NonZero!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_pow_i {
     };
 }
 
-impl_pow_i!()
+impl_pow_i!();

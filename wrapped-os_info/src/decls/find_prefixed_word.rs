@@ -4,4 +4,4 @@ macro_rules! find_prefixed_word {
     };
 }
 
-find_prefixed_word!()
+find_prefixed_word!();

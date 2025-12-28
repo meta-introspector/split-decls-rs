@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
+        Captures!();
         MatchError!();
-        Match!();
-        Span!();
-        BoundedBacktracker!();
-        Input!();
-        NFA!();
         Searcher!();
         Cache!();
-        TryFindMatches!();
+        Input!();
+        BoundedBacktracker!();
+        Match!();
+        NFA!();
         TryCapturesMatches!();
-        Captures!();
+        Span!();
+        TryFindMatches!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_444 {
     };
 }
 
-impl_444!()
+impl_444!();

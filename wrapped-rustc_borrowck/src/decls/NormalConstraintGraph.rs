@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ConstraintGraph!();
         Normal!();
+        ConstraintGraph!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! NormalConstraintGraph {
     };
 }
 
-NormalConstraintGraph!()
+NormalConstraintGraph!();

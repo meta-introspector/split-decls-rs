@@ -4,4 +4,4 @@ macro_rules! FunctionNamesDuplicated {
     };
 }
 
-FunctionNamesDuplicated!()
+FunctionNamesDuplicated!();

@@ -4,4 +4,4 @@ macro_rules! PrivateDivIf {
     };
 }
 
-PrivateDivIf!()
+PrivateDivIf!();

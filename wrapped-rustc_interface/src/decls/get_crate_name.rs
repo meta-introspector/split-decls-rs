@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        CrateNameDoesNotMatch!();
         CrateNameInvalid!();
+        CrateNameDoesNotMatch!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! get_crate_name {
     };
 }
 
-get_crate_name!()
+get_crate_name!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        Language!();
         SyntaxNode!();
+        DisplayDebug!();
         Children!();
         SerDisplay!();
-        Language!();
-        DisplayDebug!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_166 {
     };
 }
 
-impl_166!()
+impl_166!();

@@ -11,4 +11,4 @@ macro_rules! wait_for_unlock_notify {
     };
 }
 
-wait_for_unlock_notify!()
+wait_for_unlock_notify!();

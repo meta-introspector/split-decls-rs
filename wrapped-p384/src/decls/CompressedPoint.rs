@@ -4,4 +4,4 @@ macro_rules! CompressedPoint {
     };
 }
 
-CompressedPoint!()
+CompressedPoint!();

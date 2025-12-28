@@ -4,4 +4,4 @@ macro_rules! OpenError {
     };
 }
 
-OpenError!()
+OpenError!();

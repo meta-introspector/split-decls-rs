@@ -4,4 +4,4 @@ macro_rules! R_390_TLS_LDCALL {
     };
 }
 
-R_390_TLS_LDCALL!()
+R_390_TLS_LDCALL!();

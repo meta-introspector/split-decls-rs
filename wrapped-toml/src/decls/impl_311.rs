@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        Value!();
-        ValueSerializer!();
-        SerializeDocumentTable!();
-        SerializationStrategy!();
-        Table!();
+        Error!();
         SerializeDocumentTupleVariant!();
-        SerializeTupleVariant!();
         Buffer!();
         SerializeMap!();
-        Error!();
         SerializeStructVariant!();
+        SerializeDocumentTable!();
+        ValueSerializer!();
+        SerializeTupleVariant!();
+        Table!();
+        Value!();
+        SerializationStrategy!();
         Serializer!();
     };
 }
@@ -22,4 +22,4 @@ macro_rules! impl_311 {
     };
 }
 
-impl_311!()
+impl_311!();

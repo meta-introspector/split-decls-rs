@@ -4,4 +4,4 @@ macro_rules! RegionInferReason {
     };
 }
 
-RegionInferReason!()
+RegionInferReason!();

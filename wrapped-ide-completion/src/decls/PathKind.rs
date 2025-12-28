@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        AttrCtx!();
-        PatternContext!();
+        ExistingDerives!();
         TypeLocation!();
         PathExprCtx!();
         ItemListKind!();
-        ExistingDerives!();
+        AttrCtx!();
+        PatternContext!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! PathKind {
     };
 }
 
-PathKind!()
+PathKind!();

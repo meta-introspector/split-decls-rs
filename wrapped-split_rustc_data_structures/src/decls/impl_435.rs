@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        HashStable!();
         StableOrd!();
+        HashStable!();
         SortedMap!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_435 {
     };
 }
 
-impl_435!()
+impl_435!();

@@ -11,4 +11,4 @@ macro_rules! adjusted_display_range {
     };
 }
 
-adjusted_display_range!()
+adjusted_display_range!();

@@ -4,4 +4,4 @@ macro_rules! VecShrinker {
     };
 }
 
-VecShrinker!()
+VecShrinker!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Condvar!();
-        Mutex!();
-        WaitTimeoutResult!();
         RawMutex!();
+        WaitTimeoutResult!();
+        Mutex!();
+        Condvar!();
         MutexGuard!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_3 {
     };
 }
 
-impl_3!()
+impl_3!();

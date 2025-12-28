@@ -11,4 +11,4 @@ macro_rules! RPC_S_UUID_LOCAL_ONLY {
     };
 }
 
-RPC_S_UUID_LOCAL_ONLY!()
+RPC_S_UUID_LOCAL_ONLY!();

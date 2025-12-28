@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        PropertyCodePointMap!();
         VerticalOrientation!();
+        PropertyCodePointMap!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! macro_359 {
     };
 }
 
-macro_359!()
+macro_359!();

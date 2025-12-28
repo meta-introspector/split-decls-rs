@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
+        BridgeTys!();
         RigidTy!();
+        Stable!();
         TyKind!();
         Placeholder!();
-        Stable!();
         Error!();
-        BridgeTys!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_187 {
     };
 }
 
-impl_187!()
+impl_187!();

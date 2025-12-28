@@ -12,4 +12,4 @@ macro_rules! convert_implements_to_interface_chains {
     };
 }
 
-convert_implements_to_interface_chains!()
+convert_implements_to_interface_chains!();

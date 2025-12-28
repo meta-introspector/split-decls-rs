@@ -4,4 +4,4 @@ macro_rules! __pin_project_enum_make_proj_replace_method {
     };
 }
 
-__pin_project_enum_make_proj_replace_method!()
+__pin_project_enum_make_proj_replace_method!();

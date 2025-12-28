@@ -4,4 +4,4 @@ macro_rules! scope_divide_and_conquer {
     };
 }
 
-scope_divide_and_conquer!()
+scope_divide_and_conquer!();

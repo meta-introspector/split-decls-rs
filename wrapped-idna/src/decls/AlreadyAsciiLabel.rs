@@ -4,4 +4,4 @@ macro_rules! AlreadyAsciiLabel {
     };
 }
 
-AlreadyAsciiLabel!()
+AlreadyAsciiLabel!();

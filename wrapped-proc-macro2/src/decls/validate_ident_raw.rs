@@ -4,4 +4,4 @@ macro_rules! validate_ident_raw {
     };
 }
 
-validate_ident_raw!()
+validate_ident_raw!();

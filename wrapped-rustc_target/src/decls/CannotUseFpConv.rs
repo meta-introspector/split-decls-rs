@@ -4,4 +4,4 @@ macro_rules! CannotUseFpConv {
     };
 }
 
-CannotUseFpConv!()
+CannotUseFpConv!();

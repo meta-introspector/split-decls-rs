@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
         Deserializer!();
-        SeqDeserializer!();
-        Error!();
         MapDeserializer!();
         Array!();
-        Table!();
+        SeqDeserializer!();
         Value!();
+        Error!();
+        Table!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_87 {
     };
 }
 
-impl_87!()
+impl_87!();

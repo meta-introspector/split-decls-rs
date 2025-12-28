@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        FnHeader!();
         FnDecl!();
+        FnHeader!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! FnSig {
     };
 }
 
-FnSig!()
+FnSig!();

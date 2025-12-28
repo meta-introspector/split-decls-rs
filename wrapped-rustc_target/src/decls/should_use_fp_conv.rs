@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        RegPassKind!();
         FloatConv!();
+        RegPassKind!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! should_use_fp_conv {
     };
 }
 
-should_use_fp_conv!()
+should_use_fp_conv!();

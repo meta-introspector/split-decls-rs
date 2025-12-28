@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        PCWSTR!();
         HANDLE!();
         SECURITY_ATTRIBUTES!();
-        PCWSTR!();
         BOOL!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! macro_106 {
     };
 }
 
-macro_106!()
+macro_106!();

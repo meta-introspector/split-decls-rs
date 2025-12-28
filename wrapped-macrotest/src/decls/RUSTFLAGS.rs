@@ -4,4 +4,4 @@ macro_rules! RUSTFLAGS {
     };
 }
 
-RUSTFLAGS!()
+RUSTFLAGS!();

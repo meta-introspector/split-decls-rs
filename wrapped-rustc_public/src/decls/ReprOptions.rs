@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Align!();
-        IntegerType!();
         ReprFlags!();
+        IntegerType!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! ReprOptions {
     };
 }
 
-ReprOptions!()
+ReprOptions!();

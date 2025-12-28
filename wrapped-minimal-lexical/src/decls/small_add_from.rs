@@ -12,4 +12,4 @@ macro_rules! small_add_from {
     };
 }
 
-small_add_from!()
+small_add_from!();

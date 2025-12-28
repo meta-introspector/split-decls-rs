@@ -4,4 +4,4 @@ macro_rules! single_shrinker {
     };
 }
 
-single_shrinker!()
+single_shrinker!();

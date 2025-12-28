@@ -4,4 +4,4 @@ macro_rules! DerivePathArgsValue {
     };
 }
 
-DerivePathArgsValue!()
+DerivePathArgsValue!();

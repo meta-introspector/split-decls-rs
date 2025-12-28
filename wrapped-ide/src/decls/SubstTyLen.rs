@@ -4,4 +4,4 @@ macro_rules! SubstTyLen {
     };
 }
 
-SubstTyLen!()
+SubstTyLen!();

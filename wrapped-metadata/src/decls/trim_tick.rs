@@ -4,4 +4,4 @@ macro_rules! trim_tick {
     };
 }
 
-trim_tick!()
+trim_tick!();

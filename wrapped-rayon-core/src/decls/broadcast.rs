@@ -4,4 +4,4 @@ macro_rules! broadcast {
     };
 }
 
-broadcast!()
+broadcast!();

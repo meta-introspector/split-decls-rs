@@ -4,4 +4,4 @@ macro_rules! GRP_COMDAT {
     };
 }
 
-GRP_COMDAT!()
+GRP_COMDAT!();

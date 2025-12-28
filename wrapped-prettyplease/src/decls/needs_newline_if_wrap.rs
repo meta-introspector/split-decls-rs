@@ -4,4 +4,4 @@ macro_rules! needs_newline_if_wrap {
     };
 }
 
-needs_newline_if_wrap!()
+needs_newline_if_wrap!();

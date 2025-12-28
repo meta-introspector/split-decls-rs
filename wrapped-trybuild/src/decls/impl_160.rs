@@ -1,29 +1,29 @@
 macro_rules! deps {
     () => {
-        CanonicalPath!();
-        Result!();
-        Expected!();
-        Edition!();
-        Stderr!();
-        Dependency!();
-        EditionOrInherit!();
-        Runner!();
-        ExpandedTest!();
-        Name!();
-        Error!();
-        Update!();
-        Report!();
         Directory!();
+        PackageMetadata!();
+        Dependency!();
+        Report!();
+        Edition!();
+        Name!();
+        Update!();
+        Manifest!();
+        EditionOrInherit!();
+        Package!();
+        Expected!();
+        Stderr!();
+        Lock!();
+        Error!();
+        Bin!();
+        Result!();
+        ExpandedTest!();
         Workspace!();
         Outcome!();
-        Package!();
+        Runner!();
+        CanonicalPath!();
         Metadata!();
-        PathDependency!();
-        Manifest!();
         Project!();
-        Bin!();
-        Lock!();
-        PackageMetadata!();
+        PathDependency!();
     };
 }
 
@@ -37,4 +37,4 @@ macro_rules! impl_160 {
     };
 }
 
-impl_160!()
+impl_160!();

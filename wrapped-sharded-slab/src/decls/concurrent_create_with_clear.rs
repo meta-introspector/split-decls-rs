@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Pool!();
         DontDropMe!();
+        Pool!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! concurrent_create_with_clear {
     };
 }
 
-concurrent_create_with_clear!()
+concurrent_create_with_clear!();

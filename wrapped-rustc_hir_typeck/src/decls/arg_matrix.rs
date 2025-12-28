@@ -4,4 +4,4 @@ macro_rules! arg_matrix {
     };
 }
 
-arg_matrix!()
+arg_matrix!();

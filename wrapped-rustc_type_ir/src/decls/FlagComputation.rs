@@ -4,4 +4,4 @@ macro_rules! FlagComputation {
     };
 }
 
-FlagComputation!()
+FlagComputation!();

@@ -4,4 +4,4 @@ macro_rules! NGHTTP2_DATA_FLAG_EOF {
     };
 }
 
-NGHTTP2_DATA_FLAG_EOF!()
+NGHTTP2_DATA_FLAG_EOF!();

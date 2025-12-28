@@ -11,4 +11,4 @@ macro_rules! failed_thread_stack {
     };
 }
 
-failed_thread_stack!()
+failed_thread_stack!();

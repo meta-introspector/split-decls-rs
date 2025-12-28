@@ -12,4 +12,4 @@ macro_rules! SCRIPT_X_SCRIPT_VAL {
     };
 }
 
-SCRIPT_X_SCRIPT_VAL!()
+SCRIPT_X_SCRIPT_VAL!();

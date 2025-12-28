@@ -4,4 +4,4 @@ macro_rules! __test_api {
     };
 }
 
-__test_api!()
+__test_api!();

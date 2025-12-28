@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
         Duration!();
-        Options!();
-        Event!();
-        Throughput!();
-        InterruptDrawInfo!();
         Item!();
-        Interrupt!();
         WeakRoot!();
         State!();
+        Options!();
+        Event!();
+        Interrupt!();
+        InterruptDrawInfo!();
+        Throughput!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! render_with_input {
     };
 }
 
-render_with_input!()
+render_with_input!();

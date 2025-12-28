@@ -4,4 +4,4 @@ macro_rules! SavedOutputBufferOxide {
     };
 }
 
-SavedOutputBufferOxide!()
+SavedOutputBufferOxide!();

@@ -11,4 +11,4 @@ macro_rules! E_UNEXPECTED {
     };
 }
 
-E_UNEXPECTED!()
+E_UNEXPECTED!();

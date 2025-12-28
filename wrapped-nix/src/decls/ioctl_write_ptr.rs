@@ -11,4 +11,4 @@ macro_rules! ioctl_write_ptr {
     };
 }
 
-ioctl_write_ptr!()
+ioctl_write_ptr!();

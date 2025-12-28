@@ -1,24 +1,24 @@
 macro_rules! deps {
     () => {
-        CastableFrom!();
+        Exclusive!();
+        Read!();
+        CastType!();
+        MutationCompatible!();
+        Reference!();
+        Aliasing!();
+        PointerMetadata!();
+        Shared!();
         Unaligned!();
         Invariants!();
-        KnownLayout!();
-        PointerMetadata!();
-        CastError!();
-        Read!();
-        Alignment!();
-        Initialized!();
-        SizeError!();
         Validity!();
-        Aliasing!();
-        Aligned!();
+        SizeError!();
+        KnownLayout!();
+        Initialized!();
         Valid!();
-        MutationCompatible!();
-        Shared!();
-        CastType!();
-        Exclusive!();
-        Reference!();
+        Alignment!();
+        CastableFrom!();
+        CastError!();
+        Aligned!();
     };
 }
 
@@ -29,4 +29,4 @@ macro_rules! _casts {
     };
 }
 
-_casts!()
+_casts!();

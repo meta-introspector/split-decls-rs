@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Path!();
         TraitDef!();
+        Path!();
         Ty!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! expand_deriving_unsized_const_param_ty {
     };
 }
 
-expand_deriving_unsized_const_param_ty!()
+expand_deriving_unsized_const_param_ty!();

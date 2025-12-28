@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Result!();
-        ChangesetIter!();
         Changeset!();
+        ChangesetIter!();
+        Result!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_251 {
     };
 }
 
-impl_251!()
+impl_251!();

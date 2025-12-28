@@ -4,4 +4,4 @@ macro_rules! STT_HP_OPAQUE {
     };
 }
 
-STT_HP_OPAQUE!()
+STT_HP_OPAQUE!();

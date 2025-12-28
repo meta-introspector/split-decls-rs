@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        MemberRef!();
         Type!();
+        MemberRef!();
         Signature!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_101 {
     };
 }
 
-impl_101!()
+impl_101!();

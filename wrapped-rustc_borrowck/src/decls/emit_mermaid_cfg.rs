@@ -4,4 +4,4 @@ macro_rules! emit_mermaid_cfg {
     };
 }
 
-emit_mermaid_cfg!()
+emit_mermaid_cfg!();

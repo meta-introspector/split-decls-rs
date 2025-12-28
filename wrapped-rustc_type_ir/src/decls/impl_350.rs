@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         Interner!();
-        TraitPredicate!();
-        PredicatePolarity!();
-        Binder!();
         Ty!();
+        Binder!();
+        PredicatePolarity!();
+        TraitPredicate!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_350 {
     };
 }
 
-impl_350!()
+impl_350!();

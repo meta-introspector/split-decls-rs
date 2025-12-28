@@ -4,4 +4,4 @@ macro_rules! GRAPHEME_EXTEND {
     };
 }
 
-GRAPHEME_EXTEND!()
+GRAPHEME_EXTEND!();

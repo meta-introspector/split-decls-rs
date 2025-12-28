@@ -11,4 +11,4 @@ macro_rules! impl_crate_def_items {
     };
 }
 
-impl_crate_def_items!()
+impl_crate_def_items!();

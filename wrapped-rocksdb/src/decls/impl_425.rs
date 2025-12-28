@@ -1,18 +1,18 @@
 macro_rules! deps {
     () => {
-        OptimisticTransactionDBInner!();
         AsColumnFamilyRef!();
-        ThreadMode!();
-        Options!();
-        ColumnFamilyDescriptor!();
-        ColumnFamilyTtl!();
-        WriteBatchWithTransaction!();
-        Transaction!();
-        OptimisticTransactionOptions!();
-        WriteOptions!();
         OptimisticTransactionDB!();
-        Error!();
+        ColumnFamilyDescriptor!();
+        WriteOptions!();
+        OptimisticTransactionDBInner!();
         DB!();
+        OptimisticTransactionOptions!();
+        WriteBatchWithTransaction!();
+        Options!();
+        ThreadMode!();
+        ColumnFamilyTtl!();
+        Error!();
+        Transaction!();
     };
 }
 
@@ -23,4 +23,4 @@ macro_rules! impl_425 {
     };
 }
 
-impl_425!()
+impl_425!();

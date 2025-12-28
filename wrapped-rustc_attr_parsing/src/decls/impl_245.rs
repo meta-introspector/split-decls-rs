@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         SingleAttributeParser!();
-        Stage!();
         Single!();
+        Stage!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_245 {
     };
 }
 
-impl_245!()
+impl_245!();

@@ -4,4 +4,4 @@ macro_rules! find_map_first_or_last_or_any {
     };
 }
 
-find_map_first_or_last_or_any!()
+find_map_first_or_last_or_any!();

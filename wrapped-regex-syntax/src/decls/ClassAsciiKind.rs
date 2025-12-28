@@ -4,4 +4,4 @@ macro_rules! ClassAsciiKind {
     };
 }
 
-ClassAsciiKind!()
+ClassAsciiKind!();

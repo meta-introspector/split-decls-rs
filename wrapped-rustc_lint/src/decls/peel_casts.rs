@@ -11,4 +11,4 @@ macro_rules! peel_casts {
     };
 }
 
-peel_casts!()
+peel_casts!();

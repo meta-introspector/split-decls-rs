@@ -4,4 +4,4 @@ macro_rules! fallback_cgu_name {
     };
 }
 
-fallback_cgu_name!()
+fallback_cgu_name!();

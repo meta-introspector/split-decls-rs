@@ -4,4 +4,4 @@ macro_rules! sequence_section_decoder {
     };
 }
 
-sequence_section_decoder!()
+sequence_section_decoder!();

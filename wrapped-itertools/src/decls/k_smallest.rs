@@ -4,4 +4,4 @@ macro_rules! k_smallest {
     };
 }
 
-k_smallest!()
+k_smallest!();

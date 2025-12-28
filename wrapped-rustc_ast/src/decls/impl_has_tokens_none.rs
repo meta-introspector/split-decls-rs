@@ -12,4 +12,4 @@ macro_rules! impl_has_tokens_none {
     };
 }
 
-impl_has_tokens_none!()
+impl_has_tokens_none!();

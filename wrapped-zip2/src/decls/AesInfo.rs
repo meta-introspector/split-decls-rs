@@ -11,4 +11,4 @@ macro_rules! AesInfo {
     };
 }
 
-AesInfo!()
+AesInfo!();

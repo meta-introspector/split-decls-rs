@@ -4,4 +4,4 @@ macro_rules! IVector_Vtbl {
     };
 }
 
-IVector_Vtbl!()
+IVector_Vtbl!();

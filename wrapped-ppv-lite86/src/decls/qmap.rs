@@ -11,4 +11,4 @@ macro_rules! qmap {
     };
 }
 
-qmap!()
+qmap!();

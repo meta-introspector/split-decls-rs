@@ -4,4 +4,4 @@ macro_rules! MH_DSYM {
     };
 }
 
-MH_DSYM!()
+MH_DSYM!();

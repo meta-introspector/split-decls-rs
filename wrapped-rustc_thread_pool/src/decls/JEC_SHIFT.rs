@@ -4,4 +4,4 @@ macro_rules! JEC_SHIFT {
     };
 }
 
-JEC_SHIFT!()
+JEC_SHIFT!();

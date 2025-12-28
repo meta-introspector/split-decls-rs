@@ -4,4 +4,4 @@ macro_rules! COPTIC {
     };
 }
 
-COPTIC!()
+COPTIC!();

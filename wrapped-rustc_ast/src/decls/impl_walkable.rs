@@ -11,4 +11,4 @@ macro_rules! impl_walkable {
     };
 }
 
-impl_walkable!()
+impl_walkable!();

@@ -4,4 +4,4 @@ macro_rules! R_ALPHA_TLS_GD_HI {
     };
 }
 
-R_ALPHA_TLS_GD_HI!()
+R_ALPHA_TLS_GD_HI!();

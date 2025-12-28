@@ -4,4 +4,4 @@ macro_rules! sub_types {
     };
 }
 
-sub_types!()
+sub_types!();

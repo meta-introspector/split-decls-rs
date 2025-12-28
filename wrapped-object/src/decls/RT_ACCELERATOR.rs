@@ -4,4 +4,4 @@ macro_rules! RT_ACCELERATOR {
     };
 }
 
-RT_ACCELERATOR!()
+RT_ACCELERATOR!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         TestGraph!();
-        Sccs!();
         Maxes!();
+        Sccs!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! test_max_self_loop {
     };
 }
 
-test_max_self_loop!()
+test_max_self_loop!();

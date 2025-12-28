@@ -4,4 +4,4 @@ macro_rules! R_LARCH_B16 {
     };
 }
 
-R_LARCH_B16!()
+R_LARCH_B16!();

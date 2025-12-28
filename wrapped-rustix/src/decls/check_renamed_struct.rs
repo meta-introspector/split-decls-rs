@@ -4,4 +4,4 @@ macro_rules! check_renamed_struct {
     };
 }
 
-check_renamed_struct!()
+check_renamed_struct!();

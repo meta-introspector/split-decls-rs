@@ -4,4 +4,4 @@ macro_rules! CPU_SUBTYPE_I860_ALL {
     };
 }
 
-CPU_SUBTYPE_I860_ALL!()
+CPU_SUBTYPE_I860_ALL!();

@@ -4,4 +4,4 @@ macro_rules! EF_RISCV_RVC {
     };
 }
 
-EF_RISCV_RVC!()
+EF_RISCV_RVC!();

@@ -11,4 +11,4 @@ macro_rules! recursion_marker_type_di_node {
     };
 }
 
-recursion_marker_type_di_node!()
+recursion_marker_type_di_node!();

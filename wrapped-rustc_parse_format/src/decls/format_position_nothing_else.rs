@@ -11,4 +11,4 @@ macro_rules! format_position_nothing_else {
     };
 }
 
-format_position_nothing_else!()
+format_position_nothing_else!();

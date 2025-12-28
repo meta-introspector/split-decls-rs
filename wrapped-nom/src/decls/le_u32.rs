@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        ParseError!();
-        Input!();
-        Needed!();
         Error!();
         Parser!();
+        Input!();
+        ParseError!();
+        Needed!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! le_u32 {
     };
 }
 
-le_u32!()
+le_u32!();

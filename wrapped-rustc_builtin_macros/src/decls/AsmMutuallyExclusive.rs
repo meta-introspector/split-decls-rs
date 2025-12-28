@@ -4,4 +4,4 @@ macro_rules! AsmMutuallyExclusive {
     };
 }
 
-AsmMutuallyExclusive!()
+AsmMutuallyExclusive!();

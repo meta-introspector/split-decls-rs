@@ -11,4 +11,4 @@ macro_rules! BitOps0 {
     };
 }
 
-BitOps0!()
+BitOps0!();

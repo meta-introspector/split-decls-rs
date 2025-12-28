@@ -4,4 +4,4 @@ macro_rules! PR_SCHED_CORE_GET {
     };
 }
 
-PR_SCHED_CORE_GET!()
+PR_SCHED_CORE_GET!();

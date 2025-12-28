@@ -4,4 +4,4 @@ macro_rules! ProcMacroCratePanicAbort {
     };
 }
 
-ProcMacroCratePanicAbort!()
+ProcMacroCratePanicAbort!();

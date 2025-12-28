@@ -4,4 +4,4 @@ macro_rules! failed_to_build {
     };
 }
 
-failed_to_build!()
+failed_to_build!();

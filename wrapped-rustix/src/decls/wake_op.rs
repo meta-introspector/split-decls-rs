@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Result!();
         WakeOp!();
         WakeOpCmp!();
-        Result!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! wake_op {
     };
 }
 
-wake_op!()
+wake_op!();

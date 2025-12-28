@@ -4,4 +4,4 @@ macro_rules! nghttp2_option {
     };
 }
 
-nghttp2_option!()
+nghttp2_option!();

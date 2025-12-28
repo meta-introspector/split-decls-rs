@@ -4,4 +4,4 @@ macro_rules! check_lang_start_fn {
     };
 }
 
-check_lang_start_fn!()
+check_lang_start_fn!();

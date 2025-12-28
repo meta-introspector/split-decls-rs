@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Span!();
-        Cursor!();
-        Ident!();
         Reject!();
+        Cursor!();
+        Span!();
         PResult!();
+        Ident!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! ident_any {
     };
 }
 
-ident_any!()
+ident_any!();

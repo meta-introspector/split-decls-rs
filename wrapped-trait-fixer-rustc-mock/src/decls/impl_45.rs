@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        TyCtxt!();
-        MockPredicateObligation!();
         MockObligationCause!();
-        MockPredicate!();
+        TyCtxt!();
         MockParamEnv!();
+        MockPredicateObligation!();
+        MockPredicate!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_45 {
     };
 }
 
-impl_45!()
+impl_45!();

@@ -4,4 +4,4 @@ macro_rules! BadOptAccessDiag {
     };
 }
 
-BadOptAccessDiag!()
+BadOptAccessDiag!();

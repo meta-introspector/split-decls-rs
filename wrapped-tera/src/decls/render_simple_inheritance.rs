@@ -12,4 +12,4 @@ macro_rules! render_simple_inheritance {
     };
 }
 
-render_simple_inheritance!()
+render_simple_inheritance!();

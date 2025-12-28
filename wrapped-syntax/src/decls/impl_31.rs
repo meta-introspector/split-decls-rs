@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         SyntaxNode!();
-        SyntaxError!();
         SyntaxTreeBuilder!();
         Parse!();
         RustLanguage!();
+        SyntaxError!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_31 {
     };
 }
 
-impl_31!()
+impl_31!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Composition!();
         Decomposition!();
+        Composition!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_113 {
     };
 }
 
-impl_113!()
+impl_113!();

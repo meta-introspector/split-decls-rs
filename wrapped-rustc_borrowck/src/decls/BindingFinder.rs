@@ -4,4 +4,4 @@ macro_rules! BindingFinder {
     };
 }
 
-BindingFinder!()
+BindingFinder!();

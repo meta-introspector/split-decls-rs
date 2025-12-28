@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        SmallCString!();
         ParamIndexCache!();
+        SmallCString!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_659 {
     };
 }
 
-impl_659!()
+impl_659!();

@@ -4,4 +4,4 @@ macro_rules! test_lints_tracking_hash_different_values {
     };
 }
 
-test_lints_tracking_hash_different_values!()
+test_lints_tracking_hash_different_values!();

@@ -4,4 +4,4 @@ macro_rules! ExternMain {
     };
 }
 
-ExternMain!()
+ExternMain!();

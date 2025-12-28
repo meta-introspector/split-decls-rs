@@ -11,4 +11,4 @@ macro_rules! Many1Count {
     };
 }
 
-Many1Count!()
+Many1Count!();

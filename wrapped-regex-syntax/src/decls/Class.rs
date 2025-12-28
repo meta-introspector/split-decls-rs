@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        ClassUnicode!();
-        ClassBytes!();
         Bytes!();
+        ClassBytes!();
+        ClassUnicode!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Class {
     };
 }
 
-Class!()
+Class!();

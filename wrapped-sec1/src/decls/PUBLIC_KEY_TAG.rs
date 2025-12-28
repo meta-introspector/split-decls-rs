@@ -4,4 +4,4 @@ macro_rules! PUBLIC_KEY_TAG {
     };
 }
 
-PUBLIC_KEY_TAG!()
+PUBLIC_KEY_TAG!();

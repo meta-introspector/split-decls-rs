@@ -4,4 +4,4 @@ macro_rules! MZFlush {
     };
 }
 
-MZFlush!()
+MZFlush!();

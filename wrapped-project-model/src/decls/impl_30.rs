@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        ProcMacroDylibPath!();
-        CargoWorkspace!();
-        WorkspaceBuildScripts!();
-        Package!();
-        CargoConfig!();
-        CargoFeatures!();
-        ManifestPath!();
-        Sysroot!();
         BuildScriptOutput!();
         TargetKind!();
+        CargoConfig!();
+        CargoWorkspace!();
+        ManifestPath!();
+        WorkspaceBuildScripts!();
+        ProcMacroDylibPath!();
+        CargoFeatures!();
+        Sysroot!();
+        Package!();
         InvocationStrategy!();
     };
 }
@@ -21,4 +21,4 @@ macro_rules! impl_30 {
     };
 }
 
-impl_30!()
+impl_30!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         UnindexedConsumer!();
-        SkipAnyConsumer!();
         Reducer!();
+        SkipAnyConsumer!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_830 {
     };
 }
 
-impl_830!()
+impl_830!();

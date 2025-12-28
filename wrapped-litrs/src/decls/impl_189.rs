@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Buffer!();
         IntegerLit!();
+        Buffer!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_189 {
     };
 }
 
-impl_189!()
+impl_189!();

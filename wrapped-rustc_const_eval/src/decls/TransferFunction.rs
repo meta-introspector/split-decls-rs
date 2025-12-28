@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ConstCx!();
         State!();
+        ConstCx!();
         FlowSensitiveAnalysis!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! TransferFunction {
     };
 }
 
-TransferFunction!()
+TransferFunction!();

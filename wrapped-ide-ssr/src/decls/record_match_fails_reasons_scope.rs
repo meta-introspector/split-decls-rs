@@ -4,4 +4,4 @@ macro_rules! record_match_fails_reasons_scope {
     };
 }
 
-record_match_fails_reasons_scope!()
+record_match_fails_reasons_scope!();

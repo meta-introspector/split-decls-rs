@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        Locations!();
+        OutlivesConstraint!();
         SccAnnotations!();
         OutlivesConstraintSet!();
         RegionTracker!();
-        Locations!();
-        OutlivesConstraint!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! rewrite_placeholder_outlives {
     };
 }
 
-rewrite_placeholder_outlives!()
+rewrite_placeholder_outlives!();

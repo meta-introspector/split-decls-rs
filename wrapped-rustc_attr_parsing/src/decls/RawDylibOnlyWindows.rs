@@ -4,4 +4,4 @@ macro_rules! RawDylibOnlyWindows {
     };
 }
 
-RawDylibOnlyWindows!()
+RawDylibOnlyWindows!();

@@ -2,9 +2,9 @@ macro_rules! deps {
     () => {
         Buffer!();
         Table!();
+        Error!();
         SerializeDocumentTupleVariant!();
         Style!();
-        Error!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_266 {
     };
 }
 
-impl_266!()
+impl_266!();

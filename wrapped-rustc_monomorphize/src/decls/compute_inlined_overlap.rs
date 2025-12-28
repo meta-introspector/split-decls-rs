@@ -4,4 +4,4 @@ macro_rules! compute_inlined_overlap {
     };
 }
 
-compute_inlined_overlap!()
+compute_inlined_overlap!();

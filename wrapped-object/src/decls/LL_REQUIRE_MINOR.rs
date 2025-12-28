@@ -4,4 +4,4 @@ macro_rules! LL_REQUIRE_MINOR {
     };
 }
 
-LL_REQUIRE_MINOR!()
+LL_REQUIRE_MINOR!();

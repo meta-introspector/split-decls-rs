@@ -4,4 +4,4 @@ macro_rules! test_translate_position {
     };
 }
 
-test_translate_position!()
+test_translate_position!();

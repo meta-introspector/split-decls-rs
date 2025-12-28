@@ -4,4 +4,4 @@ macro_rules! branch_impl {
     };
 }
 
-branch_impl!()
+branch_impl!();

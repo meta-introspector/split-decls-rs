@@ -4,4 +4,4 @@ macro_rules! suggestion_signature {
     };
 }
 
-suggestion_signature!()
+suggestion_signature!();

@@ -11,4 +11,4 @@ macro_rules! ALL_TARGETS {
     };
 }
 
-ALL_TARGETS!()
+ALL_TARGETS!();

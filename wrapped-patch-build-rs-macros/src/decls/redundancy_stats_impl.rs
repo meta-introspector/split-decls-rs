@@ -56,4 +56,4 @@ Subexpression Redundancy:
     };
 }
 
-redundancy_stats_impl!()
+redundancy_stats_impl!();

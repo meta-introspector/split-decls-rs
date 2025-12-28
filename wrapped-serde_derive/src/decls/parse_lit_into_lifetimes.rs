@@ -11,4 +11,4 @@ macro_rules! parse_lit_into_lifetimes {
     };
 }
 
-parse_lit_into_lifetimes!()
+parse_lit_into_lifetimes!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Node!();
-        Element!();
         FilterElements!();
+        Node!();
         Edge!();
+        Element!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_250 {
     };
 }
 
-impl_250!()
+impl_250!();

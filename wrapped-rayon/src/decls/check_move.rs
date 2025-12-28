@@ -4,4 +4,4 @@ macro_rules! check_move {
     };
 }
 
-check_move!()
+check_move!();

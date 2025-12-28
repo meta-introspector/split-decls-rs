@@ -4,4 +4,4 @@ macro_rules! generic_jaro {
     };
 }
 
-generic_jaro!()
+generic_jaro!();

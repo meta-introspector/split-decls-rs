@@ -4,4 +4,4 @@ macro_rules! ConstParamTyImplOnNonAdt {
     };
 }
 
-ConstParamTyImplOnNonAdt!()
+ConstParamTyImplOnNonAdt!();

@@ -4,4 +4,4 @@ macro_rules! debug_bound_var {
     };
 }
 
-debug_bound_var!()
+debug_bound_var!();

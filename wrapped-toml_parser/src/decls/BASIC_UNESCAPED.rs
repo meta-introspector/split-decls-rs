@@ -4,4 +4,4 @@ macro_rules! BASIC_UNESCAPED {
     };
 }
 
-BASIC_UNESCAPED!()
+BASIC_UNESCAPED!();

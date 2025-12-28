@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        Hir!();
+        Capture!();
+        LookSet!();
+        Properties!();
+        Class!();
+        Look!();
         Repetition!();
         PropertiesI!();
-        Class!();
-        LookSet!();
-        Look!();
-        Properties!();
+        Hir!();
         Literal!();
-        Capture!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_256 {
     };
 }
 
-impl_256!()
+impl_256!();

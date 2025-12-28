@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        Notify!();
-        Channel!();
-        RwLock!();
-        State!();
-        Mutex!();
-        Atomic!();
-        Arc!();
-        Condvar!();
         Cell!();
+        Condvar!();
+        Atomic!();
+        Notify!();
+        RwLock!();
+        Channel!();
+        Mutex!();
+        State!();
+        Arc!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! macro_85 {
     };
 }
 
-macro_85!()
+macro_85!();

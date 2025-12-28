@@ -4,4 +4,4 @@ macro_rules! try_lock {
     };
 }
 
-try_lock!()
+try_lock!();

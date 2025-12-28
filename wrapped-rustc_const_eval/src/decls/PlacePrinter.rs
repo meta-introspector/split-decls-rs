@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        InterpCx!();
         Place!();
         Machine!();
-        InterpCx!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! PlacePrinter {
     };
 }
 
-PlacePrinter!()
+PlacePrinter!();

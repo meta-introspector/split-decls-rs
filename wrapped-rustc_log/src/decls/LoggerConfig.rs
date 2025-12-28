@@ -4,4 +4,4 @@ macro_rules! LoggerConfig {
     };
 }
 
-LoggerConfig!()
+LoggerConfig!();

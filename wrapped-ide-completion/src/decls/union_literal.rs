@@ -4,4 +4,4 @@ macro_rules! union_literal {
     };
 }
 
-union_literal!()
+union_literal!();

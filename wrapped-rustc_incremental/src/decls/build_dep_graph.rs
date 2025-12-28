@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Ok!();
         CreateDepGraph!();
+        Ok!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! build_dep_graph {
     };
 }
 
-build_dep_graph!()
+build_dep_graph!();

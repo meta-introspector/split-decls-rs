@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        RingBuffer!();
         IterMut!();
+        RingBuffer!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_235 {
     };
 }
 
-impl_235!()
+impl_235!();

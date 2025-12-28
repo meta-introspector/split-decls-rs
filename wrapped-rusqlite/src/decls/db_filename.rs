@@ -11,4 +11,4 @@ macro_rules! db_filename {
     };
 }
 
-db_filename!()
+db_filename!();

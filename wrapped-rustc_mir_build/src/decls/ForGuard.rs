@@ -4,4 +4,4 @@ macro_rules! ForGuard {
     };
 }
 
-ForGuard!()
+ForGuard!();

@@ -4,4 +4,4 @@ macro_rules! R_X86_64_GOTPC64 {
     };
 }
 
-R_X86_64_GOTPC64!()
+R_X86_64_GOTPC64!();

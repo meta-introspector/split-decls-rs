@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         WalkTreePrefixProducer!();
         Folder!();
-        IntoIter!();
         UnindexedProducer!();
+        IntoIter!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_988 {
     };
 }
 
-impl_988!()
+impl_988!();

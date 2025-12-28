@@ -4,4 +4,4 @@ macro_rules! format_ident_impl {
     };
 }
 
-format_ident_impl!()
+format_ident_impl!();

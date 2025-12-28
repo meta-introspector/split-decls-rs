@@ -11,4 +11,4 @@ macro_rules! compute_debuginfo_vtable_name {
     };
 }
 
-compute_debuginfo_vtable_name!()
+compute_debuginfo_vtable_name!();

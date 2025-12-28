@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Copied!();
-        UnindexedConsumer!();
-        ParallelIterator!();
         CopiedConsumer!();
+        Copied!();
+        ParallelIterator!();
+        UnindexedConsumer!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_381 {
     };
 }
 
-impl_381!()
+impl_381!();

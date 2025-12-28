@@ -11,4 +11,4 @@ macro_rules! load_cast {
     };
 }
 
-load_cast!()
+load_cast!();

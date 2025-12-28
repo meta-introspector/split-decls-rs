@@ -4,4 +4,4 @@ macro_rules! histogram {
     };
 }
 
-histogram!()
+histogram!();

@@ -4,4 +4,4 @@ macro_rules! SEG_OBJC {
     };
 }
 
-SEG_OBJC!()
+SEG_OBJC!();

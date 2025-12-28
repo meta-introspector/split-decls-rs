@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        DropFlagMode!();
-        DropStyle!();
-        DropElaborator!();
-        DropCtxt!();
         Unwind!();
+        DropElaborator!();
+        DropFlagMode!();
+        DropCtxt!();
+        DropStyle!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_54 {
     };
 }
 
-impl_54!()
+impl_54!();

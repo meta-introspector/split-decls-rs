@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         AttrVec!();
+        HasAttrs!();
         StmtKind!();
         Attribute!();
-        HasAttrs!();
         Stmt!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_263 {
     };
 }
 
-impl_263!()
+impl_263!();

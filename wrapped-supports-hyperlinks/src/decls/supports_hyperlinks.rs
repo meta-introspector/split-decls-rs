@@ -4,4 +4,4 @@ macro_rules! supports_hyperlinks {
     };
 }
 
-supports_hyperlinks!()
+supports_hyperlinks!();

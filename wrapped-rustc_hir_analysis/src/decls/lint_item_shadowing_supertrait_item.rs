@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        SupertraitItemShadowee!();
         SupertraitItemShadowing!();
+        SupertraitItemShadowee!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! lint_item_shadowing_supertrait_item {
     };
 }
 
-lint_item_shadowing_supertrait_item!()
+lint_item_shadowing_supertrait_item!();

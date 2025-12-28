@@ -11,4 +11,4 @@ macro_rules! is_single_call_in_arm {
     };
 }
 
-is_single_call_in_arm!()
+is_single_call_in_arm!();

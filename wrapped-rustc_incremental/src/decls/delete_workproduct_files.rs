@@ -11,4 +11,4 @@ macro_rules! delete_workproduct_files {
     };
 }
 
-delete_workproduct_files!()
+delete_workproduct_files!();

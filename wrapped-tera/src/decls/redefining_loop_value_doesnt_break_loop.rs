@@ -18,4 +18,4 @@ macro_rules! redefining_loop_value_doesnt_break_loop {
     };
 }
 
-redefining_loop_value_doesnt_break_loop!()
+redefining_loop_value_doesnt_break_loop!();

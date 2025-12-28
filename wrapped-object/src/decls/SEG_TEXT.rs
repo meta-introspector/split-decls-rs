@@ -4,4 +4,4 @@ macro_rules! SEG_TEXT {
     };
 }
 
-SEG_TEXT!()
+SEG_TEXT!();

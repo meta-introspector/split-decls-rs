@@ -11,4 +11,4 @@ macro_rules! macro_rules_fixtures {
     };
 }
 
-macro_rules_fixtures!()
+macro_rules_fixtures!();

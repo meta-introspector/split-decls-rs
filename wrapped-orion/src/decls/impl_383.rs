@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Scalar!();
         PublicKey!();
-        PrivateKey!();
         FieldElement!();
+        PrivateKey!();
+        Scalar!();
         UnknownCryptoError!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_383 {
     };
 }
 
-impl_383!()
+impl_383!();

@@ -4,4 +4,4 @@ macro_rules! is_unstable_reexport {
     };
 }
 
-is_unstable_reexport!()
+is_unstable_reexport!();

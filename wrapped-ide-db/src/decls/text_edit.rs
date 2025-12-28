@@ -4,4 +4,4 @@ macro_rules! text_edit {
     };
 }
 
-text_edit!()
+text_edit!();

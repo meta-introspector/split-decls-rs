@@ -4,4 +4,4 @@ macro_rules! max_set_impl {
     };
 }
 
-max_set_impl!()
+max_set_impl!();

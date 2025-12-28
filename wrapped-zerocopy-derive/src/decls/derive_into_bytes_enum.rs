@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        PaddingCheck!();
-        EnumRepr!();
-        FieldBounds!();
         ImplBlockBuilder!();
+        PaddingCheck!();
+        FieldBounds!();
         Trait!();
+        EnumRepr!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! derive_into_bytes_enum {
     };
 }
 
-derive_into_bytes_enum!()
+derive_into_bytes_enum!();

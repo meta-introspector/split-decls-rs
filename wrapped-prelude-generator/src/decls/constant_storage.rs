@@ -4,4 +4,4 @@ macro_rules! constant_storage {
     };
 }
 
-constant_storage!()
+constant_storage!();

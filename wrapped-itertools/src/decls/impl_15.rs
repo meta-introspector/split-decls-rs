@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        CountItem!();
         CoalesceBy!();
+        CountItem!();
         CoalescePredicate!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_15 {
     };
 }
 
-impl_15!()
+impl_15!();

@@ -4,4 +4,4 @@ macro_rules! msync {
     };
 }
 
-msync!()
+msync!();

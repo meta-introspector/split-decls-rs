@@ -4,4 +4,4 @@ macro_rules! SELFMAG {
     };
 }
 
-SELFMAG!()
+SELFMAG!();

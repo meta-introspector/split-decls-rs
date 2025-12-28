@@ -14,4 +14,4 @@ macro_rules! render_magic_variable_macro_doesnt_leak {
     };
 }
 
-render_magic_variable_macro_doesnt_leak!()
+render_magic_variable_macro_doesnt_leak!();

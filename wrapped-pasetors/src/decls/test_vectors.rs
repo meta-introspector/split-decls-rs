@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
         SymmetricKey!();
-        UntrustedToken!();
-        AsymmetricPublicKey!();
-        Local!();
-        LocalToken!();
-        PublicToken!();
-        Claims!();
-        AsymmetricSecretKey!();
-        V4!();
         Public!();
+        Local!();
+        Claims!();
+        AsymmetricPublicKey!();
+        V4!();
+        AsymmetricSecretKey!();
+        LocalToken!();
+        UntrustedToken!();
+        PublicToken!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! test_vectors {
     };
 }
 
-test_vectors!()
+test_vectors!();

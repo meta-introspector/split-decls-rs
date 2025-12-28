@@ -11,4 +11,4 @@ macro_rules! from_path {
     };
 }
 
-from_path!()
+from_path!();

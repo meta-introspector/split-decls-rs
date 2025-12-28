@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Node!();
         MinScored!();
-        Edge!();
-        NodeReferences!();
         UnionFind!();
+        NodeReferences!();
+        Edge!();
+        Node!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! MinSpanningTree {
     };
 }
 
-MinSpanningTree!()
+MinSpanningTree!();

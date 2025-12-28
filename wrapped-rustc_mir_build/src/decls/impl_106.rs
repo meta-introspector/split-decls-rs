@@ -1,23 +1,23 @@
 macro_rules! deps {
     () => {
-        ForGuard!();
-        Ascription!();
-        Scope!();
-        ScheduleDrops!();
-        CFG!();
-        ThenElseArgs!();
         Builder!();
-        Variant!();
-        BlockAnd!();
-        MatchTreeBranch!();
-        PlaceBuilder!();
         ProjectedUserTypesNode!();
         DropKind!();
-        HasMatchGuard!();
-        Binding!();
         ArmHasGuard!();
-        DeclareLetBindings!();
         BuiltMatchTree!();
+        DeclareLetBindings!();
+        ScheduleDrops!();
+        Binding!();
+        PlaceBuilder!();
+        BlockAnd!();
+        ForGuard!();
+        CFG!();
+        Variant!();
+        Ascription!();
+        Scope!();
+        HasMatchGuard!();
+        MatchTreeBranch!();
+        ThenElseArgs!();
     };
 }
 
@@ -28,4 +28,4 @@ macro_rules! impl_106 {
     };
 }
 
-impl_106!()
+impl_106!();

@@ -4,4 +4,4 @@ macro_rules! construct_tag {
     };
 }
 
-construct_tag!()
+construct_tag!();

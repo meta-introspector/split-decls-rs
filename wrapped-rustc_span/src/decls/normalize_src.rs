@@ -11,4 +11,4 @@ macro_rules! normalize_src {
     };
 }
 
-normalize_src!()
+normalize_src!();

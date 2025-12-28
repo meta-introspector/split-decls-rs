@@ -4,4 +4,4 @@ macro_rules! cfg_is_wasm_not_wasi {
     };
 }
 
-cfg_is_wasm_not_wasi!()
+cfg_is_wasm_not_wasi!();

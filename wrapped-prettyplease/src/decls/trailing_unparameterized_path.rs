@@ -11,4 +11,4 @@ macro_rules! trailing_unparameterized_path {
     };
 }
 
-trailing_unparameterized_path!()
+trailing_unparameterized_path!();

@@ -11,4 +11,4 @@ macro_rules! to_llvm_float_abi {
     };
 }
 
-to_llvm_float_abi!()
+to_llvm_float_abi!();

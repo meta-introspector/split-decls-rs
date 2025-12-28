@@ -12,4 +12,4 @@ macro_rules! write_all_bytes {
     };
 }
 
-write_all_bytes!()
+write_all_bytes!();

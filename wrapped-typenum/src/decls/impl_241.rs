@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         InvertedUnsigned!();
-        UTerm!();
         PrivateInvert!();
+        UTerm!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_241 {
     };
 }
 
-impl_241!()
+impl_241!();

@@ -4,4 +4,4 @@ macro_rules! used_muts {
     };
 }
 
-used_muts!()
+used_muts!();

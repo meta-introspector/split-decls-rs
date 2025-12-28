@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Endian!();
+        MachHeader!();
         MachOSectionInternal!();
         Object!();
-        MachOSegmentInternal!();
-        MachHeader!();
-        SymbolTable!();
         ReadRef!();
+        Endian!();
+        MachOSegmentInternal!();
+        SymbolTable!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! MachOFile {
     };
 }
 
-MachOFile!()
+MachOFile!();

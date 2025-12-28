@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        FnSig!();
         Extern!();
         Const!();
+        FnSig!();
         Safety!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_123 {
     };
 }
 
-impl_123!()
+impl_123!();

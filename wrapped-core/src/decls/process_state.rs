@@ -4,4 +4,4 @@ macro_rules! process_state {
     };
 }
 
-process_state!()
+process_state!();

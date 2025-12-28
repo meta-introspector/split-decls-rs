@@ -4,4 +4,4 @@ macro_rules! EM_SNP1K {
     };
 }
 
-EM_SNP1K!()
+EM_SNP1K!();

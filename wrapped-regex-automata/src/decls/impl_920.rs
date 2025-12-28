@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Span!();
         Match!();
         PatternID!();
-        Span!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_920 {
     };
 }
 
-impl_920!()
+impl_920!();

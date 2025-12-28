@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Config!();
         TransferStack!();
+        Config!();
         Addr!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_117 {
     };
 }
 
-impl_117!()
+impl_117!();

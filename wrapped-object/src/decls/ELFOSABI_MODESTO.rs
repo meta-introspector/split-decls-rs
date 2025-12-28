@@ -4,4 +4,4 @@ macro_rules! ELFOSABI_MODESTO {
     };
 }
 
-ELFOSABI_MODESTO!()
+ELFOSABI_MODESTO!();

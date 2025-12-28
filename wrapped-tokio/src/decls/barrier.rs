@@ -4,4 +4,4 @@ macro_rules! barrier {
     };
 }
 
-barrier!()
+barrier!();

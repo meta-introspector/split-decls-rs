@@ -4,4 +4,4 @@ macro_rules! io_uring_napi {
     };
 }
 
-io_uring_napi!()
+io_uring_napi!();

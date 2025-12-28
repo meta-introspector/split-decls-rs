@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        Class!();
-        GUID!();
+        Interface!();
+        CppStruct!();
+        Delegate!();
+        CppInterface!();
         CppFn!();
         CppConst!();
-        CppEnum!();
-        CppStruct!();
-        CppInterface!();
-        Interface!();
-        Delegate!();
+        GUID!();
+        Class!();
         CppDelegate!();
+        CppEnum!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! Type {
     };
 }
 
-Type!()
+Type!();

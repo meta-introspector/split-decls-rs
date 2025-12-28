@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Token!();
         Printer!();
         FixupContext!();
-        Token!();
         PathKind!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_88 {
     };
 }
 
-impl_88!()
+impl_88!();

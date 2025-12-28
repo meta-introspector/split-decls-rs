@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        StreamFooter!();
+        StreamHeader!();
         Read!();
         Index!();
         Block!();
-        StreamHeader!();
-        Error!();
         CheckType!();
+        StreamFooter!();
         Result!();
+        Error!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! scan_blocks {
     };
 }
 
-scan_blocks!()
+scan_blocks!();

@@ -4,4 +4,4 @@ macro_rules! MaybePlacesSwitchIntData {
     };
 }
 
-MaybePlacesSwitchIntData!()
+MaybePlacesSwitchIntData!();

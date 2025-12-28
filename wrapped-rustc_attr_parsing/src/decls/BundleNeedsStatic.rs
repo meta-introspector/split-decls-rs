@@ -4,4 +4,4 @@ macro_rules! BundleNeedsStatic {
     };
 }
 
-BundleNeedsStatic!()
+BundleNeedsStatic!();

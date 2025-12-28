@@ -11,4 +11,4 @@ macro_rules! NONE_LAYER_MARKER {
     };
 }
 
-NONE_LAYER_MARKER!()
+NONE_LAYER_MARKER!();

@@ -4,4 +4,4 @@ macro_rules! expr_ext {
     };
 }
 
-expr_ext!()
+expr_ext!();

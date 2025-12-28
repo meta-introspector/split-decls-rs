@@ -4,4 +4,4 @@ macro_rules! R_68K_PLT32O {
     };
 }
 
-R_68K_PLT32O!()
+R_68K_PLT32O!();

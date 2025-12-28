@@ -4,4 +4,4 @@ macro_rules! NakedFunctionsMustNakedAsm {
     };
 }
 
-NakedFunctionsMustNakedAsm!()
+NakedFunctionsMustNakedAsm!();

@@ -4,4 +4,4 @@ macro_rules! SA8 {
     };
 }
 
-SA8!()
+SA8!();

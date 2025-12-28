@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Safety!();
         Path!();
         MetaItemKind!();
+        Safety!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! MetaItem {
     };
 }
 
-MetaItem!()
+MetaItem!();

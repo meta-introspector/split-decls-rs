@@ -4,4 +4,4 @@ macro_rules! MutRefSugg {
     };
 }
 
-MutRefSugg!()
+MutRefSugg!();

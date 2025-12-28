@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        InflateStream!();
         ReturnCode!();
         Flags!();
-        InflateStream!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! undermine {
     };
 }
 
-undermine!()
+undermine!();

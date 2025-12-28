@@ -4,4 +4,4 @@ macro_rules! nghttp2_priority_spec {
     };
 }
 
-nghttp2_priority_spec!()
+nghttp2_priority_spec!();

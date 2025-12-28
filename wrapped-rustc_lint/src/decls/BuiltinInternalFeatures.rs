@@ -4,4 +4,4 @@ macro_rules! BuiltinInternalFeatures {
     };
 }
 
-BuiltinInternalFeatures!()
+BuiltinInternalFeatures!();

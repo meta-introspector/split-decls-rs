@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        RangeEncoder!();
-        RangeEncoderBuffer!();
         Result!();
-        LzmaEncoderTrait!();
         LzmaEncoder!();
+        RangeEncoderBuffer!();
+        LzmaEncoderTrait!();
+        RangeEncoder!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_186 {
     };
 }
 
-impl_186!()
+impl_186!();

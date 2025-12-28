@@ -4,4 +4,4 @@ macro_rules! PROC_REAP_STATUS {
     };
 }
 
-PROC_REAP_STATUS!()
+PROC_REAP_STATUS!();

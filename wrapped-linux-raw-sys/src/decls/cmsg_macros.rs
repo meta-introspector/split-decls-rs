@@ -4,4 +4,4 @@ macro_rules! cmsg_macros {
     };
 }
 
-cmsg_macros!()
+cmsg_macros!();

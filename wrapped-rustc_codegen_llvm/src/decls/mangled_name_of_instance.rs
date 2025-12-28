@@ -11,4 +11,4 @@ macro_rules! mangled_name_of_instance {
     };
 }
 
-mangled_name_of_instance!()
+mangled_name_of_instance!();

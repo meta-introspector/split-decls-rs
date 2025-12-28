@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        InternError!();
-        InterpCx!();
         CompileTimeMachine!();
+        InterpCx!();
+        InternError!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! intern_shallow {
     };
 }
 
-intern_shallow!()
+intern_shallow!();

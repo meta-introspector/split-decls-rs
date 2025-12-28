@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        ConvertError!();
-        TryFromBytes!();
-        ValidityError!();
+        Unaligned!();
         SizeError!();
+        ValidityError!();
         Immutable!();
+        TryFromBytes!();
         TryCastError!();
         KnownLayout!();
-        Unaligned!();
+        ConvertError!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! AlignedTryCastError {
     };
 }
 
-AlignedTryCastError!()
+AlignedTryCastError!();

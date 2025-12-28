@@ -4,4 +4,4 @@ macro_rules! can_into {
     };
 }
 
-can_into!()
+can_into!();

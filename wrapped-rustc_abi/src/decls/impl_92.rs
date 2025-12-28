@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        AbiAlign!();
+        Primitive!();
         Size!();
         Float!();
-        Primitive!();
         HasDataLayout!();
-        AbiAlign!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_92 {
     };
 }
 
-impl_92!()
+impl_92!();

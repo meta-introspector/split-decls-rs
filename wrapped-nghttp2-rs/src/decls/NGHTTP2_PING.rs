@@ -4,4 +4,4 @@ macro_rules! NGHTTP2_PING {
     };
 }
 
-NGHTTP2_PING!()
+NGHTTP2_PING!();

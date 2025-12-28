@@ -1,17 +1,17 @@
 macro_rules! deps {
     () => {
-        ProbeScope!();
-        ItemKind!();
-        Error!();
-        TupleArgumentsFlag!();
         InvalidCallee!();
-        CallStep!();
-        AbiCannotBeCalled!();
-        MethodCallee!();
         FnCtxt!();
-        RustCallIncorrectArgs!();
-        Expectation!();
+        ProbeScope!();
+        CallStep!();
+        Error!();
+        ItemKind!();
         DeferredCallResolution!();
+        Expectation!();
+        AbiCannotBeCalled!();
+        RustCallIncorrectArgs!();
+        MethodCallee!();
+        TupleArgumentsFlag!();
     };
 }
 
@@ -24,4 +24,4 @@ macro_rules! impl_7 {
     };
 }
 
-impl_7!()
+impl_7!();

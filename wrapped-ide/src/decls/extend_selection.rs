@@ -4,4 +4,4 @@ macro_rules! extend_selection {
     };
 }
 
-extend_selection!()
+extend_selection!();

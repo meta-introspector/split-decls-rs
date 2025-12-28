@@ -4,4 +4,4 @@ macro_rules! yield_now_to_spawn {
     };
 }
 
-yield_now_to_spawn!()
+yield_now_to_spawn!();

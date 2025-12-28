@@ -11,4 +11,4 @@ macro_rules! alloc_error_handler_name {
     };
 }
 
-alloc_error_handler_name!()
+alloc_error_handler_name!();

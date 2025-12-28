@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         SyntaxContextData!();
+        ExpnId!();
+        Transparency!();
         SyntaxContext!();
         SyntaxContextKey!();
-        Transparency!();
-        ExpnId!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_41 {
     };
 }
 
-impl_41!()
+impl_41!();

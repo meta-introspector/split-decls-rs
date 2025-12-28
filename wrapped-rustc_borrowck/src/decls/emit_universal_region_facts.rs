@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        BorrowSet!();
-        UniversalRegionRelations!();
         PoloniusFacts!();
+        UniversalRegionRelations!();
+        BorrowSet!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! emit_universal_region_facts {
     };
 }
 
-emit_universal_region_facts!()
+emit_universal_region_facts!();

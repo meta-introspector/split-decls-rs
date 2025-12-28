@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Response!();
-        RequestId!();
-        Incoming!();
         ResponseError!();
+        Response!();
+        Incoming!();
+        RequestId!();
         ErrorCode!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_38 {
     };
 }
 
-impl_38!()
+impl_38!();

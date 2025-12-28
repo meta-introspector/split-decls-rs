@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        FieldAlreadyDeclared!();
         FieldUniquenessCheckContext!();
-        FieldDeclSpan!();
+        FieldAlreadyDeclared!();
         NestedSpan!();
+        FieldDeclSpan!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_232 {
     };
 }
 
-impl_232!()
+impl_232!();

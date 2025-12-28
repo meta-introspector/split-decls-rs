@@ -4,4 +4,4 @@ macro_rules! SpanUseEqCtxtDiag {
     };
 }
 
-SpanUseEqCtxtDiag!()
+SpanUseEqCtxtDiag!();

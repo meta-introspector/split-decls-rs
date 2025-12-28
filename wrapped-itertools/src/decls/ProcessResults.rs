@@ -4,4 +4,4 @@ macro_rules! ProcessResults {
     };
 }
 
-ProcessResults!()
+ProcessResults!();

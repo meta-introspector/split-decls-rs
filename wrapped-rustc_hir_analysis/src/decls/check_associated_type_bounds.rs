@@ -11,4 +11,4 @@ macro_rules! check_associated_type_bounds {
     };
 }
 
-check_associated_type_bounds!()
+check_associated_type_bounds!();

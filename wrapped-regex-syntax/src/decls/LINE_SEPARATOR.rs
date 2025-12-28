@@ -4,4 +4,4 @@ macro_rules! LINE_SEPARATOR {
     };
 }
 
-LINE_SEPARATOR!()
+LINE_SEPARATOR!();

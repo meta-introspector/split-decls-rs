@@ -4,4 +4,4 @@ macro_rules! WANT_PENDING {
     };
 }
 
-WANT_PENDING!()
+WANT_PENDING!();

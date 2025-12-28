@@ -4,4 +4,4 @@ macro_rules! minify_val_fcs {
     };
 }
 
-minify_val_fcs!()
+minify_val_fcs!();

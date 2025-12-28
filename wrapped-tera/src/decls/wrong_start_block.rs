@@ -4,4 +4,4 @@ macro_rules! wrong_start_block {
     };
 }
 
-wrong_start_block!()
+wrong_start_block!();

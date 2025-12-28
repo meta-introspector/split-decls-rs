@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        PlaceValidity!();
         PatCx!();
+        PlaceValidity!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! PlaceInfo {
     };
 }
 
-PlaceInfo!()
+PlaceInfo!();

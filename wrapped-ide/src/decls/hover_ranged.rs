@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        HoverResult!();
         RangeInfo!();
-        Analysis!();
+        HoverResult!();
         HoverConfig!();
+        Analysis!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! hover_ranged {
     };
 }
 
-hover_ranged!()
+hover_ranged!();

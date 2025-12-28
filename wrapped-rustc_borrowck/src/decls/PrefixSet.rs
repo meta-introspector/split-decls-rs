@@ -4,4 +4,4 @@ macro_rules! PrefixSet {
     };
 }
 
-PrefixSet!()
+PrefixSet!();

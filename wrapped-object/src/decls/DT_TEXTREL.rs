@@ -4,4 +4,4 @@ macro_rules! DT_TEXTREL {
     };
 }
 
-DT_TEXTREL!()
+DT_TEXTREL!();

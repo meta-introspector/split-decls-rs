@@ -4,4 +4,4 @@ macro_rules! IMAGE_REL_ARM_TOKEN {
     };
 }
 
-IMAGE_REL_ARM_TOKEN!()
+IMAGE_REL_ARM_TOKEN!();

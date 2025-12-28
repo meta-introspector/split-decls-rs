@@ -4,4 +4,4 @@ macro_rules! code_line_ignored_by_rustdoc {
     };
 }
 
-code_line_ignored_by_rustdoc!()
+code_line_ignored_by_rustdoc!();

@@ -4,4 +4,4 @@ macro_rules! PT_IA_64_ARCHEXT {
     };
 }
 
-PT_IA_64_ARCHEXT!()
+PT_IA_64_ARCHEXT!();

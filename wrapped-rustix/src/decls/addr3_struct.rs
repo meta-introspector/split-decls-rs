@@ -4,4 +4,4 @@ macro_rules! addr3_struct {
     };
 }
 
-addr3_struct!()
+addr3_struct!();

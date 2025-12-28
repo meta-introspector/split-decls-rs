@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        UWordBounds!();
-        USentenceBounds!();
-        USentenceBoundIndices!();
-        UnicodeWordIndices!();
-        UnicodeSentences!();
-        UWordBoundIndices!();
-        UnicodeWords!();
-        Graphemes!();
         GraphemeIndices!();
+        UnicodeSentences!();
+        Graphemes!();
+        UnicodeWords!();
+        UnicodeWordIndices!();
+        UWordBoundIndices!();
+        UWordBounds!();
+        USentenceBoundIndices!();
+        USentenceBounds!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! UnicodeSegmentation {
     };
 }
 
-UnicodeSegmentation!()
+UnicodeSegmentation!();

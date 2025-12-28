@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         Expr!();
         MathOperator!();
-        MathExpr!();
         ExprVal!();
+        MathExpr!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! parse_comparison_val {
     };
 }
 
-parse_comparison_val!()
+parse_comparison_val!();

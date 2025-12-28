@@ -4,4 +4,4 @@ macro_rules! R_MIPS_SCN_DISP {
     };
 }
 
-R_MIPS_SCN_DISP!()
+R_MIPS_SCN_DISP!();

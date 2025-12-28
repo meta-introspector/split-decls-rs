@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Entry!();
-        Fixed!();
         Fd!();
+        Fixed!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! macro_63 {
     };
 }
 
-macro_63!()
+macro_63!();

@@ -1,17 +1,17 @@
 macro_rules! deps {
     () => {
-        MacroKinds!();
-        CtorOf!();
-        OpaqueTy!();
-        Safety!();
-        Closure!();
-        Variant!();
+        Mod!();
+        Impl!();
         DefPathData!();
+        Safety!();
         CtorKind!();
+        CtorOf!();
         Lifetime!();
         AnonConst!();
-        Impl!();
-        Mod!();
+        Variant!();
+        MacroKinds!();
+        OpaqueTy!();
+        Closure!();
     };
 }
 
@@ -22,4 +22,4 @@ macro_rules! DefKind {
     };
 }
 
-DefKind!()
+DefKind!();

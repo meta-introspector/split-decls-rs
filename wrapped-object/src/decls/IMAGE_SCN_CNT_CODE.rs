@@ -11,4 +11,4 @@ macro_rules! IMAGE_SCN_CNT_CODE {
     };
 }
 
-IMAGE_SCN_CNT_CODE!()
+IMAGE_SCN_CNT_CODE!();

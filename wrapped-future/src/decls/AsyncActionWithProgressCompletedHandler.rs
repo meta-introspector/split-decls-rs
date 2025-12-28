@@ -4,4 +4,4 @@ macro_rules! AsyncActionWithProgressCompletedHandler {
     };
 }
 
-AsyncActionWithProgressCompletedHandler!()
+AsyncActionWithProgressCompletedHandler!();

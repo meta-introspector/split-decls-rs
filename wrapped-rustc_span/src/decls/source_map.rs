@@ -4,4 +4,4 @@ macro_rules! source_map {
     };
 }
 
-source_map!()
+source_map!();

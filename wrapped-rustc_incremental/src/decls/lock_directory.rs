@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Ok!();
         CreateLock!();
+        Ok!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! lock_directory {
     };
 }
 
-lock_directory!()
+lock_directory!();

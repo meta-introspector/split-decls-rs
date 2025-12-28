@@ -4,4 +4,4 @@ macro_rules! highlight_related {
     };
 }
 
-highlight_related!()
+highlight_related!();

@@ -4,4 +4,4 @@ macro_rules! SHT_PROGBITS {
     };
 }
 
-SHT_PROGBITS!()
+SHT_PROGBITS!();

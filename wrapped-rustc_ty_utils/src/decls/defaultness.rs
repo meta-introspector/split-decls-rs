@@ -4,4 +4,4 @@ macro_rules! defaultness {
     };
 }
 
-defaultness!()
+defaultness!();

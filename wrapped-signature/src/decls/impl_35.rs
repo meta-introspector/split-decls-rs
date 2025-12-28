@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        RandomizedSigner!();
-        Result!();
         Error!();
         AsyncRandomizedSigner!();
+        RandomizedSigner!();
+        Result!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_35 {
     };
 }
 
-impl_35!()
+impl_35!();

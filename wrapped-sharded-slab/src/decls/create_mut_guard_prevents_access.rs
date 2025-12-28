@@ -11,4 +11,4 @@ macro_rules! create_mut_guard_prevents_access {
     };
 }
 
-create_mut_guard_prevents_access!()
+create_mut_guard_prevents_access!();

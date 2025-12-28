@@ -4,4 +4,4 @@ macro_rules! MAX_ARG_IN_REGS_SIZE {
     };
 }
 
-MAX_ARG_IN_REGS_SIZE!()
+MAX_ARG_IN_REGS_SIZE!();

@@ -4,4 +4,4 @@ macro_rules! R_SH_GNU_VTINHERIT {
     };
 }
 
-R_SH_GNU_VTINHERIT!()
+R_SH_GNU_VTINHERIT!();

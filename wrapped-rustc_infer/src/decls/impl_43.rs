@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
+        InferOk!();
         PredicateObligations!();
-        TraitEngine!();
         DefineOpaqueTypes!();
+        TraitEngine!();
+        InferCtxt!();
         ScrubbedTraitError!();
         SubregionOrigin!();
-        InferCtxt!();
         InferResult!();
-        InferOk!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_43 {
     };
 }
 
-impl_43!()
+impl_43!();

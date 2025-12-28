@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         ExtraBackendMethods!();
-        WorkItem!();
+        WorkerFatalError!();
         CodegenContext!();
         Message!();
-        WorkerFatalError!();
+        WorkItem!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! spawn_work {
     };
 }
 
-spawn_work!()
+spawn_work!();

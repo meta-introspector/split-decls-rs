@@ -4,4 +4,4 @@ macro_rules! substring {
     };
 }
 
-substring!()
+substring!();

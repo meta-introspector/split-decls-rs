@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Action!();
         Result!();
+        Action!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! tcflow {
     };
 }
 
-tcflow!()
+tcflow!();

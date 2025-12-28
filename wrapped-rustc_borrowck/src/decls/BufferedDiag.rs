@@ -4,4 +4,4 @@ macro_rules! BufferedDiag {
     };
 }
 
-BufferedDiag!()
+BufferedDiag!();

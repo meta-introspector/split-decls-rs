@@ -11,4 +11,4 @@ macro_rules! unshare_unsafe {
     };
 }
 
-unshare_unsafe!()
+unshare_unsafe!();

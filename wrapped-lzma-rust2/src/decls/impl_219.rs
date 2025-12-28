@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Write!();
-        Error!();
-        WorkPoolConfig!();
         Lzma2WriterMt!();
-        WorkUnit!();
-        Lzma2Options!();
         WorkPool!();
+        Write!();
+        WorkUnit!();
+        Error!();
+        Lzma2Options!();
+        WorkPoolConfig!();
         Result!();
         AutoFinisher!();
     };
@@ -19,4 +19,4 @@ macro_rules! impl_219 {
     };
 }
 
-impl_219!()
+impl_219!();

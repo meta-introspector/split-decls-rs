@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        TupleCombinations!();
         HasCombination!();
+        TupleCombinations!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! tuple_combinations {
     };
 }
 
-tuple_combinations!()
+tuple_combinations!();

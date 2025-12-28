@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Reject!();
         Cursor!();
+        Reject!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! word_break {
     };
 }
 
-word_break!()
+word_break!();

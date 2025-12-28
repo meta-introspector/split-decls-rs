@@ -4,4 +4,4 @@ macro_rules! linux_and_more {
     };
 }
 
-linux_and_more!()
+linux_and_more!();

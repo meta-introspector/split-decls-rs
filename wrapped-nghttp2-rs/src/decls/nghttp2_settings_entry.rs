@@ -4,4 +4,4 @@ macro_rules! nghttp2_settings_entry {
     };
 }
 
-nghttp2_settings_entry!()
+nghttp2_settings_entry!();

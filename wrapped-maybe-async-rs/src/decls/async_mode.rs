@@ -11,4 +11,4 @@ macro_rules! async_mode {
     };
 }
 
-async_mode!()
+async_mode!();

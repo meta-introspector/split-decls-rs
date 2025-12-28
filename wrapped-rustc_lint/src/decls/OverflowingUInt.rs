@@ -4,4 +4,4 @@ macro_rules! OverflowingUInt {
     };
 }
 
-OverflowingUInt!()
+OverflowingUInt!();

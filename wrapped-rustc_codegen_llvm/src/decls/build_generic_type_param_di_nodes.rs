@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        SmallVec!();
         CodegenCx!();
+        SmallVec!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! build_generic_type_param_di_nodes {
     };
 }
 
-build_generic_type_param_di_nodes!()
+build_generic_type_param_di_nodes!();

@@ -4,4 +4,4 @@ macro_rules! managarm_mlibc {
     };
 }
 
-managarm_mlibc!()
+managarm_mlibc!();

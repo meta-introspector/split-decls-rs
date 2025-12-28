@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        B0!();
         Min!();
+        B0!();
         B1!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_27 {
     };
 }
 
-impl_27!()
+impl_27!();

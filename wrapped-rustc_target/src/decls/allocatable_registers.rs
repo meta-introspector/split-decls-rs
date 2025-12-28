@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        InlineAsmReg!();
-        InlineAsmRegClass!();
         InlineAsmArch!();
+        InlineAsmRegClass!();
         Target!();
+        InlineAsmReg!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! allocatable_registers {
     };
 }
 
-allocatable_registers!()
+allocatable_registers!();

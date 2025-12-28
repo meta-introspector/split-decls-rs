@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Expr!();
         MetaVarKind!();
-        LitKind!();
-        IdentIsRaw!();
+        Expr!();
+        Lit!();
         Token!();
         InvisibleOrigin!();
-        Lit!();
+        IdentIsRaw!();
+        LitKind!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_400 {
     };
 }
 
-impl_400!()
+impl_400!();

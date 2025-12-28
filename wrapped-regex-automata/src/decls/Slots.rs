@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        GroupInfo!();
-        NFA!();
         DFA!();
+        NFA!();
+        GroupInfo!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Slots {
     };
 }
 
-Slots!()
+Slots!();

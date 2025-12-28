@@ -4,4 +4,4 @@ macro_rules! mono_item_linkage_and_visibility {
     };
 }
 
-mono_item_linkage_and_visibility!()
+mono_item_linkage_and_visibility!();

@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
+        Identifier!();
         Event!();
         Kind!();
-        Identifier!();
+        FieldSet!();
         Metadata!();
         Level!();
-        FieldSet!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_193 {
     };
 }
 
-impl_193!()
+impl_193!();

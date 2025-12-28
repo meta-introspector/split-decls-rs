@@ -4,4 +4,4 @@ macro_rules! mut_borrow_of_mutable_ref {
     };
 }
 
-mut_borrow_of_mutable_ref!()
+mut_borrow_of_mutable_ref!();

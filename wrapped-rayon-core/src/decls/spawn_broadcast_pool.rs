@@ -11,4 +11,4 @@ macro_rules! spawn_broadcast_pool {
     };
 }
 
-spawn_broadcast_pool!()
+spawn_broadcast_pool!();

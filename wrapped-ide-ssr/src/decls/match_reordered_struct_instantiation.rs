@@ -4,4 +4,4 @@ macro_rules! match_reordered_struct_instantiation {
     };
 }
 
-match_reordered_struct_instantiation!()
+match_reordered_struct_instantiation!();

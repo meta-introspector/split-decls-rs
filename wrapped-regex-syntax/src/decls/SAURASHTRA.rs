@@ -4,4 +4,4 @@ macro_rules! SAURASHTRA {
     };
 }
 
-SAURASHTRA!()
+SAURASHTRA!();

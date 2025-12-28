@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Failure!();
-        ParseResultBase!();
         LibMacroRuleTracker!();
+        ParseResultBase!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! DynMTrackerTrait {
     };
 }
 
-DynMTrackerTrait!()
+DynMTrackerTrait!();

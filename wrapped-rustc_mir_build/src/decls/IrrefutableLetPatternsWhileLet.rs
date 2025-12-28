@@ -4,4 +4,4 @@ macro_rules! IrrefutableLetPatternsWhileLet {
     };
 }
 
-IrrefutableLetPatternsWhileLet!()
+IrrefutableLetPatternsWhileLet!();

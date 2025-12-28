@@ -12,4 +12,4 @@ macro_rules! rust_column {
     };
 }
 
-rust_column!()
+rust_column!();

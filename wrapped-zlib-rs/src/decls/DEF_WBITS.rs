@@ -4,4 +4,4 @@ macro_rules! DEF_WBITS {
     };
 }
 
-DEF_WBITS!()
+DEF_WBITS!();

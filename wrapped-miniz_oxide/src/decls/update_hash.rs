@@ -4,4 +4,4 @@ macro_rules! update_hash {
     };
 }
 
-update_hash!()
+update_hash!();

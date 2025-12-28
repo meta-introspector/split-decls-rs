@@ -11,4 +11,4 @@ macro_rules! u64x2x2_generic {
     };
 }
 
-u64x2x2_generic!()
+u64x2x2_generic!();

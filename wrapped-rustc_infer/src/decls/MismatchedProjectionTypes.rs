@@ -4,4 +4,4 @@ macro_rules! MismatchedProjectionTypes {
     };
 }
 
-MismatchedProjectionTypes!()
+MismatchedProjectionTypes!();

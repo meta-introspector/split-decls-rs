@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Element!();
         SyntaxToken!();
         SyntaxElement!();
-        Element!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_158 {
     };
 }
 
-impl_158!()
+impl_158!();

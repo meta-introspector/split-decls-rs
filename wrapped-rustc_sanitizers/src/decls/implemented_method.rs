@@ -4,4 +4,4 @@ macro_rules! implemented_method {
     };
 }
 
-implemented_method!()
+implemented_method!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Intern!();
-        TrackedQuery!();
-        InputQuery!();
         Transparent!();
+        InputQuery!();
+        TrackedQuery!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! Queries {
     };
 }
 
-Queries!()
+Queries!();

@@ -4,4 +4,4 @@ macro_rules! R_SH_GOTPC {
     };
 }
 
-R_SH_GOTPC!()
+R_SH_GOTPC!();

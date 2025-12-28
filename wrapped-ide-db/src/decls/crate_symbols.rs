@@ -11,4 +11,4 @@ macro_rules! crate_symbols {
     };
 }
 
-crate_symbols!()
+crate_symbols!();

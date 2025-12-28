@@ -4,4 +4,4 @@ macro_rules! AliasBoundKind {
     };
 }
 
-AliasBoundKind!()
+AliasBoundKind!();

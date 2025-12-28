@@ -5,4 +5,4 @@ macro_rules! fn_abi_sanity_check {
     };
 }
 
-fn_abi_sanity_check!()
+fn_abi_sanity_check!();

@@ -11,4 +11,4 @@ macro_rules! fold_kind {
     };
 }
 
-fold_kind!()
+fold_kind!();

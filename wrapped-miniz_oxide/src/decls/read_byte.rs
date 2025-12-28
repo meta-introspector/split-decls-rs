@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Action!();
         InputWrapper!();
+        Action!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! read_byte {
     };
 }
 
-read_byte!()
+read_byte!();

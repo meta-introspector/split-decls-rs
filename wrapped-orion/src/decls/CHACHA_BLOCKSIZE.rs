@@ -11,4 +11,4 @@ macro_rules! CHACHA_BLOCKSIZE {
     };
 }
 
-CHACHA_BLOCKSIZE!()
+CHACHA_BLOCKSIZE!();

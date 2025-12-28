@@ -4,4 +4,4 @@ macro_rules! serde_adapter {
     };
 }
 
-serde_adapter!()
+serde_adapter!();

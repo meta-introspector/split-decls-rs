@@ -11,4 +11,4 @@ macro_rules! with_c_str {
     };
 }
 
-with_c_str!()
+with_c_str!();

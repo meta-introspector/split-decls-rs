@@ -11,4 +11,4 @@ macro_rules! joined_uncovered_patterns {
     };
 }
 
-joined_uncovered_patterns!()
+joined_uncovered_patterns!();

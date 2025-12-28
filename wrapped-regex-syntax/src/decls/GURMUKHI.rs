@@ -4,4 +4,4 @@ macro_rules! GURMUKHI {
     };
 }
 
-GURMUKHI!()
+GURMUKHI!();

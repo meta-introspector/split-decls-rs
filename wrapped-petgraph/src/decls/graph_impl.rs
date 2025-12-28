@@ -4,4 +4,4 @@ macro_rules! graph_impl {
     };
 }
 
-graph_impl!()
+graph_impl!();

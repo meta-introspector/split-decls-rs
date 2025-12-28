@@ -4,4 +4,4 @@ macro_rules! FN_TRAITS {
     };
 }
 
-FN_TRAITS!()
+FN_TRAITS!();

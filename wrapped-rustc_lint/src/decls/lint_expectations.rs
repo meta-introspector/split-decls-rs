@@ -4,4 +4,4 @@ macro_rules! lint_expectations {
     };
 }
 
-lint_expectations!()
+lint_expectations!();

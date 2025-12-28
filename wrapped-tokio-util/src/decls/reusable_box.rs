@@ -4,4 +4,4 @@ macro_rules! reusable_box {
     };
 }
 
-reusable_box!()
+reusable_box!();

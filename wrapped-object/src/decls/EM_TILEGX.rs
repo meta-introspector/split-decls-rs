@@ -4,4 +4,4 @@ macro_rules! EM_TILEGX {
     };
 }
 
-EM_TILEGX!()
+EM_TILEGX!();

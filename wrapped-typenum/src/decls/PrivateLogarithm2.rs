@@ -4,4 +4,4 @@ macro_rules! PrivateLogarithm2 {
     };
 }
 
-PrivateLogarithm2!()
+PrivateLogarithm2!();

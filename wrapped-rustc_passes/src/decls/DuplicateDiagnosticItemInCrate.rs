@@ -4,4 +4,4 @@ macro_rules! DuplicateDiagnosticItemInCrate {
     };
 }
 
-DuplicateDiagnosticItemInCrate!()
+DuplicateDiagnosticItemInCrate!();

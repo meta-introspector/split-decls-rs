@@ -4,4 +4,4 @@ macro_rules! unsigned_problem_values {
     };
 }
 
-unsigned_problem_values!()
+unsigned_problem_values!();

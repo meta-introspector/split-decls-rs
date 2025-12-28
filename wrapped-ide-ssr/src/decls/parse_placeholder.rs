@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Placeholder!();
-        Token!();
         SsrError!();
+        Token!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! parse_placeholder {
     };
 }
 
-parse_placeholder!()
+parse_placeholder!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        LintLevelsBuilder!();
         LintLevelQueryMap!();
+        LintLevelsBuilder!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! shallow_lint_levels_on {
     };
 }
 
-shallow_lint_levels_on!()
+shallow_lint_levels_on!();

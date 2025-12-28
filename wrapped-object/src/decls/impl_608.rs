@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        MachHeader!();
+        MachOFile!();
         MachOSymbolIterator!();
         ReadRef!();
-        MachOFile!();
         SymbolIndex!();
+        MachHeader!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_608 {
     };
 }
 
-impl_608!()
+impl_608!();

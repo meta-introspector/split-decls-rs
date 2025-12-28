@@ -11,4 +11,4 @@ macro_rules! assert_ty_bounds {
     };
 }
 
-assert_ty_bounds!()
+assert_ty_bounds!();

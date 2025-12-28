@@ -4,4 +4,4 @@ macro_rules! debug_fmt_fields {
     };
 }
 
-debug_fmt_fields!()
+debug_fmt_fields!();

@@ -11,4 +11,4 @@ macro_rules! merge_by_new {
     };
 }
 
-merge_by_new!()
+merge_by_new!();

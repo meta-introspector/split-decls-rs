@@ -13,4 +13,4 @@ macro_rules! full_merge_callback {
     };
 }
 
-full_merge_callback!()
+full_merge_callback!();

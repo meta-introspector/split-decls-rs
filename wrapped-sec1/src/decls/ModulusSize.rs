@@ -4,4 +4,4 @@ macro_rules! ModulusSize {
     };
 }
 
-ModulusSize!()
+ModulusSize!();

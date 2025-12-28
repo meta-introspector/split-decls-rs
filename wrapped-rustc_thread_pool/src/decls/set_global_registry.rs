@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        ThreadPoolBuildError!();
-        ErrorKind!();
         Registry!();
+        ErrorKind!();
+        ThreadPoolBuildError!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! set_global_registry {
     };
 }
 
-set_global_registry!()
+set_global_registry!();

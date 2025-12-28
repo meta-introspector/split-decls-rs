@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        MaybeInitializedPlaces!();
         MoveData!();
         Analysis!();
         LookupResult!();
+        MaybeInitializedPlaces!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_136 {
     };
 }
 
-impl_136!()
+impl_136!();

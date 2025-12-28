@@ -11,4 +11,4 @@ macro_rules! quote_optional_label {
     };
 }
 
-quote_optional_label!()
+quote_optional_label!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Builder!();
         Candidate!();
         FakeBorrowCollector!();
+        Builder!();
         PlaceBase!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! collect_fake_borrows {
     };
 }
 
-collect_fake_borrows!()
+collect_fake_borrows!();

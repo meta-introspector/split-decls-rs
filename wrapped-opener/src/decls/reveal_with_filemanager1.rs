@@ -11,4 +11,4 @@ macro_rules! reveal_with_filemanager1 {
     };
 }
 
-reveal_with_filemanager1!()
+reveal_with_filemanager1!();

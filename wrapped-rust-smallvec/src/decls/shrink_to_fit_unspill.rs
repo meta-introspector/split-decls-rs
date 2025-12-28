@@ -11,4 +11,4 @@ macro_rules! shrink_to_fit_unspill {
     };
 }
 
-shrink_to_fit_unspill!()
+shrink_to_fit_unspill!();

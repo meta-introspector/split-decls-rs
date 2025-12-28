@@ -11,4 +11,4 @@ macro_rules! table_entry {
     };
 }
 
-table_entry!()
+table_entry!();

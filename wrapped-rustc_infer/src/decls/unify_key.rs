@@ -4,4 +4,4 @@ macro_rules! unify_key {
     };
 }
 
-unify_key!()
+unify_key!();

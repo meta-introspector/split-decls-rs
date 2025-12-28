@@ -11,4 +11,4 @@ macro_rules! reconstruct_place_meta {
     };
 }
 
-reconstruct_place_meta!()
+reconstruct_place_meta!();

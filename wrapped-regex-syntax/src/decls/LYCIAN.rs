@@ -4,4 +4,4 @@ macro_rules! LYCIAN {
     };
 }
 
-LYCIAN!()
+LYCIAN!();

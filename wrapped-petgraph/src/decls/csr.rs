@@ -4,4 +4,4 @@ macro_rules! csr {
     };
 }
 
-csr!()
+csr!();

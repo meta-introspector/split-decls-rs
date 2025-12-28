@@ -11,4 +11,4 @@ macro_rules! impls_for_trait_item {
     };
 }
 
-impls_for_trait_item!()
+impls_for_trait_item!();

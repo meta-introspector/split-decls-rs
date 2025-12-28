@@ -26,4 +26,4 @@ macro_rules! test_fn_like_macro_clone_ident_subtree {
     };
 }
 
-test_fn_like_macro_clone_ident_subtree!()
+test_fn_like_macro_clone_ident_subtree!();

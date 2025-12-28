@@ -13,4 +13,4 @@ macro_rules! patchable_function_entry_attrs {
     };
 }
 
-patchable_function_entry_attrs!()
+patchable_function_entry_attrs!();

@@ -4,4 +4,4 @@ macro_rules! opaque_type_cycle_error {
     };
 }
 
-opaque_type_cycle_error!()
+opaque_type_cycle_error!();

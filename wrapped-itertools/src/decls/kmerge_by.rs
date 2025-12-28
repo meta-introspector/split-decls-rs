@@ -13,4 +13,4 @@ macro_rules! kmerge_by {
     };
 }
 
-kmerge_by!()
+kmerge_by!();

@@ -4,4 +4,4 @@ macro_rules! spin_loop {
     };
 }
 
-spin_loop!()
+spin_loop!();

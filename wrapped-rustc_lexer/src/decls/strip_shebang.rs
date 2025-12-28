@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        FrontmatterAllowed!();
         TokenKind!();
+        FrontmatterAllowed!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! strip_shebang {
     };
 }
 
-strip_shebang!()
+strip_shebang!();

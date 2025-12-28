@@ -11,4 +11,4 @@ macro_rules! wrap_branching_exprs {
     };
 }
 
-wrap_branching_exprs!()
+wrap_branching_exprs!();

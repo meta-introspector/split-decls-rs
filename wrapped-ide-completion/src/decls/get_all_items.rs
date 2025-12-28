@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        CompletionConfig!();
         CompletionItem!();
+        CompletionConfig!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! get_all_items {
     };
 }
 
-get_all_items!()
+get_all_items!();

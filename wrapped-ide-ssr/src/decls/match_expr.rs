@@ -6,4 +6,4 @@ macro_rules! match_expr {
     };
 }
 
-match_expr!()
+match_expr!();

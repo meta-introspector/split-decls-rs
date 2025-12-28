@@ -4,4 +4,4 @@ macro_rules! check_foreign_item {
     };
 }
 
-check_foreign_item!()
+check_foreign_item!();

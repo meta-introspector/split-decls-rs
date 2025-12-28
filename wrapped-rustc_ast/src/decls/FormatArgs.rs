@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        FormatArguments!();
+        LitKind!();
         Walkable!();
         FormatArgsPiece!();
-        LitKind!();
+        FormatArguments!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! FormatArgs {
     };
 }
 
-FormatArgs!()
+FormatArgs!();

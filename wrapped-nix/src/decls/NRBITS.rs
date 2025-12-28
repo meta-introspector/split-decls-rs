@@ -4,4 +4,4 @@ macro_rules! NRBITS {
     };
 }
 
-NRBITS!()
+NRBITS!();

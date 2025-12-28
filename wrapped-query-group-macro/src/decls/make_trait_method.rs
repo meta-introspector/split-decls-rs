@@ -4,4 +4,4 @@ macro_rules! make_trait_method {
     };
 }
 
-make_trait_method!()
+make_trait_method!();

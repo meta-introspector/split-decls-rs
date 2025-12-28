@@ -4,4 +4,4 @@ macro_rules! Gidx {
     };
 }
 
-Gidx!()
+Gidx!();

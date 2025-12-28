@@ -4,4 +4,4 @@ macro_rules! use_as_trait_name {
     };
 }
 
-use_as_trait_name!()
+use_as_trait_name!();

@@ -12,4 +12,4 @@ macro_rules! config_log {
     };
 }
 
-config_log!()
+config_log!();

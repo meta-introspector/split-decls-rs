@@ -63,4 +63,4 @@ Level 14: mkbuildrs!() → Complete System
     };
 }
 
-lattice_path_impl!()
+lattice_path_impl!();

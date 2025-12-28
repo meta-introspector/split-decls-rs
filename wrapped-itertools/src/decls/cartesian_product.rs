@@ -11,4 +11,4 @@ macro_rules! cartesian_product {
     };
 }
 
-cartesian_product!()
+cartesian_product!();

@@ -4,4 +4,4 @@ macro_rules! prctl {
     };
 }
 
-prctl!()
+prctl!();

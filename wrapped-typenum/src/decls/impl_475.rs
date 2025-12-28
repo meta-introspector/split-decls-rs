@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        Compare!();
-        PrivateDivIf!();
-        Internal!();
-        Cmp!();
-        PrivateDivIfQuot!();
-        UInt!();
-        PrivateDiv!();
-        GetBitOut!();
         GetBit!();
+        PrivateDiv!();
         PrivateDivIfRem!();
+        PrivateDivIf!();
+        UInt!();
+        Compare!();
+        PrivateDivIfQuot!();
+        Internal!();
+        GetBitOut!();
+        Cmp!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_475 {
     };
 }
 
-impl_475!()
+impl_475!();

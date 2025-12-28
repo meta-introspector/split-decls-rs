@@ -4,4 +4,4 @@ macro_rules! RANDOM_DATA {
     };
 }
 
-RANDOM_DATA!()
+RANDOM_DATA!();

@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         InlineAsmOperand!();
-        Inline!();
-        InlineAsmOptions!();
         InlineAsmTemplatePiece!();
-        Walkable!();
+        Inline!();
         AsmMacro!();
+        Walkable!();
+        InlineAsmOptions!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! InlineAsm {
     };
 }
 
-InlineAsm!()
+InlineAsm!();

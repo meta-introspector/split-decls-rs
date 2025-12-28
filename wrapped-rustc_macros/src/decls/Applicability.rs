@@ -4,4 +4,4 @@ macro_rules! Applicability {
     };
 }
 
-Applicability!()
+Applicability!();

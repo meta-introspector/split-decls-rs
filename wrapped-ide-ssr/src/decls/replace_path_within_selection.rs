@@ -22,4 +22,4 @@ macro_rules! replace_path_within_selection {
     };
 }
 
-replace_path_within_selection!()
+replace_path_within_selection!();

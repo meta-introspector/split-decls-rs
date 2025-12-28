@@ -11,4 +11,4 @@ macro_rules! VER_NDX_GLOBAL {
     };
 }
 
-VER_NDX_GLOBAL!()
+VER_NDX_GLOBAL!();

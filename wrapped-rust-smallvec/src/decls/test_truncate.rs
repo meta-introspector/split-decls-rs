@@ -11,4 +11,4 @@ macro_rules! test_truncate {
     };
 }
 
-test_truncate!()
+test_truncate!();

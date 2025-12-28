@@ -11,4 +11,4 @@ macro_rules! ty_to_string {
     };
 }
 
-ty_to_string!()
+ty_to_string!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        EvalCtxt!();
         SolverDelegate!();
+        EvalCtxt!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! ReplaceProjectionWith {
     };
 }
 
-ReplaceProjectionWith!()
+ReplaceProjectionWith!();

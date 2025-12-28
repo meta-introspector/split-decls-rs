@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
         ExpectedEvent!();
-        Expect!();
-        Running!();
-        MockHandle!();
         MockSubscriber!();
         ExpectedFields!();
-        ExpectedSpan!();
+        MockHandle!();
         NewSpan!();
+        Expect!();
+        ExpectedSpan!();
+        Running!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_74 {
     };
 }
 
-impl_74!()
+impl_74!();

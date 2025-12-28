@@ -11,4 +11,4 @@ macro_rules! C_NULL {
     };
 }
 
-C_NULL!()
+C_NULL!();

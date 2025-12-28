@@ -4,4 +4,4 @@ macro_rules! EM_PJ {
     };
 }
 
-EM_PJ!()
+EM_PJ!();

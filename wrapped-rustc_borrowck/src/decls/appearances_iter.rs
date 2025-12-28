@@ -12,4 +12,4 @@ macro_rules! appearances_iter {
     };
 }
 
-appearances_iter!()
+appearances_iter!();

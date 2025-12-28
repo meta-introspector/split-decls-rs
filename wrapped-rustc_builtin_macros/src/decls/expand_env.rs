@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        EnvNotDefinedWithUserMessage!();
-        EnvTakesArgs!();
         EnvNotUnicode!();
+        EnvNotDefinedWithUserMessage!();
         EnvNotDefined!();
+        EnvTakesArgs!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! expand_env {
     };
 }
 
-expand_env!()
+expand_env!();

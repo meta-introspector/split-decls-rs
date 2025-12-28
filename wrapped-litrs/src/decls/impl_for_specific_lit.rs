@@ -13,4 +13,4 @@ macro_rules! impl_for_specific_lit {
     };
 }
 
-impl_for_specific_lit!()
+impl_for_specific_lit!();

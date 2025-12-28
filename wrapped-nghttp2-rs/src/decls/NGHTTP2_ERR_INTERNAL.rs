@@ -4,4 +4,4 @@ macro_rules! NGHTTP2_ERR_INTERNAL {
     };
 }
 
-NGHTTP2_ERR_INTERNAL!()
+NGHTTP2_ERR_INTERNAL!();

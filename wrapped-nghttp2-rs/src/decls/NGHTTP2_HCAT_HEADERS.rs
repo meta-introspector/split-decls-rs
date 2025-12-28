@@ -4,4 +4,4 @@ macro_rules! NGHTTP2_HCAT_HEADERS {
     };
 }
 
-NGHTTP2_HCAT_HEADERS!()
+NGHTTP2_HCAT_HEADERS!();

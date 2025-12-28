@@ -4,4 +4,4 @@ macro_rules! mlb_invalid {
     };
 }
 
-mlb_invalid!()
+mlb_invalid!();

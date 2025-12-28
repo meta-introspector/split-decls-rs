@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        KernelSigSet!();
         Signal!();
+        KernelSigSet!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_1646 {
     };
 }
 
-impl_1646!()
+impl_1646!();

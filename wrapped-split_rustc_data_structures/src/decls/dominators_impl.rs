@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        PreOrderFrame!();
         Node!();
-        ControlFlowGraph!();
         Inner!();
+        ControlFlowGraph!();
+        PreOrderFrame!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! dominators_impl {
     };
 }
 
-dominators_impl!()
+dominators_impl!();

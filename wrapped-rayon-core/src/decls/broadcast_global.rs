@@ -4,4 +4,4 @@ macro_rules! broadcast_global {
     };
 }
 
-broadcast_global!()
+broadcast_global!();

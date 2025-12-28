@@ -13,4 +13,4 @@ macro_rules! build_all_tests {
     };
 }
 
-build_all_tests!()
+build_all_tests!();

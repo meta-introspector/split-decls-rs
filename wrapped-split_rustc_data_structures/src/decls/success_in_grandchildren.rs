@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        ProcessResult!();
         TestOutcome!();
         ObligationForest!();
+        ProcessResult!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! success_in_grandchildren {
     };
 }
 
-success_in_grandchildren!()
+success_in_grandchildren!();

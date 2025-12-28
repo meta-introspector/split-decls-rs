@@ -4,4 +4,4 @@ macro_rules! AssocTypeWithoutBody {
     };
 }
 
-AssocTypeWithoutBody!()
+AssocTypeWithoutBody!();

@@ -11,4 +11,4 @@ macro_rules! get_imp_inner {
     };
 }
 
-get_imp_inner!()
+get_imp_inner!();

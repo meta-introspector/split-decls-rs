@@ -4,4 +4,4 @@ macro_rules! OEX_DISMISS {
     };
 }
 
-OEX_DISMISS!()
+OEX_DISMISS!();

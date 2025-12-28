@@ -11,4 +11,4 @@ macro_rules! drain_forget {
     };
 }
 
-drain_forget!()
+drain_forget!();

@@ -11,4 +11,4 @@ macro_rules! bellman_ford_initialize_relax {
     };
 }
 
-bellman_ford_initialize_relax!()
+bellman_ford_initialize_relax!();

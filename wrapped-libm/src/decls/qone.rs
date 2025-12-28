@@ -4,4 +4,4 @@ macro_rules! qone {
     };
 }
 
-qone!()
+qone!();

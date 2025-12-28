@@ -4,4 +4,4 @@ macro_rules! EM_MMIX {
     };
 }
 
-EM_MMIX!()
+EM_MMIX!();

@@ -11,4 +11,4 @@ macro_rules! alloc_support {
     };
 }
 
-alloc_support!()
+alloc_support!();

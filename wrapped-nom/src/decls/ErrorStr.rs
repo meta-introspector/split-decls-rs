@@ -4,4 +4,4 @@ macro_rules! ErrorStr {
     };
 }
 
-ErrorStr!()
+ErrorStr!();

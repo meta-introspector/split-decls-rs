@@ -11,4 +11,4 @@ macro_rules! do_automock_once {
     };
 }
 
-do_automock_once!()
+do_automock_once!();

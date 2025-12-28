@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        AttributeKind!();
         CodegenCx!();
+        AttributeKind!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! inline_attr {
     };
 }
 
-inline_attr!()
+inline_attr!();

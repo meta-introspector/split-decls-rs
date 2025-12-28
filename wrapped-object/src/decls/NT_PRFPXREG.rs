@@ -4,4 +4,4 @@ macro_rules! NT_PRFPXREG {
     };
 }
 
-NT_PRFPXREG!()
+NT_PRFPXREG!();

@@ -4,4 +4,4 @@ macro_rules! N_FUN {
     };
 }
 
-N_FUN!()
+N_FUN!();

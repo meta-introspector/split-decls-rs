@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        EscapeError!();
         NonZeroChar!();
+        EscapeError!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! check_raw_c_str {
     };
 }
 
-check_raw_c_str!()
+check_raw_c_str!();

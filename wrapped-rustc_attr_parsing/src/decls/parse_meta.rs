@@ -5,4 +5,4 @@ macro_rules! parse_meta {
     };
 }
 
-parse_meta!()
+parse_meta!();

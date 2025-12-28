@@ -4,4 +4,4 @@ macro_rules! InstantiateOpaqueType {
     };
 }
 
-InstantiateOpaqueType!()
+InstantiateOpaqueType!();

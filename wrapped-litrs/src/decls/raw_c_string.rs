@@ -4,4 +4,4 @@ macro_rules! raw_c_string {
     };
 }
 
-raw_c_string!()
+raw_c_string!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        ArrayOfTablesIterMut!();
-        Item!();
-        ArrayOfTablesIter!();
         ArrayOfTables!();
         Table!();
+        Item!();
+        ArrayOfTablesIter!();
+        ArrayOfTablesIterMut!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_17 {
     };
 }
 
-impl_17!()
+impl_17!();

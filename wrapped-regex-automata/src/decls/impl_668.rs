@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        MatchesIter!();
-        MatchError!();
         Match!();
+        MatchesIter!();
         Input!();
+        MatchError!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_668 {
     };
 }
 
-impl_668!()
+impl_668!();

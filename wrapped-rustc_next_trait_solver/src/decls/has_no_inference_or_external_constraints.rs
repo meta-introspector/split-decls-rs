@@ -4,4 +4,4 @@ macro_rules! has_no_inference_or_external_constraints {
     };
 }
 
-has_no_inference_or_external_constraints!()
+has_no_inference_or_external_constraints!();

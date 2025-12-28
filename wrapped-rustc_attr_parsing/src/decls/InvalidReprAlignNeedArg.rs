@@ -4,4 +4,4 @@ macro_rules! InvalidReprAlignNeedArg {
     };
 }
 
-InvalidReprAlignNeedArg!()
+InvalidReprAlignNeedArg!();

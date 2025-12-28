@@ -4,4 +4,4 @@ macro_rules! conditional_sub_u32 {
     };
 }
 
-conditional_sub_u32!()
+conditional_sub_u32!();

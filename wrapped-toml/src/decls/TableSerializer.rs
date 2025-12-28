@@ -4,4 +4,4 @@ macro_rules! TableSerializer {
     };
 }
 
-TableSerializer!()
+TableSerializer!();

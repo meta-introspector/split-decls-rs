@@ -11,4 +11,4 @@ macro_rules! POLY1305_OUTSIZE {
     };
 }
 
-POLY1305_OUTSIZE!()
+POLY1305_OUTSIZE!();

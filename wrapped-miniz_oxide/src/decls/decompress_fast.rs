@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        State!();
-        LocalVars!();
-        TINFLStatus!();
-        DecompressorOxide!();
-        OutputBuffer!();
         InputWrapper!();
+        TINFLStatus!();
+        OutputBuffer!();
+        DecompressorOxide!();
+        LocalVars!();
+        State!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! decompress_fast {
     };
 }
 
-decompress_fast!()
+decompress_fast!();

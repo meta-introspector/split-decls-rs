@@ -11,4 +11,4 @@ macro_rules! to_llvm_code_model {
     };
 }
 
-to_llvm_code_model!()
+to_llvm_code_model!();

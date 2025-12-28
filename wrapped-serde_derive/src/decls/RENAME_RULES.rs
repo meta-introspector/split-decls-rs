@@ -11,4 +11,4 @@ macro_rules! RENAME_RULES {
     };
 }
 
-RENAME_RULES!()
+RENAME_RULES!();

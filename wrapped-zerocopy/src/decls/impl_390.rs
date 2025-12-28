@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         TransmuteFrom!();
-        Uninit!();
         MaybeUninit!();
         Valid!();
+        Uninit!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_390 {
     };
 }
 
-impl_390!()
+impl_390!();

@@ -4,4 +4,4 @@ macro_rules! DocAliasNotAnAlias {
     };
 }
 
-DocAliasNotAnAlias!()
+DocAliasNotAnAlias!();

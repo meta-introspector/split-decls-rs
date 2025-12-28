@@ -4,4 +4,4 @@ macro_rules! generate_prelude {
     };
 }
 
-generate_prelude!()
+generate_prelude!();

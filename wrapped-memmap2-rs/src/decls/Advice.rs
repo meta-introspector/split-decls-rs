@@ -4,4 +4,4 @@ macro_rules! Advice {
     };
 }
 
-Advice!()
+Advice!();

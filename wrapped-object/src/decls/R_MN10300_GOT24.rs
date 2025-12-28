@@ -4,4 +4,4 @@ macro_rules! R_MN10300_GOT24 {
     };
 }
 
-R_MN10300_GOT24!()
+R_MN10300_GOT24!();

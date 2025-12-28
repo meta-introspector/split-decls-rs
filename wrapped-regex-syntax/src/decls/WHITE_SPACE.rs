@@ -4,4 +4,4 @@ macro_rules! WHITE_SPACE {
     };
 }
 
-WHITE_SPACE!()
+WHITE_SPACE!();

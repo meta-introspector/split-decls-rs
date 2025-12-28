@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        TokenStream!();
         Literal!();
+        TokenStream!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! suffixed_int_literals {
     };
 }
 
-suffixed_int_literals!()
+suffixed_int_literals!();

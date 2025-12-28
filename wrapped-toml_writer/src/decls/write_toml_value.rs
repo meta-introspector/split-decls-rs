@@ -12,4 +12,4 @@ macro_rules! write_toml_value {
     };
 }
 
-write_toml_value!()
+write_toml_value!();

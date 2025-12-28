@@ -4,4 +4,4 @@ macro_rules! MEROITIC_CURSIVE {
     };
 }
 
-MEROITIC_CURSIVE!()
+MEROITIC_CURSIVE!();

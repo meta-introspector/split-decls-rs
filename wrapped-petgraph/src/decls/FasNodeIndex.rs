@@ -4,4 +4,4 @@ macro_rules! FasNodeIndex {
     };
 }
 
-FasNodeIndex!()
+FasNodeIndex!();

@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        StateID!();
-        Start!();
         PatternID!();
         DFA!();
-        NFA!();
         BuildError!();
         BuildErrorKind!();
+        StateID!();
+        Start!();
+        NFA!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_61 {
     };
 }
 
-impl_61!()
+impl_61!();

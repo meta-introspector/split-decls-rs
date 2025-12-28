@@ -4,4 +4,4 @@ macro_rules! meme {
     };
 }
 
-meme!()
+meme!();

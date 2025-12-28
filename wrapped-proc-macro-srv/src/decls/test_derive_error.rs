@@ -30,4 +30,4 @@ macro_rules! test_derive_error {
     };
 }
 
-test_derive_error!()
+test_derive_error!();

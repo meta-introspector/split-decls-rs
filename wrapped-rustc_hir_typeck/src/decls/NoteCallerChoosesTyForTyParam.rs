@@ -4,4 +4,4 @@ macro_rules! NoteCallerChoosesTyForTyParam {
     };
 }
 
-NoteCallerChoosesTyForTyParam!()
+NoteCallerChoosesTyForTyParam!();

@@ -4,4 +4,4 @@ macro_rules! Instrumented {
     };
 }
 
-Instrumented!()
+Instrumented!();

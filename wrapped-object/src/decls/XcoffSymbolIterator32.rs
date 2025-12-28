@@ -12,4 +12,4 @@ macro_rules! XcoffSymbolIterator32 {
     };
 }
 
-XcoffSymbolIterator32!()
+XcoffSymbolIterator32!();

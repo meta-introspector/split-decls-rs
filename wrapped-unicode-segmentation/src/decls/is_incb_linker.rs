@@ -4,4 +4,4 @@ macro_rules! is_incb_linker {
     };
 }
 
-is_incb_linker!()
+is_incb_linker!();

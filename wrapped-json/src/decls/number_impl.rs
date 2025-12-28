@@ -11,4 +11,4 @@ macro_rules! number_impl {
     };
 }
 
-number_impl!()
+number_impl!();

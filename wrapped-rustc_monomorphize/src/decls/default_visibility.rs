@@ -4,4 +4,4 @@ macro_rules! default_visibility {
     };
 }
 
-default_visibility!()
+default_visibility!();

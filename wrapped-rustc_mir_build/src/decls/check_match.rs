@@ -4,4 +4,4 @@ macro_rules! check_match {
     };
 }
 
-check_match!()
+check_match!();

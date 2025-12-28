@@ -4,4 +4,4 @@ macro_rules! CPU_SUBTYPE_X86_ARCH1 {
     };
 }
 
-CPU_SUBTYPE_X86_ARCH1!()
+CPU_SUBTYPE_X86_ARCH1!();

@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
         UnindexedConsumer!();
-        Consumer!();
-        FlatMapConsumer!();
-        Reducer!();
-        FlatMapFolder!();
         Folder!();
+        FlatMapFolder!();
         IntoParallelIterator!();
+        Consumer!();
+        Reducer!();
+        FlatMapConsumer!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_514 {
     };
 }
 
-impl_514!()
+impl_514!();

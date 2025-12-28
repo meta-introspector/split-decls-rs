@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        IntoData!();
-        Command!();
         Error!();
         Assert!();
+        IntoData!();
+        Command!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_37 {
     };
 }
 
-impl_37!()
+impl_37!();

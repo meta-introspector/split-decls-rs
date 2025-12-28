@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        RepeatProducer!();
         Repeat!();
         UnindexedConsumer!();
         ParallelIterator!();
+        RepeatProducer!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_798 {
     };
 }
 
-impl_798!()
+impl_798!();

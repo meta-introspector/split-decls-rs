@@ -4,4 +4,4 @@ macro_rules! PT_NOTE {
     };
 }
 
-PT_NOTE!()
+PT_NOTE!();

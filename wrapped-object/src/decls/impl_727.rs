@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Result!();
+        ResourceDirectory!();
         U16Bytes!();
         ResourceName!();
-        ResourceDirectory!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_727 {
     };
 }
 
-impl_727!()
+impl_727!();

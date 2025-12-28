@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         SerializeStructVariant!();
         SerializeDocumentTable!();
-        Buffer!();
         Error!();
+        Buffer!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_290 {
     };
 }
 
-impl_290!()
+impl_290!();

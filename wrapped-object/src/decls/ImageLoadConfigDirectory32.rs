@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        ImageLoadConfigCodeIntegrity!();
         U32!();
         U16!();
-        ImageLoadConfigCodeIntegrity!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! ImageLoadConfigDirectory32 {
     };
 }
 
-ImageLoadConfigDirectory32!()
+ImageLoadConfigDirectory32!();

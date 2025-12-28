@@ -4,4 +4,4 @@ macro_rules! NT_PPC_TM_CTAR {
     };
 }
 
-NT_PPC_TM_CTAR!()
+NT_PPC_TM_CTAR!();

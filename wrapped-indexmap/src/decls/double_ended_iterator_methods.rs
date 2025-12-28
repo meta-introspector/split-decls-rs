@@ -4,4 +4,4 @@ macro_rules! double_ended_iterator_methods {
     };
 }
 
-double_ended_iterator_methods!()
+double_ended_iterator_methods!();

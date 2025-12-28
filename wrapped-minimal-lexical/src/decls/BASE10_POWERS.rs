@@ -11,4 +11,4 @@ macro_rules! BASE10_POWERS {
     };
 }
 
-BASE10_POWERS!()
+BASE10_POWERS!();

@@ -4,4 +4,4 @@ macro_rules! generate_decl_registration {
     };
 }
 
-generate_decl_registration!()
+generate_decl_registration!();

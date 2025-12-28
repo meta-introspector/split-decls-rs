@@ -4,4 +4,4 @@ macro_rules! THE_REGISTRY_SET {
     };
 }
 
-THE_REGISTRY_SET!()
+THE_REGISTRY_SET!();

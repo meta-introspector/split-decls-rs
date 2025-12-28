@@ -4,4 +4,4 @@ macro_rules! DiscriminantHints {
     };
 }
 
-DiscriminantHints!()
+DiscriminantHints!();

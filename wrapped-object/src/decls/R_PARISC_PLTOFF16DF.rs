@@ -4,4 +4,4 @@ macro_rules! R_PARISC_PLTOFF16DF {
     };
 }
 
-R_PARISC_PLTOFF16DF!()
+R_PARISC_PLTOFF16DF!();

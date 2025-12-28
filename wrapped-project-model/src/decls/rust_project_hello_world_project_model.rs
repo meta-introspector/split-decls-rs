@@ -4,4 +4,4 @@ macro_rules! rust_project_hello_world_project_model {
     };
 }
 
-rust_project_hello_world_project_model!()
+rust_project_hello_world_project_model!();

@@ -11,4 +11,4 @@ macro_rules! TRIE_CONTINUE {
     };
 }
 
-TRIE_CONTINUE!()
+TRIE_CONTINUE!();

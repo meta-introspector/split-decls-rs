@@ -4,4 +4,4 @@ macro_rules! EXTRA_FIELD_MAPPING {
     };
 }
 
-EXTRA_FIELD_MAPPING!()
+EXTRA_FIELD_MAPPING!();

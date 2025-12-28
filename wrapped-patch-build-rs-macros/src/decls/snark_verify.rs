@@ -4,4 +4,4 @@ macro_rules! snark_verify {
     };
 }
 
-snark_verify!()
+snark_verify!();

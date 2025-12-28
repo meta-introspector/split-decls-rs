@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Finalize128!();
-        Hasher!();
         RawHasher!();
+        Hasher!();
+        Finalize128!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_119 {
     };
 }
 
-impl_119!()
+impl_119!();

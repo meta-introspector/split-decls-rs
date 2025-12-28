@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Time!();
         Matching!();
+        Time!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! greedy_matching {
     };
 }
 
-greedy_matching!()
+greedy_matching!();

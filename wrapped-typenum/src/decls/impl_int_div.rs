@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        Internal!();
-        Unsigned!();
-        Cmp!();
+        Z0!();
+        NonZero!();
         Equal!();
         Less!();
-        PrivateDivInt!();
-        Z0!();
         Greater!();
-        NonZero!();
+        Unsigned!();
+        Internal!();
+        PrivateDivInt!();
+        Cmp!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_int_div {
     };
 }
 
-impl_int_div!()
+impl_int_div!();

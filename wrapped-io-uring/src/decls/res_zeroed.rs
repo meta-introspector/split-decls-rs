@@ -4,4 +4,4 @@ macro_rules! res_zeroed {
     };
 }
 
-res_zeroed!()
+res_zeroed!();

@@ -4,4 +4,4 @@ macro_rules! find_first_last {
     };
 }
 
-find_first_last!()
+find_first_last!();

@@ -4,4 +4,4 @@ macro_rules! S_GB_ZEROFILL {
     };
 }
 
-S_GB_ZEROFILL!()
+S_GB_ZEROFILL!();

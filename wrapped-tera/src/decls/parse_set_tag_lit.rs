@@ -3,8 +3,8 @@ macro_rules! deps {
         Expr!();
         Set!();
         ExprVal!();
-        WS!();
         Node!();
+        WS!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! parse_set_tag_lit {
     };
 }
 
-parse_set_tag_lit!()
+parse_set_tag_lit!();

@@ -4,4 +4,4 @@ macro_rules! requires_semi_to_be_stmt {
     };
 }
 
-requires_semi_to_be_stmt!()
+requires_semi_to_be_stmt!();

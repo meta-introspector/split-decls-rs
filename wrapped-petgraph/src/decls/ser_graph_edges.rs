@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        IndexType!();
         Edge!();
+        IndexType!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! ser_graph_edges {
     };
 }
 
-ser_graph_edges!()
+ser_graph_edges!();

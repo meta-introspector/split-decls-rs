@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
+        SymbolTable!();
+        SymbolInternal!();
         ReadRef!();
         SymbolTableInternal!();
-        SymbolTable!();
-        SymbolIterator!();
-        SymbolIndex!();
-        Result!();
-        SymbolIteratorInternal!();
-        SymbolInternal!();
-        Symbol!();
         ObjectSymbolTable!();
+        SymbolIndex!();
+        SymbolIterator!();
+        SymbolIteratorInternal!();
+        Symbol!();
+        Result!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_157 {
     };
 }
 
-impl_157!()
+impl_157!();

@@ -4,4 +4,4 @@ macro_rules! retain_adt_literal_usages {
     };
 }
 
-retain_adt_literal_usages!()
+retain_adt_literal_usages!();

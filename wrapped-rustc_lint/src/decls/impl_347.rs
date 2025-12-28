@@ -1,28 +1,28 @@
 macro_rules! deps {
     () => {
-        DeprecatedLintNameFromCommandLine!();
-        OverruledAttributeLint!();
-        LintLevelsProvider!();
-        RemovedLintFromCommandLine!();
+        RequestedLevel!();
         RemovedLint!();
-        CheckLintNameResult!();
-        CheckNameUnknownTool!();
-        OverruledAttributeSub!();
-        OverruledAttribute!();
+        MalformedAttributeSub!();
+        MalformedAttribute!();
+        UnknownLint!();
+        UnknownToolInScopedLint!();
         RenamedLintFromCommandLine!();
-        DeprecatedLintName!();
         UnsupportedGroup!();
-        IgnoredUnlessCrateSpecified!();
+        RenamedLint!();
+        UnknownLintFromCommandLine!();
+        RemovedLintFromCommandLine!();
+        OverruledAttributeLint!();
+        CheckNameUnknownTool!();
+        CheckLintNameResult!();
+        LintLevelsBuilder!();
+        OverruledAttributeSub!();
+        DeprecatedLintName!();
+        LintLevelsProvider!();
         RenamedLintSuggestion!();
         UnknownLintSuggestion!();
-        MalformedAttributeSub!();
-        UnknownLint!();
-        UnknownLintFromCommandLine!();
-        RequestedLevel!();
-        UnknownToolInScopedLint!();
-        RenamedLint!();
-        MalformedAttribute!();
-        LintLevelsBuilder!();
+        OverruledAttribute!();
+        IgnoredUnlessCrateSpecified!();
+        DeprecatedLintNameFromCommandLine!();
     };
 }
 
@@ -33,4 +33,4 @@ macro_rules! impl_347 {
     };
 }
 
-impl_347!()
+impl_347!();

@@ -1,25 +1,25 @@
 macro_rules! deps {
     () => {
-        ZalsaLocal!();
-        Table!();
-        DatabaseKeyIndex!();
-        Update!();
-        IdentityHash!();
-        CycleHeads!();
-        Disambiguator!();
         Identity!();
         IterationCount!();
-        Accumulator!();
+        Table!();
         Slot!();
-        Zalsa!();
-        Durability!();
-        ActiveQueryGuard!();
-        Id!();
-        Cancelled!();
+        DatabaseKeyIndex!();
         Stamp!();
-        Revision!();
+        Update!();
         IngredientIndex!();
+        CycleHeads!();
+        ZalsaLocal!();
+        Cancelled!();
+        Id!();
+        Revision!();
         QueryStack!();
+        Disambiguator!();
+        Zalsa!();
+        Accumulator!();
+        ActiveQueryGuard!();
+        Durability!();
+        IdentityHash!();
     };
 }
 
@@ -30,4 +30,4 @@ macro_rules! impl_457 {
     };
 }
 
-impl_457!()
+impl_457!();

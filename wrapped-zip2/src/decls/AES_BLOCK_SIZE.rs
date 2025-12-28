@@ -4,4 +4,4 @@ macro_rules! AES_BLOCK_SIZE {
     };
 }
 
-AES_BLOCK_SIZE!()
+AES_BLOCK_SIZE!();

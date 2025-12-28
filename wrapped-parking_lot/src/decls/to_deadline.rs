@@ -4,4 +4,4 @@ macro_rules! to_deadline {
     };
 }
 
-to_deadline!()
+to_deadline!();

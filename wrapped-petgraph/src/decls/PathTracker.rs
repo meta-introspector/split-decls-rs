@@ -4,4 +4,4 @@ macro_rules! PathTracker {
     };
 }
 
-PathTracker!()
+PathTracker!();

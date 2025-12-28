@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         BorrowedCowStrDeserializer!();
+        Error!();
         Result!();
-        Value!();
         Deserializer!();
         MapKeyDeserializer!();
-        Error!();
+        Value!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_283 {
     };
 }
 
-impl_283!()
+impl_283!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Registry!();
-        Poll!();
-        Token!();
         Waker!();
+        Poll!();
+        Registry!();
+        Token!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_47 {
     };
 }
 
-impl_47!()
+impl_47!();

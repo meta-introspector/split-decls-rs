@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Result!();
-        ParseStream!();
         Unexpected!();
         TokenBuffer!();
+        Result!();
         Parser!();
+        ParseStream!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_527 {
     };
 }
 
-impl_527!()
+impl_527!();

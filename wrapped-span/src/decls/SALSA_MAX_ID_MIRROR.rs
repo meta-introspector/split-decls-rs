@@ -4,4 +4,4 @@ macro_rules! SALSA_MAX_ID_MIRROR {
     };
 }
 
-SALSA_MAX_ID_MIRROR!()
+SALSA_MAX_ID_MIRROR!();

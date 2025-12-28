@@ -12,4 +12,4 @@ macro_rules! allow_transparent {
     };
 }
 
-allow_transparent!()
+allow_transparent!();

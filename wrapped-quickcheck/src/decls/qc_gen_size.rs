@@ -4,4 +4,4 @@ macro_rules! qc_gen_size {
     };
 }
 
-qc_gen_size!()
+qc_gen_size!();

@@ -1,20 +1,20 @@
 macro_rules! deps {
     () => {
-        Revision!();
-        Id!();
-        QueryEdge!();
-        Ingredient!();
         FxIndexSet!();
-        IngredientImpl!();
         FxHashSet!();
+        QueryEdge!();
+        Id!();
         Configuration!();
         Zalsa!();
-        JarKind!();
         Database!();
-        Location!();
         IngredientIndex!();
+        Location!();
         RawDatabase!();
         DatabaseKeyIndex!();
+        Revision!();
+        Ingredient!();
+        JarKind!();
+        IngredientImpl!();
     };
 }
 
@@ -25,4 +25,4 @@ macro_rules! impl_370 {
     };
 }
 
-impl_370!()
+impl_370!();

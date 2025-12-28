@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        EncodeTyOptions!();
         TransformTyOptions!();
-        TransformTy!();
+        EncodeTyOptions!();
         DictKey!();
+        TransformTy!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! encode_fnsig {
     };
 }
 
-encode_fnsig!()
+encode_fnsig!();

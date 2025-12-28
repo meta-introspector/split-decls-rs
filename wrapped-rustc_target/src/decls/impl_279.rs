@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        CastTarget!();
         Uniform!();
+        CastTarget!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_279 {
     };
 }
 
-impl_279!()
+impl_279!();

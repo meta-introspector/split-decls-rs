@@ -4,4 +4,4 @@ macro_rules! TimingMethod {
     };
 }
 
-TimingMethod!()
+TimingMethod!();

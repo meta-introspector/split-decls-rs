@@ -4,4 +4,4 @@ macro_rules! test_output_types_tracking_hash_different_paths {
     };
 }
 
-test_output_types_tracking_hash_different_paths!()
+test_output_types_tracking_hash_different_paths!();

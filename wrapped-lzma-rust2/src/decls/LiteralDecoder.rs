@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        LiteralSubDecoder!();
         LiteralCoder!();
+        LiteralSubDecoder!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! LiteralDecoder {
     };
 }
 
-LiteralDecoder!()
+LiteralDecoder!();

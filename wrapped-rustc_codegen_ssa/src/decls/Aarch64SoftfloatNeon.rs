@@ -4,4 +4,4 @@ macro_rules! Aarch64SoftfloatNeon {
     };
 }
 
-Aarch64SoftfloatNeon!()
+Aarch64SoftfloatNeon!();

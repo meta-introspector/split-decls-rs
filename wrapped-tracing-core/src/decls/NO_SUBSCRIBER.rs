@@ -11,4 +11,4 @@ macro_rules! NO_SUBSCRIBER {
     };
 }
 
-NO_SUBSCRIBER!()
+NO_SUBSCRIBER!();

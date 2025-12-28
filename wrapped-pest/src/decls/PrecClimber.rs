@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Pairs!();
         Assoc!();
+        Pairs!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! PrecClimber {
     };
 }
 
-PrecClimber!()
+PrecClimber!();

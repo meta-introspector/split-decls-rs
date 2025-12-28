@@ -11,4 +11,4 @@ macro_rules! copyfile_state_alloc {
     };
 }
 
-copyfile_state_alloc!()
+copyfile_state_alloc!();

@@ -4,4 +4,4 @@ macro_rules! EF_MIPS_NAN2008 {
     };
 }
 
-EF_MIPS_NAN2008!()
+EF_MIPS_NAN2008!();

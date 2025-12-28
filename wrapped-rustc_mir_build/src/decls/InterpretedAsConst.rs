@@ -4,4 +4,4 @@ macro_rules! InterpretedAsConst {
     };
 }
 
-InterpretedAsConst!()
+InterpretedAsConst!();

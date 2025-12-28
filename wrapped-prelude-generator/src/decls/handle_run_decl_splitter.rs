@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        SymbolMap!();
-        Args!();
         RustcInfo!();
+        Args!();
         Declaration!();
+        SymbolMap!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! handle_run_decl_splitter {
     };
 }
 
-handle_run_decl_splitter!()
+handle_run_decl_splitter!();

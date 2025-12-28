@@ -11,4 +11,4 @@ macro_rules! check_drop_impl {
     };
 }
 
-check_drop_impl!()
+check_drop_impl!();

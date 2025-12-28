@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Position!();
         AstNode!();
         SyntaxAnnotation!();
-        SyntaxElement!();
+        Position!();
         SyntaxEditor!();
+        SyntaxElement!();
     };
 }
 
@@ -34,4 +34,4 @@ macro_rules! tests {
     };
 }
 
-tests!()
+tests!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Overlap!();
         AccessDepth!();
         ArtificialField!();
         PlaceConflictBias!();
+        Overlap!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! place_components_conflict {
     };
 }
 
-place_components_conflict!()
+place_components_conflict!();

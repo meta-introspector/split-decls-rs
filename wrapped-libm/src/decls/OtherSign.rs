@@ -11,4 +11,4 @@ macro_rules! OtherSign {
     };
 }
 
-OtherSign!()
+OtherSign!();

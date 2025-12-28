@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Ty!();
         BridgeTys!();
         Allocation!();
-        Ty!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! new_allocation {
     };
 }
 
-new_allocation!()
+new_allocation!();

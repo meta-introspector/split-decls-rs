@@ -4,4 +4,4 @@ macro_rules! EF_IA_64_MASKOS {
     };
 }
 
-EF_IA_64_MASKOS!()
+EF_IA_64_MASKOS!();

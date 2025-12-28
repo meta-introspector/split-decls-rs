@@ -4,4 +4,4 @@ macro_rules! should_do_rust_2021_incompatible_closure_captures_analysis {
     };
 }
 
-should_do_rust_2021_incompatible_closure_captures_analysis!()
+should_do_rust_2021_incompatible_closure_captures_analysis!();

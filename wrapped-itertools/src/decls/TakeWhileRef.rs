@@ -4,4 +4,4 @@ macro_rules! TakeWhileRef {
     };
 }
 
-TakeWhileRef!()
+TakeWhileRef!();

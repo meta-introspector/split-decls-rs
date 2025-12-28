@@ -4,4 +4,4 @@ macro_rules! R_ALPHA_HINT {
     };
 }
 
-R_ALPHA_HINT!()
+R_ALPHA_HINT!();

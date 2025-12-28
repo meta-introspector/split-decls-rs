@@ -4,4 +4,4 @@ macro_rules! MOVE_BLOCK_ALIGN_MASK {
     };
 }
 
-MOVE_BLOCK_ALIGN_MASK!()
+MOVE_BLOCK_ALIGN_MASK!();

@@ -12,4 +12,4 @@ macro_rules! render_macros_in_included {
     };
 }
 
-render_macros_in_included!()
+render_macros_in_included!();

@@ -16,4 +16,4 @@ macro_rules! string_continue {
     };
 }
 
-string_continue!()
+string_continue!();

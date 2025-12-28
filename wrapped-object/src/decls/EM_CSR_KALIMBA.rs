@@ -4,4 +4,4 @@ macro_rules! EM_CSR_KALIMBA {
     };
 }
 
-EM_CSR_KALIMBA!()
+EM_CSR_KALIMBA!();

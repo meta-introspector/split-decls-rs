@@ -4,4 +4,4 @@ macro_rules! struct_lattice_info {
     };
 }
 
-struct_lattice_info!()
+struct_lattice_info!();

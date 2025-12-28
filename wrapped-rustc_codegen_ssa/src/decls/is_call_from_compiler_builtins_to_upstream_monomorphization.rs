@@ -4,4 +4,4 @@ macro_rules! is_call_from_compiler_builtins_to_upstream_monomorphization {
     };
 }
 
-is_call_from_compiler_builtins_to_upstream_monomorphization!()
+is_call_from_compiler_builtins_to_upstream_monomorphization!();

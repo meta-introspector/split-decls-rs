@@ -4,4 +4,4 @@ macro_rules! R_IA64_LTOFF_DTPREL22 {
     };
 }
 
-R_IA64_LTOFF_DTPREL22!()
+R_IA64_LTOFF_DTPREL22!();

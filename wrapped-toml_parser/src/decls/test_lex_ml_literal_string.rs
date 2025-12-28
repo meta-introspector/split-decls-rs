@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Token!();
         Stream!();
+        Token!();
     };
 }
 
@@ -90,4 +90,4 @@ Token {
     };
 }
 
-test_lex_ml_literal_string!()
+test_lex_ml_literal_string!();

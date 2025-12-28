@@ -4,4 +4,4 @@ macro_rules! explicit_outlives_bounds {
     };
 }
 
-explicit_outlives_bounds!()
+explicit_outlives_bounds!();

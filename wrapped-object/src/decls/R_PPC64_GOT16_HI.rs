@@ -4,4 +4,4 @@ macro_rules! R_PPC64_GOT16_HI {
     };
 }
 
-R_PPC64_GOT16_HI!()
+R_PPC64_GOT16_HI!();

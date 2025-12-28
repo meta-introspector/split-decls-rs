@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Consumer!();
         IndexedParallelIterator!();
-        Producer!();
-        MaxLen!();
+        Consumer!();
         ProducerCallback!();
+        Producer!();
         MaxLenProducer!();
+        MaxLen!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_670 {
     };
 }
 
-impl_670!()
+impl_670!();

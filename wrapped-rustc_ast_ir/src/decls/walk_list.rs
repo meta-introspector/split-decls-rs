@@ -4,4 +4,4 @@ macro_rules! walk_list {
     };
 }
 
-walk_list!()
+walk_list!();

@@ -4,4 +4,4 @@ macro_rules! assert_equal {
     };
 }
 
-assert_equal!()
+assert_equal!();

@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
+        NonExhaustiveDefault!();
+        NoDefaultVariantSugg!();
         MultipleDefaultsSugg!();
         MultipleDefaults!();
-        NoDefaultVariant!();
         NonUnitDefault!();
-        NoDefaultVariantSugg!();
-        NonExhaustiveDefault!();
+        NoDefaultVariant!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! extract_default_variant {
     };
 }
 
-extract_default_variant!()
+extract_default_variant!();

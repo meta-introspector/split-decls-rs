@@ -13,4 +13,4 @@ macro_rules! compress_slice_with_flush {
     };
 }
 
-compress_slice_with_flush!()
+compress_slice_with_flush!();

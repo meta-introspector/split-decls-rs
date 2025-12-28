@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Parser!();
         ParseMode!();
+        Parser!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! musterr {
     };
 }
 
-musterr!()
+musterr!();

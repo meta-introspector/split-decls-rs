@@ -11,4 +11,4 @@ macro_rules! opt_rename {
     };
 }
 
-opt_rename!()
+opt_rename!();

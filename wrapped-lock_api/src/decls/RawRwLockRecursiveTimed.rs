@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        RawRwLockTimed!();
         RawRwLockRecursive!();
+        RawRwLockTimed!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! RawRwLockRecursiveTimed {
     };
 }
 
-RawRwLockRecursiveTimed!()
+RawRwLockRecursiveTimed!();

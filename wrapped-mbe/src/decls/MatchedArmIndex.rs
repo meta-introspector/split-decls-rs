@@ -4,4 +4,4 @@ macro_rules! MatchedArmIndex {
     };
 }
 
-MatchedArmIndex!()
+MatchedArmIndex!();

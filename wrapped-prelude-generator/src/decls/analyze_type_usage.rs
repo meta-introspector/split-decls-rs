@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        CollectedAnalysisData!();
-        FileAnalysisCache!();
         Args!();
-        ImplLatticeInfo!();
-        EnumLatticeInfo!();
-        StructLatticeInfo!();
-        TypeUsageVisitor!();
         ExpressionInfo!();
+        TypeUsageVisitor!();
+        CollectedAnalysisData!();
+        EnumLatticeInfo!();
+        FileAnalysisCache!();
+        ImplLatticeInfo!();
+        StructLatticeInfo!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! analyze_type_usage {
     };
 }
 
-analyze_type_usage!()
+analyze_type_usage!();

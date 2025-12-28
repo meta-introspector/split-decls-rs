@@ -4,4 +4,4 @@ macro_rules! kosaraju_scc {
     };
 }
 
-kosaraju_scc!()
+kosaraju_scc!();

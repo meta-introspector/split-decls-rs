@@ -11,4 +11,4 @@ macro_rules! expand_test_case {
     };
 }
 
-expand_test_case!()
+expand_test_case!();

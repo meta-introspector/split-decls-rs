@@ -4,4 +4,4 @@ macro_rules! define_opaque {
     };
 }
 
-define_opaque!()
+define_opaque!();

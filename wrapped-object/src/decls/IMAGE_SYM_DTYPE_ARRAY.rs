@@ -4,4 +4,4 @@ macro_rules! IMAGE_SYM_DTYPE_ARRAY {
     };
 }
 
-IMAGE_SYM_DTYPE_ARRAY!()
+IMAGE_SYM_DTYPE_ARRAY!();

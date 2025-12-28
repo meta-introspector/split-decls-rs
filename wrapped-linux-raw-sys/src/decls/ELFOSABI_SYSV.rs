@@ -4,4 +4,4 @@ macro_rules! ELFOSABI_SYSV {
     };
 }
 
-ELFOSABI_SYSV!()
+ELFOSABI_SYSV!();

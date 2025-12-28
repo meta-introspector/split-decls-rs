@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        StartByteMap!();
-        Start!();
-        OwnedDFA!();
-        StartKind!();
         ByteClasses!();
         DFA!();
+        OwnedDFA!();
+        StartKind!();
+        Start!();
+        StartByteMap!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_21 {
     };
 }
 
-impl_21!()
+impl_21!();

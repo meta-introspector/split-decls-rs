@@ -4,4 +4,4 @@ macro_rules! polarity_of_impl {
     };
 }
 
-polarity_of_impl!()
+polarity_of_impl!();

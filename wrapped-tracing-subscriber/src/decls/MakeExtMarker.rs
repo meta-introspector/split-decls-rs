@@ -4,4 +4,4 @@ macro_rules! MakeExtMarker {
     };
 }
 
-MakeExtMarker!()
+MakeExtMarker!();

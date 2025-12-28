@@ -11,4 +11,4 @@ macro_rules! add_module_flag_u32 {
     };
 }
 
-add_module_flag_u32!()
+add_module_flag_u32!();

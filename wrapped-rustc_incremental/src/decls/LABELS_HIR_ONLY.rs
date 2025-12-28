@@ -4,4 +4,4 @@ macro_rules! LABELS_HIR_ONLY {
     };
 }
 
-LABELS_HIR_ONLY!()
+LABELS_HIR_ONLY!();

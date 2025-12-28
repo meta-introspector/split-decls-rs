@@ -4,4 +4,4 @@ macro_rules! LinkedList {
     };
 }
 
-LinkedList!()
+LinkedList!();

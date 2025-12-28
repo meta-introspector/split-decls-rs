@@ -1,21 +1,21 @@
 macro_rules! deps {
     () => {
-        ClassUnicodeRange!();
-        Concat!();
-        ClassBytes!();
-        Literal!();
-        Alternation!();
-        Look!();
-        Capture!();
-        HirKind!();
-        Hir!();
-        Dot!();
         ClassBytesRange!();
+        Alternation!();
+        Properties!();
+        Dot!();
+        HirKind!();
+        Look!();
+        Repetition!();
+        ClassBytes!();
+        Concat!();
         ClassUnicode!();
+        Hir!();
+        Literal!();
         Class!();
         Bytes!();
-        Repetition!();
-        Properties!();
+        ClassUnicodeRange!();
+        Capture!();
     };
 }
 
@@ -26,4 +26,4 @@ macro_rules! impl_220 {
     };
 }
 
-impl_220!()
+impl_220!();

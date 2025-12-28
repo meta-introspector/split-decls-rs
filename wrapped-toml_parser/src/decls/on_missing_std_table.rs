@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         Stream!();
-        EventReceiver!();
-        Expected!();
         Token!();
+        EventReceiver!();
         ErrorSink!();
         ParseError!();
+        Expected!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! on_missing_std_table {
     };
 }
 
-on_missing_std_table!()
+on_missing_std_table!();

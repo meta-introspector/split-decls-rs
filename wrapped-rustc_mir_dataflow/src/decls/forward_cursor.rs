@@ -12,4 +12,4 @@ macro_rules! forward_cursor {
     };
 }
 
-forward_cursor!()
+forward_cursor!();

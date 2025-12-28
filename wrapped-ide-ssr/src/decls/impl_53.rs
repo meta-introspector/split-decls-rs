@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Token!();
         RawPattern!();
+        Token!();
         PatternElement!();
         Placeholder!();
     };
@@ -14,4 +14,4 @@ macro_rules! impl_53 {
     };
 }
 
-impl_53!()
+impl_53!();

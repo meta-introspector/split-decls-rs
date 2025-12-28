@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        AesWriter!();
         ZipCryptoWriter!();
+        AesWriter!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! MaybeEncrypted {
     };
 }
 
-MaybeEncrypted!()
+MaybeEncrypted!();

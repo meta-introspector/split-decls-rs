@@ -4,4 +4,4 @@ macro_rules! is_non_enum {
     };
 }
 
-is_non_enum!()
+is_non_enum!();

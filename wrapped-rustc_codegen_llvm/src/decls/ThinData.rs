@@ -4,4 +4,4 @@ macro_rules! ThinData {
     };
 }
 
-ThinData!()
+ThinData!();

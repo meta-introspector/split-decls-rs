@@ -11,4 +11,4 @@ macro_rules! all_trait_impls {
     };
 }
 
-all_trait_impls!()
+all_trait_impls!();

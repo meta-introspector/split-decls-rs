@@ -4,4 +4,4 @@ macro_rules! Z_MEM_ERROR {
     };
 }
 
-Z_MEM_ERROR!()
+Z_MEM_ERROR!();

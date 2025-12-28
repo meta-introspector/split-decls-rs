@@ -11,4 +11,4 @@ macro_rules! Macros20NormalizedIdent {
     };
 }
 
-Macros20NormalizedIdent!()
+Macros20NormalizedIdent!();

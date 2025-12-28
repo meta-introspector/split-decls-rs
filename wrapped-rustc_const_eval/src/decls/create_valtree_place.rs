@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         CompileTimeInterpCx!();
-        MemoryKind!();
         MPlaceTy!();
+        MemoryKind!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! create_valtree_place {
     };
 }
 
-create_valtree_place!()
+create_valtree_place!();

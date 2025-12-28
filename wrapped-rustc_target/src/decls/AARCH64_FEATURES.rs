@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ImpliedFeatures!();
         Stability!();
+        ImpliedFeatures!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! AARCH64_FEATURES {
     };
 }
 
-AARCH64_FEATURES!()
+AARCH64_FEATURES!();

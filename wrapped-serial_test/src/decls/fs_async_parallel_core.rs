@@ -4,4 +4,4 @@ macro_rules! fs_async_parallel_core {
     };
 }
 
-fs_async_parallel_core!()
+fs_async_parallel_core!();

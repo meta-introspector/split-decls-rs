@@ -12,4 +12,4 @@ macro_rules! PeSegment32 {
     };
 }
 
-PeSegment32!()
+PeSegment32!();

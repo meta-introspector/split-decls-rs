@@ -11,4 +11,4 @@ macro_rules! rustc_version {
     };
 }
 
-rustc_version!()
+rustc_version!();

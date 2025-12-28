@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Stage!();
-        ConvertFn!();
-        AcceptContext!();
         AttributeParser!();
-        ArgParser!();
         AllowedTargets!();
+        AcceptContext!();
+        Stage!();
+        ArgParser!();
+        ConvertFn!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! CombineAttributeParser {
     };
 }
 
-CombineAttributeParser!()
+CombineAttributeParser!();

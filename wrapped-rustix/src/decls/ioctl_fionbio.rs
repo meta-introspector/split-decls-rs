@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Result!();
         Setter!();
+        Result!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! ioctl_fionbio {
     };
 }
 
-ioctl_fionbio!()
+ioctl_fionbio!();

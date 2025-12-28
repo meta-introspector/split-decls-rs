@@ -12,4 +12,4 @@ macro_rules! late_lint_crate {
     };
 }
 
-late_lint_crate!()
+late_lint_crate!();

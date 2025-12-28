@@ -4,4 +4,4 @@ macro_rules! POW5_OFFSETS {
     };
 }
 
-POW5_OFFSETS!()
+POW5_OFFSETS!();

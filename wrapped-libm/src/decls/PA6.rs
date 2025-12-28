@@ -4,4 +4,4 @@ macro_rules! PA6 {
     };
 }
 
-PA6!()
+PA6!();

@@ -4,4 +4,4 @@ macro_rules! InternedData {
     };
 }
 
-InternedData!()
+InternedData!();

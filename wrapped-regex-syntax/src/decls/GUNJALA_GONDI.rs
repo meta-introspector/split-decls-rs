@@ -4,4 +4,4 @@ macro_rules! GUNJALA_GONDI {
     };
 }
 
-GUNJALA_GONDI!()
+GUNJALA_GONDI!();

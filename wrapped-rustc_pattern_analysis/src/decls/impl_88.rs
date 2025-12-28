@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        BranchPatUsefulness!();
-        PatCx!();
         MatrixRow!();
-        Matrix!();
         PatOrWild!();
+        PatCx!();
+        BranchPatUsefulness!();
+        Matrix!();
         RedundancyExplanation!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! impl_88 {
     };
 }
 
-impl_88!()
+impl_88!();

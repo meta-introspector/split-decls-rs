@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         UnindexedConsumer!();
-        SplitProducer!();
-        Split!();
         ParallelIterator!();
+        Split!();
+        SplitProducer!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_1310 {
     };
 }
 
-impl_1310!()
+impl_1310!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        CallHierarchyConfig!();
-        CallLocations!();
         CallItem!();
+        CallLocations!();
+        CallHierarchyConfig!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! incoming_calls {
     };
 }
 
-incoming_calls!()
+incoming_calls!();

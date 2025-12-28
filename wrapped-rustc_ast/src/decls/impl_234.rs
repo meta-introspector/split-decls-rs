@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        ForeignItemKind!();
-        TyAlias!();
-        MacCall!();
-        Fn!();
         StaticItem!();
+        TyAlias!();
+        Fn!();
+        ForeignItemKind!();
+        MacCall!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_234 {
     };
 }
 
-impl_234!()
+impl_234!();

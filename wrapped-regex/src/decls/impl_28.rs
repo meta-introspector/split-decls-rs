@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        CaptureMatches!();
-        NoExpand!();
         Split!();
+        Replacer!();
+        SplitN!();
+        Error!();
+        Match!();
         Captures!();
         Regex!();
-        SplitN!();
+        NoExpand!();
+        CaptureMatches!();
         Matches!();
-        Error!();
-        Replacer!();
-        Match!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_28 {
     };
 }
 
-impl_28!()
+impl_28!();

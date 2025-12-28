@@ -4,4 +4,4 @@ macro_rules! AssertNotLoaded {
     };
 }
 
-AssertNotLoaded!()
+AssertNotLoaded!();

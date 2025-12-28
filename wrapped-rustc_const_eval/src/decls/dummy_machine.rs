@@ -4,4 +4,4 @@ macro_rules! dummy_machine {
     };
 }
 
-dummy_machine!()
+dummy_machine!();

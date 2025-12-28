@@ -4,4 +4,4 @@ macro_rules! FilterFolder {
     };
 }
 
-FilterFolder!()
+FilterFolder!();

@@ -4,4 +4,4 @@ macro_rules! COMBINING_MARK_SALT {
     };
 }
 
-COMBINING_MARK_SALT!()
+COMBINING_MARK_SALT!();

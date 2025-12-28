@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        ErrorSink!();
-        Raw!();
-        Span!();
-        IntegerRadix!();
-        Expected!();
-        StringBuilder!();
-        ScalarKind!();
         ParseError!();
+        StringBuilder!();
+        Raw!();
+        ScalarKind!();
+        Span!();
+        Expected!();
+        ErrorSink!();
+        IntegerRadix!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! decode_zero_prefix {
     };
 }
 
-decode_zero_prefix!()
+decode_zero_prefix!();

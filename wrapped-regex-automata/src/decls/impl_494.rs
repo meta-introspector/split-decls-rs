@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        State!();
-        StateChunksIter!();
         Transition!();
+        StateChunksIter!();
+        State!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_494 {
     };
 }
 
-impl_494!()
+impl_494!();

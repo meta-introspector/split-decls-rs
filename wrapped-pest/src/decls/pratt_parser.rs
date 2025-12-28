@@ -4,4 +4,4 @@ macro_rules! pratt_parser {
     };
 }
 
-pratt_parser!()
+pratt_parser!();

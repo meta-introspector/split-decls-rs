@@ -4,4 +4,4 @@ macro_rules! EM_MMA {
     };
 }
 
-EM_MMA!()
+EM_MMA!();

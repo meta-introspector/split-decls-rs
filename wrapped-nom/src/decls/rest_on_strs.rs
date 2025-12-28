@@ -4,4 +4,4 @@ macro_rules! rest_on_strs {
     };
 }
 
-rest_on_strs!()
+rest_on_strs!();

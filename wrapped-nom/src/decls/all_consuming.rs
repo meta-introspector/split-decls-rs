@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Error!();
-        Input!();
         AllConsuming!();
         ParseError!();
-        Parser!();
+        Input!();
         IResult!();
+        Error!();
+        Parser!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! all_consuming {
     };
 }
 
-all_consuming!()
+all_consuming!();

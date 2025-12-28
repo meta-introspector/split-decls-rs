@@ -4,4 +4,4 @@ macro_rules! VER_FLG_WEAK {
     };
 }
 
-VER_FLG_WEAK!()
+VER_FLG_WEAK!();

@@ -12,4 +12,4 @@ macro_rules! codegen_global_asm {
     };
 }
 
-codegen_global_asm!()
+codegen_global_asm!();

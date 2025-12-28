@@ -4,4 +4,4 @@ macro_rules! get_raw {
     };
 }
 
-get_raw!()
+get_raw!();

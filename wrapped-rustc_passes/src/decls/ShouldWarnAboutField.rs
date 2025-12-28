@@ -4,4 +4,4 @@ macro_rules! ShouldWarnAboutField {
     };
 }
 
-ShouldWarnAboutField!()
+ShouldWarnAboutField!();

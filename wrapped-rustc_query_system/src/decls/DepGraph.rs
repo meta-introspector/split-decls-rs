@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DepGraphData!();
         Deps!();
+        DepGraphData!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! DepGraph {
     };
 }
 
-DepGraph!()
+DepGraph!();

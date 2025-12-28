@@ -4,4 +4,4 @@ macro_rules! inherent_impls_overlap {
     };
 }
 
-inherent_impls_overlap!()
+inherent_impls_overlap!();

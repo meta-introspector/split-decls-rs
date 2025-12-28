@@ -13,4 +13,4 @@ macro_rules! unescape_c_str {
     };
 }
 
-unescape_c_str!()
+unescape_c_str!();

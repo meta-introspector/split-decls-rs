@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        DFA!();
-        PatternID!();
         Anchored!();
+        MatchError!();
+        NFA!();
         HalfMatch!();
         OverlappingState!();
-        MatchKind!();
-        NFA!();
-        Input!();
-        MatchError!();
-        PatternSet!();
         Cache!();
+        PatternSet!();
+        DFA!();
+        MatchKind!();
+        PatternID!();
+        Input!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_227 {
     };
 }
 
-impl_227!()
+impl_227!();

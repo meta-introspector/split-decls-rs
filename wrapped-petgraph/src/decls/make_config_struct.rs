@@ -12,4 +12,4 @@ macro_rules! make_config_struct {
     };
 }
 
-make_config_struct!()
+make_config_struct!();

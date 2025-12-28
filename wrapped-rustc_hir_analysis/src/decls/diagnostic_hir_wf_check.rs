@@ -11,4 +11,4 @@ macro_rules! diagnostic_hir_wf_check {
     };
 }
 
-diagnostic_hir_wf_check!()
+diagnostic_hir_wf_check!();

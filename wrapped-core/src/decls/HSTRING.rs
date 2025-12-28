@@ -4,4 +4,4 @@ macro_rules! HSTRING {
     };
 }
 
-HSTRING!()
+HSTRING!();

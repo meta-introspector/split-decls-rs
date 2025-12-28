@@ -4,4 +4,4 @@ macro_rules! instance {
     };
 }
 
-instance!()
+instance!();

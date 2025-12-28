@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Read!();
         Result!();
+        Read!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! parse_multibyte_integer_from_reader {
     };
 }
 
-parse_multibyte_integer_from_reader!()
+parse_multibyte_integer_from_reader!();

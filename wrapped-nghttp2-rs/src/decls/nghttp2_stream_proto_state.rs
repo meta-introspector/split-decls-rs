@@ -4,4 +4,4 @@ macro_rules! nghttp2_stream_proto_state {
     };
 }
 
-nghttp2_stream_proto_state!()
+nghttp2_stream_proto_state!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        WriteBatchIterator!();
-        AsColumnFamilyRef!();
-        WriteBatch!();
         WriteBatchWithTransaction!();
+        AsColumnFamilyRef!();
         WriteBatchIteratorCf!();
+        WriteBatchIterator!();
+        WriteBatch!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_473 {
     };
 }
 
-impl_473!()
+impl_473!();

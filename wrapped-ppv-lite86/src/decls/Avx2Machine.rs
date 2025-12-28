@@ -4,4 +4,4 @@ macro_rules! Avx2Machine {
     };
 }
 
-Avx2Machine!()
+Avx2Machine!();

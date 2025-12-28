@@ -4,4 +4,4 @@ macro_rules! precise_captures {
     };
 }
 
-precise_captures!()
+precise_captures!();

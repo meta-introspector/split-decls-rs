@@ -4,4 +4,4 @@ macro_rules! expand_file {
     };
 }
 
-expand_file!()
+expand_file!();

@@ -4,4 +4,4 @@ macro_rules! zk_proof {
     };
 }
 
-zk_proof!()
+zk_proof!();

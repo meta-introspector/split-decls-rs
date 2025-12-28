@@ -11,4 +11,4 @@ macro_rules! build_lints_map {
     };
 }
 
-build_lints_map!()
+build_lints_map!();

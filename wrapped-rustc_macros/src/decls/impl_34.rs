@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        AllowMultipleAlternatives!();
-        List!();
-        FieldInfo!();
         FieldInnerTy!();
-        SubdiagnosticDeriveVariantBuilder!();
+        DiagnosticDeriveError!();
+        AllowMultipleAlternatives!();
+        FieldInfo!();
+        List!();
+        SubdiagnosticVariant!();
         KindsStatistics!();
         Applicability!();
-        SubdiagnosticVariant!();
-        DiagnosticDeriveError!();
+        SubdiagnosticDeriveVariantBuilder!();
         SubdiagnosticKind!();
     };
 }
@@ -25,4 +25,4 @@ macro_rules! impl_34 {
     };
 }
 
-impl_34!()
+impl_34!();

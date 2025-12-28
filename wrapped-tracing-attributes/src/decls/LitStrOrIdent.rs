@@ -4,4 +4,4 @@ macro_rules! LitStrOrIdent {
     };
 }
 
-LitStrOrIdent!()
+LitStrOrIdent!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Float!();
         Bigint!();
+        Float!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! small_atof {
     };
 }
 
-small_atof!()
+small_atof!();

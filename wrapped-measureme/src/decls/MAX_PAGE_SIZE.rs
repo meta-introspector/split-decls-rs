@@ -4,4 +4,4 @@ macro_rules! MAX_PAGE_SIZE {
     };
 }
 
-MAX_PAGE_SIZE!()
+MAX_PAGE_SIZE!();

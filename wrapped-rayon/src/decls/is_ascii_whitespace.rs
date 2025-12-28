@@ -4,4 +4,4 @@ macro_rules! is_ascii_whitespace {
     };
 }
 
-is_ascii_whitespace!()
+is_ascii_whitespace!();

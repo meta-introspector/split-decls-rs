@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         ExpnId!();
-        ExpnData!();
         HygieneData!();
+        ExpnData!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! debug_hygiene_data {
     };
 }
 
-debug_hygiene_data!()
+debug_hygiene_data!();

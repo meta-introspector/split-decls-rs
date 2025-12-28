@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         ItemCtxt!();
+        AssociatedItemTraitUninferredGenericParamsMultipartSuggestion!();
+        InherentAssocCandidate!();
+        AssociatedItemTraitUninferredGenericParams!();
         RegionInferReason!();
         HirTyLowerer!();
-        InherentAssocCandidate!();
-        AssociatedItemTraitUninferredGenericParamsMultipartSuggestion!();
-        AssociatedItemTraitUninferredGenericParams!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_222 {
     };
 }
 
-impl_222!()
+impl_222!();

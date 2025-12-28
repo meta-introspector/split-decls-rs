@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        IoUring!();
         EntryMarker!();
+        IoUring!();
         Builder!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_212 {
     };
 }
 
-impl_212!()
+impl_212!();

@@ -4,4 +4,4 @@ macro_rules! NT_GNU_PROPERTY_TYPE_0 {
     };
 }
 
-NT_GNU_PROPERTY_TYPE_0!()
+NT_GNU_PROPERTY_TYPE_0!();

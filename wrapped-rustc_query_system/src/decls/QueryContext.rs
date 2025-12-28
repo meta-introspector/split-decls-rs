@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        QueryMap!();
-        QueryStackFrameExtra!();
-        QueryJobId!();
         HasDepContext!();
+        QueryJobId!();
+        QueryStackFrameExtra!();
         QueryInfo!();
+        QueryMap!();
         QuerySideEffect!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! QueryContext {
     };
 }
 
-QueryContext!()
+QueryContext!();

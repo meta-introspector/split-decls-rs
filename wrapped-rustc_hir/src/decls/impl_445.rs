@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Stability!();
         StableSince!();
+        Stability!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_445 {
     };
 }
 
-impl_445!()
+impl_445!();

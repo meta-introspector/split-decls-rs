@@ -4,4 +4,4 @@ macro_rules! format_with_underscores {
     };
 }
 
-format_with_underscores!()
+format_with_underscores!();

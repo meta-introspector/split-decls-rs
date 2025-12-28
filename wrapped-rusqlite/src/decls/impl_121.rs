@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        PreUpdateCase!();
         Connection!();
+        PreUpdateCase!();
         Action!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_121 {
     };
 }
 
-impl_121!()
+impl_121!();

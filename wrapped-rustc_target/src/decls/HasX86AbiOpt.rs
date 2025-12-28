@@ -11,4 +11,4 @@ macro_rules! HasX86AbiOpt {
     };
 }
 
-HasX86AbiOpt!()
+HasX86AbiOpt!();

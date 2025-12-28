@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Methods!();
         MockTrait!();
+        Methods!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! MockItemStruct {
     };
 }
 
-MockItemStruct!()
+MockItemStruct!();

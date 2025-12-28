@@ -4,4 +4,4 @@ macro_rules! instantiate {
     };
 }
 
-instantiate!()
+instantiate!();

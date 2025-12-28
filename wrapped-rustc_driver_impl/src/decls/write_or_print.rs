@@ -4,4 +4,4 @@ macro_rules! write_or_print {
     };
 }
 
-write_or_print!()
+write_or_print!();

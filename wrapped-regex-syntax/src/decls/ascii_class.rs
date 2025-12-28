@@ -11,4 +11,4 @@ macro_rules! ascii_class {
     };
 }
 
-ascii_class!()
+ascii_class!();

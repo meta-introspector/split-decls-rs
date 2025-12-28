@@ -21,4 +21,4 @@ pkgs.rustc.override {{
     };
 }
 
-nix_rust_version_impl!()
+nix_rust_version_impl!();

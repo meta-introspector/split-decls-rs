@@ -4,4 +4,4 @@ macro_rules! find_relative_libdir {
     };
 }
 
-find_relative_libdir!()
+find_relative_libdir!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Interner!();
         Region!();
+        Interner!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! shift_region {
     };
 }
 
-shift_region!()
+shift_region!();

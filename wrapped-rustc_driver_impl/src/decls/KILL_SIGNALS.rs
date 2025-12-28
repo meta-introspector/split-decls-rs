@@ -4,4 +4,4 @@ macro_rules! KILL_SIGNALS {
     };
 }
 
-KILL_SIGNALS!()
+KILL_SIGNALS!();

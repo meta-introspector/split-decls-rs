@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
+        ResourceDirectoryTable!();
+        ResourceName!();
+        Name!();
         ImageResourceDirectoryEntry!();
+        Id!();
+        Table!();
         ResourceNameOrId!();
         ResourceDirectory!();
-        Name!();
-        Table!();
-        ResourceName!();
-        ResourceDirectoryTable!();
         ResourceDirectoryEntryData!();
-        Id!();
-        ImageResourceDataEntry!();
         Result!();
+        ImageResourceDataEntry!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_723 {
     };
 }
 
-impl_723!()
+impl_723!();

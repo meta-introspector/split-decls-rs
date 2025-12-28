@@ -4,4 +4,4 @@ macro_rules! R_M32R_26_PLTREL {
     };
 }
 
-R_M32R_26_PLTREL!()
+R_M32R_26_PLTREL!();

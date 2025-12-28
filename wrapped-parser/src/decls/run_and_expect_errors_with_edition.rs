@@ -11,4 +11,4 @@ macro_rules! run_and_expect_errors_with_edition {
     };
 }
 
-run_and_expect_errors_with_edition!()
+run_and_expect_errors_with_edition!();

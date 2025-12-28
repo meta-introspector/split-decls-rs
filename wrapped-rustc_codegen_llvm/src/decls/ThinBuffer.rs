@@ -4,4 +4,4 @@ macro_rules! ThinBuffer {
     };
 }
 
-ThinBuffer!()
+ThinBuffer!();

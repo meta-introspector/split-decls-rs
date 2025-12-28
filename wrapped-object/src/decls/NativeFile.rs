@@ -11,4 +11,4 @@ macro_rules! NativeFile {
     };
 }
 
-NativeFile!()
+NativeFile!();

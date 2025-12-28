@@ -4,4 +4,4 @@ macro_rules! twine_to_string {
     };
 }
 
-twine_to_string!()
+twine_to_string!();

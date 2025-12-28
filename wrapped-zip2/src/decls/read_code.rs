@@ -12,4 +12,4 @@ macro_rules! read_code {
     };
 }
 
-read_code!()
+read_code!();

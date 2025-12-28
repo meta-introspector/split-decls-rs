@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        CompressedFileRange!();
-        ReadRef!();
-        Result!();
-        CompressionFormat!();
         CompressedData!();
+        Result!();
+        ReadRef!();
+        CompressedFileRange!();
+        CompressionFormat!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_933 {
     };
 }
 
-impl_933!()
+impl_933!();

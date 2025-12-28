@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        EdgesVec!();
-        DepNode!();
         StableHashingContext!();
-        Deps!();
-        TaskDepsRef!();
-        DepContext!();
-        DepGraph!();
         QueryContext!();
+        TaskDepsRef!();
+        DepNode!();
+        DepContext!();
+        EdgesVec!();
+        Deps!();
+        DepGraph!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_52 {
     };
 }
 
-impl_52!()
+impl_52!();

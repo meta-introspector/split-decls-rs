@@ -4,4 +4,4 @@ macro_rules! VTableNameKind {
     };
 }
 
-VTableNameKind!()
+VTableNameKind!();

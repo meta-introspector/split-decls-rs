@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        WhichCaptures!();
+        Regex!();
         MatchKind!();
-        Match!();
-        Config!();
+        Input!();
         NFA!();
-        Span!();
         DFA!();
         Prefilter!();
         PikeVM!();
-        Input!();
-        Regex!();
+        Match!();
+        Config!();
+        Span!();
+        WhichCaptures!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_362 {
     };
 }
 
-impl_362!()
+impl_362!();

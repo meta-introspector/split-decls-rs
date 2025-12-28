@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Visitable!();
-        TyConstKind!();
         Visitor!();
+        TyConstKind!();
         TyConst!();
+        Visitable!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_459 {
     };
 }
 
-impl_459!()
+impl_459!();

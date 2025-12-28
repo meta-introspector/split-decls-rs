@@ -4,4 +4,4 @@ macro_rules! expression_info {
     };
 }
 
-expression_info!()
+expression_info!();

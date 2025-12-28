@@ -4,4 +4,4 @@ macro_rules! MatchAgainstHigherRankedOutlives {
     };
 }
 
-MatchAgainstHigherRankedOutlives!()
+MatchAgainstHigherRankedOutlives!();

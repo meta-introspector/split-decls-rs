@@ -11,4 +11,4 @@ macro_rules! normalize_value_to_redactions {
     };
 }
 
-normalize_value_to_redactions!()
+normalize_value_to_redactions!();

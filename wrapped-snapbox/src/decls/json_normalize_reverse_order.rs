@@ -12,4 +12,4 @@ macro_rules! json_normalize_reverse_order {
     };
 }
 
-json_normalize_reverse_order!()
+json_normalize_reverse_order!();

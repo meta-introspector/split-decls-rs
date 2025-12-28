@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Builder!();
         NamedTempFile!();
+        Builder!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_49 {
     };
 }
 
-impl_49!()
+impl_49!();

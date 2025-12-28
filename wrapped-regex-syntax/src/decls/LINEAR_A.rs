@@ -4,4 +4,4 @@ macro_rules! LINEAR_A {
     };
 }
 
-LINEAR_A!()
+LINEAR_A!();

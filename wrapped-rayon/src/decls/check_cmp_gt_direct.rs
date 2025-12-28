@@ -4,4 +4,4 @@ macro_rules! check_cmp_gt_direct {
     };
 }
 
-check_cmp_gt_direct!()
+check_cmp_gt_direct!();

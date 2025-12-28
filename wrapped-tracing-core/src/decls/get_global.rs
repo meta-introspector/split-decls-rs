@@ -11,4 +11,4 @@ macro_rules! get_global {
     };
 }
 
-get_global!()
+get_global!();

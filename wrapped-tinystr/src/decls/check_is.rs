@@ -13,4 +13,4 @@ macro_rules! check_is {
     };
 }
 
-check_is!()
+check_is!();

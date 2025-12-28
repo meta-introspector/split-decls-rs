@@ -4,4 +4,4 @@ macro_rules! Channel {
     };
 }
 
-Channel!()
+Channel!();

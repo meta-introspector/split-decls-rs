@@ -4,4 +4,4 @@ macro_rules! is_greater {
     };
 }
 
-is_greater!()
+is_greater!();

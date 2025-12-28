@@ -11,4 +11,4 @@ macro_rules! ioctl_read_buf {
     };
 }
 
-ioctl_read_buf!()
+ioctl_read_buf!();

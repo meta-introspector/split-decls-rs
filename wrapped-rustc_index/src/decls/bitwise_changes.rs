@@ -11,4 +11,4 @@ macro_rules! bitwise_changes {
     };
 }
 
-bitwise_changes!()
+bitwise_changes!();

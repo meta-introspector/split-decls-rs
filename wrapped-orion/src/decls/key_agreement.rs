@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        UnknownCryptoError!();
         PrivateKey!();
         PublicKey!();
+        UnknownCryptoError!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! key_agreement {
     };
 }
 
-key_agreement!()
+key_agreement!();

@@ -4,4 +4,4 @@ macro_rules! IAsyncActionWithProgress_Vtbl {
     };
 }
 
-IAsyncActionWithProgress_Vtbl!()
+IAsyncActionWithProgress_Vtbl!();

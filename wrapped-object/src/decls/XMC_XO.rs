@@ -4,4 +4,4 @@ macro_rules! XMC_XO {
     };
 }
 
-XMC_XO!()
+XMC_XO!();

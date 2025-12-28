@@ -1,17 +1,17 @@
 macro_rules! deps {
     () => {
-        Special!();
         Start!();
-        Anchored!();
-        Unit!();
-        BuildError!();
         StateID!();
+        Special!();
+        BuildError!();
         DFA!();
-        PatternID!();
+        Unit!();
         Minimizer!();
-        Input!();
-        Remapper!();
         OwnedDFA!();
+        Remapper!();
+        PatternID!();
+        Anchored!();
+        Input!();
     };
 }
 
@@ -23,4 +23,4 @@ macro_rules! impl_25 {
     };
 }
 
-impl_25!()
+impl_25!();

@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        SerializeMap!();
-        Result!();
-        Serializer!();
-        NumberStrEmitter!();
-        SerializeStructVariant!();
-        SerializeTupleVariant!();
         Error!();
         Formatter!();
+        SerializeMap!();
+        Result!();
+        SerializeTupleVariant!();
+        NumberStrEmitter!();
+        SerializeStructVariant!();
+        Serializer!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_158 {
     };
 }
 
-impl_158!()
+impl_158!();

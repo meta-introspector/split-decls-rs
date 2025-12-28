@@ -4,4 +4,4 @@ macro_rules! polyfills {
     };
 }
 
-polyfills!()
+polyfills!();

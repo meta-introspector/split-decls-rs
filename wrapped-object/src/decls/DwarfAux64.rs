@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        U64!();
         Section!();
+        U64!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! DwarfAux64 {
     };
 }
 
-DwarfAux64!()
+DwarfAux64!();

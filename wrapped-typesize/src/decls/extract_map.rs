@@ -4,4 +4,4 @@ macro_rules! extract_map {
     };
 }
 
-extract_map!()
+extract_map!();

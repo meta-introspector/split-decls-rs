@@ -4,4 +4,4 @@ macro_rules! bind_pat {
     };
 }
 
-bind_pat!()
+bind_pat!();

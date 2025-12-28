@@ -4,4 +4,4 @@ macro_rules! NEW_TAI_LUE {
     };
 }
 
-NEW_TAI_LUE!()
+NEW_TAI_LUE!();

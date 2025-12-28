@@ -4,4 +4,4 @@ macro_rules! T_MAX {
     };
 }
 
-T_MAX!()
+T_MAX!();

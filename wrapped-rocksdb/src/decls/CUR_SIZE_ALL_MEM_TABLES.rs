@@ -11,4 +11,4 @@ macro_rules! CUR_SIZE_ALL_MEM_TABLES {
     };
 }
 
-CUR_SIZE_ALL_MEM_TABLES!()
+CUR_SIZE_ALL_MEM_TABLES!();

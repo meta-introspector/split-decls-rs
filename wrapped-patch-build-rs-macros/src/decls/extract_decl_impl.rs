@@ -4,4 +4,4 @@ macro_rules! extract_decl_impl {
     };
 }
 
-extract_decl_impl!()
+extract_decl_impl!();

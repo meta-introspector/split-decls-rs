@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        CanAccessMutGlobal!();
-        CompileTimeMachine!();
         CompileTimeInterpCx!();
         CheckAlignment!();
         InterpCx!();
+        CompileTimeMachine!();
+        CanAccessMutGlobal!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! mk_eval_cx_to_read_const_val {
     };
 }
 
-mk_eval_cx_to_read_const_val!()
+mk_eval_cx_to_read_const_val!();

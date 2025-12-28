@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        ByteString!();
         VersionFileId!();
-        VersionFile!();
         VersionFiles!();
+        VersionFile!();
+        ByteString!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_1152 {
     };
 }
 
-impl_1152!()
+impl_1152!();

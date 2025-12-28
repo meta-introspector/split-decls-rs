@@ -4,4 +4,4 @@ macro_rules! R_ARM_ALU_PCREL_23_15 {
     };
 }
 
-R_ARM_ALU_PCREL_23_15!()
+R_ARM_ALU_PCREL_23_15!();

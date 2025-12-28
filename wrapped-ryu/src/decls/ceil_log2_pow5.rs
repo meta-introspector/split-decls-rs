@@ -4,4 +4,4 @@ macro_rules! ceil_log2_pow5 {
     };
 }
 
-ceil_log2_pow5!()
+ceil_log2_pow5!();

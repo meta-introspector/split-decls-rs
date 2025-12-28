@@ -4,4 +4,4 @@ macro_rules! closure_has_block_body {
     };
 }
 
-closure_has_block_body!()
+closure_has_block_body!();

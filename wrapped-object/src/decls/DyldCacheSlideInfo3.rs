@@ -13,4 +13,4 @@ macro_rules! DyldCacheSlideInfo3 {
     };
 }
 
-DyldCacheSlideInfo3!()
+DyldCacheSlideInfo3!();

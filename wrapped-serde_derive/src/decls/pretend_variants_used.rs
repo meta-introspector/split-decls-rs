@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Data!();
         Style!();
+        Data!();
         Container!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! pretend_variants_used {
     };
 }
 
-pretend_variants_used!()
+pretend_variants_used!();

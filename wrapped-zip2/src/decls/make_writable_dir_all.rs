@@ -11,4 +11,4 @@ macro_rules! make_writable_dir_all {
     };
 }
 
-make_writable_dir_all!()
+make_writable_dir_all!();

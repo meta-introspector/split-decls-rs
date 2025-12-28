@@ -1,22 +1,22 @@
 macro_rules! deps {
     () => {
+        Interner!();
+        TypingMode!();
         Region!();
-        Variance!();
-        IntVarValue!();
-        GenericArgs!();
-        GenericArg!();
-        DefId!();
-        TypeFoldable!();
-        FloatVarValue!();
         OpaqueTypeKey!();
+        GenericArg!();
+        FloatVarValue!();
+        Binder!();
+        Const!();
+        Variance!();
+        DefId!();
+        GenericArgs!();
+        OpaqueTypeStorageEntries!();
+        IntVarValue!();
         RelateResult!();
         Ty!();
-        Binder!();
+        TypeFoldable!();
         Span!();
-        TypingMode!();
-        Interner!();
-        OpaqueTypeStorageEntries!();
-        Const!();
     };
 }
 
@@ -27,4 +27,4 @@ macro_rules! InferCtxtLike {
     };
 }
 
-InferCtxtLike!()
+InferCtxtLike!();

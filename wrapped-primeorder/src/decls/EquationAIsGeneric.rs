@@ -4,4 +4,4 @@ macro_rules! EquationAIsGeneric {
     };
 }
 
-EquationAIsGeneric!()
+EquationAIsGeneric!();

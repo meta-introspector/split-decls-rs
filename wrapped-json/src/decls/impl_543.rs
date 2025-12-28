@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        Float!();
         Serializer!();
-        Number!();
         Result!();
         Error!();
-        Float!();
+        Number!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_543 {
     };
 }
 
-impl_543!()
+impl_543!();

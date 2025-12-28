@@ -11,4 +11,4 @@ macro_rules! impl_extend {
     };
 }
 
-impl_extend!()
+impl_extend!();

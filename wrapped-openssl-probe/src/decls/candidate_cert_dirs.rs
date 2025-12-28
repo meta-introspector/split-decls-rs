@@ -4,4 +4,4 @@ macro_rules! candidate_cert_dirs {
     };
 }
 
-candidate_cert_dirs!()
+candidate_cert_dirs!();

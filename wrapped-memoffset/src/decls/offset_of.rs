@@ -4,4 +4,4 @@ macro_rules! offset_of {
     };
 }
 
-offset_of!()
+offset_of!();

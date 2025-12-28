@@ -4,4 +4,4 @@ macro_rules! cmd_op_struct {
     };
 }
 
-cmd_op_struct!()
+cmd_op_struct!();

@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Sub1!();
         B0!();
-        B1!();
-        Shleft!();
-        Bit!();
+        Sub1!();
         UInt!();
         Unsigned!();
+        B1!();
+        Bit!();
+        Shleft!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_407 {
     };
 }
 
-impl_407!()
+impl_407!();

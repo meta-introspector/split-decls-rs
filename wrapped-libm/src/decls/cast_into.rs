@@ -11,4 +11,4 @@ macro_rules! cast_into {
     };
 }
 
-cast_into!()
+cast_into!();

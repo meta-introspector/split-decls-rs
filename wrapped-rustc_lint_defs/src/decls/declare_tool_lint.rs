@@ -12,4 +12,4 @@ macro_rules! declare_tool_lint {
     };
 }
 
-declare_tool_lint!()
+declare_tool_lint!();

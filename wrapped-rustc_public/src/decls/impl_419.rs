@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        TraitDecl!();
-        Generics!();
         GenericPredicates!();
+        Generics!();
+        TraitDecl!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_419 {
     };
 }
 
-impl_419!()
+impl_419!();

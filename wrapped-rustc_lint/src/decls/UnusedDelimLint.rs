@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         EarlyContext!();
-        UnusedDelimSuggestion!();
-        UnusedParens!();
-        UnusedDelimsCtx!();
         UnusedDelim!();
+        UnusedDelimsCtx!();
+        UnusedParens!();
+        UnusedDelimSuggestion!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! UnusedDelimLint {
     };
 }
 
-UnusedDelimLint!()
+UnusedDelimLint!();

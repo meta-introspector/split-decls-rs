@@ -12,4 +12,4 @@ macro_rules! inherit_predicates_for_delegation_item {
     };
 }
 
-inherit_predicates_for_delegation_item!()
+inherit_predicates_for_delegation_item!();

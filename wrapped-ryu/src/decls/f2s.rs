@@ -4,4 +4,4 @@ macro_rules! f2s {
     };
 }
 
-f2s!()
+f2s!();

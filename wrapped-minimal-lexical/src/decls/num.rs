@@ -4,4 +4,4 @@ macro_rules! num {
     };
 }
 
-num!()
+num!();

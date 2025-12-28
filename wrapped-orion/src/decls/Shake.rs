@@ -4,4 +4,4 @@ macro_rules! Shake {
     };
 }
 
-Shake!()
+Shake!();

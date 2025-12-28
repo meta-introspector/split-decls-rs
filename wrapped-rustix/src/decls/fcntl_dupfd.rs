@@ -11,4 +11,4 @@ macro_rules! fcntl_dupfd {
     };
 }
 
-fcntl_dupfd!()
+fcntl_dupfd!();

@@ -4,4 +4,4 @@ macro_rules! R_METAG_HIOG {
     };
 }
 
-R_METAG_HIOG!()
+R_METAG_HIOG!();

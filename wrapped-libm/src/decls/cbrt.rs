@@ -4,4 +4,4 @@ macro_rules! cbrt {
     };
 }
 
-cbrt!()
+cbrt!();

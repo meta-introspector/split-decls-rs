@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        IResult!();
-        Needed!();
-        Error!();
-        AsChar!();
-        ParseError!();
-        Streaming!();
         ErrorKind!();
         Parser!();
-        Input!();
         MultiSpace0!();
+        ParseError!();
+        Streaming!();
+        AsChar!();
+        IResult!();
+        Input!();
+        Needed!();
+        Error!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! multispace0 {
     };
 }
 
-multispace0!()
+multispace0!();

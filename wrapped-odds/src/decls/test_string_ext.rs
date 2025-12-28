@@ -11,4 +11,4 @@ macro_rules! test_string_ext {
     };
 }
 
-test_string_ext!()
+test_string_ext!();

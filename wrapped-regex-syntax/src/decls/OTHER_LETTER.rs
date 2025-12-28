@@ -4,4 +4,4 @@ macro_rules! OTHER_LETTER {
     };
 }
 
-OTHER_LETTER!()
+OTHER_LETTER!();

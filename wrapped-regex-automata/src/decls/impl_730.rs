@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Span!();
-        Memchr2!();
         PrefilterI!();
+        Memchr2!();
+        Span!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_730 {
     };
 }
 
-impl_730!()
+impl_730!();

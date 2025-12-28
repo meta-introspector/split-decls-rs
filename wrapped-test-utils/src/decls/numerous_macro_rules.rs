@@ -4,4 +4,4 @@ macro_rules! numerous_macro_rules {
     };
 }
 
-numerous_macro_rules!()
+numerous_macro_rules!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        PropertyName!();
         PropName!();
+        PropertyName!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_316 {
     };
 }
 
-impl_316!()
+impl_316!();

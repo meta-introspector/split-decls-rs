@@ -16,4 +16,4 @@ macro_rules! single_node_with_style {
     };
 }
 
-single_node_with_style!()
+single_node_with_style!();

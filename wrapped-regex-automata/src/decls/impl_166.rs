@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        AccelTy!();
         DeserializeError!();
+        AccelTy!();
         DebugByte!();
         Accel!();
     };
@@ -14,4 +14,4 @@ macro_rules! impl_166 {
     };
 }
 
-impl_166!()
+impl_166!();

@@ -11,4 +11,4 @@ macro_rules! AIX_BIG_MAGIC {
     };
 }
 
-AIX_BIG_MAGIC!()
+AIX_BIG_MAGIC!();

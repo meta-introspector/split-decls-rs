@@ -4,4 +4,4 @@ macro_rules! prefix_entries {
     };
 }
 
-prefix_entries!()
+prefix_entries!();

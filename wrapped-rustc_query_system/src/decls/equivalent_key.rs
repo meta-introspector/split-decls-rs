@@ -4,4 +4,4 @@ macro_rules! equivalent_key {
     };
 }
 
-equivalent_key!()
+equivalent_key!();

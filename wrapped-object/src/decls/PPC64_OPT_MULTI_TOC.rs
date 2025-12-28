@@ -4,4 +4,4 @@ macro_rules! PPC64_OPT_MULTI_TOC {
     };
 }
 
-PPC64_OPT_MULTI_TOC!()
+PPC64_OPT_MULTI_TOC!();

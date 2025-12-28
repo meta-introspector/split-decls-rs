@@ -4,4 +4,4 @@ macro_rules! R_SH_NONE {
     };
 }
 
-R_SH_NONE!()
+R_SH_NONE!();

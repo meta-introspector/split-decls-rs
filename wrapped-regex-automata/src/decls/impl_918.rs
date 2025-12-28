@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        HalfMatch!();
         DFA!();
         PatternID!();
-        HalfMatch!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_918 {
     };
 }
 
-impl_918!()
+impl_918!();

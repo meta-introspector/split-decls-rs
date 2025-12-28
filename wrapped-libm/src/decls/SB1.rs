@@ -4,4 +4,4 @@ macro_rules! SB1 {
     };
 }
 
-SB1!()
+SB1!();

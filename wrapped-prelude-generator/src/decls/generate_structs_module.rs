@@ -4,4 +4,4 @@ macro_rules! generate_structs_module {
     };
 }
 
-generate_structs_module!()
+generate_structs_module!();

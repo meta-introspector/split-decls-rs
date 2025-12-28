@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ActualAncestry!();
         HasAncestry!();
+        ActualAncestry!();
         ActualSpan!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! get_ancestry {
     };
 }
 
-get_ancestry!()
+get_ancestry!();

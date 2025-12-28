@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Idx!();
         ChunkedBitSet!();
         ChunkIter!();
-        Idx!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! ChunkedBitIter {
     };
 }
 
-ChunkedBitIter!()
+ChunkedBitIter!();

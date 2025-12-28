@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Trie!();
         Decomposition!();
+        Trie!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! DecompositionData {
     };
 }
 
-DecompositionData!()
+DecompositionData!();

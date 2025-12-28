@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Error!();
         Number!();
+        Error!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! ErrorCode {
     };
 }
 
-ErrorCode!()
+ErrorCode!();

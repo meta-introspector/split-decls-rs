@@ -4,4 +4,4 @@ macro_rules! StatsLevel {
     };
 }
 
-StatsLevel!()
+StatsLevel!();

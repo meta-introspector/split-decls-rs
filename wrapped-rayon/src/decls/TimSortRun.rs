@@ -4,4 +4,4 @@ macro_rules! TimSortRun {
     };
 }
 
-TimSortRun!()
+TimSortRun!();

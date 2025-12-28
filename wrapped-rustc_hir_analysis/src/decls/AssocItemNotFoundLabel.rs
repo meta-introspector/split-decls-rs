@@ -4,4 +4,4 @@ macro_rules! AssocItemNotFoundLabel {
     };
 }
 
-AssocItemNotFoundLabel!()
+AssocItemNotFoundLabel!();

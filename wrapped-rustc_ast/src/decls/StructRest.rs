@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Expr!();
         Walkable!();
+        Expr!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! StructRest {
     };
 }
 
-StructRest!()
+StructRest!();

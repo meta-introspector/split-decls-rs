@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        BuilderMethods!();
+        PlaceRef!();
         OperandValue!();
         PlaceValue!();
-        PlaceRef!();
-        BuilderMethods!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_505 {
     };
 }
 
-impl_505!()
+impl_505!();

@@ -12,4 +12,4 @@ macro_rules! replace_with_many {
     };
 }
 
-replace_with_many!()
+replace_with_many!();

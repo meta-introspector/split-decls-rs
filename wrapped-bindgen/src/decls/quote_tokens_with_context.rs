@@ -4,4 +4,4 @@ macro_rules! quote_tokens_with_context {
     };
 }
 
-quote_tokens_with_context!()
+quote_tokens_with_context!();

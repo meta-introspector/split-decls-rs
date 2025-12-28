@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        State!();
         FSETable!();
+        State!();
         SymbolStates!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! build_table_from_probabilities {
     };
 }
 
-build_table_from_probabilities!()
+build_table_from_probabilities!();

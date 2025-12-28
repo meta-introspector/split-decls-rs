@@ -11,4 +11,4 @@ macro_rules! test_drop_panic_smallvec {
     };
 }
 
-test_drop_panic_smallvec!()
+test_drop_panic_smallvec!();

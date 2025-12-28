@@ -4,4 +4,4 @@ macro_rules! is_session_directory_lock_file {
     };
 }
 
-is_session_directory_lock_file!()
+is_session_directory_lock_file!();

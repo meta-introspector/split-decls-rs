@@ -11,4 +11,4 @@ macro_rules! find_gated_cfg {
     };
 }
 
-find_gated_cfg!()
+find_gated_cfg!();

@@ -4,4 +4,4 @@ macro_rules! LEPCHA {
     };
 }
 
-LEPCHA!()
+LEPCHA!();

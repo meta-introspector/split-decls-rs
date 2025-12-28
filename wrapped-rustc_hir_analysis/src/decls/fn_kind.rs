@@ -11,4 +11,4 @@ macro_rules! fn_kind {
     };
 }
 
-fn_kind!()
+fn_kind!();

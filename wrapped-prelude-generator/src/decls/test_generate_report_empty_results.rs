@@ -4,4 +4,4 @@ macro_rules! test_generate_report_empty_results {
     };
 }
 
-test_generate_report_empty_results!()
+test_generate_report_empty_results!();

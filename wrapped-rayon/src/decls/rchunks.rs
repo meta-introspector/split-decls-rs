@@ -4,4 +4,4 @@ macro_rules! rchunks {
     };
 }
 
-rchunks!()
+rchunks!();

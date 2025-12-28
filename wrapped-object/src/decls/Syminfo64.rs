@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Endian!();
-        Sym64!();
         U16!();
+        Sym64!();
+        Endian!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Syminfo64 {
     };
 }
 
-Syminfo64!()
+Syminfo64!();

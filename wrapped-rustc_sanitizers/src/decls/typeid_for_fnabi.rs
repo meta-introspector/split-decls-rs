@@ -4,4 +4,4 @@ macro_rules! typeid_for_fnabi {
     };
 }
 
-typeid_for_fnabi!()
+typeid_for_fnabi!();

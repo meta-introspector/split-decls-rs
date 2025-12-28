@@ -4,4 +4,4 @@ macro_rules! enabled_names {
     };
 }
 
-enabled_names!()
+enabled_names!();

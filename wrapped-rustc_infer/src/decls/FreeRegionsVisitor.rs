@@ -4,4 +4,4 @@ macro_rules! FreeRegionsVisitor {
     };
 }
 
-FreeRegionsVisitor!()
+FreeRegionsVisitor!();

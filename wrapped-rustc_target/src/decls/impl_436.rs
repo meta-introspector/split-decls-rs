@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Target!();
         ToJson!();
+        Target!();
         TargetOptions!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_436 {
     };
 }
 
-impl_436!()
+impl_436!();

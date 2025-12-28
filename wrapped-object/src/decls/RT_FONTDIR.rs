@@ -4,4 +4,4 @@ macro_rules! RT_FONTDIR {
     };
 }
 
-RT_FONTDIR!()
+RT_FONTDIR!();

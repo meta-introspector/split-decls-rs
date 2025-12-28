@@ -4,4 +4,4 @@ macro_rules! deref_async_buf_read {
     };
 }
 
-deref_async_buf_read!()
+deref_async_buf_read!();

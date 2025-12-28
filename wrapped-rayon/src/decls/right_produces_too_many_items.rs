@@ -4,4 +4,4 @@ macro_rules! right_produces_too_many_items {
     };
 }
 
-right_produces_too_many_items!()
+right_produces_too_many_items!();

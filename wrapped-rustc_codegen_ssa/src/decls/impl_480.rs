@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
+        VirtualIndex!();
+        PlaceRef!();
+        FunctionCx!();
         InvalidMonomorphization!();
+        AtomicRmwBinOp!();
         BuilderMethods!();
         SynchronizationScope!();
-        PlaceRef!();
         OperandRef!();
-        AtomicRmwBinOp!();
-        VirtualIndex!();
-        FunctionCx!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_480 {
     };
 }
 
-impl_480!()
+impl_480!();

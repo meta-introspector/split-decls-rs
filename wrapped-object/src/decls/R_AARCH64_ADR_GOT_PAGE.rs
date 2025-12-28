@@ -4,4 +4,4 @@ macro_rules! R_AARCH64_ADR_GOT_PAGE {
     };
 }
 
-R_AARCH64_ADR_GOT_PAGE!()
+R_AARCH64_ADR_GOT_PAGE!();

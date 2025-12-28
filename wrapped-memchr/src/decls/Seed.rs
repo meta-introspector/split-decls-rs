@@ -4,4 +4,4 @@ macro_rules! Seed {
     };
 }
 
-Seed!()
+Seed!();

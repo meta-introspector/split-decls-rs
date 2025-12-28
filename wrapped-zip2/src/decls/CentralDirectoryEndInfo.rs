@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Zip64CentralDirectoryEnd!();
-        Zip32CentralDirectoryEnd!();
         DataAndPosition!();
+        Zip32CentralDirectoryEnd!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! CentralDirectoryEndInfo {
     };
 }
 
-CentralDirectoryEndInfo!()
+CentralDirectoryEndInfo!();

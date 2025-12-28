@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        UnusedDelimLint!();
         EarlyContext!();
         UnusedDelimsCtx!();
-        UnusedDelimLint!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_854 {
     };
 }
 
-impl_854!()
+impl_854!();

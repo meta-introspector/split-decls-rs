@@ -4,4 +4,4 @@ macro_rules! gen_mod_ident {
     };
 }
 
-gen_mod_ident!()
+gen_mod_ident!();

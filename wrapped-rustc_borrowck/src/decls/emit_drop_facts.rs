@@ -12,4 +12,4 @@ macro_rules! emit_drop_facts {
     };
 }
 
-emit_drop_facts!()
+emit_drop_facts!();

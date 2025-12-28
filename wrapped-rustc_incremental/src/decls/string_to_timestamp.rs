@@ -11,4 +11,4 @@ macro_rules! string_to_timestamp {
     };
 }
 
-string_to_timestamp!()
+string_to_timestamp!();

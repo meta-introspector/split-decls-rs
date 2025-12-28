@@ -4,4 +4,4 @@ macro_rules! RelocationStateV3 {
     };
 }
 
-RelocationStateV3!()
+RelocationStateV3!();

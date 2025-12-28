@@ -4,4 +4,4 @@ macro_rules! is_ident {
     };
 }
 
-is_ident!()
+is_ident!();

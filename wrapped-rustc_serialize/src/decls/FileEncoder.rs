@@ -4,4 +4,4 @@ macro_rules! FileEncoder {
     };
 }
 
-FileEncoder!()
+FileEncoder!();

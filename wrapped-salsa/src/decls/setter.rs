@@ -4,4 +4,4 @@ macro_rules! setter {
     };
 }
 
-setter!()
+setter!();

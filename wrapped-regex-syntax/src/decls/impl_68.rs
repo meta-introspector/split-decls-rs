@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Alternation!();
         Ast!();
+        Alternation!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_68 {
     };
 }
 
-impl_68!()
+impl_68!();

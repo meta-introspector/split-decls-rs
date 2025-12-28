@@ -4,4 +4,4 @@ macro_rules! ENV_LOCK {
     };
 }
 
-ENV_LOCK!()
+ENV_LOCK!();

@@ -11,4 +11,4 @@ macro_rules! IMAGE_SCN_MEM_READ {
     };
 }
 
-IMAGE_SCN_MEM_READ!()
+IMAGE_SCN_MEM_READ!();

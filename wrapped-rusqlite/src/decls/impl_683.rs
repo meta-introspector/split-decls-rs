@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Result!();
         Name!();
+        Result!();
         Named!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_683 {
     };
 }
 
-impl_683!()
+impl_683!();

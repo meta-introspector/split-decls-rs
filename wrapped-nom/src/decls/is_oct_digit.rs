@@ -4,4 +4,4 @@ macro_rules! is_oct_digit {
     };
 }
 
-is_oct_digit!()
+is_oct_digit!();

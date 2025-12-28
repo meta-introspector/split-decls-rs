@@ -4,4 +4,4 @@ macro_rules! test_data_dir {
     };
 }
 
-test_data_dir!()
+test_data_dir!();

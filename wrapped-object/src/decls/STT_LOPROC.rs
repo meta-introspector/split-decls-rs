@@ -4,4 +4,4 @@ macro_rules! STT_LOPROC {
     };
 }
 
-STT_LOPROC!()
+STT_LOPROC!();

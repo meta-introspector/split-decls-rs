@@ -16,4 +16,4 @@ macro_rules! can_set_variable_in_global_context_in_forloop {
     };
 }
 
-can_set_variable_in_global_context_in_forloop!()
+can_set_variable_in_global_context_in_forloop!();

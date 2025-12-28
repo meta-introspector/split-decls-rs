@@ -4,4 +4,4 @@ macro_rules! simulator_targets_set_env {
     };
 }
 
-simulator_targets_set_env!()
+simulator_targets_set_env!();

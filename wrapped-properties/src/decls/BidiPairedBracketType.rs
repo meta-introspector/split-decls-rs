@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        BidiMirroringGlyph!();
         EnumeratedProperty!();
+        BidiMirroringGlyph!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! BidiPairedBracketType {
     };
 }
 
-BidiPairedBracketType!()
+BidiPairedBracketType!();

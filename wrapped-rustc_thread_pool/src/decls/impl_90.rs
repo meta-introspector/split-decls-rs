@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         JobRef!();
-        WorkerThread!();
-        LockLatch!();
-        CoreLatch!();
         CountLatch!();
         CountLatchKind!();
+        CoreLatch!();
+        LockLatch!();
+        WorkerThread!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_90 {
     };
 }
 
-impl_90!()
+impl_90!();

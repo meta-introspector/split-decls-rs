@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        MultipleSupertraitUpcastable!();
         LateContext!();
+        MultipleSupertraitUpcastable!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_661 {
     };
 }
 
-impl_661!()
+impl_661!();

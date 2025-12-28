@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        SymbolAlreadyDefined!();
         CodegenCx!();
         Visibility!();
         Linkage!();
+        SymbolAlreadyDefined!();
         SetUniqueComdat!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_573 {
     };
 }
 
-impl_573!()
+impl_573!();

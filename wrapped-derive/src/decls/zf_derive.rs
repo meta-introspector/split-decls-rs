@@ -4,4 +4,4 @@ macro_rules! zf_derive {
     };
 }
 
-zf_derive!()
+zf_derive!();

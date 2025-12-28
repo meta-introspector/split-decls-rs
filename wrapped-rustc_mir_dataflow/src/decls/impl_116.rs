@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        MockAnalysis!();
-        EffectIndex!();
         Direction!();
+        EffectIndex!();
+        MockAnalysis!();
         Effect!();
         SeekTarget!();
     };
@@ -15,4 +15,4 @@ macro_rules! impl_116 {
     };
 }
 
-impl_116!()
+impl_116!();

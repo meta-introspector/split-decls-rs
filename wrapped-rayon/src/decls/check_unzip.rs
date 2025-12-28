@@ -4,4 +4,4 @@ macro_rules! check_unzip {
     };
 }
 
-check_unzip!()
+check_unzip!();

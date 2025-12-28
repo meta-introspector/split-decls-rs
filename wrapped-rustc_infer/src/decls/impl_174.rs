@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         TypeRelating!();
-        Obligation!();
         InferCtxt!();
+        Obligation!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_174 {
     };
 }
 
-impl_174!()
+impl_174!();

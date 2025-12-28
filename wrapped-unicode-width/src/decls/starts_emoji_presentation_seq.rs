@@ -4,4 +4,4 @@ macro_rules! starts_emoji_presentation_seq {
     };
 }
 
-starts_emoji_presentation_seq!()
+starts_emoji_presentation_seq!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Result!();
         ExportData!();
+        Result!();
         Bytes!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_517 {
     };
 }
 
-impl_517!()
+impl_517!();

@@ -4,4 +4,4 @@ macro_rules! E_E2K_MACH_48C {
     };
 }
 
-E_E2K_MACH_48C!()
+E_E2K_MACH_48C!();

@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        ExpectedFound!();
-        Abi!();
-        Interner!();
         Safety!();
-        Const!();
         Ty!();
-        PredicatePolarity!();
+        ExpectedFound!();
+        Const!();
         BoundExistentialPredicates!();
-        Region!();
+        Abi!();
         DefId!();
+        PredicatePolarity!();
+        Interner!();
+        Region!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! TypeError {
     };
 }
 
-TypeError!()
+TypeError!();

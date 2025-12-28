@@ -11,4 +11,4 @@ macro_rules! with_thread_data {
     };
 }
 
-with_thread_data!()
+with_thread_data!();

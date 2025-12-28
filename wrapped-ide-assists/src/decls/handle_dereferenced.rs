@@ -11,4 +11,4 @@ macro_rules! handle_dereferenced {
     };
 }
 
-handle_dereferenced!()
+handle_dereferenced!();

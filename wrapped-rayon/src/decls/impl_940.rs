@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Unzip!();
         UnzipOp!();
         Folder!();
-        Unzip!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_940 {
     };
 }
 
-impl_940!()
+impl_940!();

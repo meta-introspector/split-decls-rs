@@ -4,4 +4,4 @@ macro_rules! implement {
     };
 }
 
-implement!()
+implement!();

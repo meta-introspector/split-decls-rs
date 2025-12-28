@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Endian!();
         ElfFile!();
-        Endianness!();
+        Endian!();
         FileHeader64!();
+        Endianness!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! ElfFile64 {
     };
 }
 
-ElfFile64!()
+ElfFile64!();

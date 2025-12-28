@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Cmp!();
-        NInt!();
-        Greater!();
+        NonZero!();
         Z0!();
         InternalMarker!();
+        Cmp!();
         Unsigned!();
-        NonZero!();
+        Greater!();
+        NInt!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_93 {
     };
 }
 
-impl_93!()
+impl_93!();

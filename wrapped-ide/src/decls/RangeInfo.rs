@@ -4,4 +4,4 @@ macro_rules! RangeInfo {
     };
 }
 
-RangeInfo!()
+RangeInfo!();

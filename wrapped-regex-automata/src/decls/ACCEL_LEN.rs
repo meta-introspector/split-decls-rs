@@ -11,4 +11,4 @@ macro_rules! ACCEL_LEN {
     };
 }
 
-ACCEL_LEN!()
+ACCEL_LEN!();

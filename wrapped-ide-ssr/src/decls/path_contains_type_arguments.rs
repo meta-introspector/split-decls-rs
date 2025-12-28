@@ -4,4 +4,4 @@ macro_rules! path_contains_type_arguments {
     };
 }
 
-path_contains_type_arguments!()
+path_contains_type_arguments!();

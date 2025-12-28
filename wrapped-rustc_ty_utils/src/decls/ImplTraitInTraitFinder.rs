@@ -4,4 +4,4 @@ macro_rules! ImplTraitInTraitFinder {
     };
 }
 
-ImplTraitInTraitFinder!()
+ImplTraitInTraitFinder!();

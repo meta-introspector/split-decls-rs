@@ -4,4 +4,4 @@ macro_rules! HexBytes {
     };
 }
 
-HexBytes!()
+HexBytes!();

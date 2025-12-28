@@ -4,4 +4,4 @@ macro_rules! explain_borrow {
     };
 }
 
-explain_borrow!()
+explain_borrow!();

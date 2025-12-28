@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Endian!();
-        ReadRef!();
         DyldCacheImageInfo!();
+        ReadRef!();
         Result!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_504 {
     };
 }
 
-impl_504!()
+impl_504!();

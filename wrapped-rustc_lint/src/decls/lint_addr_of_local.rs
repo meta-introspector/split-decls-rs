@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        DanglingPointersFromLocals!();
         LateContext!();
         DanglingPointerLocalContext!();
-        DanglingPointersFromLocals!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! lint_addr_of_local {
     };
 }
 
-lint_addr_of_local!()
+lint_addr_of_local!();

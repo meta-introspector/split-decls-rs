@@ -4,4 +4,4 @@ macro_rules! namespace_starts_with {
     };
 }
 
-namespace_starts_with!()
+namespace_starts_with!();

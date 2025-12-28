@@ -4,4 +4,4 @@ macro_rules! FrontmatterAllowed {
     };
 }
 
-FrontmatterAllowed!()
+FrontmatterAllowed!();

@@ -4,4 +4,4 @@ macro_rules! RemoveSemiForCoerce {
     };
 }
 
-RemoveSemiForCoerce!()
+RemoveSemiForCoerce!();

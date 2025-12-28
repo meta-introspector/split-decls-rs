@@ -4,4 +4,4 @@ macro_rules! TimeStampCounterReadability {
     };
 }
 
-TimeStampCounterReadability!()
+TimeStampCounterReadability!();

@@ -4,4 +4,4 @@ macro_rules! tarjan_scc {
     };
 }
 
-tarjan_scc!()
+tarjan_scc!();

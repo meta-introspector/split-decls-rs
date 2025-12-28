@@ -4,4 +4,4 @@ macro_rules! DataDirectory {
     };
 }
 
-DataDirectory!()
+DataDirectory!();

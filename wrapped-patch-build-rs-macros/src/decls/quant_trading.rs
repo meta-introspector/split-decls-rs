@@ -4,4 +4,4 @@ macro_rules! quant_trading {
     };
 }
 
-quant_trading!()
+quant_trading!();

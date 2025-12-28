@@ -4,4 +4,4 @@ macro_rules! N_SPACES {
     };
 }
 
-N_SPACES!()
+N_SPACES!();

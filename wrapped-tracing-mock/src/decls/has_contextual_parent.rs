@@ -12,4 +12,4 @@ macro_rules! has_contextual_parent {
     };
 }
 
-has_contextual_parent!()
+has_contextual_parent!();

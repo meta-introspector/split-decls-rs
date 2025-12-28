@@ -4,4 +4,4 @@ macro_rules! Uncovered {
     };
 }
 
-Uncovered!()
+Uncovered!();

@@ -4,4 +4,4 @@ macro_rules! is_locked {
     };
 }
 
-is_locked!()
+is_locked!();

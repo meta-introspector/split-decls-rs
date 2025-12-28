@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        NeighborIterDirection!();
-        EdgeType!();
         Nullable!();
+        EdgeType!();
+        NeighborIterDirection!();
         Edges!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_1004 {
     };
 }
 
-impl_1004!()
+impl_1004!();

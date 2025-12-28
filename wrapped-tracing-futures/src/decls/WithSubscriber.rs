@@ -11,4 +11,4 @@ macro_rules! WithSubscriber {
     };
 }
 
-WithSubscriber!()
+WithSubscriber!();

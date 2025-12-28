@@ -4,4 +4,4 @@ macro_rules! repo_duplicate_analysis {
     };
 }
 
-repo_duplicate_analysis!()
+repo_duplicate_analysis!();

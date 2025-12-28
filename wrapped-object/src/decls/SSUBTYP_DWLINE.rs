@@ -4,4 +4,4 @@ macro_rules! SSUBTYP_DWLINE {
     };
 }
 
-SSUBTYP_DWLINE!()
+SSUBTYP_DWLINE!();

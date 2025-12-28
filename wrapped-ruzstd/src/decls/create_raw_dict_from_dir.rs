@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Read!();
-        Write!();
         Error!();
+        Write!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! create_raw_dict_from_dir {
     };
 }
 
-create_raw_dict_from_dir!()
+create_raw_dict_from_dir!();

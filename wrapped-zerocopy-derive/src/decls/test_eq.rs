@@ -4,4 +4,4 @@ macro_rules! test_eq {
     };
 }
 
-test_eq!()
+test_eq!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Imp!();
         CowBytes!();
+        Imp!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_281 {
     };
 }
 
-impl_281!()
+impl_281!();

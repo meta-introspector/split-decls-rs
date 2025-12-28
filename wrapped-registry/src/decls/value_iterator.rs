@@ -4,4 +4,4 @@ macro_rules! value_iterator {
     };
 }
 
-value_iterator!()
+value_iterator!();

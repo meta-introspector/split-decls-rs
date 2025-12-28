@@ -4,4 +4,4 @@ macro_rules! DIST_STATES {
     };
 }
 
-DIST_STATES!()
+DIST_STATES!();

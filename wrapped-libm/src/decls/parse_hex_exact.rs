@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Status!();
         HexFloatParseError!();
         Round!();
+        Status!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! parse_hex_exact {
     };
 }
 
-parse_hex_exact!()
+parse_hex_exact!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        CompressorOxide!();
         TDEFLFlush!();
         TDEFLStatus!();
-        CompressorOxide!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! compress_to_vec_inner {
     };
 }
 
-compress_to_vec_inner!()
+compress_to_vec_inner!();

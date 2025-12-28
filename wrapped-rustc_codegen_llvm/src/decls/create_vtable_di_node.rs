@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DIB!();
         UnnamedAddr!();
+        DIB!();
         CodegenCx!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! create_vtable_di_node {
     };
 }
 
-create_vtable_di_node!()
+create_vtable_di_node!();

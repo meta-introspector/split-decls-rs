@@ -4,4 +4,4 @@ macro_rules! PositionsFolder {
     };
 }
 
-PositionsFolder!()
+PositionsFolder!();

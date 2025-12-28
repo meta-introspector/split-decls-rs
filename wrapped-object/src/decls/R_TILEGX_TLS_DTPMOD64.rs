@@ -4,4 +4,4 @@ macro_rules! R_TILEGX_TLS_DTPMOD64 {
     };
 }
 
-R_TILEGX_TLS_DTPMOD64!()
+R_TILEGX_TLS_DTPMOD64!();

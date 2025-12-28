@@ -4,4 +4,4 @@ macro_rules! RawAutoExtension {
     };
 }
 
-RawAutoExtension!()
+RawAutoExtension!();

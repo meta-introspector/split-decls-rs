@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        ResolutionScope!();
-        Match!();
-        MatchFailureReason!();
+        SsrRule!();
         ResolvedRule!();
         SsrMatches!();
-        SsrRule!();
+        UsageCache!();
+        MatchDebugInfo!();
+        MatchFailureReason!();
+        SsrError!();
+        ResolutionScope!();
+        Match!();
         MatchFinder!();
         SsrPattern!();
-        MatchDebugInfo!();
-        SsrError!();
-        UsageCache!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_188 {
     };
 }
 
-impl_188!()
+impl_188!();

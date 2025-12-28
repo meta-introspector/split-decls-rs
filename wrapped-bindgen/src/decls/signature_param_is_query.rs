@@ -13,4 +13,4 @@ macro_rules! signature_param_is_query {
     };
 }
 
-signature_param_is_query!()
+signature_param_is_query!();

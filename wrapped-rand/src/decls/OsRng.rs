@@ -4,4 +4,4 @@ macro_rules! OsRng {
     };
 }
 
-OsRng!()
+OsRng!();

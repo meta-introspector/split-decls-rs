@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        NakedFunctionTestingAttribute!();
-        Path!();
-        TestType!();
         ShouldPanic!();
+        Path!();
+        NakedFunctionTestingAttribute!();
+        TestType!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! expand_test_or_bench {
     };
 }
 
-expand_test_or_bench!()
+expand_test_or_bench!();

@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        RotateEachWord64!();
-        BSwap!();
         MultiLane!();
-        RotateEachWord32!();
-        Machine!();
         Vec4!();
+        BSwap!();
+        Machine!();
         Words4!();
+        RotateEachWord64!();
+        RotateEachWord32!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_180 {
     };
 }
 
-impl_180!()
+impl_180!();

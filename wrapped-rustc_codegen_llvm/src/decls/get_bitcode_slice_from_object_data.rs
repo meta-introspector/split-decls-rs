@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        LtoBitcodeFromRlib!();
         LlvmCodegenBackend!();
+        LtoBitcodeFromRlib!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! get_bitcode_slice_from_object_data {
     };
 }
 
-get_bitcode_slice_from_object_data!()
+get_bitcode_slice_from_object_data!();

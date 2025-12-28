@@ -14,4 +14,4 @@ macro_rules! assert_roundtrip {
     };
 }
 
-assert_roundtrip!()
+assert_roundtrip!();

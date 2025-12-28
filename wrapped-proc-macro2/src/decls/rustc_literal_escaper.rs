@@ -4,4 +4,4 @@ macro_rules! rustc_literal_escaper {
     };
 }
 
-rustc_literal_escaper!()
+rustc_literal_escaper!();

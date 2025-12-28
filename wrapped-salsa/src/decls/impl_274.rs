@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
         Zalsa!();
+        Running!();
+        EventKind!();
         Cancelled!();
         BlockedOnInner!();
-        EventKind!();
-        Running!();
-        Event!();
         WaitResult!();
+        Event!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_274 {
     };
 }
 
-impl_274!()
+impl_274!();

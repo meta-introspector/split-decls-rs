@@ -4,4 +4,4 @@ macro_rules! key_to_cmp {
     };
 }
 
-key_to_cmp!()
+key_to_cmp!();

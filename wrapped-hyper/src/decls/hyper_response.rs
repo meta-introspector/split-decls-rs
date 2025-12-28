@@ -11,4 +11,4 @@ macro_rules! hyper_response {
     };
 }
 
-hyper_response!()
+hyper_response!();

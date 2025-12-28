@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        SectionIteratorInternal!();
         ReadRef!();
+        SectionIteratorInternal!();
         File!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! SectionIterator {
     };
 }
 
-SectionIterator!()
+SectionIterator!();

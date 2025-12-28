@@ -4,4 +4,4 @@ macro_rules! R_AARCH64_ABS16 {
     };
 }
 
-R_AARCH64_ABS16!()
+R_AARCH64_ABS16!();

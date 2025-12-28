@@ -4,4 +4,4 @@ macro_rules! linked_graph {
     };
 }
 
-linked_graph!()
+linked_graph!();

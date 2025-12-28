@@ -4,4 +4,4 @@ macro_rules! CancellationToken {
     };
 }
 
-CancellationToken!()
+CancellationToken!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Tera!();
         Context!();
+        Tera!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! render_macros_in_child_templates_same_namespace {
     };
 }
 
-render_macros_in_child_templates_same_namespace!()
+render_macros_in_child_templates_same_namespace!();

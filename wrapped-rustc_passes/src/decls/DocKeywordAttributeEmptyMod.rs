@@ -4,4 +4,4 @@ macro_rules! DocKeywordAttributeEmptyMod {
     };
 }
 
-DocKeywordAttributeEmptyMod!()
+DocKeywordAttributeEmptyMod!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Reason!();
-        RustcTarget!();
         RustcMessage!();
+        RustcTarget!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! CargoMessage {
     };
 }
 
-CargoMessage!()
+CargoMessage!();

@@ -11,4 +11,4 @@ macro_rules! test_from_slice {
     };
 }
 
-test_from_slice!()
+test_from_slice!();

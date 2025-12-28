@@ -4,4 +4,4 @@ macro_rules! test_externs_tracking_hash_different_construction_order {
     };
 }
 
-test_externs_tracking_hash_different_construction_order!()
+test_externs_tracking_hash_different_construction_order!();

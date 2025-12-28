@@ -4,4 +4,4 @@ macro_rules! purchase_blocks {
     };
 }
 
-purchase_blocks!()
+purchase_blocks!();

@@ -4,4 +4,4 @@ macro_rules! DT_AARCH64_BTI_PLT {
     };
 }
 
-DT_AARCH64_BTI_PLT!()
+DT_AARCH64_BTI_PLT!();

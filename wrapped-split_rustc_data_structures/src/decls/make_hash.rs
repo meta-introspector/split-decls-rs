@@ -4,4 +4,4 @@ macro_rules! make_hash {
     };
 }
 
-make_hash!()
+make_hash!();

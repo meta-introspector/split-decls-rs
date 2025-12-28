@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Interner!();
         ElaborateSized!();
-        Binder!();
         Filter!();
         PredicateKind!();
+        Interner!();
+        Binder!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! Elaborator {
     };
 }
 
-Elaborator!()
+Elaborator!();

@@ -11,4 +11,4 @@ macro_rules! REG_EXPAND_SZ {
     };
 }
 
-REG_EXPAND_SZ!()
+REG_EXPAND_SZ!();

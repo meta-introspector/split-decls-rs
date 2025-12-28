@@ -4,4 +4,4 @@ macro_rules! DisallowCfgProcMacroExpander {
     };
 }
 
-DisallowCfgProcMacroExpander!()
+DisallowCfgProcMacroExpander!();

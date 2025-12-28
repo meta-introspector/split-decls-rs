@@ -1,38 +1,38 @@
 macro_rules! deps {
     () => {
-        XcoffSegment!();
-        XcoffComdatIterator!();
-        XcoffSymbol!();
+        Result!();
+        XcoffSegmentIterator!();
+        XcoffSection!();
         Import!();
+        Export!();
+        SectionIterator!();
+        ObjectKind!();
+        XcoffSectionIterator!();
+        XcoffSymbol!();
+        SymbolTable!();
+        Architecture!();
+        Comdat!();
+        ComdatIterator!();
+        DynamicRelocationIterator!();
+        SegmentIterator!();
+        SectionIndex!();
+        SymbolIterator!();
+        XcoffComdatIterator!();
         SymbolIndex!();
+        Symbol!();
+        FileHeader!();
+        XcoffFile!();
+        XcoffSymbolIterator!();
         XcoffComdat!();
         NoDynamicRelocationIterator!();
-        Export!();
-        FileHeader!();
-        XcoffSegmentIterator!();
-        Comdat!();
-        Object!();
-        Section!();
-        XcoffSymbolIterator!();
-        ReadRef!();
-        SectionIterator!();
-        SymbolIterator!();
-        XcoffSymbolTable!();
-        XcoffSection!();
-        Segment!();
-        XcoffSectionIterator!();
-        SectionIndex!();
-        ComdatIterator!();
-        Symbol!();
-        Architecture!();
-        SegmentIterator!();
-        DynamicRelocationIterator!();
-        ObjectKind!();
         Dynamic!();
-        XcoffFile!();
-        SymbolTable!();
-        Result!();
+        Section!();
+        Object!();
         FileFlags!();
+        Segment!();
+        ReadRef!();
+        XcoffSymbolTable!();
+        XcoffSegment!();
     };
 }
 
@@ -43,4 +43,4 @@ macro_rules! impl_780 {
     };
 }
 
-impl_780!()
+impl_780!();

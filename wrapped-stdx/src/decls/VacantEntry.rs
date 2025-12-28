@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Downcast!();
         Map!();
+        Downcast!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! VacantEntry {
     };
 }
 
-VacantEntry!()
+VacantEntry!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Idx!();
         DenseBitSet!();
         GrowableBitSet!();
-        Idx!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_15 {
     };
 }
 
-impl_15!()
+impl_15!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        SizeHint!();
         OrderingOrBool!();
+        SizeHint!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_357 {
     };
 }
 
-impl_357!()
+impl_357!();

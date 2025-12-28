@@ -4,4 +4,4 @@ macro_rules! DEFAULT_SEED {
     };
 }
 
-DEFAULT_SEED!()
+DEFAULT_SEED!();

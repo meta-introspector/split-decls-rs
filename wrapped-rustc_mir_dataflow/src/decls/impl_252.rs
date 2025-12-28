@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Map!();
         TrackElem!();
         PlaceInfo!();
         PlaceCollector!();
+        Map!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_252 {
     };
 }
 
-impl_252!()
+impl_252!();

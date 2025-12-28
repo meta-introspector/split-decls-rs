@@ -4,4 +4,4 @@ macro_rules! EMPTY_CHAR {
     };
 }
 
-EMPTY_CHAR!()
+EMPTY_CHAR!();

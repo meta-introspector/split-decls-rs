@@ -4,4 +4,4 @@ macro_rules! FfiPureParser {
     };
 }
 
-FfiPureParser!()
+FfiPureParser!();

@@ -11,4 +11,4 @@ macro_rules! find_best_match_for_name_impl {
     };
 }
 
-find_best_match_for_name_impl!()
+find_best_match_for_name_impl!();

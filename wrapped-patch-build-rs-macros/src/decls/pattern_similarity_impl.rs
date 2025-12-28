@@ -29,4 +29,4 @@ Input Patterns: {}
     };
 }
 
-pattern_similarity_impl!()
+pattern_similarity_impl!();

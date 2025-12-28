@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Locations!();
-        OutlivesConstraint!();
-        LiveLoans!();
-        LivenessValues!();
-        LocalizedNode!();
-        BorrowSet!();
         LocalizedConstraintGraph!();
+        BorrowSet!();
+        Locations!();
+        LocalizedNode!();
+        LiveLoans!();
+        OutlivesConstraint!();
         LocalizedOutlivesConstraintSet!();
+        LivenessValues!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! compute_loan_liveness {
     };
 }
 
-compute_loan_liveness!()
+compute_loan_liveness!();

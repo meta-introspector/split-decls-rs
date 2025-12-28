@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        AcceptMapping!();
-        AttributeParser!();
-        FinalizeContext!();
-        AttributeOrder!();
-        AllowedTargets!();
-        Single!();
         SingleAttributeParser!();
+        Single!();
+        AllowedTargets!();
+        FinalizeContext!();
+        AcceptMapping!();
         Stage!();
+        AttributeOrder!();
+        AttributeParser!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_246 {
     };
 }
 
-impl_246!()
+impl_246!();

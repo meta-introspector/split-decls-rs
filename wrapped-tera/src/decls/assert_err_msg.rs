@@ -4,4 +4,4 @@ macro_rules! assert_err_msg {
     };
 }
 
-assert_err_msg!()
+assert_err_msg!();

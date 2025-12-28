@@ -4,4 +4,4 @@ macro_rules! DT_MIPS_PLTGOT {
     };
 }
 
-DT_MIPS_PLTGOT!()
+DT_MIPS_PLTGOT!();

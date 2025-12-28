@@ -4,4 +4,4 @@ macro_rules! first_token {
     };
 }
 
-first_token!()
+first_token!();

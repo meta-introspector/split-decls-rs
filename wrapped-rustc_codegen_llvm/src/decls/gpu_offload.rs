@@ -4,4 +4,4 @@ macro_rules! gpu_offload {
     };
 }
 
-gpu_offload!()
+gpu_offload!();

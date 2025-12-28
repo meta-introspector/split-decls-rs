@@ -11,4 +11,4 @@ macro_rules! inclusive_start {
     };
 }
 
-inclusive_start!()
+inclusive_start!();

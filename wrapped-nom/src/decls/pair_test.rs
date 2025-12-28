@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        IResult!();
         ErrorKind!();
+        IResult!();
         Err!();
         Needed!();
         Error!();
@@ -16,4 +16,4 @@ macro_rules! pair_test {
     };
 }
 
-pair_test!()
+pair_test!();

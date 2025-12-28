@@ -4,4 +4,4 @@ macro_rules! CoercePointeeNoUserValidityAssertion {
     };
 }
 
-CoercePointeeNoUserValidityAssertion!()
+CoercePointeeNoUserValidityAssertion!();

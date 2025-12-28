@@ -13,4 +13,4 @@ macro_rules! lint_nan {
     };
 }
 
-lint_nan!()
+lint_nan!();

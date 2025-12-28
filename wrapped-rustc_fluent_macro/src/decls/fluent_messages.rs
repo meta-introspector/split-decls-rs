@@ -4,4 +4,4 @@ macro_rules! fluent_messages {
     };
 }
 
-fluent_messages!()
+fluent_messages!();

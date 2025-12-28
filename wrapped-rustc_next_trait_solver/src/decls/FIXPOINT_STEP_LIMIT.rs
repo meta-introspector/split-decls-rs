@@ -4,4 +4,4 @@ macro_rules! FIXPOINT_STEP_LIMIT {
     };
 }
 
-FIXPOINT_STEP_LIMIT!()
+FIXPOINT_STEP_LIMIT!();

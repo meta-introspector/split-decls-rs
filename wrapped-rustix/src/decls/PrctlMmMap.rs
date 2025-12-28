@@ -4,4 +4,4 @@ macro_rules! PrctlMmMap {
     };
 }
 
-PrctlMmMap!()
+PrctlMmMap!();

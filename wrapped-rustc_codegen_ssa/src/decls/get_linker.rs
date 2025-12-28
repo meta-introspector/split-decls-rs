@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        WasmLd!();
         BpfLinker!();
-        LlbcLinker!();
-        EmLinker!();
-        AixLinker!();
+        PtxLinker!();
+        GccLinker!();
         MsvcLinker!();
+        Linker!();
         L4Bender!();
         Command!();
-        GccLinker!();
-        PtxLinker!();
-        Linker!();
+        EmLinker!();
+        WasmLd!();
+        AixLinker!();
+        LlbcLinker!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! get_linker {
     };
 }
 
-get_linker!()
+get_linker!();

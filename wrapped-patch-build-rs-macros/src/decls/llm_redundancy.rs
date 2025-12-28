@@ -4,4 +4,4 @@ macro_rules! llm_redundancy {
     };
 }
 
-llm_redundancy!()
+llm_redundancy!();

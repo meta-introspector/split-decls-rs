@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         SocketAddrOpaque!();
-        SocketAddrArg!();
         SocketAddrAny!();
         SocketAddrLen!();
+        SocketAddrArg!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_630 {
     };
 }
 
-impl_630!()
+impl_630!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        ImmTy!();
         Immediate!();
         Memory!();
+        ImmTy!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_270 {
     };
 }
 
-impl_270!()
+impl_270!();

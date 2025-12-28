@@ -11,4 +11,4 @@ macro_rules! R_MICROBLAZE_TLSLD {
     };
 }
 
-R_MICROBLAZE_TLSLD!()
+R_MICROBLAZE_TLSLD!();

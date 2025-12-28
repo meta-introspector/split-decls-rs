@@ -4,4 +4,4 @@ macro_rules! LongRunningWarn {
     };
 }
 
-LongRunningWarn!()
+LongRunningWarn!();

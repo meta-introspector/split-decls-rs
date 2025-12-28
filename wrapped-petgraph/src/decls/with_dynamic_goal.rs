@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         Graph!();
-        AlgoResult!();
         Directed!();
-        Measure!();
-        EdgeRef!();
         MinScored!();
+        EdgeRef!();
+        Measure!();
+        AlgoResult!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! with_dynamic_goal {
     };
 }
 
-with_dynamic_goal!()
+with_dynamic_goal!();

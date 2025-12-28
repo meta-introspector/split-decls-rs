@@ -4,4 +4,4 @@ macro_rules! EM_NDR1 {
     };
 }
 
-EM_NDR1!()
+EM_NDR1!();

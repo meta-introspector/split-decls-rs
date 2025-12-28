@@ -4,4 +4,4 @@ macro_rules! CoroutineParser {
     };
 }
 
-CoroutineParser!()
+CoroutineParser!();

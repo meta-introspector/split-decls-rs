@@ -4,4 +4,4 @@ macro_rules! teddy {
     };
 }
 
-teddy!()
+teddy!();

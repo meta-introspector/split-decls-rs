@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Env!();
         Bin!();
         OneShot!();
         Step!();
         CommandStatus!();
         TryCmd!();
+        Env!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_4 {
     };
 }
 
-impl_4!()
+impl_4!();

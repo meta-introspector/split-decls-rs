@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        ParseError!();
-        Needed!();
-        Streaming!();
-        Input!();
         Parser!();
+        Streaming!();
         Error!();
+        ParseError!();
+        Input!();
+        Needed!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! i8 {
     };
 }
 
-i8!()
+i8!();

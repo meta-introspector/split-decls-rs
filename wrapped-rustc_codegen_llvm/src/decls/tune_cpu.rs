@@ -4,4 +4,4 @@ macro_rules! tune_cpu {
     };
 }
 
-tune_cpu!()
+tune_cpu!();

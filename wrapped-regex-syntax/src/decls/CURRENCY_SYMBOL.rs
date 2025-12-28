@@ -4,4 +4,4 @@ macro_rules! CURRENCY_SYMBOL {
     };
 }
 
-CURRENCY_SYMBOL!()
+CURRENCY_SYMBOL!();

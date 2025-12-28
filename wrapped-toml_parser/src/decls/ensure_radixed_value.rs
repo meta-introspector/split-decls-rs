@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        IntegerRadix!();
-        ErrorSink!();
-        ParseError!();
-        Raw!();
         Span!();
+        IntegerRadix!();
+        Raw!();
+        ParseError!();
+        ErrorSink!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! ensure_radixed_value {
     };
 }
 
-ensure_radixed_value!()
+ensure_radixed_value!();

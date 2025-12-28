@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        RegionInferenceContext!();
-        RegionName!();
-        MoveError!();
-        PoloniusDiagnosticsContext!();
-        PoloniusLocationTable!();
-        BorrowckInferCtxt!();
         BorrowckDiagnosticsBuffer!();
-        BorrowCheckRootCtxt!();
+        RegionName!();
         BorrowSet!();
+        PoloniusLocationTable!();
+        PoloniusDiagnosticsContext!();
+        RegionInferenceContext!();
+        BorrowCheckRootCtxt!();
         PoloniusOutput!();
+        BorrowckInferCtxt!();
+        MoveError!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! MirBorrowckCtxt {
     };
 }
 
-MirBorrowckCtxt!()
+MirBorrowckCtxt!();

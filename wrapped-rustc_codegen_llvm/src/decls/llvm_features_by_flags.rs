@@ -11,4 +11,4 @@ macro_rules! llvm_features_by_flags {
     };
 }
 
-llvm_features_by_flags!()
+llvm_features_by_flags!();

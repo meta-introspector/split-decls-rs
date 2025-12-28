@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        DeserializeError!();
         PatternID!();
-        DeserializeErrorKind!();
         StateID!();
+        DeserializeError!();
+        DeserializeErrorKind!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_805 {
     };
 }
 
-impl_805!()
+impl_805!();

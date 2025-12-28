@@ -4,4 +4,4 @@ macro_rules! simple_paths {
     };
 }
 
-simple_paths!()
+simple_paths!();

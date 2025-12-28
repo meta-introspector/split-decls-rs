@@ -4,4 +4,4 @@ macro_rules! DedupEq {
     };
 }
 
-DedupEq!()
+DedupEq!();

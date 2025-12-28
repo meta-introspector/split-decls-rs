@@ -4,4 +4,4 @@ macro_rules! project_json {
     };
 }
 
-project_json!()
+project_json!();

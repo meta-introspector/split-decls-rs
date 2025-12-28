@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        ErrParse!();
-        DummyTracker!();
         ParseResultBase!();
+        DummyTracker!();
+        ErrParse!();
         Failure!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! macro_29 {
     };
 }
 
-macro_29!()
+macro_29!();

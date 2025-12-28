@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        ErrorKind!();
-        Input!();
+        ManyMN!();
         Err!();
         Parser!();
         OutputMode!();
-        ManyMN!();
-        Error!();
         PResult!();
+        Input!();
+        ErrorKind!();
+        Error!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_239 {
     };
 }
 
-impl_239!()
+impl_239!();

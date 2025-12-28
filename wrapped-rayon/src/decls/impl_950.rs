@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        ParallelIterator!();
-        UnzipOp!();
-        UnzipB!();
-        UnindexedConsumer!();
         UnzipConsumer!();
+        UnindexedConsumer!();
+        ParallelIterator!();
+        UnzipB!();
+        UnzipOp!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_950 {
     };
 }
 
-impl_950!()
+impl_950!();

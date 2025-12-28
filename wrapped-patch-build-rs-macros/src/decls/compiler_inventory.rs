@@ -4,4 +4,4 @@ macro_rules! compiler_inventory {
     };
 }
 
-compiler_inventory!()
+compiler_inventory!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        U32!();
-        Endian!();
         Header!();
+        Endian!();
+        U32!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! HashHeader {
     };
 }
 
-HashHeader!()
+HashHeader!();

@@ -4,4 +4,4 @@ macro_rules! InferTy {
     };
 }
 
-InferTy!()
+InferTy!();

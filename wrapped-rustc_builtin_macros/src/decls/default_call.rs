@@ -4,4 +4,4 @@ macro_rules! default_call {
     };
 }
 
-default_call!()
+default_call!();

@@ -13,4 +13,4 @@ macro_rules! WorkspaceManifest {
     };
 }
 
-WorkspaceManifest!()
+WorkspaceManifest!();

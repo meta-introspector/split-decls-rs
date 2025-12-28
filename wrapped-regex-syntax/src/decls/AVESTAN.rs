@@ -4,4 +4,4 @@ macro_rules! AVESTAN {
     };
 }
 
-AVESTAN!()
+AVESTAN!();

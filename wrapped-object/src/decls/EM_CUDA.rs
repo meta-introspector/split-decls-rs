@@ -4,4 +4,4 @@ macro_rules! EM_CUDA {
     };
 }
 
-EM_CUDA!()
+EM_CUDA!();

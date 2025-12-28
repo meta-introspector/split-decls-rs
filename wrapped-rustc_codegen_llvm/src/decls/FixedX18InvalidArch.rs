@@ -11,4 +11,4 @@ macro_rules! FixedX18InvalidArch {
     };
 }
 
-FixedX18InvalidArch!()
+FixedX18InvalidArch!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         LifetimeSource!();
-        LifetimeKind!();
         LifetimeSyntax!();
+        LifetimeKind!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Lifetime {
     };
 }
 
-Lifetime!()
+Lifetime!();

@@ -4,4 +4,4 @@ macro_rules! layout_of_uncached {
     };
 }
 
-layout_of_uncached!()
+layout_of_uncached!();

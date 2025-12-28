@@ -15,4 +15,4 @@ Some multi-line comment$0
     };
 }
 
-no_completions_in_comments!()
+no_completions_in_comments!();

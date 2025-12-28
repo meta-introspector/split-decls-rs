@@ -4,4 +4,4 @@ macro_rules! RelPathBuf {
     };
 }
 
-RelPathBuf!()
+RelPathBuf!();

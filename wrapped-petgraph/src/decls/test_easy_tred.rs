@@ -11,4 +11,4 @@ macro_rules! test_easy_tred {
     };
 }
 
-test_easy_tred!()
+test_easy_tred!();

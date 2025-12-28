@@ -1,25 +1,25 @@
 macro_rules! deps {
     () => {
-        PrintAttribute!();
-        Attribute!();
-        OptimizeAttr!();
-        Path!();
-        Stability!();
-        ReprAttr!();
-        PartialConstStability!();
-        DefaultBodyStability!();
-        CoverageAttrKind!();
-        UsedBy!();
-        MirPhase!();
         Deprecation!();
+        Attribute!();
+        Stability!();
+        PrintAttribute!();
+        CoverageAttrKind!();
+        ReprAttr!();
+        ConstStability!();
         InstructionSetAttr!();
-        MacroUseArgs!();
+        PartialConstStability!();
+        Path!();
+        MirPhase!();
+        LinkEntry!();
+        DefaultBodyStability!();
+        OptimizeAttr!();
         Limit!();
-        Linkage!();
+        UsedBy!();
         InlineAttr!();
         MirDialect!();
-        LinkEntry!();
-        ConstStability!();
+        MacroUseArgs!();
+        Linkage!();
     };
 }
 
@@ -30,4 +30,4 @@ macro_rules! AttributeKind {
     };
 }
 
-AttributeKind!()
+AttributeKind!();

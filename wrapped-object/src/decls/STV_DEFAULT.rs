@@ -4,4 +4,4 @@ macro_rules! STV_DEFAULT {
     };
 }
 
-STV_DEFAULT!()
+STV_DEFAULT!();

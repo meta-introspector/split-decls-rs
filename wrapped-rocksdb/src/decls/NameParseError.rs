@@ -4,4 +4,4 @@ macro_rules! NameParseError {
     };
 }
 
-NameParseError!()
+NameParseError!();

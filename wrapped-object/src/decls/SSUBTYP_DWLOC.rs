@@ -4,4 +4,4 @@ macro_rules! SSUBTYP_DWLOC {
     };
 }
 
-SSUBTYP_DWLOC!()
+SSUBTYP_DWLOC!();

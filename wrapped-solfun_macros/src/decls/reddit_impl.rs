@@ -4,4 +4,4 @@ macro_rules! reddit_impl {
     };
 }
 
-reddit_impl!()
+reddit_impl!();

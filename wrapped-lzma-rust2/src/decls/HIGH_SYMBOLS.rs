@@ -4,4 +4,4 @@ macro_rules! HIGH_SYMBOLS {
     };
 }
 
-HIGH_SYMBOLS!()
+HIGH_SYMBOLS!();

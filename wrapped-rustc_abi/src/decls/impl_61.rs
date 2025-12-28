@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        HasDataLayout!();
         TargetDataLayout!();
+        HasDataLayout!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_61 {
     };
 }
 
-impl_61!()
+impl_61!();

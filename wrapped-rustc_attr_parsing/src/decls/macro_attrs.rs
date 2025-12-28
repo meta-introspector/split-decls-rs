@@ -4,4 +4,4 @@ macro_rules! macro_attrs {
     };
 }
 
-macro_attrs!()
+macro_attrs!();

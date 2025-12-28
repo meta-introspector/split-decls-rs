@@ -11,4 +11,4 @@ macro_rules! prctl_3args {
     };
 }
 
-prctl_3args!()
+prctl_3args!();

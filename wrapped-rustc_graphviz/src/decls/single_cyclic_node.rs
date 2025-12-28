@@ -17,4 +17,4 @@ macro_rules! single_cyclic_node {
     };
 }
 
-single_cyclic_node!()
+single_cyclic_node!();

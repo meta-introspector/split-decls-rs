@@ -4,4 +4,4 @@ macro_rules! print_passes {
     };
 }
 
-print_passes!()
+print_passes!();

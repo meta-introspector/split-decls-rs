@@ -4,4 +4,4 @@ macro_rules! DerefImplsIsEmpty {
     };
 }
 
-DerefImplsIsEmpty!()
+DerefImplsIsEmpty!();

@@ -4,4 +4,4 @@ macro_rules! is_prime {
     };
 }
 
-is_prime!()
+is_prime!();

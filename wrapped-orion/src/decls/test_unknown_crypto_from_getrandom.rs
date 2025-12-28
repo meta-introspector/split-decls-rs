@@ -11,4 +11,4 @@ macro_rules! test_unknown_crypto_from_getrandom {
     };
 }
 
-test_unknown_crypto_from_getrandom!()
+test_unknown_crypto_from_getrandom!();

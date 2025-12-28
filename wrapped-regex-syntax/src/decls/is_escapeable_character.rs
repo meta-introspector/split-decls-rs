@@ -4,4 +4,4 @@ macro_rules! is_escapeable_character {
     };
 }
 
-is_escapeable_character!()
+is_escapeable_character!();

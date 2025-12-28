@@ -11,4 +11,4 @@ macro_rules! AutoBuffer {
     };
 }
 
-AutoBuffer!()
+AutoBuffer!();

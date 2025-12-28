@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        WithOrigin!();
-        Cause!();
         Process!();
+        Cause!();
+        WithOrigin!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Origin {
     };
 }
 
-Origin!()
+Origin!();

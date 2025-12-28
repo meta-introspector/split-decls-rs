@@ -4,4 +4,4 @@ macro_rules! SHT_LOOS {
     };
 }
 
-SHT_LOOS!()
+SHT_LOOS!();

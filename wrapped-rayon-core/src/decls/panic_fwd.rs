@@ -11,4 +11,4 @@ macro_rules! panic_fwd {
     };
 }
 
-panic_fwd!()
+panic_fwd!();

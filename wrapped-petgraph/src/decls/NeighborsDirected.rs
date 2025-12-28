@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        CompactDirection!();
-        EdgeType!();
         Direction!();
+        EdgeType!();
+        CompactDirection!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! NeighborsDirected {
     };
 }
 
-NeighborsDirected!()
+NeighborsDirected!();

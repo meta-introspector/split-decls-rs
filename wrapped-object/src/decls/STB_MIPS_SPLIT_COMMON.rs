@@ -4,4 +4,4 @@ macro_rules! STB_MIPS_SPLIT_COMMON {
     };
 }
 
-STB_MIPS_SPLIT_COMMON!()
+STB_MIPS_SPLIT_COMMON!();

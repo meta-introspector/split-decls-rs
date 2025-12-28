@@ -4,4 +4,4 @@ macro_rules! N_INDR {
     };
 }
 
-N_INDR!()
+N_INDR!();

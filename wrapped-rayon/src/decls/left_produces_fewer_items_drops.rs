@@ -11,4 +11,4 @@ macro_rules! left_produces_fewer_items_drops {
     };
 }
 
-left_produces_fewer_items_drops!()
+left_produces_fewer_items_drops!();

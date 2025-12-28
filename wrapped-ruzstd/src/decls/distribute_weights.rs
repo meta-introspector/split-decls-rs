@@ -4,4 +4,4 @@ macro_rules! distribute_weights {
     };
 }
 
-distribute_weights!()
+distribute_weights!();

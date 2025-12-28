@@ -4,4 +4,4 @@ macro_rules! DT_MIPS_INTERFACE {
     };
 }
 
-DT_MIPS_INTERFACE!()
+DT_MIPS_INTERFACE!();

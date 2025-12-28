@@ -4,4 +4,4 @@ macro_rules! C_GTLS {
     };
 }
 
-C_GTLS!()
+C_GTLS!();

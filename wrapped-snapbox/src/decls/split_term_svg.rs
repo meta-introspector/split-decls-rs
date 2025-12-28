@@ -4,4 +4,4 @@ macro_rules! split_term_svg {
     };
 }
 
-split_term_svg!()
+split_term_svg!();

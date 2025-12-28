@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        CheckExplicitRegionMentionAndCollectGenerics!();
-        DeferredOpaqueTypeError!();
         BorrowData!();
+        LifetimeMismatchOpaqueParam!();
+        DeferredOpaqueTypeError!();
         FindOpaqueRegion!();
         MirBorrowckCtxt!();
-        LifetimeMismatchOpaqueParam!();
+        CheckExplicitRegionMentionAndCollectGenerics!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_149 {
     };
 }
 
-impl_149!()
+impl_149!();

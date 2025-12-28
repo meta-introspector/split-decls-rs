@@ -4,4 +4,4 @@ macro_rules! mocked {
     };
 }
 
-mocked!()
+mocked!();

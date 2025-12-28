@@ -4,4 +4,4 @@ macro_rules! LanguageItemCollector {
     };
 }
 
-LanguageItemCollector!()
+LanguageItemCollector!();

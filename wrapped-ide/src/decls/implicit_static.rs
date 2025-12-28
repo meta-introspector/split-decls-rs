@@ -4,4 +4,4 @@ macro_rules! implicit_static {
     };
 }
 
-implicit_static!()
+implicit_static!();

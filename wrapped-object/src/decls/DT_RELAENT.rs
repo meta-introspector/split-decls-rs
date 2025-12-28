@@ -11,4 +11,4 @@ macro_rules! DT_RELAENT {
     };
 }
 
-DT_RELAENT!()
+DT_RELAENT!();

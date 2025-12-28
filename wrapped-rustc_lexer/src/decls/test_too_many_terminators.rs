@@ -4,4 +4,4 @@ macro_rules! test_too_many_terminators {
     };
 }
 
-test_too_many_terminators!()
+test_too_many_terminators!();

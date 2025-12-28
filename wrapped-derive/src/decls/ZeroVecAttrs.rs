@@ -4,4 +4,4 @@ macro_rules! ZeroVecAttrs {
     };
 }
 
-ZeroVecAttrs!()
+ZeroVecAttrs!();

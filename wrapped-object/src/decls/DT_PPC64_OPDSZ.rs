@@ -4,4 +4,4 @@ macro_rules! DT_PPC64_OPDSZ {
     };
 }
 
-DT_PPC64_OPDSZ!()
+DT_PPC64_OPDSZ!();

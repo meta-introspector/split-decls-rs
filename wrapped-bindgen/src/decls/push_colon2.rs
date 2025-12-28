@@ -11,4 +11,4 @@ macro_rules! push_colon2 {
     };
 }
 
-push_colon2!()
+push_colon2!();

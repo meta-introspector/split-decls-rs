@@ -4,4 +4,4 @@ macro_rules! IMAGE_SCN_TYPE_NO_PAD {
     };
 }
 
-IMAGE_SCN_TYPE_NO_PAD!()
+IMAGE_SCN_TYPE_NO_PAD!();

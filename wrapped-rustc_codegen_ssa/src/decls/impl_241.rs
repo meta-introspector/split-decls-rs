@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        SharedEmitterMessage!();
         SharedEmitterMain!();
         SharedEmitter!();
-        SharedEmitterMessage!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_241 {
     };
 }
 
-impl_241!()
+impl_241!();

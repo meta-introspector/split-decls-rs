@@ -4,4 +4,4 @@ macro_rules! IMAGE_REL_I386_SECREL7 {
     };
 }
 
-IMAGE_REL_I386_SECREL7!()
+IMAGE_REL_I386_SECREL7!();

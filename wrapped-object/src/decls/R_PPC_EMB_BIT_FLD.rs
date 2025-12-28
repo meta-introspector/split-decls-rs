@@ -4,4 +4,4 @@ macro_rules! R_PPC_EMB_BIT_FLD {
     };
 }
 
-R_PPC_EMB_BIT_FLD!()
+R_PPC_EMB_BIT_FLD!();

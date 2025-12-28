@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        ExtendedHasher!();
-        SipHasher128Hash!();
         SipHasher128!();
+        SipHasher128Hash!();
+        ExtendedHasher!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_21 {
     };
 }
 
-impl_21!()
+impl_21!();

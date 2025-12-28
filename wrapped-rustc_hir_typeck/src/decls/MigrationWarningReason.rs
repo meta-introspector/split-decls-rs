@@ -4,4 +4,4 @@ macro_rules! MigrationWarningReason {
     };
 }
 
-MigrationWarningReason!()
+MigrationWarningReason!();

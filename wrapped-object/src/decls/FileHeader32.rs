@@ -12,4 +12,4 @@ macro_rules! FileHeader32 {
     };
 }
 
-FileHeader32!()
+FileHeader32!();

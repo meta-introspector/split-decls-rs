@@ -4,4 +4,4 @@ macro_rules! PR_SET_VMA_ANON_NAME {
     };
 }
 
-PR_SET_VMA_ANON_NAME!()
+PR_SET_VMA_ANON_NAME!();

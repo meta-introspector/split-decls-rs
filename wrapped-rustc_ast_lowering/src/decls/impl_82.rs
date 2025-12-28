@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        ImplTraitContext!();
-        TupleStructWithDefault!();
-        ParamMode!();
         FnDeclKind!();
-        UnionWithDefault!();
-        RelaxedBoundForbiddenReason!();
+        ParamMode!();
         LoweringContext!();
-        InvalidAbi!();
-        ImplTraitPosition!();
-        InvalidAbiSuggestion!();
         RelaxedBoundPolicy!();
+        RelaxedBoundForbiddenReason!();
+        TupleStructWithDefault!();
+        UnionWithDefault!();
+        ImplTraitContext!();
+        ImplTraitPosition!();
+        InvalidAbi!();
+        InvalidAbiSuggestion!();
     };
 }
 
@@ -24,4 +24,4 @@ macro_rules! impl_82 {
     };
 }
 
-impl_82!()
+impl_82!();

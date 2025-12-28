@@ -4,4 +4,4 @@ macro_rules! mockable_item {
     };
 }
 
-mockable_item!()
+mockable_item!();

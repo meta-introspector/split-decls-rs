@@ -11,4 +11,4 @@ macro_rules! pretend_used {
     };
 }
 
-pretend_used!()
+pretend_used!();

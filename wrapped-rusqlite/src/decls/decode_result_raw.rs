@@ -11,4 +11,4 @@ macro_rules! decode_result_raw {
     };
 }
 
-decode_result_raw!()
+decode_result_raw!();

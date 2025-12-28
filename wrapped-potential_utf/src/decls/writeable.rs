@@ -4,4 +4,4 @@ macro_rules! writeable {
     };
 }
 
-writeable!()
+writeable!();

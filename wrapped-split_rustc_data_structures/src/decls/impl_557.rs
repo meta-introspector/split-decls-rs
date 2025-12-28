@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Fingerprint!();
         Svh!();
+        Fingerprint!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_557 {
     };
 }
 
-impl_557!()
+impl_557!();

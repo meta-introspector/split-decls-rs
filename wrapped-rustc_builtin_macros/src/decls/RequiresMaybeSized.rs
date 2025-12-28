@@ -4,4 +4,4 @@ macro_rules! RequiresMaybeSized {
     };
 }
 
-RequiresMaybeSized!()
+RequiresMaybeSized!();

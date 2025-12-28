@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        ModeType!();
         SequencesHeader!();
-        FSEScratch!();
+        ModeType!();
         DecodeSequenceError!();
+        FSEScratch!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! maybe_update_fse_tables {
     };
 }
 
-maybe_update_fse_tables!()
+maybe_update_fse_tables!();

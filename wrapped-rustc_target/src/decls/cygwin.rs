@@ -4,4 +4,4 @@ macro_rules! cygwin {
     };
 }
 
-cygwin!()
+cygwin!();

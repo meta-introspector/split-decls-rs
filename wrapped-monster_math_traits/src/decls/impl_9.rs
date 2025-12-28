@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         MonsterConformityChecker!();
-        DummyMonsterConformityChecker!();
-        BottPeriodicityTrait!();
-        Declaration!();
         MonsterConstants!();
+        DummyMonsterConformityChecker!();
+        Declaration!();
+        BottPeriodicityTrait!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_9 {
     };
 }
 
-impl_9!()
+impl_9!();

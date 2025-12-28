@@ -4,4 +4,4 @@ macro_rules! ignore_ident {
     };
 }
 
-ignore_ident!()
+ignore_ident!();

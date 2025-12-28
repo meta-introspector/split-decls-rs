@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         GenericBuilder!();
-        SCx!();
         TypeKind!();
         GenericCx!();
+        SCx!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_160 {
     };
 }
 
-impl_160!()
+impl_160!();

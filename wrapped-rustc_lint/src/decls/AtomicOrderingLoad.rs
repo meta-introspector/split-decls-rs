@@ -4,4 +4,4 @@ macro_rules! AtomicOrderingLoad {
     };
 }
 
-AtomicOrderingLoad!()
+AtomicOrderingLoad!();

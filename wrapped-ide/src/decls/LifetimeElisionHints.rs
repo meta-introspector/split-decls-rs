@@ -4,4 +4,4 @@ macro_rules! LifetimeElisionHints {
     };
 }
 
-LifetimeElisionHints!()
+LifetimeElisionHints!();

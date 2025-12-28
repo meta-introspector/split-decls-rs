@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        Visitor!();
-        Frame!();
-        Capture!();
-        Concat!();
-        Result!();
-        Alternation!();
-        Repetition!();
-        HeapVisitor!();
-        Hir!();
         HirKind!();
+        Capture!();
+        Hir!();
+        Result!();
+        Frame!();
+        Repetition!();
+        Alternation!();
+        HeapVisitor!();
+        Visitor!();
+        Concat!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_209 {
     };
 }
 
-impl_209!()
+impl_209!();

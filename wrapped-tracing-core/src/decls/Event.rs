@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ValueSet!();
         Parent!();
+        ValueSet!();
         Metadata!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! Event {
     };
 }
 
-Event!()
+Event!();

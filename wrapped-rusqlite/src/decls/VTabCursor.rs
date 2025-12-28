@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Context!();
-        Filters!();
         Result!();
+        Filters!();
+        Context!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! VTabCursor {
     };
 }
 
-VTabCursor!()
+VTabCursor!();

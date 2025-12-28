@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
         InterruptHandle!();
-        InnerConnection!();
-        Result!();
-        Error!();
-        Connection!();
-        RawStatement!();
-        TransactionState!();
         Statement!();
+        Error!();
+        InnerConnection!();
+        Connection!();
+        Result!();
+        RawStatement!();
         Name!();
+        TransactionState!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_146 {
     };
 }
 
-impl_146!()
+impl_146!();

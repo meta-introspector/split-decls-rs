@@ -4,4 +4,4 @@ macro_rules! btree_map {
     };
 }
 
-btree_map!()
+btree_map!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        Filter!();
         Result!();
         Context!();
         Tera!();
-        Filter!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! safe_filter_works {
     };
 }
 
-safe_filter_works!()
+safe_filter_works!();

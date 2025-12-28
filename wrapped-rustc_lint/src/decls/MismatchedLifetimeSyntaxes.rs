@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        MismatchedLifetimeSyntaxesSuggestion!();
         LifetimeSyntaxCategories!();
+        MismatchedLifetimeSyntaxesSuggestion!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! MismatchedLifetimeSyntaxes {
     };
 }
 
-MismatchedLifetimeSyntaxes!()
+MismatchedLifetimeSyntaxes!();

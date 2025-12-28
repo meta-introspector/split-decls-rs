@@ -4,4 +4,4 @@ macro_rules! standard_library_imports {
     };
 }
 
-standard_library_imports!()
+standard_library_imports!();

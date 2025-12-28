@@ -4,4 +4,4 @@ macro_rules! HINSTANCE {
     };
 }
 
-HINSTANCE!()
+HINSTANCE!();

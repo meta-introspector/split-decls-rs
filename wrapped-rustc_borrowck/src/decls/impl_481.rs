@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         RegionCtxt!();
-        Normal!();
         Locations!();
         TypeChecker!();
+        Normal!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_481 {
     };
 }
 
-impl_481!()
+impl_481!();

@@ -11,4 +11,4 @@ macro_rules! from_field {
     };
 }
 
-from_field!()
+from_field!();

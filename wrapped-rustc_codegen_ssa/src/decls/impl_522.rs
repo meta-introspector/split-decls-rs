@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        FunctionCx!();
-        LocalRef!();
         BuilderMethods!();
+        LocalRef!();
+        FunctionCx!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_522 {
     };
 }
 
-impl_522!()
+impl_522!();

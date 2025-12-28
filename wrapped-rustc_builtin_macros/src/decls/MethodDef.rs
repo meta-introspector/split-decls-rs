@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        FieldlessVariantsStrategy!();
-        CombineSubstructureFunc!();
         Ty!();
+        FieldlessVariantsStrategy!();
         Bounds!();
+        CombineSubstructureFunc!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! MethodDef {
     };
 }
 
-MethodDef!()
+MethodDef!();

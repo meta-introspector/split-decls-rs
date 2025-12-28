@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        LateContext!();
         LifetimeInfoCollector!();
+        LateContext!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! check_fn_like {
     };
 }
 
-check_fn_like!()
+check_fn_like!();

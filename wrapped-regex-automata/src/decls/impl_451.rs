@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Match!();
-        Input!();
-        Visited!();
-        Cache!();
-        Frame!();
         Captures!();
-        MatchError!();
+        Visited!();
         BoundedBacktracker!();
+        Match!();
+        MatchError!();
+        Frame!();
+        Input!();
+        Cache!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_451 {
     };
 }
 
-impl_451!()
+impl_451!();

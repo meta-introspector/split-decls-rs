@@ -13,4 +13,4 @@ macro_rules! add_rpath_args {
     };
 }
 
-add_rpath_args!()
+add_rpath_args!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        ResultsCursor!();
-        ResultsVisitor!();
         Analysis!();
+        ResultsVisitor!();
         EffectIndex!();
+        ResultsCursor!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! Direction {
     };
 }
 
-Direction!()
+Direction!();

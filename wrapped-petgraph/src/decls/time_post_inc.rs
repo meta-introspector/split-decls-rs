@@ -11,4 +11,4 @@ macro_rules! time_post_inc {
     };
 }
 
-time_post_inc!()
+time_post_inc!();

@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Interner!();
         Binder!();
-        Ty!();
-        DefId!();
-        ExistentialProjection!();
         ProjectionPredicate!();
+        Interner!();
+        ExistentialProjection!();
+        DefId!();
+        Ty!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_370 {
     };
 }
 
-impl_370!()
+impl_370!();

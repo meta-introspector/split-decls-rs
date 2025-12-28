@@ -4,4 +4,4 @@ macro_rules! FindSubstring {
     };
 }
 
-FindSubstring!()
+FindSubstring!();

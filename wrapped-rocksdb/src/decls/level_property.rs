@@ -11,4 +11,4 @@ macro_rules! level_property {
     };
 }
 
-level_property!()
+level_property!();

@@ -4,4 +4,4 @@ macro_rules! edit_distance {
     };
 }
 
-edit_distance!()
+edit_distance!();

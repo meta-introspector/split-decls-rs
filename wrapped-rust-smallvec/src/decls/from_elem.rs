@@ -11,4 +11,4 @@ macro_rules! from_elem {
     };
 }
 
-from_elem!()
+from_elem!();

@@ -4,4 +4,4 @@ macro_rules! MAX_BL_BITS {
     };
 }
 
-MAX_BL_BITS!()
+MAX_BL_BITS!();

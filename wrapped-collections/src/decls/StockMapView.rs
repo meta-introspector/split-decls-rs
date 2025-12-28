@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        IKeyValuePair!();
         IMapView!();
         IIterable!();
-        IKeyValuePair!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! StockMapView {
     };
 }
 
-StockMapView!()
+StockMapView!();

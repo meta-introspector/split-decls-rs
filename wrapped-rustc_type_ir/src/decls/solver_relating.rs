@@ -4,4 +4,4 @@ macro_rules! solver_relating {
     };
 }
 
-solver_relating!()
+solver_relating!();

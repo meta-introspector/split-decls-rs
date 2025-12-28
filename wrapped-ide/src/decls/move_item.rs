@@ -4,4 +4,4 @@ macro_rules! move_item {
     };
 }
 
-move_item!()
+move_item!();

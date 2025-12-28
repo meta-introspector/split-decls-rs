@@ -4,4 +4,4 @@ macro_rules! P_S5 {
     };
 }
 
-P_S5!()
+P_S5!();

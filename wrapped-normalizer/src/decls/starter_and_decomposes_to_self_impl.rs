@@ -4,4 +4,4 @@ macro_rules! starter_and_decomposes_to_self_impl {
     };
 }
 
-starter_and_decomposes_to_self_impl!()
+starter_and_decomposes_to_self_impl!();

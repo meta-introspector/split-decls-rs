@@ -11,4 +11,4 @@ macro_rules! impl_d_float {
     };
 }
 
-impl_d_float!()
+impl_d_float!();

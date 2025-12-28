@@ -11,4 +11,4 @@ macro_rules! SYMINFO_BT_SELF {
     };
 }
 
-SYMINFO_BT_SELF!()
+SYMINFO_BT_SELF!();

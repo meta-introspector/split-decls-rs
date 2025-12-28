@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        Attributes!();
         Record!();
-        Current!();
-        Metadata!();
-        Dispatch!();
         LevelFilter!();
+        Current!();
+        Dispatch!();
         Visit!();
         Event!();
         WeakDispatch!();
+        Metadata!();
+        Attributes!();
         Interest!();
         Id!();
     };
@@ -21,4 +21,4 @@ macro_rules! Subscriber {
     };
 }
 
-Subscriber!()
+Subscriber!();

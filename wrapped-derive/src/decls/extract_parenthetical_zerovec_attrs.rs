@@ -11,4 +11,4 @@ macro_rules! extract_parenthetical_zerovec_attrs {
     };
 }
 
-extract_parenthetical_zerovec_attrs!()
+extract_parenthetical_zerovec_attrs!();

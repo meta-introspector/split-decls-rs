@@ -4,4 +4,4 @@ macro_rules! MAX_WBITS {
     };
 }
 
-MAX_WBITS!()
+MAX_WBITS!();

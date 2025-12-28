@@ -11,4 +11,4 @@ macro_rules! no_valid_digits {
     };
 }
 
-no_valid_digits!()
+no_valid_digits!();

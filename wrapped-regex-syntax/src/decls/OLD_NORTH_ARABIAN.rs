@@ -4,4 +4,4 @@ macro_rules! OLD_NORTH_ARABIAN {
     };
 }
 
-OLD_NORTH_ARABIAN!()
+OLD_NORTH_ARABIAN!();

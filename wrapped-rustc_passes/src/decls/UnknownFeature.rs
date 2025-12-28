@@ -4,4 +4,4 @@ macro_rules! UnknownFeature {
     };
 }
 
-UnknownFeature!()
+UnknownFeature!();

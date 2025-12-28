@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        EnvSnapshot!();
         ProcMacroSrv!();
+        EnvSnapshot!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! list {
     };
 }
 
-list!()
+list!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Winsize!();
         Result!();
+        Winsize!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! tcgetwinsize {
     };
 }
 
-tcgetwinsize!()
+tcgetwinsize!();

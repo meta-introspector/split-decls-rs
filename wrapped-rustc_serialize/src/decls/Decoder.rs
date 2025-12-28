@@ -4,4 +4,4 @@ macro_rules! Decoder {
     };
 }
 
-Decoder!()
+Decoder!();

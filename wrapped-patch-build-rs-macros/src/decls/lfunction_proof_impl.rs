@@ -43,4 +43,4 @@ theorem rustc_lfunction_decomposition (R : RustcRing) :
     };
 }
 
-lfunction_proof_impl!()
+lfunction_proof_impl!();

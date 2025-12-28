@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        NodeRef!();
         NodeReferences!();
+        NodeRef!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! macro_85 {
     };
 }
 
-macro_85!()
+macro_85!();

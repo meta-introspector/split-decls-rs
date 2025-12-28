@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DisplayValue!();
         Either!();
+        DisplayValue!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Kind {
     };
 }
 
-Kind!()
+Kind!();

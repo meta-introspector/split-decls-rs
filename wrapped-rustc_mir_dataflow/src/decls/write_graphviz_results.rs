@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         Formatter!();
-        OutputStyle!();
-        Results!();
-        Analysis!();
         RustcMirAttrs!();
         DebugWithContext!();
+        Analysis!();
+        OutputStyle!();
+        Results!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! write_graphviz_results {
     };
 }
 
-write_graphviz_results!()
+write_graphviz_results!();

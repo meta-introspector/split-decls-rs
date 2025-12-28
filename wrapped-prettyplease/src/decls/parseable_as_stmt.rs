@@ -4,4 +4,4 @@ macro_rules! parseable_as_stmt {
     };
 }
 
-parseable_as_stmt!()
+parseable_as_stmt!();

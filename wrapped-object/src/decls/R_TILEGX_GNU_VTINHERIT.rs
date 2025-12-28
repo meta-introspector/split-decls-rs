@@ -4,4 +4,4 @@ macro_rules! R_TILEGX_GNU_VTINHERIT {
     };
 }
 
-R_TILEGX_GNU_VTINHERIT!()
+R_TILEGX_GNU_VTINHERIT!();

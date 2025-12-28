@@ -11,4 +11,4 @@ macro_rules! visit_fn_use {
     };
 }
 
-visit_fn_use!()
+visit_fn_use!();

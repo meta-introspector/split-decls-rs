@@ -4,4 +4,4 @@ macro_rules! has_test_related_attribute {
     };
 }
 
-has_test_related_attribute!()
+has_test_related_attribute!();

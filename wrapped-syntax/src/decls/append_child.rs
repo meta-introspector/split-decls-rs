@@ -13,4 +13,4 @@ macro_rules! append_child {
     };
 }
 
-append_child!()
+append_child!();

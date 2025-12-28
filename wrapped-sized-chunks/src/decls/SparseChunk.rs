@@ -4,4 +4,4 @@ macro_rules! SparseChunk {
     };
 }
 
-SparseChunk!()
+SparseChunk!();

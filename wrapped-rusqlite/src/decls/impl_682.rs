@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Result!();
-        SmallCString!();
         Named!();
+        SmallCString!();
+        Result!();
         Name!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_682 {
     };
 }
 
-impl_682!()
+impl_682!();

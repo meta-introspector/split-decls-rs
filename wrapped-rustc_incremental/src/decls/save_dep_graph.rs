@@ -11,4 +11,4 @@ macro_rules! save_dep_graph {
     };
 }
 
-save_dep_graph!()
+save_dep_graph!();

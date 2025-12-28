@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        U32!();
         U64!();
         BigEndian!();
+        U32!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! FatArch64 {
     };
 }
 
-FatArch64!()
+FatArch64!();

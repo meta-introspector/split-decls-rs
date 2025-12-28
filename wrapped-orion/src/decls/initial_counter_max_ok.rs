@@ -11,4 +11,4 @@ macro_rules! initial_counter_max_ok {
     };
 }
 
-initial_counter_max_ok!()
+initial_counter_max_ok!();

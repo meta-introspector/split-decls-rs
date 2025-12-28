@@ -4,4 +4,4 @@ macro_rules! mount_unmount {
     };
 }
 
-mount_unmount!()
+mount_unmount!();

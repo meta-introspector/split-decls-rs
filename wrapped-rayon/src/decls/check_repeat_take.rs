@@ -4,4 +4,4 @@ macro_rules! check_repeat_take {
     };
 }
 
-check_repeat_take!()
+check_repeat_take!();

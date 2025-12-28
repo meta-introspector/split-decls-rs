@@ -4,4 +4,4 @@ macro_rules! SerializableString {
     };
 }
 
-SerializableString!()
+SerializableString!();

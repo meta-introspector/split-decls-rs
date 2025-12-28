@@ -4,4 +4,4 @@ macro_rules! IMAGE_SYM_CLASS_ENUM_TAG {
     };
 }
 
-IMAGE_SYM_CLASS_ENUM_TAG!()
+IMAGE_SYM_CLASS_ENUM_TAG!();

@@ -4,4 +4,4 @@ macro_rules! FoldFolder {
     };
 }
 
-FoldFolder!()
+FoldFolder!();

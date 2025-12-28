@@ -4,4 +4,4 @@ macro_rules! ReferencedStatementsVisitor {
     };
 }
 
-ReferencedStatementsVisitor!()
+ReferencedStatementsVisitor!();

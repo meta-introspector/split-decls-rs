@@ -11,4 +11,4 @@ macro_rules! json_schema {
     };
 }
 
-json_schema!()
+json_schema!();

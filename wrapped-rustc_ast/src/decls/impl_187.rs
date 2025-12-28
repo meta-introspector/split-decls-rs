@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        UseTree!();
         UseTreeKind!();
+        UseTree!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_187 {
     };
 }
 
-impl_187!()
+impl_187!();

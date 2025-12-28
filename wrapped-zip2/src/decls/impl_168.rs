@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Zip64CDELocatorBlock!();
         Zip64CentralDirectoryEndLocator!();
         ZipResult!();
-        Zip64CDELocatorBlock!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_168 {
     };
 }
 
-impl_168!()
+impl_168!();

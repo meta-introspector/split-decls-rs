@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ThorinErrorWrapper!();
         Diagnostic!();
+        ThorinErrorWrapper!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_369 {
     };
 }
 
-impl_369!()
+impl_369!();

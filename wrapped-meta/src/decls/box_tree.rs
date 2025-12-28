@@ -4,4 +4,4 @@ macro_rules! box_tree {
     };
 }
 
-box_tree!()
+box_tree!();

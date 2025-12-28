@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Builder!();
         PathCompletionCtx!();
         RenderContext!();
-        Builder!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! render_path_resolution {
     };
 }
 
-render_path_resolution!()
+render_path_resolution!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        What!();
-        Step!();
-        Throughput!();
         Unit!();
+        Step!();
+        What!();
+        Throughput!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! UnitDisplay {
     };
 }
 
-UnitDisplay!()
+UnitDisplay!();

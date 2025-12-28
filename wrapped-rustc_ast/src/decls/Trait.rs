@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        Walkable!();
-        Const!();
         GenericBounds!();
-        Generics!();
-        Safety!();
+        Walkable!();
         BoundKind!();
+        Safety!();
+        Const!();
+        Generics!();
         IsAuto!();
-        AssocItem!();
         AssocCtxt!();
+        AssocItem!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! Trait {
     };
 }
 
-Trait!()
+Trait!();

@@ -4,4 +4,4 @@ macro_rules! LC_ID_DYLINKER {
     };
 }
 
-LC_ID_DYLINKER!()
+LC_ID_DYLINKER!();

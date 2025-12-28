@@ -4,4 +4,4 @@ macro_rules! predecessor_sets_to_idx_vecs {
     };
 }
 
-predecessor_sets_to_idx_vecs!()
+predecessor_sets_to_idx_vecs!();

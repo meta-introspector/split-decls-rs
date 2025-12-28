@@ -4,4 +4,4 @@ macro_rules! perl_space {
     };
 }
 
-perl_space!()
+perl_space!();

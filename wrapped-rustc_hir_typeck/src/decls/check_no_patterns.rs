@@ -11,4 +11,4 @@ macro_rules! check_no_patterns {
     };
 }
 
-check_no_patterns!()
+check_no_patterns!();

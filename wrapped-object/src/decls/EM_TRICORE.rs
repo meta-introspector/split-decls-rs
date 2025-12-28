@@ -4,4 +4,4 @@ macro_rules! EM_TRICORE {
     };
 }
 
-EM_TRICORE!()
+EM_TRICORE!();

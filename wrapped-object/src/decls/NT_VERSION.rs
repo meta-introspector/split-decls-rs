@@ -11,4 +11,4 @@ macro_rules! NT_VERSION {
     };
 }
 
-NT_VERSION!()
+NT_VERSION!();

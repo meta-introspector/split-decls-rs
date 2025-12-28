@@ -4,4 +4,4 @@ macro_rules! R_CRIS_GLOB_DAT {
     };
 }
 
-R_CRIS_GLOB_DAT!()
+R_CRIS_GLOB_DAT!();

@@ -4,4 +4,4 @@ macro_rules! assists {
     };
 }
 
-assists!()
+assists!();

@@ -4,4 +4,4 @@ macro_rules! Z_TREES {
     };
 }
 
-Z_TREES!()
+Z_TREES!();

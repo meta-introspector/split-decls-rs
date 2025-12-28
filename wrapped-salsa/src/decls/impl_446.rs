@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        Ingredient!();
-        Durability!();
+        IngredientIndex!();
         Runtime!();
         Event!();
+        Ingredient!();
+        Zalsa!();
         Views!();
         Jar!();
-        IngredientIndex!();
-        Id!();
         ErasedJar!();
+        Id!();
         Revision!();
-        Zalsa!();
+        Durability!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_446 {
     };
 }
 
-impl_446!()
+impl_446!();

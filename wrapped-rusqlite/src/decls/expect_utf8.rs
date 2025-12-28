@@ -4,4 +4,4 @@ macro_rules! expect_utf8 {
     };
 }
 
-expect_utf8!()
+expect_utf8!();

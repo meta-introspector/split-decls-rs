@@ -4,4 +4,4 @@ macro_rules! inherit_sig_for_delegation_item {
     };
 }
 
-inherit_sig_for_delegation_item!()
+inherit_sig_for_delegation_item!();

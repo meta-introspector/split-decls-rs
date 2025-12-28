@@ -12,4 +12,4 @@ macro_rules! apply_to_callsite {
     };
 }
 
-apply_to_callsite!()
+apply_to_callsite!();

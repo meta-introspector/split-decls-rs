@@ -11,4 +11,4 @@ macro_rules! compute_pane_bounds {
     };
 }
 
-compute_pane_bounds!()
+compute_pane_bounds!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         NFA!();
-        DFA!();
         StateID!();
-        OwnedDFA!();
+        DFA!();
         StateSet!();
+        OwnedDFA!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! Minimizer {
     };
 }
 
-Minimizer!()
+Minimizer!();

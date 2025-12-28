@@ -4,4 +4,4 @@ macro_rules! K64X2 {
     };
 }
 
-K64X2!()
+K64X2!();

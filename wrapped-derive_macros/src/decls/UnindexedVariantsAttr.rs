@@ -4,4 +4,4 @@ macro_rules! UnindexedVariantsAttr {
     };
 }
 
-UnindexedVariantsAttr!()
+UnindexedVariantsAttr!();

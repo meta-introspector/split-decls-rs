@@ -4,4 +4,4 @@ macro_rules! InvalidUuid {
     };
 }
 
-InvalidUuid!()
+InvalidUuid!();

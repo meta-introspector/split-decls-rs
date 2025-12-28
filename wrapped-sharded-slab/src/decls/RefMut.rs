@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Config!();
-        Shard!();
+        DefaultConfig!();
         InitGuard!();
         Clear!();
-        DefaultConfig!();
+        Config!();
+        Shard!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! RefMut {
     };
 }
 
-RefMut!()
+RefMut!();

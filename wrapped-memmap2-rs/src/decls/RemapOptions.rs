@@ -4,4 +4,4 @@ macro_rules! RemapOptions {
     };
 }
 
-RemapOptions!()
+RemapOptions!();

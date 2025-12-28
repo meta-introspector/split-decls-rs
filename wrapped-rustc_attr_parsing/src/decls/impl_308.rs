@@ -1,17 +1,17 @@
 macro_rules! deps {
     () => {
+        MetaItemParser!();
+        InvalidMetaItemRemoveNegSugg!();
+        NameValueParser!();
+        MetaItemOrLitParser!();
+        MetaItemListParser!();
+        InvalidMetaItemQuoteIdentSugg!();
         ShouldEmit!();
+        PathParser!();
+        ArgParser!();
+        MetaItemListParserContext!();
         SuffixedLiteralInAttribute!();
         InvalidMetaItem!();
-        MetaItemListParserContext!();
-        MetaItemListParser!();
-        PathParser!();
-        InvalidMetaItemRemoveNegSugg!();
-        ArgParser!();
-        MetaItemOrLitParser!();
-        InvalidMetaItemQuoteIdentSugg!();
-        NameValueParser!();
-        MetaItemParser!();
     };
 }
 
@@ -22,4 +22,4 @@ macro_rules! impl_308 {
     };
 }
 
-impl_308!()
+impl_308!();

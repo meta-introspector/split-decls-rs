@@ -4,4 +4,4 @@ macro_rules! observe_item {
     };
 }
 
-observe_item!()
+observe_item!();

@@ -11,4 +11,4 @@ macro_rules! text_to_bytes_render {
     };
 }
 
-text_to_bytes_render!()
+text_to_bytes_render!();

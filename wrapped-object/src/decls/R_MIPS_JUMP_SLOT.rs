@@ -4,4 +4,4 @@ macro_rules! R_MIPS_JUMP_SLOT {
     };
 }
 
-R_MIPS_JUMP_SLOT!()
+R_MIPS_JUMP_SLOT!();

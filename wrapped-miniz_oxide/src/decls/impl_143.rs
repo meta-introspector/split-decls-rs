@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        HuffmanTable!();
         DecompressorOxide!();
+        HuffmanTable!();
         State!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_143 {
     };
 }
 
-impl_143!()
+impl_143!();

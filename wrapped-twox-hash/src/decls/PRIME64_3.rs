@@ -4,4 +4,4 @@ macro_rules! PRIME64_3 {
     };
 }
 
-PRIME64_3!()
+PRIME64_3!();

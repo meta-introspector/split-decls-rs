@@ -13,4 +13,4 @@ macro_rules! determine_cgu_reuse {
     };
 }
 
-determine_cgu_reuse!()
+determine_cgu_reuse!();

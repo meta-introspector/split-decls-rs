@@ -4,4 +4,4 @@ macro_rules! openat2 {
     };
 }
 
-openat2!()
+openat2!();

@@ -4,4 +4,4 @@ macro_rules! EnabledLibFeature {
     };
 }
 
-EnabledLibFeature!()
+EnabledLibFeature!();

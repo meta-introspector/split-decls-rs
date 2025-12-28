@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        StaticValue!();
         Synchronize!();
+        StaticValue!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_151 {
     };
 }
 
-impl_151!()
+impl_151!();

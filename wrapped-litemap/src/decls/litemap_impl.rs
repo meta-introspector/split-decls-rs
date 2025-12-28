@@ -4,4 +4,4 @@ macro_rules! litemap_impl {
     };
 }
 
-litemap_impl!()
+litemap_impl!();

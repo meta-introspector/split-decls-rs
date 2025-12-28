@@ -4,4 +4,4 @@ macro_rules! ELFOSABI_IRIX {
     };
 }
 
-ELFOSABI_IRIX!()
+ELFOSABI_IRIX!();

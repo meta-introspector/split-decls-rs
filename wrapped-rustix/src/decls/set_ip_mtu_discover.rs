@@ -12,4 +12,4 @@ macro_rules! set_ip_mtu_discover {
     };
 }
 
-set_ip_mtu_discover!()
+set_ip_mtu_discover!();

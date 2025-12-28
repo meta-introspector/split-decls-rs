@@ -4,4 +4,4 @@ macro_rules! LITUSE_ALPHA_TLS_GD {
     };
 }
 
-LITUSE_ALPHA_TLS_GD!()
+LITUSE_ALPHA_TLS_GD!();

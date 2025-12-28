@@ -4,4 +4,4 @@ macro_rules! DT_STRTAB {
     };
 }
 
-DT_STRTAB!()
+DT_STRTAB!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Ref!();
         State!();
+        Ref!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Channel {
     };
 }
 
-Channel!()
+Channel!();

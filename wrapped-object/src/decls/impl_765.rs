@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Symbol!();
-        WasmSymbolIterator!();
-        SymbolIterator!();
-        WasmSymbolTable!();
         WasmSymbol!();
+        WasmSymbolTable!();
+        Symbol!();
         ObjectSymbolTable!();
         Result!();
         SymbolIndex!();
+        WasmSymbolIterator!();
+        SymbolIterator!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_765 {
     };
 }
 
-impl_765!()
+impl_765!();

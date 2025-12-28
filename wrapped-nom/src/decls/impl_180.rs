@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        Error!();
-        Parser!();
-        MapRes!();
-        ErrorKind!();
-        PResult!();
-        Err!();
-        Emit!();
         FromExternalError!();
         OutputMode!();
+        Err!();
+        Parser!();
+        Error!();
         OutputM!();
+        PResult!();
+        Emit!();
+        ErrorKind!();
+        MapRes!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_180 {
     };
 }
 
-impl_180!()
+impl_180!();

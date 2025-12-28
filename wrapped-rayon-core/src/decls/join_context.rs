@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        SpinLatch!();
+        StackJob!();
         JobId!();
         FnContext!();
-        StackJob!();
-        SpinLatch!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! join_context {
     };
 }
 
-join_context!()
+join_context!();

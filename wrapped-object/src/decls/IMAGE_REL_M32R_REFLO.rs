@@ -4,4 +4,4 @@ macro_rules! IMAGE_REL_M32R_REFLO {
     };
 }
 
-IMAGE_REL_M32R_REFLO!()
+IMAGE_REL_M32R_REFLO!();

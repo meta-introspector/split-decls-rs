@@ -4,4 +4,4 @@ macro_rules! ServiceContext {
     };
 }
 
-ServiceContext!()
+ServiceContext!();

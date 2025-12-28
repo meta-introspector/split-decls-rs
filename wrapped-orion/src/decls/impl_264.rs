@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         UnknownCryptoError!();
-        Poly1305!();
         Poly1305Tag!();
+        Poly1305!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_264 {
     };
 }
 
-impl_264!()
+impl_264!();

@@ -4,4 +4,4 @@ macro_rules! CommandRustcTool {
     };
 }
 
-CommandRustcTool!()
+CommandRustcTool!();

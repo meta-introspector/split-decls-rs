@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        MachHeader!();
-        ReadRef!();
-        Relocation!();
-        MachOFile!();
         Endian!();
+        ReadRef!();
+        MachOFile!();
+        MachHeader!();
+        Relocation!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! MachORelocationIterator {
     };
 }
 
-MachORelocationIterator!()
+MachORelocationIterator!();

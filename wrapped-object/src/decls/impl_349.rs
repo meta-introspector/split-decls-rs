@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Crel!();
-        FileHeader!();
-        Rela!();
         Rel!();
-        ElfRelocationIterator!();
-        Item!();
+        Rela!();
+        FileHeader!();
         Result!();
+        ElfRelocationIterator!();
+        Crel!();
+        Item!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_349 {
     };
 }
 
-impl_349!()
+impl_349!();

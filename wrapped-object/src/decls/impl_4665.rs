@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Endian!();
         ScatteredRelocationInfo!();
-        RelocationInfo!();
+        Endian!();
         Relocation!();
+        RelocationInfo!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_4665 {
     };
 }
 
-impl_4665!()
+impl_4665!();

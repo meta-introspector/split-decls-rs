@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Result!();
         Write!();
-        Compat!();
         Error!();
+        Result!();
+        Compat!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_71 {
     };
 }
 
-impl_71!()
+impl_71!();

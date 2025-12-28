@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        OwnedRef!();
         Clear!();
+        OwnedRef!();
         Config!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_29 {
     };
 }
 
-impl_29!()
+impl_29!();

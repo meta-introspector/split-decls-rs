@@ -4,4 +4,4 @@ macro_rules! ldexpf128 {
     };
 }
 
-ldexpf128!()
+ldexpf128!();

@@ -4,4 +4,4 @@ macro_rules! CopiedProducer {
     };
 }
 
-CopiedProducer!()
+CopiedProducer!();

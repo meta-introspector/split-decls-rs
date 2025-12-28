@@ -11,4 +11,4 @@ macro_rules! serial_setup {
     };
 }
 
-serial_setup!()
+serial_setup!();

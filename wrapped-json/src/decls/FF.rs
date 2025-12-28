@@ -4,4 +4,4 @@ macro_rules! FF {
     };
 }
 
-FF!()
+FF!();

@@ -11,4 +11,4 @@ macro_rules! const_alloc_to_llvm {
     };
 }
 
-const_alloc_to_llvm!()
+const_alloc_to_llvm!();

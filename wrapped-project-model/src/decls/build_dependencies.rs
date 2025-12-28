@@ -4,4 +4,4 @@ macro_rules! build_dependencies {
     };
 }
 
-build_dependencies!()
+build_dependencies!();

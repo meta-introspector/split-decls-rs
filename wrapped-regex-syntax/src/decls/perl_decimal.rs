@@ -4,4 +4,4 @@ macro_rules! perl_decimal {
     };
 }
 
-perl_decimal!()
+perl_decimal!();

@@ -11,4 +11,4 @@ macro_rules! format_level_column {
     };
 }
 
-format_level_column!()
+format_level_column!();

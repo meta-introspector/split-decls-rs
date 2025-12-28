@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Load!();
         Atomic!();
+        Load!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! atomic_int {
     };
 }
 
-atomic_int!()
+atomic_int!();

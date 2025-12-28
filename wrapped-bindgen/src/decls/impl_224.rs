@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Reader!();
         Config!();
-        References!();
         Filter!();
-        TypeMap!();
         Type!();
+        Reader!();
+        References!();
         TypeName!();
+        TypeMap!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_224 {
     };
 }
 
-impl_224!()
+impl_224!();

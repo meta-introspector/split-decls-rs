@@ -4,4 +4,4 @@ macro_rules! PR_SYS_DISPATCH_OFF {
     };
 }
 
-PR_SYS_DISPATCH_OFF!()
+PR_SYS_DISPATCH_OFF!();

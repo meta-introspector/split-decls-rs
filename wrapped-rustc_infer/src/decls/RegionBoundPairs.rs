@@ -11,4 +11,4 @@ macro_rules! RegionBoundPairs {
     };
 }
 
-RegionBoundPairs!()
+RegionBoundPairs!();

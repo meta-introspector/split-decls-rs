@@ -4,4 +4,4 @@ macro_rules! ptr_as_str {
     };
 }
 
-ptr_as_str!()
+ptr_as_str!();

@@ -4,4 +4,4 @@ macro_rules! NodeFilteredNodes {
     };
 }
 
-NodeFilteredNodes!()
+NodeFilteredNodes!();

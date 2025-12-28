@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        ZipCryptoValidator!();
+        ZipCryptoReader!();
         ZipCryptoReaderValid!();
         ZipError!();
         ZipCryptoKeys!();
-        ZipCryptoValidator!();
-        ZipCryptoReader!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_277 {
     };
 }
 
-impl_277!()
+impl_277!();

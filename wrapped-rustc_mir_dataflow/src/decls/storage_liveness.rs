@@ -4,4 +4,4 @@ macro_rules! storage_liveness {
     };
 }
 
-storage_liveness!()
+storage_liveness!();

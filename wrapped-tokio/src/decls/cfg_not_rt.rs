@@ -4,4 +4,4 @@ macro_rules! cfg_not_rt {
     };
 }
 
-cfg_not_rt!()
+cfg_not_rt!();

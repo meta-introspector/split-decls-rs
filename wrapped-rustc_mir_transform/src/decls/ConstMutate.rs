@@ -4,4 +4,4 @@ macro_rules! ConstMutate {
     };
 }
 
-ConstMutate!()
+ConstMutate!();

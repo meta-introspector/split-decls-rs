@@ -4,4 +4,4 @@ macro_rules! exponential_backoff {
     };
 }
 
-exponential_backoff!()
+exponential_backoff!();

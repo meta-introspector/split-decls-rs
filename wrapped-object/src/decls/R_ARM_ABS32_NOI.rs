@@ -4,4 +4,4 @@ macro_rules! R_ARM_ABS32_NOI {
     };
 }
 
-R_ARM_ABS32_NOI!()
+R_ARM_ABS32_NOI!();

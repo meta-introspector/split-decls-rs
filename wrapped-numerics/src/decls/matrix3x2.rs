@@ -4,4 +4,4 @@ macro_rules! matrix3x2 {
     };
 }
 
-matrix3x2!()
+matrix3x2!();

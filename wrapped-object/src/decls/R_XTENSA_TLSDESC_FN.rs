@@ -4,4 +4,4 @@ macro_rules! R_XTENSA_TLSDESC_FN {
     };
 }
 
-R_XTENSA_TLSDESC_FN!()
+R_XTENSA_TLSDESC_FN!();

@@ -4,4 +4,4 @@ macro_rules! NonConstQuestionFromResidual {
     };
 }
 
-NonConstQuestionFromResidual!()
+NonConstQuestionFromResidual!();

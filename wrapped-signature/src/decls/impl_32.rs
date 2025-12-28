@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Result!();
         Error!();
-        Signer!();
         AsyncSigner!();
+        Result!();
+        Signer!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_32 {
     };
 }
 
-impl_32!()
+impl_32!();

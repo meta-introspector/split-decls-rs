@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Consumer!();
-        Folder!();
-        NoopReducer!();
-        ForEachConsumer!();
         Reducer!();
+        NoopReducer!();
+        Consumer!();
+        ForEachConsumer!();
+        Folder!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_583 {
     };
 }
 
-impl_583!()
+impl_583!();

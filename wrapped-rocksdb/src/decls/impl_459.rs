@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        TransactionDB!();
+        SingleThreaded!();
         ColumnFamily!();
         Error!();
         Options!();
-        SingleThreaded!();
-        TransactionDB!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_459 {
     };
 }
 
-impl_459!()
+impl_459!();

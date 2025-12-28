@@ -4,4 +4,4 @@ macro_rules! InitKind {
     };
 }
 
-InitKind!()
+InitKind!();

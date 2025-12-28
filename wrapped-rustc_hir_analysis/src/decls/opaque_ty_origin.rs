@@ -4,4 +4,4 @@ macro_rules! opaque_ty_origin {
     };
 }
 
-opaque_ty_origin!()
+opaque_ty_origin!();

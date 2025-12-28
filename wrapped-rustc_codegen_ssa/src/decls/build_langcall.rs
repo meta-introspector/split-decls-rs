@@ -11,4 +11,4 @@ macro_rules! build_langcall {
     };
 }
 
-build_langcall!()
+build_langcall!();

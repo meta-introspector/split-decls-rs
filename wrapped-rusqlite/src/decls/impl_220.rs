@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        AndThenRows!();
         Row!();
-        Error!();
         Result!();
+        AndThenRows!();
+        Error!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_220 {
     };
 }
 
-impl_220!()
+impl_220!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Expr!();
         WS!();
         FunctionCall!();
         ExprVal!();
         Node!();
+        Expr!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! parse_variable_tag_array_lit_with_filter {
     };
 }
 
-parse_variable_tag_array_lit_with_filter!()
+parse_variable_tag_array_lit_with_filter!();

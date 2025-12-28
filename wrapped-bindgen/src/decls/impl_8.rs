@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Config!();
-        Type!();
-        TokenStream!();
         ReferenceStyle!();
+        TokenStream!();
+        Type!();
+        Config!();
         TypeName!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_8 {
     };
 }
 
-impl_8!()
+impl_8!();

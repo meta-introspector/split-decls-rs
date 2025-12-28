@@ -4,4 +4,4 @@ macro_rules! EdgeIndex {
     };
 }
 
-EdgeIndex!()
+EdgeIndex!();

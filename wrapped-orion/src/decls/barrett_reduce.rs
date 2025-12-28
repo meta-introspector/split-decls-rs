@@ -4,4 +4,4 @@ macro_rules! barrett_reduce {
     };
 }
 
-barrett_reduce!()
+barrett_reduce!();

@@ -4,4 +4,4 @@ macro_rules! PSALTER_PAHLAVI {
     };
 }
 
-PSALTER_PAHLAVI!()
+PSALTER_PAHLAVI!();

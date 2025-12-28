@@ -4,4 +4,4 @@ macro_rules! INVALID_STRING_ID {
     };
 }
 
-INVALID_STRING_ID!()
+INVALID_STRING_ID!();

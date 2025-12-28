@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Tree!();
-        Assume!();
         Endian!();
-        Def!();
         Answer!();
+        Tree!();
+        Def!();
+        Assume!();
         Reason!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! char {
     };
 }
 
-char!()
+char!();

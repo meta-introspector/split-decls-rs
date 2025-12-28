@@ -4,4 +4,4 @@ macro_rules! scope_path {
     };
 }
 
-scope_path!()
+scope_path!();

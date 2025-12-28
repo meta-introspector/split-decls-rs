@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        UnionFind!();
         Time!();
+        UnionFind!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! is_cyclic_undirected {
     };
 }
 
-is_cyclic_undirected!()
+is_cyclic_undirected!();

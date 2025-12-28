@@ -4,4 +4,4 @@ macro_rules! SequencesHeaderParseError {
     };
 }
 
-SequencesHeaderParseError!()
+SequencesHeaderParseError!();

@@ -11,4 +11,4 @@ macro_rules! impl_fmt_from {
     };
 }
 
-impl_fmt_from!()
+impl_fmt_from!();

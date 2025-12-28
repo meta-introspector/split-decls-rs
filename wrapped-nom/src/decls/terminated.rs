@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         Needed!();
+        Parser!();
         ParseError!();
         Error!();
         Terminated!();
-        Parser!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! terminated {
     };
 }
 
-terminated!()
+terminated!();

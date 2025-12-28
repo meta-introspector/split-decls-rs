@@ -11,4 +11,4 @@ macro_rules! enable_syscall_user_dispatch {
     };
 }
 
-enable_syscall_user_dispatch!()
+enable_syscall_user_dispatch!();

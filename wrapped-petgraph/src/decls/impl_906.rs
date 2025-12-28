@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        GraphMap!();
-        EdgeType!();
         NodeTrait!();
+        EdgeType!();
+        GraphMap!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_906 {
     };
 }
 
-impl_906!()
+impl_906!();

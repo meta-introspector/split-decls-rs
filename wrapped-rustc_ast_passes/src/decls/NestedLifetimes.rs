@@ -4,4 +4,4 @@ macro_rules! NestedLifetimes {
     };
 }
 
-NestedLifetimes!()
+NestedLifetimes!();

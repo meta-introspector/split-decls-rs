@@ -4,4 +4,4 @@ macro_rules! N_ENSYM {
     };
 }
 
-N_ENSYM!()
+N_ENSYM!();

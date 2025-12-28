@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        NFA!();
         LiteralTrie!();
-        State!();
-        StateID!();
-        BuildError!();
-        Transition!();
-        Builder!();
         Frame!();
         ThompsonRef!();
+        Transition!();
+        StateID!();
+        Builder!();
+        State!();
+        NFA!();
+        BuildError!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_489 {
     };
 }
 
-impl_489!()
+impl_489!();

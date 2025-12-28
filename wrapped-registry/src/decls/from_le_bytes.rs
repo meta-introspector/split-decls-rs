@@ -4,4 +4,4 @@ macro_rules! from_le_bytes {
     };
 }
 
-from_le_bytes!()
+from_le_bytes!();

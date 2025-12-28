@@ -12,4 +12,4 @@ macro_rules! kill_current_process_group {
     };
 }
 
-kill_current_process_group!()
+kill_current_process_group!();

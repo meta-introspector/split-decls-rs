@@ -4,4 +4,4 @@ macro_rules! DOT_MASK {
     };
 }
 
-DOT_MASK!()
+DOT_MASK!();

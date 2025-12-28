@@ -4,4 +4,4 @@ macro_rules! R_LARCH_MARK_PCREL {
     };
 }
 
-R_LARCH_MARK_PCREL!()
+R_LARCH_MARK_PCREL!();

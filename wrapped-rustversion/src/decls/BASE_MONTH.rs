@@ -4,4 +4,4 @@ macro_rules! BASE_MONTH {
     };
 }
 
-BASE_MONTH!()
+BASE_MONTH!();

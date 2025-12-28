@@ -4,4 +4,4 @@ macro_rules! UnusedVariableSugg {
     };
 }
 
-UnusedVariableSugg!()
+UnusedVariableSugg!();

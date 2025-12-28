@@ -11,4 +11,4 @@ macro_rules! index_hir {
     };
 }
 
-index_hir!()
+index_hir!();

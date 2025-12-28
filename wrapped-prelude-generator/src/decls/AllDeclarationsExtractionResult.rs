@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Declaration!();
         SymbolMap!();
+        Declaration!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! AllDeclarationsExtractionResult {
     };
 }
 
-AllDeclarationsExtractionResult!()
+AllDeclarationsExtractionResult!();

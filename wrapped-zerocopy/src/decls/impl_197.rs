@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        SizeError!();
         SendSyncPhantomData!();
         ConvertError!();
         SizeInfo!();
+        SizeError!();
         KnownLayout!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_197 {
     };
 }
 
-impl_197!()
+impl_197!();

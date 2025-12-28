@@ -4,4 +4,4 @@ macro_rules! EM_KVARC {
     };
 }
 
-EM_KVARC!()
+EM_KVARC!();

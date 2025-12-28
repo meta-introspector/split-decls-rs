@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        NoDrop!();
         TrivialDrop!();
         IterTrait!();
+        NoDrop!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_648 {
     };
 }
 
-impl_648!()
+impl_648!();

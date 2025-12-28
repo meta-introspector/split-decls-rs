@@ -4,4 +4,4 @@ macro_rules! RLINK_VERSION {
     };
 }
 
-RLINK_VERSION!()
+RLINK_VERSION!();

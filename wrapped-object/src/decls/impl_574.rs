@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
         MachHeader!();
+        SegmentFlags!();
+        MachOSegment!();
+        ObjectSegment!();
         Result!();
         ReadRef!();
-        ObjectSegment!();
-        SegmentFlags!();
         MachO!();
-        MachOSegment!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_574 {
     };
 }
 
-impl_574!()
+impl_574!();

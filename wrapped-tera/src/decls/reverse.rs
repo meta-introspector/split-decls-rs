@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Filter!();
         Error!();
+        Filter!();
         Result!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! reverse {
     };
 }
 
-reverse!()
+reverse!();

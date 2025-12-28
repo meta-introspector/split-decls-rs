@@ -4,4 +4,4 @@ macro_rules! set_initializer {
     };
 }
 
-set_initializer!()
+set_initializer!();

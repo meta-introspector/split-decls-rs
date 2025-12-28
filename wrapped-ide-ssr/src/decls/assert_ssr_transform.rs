@@ -4,4 +4,4 @@ macro_rules! assert_ssr_transform {
     };
 }
 
-assert_ssr_transform!()
+assert_ssr_transform!();

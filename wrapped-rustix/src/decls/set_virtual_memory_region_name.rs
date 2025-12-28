@@ -11,4 +11,4 @@ macro_rules! set_virtual_memory_region_name {
     };
 }
 
-set_virtual_memory_region_name!()
+set_virtual_memory_region_name!();

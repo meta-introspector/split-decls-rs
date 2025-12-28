@@ -13,4 +13,4 @@ macro_rules! UseTree2 {
     };
 }
 
-UseTree2!()
+UseTree2!();

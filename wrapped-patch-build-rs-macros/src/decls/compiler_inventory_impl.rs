@@ -89,4 +89,4 @@ macro_rules! compiler_inventory_impl {
     };
 }
 
-compiler_inventory_impl!()
+compiler_inventory_impl!();

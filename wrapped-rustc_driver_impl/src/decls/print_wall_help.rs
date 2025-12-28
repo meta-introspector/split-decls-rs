@@ -9,4 +9,4 @@ the command line flag directly.
     };
 }
 
-print_wall_help!()
+print_wall_help!();

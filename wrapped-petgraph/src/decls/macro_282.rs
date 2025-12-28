@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        NodeIndex!();
         IndexType!();
+        NodeIndex!();
         EdgeIndex!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! macro_282 {
     };
 }
 
-macro_282!()
+macro_282!();

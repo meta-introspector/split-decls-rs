@@ -4,4 +4,4 @@ macro_rules! STATE_LEN {
     };
 }
 
-STATE_LEN!()
+STATE_LEN!();

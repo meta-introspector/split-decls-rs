@@ -4,4 +4,4 @@ macro_rules! OpenHow {
     };
 }
 
-OpenHow!()
+OpenHow!();

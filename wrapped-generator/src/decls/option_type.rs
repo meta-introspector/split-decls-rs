@@ -4,4 +4,4 @@ macro_rules! option_type {
     };
 }
 
-option_type!()
+option_type!();

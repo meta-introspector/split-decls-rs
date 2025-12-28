@@ -21,4 +21,4 @@ c Unity constraint (everything maps to 1)
     };
 }
 
-sat_solve_unity_impl!()
+sat_solve_unity_impl!();

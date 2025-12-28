@@ -11,4 +11,4 @@ macro_rules! test_ll_default {
     };
 }
 
-test_ll_default!()
+test_ll_default!();

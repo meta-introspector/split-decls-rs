@@ -4,4 +4,4 @@ macro_rules! R_RISCV_COPY {
     };
 }
 
-R_RISCV_COPY!()
+R_RISCV_COPY!();

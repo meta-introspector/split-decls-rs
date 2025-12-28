@@ -4,4 +4,4 @@ macro_rules! ensure_monomorphic_enough {
     };
 }
 
-ensure_monomorphic_enough!()
+ensure_monomorphic_enough!();

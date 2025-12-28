@@ -4,4 +4,4 @@ macro_rules! InferArg {
     };
 }
 
-InferArg!()
+InferArg!();

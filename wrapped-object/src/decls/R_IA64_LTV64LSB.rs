@@ -4,4 +4,4 @@ macro_rules! R_IA64_LTV64LSB {
     };
 }
 
-R_IA64_LTV64LSB!()
+R_IA64_LTV64LSB!();

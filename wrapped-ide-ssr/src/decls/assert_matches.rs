@@ -11,4 +11,4 @@ macro_rules! assert_matches {
     };
 }
 
-assert_matches!()
+assert_matches!();

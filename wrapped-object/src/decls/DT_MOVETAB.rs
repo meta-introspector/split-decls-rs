@@ -4,4 +4,4 @@ macro_rules! DT_MOVETAB {
     };
 }
 
-DT_MOVETAB!()
+DT_MOVETAB!();

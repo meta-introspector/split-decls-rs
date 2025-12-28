@@ -4,4 +4,4 @@ macro_rules! pounded_var_names_with_context {
     };
 }
 
-pounded_var_names_with_context!()
+pounded_var_names_with_context!();

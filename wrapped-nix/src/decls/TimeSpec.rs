@@ -4,4 +4,4 @@ macro_rules! TimeSpec {
     };
 }
 
-TimeSpec!()
+TimeSpec!();

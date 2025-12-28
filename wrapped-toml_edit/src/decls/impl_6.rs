@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Value!();
-        ArrayIter!();
-        ArrayIterMut!();
-        Array!();
         Item!();
+        ArrayIter!();
+        Array!();
+        Value!();
+        ArrayIterMut!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_6 {
     };
 }
 
-impl_6!()
+impl_6!();

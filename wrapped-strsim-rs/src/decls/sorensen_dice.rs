@@ -4,4 +4,4 @@ macro_rules! sorensen_dice {
     };
 }
 
-sorensen_dice!()
+sorensen_dice!();

@@ -12,4 +12,4 @@ macro_rules! check_edit_with_config {
     };
 }
 
-check_edit_with_config!()
+check_edit_with_config!();

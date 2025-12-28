@@ -4,4 +4,4 @@ macro_rules! zlibCompileFlags {
     };
 }
 
-zlibCompileFlags!()
+zlibCompileFlags!();

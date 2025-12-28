@@ -4,4 +4,4 @@ macro_rules! moniker {
     };
 }
 
-moniker!()
+moniker!();

@@ -4,4 +4,4 @@ macro_rules! partial_eq {
     };
 }
 
-partial_eq!()
+partial_eq!();

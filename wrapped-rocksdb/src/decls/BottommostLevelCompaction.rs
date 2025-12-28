@@ -4,4 +4,4 @@ macro_rules! BottommostLevelCompaction {
     };
 }
 
-BottommostLevelCompaction!()
+BottommostLevelCompaction!();

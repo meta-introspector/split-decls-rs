@@ -4,4 +4,4 @@ macro_rules! MYANMAR {
     };
 }
 
-MYANMAR!()
+MYANMAR!();

@@ -1,20 +1,20 @@
 macro_rules! deps {
     () => {
-        SymbolSection!();
-        Result!();
-        Section!();
         MachHeader!();
-        ObjectSymbol!();
-        SymbolKind!();
-        SymbolScope!();
-        ReadRef!();
-        SectionKind!();
-        Dynamic!();
-        SymbolFlags!();
         SymbolIndex!();
-        MachO!();
-        MachOSymbol!();
+        SectionKind!();
+        Section!();
         SectionIndex!();
+        SymbolScope!();
+        ObjectSymbol!();
+        Dynamic!();
+        MachO!();
+        SymbolKind!();
+        ReadRef!();
+        Result!();
+        MachOSymbol!();
+        SymbolSection!();
+        SymbolFlags!();
     };
 }
 
@@ -25,4 +25,4 @@ macro_rules! impl_616 {
     };
 }
 
-impl_616!()
+impl_616!();

@@ -4,4 +4,4 @@ macro_rules! R_ARM_ABS8 {
     };
 }
 
-R_ARM_ABS8!()
+R_ARM_ABS8!();

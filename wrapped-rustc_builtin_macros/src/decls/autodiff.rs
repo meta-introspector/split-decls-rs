@@ -4,4 +4,4 @@ macro_rules! autodiff {
     };
 }
 
-autodiff!()
+autodiff!();

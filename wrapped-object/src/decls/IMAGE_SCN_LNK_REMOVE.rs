@@ -11,4 +11,4 @@ macro_rules! IMAGE_SCN_LNK_REMOVE {
     };
 }
 
-IMAGE_SCN_LNK_REMOVE!()
+IMAGE_SCN_LNK_REMOVE!();

@@ -11,4 +11,4 @@ macro_rules! ownedrefs_outlive_pool {
     };
 }
 
-ownedrefs_outlive_pool!()
+ownedrefs_outlive_pool!();

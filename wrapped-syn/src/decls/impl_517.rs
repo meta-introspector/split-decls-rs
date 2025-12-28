@@ -1,18 +1,18 @@
 macro_rules! deps {
     () => {
-        Parser!();
-        Cursor!();
-        Unexpected!();
-        Lifetime!();
-        ParseBuffer!();
-        Parse!();
-        ParseStream!();
-        Punctuated!();
-        Peek!();
         Lookahead1!();
-        StepCursor!();
-        Result!();
+        Parse!();
+        ParseBuffer!();
         Error!();
+        Lifetime!();
+        StepCursor!();
+        Parser!();
+        ParseStream!();
+        Unexpected!();
+        Result!();
+        Punctuated!();
+        Cursor!();
+        Peek!();
     };
 }
 
@@ -23,4 +23,4 @@ macro_rules! impl_517 {
     };
 }
 
-impl_517!()
+impl_517!();

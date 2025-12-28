@@ -4,4 +4,4 @@ macro_rules! try_filter_fat_archs {
     };
 }
 
-try_filter_fat_archs!()
+try_filter_fat_archs!();

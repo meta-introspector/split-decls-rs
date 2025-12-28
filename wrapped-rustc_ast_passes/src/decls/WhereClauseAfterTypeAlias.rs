@@ -4,4 +4,4 @@ macro_rules! WhereClauseAfterTypeAlias {
     };
 }
 
-WhereClauseAfterTypeAlias!()
+WhereClauseAfterTypeAlias!();

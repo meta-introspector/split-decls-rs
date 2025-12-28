@@ -4,4 +4,4 @@ macro_rules! AtomicRef {
     };
 }
 
-AtomicRef!()
+AtomicRef!();

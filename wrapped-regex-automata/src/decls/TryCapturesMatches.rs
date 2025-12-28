@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        Cache!();
         BoundedBacktracker!();
         MatchError!();
         Captures!();
         Searcher!();
-        Cache!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! TryCapturesMatches {
     };
 }
 
-TryCapturesMatches!()
+TryCapturesMatches!();

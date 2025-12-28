@@ -4,4 +4,4 @@ macro_rules! lex_comparison_expr {
     };
 }
 
-lex_comparison_expr!()
+lex_comparison_expr!();

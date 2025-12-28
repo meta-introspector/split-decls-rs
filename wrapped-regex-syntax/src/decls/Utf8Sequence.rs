@@ -11,4 +11,4 @@ macro_rules! Utf8Sequence {
     };
 }
 
-Utf8Sequence!()
+Utf8Sequence!();

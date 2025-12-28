@@ -4,4 +4,4 @@ macro_rules! if_futures {
     };
 }
 
-if_futures!()
+if_futures!();

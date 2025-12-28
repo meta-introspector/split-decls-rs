@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        ConstraintGraphDirection!();
+        RegionGraph!();
         ConstraintGraph!();
         Successors!();
         OutlivesConstraintSet!();
-        RegionGraph!();
+        ConstraintGraphDirection!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_31 {
     };
 }
 
-impl_31!()
+impl_31!();

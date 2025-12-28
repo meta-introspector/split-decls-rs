@@ -4,4 +4,4 @@ macro_rules! AllowIncoherentImplParser {
     };
 }
 
-AllowIncoherentImplParser!()
+AllowIncoherentImplParser!();

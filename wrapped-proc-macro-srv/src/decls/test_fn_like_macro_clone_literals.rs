@@ -94,4 +94,4 @@ macro_rules! test_fn_like_macro_clone_literals {
     };
 }
 
-test_fn_like_macro_clone_literals!()
+test_fn_like_macro_clone_literals!();

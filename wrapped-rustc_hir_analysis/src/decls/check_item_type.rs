@@ -4,4 +4,4 @@ macro_rules! check_item_type {
     };
 }
 
-check_item_type!()
+check_item_type!();

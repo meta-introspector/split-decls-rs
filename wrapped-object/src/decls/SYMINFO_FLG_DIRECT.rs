@@ -4,4 +4,4 @@ macro_rules! SYMINFO_FLG_DIRECT {
     };
 }
 
-SYMINFO_FLG_DIRECT!()
+SYMINFO_FLG_DIRECT!();

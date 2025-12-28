@@ -4,4 +4,4 @@ macro_rules! AUX_FCN {
     };
 }
 
-AUX_FCN!()
+AUX_FCN!();

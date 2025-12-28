@@ -11,4 +11,4 @@ macro_rules! DT_AUDIT {
     };
 }
 
-DT_AUDIT!()
+DT_AUDIT!();

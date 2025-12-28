@@ -4,4 +4,4 @@ macro_rules! generics_of {
     };
 }
 
-generics_of!()
+generics_of!();

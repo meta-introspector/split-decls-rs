@@ -4,4 +4,4 @@ macro_rules! BoolLit {
     };
 }
 
-BoolLit!()
+BoolLit!();

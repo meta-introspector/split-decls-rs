@@ -4,4 +4,4 @@ macro_rules! ARM_RELOC_SECTDIFF {
     };
 }
 
-ARM_RELOC_SECTDIFF!()
+ARM_RELOC_SECTDIFF!();

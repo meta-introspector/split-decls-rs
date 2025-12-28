@@ -4,4 +4,4 @@ macro_rules! direction {
     };
 }
 
-direction!()
+direction!();

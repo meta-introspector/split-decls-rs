@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Answer!();
-        Assume!();
         Def!();
-        Reason!();
         Tree!();
+        Assume!();
+        Answer!();
+        Reason!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! safety {
     };
 }
 
-safety!()
+safety!();

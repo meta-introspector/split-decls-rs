@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Error!();
         IResult!();
+        Err!();
+        Needed!();
         Many0!();
         ErrorKind!();
-        Needed!();
-        Err!();
+        Error!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! fold_many0_test {
     };
 }
 
-fold_many0_test!()
+fold_many0_test!();

@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
         PatternID!();
-        NFA!();
-        Builder!();
-        Regex!();
-        Match!();
-        BuildError!();
         Config!();
+        BuildError!();
+        NFA!();
+        Match!();
+        Regex!();
+        Builder!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_334 {
     };
 }
 
-impl_334!()
+impl_334!();

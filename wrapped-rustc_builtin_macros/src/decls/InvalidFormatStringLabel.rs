@@ -4,4 +4,4 @@ macro_rules! InvalidFormatStringLabel {
     };
 }
 
-InvalidFormatStringLabel!()
+InvalidFormatStringLabel!();

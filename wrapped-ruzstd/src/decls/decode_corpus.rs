@@ -4,4 +4,4 @@ macro_rules! decode_corpus {
     };
 }
 
-decode_corpus!()
+decode_corpus!();

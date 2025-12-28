@@ -4,4 +4,4 @@ macro_rules! PEST_KEYWORDS {
     };
 }
 
-PEST_KEYWORDS!()
+PEST_KEYWORDS!();

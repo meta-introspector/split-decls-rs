@@ -11,4 +11,4 @@ macro_rules! REG_SZ {
     };
 }
 
-REG_SZ!()
+REG_SZ!();

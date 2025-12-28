@@ -4,4 +4,4 @@ macro_rules! expand_cfg {
     };
 }
 
-expand_cfg!()
+expand_cfg!();

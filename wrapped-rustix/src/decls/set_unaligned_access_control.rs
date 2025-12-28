@@ -11,4 +11,4 @@ macro_rules! set_unaligned_access_control {
     };
 }
 
-set_unaligned_access_control!()
+set_unaligned_access_control!();

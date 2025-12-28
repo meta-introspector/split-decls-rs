@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        FnCtxt!();
         TopInfo!();
+        FnCtxt!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_317 {
     };
 }
 
-impl_317!()
+impl_317!();

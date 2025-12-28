@@ -4,4 +4,4 @@ macro_rules! CIPHERTEXT_SIZE {
     };
 }
 
-CIPHERTEXT_SIZE!()
+CIPHERTEXT_SIZE!();

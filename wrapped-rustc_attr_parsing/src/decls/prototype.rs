@@ -4,4 +4,4 @@ macro_rules! prototype {
     };
 }
 
-prototype!()
+prototype!();

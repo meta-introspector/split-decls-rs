@@ -11,4 +11,4 @@ macro_rules! _Opcode {
     };
 }
 
-_Opcode!()
+_Opcode!();

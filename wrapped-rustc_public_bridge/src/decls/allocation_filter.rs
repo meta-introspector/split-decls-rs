@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Allocation!();
-        CompilerCtxt!();
         Tables!();
         Bridge!();
+        Allocation!();
+        CompilerCtxt!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! allocation_filter {
     };
 }
 
-allocation_filter!()
+allocation_filter!();

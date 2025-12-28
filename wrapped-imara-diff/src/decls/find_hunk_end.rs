@@ -4,4 +4,4 @@ macro_rules! find_hunk_end {
     };
 }
 
-find_hunk_end!()
+find_hunk_end!();

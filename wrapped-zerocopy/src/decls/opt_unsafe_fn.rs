@@ -4,4 +4,4 @@ macro_rules! opt_unsafe_fn {
     };
 }
 
-opt_unsafe_fn!()
+opt_unsafe_fn!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Table!();
         DocumentMut!();
+        Table!();
         Item!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_39 {
     };
 }
 
-impl_39!()
+impl_39!();

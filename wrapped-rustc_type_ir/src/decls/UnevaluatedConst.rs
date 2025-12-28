@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        GenericArgs!();
         Interner!();
         DefId!();
+        GenericArgs!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! UnevaluatedConst {
     };
 }
 
-UnevaluatedConst!()
+UnevaluatedConst!();

@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Action!();
         ChangesetItem!();
-        Values!();
-        Result!();
-        Operation!();
-        Error!();
         ValueRef!();
+        Error!();
+        Action!();
+        Operation!();
+        Result!();
+        Values!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_260 {
     };
 }
 
-impl_260!()
+impl_260!();

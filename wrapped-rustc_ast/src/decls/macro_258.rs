@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        GenericParam!();
         PatField!();
-        Variant!();
-        FieldDef!();
         Param!();
-        WherePredicate!();
-        Crate!();
-        Expr!();
-        ExprField!();
         Arm!();
+        GenericParam!();
+        Crate!();
+        FieldDef!();
+        WherePredicate!();
+        ExprField!();
+        Expr!();
+        Variant!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! macro_258 {
     };
 }
 
-macro_258!()
+macro_258!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         IResult!();
-        Error!();
         Err!();
         ErrorKind!();
+        Error!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! none_of_test {
     };
 }
 
-none_of_test!()
+none_of_test!();

@@ -4,4 +4,4 @@ macro_rules! atan2f {
     };
 }
 
-atan2f!()
+atan2f!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        QueryStack!();
-        ActiveQuery!();
-        IterationCount!();
         DatabaseKeyIndex!();
+        ActiveQuery!();
         CompletedQuery!();
+        QueryStack!();
+        IterationCount!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_18 {
     };
 }
 
-impl_18!()
+impl_18!();

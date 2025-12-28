@@ -4,4 +4,4 @@ macro_rules! on_dot_typed {
     };
 }
 
-on_dot_typed!()
+on_dot_typed!();

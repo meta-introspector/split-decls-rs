@@ -4,4 +4,4 @@ macro_rules! PlaceBase {
     };
 }
 
-PlaceBase!()
+PlaceBase!();

@@ -1,17 +1,17 @@
 macro_rules! deps {
     () => {
+        EventId!();
+        PageTag!();
         StringId!();
-        RawEvent!();
-        WallTime!();
+        Counter!();
         DetachedTiming!();
         SerializationSinkBuilder!();
-        StringTableBuilder!();
-        Counter!();
-        Profiler!();
-        PageTag!();
         SerializableString!();
-        EventId!();
+        Profiler!();
+        StringTableBuilder!();
+        RawEvent!();
         TimingGuard!();
+        WallTime!();
     };
 }
 
@@ -22,4 +22,4 @@ macro_rules! impl_37 {
     };
 }
 
-impl_37!()
+impl_37!();

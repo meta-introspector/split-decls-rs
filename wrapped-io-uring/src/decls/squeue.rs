@@ -4,4 +4,4 @@ macro_rules! squeue {
     };
 }
 
-squeue!()
+squeue!();

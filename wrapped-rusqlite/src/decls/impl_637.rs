@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        SeriesTab!();
         IndexConstraintOp!();
-        VTabConnection!();
         Result!();
         IndexInfo!();
+        SeriesTab!();
+        VTabConnection!();
         VTabConfig!();
         VTab!();
         SeriesTabCursor!();
@@ -18,4 +18,4 @@ macro_rules! impl_637 {
     };
 }
 
-impl_637!()
+impl_637!();

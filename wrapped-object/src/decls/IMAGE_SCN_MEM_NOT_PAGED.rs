@@ -11,4 +11,4 @@ macro_rules! IMAGE_SCN_MEM_NOT_PAGED {
     };
 }
 
-IMAGE_SCN_MEM_NOT_PAGED!()
+IMAGE_SCN_MEM_NOT_PAGED!();

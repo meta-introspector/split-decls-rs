@@ -4,4 +4,4 @@ macro_rules! poll_timeout {
     };
 }
 
-poll_timeout!()
+poll_timeout!();

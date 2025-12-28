@@ -4,4 +4,4 @@ macro_rules! LoopMatchArmWithGuard {
     };
 }
 
-LoopMatchArmWithGuard!()
+LoopMatchArmWithGuard!();

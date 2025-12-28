@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Visitor!();
         Variant!();
+        Visitor!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! walk_variant {
     };
 }
 
-walk_variant!()
+walk_variant!();

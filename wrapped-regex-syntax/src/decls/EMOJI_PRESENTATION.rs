@@ -4,4 +4,4 @@ macro_rules! EMOJI_PRESENTATION {
     };
 }
 
-EMOJI_PRESENTATION!()
+EMOJI_PRESENTATION!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Transition!();
-        NFA!();
         StateChunksIter!();
+        Transition!();
         StateID!();
+        NFA!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! Frame {
     };
 }
 
-Frame!()
+Frame!();

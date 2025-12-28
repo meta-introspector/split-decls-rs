@@ -4,4 +4,4 @@ macro_rules! R_PPC_GOT_TPREL16_HI {
     };
 }
 
-R_PPC_GOT_TPREL16_HI!()
+R_PPC_GOT_TPREL16_HI!();

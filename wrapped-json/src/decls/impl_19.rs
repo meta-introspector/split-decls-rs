@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         NumberDeserializer!();
-        Result!();
-        Value!();
         Error!();
-        ParserNumber!();
+        Result!();
         Float!();
+        Value!();
+        ParserNumber!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_19 {
     };
 }
 
-impl_19!()
+impl_19!();

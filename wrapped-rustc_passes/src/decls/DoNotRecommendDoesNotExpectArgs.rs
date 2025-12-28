@@ -4,4 +4,4 @@ macro_rules! DoNotRecommendDoesNotExpectArgs {
     };
 }
 
-DoNotRecommendDoesNotExpectArgs!()
+DoNotRecommendDoesNotExpectArgs!();

@@ -4,4 +4,4 @@ macro_rules! expand_mod {
     };
 }
 
-expand_mod!()
+expand_mod!();

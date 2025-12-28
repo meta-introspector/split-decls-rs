@@ -4,4 +4,4 @@ macro_rules! EF_SH3E {
     };
 }
 
-EF_SH3E!()
+EF_SH3E!();

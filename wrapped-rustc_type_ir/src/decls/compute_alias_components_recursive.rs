@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        AliasTyKind!();
-        Component!();
-        OutlivesCollector!();
-        Interner!();
         AliasTy!();
+        OutlivesCollector!();
+        AliasTyKind!();
+        Interner!();
+        Component!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! compute_alias_components_recursive {
     };
 }
 
-compute_alias_components_recursive!()
+compute_alias_components_recursive!();

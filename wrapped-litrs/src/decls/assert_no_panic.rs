@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
         ByteStringLit!();
-        BoolLit!();
-        StringLit!();
         FloatLit!();
-        IntegerLit!();
-        Literal!();
         ByteLit!();
+        Literal!();
+        IntegerLit!();
+        BoolLit!();
         CharLit!();
+        StringLit!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! assert_no_panic {
     };
 }
 
-assert_no_panic!()
+assert_no_panic!();

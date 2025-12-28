@@ -4,4 +4,4 @@ macro_rules! NodeIndex {
     };
 }
 
-NodeIndex!()
+NodeIndex!();

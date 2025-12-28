@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Interner!();
-        GenericArgKind!();
-        TypeFoldable!();
-        Ty!();
-        ArgFolder!();
         Const!();
         Region!();
+        GenericArgKind!();
+        Ty!();
+        Interner!();
+        ArgFolder!();
+        TypeFoldable!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_258 {
     };
 }
 
-impl_258!()
+impl_258!();

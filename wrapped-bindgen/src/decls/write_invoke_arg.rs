@@ -12,4 +12,4 @@ macro_rules! write_invoke_arg {
     };
 }
 
-write_invoke_arg!()
+write_invoke_arg!();

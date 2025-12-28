@@ -4,4 +4,4 @@ macro_rules! R_PARISC_TLS_DTPOFF64 {
     };
 }
 
-R_PARISC_TLS_DTPOFF64!()
+R_PARISC_TLS_DTPOFF64!();

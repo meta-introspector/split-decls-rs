@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        TyOrConstInferVar!();
         FullTypeResolver!();
+        TyOrConstInferVar!();
         FixupError!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_185 {
     };
 }
 
-impl_185!()
+impl_185!();

@@ -4,4 +4,4 @@ macro_rules! language_quine {
     };
 }
 
-language_quine!()
+language_quine!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        MapSpecialCase!();
-        MapSpecialCaseFnInto!();
         MapInto!();
+        MapSpecialCaseFnInto!();
+        MapSpecialCase!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! map_into {
     };
 }
 
-map_into!()
+map_into!();

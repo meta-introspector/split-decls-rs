@@ -4,4 +4,4 @@ macro_rules! PROB_INIT {
     };
 }
 
-PROB_INIT!()
+PROB_INIT!();

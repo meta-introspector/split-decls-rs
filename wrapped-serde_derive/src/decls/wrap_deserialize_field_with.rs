@@ -11,4 +11,4 @@ macro_rules! wrap_deserialize_field_with {
     };
 }
 
-wrap_deserialize_field_with!()
+wrap_deserialize_field_with!();

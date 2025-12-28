@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        UniversalRegionRelations!();
+        DeferredClosureRequirements!();
         MirTypeckRegionConstraints!();
         PoloniusContext!();
-        DeferredClosureRequirements!();
-        UniversalRegionRelations!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! MirTypeckResults {
     };
 }
 
-MirTypeckResults!()
+MirTypeckResults!();

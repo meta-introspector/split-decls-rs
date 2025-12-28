@@ -4,4 +4,4 @@ macro_rules! wrap_field_inits {
     };
 }
 
-wrap_field_inits!()
+wrap_field_inits!();

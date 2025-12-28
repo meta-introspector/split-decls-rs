@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        Signal!();
+        KillResult!();
+        Pid!();
         ProcSelector!();
         Result!();
-        Pid!();
-        KillResult!();
-        Signal!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! reaper_kill {
     };
 }
 
-reaper_kill!()
+reaper_kill!();

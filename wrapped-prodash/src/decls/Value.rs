@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        StepShared!();
+        Step!();
+        Unit!();
         State!();
         Progress!();
-        Unit!();
-        Step!();
-        StepShared!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! Value {
     };
 }
 
-Value!()
+Value!();

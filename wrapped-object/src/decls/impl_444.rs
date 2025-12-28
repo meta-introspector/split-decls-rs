@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Result!();
-        Verneed!();
+        Endian!();
         StringTable!();
         ReadRef!();
-        Endian!();
+        Verneed!();
+        Result!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_444 {
     };
 }
 
-impl_444!()
+impl_444!();

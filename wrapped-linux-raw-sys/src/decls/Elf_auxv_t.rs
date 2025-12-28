@@ -4,4 +4,4 @@ macro_rules! Elf_auxv_t {
     };
 }
 
-Elf_auxv_t!()
+Elf_auxv_t!();

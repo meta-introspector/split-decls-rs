@@ -1,20 +1,20 @@
 macro_rules! deps {
     () => {
-        ExtractKind!();
-        Class!();
-        Literal!();
-        Alternation!();
         Capture!();
-        Repetition!();
-        ClassUnicode!();
+        Alternation!();
         Concat!();
-        Hir!();
-        Look!();
+        ClassBytes!();
         Extractor!();
         Bytes!();
-        ClassBytes!();
-        HirKind!();
+        Hir!();
         Seq!();
+        Look!();
+        Literal!();
+        ClassUnicode!();
+        Repetition!();
+        Class!();
+        HirKind!();
+        ExtractKind!();
     };
 }
 
@@ -25,4 +25,4 @@ macro_rules! impl_156 {
     };
 }
 
-impl_156!()
+impl_156!();

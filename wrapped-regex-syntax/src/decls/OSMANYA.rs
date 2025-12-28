@@ -4,4 +4,4 @@ macro_rules! OSMANYA {
     };
 }
 
-OSMANYA!()
+OSMANYA!();

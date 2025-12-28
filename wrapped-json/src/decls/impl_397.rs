@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        ModeratePathPowers!();
         ExtendedFloat!();
         ModeratePathCache!();
-        ModeratePathPowers!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_397 {
     };
 }
 
-impl_397!()
+impl_397!();

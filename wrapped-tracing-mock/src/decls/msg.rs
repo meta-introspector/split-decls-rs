@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        ExpectedValue!();
         ExpectedFields!();
         ExpectedField!();
+        ExpectedValue!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! msg {
     };
 }
 
-msg!()
+msg!();

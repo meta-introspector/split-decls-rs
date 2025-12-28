@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        DisplayValue!();
         Kind!();
-        Mode!();
         Unit!();
+        Mode!();
+        DisplayValue!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! dynamic_and_mode {
     };
 }
 
-dynamic_and_mode!()
+dynamic_and_mode!();

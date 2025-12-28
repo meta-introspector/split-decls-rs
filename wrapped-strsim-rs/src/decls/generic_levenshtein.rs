@@ -4,4 +4,4 @@ macro_rules! generic_levenshtein {
     };
 }
 
-generic_levenshtein!()
+generic_levenshtein!();

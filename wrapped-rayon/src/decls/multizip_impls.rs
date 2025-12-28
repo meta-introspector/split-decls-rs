@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        MultiZip!();
-        IntoParallelRefIterator!();
-        IntoParallelRefMutIterator!();
-        UnindexedConsumer!();
+        IndexedParallelIterator!();
         ProducerCallback!();
         Iter!();
-        IntoParallelIterator!();
         ParallelIterator!();
+        IntoParallelRefIterator!();
+        MultiZip!();
+        IntoParallelIterator!();
+        UnindexedConsumer!();
         Consumer!();
-        IndexedParallelIterator!();
+        IntoParallelRefMutIterator!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! multizip_impls {
     };
 }
 
-multizip_impls!()
+multizip_impls!();

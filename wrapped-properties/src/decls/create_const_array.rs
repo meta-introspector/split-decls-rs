@@ -11,4 +11,4 @@ macro_rules! create_const_array {
     };
 }
 
-create_const_array!()
+create_const_array!();

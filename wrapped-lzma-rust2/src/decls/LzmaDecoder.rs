@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        LengthCoder!();
         LzmaCoder!();
         LiteralDecoder!();
+        LengthCoder!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! LzmaDecoder {
     };
 }
 
-LzmaDecoder!()
+LzmaDecoder!();

@@ -11,4 +11,4 @@ macro_rules! Slab {
     };
 }
 
-Slab!()
+Slab!();

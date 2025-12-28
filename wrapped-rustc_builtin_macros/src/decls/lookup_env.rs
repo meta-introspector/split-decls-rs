@@ -4,4 +4,4 @@ macro_rules! lookup_env {
     };
 }
 
-lookup_env!()
+lookup_env!();

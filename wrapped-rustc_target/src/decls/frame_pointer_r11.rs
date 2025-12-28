@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        InlineAsmArch!();
         Target!();
+        InlineAsmArch!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! frame_pointer_r11 {
     };
 }
 
-frame_pointer_r11!()
+frame_pointer_r11!();

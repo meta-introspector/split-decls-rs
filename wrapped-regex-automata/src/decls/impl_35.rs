@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
         DFA!();
-        StartTable!();
-        BuildError!();
-        StartKind!();
-        StartByteMap!();
-        Start!();
-        PatternID!();
         LookMatcher!();
+        BuildError!();
+        Start!();
+        StartByteMap!();
+        StartTable!();
+        StartKind!();
+        PatternID!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_35 {
     };
 }
 
-impl_35!()
+impl_35!();

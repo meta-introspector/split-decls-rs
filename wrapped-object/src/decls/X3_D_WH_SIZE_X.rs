@@ -4,4 +4,4 @@ macro_rules! X3_D_WH_SIZE_X {
     };
 }
 
-X3_D_WH_SIZE_X!()
+X3_D_WH_SIZE_X!();

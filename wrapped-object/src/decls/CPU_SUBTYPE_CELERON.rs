@@ -4,4 +4,4 @@ macro_rules! CPU_SUBTYPE_CELERON {
     };
 }
 
-CPU_SUBTYPE_CELERON!()
+CPU_SUBTYPE_CELERON!();

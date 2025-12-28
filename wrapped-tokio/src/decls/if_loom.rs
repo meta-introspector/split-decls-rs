@@ -4,4 +4,4 @@ macro_rules! if_loom {
     };
 }
 
-if_loom!()
+if_loom!();

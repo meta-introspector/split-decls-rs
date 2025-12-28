@@ -4,4 +4,4 @@ macro_rules! liveness_constraints {
     };
 }
 
-liveness_constraints!()
+liveness_constraints!();

@@ -4,4 +4,4 @@ macro_rules! OsswuMapParams {
     };
 }
 
-OsswuMapParams!()
+OsswuMapParams!();

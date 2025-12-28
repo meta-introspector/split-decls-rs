@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Stream!();
         EventReceiver!();
         Token!();
+        Stream!();
         ErrorSink!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! on_expression_key_val_sep {
     };
 }
 
-on_expression_key_val_sep!()
+on_expression_key_val_sep!();

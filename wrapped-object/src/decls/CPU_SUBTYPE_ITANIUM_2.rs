@@ -4,4 +4,4 @@ macro_rules! CPU_SUBTYPE_ITANIUM_2 {
     };
 }
 
-CPU_SUBTYPE_ITANIUM_2!()
+CPU_SUBTYPE_ITANIUM_2!();

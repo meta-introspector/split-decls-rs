@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        AttrTokenStream!();
         FlatToken!();
         Token!();
-        AttrTokenStream!();
         LazyAttrTokenStreamInner!();
         AttrsTarget!();
     };
@@ -15,4 +15,4 @@ macro_rules! impl_435 {
     };
 }
 
-impl_435!()
+impl_435!();

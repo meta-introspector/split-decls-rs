@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Stability!();
+        Target!();
         ImpliedFeatures!();
+        Stability!();
         FeatureConstraints!();
         ABI!();
-        Target!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_589 {
     };
 }
 
-impl_589!()
+impl_589!();

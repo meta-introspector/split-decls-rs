@@ -4,4 +4,4 @@ macro_rules! MacroDylib {
     };
 }
 
-MacroDylib!()
+MacroDylib!();

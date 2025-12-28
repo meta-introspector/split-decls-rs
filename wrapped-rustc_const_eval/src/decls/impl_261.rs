@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        InterpCx!();
         AllocKind!();
         Machine!();
-        InterpCx!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_261 {
     };
 }
 
-impl_261!()
+impl_261!();

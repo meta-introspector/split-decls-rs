@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        MonsterConstants!();
         DummyBottPeriodicity!();
         BottPeriodicityTrait!();
-        MonsterConstants!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_23 {
     };
 }
 
-impl_23!()
+impl_23!();

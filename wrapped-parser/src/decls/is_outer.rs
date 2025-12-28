@@ -4,4 +4,4 @@ macro_rules! is_outer {
     };
 }
 
-is_outer!()
+is_outer!();

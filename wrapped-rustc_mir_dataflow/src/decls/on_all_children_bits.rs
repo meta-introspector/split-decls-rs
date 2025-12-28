@@ -11,4 +11,4 @@ macro_rules! on_all_children_bits {
     };
 }
 
-on_all_children_bits!()
+on_all_children_bits!();

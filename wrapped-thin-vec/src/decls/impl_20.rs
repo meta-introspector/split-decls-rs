@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        ThinVec!();
-        IntoIter!();
-        Header!();
         ExtractIf!();
-        Splice!();
+        Header!();
+        ThinVec!();
         Drain!();
+        IntoIter!();
+        Splice!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_20 {
     };
 }
 
-impl_20!()
+impl_20!();

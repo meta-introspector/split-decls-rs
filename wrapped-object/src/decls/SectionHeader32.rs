@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        U16!();
         U32!();
+        U16!();
         Section!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! SectionHeader32 {
     };
 }
 
-SectionHeader32!()
+SectionHeader32!();

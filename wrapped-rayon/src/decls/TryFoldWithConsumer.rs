@@ -4,4 +4,4 @@ macro_rules! TryFoldWithConsumer {
     };
 }
 
-TryFoldWithConsumer!()
+TryFoldWithConsumer!();

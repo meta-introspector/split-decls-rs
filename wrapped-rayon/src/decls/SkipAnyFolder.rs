@@ -4,4 +4,4 @@ macro_rules! SkipAnyFolder {
     };
 }
 
-SkipAnyFolder!()
+SkipAnyFolder!();

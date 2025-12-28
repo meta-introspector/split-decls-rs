@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Registry!();
-        ArcJob!();
         BroadcastContext!();
+        ArcJob!();
+        Registry!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! spawn_broadcast_in {
     };
 }
 
-spawn_broadcast_in!()
+spawn_broadcast_in!();

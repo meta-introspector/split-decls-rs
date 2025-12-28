@@ -4,4 +4,4 @@ macro_rules! DynKind {
     };
 }
 
-DynKind!()
+DynKind!();

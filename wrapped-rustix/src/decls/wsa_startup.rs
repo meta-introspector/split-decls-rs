@@ -11,4 +11,4 @@ macro_rules! wsa_startup {
     };
 }
 
-wsa_startup!()
+wsa_startup!();

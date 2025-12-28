@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         GUID!();
-        HRESULT!();
         IUnknown_Vtbl!();
+        HRESULT!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! IInspectable_Vtbl {
     };
 }
 
-IInspectable_Vtbl!()
+IInspectable_Vtbl!();

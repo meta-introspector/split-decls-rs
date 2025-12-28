@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Round!();
-        Float!();
         StatusAnd!();
+        Float!();
+        Round!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! FloatConvert {
     };
 }
 
-FloatConvert!()
+FloatConvert!();

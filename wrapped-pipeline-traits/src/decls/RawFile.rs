@@ -4,4 +4,4 @@ macro_rules! RawFile {
     };
 }
 
-RawFile!()
+RawFile!();

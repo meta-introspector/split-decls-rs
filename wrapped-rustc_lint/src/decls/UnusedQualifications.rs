@@ -4,4 +4,4 @@ macro_rules! UnusedQualifications {
     };
 }
 
-UnusedQualifications!()
+UnusedQualifications!();

@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
+        AnnotationKind!();
+        UselessStability!();
         RustcConstStableIndirectPairing!();
         MissingStabilityAnnotations!();
-        AnnotationKind!();
         CannotStabilizeDeprecated!();
-        UselessStability!();
         MissingConstErr!();
-        MissingConstStabAttr!();
-        MissingStabilityAttr!();
-        DeprecatedAttribute!();
         ConstStableNotStable!();
+        MissingConstStabAttr!();
+        DeprecatedAttribute!();
+        MissingStabilityAttr!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_328 {
     };
 }
 
-impl_328!()
+impl_328!();

@@ -4,4 +4,4 @@ macro_rules! SheblingArgs {
     };
 }
 
-SheblingArgs!()
+SheblingArgs!();

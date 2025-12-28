@@ -11,4 +11,4 @@ macro_rules! resolve_rvalue_scopes {
     };
 }
 
-resolve_rvalue_scopes!()
+resolve_rvalue_scopes!();

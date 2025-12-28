@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        SegmentId!();
         Result!();
+        SegmentId!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_1110 {
     };
 }
 
-impl_1110!()
+impl_1110!();

@@ -11,4 +11,4 @@ macro_rules! dmap2 {
     };
 }
 
-dmap2!()
+dmap2!();

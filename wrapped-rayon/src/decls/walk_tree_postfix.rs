@@ -11,4 +11,4 @@ macro_rules! walk_tree_postfix {
     };
 }
 
-walk_tree_postfix!()
+walk_tree_postfix!();

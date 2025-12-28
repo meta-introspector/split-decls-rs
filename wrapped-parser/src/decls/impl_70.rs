@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         Parser!();
-        Marker!();
         Event!();
         Input!();
         TokenSet!();
+        Marker!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_70 {
     };
 }
 
-impl_70!()
+impl_70!();

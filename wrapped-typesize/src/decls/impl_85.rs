@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Field!();
+        TypeSize!();
         Owned!();
         SizableRc!();
-        TypeSize!();
+        Field!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_85 {
     };
 }
 
-impl_85!()
+impl_85!();

@@ -4,4 +4,4 @@ macro_rules! pcg128cm {
     };
 }
 
-pcg128cm!()
+pcg128cm!();

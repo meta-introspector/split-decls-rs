@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Accels!();
-        IterAccels!();
         DFA!();
-        Accel!();
         Endian!();
-        DeserializeError!();
+        IterAccels!();
         SerializeError!();
+        DeserializeError!();
+        Accels!();
+        Accel!();
         AccelTy!();
     };
 }
@@ -19,4 +19,4 @@ macro_rules! impl_161 {
     };
 }
 
-impl_161!()
+impl_161!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Edge!();
         EdgeRef!();
         Label!();
+        Edge!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! find_join {
     };
 }
 
-find_join!()
+find_join!();

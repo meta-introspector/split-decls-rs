@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Linker!();
         FailedToWrite!();
+        Linker!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! add_linked_symbol_object {
     };
 }
 
-add_linked_symbol_object!()
+add_linked_symbol_object!();

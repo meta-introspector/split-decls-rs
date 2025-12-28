@@ -1,20 +1,20 @@
 macro_rules! deps {
     () => {
-        MachO32!();
-        MachO64!();
-        ElfSection32!();
         MachOSection64!();
-        PeSection64!();
-        CoffBigSection!();
-        MachOSection32!();
-        XcoffSection64!();
         PeSection32!();
-        Endianness!();
-        WasmSection!();
-        ReadRef!();
+        MachO64!();
         ElfSection64!();
+        WasmSection!();
+        CoffBigSection!();
+        ReadRef!();
+        PeSection64!();
         XcoffSection32!();
         CoffSection!();
+        XcoffSection64!();
+        MachO32!();
+        MachOSection32!();
+        ElfSection32!();
+        Endianness!();
     };
 }
 
@@ -25,4 +25,4 @@ macro_rules! SectionInternal {
     };
 }
 
-SectionInternal!()
+SectionInternal!();

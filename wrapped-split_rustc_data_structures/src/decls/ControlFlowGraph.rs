@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Predecessors!();
-        DirectedGraph!();
         StartNode!();
         Successors!();
+        Predecessors!();
+        DirectedGraph!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! ControlFlowGraph {
     };
 }
 
-ControlFlowGraph!()
+ControlFlowGraph!();

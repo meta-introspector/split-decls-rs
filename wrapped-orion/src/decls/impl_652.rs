@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        XofContextConsistencyTester!();
         TestableXofContext!();
+        XofContextConsistencyTester!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_652 {
     };
 }
 
-impl_652!()
+impl_652!();

@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Sub1!();
+        GetBit!();
         UInt!();
         Internal!();
-        GetBit!();
-        B1!();
+        Sub1!();
         GetBitOut!();
+        B1!();
         InternalMarker!();
     };
 }
@@ -17,4 +17,4 @@ macro_rules! impl_458 {
     };
 }
 
-impl_458!()
+impl_458!();

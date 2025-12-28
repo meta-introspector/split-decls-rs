@@ -4,4 +4,4 @@ macro_rules! PR_GET_FP_MODE {
     };
 }
 
-PR_GET_FP_MODE!()
+PR_GET_FP_MODE!();

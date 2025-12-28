@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Result!();
         Error!();
+        Result!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! compress_postfix_leaves {
     };
 }
 
-compress_postfix_leaves!()
+compress_postfix_leaves!();

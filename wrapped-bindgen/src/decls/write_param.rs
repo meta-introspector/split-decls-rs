@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Config!();
-        TokenStream!();
         Param!();
+        TokenStream!();
+        Config!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! write_param {
     };
 }
 
-write_param!()
+write_param!();

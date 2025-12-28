@@ -4,4 +4,4 @@ macro_rules! PT_TLS {
     };
 }
 
-PT_TLS!()
+PT_TLS!();

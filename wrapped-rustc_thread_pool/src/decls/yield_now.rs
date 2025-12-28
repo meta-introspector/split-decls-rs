@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Yield!();
         WorkerThread!();
+        Yield!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! yield_now {
     };
 }
 
-yield_now!()
+yield_now!();

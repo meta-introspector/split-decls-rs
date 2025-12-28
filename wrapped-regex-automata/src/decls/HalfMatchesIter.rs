@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         TryHalfMatchesIter!();
-        HalfMatch!();
         Input!();
+        HalfMatch!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! HalfMatchesIter {
     };
 }
 
-HalfMatchesIter!()
+HalfMatchesIter!();

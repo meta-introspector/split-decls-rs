@@ -4,4 +4,4 @@ macro_rules! NonPrimitiveSimdType {
     };
 }
 
-NonPrimitiveSimdType!()
+NonPrimitiveSimdType!();

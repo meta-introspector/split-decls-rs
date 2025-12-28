@@ -4,4 +4,4 @@ macro_rules! R_PARISC_TLS_GDCALL {
     };
 }
 
-R_PARISC_TLS_GDCALL!()
+R_PARISC_TLS_GDCALL!();

@@ -4,4 +4,4 @@ macro_rules! llvm_is_ec_object_file {
     };
 }
 
-llvm_is_ec_object_file!()
+llvm_is_ec_object_file!();

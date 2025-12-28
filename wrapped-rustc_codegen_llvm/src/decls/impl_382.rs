@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        WithLlvmError!();
         LlvmError!();
+        WithLlvmError!();
         Diagnostic!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_382 {
     };
 }
 
-impl_382!()
+impl_382!();

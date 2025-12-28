@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Error!();
         CStrLike!();
+        Error!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! test_c_str_like_into {
     };
 }
 
-test_c_str_like_into!()
+test_c_str_like_into!();

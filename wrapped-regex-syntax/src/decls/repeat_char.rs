@@ -4,4 +4,4 @@ macro_rules! repeat_char {
     };
 }
 
-repeat_char!()
+repeat_char!();

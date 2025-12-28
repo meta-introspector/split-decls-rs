@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Iter!();
         ParallelIterator!();
         UnindexedConsumer!();
+        Iter!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_1090 {
     };
 }
 
-impl_1090!()
+impl_1090!();

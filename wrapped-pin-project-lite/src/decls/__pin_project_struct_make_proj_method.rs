@@ -4,4 +4,4 @@ macro_rules! __pin_project_struct_make_proj_method {
     };
 }
 
-__pin_project_struct_make_proj_method!()
+__pin_project_struct_make_proj_method!();

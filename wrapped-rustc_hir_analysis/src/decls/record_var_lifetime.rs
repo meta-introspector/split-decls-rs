@@ -11,4 +11,4 @@ macro_rules! record_var_lifetime {
     };
 }
 
-record_var_lifetime!()
+record_var_lifetime!();

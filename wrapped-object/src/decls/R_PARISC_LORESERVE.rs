@@ -4,4 +4,4 @@ macro_rules! R_PARISC_LORESERVE {
     };
 }
 
-R_PARISC_LORESERVE!()
+R_PARISC_LORESERVE!();

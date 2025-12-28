@@ -4,4 +4,4 @@ macro_rules! VirtualFileMapping {
     };
 }
 
-VirtualFileMapping!()
+VirtualFileMapping!();

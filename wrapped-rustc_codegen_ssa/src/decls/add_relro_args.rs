@@ -11,4 +11,4 @@ macro_rules! add_relro_args {
     };
 }
 
-add_relro_args!()
+add_relro_args!();

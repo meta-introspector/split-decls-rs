@@ -4,4 +4,4 @@ macro_rules! check_item_fn {
     };
 }
 
-check_item_fn!()
+check_item_fn!();

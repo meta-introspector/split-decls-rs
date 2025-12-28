@@ -4,4 +4,4 @@ macro_rules! CapturedMessageOpt {
     };
 }
 
-CapturedMessageOpt!()
+CapturedMessageOpt!();

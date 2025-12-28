@@ -4,4 +4,4 @@ macro_rules! request_span {
     };
 }
 
-request_span!()
+request_span!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        FinderRev!();
         FindRevIter!();
+        FinderRev!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! rfind_iter {
     };
 }
 
-rfind_iter!()
+rfind_iter!();

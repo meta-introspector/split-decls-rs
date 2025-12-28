@@ -4,4 +4,4 @@ macro_rules! S_SYMBOL_STUBS {
     };
 }
 
-S_SYMBOL_STUBS!()
+S_SYMBOL_STUBS!();

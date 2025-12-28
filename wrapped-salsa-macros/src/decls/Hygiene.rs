@@ -4,4 +4,4 @@ macro_rules! Hygiene {
     };
 }
 
-Hygiene!()
+Hygiene!();

@@ -4,4 +4,4 @@ macro_rules! HasErrorDeep {
     };
 }
 
-HasErrorDeep!()
+HasErrorDeep!();

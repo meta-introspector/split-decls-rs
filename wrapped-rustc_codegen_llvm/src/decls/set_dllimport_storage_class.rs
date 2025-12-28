@@ -11,4 +11,4 @@ macro_rules! set_dllimport_storage_class {
     };
 }
 
-set_dllimport_storage_class!()
+set_dllimport_storage_class!();

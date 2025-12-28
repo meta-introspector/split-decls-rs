@@ -4,4 +4,4 @@ macro_rules! is_meta_character {
     };
 }
 
-is_meta_character!()
+is_meta_character!();

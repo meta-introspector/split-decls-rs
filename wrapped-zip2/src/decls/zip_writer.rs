@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        GenericZipWriter!();
         ZipFileData!();
         ZipWriterStats!();
+        GenericZipWriter!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! zip_writer {
     };
 }
 
-zip_writer!()
+zip_writer!();

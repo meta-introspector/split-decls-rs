@@ -4,4 +4,4 @@ macro_rules! LC_SUB_FRAMEWORK {
     };
 }
 
-LC_SUB_FRAMEWORK!()
+LC_SUB_FRAMEWORK!();

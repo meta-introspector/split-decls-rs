@@ -11,4 +11,4 @@ macro_rules! sethostname {
     };
 }
 
-sethostname!()
+sethostname!();

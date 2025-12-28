@@ -4,4 +4,4 @@ macro_rules! keccakf {
     };
 }
 
-keccakf!()
+keccakf!();

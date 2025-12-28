@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Value!();
+        TypeName!();
         CppEnum!();
         Type!();
-        TypeName!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_69 {
     };
 }
 
-impl_69!()
+impl_69!();

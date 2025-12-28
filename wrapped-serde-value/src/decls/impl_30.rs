@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        SerializerError!();
         Serializer!();
-        SerializeSeq!();
         SerializeStructVariant!();
-        SerializeTupleVariant!();
         Value!();
-        SerializeMap!();
+        SerializeSeq!();
+        SerializeTupleStruct!();
         SerializeTuple!();
         SerializeStruct!();
-        SerializeTupleStruct!();
+        SerializerError!();
+        SerializeMap!();
+        SerializeTupleVariant!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_30 {
     };
 }
 
-impl_30!()
+impl_30!();

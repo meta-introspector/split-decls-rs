@@ -4,4 +4,4 @@ macro_rules! braid {
     };
 }
 
-braid!()
+braid!();

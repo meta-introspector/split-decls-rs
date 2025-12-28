@@ -4,4 +4,4 @@ macro_rules! if_ether {
     };
 }
 
-if_ether!()
+if_ether!();

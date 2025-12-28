@@ -4,4 +4,4 @@ macro_rules! SkipAnyWhileConsumer {
     };
 }
 
-SkipAnyWhileConsumer!()
+SkipAnyWhileConsumer!();

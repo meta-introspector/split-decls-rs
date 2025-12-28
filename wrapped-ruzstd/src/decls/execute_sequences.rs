@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Take!();
         DecoderScratch!();
         ExecuteSequencesError!();
-        Take!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! execute_sequences {
     };
 }
 
-execute_sequences!()
+execute_sequences!();

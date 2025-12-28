@@ -4,4 +4,4 @@ macro_rules! crate_incoherent_impls {
     };
 }
 
-crate_incoherent_impls!()
+crate_incoherent_impls!();

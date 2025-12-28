@@ -13,4 +13,4 @@ macro_rules! place_projection_conflict {
     };
 }
 
-place_projection_conflict!()
+place_projection_conflict!();

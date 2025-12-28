@@ -4,4 +4,4 @@ macro_rules! EventKind {
     };
 }
 
-EventKind!()
+EventKind!();

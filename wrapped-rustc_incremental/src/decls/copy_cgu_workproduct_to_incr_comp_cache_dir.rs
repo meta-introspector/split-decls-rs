@@ -12,4 +12,4 @@ macro_rules! copy_cgu_workproduct_to_incr_comp_cache_dir {
     };
 }
 
-copy_cgu_workproduct_to_incr_comp_cache_dir!()
+copy_cgu_workproduct_to_incr_comp_cache_dir!();

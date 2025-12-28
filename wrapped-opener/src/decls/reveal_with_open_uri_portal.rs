@@ -11,4 +11,4 @@ macro_rules! reveal_with_open_uri_portal {
     };
 }
 
-reveal_with_open_uri_portal!()
+reveal_with_open_uri_portal!();

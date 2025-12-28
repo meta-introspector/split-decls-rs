@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
         ManifestPath!();
-        RustLibSrcWorkspace!();
-        WorkspaceBuildScripts!();
-        Sysroot!();
-        CargoWorkspace!();
         RustSourceWorkspaceConfig!();
+        CargoWorkspace!();
         ProjectWorkspace!();
+        WorkspaceBuildScripts!();
         ProjectWorkspaceKind!();
+        Sysroot!();
+        RustLibSrcWorkspace!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! smoke_test_real_sysroot_cargo {
     };
 }
 
-smoke_test_real_sysroot_cargo!()
+smoke_test_real_sysroot_cargo!();

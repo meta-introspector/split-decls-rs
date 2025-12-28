@@ -1,18 +1,18 @@
 macro_rules! deps {
     () => {
-        PatternID!();
-        Match!();
         Input!();
         PatternSet!();
-        PikeVM!();
-        NFA!();
+        Match!();
         Captures!();
-        MatchKind!();
+        HalfMatch!();
+        NFA!();
         GroupInfo!();
+        Anchored!();
+        PikeVM!();
+        MatchKind!();
         NonMaxUsize!();
         Cache!();
-        Anchored!();
-        HalfMatch!();
+        PatternID!();
     };
 }
 
@@ -23,4 +23,4 @@ macro_rules! impl_541 {
     };
 }
 
-impl_541!()
+impl_541!();

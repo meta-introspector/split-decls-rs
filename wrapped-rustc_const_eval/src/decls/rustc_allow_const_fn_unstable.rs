@@ -4,4 +4,4 @@ macro_rules! rustc_allow_const_fn_unstable {
     };
 }
 
-rustc_allow_const_fn_unstable!()
+rustc_allow_const_fn_unstable!();

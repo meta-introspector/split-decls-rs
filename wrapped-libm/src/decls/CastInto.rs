@@ -4,4 +4,4 @@ macro_rules! CastInto {
     };
 }
 
-CastInto!()
+CastInto!();

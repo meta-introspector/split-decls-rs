@@ -4,4 +4,4 @@ macro_rules! libc_bitflags {
     };
 }
 
-libc_bitflags!()
+libc_bitflags!();

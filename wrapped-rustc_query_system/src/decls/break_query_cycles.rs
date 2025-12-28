@@ -13,4 +13,4 @@ macro_rules! break_query_cycles {
     };
 }
 
-break_query_cycles!()
+break_query_cycles!();

@@ -4,4 +4,4 @@ macro_rules! error_halfscale {
     };
 }
 
-error_halfscale!()
+error_halfscale!();

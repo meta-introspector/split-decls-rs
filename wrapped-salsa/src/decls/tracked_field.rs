@@ -4,4 +4,4 @@ macro_rules! tracked_field {
     };
 }
 
-tracked_field!()
+tracked_field!();

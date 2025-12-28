@@ -4,4 +4,4 @@ macro_rules! IMPORT_OBJECT_DATA {
     };
 }
 
-IMPORT_OBJECT_DATA!()
+IMPORT_OBJECT_DATA!();

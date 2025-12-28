@@ -4,4 +4,4 @@ macro_rules! dwim_impl {
     };
 }
 
-dwim_impl!()
+dwim_impl!();

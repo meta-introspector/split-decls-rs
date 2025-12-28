@@ -3,9 +3,9 @@ macro_rules! deps {
         Batch!();
         ToSql!();
         Error!();
+        Result!();
         Connection!();
         InterruptHandle!();
-        Result!();
         Null!();
     };
 }
@@ -95,4 +95,4 @@ macro_rules! test {
     };
 }
 
-test!()
+test!();

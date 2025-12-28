@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        ImplicitUnsafeAutorefsOrigin!();
         ImplicitUnsafeAutorefsSuggestion!();
         ImplicitUnsafeAutorefsMethodNote!();
+        ImplicitUnsafeAutorefsOrigin!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! ImplicitUnsafeAutorefsDiag {
     };
 }
 
-ImplicitUnsafeAutorefsDiag!()
+ImplicitUnsafeAutorefsDiag!();

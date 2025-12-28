@@ -13,4 +13,4 @@ macro_rules! MachHeader64 {
     };
 }
 
-MachHeader64!()
+MachHeader64!();

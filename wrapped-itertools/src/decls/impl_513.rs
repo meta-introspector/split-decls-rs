@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        TupleBuffer!();
         Tuples!();
         HomogeneousTuple!();
-        TupleBuffer!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_513 {
     };
 }
 
-impl_513!()
+impl_513!();

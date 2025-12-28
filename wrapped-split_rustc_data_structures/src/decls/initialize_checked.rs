@@ -4,4 +4,4 @@ macro_rules! initialize_checked {
     };
 }
 
-initialize_checked!()
+initialize_checked!();

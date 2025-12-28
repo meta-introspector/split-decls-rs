@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
         Error!();
-        MapValueSerializer!();
-        Value!();
         KeySerializer!();
-        SerializeMap!();
-        InlineTable!();
-        Item!();
         SerializeInlineTable!();
+        Item!();
+        Value!();
+        SerializeMap!();
+        MapValueSerializer!();
+        InlineTable!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_368 {
     };
 }
 
-impl_368!()
+impl_368!();

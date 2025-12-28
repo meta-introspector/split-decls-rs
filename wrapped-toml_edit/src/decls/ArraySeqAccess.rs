@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Item!();
         IntoIter!();
+        Item!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! ArraySeqAccess {
     };
 }
 
-ArraySeqAccess!()
+ArraySeqAccess!();

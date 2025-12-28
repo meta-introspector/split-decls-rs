@@ -4,4 +4,4 @@ macro_rules! ffi_util {
     };
 }
 
-ffi_util!()
+ffi_util!();

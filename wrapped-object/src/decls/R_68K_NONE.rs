@@ -4,4 +4,4 @@ macro_rules! R_68K_NONE {
     };
 }
 
-R_68K_NONE!()
+R_68K_NONE!();

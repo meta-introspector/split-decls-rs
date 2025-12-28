@@ -11,4 +11,4 @@ macro_rules! generate_snapshot_path {
     };
 }
 
-generate_snapshot_path!()
+generate_snapshot_path!();

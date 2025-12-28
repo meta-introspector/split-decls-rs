@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Prefilter!();
         DFA!();
-        MatchError!();
+        Prefilter!();
         Cache!();
-        HalfMatch!();
         Input!();
-        Span!();
+        MatchError!();
         OverlappingState!();
+        Span!();
+        HalfMatch!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! find_overlapping_fwd_imp {
     };
 }
 
-find_overlapping_fwd_imp!()
+find_overlapping_fwd_imp!();

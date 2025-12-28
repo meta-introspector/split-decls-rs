@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        CheckRaw!();
         NonZeroChar!();
         EscapeError!();
+        CheckRaw!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_162 {
     };
 }
 
-impl_162!()
+impl_162!();

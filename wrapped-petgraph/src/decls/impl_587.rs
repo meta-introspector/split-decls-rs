@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         DotNodeWeight!();
-        StableGraph!();
         DotAttrList!();
+        StableGraph!();
         ParseFromDot!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_587 {
     };
 }
 
-impl_587!()
+impl_587!();

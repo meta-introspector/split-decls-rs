@@ -4,4 +4,4 @@ macro_rules! chroot {
     };
 }
 
-chroot!()
+chroot!();

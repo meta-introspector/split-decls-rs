@@ -4,4 +4,4 @@ macro_rules! RootDirFilter {
     };
 }
 
-RootDirFilter!()
+RootDirFilter!();

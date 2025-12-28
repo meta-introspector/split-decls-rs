@@ -4,4 +4,4 @@ macro_rules! SHT_SUNW_move {
     };
 }
 
-SHT_SUNW_move!()
+SHT_SUNW_move!();

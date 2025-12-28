@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        ExprVal!();
-        StringConcat!();
         FunctionCall!();
         Error!();
+        ExprVal!();
+        StringConcat!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! parse_string_concat {
     };
 }
 
-parse_string_concat!()
+parse_string_concat!();

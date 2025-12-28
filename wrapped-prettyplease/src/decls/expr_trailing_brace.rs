@@ -11,4 +11,4 @@ macro_rules! expr_trailing_brace {
     };
 }
 
-expr_trailing_brace!()
+expr_trailing_brace!();

@@ -4,4 +4,4 @@ macro_rules! reg_to_llvm {
     };
 }
 
-reg_to_llvm!()
+reg_to_llvm!();

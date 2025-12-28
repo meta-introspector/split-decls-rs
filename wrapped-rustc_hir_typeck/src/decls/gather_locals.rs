@@ -4,4 +4,4 @@ macro_rules! gather_locals {
     };
 }
 
-gather_locals!()
+gather_locals!();

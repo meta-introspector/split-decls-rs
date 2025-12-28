@@ -5,4 +5,4 @@ macro_rules! lock_file_path {
     };
 }
 
-lock_file_path!()
+lock_file_path!();

@@ -13,4 +13,4 @@ macro_rules! impl_has_attrs_none {
     };
 }
 
-impl_has_attrs_none!()
+impl_has_attrs_none!();

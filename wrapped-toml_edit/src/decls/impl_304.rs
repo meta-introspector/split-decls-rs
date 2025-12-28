@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        KeyValuePairs!();
         TableDeserializer!();
+        KeyValuePairs!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_304 {
     };
 }
 
-impl_304!()
+impl_304!();

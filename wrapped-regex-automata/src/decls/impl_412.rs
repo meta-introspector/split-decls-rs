@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
+        RegexInfo!();
+        OnePassCache!();
         OnePass!();
         OnePassEngine!();
-        RegexInfo!();
-        NFA!();
-        OnePassCache!();
         NonMaxUsize!();
+        NFA!();
         Config!();
+        Builder!();
         Input!();
         PatternID!();
-        Builder!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_412 {
     };
 }
 
-impl_412!()
+impl_412!();

@@ -4,4 +4,4 @@ macro_rules! CharEscape {
     };
 }
 
-CharEscape!()
+CharEscape!();

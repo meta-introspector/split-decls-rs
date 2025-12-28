@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        WritableBuffer!();
         Result!();
+        WritableBuffer!();
         Error!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! StreamingBuffer {
     };
 }
 
-StreamingBuffer!()
+StreamingBuffer!();

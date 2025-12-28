@@ -4,4 +4,4 @@ macro_rules! EF_SPARCV9_RMO {
     };
 }
 
-EF_SPARCV9_RMO!()
+EF_SPARCV9_RMO!();

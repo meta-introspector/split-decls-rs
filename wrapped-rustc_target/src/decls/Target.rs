@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        StaticCow!();
+        ABI!();
         TargetMetadata!();
         TargetOptions!();
-        ABI!();
-        StaticCow!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! Target {
     };
 }
 
-Target!()
+Target!();

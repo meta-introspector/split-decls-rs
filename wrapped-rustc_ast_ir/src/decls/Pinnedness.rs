@@ -4,4 +4,4 @@ macro_rules! Pinnedness {
     };
 }
 
-Pinnedness!()
+Pinnedness!();

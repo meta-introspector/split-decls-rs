@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
         Result!();
-        State!();
-        WorkStealingQueue!();
-        Lzma2ReaderMt!();
-        Read!();
-        Error!();
         ResultUnit!();
+        WorkStealingQueue!();
+        Error!();
+        State!();
+        Read!();
+        Lzma2ReaderMt!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_249 {
     };
 }
 
-impl_249!()
+impl_249!();

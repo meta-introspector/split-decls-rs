@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Result!();
-        Parse!();
+        Group!();
         Error!();
         Parser!();
-        Group!();
         LitRepr!();
+        Result!();
+        Parse!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_422 {
     };
 }
 
-impl_422!()
+impl_422!();

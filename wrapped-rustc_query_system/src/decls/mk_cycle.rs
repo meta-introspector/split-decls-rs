@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        CycleError!();
-        Value!();
-        QueryContext!();
         QueryConfig!();
+        QueryContext!();
+        Value!();
+        CycleError!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! mk_cycle {
     };
 }
 
-mk_cycle!()
+mk_cycle!();

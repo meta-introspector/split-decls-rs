@@ -4,4 +4,4 @@ macro_rules! Align128 {
     };
 }
 
-Align128!()
+Align128!();

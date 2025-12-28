@@ -4,4 +4,4 @@ macro_rules! PWD_VERIFY_LENGTH {
     };
 }
 
-PWD_VERIFY_LENGTH!()
+PWD_VERIFY_LENGTH!();

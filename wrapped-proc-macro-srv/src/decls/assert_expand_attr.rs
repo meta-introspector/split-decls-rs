@@ -4,4 +4,4 @@ macro_rules! assert_expand_attr {
     };
 }
 
-assert_expand_attr!()
+assert_expand_attr!();

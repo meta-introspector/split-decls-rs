@@ -4,4 +4,4 @@ macro_rules! mix_two_chunks {
     };
 }
 
-mix_two_chunks!()
+mix_two_chunks!();

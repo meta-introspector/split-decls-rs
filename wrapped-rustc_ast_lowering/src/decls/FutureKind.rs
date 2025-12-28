@@ -4,4 +4,4 @@ macro_rules! FutureKind {
     };
 }
 
-FutureKind!()
+FutureKind!();

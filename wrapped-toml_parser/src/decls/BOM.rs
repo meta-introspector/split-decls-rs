@@ -4,4 +4,4 @@ macro_rules! BOM {
     };
 }
 
-BOM!()
+BOM!();

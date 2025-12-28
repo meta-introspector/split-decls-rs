@@ -11,4 +11,4 @@ macro_rules! section_from_rva {
     };
 }
 
-section_from_rva!()
+section_from_rva!();

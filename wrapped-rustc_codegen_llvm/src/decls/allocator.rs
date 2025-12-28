@@ -4,4 +4,4 @@ macro_rules! allocator {
     };
 }
 
-allocator!()
+allocator!();

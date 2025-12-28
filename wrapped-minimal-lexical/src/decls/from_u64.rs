@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        VecType!();
         Limb!();
         StackVec!();
+        VecType!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! from_u64 {
     };
 }
 
-from_u64!()
+from_u64!();

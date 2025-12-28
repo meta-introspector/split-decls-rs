@@ -4,4 +4,4 @@ macro_rules! MirConstId {
     };
 }
 
-MirConstId!()
+MirConstId!();

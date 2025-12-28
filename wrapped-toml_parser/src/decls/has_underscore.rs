@@ -4,4 +4,4 @@ macro_rules! has_underscore {
     };
 }
 
-has_underscore!()
+has_underscore!();

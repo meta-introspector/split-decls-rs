@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Deserializer!();
         Read!();
         IoRead!();
-        Deserializer!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_14 {
     };
 }
 
-impl_14!()
+impl_14!();

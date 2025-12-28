@@ -4,4 +4,4 @@ macro_rules! decode_hex_val_slow {
     };
 }
 
-decode_hex_val_slow!()
+decode_hex_val_slow!();

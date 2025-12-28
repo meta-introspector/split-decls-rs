@@ -4,4 +4,4 @@ macro_rules! R_386_32PLT {
     };
 }
 
-R_386_32PLT!()
+R_386_32PLT!();

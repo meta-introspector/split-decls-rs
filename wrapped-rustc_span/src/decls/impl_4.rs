@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        StableSourceFileId!();
         SourceFile!();
-        SpanData!();
-        SourceMap!();
         CacheEntry!();
+        SpanData!();
+        StableSourceFileId!();
+        SourceMap!();
         CachingSourceMapView!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! impl_4 {
     };
 }
 
-impl_4!()
+impl_4!();

@@ -56,4 +56,4 @@ theorem system_soundness :
     };
 }
 
-formal_verification_impl!()
+formal_verification_impl!();

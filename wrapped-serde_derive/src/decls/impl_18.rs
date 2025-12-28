@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         Attr!();
         BoolAttr!();
-        Ctxt!();
         Symbol!();
+        Ctxt!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_18 {
     };
 }
 
-impl_18!()
+impl_18!();

@@ -4,4 +4,4 @@ macro_rules! visualize_whitespace {
     };
 }
 
-visualize_whitespace!()
+visualize_whitespace!();

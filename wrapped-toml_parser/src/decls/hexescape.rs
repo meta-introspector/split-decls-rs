@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Raw!();
-        Expected!();
-        Span!();
         ErrorSink!();
+        Span!();
+        Expected!();
         ParseError!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! hexescape {
     };
 }
 
-hexescape!()
+hexescape!();

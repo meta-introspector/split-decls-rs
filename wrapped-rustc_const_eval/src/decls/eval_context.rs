@@ -4,4 +4,4 @@ macro_rules! eval_context {
     };
 }
 
-eval_context!()
+eval_context!();

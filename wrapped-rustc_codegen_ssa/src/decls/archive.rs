@@ -4,4 +4,4 @@ macro_rules! archive {
     };
 }
 
-archive!()
+archive!();

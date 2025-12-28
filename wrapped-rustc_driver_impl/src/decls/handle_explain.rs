@@ -4,4 +4,4 @@ macro_rules! handle_explain {
     };
 }
 
-handle_explain!()
+handle_explain!();

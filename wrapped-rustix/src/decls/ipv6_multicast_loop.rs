@@ -11,4 +11,4 @@ macro_rules! ipv6_multicast_loop {
     };
 }
 
-ipv6_multicast_loop!()
+ipv6_multicast_loop!();

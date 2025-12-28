@@ -4,4 +4,4 @@ macro_rules! page_size {
     };
 }
 
-page_size!()
+page_size!();

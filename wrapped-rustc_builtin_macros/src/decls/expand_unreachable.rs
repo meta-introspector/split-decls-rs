@@ -4,4 +4,4 @@ macro_rules! expand_unreachable {
     };
 }
 
-expand_unreachable!()
+expand_unreachable!();

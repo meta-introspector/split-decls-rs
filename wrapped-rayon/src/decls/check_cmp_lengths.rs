@@ -4,4 +4,4 @@ macro_rules! check_cmp_lengths {
     };
 }
 
-check_cmp_lengths!()
+check_cmp_lengths!();

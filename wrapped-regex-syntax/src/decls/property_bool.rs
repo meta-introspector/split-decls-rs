@@ -4,4 +4,4 @@ macro_rules! property_bool {
     };
 }
 
-property_bool!()
+property_bool!();

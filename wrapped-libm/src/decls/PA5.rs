@@ -4,4 +4,4 @@ macro_rules! PA5 {
     };
 }
 
-PA5!()
+PA5!();

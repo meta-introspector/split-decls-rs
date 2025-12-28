@@ -11,4 +11,4 @@ macro_rules! LogLevel {
     };
 }
 
-LogLevel!()
+LogLevel!();

@@ -4,4 +4,4 @@ macro_rules! assembly {
     };
 }
 
-assembly!()
+assembly!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        AbiErrorDisabledVectorType!();
         AbiRequiredTargetFeature!();
+        AbiErrorDisabledVectorType!();
         AbiErrorUnsupportedVectorType!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! do_check_simd_vector_abi {
     };
 }
 
-do_check_simd_vector_abi!()
+do_check_simd_vector_abi!();

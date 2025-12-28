@@ -4,4 +4,4 @@ macro_rules! R_MIPS_RELGOT {
     };
 }
 
-R_MIPS_RELGOT!()
+R_MIPS_RELGOT!();

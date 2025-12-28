@@ -11,4 +11,4 @@ macro_rules! check_assist_not_applicable {
     };
 }
 
-check_assist_not_applicable!()
+check_assist_not_applicable!();

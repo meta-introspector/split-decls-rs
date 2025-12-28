@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        DefKey!();
         Item!();
-        DefPath!();
+        DefKey!();
         DefPathTable!();
+        DefPath!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_84 {
     };
 }
 
-impl_84!()
+impl_84!();

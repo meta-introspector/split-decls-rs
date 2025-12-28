@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        CargoWorkspace!();
-        PackageData!();
         TargetKind!();
         BuildScriptOutput!();
+        CargoWorkspace!();
+        PackageData!();
         ProcMacroDylibPath!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! add_target_crate_root {
     };
 }
 
-add_target_crate_root!()
+add_target_crate_root!();

@@ -4,4 +4,4 @@ macro_rules! poll_semaphore {
     };
 }
 
-poll_semaphore!()
+poll_semaphore!();

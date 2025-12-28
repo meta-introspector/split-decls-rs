@@ -4,4 +4,4 @@ macro_rules! OffsetMode {
     };
 }
 
-OffsetMode!()
+OffsetMode!();

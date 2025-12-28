@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         ForestObligation!();
-        ObligationProcessor!();
-        ClosureObligationProcessor!();
         ProcessResult!();
-        Error!();
+        ClosureObligationProcessor!();
         TestOutcome!();
+        ObligationProcessor!();
+        Error!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_316 {
     };
 }
 
-impl_316!()
+impl_316!();

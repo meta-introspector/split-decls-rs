@@ -4,4 +4,4 @@ macro_rules! test_into_bytes_enum {
     };
 }
 
-test_into_bytes_enum!()
+test_into_bytes_enum!();

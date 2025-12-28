@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
+        Input!();
         AsBytes!();
-        Offset!();
-        Error!();
-        AsChar!();
-        ParseError!();
         Parser!();
         Compare!();
-        ParseTo!();
         Float!();
-        Input!();
+        Error!();
+        ParseTo!();
+        ParseError!();
+        Offset!();
+        AsChar!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! float {
     };
 }
 
-float!()
+float!();

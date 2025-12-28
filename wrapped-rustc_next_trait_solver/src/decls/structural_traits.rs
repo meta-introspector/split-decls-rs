@@ -4,4 +4,4 @@ macro_rules! structural_traits {
     };
 }
 
-structural_traits!()
+structural_traits!();

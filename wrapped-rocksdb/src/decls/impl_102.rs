@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        ThreadMode!();
-        DBInner!();
-        DBCommon!();
-        AsColumnFamilyRef!();
-        Error!();
-        DBAccess!();
         DBPinnableSlice!();
         ReadOptions!();
+        DBCommon!();
+        Error!();
+        AsColumnFamilyRef!();
+        DBInner!();
+        ThreadMode!();
+        DBAccess!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_102 {
     };
 }
 
-impl_102!()
+impl_102!();

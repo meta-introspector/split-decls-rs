@@ -11,4 +11,4 @@ macro_rules! NUM_SHIFT {
     };
 }
 
-NUM_SHIFT!()
+NUM_SHIFT!();

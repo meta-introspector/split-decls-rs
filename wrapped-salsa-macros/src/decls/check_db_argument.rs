@@ -4,4 +4,4 @@ macro_rules! check_db_argument {
     };
 }
 
-check_db_argument!()
+check_db_argument!();

@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         Ty!();
-        Interner!();
-        DeepRejectCtxt!();
-        SimplifiedType!();
-        TreatParams!();
         DefId!();
+        SimplifiedType!();
+        DeepRejectCtxt!();
+        Interner!();
+        TreatParams!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! simplify_type {
     };
 }
 
-simplify_type!()
+simplify_type!();

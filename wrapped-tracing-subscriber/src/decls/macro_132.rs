@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Layered!();
-        Layer!();
         Context!();
+        Layer!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! macro_132 {
     };
 }
 
-macro_132!()
+macro_132!();

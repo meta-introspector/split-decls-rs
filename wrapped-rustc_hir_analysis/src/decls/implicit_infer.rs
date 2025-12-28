@@ -4,4 +4,4 @@ macro_rules! implicit_infer {
     };
 }
 
-implicit_infer!()
+implicit_infer!();

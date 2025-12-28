@@ -11,4 +11,4 @@ macro_rules! check_mod_attrs {
     };
 }
 
-check_mod_attrs!()
+check_mod_attrs!();

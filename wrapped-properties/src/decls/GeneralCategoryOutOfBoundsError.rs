@@ -4,4 +4,4 @@ macro_rules! GeneralCategoryOutOfBoundsError {
     };
 }
 
-GeneralCategoryOutOfBoundsError!()
+GeneralCategoryOutOfBoundsError!();

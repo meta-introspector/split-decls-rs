@@ -74,4 +74,4 @@ macro_rules! rust_eigenmatrix_impl {
     };
 }
 
-rust_eigenmatrix_impl!()
+rust_eigenmatrix_impl!();

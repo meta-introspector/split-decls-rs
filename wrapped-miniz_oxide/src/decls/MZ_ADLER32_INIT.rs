@@ -4,4 +4,4 @@ macro_rules! MZ_ADLER32_INIT {
     };
 }
 
-MZ_ADLER32_INIT!()
+MZ_ADLER32_INIT!();

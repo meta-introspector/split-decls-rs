@@ -11,4 +11,4 @@ macro_rules! fallback_path {
     };
 }
 
-fallback_path!()
+fallback_path!();

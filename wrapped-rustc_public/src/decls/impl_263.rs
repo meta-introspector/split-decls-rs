@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        Prov!();
         BridgeTys!();
+        DefId!();
+        Error!();
+        MirConstId!();
+        Allocation!();
+        Prov!();
+        TyConstId!();
         Layout!();
         Span!();
         Ty!();
-        TyConstId!();
-        MirConstId!();
-        Error!();
-        Allocation!();
-        DefId!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_263 {
     };
 }
 
-impl_263!()
+impl_263!();

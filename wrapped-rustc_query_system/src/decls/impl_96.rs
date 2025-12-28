@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        GraphEncoder!();
         DepNodeColor!();
-        CurrentDepGraph!();
+        GraphEncoder!();
         NodeInfo!();
         EdgesVec!();
         DepNode!();
+        DepGraphQuery!();
         DepNodeColorMap!();
         Deps!();
-        SerializedDepGraph!();
-        DepGraphQuery!();
+        CurrentDepGraph!();
         EncoderState!();
+        SerializedDepGraph!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_96 {
     };
 }
 
-impl_96!()
+impl_96!();

@@ -4,4 +4,4 @@ macro_rules! EM_D10V {
     };
 }
 
-EM_D10V!()
+EM_D10V!();

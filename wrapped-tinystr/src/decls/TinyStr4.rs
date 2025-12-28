@@ -11,4 +11,4 @@ macro_rules! TinyStr4 {
     };
 }
 
-TinyStr4!()
+TinyStr4!();

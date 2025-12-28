@@ -4,4 +4,4 @@ macro_rules! ML_BASIC_STRING_DELIM {
     };
 }
 
-ML_BASIC_STRING_DELIM!()
+ML_BASIC_STRING_DELIM!();

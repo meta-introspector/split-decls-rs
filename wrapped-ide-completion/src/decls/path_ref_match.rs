@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        CompletionContext!();
         PathCompletionCtx!();
         Builder!();
+        CompletionContext!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! path_ref_match {
     };
 }
 
-path_ref_match!()
+path_ref_match!();

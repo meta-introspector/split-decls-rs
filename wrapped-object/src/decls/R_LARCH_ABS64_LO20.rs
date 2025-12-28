@@ -4,4 +4,4 @@ macro_rules! R_LARCH_ABS64_LO20 {
     };
 }
 
-R_LARCH_ABS64_LO20!()
+R_LARCH_ABS64_LO20!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Filesystem!();
+        Args!();
         Bin!();
         Env!();
-        Args!();
         CommandStatus!();
+        Filesystem!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! OneShot {
     };
 }
 
-OneShot!()
+OneShot!();

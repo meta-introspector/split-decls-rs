@@ -4,4 +4,4 @@ macro_rules! MLL_CHAR {
     };
 }
 
-MLL_CHAR!()
+MLL_CHAR!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Type!();
-        Map!();
         Value!();
+        Map!();
+        Type!();
         Index!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_317 {
     };
 }
 
-impl_317!()
+impl_317!();

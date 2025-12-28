@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        ImageExportDirectory!();
         U32Bytes!();
         Bytes!();
+        ImageExportDirectory!();
         U16Bytes!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! ExportTable {
     };
 }
 
-ExportTable!()
+ExportTable!();

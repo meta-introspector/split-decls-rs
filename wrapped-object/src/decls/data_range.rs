@@ -4,4 +4,4 @@ macro_rules! data_range {
     };
 }
 
-data_range!()
+data_range!();

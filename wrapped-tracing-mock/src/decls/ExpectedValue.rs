@@ -4,4 +4,4 @@ macro_rules! ExpectedValue {
     };
 }
 
-ExpectedValue!()
+ExpectedValue!();

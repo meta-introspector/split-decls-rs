@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
+        Fragment!();
         Style!();
-        StructVariant!();
         Parameters!();
-        Container!();
         Variant!();
         TupleVariant!();
-        Fragment!();
+        Container!();
+        StructVariant!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! serialize_untagged_variant {
     };
 }
 
-serialize_untagged_variant!()
+serialize_untagged_variant!();

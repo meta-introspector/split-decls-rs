@@ -11,4 +11,4 @@ macro_rules! try_init_openssl_env_vars {
     };
 }
 
-try_init_openssl_env_vars!()
+try_init_openssl_env_vars!();

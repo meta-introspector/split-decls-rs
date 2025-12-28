@@ -4,4 +4,4 @@ macro_rules! DV_II_51_2_BIT {
     };
 }
 
-DV_II_51_2_BIT!()
+DV_II_51_2_BIT!();

@@ -4,4 +4,4 @@ macro_rules! TypeIrTraitUsage {
     };
 }
 
-TypeIrTraitUsage!()
+TypeIrTraitUsage!();

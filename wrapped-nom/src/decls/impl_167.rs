@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Needed!();
-        Err!();
-        IsStreaming!();
         Streaming!();
+        Needed!();
+        IsStreaming!();
+        Err!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_167 {
     };
 }
 
-impl_167!()
+impl_167!();

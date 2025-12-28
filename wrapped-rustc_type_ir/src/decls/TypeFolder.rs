@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
+        Region!();
+        Clauses!();
+        Binder!();
+        TypeFoldable!();
+        Ty!();
+        Const!();
         Predicate!();
         FallibleTypeFolder!();
-        Binder!();
-        Const!();
-        Ty!();
-        TypeFoldable!();
-        Region!();
         Interner!();
-        Clauses!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! TypeFolder {
     };
 }
 
-TypeFolder!()
+TypeFolder!();

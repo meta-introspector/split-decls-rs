@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        SeekFrom!();
         Result!();
+        SeekFrom!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! seek {
     };
 }
 
-seek!()
+seek!();

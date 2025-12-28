@@ -4,4 +4,4 @@ macro_rules! STRING_REF_TAG {
     };
 }
 
-STRING_REF_TAG!()
+STRING_REF_TAG!();

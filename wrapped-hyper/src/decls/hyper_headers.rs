@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        OriginalHeaderOrder!();
         HeaderCaseMap!();
+        OriginalHeaderOrder!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! hyper_headers {
     };
 }
 
-hyper_headers!()
+hyper_headers!();

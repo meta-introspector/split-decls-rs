@@ -11,4 +11,4 @@ macro_rules! print_disambiguation_help {
     };
 }
 
-print_disambiguation_help!()
+print_disambiguation_help!();

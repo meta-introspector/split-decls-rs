@@ -4,4 +4,4 @@ macro_rules! ssr_function_to_method {
     };
 }
 
-ssr_function_to_method!()
+ssr_function_to_method!();

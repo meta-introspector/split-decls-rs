@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        IdxRange!();
         Idx!();
+        IdxRange!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_38 {
     };
 }
 
-impl_38!()
+impl_38!();

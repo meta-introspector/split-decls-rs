@@ -12,4 +12,4 @@ macro_rules! json_normalize_glob_obj_key {
     };
 }
 
-json_normalize_glob_obj_key!()
+json_normalize_glob_obj_key!();

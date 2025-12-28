@@ -11,4 +11,4 @@ macro_rules! NON_EXHAUSTIVE {
     };
 }
 
-NON_EXHAUSTIVE!()
+NON_EXHAUSTIVE!();

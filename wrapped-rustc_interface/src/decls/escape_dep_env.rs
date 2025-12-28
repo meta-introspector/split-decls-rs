@@ -4,4 +4,4 @@ macro_rules! escape_dep_env {
     };
 }
 
-escape_dep_env!()
+escape_dep_env!();

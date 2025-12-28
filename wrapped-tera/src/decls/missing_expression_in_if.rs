@@ -4,4 +4,4 @@ macro_rules! missing_expression_in_if {
     };
 }
 
-missing_expression_in_if!()
+missing_expression_in_if!();

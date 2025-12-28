@@ -4,4 +4,4 @@ macro_rules! check_flat_map_nested_ranges {
     };
 }
 
-check_flat_map_nested_ranges!()
+check_flat_map_nested_ranges!();

@@ -4,4 +4,4 @@ macro_rules! Codetab {
     };
 }
 
-Codetab!()
+Codetab!();

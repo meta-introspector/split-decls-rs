@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         EarlyBinder!();
-        Interner!();
         TypeVisitable!();
+        Interner!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_235 {
     };
 }
 
-impl_235!()
+impl_235!();

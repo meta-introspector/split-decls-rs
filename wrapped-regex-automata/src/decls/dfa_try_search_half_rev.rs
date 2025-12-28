@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Input!();
-        RetryError!();
-        DFA!();
         Automaton!();
-        MatchError!();
+        Input!();
         HalfMatch!();
         RetryQuadraticError!();
+        DFA!();
+        MatchError!();
+        RetryError!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! dfa_try_search_half_rev {
     };
 }
 
-dfa_try_search_half_rev!()
+dfa_try_search_half_rev!();

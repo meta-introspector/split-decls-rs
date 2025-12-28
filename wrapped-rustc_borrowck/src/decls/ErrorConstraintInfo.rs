@@ -4,4 +4,4 @@ macro_rules! ErrorConstraintInfo {
     };
 }
 
-ErrorConstraintInfo!()
+ErrorConstraintInfo!();

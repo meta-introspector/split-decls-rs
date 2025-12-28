@@ -4,4 +4,4 @@ macro_rules! typesize_derive {
     };
 }
 
-typesize_derive!()
+typesize_derive!();

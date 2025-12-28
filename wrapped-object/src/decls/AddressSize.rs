@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        U16!();
         U32!();
         U64!();
+        U16!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! AddressSize {
     };
 }
 
-AddressSize!()
+AddressSize!();

@@ -4,4 +4,4 @@ macro_rules! R_ARM_TLS_IE12GP {
     };
 }
 
-R_ARM_TLS_IE12GP!()
+R_ARM_TLS_IE12GP!();

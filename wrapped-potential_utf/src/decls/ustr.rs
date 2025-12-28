@@ -4,4 +4,4 @@ macro_rules! ustr {
     };
 }
 
-ustr!()
+ustr!();

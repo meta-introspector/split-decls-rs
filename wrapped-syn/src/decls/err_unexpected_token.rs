@@ -11,4 +11,4 @@ macro_rules! err_unexpected_token {
     };
 }
 
-err_unexpected_token!()
+err_unexpected_token!();

@@ -11,4 +11,4 @@ macro_rules! Weight {
     };
 }
 
-Weight!()
+Weight!();

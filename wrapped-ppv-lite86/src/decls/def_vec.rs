@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        BitOps0!();
-        Store!();
         StoreBytes!();
-        BSwap!();
+        Store!();
         AndNot!();
+        BSwap!();
+        BitOps0!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! def_vec {
     };
 }
 
-def_vec!()
+def_vec!();

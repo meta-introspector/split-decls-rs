@@ -4,4 +4,4 @@ macro_rules! SEG_LINKEDIT {
     };
 }
 
-SEG_LINKEDIT!()
+SEG_LINKEDIT!();

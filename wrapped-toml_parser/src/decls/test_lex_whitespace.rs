@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Token!();
         Stream!();
+        Token!();
     };
 }
 
@@ -45,4 +45,4 @@ Token {
     };
 }
 
-test_lex_whitespace!()
+test_lex_whitespace!();

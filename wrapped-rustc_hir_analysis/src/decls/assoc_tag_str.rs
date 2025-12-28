@@ -4,4 +4,4 @@ macro_rules! assoc_tag_str {
     };
 }
 
-assoc_tag_str!()
+assoc_tag_str!();

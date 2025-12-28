@@ -4,4 +4,4 @@ macro_rules! StabilityParser {
     };
 }
 
-StabilityParser!()
+StabilityParser!();

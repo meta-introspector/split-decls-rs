@@ -4,4 +4,4 @@ macro_rules! ReprAlignShouldBeAlignStatic {
     };
 }
 
-ReprAlignShouldBeAlignStatic!()
+ReprAlignShouldBeAlignStatic!();

@@ -4,4 +4,4 @@ macro_rules! target_dir {
     };
 }
 
-target_dir!()
+target_dir!();

@@ -12,4 +12,4 @@ macro_rules! check_indices_after_enumerate_split {
     };
 }
 
-check_indices_after_enumerate_split!()
+check_indices_after_enumerate_split!();

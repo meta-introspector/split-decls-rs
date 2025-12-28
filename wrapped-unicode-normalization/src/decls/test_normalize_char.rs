@@ -4,4 +4,4 @@ macro_rules! test_normalize_char {
     };
 }
 
-test_normalize_char!()
+test_normalize_char!();

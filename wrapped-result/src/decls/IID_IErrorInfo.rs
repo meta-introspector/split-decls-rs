@@ -11,4 +11,4 @@ macro_rules! IID_IErrorInfo {
     };
 }
 
-IID_IErrorInfo!()
+IID_IErrorInfo!();

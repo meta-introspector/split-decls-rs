@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Name!();
-        Session!();
         Connection!();
-        Changeset!();
+        Session!();
         Result!();
+        Name!();
+        Changeset!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_246 {
     };
 }
 
-impl_246!()
+impl_246!();

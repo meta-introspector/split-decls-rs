@@ -4,4 +4,4 @@ macro_rules! update_and_header_value {
     };
 }
 
-update_and_header_value!()
+update_and_header_value!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        FloatLit!();
-        FloatType!();
         ParseError!();
+        FloatType!();
+        FloatLit!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! manual_with_suffix {
     };
 }
 
-manual_with_suffix!()
+manual_with_suffix!();

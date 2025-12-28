@@ -4,4 +4,4 @@ macro_rules! probes_from_flags {
     };
 }
 
-probes_from_flags!()
+probes_from_flags!();

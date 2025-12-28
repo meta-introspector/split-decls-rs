@@ -4,4 +4,4 @@ macro_rules! coloring {
     };
 }
 
-coloring!()
+coloring!();

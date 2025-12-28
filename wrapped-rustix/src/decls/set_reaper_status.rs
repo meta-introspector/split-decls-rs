@@ -11,4 +11,4 @@ macro_rules! set_reaper_status {
     };
 }
 
-set_reaper_status!()
+set_reaper_status!();

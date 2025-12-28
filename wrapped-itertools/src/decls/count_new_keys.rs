@@ -4,4 +4,4 @@ macro_rules! count_new_keys {
     };
 }
 
-count_new_keys!()
+count_new_keys!();

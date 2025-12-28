@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        IntrinsicUnstable!();
+        ConstCx!();
         UnstableIntrinsic!();
         NonConstOp!();
-        ConstCx!();
         Status!();
+        IntrinsicUnstable!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_26 {
     };
 }
 
-impl_26!()
+impl_26!();

@@ -4,4 +4,4 @@ macro_rules! init_logger_with_additional_layer {
     };
 }
 
-init_logger_with_additional_layer!()
+init_logger_with_additional_layer!();

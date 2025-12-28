@@ -4,4 +4,4 @@ macro_rules! LocalDateTime {
     };
 }
 
-LocalDateTime!()
+LocalDateTime!();

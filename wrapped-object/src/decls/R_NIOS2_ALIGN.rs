@@ -4,4 +4,4 @@ macro_rules! R_NIOS2_ALIGN {
     };
 }
 
-R_NIOS2_ALIGN!()
+R_NIOS2_ALIGN!();

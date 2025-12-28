@@ -4,4 +4,4 @@ macro_rules! style_timestamp {
     };
 }
 
-style_timestamp!()
+style_timestamp!();

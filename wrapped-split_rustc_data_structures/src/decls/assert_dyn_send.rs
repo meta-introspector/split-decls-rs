@@ -11,4 +11,4 @@ macro_rules! assert_dyn_send {
     };
 }
 
-assert_dyn_send!()
+assert_dyn_send!();

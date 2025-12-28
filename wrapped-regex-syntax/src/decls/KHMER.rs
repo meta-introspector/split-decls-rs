@@ -4,4 +4,4 @@ macro_rules! KHMER {
     };
 }
 
-KHMER!()
+KHMER!();

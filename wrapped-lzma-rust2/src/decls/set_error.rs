@@ -11,4 +11,4 @@ macro_rules! set_error {
     };
 }
 
-set_error!()
+set_error!();

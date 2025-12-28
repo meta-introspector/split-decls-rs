@@ -4,4 +4,4 @@ macro_rules! LOCK_FILE_EXT {
     };
 }
 
-LOCK_FILE_EXT!()
+LOCK_FILE_EXT!();

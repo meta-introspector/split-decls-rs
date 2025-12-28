@@ -11,4 +11,4 @@ macro_rules! SpanData {
     };
 }
 
-SpanData!()
+SpanData!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         EdgeReference!();
-        RowIter!();
         WSuc!();
+        RowIter!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! SomeIter {
     };
 }
 
-SomeIter!()
+SomeIter!();

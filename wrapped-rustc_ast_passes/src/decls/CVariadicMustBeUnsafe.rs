@@ -4,4 +4,4 @@ macro_rules! CVariadicMustBeUnsafe {
     };
 }
 
-CVariadicMustBeUnsafe!()
+CVariadicMustBeUnsafe!();

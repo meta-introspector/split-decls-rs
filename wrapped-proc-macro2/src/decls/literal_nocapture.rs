@@ -12,4 +12,4 @@ macro_rules! literal_nocapture {
     };
 }
 
-literal_nocapture!()
+literal_nocapture!();

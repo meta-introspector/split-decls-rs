@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Expect!();
         MockHandle!();
+        Expect!();
         MockSubscriber!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_77 {
     };
 }
 
-impl_77!()
+impl_77!();

@@ -4,4 +4,4 @@ macro_rules! decode_utf8_char {
     };
 }
 
-decode_utf8_char!()
+decode_utf8_char!();

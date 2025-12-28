@@ -11,4 +11,4 @@ macro_rules! h2_common {
     };
 }
 
-h2_common!()
+h2_common!();

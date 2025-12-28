@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        NonMaxUsize!();
-        Slots!();
-        NFA!();
         Captures!();
+        NonMaxUsize!();
+        NFA!();
+        Slots!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! SlotTable {
     };
 }
 
-SlotTable!()
+SlotTable!();

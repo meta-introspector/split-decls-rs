@@ -1,47 +1,47 @@
 macro_rules! deps {
     () => {
-        HashHeader!();
-        SectionHeader!();
-        StringId!();
-        SectionIndex!();
+        U32!();
         ProgramHeader64!();
-        FileHeader32!();
         Dyn64!();
+        ProgramHeader!();
+        SectionHeader64!();
         Verneed!();
-        AttributesWriter!();
+        Verdaux!();
+        GnuHashHeader!();
+        Sym!();
+        Writer!();
+        Result!();
         Sym32!();
-        Vernaux!();
+        I32!();
         U16!();
-        WritableBuffer!();
-        Rel64!();
         Dyn32!();
         ProgramHeader32!();
-        Ident!();
-        SymbolIndex!();
-        GnuHashHeader!();
-        Rela32!();
-        Sym64!();
-        Rel!();
+        FileHeader32!();
         Verdef!();
-        Class!();
-        SectionHeader32!();
-        Result!();
-        U32!();
-        Rel32!();
-        FileHeader!();
+        Ident!();
         FileHeader64!();
-        Endianness!();
-        I32!();
-        SectionHeader64!();
-        Verdaux!();
-        I64!();
-        Sym!();
-        Rela64!();
-        Error!();
+        WritableBuffer!();
+        Rel!();
         U64!();
-        Writer!();
-        ProgramHeader!();
+        Vernaux!();
+        FileHeader!();
+        AttributesWriter!();
         StringTable!();
+        Class!();
+        Endianness!();
+        Rela64!();
+        SectionHeader!();
+        Rel64!();
+        StringId!();
+        HashHeader!();
+        SectionHeader32!();
+        Sym64!();
+        I64!();
+        Error!();
+        Rela32!();
+        SectionIndex!();
+        Rel32!();
+        SymbolIndex!();
     };
 }
 
@@ -52,4 +52,4 @@ macro_rules! impl_970 {
     };
 }
 
-impl_970!()
+impl_970!();

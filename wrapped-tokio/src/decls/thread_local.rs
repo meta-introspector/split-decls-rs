@@ -4,4 +4,4 @@ macro_rules! thread_local {
     };
 }
 
-thread_local!()
+thread_local!();

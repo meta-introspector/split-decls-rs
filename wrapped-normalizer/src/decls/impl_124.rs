@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        ComposingNormalizer!();
         DecomposingNormalizerBorrowed!();
         ComposingNormalizerBorrowed!();
         Baked!();
+        ComposingNormalizer!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_124 {
     };
 }
 
-impl_124!()
+impl_124!();

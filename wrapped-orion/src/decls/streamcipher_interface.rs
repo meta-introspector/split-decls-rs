@@ -4,4 +4,4 @@ macro_rules! streamcipher_interface {
     };
 }
 
-streamcipher_interface!()
+streamcipher_interface!();

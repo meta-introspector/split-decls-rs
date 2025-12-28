@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        VariantAst!();
         BindingInfo!();
+        VariantAst!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! VariantInfo {
     };
 }
 
-VariantInfo!()
+VariantInfo!();

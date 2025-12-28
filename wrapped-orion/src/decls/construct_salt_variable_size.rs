@@ -4,4 +4,4 @@ macro_rules! construct_salt_variable_size {
     };
 }
 
-construct_salt_variable_size!()
+construct_salt_variable_size!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         DiffMode!();
-        Const!();
         DiffActivity!();
+        Const!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! valid_input_activity {
     };
 }
 
-valid_input_activity!()
+valid_input_activity!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        BridgeTys!();
         ClosureKind!();
         Stable!();
-        BridgeTys!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_201 {
     };
 }
 
-impl_201!()
+impl_201!();

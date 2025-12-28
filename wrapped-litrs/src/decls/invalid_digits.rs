@@ -11,4 +11,4 @@ macro_rules! invalid_digits {
     };
 }
 
-invalid_digits!()
+invalid_digits!();

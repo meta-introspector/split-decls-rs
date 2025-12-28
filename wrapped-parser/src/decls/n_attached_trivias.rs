@@ -4,4 +4,4 @@ macro_rules! n_attached_trivias {
     };
 }
 
-n_attached_trivias!()
+n_attached_trivias!();

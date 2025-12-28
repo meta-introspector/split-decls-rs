@@ -4,4 +4,4 @@ macro_rules! Cpuid {
     };
 }
 
-Cpuid!()
+Cpuid!();

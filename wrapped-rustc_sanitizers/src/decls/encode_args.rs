@@ -12,4 +12,4 @@ macro_rules! encode_args {
     };
 }
 
-encode_args!()
+encode_args!();

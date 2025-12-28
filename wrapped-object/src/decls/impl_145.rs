@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        ComdatInternal!();
         Item!();
-        ReadRef!();
         ComdatIterator!();
-        ComdatIteratorInternal!();
         Comdat!();
+        ReadRef!();
+        ComdatIteratorInternal!();
+        ComdatInternal!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_145 {
     };
 }
 
-impl_145!()
+impl_145!();

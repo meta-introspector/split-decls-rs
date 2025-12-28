@@ -4,4 +4,4 @@ macro_rules! mantissa {
     };
 }
 
-mantissa!()
+mantissa!();

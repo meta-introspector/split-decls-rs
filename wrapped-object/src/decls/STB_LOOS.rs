@@ -4,4 +4,4 @@ macro_rules! STB_LOOS {
     };
 }
 
-STB_LOOS!()
+STB_LOOS!();

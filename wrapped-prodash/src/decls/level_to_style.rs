@@ -11,4 +11,4 @@ macro_rules! level_to_style {
     };
 }
 
-level_to_style!()
+level_to_style!();

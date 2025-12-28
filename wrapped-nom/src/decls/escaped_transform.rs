@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        EscapedTransform!();
-        AsChar!();
-        Offset!();
-        Error!();
-        ParseError!();
         Parser!();
+        IResult!();
+        Error!();
+        Offset!();
+        ExtendInto!();
+        AsChar!();
+        ParseError!();
+        EscapedTransform!();
         Needed!();
         Input!();
-        ExtendInto!();
-        IResult!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! escaped_transform {
     };
 }
 
-escaped_transform!()
+escaped_transform!();

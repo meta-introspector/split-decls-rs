@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        VacantEntry!();
         Value!();
+        VacantEntry!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! VacantEntryImpl {
     };
 }
 
-VacantEntryImpl!()
+VacantEntryImpl!();

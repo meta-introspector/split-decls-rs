@@ -4,4 +4,4 @@ macro_rules! generic_array_impl {
     };
 }
 
-generic_array_impl!()
+generic_array_impl!();

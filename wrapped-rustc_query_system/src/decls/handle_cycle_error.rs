@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Value!();
-        QueryContext!();
-        HandleCycleError!();
-        QueryConfig!();
         CycleError!();
+        QueryContext!();
+        QueryConfig!();
+        Value!();
         Cycle!();
+        HandleCycleError!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! handle_cycle_error {
     };
 }
 
-handle_cycle_error!()
+handle_cycle_error!();

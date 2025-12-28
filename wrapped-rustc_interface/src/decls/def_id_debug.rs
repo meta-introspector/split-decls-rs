@@ -11,4 +11,4 @@ macro_rules! def_id_debug {
     };
 }
 
-def_id_debug!()
+def_id_debug!();

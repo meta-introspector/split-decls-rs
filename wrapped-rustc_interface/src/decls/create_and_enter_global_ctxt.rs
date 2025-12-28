@@ -11,4 +11,4 @@ macro_rules! create_and_enter_global_ctxt {
     };
 }
 
-create_and_enter_global_ctxt!()
+create_and_enter_global_ctxt!();

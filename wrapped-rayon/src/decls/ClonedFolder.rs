@@ -4,4 +4,4 @@ macro_rules! ClonedFolder {
     };
 }
 
-ClonedFolder!()
+ClonedFolder!();

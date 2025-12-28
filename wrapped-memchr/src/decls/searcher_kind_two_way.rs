@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        PrefilterState!();
         Searcher!();
+        PrefilterState!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! searcher_kind_two_way {
     };
 }
 
-searcher_kind_two_way!()
+searcher_kind_two_way!();

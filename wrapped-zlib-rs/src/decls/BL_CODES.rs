@@ -4,4 +4,4 @@ macro_rules! BL_CODES {
     };
 }
 
-BL_CODES!()
+BL_CODES!();

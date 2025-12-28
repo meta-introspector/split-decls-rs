@@ -13,4 +13,4 @@ macro_rules! clock_nanosleep_absolute {
     };
 }
 
-clock_nanosleep_absolute!()
+clock_nanosleep_absolute!();

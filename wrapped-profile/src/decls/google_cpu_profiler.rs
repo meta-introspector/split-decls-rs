@@ -4,4 +4,4 @@ macro_rules! google_cpu_profiler {
     };
 }
 
-google_cpu_profiler!()
+google_cpu_profiler!();

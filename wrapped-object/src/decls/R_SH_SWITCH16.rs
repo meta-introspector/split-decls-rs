@@ -4,4 +4,4 @@ macro_rules! R_SH_SWITCH16 {
     };
 }
 
-R_SH_SWITCH16!()
+R_SH_SWITCH16!();

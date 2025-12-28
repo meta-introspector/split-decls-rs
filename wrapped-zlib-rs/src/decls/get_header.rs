@@ -12,4 +12,4 @@ macro_rules! get_header {
     };
 }
 
-get_header!()
+get_header!();

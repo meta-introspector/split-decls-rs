@@ -4,4 +4,4 @@ macro_rules! EnumLatticeInfo {
     };
 }
 
-EnumLatticeInfo!()
+EnumLatticeInfo!();

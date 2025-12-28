@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DictKey!();
         EncodeTyOptions!();
+        DictKey!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! encode_const {
     };
 }
 
-encode_const!()
+encode_const!();

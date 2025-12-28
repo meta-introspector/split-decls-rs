@@ -4,4 +4,4 @@ macro_rules! ZERO_MODULE {
     };
 }
 
-ZERO_MODULE!()
+ZERO_MODULE!();

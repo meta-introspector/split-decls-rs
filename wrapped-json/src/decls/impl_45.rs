@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        ErrorCode!();
-        Read!();
-        Deserializer!();
-        Value!();
-        MapKey!();
-        Result!();
         Error!();
         Reference!();
+        MapKey!();
+        Result!();
+        Read!();
+        Deserializer!();
+        ErrorCode!();
+        Value!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_45 {
     };
 }
 
-impl_45!()
+impl_45!();

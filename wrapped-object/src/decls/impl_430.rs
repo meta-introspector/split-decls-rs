@@ -1,18 +1,18 @@
 macro_rules! deps {
     () => {
-        Result!();
         VersionTable!();
-        Note!();
         Version!();
+        VersionIndex!();
+        Note!();
+        VerdefIterator!();
         SymbolIndex!();
-        Endian!();
-        FileHeader!();
-        VerneedIterator!();
+        ReadRef!();
         Versym!();
         StringTable!();
-        VerdefIterator!();
-        ReadRef!();
-        VersionIndex!();
+        Endian!();
+        Result!();
+        FileHeader!();
+        VerneedIterator!();
     };
 }
 
@@ -23,4 +23,4 @@ macro_rules! impl_430 {
     };
 }
 
-impl_430!()
+impl_430!();

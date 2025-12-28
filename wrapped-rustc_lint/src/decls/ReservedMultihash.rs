@@ -4,4 +4,4 @@ macro_rules! ReservedMultihash {
     };
 }
 
-ReservedMultihash!()
+ReservedMultihash!();

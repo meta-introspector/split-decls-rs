@@ -4,4 +4,4 @@ macro_rules! PPC_RELOC_JBSR {
     };
 }
 
-PPC_RELOC_JBSR!()
+PPC_RELOC_JBSR!();

@@ -4,4 +4,4 @@ macro_rules! EF_PPC_RELOCATABLE {
     };
 }
 
-EF_PPC_RELOCATABLE!()
+EF_PPC_RELOCATABLE!();

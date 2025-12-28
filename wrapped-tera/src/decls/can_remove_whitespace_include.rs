@@ -12,4 +12,4 @@ macro_rules! can_remove_whitespace_include {
     };
 }
 
-can_remove_whitespace_include!()
+can_remove_whitespace_include!();

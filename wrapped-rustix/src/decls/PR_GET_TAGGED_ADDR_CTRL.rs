@@ -4,4 +4,4 @@ macro_rules! PR_GET_TAGGED_ADDR_CTRL {
     };
 }
 
-PR_GET_TAGGED_ADDR_CTRL!()
+PR_GET_TAGGED_ADDR_CTRL!();

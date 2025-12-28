@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        AstPass!();
         Symbol!();
         DesugaringKind!();
+        AstPass!();
         MacroKind!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! ExpnKind {
     };
 }
 
-ExpnKind!()
+ExpnKind!();

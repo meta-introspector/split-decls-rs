@@ -4,4 +4,4 @@ macro_rules! ZipWriterStats {
     };
 }
 
-ZipWriterStats!()
+ZipWriterStats!();

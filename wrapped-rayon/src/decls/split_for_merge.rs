@@ -4,4 +4,4 @@ macro_rules! split_for_merge {
     };
 }
 
-split_for_merge!()
+split_for_merge!();

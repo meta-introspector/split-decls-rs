@@ -4,4 +4,4 @@ macro_rules! fmaxf16 {
     };
 }
 
-fmaxf16!()
+fmaxf16!();

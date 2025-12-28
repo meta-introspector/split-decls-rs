@@ -1,25 +1,25 @@
 macro_rules! deps {
     () => {
-        Checker!();
-        HasMutInterior!();
-        RawPtrToIntCast!();
-        EscapingCellBorrow!();
-        PanicNonStr!();
-        ThreadLocalAccess!();
         ConstConditionsHold!();
+        EscapingCellBorrow!();
+        InlineAsm!();
+        Coroutine!();
+        Operand!();
+        UnmarkedIntrinsicExposed!();
+        IntrinsicNonConst!();
+        ThreadLocalAccess!();
+        IntrinsicUnstable!();
+        Checker!();
+        HeapAllocation!();
+        FnCallNonConst!();
+        HasMutInterior!();
         RawPtrComparison!();
         FnCallIndirect!();
-        IntrinsicNonConst!();
-        EscapingMutBorrow!();
+        PanicNonStr!();
+        RawPtrToIntCast!();
         ConstCx!();
-        IntrinsicUnstable!();
-        Coroutine!();
-        InlineAsm!();
-        UnmarkedIntrinsicExposed!();
-        Operand!();
+        EscapingMutBorrow!();
         ConditionallyConstCall!();
-        FnCallNonConst!();
-        HeapAllocation!();
     };
 }
 
@@ -30,4 +30,4 @@ macro_rules! impl_7 {
     };
 }
 
-impl_7!()
+impl_7!();

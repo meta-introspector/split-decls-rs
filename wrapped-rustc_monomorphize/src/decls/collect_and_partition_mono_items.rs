@@ -12,4 +12,4 @@ macro_rules! collect_and_partition_mono_items {
     };
 }
 
-collect_and_partition_mono_items!()
+collect_and_partition_mono_items!();

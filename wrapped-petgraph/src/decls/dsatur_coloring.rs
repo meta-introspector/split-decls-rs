@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        MaxScored!();
-        Graph!();
         Undirected!();
         Time!();
+        MaxScored!();
+        Graph!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! dsatur_coloring {
     };
 }
 
-dsatur_coloring!()
+dsatur_coloring!();

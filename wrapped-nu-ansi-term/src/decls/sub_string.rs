@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        AnsiStrings!();
         AnsiString!();
+        AnsiStrings!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! sub_string {
     };
 }
 
-sub_string!()
+sub_string!();

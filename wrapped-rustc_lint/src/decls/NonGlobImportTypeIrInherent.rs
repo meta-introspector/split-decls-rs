@@ -4,4 +4,4 @@ macro_rules! NonGlobImportTypeIrInherent {
     };
 }
 
-NonGlobImportTypeIrInherent!()
+NonGlobImportTypeIrInherent!();

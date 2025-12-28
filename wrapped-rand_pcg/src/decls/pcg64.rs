@@ -4,4 +4,4 @@ macro_rules! pcg64 {
     };
 }
 
-pcg64!()
+pcg64!();

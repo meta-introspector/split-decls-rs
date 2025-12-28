@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Float!();
         HFloat!();
+        Float!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! DFloat {
     };
 }
 
-DFloat!()
+DFloat!();

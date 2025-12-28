@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         EdgeIndex!();
-        AdjacentEdges!();
         Edge!();
+        AdjacentEdges!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_134 {
     };
 }
 
-impl_134!()
+impl_134!();

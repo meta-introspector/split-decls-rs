@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
         Immutable!();
-        PaddingFree!();
-        Reference!();
         Maybe!();
+        Reference!();
         FromBytes!();
-        TryFromBytes!();
         FromZeros!();
         IntoBytes!();
+        TryFromBytes!();
+        PaddingFree!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! cryptocorrosion_derive_traits {
     };
 }
 
-cryptocorrosion_derive_traits!()
+cryptocorrosion_derive_traits!();

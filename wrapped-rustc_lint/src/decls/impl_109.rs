@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        AsmLabelKind!();
         InvalidAsmLabel!();
+        AsmLabelKind!();
         LateContext!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_109 {
     };
 }
 
-impl_109!()
+impl_109!();

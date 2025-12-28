@@ -4,4 +4,4 @@ macro_rules! likely {
     };
 }
 
-likely!()
+likely!();

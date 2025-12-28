@@ -4,4 +4,4 @@ macro_rules! redundancy_stats {
     };
 }
 
-redundancy_stats!()
+redundancy_stats!();

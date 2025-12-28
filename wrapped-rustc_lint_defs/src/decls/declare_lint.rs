@@ -13,4 +13,4 @@ macro_rules! declare_lint {
     };
 }
 
-declare_lint!()
+declare_lint!();

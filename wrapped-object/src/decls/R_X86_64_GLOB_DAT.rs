@@ -4,4 +4,4 @@ macro_rules! R_X86_64_GLOB_DAT {
     };
 }
 
-R_X86_64_GLOB_DAT!()
+R_X86_64_GLOB_DAT!();

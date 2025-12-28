@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        DefineOpaqueTypes!();
-        TypeTrace!();
-        TypeRelating!();
         PredicateObligations!();
+        TypeRelating!();
+        DefineOpaqueTypes!();
         InferCtxt!();
+        TypeTrace!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_172 {
     };
 }
 
-impl_172!()
+impl_172!();

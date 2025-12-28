@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        CodegenLintLevels!();
         CrateInfo!();
         InvalidWindowsSubsystem!();
+        CodegenLintLevels!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_277 {
     };
 }
 
-impl_277!()
+impl_277!();

@@ -11,4 +11,4 @@ macro_rules! validate_range_expr {
     };
 }
 
-validate_range_expr!()
+validate_range_expr!();

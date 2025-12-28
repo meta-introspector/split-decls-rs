@@ -4,4 +4,4 @@ macro_rules! cpu_relax {
     };
 }
 
-cpu_relax!()
+cpu_relax!();

@@ -11,4 +11,4 @@ macro_rules! get_nullable_type_from_pat {
     };
 }
 
-get_nullable_type_from_pat!()
+get_nullable_type_from_pat!();

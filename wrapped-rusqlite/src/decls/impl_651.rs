@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        VTabLogCursor!();
         VTabLog!();
+        VTabLogCursor!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_651 {
     };
 }
 
-impl_651!()
+impl_651!();

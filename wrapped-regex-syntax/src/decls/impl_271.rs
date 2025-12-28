@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Ast!();
         ParserBuilder!();
         Parser!();
+        Ast!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_271 {
     };
 }
 
-impl_271!()
+impl_271!();

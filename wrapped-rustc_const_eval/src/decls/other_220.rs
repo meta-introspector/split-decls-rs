@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        MemoryKind!();
         Machine!();
-        CompileTimeMachine!();
         HasStaticRootDefId!();
+        MemoryKind!();
+        CompileTimeMachine!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! other_220 {
     };
 }
 
-other_220!()
+other_220!();

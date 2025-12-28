@@ -4,4 +4,4 @@ macro_rules! PatId {
     };
 }
 
-PatId!()
+PatId!();

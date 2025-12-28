@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        EdgeIndex!();
-        IndexType!();
-        MappedSequenceVisitor!();
-        Graph!();
         NodeIndex!();
         Edge!();
+        EdgeIndex!();
+        MappedSequenceVisitor!();
+        IndexType!();
+        Graph!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! deser_graph_edges {
     };
 }
 
-deser_graph_edges!()
+deser_graph_edges!();

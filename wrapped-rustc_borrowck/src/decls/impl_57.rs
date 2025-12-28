@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        PoloniusOutOfScopePrecomputer!();
-        PlaceConflictBias!();
-        RegionInferenceContext!();
         BorrowSet!();
+        RegionInferenceContext!();
+        PlaceConflictBias!();
+        PoloniusOutOfScopePrecomputer!();
         Borrows!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_57 {
     };
 }
 
-impl_57!()
+impl_57!();

@@ -4,4 +4,4 @@ macro_rules! OrderByIter {
     };
 }
 
-OrderByIter!()
+OrderByIter!();

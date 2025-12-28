@@ -4,4 +4,4 @@ macro_rules! nghttp2_stream {
     };
 }
 
-nghttp2_stream!()
+nghttp2_stream!();

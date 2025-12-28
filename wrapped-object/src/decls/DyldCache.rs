@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        ReadRef!();
-        Endianness!();
-        Architecture!();
-        Endian!();
-        DyldFile!();
         DyldCacheImageInfo!();
+        Endianness!();
+        DyldFile!();
+        Endian!();
+        Architecture!();
+        ReadRef!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! DyldCache {
     };
 }
 
-DyldCache!()
+DyldCache!();

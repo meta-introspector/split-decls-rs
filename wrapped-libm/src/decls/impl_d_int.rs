@@ -12,4 +12,4 @@ macro_rules! impl_d_int {
     };
 }
 
-impl_d_int!()
+impl_d_int!();

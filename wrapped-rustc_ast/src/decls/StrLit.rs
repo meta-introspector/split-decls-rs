@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         StrStyle!();
-        MetaItemLit!();
         Walkable!();
+        MetaItemLit!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! StrLit {
     };
 }
 
-StrLit!()
+StrLit!();

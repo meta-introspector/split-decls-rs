@@ -4,4 +4,4 @@ macro_rules! TransparencyParser {
     };
 }
 
-TransparencyParser!()
+TransparencyParser!();

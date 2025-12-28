@@ -12,4 +12,4 @@ macro_rules! reserved_g5 {
     };
 }
 
-reserved_g5!()
+reserved_g5!();

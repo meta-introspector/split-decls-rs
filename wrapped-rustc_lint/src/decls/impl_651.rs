@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        EarlyContext!();
         MacroExprFragment2024!();
+        EarlyContext!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_651 {
     };
 }
 
-impl_651!()
+impl_651!();

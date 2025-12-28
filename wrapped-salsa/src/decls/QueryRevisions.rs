@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Durability!();
-        Revision!();
-        QueryRevisionsExtra!();
         QueryOrigin!();
+        QueryRevisionsExtra!();
+        Revision!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! QueryRevisions {
     };
 }
 
-QueryRevisions!()
+QueryRevisions!();

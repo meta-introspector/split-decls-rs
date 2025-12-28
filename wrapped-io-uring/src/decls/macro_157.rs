@@ -6,4 +6,4 @@ or use `--cfg=io_uring_skip_arch_check` to skip the check.") ;
     };
 }
 
-macro_157!()
+macro_157!();

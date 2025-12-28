@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        SmallVec!();
         IntoIter!();
+        SmallVec!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_133 {
     };
 }
 
-impl_133!()
+impl_133!();

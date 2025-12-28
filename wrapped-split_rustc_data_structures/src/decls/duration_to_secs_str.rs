@@ -4,4 +4,4 @@ macro_rules! duration_to_secs_str {
     };
 }
 
-duration_to_secs_str!()
+duration_to_secs_str!();

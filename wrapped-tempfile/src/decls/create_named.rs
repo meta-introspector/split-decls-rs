@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        NamedTempFile!();
         TempPath!();
+        NamedTempFile!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! create_named {
     };
 }
 
-create_named!()
+create_named!();

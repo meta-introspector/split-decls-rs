@@ -11,4 +11,4 @@ macro_rules! collect_sizedness_bounds {
     };
 }
 
-collect_sizedness_bounds!()
+collect_sizedness_bounds!();

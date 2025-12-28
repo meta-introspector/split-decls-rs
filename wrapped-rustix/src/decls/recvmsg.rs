@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        RecvAncillaryBuffer!();
         Result!();
         RecvMsg!();
-        RecvAncillaryBuffer!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! recvmsg {
     };
 }
 
-recvmsg!()
+recvmsg!();

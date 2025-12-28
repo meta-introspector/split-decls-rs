@@ -4,4 +4,4 @@ macro_rules! mockable_fn {
     };
 }
 
-mockable_fn!()
+mockable_fn!();

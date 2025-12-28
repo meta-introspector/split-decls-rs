@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        NFA!();
+        StateID!();
         Transition!();
         DFA!();
-        StateID!();
+        NFA!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! Epsilons {
     };
 }
 
-Epsilons!()
+Epsilons!();

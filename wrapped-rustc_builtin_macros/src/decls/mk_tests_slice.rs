@@ -11,4 +11,4 @@ macro_rules! mk_tests_slice {
     };
 }
 
-mk_tests_slice!()
+mk_tests_slice!();

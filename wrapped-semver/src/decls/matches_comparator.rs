@@ -12,4 +12,4 @@ macro_rules! matches_comparator {
     };
 }
 
-matches_comparator!()
+matches_comparator!();

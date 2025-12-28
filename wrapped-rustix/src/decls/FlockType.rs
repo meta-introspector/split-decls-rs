@@ -4,4 +4,4 @@ macro_rules! FlockType {
     };
 }
 
-FlockType!()
+FlockType!();

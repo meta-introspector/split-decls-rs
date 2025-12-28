@@ -4,4 +4,4 @@ macro_rules! ToInt {
     };
 }
 
-ToInt!()
+ToInt!();

@@ -4,4 +4,4 @@ macro_rules! max_len {
     };
 }
 
-max_len!()
+max_len!();

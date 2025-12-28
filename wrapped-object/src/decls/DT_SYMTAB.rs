@@ -4,4 +4,4 @@ macro_rules! DT_SYMTAB {
     };
 }
 
-DT_SYMTAB!()
+DT_SYMTAB!();

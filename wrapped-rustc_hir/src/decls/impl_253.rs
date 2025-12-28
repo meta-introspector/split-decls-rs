@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        ImplItemId!();
-        ImplItemKind!();
-        ImplItemImplKind!();
         Ty!();
+        ImplItemImplKind!();
         ImplItem!();
+        ImplItemKind!();
+        ImplItemId!();
         BodyId!();
         FnSig!();
     };
@@ -17,4 +17,4 @@ macro_rules! impl_253 {
     };
 }
 
-impl_253!()
+impl_253!();

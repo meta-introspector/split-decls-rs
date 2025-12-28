@@ -4,4 +4,4 @@ macro_rules! R_TILEGX_GLOB_DAT {
     };
 }
 
-R_TILEGX_GLOB_DAT!()
+R_TILEGX_GLOB_DAT!();

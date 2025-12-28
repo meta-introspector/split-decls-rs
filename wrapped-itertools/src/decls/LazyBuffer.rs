@@ -4,4 +4,4 @@ macro_rules! LazyBuffer {
     };
 }
 
-LazyBuffer!()
+LazyBuffer!();

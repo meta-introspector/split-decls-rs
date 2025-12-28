@@ -4,4 +4,4 @@ macro_rules! EmptyProducer {
     };
 }
 
-EmptyProducer!()
+EmptyProducer!();

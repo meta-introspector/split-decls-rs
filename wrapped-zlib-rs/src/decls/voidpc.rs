@@ -4,4 +4,4 @@ macro_rules! voidpc {
     };
 }
 
-voidpc!()
+voidpc!();

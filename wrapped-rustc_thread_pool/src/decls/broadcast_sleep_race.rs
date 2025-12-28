@@ -11,4 +11,4 @@ macro_rules! broadcast_sleep_race {
     };
 }
 
-broadcast_sleep_race!()
+broadcast_sleep_race!();

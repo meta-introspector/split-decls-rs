@@ -4,4 +4,4 @@ macro_rules! lex_logic_val {
     };
 }
 
-lex_logic_val!()
+lex_logic_val!();

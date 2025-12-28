@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Ipv4PathMtuDiscovery!();
         Result!();
+        Ipv4PathMtuDiscovery!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! ip_mtu_discover {
     };
 }
 
-ip_mtu_discover!()
+ip_mtu_discover!();

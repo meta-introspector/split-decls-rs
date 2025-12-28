@@ -12,4 +12,4 @@ macro_rules! simd_impl {
     };
 }
 
-simd_impl!()
+simd_impl!();

@@ -11,4 +11,4 @@ macro_rules! create_mut_downgrade_during_clear_by_other_thead {
     };
 }
 
-create_mut_downgrade_during_clear_by_other_thead!()
+create_mut_downgrade_during_clear_by_other_thead!();

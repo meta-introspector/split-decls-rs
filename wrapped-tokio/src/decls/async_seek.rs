@@ -4,4 +4,4 @@ macro_rules! async_seek {
     };
 }
 
-async_seek!()
+async_seek!();

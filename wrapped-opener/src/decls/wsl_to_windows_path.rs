@@ -4,4 +4,4 @@ macro_rules! wsl_to_windows_path {
     };
 }
 
-wsl_to_windows_path!()
+wsl_to_windows_path!();

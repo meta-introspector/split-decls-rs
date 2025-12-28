@@ -4,4 +4,4 @@ macro_rules! MergingSucc {
     };
 }
 
-MergingSucc!()
+MergingSucc!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        ParamEnvSource!();
         Interner!();
-        ParamEnv!();
         BuiltinImplSource!();
+        ParamEnv!();
+        ParamEnvSource!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! CandidateSource {
     };
 }
 
-CandidateSource!()
+CandidateSource!();

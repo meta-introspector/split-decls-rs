@@ -12,4 +12,4 @@ macro_rules! free_list_reuse {
     };
 }
 
-free_list_reuse!()
+free_list_reuse!();

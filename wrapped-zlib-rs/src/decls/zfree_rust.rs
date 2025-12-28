@@ -4,4 +4,4 @@ macro_rules! zfree_rust {
     };
 }
 
-zfree_rust!()
+zfree_rust!();

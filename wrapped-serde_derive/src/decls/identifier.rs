@@ -4,4 +4,4 @@ macro_rules! identifier {
     };
 }
 
-identifier!()
+identifier!();

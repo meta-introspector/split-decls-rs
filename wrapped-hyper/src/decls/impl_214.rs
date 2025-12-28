@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Read!();
+        Result!();
         Parts!();
         Rewind!();
-        Write!();
-        Result!();
         Upgraded!();
+        Write!();
+        Read!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_214 {
     };
 }
 
-impl_214!()
+impl_214!();

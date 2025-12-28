@@ -4,4 +4,4 @@ macro_rules! ford_fulkerson {
     };
 }
 
-ford_fulkerson!()
+ford_fulkerson!();

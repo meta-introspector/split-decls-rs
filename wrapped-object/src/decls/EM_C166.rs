@@ -4,4 +4,4 @@ macro_rules! EM_C166 {
     };
 }
 
-EM_C166!()
+EM_C166!();

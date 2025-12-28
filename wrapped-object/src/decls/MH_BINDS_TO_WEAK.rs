@@ -4,4 +4,4 @@ macro_rules! MH_BINDS_TO_WEAK {
     };
 }
 
-MH_BINDS_TO_WEAK!()
+MH_BINDS_TO_WEAK!();

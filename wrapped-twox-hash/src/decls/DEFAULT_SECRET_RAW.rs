@@ -11,4 +11,4 @@ macro_rules! DEFAULT_SECRET_RAW {
     };
 }
 
-DEFAULT_SECRET_RAW!()
+DEFAULT_SECRET_RAW!();

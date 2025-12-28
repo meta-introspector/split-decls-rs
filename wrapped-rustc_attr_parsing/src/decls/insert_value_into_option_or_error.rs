@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         MetaItemParser!();
-        AcceptContext!();
         Stage!();
+        AcceptContext!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! insert_value_into_option_or_error {
     };
 }
 
-insert_value_into_option_or_error!()
+insert_value_into_option_or_error!();

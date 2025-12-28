@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
         LayoutAbi!();
-        LayoutHomogeneousAggregate!();
+        LayoutOf!();
         UnwrapLayoutCx!();
         UnrecognizedArgument!();
+        LayoutHomogeneousAggregate!();
         LayoutSize!();
         LayoutAlign!();
-        LayoutOf!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! dump_layout_of {
     };
 }
 
-dump_layout_of!()
+dump_layout_of!();

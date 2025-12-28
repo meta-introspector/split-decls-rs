@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        Generate!();
-        AsymmetricKeyPair!();
-        AsymmetricSecretKey!();
-        SymmetricKey!();
-        Id!();
-        V4!();
-        AsymmetricPublicKey!();
-        V3!();
-        Error!();
         V2!();
+        V3!();
+        SymmetricKey!();
+        V4!();
+        AsymmetricKeyPair!();
+        Id!();
+        Error!();
+        AsymmetricSecretKey!();
+        AsymmetricPublicKey!();
+        Generate!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! tests {
     };
 }
 
-tests!()
+tests!();

@@ -1,21 +1,21 @@
 macro_rules! deps {
     () => {
-        Direction!();
-        DBPinnableSlice!();
-        Error!();
         Transaction!();
         DBIteratorWithThreadMode!();
-        TransactionDB!();
-        TransactionOptions!();
-        ReadOptions!();
-        SnapshotWithThreadMode!();
-        AsColumnFamilyRef!();
-        IteratorMode!();
-        DBRawIteratorWithThreadMode!();
-        ColumnFamily!();
         WriteBatchWithTransaction!();
-        DB!();
+        Direction!();
+        TransactionDB!();
+        DBPinnableSlice!();
         OptimisticTransactionDB!();
+        ReadOptions!();
+        DBRawIteratorWithThreadMode!();
+        TransactionOptions!();
+        Error!();
+        AsColumnFamilyRef!();
+        SnapshotWithThreadMode!();
+        DB!();
+        IteratorMode!();
+        ColumnFamily!();
     };
 }
 
@@ -26,4 +26,4 @@ macro_rules! impl_449 {
     };
 }
 
-impl_449!()
+impl_449!();

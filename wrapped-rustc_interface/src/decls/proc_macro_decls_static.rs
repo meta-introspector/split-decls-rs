@@ -4,4 +4,4 @@ macro_rules! proc_macro_decls_static {
     };
 }
 
-proc_macro_decls_static!()
+proc_macro_decls_static!();

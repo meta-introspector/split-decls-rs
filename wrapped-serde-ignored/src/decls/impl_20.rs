@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Path!();
         TrackedSeed!();
+        Path!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_20 {
     };
 }
 
-impl_20!()
+impl_20!();

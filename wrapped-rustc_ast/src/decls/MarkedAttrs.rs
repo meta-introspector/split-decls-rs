@@ -4,4 +4,4 @@ macro_rules! MarkedAttrs {
     };
 }
 
-MarkedAttrs!()
+MarkedAttrs!();

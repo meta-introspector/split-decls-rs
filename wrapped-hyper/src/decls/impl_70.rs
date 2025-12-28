@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        ReadBufCursor!();
-        Compat!();
-        Error!();
         ReadBuf!();
-        Result!();
         Read!();
+        Compat!();
+        Result!();
+        Error!();
+        ReadBufCursor!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_70 {
     };
 }
 
-impl_70!()
+impl_70!();

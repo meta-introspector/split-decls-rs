@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        MMsgHdr!();
         SendAncillaryBuffer!();
-        SocketAddrArg!();
         SocketAddrAny!();
+        MMsgHdr!();
+        SocketAddrArg!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_585 {
     };
 }
 
-impl_585!()
+impl_585!();

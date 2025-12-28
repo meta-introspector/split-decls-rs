@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
+        OnClosureNote!();
+        MirBorrowckCtxt!();
         OutlivesConstraint!();
+        DescribePlaceOpt!();
         BorrowedContentSource!();
         IncludingTupleField!();
-        DescribePlaceOpt!();
-        MirBorrowckCtxt!();
-        OnClosureNote!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_170 {
     };
 }
 
-impl_170!()
+impl_170!();

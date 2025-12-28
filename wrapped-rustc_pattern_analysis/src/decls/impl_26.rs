@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        WitnessPat!();
         RustcPatCtxt!();
         Uncovered!();
+        WitnessPat!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_26 {
     };
 }
 
-impl_26!()
+impl_26!();

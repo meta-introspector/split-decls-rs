@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         End!();
         Punctuated!();
-        Pairs!();
         Pair!();
+        Pairs!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_618 {
     };
 }
 
-impl_618!()
+impl_618!();

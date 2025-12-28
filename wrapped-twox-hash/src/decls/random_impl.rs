@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        State!();
         Hasher!();
+        State!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! random_impl {
     };
 }
 
-random_impl!()
+random_impl!();

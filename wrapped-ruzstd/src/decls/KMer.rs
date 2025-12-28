@@ -4,4 +4,4 @@ macro_rules! KMer {
     };
 }
 
-KMer!()
+KMer!();

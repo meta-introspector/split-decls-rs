@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Rule!();
-        ParserNode!();
         ParserExpr!();
+        ParserNode!();
     };
 }
 
@@ -167,4 +167,4 @@ macro_rules! tests {
     };
 }
 
-tests!()
+tests!();

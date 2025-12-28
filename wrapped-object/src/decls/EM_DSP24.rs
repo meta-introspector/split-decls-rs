@@ -4,4 +4,4 @@ macro_rules! EM_DSP24 {
     };
 }
 
-EM_DSP24!()
+EM_DSP24!();

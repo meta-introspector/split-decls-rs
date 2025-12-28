@@ -4,4 +4,4 @@ macro_rules! MustUseParser {
     };
 }
 
-MustUseParser!()
+MustUseParser!();

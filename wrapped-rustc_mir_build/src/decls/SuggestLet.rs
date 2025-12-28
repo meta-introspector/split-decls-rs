@@ -4,4 +4,4 @@ macro_rules! SuggestLet {
     };
 }
 
-SuggestLet!()
+SuggestLet!();

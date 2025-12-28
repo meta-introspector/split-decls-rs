@@ -4,4 +4,4 @@ macro_rules! DT_PPC64_GLINK {
     };
 }
 
-DT_PPC64_GLINK!()
+DT_PPC64_GLINK!();

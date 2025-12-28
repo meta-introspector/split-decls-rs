@@ -4,4 +4,4 @@ macro_rules! windows_uwp_gnu {
     };
 }
 
-windows_uwp_gnu!()
+windows_uwp_gnu!();

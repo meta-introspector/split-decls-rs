@@ -1,18 +1,18 @@
 macro_rules! deps {
     () => {
-        TypeName!();
-        CppMethodOrName!();
-        Cfg!();
-        CppMethod!();
-        Type!();
-        Config!();
-        Method!();
-        TypeMap!();
-        Interface!();
-        CppInterface!();
-        MethodNames!();
-        GUID!();
         TokenStream!();
+        TypeName!();
+        Cfg!();
+        CppMethodOrName!();
+        CppMethod!();
+        Config!();
+        GUID!();
+        CppInterface!();
+        TypeMap!();
+        Method!();
+        MethodNames!();
+        Type!();
+        Interface!();
     };
 }
 
@@ -23,4 +23,4 @@ macro_rules! impl_272 {
     };
 }
 
-impl_272!()
+impl_272!();

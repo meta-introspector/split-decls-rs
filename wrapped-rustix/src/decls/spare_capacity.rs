@@ -13,4 +13,4 @@ macro_rules! spare_capacity {
     };
 }
 
-spare_capacity!()
+spare_capacity!();

@@ -4,4 +4,4 @@ macro_rules! CPU_SUBTYPE_HPPA_ALL {
     };
 }
 
-CPU_SUBTYPE_HPPA_ALL!()
+CPU_SUBTYPE_HPPA_ALL!();

@@ -4,4 +4,4 @@ macro_rules! MEETEI_MAYEK {
     };
 }
 
-MEETEI_MAYEK!()
+MEETEI_MAYEK!();

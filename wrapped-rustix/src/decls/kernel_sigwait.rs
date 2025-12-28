@@ -13,4 +13,4 @@ macro_rules! kernel_sigwait {
     };
 }
 
-kernel_sigwait!()
+kernel_sigwait!();

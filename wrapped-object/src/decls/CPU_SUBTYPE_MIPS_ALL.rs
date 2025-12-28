@@ -4,4 +4,4 @@ macro_rules! CPU_SUBTYPE_MIPS_ALL {
     };
 }
 
-CPU_SUBTYPE_MIPS_ALL!()
+CPU_SUBTYPE_MIPS_ALL!();

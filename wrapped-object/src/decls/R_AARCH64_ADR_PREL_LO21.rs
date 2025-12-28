@@ -4,4 +4,4 @@ macro_rules! R_AARCH64_ADR_PREL_LO21 {
     };
 }
 
-R_AARCH64_ADR_PREL_LO21!()
+R_AARCH64_ADR_PREL_LO21!();

@@ -11,4 +11,4 @@ macro_rules! ownedref_drop_from_other_threads {
     };
 }
 
-ownedref_drop_from_other_threads!()
+ownedref_drop_from_other_threads!();

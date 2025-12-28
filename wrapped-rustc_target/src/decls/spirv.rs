@@ -4,4 +4,4 @@ macro_rules! spirv {
     };
 }
 
-spirv!()
+spirv!();

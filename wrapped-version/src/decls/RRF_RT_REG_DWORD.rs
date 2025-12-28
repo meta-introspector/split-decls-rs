@@ -11,4 +11,4 @@ macro_rules! RRF_RT_REG_DWORD {
     };
 }
 
-RRF_RT_REG_DWORD!()
+RRF_RT_REG_DWORD!();

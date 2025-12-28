@@ -4,4 +4,4 @@ macro_rules! NT_ARM_HW_WATCH {
     };
 }
 
-NT_ARM_HW_WATCH!()
+NT_ARM_HW_WATCH!();

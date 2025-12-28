@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Result!();
-        Iter!();
         Expr!();
+        Iter!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! parse_all {
     };
 }
 
-parse_all!()
+parse_all!();

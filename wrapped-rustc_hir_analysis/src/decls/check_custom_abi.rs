@@ -11,4 +11,4 @@ macro_rules! check_custom_abi {
     };
 }
 
-check_custom_abi!()
+check_custom_abi!();

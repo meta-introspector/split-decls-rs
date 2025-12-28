@@ -4,4 +4,4 @@ macro_rules! N_UNDEF {
     };
 }
 
-N_UNDEF!()
+N_UNDEF!();

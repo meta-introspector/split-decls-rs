@@ -4,4 +4,4 @@ macro_rules! EXIT_FAILURE {
     };
 }
 
-EXIT_FAILURE!()
+EXIT_FAILURE!();

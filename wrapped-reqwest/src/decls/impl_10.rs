@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Result!();
         Error!();
         Kind!();
-        Result!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_10 {
     };
 }
 
-impl_10!()
+impl_10!();

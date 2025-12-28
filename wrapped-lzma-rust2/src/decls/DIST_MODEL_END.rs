@@ -4,4 +4,4 @@ macro_rules! DIST_MODEL_END {
     };
 }
 
-DIST_MODEL_END!()
+DIST_MODEL_END!();

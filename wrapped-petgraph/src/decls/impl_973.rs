@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Nullable!();
         NotZero!();
+        Nullable!();
         Zero!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_973 {
     };
 }
 
-impl_973!()
+impl_973!();

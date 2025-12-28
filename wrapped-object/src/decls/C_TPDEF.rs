@@ -4,4 +4,4 @@ macro_rules! C_TPDEF {
     };
 }
 
-C_TPDEF!()
+C_TPDEF!();

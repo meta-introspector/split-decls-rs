@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        GenericArgs!();
-        TyConst!();
-        IntTy!();
-        Error!();
-        Region!();
         RigidTy!();
+        Region!();
+        TyConst!();
         Layout!();
-        UintTy!();
+        Error!();
+        GenericArgs!();
+        IntTy!();
         Ty!();
+        UintTy!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_301 {
     };
 }
 
-impl_301!()
+impl_301!();

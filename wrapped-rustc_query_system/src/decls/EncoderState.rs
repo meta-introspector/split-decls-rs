@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        DepKind!();
+        Deps!();
         Stat!();
         SerializedDepGraph!();
-        Deps!();
         LocalEncoderState!();
+        DepKind!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! EncoderState {
     };
 }
 
-EncoderState!()
+EncoderState!();

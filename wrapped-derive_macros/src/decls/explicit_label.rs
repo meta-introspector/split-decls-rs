@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        LabelValue!();
         Label!();
+        LabelValue!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! explicit_label {
     };
 }
 
-explicit_label!()
+explicit_label!();

@@ -11,4 +11,4 @@ macro_rules! check_incompatible_features {
     };
 }
 
-check_incompatible_features!()
+check_incompatible_features!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        ValueRef!();
-        Row!();
-        RowIndex!();
-        Result!();
         Error!();
+        Result!();
+        RowIndex!();
+        Row!();
+        ValueRef!();
         FromSqlError!();
         FromSql!();
     };
@@ -17,4 +17,4 @@ macro_rules! impl_223 {
     };
 }
 
-impl_223!()
+impl_223!();

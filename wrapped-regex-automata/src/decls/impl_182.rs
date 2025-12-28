@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        OwnedDFA!();
-        StateMap!();
-        NFA!();
         ByteSet!();
+        MatchKind!();
         Config!();
         State!();
-        MatchKind!();
-        Runner!();
-        SparseSets!();
-        DFA!();
+        StateMap!();
+        NFA!();
         BuildError!();
+        DFA!();
+        Runner!();
+        OwnedDFA!();
+        SparseSets!();
         StateBuilderEmpty!();
     };
 }
@@ -22,4 +22,4 @@ macro_rules! impl_182 {
     };
 }
 
-impl_182!()
+impl_182!();

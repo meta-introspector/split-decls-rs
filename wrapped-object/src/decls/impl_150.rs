@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        ComdatSectionIteratorInternal!();
-        Comdat!();
-        ComdatKind!();
         ReadRef!();
-        ComdatInternal!();
-        SectionIterator!();
-        SymbolIndex!();
-        Result!();
         ObjectComdat!();
+        ComdatInternal!();
         ComdatSectionIterator!();
+        Comdat!();
+        SectionIterator!();
+        ComdatSectionIteratorInternal!();
+        ComdatKind!();
+        Result!();
+        SymbolIndex!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_150 {
     };
 }
 
-impl_150!()
+impl_150!();

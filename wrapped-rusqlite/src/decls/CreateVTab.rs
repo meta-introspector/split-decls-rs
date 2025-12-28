@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        VTabKind!();
-        VTab!();
-        VTabConnection!();
         Result!();
+        VTabKind!();
+        VTabConnection!();
+        VTab!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! CreateVTab {
     };
 }
 
-CreateVTab!()
+CreateVTab!();

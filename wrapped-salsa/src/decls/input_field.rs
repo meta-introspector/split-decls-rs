@@ -4,4 +4,4 @@ macro_rules! input_field {
     };
 }
 
-input_field!()
+input_field!();

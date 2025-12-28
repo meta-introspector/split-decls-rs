@@ -4,4 +4,4 @@ macro_rules! is_use_cloned_raw {
     };
 }
 
-is_use_cloned_raw!()
+is_use_cloned_raw!();

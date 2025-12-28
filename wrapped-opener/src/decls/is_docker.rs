@@ -4,4 +4,4 @@ macro_rules! is_docker {
     };
 }
 
-is_docker!()
+is_docker!();

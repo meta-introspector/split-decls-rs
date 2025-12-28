@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Id!();
-        VersionVec!();
         Thread!();
+        VersionVec!();
+        Id!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Set {
     };
 }
 
-Set!()
+Set!();

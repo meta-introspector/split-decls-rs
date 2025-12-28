@@ -4,4 +4,4 @@ macro_rules! MisplacedImplTrait {
     };
 }
 
-MisplacedImplTrait!()
+MisplacedImplTrait!();

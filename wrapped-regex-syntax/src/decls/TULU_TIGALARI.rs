@@ -4,4 +4,4 @@ macro_rules! TULU_TIGALARI {
     };
 }
 
-TULU_TIGALARI!()
+TULU_TIGALARI!();

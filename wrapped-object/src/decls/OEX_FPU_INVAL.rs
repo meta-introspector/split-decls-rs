@@ -4,4 +4,4 @@ macro_rules! OEX_FPU_INVAL {
     };
 }
 
-OEX_FPU_INVAL!()
+OEX_FPU_INVAL!();

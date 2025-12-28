@@ -4,4 +4,4 @@ macro_rules! R_NDS32_TLS_TPOFF {
     };
 }
 
-R_NDS32_TLS_TPOFF!()
+R_NDS32_TLS_TPOFF!();

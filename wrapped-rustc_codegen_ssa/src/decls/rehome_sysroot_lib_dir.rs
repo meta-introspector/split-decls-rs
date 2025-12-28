@@ -4,4 +4,4 @@ macro_rules! rehome_sysroot_lib_dir {
     };
 }
 
-rehome_sysroot_lib_dir!()
+rehome_sysroot_lib_dir!();

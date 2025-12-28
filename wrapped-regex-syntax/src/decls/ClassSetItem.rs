@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        Range!();
-        Span!();
-        ClassAscii!();
-        ClassSetRange!();
-        ClassPerl!();
-        Literal!();
+        ClassUnicode!();
         ClassBracketed!();
         ClassSetUnion!();
-        ClassUnicode!();
+        ClassSetRange!();
+        ClassPerl!();
+        Range!();
+        Span!();
+        Literal!();
+        ClassAscii!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! ClassSetItem {
     };
 }
 
-ClassSetItem!()
+ClassSetItem!();

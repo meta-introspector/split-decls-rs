@@ -4,4 +4,4 @@ macro_rules! MapInitConsumer {
     };
 }
 
-MapInitConsumer!()
+MapInitConsumer!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Wrap!();
-        FromBytes!();
-        Immutable!();
         IntoBytes!();
+        Immutable!();
+        FromBytes!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_55 {
     };
 }
 
-impl_55!()
+impl_55!();

@@ -4,4 +4,4 @@ macro_rules! is_boolean_literal {
     };
 }
 
-is_boolean_literal!()
+is_boolean_literal!();

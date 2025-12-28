@@ -4,4 +4,4 @@ macro_rules! S_COALESCED {
     };
 }
 
-S_COALESCED!()
+S_COALESCED!();

@@ -11,4 +11,4 @@ macro_rules! build_closure_env_di_node {
     };
 }
 
-build_closure_env_di_node!()
+build_closure_env_di_node!();

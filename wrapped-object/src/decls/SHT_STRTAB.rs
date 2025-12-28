@@ -4,4 +4,4 @@ macro_rules! SHT_STRTAB {
     };
 }
 
-SHT_STRTAB!()
+SHT_STRTAB!();

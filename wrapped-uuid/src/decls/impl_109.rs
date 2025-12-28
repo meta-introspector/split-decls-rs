@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        ClockSequence!();
         Version!();
         Builder!();
         Uuid!();
         Timestamp!();
-        ClockSequence!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_109 {
     };
 }
 
-impl_109!()
+impl_109!();

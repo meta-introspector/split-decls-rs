@@ -4,4 +4,4 @@ macro_rules! SpinWait {
     };
 }
 
-SpinWait!()
+SpinWait!();

@@ -11,4 +11,4 @@ macro_rules! u32s_to_pattern_ids {
     };
 }
 
-u32s_to_pattern_ids!()
+u32s_to_pattern_ids!();

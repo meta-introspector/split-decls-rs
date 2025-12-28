@@ -4,4 +4,4 @@ macro_rules! avalanche {
     };
 }
 
-avalanche!()
+avalanche!();

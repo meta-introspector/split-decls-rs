@@ -11,4 +11,4 @@ macro_rules! badly_formatted_id {
     };
 }
 
-badly_formatted_id!()
+badly_formatted_id!();

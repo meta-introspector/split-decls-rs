@@ -12,4 +12,4 @@ macro_rules! test_diff_params_err {
     };
 }
 
-test_diff_params_err!()
+test_diff_params_err!();

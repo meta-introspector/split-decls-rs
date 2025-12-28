@@ -4,4 +4,4 @@ macro_rules! hash_stable_body {
     };
 }
 
-hash_stable_body!()
+hash_stable_body!();

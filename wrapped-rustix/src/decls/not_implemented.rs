@@ -4,4 +4,4 @@ macro_rules! not_implemented {
     };
 }
 
-not_implemented!()
+not_implemented!();

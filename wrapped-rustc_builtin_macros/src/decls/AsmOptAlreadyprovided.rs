@@ -4,4 +4,4 @@ macro_rules! AsmOptAlreadyprovided {
     };
 }
 
-AsmOptAlreadyprovided!()
+AsmOptAlreadyprovided!();

@@ -4,4 +4,4 @@ macro_rules! struct_processing {
     };
 }
 
-struct_processing!()
+struct_processing!();

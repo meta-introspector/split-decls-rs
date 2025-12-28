@@ -4,4 +4,4 @@ macro_rules! SetActualSpanIdError {
     };
 }
 
-SetActualSpanIdError!()
+SetActualSpanIdError!();

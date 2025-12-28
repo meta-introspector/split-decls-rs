@@ -4,4 +4,4 @@ macro_rules! target_cpu {
     };
 }
 
-target_cpu!()
+target_cpu!();

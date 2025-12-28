@@ -4,4 +4,4 @@ macro_rules! alias_fallback {
     };
 }
 
-alias_fallback!()
+alias_fallback!();

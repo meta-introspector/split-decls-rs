@@ -4,4 +4,4 @@ macro_rules! FieldlessUnion {
     };
 }
 
-FieldlessUnion!()
+FieldlessUnion!();

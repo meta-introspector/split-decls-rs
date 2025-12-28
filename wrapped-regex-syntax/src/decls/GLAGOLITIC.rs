@@ -4,4 +4,4 @@ macro_rules! GLAGOLITIC {
     };
 }
 
-GLAGOLITIC!()
+GLAGOLITIC!();

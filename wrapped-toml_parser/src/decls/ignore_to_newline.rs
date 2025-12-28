@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Stream!();
-        ErrorSink!();
         EventReceiver!();
+        ErrorSink!();
+        Stream!();
         TokenKind!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! ignore_to_newline {
     };
 }
 
-ignore_to_newline!()
+ignore_to_newline!();

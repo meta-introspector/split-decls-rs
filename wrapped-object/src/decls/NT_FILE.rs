@@ -4,4 +4,4 @@ macro_rules! NT_FILE {
     };
 }
 
-NT_FILE!()
+NT_FILE!();

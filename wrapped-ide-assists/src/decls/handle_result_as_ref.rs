@@ -11,4 +11,4 @@ macro_rules! handle_result_as_ref {
     };
 }
 
-handle_result_as_ref!()
+handle_result_as_ref!();

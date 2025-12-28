@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        MatchError!();
         DFA!();
+        Anchored!();
+        PatternID!();
         Input!();
         NonMaxUsize!();
-        MatchKind!();
+        MatchError!();
         Slots!();
-        PatternID!();
         StateID!();
         Cache!();
-        Anchored!();
+        MatchKind!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_73 {
     };
 }
 
-impl_73!()
+impl_73!();

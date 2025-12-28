@@ -6,4 +6,4 @@ macro_rules! parse_float_into_scalar {
     };
 }
 
-parse_float_into_scalar!()
+parse_float_into_scalar!();

@@ -4,4 +4,4 @@ macro_rules! for_each_exported_symbols_include_dep {
     };
 }
 
-for_each_exported_symbols_include_dep!()
+for_each_exported_symbols_include_dep!();

@@ -4,4 +4,4 @@ macro_rules! ResourceDirectory {
     };
 }
 
-ResourceDirectory!()
+ResourceDirectory!();

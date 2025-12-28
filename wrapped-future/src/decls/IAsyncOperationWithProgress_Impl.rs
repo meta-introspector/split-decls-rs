@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        AsyncOperationWithProgressCompletedHandler!();
-        AsyncOperationProgressHandler!();
         IAsyncInfo_Impl!();
+        AsyncOperationProgressHandler!();
+        AsyncOperationWithProgressCompletedHandler!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! IAsyncOperationWithProgress_Impl {
     };
 }
 
-IAsyncOperationWithProgress_Impl!()
+IAsyncOperationWithProgress_Impl!();

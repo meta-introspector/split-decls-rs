@@ -4,4 +4,4 @@ macro_rules! IMAGE_VXD_SIGNATURE {
     };
 }
 
-IMAGE_VXD_SIGNATURE!()
+IMAGE_VXD_SIGNATURE!();

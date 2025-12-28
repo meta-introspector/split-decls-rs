@@ -11,4 +11,4 @@ macro_rules! encrypt_decrypt_input_empty {
     };
 }
 
-encrypt_decrypt_input_empty!()
+encrypt_decrypt_input_empty!();

@@ -12,4 +12,4 @@ macro_rules! walk_pat_field {
     };
 }
 
-walk_pat_field!()
+walk_pat_field!();

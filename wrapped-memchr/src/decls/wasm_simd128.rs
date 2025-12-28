@@ -13,4 +13,4 @@ macro_rules! wasm_simd128 {
     };
 }
 
-wasm_simd128!()
+wasm_simd128!();

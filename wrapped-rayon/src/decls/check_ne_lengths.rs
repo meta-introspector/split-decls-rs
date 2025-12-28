@@ -4,4 +4,4 @@ macro_rules! check_ne_lengths {
     };
 }
 
-check_ne_lengths!()
+check_ne_lengths!();

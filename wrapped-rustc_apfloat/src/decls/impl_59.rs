@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Float!();
-        FloatConvert!();
         DoubleFloat!();
-        FallbackExtended!();
+        Float!();
         Fallback!();
+        FallbackExtended!();
+        FloatConvert!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_59 {
     };
 }
 
-impl_59!()
+impl_59!();

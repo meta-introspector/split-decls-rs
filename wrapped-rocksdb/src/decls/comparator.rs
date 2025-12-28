@@ -4,4 +4,4 @@ macro_rules! comparator {
     };
 }
 
-comparator!()
+comparator!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Cursor!();
         Reject!();
+        Cursor!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! cooked_byte_string {
     };
 }
 
-cooked_byte_string!()
+cooked_byte_string!();

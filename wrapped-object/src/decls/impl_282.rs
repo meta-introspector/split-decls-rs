@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        ReadRef!();
-        RelocationSections!();
-        ElfFile!();
-        FileHeader!();
         ProgramHeader!();
-        ElfSection!();
+        Result!();
+        FileHeader!();
+        SymbolTable!();
+        ReadRef!();
         SectionTable!();
         Endian!();
-        SymbolTable!();
-        Result!();
+        ElfFile!();
+        RelocationSections!();
+        ElfSection!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_282 {
     };
 }
 
-impl_282!()
+impl_282!();

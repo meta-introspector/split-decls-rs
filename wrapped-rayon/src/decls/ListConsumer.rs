@@ -4,4 +4,4 @@ macro_rules! ListConsumer {
     };
 }
 
-ListConsumer!()
+ListConsumer!();

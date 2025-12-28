@@ -4,4 +4,4 @@ macro_rules! ReverseSccGraph {
     };
 }
 
-ReverseSccGraph!()
+ReverseSccGraph!();

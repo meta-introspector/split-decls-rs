@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        RingElementNTT!();
         FieldElement!();
+        RingElementNTT!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_436 {
     };
 }
 
-impl_436!()
+impl_436!();

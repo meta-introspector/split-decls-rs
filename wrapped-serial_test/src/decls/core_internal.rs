@@ -4,4 +4,4 @@ macro_rules! core_internal {
     };
 }
 
-core_internal!()
+core_internal!();

@@ -4,4 +4,4 @@ macro_rules! elf_uapi {
     };
 }
 
-elf_uapi!()
+elf_uapi!();

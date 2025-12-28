@@ -4,4 +4,4 @@ macro_rules! take_any {
     };
 }
 
-take_any!()
+take_any!();

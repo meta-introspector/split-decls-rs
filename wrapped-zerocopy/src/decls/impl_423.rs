@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        KnownLayout!();
         MaybeUninit!();
-        PointerMetadata!();
         AllocError!();
+        PointerMetadata!();
+        KnownLayout!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_423 {
     };
 }
 
-impl_423!()
+impl_423!();

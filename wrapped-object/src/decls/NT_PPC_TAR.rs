@@ -4,4 +4,4 @@ macro_rules! NT_PPC_TAR {
     };
 }
 
-NT_PPC_TAR!()
+NT_PPC_TAR!();

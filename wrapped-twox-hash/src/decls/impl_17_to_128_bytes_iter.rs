@@ -4,4 +4,4 @@ macro_rules! impl_17_to_128_bytes_iter {
     };
 }
 
-impl_17_to_128_bytes_iter!()
+impl_17_to_128_bytes_iter!();

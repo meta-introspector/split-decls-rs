@@ -4,4 +4,4 @@ macro_rules! REGION_WIDTH {
     };
 }
 
-REGION_WIDTH!()
+REGION_WIDTH!();

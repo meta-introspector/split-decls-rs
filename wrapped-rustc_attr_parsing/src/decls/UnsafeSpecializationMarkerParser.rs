@@ -4,4 +4,4 @@ macro_rules! UnsafeSpecializationMarkerParser {
     };
 }
 
-UnsafeSpecializationMarkerParser!()
+UnsafeSpecializationMarkerParser!();

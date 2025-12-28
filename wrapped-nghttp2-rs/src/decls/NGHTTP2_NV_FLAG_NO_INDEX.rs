@@ -4,4 +4,4 @@ macro_rules! NGHTTP2_NV_FLAG_NO_INDEX {
     };
 }
 
-NGHTTP2_NV_FLAG_NO_INDEX!()
+NGHTTP2_NV_FLAG_NO_INDEX!();

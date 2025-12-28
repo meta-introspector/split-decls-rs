@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        Ty!();
-        PatKind!();
-        BindingMode!();
-        Expr!();
-        MutTy!();
         Path!();
-        TyKind!();
+        MutTy!();
         MacCall!();
         Pat!();
+        BindingMode!();
+        Expr!();
+        TyKind!();
+        PatKind!();
+        Ty!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_51 {
     };
 }
 
-impl_51!()
+impl_51!();

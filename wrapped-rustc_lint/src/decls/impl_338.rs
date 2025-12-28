@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        LintLevelsProvider!();
         TopDown!();
+        LintLevelsProvider!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_338 {
     };
 }
 
-impl_338!()
+impl_338!();

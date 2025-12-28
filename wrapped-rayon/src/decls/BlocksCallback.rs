@@ -4,4 +4,4 @@ macro_rules! BlocksCallback {
     };
 }
 
-BlocksCallback!()
+BlocksCallback!();

@@ -4,4 +4,4 @@ macro_rules! PointerMachina {
     };
 }
 
-PointerMachina!()
+PointerMachina!();

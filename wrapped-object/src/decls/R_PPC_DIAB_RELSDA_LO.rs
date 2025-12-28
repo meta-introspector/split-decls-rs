@@ -4,4 +4,4 @@ macro_rules! R_PPC_DIAB_RELSDA_LO {
     };
 }
 
-R_PPC_DIAB_RELSDA_LO!()
+R_PPC_DIAB_RELSDA_LO!();

@@ -4,4 +4,4 @@ macro_rules! DOUBLE_POW5_BITCOUNT {
     };
 }
 
-DOUBLE_POW5_BITCOUNT!()
+DOUBLE_POW5_BITCOUNT!();

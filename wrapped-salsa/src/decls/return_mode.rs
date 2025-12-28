@@ -4,4 +4,4 @@ macro_rules! return_mode {
     };
 }
 
-return_mode!()
+return_mode!();

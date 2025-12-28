@@ -11,4 +11,4 @@ macro_rules! PlainTableFactoryOptions {
     };
 }
 
-PlainTableFactoryOptions!()
+PlainTableFactoryOptions!();

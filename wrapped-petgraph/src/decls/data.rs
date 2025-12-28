@@ -4,4 +4,4 @@ macro_rules! data {
     };
 }
 
-data!()
+data!();

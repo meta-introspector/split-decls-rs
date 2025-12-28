@@ -12,4 +12,4 @@ macro_rules! decorate_array {
     };
 }
 
-decorate_array!()
+decorate_array!();

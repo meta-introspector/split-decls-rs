@@ -4,4 +4,4 @@ macro_rules! R_PARISC_PLTOFF21L {
     };
 }
 
-R_PARISC_PLTOFF21L!()
+R_PARISC_PLTOFF21L!();

@@ -4,4 +4,4 @@ macro_rules! join_a_lot {
     };
 }
 
-join_a_lot!()
+join_a_lot!();

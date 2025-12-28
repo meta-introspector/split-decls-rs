@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Linkage!();
         UnnamedAddr!();
         Visibility!();
-        Linkage!();
         CodegenCx!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_204 {
     };
 }
 
-impl_204!()
+impl_204!();

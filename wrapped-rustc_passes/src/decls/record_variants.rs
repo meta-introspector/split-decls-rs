@@ -4,4 +4,4 @@ macro_rules! record_variants {
     };
 }
 
-record_variants!()
+record_variants!();

@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Parent!();
-        ValueSet!();
-        Metadata!();
-        Visit!();
         Id!();
-        Current!();
+        ValueSet!();
+        Visit!();
         Iter!();
         Event!();
+        Metadata!();
+        Parent!();
+        Current!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_102 {
     };
 }
 
-impl_102!()
+impl_102!();

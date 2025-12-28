@@ -4,4 +4,4 @@ macro_rules! deflateInit2_ {
     };
 }
 
-deflateInit2_!()
+deflateInit2_!();

@@ -4,4 +4,4 @@ macro_rules! lints {
     };
 }
 
-lints!()
+lints!();

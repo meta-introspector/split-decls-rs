@@ -11,4 +11,4 @@ macro_rules! termination_while_things_are_executing {
     };
 }
 
-termination_while_things_are_executing!()
+termination_while_things_are_executing!();

@@ -4,4 +4,4 @@ macro_rules! alloc_func {
     };
 }
 
-alloc_func!()
+alloc_func!();

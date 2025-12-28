@@ -4,4 +4,4 @@ macro_rules! Captures {
     };
 }
 
-Captures!()
+Captures!();

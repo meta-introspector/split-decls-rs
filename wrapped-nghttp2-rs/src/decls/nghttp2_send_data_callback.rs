@@ -4,4 +4,4 @@ macro_rules! nghttp2_send_data_callback {
     };
 }
 
-nghttp2_send_data_callback!()
+nghttp2_send_data_callback!();

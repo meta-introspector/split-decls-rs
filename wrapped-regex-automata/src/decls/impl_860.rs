@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        StateID!();
-        StateBuilderMatches!();
-        Repr!();
-        PatternID!();
-        LookSet!();
         ReprVec!();
         StateBuilderNFA!();
+        Repr!();
+        PatternID!();
+        StateBuilderMatches!();
+        LookSet!();
+        StateID!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_860 {
     };
 }
 
-impl_860!()
+impl_860!();

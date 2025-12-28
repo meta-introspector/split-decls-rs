@@ -4,4 +4,4 @@ macro_rules! C_ENTAG {
     };
 }
 
-C_ENTAG!()
+C_ENTAG!();

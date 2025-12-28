@@ -4,4 +4,4 @@ macro_rules! floyd_warshall {
     };
 }
 
-floyd_warshall!()
+floyd_warshall!();

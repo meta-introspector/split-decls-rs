@@ -7,4 +7,4 @@ macro_rules! check_transparent {
     };
 }
 
-check_transparent!()
+check_transparent!();

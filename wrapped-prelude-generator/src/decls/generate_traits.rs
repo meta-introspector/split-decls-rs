@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Uses!();
-        AllDeclarationsExtractionResult!();
         GeneratedTrait!();
-        GeneratedTraitMethod!();
+        Uses!();
         Is!();
+        AllDeclarationsExtractionResult!();
+        GeneratedTraitMethod!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! generate_traits {
     };
 }
 
-generate_traits!()
+generate_traits!();

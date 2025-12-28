@@ -4,4 +4,4 @@ macro_rules! UnlabeledInLabeledBlock {
     };
 }
 
-UnlabeledInLabeledBlock!()
+UnlabeledInLabeledBlock!();

@@ -4,4 +4,4 @@ macro_rules! NonAsmTypeReason {
     };
 }
 
-NonAsmTypeReason!()
+NonAsmTypeReason!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Visitor!();
         ImplItemId!();
+        Visitor!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! walk_impl_item_ref {
     };
 }
 
-walk_impl_item_ref!()
+walk_impl_item_ref!();

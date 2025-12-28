@@ -14,4 +14,4 @@ macro_rules! is_range_literal {
     };
 }
 
-is_range_literal!()
+is_range_literal!();

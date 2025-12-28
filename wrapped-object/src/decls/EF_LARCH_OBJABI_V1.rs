@@ -4,4 +4,4 @@ macro_rules! EF_LARCH_OBJABI_V1 {
     };
 }
 
-EF_LARCH_OBJABI_V1!()
+EF_LARCH_OBJABI_V1!();

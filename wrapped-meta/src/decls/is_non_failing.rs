@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ParserNode!();
         ParserExpr!();
+        ParserNode!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! is_non_failing {
     };
 }
 
-is_non_failing!()
+is_non_failing!();

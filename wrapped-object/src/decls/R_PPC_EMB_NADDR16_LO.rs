@@ -4,4 +4,4 @@ macro_rules! R_PPC_EMB_NADDR16_LO {
     };
 }
 
-R_PPC_EMB_NADDR16_LO!()
+R_PPC_EMB_NADDR16_LO!();

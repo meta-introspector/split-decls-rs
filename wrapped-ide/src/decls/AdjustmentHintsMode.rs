@@ -4,4 +4,4 @@ macro_rules! AdjustmentHintsMode {
     };
 }
 
-AdjustmentHintsMode!()
+AdjustmentHintsMode!();

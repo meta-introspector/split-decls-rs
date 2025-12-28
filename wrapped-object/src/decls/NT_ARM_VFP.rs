@@ -4,4 +4,4 @@ macro_rules! NT_ARM_VFP {
     };
 }
 
-NT_ARM_VFP!()
+NT_ARM_VFP!();

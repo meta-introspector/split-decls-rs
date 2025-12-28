@@ -4,4 +4,4 @@ macro_rules! R_PPC64_TLSLD {
     };
 }
 
-R_PPC64_TLSLD!()
+R_PPC64_TLSLD!();

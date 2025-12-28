@@ -11,4 +11,4 @@ macro_rules! omap2 {
     };
 }
 
-omap2!()
+omap2!();

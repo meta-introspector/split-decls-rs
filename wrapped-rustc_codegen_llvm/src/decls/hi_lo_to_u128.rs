@@ -4,4 +4,4 @@ macro_rules! hi_lo_to_u128 {
     };
 }
 
-hi_lo_to_u128!()
+hi_lo_to_u128!();

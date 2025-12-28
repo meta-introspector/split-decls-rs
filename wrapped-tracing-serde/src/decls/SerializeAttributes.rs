@@ -4,4 +4,4 @@ macro_rules! SerializeAttributes {
     };
 }
 
-SerializeAttributes!()
+SerializeAttributes!();

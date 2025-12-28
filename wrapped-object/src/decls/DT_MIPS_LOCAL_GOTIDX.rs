@@ -4,4 +4,4 @@ macro_rules! DT_MIPS_LOCAL_GOTIDX {
     };
 }
 
-DT_MIPS_LOCAL_GOTIDX!()
+DT_MIPS_LOCAL_GOTIDX!();

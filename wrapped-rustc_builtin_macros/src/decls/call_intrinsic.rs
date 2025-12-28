@@ -4,4 +4,4 @@ macro_rules! call_intrinsic {
     };
 }
 
-call_intrinsic!()
+call_intrinsic!();

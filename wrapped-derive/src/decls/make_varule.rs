@@ -4,4 +4,4 @@ macro_rules! make_varule {
     };
 }
 
-make_varule!()
+make_varule!();

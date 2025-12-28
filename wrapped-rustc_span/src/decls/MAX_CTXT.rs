@@ -4,4 +4,4 @@ macro_rules! MAX_CTXT {
     };
 }
 
-MAX_CTXT!()
+MAX_CTXT!();

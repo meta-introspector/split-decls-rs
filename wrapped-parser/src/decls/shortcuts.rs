@@ -4,4 +4,4 @@ macro_rules! shortcuts {
     };
 }
 
-shortcuts!()
+shortcuts!();

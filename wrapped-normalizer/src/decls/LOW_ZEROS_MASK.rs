@@ -4,4 +4,4 @@ macro_rules! LOW_ZEROS_MASK {
     };
 }
 
-LOW_ZEROS_MASK!()
+LOW_ZEROS_MASK!();

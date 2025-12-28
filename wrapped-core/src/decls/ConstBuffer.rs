@@ -4,4 +4,4 @@ macro_rules! ConstBuffer {
     };
 }
 
-ConstBuffer!()
+ConstBuffer!();

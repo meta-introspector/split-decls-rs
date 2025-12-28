@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Visitable!();
         GenericArgs!();
         Visitor!();
-        Visitable!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_467 {
     };
 }
 
-impl_467!()
+impl_467!();

@@ -11,4 +11,4 @@ macro_rules! prefilter_kind_fallback {
     };
 }
 
-prefilter_kind_fallback!()
+prefilter_kind_fallback!();

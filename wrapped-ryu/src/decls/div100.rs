@@ -4,4 +4,4 @@ macro_rules! div100 {
     };
 }
 
-div100!()
+div100!();

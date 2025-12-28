@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        RegionClassification!();
         RegionCtxt!();
+        RegionClassification!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! nll_var_to_universal_region {
     };
 }
 
-nll_var_to_universal_region!()
+nll_var_to_universal_region!();

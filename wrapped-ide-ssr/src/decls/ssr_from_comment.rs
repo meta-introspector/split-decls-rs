@@ -11,4 +11,4 @@ macro_rules! ssr_from_comment {
     };
 }
 
-ssr_from_comment!()
+ssr_from_comment!();

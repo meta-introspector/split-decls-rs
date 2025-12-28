@@ -4,4 +4,4 @@ macro_rules! R_PARISC_LTOFF14R {
     };
 }
 
-R_PARISC_LTOFF14R!()
+R_PARISC_LTOFF14R!();

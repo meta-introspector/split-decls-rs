@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Lifetime!();
         GenericArgsParentheses!();
-        GenericArg!();
-        Ty!();
-        GenericArgs!();
+        Lifetime!();
         TyKind!();
+        GenericArgs!();
+        Ty!();
+        GenericArg!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_129 {
     };
 }
 
-impl_129!()
+impl_129!();

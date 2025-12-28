@@ -12,4 +12,4 @@ macro_rules! XcoffFile64 {
     };
 }
 
-XcoffFile64!()
+XcoffFile64!();

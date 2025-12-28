@@ -4,4 +4,4 @@ macro_rules! anon_const {
     };
 }
 
-anon_const!()
+anon_const!();

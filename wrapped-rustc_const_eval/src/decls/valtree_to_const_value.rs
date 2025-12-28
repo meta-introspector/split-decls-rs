@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        ImmTy!();
         Coroutine!();
-        CanAccessMutGlobal!();
         InternKind!();
+        CanAccessMutGlobal!();
+        ImmTy!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! valtree_to_const_value {
     };
 }
 
-valtree_to_const_value!()
+valtree_to_const_value!();

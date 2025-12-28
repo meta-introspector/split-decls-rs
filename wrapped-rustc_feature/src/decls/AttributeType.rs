@@ -4,4 +4,4 @@ macro_rules! AttributeType {
     };
 }
 
-AttributeType!()
+AttributeType!();

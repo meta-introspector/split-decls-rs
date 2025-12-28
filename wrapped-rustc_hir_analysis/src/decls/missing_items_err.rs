@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        MissingTraitItem!();
         MissingTraitItemLabel!();
-        MissingTraitItemSuggestion!();
         MissingTraitItemSuggestionNone!();
+        MissingTraitItem!();
+        MissingTraitItemSuggestion!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! missing_items_err {
     };
 }
 
-missing_items_err!()
+missing_items_err!();

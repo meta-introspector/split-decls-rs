@@ -4,4 +4,4 @@ macro_rules! allocate_loop {
     };
 }
 
-allocate_loop!()
+allocate_loop!();

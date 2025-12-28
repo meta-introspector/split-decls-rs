@@ -4,4 +4,4 @@ macro_rules! DanglingPointers {
     };
 }
 
-DanglingPointers!()
+DanglingPointers!();

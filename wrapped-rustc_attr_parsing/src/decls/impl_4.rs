@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        StabilityOutsideStd!();
-        ConvertFn!();
-        AllowedTargets!();
-        AcceptContext!();
         ArgParser!();
-        UnstableFeatureBoundParser!();
+        AllowedTargets!();
         Stage!();
+        UnstableFeatureBoundParser!();
+        AcceptContext!();
+        ConvertFn!();
+        StabilityOutsideStd!();
         CombineAttributeParser!();
     };
 }
@@ -18,4 +18,4 @@ macro_rules! impl_4 {
     };
 }
 
-impl_4!()
+impl_4!();

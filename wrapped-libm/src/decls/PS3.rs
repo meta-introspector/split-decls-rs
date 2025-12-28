@@ -4,4 +4,4 @@ macro_rules! PS3 {
     };
 }
 
-PS3!()
+PS3!();

@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Value!();
-        BorrowedRawDeserializer!();
         Position!();
+        BorrowedRawDeserializer!();
         Read!();
         StrRead!();
-        Reference!();
         Result!();
+        Value!();
+        Reference!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_584 {
     };
 }
 
-impl_584!()
+impl_584!();

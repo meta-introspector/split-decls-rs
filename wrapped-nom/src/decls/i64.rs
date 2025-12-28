@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Endianness!();
-        Either!();
+        Parser!();
+        Streaming!();
         ParseError!();
         Error!();
         Input!();
-        Streaming!();
+        Endianness!();
         Needed!();
-        Parser!();
+        Either!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! i64 {
     };
 }
 
-i64!()
+i64!();

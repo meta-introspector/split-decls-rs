@@ -4,4 +4,4 @@ macro_rules! DataBlockIndexType {
     };
 }
 
-DataBlockIndexType!()
+DataBlockIndexType!();

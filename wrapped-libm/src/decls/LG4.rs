@@ -4,4 +4,4 @@ macro_rules! LG4 {
     };
 }
 
-LG4!()
+LG4!();

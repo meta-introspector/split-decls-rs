@@ -4,4 +4,4 @@ macro_rules! output_tests {
     };
 }
 
-output_tests!()
+output_tests!();

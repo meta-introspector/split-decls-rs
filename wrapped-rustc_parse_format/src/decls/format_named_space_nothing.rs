@@ -11,4 +11,4 @@ macro_rules! format_named_space_nothing {
     };
 }
 
-format_named_space_nothing!()
+format_named_space_nothing!();

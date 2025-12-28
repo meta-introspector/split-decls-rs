@@ -12,4 +12,4 @@ macro_rules! dedup_by_with_count {
     };
 }
 
-dedup_by_with_count!()
+dedup_by_with_count!();

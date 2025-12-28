@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Value!();
-        EnumRefDeserializer!();
         Error!();
         Result!();
         VariantRefDeserializer!();
+        EnumRefDeserializer!();
+        Value!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_272 {
     };
 }
 
-impl_272!()
+impl_272!();

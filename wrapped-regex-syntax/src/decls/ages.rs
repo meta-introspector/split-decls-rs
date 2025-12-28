@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Result!();
         Error!();
         Range!();
-        Result!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! ages {
     };
 }
 
-ages!()
+ages!();

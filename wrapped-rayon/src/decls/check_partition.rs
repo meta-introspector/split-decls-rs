@@ -4,4 +4,4 @@ macro_rules! check_partition {
     };
 }
 
-check_partition!()
+check_partition!();

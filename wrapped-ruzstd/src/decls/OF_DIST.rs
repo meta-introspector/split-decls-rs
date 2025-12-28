@@ -4,4 +4,4 @@ macro_rules! OF_DIST {
     };
 }
 
-OF_DIST!()
+OF_DIST!();

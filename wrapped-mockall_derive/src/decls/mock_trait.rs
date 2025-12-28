@@ -4,4 +4,4 @@ macro_rules! mock_trait {
     };
 }
 
-mock_trait!()
+mock_trait!();

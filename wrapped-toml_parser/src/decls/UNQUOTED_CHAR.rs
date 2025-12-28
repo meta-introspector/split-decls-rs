@@ -4,4 +4,4 @@ macro_rules! UNQUOTED_CHAR {
     };
 }
 
-UNQUOTED_CHAR!()
+UNQUOTED_CHAR!();

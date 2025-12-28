@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        Variant!();
-        LoopMatchInvalidMatch!();
         LoopMatchInvalidUpdate!();
+        LoopMatchInvalidMatch!();
+        ConstContinueMissingLabelOrValue!();
         ThirBuildCx!();
-        LoopMatchBadRhs!();
-        Scope!();
         LoopMatchMissingAssignment!();
         LoopMatchBadStatements!();
-        ConstContinueMissingLabelOrValue!();
+        LoopMatchBadRhs!();
+        Scope!();
+        Variant!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_300 {
     };
 }
 
-impl_300!()
+impl_300!();

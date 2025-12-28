@@ -4,4 +4,4 @@ macro_rules! Z_OK {
     };
 }
 
-Z_OK!()
+Z_OK!();

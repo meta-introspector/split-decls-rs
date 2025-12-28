@@ -4,4 +4,4 @@ macro_rules! slice_assume_init_mut {
     };
 }
 
-slice_assume_init_mut!()
+slice_assume_init_mut!();

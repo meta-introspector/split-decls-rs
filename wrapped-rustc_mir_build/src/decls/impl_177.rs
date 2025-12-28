@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Binding!();
+        Variant!();
         LayoutConstrainedPlaceVisitor!();
         SafetyContext!();
-        Variant!();
-        UnsafetyVisitor!();
+        Binding!();
         Scope!();
+        UnsafetyVisitor!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_177 {
     };
 }
 
-impl_177!()
+impl_177!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        MutexGuard!();
         Condvar!();
+        MutexGuard!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_227 {
     };
 }
 
-impl_227!()
+impl_227!();

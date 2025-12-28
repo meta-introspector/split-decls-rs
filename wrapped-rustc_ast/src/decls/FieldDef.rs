@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Ty!();
-        AnonConst!();
-        AttrVec!();
         Visibility!();
-        Walkable!();
         Safety!();
+        AnonConst!();
+        Walkable!();
+        AttrVec!();
+        Ty!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! FieldDef {
     };
 }
 
-FieldDef!()
+FieldDef!();

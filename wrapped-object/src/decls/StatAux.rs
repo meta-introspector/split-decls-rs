@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Section!();
+        U32!();
         Symbol!();
         U16!();
-        U32!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! StatAux {
     };
 }
 
-StatAux!()
+StatAux!();

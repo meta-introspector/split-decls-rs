@@ -4,4 +4,4 @@ macro_rules! Finalize128 {
     };
 }
 
-Finalize128!()
+Finalize128!();

@@ -4,4 +4,4 @@ macro_rules! bellman_ford {
     };
 }
 
-bellman_ford!()
+bellman_ford!();

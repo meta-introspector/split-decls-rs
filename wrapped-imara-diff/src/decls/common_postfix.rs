@@ -11,4 +11,4 @@ macro_rules! common_postfix {
     };
 }
 
-common_postfix!()
+common_postfix!();

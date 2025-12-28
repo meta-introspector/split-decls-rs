@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         Item!();
         ItemId!();
-        Expr!();
         LetStmt!();
+        Expr!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! StmtKind {
     };
 }
 
-StmtKind!()
+StmtKind!();

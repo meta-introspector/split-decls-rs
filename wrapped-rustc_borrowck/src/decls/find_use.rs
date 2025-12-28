@@ -4,4 +4,4 @@ macro_rules! find_use {
     };
 }
 
-find_use!()
+find_use!();

@@ -4,4 +4,4 @@ macro_rules! EF_SPARC_SUN_US1 {
     };
 }
 
-EF_SPARC_SUN_US1!()
+EF_SPARC_SUN_US1!();

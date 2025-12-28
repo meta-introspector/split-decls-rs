@@ -4,4 +4,4 @@ macro_rules! hltypes {
     };
 }
 
-hltypes!()
+hltypes!();

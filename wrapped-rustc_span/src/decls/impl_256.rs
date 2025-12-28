@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        FileNameDisplay!();
         FileName!();
+        FileNameDisplay!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_256 {
     };
 }
 
-impl_256!()
+impl_256!();

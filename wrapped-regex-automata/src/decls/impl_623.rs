@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        GroupInfoError!();
+        PatternID!();
+        SmallIndex!();
         GroupInfoInner!();
         CaptureNameMap!();
         IteratorIndexExt!();
-        PatternID!();
-        SmallIndex!();
+        GroupInfoError!();
         GroupInfo!();
     };
 }
@@ -17,4 +17,4 @@ macro_rules! impl_623 {
     };
 }
 
-impl_623!()
+impl_623!();

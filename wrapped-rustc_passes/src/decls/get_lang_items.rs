@@ -11,4 +11,4 @@ macro_rules! get_lang_items {
     };
 }
 
-get_lang_items!()
+get_lang_items!();

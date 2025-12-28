@@ -4,4 +4,4 @@ macro_rules! SupertraitAsDerefTargetLabel {
     };
 }
 
-SupertraitAsDerefTargetLabel!()
+SupertraitAsDerefTargetLabel!();

@@ -11,4 +11,4 @@ macro_rules! round_down {
     };
 }
 
-round_down!()
+round_down!();

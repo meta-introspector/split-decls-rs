@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        FeatureOnNonNightly!();
         StableFeature!();
+        FeatureOnNonNightly!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! maybe_stage_features {
     };
 }
 
-maybe_stage_features!()
+maybe_stage_features!();

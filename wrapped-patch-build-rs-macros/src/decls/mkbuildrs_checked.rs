@@ -4,4 +4,4 @@ macro_rules! mkbuildrs_checked {
     };
 }
 
-mkbuildrs_checked!()
+mkbuildrs_checked!();

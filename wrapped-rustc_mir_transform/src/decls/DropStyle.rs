@@ -4,4 +4,4 @@ macro_rules! DropStyle {
     };
 }
 
-DropStyle!()
+DropStyle!();

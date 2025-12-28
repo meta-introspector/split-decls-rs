@@ -4,4 +4,4 @@ macro_rules! epoll {
     };
 }
 
-epoll!()
+epoll!();

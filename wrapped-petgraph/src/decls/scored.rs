@@ -4,4 +4,4 @@ macro_rules! scored {
     };
 }
 
-scored!()
+scored!();

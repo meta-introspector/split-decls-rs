@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Solution!();
-        CodeFix!();
-        Data!();
-        Suggestion!();
         Error!();
+        Suggestion!();
+        Solution!();
+        Data!();
+        CodeFix!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_31 {
     };
 }
 
-impl_31!()
+impl_31!();

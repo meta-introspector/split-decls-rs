@@ -11,4 +11,4 @@ macro_rules! test_compression {
     };
 }
 
-test_compression!()
+test_compression!();

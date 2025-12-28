@@ -11,4 +11,4 @@ macro_rules! ioctl_none {
     };
 }
 
-ioctl_none!()
+ioctl_none!();

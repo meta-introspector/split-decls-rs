@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         Linker!();
-        OptimizationDiagnostic!();
         DiagnosticKind!();
-        Diagnostic!();
         InlineAsmDiagnostic!();
+        OptimizationDiagnostic!();
+        Diagnostic!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_413 {
     };
 }
 
-impl_413!()
+impl_413!();

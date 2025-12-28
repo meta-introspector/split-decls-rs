@@ -4,4 +4,4 @@ macro_rules! trailing_field_offset {
     };
 }
 
-trailing_field_offset!()
+trailing_field_offset!();

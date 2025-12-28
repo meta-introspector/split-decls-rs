@@ -1,34 +1,34 @@
 macro_rules! deps {
     () => {
-        RegionRelationCheckResult!();
-        ClosureOutlivesSubjectTy!();
-        LoweredConstraints!();
         RegionElement!();
-        Locations!();
-        Normal!();
-        BorrowckInferCtxt!();
-        Trace!();
-        LivenessValues!();
-        ClosureRegionRequirements!();
-        RegionTracker!();
-        ToElementIndex!();
-        UniverseInfo!();
-        ClosureOutlivesRequirement!();
-        LiveLoans!();
-        RegionDefinition!();
-        PoloniusOutput!();
-        MirTypeckRegionConstraints!();
-        RegionInferenceContext!();
-        UniversalRegionRelations!();
-        RegionErrors!();
-        OutlivesConstraint!();
-        ConstraintSccs!();
         RegionErrorKind!();
-        BlameConstraint!();
-        RegionValues!();
-        UniversalRegions!();
         ClosureOutlivesSubject!();
+        LoweredConstraints!();
+        RegionRelationCheckResult!();
+        UniverseInfo!();
+        BlameConstraint!();
+        RegionErrors!();
+        Trace!();
+        MirTypeckRegionConstraints!();
+        ClosureOutlivesSubjectTy!();
+        RegionValues!();
+        RegionTracker!();
+        RegionInferenceContext!();
+        ConstraintSccs!();
+        BorrowckInferCtxt!();
+        UniversalRegionRelations!();
+        LiveLoans!();
+        ToElementIndex!();
+        PoloniusOutput!();
+        LivenessValues!();
+        UniversalRegions!();
+        Normal!();
+        Locations!();
+        OutlivesConstraint!();
+        ClosureRegionRequirements!();
         TypeTest!();
+        ClosureOutlivesRequirement!();
+        RegionDefinition!();
     };
 }
 
@@ -43,4 +43,4 @@ macro_rules! impl_381 {
     };
 }
 
-impl_381!()
+impl_381!();

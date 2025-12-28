@@ -4,4 +4,4 @@ macro_rules! num_nodes {
     };
 }
 
-num_nodes!()
+num_nodes!();

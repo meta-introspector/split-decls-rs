@@ -4,4 +4,4 @@ macro_rules! R_68K_JMP_SLOT {
     };
 }
 
-R_68K_JMP_SLOT!()
+R_68K_JMP_SLOT!();

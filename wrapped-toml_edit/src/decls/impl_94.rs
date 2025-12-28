@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Key!();
-        Item!();
-        Value!();
         InlineTable!();
+        Key!();
+        Value!();
+        Item!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_94 {
     };
 }
 
-impl_94!()
+impl_94!();

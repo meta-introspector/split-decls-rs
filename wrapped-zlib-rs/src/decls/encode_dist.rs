@@ -13,4 +13,4 @@ macro_rules! encode_dist {
     };
 }
 
-encode_dist!()
+encode_dist!();

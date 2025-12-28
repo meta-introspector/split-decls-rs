@@ -4,4 +4,4 @@ macro_rules! TaggedLen {
     };
 }
 
-TaggedLen!()
+TaggedLen!();

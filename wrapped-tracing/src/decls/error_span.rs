@@ -4,4 +4,4 @@ macro_rules! error_span {
     };
 }
 
-error_span!()
+error_span!();

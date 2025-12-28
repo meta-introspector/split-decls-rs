@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
         FSEScratch!();
-        FSETable!();
-        HuffmanScratch!();
         DecodeBuffer!();
-        DecoderScratch!();
         HuffmanTable!();
         Dictionary!();
+        DecoderScratch!();
+        HuffmanScratch!();
+        FSETable!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_170 {
     };
 }
 
-impl_170!()
+impl_170!();

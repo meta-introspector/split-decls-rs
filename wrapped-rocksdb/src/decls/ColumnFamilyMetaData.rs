@@ -4,4 +4,4 @@ macro_rules! ColumnFamilyMetaData {
     };
 }
 
-ColumnFamilyMetaData!()
+ColumnFamilyMetaData!();

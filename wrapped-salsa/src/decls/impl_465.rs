@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         QueryRevisionsExtraInner!();
-        Id!();
         Identity!();
+        Id!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_465 {
     };
 }
 
-impl_465!()
+impl_465!();

@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         Interner!();
         Ty!();
-        ProjectionPredicate!();
         DefId!();
+        ProjectionPredicate!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_383 {
     };
 }
 
-impl_383!()
+impl_383!();

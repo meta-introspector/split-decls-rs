@@ -26,4 +26,4 @@ macro_rules! pattern_is_a_single_segment_path {
     };
 }
 
-pattern_is_a_single_segment_path!()
+pattern_is_a_single_segment_path!();

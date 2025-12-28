@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        IntoBytes!();
         FromBytes!();
         SliceDst!();
-        IntoBytes!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_172 {
     };
 }
 
-impl_172!()
+impl_172!();

@@ -4,4 +4,4 @@ macro_rules! R_RISCV_CALL {
     };
 }
 
-R_RISCV_CALL!()
+R_RISCV_CALL!();

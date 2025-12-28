@@ -13,4 +13,4 @@ macro_rules! json_normalize_with_missing_obj_key {
     };
 }
 
-json_normalize_with_missing_obj_key!()
+json_normalize_with_missing_obj_key!();

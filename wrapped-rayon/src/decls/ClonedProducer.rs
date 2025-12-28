@@ -4,4 +4,4 @@ macro_rules! ClonedProducer {
     };
 }
 
-ClonedProducer!()
+ClonedProducer!();

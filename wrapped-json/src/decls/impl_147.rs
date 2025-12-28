@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
         Number!();
+        SerializeTupleVariant!();
         Compound!();
+        Formatter!();
         Error!();
         RawValue!();
-        SerializeTupleVariant!();
-        Formatter!();
         State!();
-        Map!();
         Result!();
+        Map!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_147 {
     };
 }
 
-impl_147!()
+impl_147!();

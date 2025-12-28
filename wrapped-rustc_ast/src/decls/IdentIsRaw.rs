@@ -4,4 +4,4 @@ macro_rules! IdentIsRaw {
     };
 }
 
-IdentIsRaw!()
+IdentIsRaw!();

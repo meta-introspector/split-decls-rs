@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        MirTypeckRegionConstraints!();
-        UniversalRegions!();
         BorrowckInferCtxt!();
+        UniversalRegions!();
+        MirTypeckRegionConstraints!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! UniversalRegionRelationsBuilder {
     };
 }
 
-UniversalRegionRelationsBuilder!()
+UniversalRegionRelationsBuilder!();

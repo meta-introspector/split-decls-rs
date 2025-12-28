@@ -4,4 +4,4 @@ macro_rules! cfg_io_blocking {
     };
 }
 
-cfg_io_blocking!()
+cfg_io_blocking!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Ty!();
         BodyId!();
         FnSig!();
+        Ty!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! ImplItemKind {
     };
 }
 
-ImplItemKind!()
+ImplItemKind!();

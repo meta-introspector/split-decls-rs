@@ -12,4 +12,4 @@ macro_rules! parse_delimited {
     };
 }
 
-parse_delimited!()
+parse_delimited!();

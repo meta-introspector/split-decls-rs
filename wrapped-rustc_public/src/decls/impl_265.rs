@@ -1,49 +1,49 @@
 macro_rules! deps {
     () => {
-        Crate!();
-        ItemKind!();
-        MirConst!();
-        TyConstId!();
-        TyKind!();
-        MachineSize!();
-        ClosureKind!();
         VariantDef!();
-        ForeignItemKind!();
-        AdtKind!();
-        Allocation!();
-        BridgeTys!();
-        GenericPredicates!();
-        ImplTraitDecls!();
-        ImplTrait!();
         GenericArgs!();
+        FnAbi!();
+        DefId!();
+        Crate!();
+        LayoutShape!();
+        AssocItems!();
+        Attribute!();
+        TyConstId!();
+        RigidTy!();
+        Symbol!();
+        Filename!();
+        Allocation!();
+        AdtKind!();
+        Ty!();
+        ImplTraitDecls!();
+        TyConst!();
+        ForeignModule!();
+        CrateItems!();
+        ReprOptions!();
+        ForeignItemKind!();
+        TraitDecls!();
+        UintTy!();
+        CompilerInterface!();
+        TyKind!();
+        Generics!();
+        ClosureKind!();
+        MachineSize!();
         Span!();
         MachineInfo!();
-        UintTy!();
-        FieldDef!();
-        LineInfo!();
-        ReprOptions!();
-        ForeignModule!();
-        Filename!();
-        DefId!();
-        TyConst!();
-        CrateItems!();
-        Symbol!();
-        AssocItems!();
-        Discr!();
-        VariantIdx!();
+        Layout!();
+        BridgeTys!();
+        ImplTrait!();
         PolyFnSig!();
+        Discr!();
+        MirConst!();
+        ItemKind!();
+        VariantIdx!();
         TraitDecl!();
-        RigidTy!();
+        FieldDef!();
+        GenericPredicates!();
         CrateNum!();
         Error!();
-        FnAbi!();
-        LayoutShape!();
-        TraitDecls!();
-        Attribute!();
-        Layout!();
-        Ty!();
-        CompilerInterface!();
-        Generics!();
+        LineInfo!();
     };
 }
 
@@ -54,4 +54,4 @@ macro_rules! impl_265 {
     };
 }
 
-impl_265!()
+impl_265!();

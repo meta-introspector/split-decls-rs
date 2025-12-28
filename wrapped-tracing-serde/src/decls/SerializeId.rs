@@ -4,4 +4,4 @@ macro_rules! SerializeId {
     };
 }
 
-SerializeId!()
+SerializeId!();

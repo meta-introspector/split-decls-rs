@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Table!();
         MapEnumDeserializer!();
-        Value!();
-        Array!();
-        Deserializer!();
         Error!();
+        Deserializer!();
+        Array!();
+        Value!();
+        Table!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_97 {
     };
 }
 
-impl_97!()
+impl_97!();

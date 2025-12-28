@@ -4,4 +4,4 @@ macro_rules! memory_allocation {
     };
 }
 
-memory_allocation!()
+memory_allocation!();

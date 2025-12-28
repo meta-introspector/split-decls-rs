@@ -4,4 +4,4 @@ macro_rules! mut_if {
     };
 }
 
-mut_if!()
+mut_if!();

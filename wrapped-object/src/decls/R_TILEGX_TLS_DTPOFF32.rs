@@ -4,4 +4,4 @@ macro_rules! R_TILEGX_TLS_DTPOFF32 {
     };
 }
 
-R_TILEGX_TLS_DTPOFF32!()
+R_TILEGX_TLS_DTPOFF32!();

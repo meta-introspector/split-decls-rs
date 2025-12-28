@@ -4,4 +4,4 @@ macro_rules! R_TILEPRO_RELATIVE {
     };
 }
 
-R_TILEPRO_RELATIVE!()
+R_TILEPRO_RELATIVE!();

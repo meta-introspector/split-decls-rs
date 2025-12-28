@@ -4,4 +4,4 @@ macro_rules! check_consts {
     };
 }
 
-check_consts!()
+check_consts!();

@@ -4,4 +4,4 @@ macro_rules! ast_validation {
     };
 }
 
-ast_validation!()
+ast_validation!();

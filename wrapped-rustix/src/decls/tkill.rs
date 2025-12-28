@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Signal!();
-        Pid!();
         Result!();
+        Pid!();
+        Signal!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! tkill {
     };
 }
 
-tkill!()
+tkill!();

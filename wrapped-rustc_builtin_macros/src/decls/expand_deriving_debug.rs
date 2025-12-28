@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        TraitDef!();
-        Bounds!();
         MethodDef!();
-        Path!();
+        Bounds!();
+        TraitDef!();
         FieldlessVariantsStrategy!();
+        Path!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! expand_deriving_debug {
     };
 }
 
-expand_deriving_debug!()
+expand_deriving_debug!();

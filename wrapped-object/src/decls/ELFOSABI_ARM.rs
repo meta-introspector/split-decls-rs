@@ -4,4 +4,4 @@ macro_rules! ELFOSABI_ARM {
     };
 }
 
-ELFOSABI_ARM!()
+ELFOSABI_ARM!();

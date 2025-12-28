@@ -4,4 +4,4 @@ macro_rules! inflateSync {
     };
 }
 
-inflateSync!()
+inflateSync!();

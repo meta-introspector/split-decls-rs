@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        UnindexedConsumer!();
-        TryFold!();
         TryFoldConsumer!();
         ParallelIterator!();
+        UnindexedConsumer!();
+        TryFold!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_900 {
     };
 }
 
-impl_900!()
+impl_900!();

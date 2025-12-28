@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        PredicateObligations!();
+        LatticeOpKind!();
         InferCtxt!();
         TypeTrace!();
-        LatticeOpKind!();
-        PredicateObligations!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! LatticeOp {
     };
 }
 
-LatticeOp!()
+LatticeOp!();

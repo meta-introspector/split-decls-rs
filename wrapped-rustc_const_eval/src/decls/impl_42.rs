@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        RawPtrComparison!();
+        RawPtrComparisonErr!();
         NonConstOp!();
         ConstCx!();
-        RawPtrComparisonErr!();
-        RawPtrComparison!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_42 {
     };
 }
 
-impl_42!()
+impl_42!();

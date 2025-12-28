@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Splitter!();
         UnindexedProducer!();
+        Splitter!();
         UnindexedConsumer!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! bridge_unindexed_producer_consumer {
     };
 }
 
-bridge_unindexed_producer_consumer!()
+bridge_unindexed_producer_consumer!();

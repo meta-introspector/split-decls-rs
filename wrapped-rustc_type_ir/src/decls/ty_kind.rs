@@ -4,4 +4,4 @@ macro_rules! ty_kind {
     };
 }
 
-ty_kind!()
+ty_kind!();

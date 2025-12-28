@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        MatrixRow!();
-        PlaceInfo!();
         PatCx!();
+        PlaceInfo!();
+        MatrixRow!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Matrix {
     };
 }
 
-Matrix!()
+Matrix!();

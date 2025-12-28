@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Container!();
         Fragment!();
+        Container!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! serialize_unit_struct {
     };
 }
 
-serialize_unit_struct!()
+serialize_unit_struct!();

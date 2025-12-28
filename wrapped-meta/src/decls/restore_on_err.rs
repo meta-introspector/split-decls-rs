@@ -12,4 +12,4 @@ macro_rules! restore_on_err {
     };
 }
 
-restore_on_err!()
+restore_on_err!();

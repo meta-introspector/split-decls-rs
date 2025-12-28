@@ -11,4 +11,4 @@ macro_rules! Sha256VarCore {
     };
 }
 
-Sha256VarCore!()
+Sha256VarCore!();

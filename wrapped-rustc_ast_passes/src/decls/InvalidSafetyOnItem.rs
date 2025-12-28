@@ -4,4 +4,4 @@ macro_rules! InvalidSafetyOnItem {
     };
 }
 
-InvalidSafetyOnItem!()
+InvalidSafetyOnItem!();

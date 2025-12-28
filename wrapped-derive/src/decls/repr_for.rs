@@ -4,4 +4,4 @@ macro_rules! repr_for {
     };
 }
 
-repr_for!()
+repr_for!();

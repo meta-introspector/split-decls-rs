@@ -4,4 +4,4 @@ macro_rules! RawValueEmitter {
     };
 }
 
-RawValueEmitter!()
+RawValueEmitter!();

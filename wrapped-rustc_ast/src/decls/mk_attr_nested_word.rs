@@ -1,18 +1,18 @@
 macro_rules! deps {
     () => {
-        Attribute!();
-        AttrStyle!();
-        TokenTree!();
-        Token!();
-        Spacing!();
-        AttrArgs!();
-        DelimArgs!();
-        Delimiter!();
-        AttrIdGenerator!();
         Safety!();
+        AttrArgs!();
+        Spacing!();
+        AttrIdGenerator!();
         Path!();
-        DelimSpan!();
         TokenStream!();
+        AttrStyle!();
+        DelimSpan!();
+        Delimiter!();
+        Token!();
+        DelimArgs!();
+        TokenTree!();
+        Attribute!();
     };
 }
 
@@ -23,4 +23,4 @@ macro_rules! mk_attr_nested_word {
     };
 }
 
-mk_attr_nested_word!()
+mk_attr_nested_word!();

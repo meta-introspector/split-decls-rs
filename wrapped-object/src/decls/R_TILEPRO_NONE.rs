@@ -4,4 +4,4 @@ macro_rules! R_TILEPRO_NONE {
     };
 }
 
-R_TILEPRO_NONE!()
+R_TILEPRO_NONE!();

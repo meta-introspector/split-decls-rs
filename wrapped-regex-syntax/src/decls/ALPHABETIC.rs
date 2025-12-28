@@ -4,4 +4,4 @@ macro_rules! ALPHABETIC {
     };
 }
 
-ALPHABETIC!()
+ALPHABETIC!();

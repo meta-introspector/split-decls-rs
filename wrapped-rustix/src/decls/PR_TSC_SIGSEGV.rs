@@ -4,4 +4,4 @@ macro_rules! PR_TSC_SIGSEGV {
     };
 }
 
-PR_TSC_SIGSEGV!()
+PR_TSC_SIGSEGV!();

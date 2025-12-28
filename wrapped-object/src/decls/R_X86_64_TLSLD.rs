@@ -4,4 +4,4 @@ macro_rules! R_X86_64_TLSLD {
     };
 }
 
-R_X86_64_TLSLD!()
+R_X86_64_TLSLD!();

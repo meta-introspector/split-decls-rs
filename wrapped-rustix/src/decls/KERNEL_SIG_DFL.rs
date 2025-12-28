@@ -11,4 +11,4 @@ macro_rules! KERNEL_SIG_DFL {
     };
 }
 
-KERNEL_SIG_DFL!()
+KERNEL_SIG_DFL!();

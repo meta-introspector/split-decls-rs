@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        ScalarKind!();
-        ErrorSink!();
         ParseError!();
+        ScalarKind!();
         Span!();
+        ErrorSink!();
         Raw!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! ensure_float {
     };
 }
 
-ensure_float!()
+ensure_float!();

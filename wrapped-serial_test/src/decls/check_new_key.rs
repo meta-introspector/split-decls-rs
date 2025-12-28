@@ -11,4 +11,4 @@ macro_rules! check_new_key {
     };
 }
 
-check_new_key!()
+check_new_key!();

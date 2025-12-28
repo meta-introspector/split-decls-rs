@@ -4,4 +4,4 @@ macro_rules! test_issue_833 {
     };
 }
 
-test_issue_833!()
+test_issue_833!();

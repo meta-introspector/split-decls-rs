@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Result!();
-        Hir!();
         Formatter!();
+        Hir!();
         Printer!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_224 {
     };
 }
 
-impl_224!()
+impl_224!();

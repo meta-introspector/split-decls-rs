@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        Match!();
-        Look!();
-        WhichCaptures!();
-        Automaton!();
+        PikeVM!();
         NFA!();
-        Config!();
-        DFA!();
+        Automaton!();
+        WhichCaptures!();
         LookMatcher!();
         Input!();
+        Look!();
+        Config!();
+        DFA!();
         HalfMatch!();
-        PikeVM!();
+        Match!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_465 {
     };
 }
 
-impl_465!()
+impl_465!();

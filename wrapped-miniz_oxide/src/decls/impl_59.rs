@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        CallbackBuf!();
         CallbackOxide!();
-        CallbackFunc!();
         SavedOutputBufferOxide!();
+        CallbackFunc!();
         ParamsOxide!();
         CallbackOut!();
+        CallbackBuf!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_59 {
     };
 }
 
-impl_59!()
+impl_59!();

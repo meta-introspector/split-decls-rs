@@ -11,4 +11,4 @@ macro_rules! drain_overflow {
     };
 }
 
-drain_overflow!()
+drain_overflow!();

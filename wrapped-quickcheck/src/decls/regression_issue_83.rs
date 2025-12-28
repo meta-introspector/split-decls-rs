@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Gen!();
         QuickCheck!();
+        Gen!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! regression_issue_83 {
     };
 }
 
-regression_issue_83!()
+regression_issue_83!();

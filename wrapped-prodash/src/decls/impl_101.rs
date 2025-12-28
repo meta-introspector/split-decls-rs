@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        DisplayValue!();
         Duration!();
         Step!();
+        DisplayValue!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_101 {
     };
 }
 
-impl_101!()
+impl_101!();

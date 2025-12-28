@@ -4,4 +4,4 @@ macro_rules! dominators {
     };
 }
 
-dominators!()
+dominators!();

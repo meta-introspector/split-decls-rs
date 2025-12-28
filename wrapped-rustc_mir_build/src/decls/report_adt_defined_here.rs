@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        AdtDefinedHere!();
         Variant!();
+        AdtDefinedHere!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! report_adt_defined_here {
     };
 }
 
-report_adt_defined_here!()
+report_adt_defined_here!();

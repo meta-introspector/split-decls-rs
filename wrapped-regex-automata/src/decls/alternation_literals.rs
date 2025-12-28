@@ -12,4 +12,4 @@ macro_rules! alternation_literals {
     };
 }
 
-alternation_literals!()
+alternation_literals!();

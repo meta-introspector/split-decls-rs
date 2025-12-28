@@ -11,4 +11,4 @@ macro_rules! current_timer_slack {
     };
 }
 
-current_timer_slack!()
+current_timer_slack!();

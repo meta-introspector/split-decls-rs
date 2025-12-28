@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
+        ImageSectionHeader!();
+        StringTable!();
         ImageRelocation!();
         Error!();
-        StringTable!();
-        Result!();
         ReadRef!();
-        ImageSectionHeader!();
+        Result!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_224 {
     };
 }
 
-impl_224!()
+impl_224!();

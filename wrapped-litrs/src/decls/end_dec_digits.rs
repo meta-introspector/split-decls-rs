@@ -4,4 +4,4 @@ macro_rules! end_dec_digits {
     };
 }
 
-end_dec_digits!()
+end_dec_digits!();

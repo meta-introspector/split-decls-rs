@@ -4,4 +4,4 @@ macro_rules! SYM_V_EXPORTED {
     };
 }
 
-SYM_V_EXPORTED!()
+SYM_V_EXPORTED!();

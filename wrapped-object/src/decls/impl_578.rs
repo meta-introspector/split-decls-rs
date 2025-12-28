@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Endian!();
-        SegmentCommand64!();
-        LoadCommandData!();
-        Result!();
-        Segment!();
-        Section!();
         Section64!();
+        Section!();
+        Result!();
+        Endian!();
+        Segment!();
+        LoadCommandData!();
+        SegmentCommand64!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_578 {
     };
 }
 
-impl_578!()
+impl_578!();

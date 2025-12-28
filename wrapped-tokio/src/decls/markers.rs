@@ -4,4 +4,4 @@ macro_rules! markers {
     };
 }
 
-markers!()
+markers!();

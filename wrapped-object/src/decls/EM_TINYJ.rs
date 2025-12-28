@@ -4,4 +4,4 @@ macro_rules! EM_TINYJ {
     };
 }
 
-EM_TINYJ!()
+EM_TINYJ!();

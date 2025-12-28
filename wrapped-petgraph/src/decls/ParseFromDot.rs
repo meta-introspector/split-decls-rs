@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        DotParsingError!();
-        DotNodeWeight!();
-        Create!();
         DotAttrList!();
+        Create!();
+        DotNodeWeight!();
+        DotParsingError!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! ParseFromDot {
     };
 }
 
-ParseFromDot!()
+ParseFromDot!();

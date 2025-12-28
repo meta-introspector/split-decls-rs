@@ -4,4 +4,4 @@ macro_rules! DT_SPARC_REGISTER {
     };
 }
 
-DT_SPARC_REGISTER!()
+DT_SPARC_REGISTER!();

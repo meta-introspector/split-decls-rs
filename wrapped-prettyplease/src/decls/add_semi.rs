@@ -4,4 +4,4 @@ macro_rules! add_semi {
     };
 }
 
-add_semi!()
+add_semi!();

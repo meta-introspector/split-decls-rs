@@ -4,4 +4,4 @@ macro_rules! Preceded {
     };
 }
 
-Preceded!()
+Preceded!();

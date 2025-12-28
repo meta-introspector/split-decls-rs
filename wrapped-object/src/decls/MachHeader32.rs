@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         BigEndian!();
-        Endian!();
         U32!();
+        Endian!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! MachHeader32 {
     };
 }
 
-MachHeader32!()
+MachHeader32!();

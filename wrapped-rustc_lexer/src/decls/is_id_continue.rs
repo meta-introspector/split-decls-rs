@@ -4,4 +4,4 @@ macro_rules! is_id_continue {
     };
 }
 
-is_id_continue!()
+is_id_continue!();

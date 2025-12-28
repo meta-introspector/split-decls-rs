@@ -4,4 +4,4 @@ macro_rules! lift_int_code_impl {
     };
 }
 
-lift_int_code_impl!()
+lift_int_code_impl!();

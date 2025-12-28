@@ -4,4 +4,4 @@ macro_rules! SUID_DUMP_ROOT {
     };
 }
 
-SUID_DUMP_ROOT!()
+SUID_DUMP_ROOT!();

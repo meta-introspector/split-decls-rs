@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        WS!();
         ExprVal!();
-        Node!();
-        If!();
         Expr!();
+        Node!();
+        WS!();
+        If!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! handle_ws_for_if_nodes_with_else {
     };
 }
 
-handle_ws_for_if_nodes_with_else!()
+handle_ws_for_if_nodes_with_else!();

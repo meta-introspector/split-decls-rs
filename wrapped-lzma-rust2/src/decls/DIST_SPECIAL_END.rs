@@ -4,4 +4,4 @@ macro_rules! DIST_SPECIAL_END {
     };
 }
 
-DIST_SPECIAL_END!()
+DIST_SPECIAL_END!();

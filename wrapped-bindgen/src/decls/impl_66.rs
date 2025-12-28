@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Dependencies!();
         Signature!();
         TypeMap!();
+        Dependencies!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_66 {
     };
 }
 
-impl_66!()
+impl_66!();

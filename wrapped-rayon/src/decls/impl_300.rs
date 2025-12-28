@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        UnindexedConsumer!();
-        BlocksCallback!();
-        UniformBlocks!();
         ParallelIterator!();
         IndexedParallelIterator!();
+        BlocksCallback!();
+        UnindexedConsumer!();
+        UniformBlocks!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_300 {
     };
 }
 
-impl_300!()
+impl_300!();

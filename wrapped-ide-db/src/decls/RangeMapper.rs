@@ -4,4 +4,4 @@ macro_rules! RangeMapper {
     };
 }
 
-RangeMapper!()
+RangeMapper!();

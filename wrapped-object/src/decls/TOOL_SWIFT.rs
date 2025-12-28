@@ -4,4 +4,4 @@ macro_rules! TOOL_SWIFT {
     };
 }
 
-TOOL_SWIFT!()
+TOOL_SWIFT!();

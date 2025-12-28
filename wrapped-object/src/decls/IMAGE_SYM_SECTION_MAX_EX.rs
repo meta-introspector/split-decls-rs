@@ -4,4 +4,4 @@ macro_rules! IMAGE_SYM_SECTION_MAX_EX {
     };
 }
 
-IMAGE_SYM_SECTION_MAX_EX!()
+IMAGE_SYM_SECTION_MAX_EX!();

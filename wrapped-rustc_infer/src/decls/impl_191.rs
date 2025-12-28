@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         SnapshotVarData!();
-        VariableLengths!();
         InferCtxt!();
+        VariableLengths!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_191 {
     };
 }
 
-impl_191!()
+impl_191!();

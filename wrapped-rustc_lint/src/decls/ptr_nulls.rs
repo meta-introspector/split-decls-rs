@@ -4,4 +4,4 @@ macro_rules! ptr_nulls {
     };
 }
 
-ptr_nulls!()
+ptr_nulls!();

@@ -11,4 +11,4 @@ macro_rules! post_musl_self_contained {
     };
 }
 
-post_musl_self_contained!()
+post_musl_self_contained!();

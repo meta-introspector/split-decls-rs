@@ -11,4 +11,4 @@ macro_rules! hash_stable_no_context_derive {
     };
 }
 
-hash_stable_no_context_derive!()
+hash_stable_no_context_derive!();

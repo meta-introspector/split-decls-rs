@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        DiMatrix!();
-        Undirected!();
-        Directed!();
-        MatrixGraph!();
+        UnMatrix!();
         MatrixError!();
         NotZero!();
-        UnMatrix!();
+        MatrixGraph!();
+        Undirected!();
         IdStorage!();
+        Directed!();
+        DiMatrix!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! tests {
     };
 }
 
-tests!()
+tests!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        UndefinedTransmuteLint!();
         LateContext!();
+        UndefinedTransmuteLint!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! check_ptr_transmute_in_const {
     };
 }
 
-check_ptr_transmute_in_const!()
+check_ptr_transmute_in_const!();

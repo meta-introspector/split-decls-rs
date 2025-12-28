@@ -4,4 +4,4 @@ macro_rules! unwrap_u32 {
     };
 }
 
-unwrap_u32!()
+unwrap_u32!();

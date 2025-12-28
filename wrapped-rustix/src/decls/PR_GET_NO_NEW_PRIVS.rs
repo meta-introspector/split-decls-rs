@@ -4,4 +4,4 @@ macro_rules! PR_GET_NO_NEW_PRIVS {
     };
 }
 
-PR_GET_NO_NEW_PRIVS!()
+PR_GET_NO_NEW_PRIVS!();

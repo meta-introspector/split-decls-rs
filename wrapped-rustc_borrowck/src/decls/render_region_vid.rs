@@ -11,4 +11,4 @@ macro_rules! render_region_vid {
     };
 }
 
-render_region_vid!()
+render_region_vid!();

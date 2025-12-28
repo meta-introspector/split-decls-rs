@@ -4,4 +4,4 @@ macro_rules! C_MOS {
     };
 }
 
-C_MOS!()
+C_MOS!();

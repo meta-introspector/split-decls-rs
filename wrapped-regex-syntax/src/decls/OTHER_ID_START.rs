@@ -4,4 +4,4 @@ macro_rules! OTHER_ID_START {
     };
 }
 
-OTHER_ID_START!()
+OTHER_ID_START!();

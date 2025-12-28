@@ -4,4 +4,4 @@ macro_rules! search_trait_bound {
     };
 }
 
-search_trait_bound!()
+search_trait_bound!();

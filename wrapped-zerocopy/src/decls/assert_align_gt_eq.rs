@@ -11,4 +11,4 @@ macro_rules! assert_align_gt_eq {
     };
 }
 
-assert_align_gt_eq!()
+assert_align_gt_eq!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Config!();
-        RefMut!();
         Clear!();
+        RefMut!();
+        Config!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_24 {
     };
 }
 
-impl_24!()
+impl_24!();

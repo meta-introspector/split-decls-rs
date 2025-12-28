@@ -4,4 +4,4 @@ macro_rules! EM_L10M {
     };
 }
 
-EM_L10M!()
+EM_L10M!();

@@ -4,4 +4,4 @@ macro_rules! NoVariantNamed {
     };
 }
 
-NoVariantNamed!()
+NoVariantNamed!();

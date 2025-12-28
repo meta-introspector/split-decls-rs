@@ -75,4 +75,4 @@ macro_rules! bare_cr_bad {
     };
 }
 
-bare_cr_bad!()
+bare_cr_bad!();

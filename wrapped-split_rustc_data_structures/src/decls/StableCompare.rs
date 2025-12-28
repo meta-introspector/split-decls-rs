@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ToStableHashKey!();
         StableOrd!();
+        ToStableHashKey!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! StableCompare {
     };
 }
 
-StableCompare!()
+StableCompare!();

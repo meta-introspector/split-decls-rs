@@ -4,4 +4,4 @@ macro_rules! C_DECL {
     };
 }
 
-C_DECL!()
+C_DECL!();

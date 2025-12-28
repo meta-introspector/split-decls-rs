@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Expr!();
-        Block!();
         ExprKind!();
+        Block!();
+        Expr!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_179 {
     };
 }
 
-impl_179!()
+impl_179!();

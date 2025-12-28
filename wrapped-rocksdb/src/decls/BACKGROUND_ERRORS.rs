@@ -11,4 +11,4 @@ macro_rules! BACKGROUND_ERRORS {
     };
 }
 
-BACKGROUND_ERRORS!()
+BACKGROUND_ERRORS!();

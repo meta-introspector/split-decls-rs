@@ -4,4 +4,4 @@ macro_rules! broadcast_after_spawn_broadcast {
     };
 }
 
-broadcast_after_spawn_broadcast!()
+broadcast_after_spawn_broadcast!();

@@ -1,18 +1,18 @@
 macro_rules! deps {
     () => {
-        ReadRef!();
-        MachOSymbol32!();
         MachOSymbol64!();
-        CoffSymbol!();
         MachO64!();
-        MachO32!();
-        ElfSymbol32!();
-        Endianness!();
-        WasmSymbol!();
         XcoffSymbol32!();
-        ElfSymbol64!();
+        MachOSymbol32!();
+        MachO32!();
         CoffBigSymbol!();
+        Endianness!();
+        ElfSymbol32!();
         XcoffSymbol64!();
+        WasmSymbol!();
+        ReadRef!();
+        ElfSymbol64!();
+        CoffSymbol!();
     };
 }
 
@@ -23,4 +23,4 @@ macro_rules! SymbolInternal {
     };
 }
 
-SymbolInternal!()
+SymbolInternal!();

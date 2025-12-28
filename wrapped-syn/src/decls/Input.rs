@@ -4,4 +4,4 @@ macro_rules! Input {
     };
 }
 
-Input!()
+Input!();

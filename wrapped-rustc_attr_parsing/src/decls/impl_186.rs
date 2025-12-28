@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
+        UnstableFeatureBoundIncompatibleStability!();
+        RustcAllowedUnstablePairing!();
         AttributeParser!();
         StabilityParser!();
-        AcceptMapping!();
-        RustcAllowedUnstablePairing!();
-        Stage!();
-        UnstableFeatureBoundIncompatibleStability!();
-        AllowedTargets!();
         FinalizeContext!();
+        Stage!();
+        AcceptMapping!();
+        AllowedTargets!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_186 {
     };
 }
 
-impl_186!()
+impl_186!();

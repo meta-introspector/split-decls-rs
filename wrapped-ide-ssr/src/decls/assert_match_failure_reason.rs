@@ -11,4 +11,4 @@ macro_rules! assert_match_failure_reason {
     };
 }
 
-assert_match_failure_reason!()
+assert_match_failure_reason!();

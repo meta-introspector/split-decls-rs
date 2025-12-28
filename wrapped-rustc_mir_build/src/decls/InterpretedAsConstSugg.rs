@@ -4,4 +4,4 @@ macro_rules! InterpretedAsConstSugg {
     };
 }
 
-InterpretedAsConstSugg!()
+InterpretedAsConstSugg!();

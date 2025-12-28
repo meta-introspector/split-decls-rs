@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
         SectionIndex!();
+        Result!();
+        ReadRef!();
+        SectionTable!();
+        RelocationSections!();
+        Endian!();
         FileHeader!();
         Error!();
-        Result!();
-        Endian!();
-        ReadRef!();
-        RelocationSections!();
-        SectionTable!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_346 {
     };
 }
 
-impl_346!()
+impl_346!();

@@ -4,4 +4,4 @@ macro_rules! libc {
     };
 }
 
-libc!()
+libc!();

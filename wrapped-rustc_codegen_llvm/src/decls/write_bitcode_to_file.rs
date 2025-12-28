@@ -11,4 +11,4 @@ macro_rules! write_bitcode_to_file {
     };
 }
 
-write_bitcode_to_file!()
+write_bitcode_to_file!();

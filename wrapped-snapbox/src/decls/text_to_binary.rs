@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DataFormat!();
         Data!();
+        DataFormat!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! text_to_binary {
     };
 }
 
-text_to_binary!()
+text_to_binary!();

@@ -4,4 +4,4 @@ macro_rules! IMAGE_COR_MIH_EHRVA {
     };
 }
 
-IMAGE_COR_MIH_EHRVA!()
+IMAGE_COR_MIH_EHRVA!();

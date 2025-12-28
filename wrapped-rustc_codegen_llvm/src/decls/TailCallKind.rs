@@ -4,4 +4,4 @@ macro_rules! TailCallKind {
     };
 }
 
-TailCallKind!()
+TailCallKind!();

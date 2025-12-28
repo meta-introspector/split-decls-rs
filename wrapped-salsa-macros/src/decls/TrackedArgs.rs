@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        TrackedStruct!();
         Options!();
+        TrackedStruct!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! TrackedArgs {
     };
 }
 
-TrackedArgs!()
+TrackedArgs!();

@@ -4,4 +4,4 @@ macro_rules! EnvTakesArgs {
     };
 }
 
-EnvTakesArgs!()
+EnvTakesArgs!();

@@ -4,4 +4,4 @@ macro_rules! IdentPrintMode {
     };
 }
 
-IdentPrintMode!()
+IdentPrintMode!();

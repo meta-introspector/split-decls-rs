@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Stability!();
         ImpliedFeatures!();
+        Stability!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! M68K_FEATURES {
     };
 }
 
-M68K_FEATURES!()
+M68K_FEATURES!();

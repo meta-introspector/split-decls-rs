@@ -4,4 +4,4 @@ macro_rules! DF_STATIC_TLS {
     };
 }
 
-DF_STATIC_TLS!()
+DF_STATIC_TLS!();

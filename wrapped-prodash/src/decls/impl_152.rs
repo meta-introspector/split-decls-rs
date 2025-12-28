@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Id!();
-        Task!();
+        Adjacency!();
         SiblingLocation!();
-        Key!();
+        Id!();
         Level!();
         Item!();
-        Adjacency!();
+        Task!();
+        Key!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_152 {
     };
 }
 
-impl_152!()
+impl_152!();

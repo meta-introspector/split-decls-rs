@@ -4,4 +4,4 @@ macro_rules! NGHTTP2_NV_FLAG_NONE {
     };
 }
 
-NGHTTP2_NV_FLAG_NONE!()
+NGHTTP2_NV_FLAG_NONE!();

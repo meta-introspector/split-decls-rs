@@ -4,4 +4,4 @@ macro_rules! structurally_same_type_impl {
     };
 }
 
-structurally_same_type_impl!()
+structurally_same_type_impl!();

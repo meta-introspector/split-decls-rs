@@ -11,4 +11,4 @@ macro_rules! fcntl_dupfd_cloexec {
     };
 }
 
-fcntl_dupfd_cloexec!()
+fcntl_dupfd_cloexec!();

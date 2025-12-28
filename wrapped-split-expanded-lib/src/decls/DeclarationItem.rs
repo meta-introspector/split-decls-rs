@@ -4,4 +4,4 @@ macro_rules! DeclarationItem {
     };
 }
 
-DeclarationItem!()
+DeclarationItem!();

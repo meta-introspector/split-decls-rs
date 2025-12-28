@@ -11,4 +11,4 @@ macro_rules! socket_error {
     };
 }
 
-socket_error!()
+socket_error!();

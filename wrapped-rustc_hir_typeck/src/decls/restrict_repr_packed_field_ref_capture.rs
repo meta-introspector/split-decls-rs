@@ -4,4 +4,4 @@ macro_rules! restrict_repr_packed_field_ref_capture {
     };
 }
 
-restrict_repr_packed_field_ref_capture!()
+restrict_repr_packed_field_ref_capture!();

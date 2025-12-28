@@ -4,4 +4,4 @@ macro_rules! NeedsDropTypes {
     };
 }
 
-NeedsDropTypes!()
+NeedsDropTypes!();

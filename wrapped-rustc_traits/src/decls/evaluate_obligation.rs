@@ -4,4 +4,4 @@ macro_rules! evaluate_obligation {
     };
 }
 
-evaluate_obligation!()
+evaluate_obligation!();

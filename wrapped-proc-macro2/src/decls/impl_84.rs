@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        TokenStream!();
-        RcVecBuilder!();
         LexError!();
+        RcVecBuilder!();
+        TokenStream!();
         TokenTree!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_84 {
     };
 }
 
-impl_84!()
+impl_84!();

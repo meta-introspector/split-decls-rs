@@ -4,4 +4,4 @@ macro_rules! is_int_bool_float_or_char {
     };
 }
 
-is_int_bool_float_or_char!()
+is_int_bool_float_or_char!();

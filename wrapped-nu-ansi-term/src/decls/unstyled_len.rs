@@ -11,4 +11,4 @@ macro_rules! unstyled_len {
     };
 }
 
-unstyled_len!()
+unstyled_len!();

@@ -4,4 +4,4 @@ macro_rules! is_iterator_singleton {
     };
 }
 
-is_iterator_singleton!()
+is_iterator_singleton!();

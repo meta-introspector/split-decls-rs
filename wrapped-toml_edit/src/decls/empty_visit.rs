@@ -11,4 +11,4 @@ macro_rules! empty_visit {
     };
 }
 
-empty_visit!()
+empty_visit!();

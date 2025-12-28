@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        QueryLatch!();
-        QueryMap!();
         QueryStackFrame!();
         QueryJobId!();
+        QueryLatch!();
+        QueryMap!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_168 {
     };
 }
 
-impl_168!()
+impl_168!();

@@ -4,4 +4,4 @@ macro_rules! has_punycode_prefix {
     };
 }
 
-has_punycode_prefix!()
+has_punycode_prefix!();

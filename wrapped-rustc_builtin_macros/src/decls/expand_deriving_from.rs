@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        FieldlessVariantsStrategy!();
-        SubstructureFields!();
-        DeriveFromWrongTarget!();
-        BlockOrExpr!();
+        Bounds!();
+        MethodDef!();
         Path!();
         Ty!();
+        BlockOrExpr!();
+        SubstructureFields!();
         PathKind!();
-        MethodDef!();
-        Bounds!();
-        TraitDef!();
+        DeriveFromWrongTarget!();
         DeriveFromWrongFieldCount!();
+        TraitDef!();
+        FieldlessVariantsStrategy!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! expand_deriving_from {
     };
 }
 
-expand_deriving_from!()
+expand_deriving_from!();

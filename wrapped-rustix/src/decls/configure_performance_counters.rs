@@ -11,4 +11,4 @@ macro_rules! configure_performance_counters {
     };
 }
 
-configure_performance_counters!()
+configure_performance_counters!();

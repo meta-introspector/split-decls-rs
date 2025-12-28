@@ -4,4 +4,4 @@ macro_rules! MAGIC_END_BYTES {
     };
 }
 
-MAGIC_END_BYTES!()
+MAGIC_END_BYTES!();

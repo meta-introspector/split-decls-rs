@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Endianness!();
         MachOSymbolIterator!();
-        Endian!();
         MachHeader64!();
+        Endian!();
+        Endianness!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! MachOSymbolIterator64 {
     };
 }
 
-MachOSymbolIterator64!()
+MachOSymbolIterator64!();

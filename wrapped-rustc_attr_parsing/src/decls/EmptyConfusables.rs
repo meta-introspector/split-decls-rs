@@ -4,4 +4,4 @@ macro_rules! EmptyConfusables {
     };
 }
 
-EmptyConfusables!()
+EmptyConfusables!();

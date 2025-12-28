@@ -11,4 +11,4 @@ macro_rules! deanonymize_path {
     };
 }
 
-deanonymize_path!()
+deanonymize_path!();

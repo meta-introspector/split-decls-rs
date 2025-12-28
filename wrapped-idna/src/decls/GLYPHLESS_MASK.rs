@@ -4,4 +4,4 @@ macro_rules! GLYPHLESS_MASK {
     };
 }
 
-GLYPHLESS_MASK!()
+GLYPHLESS_MASK!();

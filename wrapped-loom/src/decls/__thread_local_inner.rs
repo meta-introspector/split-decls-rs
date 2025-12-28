@@ -11,4 +11,4 @@ macro_rules! __thread_local_inner {
     };
 }
 
-__thread_local_inner!()
+__thread_local_inner!();

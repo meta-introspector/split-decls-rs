@@ -11,4 +11,4 @@ macro_rules! try_gen_trivial_is_bit_valid {
     };
 }
 
-try_gen_trivial_is_bit_valid!()
+try_gen_trivial_is_bit_valid!();

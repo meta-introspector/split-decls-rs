@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        UnrecognizedArgument!();
         AbiOf!();
         AbiNe!();
+        UnrecognizedArgument!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! dump_abi_of_fn_type {
     };
 }
 
-dump_abi_of_fn_type!()
+dump_abi_of_fn_type!();

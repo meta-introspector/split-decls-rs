@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Res!();
         PerNS!();
+        Res!();
         Path!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! UsePath {
     };
 }
 
-UsePath!()
+UsePath!();

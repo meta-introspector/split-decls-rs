@@ -12,4 +12,4 @@ macro_rules! TestableXofContext {
     };
 }
 
-TestableXofContext!()
+TestableXofContext!();

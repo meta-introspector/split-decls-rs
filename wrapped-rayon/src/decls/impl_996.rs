@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         WalkTreePostfix!();
-        UnindexedConsumer!();
         ParallelIterator!();
         WalkTreePostfixProducer!();
+        UnindexedConsumer!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_996 {
     };
 }
 
-impl_996!()
+impl_996!();

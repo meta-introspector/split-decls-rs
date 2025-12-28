@@ -4,4 +4,4 @@ macro_rules! Z_DATA_ERROR {
     };
 }
 
-Z_DATA_ERROR!()
+Z_DATA_ERROR!();

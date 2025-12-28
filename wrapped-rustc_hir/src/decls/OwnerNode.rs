@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Item!();
-        ImplItem!();
         Crate!();
+        Item!();
         ForeignItem!();
-        Mod!();
         TraitItem!();
+        Mod!();
+        ImplItem!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! OwnerNode {
     };
 }
 
-OwnerNode!()
+OwnerNode!();

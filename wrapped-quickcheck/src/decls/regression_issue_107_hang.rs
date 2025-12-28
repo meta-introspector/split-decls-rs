@@ -4,4 +4,4 @@ macro_rules! regression_issue_107_hang {
     };
 }
 
-regression_issue_107_hang!()
+regression_issue_107_hang!();

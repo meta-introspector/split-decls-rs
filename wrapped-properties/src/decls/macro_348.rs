@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        CanonicalCombiningClass!();
         PropertyCodePointMap!();
+        CanonicalCombiningClass!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! macro_348 {
     };
 }
 
-macro_348!()
+macro_348!();

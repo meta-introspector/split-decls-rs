@@ -4,4 +4,4 @@ macro_rules! R_SPARC_TLS_LDO_HIX22 {
     };
 }
 
-R_SPARC_TLS_LDO_HIX22!()
+R_SPARC_TLS_LDO_HIX22!();

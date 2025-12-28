@@ -4,4 +4,4 @@ macro_rules! Ficlone {
     };
 }
 
-Ficlone!()
+Ficlone!();

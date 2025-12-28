@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        ByteClasses!();
-        StateID!();
         Unit!();
         TransitionTable!();
+        StateID!();
+        ByteClasses!();
         BuildError!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_31 {
     };
 }
 
-impl_31!()
+impl_31!();

@@ -4,4 +4,4 @@ macro_rules! DocAttrNotCrateLevel {
     };
 }
 
-DocAttrNotCrateLevel!()
+DocAttrNotCrateLevel!();

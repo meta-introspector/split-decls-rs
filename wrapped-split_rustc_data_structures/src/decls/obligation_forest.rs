@@ -4,4 +4,4 @@ macro_rules! obligation_forest {
     };
 }
 
-obligation_forest!()
+obligation_forest!();

@@ -11,4 +11,4 @@ macro_rules! RT_VERSION {
     };
 }
 
-RT_VERSION!()
+RT_VERSION!();

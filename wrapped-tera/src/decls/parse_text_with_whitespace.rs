@@ -11,4 +11,4 @@ macro_rules! parse_text_with_whitespace {
     };
 }
 
-parse_text_with_whitespace!()
+parse_text_with_whitespace!();

@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
+        Table!();
+        Item!();
         State!();
-        Key!();
+        RawString!();
         Entry!();
         Value!();
-        Item!();
-        ArrayOfTables!();
-        TableHeader!();
-        RawString!();
+        Key!();
         TraceScope!();
+        TableHeader!();
         Decor!();
-        Table!();
+        ArrayOfTables!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_176 {
     };
 }
 
-impl_176!()
+impl_176!();

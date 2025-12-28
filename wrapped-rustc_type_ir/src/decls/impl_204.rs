@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Interner!();
+        SizedTraitKind!();
         SolverTraitLangItem!();
         DefId!();
-        SizedTraitKind!();
+        Interner!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_204 {
     };
 }
 
-impl_204!()
+impl_204!();

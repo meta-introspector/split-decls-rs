@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        AesCtrZipKeyStream!();
-        Aes128!();
-        Aes256!();
         Aes192!();
+        Aes128!();
+        AesCtrZipKeyStream!();
+        Aes256!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! Cipher {
     };
 }
 
-Cipher!()
+Cipher!();

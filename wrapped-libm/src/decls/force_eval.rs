@@ -4,4 +4,4 @@ macro_rules! force_eval {
     };
 }
 
-force_eval!()
+force_eval!();

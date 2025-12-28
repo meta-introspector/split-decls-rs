@@ -11,4 +11,4 @@ macro_rules! set_ip_multicast_if_with_ifindex {
     };
 }
 
-set_ip_multicast_if_with_ifindex!()
+set_ip_multicast_if_with_ifindex!();

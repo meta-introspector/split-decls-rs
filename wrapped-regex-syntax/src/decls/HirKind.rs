@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
         Hir!();
-        Alternation!();
-        Class!();
         Repetition!();
-        Look!();
+        Alternation!();
         Capture!();
         Literal!();
+        Look!();
         Concat!();
+        Class!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! HirKind {
     };
 }
 
-HirKind!()
+HirKind!();

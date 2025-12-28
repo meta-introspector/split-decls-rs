@@ -12,4 +12,4 @@ macro_rules! wrapping_range_contains_range {
     };
 }
 
-wrapping_range_contains_range!()
+wrapping_range_contains_range!();

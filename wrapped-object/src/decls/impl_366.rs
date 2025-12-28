@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Rela!();
         Endian!();
         Rela64!();
+        Rela!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_366 {
     };
 }
 
-impl_366!()
+impl_366!();

@@ -19,4 +19,4 @@ macro_rules! report_unused_fields {
     };
 }
 
-report_unused_fields!()
+report_unused_fields!();

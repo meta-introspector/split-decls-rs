@@ -11,4 +11,4 @@ macro_rules! skip_ascii_whitespace {
     };
 }
 
-skip_ascii_whitespace!()
+skip_ascii_whitespace!();

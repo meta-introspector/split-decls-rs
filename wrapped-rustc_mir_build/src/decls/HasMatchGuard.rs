@@ -4,4 +4,4 @@ macro_rules! HasMatchGuard {
     };
 }
 
-HasMatchGuard!()
+HasMatchGuard!();

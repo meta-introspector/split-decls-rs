@@ -4,4 +4,4 @@ macro_rules! EM_AARCH64 {
     };
 }
 
-EM_AARCH64!()
+EM_AARCH64!();

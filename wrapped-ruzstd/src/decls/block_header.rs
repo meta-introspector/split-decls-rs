@@ -4,4 +4,4 @@ macro_rules! block_header {
     };
 }
 
-block_header!()
+block_header!();

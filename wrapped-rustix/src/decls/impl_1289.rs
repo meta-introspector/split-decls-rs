@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Result!();
         SecureComputingMode!();
+        Result!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_1289 {
     };
 }
 
-impl_1289!()
+impl_1289!();

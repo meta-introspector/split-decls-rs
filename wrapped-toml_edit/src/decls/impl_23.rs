@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        IntoIter!();
-        ArrayOfTablesIntoIter!();
         Table!();
         Item!();
         ArrayOfTables!();
+        IntoIter!();
+        ArrayOfTablesIntoIter!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_23 {
     };
 }
 
-impl_23!()
+impl_23!();

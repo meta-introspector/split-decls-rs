@@ -5,4 +5,4 @@ macro_rules! check_simd {
     };
 }
 
-check_simd!()
+check_simd!();

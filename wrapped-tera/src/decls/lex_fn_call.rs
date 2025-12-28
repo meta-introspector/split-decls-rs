@@ -4,4 +4,4 @@ macro_rules! lex_fn_call {
     };
 }
 
-lex_fn_call!()
+lex_fn_call!();

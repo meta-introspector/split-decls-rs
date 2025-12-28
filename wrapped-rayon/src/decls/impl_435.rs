@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        UnindexedConsumer!();
-        ListConsumer!();
-        Reducer!();
         ListReducer!();
+        UnindexedConsumer!();
+        Reducer!();
+        ListConsumer!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_435 {
     };
 }
 
-impl_435!()
+impl_435!();

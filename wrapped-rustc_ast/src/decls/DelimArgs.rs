@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Walkable!();
+        Delimiter!();
         DelimSpan!();
         TokenStream!();
-        Delimiter!();
+        Walkable!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! DelimArgs {
     };
 }
 
-DelimArgs!()
+DelimArgs!();

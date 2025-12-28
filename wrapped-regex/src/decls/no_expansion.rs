@@ -4,4 +4,4 @@ macro_rules! no_expansion {
     };
 }
 
-no_expansion!()
+no_expansion!();

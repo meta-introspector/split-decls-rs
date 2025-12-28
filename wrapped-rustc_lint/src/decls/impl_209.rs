@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        ForLoopsOverFalliblesDiag!();
-        LateContext!();
-        ForLoopsOverFalliblesQuestionMark!();
         ForLoopsOverFalliblesLoopSub!();
+        ForLoopsOverFalliblesDiag!();
         ForLoopsOverFalliblesSuggestion!();
+        ForLoopsOverFalliblesQuestionMark!();
+        LateContext!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_209 {
     };
 }
 
-impl_209!()
+impl_209!();

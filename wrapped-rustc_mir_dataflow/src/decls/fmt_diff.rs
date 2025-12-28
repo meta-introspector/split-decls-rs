@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DebugWithContext!();
         Formatter!();
+        DebugWithContext!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! fmt_diff {
     };
 }
 
-fmt_diff!()
+fmt_diff!();

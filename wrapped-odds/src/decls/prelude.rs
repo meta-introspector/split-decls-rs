@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         VecExt!();
-        StringExt!();
         SliceFind!();
-        IndexRange!();
-        StrExt!();
         StrChunksWindows!();
+        IndexRange!();
+        StringExt!();
+        StrExt!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! prelude {
     };
 }
 
-prelude!()
+prelude!();

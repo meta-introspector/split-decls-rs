@@ -11,4 +11,4 @@ macro_rules! test_filter {
     };
 }
 
-test_filter!()
+test_filter!();

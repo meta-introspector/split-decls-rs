@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Dfs!();
         DfsSpace!();
+        Dfs!();
         VisitMap!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_484 {
     };
 }
 
-impl_484!()
+impl_484!();

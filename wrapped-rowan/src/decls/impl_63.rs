@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        NodeOrToken!();
+        SyntaxElement!();
+        Direction!();
         Language!();
         SyntaxNode!();
-        SyntaxElement!();
         SyntaxToken!();
-        Direction!();
+        NodeOrToken!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_63 {
     };
 }
 
-impl_63!()
+impl_63!();

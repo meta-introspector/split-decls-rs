@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Rgb!();
         Color!();
         AnyWrite!();
+        Rgb!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_4 {
     };
 }
 
-impl_4!()
+impl_4!();

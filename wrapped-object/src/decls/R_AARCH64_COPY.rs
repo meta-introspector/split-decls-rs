@@ -4,4 +4,4 @@ macro_rules! R_AARCH64_COPY {
     };
 }
 
-R_AARCH64_COPY!()
+R_AARCH64_COPY!();

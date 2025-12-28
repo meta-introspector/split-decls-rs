@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        BlockDecodingStrategy!();
         FrameDecoder!();
+        BlockDecodingStrategy!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! test_all_artifacts {
     };
 }
 
-test_all_artifacts!()
+test_all_artifacts!();

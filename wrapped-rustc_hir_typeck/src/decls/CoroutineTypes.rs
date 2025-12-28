@@ -4,4 +4,4 @@ macro_rules! CoroutineTypes {
     };
 }
 
-CoroutineTypes!()
+CoroutineTypes!();

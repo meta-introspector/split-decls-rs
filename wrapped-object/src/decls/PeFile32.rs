@@ -12,4 +12,4 @@ macro_rules! PeFile32 {
     };
 }
 
-PeFile32!()
+PeFile32!();

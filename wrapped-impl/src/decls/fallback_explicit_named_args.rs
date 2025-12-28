@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        FmtArguments!();
         IdentUnraw!();
+        FmtArguments!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! fallback_explicit_named_args {
     };
 }
 
-fallback_explicit_named_args!()
+fallback_explicit_named_args!();

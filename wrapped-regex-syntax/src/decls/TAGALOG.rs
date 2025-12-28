@@ -4,4 +4,4 @@ macro_rules! TAGALOG {
     };
 }
 
-TAGALOG!()
+TAGALOG!();

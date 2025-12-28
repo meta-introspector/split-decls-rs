@@ -11,4 +11,4 @@ macro_rules! cancel_token {
     };
 }
 
-cancel_token!()
+cancel_token!();

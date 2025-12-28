@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        SkipAnyWhileConsumer!();
         Reducer!();
+        SkipAnyWhileConsumer!();
         UnindexedConsumer!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_841 {
     };
 }
 
-impl_841!()
+impl_841!();

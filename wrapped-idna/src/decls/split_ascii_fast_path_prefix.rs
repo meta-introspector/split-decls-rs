@@ -4,4 +4,4 @@ macro_rules! split_ascii_fast_path_prefix {
     };
 }
 
-split_ascii_fast_path_prefix!()
+split_ascii_fast_path_prefix!();

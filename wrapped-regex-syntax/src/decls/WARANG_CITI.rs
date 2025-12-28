@@ -4,4 +4,4 @@ macro_rules! WARANG_CITI {
     };
 }
 
-WARANG_CITI!()
+WARANG_CITI!();

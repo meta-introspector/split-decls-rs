@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Fragment!();
         Expr!();
+        Fragment!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! quote_expr {
     };
 }
 
-quote_expr!()
+quote_expr!();

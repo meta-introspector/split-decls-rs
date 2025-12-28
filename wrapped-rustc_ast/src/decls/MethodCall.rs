@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Expr!();
         PathSegment!();
+        Expr!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! MethodCall {
     };
 }
 
-MethodCall!()
+MethodCall!();

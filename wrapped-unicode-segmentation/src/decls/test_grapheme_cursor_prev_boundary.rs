@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        GraphemeCursor!();
         GraphemeIncomplete!();
+        GraphemeCursor!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! test_grapheme_cursor_prev_boundary {
     };
 }
 
-test_grapheme_cursor_prev_boundary!()
+test_grapheme_cursor_prev_boundary!();

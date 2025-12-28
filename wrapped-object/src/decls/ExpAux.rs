@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        File!();
         U64!();
-        U32!();
+        File!();
         Symbol!();
+        U32!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! ExpAux {
     };
 }
 
-ExpAux!()
+ExpAux!();

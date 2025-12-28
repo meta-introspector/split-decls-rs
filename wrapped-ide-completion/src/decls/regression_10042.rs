@@ -20,4 +20,4 @@ fn foo() {
     };
 }
 
-regression_10042!()
+regression_10042!();

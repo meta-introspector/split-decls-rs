@@ -4,4 +4,4 @@ macro_rules! Authorization {
     };
 }
 
-Authorization!()
+Authorization!();

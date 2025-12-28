@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Tag!();
         ErrorKind!();
         IResult!();
+        Tag!();
+        Error!();
         Err!();
         Needed!();
-        Error!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! alt_incomplete {
     };
 }
 
-alt_incomplete!()
+alt_incomplete!();

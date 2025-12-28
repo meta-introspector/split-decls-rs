@@ -4,4 +4,4 @@ macro_rules! need_bitcode_in_object {
     };
 }
 
-need_bitcode_in_object!()
+need_bitcode_in_object!();

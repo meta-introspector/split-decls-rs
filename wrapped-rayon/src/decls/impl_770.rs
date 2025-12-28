@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        PositionsFolder!();
-        PositionsConsumer!();
-        Consumer!();
         Reducer!();
+        Consumer!();
+        PositionsConsumer!();
         Folder!();
+        PositionsFolder!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_770 {
     };
 }
 
-impl_770!()
+impl_770!();

@@ -11,4 +11,4 @@ macro_rules! validate_undefined {
     };
 }
 
-validate_undefined!()
+validate_undefined!();

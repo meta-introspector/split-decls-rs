@@ -24,4 +24,4 @@ macro_rules! match_trait_method_call {
     };
 }
 
-match_trait_method_call!()
+match_trait_method_call!();

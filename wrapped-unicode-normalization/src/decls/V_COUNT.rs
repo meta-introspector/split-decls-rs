@@ -4,4 +4,4 @@ macro_rules! V_COUNT {
     };
 }
 
-V_COUNT!()
+V_COUNT!();

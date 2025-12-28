@@ -17,4 +17,4 @@ macro_rules! var_access_by_loop_index {
     };
 }
 
-var_access_by_loop_index!()
+var_access_by_loop_index!();

@@ -4,4 +4,4 @@ macro_rules! hyper_code {
     };
 }
 
-hyper_code!()
+hyper_code!();

@@ -12,4 +12,4 @@ macro_rules! update_aes_extra_data {
     };
 }
 
-update_aes_extra_data!()
+update_aes_extra_data!();

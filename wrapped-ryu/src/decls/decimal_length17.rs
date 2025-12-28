@@ -4,4 +4,4 @@ macro_rules! decimal_length17 {
     };
 }
 
-decimal_length17!()
+decimal_length17!();

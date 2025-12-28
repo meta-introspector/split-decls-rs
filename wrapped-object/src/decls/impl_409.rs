@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        GnuPropertyIterator!();
-        Endian!();
-        Note!();
-        NoteHeader!();
         Bytes!();
+        Endian!();
+        NoteHeader!();
+        Note!();
+        GnuPropertyIterator!();
         FileHeader!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! impl_409 {
     };
 }
 
-impl_409!()
+impl_409!();

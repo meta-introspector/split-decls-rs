@@ -4,4 +4,4 @@ macro_rules! HashMapExt {
     };
 }
 
-HashMapExt!()
+HashMapExt!();

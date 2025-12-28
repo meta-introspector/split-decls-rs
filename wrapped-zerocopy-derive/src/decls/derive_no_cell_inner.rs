@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Trait!();
-        ImplBlockBuilder!();
         FieldBounds!();
+        ImplBlockBuilder!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! derive_no_cell_inner {
     };
 }
 
-derive_no_cell_inner!()
+derive_no_cell_inner!();

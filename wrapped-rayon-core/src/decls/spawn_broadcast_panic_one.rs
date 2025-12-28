@@ -11,4 +11,4 @@ macro_rules! spawn_broadcast_panic_one {
     };
 }
 
-spawn_broadcast_panic_one!()
+spawn_broadcast_panic_one!();

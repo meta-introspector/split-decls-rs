@@ -4,4 +4,4 @@ macro_rules! ELFCOMPRESS_HIPROC {
     };
 }
 
-ELFCOMPRESS_HIPROC!()
+ELFCOMPRESS_HIPROC!();

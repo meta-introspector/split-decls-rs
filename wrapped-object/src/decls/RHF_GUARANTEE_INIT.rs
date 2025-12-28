@@ -4,4 +4,4 @@ macro_rules! RHF_GUARANTEE_INIT {
     };
 }
 
-RHF_GUARANTEE_INIT!()
+RHF_GUARANTEE_INIT!();

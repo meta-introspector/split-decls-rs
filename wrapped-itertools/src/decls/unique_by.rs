@@ -11,4 +11,4 @@ macro_rules! unique_by {
     };
 }
 
-unique_by!()
+unique_by!();

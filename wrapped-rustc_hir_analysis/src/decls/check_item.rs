@@ -10,4 +10,4 @@ macro_rules! check_item {
     };
 }
 
-check_item!()
+check_item!();

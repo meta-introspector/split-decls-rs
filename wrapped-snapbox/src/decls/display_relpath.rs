@@ -4,4 +4,4 @@ macro_rules! display_relpath {
     };
 }
 
-display_relpath!()
+display_relpath!();

@@ -4,4 +4,4 @@ macro_rules! render_const_eval_error {
     };
 }
 
-render_const_eval_error!()
+render_const_eval_error!();

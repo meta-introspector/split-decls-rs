@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        Literal!();
-        Dot!();
-        Parser!();
-        Ast!();
-        Assertion!();
-        ClassSetItem!();
-        Primitive!();
+        Span!();
         Result!();
         ErrorKind!();
+        Ast!();
+        Literal!();
+        ClassSetItem!();
+        Parser!();
+        Assertion!();
         ParserI!();
-        Span!();
+        Primitive!();
+        Dot!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_4 {
     };
 }
 
-impl_4!()
+impl_4!();

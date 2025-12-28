@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         NodeIdentifiers!();
-        EdgeType!();
         IndexType!();
+        EdgeType!();
         Csr!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_545 {
     };
 }
 
-impl_545!()
+impl_545!();

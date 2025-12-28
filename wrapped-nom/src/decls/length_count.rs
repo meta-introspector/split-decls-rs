@@ -2,12 +2,12 @@ macro_rules! deps {
     () => {
         ErrorKind!();
         Error!();
-        LengthCount!();
-        ParseError!();
+        IResult!();
         ToUsize!();
         Needed!();
         Parser!();
-        IResult!();
+        LengthCount!();
+        ParseError!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! length_count {
     };
 }
 
-length_count!()
+length_count!();

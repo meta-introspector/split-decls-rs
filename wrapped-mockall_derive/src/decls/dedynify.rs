@@ -4,4 +4,4 @@ macro_rules! dedynify {
     };
 }
 
-dedynify!()
+dedynify!();

@@ -4,4 +4,4 @@ macro_rules! TargetGround {
     };
 }
 
-TargetGround!()
+TargetGround!();

@@ -4,4 +4,4 @@ macro_rules! try_extract_error_from_fulfill_cx {
     };
 }
 
-try_extract_error_from_fulfill_cx!()
+try_extract_error_from_fulfill_cx!();

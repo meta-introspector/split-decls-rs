@@ -11,4 +11,4 @@ macro_rules! validate_trait_object_fn_ptr_ret_ty {
     };
 }
 
-validate_trait_object_fn_ptr_ret_ty!()
+validate_trait_object_fn_ptr_ret_ty!();

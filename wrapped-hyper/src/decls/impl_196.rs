@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Error!();
         Service!();
         Response!();
-        Error!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_196 {
     };
 }
 
-impl_196!()
+impl_196!();

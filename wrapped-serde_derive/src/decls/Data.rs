@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Variant!();
         Field!();
         Style!();
+        Variant!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Data {
     };
 }
 
-Data!()
+Data!();

@@ -4,4 +4,4 @@ macro_rules! SHT_MIPS_RELD {
     };
 }
 
-SHT_MIPS_RELD!()
+SHT_MIPS_RELD!();

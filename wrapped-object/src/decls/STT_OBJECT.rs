@@ -11,4 +11,4 @@ macro_rules! STT_OBJECT {
     };
 }
 
-STT_OBJECT!()
+STT_OBJECT!();

@@ -4,4 +4,4 @@ macro_rules! AllowInferenceConstraints {
     };
 }
 
-AllowInferenceConstraints!()
+AllowInferenceConstraints!();

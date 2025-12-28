@@ -4,4 +4,4 @@ macro_rules! cpp_const {
     };
 }
 
-cpp_const!()
+cpp_const!();

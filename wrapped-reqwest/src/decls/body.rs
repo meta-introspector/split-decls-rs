@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Error!();
-        BoxError!();
         Kind!();
+        BoxError!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! body {
     };
 }
 
-body!()
+body!();

@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        IntoBytes!();
         KnownLayout!();
-        FromBytes!();
+        IntoBytes!();
         Immutable!();
-        Split!();
+        FromBytes!();
         PointerMetadata!();
+        Split!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! SplitAt {
     };
 }
 
-SplitAt!()
+SplitAt!();

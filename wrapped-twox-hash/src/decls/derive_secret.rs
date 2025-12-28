@@ -11,4 +11,4 @@ macro_rules! derive_secret {
     };
 }
 
-derive_secret!()
+derive_secret!();

@@ -4,4 +4,4 @@ macro_rules! daml_impl {
     };
 }
 
-daml_impl!()
+daml_impl!();

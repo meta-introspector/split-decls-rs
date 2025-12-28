@@ -4,4 +4,4 @@ macro_rules! TypeTest {
     };
 }
 
-TypeTest!()
+TypeTest!();

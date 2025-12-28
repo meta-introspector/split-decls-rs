@@ -4,4 +4,4 @@ macro_rules! R_CKCORE_RELATIVE {
     };
 }
 
-R_CKCORE_RELATIVE!()
+R_CKCORE_RELATIVE!();

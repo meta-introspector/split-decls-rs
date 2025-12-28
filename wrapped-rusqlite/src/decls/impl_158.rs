@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        LoadExtensionGuard!();
         Connection!();
         Result!();
-        LoadExtensionGuard!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_158 {
     };
 }
 
-impl_158!()
+impl_158!();

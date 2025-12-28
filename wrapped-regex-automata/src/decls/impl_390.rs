@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        Core!();
-        RetryError!();
-        Prefilter!();
-        Cache!();
-        Input!();
-        ReverseSuffix!();
-        HalfMatch!();
-        DFA!();
-        RetryFailError!();
         Anchored!();
+        Input!();
+        RetryError!();
+        Core!();
+        DFA!();
+        Prefilter!();
+        HalfMatch!();
+        Cache!();
+        ReverseSuffix!();
+        RetryFailError!();
     };
 }
 
@@ -32,4 +32,4 @@ macro_rules! impl_390 {
     };
 }
 
-impl_390!()
+impl_390!();

@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        ResultsCursor!();
+        CfgEdge!();
         StateDiffCollector!();
         Background!();
+        ResultsCursor!();
         Analysis!();
-        DebugWithContext!();
-        CfgEdge!();
-        Formatter!();
         BlockFormatter!();
+        Formatter!();
+        DebugWithContext!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_65 {
     };
 }
 
-impl_65!()
+impl_65!();

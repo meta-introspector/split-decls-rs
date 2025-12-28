@@ -4,4 +4,4 @@ macro_rules! R_AVR_7_PCREL {
     };
 }
 
-R_AVR_7_PCREL!()
+R_AVR_7_PCREL!();

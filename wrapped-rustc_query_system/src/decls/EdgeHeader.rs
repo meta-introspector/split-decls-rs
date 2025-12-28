@@ -4,4 +4,4 @@ macro_rules! EdgeHeader {
     };
 }
 
-EdgeHeader!()
+EdgeHeader!();

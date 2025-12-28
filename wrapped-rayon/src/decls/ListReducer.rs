@@ -4,4 +4,4 @@ macro_rules! ListReducer {
     };
 }
 
-ListReducer!()
+ListReducer!();

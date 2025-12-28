@@ -4,4 +4,4 @@ macro_rules! NGHTTP2_ERR_DATA_EXIST {
     };
 }
 
-NGHTTP2_ERR_DATA_EXIST!()
+NGHTTP2_ERR_DATA_EXIST!();

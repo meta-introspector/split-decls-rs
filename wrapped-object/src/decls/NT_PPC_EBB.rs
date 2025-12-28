@@ -4,4 +4,4 @@ macro_rules! NT_PPC_EBB {
     };
 }
 
-NT_PPC_EBB!()
+NT_PPC_EBB!();

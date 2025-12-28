@@ -4,4 +4,4 @@ macro_rules! R_METAG_GLOB_DAT {
     };
 }
 
-R_METAG_GLOB_DAT!()
+R_METAG_GLOB_DAT!();

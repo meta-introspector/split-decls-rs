@@ -4,4 +4,4 @@ macro_rules! mir_const_qualif {
     };
 }
 
-mir_const_qualif!()
+mir_const_qualif!();

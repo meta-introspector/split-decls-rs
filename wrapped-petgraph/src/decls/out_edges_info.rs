@@ -11,4 +11,4 @@ macro_rules! out_edges_info {
     };
 }
 
-out_edges_info!()
+out_edges_info!();

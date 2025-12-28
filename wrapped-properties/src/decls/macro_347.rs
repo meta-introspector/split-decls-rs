@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        BidiClass!();
         PropertyCodePointMap!();
+        BidiClass!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! macro_347 {
     };
 }
 
-macro_347!()
+macro_347!();

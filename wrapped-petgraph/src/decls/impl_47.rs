@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         GraphRef!();
-        DfsPostOrder!();
-        Create!();
         VisitMap!();
+        Create!();
+        DfsPostOrder!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_47 {
     };
 }
 
-impl_47!()
+impl_47!();

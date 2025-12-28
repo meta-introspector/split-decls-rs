@@ -4,4 +4,4 @@ macro_rules! R_PARISC_LTOFF_TP64 {
     };
 }
 
-R_PARISC_LTOFF_TP64!()
+R_PARISC_LTOFF_TP64!();

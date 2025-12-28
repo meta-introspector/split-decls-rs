@@ -4,4 +4,4 @@ macro_rules! pidfd_getfd {
     };
 }
 
-pidfd_getfd!()
+pidfd_getfd!();

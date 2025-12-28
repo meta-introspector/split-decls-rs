@@ -4,4 +4,4 @@ macro_rules! move_paths {
     };
 }
 
-move_paths!()
+move_paths!();

@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        ToUniverseInfo!();
-        ConstraintConversion!();
+        BorrowckInferCtxt!();
         MirTypeckRegionConstraints!();
         Locations!();
+        ToUniverseInfo!();
         UniversalRegions!();
-        BorrowckInferCtxt!();
+        ConstraintConversion!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! fully_perform_op_raw {
     };
 }
 
-fully_perform_op_raw!()
+fully_perform_op_raw!();

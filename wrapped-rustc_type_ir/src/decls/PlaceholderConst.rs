@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Interner!();
-        PlaceholderLike!();
-        ParamEnv!();
         Ty!();
+        Interner!();
+        ParamEnv!();
+        PlaceholderLike!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! PlaceholderConst {
     };
 }
 
-PlaceholderConst!()
+PlaceholderConst!();

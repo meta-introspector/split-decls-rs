@@ -4,4 +4,4 @@ macro_rules! derive_as_bytes {
     };
 }
 
-derive_as_bytes!()
+derive_as_bytes!();

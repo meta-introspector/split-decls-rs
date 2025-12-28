@@ -11,4 +11,4 @@ macro_rules! WaiterSignaler {
     };
 }
 
-WaiterSignaler!()
+WaiterSignaler!();

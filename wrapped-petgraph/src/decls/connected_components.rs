@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Time!();
         UnionFind!();
+        Time!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! connected_components {
     };
 }
 
-connected_components!()
+connected_components!();

@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        Views!();
+        TypeIdHasher!();
         Jar!();
+        Views!();
+        StorageNonce!();
         Event!();
         IngredientIndex!();
-        Ingredient!();
-        StorageNonce!();
-        Runtime!();
-        TypeIdHasher!();
         Nonce!();
+        Runtime!();
+        Ingredient!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! Zalsa {
     };
 }
 
-Zalsa!()
+Zalsa!();

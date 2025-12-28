@@ -4,4 +4,4 @@ macro_rules! get_interface_ident_suffix {
     };
 }
 
-get_interface_ident_suffix!()
+get_interface_ident_suffix!();

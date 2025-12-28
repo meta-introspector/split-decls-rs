@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        U8!();
-        UnitKind!();
         DFA!();
         Unit!();
+        U8!();
+        UnitKind!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_581 {
     };
 }
 
-impl_581!()
+impl_581!();

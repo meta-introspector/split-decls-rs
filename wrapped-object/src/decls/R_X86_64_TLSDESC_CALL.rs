@@ -4,4 +4,4 @@ macro_rules! R_X86_64_TLSDESC_CALL {
     };
 }
 
-R_X86_64_TLSDESC_CALL!()
+R_X86_64_TLSDESC_CALL!();

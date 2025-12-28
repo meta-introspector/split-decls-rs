@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         DepContext!();
-        Reentrant!();
         IncrementCompilation!();
+        Reentrant!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! incremental_verify_ich_failed {
     };
 }
 
-incremental_verify_ich_failed!()
+incremental_verify_ich_failed!();

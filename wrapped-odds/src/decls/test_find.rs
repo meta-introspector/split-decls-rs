@@ -4,4 +4,4 @@ macro_rules! test_find {
     };
 }
 
-test_find!()
+test_find!();

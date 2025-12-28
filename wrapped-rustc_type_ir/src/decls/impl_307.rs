@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Interner!();
         Shifter!();
+        Interner!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_307 {
     };
 }
 
-impl_307!()
+impl_307!();

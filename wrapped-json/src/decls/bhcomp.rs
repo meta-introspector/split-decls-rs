@@ -4,4 +4,4 @@ macro_rules! bhcomp {
     };
 }
 
-bhcomp!()
+bhcomp!();

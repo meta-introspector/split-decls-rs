@@ -4,4 +4,4 @@ macro_rules! int_pat {
     };
 }
 
-int_pat!()
+int_pat!();

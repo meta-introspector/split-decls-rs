@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        ForLoop!();
-        Forloop!();
-        ForLoopState!();
-        ForLoopValues!();
         ForLoopKind!();
         Val!();
+        Forloop!();
+        ForLoopState!();
+        ForLoop!();
+        ForLoopValues!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_510 {
     };
 }
 
-impl_510!()
+impl_510!();

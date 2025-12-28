@@ -4,4 +4,4 @@ macro_rules! STT_FUNC {
     };
 }
 
-STT_FUNC!()
+STT_FUNC!();

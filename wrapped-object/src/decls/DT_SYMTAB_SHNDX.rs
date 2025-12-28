@@ -4,4 +4,4 @@ macro_rules! DT_SYMTAB_SHNDX {
     };
 }
 
-DT_SYMTAB_SHNDX!()
+DT_SYMTAB_SHNDX!();

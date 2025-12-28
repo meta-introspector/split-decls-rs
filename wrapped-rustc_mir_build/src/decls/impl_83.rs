@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        BlockFrame!();
         Builder!();
-        BreakableTarget!();
         Scope!();
         BlockAnd!();
+        BlockFrame!();
+        BreakableTarget!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_83 {
     };
 }
 
-impl_83!()
+impl_83!();

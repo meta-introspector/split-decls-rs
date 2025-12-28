@@ -4,4 +4,4 @@ macro_rules! float_problem_values {
     };
 }
 
-float_problem_values!()
+float_problem_values!();

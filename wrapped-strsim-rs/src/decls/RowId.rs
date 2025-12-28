@@ -4,4 +4,4 @@ macro_rules! RowId {
     };
 }
 
-RowId!()
+RowId!();

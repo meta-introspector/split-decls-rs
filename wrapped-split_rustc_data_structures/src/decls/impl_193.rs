@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Sccs!();
-        Node!();
         Successors!();
+        Node!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_193 {
     };
 }
 
-impl_193!()
+impl_193!();

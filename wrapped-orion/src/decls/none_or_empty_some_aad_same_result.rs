@@ -11,4 +11,4 @@ macro_rules! none_or_empty_some_aad_same_result {
     };
 }
 
-none_or_empty_some_aad_same_result!()
+none_or_empty_some_aad_same_result!();

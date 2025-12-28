@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Arbitrary!();
         Gen!();
+        Arbitrary!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_arb_for_single_tuple {
     };
 }
 
-impl_arb_for_single_tuple!()
+impl_arb_for_single_tuple!();

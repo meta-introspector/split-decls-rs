@@ -4,4 +4,4 @@ macro_rules! get_location_info {
     };
 }
 
-get_location_info!()
+get_location_info!();

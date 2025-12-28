@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Anchored!();
         DebugByte!();
         StartError!();
-        Anchored!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_176 {
     };
 }
 
-impl_176!()
+impl_176!();

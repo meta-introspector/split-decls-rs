@@ -11,4 +11,4 @@ macro_rules! test_spawn_order {
     };
 }
 
-test_spawn_order!()
+test_spawn_order!();

@@ -11,4 +11,4 @@ macro_rules! to_vec {
     };
 }
 
-to_vec!()
+to_vec!();

@@ -4,4 +4,4 @@ macro_rules! generic_params {
     };
 }
 
-generic_params!()
+generic_params!();

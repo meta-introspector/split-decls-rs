@@ -4,4 +4,4 @@ macro_rules! DotAttrList {
     };
 }
 
-DotAttrList!()
+DotAttrList!();

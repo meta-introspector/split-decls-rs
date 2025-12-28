@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        UnknownCryptoError!();
         StreamXChaCha20Poly1305!();
         StreamTag!();
         Poly1305!();
+        UnknownCryptoError!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! streaming {
     };
 }
 
-streaming!()
+streaming!();

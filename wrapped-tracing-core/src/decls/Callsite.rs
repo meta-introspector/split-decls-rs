@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Interest!();
         Metadata!();
+        Interest!();
         Identifier!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! Callsite {
     };
 }
 
-Callsite!()
+Callsite!();

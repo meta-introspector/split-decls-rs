@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        U32!();
         Endian!();
+        U32!();
         U64Bytes!();
         U16!();
     };
@@ -14,4 +14,4 @@ macro_rules! Nlist64 {
     };
 }
 
-Nlist64!()
+Nlist64!();

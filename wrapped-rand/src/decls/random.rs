@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Distribution!();
-        ThreadRng!();
         StandardUniform!();
+        ThreadRng!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! random {
     };
 }
 
-random!()
+random!();

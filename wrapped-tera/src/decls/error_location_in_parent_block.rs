@@ -12,4 +12,4 @@ macro_rules! error_location_in_parent_block {
     };
 }
 
-error_location_in_parent_block!()
+error_location_in_parent_block!();

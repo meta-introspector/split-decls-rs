@@ -4,4 +4,4 @@ macro_rules! LN10_F64 {
     };
 }
 
-LN10_F64!()
+LN10_F64!();

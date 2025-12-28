@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        LinkNameSpaceType!();
         Result!();
+        LinkNameSpaceType!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! move_into_link_name_space {
     };
 }
 
-move_into_link_name_space!()
+move_into_link_name_space!();

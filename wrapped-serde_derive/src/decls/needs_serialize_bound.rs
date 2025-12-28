@@ -12,4 +12,4 @@ macro_rules! needs_serialize_bound {
     };
 }
 
-needs_serialize_bound!()
+needs_serialize_bound!();

@@ -4,4 +4,4 @@ macro_rules! other_401 {
     };
 }
 
-other_401!()
+other_401!();

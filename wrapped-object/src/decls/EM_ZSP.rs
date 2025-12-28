@@ -4,4 +4,4 @@ macro_rules! EM_ZSP {
     };
 }
 
-EM_ZSP!()
+EM_ZSP!();

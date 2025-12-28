@@ -4,4 +4,4 @@ macro_rules! OPAD_POSTFIX {
     };
 }
 
-OPAD_POSTFIX!()
+OPAD_POSTFIX!();

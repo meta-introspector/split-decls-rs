@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        FnCtxt!();
-        EnclosingBreakables!();
         Diverges!();
+        FnCtxt!();
         TypeckRootCtxt!();
+        EnclosingBreakables!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_211 {
     };
 }
 
-impl_211!()
+impl_211!();

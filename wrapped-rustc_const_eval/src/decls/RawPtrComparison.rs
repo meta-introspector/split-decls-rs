@@ -4,4 +4,4 @@ macro_rules! RawPtrComparison {
     };
 }
 
-RawPtrComparison!()
+RawPtrComparison!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         RegionConstraintCollector!();
-        MiniGraph!();
         SccUniverse!();
+        MiniGraph!();
         LeakCheck!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_114 {
     };
 }
 
-impl_114!()
+impl_114!();

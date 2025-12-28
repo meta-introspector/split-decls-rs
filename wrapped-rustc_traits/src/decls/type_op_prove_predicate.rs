@@ -4,4 +4,4 @@ macro_rules! type_op_prove_predicate {
     };
 }
 
-type_op_prove_predicate!()
+type_op_prove_predicate!();

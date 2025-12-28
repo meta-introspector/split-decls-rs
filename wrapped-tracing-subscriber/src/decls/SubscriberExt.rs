@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Layer!();
         Layered!();
+        Layer!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! SubscriberExt {
     };
 }
 
-SubscriberExt!()
+SubscriberExt!();

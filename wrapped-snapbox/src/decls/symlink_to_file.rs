@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Error!();
         Result!();
+        Error!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! symlink_to_file {
     };
 }
 
-symlink_to_file!()
+symlink_to_file!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        Error!();
         Verify!();
         Err!();
         ErrorKind!();
-        Error!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! test_verify_alloc {
     };
 }
 
-test_verify_alloc!()
+test_verify_alloc!();

@@ -11,4 +11,4 @@ macro_rules! new_sentence_bound_indices {
     };
 }
 
-new_sentence_bound_indices!()
+new_sentence_bound_indices!();

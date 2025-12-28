@@ -1,19 +1,19 @@
 macro_rules! deps {
     () => {
-        Literal!();
-        Result!();
-        Look!();
-        Writer!();
-        Concat!();
-        Capture!();
-        Error!();
-        HirKind!();
-        Bytes!();
-        Class!();
-        Alternation!();
-        Repetition!();
         Visitor!();
+        Look!();
+        Result!();
+        Repetition!();
+        HirKind!();
+        Alternation!();
+        Class!();
+        Error!();
+        Writer!();
+        Literal!();
         Hir!();
+        Bytes!();
+        Capture!();
+        Concat!();
     };
 }
 
@@ -24,4 +24,4 @@ macro_rules! impl_183 {
     };
 }
 
-impl_183!()
+impl_183!();

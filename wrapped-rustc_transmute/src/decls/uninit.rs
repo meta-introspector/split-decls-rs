@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Tree!();
-        Answer!();
         Assume!();
+        Answer!();
+        Tree!();
         Reason!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! uninit {
     };
 }
 
-uninit!()
+uninit!();

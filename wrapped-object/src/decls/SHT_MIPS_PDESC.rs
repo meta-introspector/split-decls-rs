@@ -4,4 +4,4 @@ macro_rules! SHT_MIPS_PDESC {
     };
 }
 
-SHT_MIPS_PDESC!()
+SHT_MIPS_PDESC!();

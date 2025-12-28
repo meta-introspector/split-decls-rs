@@ -1,23 +1,23 @@
 macro_rules! deps {
     () => {
-        AndNot!();
-        Avx2Machine!();
-        G0!();
-        Vec4Ext!();
-        Vec2!();
-        YesS4!();
-        BSwap!();
-        Vector!();
-        LaneWords4!();
-        RotateEachWord32!();
         BitOps32!();
-        ArithOps!();
-        BitOps0!();
-        StoreBytes!();
-        Store!();
-        Vec4!();
         MultiLane!();
+        StoreBytes!();
+        Avx2Machine!();
         YesS3!();
+        Vector!();
+        RotateEachWord32!();
+        Vec4!();
+        AndNot!();
+        G0!();
+        YesS4!();
+        Store!();
+        BitOps0!();
+        Vec2!();
+        ArithOps!();
+        BSwap!();
+        Vec4Ext!();
+        LaneWords4!();
     };
 }
 
@@ -28,4 +28,4 @@ macro_rules! avx2 {
     };
 }
 
-avx2!()
+avx2!();

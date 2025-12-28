@@ -4,4 +4,4 @@ macro_rules! assert_contains {
     };
 }
 
-assert_contains!()
+assert_contains!();

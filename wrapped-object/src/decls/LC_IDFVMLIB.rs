@@ -4,4 +4,4 @@ macro_rules! LC_IDFVMLIB {
     };
 }
 
-LC_IDFVMLIB!()
+LC_IDFVMLIB!();

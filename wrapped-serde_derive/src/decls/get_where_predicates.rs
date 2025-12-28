@@ -12,4 +12,4 @@ macro_rules! get_where_predicates {
     };
 }
 
-get_where_predicates!()
+get_where_predicates!();

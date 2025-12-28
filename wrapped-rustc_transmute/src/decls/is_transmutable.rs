@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Assume!();
-        Answer!();
         Representation!();
+        Answer!();
+        Assume!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! is_transmutable {
     };
 }
 
-is_transmutable!()
+is_transmutable!();

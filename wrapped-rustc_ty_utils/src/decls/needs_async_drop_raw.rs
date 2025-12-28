@@ -11,4 +11,4 @@ macro_rules! needs_async_drop_raw {
     };
 }
 
-needs_async_drop_raw!()
+needs_async_drop_raw!();

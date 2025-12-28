@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         BufEntry!();
-        Token!();
         PrintFrame!();
+        Token!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Printer {
     };
 }
 
-Printer!()
+Printer!();

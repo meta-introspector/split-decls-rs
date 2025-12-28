@@ -4,4 +4,4 @@ macro_rules! find_any {
     };
 }
 
-find_any!()
+find_any!();

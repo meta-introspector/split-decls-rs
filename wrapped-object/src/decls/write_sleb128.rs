@@ -4,4 +4,4 @@ macro_rules! write_sleb128 {
     };
 }
 
-write_sleb128!()
+write_sleb128!();

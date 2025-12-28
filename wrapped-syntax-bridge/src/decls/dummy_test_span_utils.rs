@@ -11,4 +11,4 @@ macro_rules! dummy_test_span_utils {
     };
 }
 
-dummy_test_span_utils!()
+dummy_test_span_utils!();

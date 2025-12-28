@@ -4,4 +4,4 @@ macro_rules! teeos {
     };
 }
 
-teeos!()
+teeos!();

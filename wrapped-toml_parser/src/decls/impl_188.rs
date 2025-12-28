@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
+        ErrorSink!();
+        Encoding!();
         Span!();
-        EventReceiver!();
         RecursionGuard!();
         ParseError!();
-        Encoding!();
-        ErrorSink!();
+        EventReceiver!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_188 {
     };
 }
 
-impl_188!()
+impl_188!();

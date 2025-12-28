@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        StableGraph!();
-        EdgeType!();
-        EdgesDirected!();
         Direction!();
-        IndexType!();
         Edges!();
+        StableGraph!();
+        IndexType!();
+        EdgesDirected!();
+        EdgeType!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_861 {
     };
 }
 
-impl_861!()
+impl_861!();

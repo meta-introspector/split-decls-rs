@@ -4,4 +4,4 @@ macro_rules! file_format {
     };
 }
 
-file_format!()
+file_format!();

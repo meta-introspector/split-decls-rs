@@ -4,4 +4,4 @@ macro_rules! pop_arg_separator {
     };
 }
 
-pop_arg_separator!()
+pop_arg_separator!();

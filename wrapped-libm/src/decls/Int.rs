@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         OtherSign!();
-        MinInt!();
         CastInto!();
         CastFrom!();
+        MinInt!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! Int {
     };
 }
 
-Int!()
+Int!();

@@ -4,4 +4,4 @@ macro_rules! par_either {
     };
 }
 
-par_either!()
+par_either!();

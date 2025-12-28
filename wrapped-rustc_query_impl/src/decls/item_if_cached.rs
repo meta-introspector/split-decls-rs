@@ -4,4 +4,4 @@ macro_rules! item_if_cached {
     };
 }
 
-item_if_cached!()
+item_if_cached!();

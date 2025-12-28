@@ -11,4 +11,4 @@ macro_rules! NO_ERROR {
     };
 }
 
-NO_ERROR!()
+NO_ERROR!();

@@ -11,4 +11,4 @@ macro_rules! block_on {
     };
 }
 
-block_on!()
+block_on!();

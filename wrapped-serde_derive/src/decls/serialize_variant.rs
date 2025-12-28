@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Style!();
-        Match!();
-        TagType!();
-        Container!();
         Variant!();
+        Container!();
         Parameters!();
+        Match!();
+        Style!();
+        TagType!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! serialize_variant {
     };
 }
 
-serialize_variant!()
+serialize_variant!();

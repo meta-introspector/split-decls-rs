@@ -4,4 +4,4 @@ macro_rules! R_SPARC_JMP_IREL {
     };
 }
 
-R_SPARC_JMP_IREL!()
+R_SPARC_JMP_IREL!();

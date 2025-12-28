@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
+        ForeignItemId!();
+        BodyId!();
         Body!();
+        Item!();
         ItemId!();
         HirTyCtxt!();
-        ForeignItemId!();
+        TraitItemId!();
         ImplItemId!();
+        Node!();
         TraitItem!();
         ImplItem!();
-        Node!();
-        BodyId!();
-        Item!();
-        TraitItemId!();
         ForeignItem!();
     };
 }
@@ -22,4 +22,4 @@ macro_rules! impl_350 {
     };
 }
 
-impl_350!()
+impl_350!();

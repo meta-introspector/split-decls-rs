@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        UnindexedProducer!();
-        Folder!();
         WalkTreePostfixProducer!();
+        Folder!();
+        UnindexedProducer!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_993 {
     };
 }
 
-impl_993!()
+impl_993!();

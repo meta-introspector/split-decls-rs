@@ -4,4 +4,4 @@ macro_rules! item_bounds {
     };
 }
 
-item_bounds!()
+item_bounds!();

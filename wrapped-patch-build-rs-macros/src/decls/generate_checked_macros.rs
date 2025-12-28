@@ -4,4 +4,4 @@ macro_rules! generate_checked_macros {
     };
 }
 
-generate_checked_macros!()
+generate_checked_macros!();

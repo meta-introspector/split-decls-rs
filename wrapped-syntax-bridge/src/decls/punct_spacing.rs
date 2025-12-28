@@ -47,4 +47,4 @@ fn main() {
     };
 }
 
-punct_spacing!()
+punct_spacing!();

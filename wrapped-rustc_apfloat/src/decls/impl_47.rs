@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        Round!();
-        ExpInt!();
-        Limb!();
-        NonfiniteBehavior!();
         Category!();
+        Semantics!();
+        IeeeFloat!();
+        ExpInt!();
+        Round!();
+        StatusAnd!();
+        NonfiniteBehavior!();
+        Loss!();
+        Limb!();
         DynPrecisionLimbVec!();
         ParseError!();
-        IeeeFloat!();
-        StatusAnd!();
-        Semantics!();
-        Loss!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_47 {
     };
 }
 
-impl_47!()
+impl_47!();

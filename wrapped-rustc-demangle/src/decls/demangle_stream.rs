@@ -4,4 +4,4 @@ macro_rules! demangle_stream {
     };
 }
 
-demangle_stream!()
+demangle_stream!();

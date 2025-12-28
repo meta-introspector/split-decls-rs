@@ -4,4 +4,4 @@ macro_rules! exported_symbols_for_lto {
     };
 }
 
-exported_symbols_for_lto!()
+exported_symbols_for_lto!();

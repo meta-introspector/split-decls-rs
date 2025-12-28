@@ -12,4 +12,4 @@ macro_rules! parse_comments_before_extends {
     };
 }
 
-parse_comments_before_extends!()
+parse_comments_before_extends!();

@@ -11,4 +11,4 @@ macro_rules! check_diagnostics_with_disabled {
     };
 }
 
-check_diagnostics_with_disabled!()
+check_diagnostics_with_disabled!();

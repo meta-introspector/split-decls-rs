@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Struct!();
         Display!();
+        Struct!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_114 {
     };
 }
 
-impl_114!()
+impl_114!();

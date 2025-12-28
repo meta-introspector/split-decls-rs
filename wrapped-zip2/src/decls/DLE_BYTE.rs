@@ -4,4 +4,4 @@ macro_rules! DLE_BYTE {
     };
 }
 
-DLE_BYTE!()
+DLE_BYTE!();

@@ -4,4 +4,4 @@ macro_rules! PR_SVE_GET_VL {
     };
 }
 
-PR_SVE_GET_VL!()
+PR_SVE_GET_VL!();

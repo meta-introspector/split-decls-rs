@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         WhileSomeConsumer!();
-        UnindexedConsumer!();
         Reducer!();
+        UnindexedConsumer!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_1008 {
     };
 }
 
-impl_1008!()
+impl_1008!();

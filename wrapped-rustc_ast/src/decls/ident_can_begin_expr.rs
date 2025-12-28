@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        IdentIsRaw!();
         Token!();
         Const!();
-        IdentIsRaw!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! ident_can_begin_expr {
     };
 }
 
-ident_can_begin_expr!()
+ident_can_begin_expr!();

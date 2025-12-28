@@ -4,4 +4,4 @@ macro_rules! UnsafeAttrOutsideUnsafeSuggestion {
     };
 }
 
-UnsafeAttrOutsideUnsafeSuggestion!()
+UnsafeAttrOutsideUnsafeSuggestion!();

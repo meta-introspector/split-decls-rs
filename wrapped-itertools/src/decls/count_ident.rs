@@ -4,4 +4,4 @@ macro_rules! count_ident {
     };
 }
 
-count_ident!()
+count_ident!();

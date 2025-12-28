@@ -4,4 +4,4 @@ macro_rules! Issue {
     };
 }
 
-Issue!()
+Issue!();

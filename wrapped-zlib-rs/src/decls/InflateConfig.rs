@@ -4,4 +4,4 @@ macro_rules! InflateConfig {
     };
 }
 
-InflateConfig!()
+InflateConfig!();

@@ -4,4 +4,4 @@ macro_rules! expect_methods_self_kind {
     };
 }
 
-expect_methods_self_kind!()
+expect_methods_self_kind!();

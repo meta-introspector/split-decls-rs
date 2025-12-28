@@ -4,4 +4,4 @@ macro_rules! DebugStrictAdd {
     };
 }
 
-DebugStrictAdd!()
+DebugStrictAdd!();

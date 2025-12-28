@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        QueryStackFrame!();
-        QueryState!();
-        QueryMap!();
-        QueryResult!();
         QueryJobInfo!();
+        QueryMap!();
+        QueryState!();
+        QueryResult!();
+        QueryStackFrame!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_138 {
     };
 }
 
-impl_138!()
+impl_138!();

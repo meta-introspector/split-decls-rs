@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        RealSpanMap!();
-        EditionedFileId!();
-        SpanAnchor!();
-        ErasedFileAstId!();
         Span!();
+        ErasedFileAstId!();
         SyntaxContext!();
+        SpanAnchor!();
+        EditionedFileId!();
+        RealSpanMap!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_72 {
     };
 }
 
-impl_72!()
+impl_72!();

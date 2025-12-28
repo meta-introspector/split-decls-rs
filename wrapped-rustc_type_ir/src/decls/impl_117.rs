@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        VarianceDiagInfo!();
         RelateResult!();
-        FnSig!();
-        ExpectedFound!();
-        Relate!();
         Interner!();
-        TypeError!();
+        Relate!();
+        ExpectedFound!();
+        FnSig!();
         TypeRelation!();
+        VarianceDiagInfo!();
+        TypeError!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_117 {
     };
 }
 
-impl_117!()
+impl_117!();

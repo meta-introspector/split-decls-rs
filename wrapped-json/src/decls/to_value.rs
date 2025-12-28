@@ -14,4 +14,4 @@ macro_rules! to_value {
     };
 }
 
-to_value!()
+to_value!();

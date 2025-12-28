@@ -4,4 +4,4 @@ macro_rules! inline_array {
     };
 }
 
-inline_array!()
+inline_array!();

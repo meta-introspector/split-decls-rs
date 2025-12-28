@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Step!();
         DisplayValue!();
         Bytes!();
+        Step!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_98 {
     };
 }
 
-impl_98!()
+impl_98!();

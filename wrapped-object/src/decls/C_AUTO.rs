@@ -4,4 +4,4 @@ macro_rules! C_AUTO {
     };
 }
 
-C_AUTO!()
+C_AUTO!();

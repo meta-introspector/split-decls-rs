@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        CopyImplOnNonAdt!();
         Checker!();
         CopyImplOnTypeWithDtor!();
+        CopyImplOnNonAdt!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! visit_implementation_of_copy {
     };
 }
 
-visit_implementation_of_copy!()
+visit_implementation_of_copy!();

@@ -4,4 +4,4 @@ macro_rules! PR_SVE_VL_INHERIT {
     };
 }
 
-PR_SVE_VL_INHERIT!()
+PR_SVE_VL_INHERIT!();

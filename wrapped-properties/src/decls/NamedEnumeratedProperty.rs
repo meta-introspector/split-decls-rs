@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         PropertyParser!();
+        ParseableEnumeratedProperty!();
         PropertyNamesShort!();
         PropertyEnumToValueNameLookup!();
         PropertyNamesLong!();
-        ParseableEnumeratedProperty!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! NamedEnumeratedProperty {
     };
 }
 
-NamedEnumeratedProperty!()
+NamedEnumeratedProperty!();

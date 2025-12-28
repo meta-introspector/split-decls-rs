@@ -11,4 +11,4 @@ macro_rules! IAsyncInfo_Vtbl {
     };
 }
 
-IAsyncInfo_Vtbl!()
+IAsyncInfo_Vtbl!();

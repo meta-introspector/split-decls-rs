@@ -28,4 +28,4 @@ macro_rules! replace_local_variable_reference {
     };
 }
 
-replace_local_variable_reference!()
+replace_local_variable_reference!();

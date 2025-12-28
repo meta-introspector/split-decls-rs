@@ -11,4 +11,4 @@ macro_rules! encode_seqnum {
     };
 }
 
-encode_seqnum!()
+encode_seqnum!();

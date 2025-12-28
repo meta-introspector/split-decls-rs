@@ -4,4 +4,4 @@ macro_rules! replace_macro_invocations {
     };
 }
 
-replace_macro_invocations!()
+replace_macro_invocations!();

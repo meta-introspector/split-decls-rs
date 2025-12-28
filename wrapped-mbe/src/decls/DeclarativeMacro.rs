@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Rule!();
         ParseError!();
+        Rule!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! DeclarativeMacro {
     };
 }
 
-DeclarativeMacro!()
+DeclarativeMacro!();

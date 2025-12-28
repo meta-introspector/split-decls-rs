@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        Input!();
+        PResult!();
         OutputMode!();
-        Parser!();
-        Digit1!();
-        ParseError!();
+        AsChar!();
+        Input!();
         ErrorKind!();
         Error!();
-        AsChar!();
-        PResult!();
+        ParseError!();
+        Digit1!();
+        Parser!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_581 {
     };
 }
 
-impl_581!()
+impl_581!();

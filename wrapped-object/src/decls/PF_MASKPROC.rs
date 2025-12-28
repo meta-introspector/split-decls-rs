@@ -4,4 +4,4 @@ macro_rules! PF_MASKPROC {
     };
 }
 
-PF_MASKPROC!()
+PF_MASKPROC!();

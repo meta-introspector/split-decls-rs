@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        ConstCx!();
-        DiagImportance!();
         MutableBorrowEscaping!();
-        EscapingMutBorrow!();
         NonConstOp!();
+        DiagImportance!();
+        EscapingMutBorrow!();
+        ConstCx!();
         Status!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! impl_38 {
     };
 }
 
-impl_38!()
+impl_38!();

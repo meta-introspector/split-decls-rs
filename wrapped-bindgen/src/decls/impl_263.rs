@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Cfg!();
-        CppFn!();
+        Config!();
         ReturnHint!();
         Type!();
-        TokenStream!();
         CppMethod!();
+        CppFn!();
+        Cfg!();
+        TokenStream!();
         TypeName!();
-        Config!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_263 {
     };
 }
 
-impl_263!()
+impl_263!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        PrivateSetBit!();
         Shleft!();
+        PrivateSetBit!();
         B1!();
         UTerm!();
     };
@@ -14,4 +14,4 @@ macro_rules! impl_467 {
     };
 }
 
-impl_467!()
+impl_467!();

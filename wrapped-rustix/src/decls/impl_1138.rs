@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         IoctlOutput!();
-        Ioctl!();
         Result!();
         Opcode!();
         Tiocgptpeer!();
+        Ioctl!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_1138 {
     };
 }
 
-impl_1138!()
+impl_1138!();

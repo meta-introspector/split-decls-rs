@@ -1,19 +1,19 @@
 macro_rules! deps {
     () => {
-        CycleError!();
-        QueryState!();
         QueryStackFrameExtra!();
         HandleCycleError!();
-        QueryCache!();
         HashResult!();
-        DepNode!();
-        DepContext!();
-        QueryInfo!();
-        DepKind!();
-        Value!();
         DepNodeParams!();
-        QueryContext!();
+        QueryInfo!();
+        QueryState!();
         Cache!();
+        CycleError!();
+        DepContext!();
+        DepKind!();
+        DepNode!();
+        QueryCache!();
+        Value!();
+        QueryContext!();
     };
 }
 
@@ -24,4 +24,4 @@ macro_rules! QueryConfig {
     };
 }
 
-QueryConfig!()
+QueryConfig!();

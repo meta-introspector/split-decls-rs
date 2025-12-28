@@ -4,4 +4,4 @@ macro_rules! ParamEnvSource {
     };
 }
 
-ParamEnvSource!()
+ParamEnvSource!();

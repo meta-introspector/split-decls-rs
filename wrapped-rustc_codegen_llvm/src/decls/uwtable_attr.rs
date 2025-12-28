@@ -11,4 +11,4 @@ macro_rules! uwtable_attr {
     };
 }
 
-uwtable_attr!()
+uwtable_attr!();

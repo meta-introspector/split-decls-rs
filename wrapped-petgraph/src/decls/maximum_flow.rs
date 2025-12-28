@@ -4,4 +4,4 @@ macro_rules! maximum_flow {
     };
 }
 
-maximum_flow!()
+maximum_flow!();

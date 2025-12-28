@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        NonZero!();
-        Prod!();
-        PInt!();
-        Unsigned!();
         TArr!();
+        NonZero!();
+        PInt!();
+        Prod!();
+        Unsigned!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_549 {
     };
 }
 
-impl_549!()
+impl_549!();

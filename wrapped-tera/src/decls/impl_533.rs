@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Context!();
-        Tera!();
         Template!();
-        Result!();
-        Processor!();
         Renderer!();
+        Context!();
+        Result!();
+        Tera!();
+        Processor!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_533 {
     };
 }
 
-impl_533!()
+impl_533!();

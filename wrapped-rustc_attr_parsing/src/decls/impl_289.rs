@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        ShouldEmit!();
-        ArgParser!();
-        SharedContext!();
-        Early!();
-        OmitDoc!();
         MetaItemParser!();
+        Early!();
         AttributeParser!();
+        ShouldEmit!();
+        SharedContext!();
+        ArgParser!();
         AcceptContext!();
+        OmitDoc!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_289 {
     };
 }
 
-impl_289!()
+impl_289!();

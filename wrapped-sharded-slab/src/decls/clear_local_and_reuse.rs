@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Pool!();
         Generation!();
+        Pool!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! clear_local_and_reuse {
     };
 }
 
-clear_local_and_reuse!()
+clear_local_and_reuse!();

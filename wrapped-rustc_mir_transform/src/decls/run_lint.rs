@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        LocalLabel!();
-        DropsReachable!();
-        DestructorLabel!();
-        MovePathIndexAtBlock!();
         TailExprDropOrderLint!();
+        DestructorLabel!();
+        DropsReachable!();
+        MovePathIndexAtBlock!();
+        LocalLabel!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! run_lint {
     };
 }
 
-run_lint!()
+run_lint!();

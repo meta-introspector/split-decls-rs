@@ -4,4 +4,4 @@ macro_rules! markdown_remove {
     };
 }
 
-markdown_remove!()
+markdown_remove!();

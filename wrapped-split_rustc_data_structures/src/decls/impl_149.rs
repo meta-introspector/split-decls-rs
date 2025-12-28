@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Predecessors!();
-        Successors!();
         Node!();
+        Successors!();
+        Predecessors!();
         ReversedGraph!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_149 {
     };
 }
 
-impl_149!()
+impl_149!();

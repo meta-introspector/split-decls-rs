@@ -13,4 +13,4 @@ macro_rules! ident_not_raw {
     };
 }
 
-ident_not_raw!()
+ident_not_raw!();

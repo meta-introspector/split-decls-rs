@@ -4,4 +4,4 @@ macro_rules! upvar {
     };
 }
 
-upvar!()
+upvar!();

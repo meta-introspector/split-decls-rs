@@ -4,4 +4,4 @@ macro_rules! assoc_fn_of_type {
     };
 }
 
-assoc_fn_of_type!()
+assoc_fn_of_type!();

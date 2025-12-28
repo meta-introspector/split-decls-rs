@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        GenericBound!();
         Visitor!();
+        GenericBound!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! walk_param_bound {
     };
 }
 
-walk_param_bound!()
+walk_param_bound!();

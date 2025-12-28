@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        StmtRef!();
         StatementStatus!();
+        StmtRef!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_287 {
     };
 }
 
-impl_287!()
+impl_287!();

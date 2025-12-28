@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ThreadLocal!();
         Thread!();
+        ThreadLocal!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! ThreadIdManager {
     };
 }
 
-ThreadIdManager!()
+ThreadIdManager!();

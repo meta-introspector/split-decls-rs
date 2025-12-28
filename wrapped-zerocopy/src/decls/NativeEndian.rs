@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        LittleEndian!();
         BigEndian!();
+        LittleEndian!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! NativeEndian {
     };
 }
 
-NativeEndian!()
+NativeEndian!();

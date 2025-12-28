@@ -4,4 +4,4 @@ macro_rules! SplitInclusive {
     };
 }
 
-SplitInclusive!()
+SplitInclusive!();

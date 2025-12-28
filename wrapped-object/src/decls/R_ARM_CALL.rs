@@ -4,4 +4,4 @@ macro_rules! R_ARM_CALL {
     };
 }
 
-R_ARM_CALL!()
+R_ARM_CALL!();

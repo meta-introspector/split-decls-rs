@@ -4,4 +4,4 @@ macro_rules! github {
     };
 }
 
-github!()
+github!();

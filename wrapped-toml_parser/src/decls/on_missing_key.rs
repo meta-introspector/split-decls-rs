@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        ParseError!();
-        EventReceiver!();
-        Token!();
         TokenKind!();
         Stream!();
         ErrorSink!();
+        Token!();
         Expected!();
+        ParseError!();
+        EventReceiver!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! on_missing_key {
     };
 }
 
-on_missing_key!()
+on_missing_key!();

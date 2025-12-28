@@ -4,4 +4,4 @@ macro_rules! OperatorClass {
     };
 }
 
-OperatorClass!()
+OperatorClass!();

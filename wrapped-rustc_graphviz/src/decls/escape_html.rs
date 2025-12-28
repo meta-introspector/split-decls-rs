@@ -4,4 +4,4 @@ macro_rules! escape_html {
     };
 }
 
-escape_html!()
+escape_html!();

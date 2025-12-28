@@ -40,4 +40,4 @@ macro_rules! analyze_real_source_impl {
     };
 }
 
-analyze_real_source_impl!()
+analyze_real_source_impl!();

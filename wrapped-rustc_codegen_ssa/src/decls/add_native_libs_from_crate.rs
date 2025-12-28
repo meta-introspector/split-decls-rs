@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Linker!();
         CodegenResults!();
         ArchiveBuilderBuilder!();
+        Linker!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! add_native_libs_from_crate {
     };
 }
 
-add_native_libs_from_crate!()
+add_native_libs_from_crate!();

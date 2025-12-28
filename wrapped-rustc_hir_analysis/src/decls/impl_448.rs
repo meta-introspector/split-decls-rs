@@ -1,18 +1,18 @@
 macro_rules! deps {
     () => {
-        AssocItemQSelf!();
-        HirTyLowerer!();
-        ManualImplementation!();
-        InherentAssocCandidate!();
         AssocKindMismatchWrapInBracesSugg!();
         AssocItemNotFoundSugg!();
-        MissingTypeParams!();
-        TraitObjectDeclaredWithNoTraits!();
-        GenericsArgsErrExtend!();
+        AssocItemNotFoundLabel!();
         NoVariantNamed!();
+        AssocItemQSelf!();
+        InherentAssocCandidate!();
+        MissingTypeParams!();
         AssocItemNotFound!();
         AssocKindMismatch!();
-        AssocItemNotFoundLabel!();
+        ManualImplementation!();
+        HirTyLowerer!();
+        GenericsArgsErrExtend!();
+        TraitObjectDeclaredWithNoTraits!();
     };
 }
 
@@ -35,4 +35,4 @@ macro_rules! impl_448 {
     };
 }
 
-impl_448!()
+impl_448!();

@@ -4,4 +4,4 @@ macro_rules! PAHAWH_HMONG {
     };
 }
 
-PAHAWH_HMONG!()
+PAHAWH_HMONG!();

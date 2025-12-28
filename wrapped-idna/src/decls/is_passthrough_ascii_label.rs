@@ -4,4 +4,4 @@ macro_rules! is_passthrough_ascii_label {
     };
 }
 
-is_passthrough_ascii_label!()
+is_passthrough_ascii_label!();

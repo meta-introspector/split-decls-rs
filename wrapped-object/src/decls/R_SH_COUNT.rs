@@ -4,4 +4,4 @@ macro_rules! R_SH_COUNT {
     };
 }
 
-R_SH_COUNT!()
+R_SH_COUNT!();

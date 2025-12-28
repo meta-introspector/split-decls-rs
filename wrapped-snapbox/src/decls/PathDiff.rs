@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Data!();
         Error!();
         FileType!();
+        Data!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! PathDiff {
     };
 }
 
-PathDiff!()
+PathDiff!();

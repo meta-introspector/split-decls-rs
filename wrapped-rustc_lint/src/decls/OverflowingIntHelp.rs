@@ -4,4 +4,4 @@ macro_rules! OverflowingIntHelp {
     };
 }
 
-OverflowingIntHelp!()
+OverflowingIntHelp!();

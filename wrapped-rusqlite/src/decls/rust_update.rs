@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
+        Inserts!();
+        Error!();
+        Updates!();
+        UpdateVTab!();
         Values!();
         ValueRef!();
-        UpdateVTab!();
-        Inserts!();
-        Updates!();
-        Error!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! rust_update {
     };
 }
 
-rust_update!()
+rust_update!();

@@ -4,4 +4,4 @@ macro_rules! SG_HIGHVM {
     };
 }
 
-SG_HIGHVM!()
+SG_HIGHVM!();

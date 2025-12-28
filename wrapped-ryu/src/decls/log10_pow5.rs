@@ -4,4 +4,4 @@ macro_rules! log10_pow5 {
     };
 }
 
-log10_pow5!()
+log10_pow5!();

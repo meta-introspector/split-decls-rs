@@ -4,4 +4,4 @@ macro_rules! ODK_HWOR {
     };
 }
 
-ODK_HWOR!()
+ODK_HWOR!();

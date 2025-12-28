@@ -4,4 +4,4 @@ macro_rules! KemTester {
     };
 }
 
-KemTester!()
+KemTester!();

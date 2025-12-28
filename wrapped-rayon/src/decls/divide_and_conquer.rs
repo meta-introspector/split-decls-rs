@@ -4,4 +4,4 @@ macro_rules! divide_and_conquer {
     };
 }
 
-divide_and_conquer!()
+divide_and_conquer!();

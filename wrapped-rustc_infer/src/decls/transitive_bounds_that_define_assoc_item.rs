@@ -4,4 +4,4 @@ macro_rules! transitive_bounds_that_define_assoc_item {
     };
 }
 
-transitive_bounds_that_define_assoc_item!()
+transitive_bounds_that_define_assoc_item!();

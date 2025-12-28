@@ -4,4 +4,4 @@ macro_rules! InvalidSafetyOnExtern {
     };
 }
 
-InvalidSafetyOnExtern!()
+InvalidSafetyOnExtern!();

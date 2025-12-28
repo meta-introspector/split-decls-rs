@@ -4,4 +4,4 @@ macro_rules! LocalRoots {
     };
 }
 
-LocalRoots!()
+LocalRoots!();

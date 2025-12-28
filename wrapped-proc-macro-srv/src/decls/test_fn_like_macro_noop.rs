@@ -42,4 +42,4 @@ macro_rules! test_fn_like_macro_noop {
     };
 }
 
-test_fn_like_macro_noop!()
+test_fn_like_macro_noop!();

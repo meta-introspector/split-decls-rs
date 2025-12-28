@@ -11,4 +11,4 @@ macro_rules! handle_event {
     };
 }
 
-handle_event!()
+handle_event!();

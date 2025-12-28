@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         AttrStyle!();
-        AttrKind!();
-        MetaItemKind!();
         TokenTree!();
-        MetaItem!();
+        AttrKind!();
         Attribute!();
+        MetaItem!();
+        MetaItemKind!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_277 {
     };
 }
 
-impl_277!()
+impl_277!();

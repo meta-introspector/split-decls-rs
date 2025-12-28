@@ -4,4 +4,4 @@ macro_rules! impl_spans {
     };
 }
 
-impl_spans!()
+impl_spans!();

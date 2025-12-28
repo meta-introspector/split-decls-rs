@@ -4,4 +4,4 @@ macro_rules! work_queue {
     };
 }
 
-work_queue!()
+work_queue!();

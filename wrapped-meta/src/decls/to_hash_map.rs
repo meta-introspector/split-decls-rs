@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ParserRule!();
         ParserNode!();
+        ParserRule!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! to_hash_map {
     };
 }
 
-to_hash_map!()
+to_hash_map!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        DeferredOpaqueTypeError!();
         DefiningUse!();
-        ToArgRegionsFolder!();
-        LifetimeMismatchOpaqueParam!();
         RegionCtxt!();
+        DeferredOpaqueTypeError!();
+        LifetimeMismatchOpaqueParam!();
+        ToArgRegionsFolder!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! compute_concrete_types_from_defining_uses {
     };
 }
 
-compute_concrete_types_from_defining_uses!()
+compute_concrete_types_from_defining_uses!();

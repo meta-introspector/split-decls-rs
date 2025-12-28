@@ -4,4 +4,4 @@ macro_rules! FRAME_FPO {
     };
 }
 
-FRAME_FPO!()
+FRAME_FPO!();

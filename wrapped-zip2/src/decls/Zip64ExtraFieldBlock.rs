@@ -11,4 +11,4 @@ macro_rules! Zip64ExtraFieldBlock {
     };
 }
 
-Zip64ExtraFieldBlock!()
+Zip64ExtraFieldBlock!();

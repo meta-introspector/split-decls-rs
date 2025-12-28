@@ -4,4 +4,4 @@ macro_rules! recipes {
     };
 }
 
-recipes!()
+recipes!();

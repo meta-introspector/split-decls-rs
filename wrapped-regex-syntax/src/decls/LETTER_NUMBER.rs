@@ -4,4 +4,4 @@ macro_rules! LETTER_NUMBER {
     };
 }
 
-LETTER_NUMBER!()
+LETTER_NUMBER!();

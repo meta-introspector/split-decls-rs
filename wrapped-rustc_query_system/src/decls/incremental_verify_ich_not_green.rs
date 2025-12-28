@@ -11,4 +11,4 @@ macro_rules! incremental_verify_ich_not_green {
     };
 }
 
-incremental_verify_ich_not_green!()
+incremental_verify_ich_not_green!();

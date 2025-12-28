@@ -12,4 +12,4 @@ macro_rules! register_raw {
     };
 }
 
-register_raw!()
+register_raw!();

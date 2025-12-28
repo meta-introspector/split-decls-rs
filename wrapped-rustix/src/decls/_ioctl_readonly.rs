@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         IoctlOutput!();
-        Opcode!();
         Result!();
+        Opcode!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! _ioctl_readonly {
     };
 }
 
-_ioctl_readonly!()
+_ioctl_readonly!();

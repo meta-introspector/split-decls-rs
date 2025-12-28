@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        ReadCacheOps!();
-        Note!();
-        ReadCacheInternal!();
         ReadRef!();
+        ReadCacheOps!();
+        ReadCacheInternal!();
+        Note!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! ReadCache {
     };
 }
 
-ReadCache!()
+ReadCache!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Regions!();
         CounterExpression!();
+        Regions!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! write_function_mappings_to_buffer {
     };
 }
 
-write_function_mappings_to_buffer!()
+write_function_mappings_to_buffer!();

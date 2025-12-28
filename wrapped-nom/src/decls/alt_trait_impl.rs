@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        OutputMode!();
         Input!();
-        ParseError!();
-        Err!();
-        PResult!();
         Choice!();
+        Err!();
         Parser!();
+        OutputMode!();
         Error!();
+        ParseError!();
+        PResult!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! alt_trait_impl {
     };
 }
 
-alt_trait_impl!()
+alt_trait_impl!();

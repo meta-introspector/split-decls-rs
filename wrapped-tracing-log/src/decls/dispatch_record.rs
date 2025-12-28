@@ -4,4 +4,4 @@ macro_rules! dispatch_record {
     };
 }
 
-dispatch_record!()
+dispatch_record!();

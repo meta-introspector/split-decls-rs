@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Field!();
-        Style!();
-        Default!();
         Variant!();
+        Default!();
+        Style!();
         Ctxt!();
+        Field!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! struct_from_ast {
     };
 }
 
-struct_from_ast!()
+struct_from_ast!();

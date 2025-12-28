@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Segment!();
         MachO!();
+        Segment!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! SegmentFlags {
     };
 }
 
-SegmentFlags!()
+SegmentFlags!();

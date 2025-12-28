@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        ContainsItems!();
-        FileAstId!();
-        ErasedAstIdNextIndexMap!();
+        AstIdMap!();
+        AstIdNode!();
         ErasedFileAstId!();
         ErasedFileAstIdKind!();
-        AstIdMap!();
+        ContainsItems!();
+        FileAstId!();
         ArenaId!();
-        AstIdNode!();
+        ErasedAstIdNextIndexMap!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_49 {
     };
 }
 
-impl_49!()
+impl_49!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        ClassSetItem!();
         Ast!();
         ClassSetBinaryOp!();
+        ClassSetItem!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! ClassInduct {
     };
 }
 
-ClassInduct!()
+ClassInduct!();

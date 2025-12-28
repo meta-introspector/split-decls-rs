@@ -4,4 +4,4 @@ macro_rules! StreamTag {
     };
 }
 
-StreamTag!()
+StreamTag!();

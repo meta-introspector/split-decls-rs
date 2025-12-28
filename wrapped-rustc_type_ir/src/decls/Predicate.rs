@@ -1,22 +1,22 @@
 macro_rules! deps {
     () => {
-        ClauseKind!();
-        Elaboratable!();
-        UpcastFrom!();
-        NormalizesTo!();
-        Binder!();
-        TraitRef!();
-        Interner!();
-        Flags!();
-        TraitPredicate!();
-        IntoKind!();
-        TypeSuperFoldable!();
+        OutlivesPredicate!();
         PredicateKind!();
+        TraitRef!();
         Clause!();
+        Region!();
+        Interner!();
+        TypeSuperFoldable!();
+        Binder!();
+        Elaboratable!();
+        IntoKind!();
         TypeSuperVisitable!();
         Ty!();
-        Region!();
-        OutlivesPredicate!();
+        UpcastFrom!();
+        Flags!();
+        ClauseKind!();
+        NormalizesTo!();
+        TraitPredicate!();
     };
 }
 
@@ -27,4 +27,4 @@ macro_rules! Predicate {
     };
 }
 
-Predicate!()
+Predicate!();

@@ -4,4 +4,4 @@ macro_rules! InvalidCallee {
     };
 }
 
-InvalidCallee!()
+InvalidCallee!();

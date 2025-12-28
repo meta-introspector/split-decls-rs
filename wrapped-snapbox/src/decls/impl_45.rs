@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        IntoData!();
-        OutputAssert!();
-        Assert!();
-        Result!();
         Error!();
+        Result!();
+        Assert!();
+        OutputAssert!();
+        IntoData!();
         Data!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! impl_45 {
     };
 }
 
-impl_45!()
+impl_45!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Color!();
-        Style!();
         AnsiStrings!();
         AnsiGenericString!();
+        Style!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! tests {
     };
 }
 
-tests!()
+tests!();

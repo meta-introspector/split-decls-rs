@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Action!();
         Input!();
+        Action!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! CLOSURE {
     };
 }
 
-CLOSURE!()
+CLOSURE!();

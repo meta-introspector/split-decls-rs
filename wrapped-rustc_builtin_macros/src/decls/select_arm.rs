@@ -4,4 +4,4 @@ macro_rules! select_arm {
     };
 }
 
-select_arm!()
+select_arm!();

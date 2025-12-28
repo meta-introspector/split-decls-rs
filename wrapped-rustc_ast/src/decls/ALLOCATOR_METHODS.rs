@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        AllocatorMethodInput!();
         AllocatorTy!();
         AllocatorMethod!();
-        AllocatorMethodInput!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! ALLOCATOR_METHODS {
     };
 }
 
-ALLOCATOR_METHODS!()
+ALLOCATOR_METHODS!();

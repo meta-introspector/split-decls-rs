@@ -11,4 +11,4 @@ macro_rules! merge_map {
     };
 }
 
-merge_map!()
+merge_map!();

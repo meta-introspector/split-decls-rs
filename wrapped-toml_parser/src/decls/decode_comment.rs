@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Expected!();
         ParseError!();
         Raw!();
         ErrorSink!();
         Span!();
+        Expected!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! decode_comment {
     };
 }
 
-decode_comment!()
+decode_comment!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Dependency!();
         Error!();
         Result!();
+        Dependency!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_53 {
     };
 }
 
-impl_53!()
+impl_53!();

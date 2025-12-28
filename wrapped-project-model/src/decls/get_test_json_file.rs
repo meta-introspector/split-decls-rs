@@ -4,4 +4,4 @@ macro_rules! get_test_json_file {
     };
 }
 
-get_test_json_file!()
+get_test_json_file!();

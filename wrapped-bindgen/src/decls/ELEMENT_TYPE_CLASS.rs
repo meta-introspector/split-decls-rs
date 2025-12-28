@@ -11,4 +11,4 @@ macro_rules! ELEMENT_TYPE_CLASS {
     };
 }
 
-ELEMENT_TYPE_CLASS!()
+ELEMENT_TYPE_CLASS!();

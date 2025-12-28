@@ -4,4 +4,4 @@ macro_rules! is_switch_ty {
     };
 }
 
-is_switch_ty!()
+is_switch_ty!();

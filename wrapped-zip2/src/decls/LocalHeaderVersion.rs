@@ -4,4 +4,4 @@ macro_rules! LocalHeaderVersion {
     };
 }
 
-LocalHeaderVersion!()
+LocalHeaderVersion!();

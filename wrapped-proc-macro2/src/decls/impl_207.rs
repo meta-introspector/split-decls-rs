@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Literal!();
-        Group!();
-        Span!();
-        TokenTree!();
         Ident!();
         Punct!();
+        Span!();
+        TokenTree!();
+        Literal!();
+        Group!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_207 {
     };
 }
 
-impl_207!()
+impl_207!();

@@ -11,4 +11,4 @@ macro_rules! CycleRecoveryStrategy {
     };
 }
 
-CycleRecoveryStrategy!()
+CycleRecoveryStrategy!();

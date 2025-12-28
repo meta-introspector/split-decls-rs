@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Formatter!();
         CharEscape!();
+        Formatter!();
         Result!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! format_escaped_str_contents {
     };
 }
 
-format_escaped_str_contents!()
+format_escaped_str_contents!();

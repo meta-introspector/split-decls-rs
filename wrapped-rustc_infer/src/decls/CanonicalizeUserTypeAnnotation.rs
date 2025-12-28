@@ -4,4 +4,4 @@ macro_rules! CanonicalizeUserTypeAnnotation {
     };
 }
 
-CanonicalizeUserTypeAnnotation!()
+CanonicalizeUserTypeAnnotation!();

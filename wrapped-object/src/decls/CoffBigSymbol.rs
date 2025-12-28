@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        CoffSymbol!();
         AnonObjectHeaderBigobj!();
+        CoffSymbol!();
         ObjectSymbol!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! CoffBigSymbol {
     };
 }
 
-CoffBigSymbol!()
+CoffBigSymbol!();

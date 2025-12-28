@@ -4,4 +4,4 @@ macro_rules! TV_MAX_SECONDS {
     };
 }
 
-TV_MAX_SECONDS!()
+TV_MAX_SECONDS!();

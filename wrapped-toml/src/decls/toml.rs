@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Table!();
         Value!();
+        Table!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! toml {
     };
 }
 
-toml!()
+toml!();

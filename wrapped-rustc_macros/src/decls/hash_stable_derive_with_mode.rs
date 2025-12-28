@@ -11,4 +11,4 @@ macro_rules! hash_stable_derive_with_mode {
     };
 }
 
-hash_stable_derive_with_mode!()
+hash_stable_derive_with_mode!();

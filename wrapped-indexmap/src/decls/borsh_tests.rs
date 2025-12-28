@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        IndexSet!();
         IndexMap!();
+        IndexSet!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! borsh_tests {
     };
 }
 
-borsh_tests!()
+borsh_tests!();

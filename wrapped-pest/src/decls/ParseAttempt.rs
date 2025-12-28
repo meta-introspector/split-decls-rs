@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        ParserState!();
         ParseAttempts!();
         Token!();
-        ParserState!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! ParseAttempt {
     };
 }
 
-ParseAttempt!()
+ParseAttempt!();

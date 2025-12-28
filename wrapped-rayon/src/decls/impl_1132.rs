@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        ChunkBySlice!();
         ChunkByProducer!();
-        UnindexedProducer!();
         Folder!();
+        ChunkBySlice!();
+        UnindexedProducer!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_1132 {
     };
 }
 
-impl_1132!()
+impl_1132!();

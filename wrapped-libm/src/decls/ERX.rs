@@ -4,4 +4,4 @@ macro_rules! ERX {
     };
 }
 
-ERX!()
+ERX!();

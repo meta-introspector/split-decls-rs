@@ -4,4 +4,4 @@ macro_rules! modifier_to_llvm {
     };
 }
 
-modifier_to_llvm!()
+modifier_to_llvm!();

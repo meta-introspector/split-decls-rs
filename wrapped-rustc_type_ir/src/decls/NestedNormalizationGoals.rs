@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Interner!();
-        Goal!();
         Predicate!();
+        Interner!();
         GoalSource!();
+        Goal!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! NestedNormalizationGoals {
     };
 }
 
-NestedNormalizationGoals!()
+NestedNormalizationGoals!();

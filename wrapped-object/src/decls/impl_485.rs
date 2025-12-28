@@ -1,19 +1,19 @@
 macro_rules! deps {
     () => {
+        DyldCacheMapping!();
+        DyldCacheRelocationIteratorV2!();
+        ReadRef!();
+        DyldCacheRelocationIteratorV3!();
+        DyldCacheRelocationIterator!();
+        Result!();
+        RelocationStateV5!();
+        RelocationStateV3!();
+        Endian!();
+        DyldCacheMappingVersion!();
+        RelocationStateV2!();
+        DyldCacheRelocationIteratorVersion!();
         DyldCacheRelocationIteratorV5!();
         DyldCacheSlideInfo!();
-        DyldCacheMappingVersion!();
-        DyldCacheRelocationIteratorV3!();
-        DyldCacheMapping!();
-        ReadRef!();
-        DyldCacheRelocationIterator!();
-        DyldCacheRelocationIteratorVersion!();
-        DyldCacheRelocationIteratorV2!();
-        Endian!();
-        RelocationStateV3!();
-        RelocationStateV5!();
-        RelocationStateV2!();
-        Result!();
     };
 }
 
@@ -24,4 +24,4 @@ macro_rules! impl_485 {
     };
 }
 
-impl_485!()
+impl_485!();

@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Uuid!();
-        Error!();
-        Version!();
-        ErrorKind!();
-        Variant!();
         InvalidUuid!();
+        Error!();
+        Variant!();
+        ErrorKind!();
+        Uuid!();
+        Version!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_34 {
     };
 }
 
-impl_34!()
+impl_34!();

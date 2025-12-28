@@ -4,4 +4,4 @@ macro_rules! EF_RISCV_RVE {
     };
 }
 
-EF_RISCV_RVE!()
+EF_RISCV_RVE!();

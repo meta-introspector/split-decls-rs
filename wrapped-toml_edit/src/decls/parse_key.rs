@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Key!();
-        Repr!();
         RawString!();
+        Repr!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! parse_key {
     };
 }
 
-parse_key!()
+parse_key!();

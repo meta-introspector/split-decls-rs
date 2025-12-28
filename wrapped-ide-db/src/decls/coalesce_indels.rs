@@ -11,4 +11,4 @@ macro_rules! coalesce_indels {
     };
 }
 
-coalesce_indels!()
+coalesce_indels!();

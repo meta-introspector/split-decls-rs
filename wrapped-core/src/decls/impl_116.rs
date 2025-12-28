@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ComObjectInner!();
         ComObject!();
+        ComObjectInner!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_116 {
     };
 }
 
-impl_116!()
+impl_116!();

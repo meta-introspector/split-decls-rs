@@ -4,4 +4,4 @@ macro_rules! missing_value_in_set {
     };
 }
 
-missing_value_in_set!()
+missing_value_in_set!();

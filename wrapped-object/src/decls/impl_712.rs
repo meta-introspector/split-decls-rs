@@ -2,11 +2,11 @@ macro_rules! deps {
     () => {
         U16!();
         Bytes!();
-        RelocationBlockIterator!();
-        Result!();
         Error!();
-        ImageBaseRelocation!();
         RelocationIterator!();
+        Result!();
+        ImageBaseRelocation!();
+        RelocationBlockIterator!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_712 {
     };
 }
 
-impl_712!()
+impl_712!();

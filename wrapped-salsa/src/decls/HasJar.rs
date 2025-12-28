@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        JarKind!();
         Jar!();
+        JarKind!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! HasJar {
     };
 }
 
-HasJar!()
+HasJar!();

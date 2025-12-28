@@ -4,4 +4,4 @@ macro_rules! SECTION_TYPE {
     };
 }
 
-SECTION_TYPE!()
+SECTION_TYPE!();

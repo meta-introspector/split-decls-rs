@@ -12,4 +12,4 @@ macro_rules! type_arguments_within_path {
     };
 }
 
-type_arguments_within_path!()
+type_arguments_within_path!();

@@ -4,4 +4,4 @@ macro_rules! NAG_MUNDARI {
     };
 }
 
-NAG_MUNDARI!()
+NAG_MUNDARI!();

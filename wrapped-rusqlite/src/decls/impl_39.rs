@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        BindIndex!();
-        Error!();
-        Statement!();
         Result!();
+        Error!();
+        BindIndex!();
+        Statement!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_39 {
     };
 }
 
-impl_39!()
+impl_39!();

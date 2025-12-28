@@ -4,4 +4,4 @@ macro_rules! compression_w {
     };
 }
 
-compression_w!()
+compression_w!();

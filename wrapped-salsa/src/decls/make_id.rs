@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        PageIndex!();
         SlotIndex!();
+        PageIndex!();
         Id!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! make_id {
     };
 }
 
-make_id!()
+make_id!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        CodegenCx!();
         AttributeKind!();
+        CodegenCx!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! stackprotector_attr {
     };
 }
 
-stackprotector_attr!()
+stackprotector_attr!();

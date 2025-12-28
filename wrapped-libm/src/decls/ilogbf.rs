@@ -4,4 +4,4 @@ macro_rules! ilogbf {
     };
 }
 
-ilogbf!()
+ilogbf!();

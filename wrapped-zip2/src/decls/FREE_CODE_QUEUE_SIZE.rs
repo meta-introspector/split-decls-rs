@@ -4,4 +4,4 @@ macro_rules! FREE_CODE_QUEUE_SIZE {
     };
 }
 
-FREE_CODE_QUEUE_SIZE!()
+FREE_CODE_QUEUE_SIZE!();

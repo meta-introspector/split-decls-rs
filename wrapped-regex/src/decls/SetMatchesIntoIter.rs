@@ -4,4 +4,4 @@ macro_rules! SetMatchesIntoIter {
     };
 }
 
-SetMatchesIntoIter!()
+SetMatchesIntoIter!();

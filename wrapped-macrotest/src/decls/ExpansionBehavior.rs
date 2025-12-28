@@ -4,4 +4,4 @@ macro_rules! ExpansionBehavior {
     };
 }
 
-ExpansionBehavior!()
+ExpansionBehavior!();

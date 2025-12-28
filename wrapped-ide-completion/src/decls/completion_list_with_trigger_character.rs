@@ -4,4 +4,4 @@ macro_rules! completion_list_with_trigger_character {
     };
 }
 
-completion_list_with_trigger_character!()
+completion_list_with_trigger_character!();

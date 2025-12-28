@@ -4,4 +4,4 @@ macro_rules! EXTENDER {
     };
 }
 
-EXTENDER!()
+EXTENDER!();

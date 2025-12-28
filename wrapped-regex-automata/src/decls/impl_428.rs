@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        Config!();
-        NFA!();
-        ReverseHybridCache!();
-        ReverseHybridEngine!();
-        RegexInfo!();
-        Builder!();
-        Input!();
         HalfMatch!();
         DFA!();
+        ReverseHybridCache!();
+        RegexInfo!();
         RetryError!();
+        Config!();
+        Input!();
+        ReverseHybridEngine!();
+        Builder!();
+        NFA!();
         MatchKind!();
     };
 }
@@ -21,4 +21,4 @@ macro_rules! impl_428 {
     };
 }
 
-impl_428!()
+impl_428!();

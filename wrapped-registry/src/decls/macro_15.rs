@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        REG_SAM_FLAGS!();
+        WIN32_ERROR!();
         HANDLE!();
         HKEY!();
-        WIN32_ERROR!();
-        REG_SAM_FLAGS!();
         PCWSTR!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! macro_15 {
     };
 }
 
-macro_15!()
+macro_15!();

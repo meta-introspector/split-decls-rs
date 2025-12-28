@@ -4,4 +4,4 @@ macro_rules! ClauseFlavor {
     };
 }
 
-ClauseFlavor!()
+ClauseFlavor!();

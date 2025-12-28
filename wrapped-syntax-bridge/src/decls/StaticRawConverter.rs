@@ -11,4 +11,4 @@ macro_rules! StaticRawConverter {
     };
 }
 
-StaticRawConverter!()
+StaticRawConverter!();

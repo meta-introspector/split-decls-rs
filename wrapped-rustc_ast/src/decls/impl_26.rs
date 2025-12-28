@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Type!();
         ParenthesizedArgs!();
-        AngleBracketedArgs!();
         AngleBracketedArg!();
         GenericArg!();
+        AngleBracketedArgs!();
+        Type!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_26 {
     };
 }
 
-impl_26!()
+impl_26!();

@@ -1,41 +1,41 @@
 macro_rules! deps {
     () => {
-        ElfSegmentIterator!();
-        ElfSectionIterator!();
-        FileHeader!();
-        Architecture!();
-        Bytes!();
-        ReadRef!();
-        Symbol!();
-        ElfSection!();
-        Result!();
-        Section!();
-        SymbolIndex!();
-        ComdatIterator!();
-        ElfSegment!();
-        SectionIterator!();
-        Dynamic!();
-        FileFlags!();
-        Export!();
-        SectionIndex!();
-        Object!();
         ElfSymbolTable!();
-        ElfDynamicRelocationIterator!();
-        ElfFile!();
         ByteString!();
-        ElfComdat!();
-        SymbolTable!();
-        ElfSymbol!();
-        SegmentIterator!();
         Import!();
-        ElfComdatIterator!();
-        DynamicRelocationIterator!();
+        ElfSection!();
+        ElfFile!();
         ElfSymbolIterator!();
-        Comdat!();
-        SymbolIterator!();
-        U32!();
+        ElfSectionIterator!();
+        Architecture!();
+        DynamicRelocationIterator!();
+        ElfSegment!();
+        ElfComdat!();
+        ElfSegmentIterator!();
+        ReadRef!();
+        SymbolIndex!();
         Segment!();
+        FileHeader!();
+        Bytes!();
+        ElfDynamicRelocationIterator!();
+        ElfSymbol!();
+        Object!();
+        SymbolIterator!();
+        ComdatIterator!();
+        Export!();
+        U32!();
+        SymbolTable!();
+        Dynamic!();
+        Comdat!();
+        Result!();
+        ElfComdatIterator!();
+        FileFlags!();
+        SectionIndex!();
+        Symbol!();
         ObjectKind!();
+        SectionIterator!();
+        Section!();
+        SegmentIterator!();
     };
 }
 
@@ -46,4 +46,4 @@ macro_rules! impl_284 {
     };
 }
 
-impl_284!()
+impl_284!();

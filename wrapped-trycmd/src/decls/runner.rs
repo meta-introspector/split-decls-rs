@@ -4,4 +4,4 @@ macro_rules! runner {
     };
 }
 
-runner!()
+runner!();

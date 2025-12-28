@@ -12,4 +12,4 @@ macro_rules! check_mod_privacy {
     };
 }
 
-check_mod_privacy!()
+check_mod_privacy!();

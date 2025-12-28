@@ -11,4 +11,4 @@ macro_rules! qc_nfd {
     };
 }
 
-qc_nfd!()
+qc_nfd!();

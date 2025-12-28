@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Array!();
+        Config!();
         Ptr!();
         IterMut!();
-        Config!();
         Shard!();
         Tid!();
+        Array!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_155 {
     };
 }
 
-impl_155!()
+impl_155!();

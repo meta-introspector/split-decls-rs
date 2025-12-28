@@ -4,4 +4,4 @@ macro_rules! R_TILEGX_GNU_VTENTRY {
     };
 }
 
-R_TILEGX_GNU_VTENTRY!()
+R_TILEGX_GNU_VTENTRY!();

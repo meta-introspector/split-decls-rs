@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Result!();
         ClockId!();
+        Result!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_1642 {
     };
 }
 
-impl_1642!()
+impl_1642!();

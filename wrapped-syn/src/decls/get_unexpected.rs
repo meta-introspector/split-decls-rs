@@ -12,4 +12,4 @@ macro_rules! get_unexpected {
     };
 }
 
-get_unexpected!()
+get_unexpected!();

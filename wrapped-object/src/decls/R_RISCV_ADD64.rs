@@ -4,4 +4,4 @@ macro_rules! R_RISCV_ADD64 {
     };
 }
 
-R_RISCV_ADD64!()
+R_RISCV_ADD64!();

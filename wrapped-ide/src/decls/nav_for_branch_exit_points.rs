@@ -11,4 +11,4 @@ macro_rules! nav_for_branch_exit_points {
     };
 }
 
-nav_for_branch_exit_points!()
+nav_for_branch_exit_points!();

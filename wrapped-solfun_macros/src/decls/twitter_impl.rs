@@ -4,4 +4,4 @@ macro_rules! twitter_impl {
     };
 }
 
-twitter_impl!()
+twitter_impl!();

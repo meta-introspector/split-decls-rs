@@ -4,4 +4,4 @@ macro_rules! IdentifierKind {
     };
 }
 
-IdentifierKind!()
+IdentifierKind!();

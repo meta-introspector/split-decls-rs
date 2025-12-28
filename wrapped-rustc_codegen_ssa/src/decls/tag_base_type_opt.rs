@@ -4,4 +4,4 @@ macro_rules! tag_base_type_opt {
     };
 }
 
-tag_base_type_opt!()
+tag_base_type_opt!();

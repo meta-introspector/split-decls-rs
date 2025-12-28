@@ -4,4 +4,4 @@ macro_rules! INACTIVE_SHIFT {
     };
 }
 
-INACTIVE_SHIFT!()
+INACTIVE_SHIFT!();

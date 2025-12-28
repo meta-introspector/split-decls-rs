@@ -4,4 +4,4 @@ macro_rules! R_PPC64_JMP_IREL {
     };
 }
 
-R_PPC64_JMP_IREL!()
+R_PPC64_JMP_IREL!();

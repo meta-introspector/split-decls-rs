@@ -12,4 +12,4 @@ macro_rules! json_internal {
     };
 }
 
-json_internal!()
+json_internal!();

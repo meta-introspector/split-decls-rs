@@ -1,18 +1,18 @@
 macro_rules! deps {
     () => {
-        SymbolMap!();
-        SymbolIndex!();
         SymbolMapEntry!();
+        MachHeader!();
+        SymbolIndex!();
+        Endian!();
         ObjectMapEntry!();
+        ObjectMapFile!();
+        Nlist!();
+        SymbolMap!();
+        ReadRef!();
+        ObjectMap!();
+        Result!();
         SymbolTable!();
         StringTable!();
-        ObjectMap!();
-        Endian!();
-        ObjectMapFile!();
-        Result!();
-        MachHeader!();
-        ReadRef!();
-        Nlist!();
     };
 }
 
@@ -23,4 +23,4 @@ macro_rules! impl_599 {
     };
 }
 
-impl_599!()
+impl_599!();

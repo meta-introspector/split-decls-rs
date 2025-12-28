@@ -4,4 +4,4 @@ macro_rules! codegen_impl {
     };
 }
 
-codegen_impl!()
+codegen_impl!();

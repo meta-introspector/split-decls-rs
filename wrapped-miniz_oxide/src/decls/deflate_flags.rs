@@ -4,4 +4,4 @@ macro_rules! deflate_flags {
     };
 }
 
-deflate_flags!()
+deflate_flags!();

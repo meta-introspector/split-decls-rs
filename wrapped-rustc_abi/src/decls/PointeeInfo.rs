@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Align!();
         Size!();
+        Align!();
         PointerKind!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! PointeeInfo {
     };
 }
 
-PointeeInfo!()
+PointeeInfo!();

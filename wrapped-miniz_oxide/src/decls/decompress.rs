@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        TINFLStatus!();
         DecompressorOxide!();
+        TINFLStatus!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! decompress {
     };
 }
 
-decompress!()
+decompress!();

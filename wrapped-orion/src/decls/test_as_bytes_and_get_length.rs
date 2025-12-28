@@ -4,4 +4,4 @@ macro_rules! test_as_bytes_and_get_length {
     };
 }
 
-test_as_bytes_and_get_length!()
+test_as_bytes_and_get_length!();

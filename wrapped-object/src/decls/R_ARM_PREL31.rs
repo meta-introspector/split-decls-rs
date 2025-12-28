@@ -4,4 +4,4 @@ macro_rules! R_ARM_PREL31 {
     };
 }
 
-R_ARM_PREL31!()
+R_ARM_PREL31!();

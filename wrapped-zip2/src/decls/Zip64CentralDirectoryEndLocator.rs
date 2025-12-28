@@ -4,4 +4,4 @@ macro_rules! Zip64CentralDirectoryEndLocator {
     };
 }
 
-Zip64CentralDirectoryEndLocator!()
+Zip64CentralDirectoryEndLocator!();

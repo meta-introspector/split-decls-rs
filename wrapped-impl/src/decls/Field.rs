@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        MemberUnraw!();
         Attrs!();
+        MemberUnraw!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Field {
     };
 }
 
-Field!()
+Field!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         ToDebug!();
-        IntoData!();
         IntoJson!();
+        IntoData!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! prelude {
     };
 }
 
-prelude!()
+prelude!();

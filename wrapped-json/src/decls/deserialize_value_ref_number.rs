@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Error!();
-        Value!();
         Result!();
+        Value!();
+        Error!();
         Number!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! deserialize_value_ref_number {
     };
 }
 
-deserialize_value_ref_number!()
+deserialize_value_ref_number!();

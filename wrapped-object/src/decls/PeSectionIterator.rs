@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        ImageSectionHeader!();
+        PeFile!();
         ImageNtHeaders!();
         ReadRef!();
-        PeFile!();
-        ImageSectionHeader!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! PeSectionIterator {
     };
 }
 
-PeSectionIterator!()
+PeSectionIterator!();

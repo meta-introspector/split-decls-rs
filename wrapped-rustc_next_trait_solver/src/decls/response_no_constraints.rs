@@ -4,4 +4,4 @@ macro_rules! response_no_constraints {
     };
 }
 
-response_no_constraints!()
+response_no_constraints!();

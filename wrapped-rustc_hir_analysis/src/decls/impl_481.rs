@@ -1,25 +1,25 @@
 macro_rules! deps {
     () => {
-        LowerTypeRelativePathMode!();
-        GenericArgCountResult!();
         HirTyLowerer!();
-        TypeRelativePath!();
-        GenericArgPosition!();
-        GenericPathSegment!();
-        BadReturnTypeNotation!();
         RegionInferReason!();
-        FeedConstTy!();
-        AssocItemIsPrivate!();
-        AmbiguousAssocItem!();
-        InherentAssocCandidate!();
+        AssocItemQSelf!();
         GenericArgCountMismatch!();
         PermitVariants!();
-        AmbiguousLifetimeBound!();
-        PredicateFilter!();
-        ConstBoundForNonConstTrait!();
-        GenericArgsLowerer!();
-        AssocItemQSelf!();
+        FeedConstTy!();
+        LowerTypeRelativePathMode!();
+        GenericArgPosition!();
+        GenericArgCountResult!();
         GenericsArgsErrExtend!();
+        GenericArgsLowerer!();
+        AmbiguousAssocItem!();
+        PredicateFilter!();
+        GenericPathSegment!();
+        AssocItemIsPrivate!();
+        ConstBoundForNonConstTrait!();
+        BadReturnTypeNotation!();
+        AmbiguousLifetimeBound!();
+        TypeRelativePath!();
+        InherentAssocCandidate!();
     };
 }
 
@@ -31,4 +31,4 @@ macro_rules! impl_481 {
     };
 }
 
-impl_481!()
+impl_481!();

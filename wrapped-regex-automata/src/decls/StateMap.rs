@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        State!();
         LazyStateID!();
+        State!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! StateMap {
     };
 }
 
-StateMap!()
+StateMap!();

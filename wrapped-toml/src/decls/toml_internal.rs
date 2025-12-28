@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Value!();
-        Error!();
         Array!();
         Table!();
+        Error!();
+        Value!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! toml_internal {
     };
 }
 
-toml_internal!()
+toml_internal!();

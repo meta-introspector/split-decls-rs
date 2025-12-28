@@ -4,4 +4,4 @@ macro_rules! R_PARISC_COPY {
     };
 }
 
-R_PARISC_COPY!()
+R_PARISC_COPY!();

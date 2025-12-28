@@ -4,4 +4,4 @@ macro_rules! IDLE {
     };
 }
 
-IDLE!()
+IDLE!();

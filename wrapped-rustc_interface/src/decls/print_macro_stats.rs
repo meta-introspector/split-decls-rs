@@ -4,4 +4,4 @@ macro_rules! print_macro_stats {
     };
 }
 
-print_macro_stats!()
+print_macro_stats!();

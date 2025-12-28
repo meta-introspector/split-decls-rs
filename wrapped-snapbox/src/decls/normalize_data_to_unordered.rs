@@ -13,4 +13,4 @@ macro_rules! normalize_data_to_unordered {
     };
 }
 
-normalize_data_to_unordered!()
+normalize_data_to_unordered!();

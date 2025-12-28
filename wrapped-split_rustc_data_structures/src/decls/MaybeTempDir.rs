@@ -4,4 +4,4 @@ macro_rules! MaybeTempDir {
     };
 }
 
-MaybeTempDir!()
+MaybeTempDir!();

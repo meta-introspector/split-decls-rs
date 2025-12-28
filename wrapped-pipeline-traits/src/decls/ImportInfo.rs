@@ -4,4 +4,4 @@ macro_rules! ImportInfo {
     };
 }
 
-ImportInfo!()
+ImportInfo!();

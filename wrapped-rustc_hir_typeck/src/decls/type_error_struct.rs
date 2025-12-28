@@ -4,4 +4,4 @@ macro_rules! type_error_struct {
     };
 }
 
-type_error_struct!()
+type_error_struct!();

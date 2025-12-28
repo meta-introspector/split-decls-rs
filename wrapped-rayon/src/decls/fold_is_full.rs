@@ -4,4 +4,4 @@ macro_rules! fold_is_full {
     };
 }
 
-fold_is_full!()
+fold_is_full!();

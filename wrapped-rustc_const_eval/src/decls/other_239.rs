@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         InterpCx!();
+        PlaceTy!();
         MemoryKind!();
         FnArg!();
-        PlaceTy!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! other_239 {
     };
 }
 
-other_239!()
+other_239!();

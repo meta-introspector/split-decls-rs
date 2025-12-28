@@ -4,4 +4,4 @@ macro_rules! ARGON2_VERSION {
     };
 }
 
-ARGON2_VERSION!()
+ARGON2_VERSION!();

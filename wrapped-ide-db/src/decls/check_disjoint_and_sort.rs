@@ -11,4 +11,4 @@ macro_rules! check_disjoint_and_sort {
     };
 }
 
-check_disjoint_and_sort!()
+check_disjoint_and_sort!();

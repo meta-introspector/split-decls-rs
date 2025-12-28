@@ -4,4 +4,4 @@ macro_rules! ast_enum_from_struct {
     };
 }
 
-ast_enum_from_struct!()
+ast_enum_from_struct!();

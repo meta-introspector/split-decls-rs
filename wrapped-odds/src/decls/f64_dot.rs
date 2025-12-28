@@ -4,4 +4,4 @@ macro_rules! f64_dot {
     };
 }
 
-f64_dot!()
+f64_dot!();

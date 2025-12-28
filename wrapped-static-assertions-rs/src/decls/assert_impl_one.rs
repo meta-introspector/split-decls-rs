@@ -4,4 +4,4 @@ macro_rules! assert_impl_one {
     };
 }
 
-assert_impl_one!()
+assert_impl_one!();

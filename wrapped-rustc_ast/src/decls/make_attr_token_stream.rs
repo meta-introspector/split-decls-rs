@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        DelimSpacing!();
-        FlatToken!();
-        AttrTokenTree!();
-        Token!();
-        Delimiter!();
-        Item!();
         Spacing!();
-        AttrTokenStream!();
+        Token!();
         AttrsTarget!();
+        AttrTokenStream!();
+        AttrTokenTree!();
+        FlatToken!();
+        Item!();
         DelimSpan!();
+        Delimiter!();
+        DelimSpacing!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! make_attr_token_stream {
     };
 }
 
-make_attr_token_stream!()
+make_attr_token_stream!();

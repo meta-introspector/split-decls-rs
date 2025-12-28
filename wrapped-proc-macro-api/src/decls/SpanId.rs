@@ -4,4 +4,4 @@ macro_rules! SpanId {
     };
 }
 
-SpanId!()
+SpanId!();

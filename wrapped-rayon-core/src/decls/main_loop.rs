@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Latch!();
-        AbortIfPanic!();
-        ThreadBuilder!();
         WorkerThread!();
+        Latch!();
+        ThreadBuilder!();
+        AbortIfPanic!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! main_loop {
     };
 }
 
-main_loop!()
+main_loop!();

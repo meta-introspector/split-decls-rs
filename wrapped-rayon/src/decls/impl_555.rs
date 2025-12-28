@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        FoldFolder!();
         Consumer!();
-        Reducer!();
         Folder!();
         FoldConsumer!();
-        FoldFolder!();
+        Reducer!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_555 {
     };
 }
 
-impl_555!()
+impl_555!();

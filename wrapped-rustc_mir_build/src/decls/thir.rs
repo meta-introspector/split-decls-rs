@@ -4,4 +4,4 @@ macro_rules! thir {
     };
 }
 
-thir!()
+thir!();

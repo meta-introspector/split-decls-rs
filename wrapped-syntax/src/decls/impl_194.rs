@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        SyntaxNode!();
         AstNode!();
+        SyntaxNode!();
         Parse!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_194 {
     };
 }
 
-impl_194!()
+impl_194!();

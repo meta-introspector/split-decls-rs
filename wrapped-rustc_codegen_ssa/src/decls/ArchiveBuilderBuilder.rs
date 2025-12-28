@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         ArchiveBuilder!();
+        ImportLibraryItem!();
         ErrorCreatingImportLibrary!();
         ExtractBundledLibsError!();
-        ImportLibraryItem!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! ArchiveBuilderBuilder {
     };
 }
 
-ArchiveBuilderBuilder!()
+ArchiveBuilderBuilder!();

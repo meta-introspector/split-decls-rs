@@ -4,4 +4,4 @@ macro_rules! PropertyValues {
     };
 }
 
-PropertyValues!()
+PropertyValues!();

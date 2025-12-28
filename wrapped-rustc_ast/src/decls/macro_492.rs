@@ -1,19 +1,19 @@
 macro_rules! deps {
     () => {
-        GenericParam!();
-        Variant!();
-        Param!();
-        ExprField!();
-        PatField!();
-        ForeignItem!();
-        Item!();
-        AssocItem!();
-        FieldDef!();
-        Arm!();
-        AssocCtxt!();
-        Expr!();
-        Stmt!();
         WherePredicate!();
+        Expr!();
+        ExprField!();
+        AssocCtxt!();
+        Stmt!();
+        PatField!();
+        AssocItem!();
+        ForeignItem!();
+        GenericParam!();
+        Item!();
+        Variant!();
+        Arm!();
+        Param!();
+        FieldDef!();
     };
 }
 
@@ -24,4 +24,4 @@ macro_rules! macro_492 {
     };
 }
 
-macro_492!()
+macro_492!();

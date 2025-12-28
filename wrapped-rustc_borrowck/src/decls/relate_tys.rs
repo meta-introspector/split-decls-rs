@@ -4,4 +4,4 @@ macro_rules! relate_tys {
     };
 }
 
-relate_tys!()
+relate_tys!();

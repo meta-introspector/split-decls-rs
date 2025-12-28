@@ -2,9 +2,9 @@ macro_rules! deps {
     () => {
         SerializedDepGraph!();
         DepNode!();
-        GraphEncoder!();
         Deps!();
         EdgeFilter!();
+        GraphEncoder!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! CurrentDepGraph {
     };
 }
 
-CurrentDepGraph!()
+CurrentDepGraph!();

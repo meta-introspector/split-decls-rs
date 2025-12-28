@@ -4,4 +4,4 @@ macro_rules! ioctl_param_type {
     };
 }
 
-ioctl_param_type!()
+ioctl_param_type!();

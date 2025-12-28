@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        Permutation!();
-        OutputMode!();
-        Input!();
-        Error!();
-        Mode!();
-        Parser!();
-        ErrorKind!();
-        Err!();
         ParseError!();
+        Mode!();
+        OutputMode!();
+        Err!();
+        ErrorKind!();
+        Error!();
+        Input!();
         PResult!();
+        Permutation!();
+        Parser!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! permutation_trait_impl {
     };
 }
 
-permutation_trait_impl!()
+permutation_trait_impl!();

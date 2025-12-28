@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        TypeRelation!();
-        RelateResult!();
+        Ty!();
         VarianceDiagInfo!();
         ExpectedFound!();
+        RelateResult!();
+        TypeRelation!();
         TypeError!();
         Interner!();
-        Ty!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! structurally_relate_tys {
     };
 }
 
-structurally_relate_tys!()
+structurally_relate_tys!();

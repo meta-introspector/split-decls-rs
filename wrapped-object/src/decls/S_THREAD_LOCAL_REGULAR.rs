@@ -4,4 +4,4 @@ macro_rules! S_THREAD_LOCAL_REGULAR {
     };
 }
 
-S_THREAD_LOCAL_REGULAR!()
+S_THREAD_LOCAL_REGULAR!();

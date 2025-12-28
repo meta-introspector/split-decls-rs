@@ -4,4 +4,4 @@ macro_rules! ConstToPat {
     };
 }
 
-ConstToPat!()
+ConstToPat!();

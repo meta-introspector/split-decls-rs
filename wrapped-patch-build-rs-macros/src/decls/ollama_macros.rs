@@ -4,4 +4,4 @@ macro_rules! ollama_macros {
     };
 }
 
-ollama_macros!()
+ollama_macros!();

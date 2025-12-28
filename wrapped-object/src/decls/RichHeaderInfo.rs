@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Header!();
         MaskedRichHeaderEntry!();
+        Header!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! RichHeaderInfo {
     };
 }
 
-RichHeaderInfo!()
+RichHeaderInfo!();

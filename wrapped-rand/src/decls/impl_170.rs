@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        SampleUniform!();
         SampleBorrow!();
+        SampleUniform!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_170 {
     };
 }
 
-impl_170!()
+impl_170!();

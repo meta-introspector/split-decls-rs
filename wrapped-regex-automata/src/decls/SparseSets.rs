@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        NFA!();
         SparseSet!();
+        NFA!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! SparseSets {
     };
 }
 
-SparseSets!()
+SparseSets!();

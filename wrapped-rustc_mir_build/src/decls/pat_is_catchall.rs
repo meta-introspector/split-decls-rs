@@ -4,4 +4,4 @@ macro_rules! pat_is_catchall {
     };
 }
 
-pat_is_catchall!()
+pat_is_catchall!();

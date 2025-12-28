@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        BuiltinClashingExternSub!();
         ClashingExternDeclarations!();
         BuiltinClashingExtern!();
+        BuiltinClashingExternSub!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_221 {
     };
 }
 
-impl_221!()
+impl_221!();

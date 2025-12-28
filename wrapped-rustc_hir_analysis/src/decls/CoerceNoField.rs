@@ -4,4 +4,4 @@ macro_rules! CoerceNoField {
     };
 }
 
-CoerceNoField!()
+CoerceNoField!();

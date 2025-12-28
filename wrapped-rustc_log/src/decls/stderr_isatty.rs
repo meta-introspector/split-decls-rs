@@ -4,4 +4,4 @@ macro_rules! stderr_isatty {
     };
 }
 
-stderr_isatty!()
+stderr_isatty!();

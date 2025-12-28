@@ -4,4 +4,4 @@ macro_rules! NT_X86_XSTATE {
     };
 }
 
-NT_X86_XSTATE!()
+NT_X86_XSTATE!();

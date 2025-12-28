@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         ImportObjectHeader!();
-        ImportType!();
         ByteString!();
+        ImportType!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! ImportFile {
     };
 }
 
-ImportFile!()
+ImportFile!();

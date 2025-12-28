@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ErrorKind!();
         Position!();
+        ErrorKind!();
         Error!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! identifier {
     };
 }
 
-identifier!()
+identifier!();

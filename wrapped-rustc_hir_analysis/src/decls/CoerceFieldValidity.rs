@@ -4,4 +4,4 @@ macro_rules! CoerceFieldValidity {
     };
 }
 
-CoerceFieldValidity!()
+CoerceFieldValidity!();

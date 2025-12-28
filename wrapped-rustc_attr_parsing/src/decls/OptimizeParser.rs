@@ -4,4 +4,4 @@ macro_rules! OptimizeParser {
     };
 }
 
-OptimizeParser!()
+OptimizeParser!();

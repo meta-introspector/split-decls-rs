@@ -4,4 +4,4 @@ macro_rules! nghttp2_rst_stream {
     };
 }
 
-nghttp2_rst_stream!()
+nghttp2_rst_stream!();

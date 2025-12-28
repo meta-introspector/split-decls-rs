@@ -4,4 +4,4 @@ macro_rules! pwhash {
     };
 }
 
-pwhash!()
+pwhash!();

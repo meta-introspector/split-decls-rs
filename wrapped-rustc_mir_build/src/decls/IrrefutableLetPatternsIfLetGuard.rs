@@ -4,4 +4,4 @@ macro_rules! IrrefutableLetPatternsIfLetGuard {
     };
 }
 
-IrrefutableLetPatternsIfLetGuard!()
+IrrefutableLetPatternsIfLetGuard!();

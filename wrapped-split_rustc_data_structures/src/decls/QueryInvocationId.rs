@@ -4,4 +4,4 @@ macro_rules! QueryInvocationId {
     };
 }
 
-QueryInvocationId!()
+QueryInvocationId!();

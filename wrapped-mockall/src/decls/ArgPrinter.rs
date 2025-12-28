@@ -4,4 +4,4 @@ macro_rules! ArgPrinter {
     };
 }
 
-ArgPrinter!()
+ArgPrinter!();

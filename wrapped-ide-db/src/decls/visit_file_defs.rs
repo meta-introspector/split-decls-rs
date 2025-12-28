@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Definition!();
         RootDatabase!();
+        Definition!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! visit_file_defs {
     };
 }
 
-visit_file_defs!()
+visit_file_defs!();

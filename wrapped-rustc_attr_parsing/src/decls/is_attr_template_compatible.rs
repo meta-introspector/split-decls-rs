@@ -4,4 +4,4 @@ macro_rules! is_attr_template_compatible {
     };
 }
 
-is_attr_template_compatible!()
+is_attr_template_compatible!();

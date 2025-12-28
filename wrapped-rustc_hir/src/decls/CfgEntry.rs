@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        PrintAttribute!();
         RustcVersion!();
+        PrintAttribute!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! CfgEntry {
     };
 }
 
-CfgEntry!()
+CfgEntry!();

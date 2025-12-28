@@ -4,4 +4,4 @@ macro_rules! nonstandard_style {
     };
 }
 
-nonstandard_style!()
+nonstandard_style!();

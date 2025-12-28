@@ -4,4 +4,4 @@ macro_rules! fabsd {
     };
 }
 
-fabsd!()
+fabsd!();

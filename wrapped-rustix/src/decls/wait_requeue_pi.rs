@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Result!();
         Timespec!();
+        Result!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! wait_requeue_pi {
     };
 }
 
-wait_requeue_pi!()
+wait_requeue_pi!();

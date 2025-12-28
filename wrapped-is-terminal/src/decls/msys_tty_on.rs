@@ -4,4 +4,4 @@ macro_rules! msys_tty_on {
     };
 }
 
-msys_tty_on!()
+msys_tty_on!();

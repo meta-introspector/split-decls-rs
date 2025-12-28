@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        UnindexedConsumer!();
-        Iter!();
-        UnindexedRangeLen!();
-        UnindexedProducer!();
-        Folder!();
         IterProducer!();
+        Folder!();
+        UnindexedRangeLen!();
+        Iter!();
+        UnindexedConsumer!();
+        UnindexedProducer!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! unindexed_range_impl {
     };
 }
 
-unindexed_range_impl!()
+unindexed_range_impl!();

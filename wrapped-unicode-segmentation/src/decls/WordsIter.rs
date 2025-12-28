@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        AsciiWordsIter!();
         UnicodeWordsIter!();
+        AsciiWordsIter!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! WordsIter {
     };
 }
 
-WordsIter!()
+WordsIter!();

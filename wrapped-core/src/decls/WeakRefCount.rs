@@ -4,4 +4,4 @@ macro_rules! WeakRefCount {
     };
 }
 
-WeakRefCount!()
+WeakRefCount!();

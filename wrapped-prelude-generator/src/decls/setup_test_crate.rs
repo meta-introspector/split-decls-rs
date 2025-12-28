@@ -6,4 +6,4 @@ edition = \"2021\"
     };
 }
 
-setup_test_crate!()
+setup_test_crate!();

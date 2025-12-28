@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        PanicFuseConsumer!();
-        Fuse!();
         ProducerCallback!();
-        Consumer!();
-        PanicFuse!();
-        IndexedParallelIterator!();
-        Producer!();
         PanicFuseProducer!();
+        PanicFuseConsumer!();
+        IndexedParallelIterator!();
+        Fuse!();
+        Consumer!();
+        Producer!();
+        PanicFuse!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_742 {
     };
 }
 
-impl_742!()
+impl_742!();

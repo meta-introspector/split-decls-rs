@@ -4,4 +4,4 @@ macro_rules! UndirectedAdaptor {
     };
 }
 
-UndirectedAdaptor!()
+UndirectedAdaptor!();

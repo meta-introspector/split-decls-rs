@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        VersionFiles!();
-        Segments!();
-        Sections!();
         Symbols!();
+        VersionFiles!();
+        Sections!();
+        Segments!();
+        Versions!();
+        ByteString!();
+        Endianness!();
         Header!();
         DynamicSymbols!();
-        ByteString!();
-        Versions!();
-        Endianness!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! Builder {
     };
 }
 
-Builder!()
+Builder!();

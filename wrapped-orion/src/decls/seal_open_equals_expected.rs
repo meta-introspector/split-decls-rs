@@ -11,4 +11,4 @@ macro_rules! seal_open_equals_expected {
     };
 }
 
-seal_open_equals_expected!()
+seal_open_equals_expected!();

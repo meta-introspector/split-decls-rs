@@ -4,4 +4,4 @@ macro_rules! InvalidAsmTemplateModifierRegClassSub {
     };
 }
 
-InvalidAsmTemplateModifierRegClassSub!()
+InvalidAsmTemplateModifierRegClassSub!();

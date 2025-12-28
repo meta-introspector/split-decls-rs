@@ -4,4 +4,4 @@ macro_rules! interface_impl {
     };
 }
 
-interface_impl!()
+interface_impl!();

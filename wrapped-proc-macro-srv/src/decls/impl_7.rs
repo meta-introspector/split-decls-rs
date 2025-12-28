@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        ProcMacroSrvSpan!();
-        Expander!();
-        LoadProcMacroDylibError!();
-        ProcMacroKind!();
         ProcMacroLibrary!();
         PanicMessage!();
+        LoadProcMacroDylibError!();
         TopSubtree!();
+        ProcMacroKind!();
+        Expander!();
+        ProcMacroSrvSpan!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_7 {
     };
 }
 
-impl_7!()
+impl_7!();

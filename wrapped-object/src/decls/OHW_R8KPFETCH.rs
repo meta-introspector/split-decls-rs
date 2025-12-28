@@ -4,4 +4,4 @@ macro_rules! OHW_R8KPFETCH {
     };
 }
 
-OHW_R8KPFETCH!()
+OHW_R8KPFETCH!();

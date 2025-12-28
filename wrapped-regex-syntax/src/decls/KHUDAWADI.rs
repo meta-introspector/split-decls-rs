@@ -4,4 +4,4 @@ macro_rules! KHUDAWADI {
     };
 }
 
-KHUDAWADI!()
+KHUDAWADI!();

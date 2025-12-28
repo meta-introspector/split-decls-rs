@@ -4,4 +4,4 @@ macro_rules! try_canonicalize {
     };
 }
 
-try_canonicalize!()
+try_canonicalize!();

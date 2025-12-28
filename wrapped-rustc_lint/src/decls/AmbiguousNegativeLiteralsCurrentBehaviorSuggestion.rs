@@ -4,4 +4,4 @@ macro_rules! AmbiguousNegativeLiteralsCurrentBehaviorSuggestion {
     };
 }
 
-AmbiguousNegativeLiteralsCurrentBehaviorSuggestion!()
+AmbiguousNegativeLiteralsCurrentBehaviorSuggestion!();

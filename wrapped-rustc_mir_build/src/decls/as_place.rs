@@ -4,4 +4,4 @@ macro_rules! as_place {
     };
 }
 
-as_place!()
+as_place!();

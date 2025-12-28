@@ -4,4 +4,4 @@ macro_rules! ENUM_SERVICE_TYPE {
     };
 }
 
-ENUM_SERVICE_TYPE!()
+ENUM_SERVICE_TYPE!();

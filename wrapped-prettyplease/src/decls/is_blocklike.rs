@@ -4,4 +4,4 @@ macro_rules! is_blocklike {
     };
 }
 
-is_blocklike!()
+is_blocklike!();

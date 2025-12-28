@@ -4,4 +4,4 @@ macro_rules! expand_requires_tts {
     };
 }
 
-expand_requires_tts!()
+expand_requires_tts!();

@@ -4,4 +4,4 @@ macro_rules! Checker {
     };
 }
 
-Checker!()
+Checker!();

@@ -4,4 +4,4 @@ macro_rules! EF_MIPS_XGOT {
     };
 }
 
-EF_MIPS_XGOT!()
+EF_MIPS_XGOT!();

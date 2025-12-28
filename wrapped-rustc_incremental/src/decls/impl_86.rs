@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        AssertionAuto!();
-        RepeatedDepNodeLabel!();
-        NotDirty!();
         UnrecognizedDepNodeLabel!();
-        UndefinedCleanDirtyItem!();
+        NotDirty!();
+        NotClean!();
         Labels!();
         Assertion!();
-        UndefinedCleanDirty!();
-        DirtyCleanVisitor!();
-        NotClean!();
         NotLoaded!();
+        DirtyCleanVisitor!();
+        AssertionAuto!();
+        UndefinedCleanDirtyItem!();
+        RepeatedDepNodeLabel!();
+        UndefinedCleanDirty!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_86 {
     };
 }
 
-impl_86!()
+impl_86!();

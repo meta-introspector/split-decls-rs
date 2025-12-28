@@ -4,4 +4,4 @@ macro_rules! LoopMatchInvalidMatch {
     };
 }
 
-LoopMatchInvalidMatch!()
+LoopMatchInvalidMatch!();

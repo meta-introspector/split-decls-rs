@@ -4,4 +4,4 @@ macro_rules! HEX_TABLE {
     };
 }
 
-HEX_TABLE!()
+HEX_TABLE!();

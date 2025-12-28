@@ -4,4 +4,4 @@ macro_rules! crc32_braid {
     };
 }
 
-crc32_braid!()
+crc32_braid!();

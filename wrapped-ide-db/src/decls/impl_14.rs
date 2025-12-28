@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        AssistKind!();
         Result!();
+        AssistKind!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_14 {
     };
 }
 
-impl_14!()
+impl_14!();

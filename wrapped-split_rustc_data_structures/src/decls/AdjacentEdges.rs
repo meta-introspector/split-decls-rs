@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        EdgeIndex!();
         Direction!();
+        EdgeIndex!();
         LinkedGraph!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! AdjacentEdges {
     };
 }
 
-AdjacentEdges!()
+AdjacentEdges!();

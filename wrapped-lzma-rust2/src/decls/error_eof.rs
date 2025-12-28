@@ -11,4 +11,4 @@ macro_rules! error_eof {
     };
 }
 
-error_eof!()
+error_eof!();

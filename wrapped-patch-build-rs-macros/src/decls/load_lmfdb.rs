@@ -4,4 +4,4 @@ macro_rules! load_lmfdb {
     };
 }
 
-load_lmfdb!()
+load_lmfdb!();

@@ -4,4 +4,4 @@ macro_rules! traits_graph {
     };
 }
 
-traits_graph!()
+traits_graph!();

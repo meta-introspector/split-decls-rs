@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DanglingPointerLocalContext!();
         LateContext!();
+        DanglingPointerLocalContext!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! DanglingPointerReturnSearcher {
     };
 }
 
-DanglingPointerReturnSearcher!()
+DanglingPointerReturnSearcher!();

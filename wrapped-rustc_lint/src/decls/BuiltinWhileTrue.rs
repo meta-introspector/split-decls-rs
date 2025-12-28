@@ -4,4 +4,4 @@ macro_rules! BuiltinWhileTrue {
     };
 }
 
-BuiltinWhileTrue!()
+BuiltinWhileTrue!();

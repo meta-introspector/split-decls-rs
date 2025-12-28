@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        WrappingRange!();
         Size!();
         Primitive!();
-        WrappingRange!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Niche {
     };
 }
 
-Niche!()
+Niche!();

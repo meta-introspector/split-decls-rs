@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ConvertError!();
         Alignment!();
+        ConvertError!();
         Validity!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_183 {
     };
 }
 
-impl_183!()
+impl_183!();

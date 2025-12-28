@@ -4,4 +4,4 @@ macro_rules! R_386_PLT32 {
     };
 }
 
-R_386_PLT32!()
+R_386_PLT32!();

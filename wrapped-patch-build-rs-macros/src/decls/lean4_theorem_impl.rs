@@ -53,4 +53,4 @@ lemma lfunction_convergence (φ : RustcRing → MonsterGroup) (R : RustcRing) :
     };
 }
 
-lean4_theorem_impl!()
+lean4_theorem_impl!();

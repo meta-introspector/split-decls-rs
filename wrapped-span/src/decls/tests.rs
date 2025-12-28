@@ -51,4 +51,4 @@ fn foo() {
     };
 }
 
-tests!()
+tests!();

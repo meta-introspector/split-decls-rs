@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        Locations!();
+        TypeChecker!();
         ConstraintConversion!();
         LivenessValues!();
-        TypeChecker!();
-        Locations!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_480 {
     };
 }
 
-impl_480!()
+impl_480!();

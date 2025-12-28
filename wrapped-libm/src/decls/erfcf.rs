@@ -4,4 +4,4 @@ macro_rules! erfcf {
     };
 }
 
-erfcf!()
+erfcf!();

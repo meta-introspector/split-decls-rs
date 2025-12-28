@@ -11,4 +11,4 @@ macro_rules! traverse_candidate {
     };
 }
 
-traverse_candidate!()
+traverse_candidate!();

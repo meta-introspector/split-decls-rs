@@ -11,4 +11,4 @@ macro_rules! parse_error_text {
     };
 }
 
-parse_error_text!()
+parse_error_text!();

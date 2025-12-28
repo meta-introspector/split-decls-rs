@@ -4,4 +4,4 @@ macro_rules! uname_cli {
     };
 }
 
-uname_cli!()
+uname_cli!();

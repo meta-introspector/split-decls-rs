@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Deserializer!();
-        Error!();
         ValueDeserializer!();
+        Error!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! from_str {
     };
 }
 
-from_str!()
+from_str!();

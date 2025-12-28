@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Result!();
         RawValue!();
         Error!();
-        Result!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! to_raw_value {
     };
 }
 
-to_raw_value!()
+to_raw_value!();

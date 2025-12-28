@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        GraphMap!();
         EdgeType!();
+        GraphMap!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_925 {
     };
 }
 
-impl_925!()
+impl_925!();

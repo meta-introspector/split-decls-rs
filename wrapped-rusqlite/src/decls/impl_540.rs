@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Result!();
-        VTabConfig!();
         VTabConnection!();
+        VTabConfig!();
         Connection!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_540 {
     };
 }
 
-impl_540!()
+impl_540!();

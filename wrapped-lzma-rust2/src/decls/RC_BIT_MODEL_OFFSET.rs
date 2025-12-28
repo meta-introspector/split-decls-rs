@@ -4,4 +4,4 @@ macro_rules! RC_BIT_MODEL_OFFSET {
     };
 }
 
-RC_BIT_MODEL_OFFSET!()
+RC_BIT_MODEL_OFFSET!();

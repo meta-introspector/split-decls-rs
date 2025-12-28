@@ -4,4 +4,4 @@ macro_rules! integer128 {
     };
 }
 
-integer128!()
+integer128!();

@@ -11,4 +11,4 @@ macro_rules! try_lookup_include_path {
     };
 }
 
-try_lookup_include_path!()
+try_lookup_include_path!();

@@ -12,4 +12,4 @@ macro_rules! impl_fill {
     };
 }
 
-impl_fill!()
+impl_fill!();

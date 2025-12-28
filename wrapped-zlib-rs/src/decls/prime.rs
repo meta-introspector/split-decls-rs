@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ReturnCode!();
         InflateStream!();
+        ReturnCode!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! prime {
     };
 }
 
-prime!()
+prime!();

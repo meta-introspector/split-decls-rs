@@ -12,4 +12,4 @@ macro_rules! collect_with_consumer {
     };
 }
 
-collect_with_consumer!()
+collect_with_consumer!();

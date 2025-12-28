@@ -11,4 +11,4 @@ macro_rules! encode_array {
     };
 }
 
-encode_array!()
+encode_array!();

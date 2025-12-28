@@ -4,4 +4,4 @@ macro_rules! implicit_drop {
     };
 }
 
-implicit_drop!()
+implicit_drop!();

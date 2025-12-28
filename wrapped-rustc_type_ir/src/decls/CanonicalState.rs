@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Canonical!();
         State!();
+        Canonical!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! CanonicalState {
     };
 }
 
-CanonicalState!()
+CanonicalState!();

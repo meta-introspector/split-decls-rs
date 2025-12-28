@@ -4,4 +4,4 @@ macro_rules! declare_passes {
     };
 }
 
-declare_passes!()
+declare_passes!();

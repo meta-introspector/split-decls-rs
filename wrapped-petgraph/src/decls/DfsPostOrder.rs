@@ -4,4 +4,4 @@ macro_rules! DfsPostOrder {
     };
 }
 
-DfsPostOrder!()
+DfsPostOrder!();

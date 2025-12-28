@@ -4,4 +4,4 @@ macro_rules! ErrorGuaranteed {
     };
 }
 
-ErrorGuaranteed!()
+ErrorGuaranteed!();

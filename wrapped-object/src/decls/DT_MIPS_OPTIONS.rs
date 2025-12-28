@@ -4,4 +4,4 @@ macro_rules! DT_MIPS_OPTIONS {
     };
 }
 
-DT_MIPS_OPTIONS!()
+DT_MIPS_OPTIONS!();

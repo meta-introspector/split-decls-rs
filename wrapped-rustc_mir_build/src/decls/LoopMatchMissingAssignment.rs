@@ -4,4 +4,4 @@ macro_rules! LoopMatchMissingAssignment {
     };
 }
 
-LoopMatchMissingAssignment!()
+LoopMatchMissingAssignment!();

@@ -4,4 +4,4 @@ macro_rules! enforce_empty_impls_for_marker_traits {
     };
 }
 
-enforce_empty_impls_for_marker_traits!()
+enforce_empty_impls_for_marker_traits!();

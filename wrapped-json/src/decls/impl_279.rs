@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        MapRefDeserializer!();
         Map!();
         Value!();
+        MapRefDeserializer!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_279 {
     };
 }
 
-impl_279!()
+impl_279!();

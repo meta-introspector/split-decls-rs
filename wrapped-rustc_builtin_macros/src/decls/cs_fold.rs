@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Substructure!();
         FieldInfo!();
         CsFold!();
+        Substructure!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! cs_fold {
     };
 }
 
-cs_fold!()
+cs_fold!();

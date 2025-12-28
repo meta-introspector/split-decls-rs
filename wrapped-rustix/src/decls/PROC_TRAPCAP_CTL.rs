@@ -4,4 +4,4 @@ macro_rules! PROC_TRAPCAP_CTL {
     };
 }
 
-PROC_TRAPCAP_CTL!()
+PROC_TRAPCAP_CTL!();

@@ -4,4 +4,4 @@ macro_rules! DAMP {
     };
 }
 
-DAMP!()
+DAMP!();

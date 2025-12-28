@@ -1,18 +1,18 @@
 macro_rules! deps {
     () => {
-        InnerConnection!();
-        Name!();
-        Params!();
-        TransactionBehavior!();
-        Result!();
-        Connection!();
-        LoadExtensionGuard!();
-        Row!();
-        FromSql!();
-        StatementCache!();
-        Statement!();
         InterruptHandle!();
+        Params!();
+        Connection!();
+        TransactionBehavior!();
         Error!();
+        LoadExtensionGuard!();
+        Statement!();
+        InnerConnection!();
+        StatementCache!();
+        FromSql!();
+        Row!();
+        Result!();
+        Name!();
     };
 }
 
@@ -23,4 +23,4 @@ macro_rules! impl_704 {
     };
 }
 
-impl_704!()
+impl_704!();

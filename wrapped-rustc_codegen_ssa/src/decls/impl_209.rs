@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         WriteBackendMethods!();
-        CodegenContext!();
         TargetMachineFactoryConfig!();
+        CodegenContext!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_209 {
     };
 }
 
-impl_209!()
+impl_209!();

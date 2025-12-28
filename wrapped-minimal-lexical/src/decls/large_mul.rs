@@ -12,4 +12,4 @@ macro_rules! large_mul {
     };
 }
 
-large_mul!()
+large_mul!();

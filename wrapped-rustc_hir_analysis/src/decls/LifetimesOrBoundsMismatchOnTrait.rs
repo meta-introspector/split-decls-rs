@@ -4,4 +4,4 @@ macro_rules! LifetimesOrBoundsMismatchOnTrait {
     };
 }
 
-LifetimesOrBoundsMismatchOnTrait!()
+LifetimesOrBoundsMismatchOnTrait!();

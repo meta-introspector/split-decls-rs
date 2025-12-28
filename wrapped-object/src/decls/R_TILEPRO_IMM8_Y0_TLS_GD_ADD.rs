@@ -4,4 +4,4 @@ macro_rules! R_TILEPRO_IMM8_Y0_TLS_GD_ADD {
     };
 }
 
-R_TILEPRO_IMM8_Y0_TLS_GD_ADD!()
+R_TILEPRO_IMM8_Y0_TLS_GD_ADD!();

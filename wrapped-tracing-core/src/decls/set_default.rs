@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         DefaultGuard!();
-        State!();
         Dispatch!();
+        State!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! set_default {
     };
 }
 
-set_default!()
+set_default!();

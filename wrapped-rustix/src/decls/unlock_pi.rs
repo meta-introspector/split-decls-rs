@@ -11,4 +11,4 @@ macro_rules! unlock_pi {
     };
 }
 
-unlock_pi!()
+unlock_pi!();

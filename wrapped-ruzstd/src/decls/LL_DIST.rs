@@ -4,4 +4,4 @@ macro_rules! LL_DIST {
     };
 }
 
-LL_DIST!()
+LL_DIST!();

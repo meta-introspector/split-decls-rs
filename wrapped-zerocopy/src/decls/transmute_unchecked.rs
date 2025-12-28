@@ -4,4 +4,4 @@ macro_rules! transmute_unchecked {
     };
 }
 
-transmute_unchecked!()
+transmute_unchecked!();

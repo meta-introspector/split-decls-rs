@@ -4,4 +4,4 @@ macro_rules! DOUBLE_BIAS {
     };
 }
 
-DOUBLE_BIAS!()
+DOUBLE_BIAS!();

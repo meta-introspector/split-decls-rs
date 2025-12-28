@@ -11,4 +11,4 @@ macro_rules! path_segment_to_string {
     };
 }
 
-path_segment_to_string!()
+path_segment_to_string!();

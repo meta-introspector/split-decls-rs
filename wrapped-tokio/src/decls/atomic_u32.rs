@@ -4,4 +4,4 @@ macro_rules! atomic_u32 {
     };
 }
 
-atomic_u32!()
+atomic_u32!();

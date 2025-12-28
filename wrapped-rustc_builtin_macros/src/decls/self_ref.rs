@@ -11,4 +11,4 @@ macro_rules! self_ref {
     };
 }
 
-self_ref!()
+self_ref!();

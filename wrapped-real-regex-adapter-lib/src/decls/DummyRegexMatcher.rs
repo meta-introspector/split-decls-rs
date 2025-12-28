@@ -4,4 +4,4 @@ macro_rules! DummyRegexMatcher {
     };
 }
 
-DummyRegexMatcher!()
+DummyRegexMatcher!();

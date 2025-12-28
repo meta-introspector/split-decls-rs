@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        IntoIter!();
         IterMut!();
+        IntoIter!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! PrivateIterMut {
     };
 }
 
-PrivateIterMut!()
+PrivateIterMut!();

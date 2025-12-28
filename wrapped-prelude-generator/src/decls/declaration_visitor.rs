@@ -4,4 +4,4 @@ macro_rules! declaration_visitor {
     };
 }
 
-declaration_visitor!()
+declaration_visitor!();

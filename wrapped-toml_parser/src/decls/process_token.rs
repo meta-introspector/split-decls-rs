@@ -13,4 +13,4 @@ macro_rules! process_token {
     };
 }
 
-process_token!()
+process_token!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        LengthCoder!();
-        Write!();
         Result!();
-        LengthEncoder!();
+        Write!();
         RangeEncoder!();
+        LengthEncoder!();
+        LengthCoder!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_192 {
     };
 }
 
-impl_192!()
+impl_192!();

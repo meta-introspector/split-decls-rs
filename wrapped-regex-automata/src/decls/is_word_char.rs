@@ -11,4 +11,4 @@ macro_rules! is_word_char {
     };
 }
 
-is_word_char!()
+is_word_char!();

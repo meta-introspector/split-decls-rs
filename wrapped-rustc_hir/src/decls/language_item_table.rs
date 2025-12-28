@@ -13,4 +13,4 @@ macro_rules! language_item_table {
     };
 }
 
-language_item_table!()
+language_item_table!();

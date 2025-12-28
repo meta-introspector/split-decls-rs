@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        CoffSegmentIterator!();
         AnonObjectHeaderBigobj!();
+        CoffSegmentIterator!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! CoffBigSegmentIterator {
     };
 }
 
-CoffBigSegmentIterator!()
+CoffBigSegmentIterator!();

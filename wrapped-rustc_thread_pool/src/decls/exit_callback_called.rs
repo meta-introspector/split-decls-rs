@@ -11,4 +11,4 @@ macro_rules! exit_callback_called {
     };
 }
 
-exit_callback_called!()
+exit_callback_called!();

@@ -4,4 +4,4 @@ macro_rules! CONCATENATED {
     };
 }
 
-CONCATENATED!()
+CONCATENATED!();

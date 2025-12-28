@@ -4,4 +4,4 @@ macro_rules! HasChanged {
     };
 }
 
-HasChanged!()
+HasChanged!();

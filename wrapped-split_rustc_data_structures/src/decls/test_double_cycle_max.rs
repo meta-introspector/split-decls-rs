@@ -13,4 +13,4 @@ macro_rules! test_double_cycle_max {
     };
 }
 
-test_double_cycle_max!()
+test_double_cycle_max!();

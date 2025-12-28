@@ -4,4 +4,4 @@ macro_rules! R_ALPHA_DTPMOD64 {
     };
 }
 
-R_ALPHA_DTPMOD64!()
+R_ALPHA_DTPMOD64!();

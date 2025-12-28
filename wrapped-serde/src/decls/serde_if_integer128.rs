@@ -10,4 +10,4 @@ integers are always supported.
     };
 }
 
-serde_if_integer128!()
+serde_if_integer128!();

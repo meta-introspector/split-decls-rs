@@ -4,4 +4,4 @@ macro_rules! plumbing {
     };
 }
 
-plumbing!()
+plumbing!();

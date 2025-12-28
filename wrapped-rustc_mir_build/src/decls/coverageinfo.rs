@@ -4,4 +4,4 @@ macro_rules! coverageinfo {
     };
 }
 
-coverageinfo!()
+coverageinfo!();

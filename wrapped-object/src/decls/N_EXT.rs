@@ -4,4 +4,4 @@ macro_rules! N_EXT {
     };
 }
 
-N_EXT!()
+N_EXT!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Snippet!();
         CompletionContext!();
         SnippetScope!();
+        Snippet!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_20 {
     };
 }
 
-impl_20!()
+impl_20!();

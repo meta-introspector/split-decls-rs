@@ -4,4 +4,4 @@ macro_rules! enum_impl {
     };
 }
 
-enum_impl!()
+enum_impl!();

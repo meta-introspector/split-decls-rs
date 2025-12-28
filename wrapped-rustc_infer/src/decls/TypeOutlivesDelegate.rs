@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        SubregionOrigin!();
-        GenericKind!();
         VerifyBound!();
+        GenericKind!();
+        SubregionOrigin!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! TypeOutlivesDelegate {
     };
 }
 
-TypeOutlivesDelegate!()
+TypeOutlivesDelegate!();

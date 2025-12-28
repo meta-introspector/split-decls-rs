@@ -11,4 +11,4 @@ macro_rules! migration_suggestion_for_2229 {
     };
 }
 
-migration_suggestion_for_2229!()
+migration_suggestion_for_2229!();

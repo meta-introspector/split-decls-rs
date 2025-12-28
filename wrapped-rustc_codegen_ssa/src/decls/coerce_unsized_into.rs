@@ -13,4 +13,4 @@ macro_rules! coerce_unsized_into {
     };
 }
 
-coerce_unsized_into!()
+coerce_unsized_into!();

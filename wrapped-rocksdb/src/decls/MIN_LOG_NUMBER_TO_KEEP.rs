@@ -11,4 +11,4 @@ macro_rules! MIN_LOG_NUMBER_TO_KEEP {
     };
 }
 
-MIN_LOG_NUMBER_TO_KEEP!()
+MIN_LOG_NUMBER_TO_KEEP!();

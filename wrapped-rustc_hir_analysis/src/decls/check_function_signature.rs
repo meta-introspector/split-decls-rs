@@ -4,4 +4,4 @@ macro_rules! check_function_signature {
     };
 }
 
-check_function_signature!()
+check_function_signature!();

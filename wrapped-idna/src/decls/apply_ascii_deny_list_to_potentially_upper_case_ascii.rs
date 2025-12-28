@@ -4,4 +4,4 @@ macro_rules! apply_ascii_deny_list_to_potentially_upper_case_ascii {
     };
 }
 
-apply_ascii_deny_list_to_potentially_upper_case_ascii!()
+apply_ascii_deny_list_to_potentially_upper_case_ascii!();

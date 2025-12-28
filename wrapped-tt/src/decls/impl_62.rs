@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        Leaf!();
-        Spacing!();
-        Punct!();
-        TopSubtree!();
-        DelimiterKind!();
-        TokenTree!();
-        Ident!();
         Subtree!();
+        DelimiterKind!();
+        Ident!();
+        Punct!();
+        Leaf!();
+        TopSubtree!();
         Literal!();
+        TokenTree!();
+        Spacing!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_62 {
     };
 }
 
-impl_62!()
+impl_62!();

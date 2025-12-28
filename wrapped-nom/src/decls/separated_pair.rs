@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        ParseError!();
-        Needed!();
         Error!();
+        Needed!();
+        ParseError!();
         Parser!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! separated_pair {
     };
 }
 
-separated_pair!()
+separated_pair!();

@@ -4,4 +4,4 @@ macro_rules! ALGORITHM_OID {
     };
 }
 
-ALGORITHM_OID!()
+ALGORITHM_OID!();

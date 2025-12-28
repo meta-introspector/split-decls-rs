@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         TraitPredicate!();
-        UpcastFrom!();
-        Binder!();
+        Interner!();
         TraitRef!();
         PredicatePolarity!();
-        Interner!();
+        Binder!();
+        UpcastFrom!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_352 {
     };
 }
 
-impl_352!()
+impl_352!();

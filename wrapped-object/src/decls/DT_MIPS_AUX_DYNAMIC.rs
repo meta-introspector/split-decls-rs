@@ -4,4 +4,4 @@ macro_rules! DT_MIPS_AUX_DYNAMIC {
     };
 }
 
-DT_MIPS_AUX_DYNAMIC!()
+DT_MIPS_AUX_DYNAMIC!();

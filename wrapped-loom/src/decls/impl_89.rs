@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Object!();
         Ref!();
         Store!();
+        Object!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_89 {
     };
 }
 
-impl_89!()
+impl_89!();

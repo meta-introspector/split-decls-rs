@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Int!();
         Float!();
+        Int!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! IntTy {
     };
 }
 
-IntTy!()
+IntTy!();

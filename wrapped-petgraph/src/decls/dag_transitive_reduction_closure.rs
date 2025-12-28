@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        List!();
-        UnweightedList!();
         IndexType!();
+        List!();
         Time!();
+        UnweightedList!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! dag_transitive_reduction_closure {
     };
 }
 
-dag_transitive_reduction_closure!()
+dag_transitive_reduction_closure!();

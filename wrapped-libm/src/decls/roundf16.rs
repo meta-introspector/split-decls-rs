@@ -11,4 +11,4 @@ macro_rules! roundf16 {
     };
 }
 
-roundf16!()
+roundf16!();

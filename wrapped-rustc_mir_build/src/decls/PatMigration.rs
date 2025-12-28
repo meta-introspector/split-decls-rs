@@ -4,4 +4,4 @@ macro_rules! PatMigration {
     };
 }
 
-PatMigration!()
+PatMigration!();

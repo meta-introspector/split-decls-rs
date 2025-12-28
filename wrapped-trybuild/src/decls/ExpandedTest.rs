@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Error!();
         Name!();
         Test!();
-        Error!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! ExpandedTest {
     };
 }
 
-ExpandedTest!()
+ExpandedTest!();

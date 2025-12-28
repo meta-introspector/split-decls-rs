@@ -13,4 +13,4 @@ macro_rules! apply_suggestions {
     };
 }
 
-apply_suggestions!()
+apply_suggestions!();

@@ -4,4 +4,4 @@ macro_rules! SYSCALL_ENTER {
     };
 }
 
-SYSCALL_ENTER!()
+SYSCALL_ENTER!();

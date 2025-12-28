@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        LintStore!();
         LintLevelsBuilder!();
         EarlyContext!();
+        LintStore!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_126 {
     };
 }
 
-impl_126!()
+impl_126!();

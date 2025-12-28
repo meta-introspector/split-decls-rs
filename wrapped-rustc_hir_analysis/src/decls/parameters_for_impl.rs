@@ -11,4 +11,4 @@ macro_rules! parameters_for_impl {
     };
 }
 
-parameters_for_impl!()
+parameters_for_impl!();

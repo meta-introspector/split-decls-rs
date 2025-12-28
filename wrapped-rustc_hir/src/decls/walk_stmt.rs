@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Visitor!();
+        Item!();
         Expr!();
         Stmt!();
-        Item!();
         StmtKind!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! walk_stmt {
     };
 }
 
-walk_stmt!()
+walk_stmt!();

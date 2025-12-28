@@ -11,4 +11,4 @@ macro_rules! escaping_happens_at_the_end {
     };
 }
 
-escaping_happens_at_the_end!()
+escaping_happens_at_the_end!();

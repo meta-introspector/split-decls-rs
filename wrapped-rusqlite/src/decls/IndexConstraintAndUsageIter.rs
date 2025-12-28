@@ -4,4 +4,4 @@ macro_rules! IndexConstraintAndUsageIter {
     };
 }
 
-IndexConstraintAndUsageIter!()
+IndexConstraintAndUsageIter!();

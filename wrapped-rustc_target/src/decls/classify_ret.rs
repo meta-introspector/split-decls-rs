@@ -11,4 +11,4 @@ macro_rules! classify_ret {
     };
 }
 
-classify_ret!()
+classify_ret!();

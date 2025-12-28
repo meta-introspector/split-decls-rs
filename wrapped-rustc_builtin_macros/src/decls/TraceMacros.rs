@@ -4,4 +4,4 @@ macro_rules! TraceMacros {
     };
 }
 
-TraceMacros!()
+TraceMacros!();

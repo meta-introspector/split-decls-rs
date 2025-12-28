@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DebugValue!();
         Value!();
+        DebugValue!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! debug {
     };
 }
 
-debug!()
+debug!();

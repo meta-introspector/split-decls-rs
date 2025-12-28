@@ -4,4 +4,4 @@ macro_rules! get_constant_value_string {
     };
 }
 
-get_constant_value_string!()
+get_constant_value_string!();

@@ -4,4 +4,4 @@ macro_rules! get_commit_date {
     };
 }
 
-get_commit_date!()
+get_commit_date!();

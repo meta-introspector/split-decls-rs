@@ -4,4 +4,4 @@ macro_rules! filter_test_proc_macros {
     };
 }
 
-filter_test_proc_macros!()
+filter_test_proc_macros!();

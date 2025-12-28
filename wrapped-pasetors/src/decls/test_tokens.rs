@@ -1,17 +1,17 @@
 macro_rules! deps {
     () => {
-        PublicToken!();
-        AsymmetricSecretKey!();
-        Error!();
-        UntrustedToken!();
-        Generate!();
-        Local!();
-        Public!();
         V4!();
         SymmetricKey!();
-        AsymmetricPublicKey!();
-        AsymmetricKeyPair!();
+        PublicToken!();
+        Generate!();
+        UntrustedToken!();
+        Public!();
         LocalToken!();
+        Local!();
+        AsymmetricSecretKey!();
+        AsymmetricPublicKey!();
+        Error!();
+        AsymmetricKeyPair!();
     };
 }
 
@@ -22,4 +22,4 @@ macro_rules! test_tokens {
     };
 }
 
-test_tokens!()
+test_tokens!();

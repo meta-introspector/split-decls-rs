@@ -4,4 +4,4 @@ macro_rules! is_identifier_continue {
     };
 }
 
-is_identifier_continue!()
+is_identifier_continue!();

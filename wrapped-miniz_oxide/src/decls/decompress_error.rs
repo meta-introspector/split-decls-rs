@@ -13,4 +13,4 @@ macro_rules! decompress_error {
     };
 }
 
-decompress_error!()
+decompress_error!();

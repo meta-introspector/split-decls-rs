@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         VirtualIndex!();
-        BuilderMethods!();
         IntPredicate!();
+        BuilderMethods!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! size_and_align_of_dst {
     };
 }
 
-size_and_align_of_dst!()
+size_and_align_of_dst!();

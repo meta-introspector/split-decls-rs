@@ -4,4 +4,4 @@ macro_rules! ReturnAction {
     };
 }
 
-ReturnAction!()
+ReturnAction!();

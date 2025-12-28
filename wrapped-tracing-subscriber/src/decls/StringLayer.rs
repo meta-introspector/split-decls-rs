@@ -4,4 +4,4 @@ macro_rules! StringLayer {
     };
 }
 
-StringLayer!()
+StringLayer!();

@@ -4,4 +4,4 @@ macro_rules! SnippetScope {
     };
 }
 
-SnippetScope!()
+SnippetScope!();

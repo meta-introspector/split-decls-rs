@@ -11,4 +11,4 @@ macro_rules! path_for_pass_by_value {
     };
 }
 
-path_for_pass_by_value!()
+path_for_pass_by_value!();

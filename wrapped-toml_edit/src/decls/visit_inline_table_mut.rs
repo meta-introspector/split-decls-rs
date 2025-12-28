@@ -12,4 +12,4 @@ macro_rules! visit_inline_table_mut {
     };
 }
 
-visit_inline_table_mut!()
+visit_inline_table_mut!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         LateContext!();
-        AsyncClosureSugg!();
         ClosureReturningAsyncBlock!();
+        AsyncClosureSugg!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_2 {
     };
 }
 
-impl_2!()
+impl_2!();

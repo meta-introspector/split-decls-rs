@@ -4,4 +4,4 @@ macro_rules! ComparisonOp {
     };
 }
 
-ComparisonOp!()
+ComparisonOp!();

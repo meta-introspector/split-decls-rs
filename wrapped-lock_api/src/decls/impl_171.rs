@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        RawRwLockUpgrade!();
         RwLockUpgradableReadGuard!();
+        RawRwLockUpgrade!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_171 {
     };
 }
 
-impl_171!()
+impl_171!();

@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        ComdatKind!();
-        SymbolIndex!();
-        ReadRef!();
-        ObjectComdat!();
-        PeComdatSectionIterator!();
         PeComdat!();
+        ComdatKind!();
         ImageNtHeaders!();
+        PeComdatSectionIterator!();
+        ReadRef!();
+        SymbolIndex!();
         SectionIterator!();
         Result!();
+        ObjectComdat!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_642 {
     };
 }
 
-impl_642!()
+impl_642!();

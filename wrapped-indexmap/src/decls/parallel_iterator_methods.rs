@@ -4,4 +4,4 @@ macro_rules! parallel_iterator_methods {
     };
 }
 
-parallel_iterator_methods!()
+parallel_iterator_methods!();

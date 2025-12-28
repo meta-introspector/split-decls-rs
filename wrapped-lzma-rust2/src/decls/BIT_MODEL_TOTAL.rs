@@ -4,4 +4,4 @@ macro_rules! BIT_MODEL_TOTAL {
     };
 }
 
-BIT_MODEL_TOTAL!()
+BIT_MODEL_TOTAL!();

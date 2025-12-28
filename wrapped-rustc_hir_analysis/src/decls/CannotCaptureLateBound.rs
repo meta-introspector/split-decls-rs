@@ -4,4 +4,4 @@ macro_rules! CannotCaptureLateBound {
     };
 }
 
-CannotCaptureLateBound!()
+CannotCaptureLateBound!();

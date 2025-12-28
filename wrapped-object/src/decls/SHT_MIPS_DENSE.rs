@@ -4,4 +4,4 @@ macro_rules! SHT_MIPS_DENSE {
     };
 }
 
-SHT_MIPS_DENSE!()
+SHT_MIPS_DENSE!();

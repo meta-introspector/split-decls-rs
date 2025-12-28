@@ -11,4 +11,4 @@ macro_rules! non_ascii {
     };
 }
 
-non_ascii!()
+non_ascii!();

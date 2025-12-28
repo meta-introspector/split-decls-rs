@@ -13,4 +13,4 @@ macro_rules! find_negative_cycle {
     };
 }
 
-find_negative_cycle!()
+find_negative_cycle!();

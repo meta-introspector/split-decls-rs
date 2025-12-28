@@ -12,4 +12,4 @@ macro_rules! configure_virtual_memory_map {
     };
 }
 
-configure_virtual_memory_map!()
+configure_virtual_memory_map!();

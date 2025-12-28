@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        BitWriter!();
-        Sequence!();
-        FSETable!();
         State!();
+        BitWriter!();
+        FSETable!();
+        Sequence!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! encode_sequences {
     };
 }
 
-encode_sequences!()
+encode_sequences!();

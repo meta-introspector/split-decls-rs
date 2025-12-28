@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         StateID!();
-        Utf8Node!();
         Transition!();
+        Utf8Node!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_479 {
     };
 }
 
-impl_479!()
+impl_479!();

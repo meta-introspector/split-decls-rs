@@ -4,4 +4,4 @@ macro_rules! autorefs {
     };
 }
 
-autorefs!()
+autorefs!();

@@ -4,4 +4,4 @@ macro_rules! check_unop {
     };
 }
 
-check_unop!()
+check_unop!();

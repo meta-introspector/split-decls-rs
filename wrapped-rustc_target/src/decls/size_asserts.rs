@@ -12,4 +12,4 @@ macro_rules! size_asserts {
     };
 }
 
-size_asserts!()
+size_asserts!();

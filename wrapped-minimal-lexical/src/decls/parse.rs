@@ -4,4 +4,4 @@ macro_rules! parse {
     };
 }
 
-parse!()
+parse!();

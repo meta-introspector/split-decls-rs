@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Result!();
         SocketAddrArg!();
+        Result!();
         SendAncillaryBuffer!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! sendmsg_addr {
     };
 }
 
-sendmsg_addr!()
+sendmsg_addr!();

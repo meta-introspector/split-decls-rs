@@ -4,4 +4,4 @@ macro_rules! composition_table {
     };
 }
 
-composition_table!()
+composition_table!();

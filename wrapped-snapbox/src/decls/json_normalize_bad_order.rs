@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        NormalizeToExpected!();
         DataInner!();
         Data!();
-        NormalizeToExpected!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! json_normalize_bad_order {
     };
 }
 
-json_normalize_bad_order!()
+json_normalize_bad_order!();

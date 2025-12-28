@@ -4,4 +4,4 @@ macro_rules! IceExcludeCargoDefaults {
     };
 }
 
-IceExcludeCargoDefaults!()
+IceExcludeCargoDefaults!();

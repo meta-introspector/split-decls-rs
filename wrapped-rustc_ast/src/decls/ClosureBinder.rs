@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Closure!();
-        GenericParam!();
         Walkable!();
+        GenericParam!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! ClosureBinder {
     };
 }
 
-ClosureBinder!()
+ClosureBinder!();

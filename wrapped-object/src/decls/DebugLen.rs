@@ -4,4 +4,4 @@ macro_rules! DebugLen {
     };
 }
 
-DebugLen!()
+DebugLen!();

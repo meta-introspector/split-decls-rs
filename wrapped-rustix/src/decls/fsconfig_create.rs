@@ -11,4 +11,4 @@ macro_rules! fsconfig_create {
     };
 }
 
-fsconfig_create!()
+fsconfig_create!();

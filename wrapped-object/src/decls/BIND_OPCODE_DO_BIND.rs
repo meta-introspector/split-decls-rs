@@ -4,4 +4,4 @@ macro_rules! BIND_OPCODE_DO_BIND {
     };
 }
 
-BIND_OPCODE_DO_BIND!()
+BIND_OPCODE_DO_BIND!();

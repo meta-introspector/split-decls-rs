@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         MatchKind!();
-        Match!();
         PrefilterI!();
+        Match!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Prefilter {
     };
 }
 
-Prefilter!()
+Prefilter!();

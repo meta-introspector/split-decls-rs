@@ -4,4 +4,4 @@ macro_rules! RevProducer {
     };
 }
 
-RevProducer!()
+RevProducer!();

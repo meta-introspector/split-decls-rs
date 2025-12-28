@@ -4,4 +4,4 @@ macro_rules! on_eq_typed {
     };
 }
 
-on_eq_typed!()
+on_eq_typed!();

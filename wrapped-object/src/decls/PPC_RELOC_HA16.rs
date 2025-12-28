@@ -4,4 +4,4 @@ macro_rules! PPC_RELOC_HA16 {
     };
 }
 
-PPC_RELOC_HA16!()
+PPC_RELOC_HA16!();

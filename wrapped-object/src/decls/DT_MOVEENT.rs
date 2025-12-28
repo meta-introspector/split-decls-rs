@@ -4,4 +4,4 @@ macro_rules! DT_MOVEENT {
     };
 }
 
-DT_MOVEENT!()
+DT_MOVEENT!();

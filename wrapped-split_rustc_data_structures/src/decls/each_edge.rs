@@ -4,4 +4,4 @@ macro_rules! each_edge {
     };
 }
 
-each_edge!()
+each_edge!();

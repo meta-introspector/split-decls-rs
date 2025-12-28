@@ -4,4 +4,4 @@ macro_rules! write_varu32 {
     };
 }
 
-write_varu32!()
+write_varu32!();

@@ -4,4 +4,4 @@ macro_rules! coroutine_witnesses {
     };
 }
 
-coroutine_witnesses!()
+coroutine_witnesses!();

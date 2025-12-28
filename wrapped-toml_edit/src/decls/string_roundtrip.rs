@@ -11,4 +11,4 @@ macro_rules! string_roundtrip {
     };
 }
 
-string_roundtrip!()
+string_roundtrip!();

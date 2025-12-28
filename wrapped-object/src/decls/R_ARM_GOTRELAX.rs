@@ -4,4 +4,4 @@ macro_rules! R_ARM_GOTRELAX {
     };
 }
 
-R_ARM_GOTRELAX!()
+R_ARM_GOTRELAX!();

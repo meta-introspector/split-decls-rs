@@ -12,4 +12,4 @@ macro_rules! impl_741 {
     };
 }
 
-impl_741!()
+impl_741!();

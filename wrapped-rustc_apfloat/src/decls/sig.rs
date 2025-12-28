@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Loss!();
-        IeeeFloat!();
         ExpInt!();
+        IeeeFloat!();
+        Loss!();
         Limb!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! sig {
     };
 }
 
-sig!()
+sig!();

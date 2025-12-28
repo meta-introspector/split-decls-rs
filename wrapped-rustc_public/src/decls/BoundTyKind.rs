@@ -4,4 +4,4 @@ macro_rules! BoundTyKind {
     };
 }
 
-BoundTyKind!()
+BoundTyKind!();

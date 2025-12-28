@@ -4,4 +4,4 @@ macro_rules! R_MN10300_RELATIVE {
     };
 }
 
-R_MN10300_RELATIVE!()
+R_MN10300_RELATIVE!();

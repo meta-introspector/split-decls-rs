@@ -11,4 +11,4 @@ macro_rules! fcntl_fullfsync {
     };
 }
 
-fcntl_fullfsync!()
+fcntl_fullfsync!();

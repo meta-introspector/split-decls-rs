@@ -11,4 +11,4 @@ macro_rules! lock {
     };
 }
 
-lock!()
+lock!();

@@ -4,4 +4,4 @@ macro_rules! PPC_RELOC_VANILLA {
     };
 }
 
-PPC_RELOC_VANILLA!()
+PPC_RELOC_VANILLA!();

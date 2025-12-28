@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ByteSet!();
         BitSet!();
+        ByteSet!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_601 {
     };
 }
 
-impl_601!()
+impl_601!();

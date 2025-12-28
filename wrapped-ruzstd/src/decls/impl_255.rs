@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        SuffixStore!();
         Sequence!();
+        SuffixStore!();
         WindowEntry!();
         MatchGenerator!();
     };
@@ -14,4 +14,4 @@ macro_rules! impl_255 {
     };
 }
 
-impl_255!()
+impl_255!();

@@ -4,4 +4,4 @@ macro_rules! DecomposingNormalizer {
     };
 }
 
-DecomposingNormalizer!()
+DecomposingNormalizer!();

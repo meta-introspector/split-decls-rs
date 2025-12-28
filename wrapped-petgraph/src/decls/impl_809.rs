@@ -1,30 +1,30 @@
 macro_rules! deps {
     () => {
-        StableGraphNode!();
-        Pair!();
-        Frozen!();
-        IndexType!();
-        Externals!();
-        EdgeType!();
-        Create!();
-        EdgeIndices!();
-        Node!();
-        GraphError!();
-        Edge!();
-        NodeIndex!();
-        IntoWeightedEdge!();
-        Directed!();
-        Graph!();
-        StableGraph!();
         Direction!();
-        Neighbors!();
-        Edges!();
-        EdgeIndex!();
-        StableGraphEdge!();
-        GraphIndex!();
-        EdgesConnecting!();
+        IntoWeightedEdge!();
+        Pair!();
         NodeIndices!();
         Undirected!();
+        Neighbors!();
+        NodeIndex!();
+        StableGraphEdge!();
+        StableGraph!();
+        Graph!();
+        Edges!();
+        EdgeType!();
+        Edge!();
+        Node!();
+        IndexType!();
+        EdgeIndex!();
+        GraphError!();
+        EdgesConnecting!();
+        EdgeIndices!();
+        Frozen!();
+        Create!();
+        GraphIndex!();
+        StableGraphNode!();
+        Directed!();
+        Externals!();
     };
 }
 
@@ -35,4 +35,4 @@ macro_rules! impl_809 {
     };
 }
 
-impl_809!()
+impl_809!();

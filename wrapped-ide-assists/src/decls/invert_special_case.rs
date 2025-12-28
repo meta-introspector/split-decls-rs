@@ -4,4 +4,4 @@ macro_rules! invert_special_case {
     };
 }
 
-invert_special_case!()
+invert_special_case!();

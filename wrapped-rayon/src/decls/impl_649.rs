@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Producer!();
-        IntersperseProducer!();
-        Folder!();
         IntersperseIter!();
+        IntersperseProducer!();
+        Producer!();
         IntoIter!();
         IntersperseFolder!();
+        Folder!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_649 {
     };
 }
 
-impl_649!()
+impl_649!();

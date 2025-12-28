@@ -11,4 +11,4 @@ macro_rules! with_c_str_slow_path {
     };
 }
 
-with_c_str_slow_path!()
+with_c_str_slow_path!();

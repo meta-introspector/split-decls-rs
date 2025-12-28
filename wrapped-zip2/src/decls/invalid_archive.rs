@@ -11,4 +11,4 @@ macro_rules! invalid_archive {
     };
 }
 
-invalid_archive!()
+invalid_archive!();

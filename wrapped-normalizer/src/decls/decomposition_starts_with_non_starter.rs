@@ -4,4 +4,4 @@ macro_rules! decomposition_starts_with_non_starter {
     };
 }
 
-decomposition_starts_with_non_starter!()
+decomposition_starts_with_non_starter!();

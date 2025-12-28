@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        TokenStreamExt!();
         TokensOrDefault!();
+        TokenStreamExt!();
         FilterAttrs!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! printing {
     };
 }
 
-printing!()
+printing!();

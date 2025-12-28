@@ -4,4 +4,4 @@ macro_rules! RealSerdeAdapter {
     };
 }
 
-RealSerdeAdapter!()
+RealSerdeAdapter!();

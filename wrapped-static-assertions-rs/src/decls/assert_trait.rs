@@ -4,4 +4,4 @@ macro_rules! assert_trait {
     };
 }
 
-assert_trait!()
+assert_trait!();

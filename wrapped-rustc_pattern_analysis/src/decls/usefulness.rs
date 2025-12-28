@@ -4,4 +4,4 @@ macro_rules! usefulness {
     };
 }
 
-usefulness!()
+usefulness!();

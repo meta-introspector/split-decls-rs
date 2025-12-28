@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Suggestion!();
-        Filter!();
         Diagnostic!();
+        Filter!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! get_suggestions_from_json {
     };
 }
 
-get_suggestions_from_json!()
+get_suggestions_from_json!();

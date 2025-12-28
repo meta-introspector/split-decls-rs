@@ -65,4 +65,4 @@ impl ProofSimulator {{
     };
 }
 
-proof_simulate_impl!()
+proof_simulate_impl!();

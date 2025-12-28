@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        IntoIter!();
         Value!();
+        IntoIter!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! SeqDeserializer {
     };
 }
 
-SeqDeserializer!()
+SeqDeserializer!();

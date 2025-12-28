@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        LazyAttrTokenStream!();
-        StmtKind!();
         Expr!();
-        MacStmtStyle!();
-        Item!();
         MacCall!();
+        StmtKind!();
         Stmt!();
+        MacStmtStyle!();
+        LazyAttrTokenStream!();
+        Item!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_73 {
     };
 }
 
-impl_73!()
+impl_73!();

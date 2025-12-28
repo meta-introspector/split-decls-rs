@@ -1,19 +1,19 @@
 macro_rules! deps {
     () => {
-        CoffSymbol!();
         Section!();
+        CoffHeader!();
+        Result!();
+        SymbolScope!();
+        ReadRef!();
+        ObjectSymbol!();
+        CoffSection!();
+        SymbolIndex!();
         File!();
+        SymbolKind!();
+        SectionIndex!();
+        CoffSymbol!();
         SymbolFlags!();
         SymbolSection!();
-        SymbolKind!();
-        ObjectSymbol!();
-        ReadRef!();
-        Result!();
-        SectionIndex!();
-        CoffSection!();
-        SymbolScope!();
-        SymbolIndex!();
-        CoffHeader!();
     };
 }
 
@@ -24,4 +24,4 @@ macro_rules! impl_245 {
     };
 }
 
-impl_245!()
+impl_245!();

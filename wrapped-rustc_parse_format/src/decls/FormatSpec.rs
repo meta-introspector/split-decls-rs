@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Sign!();
-        DebugHex!();
         Count!();
+        DebugHex!();
+        Sign!();
         Alignment!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! FormatSpec {
     };
 }
 
-FormatSpec!()
+FormatSpec!();

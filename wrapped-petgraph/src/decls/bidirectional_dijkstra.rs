@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
+        Time!();
         EdgeRef!();
-        Graph!();
         Measure!();
         Direction!();
-        Directed!();
         Edge!();
-        Time!();
+        Directed!();
+        Graph!();
         MinScored!();
     };
 }
@@ -18,4 +18,4 @@ macro_rules! bidirectional_dijkstra {
     };
 }
 
-bidirectional_dijkstra!()
+bidirectional_dijkstra!();

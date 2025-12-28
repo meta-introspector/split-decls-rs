@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        B0!();
-        Bit!();
         And!();
+        Bit!();
+        B0!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_11 {
     };
 }
 
-impl_11!()
+impl_11!();

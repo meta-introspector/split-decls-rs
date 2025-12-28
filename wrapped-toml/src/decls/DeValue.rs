@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
+        DeArray!();
+        DeString!();
+        DeTable!();
         DeInteger!();
         Table!();
         Array!();
-        DeArray!();
-        DeString!();
         DeFloat!();
-        DeTable!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! DeValue {
     };
 }
 
-DeValue!()
+DeValue!();

@@ -4,4 +4,4 @@ macro_rules! nghttp2_on_header_callback {
     };
 }
 
-nghttp2_on_header_callback!()
+nghttp2_on_header_callback!();

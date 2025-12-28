@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ReturnCode!();
         DeflateConfig!();
+        ReturnCode!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! compress_slice {
     };
 }
 
-compress_slice!()
+compress_slice!();

@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        GenericArg!();
         Interner!();
-        TraitRef!();
-        GenericArgs!();
-        ExistentialTraitRef!();
         Ty!();
+        GenericArgs!();
+        GenericArg!();
+        TraitRef!();
+        ExistentialTraitRef!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_365 {
     };
 }
 
-impl_365!()
+impl_365!();

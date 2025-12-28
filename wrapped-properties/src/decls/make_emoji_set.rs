@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         PropertyUnicodeSet!();
-        Baked!();
         EmojiSet!();
+        Baked!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! make_emoji_set {
     };
 }
 
-make_emoji_set!()
+make_emoji_set!();

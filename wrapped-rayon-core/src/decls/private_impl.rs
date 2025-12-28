@@ -11,4 +11,4 @@ macro_rules! private_impl {
     };
 }
 
-private_impl!()
+private_impl!();

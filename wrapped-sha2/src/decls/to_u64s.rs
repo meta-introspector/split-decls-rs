@@ -4,4 +4,4 @@ macro_rules! to_u64s {
     };
 }
 
-to_u64s!()
+to_u64s!();

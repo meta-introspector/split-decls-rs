@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        Immediate!();
-        Operand!();
-        Frame!();
         InterpCx!();
-        OpTy!();
-        PlaceTy!();
-        Machine!();
         ImmTy!();
+        Operand!();
+        Machine!();
+        OpTy!();
+        Frame!();
+        PlaceTy!();
         Projectable!();
-        MPlaceTy!();
         Place!();
+        Immediate!();
+        MPlaceTy!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_279 {
     };
 }
 
-impl_279!()
+impl_279!();

@@ -4,4 +4,4 @@ macro_rules! llvm_is_any_arm64_coff {
     };
 }
 
-llvm_is_any_arm64_coff!()
+llvm_is_any_arm64_coff!();

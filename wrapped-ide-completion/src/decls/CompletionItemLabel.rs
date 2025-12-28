@@ -4,4 +4,4 @@ macro_rules! CompletionItemLabel {
     };
 }
 
-CompletionItemLabel!()
+CompletionItemLabel!();

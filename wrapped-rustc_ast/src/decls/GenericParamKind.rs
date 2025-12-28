@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Const!();
-        Ty!();
-        AnonConst!();
-        Lifetime!();
-        Type!();
         Walkable!();
+        Lifetime!();
+        Ty!();
+        Const!();
+        AnonConst!();
+        Type!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! GenericParamKind {
     };
 }
 
-GenericParamKind!()
+GenericParamKind!();

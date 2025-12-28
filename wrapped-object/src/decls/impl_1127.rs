@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
+        SectionData!();
+        Bytes!();
         Section!();
         SectionId!();
-        SectionData!();
         ByteString!();
         Sections!();
-        Bytes!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_1127 {
     };
 }
 
-impl_1127!()
+impl_1127!();

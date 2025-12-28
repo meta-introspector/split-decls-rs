@@ -11,4 +11,4 @@ macro_rules! load_workspace {
     };
 }
 
-load_workspace!()
+load_workspace!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        IndexMap!();
         IndexSet!();
+        IndexMap!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_87 {
     };
 }
 
-impl_87!()
+impl_87!();

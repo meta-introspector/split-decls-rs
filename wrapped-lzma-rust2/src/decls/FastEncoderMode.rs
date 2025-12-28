@@ -4,4 +4,4 @@ macro_rules! FastEncoderMode {
     };
 }
 
-FastEncoderMode!()
+FastEncoderMode!();

@@ -11,4 +11,4 @@ macro_rules! arm_set_tls {
     };
 }
 
-arm_set_tls!()
+arm_set_tls!();

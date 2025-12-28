@@ -4,4 +4,4 @@ macro_rules! ForEachConsumer {
     };
 }
 
-ForEachConsumer!()
+ForEachConsumer!();

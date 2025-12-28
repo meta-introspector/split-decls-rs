@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        HighlightedRange!();
         WalkExpandedExprCtx!();
+        HighlightedRange!();
         HighlightMap!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! highlight_yield_points {
     };
 }
 
-highlight_yield_points!()
+highlight_yield_points!();

@@ -4,4 +4,4 @@ macro_rules! EllipsisInclusiveRangePatterns {
     };
 }
 
-EllipsisInclusiveRangePatterns!()
+EllipsisInclusiveRangePatterns!();

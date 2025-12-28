@@ -11,4 +11,4 @@ macro_rules! find_delimiters {
     };
 }
 
-find_delimiters!()
+find_delimiters!();

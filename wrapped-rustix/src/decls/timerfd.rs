@@ -4,4 +4,4 @@ macro_rules! timerfd {
     };
 }
 
-timerfd!()
+timerfd!();

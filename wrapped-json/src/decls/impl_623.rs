@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
+        Result!();
+        Error!();
         Value!();
         RawValue!();
         ReferenceFromString!();
         Formatter!();
-        Error!();
-        Result!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_623 {
     };
 }
 
-impl_623!()
+impl_623!();

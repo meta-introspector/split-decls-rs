@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         UpdateVTab!();
-        VTabKind!();
         Module!();
+        VTabKind!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! update_module {
     };
 }
 
-update_module!()
+update_module!();

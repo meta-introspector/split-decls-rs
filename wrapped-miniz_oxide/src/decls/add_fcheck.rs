@@ -4,4 +4,4 @@ macro_rules! add_fcheck {
     };
 }
 
-add_fcheck!()
+add_fcheck!();

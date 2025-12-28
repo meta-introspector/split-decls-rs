@@ -4,4 +4,4 @@ macro_rules! idx {
     };
 }
 
-idx!()
+idx!();

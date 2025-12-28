@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Filter!();
-        Error!();
         Result!();
+        Error!();
+        Filter!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! float {
     };
 }
 
-float!()
+float!();

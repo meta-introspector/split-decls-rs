@@ -4,4 +4,4 @@ macro_rules! add_assign {
     };
 }
 
-add_assign!()
+add_assign!();

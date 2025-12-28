@@ -18,4 +18,4 @@ macro_rules! test_fn_like_mk_idents {
     };
 }
 
-test_fn_like_mk_idents!()
+test_fn_like_mk_idents!();

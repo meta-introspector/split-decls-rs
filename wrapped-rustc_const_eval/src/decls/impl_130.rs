@@ -1,21 +1,21 @@
 macro_rules! deps {
     () => {
-        InterpCx!();
-        ImmTy!();
         RangeSet!();
-        FnArg!();
-        Machine!();
-        ConstEvalErrKind!();
-        LongRunningWarn!();
-        Memory!();
-        Frame!();
         CompileTimeMachine!();
-        OpTy!();
-        CheckAlignment!();
-        CanAccessMutGlobal!();
-        MemoryKind!();
+        ImmTy!();
         LongRunning!();
+        Machine!();
+        FnArg!();
+        LongRunningWarn!();
+        CanAccessMutGlobal!();
+        CheckAlignment!();
+        OpTy!();
         PlaceTy!();
+        MemoryKind!();
+        InterpCx!();
+        Frame!();
+        ConstEvalErrKind!();
+        Memory!();
     };
 }
 
@@ -26,4 +26,4 @@ macro_rules! impl_130 {
     };
 }
 
-impl_130!()
+impl_130!();

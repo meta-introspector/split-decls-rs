@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        Encoder!();
+        Encodable!();
         Decoder!();
         Decodable!();
-        Encodable!();
-        Encoder!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! tuple {
     };
 }
 
-tuple!()
+tuple!();

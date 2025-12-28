@@ -12,4 +12,4 @@ macro_rules! const_rwlock {
     };
 }
 
-const_rwlock!()
+const_rwlock!();

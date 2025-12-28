@@ -4,4 +4,4 @@ macro_rules! POW5_14 {
     };
 }
 
-POW5_14!()
+POW5_14!();

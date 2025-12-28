@@ -4,4 +4,4 @@ macro_rules! send_recv {
     };
 }
 
-send_recv!()
+send_recv!();

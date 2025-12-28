@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        ABI!();
-        Target!();
         InlineAsmArch!();
+        Target!();
+        ABI!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! reserved_v20to31 {
     };
 }
 
-reserved_v20to31!()
+reserved_v20to31!();

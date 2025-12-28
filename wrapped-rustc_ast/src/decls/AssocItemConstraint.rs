@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Walkable!();
+        GenericArgs!();
         Ty!();
         AssocItemConstraintKind!();
-        GenericArgs!();
+        Walkable!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! AssocItemConstraint {
     };
 }
 
-AssocItemConstraint!()
+AssocItemConstraint!();

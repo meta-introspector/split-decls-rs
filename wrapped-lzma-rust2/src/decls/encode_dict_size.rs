@@ -11,4 +11,4 @@ macro_rules! encode_dict_size {
     };
 }
 
-encode_dict_size!()
+encode_dict_size!();

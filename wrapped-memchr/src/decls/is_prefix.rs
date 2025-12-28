@@ -4,4 +4,4 @@ macro_rules! is_prefix {
     };
 }
 
-is_prefix!()
+is_prefix!();

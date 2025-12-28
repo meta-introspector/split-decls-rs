@@ -4,4 +4,4 @@ macro_rules! T_MIN {
     };
 }
 
-T_MIN!()
+T_MIN!();

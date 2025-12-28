@@ -4,4 +4,4 @@ macro_rules! check_ne_to_seq {
     };
 }
 
-check_ne_to_seq!()
+check_ne_to_seq!();

@@ -11,4 +11,4 @@ macro_rules! render_variable_block_lit_expr {
     };
 }
 
-render_variable_block_lit_expr!()
+render_variable_block_lit_expr!();

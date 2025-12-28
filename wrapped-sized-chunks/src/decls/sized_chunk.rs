@@ -4,4 +4,4 @@ macro_rules! sized_chunk {
     };
 }
 
-sized_chunk!()
+sized_chunk!();

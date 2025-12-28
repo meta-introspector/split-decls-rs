@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        EmLinker!();
         Command!();
         Linker!();
-        EmLinker!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_120 {
     };
 }
 
-impl_120!()
+impl_120!();

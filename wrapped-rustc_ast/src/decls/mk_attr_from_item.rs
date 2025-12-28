@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Attribute!();
-        AttrKind!();
-        LazyAttrTokenStream!();
         AttrStyle!();
+        LazyAttrTokenStream!();
+        AttrItem!();
+        AttrKind!();
         NormalAttr!();
         AttrIdGenerator!();
-        AttrItem!();
+        Attribute!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! mk_attr_from_item {
     };
 }
 
-mk_attr_from_item!()
+mk_attr_from_item!();

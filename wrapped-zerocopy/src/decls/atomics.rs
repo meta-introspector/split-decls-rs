@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Valid!();
+        TransmuteFrom!();
         SizeEq!();
-        TryFromBytes!();
         FromZeros!();
-        FromBytes!();
+        Valid!();
         IntoBytes!();
         Unaligned!();
-        TransmuteFrom!();
+        FromBytes!();
+        TryFromBytes!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! atomics {
     };
 }
 
-atomics!()
+atomics!();

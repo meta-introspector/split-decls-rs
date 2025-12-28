@@ -4,4 +4,4 @@ macro_rules! describe_debug_flags {
     };
 }
 
-describe_debug_flags!()
+describe_debug_flags!();

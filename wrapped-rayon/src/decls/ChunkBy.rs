@@ -4,4 +4,4 @@ macro_rules! ChunkBy {
     };
 }
 
-ChunkBy!()
+ChunkBy!();

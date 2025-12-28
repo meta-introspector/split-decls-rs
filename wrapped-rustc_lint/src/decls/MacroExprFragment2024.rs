@@ -4,4 +4,4 @@ macro_rules! MacroExprFragment2024 {
     };
 }
 
-MacroExprFragment2024!()
+MacroExprFragment2024!();

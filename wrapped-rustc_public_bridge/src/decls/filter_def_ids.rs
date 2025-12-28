@@ -4,4 +4,4 @@ macro_rules! filter_def_ids {
     };
 }
 
-filter_def_ids!()
+filter_def_ids!();

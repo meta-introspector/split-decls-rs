@@ -4,4 +4,4 @@ macro_rules! R_CRIS_16 {
     };
 }
 
-R_CRIS_16!()
+R_CRIS_16!();

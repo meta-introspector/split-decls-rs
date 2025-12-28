@@ -4,4 +4,4 @@ macro_rules! http_types {
     };
 }
 
-http_types!()
+http_types!();

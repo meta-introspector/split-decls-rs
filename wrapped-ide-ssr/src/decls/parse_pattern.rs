@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         PatternElement!();
-        Token!();
         SsrError!();
+        Token!();
         Placeholder!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! parse_pattern {
     };
 }
 
-parse_pattern!()
+parse_pattern!();

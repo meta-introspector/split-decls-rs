@@ -4,4 +4,4 @@ macro_rules! TransferFunction {
     };
 }
 
-TransferFunction!()
+TransferFunction!();

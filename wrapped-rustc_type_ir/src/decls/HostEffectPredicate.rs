@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        TraitRef!();
         Interner!();
         BoundConstness!();
+        TraitRef!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! HostEffectPredicate {
     };
 }
 
-HostEffectPredicate!()
+HostEffectPredicate!();

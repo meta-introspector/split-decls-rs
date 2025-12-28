@@ -4,4 +4,4 @@ macro_rules! InternalCaller {
     };
 }
 
-InternalCaller!()
+InternalCaller!();

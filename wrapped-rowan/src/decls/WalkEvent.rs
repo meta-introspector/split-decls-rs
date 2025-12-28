@@ -4,4 +4,4 @@ macro_rules! WalkEvent {
     };
 }
 
-WalkEvent!()
+WalkEvent!();

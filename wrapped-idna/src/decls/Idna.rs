@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Uts46!();
         Config!();
+        Uts46!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Idna {
     };
 }
 
-Idna!()
+Idna!();

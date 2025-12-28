@@ -1,18 +1,18 @@
 macro_rules! deps {
     () => {
-        Relate!();
-        GenericArg!();
-        ConstKind!();
-        Interner!();
-        Term!();
-        TypeSuperVisitable!();
-        PlaceholderConst!();
-        TypeSuperFoldable!();
-        Flags!();
-        IntoKind!();
-        UnevaluatedConst!();
-        ExprConst!();
         InferConst!();
+        Interner!();
+        Flags!();
+        Relate!();
+        IntoKind!();
+        ConstKind!();
+        Term!();
+        TypeSuperFoldable!();
+        GenericArg!();
+        PlaceholderConst!();
+        TypeSuperVisitable!();
+        ExprConst!();
+        UnevaluatedConst!();
     };
 }
 
@@ -23,4 +23,4 @@ macro_rules! Const {
     };
 }
 
-Const!()
+Const!();

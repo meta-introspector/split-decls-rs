@@ -4,4 +4,4 @@ macro_rules! platforms {
     };
 }
 
-platforms!()
+platforms!();

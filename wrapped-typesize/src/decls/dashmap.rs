@@ -4,4 +4,4 @@ macro_rules! dashmap {
     };
 }
 
-dashmap!()
+dashmap!();

@@ -4,4 +4,4 @@ macro_rules! encode_ty_name {
     };
 }
 
-encode_ty_name!()
+encode_ty_name!();

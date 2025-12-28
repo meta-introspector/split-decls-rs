@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Node!();
         DirectedGraph!();
         TestGraph!();
+        Node!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_218 {
     };
 }
 
-impl_218!()
+impl_218!();

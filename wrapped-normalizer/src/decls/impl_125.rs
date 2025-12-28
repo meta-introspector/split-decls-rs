@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        Decomposition!();
+        CharacterAndTrieValue!();
         ComposingNormalizerBorrowed!();
         Composition!();
-        CharacterAndTrieValue!();
         IgnorableBehavior!();
-        Decomposition!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_125 {
     };
 }
 
-impl_125!()
+impl_125!();

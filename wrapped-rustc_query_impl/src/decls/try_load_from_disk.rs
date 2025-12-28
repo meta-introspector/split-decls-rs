@@ -4,4 +4,4 @@ macro_rules! try_load_from_disk {
     };
 }
 
-try_load_from_disk!()
+try_load_from_disk!();

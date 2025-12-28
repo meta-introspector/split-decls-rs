@@ -4,4 +4,4 @@ macro_rules! UPPERCASE_LETTER {
     };
 }
 
-UPPERCASE_LETTER!()
+UPPERCASE_LETTER!();

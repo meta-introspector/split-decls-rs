@@ -4,4 +4,4 @@ macro_rules! test_is_combining_mark_misc {
     };
 }
 
-test_is_combining_mark_misc!()
+test_is_combining_mark_misc!();

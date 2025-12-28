@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
         ModuleCodegen!();
-        ModuleBufferMethods!();
-        ThinModule!();
-        SerializedModule!();
-        ModuleConfig!();
         CompiledModule!();
+        ThinModule!();
         ThinBufferMethods!();
+        ModuleConfig!();
+        ModuleBufferMethods!();
         CodegenContext!();
+        SerializedModule!();
         FatLtoInput!();
     };
 }
@@ -19,4 +19,4 @@ macro_rules! WriteBackendMethods {
     };
 }
 
-WriteBackendMethods!()
+WriteBackendMethods!();

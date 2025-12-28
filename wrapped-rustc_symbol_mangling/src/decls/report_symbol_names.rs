@@ -11,4 +11,4 @@ macro_rules! report_symbol_names {
     };
 }
 
-report_symbol_names!()
+report_symbol_names!();

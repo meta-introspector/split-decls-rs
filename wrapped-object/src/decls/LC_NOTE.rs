@@ -4,4 +4,4 @@ macro_rules! LC_NOTE {
     };
 }
 
-LC_NOTE!()
+LC_NOTE!();

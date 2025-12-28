@@ -4,4 +4,4 @@ macro_rules! lattice_path {
     };
 }
 
-lattice_path!()
+lattice_path!();

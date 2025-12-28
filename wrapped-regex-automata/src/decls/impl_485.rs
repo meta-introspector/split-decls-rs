@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Captures!();
         BuildErrorKind!();
+        Captures!();
         BuildError!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_485 {
     };
 }
 
-impl_485!()
+impl_485!();

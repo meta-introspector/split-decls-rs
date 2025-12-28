@@ -4,4 +4,4 @@ macro_rules! class_layout {
     };
 }
 
-class_layout!()
+class_layout!();

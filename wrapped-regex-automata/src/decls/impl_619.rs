@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        GroupInfoAllNames!();
-        GroupInfoInner!();
-        GroupInfoError!();
-        SmallIndex!();
-        WhichCaptures!();
-        GroupInfoPatternNames!();
-        NFA!();
-        PatternID!();
         GroupInfo!();
+        GroupInfoAllNames!();
+        GroupInfoError!();
+        PatternID!();
+        NFA!();
         CaptureNameMap!();
+        GroupInfoPatternNames!();
+        SmallIndex!();
+        GroupInfoInner!();
+        WhichCaptures!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_619 {
     };
 }
 
-impl_619!()
+impl_619!();

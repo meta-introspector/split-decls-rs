@@ -3,9 +3,9 @@ macro_rules! deps {
         QueryOriginKind!();
         QueryEdge!();
         QueryOriginRef!();
+        DatabaseKeyIndex!();
         QueryOrigin!();
         IngredientIndex!();
-        DatabaseKeyIndex!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_476 {
     };
 }
 
-impl_476!()
+impl_476!();

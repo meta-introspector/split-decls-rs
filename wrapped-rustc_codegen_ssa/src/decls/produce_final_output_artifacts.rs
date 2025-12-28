@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        IgnoringOutput!();
-        CompiledModules!();
-        IgnoringEmitPath!();
-        BinaryOutputToTty!();
         CopyPath!();
+        BinaryOutputToTty!();
+        IgnoringEmitPath!();
+        CompiledModules!();
+        IgnoringOutput!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! produce_final_output_artifacts {
     };
 }
 
-produce_final_output_artifacts!()
+produce_final_output_artifacts!();

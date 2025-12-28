@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Result!();
+        ImportObjectData!();
         ByteString!();
         Error!();
         Bytes!();
-        ImportObjectData!();
         ReadRef!();
         ImportObjectHeader!();
+        Result!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_274 {
     };
 }
 
-impl_274!()
+impl_274!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        PointerMetadata!();
-        KnownLayout!();
         AllocError!();
+        KnownLayout!();
+        PointerMetadata!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! new_box {
     };
 }
 
-new_box!()
+new_box!();

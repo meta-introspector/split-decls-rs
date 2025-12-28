@@ -4,4 +4,4 @@ macro_rules! JOIN_CONTROL {
     };
 }
 
-JOIN_CONTROL!()
+JOIN_CONTROL!();

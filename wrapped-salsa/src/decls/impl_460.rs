@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        QueryRevisions!();
         QueryOriginRef!();
         QueryRevisionsExtra!();
-        QueryRevisions!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_460 {
     };
 }
 
-impl_460!()
+impl_460!();

@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         FromId!();
         Revision!();
-        AsId!();
         Location!();
+        AsId!();
         Update!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! Configuration {
     };
 }
 
-Configuration!()
+Configuration!();

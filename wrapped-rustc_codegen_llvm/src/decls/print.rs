@@ -4,4 +4,4 @@ macro_rules! print {
     };
 }
 
-print!()
+print!();

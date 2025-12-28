@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Folder!();
         ReduceFolder!();
+        Folder!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_793 {
     };
 }
 
-impl_793!()
+impl_793!();

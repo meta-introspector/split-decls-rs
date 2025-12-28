@@ -4,4 +4,4 @@ macro_rules! EM_PPC {
     };
 }
 
-EM_PPC!()
+EM_PPC!();

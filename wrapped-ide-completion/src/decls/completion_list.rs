@@ -4,4 +4,4 @@ macro_rules! completion_list {
     };
 }
 
-completion_list!()
+completion_list!();

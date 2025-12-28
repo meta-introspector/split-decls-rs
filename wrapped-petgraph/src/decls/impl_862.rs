@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        EdgeType!();
-        StableGraph!();
-        EdgeRef!();
-        IndexType!();
         EdgeReference!();
+        EdgeType!();
         Create!();
         EdgeReferences!();
+        IndexType!();
+        StableGraph!();
+        EdgeRef!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_862 {
     };
 }
 
-impl_862!()
+impl_862!();

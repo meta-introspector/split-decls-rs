@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Len!();
-        TArr!();
-        B1!();
-        Sum!();
         Unsigned!();
+        Sum!();
         Add1!();
+        B1!();
         Length!();
+        TArr!();
+        Len!();
         TypeArray!();
     };
 }
@@ -18,4 +18,4 @@ macro_rules! impl_534 {
     };
 }
 
-impl_534!()
+impl_534!();

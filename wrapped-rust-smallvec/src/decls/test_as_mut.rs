@@ -11,4 +11,4 @@ macro_rules! test_as_mut {
     };
 }
 
-test_as_mut!()
+test_as_mut!();

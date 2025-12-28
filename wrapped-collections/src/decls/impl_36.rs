@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        IMap_Vtbl!();
         IMap!();
+        IMap_Vtbl!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_36 {
     };
 }
 
-impl_36!()
+impl_36!();

@@ -4,4 +4,4 @@ macro_rules! InterestCacheConfig {
     };
 }
 
-InterestCacheConfig!()
+InterestCacheConfig!();

@@ -4,4 +4,4 @@ macro_rules! LinkExeStatusStackBufferOverrun {
     };
 }
 
-LinkExeStatusStackBufferOverrun!()
+LinkExeStatusStackBufferOverrun!();

@@ -4,4 +4,4 @@ macro_rules! hwexplode {
     };
 }
 
-hwexplode!()
+hwexplode!();

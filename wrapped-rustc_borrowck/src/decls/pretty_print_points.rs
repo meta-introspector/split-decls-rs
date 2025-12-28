@@ -11,4 +11,4 @@ macro_rules! pretty_print_points {
     };
 }
 
-pretty_print_points!()
+pretty_print_points!();

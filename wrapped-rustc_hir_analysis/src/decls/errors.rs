@@ -4,4 +4,4 @@ macro_rules! errors {
     };
 }
 
-errors!()
+errors!();

@@ -4,4 +4,4 @@ macro_rules! StableHashingContext {
     };
 }
 
-StableHashingContext!()
+StableHashingContext!();

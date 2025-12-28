@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Walkable!();
         BoundConstness!();
         BoundPolarity!();
+        Walkable!();
         BoundAsyncness!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! TraitBoundModifiers {
     };
 }
 
-TraitBoundModifiers!()
+TraitBoundModifiers!();

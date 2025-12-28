@@ -4,4 +4,4 @@ macro_rules! RustcMacroExpander {
     };
 }
 
-RustcMacroExpander!()
+RustcMacroExpander!();

@@ -4,4 +4,4 @@ macro_rules! TakeAnyFolder {
     };
 }
 
-TakeAnyFolder!()
+TakeAnyFolder!();

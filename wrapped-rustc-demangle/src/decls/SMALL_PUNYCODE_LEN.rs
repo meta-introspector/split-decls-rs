@@ -4,4 +4,4 @@ macro_rules! SMALL_PUNYCODE_LEN {
     };
 }
 
-SMALL_PUNYCODE_LEN!()
+SMALL_PUNYCODE_LEN!();

@@ -4,4 +4,4 @@ macro_rules! derive_void {
     };
 }
 
-derive_void!()
+derive_void!();

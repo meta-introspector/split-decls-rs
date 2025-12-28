@@ -4,4 +4,4 @@ macro_rules! EM_ECOG1X {
     };
 }
 
-EM_ECOG1X!()
+EM_ECOG1X!();

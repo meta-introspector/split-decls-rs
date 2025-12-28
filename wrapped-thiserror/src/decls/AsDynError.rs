@@ -11,4 +11,4 @@ macro_rules! AsDynError {
     };
 }
 
-AsDynError!()
+AsDynError!();

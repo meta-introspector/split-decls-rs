@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Aggregate!();
-        SqlFnOutput!();
         Context!();
         Error!();
+        SqlFnOutput!();
+        Aggregate!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! call_boxed_final {
     };
 }
 
-call_boxed_final!()
+call_boxed_final!();

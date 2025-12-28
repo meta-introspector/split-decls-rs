@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        IntoIter!();
-        Header!();
         Drain!();
         ThinVec!();
+        IntoIter!();
+        Header!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! std_tests {
     };
 }
 
-std_tests!()
+std_tests!();

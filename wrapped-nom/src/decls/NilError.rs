@@ -4,4 +4,4 @@ macro_rules! NilError {
     };
 }
 
-NilError!()
+NilError!();

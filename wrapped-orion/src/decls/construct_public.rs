@@ -4,4 +4,4 @@ macro_rules! construct_public {
     };
 }
 
-construct_public!()
+construct_public!();

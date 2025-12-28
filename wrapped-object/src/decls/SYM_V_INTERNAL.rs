@@ -4,4 +4,4 @@ macro_rules! SYM_V_INTERNAL {
     };
 }
 
-SYM_V_INTERNAL!()
+SYM_V_INTERNAL!();

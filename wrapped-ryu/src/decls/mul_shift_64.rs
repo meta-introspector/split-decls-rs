@@ -4,4 +4,4 @@ macro_rules! mul_shift_64 {
     };
 }
 
-mul_shift_64!()
+mul_shift_64!();

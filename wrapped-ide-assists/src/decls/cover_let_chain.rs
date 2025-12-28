@@ -4,4 +4,4 @@ macro_rules! cover_let_chain {
     };
 }
 
-cover_let_chain!()
+cover_let_chain!();

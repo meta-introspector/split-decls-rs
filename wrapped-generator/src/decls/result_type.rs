@@ -4,4 +4,4 @@ macro_rules! result_type {
     };
 }
 
-result_type!()
+result_type!();

@@ -11,4 +11,4 @@ macro_rules! unsized_info {
     };
 }
 
-unsized_info!()
+unsized_info!();

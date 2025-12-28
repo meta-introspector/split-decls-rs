@@ -4,4 +4,4 @@ macro_rules! reseeding {
     };
 }
 
-reseeding!()
+reseeding!();

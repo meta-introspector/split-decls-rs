@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Options!();
         ColumnFamilyDescriptor!();
-        ColumnFamilyTtl!();
         DB!();
+        Options!();
+        ColumnFamilyTtl!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_41 {
     };
 }
 
-impl_41!()
+impl_41!();

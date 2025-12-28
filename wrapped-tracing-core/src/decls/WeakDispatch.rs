@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Dispatch!();
         Subscriber!();
+        Dispatch!();
         Kind!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! WeakDispatch {
     };
 }
 
-WeakDispatch!()
+WeakDispatch!();

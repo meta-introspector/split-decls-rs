@@ -4,4 +4,4 @@ macro_rules! R_ARM_THM_GOT_BREL12 {
     };
 }
 
-R_ARM_THM_GOT_BREL12!()
+R_ARM_THM_GOT_BREL12!();

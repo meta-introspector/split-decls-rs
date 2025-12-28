@@ -4,4 +4,4 @@ macro_rules! R_SPARC_GOTDATA_OP {
     };
 }
 
-R_SPARC_GOTDATA_OP!()
+R_SPARC_GOTDATA_OP!();

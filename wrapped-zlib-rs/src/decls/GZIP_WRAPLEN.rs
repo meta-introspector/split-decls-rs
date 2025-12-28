@@ -4,4 +4,4 @@ macro_rules! GZIP_WRAPLEN {
     };
 }
 
-GZIP_WRAPLEN!()
+GZIP_WRAPLEN!();

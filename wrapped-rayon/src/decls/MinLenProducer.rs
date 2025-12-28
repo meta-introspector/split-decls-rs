@@ -4,4 +4,4 @@ macro_rules! MinLenProducer {
     };
 }
 
-MinLenProducer!()
+MinLenProducer!();

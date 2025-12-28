@@ -4,4 +4,4 @@ macro_rules! trie_value_indicates_special_non_starter_decomposition {
     };
 }
 
-trie_value_indicates_special_non_starter_decomposition!()
+trie_value_indicates_special_non_starter_decomposition!();

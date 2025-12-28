@@ -4,4 +4,4 @@ macro_rules! prefix_and_suffix {
     };
 }
 
-prefix_and_suffix!()
+prefix_and_suffix!();

@@ -4,4 +4,4 @@ macro_rules! stdio {
     };
 }
 
-stdio!()
+stdio!();

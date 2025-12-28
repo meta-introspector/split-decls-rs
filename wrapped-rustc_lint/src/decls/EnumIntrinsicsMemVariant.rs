@@ -4,4 +4,4 @@ macro_rules! EnumIntrinsicsMemVariant {
     };
 }
 
-EnumIntrinsicsMemVariant!()
+EnumIntrinsicsMemVariant!();

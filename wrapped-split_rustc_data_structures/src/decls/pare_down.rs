@@ -4,4 +4,4 @@ macro_rules! pare_down {
     };
 }
 
-pare_down!()
+pare_down!();

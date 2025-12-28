@@ -4,4 +4,4 @@ macro_rules! alloc_type_name {
     };
 }
 
-alloc_type_name!()
+alloc_type_name!();

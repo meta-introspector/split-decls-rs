@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Error!();
-        PropName!();
         CStrLike!();
+        PropName!();
+        Error!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_313 {
     };
 }
 
-impl_313!()
+impl_313!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Result!();
         KernelSigSet!();
+        Result!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! io_uring_enter_arg {
     };
 }
 
-io_uring_enter_arg!()
+io_uring_enter_arg!();

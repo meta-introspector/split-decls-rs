@@ -4,4 +4,4 @@ macro_rules! convert_to_hir_projections_and_truncate_for_capture {
     };
 }
 
-convert_to_hir_projections_and_truncate_for_capture!()
+convert_to_hir_projections_and_truncate_for_capture!();

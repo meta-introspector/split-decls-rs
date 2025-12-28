@@ -12,4 +12,4 @@ macro_rules! racy_clear {
     };
 }
 
-racy_clear!()
+racy_clear!();

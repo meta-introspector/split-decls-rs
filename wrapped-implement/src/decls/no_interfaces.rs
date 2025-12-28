@@ -4,4 +4,4 @@ macro_rules! no_interfaces {
     };
 }
 
-no_interfaces!()
+no_interfaces!();

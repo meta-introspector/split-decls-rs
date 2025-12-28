@@ -4,4 +4,4 @@ macro_rules! NoFieldOnVariant {
     };
 }
 
-NoFieldOnVariant!()
+NoFieldOnVariant!();

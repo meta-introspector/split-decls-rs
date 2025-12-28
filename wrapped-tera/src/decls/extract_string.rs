@@ -12,4 +12,4 @@ macro_rules! extract_string {
     };
 }
 
-extract_string!()
+extract_string!();

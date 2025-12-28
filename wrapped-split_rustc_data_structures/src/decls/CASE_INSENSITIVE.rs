@@ -4,4 +4,4 @@ macro_rules! CASE_INSENSITIVE {
     };
 }
 
-CASE_INSENSITIVE!()
+CASE_INSENSITIVE!();

@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        Interner!();
-        ConstKind!();
-        TypeVisitable!();
-        Binder!();
-        ValidateBoundVars!();
-        TypeVisitor!();
-        Ty!();
         Const!();
+        Binder!();
+        TypeVisitable!();
+        Ty!();
+        ValidateBoundVars!();
         Region!();
+        Interner!();
+        TypeVisitor!();
+        ConstKind!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_231 {
     };
 }
 
-impl_231!()
+impl_231!();

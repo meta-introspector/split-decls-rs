@@ -4,4 +4,4 @@ macro_rules! ArgumentType {
     };
 }
 
-ArgumentType!()
+ArgumentType!();

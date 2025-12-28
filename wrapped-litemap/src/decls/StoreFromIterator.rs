@@ -4,4 +4,4 @@ macro_rules! StoreFromIterator {
     };
 }
 
-StoreFromIterator!()
+StoreFromIterator!();

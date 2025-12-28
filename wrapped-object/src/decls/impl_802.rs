@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
+        Rel32!();
+        ReadRef!();
+        Error!();
         Rel!();
         FileHeader32!();
         SectionHeader32!();
-        SectionHeader!();
-        Error!();
-        Rel32!();
-        ReadRef!();
         Result!();
+        SectionHeader!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_802 {
     };
 }
 
-impl_802!()
+impl_802!();

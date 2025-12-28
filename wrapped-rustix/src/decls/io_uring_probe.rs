@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        IncompleteArrayField!();
         IoringOp!();
+        IncompleteArrayField!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! io_uring_probe {
     };
 }
 
-io_uring_probe!()
+io_uring_probe!();

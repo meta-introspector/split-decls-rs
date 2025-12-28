@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Inner!();
         Builder!();
+        Inner!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Mock {
     };
 }
 
-Mock!()
+Mock!();

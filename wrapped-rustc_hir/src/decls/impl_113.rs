@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Lifetime!();
-        Path!();
-        LifetimeKind!();
         AngleBrackets!();
-        LifetimeSource!();
+        Path!();
+        Lifetime!();
         LifetimeSyntax!();
+        LifetimeSource!();
+        LifetimeKind!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_113 {
     };
 }
 
-impl_113!()
+impl_113!();

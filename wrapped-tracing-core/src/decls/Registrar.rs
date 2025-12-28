@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Kind!();
         Subscriber!();
+        Kind!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Registrar {
     };
 }
 
-Registrar!()
+Registrar!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        State!();
         AnnNode!();
+        State!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! print_crate_inner {
     };
 }
 
-print_crate_inner!()
+print_crate_inner!();

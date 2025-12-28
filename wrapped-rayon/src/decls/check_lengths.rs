@@ -4,4 +4,4 @@ macro_rules! check_lengths {
     };
 }
 
-check_lengths!()
+check_lengths!();

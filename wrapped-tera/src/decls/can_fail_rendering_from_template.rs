@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Error!();
-        Context!();
         Function!();
+        Context!();
+        Error!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! can_fail_rendering_from_template {
     };
 }
 
-can_fail_rendering_from_template!()
+can_fail_rendering_from_template!();

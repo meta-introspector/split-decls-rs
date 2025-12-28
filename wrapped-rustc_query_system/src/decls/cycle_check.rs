@@ -13,4 +13,4 @@ macro_rules! cycle_check {
     };
 }
 
-cycle_check!()
+cycle_check!();

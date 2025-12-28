@@ -11,4 +11,4 @@ macro_rules! fmaf128 {
     };
 }
 
-fmaf128!()
+fmaf128!();

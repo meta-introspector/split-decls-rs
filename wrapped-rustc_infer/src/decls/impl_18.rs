@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ToTrace!();
         TypeTrace!();
+        ToTrace!();
         ValuePairs!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_18 {
     };
 }
 
-impl_18!()
+impl_18!();

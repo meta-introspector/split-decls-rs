@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Data!();
-        DataInner!();
-        Redactions!();
         Error!();
+        DataInner!();
+        Data!();
+        Redactions!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! normalize_data_to_unordered_redactions {
     };
 }
 
-normalize_data_to_unordered_redactions!()
+normalize_data_to_unordered_redactions!();

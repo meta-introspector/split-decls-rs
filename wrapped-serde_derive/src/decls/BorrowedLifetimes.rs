@@ -4,4 +4,4 @@ macro_rules! BorrowedLifetimes {
     };
 }
 
-BorrowedLifetimes!()
+BorrowedLifetimes!();

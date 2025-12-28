@@ -12,4 +12,4 @@ macro_rules! WithoutArgs {
     };
 }
 
-WithoutArgs!()
+WithoutArgs!();

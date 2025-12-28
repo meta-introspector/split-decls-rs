@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        GenericParam!();
         WhereClause!();
         Walkable!();
+        GenericParam!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Generics {
     };
 }
 
-Generics!()
+Generics!();

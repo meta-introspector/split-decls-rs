@@ -11,4 +11,4 @@ macro_rules! impl_unit_measure {
     };
 }
 
-impl_unit_measure!()
+impl_unit_measure!();

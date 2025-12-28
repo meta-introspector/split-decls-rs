@@ -4,4 +4,4 @@ macro_rules! PositionsConsumer {
     };
 }
 
-PositionsConsumer!()
+PositionsConsumer!();

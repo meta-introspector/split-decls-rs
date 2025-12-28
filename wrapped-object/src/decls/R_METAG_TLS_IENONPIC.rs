@@ -4,4 +4,4 @@ macro_rules! R_METAG_TLS_IENONPIC {
     };
 }
 
-R_METAG_TLS_IENONPIC!()
+R_METAG_TLS_IENONPIC!();

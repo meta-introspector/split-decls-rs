@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        MachOSectionInternal!();
-        MachHeader!();
-        ReadRef!();
         Section!();
+        MachOSectionInternal!();
         SectionIndex!();
+        ReadRef!();
+        MachHeader!();
         SectionKind!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! impl_592 {
     };
 }
 
-impl_592!()
+impl_592!();

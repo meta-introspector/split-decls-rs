@@ -11,4 +11,4 @@ macro_rules! get_namespace_for_item {
     };
 }
 
-get_namespace_for_item!()
+get_namespace_for_item!();

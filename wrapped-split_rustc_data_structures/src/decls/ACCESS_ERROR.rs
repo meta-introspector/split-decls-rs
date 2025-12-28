@@ -4,4 +4,4 @@ macro_rules! ACCESS_ERROR {
     };
 }
 
-ACCESS_ERROR!()
+ACCESS_ERROR!();

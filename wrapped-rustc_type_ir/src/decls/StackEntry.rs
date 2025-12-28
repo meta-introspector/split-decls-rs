@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        AvailableDepth!();
-        Stack!();
-        PathKind!();
-        NestedGoals!();
-        Cx!();
         CycleHeads!();
-        HeadUsages!();
+        NestedGoals!();
+        PathKind!();
+        Stack!();
         CandidateHeadUsages!();
+        Cx!();
+        AvailableDepth!();
+        HeadUsages!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! StackEntry {
     };
 }
 
-StackEntry!()
+StackEntry!();

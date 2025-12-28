@@ -4,4 +4,4 @@ macro_rules! DerefSource {
     };
 }
 
-DerefSource!()
+DerefSource!();

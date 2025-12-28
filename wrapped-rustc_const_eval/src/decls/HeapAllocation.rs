@@ -4,4 +4,4 @@ macro_rules! HeapAllocation {
     };
 }
 
-HeapAllocation!()
+HeapAllocation!();

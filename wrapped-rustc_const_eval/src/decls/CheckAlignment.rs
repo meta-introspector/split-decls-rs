@@ -4,4 +4,4 @@ macro_rules! CheckAlignment {
     };
 }
 
-CheckAlignment!()
+CheckAlignment!();

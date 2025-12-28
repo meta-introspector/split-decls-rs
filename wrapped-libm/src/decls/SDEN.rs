@@ -4,4 +4,4 @@ macro_rules! SDEN {
     };
 }
 
-SDEN!()
+SDEN!();

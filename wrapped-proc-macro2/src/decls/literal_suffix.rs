@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Reject!();
         Cursor!();
+        Reject!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! literal_suffix {
     };
 }
 
-literal_suffix!()
+literal_suffix!();

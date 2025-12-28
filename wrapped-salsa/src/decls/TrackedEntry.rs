@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         IdentityMap!();
-        Id!();
         Identity!();
+        Id!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! TrackedEntry {
     };
 }
 
-TrackedEntry!()
+TrackedEntry!();

@@ -4,4 +4,4 @@ macro_rules! OSControl {
     };
 }
 
-OSControl!()
+OSControl!();

@@ -4,4 +4,4 @@ macro_rules! extract_timestamp_from_session_dir {
     };
 }
 
-extract_timestamp_from_session_dir!()
+extract_timestamp_from_session_dir!();

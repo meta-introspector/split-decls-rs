@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        AttributeParseErrorReason!();
-        AcceptContext!();
         UnknownMetaItem!();
         Stage!();
         AttributeParseError!();
+        AttributeParseErrorReason!();
+        AcceptContext!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_275 {
     };
 }
 
-impl_275!()
+impl_275!();

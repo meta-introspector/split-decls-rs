@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        LateContext!();
         BuiltinUngatedAsyncFnTrackCaller!();
+        LateContext!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_59 {
     };
 }
 
-impl_59!()
+impl_59!();

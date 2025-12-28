@@ -4,4 +4,4 @@ macro_rules! AllocRefMut {
     };
 }
 
-AllocRefMut!()
+AllocRefMut!();

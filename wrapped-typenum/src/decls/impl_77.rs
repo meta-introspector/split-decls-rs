@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         Cmp!();
-        Unsigned!();
         PrivateIntegerAdd!();
-        NonZero!();
         Internal!();
+        Unsigned!();
+        NonZero!();
         NInt!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! impl_77 {
     };
 }
 
-impl_77!()
+impl_77!();

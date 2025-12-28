@@ -4,4 +4,4 @@ macro_rules! vis_offset {
     };
 }
 
-vis_offset!()
+vis_offset!();

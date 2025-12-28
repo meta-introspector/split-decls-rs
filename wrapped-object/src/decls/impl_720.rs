@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         ResourceDirectoryTable!();
-        ResourceDirectory!();
         Result!();
+        ResourceDirectory!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_720 {
     };
 }
 
-impl_720!()
+impl_720!();

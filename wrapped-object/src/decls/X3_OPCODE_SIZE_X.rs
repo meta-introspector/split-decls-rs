@@ -4,4 +4,4 @@ macro_rules! X3_OPCODE_SIZE_X {
     };
 }
 
-X3_OPCODE_SIZE_X!()
+X3_OPCODE_SIZE_X!();

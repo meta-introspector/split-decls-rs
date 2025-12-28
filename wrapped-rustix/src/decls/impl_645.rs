@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        SocketType!();
         RawSocketType!();
+        SocketType!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_645 {
     };
 }
 
-impl_645!()
+impl_645!();

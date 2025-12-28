@@ -4,4 +4,4 @@ macro_rules! count_repeat_n_clones {
     };
 }
 
-count_repeat_n_clones!()
+count_repeat_n_clones!();

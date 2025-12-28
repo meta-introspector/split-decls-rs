@@ -4,4 +4,4 @@ macro_rules! relative_target_rustlib_path {
     };
 }
 
-relative_target_rustlib_path!()
+relative_target_rustlib_path!();

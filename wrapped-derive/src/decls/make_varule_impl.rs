@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        UnsizedField!();
-        FieldInfo!();
         UnsizedFields!();
+        FieldInfo!();
+        UnsizedField!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! make_varule_impl {
     };
 }
 
-make_varule_impl!()
+make_varule_impl!();

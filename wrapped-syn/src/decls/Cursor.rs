@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Entry!();
         TokenBuffer!();
+        Entry!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Cursor {
     };
 }
 
-Cursor!()
+Cursor!();

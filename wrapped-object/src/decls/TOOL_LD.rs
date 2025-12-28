@@ -4,4 +4,4 @@ macro_rules! TOOL_LD {
     };
 }
 
-TOOL_LD!()
+TOOL_LD!();

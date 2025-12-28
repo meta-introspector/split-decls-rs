@@ -11,4 +11,4 @@ macro_rules! thread_rng {
     };
 }
 
-thread_rng!()
+thread_rng!();

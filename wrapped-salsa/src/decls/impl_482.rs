@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        QueryEdge!();
         QueryEdgeKind!();
         DatabaseKeyIndex!();
+        QueryEdge!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_482 {
     };
 }
 
-impl_482!()
+impl_482!();

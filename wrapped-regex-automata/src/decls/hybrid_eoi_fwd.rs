@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         Cache!();
-        DFA!();
+        HalfMatch!();
         LazyStateID!();
         Input!();
-        HalfMatch!();
         MatchError!();
+        DFA!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! hybrid_eoi_fwd {
     };
 }
 
-hybrid_eoi_fwd!()
+hybrid_eoi_fwd!();

@@ -4,4 +4,4 @@ macro_rules! CHAM {
     };
 }
 
-CHAM!()
+CHAM!();

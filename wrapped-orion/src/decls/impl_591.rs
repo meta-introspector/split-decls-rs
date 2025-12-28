@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        UnknownCryptoError!();
         PrivateKey!();
         DHKEM_X25519_SHA256_CHACHA20!();
         PublicKey!();
         DhKem!();
-        UnknownCryptoError!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_591 {
     };
 }
 
-impl_591!()
+impl_591!();

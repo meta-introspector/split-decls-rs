@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        FairMutex!();
         RawMutex!();
         RawFairMutex!();
-        FairMutex!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! const_fair_mutex {
     };
 }
 
-const_fair_mutex!()
+const_fair_mutex!();

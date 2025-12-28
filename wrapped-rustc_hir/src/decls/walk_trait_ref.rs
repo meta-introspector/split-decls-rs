@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        TraitRef!();
         Visitor!();
+        TraitRef!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! walk_trait_ref {
     };
 }
 
-walk_trait_ref!()
+walk_trait_ref!();

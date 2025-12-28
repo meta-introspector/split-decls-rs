@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
         ObjectSymbolTable!();
-        ElfSymbol!();
-        SymbolIterator!();
-        ReadRef!();
         ElfSymbolTable!();
-        Symbol!();
+        SymbolIterator!();
+        Result!();
         ElfSymbolIterator!();
         SymbolIndex!();
+        Symbol!();
+        ElfSymbol!();
         FileHeader!();
-        Result!();
+        ReadRef!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_328 {
     };
 }
 
-impl_328!()
+impl_328!();

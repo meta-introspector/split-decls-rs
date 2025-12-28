@@ -4,4 +4,4 @@ macro_rules! GenericArgCountMismatch {
     };
 }
 
-GenericArgCountMismatch!()
+GenericArgCountMismatch!();

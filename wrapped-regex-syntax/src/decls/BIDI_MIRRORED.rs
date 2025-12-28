@@ -4,4 +4,4 @@ macro_rules! BIDI_MIRRORED {
     };
 }
 
-BIDI_MIRRORED!()
+BIDI_MIRRORED!();

@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        FallibleTypeFolder!();
         Interner!();
+        TypeVisitable!();
+        Ty!();
         TypeVisitableExt!();
         TypeFolder!();
-        Ty!();
-        TypeVisitable!();
+        FallibleTypeFolder!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! TypeFoldable {
     };
 }
 
-TypeFoldable!()
+TypeFoldable!();

@@ -4,4 +4,4 @@ macro_rules! ENCLOSING_MARK {
     };
 }
 
-ENCLOSING_MARK!()
+ENCLOSING_MARK!();

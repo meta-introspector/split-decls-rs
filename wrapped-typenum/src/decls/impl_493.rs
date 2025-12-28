@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        PrivateMax!();
         UInt!();
         Cmp!();
+        Bit!();
+        PrivateMax!();
+        Compare!();
+        PrivateMaxOut!();
         Unsigned!();
         Max!();
-        Compare!();
-        Bit!();
-        PrivateMaxOut!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_493 {
     };
 }
 
-impl_493!()
+impl_493!();

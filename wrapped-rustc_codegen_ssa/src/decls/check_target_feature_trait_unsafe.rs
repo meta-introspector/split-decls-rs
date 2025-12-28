@@ -11,4 +11,4 @@ macro_rules! check_target_feature_trait_unsafe {
     };
 }
 
-check_target_feature_trait_unsafe!()
+check_target_feature_trait_unsafe!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        BridgeTys!();
-        SubtypePredicate!();
         Stable!();
+        SubtypePredicate!();
+        BridgeTys!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_202 {
     };
 }
 
-impl_202!()
+impl_202!();

@@ -4,4 +4,4 @@ macro_rules! NotInfo {
     };
 }
 
-NotInfo!()
+NotInfo!();

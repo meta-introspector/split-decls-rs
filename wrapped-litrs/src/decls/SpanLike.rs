@@ -4,4 +4,4 @@ macro_rules! SpanLike {
     };
 }
 
-SpanLike!()
+SpanLike!();

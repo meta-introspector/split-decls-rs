@@ -4,4 +4,4 @@ macro_rules! PR_GET_IO_FLUSHER {
     };
 }
 
-PR_GET_IO_FLUSHER!()
+PR_GET_IO_FLUSHER!();

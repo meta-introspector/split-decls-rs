@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        Compare!();
-        ErrorKind!();
-        Parser!();
-        Float!();
-        ParseError!();
-        Input!();
-        Offset!();
-        Error!();
         AsChar!();
+        Input!();
         Err!();
+        Parser!();
+        ParseError!();
+        Offset!();
+        ErrorKind!();
+        Error!();
+        Compare!();
+        Float!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! recognize_float_or_exceptions {
     };
 }
 
-recognize_float_or_exceptions!()
+recognize_float_or_exceptions!();

@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        IWeakReference_Vtbl!();
-        Interface!();
         IWeakReference_Impl!();
-        HRESULT!();
         IUnknown_Vtbl!();
+        Interface!();
+        IWeakReference_Vtbl!();
         GUID!();
+        HRESULT!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_57 {
     };
 }
 
-impl_57!()
+impl_57!();

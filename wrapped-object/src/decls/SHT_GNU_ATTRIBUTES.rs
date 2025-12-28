@@ -11,4 +11,4 @@ macro_rules! SHT_GNU_ATTRIBUTES {
     };
 }
 
-SHT_GNU_ATTRIBUTES!()
+SHT_GNU_ATTRIBUTES!();

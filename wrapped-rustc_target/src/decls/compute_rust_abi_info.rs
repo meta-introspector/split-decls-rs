@@ -12,4 +12,4 @@ macro_rules! compute_rust_abi_info {
     };
 }
 
-compute_rust_abi_info!()
+compute_rust_abi_info!();

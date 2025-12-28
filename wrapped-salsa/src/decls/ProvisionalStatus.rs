@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         IterationCount!();
-        CycleHeads!();
         Revision!();
+        CycleHeads!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! ProvisionalStatus {
     };
 }
 
-ProvisionalStatus!()
+ProvisionalStatus!();

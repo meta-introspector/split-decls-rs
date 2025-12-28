@@ -4,4 +4,4 @@ macro_rules! register_usize {
     };
 }
 
-register_usize!()
+register_usize!();

@@ -4,4 +4,4 @@ macro_rules! DOUBLE_ROUND {
     };
 }
 
-DOUBLE_ROUND!()
+DOUBLE_ROUND!();

@@ -11,4 +11,4 @@ macro_rules! DYNAMIC_CAST_IID {
     };
 }
 
-DYNAMIC_CAST_IID!()
+DYNAMIC_CAST_IID!();

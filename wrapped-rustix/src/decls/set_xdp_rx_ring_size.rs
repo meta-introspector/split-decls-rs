@@ -11,4 +11,4 @@ macro_rules! set_xdp_rx_ring_size {
     };
 }
 
-set_xdp_rx_ring_size!()
+set_xdp_rx_ring_size!();

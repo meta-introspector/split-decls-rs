@@ -4,4 +4,4 @@ macro_rules! OEX_PAGE0 {
     };
 }
 
-OEX_PAGE0!()
+OEX_PAGE0!();

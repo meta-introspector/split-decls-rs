@@ -4,4 +4,4 @@ macro_rules! ELFOSABI_SOLARIS {
     };
 }
 
-ELFOSABI_SOLARIS!()
+ELFOSABI_SOLARIS!();

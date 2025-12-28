@@ -4,4 +4,4 @@ macro_rules! ELFOSABI_OPENBSD {
     };
 }
 
-ELFOSABI_OPENBSD!()
+ELFOSABI_OPENBSD!();

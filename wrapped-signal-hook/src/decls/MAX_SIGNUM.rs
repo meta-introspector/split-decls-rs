@@ -4,4 +4,4 @@ macro_rules! MAX_SIGNUM {
     };
 }
 
-MAX_SIGNUM!()
+MAX_SIGNUM!();

@@ -11,4 +11,4 @@ macro_rules! RTLD_GLOBAL {
     };
 }
 
-RTLD_GLOBAL!()
+RTLD_GLOBAL!();

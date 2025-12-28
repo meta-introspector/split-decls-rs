@@ -4,4 +4,4 @@ macro_rules! FromDyn {
     };
 }
 
-FromDyn!()
+FromDyn!();

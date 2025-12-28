@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        CircularTupleWindows!();
         TupleCollect!();
+        CircularTupleWindows!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_522 {
     };
 }
 
-impl_522!()
+impl_522!();

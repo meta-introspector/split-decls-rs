@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        AttributeExt!();
         Item!();
+        AttributeExt!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! filter_by_name {
     };
 }
 
-filter_by_name!()
+filter_by_name!();

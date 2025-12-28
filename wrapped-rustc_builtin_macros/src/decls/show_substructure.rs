@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        FieldInfo!();
         BlockOrExpr!();
+        FieldInfo!();
         Substructure!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! show_substructure {
     };
 }
 
-show_substructure!()
+show_substructure!();

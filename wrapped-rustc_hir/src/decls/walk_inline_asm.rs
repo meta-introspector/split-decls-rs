@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        InlineAsm!();
-        Visitor!();
         InlineAsmOperand!();
+        Visitor!();
+        InlineAsm!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! walk_inline_asm {
     };
 }
 
-walk_inline_asm!()
+walk_inline_asm!();

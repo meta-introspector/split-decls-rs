@@ -4,4 +4,4 @@ macro_rules! interface {
     };
 }
 
-interface!()
+interface!();

@@ -4,4 +4,4 @@ macro_rules! EdgesFromStatic {
     };
 }
 
-EdgesFromStatic!()
+EdgesFromStatic!();

@@ -4,4 +4,4 @@ macro_rules! EM_ST19 {
     };
 }
 
-EM_ST19!()
+EM_ST19!();

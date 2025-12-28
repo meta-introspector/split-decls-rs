@@ -4,4 +4,4 @@ macro_rules! IsCopy {
     };
 }
 
-IsCopy!()
+IsCopy!();

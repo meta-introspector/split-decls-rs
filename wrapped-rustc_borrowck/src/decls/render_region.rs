@@ -11,4 +11,4 @@ macro_rules! render_region {
     };
 }
 
-render_region!()
+render_region!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         OccupiedEntry!();
+        Item!();
         InlineTable!();
         Key!();
-        Item!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! InlineOccupiedEntry {
     };
 }
 
-InlineOccupiedEntry!()
+InlineOccupiedEntry!();

@@ -12,4 +12,4 @@ macro_rules! validate_struct_keys {
     };
 }
 
-validate_struct_keys!()
+validate_struct_keys!();

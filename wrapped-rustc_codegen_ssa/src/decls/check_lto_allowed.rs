@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        LtoDylib!();
-        CodegenContext!();
-        WriteBackendMethods!();
         LtoProcMacro!();
-        LtoDisallowed!();
         DynamicLinkingWithLTO!();
+        CodegenContext!();
+        LtoDylib!();
+        WriteBackendMethods!();
+        LtoDisallowed!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! check_lto_allowed {
     };
 }
 
-check_lto_allowed!()
+check_lto_allowed!();

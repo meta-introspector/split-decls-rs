@@ -4,4 +4,4 @@ macro_rules! exported_symbols_for_proc_macro_crate {
     };
 }
 
-exported_symbols_for_proc_macro_crate!()
+exported_symbols_for_proc_macro_crate!();

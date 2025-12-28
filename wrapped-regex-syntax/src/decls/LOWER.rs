@@ -4,4 +4,4 @@ macro_rules! LOWER {
     };
 }
 
-LOWER!()
+LOWER!();

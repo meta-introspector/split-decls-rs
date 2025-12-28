@@ -4,4 +4,4 @@ macro_rules! type_is_unit {
     };
 }
 
-type_is_unit!()
+type_is_unit!();

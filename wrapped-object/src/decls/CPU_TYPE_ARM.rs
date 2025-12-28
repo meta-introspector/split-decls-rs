@@ -4,4 +4,4 @@ macro_rules! CPU_TYPE_ARM {
     };
 }
 
-CPU_TYPE_ARM!()
+CPU_TYPE_ARM!();

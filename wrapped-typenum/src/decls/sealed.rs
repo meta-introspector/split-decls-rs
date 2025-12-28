@@ -1,20 +1,20 @@
 macro_rules! deps {
     () => {
-        PInt!();
-        B1!();
-        UInt!();
-        Greater!();
-        Z0!();
-        ATerm!();
-        Bit!();
-        NonZero!();
-        NInt!();
-        TArr!();
-        Less!();
         Unsigned!();
         Equal!();
+        B1!();
+        PInt!();
+        NInt!();
+        Greater!();
+        Less!();
+        TArr!();
+        Bit!();
         UTerm!();
+        UInt!();
+        ATerm!();
         B0!();
+        Z0!();
+        NonZero!();
     };
 }
 
@@ -25,4 +25,4 @@ macro_rules! sealed {
     };
 }
 
-sealed!()
+sealed!();

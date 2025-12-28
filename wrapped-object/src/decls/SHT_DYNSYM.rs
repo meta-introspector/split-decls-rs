@@ -11,4 +11,4 @@ macro_rules! SHT_DYNSYM {
     };
 }
 
-SHT_DYNSYM!()
+SHT_DYNSYM!();

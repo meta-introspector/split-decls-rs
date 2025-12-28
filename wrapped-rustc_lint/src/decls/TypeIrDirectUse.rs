@@ -4,4 +4,4 @@ macro_rules! TypeIrDirectUse {
     };
 }
 
-TypeIrDirectUse!()
+TypeIrDirectUse!();

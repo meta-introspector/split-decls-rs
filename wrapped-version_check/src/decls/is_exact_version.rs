@@ -11,4 +11,4 @@ macro_rules! is_exact_version {
     };
 }
 
-is_exact_version!()
+is_exact_version!();

@@ -11,4 +11,4 @@ macro_rules! error_with_offset {
     };
 }
 
-error_with_offset!()
+error_with_offset!();

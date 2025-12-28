@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        CollectionAllocErr!();
         TaggedLen!();
-        IntoIter!();
+        SmallVec!();
         Drain!();
+        ExtractIf!();
         DropDealloc!();
         Splice!();
-        ExtractIf!();
-        SmallVec!();
+        IntoIter!();
+        CollectionAllocErr!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_112 {
     };
 }
 
-impl_112!()
+impl_112!();

@@ -4,4 +4,4 @@ macro_rules! is_primitive_path {
     };
 }
 
-is_primitive_path!()
+is_primitive_path!();

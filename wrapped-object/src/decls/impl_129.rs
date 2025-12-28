@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         Segment!();
-        SegmentIteratorInternal!();
-        SegmentIterator!();
         ReadRef!();
+        SegmentIterator!();
         Item!();
+        SegmentIteratorInternal!();
         SegmentInternal!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! impl_129 {
     };
 }
 
-impl_129!()
+impl_129!();

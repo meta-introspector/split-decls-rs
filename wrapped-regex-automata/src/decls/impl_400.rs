@@ -1,18 +1,18 @@
 macro_rules! deps {
     () => {
+        Input!();
+        PikeVMEngine!();
+        PatternSet!();
+        PikeVM!();
         PatternID!();
-        Config!();
         PikeVMCache!();
         NonMaxUsize!();
+        NFA!();
         Prefilter!();
         BuildError!();
-        NFA!();
-        PatternSet!();
-        Input!();
-        RegexInfo!();
         Builder!();
-        PikeVMEngine!();
-        PikeVM!();
+        Config!();
+        RegexInfo!();
     };
 }
 
@@ -23,4 +23,4 @@ macro_rules! impl_400 {
     };
 }
 
-impl_400!()
+impl_400!();

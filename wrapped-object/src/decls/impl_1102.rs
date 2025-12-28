@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Item!();
         TableIter!();
+        Item!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_1102 {
     };
 }
 
-impl_1102!()
+impl_1102!();

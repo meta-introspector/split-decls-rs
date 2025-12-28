@@ -4,4 +4,4 @@ macro_rules! invalid_filter_section_missing_name {
     };
 }
 
-invalid_filter_section_missing_name!()
+invalid_filter_section_missing_name!();

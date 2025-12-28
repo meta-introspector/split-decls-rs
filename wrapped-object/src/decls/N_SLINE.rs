@@ -4,4 +4,4 @@ macro_rules! N_SLINE {
     };
 }
 
-N_SLINE!()
+N_SLINE!();

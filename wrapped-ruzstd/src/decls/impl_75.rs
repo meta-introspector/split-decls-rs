@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        FrameDecoderError!();
         ReadFrameHeaderError!();
+        FrameDecoderError!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_75 {
     };
 }
 
-impl_75!()
+impl_75!();

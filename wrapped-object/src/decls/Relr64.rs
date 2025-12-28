@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Endian!();
         U64!();
+        Endian!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Relr64 {
     };
 }
 
-Relr64!()
+Relr64!();

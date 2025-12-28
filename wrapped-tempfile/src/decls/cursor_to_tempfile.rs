@@ -4,4 +4,4 @@ macro_rules! cursor_to_tempfile {
     };
 }
 
-cursor_to_tempfile!()
+cursor_to_tempfile!();

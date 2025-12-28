@@ -4,4 +4,4 @@ macro_rules! encode_offset {
     };
 }
 
-encode_offset!()
+encode_offset!();

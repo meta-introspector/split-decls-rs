@@ -4,4 +4,4 @@ macro_rules! LogicOperator {
     };
 }
 
-LogicOperator!()
+LogicOperator!();

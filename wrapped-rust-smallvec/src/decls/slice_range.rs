@@ -4,4 +4,4 @@ macro_rules! slice_range {
     };
 }
 
-slice_range!()
+slice_range!();

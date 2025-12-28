@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Termios!();
         Result!();
+        Termios!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! tcgetattr {
     };
 }
 
-tcgetattr!()
+tcgetattr!();

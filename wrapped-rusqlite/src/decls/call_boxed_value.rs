@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        SqlFnOutput!();
-        Error!();
         WindowAggregate!();
+        Error!();
+        SqlFnOutput!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! call_boxed_value {
     };
 }
 
-call_boxed_value!()
+call_boxed_value!();

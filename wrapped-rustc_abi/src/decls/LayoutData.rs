@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
+        FieldsShape!();
+        BackendRepr!();
+        Niche!();
         AbiAlign!();
+        Size!();
         Align!();
         Variants!();
-        Size!();
-        FieldsShape!();
-        Niche!();
-        BackendRepr!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! LayoutData {
     };
 }
 
-LayoutData!()
+LayoutData!();

@@ -4,4 +4,4 @@ macro_rules! IMAGE_DOS_HEADER {
     };
 }
 
-IMAGE_DOS_HEADER!()
+IMAGE_DOS_HEADER!();

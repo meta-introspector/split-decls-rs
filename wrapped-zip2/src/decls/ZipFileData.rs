@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        CompressionMethod!();
+        System!();
         DateTime!();
         AesMode!();
-        AesVendorVersion!();
+        CompressionMethod!();
         ExtraField!();
-        System!();
+        AesVendorVersion!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! ZipFileData {
     };
 }
 
-ZipFileData!()
+ZipFileData!();

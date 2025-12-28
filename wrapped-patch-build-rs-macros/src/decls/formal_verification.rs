@@ -4,4 +4,4 @@ macro_rules! formal_verification {
     };
 }
 
-formal_verification!()
+formal_verification!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        TypeName!();
         Reader!();
+        TypeName!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! get_type_name {
     };
 }
 
-get_type_name!()
+get_type_name!();

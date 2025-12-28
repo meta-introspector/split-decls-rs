@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         InCrate!();
-        UncoveredTyParams!();
-        OrphanCheckErr!();
         OrphanChecker!();
         OrphanCheckEarlyExit!();
+        OrphanCheckErr!();
+        UncoveredTyParams!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! orphan_check_trait_ref {
     };
 }
 
-orphan_check_trait_ref!()
+orphan_check_trait_ref!();

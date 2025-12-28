@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        IntervalSet!();
         ClassBytesRange!();
+        IntervalSet!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! ClassBytes {
     };
 }
 
-ClassBytes!()
+ClassBytes!();

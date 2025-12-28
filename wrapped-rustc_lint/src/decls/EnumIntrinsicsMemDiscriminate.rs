@@ -4,4 +4,4 @@ macro_rules! EnumIntrinsicsMemDiscriminate {
     };
 }
 
-EnumIntrinsicsMemDiscriminate!()
+EnumIntrinsicsMemDiscriminate!();

@@ -4,4 +4,4 @@ macro_rules! __tracing_stringify {
     };
 }
 
-__tracing_stringify!()
+__tracing_stringify!();

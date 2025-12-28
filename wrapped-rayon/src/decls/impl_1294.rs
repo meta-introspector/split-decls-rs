@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        CharsProducer!();
         ParallelIterator!();
         Chars!();
         UnindexedConsumer!();
-        CharsProducer!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_1294 {
     };
 }
 
-impl_1294!()
+impl_1294!();

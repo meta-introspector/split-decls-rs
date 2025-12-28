@@ -4,4 +4,4 @@ macro_rules! trace_span {
     };
 }
 
-trace_span!()
+trace_span!();

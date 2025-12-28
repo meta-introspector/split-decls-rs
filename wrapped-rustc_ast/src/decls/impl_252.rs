@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        HasTokens!();
         Stmt!();
         LazyAttrTokenStream!();
+        HasTokens!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_252 {
     };
 }
 
-impl_252!()
+impl_252!();

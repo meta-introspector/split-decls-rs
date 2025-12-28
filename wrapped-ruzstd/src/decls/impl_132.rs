@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
+        FrameDecoder!();
         Error!();
-        ErrorKind!();
-        StreamingDecoder!();
         BlockDecodingStrategy!();
         Read!();
-        FrameDecoder!();
+        StreamingDecoder!();
+        ErrorKind!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_132 {
     };
 }
 
-impl_132!()
+impl_132!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        FileHeader!();
         Item!();
-        ReadRef!();
-        ElfSegmentIterator!();
+        FileHeader!();
         ElfSegment!();
+        ElfSegmentIterator!();
+        ReadRef!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_292 {
     };
 }
 
-impl_292!()
+impl_292!();

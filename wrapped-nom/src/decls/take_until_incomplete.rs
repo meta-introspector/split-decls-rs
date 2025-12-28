@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Err!();
-        IResult!();
         Needed!();
+        IResult!();
+        Err!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! take_until_incomplete {
     };
 }
 
-take_until_incomplete!()
+take_until_incomplete!();

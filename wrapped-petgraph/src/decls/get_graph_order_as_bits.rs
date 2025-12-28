@@ -11,4 +11,4 @@ macro_rules! get_graph_order_as_bits {
     };
 }
 
-get_graph_order_as_bits!()
+get_graph_order_as_bits!();

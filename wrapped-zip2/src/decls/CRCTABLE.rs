@@ -4,4 +4,4 @@ macro_rules! CRCTABLE {
     };
 }
 
-CRCTABLE!()
+CRCTABLE!();

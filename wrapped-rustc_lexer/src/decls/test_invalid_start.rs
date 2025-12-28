@@ -11,4 +11,4 @@ macro_rules! test_invalid_start {
     };
 }
 
-test_invalid_start!()
+test_invalid_start!();

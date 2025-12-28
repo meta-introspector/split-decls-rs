@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        PikeVM!();
-        HalfMatch!();
-        Config!();
-        Match!();
-        NFA!();
-        Prefilter!();
-        Input!();
-        MatchKind!();
         DFA!();
+        Prefilter!();
+        NFA!();
+        Config!();
+        MatchKind!();
+        PikeVM!();
+        Input!();
+        Match!();
+        HalfMatch!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_535 {
     };
 }
 
-impl_535!()
+impl_535!();

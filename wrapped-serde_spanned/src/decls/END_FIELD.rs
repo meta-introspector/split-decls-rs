@@ -4,4 +4,4 @@ macro_rules! END_FIELD {
     };
 }
 
-END_FIELD!()
+END_FIELD!();

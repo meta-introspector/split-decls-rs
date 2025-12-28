@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        TermKind!();
         Visitor!();
         Visitable!();
-        TermKind!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_474 {
     };
 }
 
-impl_474!()
+impl_474!();

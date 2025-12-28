@@ -4,4 +4,4 @@ macro_rules! NT_PRCRED {
     };
 }
 
-NT_PRCRED!()
+NT_PRCRED!();

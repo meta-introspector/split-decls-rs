@@ -12,4 +12,4 @@ macro_rules! infer_type_if_missing {
     };
 }
 
-infer_type_if_missing!()
+infer_type_if_missing!();

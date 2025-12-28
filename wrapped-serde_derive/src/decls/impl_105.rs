@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        ReplaceReceiver!();
-        Field!();
         Default!();
         Data!();
+        ReplaceReceiver!();
+        Field!();
         Expr!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_105 {
     };
 }
 
-impl_105!()
+impl_105!();

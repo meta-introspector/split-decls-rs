@@ -4,4 +4,4 @@ macro_rules! ScaledValue {
     };
 }
 
-ScaledValue!()
+ScaledValue!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        PoloniusDiagnosticsContext!();
-        ClosureRegionRequirements!();
-        BorrowSet!();
         BorrowckInferCtxt!();
+        PoloniusDiagnosticsContext!();
+        BorrowSet!();
+        ClosureRegionRequirements!();
         RegionInferenceContext!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! dump_polonius_mir {
     };
 }
 
-dump_polonius_mir!()
+dump_polonius_mir!();

@@ -11,4 +11,4 @@ macro_rules! collect_natvis_visualizers {
     };
 }
 
-collect_natvis_visualizers!()
+collect_natvis_visualizers!();

@@ -11,4 +11,4 @@ macro_rules! current_num_threads {
     };
 }
 
-current_num_threads!()
+current_num_threads!();

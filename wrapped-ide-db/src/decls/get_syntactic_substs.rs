@@ -11,4 +11,4 @@ macro_rules! get_syntactic_substs {
     };
 }
 
-get_syntactic_substs!()
+get_syntactic_substs!();

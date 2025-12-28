@@ -4,4 +4,4 @@ macro_rules! FilterType {
     };
 }
 
-FilterType!()
+FilterType!();

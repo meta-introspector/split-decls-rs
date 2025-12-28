@@ -4,4 +4,4 @@ macro_rules! R_ARM_SBREL31 {
     };
 }
 
-R_ARM_SBREL31!()
+R_ARM_SBREL31!();

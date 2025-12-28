@@ -4,4 +4,4 @@ macro_rules! C_FILE {
     };
 }
 
-C_FILE!()
+C_FILE!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Reversed!();
+        Edges!();
         ReversedEdges!();
         EdgesDirected!();
-        Edges!();
+        Reversed!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_174 {
     };
 }
 
-impl_174!()
+impl_174!();

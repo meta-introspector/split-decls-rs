@@ -11,4 +11,4 @@ macro_rules! lex_requires_whitespace_between_things {
     };
 }
 
-lex_requires_whitespace_between_things!()
+lex_requires_whitespace_between_things!();

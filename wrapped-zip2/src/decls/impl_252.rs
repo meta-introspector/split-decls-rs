@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ZipResult!();
         ZipLocalEntryBlock!();
+        ZipResult!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_252 {
     };
 }
 
-impl_252!()
+impl_252!();

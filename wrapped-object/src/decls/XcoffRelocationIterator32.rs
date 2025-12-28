@@ -12,4 +12,4 @@ macro_rules! XcoffRelocationIterator32 {
     };
 }
 
-XcoffRelocationIterator32!()
+XcoffRelocationIterator32!();

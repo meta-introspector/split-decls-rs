@@ -4,4 +4,4 @@ macro_rules! region_known_to_outlive {
     };
 }
 
-region_known_to_outlive!()
+region_known_to_outlive!();

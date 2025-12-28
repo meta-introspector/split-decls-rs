@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Table!();
-        Flags!();
         State!();
-        Mode!();
-        Codes!();
         InflateFlush!();
-        Crc32Fold!();
+        Mode!();
         Code!();
+        Codes!();
+        Flags!();
+        Crc32Fold!();
+        Table!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_236 {
     };
 }
 
-impl_236!()
+impl_236!();

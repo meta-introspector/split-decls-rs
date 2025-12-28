@@ -4,4 +4,4 @@ macro_rules! r#gen {
     };
 }
 
-r#gen!()
+r#gen!();

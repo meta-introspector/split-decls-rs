@@ -4,4 +4,4 @@ macro_rules! impl_load {
     };
 }
 
-impl_load!()
+impl_load!();

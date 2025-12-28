@@ -4,4 +4,4 @@ macro_rules! CharsProducer {
     };
 }
 
-CharsProducer!()
+CharsProducer!();

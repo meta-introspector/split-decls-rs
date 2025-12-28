@@ -4,4 +4,4 @@ macro_rules! llvm_is_64_bit_object_file {
     };
 }
 
-llvm_is_64_bit_object_file!()
+llvm_is_64_bit_object_file!();

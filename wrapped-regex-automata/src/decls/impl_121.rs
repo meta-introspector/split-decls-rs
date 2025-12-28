@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        NE!();
         Endian!();
-        DFA!();
         HalfMatch!();
         SerializeError!();
-        BE!();
         Input!();
+        BE!();
+        NE!();
+        DFA!();
         LE!();
     };
 }
@@ -18,4 +18,4 @@ macro_rules! impl_121 {
     };
 }
 
-impl_121!()
+impl_121!();

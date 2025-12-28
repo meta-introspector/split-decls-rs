@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         DstLayout!();
-        SizeInfo!();
         SliceDst!();
         TrailingSliceLayout!();
+        SizeInfo!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! proofs {
     };
 }
 
-proofs!()
+proofs!();

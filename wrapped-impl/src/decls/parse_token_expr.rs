@@ -4,4 +4,4 @@ macro_rules! parse_token_expr {
     };
 }
 
-parse_token_expr!()
+parse_token_expr!();

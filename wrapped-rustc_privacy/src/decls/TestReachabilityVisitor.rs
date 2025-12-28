@@ -4,4 +4,4 @@ macro_rules! TestReachabilityVisitor {
     };
 }
 
-TestReachabilityVisitor!()
+TestReachabilityVisitor!();

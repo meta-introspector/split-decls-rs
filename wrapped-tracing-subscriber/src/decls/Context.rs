@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        LookupSpan!();
         Layer!();
+        LookupSpan!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Context {
     };
 }
 
-Context!()
+Context!();

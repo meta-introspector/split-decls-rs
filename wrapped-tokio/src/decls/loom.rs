@@ -4,4 +4,4 @@ macro_rules! loom {
     };
 }
 
-loom!()
+loom!();

@@ -4,4 +4,4 @@ macro_rules! BorrowAttribute {
     };
 }
 
-BorrowAttribute!()
+BorrowAttribute!();

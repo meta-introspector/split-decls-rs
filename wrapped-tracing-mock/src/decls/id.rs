@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        ExpectedSpan!();
         NewSpan!();
         ExpectedId!();
-        ExpectedSpan!();
         MockSubscriber!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! id {
     };
 }
 
-id!()
+id!();

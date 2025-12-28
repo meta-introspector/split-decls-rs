@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Equal!();
         Less!();
+        Equal!();
         Ord!();
         InternalMarker!();
         Greater!();
@@ -15,4 +15,4 @@ macro_rules! Cmp {
     };
 }
 
-Cmp!()
+Cmp!();

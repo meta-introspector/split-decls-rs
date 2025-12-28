@@ -4,4 +4,4 @@ macro_rules! FailedCandidateInfo {
     };
 }
 
-FailedCandidateInfo!()
+FailedCandidateInfo!();

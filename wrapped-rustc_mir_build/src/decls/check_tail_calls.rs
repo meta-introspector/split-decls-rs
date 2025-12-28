@@ -4,4 +4,4 @@ macro_rules! check_tail_calls {
     };
 }
 
-check_tail_calls!()
+check_tail_calls!();

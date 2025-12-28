@@ -11,4 +11,4 @@ macro_rules! is_syn_full {
     };
 }
 
-is_syn_full!()
+is_syn_full!();

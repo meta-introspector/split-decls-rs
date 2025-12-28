@@ -4,4 +4,4 @@ macro_rules! SIGNALS {
     };
 }
 
-SIGNALS!()
+SIGNALS!();

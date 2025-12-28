@@ -4,4 +4,4 @@ macro_rules! json_monster_proof {
     };
 }
 
-json_monster_proof!()
+json_monster_proof!();

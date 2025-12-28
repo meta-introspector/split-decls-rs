@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         WorkUnit!();
-        WorkerHandle!();
-        Error!();
         ResultUnit!();
+        Error!();
+        WorkerHandle!();
         Lzma2Reader!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! worker_thread_logic {
     };
 }
 
-worker_thread_logic!()
+worker_thread_logic!();

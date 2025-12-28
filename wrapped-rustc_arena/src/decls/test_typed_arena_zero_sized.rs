@@ -11,4 +11,4 @@ macro_rules! test_typed_arena_zero_sized {
     };
 }
 
-test_typed_arena_zero_sized!()
+test_typed_arena_zero_sized!();

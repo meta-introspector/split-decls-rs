@@ -11,4 +11,4 @@ macro_rules! bytes_of_slice_mut {
     };
 }
 
-bytes_of_slice_mut!()
+bytes_of_slice_mut!();

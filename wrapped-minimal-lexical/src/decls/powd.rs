@@ -4,4 +4,4 @@ macro_rules! powd {
     };
 }
 
-powd!()
+powd!();

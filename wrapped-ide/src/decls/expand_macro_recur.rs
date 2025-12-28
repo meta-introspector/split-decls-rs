@@ -4,4 +4,4 @@ macro_rules! expand_macro_recur {
     };
 }
 
-expand_macro_recur!()
+expand_macro_recur!();

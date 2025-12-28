@@ -4,4 +4,4 @@ macro_rules! CTRL_C_RECEIVED {
     };
 }
 
-CTRL_C_RECEIVED!()
+CTRL_C_RECEIVED!();

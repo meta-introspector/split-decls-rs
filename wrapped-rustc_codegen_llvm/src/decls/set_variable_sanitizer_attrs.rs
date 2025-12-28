@@ -4,4 +4,4 @@ macro_rules! set_variable_sanitizer_attrs {
     };
 }
 
-set_variable_sanitizer_attrs!()
+set_variable_sanitizer_attrs!();

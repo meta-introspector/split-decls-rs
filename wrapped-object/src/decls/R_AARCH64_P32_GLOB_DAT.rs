@@ -4,4 +4,4 @@ macro_rules! R_AARCH64_P32_GLOB_DAT {
     };
 }
 
-R_AARCH64_P32_GLOB_DAT!()
+R_AARCH64_P32_GLOB_DAT!();

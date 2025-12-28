@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        DepNodeColor!();
         QueryContext!();
-        Deps!();
-        MarkFrame!();
+        DepNodeColor!();
         DepGraphData!();
         DepNode!();
+        Deps!();
+        MarkFrame!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_55 {
     };
 }
 
-impl_55!()
+impl_55!();

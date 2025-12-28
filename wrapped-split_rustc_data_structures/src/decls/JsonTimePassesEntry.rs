@@ -4,4 +4,4 @@ macro_rules! JsonTimePassesEntry {
     };
 }
 
-JsonTimePassesEntry!()
+JsonTimePassesEntry!();

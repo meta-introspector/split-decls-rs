@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        CoroutineTypes!();
+        GatherLocalsVisitor!();
         FnCtxt!();
         Diverges!();
         CoerceMany!();
-        CoroutineTypes!();
-        GatherLocalsVisitor!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! check_fn {
     };
 }
 
-check_fn!()
+check_fn!();

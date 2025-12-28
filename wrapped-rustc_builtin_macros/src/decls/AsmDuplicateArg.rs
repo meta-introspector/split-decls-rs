@@ -4,4 +4,4 @@ macro_rules! AsmDuplicateArg {
     };
 }
 
-AsmDuplicateArg!()
+AsmDuplicateArg!();

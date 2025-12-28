@@ -4,4 +4,4 @@ macro_rules! trait_method {
     };
 }
 
-trait_method!()
+trait_method!();

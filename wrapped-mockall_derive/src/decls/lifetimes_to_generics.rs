@@ -4,4 +4,4 @@ macro_rules! lifetimes_to_generics {
     };
 }
 
-lifetimes_to_generics!()
+lifetimes_to_generics!();

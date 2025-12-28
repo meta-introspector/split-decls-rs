@@ -4,4 +4,4 @@ macro_rules! RustcFacts {
     };
 }
 
-RustcFacts!()
+RustcFacts!();

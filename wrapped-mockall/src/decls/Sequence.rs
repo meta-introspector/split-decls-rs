@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        SeqHandle!();
-        Foo!();
         SeqInner!();
+        Foo!();
+        SeqHandle!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Sequence {
     };
 }
 
-Sequence!()
+Sequence!();

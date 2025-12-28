@@ -4,4 +4,4 @@ macro_rules! O_THRESHOLD {
     };
 }
 
-O_THRESHOLD!()
+O_THRESHOLD!();

@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
         WasmComdatSectionIterator!();
+        ComdatKind!();
+        SymbolIndex!();
         WasmComdat!();
         SectionIterator!();
         Result!();
         ObjectComdat!();
-        SymbolIndex!();
-        ComdatKind!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_760 {
     };
 }
 
-impl_760!()
+impl_760!();

@@ -4,4 +4,4 @@ macro_rules! DocTestTakesList {
     };
 }
 
-DocTestTakesList!()
+DocTestTakesList!();

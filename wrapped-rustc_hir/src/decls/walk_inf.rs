@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Visitor!();
         InferArg!();
+        Visitor!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! walk_inf {
     };
 }
 
-walk_inf!()
+walk_inf!();

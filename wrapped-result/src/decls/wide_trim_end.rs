@@ -4,4 +4,4 @@ macro_rules! wide_trim_end {
     };
 }
 
-wide_trim_end!()
+wide_trim_end!();

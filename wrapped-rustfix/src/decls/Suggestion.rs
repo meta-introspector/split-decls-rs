@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Solution!();
         Snippet!();
+        Solution!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Suggestion {
     };
 }
 
-Suggestion!()
+Suggestion!();

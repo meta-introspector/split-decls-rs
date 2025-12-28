@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Matcher!();
         FseTables!();
+        Matcher!();
         HuffmanTable!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! CompressState {
     };
 }
 
-CompressState!()
+CompressState!();

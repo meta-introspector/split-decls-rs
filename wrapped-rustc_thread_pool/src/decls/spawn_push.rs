@@ -4,4 +4,4 @@ macro_rules! spawn_push {
     };
 }
 
-spawn_push!()
+spawn_push!();

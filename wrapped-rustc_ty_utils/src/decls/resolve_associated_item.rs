@@ -11,4 +11,4 @@ macro_rules! resolve_associated_item {
     };
 }
 
-resolve_associated_item!()
+resolve_associated_item!();

@@ -11,4 +11,4 @@ macro_rules! compute_copy_classes {
     };
 }
 
-compute_copy_classes!()
+compute_copy_classes!();

@@ -11,4 +11,4 @@ macro_rules! contiguous_range_for_comment {
     };
 }
 
-contiguous_range_for_comment!()
+contiguous_range_for_comment!();

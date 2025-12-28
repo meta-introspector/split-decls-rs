@@ -4,4 +4,4 @@ macro_rules! compress256 {
     };
 }
 
-compress256!()
+compress256!();

@@ -12,4 +12,4 @@ macro_rules! as_cast_impl {
     };
 }
 
-as_cast_impl!()
+as_cast_impl!();

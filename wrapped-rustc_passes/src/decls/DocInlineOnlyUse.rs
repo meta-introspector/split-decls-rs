@@ -4,4 +4,4 @@ macro_rules! DocInlineOnlyUse {
     };
 }
 
-DocInlineOnlyUse!()
+DocInlineOnlyUse!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        BranchPatUsefulness!();
         PatStack!();
         PatCx!();
+        BranchPatUsefulness!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! MatrixRow {
     };
 }
 
-MatrixRow!()
+MatrixRow!();

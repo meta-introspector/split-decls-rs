@@ -11,4 +11,4 @@ macro_rules! SHF_TLS {
     };
 }
 
-SHF_TLS!()
+SHF_TLS!();

@@ -11,4 +11,4 @@ macro_rules! deny_builtin_meta_unsafety {
     };
 }
 
-deny_builtin_meta_unsafety!()
+deny_builtin_meta_unsafety!();

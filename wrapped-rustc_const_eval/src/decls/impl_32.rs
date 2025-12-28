@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         NonConstOp!();
+        InlineAsm!();
         UnallowedInlineAsm!();
         ConstCx!();
-        InlineAsm!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_32 {
     };
 }
 
-impl_32!()
+impl_32!();

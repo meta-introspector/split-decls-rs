@@ -4,4 +4,4 @@ macro_rules! cost_checker {
     };
 }
 
-cost_checker!()
+cost_checker!();

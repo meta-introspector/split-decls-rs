@@ -4,4 +4,4 @@ macro_rules! get_lints {
     };
 }
 
-get_lints!()
+get_lints!();

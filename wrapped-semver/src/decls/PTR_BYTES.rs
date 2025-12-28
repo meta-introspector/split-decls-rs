@@ -4,4 +4,4 @@ macro_rules! PTR_BYTES {
     };
 }
 
-PTR_BYTES!()
+PTR_BYTES!();

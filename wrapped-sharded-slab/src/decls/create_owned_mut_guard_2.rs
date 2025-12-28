@@ -11,4 +11,4 @@ macro_rules! create_owned_mut_guard_2 {
     };
 }
 
-create_owned_mut_guard_2!()
+create_owned_mut_guard_2!();

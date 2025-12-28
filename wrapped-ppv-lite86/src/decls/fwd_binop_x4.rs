@@ -4,4 +4,4 @@ macro_rules! fwd_binop_x4 {
     };
 }
 
-fwd_binop_x4!()
+fwd_binop_x4!();

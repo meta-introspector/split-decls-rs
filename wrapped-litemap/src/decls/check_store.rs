@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        StoreFromIterator!();
         StoreMut!();
         StoreIterable!();
         StoreConstEmpty!();
-        StoreFromIterator!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! check_store {
     };
 }
 
-check_store!()
+check_store!();

@@ -4,4 +4,4 @@ macro_rules! ShadowedIntoIter {
     };
 }
 
-ShadowedIntoIter!()
+ShadowedIntoIter!();

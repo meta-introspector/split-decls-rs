@@ -4,4 +4,4 @@ macro_rules! IMAGE_REL_IA64_IMM22 {
     };
 }
 
-IMAGE_REL_IA64_IMM22!()
+IMAGE_REL_IA64_IMM22!();

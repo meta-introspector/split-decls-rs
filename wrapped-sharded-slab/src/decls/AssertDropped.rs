@@ -4,4 +4,4 @@ macro_rules! AssertDropped {
     };
 }
 
-AssertDropped!()
+AssertDropped!();

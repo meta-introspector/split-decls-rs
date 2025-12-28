@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        PkeParameters!();
-        UnknownCryptoError!();
-        ByteSerialization!();
-        FieldElement!();
-        RingElement!();
         MlKem1024Internal!();
+        ByteSerialization!();
+        PkeParameters!();
+        RingElement!();
+        FieldElement!();
+        UnknownCryptoError!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_466 {
     };
 }
 
-impl_466!()
+impl_466!();

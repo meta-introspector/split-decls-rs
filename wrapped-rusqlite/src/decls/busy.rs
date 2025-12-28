@@ -4,4 +4,4 @@ macro_rules! busy {
     };
 }
 
-busy!()
+busy!();

@@ -1,18 +1,18 @@
 macro_rules! deps {
     () => {
         HalfMatch!();
-        Regex!();
+        MatchKind!();
         Anchored!();
-        Match!();
         Input!();
-        GroupInfo!();
         NonMaxUsize!();
+        PoolGuard!();
+        Match!();
+        PatternSet!();
+        DFA!();
         Captures!();
         PatternID!();
-        PoolGuard!();
-        DFA!();
-        MatchKind!();
-        PatternSet!();
+        GroupInfo!();
+        Regex!();
     };
 }
 
@@ -23,4 +23,4 @@ macro_rules! impl_336 {
     };
 }
 
-impl_336!()
+impl_336!();

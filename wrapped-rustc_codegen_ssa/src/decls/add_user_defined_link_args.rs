@@ -11,4 +11,4 @@ macro_rules! add_user_defined_link_args {
     };
 }
 
-add_user_defined_link_args!()
+add_user_defined_link_args!();

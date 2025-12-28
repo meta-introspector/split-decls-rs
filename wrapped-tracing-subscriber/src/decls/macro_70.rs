@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        DynFilterFn!();
         FilterFn!();
         Context!();
+        DynFilterFn!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! macro_70 {
     };
 }
 
-macro_70!()
+macro_70!();

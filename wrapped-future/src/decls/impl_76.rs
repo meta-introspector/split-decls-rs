@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        IAsyncInfo_Impl!();
-        IAsyncInfo_Vtbl!();
         AsyncStatus!();
+        IAsyncInfo_Vtbl!();
+        IAsyncInfo_Impl!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_76 {
     };
 }
 
-impl_76!()
+impl_76!();

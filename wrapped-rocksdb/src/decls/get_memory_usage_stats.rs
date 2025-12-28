@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        DB!();
-        MemoryUsageBuilder!();
         Error!();
-        Cache!();
+        MemoryUsageBuilder!();
+        DB!();
         MemoryUsageStats!();
+        Cache!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! get_memory_usage_stats {
     };
 }
 
-get_memory_usage_stats!()
+get_memory_usage_stats!();

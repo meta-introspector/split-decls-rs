@@ -4,4 +4,4 @@ macro_rules! WillCreateDefIdsVisitor {
     };
 }
 
-WillCreateDefIdsVisitor!()
+WillCreateDefIdsVisitor!();

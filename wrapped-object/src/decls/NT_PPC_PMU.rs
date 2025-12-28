@@ -4,4 +4,4 @@ macro_rules! NT_PPC_PMU {
     };
 }
 
-NT_PPC_PMU!()
+NT_PPC_PMU!();

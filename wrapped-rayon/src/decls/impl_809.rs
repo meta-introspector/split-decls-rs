@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Empty!();
         RepeatNProducer!();
+        Empty!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_809 {
     };
 }
 
-impl_809!()
+impl_809!();

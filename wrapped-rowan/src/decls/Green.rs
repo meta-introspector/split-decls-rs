@@ -4,4 +4,4 @@ macro_rules! Green {
     };
 }
 
-Green!()
+Green!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         ParserExpr!();
-        ParserRule!();
         Rule!();
+        ParserRule!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! validate_choices {
     };
 }
 
-validate_choices!()
+validate_choices!();

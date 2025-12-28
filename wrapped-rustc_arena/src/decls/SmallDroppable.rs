@@ -4,4 +4,4 @@ macro_rules! SmallDroppable {
     };
 }
 
-SmallDroppable!()
+SmallDroppable!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        LocalKeyId!();
         LocalValue!();
+        LocalKeyId!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! LocalMap {
     };
 }
 
-LocalMap!()
+LocalMap!();

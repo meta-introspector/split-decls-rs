@@ -4,4 +4,4 @@ macro_rules! ENCODE_SIZE_POLY {
     };
 }
 
-ENCODE_SIZE_POLY!()
+ENCODE_SIZE_POLY!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Ficlone!();
-        Ioctl!();
-        IoctlOutput!();
         Result!();
+        Ficlone!();
+        IoctlOutput!();
+        Ioctl!();
         Opcode!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_232 {
     };
 }
 
-impl_232!()
+impl_232!();

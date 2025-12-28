@@ -11,4 +11,4 @@ macro_rules! find_lifetimes_in_path {
     };
 }
 
-find_lifetimes_in_path!()
+find_lifetimes_in_path!();

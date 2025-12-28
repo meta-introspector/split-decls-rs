@@ -11,4 +11,4 @@ macro_rules! DEF_ID_DEBUG {
     };
 }
 
-DEF_ID_DEBUG!()
+DEF_ID_DEBUG!();

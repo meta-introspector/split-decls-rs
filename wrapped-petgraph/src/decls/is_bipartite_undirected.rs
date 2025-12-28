@@ -13,4 +13,4 @@ macro_rules! is_bipartite_undirected {
     };
 }
 
-is_bipartite_undirected!()
+is_bipartite_undirected!();

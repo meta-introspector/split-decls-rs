@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        HirId!();
         OwnerId!();
+        HirId!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_2 {
     };
 }
 
-impl_2!()
+impl_2!();

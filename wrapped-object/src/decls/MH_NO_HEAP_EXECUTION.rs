@@ -4,4 +4,4 @@ macro_rules! MH_NO_HEAP_EXECUTION {
     };
 }
 
-MH_NO_HEAP_EXECUTION!()
+MH_NO_HEAP_EXECUTION!();

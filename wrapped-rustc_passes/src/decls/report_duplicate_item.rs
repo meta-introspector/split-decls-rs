@@ -11,4 +11,4 @@ macro_rules! report_duplicate_item {
     };
 }
 
-report_duplicate_item!()
+report_duplicate_item!();

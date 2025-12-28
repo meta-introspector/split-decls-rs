@@ -4,4 +4,4 @@ macro_rules! check_fixes_unordered {
     };
 }
 
-check_fixes_unordered!()
+check_fixes_unordered!();

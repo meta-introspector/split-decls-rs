@@ -4,4 +4,4 @@ macro_rules! SYM_V_PROTECTED {
     };
 }
 
-SYM_V_PROTECTED!()
+SYM_V_PROTECTED!();

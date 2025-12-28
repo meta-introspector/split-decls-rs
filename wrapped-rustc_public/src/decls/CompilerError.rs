@@ -4,4 +4,4 @@ macro_rules! CompilerError {
     };
 }
 
-CompilerError!()
+CompilerError!();

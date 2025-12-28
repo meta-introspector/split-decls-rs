@@ -4,4 +4,4 @@ macro_rules! filter_targets {
     };
 }
 
-filter_targets!()
+filter_targets!();

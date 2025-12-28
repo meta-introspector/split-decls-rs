@@ -4,4 +4,4 @@ macro_rules! ExpandedFileEntry {
     };
 }
 
-ExpandedFileEntry!()
+ExpandedFileEntry!();

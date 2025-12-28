@@ -4,4 +4,4 @@ macro_rules! BackingStorage {
     };
 }
 
-BackingStorage!()
+BackingStorage!();

@@ -11,4 +11,4 @@ macro_rules! make_acquire_future {
     };
 }
 
-make_acquire_future!()
+make_acquire_future!();

@@ -4,4 +4,4 @@ macro_rules! InlineAsmClobberAbi {
     };
 }
 
-InlineAsmClobberAbi!()
+InlineAsmClobberAbi!();

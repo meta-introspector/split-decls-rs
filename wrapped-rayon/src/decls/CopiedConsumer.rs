@@ -4,4 +4,4 @@ macro_rules! CopiedConsumer {
     };
 }
 
-CopiedConsumer!()
+CopiedConsumer!();

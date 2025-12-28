@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        TestCases!();
         Runner!();
         Test!();
         Expected!();
+        TestCases!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_182 {
     };
 }
 
-impl_182!()
+impl_182!();

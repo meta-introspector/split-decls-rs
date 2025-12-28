@@ -11,4 +11,4 @@ macro_rules! DIR_SHIFT {
     };
 }
 
-DIR_SHIFT!()
+DIR_SHIFT!();

@@ -4,4 +4,4 @@ macro_rules! extract_lfunction {
     };
 }
 
-extract_lfunction!()
+extract_lfunction!();

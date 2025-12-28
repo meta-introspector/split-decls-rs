@@ -4,4 +4,4 @@ macro_rules! UnlabeledCfInWhileCondition {
     };
 }
 
-UnlabeledCfInWhileCondition!()
+UnlabeledCfInWhileCondition!();

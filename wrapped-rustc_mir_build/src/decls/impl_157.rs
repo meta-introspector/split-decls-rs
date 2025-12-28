@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        Unwind!();
-        Builder!();
+        DropNode!();
+        BlockAnd!();
         CoroutineDrop!();
         DropKind!();
-        DropNode!();
         CFG!();
-        BlockAnd!();
-        Scope!();
+        Unwind!();
         DropTree!();
+        Scope!();
         ExitScopes!();
+        Builder!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_157 {
     };
 }
 
-impl_157!()
+impl_157!();

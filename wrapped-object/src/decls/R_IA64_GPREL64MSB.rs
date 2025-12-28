@@ -4,4 +4,4 @@ macro_rules! R_IA64_GPREL64MSB {
     };
 }
 
-R_IA64_GPREL64MSB!()
+R_IA64_GPREL64MSB!();

@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
         TokenStream!();
-        Cfg!();
-        Type!();
-        Method!();
-        Config!();
-        InterfaceKind!();
-        MethodNames!();
         Param!();
+        Config!();
+        MethodNames!();
+        InterfaceKind!();
+        Type!();
         Interface!();
+        Cfg!();
+        Method!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_311 {
     };
 }
 
-impl_311!()
+impl_311!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        CompactDirection!();
         NodeTrait!();
+        CompactDirection!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! macro_891 {
     };
 }
 
-macro_891!()
+macro_891!();

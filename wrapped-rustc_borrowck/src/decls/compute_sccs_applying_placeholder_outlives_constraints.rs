@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
         BorrowckInferCtxt!();
-        OutlivesConstraintSet!();
-        UniversalRegionRelations!();
         LoweredConstraints!();
-        SccAnnotations!();
         ConstraintSccs!();
-        MirTypeckRegionConstraints!();
         RegionTracker!();
+        OutlivesConstraintSet!();
+        MirTypeckRegionConstraints!();
+        SccAnnotations!();
+        UniversalRegionRelations!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! compute_sccs_applying_placeholder_outlives_constraints {
     };
 }
 
-compute_sccs_applying_placeholder_outlives_constraints!()
+compute_sccs_applying_placeholder_outlives_constraints!();

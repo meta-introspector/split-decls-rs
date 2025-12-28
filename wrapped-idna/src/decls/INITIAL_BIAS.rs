@@ -4,4 +4,4 @@ macro_rules! INITIAL_BIAS {
     };
 }
 
-INITIAL_BIAS!()
+INITIAL_BIAS!();

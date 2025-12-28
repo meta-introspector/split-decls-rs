@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         Sccs!();
-        Annotations!();
-        NoAnnotations!();
         SccsConstruction!();
-        VecGraph!();
+        Annotations!();
         Node!();
+        NoAnnotations!();
+        VecGraph!();
         Successors!();
     };
 }
@@ -17,4 +17,4 @@ macro_rules! impl_190 {
     };
 }
 
-impl_190!()
+impl_190!();

@@ -11,4 +11,4 @@ macro_rules! socket_passcred {
     };
 }
 
-socket_passcred!()
+socket_passcred!();

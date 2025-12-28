@@ -4,4 +4,4 @@ macro_rules! copied {
     };
 }
 
-copied!()
+copied!();

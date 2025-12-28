@@ -4,4 +4,4 @@ macro_rules! OTHER_UPPERCASE {
     };
 }
 
-OTHER_UPPERCASE!()
+OTHER_UPPERCASE!();

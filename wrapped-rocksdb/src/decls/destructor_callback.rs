@@ -12,4 +12,4 @@ macro_rules! destructor_callback {
     };
 }
 
-destructor_callback!()
+destructor_callback!();

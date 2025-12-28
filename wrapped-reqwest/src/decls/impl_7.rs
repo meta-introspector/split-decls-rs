@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        TimedOut!();
-        Inner!();
-        Kind!();
         BoxError!();
+        Kind!();
+        Inner!();
         Error!();
+        TimedOut!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_7 {
     };
 }
 
-impl_7!()
+impl_7!();

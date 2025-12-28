@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        ExpectedFields!();
         ExpectedSpan!();
-        NewSpan!();
         ExpectedEvent!();
+        ExpectedFields!();
+        NewSpan!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! Expect {
     };
 }
 
-Expect!()
+Expect!();

@@ -11,4 +11,4 @@ macro_rules! no_new_privs {
     };
 }
 
-no_new_privs!()
+no_new_privs!();

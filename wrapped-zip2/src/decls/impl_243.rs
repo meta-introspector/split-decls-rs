@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        ZipFileData!();
-        LittleEndianReadExt!();
-        ExtendedFileOptions!();
         ZipResult!();
+        ExtendedFileOptions!();
         ZipError!();
+        LittleEndianReadExt!();
+        ZipFileData!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_243 {
     };
 }
 
-impl_243!()
+impl_243!();

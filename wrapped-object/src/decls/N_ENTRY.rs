@@ -4,4 +4,4 @@ macro_rules! N_ENTRY {
     };
 }
 
-N_ENTRY!()
+N_ENTRY!();

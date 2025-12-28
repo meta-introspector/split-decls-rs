@@ -4,4 +4,4 @@ macro_rules! EarlyBinderIter {
     };
 }
 
-EarlyBinderIter!()
+EarlyBinderIter!();

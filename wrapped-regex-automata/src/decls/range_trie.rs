@@ -4,4 +4,4 @@ macro_rules! range_trie {
     };
 }
 
-range_trie!()
+range_trie!();

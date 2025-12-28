@@ -12,4 +12,4 @@ macro_rules! VerifyBoundCx {
     };
 }
 
-VerifyBoundCx!()
+VerifyBoundCx!();

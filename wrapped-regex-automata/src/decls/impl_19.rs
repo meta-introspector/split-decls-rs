@@ -1,23 +1,23 @@
 macro_rules! deps {
     () => {
-        MatchStates!();
-        DFA!();
-        ByteSet!();
-        Special!();
-        StartTable!();
-        Builder!();
-        HalfMatch!();
         ByteClasses!();
-        Prefilter!();
-        Input!();
-        Accels!();
-        OwnedDFA!();
+        StartTable!();
+        Special!();
         StartKind!();
-        TransitionTable!();
         BuildError!();
-        LookMatcher!();
-        Flags!();
+        Accels!();
+        ByteSet!();
+        OwnedDFA!();
         NFA!();
+        Flags!();
+        DFA!();
+        LookMatcher!();
+        Builder!();
+        Prefilter!();
+        MatchStates!();
+        HalfMatch!();
+        Input!();
+        TransitionTable!();
     };
 }
 
@@ -28,4 +28,4 @@ macro_rules! impl_19 {
     };
 }
 
-impl_19!()
+impl_19!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        SyntaxNode!();
         AstNode!();
+        SyntaxNode!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! find_node_at_range {
     };
 }
 
-find_node_at_range!()
+find_node_at_range!();

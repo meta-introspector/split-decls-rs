@@ -4,4 +4,4 @@ macro_rules! impl_to_tokens_for_custom_punctuation {
     };
 }
 
-impl_to_tokens_for_custom_punctuation!()
+impl_to_tokens_for_custom_punctuation!();

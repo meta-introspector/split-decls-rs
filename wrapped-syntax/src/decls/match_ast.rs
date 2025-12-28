@@ -11,4 +11,4 @@ macro_rules! match_ast {
     };
 }
 
-match_ast!()
+match_ast!();

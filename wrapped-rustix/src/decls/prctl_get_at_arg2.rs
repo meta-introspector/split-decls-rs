@@ -11,4 +11,4 @@ macro_rules! prctl_get_at_arg2 {
     };
 }
 
-prctl_get_at_arg2!()
+prctl_get_at_arg2!();

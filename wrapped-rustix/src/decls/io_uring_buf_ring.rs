@@ -4,4 +4,4 @@ macro_rules! io_uring_buf_ring {
     };
 }
 
-io_uring_buf_ring!()
+io_uring_buf_ring!();

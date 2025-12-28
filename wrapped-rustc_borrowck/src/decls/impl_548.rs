@@ -1,26 +1,26 @@
 macro_rules! deps {
     () => {
-        InitializationRequiringAction!();
-        WriteKind!();
-        AccessDepth!();
-        StorageDeadOrDrop!();
-        MirBorrowckCtxt!();
-        LocalMutationIsAllowed!();
-        ReadOrWrite!();
-        IllegalMoveOriginKind!();
-        BorrowckDomain!();
-        AccessKind!();
-        ReadKind!();
         VarNeedNotMut!();
-        MoveError!();
+        Overlap!();
+        ReadKind!();
+        ReadOrWrite!();
+        WriteKind!();
+        BorrowckDomain!();
+        TyCtxtConsts!();
         PlaceConflictBias!();
-        RootPlace!();
+        ArtificialField!();
         BorrowData!();
+        MoveError!();
+        LocalMutationIsAllowed!();
+        InitializationRequiringAction!();
         PrefixSet!();
         TailExprDropOrder!();
-        Overlap!();
-        ArtificialField!();
-        TyCtxtConsts!();
+        StorageDeadOrDrop!();
+        IllegalMoveOriginKind!();
+        AccessDepth!();
+        MirBorrowckCtxt!();
+        AccessKind!();
+        RootPlace!();
     };
 }
 
@@ -37,4 +37,4 @@ macro_rules! impl_548 {
     };
 }
 
-impl_548!()
+impl_548!();

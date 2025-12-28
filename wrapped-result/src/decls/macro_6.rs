@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        HANDLE!();
         HMODULE!();
         PCSTR!();
         LOAD_LIBRARY_FLAGS!();
-        HANDLE!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! macro_6 {
     };
 }
 
-macro_6!()
+macro_6!();

@@ -11,4 +11,4 @@ macro_rules! drain_rev {
     };
 }
 
-drain_rev!()
+drain_rev!();

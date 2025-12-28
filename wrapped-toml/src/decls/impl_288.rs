@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        SerializeDocumentTable!();
-        SerializeMap!();
         Error!();
-        KeySerializer!();
-        Serializer!();
-        SerializationStrategy!();
         ArrayOfTablesSerializer!();
-        Table!();
-        Buffer!();
+        SerializationStrategy!();
         ValueSerializer!();
+        SerializeMap!();
+        Serializer!();
         Value!();
+        Buffer!();
+        KeySerializer!();
+        Table!();
+        SerializeDocumentTable!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_288 {
     };
 }
 
-impl_288!()
+impl_288!();

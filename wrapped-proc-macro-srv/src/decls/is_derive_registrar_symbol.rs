@@ -4,4 +4,4 @@ macro_rules! is_derive_registrar_symbol {
     };
 }
 
-is_derive_registrar_symbol!()
+is_derive_registrar_symbol!();

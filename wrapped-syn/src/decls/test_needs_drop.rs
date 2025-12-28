@@ -13,4 +13,4 @@ macro_rules! test_needs_drop {
     };
 }
 
-test_needs_drop!()
+test_needs_drop!();

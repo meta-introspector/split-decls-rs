@@ -4,4 +4,4 @@ macro_rules! RequireStaticErr {
     };
 }
 
-RequireStaticErr!()
+RequireStaticErr!();

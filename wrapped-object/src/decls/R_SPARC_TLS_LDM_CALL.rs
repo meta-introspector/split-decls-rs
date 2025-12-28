@@ -4,4 +4,4 @@ macro_rules! R_SPARC_TLS_LDM_CALL {
     };
 }
 
-R_SPARC_TLS_LDM_CALL!()
+R_SPARC_TLS_LDM_CALL!();

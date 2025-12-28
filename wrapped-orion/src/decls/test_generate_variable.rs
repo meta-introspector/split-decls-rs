@@ -4,4 +4,4 @@ macro_rules! test_generate_variable {
     };
 }
 
-test_generate_variable!()
+test_generate_variable!();

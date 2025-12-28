@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        ErasedJar!();
-        Event!();
         Storage!();
+        Event!();
+        ErasedJar!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! StorageBuilder {
     };
 }
 
-StorageBuilder!()
+StorageBuilder!();

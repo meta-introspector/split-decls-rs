@@ -4,4 +4,4 @@ macro_rules! branch {
     };
 }
 
-branch!()
+branch!();

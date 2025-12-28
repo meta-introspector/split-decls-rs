@@ -4,4 +4,4 @@ macro_rules! block_xor {
     };
 }
 
-block_xor!()
+block_xor!();

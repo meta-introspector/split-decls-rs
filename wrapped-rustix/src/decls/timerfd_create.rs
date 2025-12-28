@@ -11,4 +11,4 @@ macro_rules! timerfd_create {
     };
 }
 
-timerfd_create!()
+timerfd_create!();

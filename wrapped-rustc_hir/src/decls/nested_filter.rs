@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        AnonConst!();
         HirTyCtxt!();
+        AnonConst!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! nested_filter {
     };
 }
 
-nested_filter!()
+nested_filter!();

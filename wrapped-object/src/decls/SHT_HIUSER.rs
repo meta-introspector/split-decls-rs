@@ -4,4 +4,4 @@ macro_rules! SHT_HIUSER {
     };
 }
 
-SHT_HIUSER!()
+SHT_HIUSER!();

@@ -4,4 +4,4 @@ macro_rules! private_iter_index {
     };
 }
 
-private_iter_index!()
+private_iter_index!();

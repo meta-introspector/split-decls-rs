@@ -4,4 +4,4 @@ macro_rules! AUX_FILE {
     };
 }
 
-AUX_FILE!()
+AUX_FILE!();

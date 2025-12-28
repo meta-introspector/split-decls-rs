@@ -4,4 +4,4 @@ macro_rules! escape_double_quote {
     };
 }
 
-escape_double_quote!()
+escape_double_quote!();

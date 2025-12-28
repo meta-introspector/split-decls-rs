@@ -4,4 +4,4 @@ macro_rules! LC_PREBOUND_DYLIB {
     };
 }
 
-LC_PREBOUND_DYLIB!()
+LC_PREBOUND_DYLIB!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        ParseError!();
+        StatusAnd!();
         Float!();
         Round!();
-        StatusAnd!();
+        ParseError!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! float_common_impls {
     };
 }
 
-float_common_impls!()
+float_common_impls!();

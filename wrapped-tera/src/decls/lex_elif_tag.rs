@@ -4,4 +4,4 @@ macro_rules! lex_elif_tag {
     };
 }
 
-lex_elif_tag!()
+lex_elif_tag!();

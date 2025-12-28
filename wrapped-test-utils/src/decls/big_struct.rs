@@ -4,4 +4,4 @@ macro_rules! big_struct {
     };
 }
 
-big_struct!()
+big_struct!();

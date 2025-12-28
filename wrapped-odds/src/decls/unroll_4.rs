@@ -4,4 +4,4 @@ macro_rules! unroll_4 {
     };
 }
 
-unroll_4!()
+unroll_4!();

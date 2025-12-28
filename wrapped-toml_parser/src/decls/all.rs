@@ -139,4 +139,4 @@ macro_rules! all {
     };
 }
 
-all!()
+all!();

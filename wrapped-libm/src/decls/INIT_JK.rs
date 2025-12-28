@@ -4,4 +4,4 @@ macro_rules! INIT_JK {
     };
 }
 
-INIT_JK!()
+INIT_JK!();

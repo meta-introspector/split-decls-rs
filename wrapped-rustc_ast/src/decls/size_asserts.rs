@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
+        LazyAttrTokenStream!();
+        TokenTree!();
+        TokenStream!();
         AttrTokenStream!();
         AttrTokenTree!();
-        TokenTree!();
-        LazyAttrTokenStream!();
         LazyAttrTokenStreamInner!();
-        TokenStream!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! size_asserts {
     };
 }
 
-size_asserts!()
+size_asserts!();

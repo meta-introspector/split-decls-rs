@@ -4,4 +4,4 @@ macro_rules! ImplPolarity {
     };
 }
 
-ImplPolarity!()
+ImplPolarity!();

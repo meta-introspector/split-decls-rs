@@ -11,4 +11,4 @@ macro_rules! seal_dst_out_length {
     };
 }
 
-seal_dst_out_length!()
+seal_dst_out_length!();

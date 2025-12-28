@@ -4,4 +4,4 @@ macro_rules! link_attrs {
     };
 }
 
-link_attrs!()
+link_attrs!();

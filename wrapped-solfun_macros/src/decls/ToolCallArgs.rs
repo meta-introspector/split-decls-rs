@@ -4,4 +4,4 @@ macro_rules! ToolCallArgs {
     };
 }
 
-ToolCallArgs!()
+ToolCallArgs!();

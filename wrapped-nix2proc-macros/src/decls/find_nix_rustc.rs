@@ -4,4 +4,4 @@ macro_rules! find_nix_rustc {
     };
 }
 
-find_nix_rustc!()
+find_nix_rustc!();

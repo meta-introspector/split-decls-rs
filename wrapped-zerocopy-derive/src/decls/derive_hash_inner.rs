@@ -11,4 +11,4 @@ macro_rules! derive_hash_inner {
     };
 }
 
-derive_hash_inner!()
+derive_hash_inner!();

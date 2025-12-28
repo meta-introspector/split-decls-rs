@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         ProcessResult!();
+        OutcomeTrait!();
         ForestObligation!();
         Error!();
-        OutcomeTrait!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! ObligationProcessor {
     };
 }
 
-ObligationProcessor!()
+ObligationProcessor!();

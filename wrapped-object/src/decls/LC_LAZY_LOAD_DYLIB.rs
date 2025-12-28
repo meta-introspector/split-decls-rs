@@ -4,4 +4,4 @@ macro_rules! LC_LAZY_LOAD_DYLIB {
     };
 }
 
-LC_LAZY_LOAD_DYLIB!()
+LC_LAZY_LOAD_DYLIB!();

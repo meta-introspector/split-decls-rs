@@ -11,4 +11,4 @@ macro_rules! determine_place_ancestry_relation {
     };
 }
 
-determine_place_ancestry_relation!()
+determine_place_ancestry_relation!();

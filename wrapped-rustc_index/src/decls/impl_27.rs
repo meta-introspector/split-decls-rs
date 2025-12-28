@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         BitRelations!();
-        ChunkedBitSet!();
-        ChunkSize!();
         Idx!();
+        ChunkSize!();
+        ChunkedBitSet!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_27 {
     };
 }
 
-impl_27!()
+impl_27!();

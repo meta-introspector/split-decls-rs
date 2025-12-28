@@ -13,4 +13,4 @@ macro_rules! write_xz_index {
     };
 }
 
-write_xz_index!()
+write_xz_index!();

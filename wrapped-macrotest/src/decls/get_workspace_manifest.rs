@@ -11,4 +11,4 @@ macro_rules! get_workspace_manifest {
     };
 }
 
-get_workspace_manifest!()
+get_workspace_manifest!();

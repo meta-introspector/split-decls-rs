@@ -4,4 +4,4 @@ macro_rules! ERROR_CHECKING {
     };
 }
 
-ERROR_CHECKING!()
+ERROR_CHECKING!();

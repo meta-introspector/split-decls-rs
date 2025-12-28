@@ -4,4 +4,4 @@ macro_rules! R_PPC64_TOCSAVE {
     };
 }
 
-R_PPC64_TOCSAVE!()
+R_PPC64_TOCSAVE!();

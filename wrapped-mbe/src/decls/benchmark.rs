@@ -4,4 +4,4 @@ macro_rules! benchmark {
     };
 }
 
-benchmark!()
+benchmark!();

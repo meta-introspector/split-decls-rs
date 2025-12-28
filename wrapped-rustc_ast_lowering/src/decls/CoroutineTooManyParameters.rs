@@ -4,4 +4,4 @@ macro_rules! CoroutineTooManyParameters {
     };
 }
 
-CoroutineTooManyParameters!()
+CoroutineTooManyParameters!();

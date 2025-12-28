@@ -4,4 +4,4 @@ macro_rules! Shright {
     };
 }
 
-Shright!()
+Shright!();

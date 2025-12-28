@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DecompressError!();
         Result!();
+        DecompressError!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! decompress_to_vec_with_limit {
     };
 }
 
-decompress_to_vec_with_limit!()
+decompress_to_vec_with_limit!();

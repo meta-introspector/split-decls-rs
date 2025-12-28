@@ -4,4 +4,4 @@ macro_rules! IMPORT_OBJECT_CONST {
     };
 }
 
-IMPORT_OBJECT_CONST!()
+IMPORT_OBJECT_CONST!();

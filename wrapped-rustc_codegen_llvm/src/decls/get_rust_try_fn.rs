@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        CodegenCx!();
         Builder!();
+        CodegenCx!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! get_rust_try_fn {
     };
 }
 
-get_rust_try_fn!()
+get_rust_try_fn!();

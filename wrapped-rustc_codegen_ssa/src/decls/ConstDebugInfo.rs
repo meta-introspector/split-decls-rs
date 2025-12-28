@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        BuilderMethods!();
         OperandRef!();
+        BuilderMethods!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! ConstDebugInfo {
     };
 }
 
-ConstDebugInfo!()
+ConstDebugInfo!();

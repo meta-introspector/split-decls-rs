@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         SyntaxElement!();
+        PositionRepr!();
         Position!();
         SyntaxToken!();
-        PositionRepr!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! ws_after {
     };
 }
 
-ws_after!()
+ws_after!();

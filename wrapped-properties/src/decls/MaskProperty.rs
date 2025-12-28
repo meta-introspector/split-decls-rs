@@ -4,4 +4,4 @@ macro_rules! MaskProperty {
     };
 }
 
-MaskProperty!()
+MaskProperty!();

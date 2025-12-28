@@ -11,4 +11,4 @@ macro_rules! create_graph_with_back_refs {
     };
 }
 
-create_graph_with_back_refs!()
+create_graph_with_back_refs!();

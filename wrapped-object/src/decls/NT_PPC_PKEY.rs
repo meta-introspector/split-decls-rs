@@ -4,4 +4,4 @@ macro_rules! NT_PPC_PKEY {
     };
 }
 
-NT_PPC_PKEY!()
+NT_PPC_PKEY!();

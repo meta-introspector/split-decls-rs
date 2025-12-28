@@ -4,4 +4,4 @@ macro_rules! KYBER_Q {
     };
 }
 
-KYBER_Q!()
+KYBER_Q!();

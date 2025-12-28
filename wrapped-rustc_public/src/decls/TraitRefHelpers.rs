@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DefId!();
         TraitRef!();
+        DefId!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! TraitRefHelpers {
     };
 }
 
-TraitRefHelpers!()
+TraitRefHelpers!();

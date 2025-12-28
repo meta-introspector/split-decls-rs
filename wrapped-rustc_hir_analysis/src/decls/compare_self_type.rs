@@ -4,4 +4,4 @@ macro_rules! compare_self_type {
     };
 }
 
-compare_self_type!()
+compare_self_type!();

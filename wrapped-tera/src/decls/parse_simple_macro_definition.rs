@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        MacroDefinition!();
         Expr!();
         Node!();
-        MacroDefinition!();
         WS!();
         ExprVal!();
     };
@@ -15,4 +15,4 @@ macro_rules! parse_simple_macro_definition {
     };
 }
 
-parse_simple_macro_definition!()
+parse_simple_macro_definition!();

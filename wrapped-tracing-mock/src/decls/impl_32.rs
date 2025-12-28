@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         ExpectedField!();
         ExpectedValue!();
-        ExpectedFields!();
         CheckVisitor!();
+        ExpectedFields!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_32 {
     };
 }
 
-impl_32!()
+impl_32!();

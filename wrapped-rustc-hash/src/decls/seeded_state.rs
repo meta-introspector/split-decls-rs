@@ -4,4 +4,4 @@ macro_rules! seeded_state {
     };
 }
 
-seeded_state!()
+seeded_state!();

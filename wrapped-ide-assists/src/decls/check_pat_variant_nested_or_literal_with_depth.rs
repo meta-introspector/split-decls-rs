@@ -11,4 +11,4 @@ macro_rules! check_pat_variant_nested_or_literal_with_depth {
     };
 }
 
-check_pat_variant_nested_or_literal_with_depth!()
+check_pat_variant_nested_or_literal_with_depth!();

@@ -4,4 +4,4 @@ macro_rules! mockable_foreign_mod {
     };
 }
 
-mockable_foreign_mod!()
+mockable_foreign_mod!();

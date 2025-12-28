@@ -4,4 +4,4 @@ macro_rules! Finalize {
     };
 }
 
-Finalize!()
+Finalize!();

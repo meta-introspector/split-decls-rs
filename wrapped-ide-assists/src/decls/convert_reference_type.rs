@@ -11,4 +11,4 @@ macro_rules! convert_reference_type {
     };
 }
 
-convert_reference_type!()
+convert_reference_type!();

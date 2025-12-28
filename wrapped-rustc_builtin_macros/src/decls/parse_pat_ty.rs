@@ -11,4 +11,4 @@ macro_rules! parse_pat_ty {
     };
 }
 
-parse_pat_ty!()
+parse_pat_ty!();

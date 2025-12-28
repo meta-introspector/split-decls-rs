@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        IMAGE_FILE_MACHINE!();
         IMAGE_FILE_CHARACTERISTICS!();
+        IMAGE_FILE_MACHINE!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! IMAGE_FILE_HEADER {
     };
 }
 
-IMAGE_FILE_HEADER!()
+IMAGE_FILE_HEADER!();

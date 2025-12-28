@@ -4,4 +4,4 @@ macro_rules! SHT_GNU_HASH {
     };
 }
 
-SHT_GNU_HASH!()
+SHT_GNU_HASH!();

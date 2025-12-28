@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Error!();
-        Result!();
         ClassQuery!();
         CanonicalClassQuery!();
+        Result!();
+        Error!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_288 {
     };
 }
 
-impl_288!()
+impl_288!();

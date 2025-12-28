@@ -4,4 +4,4 @@ macro_rules! TestingRandom {
     };
 }
 
-TestingRandom!()
+TestingRandom!();

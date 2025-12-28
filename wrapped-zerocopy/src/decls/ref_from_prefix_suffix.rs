@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        PointerMetadata!();
-        CastError!();
-        BecauseImmutable!();
-        Immutable!();
-        CastType!();
         FromBytes!();
+        PointerMetadata!();
+        CastType!();
+        BecauseImmutable!();
+        CastError!();
         KnownLayout!();
+        Immutable!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! ref_from_prefix_suffix {
     };
 }
 
-ref_from_prefix_suffix!()
+ref_from_prefix_suffix!();

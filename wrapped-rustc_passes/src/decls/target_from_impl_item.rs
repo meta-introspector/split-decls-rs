@@ -4,4 +4,4 @@ macro_rules! target_from_impl_item {
     };
 }
 
-target_from_impl_item!()
+target_from_impl_item!();

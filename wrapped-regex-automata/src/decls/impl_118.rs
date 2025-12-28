@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        HalfMatch!();
         Builder!();
         DFA!();
-        Input!();
+        HalfMatch!();
         BuildError!();
+        Input!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_118 {
     };
 }
 
-impl_118!()
+impl_118!();

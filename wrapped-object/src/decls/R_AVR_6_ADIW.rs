@@ -4,4 +4,4 @@ macro_rules! R_AVR_6_ADIW {
     };
 }
 
-R_AVR_6_ADIW!()
+R_AVR_6_ADIW!();

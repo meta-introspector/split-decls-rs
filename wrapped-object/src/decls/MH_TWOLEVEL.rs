@@ -4,4 +4,4 @@ macro_rules! MH_TWOLEVEL {
     };
 }
 
-MH_TWOLEVEL!()
+MH_TWOLEVEL!();

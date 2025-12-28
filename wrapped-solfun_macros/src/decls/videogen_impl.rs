@@ -4,4 +4,4 @@ macro_rules! videogen_impl {
     };
 }
 
-videogen_impl!()
+videogen_impl!();

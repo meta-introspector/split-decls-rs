@@ -4,4 +4,4 @@ macro_rules! path_span_without_args {
     };
 }
 
-path_span_without_args!()
+path_span_without_args!();

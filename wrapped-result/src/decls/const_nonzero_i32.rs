@@ -11,4 +11,4 @@ macro_rules! const_nonzero_i32 {
     };
 }
 
-const_nonzero_i32!()
+const_nonzero_i32!();

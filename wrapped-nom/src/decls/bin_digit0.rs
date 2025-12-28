@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        AsChar!();
+        IResult!();
+        ErrorKind!();
+        Streaming!();
+        Input!();
         Needed!();
         ParseError!();
-        Input!();
-        Streaming!();
-        ErrorKind!();
-        IResult!();
+        AsChar!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! bin_digit0 {
     };
 }
 
-bin_digit0!()
+bin_digit0!();

@@ -1,17 +1,17 @@
 macro_rules! deps {
     () => {
-        BoxedDynNestedProgress!();
-        BoxedProgress!();
-        DynNestedProgressToNestedProgress!();
-        MessageLevel!();
         NestedProgress!();
-        Progress!();
-        Step!();
-        Count!();
-        Unit!();
-        Id!();
         StepShared!();
+        Progress!();
+        Id!();
+        BoxedProgress!();
+        MessageLevel!();
+        Count!();
+        DynNestedProgressToNestedProgress!();
         DynNestedProgress!();
+        Step!();
+        Unit!();
+        BoxedDynNestedProgress!();
     };
 }
 
@@ -22,4 +22,4 @@ macro_rules! impls {
     };
 }
 
-impls!()
+impls!();

@@ -4,4 +4,4 @@ macro_rules! ToUsize {
     };
 }
 
-ToUsize!()
+ToUsize!();

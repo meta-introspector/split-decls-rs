@@ -11,4 +11,4 @@ macro_rules! owned_entrys_outlive_slab {
     };
 }
 
-owned_entrys_outlive_slab!()
+owned_entrys_outlive_slab!();

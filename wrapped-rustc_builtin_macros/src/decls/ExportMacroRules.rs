@@ -4,4 +4,4 @@ macro_rules! ExportMacroRules {
     };
 }
 
-ExportMacroRules!()
+ExportMacroRules!();

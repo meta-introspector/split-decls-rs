@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        TextEdit!();
         SnippetEdit!();
         SourceChange!();
-        TextEdit!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_181 {
     };
 }
 
-impl_181!()
+impl_181!();

@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        CodegenCx!();
-        SimpleCx!();
         Linkage!();
-        CodegenUnitDebugContext!();
-        FullCx!();
-        CguCoverageContext!();
-        ModuleLlvm!();
         GenericCx!();
+        FullCx!();
+        SimpleCx!();
+        ModuleLlvm!();
+        CodegenUnitDebugContext!();
+        CguCoverageContext!();
+        CodegenCx!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_218 {
     };
 }
 
-impl_218!()
+impl_218!();

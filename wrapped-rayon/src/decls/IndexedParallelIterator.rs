@@ -1,27 +1,27 @@
 macro_rules! deps {
     () => {
+        ParallelIterator!();
+        ZipEq!();
+        Positions!();
+        MaxLen!();
+        Enumerate!();
+        FoldChunks!();
+        InterleaveShortest!();
+        ProducerCallback!();
         Take!();
         Consumer!();
+        Iter!();
+        Interleave!();
+        StepBy!();
+        UniformBlocks!();
         ExponentialBlocks!();
-        ZipEq!();
-        Chunks!();
+        Zip!();
         MinLen!();
-        ProducerCallback!();
         Skip!();
         Rev!();
-        InterleaveShortest!();
-        UniformBlocks!();
-        ParallelIterator!();
-        MaxLen!();
-        Zip!();
-        Iter!();
-        StepBy!();
-        FoldChunksWith!();
-        Interleave!();
-        Enumerate!();
-        Positions!();
+        Chunks!();
         IntoParallelIterator!();
-        FoldChunks!();
+        FoldChunksWith!();
     };
 }
 
@@ -33,4 +33,4 @@ macro_rules! IndexedParallelIterator {
     };
 }
 
-IndexedParallelIterator!()
+IndexedParallelIterator!();

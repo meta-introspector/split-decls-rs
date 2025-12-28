@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Thread!();
-        Spurious!();
-        Path!();
-        Store!();
-        Schedule!();
-        Ref!();
         Id!();
         Load!();
+        Path!();
+        Spurious!();
+        Store!();
+        Ref!();
+        Thread!();
+        Schedule!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_123 {
     };
 }
 
-impl_123!()
+impl_123!();

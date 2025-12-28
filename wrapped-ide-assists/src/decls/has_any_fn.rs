@@ -4,4 +4,4 @@ macro_rules! has_any_fn {
     };
 }
 
-has_any_fn!()
+has_any_fn!();

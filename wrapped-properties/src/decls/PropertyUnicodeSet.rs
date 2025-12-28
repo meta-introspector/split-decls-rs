@@ -4,4 +4,4 @@ macro_rules! PropertyUnicodeSet {
     };
 }
 
-PropertyUnicodeSet!()
+PropertyUnicodeSet!();

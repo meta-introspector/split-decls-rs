@@ -4,4 +4,4 @@ macro_rules! atanf {
     };
 }
 
-atanf!()
+atanf!();

@@ -4,4 +4,4 @@ macro_rules! NoMainErr {
     };
 }
 
-NoMainErr!()
+NoMainErr!();

@@ -4,4 +4,4 @@ macro_rules! NT_S390_SYSTEM_CALL {
     };
 }
 
-NT_S390_SYSTEM_CALL!()
+NT_S390_SYSTEM_CALL!();

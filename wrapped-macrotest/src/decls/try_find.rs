@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Result!();
         Ignored!();
+        Result!();
         Build!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! try_find {
     };
 }
 
-try_find!()
+try_find!();

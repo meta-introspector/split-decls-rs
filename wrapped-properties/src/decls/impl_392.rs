@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        ScriptWithExtensions!();
-        Baked!();
         ScriptWithExtensionsBorrowed!();
+        Baked!();
+        ScriptWithExtensions!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_392 {
     };
 }
 
-impl_392!()
+impl_392!();

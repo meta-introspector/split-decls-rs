@@ -4,4 +4,4 @@ macro_rules! promoted_mir {
     };
 }
 
-promoted_mir!()
+promoted_mir!();

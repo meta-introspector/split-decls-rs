@@ -4,4 +4,4 @@ macro_rules! find_and_interpret {
     };
 }
 
-find_and_interpret!()
+find_and_interpret!();

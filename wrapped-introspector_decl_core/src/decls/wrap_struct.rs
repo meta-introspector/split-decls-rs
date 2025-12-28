@@ -11,4 +11,4 @@ macro_rules! wrap_struct {
     };
 }
 
-wrap_struct!()
+wrap_struct!();

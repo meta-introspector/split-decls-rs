@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Expr!();
+        Pat!();
         Visitor!();
         PatKind!();
-        Pat!();
+        Expr!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! walk_pat {
     };
 }
 
-walk_pat!()
+walk_pat!();

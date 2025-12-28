@@ -4,4 +4,4 @@ macro_rules! EF_ARM_EABI_UNKNOWN {
     };
 }
 
-EF_ARM_EABI_UNKNOWN!()
+EF_ARM_EABI_UNKNOWN!();

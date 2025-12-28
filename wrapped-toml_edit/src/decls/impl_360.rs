@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        Value!();
+        Error!();
         Table!();
         SerializeMap!();
-        Error!();
-        Value!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_360 {
     };
 }
 
-impl_360!()
+impl_360!();

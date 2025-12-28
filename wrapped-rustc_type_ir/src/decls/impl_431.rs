@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Interner!();
         TyKind!();
+        Interner!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_431 {
     };
 }
 
-impl_431!()
+impl_431!();

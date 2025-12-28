@@ -4,4 +4,4 @@ macro_rules! ExternTypesCannotHave {
     };
 }
 
-ExternTypesCannotHave!()
+ExternTypesCannotHave!();

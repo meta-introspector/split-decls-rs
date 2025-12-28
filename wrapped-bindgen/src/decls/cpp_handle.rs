@@ -4,4 +4,4 @@ macro_rules! cpp_handle {
     };
 }
 
-cpp_handle!()
+cpp_handle!();

@@ -4,4 +4,4 @@ macro_rules! InvalidIssueStringCause {
     };
 }
 
-InvalidIssueStringCause!()
+InvalidIssueStringCause!();

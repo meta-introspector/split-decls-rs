@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Path!();
-        Allocation!();
-        Set!();
-        Arc!();
-        Store!();
         Id!();
+        Path!();
+        Store!();
+        Set!();
+        Allocation!();
+        Arc!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! Execution {
     };
 }
 
-Execution!()
+Execution!();

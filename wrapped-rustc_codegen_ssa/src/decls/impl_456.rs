@@ -1,19 +1,19 @@
 macro_rules! deps {
     () => {
-        CachedLlbb!();
-        VirtualIndex!();
-        PlaceValue!();
-        OperandRef!();
-        CallKind!();
-        IntPredicate!();
-        ReturnDest!();
-        MergingSucc!();
         FunctionCx!();
-        PlaceRef!();
+        OperandRef!();
+        VirtualIndex!();
+        CachedLlbb!();
+        PlaceValue!();
+        CallKind!();
         InlineAsmOperandRef!();
         BuilderMethods!();
-        LocalRef!();
+        IntPredicate!();
         TerminatorCodegenHelper!();
+        MergingSucc!();
+        PlaceRef!();
+        ReturnDest!();
+        LocalRef!();
     };
 }
 
@@ -24,4 +24,4 @@ macro_rules! impl_456 {
     };
 }
 
-impl_456!()
+impl_456!();

@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        RlinkUnableToRead!();
-        RLinkWrongFileType!();
-        RLinkRustcVersionMismatch!();
-        RLinkEmptyVersionNumber!();
         RlinkCorruptFile!();
+        RlinkUnableToRead!();
+        RLinkRustcVersionMismatch!();
         RLinkEncodingVersionMismatch!();
+        RLinkWrongFileType!();
+        RLinkEmptyVersionNumber!();
         RlinkNotAFile!();
     };
 }
@@ -17,4 +17,4 @@ macro_rules! process_rlink {
     };
 }
 
-process_rlink!()
+process_rlink!();

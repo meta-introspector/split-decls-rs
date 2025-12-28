@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Visitable!();
-        Allocation!();
         Visitor!();
+        Allocation!();
+        Visitable!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_462 {
     };
 }
 
-impl_462!()
+impl_462!();

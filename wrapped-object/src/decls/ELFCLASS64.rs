@@ -4,4 +4,4 @@ macro_rules! ELFCLASS64 {
     };
 }
 
-ELFCLASS64!()
+ELFCLASS64!();

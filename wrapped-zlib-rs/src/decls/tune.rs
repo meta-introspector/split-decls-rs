@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DeflateStream!();
         ReturnCode!();
+        DeflateStream!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! tune {
     };
 }
 
-tune!()
+tune!();

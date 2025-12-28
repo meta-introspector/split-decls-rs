@@ -4,4 +4,4 @@ macro_rules! expectation_visibility {
     };
 }
 
-expectation_visibility!()
+expectation_visibility!();

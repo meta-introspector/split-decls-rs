@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        PatCtxt!();
+        UnreachablePattern!();
         WantedConstant!();
         Binding!();
-        UnreachablePattern!();
+        PatCtxt!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! find_fallback_pattern_typo {
     };
 }
 
-find_fallback_pattern_typo!()
+find_fallback_pattern_typo!();

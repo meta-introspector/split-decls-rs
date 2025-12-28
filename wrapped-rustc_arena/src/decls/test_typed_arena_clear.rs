@@ -12,4 +12,4 @@ macro_rules! test_typed_arena_clear {
     };
 }
 
-test_typed_arena_clear!()
+test_typed_arena_clear!();

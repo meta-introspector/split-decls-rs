@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Spanned!();
         SpannedDeserializer!();
+        Spanned!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_25 {
     };
 }
 
-impl_25!()
+impl_25!();

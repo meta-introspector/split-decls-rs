@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Visitable!();
         Item!();
+        Visitable!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_visitable_list {
     };
 }
 
-impl_visitable_list!()
+impl_visitable_list!();

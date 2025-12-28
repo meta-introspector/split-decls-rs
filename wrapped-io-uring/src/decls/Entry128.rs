@@ -11,4 +11,4 @@ macro_rules! Entry128 {
     };
 }
 
-Entry128!()
+Entry128!();

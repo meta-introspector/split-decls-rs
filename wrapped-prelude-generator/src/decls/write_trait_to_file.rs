@@ -11,4 +11,4 @@ macro_rules! write_trait_to_file {
     };
 }
 
-write_trait_to_file!()
+write_trait_to_file!();

@@ -4,4 +4,4 @@ macro_rules! R_XTENSA_GNU_VTINHERIT {
     };
 }
 
-R_XTENSA_GNU_VTINHERIT!()
+R_XTENSA_GNU_VTINHERIT!();

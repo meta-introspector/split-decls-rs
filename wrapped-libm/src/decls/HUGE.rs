@@ -4,4 +4,4 @@ macro_rules! HUGE {
     };
 }
 
-HUGE!()
+HUGE!();

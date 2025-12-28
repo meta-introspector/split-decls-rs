@@ -4,4 +4,4 @@ macro_rules! check_interleave_uneven {
     };
 }
 
-check_interleave_uneven!()
+check_interleave_uneven!();

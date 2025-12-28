@@ -4,4 +4,4 @@ macro_rules! SHT_HISUNW {
     };
 }
 
-SHT_HISUNW!()
+SHT_HISUNW!();

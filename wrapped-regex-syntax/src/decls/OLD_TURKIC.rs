@@ -4,4 +4,4 @@ macro_rules! OLD_TURKIC {
     };
 }
 
-OLD_TURKIC!()
+OLD_TURKIC!();

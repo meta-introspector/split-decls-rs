@@ -4,4 +4,4 @@ macro_rules! EM_SPARCV9 {
     };
 }
 
-EM_SPARCV9!()
+EM_SPARCV9!();

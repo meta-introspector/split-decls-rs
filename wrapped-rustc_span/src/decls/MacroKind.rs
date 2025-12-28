@@ -4,4 +4,4 @@ macro_rules! MacroKind {
     };
 }
 
-MacroKind!()
+MacroKind!();

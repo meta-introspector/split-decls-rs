@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        UserDataPointer!();
         IntoDynTaskType!();
+        UserDataPointer!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_353 {
     };
 }
 
-impl_353!()
+impl_353!();

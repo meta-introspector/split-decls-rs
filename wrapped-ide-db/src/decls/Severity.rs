@@ -4,4 +4,4 @@ macro_rules! Severity {
     };
 }
 
-Severity!()
+Severity!();

@@ -11,4 +11,4 @@ macro_rules! foreign_item_to_string {
     };
 }
 
-foreign_item_to_string!()
+foreign_item_to_string!();

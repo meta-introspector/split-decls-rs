@@ -4,4 +4,4 @@ macro_rules! IoringRestrictionOp {
     };
 }
 
-IoringRestrictionOp!()
+IoringRestrictionOp!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        ExistentialProjection!();
         InternalCx!();
         DefId!();
+        ExistentialProjection!();
         ExistentialProjectionHelpers!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_241 {
     };
 }
 
-impl_241!()
+impl_241!();

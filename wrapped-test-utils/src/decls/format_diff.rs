@@ -4,4 +4,4 @@ macro_rules! format_diff {
     };
 }
 
-format_diff!()
+format_diff!();

@@ -11,4 +11,4 @@ macro_rules! DF_1_SYMINTPOSE {
     };
 }
 
-DF_1_SYMINTPOSE!()
+DF_1_SYMINTPOSE!();

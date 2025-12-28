@@ -4,4 +4,4 @@ macro_rules! PROC_NO_NEW_PRIVS_STATUS {
     };
 }
 
-PROC_NO_NEW_PRIVS_STATUS!()
+PROC_NO_NEW_PRIVS_STATUS!();

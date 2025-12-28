@@ -11,4 +11,4 @@ macro_rules! format_patch {
     };
 }
 
-format_patch!()
+format_patch!();

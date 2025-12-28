@@ -4,4 +4,4 @@ macro_rules! sincosf {
     };
 }
 
-sincosf!()
+sincosf!();

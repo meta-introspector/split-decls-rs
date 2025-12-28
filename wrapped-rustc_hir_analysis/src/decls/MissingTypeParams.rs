@@ -4,4 +4,4 @@ macro_rules! MissingTypeParams {
     };
 }
 
-MissingTypeParams!()
+MissingTypeParams!();

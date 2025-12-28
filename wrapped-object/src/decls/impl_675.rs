@@ -1,18 +1,18 @@
 macro_rules! deps {
     () => {
-        PeSection!();
         CompressedData!();
         RelocationIterator!();
-        SectionIndex!();
-        SectionFlags!();
-        ObjectSection!();
         SectionKind!();
         ImageNtHeaders!();
-        ReadRef!();
-        RelocationMap!();
         PeRelocationIterator!();
+        RelocationMap!();
+        SectionFlags!();
         CompressedFileRange!();
+        ObjectSection!();
+        ReadRef!();
+        SectionIndex!();
         Result!();
+        PeSection!();
     };
 }
 
@@ -23,4 +23,4 @@ macro_rules! impl_675 {
     };
 }
 
-impl_675!()
+impl_675!();

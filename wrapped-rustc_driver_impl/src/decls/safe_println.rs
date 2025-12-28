@@ -4,4 +4,4 @@ macro_rules! safe_println {
     };
 }
 
-safe_println!()
+safe_println!();

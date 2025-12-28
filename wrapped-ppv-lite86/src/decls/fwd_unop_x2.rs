@@ -4,4 +4,4 @@ macro_rules! fwd_unop_x2 {
     };
 }
 
-fwd_unop_x2!()
+fwd_unop_x2!();

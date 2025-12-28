@@ -4,4 +4,4 @@ macro_rules! VirtualIndex {
     };
 }
 
-VirtualIndex!()
+VirtualIndex!();

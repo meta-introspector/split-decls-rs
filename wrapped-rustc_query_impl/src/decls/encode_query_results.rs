@@ -12,4 +12,4 @@ macro_rules! encode_query_results {
     };
 }
 
-encode_query_results!()
+encode_query_results!();

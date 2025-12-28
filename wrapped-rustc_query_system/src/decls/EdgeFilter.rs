@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DepNode!();
         DepNodeFilter!();
+        DepNode!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! EdgeFilter {
     };
 }
 
-EdgeFilter!()
+EdgeFilter!();

@@ -4,4 +4,4 @@ macro_rules! sha3_256 {
     };
 }
 
-sha3_256!()
+sha3_256!();

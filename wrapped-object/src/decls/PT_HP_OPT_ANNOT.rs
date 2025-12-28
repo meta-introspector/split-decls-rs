@@ -4,4 +4,4 @@ macro_rules! PT_HP_OPT_ANNOT {
     };
 }
 
-PT_HP_OPT_ANNOT!()
+PT_HP_OPT_ANNOT!();

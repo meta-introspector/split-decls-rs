@@ -4,4 +4,4 @@ macro_rules! thread_done {
     };
 }
 
-thread_done!()
+thread_done!();

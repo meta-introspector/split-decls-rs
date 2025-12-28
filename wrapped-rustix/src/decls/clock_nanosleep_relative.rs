@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        NanosleepRelativeResult!();
         ClockId!();
         Timespec!();
+        NanosleepRelativeResult!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! clock_nanosleep_relative {
     };
 }
 
-clock_nanosleep_relative!()
+clock_nanosleep_relative!();

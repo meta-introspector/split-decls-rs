@@ -11,4 +11,4 @@ macro_rules! convert_doc_comment {
     };
 }
 
-convert_doc_comment!()
+convert_doc_comment!();

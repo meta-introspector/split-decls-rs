@@ -4,4 +4,4 @@ macro_rules! impl_write_unsigned_leb128 {
     };
 }
 
-impl_write_unsigned_leb128!()
+impl_write_unsigned_leb128!();

@@ -4,4 +4,4 @@ macro_rules! EM_68HC11 {
     };
 }
 
-EM_68HC11!()
+EM_68HC11!();

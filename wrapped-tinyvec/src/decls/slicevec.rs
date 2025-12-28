@@ -4,4 +4,4 @@ macro_rules! slicevec {
     };
 }
 
-slicevec!()
+slicevec!();

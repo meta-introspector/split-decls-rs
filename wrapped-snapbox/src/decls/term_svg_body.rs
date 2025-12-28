@@ -4,4 +4,4 @@ macro_rules! term_svg_body {
     };
 }
 
-term_svg_body!()
+term_svg_body!();

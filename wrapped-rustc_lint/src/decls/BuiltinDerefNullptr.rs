@@ -4,4 +4,4 @@ macro_rules! BuiltinDerefNullptr {
     };
 }
 
-BuiltinDerefNullptr!()
+BuiltinDerefNullptr!();

@@ -12,4 +12,4 @@ macro_rules! make_query_region_constraints {
     };
 }
 
-make_query_region_constraints!()
+make_query_region_constraints!();

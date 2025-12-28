@@ -4,4 +4,4 @@ macro_rules! OutlivesPredicate {
     };
 }
 
-OutlivesPredicate!()
+OutlivesPredicate!();

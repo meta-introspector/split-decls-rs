@@ -4,4 +4,4 @@ macro_rules! MovePathIndexAtBlock {
     };
 }
 
-MovePathIndexAtBlock!()
+MovePathIndexAtBlock!();

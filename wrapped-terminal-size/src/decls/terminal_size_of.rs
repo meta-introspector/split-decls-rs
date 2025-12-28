@@ -12,4 +12,4 @@ macro_rules! terminal_size_of {
     };
 }
 
-terminal_size_of!()
+terminal_size_of!();

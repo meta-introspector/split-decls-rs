@@ -1,19 +1,19 @@
 macro_rules! deps {
     () => {
-        QueryEdge!();
-        FxIndexSet!();
-        Configuration!();
-        JarKind!();
-        Ingredient!();
-        RawDatabase!();
-        IngredientIndex!();
-        Revision!();
         Zalsa!();
+        Revision!();
+        Database!();
+        IngredientIndex!();
+        RawDatabase!();
+        Id!();
+        FxIndexSet!();
+        IngredientImpl!();
         Location!();
         FxHashSet!();
-        Id!();
-        Database!();
-        IngredientImpl!();
+        QueryEdge!();
+        JarKind!();
+        Ingredient!();
+        Configuration!();
     };
 }
 
@@ -24,4 +24,4 @@ macro_rules! impl_166 {
     };
 }
 
-impl_166!()
+impl_166!();

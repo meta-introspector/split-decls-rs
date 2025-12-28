@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        FnHeader!();
         Walkable!();
-        FnRetTy!();
+        FnHeader!();
         Param!();
+        FnRetTy!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! FnDecl {
     };
 }
 
-FnDecl!()
+FnDecl!();

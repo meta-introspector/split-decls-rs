@@ -4,4 +4,4 @@ macro_rules! AttrArgs {
     };
 }
 
-AttrArgs!()
+AttrArgs!();

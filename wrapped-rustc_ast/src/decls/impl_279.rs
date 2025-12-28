@@ -1,18 +1,18 @@
 macro_rules! deps {
     () => {
+        InvisibleOrigin!();
+        Token!();
+        MetaItemInner!();
+        MetaItemLit!();
+        PathSegment!();
+        Safety!();
         MetaVarKind!();
         MetaItem!();
-        MetaItemInner!();
-        Path!();
-        MetaItemLit!();
-        TokenTree!();
-        InvisibleOrigin!();
-        Safety!();
-        MetaItemKind!();
-        Token!();
-        PathSegment!();
-        Delimiter!();
         TokenStreamIter!();
+        Delimiter!();
+        MetaItemKind!();
+        TokenTree!();
+        Path!();
     };
 }
 
@@ -23,4 +23,4 @@ macro_rules! impl_279 {
     };
 }
 
-impl_279!()
+impl_279!();

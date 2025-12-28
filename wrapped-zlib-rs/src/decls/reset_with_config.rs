@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         InflateConfig!();
-        ReturnCode!();
         InflateStream!();
+        ReturnCode!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! reset_with_config {
     };
 }
 
-reset_with_config!()
+reset_with_config!();

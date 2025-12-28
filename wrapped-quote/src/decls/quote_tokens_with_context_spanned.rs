@@ -4,4 +4,4 @@ macro_rules! quote_tokens_with_context_spanned {
     };
 }
 
-quote_tokens_with_context_spanned!()
+quote_tokens_with_context_spanned!();

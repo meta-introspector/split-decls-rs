@@ -4,4 +4,4 @@ macro_rules! codegen_select_candidate {
     };
 }
 
-codegen_select_candidate!()
+codegen_select_candidate!();

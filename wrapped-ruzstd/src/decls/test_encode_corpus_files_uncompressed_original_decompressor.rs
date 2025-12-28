@@ -12,4 +12,4 @@ macro_rules! test_encode_corpus_files_uncompressed_original_decompressor {
     };
 }
 
-test_encode_corpus_files_uncompressed_original_decompressor!()
+test_encode_corpus_files_uncompressed_original_decompressor!();

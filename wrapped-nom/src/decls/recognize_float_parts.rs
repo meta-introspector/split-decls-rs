@@ -1,18 +1,18 @@
 macro_rules! deps {
     () => {
+        ParseError!();
         Streaming!();
         Offset!();
-        Float!();
         AsBytes!();
+        IResult!();
         Error!();
         Input!();
-        Needed!();
-        Compare!();
         Err!();
+        Compare!();
         ErrorKind!();
-        ParseError!();
-        IResult!();
+        Needed!();
         AsChar!();
+        Float!();
     };
 }
 
@@ -23,4 +23,4 @@ macro_rules! recognize_float_parts {
     };
 }
 
-recognize_float_parts!()
+recognize_float_parts!();

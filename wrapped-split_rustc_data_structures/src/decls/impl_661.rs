@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        ToStableHashKey!();
-        StableCompare!();
         UnordMap!();
-        UnordItems!();
         Entry!();
+        UnordItems!();
+        StableCompare!();
+        ToStableHashKey!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_661 {
     };
 }
 
-impl_661!()
+impl_661!();

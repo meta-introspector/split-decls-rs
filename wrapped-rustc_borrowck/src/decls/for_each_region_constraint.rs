@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ClosureOutlivesSubject!();
         ClosureRegionRequirements!();
+        ClosureOutlivesSubject!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! for_each_region_constraint {
     };
 }
 
-for_each_region_constraint!()
+for_each_region_constraint!();

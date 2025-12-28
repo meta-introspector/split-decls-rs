@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Undirected!();
         GraphRef!();
+        Undirected!();
         Directed!();
         Neighbors!();
     };
@@ -14,4 +14,4 @@ macro_rules! macro_69 {
     };
 }
 
-macro_69!()
+macro_69!();

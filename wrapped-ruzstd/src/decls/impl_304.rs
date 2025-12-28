@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        FSETable!();
         State!();
-        Read!();
-        BitReader!();
-        Entry!();
         FSETableError!();
+        Read!();
+        Entry!();
+        BitReader!();
+        FSETable!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_304 {
     };
 }
 
-impl_304!()
+impl_304!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DiagnosticDeriveError!();
         FieldInfo!();
+        DiagnosticDeriveError!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! report_error_if_not_applied_to_ty {
     };
 }
 
-report_error_if_not_applied_to_ty!()
+report_error_if_not_applied_to_ty!();

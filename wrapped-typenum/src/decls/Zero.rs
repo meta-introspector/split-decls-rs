@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        B0!();
         Z0!();
+        B0!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Zero {
     };
 }
 
-Zero!()
+Zero!();

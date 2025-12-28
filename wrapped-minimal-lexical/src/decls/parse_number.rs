@@ -11,4 +11,4 @@ macro_rules! parse_number {
     };
 }
 
-parse_number!()
+parse_number!();

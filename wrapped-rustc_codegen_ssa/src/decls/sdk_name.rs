@@ -4,4 +4,4 @@ macro_rules! sdk_name {
     };
 }
 
-sdk_name!()
+sdk_name!();

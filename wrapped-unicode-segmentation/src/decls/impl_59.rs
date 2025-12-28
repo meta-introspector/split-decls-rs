@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        FormatExtendType!();
         UWordBounds!();
         UWordBoundsState!();
+        FormatExtendType!();
         RegionalState!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_59 {
     };
 }
 
-impl_59!()
+impl_59!();

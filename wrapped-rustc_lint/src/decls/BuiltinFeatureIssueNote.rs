@@ -4,4 +4,4 @@ macro_rules! BuiltinFeatureIssueNote {
     };
 }
 
-BuiltinFeatureIssueNote!()
+BuiltinFeatureIssueNote!();

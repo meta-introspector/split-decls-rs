@@ -4,4 +4,4 @@ macro_rules! R_SPARC_8 {
     };
 }
 
-R_SPARC_8!()
+R_SPARC_8!();

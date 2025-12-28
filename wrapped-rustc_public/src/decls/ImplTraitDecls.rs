@@ -4,4 +4,4 @@ macro_rules! ImplTraitDecls {
     };
 }
 
-ImplTraitDecls!()
+ImplTraitDecls!();

@@ -4,4 +4,4 @@ macro_rules! MachO64 {
     };
 }
 
-MachO64!()
+MachO64!();

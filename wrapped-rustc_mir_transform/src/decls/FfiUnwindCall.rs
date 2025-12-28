@@ -4,4 +4,4 @@ macro_rules! FfiUnwindCall {
     };
 }
 
-FfiUnwindCall!()
+FfiUnwindCall!();

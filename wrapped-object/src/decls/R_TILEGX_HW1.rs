@@ -4,4 +4,4 @@ macro_rules! R_TILEGX_HW1 {
     };
 }
 
-R_TILEGX_HW1!()
+R_TILEGX_HW1!();

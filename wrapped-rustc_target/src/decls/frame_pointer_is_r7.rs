@@ -11,4 +11,4 @@ macro_rules! frame_pointer_is_r7 {
     };
 }
 
-frame_pointer_is_r7!()
+frame_pointer_is_r7!();

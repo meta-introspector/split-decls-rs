@@ -4,4 +4,4 @@ macro_rules! meta_encodable_derive {
     };
 }
 
-meta_encodable_derive!()
+meta_encodable_derive!();

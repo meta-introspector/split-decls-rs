@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        ColdParser!();
         NoArgsAttributeParser!();
-        Stage!();
         OnDuplicate!();
         AllowedTargets!();
+        ColdParser!();
+        Stage!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_33 {
     };
 }
 
-impl_33!()
+impl_33!();

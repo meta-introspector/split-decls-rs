@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        UndoLog!();
-        OutlivesEnvironment!();
-        TypeOutlivesConstraint!();
-        SubregionOrigin!();
         InferCtxt!();
         TypeOutlives!();
         OpportunisticRegionResolver!();
+        OutlivesEnvironment!();
+        SubregionOrigin!();
+        TypeOutlivesConstraint!();
+        UndoLog!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_91 {
     };
 }
 
-impl_91!()
+impl_91!();

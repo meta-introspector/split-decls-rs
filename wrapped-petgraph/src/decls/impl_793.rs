@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        StableGraph!();
-        EdgeType!();
         SerStableGraph!();
-        IndexType!();
-        IntoSerializable!();
+        EdgeType!();
         Holes!();
+        IndexType!();
+        StableGraph!();
         Somes!();
+        IntoSerializable!();
         EdgeProperty!();
     };
 }
@@ -18,4 +18,4 @@ macro_rules! impl_793 {
     };
 }
 
-impl_793!()
+impl_793!();

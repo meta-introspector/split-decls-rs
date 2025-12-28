@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        LevelFilter!();
         Subscriber!();
-        LevelInner!();
-        Event!();
-        Metadata!();
         Record!();
+        Event!();
         Id!();
         Current!();
+        Metadata!();
+        LevelInner!();
+        LevelFilter!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! Level {
     };
 }
 
-Level!()
+Level!();

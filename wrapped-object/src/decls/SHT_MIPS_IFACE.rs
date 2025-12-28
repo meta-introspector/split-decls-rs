@@ -4,4 +4,4 @@ macro_rules! SHT_MIPS_IFACE {
     };
 }
 
-SHT_MIPS_IFACE!()
+SHT_MIPS_IFACE!();

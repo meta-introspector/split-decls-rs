@@ -4,4 +4,4 @@ macro_rules! assist_context {
     };
 }
 
-assist_context!()
+assist_context!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Handle!();
         Exfiltrator!();
-        Pending!();
-        PendingSignals!();
+        Handle!();
         SignalDelivery!();
+        PendingSignals!();
+        Pending!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_20 {
     };
 }
 
-impl_20!()
+impl_20!();

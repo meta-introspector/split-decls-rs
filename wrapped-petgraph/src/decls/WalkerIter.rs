@@ -4,4 +4,4 @@ macro_rules! WalkerIter {
     };
 }
 
-WalkerIter!()
+WalkerIter!();

@@ -4,4 +4,4 @@ macro_rules! Z_DEFAULT_STRATEGY {
     };
 }
 
-Z_DEFAULT_STRATEGY!()
+Z_DEFAULT_STRATEGY!();

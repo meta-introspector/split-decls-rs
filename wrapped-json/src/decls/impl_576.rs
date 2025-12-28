@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        IoRead!();
         Read!();
+        IoRead!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_576 {
     };
 }
 
-impl_576!()
+impl_576!();

@@ -4,4 +4,4 @@ macro_rules! generate_to_tokens {
     };
 }
 
-generate_to_tokens!()
+generate_to_tokens!();

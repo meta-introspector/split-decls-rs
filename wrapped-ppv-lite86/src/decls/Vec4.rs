@@ -4,4 +4,4 @@ macro_rules! Vec4 {
     };
 }
 
-Vec4!()
+Vec4!();

@@ -4,4 +4,4 @@ macro_rules! LIFECYCLE_LOG_TARGET {
     };
 }
 
-LIFECYCLE_LOG_TARGET!()
+LIFECYCLE_LOG_TARGET!();

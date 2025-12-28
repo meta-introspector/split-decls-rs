@@ -4,4 +4,4 @@ macro_rules! ONE_JEC {
     };
 }
 
-ONE_JEC!()
+ONE_JEC!();

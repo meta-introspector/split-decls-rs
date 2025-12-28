@@ -11,4 +11,4 @@ macro_rules! validate_const {
     };
 }
 
-validate_const!()
+validate_const!();

@@ -4,4 +4,4 @@ macro_rules! SHN_PARISC_HUGE_COMMON {
     };
 }
 
-SHN_PARISC_HUGE_COMMON!()
+SHN_PARISC_HUGE_COMMON!();

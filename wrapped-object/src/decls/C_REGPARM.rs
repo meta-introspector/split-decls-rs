@@ -4,4 +4,4 @@ macro_rules! C_REGPARM {
     };
 }
 
-C_REGPARM!()
+C_REGPARM!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         MemberUnraw!();
-        ParamsInScope!();
         IdentUnraw!();
+        ParamsInScope!();
         Field!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_11 {
     };
 }
 
-impl_11!()
+impl_11!();

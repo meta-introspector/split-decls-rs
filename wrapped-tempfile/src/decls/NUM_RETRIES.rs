@@ -4,4 +4,4 @@ macro_rules! NUM_RETRIES {
     };
 }
 
-NUM_RETRIES!()
+NUM_RETRIES!();

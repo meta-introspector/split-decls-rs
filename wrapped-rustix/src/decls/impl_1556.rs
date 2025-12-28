@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        RawDirEntry!();
         Result!();
+        RawDirEntry!();
         RawDir!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_1556 {
     };
 }
 
-impl_1556!()
+impl_1556!();

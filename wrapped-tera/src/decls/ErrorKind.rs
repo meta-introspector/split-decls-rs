@@ -12,4 +12,4 @@ macro_rules! ErrorKind {
     };
 }
 
-ErrorKind!()
+ErrorKind!();

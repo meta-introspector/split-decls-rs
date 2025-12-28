@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        LivenessValues!();
         ConstraintDirection!();
         UniversalRegions!();
         LocalizedOutlivesConstraintSet!();
-        LivenessValues!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! create_liveness_constraints {
     };
 }
 
-create_liveness_constraints!()
+create_liveness_constraints!();

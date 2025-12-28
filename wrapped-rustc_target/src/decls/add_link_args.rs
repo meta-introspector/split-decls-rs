@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        LinkArgs!();
         LinkerFlavor!();
+        LinkArgs!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! add_link_args {
     };
 }
 
-add_link_args!()
+add_link_args!();

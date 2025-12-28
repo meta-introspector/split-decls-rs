@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        U32!();
         Endian!();
         FileHeader!();
+        U32!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! GnuHashTable {
     };
 }
 
-GnuHashTable!()
+GnuHashTable!();

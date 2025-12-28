@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Ty!();
-        ParamConst!();
-        TyConst!();
         UnevaluatedConst!();
+        ParamConst!();
         Allocation!();
+        TyConst!();
+        Ty!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! ConstantKind {
     };
 }
 
-ConstantKind!()
+ConstantKind!();

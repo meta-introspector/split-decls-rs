@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        RegionVariableOrigin!();
-        RegionVariableInfo!();
-        RegionConstraintData!();
         CombineMap!();
+        RegionVariableOrigin!();
         RegionVidKey!();
+        RegionConstraintData!();
+        RegionVariableInfo!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! RegionConstraintStorage {
     };
 }
 
-RegionConstraintStorage!()
+RegionConstraintStorage!();

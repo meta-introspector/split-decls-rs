@@ -4,4 +4,4 @@ macro_rules! parse_alignment {
     };
 }
 
-parse_alignment!()
+parse_alignment!();

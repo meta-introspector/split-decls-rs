@@ -4,4 +4,4 @@ macro_rules! is_wsl {
     };
 }
 
-is_wsl!()
+is_wsl!();

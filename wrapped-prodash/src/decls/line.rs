@@ -4,4 +4,4 @@ macro_rules! line {
     };
 }
 
-line!()
+line!();

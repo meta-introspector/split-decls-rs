@@ -4,4 +4,4 @@ macro_rules! OLD_SOGDIAN {
     };
 }
 
-OLD_SOGDIAN!()
+OLD_SOGDIAN!();

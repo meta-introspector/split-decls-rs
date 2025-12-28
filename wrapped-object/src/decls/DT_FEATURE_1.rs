@@ -4,4 +4,4 @@ macro_rules! DT_FEATURE_1 {
     };
 }
 
-DT_FEATURE_1!()
+DT_FEATURE_1!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Thread!();
         LocalKey!();
+        Thread!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! CURRENT_THREAD_KEY {
     };
 }
 
-CURRENT_THREAD_KEY!()
+CURRENT_THREAD_KEY!();

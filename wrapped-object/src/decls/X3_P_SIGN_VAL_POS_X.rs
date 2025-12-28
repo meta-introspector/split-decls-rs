@@ -4,4 +4,4 @@ macro_rules! X3_P_SIGN_VAL_POS_X {
     };
 }
 
-X3_P_SIGN_VAL_POS_X!()
+X3_P_SIGN_VAL_POS_X!();

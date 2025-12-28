@@ -11,4 +11,4 @@ macro_rules! parse_optional_paren {
     };
 }
 
-parse_optional_paren!()
+parse_optional_paren!();

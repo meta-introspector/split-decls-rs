@@ -4,4 +4,4 @@ macro_rules! MTLock {
     };
 }
 
-MTLock!()
+MTLock!();

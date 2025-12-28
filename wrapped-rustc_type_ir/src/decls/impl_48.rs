@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
         GenericArgs!();
-        Const!();
-        InferTy!();
         ConstKind!();
-        Ty!();
-        DeepRejectCtxt!();
-        GenericArgKind!();
         Interner!();
+        GenericArgKind!();
+        InferTy!();
+        Const!();
+        DeepRejectCtxt!();
+        Ty!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_48 {
     };
 }
 
-impl_48!()
+impl_48!();

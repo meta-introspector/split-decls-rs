@@ -4,4 +4,4 @@ macro_rules! should_emit_generic_error {
     };
 }
 
-should_emit_generic_error!()
+should_emit_generic_error!();

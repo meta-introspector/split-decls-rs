@@ -4,4 +4,4 @@ macro_rules! TraitObjectBound {
     };
 }
 
-TraitObjectBound!()
+TraitObjectBound!();

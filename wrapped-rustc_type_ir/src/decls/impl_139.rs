@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        GlobalCache!();
         AvailableDepth!();
         WithOverflow!();
-        Cx!();
-        EvaluationResult!();
+        NestedGoals!();
         Success!();
         CacheData!();
-        NestedGoals!();
+        EvaluationResult!();
+        GlobalCache!();
+        Cx!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_139 {
     };
 }
 
-impl_139!()
+impl_139!();

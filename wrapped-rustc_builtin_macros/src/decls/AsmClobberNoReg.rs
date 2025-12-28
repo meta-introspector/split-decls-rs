@@ -4,4 +4,4 @@ macro_rules! AsmClobberNoReg {
     };
 }
 
-AsmClobberNoReg!()
+AsmClobberNoReg!();

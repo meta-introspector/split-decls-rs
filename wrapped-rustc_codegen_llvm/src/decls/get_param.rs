@@ -4,4 +4,4 @@ macro_rules! get_param {
     };
 }
 
-get_param!()
+get_param!();

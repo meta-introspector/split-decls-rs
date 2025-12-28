@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DecInt!();
         Result!();
+        DecInt!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_852 {
     };
 }
 
-impl_852!()
+impl_852!();

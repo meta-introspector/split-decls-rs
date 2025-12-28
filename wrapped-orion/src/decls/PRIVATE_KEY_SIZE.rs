@@ -11,4 +11,4 @@ macro_rules! PRIVATE_KEY_SIZE {
     };
 }
 
-PRIVATE_KEY_SIZE!()
+PRIVATE_KEY_SIZE!();

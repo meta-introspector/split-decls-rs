@@ -4,4 +4,4 @@ macro_rules! ALIGN_GNU_VERNEED {
     };
 }
 
-ALIGN_GNU_VERNEED!()
+ALIGN_GNU_VERNEED!();

@@ -4,4 +4,4 @@ macro_rules! Lcg64Xsh32 {
     };
 }
 
-Lcg64Xsh32!()
+Lcg64Xsh32!();

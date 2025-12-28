@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        VTabConnection!();
         IndexInfo!();
         VTab!();
-        Result!();
         VTabLog!();
+        VTabConnection!();
+        Result!();
         VTabLogCursor!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! impl_647 {
     };
 }
 
-impl_647!()
+impl_647!();

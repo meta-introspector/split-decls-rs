@@ -4,4 +4,4 @@ macro_rules! validate_body {
     };
 }
 
-validate_body!()
+validate_body!();

@@ -11,4 +11,4 @@ macro_rules! reveal_fallback {
     };
 }
 
-reveal_fallback!()
+reveal_fallback!();

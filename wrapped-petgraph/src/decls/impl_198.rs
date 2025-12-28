@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        NeighborsDirected!();
         Direction!();
         UndirectedAdaptor!();
+        NeighborsDirected!();
         Neighbors!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_198 {
     };
 }
 
-impl_198!()
+impl_198!();

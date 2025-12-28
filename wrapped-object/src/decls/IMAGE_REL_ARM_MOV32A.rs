@@ -4,4 +4,4 @@ macro_rules! IMAGE_REL_ARM_MOV32A {
     };
 }
 
-IMAGE_REL_ARM_MOV32A!()
+IMAGE_REL_ARM_MOV32A!();

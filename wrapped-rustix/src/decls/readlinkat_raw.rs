@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Arg!();
-        Result!();
         Buffer!();
+        Result!();
+        Arg!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! readlinkat_raw {
     };
 }
 
-readlinkat_raw!()
+readlinkat_raw!();

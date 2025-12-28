@@ -4,4 +4,4 @@ macro_rules! NGHTTP2_HEADERS {
     };
 }
 
-NGHTTP2_HEADERS!()
+NGHTTP2_HEADERS!();

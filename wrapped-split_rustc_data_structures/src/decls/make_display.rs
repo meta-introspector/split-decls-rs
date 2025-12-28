@@ -4,4 +4,4 @@ macro_rules! make_display {
     };
 }
 
-make_display!()
+make_display!();

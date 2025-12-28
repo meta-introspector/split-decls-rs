@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        DFA!();
         StateID!();
-        BuildErrorKind!();
-        NFA!();
-        Automaton!();
-        BuildError!();
         PatternID!();
         Input!();
+        BuildErrorKind!();
+        NFA!();
+        BuildError!();
+        Automaton!();
+        DFA!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_57 {
     };
 }
 
-impl_57!()
+impl_57!();

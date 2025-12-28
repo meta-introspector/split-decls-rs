@@ -4,4 +4,4 @@ macro_rules! LZ_CODE_BUF_MASK {
     };
 }
 
-LZ_CODE_BUF_MASK!()
+LZ_CODE_BUF_MASK!();

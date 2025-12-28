@@ -4,4 +4,4 @@ macro_rules! com_call {
     };
 }
 
-com_call!()
+com_call!();

@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Table!();
         Error!();
+        Table!();
+        SerializeStructVariant!();
+        Value!();
         ValueSerializeVariant!();
         ValueSerializeMap!();
-        Value!();
-        SerializeStructVariant!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_115 {
     };
 }
 
-impl_115!()
+impl_115!();

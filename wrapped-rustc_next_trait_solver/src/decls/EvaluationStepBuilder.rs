@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        SolverDelegate!();
         WipEvaluationStep!();
+        SolverDelegate!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! EvaluationStepBuilder {
     };
 }
 
-EvaluationStepBuilder!()
+EvaluationStepBuilder!();

@@ -4,4 +4,4 @@ macro_rules! destroy_handle {
     };
 }
 
-destroy_handle!()
+destroy_handle!();

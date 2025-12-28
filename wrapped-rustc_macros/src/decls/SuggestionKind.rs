@@ -4,4 +4,4 @@ macro_rules! SuggestionKind {
     };
 }
 
-SuggestionKind!()
+SuggestionKind!();

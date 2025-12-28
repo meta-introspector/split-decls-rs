@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        NoopReducer!();
         Reducer!();
+        NoopReducer!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_729 {
     };
 }
 
-impl_729!()
+impl_729!();

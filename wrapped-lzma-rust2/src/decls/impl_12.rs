@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Bt4!();
         LzEncoderData!();
         Hash234!();
         LzEncoder!();
+        Bt4!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_12 {
     };
 }
 
-impl_12!()
+impl_12!();

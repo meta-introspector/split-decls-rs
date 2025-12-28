@@ -4,4 +4,4 @@ macro_rules! EM_SLE9X {
     };
 }
 
-EM_SLE9X!()
+EM_SLE9X!();

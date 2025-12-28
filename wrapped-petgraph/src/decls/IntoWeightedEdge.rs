@@ -4,4 +4,4 @@ macro_rules! IntoWeightedEdge {
     };
 }
 
-IntoWeightedEdge!()
+IntoWeightedEdge!();

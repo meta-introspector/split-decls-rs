@@ -4,4 +4,4 @@ macro_rules! load_metadata_with {
     };
 }
 
-load_metadata_with!()
+load_metadata_with!();

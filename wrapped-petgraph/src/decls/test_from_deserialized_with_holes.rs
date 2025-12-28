@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
+        StableUnGraph!();
+        DeserStableGraph!();
+        Node!();
         EdgeIndex!();
         EdgeProperty!();
         Undirected!();
-        Node!();
-        StableUnGraph!();
-        DeserStableGraph!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! test_from_deserialized_with_holes {
     };
 }
 
-test_from_deserialized_with_holes!()
+test_from_deserialized_with_holes!();

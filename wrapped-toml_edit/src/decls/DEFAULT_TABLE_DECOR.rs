@@ -4,4 +4,4 @@ macro_rules! DEFAULT_TABLE_DECOR {
     };
 }
 
-DEFAULT_TABLE_DECOR!()
+DEFAULT_TABLE_DECOR!();

@@ -11,4 +11,4 @@ macro_rules! HeapVec {
     };
 }
 
-HeapVec!()
+HeapVec!();

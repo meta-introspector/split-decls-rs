@@ -11,4 +11,4 @@ macro_rules! impls_dyn_send_neg {
     };
 }
 
-impls_dyn_send_neg!()
+impls_dyn_send_neg!();

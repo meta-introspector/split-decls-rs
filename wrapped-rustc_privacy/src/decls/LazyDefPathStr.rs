@@ -4,4 +4,4 @@ macro_rules! LazyDefPathStr {
     };
 }
 
-LazyDefPathStr!()
+LazyDefPathStr!();

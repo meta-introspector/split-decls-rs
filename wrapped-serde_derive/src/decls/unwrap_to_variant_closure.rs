@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Parameters!();
         Variant!();
         Style!();
+        Parameters!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! unwrap_to_variant_closure {
     };
 }
 
-unwrap_to_variant_closure!()
+unwrap_to_variant_closure!();

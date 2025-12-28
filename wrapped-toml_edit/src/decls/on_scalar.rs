@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        TraceScope!();
-        Formatted!();
-        Repr!();
         RawString!();
+        Repr!();
+        Formatted!();
         Value!();
+        TraceScope!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! on_scalar {
     };
 }
 
-on_scalar!()
+on_scalar!();

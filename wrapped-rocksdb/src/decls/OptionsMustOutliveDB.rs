@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Cache!();
-        BlockBasedOptionsMustOutliveDB!();
-        WriteBufferManager!();
         Env!();
+        WriteBufferManager!();
+        BlockBasedOptionsMustOutliveDB!();
+        Cache!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! OptionsMustOutliveDB {
     };
 }
 
-OptionsMustOutliveDB!()
+OptionsMustOutliveDB!();

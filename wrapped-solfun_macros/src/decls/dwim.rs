@@ -4,4 +4,4 @@ macro_rules! dwim {
     };
 }
 
-dwim!()
+dwim!();

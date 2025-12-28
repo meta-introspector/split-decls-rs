@@ -1,18 +1,18 @@
 macro_rules! deps {
     () => {
-        Template!();
-        Result!();
-        Filter!();
-        Tera!();
-        Set!();
-        Error!();
-        In!();
-        Test!();
-        Function!();
         If!();
+        Filter!();
+        Test!();
         Renderer!();
+        Function!();
         EscapeFn!();
+        Error!();
+        Tera!();
+        Result!();
         Context!();
+        Set!();
+        Template!();
+        In!();
     };
 }
 
@@ -23,4 +23,4 @@ macro_rules! impl_542 {
     };
 }
 
-impl_542!()
+impl_542!();

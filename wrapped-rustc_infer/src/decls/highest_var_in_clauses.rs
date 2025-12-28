@@ -4,4 +4,4 @@ macro_rules! highest_var_in_clauses {
     };
 }
 
-highest_var_in_clauses!()
+highest_var_in_clauses!();

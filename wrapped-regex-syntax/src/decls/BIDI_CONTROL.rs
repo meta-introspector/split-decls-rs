@@ -4,4 +4,4 @@ macro_rules! BIDI_CONTROL {
     };
 }
 
-BIDI_CONTROL!()
+BIDI_CONTROL!();

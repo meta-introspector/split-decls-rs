@@ -1,19 +1,19 @@
 macro_rules! deps {
     () => {
+        NonConstClosure!();
+        NonConstFmtMacroCall!();
+        NonConstQuestionBranch!();
+        NonConstTryBlockFromOutput!();
         ConsiderDereferencing!();
         NonConstAwait!();
-        NonConstFmtMacroCall!();
-        NonConstMatchEq!();
-        NonConstQuestionBranch!();
-        NonConstQuestionFromResidual!();
-        NonConstOperator!();
         NonConstFnCall!();
-        NonConstClosureNote!();
-        NonConstClosure!();
-        NonConstTryBlockFromOutput!();
-        NonConstDerefCoercion!();
+        NonConstMatchEq!();
         ConstCx!();
         NonConstForLoopIntoIter!();
+        NonConstQuestionFromResidual!();
+        NonConstClosureNote!();
+        NonConstOperator!();
+        NonConstDerefCoercion!();
     };
 }
 
@@ -25,4 +25,4 @@ macro_rules! build_error_for_const_call {
     };
 }
 
-build_error_for_const_call!()
+build_error_for_const_call!();

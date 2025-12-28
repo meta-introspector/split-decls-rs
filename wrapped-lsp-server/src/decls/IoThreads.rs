@@ -4,4 +4,4 @@ macro_rules! IoThreads {
     };
 }
 
-IoThreads!()
+IoThreads!();

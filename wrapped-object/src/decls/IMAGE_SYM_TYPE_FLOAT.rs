@@ -4,4 +4,4 @@ macro_rules! IMAGE_SYM_TYPE_FLOAT {
     };
 }
 
-IMAGE_SYM_TYPE_FLOAT!()
+IMAGE_SYM_TYPE_FLOAT!();

@@ -4,4 +4,4 @@ macro_rules! check_static_item {
     };
 }
 
-check_static_item!()
+check_static_item!();

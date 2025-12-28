@@ -4,4 +4,4 @@ macro_rules! DICE_KIND_JUMP_TABLE8 {
     };
 }
 
-DICE_KIND_JUMP_TABLE8!()
+DICE_KIND_JUMP_TABLE8!();

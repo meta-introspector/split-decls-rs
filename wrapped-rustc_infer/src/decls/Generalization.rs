@@ -4,4 +4,4 @@ macro_rules! Generalization {
     };
 }
 
-Generalization!()
+Generalization!();

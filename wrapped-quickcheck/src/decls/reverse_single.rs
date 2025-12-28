@@ -11,4 +11,4 @@ macro_rules! reverse_single {
     };
 }
 
-reverse_single!()
+reverse_single!();

@@ -4,4 +4,4 @@ macro_rules! find_crate_by_id {
     };
 }
 
-find_crate_by_id!()
+find_crate_by_id!();

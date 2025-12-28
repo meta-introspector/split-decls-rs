@@ -4,4 +4,4 @@ macro_rules! NeedsDrop {
     };
 }
 
-NeedsDrop!()
+NeedsDrop!();

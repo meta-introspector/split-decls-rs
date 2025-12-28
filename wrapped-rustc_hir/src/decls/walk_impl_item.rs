@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        ImplItemKind!();
-        ImplItemImplKind!();
         FnKind!();
         Visitor!();
+        ImplItemKind!();
+        ImplItemImplKind!();
         ImplItem!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! walk_impl_item {
     };
 }
 
-walk_impl_item!()
+walk_impl_item!();

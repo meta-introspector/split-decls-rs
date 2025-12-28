@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Event!();
-        Reader!();
         Result!();
+        Reader!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_1531 {
     };
 }
 
-impl_1531!()
+impl_1531!();

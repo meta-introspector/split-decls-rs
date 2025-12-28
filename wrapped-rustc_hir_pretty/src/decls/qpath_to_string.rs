@@ -11,4 +11,4 @@ macro_rules! qpath_to_string {
     };
 }
 
-qpath_to_string!()
+qpath_to_string!();

@@ -11,4 +11,4 @@ macro_rules! restrict_precision_for_drop_types {
     };
 }
 
-restrict_precision_for_drop_types!()
+restrict_precision_for_drop_types!();

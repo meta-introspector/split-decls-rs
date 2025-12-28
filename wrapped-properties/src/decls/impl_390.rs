@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Script!();
-        ScriptWithExt!();
         ScriptExtensionsSet!();
+        ScriptWithExt!();
         ScriptWithExtensionsBorrowed!();
+        Script!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_390 {
     };
 }
 
-impl_390!()
+impl_390!();

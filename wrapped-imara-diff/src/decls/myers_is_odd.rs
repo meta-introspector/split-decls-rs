@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         InternedInput!();
+        UnifiedDiffConfig!();
         BasicLineDiffPrinter!();
+        Diff!();
         Algorithm!();
         Myers!();
-        Diff!();
-        UnifiedDiffConfig!();
     };
 }
 
@@ -24,4 +24,4 @@ macro_rules! myers_is_odd {
     };
 }
 
-myers_is_odd!()
+myers_is_odd!();

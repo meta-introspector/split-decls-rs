@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        FrameDecoderError!();
-        FrameDecoderState!();
-        DecoderScratch!();
         Read!();
+        FrameDecoderError!();
+        DecoderScratch!();
+        FrameDecoderState!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_123 {
     };
 }
 
-impl_123!()
+impl_123!();

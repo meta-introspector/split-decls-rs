@@ -4,4 +4,4 @@ macro_rules! DF_1_LOADFLTR {
     };
 }
 
-DF_1_LOADFLTR!()
+DF_1_LOADFLTR!();

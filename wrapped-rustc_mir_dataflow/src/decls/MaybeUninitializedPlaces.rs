@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        MoveData!();
         MaybeInitializedPlaces!();
+        MoveData!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! MaybeUninitializedPlaces {
     };
 }
 
-MaybeUninitializedPlaces!()
+MaybeUninitializedPlaces!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Expected!();
         ErrorStr!();
+        Expected!();
         Span!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! ParseError {
     };
 }
 
-ParseError!()
+ParseError!();

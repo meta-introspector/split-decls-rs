@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Trivial!();
         LabelledGraph!();
+        Trivial!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! empty_graph {
     };
 }
 
-empty_graph!()
+empty_graph!();

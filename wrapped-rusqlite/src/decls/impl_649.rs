@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Updates!();
-        Inserts!();
-        VTabLog!();
         ValueRef!();
-        UpdateVTab!();
+        Inserts!();
         Result!();
+        UpdateVTab!();
+        VTabLog!();
+        Updates!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_649 {
     };
 }
 
-impl_649!()
+impl_649!();

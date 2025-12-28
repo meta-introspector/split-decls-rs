@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        GroupInner!();
         IntoChunks!();
+        GroupInner!();
         ChunkIndex!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! new_chunks {
     };
 }
 
-new_chunks!()
+new_chunks!();

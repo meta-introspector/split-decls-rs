@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
         ImageExportDirectory!();
-        RelocationBlockIterator!();
-        DataDirectories!();
+        Result!();
         ReadRef!();
-        ImageDataDirectory!();
-        DelayLoadImportTable!();
-        ImportTable!();
-        SectionTable!();
         ResourceDirectory!();
         ExportTable!();
-        Result!();
+        DelayLoadImportTable!();
+        RelocationBlockIterator!();
+        ImageDataDirectory!();
+        SectionTable!();
+        DataDirectories!();
+        ImportTable!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_682 {
     };
 }
 
-impl_682!()
+impl_682!();

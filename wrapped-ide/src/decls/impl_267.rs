@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         InlayHint!();
-        InlayKind!();
         InlayHintPosition!();
         InlayHintLabel!();
+        InlayKind!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_267 {
     };
 }
 
-impl_267!()
+impl_267!();

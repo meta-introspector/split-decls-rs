@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        ManifestPath!();
         Crate!();
         Runnable!();
-        ManifestPath!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! ProjectJson {
     };
 }
 
-ProjectJson!()
+ProjectJson!();

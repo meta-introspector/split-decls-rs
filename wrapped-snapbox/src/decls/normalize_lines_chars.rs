@@ -4,4 +4,4 @@ macro_rules! normalize_lines_chars {
     };
 }
 
-normalize_lines_chars!()
+normalize_lines_chars!();

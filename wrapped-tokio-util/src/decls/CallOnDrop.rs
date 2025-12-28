@@ -4,4 +4,4 @@ macro_rules! CallOnDrop {
     };
 }
 
-CallOnDrop!()
+CallOnDrop!();

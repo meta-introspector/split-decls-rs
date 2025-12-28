@@ -4,4 +4,4 @@ macro_rules! check_le_less_direct {
     };
 }
 
-check_le_less_direct!()
+check_le_less_direct!();

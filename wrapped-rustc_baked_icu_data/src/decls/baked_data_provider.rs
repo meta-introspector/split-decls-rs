@@ -11,4 +11,4 @@ macro_rules! baked_data_provider {
     };
 }
 
-baked_data_provider!()
+baked_data_provider!();

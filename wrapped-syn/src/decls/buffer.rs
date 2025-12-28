@@ -4,4 +4,4 @@ macro_rules! buffer {
     };
 }
 
-buffer!()
+buffer!();

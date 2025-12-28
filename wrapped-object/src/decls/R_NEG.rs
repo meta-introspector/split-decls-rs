@@ -4,4 +4,4 @@ macro_rules! R_NEG {
     };
 }
 
-R_NEG!()
+R_NEG!();

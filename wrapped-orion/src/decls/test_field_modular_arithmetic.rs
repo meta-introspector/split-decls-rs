@@ -11,4 +11,4 @@ macro_rules! test_field_modular_arithmetic {
     };
 }
 
-test_field_modular_arithmetic!()
+test_field_modular_arithmetic!();

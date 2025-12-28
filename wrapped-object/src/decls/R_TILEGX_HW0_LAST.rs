@@ -4,4 +4,4 @@ macro_rules! R_TILEGX_HW0_LAST {
     };
 }
 
-R_TILEGX_HW0_LAST!()
+R_TILEGX_HW0_LAST!();

@@ -4,4 +4,4 @@ macro_rules! R_ARM_TLS_LDO12 {
     };
 }
 
-R_ARM_TLS_LDO12!()
+R_ARM_TLS_LDO12!();

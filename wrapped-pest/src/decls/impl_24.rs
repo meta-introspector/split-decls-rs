@@ -2,9 +2,9 @@ macro_rules! deps {
     () => {
         RuleType!();
         QueueableToken!();
+        FlatPairs!();
         Tokens!();
         Token!();
-        FlatPairs!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_24 {
     };
 }
 
-impl_24!()
+impl_24!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        WriteBackendMethods!();
         ThinShared!();
+        WriteBackendMethods!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! ThinModule {
     };
 }
 
-ThinModule!()
+ThinModule!();

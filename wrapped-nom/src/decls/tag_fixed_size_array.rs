@@ -11,4 +11,4 @@ macro_rules! tag_fixed_size_array {
     };
 }
 
-tag_fixed_size_array!()
+tag_fixed_size_array!();

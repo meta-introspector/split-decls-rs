@@ -4,4 +4,4 @@ macro_rules! os_type {
     };
 }
 
-os_type!()
+os_type!();

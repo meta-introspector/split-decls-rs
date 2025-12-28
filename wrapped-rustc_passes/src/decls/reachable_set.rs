@@ -11,4 +11,4 @@ macro_rules! reachable_set {
     };
 }
 
-reachable_set!()
+reachable_set!();

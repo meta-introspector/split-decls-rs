@@ -4,4 +4,4 @@ macro_rules! CtorKind {
     };
 }
 
-CtorKind!()
+CtorKind!();

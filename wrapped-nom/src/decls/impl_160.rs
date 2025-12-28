@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Mode!();
         Emit!();
+        Mode!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_160 {
     };
 }
 
-impl_160!()
+impl_160!();

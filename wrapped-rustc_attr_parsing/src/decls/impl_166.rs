@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         InvalidAlignmentValue!();
-        ArgParser!();
         AlignParser!();
         IncorrectReprFormatExpectInteger!();
-        AcceptContext!();
         Stage!();
+        ArgParser!();
+        AcceptContext!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_166 {
     };
 }
 
-impl_166!()
+impl_166!();

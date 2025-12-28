@@ -4,4 +4,4 @@ macro_rules! pow5factor_32 {
     };
 }
 
-pow5factor_32!()
+pow5factor_32!();

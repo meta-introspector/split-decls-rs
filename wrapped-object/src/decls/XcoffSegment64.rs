@@ -12,4 +12,4 @@ macro_rules! XcoffSegment64 {
     };
 }
 
-XcoffSegment64!()
+XcoffSegment64!();

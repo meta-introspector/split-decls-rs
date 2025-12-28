@@ -4,4 +4,4 @@ macro_rules! mirbug {
     };
 }
 
-mirbug!()
+mirbug!();

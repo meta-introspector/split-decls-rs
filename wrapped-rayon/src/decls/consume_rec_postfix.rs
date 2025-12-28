@@ -11,4 +11,4 @@ macro_rules! consume_rec_postfix {
     };
 }
 
-consume_rec_postfix!()
+consume_rec_postfix!();

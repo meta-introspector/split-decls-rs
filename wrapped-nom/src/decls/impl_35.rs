@@ -1,34 +1,34 @@
 macro_rules! deps {
     () => {
-        EscapedTransform!();
-        Map!();
-        Count!();
-        ErrorKind!();
-        TakeUntil!();
-        Satisfy!();
-        Escaped!();
-        Verify!();
-        Char!();
-        Fold!();
-        Take!();
-        Fail!();
-        MapRes!();
-        Needed!();
-        Many1Count!();
-        MapOpt!();
-        Permutation!();
-        Not!();
         TakeWhileMN!();
-        Complete!();
         Many0!();
-        Float!();
-        LengthValue!();
-        Many1!();
-        ManyMN!();
-        ManyTill!();
-        Many!();
-        Tag!();
         Many0Count!();
+        Escaped!();
+        Complete!();
+        Tag!();
+        ManyTill!();
+        Many1Count!();
+        Float!();
+        Many1!();
+        Verify!();
+        Permutation!();
+        ManyMN!();
+        Take!();
+        Needed!();
+        EscapedTransform!();
+        ErrorKind!();
+        MapRes!();
+        Count!();
+        Not!();
+        Many!();
+        Fold!();
+        MapOpt!();
+        Char!();
+        Satisfy!();
+        Fail!();
+        TakeUntil!();
+        Map!();
+        LengthValue!();
     };
 }
 
@@ -39,4 +39,4 @@ macro_rules! impl_35 {
     };
 }
 
-impl_35!()
+impl_35!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Error!();
-        CStrLike!();
         PropertyName!();
+        CStrLike!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_326 {
     };
 }
 
-impl_326!()
+impl_326!();

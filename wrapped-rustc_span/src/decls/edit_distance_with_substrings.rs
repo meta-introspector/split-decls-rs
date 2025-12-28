@@ -4,4 +4,4 @@ macro_rules! edit_distance_with_substrings {
     };
 }
 
-edit_distance_with_substrings!()
+edit_distance_with_substrings!();

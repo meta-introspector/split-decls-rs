@@ -4,4 +4,4 @@ macro_rules! CrelIteratorHeader {
     };
 }
 
-CrelIteratorHeader!()
+CrelIteratorHeader!();

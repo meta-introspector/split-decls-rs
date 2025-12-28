@@ -4,4 +4,4 @@ macro_rules! dropck_outlives {
     };
 }
 
-dropck_outlives!()
+dropck_outlives!();

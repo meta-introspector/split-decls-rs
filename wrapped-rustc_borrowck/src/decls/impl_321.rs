@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        RawConstraints!();
-        RegionInferenceContext!();
         OutlivesConstraint!();
+        RegionInferenceContext!();
+        RawConstraints!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_321 {
     };
 }
 
-impl_321!()
+impl_321!();

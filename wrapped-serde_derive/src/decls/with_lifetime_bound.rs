@@ -4,4 +4,4 @@ macro_rules! with_lifetime_bound {
     };
 }
 
-with_lifetime_bound!()
+with_lifetime_bound!();

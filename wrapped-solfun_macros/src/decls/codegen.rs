@@ -4,4 +4,4 @@ macro_rules! codegen {
     };
 }
 
-codegen!()
+codegen!();

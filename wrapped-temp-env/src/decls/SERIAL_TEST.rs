@@ -4,4 +4,4 @@ macro_rules! SERIAL_TEST {
     };
 }
 
-SERIAL_TEST!()
+SERIAL_TEST!();

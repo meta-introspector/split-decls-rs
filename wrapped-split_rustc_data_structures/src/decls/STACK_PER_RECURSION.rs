@@ -4,4 +4,4 @@ macro_rules! STACK_PER_RECURSION {
     };
 }
 
-STACK_PER_RECURSION!()
+STACK_PER_RECURSION!();

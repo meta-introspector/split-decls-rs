@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        GenericArg!();
-        InferArg!();
         ConstArg!();
+        GenericArg!();
         Ty!();
+        InferArg!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! InferKind {
     };
 }
 
-InferKind!()
+InferKind!();

@@ -2,14 +2,14 @@ macro_rules! deps {
     () => {
         TraceStyle!();
         Object!();
-        Message!();
-        ChromeLayerBuilder!();
         FlushGuard!();
-        ChromeLayer!();
         EventOrSpan!();
+        ArgsWrapper!();
         JsonVisitor!();
         Callsite!();
-        ArgsWrapper!();
+        ChromeLayerBuilder!();
+        Message!();
+        ChromeLayer!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_14 {
     };
 }
 
-impl_14!()
+impl_14!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        MinInt!();
         OtherSign!();
         Int!();
-        MinInt!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Float {
     };
 }
 
-Float!()
+Float!();

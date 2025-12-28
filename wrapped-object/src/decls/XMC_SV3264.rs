@@ -4,4 +4,4 @@ macro_rules! XMC_SV3264 {
     };
 }
 
-XMC_SV3264!()
+XMC_SV3264!();

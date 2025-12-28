@@ -14,4 +14,4 @@ macro_rules! NewSpan {
     };
 }
 
-NewSpan!()
+NewSpan!();

@@ -4,4 +4,4 @@ macro_rules! bold_color {
     };
 }
 
-bold_color!()
+bold_color!();

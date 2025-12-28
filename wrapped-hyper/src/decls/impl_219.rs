@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Upgraded!();
-        OnUpgrade!();
         Error!();
+        OnUpgrade!();
+        Upgraded!();
         Result!();
         UpgradeExpected!();
     };
@@ -15,4 +15,4 @@ macro_rules! impl_219 {
     };
 }
 
-impl_219!()
+impl_219!();

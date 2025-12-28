@@ -11,4 +11,4 @@ macro_rules! put_back_n {
     };
 }
 
-put_back_n!()
+put_back_n!();

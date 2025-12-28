@@ -4,4 +4,4 @@ macro_rules! dict_test {
     };
 }
 
-dict_test!()
+dict_test!();

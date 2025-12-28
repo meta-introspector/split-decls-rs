@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
+        CoffHeader!();
+        ImageSymbolEx!();
         AnonObjectHeaderBigobj!();
         Error!();
-        CoffHeader!();
-        ReadRef!();
-        ImageSymbolEx!();
-        ImageSymbolBytes!();
-        ImageSymbol!();
         Result!();
         ImageSymbolExBytes!();
+        ImageSymbolBytes!();
+        ReadRef!();
+        ImageSymbol!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_203 {
     };
 }
 
-impl_203!()
+impl_203!();

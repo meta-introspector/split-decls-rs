@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Node!();
         WS!();
-        Expr!();
         ExprVal!();
+        Expr!();
+        Node!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! parse_string_concat_can_merge {
     };
 }
 
-parse_string_concat_can_merge!()
+parse_string_concat_can_merge!();

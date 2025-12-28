@@ -11,4 +11,4 @@ macro_rules! backtrace_field {
     };
 }
 
-backtrace_field!()
+backtrace_field!();

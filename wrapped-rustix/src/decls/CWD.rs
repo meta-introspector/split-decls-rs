@@ -4,4 +4,4 @@ macro_rules! CWD {
     };
 }
 
-CWD!()
+CWD!();

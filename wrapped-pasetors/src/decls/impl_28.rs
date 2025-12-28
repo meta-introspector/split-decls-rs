@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Id!();
         Error!();
         Footer!();
-        Id!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_28 {
     };
 }
 
-impl_28!()
+impl_28!();

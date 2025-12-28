@@ -4,4 +4,4 @@ macro_rules! TargetLint {
     };
 }
 
-TargetLint!()
+TargetLint!();

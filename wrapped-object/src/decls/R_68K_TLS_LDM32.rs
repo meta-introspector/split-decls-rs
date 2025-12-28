@@ -4,4 +4,4 @@ macro_rules! R_68K_TLS_LDM32 {
     };
 }
 
-R_68K_TLS_LDM32!()
+R_68K_TLS_LDM32!();

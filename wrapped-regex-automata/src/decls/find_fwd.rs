@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        HalfMatch!();
-        DFA!();
-        MatchError!();
         Input!();
+        DFA!();
         Cache!();
+        HalfMatch!();
+        MatchError!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! find_fwd {
     };
 }
 
-find_fwd!()
+find_fwd!();

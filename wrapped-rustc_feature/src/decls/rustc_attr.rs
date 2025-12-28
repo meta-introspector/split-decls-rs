@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        BuiltinAttribute!();
         AttributeSafety!();
         Features!();
+        BuiltinAttribute!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! rustc_attr {
     };
 }
 
-rustc_attr!()
+rustc_attr!();

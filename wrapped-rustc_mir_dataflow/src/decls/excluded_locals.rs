@@ -4,4 +4,4 @@ macro_rules! excluded_locals {
     };
 }
 
-excluded_locals!()
+excluded_locals!();

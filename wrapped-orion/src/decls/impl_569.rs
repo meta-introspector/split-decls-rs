@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        UnknownCryptoError!();
         Role!();
         PublicKey!();
         ModePsk!();
         PrivateKey!();
-        UnknownCryptoError!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_569 {
     };
 }
 
-impl_569!()
+impl_569!();

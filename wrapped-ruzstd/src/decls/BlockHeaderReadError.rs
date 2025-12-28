@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         BlockSizeError!();
-        BlockTypeError!();
         Error!();
+        BlockTypeError!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! BlockHeaderReadError {
     };
 }
 
-BlockHeaderReadError!()
+BlockHeaderReadError!();

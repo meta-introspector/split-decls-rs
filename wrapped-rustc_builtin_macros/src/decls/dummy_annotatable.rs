@@ -4,4 +4,4 @@ macro_rules! dummy_annotatable {
     };
 }
 
-dummy_annotatable!()
+dummy_annotatable!();

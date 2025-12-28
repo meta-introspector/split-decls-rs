@@ -4,4 +4,4 @@ macro_rules! AsyncClosureSugg {
     };
 }
 
-AsyncClosureSugg!()
+AsyncClosureSugg!();

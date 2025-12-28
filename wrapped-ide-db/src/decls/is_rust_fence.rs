@@ -4,4 +4,4 @@ macro_rules! is_rust_fence {
     };
 }
 
-is_rust_fence!()
+is_rust_fence!();

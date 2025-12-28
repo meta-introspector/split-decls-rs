@@ -4,4 +4,4 @@ macro_rules! AsciiByte {
     };
 }
 
-AsciiByte!()
+AsciiByte!();

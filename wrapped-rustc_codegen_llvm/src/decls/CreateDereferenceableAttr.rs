@@ -4,4 +4,4 @@ macro_rules! CreateDereferenceableAttr {
     };
 }
 
-CreateDereferenceableAttr!()
+CreateDereferenceableAttr!();

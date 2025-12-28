@@ -4,4 +4,4 @@ macro_rules! test_output_types_tracking_hash_different_construction_order {
     };
 }
 
-test_output_types_tracking_hash_different_construction_order!()
+test_output_types_tracking_hash_different_construction_order!();

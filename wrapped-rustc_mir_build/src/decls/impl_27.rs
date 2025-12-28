@@ -1,18 +1,18 @@
 macro_rules! deps {
     () => {
-        CFG!();
-        CaptureMap!();
         BlockContext!();
-        LocalsForNode!();
+        Builder!();
         Binding!();
         Scope!();
-        PlaceBuilder!();
+        CaptureMap!();
+        Capture!();
+        DropKind!();
+        CFG!();
+        LocalsForNode!();
         Scopes!();
         CoverageInfoBuilder!();
-        Capture!();
+        PlaceBuilder!();
         BlockAnd!();
-        Builder!();
-        DropKind!();
     };
 }
 
@@ -23,4 +23,4 @@ macro_rules! impl_27 {
     };
 }
 
-impl_27!()
+impl_27!();

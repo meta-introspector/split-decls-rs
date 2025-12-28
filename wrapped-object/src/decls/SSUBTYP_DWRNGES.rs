@@ -4,4 +4,4 @@ macro_rules! SSUBTYP_DWRNGES {
     };
 }
 
-SSUBTYP_DWRNGES!()
+SSUBTYP_DWRNGES!();

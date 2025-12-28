@@ -4,4 +4,4 @@ macro_rules! HirInfo {
     };
 }
 
-HirInfo!()
+HirInfo!();

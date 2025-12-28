@@ -4,4 +4,4 @@ macro_rules! R_TILEPRO_GLOB_DAT {
     };
 }
 
-R_TILEPRO_GLOB_DAT!()
+R_TILEPRO_GLOB_DAT!();

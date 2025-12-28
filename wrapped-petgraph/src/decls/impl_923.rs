@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        EdgeType!();
         NodeReferences!();
         NodeTrait!();
+        EdgeType!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_923 {
     };
 }
 
-impl_923!()
+impl_923!();

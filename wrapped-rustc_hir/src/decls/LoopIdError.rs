@@ -4,4 +4,4 @@ macro_rules! LoopIdError {
     };
 }
 
-LoopIdError!()
+LoopIdError!();

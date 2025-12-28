@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Section!();
-        U32!();
         U16!();
         Version!();
+        U32!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! AuxHeader32 {
     };
 }
 
-AuxHeader32!()
+AuxHeader32!();

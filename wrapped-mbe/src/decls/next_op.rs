@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        ParseError!();
-        Op!();
-        Mode!();
         MetaTemplate!();
+        ParseError!();
+        Mode!();
+        Op!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! next_op {
     };
 }
 
-next_op!()
+next_op!();

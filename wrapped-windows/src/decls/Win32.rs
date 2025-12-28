@@ -4,4 +4,4 @@ macro_rules! Win32 {
     };
 }
 
-Win32!()
+Win32!();

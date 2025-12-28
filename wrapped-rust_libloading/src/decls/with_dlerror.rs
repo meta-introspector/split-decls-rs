@@ -11,4 +11,4 @@ macro_rules! with_dlerror {
     };
 }
 
-with_dlerror!()
+with_dlerror!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        DeserializeError!();
+        Anchored!();
         StartKind!();
         Endian!();
-        Anchored!();
+        DeserializeError!();
         SerializeError!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_220 {
     };
 }
 
-impl_220!()
+impl_220!();

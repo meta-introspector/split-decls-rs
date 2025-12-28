@@ -4,4 +4,4 @@ macro_rules! docs_from_attrs {
     };
 }
 
-docs_from_attrs!()
+docs_from_attrs!();

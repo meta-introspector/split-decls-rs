@@ -4,4 +4,4 @@ macro_rules! AmbiguousWidePointerComparisonsAddrMetadataSuggestion {
     };
 }
 
-AmbiguousWidePointerComparisonsAddrMetadataSuggestion!()
+AmbiguousWidePointerComparisonsAddrMetadataSuggestion!();

@@ -12,4 +12,4 @@ macro_rules! emit_x86_64_sysv64_va_arg {
     };
 }
 
-emit_x86_64_sysv64_va_arg!()
+emit_x86_64_sysv64_va_arg!();

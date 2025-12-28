@@ -11,4 +11,4 @@ macro_rules! drop_location_span {
     };
 }
 
-drop_location_span!()
+drop_location_span!();

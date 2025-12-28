@@ -4,4 +4,4 @@ macro_rules! CreateDereferenceableOrNullAttr {
     };
 }
 
-CreateDereferenceableOrNullAttr!()
+CreateDereferenceableOrNullAttr!();

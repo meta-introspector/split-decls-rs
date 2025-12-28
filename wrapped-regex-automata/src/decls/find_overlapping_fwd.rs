@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Cache!();
-        MatchError!();
+        Input!();
         OverlappingState!();
         DFA!();
-        Input!();
+        Cache!();
+        MatchError!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! find_overlapping_fwd {
     };
 }
 
-find_overlapping_fwd!()
+find_overlapping_fwd!();

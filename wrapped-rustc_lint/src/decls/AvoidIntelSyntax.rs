@@ -4,4 +4,4 @@ macro_rules! AvoidIntelSyntax {
     };
 }
 
-AvoidIntelSyntax!()
+AvoidIntelSyntax!();

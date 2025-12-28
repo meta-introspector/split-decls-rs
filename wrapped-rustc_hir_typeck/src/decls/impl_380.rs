@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        Locatable!();
+        HasRecursiveOpaque!();
         Resolver!();
         WritebackCx!();
-        HasRecursiveOpaque!();
-        Locatable!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_380 {
     };
 }
 
-impl_380!()
+impl_380!();

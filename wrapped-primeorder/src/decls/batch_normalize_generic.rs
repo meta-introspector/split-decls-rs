@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         AffinePoint!();
-        ProjectivePoint!();
         PrimeCurveParams!();
+        ProjectivePoint!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! batch_normalize_generic {
     };
 }
 
-batch_normalize_generic!()
+batch_normalize_generic!();

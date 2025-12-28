@@ -4,4 +4,4 @@ macro_rules! JoinSemiLattice {
     };
 }
 
-JoinSemiLattice!()
+JoinSemiLattice!();

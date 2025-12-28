@@ -4,4 +4,4 @@ macro_rules! IMAGE_HOT_PATCH_NONE {
     };
 }
 
-IMAGE_HOT_PATCH_NONE!()
+IMAGE_HOT_PATCH_NONE!();

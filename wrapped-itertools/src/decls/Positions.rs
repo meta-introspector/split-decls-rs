@@ -4,4 +4,4 @@ macro_rules! Positions {
     };
 }
 
-Positions!()
+Positions!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        ParamEnv!();
         CanonicalVarKind!();
         Interner!();
+        ParamEnv!();
         GenericArg!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! CanonicalParamEnvCacheEntry {
     };
 }
 
-CanonicalParamEnvCacheEntry!()
+CanonicalParamEnvCacheEntry!();

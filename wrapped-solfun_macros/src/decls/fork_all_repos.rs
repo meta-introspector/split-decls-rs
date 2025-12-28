@@ -4,4 +4,4 @@ macro_rules! fork_all_repos {
     };
 }
 
-fork_all_repos!()
+fork_all_repos!();

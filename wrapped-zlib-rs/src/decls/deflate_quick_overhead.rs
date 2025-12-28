@@ -4,4 +4,4 @@ macro_rules! deflate_quick_overhead {
     };
 }
 
-deflate_quick_overhead!()
+deflate_quick_overhead!();

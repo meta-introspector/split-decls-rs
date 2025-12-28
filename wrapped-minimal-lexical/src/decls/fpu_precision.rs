@@ -4,4 +4,4 @@ macro_rules! fpu_precision {
     };
 }
 
-fpu_precision!()
+fpu_precision!();

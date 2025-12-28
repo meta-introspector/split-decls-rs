@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        BitOps128!();
         RotateEachWord128!();
+        BitOps128!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_bitops128 {
     };
 }
 
-impl_bitops128!()
+impl_bitops128!();

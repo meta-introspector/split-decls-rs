@@ -11,4 +11,4 @@ macro_rules! benchmark_parse_macro_rules {
     };
 }
 
-benchmark_parse_macro_rules!()
+benchmark_parse_macro_rules!();

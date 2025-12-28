@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        LoadingProgress!();
         Handle!();
         Config!();
+        LoadingProgress!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Message {
     };
 }
 
-Message!()
+Message!();

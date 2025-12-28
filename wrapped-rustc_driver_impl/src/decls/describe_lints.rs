@@ -11,4 +11,4 @@ Available lint options:
     };
 }
 
-describe_lints!()
+describe_lints!();

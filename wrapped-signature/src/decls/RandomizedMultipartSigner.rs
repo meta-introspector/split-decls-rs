@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Error!();
         RandomizedSigner!();
         Result!();
-        Error!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! RandomizedMultipartSigner {
     };
 }
 
-RandomizedMultipartSigner!()
+RandomizedMultipartSigner!();

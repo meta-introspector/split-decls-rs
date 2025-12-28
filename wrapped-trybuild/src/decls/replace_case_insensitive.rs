@@ -4,4 +4,4 @@ macro_rules! replace_case_insensitive {
     };
 }
 
-replace_case_insensitive!()
+replace_case_insensitive!();

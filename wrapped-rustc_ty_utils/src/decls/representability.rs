@@ -4,4 +4,4 @@ macro_rules! representability {
     };
 }
 
-representability!()
+representability!();

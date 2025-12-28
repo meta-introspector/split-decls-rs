@@ -4,4 +4,4 @@ macro_rules! sieve_not_all_primes {
     };
 }
 
-sieve_not_all_primes!()
+sieve_not_all_primes!();

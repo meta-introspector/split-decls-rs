@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        RootDatabase!();
         LocalRoots!();
         LibraryRoots!();
-        RootDatabase!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_254 {
     };
 }
 
-impl_254!()
+impl_254!();

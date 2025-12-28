@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Path!();
         Deserializer!();
+        Path!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_4 {
     };
 }
 
-impl_4!()
+impl_4!();

@@ -4,4 +4,4 @@ macro_rules! InvalidFromUtf8Diag {
     };
 }
 
-InvalidFromUtf8Diag!()
+InvalidFromUtf8Diag!();

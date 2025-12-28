@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        FromBytes!();
-        Valid!();
-        SplitAt!();
-        Split!();
-        Unaligned!();
-        KnownLayout!();
         Shared!();
-        Immutable!();
-        IntoBytes!();
         Aligned!();
+        Split!();
+        IntoBytes!();
+        Valid!();
+        KnownLayout!();
+        FromBytes!();
+        Immutable!();
+        Unaligned!();
+        SplitAt!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_402 {
     };
 }
 
-impl_402!()
+impl_402!();

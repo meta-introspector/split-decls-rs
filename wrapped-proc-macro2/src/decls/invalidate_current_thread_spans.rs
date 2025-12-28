@@ -11,4 +11,4 @@ macro_rules! invalidate_current_thread_spans {
     };
 }
 
-invalidate_current_thread_spans!()
+invalidate_current_thread_spans!();

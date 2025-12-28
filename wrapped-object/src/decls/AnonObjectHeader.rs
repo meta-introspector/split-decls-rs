@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         U32!();
-        Object!();
         U16!();
+        Object!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! AnonObjectHeader {
     };
 }
 
-AnonObjectHeader!()
+AnonObjectHeader!();

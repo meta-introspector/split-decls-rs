@@ -4,4 +4,4 @@ macro_rules! RUNNING {
     };
 }
 
-RUNNING!()
+RUNNING!();

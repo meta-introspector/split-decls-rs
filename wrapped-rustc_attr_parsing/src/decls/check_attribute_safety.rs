@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        UnsafeAttrOutsideUnsafe!();
         UnsafeAttrOutsideUnsafeSuggestion!();
         InvalidAttrUnsafe!();
+        UnsafeAttrOutsideUnsafe!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! check_attribute_safety {
     };
 }
 
-check_attribute_safety!()
+check_attribute_safety!();

@@ -11,4 +11,4 @@ macro_rules! h2_server {
     };
 }
 
-h2_server!()
+h2_server!();

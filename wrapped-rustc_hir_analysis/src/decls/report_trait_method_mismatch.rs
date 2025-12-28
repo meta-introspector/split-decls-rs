@@ -4,4 +4,4 @@ macro_rules! report_trait_method_mismatch {
     };
 }
 
-report_trait_method_mismatch!()
+report_trait_method_mismatch!();

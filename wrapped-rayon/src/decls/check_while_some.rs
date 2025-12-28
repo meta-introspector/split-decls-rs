@@ -4,4 +4,4 @@ macro_rules! check_while_some {
     };
 }
 
-check_while_some!()
+check_while_some!();

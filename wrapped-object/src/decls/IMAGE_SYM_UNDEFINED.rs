@@ -11,4 +11,4 @@ macro_rules! IMAGE_SYM_UNDEFINED {
     };
 }
 
-IMAGE_SYM_UNDEFINED!()
+IMAGE_SYM_UNDEFINED!();

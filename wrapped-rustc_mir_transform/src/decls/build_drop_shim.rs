@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         DropShimElaborator!();
-        MirPatch!();
         Unwind!();
+        MirPatch!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! build_drop_shim {
     };
 }
 
-build_drop_shim!()
+build_drop_shim!();

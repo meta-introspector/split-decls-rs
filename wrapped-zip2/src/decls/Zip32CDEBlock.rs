@@ -11,4 +11,4 @@ macro_rules! Zip32CDEBlock {
     };
 }
 
-Zip32CDEBlock!()
+Zip32CDEBlock!();

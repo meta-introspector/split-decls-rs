@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DB!();
         MultiThreaded!();
+        DB!();
         ColumnFamily!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! BoundColumnFamily {
     };
 }
 
-BoundColumnFamily!()
+BoundColumnFamily!();

@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        ImageDosHeader!();
         CoffCommon!();
-        Object!();
-        DataDirectories!();
         ImageNtHeaders!();
         ReadRef!();
+        ImageDosHeader!();
+        DataDirectories!();
+        Object!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! PeFile {
     };
 }
 
-PeFile!()
+PeFile!();

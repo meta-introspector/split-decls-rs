@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        NameContext!();
-        CompletionContext!();
         Completions!();
+        CompletionContext!();
+        NameContext!();
         NameKind!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! complete_name {
     };
 }
 
-complete_name!()
+complete_name!();

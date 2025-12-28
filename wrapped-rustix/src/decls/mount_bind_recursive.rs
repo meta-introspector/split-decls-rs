@@ -12,4 +12,4 @@ macro_rules! mount_bind_recursive {
     };
 }
 
-mount_bind_recursive!()
+mount_bind_recursive!();

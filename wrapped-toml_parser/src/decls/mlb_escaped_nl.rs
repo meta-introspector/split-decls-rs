@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Span!();
-        Raw!();
-        Expected!();
         ErrorSink!();
+        Expected!();
+        Raw!();
         ParseError!();
+        Span!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! mlb_escaped_nl {
     };
 }
 
-mlb_escaped_nl!()
+mlb_escaped_nl!();

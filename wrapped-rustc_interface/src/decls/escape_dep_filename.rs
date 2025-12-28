@@ -4,4 +4,4 @@ macro_rules! escape_dep_filename {
     };
 }
 
-escape_dep_filename!()
+escape_dep_filename!();

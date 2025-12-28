@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Error!();
         Function!();
+        Error!();
         Result!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! get_random {
     };
 }
 
-get_random!()
+get_random!();

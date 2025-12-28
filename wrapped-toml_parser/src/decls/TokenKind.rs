@@ -4,4 +4,4 @@ macro_rules! TokenKind {
     };
 }
 
-TokenKind!()
+TokenKind!();

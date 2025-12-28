@@ -4,4 +4,4 @@ macro_rules! ctypes {
     };
 }
 
-ctypes!()
+ctypes!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         MatchesProducer!();
-        Folder!();
         UnindexedProducer!();
+        Folder!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_1333 {
     };
 }
 
-impl_1333!()
+impl_1333!();

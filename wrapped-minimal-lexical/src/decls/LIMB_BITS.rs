@@ -4,4 +4,4 @@ macro_rules! LIMB_BITS {
     };
 }
 
-LIMB_BITS!()
+LIMB_BITS!();

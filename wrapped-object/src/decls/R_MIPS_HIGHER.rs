@@ -4,4 +4,4 @@ macro_rules! R_MIPS_HIGHER {
     };
 }
 
-R_MIPS_HIGHER!()
+R_MIPS_HIGHER!();

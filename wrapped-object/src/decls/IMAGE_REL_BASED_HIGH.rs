@@ -4,4 +4,4 @@ macro_rules! IMAGE_REL_BASED_HIGH {
     };
 }
 
-IMAGE_REL_BASED_HIGH!()
+IMAGE_REL_BASED_HIGH!();

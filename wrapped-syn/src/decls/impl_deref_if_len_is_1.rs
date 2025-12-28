@@ -4,4 +4,4 @@ macro_rules! impl_deref_if_len_is_1 {
     };
 }
 
-impl_deref_if_len_is_1!()
+impl_deref_if_len_is_1!();

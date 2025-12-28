@@ -4,4 +4,4 @@ macro_rules! ModuleFlagMergeBehavior {
     };
 }
 
-ModuleFlagMergeBehavior!()
+ModuleFlagMergeBehavior!();

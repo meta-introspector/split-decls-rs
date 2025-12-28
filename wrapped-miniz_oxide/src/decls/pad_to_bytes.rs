@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        LocalVars!();
         InputWrapper!();
         Action!();
+        LocalVars!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! pad_to_bytes {
     };
 }
 
-pad_to_bytes!()
+pad_to_bytes!();

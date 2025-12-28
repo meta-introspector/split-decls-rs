@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         FindMin!();
-        DefIdVisitor!();
         VisibilityLike!();
+        DefIdVisitor!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_19 {
     };
 }
 
-impl_19!()
+impl_19!();

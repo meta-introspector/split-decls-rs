@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        CompileTimeInterpCx!();
-        Immediate!();
         InternKind!();
+        Immediate!();
+        CompileTimeInterpCx!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! valtree_to_ref {
     };
 }
 
-valtree_to_ref!()
+valtree_to_ref!();

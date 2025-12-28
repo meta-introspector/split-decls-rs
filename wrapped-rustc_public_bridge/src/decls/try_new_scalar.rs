@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Bridge!();
-        Allocation!();
-        Error!();
         CompilerCtxt!();
+        Error!();
+        Allocation!();
+        Bridge!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! try_new_scalar {
     };
 }
 
-try_new_scalar!()
+try_new_scalar!();

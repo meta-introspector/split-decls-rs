@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        MinSpanningTree!();
-        Edge!();
-        Node!();
         MinScored!();
+        Node!();
+        MinSpanningTree!();
         Element!();
+        Edge!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_438 {
     };
 }
 
-impl_438!()
+impl_438!();

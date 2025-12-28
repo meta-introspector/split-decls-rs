@@ -14,4 +14,4 @@ macro_rules! validate_rule {
     };
 }
 
-validate_rule!()
+validate_rule!();

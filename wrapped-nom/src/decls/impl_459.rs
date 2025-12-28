@@ -1,18 +1,18 @@
 macro_rules! deps {
     () => {
-        TagNoCase!();
-        ErrorKind!();
+        Tag!();
+        Error!();
         PResult!();
         Parser!();
-        CompareResult!();
-        Error!();
         Compare!();
+        TagNoCase!();
+        ParseError!();
+        Needed!();
+        ErrorKind!();
+        Input!();
+        CompareResult!();
         Err!();
         OutputMode!();
-        Input!();
-        Needed!();
-        ParseError!();
-        Tag!();
     };
 }
 
@@ -23,4 +23,4 @@ macro_rules! impl_459 {
     };
 }
 
-impl_459!()
+impl_459!();

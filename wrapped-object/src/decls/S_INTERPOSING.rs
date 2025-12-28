@@ -4,4 +4,4 @@ macro_rules! S_INTERPOSING {
     };
 }
 
-S_INTERPOSING!()
+S_INTERPOSING!();

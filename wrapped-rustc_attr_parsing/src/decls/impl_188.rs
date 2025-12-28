@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        FinalizeContext!();
         MultipleStabilityLevels!();
+        FinalizeContext!();
         AllowedTargets!();
-        Stage!();
         BodyStabilityParser!();
         AttributeParser!();
         AcceptMapping!();
+        Stage!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_188 {
     };
 }
 
-impl_188!()
+impl_188!();

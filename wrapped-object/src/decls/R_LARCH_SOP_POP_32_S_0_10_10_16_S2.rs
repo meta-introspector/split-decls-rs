@@ -4,4 +4,4 @@ macro_rules! R_LARCH_SOP_POP_32_S_0_10_10_16_S2 {
     };
 }
 
-R_LARCH_SOP_POP_32_S_0_10_10_16_S2!()
+R_LARCH_SOP_POP_32_S_0_10_10_16_S2!();

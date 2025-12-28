@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Status!();
-        NonConstOp!();
         UnallowedOpInConstContext!();
+        NonConstOp!();
         ConstCx!();
         Coroutine!();
     };
@@ -15,4 +15,4 @@ macro_rules! impl_28 {
     };
 }
 
-impl_28!()
+impl_28!();

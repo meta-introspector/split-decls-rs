@@ -4,4 +4,4 @@ macro_rules! unsafe_pinned {
     };
 }
 
-unsafe_pinned!()
+unsafe_pinned!();

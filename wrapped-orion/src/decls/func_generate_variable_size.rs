@@ -11,4 +11,4 @@ macro_rules! func_generate_variable_size {
     };
 }
 
-func_generate_variable_size!()
+func_generate_variable_size!();

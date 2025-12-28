@@ -4,4 +4,4 @@ macro_rules! setup_callbacks {
     };
 }
 
-setup_callbacks!()
+setup_callbacks!();

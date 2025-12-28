@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Error!();
         OsError!();
+        Error!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_264 {
     };
 }
 
-impl_264!()
+impl_264!();

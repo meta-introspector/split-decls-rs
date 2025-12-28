@@ -4,4 +4,4 @@ macro_rules! SmallVecVisitor {
     };
 }
 
-SmallVecVisitor!()
+SmallVecVisitor!();

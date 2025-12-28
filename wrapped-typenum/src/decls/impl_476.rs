@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        UInt!();
-        B1!();
-        PrivateDiv!();
-        Less!();
-        PrivateDivIf!();
-        Sub1!();
-        PrivateDivQuot!();
         PrivateDivRem!();
+        UInt!();
+        PrivateDivIf!();
+        Less!();
+        Sub1!();
+        B1!();
+        PrivateDivQuot!();
+        PrivateDiv!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_476 {
     };
 }
 
-impl_476!()
+impl_476!();

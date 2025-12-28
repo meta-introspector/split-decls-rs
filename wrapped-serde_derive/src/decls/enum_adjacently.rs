@@ -4,4 +4,4 @@ macro_rules! enum_adjacently {
     };
 }
 
-enum_adjacently!()
+enum_adjacently!();

@@ -4,4 +4,4 @@ macro_rules! path_might_be_cyclic {
     };
 }
 
-path_might_be_cyclic!()
+path_might_be_cyclic!();

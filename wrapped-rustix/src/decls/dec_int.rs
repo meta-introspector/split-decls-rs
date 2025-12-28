@@ -4,4 +4,4 @@ macro_rules! dec_int {
     };
 }
 
-dec_int!()
+dec_int!();

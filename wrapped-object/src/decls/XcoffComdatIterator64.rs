@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        FileHeader64!();
         XcoffComdatIterator!();
+        FileHeader64!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! XcoffComdatIterator64 {
     };
 }
 
-XcoffComdatIterator64!()
+XcoffComdatIterator64!();

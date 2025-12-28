@@ -4,4 +4,4 @@ macro_rules! IteratorIndexExt {
     };
 }
 
-IteratorIndexExt!()
+IteratorIndexExt!();

@@ -11,4 +11,4 @@ macro_rules! lower_variant {
     };
 }
 
-lower_variant!()
+lower_variant!();

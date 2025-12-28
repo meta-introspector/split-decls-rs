@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Version!();
         Endian!();
         U16!();
+        Version!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Versym {
     };
 }
 
-Versym!()
+Versym!();

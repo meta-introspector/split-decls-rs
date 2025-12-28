@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        HoverAction!();
         Runnable!();
+        HoverAction!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! dedupe_or_merge_hover_actions {
     };
 }
 
-dedupe_or_merge_hover_actions!()
+dedupe_or_merge_hover_actions!();

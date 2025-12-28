@@ -4,4 +4,4 @@ macro_rules! l4re {
     };
 }
 
-l4re!()
+l4re!();

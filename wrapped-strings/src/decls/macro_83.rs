@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        HANDLE!();
         HEAP_FLAGS!();
         BOOL!();
+        HANDLE!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! macro_83 {
     };
 }
 
-macro_83!()
+macro_83!();

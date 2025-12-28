@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        Dictionary!();
-        FrameDecoderState!();
-        BlockDecodingStrategy!();
-        Write!();
-        FrameDecoderError!();
-        Read!();
         FrameDecoder!();
+        BlockDecodingStrategy!();
         ReadFrameHeaderError!();
+        Read!();
+        FrameDecoderState!();
+        Write!();
         Error!();
+        FrameDecoderError!();
+        Dictionary!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_125 {
     };
 }
 
-impl_125!()
+impl_125!();

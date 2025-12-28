@@ -4,4 +4,4 @@ macro_rules! wrap_in_const {
     };
 }
 
-wrap_in_const!()
+wrap_in_const!();

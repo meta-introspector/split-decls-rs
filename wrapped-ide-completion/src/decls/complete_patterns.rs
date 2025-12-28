@@ -13,4 +13,4 @@ macro_rules! complete_patterns {
     };
 }
 
-complete_patterns!()
+complete_patterns!();

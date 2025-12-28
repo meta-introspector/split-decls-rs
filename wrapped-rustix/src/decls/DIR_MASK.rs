@@ -11,4 +11,4 @@ macro_rules! DIR_MASK {
     };
 }
 
-DIR_MASK!()
+DIR_MASK!();

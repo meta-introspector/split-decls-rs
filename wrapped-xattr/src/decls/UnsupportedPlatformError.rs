@@ -4,4 +4,4 @@ macro_rules! UnsupportedPlatformError {
     };
 }
 
-UnsupportedPlatformError!()
+UnsupportedPlatformError!();

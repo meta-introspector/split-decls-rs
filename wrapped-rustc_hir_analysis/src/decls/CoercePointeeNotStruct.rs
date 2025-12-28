@@ -4,4 +4,4 @@ macro_rules! CoercePointeeNotStruct {
     };
 }
 
-CoercePointeeNotStruct!()
+CoercePointeeNotStruct!();

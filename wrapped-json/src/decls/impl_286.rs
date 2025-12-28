@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Deserializer!();
-        KeyClass!();
         KeyClassifier!();
-        Result!();
+        KeyClass!();
+        Deserializer!();
         Error!();
         Value!();
+        Result!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_286 {
     };
 }
 
-impl_286!()
+impl_286!();

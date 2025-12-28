@@ -4,4 +4,4 @@ macro_rules! R_LARCH_TLS_IE_LO12 {
     };
 }
 
-R_LARCH_TLS_IE_LO12!()
+R_LARCH_TLS_IE_LO12!();

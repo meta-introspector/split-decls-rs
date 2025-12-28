@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        ObligationForest!();
-        Edge!();
         ForestObligation!();
+        Edge!();
+        ObligationForest!();
         Node!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_308 {
     };
 }
 
-impl_308!()
+impl_308!();

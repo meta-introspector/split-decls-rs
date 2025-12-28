@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        CanonicalState!();
         Interner!();
         ProbeStep!();
         ProbeKind!();
+        CanonicalState!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! Probe {
     };
 }
 
-Probe!()
+Probe!();

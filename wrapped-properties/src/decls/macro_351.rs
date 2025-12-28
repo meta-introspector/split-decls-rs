@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        PropertyCodePointMap!();
         GraphemeClusterBreak!();
+        PropertyCodePointMap!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! macro_351 {
     };
 }
 
-macro_351!()
+macro_351!();

@@ -12,4 +12,4 @@ macro_rules! other_490 {
     };
 }
 
-other_490!()
+other_490!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Relr32!();
+        Endian!();
         Pod!();
         Relr64!();
-        Endian!();
+        Relr32!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! Relr {
     };
 }
 
-Relr!()
+Relr!();

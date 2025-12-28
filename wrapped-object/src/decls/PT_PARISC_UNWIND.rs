@@ -4,4 +4,4 @@ macro_rules! PT_PARISC_UNWIND {
     };
 }
 
-PT_PARISC_UNWIND!()
+PT_PARISC_UNWIND!();

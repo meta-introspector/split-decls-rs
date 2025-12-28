@@ -4,4 +4,4 @@ macro_rules! R_LARCH_ABS_LO12 {
     };
 }
 
-R_LARCH_ABS_LO12!()
+R_LARCH_ABS_LO12!();

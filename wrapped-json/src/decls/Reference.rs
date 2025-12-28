@@ -4,4 +4,4 @@ macro_rules! Reference {
     };
 }
 
-Reference!()
+Reference!();

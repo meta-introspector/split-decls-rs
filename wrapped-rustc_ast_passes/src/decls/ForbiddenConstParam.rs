@@ -4,4 +4,4 @@ macro_rules! ForbiddenConstParam {
     };
 }
 
-ForbiddenConstParam!()
+ForbiddenConstParam!();

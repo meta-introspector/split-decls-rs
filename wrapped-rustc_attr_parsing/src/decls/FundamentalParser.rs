@@ -4,4 +4,4 @@ macro_rules! FundamentalParser {
     };
 }
 
-FundamentalParser!()
+FundamentalParser!();

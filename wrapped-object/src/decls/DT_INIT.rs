@@ -4,4 +4,4 @@ macro_rules! DT_INIT {
     };
 }
 
-DT_INIT!()
+DT_INIT!();

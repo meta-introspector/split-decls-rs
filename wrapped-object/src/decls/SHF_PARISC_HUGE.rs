@@ -11,4 +11,4 @@ macro_rules! SHF_PARISC_HUGE {
     };
 }
 
-SHF_PARISC_HUGE!()
+SHF_PARISC_HUGE!();

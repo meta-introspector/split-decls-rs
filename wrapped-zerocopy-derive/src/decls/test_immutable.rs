@@ -4,4 +4,4 @@ macro_rules! test_immutable {
     };
 }
 
-test_immutable!()
+test_immutable!();

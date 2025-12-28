@@ -4,4 +4,4 @@ macro_rules! opaque_ty {
     };
 }
 
-opaque_ty!()
+opaque_ty!();

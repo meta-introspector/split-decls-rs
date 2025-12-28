@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        LookupResult!();
-        MoveData!();
         DropFlagState!();
+        MoveData!();
+        LookupResult!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! drop_flag_effects_for_location {
     };
 }
 
-drop_flag_effects_for_location!()
+drop_flag_effects_for_location!();

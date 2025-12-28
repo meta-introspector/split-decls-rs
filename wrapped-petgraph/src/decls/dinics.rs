@@ -4,4 +4,4 @@ macro_rules! dinics {
     };
 }
 
-dinics!()
+dinics!();

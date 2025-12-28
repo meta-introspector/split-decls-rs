@@ -4,4 +4,4 @@ macro_rules! analyze_rustc_ring_impl {
     };
 }
 
-analyze_rustc_ring_impl!()
+analyze_rustc_ring_impl!();

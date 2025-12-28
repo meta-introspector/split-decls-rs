@@ -4,4 +4,4 @@ macro_rules! stability {
     };
 }
 
-stability!()
+stability!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Kind!();
         BoxError!();
         Error!();
+        Kind!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! decode {
     };
 }
 
-decode!()
+decode!();

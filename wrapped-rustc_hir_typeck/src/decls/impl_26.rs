@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        CoroutineTypes!();
-        FnCtxt!();
-        ClosureSignatures!();
-        Expectation!();
-        Error!();
         ExpectedSig!();
+        Error!();
+        FnCtxt!();
+        Expectation!();
+        CoroutineTypes!();
+        ClosureSignatures!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_26 {
     };
 }
 
-impl_26!()
+impl_26!();

@@ -4,4 +4,4 @@ macro_rules! GARAY {
     };
 }
 
-GARAY!()
+GARAY!();

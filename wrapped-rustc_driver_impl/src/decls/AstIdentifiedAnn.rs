@@ -4,4 +4,4 @@ macro_rules! AstIdentifiedAnn {
     };
 }
 
-AstIdentifiedAnn!()
+AstIdentifiedAnn!();

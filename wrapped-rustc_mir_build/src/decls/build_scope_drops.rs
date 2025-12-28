@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        DropTree!();
-        DropKind!();
-        BlockAnd!();
         CFG!();
+        DropKind!();
+        DropTree!();
+        BlockAnd!();
         Scope!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! build_scope_drops {
     };
 }
 
-build_scope_drops!()
+build_scope_drops!();

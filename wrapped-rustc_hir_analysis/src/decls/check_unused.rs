@@ -4,4 +4,4 @@ macro_rules! check_unused {
     };
 }
 
-check_unused!()
+check_unused!();

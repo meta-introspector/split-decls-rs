@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Node!();
-        WS!();
         ExprVal!();
-        Expr!();
+        Node!();
         Forloop!();
+        Expr!();
+        WS!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! parse_value_forloop_empty {
     };
 }
 
-parse_value_forloop_empty!()
+parse_value_forloop_empty!();

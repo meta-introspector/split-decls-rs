@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         DestinationSlot!();
-        Entry!();
         Fixed!();
+        Entry!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! macro_95 {
     };
 }
 
-macro_95!()
+macro_95!();

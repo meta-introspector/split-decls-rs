@@ -4,4 +4,4 @@ macro_rules! have_elision {
     };
 }
 
-have_elision!()
+have_elision!();

@@ -4,4 +4,4 @@ macro_rules! cfg_attr_lint_attrs {
     };
 }
 
-cfg_attr_lint_attrs!()
+cfg_attr_lint_attrs!();

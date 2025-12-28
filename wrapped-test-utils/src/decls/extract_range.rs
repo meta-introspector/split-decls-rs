@@ -4,4 +4,4 @@ macro_rules! extract_range {
     };
 }
 
-extract_range!()
+extract_range!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Style!();
         Variant!();
+        Style!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! effective_style {
     };
 }
 
-effective_style!()
+effective_style!();

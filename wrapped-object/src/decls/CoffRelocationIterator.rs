@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        ImageFileHeader!();
-        CoffFile!();
-        ReadRef!();
-        CoffHeader!();
         ImageRelocation!();
+        CoffFile!();
+        CoffHeader!();
+        ImageFileHeader!();
+        ReadRef!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! CoffRelocationIterator {
     };
 }
 
-CoffRelocationIterator!()
+CoffRelocationIterator!();

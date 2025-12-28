@@ -4,4 +4,4 @@ macro_rules! slide_hash {
     };
 }
 
-slide_hash!()
+slide_hash!();

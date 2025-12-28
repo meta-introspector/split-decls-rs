@@ -4,4 +4,4 @@ macro_rules! PROC_REAP_GETPIDS {
     };
 }
 
-PROC_REAP_GETPIDS!()
+PROC_REAP_GETPIDS!();

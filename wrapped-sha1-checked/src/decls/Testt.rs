@@ -4,4 +4,4 @@ macro_rules! Testt {
     };
 }
 
-Testt!()
+Testt!();

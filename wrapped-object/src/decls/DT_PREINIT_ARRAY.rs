@@ -4,4 +4,4 @@ macro_rules! DT_PREINIT_ARRAY {
     };
 }
 
-DT_PREINIT_ARRAY!()
+DT_PREINIT_ARRAY!();

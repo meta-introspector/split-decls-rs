@@ -4,4 +4,4 @@ macro_rules! type_spec {
     };
 }
 
-type_spec!()
+type_spec!();

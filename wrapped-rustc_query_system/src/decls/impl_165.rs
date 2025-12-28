@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        QueryStackFrameExtra!();
         QueryInfo!();
+        QueryStackFrameExtra!();
         QueryContext!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_165 {
     };
 }
 
-impl_165!()
+impl_165!();

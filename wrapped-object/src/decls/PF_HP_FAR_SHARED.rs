@@ -4,4 +4,4 @@ macro_rules! PF_HP_FAR_SHARED {
     };
 }
 
-PF_HP_FAR_SHARED!()
+PF_HP_FAR_SHARED!();

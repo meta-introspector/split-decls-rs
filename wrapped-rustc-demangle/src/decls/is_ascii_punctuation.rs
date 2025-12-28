@@ -4,4 +4,4 @@ macro_rules! is_ascii_punctuation {
     };
 }
 
-is_ascii_punctuation!()
+is_ascii_punctuation!();

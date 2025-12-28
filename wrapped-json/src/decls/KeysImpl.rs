@@ -12,4 +12,4 @@ macro_rules! KeysImpl {
     };
 }
 
-KeysImpl!()
+KeysImpl!();

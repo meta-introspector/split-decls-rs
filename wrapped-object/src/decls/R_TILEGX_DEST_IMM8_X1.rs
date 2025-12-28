@@ -4,4 +4,4 @@ macro_rules! R_TILEGX_DEST_IMM8_X1 {
     };
 }
 
-R_TILEGX_DEST_IMM8_X1!()
+R_TILEGX_DEST_IMM8_X1!();

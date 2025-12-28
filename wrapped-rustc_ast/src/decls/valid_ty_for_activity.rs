@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Ty!();
         TyKind!();
         DiffActivity!();
+        Ty!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! valid_ty_for_activity {
     };
 }
 
-valid_ty_for_activity!()
+valid_ty_for_activity!();

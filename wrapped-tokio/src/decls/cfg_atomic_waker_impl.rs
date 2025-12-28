@@ -4,4 +4,4 @@ macro_rules! cfg_atomic_waker_impl {
     };
 }
 
-cfg_atomic_waker_impl!()
+cfg_atomic_waker_impl!();

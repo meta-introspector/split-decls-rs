@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        SourceMap!();
-        HygieneData!();
-        Interner!();
         Span!();
         SpanInterner!();
+        SourceMap!();
+        Interner!();
         MetavarSpansMap!();
+        HygieneData!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! SessionGlobals {
     };
 }
 
-SessionGlobals!()
+SessionGlobals!();

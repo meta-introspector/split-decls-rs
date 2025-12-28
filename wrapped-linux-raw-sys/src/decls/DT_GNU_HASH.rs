@@ -4,4 +4,4 @@ macro_rules! DT_GNU_HASH {
     };
 }
 
-DT_GNU_HASH!()
+DT_GNU_HASH!();

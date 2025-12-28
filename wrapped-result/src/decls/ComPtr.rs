@@ -4,4 +4,4 @@ macro_rules! ComPtr {
     };
 }
 
-ComPtr!()
+ComPtr!();

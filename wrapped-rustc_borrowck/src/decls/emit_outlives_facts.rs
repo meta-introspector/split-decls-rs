@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         OutlivesConstraint!();
-        LoweredConstraints!();
-        PoloniusFacts!();
         PoloniusLocationTable!();
+        PoloniusFacts!();
+        LoweredConstraints!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! emit_outlives_facts {
     };
 }
 
-emit_outlives_facts!()
+emit_outlives_facts!();

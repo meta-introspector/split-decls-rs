@@ -4,4 +4,4 @@ macro_rules! ClosingBrackets {
     };
 }
 
-ClosingBrackets!()
+ClosingBrackets!();

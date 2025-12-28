@@ -4,4 +4,4 @@ macro_rules! R_AVR_32 {
     };
 }
 
-R_AVR_32!()
+R_AVR_32!();

@@ -4,4 +4,4 @@ macro_rules! N_PEXT {
     };
 }
 
-N_PEXT!()
+N_PEXT!();

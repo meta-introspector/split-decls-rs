@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        SolveContext!();
         VarianceTermPtr!();
         Constraint!();
+        SolveContext!();
         InferredIndex!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_525 {
     };
 }
 
-impl_525!()
+impl_525!();

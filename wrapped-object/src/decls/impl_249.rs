@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        SymbolIndex!();
         ImageAuxSymbolWeak!();
+        SymbolIndex!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_249 {
     };
 }
 
-impl_249!()
+impl_249!();

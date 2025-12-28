@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Trie!();
         DecompositionData!();
+        Trie!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! NonRecursiveDecompositionSupplement {
     };
 }
 
-NonRecursiveDecompositionSupplement!()
+NonRecursiveDecompositionSupplement!();

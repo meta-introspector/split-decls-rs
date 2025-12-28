@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Span!();
-        LineColLocation!();
-        Error!();
         RuleType!();
+        Span!();
+        Error!();
+        LineColLocation!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! miette_adapter {
     };
 }
 
-miette_adapter!()
+miette_adapter!();

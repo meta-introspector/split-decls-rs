@@ -4,4 +4,4 @@ macro_rules! ReplaceReceiver {
     };
 }
 
-ReplaceReceiver!()
+ReplaceReceiver!();

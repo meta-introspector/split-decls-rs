@@ -4,4 +4,4 @@ macro_rules! token_weight {
     };
 }
 
-token_weight!()
+token_weight!();

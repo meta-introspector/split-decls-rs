@@ -4,4 +4,4 @@ macro_rules! mod_path_to_ast {
     };
 }
 
-mod_path_to_ast!()
+mod_path_to_ast!();

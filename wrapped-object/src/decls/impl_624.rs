@@ -1,19 +1,19 @@
 macro_rules! deps {
     () => {
         RelocationFlags!();
-        SymbolIndex!();
-        MachORelocationIterator!();
-        RelocationTarget!();
-        RelocationEncoding!();
-        Section!();
-        ReadRef!();
         Symbol!();
+        RelocationEncoding!();
+        SymbolIndex!();
         SectionIndex!();
-        Item!();
-        RelocationKind!();
-        MachO!();
         Relocation!();
         MachHeader!();
+        MachORelocationIterator!();
+        Section!();
+        ReadRef!();
+        RelocationKind!();
+        Item!();
+        MachO!();
+        RelocationTarget!();
     };
 }
 
@@ -24,4 +24,4 @@ macro_rules! impl_624 {
     };
 }
 
-impl_624!()
+impl_624!();

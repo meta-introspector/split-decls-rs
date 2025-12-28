@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        WritableBuffer!();
         SegmentCommand!();
         SectionHeader!();
-        Nlist!();
         MachHeader!();
-        WritableBuffer!();
+        Nlist!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! MachO {
     };
 }
 
-MachO!()
+MachO!();

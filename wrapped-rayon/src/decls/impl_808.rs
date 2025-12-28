@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        Empty!();
+        RepeatNProducer!();
         Producer!();
         IntoIter!();
-        RepeatNProducer!();
-        Empty!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_808 {
     };
 }
 
-impl_808!()
+impl_808!();

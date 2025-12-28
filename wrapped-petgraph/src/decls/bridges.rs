@@ -4,4 +4,4 @@ macro_rules! bridges {
     };
 }
 
-bridges!()
+bridges!();

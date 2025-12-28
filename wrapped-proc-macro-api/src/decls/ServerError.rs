@@ -4,4 +4,4 @@ macro_rules! ServerError {
     };
 }
 
-ServerError!()
+ServerError!();

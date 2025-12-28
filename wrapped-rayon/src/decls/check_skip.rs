@@ -4,4 +4,4 @@ macro_rules! check_skip {
     };
 }
 
-check_skip!()
+check_skip!();

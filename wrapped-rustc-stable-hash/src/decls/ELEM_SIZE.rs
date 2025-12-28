@@ -4,4 +4,4 @@ macro_rules! ELEM_SIZE {
     };
 }
 
-ELEM_SIZE!()
+ELEM_SIZE!();

@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        BecauseImmutable!();
-        Shared!();
-        SizeEq!();
         Validity!();
-        TryTransmuteFromPtr!();
+        SizeEq!();
         Immutable!();
+        TryTransmuteFromPtr!();
+        Shared!();
+        BecauseImmutable!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_359 {
     };
 }
 
-impl_359!()
+impl_359!();

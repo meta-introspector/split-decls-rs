@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Result!();
         Serializer!();
+        Result!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! to_writer {
     };
 }
 
-to_writer!()
+to_writer!();

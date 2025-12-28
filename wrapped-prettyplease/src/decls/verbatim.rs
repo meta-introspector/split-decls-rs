@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Token!();
-        IterDelimited!();
-        Printer!();
         FixupContext!();
+        Printer!();
+        IterDelimited!();
+        Token!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! verbatim {
     };
 }
 
-verbatim!()
+verbatim!();

@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
+        ByteClasses!();
+        Accel!();
+        StateID!();
         DFA!();
-        State!();
         StateTransitionIter!();
         StateSparseTransitionIter!();
-        ByteClasses!();
-        StateID!();
-        Accel!();
+        State!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_50 {
     };
 }
 
-impl_50!()
+impl_50!();

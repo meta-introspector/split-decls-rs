@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        ConstVariableValue!();
         TermVid!();
-        TypeVariableValue!();
+        ConstVariableValue!();
         RegionVariableOrigin!();
         Generalizer!();
+        TypeVariableValue!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_158 {
     };
 }
 
-impl_158!()
+impl_158!();

@@ -4,4 +4,4 @@ macro_rules! UnnameableTestItems {
     };
 }
 
-UnnameableTestItems!()
+UnnameableTestItems!();

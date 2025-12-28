@@ -11,4 +11,4 @@ macro_rules! linkage_to_llvm {
     };
 }
 
-linkage_to_llvm!()
+linkage_to_llvm!();

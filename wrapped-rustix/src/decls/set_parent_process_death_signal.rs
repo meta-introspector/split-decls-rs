@@ -12,4 +12,4 @@ macro_rules! set_parent_process_death_signal {
     };
 }
 
-set_parent_process_death_signal!()
+set_parent_process_death_signal!();

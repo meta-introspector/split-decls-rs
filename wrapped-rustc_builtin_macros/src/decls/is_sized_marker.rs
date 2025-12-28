@@ -11,4 +11,4 @@ macro_rules! is_sized_marker {
     };
 }
 
-is_sized_marker!()
+is_sized_marker!();

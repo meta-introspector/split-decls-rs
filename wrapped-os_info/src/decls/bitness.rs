@@ -4,4 +4,4 @@ macro_rules! bitness {
     };
 }
 
-bitness!()
+bitness!();

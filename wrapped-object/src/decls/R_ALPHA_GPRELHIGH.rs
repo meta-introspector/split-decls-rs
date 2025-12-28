@@ -4,4 +4,4 @@ macro_rules! R_ALPHA_GPRELHIGH {
     };
 }
 
-R_ALPHA_GPRELHIGH!()
+R_ALPHA_GPRELHIGH!();

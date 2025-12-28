@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
+        Ty!();
         Attribute!();
         Pat!();
-        Ty!();
-        AttrItem!();
         Block!();
         Path!();
+        AttrItem!();
         Visibility!();
     };
 }
@@ -17,4 +17,4 @@ macro_rules! macro_259 {
     };
 }
 
-macro_259!()
+macro_259!();

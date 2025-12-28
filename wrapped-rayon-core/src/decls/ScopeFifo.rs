@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        JobFifo!();
         ScopeBase!();
+        JobFifo!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! ScopeFifo {
     };
 }
 
-ScopeFifo!()
+ScopeFifo!();

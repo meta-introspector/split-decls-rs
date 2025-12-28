@@ -4,4 +4,4 @@ macro_rules! UnrecognizedArgument {
     };
 }
 
-UnrecognizedArgument!()
+UnrecognizedArgument!();

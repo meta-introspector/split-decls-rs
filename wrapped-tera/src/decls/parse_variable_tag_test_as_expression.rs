@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
+        LogicOperator!();
+        Test!();
         LogicExpr!();
         ExprVal!();
-        Expr!();
-        Test!();
         Node!();
-        LogicOperator!();
         WS!();
+        Expr!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! parse_variable_tag_test_as_expression {
     };
 }
 
-parse_variable_tag_test_as_expression!()
+parse_variable_tag_test_as_expression!();

@@ -11,4 +11,4 @@ macro_rules! Digit1 {
     };
 }
 
-Digit1!()
+Digit1!();

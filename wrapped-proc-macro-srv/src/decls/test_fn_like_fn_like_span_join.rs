@@ -20,4 +20,4 @@ macro_rules! test_fn_like_fn_like_span_join {
     };
 }
 
-test_fn_like_fn_like_span_join!()
+test_fn_like_fn_like_span_join!();

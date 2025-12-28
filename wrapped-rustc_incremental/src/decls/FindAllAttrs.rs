@@ -4,4 +4,4 @@ macro_rules! FindAllAttrs {
     };
 }
 
-FindAllAttrs!()
+FindAllAttrs!();

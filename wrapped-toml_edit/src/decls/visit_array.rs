@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Visit!();
         Array!();
+        Visit!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! visit_array {
     };
 }
 
-visit_array!()
+visit_array!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        UnknownCryptoError!();
         ChaCha20!();
         U32x4!();
-        UnknownCryptoError!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_340 {
     };
 }
 
-impl_340!()
+impl_340!();

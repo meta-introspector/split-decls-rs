@@ -11,4 +11,4 @@ macro_rules! ioctl_readwrite_bad {
     };
 }
 
-ioctl_readwrite_bad!()
+ioctl_readwrite_bad!();

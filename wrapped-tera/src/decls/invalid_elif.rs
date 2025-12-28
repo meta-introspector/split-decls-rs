@@ -9,4 +9,4 @@ macro_rules! invalid_elif {
     };
 }
 
-invalid_elif!()
+invalid_elif!();

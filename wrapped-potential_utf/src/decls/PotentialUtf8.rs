@@ -4,4 +4,4 @@ macro_rules! PotentialUtf8 {
     };
 }
 
-PotentialUtf8!()
+PotentialUtf8!();

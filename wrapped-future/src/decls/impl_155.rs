@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        AsyncStatus!();
         SyncState!();
         State!();
+        AsyncStatus!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_155 {
     };
 }
 
-impl_155!()
+impl_155!();

@@ -4,4 +4,4 @@ macro_rules! HCHACHA_OUTSIZE {
     };
 }
 
-HCHACHA_OUTSIZE!()
+HCHACHA_OUTSIZE!();

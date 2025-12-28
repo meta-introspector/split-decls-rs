@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        RawRwLock!();
         RwLock!();
+        RawRwLock!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_120 {
     };
 }
 
-impl_120!()
+impl_120!();

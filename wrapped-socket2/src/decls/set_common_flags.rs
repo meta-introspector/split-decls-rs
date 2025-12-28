@@ -11,4 +11,4 @@ macro_rules! set_common_flags {
     };
 }
 
-set_common_flags!()
+set_common_flags!();

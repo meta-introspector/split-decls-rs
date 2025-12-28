@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Exfiltrator!();
-        Pending!();
         PendingSignals!();
+        Pending!();
+        Exfiltrator!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_22 {
     };
 }
 
-impl_22!()
+impl_22!();

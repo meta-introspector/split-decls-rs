@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
         CompressedFileRange!();
-        BigEndian!();
-        ReadRef!();
         Error!();
-        CompressionFormat!();
-        Result!();
+        ReadRef!();
         U32Bytes!();
+        CompressionFormat!();
+        BigEndian!();
+        Result!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! compressed_file_range {
     };
 }
 
-compressed_file_range!()
+compressed_file_range!();

@@ -4,4 +4,4 @@ macro_rules! LARGE_SWITCH_PENALTY {
     };
 }
 
-LARGE_SWITCH_PENALTY!()
+LARGE_SWITCH_PENALTY!();

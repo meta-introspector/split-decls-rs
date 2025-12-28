@@ -11,4 +11,4 @@ macro_rules! compute_access_time {
     };
 }
 
-compute_access_time!()
+compute_access_time!();

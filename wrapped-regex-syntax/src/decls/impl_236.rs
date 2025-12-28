@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        ClassUnicodeRange!();
-        Interval!();
         CaseFoldError!();
         SimpleCaseFolder!();
         Bound!();
+        ClassUnicodeRange!();
         Result!();
+        Interval!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_236 {
     };
 }
 
-impl_236!()
+impl_236!();

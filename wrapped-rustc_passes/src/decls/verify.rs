@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        MissingPanicHandler!();
         PanicUnwindWithoutStd!();
         MissingLangItem!();
+        MissingPanicHandler!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! verify {
     };
 }
 
-verify!()
+verify!();

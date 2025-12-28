@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Error!();
         Function!();
         Result!();
+        Error!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! get_env {
     };
 }
 
-get_env!()
+get_env!();

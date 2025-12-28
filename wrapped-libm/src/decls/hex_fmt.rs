@@ -11,4 +11,4 @@ macro_rules! hex_fmt {
     };
 }
 
-hex_fmt!()
+hex_fmt!();

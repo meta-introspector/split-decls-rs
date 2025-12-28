@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Parser!();
-        AsChar!();
-        Offset!();
-        ParseError!();
         Input!();
-        Needed!();
-        Streaming!();
+        Parser!();
         Error!();
+        Offset!();
+        Streaming!();
+        AsChar!();
+        ParseError!();
+        Needed!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! recognize_float {
     };
 }
 
-recognize_float!()
+recognize_float!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Write!();
         Read!();
-        Rewind!();
+        Write!();
         Io!();
+        Rewind!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! Upgraded {
     };
 }
 
-Upgraded!()
+Upgraded!();

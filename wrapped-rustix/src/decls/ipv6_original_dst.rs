@@ -11,4 +11,4 @@ macro_rules! ipv6_original_dst {
     };
 }
 
-ipv6_original_dst!()
+ipv6_original_dst!();

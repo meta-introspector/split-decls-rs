@@ -4,4 +4,4 @@ macro_rules! generate_common_macros {
     };
 }
 
-generate_common_macros!()
+generate_common_macros!();

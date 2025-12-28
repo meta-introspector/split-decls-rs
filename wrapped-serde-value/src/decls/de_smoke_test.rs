@@ -11,4 +11,4 @@ macro_rules! de_smoke_test {
     };
 }
 
-de_smoke_test!()
+de_smoke_test!();

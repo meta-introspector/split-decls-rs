@@ -4,4 +4,4 @@ macro_rules! SymbolIndex {
     };
 }
 
-SymbolIndex!()
+SymbolIndex!();

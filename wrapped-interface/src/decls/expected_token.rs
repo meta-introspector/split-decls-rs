@@ -4,4 +4,4 @@ macro_rules! expected_token {
     };
 }
 
-expected_token!()
+expected_token!();

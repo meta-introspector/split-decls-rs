@@ -11,4 +11,4 @@ macro_rules! unnecessary_partially_stable_feature_lint {
     };
 }
 
-unnecessary_partially_stable_feature_lint!()
+unnecessary_partially_stable_feature_lint!();

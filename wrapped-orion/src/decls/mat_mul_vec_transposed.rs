@@ -11,4 +11,4 @@ macro_rules! mat_mul_vec_transposed {
     };
 }
 
-mat_mul_vec_transposed!()
+mat_mul_vec_transposed!();

@@ -4,4 +4,4 @@ macro_rules! type_of {
     };
 }
 
-type_of!()
+type_of!();

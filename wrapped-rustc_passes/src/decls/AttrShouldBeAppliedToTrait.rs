@@ -4,4 +4,4 @@ macro_rules! AttrShouldBeAppliedToTrait {
     };
 }
 
-AttrShouldBeAppliedToTrait!()
+AttrShouldBeAppliedToTrait!();

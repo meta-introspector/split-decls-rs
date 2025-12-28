@@ -4,4 +4,4 @@ macro_rules! ARM64_RELOC_ADDEND {
     };
 }
 
-ARM64_RELOC_ADDEND!()
+ARM64_RELOC_ADDEND!();

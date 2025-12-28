@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        DotAccess!();
-        CompletionItem!();
-        RenderContext!();
         CompletionRelevance!();
+        RenderContext!();
+        DotAccess!();
         DotAccessKind!();
+        CompletionItem!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! render_field {
     };
 }
 
-render_field!()
+render_field!();

@@ -4,4 +4,4 @@ macro_rules! mark_code_coverage_dead_code_cgu {
     };
 }
 
-mark_code_coverage_dead_code_cgu!()
+mark_code_coverage_dead_code_cgu!();

@@ -11,4 +11,4 @@ macro_rules! lex_dotted_square_bracket_ident {
     };
 }
 
-lex_dotted_square_bracket_ident!()
+lex_dotted_square_bracket_ident!();

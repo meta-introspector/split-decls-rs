@@ -4,4 +4,4 @@ macro_rules! SHT_SUNW_COMDAT {
     };
 }
 
-SHT_SUNW_COMDAT!()
+SHT_SUNW_COMDAT!();

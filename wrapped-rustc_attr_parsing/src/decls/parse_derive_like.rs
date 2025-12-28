@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Stage!();
-        ArgParser!();
         AcceptContext!();
+        ArgParser!();
+        Stage!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! parse_derive_like {
     };
 }
 
-parse_derive_like!()
+parse_derive_like!();

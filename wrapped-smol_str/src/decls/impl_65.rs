@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        SmolStr!();
         SmolStrBuilder!();
+        SmolStr!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_65 {
     };
 }
 
-impl_65!()
+impl_65!();

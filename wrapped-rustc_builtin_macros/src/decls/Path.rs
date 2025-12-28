@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        PathKind!();
         Ty!();
+        PathKind!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Path {
     };
 }
 
-Path!()
+Path!();

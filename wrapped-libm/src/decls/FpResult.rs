@@ -11,4 +11,4 @@ macro_rules! FpResult {
     };
 }
 
-FpResult!()
+FpResult!();

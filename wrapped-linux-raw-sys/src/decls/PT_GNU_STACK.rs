@@ -4,4 +4,4 @@ macro_rules! PT_GNU_STACK {
     };
 }
 
-PT_GNU_STACK!()
+PT_GNU_STACK!();

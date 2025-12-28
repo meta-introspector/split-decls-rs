@@ -4,4 +4,4 @@ macro_rules! localtime {
     };
 }
 
-localtime!()
+localtime!();

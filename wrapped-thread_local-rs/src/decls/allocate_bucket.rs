@@ -11,4 +11,4 @@ macro_rules! allocate_bucket {
     };
 }
 
-allocate_bucket!()
+allocate_bucket!();

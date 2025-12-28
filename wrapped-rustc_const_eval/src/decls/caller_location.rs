@@ -4,4 +4,4 @@ macro_rules! caller_location {
     };
 }
 
-caller_location!()
+caller_location!();

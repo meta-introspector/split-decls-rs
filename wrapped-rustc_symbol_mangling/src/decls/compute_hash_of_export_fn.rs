@@ -4,4 +4,4 @@ macro_rules! compute_hash_of_export_fn {
     };
 }
 
-compute_hash_of_export_fn!()
+compute_hash_of_export_fn!();

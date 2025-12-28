@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Path!();
+        TypeParameter!();
         DeriveMacroCall!();
         Ty!();
-        TypeParameter!();
+        Path!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! find_type_parameters {
     };
 }
 
-find_type_parameters!()
+find_type_parameters!();

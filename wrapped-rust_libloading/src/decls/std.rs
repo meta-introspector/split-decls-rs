@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Sealed!();
         Error!();
         AsFilename!();
-        Sealed!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! std {
     };
 }
 
-std!()
+std!();

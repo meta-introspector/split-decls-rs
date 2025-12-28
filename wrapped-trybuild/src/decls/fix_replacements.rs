@@ -12,4 +12,4 @@ macro_rules! fix_replacements {
     };
 }
 
-fix_replacements!()
+fix_replacements!();

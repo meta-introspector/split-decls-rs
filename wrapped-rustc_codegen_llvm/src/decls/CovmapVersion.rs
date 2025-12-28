@@ -4,4 +4,4 @@ macro_rules! CovmapVersion {
     };
 }
 
-CovmapVersion!()
+CovmapVersion!();

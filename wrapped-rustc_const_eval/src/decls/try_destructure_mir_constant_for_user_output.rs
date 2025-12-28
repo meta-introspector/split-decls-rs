@@ -4,4 +4,4 @@ macro_rules! try_destructure_mir_constant_for_user_output {
     };
 }
 
-try_destructure_mir_constant_for_user_output!()
+try_destructure_mir_constant_for_user_output!();

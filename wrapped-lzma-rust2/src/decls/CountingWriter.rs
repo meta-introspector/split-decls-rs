@@ -4,4 +4,4 @@ macro_rules! CountingWriter {
     };
 }
 
-CountingWriter!()
+CountingWriter!();

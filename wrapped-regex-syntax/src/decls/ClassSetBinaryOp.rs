@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        ClassSetBinaryOpKind!();
         Span!();
         ClassSet!();
+        ClassSetBinaryOpKind!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! ClassSetBinaryOp {
     };
 }
 
-ClassSetBinaryOp!()
+ClassSetBinaryOp!();

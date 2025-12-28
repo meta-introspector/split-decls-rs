@@ -4,4 +4,4 @@ macro_rules! EM_SPARC32PLUS {
     };
 }
 
-EM_SPARC32PLUS!()
+EM_SPARC32PLUS!();

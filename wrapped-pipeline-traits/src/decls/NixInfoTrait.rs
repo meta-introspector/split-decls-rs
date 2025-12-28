@@ -4,4 +4,4 @@ macro_rules! NixInfoTrait {
     };
 }
 
-NixInfoTrait!()
+NixInfoTrait!();

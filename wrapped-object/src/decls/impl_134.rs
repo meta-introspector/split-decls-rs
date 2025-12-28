@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        ReadRef!();
-        SegmentInternal!();
-        Segment!();
-        ObjectSegment!();
-        SegmentFlags!();
         Result!();
+        ObjectSegment!();
+        Segment!();
+        SegmentInternal!();
+        SegmentFlags!();
+        ReadRef!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_134 {
     };
 }
 
-impl_134!()
+impl_134!();

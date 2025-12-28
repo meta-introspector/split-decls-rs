@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Value!();
-        Values!();
         Deserializer!();
+        Values!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! StreamDeserializer {
     };
 }
 
-StreamDeserializer!()
+StreamDeserializer!();

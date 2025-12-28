@@ -11,4 +11,4 @@ macro_rules! set_perf_stats {
     };
 }
 
-set_perf_stats!()
+set_perf_stats!();

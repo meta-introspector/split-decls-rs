@@ -4,4 +4,4 @@ macro_rules! NoPreciseCapturesOnApit {
     };
 }
 
-NoPreciseCapturesOnApit!()
+NoPreciseCapturesOnApit!();

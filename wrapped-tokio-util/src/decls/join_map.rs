@@ -4,4 +4,4 @@ macro_rules! join_map {
     };
 }
 
-join_map!()
+join_map!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        WorkItem!();
         WriteBackendMethods!();
+        WorkItem!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_221 {
     };
 }
 
-impl_221!()
+impl_221!();

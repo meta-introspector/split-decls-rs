@@ -2,10 +2,10 @@ macro_rules! deps {
     () => {
         MemoIngredientIndex!();
         NewMemoIngredientIndices!();
+        IngredientIndices!();
+        Zalsa!();
         IngredientIndex!();
         MemoIngredientIndices!();
-        Zalsa!();
-        IngredientIndices!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_232 {
     };
 }
 
-impl_232!()
+impl_232!();

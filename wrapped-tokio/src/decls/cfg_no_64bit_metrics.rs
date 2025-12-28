@@ -4,4 +4,4 @@ macro_rules! cfg_no_64bit_metrics {
     };
 }
 
-cfg_no_64bit_metrics!()
+cfg_no_64bit_metrics!();

@@ -12,4 +12,4 @@ macro_rules! fsconfig_set_binary {
     };
 }
 
-fsconfig_set_binary!()
+fsconfig_set_binary!();

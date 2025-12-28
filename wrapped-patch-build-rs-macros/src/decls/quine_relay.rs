@@ -4,4 +4,4 @@ macro_rules! quine_relay {
     };
 }
 
-quine_relay!()
+quine_relay!();

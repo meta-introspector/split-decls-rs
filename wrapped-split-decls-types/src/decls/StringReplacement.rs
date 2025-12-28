@@ -4,4 +4,4 @@ macro_rules! StringReplacement {
     };
 }
 
-StringReplacement!()
+StringReplacement!();

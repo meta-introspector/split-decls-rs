@@ -12,4 +12,4 @@ macro_rules! walk_trait_item_ref {
     };
 }
 
-walk_trait_item_ref!()
+walk_trait_item_ref!();

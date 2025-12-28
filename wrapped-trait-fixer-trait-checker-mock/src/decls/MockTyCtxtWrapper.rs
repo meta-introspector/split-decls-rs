@@ -4,4 +4,4 @@ macro_rules! MockTyCtxtWrapper {
     };
 }
 
-MockTyCtxtWrapper!()
+MockTyCtxtWrapper!();

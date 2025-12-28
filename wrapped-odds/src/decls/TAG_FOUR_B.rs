@@ -4,4 +4,4 @@ macro_rules! TAG_FOUR_B {
     };
 }
 
-TAG_FOUR_B!()
+TAG_FOUR_B!();

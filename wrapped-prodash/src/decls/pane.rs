@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        State!();
-        Task!();
         Key!();
+        Task!();
+        State!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! pane {
     };
 }
 
-pane!()
+pane!();

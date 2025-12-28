@@ -12,4 +12,4 @@ macro_rules! render_macros_in_parent_template_with_inheritance {
     };
 }
 
-render_macros_in_parent_template_with_inheritance!()
+render_macros_in_parent_template_with_inheritance!();

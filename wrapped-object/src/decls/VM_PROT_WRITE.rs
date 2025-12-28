@@ -4,4 +4,4 @@ macro_rules! VM_PROT_WRITE {
     };
 }
 
-VM_PROT_WRITE!()
+VM_PROT_WRITE!();

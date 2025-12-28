@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Three!();
         Two!();
         One!();
-        Three!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! define_memchr_quickcheck {
     };
 }
 
-define_memchr_quickcheck!()
+define_memchr_quickcheck!();

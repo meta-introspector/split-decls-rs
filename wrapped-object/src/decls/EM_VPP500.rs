@@ -4,4 +4,4 @@ macro_rules! EM_VPP500 {
     };
 }
 
-EM_VPP500!()
+EM_VPP500!();

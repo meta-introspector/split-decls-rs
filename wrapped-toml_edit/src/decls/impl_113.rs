@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        TableLike!();
-        Value!();
-        Array!();
-        Item!();
-        ArrayOfTables!();
-        Table!();
         InlineTable!();
+        Item!();
+        Table!();
+        ArrayOfTables!();
+        TableLike!();
         Index!();
+        Array!();
+        Value!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_113 {
     };
 }
 
-impl_113!()
+impl_113!();

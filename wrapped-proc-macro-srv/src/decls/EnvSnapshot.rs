@@ -4,4 +4,4 @@ macro_rules! EnvSnapshot {
     };
 }
 
-EnvSnapshot!()
+EnvSnapshot!();

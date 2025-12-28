@@ -11,4 +11,4 @@ macro_rules! str_normalize_input_shorter {
     };
 }
 
-str_normalize_input_shorter!()
+str_normalize_input_shorter!();

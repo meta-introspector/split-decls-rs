@@ -4,4 +4,4 @@ macro_rules! is_sized_raw {
     };
 }
 
-is_sized_raw!()
+is_sized_raw!();

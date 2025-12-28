@@ -4,4 +4,4 @@ macro_rules! zero_init_timespec {
     };
 }
 
-zero_init_timespec!()
+zero_init_timespec!();

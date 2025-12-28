@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Task!();
         Key!();
+        Task!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! draw_overflow {
     };
 }
 
-draw_overflow!()
+draw_overflow!();

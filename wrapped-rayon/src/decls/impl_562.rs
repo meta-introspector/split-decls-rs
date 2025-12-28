@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        UnindexedConsumer!();
-        FoldWith!();
-        FoldWithConsumer!();
         ParallelIterator!();
+        FoldWith!();
+        UnindexedConsumer!();
+        FoldWithConsumer!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_562 {
     };
 }
 
-impl_562!()
+impl_562!();

@@ -4,4 +4,4 @@ macro_rules! PRE_LTO_BC_EXT {
     };
 }
 
-PRE_LTO_BC_EXT!()
+PRE_LTO_BC_EXT!();

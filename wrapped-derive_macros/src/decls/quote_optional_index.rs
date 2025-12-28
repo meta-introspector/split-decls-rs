@@ -11,4 +11,4 @@ macro_rules! quote_optional_index {
     };
 }
 
-quote_optional_index!()
+quote_optional_index!();

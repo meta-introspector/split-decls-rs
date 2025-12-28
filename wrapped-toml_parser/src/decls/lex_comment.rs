@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Span!();
-        Stream!();
-        TokenKind!();
         Token!();
+        TokenKind!();
+        Stream!();
+        Span!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! lex_comment {
     };
 }
 
-lex_comment!()
+lex_comment!();

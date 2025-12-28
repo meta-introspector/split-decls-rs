@@ -4,4 +4,4 @@ macro_rules! R_METAG_LO16_GOTOFF {
     };
 }
 
-R_METAG_LO16_GOTOFF!()
+R_METAG_LO16_GOTOFF!();

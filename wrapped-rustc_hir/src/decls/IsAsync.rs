@@ -4,4 +4,4 @@ macro_rules! IsAsync {
     };
 }
 
-IsAsync!()
+IsAsync!();

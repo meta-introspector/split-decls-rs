@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        SendAncillaryBuffer!();
         SendAncillaryMessage!();
+        SendAncillaryBuffer!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_573 {
     };
 }
 
-impl_573!()
+impl_573!();

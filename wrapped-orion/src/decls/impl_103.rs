@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         UnknownCryptoError!();
+        Poly1305Tag!();
+        ChaCha20!();
         StreamXChaCha20Poly1305!();
         Poly1305!();
-        Poly1305Tag!();
         StreamTag!();
-        ChaCha20!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_103 {
     };
 }
 
-impl_103!()
+impl_103!();

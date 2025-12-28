@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        PlaceholderConst!();
-        Interner!();
         ConstKind!();
-        ClauseKind!();
-        ParamEnv!();
         Ty!();
+        ParamEnv!();
+        ClauseKind!();
+        Interner!();
+        PlaceholderConst!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_67 {
     };
 }
 
-impl_67!()
+impl_67!();

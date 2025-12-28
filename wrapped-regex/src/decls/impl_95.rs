@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         SubCaptureMatches!();
-        Match!();
         Captures!();
+        Match!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_95 {
     };
 }
 
-impl_95!()
+impl_95!();

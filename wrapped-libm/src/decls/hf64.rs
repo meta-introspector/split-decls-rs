@@ -11,4 +11,4 @@ macro_rules! hf64 {
     };
 }
 
-hf64!()
+hf64!();

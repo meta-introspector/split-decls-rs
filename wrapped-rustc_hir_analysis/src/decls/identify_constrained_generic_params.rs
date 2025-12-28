@@ -11,4 +11,4 @@ macro_rules! identify_constrained_generic_params {
     };
 }
 
-identify_constrained_generic_params!()
+identify_constrained_generic_params!();

@@ -12,4 +12,4 @@ macro_rules! extended_hash {
     };
 }
 
-extended_hash!()
+extended_hash!();

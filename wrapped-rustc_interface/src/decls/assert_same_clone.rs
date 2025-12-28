@@ -4,4 +4,4 @@ macro_rules! assert_same_clone {
     };
 }
 
-assert_same_clone!()
+assert_same_clone!();

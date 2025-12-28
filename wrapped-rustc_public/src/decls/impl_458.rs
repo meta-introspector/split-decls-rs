@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        TyKind!();
-        Visitor!();
         Ty!();
-        RigidTy!();
+        Visitor!();
         Visitable!();
+        TyKind!();
+        RigidTy!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_458 {
     };
 }
 
-impl_458!()
+impl_458!();

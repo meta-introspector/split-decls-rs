@@ -11,4 +11,4 @@ macro_rules! IMAGE_REL_ARM_SECTION {
     };
 }
 
-IMAGE_REL_ARM_SECTION!()
+IMAGE_REL_ARM_SECTION!();

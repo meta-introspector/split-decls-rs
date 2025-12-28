@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
+        EdgeIndex!();
         LinkedGraph!();
         DepthFirstTraversal!();
-        EdgeIndex!();
-        NodeIndex!();
-        Node!();
-        Direction!();
         AdjacentEdges!();
         Edge!();
+        Node!();
+        NodeIndex!();
+        Direction!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_131 {
     };
 }
 
-impl_131!()
+impl_131!();

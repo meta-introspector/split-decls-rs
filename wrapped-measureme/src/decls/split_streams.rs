@@ -11,4 +11,4 @@ macro_rules! split_streams {
     };
 }
 
-split_streams!()
+split_streams!();

@@ -4,4 +4,4 @@ macro_rules! poll_write_buf {
     };
 }
 
-poll_write_buf!()
+poll_write_buf!();

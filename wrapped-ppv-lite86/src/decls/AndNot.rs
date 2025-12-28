@@ -4,4 +4,4 @@ macro_rules! AndNot {
     };
 }
 
-AndNot!()
+AndNot!();

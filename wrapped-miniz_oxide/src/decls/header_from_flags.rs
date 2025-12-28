@@ -4,4 +4,4 @@ macro_rules! header_from_flags {
     };
 }
 
-header_from_flags!()
+header_from_flags!();

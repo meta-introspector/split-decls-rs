@@ -4,4 +4,4 @@ macro_rules! S_LAZY_SYMBOL_POINTERS {
     };
 }
 
-S_LAZY_SYMBOL_POINTERS!()
+S_LAZY_SYMBOL_POINTERS!();

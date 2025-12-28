@@ -11,4 +11,4 @@ macro_rules! other_endpoint {
     };
 }
 
-other_endpoint!()
+other_endpoint!();

@@ -4,4 +4,4 @@ macro_rules! DocFakeVariadicNotValid {
     };
 }
 
-DocFakeVariadicNotValid!()
+DocFakeVariadicNotValid!();

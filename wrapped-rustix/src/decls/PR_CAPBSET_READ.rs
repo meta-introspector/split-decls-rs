@@ -4,4 +4,4 @@ macro_rules! PR_CAPBSET_READ {
     };
 }
 
-PR_CAPBSET_READ!()
+PR_CAPBSET_READ!();

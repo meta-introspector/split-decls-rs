@@ -4,4 +4,4 @@ macro_rules! MH_KEXT_BUNDLE {
     };
 }
 
-MH_KEXT_BUNDLE!()
+MH_KEXT_BUNDLE!();

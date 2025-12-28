@@ -4,4 +4,4 @@ macro_rules! FunctionMetrics {
     };
 }
 
-FunctionMetrics!()
+FunctionMetrics!();

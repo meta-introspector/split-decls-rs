@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         QueueableToken!();
-        LineIndex!();
         Token!();
+        LineIndex!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Pair {
     };
 }
 
-Pair!()
+Pair!();

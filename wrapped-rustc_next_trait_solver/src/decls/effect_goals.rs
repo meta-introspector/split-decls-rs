@@ -4,4 +4,4 @@ macro_rules! effect_goals {
     };
 }
 
-effect_goals!()
+effect_goals!();

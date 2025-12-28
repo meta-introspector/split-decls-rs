@@ -11,4 +11,4 @@ macro_rules! walk_ident {
     };
 }
 
-walk_ident!()
+walk_ident!();

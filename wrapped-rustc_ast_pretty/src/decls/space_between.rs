@@ -11,4 +11,4 @@ macro_rules! space_between {
     };
 }
 
-space_between!()
+space_between!();

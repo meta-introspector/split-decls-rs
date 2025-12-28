@@ -11,4 +11,4 @@ macro_rules! parse_by_kind {
     };
 }
 
-parse_by_kind!()
+parse_by_kind!();

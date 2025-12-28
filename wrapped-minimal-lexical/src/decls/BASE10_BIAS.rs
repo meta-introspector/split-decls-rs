@@ -4,4 +4,4 @@ macro_rules! BASE10_BIAS {
     };
 }
 
-BASE10_BIAS!()
+BASE10_BIAS!();

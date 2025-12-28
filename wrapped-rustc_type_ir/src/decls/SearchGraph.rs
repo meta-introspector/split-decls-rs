@@ -2,9 +2,9 @@ macro_rules! deps {
     () => {
         Cx!();
         ProvisionalCacheEntry!();
-        Delegate!();
         AvailableDepth!();
         Stack!();
+        Delegate!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! SearchGraph {
     };
 }
 
-SearchGraph!()
+SearchGraph!();

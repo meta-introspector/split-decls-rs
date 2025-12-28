@@ -4,4 +4,4 @@ macro_rules! SleepData {
     };
 }
 
-SleepData!()
+SleepData!();

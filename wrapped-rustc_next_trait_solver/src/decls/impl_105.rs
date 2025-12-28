@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        EvaluationStepBuilder!();
-        WipProbeStep!();
         SolverDelegate!();
+        WipProbeStep!();
+        EvaluationStepBuilder!();
         WipProbe!();
         WipEvaluationStep!();
     };
@@ -15,4 +15,4 @@ macro_rules! impl_105 {
     };
 }
 
-impl_105!()
+impl_105!();

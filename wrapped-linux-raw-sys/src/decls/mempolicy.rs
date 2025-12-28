@@ -4,4 +4,4 @@ macro_rules! mempolicy {
     };
 }
 
-mempolicy!()
+mempolicy!();

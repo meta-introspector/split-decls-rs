@@ -4,4 +4,4 @@ macro_rules! rerun_if_git_changes {
     };
 }
 
-rerun_if_git_changes!()
+rerun_if_git_changes!();

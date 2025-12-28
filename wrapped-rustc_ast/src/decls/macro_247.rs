@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        Path!();
-        AttrItem!();
-        Expr!();
-        Item!();
         Block!();
-        Visibility!();
-        Ty!();
         Pat!();
+        Expr!();
+        AttrItem!();
+        Ty!();
+        Path!();
         AssocItem!();
         ForeignItem!();
+        Item!();
+        Visibility!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! macro_247 {
     };
 }
 
-macro_247!()
+macro_247!();

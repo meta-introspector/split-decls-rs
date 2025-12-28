@@ -4,4 +4,4 @@ macro_rules! match_macro_invocation {
     };
 }
 
-match_macro_invocation!()
+match_macro_invocation!();

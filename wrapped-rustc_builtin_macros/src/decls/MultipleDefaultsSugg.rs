@@ -4,4 +4,4 @@ macro_rules! MultipleDefaultsSugg {
     };
 }
 
-MultipleDefaultsSugg!()
+MultipleDefaultsSugg!();

@@ -4,4 +4,4 @@ macro_rules! free_func {
     };
 }
 
-free_func!()
+free_func!();

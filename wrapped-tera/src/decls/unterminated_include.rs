@@ -4,4 +4,4 @@ macro_rules! unterminated_include {
     };
 }
 
-unterminated_include!()
+unterminated_include!();

@@ -12,4 +12,4 @@ macro_rules! name_callback {
     };
 }
 
-name_callback!()
+name_callback!();

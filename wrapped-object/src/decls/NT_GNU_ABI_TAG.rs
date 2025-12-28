@@ -4,4 +4,4 @@ macro_rules! NT_GNU_ABI_TAG {
     };
 }
 
-NT_GNU_ABI_TAG!()
+NT_GNU_ABI_TAG!();

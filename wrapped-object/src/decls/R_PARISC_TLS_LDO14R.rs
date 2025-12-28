@@ -4,4 +4,4 @@ macro_rules! R_PARISC_TLS_LDO14R {
     };
 }
 
-R_PARISC_TLS_LDO14R!()
+R_PARISC_TLS_LDO14R!();

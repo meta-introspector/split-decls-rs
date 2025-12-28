@@ -1,20 +1,20 @@
 macro_rules! deps {
     () => {
-        U32!();
-        MachO32!();
-        WritableBuffer!();
-        SectionHeader!();
-        MachHeader32!();
-        Nlist!();
-        MachHeader!();
-        Section32!();
         U16!();
-        SegmentCommand32!();
-        Nlist32!();
+        WritableBuffer!();
         MachO!();
-        Endian!();
+        U32!();
+        MachHeader32!();
         SegmentCommand!();
+        SectionHeader!();
         BigEndian!();
+        MachO32!();
+        Nlist!();
+        Nlist32!();
+        Section32!();
+        MachHeader!();
+        SegmentCommand32!();
+        Endian!();
     };
 }
 
@@ -25,4 +25,4 @@ macro_rules! impl_997 {
     };
 }
 
-impl_997!()
+impl_997!();

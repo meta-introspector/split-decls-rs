@@ -11,4 +11,4 @@ macro_rules! emit_malformed_attribute {
     };
 }
 
-emit_malformed_attribute!()
+emit_malformed_attribute!();

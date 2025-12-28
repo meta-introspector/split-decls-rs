@@ -4,4 +4,4 @@ macro_rules! PF_ARM_PI {
     };
 }
 
-PF_ARM_PI!()
+PF_ARM_PI!();

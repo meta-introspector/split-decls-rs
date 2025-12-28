@@ -4,4 +4,4 @@ macro_rules! starts_non_ideographic_text_presentation_seq {
     };
 }
 
-starts_non_ideographic_text_presentation_seq!()
+starts_non_ideographic_text_presentation_seq!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         GroupInfoInner!();
-        NFA!();
-        PatternID!();
-        Slots!();
         Captures!();
+        PatternID!();
+        NFA!();
+        Slots!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! GroupInfo {
     };
 }
 
-GroupInfo!()
+GroupInfo!();

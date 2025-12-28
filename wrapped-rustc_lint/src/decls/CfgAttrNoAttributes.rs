@@ -4,4 +4,4 @@ macro_rules! CfgAttrNoAttributes {
     };
 }
 
-CfgAttrNoAttributes!()
+CfgAttrNoAttributes!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        UnifiedDiffPrinter!();
         UnifiedDiff!();
-        Token!();
         Diff!();
         UnifiedDiffConfig!();
-        UnifiedDiffPrinter!();
+        Token!();
         InternedInput!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! impl_73 {
     };
 }
 
-impl_73!()
+impl_73!();

@@ -4,4 +4,4 @@ macro_rules! typeid_for_instance {
     };
 }
 
-typeid_for_instance!()
+typeid_for_instance!();

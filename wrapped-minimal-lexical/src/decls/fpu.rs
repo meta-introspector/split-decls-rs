@@ -4,4 +4,4 @@ macro_rules! fpu {
     };
 }
 
-fpu!()
+fpu!();

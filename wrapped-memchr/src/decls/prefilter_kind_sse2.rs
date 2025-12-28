@@ -11,4 +11,4 @@ macro_rules! prefilter_kind_sse2 {
     };
 }
 
-prefilter_kind_sse2!()
+prefilter_kind_sse2!();

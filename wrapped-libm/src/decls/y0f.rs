@@ -4,4 +4,4 @@ macro_rules! y0f {
     };
 }
 
-y0f!()
+y0f!();

@@ -4,4 +4,4 @@ macro_rules! OptimisticTransactionDBInner {
     };
 }
 
-OptimisticTransactionDBInner!()
+OptimisticTransactionDBInner!();

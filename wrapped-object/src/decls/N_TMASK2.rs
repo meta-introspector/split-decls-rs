@@ -4,4 +4,4 @@ macro_rules! N_TMASK2 {
     };
 }
 
-N_TMASK2!()
+N_TMASK2!();

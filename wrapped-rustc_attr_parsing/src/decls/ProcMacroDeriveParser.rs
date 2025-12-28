@@ -4,4 +4,4 @@ macro_rules! ProcMacroDeriveParser {
     };
 }
 
-ProcMacroDeriveParser!()
+ProcMacroDeriveParser!();

@@ -4,4 +4,4 @@ macro_rules! test_try_from_bytes {
     };
 }
 
-test_try_from_bytes!()
+test_try_from_bytes!();

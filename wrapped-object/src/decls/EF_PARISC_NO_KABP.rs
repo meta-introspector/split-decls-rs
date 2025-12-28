@@ -4,4 +4,4 @@ macro_rules! EF_PARISC_NO_KABP {
     };
 }
 
-EF_PARISC_NO_KABP!()
+EF_PARISC_NO_KABP!();

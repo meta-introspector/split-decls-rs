@@ -4,4 +4,4 @@ macro_rules! ListVecFolder {
     };
 }
 
-ListVecFolder!()
+ListVecFolder!();

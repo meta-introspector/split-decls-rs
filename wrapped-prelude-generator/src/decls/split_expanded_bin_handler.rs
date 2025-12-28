@@ -4,4 +4,4 @@ macro_rules! split_expanded_bin_handler {
     };
 }
 
-split_expanded_bin_handler!()
+split_expanded_bin_handler!();

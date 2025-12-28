@@ -4,4 +4,4 @@ macro_rules! decode_last {
     };
 }
 
-decode_last!()
+decode_last!();

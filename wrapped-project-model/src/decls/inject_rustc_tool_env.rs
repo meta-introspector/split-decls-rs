@@ -11,4 +11,4 @@ macro_rules! inject_rustc_tool_env {
     };
 }
 
-inject_rustc_tool_env!()
+inject_rustc_tool_env!();

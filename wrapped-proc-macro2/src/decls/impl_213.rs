@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Literal!();
-        Punct!();
-        TokenTree!();
         Group!();
         Ident!();
+        Literal!();
+        TokenTree!();
+        Punct!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_213 {
     };
 }
 
-impl_213!()
+impl_213!();

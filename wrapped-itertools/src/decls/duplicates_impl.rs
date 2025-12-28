@@ -4,4 +4,4 @@ macro_rules! duplicates_impl {
     };
 }
 
-duplicates_impl!()
+duplicates_impl!();

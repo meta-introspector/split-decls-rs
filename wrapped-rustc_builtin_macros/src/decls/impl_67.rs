@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         NonGenericPointee!();
         Ty!();
-        DetectNonGenericPointeeAttr!();
         AlwaysErrorOnGenericParam!();
+        DetectNonGenericPointeeAttr!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_67 {
     };
 }
 
-impl_67!()
+impl_67!();

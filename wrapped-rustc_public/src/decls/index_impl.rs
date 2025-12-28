@@ -4,4 +4,4 @@ macro_rules! index_impl {
     };
 }
 
-index_impl!()
+index_impl!();

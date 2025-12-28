@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Aes128!();
         Aes192!();
         AesMode!();
-        Aes128!();
         Aes256!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_226 {
     };
 }
 
-impl_226!()
+impl_226!();

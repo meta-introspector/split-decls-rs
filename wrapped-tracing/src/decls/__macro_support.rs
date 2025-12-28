@@ -11,4 +11,4 @@ macro_rules! __macro_support {
     };
 }
 
-__macro_support!()
+__macro_support!();

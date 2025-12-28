@@ -4,4 +4,4 @@ macro_rules! PrivateRem {
     };
 }
 
-PrivateRem!()
+PrivateRem!();

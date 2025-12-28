@@ -4,4 +4,4 @@ macro_rules! VER_FLG_BASE {
     };
 }
 
-VER_FLG_BASE!()
+VER_FLG_BASE!();

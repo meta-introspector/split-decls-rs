@@ -4,4 +4,4 @@ macro_rules! Z_TEXT {
     };
 }
 
-Z_TEXT!()
+Z_TEXT!();

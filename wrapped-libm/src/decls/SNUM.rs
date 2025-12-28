@@ -4,4 +4,4 @@ macro_rules! SNUM {
     };
 }
 
-SNUM!()
+SNUM!();

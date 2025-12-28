@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Comparator!();
         Op!();
+        Comparator!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! VersionReq {
     };
 }
 
-VersionReq!()
+VersionReq!();

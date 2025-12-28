@@ -4,4 +4,4 @@ macro_rules! EV_CURRENT {
     };
 }
 
-EV_CURRENT!()
+EV_CURRENT!();

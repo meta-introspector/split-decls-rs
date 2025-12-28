@@ -12,4 +12,4 @@ macro_rules! llvm_enzyme {
     };
 }
 
-llvm_enzyme!()
+llvm_enzyme!();

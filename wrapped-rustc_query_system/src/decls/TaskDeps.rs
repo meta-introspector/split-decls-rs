@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        EdgesVec!();
         DepNode!();
+        EdgesVec!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! TaskDeps {
     };
 }
 
-TaskDeps!()
+TaskDeps!();

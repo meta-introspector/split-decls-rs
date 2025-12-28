@@ -2,9 +2,9 @@ macro_rules! deps {
     () => {
         ZalsaDatabase!();
         Zalsa!();
-        HasStorage!();
-        RawDatabase!();
         ZalsaLocal!();
+        RawDatabase!();
+        HasStorage!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_296 {
     };
 }
 
-impl_296!()
+impl_296!();

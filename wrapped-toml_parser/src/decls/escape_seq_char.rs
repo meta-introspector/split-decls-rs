@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         Raw!();
-        Expected!();
-        Span!();
         ErrorSink!();
+        Expected!();
         ParseError!();
+        Span!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! escape_seq_char {
     };
 }
 
-escape_seq_char!()
+escape_seq_char!();

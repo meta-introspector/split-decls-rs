@@ -4,4 +4,4 @@ macro_rules! R_NIOS2_PCREL_HA {
     };
 }
 
-R_NIOS2_PCREL_HA!()
+R_NIOS2_PCREL_HA!();

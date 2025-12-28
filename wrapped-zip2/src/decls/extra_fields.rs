@@ -4,4 +4,4 @@ macro_rules! extra_fields {
     };
 }
 
-extra_fields!()
+extra_fields!();

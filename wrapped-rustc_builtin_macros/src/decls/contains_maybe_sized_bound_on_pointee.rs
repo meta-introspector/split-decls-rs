@@ -4,4 +4,4 @@ macro_rules! contains_maybe_sized_bound_on_pointee {
     };
 }
 
-contains_maybe_sized_bound_on_pointee!()
+contains_maybe_sized_bound_on_pointee!();

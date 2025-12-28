@@ -4,4 +4,4 @@ macro_rules! ARGON2_VARIANT {
     };
 }
 
-ARGON2_VARIANT!()
+ARGON2_VARIANT!();

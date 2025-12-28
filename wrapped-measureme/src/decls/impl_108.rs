@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        StringTableBuilder!();
-        StringId!();
         SerializableString!();
         SerializationSink!();
+        StringTableBuilder!();
+        StringId!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_108 {
     };
 }
 
-impl_108!()
+impl_108!();

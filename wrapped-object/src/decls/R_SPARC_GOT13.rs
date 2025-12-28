@@ -4,4 +4,4 @@ macro_rules! R_SPARC_GOT13 {
     };
 }
 
-R_SPARC_GOT13!()
+R_SPARC_GOT13!();

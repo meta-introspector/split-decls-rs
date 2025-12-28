@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        ReferenceFromString!();
-        MapAccess!();
-        Formatter!();
         Error!();
-        Map!();
-        RawKey!();
+        Formatter!();
+        MapAccess!();
+        Result!();
         Deserializer!();
         Value!();
+        ReferenceFromString!();
         RawValue!();
-        Result!();
+        RawKey!();
+        Map!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_617 {
     };
 }
 
-impl_617!()
+impl_617!();

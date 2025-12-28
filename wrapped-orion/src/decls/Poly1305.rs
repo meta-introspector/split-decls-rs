@@ -4,4 +4,4 @@ macro_rules! Poly1305 {
     };
 }
 
-Poly1305!()
+Poly1305!();

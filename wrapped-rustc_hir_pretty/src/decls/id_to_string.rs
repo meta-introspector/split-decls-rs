@@ -4,4 +4,4 @@ macro_rules! id_to_string {
     };
 }
 
-id_to_string!()
+id_to_string!();

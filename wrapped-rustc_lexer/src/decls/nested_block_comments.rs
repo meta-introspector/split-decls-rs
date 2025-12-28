@@ -15,4 +15,4 @@ macro_rules! nested_block_comments {
     };
 }
 
-nested_block_comments!()
+nested_block_comments!();

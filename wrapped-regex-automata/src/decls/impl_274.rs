@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        Cache!();
+        BuildError!();
         Builder!();
         Regex!();
         Match!();
-        BuildError!();
-        Cache!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_274 {
     };
 }
 
-impl_274!()
+impl_274!();

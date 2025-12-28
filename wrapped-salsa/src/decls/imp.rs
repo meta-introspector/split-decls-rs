@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Ingredient!();
-        Nonce!();
         StorageNonce!();
+        Ingredient!();
         IngredientIndex!();
+        Nonce!();
         Zalsa!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! imp {
     };
 }
 
-imp!()
+imp!();

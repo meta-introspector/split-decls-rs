@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        MachOSymbolIterator!();
-        SymbolIndex!();
-        MachOSymbolTable!();
-        Result!();
         Symbol!();
-        MachOSymbol!();
-        ReadRef!();
-        ObjectSymbolTable!();
-        SymbolIterator!();
+        MachOSymbolIterator!();
         MachHeader!();
+        MachOSymbol!();
+        MachOSymbolTable!();
+        ObjectSymbolTable!();
+        ReadRef!();
+        Result!();
+        SymbolIterator!();
+        SymbolIndex!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_604 {
     };
 }
 
-impl_604!()
+impl_604!();

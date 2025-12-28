@@ -4,4 +4,4 @@ macro_rules! lean4_expr_json {
     };
 }
 
-lean4_expr_json!()
+lean4_expr_json!();

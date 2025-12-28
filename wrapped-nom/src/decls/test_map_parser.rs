@@ -4,4 +4,4 @@ macro_rules! test_map_parser {
     };
 }
 
-test_map_parser!()
+test_map_parser!();

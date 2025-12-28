@@ -4,4 +4,4 @@ macro_rules! LocalFunctionKind {
     };
 }
 
-LocalFunctionKind!()
+LocalFunctionKind!();

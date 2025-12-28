@@ -4,4 +4,4 @@ macro_rules! FxIndexSet {
     };
 }
 
-FxIndexSet!()
+FxIndexSet!();

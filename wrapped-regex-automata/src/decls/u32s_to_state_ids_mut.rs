@@ -11,4 +11,4 @@ macro_rules! u32s_to_state_ids_mut {
     };
 }
 
-u32s_to_state_ids_mut!()
+u32s_to_state_ids_mut!();

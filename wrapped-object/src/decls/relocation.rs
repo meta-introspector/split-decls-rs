@@ -4,4 +4,4 @@ macro_rules! relocation {
     };
 }
 
-relocation!()
+relocation!();

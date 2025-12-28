@@ -4,4 +4,4 @@ macro_rules! test_try_from_bytes_trivial_is_bit_valid_enum {
     };
 }
 
-test_try_from_bytes_trivial_is_bit_valid_enum!()
+test_try_from_bytes_trivial_is_bit_valid_enum!();

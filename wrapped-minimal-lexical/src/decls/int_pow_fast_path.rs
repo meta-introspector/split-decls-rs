@@ -11,4 +11,4 @@ macro_rules! int_pow_fast_path {
     };
 }
 
-int_pow_fast_path!()
+int_pow_fast_path!();

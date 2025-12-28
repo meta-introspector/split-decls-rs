@@ -12,4 +12,4 @@ macro_rules! inflate_fast_help_vanilla {
     };
 }
 
-inflate_fast_help_vanilla!()
+inflate_fast_help_vanilla!();

@@ -4,4 +4,4 @@ macro_rules! session {
     };
 }
 
-session!()
+session!();

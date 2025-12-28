@@ -4,4 +4,4 @@ macro_rules! R_SPARC_TLS_TPOFF32 {
     };
 }
 
-R_SPARC_TLS_TPOFF32!()
+R_SPARC_TLS_TPOFF32!();

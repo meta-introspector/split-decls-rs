@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DynSend!();
         IntoDynSyncSend!();
+        DynSend!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_289 {
     };
 }
 
-impl_289!()
+impl_289!();

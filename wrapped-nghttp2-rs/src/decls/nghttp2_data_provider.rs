@@ -4,4 +4,4 @@ macro_rules! nghttp2_data_provider {
     };
 }
 
-nghttp2_data_provider!()
+nghttp2_data_provider!();

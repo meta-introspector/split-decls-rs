@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Memchr2!();
         MatchKind!();
+        Memchr2!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_729 {
     };
 }
 
-impl_729!()
+impl_729!();

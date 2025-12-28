@@ -4,4 +4,4 @@ macro_rules! MissingStabilityAnnotations {
     };
 }
 
-MissingStabilityAnnotations!()
+MissingStabilityAnnotations!();

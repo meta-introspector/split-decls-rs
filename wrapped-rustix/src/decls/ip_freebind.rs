@@ -11,4 +11,4 @@ macro_rules! ip_freebind {
     };
 }
 
-ip_freebind!()
+ip_freebind!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         VacantEntry!();
-        OccupiedEntry!();
         Table!();
+        OccupiedEntry!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Entry {
     };
 }
 
-Entry!()
+Entry!();

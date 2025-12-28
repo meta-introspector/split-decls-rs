@@ -4,4 +4,4 @@ macro_rules! invocation_relative_path_to_absolute {
     };
 }
 
-invocation_relative_path_to_absolute!()
+invocation_relative_path_to_absolute!();

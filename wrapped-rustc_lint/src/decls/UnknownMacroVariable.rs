@@ -4,4 +4,4 @@ macro_rules! UnknownMacroVariable {
     };
 }
 
-UnknownMacroVariable!()
+UnknownMacroVariable!();

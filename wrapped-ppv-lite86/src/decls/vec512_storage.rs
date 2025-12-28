@@ -4,4 +4,4 @@ macro_rules! vec512_storage {
     };
 }
 
-vec512_storage!()
+vec512_storage!();

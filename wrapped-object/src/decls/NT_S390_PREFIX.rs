@@ -4,4 +4,4 @@ macro_rules! NT_S390_PREFIX {
     };
 }
 
-NT_S390_PREFIX!()
+NT_S390_PREFIX!();

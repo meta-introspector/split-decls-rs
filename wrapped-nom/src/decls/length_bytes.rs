@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         IResult!();
-        Needed!();
         Err!();
+        Needed!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! length_bytes {
     };
 }
 
-length_bytes!()
+length_bytes!();

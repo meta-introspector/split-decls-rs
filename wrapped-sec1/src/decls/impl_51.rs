@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Result!();
         Error!();
-        EcPrivateKey!();
         Tag!();
+        EcPrivateKey!();
+        Result!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_51 {
     };
 }
 
-impl_51!()
+impl_51!();

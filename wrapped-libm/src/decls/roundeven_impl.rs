@@ -12,4 +12,4 @@ macro_rules! roundeven_impl {
     };
 }
 
-roundeven_impl!()
+roundeven_impl!();

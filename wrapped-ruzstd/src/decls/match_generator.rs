@@ -4,4 +4,4 @@ macro_rules! match_generator {
     };
 }
 
-match_generator!()
+match_generator!();

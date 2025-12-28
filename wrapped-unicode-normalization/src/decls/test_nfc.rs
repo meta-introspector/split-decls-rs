@@ -4,4 +4,4 @@ macro_rules! test_nfc {
     };
 }
 
-test_nfc!()
+test_nfc!();

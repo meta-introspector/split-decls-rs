@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DroplessArena!();
         ArenaChunk!();
+        DroplessArena!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_17 {
     };
 }
 
-impl_17!()
+impl_17!();

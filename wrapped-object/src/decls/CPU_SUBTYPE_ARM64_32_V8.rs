@@ -4,4 +4,4 @@ macro_rules! CPU_SUBTYPE_ARM64_32_V8 {
     };
 }
 
-CPU_SUBTYPE_ARM64_32_V8!()
+CPU_SUBTYPE_ARM64_32_V8!();

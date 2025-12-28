@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Item!();
         OccupiedEntry!();
+        Item!();
         KeyMut!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_248 {
     };
 }
 
-impl_248!()
+impl_248!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ItemId!();
         HashStableContext!();
+        ItemId!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_459 {
     };
 }
 
-impl_459!()
+impl_459!();

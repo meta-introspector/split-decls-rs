@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ListVecConsumer!();
         IntoParallelIterator!();
+        ListVecConsumer!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! fast_collect {
     };
 }
 
-fast_collect!()
+fast_collect!();

@@ -4,4 +4,4 @@ macro_rules! N_BTMASK {
     };
 }
 
-N_BTMASK!()
+N_BTMASK!();

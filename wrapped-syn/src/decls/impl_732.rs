@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ThreadBound!();
         Result!();
+        ThreadBound!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_732 {
     };
 }
 
-impl_732!()
+impl_732!();

@@ -11,4 +11,4 @@ macro_rules! dt_err {
     };
 }
 
-dt_err!()
+dt_err!();

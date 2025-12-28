@@ -11,4 +11,4 @@ macro_rules! build_predicates {
     };
 }
 
-build_predicates!()
+build_predicates!();

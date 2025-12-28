@@ -4,4 +4,4 @@ macro_rules! Baked {
     };
 }
 
-Baked!()
+Baked!();

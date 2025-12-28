@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        IsStreaming!();
         Mode!();
         Check!();
-        Emit!();
         Error!();
+        Emit!();
+        IsStreaming!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! OutputMode {
     };
 }
 
-OutputMode!()
+OutputMode!();

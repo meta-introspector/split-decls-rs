@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        AsyncOperationCompletedHandler!();
         IAsyncInfo_Impl!();
+        AsyncOperationCompletedHandler!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! IAsyncOperation_Impl {
     };
 }
 
-IAsyncOperation_Impl!()
+IAsyncOperation_Impl!();

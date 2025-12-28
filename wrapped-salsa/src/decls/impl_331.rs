@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
+        Slot!();
+        IngredientIndex!();
+        PageIndex!();
         SlotIndex!();
+        Revision!();
+        PageView!();
+        Table!();
         DummySlot!();
         Id!();
-        PageView!();
         Page!();
-        Slot!();
-        Table!();
-        PageIndex!();
-        IngredientIndex!();
-        Revision!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_331 {
     };
 }
 
-impl_331!()
+impl_331!();

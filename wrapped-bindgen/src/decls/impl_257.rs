@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        CppEnum!();
         TokenStream!();
+        CppEnum!();
         DeriveWriter!();
-        Literal!();
-        Config!();
         TypeName!();
+        Config!();
+        Literal!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_257 {
     };
 }
 
-impl_257!()
+impl_257!();

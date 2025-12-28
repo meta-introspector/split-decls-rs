@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Walker!();
         Topo!();
+        Walker!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_62 {
     };
 }
 
-impl_62!()
+impl_62!();

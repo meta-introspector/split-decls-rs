@@ -4,4 +4,4 @@ macro_rules! ReportErrorExt {
     };
 }
 
-ReportErrorExt!()
+ReportErrorExt!();

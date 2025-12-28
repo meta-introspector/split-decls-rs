@@ -11,4 +11,4 @@ macro_rules! internalize_symbols {
     };
 }
 
-internalize_symbols!()
+internalize_symbols!();

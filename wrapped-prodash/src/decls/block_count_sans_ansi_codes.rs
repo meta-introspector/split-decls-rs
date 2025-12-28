@@ -4,4 +4,4 @@ macro_rules! block_count_sans_ansi_codes {
     };
 }
 
-block_count_sans_ansi_codes!()
+block_count_sans_ansi_codes!();

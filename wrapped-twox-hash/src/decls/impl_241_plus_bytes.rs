@@ -4,4 +4,4 @@ macro_rules! impl_241_plus_bytes {
     };
 }
 
-impl_241_plus_bytes!()
+impl_241_plus_bytes!();

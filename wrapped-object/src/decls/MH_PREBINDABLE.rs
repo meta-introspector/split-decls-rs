@@ -4,4 +4,4 @@ macro_rules! MH_PREBINDABLE {
     };
 }
 
-MH_PREBINDABLE!()
+MH_PREBINDABLE!();

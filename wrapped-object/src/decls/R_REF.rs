@@ -4,4 +4,4 @@ macro_rules! R_REF {
     };
 }
 
-R_REF!()
+R_REF!();

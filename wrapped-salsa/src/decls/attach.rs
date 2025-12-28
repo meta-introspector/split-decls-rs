@@ -4,4 +4,4 @@ macro_rules! attach {
     };
 }
 
-attach!()
+attach!();

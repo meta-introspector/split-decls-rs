@@ -4,4 +4,4 @@ macro_rules! FoundEscapingVars {
     };
 }
 
-FoundEscapingVars!()
+FoundEscapingVars!();

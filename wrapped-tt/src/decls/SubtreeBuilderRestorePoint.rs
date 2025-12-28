@@ -4,4 +4,4 @@ macro_rules! SubtreeBuilderRestorePoint {
     };
 }
 
-SubtreeBuilderRestorePoint!()
+SubtreeBuilderRestorePoint!();

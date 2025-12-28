@@ -4,4 +4,4 @@ macro_rules! EF_ARM_VFP_FLOAT {
     };
 }
 
-EF_ARM_VFP_FLOAT!()
+EF_ARM_VFP_FLOAT!();

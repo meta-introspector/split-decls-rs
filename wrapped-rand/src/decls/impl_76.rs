@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Alphabetic!();
         Distribution!();
+        Alphabetic!();
         Rng!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_76 {
     };
 }
 
-impl_76!()
+impl_76!();

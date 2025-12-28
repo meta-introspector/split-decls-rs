@@ -11,4 +11,4 @@ macro_rules! expand_input {
     };
 }
 
-expand_input!()
+expand_input!();

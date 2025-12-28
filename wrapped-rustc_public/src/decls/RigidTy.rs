@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        IntTy!();
-        GenericArgs!();
-        Pattern!();
-        DynKind!();
-        ExistentialPredicate!();
-        Ty!();
         PolyFnSig!();
+        IntTy!();
         UintTy!();
-        FloatTy!();
         TyConst!();
         Region!();
+        GenericArgs!();
+        DynKind!();
+        FloatTy!();
+        Pattern!();
+        Ty!();
+        ExistentialPredicate!();
         Binder!();
     };
 }
@@ -22,4 +22,4 @@ macro_rules! RigidTy {
     };
 }
 
-RigidTy!()
+RigidTy!();

@@ -4,4 +4,4 @@ macro_rules! used_trait_imports {
     };
 }
 
-used_trait_imports!()
+used_trait_imports!();

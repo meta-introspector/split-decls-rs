@@ -4,4 +4,4 @@ macro_rules! catch_with_exit_code {
     };
 }
 
-catch_with_exit_code!()
+catch_with_exit_code!();

@@ -11,4 +11,4 @@ macro_rules! DECL_REGISTRY {
     };
 }
 
-DECL_REGISTRY!()
+DECL_REGISTRY!();

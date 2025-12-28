@@ -4,4 +4,4 @@ macro_rules! VTabKind {
     };
 }
 
-VTabKind!()
+VTabKind!();

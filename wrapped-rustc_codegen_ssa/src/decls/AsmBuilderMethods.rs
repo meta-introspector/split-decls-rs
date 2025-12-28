@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        BackendTypes!();
         InlineAsmOperandRef!();
+        BackendTypes!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! AsmBuilderMethods {
     };
 }
 
-AsmBuilderMethods!()
+AsmBuilderMethods!();

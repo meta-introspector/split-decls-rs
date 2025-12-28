@@ -12,4 +12,4 @@ macro_rules! sha2_core {
     };
 }
 
-sha2_core!()
+sha2_core!();

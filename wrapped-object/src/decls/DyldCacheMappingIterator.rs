@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Endianness!();
         ReadRef!();
         Endian!();
+        Endianness!();
         DyldCacheMappingVersionIterator!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! DyldCacheMappingIterator {
     };
 }
 
-DyldCacheMappingIterator!()
+DyldCacheMappingIterator!();

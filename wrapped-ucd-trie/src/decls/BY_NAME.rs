@@ -4,4 +4,4 @@ macro_rules! BY_NAME {
     };
 }
 
-BY_NAME!()
+BY_NAME!();

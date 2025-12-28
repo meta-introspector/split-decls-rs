@@ -4,4 +4,4 @@ macro_rules! fun_to_string {
     };
 }
 
-fun_to_string!()
+fun_to_string!();

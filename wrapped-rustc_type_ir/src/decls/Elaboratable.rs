@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        TraitPredicate!();
-        Binder!();
         Predicate!();
-        Clause!();
-        Span!();
         Interner!();
+        Span!();
+        Clause!();
+        Binder!();
+        TraitPredicate!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! Elaboratable {
     };
 }
 
-Elaboratable!()
+Elaboratable!();

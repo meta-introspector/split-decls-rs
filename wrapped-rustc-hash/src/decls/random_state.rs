@@ -4,4 +4,4 @@ macro_rules! random_state {
     };
 }
 
-random_state!()
+random_state!();

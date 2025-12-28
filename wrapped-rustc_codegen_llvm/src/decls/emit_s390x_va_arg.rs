@@ -12,4 +12,4 @@ macro_rules! emit_s390x_va_arg {
     };
 }
 
-emit_s390x_va_arg!()
+emit_s390x_va_arg!();

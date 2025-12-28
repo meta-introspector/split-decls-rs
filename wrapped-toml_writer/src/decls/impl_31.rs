@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         ValueMetrics!();
         TomlStringBuilder!();
-        Encoding!();
         TomlString!();
+        Encoding!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_31 {
     };
 }
 
-impl_31!()
+impl_31!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        ObjectMapFile!();
         ObjectMapEntry!();
         ObjectMap!();
+        ObjectMapFile!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_915 {
     };
 }
 
-impl_915!()
+impl_915!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Configuration!();
-        ItemFn!();
         AttributeArgs!();
         FinalConfig!();
+        ItemFn!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! build_config {
     };
 }
 
-build_config!()
+build_config!();

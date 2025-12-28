@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Interleave!();
         IndexedParallelIterator!();
         Take!();
+        Interleave!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! InterleaveShortest {
     };
 }
 
-InterleaveShortest!()
+InterleaveShortest!();

@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
         SourceFile!();
+        MultiByteChar!();
         SpanDecoder!();
         NormalizedPos!();
-        MultiByteChar!();
-        SourceFileDiffs!();
-        SourceFileLines!();
-        SourceFileHash!();
         ExternalSource!();
         FileName!();
+        SourceFileDiffs!();
+        SourceFileHash!();
+        SourceFileLines!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_309 {
     };
 }
 
-impl_309!()
+impl_309!();

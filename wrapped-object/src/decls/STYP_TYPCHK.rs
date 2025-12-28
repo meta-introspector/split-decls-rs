@@ -4,4 +4,4 @@ macro_rules! STYP_TYPCHK {
     };
 }
 
-STYP_TYPCHK!()
+STYP_TYPCHK!();

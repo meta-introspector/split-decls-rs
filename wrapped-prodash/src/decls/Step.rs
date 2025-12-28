@@ -4,4 +4,4 @@ macro_rules! Step {
     };
 }
 
-Step!()
+Step!();

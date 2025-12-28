@@ -4,4 +4,4 @@ macro_rules! yokeable_derive {
     };
 }
 
-yokeable_derive!()
+yokeable_derive!();

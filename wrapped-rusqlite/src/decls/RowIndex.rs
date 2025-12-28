@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Statement!();
-        Result!();
         Error!();
+        Result!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! RowIndex {
     };
 }
 
-RowIndex!()
+RowIndex!();

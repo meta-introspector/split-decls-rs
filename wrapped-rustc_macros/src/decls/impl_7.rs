@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Mismatch!();
-        DiagnosticDeriveError!();
-        LintDiagnosticDerive!();
         DiagnosticDeriveKind!();
+        DiagnosticDeriveError!();
+        Mismatch!();
+        LintDiagnosticDerive!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_7 {
     };
 }
 
-impl_7!()
+impl_7!();

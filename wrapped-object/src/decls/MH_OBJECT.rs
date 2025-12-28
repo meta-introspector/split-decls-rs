@@ -4,4 +4,4 @@ macro_rules! MH_OBJECT {
     };
 }
 
-MH_OBJECT!()
+MH_OBJECT!();

@@ -4,4 +4,4 @@ macro_rules! DT_MIPS_PIXIE_INIT {
     };
 }
 
-DT_MIPS_PIXIE_INIT!()
+DT_MIPS_PIXIE_INIT!();

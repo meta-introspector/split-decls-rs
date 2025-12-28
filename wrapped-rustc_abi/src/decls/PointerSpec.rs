@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Size!();
         AbiAlign!();
+        Size!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! PointerSpec {
     };
 }
 
-PointerSpec!()
+PointerSpec!();

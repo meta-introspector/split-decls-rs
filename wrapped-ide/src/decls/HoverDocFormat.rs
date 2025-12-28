@@ -4,4 +4,4 @@ macro_rules! HoverDocFormat {
     };
 }
 
-HoverDocFormat!()
+HoverDocFormat!();

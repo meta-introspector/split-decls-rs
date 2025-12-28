@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        UnindexedConsumer!();
-        SkipAny!();
         SkipAnyConsumer!();
         ParallelIterator!();
+        UnindexedConsumer!();
+        SkipAny!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_827 {
     };
 }
 
-impl_827!()
+impl_827!();

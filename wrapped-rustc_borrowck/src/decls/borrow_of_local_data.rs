@@ -4,4 +4,4 @@ macro_rules! borrow_of_local_data {
     };
 }
 
-borrow_of_local_data!()
+borrow_of_local_data!();

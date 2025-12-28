@@ -11,4 +11,4 @@ macro_rules! str_windows {
     };
 }
 
-str_windows!()
+str_windows!();

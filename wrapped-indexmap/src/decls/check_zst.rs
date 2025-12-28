@@ -4,4 +4,4 @@ macro_rules! check_zst {
     };
 }
 
-check_zst!()
+check_zst!();

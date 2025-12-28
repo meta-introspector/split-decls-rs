@@ -4,4 +4,4 @@ macro_rules! InstallConfig {
     };
 }
 
-InstallConfig!()
+InstallConfig!();

@@ -1,18 +1,18 @@
 macro_rules! deps {
     () => {
-        GetBitOut!();
+        UInt!();
         PrivateDiv!();
-        UTerm!();
-        Cmp!();
+        Compare!();
         PrivateDivIfRem!();
         Internal!();
-        Compare!();
-        UInt!();
-        PrivateDivIf!();
-        PrivateDivIfQuot!();
         TrimOut!();
+        PrivateDivIf!();
         GetBit!();
+        UTerm!();
+        GetBitOut!();
         Trim!();
+        PrivateDivIfQuot!();
+        Cmp!();
     };
 }
 
@@ -23,4 +23,4 @@ macro_rules! impl_474 {
     };
 }
 
-impl_474!()
+impl_474!();

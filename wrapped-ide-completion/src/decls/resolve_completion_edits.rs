@@ -11,4 +11,4 @@ macro_rules! resolve_completion_edits {
     };
 }
 
-resolve_completion_edits!()
+resolve_completion_edits!();

@@ -4,4 +4,4 @@ macro_rules! R_SH_RELATIVE {
     };
 }
 
-R_SH_RELATIVE!()
+R_SH_RELATIVE!();

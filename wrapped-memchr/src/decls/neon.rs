@@ -4,4 +4,4 @@ macro_rules! neon {
     };
 }
 
-neon!()
+neon!();

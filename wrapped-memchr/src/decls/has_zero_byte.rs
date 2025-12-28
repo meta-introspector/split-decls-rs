@@ -4,4 +4,4 @@ macro_rules! has_zero_byte {
     };
 }
 
-has_zero_byte!()
+has_zero_byte!();

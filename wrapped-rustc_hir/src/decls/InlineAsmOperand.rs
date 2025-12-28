@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Block!();
         Expr!();
         QPath!();
+        Block!();
         ConstBlock!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! InlineAsmOperand {
     };
 }
 
-InlineAsmOperand!()
+InlineAsmOperand!();

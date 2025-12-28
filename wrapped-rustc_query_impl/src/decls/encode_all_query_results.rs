@@ -4,4 +4,4 @@ macro_rules! encode_all_query_results {
     };
 }
 
-encode_all_query_results!()
+encode_all_query_results!();

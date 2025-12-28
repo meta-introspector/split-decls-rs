@@ -4,4 +4,4 @@ macro_rules! BranchInfo {
     };
 }
 
-BranchInfo!()
+BranchInfo!();

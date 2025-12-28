@@ -4,4 +4,4 @@ macro_rules! arrayvec_drain {
     };
 }
 
-arrayvec_drain!()
+arrayvec_drain!();

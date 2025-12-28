@@ -4,4 +4,4 @@ macro_rules! rotate_left {
     };
 }
 
-rotate_left!()
+rotate_left!();

@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Attribute!();
-        Deprecation!();
-        Linkage!();
         AttributeKind!();
+        Linkage!();
         AttrItem!();
+        Deprecation!();
         AttrArgs!();
+        Attribute!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_164 {
     };
 }
 
-impl_164!()
+impl_164!();

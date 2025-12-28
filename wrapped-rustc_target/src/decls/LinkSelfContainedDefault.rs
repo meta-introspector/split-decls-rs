@@ -4,4 +4,4 @@ macro_rules! LinkSelfContainedDefault {
     };
 }
 
-LinkSelfContainedDefault!()
+LinkSelfContainedDefault!();

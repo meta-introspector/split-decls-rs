@@ -4,4 +4,4 @@ macro_rules! hwexpand {
     };
 }
 
-hwexpand!()
+hwexpand!();

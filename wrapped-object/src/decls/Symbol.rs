@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        SectionId!();
-        ByteString!();
         VersionId!();
-        SymbolId!();
+        ByteString!();
         Symbols!();
+        SectionId!();
+        SymbolId!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! Symbol {
     };
 }
 
-Symbol!()
+Symbol!();

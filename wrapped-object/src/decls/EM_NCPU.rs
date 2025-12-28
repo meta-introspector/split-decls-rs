@@ -4,4 +4,4 @@ macro_rules! EM_NCPU {
     };
 }
 
-EM_NCPU!()
+EM_NCPU!();

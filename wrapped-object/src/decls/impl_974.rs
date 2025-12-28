@@ -1,29 +1,29 @@
 macro_rules! deps {
     () => {
-        HashHeader!();
         FileHeader64!();
-        Relr32!();
-        GnuHashHeader!();
-        Class!();
-        Sym64!();
-        Rel32!();
-        Verdef!();
+        Relr64!();
         Verdaux!();
-        Rel64!();
-        ProgramHeader32!();
-        Endianness!();
-        Rela32!();
+        Sym64!();
+        ProgramHeader64!();
+        GnuHashHeader!();
+        SectionHeader32!();
+        SectionHeader64!();
+        Verdef!();
+        FileHeader32!();
+        Class!();
+        Rela64!();
+        Rel32!();
         Verneed!();
         Vernaux!();
-        SectionHeader32!();
-        FileHeader32!();
-        Sym32!();
-        ProgramHeader64!();
-        Rela64!();
-        Dyn32!();
-        SectionHeader64!();
-        Relr64!();
+        ProgramHeader32!();
+        Relr32!();
         Dyn64!();
+        Rela32!();
+        Endianness!();
+        Rel64!();
+        HashHeader!();
+        Sym32!();
+        Dyn32!();
     };
 }
 
@@ -34,4 +34,4 @@ macro_rules! impl_974 {
     };
 }
 
-impl_974!()
+impl_974!();

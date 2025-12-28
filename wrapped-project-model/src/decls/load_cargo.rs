@@ -4,4 +4,4 @@ macro_rules! load_cargo {
     };
 }
 
-load_cargo!()
+load_cargo!();

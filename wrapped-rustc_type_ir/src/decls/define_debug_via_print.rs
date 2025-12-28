@@ -12,4 +12,4 @@ macro_rules! define_debug_via_print {
     };
 }
 
-define_debug_via_print!()
+define_debug_via_print!();

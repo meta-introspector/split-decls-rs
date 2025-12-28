@@ -4,4 +4,4 @@ macro_rules! edit_in_place {
     };
 }
 
-edit_in_place!()
+edit_in_place!();

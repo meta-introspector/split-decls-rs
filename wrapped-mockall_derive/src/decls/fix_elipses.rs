@@ -4,4 +4,4 @@ macro_rules! fix_elipses {
     };
 }
 
-fix_elipses!()
+fix_elipses!();

@@ -11,4 +11,4 @@ macro_rules! check_fn_or_method {
     };
 }
 
-check_fn_or_method!()
+check_fn_or_method!();

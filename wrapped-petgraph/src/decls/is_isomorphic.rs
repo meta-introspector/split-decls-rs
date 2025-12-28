@@ -12,4 +12,4 @@ macro_rules! is_isomorphic {
     };
 }
 
-is_isomorphic!()
+is_isomorphic!();

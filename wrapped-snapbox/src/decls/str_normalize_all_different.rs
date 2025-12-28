@@ -11,4 +11,4 @@ macro_rules! str_normalize_all_different {
     };
 }
 
-str_normalize_all_different!()
+str_normalize_all_different!();

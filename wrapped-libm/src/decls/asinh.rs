@@ -4,4 +4,4 @@ macro_rules! asinh {
     };
 }
 
-asinh!()
+asinh!();

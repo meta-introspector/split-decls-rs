@@ -4,4 +4,4 @@ macro_rules! get_object_file_path {
     };
 }
 
-get_object_file_path!()
+get_object_file_path!();

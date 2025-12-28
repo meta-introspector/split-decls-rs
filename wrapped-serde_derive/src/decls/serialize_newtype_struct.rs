@@ -14,4 +14,4 @@ macro_rules! serialize_newtype_struct {
     };
 }
 
-serialize_newtype_struct!()
+serialize_newtype_struct!();

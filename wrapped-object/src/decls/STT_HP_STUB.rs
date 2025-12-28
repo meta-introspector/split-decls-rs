@@ -4,4 +4,4 @@ macro_rules! STT_HP_STUB {
     };
 }
 
-STT_HP_STUB!()
+STT_HP_STUB!();

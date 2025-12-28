@@ -4,4 +4,4 @@ macro_rules! macro_args {
     };
 }
 
-macro_args!()
+macro_args!();

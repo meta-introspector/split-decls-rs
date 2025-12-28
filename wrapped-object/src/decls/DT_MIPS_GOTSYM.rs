@@ -4,4 +4,4 @@ macro_rules! DT_MIPS_GOTSYM {
     };
 }
 
-DT_MIPS_GOTSYM!()
+DT_MIPS_GOTSYM!();

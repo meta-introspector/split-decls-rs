@@ -11,4 +11,4 @@ macro_rules! is_ansi_encoding {
     };
 }
 
-is_ansi_encoding!()
+is_ansi_encoding!();

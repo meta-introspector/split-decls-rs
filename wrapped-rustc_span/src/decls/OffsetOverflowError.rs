@@ -4,4 +4,4 @@ macro_rules! OffsetOverflowError {
     };
 }
 
-OffsetOverflowError!()
+OffsetOverflowError!();

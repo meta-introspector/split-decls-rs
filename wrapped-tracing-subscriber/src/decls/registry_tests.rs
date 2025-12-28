@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Context!();
         NopLayer!();
         Layer!();
         LookupSpan!();
+        Context!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! registry_tests {
     };
 }
 
-registry_tests!()
+registry_tests!();

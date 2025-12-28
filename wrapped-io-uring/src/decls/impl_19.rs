@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        EntryMarker!();
         CompletionQueue!();
+        EntryMarker!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_19 {
     };
 }
 
-impl_19!()
+impl_19!();

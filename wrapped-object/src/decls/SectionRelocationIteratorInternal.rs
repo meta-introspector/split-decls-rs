@@ -1,19 +1,19 @@
 macro_rules! deps {
     () => {
-        MachO32!();
         ElfSectionRelocationIterator32!();
         CoffBigRelocationIterator!();
-        ReadRef!();
-        CoffRelocationIterator!();
-        PeRelocationIterator!();
         MachO64!();
-        MachORelocationIterator64!();
-        XcoffRelocationIterator64!();
         XcoffRelocationIterator32!();
         ElfSectionRelocationIterator64!();
+        XcoffRelocationIterator64!();
+        CoffRelocationIterator!();
         Endianness!();
-        WasmRelocationIterator!();
+        MachORelocationIterator64!();
+        PeRelocationIterator!();
         MachORelocationIterator32!();
+        ReadRef!();
+        WasmRelocationIterator!();
+        MachO32!();
     };
 }
 
@@ -24,4 +24,4 @@ macro_rules! SectionRelocationIteratorInternal {
     };
 }
 
-SectionRelocationIteratorInternal!()
+SectionRelocationIteratorInternal!();

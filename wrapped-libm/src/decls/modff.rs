@@ -4,4 +4,4 @@ macro_rules! modff {
     };
 }
 
-modff!()
+modff!();

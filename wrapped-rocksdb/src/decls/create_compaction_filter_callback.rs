@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        CompactionFilterFactory!();
         CompactionFilterContext!();
+        CompactionFilterFactory!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! create_compaction_filter_callback {
     };
 }
 
-create_compaction_filter_callback!()
+create_compaction_filter_callback!();

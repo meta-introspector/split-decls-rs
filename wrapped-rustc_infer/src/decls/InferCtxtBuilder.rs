@@ -4,4 +4,4 @@ macro_rules! InferCtxtBuilder {
     };
 }
 
-InferCtxtBuilder!()
+InferCtxtBuilder!();

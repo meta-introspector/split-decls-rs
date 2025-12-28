@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        PropagatedBorrowCheckResults!();
         CollectRegionConstraintsResult!();
         BorrowckConsumer!();
-        PropagatedBorrowCheckResults!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! BorrowCheckRootCtxt {
     };
 }
 
-BorrowCheckRootCtxt!()
+BorrowCheckRootCtxt!();

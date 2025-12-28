@@ -4,4 +4,4 @@ macro_rules! Pu128 {
     };
 }
 
-Pu128!()
+Pu128!();

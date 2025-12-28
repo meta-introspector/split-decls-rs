@@ -2,12 +2,12 @@ macro_rules! deps {
     () => {
         InlineTable!();
         SerializeMap!();
-        Error!();
-        SerializeStructVariant!();
         SerializeTupleVariant!();
+        SerializeStructVariant!();
+        Error!();
         SerializeValueArray!();
-        Value!();
         ValueSerializer!();
+        Value!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_383 {
     };
 }
 
-impl_383!()
+impl_383!();

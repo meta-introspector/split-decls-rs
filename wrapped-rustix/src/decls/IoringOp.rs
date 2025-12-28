@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Shutdown!();
-        Statx!();
         Timeout!();
+        Statx!();
+        Shutdown!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! IoringOp {
     };
 }
 
-IoringOp!()
+IoringOp!();

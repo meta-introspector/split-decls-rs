@@ -11,4 +11,4 @@ macro_rules! open_modified_ciphertext_err {
     };
 }
 
-open_modified_ciphertext_err!()
+open_modified_ciphertext_err!();

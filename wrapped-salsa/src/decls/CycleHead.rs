@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Cycle!();
         DatabaseKeyIndex!();
         AtomicIterationCount!();
         CycleHeads!();
+        Cycle!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! CycleHead {
     };
 }
 
-CycleHead!()
+CycleHead!();

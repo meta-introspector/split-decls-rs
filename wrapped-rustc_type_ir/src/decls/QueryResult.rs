@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        CanonicalResponse!();
-        NoSolution!();
         Certainty!();
+        NoSolution!();
+        CanonicalResponse!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! QueryResult {
     };
 }
 
-QueryResult!()
+QueryResult!();

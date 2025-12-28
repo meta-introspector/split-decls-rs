@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        GenericBounds!();
         OpaqueTyOrigin!();
+        GenericBounds!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! OpaqueTy {
     };
 }
 
-OpaqueTy!()
+OpaqueTy!();

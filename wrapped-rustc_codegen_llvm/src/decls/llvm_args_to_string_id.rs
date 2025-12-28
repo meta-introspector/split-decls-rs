@@ -4,4 +4,4 @@ macro_rules! llvm_args_to_string_id {
     };
 }
 
-llvm_args_to_string_id!()
+llvm_args_to_string_id!();

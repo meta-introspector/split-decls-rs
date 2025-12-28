@@ -4,4 +4,4 @@ macro_rules! raw_statement {
     };
 }
 
-raw_statement!()
+raw_statement!();

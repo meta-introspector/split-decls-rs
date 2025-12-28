@@ -12,4 +12,4 @@ macro_rules! generic_arg_mismatch_err {
     };
 }
 
-generic_arg_mismatch_err!()
+generic_arg_mismatch_err!();

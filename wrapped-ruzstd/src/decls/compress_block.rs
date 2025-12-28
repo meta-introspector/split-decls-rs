@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         Sequence!();
-        CompressState!();
-        BitWriter!();
-        Matcher!();
         FseTableMode!();
+        CompressState!();
+        Matcher!();
+        BitWriter!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! compress_block {
     };
 }
 
-compress_block!()
+compress_block!();

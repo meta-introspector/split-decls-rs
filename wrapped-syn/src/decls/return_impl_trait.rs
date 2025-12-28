@@ -4,4 +4,4 @@ macro_rules! return_impl_trait {
     };
 }
 
-return_impl_trait!()
+return_impl_trait!();

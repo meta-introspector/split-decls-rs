@@ -4,4 +4,4 @@ macro_rules! MustNotSuspend {
     };
 }
 
-MustNotSuspend!()
+MustNotSuspend!();

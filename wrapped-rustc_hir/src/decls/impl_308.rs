@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        CtorKind!();
         FieldDef!();
         VariantData!();
+        CtorKind!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_308 {
     };
 }
 
-impl_308!()
+impl_308!();

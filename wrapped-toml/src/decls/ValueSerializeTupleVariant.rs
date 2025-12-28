@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ValueSerializeVec!();
         ValueSerializeVariant!();
+        ValueSerializeVec!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! ValueSerializeTupleVariant {
     };
 }
 
-ValueSerializeTupleVariant!()
+ValueSerializeTupleVariant!();

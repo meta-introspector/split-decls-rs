@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        EnumerateProducer!();
-        Zip!();
         Producer!();
+        EnumerateProducer!();
         IntoIter!();
+        Zip!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_406 {
     };
 }
 
-impl_406!()
+impl_406!();

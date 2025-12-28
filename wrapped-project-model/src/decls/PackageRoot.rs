@@ -4,4 +4,4 @@ macro_rules! PackageRoot {
     };
 }
 
-PackageRoot!()
+PackageRoot!();

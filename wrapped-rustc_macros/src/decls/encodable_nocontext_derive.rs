@@ -4,4 +4,4 @@ macro_rules! encodable_nocontext_derive {
     };
 }
 
-encodable_nocontext_derive!()
+encodable_nocontext_derive!();

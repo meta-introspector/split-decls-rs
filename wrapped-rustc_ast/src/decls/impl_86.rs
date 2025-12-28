@@ -1,33 +1,33 @@
 macro_rules! deps {
     () => {
-        TraitBoundModifiers!();
-        Closure!();
-        AttrVec!();
-        BorrowKind!();
-        AssignOp!();
-        FnRetTy!();
-        Path!();
-        BinOpKind!();
-        FormatArgs!();
-        ExprKind!();
-        TyKind!();
-        GenericBound!();
-        InlineAsm!();
-        MutTy!();
-        StmtKind!();
+        PolyTraitRef!();
         Lit!();
-        Type!();
+        AttrStyle!();
         Block!();
         Parens!();
-        Expr!();
-        MacCall!();
+        AssignOp!();
+        AttrVec!();
+        InlineAsm!();
         MethodCall!();
+        BorrowKind!();
+        Expr!();
+        Type!();
+        BinOpKind!();
+        ExprKind!();
+        Path!();
+        MacCall!();
         Ty!();
-        TraitObjectSyntax!();
-        PolyTraitRef!();
+        Closure!();
+        TraitBoundModifiers!();
         Trait!();
-        AttrStyle!();
+        GenericBound!();
+        TraitObjectSyntax!();
+        MutTy!();
+        FormatArgs!();
+        TyKind!();
         YieldKind!();
+        StmtKind!();
+        FnRetTy!();
     };
 }
 
@@ -38,4 +38,4 @@ macro_rules! impl_86 {
     };
 }
 
-impl_86!()
+impl_86!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        FromDeserialized!();
         Graph!();
+        FromDeserialized!();
         DeserGraph!();
         EdgeType!();
         IndexType!();
@@ -15,4 +15,4 @@ macro_rules! impl_645 {
     };
 }
 
-impl_645!()
+impl_645!();

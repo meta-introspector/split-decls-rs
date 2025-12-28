@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Definition!();
         TextEditBuilder!();
+        Definition!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! source_edit_from_name_ref {
     };
 }
 
-source_edit_from_name_ref!()
+source_edit_from_name_ref!();

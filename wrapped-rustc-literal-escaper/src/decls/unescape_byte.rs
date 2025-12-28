@@ -12,4 +12,4 @@ macro_rules! unescape_byte {
     };
 }
 
-unescape_byte!()
+unescape_byte!();

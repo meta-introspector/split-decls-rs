@@ -4,4 +4,4 @@ macro_rules! CfgSelectNoMatches {
     };
 }
 
-CfgSelectNoMatches!()
+CfgSelectNoMatches!();

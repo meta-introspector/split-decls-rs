@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        CreateVTab!();
         Error!();
+        CreateVTab!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! rust_destroy {
     };
 }
 
-rust_destroy!()
+rust_destroy!();

@@ -4,4 +4,4 @@ macro_rules! NavigationTarget {
     };
 }
 
-NavigationTarget!()
+NavigationTarget!();

@@ -4,4 +4,4 @@ macro_rules! PR_SET_UNALIGN {
     };
 }
 
-PR_SET_UNALIGN!()
+PR_SET_UNALIGN!();

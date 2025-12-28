@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        MachO32!();
         MachO64!();
+        MachO32!();
         Result!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! map_inner_option {
     };
 }
 
-map_inner_option!()
+map_inner_option!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        AttributePlace!();
-        Builder!();
         ModuleLlvm!();
         CodegenCx!();
+        AttributePlace!();
+        Builder!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! compile_codegen_unit {
     };
 }
 
-compile_codegen_unit!()
+compile_codegen_unit!();

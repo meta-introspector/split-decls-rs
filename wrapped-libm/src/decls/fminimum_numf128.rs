@@ -4,4 +4,4 @@ macro_rules! fminimum_numf128 {
     };
 }
 
-fminimum_numf128!()
+fminimum_numf128!();

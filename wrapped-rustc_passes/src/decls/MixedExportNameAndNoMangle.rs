@@ -4,4 +4,4 @@ macro_rules! MixedExportNameAndNoMangle {
     };
 }
 
-MixedExportNameAndNoMangle!()
+MixedExportNameAndNoMangle!();

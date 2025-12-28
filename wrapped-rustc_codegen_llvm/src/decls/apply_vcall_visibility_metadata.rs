@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        CodegenCx!();
         Visibility!();
         MetadataType!();
-        CodegenCx!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! apply_vcall_visibility_metadata {
     };
 }
 
-apply_vcall_visibility_metadata!()
+apply_vcall_visibility_metadata!();

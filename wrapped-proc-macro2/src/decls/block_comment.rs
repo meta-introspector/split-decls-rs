@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Cursor!();
-        Reject!();
         PResult!();
+        Reject!();
+        Cursor!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! block_comment {
     };
 }
 
-block_comment!()
+block_comment!();

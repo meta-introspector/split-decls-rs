@@ -11,4 +11,4 @@ macro_rules! from_i64 {
     };
 }
 
-from_i64!()
+from_i64!();

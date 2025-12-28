@@ -13,4 +13,4 @@ macro_rules! try_find {
     };
 }
 
-try_find!()
+try_find!();

@@ -4,4 +4,4 @@ macro_rules! typeck_naked_fn {
     };
 }
 
-typeck_naked_fn!()
+typeck_naked_fn!();

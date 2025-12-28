@@ -4,4 +4,4 @@ macro_rules! try_join_tokens {
     };
 }
 
-try_join_tokens!()
+try_join_tokens!();

@@ -4,4 +4,4 @@ macro_rules! DT_SYMINSZ {
     };
 }
 
-DT_SYMINSZ!()
+DT_SYMINSZ!();

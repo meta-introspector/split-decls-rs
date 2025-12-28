@@ -4,4 +4,4 @@ macro_rules! typeid_for_trait_ref {
     };
 }
 
-typeid_for_trait_ref!()
+typeid_for_trait_ref!();

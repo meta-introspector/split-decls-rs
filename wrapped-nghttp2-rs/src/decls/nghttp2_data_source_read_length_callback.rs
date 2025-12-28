@@ -4,4 +4,4 @@ macro_rules! nghttp2_data_source_read_length_callback {
     };
 }
 
-nghttp2_data_source_read_length_callback!()
+nghttp2_data_source_read_length_callback!();

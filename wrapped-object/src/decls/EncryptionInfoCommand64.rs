@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        U32!();
         Endian!();
+        U32!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! EncryptionInfoCommand64 {
     };
 }
 
-EncryptionInfoCommand64!()
+EncryptionInfoCommand64!();

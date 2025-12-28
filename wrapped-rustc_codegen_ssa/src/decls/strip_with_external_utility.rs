@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Command!();
         UnableToRun!();
         StrippingDebugInfoFailed!();
+        Command!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! strip_with_external_utility {
     };
 }
 
-strip_with_external_utility!()
+strip_with_external_utility!();

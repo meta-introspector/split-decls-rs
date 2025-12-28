@@ -4,4 +4,4 @@ macro_rules! R_AARCH64_TLSLD_MOVW_G0_NC {
     };
 }
 
-R_AARCH64_TLSLD_MOVW_G0_NC!()
+R_AARCH64_TLSLD_MOVW_G0_NC!();

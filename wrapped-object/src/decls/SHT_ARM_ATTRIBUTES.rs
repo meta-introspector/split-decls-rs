@@ -4,4 +4,4 @@ macro_rules! SHT_ARM_ATTRIBUTES {
     };
 }
 
-SHT_ARM_ATTRIBUTES!()
+SHT_ARM_ATTRIBUTES!();

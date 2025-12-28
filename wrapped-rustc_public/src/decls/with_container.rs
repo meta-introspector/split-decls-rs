@@ -4,4 +4,4 @@ macro_rules! with_container {
     };
 }
 
-with_container!()
+with_container!();

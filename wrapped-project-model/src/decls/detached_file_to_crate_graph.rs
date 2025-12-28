@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        ManifestPath!();
         Sysroot!();
         CfgOverrides!();
-        ManifestPath!();
         FileLoader!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! detached_file_to_crate_graph {
     };
 }
 
-detached_file_to_crate_graph!()
+detached_file_to_crate_graph!();

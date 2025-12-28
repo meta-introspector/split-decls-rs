@@ -13,4 +13,4 @@ macro_rules! depth_first_search {
     };
 }
 
-depth_first_search!()
+depth_first_search!();

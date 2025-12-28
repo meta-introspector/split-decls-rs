@@ -12,4 +12,4 @@ macro_rules! error_location_base_template {
     };
 }
 
-error_location_base_template!()
+error_location_base_template!();

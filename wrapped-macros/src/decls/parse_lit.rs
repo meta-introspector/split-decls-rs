@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ErrorKind!();
         Error!();
+        ErrorKind!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! parse_lit {
     };
 }
 
-parse_lit!()
+parse_lit!();

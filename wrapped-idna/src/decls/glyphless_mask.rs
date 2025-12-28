@@ -4,4 +4,4 @@ macro_rules! glyphless_mask {
     };
 }
 
-glyphless_mask!()
+glyphless_mask!();

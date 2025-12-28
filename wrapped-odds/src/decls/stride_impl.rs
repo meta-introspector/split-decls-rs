@@ -11,4 +11,4 @@ macro_rules! stride_impl {
     };
 }
 
-stride_impl!()
+stride_impl!();

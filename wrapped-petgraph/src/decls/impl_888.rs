@@ -1,29 +1,29 @@
 macro_rules! deps {
     () => {
-        Undirected!();
-        Direction!();
-        AllEdgesMut!();
-        Directed!();
+        ParAllEdgesMut!();
+        AllEdges!();
         NodeTrait!();
-        UnGraphMap!();
-        Edges!();
-        DiGraphMap!();
+        IntoWeightedEdge!();
+        IndexType!();
+        EdgeType!();
         EdgesDirected!();
         Neighbors!();
-        NeighborsDirected!();
-        Node!();
-        GraphMap!();
-        Create!();
-        ParAllEdges!();
-        EdgeType!();
-        ParAllEdgesMut!();
+        Direction!();
+        DiGraphMap!();
+        Directed!();
+        UnGraphMap!();
+        Edges!();
         Graph!();
-        IntoWeightedEdge!();
-        ParNodes!();
-        AllEdges!();
-        IndexType!();
         Edge!();
+        NeighborsDirected!();
         CompactDirection!();
+        Create!();
+        GraphMap!();
+        ParAllEdges!();
+        ParNodes!();
+        Node!();
+        Undirected!();
+        AllEdgesMut!();
     };
 }
 
@@ -34,4 +34,4 @@ macro_rules! impl_888 {
     };
 }
 
-impl_888!()
+impl_888!();

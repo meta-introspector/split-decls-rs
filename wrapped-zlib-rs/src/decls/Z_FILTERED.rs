@@ -4,4 +4,4 @@ macro_rules! Z_FILTERED {
     };
 }
 
-Z_FILTERED!()
+Z_FILTERED!();

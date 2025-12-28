@@ -4,4 +4,4 @@ macro_rules! on_right_angle_typed {
     };
 }
 
-on_right_angle_typed!()
+on_right_angle_typed!();

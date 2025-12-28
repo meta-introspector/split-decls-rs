@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Note!();
-        SectionIndex!();
         Section!();
+        SectionIndex!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! RelocationKind {
     };
 }
 
-RelocationKind!()
+RelocationKind!();

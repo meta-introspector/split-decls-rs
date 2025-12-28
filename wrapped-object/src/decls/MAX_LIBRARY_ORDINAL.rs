@@ -4,4 +4,4 @@ macro_rules! MAX_LIBRARY_ORDINAL {
     };
 }
 
-MAX_LIBRARY_ORDINAL!()
+MAX_LIBRARY_ORDINAL!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        AttributeType!();
-        Features!();
         AttributeSafety!();
+        AttributeType!();
         BuiltinAttribute!();
+        Features!();
     };
 }
 
@@ -35,4 +35,4 @@ macro_rules! BUILTIN_ATTRIBUTES {
     };
 }
 
-BUILTIN_ATTRIBUTES!()
+BUILTIN_ATTRIBUTES!();

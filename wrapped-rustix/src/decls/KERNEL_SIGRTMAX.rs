@@ -4,4 +4,4 @@ macro_rules! KERNEL_SIGRTMAX {
     };
 }
 
-KERNEL_SIGRTMAX!()
+KERNEL_SIGRTMAX!();

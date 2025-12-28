@@ -4,4 +4,4 @@ macro_rules! failed {
     };
 }
 
-failed!()
+failed!();

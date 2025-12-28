@@ -98,4 +98,4 @@ macro_rules! json_monster_proof_impl {
     };
 }
 
-json_monster_proof_impl!()
+json_monster_proof_impl!();

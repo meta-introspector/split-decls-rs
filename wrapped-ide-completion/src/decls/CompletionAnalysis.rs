@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        LifetimeContext!();
         NameRefContext!();
         NameContext!();
+        LifetimeContext!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! CompletionAnalysis {
     };
 }
 
-CompletionAnalysis!()
+CompletionAnalysis!();

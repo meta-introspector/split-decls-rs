@@ -4,4 +4,4 @@ macro_rules! BecauseImmutable {
     };
 }
 
-BecauseImmutable!()
+BecauseImmutable!();

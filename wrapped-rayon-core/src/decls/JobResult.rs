@@ -4,4 +4,4 @@ macro_rules! JobResult {
     };
 }
 
-JobResult!()
+JobResult!();

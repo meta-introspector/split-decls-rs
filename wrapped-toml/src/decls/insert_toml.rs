@@ -11,4 +11,4 @@ macro_rules! insert_toml {
     };
 }
 
-insert_toml!()
+insert_toml!();

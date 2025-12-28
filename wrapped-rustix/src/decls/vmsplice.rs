@@ -11,4 +11,4 @@ macro_rules! vmsplice {
     };
 }
 
-vmsplice!()
+vmsplice!();

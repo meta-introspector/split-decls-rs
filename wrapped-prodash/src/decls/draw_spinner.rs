@@ -11,4 +11,4 @@ macro_rules! draw_spinner {
     };
 }
 
-draw_spinner!()
+draw_spinner!();

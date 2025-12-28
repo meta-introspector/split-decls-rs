@@ -11,4 +11,4 @@ macro_rules! push_ident {
     };
 }
 
-push_ident!()
+push_ident!();

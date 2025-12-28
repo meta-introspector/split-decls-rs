@@ -4,4 +4,4 @@ macro_rules! expand_naked_asm {
     };
 }
 
-expand_naked_asm!()
+expand_naked_asm!();

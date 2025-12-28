@@ -4,4 +4,4 @@ macro_rules! TimePassesFormat {
     };
 }
 
-TimePassesFormat!()
+TimePassesFormat!();

@@ -4,4 +4,4 @@ macro_rules! version_at_macro_invocation {
     };
 }
 
-version_at_macro_invocation!()
+version_at_macro_invocation!();

@@ -4,4 +4,4 @@ macro_rules! UnstableConstTrait {
     };
 }
 
-UnstableConstTrait!()
+UnstableConstTrait!();

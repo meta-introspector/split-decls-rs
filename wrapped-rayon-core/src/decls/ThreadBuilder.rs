@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        JobRef!();
         Registry!();
+        JobRef!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! ThreadBuilder {
     };
 }
 
-ThreadBuilder!()
+ThreadBuilder!();

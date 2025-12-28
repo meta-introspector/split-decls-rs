@@ -4,4 +4,4 @@ macro_rules! is_any_integer_digit {
     };
 }
 
-is_any_integer_digit!()
+is_any_integer_digit!();

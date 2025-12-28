@@ -4,4 +4,4 @@ macro_rules! iterate {
     };
 }
 
-iterate!()
+iterate!();

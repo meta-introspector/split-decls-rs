@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        RingElement!();
-        ByteSerialization!();
-        FieldElement!();
         Sha3_256!();
         UnknownCryptoError!();
+        FieldElement!();
+        ByteSerialization!();
+        RingElement!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! PkeParameters {
     };
 }
 
-PkeParameters!()
+PkeParameters!();

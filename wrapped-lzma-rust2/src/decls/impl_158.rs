@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Read!();
         Result!();
-        CheckType!();
         StreamHeader!();
+        CheckType!();
+        Read!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_158 {
     };
 }
 
-impl_158!()
+impl_158!();

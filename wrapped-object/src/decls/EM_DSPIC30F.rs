@@ -4,4 +4,4 @@ macro_rules! EM_DSPIC30F {
     };
 }
 
-EM_DSPIC30F!()
+EM_DSPIC30F!();

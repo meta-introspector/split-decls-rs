@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        InternError!();
-        InternKind!();
         MPlaceTy!();
-        InterpCx!();
         CompileTimeMachine!();
+        InterpCx!();
+        InternKind!();
+        InternError!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! intern_const_alloc_recursive {
     };
 }
 
-intern_const_alloc_recursive!()
+intern_const_alloc_recursive!();

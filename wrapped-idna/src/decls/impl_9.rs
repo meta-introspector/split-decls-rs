@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Idna!();
-        Hyphens!();
-        AsciiDenyList!();
         Config!();
+        AsciiDenyList!();
         Errors!();
+        Hyphens!();
+        Idna!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_9 {
     };
 }
 
-impl_9!()
+impl_9!();

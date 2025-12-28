@@ -12,4 +12,4 @@ macro_rules! crate_num {
     };
 }
 
-crate_num!()
+crate_num!();

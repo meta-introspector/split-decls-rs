@@ -4,4 +4,4 @@ macro_rules! with_position {
     };
 }
 
-with_position!()
+with_position!();

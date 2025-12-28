@@ -4,4 +4,4 @@ macro_rules! fetch_generics {
     };
 }
 
-fetch_generics!()
+fetch_generics!();

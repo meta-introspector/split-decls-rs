@@ -4,4 +4,4 @@ macro_rules! SHT_MIPS_TRANSLATE {
     };
 }
 
-SHT_MIPS_TRANSLATE!()
+SHT_MIPS_TRANSLATE!();

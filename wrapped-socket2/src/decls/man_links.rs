@@ -4,4 +4,4 @@ macro_rules! man_links {
     };
 }
 
-man_links!()
+man_links!();

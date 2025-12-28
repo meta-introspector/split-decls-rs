@@ -11,4 +11,4 @@ macro_rules! take_remote_and_reuse {
     };
 }
 
-take_remote_and_reuse!()
+take_remote_and_reuse!();

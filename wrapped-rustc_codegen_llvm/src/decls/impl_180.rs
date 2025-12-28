@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Builder!();
-        OperandBundleBox!();
         Funclet!();
         SmallVec!();
+        OperandBundleBox!();
+        Builder!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_180 {
     };
 }
 
-impl_180!()
+impl_180!();

@@ -4,4 +4,4 @@ macro_rules! StatementStatus {
     };
 }
 
-StatementStatus!()
+StatementStatus!();

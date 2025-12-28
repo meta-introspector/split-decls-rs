@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         NonFmtPanicUnused!();
-        LateContext!();
         NonFmtPanicBraces!();
+        LateContext!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! check_panic_str {
     };
 }
 
-check_panic_str!()
+check_panic_str!();

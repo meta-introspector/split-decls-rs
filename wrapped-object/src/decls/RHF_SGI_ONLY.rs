@@ -4,4 +4,4 @@ macro_rules! RHF_SGI_ONLY {
     };
 }
 
-RHF_SGI_ONLY!()
+RHF_SGI_ONLY!();

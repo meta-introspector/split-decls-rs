@@ -4,4 +4,4 @@ macro_rules! EF_ARM_RELEXEC {
     };
 }
 
-EF_ARM_RELEXEC!()
+EF_ARM_RELEXEC!();

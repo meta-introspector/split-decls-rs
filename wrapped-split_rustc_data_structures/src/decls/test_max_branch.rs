@@ -13,4 +13,4 @@ macro_rules! test_max_branch {
     };
 }
 
-test_max_branch!()
+test_max_branch!();

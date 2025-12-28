@@ -4,4 +4,4 @@ macro_rules! float_type_width {
     };
 }
 
-float_type_width!()
+float_type_width!();

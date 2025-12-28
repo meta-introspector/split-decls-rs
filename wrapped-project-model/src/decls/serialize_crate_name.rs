@@ -4,4 +4,4 @@ macro_rules! serialize_crate_name {
     };
 }
 
-serialize_crate_name!()
+serialize_crate_name!();

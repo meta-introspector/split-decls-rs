@@ -4,4 +4,4 @@ macro_rules! is_self {
     };
 }
 
-is_self!()
+is_self!();

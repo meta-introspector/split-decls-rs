@@ -4,4 +4,4 @@ macro_rules! R_XTENSA_RTLD {
     };
 }
 
-R_XTENSA_RTLD!()
+R_XTENSA_RTLD!();

@@ -4,4 +4,4 @@ macro_rules! IMPORT_OBJECT_HDR_SIG2 {
     };
 }
 
-IMPORT_OBJECT_HDR_SIG2!()
+IMPORT_OBJECT_HDR_SIG2!();

@@ -11,4 +11,4 @@ macro_rules! dummy_output_type {
     };
 }
 
-dummy_output_type!()
+dummy_output_type!();

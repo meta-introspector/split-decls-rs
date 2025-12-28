@@ -4,4 +4,4 @@ macro_rules! seeded_rng {
     };
 }
 
-seeded_rng!()
+seeded_rng!();

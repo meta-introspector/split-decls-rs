@@ -1,23 +1,23 @@
 macro_rules! deps {
     () => {
-        Builder!();
-        ConstContinueUnknownJumpTarget!();
-        Scope!();
-        CFG!();
+        DropTree!();
         BreakableScope!();
+        Builder!();
         DropData!();
+        ConstContinueNotMonomorphicConst!();
+        ConstContinuableScope!();
+        IfThenScope!();
+        BlockFrame!();
         ConstContinueNotMonomorphicConstReason!();
         DropKind!();
-        DropTree!();
+        ConstContinueBadConst!();
         CoroutineDrop!();
-        ConstContinuableScope!();
-        BreakableTarget!();
+        Scope!();
+        CFG!();
         BuiltMatchTree!();
         BlockAnd!();
-        ConstContinueNotMonomorphicConst!();
-        ConstContinueBadConst!();
-        BlockFrame!();
-        IfThenScope!();
+        BreakableTarget!();
+        ConstContinueUnknownJumpTarget!();
     };
 }
 
@@ -29,4 +29,4 @@ macro_rules! impl_155 {
     };
 }
 
-impl_155!()
+impl_155!();

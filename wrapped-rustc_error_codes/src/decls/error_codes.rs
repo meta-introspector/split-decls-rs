@@ -4,4 +4,4 @@ macro_rules! error_codes {
     };
 }
 
-error_codes!()
+error_codes!();

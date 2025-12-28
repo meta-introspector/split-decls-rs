@@ -4,4 +4,4 @@ macro_rules! kill {
     };
 }
 
-kill!()
+kill!();

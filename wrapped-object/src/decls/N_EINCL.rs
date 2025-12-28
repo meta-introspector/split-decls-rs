@@ -4,4 +4,4 @@ macro_rules! N_EINCL {
     };
 }
 
-N_EINCL!()
+N_EINCL!();

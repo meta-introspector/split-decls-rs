@@ -11,4 +11,4 @@ macro_rules! scope_def_to_name {
     };
 }
 
-scope_def_to_name!()
+scope_def_to_name!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Key!();
-        MessageRingBuffer!();
-        Item!();
-        Options!();
         Root!();
+        Item!();
+        Key!();
+        Options!();
+        MessageRingBuffer!();
         HashMap!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! impl_17 {
     };
 }
 
-impl_17!()
+impl_17!();

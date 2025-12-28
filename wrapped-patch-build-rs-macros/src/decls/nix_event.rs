@@ -4,4 +4,4 @@ macro_rules! nix_event {
     };
 }
 
-nix_event!()
+nix_event!();

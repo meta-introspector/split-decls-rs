@@ -4,4 +4,4 @@ macro_rules! plonk_circuit {
     };
 }
 
-plonk_circuit!()
+plonk_circuit!();

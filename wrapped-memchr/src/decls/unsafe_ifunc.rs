@@ -4,4 +4,4 @@ macro_rules! unsafe_ifunc {
     };
 }
 
-unsafe_ifunc!()
+unsafe_ifunc!();

@@ -4,4 +4,4 @@ macro_rules! IMAGE_REL_ARM_GPREL12 {
     };
 }
 
-IMAGE_REL_ARM_GPREL12!()
+IMAGE_REL_ARM_GPREL12!();

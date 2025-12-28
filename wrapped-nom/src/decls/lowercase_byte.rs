@@ -4,4 +4,4 @@ macro_rules! lowercase_byte {
     };
 }
 
-lowercase_byte!()
+lowercase_byte!();

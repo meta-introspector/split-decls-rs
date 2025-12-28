@@ -4,4 +4,4 @@ macro_rules! linux_musl {
     };
 }
 
-linux_musl!()
+linux_musl!();

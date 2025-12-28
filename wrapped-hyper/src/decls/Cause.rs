@@ -4,4 +4,4 @@ macro_rules! Cause {
     };
 }
 
-Cause!()
+Cause!();

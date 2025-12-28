@@ -9,4 +9,4 @@ macro_rules! DEC_DIGITS_LUT {
     };
 }
 
-DEC_DIGITS_LUT!()
+DEC_DIGITS_LUT!();

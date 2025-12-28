@@ -4,4 +4,4 @@ macro_rules! FileEncodeResult {
     };
 }
 
-FileEncodeResult!()
+FileEncodeResult!();

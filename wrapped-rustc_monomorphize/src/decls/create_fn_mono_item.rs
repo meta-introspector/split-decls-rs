@@ -4,4 +4,4 @@ macro_rules! create_fn_mono_item {
     };
 }
 
-create_fn_mono_item!()
+create_fn_mono_item!();

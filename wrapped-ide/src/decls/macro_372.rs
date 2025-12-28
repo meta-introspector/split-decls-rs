@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        RunnableKind!();
         UpdateTest!();
+        RunnableKind!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! macro_372 {
     };
 }
 
-macro_372!()
+macro_372!();

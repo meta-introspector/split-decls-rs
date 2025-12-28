@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Deps!();
         DepContext!();
+        Deps!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! HasDepContext {
     };
 }
 
-HasDepContext!()
+HasDepContext!();

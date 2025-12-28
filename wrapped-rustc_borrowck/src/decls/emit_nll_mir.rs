@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        BorrowSet!();
         RegionInferenceContext!();
         ClosureRegionRequirements!();
-        BorrowSet!();
         Borrows!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! emit_nll_mir {
     };
 }
 
-emit_nll_mir!()
+emit_nll_mir!();

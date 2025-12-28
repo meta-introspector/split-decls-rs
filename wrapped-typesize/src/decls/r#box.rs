@@ -4,4 +4,4 @@ macro_rules! r#box {
     };
 }
 
-r#box!()
+r#box!();

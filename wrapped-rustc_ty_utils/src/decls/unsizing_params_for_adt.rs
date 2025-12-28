@@ -4,4 +4,4 @@ macro_rules! unsizing_params_for_adt {
     };
 }
 
-unsizing_params_for_adt!()
+unsizing_params_for_adt!();

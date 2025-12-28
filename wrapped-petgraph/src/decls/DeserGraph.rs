@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Edge!();
+        EdgeProperty!();
         Node!();
         IndexType!();
-        EdgeProperty!();
+        Edge!();
         NodeIndex!();
         Graph!();
     };
@@ -16,4 +16,4 @@ macro_rules! DeserGraph {
     };
 }
 
-DeserGraph!()
+DeserGraph!();

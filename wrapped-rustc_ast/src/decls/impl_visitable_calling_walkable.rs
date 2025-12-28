@@ -4,4 +4,4 @@ macro_rules! impl_visitable_calling_walkable {
     };
 }
 
-impl_visitable_calling_walkable!()
+impl_visitable_calling_walkable!();

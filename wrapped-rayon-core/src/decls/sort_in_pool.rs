@@ -11,4 +11,4 @@ macro_rules! sort_in_pool {
     };
 }
 
-sort_in_pool!()
+sort_in_pool!();

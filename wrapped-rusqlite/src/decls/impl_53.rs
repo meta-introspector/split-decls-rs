@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        ToSql!();
         Result!();
         ToSqlOutput!();
+        ToSql!();
         ZeroBlob!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_53 {
     };
 }
 
-impl_53!()
+impl_53!();

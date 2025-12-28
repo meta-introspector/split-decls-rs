@@ -11,4 +11,4 @@ macro_rules! impl_333 {
     };
 }
 
-impl_333!()
+impl_333!();

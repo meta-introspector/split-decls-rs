@@ -4,4 +4,4 @@ macro_rules! finish {
     };
 }
 
-finish!()
+finish!();

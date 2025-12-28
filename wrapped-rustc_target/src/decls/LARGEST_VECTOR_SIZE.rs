@@ -4,4 +4,4 @@ macro_rules! LARGEST_VECTOR_SIZE {
     };
 }
 
-LARGEST_VECTOR_SIZE!()
+LARGEST_VECTOR_SIZE!();

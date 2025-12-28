@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Span!();
-        FloatLit!();
+        StringLit!();
         InvalidToken!();
+        FloatLit!();
+        Span!();
         Literal!();
         TokenKind!();
-        StringLit!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! invalid_token_display {
     };
 }
 
-invalid_token_display!()
+invalid_token_display!();

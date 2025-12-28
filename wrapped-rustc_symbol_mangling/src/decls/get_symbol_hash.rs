@@ -4,4 +4,4 @@ macro_rules! get_symbol_hash {
     };
 }
 
-get_symbol_hash!()
+get_symbol_hash!();

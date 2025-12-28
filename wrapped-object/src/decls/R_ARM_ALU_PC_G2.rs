@@ -4,4 +4,4 @@ macro_rules! R_ARM_ALU_PC_G2 {
     };
 }
 
-R_ARM_ALU_PC_G2!()
+R_ARM_ALU_PC_G2!();

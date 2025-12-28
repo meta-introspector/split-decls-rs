@@ -4,4 +4,4 @@ macro_rules! PR_GET_KEEPCAPS {
     };
 }
 
-PR_GET_KEEPCAPS!()
+PR_GET_KEEPCAPS!();

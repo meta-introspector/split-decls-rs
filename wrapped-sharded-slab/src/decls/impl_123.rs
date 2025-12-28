@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Config!();
         Addr!();
+        Config!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_123 {
     };
 }
 
-impl_123!()
+impl_123!();

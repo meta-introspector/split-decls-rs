@@ -4,4 +4,4 @@ macro_rules! EF_SPARC_32PLUS {
     };
 }
 
-EF_SPARC_32PLUS!()
+EF_SPARC_32PLUS!();

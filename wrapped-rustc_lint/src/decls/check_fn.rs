@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         VisitOpaqueTypes!();
-        ParamKind!();
         FunctionalVariances!();
+        ParamKind!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! check_fn {
     };
 }
 
-check_fn!()
+check_fn!();

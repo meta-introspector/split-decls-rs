@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        ParseError!();
-        Input!();
         IResult!();
+        Input!();
+        ParseError!();
         ErrorKind!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! bool {
     };
 }
 
-bool!()
+bool!();

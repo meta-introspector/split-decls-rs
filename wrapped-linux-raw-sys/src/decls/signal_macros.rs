@@ -4,4 +4,4 @@ macro_rules! signal_macros {
     };
 }
 
-signal_macros!()
+signal_macros!();

@@ -4,4 +4,4 @@ macro_rules! ARM64_RELOC_BRANCH26 {
     };
 }
 
-ARM64_RELOC_BRANCH26!()
+ARM64_RELOC_BRANCH26!();

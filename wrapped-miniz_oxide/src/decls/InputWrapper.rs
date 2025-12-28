@@ -4,4 +4,4 @@ macro_rules! InputWrapper {
     };
 }
 
-InputWrapper!()
+InputWrapper!();

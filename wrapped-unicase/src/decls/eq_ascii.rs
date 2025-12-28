@@ -11,4 +11,4 @@ macro_rules! eq_ascii {
     };
 }
 
-eq_ascii!()
+eq_ascii!();

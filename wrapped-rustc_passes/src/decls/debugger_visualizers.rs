@@ -11,4 +11,4 @@ macro_rules! debugger_visualizers {
     };
 }
 
-debugger_visualizers!()
+debugger_visualizers!();

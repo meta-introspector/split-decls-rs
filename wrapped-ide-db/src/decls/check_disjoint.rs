@@ -11,4 +11,4 @@ macro_rules! check_disjoint {
     };
 }
 
-check_disjoint!()
+check_disjoint!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        KnownLayout!();
         SizeError!();
+        KnownLayout!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_203 {
     };
 }
 
-impl_203!()
+impl_203!();

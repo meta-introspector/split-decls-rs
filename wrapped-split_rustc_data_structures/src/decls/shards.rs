@@ -4,4 +4,4 @@ macro_rules! shards {
     };
 }
 
-shards!()
+shards!();

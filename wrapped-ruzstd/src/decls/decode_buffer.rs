@@ -4,4 +4,4 @@ macro_rules! decode_buffer {
     };
 }
 
-decode_buffer!()
+decode_buffer!();

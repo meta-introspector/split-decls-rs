@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ParserExpr!();
         ParserNode!();
+        ParserExpr!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! is_non_progressing {
     };
 }
 
-is_non_progressing!()
+is_non_progressing!();

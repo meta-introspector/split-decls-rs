@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        Iter!();
         IndexedParallelIterator!();
         Consumer!();
         ProducerCallback!();
-        Iter!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_1078 {
     };
 }
 
-impl_1078!()
+impl_1078!();

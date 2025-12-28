@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Identity!();
-        QueryOriginRef!();
-        QueryRevisions!();
         CycleHeads!();
         CompletedQuery!();
+        QueryOriginRef!();
         ActiveQueryGuard!();
         Id!();
+        Identity!();
+        QueryRevisions!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_488 {
     };
 }
 
-impl_488!()
+impl_488!();

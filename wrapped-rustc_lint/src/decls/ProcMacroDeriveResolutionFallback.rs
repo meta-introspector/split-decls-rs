@@ -4,4 +4,4 @@ macro_rules! ProcMacroDeriveResolutionFallback {
     };
 }
 
-ProcMacroDeriveResolutionFallback!()
+ProcMacroDeriveResolutionFallback!();

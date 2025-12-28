@@ -4,4 +4,4 @@ macro_rules! LibMacroRuleTrackerSpanArgT {
     };
 }
 
-LibMacroRuleTrackerSpanArgT!()
+LibMacroRuleTrackerSpanArgT!();

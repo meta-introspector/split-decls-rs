@@ -4,4 +4,4 @@ macro_rules! BlockBasedIndexType {
     };
 }
 
-BlockBasedIndexType!()
+BlockBasedIndexType!();

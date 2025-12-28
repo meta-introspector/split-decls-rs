@@ -4,4 +4,4 @@ macro_rules! TOINT {
     };
 }
 
-TOINT!()
+TOINT!();

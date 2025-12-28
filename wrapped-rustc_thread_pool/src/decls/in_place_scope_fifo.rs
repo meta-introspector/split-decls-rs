@@ -11,4 +11,4 @@ macro_rules! in_place_scope_fifo {
     };
 }
 
-in_place_scope_fifo!()
+in_place_scope_fifo!();

@@ -4,4 +4,4 @@ macro_rules! R_METAG_LOOG {
     };
 }
 
-R_METAG_LOOG!()
+R_METAG_LOOG!();

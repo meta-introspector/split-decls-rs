@@ -4,4 +4,4 @@ macro_rules! DominatedByIter {
     };
 }
 
-DominatedByIter!()
+DominatedByIter!();

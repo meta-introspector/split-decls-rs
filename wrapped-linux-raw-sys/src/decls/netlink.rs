@@ -4,4 +4,4 @@ macro_rules! netlink {
     };
 }
 
-netlink!()
+netlink!();

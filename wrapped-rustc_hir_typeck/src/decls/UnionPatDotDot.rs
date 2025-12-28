@@ -4,4 +4,4 @@ macro_rules! UnionPatDotDot {
     };
 }
 
-UnionPatDotDot!()
+UnionPatDotDot!();

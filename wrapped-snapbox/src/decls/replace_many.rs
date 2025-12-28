@@ -11,4 +11,4 @@ macro_rules! replace_many {
     };
 }
 
-replace_many!()
+replace_many!();

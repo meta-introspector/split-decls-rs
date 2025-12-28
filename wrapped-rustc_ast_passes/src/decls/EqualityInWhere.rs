@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        AssociatedSuggestion2!();
         AssociatedSuggestion!();
+        AssociatedSuggestion2!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! EqualityInWhere {
     };
 }
 
-EqualityInWhere!()
+EqualityInWhere!();

@@ -11,4 +11,4 @@ macro_rules! str_normalize_empty {
     };
 }
 
-str_normalize_empty!()
+str_normalize_empty!();

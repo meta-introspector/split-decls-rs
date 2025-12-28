@@ -11,4 +11,4 @@ macro_rules! lookup_width {
     };
 }
 
-lookup_width!()
+lookup_width!();

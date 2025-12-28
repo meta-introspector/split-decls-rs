@@ -4,4 +4,4 @@ macro_rules! MacroOnlyAttribute {
     };
 }
 
-MacroOnlyAttribute!()
+MacroOnlyAttribute!();

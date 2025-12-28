@@ -4,4 +4,4 @@ macro_rules! TRIGGER_CHARS {
     };
 }
 
-TRIGGER_CHARS!()
+TRIGGER_CHARS!();

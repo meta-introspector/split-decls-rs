@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Write!();
         Result!();
-        AutoFinish!();
         AutoFinisher!();
+        AutoFinish!();
+        Write!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_344 {
     };
 }
 
-impl_344!()
+impl_344!();

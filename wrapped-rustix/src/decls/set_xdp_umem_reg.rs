@@ -11,4 +11,4 @@ macro_rules! set_xdp_umem_reg {
     };
 }
 
-set_xdp_umem_reg!()
+set_xdp_umem_reg!();

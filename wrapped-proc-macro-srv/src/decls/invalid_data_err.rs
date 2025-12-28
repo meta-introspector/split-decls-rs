@@ -4,4 +4,4 @@ macro_rules! invalid_data_err {
     };
 }
 
-invalid_data_err!()
+invalid_data_err!();

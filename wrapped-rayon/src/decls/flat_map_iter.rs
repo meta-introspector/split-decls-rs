@@ -4,4 +4,4 @@ macro_rules! flat_map_iter {
     };
 }
 
-flat_map_iter!()
+flat_map_iter!();

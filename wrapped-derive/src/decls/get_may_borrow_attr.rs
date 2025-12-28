@@ -4,4 +4,4 @@ macro_rules! get_may_borrow_attr {
     };
 }
 
-get_may_borrow_attr!()
+get_may_borrow_attr!();

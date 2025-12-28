@@ -11,4 +11,4 @@ macro_rules! deserialize_newtype {
     };
 }
 
-deserialize_newtype!()
+deserialize_newtype!();

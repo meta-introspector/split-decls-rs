@@ -11,4 +11,4 @@ macro_rules! xdp_options {
     };
 }
 
-xdp_options!()
+xdp_options!();

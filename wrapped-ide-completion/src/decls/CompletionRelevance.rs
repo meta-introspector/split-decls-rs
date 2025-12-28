@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        CompletionRelevanceFn!();
         CompletionRelevanceTraitInfo!();
-        CompletionRelevancePostfixMatch!();
         CompletionRelevanceTypeMatch!();
+        CompletionRelevanceFn!();
+        CompletionRelevancePostfixMatch!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! CompletionRelevance {
     };
 }
 
-CompletionRelevance!()
+CompletionRelevance!();

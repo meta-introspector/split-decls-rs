@@ -12,4 +12,4 @@ macro_rules! works_with_filter_section {
     };
 }
 
-works_with_filter_section!()
+works_with_filter_section!();

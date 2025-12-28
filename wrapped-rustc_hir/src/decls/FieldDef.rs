@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        AnonConst!();
-        Safety!();
         Ty!();
+        Safety!();
+        AnonConst!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! FieldDef {
     };
 }
 
-FieldDef!()
+FieldDef!();

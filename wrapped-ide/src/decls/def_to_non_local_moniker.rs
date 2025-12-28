@@ -2,10 +2,10 @@ macro_rules! deps {
     () => {
         MonikerDescriptor!();
         PackageInformation!();
-        Moniker!();
-        MonikerDescriptorKind!();
         MonikerKind!();
+        Moniker!();
         MonikerIdentifier!();
+        MonikerDescriptorKind!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! def_to_non_local_moniker {
     };
 }
 
-def_to_non_local_moniker!()
+def_to_non_local_moniker!();

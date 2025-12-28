@@ -4,4 +4,4 @@ macro_rules! LittleEndianReadExt {
     };
 }
 
-LittleEndianReadExt!()
+LittleEndianReadExt!();

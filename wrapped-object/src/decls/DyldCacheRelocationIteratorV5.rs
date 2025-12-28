@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Endianness!();
         ReadRef!();
-        Endian!();
         U16!();
+        Endianness!();
+        Endian!();
         RelocationStateV5!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! DyldCacheRelocationIteratorV5 {
     };
 }
 
-DyldCacheRelocationIteratorV5!()
+DyldCacheRelocationIteratorV5!();

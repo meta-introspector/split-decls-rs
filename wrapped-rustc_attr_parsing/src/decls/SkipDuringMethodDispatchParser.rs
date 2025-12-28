@@ -4,4 +4,4 @@ macro_rules! SkipDuringMethodDispatchParser {
     };
 }
 
-SkipDuringMethodDispatchParser!()
+SkipDuringMethodDispatchParser!();

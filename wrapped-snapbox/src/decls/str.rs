@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Inline!();
         Position!();
         IntoData!();
+        Inline!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! str {
     };
 }
 
-str!()
+str!();

@@ -4,4 +4,4 @@ macro_rules! DeprecatedItemSuggestion {
     };
 }
 
-DeprecatedItemSuggestion!()
+DeprecatedItemSuggestion!();

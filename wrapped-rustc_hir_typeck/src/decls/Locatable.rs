@@ -4,4 +4,4 @@ macro_rules! Locatable {
     };
 }
 
-Locatable!()
+Locatable!();

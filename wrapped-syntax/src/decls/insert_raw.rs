@@ -12,4 +12,4 @@ macro_rules! insert_raw {
     };
 }
 
-insert_raw!()
+insert_raw!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        Expected!();
         ErrorSink!();
+        Raw!();
         ScalarKind!();
         StringBuilder!();
-        Expected!();
-        Raw!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! decode_unquoted_scalar {
     };
 }
 
-decode_unquoted_scalar!()
+decode_unquoted_scalar!();

@@ -4,4 +4,4 @@ macro_rules! opt_bytes_to_ptr {
     };
 }
 
-opt_bytes_to_ptr!()
+opt_bytes_to_ptr!();

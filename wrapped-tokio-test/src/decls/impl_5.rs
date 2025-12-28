@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Builder!();
-        Action!();
-        Handle!();
-        Inner!();
         Mock!();
+        Builder!();
+        Inner!();
+        Handle!();
+        Action!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_5 {
     };
 }
 
-impl_5!()
+impl_5!();

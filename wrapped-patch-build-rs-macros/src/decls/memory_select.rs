@@ -4,4 +4,4 @@ macro_rules! memory_select {
     };
 }
 
-memory_select!()
+memory_select!();

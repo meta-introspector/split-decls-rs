@@ -4,4 +4,4 @@ macro_rules! last_error {
     };
 }
 
-last_error!()
+last_error!();

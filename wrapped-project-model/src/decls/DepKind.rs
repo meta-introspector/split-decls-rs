@@ -11,4 +11,4 @@ macro_rules! DepKind {
     };
 }
 
-DepKind!()
+DepKind!();

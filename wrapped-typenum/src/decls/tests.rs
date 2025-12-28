@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Unsigned!();
-        Log2!();
         ToInt!();
+        Log2!();
+        Unsigned!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! tests {
     };
 }
 
-tests!()
+tests!();

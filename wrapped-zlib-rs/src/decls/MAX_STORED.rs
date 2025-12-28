@@ -4,4 +4,4 @@ macro_rules! MAX_STORED {
     };
 }
 
-MAX_STORED!()
+MAX_STORED!();

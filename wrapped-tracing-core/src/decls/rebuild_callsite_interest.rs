@@ -12,4 +12,4 @@ macro_rules! rebuild_callsite_interest {
     };
 }
 
-rebuild_callsite_interest!()
+rebuild_callsite_interest!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        CallbackOut!();
-        CallbackOxide!();
         TDEFLStatus!();
+        CallbackOut!();
         ParamsOxide!();
+        CallbackOxide!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! flush_output_buffer {
     };
 }
 
-flush_output_buffer!()
+flush_output_buffer!();

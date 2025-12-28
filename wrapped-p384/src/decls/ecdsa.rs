@@ -4,4 +4,4 @@ macro_rules! ecdsa {
     };
 }
 
-ecdsa!()
+ecdsa!();

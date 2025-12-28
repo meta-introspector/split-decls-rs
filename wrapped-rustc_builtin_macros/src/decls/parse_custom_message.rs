@@ -4,4 +4,4 @@ macro_rules! parse_custom_message {
     };
 }
 
-parse_custom_message!()
+parse_custom_message!();

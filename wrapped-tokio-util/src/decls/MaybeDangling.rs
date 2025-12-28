@@ -4,4 +4,4 @@ macro_rules! MaybeDangling {
     };
 }
 
-MaybeDangling!()
+MaybeDangling!();

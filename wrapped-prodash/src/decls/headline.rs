@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Duration!();
-        Key!();
-        State!();
         Task!();
+        Duration!();
         InterruptDrawInfo!();
+        State!();
+        Key!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! headline {
     };
 }
 
-headline!()
+headline!();

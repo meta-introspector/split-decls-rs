@@ -4,4 +4,4 @@ macro_rules! LINE_CLOSE {
     };
 }
 
-LINE_CLOSE!()
+LINE_CLOSE!();

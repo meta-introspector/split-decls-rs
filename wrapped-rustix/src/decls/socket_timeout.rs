@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Timeout!();
         Result!();
+        Timeout!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! socket_timeout {
     };
 }
 
-socket_timeout!()
+socket_timeout!();

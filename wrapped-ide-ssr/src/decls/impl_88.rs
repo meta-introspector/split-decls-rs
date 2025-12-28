@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        ResolvedPattern!();
-        ResolvedRule!();
-        ResolvedPath!();
-        UsageCache!();
-        Match!();
         MatchFinder!();
+        ResolvedPath!();
+        ResolvedRule!();
+        Match!();
+        ResolvedPattern!();
+        UsageCache!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_88 {
     };
 }
 
-impl_88!()
+impl_88!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        EncodedPoint!();
+        Error!();
         Result!();
         ModulusSize!();
-        Error!();
+        EncodedPoint!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_21 {
     };
 }
 
-impl_21!()
+impl_21!();

@@ -5,4 +5,4 @@ macro_rules! check_gat_where_clauses {
     };
 }
 
-check_gat_where_clauses!()
+check_gat_where_clauses!();

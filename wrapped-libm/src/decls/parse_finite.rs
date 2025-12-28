@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         HexFloatParseError!();
-        Parsed!();
         Status!();
         Round!();
+        Parsed!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! parse_finite {
     };
 }
 
-parse_finite!()
+parse_finite!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Result!();
         DumpableBehavior!();
         ProcSelector!();
-        Result!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! set_dumpable_behavior {
     };
 }
 
-set_dumpable_behavior!()
+set_dumpable_behavior!();

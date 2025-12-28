@@ -4,4 +4,4 @@ macro_rules! NGHTTP2_FLAG_ACK {
     };
 }
 
-NGHTTP2_FLAG_ACK!()
+NGHTTP2_FLAG_ACK!();

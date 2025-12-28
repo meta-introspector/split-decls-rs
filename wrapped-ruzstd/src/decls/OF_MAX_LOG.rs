@@ -4,4 +4,4 @@ macro_rules! OF_MAX_LOG {
     };
 }
 
-OF_MAX_LOG!()
+OF_MAX_LOG!();

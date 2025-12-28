@@ -4,4 +4,4 @@ macro_rules! check_call_site_abi {
     };
 }
 
-check_call_site_abi!()
+check_call_site_abi!();

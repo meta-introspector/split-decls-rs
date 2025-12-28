@@ -4,4 +4,4 @@ macro_rules! USIZE_BYTES {
     };
 }
 
-USIZE_BYTES!()
+USIZE_BYTES!();

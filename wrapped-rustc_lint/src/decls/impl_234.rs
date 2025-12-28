@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        LateContext!();
         IfLetRescope!();
+        LateContext!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_234 {
     };
 }
 
-impl_234!()
+impl_234!();

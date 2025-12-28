@@ -4,4 +4,4 @@ macro_rules! MAX_HUFF_TABLES {
     };
 }
 
-MAX_HUFF_TABLES!()
+MAX_HUFF_TABLES!();

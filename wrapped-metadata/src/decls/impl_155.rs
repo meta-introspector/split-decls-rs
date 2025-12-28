@@ -1,19 +1,19 @@
 macro_rules! deps {
     () => {
-        Constant!();
-        NestedClass!();
-        File!();
-        IMAGE_SECTION_HEADER!();
-        METADATA_HEADER!();
-        ClassLayout!();
-        Attribute!();
-        IMAGE_FILE_HEADER!();
-        STREAM_HEADER!();
-        IMAGE_DOS_HEADER!();
-        IMAGE_OPTIONAL_HEADER32!();
-        IMAGE_COR20_HEADER!();
-        ImplMap!();
         IMAGE_DATA_DIRECTORY!();
+        NestedClass!();
+        STREAM_HEADER!();
+        ClassLayout!();
+        File!();
+        IMAGE_FILE_HEADER!();
+        IMAGE_OPTIONAL_HEADER32!();
+        ImplMap!();
+        METADATA_HEADER!();
+        IMAGE_DOS_HEADER!();
+        IMAGE_SECTION_HEADER!();
+        IMAGE_COR20_HEADER!();
+        Attribute!();
+        Constant!();
         GenericParam!();
     };
 }
@@ -25,4 +25,4 @@ macro_rules! impl_155 {
     };
 }
 
-impl_155!()
+impl_155!();

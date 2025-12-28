@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Simple!();
         Braced!();
         Hyphenated!();
-        Simple!();
         Urn!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! macro_73 {
     };
 }
 
-macro_73!()
+macro_73!();

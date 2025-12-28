@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Result!();
         Error!();
         Filter!();
-        Result!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! round {
     };
 }
 
-round!()
+round!();

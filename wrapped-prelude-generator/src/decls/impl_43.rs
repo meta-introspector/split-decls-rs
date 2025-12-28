@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Declaration!();
         DeclarationInstance!();
+        Declaration!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_43 {
     };
 }
 
-impl_43!()
+impl_43!();

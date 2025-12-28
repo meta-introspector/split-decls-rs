@@ -4,4 +4,4 @@ macro_rules! add_configuration {
     };
 }
 
-add_configuration!()
+add_configuration!();

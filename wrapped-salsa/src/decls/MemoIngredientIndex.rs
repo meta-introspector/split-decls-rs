@@ -4,4 +4,4 @@ macro_rules! MemoIngredientIndex {
     };
 }
 
-MemoIngredientIndex!()
+MemoIngredientIndex!();

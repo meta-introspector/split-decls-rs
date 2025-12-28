@@ -4,4 +4,4 @@ macro_rules! other_256 {
     };
 }
 
-other_256!()
+other_256!();

@@ -11,4 +11,4 @@ macro_rules! validate_visibility {
     };
 }
 
-validate_visibility!()
+validate_visibility!();

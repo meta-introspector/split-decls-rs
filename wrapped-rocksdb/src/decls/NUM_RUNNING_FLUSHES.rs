@@ -11,4 +11,4 @@ macro_rules! NUM_RUNNING_FLUSHES {
     };
 }
 
-NUM_RUNNING_FLUSHES!()
+NUM_RUNNING_FLUSHES!();

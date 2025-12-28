@@ -4,4 +4,4 @@ macro_rules! spooled {
     };
 }
 
-spooled!()
+spooled!();

@@ -4,4 +4,4 @@ macro_rules! PatternInBodiless {
     };
 }
 
-PatternInBodiless!()
+PatternInBodiless!();

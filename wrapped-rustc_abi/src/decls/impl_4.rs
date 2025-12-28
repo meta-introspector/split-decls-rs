@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        Integer!();
-        FieldsShape!();
+        Float!();
         Variants!();
+        Primitive!();
         HomogeneousAggregate!();
         Scalar!();
-        Size!();
+        FieldsShape!();
         Heterogeneous!();
-        Float!();
+        Integer!();
         BackendRepr!();
-        Primitive!();
+        Size!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_4 {
     };
 }
 
-impl_4!()
+impl_4!();

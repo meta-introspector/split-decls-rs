@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        PlaceInfo!();
         TrackElem!();
+        PlaceInfo!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Map {
     };
 }
 
-Map!()
+Map!();

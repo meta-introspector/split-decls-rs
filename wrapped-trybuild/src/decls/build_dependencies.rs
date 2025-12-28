@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Project!();
-        Error!();
         Result!();
+        Error!();
+        Project!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! build_dependencies {
     };
 }
 
-build_dependencies!()
+build_dependencies!();

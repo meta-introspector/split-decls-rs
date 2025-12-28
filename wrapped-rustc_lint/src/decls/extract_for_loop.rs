@@ -4,4 +4,4 @@ macro_rules! extract_for_loop {
     };
 }
 
-extract_for_loop!()
+extract_for_loop!();

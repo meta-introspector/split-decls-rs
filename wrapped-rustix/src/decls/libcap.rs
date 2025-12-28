@@ -4,4 +4,4 @@ macro_rules! libcap {
     };
 }
 
-libcap!()
+libcap!();

@@ -4,4 +4,4 @@ macro_rules! UnrecognizedReprHint {
     };
 }
 
-UnrecognizedReprHint!()
+UnrecognizedReprHint!();

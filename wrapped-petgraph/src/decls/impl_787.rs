@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Somes!();
         Node!();
+        Somes!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_787 {
     };
 }
 
-impl_787!()
+impl_787!();

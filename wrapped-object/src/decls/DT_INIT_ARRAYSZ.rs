@@ -4,4 +4,4 @@ macro_rules! DT_INIT_ARRAYSZ {
     };
 }
 
-DT_INIT_ARRAYSZ!()
+DT_INIT_ARRAYSZ!();

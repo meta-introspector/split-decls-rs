@@ -11,4 +11,4 @@ macro_rules! SpanMap {
     };
 }
 
-SpanMap!()
+SpanMap!();

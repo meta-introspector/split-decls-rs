@@ -11,4 +11,4 @@ macro_rules! as_trait_assoc_def {
     };
 }
 
-as_trait_assoc_def!()
+as_trait_assoc_def!();

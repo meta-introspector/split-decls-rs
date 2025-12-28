@@ -4,4 +4,4 @@ macro_rules! PT_HP_CORE_SHM {
     };
 }
 
-PT_HP_CORE_SHM!()
+PT_HP_CORE_SHM!();

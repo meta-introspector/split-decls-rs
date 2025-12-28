@@ -4,4 +4,4 @@ macro_rules! HEUR_MIN_COST {
     };
 }
 
-HEUR_MIN_COST!()
+HEUR_MIN_COST!();

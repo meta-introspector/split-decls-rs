@@ -4,4 +4,4 @@ macro_rules! R_MICROBLAZE_COPY {
     };
 }
 
-R_MICROBLAZE_COPY!()
+R_MICROBLAZE_COPY!();

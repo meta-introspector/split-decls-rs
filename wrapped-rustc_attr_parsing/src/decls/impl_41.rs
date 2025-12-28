@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        Stage!();
         NoArgsAttributeParser!();
         AllowedTargets!();
-        OnDuplicate!();
         TrackCallerParser!();
-        Stage!();
+        OnDuplicate!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_41 {
     };
 }
 
-impl_41!()
+impl_41!();

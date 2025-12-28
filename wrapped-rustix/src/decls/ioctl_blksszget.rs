@@ -12,4 +12,4 @@ macro_rules! ioctl_blksszget {
     };
 }
 
-ioctl_blksszget!()
+ioctl_blksszget!();

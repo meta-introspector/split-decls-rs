@@ -4,4 +4,4 @@ macro_rules! PPC64_OPT_TLS {
     };
 }
 
-PPC64_OPT_TLS!()
+PPC64_OPT_TLS!();

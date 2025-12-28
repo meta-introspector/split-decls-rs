@@ -4,4 +4,4 @@ macro_rules! PrivateItemsInPublicInterfacesChecker {
     };
 }
 
-PrivateItemsInPublicInterfacesChecker!()
+PrivateItemsInPublicInterfacesChecker!();

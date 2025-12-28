@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Counters!();
         NFA!();
-        SparseSet!();
-        StateID!();
         PikeVM!();
+        Counters!();
+        StateID!();
+        SparseSet!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_555 {
     };
 }
 
-impl_555!()
+impl_555!();

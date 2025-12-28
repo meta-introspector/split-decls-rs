@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        SerializeInlineTable!();
         SerializeDatetime!();
         SerializeMap!();
+        SerializeInlineTable!();
         Table!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_358 {
     };
 }
 
-impl_358!()
+impl_358!();

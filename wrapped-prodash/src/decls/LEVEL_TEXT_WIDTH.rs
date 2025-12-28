@@ -4,4 +4,4 @@ macro_rules! LEVEL_TEXT_WIDTH {
     };
 }
 
-LEVEL_TEXT_WIDTH!()
+LEVEL_TEXT_WIDTH!();

@@ -4,4 +4,4 @@ macro_rules! IntoSpans {
     };
 }
 
-IntoSpans!()
+IntoSpans!();

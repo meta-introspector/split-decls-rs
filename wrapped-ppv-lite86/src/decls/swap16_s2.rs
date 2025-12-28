@@ -4,4 +4,4 @@ macro_rules! swap16_s2 {
     };
 }
 
-swap16_s2!()
+swap16_s2!();

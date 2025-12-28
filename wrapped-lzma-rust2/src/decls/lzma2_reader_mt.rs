@@ -4,4 +4,4 @@ macro_rules! lzma2_reader_mt {
     };
 }
 
-lzma2_reader_mt!()
+lzma2_reader_mt!();

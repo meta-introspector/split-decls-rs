@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Node!();
         TeraParser!();
+        Node!();
         Error!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! parse {
     };
 }
 
-parse!()
+parse!();

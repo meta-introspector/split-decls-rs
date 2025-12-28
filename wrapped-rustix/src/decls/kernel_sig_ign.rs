@@ -11,4 +11,4 @@ macro_rules! kernel_sig_ign {
     };
 }
 
-kernel_sig_ign!()
+kernel_sig_ign!();

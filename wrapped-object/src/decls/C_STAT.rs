@@ -4,4 +4,4 @@ macro_rules! C_STAT {
     };
 }
 
-C_STAT!()
+C_STAT!();

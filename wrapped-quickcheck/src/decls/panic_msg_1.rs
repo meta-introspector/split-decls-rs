@@ -4,4 +4,4 @@ macro_rules! panic_msg_1 {
     };
 }
 
-panic_msg_1!()
+panic_msg_1!();

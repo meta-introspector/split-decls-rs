@@ -11,4 +11,4 @@ macro_rules! fcntl_getpipe_size {
     };
 }
 
-fcntl_getpipe_size!()
+fcntl_getpipe_size!();

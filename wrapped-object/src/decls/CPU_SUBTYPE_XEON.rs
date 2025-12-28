@@ -4,4 +4,4 @@ macro_rules! CPU_SUBTYPE_XEON {
     };
 }
 
-CPU_SUBTYPE_XEON!()
+CPU_SUBTYPE_XEON!();

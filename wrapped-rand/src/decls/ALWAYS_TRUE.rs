@@ -4,4 +4,4 @@ macro_rules! ALWAYS_TRUE {
     };
 }
 
-ALWAYS_TRUE!()
+ALWAYS_TRUE!();

@@ -4,4 +4,4 @@ macro_rules! DatetimeOrTable {
     };
 }
 
-DatetimeOrTable!()
+DatetimeOrTable!();

@@ -13,4 +13,4 @@ macro_rules! test_normalize {
     };
 }
 
-test_normalize!()
+test_normalize!();

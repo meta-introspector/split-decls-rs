@@ -4,4 +4,4 @@ macro_rules! ingredient_cache {
     };
 }
 
-ingredient_cache!()
+ingredient_cache!();

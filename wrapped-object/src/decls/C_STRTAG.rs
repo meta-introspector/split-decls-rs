@@ -4,4 +4,4 @@ macro_rules! C_STRTAG {
     };
 }
 
-C_STRTAG!()
+C_STRTAG!();

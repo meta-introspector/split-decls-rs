@@ -11,4 +11,4 @@ macro_rules! io_uring_sync_cancel_reg {
     };
 }
 
-io_uring_sync_cancel_reg!()
+io_uring_sync_cancel_reg!();

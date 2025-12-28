@@ -4,4 +4,4 @@ macro_rules! CouldntDumpMonoStats {
     };
 }
 
-CouldntDumpMonoStats!()
+CouldntDumpMonoStats!();

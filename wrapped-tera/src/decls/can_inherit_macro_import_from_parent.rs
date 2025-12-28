@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Context!();
         Tera!();
+        Context!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! can_inherit_macro_import_from_parent {
     };
 }
 
-can_inherit_macro_import_from_parent!()
+can_inherit_macro_import_from_parent!();

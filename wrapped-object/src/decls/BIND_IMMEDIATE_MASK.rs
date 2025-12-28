@@ -4,4 +4,4 @@ macro_rules! BIND_IMMEDIATE_MASK {
     };
 }
 
-BIND_IMMEDIATE_MASK!()
+BIND_IMMEDIATE_MASK!();

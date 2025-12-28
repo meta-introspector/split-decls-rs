@@ -4,4 +4,4 @@ macro_rules! intersperse {
     };
 }
 
-intersperse!()
+intersperse!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        AcceptContext!();
         Stage!();
+        AcceptContext!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! parse_phase {
     };
 }
 
-parse_phase!()
+parse_phase!();

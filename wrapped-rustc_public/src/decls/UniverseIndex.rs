@@ -4,4 +4,4 @@ macro_rules! UniverseIndex {
     };
 }
 
-UniverseIndex!()
+UniverseIndex!();

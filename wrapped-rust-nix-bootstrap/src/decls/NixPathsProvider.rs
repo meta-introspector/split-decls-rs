@@ -4,4 +4,4 @@ macro_rules! NixPathsProvider {
     };
 }
 
-NixPathsProvider!()
+NixPathsProvider!();

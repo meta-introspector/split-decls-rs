@@ -4,4 +4,4 @@ macro_rules! NakedFunctionTestingAttribute {
     };
 }
 
-NakedFunctionTestingAttribute!()
+NakedFunctionTestingAttribute!();

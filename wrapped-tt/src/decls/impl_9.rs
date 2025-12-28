@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
         Leaf!();
-        TtElement!();
-        Punct!();
-        Spacing!();
+        TtIterSavepoint!();
         TtIter!();
+        TtElement!();
+        TokenTreesView!();
+        Punct!();
         TokenTree!();
         Literal!();
-        TtIterSavepoint!();
-        Subtree!();
         Ident!();
-        TokenTreesView!();
+        Spacing!();
+        Subtree!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_9 {
     };
 }
 
-impl_9!()
+impl_9!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ReadRef!();
         FileHeader!();
+        ReadRef!();
         SymbolBytes!();
         StringTable!();
     };
@@ -14,4 +14,4 @@ macro_rules! SymbolTable {
     };
 }
 
-SymbolTable!()
+SymbolTable!();

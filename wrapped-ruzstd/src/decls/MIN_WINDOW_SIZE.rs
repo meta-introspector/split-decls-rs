@@ -4,4 +4,4 @@ macro_rules! MIN_WINDOW_SIZE {
     };
 }
 
-MIN_WINDOW_SIZE!()
+MIN_WINDOW_SIZE!();

@@ -11,4 +11,4 @@ macro_rules! unsafe_impl_invariants_eq {
     };
 }
 
-unsafe_impl_invariants_eq!()
+unsafe_impl_invariants_eq!();

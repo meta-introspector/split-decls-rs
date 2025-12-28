@@ -4,4 +4,4 @@ macro_rules! MIN_TREE_WIDTH {
     };
 }
 
-MIN_TREE_WIDTH!()
+MIN_TREE_WIDTH!();

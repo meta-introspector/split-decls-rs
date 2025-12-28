@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Executor!();
-        Write!();
-        Read!();
         Error!();
+        Executor!();
+        Read!();
+        Write!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! h2_client {
     };
 }
 
-h2_client!()
+h2_client!();

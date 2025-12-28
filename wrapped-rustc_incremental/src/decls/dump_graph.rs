@@ -12,4 +12,4 @@ macro_rules! dump_graph {
     };
 }
 
-dump_graph!()
+dump_graph!();

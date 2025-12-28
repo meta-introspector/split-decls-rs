@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Number!();
-        Float!();
         ParserNumber!();
+        Float!();
+        Number!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_558 {
     };
 }
 
-impl_558!()
+impl_558!();

@@ -4,4 +4,4 @@ macro_rules! IncompatibleWasmLink {
     };
 }
 
-IncompatibleWasmLink!()
+IncompatibleWasmLink!();

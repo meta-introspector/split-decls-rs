@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Value!();
-        Array!();
-        Error!();
         TraceScope!();
         State!();
+        Array!();
+        Value!();
+        Error!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! on_array {
     };
 }
 
-on_array!()
+on_array!();

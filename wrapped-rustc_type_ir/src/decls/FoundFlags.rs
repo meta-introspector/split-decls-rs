@@ -4,4 +4,4 @@ macro_rules! FoundFlags {
     };
 }
 
-FoundFlags!()
+FoundFlags!();

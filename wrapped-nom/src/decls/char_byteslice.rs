@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         IResult!();
         Err!();
-        Char!();
         ErrorKind!();
+        Char!();
         Error!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! char_byteslice {
     };
 }
 
-char_byteslice!()
+char_byteslice!();

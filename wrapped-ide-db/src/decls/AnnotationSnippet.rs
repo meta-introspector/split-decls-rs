@@ -4,4 +4,4 @@ macro_rules! AnnotationSnippet {
     };
 }
 
-AnnotationSnippet!()
+AnnotationSnippet!();

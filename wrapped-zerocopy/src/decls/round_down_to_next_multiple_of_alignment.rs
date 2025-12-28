@@ -4,4 +4,4 @@ macro_rules! round_down_to_next_multiple_of_alignment {
     };
 }
 
-round_down_to_next_multiple_of_alignment!()
+round_down_to_next_multiple_of_alignment!();

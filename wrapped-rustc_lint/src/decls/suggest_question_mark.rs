@@ -11,4 +11,4 @@ macro_rules! suggest_question_mark {
     };
 }
 
-suggest_question_mark!()
+suggest_question_mark!();

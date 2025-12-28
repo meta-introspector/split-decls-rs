@@ -4,4 +4,4 @@ macro_rules! DummyParser {
     };
 }
 
-DummyParser!()
+DummyParser!();

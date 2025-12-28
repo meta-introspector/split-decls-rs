@@ -1,20 +1,20 @@
 macro_rules! deps {
     () => {
-        CycleHead!();
-        CacheData!();
         PathKind!();
-        Cx!();
-        StackEntry!();
+        HeadUsages!();
         Stack!();
         SearchGraph!();
+        ProvisionalCacheEntry!();
+        AvailableDepth!();
+        CacheData!();
+        CycleHead!();
         CandidateHeadUsages!();
         EvaluationResult!();
-        AvailableDepth!();
-        ProvisionalCacheEntry!();
         Delegate!();
-        UpdateParentGoalCtxt!();
-        HeadUsages!();
         NestedGoals!();
+        StackEntry!();
+        Cx!();
+        UpdateParentGoalCtxt!();
     };
 }
 
@@ -25,4 +25,4 @@ macro_rules! impl_164 {
     };
 }
 
-impl_164!()
+impl_164!();

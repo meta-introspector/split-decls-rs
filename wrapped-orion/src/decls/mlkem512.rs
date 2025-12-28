@@ -4,4 +4,4 @@ macro_rules! mlkem512 {
     };
 }
 
-mlkem512!()
+mlkem512!();

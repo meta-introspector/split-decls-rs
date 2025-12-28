@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        Field!();
-        VecAttr!();
         Default!();
         MultiName!();
-        Attr!();
+        Field!();
         Variant!();
-        Ctxt!();
-        Name!();
+        Attr!();
+        VecAttr!();
         BoolAttr!();
+        Name!();
+        Ctxt!();
         RenameAllRules!();
     };
 }
@@ -20,4 +20,4 @@ macro_rules! impl_37 {
     };
 }
 
-impl_37!()
+impl_37!();

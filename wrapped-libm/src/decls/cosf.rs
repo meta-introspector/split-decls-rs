@@ -4,4 +4,4 @@ macro_rules! cosf {
     };
 }
 
-cosf!()
+cosf!();

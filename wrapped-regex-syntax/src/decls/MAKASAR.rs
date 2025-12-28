@@ -4,4 +4,4 @@ macro_rules! MAKASAR {
     };
 }
 
-MAKASAR!()
+MAKASAR!();

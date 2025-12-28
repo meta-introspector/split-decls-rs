@@ -11,4 +11,4 @@ macro_rules! mir_drops_elaborated_and_const_checked {
     };
 }
 
-mir_drops_elaborated_and_const_checked!()
+mir_drops_elaborated_and_const_checked!();

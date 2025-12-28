@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         Dep!();
-        CfgList!();
-        EditionData!();
         CrateSource!();
         BuildData!();
+        EditionData!();
+        CfgList!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! CrateData {
     };
 }
 
-CrateData!()
+CrateData!();

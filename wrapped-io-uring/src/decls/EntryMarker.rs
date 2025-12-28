@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Entry128!();
         Entry!();
+        Entry128!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! EntryMarker {
     };
 }
 
-EntryMarker!()
+EntryMarker!();

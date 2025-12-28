@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        SmallDroppable!();
         TypedArena!();
+        SmallDroppable!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! test_typed_arena_drop_small_count {
     };
 }
 
-test_typed_arena_drop_small_count!()
+test_typed_arena_drop_small_count!();

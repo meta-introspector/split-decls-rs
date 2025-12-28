@@ -4,4 +4,4 @@ macro_rules! sinf {
     };
 }
 
-sinf!()
+sinf!();

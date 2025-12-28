@@ -4,4 +4,4 @@ macro_rules! foreign_modules {
     };
 }
 
-foreign_modules!()
+foreign_modules!();

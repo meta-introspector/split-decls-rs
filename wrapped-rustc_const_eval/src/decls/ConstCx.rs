@@ -4,4 +4,4 @@ macro_rules! ConstCx {
     };
 }
 
-ConstCx!()
+ConstCx!();

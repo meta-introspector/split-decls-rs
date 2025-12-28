@@ -4,4 +4,4 @@ macro_rules! OPAD_SYMBOL {
     };
 }
 
-OPAD_SYMBOL!()
+OPAD_SYMBOL!();

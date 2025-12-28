@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        MergeFn!();
         MergeOperatorCallback!();
         MergeOperands!();
-        MergeFn!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! partial_merge_callback {
     };
 }
 
-partial_merge_callback!()
+partial_merge_callback!();

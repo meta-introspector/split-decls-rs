@@ -4,4 +4,4 @@ macro_rules! IntersperseConsumer {
     };
 }
 
-IntersperseConsumer!()
+IntersperseConsumer!();

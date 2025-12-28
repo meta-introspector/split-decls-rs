@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Machine!();
         FnVal!();
         FnArg!();
+        Machine!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! EvaluatedCalleeAndArgs {
     };
 }
 
-EvaluatedCalleeAndArgs!()
+EvaluatedCalleeAndArgs!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DFA!();
         LookMatcher!();
+        DFA!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Start {
     };
 }
 
-Start!()
+Start!();

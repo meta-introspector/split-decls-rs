@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Success!();
-        Cx!();
         WithOverflow!();
+        Cx!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! CacheEntry {
     };
 }
 
-CacheEntry!()
+CacheEntry!();

@@ -4,4 +4,4 @@ macro_rules! lower_n_halfway {
     };
 }
 
-lower_n_halfway!()
+lower_n_halfway!();

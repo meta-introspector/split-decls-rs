@@ -4,4 +4,4 @@ macro_rules! add_gnu_property_note {
     };
 }
 
-add_gnu_property_note!()
+add_gnu_property_note!();

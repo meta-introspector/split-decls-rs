@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        MetaItemParser!();
+        Stage!();
         AcceptContext!();
-        EmptyLinkName!();
+        MetaItemParser!();
         ImportNameTypeX86!();
+        EmptyLinkName!();
         LinkFrameworkApple!();
         LinkParser!();
-        Stage!();
         RawDylibOnlyWindows!();
     };
 }
@@ -18,4 +18,4 @@ macro_rules! impl_89 {
     };
 }
 
-impl_89!()
+impl_89!();

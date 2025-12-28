@@ -4,4 +4,4 @@ macro_rules! simple_type {
     };
 }
 
-simple_type!()
+simple_type!();

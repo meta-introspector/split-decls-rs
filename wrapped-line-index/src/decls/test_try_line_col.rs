@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        LineCol!();
         LineIndex!();
+        LineCol!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! test_try_line_col {
     };
 }
 
-test_try_line_col!()
+test_try_line_col!();

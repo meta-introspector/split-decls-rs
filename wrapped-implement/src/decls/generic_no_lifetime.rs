@@ -4,4 +4,4 @@ macro_rules! generic_no_lifetime {
     };
 }
 
-generic_no_lifetime!()
+generic_no_lifetime!();

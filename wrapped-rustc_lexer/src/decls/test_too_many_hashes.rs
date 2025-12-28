@@ -11,4 +11,4 @@ macro_rules! test_too_many_hashes {
     };
 }
 
-test_too_many_hashes!()
+test_too_many_hashes!();

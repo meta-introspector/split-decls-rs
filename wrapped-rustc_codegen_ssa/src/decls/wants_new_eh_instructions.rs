@@ -4,4 +4,4 @@ macro_rules! wants_new_eh_instructions {
     };
 }
 
-wants_new_eh_instructions!()
+wants_new_eh_instructions!();

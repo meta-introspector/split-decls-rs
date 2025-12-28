@@ -4,4 +4,4 @@ macro_rules! R_IA64_IPLTMSB {
     };
 }
 
-R_IA64_IPLTMSB!()
+R_IA64_IPLTMSB!();

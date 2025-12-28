@@ -4,4 +4,4 @@ macro_rules! AssemblyRef {
     };
 }
 
-AssemblyRef!()
+AssemblyRef!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        JsonTimePassesEntry!();
         TimePassesFormat!();
+        JsonTimePassesEntry!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! print_time_passes_entry {
     };
 }
 
-print_time_passes_entry!()
+print_time_passes_entry!();

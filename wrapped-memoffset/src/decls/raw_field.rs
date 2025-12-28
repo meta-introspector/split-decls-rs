@@ -4,4 +4,4 @@ macro_rules! raw_field {
     };
 }
 
-raw_field!()
+raw_field!();

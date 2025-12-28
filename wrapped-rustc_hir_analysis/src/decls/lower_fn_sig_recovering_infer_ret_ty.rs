@@ -11,4 +11,4 @@ macro_rules! lower_fn_sig_recovering_infer_ret_ty {
     };
 }
 
-lower_fn_sig_recovering_infer_ret_ty!()
+lower_fn_sig_recovering_infer_ret_ty!();

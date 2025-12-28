@@ -36,4 +36,4 @@ fn main() {
     };
 }
 
-mkbuildrs_with_macros_impl!()
+mkbuildrs_with_macros_impl!();

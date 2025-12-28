@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        DFA!();
-        Input!();
-        OverlappingState!();
-        NFA!();
         HalfMatch!();
+        OverlappingState!();
+        Input!();
+        NFA!();
         Match!();
+        DFA!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! MatchKind {
     };
 }
 
-MatchKind!()
+MatchKind!();

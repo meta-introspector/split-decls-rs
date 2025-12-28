@@ -4,4 +4,4 @@ macro_rules! stop {
     };
 }
 
-stop!()
+stop!();

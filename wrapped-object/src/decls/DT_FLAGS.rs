@@ -4,4 +4,4 @@ macro_rules! DT_FLAGS {
     };
 }
 
-DT_FLAGS!()
+DT_FLAGS!();

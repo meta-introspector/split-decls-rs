@@ -11,4 +11,4 @@ macro_rules! should_allow_deprecated {
     };
 }
 
-should_allow_deprecated!()
+should_allow_deprecated!();

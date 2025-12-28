@@ -4,4 +4,4 @@ macro_rules! coder_get_dict_size {
     };
 }
 
-coder_get_dict_size!()
+coder_get_dict_size!();

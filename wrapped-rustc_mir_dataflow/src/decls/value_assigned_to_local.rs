@@ -4,4 +4,4 @@ macro_rules! value_assigned_to_local {
     };
 }
 
-value_assigned_to_local!()
+value_assigned_to_local!();

@@ -4,4 +4,4 @@ macro_rules! check_enum {
     };
 }
 
-check_enum!()
+check_enum!();

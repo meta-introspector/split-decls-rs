@@ -4,4 +4,4 @@ macro_rules! destructure_const {
     };
 }
 
-destructure_const!()
+destructure_const!();

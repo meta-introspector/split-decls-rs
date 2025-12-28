@@ -4,4 +4,4 @@ macro_rules! request_code_read {
     };
 }
 
-request_code_read!()
+request_code_read!();

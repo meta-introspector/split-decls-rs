@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
         GenericArgs!();
-        CanonicalState!();
-        Goal!();
-        Interner!();
-        Probe!();
         Predicate!();
+        Interner!();
         GoalSource!();
+        Probe!();
         Certainty!();
+        Goal!();
+        CanonicalState!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! ProbeStep {
     };
 }
 
-ProbeStep!()
+ProbeStep!();

@@ -4,4 +4,4 @@ macro_rules! semantic {
     };
 }
 
-semantic!()
+semantic!();

@@ -4,4 +4,4 @@ macro_rules! TykindKind {
     };
 }
 
-TykindKind!()
+TykindKind!();

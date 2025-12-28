@@ -4,4 +4,4 @@ macro_rules! project_goals {
     };
 }
 
-project_goals!()
+project_goals!();

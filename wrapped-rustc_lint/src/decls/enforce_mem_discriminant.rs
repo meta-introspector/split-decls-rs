@@ -12,4 +12,4 @@ macro_rules! enforce_mem_discriminant {
     };
 }
 
-enforce_mem_discriminant!()
+enforce_mem_discriminant!();

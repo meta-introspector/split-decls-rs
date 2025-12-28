@@ -4,4 +4,4 @@ macro_rules! strcursor {
     };
 }
 
-strcursor!()
+strcursor!();

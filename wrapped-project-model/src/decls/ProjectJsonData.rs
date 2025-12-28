@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        RunnableData!();
         CfgList!();
         CrateData!();
-        RunnableData!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! ProjectJsonData {
     };
 }
 
-ProjectJsonData!()
+ProjectJsonData!();

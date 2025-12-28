@@ -4,4 +4,4 @@ macro_rules! unstable {
     };
 }
 
-unstable!()
+unstable!();

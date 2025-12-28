@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        ConstArg!();
+        AssocItemConstraint!();
+        AssocItemConstraintKind!();
         Term!();
         Ty!();
-        AssocItemConstraintKind!();
-        AssocItemConstraint!();
-        ConstArg!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_256 {
     };
 }
 
-impl_256!()
+impl_256!();

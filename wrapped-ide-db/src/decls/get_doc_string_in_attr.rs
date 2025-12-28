@@ -4,4 +4,4 @@ macro_rules! get_doc_string_in_attr {
     };
 }
 
-get_doc_string_in_attr!()
+get_doc_string_in_attr!();

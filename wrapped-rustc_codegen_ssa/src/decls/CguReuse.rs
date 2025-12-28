@@ -4,4 +4,4 @@ macro_rules! CguReuse {
     };
 }
 
-CguReuse!()
+CguReuse!();

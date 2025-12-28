@@ -4,4 +4,4 @@ macro_rules! TrieSetSlice {
     };
 }
 
-TrieSetSlice!()
+TrieSetSlice!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        VariantIdx!();
-        BridgeTys!();
         Stable!();
+        BridgeTys!();
         VariantsShape!();
+        VariantIdx!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_108 {
     };
 }
 
-impl_108!()
+impl_108!();

@@ -4,4 +4,4 @@ macro_rules! filename_and_frag_for_def {
     };
 }
 
-filename_and_frag_for_def!()
+filename_and_frag_for_def!();

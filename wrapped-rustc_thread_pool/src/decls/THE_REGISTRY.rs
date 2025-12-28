@@ -11,4 +11,4 @@ macro_rules! THE_REGISTRY {
     };
 }
 
-THE_REGISTRY!()
+THE_REGISTRY!();

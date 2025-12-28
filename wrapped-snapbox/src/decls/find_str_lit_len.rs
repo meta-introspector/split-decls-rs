@@ -11,4 +11,4 @@ macro_rules! find_str_lit_len {
     };
 }
 
-find_str_lit_len!()
+find_str_lit_len!();

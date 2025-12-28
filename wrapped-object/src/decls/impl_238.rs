@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        ReadRef!();
-        CoffHeader!();
         CoffSymbolIterator!();
         CoffCommon!();
         SymbolIndex!();
+        ReadRef!();
+        CoffHeader!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_238 {
     };
 }
 
-impl_238!()
+impl_238!();

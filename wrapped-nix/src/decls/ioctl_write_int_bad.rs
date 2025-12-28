@@ -11,4 +11,4 @@ macro_rules! ioctl_write_int_bad {
     };
 }
 
-ioctl_write_int_bad!()
+ioctl_write_int_bad!();

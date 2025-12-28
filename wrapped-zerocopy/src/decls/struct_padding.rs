@@ -4,4 +4,4 @@ macro_rules! struct_padding {
     };
 }
 
-struct_padding!()
+struct_padding!();

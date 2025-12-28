@@ -4,4 +4,4 @@ macro_rules! UnconstrainedGenericParameter {
     };
 }
 
-UnconstrainedGenericParameter!()
+UnconstrainedGenericParameter!();

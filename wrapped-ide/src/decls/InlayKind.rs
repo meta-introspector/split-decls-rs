@@ -4,4 +4,4 @@ macro_rules! InlayKind {
     };
 }
 
-InlayKind!()
+InlayKind!();

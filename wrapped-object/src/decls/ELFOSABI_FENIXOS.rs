@@ -4,4 +4,4 @@ macro_rules! ELFOSABI_FENIXOS {
     };
 }
 
-ELFOSABI_FENIXOS!()
+ELFOSABI_FENIXOS!();

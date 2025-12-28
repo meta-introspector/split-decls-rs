@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        EdgeRef!();
         BoundedMeasure!();
         NegativeCycle!();
+        EdgeRef!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! _floyd_warshall_path {
     };
 }
 
-_floyd_warshall_path!()
+_floyd_warshall_path!();

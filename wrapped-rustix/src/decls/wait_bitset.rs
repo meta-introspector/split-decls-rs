@@ -12,4 +12,4 @@ macro_rules! wait_bitset {
     };
 }
 
-wait_bitset!()
+wait_bitset!();

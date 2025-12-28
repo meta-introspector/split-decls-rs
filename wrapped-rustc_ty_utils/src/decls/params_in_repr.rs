@@ -4,4 +4,4 @@ macro_rules! params_in_repr {
     };
 }
 
-params_in_repr!()
+params_in_repr!();

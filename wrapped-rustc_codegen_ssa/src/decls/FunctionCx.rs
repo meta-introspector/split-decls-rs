@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        BuilderMethods!();
-        CachedLlbb!();
-        CleanupKind!();
         Locals!();
-        FunctionDebugContext!();
-        PerLocalVarDebugInfoIndexVec!();
+        CleanupKind!();
         OperandRef!();
+        PerLocalVarDebugInfoIndexVec!();
+        FunctionDebugContext!();
+        CachedLlbb!();
         PlaceRef!();
+        BuilderMethods!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! FunctionCx {
     };
 }
 
-FunctionCx!()
+FunctionCx!();

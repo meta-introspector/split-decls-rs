@@ -4,4 +4,4 @@ macro_rules! as_ptr {
     };
 }
 
-as_ptr!()
+as_ptr!();

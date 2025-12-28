@@ -12,4 +12,4 @@ macro_rules! build_mismatch_suggestion {
     };
 }
 
-build_mismatch_suggestion!()
+build_mismatch_suggestion!();

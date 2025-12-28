@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        KnownLayout!();
         FromBytes!();
-        Unaligned!();
+        KnownLayout!();
         IntoBytes!();
+        Unaligned!();
         Immutable!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! testutil {
     };
 }
 
-testutil!()
+testutil!();

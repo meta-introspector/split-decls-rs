@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Path!();
         QSelf!();
+        Inline!();
         Walkable!();
         AnonConst!();
-        Inline!();
+        Path!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! InlineAsmSym {
     };
 }
 
-InlineAsmSym!()
+InlineAsmSym!();

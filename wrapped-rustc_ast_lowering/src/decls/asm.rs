@@ -4,4 +4,4 @@ macro_rules! asm {
     };
 }
 
-asm!()
+asm!();

@@ -4,4 +4,4 @@ macro_rules! try_eat_dollar {
     };
 }
 
-try_eat_dollar!()
+try_eat_dollar!();

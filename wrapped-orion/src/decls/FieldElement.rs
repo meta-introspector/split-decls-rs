@@ -4,4 +4,4 @@ macro_rules! FieldElement {
     };
 }
 
-FieldElement!()
+FieldElement!();

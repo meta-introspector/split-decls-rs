@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Scalar!();
         Niche!();
-        HasDataLayout!();
-        WrappingRange!();
         Size!();
+        HasDataLayout!();
+        Scalar!();
+        WrappingRange!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_107 {
     };
 }
 
-impl_107!()
+impl_107!();

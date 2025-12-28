@@ -4,4 +4,4 @@ macro_rules! list_metadata {
     };
 }
 
-list_metadata!()
+list_metadata!();

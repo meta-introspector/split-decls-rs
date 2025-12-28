@@ -4,4 +4,4 @@ macro_rules! normalized_levenshtein {
     };
 }
 
-normalized_levenshtein!()
+normalized_levenshtein!();

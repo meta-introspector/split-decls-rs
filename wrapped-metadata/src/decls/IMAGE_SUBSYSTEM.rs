@@ -4,4 +4,4 @@ macro_rules! IMAGE_SUBSYSTEM {
     };
 }
 
-IMAGE_SUBSYSTEM!()
+IMAGE_SUBSYSTEM!();

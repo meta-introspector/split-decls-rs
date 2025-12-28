@@ -1,24 +1,24 @@
 macro_rules! deps {
     () => {
-        LossyProvenanceInt2Ptr!();
         UseIsEmpty!();
-        LossyProvenanceInt2PtrSuggestion!();
-        FnCtxt!();
-        PtrCastAddAutoToObject!();
-        IntToWide!();
-        CastUnknownPointerSub!();
-        CannotCastToBool!();
-        TrivialCast!();
-        LossyProvenancePtr2IntSuggestion!();
         CastError!();
-        CastCheck!();
-        DerefImplsIsEmpty!();
-        CannotCastToBoolHelp!();
-        PointerKind!();
-        LossyProvenancePtr2Int!();
-        CastThinPointerToWidePointer!();
-        CastUnknownPointer!();
         CastEnumDrop!();
+        LossyProvenanceInt2PtrSuggestion!();
+        PointerKind!();
+        FnCtxt!();
+        CannotCastToBoolHelp!();
+        DerefImplsIsEmpty!();
+        CastUnknownPointer!();
+        PtrCastAddAutoToObject!();
+        CastThinPointerToWidePointer!();
+        LossyProvenancePtr2IntSuggestion!();
+        LossyProvenanceInt2Ptr!();
+        TrivialCast!();
+        IntToWide!();
+        LossyProvenancePtr2Int!();
+        CastUnknownPointerSub!();
+        CastCheck!();
+        CannotCastToBool!();
     };
 }
 
@@ -31,4 +31,4 @@ macro_rules! impl_18 {
     };
 }
 
-impl_18!()
+impl_18!();

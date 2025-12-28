@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         DataInner!();
-        Data!();
         Palette!();
+        Data!();
     };
 }
 
@@ -81,4 +81,4 @@ Hello World
     };
 }
 
-test!()
+test!();

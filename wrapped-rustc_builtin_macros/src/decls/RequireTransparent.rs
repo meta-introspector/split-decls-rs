@@ -4,4 +4,4 @@ macro_rules! RequireTransparent {
     };
 }
 
-RequireTransparent!()
+RequireTransparent!();

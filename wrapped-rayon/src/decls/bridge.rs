@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        IndexedParallelIterator!();
         Consumer!();
+        IndexedParallelIterator!();
         ProducerCallback!();
         Producer!();
     };
@@ -14,4 +14,4 @@ macro_rules! bridge {
     };
 }
 
-bridge!()
+bridge!();

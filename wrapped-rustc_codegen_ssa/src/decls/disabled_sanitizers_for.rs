@@ -4,4 +4,4 @@ macro_rules! disabled_sanitizers_for {
     };
 }
 
-disabled_sanitizers_for!()
+disabled_sanitizers_for!();

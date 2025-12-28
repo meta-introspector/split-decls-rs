@@ -11,4 +11,4 @@ macro_rules! load_binary_file {
     };
 }
 
-load_binary_file!()
+load_binary_file!();

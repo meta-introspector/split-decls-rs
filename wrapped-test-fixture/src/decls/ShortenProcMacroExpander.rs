@@ -4,4 +4,4 @@ macro_rules! ShortenProcMacroExpander {
     };
 }
 
-ShortenProcMacroExpander!()
+ShortenProcMacroExpander!();

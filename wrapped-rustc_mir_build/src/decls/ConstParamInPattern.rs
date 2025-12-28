@@ -4,4 +4,4 @@ macro_rules! ConstParamInPattern {
     };
 }
 
-ConstParamInPattern!()
+ConstParamInPattern!();

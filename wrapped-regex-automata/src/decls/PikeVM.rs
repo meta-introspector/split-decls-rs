@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        Match!();
+        NFA!();
         PatternID!();
         Anchored!();
         Config!();
-        NFA!();
-        Match!();
         PatternSet!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! PikeVM {
     };
 }
 
-PikeVM!()
+PikeVM!();

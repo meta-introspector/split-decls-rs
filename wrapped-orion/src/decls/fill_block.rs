@@ -4,4 +4,4 @@ macro_rules! fill_block {
     };
 }
 
-fill_block!()
+fill_block!();

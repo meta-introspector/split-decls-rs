@@ -4,4 +4,4 @@ macro_rules! add_trait_bound {
     };
 }
 
-add_trait_bound!()
+add_trait_bound!();

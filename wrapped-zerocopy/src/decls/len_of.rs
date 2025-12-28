@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        CastType!();
         DstLayout!();
         SizeInfo!();
         PointerMetadata!();
+        CastType!();
         MetadataCastError!();
         KnownLayout!();
     };
@@ -16,4 +16,4 @@ macro_rules! len_of {
     };
 }
 
-len_of!()
+len_of!();

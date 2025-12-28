@@ -12,4 +12,4 @@ macro_rules! from_slice {
     };
 }
 
-from_slice!()
+from_slice!();

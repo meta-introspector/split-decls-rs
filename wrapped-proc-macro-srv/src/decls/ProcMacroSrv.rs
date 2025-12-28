@@ -12,4 +12,4 @@ macro_rules! ProcMacroSrv {
     };
 }
 
-ProcMacroSrv!()
+ProcMacroSrv!();

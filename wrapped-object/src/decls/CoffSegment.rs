@@ -2,10 +2,10 @@ macro_rules! deps {
     () => {
         ReadRef!();
         ImageSectionHeader!();
-        ObjectSegment!();
-        CoffHeader!();
         CoffFile!();
         ImageFileHeader!();
+        CoffHeader!();
+        ObjectSegment!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! CoffSegment {
     };
 }
 
-CoffSegment!()
+CoffSegment!();

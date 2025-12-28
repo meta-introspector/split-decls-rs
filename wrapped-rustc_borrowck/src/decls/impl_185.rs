@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        RegionTracker!();
-        RegionDefinition!();
-        Representative!();
         PlaceholderReachability!();
+        RegionTracker!();
+        Representative!();
+        RegionDefinition!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_185 {
     };
 }
 
-impl_185!()
+impl_185!();

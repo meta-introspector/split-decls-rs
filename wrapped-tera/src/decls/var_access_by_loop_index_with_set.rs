@@ -18,4 +18,4 @@ macro_rules! var_access_by_loop_index_with_set {
     };
 }
 
-var_access_by_loop_index_with_set!()
+var_access_by_loop_index_with_set!();

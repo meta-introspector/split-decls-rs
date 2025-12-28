@@ -4,4 +4,4 @@ macro_rules! is_attribute_ident {
     };
 }
 
-is_attribute_ident!()
+is_attribute_ident!();

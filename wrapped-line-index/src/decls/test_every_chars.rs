@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        LineIndex!();
         WideEncoding!();
         LineCol!();
+        LineIndex!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! test_every_chars {
     };
 }
 
-test_every_chars!()
+test_every_chars!();

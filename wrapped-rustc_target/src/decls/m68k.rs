@@ -4,4 +4,4 @@ macro_rules! m68k {
     };
 }
 
-m68k!()
+m68k!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        ParserNode!();
-        Rule!();
         ParserExpr!();
+        Rule!();
+        ParserNode!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! left_recursion {
     };
 }
 
-left_recursion!()
+left_recursion!();

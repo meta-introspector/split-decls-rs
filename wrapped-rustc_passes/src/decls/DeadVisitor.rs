@@ -4,4 +4,4 @@ macro_rules! DeadVisitor {
     };
 }
 
-DeadVisitor!()
+DeadVisitor!();

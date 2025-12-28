@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Variations!();
         Context!();
+        Variations!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! diagnostics {
     };
 }
 
-diagnostics!()
+diagnostics!();

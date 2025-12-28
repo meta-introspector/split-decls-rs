@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        PolyTraitRef!();
-        PreciseCapturingArg!();
-        Trait!();
         LifetimeCtxt!();
+        PreciseCapturingArg!();
         Lifetime!();
+        Trait!();
         Walkable!();
+        PolyTraitRef!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! GenericBound {
     };
 }
 
-GenericBound!()
+GenericBound!();

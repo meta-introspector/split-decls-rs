@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        ThreadPoolBuildError!();
         ThreadPoolBuilder!();
         WorkerThread!();
+        ThreadPoolBuildError!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! cleared_current_thread {
     };
 }
 
-cleared_current_thread!()
+cleared_current_thread!();

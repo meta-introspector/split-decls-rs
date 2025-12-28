@@ -4,4 +4,4 @@ macro_rules! IMAGE_REL_IA64_SECTION {
     };
 }
 
-IMAGE_REL_IA64_SECTION!()
+IMAGE_REL_IA64_SECTION!();

@@ -11,4 +11,4 @@ macro_rules! set_socket_keepalive {
     };
 }
 
-set_socket_keepalive!()
+set_socket_keepalive!();

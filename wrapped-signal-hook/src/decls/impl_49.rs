@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        SignalsInfo!();
-        Forever!();
         Exfiltrator!();
-        PollResult!();
         Pending!();
+        PollResult!();
+        Forever!();
+        SignalsInfo!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_49 {
     };
 }
 
-impl_49!()
+impl_49!();

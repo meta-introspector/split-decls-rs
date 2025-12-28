@@ -4,4 +4,4 @@ macro_rules! UnusedVarMaybeCaptureRef {
     };
 }
 
-UnusedVarMaybeCaptureRef!()
+UnusedVarMaybeCaptureRef!();

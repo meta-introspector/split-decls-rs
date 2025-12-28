@@ -4,4 +4,4 @@ macro_rules! change_pair {
     };
 }
 
-change_pair!()
+change_pair!();

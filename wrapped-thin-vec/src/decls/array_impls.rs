@@ -11,4 +11,4 @@ macro_rules! array_impls {
     };
 }
 
-array_impls!()
+array_impls!();

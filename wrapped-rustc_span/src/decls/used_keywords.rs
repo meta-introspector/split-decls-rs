@@ -12,4 +12,4 @@ macro_rules! used_keywords {
     };
 }
 
-used_keywords!()
+used_keywords!();

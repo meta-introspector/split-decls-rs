@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        TransmuteRefDst!();
-        FromBytes!();
+        Immutable!();
         Wrap!();
         IntoBytes!();
-        Immutable!();
+        FromBytes!();
+        TransmuteRefDst!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! transmute_ref {
     };
 }
 
-transmute_ref!()
+transmute_ref!();

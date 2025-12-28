@@ -4,4 +4,4 @@ macro_rules! redactions {
     };
 }
 
-redactions!()
+redactions!();

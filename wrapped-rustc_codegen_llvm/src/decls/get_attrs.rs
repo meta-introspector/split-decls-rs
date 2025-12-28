@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
+        AttributeKind!();
         CreateAlignmentAttr!();
         CodegenCx!();
-        AttributeKind!();
-        SmallVec!();
         CreateDereferenceableAttr!();
         CreateDereferenceableOrNullAttr!();
+        SmallVec!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! get_attrs {
     };
 }
 
-get_attrs!()
+get_attrs!();

@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Def!();
-        Region!();
-        Endian!();
-        Byte!();
-        Type!();
         Tree!();
+        Def!();
+        Byte!();
+        Endian!();
+        Type!();
+        Region!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_4 {
     };
 }
 
-impl_4!()
+impl_4!();

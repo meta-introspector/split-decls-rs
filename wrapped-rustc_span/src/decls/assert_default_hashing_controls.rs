@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        HashStableContext!();
         ExpnData!();
+        HashStableContext!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! assert_default_hashing_controls {
     };
 }
 
-assert_default_hashing_controls!()
+assert_default_hashing_controls!();

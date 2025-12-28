@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        SerializeTable!();
         Style!();
-        SerializeStructVariant!();
         Error!();
+        SerializeTable!();
+        SerializeStructVariant!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_355 {
     };
 }
 
-impl_355!()
+impl_355!();

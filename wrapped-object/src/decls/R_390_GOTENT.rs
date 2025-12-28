@@ -4,4 +4,4 @@ macro_rules! R_390_GOTENT {
     };
 }
 
-R_390_GOTENT!()
+R_390_GOTENT!();

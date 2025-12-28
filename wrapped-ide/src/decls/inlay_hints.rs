@@ -4,4 +4,4 @@ macro_rules! inlay_hints {
     };
 }
 
-inlay_hints!()
+inlay_hints!();

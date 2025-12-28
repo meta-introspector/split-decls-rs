@@ -4,4 +4,4 @@ macro_rules! WorkerFatalError {
     };
 }
 
-WorkerFatalError!()
+WorkerFatalError!();

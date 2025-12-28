@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        CodegenCx!();
         DIB!();
+        CodegenCx!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! build_fixed_size_array_di_node {
     };
 }
 
-build_fixed_size_array_di_node!()
+build_fixed_size_array_di_node!();

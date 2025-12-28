@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        BlockDecodingStrategy!();
-        FrameDecoder!();
         Read!();
+        FrameDecoder!();
+        BlockDecodingStrategy!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! test_decode_corpus_files {
     };
 }
 
-test_decode_corpus_files!()
+test_decode_corpus_files!();

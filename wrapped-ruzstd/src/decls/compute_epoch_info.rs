@@ -11,4 +11,4 @@ macro_rules! compute_epoch_info {
     };
 }
 
-compute_epoch_info!()
+compute_epoch_info!();

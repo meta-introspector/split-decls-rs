@@ -4,4 +4,4 @@ macro_rules! MAX_DIST_EXTRA_BITS {
     };
 }
 
-MAX_DIST_EXTRA_BITS!()
+MAX_DIST_EXTRA_BITS!();

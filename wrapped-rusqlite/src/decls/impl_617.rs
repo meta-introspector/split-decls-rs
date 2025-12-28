@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Filters!();
         Result!();
-        ArrayTabCursor!();
         VTabCursor!();
         Context!();
+        Filters!();
+        ArrayTabCursor!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_617 {
     };
 }
 
-impl_617!()
+impl_617!();

@@ -4,4 +4,4 @@ macro_rules! MergeHole {
     };
 }
 
-MergeHole!()
+MergeHole!();

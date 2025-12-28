@@ -4,4 +4,4 @@ macro_rules! F64_POW10 {
     };
 }
 
-F64_POW10!()
+F64_POW10!();

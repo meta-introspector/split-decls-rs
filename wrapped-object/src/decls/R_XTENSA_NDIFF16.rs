@@ -4,4 +4,4 @@ macro_rules! R_XTENSA_NDIFF16 {
     };
 }
 
-R_XTENSA_NDIFF16!()
+R_XTENSA_NDIFF16!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ZipFileData!();
         ZipResult!();
+        ZipFileData!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! parse_extra_field {
     };
 }
 
-parse_extra_field!()
+parse_extra_field!();

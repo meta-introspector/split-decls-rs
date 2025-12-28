@@ -4,4 +4,4 @@ macro_rules! invalid_extends_no_string {
     };
 }
 
-invalid_extends_no_string!()
+invalid_extends_no_string!();

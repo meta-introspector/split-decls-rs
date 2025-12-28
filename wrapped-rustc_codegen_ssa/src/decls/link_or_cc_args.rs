@@ -11,4 +11,4 @@ macro_rules! link_or_cc_args {
     };
 }
 
-link_or_cc_args!()
+link_or_cc_args!();

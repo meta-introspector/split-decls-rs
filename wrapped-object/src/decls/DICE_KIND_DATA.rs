@@ -4,4 +4,4 @@ macro_rules! DICE_KIND_DATA {
     };
 }
 
-DICE_KIND_DATA!()
+DICE_KIND_DATA!();

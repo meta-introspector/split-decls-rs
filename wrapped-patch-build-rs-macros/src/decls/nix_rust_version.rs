@@ -4,4 +4,4 @@ macro_rules! nix_rust_version {
     };
 }
 
-nix_rust_version!()
+nix_rust_version!();

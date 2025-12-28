@@ -12,4 +12,4 @@ macro_rules! visit_document {
     };
 }
 
-visit_document!()
+visit_document!();

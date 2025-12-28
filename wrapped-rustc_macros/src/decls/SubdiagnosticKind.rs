@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Applicability!();
         SpannedOption!();
         SuggestionKind!();
+        Applicability!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! SubdiagnosticKind {
     };
 }
 
-SubdiagnosticKind!()
+SubdiagnosticKind!();

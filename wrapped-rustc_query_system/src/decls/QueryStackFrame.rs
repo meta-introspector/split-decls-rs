@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        DepKind!();
-        QueryStackFrameExtra!();
         QueryStackDeferred!();
+        QueryStackFrameExtra!();
+        DepKind!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! QueryStackFrame {
     };
 }
 
-QueryStackFrame!()
+QueryStackFrame!();

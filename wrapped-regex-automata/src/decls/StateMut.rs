@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DFA!();
         StateID!();
+        DFA!();
         Transitions!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! StateMut {
     };
 }
 
-StateMut!()
+StateMut!();

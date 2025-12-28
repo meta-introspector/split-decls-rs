@@ -4,4 +4,4 @@ macro_rules! normalize_canonicalized_free_alias {
     };
 }
 
-normalize_canonicalized_free_alias!()
+normalize_canonicalized_free_alias!();

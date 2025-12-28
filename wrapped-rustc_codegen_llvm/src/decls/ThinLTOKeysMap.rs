@@ -4,4 +4,4 @@ macro_rules! ThinLTOKeysMap {
     };
 }
 
-ThinLTOKeysMap!()
+ThinLTOKeysMap!();

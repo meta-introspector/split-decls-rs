@@ -4,4 +4,4 @@ macro_rules! contracts {
     };
 }
 
-contracts!()
+contracts!();

@@ -4,4 +4,4 @@ macro_rules! PT_GNU_RELRO {
     };
 }
 
-PT_GNU_RELRO!()
+PT_GNU_RELRO!();

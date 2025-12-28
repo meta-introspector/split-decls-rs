@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Leaf!();
-        TtIter!();
         Subtree!();
+        TtIter!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! TtElement {
     };
 }
 
-TtElement!()
+TtElement!();

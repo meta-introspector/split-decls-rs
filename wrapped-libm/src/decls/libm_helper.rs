@@ -4,4 +4,4 @@ macro_rules! libm_helper {
     };
 }
 
-libm_helper!()
+libm_helper!();

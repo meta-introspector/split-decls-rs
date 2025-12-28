@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        SerializationSink!();
-        StringTableBuilder!();
         Counter!();
+        StringTableBuilder!();
+        SerializationSink!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Profiler {
     };
 }
 
-Profiler!()
+Profiler!();

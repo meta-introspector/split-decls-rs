@@ -4,4 +4,4 @@ macro_rules! UnnamedItemIsPrivate {
     };
 }
 
-UnnamedItemIsPrivate!()
+UnnamedItemIsPrivate!();

@@ -4,4 +4,4 @@ macro_rules! is_slice_u8 {
     };
 }
 
-is_slice_u8!()
+is_slice_u8!();

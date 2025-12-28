@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Builder!();
         Config!();
+        Builder!();
+        PikeVM!();
         Compiler!();
         BuildError!();
         NFA!();
-        PikeVM!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_537 {
     };
 }
 
-impl_537!()
+impl_537!();

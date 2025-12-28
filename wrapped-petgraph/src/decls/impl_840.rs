@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        IndexType!();
         WalkNeighbors!();
+        IndexType!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_840 {
     };
 }
 
-impl_840!()
+impl_840!();

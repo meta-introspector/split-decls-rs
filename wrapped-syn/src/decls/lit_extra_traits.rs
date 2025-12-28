@@ -11,4 +11,4 @@ macro_rules! lit_extra_traits {
     };
 }
 
-lit_extra_traits!()
+lit_extra_traits!();

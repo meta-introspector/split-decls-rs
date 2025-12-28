@@ -1,20 +1,20 @@
 macro_rules! deps {
     () => {
-        MachOSectionIterator32!();
-        PeSectionIterator32!();
-        ElfSectionIterator64!();
-        ElfSectionIterator32!();
-        CoffBigSectionIterator!();
-        WasmSectionIterator!();
-        MachO32!();
-        CoffSectionIterator!();
-        MachOSectionIterator64!();
-        XcoffSectionIterator32!();
-        MachO64!();
         XcoffSectionIterator64!();
+        CoffBigSectionIterator!();
+        ElfSectionIterator32!();
+        MachO64!();
+        CoffSectionIterator!();
+        MachO32!();
+        ElfSectionIterator64!();
+        MachOSectionIterator32!();
         ReadRef!();
         Endianness!();
+        PeSectionIterator32!();
+        MachOSectionIterator64!();
         PeSectionIterator64!();
+        WasmSectionIterator!();
+        XcoffSectionIterator32!();
     };
 }
 
@@ -25,4 +25,4 @@ macro_rules! SectionIteratorInternal {
     };
 }
 
-SectionIteratorInternal!()
+SectionIteratorInternal!();

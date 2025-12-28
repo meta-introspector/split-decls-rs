@@ -4,4 +4,4 @@ macro_rules! Snippet {
     };
 }
 
-Snippet!()
+Snippet!();

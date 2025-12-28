@@ -4,4 +4,4 @@ macro_rules! VERSION_ID_BASE {
     };
 }
 
-VERSION_ID_BASE!()
+VERSION_ID_BASE!();

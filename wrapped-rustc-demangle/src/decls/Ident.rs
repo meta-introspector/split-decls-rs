@@ -4,4 +4,4 @@ macro_rules! Ident {
     };
 }
 
-Ident!()
+Ident!();

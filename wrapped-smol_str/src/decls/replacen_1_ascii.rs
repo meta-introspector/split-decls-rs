@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        InlineSize!();
         SmolStr!();
+        InlineSize!();
         Repr!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! replacen_1_ascii {
     };
 }
 
-replacen_1_ascii!()
+replacen_1_ascii!();

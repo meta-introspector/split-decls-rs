@@ -4,4 +4,4 @@ macro_rules! type_tree {
     };
 }
 
-type_tree!()
+type_tree!();

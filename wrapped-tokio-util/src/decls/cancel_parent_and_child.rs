@@ -11,4 +11,4 @@ macro_rules! cancel_parent_and_child {
     };
 }
 
-cancel_parent_and_child!()
+cancel_parent_and_child!();

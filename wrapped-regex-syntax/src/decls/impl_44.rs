@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Literal!();
-        Result!();
-        ClassInduct!();
-        ClassSetItem!();
-        Formatter!();
-        ClassSetBinaryOpKind!();
         Range!();
+        ClassInduct!();
+        Result!();
+        ClassSetBinaryOpKind!();
+        Literal!();
+        Formatter!();
+        ClassSetItem!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_44 {
     };
 }
 
-impl_44!()
+impl_44!();

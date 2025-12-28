@@ -4,4 +4,4 @@ macro_rules! min {
     };
 }
 
-min!()
+min!();

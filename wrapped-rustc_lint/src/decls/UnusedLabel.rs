@@ -4,4 +4,4 @@ macro_rules! UnusedLabel {
     };
 }
 
-UnusedLabel!()
+UnusedLabel!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Candidate!();
         PickConstraintsForShadowed!();
+        Candidate!();
         CandidateKind!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_261 {
     };
 }
 
-impl_261!()
+impl_261!();

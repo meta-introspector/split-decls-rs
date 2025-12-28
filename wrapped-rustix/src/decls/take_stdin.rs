@@ -4,4 +4,4 @@ macro_rules! take_stdin {
     };
 }
 
-take_stdin!()
+take_stdin!();

@@ -4,4 +4,4 @@ macro_rules! LetKind {
     };
 }
 
-LetKind!()
+LetKind!();

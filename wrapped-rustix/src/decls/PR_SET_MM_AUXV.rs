@@ -4,4 +4,4 @@ macro_rules! PR_SET_MM_AUXV {
     };
 }
 
-PR_SET_MM_AUXV!()
+PR_SET_MM_AUXV!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Endian!();
-        Bytes!();
         FileHeader!();
+        Bytes!();
+        Endian!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! NoteIterator {
     };
 }
 
-NoteIterator!()
+NoteIterator!();

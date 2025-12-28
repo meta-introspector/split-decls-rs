@@ -4,4 +4,4 @@ macro_rules! macho_object_build_version_for_target {
     };
 }
 
-macho_object_build_version_for_target!()
+macho_object_build_version_for_target!();

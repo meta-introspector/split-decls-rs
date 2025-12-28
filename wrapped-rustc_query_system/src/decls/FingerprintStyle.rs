@@ -4,4 +4,4 @@ macro_rules! FingerprintStyle {
     };
 }
 
-FingerprintStyle!()
+FingerprintStyle!();

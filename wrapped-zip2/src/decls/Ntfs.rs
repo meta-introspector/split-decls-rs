@@ -4,4 +4,4 @@ macro_rules! Ntfs {
     };
 }
 
-Ntfs!()
+Ntfs!();

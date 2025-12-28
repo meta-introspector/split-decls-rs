@@ -4,4 +4,4 @@ macro_rules! R_LARCH_CFA {
     };
 }
 
-R_LARCH_CFA!()
+R_LARCH_CFA!();

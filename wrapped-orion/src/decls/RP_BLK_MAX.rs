@@ -4,4 +4,4 @@ macro_rules! RP_BLK_MAX {
     };
 }
 
-RP_BLK_MAX!()
+RP_BLK_MAX!();

@@ -4,4 +4,4 @@ macro_rules! IndexItem {
     };
 }
 
-IndexItem!()
+IndexItem!();

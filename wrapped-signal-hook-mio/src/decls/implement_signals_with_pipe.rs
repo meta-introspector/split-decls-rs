@@ -4,4 +4,4 @@ macro_rules! implement_signals_with_pipe {
     };
 }
 
-implement_signals_with_pipe!()
+implement_signals_with_pipe!();

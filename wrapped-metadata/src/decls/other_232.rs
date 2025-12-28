@@ -4,4 +4,4 @@ macro_rules! other_232 {
     };
 }
 
-other_232!()
+other_232!();

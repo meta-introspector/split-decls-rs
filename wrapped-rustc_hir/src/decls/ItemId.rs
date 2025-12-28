@@ -4,4 +4,4 @@ macro_rules! ItemId {
     };
 }
 
-ItemId!()
+ItemId!();

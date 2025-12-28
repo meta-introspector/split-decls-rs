@@ -4,4 +4,4 @@ macro_rules! R_METAG_NONE {
     };
 }
 
-R_METAG_NONE!()
+R_METAG_NONE!();

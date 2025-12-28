@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Visitor!();
-        TraitItemKind!();
         FnKind!();
-        TraitItem!();
+        TraitItemKind!();
         TraitFn!();
+        TraitItem!();
+        Visitor!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! walk_trait_item {
     };
 }
 
-walk_trait_item!()
+walk_trait_item!();

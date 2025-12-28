@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        TokenTreesView!();
+        TopSubtreeBuilder!();
+        TopSubtree!();
         Spacing!();
         Punct!();
         DelimiterKind!();
-        TopSubtreeBuilder!();
-        Leaf!();
-        TokenTree!();
-        TopSubtree!();
         SubtreeBuilderRestorePoint!();
+        Leaf!();
         Delimiter!();
+        TokenTreesView!();
         Subtree!();
+        TokenTree!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_31 {
     };
 }
 
-impl_31!()
+impl_31!();

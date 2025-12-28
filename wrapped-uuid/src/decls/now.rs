@@ -4,4 +4,4 @@ macro_rules! now {
     };
 }
 
-now!()
+now!();

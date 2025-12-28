@@ -4,4 +4,4 @@ macro_rules! assert_ready_eq {
     };
 }
 
-assert_ready_eq!()
+assert_ready_eq!();

@@ -4,4 +4,4 @@ macro_rules! R_XTENSA_SLOT10_ALT {
     };
 }
 
-R_XTENSA_SLOT10_ALT!()
+R_XTENSA_SLOT10_ALT!();

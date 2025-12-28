@@ -5,4 +5,4 @@ macro_rules! emit_inline_always_target_feature_diagnostic {
     };
 }
 
-emit_inline_always_target_feature_diagnostic!()
+emit_inline_always_target_feature_diagnostic!();

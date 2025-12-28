@@ -4,4 +4,4 @@ macro_rules! is_closing_token {
     };
 }
 
-is_closing_token!()
+is_closing_token!();

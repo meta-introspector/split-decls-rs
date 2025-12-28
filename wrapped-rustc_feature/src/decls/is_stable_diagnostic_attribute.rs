@@ -11,4 +11,4 @@ macro_rules! is_stable_diagnostic_attribute {
     };
 }
 
-is_stable_diagnostic_attribute!()
+is_stable_diagnostic_attribute!();

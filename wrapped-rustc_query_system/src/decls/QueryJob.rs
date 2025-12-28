@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        QueryJobId!();
         QueryLatch!();
+        QueryJobId!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! QueryJob {
     };
 }
 
-QueryJob!()
+QueryJob!();

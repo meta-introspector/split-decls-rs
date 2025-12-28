@@ -4,4 +4,4 @@ macro_rules! MH_APP_EXTENSION_SAFE {
     };
 }
 
-MH_APP_EXTENSION_SAFE!()
+MH_APP_EXTENSION_SAFE!();

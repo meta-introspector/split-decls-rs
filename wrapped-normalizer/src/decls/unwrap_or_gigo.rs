@@ -4,4 +4,4 @@ macro_rules! unwrap_or_gigo {
     };
 }
 
-unwrap_or_gigo!()
+unwrap_or_gigo!();

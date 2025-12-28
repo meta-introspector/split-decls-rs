@@ -4,4 +4,4 @@ macro_rules! EM_PDSP {
     };
 }
 
-EM_PDSP!()
+EM_PDSP!();

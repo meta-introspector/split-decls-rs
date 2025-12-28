@@ -12,4 +12,4 @@ macro_rules! flush_bytes {
     };
 }
 
-flush_bytes!()
+flush_bytes!();

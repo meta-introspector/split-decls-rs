@@ -4,4 +4,4 @@ macro_rules! BlockOrExpr {
     };
 }
 
-BlockOrExpr!()
+BlockOrExpr!();

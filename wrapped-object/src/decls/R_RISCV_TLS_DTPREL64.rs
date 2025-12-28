@@ -4,4 +4,4 @@ macro_rules! R_RISCV_TLS_DTPREL64 {
     };
 }
 
-R_RISCV_TLS_DTPREL64!()
+R_RISCV_TLS_DTPREL64!();

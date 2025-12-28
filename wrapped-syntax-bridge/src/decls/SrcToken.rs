@@ -4,4 +4,4 @@ macro_rules! SrcToken {
     };
 }
 
-SrcToken!()
+SrcToken!();

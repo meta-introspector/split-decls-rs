@@ -4,4 +4,4 @@ macro_rules! set_call_limit {
     };
 }
 
-set_call_limit!()
+set_call_limit!();

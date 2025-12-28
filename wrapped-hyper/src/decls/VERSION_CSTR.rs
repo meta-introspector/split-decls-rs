@@ -4,4 +4,4 @@ macro_rules! VERSION_CSTR {
     };
 }
 
-VERSION_CSTR!()
+VERSION_CSTR!();

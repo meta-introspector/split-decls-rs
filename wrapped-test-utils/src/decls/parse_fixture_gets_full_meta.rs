@@ -17,4 +17,4 @@ mod m;
     };
 }
 
-parse_fixture_gets_full_meta!()
+parse_fixture_gets_full_meta!();

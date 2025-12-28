@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        RuntimeName!();
-        GUID!();
-        IInspectable_Vtbl!();
         IUnknownImpl!();
-        IUnknown_Vtbl!();
+        GUID!();
         HSTRING!();
+        IInspectable_Vtbl!();
+        RuntimeName!();
         HRESULT!();
+        IUnknown_Vtbl!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_152 {
     };
 }
 
-impl_152!()
+impl_152!();

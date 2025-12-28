@@ -4,4 +4,4 @@ macro_rules! USIZE_ALIGN {
     };
 }
 
-USIZE_ALIGN!()
+USIZE_ALIGN!();

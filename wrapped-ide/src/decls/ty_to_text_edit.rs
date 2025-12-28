@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        LazyProperty!();
         InlayHintsConfig!();
+        LazyProperty!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! ty_to_text_edit {
     };
 }
 
-ty_to_text_edit!()
+ty_to_text_edit!();

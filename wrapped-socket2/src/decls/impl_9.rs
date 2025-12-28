@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        SockAddrStorage!();
-        Domain!();
         Type!();
-        SockAddr!();
         Socket!();
+        SockAddrStorage!();
+        SockAddr!();
+        Domain!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_9 {
     };
 }
 
-impl_9!()
+impl_9!();

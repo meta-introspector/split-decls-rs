@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
+        SerializeError!();
+        StateID!();
+        Endian!();
         BE!();
         DFA!();
-        StateID!();
-        LE!();
-        BuildError!();
-        Endian!();
         NE!();
         HalfMatch!();
-        SerializeError!();
         Input!();
+        LE!();
+        BuildError!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_22 {
     };
 }
 
-impl_22!()
+impl_22!();

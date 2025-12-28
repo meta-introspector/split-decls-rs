@@ -4,4 +4,4 @@ macro_rules! serde_deserialize_from_str {
     };
 }
 
-serde_deserialize_from_str!()
+serde_deserialize_from_str!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        HierarchicalLayer!();
         LocalDateTime!();
+        HierarchicalLayer!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! FormatTime {
     };
 }
 
-FormatTime!()
+FormatTime!();

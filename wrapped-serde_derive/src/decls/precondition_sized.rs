@@ -13,4 +13,4 @@ macro_rules! precondition_sized {
     };
 }
 
-precondition_sized!()
+precondition_sized!();

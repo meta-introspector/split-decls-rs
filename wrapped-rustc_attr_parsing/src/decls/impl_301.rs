@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        ShouldEmit!();
-        PathParser!();
         MetaItemParser!();
+        PathParser!();
         ArgParser!();
+        ShouldEmit!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_301 {
     };
 }
 
-impl_301!()
+impl_301!();

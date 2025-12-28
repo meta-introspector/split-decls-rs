@@ -4,4 +4,4 @@ macro_rules! powf {
     };
 }
 
-powf!()
+powf!();

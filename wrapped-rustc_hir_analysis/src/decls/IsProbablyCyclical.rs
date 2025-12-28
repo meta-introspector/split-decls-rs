@@ -4,4 +4,4 @@ macro_rules! IsProbablyCyclical {
     };
 }
 
-IsProbablyCyclical!()
+IsProbablyCyclical!();

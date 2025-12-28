@@ -4,4 +4,4 @@ macro_rules! steiner_tree {
     };
 }
 
-steiner_tree!()
+steiner_tree!();

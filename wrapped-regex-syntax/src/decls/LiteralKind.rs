@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        HexLiteralKind!();
         SpecialLiteralKind!();
+        HexLiteralKind!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! LiteralKind {
     };
 }
 
-LiteralKind!()
+LiteralKind!();

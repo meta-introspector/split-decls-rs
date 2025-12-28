@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        StoreMut!();
         Store!();
+        StoreMut!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_10 {
     };
 }
 
-impl_10!()
+impl_10!();

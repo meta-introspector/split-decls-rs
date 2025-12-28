@@ -4,4 +4,4 @@ macro_rules! AbiCustomClothedFunction {
     };
 }
 
-AbiCustomClothedFunction!()
+AbiCustomClothedFunction!();

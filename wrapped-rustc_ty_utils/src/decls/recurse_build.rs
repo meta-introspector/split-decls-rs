@@ -11,4 +11,4 @@ macro_rules! recurse_build {
     };
 }
 
-recurse_build!()
+recurse_build!();

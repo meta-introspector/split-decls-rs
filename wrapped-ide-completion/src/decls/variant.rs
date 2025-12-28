@@ -4,4 +4,4 @@ macro_rules! variant {
     };
 }
 
-variant!()
+variant!();

@@ -12,4 +12,4 @@ macro_rules! render_macros_expression_arg {
     };
 }
 
-render_macros_expression_arg!()
+render_macros_expression_arg!();

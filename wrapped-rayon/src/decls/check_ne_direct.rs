@@ -4,4 +4,4 @@ macro_rules! check_ne_direct {
     };
 }
 
-check_ne_direct!()
+check_ne_direct!();

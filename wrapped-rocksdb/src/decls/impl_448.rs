@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        DBPinnableSlice!();
         ReadOptions!();
+        DBPinnableSlice!();
         AsColumnFamilyRef!();
-        Error!();
-        DBAccess!();
-        Transaction!();
         DB!();
+        Error!();
+        Transaction!();
+        DBAccess!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_448 {
     };
 }
 
-impl_448!()
+impl_448!();

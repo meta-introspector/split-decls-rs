@@ -4,4 +4,4 @@ macro_rules! iterators {
     };
 }
 
-iterators!()
+iterators!();

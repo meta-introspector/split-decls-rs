@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        CompactOptions!();
         Options!();
+        CompactOptions!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_234 {
     };
 }
 
-impl_234!()
+impl_234!();

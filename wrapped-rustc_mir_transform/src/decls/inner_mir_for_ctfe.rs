@@ -11,4 +11,4 @@ macro_rules! inner_mir_for_ctfe {
     };
 }
 
-inner_mir_for_ctfe!()
+inner_mir_for_ctfe!();

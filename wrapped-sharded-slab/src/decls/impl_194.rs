@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        VacantEntry!();
         Config!();
+        VacantEntry!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_194 {
     };
 }
 
-impl_194!()
+impl_194!();

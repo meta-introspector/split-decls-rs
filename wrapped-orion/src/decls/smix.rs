@@ -4,4 +4,4 @@ macro_rules! smix {
     };
 }
 
-smix!()
+smix!();

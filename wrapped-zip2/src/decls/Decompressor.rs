@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        ReduceDecoder!();
         ImplodeDecoder!();
         Lzma!();
-        Ppmd!();
         ShrinkDecoder!();
+        ReduceDecoder!();
+        Ppmd!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! Decompressor {
     };
 }
 
-Decompressor!()
+Decompressor!();

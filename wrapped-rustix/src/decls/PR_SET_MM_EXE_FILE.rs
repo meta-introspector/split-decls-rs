@@ -4,4 +4,4 @@ macro_rules! PR_SET_MM_EXE_FILE {
     };
 }
 
-PR_SET_MM_EXE_FILE!()
+PR_SET_MM_EXE_FILE!();

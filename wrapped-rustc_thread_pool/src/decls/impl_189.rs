@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        ScopeBase!();
-        Registry!();
-        CountLatch!();
-        ArcJob!();
-        WorkerThread!();
         JobRef!();
-        HeapJob!();
         Latch!();
+        HeapJob!();
+        ArcJob!();
+        CountLatch!();
+        ScopeBase!();
+        WorkerThread!();
+        Registry!();
         JobRefId!();
     };
 }
@@ -19,4 +19,4 @@ macro_rules! impl_189 {
     };
 }
 
-impl_189!()
+impl_189!();

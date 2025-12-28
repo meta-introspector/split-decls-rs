@@ -12,4 +12,4 @@ macro_rules! DynNestedProgressToNestedProgress {
     };
 }
 
-DynNestedProgressToNestedProgress!()
+DynNestedProgressToNestedProgress!();

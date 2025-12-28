@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        MachHeader!();
-        Endian!();
         Bytes!();
+        Endian!();
+        MachHeader!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! LoadCommandIterator {
     };
 }
 
-LoadCommandIterator!()
+LoadCommandIterator!();

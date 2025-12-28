@@ -4,4 +4,4 @@ macro_rules! Fixture {
     };
 }
 
-Fixture!()
+Fixture!();

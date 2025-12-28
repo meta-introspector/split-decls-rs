@@ -11,4 +11,4 @@ macro_rules! register_dispatch {
     };
 }
 
-register_dispatch!()
+register_dispatch!();

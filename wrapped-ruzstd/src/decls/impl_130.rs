@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        StreamingDecoder!();
         FrameDecoder!();
-        FrameDecoderError!();
         Read!();
+        FrameDecoderError!();
+        StreamingDecoder!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_130 {
     };
 }
 
-impl_130!()
+impl_130!();

@@ -4,4 +4,4 @@ macro_rules! zipcrypto {
     };
 }
 
-zipcrypto!()
+zipcrypto!();

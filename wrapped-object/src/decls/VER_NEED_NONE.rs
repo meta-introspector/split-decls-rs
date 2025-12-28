@@ -4,4 +4,4 @@ macro_rules! VER_NEED_NONE {
     };
 }
 
-VER_NEED_NONE!()
+VER_NEED_NONE!();

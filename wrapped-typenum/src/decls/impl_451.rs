@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Even!();
-        NonZero!();
-        Gcf!();
         Gcd!();
+        Gcf!();
+        NonZero!();
         Odd!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_451 {
     };
 }
 
-impl_451!()
+impl_451!();

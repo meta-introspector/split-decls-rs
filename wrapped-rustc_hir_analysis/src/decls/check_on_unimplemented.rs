@@ -4,4 +4,4 @@ macro_rules! check_on_unimplemented {
     };
 }
 
-check_on_unimplemented!()
+check_on_unimplemented!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        UniversalRegions!();
-        CreateResult!();
         MirTypeckRegionConstraints!();
         BorrowckInferCtxt!();
+        CreateResult!();
         UniversalRegionRelationsBuilder!();
+        UniversalRegions!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! create {
     };
 }
 
-create!()
+create!();

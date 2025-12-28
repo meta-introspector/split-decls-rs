@@ -12,4 +12,4 @@ macro_rules! yield_local {
     };
 }
 
-yield_local!()
+yield_local!();

@@ -4,4 +4,4 @@ macro_rules! landlock {
     };
 }
 
-landlock!()
+landlock!();

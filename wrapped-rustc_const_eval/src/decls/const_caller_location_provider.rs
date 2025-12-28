@@ -12,4 +12,4 @@ macro_rules! const_caller_location_provider {
     };
 }
 
-const_caller_location_provider!()
+const_caller_location_provider!();

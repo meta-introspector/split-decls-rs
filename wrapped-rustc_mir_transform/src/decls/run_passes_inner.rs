@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         MirPass!();
-        Optimizations!();
         UnknownPassName!();
+        Optimizations!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! run_passes_inner {
     };
 }
 
-run_passes_inner!()
+run_passes_inner!();

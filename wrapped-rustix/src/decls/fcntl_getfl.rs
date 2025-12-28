@@ -11,4 +11,4 @@ macro_rules! fcntl_getfl {
     };
 }
 
-fcntl_getfl!()
+fcntl_getfl!();

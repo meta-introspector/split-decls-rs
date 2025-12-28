@@ -11,4 +11,4 @@ macro_rules! CLASSES_ROOT {
     };
 }
 
-CLASSES_ROOT!()
+CLASSES_ROOT!();

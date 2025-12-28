@@ -4,4 +4,4 @@ macro_rules! find_region_in_predicates {
     };
 }
 
-find_region_in_predicates!()
+find_region_in_predicates!();

@@ -4,4 +4,4 @@ macro_rules! escape_into {
     };
 }
 
-escape_into!()
+escape_into!();

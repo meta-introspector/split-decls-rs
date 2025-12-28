@@ -4,4 +4,4 @@ macro_rules! MAX_SECT {
     };
 }
 
-MAX_SECT!()
+MAX_SECT!();

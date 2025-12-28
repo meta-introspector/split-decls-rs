@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Result!();
-        Tag!();
         Stream!();
+        Tag!();
+        Result!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Value {
     };
 }
 
-Value!()
+Value!();

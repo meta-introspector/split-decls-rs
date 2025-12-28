@@ -4,4 +4,4 @@ macro_rules! cfg_windows {
     };
 }
 
-cfg_windows!()
+cfg_windows!();

@@ -4,4 +4,4 @@ macro_rules! internal_cx {
     };
 }
 
-internal_cx!()
+internal_cx!();

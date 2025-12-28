@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        DirectedGraph!();
-        Sccs!();
-        SccsConstruction!();
-        WalkReturn!();
-        NodeState!();
-        Successors!();
         SccData!();
-        Annotations!();
+        WalkReturn!();
         Node!();
+        SccsConstruction!();
+        Sccs!();
+        DirectedGraph!();
+        Successors!();
+        Annotations!();
+        NodeState!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_198 {
     };
 }
 
-impl_198!()
+impl_198!();

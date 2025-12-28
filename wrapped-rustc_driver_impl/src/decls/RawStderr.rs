@@ -4,4 +4,4 @@ macro_rules! RawStderr {
     };
 }
 
-RawStderr!()
+RawStderr!();

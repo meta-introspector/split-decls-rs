@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        SyntaxElement!();
         Green!();
+        SyntaxElement!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! NodeData {
     };
 }
 
-NodeData!()
+NodeData!();

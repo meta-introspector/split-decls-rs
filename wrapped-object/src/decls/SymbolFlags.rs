@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        Section!();
         MachO!();
         CoffSection!();
         Symbol!();
-        Section!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! SymbolFlags {
     };
 }
 
-SymbolFlags!()
+SymbolFlags!();

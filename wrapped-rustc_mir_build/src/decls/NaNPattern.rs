@@ -4,4 +4,4 @@ macro_rules! NaNPattern {
     };
 }
 
-NaNPattern!()
+NaNPattern!();

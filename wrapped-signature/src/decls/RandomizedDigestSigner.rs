@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Result!();
         RandomizedSigner!();
-        DigestSigner!();
+        Result!();
         Error!();
+        DigestSigner!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! RandomizedDigestSigner {
     };
 }
 
-RandomizedDigestSigner!()
+RandomizedDigestSigner!();

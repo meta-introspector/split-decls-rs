@@ -4,4 +4,4 @@ macro_rules! is_enabled_avx2_and_bmi2 {
     };
 }
 
-is_enabled_avx2_and_bmi2!()
+is_enabled_avx2_and_bmi2!();

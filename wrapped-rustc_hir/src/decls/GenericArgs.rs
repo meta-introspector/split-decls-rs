@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         GenericArgsParentheses!();
-        AssocItemConstraint!();
         GenericArg!();
+        AssocItemConstraint!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! GenericArgs {
     };
 }
 
-GenericArgs!()
+GenericArgs!();

@@ -4,4 +4,4 @@ macro_rules! R_SHARC_ADDR32_V3 {
     };
 }
 
-R_SHARC_ADDR32_V3!()
+R_SHARC_ADDR32_V3!();

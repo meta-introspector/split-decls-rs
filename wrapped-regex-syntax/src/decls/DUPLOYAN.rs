@@ -4,4 +4,4 @@ macro_rules! DUPLOYAN {
     };
 }
 
-DUPLOYAN!()
+DUPLOYAN!();

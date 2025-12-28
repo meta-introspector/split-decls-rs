@@ -11,4 +11,4 @@ macro_rules! mangle {
     };
 }
 
-mangle!()
+mangle!();

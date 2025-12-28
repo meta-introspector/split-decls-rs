@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        AssistId!();
-        GroupLabel!();
-        SourceChange!();
         Label!();
+        AssistId!();
+        SourceChange!();
         Command!();
+        GroupLabel!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! Assist {
     };
 }
 
-Assist!()
+Assist!();

@@ -4,4 +4,4 @@ macro_rules! same_as_naive {
     };
 }
 
-same_as_naive!()
+same_as_naive!();

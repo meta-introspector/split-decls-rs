@@ -4,4 +4,4 @@ macro_rules! uLong {
     };
 }
 
-uLong!()
+uLong!();

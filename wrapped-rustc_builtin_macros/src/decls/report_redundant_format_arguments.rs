@@ -12,4 +12,4 @@ macro_rules! report_redundant_format_arguments {
     };
 }
 
-report_redundant_format_arguments!()
+report_redundant_format_arguments!();

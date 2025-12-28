@@ -4,4 +4,4 @@ macro_rules! does_impl {
     };
 }
 
-does_impl!()
+does_impl!();

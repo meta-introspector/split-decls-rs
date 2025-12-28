@@ -4,4 +4,4 @@ macro_rules! test_usize_i64_overflow {
     };
 }
 
-test_usize_i64_overflow!()
+test_usize_i64_overflow!();

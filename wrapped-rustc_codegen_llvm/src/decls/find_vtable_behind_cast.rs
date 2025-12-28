@@ -11,4 +11,4 @@ macro_rules! find_vtable_behind_cast {
     };
 }
 
-find_vtable_behind_cast!()
+find_vtable_behind_cast!();

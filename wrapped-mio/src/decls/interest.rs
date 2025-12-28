@@ -4,4 +4,4 @@ macro_rules! interest {
     };
 }
 
-interest!()
+interest!();

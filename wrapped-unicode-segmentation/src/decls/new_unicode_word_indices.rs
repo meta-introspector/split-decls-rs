@@ -12,4 +12,4 @@ macro_rules! new_unicode_word_indices {
     };
 }
 
-new_unicode_word_indices!()
+new_unicode_word_indices!();

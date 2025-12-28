@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        StreamResult!();
         Error!();
         MZResult!();
+        StreamResult!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! MZError {
     };
 }
 
-MZError!()
+MZError!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        LivenessValues!();
         UniversalRegions!();
         PoloniusLivenessContext!();
+        LivenessValues!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! LiveVariablesVisitor {
     };
 }
 
-LiveVariablesVisitor!()
+LiveVariablesVisitor!();

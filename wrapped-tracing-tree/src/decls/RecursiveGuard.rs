@@ -4,4 +4,4 @@ macro_rules! RecursiveGuard {
     };
 }
 
-RecursiveGuard!()
+RecursiveGuard!();

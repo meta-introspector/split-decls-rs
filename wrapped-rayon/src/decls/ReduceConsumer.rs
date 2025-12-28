@@ -4,4 +4,4 @@ macro_rules! ReduceConsumer {
     };
 }
 
-ReduceConsumer!()
+ReduceConsumer!();

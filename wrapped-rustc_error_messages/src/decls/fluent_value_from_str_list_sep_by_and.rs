@@ -4,4 +4,4 @@ macro_rules! fluent_value_from_str_list_sep_by_and {
     };
 }
 
-fluent_value_from_str_list_sep_by_and!()
+fluent_value_from_str_list_sep_by_and!();

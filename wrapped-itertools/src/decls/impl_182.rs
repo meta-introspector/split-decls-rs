@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        CombinationsGeneric!();
         PoolIndex!();
+        CombinationsGeneric!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_182 {
     };
 }
 
-impl_182!()
+impl_182!();

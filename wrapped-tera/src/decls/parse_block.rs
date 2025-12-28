@@ -13,4 +13,4 @@ macro_rules! parse_block {
     };
 }
 
-parse_block!()
+parse_block!();

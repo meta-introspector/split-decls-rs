@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        FSETable!();
         FseTableMode!();
+        FSETable!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! choose_table {
     };
 }
 
-choose_table!()
+choose_table!();

@@ -4,4 +4,4 @@ macro_rules! BlockMarkerGen {
     };
 }
 
-BlockMarkerGen!()
+BlockMarkerGen!();

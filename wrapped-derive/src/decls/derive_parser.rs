@@ -4,4 +4,4 @@ macro_rules! derive_parser {
     };
 }
 
-derive_parser!()
+derive_parser!();

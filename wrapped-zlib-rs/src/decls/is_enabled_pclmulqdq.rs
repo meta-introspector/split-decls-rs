@@ -4,4 +4,4 @@ macro_rules! is_enabled_pclmulqdq {
     };
 }
 
-is_enabled_pclmulqdq!()
+is_enabled_pclmulqdq!();

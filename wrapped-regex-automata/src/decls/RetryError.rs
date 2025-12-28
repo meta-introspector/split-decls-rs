@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        RetryQuadraticError!();
-        PikeVM!();
         RetryFailError!();
+        PikeVM!();
+        RetryQuadraticError!();
         DFA!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! RetryError {
     };
 }
 
-RetryError!()
+RetryError!();

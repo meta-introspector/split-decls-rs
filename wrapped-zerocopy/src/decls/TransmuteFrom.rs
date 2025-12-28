@@ -4,4 +4,4 @@ macro_rules! TransmuteFrom {
     };
 }
 
-TransmuteFrom!()
+TransmuteFrom!();

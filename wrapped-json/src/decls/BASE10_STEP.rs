@@ -4,4 +4,4 @@ macro_rules! BASE10_STEP {
     };
 }
 
-BASE10_STEP!()
+BASE10_STEP!();

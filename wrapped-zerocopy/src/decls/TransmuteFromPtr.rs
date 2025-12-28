@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        TryTransmuteFromPtr!();
         TransmuteFrom!();
         Aliasing!();
         Validity!();
+        TryTransmuteFromPtr!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! TransmuteFromPtr {
     };
 }
 
-TransmuteFromPtr!()
+TransmuteFromPtr!();

@@ -4,4 +4,4 @@ macro_rules! check_type_wf {
     };
 }
 
-check_type_wf!()
+check_type_wf!();

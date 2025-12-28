@@ -4,4 +4,4 @@ macro_rules! IMAGE_REL_SH3_ABSOLUTE {
     };
 }
 
-IMAGE_REL_SH3_ABSOLUTE!()
+IMAGE_REL_SH3_ABSOLUTE!();

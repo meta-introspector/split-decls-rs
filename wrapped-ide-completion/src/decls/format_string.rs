@@ -4,4 +4,4 @@ macro_rules! format_string {
     };
 }
 
-format_string!()
+format_string!();

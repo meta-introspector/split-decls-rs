@@ -4,4 +4,4 @@ macro_rules! EF_CSKY_OTHER {
     };
 }
 
-EF_CSKY_OTHER!()
+EF_CSKY_OTHER!();

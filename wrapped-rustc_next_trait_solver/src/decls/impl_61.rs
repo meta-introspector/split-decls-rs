@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
         SolverDelegate!();
-        EvalCtxt!();
-        GoalKind!();
-        AllowInferenceConstraints!();
-        FindParamInClause!();
-        Candidate!();
         TraitGoalProvenVia!();
+        AllowInferenceConstraints!();
         AssembleCandidatesFrom!();
+        FindParamInClause!();
+        GoalKind!();
+        Candidate!();
+        EvalCtxt!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_61 {
     };
 }
 
-impl_61!()
+impl_61!();

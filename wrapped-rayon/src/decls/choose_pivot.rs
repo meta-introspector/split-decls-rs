@@ -4,4 +4,4 @@ macro_rules! choose_pivot {
     };
 }
 
-choose_pivot!()
+choose_pivot!();

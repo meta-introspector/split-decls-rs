@@ -11,4 +11,4 @@ macro_rules! get_shard_hash {
     };
 }
 
-get_shard_hash!()
+get_shard_hash!();

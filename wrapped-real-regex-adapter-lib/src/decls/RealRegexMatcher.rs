@@ -4,4 +4,4 @@ macro_rules! RealRegexMatcher {
     };
 }
 
-RealRegexMatcher!()
+RealRegexMatcher!();

@@ -4,4 +4,4 @@ macro_rules! EM_TI_C6000 {
     };
 }
 
-EM_TI_C6000!()
+EM_TI_C6000!();

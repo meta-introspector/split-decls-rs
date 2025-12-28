@@ -4,4 +4,4 @@ macro_rules! path_segment_is_exact_match {
     };
 }
 
-path_segment_is_exact_match!()
+path_segment_is_exact_match!();

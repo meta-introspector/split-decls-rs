@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Statement!();
-        AndThenRows!();
-        MappedRows!();
-        Rows!();
-        Row!();
-        Result!();
         Map!();
+        MappedRows!();
+        AndThenRows!();
+        Statement!();
+        Rows!();
+        Result!();
+        Row!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_212 {
     };
 }
 
-impl_212!()
+impl_212!();

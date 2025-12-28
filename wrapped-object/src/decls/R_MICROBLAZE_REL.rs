@@ -4,4 +4,4 @@ macro_rules! R_MICROBLAZE_REL {
     };
 }
 
-R_MICROBLAZE_REL!()
+R_MICROBLAZE_REL!();

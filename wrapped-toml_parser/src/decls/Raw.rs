@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Encoding!();
         Source!();
         Span!();
+        Encoding!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Raw {
     };
 }
 
-Raw!()
+Raw!();

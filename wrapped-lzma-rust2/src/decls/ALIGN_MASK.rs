@@ -4,4 +4,4 @@ macro_rules! ALIGN_MASK {
     };
 }
 
-ALIGN_MASK!()
+ALIGN_MASK!();

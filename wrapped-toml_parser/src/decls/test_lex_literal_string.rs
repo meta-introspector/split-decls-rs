@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Token!();
         Stream!();
+        Token!();
     };
 }
 
@@ -45,4 +45,4 @@ trailing
     };
 }
 
-test_lex_literal_string!()
+test_lex_literal_string!();

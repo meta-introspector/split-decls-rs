@@ -4,4 +4,4 @@ macro_rules! match_fn_definition {
     };
 }
 
-match_fn_definition!()
+match_fn_definition!();

@@ -4,4 +4,4 @@ macro_rules! emoji_poem {
     };
 }
 
-emoji_poem!()
+emoji_poem!();

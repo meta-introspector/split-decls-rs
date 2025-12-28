@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        Region!();
+        RegionFolder!();
         TypeFoldable!();
         Interner!();
-        RegionFolder!();
-        Region!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! fold_regions {
     };
 }
 
-fold_regions!()
+fold_regions!();

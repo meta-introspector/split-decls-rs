@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
         Expected!();
-        ParseError!();
-        EventReceiver!();
+        ErrorSink!();
         TokenKind!();
         Stream!();
-        ErrorSink!();
         Token!();
+        EventReceiver!();
+        ParseError!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! on_comment {
     };
 }
 
-on_comment!()
+on_comment!();

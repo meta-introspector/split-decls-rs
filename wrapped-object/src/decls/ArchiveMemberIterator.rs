@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ReadRef!();
         Members!();
+        ReadRef!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! ArchiveMemberIterator {
     };
 }
 
-ArchiveMemberIterator!()
+ArchiveMemberIterator!();

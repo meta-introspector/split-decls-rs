@@ -4,4 +4,4 @@ macro_rules! PR_MTE_TAG_SHIFT {
     };
 }
 
-PR_MTE_TAG_SHIFT!()
+PR_MTE_TAG_SHIFT!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        RangeDecoder!();
         RangeReader!();
+        RangeDecoder!();
         Result!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_94 {
     };
 }
 
-impl_94!()
+impl_94!();

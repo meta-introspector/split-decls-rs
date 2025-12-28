@@ -4,4 +4,4 @@ macro_rules! reverse_bits {
     };
 }
 
-reverse_bits!()
+reverse_bits!();

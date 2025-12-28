@@ -4,4 +4,4 @@ macro_rules! BadReturnTypeNotation {
     };
 }
 
-BadReturnTypeNotation!()
+BadReturnTypeNotation!();

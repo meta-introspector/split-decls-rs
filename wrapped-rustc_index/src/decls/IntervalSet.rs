@@ -4,4 +4,4 @@ macro_rules! IntervalSet {
     };
 }
 
-IntervalSet!()
+IntervalSet!();

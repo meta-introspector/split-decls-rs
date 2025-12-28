@@ -4,4 +4,4 @@ macro_rules! PPC64_OPT_LOCALENTRY {
     };
 }
 
-PPC64_OPT_LOCALENTRY!()
+PPC64_OPT_LOCALENTRY!();

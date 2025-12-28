@@ -4,4 +4,4 @@ macro_rules! report_unexpected_variant_res {
     };
 }
 
-report_unexpected_variant_res!()
+report_unexpected_variant_res!();

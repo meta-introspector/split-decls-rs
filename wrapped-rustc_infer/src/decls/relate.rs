@@ -4,4 +4,4 @@ macro_rules! relate {
     };
 }
 
-relate!()
+relate!();

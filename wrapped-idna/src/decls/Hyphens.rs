@@ -4,4 +4,4 @@ macro_rules! Hyphens {
     };
 }
 
-Hyphens!()
+Hyphens!();

@@ -4,4 +4,4 @@ macro_rules! mix {
     };
 }
 
-mix!()
+mix!();

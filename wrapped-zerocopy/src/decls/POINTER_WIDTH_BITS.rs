@@ -4,4 +4,4 @@ macro_rules! POINTER_WIDTH_BITS {
     };
 }
 
-POINTER_WIDTH_BITS!()
+POINTER_WIDTH_BITS!();

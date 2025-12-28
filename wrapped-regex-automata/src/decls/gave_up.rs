@@ -11,4 +11,4 @@ macro_rules! gave_up {
     };
 }
 
-gave_up!()
+gave_up!();

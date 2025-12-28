@@ -4,4 +4,4 @@ macro_rules! redundant_semicolon {
     };
 }
 
-redundant_semicolon!()
+redundant_semicolon!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         ToSql!();
-        ToSqlOutput!();
         Result!();
+        ToSqlOutput!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_432 {
     };
 }
 
-impl_432!()
+impl_432!();

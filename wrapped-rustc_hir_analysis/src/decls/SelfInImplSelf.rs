@@ -4,4 +4,4 @@ macro_rules! SelfInImplSelf {
     };
 }
 
-SelfInImplSelf!()
+SelfInImplSelf!();

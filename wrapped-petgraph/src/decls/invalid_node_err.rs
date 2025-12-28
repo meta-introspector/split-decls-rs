@@ -5,4 +5,4 @@ macro_rules! invalid_node_err {
     };
 }
 
-invalid_node_err!()
+invalid_node_err!();

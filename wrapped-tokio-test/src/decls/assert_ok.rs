@@ -4,4 +4,4 @@ macro_rules! assert_ok {
     };
 }
 
-assert_ok!()
+assert_ok!();

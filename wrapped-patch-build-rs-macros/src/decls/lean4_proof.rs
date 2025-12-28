@@ -4,4 +4,4 @@ macro_rules! lean4_proof {
     };
 }
 
-lean4_proof!()
+lean4_proof!();

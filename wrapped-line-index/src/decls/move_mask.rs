@@ -4,4 +4,4 @@ macro_rules! move_mask {
     };
 }
 
-move_mask!()
+move_mask!();

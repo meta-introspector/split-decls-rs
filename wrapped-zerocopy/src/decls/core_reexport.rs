@@ -4,4 +4,4 @@ macro_rules! core_reexport {
     };
 }
 
-core_reexport!()
+core_reexport!();

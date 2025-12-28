@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Matcher!();
         Write!();
-        CompressionLevel!();
         Read!();
+        CompressionLevel!();
+        Matcher!();
         CompressState!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! FrameCompressor {
     };
 }
 
-FrameCompressor!()
+FrameCompressor!();

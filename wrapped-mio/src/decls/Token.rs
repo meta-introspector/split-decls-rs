@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Poll!();
-        Interest!();
         Event!();
+        Interest!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Token {
     };
 }
 
-Token!()
+Token!();

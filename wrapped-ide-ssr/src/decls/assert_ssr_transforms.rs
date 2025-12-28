@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        MatchFinder!();
         SsrRule!();
+        MatchFinder!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! assert_ssr_transforms {
     };
 }
 
-assert_ssr_transforms!()
+assert_ssr_transforms!();

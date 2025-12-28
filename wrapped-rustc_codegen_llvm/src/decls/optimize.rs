@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
         WriteBytecode!();
-        DiagnosticHandlers!();
-        LlvmCodegenBackend!();
-        ModuleLlvm!();
-        OptStage!();
-        ThinBuffer!();
-        CodegenDiagnosticsStage!();
         AutodiffStage!();
+        ModuleLlvm!();
+        ThinBuffer!();
+        OptStage!();
+        DiagnosticHandlers!();
+        CodegenDiagnosticsStage!();
+        LlvmCodegenBackend!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! optimize {
     };
 }
 
-optimize!()
+optimize!();

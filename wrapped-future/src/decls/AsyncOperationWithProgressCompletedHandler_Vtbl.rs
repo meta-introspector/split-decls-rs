@@ -11,4 +11,4 @@ macro_rules! AsyncOperationWithProgressCompletedHandler_Vtbl {
     };
 }
 
-AsyncOperationWithProgressCompletedHandler_Vtbl!()
+AsyncOperationWithProgressCompletedHandler_Vtbl!();

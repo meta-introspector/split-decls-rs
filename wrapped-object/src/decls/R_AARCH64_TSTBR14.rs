@@ -4,4 +4,4 @@ macro_rules! R_AARCH64_TSTBR14 {
     };
 }
 
-R_AARCH64_TSTBR14!()
+R_AARCH64_TSTBR14!();

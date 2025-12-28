@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        SectionTable!();
+        ImageSymbolBytes!();
+        ReadRef!();
         SymbolTable!();
+        Result!();
         Pod!();
         ImageSymbol!();
-        ReadRef!();
-        Result!();
-        ImageSymbolBytes!();
+        SectionTable!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! CoffHeader {
     };
 }
 
-CoffHeader!()
+CoffHeader!();

@@ -11,4 +11,4 @@ macro_rules! ok_many_variable_blocks {
     };
 }
 
-ok_many_variable_blocks!()
+ok_many_variable_blocks!();

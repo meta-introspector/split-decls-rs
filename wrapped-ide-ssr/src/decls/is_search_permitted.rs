@@ -4,4 +4,4 @@ macro_rules! is_search_permitted {
     };
 }
 
-is_search_permitted!()
+is_search_permitted!();

@@ -4,4 +4,4 @@ macro_rules! min_specialization {
     };
 }
 
-min_specialization!()
+min_specialization!();

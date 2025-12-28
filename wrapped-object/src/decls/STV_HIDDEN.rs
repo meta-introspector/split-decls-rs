@@ -11,4 +11,4 @@ macro_rules! STV_HIDDEN {
     };
 }
 
-STV_HIDDEN!()
+STV_HIDDEN!();

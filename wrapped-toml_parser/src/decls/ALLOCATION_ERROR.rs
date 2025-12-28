@@ -4,4 +4,4 @@ macro_rules! ALLOCATION_ERROR {
     };
 }
 
-ALLOCATION_ERROR!()
+ALLOCATION_ERROR!();

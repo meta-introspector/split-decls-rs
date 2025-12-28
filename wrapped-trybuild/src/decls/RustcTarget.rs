@@ -4,4 +4,4 @@ macro_rules! RustcTarget {
     };
 }
 
-RustcTarget!()
+RustcTarget!();

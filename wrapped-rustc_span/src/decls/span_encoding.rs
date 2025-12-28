@@ -4,4 +4,4 @@ macro_rules! span_encoding {
     };
 }
 
-span_encoding!()
+span_encoding!();

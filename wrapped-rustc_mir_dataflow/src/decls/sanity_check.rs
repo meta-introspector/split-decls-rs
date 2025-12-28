@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        MoveData!();
-        MaybeUninitializedPlaces!();
         MaybeInitializedPlaces!();
         StopAfterDataFlowEndedCompilation!();
         MaybeLiveLocals!();
+        MoveData!();
+        MaybeUninitializedPlaces!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! sanity_check {
     };
 }
 
-sanity_check!()
+sanity_check!();

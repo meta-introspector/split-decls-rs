@@ -4,4 +4,4 @@ macro_rules! bail {
     };
 }
 
-bail!()
+bail!();

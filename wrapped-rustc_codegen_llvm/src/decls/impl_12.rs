@@ -1,19 +1,19 @@
 macro_rules! deps {
     () => {
-        FnAbiLlvmExt!();
-        CodegenCx!();
-        SmallVec!();
-        SetInstructionCallConv!();
-        CreateStructRetAttr!();
-        AttributeKind!();
-        Builder!();
-        CallConv!();
-        CreateAttrString!();
-        CreateByValAttr!();
-        CreateRangeAttr!();
         PassMode!();
+        CodegenCx!();
+        AttributeKind!();
         AttributePlace!();
+        CallConv!();
         CreateAttrStringValue!();
+        CreateStructRetAttr!();
+        SetInstructionCallConv!();
+        SmallVec!();
+        FnAbiLlvmExt!();
+        CreateByValAttr!();
+        Builder!();
+        CreateAttrString!();
+        CreateRangeAttr!();
     };
 }
 
@@ -24,4 +24,4 @@ macro_rules! impl_12 {
     };
 }
 
-impl_12!()
+impl_12!();

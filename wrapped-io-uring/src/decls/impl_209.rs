@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Entry!();
-        Parameters!();
         Builder!();
         IoUring!();
+        Parameters!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_209 {
     };
 }
 
-impl_209!()
+impl_209!();

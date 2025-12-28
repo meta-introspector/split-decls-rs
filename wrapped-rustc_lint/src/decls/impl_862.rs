@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        LateContext!();
-        UnusedAllocationDiag!();
         UnusedAllocationMutDiag!();
+        UnusedAllocationDiag!();
+        LateContext!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_862 {
     };
 }
 
-impl_862!()
+impl_862!();

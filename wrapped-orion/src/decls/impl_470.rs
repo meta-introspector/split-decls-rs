@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
         RingElementNTT!();
-        Sha3_256!();
-        RingElement!();
-        PkeParameters!();
-        FieldElement!();
-        EncapKey!();
         ByteSerialization!();
+        EncapKey!();
+        PkeParameters!();
+        RingElement!();
         UnknownCryptoError!();
+        FieldElement!();
+        Sha3_256!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_470 {
     };
 }
 
-impl_470!()
+impl_470!();

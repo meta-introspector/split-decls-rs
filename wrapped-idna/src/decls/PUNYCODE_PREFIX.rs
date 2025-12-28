@@ -4,4 +4,4 @@ macro_rules! PUNYCODE_PREFIX {
     };
 }
 
-PUNYCODE_PREFIX!()
+PUNYCODE_PREFIX!();

@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        ImageSymbol!();
-        CoffCommon!();
         ImageFileHeader!();
         ObjectSymbol!();
-        SymbolIndex!();
-        CoffHeader!();
+        ImageSymbol!();
+        CoffCommon!();
         ReadRef!();
+        CoffHeader!();
+        SymbolIndex!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! CoffSymbol {
     };
 }
 
-CoffSymbol!()
+CoffSymbol!();

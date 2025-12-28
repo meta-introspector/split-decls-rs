@@ -4,4 +4,4 @@ macro_rules! utf8_paths {
     };
 }
 
-utf8_paths!()
+utf8_paths!();

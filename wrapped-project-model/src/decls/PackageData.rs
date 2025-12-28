@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        Target!();
+        RustAnalyzerPackageMetaData!();
         PackageDependency!();
         ManifestPath!();
         Package!();
-        Target!();
-        RustAnalyzerPackageMetaData!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! PackageData {
     };
 }
 
-PackageData!()
+PackageData!();

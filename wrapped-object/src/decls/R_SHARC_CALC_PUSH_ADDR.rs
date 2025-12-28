@@ -4,4 +4,4 @@ macro_rules! R_SHARC_CALC_PUSH_ADDR {
     };
 }
 
-R_SHARC_CALC_PUSH_ADDR!()
+R_SHARC_CALC_PUSH_ADDR!();

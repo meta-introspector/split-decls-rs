@@ -4,4 +4,4 @@ macro_rules! OpaqueTypeStorageEntries {
     };
 }
 
-OpaqueTypeStorageEntries!()
+OpaqueTypeStorageEntries!();

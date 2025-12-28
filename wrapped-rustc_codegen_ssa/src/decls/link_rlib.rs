@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        ArchiveBuilder!();
-        ReadFileError!();
-        AddNativeLibrary!();
-        CodegenResults!();
         ArchiveBuilderBuilder!();
-        RlibFlavor!();
+        CodegenResults!();
         MetadataPosition!();
+        ArchiveBuilder!();
+        RlibFlavor!();
+        AddNativeLibrary!();
+        ReadFileError!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! link_rlib {
     };
 }
 
-link_rlib!()
+link_rlib!();

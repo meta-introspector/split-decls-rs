@@ -11,4 +11,4 @@ macro_rules! IVectorView_Impl {
     };
 }
 
-IVectorView_Impl!()
+IVectorView_Impl!();

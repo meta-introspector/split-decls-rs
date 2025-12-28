@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        InstantiateOpaqueType!();
         ToUniverseInfo!();
         UniverseInfo!();
-        InstantiateOpaqueType!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_93 {
     };
 }
 
-impl_93!()
+impl_93!();

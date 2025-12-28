@@ -4,4 +4,4 @@ macro_rules! PeekingTakeWhile {
     };
 }
 
-PeekingTakeWhile!()
+PeekingTakeWhile!();

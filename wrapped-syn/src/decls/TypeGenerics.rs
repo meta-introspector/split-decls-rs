@@ -4,4 +4,4 @@ macro_rules! TypeGenerics {
     };
 }
 
-TypeGenerics!()
+TypeGenerics!();

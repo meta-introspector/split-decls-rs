@@ -13,4 +13,4 @@ macro_rules! input_edges {
     };
 }
 
-input_edges!()
+input_edges!();

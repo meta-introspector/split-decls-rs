@@ -13,4 +13,4 @@ macro_rules! merge_recurse {
     };
 }
 
-merge_recurse!()
+merge_recurse!();

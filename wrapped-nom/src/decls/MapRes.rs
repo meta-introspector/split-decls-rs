@@ -4,4 +4,4 @@ macro_rules! MapRes {
     };
 }
 
-MapRes!()
+MapRes!();

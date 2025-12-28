@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        ErrorKind!();
-        Parser!();
-        ParseError!();
-        IResult!();
         Input!();
-        Streaming!();
+        ErrorKind!();
         SplitPosition1!();
         Error!();
+        Parser!();
         Needed!();
+        ParseError!();
+        Streaming!();
+        IResult!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! take_while1 {
     };
 }
 
-take_while1!()
+take_while1!();

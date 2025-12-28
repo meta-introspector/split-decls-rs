@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        IdentClass!();
         RootDatabase!();
+        IdentClass!();
         Definition!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! get_definition {
     };
 }
 
-get_definition!()
+get_definition!();

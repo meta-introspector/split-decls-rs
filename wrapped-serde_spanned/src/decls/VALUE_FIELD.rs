@@ -4,4 +4,4 @@ macro_rules! VALUE_FIELD {
     };
 }
 
-VALUE_FIELD!()
+VALUE_FIELD!();

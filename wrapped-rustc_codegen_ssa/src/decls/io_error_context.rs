@@ -4,4 +4,4 @@ macro_rules! io_error_context {
     };
 }
 
-io_error_context!()
+io_error_context!();

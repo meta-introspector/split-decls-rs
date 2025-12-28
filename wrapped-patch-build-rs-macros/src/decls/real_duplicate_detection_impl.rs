@@ -35,4 +35,4 @@ macro_rules! real_duplicate_detection_impl {
     };
 }
 
-real_duplicate_detection_impl!()
+real_duplicate_detection_impl!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        ShouldWarnAboutField!();
-        ReportOn!();
         DeadItem!();
+        ReportOn!();
+        ShouldWarnAboutField!();
         DeadVisitor!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! check_mod_deathness {
     };
 }
 
-check_mod_deathness!()
+check_mod_deathness!();

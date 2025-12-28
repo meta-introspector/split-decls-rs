@@ -12,4 +12,4 @@ macro_rules! as_limb {
     };
 }
 
-as_limb!()
+as_limb!();

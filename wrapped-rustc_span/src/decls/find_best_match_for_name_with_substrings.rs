@@ -11,4 +11,4 @@ macro_rules! find_best_match_for_name_with_substrings {
     };
 }
 
-find_best_match_for_name_with_substrings!()
+find_best_match_for_name_with_substrings!();

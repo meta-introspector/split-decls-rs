@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         ATerm!();
         Len!();
-        UTerm!();
         Length!();
+        UTerm!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_533 {
     };
 }
 
-impl_533!()
+impl_533!();

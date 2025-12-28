@@ -4,4 +4,4 @@ macro_rules! expand_global_asm {
     };
 }
 
-expand_global_asm!()
+expand_global_asm!();

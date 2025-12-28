@@ -11,4 +11,4 @@ macro_rules! RawRwLockDowngrade {
     };
 }
 
-RawRwLockDowngrade!()
+RawRwLockDowngrade!();

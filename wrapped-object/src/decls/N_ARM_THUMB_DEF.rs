@@ -4,4 +4,4 @@ macro_rules! N_ARM_THUMB_DEF {
     };
 }
 
-N_ARM_THUMB_DEF!()
+N_ARM_THUMB_DEF!();

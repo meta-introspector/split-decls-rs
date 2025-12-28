@@ -4,4 +4,4 @@ macro_rules! X3_P_SIZE_X {
     };
 }
 
-X3_P_SIZE_X!()
+X3_P_SIZE_X!();

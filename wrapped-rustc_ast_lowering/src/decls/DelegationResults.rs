@@ -4,4 +4,4 @@ macro_rules! DelegationResults {
     };
 }
 
-DelegationResults!()
+DelegationResults!();

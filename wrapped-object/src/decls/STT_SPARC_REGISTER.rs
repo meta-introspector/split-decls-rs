@@ -4,4 +4,4 @@ macro_rules! STT_SPARC_REGISTER {
     };
 }
 
-STT_SPARC_REGISTER!()
+STT_SPARC_REGISTER!();

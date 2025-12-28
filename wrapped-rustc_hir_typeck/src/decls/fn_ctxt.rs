@@ -4,4 +4,4 @@ macro_rules! fn_ctxt {
     };
 }
 
-fn_ctxt!()
+fn_ctxt!();

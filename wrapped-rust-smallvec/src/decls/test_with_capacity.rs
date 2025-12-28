@@ -11,4 +11,4 @@ macro_rules! test_with_capacity {
     };
 }
 
-test_with_capacity!()
+test_with_capacity!();

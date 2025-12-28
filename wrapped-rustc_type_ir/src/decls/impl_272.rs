@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        GenericArg!();
         CanonicalVarValues!();
+        SliceLike!();
         Interner!();
         GenericArgs!();
-        GenericArg!();
-        SliceLike!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_272 {
     };
 }
 
-impl_272!()
+impl_272!();

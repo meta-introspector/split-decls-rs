@@ -4,4 +4,4 @@ macro_rules! IAsyncOperation {
     };
 }
 
-IAsyncOperation!()
+IAsyncOperation!();

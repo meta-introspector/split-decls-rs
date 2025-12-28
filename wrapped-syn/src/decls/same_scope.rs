@@ -11,4 +11,4 @@ macro_rules! same_scope {
     };
 }
 
-same_scope!()
+same_scope!();

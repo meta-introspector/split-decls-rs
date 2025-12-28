@@ -4,4 +4,4 @@ macro_rules! ID_COMPAT_MATH_START {
     };
 }
 
-ID_COMPAT_MATH_START!()
+ID_COMPAT_MATH_START!();

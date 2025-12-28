@@ -4,4 +4,4 @@ macro_rules! testable_unit {
     };
 }
 
-testable_unit!()
+testable_unit!();

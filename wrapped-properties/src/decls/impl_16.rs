@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        GeneralCategoryGroup!();
         CodePointMapDataBorrowed!();
+        GeneralCategoryGroup!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_16 {
     };
 }
 
-impl_16!()
+impl_16!();

@@ -4,4 +4,4 @@ macro_rules! MAX_PROBES_MASK {
     };
 }
 
-MAX_PROBES_MASK!()
+MAX_PROBES_MASK!();

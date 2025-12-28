@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        ValueRef!();
-        Error!();
-        Value!();
-        Result!();
-        Null!();
         ToSql!();
         ToSqlOutput!();
+        Result!();
+        ValueRef!();
+        Null!();
+        Error!();
+        Value!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_379 {
     };
 }
 
-impl_379!()
+impl_379!();

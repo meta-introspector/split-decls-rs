@@ -13,4 +13,4 @@ macro_rules! runnable_mod_outline_definition {
     };
 }
 
-runnable_mod_outline_definition!()
+runnable_mod_outline_definition!();

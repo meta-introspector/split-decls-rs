@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        FloatLength!();
         IntegerLength!();
         AddressSpace!();
-        FloatLength!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Primitive {
     };
 }
 
-Primitive!()
+Primitive!();

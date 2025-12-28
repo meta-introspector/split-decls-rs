@@ -4,4 +4,4 @@ macro_rules! multipeek_impl {
     };
 }
 
-multipeek_impl!()
+multipeek_impl!();

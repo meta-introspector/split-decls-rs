@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        BinOpCategory!();
-        Op!();
-        MethodCallee!();
-        FnCtxt!();
         Expectation!();
+        MethodCallee!();
+        Op!();
+        BinOpCategory!();
+        FnCtxt!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_297 {
     };
 }
 
-impl_297!()
+impl_297!();

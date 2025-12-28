@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
         IResult!();
+        Input!();
+        Error!();
         SplitPosition!();
         Needed!();
         ParseError!();
-        Error!();
         Parser!();
-        Input!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! take_till {
     };
 }
 
-take_till!()
+take_till!();

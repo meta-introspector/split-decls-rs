@@ -12,4 +12,4 @@ macro_rules! parse_metavar_expr {
     };
 }
 
-parse_metavar_expr!()
+parse_metavar_expr!();

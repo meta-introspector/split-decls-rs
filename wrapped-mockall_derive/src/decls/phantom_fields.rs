@@ -4,4 +4,4 @@ macro_rules! phantom_fields {
     };
 }
 
-phantom_fields!()
+phantom_fields!();

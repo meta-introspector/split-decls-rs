@@ -11,4 +11,4 @@ macro_rules! parser_repeated_name {
     };
 }
 
-parser_repeated_name!()
+parser_repeated_name!();

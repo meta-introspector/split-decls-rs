@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Tag!();
         Result!();
+        Tag!();
         Stream!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_value_forward {
     };
 }
 
-impl_value_forward!()
+impl_value_forward!();

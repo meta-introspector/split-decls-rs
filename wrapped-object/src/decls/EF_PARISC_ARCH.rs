@@ -11,4 +11,4 @@ macro_rules! EF_PARISC_ARCH {
     };
 }
 
-EF_PARISC_ARCH!()
+EF_PARISC_ARCH!();

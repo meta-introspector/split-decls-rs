@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Cache!();
-        Anchored!();
         StartError!();
         CacheError!();
+        Anchored!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_258 {
     };
 }
 
-impl_258!()
+impl_258!();

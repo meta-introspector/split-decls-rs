@@ -4,4 +4,4 @@ macro_rules! XDG_OPEN_SCRIPT {
     };
 }
 
-XDG_OPEN_SCRIPT!()
+XDG_OPEN_SCRIPT!();

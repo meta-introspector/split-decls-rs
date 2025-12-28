@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Result!();
         Formatter!();
+        Result!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! format_escaped_str {
     };
 }
 
-format_escaped_str!()
+format_escaped_str!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         PassMode!();
-        Ty!();
         Layout!();
+        Ty!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! ArgAbi {
     };
 }
 
-ArgAbi!()
+ArgAbi!();

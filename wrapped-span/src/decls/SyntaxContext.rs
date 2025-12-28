@@ -4,4 +4,4 @@ macro_rules! SyntaxContext {
     };
 }
 
-SyntaxContext!()
+SyntaxContext!();

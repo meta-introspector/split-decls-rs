@@ -11,4 +11,4 @@ macro_rules! is_terminal {
     };
 }
 
-is_terminal!()
+is_terminal!();

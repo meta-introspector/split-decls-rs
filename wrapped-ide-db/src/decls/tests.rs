@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        FilePosition!();
         RootDatabase!();
+        FilePosition!();
     };
 }
 
@@ -81,4 +81,4 @@ impl Tr for () {
     };
 }
 
-tests!()
+tests!();

@@ -12,4 +12,4 @@ macro_rules! test_kill_process_group {
     };
 }
 
-test_kill_process_group!()
+test_kill_process_group!();

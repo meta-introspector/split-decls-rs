@@ -4,4 +4,4 @@ macro_rules! dummy_rustc_tool {
     };
 }
 
-dummy_rustc_tool!()
+dummy_rustc_tool!();

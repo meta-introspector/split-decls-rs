@@ -4,4 +4,4 @@ macro_rules! TIBETAN {
     };
 }
 
-TIBETAN!()
+TIBETAN!();

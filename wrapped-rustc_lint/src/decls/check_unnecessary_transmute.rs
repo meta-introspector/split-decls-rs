@@ -11,4 +11,4 @@ macro_rules! check_unnecessary_transmute {
     };
 }
 
-check_unnecessary_transmute!()
+check_unnecessary_transmute!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        EvalCtxt!();
         EvaluationStepBuilder!();
         SolverDelegate!();
-        EvalCtxt!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! ProofTreeBuilder {
     };
 }
 
-ProofTreeBuilder!()
+ProofTreeBuilder!();

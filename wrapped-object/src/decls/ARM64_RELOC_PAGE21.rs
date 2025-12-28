@@ -4,4 +4,4 @@ macro_rules! ARM64_RELOC_PAGE21 {
     };
 }
 
-ARM64_RELOC_PAGE21!()
+ARM64_RELOC_PAGE21!();

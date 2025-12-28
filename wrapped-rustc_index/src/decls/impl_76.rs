@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        IndexVec!();
-        IntervalSet!();
-        Idx!();
         SparseIntervalMatrix!();
+        IndexVec!();
+        Idx!();
+        IntervalSet!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_76 {
     };
 }
 
-impl_76!()
+impl_76!();

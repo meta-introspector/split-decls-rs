@@ -4,4 +4,4 @@ macro_rules! mod_floor_64 {
     };
 }
 
-mod_floor_64!()
+mod_floor_64!();

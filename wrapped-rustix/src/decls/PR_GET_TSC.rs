@@ -4,4 +4,4 @@ macro_rules! PR_GET_TSC {
     };
 }
 
-PR_GET_TSC!()
+PR_GET_TSC!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        MachOFile!();
         ReadRef!();
         MachHeader!();
-        MachOFile!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! MachOComdatIterator {
     };
 }
 
-MachOComdatIterator!()
+MachOComdatIterator!();

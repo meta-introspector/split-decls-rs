@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        Read!();
         FrameDecoder!();
         BlockDecodingStrategy!();
         Dictionary!();
-        Read!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! test_dict_decoding {
     };
 }
 
-test_dict_decoding!()
+test_dict_decoding!();

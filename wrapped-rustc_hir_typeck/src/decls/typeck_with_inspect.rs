@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        TypeckRootCtxt!();
         FnCtxt!();
         ItemKind!();
-        TypeckRootCtxt!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! typeck_with_inspect {
     };
 }
 
-typeck_with_inspect!()
+typeck_with_inspect!();

@@ -11,4 +11,4 @@ macro_rules! adt_consider_insignificant_dtor {
     };
 }
 
-adt_consider_insignificant_dtor!()
+adt_consider_insignificant_dtor!();

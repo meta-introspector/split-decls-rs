@@ -4,4 +4,4 @@ macro_rules! IncorrectReprFormatExpectInteger {
     };
 }
 
-IncorrectReprFormatExpectInteger!()
+IncorrectReprFormatExpectInteger!();

@@ -4,4 +4,4 @@ macro_rules! cfg_not_wasi {
     };
 }
 
-cfg_not_wasi!()
+cfg_not_wasi!();

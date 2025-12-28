@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Result!();
-        KernelSigaction!();
         Signal!();
+        KernelSigaction!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! kernel_sigaction {
     };
 }
 
-kernel_sigaction!()
+kernel_sigaction!();

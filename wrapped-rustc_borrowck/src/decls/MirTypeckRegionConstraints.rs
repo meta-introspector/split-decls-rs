@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        LivenessValues!();
+        OutlivesConstraintSet!();
         UniverseInfo!();
         PlaceholderIndices!();
-        OutlivesConstraintSet!();
         TypeTest!();
+        LivenessValues!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! MirTypeckRegionConstraints {
     };
 }
 
-MirTypeckRegionConstraints!()
+MirTypeckRegionConstraints!();

@@ -11,4 +11,4 @@ macro_rules! print_tup {
     };
 }
 
-print_tup!()
+print_tup!();

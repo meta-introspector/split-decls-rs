@@ -4,4 +4,4 @@ macro_rules! chaining {
     };
 }
 
-chaining!()
+chaining!();

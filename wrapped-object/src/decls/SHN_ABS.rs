@@ -4,4 +4,4 @@ macro_rules! SHN_ABS {
     };
 }
 
-SHN_ABS!()
+SHN_ABS!();

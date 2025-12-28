@@ -4,4 +4,4 @@ macro_rules! replacing {
     };
 }
 
-replacing!()
+replacing!();

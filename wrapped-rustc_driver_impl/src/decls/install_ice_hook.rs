@@ -7,4 +7,4 @@ macro_rules! install_ice_hook {
     };
 }
 
-install_ice_hook!()
+install_ice_hook!();

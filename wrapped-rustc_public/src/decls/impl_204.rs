@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Stable!();
-        AliasRelationDirection!();
         BridgeTys!();
+        AliasRelationDirection!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_204 {
     };
 }
 
-impl_204!()
+impl_204!();

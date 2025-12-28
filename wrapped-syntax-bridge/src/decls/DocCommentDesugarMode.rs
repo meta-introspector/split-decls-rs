@@ -4,4 +4,4 @@ macro_rules! DocCommentDesugarMode {
     };
 }
 
-DocCommentDesugarMode!()
+DocCommentDesugarMode!();

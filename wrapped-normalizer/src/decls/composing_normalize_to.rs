@@ -11,4 +11,4 @@ macro_rules! composing_normalize_to {
     };
 }
 
-composing_normalize_to!()
+composing_normalize_to!();

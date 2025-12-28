@@ -4,4 +4,4 @@ macro_rules! memmem {
     };
 }
 
-memmem!()
+memmem!();

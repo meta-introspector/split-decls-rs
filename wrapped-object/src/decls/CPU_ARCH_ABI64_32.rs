@@ -4,4 +4,4 @@ macro_rules! CPU_ARCH_ABI64_32 {
     };
 }
 
-CPU_ARCH_ABI64_32!()
+CPU_ARCH_ABI64_32!();

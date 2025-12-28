@@ -4,4 +4,4 @@ macro_rules! always_applicable {
     };
 }
 
-always_applicable!()
+always_applicable!();

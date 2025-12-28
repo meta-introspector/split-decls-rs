@@ -4,4 +4,4 @@ macro_rules! write_endianness_check_len {
     };
 }
 
-write_endianness_check_len!()
+write_endianness_check_len!();

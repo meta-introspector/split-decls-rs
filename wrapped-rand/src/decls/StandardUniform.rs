@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Open01!();
-        Distribution!();
-        Rng!();
-        Alphabetic!();
-        Alphanumeric!();
         OpenClosed01!();
         Uniform!();
+        Rng!();
+        Alphanumeric!();
+        Distribution!();
+        Open01!();
+        Alphabetic!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! StandardUniform {
     };
 }
 
-StandardUniform!()
+StandardUniform!();

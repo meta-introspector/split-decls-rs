@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        OpTy!();
         Operand!();
         Immediate!();
         ImmTy!();
+        OpTy!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_275 {
     };
 }
 
-impl_275!()
+impl_275!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         DynKind!();
-        InternalCx!();
         RustcInternal!();
         BridgeTys!();
+        InternalCx!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_77 {
     };
 }
 
-impl_77!()
+impl_77!();

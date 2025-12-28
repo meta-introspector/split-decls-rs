@@ -11,4 +11,4 @@ macro_rules! cleanup_kinds {
     };
 }
 
-cleanup_kinds!()
+cleanup_kinds!();

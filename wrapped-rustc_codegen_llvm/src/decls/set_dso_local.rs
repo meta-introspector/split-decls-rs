@@ -4,4 +4,4 @@ macro_rules! set_dso_local {
     };
 }
 
-set_dso_local!()
+set_dso_local!();

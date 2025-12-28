@@ -11,4 +11,4 @@ macro_rules! produces_items_with_no_complete {
     };
 }
 
-produces_items_with_no_complete!()
+produces_items_with_no_complete!();

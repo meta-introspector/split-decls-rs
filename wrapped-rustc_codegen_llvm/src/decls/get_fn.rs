@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        CodegenCx!();
         Visibility!();
         Linkage!();
+        CodegenCx!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! get_fn {
     };
 }
 
-get_fn!()
+get_fn!();

@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        LocalizedOutlivesConstraint!();
+        ClosureRegionRequirements!();
         BorrowSet!();
         RegionInferenceContext!();
-        ClosureRegionRequirements!();
         LocalizedOutlivesConstraintSet!();
-        LocalizedOutlivesConstraint!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! emit_polonius_mir {
     };
 }
 
-emit_polonius_mir!()
+emit_polonius_mir!();

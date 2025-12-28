@@ -4,4 +4,4 @@ macro_rules! PositionUsedAs {
     };
 }
 
-PositionUsedAs!()
+PositionUsedAs!();

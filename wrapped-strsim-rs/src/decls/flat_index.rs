@@ -4,4 +4,4 @@ macro_rules! flat_index {
     };
 }
 
-flat_index!()
+flat_index!();

@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        PlaceCtxt!();
-        MatrixRow!();
-        PlaceInfo!();
-        PlaceValidity!();
-        Constructor!();
-        PatOrWild!();
-        Matrix!();
-        PatCx!();
         MatchArm!();
+        Constructor!();
+        MatrixRow!();
+        PatOrWild!();
+        PlaceValidity!();
+        Matrix!();
+        PlaceInfo!();
+        PatCx!();
+        PlaceCtxt!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_111 {
     };
 }
 
-impl_111!()
+impl_111!();

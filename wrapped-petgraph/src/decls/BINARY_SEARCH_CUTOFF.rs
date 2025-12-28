@@ -4,4 +4,4 @@ macro_rules! BINARY_SEARCH_CUTOFF {
     };
 }
 
-BINARY_SEARCH_CUTOFF!()
+BINARY_SEARCH_CUTOFF!();

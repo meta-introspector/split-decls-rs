@@ -4,4 +4,4 @@ macro_rules! ValueOfAssociatedStructAlreadySpecified {
     };
 }
 
-ValueOfAssociatedStructAlreadySpecified!()
+ValueOfAssociatedStructAlreadySpecified!();

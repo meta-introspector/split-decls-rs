@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Create!();
         Config!();
-        EdgeRef!();
+        Create!();
         Dot!();
+        EdgeRef!();
         NodeRef!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_561 {
     };
 }
 
-impl_561!()
+impl_561!();

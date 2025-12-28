@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ExistentialProjection!();
         DefId!();
+        ExistentialProjection!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! ExistentialProjectionHelpers {
     };
 }
 
-ExistentialProjectionHelpers!()
+ExistentialProjectionHelpers!();

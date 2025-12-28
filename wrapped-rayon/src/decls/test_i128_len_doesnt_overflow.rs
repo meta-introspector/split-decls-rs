@@ -11,4 +11,4 @@ macro_rules! test_i128_len_doesnt_overflow {
     };
 }
 
-test_i128_len_doesnt_overflow!()
+test_i128_len_doesnt_overflow!();

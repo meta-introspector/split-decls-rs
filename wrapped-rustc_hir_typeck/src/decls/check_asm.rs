@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        ItemKind!();
-        NakedFunctionsMustNakedAsm!();
-        CheckInlineAssembly!();
         NakedFunctionsAsmBlock!();
+        ItemKind!();
+        CheckInlineAssembly!();
+        NakedFunctionsMustNakedAsm!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! check_asm {
     };
 }
 
-check_asm!()
+check_asm!();

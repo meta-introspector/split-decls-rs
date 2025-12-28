@@ -4,4 +4,4 @@ macro_rules! ESCAPE {
     };
 }
 
-ESCAPE!()
+ESCAPE!();

@@ -4,4 +4,4 @@ macro_rules! BIND_OPCODE_SET_TYPE_IMM {
     };
 }
 
-BIND_OPCODE_SET_TYPE_IMM!()
+BIND_OPCODE_SET_TYPE_IMM!();

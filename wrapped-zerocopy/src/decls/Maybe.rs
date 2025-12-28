@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Initialized!();
-        Shared!();
         Aliasing!();
         Unaligned!();
+        Initialized!();
         Alignment!();
+        Shared!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! Maybe {
     };
 }
 
-Maybe!()
+Maybe!();

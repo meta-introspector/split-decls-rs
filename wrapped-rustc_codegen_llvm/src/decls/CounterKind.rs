@@ -4,4 +4,4 @@ macro_rules! CounterKind {
     };
 }
 
-CounterKind!()
+CounterKind!();

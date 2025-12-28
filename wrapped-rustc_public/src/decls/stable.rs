@@ -4,4 +4,4 @@ macro_rules! stable {
     };
 }
 
-stable!()
+stable!();

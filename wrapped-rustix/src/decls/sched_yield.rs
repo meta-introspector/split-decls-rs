@@ -4,4 +4,4 @@ macro_rules! sched_yield {
     };
 }
 
-sched_yield!()
+sched_yield!();

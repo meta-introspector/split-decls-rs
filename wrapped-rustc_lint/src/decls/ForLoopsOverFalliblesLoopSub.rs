@@ -4,4 +4,4 @@ macro_rules! ForLoopsOverFalliblesLoopSub {
     };
 }
 
-ForLoopsOverFalliblesLoopSub!()
+ForLoopsOverFalliblesLoopSub!();

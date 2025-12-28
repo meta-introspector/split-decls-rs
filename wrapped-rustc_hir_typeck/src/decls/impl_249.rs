@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         FnCtxt!();
-        PickKind!();
-        ItemKind!();
-        AutorefOrPtrAdjustment!();
         Pick!();
+        ItemKind!();
+        PickKind!();
+        AutorefOrPtrAdjustment!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_249 {
     };
 }
 
-impl_249!()
+impl_249!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Safety!();
         Const!();
-        FnHeader!();
+        Safety!();
         Extern!();
+        FnHeader!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_213 {
     };
 }
 
-impl_213!()
+impl_213!();

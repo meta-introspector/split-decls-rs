@@ -4,4 +4,4 @@ macro_rules! GNU_PROPERTY_LOUSER {
     };
 }
 
-GNU_PROPERTY_LOUSER!()
+GNU_PROPERTY_LOUSER!();

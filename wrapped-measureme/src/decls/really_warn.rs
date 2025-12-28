@@ -4,4 +4,4 @@ macro_rules! really_warn {
     };
 }
 
-really_warn!()
+really_warn!();

@@ -4,4 +4,4 @@ macro_rules! MAX_MEM_LEVEL {
     };
 }
 
-MAX_MEM_LEVEL!()
+MAX_MEM_LEVEL!();

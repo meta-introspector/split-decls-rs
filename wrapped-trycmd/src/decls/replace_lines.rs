@@ -4,4 +4,4 @@ macro_rules! replace_lines {
     };
 }
 
-replace_lines!()
+replace_lines!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Tag!();
         TaggedRef!();
+        Tag!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_587 {
     };
 }
 
-impl_587!()
+impl_587!();

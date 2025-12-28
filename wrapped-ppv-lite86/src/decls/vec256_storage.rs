@@ -4,4 +4,4 @@ macro_rules! vec256_storage {
     };
 }
 
-vec256_storage!()
+vec256_storage!();

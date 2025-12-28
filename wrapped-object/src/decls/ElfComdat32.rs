@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Endian!();
-        ElfComdat!();
         Endianness!();
         FileHeader32!();
+        ElfComdat!();
+        Endian!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! ElfComdat32 {
     };
 }
 
-ElfComdat32!()
+ElfComdat32!();

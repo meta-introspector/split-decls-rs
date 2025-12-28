@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        SpecialCode!();
-        Termios!();
         Result!();
+        Termios!();
+        SpecialCode!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_1197 {
     };
 }
 
-impl_1197!()
+impl_1197!();

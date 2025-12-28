@@ -4,4 +4,4 @@ macro_rules! GenericParamDefKind {
     };
 }
 
-GenericParamDefKind!()
+GenericParamDefKind!();

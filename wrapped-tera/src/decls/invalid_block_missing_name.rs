@@ -4,4 +4,4 @@ macro_rules! invalid_block_missing_name {
     };
 }
 
-invalid_block_missing_name!()
+invalid_block_missing_name!();

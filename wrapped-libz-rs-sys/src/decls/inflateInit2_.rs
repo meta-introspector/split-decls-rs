@@ -4,4 +4,4 @@ macro_rules! inflateInit2_ {
     };
 }
 
-inflateInit2_!()
+inflateInit2_!();

@@ -4,4 +4,4 @@ macro_rules! InlayHintCtx {
     };
 }
 
-InlayHintCtx!()
+InlayHintCtx!();

@@ -4,4 +4,4 @@ macro_rules! NONLIT_MATCH {
     };
 }
 
-NONLIT_MATCH!()
+NONLIT_MATCH!();

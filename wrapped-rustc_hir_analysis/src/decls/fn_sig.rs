@@ -11,4 +11,4 @@ macro_rules! fn_sig {
     };
 }
 
-fn_sig!()
+fn_sig!();

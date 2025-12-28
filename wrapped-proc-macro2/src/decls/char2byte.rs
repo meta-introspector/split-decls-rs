@@ -11,4 +11,4 @@ macro_rules! char2byte {
     };
 }
 
-char2byte!()
+char2byte!();

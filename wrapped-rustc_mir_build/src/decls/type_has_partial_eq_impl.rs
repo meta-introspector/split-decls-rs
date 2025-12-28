@@ -11,4 +11,4 @@ macro_rules! type_has_partial_eq_impl {
     };
 }
 
-type_has_partial_eq_impl!()
+type_has_partial_eq_impl!();

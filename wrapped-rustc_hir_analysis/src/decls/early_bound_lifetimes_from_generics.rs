@@ -4,4 +4,4 @@ macro_rules! early_bound_lifetimes_from_generics {
     };
 }
 
-early_bound_lifetimes_from_generics!()
+early_bound_lifetimes_from_generics!();

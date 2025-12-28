@@ -4,4 +4,4 @@ macro_rules! R_AARCH64_TLSDESC_OFF_G1 {
     };
 }
 
-R_AARCH64_TLSDESC_OFF_G1!()
+R_AARCH64_TLSDESC_OFF_G1!();

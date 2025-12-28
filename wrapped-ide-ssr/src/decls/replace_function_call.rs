@@ -4,4 +4,4 @@ macro_rules! replace_function_call {
     };
 }
 
-replace_function_call!()
+replace_function_call!();

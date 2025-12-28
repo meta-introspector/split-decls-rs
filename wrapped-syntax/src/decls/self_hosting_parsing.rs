@@ -4,4 +4,4 @@ macro_rules! self_hosting_parsing {
     };
 }
 
-self_hosting_parsing!()
+self_hosting_parsing!();

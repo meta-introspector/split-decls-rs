@@ -11,4 +11,4 @@ macro_rules! assert_layer {
     };
 }
 
-assert_layer!()
+assert_layer!();

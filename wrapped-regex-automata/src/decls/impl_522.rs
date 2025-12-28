@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         StateID!();
-        Unit!();
         SparseTransitions!();
+        Unit!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_522 {
     };
 }
 
-impl_522!()
+impl_522!();

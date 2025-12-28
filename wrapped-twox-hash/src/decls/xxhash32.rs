@@ -4,4 +4,4 @@ macro_rules! xxhash32 {
     };
 }
 
-xxhash32!()
+xxhash32!();

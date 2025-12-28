@@ -4,4 +4,4 @@ macro_rules! api {
     };
 }
 
-api!()
+api!();

@@ -4,4 +4,4 @@ macro_rules! int_impl_common {
     };
 }
 
-int_impl_common!()
+int_impl_common!();

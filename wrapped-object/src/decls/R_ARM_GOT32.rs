@@ -4,4 +4,4 @@ macro_rules! R_ARM_GOT32 {
     };
 }
 
-R_ARM_GOT32!()
+R_ARM_GOT32!();

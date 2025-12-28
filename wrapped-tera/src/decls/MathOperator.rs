@@ -4,4 +4,4 @@ macro_rules! MathOperator {
     };
 }
 
-MathOperator!()
+MathOperator!();

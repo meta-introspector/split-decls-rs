@@ -4,4 +4,4 @@ macro_rules! pod {
     };
 }
 
-pod!()
+pod!();

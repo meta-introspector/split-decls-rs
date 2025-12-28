@@ -11,4 +11,4 @@ macro_rules! cmp_requeue_pi {
     };
 }
 
-cmp_requeue_pi!()
+cmp_requeue_pi!();

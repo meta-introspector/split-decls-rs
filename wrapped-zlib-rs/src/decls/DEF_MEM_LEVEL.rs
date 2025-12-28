@@ -4,4 +4,4 @@ macro_rules! DEF_MEM_LEVEL {
     };
 }
 
-DEF_MEM_LEVEL!()
+DEF_MEM_LEVEL!();

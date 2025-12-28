@@ -4,4 +4,4 @@ macro_rules! annotations {
     };
 }
 
-annotations!()
+annotations!();

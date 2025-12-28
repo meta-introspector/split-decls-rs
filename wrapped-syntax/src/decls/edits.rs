@@ -4,4 +4,4 @@ macro_rules! edits {
     };
 }
 
-edits!()
+edits!();

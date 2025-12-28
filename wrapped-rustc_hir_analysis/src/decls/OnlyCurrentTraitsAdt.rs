@@ -4,4 +4,4 @@ macro_rules! OnlyCurrentTraitsAdt {
     };
 }
 
-OnlyCurrentTraitsAdt!()
+OnlyCurrentTraitsAdt!();

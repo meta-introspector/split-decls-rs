@@ -11,4 +11,4 @@ macro_rules! opt_visibility {
     };
 }
 
-opt_visibility!()
+opt_visibility!();

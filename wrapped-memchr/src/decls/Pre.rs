@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Prefilter!();
         PrefilterState!();
+        Prefilter!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Pre {
     };
 }
 
-Pre!()
+Pre!();

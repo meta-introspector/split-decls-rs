@@ -4,4 +4,4 @@ macro_rules! UnmarkedConstItemExposed {
     };
 }
 
-UnmarkedConstItemExposed!()
+UnmarkedConstItemExposed!();

@@ -11,4 +11,4 @@ macro_rules! from_token_tree {
     };
 }
 
-from_token_tree!()
+from_token_tree!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        NoopConsumer!();
-        IntoParallelIterator!();
         ParallelExtend!();
+        IntoParallelIterator!();
+        NoopConsumer!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_456 {
     };
 }
 
-impl_456!()
+impl_456!();

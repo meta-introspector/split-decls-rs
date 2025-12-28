@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Module!();
-        CreateVTab!();
         VTabKind!();
+        CreateVTab!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! read_only_module {
     };
 }
 
-read_only_module!()
+read_only_module!();

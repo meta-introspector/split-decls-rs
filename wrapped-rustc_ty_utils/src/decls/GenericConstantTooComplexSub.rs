@@ -4,4 +4,4 @@ macro_rules! GenericConstantTooComplexSub {
     };
 }
 
-GenericConstantTooComplexSub!()
+GenericConstantTooComplexSub!();

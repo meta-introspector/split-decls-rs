@@ -4,4 +4,4 @@ macro_rules! iter_eq_by {
     };
 }
 
-iter_eq_by!()
+iter_eq_by!();

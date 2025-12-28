@@ -4,4 +4,4 @@ macro_rules! i686_decorated_name {
     };
 }
 
-i686_decorated_name!()
+i686_decorated_name!();

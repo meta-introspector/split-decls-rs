@@ -11,4 +11,4 @@ macro_rules! get_rpath_relative_to_output {
     };
 }
 
-get_rpath_relative_to_output!()
+get_rpath_relative_to_output!();

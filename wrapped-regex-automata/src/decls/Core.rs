@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
         BoundedBacktracker!();
-        OnePass!();
-        Hybrid!();
-        DFA!();
-        RegexInfo!();
         NFA!();
+        OnePass!();
+        RegexInfo!();
+        Hybrid!();
         PikeVM!();
         Prefilter!();
+        DFA!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! Core {
     };
 }
 
-Core!()
+Core!();

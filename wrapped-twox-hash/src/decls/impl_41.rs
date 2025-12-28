@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Lane!();
-        BufferData!();
         Bytes!();
+        BufferData!();
+        Lane!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_41 {
     };
 }
 
-impl_41!()
+impl_41!();

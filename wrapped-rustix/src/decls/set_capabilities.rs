@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         CapabilitySets!();
-        Pid!();
         Result!();
+        Pid!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! set_capabilities {
     };
 }
 
-set_capabilities!()
+set_capabilities!();

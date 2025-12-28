@@ -11,4 +11,4 @@ macro_rules! swap_sibling_in_list {
     };
 }
 
-swap_sibling_in_list!()
+swap_sibling_in_list!();

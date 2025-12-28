@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        PrintAttribute!();
         DeprecatedSince!();
+        PrintAttribute!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Deprecation {
     };
 }
 
-Deprecation!()
+Deprecation!();

@@ -4,4 +4,4 @@ macro_rules! constraints {
     };
 }
 
-constraints!()
+constraints!();

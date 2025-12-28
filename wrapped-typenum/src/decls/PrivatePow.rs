@@ -4,4 +4,4 @@ macro_rules! PrivatePow {
     };
 }
 
-PrivatePow!()
+PrivatePow!();

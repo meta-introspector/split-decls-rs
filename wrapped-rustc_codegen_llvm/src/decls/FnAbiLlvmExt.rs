@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Builder!();
         CodegenCx!();
+        Builder!();
         CallConv!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! FnAbiLlvmExt {
     };
 }
 
-FnAbiLlvmExt!()
+FnAbiLlvmExt!();

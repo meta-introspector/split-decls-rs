@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        U16!();
         Version!();
         Table!();
         Segment!();
         I32!();
-        U16!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! ImageOs2Header {
     };
 }
 
-ImageOs2Header!()
+ImageOs2Header!();

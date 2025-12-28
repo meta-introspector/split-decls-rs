@@ -4,4 +4,4 @@ macro_rules! RT_BITMAP {
     };
 }
 
-RT_BITMAP!()
+RT_BITMAP!();

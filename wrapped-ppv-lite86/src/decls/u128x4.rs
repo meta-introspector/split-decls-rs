@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         BitOps128!();
-        Vec4!();
         MultiLane!();
-        Machine!();
         Swap64!();
         Store!();
+        Machine!();
+        Vec4!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! u128x4 {
     };
 }
 
-u128x4!()
+u128x4!();

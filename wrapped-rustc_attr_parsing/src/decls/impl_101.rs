@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
+        ArgParser!();
+        LinkOrdinalParser!();
+        AcceptContext!();
+        LinkOrdinalOutOfRange!();
+        OnDuplicate!();
         AttributeOrder!();
         AllowedTargets!();
         SingleAttributeParser!();
-        LinkOrdinalOutOfRange!();
-        LinkOrdinalParser!();
         Stage!();
-        OnDuplicate!();
-        AcceptContext!();
-        ArgParser!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_101 {
     };
 }
 
-impl_101!()
+impl_101!();

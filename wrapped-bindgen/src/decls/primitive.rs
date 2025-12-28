@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ToTokens!();
         TokenStream!();
+        ToTokens!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! primitive {
     };
 }
 
-primitive!()
+primitive!();

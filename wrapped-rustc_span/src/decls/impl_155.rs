@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Span!();
         LocalDefId!();
-        InlineParent!();
         SpanData!();
+        Span!();
         SyntaxContext!();
+        InlineParent!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_155 {
     };
 }
 
-impl_155!()
+impl_155!();

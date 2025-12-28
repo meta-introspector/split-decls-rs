@@ -4,4 +4,4 @@ macro_rules! test_vec_impl {
     };
 }
 
-test_vec_impl!()
+test_vec_impl!();

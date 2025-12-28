@@ -13,4 +13,4 @@ macro_rules! impl_int_from_uint {
     };
 }
 
-impl_int_from_uint!()
+impl_int_from_uint!();

@@ -4,4 +4,4 @@ macro_rules! TIRHUTA {
     };
 }
 
-TIRHUTA!()
+TIRHUTA!();

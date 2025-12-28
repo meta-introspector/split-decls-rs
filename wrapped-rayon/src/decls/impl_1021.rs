@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        UnindexedConsumer!();
-        IndexedParallelIterator!();
-        ZipEq!();
         ParallelIterator!();
+        ZipEq!();
+        IndexedParallelIterator!();
+        UnindexedConsumer!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_1021 {
     };
 }
 
-impl_1021!()
+impl_1021!();

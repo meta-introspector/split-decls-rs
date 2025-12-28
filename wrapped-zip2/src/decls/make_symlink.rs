@@ -11,4 +11,4 @@ macro_rules! make_symlink {
     };
 }
 
-make_symlink!()
+make_symlink!();

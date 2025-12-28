@@ -11,4 +11,4 @@ macro_rules! rintf128 {
     };
 }
 
-rintf128!()
+rintf128!();

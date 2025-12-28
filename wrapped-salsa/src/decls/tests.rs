@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        IngredientIndex!();
         IdentityMap!();
-        IdentityHash!();
+        IngredientIndex!();
         Identity!();
-        Id!();
+        IdentityHash!();
         DisambiguatorMap!();
         Disambiguator!();
+        Id!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! tests {
     };
 }
 
-tests!()
+tests!();

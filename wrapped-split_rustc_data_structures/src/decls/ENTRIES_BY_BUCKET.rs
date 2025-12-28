@@ -11,4 +11,4 @@ macro_rules! ENTRIES_BY_BUCKET {
     };
 }
 
-ENTRIES_BY_BUCKET!()
+ENTRIES_BY_BUCKET!();

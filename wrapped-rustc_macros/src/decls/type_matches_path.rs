@@ -4,4 +4,4 @@ macro_rules! type_matches_path {
     };
 }
 
-type_matches_path!()
+type_matches_path!();

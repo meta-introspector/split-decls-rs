@@ -2,12 +2,12 @@ macro_rules! deps {
     () => {
         FileExcluded!();
         ChangedFile!();
-        Change!();
-        FileState!();
-        Vfs!();
         FileId!();
-        VfsPath!();
+        Vfs!();
+        FileState!();
         Entry!();
+        Change!();
+        VfsPath!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_56 {
     };
 }
 
-impl_56!()
+impl_56!();

@@ -4,4 +4,4 @@ macro_rules! NUM_WAKERS {
     };
 }
 
-NUM_WAKERS!()
+NUM_WAKERS!();

@@ -11,4 +11,4 @@ macro_rules! collect_const_value {
     };
 }
 
-collect_const_value!()
+collect_const_value!();

@@ -4,4 +4,4 @@ macro_rules! CompactDirection {
     };
 }
 
-CompactDirection!()
+CompactDirection!();

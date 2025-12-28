@@ -4,4 +4,4 @@ macro_rules! IMAGE_OS2_SIGNATURE {
     };
 }
 
-IMAGE_OS2_SIGNATURE!()
+IMAGE_OS2_SIGNATURE!();

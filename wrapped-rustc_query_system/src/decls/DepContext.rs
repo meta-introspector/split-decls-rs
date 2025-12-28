@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        DepNode!();
-        DepKindStruct!();
-        DepKind!();
-        MarkFrame!();
         DepGraph!();
-        Deps!();
-        FingerprintStyle!();
+        DepNode!();
+        DepKind!();
         StableHashingContext!();
+        FingerprintStyle!();
+        DepKindStruct!();
+        Deps!();
+        MarkFrame!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! DepContext {
     };
 }
 
-DepContext!()
+DepContext!();

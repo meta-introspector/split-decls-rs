@@ -4,4 +4,4 @@ macro_rules! R_SH_DIR8WPL {
     };
 }
 
-R_SH_DIR8WPL!()
+R_SH_DIR8WPL!();

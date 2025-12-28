@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
         Connection!();
-        OwnedData!();
-        Error!();
-        Result!();
-        SharedData!();
-        Name!();
         Data!();
+        OwnedData!();
+        Name!();
+        SharedData!();
+        Result!();
+        Error!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_241 {
     };
 }
 
-impl_241!()
+impl_241!();

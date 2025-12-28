@@ -4,4 +4,4 @@ macro_rules! explicit {
     };
 }
 
-explicit!()
+explicit!();

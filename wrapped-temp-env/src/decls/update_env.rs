@@ -4,4 +4,4 @@ macro_rules! update_env {
     };
 }
 
-update_env!()
+update_env!();

@@ -4,4 +4,4 @@ macro_rules! is_id_start {
     };
 }
 
-is_id_start!()
+is_id_start!();

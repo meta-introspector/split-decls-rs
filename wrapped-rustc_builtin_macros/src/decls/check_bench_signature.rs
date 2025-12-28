@@ -11,4 +11,4 @@ macro_rules! check_bench_signature {
     };
 }
 
-check_bench_signature!()
+check_bench_signature!();

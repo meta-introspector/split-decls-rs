@@ -11,4 +11,4 @@ macro_rules! num_chunks {
     };
 }
 
-num_chunks!()
+num_chunks!();

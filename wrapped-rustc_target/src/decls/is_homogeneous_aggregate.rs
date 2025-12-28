@@ -13,4 +13,4 @@ macro_rules! is_homogeneous_aggregate {
     };
 }
 
-is_homogeneous_aggregate!()
+is_homogeneous_aggregate!();

@@ -4,4 +4,4 @@ macro_rules! fs_serial_core_with_return {
     };
 }
 
-fs_serial_core_with_return!()
+fs_serial_core_with_return!();

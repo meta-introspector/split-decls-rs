@@ -4,4 +4,4 @@ macro_rules! clone_fields {
     };
 }
 
-clone_fields!()
+clone_fields!();

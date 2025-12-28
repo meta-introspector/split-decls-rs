@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ExpnId!();
         Transparency!();
+        ExpnId!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! SyntaxContext {
     };
 }
 
-SyntaxContext!()
+SyntaxContext!();

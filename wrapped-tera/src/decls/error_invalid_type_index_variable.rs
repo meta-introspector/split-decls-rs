@@ -12,4 +12,4 @@ macro_rules! error_invalid_type_index_variable {
     };
 }
 
-error_invalid_type_index_variable!()
+error_invalid_type_index_variable!();

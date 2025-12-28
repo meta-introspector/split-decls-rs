@@ -4,4 +4,4 @@ macro_rules! right_produces_items_with_no_complete {
     };
 }
 
-right_produces_items_with_no_complete!()
+right_produces_items_with_no_complete!();

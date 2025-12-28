@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Linker!();
         SelfContainedLinkerMissing!();
+        Linker!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! add_lld_args {
     };
 }
 
-add_lld_args!()
+add_lld_args!();

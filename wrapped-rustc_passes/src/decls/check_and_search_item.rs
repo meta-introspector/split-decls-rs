@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        AttrOnlyInFunctions!();
         MultipleRustcMain!();
         EntryContext!();
-        AttrOnlyInFunctions!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! check_and_search_item {
     };
 }
 
-check_and_search_item!()
+check_and_search_item!();

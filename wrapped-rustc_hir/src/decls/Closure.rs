@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        ClosureBinder!();
-        BodyId!();
-        Constness!();
         GenericParam!();
-        FnDecl!();
+        BodyId!();
         ClosureKind!();
+        Constness!();
+        FnDecl!();
+        ClosureBinder!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! Closure {
     };
 }
 
-Closure!()
+Closure!();

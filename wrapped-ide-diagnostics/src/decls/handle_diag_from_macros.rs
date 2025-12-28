@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DiagnosticCode!();
         Diagnostic!();
+        DiagnosticCode!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! handle_diag_from_macros {
     };
 }
 
-handle_diag_from_macros!()
+handle_diag_from_macros!();

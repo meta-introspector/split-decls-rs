@@ -4,4 +4,4 @@ macro_rules! FormatDebugHex {
     };
 }
 
-FormatDebugHex!()
+FormatDebugHex!();

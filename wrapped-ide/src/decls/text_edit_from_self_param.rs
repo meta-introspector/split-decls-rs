@@ -4,4 +4,4 @@ macro_rules! text_edit_from_self_param {
     };
 }
 
-text_edit_from_self_param!()
+text_edit_from_self_param!();

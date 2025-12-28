@@ -4,4 +4,4 @@ macro_rules! IdIterator {
     };
 }
 
-IdIterator!()
+IdIterator!();

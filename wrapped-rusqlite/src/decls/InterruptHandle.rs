@@ -4,4 +4,4 @@ macro_rules! InterruptHandle {
     };
 }
 
-InterruptHandle!()
+InterruptHandle!();

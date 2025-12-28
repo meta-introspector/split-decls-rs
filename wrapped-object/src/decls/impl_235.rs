@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        Result!();
-        SymbolIterator!();
-        ObjectSymbolTable!();
-        CoffHeader!();
-        ReadRef!();
-        CoffSymbol!();
-        Symbol!();
         CoffSymbolIterator!();
-        CoffSymbolTable!();
+        Result!();
+        ObjectSymbolTable!();
+        CoffSymbol!();
+        CoffHeader!();
         SymbolIndex!();
+        SymbolIterator!();
+        CoffSymbolTable!();
+        ReadRef!();
+        Symbol!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_235 {
     };
 }
 
-impl_235!()
+impl_235!();

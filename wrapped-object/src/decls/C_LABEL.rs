@@ -4,4 +4,4 @@ macro_rules! C_LABEL {
     };
 }
 
-C_LABEL!()
+C_LABEL!();

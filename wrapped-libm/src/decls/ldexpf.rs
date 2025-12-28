@@ -4,4 +4,4 @@ macro_rules! ldexpf {
     };
 }
 
-ldexpf!()
+ldexpf!();

@@ -4,4 +4,4 @@ macro_rules! as_constant {
     };
 }
 
-as_constant!()
+as_constant!();

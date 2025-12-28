@@ -4,4 +4,4 @@ macro_rules! io_cqring_offsets {
     };
 }
 
-io_cqring_offsets!()
+io_cqring_offsets!();

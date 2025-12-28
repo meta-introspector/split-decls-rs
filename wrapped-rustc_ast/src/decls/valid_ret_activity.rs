@@ -13,4 +13,4 @@ macro_rules! valid_ret_activity {
     };
 }
 
-valid_ret_activity!()
+valid_ret_activity!();

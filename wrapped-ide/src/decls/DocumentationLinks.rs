@@ -4,4 +4,4 @@ macro_rules! DocumentationLinks {
     };
 }
 
-DocumentationLinks!()
+DocumentationLinks!();

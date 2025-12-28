@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        IllFormedAttributeInput!();
+        InvalidAttrStyle!();
         InvalidTargetLint!();
         UnusedDuplicate!();
-        InvalidAttrStyle!();
+        IllFormedAttributeInput!();
         EmptyAttributeList!();
         InvalidTarget!();
     };
@@ -16,4 +16,4 @@ macro_rules! emit_attribute_lint {
     };
 }
 
-emit_attribute_lint!()
+emit_attribute_lint!();

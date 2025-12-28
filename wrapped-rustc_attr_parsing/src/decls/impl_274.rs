@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        SharedContext!();
         ShouldEmit!();
         UnusedDuplicate!();
         Stage!();
+        SharedContext!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_274 {
     };
 }
 
-impl_274!()
+impl_274!();

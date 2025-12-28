@@ -4,4 +4,4 @@ macro_rules! construct_place_string {
     };
 }
 
-construct_place_string!()
+construct_place_string!();

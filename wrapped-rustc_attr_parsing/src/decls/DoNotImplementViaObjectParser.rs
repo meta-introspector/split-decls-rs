@@ -4,4 +4,4 @@ macro_rules! DoNotImplementViaObjectParser {
     };
 }
 
-DoNotImplementViaObjectParser!()
+DoNotImplementViaObjectParser!();

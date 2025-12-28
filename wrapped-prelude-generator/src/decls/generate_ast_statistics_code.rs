@@ -4,4 +4,4 @@ macro_rules! generate_ast_statistics_code {
     };
 }
 
-generate_ast_statistics_code!()
+generate_ast_statistics_code!();

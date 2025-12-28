@@ -4,4 +4,4 @@ macro_rules! WSCHAR {
     };
 }
 
-WSCHAR!()
+WSCHAR!();

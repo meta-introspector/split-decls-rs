@@ -11,4 +11,4 @@ macro_rules! impl_try_from_trait {
     };
 }
 
-impl_try_from_trait!()
+impl_try_from_trait!();

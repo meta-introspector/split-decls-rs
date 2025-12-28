@@ -11,4 +11,4 @@ macro_rules! set_ip_drop_membership_with_ifindex {
     };
 }
 
-set_ip_drop_membership_with_ifindex!()
+set_ip_drop_membership_with_ifindex!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ParAllEdges!();
         NodeTrait!();
+        ParAllEdges!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_947 {
     };
 }
 
-impl_947!()
+impl_947!();

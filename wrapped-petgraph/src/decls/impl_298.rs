@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        EdgeReferences!();
         IndexType!();
+        EdgeReferences!();
         NoPretty!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_298 {
     };
 }
 
-impl_298!()
+impl_298!();

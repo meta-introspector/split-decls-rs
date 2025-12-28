@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        StructRest!();
         QSelf!();
+        StructRest!();
         Walkable!();
         Path!();
         ExprField!();
@@ -15,4 +15,4 @@ macro_rules! StructExpr {
     };
 }
 
-StructExpr!()
+StructExpr!();

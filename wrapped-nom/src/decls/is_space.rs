@@ -4,4 +4,4 @@ macro_rules! is_space {
     };
 }
 
-is_space!()
+is_space!();

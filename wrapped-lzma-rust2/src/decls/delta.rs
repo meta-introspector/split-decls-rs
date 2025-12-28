@@ -4,4 +4,4 @@ macro_rules! delta {
     };
 }
 
-delta!()
+delta!();

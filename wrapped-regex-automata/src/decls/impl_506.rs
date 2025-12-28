@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Utf8BoundedMap!();
         NFA!();
-        Utf8BoundedEntry!();
-        StateID!();
         Transition!();
+        StateID!();
+        Utf8BoundedEntry!();
+        Utf8BoundedMap!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_506 {
     };
 }
 
-impl_506!()
+impl_506!();

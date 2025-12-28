@@ -4,4 +4,4 @@ macro_rules! ExpectedReturnTypeLabel {
     };
 }
 
-ExpectedReturnTypeLabel!()
+ExpectedReturnTypeLabel!();

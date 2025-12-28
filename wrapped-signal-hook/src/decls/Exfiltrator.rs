@@ -4,4 +4,4 @@ macro_rules! Exfiltrator {
     };
 }
 
-Exfiltrator!()
+Exfiltrator!();

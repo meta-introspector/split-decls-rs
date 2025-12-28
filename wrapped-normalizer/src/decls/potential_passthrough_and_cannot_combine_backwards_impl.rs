@@ -4,4 +4,4 @@ macro_rules! potential_passthrough_and_cannot_combine_backwards_impl {
     };
 }
 
-potential_passthrough_and_cannot_combine_backwards_impl!()
+potential_passthrough_and_cannot_combine_backwards_impl!();

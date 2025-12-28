@@ -4,4 +4,4 @@ macro_rules! execute_unindexed_range {
     };
 }
 
-execute_unindexed_range!()
+execute_unindexed_range!();

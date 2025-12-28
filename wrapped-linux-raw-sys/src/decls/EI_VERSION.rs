@@ -4,4 +4,4 @@ macro_rules! EI_VERSION {
     };
 }
 
-EI_VERSION!()
+EI_VERSION!();

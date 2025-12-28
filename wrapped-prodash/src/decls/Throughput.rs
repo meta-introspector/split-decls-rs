@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Duration!();
         Key!();
         State!();
+        Duration!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Throughput {
     };
 }
 
-Throughput!()
+Throughput!();

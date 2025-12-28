@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Derive!();
+        Ctxt!();
         Container!();
         Data!();
-        Ctxt!();
+        Derive!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_9 {
     };
 }
 
-impl_9!()
+impl_9!();

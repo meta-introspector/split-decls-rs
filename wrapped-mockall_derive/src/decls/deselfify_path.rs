@@ -4,4 +4,4 @@ macro_rules! deselfify_path {
     };
 }
 
-deselfify_path!()
+deselfify_path!();

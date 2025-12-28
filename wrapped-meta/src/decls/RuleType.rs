@@ -4,4 +4,4 @@ macro_rules! RuleType {
     };
 }
 
-RuleType!()
+RuleType!();

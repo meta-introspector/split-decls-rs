@@ -11,4 +11,4 @@ macro_rules! remove_bom {
     };
 }
 
-remove_bom!()
+remove_bom!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Info!();
         LifetimeSyntaxCategories!();
+        Info!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! lifetimes_use_matched_syntax {
     };
 }
 
-lifetimes_use_matched_syntax!()
+lifetimes_use_matched_syntax!();

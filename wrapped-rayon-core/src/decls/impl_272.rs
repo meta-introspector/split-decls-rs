@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        Configuration!();
-        ThreadPoolBuilder!();
-        Scope!();
         ScopeFifo!();
-        Yield!();
-        ThreadSpawn!();
-        Registry!();
-        ThreadPool!();
         BroadcastContext!();
+        Yield!();
+        Scope!();
+        ThreadPoolBuilder!();
+        Registry!();
+        Configuration!();
+        ThreadSpawn!();
         ThreadPoolBuildError!();
+        ThreadPool!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_272 {
     };
 }
 
-impl_272!()
+impl_272!();

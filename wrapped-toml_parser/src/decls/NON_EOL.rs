@@ -4,4 +4,4 @@ macro_rules! NON_EOL {
     };
 }
 
-NON_EOL!()
+NON_EOL!();

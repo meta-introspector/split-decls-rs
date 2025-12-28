@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Builder!();
         AsmDialect!();
         Funclet!();
+        Builder!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! inline_asm_call {
     };
 }
 
-inline_asm_call!()
+inline_asm_call!();

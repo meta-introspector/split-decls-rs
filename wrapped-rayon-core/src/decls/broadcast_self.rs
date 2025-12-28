@@ -11,4 +11,4 @@ macro_rules! broadcast_self {
     };
 }
 
-broadcast_self!()
+broadcast_self!();

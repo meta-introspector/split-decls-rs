@@ -4,4 +4,4 @@ macro_rules! R_CRIS_16_PCREL {
     };
 }
 
-R_CRIS_16_PCREL!()
+R_CRIS_16_PCREL!();

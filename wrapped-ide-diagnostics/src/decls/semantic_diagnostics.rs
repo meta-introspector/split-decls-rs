@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        DiagnosticCode!();
+        DiagnosticsConfig!();
         DiagnosticsContext!();
         Diagnostic!();
-        DiagnosticsConfig!();
+        DiagnosticCode!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! semantic_diagnostics {
     };
 }
 
-semantic_diagnostics!()
+semantic_diagnostics!();

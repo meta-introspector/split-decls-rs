@@ -4,4 +4,4 @@ macro_rules! MisplacedAssocTyBinding {
     };
 }
 
-MisplacedAssocTyBinding!()
+MisplacedAssocTyBinding!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Token!();
-        TraitBoundConst!();
         Printer!();
+        TraitBoundConst!();
+        Token!();
         PathKind!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_44 {
     };
 }
 
-impl_44!()
+impl_44!();

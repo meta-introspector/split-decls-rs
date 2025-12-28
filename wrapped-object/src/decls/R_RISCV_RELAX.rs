@@ -4,4 +4,4 @@ macro_rules! R_RISCV_RELAX {
     };
 }
 
-R_RISCV_RELAX!()
+R_RISCV_RELAX!();

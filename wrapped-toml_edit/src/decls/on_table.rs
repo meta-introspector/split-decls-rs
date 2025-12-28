@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
         Array!();
-        RawString!();
+        Error!();
+        TraceScope!();
         Decor!();
         Table!();
+        RawString!();
         TableHeader!();
-        TraceScope!();
-        Error!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! on_table {
     };
 }
 
-on_table!()
+on_table!();

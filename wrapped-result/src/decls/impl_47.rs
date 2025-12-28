@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ComPtr!();
         IUnknown_Vtbl!();
+        ComPtr!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_47 {
     };
 }
 
-impl_47!()
+impl_47!();

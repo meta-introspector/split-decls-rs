@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        AttributePlace!();
         SBuilder!();
-        Visibility!();
         CallConv!();
         UnnamedAddr!();
+        Visibility!();
+        AttributePlace!();
         AttributeKind!();
         SimpleCx!();
     };
@@ -17,4 +17,4 @@ macro_rules! create_const_value_function {
     };
 }
 
-create_const_value_function!()
+create_const_value_function!();

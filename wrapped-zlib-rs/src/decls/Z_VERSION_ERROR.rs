@@ -4,4 +4,4 @@ macro_rules! Z_VERSION_ERROR {
     };
 }
 
-Z_VERSION_ERROR!()
+Z_VERSION_ERROR!();

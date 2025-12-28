@@ -1,44 +1,44 @@
 macro_rules! deps {
     () => {
-        Span!();
-        Flags!();
-        Dot!();
-        Translator!();
-        Result!();
-        ClassAsciiKind!();
-        AssertionKind!();
-        ClassUnicodeKind!();
-        Ast!();
-        ErrorKind!();
+        Class!();
+        ClassUnicodeRange!();
+        HirFrame!();
         SimpleCaseFolder!();
+        ClassPerlKind!();
         Concat!();
-        Look!();
-        ClassAscii!();
+        ClassBytes!();
         Error!();
         Repetition!();
-        Class!();
-        ClassPerlKind!();
-        ClassBytes!();
-        GroupKind!();
-        ClassQuery!();
-        TranslatorI!();
-        HirFrame!();
-        Assertion!();
-        Bytes!();
-        Alternation!();
-        Range!();
-        Either!();
-        ClassBytesRange!();
-        Hir!();
-        CaptureName!();
-        ClassPerl!();
-        Group!();
-        RepetitionRange!();
-        ClassUnicodeRange!();
         Capture!();
+        Result!();
+        Dot!();
+        CaptureName!();
+        Range!();
+        ClassQuery!();
+        RepetitionKind!();
+        ClassPerl!();
+        Alternation!();
+        Either!();
+        Bytes!();
+        ClassBytesRange!();
+        RepetitionRange!();
+        Look!();
+        AssertionKind!();
+        Translator!();
+        ErrorKind!();
+        ClassAsciiKind!();
+        ClassAscii!();
         ClassUnicode!();
         Literal!();
-        RepetitionKind!();
+        ClassUnicodeKind!();
+        Group!();
+        Ast!();
+        Flags!();
+        GroupKind!();
+        TranslatorI!();
+        Hir!();
+        Assertion!();
+        Span!();
     };
 }
 
@@ -49,4 +49,4 @@ macro_rules! impl_197 {
     };
 }
 
-impl_197!()
+impl_197!();

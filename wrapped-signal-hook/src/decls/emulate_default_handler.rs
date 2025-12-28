@@ -11,4 +11,4 @@ macro_rules! emulate_default_handler {
     };
 }
 
-emulate_default_handler!()
+emulate_default_handler!();

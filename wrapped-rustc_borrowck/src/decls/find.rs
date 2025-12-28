@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        UseFinder!();
         Cause!();
+        UseFinder!();
         RegionInferenceContext!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! find {
     };
 }
 
-find!()
+find!();

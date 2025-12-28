@@ -4,4 +4,4 @@ macro_rules! R_PARISC_GNU_VTINHERIT {
     };
 }
 
-R_PARISC_GNU_VTINHERIT!()
+R_PARISC_GNU_VTINHERIT!();

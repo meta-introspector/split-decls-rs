@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        MaybeEncrypted!();
         ZipResult!();
         GenericZipWriter!();
-        MaybeEncrypted!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! SwitchWriterFunction {
     };
 }
 
-SwitchWriterFunction!()
+SwitchWriterFunction!();

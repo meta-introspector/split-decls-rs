@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        TokenKind!();
         Token!();
+        TokenKind!();
         Stream!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! next_token_if {
     };
 }
 
-next_token_if!()
+next_token_if!();

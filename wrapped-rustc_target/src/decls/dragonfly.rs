@@ -4,4 +4,4 @@ macro_rules! dragonfly {
     };
 }
 
-dragonfly!()
+dragonfly!();

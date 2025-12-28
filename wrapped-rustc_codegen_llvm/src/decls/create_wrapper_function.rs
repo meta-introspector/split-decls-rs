@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        CreateAttrStringValue!();
-        SBuilder!();
-        Visibility!();
-        SimpleCx!();
-        AttributePlace!();
-        AttributeKind!();
         UnnamedAddr!();
-        CallConv!();
+        SBuilder!();
+        CreateAttrStringValue!();
+        AttributePlace!();
+        Visibility!();
         SmallVec!();
+        AttributeKind!();
+        SimpleCx!();
+        CallConv!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! create_wrapper_function {
     };
 }
 
-create_wrapper_function!()
+create_wrapper_function!();

@@ -4,4 +4,4 @@ macro_rules! ssr_let_stmt_in_fn_match {
     };
 }
 
-ssr_let_stmt_in_fn_match!()
+ssr_let_stmt_in_fn_match!();

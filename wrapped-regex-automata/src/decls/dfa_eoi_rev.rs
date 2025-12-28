@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        MatchError!();
-        StateID!();
         HalfMatch!();
-        Input!();
-        Automaton!();
         DFA!();
+        MatchError!();
+        Automaton!();
+        StateID!();
+        Input!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! dfa_eoi_rev {
     };
 }
 
-dfa_eoi_rev!()
+dfa_eoi_rev!();

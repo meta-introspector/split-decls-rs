@@ -4,4 +4,4 @@ macro_rules! DEFAULT_FLAGS {
     };
 }
 
-DEFAULT_FLAGS!()
+DEFAULT_FLAGS!();

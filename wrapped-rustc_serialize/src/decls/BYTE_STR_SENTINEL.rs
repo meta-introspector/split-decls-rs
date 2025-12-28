@@ -4,4 +4,4 @@ macro_rules! BYTE_STR_SENTINEL {
     };
 }
 
-BYTE_STR_SENTINEL!()
+BYTE_STR_SENTINEL!();

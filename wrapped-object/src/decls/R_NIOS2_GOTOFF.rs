@@ -4,4 +4,4 @@ macro_rules! R_NIOS2_GOTOFF {
     };
 }
 
-R_NIOS2_GOTOFF!()
+R_NIOS2_GOTOFF!();

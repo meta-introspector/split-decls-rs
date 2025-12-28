@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        InterpretationResult!();
-        CheckAlignment!();
         InterpCx!();
-        CompileTimeMachine!();
         CanAccessMutGlobal!();
+        CheckAlignment!();
+        CompileTimeMachine!();
+        InterpretationResult!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! eval_in_interpreter {
     };
 }
 
-eval_in_interpreter!()
+eval_in_interpreter!();

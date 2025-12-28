@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Response!();
-        Result!();
         Error!();
+        Result!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Service {
     };
 }
 
-Service!()
+Service!();

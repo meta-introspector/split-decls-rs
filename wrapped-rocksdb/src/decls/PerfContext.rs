@@ -4,4 +4,4 @@ macro_rules! PerfContext {
     };
 }
 
-PerfContext!()
+PerfContext!();

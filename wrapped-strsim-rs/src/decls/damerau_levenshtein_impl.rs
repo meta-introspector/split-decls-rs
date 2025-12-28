@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        HybridGrowingHashmapChar!();
         RowId!();
+        HybridGrowingHashmapChar!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! damerau_levenshtein_impl {
     };
 }
 
-damerau_levenshtein_impl!()
+damerau_levenshtein_impl!();

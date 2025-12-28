@@ -9,4 +9,4 @@ macro_rules! invalid_macro_content {
     };
 }
 
-invalid_macro_content!()
+invalid_macro_content!();

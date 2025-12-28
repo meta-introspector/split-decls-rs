@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
+        EdgeIndex!();
         Directed!();
         NodeIndex!();
-        DefaultIx!();
         Edge!();
-        EdgeIndex!();
-        Dfs!();
         Node!();
+        DefaultIx!();
+        Dfs!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! Graph {
     };
 }
 
-Graph!()
+Graph!();

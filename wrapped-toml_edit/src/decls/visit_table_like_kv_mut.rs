@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        KeyMut!();
         Item!();
         VisitMut!();
-        KeyMut!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! visit_table_like_kv_mut {
     };
 }
 
-visit_table_like_kv_mut!()
+visit_table_like_kv_mut!();

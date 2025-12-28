@@ -12,4 +12,4 @@ macro_rules! walk_const_param_default {
     };
 }
 
-walk_const_param_default!()
+walk_const_param_default!();

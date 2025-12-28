@@ -4,4 +4,4 @@ macro_rules! BuiltinSpecialModuleNameUsed {
     };
 }
 
-BuiltinSpecialModuleNameUsed!()
+BuiltinSpecialModuleNameUsed!();

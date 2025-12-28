@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        InlineSize!();
         SmolStr!();
         Repr!();
+        InlineSize!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! build_from_str_iter {
     };
 }
 
-build_from_str_iter!()
+build_from_str_iter!();

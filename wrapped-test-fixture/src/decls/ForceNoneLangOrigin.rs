@@ -4,4 +4,4 @@ macro_rules! ForceNoneLangOrigin {
     };
 }
 
-ForceNoneLangOrigin!()
+ForceNoneLangOrigin!();

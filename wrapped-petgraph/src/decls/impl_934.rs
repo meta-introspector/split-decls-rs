@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        NeighborsDirected!();
-        Direction!();
         GraphMap!();
+        NeighborsDirected!();
         EdgeType!();
+        Direction!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_934 {
     };
 }
 
-impl_934!()
+impl_934!();

@@ -11,4 +11,4 @@ macro_rules! is_disaligned {
     };
 }
 
-is_disaligned!()
+is_disaligned!();

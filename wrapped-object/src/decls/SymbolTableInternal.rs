@@ -1,18 +1,18 @@
 macro_rules! deps {
     () => {
-        WasmSymbolTable!();
-        Endianness!();
-        CoffBigSymbolTable!();
-        XcoffSymbolTable64!();
         ReadRef!();
-        ElfSymbolTable64!();
-        CoffSymbolTable!();
         MachO32!();
-        MachO64!();
+        CoffBigSymbolTable!();
         MachOSymbolTable32!();
-        MachOSymbolTable64!();
+        ElfSymbolTable64!();
+        XcoffSymbolTable64!();
+        Endianness!();
         XcoffSymbolTable32!();
         ElfSymbolTable32!();
+        MachOSymbolTable64!();
+        WasmSymbolTable!();
+        MachO64!();
+        CoffSymbolTable!();
     };
 }
 
@@ -23,4 +23,4 @@ macro_rules! SymbolTableInternal {
     };
 }
 
-SymbolTableInternal!()
+SymbolTableInternal!();

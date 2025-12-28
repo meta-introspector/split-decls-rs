@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
         SymbolMap!();
-        RustcInfo!();
-        DependencyAnalysisVisitor!();
         Declaration!();
+        RustcInfo!();
         AllDeclarationsExtractionResult!();
+        DependencyAnalysisVisitor!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! extract_all_declarations_from_file {
     };
 }
 
-extract_all_declarations_from_file!()
+extract_all_declarations_from_file!();

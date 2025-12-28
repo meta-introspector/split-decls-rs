@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         Error!();
+        ErrorKind!();
         Parser!();
+        ParseError!();
         Cond!();
         IResult!();
-        ErrorKind!();
-        ParseError!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! cond {
     };
 }
 
-cond!()
+cond!();

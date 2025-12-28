@@ -11,4 +11,4 @@ macro_rules! expand_trace_macros {
     };
 }
 
-expand_trace_macros!()
+expand_trace_macros!();

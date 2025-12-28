@@ -11,4 +11,4 @@ macro_rules! connect_unspec {
     };
 }
 
-connect_unspec!()
+connect_unspec!();

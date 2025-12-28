@@ -4,4 +4,4 @@ macro_rules! DT_MIPS_FLAGS {
     };
 }
 
-DT_MIPS_FLAGS!()
+DT_MIPS_FLAGS!();

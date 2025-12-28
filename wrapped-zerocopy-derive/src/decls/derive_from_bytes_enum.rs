@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        EnumRepr!();
-        ImplBlockBuilder!();
         FieldBounds!();
+        EnumRepr!();
         Trait!();
+        ImplBlockBuilder!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! derive_from_bytes_enum {
     };
 }
 
-derive_from_bytes_enum!()
+derive_from_bytes_enum!();

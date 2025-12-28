@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Endian!();
-        SectionHeader32!();
         SectionHeader!();
         FileHeader32!();
+        SectionHeader32!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_318 {
     };
 }
 
-impl_318!()
+impl_318!();

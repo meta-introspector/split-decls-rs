@@ -4,4 +4,4 @@ macro_rules! RenameDefinition {
     };
 }
 
-RenameDefinition!()
+RenameDefinition!();

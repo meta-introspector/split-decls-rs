@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Item!();
-        GenericParam!();
-        WhereRegionPredicate!();
-        Generics!();
-        WhereBoundPredicate!();
         TyKind!();
         WherePredicateKind!();
+        Generics!();
+        GenericParam!();
+        WhereRegionPredicate!();
+        Item!();
+        WhereBoundPredicate!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_144 {
     };
 }
 
-impl_144!()
+impl_144!();

@@ -4,4 +4,4 @@ macro_rules! RawPrefix {
     };
 }
 
-RawPrefix!()
+RawPrefix!();

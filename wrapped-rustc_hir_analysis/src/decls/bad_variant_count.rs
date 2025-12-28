@@ -11,4 +11,4 @@ macro_rules! bad_variant_count {
     };
 }
 
-bad_variant_count!()
+bad_variant_count!();

@@ -4,4 +4,4 @@ macro_rules! impl_mirrored {
     };
 }
 
-impl_mirrored!()
+impl_mirrored!();

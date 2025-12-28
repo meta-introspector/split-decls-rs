@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Latch!();
-        SpinLatch!();
         CoreLatch!();
+        SpinLatch!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! OnceLatch {
     };
 }
 
-OnceLatch!()
+OnceLatch!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Zip64CDEBlock!();
         ZipResult!();
+        Zip64CDEBlock!();
         Zip64CentralDirectoryEnd!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_173 {
     };
 }
 
-impl_173!()
+impl_173!();

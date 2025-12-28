@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        ClassUnicode!();
-        ClassQuery!();
-        CanonicalClassQuery!();
-        Result!();
         Error!();
+        ClassUnicode!();
+        Result!();
+        CanonicalClassQuery!();
+        ClassQuery!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! class {
     };
 }
 
-class!()
+class!();

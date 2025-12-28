@@ -12,4 +12,4 @@ macro_rules! error_is_accurate {
     };
 }
 
-error_is_accurate!()
+error_is_accurate!();

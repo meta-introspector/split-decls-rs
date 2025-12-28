@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Result!();
-        VTabLog!();
         Connection!();
+        VTabLog!();
+        Result!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! load_module {
     };
 }
 
-load_module!()
+load_module!();

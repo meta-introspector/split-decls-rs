@@ -4,4 +4,4 @@ macro_rules! goto_definition {
     };
 }
 
-goto_definition!()
+goto_definition!();

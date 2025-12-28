@@ -4,4 +4,4 @@ macro_rules! characteristic_def_id_of_mono_item {
     };
 }
 
-characteristic_def_id_of_mono_item!()
+characteristic_def_id_of_mono_item!();

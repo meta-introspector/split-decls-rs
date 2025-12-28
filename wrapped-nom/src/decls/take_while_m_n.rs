@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
         Streaming!();
+        IResult!();
+        Error!();
+        Input!();
+        Needed!();
+        Parser!();
         ErrorKind!();
         ParseError!();
-        Parser!();
-        Input!();
-        IResult!();
-        Needed!();
-        Error!();
         TakeWhileMN!();
     };
 }
@@ -19,4 +19,4 @@ macro_rules! take_while_m_n {
     };
 }
 
-take_while_m_n!()
+take_while_m_n!();

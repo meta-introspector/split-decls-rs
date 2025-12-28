@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        CompilerCtxt!();
         TypingEnvHelpers!();
         Bridge!();
+        CompilerCtxt!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! create_ty_and_layout {
     };
 }
 
-create_ty_and_layout!()
+create_ty_and_layout!();

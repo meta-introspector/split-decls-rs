@@ -4,4 +4,4 @@ macro_rules! tree_node {
     };
 }
 
-tree_node!()
+tree_node!();

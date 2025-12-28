@@ -4,4 +4,4 @@ macro_rules! parse_decimal {
     };
 }
 
-parse_decimal!()
+parse_decimal!();

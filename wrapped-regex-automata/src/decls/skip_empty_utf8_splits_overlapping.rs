@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        NFA!();
         Input!();
+        NFA!();
         OverlappingState!();
         MatchError!();
     };
@@ -14,4 +14,4 @@ macro_rules! skip_empty_utf8_splits_overlapping {
     };
 }
 
-skip_empty_utf8_splits_overlapping!()
+skip_empty_utf8_splits_overlapping!();

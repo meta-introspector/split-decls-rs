@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         Binder!();
-        Interner!();
-        Clause!();
-        TraitRef!();
         FilterToTraits!();
         Elaborator!();
+        Clause!();
+        TraitRef!();
+        Interner!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! supertraits {
     };
 }
 
-supertraits!()
+supertraits!();

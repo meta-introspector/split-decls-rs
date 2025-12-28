@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        DiagnosticsConfig!();
         Diagnostic!();
+        DiagnosticsConfig!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! full_diagnostics {
     };
 }
 
-full_diagnostics!()
+full_diagnostics!();

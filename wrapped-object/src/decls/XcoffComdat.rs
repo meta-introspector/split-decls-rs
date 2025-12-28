@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        FileHeader!();
         XcoffFile!();
         ReadRef!();
-        FileHeader!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! XcoffComdat {
     };
 }
 
-XcoffComdat!()
+XcoffComdat!();

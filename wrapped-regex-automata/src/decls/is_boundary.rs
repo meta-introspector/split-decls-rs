@@ -4,4 +4,4 @@ macro_rules! is_boundary {
     };
 }
 
-is_boundary!()
+is_boundary!();

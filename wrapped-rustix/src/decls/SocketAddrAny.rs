@@ -4,4 +4,4 @@ macro_rules! SocketAddrAny {
     };
 }
 
-SocketAddrAny!()
+SocketAddrAny!();

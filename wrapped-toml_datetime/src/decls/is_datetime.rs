@@ -4,4 +4,4 @@ macro_rules! is_datetime {
     };
 }
 
-is_datetime!()
+is_datetime!();

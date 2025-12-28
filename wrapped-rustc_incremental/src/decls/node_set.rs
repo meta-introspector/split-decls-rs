@@ -4,4 +4,4 @@ macro_rules! node_set {
     };
 }
 
-node_set!()
+node_set!();

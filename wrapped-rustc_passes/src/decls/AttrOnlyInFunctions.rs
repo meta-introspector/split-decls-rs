@@ -4,4 +4,4 @@ macro_rules! AttrOnlyInFunctions {
     };
 }
 
-AttrOnlyInFunctions!()
+AttrOnlyInFunctions!();

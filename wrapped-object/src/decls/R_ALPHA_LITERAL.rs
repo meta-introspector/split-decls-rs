@@ -4,4 +4,4 @@ macro_rules! R_ALPHA_LITERAL {
     };
 }
 
-R_ALPHA_LITERAL!()
+R_ALPHA_LITERAL!();

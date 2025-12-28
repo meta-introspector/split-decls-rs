@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        RwLock!();
         Steal!();
+        RwLock!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_553 {
     };
 }
 
-impl_553!()
+impl_553!();

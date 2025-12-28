@@ -4,4 +4,4 @@ macro_rules! C_INFO {
     };
 }
 
-C_INFO!()
+C_INFO!();

@@ -11,4 +11,4 @@ macro_rules! codegen_naked_asm {
     };
 }
 
-codegen_naked_asm!()
+codegen_naked_asm!();

@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
         LogicExpr!();
+        WS!();
+        LogicOperator!();
+        Expr!();
         FunctionCall!();
         MathExpr!();
         ExprVal!();
         Node!();
-        LogicOperator!();
-        Expr!();
-        WS!();
         MathOperator!();
     };
 }
@@ -19,4 +19,4 @@ macro_rules! parse_variable_tag_math_with_filters_and_logic_expression {
     };
 }
 
-parse_variable_tag_math_with_filters_and_logic_expression!()
+parse_variable_tag_math_with_filters_and_logic_expression!();

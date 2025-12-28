@@ -4,4 +4,4 @@ macro_rules! CONTROL_CODE {
     };
 }
 
-CONTROL_CODE!()
+CONTROL_CODE!();

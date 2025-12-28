@@ -4,4 +4,4 @@ macro_rules! lookup_deprecation_entry {
     };
 }
 
-lookup_deprecation_entry!()
+lookup_deprecation_entry!();

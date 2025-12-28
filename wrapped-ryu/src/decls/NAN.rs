@@ -4,4 +4,4 @@ macro_rules! NAN {
     };
 }
 
-NAN!()
+NAN!();

@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        LlvmCodegenBackend!();
-        LlvmError!();
-        ModuleBuffer!();
-        ThinLTOModule!();
         ThinData!();
-        ThinBuffer!();
         ThinLTOKeysMap!();
+        LlvmError!();
+        ThinBuffer!();
+        ModuleBuffer!();
+        LlvmCodegenBackend!();
+        ThinLTOModule!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! thin_lto {
     };
 }
 
-thin_lto!()
+thin_lto!();

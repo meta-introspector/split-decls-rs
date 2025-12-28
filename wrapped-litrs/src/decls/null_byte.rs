@@ -11,4 +11,4 @@ macro_rules! null_byte {
     };
 }
 
-null_byte!()
+null_byte!();

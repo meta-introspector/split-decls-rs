@@ -4,4 +4,4 @@ macro_rules! list_deref {
     };
 }
 
-list_deref!()
+list_deref!();

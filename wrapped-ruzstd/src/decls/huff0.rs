@@ -4,4 +4,4 @@ macro_rules! huff0 {
     };
 }
 
-huff0!()
+huff0!();

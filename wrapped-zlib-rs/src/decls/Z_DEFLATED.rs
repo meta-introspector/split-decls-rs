@@ -4,4 +4,4 @@ macro_rules! Z_DEFLATED {
     };
 }
 
-Z_DEFLATED!()
+Z_DEFLATED!();

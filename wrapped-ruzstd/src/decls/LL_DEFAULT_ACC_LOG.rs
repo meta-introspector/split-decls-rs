@@ -4,4 +4,4 @@ macro_rules! LL_DEFAULT_ACC_LOG {
     };
 }
 
-LL_DEFAULT_ACC_LOG!()
+LL_DEFAULT_ACC_LOG!();

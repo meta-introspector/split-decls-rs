@@ -4,4 +4,4 @@ macro_rules! StabilityOutsideStd {
     };
 }
 
-StabilityOutsideStd!()
+StabilityOutsideStd!();

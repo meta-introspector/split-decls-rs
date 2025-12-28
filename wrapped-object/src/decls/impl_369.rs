@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Relr!();
-        RelrIterator!();
         Item!();
         FileHeader!();
+        RelrIterator!();
+        Relr!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_369 {
     };
 }
 
-impl_369!()
+impl_369!();

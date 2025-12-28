@@ -12,4 +12,4 @@ macro_rules! test_decode_from_to {
     };
 }
 
-test_decode_from_to!()
+test_decode_from_to!();

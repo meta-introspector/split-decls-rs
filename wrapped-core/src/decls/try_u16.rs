@@ -4,4 +4,4 @@ macro_rules! try_u16 {
     };
 }
 
-try_u16!()
+try_u16!();

@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         Sysroot!();
+        CfgOverrides!();
+        InvocationStrategy!();
+        TargetDirectoryConfig!();
         RustLibSource!();
         CargoFeatures!();
-        TargetDirectoryConfig!();
-        InvocationStrategy!();
-        CfgOverrides!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! CargoConfig {
     };
 }
 
-CargoConfig!()
+CargoConfig!();

@@ -4,4 +4,4 @@ macro_rules! repo_analysis {
     };
 }
 
-repo_analysis!()
+repo_analysis!();

@@ -4,4 +4,4 @@ macro_rules! PanicNonStr {
     };
 }
 
-PanicNonStr!()
+PanicNonStr!();

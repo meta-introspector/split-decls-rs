@@ -1,18 +1,18 @@
 macro_rules! deps {
     () => {
         ByteClasses!();
-        Input!();
-        HalfMatch!();
-        OwnedDFA!();
-        Compiler!();
-        WhichCaptures!();
-        Builder!();
-        DFA!();
-        BuildError!();
-        ByteSet!();
         Flags!();
-        Config!();
+        WhichCaptures!();
+        DFA!();
+        HalfMatch!();
+        ByteSet!();
+        BuildError!();
         NFA!();
+        Compiler!();
+        Config!();
+        OwnedDFA!();
+        Input!();
+        Builder!();
     };
 }
 
@@ -23,4 +23,4 @@ macro_rules! impl_14 {
     };
 }
 
-impl_14!()
+impl_14!();

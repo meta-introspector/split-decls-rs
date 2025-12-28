@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        NamedEnumeratedProperty!();
         ParseableEnumeratedProperty!();
         Baked!();
-        NamedEnumeratedProperty!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_value_getter {
     };
 }
 
-impl_value_getter!()
+impl_value_getter!();

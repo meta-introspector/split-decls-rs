@@ -11,4 +11,4 @@ macro_rules! parse_many {
     };
 }
 
-parse_many!()
+parse_many!();

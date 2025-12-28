@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Registry!();
-        ThreadPoolBuildError!();
         ThreadPoolBuilder!();
         ThreadSpawn!();
+        ThreadPoolBuildError!();
+        Registry!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! init_global_registry {
     };
 }
 
-init_global_registry!()
+init_global_registry!();

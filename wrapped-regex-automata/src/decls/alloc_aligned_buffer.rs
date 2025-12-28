@@ -4,4 +4,4 @@ macro_rules! alloc_aligned_buffer {
     };
 }
 
-alloc_aligned_buffer!()
+alloc_aligned_buffer!();

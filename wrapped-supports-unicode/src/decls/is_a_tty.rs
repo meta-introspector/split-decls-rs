@@ -11,4 +11,4 @@ macro_rules! is_a_tty {
     };
 }
 
-is_a_tty!()
+is_a_tty!();

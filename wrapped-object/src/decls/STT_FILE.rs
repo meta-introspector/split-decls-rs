@@ -4,4 +4,4 @@ macro_rules! STT_FILE {
     };
 }
 
-STT_FILE!()
+STT_FILE!();

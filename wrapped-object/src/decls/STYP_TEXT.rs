@@ -4,4 +4,4 @@ macro_rules! STYP_TEXT {
     };
 }
 
-STYP_TEXT!()
+STYP_TEXT!();

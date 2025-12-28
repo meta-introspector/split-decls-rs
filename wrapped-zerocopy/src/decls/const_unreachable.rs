@@ -4,4 +4,4 @@ macro_rules! const_unreachable {
     };
 }
 
-const_unreachable!()
+const_unreachable!();

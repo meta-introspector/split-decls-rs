@@ -13,4 +13,4 @@ macro_rules! parse_brackets {
     };
 }
 
-parse_brackets!()
+parse_brackets!();

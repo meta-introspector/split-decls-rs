@@ -11,4 +11,4 @@ macro_rules! unlock_bucket_pair {
     };
 }
 
-unlock_bucket_pair!()
+unlock_bucket_pair!();

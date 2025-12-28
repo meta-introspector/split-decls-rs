@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Relocation!();
         Table!();
+        Relocation!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! IMAGE_DIRECTORY_ENTRY_BASERELOC {
     };
 }
 
-IMAGE_DIRECTORY_ENTRY_BASERELOC!()
+IMAGE_DIRECTORY_ENTRY_BASERELOC!();

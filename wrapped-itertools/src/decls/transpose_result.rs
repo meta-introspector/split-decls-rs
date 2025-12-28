@@ -4,4 +4,4 @@ macro_rules! transpose_result {
     };
 }
 
-transpose_result!()
+transpose_result!();

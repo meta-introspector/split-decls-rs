@@ -4,4 +4,4 @@ macro_rules! ConditionallyConstCall {
     };
 }
 
-ConditionallyConstCall!()
+ConditionallyConstCall!();

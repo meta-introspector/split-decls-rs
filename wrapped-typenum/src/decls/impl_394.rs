@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        UInt!();
         TrimOut!();
+        Bit!();
+        Unsigned!();
         PrivateXorOut!();
         PrivateXor!();
-        Unsigned!();
-        Bit!();
         Trim!();
+        UInt!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_394 {
     };
 }
 
-impl_394!()
+impl_394!();

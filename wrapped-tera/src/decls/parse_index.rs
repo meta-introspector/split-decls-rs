@@ -4,4 +4,4 @@ macro_rules! parse_index {
     };
 }
 
-parse_index!()
+parse_index!();

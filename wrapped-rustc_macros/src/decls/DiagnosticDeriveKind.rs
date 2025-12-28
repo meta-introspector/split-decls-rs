@@ -4,4 +4,4 @@ macro_rules! DiagnosticDeriveKind {
     };
 }
 
-DiagnosticDeriveKind!()
+DiagnosticDeriveKind!();

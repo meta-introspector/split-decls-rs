@@ -4,4 +4,4 @@ macro_rules! Dot {
     };
 }
 
-Dot!()
+Dot!();

@@ -4,4 +4,4 @@ macro_rules! newline_with_overdraw {
     };
 }
 
-newline_with_overdraw!()
+newline_with_overdraw!();

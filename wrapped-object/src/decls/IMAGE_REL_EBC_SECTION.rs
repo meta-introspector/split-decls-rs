@@ -11,4 +11,4 @@ macro_rules! IMAGE_REL_EBC_SECTION {
     };
 }
 
-IMAGE_REL_EBC_SECTION!()
+IMAGE_REL_EBC_SECTION!();

@@ -78,4 +78,4 @@ macro_rules! minus_belongs_to_literal {
     };
 }
 
-minus_belongs_to_literal!()
+minus_belongs_to_literal!();

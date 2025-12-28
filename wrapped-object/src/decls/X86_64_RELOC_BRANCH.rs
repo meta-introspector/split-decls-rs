@@ -4,4 +4,4 @@ macro_rules! X86_64_RELOC_BRANCH {
     };
 }
 
-X86_64_RELOC_BRANCH!()
+X86_64_RELOC_BRANCH!();

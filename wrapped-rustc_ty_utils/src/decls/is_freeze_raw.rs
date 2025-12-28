@@ -4,4 +4,4 @@ macro_rules! is_freeze_raw {
     };
 }
 
-is_freeze_raw!()
+is_freeze_raw!();

@@ -11,4 +11,4 @@ macro_rules! huge_encode {
     };
 }
 
-huge_encode!()
+huge_encode!();

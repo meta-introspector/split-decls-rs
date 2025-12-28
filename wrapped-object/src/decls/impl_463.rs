@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        AttributeReader!();
         Result!();
+        AttributeReader!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_463 {
     };
 }
 
-impl_463!()
+impl_463!();

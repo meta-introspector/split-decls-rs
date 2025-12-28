@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        TryReadError!();
-        AlignmentError!();
-        Alignment!();
         Validity!();
+        TryReadError!();
+        ValidityError!();
+        Alignment!();
+        AlignmentError!();
         CastError!();
         TryCastError!();
         SizeError!();
-        ValidityError!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! ConvertError {
     };
 }
 
-ConvertError!()
+ConvertError!();

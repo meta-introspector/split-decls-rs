@@ -11,4 +11,4 @@ macro_rules! add_query_desc_cached_impl {
     };
 }
 
-add_query_desc_cached_impl!()
+add_query_desc_cached_impl!();

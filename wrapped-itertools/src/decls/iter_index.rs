@@ -4,4 +4,4 @@ macro_rules! iter_index {
     };
 }
 
-iter_index!()
+iter_index!();

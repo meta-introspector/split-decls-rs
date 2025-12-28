@@ -11,4 +11,4 @@ macro_rules! insert_outlives_predicate {
     };
 }
 
-insert_outlives_predicate!()
+insert_outlives_predicate!();

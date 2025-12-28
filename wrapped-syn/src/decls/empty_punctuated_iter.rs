@@ -12,4 +12,4 @@ macro_rules! empty_punctuated_iter {
     };
 }
 
-empty_punctuated_iter!()
+empty_punctuated_iter!();

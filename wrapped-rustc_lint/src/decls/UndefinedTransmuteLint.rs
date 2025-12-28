@@ -4,4 +4,4 @@ macro_rules! UndefinedTransmuteLint {
     };
 }
 
-UndefinedTransmuteLint!()
+UndefinedTransmuteLint!();

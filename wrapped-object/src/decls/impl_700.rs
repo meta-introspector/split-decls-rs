@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         ImportThunkList!();
         ImageThunkData!();
-        ImageNtHeaders!();
         Result!();
+        ImageNtHeaders!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_700 {
     };
 }
 
-impl_700!()
+impl_700!();

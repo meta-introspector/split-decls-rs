@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Exfiltrator!();
         Handle!();
+        Exfiltrator!();
         PendingSignals!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! SignalDelivery {
     };
 }
 
-SignalDelivery!()
+SignalDelivery!();

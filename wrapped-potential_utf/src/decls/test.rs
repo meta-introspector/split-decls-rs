@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        PotentialUtf16!();
         PotentialUtf8!();
+        PotentialUtf16!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! test {
     };
 }
 
-test!()
+test!();

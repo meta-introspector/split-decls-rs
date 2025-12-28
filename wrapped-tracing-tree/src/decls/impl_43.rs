@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        SpanMode!();
-        RecursiveGuard!();
-        Buffers!();
         HierarchicalLayer!();
         Data!();
+        Buffers!();
+        SpanMode!();
+        RecursiveGuard!();
         DifferenceIter!();
-        Config!();
         FormatTime!();
+        Config!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_43 {
     };
 }
 
-impl_43!()
+impl_43!();

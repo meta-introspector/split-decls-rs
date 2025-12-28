@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ToElementIndex!();
         RegionValues!();
+        ToElementIndex!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_366 {
     };
 }
 
-impl_366!()
+impl_366!();

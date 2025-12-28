@@ -10,4 +10,4 @@ fn main() {
     };
 }
 
-test_extract_annotations_2!()
+test_extract_annotations_2!();

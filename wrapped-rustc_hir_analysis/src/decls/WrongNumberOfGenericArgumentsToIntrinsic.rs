@@ -4,4 +4,4 @@ macro_rules! WrongNumberOfGenericArgumentsToIntrinsic {
     };
 }
 
-WrongNumberOfGenericArgumentsToIntrinsic!()
+WrongNumberOfGenericArgumentsToIntrinsic!();

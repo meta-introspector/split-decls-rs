@@ -4,4 +4,4 @@ macro_rules! IMAGE_REL_MIPS_TOKEN {
     };
 }
 
-IMAGE_REL_MIPS_TOKEN!()
+IMAGE_REL_MIPS_TOKEN!();

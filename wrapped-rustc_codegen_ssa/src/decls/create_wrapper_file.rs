@@ -11,4 +11,4 @@ macro_rules! create_wrapper_file {
     };
 }
 
-create_wrapper_file!()
+create_wrapper_file!();

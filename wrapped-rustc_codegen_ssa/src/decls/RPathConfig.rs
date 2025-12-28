@@ -4,4 +4,4 @@ macro_rules! RPathConfig {
     };
 }
 
-RPathConfig!()
+RPathConfig!();

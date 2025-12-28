@@ -11,4 +11,4 @@ macro_rules! indented_line_kind {
     };
 }
 
-indented_line_kind!()
+indented_line_kind!();

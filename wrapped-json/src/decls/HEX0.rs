@@ -4,4 +4,4 @@ macro_rules! HEX0 {
     };
 }
 
-HEX0!()
+HEX0!();

@@ -4,4 +4,4 @@ macro_rules! relate_types {
     };
 }
 
-relate_types!()
+relate_types!();

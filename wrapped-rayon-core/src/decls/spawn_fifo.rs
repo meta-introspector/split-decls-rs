@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ThreadPoolBuilder!();
         Registry!();
+        ThreadPoolBuilder!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! spawn_fifo {
     };
 }
 
-spawn_fifo!()
+spawn_fifo!();

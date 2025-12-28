@@ -4,4 +4,4 @@ macro_rules! EcParameters {
     };
 }
 
-EcParameters!()
+EcParameters!();

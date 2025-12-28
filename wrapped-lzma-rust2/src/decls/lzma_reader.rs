@@ -4,4 +4,4 @@ macro_rules! lzma_reader {
     };
 }
 
-lzma_reader!()
+lzma_reader!();

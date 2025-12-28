@@ -11,4 +11,4 @@ macro_rules! is_spanned {
     };
 }
 
-is_spanned!()
+is_spanned!();

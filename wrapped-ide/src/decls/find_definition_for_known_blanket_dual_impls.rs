@@ -11,4 +11,4 @@ macro_rules! find_definition_for_known_blanket_dual_impls {
     };
 }
 
-find_definition_for_known_blanket_dual_impls!()
+find_definition_for_known_blanket_dual_impls!();

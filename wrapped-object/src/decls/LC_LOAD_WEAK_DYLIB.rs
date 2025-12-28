@@ -4,4 +4,4 @@ macro_rules! LC_LOAD_WEAK_DYLIB {
     };
 }
 
-LC_LOAD_WEAK_DYLIB!()
+LC_LOAD_WEAK_DYLIB!();

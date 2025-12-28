@@ -11,4 +11,4 @@ macro_rules! sorted_unstable {
     };
 }
 
-sorted_unstable!()
+sorted_unstable!();

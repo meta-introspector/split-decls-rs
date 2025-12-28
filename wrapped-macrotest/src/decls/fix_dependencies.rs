@@ -11,4 +11,4 @@ macro_rules! fix_dependencies {
     };
 }
 
-fix_dependencies!()
+fix_dependencies!();

@@ -4,4 +4,4 @@ macro_rules! R_AARCH64_MOVW_UABS_G2_NC {
     };
 }
 
-R_AARCH64_MOVW_UABS_G2_NC!()
+R_AARCH64_MOVW_UABS_G2_NC!();

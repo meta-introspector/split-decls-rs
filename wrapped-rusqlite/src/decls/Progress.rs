@@ -4,4 +4,4 @@ macro_rules! Progress {
     };
 }
 
-Progress!()
+Progress!();

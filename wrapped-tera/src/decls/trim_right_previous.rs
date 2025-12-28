@@ -11,4 +11,4 @@ macro_rules! trim_right_previous {
     };
 }
 
-trim_right_previous!()
+trim_right_previous!();

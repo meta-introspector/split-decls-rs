@@ -4,4 +4,4 @@ macro_rules! PF_HP_NEAR_SHARED {
     };
 }
 
-PF_HP_NEAR_SHARED!()
+PF_HP_NEAR_SHARED!();

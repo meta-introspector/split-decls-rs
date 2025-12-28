@@ -4,4 +4,4 @@ macro_rules! PROC_PDEATHSIG_CTL {
     };
 }
 
-PROC_PDEATHSIG_CTL!()
+PROC_PDEATHSIG_CTL!();

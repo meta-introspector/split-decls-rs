@@ -4,4 +4,4 @@ macro_rules! BenchSig {
     };
 }
 
-BenchSig!()
+BenchSig!();

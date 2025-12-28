@@ -4,4 +4,4 @@ macro_rules! type_op_prove_predicate_with_cause {
     };
 }
 
-type_op_prove_predicate_with_cause!()
+type_op_prove_predicate_with_cause!();

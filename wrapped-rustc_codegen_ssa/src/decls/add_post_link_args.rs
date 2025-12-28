@@ -11,4 +11,4 @@ macro_rules! add_post_link_args {
     };
 }
 
-add_post_link_args!()
+add_post_link_args!();

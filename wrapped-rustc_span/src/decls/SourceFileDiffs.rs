@@ -4,4 +4,4 @@ macro_rules! SourceFileDiffs {
     };
 }
 
-SourceFileDiffs!()
+SourceFileDiffs!();

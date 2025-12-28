@@ -11,4 +11,4 @@ macro_rules! deserialize_into_enum {
     };
 }
 
-deserialize_into_enum!()
+deserialize_into_enum!();

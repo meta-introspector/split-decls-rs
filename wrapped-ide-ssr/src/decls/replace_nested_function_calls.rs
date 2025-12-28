@@ -4,4 +4,4 @@ macro_rules! replace_nested_function_calls {
     };
 }
 
-replace_nested_function_calls!()
+replace_nested_function_calls!();

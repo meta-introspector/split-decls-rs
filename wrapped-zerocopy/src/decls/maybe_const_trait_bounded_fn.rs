@@ -4,4 +4,4 @@ macro_rules! maybe_const_trait_bounded_fn {
     };
 }
 
-maybe_const_trait_bounded_fn!()
+maybe_const_trait_bounded_fn!();

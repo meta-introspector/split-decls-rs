@@ -4,4 +4,4 @@ macro_rules! PrefixRange {
     };
 }
 
-PrefixRange!()
+PrefixRange!();

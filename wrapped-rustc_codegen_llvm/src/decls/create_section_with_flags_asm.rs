@@ -4,4 +4,4 @@ macro_rules! create_section_with_flags_asm {
     };
 }
 
-create_section_with_flags_asm!()
+create_section_with_flags_asm!();

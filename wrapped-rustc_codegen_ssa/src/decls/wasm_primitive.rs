@@ -4,4 +4,4 @@ macro_rules! wasm_primitive {
     };
 }
 
-wasm_primitive!()
+wasm_primitive!();

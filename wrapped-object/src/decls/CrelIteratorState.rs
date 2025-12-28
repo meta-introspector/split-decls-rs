@@ -11,4 +11,4 @@ macro_rules! CrelIteratorState {
     };
 }
 
-CrelIteratorState!()
+CrelIteratorState!();

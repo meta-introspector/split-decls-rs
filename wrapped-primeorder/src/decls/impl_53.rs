@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        PrimeCurveParams!();
-        AffinePoint!();
-        LookupTable!();
         ProjectivePoint!();
+        PrimeCurveParams!();
+        LookupTable!();
+        AffinePoint!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_53 {
     };
 }
 
-impl_53!()
+impl_53!();

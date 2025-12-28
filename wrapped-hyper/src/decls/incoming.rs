@@ -4,4 +4,4 @@ macro_rules! incoming {
     };
 }
 
-incoming!()
+incoming!();

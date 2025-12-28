@@ -4,4 +4,4 @@ macro_rules! InferConst {
     };
 }
 
-InferConst!()
+InferConst!();

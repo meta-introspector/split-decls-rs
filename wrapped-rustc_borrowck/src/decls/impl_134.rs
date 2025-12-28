@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        IllegalMoveOriginKind!();
-        MirBorrowckCtxt!();
         DescribePlaceOpt!();
-        BindingFinder!();
+        IllegalMoveOriginKind!();
         UseSpans!();
-        GroupedMoveError!();
-        PrefixSet!();
         CapturedMessageOpt!();
+        BindingFinder!();
         CaptureArgLabel!();
-        TypeNoCopy!();
+        PrefixSet!();
         MoveError!();
+        MirBorrowckCtxt!();
+        TypeNoCopy!();
+        GroupedMoveError!();
     };
 }
 
@@ -25,4 +25,4 @@ macro_rules! impl_134 {
     };
 }
 
-impl_134!()
+impl_134!();

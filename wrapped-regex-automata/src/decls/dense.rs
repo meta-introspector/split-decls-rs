@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Remappable!();
         StateID!();
         OwnedDFA!();
-        Remappable!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! dense {
     };
 }
 
-dense!()
+dense!();

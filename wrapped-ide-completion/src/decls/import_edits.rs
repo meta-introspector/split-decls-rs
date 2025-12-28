@@ -11,4 +11,4 @@ macro_rules! import_edits {
     };
 }
 
-import_edits!()
+import_edits!();

@@ -4,4 +4,4 @@ macro_rules! Reject {
     };
 }
 
-Reject!()
+Reject!();

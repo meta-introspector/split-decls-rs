@@ -11,4 +11,4 @@ macro_rules! with_session_globals {
     };
 }
 
-with_session_globals!()
+with_session_globals!();

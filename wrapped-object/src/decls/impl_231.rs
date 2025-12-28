@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        ImageSymbol!();
         ReadRef!();
         CoffHeader!();
         SymbolIndex!();
         SymbolIterator!();
-        ImageSymbol!();
         Item!();
     };
 }
@@ -16,4 +16,4 @@ macro_rules! impl_231 {
     };
 }
 
-impl_231!()
+impl_231!();

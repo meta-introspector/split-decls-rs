@@ -4,4 +4,4 @@ macro_rules! is_zero {
     };
 }
 
-is_zero!()
+is_zero!();

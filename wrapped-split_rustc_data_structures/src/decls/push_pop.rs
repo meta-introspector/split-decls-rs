@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        ProcessResult!();
         TestOutcome!();
-        Error!();
+        ProcessResult!();
         ObligationForest!();
+        Error!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! push_pop {
     };
 }
 
-push_pop!()
+push_pop!();

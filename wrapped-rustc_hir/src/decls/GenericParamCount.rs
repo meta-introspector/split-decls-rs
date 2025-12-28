@@ -4,4 +4,4 @@ macro_rules! GenericParamCount {
     };
 }
 
-GenericParamCount!()
+GenericParamCount!();

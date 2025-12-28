@@ -4,4 +4,4 @@ macro_rules! FastPathRadix {
     };
 }
 
-FastPathRadix!()
+FastPathRadix!();

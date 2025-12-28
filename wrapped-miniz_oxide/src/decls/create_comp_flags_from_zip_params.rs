@@ -12,4 +12,4 @@ macro_rules! create_comp_flags_from_zip_params {
     };
 }
 
-create_comp_flags_from_zip_params!()
+create_comp_flags_from_zip_params!();

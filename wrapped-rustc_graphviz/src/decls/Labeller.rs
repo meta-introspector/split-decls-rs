@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        LabelText!();
-        Edge!();
         Node!();
-        Style!();
+        Edge!();
         Id!();
+        Style!();
+        LabelText!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! Labeller {
     };
 }
 
-Labeller!()
+Labeller!();

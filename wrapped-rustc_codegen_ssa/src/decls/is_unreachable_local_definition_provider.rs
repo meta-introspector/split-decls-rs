@@ -4,4 +4,4 @@ macro_rules! is_unreachable_local_definition_provider {
     };
 }
 
-is_unreachable_local_definition_provider!()
+is_unreachable_local_definition_provider!();

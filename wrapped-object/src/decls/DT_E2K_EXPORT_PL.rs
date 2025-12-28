@@ -4,4 +4,4 @@ macro_rules! DT_E2K_EXPORT_PL {
     };
 }
 
-DT_E2K_EXPORT_PL!()
+DT_E2K_EXPORT_PL!();

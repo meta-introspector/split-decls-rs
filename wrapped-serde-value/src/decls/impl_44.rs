@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        Serializer!();
+        Value!();
         SerializeStructVariant!();
         SerializerError!();
-        Value!();
-        Serializer!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_44 {
     };
 }
 
-impl_44!()
+impl_44!();

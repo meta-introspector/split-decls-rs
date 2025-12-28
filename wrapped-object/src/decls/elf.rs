@@ -4,4 +4,4 @@ macro_rules! elf {
     };
 }
 
-elf!()
+elf!();

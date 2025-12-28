@@ -4,4 +4,4 @@ macro_rules! factorizer {
     };
 }
 
-factorizer!()
+factorizer!();

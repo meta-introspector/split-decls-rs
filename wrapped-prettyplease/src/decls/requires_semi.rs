@@ -4,4 +4,4 @@ macro_rules! requires_semi {
     };
 }
 
-requires_semi!()
+requires_semi!();

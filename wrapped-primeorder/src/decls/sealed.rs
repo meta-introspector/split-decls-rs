@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        PrimeCurveParams!();
         ProjectivePoint!();
+        PrimeCurveParams!();
         AffinePoint!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! sealed {
     };
 }
 
-sealed!()
+sealed!();

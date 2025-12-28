@@ -11,4 +11,4 @@ macro_rules! deserialize_try_from {
     };
 }
 
-deserialize_try_from!()
+deserialize_try_from!();

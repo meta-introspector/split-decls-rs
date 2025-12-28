@@ -4,4 +4,4 @@ macro_rules! zk_witness {
     };
 }
 
-zk_witness!()
+zk_witness!();

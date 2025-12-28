@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        IMap!();
         IIterable!();
+        IMap!();
         IKeyValuePair!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_38 {
     };
 }
 
-impl_38!()
+impl_38!();

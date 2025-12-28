@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        TraitCannotImplForTy!();
         ImplForTyRequires!();
+        TraitCannotImplForTy!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! infringing_fields_error {
     };
 }
 
-infringing_fields_error!()
+infringing_fields_error!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         FrameDescriptor!();
+        Read!();
         FrameHeader!();
         ReadFrameHeaderError!();
-        Read!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! read_frame_header {
     };
 }
 
-read_frame_header!()
+read_frame_header!();

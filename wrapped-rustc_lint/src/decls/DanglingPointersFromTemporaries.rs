@@ -4,4 +4,4 @@ macro_rules! DanglingPointersFromTemporaries {
     };
 }
 
-DanglingPointersFromTemporaries!()
+DanglingPointersFromTemporaries!();

@@ -11,4 +11,4 @@ macro_rules! compute_shortest_path_length {
     };
 }
 
-compute_shortest_path_length!()
+compute_shortest_path_length!();

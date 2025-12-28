@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        MakeVisitor!();
+        VisitFmt!();
         Messages!();
         Alt!();
-        Delimited!();
         MakeExtMarker!();
-        VisitFmt!();
+        MakeVisitor!();
+        Delimited!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! MakeExt {
     };
 }
 
-MakeExt!()
+MakeExt!();

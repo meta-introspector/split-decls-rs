@@ -4,4 +4,4 @@ macro_rules! option {
     };
 }
 
-option!()
+option!();

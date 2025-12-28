@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        SourceChange!();
-        IdentifierKind!();
-        Definition!();
-        RootDatabase!();
-        RenameDefinition!();
         Label!();
+        RenameDefinition!();
+        Definition!();
         Result!();
+        IdentifierKind!();
+        SourceChange!();
+        RootDatabase!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! rename_reference {
     };
 }
 
-rename_reference!()
+rename_reference!();

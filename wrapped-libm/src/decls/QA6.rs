@@ -4,4 +4,4 @@ macro_rules! QA6 {
     };
 }
 
-QA6!()
+QA6!();

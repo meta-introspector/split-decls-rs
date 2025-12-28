@@ -4,4 +4,4 @@ macro_rules! setup_version_info {
     };
 }
 
-setup_version_info!()
+setup_version_info!();

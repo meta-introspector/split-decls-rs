@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Interner!();
         TypingMode!();
+        Interner!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_322 {
     };
 }
 
-impl_322!()
+impl_322!();

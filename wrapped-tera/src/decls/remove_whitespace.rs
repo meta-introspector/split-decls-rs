@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        Forloop!();
         Node!();
+        Forloop!();
         Set!();
         FilterSection!();
-        MacroDefinition!();
-        WS!();
         Block!();
+        WS!();
+        MacroDefinition!();
         If!();
     };
 }
@@ -18,4 +18,4 @@ macro_rules! remove_whitespace {
     };
 }
 
-remove_whitespace!()
+remove_whitespace!();

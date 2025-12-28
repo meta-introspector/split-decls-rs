@@ -4,4 +4,4 @@ macro_rules! MemoryLayoutNode {
     };
 }
 
-MemoryLayoutNode!()
+MemoryLayoutNode!();

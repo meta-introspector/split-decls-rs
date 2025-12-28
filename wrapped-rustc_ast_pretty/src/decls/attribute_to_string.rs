@@ -11,4 +11,4 @@ macro_rules! attribute_to_string {
     };
 }
 
-attribute_to_string!()
+attribute_to_string!();

@@ -4,4 +4,4 @@ macro_rules! cfg_not_has_atomic_u64 {
     };
 }
 
-cfg_not_has_atomic_u64!()
+cfg_not_has_atomic_u64!();

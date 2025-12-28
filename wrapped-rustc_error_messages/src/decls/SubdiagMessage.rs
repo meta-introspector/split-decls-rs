@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        FluentId!();
         DiagMessage!();
+        FluentId!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! SubdiagMessage {
     };
 }
 
-SubdiagMessage!()
+SubdiagMessage!();

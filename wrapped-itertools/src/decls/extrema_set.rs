@@ -4,4 +4,4 @@ macro_rules! extrema_set {
     };
 }
 
-extrema_set!()
+extrema_set!();

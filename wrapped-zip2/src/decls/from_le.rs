@@ -4,4 +4,4 @@ macro_rules! from_le {
     };
 }
 
-from_le!()
+from_le!();

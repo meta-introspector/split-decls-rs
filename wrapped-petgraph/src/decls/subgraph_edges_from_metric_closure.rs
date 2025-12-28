@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Edge!();
         Subgraph!();
         BoundedMeasure!();
-        Edge!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! subgraph_edges_from_metric_closure {
     };
 }
 
-subgraph_edges_from_metric_closure!()
+subgraph_edges_from_metric_closure!();

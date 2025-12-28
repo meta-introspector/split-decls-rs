@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        ErrorKind!();
-        Needed!();
-        AsChar!();
         Input!();
-        IResult!();
+        ErrorKind!();
+        AsChar!();
         Error!();
+        IResult!();
+        Satisfy!();
         ParseError!();
         Parser!();
-        Satisfy!();
+        Needed!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! satisfy {
     };
 }
 
-satisfy!()
+satisfy!();

@@ -4,4 +4,4 @@ macro_rules! NumericProperty {
     };
 }
 
-NumericProperty!()
+NumericProperty!();

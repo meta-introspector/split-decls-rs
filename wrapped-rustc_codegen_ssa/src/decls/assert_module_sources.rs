@@ -4,4 +4,4 @@ macro_rules! assert_module_sources {
     };
 }
 
-assert_module_sources!()
+assert_module_sources!();

@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        SerializeMap!();
         Serializer!();
         ArrayWalkValue!();
-        Value!();
-        SerializeTupleVariant!();
-        SerializationStrategy!();
-        Error!();
-        Table!();
-        WalkValue!();
-        StructWalkValue!();
         SerializeStructVariant!();
+        WalkValue!();
+        SerializationStrategy!();
+        StructWalkValue!();
+        Value!();
+        Table!();
+        SerializeTupleVariant!();
+        Error!();
+        SerializeMap!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_299 {
     };
 }
 
-impl_299!()
+impl_299!();

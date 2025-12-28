@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Pattern!();
         DefId!();
+        BoundVariableKind!();
+        Pattern!();
         Region!();
         Ty!();
         InternalCx!();
-        BoundVariableKind!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_244 {
     };
 }
 
-impl_244!()
+impl_244!();

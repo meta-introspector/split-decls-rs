@@ -4,4 +4,4 @@ macro_rules! install_ctrlc_handler {
     };
 }
 
-install_ctrlc_handler!()
+install_ctrlc_handler!();

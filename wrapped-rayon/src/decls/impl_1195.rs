@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         IntoIter!();
-        RChunksExactMutProducer!();
         RChunksExactMut!();
         Producer!();
+        RChunksExactMutProducer!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_1195 {
     };
 }
 
-impl_1195!()
+impl_1195!();

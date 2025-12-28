@@ -4,4 +4,4 @@ macro_rules! PLATFORM_XROS {
     };
 }
 
-PLATFORM_XROS!()
+PLATFORM_XROS!();

@@ -4,4 +4,4 @@ macro_rules! PointeeParser {
     };
 }
 
-PointeeParser!()
+PointeeParser!();

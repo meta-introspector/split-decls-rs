@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        NormalizedInputsAndOutput!();
         UniversalRegionRelations!();
+        NormalizedInputsAndOutput!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! CreateResult {
     };
 }
 
-CreateResult!()
+CreateResult!();

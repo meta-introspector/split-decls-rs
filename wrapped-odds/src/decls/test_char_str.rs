@@ -11,4 +11,4 @@ macro_rules! test_char_str {
     };
 }
 
-test_char_str!()
+test_char_str!();

@@ -4,4 +4,4 @@ macro_rules! STB_LOPROC {
     };
 }
 
-STB_LOPROC!()
+STB_LOPROC!();

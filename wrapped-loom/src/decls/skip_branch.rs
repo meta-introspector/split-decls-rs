@@ -4,4 +4,4 @@ macro_rules! skip_branch {
     };
 }
 
-skip_branch!()
+skip_branch!();

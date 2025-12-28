@@ -4,4 +4,4 @@ macro_rules! SHA3_512_OUTSIZE {
     };
 }
 
-SHA3_512_OUTSIZE!()
+SHA3_512_OUTSIZE!();

@@ -11,4 +11,4 @@ macro_rules! set_ipv6_add_membership {
     };
 }
 
-set_ipv6_add_membership!()
+set_ipv6_add_membership!();

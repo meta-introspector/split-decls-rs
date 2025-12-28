@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ModuleKind!();
         ComputedLtoType!();
+        ModuleKind!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! compute_per_cgu_lto_type {
     };
 }
 
-compute_per_cgu_lto_type!()
+compute_per_cgu_lto_type!();

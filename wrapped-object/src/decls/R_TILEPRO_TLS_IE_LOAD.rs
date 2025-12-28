@@ -4,4 +4,4 @@ macro_rules! R_TILEPRO_TLS_IE_LOAD {
     };
 }
 
-R_TILEPRO_TLS_IE_LOAD!()
+R_TILEPRO_TLS_IE_LOAD!();

@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        MalformedCguName!();
-        AssertModuleSource!();
-        MissingQueryDepGraph!();
-        CguReuse!();
-        NoModuleNamed!();
-        NoField!();
-        FieldAssociatedValueExpected!();
-        UnknownReuseKind!();
         ComparisonKind!();
+        MissingQueryDepGraph!();
+        AssertModuleSource!();
+        FieldAssociatedValueExpected!();
+        NoField!();
+        MalformedCguName!();
+        NoModuleNamed!();
+        CguReuse!();
+        UnknownReuseKind!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_2 {
     };
 }
 
-impl_2!()
+impl_2!();

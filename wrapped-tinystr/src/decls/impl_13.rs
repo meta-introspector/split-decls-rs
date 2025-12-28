@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ParseError!();
         TinyAsciiStr!();
+        ParseError!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_13 {
     };
 }
 
-impl_13!()
+impl_13!();

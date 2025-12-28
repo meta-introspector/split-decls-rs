@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Width!();
         Height!();
+        Width!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! terminal_size_using_handle {
     };
 }
 
-terminal_size_using_handle!()
+terminal_size_using_handle!();

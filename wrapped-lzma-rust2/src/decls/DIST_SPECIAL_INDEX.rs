@@ -4,4 +4,4 @@ macro_rules! DIST_SPECIAL_INDEX {
     };
 }
 
-DIST_SPECIAL_INDEX!()
+DIST_SPECIAL_INDEX!();

@@ -11,4 +11,4 @@ macro_rules! impl_ops_traits {
     };
 }
 
-impl_ops_traits!()
+impl_ops_traits!();

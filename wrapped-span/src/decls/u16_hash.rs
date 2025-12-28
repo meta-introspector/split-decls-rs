@@ -4,4 +4,4 @@ macro_rules! u16_hash {
     };
 }
 
-u16_hash!()
+u16_hash!();

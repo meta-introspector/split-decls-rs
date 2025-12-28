@@ -4,4 +4,4 @@ macro_rules! z_checksum {
     };
 }
 
-z_checksum!()
+z_checksum!();

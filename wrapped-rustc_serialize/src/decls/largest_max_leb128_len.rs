@@ -4,4 +4,4 @@ macro_rules! largest_max_leb128_len {
     };
 }
 
-largest_max_leb128_len!()
+largest_max_leb128_len!();

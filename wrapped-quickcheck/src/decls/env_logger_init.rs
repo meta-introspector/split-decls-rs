@@ -4,4 +4,4 @@ macro_rules! env_logger_init {
     };
 }
 
-env_logger_init!()
+env_logger_init!();

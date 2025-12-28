@@ -11,4 +11,4 @@ macro_rules! get_declaration_by_hash {
     };
 }
 
-get_declaration_by_hash!()
+get_declaration_by_hash!();

@@ -4,4 +4,4 @@ macro_rules! CreateAllocSizeAttr {
     };
 }
 
-CreateAllocSizeAttr!()
+CreateAllocSizeAttr!();

@@ -4,4 +4,4 @@ macro_rules! test_frame_header_reading {
     };
 }
 
-test_frame_header_reading!()
+test_frame_header_reading!();

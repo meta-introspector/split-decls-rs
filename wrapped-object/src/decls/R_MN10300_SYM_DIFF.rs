@@ -4,4 +4,4 @@ macro_rules! R_MN10300_SYM_DIFF {
     };
 }
 
-R_MN10300_SYM_DIFF!()
+R_MN10300_SYM_DIFF!();

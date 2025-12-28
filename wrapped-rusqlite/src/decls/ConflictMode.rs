@@ -4,4 +4,4 @@ macro_rules! ConflictMode {
     };
 }
 
-ConflictMode!()
+ConflictMode!();

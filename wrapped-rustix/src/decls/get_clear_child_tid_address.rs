@@ -11,4 +11,4 @@ macro_rules! get_clear_child_tid_address {
     };
 }
 
-get_clear_child_tid_address!()
+get_clear_child_tid_address!();

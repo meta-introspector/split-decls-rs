@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
         Consumer!();
-        ListStringFolder!();
+        Reducer!();
         ListStringConsumer!();
         Folder!();
         ListReducer!();
-        Reducer!();
+        ListStringFolder!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_445 {
     };
 }
 
-impl_445!()
+impl_445!();

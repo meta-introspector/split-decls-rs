@@ -4,4 +4,4 @@ macro_rules! R_SPARC_32 {
     };
 }
 
-R_SPARC_32!()
+R_SPARC_32!();

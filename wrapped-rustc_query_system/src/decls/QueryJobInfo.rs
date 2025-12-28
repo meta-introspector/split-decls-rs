@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        QueryJob!();
         QueryStackFrame!();
+        QueryJob!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! QueryJobInfo {
     };
 }
 
-QueryJobInfo!()
+QueryJobInfo!();

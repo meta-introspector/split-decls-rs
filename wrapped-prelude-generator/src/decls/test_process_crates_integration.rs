@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        FileProcessingResult!();
         FileProcessingStatus!();
         Args!();
-        FileProcessingResult!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! test_process_crates_integration {
     };
 }
 
-test_process_crates_integration!()
+test_process_crates_integration!();

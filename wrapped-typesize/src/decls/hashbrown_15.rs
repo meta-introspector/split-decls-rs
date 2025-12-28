@@ -4,4 +4,4 @@ macro_rules! hashbrown_15 {
     };
 }
 
-hashbrown_15!()
+hashbrown_15!();

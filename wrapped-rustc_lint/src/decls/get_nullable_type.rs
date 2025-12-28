@@ -4,4 +4,4 @@ macro_rules! get_nullable_type {
     };
 }
 
-get_nullable_type!()
+get_nullable_type!();

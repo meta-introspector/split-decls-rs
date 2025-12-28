@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        QueueableToken!();
         RuleType!();
         Tokens!();
+        QueueableToken!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! new {
     };
 }
 
-new!()
+new!();

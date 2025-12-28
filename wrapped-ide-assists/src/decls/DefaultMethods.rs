@@ -4,4 +4,4 @@ macro_rules! DefaultMethods {
     };
 }
 
-DefaultMethods!()
+DefaultMethods!();

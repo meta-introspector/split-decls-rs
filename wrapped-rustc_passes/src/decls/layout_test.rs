@@ -4,4 +4,4 @@ macro_rules! layout_test {
     };
 }
 
-layout_test!()
+layout_test!();

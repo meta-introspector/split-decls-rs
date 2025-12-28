@@ -4,4 +4,4 @@ macro_rules! osm {
     };
 }
 
-osm!()
+osm!();

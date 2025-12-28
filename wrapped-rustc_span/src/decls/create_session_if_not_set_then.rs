@@ -12,4 +12,4 @@ macro_rules! create_session_if_not_set_then {
     };
 }
 
-create_session_if_not_set_then!()
+create_session_if_not_set_then!();

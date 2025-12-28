@@ -4,4 +4,4 @@ macro_rules! C_DWARF {
     };
 }
 
-C_DWARF!()
+C_DWARF!();

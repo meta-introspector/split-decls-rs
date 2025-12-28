@@ -4,4 +4,4 @@ macro_rules! concat {
     };
 }
 
-concat!()
+concat!();

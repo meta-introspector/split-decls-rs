@@ -11,4 +11,4 @@ macro_rules! OpTy {
     };
 }
 
-OpTy!()
+OpTy!();

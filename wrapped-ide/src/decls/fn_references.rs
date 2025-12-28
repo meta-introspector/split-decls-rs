@@ -4,4 +4,4 @@ macro_rules! fn_references {
     };
 }
 
-fn_references!()
+fn_references!();

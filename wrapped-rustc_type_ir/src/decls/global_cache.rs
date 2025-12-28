@@ -4,4 +4,4 @@ macro_rules! global_cache {
     };
 }
 
-global_cache!()
+global_cache!();

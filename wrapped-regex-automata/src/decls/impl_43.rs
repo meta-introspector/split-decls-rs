@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         MatchStates!();
         BuildError!();
-        PatternID!();
         StateID!();
+        PatternID!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_43 {
     };
 }
 
-impl_43!()
+impl_43!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        MsgHdr!();
-        MaybeUninitSlice!();
         SockAddr!();
+        MaybeUninitSlice!();
+        MsgHdr!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! MsgHdrMut {
     };
 }
 
-MsgHdrMut!()
+MsgHdrMut!();

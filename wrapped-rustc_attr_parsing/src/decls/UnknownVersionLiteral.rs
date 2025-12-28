@@ -4,4 +4,4 @@ macro_rules! UnknownVersionLiteral {
     };
 }
 
-UnknownVersionLiteral!()
+UnknownVersionLiteral!();

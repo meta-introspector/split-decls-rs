@@ -11,4 +11,4 @@ macro_rules! SHF_ARM_ENTRYSECT {
     };
 }
 
-SHF_ARM_ENTRYSECT!()
+SHF_ARM_ENTRYSECT!();

@@ -4,4 +4,4 @@ macro_rules! Array {
     };
 }
 
-Array!()
+Array!();

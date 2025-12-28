@@ -4,4 +4,4 @@ macro_rules! proc_macro_attrs {
     };
 }
 
-proc_macro_attrs!()
+proc_macro_attrs!();

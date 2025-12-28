@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Scope!();
         Tree!();
+        Scope!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_138 {
     };
 }
 
-impl_138!()
+impl_138!();

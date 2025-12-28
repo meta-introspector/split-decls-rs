@@ -11,4 +11,4 @@ macro_rules! generate_ule_validators {
     };
 }
 
-generate_ule_validators!()
+generate_ule_validators!();

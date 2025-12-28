@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         SyntaxEditor!();
+        SyntaxAnnotation!();
         SyntaxNode!();
         SyntaxElement!();
-        SyntaxAnnotation!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! SyntaxEdit {
     };
 }
 
-SyntaxEdit!()
+SyntaxEdit!();

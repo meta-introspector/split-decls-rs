@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
+        Thread!();
+        Mutex!();
+        ThreadId!();
+        Notify!();
         JoinHandle!();
         Arc!();
-        Thread!();
-        Notify!();
-        ThreadId!();
-        Mutex!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! spawn_internal {
     };
 }
 
-spawn_internal!()
+spawn_internal!();

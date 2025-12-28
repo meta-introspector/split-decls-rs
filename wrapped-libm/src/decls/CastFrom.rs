@@ -4,4 +4,4 @@ macro_rules! CastFrom {
     };
 }
 
-CastFrom!()
+CastFrom!();

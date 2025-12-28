@@ -11,4 +11,4 @@ macro_rules! IMPORT_OBJECT_NAME {
     };
 }
 
-IMPORT_OBJECT_NAME!()
+IMPORT_OBJECT_NAME!();

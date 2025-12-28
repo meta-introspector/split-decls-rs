@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        UInt!();
         B1!();
-        UTerm!();
         PrivateLogarithm2!();
+        UInt!();
+        UTerm!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_500 {
     };
 }
 
-impl_500!()
+impl_500!();

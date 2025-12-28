@@ -4,4 +4,4 @@ macro_rules! hyper_request_on_informational_callback {
     };
 }
 
-hyper_request_on_informational_callback!()
+hyper_request_on_informational_callback!();

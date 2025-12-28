@@ -13,4 +13,4 @@ macro_rules! render_magic_variable_isnt_escaped {
     };
 }
 
-render_magic_variable_isnt_escaped!()
+render_magic_variable_isnt_escaped!();

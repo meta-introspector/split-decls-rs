@@ -11,4 +11,4 @@ macro_rules! clashing_extern_declarations {
     };
 }
 
-clashing_extern_declarations!()
+clashing_extern_declarations!();

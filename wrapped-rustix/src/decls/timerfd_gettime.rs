@@ -12,4 +12,4 @@ macro_rules! timerfd_gettime {
     };
 }
 
-timerfd_gettime!()
+timerfd_gettime!();

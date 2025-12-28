@@ -4,4 +4,4 @@ macro_rules! handle_generate_aggregated_test_file {
     };
 }
 
-handle_generate_aggregated_test_file!()
+handle_generate_aggregated_test_file!();

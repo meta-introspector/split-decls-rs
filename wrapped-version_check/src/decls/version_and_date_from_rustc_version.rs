@@ -4,4 +4,4 @@ macro_rules! version_and_date_from_rustc_version {
     };
 }
 
-version_and_date_from_rustc_version!()
+version_and_date_from_rustc_version!();

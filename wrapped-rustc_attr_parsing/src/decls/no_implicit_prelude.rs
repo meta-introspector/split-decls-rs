@@ -4,4 +4,4 @@ macro_rules! no_implicit_prelude {
     };
 }
 
-no_implicit_prelude!()
+no_implicit_prelude!();

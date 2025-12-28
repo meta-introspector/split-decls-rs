@@ -12,4 +12,4 @@ macro_rules! SENTINEL_STATES {
     };
 }
 
-SENTINEL_STATES!()
+SENTINEL_STATES!();

@@ -1,21 +1,21 @@
 macro_rules! deps {
     () => {
-        ReadRef!();
-        Result!();
-        RelocationIterator!();
         WasmRelocationIterator!();
-        Import!();
-        Export!();
-        Table!();
-        CompressedData!();
-        SectionKind!();
-        SectionFlags!();
         ObjectSection!();
+        Result!();
+        WasmSection!();
+        Import!();
+        SectionFlags!();
+        CompressedData!();
         SectionId!();
         SectionIndex!();
-        CompressedFileRange!();
-        WasmSection!();
         RelocationMap!();
+        RelocationIterator!();
+        SectionKind!();
+        CompressedFileRange!();
+        ReadRef!();
+        Table!();
+        Export!();
     };
 }
 
@@ -26,4 +26,4 @@ macro_rules! impl_755 {
     };
 }
 
-impl_755!()
+impl_755!();

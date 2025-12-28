@@ -4,4 +4,4 @@ macro_rules! LISTEN_BACKLOG_SIZE {
     };
 }
 
-LISTEN_BACKLOG_SIZE!()
+LISTEN_BACKLOG_SIZE!();

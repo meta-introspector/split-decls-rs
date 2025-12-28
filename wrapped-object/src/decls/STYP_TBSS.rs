@@ -4,4 +4,4 @@ macro_rules! STYP_TBSS {
     };
 }
 
-STYP_TBSS!()
+STYP_TBSS!();

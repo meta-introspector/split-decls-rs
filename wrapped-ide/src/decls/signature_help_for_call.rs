@@ -11,4 +11,4 @@ macro_rules! signature_help_for_call {
     };
 }
 
-signature_help_for_call!()
+signature_help_for_call!();

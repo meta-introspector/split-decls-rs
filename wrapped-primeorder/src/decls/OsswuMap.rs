@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        OsswuMapParams!();
         Sgn0!();
+        OsswuMapParams!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! OsswuMap {
     };
 }
 
-OsswuMap!()
+OsswuMap!();

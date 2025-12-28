@@ -4,4 +4,4 @@ macro_rules! detect_self_contained_mingw {
     };
 }
 
-detect_self_contained_mingw!()
+detect_self_contained_mingw!();

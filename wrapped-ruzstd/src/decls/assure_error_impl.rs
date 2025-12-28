@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Error!();
         FrameDecoderError!();
+        Error!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! assure_error_impl {
     };
 }
 
-assure_error_impl!()
+assure_error_impl!();

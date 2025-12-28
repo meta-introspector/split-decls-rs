@@ -4,4 +4,4 @@ macro_rules! dearray {
     };
 }
 
-dearray!()
+dearray!();

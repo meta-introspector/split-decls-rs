@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        SymbolIndex!();
         Result!();
+        SymbolIndex!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_903 {
     };
 }
 
-impl_903!()
+impl_903!();

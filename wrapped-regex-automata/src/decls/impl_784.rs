@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Start!();
-        SerializeError!();
         DeserializeError!();
-        StartByteMap!();
+        Start!();
         LookMatcher!();
+        StartByteMap!();
+        SerializeError!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_784 {
     };
 }
 
-impl_784!()
+impl_784!();

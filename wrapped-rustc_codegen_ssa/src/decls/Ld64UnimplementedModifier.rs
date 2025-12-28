@@ -11,4 +11,4 @@ macro_rules! Ld64UnimplementedModifier {
     };
 }
 
-Ld64UnimplementedModifier!()
+Ld64UnimplementedModifier!();

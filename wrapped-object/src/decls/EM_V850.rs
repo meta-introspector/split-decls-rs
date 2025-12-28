@@ -4,4 +4,4 @@ macro_rules! EM_V850 {
     };
 }
 
-EM_V850!()
+EM_V850!();

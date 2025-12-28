@@ -11,4 +11,4 @@ macro_rules! get_rustc_info {
     };
 }
 
-get_rustc_info!()
+get_rustc_info!();

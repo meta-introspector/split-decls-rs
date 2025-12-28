@@ -4,4 +4,4 @@ macro_rules! __tracing_log {
     };
 }
 
-__tracing_log!()
+__tracing_log!();

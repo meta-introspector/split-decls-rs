@@ -11,4 +11,4 @@ macro_rules! insert_head {
     };
 }
 
-insert_head!()
+insert_head!();

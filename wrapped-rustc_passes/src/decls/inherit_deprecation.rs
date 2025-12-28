@@ -4,4 +4,4 @@ macro_rules! inherit_deprecation {
     };
 }
 
-inherit_deprecation!()
+inherit_deprecation!();

@@ -11,4 +11,4 @@ macro_rules! DEP_KIND_DEBUG {
     };
 }
 
-DEP_KIND_DEBUG!()
+DEP_KIND_DEBUG!();

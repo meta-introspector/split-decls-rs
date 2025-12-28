@@ -4,4 +4,4 @@ macro_rules! R_386_TLS_LDM_POP {
     };
 }
 
-R_386_TLS_LDM_POP!()
+R_386_TLS_LDM_POP!();

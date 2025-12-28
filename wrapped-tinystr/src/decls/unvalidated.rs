@@ -4,4 +4,4 @@ macro_rules! unvalidated {
     };
 }
 
-unvalidated!()
+unvalidated!();

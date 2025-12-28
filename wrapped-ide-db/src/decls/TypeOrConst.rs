@@ -4,4 +4,4 @@ macro_rules! TypeOrConst {
     };
 }
 
-TypeOrConst!()
+TypeOrConst!();

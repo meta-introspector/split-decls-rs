@@ -4,4 +4,4 @@ macro_rules! chi {
     };
 }
 
-chi!()
+chi!();

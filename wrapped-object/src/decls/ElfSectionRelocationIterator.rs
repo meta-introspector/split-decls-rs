@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        ReadRef!();
         ElfFile!();
         FileHeader!();
-        SectionIndex!();
         ElfRelocationIterator!();
+        ReadRef!();
+        SectionIndex!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! ElfSectionRelocationIterator {
     };
 }
 
-ElfSectionRelocationIterator!()
+ElfSectionRelocationIterator!();

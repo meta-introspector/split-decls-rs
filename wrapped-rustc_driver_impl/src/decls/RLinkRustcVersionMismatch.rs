@@ -4,4 +4,4 @@ macro_rules! RLinkRustcVersionMismatch {
     };
 }
 
-RLinkRustcVersionMismatch!()
+RLinkRustcVersionMismatch!();

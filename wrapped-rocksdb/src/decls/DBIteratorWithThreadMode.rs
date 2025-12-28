@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        DBRawIteratorWithThreadMode!();
-        Direction!();
         DBAccess!();
+        DBRawIteratorWithThreadMode!();
         Options!();
+        Direction!();
         IteratorMode!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! DBIteratorWithThreadMode {
     };
 }
 
-DBIteratorWithThreadMode!()
+DBIteratorWithThreadMode!();

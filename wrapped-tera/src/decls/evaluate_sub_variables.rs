@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Tera!();
         CallStack!();
         Result!();
         Error!();
+        Tera!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! evaluate_sub_variables {
     };
 }
 
-evaluate_sub_variables!()
+evaluate_sub_variables!();

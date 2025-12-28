@@ -4,4 +4,4 @@ macro_rules! ConsiderDereferencing {
     };
 }
 
-ConsiderDereferencing!()
+ConsiderDereferencing!();

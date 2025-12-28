@@ -11,4 +11,4 @@ macro_rules! build_generic_args {
     };
 }
 
-build_generic_args!()
+build_generic_args!();

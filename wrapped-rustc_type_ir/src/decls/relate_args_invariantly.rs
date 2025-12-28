@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        VarianceDiagInfo!();
         TypeRelation!();
         RelateResult!();
-        VarianceDiagInfo!();
         Interner!();
         GenericArgs!();
     };
@@ -15,4 +15,4 @@ macro_rules! relate_args_invariantly {
     };
 }
 
-relate_args_invariantly!()
+relate_args_invariantly!();

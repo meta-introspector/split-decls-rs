@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        NoArgsAttributeParser!();
-        ParenSugarParser!();
         OnDuplicate!();
         AllowedTargets!();
+        NoArgsAttributeParser!();
+        ParenSugarParser!();
         Stage!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_206 {
     };
 }
 
-impl_206!()
+impl_206!();

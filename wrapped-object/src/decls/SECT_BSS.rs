@@ -4,4 +4,4 @@ macro_rules! SECT_BSS {
     };
 }
 
-SECT_BSS!()
+SECT_BSS!();

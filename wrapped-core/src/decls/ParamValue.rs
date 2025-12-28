@@ -4,4 +4,4 @@ macro_rules! ParamValue {
     };
 }
 
-ParamValue!()
+ParamValue!();

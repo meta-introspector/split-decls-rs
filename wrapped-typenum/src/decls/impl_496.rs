@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        UInt!();
+        PrivateSquareRoot!();
         UTerm!();
         B1!();
-        PrivateSquareRoot!();
+        UInt!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_496 {
     };
 }
 
-impl_496!()
+impl_496!();

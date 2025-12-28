@@ -11,4 +11,4 @@ macro_rules! oneshot_impl {
     };
 }
 
-oneshot_impl!()
+oneshot_impl!();

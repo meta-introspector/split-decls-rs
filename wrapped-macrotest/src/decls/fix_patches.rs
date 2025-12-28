@@ -11,4 +11,4 @@ macro_rules! fix_patches {
     };
 }
 
-fix_patches!()
+fix_patches!();

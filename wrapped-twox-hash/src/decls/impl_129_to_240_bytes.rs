@@ -4,4 +4,4 @@ macro_rules! impl_129_to_240_bytes {
     };
 }
 
-impl_129_to_240_bytes!()
+impl_129_to_240_bytes!();

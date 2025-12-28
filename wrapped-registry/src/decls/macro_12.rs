@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        FILETIME!();
+        WIN32_ERROR!();
         HKEY!();
         PWSTR!();
-        WIN32_ERROR!();
-        FILETIME!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! macro_12 {
     };
 }
 
-macro_12!()
+macro_12!();

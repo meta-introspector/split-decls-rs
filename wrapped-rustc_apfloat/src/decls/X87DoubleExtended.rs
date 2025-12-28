@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        IeeeFloat!();
         X87DoubleExtendedS!();
+        IeeeFloat!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! X87DoubleExtended {
     };
 }
 
-X87DoubleExtended!()
+X87DoubleExtended!();

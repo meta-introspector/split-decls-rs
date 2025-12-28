@@ -4,4 +4,4 @@ macro_rules! WIDTH_MIDDLE_LEN {
     };
 }
 
-WIDTH_MIDDLE_LEN!()
+WIDTH_MIDDLE_LEN!();

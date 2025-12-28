@@ -4,4 +4,4 @@ macro_rules! canonical_fully_decomposed {
     };
 }
 
-canonical_fully_decomposed!()
+canonical_fully_decomposed!();

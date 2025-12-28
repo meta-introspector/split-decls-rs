@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        WherePredicate!();
+        WherePredicateKind!();
         WhereBoundPredicate!();
+        WhereRegionPredicate!();
+        WherePredicate!();
         Visitor!();
         WhereEqPredicate!();
-        WherePredicateKind!();
-        WhereRegionPredicate!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! walk_where_predicate {
     };
 }
 
-walk_where_predicate!()
+walk_where_predicate!();

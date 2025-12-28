@@ -2,10 +2,10 @@ macro_rules! deps {
     () => {
         LocalKind!();
         Ty!();
+        LazyAttrTokenStream!();
+        Pat!();
         AttrVec!();
         Walkable!();
-        Pat!();
-        LazyAttrTokenStream!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! Local {
     };
 }
 
-Local!()
+Local!();

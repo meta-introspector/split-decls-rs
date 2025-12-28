@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Anchored!();
-        DFA!();
         BuildError!();
+        DFA!();
         StateID!();
         Start!();
         StartTable!();
@@ -16,4 +16,4 @@ macro_rules! impl_131 {
     };
 }
 
-impl_131!()
+impl_131!();

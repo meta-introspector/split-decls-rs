@@ -11,4 +11,4 @@ macro_rules! does_render_owned_for_loop_with_objects_string_keys {
     };
 }
 
-does_render_owned_for_loop_with_objects_string_keys!()
+does_render_owned_for_loop_with_objects_string_keys!();

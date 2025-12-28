@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        BuildError!();
-        BoundedBacktrackerCache!();
         RegexInfo!();
-        BoundedBacktracker!();
         NFA!();
-        BoundedBacktrackerEngine!();
-        Prefilter!();
         Input!();
+        BoundedBacktrackerCache!();
+        BuildError!();
+        Prefilter!();
+        BoundedBacktrackerEngine!();
+        BoundedBacktracker!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_404 {
     };
 }
 
-impl_404!()
+impl_404!();

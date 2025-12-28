@@ -4,4 +4,4 @@ macro_rules! o_of_q {
     };
 }
 
-o_of_q!()
+o_of_q!();

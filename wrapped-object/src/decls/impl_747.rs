@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        WasmSegmentIterator!();
         WasmSegment!();
+        WasmSegmentIterator!();
         Item!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_747 {
     };
 }
 
-impl_747!()
+impl_747!();

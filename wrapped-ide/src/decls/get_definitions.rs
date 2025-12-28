@@ -4,4 +4,4 @@ macro_rules! get_definitions {
     };
 }
 
-get_definitions!()
+get_definitions!();

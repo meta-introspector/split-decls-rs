@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        OutlivesConstraint!();
-        UniversalRegions!();
         LocalizedOutlivesConstraint!();
+        UniversalRegions!();
+        OutlivesConstraint!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! compute_constraint_direction {
     };
 }
 
-compute_constraint_direction!()
+compute_constraint_direction!();

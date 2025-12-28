@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        PointerMetadata!();
         SizeInfo!();
-        KnownLayout!();
         DstLayout!();
+        PointerMetadata!();
+        KnownLayout!();
         SliceDst!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! cast_from_raw {
     };
 }
 
-cast_from_raw!()
+cast_from_raw!();

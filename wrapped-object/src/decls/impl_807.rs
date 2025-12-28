@@ -1,20 +1,20 @@
 macro_rules! deps {
     () => {
-        Symbol!();
-        FileAux!();
+        Error!();
+        FileHeader!();
         Note!();
-        SymbolIndex!();
+        StringTable!();
         SymbolTable!();
+        Result!();
+        Pod!();
+        FileAux!();
         SymbolIterator!();
         Bytes!();
-        Result!();
-        StringTable!();
-        CsectAux!();
-        Pod!();
-        Error!();
-        U32Bytes!();
-        FileHeader!();
+        SymbolIndex!();
+        Symbol!();
         ReadRef!();
+        U32Bytes!();
+        CsectAux!();
     };
 }
 
@@ -25,4 +25,4 @@ macro_rules! impl_807 {
     };
 }
 
-impl_807!()
+impl_807!();

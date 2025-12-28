@@ -4,4 +4,4 @@ macro_rules! TopSubtree {
     };
 }
 
-TopSubtree!()
+TopSubtree!();

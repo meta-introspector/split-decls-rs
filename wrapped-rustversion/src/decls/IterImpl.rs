@@ -4,4 +4,4 @@ macro_rules! IterImpl {
     };
 }
 
-IterImpl!()
+IterImpl!();

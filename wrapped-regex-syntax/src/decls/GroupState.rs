@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Alternation!();
         Group!();
+        Alternation!();
         Concat!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! GroupState {
     };
 }
 
-GroupState!()
+GroupState!();

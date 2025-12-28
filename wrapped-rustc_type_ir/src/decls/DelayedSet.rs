@@ -4,4 +4,4 @@ macro_rules! DelayedSet {
     };
 }
 
-DelayedSet!()
+DelayedSet!();

@@ -4,4 +4,4 @@ macro_rules! UnstableConstFn {
     };
 }
 
-UnstableConstFn!()
+UnstableConstFn!();

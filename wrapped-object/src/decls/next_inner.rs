@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        MachO32!();
         MachO64!();
+        MachO32!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! next_inner {
     };
 }
 
-next_inner!()
+next_inner!();

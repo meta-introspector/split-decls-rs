@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
+        Alternation!();
         Ast!();
+        Repetition!();
         Concat!();
         Group!();
         Frame!();
-        Repetition!();
-        Alternation!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_40 {
     };
 }
 
-impl_40!()
+impl_40!();

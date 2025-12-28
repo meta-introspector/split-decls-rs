@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        DyldCacheRelocationIteratorV2!();
-        RelocationStateV2!();
-        ReadRef!();
-        Result!();
         DyldRelocation!();
-        U64!();
+        DyldCacheRelocationIteratorV2!();
         Endian!();
+        Result!();
+        ReadRef!();
+        RelocationStateV2!();
+        U64!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_492 {
     };
 }
 
-impl_492!()
+impl_492!();

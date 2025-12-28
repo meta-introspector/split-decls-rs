@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        Cache!();
-        DBInner!();
         ThreadMode!();
-        DBCommon!();
-        Error!();
         TransactionDB!();
-        MemoryUsageBuilder!();
         DB!();
+        DBCommon!();
+        DBInner!();
         MemoryUsage!();
+        Cache!();
+        MemoryUsageBuilder!();
+        Error!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_298 {
     };
 }
 
-impl_298!()
+impl_298!();

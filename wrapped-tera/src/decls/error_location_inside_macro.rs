@@ -12,4 +12,4 @@ macro_rules! error_location_inside_macro {
     };
 }
 
-error_location_inside_macro!()
+error_location_inside_macro!();

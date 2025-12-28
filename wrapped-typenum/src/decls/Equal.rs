@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Ord!();
         Cmp!();
         Eq!();
+        Ord!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! Equal {
     };
 }
 
-Equal!()
+Equal!();

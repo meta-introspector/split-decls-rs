@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        CoffComdatIterator!();
         AnonObjectHeaderBigobj!();
+        CoffComdatIterator!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! CoffBigComdatIterator {
     };
 }
 
-CoffBigComdatIterator!()
+CoffBigComdatIterator!();

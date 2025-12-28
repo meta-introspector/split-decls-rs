@@ -2,10 +2,10 @@ macro_rules! deps {
     () => {
         RowIterator!();
         Reader!();
-        Decode!();
-        Blob!();
         File!();
         Row!();
+        Blob!();
+        Decode!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! AsRow {
     };
 }
 
-AsRow!()
+AsRow!();

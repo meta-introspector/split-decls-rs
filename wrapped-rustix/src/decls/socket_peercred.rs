@@ -12,4 +12,4 @@ macro_rules! socket_peercred {
     };
 }
 
-socket_peercred!()
+socket_peercred!();

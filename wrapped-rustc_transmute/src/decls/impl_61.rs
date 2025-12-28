@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        MaybeTransmutableQuery!();
-        QueryContext!();
         Assume!();
+        QueryContext!();
+        MaybeTransmutableQuery!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_61 {
     };
 }
 
-impl_61!()
+impl_61!();

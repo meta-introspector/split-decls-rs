@@ -4,4 +4,4 @@ macro_rules! SSUBTYP_DWSTR {
     };
 }
 
-SSUBTYP_DWSTR!()
+SSUBTYP_DWSTR!();

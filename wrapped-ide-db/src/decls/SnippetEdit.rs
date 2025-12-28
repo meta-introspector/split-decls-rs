@@ -4,4 +4,4 @@ macro_rules! SnippetEdit {
     };
 }
 
-SnippetEdit!()
+SnippetEdit!();

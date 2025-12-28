@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        From!();
+        Struct!();
         Display!();
         Trait!();
+        From!();
         InferredBounds!();
-        Struct!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_struct {
     };
 }
 
-impl_struct!()
+impl_struct!();

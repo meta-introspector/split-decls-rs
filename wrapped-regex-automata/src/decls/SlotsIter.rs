@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Slots!();
         NFA!();
+        Slots!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! SlotsIter {
     };
 }
 
-SlotsIter!()
+SlotsIter!();

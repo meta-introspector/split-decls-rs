@@ -4,4 +4,4 @@ macro_rules! RustcLegacyConstGenericsIndexNegative {
     };
 }
 
-RustcLegacyConstGenericsIndexNegative!()
+RustcLegacyConstGenericsIndexNegative!();

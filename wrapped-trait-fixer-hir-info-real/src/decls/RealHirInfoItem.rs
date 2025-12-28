@@ -4,4 +4,4 @@ macro_rules! RealHirInfoItem {
     };
 }
 
-RealHirInfoItem!()
+RealHirInfoItem!();

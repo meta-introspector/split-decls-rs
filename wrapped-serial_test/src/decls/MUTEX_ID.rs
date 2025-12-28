@@ -4,4 +4,4 @@ macro_rules! MUTEX_ID {
     };
 }
 
-MUTEX_ID!()
+MUTEX_ID!();

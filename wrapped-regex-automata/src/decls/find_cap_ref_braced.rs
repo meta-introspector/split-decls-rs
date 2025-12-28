@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Ref!();
         CaptureRef!();
+        Ref!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! find_cap_ref_braced {
     };
 }
 
-find_cap_ref_braced!()
+find_cap_ref_braced!();

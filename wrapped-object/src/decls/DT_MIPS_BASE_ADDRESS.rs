@@ -4,4 +4,4 @@ macro_rules! DT_MIPS_BASE_ADDRESS {
     };
 }
 
-DT_MIPS_BASE_ADDRESS!()
+DT_MIPS_BASE_ADDRESS!();

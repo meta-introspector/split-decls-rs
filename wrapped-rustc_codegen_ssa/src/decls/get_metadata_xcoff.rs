@@ -4,4 +4,4 @@ macro_rules! get_metadata_xcoff {
     };
 }
 
-get_metadata_xcoff!()
+get_metadata_xcoff!();

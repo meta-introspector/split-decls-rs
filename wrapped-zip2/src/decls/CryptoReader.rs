@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        ZipCryptoReaderValid!();
         AesReaderValid!();
         AesVendorVersion!();
+        ZipCryptoReaderValid!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! CryptoReader {
     };
 }
 
-CryptoReader!()
+CryptoReader!();

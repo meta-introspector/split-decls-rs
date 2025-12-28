@@ -4,4 +4,4 @@ macro_rules! DT_INIT_ARRAY {
     };
 }
 
-DT_INIT_ARRAY!()
+DT_INIT_ARRAY!();

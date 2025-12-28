@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        BoundRegionKind!();
         BoundVar!();
+        BoundRegionKind!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! BoundRegion {
     };
 }
 
-BoundRegion!()
+BoundRegion!();

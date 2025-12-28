@@ -4,4 +4,4 @@ macro_rules! fmaximumf {
     };
 }
 
-fmaximumf!()
+fmaximumf!();

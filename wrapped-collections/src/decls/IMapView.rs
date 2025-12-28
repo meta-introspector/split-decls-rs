@@ -4,4 +4,4 @@ macro_rules! IMapView {
     };
 }
 
-IMapView!()
+IMapView!();

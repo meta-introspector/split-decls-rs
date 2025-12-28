@@ -4,4 +4,4 @@ macro_rules! avalanche_xxh64 {
     };
 }
 
-avalanche_xxh64!()
+avalanche_xxh64!();

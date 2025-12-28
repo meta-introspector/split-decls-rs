@@ -1,19 +1,19 @@
 macro_rules! deps {
     () => {
-        MiscPatternSuggestion!();
+        LeadingIrrefutableLetPatterns!();
+        TrailingIrrefutableLetPatterns!();
+        Inform!();
         SuggestLet!();
         LetSource!();
-        Variant!();
-        Inform!();
-        TrailingIrrefutableLetPatterns!();
-        MatchVisitor!();
-        Scope!();
-        PatCtxt!();
-        InterpretedAsConstSugg!();
-        LeadingIrrefutableLetPatterns!();
         PatternNotCovered!();
         RefutableFlag!();
+        Scope!();
+        Variant!();
+        MatchVisitor!();
+        InterpretedAsConstSugg!();
         InterpretedAsConst!();
+        MiscPatternSuggestion!();
+        PatCtxt!();
     };
 }
 
@@ -24,4 +24,4 @@ macro_rules! impl_313 {
     };
 }
 
-impl_313!()
+impl_313!();

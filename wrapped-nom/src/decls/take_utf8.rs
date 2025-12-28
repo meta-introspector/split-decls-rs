@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        Needed!();
         IResult!();
         Err!();
-        Needed!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! take_utf8 {
     };
 }
 
-take_utf8!()
+take_utf8!();

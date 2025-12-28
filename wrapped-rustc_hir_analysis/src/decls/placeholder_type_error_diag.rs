@@ -11,4 +11,4 @@ macro_rules! placeholder_type_error_diag {
     };
 }
 
-placeholder_type_error_diag!()
+placeholder_type_error_diag!();

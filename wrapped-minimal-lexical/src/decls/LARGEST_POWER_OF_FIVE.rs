@@ -4,4 +4,4 @@ macro_rules! LARGEST_POWER_OF_FIVE {
     };
 }
 
-LARGEST_POWER_OF_FIVE!()
+LARGEST_POWER_OF_FIVE!();

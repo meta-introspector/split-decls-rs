@@ -4,4 +4,4 @@ macro_rules! FromCp437 {
     };
 }
 
-FromCp437!()
+FromCp437!();

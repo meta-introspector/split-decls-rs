@@ -4,4 +4,4 @@ macro_rules! decode_four_hex_digits {
     };
 }
 
-decode_four_hex_digits!()
+decode_four_hex_digits!();

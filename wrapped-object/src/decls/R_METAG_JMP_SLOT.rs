@@ -4,4 +4,4 @@ macro_rules! R_METAG_JMP_SLOT {
     };
 }
 
-R_METAG_JMP_SLOT!()
+R_METAG_JMP_SLOT!();

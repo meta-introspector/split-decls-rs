@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        MatchCollector!();
         Match!();
         SsrMatches!();
-        MatchCollector!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! nest_and_remove_collisions {
     };
 }
 
-nest_and_remove_collisions!()
+nest_and_remove_collisions!();

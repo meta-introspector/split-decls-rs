@@ -4,4 +4,4 @@ macro_rules! SSUBTYP_DWABREV {
     };
 }
 
-SSUBTYP_DWABREV!()
+SSUBTYP_DWABREV!();

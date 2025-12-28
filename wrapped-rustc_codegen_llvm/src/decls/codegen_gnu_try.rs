@@ -11,4 +11,4 @@ macro_rules! codegen_gnu_try {
     };
 }
 
-codegen_gnu_try!()
+codegen_gnu_try!();

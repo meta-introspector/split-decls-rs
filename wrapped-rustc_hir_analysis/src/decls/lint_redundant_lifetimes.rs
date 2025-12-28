@@ -11,4 +11,4 @@ macro_rules! lint_redundant_lifetimes {
     };
 }
 
-lint_redundant_lifetimes!()
+lint_redundant_lifetimes!();

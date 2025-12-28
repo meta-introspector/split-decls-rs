@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        UnifiedDiffConfig!();
-        Token!();
-        Diff!();
         UnifiedDiffPrinter!();
+        Diff!();
+        Token!();
+        UnifiedDiffConfig!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! UnifiedDiff {
     };
 }
 
-UnifiedDiff!()
+UnifiedDiff!();

@@ -12,4 +12,4 @@ macro_rules! set_ipv6_mtu_discover {
     };
 }
 
-set_ipv6_mtu_discover!()
+set_ipv6_mtu_discover!();

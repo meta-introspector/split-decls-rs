@@ -4,4 +4,4 @@ macro_rules! IGNORE_CHECK {
     };
 }
 
-IGNORE_CHECK!()
+IGNORE_CHECK!();

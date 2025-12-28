@@ -4,4 +4,4 @@ macro_rules! BASSA_VAH {
     };
 }
 
-BASSA_VAH!()
+BASSA_VAH!();

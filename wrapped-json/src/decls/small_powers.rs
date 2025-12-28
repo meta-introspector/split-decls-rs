@@ -4,4 +4,4 @@ macro_rules! small_powers {
     };
 }
 
-small_powers!()
+small_powers!();

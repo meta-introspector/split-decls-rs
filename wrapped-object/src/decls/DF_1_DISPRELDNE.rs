@@ -4,4 +4,4 @@ macro_rules! DF_1_DISPRELDNE {
     };
 }
 
-DF_1_DISPRELDNE!()
+DF_1_DISPRELDNE!();

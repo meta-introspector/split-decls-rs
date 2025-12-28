@@ -4,4 +4,4 @@ macro_rules! tuple_type {
     };
 }
 
-tuple_type!()
+tuple_type!();

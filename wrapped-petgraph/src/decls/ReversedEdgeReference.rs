@@ -4,4 +4,4 @@ macro_rules! ReversedEdgeReference {
     };
 }
 
-ReversedEdgeReference!()
+ReversedEdgeReference!();

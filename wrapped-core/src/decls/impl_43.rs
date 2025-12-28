@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Interface!();
         IAgileObject_Vtbl!();
-        IAgileObject_Impl!();
-        GUID!();
+        Interface!();
         IUnknown_Vtbl!();
+        GUID!();
+        IAgileObject_Impl!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_43 {
     };
 }
 
-impl_43!()
+impl_43!();

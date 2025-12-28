@@ -11,4 +11,4 @@ macro_rules! impl_positive_measure {
     };
 }
 
-impl_positive_measure!()
+impl_positive_measure!();

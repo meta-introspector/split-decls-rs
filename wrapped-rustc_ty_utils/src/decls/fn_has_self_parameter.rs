@@ -4,4 +4,4 @@ macro_rules! fn_has_self_parameter {
     };
 }
 
-fn_has_self_parameter!()
+fn_has_self_parameter!();

@@ -4,4 +4,4 @@ macro_rules! BASE10_LOG2_SHIFT {
     };
 }
 
-BASE10_LOG2_SHIFT!()
+BASE10_LOG2_SHIFT!();

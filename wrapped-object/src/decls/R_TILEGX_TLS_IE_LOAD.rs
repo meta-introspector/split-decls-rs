@@ -4,4 +4,4 @@ macro_rules! R_TILEGX_TLS_IE_LOAD {
     };
 }
 
-R_TILEGX_TLS_IE_LOAD!()
+R_TILEGX_TLS_IE_LOAD!();

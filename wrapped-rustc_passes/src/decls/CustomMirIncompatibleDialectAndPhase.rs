@@ -4,4 +4,4 @@ macro_rules! CustomMirIncompatibleDialectAndPhase {
     };
 }
 
-CustomMirIncompatibleDialectAndPhase!()
+CustomMirIncompatibleDialectAndPhase!();

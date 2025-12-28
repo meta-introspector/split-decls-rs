@@ -4,4 +4,4 @@ macro_rules! sess_and_cfg {
     };
 }
 
-sess_and_cfg!()
+sess_and_cfg!();

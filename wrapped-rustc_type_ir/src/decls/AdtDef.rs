@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        SizedTraitKind!();
+        Interner!();
         EarlyBinder!();
         AdtDestructorKind!();
         Ty!();
-        Interner!();
+        SizedTraitKind!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! AdtDef {
     };
 }
 
-AdtDef!()
+AdtDef!();

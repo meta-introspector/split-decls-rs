@@ -1,13 +1,13 @@
 macro_rules! deps {
     () => {
-        Span!();
-        HygieneData!();
-        ExpnHash!();
         ExpnId!();
-        SyntaxContext!();
         MacroKind!();
         ExpnKind!();
+        Span!();
+        ExpnHash!();
         ExpnData!();
+        SyntaxContext!();
+        HygieneData!();
     };
 }
 
@@ -18,4 +18,4 @@ macro_rules! impl_54 {
     };
 }
 
-impl_54!()
+impl_54!();

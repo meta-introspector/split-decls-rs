@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        FnCtxt!();
         UsageKind!();
+        FnCtxt!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_311 {
     };
 }
 
-impl_311!()
+impl_311!();

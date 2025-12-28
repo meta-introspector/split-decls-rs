@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         CompiledModule!();
-        ModuleCodegen!();
         ModuleKind!();
+        ModuleCodegen!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_597 {
     };
 }
 
-impl_597!()
+impl_597!();

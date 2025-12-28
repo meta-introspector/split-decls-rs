@@ -4,4 +4,4 @@ macro_rules! DEFAULT_VERSION {
     };
 }
 
-DEFAULT_VERSION!()
+DEFAULT_VERSION!();

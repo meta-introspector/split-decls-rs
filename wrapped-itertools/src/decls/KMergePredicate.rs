@@ -4,4 +4,4 @@ macro_rules! KMergePredicate {
     };
 }
 
-KMergePredicate!()
+KMergePredicate!();

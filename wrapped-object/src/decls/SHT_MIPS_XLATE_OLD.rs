@@ -4,4 +4,4 @@ macro_rules! SHT_MIPS_XLATE_OLD {
     };
 }
 
-SHT_MIPS_XLATE_OLD!()
+SHT_MIPS_XLATE_OLD!();

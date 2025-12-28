@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        FinderRev!();
         Runner!();
         Finder!();
-        FinderRev!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! tests {
     };
 }
 
-tests!()
+tests!();

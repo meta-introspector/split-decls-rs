@@ -4,4 +4,4 @@ macro_rules! map_reduce {
     };
 }
 
-map_reduce!()
+map_reduce!();

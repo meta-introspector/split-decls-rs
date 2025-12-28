@@ -11,4 +11,4 @@ macro_rules! convert_tokens {
     };
 }
 
-convert_tokens!()
+convert_tokens!();

@@ -11,4 +11,4 @@ macro_rules! render_tests {
     };
 }
 
-render_tests!()
+render_tests!();

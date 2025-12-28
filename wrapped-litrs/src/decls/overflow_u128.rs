@@ -12,4 +12,4 @@ macro_rules! overflow_u128 {
     };
 }
 
-overflow_u128!()
+overflow_u128!();

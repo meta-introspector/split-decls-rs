@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        FileHeader!();
         SectionTable!();
+        FileHeader!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_799 {
     };
 }
 
-impl_799!()
+impl_799!();

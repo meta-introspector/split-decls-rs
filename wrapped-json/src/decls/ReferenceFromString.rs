@@ -4,4 +4,4 @@ macro_rules! ReferenceFromString {
     };
 }
 
-ReferenceFromString!()
+ReferenceFromString!();

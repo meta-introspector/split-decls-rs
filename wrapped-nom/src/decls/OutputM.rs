@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        IsStreaming!();
         Mode!();
+        IsStreaming!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! OutputM {
     };
 }
 
-OutputM!()
+OutputM!();

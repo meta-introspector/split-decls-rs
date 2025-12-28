@@ -4,4 +4,4 @@ macro_rules! BoolExt {
     };
 }
 
-BoolExt!()
+BoolExt!();

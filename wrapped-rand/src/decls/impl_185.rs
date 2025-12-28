@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
+        Distribution!();
+        Error!();
         SampleUniform!();
         Weight!();
-        Distribution!();
-        SampleBorrow!();
         WeightedIndex!();
-        Error!();
+        SampleBorrow!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_185 {
     };
 }
 
-impl_185!()
+impl_185!();

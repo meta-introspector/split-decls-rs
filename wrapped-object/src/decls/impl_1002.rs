@@ -1,27 +1,27 @@
 macro_rules! deps {
     () => {
-        ImageNtHeaders32!();
-        Error!();
-        ImageSectionHeader!();
-        ImageBaseRelocation!();
         Result!();
-        ImageOptionalHeader64!();
-        SectionRange!();
-        Note!();
-        Section!();
-        WritableBuffer!();
-        ImageNtHeaders64!();
-        Writer!();
-        ImageOptionalHeader32!();
-        U16!();
-        RelocBlock!();
         ImageDataDirectory!();
-        ImageFileHeader!();
-        U64!();
-        NtHeaders!();
-        U32!();
+        RelocBlock!();
         DataDirectory!();
+        U32!();
+        ImageOptionalHeader32!();
+        ImageNtHeaders64!();
+        ImageSectionHeader!();
+        U16!();
+        NtHeaders!();
+        ImageOptionalHeader64!();
+        Section!();
+        Error!();
+        Writer!();
         ImageDosHeader!();
+        SectionRange!();
+        WritableBuffer!();
+        ImageNtHeaders32!();
+        ImageFileHeader!();
+        ImageBaseRelocation!();
+        Note!();
+        U64!();
     };
 }
 
@@ -32,4 +32,4 @@ macro_rules! impl_1002 {
     };
 }
 
-impl_1002!()
+impl_1002!();

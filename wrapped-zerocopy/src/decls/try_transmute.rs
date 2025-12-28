@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        TryFromBytes!();
         IntoBytes!();
+        TryFromBytes!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! try_transmute {
     };
 }
 
-try_transmute!()
+try_transmute!();

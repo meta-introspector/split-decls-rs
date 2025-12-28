@@ -11,4 +11,4 @@ macro_rules! crate_info {
     };
 }
 
-crate_info!()
+crate_info!();

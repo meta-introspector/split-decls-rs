@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Container!();
         Stmts!();
+        Container!();
         Parameters!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! deserialize_in_place_body {
     };
 }
 
-deserialize_in_place_body!()
+deserialize_in_place_body!();

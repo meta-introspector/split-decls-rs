@@ -11,4 +11,4 @@ macro_rules! NUM_SNAPSHOTS {
     };
 }
 
-NUM_SNAPSHOTS!()
+NUM_SNAPSHOTS!();

@@ -4,4 +4,4 @@ macro_rules! syntax_factory {
     };
 }
 
-syntax_factory!()
+syntax_factory!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        PrefixEntryPoint!();
-        Input!();
-        Output!();
         Parser!();
+        PrefixEntryPoint!();
+        Output!();
+        Input!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_115 {
     };
 }
 
-impl_115!()
+impl_115!();

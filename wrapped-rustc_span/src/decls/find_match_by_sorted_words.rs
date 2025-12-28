@@ -11,4 +11,4 @@ macro_rules! find_match_by_sorted_words {
     };
 }
 
-find_match_by_sorted_words!()
+find_match_by_sorted_words!();

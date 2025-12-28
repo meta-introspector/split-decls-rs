@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Match!();
         Transition!();
-        State!();
+        Match!();
         Look!();
+        State!();
         StateID!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_459 {
     };
 }
 
-impl_459!()
+impl_459!();

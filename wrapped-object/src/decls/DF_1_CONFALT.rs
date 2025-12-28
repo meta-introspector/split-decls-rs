@@ -4,4 +4,4 @@ macro_rules! DF_1_CONFALT {
     };
 }
 
-DF_1_CONFALT!()
+DF_1_CONFALT!();

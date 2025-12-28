@@ -4,4 +4,4 @@ macro_rules! check_zip_eq_into_par_iter {
     };
 }
 
-check_zip_eq_into_par_iter!()
+check_zip_eq_into_par_iter!();

@@ -4,4 +4,4 @@ macro_rules! layer_declarations {
     };
 }
 
-layer_declarations!()
+layer_declarations!();

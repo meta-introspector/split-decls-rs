@@ -11,4 +11,4 @@ macro_rules! link_sanitizer_runtime {
     };
 }
 
-link_sanitizer_runtime!()
+link_sanitizer_runtime!();

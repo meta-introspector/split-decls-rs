@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         ValueSet!();
-        Field!();
         Value!();
+        Field!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! private {
     };
 }
 
-private!()
+private!();

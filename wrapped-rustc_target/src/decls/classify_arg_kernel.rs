@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        CastTarget!();
+        Uniform!();
         ArgAbi!();
         PassMode!();
-        Uniform!();
+        CastTarget!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! classify_arg_kernel {
     };
 }
 
-classify_arg_kernel!()
+classify_arg_kernel!();

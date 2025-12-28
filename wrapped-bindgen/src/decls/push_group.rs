@@ -12,4 +12,4 @@ macro_rules! push_group {
     };
 }
 
-push_group!()
+push_group!();

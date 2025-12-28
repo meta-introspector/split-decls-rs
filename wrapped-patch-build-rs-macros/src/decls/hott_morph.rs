@@ -4,4 +4,4 @@ macro_rules! hott_morph {
     };
 }
 
-hott_morph!()
+hott_morph!();

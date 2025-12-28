@@ -4,4 +4,4 @@ macro_rules! testable_result_err {
     };
 }
 
-testable_result_err!()
+testable_result_err!();

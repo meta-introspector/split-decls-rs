@@ -4,4 +4,4 @@ macro_rules! transcriber {
     };
 }
 
-transcriber!()
+transcriber!();

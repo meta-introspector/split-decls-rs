@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        IsEmpty!();
-        Result!();
         RaFixtureAnalysis!();
         UpmapFromRaFixture!();
+        IsEmpty!();
+        Result!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! upmap_collection {
     };
 }
 
-upmap_collection!()
+upmap_collection!();

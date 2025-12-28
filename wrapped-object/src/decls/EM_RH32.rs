@@ -4,4 +4,4 @@ macro_rules! EM_RH32 {
     };
 }
 
-EM_RH32!()
+EM_RH32!();

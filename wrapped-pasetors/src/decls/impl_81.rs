@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        AsymmetricPublicKey!();
+        AsymmetricSecretKey!();
         V2!();
         Error!();
-        AsymmetricSecretKey!();
-        AsymmetricPublicKey!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_81 {
     };
 }
 
-impl_81!()
+impl_81!();

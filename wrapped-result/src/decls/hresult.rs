@@ -4,4 +4,4 @@ macro_rules! hresult {
     };
 }
 
-hresult!()
+hresult!();

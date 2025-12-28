@@ -4,4 +4,4 @@ macro_rules! associated_type_for_impl_trait_in_impl {
     };
 }
 
-associated_type_for_impl_trait_in_impl!()
+associated_type_for_impl_trait_in_impl!();

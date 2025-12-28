@@ -4,4 +4,4 @@ macro_rules! EF_E2K_4MB_PAGES {
     };
 }
 
-EF_E2K_4MB_PAGES!()
+EF_E2K_4MB_PAGES!();

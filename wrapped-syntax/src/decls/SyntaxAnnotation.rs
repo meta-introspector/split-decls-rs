@@ -4,4 +4,4 @@ macro_rules! SyntaxAnnotation {
     };
 }
 
-SyntaxAnnotation!()
+SyntaxAnnotation!();

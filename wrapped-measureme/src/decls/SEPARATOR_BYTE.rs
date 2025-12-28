@@ -4,4 +4,4 @@ macro_rules! SEPARATOR_BYTE {
     };
 }
 
-SEPARATOR_BYTE!()
+SEPARATOR_BYTE!();

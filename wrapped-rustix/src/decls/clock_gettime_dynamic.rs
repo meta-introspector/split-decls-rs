@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Timespec!();
         Result!();
+        Timespec!();
         DynamicClockId!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! clock_gettime_dynamic {
     };
 }
 
-clock_gettime_dynamic!()
+clock_gettime_dynamic!();

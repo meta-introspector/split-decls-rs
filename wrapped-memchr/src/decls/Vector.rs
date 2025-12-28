@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        MoveMask!();
         Mask!();
+        MoveMask!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Vector {
     };
 }
 
-Vector!()
+Vector!();

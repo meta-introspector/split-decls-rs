@@ -4,4 +4,4 @@ macro_rules! format_foreign {
     };
 }
 
-format_foreign!()
+format_foreign!();

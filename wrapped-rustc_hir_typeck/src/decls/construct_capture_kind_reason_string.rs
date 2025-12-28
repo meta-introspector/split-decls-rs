@@ -4,4 +4,4 @@ macro_rules! construct_capture_kind_reason_string {
     };
 }
 
-construct_capture_kind_reason_string!()
+construct_capture_kind_reason_string!();

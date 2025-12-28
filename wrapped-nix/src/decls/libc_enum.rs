@@ -12,4 +12,4 @@ macro_rules! libc_enum {
     };
 }
 
-libc_enum!()
+libc_enum!();

@@ -4,4 +4,4 @@ macro_rules! RP_MAX {
     };
 }
 
-RP_MAX!()
+RP_MAX!();

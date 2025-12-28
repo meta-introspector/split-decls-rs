@@ -4,4 +4,4 @@ macro_rules! bootstrap_cycle {
     };
 }
 
-bootstrap_cycle!()
+bootstrap_cycle!();

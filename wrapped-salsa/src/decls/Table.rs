@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        IngredientIndex!();
         PageIndex!();
+        IngredientIndex!();
         Page!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! Table {
     };
 }
 
-Table!()
+Table!();

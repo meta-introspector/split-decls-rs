@@ -4,4 +4,4 @@ macro_rules! F_DSA {
     };
 }
 
-F_DSA!()
+F_DSA!();

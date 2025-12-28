@@ -11,4 +11,4 @@ macro_rules! analyze_source_file_neon {
     };
 }
 
-analyze_source_file_neon!()
+analyze_source_file_neon!();

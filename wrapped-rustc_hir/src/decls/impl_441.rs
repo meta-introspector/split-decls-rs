@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        Expr!();
-        QPath!();
-        Res!();
         Variant!();
-        PatExprKind!();
+        PatKind!();
+        Res!();
+        PatExpr!();
         Pat!();
         Path!();
-        PatKind!();
-        CtorOf!();
+        QPath!();
+        Expr!();
         DefKind!();
-        PatExpr!();
+        CtorOf!();
+        PatExprKind!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_441 {
     };
 }
 
-impl_441!()
+impl_441!();

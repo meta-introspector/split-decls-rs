@@ -4,4 +4,4 @@ macro_rules! R_AVR_8_HI8 {
     };
 }
 
-R_AVR_8_HI8!()
+R_AVR_8_HI8!();

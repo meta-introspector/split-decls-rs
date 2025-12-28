@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        Node!();
+        NodeRef!();
         Edge!();
         MinScored!();
-        NodeRef!();
         NodeReferences!();
-        Node!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! MinSpanningTreePrim {
     };
 }
 
-MinSpanningTreePrim!()
+MinSpanningTreePrim!();

@@ -11,4 +11,4 @@ macro_rules! normalize_str_to_unordered {
     };
 }
 
-normalize_str_to_unordered!()
+normalize_str_to_unordered!();

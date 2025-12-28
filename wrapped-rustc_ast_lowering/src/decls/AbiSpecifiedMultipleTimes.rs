@@ -4,4 +4,4 @@ macro_rules! AbiSpecifiedMultipleTimes {
     };
 }
 
-AbiSpecifiedMultipleTimes!()
+AbiSpecifiedMultipleTimes!();

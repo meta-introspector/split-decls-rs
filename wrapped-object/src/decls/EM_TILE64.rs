@@ -4,4 +4,4 @@ macro_rules! EM_TILE64 {
     };
 }
 
-EM_TILE64!()
+EM_TILE64!();

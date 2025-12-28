@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Endian!();
         Section32!();
         Section!();
+        Endian!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_594 {
     };
 }
 
-impl_594!()
+impl_594!();

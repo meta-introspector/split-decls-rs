@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        RepeatN!();
         Empty!();
+        RepeatN!();
         Producer!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! RepeatNProducer {
     };
 }
 
-RepeatNProducer!()
+RepeatNProducer!();

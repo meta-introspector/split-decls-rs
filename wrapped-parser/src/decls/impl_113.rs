@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Parser!();
-        Step!();
         Output!();
+        Step!();
         Input!();
         TopEntryPoint!();
+        Parser!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_113 {
     };
 }
 
-impl_113!()
+impl_113!();

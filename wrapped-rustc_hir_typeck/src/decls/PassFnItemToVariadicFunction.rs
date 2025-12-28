@@ -4,4 +4,4 @@ macro_rules! PassFnItemToVariadicFunction {
     };
 }
 
-PassFnItemToVariadicFunction!()
+PassFnItemToVariadicFunction!();

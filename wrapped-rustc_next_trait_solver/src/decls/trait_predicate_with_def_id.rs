@@ -4,4 +4,4 @@ macro_rules! trait_predicate_with_def_id {
     };
 }
 
-trait_predicate_with_def_id!()
+trait_predicate_with_def_id!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Result!();
         SocketAddrAny!();
+        Result!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! acceptfrom {
     };
 }
 
-acceptfrom!()
+acceptfrom!();

@@ -4,4 +4,4 @@ macro_rules! EF_IA_64_ABI64 {
     };
 }
 
-EF_IA_64_ABI64!()
+EF_IA_64_ABI64!();

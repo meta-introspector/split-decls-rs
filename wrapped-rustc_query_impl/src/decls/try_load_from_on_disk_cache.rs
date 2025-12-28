@@ -11,4 +11,4 @@ macro_rules! try_load_from_on_disk_cache {
     };
 }
 
-try_load_from_on_disk_cache!()
+try_load_from_on_disk_cache!();

@@ -12,4 +12,4 @@ macro_rules! get_lit_str {
     };
 }
 
-get_lit_str!()
+get_lit_str!();

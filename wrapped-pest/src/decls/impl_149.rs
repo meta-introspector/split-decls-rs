@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Operator!();
         RuleType!();
-        Assoc!();
         Pair!();
-        PrecClimber!();
         Pairs!();
+        Operator!();
+        Assoc!();
+        PrecClimber!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_149 {
     };
 }
 
-impl_149!()
+impl_149!();

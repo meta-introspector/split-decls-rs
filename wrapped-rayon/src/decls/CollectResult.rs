@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        SendPtr!();
         CollectReducer!();
+        SendPtr!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! CollectResult {
     };
 }
 
-CollectResult!()
+CollectResult!();

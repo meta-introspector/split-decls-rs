@@ -4,4 +4,4 @@ macro_rules! sigpipe {
     };
 }
 
-sigpipe!()
+sigpipe!();

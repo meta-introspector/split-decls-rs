@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Crel!();
         Item!();
+        Crel!();
         Result!();
         CrelIterator!();
     };
@@ -14,4 +14,4 @@ macro_rules! impl_379 {
     };
 }
 
-impl_379!()
+impl_379!();

@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
-        Ty!();
-        TraitFn!();
-        FnPtrTy!();
+        Safety!();
         Generics!();
         FnSig!();
-        Safety!();
+        FnPtrTy!();
+        TraitFn!();
+        Ty!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! ForeignItemKind {
     };
 }
 
-ForeignItemKind!()
+ForeignItemKind!();

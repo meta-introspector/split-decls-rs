@@ -4,4 +4,4 @@ macro_rules! CfgSelectUnreachable {
     };
 }
 
-CfgSelectUnreachable!()
+CfgSelectUnreachable!();

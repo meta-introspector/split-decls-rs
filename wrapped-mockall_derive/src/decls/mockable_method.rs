@@ -4,4 +4,4 @@ macro_rules! mockable_method {
     };
 }
 
-mockable_method!()
+mockable_method!();

@@ -4,4 +4,4 @@ macro_rules! Opcode {
     };
 }
 
-Opcode!()
+Opcode!();

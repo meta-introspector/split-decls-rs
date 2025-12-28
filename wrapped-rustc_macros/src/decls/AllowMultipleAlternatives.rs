@@ -4,4 +4,4 @@ macro_rules! AllowMultipleAlternatives {
     };
 }
 
-AllowMultipleAlternatives!()
+AllowMultipleAlternatives!();

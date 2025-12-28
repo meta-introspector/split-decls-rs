@@ -4,4 +4,4 @@ macro_rules! original_frange {
     };
 }
 
-original_frange!()
+original_frange!();

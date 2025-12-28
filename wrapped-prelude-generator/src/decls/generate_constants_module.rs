@@ -4,4 +4,4 @@ macro_rules! generate_constants_module {
     };
 }
 
-generate_constants_module!()
+generate_constants_module!();

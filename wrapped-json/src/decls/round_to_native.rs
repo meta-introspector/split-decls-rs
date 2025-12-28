@@ -12,4 +12,4 @@ macro_rules! round_to_native {
     };
 }
 
-round_to_native!()
+round_to_native!();

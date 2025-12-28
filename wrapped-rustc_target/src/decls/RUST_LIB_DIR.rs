@@ -4,4 +4,4 @@ macro_rules! RUST_LIB_DIR {
     };
 }
 
-RUST_LIB_DIR!()
+RUST_LIB_DIR!();

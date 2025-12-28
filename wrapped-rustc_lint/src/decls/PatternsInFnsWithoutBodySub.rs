@@ -4,4 +4,4 @@ macro_rules! PatternsInFnsWithoutBodySub {
     };
 }
 
-PatternsInFnsWithoutBodySub!()
+PatternsInFnsWithoutBodySub!();

@@ -53,4 +53,4 @@ impl AtomicSwap {{
     };
 }
 
-atomic_swap_impl!()
+atomic_swap_impl!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Write!();
         Error!();
+        Write!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_435 {
     };
 }
 
-impl_435!()
+impl_435!();

@@ -4,4 +4,4 @@ macro_rules! GenKill {
     };
 }
 
-GenKill!()
+GenKill!();

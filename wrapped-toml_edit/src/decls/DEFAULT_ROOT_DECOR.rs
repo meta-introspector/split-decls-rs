@@ -4,4 +4,4 @@ macro_rules! DEFAULT_ROOT_DECOR {
     };
 }
 
-DEFAULT_ROOT_DECOR!()
+DEFAULT_ROOT_DECOR!();

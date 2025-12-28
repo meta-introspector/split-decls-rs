@@ -4,4 +4,4 @@ macro_rules! ForestObligation {
     };
 }
 
-ForestObligation!()
+ForestObligation!();

@@ -1,17 +1,17 @@
 macro_rules! deps {
     () => {
-        InlineAsm!();
-        Block!();
-        Path!();
-        ExprKind!();
-        Closure!();
         Expr!();
-        ConstBlock!();
-        StructTailExpr!();
-        FnKind!();
-        LetExpr!();
-        Visitor!();
+        ExprKind!();
+        Block!();
         Lit!();
+        StructTailExpr!();
+        LetExpr!();
+        FnKind!();
+        ConstBlock!();
+        InlineAsm!();
+        Closure!();
+        Path!();
+        Visitor!();
     };
 }
 
@@ -22,4 +22,4 @@ macro_rules! walk_expr {
     };
 }
 
-walk_expr!()
+walk_expr!();

@@ -11,4 +11,4 @@ macro_rules! fail_output {
     };
 }
 
-fail_output!()
+fail_output!();

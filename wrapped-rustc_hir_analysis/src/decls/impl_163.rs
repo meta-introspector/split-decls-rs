@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Autoderef!();
-        AutoderefSnapshot!();
         AutoderefKind!();
+        AutoderefSnapshot!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_163 {
     };
 }
 
-impl_163!()
+impl_163!();

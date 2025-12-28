@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        ModuleCodegen!();
-        ExtraBackendMethods!();
-        Message!();
-        WorkItem!();
         Coordinator!();
+        ExtraBackendMethods!();
+        WorkItem!();
+        Message!();
+        ModuleCodegen!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! submit_codegened_module_to_llvm {
     };
 }
 
-submit_codegened_module_to_llvm!()
+submit_codegened_module_to_llvm!();

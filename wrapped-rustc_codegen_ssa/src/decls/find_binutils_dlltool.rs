@@ -4,4 +4,4 @@ macro_rules! find_binutils_dlltool {
     };
 }
 
-find_binutils_dlltool!()
+find_binutils_dlltool!();

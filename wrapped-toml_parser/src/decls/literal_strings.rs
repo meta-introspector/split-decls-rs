@@ -107,4 +107,4 @@ macro_rules! literal_strings {
     };
 }
 
-literal_strings!()
+literal_strings!();

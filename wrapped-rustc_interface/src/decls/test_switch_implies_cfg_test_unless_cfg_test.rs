@@ -4,4 +4,4 @@ macro_rules! test_switch_implies_cfg_test_unless_cfg_test {
     };
 }
 
-test_switch_implies_cfg_test_unless_cfg_test!()
+test_switch_implies_cfg_test_unless_cfg_test!();

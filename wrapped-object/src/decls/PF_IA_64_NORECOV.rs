@@ -4,4 +4,4 @@ macro_rules! PF_IA_64_NORECOV {
     };
 }
 
-PF_IA_64_NORECOV!()
+PF_IA_64_NORECOV!();

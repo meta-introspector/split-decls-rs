@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Captures!();
-        StateID!();
         NonMaxUsize!();
         PikeVM!();
         SlotTable!();
+        StateID!();
+        Captures!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! impl_552 {
     };
 }
 
-impl_552!()
+impl_552!();

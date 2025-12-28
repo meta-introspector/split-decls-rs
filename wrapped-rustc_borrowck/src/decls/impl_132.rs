@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        MoveError!();
         IllegalMoveOriginKind!();
+        MoveError!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_132 {
     };
 }
 
-impl_132!()
+impl_132!();

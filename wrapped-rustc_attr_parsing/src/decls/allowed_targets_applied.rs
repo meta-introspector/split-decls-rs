@@ -4,4 +4,4 @@ macro_rules! allowed_targets_applied {
     };
 }
 
-allowed_targets_applied!()
+allowed_targets_applied!();

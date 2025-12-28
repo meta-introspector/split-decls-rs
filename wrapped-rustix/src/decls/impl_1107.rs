@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        FlockOffsetType!();
-        FlockType!();
         Flock!();
+        FlockType!();
+        FlockOffsetType!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_1107 {
     };
 }
 
-impl_1107!()
+impl_1107!();

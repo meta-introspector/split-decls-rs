@@ -4,4 +4,4 @@ macro_rules! non_nil {
     };
 }
 
-non_nil!()
+non_nil!();

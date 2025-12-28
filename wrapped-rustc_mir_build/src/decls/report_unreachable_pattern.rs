@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        PatCtxt!();
         UnreachablePattern!();
+        PatCtxt!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! report_unreachable_pattern {
     };
 }
 
-report_unreachable_pattern!()
+report_unreachable_pattern!();

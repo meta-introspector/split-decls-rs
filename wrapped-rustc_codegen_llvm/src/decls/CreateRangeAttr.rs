@@ -4,4 +4,4 @@ macro_rules! CreateRangeAttr {
     };
 }
 
-CreateRangeAttr!()
+CreateRangeAttr!();

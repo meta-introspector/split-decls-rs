@@ -4,4 +4,4 @@ macro_rules! iter {
     };
 }
 
-iter!()
+iter!();

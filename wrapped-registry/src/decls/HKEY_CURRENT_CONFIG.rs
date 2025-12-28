@@ -11,4 +11,4 @@ macro_rules! HKEY_CURRENT_CONFIG {
     };
 }
 
-HKEY_CURRENT_CONFIG!()
+HKEY_CURRENT_CONFIG!();

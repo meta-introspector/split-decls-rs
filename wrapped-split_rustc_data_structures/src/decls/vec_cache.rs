@@ -4,4 +4,4 @@ macro_rules! vec_cache {
     };
 }
 
-vec_cache!()
+vec_cache!();

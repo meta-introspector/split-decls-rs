@@ -12,4 +12,4 @@ fn f1() -> DynTrait<Vec<Error>> {foo()}
     };
 }
 
-replace_type!()
+replace_type!();

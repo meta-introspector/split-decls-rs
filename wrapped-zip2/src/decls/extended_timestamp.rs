@@ -4,4 +4,4 @@ macro_rules! extended_timestamp {
     };
 }
 
-extended_timestamp!()
+extended_timestamp!();

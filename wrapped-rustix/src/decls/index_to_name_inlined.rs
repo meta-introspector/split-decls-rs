@@ -12,4 +12,4 @@ macro_rules! index_to_name_inlined {
     };
 }
 
-index_to_name_inlined!()
+index_to_name_inlined!();

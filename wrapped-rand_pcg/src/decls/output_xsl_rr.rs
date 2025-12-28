@@ -4,4 +4,4 @@ macro_rules! output_xsl_rr {
     };
 }
 
-output_xsl_rr!()
+output_xsl_rr!();

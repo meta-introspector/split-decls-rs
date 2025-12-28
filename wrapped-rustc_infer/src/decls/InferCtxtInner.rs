@@ -1,17 +1,17 @@
 macro_rules! deps {
     () => {
-        At!();
-        RegionConstraintStorage!();
-        InferCtxt!();
-        TypeOutlivesConstraint!();
-        ProjectionCacheStorage!();
-        TypeVariableStorage!();
         UnificationTable!();
-        Snapshot!();
-        InferCtxtUndoLogs!();
         ConstVidKey!();
-        OpaqueTypeStorage!();
+        TypeOutlivesConstraint!();
         PredicateObligation!();
+        RegionConstraintStorage!();
+        Snapshot!();
+        At!();
+        InferCtxtUndoLogs!();
+        ProjectionCacheStorage!();
+        OpaqueTypeStorage!();
+        TypeVariableStorage!();
+        InferCtxt!();
     };
 }
 
@@ -22,4 +22,4 @@ macro_rules! InferCtxtInner {
     };
 }
 
-InferCtxtInner!()
+InferCtxtInner!();

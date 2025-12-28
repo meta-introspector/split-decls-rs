@@ -4,4 +4,4 @@ macro_rules! MAX_SINGLE_VALUE {
     };
 }
 
-MAX_SINGLE_VALUE!()
+MAX_SINGLE_VALUE!();

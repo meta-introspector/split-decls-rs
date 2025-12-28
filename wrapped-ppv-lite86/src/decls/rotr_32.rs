@@ -4,4 +4,4 @@ macro_rules! rotr_32 {
     };
 }
 
-rotr_32!()
+rotr_32!();

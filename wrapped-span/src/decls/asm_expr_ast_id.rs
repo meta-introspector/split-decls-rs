@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ErasedFileAstId!();
         ErasedFileAstIdKind!();
+        ErasedFileAstId!();
         ErasedAstIdNextIndexMap!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! asm_expr_ast_id {
     };
 }
 
-asm_expr_ast_id!()
+asm_expr_ast_id!();

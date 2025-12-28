@@ -11,4 +11,4 @@ macro_rules! is_cast_from_ref_to_mut_ptr {
     };
 }
 
-is_cast_from_ref_to_mut_ptr!()
+is_cast_from_ref_to_mut_ptr!();

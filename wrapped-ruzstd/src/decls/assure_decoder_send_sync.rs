@@ -11,4 +11,4 @@ macro_rules! assure_decoder_send_sync {
     };
 }
 
-assure_decoder_send_sync!()
+assure_decoder_send_sync!();

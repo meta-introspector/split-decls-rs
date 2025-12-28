@@ -11,4 +11,4 @@ macro_rules! scope_def_is_deprecated {
     };
 }
 
-scope_def_is_deprecated!()
+scope_def_is_deprecated!();

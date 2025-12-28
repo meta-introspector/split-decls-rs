@@ -4,4 +4,4 @@ macro_rules! this {
     };
 }
 
-this!()
+this!();

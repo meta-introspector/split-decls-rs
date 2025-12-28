@@ -4,4 +4,4 @@ macro_rules! scc {
     };
 }
 
-scc!()
+scc!();

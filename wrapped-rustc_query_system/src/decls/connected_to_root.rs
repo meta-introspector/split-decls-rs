@@ -12,4 +12,4 @@ macro_rules! connected_to_root {
     };
 }
 
-connected_to_root!()
+connected_to_root!();

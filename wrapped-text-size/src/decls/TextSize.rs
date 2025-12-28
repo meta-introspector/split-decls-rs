@@ -4,4 +4,4 @@ macro_rules! TextSize {
     };
 }
 
-TextSize!()
+TextSize!();

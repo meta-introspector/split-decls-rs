@@ -4,4 +4,4 @@ macro_rules! data_directory {
     };
 }
 
-data_directory!()
+data_directory!();

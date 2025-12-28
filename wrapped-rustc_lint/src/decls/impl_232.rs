@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        AltHead!();
-        FindSignificantDropper!();
-        DestructorLabel!();
-        IfLetRescopeLint!();
-        SingleArmMatchBegin!();
         ConsequentRewrite!();
-        IfLetRescope!();
         LateContext!();
-        IfLetRescopeRewrite!();
+        AltHead!();
+        IfLetRescopeLint!();
+        DestructorLabel!();
         ClosingBrackets!();
+        IfLetRescope!();
+        SingleArmMatchBegin!();
+        IfLetRescopeRewrite!();
+        FindSignificantDropper!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_232 {
     };
 }
 
-impl_232!()
+impl_232!();

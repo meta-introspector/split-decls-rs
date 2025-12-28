@@ -4,4 +4,4 @@ macro_rules! BuildConfig {
     };
 }
 
-BuildConfig!()
+BuildConfig!();

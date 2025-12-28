@@ -4,4 +4,4 @@ macro_rules! z_size {
     };
 }
 
-z_size!()
+z_size!();

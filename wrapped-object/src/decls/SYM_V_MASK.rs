@@ -4,4 +4,4 @@ macro_rules! SYM_V_MASK {
     };
 }
 
-SYM_V_MASK!()
+SYM_V_MASK!();

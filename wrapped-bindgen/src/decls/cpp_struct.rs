@@ -4,4 +4,4 @@ macro_rules! cpp_struct {
     };
 }
 
-cpp_struct!()
+cpp_struct!();

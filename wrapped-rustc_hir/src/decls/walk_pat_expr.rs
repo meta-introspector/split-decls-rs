@@ -1,11 +1,11 @@
 macro_rules! deps {
     () => {
+        ConstBlock!();
         Path!();
         Visitor!();
-        PatExprKind!();
         PatExpr!();
+        PatExprKind!();
         Lit!();
-        ConstBlock!();
     };
 }
 
@@ -16,4 +16,4 @@ macro_rules! walk_pat_expr {
     };
 }
 
-walk_pat_expr!()
+walk_pat_expr!();

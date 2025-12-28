@@ -4,4 +4,4 @@ macro_rules! suggest_impl_trait {
     };
 }
 
-suggest_impl_trait!()
+suggest_impl_trait!();

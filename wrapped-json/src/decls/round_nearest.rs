@@ -11,4 +11,4 @@ macro_rules! round_nearest {
     };
 }
 
-round_nearest!()
+round_nearest!();

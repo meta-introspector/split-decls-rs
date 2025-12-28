@@ -4,4 +4,4 @@ macro_rules! unoptional_type {
     };
 }
 
-unoptional_type!()
+unoptional_type!();

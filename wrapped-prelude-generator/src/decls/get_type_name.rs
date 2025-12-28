@@ -4,4 +4,4 @@ macro_rules! get_type_name {
     };
 }
 
-get_type_name!()
+get_type_name!();

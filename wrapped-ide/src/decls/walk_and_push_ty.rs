@@ -4,4 +4,4 @@ macro_rules! walk_and_push_ty {
     };
 }
 
-walk_and_push_ty!()
+walk_and_push_ty!();

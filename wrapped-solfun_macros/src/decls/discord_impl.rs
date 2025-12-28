@@ -4,4 +4,4 @@ macro_rules! discord_impl {
     };
 }
 
-discord_impl!()
+discord_impl!();

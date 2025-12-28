@@ -4,4 +4,4 @@ macro_rules! PrivateUninhabitedField {
     };
 }
 
-PrivateUninhabitedField!()
+PrivateUninhabitedField!();

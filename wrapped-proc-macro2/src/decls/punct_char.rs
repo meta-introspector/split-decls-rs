@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Reject!();
-        Cursor!();
         PResult!();
+        Cursor!();
+        Reject!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! punct_char {
     };
 }
 
-punct_char!()
+punct_char!();

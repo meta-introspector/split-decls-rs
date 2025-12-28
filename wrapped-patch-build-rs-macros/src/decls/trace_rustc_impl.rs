@@ -30,4 +30,4 @@ macro_rules! trace_rustc_impl {
     };
 }
 
-trace_rustc_impl!()
+trace_rustc_impl!();

@@ -4,4 +4,4 @@ macro_rules! DT_GNU_CONFLICTSZ {
     };
 }
 
-DT_GNU_CONFLICTSZ!()
+DT_GNU_CONFLICTSZ!();

@@ -4,4 +4,4 @@ macro_rules! SlotIndex {
     };
 }
 
-SlotIndex!()
+SlotIndex!();

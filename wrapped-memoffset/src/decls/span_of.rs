@@ -4,4 +4,4 @@ macro_rules! span_of {
     };
 }
 
-span_of!()
+span_of!();

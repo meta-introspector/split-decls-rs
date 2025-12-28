@@ -4,4 +4,4 @@ macro_rules! template {
     };
 }
 
-template!()
+template!();

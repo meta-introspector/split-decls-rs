@@ -4,4 +4,4 @@ macro_rules! check_cmp_lt_to_seq {
     };
 }
 
-check_cmp_lt_to_seq!()
+check_cmp_lt_to_seq!();

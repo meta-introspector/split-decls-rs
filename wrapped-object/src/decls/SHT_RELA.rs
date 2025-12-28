@@ -11,4 +11,4 @@ macro_rules! SHT_RELA {
     };
 }
 
-SHT_RELA!()
+SHT_RELA!();

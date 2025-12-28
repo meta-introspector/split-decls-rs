@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         MonikerResult!();
+        ReferenceData!();
         SymbolInformationKind!();
         HoverResult!();
-        ReferenceData!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! TokenStaticData {
     };
 }
 
-TokenStaticData!()
+TokenStaticData!();

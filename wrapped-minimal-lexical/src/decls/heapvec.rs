@@ -4,4 +4,4 @@ macro_rules! heapvec {
     };
 }
 
-heapvec!()
+heapvec!();

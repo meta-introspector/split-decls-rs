@@ -11,4 +11,4 @@ macro_rules! handle_generate_test_report {
     };
 }
 
-handle_generate_test_report!()
+handle_generate_test_report!();

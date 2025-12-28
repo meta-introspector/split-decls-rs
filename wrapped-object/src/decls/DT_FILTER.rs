@@ -4,4 +4,4 @@ macro_rules! DT_FILTER {
     };
 }
 
-DT_FILTER!()
+DT_FILTER!();

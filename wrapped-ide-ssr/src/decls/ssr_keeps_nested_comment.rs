@@ -4,4 +4,4 @@ macro_rules! ssr_keeps_nested_comment {
     };
 }
 
-ssr_keeps_nested_comment!()
+ssr_keeps_nested_comment!();

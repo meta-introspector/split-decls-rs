@@ -4,4 +4,4 @@ macro_rules! SHF_MASKOS {
     };
 }
 
-SHF_MASKOS!()
+SHF_MASKOS!();

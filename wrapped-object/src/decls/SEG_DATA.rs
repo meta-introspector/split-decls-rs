@@ -4,4 +4,4 @@ macro_rules! SEG_DATA {
     };
 }
 
-SEG_DATA!()
+SEG_DATA!();

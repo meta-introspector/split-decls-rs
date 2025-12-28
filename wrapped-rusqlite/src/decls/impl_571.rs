@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        InValues!();
+        ValueRef!();
         Result!();
         Error!();
-        ValueRef!();
+        InValues!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_571 {
     };
 }
 
-impl_571!()
+impl_571!();

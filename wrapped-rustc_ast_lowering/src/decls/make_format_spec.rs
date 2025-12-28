@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ArgumentType!();
         LoweringContext!();
+        ArgumentType!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! make_format_spec {
     };
 }
 
-make_format_spec!()
+make_format_spec!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
+        Cc!();
+        Lld!();
         LinkerFlavor!();
         TargetOptions!();
-        Lld!();
-        Cc!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! opts {
     };
 }
 
-opts!()
+opts!();

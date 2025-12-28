@@ -4,4 +4,4 @@ macro_rules! ProtocolError {
     };
 }
 
-ProtocolError!()
+ProtocolError!();

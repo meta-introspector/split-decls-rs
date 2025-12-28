@@ -4,4 +4,4 @@ macro_rules! SockAddrStorage {
     };
 }
 
-SockAddrStorage!()
+SockAddrStorage!();

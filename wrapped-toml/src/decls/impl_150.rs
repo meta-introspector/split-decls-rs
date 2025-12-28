@@ -1,15 +1,15 @@
 macro_rules! deps {
     () => {
-        ArrayDeserializer!();
-        DeString!();
-        Deserializer!();
-        ValueDeserializer!();
         Value!();
         Error!();
+        Deserializer!();
         TableDeserializer!();
-        Array!();
-        DeValue!();
         Table!();
+        DeValue!();
+        DeString!();
+        ValueDeserializer!();
+        Array!();
+        ArrayDeserializer!();
     };
 }
 
@@ -20,4 +20,4 @@ macro_rules! impl_150 {
     };
 }
 
-impl_150!()
+impl_150!();

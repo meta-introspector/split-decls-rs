@@ -1,21 +1,21 @@
 macro_rules! deps {
     () => {
+        Nonce!();
+        MemoIngredientIndex!();
         Table!();
-        ZalsaLocal!();
+        Zalsa!();
+        Runtime!();
+        IngredientIndex!();
+        Ingredient!();
+        Database!();
+        SalsaStructInDb!();
+        Views!();
         Id!();
         StorageNonce!();
-        Nonce!();
-        Views!();
-        MemoIngredientIndex!();
-        Database!();
-        Zalsa!();
-        SalsaStructInDb!();
+        ZalsaLocal!();
         EventKind!();
         ErasedJar!();
-        Ingredient!();
         Event!();
-        IngredientIndex!();
-        Runtime!();
     };
 }
 
@@ -26,4 +26,4 @@ macro_rules! impl_445 {
     };
 }
 
-impl_445!()
+impl_445!();

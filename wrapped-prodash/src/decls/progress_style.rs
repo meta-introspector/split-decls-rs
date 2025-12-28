@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        State!();
         Value!();
+        State!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! progress_style {
     };
 }
 
-progress_style!()
+progress_style!();

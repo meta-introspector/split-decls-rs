@@ -4,4 +4,4 @@ macro_rules! R_TILEPRO_TLS_DTPMOD32 {
     };
 }
 
-R_TILEPRO_TLS_DTPMOD32!()
+R_TILEPRO_TLS_DTPMOD32!();

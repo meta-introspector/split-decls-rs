@@ -35,4 +35,4 @@ macro_rules! unknown_quine {
     };
 }
 
-language_quine_impl!()
+language_quine_impl!();

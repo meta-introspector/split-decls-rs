@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Snippet!();
-        AutoImportExclusionType!();
-        CompletionFieldsToResolve!();
         CallableSnippets!();
+        CompletionFieldsToResolve!();
+        AutoImportExclusionType!();
+        Snippet!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! CompletionConfig {
     };
 }
 
-CompletionConfig!()
+CompletionConfig!();

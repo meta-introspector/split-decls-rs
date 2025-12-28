@@ -4,4 +4,4 @@ macro_rules! const_assert_eq_usize {
     };
 }
 
-const_assert_eq_usize!()
+const_assert_eq_usize!();

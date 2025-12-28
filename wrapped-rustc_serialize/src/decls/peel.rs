@@ -4,4 +4,4 @@ macro_rules! peel {
     };
 }
 
-peel!()
+peel!();

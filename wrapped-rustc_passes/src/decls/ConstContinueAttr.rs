@@ -4,4 +4,4 @@ macro_rules! ConstContinueAttr {
     };
 }
 
-ConstContinueAttr!()
+ConstContinueAttr!();

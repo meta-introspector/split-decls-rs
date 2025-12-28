@@ -4,4 +4,4 @@ macro_rules! R_PPC64_ADDR16_HIGHA {
     };
 }
 
-R_PPC64_ADDR16_HIGHA!()
+R_PPC64_ADDR16_HIGHA!();

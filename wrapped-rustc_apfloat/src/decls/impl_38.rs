@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Category!();
-        IeeeFloat!();
         Semantics!();
+        IeeeFloat!();
+        Category!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_38 {
     };
 }
 
-impl_38!()
+impl_38!();

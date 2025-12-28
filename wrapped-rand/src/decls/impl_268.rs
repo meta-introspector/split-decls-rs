@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        OsError!();
         OsRng!();
+        OsError!();
         Error!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! impl_268 {
     };
 }
 
-impl_268!()
+impl_268!();

@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Class!();
+        Hir!();
         ClassBytes!();
         HirKind!();
-        Hir!();
         Bytes!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! class_bytes {
     };
 }
 
-class_bytes!()
+class_bytes!();

@@ -4,4 +4,4 @@ macro_rules! check_binop {
     };
 }
 
-check_binop!()
+check_binop!();

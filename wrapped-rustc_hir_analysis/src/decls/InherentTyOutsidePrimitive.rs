@@ -4,4 +4,4 @@ macro_rules! InherentTyOutsidePrimitive {
     };
 }
 
-InherentTyOutsidePrimitive!()
+InherentTyOutsidePrimitive!();

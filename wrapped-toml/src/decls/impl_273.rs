@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        Table!();
+        Buffer!();
         SerializeArrayOfTablesSerializer!();
         Style!();
         Error!();
-        Buffer!();
-        Table!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_273 {
     };
 }
 
-impl_273!()
+impl_273!();

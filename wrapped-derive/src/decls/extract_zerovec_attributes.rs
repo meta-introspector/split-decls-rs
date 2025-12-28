@@ -4,4 +4,4 @@ macro_rules! extract_zerovec_attributes {
     };
 }
 
-extract_zerovec_attributes!()
+extract_zerovec_attributes!();

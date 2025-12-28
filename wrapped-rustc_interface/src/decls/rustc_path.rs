@@ -4,4 +4,4 @@ macro_rules! rustc_path {
     };
 }
 
-rustc_path!()
+rustc_path!();

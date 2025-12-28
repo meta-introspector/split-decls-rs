@@ -4,4 +4,4 @@ macro_rules! UnusedImportBracesDiag {
     };
 }
 
-UnusedImportBracesDiag!()
+UnusedImportBracesDiag!();

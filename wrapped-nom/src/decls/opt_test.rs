@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         Needed!();
-        IResult!();
         Err!();
+        IResult!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! opt_test {
     };
 }
 
-opt_test!()
+opt_test!();

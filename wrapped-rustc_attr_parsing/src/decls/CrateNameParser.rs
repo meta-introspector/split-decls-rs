@@ -4,4 +4,4 @@ macro_rules! CrateNameParser {
     };
 }
 
-CrateNameParser!()
+CrateNameParser!();

@@ -18,4 +18,4 @@ macro_rules! characters {
     };
 }
 
-characters!()
+characters!();

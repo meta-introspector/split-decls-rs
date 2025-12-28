@@ -11,4 +11,4 @@ macro_rules! partition_equal {
     };
 }
 
-partition_equal!()
+partition_equal!();

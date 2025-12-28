@@ -4,4 +4,4 @@ macro_rules! copy_nonoverlapping_small {
     };
 }
 
-copy_nonoverlapping_small!()
+copy_nonoverlapping_small!();

@@ -4,4 +4,4 @@ macro_rules! GLOBAL_CLIENT {
     };
 }
 
-GLOBAL_CLIENT!()
+GLOBAL_CLIENT!();

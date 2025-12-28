@@ -4,4 +4,4 @@ macro_rules! record_rvalue_scope {
     };
 }
 
-record_rvalue_scope!()
+record_rvalue_scope!();

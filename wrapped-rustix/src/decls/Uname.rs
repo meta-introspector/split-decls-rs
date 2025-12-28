@@ -4,4 +4,4 @@ macro_rules! Uname {
     };
 }
 
-Uname!()
+Uname!();

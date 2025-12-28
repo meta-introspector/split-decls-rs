@@ -4,4 +4,4 @@ macro_rules! d2s {
     };
 }
 
-d2s!()
+d2s!();

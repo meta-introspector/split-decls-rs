@@ -12,4 +12,4 @@ macro_rules! PeSegmentIterator64 {
     };
 }
 
-PeSegmentIterator64!()
+PeSegmentIterator64!();

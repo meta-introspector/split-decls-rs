@@ -4,4 +4,4 @@ macro_rules! shiftor {
     };
 }
 
-shiftor!()
+shiftor!();

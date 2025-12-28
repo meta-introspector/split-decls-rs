@@ -4,4 +4,4 @@ macro_rules! NUM_RET_GPRS {
     };
 }
 
-NUM_RET_GPRS!()
+NUM_RET_GPRS!();

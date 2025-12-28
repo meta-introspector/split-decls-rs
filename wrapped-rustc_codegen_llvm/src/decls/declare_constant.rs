@@ -4,4 +4,4 @@ macro_rules! declare_constant {
     };
 }
 
-declare_constant!()
+declare_constant!();

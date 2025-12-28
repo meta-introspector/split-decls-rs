@@ -4,4 +4,4 @@ macro_rules! MatchDir {
     };
 }
 
-MatchDir!()
+MatchDir!();

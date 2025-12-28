@@ -12,4 +12,4 @@ macro_rules! sve_vector_length_configuration {
     };
 }
 
-sve_vector_length_configuration!()
+sve_vector_length_configuration!();

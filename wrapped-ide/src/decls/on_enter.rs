@@ -4,4 +4,4 @@ macro_rules! on_enter {
     };
 }
 
-on_enter!()
+on_enter!();

@@ -4,4 +4,4 @@ macro_rules! view_item_tree {
     };
 }
 
-view_item_tree!()
+view_item_tree!();

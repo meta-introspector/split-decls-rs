@@ -11,4 +11,4 @@ macro_rules! path_has_local_parent {
     };
 }
 
-path_has_local_parent!()
+path_has_local_parent!();

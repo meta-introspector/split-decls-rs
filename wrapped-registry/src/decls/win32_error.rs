@@ -11,4 +11,4 @@ macro_rules! win32_error {
     };
 }
 
-win32_error!()
+win32_error!();

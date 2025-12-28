@@ -4,4 +4,4 @@ macro_rules! dummy_tracker {
     };
 }
 
-dummy_tracker!()
+dummy_tracker!();

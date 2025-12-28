@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Cursor!();
-        ParseStream!();
         Result!();
         Parse!();
+        Cursor!();
+        ParseStream!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! define_punctuation {
     };
 }
 
-define_punctuation!()
+define_punctuation!();

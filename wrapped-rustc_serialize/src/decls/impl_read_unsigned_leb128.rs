@@ -11,4 +11,4 @@ macro_rules! impl_read_unsigned_leb128 {
     };
 }
 
-impl_read_unsigned_leb128!()
+impl_read_unsigned_leb128!();

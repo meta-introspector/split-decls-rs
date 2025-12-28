@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        DeString!();
         State!();
-        Error!();
         TraceScope!();
+        Error!();
+        DeString!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! on_key {
     };
 }
 
-on_key!()
+on_key!();

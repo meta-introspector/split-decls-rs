@@ -4,4 +4,4 @@ macro_rules! AwaitOnlyInAsyncFnAndBlocks {
     };
 }
 
-AwaitOnlyInAsyncFnAndBlocks!()
+AwaitOnlyInAsyncFnAndBlocks!();

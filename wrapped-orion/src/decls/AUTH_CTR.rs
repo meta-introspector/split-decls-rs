@@ -11,4 +11,4 @@ macro_rules! AUTH_CTR {
     };
 }
 
-AUTH_CTR!()
+AUTH_CTR!();

@@ -4,4 +4,4 @@ macro_rules! R_MIPS_GOT_OFST {
     };
 }
 
-R_MIPS_GOT_OFST!()
+R_MIPS_GOT_OFST!();

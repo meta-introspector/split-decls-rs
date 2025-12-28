@@ -4,4 +4,4 @@ macro_rules! try_as_const_integral {
     };
 }
 
-try_as_const_integral!()
+try_as_const_integral!();

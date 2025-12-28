@@ -4,4 +4,4 @@ macro_rules! NeverPatternWithBody {
     };
 }
 
-NeverPatternWithBody!()
+NeverPatternWithBody!();

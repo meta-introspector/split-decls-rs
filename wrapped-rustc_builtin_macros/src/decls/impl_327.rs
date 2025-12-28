@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ExportMacroRules!();
         CollectProcMacros!();
+        ExportMacroRules!();
         AttributeOnlyUsableWithCrateType!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_327 {
     };
 }
 
-impl_327!()
+impl_327!();

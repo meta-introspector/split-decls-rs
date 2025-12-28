@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        EdgeType!();
-        IndexType!();
         MatrixGraph!();
-        Nullable!();
+        EdgeType!();
         NodeIndex!();
+        Nullable!();
+        IndexType!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_1028 {
     };
 }
 
-impl_1028!()
+impl_1028!();

@@ -13,4 +13,4 @@ macro_rules! make_ule_enum_impl {
     };
 }
 
-make_ule_enum_impl!()
+make_ule_enum_impl!();

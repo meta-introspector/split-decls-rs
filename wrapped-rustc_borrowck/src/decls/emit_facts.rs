@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        PoloniusFacts!();
-        PoloniusLocationTable!();
-        BorrowSet!();
         UniversalRegionRelations!();
         LoweredConstraints!();
+        PoloniusLocationTable!();
+        BorrowSet!();
+        PoloniusFacts!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! emit_facts {
     };
 }
 
-emit_facts!()
+emit_facts!();

@@ -4,4 +4,4 @@ macro_rules! DT_MIPS_GP_VALUE {
     };
 }
 
-DT_MIPS_GP_VALUE!()
+DT_MIPS_GP_VALUE!();

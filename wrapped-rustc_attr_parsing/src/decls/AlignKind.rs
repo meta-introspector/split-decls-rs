@@ -4,4 +4,4 @@ macro_rules! AlignKind {
     };
 }
 
-AlignKind!()
+AlignKind!();

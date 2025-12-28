@@ -4,4 +4,4 @@ macro_rules! EM_AVR {
     };
 }
 
-EM_AVR!()
+EM_AVR!();

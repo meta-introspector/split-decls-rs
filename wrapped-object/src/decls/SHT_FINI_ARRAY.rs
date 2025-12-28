@@ -4,4 +4,4 @@ macro_rules! SHT_FINI_ARRAY {
     };
 }
 
-SHT_FINI_ARRAY!()
+SHT_FINI_ARRAY!();

@@ -4,4 +4,4 @@ macro_rules! OEX_SMM {
     };
 }
 
-OEX_SMM!()
+OEX_SMM!();

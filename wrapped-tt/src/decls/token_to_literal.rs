@@ -12,4 +12,4 @@ macro_rules! token_to_literal {
     };
 }
 
-token_to_literal!()
+token_to_literal!();

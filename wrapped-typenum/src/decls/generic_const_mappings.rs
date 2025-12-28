@@ -4,4 +4,4 @@ macro_rules! generic_const_mappings {
     };
 }
 
-generic_const_mappings!()
+generic_const_mappings!();

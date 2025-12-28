@@ -1,46 +1,46 @@
 macro_rules! deps {
     () => {
-        MemoIngredientIndices!();
-        SalsaStructInDb!();
-        Memo!();
-        HashEqLike!();
-        Accumulator!();
-        NewMemoIngredientIndices!();
-        Database!();
-        JarKind!();
-        AsId!();
-        IngredientImpl!();
-        Runtime!();
-        Durability!();
-        Jar!();
-        Ingredient!();
-        HasBuilder!();
-        HasStorage!();
-        ErasedJar!();
-        Id!();
-        JarImpl!();
-        Location!();
-        MemoIngredientMap!();
-        Revision!();
-        FromId!();
-        Update!();
-        HasJar!();
-        DatabaseKeyIndex!();
         Configuration!();
-        MemoIngredientSingletonIndex!();
-        IngredientIndices!();
-        Storage!();
-        ZalsaLocal!();
-        ZalsaDatabase!();
-        Zalsa!();
-        TrackedStructInDb!();
-        DatabaseDownCaster!();
-        Stamp!();
-        FromIdWithDb!();
-        IngredientIndex!();
-        CycleRecoveryStrategy!();
+        Database!();
         Value!();
+        ZalsaDatabase!();
+        DatabaseDownCaster!();
+        HashEqLike!();
+        HasJar!();
         Lookup!();
+        JarImpl!();
+        FromId!();
+        FromIdWithDb!();
+        IngredientIndices!();
+        SalsaStructInDb!();
+        MemoIngredientMap!();
+        ErasedJar!();
+        HasBuilder!();
+        Stamp!();
+        AsId!();
+        JarKind!();
+        TrackedStructInDb!();
+        IngredientImpl!();
+        Jar!();
+        NewMemoIngredientIndices!();
+        Runtime!();
+        DatabaseKeyIndex!();
+        IngredientIndex!();
+        ZalsaLocal!();
+        Revision!();
+        Location!();
+        Durability!();
+        MemoIngredientSingletonIndex!();
+        Memo!();
+        Zalsa!();
+        Id!();
+        MemoIngredientIndices!();
+        CycleRecoveryStrategy!();
+        Accumulator!();
+        Storage!();
+        HasStorage!();
+        Update!();
+        Ingredient!();
     };
 }
 
@@ -51,4 +51,4 @@ macro_rules! plumbing {
     };
 }
 
-plumbing!()
+plumbing!();

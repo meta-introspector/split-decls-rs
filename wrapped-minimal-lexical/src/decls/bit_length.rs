@@ -11,4 +11,4 @@ macro_rules! bit_length {
     };
 }
 
-bit_length!()
+bit_length!();

@@ -4,4 +4,4 @@ macro_rules! R_PPC_ADDR16 {
     };
 }
 
-R_PPC_ADDR16!()
+R_PPC_ADDR16!();

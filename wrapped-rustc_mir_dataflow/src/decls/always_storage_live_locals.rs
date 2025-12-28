@@ -4,4 +4,4 @@ macro_rules! always_storage_live_locals {
     };
 }
 
-always_storage_live_locals!()
+always_storage_live_locals!();

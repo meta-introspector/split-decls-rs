@@ -4,4 +4,4 @@ macro_rules! tanh {
     };
 }
 
-tanh!()
+tanh!();

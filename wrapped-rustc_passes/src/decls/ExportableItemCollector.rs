@@ -4,4 +4,4 @@ macro_rules! ExportableItemCollector {
     };
 }
 
-ExportableItemCollector!()
+ExportableItemCollector!();

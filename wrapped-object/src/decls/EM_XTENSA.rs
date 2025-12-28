@@ -11,4 +11,4 @@ macro_rules! EM_XTENSA {
     };
 }
 
-EM_XTENSA!()
+EM_XTENSA!();

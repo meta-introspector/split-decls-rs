@@ -1,16 +1,16 @@
 macro_rules! deps {
     () => {
-        Swap64!();
-        MultiLane!();
-        YesS4!();
-        YesS3!();
-        Vec2!();
         Avx2Machine!();
-        Words4!();
+        Swap64!();
+        YesS4!();
         RotateEachWord32!();
+        Vec2!();
         Vec4!();
-        BSwap!();
         Machine!();
+        Words4!();
+        YesS3!();
+        BSwap!();
+        MultiLane!();
     };
 }
 
@@ -21,4 +21,4 @@ macro_rules! impl_219 {
     };
 }
 
-impl_219!()
+impl_219!();

@@ -2,8 +2,8 @@ macro_rules! deps {
     () => {
         DFA!();
         Utf8State!();
-        StateID!();
         Builder!();
+        StateID!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! Utf8Compiler {
     };
 }
 
-Utf8Compiler!()
+Utf8Compiler!();

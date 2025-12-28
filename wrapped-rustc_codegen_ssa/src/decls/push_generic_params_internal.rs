@@ -4,4 +4,4 @@ macro_rules! push_generic_params_internal {
     };
 }
 
-push_generic_params_internal!()
+push_generic_params_internal!();

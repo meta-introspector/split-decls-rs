@@ -4,4 +4,4 @@ macro_rules! EM_LOONGARCH {
     };
 }
 
-EM_LOONGARCH!()
+EM_LOONGARCH!();

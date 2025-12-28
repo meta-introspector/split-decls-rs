@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         RenderContext!();
-        CompletionRelevance!();
         CompletionItem!();
+        CompletionRelevance!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! render_tuple_field {
     };
 }
 
-render_tuple_field!()
+render_tuple_field!();

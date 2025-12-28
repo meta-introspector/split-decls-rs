@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        NoMatchData!();
         Error!();
         CandidateSource!();
-        NoMatchData!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! MethodError {
     };
 }
 
-MethodError!()
+MethodError!();

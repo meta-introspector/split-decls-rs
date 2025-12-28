@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        ArgParser!();
         PathParser!();
         MetaItemParser!();
+        ArgParser!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_302 {
     };
 }
 
-impl_302!()
+impl_302!();

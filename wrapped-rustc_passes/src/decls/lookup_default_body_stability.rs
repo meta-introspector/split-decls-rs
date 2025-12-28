@@ -4,4 +4,4 @@ macro_rules! lookup_default_body_stability {
     };
 }
 
-lookup_default_body_stability!()
+lookup_default_body_stability!();

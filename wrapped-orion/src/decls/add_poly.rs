@@ -11,4 +11,4 @@ macro_rules! add_poly {
     };
 }
 
-add_poly!()
+add_poly!();

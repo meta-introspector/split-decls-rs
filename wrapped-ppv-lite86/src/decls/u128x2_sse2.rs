@@ -11,4 +11,4 @@ macro_rules! u128x2_sse2 {
     };
 }
 
-u128x2_sse2!()
+u128x2_sse2!();

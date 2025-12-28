@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
         AttributeParser!();
-        EmptyConfusables!();
-        FinalizeContext!();
         AcceptMapping!();
         Stage!();
-        AllowedTargets!();
+        FinalizeContext!();
         ConfusablesParser!();
+        EmptyConfusables!();
+        AllowedTargets!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_55 {
     };
 }
 
-impl_55!()
+impl_55!();

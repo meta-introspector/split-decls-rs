@@ -1,22 +1,22 @@
 macro_rules! deps {
     () => {
-        MatchError!();
-        StateID!();
-        GroupInfo!();
-        BoundedBacktracker!();
-        Cache!();
-        Input!();
-        Frame!();
-        Anchored!();
-        PatternID!();
-        NFA!();
         Captures!();
-        Span!();
+        MatchError!();
         NonMaxUsize!();
+        BoundedBacktracker!();
+        Input!();
         Look!();
+        NFA!();
+        Span!();
         State!();
         HalfMatch!();
+        Frame!();
+        Cache!();
         Match!();
+        StateID!();
+        PatternID!();
+        Anchored!();
+        GroupInfo!();
     };
 }
 
@@ -27,4 +27,4 @@ macro_rules! impl_445 {
     };
 }
 
-impl_445!()
+impl_445!();

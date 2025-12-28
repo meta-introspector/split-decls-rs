@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        ArrayVec!();
-        Array!();
-        ArrayVecDrain!();
         ArrayVecSplice!();
+        Array!();
+        ArrayVec!();
+        ArrayVecDrain!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_19 {
     };
 }
 
-impl_19!()
+impl_19!();

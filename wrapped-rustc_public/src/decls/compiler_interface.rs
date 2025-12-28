@@ -4,4 +4,4 @@ macro_rules! compiler_interface {
     };
 }
 
-compiler_interface!()
+compiler_interface!();

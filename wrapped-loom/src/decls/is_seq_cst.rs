@@ -4,4 +4,4 @@ macro_rules! is_seq_cst {
     };
 }
 
-is_seq_cst!()
+is_seq_cst!();

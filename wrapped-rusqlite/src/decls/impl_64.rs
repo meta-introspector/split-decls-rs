@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Statement!();
         CachedStatement!();
+        Statement!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_64 {
     };
 }
 
-impl_64!()
+impl_64!();

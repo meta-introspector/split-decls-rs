@@ -4,4 +4,4 @@ macro_rules! OptimizationDiagnosticKind {
     };
 }
 
-OptimizationDiagnosticKind!()
+OptimizationDiagnosticKind!();

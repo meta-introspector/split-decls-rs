@@ -4,4 +4,4 @@ macro_rules! DOGRA {
     };
 }
 
-DOGRA!()
+DOGRA!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Iter!();
         ParallelIterator!();
         IntoParallelIterator!();
+        Iter!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! IntoParallelRefMutIterator {
     };
 }
 
-IntoParallelRefMutIterator!()
+IntoParallelRefMutIterator!();

@@ -4,4 +4,4 @@ macro_rules! CollapseDebuginfo {
     };
 }
 
-CollapseDebuginfo!()
+CollapseDebuginfo!();

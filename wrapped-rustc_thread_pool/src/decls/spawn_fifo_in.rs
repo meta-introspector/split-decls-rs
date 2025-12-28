@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        AbortIfPanic!();
         Registry!();
+        AbortIfPanic!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! spawn_fifo_in {
     };
 }
 
-spawn_fifo_in!()
+spawn_fifo_in!();

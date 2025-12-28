@@ -4,4 +4,4 @@ macro_rules! GRAPHEME_BASE {
     };
 }
 
-GRAPHEME_BASE!()
+GRAPHEME_BASE!();

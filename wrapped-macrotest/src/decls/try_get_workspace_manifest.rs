@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Result!();
         Error!();
         WorkspaceManifest!();
+        Result!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! try_get_workspace_manifest {
     };
 }
 
-try_get_workspace_manifest!()
+try_get_workspace_manifest!();

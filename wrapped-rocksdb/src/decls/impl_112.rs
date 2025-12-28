@@ -1,17 +1,17 @@
 macro_rules! deps {
     () => {
-        ColumnFamilyDescriptor!();
+        WriteBatch!();
+        AsColumnFamilyRef!();
+        ThreadMode!();
+        Options!();
         AccessType!();
         Error!();
-        WriteOptions!();
-        Options!();
         DB!();
-        WriteBatch!();
-        DBWithThreadMode!();
-        DBWithThreadModeInner!();
-        AsColumnFamilyRef!();
         ColumnFamilyTtl!();
-        ThreadMode!();
+        DBWithThreadMode!();
+        ColumnFamilyDescriptor!();
+        DBWithThreadModeInner!();
+        WriteOptions!();
     };
 }
 
@@ -22,4 +22,4 @@ macro_rules! impl_112 {
     };
 }
 
-impl_112!()
+impl_112!();

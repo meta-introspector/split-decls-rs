@@ -4,4 +4,4 @@ macro_rules! check_repr_packed {
     };
 }
 
-check_repr_packed!()
+check_repr_packed!();

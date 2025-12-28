@@ -4,4 +4,4 @@ macro_rules! R_AARCH64_JUMP26 {
     };
 }
 
-R_AARCH64_JUMP26!()
+R_AARCH64_JUMP26!();

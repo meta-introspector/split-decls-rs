@@ -4,4 +4,4 @@ macro_rules! ALIGN_SIZE {
     };
 }
 
-ALIGN_SIZE!()
+ALIGN_SIZE!();

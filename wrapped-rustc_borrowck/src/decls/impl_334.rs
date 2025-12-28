@@ -1,17 +1,17 @@
 macro_rules! deps {
     () => {
-        BorrowckInferCtxt!();
-        OutlivesConstraintSet!();
-        RegionCtxt!();
-        UniversalRegionRelations!();
-        RegionValues!();
-        SccAnnotations!();
-        ReverseSccGraph!();
         UniversalRegions!();
+        BorrowckInferCtxt!();
         MirTypeckRegionConstraints!();
-        ConstraintSccs!();
+        RegionValues!();
+        UniversalRegionRelations!();
         Representative!();
+        OutlivesConstraintSet!();
+        SccAnnotations!();
         RegionTracker!();
+        RegionCtxt!();
+        ReverseSccGraph!();
+        ConstraintSccs!();
     };
 }
 
@@ -22,4 +22,4 @@ macro_rules! impl_334 {
     };
 }
 
-impl_334!()
+impl_334!();

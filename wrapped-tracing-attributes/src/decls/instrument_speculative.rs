@@ -12,4 +12,4 @@ macro_rules! instrument_speculative {
     };
 }
 
-instrument_speculative!()
+instrument_speculative!();

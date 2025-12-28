@@ -4,4 +4,4 @@ macro_rules! deanonymize_lifetime {
     };
 }
 
-deanonymize_lifetime!()
+deanonymize_lifetime!();

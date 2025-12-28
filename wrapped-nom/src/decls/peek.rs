@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        Error!();
-        Peek!();
-        IResult!();
         Parser!();
+        Error!();
+        IResult!();
+        Peek!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! peek {
     };
 }
 
-peek!()
+peek!();

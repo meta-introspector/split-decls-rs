@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        LintGroups!();
         DiagnosticCode!();
+        LintGroups!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! lint_groups {
     };
 }
 
-lint_groups!()
+lint_groups!();

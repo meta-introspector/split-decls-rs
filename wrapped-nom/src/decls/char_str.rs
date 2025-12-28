@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
+        ErrorKind!();
+        IResult!();
         Err!();
         Char!();
-        IResult!();
         Error!();
-        ErrorKind!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! char_str {
     };
 }
 
-char_str!()
+char_str!();

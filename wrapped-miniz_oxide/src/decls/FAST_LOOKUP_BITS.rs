@@ -4,4 +4,4 @@ macro_rules! FAST_LOOKUP_BITS {
     };
 }
 
-FAST_LOOKUP_BITS!()
+FAST_LOOKUP_BITS!();

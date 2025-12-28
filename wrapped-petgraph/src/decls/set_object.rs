@@ -4,4 +4,4 @@ macro_rules! set_object {
     };
 }
 
-set_object!()
+set_object!();

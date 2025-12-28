@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Ascription!();
         SubpatternBindings!();
+        Ascription!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! PatternExtraData {
     };
 }
 
-PatternExtraData!()
+PatternExtraData!();

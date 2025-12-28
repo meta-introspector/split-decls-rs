@@ -4,4 +4,4 @@ macro_rules! send_syncify {
     };
 }
 
-send_syncify!()
+send_syncify!();

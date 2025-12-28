@@ -4,4 +4,4 @@ macro_rules! PR_GET_PDEATHSIG {
     };
 }
 
-PR_GET_PDEATHSIG!()
+PR_GET_PDEATHSIG!();

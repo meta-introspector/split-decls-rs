@@ -4,4 +4,4 @@ macro_rules! MemtableFactory {
     };
 }
 
-MemtableFactory!()
+MemtableFactory!();

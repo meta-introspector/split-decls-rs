@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        ConnRef!();
         StmtRef!();
-        TraceEvent!();
         Row!();
+        ConnRef!();
+        TraceEvent!();
         Connection!();
     };
 }
@@ -15,4 +15,4 @@ macro_rules! impl_290 {
     };
 }
 
-impl_290!()
+impl_290!();

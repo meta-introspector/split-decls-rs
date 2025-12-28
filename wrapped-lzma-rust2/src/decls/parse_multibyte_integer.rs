@@ -11,4 +11,4 @@ macro_rules! parse_multibyte_integer {
     };
 }
 
-parse_multibyte_integer!()
+parse_multibyte_integer!();

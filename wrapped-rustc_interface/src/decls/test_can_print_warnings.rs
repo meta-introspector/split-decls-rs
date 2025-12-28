@@ -4,4 +4,4 @@ macro_rules! test_can_print_warnings {
     };
 }
 
-test_can_print_warnings!()
+test_can_print_warnings!();

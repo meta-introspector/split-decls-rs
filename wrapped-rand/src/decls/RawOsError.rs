@@ -4,4 +4,4 @@ macro_rules! RawOsError {
     };
 }
 
-RawOsError!()
+RawOsError!();

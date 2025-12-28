@@ -4,4 +4,4 @@ macro_rules! PR_TIMING_TIMESTAMP {
     };
 }
 
-PR_TIMING_TIMESTAMP!()
+PR_TIMING_TIMESTAMP!();

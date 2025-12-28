@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        EllipsisInclusiveRangePatterns!();
         UnusedParens!();
         UnusedDocComment!();
-        EllipsisInclusiveRangePatterns!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! macro_870 {
     };
 }
 
-macro_870!()
+macro_870!();

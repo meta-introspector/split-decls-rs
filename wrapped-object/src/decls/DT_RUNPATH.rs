@@ -4,4 +4,4 @@ macro_rules! DT_RUNPATH {
     };
 }
 
-DT_RUNPATH!()
+DT_RUNPATH!();

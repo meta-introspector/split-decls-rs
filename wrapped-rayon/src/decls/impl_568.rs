@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Fold!();
         FoldChunks!();
+        Fold!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_568 {
     };
 }
 
-impl_568!()
+impl_568!();

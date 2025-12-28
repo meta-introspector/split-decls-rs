@@ -4,4 +4,4 @@ macro_rules! UnexpectedExprKind {
     };
 }
 
-UnexpectedExprKind!()
+UnexpectedExprKind!();

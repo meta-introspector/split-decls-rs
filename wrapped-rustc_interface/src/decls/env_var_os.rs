@@ -4,4 +4,4 @@ macro_rules! env_var_os {
     };
 }
 
-env_var_os!()
+env_var_os!();

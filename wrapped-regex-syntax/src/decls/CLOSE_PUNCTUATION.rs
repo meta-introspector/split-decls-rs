@@ -4,4 +4,4 @@ macro_rules! CLOSE_PUNCTUATION {
     };
 }
 
-CLOSE_PUNCTUATION!()
+CLOSE_PUNCTUATION!();

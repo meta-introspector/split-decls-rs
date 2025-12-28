@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Symbol!();
         LintDiagnosticDerive!();
+        Symbol!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! lint_diagnostic_derive {
     };
 }
 
-lint_diagnostic_derive!()
+lint_diagnostic_derive!();

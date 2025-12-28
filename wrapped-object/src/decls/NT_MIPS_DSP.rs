@@ -4,4 +4,4 @@ macro_rules! NT_MIPS_DSP {
     };
 }
 
-NT_MIPS_DSP!()
+NT_MIPS_DSP!();

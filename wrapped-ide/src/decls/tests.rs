@@ -30,4 +30,4 @@ fn bar() {
     };
 }
 
-tests!()
+tests!();

@@ -4,4 +4,4 @@ macro_rules! MacroExpandedMacroExportsAccessedByAbsolutePaths {
     };
 }
 
-MacroExpandedMacroExportsAccessedByAbsolutePaths!()
+MacroExpandedMacroExportsAccessedByAbsolutePaths!();

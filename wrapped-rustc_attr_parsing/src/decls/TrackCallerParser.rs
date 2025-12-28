@@ -4,4 +4,4 @@ macro_rules! TrackCallerParser {
     };
 }
 
-TrackCallerParser!()
+TrackCallerParser!();

@@ -4,4 +4,4 @@ macro_rules! SHAKE_256_RATE {
     };
 }
 
-SHAKE_256_RATE!()
+SHAKE_256_RATE!();

@@ -1,25 +1,25 @@
 macro_rules! deps {
     () => {
-        Config!();
-        StateID!();
-        PatternIter!();
-        GroupInfo!();
-        WhichCaptures!();
         LookSet!();
-        Compiler!();
-        NFA!();
         Inner!();
-        ByteClassSet!();
-        PatternID!();
         DFA!();
+        WhichCaptures!();
         Input!();
+        NFA!();
+        BuildError!();
         LookMatcher!();
         Builder!();
+        Compiler!();
         State!();
-        ByteClasses!();
         Match!();
-        BuildError!();
+        PatternIter!();
+        PatternID!();
+        Config!();
         PikeVM!();
+        ByteClasses!();
+        ByteClassSet!();
+        GroupInfo!();
+        StateID!();
     };
 }
 
@@ -30,4 +30,4 @@ macro_rules! impl_513 {
     };
 }
 
-impl_513!()
+impl_513!();

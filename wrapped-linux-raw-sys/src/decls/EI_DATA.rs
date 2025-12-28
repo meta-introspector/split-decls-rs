@@ -4,4 +4,4 @@ macro_rules! EI_DATA {
     };
 }
 
-EI_DATA!()
+EI_DATA!();

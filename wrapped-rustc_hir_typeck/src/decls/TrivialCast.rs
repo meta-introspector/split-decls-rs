@@ -4,4 +4,4 @@ macro_rules! TrivialCast {
     };
 }
 
-TrivialCast!()
+TrivialCast!();

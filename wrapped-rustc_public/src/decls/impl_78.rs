@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        InternalCx!();
         RustcInternal!();
         BridgeTys!();
-        InternalCx!();
         ExistentialPredicate!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! impl_78 {
     };
 }
 
-impl_78!()
+impl_78!();

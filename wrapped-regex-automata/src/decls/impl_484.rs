@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        UnicodeWordBoundaryError!();
-        StateID!();
-        Captures!();
-        PatternID!();
         BuildError!();
-        GroupInfoError!();
+        StateID!();
+        UnicodeWordBoundaryError!();
         NFA!();
+        PatternID!();
+        Captures!();
+        GroupInfoError!();
         BuildErrorKind!();
     };
 }
@@ -18,4 +18,4 @@ macro_rules! impl_484 {
     };
 }
 
-impl_484!()
+impl_484!();

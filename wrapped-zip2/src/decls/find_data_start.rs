@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ZipError!();
         ZipFileData!();
+        ZipError!();
         ZipLocalEntryBlock!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! find_data_start {
     };
 }
 
-find_data_start!()
+find_data_start!();

@@ -4,4 +4,4 @@ macro_rules! database_impl {
     };
 }
 
-database_impl!()
+database_impl!();

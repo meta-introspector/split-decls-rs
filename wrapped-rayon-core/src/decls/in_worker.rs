@@ -11,4 +11,4 @@ macro_rules! in_worker {
     };
 }
 
-in_worker!()
+in_worker!();

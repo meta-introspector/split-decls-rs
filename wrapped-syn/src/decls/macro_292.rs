@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Punctuated!();
         Lifetime!();
+        Punctuated!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! macro_292 {
     };
 }
 
-macro_292!()
+macro_292!();

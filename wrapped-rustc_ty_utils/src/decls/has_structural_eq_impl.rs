@@ -4,4 +4,4 @@ macro_rules! has_structural_eq_impl {
     };
 }
 
-has_structural_eq_impl!()
+has_structural_eq_impl!();

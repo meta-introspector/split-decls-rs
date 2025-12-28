@@ -4,4 +4,4 @@ macro_rules! middle_snake {
     };
 }
 
-middle_snake!()
+middle_snake!();

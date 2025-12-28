@@ -4,4 +4,4 @@ macro_rules! DEVANAGARI {
     };
 }
 
-DEVANAGARI!()
+DEVANAGARI!();

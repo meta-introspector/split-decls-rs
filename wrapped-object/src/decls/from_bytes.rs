@@ -12,4 +12,4 @@ macro_rules! from_bytes {
     };
 }
 
-from_bytes!()
+from_bytes!();

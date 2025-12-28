@@ -4,4 +4,4 @@ macro_rules! strip_pos {
     };
 }
 
-strip_pos!()
+strip_pos!();

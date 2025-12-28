@@ -4,4 +4,4 @@ macro_rules! UnsupportedAttributesInWhere {
     };
 }
 
-UnsupportedAttributesInWhere!()
+UnsupportedAttributesInWhere!();

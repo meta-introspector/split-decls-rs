@@ -4,4 +4,4 @@ macro_rules! AlignParser {
     };
 }
 
-AlignParser!()
+AlignParser!();

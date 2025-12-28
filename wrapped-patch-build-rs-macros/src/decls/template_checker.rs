@@ -4,4 +4,4 @@ macro_rules! template_checker {
     };
 }
 
-template_checker!()
+template_checker!();

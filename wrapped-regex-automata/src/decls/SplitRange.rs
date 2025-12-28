@@ -4,4 +4,4 @@ macro_rules! SplitRange {
     };
 }
 
-SplitRange!()
+SplitRange!();

@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        DropData!();
         TypeChecker!();
         LocalUseMap!();
-        DropData!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! LivenessContext {
     };
 }
 
-LivenessContext!()
+LivenessContext!();

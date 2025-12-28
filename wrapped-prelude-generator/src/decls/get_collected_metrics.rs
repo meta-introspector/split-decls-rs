@@ -11,4 +11,4 @@ macro_rules! get_collected_metrics {
     };
 }
 
-get_collected_metrics!()
+get_collected_metrics!();

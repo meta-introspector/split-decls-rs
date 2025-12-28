@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
-        BitcodeSection!();
         ModuleKind!();
-        ModuleConfig!();
         EmitObj!();
+        BitcodeSection!();
+        ModuleConfig!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_207 {
     };
 }
 
-impl_207!()
+impl_207!();

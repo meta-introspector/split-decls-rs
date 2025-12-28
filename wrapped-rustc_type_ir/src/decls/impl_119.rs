@@ -1,14 +1,14 @@
 macro_rules! deps {
     () => {
-        RelateResult!();
-        TypeError!();
-        TypeRelation!();
         Interner!();
-        AliasTermKind!();
-        Relate!();
-        UnevaluatedConst!();
+        TypeError!();
         ExpectedFound!();
         AliasTerm!();
+        Relate!();
+        TypeRelation!();
+        UnevaluatedConst!();
+        AliasTermKind!();
+        RelateResult!();
     };
 }
 
@@ -19,4 +19,4 @@ macro_rules! impl_119 {
     };
 }
 
-impl_119!()
+impl_119!();

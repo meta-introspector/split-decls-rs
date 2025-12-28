@@ -34,4 +34,4 @@ fn transaction_matches(pattern: &str) -> bool {{
     };
 }
 
-mev_exclude_impl!()
+mev_exclude_impl!();

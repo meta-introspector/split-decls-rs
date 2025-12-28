@@ -4,4 +4,4 @@ macro_rules! async_closures {
     };
 }
 
-async_closures!()
+async_closures!();

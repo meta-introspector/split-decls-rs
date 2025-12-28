@@ -11,4 +11,4 @@ macro_rules! goto_type_action_for_def {
     };
 }
 
-goto_type_action_for_def!()
+goto_type_action_for_def!();

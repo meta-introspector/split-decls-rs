@@ -4,4 +4,4 @@ macro_rules! ConstStableNotStable {
     };
 }
 
-ConstStableNotStable!()
+ConstStableNotStable!();

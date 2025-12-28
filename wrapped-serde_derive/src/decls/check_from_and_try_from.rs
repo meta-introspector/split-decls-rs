@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Container!();
         Ctxt!();
+        Container!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! check_from_and_try_from {
     };
 }
 
-check_from_and_try_from!()
+check_from_and_try_from!();

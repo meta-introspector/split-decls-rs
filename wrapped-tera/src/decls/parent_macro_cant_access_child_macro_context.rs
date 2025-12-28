@@ -12,4 +12,4 @@ macro_rules! parent_macro_cant_access_child_macro_context {
     };
 }
 
-parent_macro_cant_access_child_macro_context!()
+parent_macro_cant_access_child_macro_context!();

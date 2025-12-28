@@ -4,4 +4,4 @@ macro_rules! LC_PREPAGE {
     };
 }
 
-LC_PREPAGE!()
+LC_PREPAGE!();

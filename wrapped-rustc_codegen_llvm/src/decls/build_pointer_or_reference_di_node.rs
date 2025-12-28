@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        CodegenCx!();
-        DIB!();
         WidePtrKind!();
+        DIB!();
+        CodegenCx!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! build_pointer_or_reference_di_node {
     };
 }
 
-build_pointer_or_reference_di_node!()
+build_pointer_or_reference_di_node!();

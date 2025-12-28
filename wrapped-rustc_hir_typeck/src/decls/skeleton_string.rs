@@ -4,4 +4,4 @@ macro_rules! skeleton_string {
     };
 }
 
-skeleton_string!()
+skeleton_string!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        OwnedData!();
         SharedData!();
+        OwnedData!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! Data {
     };
 }
 
-Data!()
+Data!();

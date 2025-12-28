@@ -11,4 +11,4 @@ macro_rules! intersperse_with {
     };
 }
 
-intersperse_with!()
+intersperse_with!();

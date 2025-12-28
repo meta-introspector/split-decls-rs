@@ -4,4 +4,4 @@ macro_rules! bit_set {
     };
 }
 
-bit_set!()
+bit_set!();

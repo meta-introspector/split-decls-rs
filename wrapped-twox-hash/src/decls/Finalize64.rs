@@ -4,4 +4,4 @@ macro_rules! Finalize64 {
     };
 }
 
-Finalize64!()
+Finalize64!();

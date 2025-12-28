@@ -11,4 +11,4 @@ macro_rules! gen_call_with_arg {
     };
 }
 
-gen_call_with_arg!()
+gen_call_with_arg!();

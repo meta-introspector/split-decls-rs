@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        IndexInfo!();
         VTab!();
+        IndexInfo!();
         Error!();
     };
 }
@@ -13,4 +13,4 @@ macro_rules! rust_best_index {
     };
 }
 
-rust_best_index!()
+rust_best_index!();

@@ -4,4 +4,4 @@ macro_rules! CoverageInfoBuilderMethods {
     };
 }
 
-CoverageInfoBuilderMethods!()
+CoverageInfoBuilderMethods!();

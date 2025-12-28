@@ -4,4 +4,4 @@ macro_rules! EM_56800EX {
     };
 }
 
-EM_56800EX!()
+EM_56800EX!();

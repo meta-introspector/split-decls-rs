@@ -1,37 +1,37 @@
 macro_rules! deps {
     () => {
-        OffsetOverflowError!();
-        FileLines!();
-        SpanLinesError!();
-        SourceFileHashAlgorithm!();
-        SourceFileAndBytePos!();
-        NormalizedPos!();
-        MalformedSourceMapPositions!();
         FatalError!();
-        LineInfo!();
-        FileLinesResult!();
-        RealFileLoader!();
-        SourceFileLines!();
-        RealFileName!();
         Loc!();
-        SourceFileHash!();
-        SourceMapInputs!();
-        SourceFileAndLine!();
-        SpanSnippetError!();
-        SpanData!();
-        FileNameDisplayPreference!();
         ExternalSource!();
-        FileName!();
-        DistinctSources!();
-        ExternalSourceKind!();
-        StableSourceFileId!();
-        SyntaxContext!();
+        LineInfo!();
         FileNameDisplay!();
-        SourceMap!();
+        NormalizedPos!();
+        SourceFileHash!();
         FilePathMapping!();
-        MultiByteChar!();
+        SpanLinesError!();
+        SourceMapInputs!();
+        ExternalSourceKind!();
+        SourceFileLines!();
+        SourceFileAndBytePos!();
+        SourceMap!();
+        DistinctSources!();
+        RealFileLoader!();
+        OffsetOverflowError!();
+        FileNameDisplayPreference!();
+        FileLines!();
+        SpanSnippetError!();
+        SourceFileHashAlgorithm!();
+        MalformedSourceMapPositions!();
         Span!();
         SourceFile!();
+        SyntaxContext!();
+        MultiByteChar!();
+        FileLinesResult!();
+        RealFileName!();
+        SourceFileAndLine!();
+        SpanData!();
+        StableSourceFileId!();
+        FileName!();
     };
 }
 
@@ -42,4 +42,4 @@ macro_rules! impl_22 {
     };
 }
 
-impl_22!()
+impl_22!();

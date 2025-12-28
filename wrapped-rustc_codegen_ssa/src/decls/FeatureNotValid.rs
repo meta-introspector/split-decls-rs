@@ -11,4 +11,4 @@ macro_rules! FeatureNotValid {
     };
 }
 
-FeatureNotValid!()
+FeatureNotValid!();

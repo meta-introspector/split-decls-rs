@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Result!();
         Error!();
+        Result!();
+        VariantAccess!();
         VariantDeserializer!();
         Value!();
-        VariantAccess!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_260 {
     };
 }
 
-impl_260!()
+impl_260!();

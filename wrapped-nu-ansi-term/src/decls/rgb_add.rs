@@ -11,4 +11,4 @@ macro_rules! rgb_add {
     };
 }
 
-rgb_add!()
+rgb_add!();

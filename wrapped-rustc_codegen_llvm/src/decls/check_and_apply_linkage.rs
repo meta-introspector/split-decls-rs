@@ -13,4 +13,4 @@ macro_rules! check_and_apply_linkage {
     };
 }
 
-check_and_apply_linkage!()
+check_and_apply_linkage!();

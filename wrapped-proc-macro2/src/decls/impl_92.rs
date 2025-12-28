@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
+        Punct!();
         Ident!();
-        Group!();
         TokenTree!();
-        TokenStream!();
+        Group!();
         Spacing!();
         Literal!();
-        Punct!();
+        TokenStream!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_92 {
     };
 }
 
-impl_92!()
+impl_92!();

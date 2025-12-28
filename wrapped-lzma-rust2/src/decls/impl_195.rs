@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
+        MfType!();
         FastEncoderMode!();
         LzEncoder!();
-        MfType!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! impl_195 {
     };
 }
 
-impl_195!()
+impl_195!();

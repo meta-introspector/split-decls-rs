@@ -5,4 +5,4 @@ macro_rules! compare_number_of_generics {
     };
 }
 
-compare_number_of_generics!()
+compare_number_of_generics!();

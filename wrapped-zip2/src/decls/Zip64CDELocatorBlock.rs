@@ -11,4 +11,4 @@ macro_rules! Zip64CDELocatorBlock {
     };
 }
 
-Zip64CDELocatorBlock!()
+Zip64CDELocatorBlock!();

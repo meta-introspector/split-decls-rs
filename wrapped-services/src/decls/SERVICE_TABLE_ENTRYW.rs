@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        LPSERVICE_MAIN_FUNCTIONW!();
         PWSTR!();
+        LPSERVICE_MAIN_FUNCTIONW!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! SERVICE_TABLE_ENTRYW {
     };
 }
 
-SERVICE_TABLE_ENTRYW!()
+SERVICE_TABLE_ENTRYW!();

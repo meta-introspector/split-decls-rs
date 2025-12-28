@@ -4,4 +4,4 @@ macro_rules! nghttp2_session_callbacks {
     };
 }
 
-nghttp2_session_callbacks!()
+nghttp2_session_callbacks!();

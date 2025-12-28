@@ -11,4 +11,4 @@ macro_rules! push_dict_out {
     };
 }
 
-push_dict_out!()
+push_dict_out!();

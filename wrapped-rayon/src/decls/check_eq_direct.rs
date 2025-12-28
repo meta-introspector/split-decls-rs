@@ -4,4 +4,4 @@ macro_rules! check_eq_direct {
     };
 }
 
-check_eq_direct!()
+check_eq_direct!();

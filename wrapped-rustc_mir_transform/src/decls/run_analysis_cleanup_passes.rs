@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        MirPass!();
         Optimizations!();
+        MirPass!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! run_analysis_cleanup_passes {
     };
 }
 
-run_analysis_cleanup_passes!()
+run_analysis_cleanup_passes!();

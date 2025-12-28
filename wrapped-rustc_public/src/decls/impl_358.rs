@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        ReprOptions!();
-        GenericArgs!();
         AdtKind!();
+        GenericArgs!();
         Ty!();
         VariantDef!();
+        ReprOptions!();
         VariantIdx!();
         Discr!();
     };
@@ -17,4 +17,4 @@ macro_rules! impl_358 {
     };
 }
 
-impl_358!()
+impl_358!();

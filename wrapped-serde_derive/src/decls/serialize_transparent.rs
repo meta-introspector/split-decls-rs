@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         Container!();
-        Data!();
         Parameters!();
         Fragment!();
+        Data!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! serialize_transparent {
     };
 }
 
-serialize_transparent!()
+serialize_transparent!();

@@ -4,4 +4,4 @@ macro_rules! SIZE_INFINITY {
     };
 }
 
-SIZE_INFINITY!()
+SIZE_INFINITY!();

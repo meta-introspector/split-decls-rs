@@ -4,4 +4,4 @@ macro_rules! BoundRegionKind {
     };
 }
 
-BoundRegionKind!()
+BoundRegionKind!();

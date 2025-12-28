@@ -12,4 +12,4 @@ macro_rules! hash_password {
     };
 }
 
-hash_password!()
+hash_password!();

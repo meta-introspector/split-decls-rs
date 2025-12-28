@@ -4,4 +4,4 @@ macro_rules! cast_ptr {
     };
 }
 
-cast_ptr!()
+cast_ptr!();

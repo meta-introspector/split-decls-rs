@@ -11,4 +11,4 @@ macro_rules! sub_scalar {
     };
 }
 
-sub_scalar!()
+sub_scalar!();

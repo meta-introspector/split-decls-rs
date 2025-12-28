@@ -4,4 +4,4 @@ macro_rules! PagerankError {
     };
 }
 
-PagerankError!()
+PagerankError!();

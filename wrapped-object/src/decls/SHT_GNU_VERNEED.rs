@@ -11,4 +11,4 @@ macro_rules! SHT_GNU_VERNEED {
     };
 }
 
-SHT_GNU_VERNEED!()
+SHT_GNU_VERNEED!();

@@ -12,4 +12,4 @@ macro_rules! name_r {
     };
 }
 
-name_r!()
+name_r!();

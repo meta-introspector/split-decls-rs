@@ -4,4 +4,4 @@ macro_rules! R_390_IRELATIVE {
     };
 }
 
-R_390_IRELATIVE!()
+R_390_IRELATIVE!();

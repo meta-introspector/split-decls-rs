@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        ImageBaseRelocation!();
         RelocBlock!();
+        ImageBaseRelocation!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_1008 {
     };
 }
 
-impl_1008!()
+impl_1008!();

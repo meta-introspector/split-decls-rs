@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Prec!();
-        Op!();
         Pairs!();
-        RuleType!();
         Affix!();
+        Prec!();
+        RuleType!();
+        Op!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! PrattParser {
     };
 }
 
-PrattParser!()
+PrattParser!();

@@ -4,4 +4,4 @@ macro_rules! huffman {
     };
 }
 
-huffman!()
+huffman!();

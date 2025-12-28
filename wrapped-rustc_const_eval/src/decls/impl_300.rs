@@ -3,8 +3,8 @@ macro_rules! deps {
         Writeable!();
         InterpCx!();
         PlaceTy!();
-        Machine!();
         MPlaceTy!();
+        Machine!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_300 {
     };
 }
 
-impl_300!()
+impl_300!();

@@ -4,4 +4,4 @@ macro_rules! eq_visibility {
     };
 }
 
-eq_visibility!()
+eq_visibility!();

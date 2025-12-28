@@ -4,4 +4,4 @@ macro_rules! F_RELFLG {
     };
 }
 
-F_RELFLG!()
+F_RELFLG!();

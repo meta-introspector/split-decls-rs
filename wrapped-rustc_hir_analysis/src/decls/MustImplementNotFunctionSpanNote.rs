@@ -4,4 +4,4 @@ macro_rules! MustImplementNotFunctionSpanNote {
     };
 }
 
-MustImplementNotFunctionSpanNote!()
+MustImplementNotFunctionSpanNote!();

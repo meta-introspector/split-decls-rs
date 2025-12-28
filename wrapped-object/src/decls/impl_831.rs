@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        FileAux!();
         FileAux32!();
+        FileAux!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! impl_831 {
     };
 }
 
-impl_831!()
+impl_831!();

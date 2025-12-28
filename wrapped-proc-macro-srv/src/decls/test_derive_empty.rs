@@ -20,4 +20,4 @@ macro_rules! test_derive_empty {
     };
 }
 
-test_derive_empty!()
+test_derive_empty!();

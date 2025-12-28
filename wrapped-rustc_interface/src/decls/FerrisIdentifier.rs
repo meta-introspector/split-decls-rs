@@ -4,4 +4,4 @@ macro_rules! FerrisIdentifier {
     };
 }
 
-FerrisIdentifier!()
+FerrisIdentifier!();

@@ -12,4 +12,4 @@ macro_rules! graph_from_str {
     };
 }
 
-graph_from_str!()
+graph_from_str!();

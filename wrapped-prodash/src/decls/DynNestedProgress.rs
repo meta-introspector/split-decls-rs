@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
         BoxedDynNestedProgress!();
-        Progress!();
         NestedProgress!();
+        Progress!();
         Id!();
     };
 }
@@ -14,4 +14,4 @@ macro_rules! DynNestedProgress {
     };
 }
 
-DynNestedProgress!()
+DynNestedProgress!();

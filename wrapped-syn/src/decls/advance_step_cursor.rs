@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        StepCursor!();
         Cursor!();
+        StepCursor!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! advance_step_cursor {
     };
 }
 
-advance_step_cursor!()
+advance_step_cursor!();

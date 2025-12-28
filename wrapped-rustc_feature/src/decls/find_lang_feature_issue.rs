@@ -4,4 +4,4 @@ macro_rules! find_lang_feature_issue {
     };
 }
 
-find_lang_feature_issue!()
+find_lang_feature_issue!();

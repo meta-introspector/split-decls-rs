@@ -1,10 +1,10 @@
 macro_rules! deps {
     () => {
-        Error!();
+        Cond!();
         PResult!();
+        Error!();
         Parser!();
         OutputMode!();
-        Cond!();
     };
 }
 
@@ -15,4 +15,4 @@ macro_rules! impl_102 {
     };
 }
 
-impl_102!()
+impl_102!();

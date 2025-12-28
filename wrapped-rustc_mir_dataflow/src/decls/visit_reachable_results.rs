@@ -1,8 +1,8 @@
 macro_rules! deps {
     () => {
-        Results!();
         ResultsVisitor!();
         Analysis!();
+        Results!();
     };
 }
 
@@ -13,4 +13,4 @@ macro_rules! visit_reachable_results {
     };
 }
 
-visit_reachable_results!()
+visit_reachable_results!();

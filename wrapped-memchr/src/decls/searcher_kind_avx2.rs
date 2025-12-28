@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Searcher!();
         PrefilterState!();
+        Searcher!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! searcher_kind_avx2 {
     };
 }
 
-searcher_kind_avx2!()
+searcher_kind_avx2!();

@@ -4,4 +4,4 @@ macro_rules! parse_float_into_constval {
     };
 }
 
-parse_float_into_constval!()
+parse_float_into_constval!();

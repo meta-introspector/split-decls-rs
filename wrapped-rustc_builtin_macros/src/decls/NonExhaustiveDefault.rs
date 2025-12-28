@@ -4,4 +4,4 @@ macro_rules! NonExhaustiveDefault {
     };
 }
 
-NonExhaustiveDefault!()
+NonExhaustiveDefault!();

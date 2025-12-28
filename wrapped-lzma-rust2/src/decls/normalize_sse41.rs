@@ -4,4 +4,4 @@ macro_rules! normalize_sse41 {
     };
 }
 
-normalize_sse41!()
+normalize_sse41!();

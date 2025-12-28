@@ -1,9 +1,9 @@
 macro_rules! deps {
     () => {
         TyVidEqKey!();
+        TypeVariableTable!();
         TypeVariableStorage!();
         InferCtxtUndoLogs!();
-        TypeVariableTable!();
     };
 }
 
@@ -14,4 +14,4 @@ macro_rules! impl_223 {
     };
 }
 
-impl_223!()
+impl_223!();

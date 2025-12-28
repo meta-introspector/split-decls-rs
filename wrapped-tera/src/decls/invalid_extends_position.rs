@@ -7,4 +7,4 @@ hello
     };
 }
 
-invalid_extends_position!()
+invalid_extends_position!();

@@ -1,7 +1,7 @@
 macro_rules! deps {
     () => {
-        Cpuid!();
         Result!();
+        Cpuid!();
     };
 }
 
@@ -12,4 +12,4 @@ macro_rules! membarrier_cpu {
     };
 }
 
-membarrier_cpu!()
+membarrier_cpu!();

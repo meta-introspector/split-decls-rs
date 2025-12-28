@@ -4,4 +4,4 @@ macro_rules! invert_special_case_legacy {
     };
 }
 
-invert_special_case_legacy!()
+invert_special_case_legacy!();

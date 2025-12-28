@@ -11,4 +11,4 @@ macro_rules! filter_by_config {
     };
 }
 
-filter_by_config!()
+filter_by_config!();

@@ -4,4 +4,4 @@ macro_rules! InternMap {
     };
 }
 
-InternMap!()
+InternMap!();

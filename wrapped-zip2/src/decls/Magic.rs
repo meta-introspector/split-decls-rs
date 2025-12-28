@@ -4,4 +4,4 @@ macro_rules! Magic {
     };
 }
 
-Magic!()
+Magic!();

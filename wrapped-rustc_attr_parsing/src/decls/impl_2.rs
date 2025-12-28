@@ -1,12 +1,12 @@
 macro_rules! deps {
     () => {
-        AllowedTargets!();
-        AllowInternalUnstableParser!();
-        ArgParser!();
-        AcceptContext!();
         Stage!();
         ConvertFn!();
+        ArgParser!();
+        AllowInternalUnstableParser!();
+        AcceptContext!();
         CombineAttributeParser!();
+        AllowedTargets!();
     };
 }
 
@@ -17,4 +17,4 @@ macro_rules! impl_2 {
     };
 }
 
-impl_2!()
+impl_2!();
