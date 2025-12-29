@@ -7,6 +7,10 @@ edition = "2021"
 
 [dependencies]
 serde = { version = "1.0", features = ["derive"] }
+paste = "1.0"
+anyhow = "1.0"
+module-wrapper-macros = { path = "../module-wrapper-macros" }
+toml = "0.8"
 
 [lib]
 name = "bootstrap3"

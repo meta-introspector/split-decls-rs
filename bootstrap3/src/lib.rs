@@ -1,7 +1,52 @@
 use std::path::{Path, PathBuf};
 use std::fs;
+use module_wrapper_macros::includemod;
 
-// Include actual split declarations from output2
+// Declare modules
+pub mod simple_test;
+
+// Add missing macros and imports that the generated code needs
+macro_rules! warn {
+    ($($tt:tt)*) => {
+        println!("🔧 WARN: {}", format!($($tt)*));
+    };
+}
+
+// Add mkdeclfn macro that makes functions public
+macro_rules! mkdeclfn {
+    (fn $name:ident $($rest:tt)*) => {
+        pub fn $name $($rest)*
+    };
+}
+
+// Add other missing items that generated code needs
+use serde::{Serialize, Deserialize};
+use std::collections::HashMap;
+
+// Include SplitDeclsConfig first
+pub mod split_decls_config_mod {
+    include!("../../output2/wrapped-split-decls-rs/src/decls/lib/struct/9/SplitDeclsConfig.rs");
+}
+
+// Let mkwrap! handle all the includes automatically
+// (removed manual includemod calls to avoid duplicates)
+
+// Include run_wrapped_workspace_mode
+pub mod run_wrapped_workspace_mode_mod {
+    use std::path::{Path, PathBuf};
+    use anyhow::Result;
+    use crate::split_decls_config_mod::SplitDeclsConfig;
+    include!(concat!(env!("CARGO_MANIFEST_DIR"), "/../output2/wrapped-split-decls-rs/src/decls/main/fn/10/run_wrapped_workspace_mode.rs"));
+}
+
+// Include run_bootstrap_mode
+pub mod bootstrap_mode_mod {
+    use std::path::PathBuf;
+    use anyhow::Result;
+    use crate::split_decls_config_mod::SplitDeclsConfig;
+    use crate::run_wrapped_workspace_mode_mod::run_wrapped_workspace_mode;
+    include!(concat!(env!("CARGO_MANIFEST_DIR"), "/../output2/wrapped-split-decls-rs/src/decls/main/fn/6/run_bootstrap_mode.rs"));
+}
 include!(concat!(env!("CARGO_MANIFEST_DIR"), "/../output2/wrapped-split-decls-rs/src/decls/lib/struct/3/SplitDeclsConfig.rs"));
 
 // Add missing macros that call the real ones
@@ -20,8 +65,8 @@ macro_rules! mkdeclfn {
     };
 }
 
-// Include the actual bootstrap function from output2
-include!(concat!(env!("CARGO_MANIFEST_DIR"), "/../output2/wrapped-split-decls-rs/src/decls/main/fn/6/run_bootstrap_mode.rs"));
+pub use bootstrap_mode_mod::run_bootstrap_mode;
+pub use run_wrapped_workspace_mode_mod::run_wrapped_workspace_mode;
 
 macro_rules! mkdeclstruct {
     (struct $name:ident $($tt:tt)*) => {

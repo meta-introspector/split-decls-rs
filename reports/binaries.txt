@@ -1,0 +1,44 @@
+warning: unused import: `Item`
+ --> src/main.rs:9:25
+  |
+9 | use syn::{visit::Visit, Item, Ident, File as SynFile};
+  |                         ^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused variable: `token`
+   --> src/main.rs:623:14
+    |
+623 |         for (token, paths) in resolved_deps {
+    |              ^^^^^ help: if this is intentional, prefix it with an underscore: `_token`
+    |
+    = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default
+
+warning: field `module_count` is never read
+  --> src/main.rs:78:5
+   |
+75 | struct IncrementalBootstrap {
+   |        -------------------- field in this struct
+...
+78 |     module_count: usize,
+   |     ^^^^^^^^^^^^
+   |
+   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: `incremental-bootstrap` (bin "incremental-bootstrap") generated 3 warnings (run `cargo fix --bin "incremental-bootstrap"` to apply 1 suggestion)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.30s
+     Running `target/debug/incremental-bootstrap list-bins`
+🔍 Scanning output2 for binaries...
+📋 Found 5 binaries in output2:
+  🔧 wrapped-dissimilar::main -> ../output2/wrapped-dissimilar/src/decls/main.rs
+  🔧 wrapped-gix-credentials::main -> ../output2/wrapped-gix-credentials/src/decls/main.rs
+  🔧 wrapped-rustc_driver_impl::main -> ../output2/wrapped-rustc_driver_impl/src/decls/main.rs
+  🔧 wrapped-tokio-macros::main -> ../output2/wrapped-tokio-macros/src/decls/main.rs
+  🔧 wrapped-cargo-credential::main -> ../output2/wrapped-cargo-credential/src/decls/main.rs
+
+📝 Generated include statements:
+include!("output2/wrapped-dissimilar/src/decls/main.rs"); // wrapped-dissimilar::main
+include!("output2/wrapped-gix-credentials/src/decls/main.rs"); // wrapped-gix-credentials::main
+include!("output2/wrapped-rustc_driver_impl/src/decls/main.rs"); // wrapped-rustc_driver_impl::main
+include!("output2/wrapped-tokio-macros/src/decls/main.rs"); // wrapped-tokio-macros::main
+include!("output2/wrapped-cargo-credential/src/decls/main.rs"); // wrapped-cargo-credential::main

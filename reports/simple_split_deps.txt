@@ -1,0 +1,73 @@
+warning: unused import: `Item`
+ --> src/main.rs:9:25
+  |
+9 | use syn::{visit::Visit, Item, Ident, File as SynFile};
+  |                         ^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused variable: `token`
+   --> src/main.rs:623:14
+    |
+623 |         for (token, paths) in resolved_deps {
+    |              ^^^^^ help: if this is intentional, prefix it with an underscore: `_token`
+    |
+    = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default
+
+warning: field `module_count` is never read
+  --> src/main.rs:78:5
+   |
+75 | struct IncrementalBootstrap {
+   |        -------------------- field in this struct
+...
+78 |     module_count: usize,
+   |     ^^^^^^^^^^^^
+   |
+   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: `incremental-bootstrap` (bin "incremental-bootstrap") generated 3 warnings (run `cargo fix --bin "incremental-bootstrap"` to apply 1 suggestion)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.01s
+     Running `target/debug/incremental-bootstrap analyze-deps --bin simple_split`
+🔍 Analyzing dependencies for binary: simple_split
+📍 Found binary at: ../output2/wrapped-split-decls-rs/src/decls/simple_split/fn/7/main.rs
+🔧 Binary uses 7 unique tokens
+🔍 Scanning output2 for 7 tokens...
+✅ Resolved 7 dependencies in output2:
+  collections -> 34041 files
+    ../output2/wrapped-rustc_span/src/decls/macro_122.rs
+    ../output2/wrapped-rustc_span/src/decls/macro_112.rs
+    ../output2/wrapped-split_rustc_data_structures/src/decls/UnordMap.rs
+    ... and 34038 more
+  std -> 39936 files
+    ../output2/wrapped-criterion/src/decls/impl_280.rs
+    ../output2/wrapped-criterion/src/decls/Result.rs
+    ../output2/wrapped-criterion/src/decls/Context.rs
+    ... and 39933 more
+  HashMap -> 34819 files
+    ../output2/wrapped-criterion/src/decls/impl_146.rs
+    ../output2/wrapped-criterion/src/decls/impl_142.rs
+    ../output2/wrapped-rustc_span/src/decls/macro_174.rs
+    ... and 34816 more
+  Deserialize -> 34969 files
+    ../output2/wrapped-criterion/src/decls/ChangeEstimates.rs
+    ../output2/wrapped-criterion/src/decls/Estimate.rs
+    ../output2/wrapped-criterion/src/decls/BenchmarkId.rs
+    ... and 34966 more
+  serde -> 35055 files
+    ../output2/wrapped-criterion/src/decls/save.rs
+    ../output2/wrapped-criterion/src/decls/load.rs
+    ../output2/wrapped-criterion/src/decls/cargo_target_directory.rs
+    ... and 35052 more
+  mkdeclfn -> 24039 files
+    ../output2/wrapped-split-decls-rs/src/decls/module_7088/fn/2/test_compile_module_7088.rs
+    ../output2/wrapped-split-decls-rs/src/decls/module_57169/fn/2/test_compile_module_57169.rs
+    ../output2/wrapped-split-decls-rs/src/decls/wrapped_rustc_literal_escaper_decls_unescape_c_str/fn/3/unescape_c_str.rs
+    ... and 24036 more
+  Serialize -> 35170 files
+    ../output2/wrapped-criterion/src/decls/Comparison.rs
+    ../output2/wrapped-criterion/src/decls/BenchmarkValueGroup.rs
+    ../output2/wrapped-criterion/src/decls/Context.rs
+    ... and 35167 more
+📊 Generating dependency graph for simple_split
+✅ Dependency graph saved to: ../bootstrap3-incremental/simple_split_dependencies.rs
+📈 Total unique files needed: 7

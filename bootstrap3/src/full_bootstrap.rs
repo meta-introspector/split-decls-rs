@@ -132,10 +132,26 @@ mod build_script_composer {
     }
 }
 
-// Include ALL extracted functions from output2
-include!("../../output2/wrapped-split-decls-rs/src/decls/paths/fn/8/setup_crate_paths.rs");
-include!("../../output2/wrapped-split-decls-rs/src/decls/main/fn/6/run_bootstrap_mode.rs");
-include!("../../output2/wrapped-split-decls-rs/src/decls/main/fn/10/run_wrapped_workspace_mode.rs");
+// Include ALL extracted functions from output2 wrapped in modules
+pub mod setup_crate_paths_mod {
+    use std::path::{Path, PathBuf};
+    use anyhow::Result;
+    include!("../../output2/wrapped-split-decls-rs/src/decls/paths/fn/8/setup_crate_paths.rs");
+}
+pub mod run_bootstrap_mode_mod2 {
+    use std::path::PathBuf;
+    use anyhow::Result;
+    include!("../../output2/wrapped-split-decls-rs/src/decls/main/fn/6/run_bootstrap_mode.rs");
+}
+pub mod run_wrapped_workspace_mode_mod2 {
+    use std::path::{Path, PathBuf};
+    use anyhow::Result;
+    include!("../../output2/wrapped-split-decls-rs/src/decls/main/fn/10/run_wrapped_workspace_mode.rs");
+}
+
+pub use setup_crate_paths_mod::setup_crate_paths;
+pub use run_bootstrap_mode_mod2::run_bootstrap_mode;
+pub use run_wrapped_workspace_mode_mod2::run_wrapped_workspace_mode;
 
 pub fn call_all_functions() -> Result<()> {
     println!("📋 Testing extracted functions with full bootstrap tracing...");

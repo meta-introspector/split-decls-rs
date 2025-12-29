@@ -8,6 +8,18 @@ macro_rules! mkdeclfn {
     };
 }
 
+// Macro to wrap includes in modules with proper imports
+macro_rules! includemod {
+    ($mod_name:ident, $file_path:expr) => {
+        pub mod $mod_name {
+            use std::path::{Path, PathBuf};
+            use anyhow::Result;
+            use crate::split_decls_config_mod::SplitDeclsConfig;
+            include!($file_path);
+        }
+    };
+}
+
 // Define the CratePaths struct that the extracted function needs
 #[derive(Debug, Clone)]
 pub struct CratePaths {

@@ -214,3 +214,37 @@ simple_split_hir_ty:
 simple_split_all:
 	@echo "🚀 Splitting all crates from config..."
 	@cargo run --bin simple_split_all_crates > simple_split_all.log 2>&1 && echo "✅ All crates split complete" || echo "❌ Some crates failed - check simple_split_all.log"
+# Recursive Dependency Analysis System
+recursive-analysis:
+	@echo "🚀 Running Recursive Dependency Analysis System"
+	@echo "================================================"
+	@mkdir -p reports
+	@cd incremental-bootstrap && \
+	echo "📋 Discovering binaries..." && \
+	cargo run -- list-bins > ../reports/binaries.txt 2>&1 && \
+	echo "🔍 Analyzing simple_split dependencies..." && \
+	cargo run -- analyze-deps --bin simple_split > ../reports/simple_split_deps.txt 2>&1 && \
+	echo "🔄 Running recursive analysis (depth 2)..." && \
+	cargo run -- recursive-deps --bin simple_split --depth 2 > ../reports/recursive_analysis.txt 2>&1 && \
+	echo "📊 Generating dependency graph..." && \
+	cargo run -- print-graph --bin simple_split --depth 2 > ../reports/dependency_graph.txt 2>&1 && \
+	echo "🧪 Testing compilation..." && \
+	cargo run -- test-eval --bin simple_split > ../reports/compilation_test.txt 2>&1
+	@echo ""
+	@echo "✅ Analysis Complete! Results saved to reports/"
+	@echo "📁 Generated files:"
+	@ls -la reports/
+	@echo ""
+	@echo "📋 Cache status:"
+	@ls -la bootstrap3-incremental/dep-cache/ | head -5
+	@echo ""
+	@echo "📊 Summary Report:"
+	@echo "=================="
+	@echo "🔧 Binaries found: $$(grep -c '🔧' reports/binaries.txt || echo 'N/A')"
+	@echo "📈 Dependencies resolved: $$(grep 'Total unique dependencies:' reports/recursive_analysis.txt | tail -1 | cut -d: -f2 | xargs || echo 'N/A')"
+	@echo "🏗️  Cache entries: $$(grep 'Cache entries:' reports/recursive_analysis.txt | tail -1 | cut -d: -f2 | xargs || echo 'N/A')"
+	@echo "✅ Compilation status: $$(if grep -q 'SUCCESS' reports/compilation_test.txt; then echo 'PASSED'; else echo 'FAILED (import conflicts)'; fi)"
+	@echo ""
+	@echo "📖 Full documentation: RECURSIVE_DEPENDENCY_ANALYSIS.md"
+
+.PHONY: recursive-analysis

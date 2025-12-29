@@ -1,0 +1,62 @@
+warning: unused import: `Item`
+ --> src/main.rs:9:25
+  |
+9 | use syn::{visit::Visit, Item, Ident, File as SynFile};
+  |                         ^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused variable: `token`
+   --> src/main.rs:623:14
+    |
+623 |         for (token, paths) in resolved_deps {
+    |              ^^^^^ help: if this is intentional, prefix it with an underscore: `_token`
+    |
+    = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default
+
+warning: field `module_count` is never read
+  --> src/main.rs:78:5
+   |
+75 | struct IncrementalBootstrap {
+   |        -------------------- field in this struct
+...
+78 |     module_count: usize,
+   |     ^^^^^^^^^^^^
+   |
+   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: `incremental-bootstrap` (bin "incremental-bootstrap") generated 3 warnings (run `cargo fix --bin "incremental-bootstrap"` to apply 1 suggestion)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.02s
+     Running `target/debug/incremental-bootstrap recursive-deps --bin simple_split --depth 2`
+🔄 Recursive dependency analysis for: simple_split (depth: 2)
+📊 Processing dep-e6c2032e2a86ab3d at depth 0
+🔍 Scanning output2 for 7 tokens...
+  ✅ Found 7 dependencies
+📊 Processing dep-500ae9ba55309af0 at depth 1
+🔍 Scanning output2 for 7 tokens...
+  ✅ Found 7 dependencies
+📊 Processing dep-6f471c3f03e8bc1b at depth 1
+🔍 Scanning output2 for 3 tokens...
+  ✅ Found 3 dependencies
+📊 Processing dep-ae59ffb023d17d44 at depth 1
+🔍 Scanning output2 for 3 tokens...
+  ✅ Found 3 dependencies
+📊 Processing dep-61c7700ba0447f4b at depth 1
+🔍 Scanning output2 for 3 tokens...
+  ✅ Found 3 dependencies
+📊 Processing dep-3887e2e8c1c4fc4a at depth 1
+🔍 Scanning output2 for 3 tokens...
+  ✅ Found 3 dependencies
+📊 Processing dep-fda966e2c3c180a9 at depth 1
+🔍 Scanning output2 for 3 tokens...
+  ✅ Found 3 dependencies
+📊 Processing dep-14c4ff3cf8bbeae1 at depth 1
+🔍 Scanning output2 for 3 tokens...
+  ✅ Found 3 dependencies
+📝 Generating evaluation result...
+✅ Evaluation saved to: ../bootstrap3-incremental/simple_split_recursive_eval.rs
+📋 Manifest saved to: ../bootstrap3-incremental/simple_split_manifest.json
+📈 Total unique dependencies: 1
+🎯 Recursive analysis complete!
+   Processed 8 unique nodes
+   Cache entries: 10

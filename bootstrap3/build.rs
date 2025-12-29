@@ -63,4 +63,13 @@ fn main() {
     f.write_all(generated_code.as_bytes()).unwrap();
     
     println!("cargo:warning=Generated mkwrap! macro at {:?}", dest_path);
+    
+    // Print suggested fixes for missing dependencies
+    println!("cargo:warning=🔧 SUGGESTED FIXES for missing dependencies:");
+    println!("cargo:warning=Add these mkdeclmod! calls to fix compilation errors:");
+    println!("cargo:warning=mkdeclmod!(\"main\", \"fn\", \"5\", \"dep_to_toml_value_iter\");");
+    println!("cargo:warning=mkdeclmod!(\"lib\", \"struct\", \"9\", \"PatchConfig\");");
+    println!("cargo:warning=mkdeclmod!(\"lib\", \"struct\", \"8\", \"CargoToml\");");
+    println!("cargo:warning=mkdeclmod!(\"multi_crate\", \"fn\", \"7\", \"generate_wrapped_workspace\");");
+    println!("cargo:warning=mkdeclmod!(\"build_script_composer\", \"fn\", \"4\", \"compose_build_script_from_parts\");");
 }

@@ -1,0 +1,97 @@
+warning: unused import: `Item`
+ --> src/main.rs:9:25
+  |
+9 | use syn::{visit::Visit, Item, Ident, File as SynFile};
+  |                         ^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused variable: `token`
+   --> src/main.rs:623:14
+    |
+623 |         for (token, paths) in resolved_deps {
+    |              ^^^^^ help: if this is intentional, prefix it with an underscore: `_token`
+    |
+    = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default
+
+warning: field `module_count` is never read
+  --> src/main.rs:78:5
+   |
+75 | struct IncrementalBootstrap {
+   |        -------------------- field in this struct
+...
+78 |     module_count: usize,
+   |     ^^^^^^^^^^^^
+   |
+   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: `incremental-bootstrap` (bin "incremental-bootstrap") generated 3 warnings (run `cargo fix --bin "incremental-bootstrap"` to apply 1 suggestion)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.01s
+     Running `target/debug/incremental-bootstrap print-graph --bin simple_split --depth 2`
+📊 Dependency Graph for: simple_split
+═══════════════════════════════════════
+🔍 Scanning output2 for 7 tokens...
+🔍 Scanning output2 for 3 tokens...
+🔍 Scanning output2 for 3 tokens...
+🔍 Scanning output2 for 3 tokens...
+🔍 Scanning output2 for 3 tokens...
+🔍 Scanning output2 for 7 tokens...
+🔍 Scanning output2 for 3 tokens...
+🔍 Scanning output2 for 3 tokens...
+├─ main.rs (42eb9df40dc969bb)
+│  tokens: ["collections", "mkdeclfn", "HashMap"]
+  ├─ ChangeEstimates.rs (549b1ad51e9b12db)
+  │  tokens: ["deps", "ChangeEstimates", "macro_rules"]
+    ├─ ChangeEstimates.rs (549b1ad51e9b12db)
+    │  tokens: ["deps", "ChangeEstimates", "macro_rules"]
+    │  (already visited)
+    ├─ iteration_times_figure.rs (454dc6c907edcc16)
+    │  tokens: ["deps", "iteration_times_figure", "macro_rules"]
+    ├─ iteration_times_figure.rs (454dc6c907edcc16)
+    │  tokens: ["deps", "iteration_times_figure", "macro_rules"]
+    │  (already visited)
+  ├─ macro_122.rs (c5854bc92a09fddc)
+  │  tokens: ["deps", "macro_122", "macro_rules"]
+    ├─ iteration_times_figure.rs (454dc6c907edcc16)
+    │  tokens: ["deps", "iteration_times_figure", "macro_rules"]
+    │  (already visited)
+    ├─ macro_122.rs (c5854bc92a09fddc)
+    │  tokens: ["deps", "macro_122", "macro_rules"]
+    │  (already visited)
+    ├─ iteration_times_figure.rs (454dc6c907edcc16)
+    │  tokens: ["deps", "iteration_times_figure", "macro_rules"]
+    │  (already visited)
+  ├─ test_compile_module_7088.rs (46ef371889c66e18)
+  │  tokens: ["mkdeclfn", "Deserialize", "Serialize"]
+    ├─ test_compile_module_7088.rs (46ef371889c66e18)
+    │  tokens: ["mkdeclfn", "Deserialize", "Serialize"]
+    │  (already visited)
+    ├─ Comparison.rs (d5f3775594f1ba26)
+    │  tokens: ["Comparison", "macro_rules", "deps"]
+      ├─ iteration_times_figure.rs (454dc6c907edcc16)
+      │  tokens: ["deps", "iteration_times_figure", "macro_rules"]
+      │  (already visited)
+      ├─ iteration_times_figure.rs (454dc6c907edcc16)
+      │  tokens: ["deps", "iteration_times_figure", "macro_rules"]
+      │  (already visited)
+      ├─ Comparison.rs (d5f3775594f1ba26)
+      │  tokens: ["Comparison", "macro_rules", "deps"]
+      │  (already visited)
+    ├─ impl_280.rs (ad53990a585e935b)
+    │  tokens: ["macro_rules", "deps", "impl_280"]
+      ├─ iteration_times_figure.rs (454dc6c907edcc16)
+      │  tokens: ["deps", "iteration_times_figure", "macro_rules"]
+      │  (already visited)
+      ├─ iteration_times_figure.rs (454dc6c907edcc16)
+      │  tokens: ["deps", "iteration_times_figure", "macro_rules"]
+      │  (already visited)
+      ├─ impl_280.rs (ad53990a585e935b)
+      │  tokens: ["macro_rules", "deps", "impl_280"]
+      │  (already visited)
+    ├─ ... and 4 more dependencies
+  ├─ ... and 4 more dependencies
+
+📈 Graph Summary:
+   Total nodes: 8
+   Max depth: 2
+   Cache entries: 10

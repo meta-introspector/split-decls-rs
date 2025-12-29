@@ -3,7 +3,21 @@ use std::path::Path;
 
 // Import the generated functions
 use crate::simple_test::setup_crate_paths;
-use crate::test_extracted_functions_v2::SplitDeclsConfig;
+// Direct includes wrapped in modules
+pub mod split_decls_config_mod {
+    include!("../../output2/wrapped-split-decls-rs/src/decls/lib/struct/9/SplitDeclsConfig.rs");
+}
+
+pub mod run_wrapped_workspace_mode_mod {
+    use super::split_decls_config_mod::SplitDeclsConfig;
+    use std::path::{Path, PathBuf};
+    use anyhow::Result;
+    include!("../../output2/wrapped-split-decls-rs/src/decls/main/fn/10/run_wrapped_workspace_mode.rs");
+}
+
+pub use split_decls_config_mod::SplitDeclsConfig;
+pub use run_wrapped_workspace_mode_mod::run_wrapped_workspace_mode;
+pub use bootstrap_mode_mod::run_bootstrap_mode;
 
 // Include the generated mkwrap! macro
 include!(concat!(env!("OUT_DIR"), "/mkwrap_generated.rs"));
