@@ -1,0 +1,1 @@
+/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-rs/level-crates/rust-misc-level0/target/release/librust_misc_level0.rlib: /mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-rs/level-crates/rust-misc-level0/src/lib.rs
