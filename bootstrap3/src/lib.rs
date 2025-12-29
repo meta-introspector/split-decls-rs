@@ -61,7 +61,10 @@ macro_rules! warn {
 macro_rules! mkdeclfn {
     (fn $name:ident $($tt:tt)*) => {
         println!("🔧 WRAPPED: mkdeclfn! called for function: {}", stringify!($name));
-        fn $name $($tt)*
+        println!("🔍 TRACE: → {} entry", stringify!($name));
+        fn $name $($tt)* {
+            println!("🔍 TRACE: ← {} exit", stringify!($name));
+        }
     };
 }
 
