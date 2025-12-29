@@ -1,6 +1,6 @@
 // STRUCTURED DECLARATION METADATA
 decl_metadata!({
-name: "decls",
+name: "rust_to_monster_reporter",
 decl_type: "function",
 source_file: "./src/lib.rs",
 source_crate: ".",
@@ -10,10 +10,10 @@ fields: [],
 generated_at: "2025-12-29 16:02:27 UTC"
 });
 
-macro_rules! decls {
+macro_rules! rust_to_monster_reporter {
     () => {
-        pub mod decls ;
+        pub mod rust_to_monster_reporter ;
     };
 }
 
-decls!();
+rust_to_monster_reporter!();

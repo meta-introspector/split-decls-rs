@@ -1,6 +1,6 @@
 // STRUCTURED DECLARATION METADATA
 decl_metadata!({
-name: "decls",
+name: "source_tracker",
 decl_type: "function",
 source_file: "./src/lib.rs",
 source_crate: ".",
@@ -10,10 +10,10 @@ fields: [],
 generated_at: "2025-12-29 16:02:27 UTC"
 });
 
-macro_rules! decls {
+macro_rules! source_tracker {
     () => {
-        pub mod decls ;
+        pub mod source_tracker ;
     };
 }
 
-decls!();
+source_tracker!();

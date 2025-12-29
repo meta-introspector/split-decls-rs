@@ -1,6 +1,6 @@
 // STRUCTURED DECLARATION METADATA
 decl_metadata!({
-name: "decls",
+name: "macro_analyzer_parts",
 decl_type: "function",
 source_file: "./src/lib.rs",
 source_crate: ".",
@@ -10,10 +10,10 @@ fields: [],
 generated_at: "2025-12-29 16:02:27 UTC"
 });
 
-macro_rules! decls {
+macro_rules! macro_analyzer_parts {
     () => {
-        pub mod decls ;
+        pub mod macro_analyzer_parts ;
     };
 }
 
-decls!();
+macro_analyzer_parts!();

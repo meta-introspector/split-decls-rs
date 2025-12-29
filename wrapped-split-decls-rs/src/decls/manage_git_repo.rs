@@ -1,0 +1,19 @@
+// STRUCTURED DECLARATION METADATA
+decl_metadata!({
+name: "manage_git_repo",
+decl_type: "function",
+source_file: "./src/git_manager.rs",
+source_crate: ".",
+deps: [],
+uses: ["Some", "String", "Checking", "Failed", "Result", "Target", "Url", "Git", "Option", "Path", "Repository", "URL", "Fetching", "Err", "Could", "Setting", "Clones", "HashMap", "Command", "Ok", "UTF-8", "Cloning"],
+fields: [],
+generated_at: "2025-12-29 16:02:27 UTC"
+});
+
+macro_rules! manage_git_repo {
+    () => {
+        # [doc = " Clones or updates a Git repository and checks out a specific reference,"] # [doc = " and sets up origin and upstream remotes."] pub fn manage_git_repo (repo_url : & str , target_dir : & Path , reference : & str , github_org : Option < & str > , repo_fork_mapping : & std :: collections :: HashMap < String , String > ,) -> Result < () > { let repo_name = target_dir . file_name () . context ("Target directory has no file name") ? . to_str () . context ("Repository name is not valid UTF-8") ? ; let fork_url = if let Some (explicit_fork_url) = repo_fork_mapping . get (repo_url) { explicit_fork_url . clone () } else if let Some (org) = github_org { let upstream_host = url :: Url :: parse (repo_url) . ok () . and_then (| u | u . host_str () . map (| s | s . to_string ())) . context ("Could not parse upstream host from repo URL") ? ; format ! ("https://{}/{}/{}" , upstream_host , org , repo_name) } else { repo_url . to_string () } ; if ! target_dir . exists () { println ! ("Cloning fork {} to {}..." , fork_url , target_dir . display ()) ; Command :: new ("git") . arg ("clone") . arg (& fork_url) . arg (target_dir) . status () . context (format ! ("Failed to clone repository {}" , fork_url)) ? ; } else { println ! ("Repository already exists at {}. Fetching latest..." , target_dir . display ()) ; Command :: new ("git") . arg ("-C") . arg (target_dir) . arg ("fetch") . arg ("origin") . status () . context (format ! ("Failed to fetch origin for {}" , target_dir . display ())) ? ; Command :: new ("git") . arg ("-C") . arg (target_dir) . arg ("remote") . arg ("set-url") . arg ("origin") . arg (& fork_url) . status () . context (format ! ("Failed to set origin URL to {}" , fork_url)) ? ; } println ! ("Setting upstream remote to {}..." , repo_url) ; Command :: new ("git") . arg ("-C") . arg (target_dir) . arg ("remote") . arg ("add") . arg ("upstream") . arg (repo_url) . status () . or_else (| e | { if e . to_string () . contains ("already exists") { Command :: new ("git") . arg ("-C") . arg (target_dir) . arg ("remote") . arg ("set-url") . arg ("upstream") . arg (repo_url) . status () . context (format ! ("Failed to set upstream URL to {}" , repo_url)) } else { Err (e) . context ("Failed to add upstream remote") } }) ? ; println ! ("Checking out {} in {}..." , reference , target_dir . display ()) ; Command :: new ("git") . arg ("-C") . arg (target_dir) . arg ("checkout") . arg (reference) . status () . context (format ! ("Failed to checkout {} in {}" , reference , target_dir . display ())) ? ; Ok (()) }
+    };
+}
+
+manage_git_repo!();

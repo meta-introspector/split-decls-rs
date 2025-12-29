@@ -1,8 +1,8 @@
 // STRUCTURED DECLARATION METADATA
 decl_metadata!({
-name: "decls",
+name: "invocation_generator",
 decl_type: "function",
-source_file: "./src/lib.rs",
+source_file: "./src/eager_splitter.rs",
 source_crate: ".",
 deps: [],
 uses: [],
@@ -10,10 +10,10 @@ fields: [],
 generated_at: "2025-12-29 16:02:27 UTC"
 });
 
-macro_rules! decls {
+macro_rules! invocation_generator {
     () => {
-        pub mod decls ;
+        pub mod invocation_generator ;
     };
 }
 
-decls!();
+invocation_generator!();

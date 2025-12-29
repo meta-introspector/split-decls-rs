@@ -1,8 +1,8 @@
 // STRUCTURED DECLARATION METADATA
 decl_metadata!({
-name: "decls",
+name: "default_true",
 decl_type: "function",
-source_file: "./src/lib.rs",
+source_file: "./src/goal_parser.rs",
 source_crate: ".",
 deps: [],
 uses: [],
@@ -10,10 +10,10 @@ fields: [],
 generated_at: "2025-12-29 16:02:27 UTC"
 });
 
-macro_rules! decls {
+macro_rules! default_true {
     () => {
-        pub mod decls ;
+        fn default_true () -> bool { true }
     };
 }
 
-decls!();
+default_true!();

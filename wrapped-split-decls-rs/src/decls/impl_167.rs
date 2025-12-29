@@ -1,0 +1,32 @@
+// STRUCTURED DECLARATION METADATA
+decl_metadata!({
+name: "impl_167",
+decl_type: "function",
+source_file: "./src/syn_mold.rs",
+source_crate: ".",
+deps: ["SynUsageVisitor", "ComplexityMetrics", "MoldExtraction", "PatternType", "SynSignature", "UsagePattern", "SynMold"],
+uses: ["Vec", "ParseQuote", "SynUsageVisitor", "AttributeProcessing", "Error", "Extract", "SynMoldCheck", "ComplexityMetrics", "Ok", "Parse", "MoldedParse", "File", "HashMap", "COMPLEXITY_SCORE", "PhantomData", "MoldExtraction", "OPERATION_TYPE", "PatternType", "TokenStreamGeneration", "SynSignature", "UsagePattern", "TokenStream", "MacroExpansion", "VisitMut", "Generate", "Result", "SynMold"],
+fields: [],
+generated_at: "2025-12-29 16:02:27 UTC"
+});
+
+macro_rules! deps {
+    () => {
+        SynUsageVisitor!();
+        ComplexityMetrics!();
+        MoldExtraction!();
+        PatternType!();
+        SynSignature!();
+        UsagePattern!();
+        SynMold!();
+    };
+}
+
+macro_rules! impl_167 {
+    () => {
+        deps!();
+        impl SynMold { pub fn new () -> Self { Self { signatures : Vec :: new () , complexity_metrics : ComplexityMetrics :: default () , usage_patterns : HashMap :: new () , } } # [doc = " Extract signature and complexity from syn-based code"] pub fn extract_mold (& mut self , input : TokenStream) -> Result < MoldExtraction , anyhow :: Error > { let syntax_tree : syn :: File = syn :: parse2 (input) ? ; let mut visitor = SynUsageVisitor :: new () ; visitor . visit_file (& syntax_tree) ; self . analyze_usage_patterns (& visitor) ; self . calculate_complexity (& visitor) ; self . extract_signatures (& visitor) ; Ok (MoldExtraction { original_code : syntax_tree , mold_wrapper : self . generate_mold_wrapper () ? , static_analysis : self . clone () , }) } # [doc = " Generate inside-out wrapper that can replace syn usage"] pub fn generate_mold_wrapper (& self) -> Result < TokenStream , anyhow :: Error > { Ok (quote ! { pub mod syn_mold_wrapper { use super ::*; pub trait SynMoldCheck { const COMPLEXITY_SCORE : f64 ; const OPERATION_TYPE : &'static str ; fn check_signature () -> bool ; fn extract_pattern () -> UsagePattern ; } pub fn mold_parse < T > () -> impl SynMoldCheck where T : syn :: parse :: Parse { MoldedParse ::< T > { complexity : 1.0 , phantom : std :: marker :: PhantomData , } } pub struct MoldedParse < T > { complexity : f64 , phantom : std :: marker :: PhantomData < T >, } impl < T > SynMoldCheck for MoldedParse < T > { const COMPLEXITY_SCORE : f64 = 1.0 ; const OPERATION_TYPE : &'static str = "parse" ; fn check_signature () -> bool { true } fn extract_pattern () -> UsagePattern { UsagePattern { pattern_type : PatternType :: ParseQuote , frequency : 1 , locations : vec ! ["compile_time" . to_string ()] , } } } } }) } fn analyze_usage_patterns (& mut self , visitor : & SynUsageVisitor) { for (pattern , locations) in & visitor . patterns { self . usage_patterns . insert (pattern . clone () , UsagePattern { pattern_type : self . classify_pattern (pattern) , frequency : locations . len () as u32 , locations : locations . clone () , }) ; } } fn calculate_complexity (& mut self , visitor : & SynUsageVisitor) { self . complexity_metrics . parse_operations = visitor . parse_calls ; self . complexity_metrics . visit_operations = visitor . visit_calls ; self . complexity_metrics . transform_operations = visitor . transform_calls ; self . complexity_metrics . generation_operations = visitor . generation_calls ; self . complexity_metrics . total_complexity = (self . complexity_metrics . parse_operations as f64 * 1.0) + (self . complexity_metrics . visit_operations as f64 * 2.0) + (self . complexity_metrics . transform_operations as f64 * 3.0) + (self . complexity_metrics . generation_operations as f64 * 2.5) ; } fn extract_signatures (& mut self , visitor : & SynUsageVisitor) { for operation in & visitor . operations { self . signatures . push (SynSignature { operation : operation . name . clone () , input_types : operation . input_types . clone () , output_types : operation . output_types . clone () , complexity_score : operation . complexity , dependencies : operation . dependencies . clone () , }) ; } } fn classify_pattern (& self , pattern : & str) -> PatternType { match pattern { p if p . contains ("parse") && p . contains ("quote") => PatternType :: ParseQuote , p if p . contains ("visit_mut") => PatternType :: VisitMut , p if p . contains ("TokenStream") => PatternType :: TokenStreamGeneration , p if p . contains ("attribute") => PatternType :: AttributeProcessing , p if p . contains ("macro") => PatternType :: MacroExpansion , _ => PatternType :: ParseQuote , } } }
+    };
+}
+
+impl_167!();

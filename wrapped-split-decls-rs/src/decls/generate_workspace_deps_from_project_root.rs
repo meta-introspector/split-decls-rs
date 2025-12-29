@@ -1,0 +1,19 @@
+// STRUCTURED DECLARATION METADATA
+decl_metadata!({
+name: "generate_workspace_deps_from_project_root",
+decl_type: "function",
+source_file: "./src/auto_workspace_generator.rs",
+source_crate: ".",
+deps: [],
+uses: ["Path", "Result", "Vec", "String", "Some", "DEBUG", "Ok"],
+fields: [],
+generated_at: "2025-12-29 16:02:27 UTC"
+});
+
+macro_rules! generate_workspace_deps_from_project_root {
+    () => {
+        pub fn generate_workspace_deps_from_project_root (project_root : & Path) -> Result < (Vec < String > , Vec < String >) > { println ! ("DEBUG: generate_workspace_deps_from_project_root called with: {}" , project_root . display ()) ; let mut workspace_deps = Vec :: new () ; let mut patch_entries = Vec :: new () ; let cargo_tomls = find_cargo_tomls (project_root) ? ; for cargo_path in cargo_tomls { if let Some (crate_info) = extract_crate_info (& cargo_path) ? { let relative_path = cargo_path . parent () . unwrap () . strip_prefix (project_root) ? . to_string_lossy () ; let dep_entry = format ! ("{} = {{ path = \"{}\" }}" , crate_info . name , relative_path) ; workspace_deps . push (dep_entry . clone ()) ; patch_entries . push (dep_entry) ; } } Ok ((workspace_deps , patch_entries)) }
+    };
+}
+
+generate_workspace_deps_from_project_root!();

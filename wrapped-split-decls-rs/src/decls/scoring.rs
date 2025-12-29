@@ -1,8 +1,8 @@
 // STRUCTURED DECLARATION METADATA
 decl_metadata!({
-name: "decls",
+name: "scoring",
 decl_type: "function",
-source_file: "./src/lib.rs",
+source_file: "./src/macro_analyzer_parts/mod.rs",
 source_crate: ".",
 deps: [],
 uses: [],
@@ -10,10 +10,10 @@ fields: [],
 generated_at: "2025-12-29 16:02:27 UTC"
 });
 
-macro_rules! decls {
+macro_rules! scoring {
     () => {
-        pub mod decls ;
+        pub mod scoring ;
     };
 }
 
-decls!();
+scoring!();

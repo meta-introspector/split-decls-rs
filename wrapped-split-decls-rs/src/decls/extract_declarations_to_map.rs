@@ -1,0 +1,26 @@
+// STRUCTURED DECLARATION METADATA
+decl_metadata!({
+name: "extract_declarations_to_map",
+decl_type: "function",
+source_file: "./src/eager_splitter.rs",
+source_crate: ".",
+deps: ["CratePaths"],
+uses: ["FILE", "Extracts", "CratePaths", "TokenStream", "Some", "Failed", "Result", "HashMap", "File", "Rust", "Ok", "String", "SOURCE", "PROCESSING"],
+fields: [],
+generated_at: "2025-12-29 16:02:27 UTC"
+});
+
+macro_rules! deps {
+    () => {
+        CratePaths!();
+    };
+}
+
+macro_rules! extract_declarations_to_map {
+    () => {
+        deps!();
+        # [doc = " Extracts declarations from a crate's source files and returns them as a map."] pub fn extract_declarations_to_map (paths : & CratePaths) -> Result < HashMap < String , TokenStream > > { let mut all_extracted_decls : HashMap < String , TokenStream > = HashMap :: new () ; for source_file in & paths . source_files { println ! ("🔍 PROCESSING SOURCE FILE: {}" , source_file . display ()) ; let file_content = fs :: read_to_string (source_file) . context (format ! ("Failed to read {}" , source_file . display ())) ? ; let syntax_tree : syn :: File = syn :: parse_file (& file_content) . context (format ! ("Failed to parse {} as Rust code" , source_file . display ())) ? ; let mut item_count = 0 ; for item in & syntax_tree . items { if let Some (decl) = declaration_extractor :: extract_single_declaration (item , item_count) { let unique_key = format ! ("{}_{}" , source_file . file_stem () . unwrap () . to_string_lossy () , decl . name) ; all_extracted_decls . insert (unique_key , decl . content) ; item_count += 1 ; } } } Ok (all_extracted_decls) }
+    };
+}
+
+extract_declarations_to_map!();

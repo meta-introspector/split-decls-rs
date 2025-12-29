@@ -1,6 +1,6 @@
 // STRUCTURED DECLARATION METADATA
 decl_metadata!({
-name: "decls",
+name: "conformal_field_theory",
 decl_type: "function",
 source_file: "./src/lib.rs",
 source_crate: ".",
@@ -10,10 +10,10 @@ fields: [],
 generated_at: "2025-12-29 16:02:27 UTC"
 });
 
-macro_rules! decls {
+macro_rules! conformal_field_theory {
     () => {
-        pub mod decls ;
+        pub mod conformal_field_theory ;
     };
 }
 
-decls!();
+conformal_field_theory!();

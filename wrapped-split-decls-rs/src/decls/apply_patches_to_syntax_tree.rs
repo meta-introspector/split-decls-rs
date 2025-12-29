@@ -1,6 +1,6 @@
 // STRUCTURED DECLARATION METADATA
 decl_metadata!({
-name: "decls",
+name: "apply_patches_to_syntax_tree",
 decl_type: "function",
 source_file: "./src/lib.rs",
 source_crate: ".",
@@ -10,10 +10,10 @@ fields: [],
 generated_at: "2025-12-29 16:02:27 UTC"
 });
 
-macro_rules! decls {
+macro_rules! apply_patches_to_syntax_tree {
     () => {
-        pub mod decls ;
+        pub mod apply_patches_to_syntax_tree ;
     };
 }
 
-decls!();
+apply_patches_to_syntax_tree!();

@@ -1,6 +1,6 @@
 // STRUCTURED DECLARATION METADATA
 decl_metadata!({
-name: "decls",
+name: "generate_wrapped_workspace",
 decl_type: "function",
 source_file: "./src/lib.rs",
 source_crate: ".",
@@ -10,10 +10,10 @@ fields: [],
 generated_at: "2025-12-29 16:02:27 UTC"
 });
 
-macro_rules! decls {
+macro_rules! generate_wrapped_workspace {
     () => {
-        pub mod decls ;
+        pub mod generate_wrapped_workspace ;
     };
 }
 
-decls!();
+generate_wrapped_workspace!();

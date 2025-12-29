@@ -1,6 +1,6 @@
 // STRUCTURED DECLARATION METADATA
 decl_metadata!({
-name: "decls",
+name: "resolve_crate_path_in_submodule",
 decl_type: "function",
 source_file: "./src/lib.rs",
 source_crate: ".",
@@ -10,10 +10,10 @@ fields: [],
 generated_at: "2025-12-29 16:02:27 UTC"
 });
 
-macro_rules! decls {
+macro_rules! resolve_crate_path_in_submodule {
     () => {
-        pub mod decls ;
+        pub mod resolve_crate_path_in_submodule ;
     };
 }
 
-decls!();
+resolve_crate_path_in_submodule!();

@@ -1,0 +1,29 @@
+// STRUCTURED DECLARATION METADATA
+decl_metadata!({
+name: "impl_154",
+decl_type: "function",
+source_file: "./src/bott_periodicity.rs",
+source_crate: ".",
+deps: ["AbstractionBundle", "BottLevel", "BottMap", "AbstractionContent"],
+uses: ["Concrete", "Apply", "AbstractionBundle", "Seven", "Dual", "Four", "Two", "BottLevel", "BottMap", "Vec", "Bott", "MetaPattern", "Zero", "AbstractionContent", "Quaternionic", "Six", "Meta"],
+fields: [],
+generated_at: "2025-12-29 16:02:27 UTC"
+});
+
+macro_rules! deps {
+    () => {
+        AbstractionBundle!();
+        BottLevel!();
+        BottMap!();
+        AbstractionContent!();
+    };
+}
+
+macro_rules! impl_154 {
+    () => {
+        deps!();
+        impl BottMap { # [doc = " Apply the Bott map: shift by 2 levels"] pub fn apply (bundle : AbstractionBundle) -> AbstractionBundle { let current_level = bundle . bott_level ; let new_level = BottLevel :: from_n ((current_level as usize + 2) % 8) ; let new_winding = if matches ! (new_level , BottLevel :: Zero) && ! matches ! (current_level , BottLevel :: Six | BottLevel :: Seven) { bundle . winding_number + 1 } else { bundle . winding_number } ; AbstractionBundle { bott_level : new_level , winding_number : new_winding , content : Self :: transform_content (bundle . content , new_level) , chern_classes : Self :: transform_chern_classes (& bundle . chern_classes) , } } fn transform_content (content : AbstractionContent , new_level : BottLevel) -> AbstractionContent { match (content , new_level) { (AbstractionContent :: Concrete (tokens) , BottLevel :: Two) => { AbstractionContent :: MetaPattern { meta_structure : format ! ("Meta({})" , tokens) , } } (AbstractionContent :: MetaPattern { meta_structure } , BottLevel :: Four) => { AbstractionContent :: Quaternionic { real_part : meta_structure . clone () , imag_parts : [format ! ("{}_i" , meta_structure) , format ! ("{}_j" , meta_structure) , format ! ("{}_k" , meta_structure) ,] , } } (AbstractionContent :: Quaternionic { real_part , .. } , BottLevel :: Six) => { AbstractionContent :: MetaPattern { meta_structure : format ! ("Dual({})" , real_part) , } } (AbstractionContent :: MetaPattern { meta_structure } , BottLevel :: Zero) => { let enriched = quote ! { # [lifted_from = # meta_structure] () } ; AbstractionContent :: Concrete (enriched) } (c , _) => c , } } fn transform_chern_classes (classes : & [i32]) -> Vec < i32 > { classes . iter () . map (| c | c + 1) . collect () } }
+    };
+}
+
+impl_154!();
