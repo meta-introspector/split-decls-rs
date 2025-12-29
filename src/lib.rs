@@ -1,6 +1,13 @@
 pub mod decls;
 pub use decls::*;
 
+pub mod macro_dep_extractor;
+pub use macro_dep_extractor::*;
+
+// Add missing modules that main.rs needs
+pub mod config_macros;
+pub use config_macros::*;
+
 // COMMENTED OUT: These includes cause 9k+ compilation errors
 // include!("output2_modules.rs");
 

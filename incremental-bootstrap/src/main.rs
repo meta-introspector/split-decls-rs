@@ -816,13 +816,34 @@ macro_rules! mkdeclfn {
     
     // Generate evaluation function
     eval_content.push_str(&format!(
-        "pub fn evaluate_{}() -> Result<(), Box<dyn std::error::Error>> {{\n",
+        "mkdeclfn! {{ fn evaluate_{}() -> Result<(), Box<dyn std::error::Error>> {{\n",
         bin_name
     ));
     eval_content.push_str("    println!(\"🚀 Evaluating recursive dependencies...\");\n");
     eval_content.push_str("    // All dependencies are now available\n");
     eval_content.push_str("    Ok(())\n");
-    eval_content.push_str("}\n");
+    eval_content.push_str("} }\n\n");
+    
+    // Generate mkbin! call with all findings
+    eval_content.push_str(&format!(
+        "mkbin! {{\n    binary: \"{}\",\n    dependencies: [\n",
+        bin_name
+    ));
+    
+    for (i, dep_id) in ordered.iter().enumerate() {
+        if let Some(node) = cache.nodes.get(dep_id) {
+            let path_str = node.path.to_string_lossy();
+            eval_content.push_str(&format!(
+                "        \"{}\", // dep-{}: {:x}\n",
+                path_str, i, node.content_hash
+            ));
+        }
+    }
+    
+    eval_content.push_str("    ],\n");
+    eval_content.push_str(&format!("    total_deps: {},\n", included_paths.len()));
+    eval_content.push_str(&format!("    cache_entries: {}\n", cache.nodes.len()));
+    eval_content.push_str("}}\n");
     
     let output_file = format!("../bootstrap3-incremental/{}_recursive_eval.rs", bin_name);
     fs::write(&output_file, eval_content)?;
