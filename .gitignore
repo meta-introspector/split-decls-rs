@@ -58,3 +58,11 @@ bootstrap3-incremental/dep-cache/
 bootstrap3-incremental/test-*/
 incremental-progress.toml
 index.toml
+# Generated analysis files (too large for git)
+*.json
+recursive_output.txt
+report2.txt
+*.mk
+trace_components.txt
+trace_summary.txt
+bootstrap3-incremental/
