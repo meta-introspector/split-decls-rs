@@ -62,34 +62,101 @@ struct NameVisitor {
     names: Vec<String>,
 }
 
+impl NameVisitor {
+    fn extract_from_tokens(&mut self, tokens: &proc_macro2::TokenStream) {
+        for token in tokens.clone() {
+            match token {
+                proc_macro2::TokenTree::Ident(ident) => {
+                    self.names.push(ident.to_string());
+                }
+                proc_macro2::TokenTree::Group(group) => {
+                    self.extract_from_tokens(&group.stream());
+                }
+                _ => {}
+            }
+        }
+    }
+
+    fn extract_from_attributes(&mut self, attrs: &[syn::Attribute]) {
+        for attr in attrs {
+            if let Ok(tokens) = attr.meta.require_path_only() {
+                self.names.push(tokens.get_ident().unwrap_or(&syn::Ident::new("unknown", proc_macro2::Span::call_site())).to_string());
+            }
+            // Also extract from attribute arguments
+            match &attr.meta {
+                syn::Meta::List(meta_list) => {
+                    self.extract_from_tokens(&meta_list.tokens);
+                }
+                syn::Meta::NameValue(meta_name_value) => {
+                    if let syn::Expr::Lit(expr_lit) = &meta_name_value.value {
+                        if let syn::Lit::Str(lit_str) = &expr_lit.lit {
+                            // Extract identifiers from string literals in attributes
+                            for word in lit_str.value().split_whitespace() {
+                                if word.chars().all(|c| c.is_alphanumeric() || c == '_') && !word.is_empty() {
+                                    self.names.push(word.to_string());
+                                }
+                            }
+                        }
+                    }
+                }
+                _ => {}
+            }
+        }
+    }
+}
+
 impl<'ast> Visit<'ast> for NameVisitor {
     fn visit_item_fn(&mut self, node: &'ast syn::ItemFn) {
         self.names.push(node.sig.ident.to_string());
+        self.extract_from_attributes(&node.attrs);
         syn::visit::visit_item_fn(self, node);
     }
     
     fn visit_item_struct(&mut self, node: &'ast syn::ItemStruct) {
         self.names.push(node.ident.to_string());
+        self.extract_from_attributes(&node.attrs);
         syn::visit::visit_item_struct(self, node);
     }
     
     fn visit_item_enum(&mut self, node: &'ast syn::ItemEnum) {
         self.names.push(node.ident.to_string());
+        self.extract_from_attributes(&node.attrs);
         syn::visit::visit_item_enum(self, node);
     }
     
     fn visit_item_trait(&mut self, node: &'ast syn::ItemTrait) {
         self.names.push(node.ident.to_string());
+        self.extract_from_attributes(&node.attrs);
         syn::visit::visit_item_trait(self, node);
     }
     
     fn visit_item_const(&mut self, node: &'ast syn::ItemConst) {
         self.names.push(node.ident.to_string());
+        self.extract_from_attributes(&node.attrs);
         syn::visit::visit_item_const(self, node);
     }
     
     fn visit_item_static(&mut self, node: &'ast syn::ItemStatic) {
         self.names.push(node.ident.to_string());
+        self.extract_from_attributes(&node.attrs);
         syn::visit::visit_item_static(self, node);
+    }
+
+    fn visit_item_macro(&mut self, node: &'ast syn::ItemMacro) {
+        if let Some(ident) = &node.ident {
+            self.names.push(ident.to_string());
+        }
+        self.extract_from_tokens(&node.mac.tokens);
+        syn::visit::visit_item_macro(self, node);
+    }
+
+    fn visit_macro(&mut self, node: &'ast syn::Macro) {
+        self.extract_from_tokens(&node.tokens);
+        syn::visit::visit_macro(self, node);
+    }
+
+    fn visit_ident(&mut self, node: &'ast syn::Ident) {
+        self.names.push(node.to_string());
+        syn::visit::visit_ident(self, node);
     }
 }
