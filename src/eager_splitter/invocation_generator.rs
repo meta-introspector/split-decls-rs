@@ -29,7 +29,7 @@ pub fn generate_decl_module_invocation(
 
     let decl_invocation_file_path = paths.decls_output_dir.join("_decl_module_invocation.rs");
     if !dry_run {
-        add_generated_rust_header_with_result!(
+        crate::add_generated_rust_header_with_result!(
             &decl_invocation_file_path,
             final_decl_module_code.to_string().as_str(),
             file!(),
