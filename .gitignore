@@ -52,6 +52,9 @@ partition1-crate/
 
 # Incremental build artifacts
 incremental-crates/
-bootstrap3-incremental/
+bootstrap3-incremental/module_*.rs
+bootstrap3-incremental/output2_index.json
+bootstrap3-incremental/dep-cache/
+bootstrap3-incremental/test-*/
 incremental-progress.toml
 index.toml

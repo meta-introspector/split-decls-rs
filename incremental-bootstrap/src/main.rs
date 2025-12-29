@@ -6,7 +6,7 @@ use std::fs;
 use std::path::Path;
 use std::process::Command;
 use clap::{Parser, Subcommand};
-use syn::{visit::Visit, Item, Ident, File as SynFile};
+use syn::{visit::Visit, Item, Ident, File as SynFile, UseTree, UsePath, UseGroup};
 use std::collections::hash_map::DefaultHasher;
 use std::hash::{Hash, Hasher};
 
@@ -445,6 +445,16 @@ impl<'ast> Visit<'ast> for TokenVisitor {
     }
 }
 
+struct ImportVisitor {
+    imports: Vec<String>,
+}
+
+impl<'ast> Visit<'ast> for ImportVisitor {
+    fn visit_item_use(&mut self, node: &'ast syn::ItemUse) {
+        self.imports.push(quote::quote!(#node).to_string());
+    }
+}
+
 fn scan_output2_for_tokens(tokens: &HashSet<String>, resolved: &mut HashMap<String, Vec<std::path::PathBuf>>) -> Result<(), Box<dyn std::error::Error>> {
     println!("🔍 Scanning output2 for {} tokens...", tokens.len());
     
@@ -518,6 +528,98 @@ struct DepNode {
     content_hash: u64,
     tokens: HashSet<String>,
     resolved_deps: Vec<String>,
+}
+
+struct Output2Index {
+    declarations: HashMap<String, Vec<std::path::PathBuf>>, // token -> paths
+    cache_file: std::path::PathBuf,
+}
+
+impl Output2Index {
+    fn new() -> Self {
+        Self {
+            declarations: HashMap::new(),
+            cache_file: std::path::PathBuf::from("../bootstrap3-incremental/output2_index.json"),
+        }
+    }
+
+    fn load_or_build(&mut self) -> Result<(), Box<dyn std::error::Error>> {
+        // Try to load from cache first
+        if self.cache_file.exists() {
+            if let Ok(content) = fs::read_to_string(&self.cache_file) {
+                if let Ok(cached) = serde_json::from_str::<HashMap<String, Vec<String>>>(&content) {
+                    self.declarations = cached.into_iter()
+                        .map(|(k, v)| (k, v.into_iter().map(std::path::PathBuf::from).collect()))
+                        .collect();
+                    println!("📋 Loaded output2 index from cache ({} tokens)", self.declarations.len());
+                    return Ok(());
+                }
+            }
+        }
+
+        // Build index from scratch
+        println!("🔍 Building output2 index (one-time scan)...");
+        self.scan_all_output2()?;
+        self.save_cache()?;
+        println!("✅ Built output2 index ({} tokens)", self.declarations.len());
+        Ok(())
+    }
+
+    fn scan_all_output2(&mut self) -> Result<(), Box<dyn std::error::Error>> {
+        for entry in fs::read_dir("../output2")? {
+            let entry = entry?;
+            if entry.file_type()?.is_dir() {
+                let decls_dir = entry.path().join("src/decls");
+                if decls_dir.exists() {
+                    self.scan_decls_recursive(&decls_dir)?;
+                }
+            }
+        }
+        Ok(())
+    }
+
+    fn scan_decls_recursive(&mut self, dir: &std::path::Path) -> Result<(), Box<dyn std::error::Error>> {
+        for entry in fs::read_dir(dir)? {
+            let entry = entry?;
+            let path = entry.path();
+            
+            if path.is_file() && path.extension().map_or(false, |ext| ext == "rs") {
+                if let Ok(content) = fs::read_to_string(&path) {
+                    // Extract tokens from filename and content
+                    if let Some(file_stem) = path.file_stem().and_then(|s| s.to_str()) {
+                        self.declarations.entry(file_stem.to_string())
+                            .or_insert_with(Vec::new)
+                            .push(path.clone());
+                    }
+                    
+                    // Extract common type names from content
+                    for token in ["Path", "File", "Item", "fs", "env", "ToTokens", "HashMap", "Vec", "String", "Result"] {
+                        if content.contains(token) {
+                            self.declarations.entry(token.to_string())
+                                .or_insert_with(Vec::new)
+                                .push(path.clone());
+                        }
+                    }
+                }
+            } else if path.is_dir() {
+                self.scan_decls_recursive(&path)?;
+            }
+        }
+        Ok(())
+    }
+
+    fn save_cache(&self) -> Result<(), Box<dyn std::error::Error>> {
+        let cache_data: HashMap<String, Vec<String>> = self.declarations.iter()
+            .map(|(k, v)| (k.clone(), v.iter().map(|p| p.to_string_lossy().to_string()).collect()))
+            .collect();
+        let json = serde_json::to_string_pretty(&cache_data)?;
+        fs::write(&self.cache_file, json)?;
+        Ok(())
+    }
+
+    fn resolve(&self, token: &str) -> Option<&Vec<std::path::PathBuf>> {
+        self.declarations.get(token)
+    }
 }
 
 struct DepCache {
@@ -594,6 +696,10 @@ struct CachedNode {
 fn recursive_dependency_analysis(bin_name: &str, max_depth: usize) -> Result<(), Box<dyn std::error::Error>> {
     println!("🔄 Recursive dependency analysis for: {} (depth: {})", bin_name, max_depth);
     
+    // Build output2 index once
+    let mut index = Output2Index::new();
+    index.load_or_build()?;
+    
     let mut cache = DepCache::new();
     let mut processed = HashSet::new();
     let mut to_process = Vec::new();
@@ -614,17 +720,17 @@ fn recursive_dependency_analysis(bin_name: &str, max_depth: usize) -> Result<(),
         println!("📊 Processing {} at depth {}", current_id, depth);
         
         let node = cache.nodes.get(&current_id).unwrap();
-        let mut resolved_deps = HashMap::new();
+        let tokens = node.tokens.clone(); // Clone to avoid borrow issues
         
-        // Find dependencies for this node's tokens
-        scan_output2_for_tokens(&node.tokens, &mut resolved_deps)?;
-        
+        // Use index to resolve dependencies instead of scanning
         let mut dep_ids = Vec::new();
-        for (token, paths) in resolved_deps {
-            if let Some(first_path) = paths.first() {
-                let dep_id = cache.get_or_compute(first_path)?;
-                dep_ids.push(dep_id.clone());
-                to_process.push((dep_id, depth + 1));
+        for token in &tokens {
+            if let Some(paths) = index.resolve(token) {
+                if let Some(first_path) = paths.first() {
+                    let dep_id = cache.get_or_compute(first_path)?;
+                    dep_ids.push(dep_id.clone());
+                    to_process.push((dep_id, depth + 1));
+                }
             }
         }
         
@@ -634,7 +740,7 @@ fn recursive_dependency_analysis(bin_name: &str, max_depth: usize) -> Result<(),
     }
     
     // Generate final evaluation
-    generate_evaluation_result(bin_name, &dependency_tree, &cache)?;
+    generate_evaluation_result(bin_name, &dependency_tree, &cache, &index)?;
     
     println!("🎯 Recursive analysis complete!");
     println!("   Processed {} unique nodes", processed.len());
@@ -646,7 +752,8 @@ fn recursive_dependency_analysis(bin_name: &str, max_depth: usize) -> Result<(),
 fn generate_evaluation_result(
     bin_name: &str, 
     tree: &HashMap<String, Vec<String>>, 
-    cache: &DepCache
+    cache: &DepCache,
+    index: &Output2Index
 ) -> Result<(), Box<dyn std::error::Error>> {
     println!("📝 Generating evaluation result...");
     
@@ -656,6 +763,12 @@ fn generate_evaluation_result(
     // Add macro definitions first
     eval_content.push_str(r#"// Macro definitions
 macro_rules! mkdeclfn {
+    (fn $name:ident($($args:tt)*) -> Result<()> { $($body:tt)* }) => {
+        pub fn $name($($args)*) -> Result<(), Box<dyn std::error::Error>> {
+            println!("🔧 Calling function: {}", stringify!($name));
+            $($body)*
+        }
+    };
     (fn $name:ident($($args:tt)*) -> $ret:ty { $($body:tt)* }) => {
         pub fn $name($($args)*) -> $ret {
             println!("🔧 Calling function: {}", stringify!($name));
@@ -682,9 +795,19 @@ macro_rules! mkdeclfn {
                 let abs_path = std::fs::canonicalize(&node.path)
                     .unwrap_or_else(|_| node.path.clone());
                 let mod_name = format!("dep_mod_{}", i);
+                // Extract content and recursively resolve all dependencies
+                let content = fs::read_to_string(&abs_path).unwrap_or_default();
+                let (original_imports, clean_content) = extract_imports_and_content(&content)?;
+                
+                // Recursively resolve all missing dependencies from the content
+                let mut resolved_includes = String::new();
+                let mut visited = HashSet::new();
+                let mut glossary = HashMap::new();
+                resolve_dependencies_recursive(&clean_content, index, &mut resolved_includes, &mut visited, 0, &mut glossary)?;
+                
                 eval_content.push_str(&format!(
-                    "// Dep: {} (hash: {:x})\nmod {} {{\n    use serde::{{Deserialize, Serialize}};\n    use std::collections::HashMap;\n    use std::{{fs, env}};\n    use std::path::Path;\n    use syn::{{File, Item}};\n    use quote::ToTokens;\n    include!(\"{}\");\n}}\npub use {}::*;\n\n",
-                    dep_id, node.content_hash, mod_name, abs_path.display(), mod_name
+                    "// Dep: {} (hash: {:x})\nmod {} {{\n{}\n{}\n{}\n}}\npub use {}::*;\n\n",
+                    dep_id, node.content_hash, mod_name, original_imports, resolved_includes, clean_content, mod_name
                 ));
                 included_paths.insert(node.path.clone());
             }
@@ -717,8 +840,16 @@ macro_rules! mkdeclfn {
     let manifest_file = format!("../bootstrap3-incremental/{}_manifest.json", bin_name);
     fs::write(&manifest_file, manifest)?;
     
+    // Generate glossary of all resolved dependencies
+    let mut all_glossary: HashMap<String, String> = HashMap::new();
+    // Collect glossary from all modules (simplified for now)
+    let glossary_content = serde_json::to_string_pretty(&all_glossary)?;
+    let glossary_file = format!("../bootstrap3-incremental/{}_glossary.json", bin_name);
+    fs::write(&glossary_file, glossary_content)?;
+    
     println!("✅ Evaluation saved to: {}", output_file);
     println!("📋 Manifest saved to: {}", manifest_file);
+    println!("📚 Glossary saved to: {}", glossary_file);
     println!("📈 Total unique dependencies: {}", included_paths.len());
     
     Ok(())
@@ -963,6 +1094,108 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {{
         if stderr.contains("cannot find") {
             println!("\n🔍 Dependency resolution issues detected.");
             println!("This suggests the topological ordering or token resolution needs improvement.");
+        }
+    }
+    
+    Ok(())
+}
+fn extract_imports_and_content(content: &str) -> Result<(String, String), Box<dyn std::error::Error>> {
+    if let Ok(ast) = syn::parse_file(content) {
+        let mut import_visitor = ImportVisitor { imports: Vec::new() };
+        import_visitor.visit_file(&ast);
+        
+        // Extract non-use items
+        let mut non_use_items = Vec::new();
+        for item in &ast.items {
+            if !matches!(item, syn::Item::Use(_)) {
+                non_use_items.push(quote::quote!(#item).to_string());
+            }
+        }
+        
+        let imports_str = import_visitor.imports.join("\n    ");
+        let content_str = non_use_items.join("\n\n    ");
+        
+        Ok((
+            if imports_str.is_empty() { String::new() } else { format!("    {}", imports_str) },
+            if content_str.is_empty() { String::new() } else { format!("    {}", content_str) }
+        ))
+    } else {
+        // Fallback: return content as-is
+        Ok((String::new(), format!("    {}", content)))
+    }
+}
+fn find_missing_types(content: &str) -> HashSet<String> {
+    let mut missing = HashSet::new();
+    
+    // Extract all potential identifiers from content automatically
+    let words: Vec<&str> = content.split_whitespace().collect();
+    
+    for window in words.windows(2) {
+        if window[1] == "::" {
+            // Found "Something ::" pattern - likely a type or module
+            let identifier = window[0].trim_matches(|c: char| !c.is_alphanumeric() && c != '_');
+            if !identifier.is_empty() {
+                missing.insert(identifier.to_string());
+            }
+        }
+    }
+    
+    // Look for macro calls ending with !
+    for word in &words {
+        if word.ends_with('!') {
+            let macro_name = word.trim_end_matches('!').trim_matches(|c: char| !c.is_alphanumeric() && c != '_');
+            if !macro_name.is_empty() {
+                missing.insert(macro_name.to_string());
+            }
+        }
+    }
+    
+    // Look for standalone capitalized identifiers (likely types)
+    for word in &words {
+        let clean_word = word.trim_matches(|c: char| !c.is_alphanumeric() && c != '_');
+        if !clean_word.is_empty() && clean_word.chars().next().unwrap().is_uppercase() && clean_word.len() > 2 {
+            missing.insert(clean_word.to_string());
+        }
+    }
+    
+    missing
+}
+
+fn resolve_dependencies_recursive(
+    content: &str, 
+    index: &Output2Index, 
+    resolved_includes: &mut String, 
+    visited: &mut HashSet<String>,
+    depth: usize,
+    glossary: &mut HashMap<String, String>
+) -> Result<(), Box<dyn std::error::Error>> {
+    if depth > 3 { // Stack overflow protection
+        return Ok(());
+    }
+    
+    let missing_types = find_missing_types(content);
+    
+    for token in missing_types {
+        if visited.contains(&token) {
+            continue; // Already resolved
+        }
+        visited.insert(token.clone());
+        
+        if let Some(paths) = index.resolve(&token) {
+            if let Some(first_path) = paths.first() {
+                let abs_path = std::fs::canonicalize(first_path).unwrap_or_else(|_| first_path.clone());
+                println!("🔗 Resolving {} -> {}", token, abs_path.display());
+                
+                // Add to glossary
+                glossary.insert(token.clone(), abs_path.to_string_lossy().to_string());
+                
+                resolved_includes.push_str(&format!("    include!(\"{}\"); // for {}\n", abs_path.display(), token));
+                
+                // Recursively resolve dependencies of this dependency
+                if let Ok(dep_content) = fs::read_to_string(first_path) {
+                    resolve_dependencies_recursive(&dep_content, index, resolved_includes, visited, depth + 1, glossary)?;
+                }
+            }
         }
     }
     
