@@ -38,6 +38,7 @@ The codebase has undergone significant quality improvements and **SUCCESSFUL ECO
 - **100% Resolution Rate**: Achieved complete dependency resolution for rustc functions (up from 3.1% success rate)
 - **Recursive Dependency Analysis**: Full transitive dependency resolution discovering 12,511 dependencies from initial rustc terms
 - **Comprehensive Name Index**: 141,578 indexed names across the entire codebase with fast lookup capabilities
+- **Macro-Based Execution**: Generated callable macros for each dependency that include and execute the actual source files
 
 #### 🔍 Advanced Analysis & Audit Infrastructure
 - **Bootstrap Auditing System**: Complete syscall analysis and trait generation for security auditing
@@ -288,6 +289,23 @@ cargo run --bin recursive_resolver
 # Results: 12,511+ resolved dependencies across entire codebase
 ```
 
+#### Macro Generation and Execution
+```bash
+# Generate callable macros for all resolved dependencies
+cargo run --bin generate_dependency_macros
+
+# Creates dependency_macros.rs with call_<name>!() macros for each dependency
+# Each macro includes the actual source file and executes the dependency
+
+# Execute all dependencies via generated macros
+cargo run --bin rustc_macro_executor
+
+# Or use in your own code:
+# include!("dependency_macros.rs");
+# execute_all_deps!();  // Calls all 12,511 dependency macros
+# call_specific_dep!(); // Call individual dependency macro
+```
+
 #### Syn Parsing Validation
 ```bash
 # Test enhanced syn parsing capabilities
@@ -302,12 +320,31 @@ cargo run --bin test_syn_parsing
 - **100% Resolution Rate**: Complete dependency resolution for rustc functions
 - **Recursive Analysis**: Full transitive dependency discovery
 - **Fast Lookup**: Comprehensive name index for instant dependency resolution
+- **Macro-Based Execution**: Each dependency becomes a callable macro that includes its source file
 
 ### Output Files
 
 - `name_index.json`: Fast lookup index (141,578+ names)
 - `recursive_dependencies.json`: Complete dependency graph (12,511+ dependencies)
+- `dependency_macros.rs`: Generated callable macros for all dependencies
 - `missing_content_report.json`: Analysis of unresolved dependencies (now 0 missing)
+
+### Usage Example
+
+```rust
+// Include generated macros
+include!("dependency_macros.rs");
+
+fn main() {
+    // Execute all dependencies
+    execute_all_deps!();
+    
+    // Or call specific dependencies
+    call_get_resident_set_size!();
+    call_TimePassesCallbacks!();
+    call_run_compiler!();
+}
+```
 
 ## Testing 
 

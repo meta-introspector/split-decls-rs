@@ -3,7 +3,7 @@ use clap::{Arg, Command};
 use std::fs;
 use std::path::Path;
 
-use split_decls_rs::signature_compressor::{SignatureCompressor, SignatureLookup};
+//use split_decls_rs::signature_compressor::{SignatureCompressor, SignatureLookup};
 
 fn main() -> Result<()> {
     let matches = 
