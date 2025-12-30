@@ -1,0 +1,40 @@
+// Generated module macro for crate::lint_tail_expr_drop_order
+macro_rules! Modcrate_lint_tail_expr_drop_order {
+() => {
+        Depcrate_lint_tail_expr_drop_orderuse_182!();
+        Depcrate_lint_tail_expr_drop_orderuse_183!();
+        Depcrate_lint_tail_expr_drop_orderuse_184!();
+        Depcrate_lint_tail_expr_drop_orderuse_185!();
+        Depcrate_lint_tail_expr_drop_orderuse_186!();
+        Depcrate_lint_tail_expr_drop_orderuse_187!();
+        Depcrate_lint_tail_expr_drop_orderuse_188!();
+        Depcrate_lint_tail_expr_drop_orderuse_189!();
+        Depcrate_lint_tail_expr_drop_orderuse_190!();
+        Depcrate_lint_tail_expr_drop_orderuse_191!();
+        Depcrate_lint_tail_expr_drop_orderuse_192!();
+        Depcrate_lint_tail_expr_drop_orderuse_193!();
+        Depcrate_lint_tail_expr_drop_orderuse_194!();
+        Depcrate_lint_tail_expr_drop_orderuse_195!();
+        Depcrate_lint_tail_expr_drop_orderuse_196!();
+        Depcrate_lint_tail_expr_drop_orderuse_197!();
+        Depcrate_lint_tail_expr_drop_orderuse_198!();
+        Depcrate_lint_tail_expr_drop_orderuse_199!();
+        Depcrate_lint_tail_expr_drop_orderuse_200!();
+        Depcrate_lint_tail_expr_drop_orderuse_201!();
+        Depcrate_lint_tail_expr_drop_orderuse_202!();
+        Depcrate_lint_tail_expr_drop_orderuse_203!();
+        Depcrate_lint_tail_expr_drop_orderuse_204!();
+        Depcrate_lint_tail_expr_drop_orderplace_has_common_prefix!();
+        Depcrate_lint_tail_expr_drop_orderMovePathIndexAtBlock!();
+        Depcrate_lint_tail_expr_drop_orderDropsReachable!();
+        Depcrate_lint_tail_expr_drop_orderimpl_208!();
+        Depcrate_lint_tail_expr_drop_orderplace_descendent_of_bids!();
+        Depcrate_lint_tail_expr_drop_orderrun_lint!();
+        Depcrate_lint_tail_expr_drop_ordercollect_user_names!();
+        Depcrate_lint_tail_expr_drop_orderassign_observables_names!();
+        Depcrate_lint_tail_expr_drop_orderTailExprDropOrderLint!();
+        Depcrate_lint_tail_expr_drop_orderLocalLabel!();
+        Depcrate_lint_tail_expr_drop_orderimpl_215!();
+        Depcrate_lint_tail_expr_drop_orderDestructorLabel!();
+    };
+}

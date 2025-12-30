@@ -1,0 +1,40 @@
+// Generated module macro for crate::sorted_linked_list
+macro_rules! Modcrate_sorted_linked_list {
+() => {
+        Depcrate_sorted_linked_listuse_496!();
+        Depcrate_sorted_linked_listuse_497!();
+        Depcrate_sorted_linked_liststorage!();
+        Depcrate_sorted_linked_listuse_499!();
+        Depcrate_sorted_linked_listuse_500!();
+        Depcrate_sorted_linked_listMin!();
+        Depcrate_sorted_linked_listMax!();
+        Depcrate_sorted_linked_listKind!();
+        Depcrate_sorted_linked_listimpl_504!();
+        Depcrate_sorted_linked_listimpl_505!();
+        Depcrate_sorted_linked_listprivate!();
+        Depcrate_sorted_linked_listimpl_507!();
+        Depcrate_sorted_linked_listimpl_508!();
+        Depcrate_sorted_linked_listNode!();
+        Depcrate_sorted_linked_listSortedLinkedListInner!();
+        Depcrate_sorted_linked_listSortedLinkedList!();
+        Depcrate_sorted_linked_listSortedLinkedListView!();
+        Depcrate_sorted_linked_listimpl_const_new!();
+        Depcrate_sorted_linked_listmacro_514!();
+        Depcrate_sorted_linked_listmacro_515!();
+        Depcrate_sorted_linked_listmacro_516!();
+        Depcrate_sorted_linked_listimpl_517!();
+        Depcrate_sorted_linked_listimpl_518!();
+        Depcrate_sorted_linked_listimpl_519!();
+        Depcrate_sorted_linked_listIterView!();
+        Depcrate_sorted_linked_listimpl_521!();
+        Depcrate_sorted_linked_listFindMutView!();
+        Depcrate_sorted_linked_listimpl_523!();
+        Depcrate_sorted_linked_listimpl_524!();
+        Depcrate_sorted_linked_listimpl_525!();
+        Depcrate_sorted_linked_listimpl_526!();
+        Depcrate_sorted_linked_listimpl_527!();
+        Depcrate_sorted_linked_listimpl_528!();
+        Depcrate_sorted_linked_listimpl_529!();
+        Depcrate_sorted_linked_listtests!();
+    };
+}

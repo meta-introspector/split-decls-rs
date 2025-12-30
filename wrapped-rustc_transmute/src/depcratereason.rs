@@ -1,0 +1,9 @@
+// Generated macro for Reason (enum)
+macro_rules! DepcrateReason {
+() => {
+// Module: crate
+// Provides: {"Reason"}
+// Dependencies: {}
+# [doc = " Answers \"why wasn't the source type transmutable into the destination type?\""] # [derive (Debug , Hash , Eq , PartialEq , PartialOrd , Ord , Clone)] pub enum Reason < T > { # [doc = " The layout of the source type is not yet supported."] SrcIsNotYetSupported , # [doc = " The layout of the destination type is not yet supported."] DstIsNotYetSupported , # [doc = " The layout of the destination type is bit-incompatible with the source type."] DstIsBitIncompatible , # [doc = " The destination type is uninhabited."] DstUninhabited , # [doc = " The destination type may carry safety invariants."] DstMayHaveSafetyInvariants , # [doc = " `Dst` is larger than `Src`, and the excess bytes were not exclusively uninitialized."] DstIsTooBig , # [doc = " `Dst` is larger `Src`."] DstRefIsTooBig { # [doc = " The referent of the source type."] src : T , # [doc = " The size of the source type's referent."] src_size : usize , # [doc = " The too-large referent of the destination type."] dst : T , # [doc = " The size of the destination type's referent."] dst_size : usize , } , # [doc = " Src should have a stricter alignment than Dst, but it does not."] DstHasStricterAlignment { src_min_align : usize , dst_min_align : usize } , # [doc = " Can't go from shared pointer to unique pointer"] DstIsMoreUnique , # [doc = " Encountered a type error"] TypeError , # [doc = " The layout of src is unknown"] SrcLayoutUnknown , # [doc = " The layout of dst is unknown"] DstLayoutUnknown , # [doc = " The size of src is overflow"] SrcSizeOverflow , # [doc = " The size of dst is overflow"] DstSizeOverflow , }
+};
+}

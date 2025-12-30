@@ -1,0 +1,9 @@
+// Generated macro for MAX_INLINE_ENTRIES (const)
+macro_rules! Depcrate_utils_poll_state_vecMAX_INLINE_ENTRIES {
+() => {
+// Module: crate::utils::poll_state::vec
+// Provides: {"MAX_INLINE_ENTRIES"}
+// Dependencies: {}
+# [doc = " The maximum number of entries that `PollStates` can store without"] # [doc = " dynamic memory allocation."] # [doc = ""] # [doc = " The heap variant is the minimum size the data structure can have."] # [doc = " It consists of a boxed slice (=2 usizes) and space for the enum"] # [doc = " tag (another usize because of padding), so 3 usizes."] # [doc = " The inline variant then consists of `3 * size_of(usize) - 2` entries."] # [doc = " Each entry is a byte and we subtract one byte for a length field,"] # [doc = " and another byte for the enum tag."] # [doc = ""] # [doc = " ```txt"] # [doc = "                                 Boxed"] # [doc = "                                 vvvvv"] # [doc = " tag"] # [doc = "  | <-------padding----> <--- Box<[T]>::len ---> <--- Box<[T]>::ptr --->"] # [doc = " 00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23  <bytes"] # [doc = "  |  | <------------------- entries ----------------------------------->"] # [doc = " tag |"] # [doc = "    len                          ^^^^^"] # [doc = "                                 Inline"] # [doc = " ```"] const MAX_INLINE_ENTRIES : usize = core :: mem :: size_of :: < usize > () * 3 - 2 ;
+};
+}

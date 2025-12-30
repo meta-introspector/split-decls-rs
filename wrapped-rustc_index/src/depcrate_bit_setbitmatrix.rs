@@ -1,0 +1,9 @@
+// Generated macro for BitMatrix (struct)
+macro_rules! Depcrate_bit_setBitMatrix {
+() => {
+// Module: crate::bit_set
+// Provides: {"BitMatrix"}
+// Dependencies: {}
+# [doc = " A fixed-size 2D bit matrix type with a dense representation."] # [doc = ""] # [doc = " `R` and `C` are index types used to identify rows and columns respectively;"] # [doc = " typically newtyped `usize` wrappers, but they can also just be `usize`."] # [doc = ""] # [doc = " All operations that involve a row and/or column index will panic if the"] # [doc = " index exceeds the relevant bound."] # [cfg_attr (feature = "nightly" , derive (Decodable_NoContext , Encodable_NoContext))] # [derive (Clone , Eq , PartialEq , Hash)] pub struct BitMatrix < R : Idx , C : Idx > { num_rows : usize , num_columns : usize , words : SmallVec < [Word ; 2] > , marker : PhantomData < (R , C) > , }
+};
+}

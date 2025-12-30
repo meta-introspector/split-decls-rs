@@ -1,0 +1,45 @@
+// Generated module macro for crate::functions
+macro_rules! Modcrate_functions {
+() => {
+        Depcrate_functionsuse_195!();
+        Depcrate_functionsuse_196!();
+        Depcrate_functionsuse_197!();
+        Depcrate_functionsuse_198!();
+        Depcrate_functionsuse_199!();
+        Depcrate_functionsuse_200!();
+        Depcrate_functionsuse_201!();
+        Depcrate_functionsuse_202!();
+        Depcrate_functionsuse_203!();
+        Depcrate_functionsuse_204!();
+        Depcrate_functionsuse_205!();
+        Depcrate_functionsuse_206!();
+        Depcrate_functionsuse_207!();
+        Depcrate_functionsuse_208!();
+        Depcrate_functionsuse_209!();
+        Depcrate_functionsreport_error!();
+        Depcrate_functionsContext!();
+        Depcrate_functionsimpl_212!();
+        Depcrate_functionsConnectionRef!();
+        Depcrate_functionsimpl_214!();
+        Depcrate_functionsAuxInner!();
+        Depcrate_functionsSubType!();
+        Depcrate_functionsSqlFnOutput!();
+        Depcrate_functionsimpl_218!();
+        Depcrate_functionsimpl_219!();
+        Depcrate_functionsSqlFnArg!();
+        Depcrate_functionsimpl_221!();
+        Depcrate_functionssql_result!();
+        Depcrate_functionsAggregate!();
+        Depcrate_functionsWindowAggregate!();
+        Depcrate_functionsmacro_225!();
+        Depcrate_functionsimpl_226!();
+        Depcrate_functionsimpl_227!();
+        Depcrate_functionsimpl_228!();
+        Depcrate_functionsaggregate_context!();
+        Depcrate_functionscall_boxed_step!();
+        Depcrate_functionscall_boxed_inverse!();
+        Depcrate_functionscall_boxed_final!();
+        Depcrate_functionscall_boxed_value!();
+        Depcrate_functionstest!();
+    };
+}

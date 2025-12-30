@@ -1,0 +1,9 @@
+// Generated macro for find_all_rust_files (function)
+macro_rules! Depcrate_eager_splitterfind_all_rust_files {
+() => {
+// Module: crate::eager_splitter
+// Provides: {"find_all_rust_files"}
+// Dependencies: {}
+# [doc = " Recursively finds all .rs files in src directory that cargo would build"] fn find_all_rust_files (src_dir : & std :: path :: Path) -> Result < Vec < std :: path :: PathBuf > > { let mut rust_files = Vec :: new () ; if ! src_dir . exists () { return Ok (rust_files) ; } for entry in std :: fs :: read_dir (src_dir) ? { let entry = entry ? ; let path = entry . path () ; if path . is_file () && path . extension () . map_or (false , | ext | ext == "rs") { rust_files . push (path) ; } else if path . is_dir () { rust_files . extend (find_all_rust_files (& path) ?) ; } } Ok (rust_files) }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for strip_prefix (function)
+macro_rules! Depcrate_builder_expr_as_placestrip_prefix {
+() => {
+// Module: crate::builder::expr::as_place
+// Provides: {"strip_prefix"}
+// Dependencies: {}
+# [doc = " Returns projections remaining after stripping an initial prefix of HIR"] # [doc = " projections."] # [doc = ""] # [doc = " Supports only HIR projection kinds that represent a path that might be"] # [doc = " captured by a closure or a coroutine, i.e., an `Index` or a `Subslice`"] # [doc = " projection kinds are unsupported."] fn strip_prefix < 'tcx > (mut base_ty : Ty < 'tcx > , projections : & [PlaceElem < 'tcx >] , prefix_projections : & [HirProjection < 'tcx >] ,) -> impl Iterator < Item = PlaceElem < 'tcx > > { let mut iter = projections . iter () . copied () . filter (| elem | ! matches ! (elem , ProjectionElem :: OpaqueCast (..))) ; for projection in prefix_projections { match projection . kind { HirProjectionKind :: Deref => { assert_matches ! (iter . next () , Some (ProjectionElem :: Deref)) ; } HirProjectionKind :: Field (..) => { if base_ty . is_enum () { assert_matches ! (iter . next () , Some (ProjectionElem :: Downcast (..))) ; } assert_matches ! (iter . next () , Some (ProjectionElem :: Field (..))) ; } HirProjectionKind :: OpaqueCast => { assert_matches ! (iter . next () , Some (ProjectionElem :: OpaqueCast (..))) ; } HirProjectionKind :: UnwrapUnsafeBinder => { assert_matches ! (iter . next () , Some (ProjectionElem :: UnwrapUnsafeBinder (..))) ; } HirProjectionKind :: Index | HirProjectionKind :: Subslice => { bug ! ("unexpected projection kind: {:?}" , projection) ; } } base_ty = projection . ty ; } iter }
+};
+}

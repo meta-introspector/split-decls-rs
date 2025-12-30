@@ -1,0 +1,9 @@
+// Generated macro for impl_246 (impl)
+macro_rules! Depcrateimpl_246 {
+() => {
+// Module: crate
+// Provides: {"impl_246"}
+// Dependencies: {}
+impl < T , N : ArrayLength > FromIterator < T > for GenericArray < T , N > { # [doc = " Create a `GenericArray` from an iterator."] # [doc = ""] # [doc = " Will panic if the number of elements is not exactly the array length."] # [doc = ""] # [doc = " See [`GenericArray::try_from_iter`] for a fallible alternative."] # [inline] fn from_iter < I > (iter : I) -> GenericArray < T , N > where I : IntoIterator < Item = T > , { match Self :: try_from_iter (iter) { Ok (res) => res , Err (_) => from_iter_length_fail (N :: USIZE) , } } }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for impl_128 (impl)
+macro_rules! Depcrate_arch_all_twowayimpl_128 {
+() => {
+// Module: crate::arch::all::twoway
+// Provides: {"impl_128"}
+// Dependencies: {}
+impl Suffix { fn forward (needle : & [u8] , kind : SuffixKind) -> Suffix { let mut suffix = Suffix { pos : 0 , period : 1 } ; let mut candidate_start = 1 ; let mut offset = 0 ; while candidate_start + offset < needle . len () { let current = needle [suffix . pos + offset] ; let candidate = needle [candidate_start + offset] ; match kind . cmp (current , candidate) { SuffixOrdering :: Accept => { suffix = Suffix { pos : candidate_start , period : 1 } ; candidate_start += 1 ; offset = 0 ; } SuffixOrdering :: Skip => { candidate_start += offset + 1 ; offset = 0 ; suffix . period = candidate_start - suffix . pos ; } SuffixOrdering :: Push => { if offset + 1 == suffix . period { candidate_start += suffix . period ; offset = 0 ; } else { offset += 1 ; } } } } suffix } fn reverse (needle : & [u8] , kind : SuffixKind) -> Suffix { let mut suffix = Suffix { pos : needle . len () , period : 1 } ; if needle . len () == 1 { return suffix ; } let mut candidate_start = match needle . len () . checked_sub (1) { None => return suffix , Some (candidate_start) => candidate_start , } ; let mut offset = 0 ; while offset < candidate_start { let current = needle [suffix . pos - offset - 1] ; let candidate = needle [candidate_start - offset - 1] ; match kind . cmp (current , candidate) { SuffixOrdering :: Accept => { suffix = Suffix { pos : candidate_start , period : 1 } ; candidate_start -= 1 ; offset = 0 ; } SuffixOrdering :: Skip => { candidate_start -= offset + 1 ; offset = 0 ; suffix . period = suffix . pos - candidate_start ; } SuffixOrdering :: Push => { if offset + 1 == suffix . period { candidate_start -= suffix . period ; offset = 0 ; } else { offset += 1 ; } } } } suffix } }
+};
+}

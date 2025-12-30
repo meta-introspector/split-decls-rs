@@ -1,0 +1,39 @@
+// Generated module macro for crate::prop_name
+macro_rules! Modcrate_prop_name {
+() => {
+        Depcrate_prop_nameuse_373!();
+        Depcrate_prop_nameuse_374!();
+        Depcrate_prop_nameuse_375!();
+        Depcrate_prop_namePropName!();
+        Depcrate_prop_nameimpl_377!();
+        Depcrate_prop_nameimpl_378!();
+        Depcrate_prop_nameimpl_379!();
+        Depcrate_prop_nameimpl_380!();
+        Depcrate_prop_nameimpl_381!();
+        Depcrate_prop_nameimpl_382!();
+        Depcrate_prop_nameimpl_383!();
+        Depcrate_prop_nameimpl_384!();
+        Depcrate_prop_nameimpl_385!();
+        Depcrate_prop_nameimpl_386!();
+        Depcrate_prop_nameimpl_387!();
+        Depcrate_prop_nameimpl_388!();
+        Depcrate_prop_namePropertyName!();
+        Depcrate_prop_nameimpl_390!();
+        Depcrate_prop_nameimpl_391!();
+        Depcrate_prop_nameimpl_392!();
+        Depcrate_prop_nameimpl_393!();
+        Depcrate_prop_nameimpl_394!();
+        Depcrate_prop_nameimpl_395!();
+        Depcrate_prop_nameimpl_396!();
+        Depcrate_prop_nameimpl_397!();
+        Depcrate_prop_nameimpl_398!();
+        Depcrate_prop_nameimpl_399!();
+        Depcrate_prop_nameimpl_400!();
+        Depcrate_prop_nameimpl_401!();
+        Depcrate_prop_nameimpl_402!();
+        Depcrate_prop_namelevel_property!();
+        Depcrate_prop_namesanity_checks!();
+        Depcrate_prop_nametest_interior_nul!();
+        Depcrate_prop_nametest_non_nul_terminated!();
+    };
+}

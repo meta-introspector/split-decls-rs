@@ -1,0 +1,42 @@
+// Generated module macro for crate::time_delta
+macro_rules! Modcrate_time_delta {
+() => {
+        Depcrate_time_deltause_3!();
+        Depcrate_time_deltause_4!();
+        Depcrate_time_deltause_5!();
+        Depcrate_time_deltause_6!();
+        Depcrate_time_deltause_7!();
+        Depcrate_time_deltause_8!();
+        Depcrate_time_deltause_9!();
+        Depcrate_time_deltaNANOS_PER_MICRO!();
+        Depcrate_time_deltaNANOS_PER_MILLI!();
+        Depcrate_time_deltaNANOS_PER_SEC!();
+        Depcrate_time_deltaMICROS_PER_SEC!();
+        Depcrate_time_deltaMILLIS_PER_SEC!();
+        Depcrate_time_deltaSECS_PER_MINUTE!();
+        Depcrate_time_deltaSECS_PER_HOUR!();
+        Depcrate_time_deltaSECS_PER_DAY!();
+        Depcrate_time_deltaSECS_PER_WEEK!();
+        Depcrate_time_deltaTimeDelta!();
+        Depcrate_time_deltaMIN!();
+        Depcrate_time_deltaMAX!();
+        Depcrate_time_deltaimpl_22!();
+        Depcrate_time_deltaimpl_23!();
+        Depcrate_time_deltaimpl_24!();
+        Depcrate_time_deltaimpl_25!();
+        Depcrate_time_deltaimpl_26!();
+        Depcrate_time_deltaimpl_27!();
+        Depcrate_time_deltaimpl_28!();
+        Depcrate_time_deltaimpl_29!();
+        Depcrate_time_deltaimpl_30!();
+        Depcrate_time_deltaimpl_31!();
+        Depcrate_time_deltaimpl_32!();
+        Depcrate_time_deltaOutOfRangeError!();
+        Depcrate_time_deltaimpl_34!();
+        Depcrate_time_deltaimpl_35!();
+        Depcrate_time_deltadiv_mod_floor_64!();
+        Depcrate_time_deltaimpl_37!();
+        Depcrate_time_deltaserde!();
+        Depcrate_time_deltatests!();
+    };
+}

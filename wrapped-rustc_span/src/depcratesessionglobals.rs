@@ -1,0 +1,9 @@
+// Generated macro for SessionGlobals (struct)
+macro_rules! DepcrateSessionGlobals {
+() => {
+// Module: crate
+// Provides: {"SessionGlobals"}
+// Dependencies: {}
+# [doc = " Per-session global variables: this struct is stored in thread-local storage"] # [doc = " in such a way that it is accessible without any kind of handle to all"] # [doc = " threads within the compilation session, but is not accessible outside the"] # [doc = " session."] pub struct SessionGlobals { symbol_interner : symbol :: Interner , span_interner : Lock < span_encoding :: SpanInterner > , # [doc = " Maps a macro argument token into use of the corresponding metavariable in the macro body."] # [doc = " Collisions are possible and processed in `maybe_use_metavar_location` on best effort basis."] metavar_spans : MetavarSpansMap , hygiene_data : Lock < hygiene :: HygieneData > , # [doc = " The session's source map, if there is one. This field should only be"] # [doc = " used in places where the `Session` is truly not available, such as"] # [doc = " `<Span as Debug>::fmt`."] source_map : Option < Arc < SourceMap > > , }
+};
+}

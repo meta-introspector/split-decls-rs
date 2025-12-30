@@ -1,0 +1,43 @@
+// Generated module macro for crate::visit
+macro_rules! Modcrate_visit {
+() => {
+        Depcrate_visituse_556!();
+        Depcrate_visituse_557!();
+        Depcrate_visituse_558!();
+        Depcrate_visituse_559!();
+        Depcrate_visituse_560!();
+        Depcrate_visituse_561!();
+        Depcrate_visituse_562!();
+        Depcrate_visitAssocCtxt!();
+        Depcrate_visitFnCtxt!();
+        Depcrate_visitBoundKind!();
+        Depcrate_visitimpl_566!();
+        Depcrate_visitLifetimeCtxt!();
+        Depcrate_visitVisitable!();
+        Depcrate_visitimpl_569!();
+        Depcrate_visitimpl_570!();
+        Depcrate_visitimpl_571!();
+        Depcrate_visitimpl_572!();
+        Depcrate_visitimpl_573!();
+        Depcrate_visitimpl_574!();
+        Depcrate_visitimpl_575!();
+        Depcrate_visitimpl_576!();
+        Depcrate_visitimpl_577!();
+        Depcrate_visitWalkable!();
+        Depcrate_visitvisit_visitable!();
+        Depcrate_visitvisit_visitable_with!();
+        Depcrate_visitwalk_walkable!();
+        Depcrate_visitimpl_visitable!();
+        Depcrate_visitimpl_walkable!();
+        Depcrate_visitimpl_visitable_noop!();
+        Depcrate_visitimpl_visitable_list!();
+        Depcrate_visitimpl_visitable_direct!();
+        Depcrate_visitimpl_visitable_calling_walkable!();
+        Depcrate_visitdefine_named_walk!();
+        Depcrate_visitcommon_visitor_and_walkers!();
+        Depcrate_visitmacro_590!();
+        Depcrate_visitgenerate_list_visit_fns!();
+        Depcrate_visitmacro_592!();
+        Depcrate_visitwalk_stmt!();
+    };
+}

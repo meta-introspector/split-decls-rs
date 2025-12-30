@@ -1,0 +1,54 @@
+// Generated module macro for crate::ser
+macro_rules! Modcrate_ser {
+() => {
+        Depcrate_seruse_100!();
+        Depcrate_seruse_101!();
+        Depcrate_seruse_102!();
+        Depcrate_seruse_103!();
+        Depcrate_seruse_104!();
+        Depcrate_seruse_105!();
+        Depcrate_seruse_106!();
+        Depcrate_serSerialize!();
+        Depcrate_serSerializer!();
+        Depcrate_serimpl_109!();
+        Depcrate_serimpl_110!();
+        Depcrate_serimpl_111!();
+        Depcrate_sererase!();
+        Depcrate_serimpl_113!();
+        Depcrate_serimpl_114!();
+        Depcrate_serErrorImpl!();
+        Depcrate_serimpl_116!();
+        Depcrate_serimpl_117!();
+        Depcrate_serimpl_118!();
+        Depcrate_serimpl_119!();
+        Depcrate_serserialize!();
+        Depcrate_sermacro_121!();
+        Depcrate_serMakeSerializer!();
+        Depcrate_serimpl_123!();
+        Depcrate_serSerializeSeq!();
+        Depcrate_serimpl_125!();
+        Depcrate_serimpl_126!();
+        Depcrate_serSerializeTuple!();
+        Depcrate_serimpl_128!();
+        Depcrate_serimpl_129!();
+        Depcrate_serSerializeTupleStruct!();
+        Depcrate_serimpl_131!();
+        Depcrate_serimpl_132!();
+        Depcrate_serSerializeTupleVariant!();
+        Depcrate_serimpl_134!();
+        Depcrate_serimpl_135!();
+        Depcrate_serSerializeMap!();
+        Depcrate_serimpl_137!();
+        Depcrate_serimpl_138!();
+        Depcrate_serSerializeStruct!();
+        Depcrate_serimpl_140!();
+        Depcrate_serimpl_141!();
+        Depcrate_serSerializeStructVariant!();
+        Depcrate_serimpl_143!();
+        Depcrate_serimpl_144!();
+        Depcrate_serderef_erased_serializer!();
+        Depcrate_sermacro_146!();
+        Depcrate_sermacro_147!();
+        Depcrate_sertests!();
+    };
+}

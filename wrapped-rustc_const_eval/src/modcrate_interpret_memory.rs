@@ -1,0 +1,41 @@
+// Generated module macro for crate::interpret::memory
+macro_rules! Modcrate_interpret_memory {
+() => {
+        Depcrate_interpret_memoryuse_519!();
+        Depcrate_interpret_memoryuse_520!();
+        Depcrate_interpret_memoryuse_521!();
+        Depcrate_interpret_memoryuse_522!();
+        Depcrate_interpret_memoryuse_523!();
+        Depcrate_interpret_memoryuse_524!();
+        Depcrate_interpret_memoryuse_525!();
+        Depcrate_interpret_memoryuse_526!();
+        Depcrate_interpret_memoryuse_527!();
+        Depcrate_interpret_memoryuse_528!();
+        Depcrate_interpret_memoryuse_529!();
+        Depcrate_interpret_memoryuse_530!();
+        Depcrate_interpret_memoryuse_531!();
+        Depcrate_interpret_memoryuse_532!();
+        Depcrate_interpret_memoryuse_533!();
+        Depcrate_interpret_memoryMemoryKind!();
+        Depcrate_interpret_memoryimpl_535!();
+        Depcrate_interpret_memoryimpl_536!();
+        Depcrate_interpret_memoryAllocKind!();
+        Depcrate_interpret_memoryAllocInfo!();
+        Depcrate_interpret_memoryimpl_539!();
+        Depcrate_interpret_memoryFnVal!();
+        Depcrate_interpret_memoryimpl_541!();
+        Depcrate_interpret_memoryMemory!();
+        Depcrate_interpret_memoryAllocRef!();
+        Depcrate_interpret_memoryAllocRefMut!();
+        Depcrate_interpret_memoryimpl_545!();
+        Depcrate_interpret_memoryimpl_546!();
+        Depcrate_interpret_memoryimpl_547!();
+        Depcrate_interpret_memoryimpl_548!();
+        Depcrate_interpret_memoryDumpAllocs!();
+        Depcrate_interpret_memoryimpl_550!();
+        Depcrate_interpret_memoryimpl_551!();
+        Depcrate_interpret_memoryimpl_552!();
+        Depcrate_interpret_memoryimpl_553!();
+        Depcrate_interpret_memoryimpl_554!();
+    };
+}

@@ -1,0 +1,9 @@
+// Generated macro for use_1067 (use)
+macro_rules! Depcrateuse_1067 {
+() => {
+// Module: crate
+// Provides: {"use_1067"}
+// Dependencies: {}
+use rustc_data_structures :: unord :: UnordSet ;
+};
+}

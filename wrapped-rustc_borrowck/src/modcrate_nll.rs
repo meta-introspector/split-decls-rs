@@ -1,0 +1,41 @@
+// Generated module macro for crate::nll
+macro_rules! Modcrate_nll {
+() => {
+        Depcrate_nlluse_528!();
+        Depcrate_nlluse_529!();
+        Depcrate_nlluse_530!();
+        Depcrate_nlluse_531!();
+        Depcrate_nlluse_532!();
+        Depcrate_nlluse_533!();
+        Depcrate_nlluse_534!();
+        Depcrate_nlluse_535!();
+        Depcrate_nlluse_536!();
+        Depcrate_nlluse_537!();
+        Depcrate_nlluse_538!();
+        Depcrate_nlluse_539!();
+        Depcrate_nlluse_540!();
+        Depcrate_nlluse_541!();
+        Depcrate_nlluse_542!();
+        Depcrate_nlluse_543!();
+        Depcrate_nlluse_544!();
+        Depcrate_nlluse_545!();
+        Depcrate_nlluse_546!();
+        Depcrate_nlluse_547!();
+        Depcrate_nlluse_548!();
+        Depcrate_nlluse_549!();
+        Depcrate_nlluse_550!();
+        Depcrate_nlluse_551!();
+        Depcrate_nlluse_552!();
+        Depcrate_nlluse_553!();
+        Depcrate_nlluse_554!();
+        Depcrate_nllNllOutput!();
+        Depcrate_nllreplace_regions_in_mir!();
+        Depcrate_nllcompute_closure_requirements_modulo_opaques!();
+        Depcrate_nllcompute_regions!();
+        Depcrate_nlldump_nll_mir!();
+        Depcrate_nllemit_nll_mir!();
+        Depcrate_nlldump_annotation!();
+        Depcrate_nllfor_each_region_constraint!();
+        Depcrate_nllConstraintDescription!();
+    };
+}

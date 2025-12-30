@@ -1,0 +1,49 @@
+// Generated module macro for crate::rustc
+macro_rules! Modcrate_rustc {
+() => {
+        Depcrate_rustcuse_101!();
+        Depcrate_rustcuse_102!();
+        Depcrate_rustcuse_103!();
+        Depcrate_rustcuse_104!();
+        Depcrate_rustcuse_105!();
+        Depcrate_rustcuse_106!();
+        Depcrate_rustcuse_107!();
+        Depcrate_rustcuse_108!();
+        Depcrate_rustcuse_109!();
+        Depcrate_rustcuse_110!();
+        Depcrate_rustcuse_111!();
+        Depcrate_rustcuse_112!();
+        Depcrate_rustcuse_113!();
+        Depcrate_rustcuse_114!();
+        Depcrate_rustcuse_115!();
+        Depcrate_rustcuse_116!();
+        Depcrate_rustcuse_117!();
+        Depcrate_rustcuse_118!();
+        Depcrate_rustcuse_119!();
+        Depcrate_rustcuse_120!();
+        Depcrate_rustcuse_121!();
+        Depcrate_rustcuse_122!();
+        Depcrate_rustcprint!();
+        Depcrate_rustcConstructor!();
+        Depcrate_rustcConstructorSet!();
+        Depcrate_rustcDeconstructedPat!();
+        Depcrate_rustcMatchArm!();
+        Depcrate_rustcRedundancyExplanation!();
+        Depcrate_rustcUsefulness!();
+        Depcrate_rustcUsefulnessReport!();
+        Depcrate_rustcWitnessPat!();
+        Depcrate_rustcRevealedTy!();
+        Depcrate_rustcimpl_133!();
+        Depcrate_rustcimpl_134!();
+        Depcrate_rustcimpl_135!();
+        Depcrate_rustcimpl_136!();
+        Depcrate_rustcRustcPatCtxt!();
+        Depcrate_rustcRustcPatCtxtState!();
+        Depcrate_rustcimpl_139!();
+        Depcrate_rustcimpl_140!();
+        Depcrate_rustcwould_print_as_wildcard!();
+        Depcrate_rustcimpl_142!();
+        Depcrate_rustcexpand_or_pat!();
+        Depcrate_rustcanalyze_match!();
+    };
+}

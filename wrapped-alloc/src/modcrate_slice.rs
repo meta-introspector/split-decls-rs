@@ -1,0 +1,47 @@
+// Generated module macro for crate::slice
+macro_rules! Modcrate_slice {
+() => {
+        Depcrate_sliceuse_1325!();
+        Depcrate_sliceuse_1326!();
+        Depcrate_sliceuse_1327!();
+        Depcrate_sliceuse_1328!();
+        Depcrate_sliceuse_1329!();
+        Depcrate_sliceuse_1330!();
+        Depcrate_sliceuse_1331!();
+        Depcrate_sliceuse_1332!();
+        Depcrate_sliceuse_1333!();
+        Depcrate_sliceuse_1334!();
+        Depcrate_sliceuse_1335!();
+        Depcrate_sliceuse_1336!();
+        Depcrate_sliceuse_1337!();
+        Depcrate_sliceuse_1338!();
+        Depcrate_sliceuse_1339!();
+        Depcrate_sliceuse_1340!();
+        Depcrate_sliceuse_1341!();
+        Depcrate_sliceuse_1342!();
+        Depcrate_sliceuse_1343!();
+        Depcrate_sliceuse_1344!();
+        Depcrate_sliceuse_1345!();
+        Depcrate_sliceuse_1346!();
+        Depcrate_sliceuse_1347!();
+        Depcrate_sliceuse_1348!();
+        Depcrate_sliceuse_1349!();
+        Depcrate_sliceuse_1350!();
+        Depcrate_sliceuse_1351!();
+        Depcrate_sliceimpl_1352!();
+        Depcrate_sliceimpl_1353!();
+        Depcrate_sliceConcat!();
+        Depcrate_sliceJoin!();
+        Depcrate_sliceimpl_1356!();
+        Depcrate_sliceimpl_1357!();
+        Depcrate_sliceimpl_1358!();
+        Depcrate_sliceimpl_1359!();
+        Depcrate_sliceimpl_1360!();
+        Depcrate_sliceSpecCloneIntoVec!();
+        Depcrate_sliceimpl_1362!();
+        Depcrate_sliceimpl_1363!();
+        Depcrate_sliceimpl_1364!();
+        Depcrate_slicestable_sort!();
+        Depcrate_sliceimpl_1366!();
+    };
+}

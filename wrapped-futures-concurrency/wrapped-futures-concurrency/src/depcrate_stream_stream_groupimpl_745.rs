@@ -1,0 +1,9 @@
+// Generated macro for impl_745 (impl)
+macro_rules! Depcrate_stream_stream_groupimpl_745 {
+() => {
+// Module: crate::stream::stream_group
+// Provides: {"impl_745"}
+// Dependencies: {}
+impl < S : Stream > StreamGroup < S > { fn poll_next_inner (mut self : Pin < & mut Self > , cx : & Context < '_ > ,) -> Poll < Option < (Key , < S as Stream > :: Item) > > { let mut this = self . as_mut () . project () ; if this . streams . is_empty () { return Poll :: Ready (None) ; } let mut readiness = this . wakers . readiness () ; readiness . set_waker (cx . waker ()) ; if ! readiness . any_ready () { return Poll :: Pending ; } let mut ret = Poll :: Pending ; let mut done_count = 0 ; let stream_count = this . streams . len () ; let states = this . states ; let streams = unsafe { this . streams . as_mut () . get_unchecked_mut () } ; for index in this . keys . iter () . cloned () { if states [index] . is_pending () && readiness . clear_ready (index) { # [allow (clippy :: drop_non_drop)] drop (readiness) ; let mut cx = Context :: from_waker (this . wakers . get (index) . unwrap ()) ; let stream = unsafe { Pin :: new_unchecked (& mut streams [index]) } ; match stream . poll_next (& mut cx) { Poll :: Ready (Some (item)) => { ret = Poll :: Ready (Some ((Key (index) , item))) ; states [index] = PollState :: Pending ; let mut readiness = this . wakers . readiness () ; readiness . set_ready (index) ; break ; } Poll :: Ready (None) => { done_count += 1 ; states [index] = PollState :: None ; streams . remove (index) ; this . key_removal_queue . push (index) ; } Poll :: Pending => { } } ; readiness = this . wakers . readiness () ; } } if ! this . key_removal_queue . is_empty () { for key in this . key_removal_queue . iter () { this . keys . remove (key) ; } this . key_removal_queue . clear () ; } if done_count == stream_count { ret = Poll :: Ready (None) ; } ret } }
+};
+}

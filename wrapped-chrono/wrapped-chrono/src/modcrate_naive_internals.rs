@@ -1,0 +1,42 @@
+// Generated module macro for crate::naive::internals
+macro_rules! Modcrate_naive_internals {
+() => {
+        Depcrate_naive_internalsuse_586!();
+        Depcrate_naive_internalsYearFlags!();
+        Depcrate_naive_internalsYEAR_STARTS_AFTER_MONDAY!();
+        Depcrate_naive_internalsYEAR_STARTS_AFTER_THUESDAY!();
+        Depcrate_naive_internalsYEAR_STARTS_AFTER_WEDNESDAY!();
+        Depcrate_naive_internalsYEAR_STARTS_AFTER_THURSDAY!();
+        Depcrate_naive_internalsYEAR_STARTS_AFTER_FRIDAY!();
+        Depcrate_naive_internalsYEAR_STARTS_AFTER_SATURDAY!();
+        Depcrate_naive_internalsYEAR_STARTS_AFTER_SUNDAY!();
+        Depcrate_naive_internalsCOMMON_YEAR!();
+        Depcrate_naive_internalsLEAP_YEAR!();
+        Depcrate_naive_internalsA!();
+        Depcrate_naive_internalsAG!();
+        Depcrate_naive_internalsB!();
+        Depcrate_naive_internalsBA!();
+        Depcrate_naive_internalsC!();
+        Depcrate_naive_internalsCB!();
+        Depcrate_naive_internalsD!();
+        Depcrate_naive_internalsDC!();
+        Depcrate_naive_internalsE!();
+        Depcrate_naive_internalsED!();
+        Depcrate_naive_internalsF!();
+        Depcrate_naive_internalsFE!();
+        Depcrate_naive_internalsG!();
+        Depcrate_naive_internalsGF!();
+        Depcrate_naive_internalsYEAR_TO_FLAGS!();
+        Depcrate_naive_internalsimpl_612!();
+        Depcrate_naive_internalsimpl_613!();
+        Depcrate_naive_internalsMAX_OL!();
+        Depcrate_naive_internalsMAX_MDL!();
+        Depcrate_naive_internalsXX!();
+        Depcrate_naive_internalsMDL_TO_OL!();
+        Depcrate_naive_internalsOL_TO_MDL!();
+        Depcrate_naive_internalsMdf!();
+        Depcrate_naive_internalsimpl_620!();
+        Depcrate_naive_internalsimpl_621!();
+        Depcrate_naive_internalstests!();
+    };
+}

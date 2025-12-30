@@ -1,0 +1,45 @@
+// Generated module macro for crate::atomic
+macro_rules! Modcrate_atomic {
+() => {
+        Depcrate_atomicuse_4!();
+        Depcrate_atomicuse_5!();
+        Depcrate_atomicuse_6!();
+        Depcrate_atomicuse_7!();
+        Depcrate_atomicuse_8!();
+        Depcrate_atomicuse_9!();
+        Depcrate_atomicuse_10!();
+        Depcrate_atomicimpl_11!();
+        Depcrate_atomicimpl_12!();
+        Depcrate_atomicmacro_13!();
+        Depcrate_atomicimpl_14!();
+        Depcrate_atomicimpl_15!();
+        Depcrate_atomicmacro_16!();
+        Depcrate_atomicimpl_17!();
+        Depcrate_atomicimpl_18!();
+        Depcrate_atomicmacro_19!();
+        Depcrate_atomicimpl_20!();
+        Depcrate_atomicimpl_21!();
+        Depcrate_atomicmacro_22!();
+        Depcrate_atomicimpl_23!();
+        Depcrate_atomicimpl_24!();
+        Depcrate_atomicmacro_25!();
+        Depcrate_atomicimpl_26!();
+        Depcrate_atomicimpl_27!();
+        Depcrate_atomicmacro_28!();
+        Depcrate_atomicimpl_29!();
+        Depcrate_atomicimpl_30!();
+        Depcrate_atomicmacro_31!();
+        Depcrate_atomicimpl_32!();
+        Depcrate_atomicimpl_33!();
+        Depcrate_atomicmacro_34!();
+        Depcrate_atomicimpl_35!();
+        Depcrate_atomicimpl_36!();
+        Depcrate_atomicmacro_37!();
+        Depcrate_atomicimpl_38!();
+        Depcrate_atomicimpl_39!();
+        Depcrate_atomicmacro_40!();
+        Depcrate_atomicimpl_41!();
+        Depcrate_atomicimpl_42!();
+        Depcrate_atomicmacro_43!();
+    };
+}

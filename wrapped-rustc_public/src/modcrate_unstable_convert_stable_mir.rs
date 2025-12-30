@@ -1,0 +1,54 @@
+// Generated module macro for crate::unstable::convert::stable::mir
+macro_rules! Modcrate_unstable_convert_stable_mir {
+() => {
+        Depcrate_unstable_convert_stable_miruse_211!();
+        Depcrate_unstable_convert_stable_miruse_212!();
+        Depcrate_unstable_convert_stable_miruse_213!();
+        Depcrate_unstable_convert_stable_miruse_214!();
+        Depcrate_unstable_convert_stable_miruse_215!();
+        Depcrate_unstable_convert_stable_miruse_216!();
+        Depcrate_unstable_convert_stable_miruse_217!();
+        Depcrate_unstable_convert_stable_miruse_218!();
+        Depcrate_unstable_convert_stable_miruse_219!();
+        Depcrate_unstable_convert_stable_miruse_220!();
+        Depcrate_unstable_convert_stable_mirimpl_221!();
+        Depcrate_unstable_convert_stable_mirimpl_222!();
+        Depcrate_unstable_convert_stable_mirimpl_223!();
+        Depcrate_unstable_convert_stable_mirimpl_224!();
+        Depcrate_unstable_convert_stable_mirimpl_225!();
+        Depcrate_unstable_convert_stable_mirimpl_226!();
+        Depcrate_unstable_convert_stable_mirimpl_227!();
+        Depcrate_unstable_convert_stable_mirimpl_228!();
+        Depcrate_unstable_convert_stable_mirimpl_229!();
+        Depcrate_unstable_convert_stable_mirimpl_230!();
+        Depcrate_unstable_convert_stable_mirimpl_231!();
+        Depcrate_unstable_convert_stable_mirimpl_232!();
+        Depcrate_unstable_convert_stable_mirimpl_233!();
+        Depcrate_unstable_convert_stable_mirimpl_234!();
+        Depcrate_unstable_convert_stable_mirimpl_235!();
+        Depcrate_unstable_convert_stable_mirimpl_236!();
+        Depcrate_unstable_convert_stable_mirimpl_237!();
+        Depcrate_unstable_convert_stable_mirimpl_238!();
+        Depcrate_unstable_convert_stable_mirimpl_239!();
+        Depcrate_unstable_convert_stable_mirimpl_240!();
+        Depcrate_unstable_convert_stable_mirimpl_241!();
+        Depcrate_unstable_convert_stable_mirimpl_242!();
+        Depcrate_unstable_convert_stable_mirimpl_243!();
+        Depcrate_unstable_convert_stable_mirimpl_244!();
+        Depcrate_unstable_convert_stable_mirimpl_245!();
+        Depcrate_unstable_convert_stable_mirimpl_246!();
+        Depcrate_unstable_convert_stable_mirimpl_247!();
+        Depcrate_unstable_convert_stable_mirimpl_248!();
+        Depcrate_unstable_convert_stable_mirimpl_249!();
+        Depcrate_unstable_convert_stable_mirimpl_250!();
+        Depcrate_unstable_convert_stable_mirimpl_251!();
+        Depcrate_unstable_convert_stable_mirimpl_252!();
+        Depcrate_unstable_convert_stable_mirimpl_253!();
+        Depcrate_unstable_convert_stable_mirimpl_254!();
+        Depcrate_unstable_convert_stable_mirimpl_255!();
+        Depcrate_unstable_convert_stable_mirimpl_256!();
+        Depcrate_unstable_convert_stable_mirimpl_257!();
+        Depcrate_unstable_convert_stable_mirimpl_258!();
+        Depcrate_unstable_convert_stable_mirimpl_259!();
+    };
+}

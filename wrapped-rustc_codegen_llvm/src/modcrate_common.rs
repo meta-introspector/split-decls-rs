@@ -1,0 +1,41 @@
+// Generated module macro for crate::common
+macro_rules! Modcrate_common {
+() => {
+        Depcrate_commonuse_414!();
+        Depcrate_commonuse_415!();
+        Depcrate_commonuse_416!();
+        Depcrate_commonuse_417!();
+        Depcrate_commonuse_418!();
+        Depcrate_commonuse_419!();
+        Depcrate_commonuse_420!();
+        Depcrate_commonuse_421!();
+        Depcrate_commonuse_422!();
+        Depcrate_commonuse_423!();
+        Depcrate_commonuse_424!();
+        Depcrate_commonuse_425!();
+        Depcrate_commonuse_426!();
+        Depcrate_commonuse_427!();
+        Depcrate_commonuse_428!();
+        Depcrate_commonuse_429!();
+        Depcrate_commonuse_430!();
+        Depcrate_commonuse_431!();
+        Depcrate_commonuse_432!();
+        Depcrate_commonuse_433!();
+        Depcrate_commonuse_434!();
+        Depcrate_commonFunclet!();
+        Depcrate_commonimpl_436!();
+        Depcrate_commonimpl_437!();
+        Depcrate_commonimpl_438!();
+        Depcrate_commonimpl_439!();
+        Depcrate_commonval_ty!();
+        Depcrate_commonbytes_in_context!();
+        Depcrate_commonnamed_struct!();
+        Depcrate_commonstruct_in_context!();
+        Depcrate_commonhi_lo_to_u128!();
+        Depcrate_commontry_as_const_integral!();
+        Depcrate_commonget_dllimport!();
+        Depcrate_commonAsCCharPtr!();
+        Depcrate_commonimpl_448!();
+        Depcrate_commonimpl_449!();
+    };
+}

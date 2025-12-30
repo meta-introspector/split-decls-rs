@@ -1,0 +1,39 @@
+// Generated module macro for crate::writeback
+macro_rules! Modcrate_writeback {
+() => {
+        Depcrate_writebackuse_1031!();
+        Depcrate_writebackuse_1032!();
+        Depcrate_writebackuse_1033!();
+        Depcrate_writebackuse_1034!();
+        Depcrate_writebackuse_1035!();
+        Depcrate_writebackuse_1036!();
+        Depcrate_writebackuse_1037!();
+        Depcrate_writebackuse_1038!();
+        Depcrate_writebackuse_1039!();
+        Depcrate_writebackuse_1040!();
+        Depcrate_writebackuse_1041!();
+        Depcrate_writebackuse_1042!();
+        Depcrate_writebackuse_1043!();
+        Depcrate_writebackuse_1044!();
+        Depcrate_writebackuse_1045!();
+        Depcrate_writebackuse_1046!();
+        Depcrate_writebackuse_1047!();
+        Depcrate_writebackuse_1048!();
+        Depcrate_writebackimpl_1049!();
+        Depcrate_writebackWritebackCx!();
+        Depcrate_writebackimpl_1051!();
+        Depcrate_writebackimpl_1052!();
+        Depcrate_writebackimpl_1053!();
+        Depcrate_writebackLocatable!();
+        Depcrate_writebackimpl_1055!();
+        Depcrate_writebackimpl_1056!();
+        Depcrate_writebackResolver!();
+        Depcrate_writebackimpl_1058!();
+        Depcrate_writebackimpl_1059!();
+        Depcrate_writebackEagerlyNormalizeConsts!();
+        Depcrate_writebackimpl_1061!();
+        Depcrate_writebackimpl_1062!();
+        Depcrate_writebackHasRecursiveOpaque!();
+        Depcrate_writebackimpl_1064!();
+    };
+}

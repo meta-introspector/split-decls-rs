@@ -1,0 +1,40 @@
+// Generated module macro for crate::access
+macro_rules! Modcrate_access {
+() => {
+        Depcrate_accessuse_3!();
+        Depcrate_accessuse_4!();
+        Depcrate_accessuse_5!();
+        Depcrate_accessuse_6!();
+        Depcrate_accessuse_7!();
+        Depcrate_accessuse_8!();
+        Depcrate_accessuse_9!();
+        Depcrate_accessuse_10!();
+        Depcrate_accessAccess!();
+        Depcrate_accessimpl_12!();
+        Depcrate_accessimpl_13!();
+        Depcrate_accessimpl_14!();
+        Depcrate_accessimpl_15!();
+        Depcrate_accessimpl_16!();
+        Depcrate_accessDirectDeref!();
+        Depcrate_accessimpl_18!();
+        Depcrate_accessimpl_19!();
+        Depcrate_accessimpl_20!();
+        Depcrate_accessimpl_21!();
+        Depcrate_accessDynGuard!();
+        Depcrate_accessimpl_23!();
+        Depcrate_accessDynAccess!();
+        Depcrate_accessimpl_25!();
+        Depcrate_accessAccessConvert!();
+        Depcrate_accessimpl_27!();
+        Depcrate_accessMapGuard!();
+        Depcrate_accessimpl_29!();
+        Depcrate_accessMap!();
+        Depcrate_accessimpl_31!();
+        Depcrate_accessimpl_32!();
+        Depcrate_accessConstantDeref!();
+        Depcrate_accessimpl_34!();
+        Depcrate_accessConstant!();
+        Depcrate_accessimpl_36!();
+        Depcrate_accesstests!();
+    };
+}

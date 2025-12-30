@@ -1,0 +1,9 @@
+// Generated macro for merge (function)
+macro_rules! Depcrate_slice_sortmerge {
+() => {
+// Module: crate::slice::sort
+// Provides: {"merge"}
+// Dependencies: {}
+# [doc = " Merges non-decreasing runs `v[..mid]` and `v[mid..]` using `buf` as temporary storage, and"] # [doc = " stores the result into `v[..]`."] # [doc = ""] # [doc = " # Safety"] # [doc = ""] # [doc = " The two slices must be non-empty and `mid` must be in bounds. Buffer `buf` must be long enough"] # [doc = " to hold a copy of the shorter slice. Also, `T` must not be a zero-sized type."] unsafe fn merge < T , F > (v : & mut [T] , mid : usize , buf : * mut T , is_less : & F) where F : Fn (& T , & T) -> bool , { let len = v . len () ; let v = v . as_mut_ptr () ; let (v_mid , v_end) = unsafe { (v . add (mid) , v . add (len)) } ; let mut hole ; if mid <= len - mid { unsafe { ptr :: copy_nonoverlapping (v , buf , mid) ; hole = MergeHole { start : buf , end : buf . add (mid) , dest : v , } ; } let left = & mut hole . start ; let mut right = v_mid ; let out = & mut hole . dest ; while * left < hole . end && right < v_end { unsafe { let is_l = is_less (& * right , & * * left) ; let to_copy = if is_l { right } else { * left } ; ptr :: copy_nonoverlapping (to_copy , * out , 1) ; * out = out . add (1) ; right = right . add (is_l as usize) ; * left = left . add (! is_l as usize) ; } } } else { unsafe { ptr :: copy_nonoverlapping (v_mid , buf , len - mid) ; hole = MergeHole { start : buf , end : buf . add (len - mid) , dest : v_mid , } ; } let left = & mut hole . dest ; let right = & mut hole . end ; let mut out = v_end ; while v < * left && buf < * right { unsafe { let is_l = is_less (& * right . sub (1) , & * left . sub (1)) ; * left = left . sub (is_l as usize) ; * right = right . sub (! is_l as usize) ; let to_copy = if is_l { * left } else { * right } ; out = out . sub (1) ; ptr :: copy_nonoverlapping (to_copy , out , 1) ; } } } }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for FinderReverse (struct)
+macro_rules! Depcrate_ext_sliceFinderReverse {
+() => {
+// Module: crate::ext_slice
+// Provides: {"FinderReverse"}
+// Dependencies: {}
+# [doc = " A single substring reverse searcher fixed to a particular needle."] # [doc = ""] # [doc = " The purpose of this type is to permit callers to construct a substring"] # [doc = " searcher that can be used to search haystacks without the overhead of"] # [doc = " constructing the searcher in the first place. This is a somewhat niche"] # [doc = " concern when it's necessary to re-use the same needle to search multiple"] # [doc = " different haystacks with as little overhead as possible. In general, using"] # [doc = " [`ByteSlice::rfind`](trait.ByteSlice.html#method.rfind)"] # [doc = " or"] # [doc = " [`ByteSlice::rfind_iter`](trait.ByteSlice.html#method.rfind_iter)"] # [doc = " is good enough, but `FinderReverse` is useful when you can meaningfully"] # [doc = " observe searcher construction time in a profile."] # [doc = ""] # [doc = " When the `std` feature is enabled, then this type has an `into_owned`"] # [doc = " version which permits building a `FinderReverse` that is not connected to"] # [doc = " the lifetime of its needle."] # [derive (Clone , Debug)] pub struct FinderReverse < 'a > (memmem :: FinderRev < 'a >) ;
+};
+}

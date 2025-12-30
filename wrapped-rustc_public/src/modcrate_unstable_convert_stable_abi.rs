@@ -1,0 +1,40 @@
+// Generated module macro for crate::unstable::convert::stable::abi
+macro_rules! Modcrate_unstable_convert_stable_abi {
+() => {
+        Depcrate_unstable_convert_stable_abiuse_175!();
+        Depcrate_unstable_convert_stable_abiuse_176!();
+        Depcrate_unstable_convert_stable_abiuse_177!();
+        Depcrate_unstable_convert_stable_abiuse_178!();
+        Depcrate_unstable_convert_stable_abiuse_179!();
+        Depcrate_unstable_convert_stable_abiuse_180!();
+        Depcrate_unstable_convert_stable_abiuse_181!();
+        Depcrate_unstable_convert_stable_abiuse_182!();
+        Depcrate_unstable_convert_stable_abiuse_183!();
+        Depcrate_unstable_convert_stable_abiuse_184!();
+        Depcrate_unstable_convert_stable_abiuse_185!();
+        Depcrate_unstable_convert_stable_abiimpl_186!();
+        Depcrate_unstable_convert_stable_abiimpl_187!();
+        Depcrate_unstable_convert_stable_abiimpl_188!();
+        Depcrate_unstable_convert_stable_abiimpl_189!();
+        Depcrate_unstable_convert_stable_abiimpl_190!();
+        Depcrate_unstable_convert_stable_abiimpl_191!();
+        Depcrate_unstable_convert_stable_abiimpl_192!();
+        Depcrate_unstable_convert_stable_abiimpl_193!();
+        Depcrate_unstable_convert_stable_abiimpl_194!();
+        Depcrate_unstable_convert_stable_abiimpl_195!();
+        Depcrate_unstable_convert_stable_abiimpl_196!();
+        Depcrate_unstable_convert_stable_abiimpl_197!();
+        Depcrate_unstable_convert_stable_abiimpl_198!();
+        Depcrate_unstable_convert_stable_abiimpl_199!();
+        Depcrate_unstable_convert_stable_abiimpl_200!();
+        Depcrate_unstable_convert_stable_abiimpl_201!();
+        Depcrate_unstable_convert_stable_abiimpl_202!();
+        Depcrate_unstable_convert_stable_abiimpl_203!();
+        Depcrate_unstable_convert_stable_abiimpl_204!();
+        Depcrate_unstable_convert_stable_abiimpl_205!();
+        Depcrate_unstable_convert_stable_abiimpl_206!();
+        Depcrate_unstable_convert_stable_abiimpl_207!();
+        Depcrate_unstable_convert_stable_abiimpl_208!();
+        Depcrate_unstable_convert_stable_abiimpl_209!();
+    };
+}

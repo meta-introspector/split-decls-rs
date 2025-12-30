@@ -1,0 +1,9 @@
+// Generated macro for build_adt_ctor (function)
+macro_rules! Depcrate_shimbuild_adt_ctor {
+() => {
+// Module: crate::shim
+// Provides: {"build_adt_ctor"}
+// Dependencies: {}
+pub (super) fn build_adt_ctor (tcx : TyCtxt < '_ > , ctor_id : DefId) -> Body < '_ > { debug_assert ! (tcx . is_constructor (ctor_id)) ; let typing_env = ty :: TypingEnv :: post_analysis (tcx , ctor_id) ; let sig = tcx . fn_sig (ctor_id) . instantiate_identity () . no_bound_vars () . expect ("LBR in ADT constructor signature") ; let sig = tcx . normalize_erasing_regions (typing_env , sig) ; let ty :: Adt (adt_def , args) = sig . output () . kind () else { bug ! ("unexpected type for ADT ctor {:?}" , sig . output ()) ; } ; debug ! ("build_ctor: ctor_id={:?} sig={:?}" , ctor_id , sig) ; let span = tcx . def_span (ctor_id) ; let local_decls = local_decls_for_sig (& sig , span) ; let source_info = SourceInfo :: outermost (span) ; let variant_index = if adt_def . is_enum () { adt_def . variant_index_with_ctor_id (ctor_id) } else { FIRST_VARIANT } ; debug ! ("build_ctor: variant_index={:?}" , variant_index) ; let kind = AggregateKind :: Adt (adt_def . did () , variant_index , args , None , None) ; let variant = adt_def . variant (variant_index) ; let statement = Statement :: new (source_info , StatementKind :: Assign (Box :: new ((Place :: return_place () , Rvalue :: Aggregate (Box :: new (kind) , (0 .. variant . fields . len ()) . map (| idx | Operand :: Move (Place :: from (Local :: new (idx + 1)))) . collect () ,) ,))) ,) ; let start_block = BasicBlockData :: new_stmts (vec ! [statement] , Some (Terminator { source_info , kind : TerminatorKind :: Return }) , false ,) ; let source = MirSource :: item (ctor_id) ; let mut body = new_body (source , IndexVec :: from_elem_n (start_block , 1) , local_decls , sig . inputs () . len () , span ,) ; body . set_mentioned_items (Vec :: new ()) ; crate :: pass_manager :: dump_mir_for_phase_change (tcx , & body) ; body }
+};
+}

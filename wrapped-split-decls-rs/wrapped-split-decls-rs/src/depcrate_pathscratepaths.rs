@@ -1,0 +1,9 @@
+// Generated macro for CratePaths (struct)
+macro_rules! Depcrate_pathsCratePaths {
+() => {
+// Module: crate::paths
+// Provides: {"CratePaths"}
+// Dependencies: {}
+# [doc = " Encapsulates all relevant file paths for a target crate."] pub struct CratePaths { pub crate_path : PathBuf , pub crate_name : String , pub source_files : Vec < PathBuf > , pub build_rs_path : PathBuf , pub cargo_toml_path : PathBuf , pub decls_output_dir : PathBuf , pub target_config_path : PathBuf , pub output_crate_path : PathBuf , }
+};
+}

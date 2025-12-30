@@ -1,0 +1,9 @@
+// Generated macro for construct_salt_variable_size (macro)
+macro_rules! Depcrate_typedefsconstruct_salt_variable_size {
+() => {
+// Module: crate::typedefs
+// Provides: {"construct_salt_variable_size"}
+// Dependencies: {}
+# [cfg (feature = "safe_api")] # [doc = " Macro to construct a type containing non-sensitive data which is stored on the"] # [doc = " heap."] macro_rules ! construct_salt_variable_size { ($ (# [$ meta : meta]) * ($ name : ident , $ test_module_name : ident , $ default_size : expr)) => (# [cfg (feature = "safe_api")] $ (# [$ meta]) * # [doc = ""] pub struct $ name { value : alloc :: vec :: Vec < u8 >, original_length : usize , } impl_normal_debug_trait ! ($ name) ; impl_default_trait ! ($ name , $ default_size) ; impl_ct_partialeq_trait ! ($ name , as_ref) ; impl_asref_trait ! ($ name) ; impl_try_from_trait ! ($ name) ; # [cfg (feature = "serde")] impl_serde_traits ! ($ name , as_ref) ; impl $ name { func_from_slice_variable_size ! ($ name) ; func_len ! () ; func_is_empty ! () ; func_generate_variable_size ! ($ name) ; } # [cfg (test)] mod $ test_module_name { use super ::*; test_from_slice_variable ! ($ name) ; test_as_bytes_and_get_length ! ($ name , 1 , $ default_size + 1 , as_ref) ; test_generate_variable ! ($ name) ; test_partial_eq ! ($ name , $ default_size) ; test_normal_debug ! ($ name , $ default_size) ; # [cfg (feature = "serde")] test_serde_impls ! ($ name , $ default_size) ; }) ; }
+};
+}

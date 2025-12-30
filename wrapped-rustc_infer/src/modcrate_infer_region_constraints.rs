@@ -1,0 +1,47 @@
+// Generated module macro for crate::infer::region_constraints
+macro_rules! Modcrate_infer_region_constraints {
+() => {
+        Depcrate_infer_region_constraintsuse_297!();
+        Depcrate_infer_region_constraintsuse_298!();
+        Depcrate_infer_region_constraintsuse_299!();
+        Depcrate_infer_region_constraintsuse_300!();
+        Depcrate_infer_region_constraintsuse_301!();
+        Depcrate_infer_region_constraintsuse_302!();
+        Depcrate_infer_region_constraintsuse_303!();
+        Depcrate_infer_region_constraintsuse_304!();
+        Depcrate_infer_region_constraintsuse_305!();
+        Depcrate_infer_region_constraintsuse_306!();
+        Depcrate_infer_region_constraintsuse_307!();
+        Depcrate_infer_region_constraintsuse_308!();
+        Depcrate_infer_region_constraintsuse_309!();
+        Depcrate_infer_region_constraintsuse_310!();
+        Depcrate_infer_region_constraintsuse_311!();
+        Depcrate_infer_region_constraintsleak_check!();
+        Depcrate_infer_region_constraintsRegionConstraintStorage!();
+        Depcrate_infer_region_constraintsRegionConstraintCollector!();
+        Depcrate_infer_region_constraintsVarInfos!();
+        Depcrate_infer_region_constraintsRegionConstraintData!();
+        Depcrate_infer_region_constraintsConstraintKind!();
+        Depcrate_infer_region_constraintsConstraint!();
+        Depcrate_infer_region_constraintsimpl_338!();
+        Depcrate_infer_region_constraintsVerify!();
+        Depcrate_infer_region_constraintsGenericKind!();
+        Depcrate_infer_region_constraintsVerifyBound!();
+        Depcrate_infer_region_constraintsVerifyIfEq!();
+        Depcrate_infer_region_constraintsTwoRegions!();
+        Depcrate_infer_region_constraintsUndoLog!();
+        Depcrate_infer_region_constraintsCombineMapType!();
+        Depcrate_infer_region_constraintsCombineMap!();
+        Depcrate_infer_region_constraintsRegionVariableInfo!();
+        Depcrate_infer_region_constraintsRegionSnapshot!();
+        Depcrate_infer_region_constraintsimpl_349!();
+        Depcrate_infer_region_constraintsimpl_350!();
+        Depcrate_infer_region_constraintsimpl_351!();
+        Depcrate_infer_region_constraintsimpl_352!();
+        Depcrate_infer_region_constraintsimpl_353!();
+        Depcrate_infer_region_constraintsimpl_354!();
+        Depcrate_infer_region_constraintsimpl_355!();
+        Depcrate_infer_region_constraintsimpl_356!();
+        Depcrate_infer_region_constraintsimpl_357!();
+    };
+}

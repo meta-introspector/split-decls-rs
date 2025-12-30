@@ -1,0 +1,40 @@
+// Generated module macro for crate::asm
+macro_rules! Modcrate_asm {
+() => {
+        Depcrate_asmuse_80!();
+        Depcrate_asmuse_81!();
+        Depcrate_asmuse_82!();
+        Depcrate_asmuse_83!();
+        Depcrate_asmuse_84!();
+        Depcrate_asmuse_85!();
+        Depcrate_asmuse_86!();
+        Depcrate_asmuse_87!();
+        Depcrate_asmuse_88!();
+        Depcrate_asmuse_89!();
+        Depcrate_asmuse_90!();
+        Depcrate_asmuse_91!();
+        Depcrate_asmuse_92!();
+        Depcrate_asmuse_93!();
+        Depcrate_asmuse_94!();
+        Depcrate_asmuse_95!();
+        Depcrate_asmuse_96!();
+        Depcrate_asmuse_97!();
+        Depcrate_asmuse_98!();
+        Depcrate_asmuse_99!();
+        Depcrate_asmuse_100!();
+        Depcrate_asmimpl_101!();
+        Depcrate_asmimpl_102!();
+        Depcrate_asminline_asm_call!();
+        Depcrate_asmxmm_reg_index!();
+        Depcrate_asma64_reg_index!();
+        Depcrate_asma64_vreg_index!();
+        Depcrate_asmreg_to_llvm!();
+        Depcrate_asmmodifier_to_llvm!();
+        Depcrate_asmdummy_output_type!();
+        Depcrate_asmllvm_asm_scalar_type!();
+        Depcrate_asmany_target_feature_enabled!();
+        Depcrate_asmllvm_fixup_input!();
+        Depcrate_asmllvm_fixup_output!();
+        Depcrate_asmllvm_fixup_output_type!();
+    };
+}

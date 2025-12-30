@@ -1,0 +1,9 @@
+// Generated macro for Union (struct)
+macro_rules! DepcrateUnion {
+() => {
+// Module: crate
+// Provides: {"Union"}
+// Dependencies: {}
+# [doc = " An iterator producing elements in the union of two sets."] # [doc = ""] # [doc = " This struct is created by the [`FixedBitSet::union`] method."] pub struct Union < 'a > { iter : Chain < Ones < 'a > , Difference < 'a > > , }
+};
+}

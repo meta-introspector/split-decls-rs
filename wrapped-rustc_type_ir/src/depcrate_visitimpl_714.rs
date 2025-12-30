@@ -1,0 +1,9 @@
+// Generated macro for impl_714 (impl)
+macro_rules! Depcrate_visitimpl_714 {
+() => {
+// Module: crate::visit
+// Provides: {"impl_714"}
+// Dependencies: {}
+impl < I : Interner , T : TypeVisitable < I > > TypeVisitable < I > for Box < [T] > { fn visit_with < V : TypeVisitor < I > > (& self , visitor : & mut V) -> V :: Result { walk_visitable_list ! (visitor , self . iter ()) ; V :: Result :: output () } }
+};
+}

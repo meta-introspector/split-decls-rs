@@ -1,0 +1,9 @@
+// Generated macro for valid_ty_for_activity (function)
+macro_rules! Depcrate_expand_autodiff_attrsvalid_ty_for_activity {
+() => {
+// Module: crate::expand::autodiff_attrs
+// Provides: {"valid_ty_for_activity"}
+// Dependencies: {}
+# [doc = " For indirections (ptr/ref) we can't use Active, since Active allocates a shadow value"] # [doc = " for the given argument, but we generally can't know the size of such a type."] # [doc = " For scalar types (f16/f32/f64/f128) we can use Active and we can't use Duplicated,"] # [doc = " since Duplicated expects a mutable ref/ptr and we would thus end up with a shadow value"] # [doc = " who is an indirect type, which doesn't match the primal scalar type. We can't prevent"] # [doc = " users here from marking scalars as Duplicated, due to type aliases."] pub fn valid_ty_for_activity (ty : & Box < Ty > , activity : DiffActivity) -> bool { use DiffActivity :: * ; if activity . is_dual_or_const () { return true ; } if matches ! (activity , Active | ActiveOnly) { return true ; } matches ! (ty . kind , TyKind :: Ptr (_) | TyKind :: Ref (..)) && matches ! (activity , Duplicated | DuplicatedOnly) }
+};
+}

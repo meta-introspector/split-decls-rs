@@ -1,0 +1,9 @@
+// Generated macro for unsizing_params_for_adt (function)
+macro_rules! Depcrate_tyunsizing_params_for_adt {
+() => {
+// Module: crate::ty
+// Provides: {"unsizing_params_for_adt"}
+// Dependencies: {}
+fn unsizing_params_for_adt < 'tcx > (tcx : TyCtxt < 'tcx > , def_id : DefId) -> DenseBitSet < u32 > { let def = tcx . adt_def (def_id) ; let num_params = tcx . generics_of (def_id) . count () ; let maybe_unsizing_param_idx = | arg : ty :: GenericArg < 'tcx > | match arg . kind () { ty :: GenericArgKind :: Type (ty) => match ty . kind () { ty :: Param (p) => Some (p . index) , _ => None , } , ty :: GenericArgKind :: Lifetime (_) => None , ty :: GenericArgKind :: Const (ct) => match ct . kind () { ty :: ConstKind :: Param (p) => Some (p . index) , _ => None , } , } ; let Some ((tail_field , prefix_fields)) = def . non_enum_variant () . fields . raw . split_last () else { return DenseBitSet :: new_empty (num_params) ; } ; let mut unsizing_params = DenseBitSet :: new_empty (num_params) ; for arg in tcx . type_of (tail_field . did) . instantiate_identity () . walk () { if let Some (i) = maybe_unsizing_param_idx (arg) { unsizing_params . insert (i) ; } } for field in prefix_fields { for arg in tcx . type_of (field . did) . instantiate_identity () . walk () { if let Some (i) = maybe_unsizing_param_idx (arg) { unsizing_params . remove (i) ; } } } unsizing_params }
+};
+}

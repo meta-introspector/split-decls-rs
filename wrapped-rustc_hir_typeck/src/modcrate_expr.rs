@@ -1,0 +1,40 @@
+// Generated module macro for crate::expr
+macro_rules! Modcrate_expr {
+() => {
+        Depcrate_expruse_308!();
+        Depcrate_expruse_309!();
+        Depcrate_expruse_310!();
+        Depcrate_expruse_311!();
+        Depcrate_expruse_312!();
+        Depcrate_expruse_313!();
+        Depcrate_expruse_314!();
+        Depcrate_expruse_315!();
+        Depcrate_expruse_316!();
+        Depcrate_expruse_317!();
+        Depcrate_expruse_318!();
+        Depcrate_expruse_319!();
+        Depcrate_expruse_320!();
+        Depcrate_expruse_321!();
+        Depcrate_expruse_322!();
+        Depcrate_expruse_323!();
+        Depcrate_expruse_324!();
+        Depcrate_expruse_325!();
+        Depcrate_expruse_326!();
+        Depcrate_expruse_327!();
+        Depcrate_expruse_328!();
+        Depcrate_expruse_329!();
+        Depcrate_expruse_330!();
+        Depcrate_expruse_331!();
+        Depcrate_expruse_332!();
+        Depcrate_expruse_333!();
+        Depcrate_expruse_334!();
+        Depcrate_expruse_335!();
+        Depcrate_expruse_336!();
+        Depcrate_expruse_337!();
+        Depcrate_expruse_338!();
+        Depcrate_expruse_339!();
+        Depcrate_expruse_340!();
+        Depcrate_expruse_341!();
+        Depcrate_exprimpl_342!();
+    };
+}

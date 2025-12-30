@@ -1,0 +1,43 @@
+// Generated module macro for crate::common
+macro_rules! Modcrate_common {
+() => {
+        Depcrate_commonFormat!();
+        Depcrate_commonimpl_6!();
+        Depcrate_commonVendor!();
+        Depcrate_commonEncoding!();
+        Depcrate_commonLineEncoding!();
+        Depcrate_commonimpl_10!();
+        Depcrate_commonRegister!();
+        Depcrate_commonDebugAbbrevOffset!();
+        Depcrate_commonDebugAddrOffset!();
+        Depcrate_commonDebugAddrBase!();
+        Depcrate_commonDebugAddrIndex!();
+        Depcrate_commonDebugArangesOffset!();
+        Depcrate_commonDebugInfoOffset!();
+        Depcrate_commonDebugLineOffset!();
+        Depcrate_commonDebugLineStrOffset!();
+        Depcrate_commonLocationListsOffset!();
+        Depcrate_commonDebugLocListsBase!();
+        Depcrate_commonDebugLocListsIndex!();
+        Depcrate_commonDebugMacinfoOffset!();
+        Depcrate_commonDebugMacroOffset!();
+        Depcrate_commonRawRangeListsOffset!();
+        Depcrate_commonRangeListsOffset!();
+        Depcrate_commonDebugRngListsBase!();
+        Depcrate_commonDebugRngListsIndex!();
+        Depcrate_commonDebugStrOffset!();
+        Depcrate_commonDebugStrOffsetsBase!();
+        Depcrate_commonDebugStrOffsetsIndex!();
+        Depcrate_commonDebugTypesOffset!();
+        Depcrate_commonDebugTypeSignature!();
+        Depcrate_commonDebugFrameOffset!();
+        Depcrate_commonimpl_35!();
+        Depcrate_commonEhFrameOffset!();
+        Depcrate_commonimpl_37!();
+        Depcrate_commonUnitSectionOffset!();
+        Depcrate_commonSectionId!();
+        Depcrate_commonimpl_40!();
+        Depcrate_commonDwoId!();
+        Depcrate_commonDwarfFileType!();
+    };
+}

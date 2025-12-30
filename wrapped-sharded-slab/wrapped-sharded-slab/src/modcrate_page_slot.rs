@@ -1,0 +1,50 @@
+// Generated module macro for crate::page::slot
+macro_rules! Modcrate_page_slot {
+() => {
+        Depcrate_page_slotuse_90!();
+        Depcrate_page_slotuse_91!();
+        Depcrate_page_slotuse_92!();
+        Depcrate_page_slotuse_93!();
+        Depcrate_page_slotSlot!();
+        Depcrate_page_slotGuard!();
+        Depcrate_page_slotInitGuard!();
+        Depcrate_page_slotGeneration!();
+        Depcrate_page_slotRefCount!();
+        Depcrate_page_slotLifecycle!();
+        Depcrate_page_slotLifecycleGen!();
+        Depcrate_page_slotState!();
+        Depcrate_page_slotimpl_102!();
+        Depcrate_page_slotimpl_103!();
+        Depcrate_page_slotimpl_104!();
+        Depcrate_page_slotimpl_105!();
+        Depcrate_page_slotimpl_106!();
+        Depcrate_page_slotimpl_107!();
+        Depcrate_page_slotimpl_108!();
+        Depcrate_page_slotimpl_109!();
+        Depcrate_page_slotimpl_110!();
+        Depcrate_page_slotimpl_111!();
+        Depcrate_page_slotimpl_112!();
+        Depcrate_page_slotimpl_113!();
+        Depcrate_page_slotimpl_114!();
+        Depcrate_page_slotimpl_115!();
+        Depcrate_page_slotimpl_116!();
+        Depcrate_page_slotimpl_117!();
+        Depcrate_page_slotimpl_118!();
+        Depcrate_page_slotimpl_119!();
+        Depcrate_page_slotimpl_120!();
+        Depcrate_page_slotimpl_121!();
+        Depcrate_page_slotimpl_122!();
+        Depcrate_page_slotimpl_123!();
+        Depcrate_page_slotimpl_124!();
+        Depcrate_page_slotimpl_125!();
+        Depcrate_page_slotimpl_126!();
+        Depcrate_page_slotimpl_127!();
+        Depcrate_page_slotimpl_128!();
+        Depcrate_page_slotimpl_129!();
+        Depcrate_page_slotimpl_130!();
+        Depcrate_page_slotimpl_131!();
+        Depcrate_page_slotimpl_132!();
+        Depcrate_page_slotimpl_133!();
+        Depcrate_page_slotexponential_backoff!();
+    };
+}

@@ -1,0 +1,9 @@
+// Generated macro for impl_472 (impl)
+macro_rules! Depcrateimpl_472 {
+() => {
+// Module: crate
+// Provides: {"impl_472"}
+// Dependencies: {}
+impl < S > fmt :: Debug for ThreadPoolBuilder < S > { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { let ThreadPoolBuilder { ref num_threads , ref get_thread_name , ref panic_handler , ref stack_size , ref deadlock_handler , ref start_handler , ref exit_handler , ref acquire_thread_handler , ref release_thread_handler , spawn_handler : _ , ref breadth_first , } = * self ; struct ClosurePlaceholder ; impl fmt :: Debug for ClosurePlaceholder { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { f . write_str ("<closure>") } } let get_thread_name = get_thread_name . as_ref () . map (| _ | ClosurePlaceholder) ; let panic_handler = panic_handler . as_ref () . map (| _ | ClosurePlaceholder) ; let deadlock_handler = deadlock_handler . as_ref () . map (| _ | ClosurePlaceholder) ; let start_handler = start_handler . as_ref () . map (| _ | ClosurePlaceholder) ; let exit_handler = exit_handler . as_ref () . map (| _ | ClosurePlaceholder) ; let acquire_thread_handler = acquire_thread_handler . as_ref () . map (| _ | ClosurePlaceholder) ; let release_thread_handler = release_thread_handler . as_ref () . map (| _ | ClosurePlaceholder) ; f . debug_struct ("ThreadPoolBuilder") . field ("num_threads" , num_threads) . field ("get_thread_name" , & get_thread_name) . field ("panic_handler" , & panic_handler) . field ("stack_size" , & stack_size) . field ("deadlock_handler" , & deadlock_handler) . field ("start_handler" , & start_handler) . field ("exit_handler" , & exit_handler) . field ("acquire_thread_handler" , & acquire_thread_handler) . field ("release_thread_handler" , & release_thread_handler) . field ("breadth_first" , & breadth_first) . finish () } }
+};
+}

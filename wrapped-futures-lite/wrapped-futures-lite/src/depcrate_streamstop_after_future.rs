@@ -1,0 +1,9 @@
+// Generated macro for stop_after_future (function)
+macro_rules! Depcrate_streamstop_after_future {
+() => {
+// Module: crate::stream
+// Provides: {"stop_after_future"}
+// Dependencies: {}
+# [doc = " Take elements from this stream until the provided future resolves."] # [doc = ""] # [doc = " This function will take elements from the stream until the provided"] # [doc = " stopping future `fut` resolves. Once the `fut` future becomes ready,"] # [doc = " this stream combinator will always return that the stream is done."] # [doc = ""] # [doc = " The stopping future may return any type. Once the stream is stopped"] # [doc = " the result of the stopping future may be accessed with `StopAfterFuture::take_result()`."] # [doc = " The stream may also be resumed with `StopAfterFuture::take_future()`."] # [doc = " See the documentation of [`StopAfterFuture`] for more information."] # [doc = ""] # [doc = " ```"] # [doc = " use futures_lite::stream::{self, StreamExt, stop_after_future};"] # [doc = " use futures_lite::future;"] # [doc = " use std::task::Poll;"] # [doc = ""] # [doc = " let stream = stream::iter(1..=10);"] # [doc = ""] # [doc = " # spin_on::spin_on(async {"] # [doc = " let mut i = 0;"] # [doc = " let stop_fut = future::poll_fn(|_cx| {"] # [doc = "     i += 1;"] # [doc = "     if i <= 5 {"] # [doc = "         Poll::Pending"] # [doc = "     } else {"] # [doc = "         Poll::Ready(())"] # [doc = "     }"] # [doc = " });"] # [doc = ""] # [doc = " let stream = stop_after_future(stream, stop_fut);"] # [doc = ""] # [doc = " assert_eq!(vec![1, 2, 3, 4, 5], stream.collect::<Vec<_>>().await);"] # [doc = " # });"] pub fn stop_after_future < S , F > (stream : S , future : F) -> StopAfterFuture < S , F > where S : Sized + Stream , F : Future , { StopAfterFuture { stream , fut : Some (future) , fut_result : None , free : false , } }
+};
+}

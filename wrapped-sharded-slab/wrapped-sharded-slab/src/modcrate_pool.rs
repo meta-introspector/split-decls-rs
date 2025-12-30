@@ -1,0 +1,44 @@
+// Generated module macro for crate::pool
+macro_rules! Modcrate_pool {
+() => {
+        Depcrate_pooluse_8!();
+        Depcrate_pooluse_9!();
+        Depcrate_poolPool!();
+        Depcrate_poolRef!();
+        Depcrate_poolRefMut!();
+        Depcrate_poolOwnedRef!();
+        Depcrate_poolOwnedRefMut!();
+        Depcrate_poolimpl_15!();
+        Depcrate_poolimpl_16!();
+        Depcrate_poolimpl_17!();
+        Depcrate_poolimpl_18!();
+        Depcrate_poolimpl_19!();
+        Depcrate_poolimpl_20!();
+        Depcrate_poolimpl_21!();
+        Depcrate_poolimpl_22!();
+        Depcrate_poolimpl_23!();
+        Depcrate_poolimpl_24!();
+        Depcrate_poolimpl_25!();
+        Depcrate_poolimpl_26!();
+        Depcrate_poolimpl_27!();
+        Depcrate_poolimpl_28!();
+        Depcrate_poolimpl_29!();
+        Depcrate_poolimpl_30!();
+        Depcrate_poolimpl_31!();
+        Depcrate_poolimpl_32!();
+        Depcrate_poolimpl_33!();
+        Depcrate_poolimpl_34!();
+        Depcrate_poolimpl_35!();
+        Depcrate_poolimpl_36!();
+        Depcrate_poolimpl_37!();
+        Depcrate_poolimpl_38!();
+        Depcrate_poolimpl_39!();
+        Depcrate_poolimpl_40!();
+        Depcrate_poolimpl_41!();
+        Depcrate_poolimpl_42!();
+        Depcrate_poolimpl_43!();
+        Depcrate_poolimpl_44!();
+        Depcrate_poolimpl_45!();
+        Depcrate_poolimpl_46!();
+    };
+}

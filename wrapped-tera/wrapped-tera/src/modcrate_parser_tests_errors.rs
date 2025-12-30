@@ -1,0 +1,44 @@
+// Generated module macro for crate::parser::tests::errors
+macro_rules! Modcrate_parser_tests_errors {
+() => {
+        Depcrate_parser_tests_errorsuse_255!();
+        Depcrate_parser_tests_errorsassert_err_msg!();
+        Depcrate_parser_tests_errorsinvalid_number!();
+        Depcrate_parser_tests_errorsinvalid_op!();
+        Depcrate_parser_tests_errorswrong_start_block!();
+        Depcrate_parser_tests_errorswrong_end_block!();
+        Depcrate_parser_tests_errorsunterminated_variable_block!();
+        Depcrate_parser_tests_errorsunterminated_string!();
+        Depcrate_parser_tests_errorsunterminated_if_tag!();
+        Depcrate_parser_tests_errorsunterminated_filter_section!();
+        Depcrate_parser_tests_errorsinvalid_filter_section_missing_name!();
+        Depcrate_parser_tests_errorsinvalid_macro_content!();
+        Depcrate_parser_tests_errorsinvalid_macro_not_toplevel!();
+        Depcrate_parser_tests_errorsinvalid_macro_default_arg_value!();
+        Depcrate_parser_tests_errorsinvalid_elif!();
+        Depcrate_parser_tests_errorsinvalid_else!();
+        Depcrate_parser_tests_errorsinvalid_extends_position!();
+        Depcrate_parser_tests_errorsinvalid_operator!();
+        Depcrate_parser_tests_errorsmissing_expression_with_not!();
+        Depcrate_parser_tests_errorsmissing_expression_in_if!();
+        Depcrate_parser_tests_errorsmissing_container_name_in_forloop!();
+        Depcrate_parser_tests_errorsmissing_variable_name_in_set!();
+        Depcrate_parser_tests_errorsmissing_value_in_set!();
+        Depcrate_parser_tests_errorsunterminated_fn_call!();
+        Depcrate_parser_tests_errorsinvalid_fn_call_missing_value!();
+        Depcrate_parser_tests_errorsunterminated_macro_call!();
+        Depcrate_parser_tests_errorsinvalid_macro_call!();
+        Depcrate_parser_tests_errorsunterminated_include!();
+        Depcrate_parser_tests_errorsinvalid_include_no_string!();
+        Depcrate_parser_tests_errorsunterminated_extends!();
+        Depcrate_parser_tests_errorsinvalid_extends_no_string!();
+        Depcrate_parser_tests_errorsinvalid_import_macros_missing_filename!();
+        Depcrate_parser_tests_errorsinvalid_import_macros_missing_namespace!();
+        Depcrate_parser_tests_errorsinvalid_block_missing_name!();
+        Depcrate_parser_tests_errorsunterminated_test!();
+        Depcrate_parser_tests_errorsinvalid_test_argument!();
+        Depcrate_parser_tests_errorsunterminated_raw_tag!();
+        Depcrate_parser_tests_errorsinvalid_break_outside_loop!();
+        Depcrate_parser_tests_errorsinvalid_continue_outside_loop!();
+    };
+}

@@ -1,0 +1,43 @@
+// Generated module macro for crate::diagnostic_impls
+macro_rules! Modcrate_diagnostic_impls {
+() => {
+        Depcrate_diagnostic_implsuse_17!();
+        Depcrate_diagnostic_implsuse_18!();
+        Depcrate_diagnostic_implsuse_19!();
+        Depcrate_diagnostic_implsuse_20!();
+        Depcrate_diagnostic_implsuse_21!();
+        Depcrate_diagnostic_implsuse_22!();
+        Depcrate_diagnostic_implsuse_23!();
+        Depcrate_diagnostic_implsuse_24!();
+        Depcrate_diagnostic_implsuse_25!();
+        Depcrate_diagnostic_implsuse_26!();
+        Depcrate_diagnostic_implsDiagArgFromDisplay!();
+        Depcrate_diagnostic_implsimpl_28!();
+        Depcrate_diagnostic_implsimpl_29!();
+        Depcrate_diagnostic_implsimpl_30!();
+        Depcrate_diagnostic_implsimpl_31!();
+        Depcrate_diagnostic_implsinto_diag_arg_using_display!();
+        Depcrate_diagnostic_implsinto_diag_arg_for_number!();
+        Depcrate_diagnostic_implsmacro_34!();
+        Depcrate_diagnostic_implsmacro_35!();
+        Depcrate_diagnostic_implsimpl_36!();
+        Depcrate_diagnostic_implsimpl_37!();
+        Depcrate_diagnostic_implsimpl_38!();
+        Depcrate_diagnostic_implsimpl_39!();
+        Depcrate_diagnostic_implsimpl_40!();
+        Depcrate_diagnostic_implsimpl_41!();
+        Depcrate_diagnostic_implsimpl_42!();
+        Depcrate_diagnostic_implsimpl_43!();
+        Depcrate_diagnostic_implsimpl_44!();
+        Depcrate_diagnostic_implsimpl_45!();
+        Depcrate_diagnostic_implsimpl_46!();
+        Depcrate_diagnostic_implsimpl_47!();
+        Depcrate_diagnostic_implsimpl_48!();
+        Depcrate_diagnostic_implsimpl_49!();
+        Depcrate_diagnostic_implsimpl_50!();
+        Depcrate_diagnostic_implsimpl_51!();
+        Depcrate_diagnostic_implsimpl_52!();
+        Depcrate_diagnostic_implsimpl_53!();
+        Depcrate_diagnostic_implsimpl_54!();
+    };
+}

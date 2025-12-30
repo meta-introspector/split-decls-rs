@@ -1,0 +1,9 @@
+// Generated macro for UTF_16BE (static)
+macro_rules! DepcrateUTF_16BE {
+() => {
+// Module: crate
+// Provides: {"UTF_16BE"}
+// Dependencies: {}
+# [doc = " The UTF-16BE encoding."] # [doc = ""] # [doc = " This decode-only encoding uses 16-bit code units due to Unicode originally"] # [doc = " having been designed as a 16-bit reportoire. In the absence of a byte order"] # [doc = " mark the big endian byte order is assumed."] # [doc = ""] # [doc = " There is no corresponding encoder in this crate or in the Encoding"] # [doc = " Standard. The output encoding of this encoding is UTF-8."] # [doc = ""] # [doc = " This encoding matches the Windows code page 1201."] # [doc = ""] # [doc = " This will change from `static` to `const` if Rust changes"] # [doc = " to make the referent of `pub const FOO: &'static Encoding`"] # [doc = " unique cross-crate, so don't take the address of this"] # [doc = " `static`."] pub static UTF_16BE : & 'static Encoding = & UTF_16BE_INIT ;
+};
+}

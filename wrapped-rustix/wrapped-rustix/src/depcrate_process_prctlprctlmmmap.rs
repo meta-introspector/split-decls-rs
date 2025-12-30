@@ -1,0 +1,9 @@
+// Generated macro for PrctlMmMap (struct)
+macro_rules! Depcrate_process_prctlPrctlMmMap {
+() => {
+// Module: crate::process::prctl
+// Provides: {"PrctlMmMap"}
+// Dependencies: {}
+# [doc = " This structure provides new memory descriptor map which mostly modifies"] # [doc = " `/proc/pid/stat[m]` output for a task."] # [doc = " This mostly done in a sake of checkpoint/restore functionality."] # [repr (C)] # [derive (Debug , Clone)] pub struct PrctlMmMap { # [doc = " Code section start address."] pub start_code : u64 , # [doc = " Code section end address."] pub end_code : u64 , # [doc = " Data section start address."] pub start_data : u64 , # [doc = " Data section end address."] pub end_data : u64 , # [doc = " `brk` start address."] pub start_brk : u64 , # [doc = " `brk` current address."] pub brk : u64 , # [doc = " Stack start address."] pub start_stack : u64 , # [doc = " Program command line start address."] pub arg_start : u64 , # [doc = " Program command line end address."] pub arg_end : u64 , # [doc = " Program environment start address."] pub env_start : u64 , # [doc = " Program environment end address."] pub env_end : u64 , # [doc = " Auxiliary vector start address."] pub auxv : * mut u64 , # [doc = " Auxiliary vector size."] pub auxv_size : u32 , # [doc = " File descriptor of executable file that was used to create this"] # [doc = " process."] pub exe_fd : RawFd , }
+};
+}

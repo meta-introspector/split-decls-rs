@@ -1,0 +1,9 @@
+// Generated macro for impl_31 (impl)
+macro_rules! Depcrateimpl_31 {
+() => {
+// Module: crate
+// Provides: {"impl_31"}
+// Dependencies: {}
+impl < T : fmt :: Debug > fmt :: Debug for Unblock < T > { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { struct Closed ; impl fmt :: Debug for Closed { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { f . write_str ("<closed>") } } struct Blocked ; impl fmt :: Debug for Blocked { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { f . write_str ("<blocked>") } } match & self . state { State :: Idle (None) => f . debug_struct ("Unblock") . field ("io" , & Closed) . finish () , State :: Idle (Some (io)) => { let io : & T = io ; f . debug_struct ("Unblock") . field ("io" , io) . finish () } State :: WithMut (..) | State :: Streaming (..) | State :: Reading (..) | State :: Writing (..) | State :: Seeking (..) => f . debug_struct ("Unblock") . field ("io" , & Blocked) . finish () , } } }
+};
+}

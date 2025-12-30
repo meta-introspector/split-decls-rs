@@ -1,0 +1,9 @@
+// Generated macro for colorify (macro)
+macro_rules! Depcratecolorify {
+() => {
+// Module: crate
+// Provides: {"colorify"}
+// Dependencies: {}
+# [cfg (all (windows , not (feature = "enable_windows")))] # [macro_export] macro_rules ! colorify { (help) => { concat ! (help ! () , "\n") } ; (help :) => { concat ! (help ! () , "\n") } ; (help : $ s : expr) => { concat ! (help ! () , "\n" , "\x1b[0m" , $ s , "\x1b[0m") } ; (default : $ s : expr) => { $ s } ; (black : $ s : expr) => { $ s } ; (black_bold : $ s : expr) => { $ s } ; (red : $ s : expr) => { $ s } ; (red_bold : $ s : expr) => { $ s } ; (green : $ s : expr) => { $ s } ; (green_bold : $ s : expr) => { $ s } ; (orange : $ s : expr) => { $ s } ; (orange_bold : $ s : expr) => { $ s } ; (blue : $ s : expr) => { $ s } ; (blue_bold : $ s : expr) => { $ s } ; (purple : $ s : expr) => { $ s } ; (purple_bold : $ s : expr) => { $ s } ; (cyan : $ s : expr) => { $ s } ; (cyan_bold : $ s : expr) => { $ s } ; (light_grey : $ s : expr) => { $ s } ; (white_bold : $ s : expr) => { $ s } ; (dark_grey : $ s : expr) => { $ s } ; (dark_grey_bold : $ s : expr) => { $ s } ; (peach : $ s : expr) => { $ s } ; (peach_bold : $ s : expr) => { $ s } ; (lime : $ s : expr) => { $ s } ; (lime_bold : $ s : expr) => { $ s } ; (yellow : $ s : expr) => { $ s } ; (yellow_bold : $ s : expr) => { $ s } ; (royal_blue : $ s : expr) => { $ s } ; (royal_blue_bold : $ s : expr) => { $ s } ; (magenta : $ s : expr) => { $ s } ; (magenta_bold : $ s : expr) => { $ s } ; (teal : $ s : expr) => { $ s } ; (teal_bold : $ s : expr) => { $ s } ; (white : $ s : expr) => { $ s } ; (white_bold2 : $ s : expr) => { $ s } ; }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for MsgHdrMut (struct)
+macro_rules! DepcrateMsgHdrMut {
+() => {
+// Module: crate
+// Provides: {"MsgHdrMut"}
+// Dependencies: {}
+# [doc = " Configuration of a `recvmsg(2)` system call."] # [doc = ""] # [doc = " This wraps `msghdr` on Unix and `WSAMSG` on Windows. Also see [`MsgHdr`] for"] # [doc = " the variant used by `sendmsg(2)`."] # [cfg (not (target_os = "redox"))] pub struct MsgHdrMut < 'addr , 'bufs , 'control > { inner : sys :: msghdr , # [allow (clippy :: type_complexity)] _lifetimes : PhantomData < (& 'addr mut SockAddr , & 'bufs mut MaybeUninitSlice < 'bufs > , & 'control mut [u8] ,) > , }
+};
+}

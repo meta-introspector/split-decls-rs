@@ -1,0 +1,46 @@
+// Generated module macro for crate::set
+macro_rules! Modcrate_set {
+() => {
+        Depcrate_setiter!();
+        Depcrate_setmutable!();
+        Depcrate_setslice!();
+        Depcrate_settests!();
+        Depcrate_setuse_110!();
+        Depcrate_setuse_111!();
+        Depcrate_setuse_112!();
+        Depcrate_setuse_113!();
+        Depcrate_setuse_114!();
+        Depcrate_setuse_115!();
+        Depcrate_setuse_116!();
+        Depcrate_setuse_117!();
+        Depcrate_setuse_118!();
+        Depcrate_setuse_119!();
+        Depcrate_setuse_120!();
+        Depcrate_setuse_121!();
+        Depcrate_setuse_122!();
+        Depcrate_setuse_123!();
+        Depcrate_setBucket!();
+        Depcrate_setIndexSet!();
+        Depcrate_setIndexSet!();
+        Depcrate_setimpl_127!();
+        Depcrate_setimpl_128!();
+        Depcrate_setimpl_129!();
+        Depcrate_setimpl_130!();
+        Depcrate_setimpl_131!();
+        Depcrate_setimpl_132!();
+        Depcrate_setimpl_133!();
+        Depcrate_setimpl_134!();
+        Depcrate_setimpl_135!();
+        Depcrate_setimpl_136!();
+        Depcrate_setimpl_137!();
+        Depcrate_setimpl_138!();
+        Depcrate_setimpl_139!();
+        Depcrate_setimpl_140!();
+        Depcrate_setimpl_141!();
+        Depcrate_setimpl_142!();
+        Depcrate_setimpl_143!();
+        Depcrate_setimpl_144!();
+        Depcrate_setimpl_145!();
+        Depcrate_setimpl_146!();
+    };
+}

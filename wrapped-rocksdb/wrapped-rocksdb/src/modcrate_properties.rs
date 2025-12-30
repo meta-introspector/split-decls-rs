@@ -1,0 +1,54 @@
+// Generated module macro for crate::properties
+macro_rules! Modcrate_properties {
+() => {
+        Depcrate_propertiesuse_408!();
+        Depcrate_propertiesuse_409!();
+        Depcrate_propertiesproperty!();
+        Depcrate_propertiesnum_files_at_level!();
+        Depcrate_propertiescompression_ratio_at_level!();
+        Depcrate_propertiesSTATS!();
+        Depcrate_propertiesSSTABLES!();
+        Depcrate_propertiesCFSTATS!();
+        Depcrate_propertiesCFSTATS_NO_FILE_HISTOGRAM!();
+        Depcrate_propertiesCF_FILE_HISTOGRAM!();
+        Depcrate_propertiesDBSTATS!();
+        Depcrate_propertiesLEVELSTATS!();
+        Depcrate_propertiesNUM_IMMUTABLE_MEM_TABLE!();
+        Depcrate_propertiesNUM_IMMUTABLE_MEM_TABLE_FLUSHED!();
+        Depcrate_propertiesMEM_TABLE_FLUSH_PENDING!();
+        Depcrate_propertiesNUM_RUNNING_FLUSHES!();
+        Depcrate_propertiesCOMPACTION_PENDING!();
+        Depcrate_propertiesNUM_RUNNING_COMPACTIONS!();
+        Depcrate_propertiesBACKGROUND_ERRORS!();
+        Depcrate_propertiesCUR_SIZE_ACTIVE_MEM_TABLE!();
+        Depcrate_propertiesCUR_SIZE_ALL_MEM_TABLES!();
+        Depcrate_propertiesSIZE_ALL_MEM_TABLES!();
+        Depcrate_propertiesNUM_ENTRIES_ACTIVE_MEM_TABLE!();
+        Depcrate_propertiesNUM_ENTRIES_IMM_MEM_TABLES!();
+        Depcrate_propertiesNUM_DELETES_ACTIVE_MEM_TABLE!();
+        Depcrate_propertiesNUM_DELETES_IMM_MEM_TABLES!();
+        Depcrate_propertiesESTIMATE_NUM_KEYS!();
+        Depcrate_propertiesESTIMATE_TABLE_READERS_MEM!();
+        Depcrate_propertiesIS_FILE_DELETIONS_ENABLED!();
+        Depcrate_propertiesNUM_SNAPSHOTS!();
+        Depcrate_propertiesOLDEST_SNAPSHOT_TIME!();
+        Depcrate_propertiesNUM_LIVE_VERSIONS!();
+        Depcrate_propertiesCURRENT_SUPER_VERSION_NUMBER!();
+        Depcrate_propertiesESTIMATE_LIVE_DATA_SIZE!();
+        Depcrate_propertiesMIN_LOG_NUMBER_TO_KEEP!();
+        Depcrate_propertiesMIN_OBSOLETE_SST_NUMBER_TO_KEEP!();
+        Depcrate_propertiesTOTAL_SST_FILES_SIZE!();
+        Depcrate_propertiesLIVE_SST_FILES_SIZE!();
+        Depcrate_propertiesBASE_LEVEL!();
+        Depcrate_propertiesESTIMATE_PENDING_COMPACTION_BYTES!();
+        Depcrate_propertiesAGGREGATED_TABLE_PROPERTIES!();
+        Depcrate_propertiesaggregated_table_properties_at_level!();
+        Depcrate_propertiesACTUAL_DELAYED_WRITE_RATE!();
+        Depcrate_propertiesIS_WRITE_STOPPED!();
+        Depcrate_propertiesESTIMATE_OLDEST_KEY_TIME!();
+        Depcrate_propertiesBLOCK_CACHE_CAPACITY!();
+        Depcrate_propertiesBLOCK_CACHE_USAGE!();
+        Depcrate_propertiesBLOCK_CACHE_PINNED_USAGE!();
+        Depcrate_propertiesOPTIONS_STATISTICS!();
+    };
+}

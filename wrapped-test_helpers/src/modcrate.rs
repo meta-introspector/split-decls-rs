@@ -1,0 +1,48 @@
+// Generated module macro for crate
+macro_rules! Modcrate {
+() => {
+        Depcratearray!();
+        Depcratewasm!();
+        Depcratebiteq!();
+        Depcratesubnormals!();
+        Depcrateuse_42!();
+        DepcrateDefaultStrategy!();
+        Depcrateimpl_num!();
+        Depcratemacro_45!();
+        Depcratemacro_46!();
+        Depcratemacro_47!();
+        Depcratemacro_48!();
+        Depcratemacro_49!();
+        Depcratemacro_50!();
+        Depcratemacro_51!();
+        Depcratemacro_52!();
+        Depcratemacro_53!();
+        Depcratemacro_54!();
+        Depcratemacro_55!();
+        Depcratemacro_56!();
+        Depcrateimpl_57!();
+        Depcrateimpl_58!();
+        Depcrateimpl_59!();
+        Depcrateimpl_60!();
+        Depcrateimpl_61!();
+        Depcrateimpl_62!();
+        Depcrateimpl_63!();
+        Depcratemake_runner!();
+        Depcratemake_runner!();
+        Depcratetest_1!();
+        Depcratetest_2!();
+        Depcratetest_3!();
+        Depcratetest_unary_elementwise!();
+        Depcratetest_unary_elementwise_flush_subnormals!();
+        Depcratetest_unary_mask_elementwise!();
+        Depcratetest_binary_elementwise!();
+        Depcratetest_binary_elementwise_flush_subnormals!();
+        Depcratetest_binary_mask_elementwise!();
+        Depcratetest_binary_scalar_rhs_elementwise!();
+        Depcratetest_binary_scalar_lhs_elementwise!();
+        Depcratetest_ternary_elementwise!();
+        Depcratetest_lanes_helper!();
+        Depcratetest_lanes!();
+        Depcratetest_lanes_panic!();
+    };
+}

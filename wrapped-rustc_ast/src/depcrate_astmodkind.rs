@@ -1,0 +1,9 @@
+// Generated macro for ModKind (enum)
+macro_rules! Depcrate_astModKind {
+() => {
+// Module: crate::ast
+// Provides: {"ModKind"}
+// Dependencies: {}
+# [doc = " Module item kind."] # [derive (Clone , Encodable , Decodable , Debug , Walkable)] pub enum ModKind { # [doc = " Module with inlined definition `mod foo { ... }`,"] # [doc = " or with definition outlined to a separate file `mod foo;` and already loaded from it."] # [doc = " The inner span is from the first token past `{` to the last token until `}`,"] # [doc = " or from the first to the last token in the loaded file."] Loaded (ThinVec < Box < Item > > , Inline , ModSpans) , # [doc = " Module with definition outlined to a separate file `mod foo;` but not yet loaded from it."] Unloaded , }
+};
+}

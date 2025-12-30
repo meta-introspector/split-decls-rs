@@ -1,0 +1,9 @@
+// Generated macro for SKIP_FILE (const)
+macro_rules! Depcrate_registerSKIP_FILE {
+() => {
+// Module: crate::register
+// Provides: {"SKIP_FILE"}
+// Dependencies: {}
+# [doc = " A RawFd, which can be used for"] # [doc = " [register_files_update](crate::Submitter::register_files_update)."] # [doc = ""] # [doc = " File descriptors can be skipped if they are set to `SKIP_FILE`."] # [doc = " Skipping an fd will not touch the file associated with the previous fd at that index."] pub const SKIP_FILE : RawFd = sys :: IORING_REGISTER_FILES_SKIP ;
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for assert_equal (function)
+macro_rules! Depcrateassert_equal {
+() => {
+// Module: crate
+// Provides: {"assert_equal"}
+// Dependencies: {}
+# [doc = " Assert that two iterables produce equal sequences, with the same"] # [doc = " semantics as [`equal(a, b)`](equal)."] # [doc = ""] # [doc = " **Panics** on assertion failure with a message that shows the"] # [doc = " two different elements and the iteration index."] # [doc = ""] # [doc = " ```should_panic"] # [doc = " # use itertools::assert_equal;"] # [doc = " assert_equal(\"exceed\".split('c'), \"excess\".split('c'));"] # [doc = " // ^PANIC: panicked at 'Failed assertion Some(\"eed\") == Some(\"ess\") for iteration 1'."] # [doc = " ```"] # [track_caller] pub fn assert_equal < I , J > (a : I , b : J) where I : IntoIterator , J : IntoIterator , I :: Item : fmt :: Debug + PartialEq < J :: Item > , J :: Item : fmt :: Debug , { let mut ia = a . into_iter () ; let mut ib = b . into_iter () ; let mut i : usize = 0 ; loop { match (ia . next () , ib . next ()) { (None , None) => return , (a , b) => { let equal = match (& a , & b) { (Some (a) , Some (b)) => a == b , _ => false , } ; assert ! (equal , "Failed assertion {a:?} == {b:?} for iteration {i}" , i = i , a = a , b = b) ; i += 1 ; } } } }
+};
+}

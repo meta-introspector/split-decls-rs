@@ -1,0 +1,9 @@
+// Generated macro for macro_48 (macro)
+macro_rules! Depcrate_builtinmacro_48 {
+() => {
+// Module: crate::builtin
+// Provides: {"macro_48"}
+// Dependencies: {}
+declare_lint ! { # [doc = " The `trivial_casts` lint detects trivial casts which could be replaced"] # [doc = " with coercion, which may require a temporary variable."] # [doc = ""] # [doc = " ### Example"] # [doc = ""] # [doc = " ```rust,compile_fail"] # [doc = " #![deny(trivial_casts)]"] # [doc = " let x: &u32 = &42;"] # [doc = " let y = x as *const u32;"] # [doc = " ```"] # [doc = ""] # [doc = " {{produces}}"] # [doc = ""] # [doc = " ### Explanation"] # [doc = ""] # [doc = " A trivial cast is a cast `e as T` where `e` has type `U` and `U` is a"] # [doc = " subtype of `T`. This type of cast is usually unnecessary, as it can be"] # [doc = " usually be inferred."] # [doc = ""] # [doc = " This lint is \"allow\" by default because there are situations, such as"] # [doc = " with FFI interfaces or complex type aliases, where it triggers"] # [doc = " incorrectly, or in situations where it will be more difficult to"] # [doc = " clearly express the intent. It may be possible that this will become a"] # [doc = " warning in the future, possibly with an explicit syntax for coercions"] # [doc = " providing a convenient way to work around the current issues."] # [doc = " See [RFC 401 (coercions)][rfc-401], [RFC 803 (type ascription)][rfc-803] and"] # [doc = " [RFC 3307 (remove type ascription)][rfc-3307] for historical context."] # [doc = ""] # [doc = " [rfc-401]: https://github.com/rust-lang/rfcs/blob/master/text/0401-coercions.md"] # [doc = " [rfc-803]: https://github.com/rust-lang/rfcs/blob/master/text/0803-type-ascription.md"] # [doc = " [rfc-3307]: https://github.com/rust-lang/rfcs/blob/master/text/3307-de-rfc-type-ascription.md"] pub TRIVIAL_CASTS , Allow , "detects trivial casts which could be removed" }
+};
+}

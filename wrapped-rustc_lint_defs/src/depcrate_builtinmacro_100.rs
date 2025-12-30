@@ -1,0 +1,9 @@
+// Generated macro for macro_100 (macro)
+macro_rules! Depcrate_builtinmacro_100 {
+() => {
+// Module: crate::builtin
+// Provides: {"macro_100"}
+// Dependencies: {}
+declare_lint ! { # [doc = " The `ambiguous_glob_reexports` lint detects cases where names re-exported via globs"] # [doc = " collide. Downstream users trying to use the same name re-exported from multiple globs"] # [doc = " will receive a warning pointing out redefinition of the same name."] # [doc = ""] # [doc = " ### Example"] # [doc = ""] # [doc = " ```rust,compile_fail"] # [doc = " #![deny(ambiguous_glob_reexports)]"] # [doc = " pub mod foo {"] # [doc = "     pub type X = u8;"] # [doc = " }"] # [doc = ""] # [doc = " pub mod bar {"] # [doc = "     pub type Y = u8;"] # [doc = "     pub type X = u8;"] # [doc = " }"] # [doc = ""] # [doc = " pub use foo::*;"] # [doc = " pub use bar::*;"] # [doc = ""] # [doc = ""] # [doc = " pub fn main() {}"] # [doc = " ```"] # [doc = ""] # [doc = " {{produces}}"] # [doc = ""] # [doc = " ### Explanation"] # [doc = ""] # [doc = " This was previously accepted but it could silently break a crate's downstream users code."] # [doc = " For example, if `foo::*` and `bar::*` were re-exported before `bar::X` was added to the"] # [doc = " re-exports, down stream users could use `this_crate::X` without problems. However, adding"] # [doc = " `bar::X` would cause compilation errors in downstream crates because `X` is defined"] # [doc = " multiple times in the same namespace of `this_crate`."] pub AMBIGUOUS_GLOB_REEXPORTS , Warn , "ambiguous glob re-exports" , }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for impl_236 (impl)
+macro_rules! Depcrate_solve_normalizes_to_inherentimpl_236 {
+() => {
+// Module: crate::solve::normalizes_to::inherent
+// Provides: {"impl_236"}
+// Dependencies: {}
+impl < D , I > EvalCtxt < '_ , D > where D : SolverDelegate < Interner = I > , I : Interner , { pub (super) fn normalize_inherent_associated_term (& mut self , goal : Goal < I , ty :: NormalizesTo < I > > ,) -> QueryResult < I > { let cx = self . cx () ; let inherent = goal . predicate . alias ; let impl_def_id = cx . parent (inherent . def_id) ; let impl_args = self . fresh_args_for_item (impl_def_id) ; self . eq (goal . param_env , inherent . self_ty () , cx . type_of (impl_def_id) . instantiate (cx , impl_args) ,) ? ; let inherent_args = inherent . rebase_inherent_args_onto_impl (impl_args , cx) ; self . add_goals (GoalSource :: Misc , cx . predicates_of (inherent . def_id) . iter_instantiated (cx , inherent_args) . map (| pred | goal . with (cx , pred)) ,) ; let normalized = if inherent . kind (cx) . is_type () { cx . type_of (inherent . def_id) . instantiate (cx , inherent_args) . into () } else { panic ! ("normalizing inherent associated consts in the type system is unsupported") ; } ; self . instantiate_normalizes_to_term (goal , normalized) ; self . evaluate_added_goals_and_make_canonical_response (Certainty :: Yes) } }
+};
+}

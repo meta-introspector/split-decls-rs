@@ -1,0 +1,49 @@
+// Generated module macro for crate::types
+macro_rules! Modcrate_types {
+() => {
+        Depcrate_typesuse_1256!();
+        Depcrate_typesuse_1257!();
+        Depcrate_typesuse_1258!();
+        Depcrate_typesuse_1259!();
+        Depcrate_typesuse_1260!();
+        Depcrate_typesuse_1261!();
+        Depcrate_typesuse_1262!();
+        Depcrate_typesuse_1263!();
+        Depcrate_typesuse_1264!();
+        Depcrate_typesuse_1265!();
+        Depcrate_typesimproper_ctypes!();
+        Depcrate_typesuse_1267!();
+        Depcrate_typesuse_1268!();
+        Depcrate_typesuse_1269!();
+        Depcrate_typesliteral!();
+        Depcrate_typesuse_1271!();
+        Depcrate_typesmacro_1272!();
+        Depcrate_typesmacro_1273!();
+        Depcrate_typesmacro_1274!();
+        Depcrate_typesmacro_1275!();
+        Depcrate_typesmacro_1276!();
+        Depcrate_typesmacro_1277!();
+        Depcrate_typesTypeLimits!();
+        Depcrate_typesmacro_1279!();
+        Depcrate_typesimpl_1280!();
+        Depcrate_typeslint_nan!();
+        Depcrate_typesComparisonOp!();
+        Depcrate_typeslint_wide_pointer!();
+        Depcrate_typeslint_fn_pointer!();
+        Depcrate_typesimpl_1285!();
+        Depcrate_typesnonnull_optimization_guaranteed!();
+        Depcrate_typestransparent_newtype_field!();
+        Depcrate_typesty_is_known_nonnull!();
+        Depcrate_typespat_ty_is_known_nonnull!();
+        Depcrate_typesget_nullable_type!();
+        Depcrate_typesis_niche_optimization_candidate!();
+        Depcrate_typesrepr_nullable_ptr!();
+        Depcrate_typesget_nullable_type_from_pat!();
+        Depcrate_typesmacro_1294!();
+        Depcrate_typesimpl_1295!();
+        Depcrate_typesmacro_1296!();
+        Depcrate_typesmacro_1297!();
+        Depcrate_typesimpl_1298!();
+        Depcrate_typesimpl_1299!();
+    };
+}

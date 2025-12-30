@@ -1,0 +1,9 @@
+// Generated macro for Error (enum)
+macro_rules! Depcrate_errorError {
+() => {
+// Module: crate::error
+// Provides: {"Error"}
+// Dependencies: {}
+# [doc = " Errors that can occur while demangling a symbol."] # [derive (Debug , Clone , Copy , PartialEq , Eq , Hash)] pub enum Error { # [doc = " The mangled symbol ends abruptly."] UnexpectedEnd , # [doc = " The mangled symbol is not well-formed."] UnexpectedText , # [doc = " Found a back reference that is out-of-bounds of the substitution"] # [doc = " table."] BadBackReference , # [doc = " Found a reference to a template arg that is either out-of-bounds, or in"] # [doc = " a context without template args."] BadTemplateArgReference , # [doc = " Found a reference to a template arg from within the arg itself (or from"] # [doc = " within an earlier arg)."] ForwardTemplateArgReference , # [doc = " Found a reference to a function arg that is either out-of-bounds, or in"] # [doc = " a context without function args."] BadFunctionArgReference , # [doc = " Found a reference to a leaf name in a context where there is no current"] # [doc = " leaf name."] BadLeafNameReference , # [doc = " An overflow or underflow would occur when parsing an integer in a"] # [doc = " mangled symbol."] Overflow , # [doc = " Encountered too much recursion when demangling symbol."] TooMuchRecursion , }
+};
+}

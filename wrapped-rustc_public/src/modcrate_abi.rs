@@ -1,0 +1,46 @@
+// Generated module macro for crate::abi
+macro_rules! Modcrate_abi {
+() => {
+        Depcrate_abiuse_40!();
+        Depcrate_abiuse_41!();
+        Depcrate_abiuse_42!();
+        Depcrate_abiuse_43!();
+        Depcrate_abiuse_44!();
+        Depcrate_abiuse_45!();
+        Depcrate_abiuse_46!();
+        Depcrate_abiuse_47!();
+        Depcrate_abiuse_48!();
+        Depcrate_abiFnAbi!();
+        Depcrate_abiArgAbi!();
+        Depcrate_abiPassMode!();
+        Depcrate_abiTyAndLayout!();
+        Depcrate_abiLayoutShape!();
+        Depcrate_abiimpl_54!();
+        Depcrate_abiLayout!();
+        Depcrate_abiimpl_56!();
+        Depcrate_abiimpl_57!();
+        Depcrate_abiFieldsShape!();
+        Depcrate_abiimpl_59!();
+        Depcrate_abiVariantsShape!();
+        Depcrate_abiTagEncoding!();
+        Depcrate_abiValueAbi!();
+        Depcrate_abiimpl_63!();
+        Depcrate_abiScalar!();
+        Depcrate_abiimpl_65!();
+        Depcrate_abiPrimitive!();
+        Depcrate_abiimpl_67!();
+        Depcrate_abiIntegerLength!();
+        Depcrate_abiFloatLength!();
+        Depcrate_abiimpl_70!();
+        Depcrate_abiimpl_71!();
+        Depcrate_abiAddressSpace!();
+        Depcrate_abiimpl_73!();
+        Depcrate_abiWrappingRange!();
+        Depcrate_abiimpl_75!();
+        Depcrate_abiimpl_76!();
+        Depcrate_abiCallConvention!();
+        Depcrate_abiReprFlags!();
+        Depcrate_abiIntegerType!();
+        Depcrate_abiReprOptions!();
+    };
+}

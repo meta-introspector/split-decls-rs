@@ -1,0 +1,9 @@
+// Generated macro for Symbol (trait)
+macro_rules! Depcrate_read_xcoff_symbolSymbol {
+() => {
+// Module: crate::read::xcoff::symbol
+// Provides: {"Symbol"}
+// Dependencies: {}
+# [doc = " A trait for generic access to [`xcoff::Symbol32`] and [`xcoff::Symbol64`]."] # [allow (missing_docs)] pub trait Symbol : Debug + Pod { type Word : Into < u64 > ; fn n_value (& self) -> Self :: Word ; fn n_scnum (& self) -> i16 ; fn n_type (& self) -> u16 ; fn n_sclass (& self) -> u8 ; fn n_numaux (& self) -> u8 ; fn name_offset (& self) -> Option < u32 > ; fn name < 'data , R : ReadRef < 'data > > (& 'data self , strings : StringTable < 'data , R > ,) -> Result < & 'data [u8] > ; # [doc = " Return the section index for the symbol."] fn section (& self) -> Option < SectionIndex > { let index = self . n_scnum () ; if index > 0 { Some (SectionIndex (index as usize)) } else { None } } # [doc = " Return true if the symbol is a null placeholder."] # [inline] fn is_null (& self) -> bool { self . n_sclass () == xcoff :: C_NULL } # [doc = " Return true if the symbol is undefined."] # [inline] fn is_undefined (& self) -> bool { let n_sclass = self . n_sclass () ; (n_sclass == xcoff :: C_EXT || n_sclass == xcoff :: C_WEAKEXT) && self . n_scnum () == xcoff :: N_UNDEF } # [doc = " Return true if the symbol has file auxiliary entry."] fn has_aux_file (& self) -> bool { self . n_numaux () > 0 && self . n_sclass () == xcoff :: C_FILE } # [doc = " Return true if the symbol has csect auxiliary entry."] # [doc = ""] # [doc = " A csect auxiliary entry is required for each symbol table entry that has"] # [doc = " a storage class value of C_EXT, C_WEAKEXT, or C_HIDEXT."] fn has_aux_csect (& self) -> bool { let sclass = self . n_sclass () ; self . n_numaux () > 0 && (sclass == xcoff :: C_EXT || sclass == xcoff :: C_WEAKEXT || sclass == xcoff :: C_HIDEXT) } }
+};
+}

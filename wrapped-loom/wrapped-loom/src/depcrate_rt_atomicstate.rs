@@ -1,0 +1,9 @@
+// Generated macro for State (struct)
+macro_rules! Depcrate_rt_atomicState {
+() => {
+// Module: crate::rt::atomic
+// Provides: {"State"}
+// Dependencies: {}
+# [derive (Debug)] pub (super) struct State { # [doc = " Where the atomic was created"] created_location : Location , # [doc = " Transitive closure of all atomic loads from the cell."] loaded_at : VersionVec , # [doc = " Location for the *last* time a thread atomically loaded from the cell."] loaded_locations : LocationSet , # [doc = " Transitive closure of all **unsynchronized** loads from the cell."] unsync_loaded_at : VersionVec , # [doc = " Location for the *last* time a thread read **synchronized** from the cell."] unsync_loaded_locations : LocationSet , # [doc = " Transitive closure of all atomic stores to the cell."] stored_at : VersionVec , # [doc = " Location for the *last* time a thread atomically stored to the cell."] stored_locations : LocationSet , # [doc = " Version of the most recent **unsynchronized** mutable access to the"] # [doc = " cell."] # [doc = ""] # [doc = " This includes the initialization of the cell as well as any calls to"] # [doc = " `get_mut`."] unsync_mut_at : VersionVec , # [doc = " Location for the *last* time a thread `with_mut` from the cell."] unsync_mut_locations : LocationSet , # [doc = " `true` when in a `with_mut` closure. If this is set, there can be no"] # [doc = " access to the cell."] is_mutating : bool , # [doc = " Last time the atomic was accessed. This tracks the dependent access for"] # [doc = " the DPOR algorithm."] last_access : Option < Access > , # [doc = " Last time the atomic was accessed for a store or rmw operation."] last_non_load_access : Option < Access > , # [doc = " Currently tracked stored values. This is the `MAX_ATOMIC_HISTORY` most"] # [doc = " recent stores to the atomic cell in loom execution order."] stores : [Store ; MAX_ATOMIC_HISTORY] , # [doc = " The total number of stores to the cell."] cnt : u16 , }
+};
+}

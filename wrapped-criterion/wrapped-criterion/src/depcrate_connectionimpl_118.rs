@@ -1,0 +1,9 @@
+// Generated macro for impl_118 (impl)
+macro_rules! Depcrate_connectionimpl_118 {
+() => {
+// Module: crate::connection
+// Provides: {"impl_118"}
+// Dependencies: {}
+impl Connection { pub fn new (socket : TcpStream) -> Result < Self , std :: io :: Error > { Ok (Connection { inner : RefCell :: new (InnerConnection :: new (socket) ?) , }) } # [allow (dead_code)] pub fn recv (& self) -> Result < IncomingMessage , MessageError > { self . inner . borrow_mut () . recv () } pub fn send (& self , message : & OutgoingMessage) -> Result < () , MessageError > { self . inner . borrow_mut () . send (message) } pub fn serve_value_formatter (& self , formatter : & dyn crate :: measurement :: ValueFormatter ,) -> Result < () , MessageError > { loop { let response = match self . recv () ? { IncomingMessage :: FormatValue { value } => OutgoingMessage :: FormattedValue { value : formatter . format_value (value) , } , IncomingMessage :: FormatThroughput { value , throughput } => { OutgoingMessage :: FormattedValue { value : formatter . format_throughput (& throughput , value) , } } IncomingMessage :: ScaleValues { typical_value , mut values , } => { let unit = formatter . scale_values (typical_value , & mut values) ; OutgoingMessage :: ScaledValues { unit , scaled_values : values , } } IncomingMessage :: ScaleThroughputs { typical_value , throughput , mut values , } => { let unit = formatter . scale_throughputs (typical_value , & throughput , & mut values) ; OutgoingMessage :: ScaledValues { unit , scaled_values : values , } } IncomingMessage :: ScaleForMachines { mut values } => { let unit = formatter . scale_for_machines (& mut values) ; OutgoingMessage :: ScaledValues { unit , scaled_values : values , } } IncomingMessage :: Continue => break , _ => panic ! () , } ; self . send (& response) ? ; } Ok (()) } }
+};
+}

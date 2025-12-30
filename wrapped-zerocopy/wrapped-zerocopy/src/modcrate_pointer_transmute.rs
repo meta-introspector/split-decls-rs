@@ -1,0 +1,44 @@
+// Generated module macro for crate::pointer::transmute
+macro_rules! Modcrate_pointer_transmute {
+() => {
+        Depcrate_pointer_transmuteuse_392!();
+        Depcrate_pointer_transmuteuse_393!();
+        Depcrate_pointer_transmuteTryTransmuteFromPtr!();
+        Depcrate_pointer_transmuteBecauseMutationCompatible!();
+        Depcrate_pointer_transmuteimpl_396!();
+        Depcrate_pointer_transmuteimpl_397!();
+        Depcrate_pointer_transmuteMutationCompatible!();
+        Depcrate_pointer_transmuteBecauseRead!();
+        Depcrate_pointer_transmuteimpl_400!();
+        Depcrate_pointer_transmuteInvariantsEq!();
+        Depcrate_pointer_transmuteimpl_402!();
+        Depcrate_pointer_transmuteimpl_403!();
+        Depcrate_pointer_transmuteBecauseInvariantsEq!();
+        Depcrate_pointer_transmuteunsafe_impl_invariants_eq!();
+        Depcrate_pointer_transmutemacro_406!();
+        Depcrate_pointer_transmutemacro_407!();
+        Depcrate_pointer_transmuteimpl_408!();
+        Depcrate_pointer_transmuteimpl_409!();
+        Depcrate_pointer_transmuteTransmuteFromPtr!();
+        Depcrate_pointer_transmuteimpl_411!();
+        Depcrate_pointer_transmuteTransmuteFrom!();
+        Depcrate_pointer_transmuteSizeEq!();
+        Depcrate_pointer_transmuteimpl_414!();
+        Depcrate_pointer_transmuteimpl_415!();
+        Depcrate_pointer_transmuteimpl_416!();
+        Depcrate_pointer_transmuteimpl_417!();
+        Depcrate_pointer_transmuteimpl_418!();
+        Depcrate_pointer_transmute_!();
+        Depcrate_pointer_transmute_!();
+        Depcrate_pointer_transmute_!();
+        Depcrate_pointer_transmute_!();
+        Depcrate_pointer_transmute_!();
+        Depcrate_pointer_transmute_!();
+        Depcrate_pointer_transmute_!();
+        Depcrate_pointer_transmutemacro_426!();
+        Depcrate_pointer_transmutemacro_427!();
+        Depcrate_pointer_transmuteimpl_428!();
+        Depcrate_pointer_transmuteimpl_429!();
+        Depcrate_pointer_transmuteimpl_430!();
+    };
+}

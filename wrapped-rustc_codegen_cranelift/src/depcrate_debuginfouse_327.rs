@@ -1,0 +1,9 @@
+// Generated macro for use_327 (use)
+macro_rules! Depcrate_debuginfouse_327 {
+() => {
+// Module: crate::debuginfo
+// Provides: {"use_327"}
+// Dependencies: {}
+use crate :: debuginfo :: emit :: { address_for_data , address_for_func } ;
+};
+}

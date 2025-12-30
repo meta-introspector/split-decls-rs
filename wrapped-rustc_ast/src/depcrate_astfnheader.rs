@@ -1,0 +1,9 @@
+// Generated macro for FnHeader (struct)
+macro_rules! Depcrate_astFnHeader {
+() => {
+// Module: crate::ast
+// Provides: {"FnHeader"}
+// Dependencies: {}
+# [doc = " A function header."] # [doc = ""] # [doc = " All the information between the visibility and the name of the function is"] # [doc = " included in this struct (e.g., `async unsafe fn` or `const extern \"C\" fn`)."] # [derive (Clone , Copy , Encodable , Decodable , Debug , Walkable)] pub struct FnHeader { # [doc = " The `const` keyword, if any"] pub constness : Const , # [doc = " Whether this is `async`, `gen`, or nothing."] pub coroutine_kind : Option < CoroutineKind > , # [doc = " Whether this is `unsafe`, or has a default safety."] pub safety : Safety , # [doc = " The `extern` keyword and corresponding ABI string, if any."] pub ext : Extern , }
+};
+}

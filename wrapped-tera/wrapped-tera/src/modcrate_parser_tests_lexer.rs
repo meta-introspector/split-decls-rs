@@ -1,0 +1,51 @@
+// Generated module macro for crate::parser::tests::lexer
+macro_rules! Modcrate_parser_tests_lexer {
+() => {
+        Depcrate_parser_tests_lexeruse_295!();
+        Depcrate_parser_tests_lexeruse_296!();
+        Depcrate_parser_tests_lexerassert_lex_rule!();
+        Depcrate_parser_tests_lexerlex_boolean!();
+        Depcrate_parser_tests_lexerlex_int!();
+        Depcrate_parser_tests_lexerlex_float!();
+        Depcrate_parser_tests_lexerlex_string!();
+        Depcrate_parser_tests_lexerlex_ident!();
+        Depcrate_parser_tests_lexerlex_dotted_ident!();
+        Depcrate_parser_tests_lexerlex_dotted_square_bracket_ident!();
+        Depcrate_parser_tests_lexerlex_string_concat!();
+        Depcrate_parser_tests_lexerlex_array!();
+        Depcrate_parser_tests_lexerlex_basic_expr!();
+        Depcrate_parser_tests_lexerlex_basic_expr_with_filter!();
+        Depcrate_parser_tests_lexerlex_string_expr_with_filter!();
+        Depcrate_parser_tests_lexerlex_comparison_val!();
+        Depcrate_parser_tests_lexerlex_in_cond!();
+        Depcrate_parser_tests_lexerlex_comparison_expr!();
+        Depcrate_parser_tests_lexerlex_logic_val!();
+        Depcrate_parser_tests_lexerlex_logic_expr!();
+        Depcrate_parser_tests_lexerlex_kwarg!();
+        Depcrate_parser_tests_lexerlex_kwargs!();
+        Depcrate_parser_tests_lexerlex_fn_call!();
+        Depcrate_parser_tests_lexerlex_filter!();
+        Depcrate_parser_tests_lexerlex_macro_definition!();
+        Depcrate_parser_tests_lexerlex_test!();
+        Depcrate_parser_tests_lexerlex_include_tag!();
+        Depcrate_parser_tests_lexerlex_import_macro_tag!();
+        Depcrate_parser_tests_lexerlex_extends_tag!();
+        Depcrate_parser_tests_lexerlex_comment_tag!();
+        Depcrate_parser_tests_lexerlex_block_tag!();
+        Depcrate_parser_tests_lexerlex_filter_tag!();
+        Depcrate_parser_tests_lexerlex_macro_tag!();
+        Depcrate_parser_tests_lexerlex_if_tag!();
+        Depcrate_parser_tests_lexerlex_elif_tag!();
+        Depcrate_parser_tests_lexerlex_else_tag!();
+        Depcrate_parser_tests_lexerlex_for_tag!();
+        Depcrate_parser_tests_lexerlex_break_tag!();
+        Depcrate_parser_tests_lexerlex_continue_tag!();
+        Depcrate_parser_tests_lexerlex_set_tag!();
+        Depcrate_parser_tests_lexerlex_set_global_tag!();
+        Depcrate_parser_tests_lexerlex_variable_tag!();
+        Depcrate_parser_tests_lexerlex_content!();
+        Depcrate_parser_tests_lexerlex_template!();
+        Depcrate_parser_tests_lexerlex_extends_with_imports!();
+        Depcrate_parser_tests_lexerlex_requires_whitespace_between_things!();
+    };
+}

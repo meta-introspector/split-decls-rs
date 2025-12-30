@@ -1,0 +1,9 @@
+// Generated macro for impl_271 (impl)
+macro_rules! Depcrate_tyimpl_271 {
+() => {
+// Module: crate::ty
+// Provides: {"impl_271"}
+// Dependencies: {}
+impl < 'tcx > TypeVisitor < TyCtxt < 'tcx > > for ImplTraitInTraitFinder < '_ , 'tcx > { fn visit_binder < T : TypeVisitable < TyCtxt < 'tcx > > > (& mut self , binder : & ty :: Binder < 'tcx , T >) { self . depth . shift_in (1) ; binder . super_visit_with (self) ; self . depth . shift_out (1) ; } fn visit_ty (& mut self , ty : Ty < 'tcx >) { if let ty :: Alias (ty :: Projection , unshifted_alias_ty) = * ty . kind () && let Some (ty :: ImplTraitInTraitData :: Trait { fn_def_id , .. } | ty :: ImplTraitInTraitData :: Impl { fn_def_id , .. } ,) = self . tcx . opt_rpitit_info (unshifted_alias_ty . def_id) && fn_def_id == self . fn_def_id && self . seen . insert (unshifted_alias_ty . def_id) { let shifted_alias_ty = fold_regions (self . tcx , unshifted_alias_ty , | re , depth | { if let ty :: ReBound (index , bv) = re . kind () { if depth != ty :: INNERMOST { return ty :: Region :: new_error_with_message (self . tcx , DUMMY_SP , "we shouldn't walk non-predicate binders with `impl Trait`..." ,) ; } ty :: Region :: new_bound (self . tcx , index . shifted_out_to_binder (self . depth) , bv) } else { re } }) ; let default_ty = self . tcx . type_of (shifted_alias_ty . def_id) . instantiate (self . tcx , shifted_alias_ty . args) ; self . predicates . push (ty :: Binder :: bind_with_vars (ty :: ProjectionPredicate { projection_term : shifted_alias_ty . into () , term : default_ty . into () , } , self . bound_vars ,) . upcast (self . tcx) ,) ; for bound in self . tcx . item_bounds (unshifted_alias_ty . def_id) . iter_instantiated (self . tcx , unshifted_alias_ty . args) { bound . visit_with (self) ; } } ty . super_visit_with (self) } }
+};
+}

@@ -1,0 +1,43 @@
+// Generated module macro for crate::mir
+macro_rules! Modcrate_mir {
+() => {
+        Depcrate_miruse_788!();
+        Depcrate_miruse_789!();
+        Depcrate_miruse_790!();
+        Depcrate_miruse_791!();
+        Depcrate_miruse_792!();
+        Depcrate_miruse_793!();
+        Depcrate_miruse_794!();
+        Depcrate_miruse_795!();
+        Depcrate_miruse_796!();
+        Depcrate_miruse_797!();
+        Depcrate_miruse_798!();
+        Depcrate_miruse_799!();
+        Depcrate_miranalyze!();
+        Depcrate_mirblock!();
+        Depcrate_mirconstant!();
+        Depcrate_mircoverageinfo!();
+        Depcrate_mirdebuginfo!();
+        Depcrate_mirintrinsic!();
+        Depcrate_mirlocals!();
+        Depcrate_mirnaked_asm!();
+        Depcrate_miroperand!();
+        Depcrate_mirplace!();
+        Depcrate_mirrvalue!();
+        Depcrate_mirstatement!();
+        Depcrate_miruse_1028!();
+        Depcrate_miruse_1029!();
+        Depcrate_miruse_1030!();
+        Depcrate_miruse_1031!();
+        Depcrate_mirCachedLlbb!();
+        Depcrate_mirPerLocalVarDebugInfoIndexVec!();
+        Depcrate_mirFunctionCx!();
+        Depcrate_mirimpl_1035!();
+        Depcrate_mirLocalRef!();
+        Depcrate_mirimpl_1037!();
+        Depcrate_mircodegen_mir!();
+        Depcrate_miroptimize_use_clone!();
+        Depcrate_mirarg_local_refs!();
+        Depcrate_mirfind_cold_blocks!();
+    };
+}

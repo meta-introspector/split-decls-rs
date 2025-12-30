@@ -1,0 +1,48 @@
+// Generated module macro for crate::driver::aot
+macro_rules! Modcrate_driver_aot {
+() => {
+        Depcrate_driver_aotuse_346!();
+        Depcrate_driver_aotuse_347!();
+        Depcrate_driver_aotuse_348!();
+        Depcrate_driver_aotuse_349!();
+        Depcrate_driver_aotuse_350!();
+        Depcrate_driver_aotuse_351!();
+        Depcrate_driver_aotuse_352!();
+        Depcrate_driver_aotuse_353!();
+        Depcrate_driver_aotuse_354!();
+        Depcrate_driver_aotuse_355!();
+        Depcrate_driver_aotuse_356!();
+        Depcrate_driver_aotuse_357!();
+        Depcrate_driver_aotuse_358!();
+        Depcrate_driver_aotuse_359!();
+        Depcrate_driver_aotuse_360!();
+        Depcrate_driver_aotuse_361!();
+        Depcrate_driver_aotuse_362!();
+        Depcrate_driver_aotuse_363!();
+        Depcrate_driver_aotuse_364!();
+        Depcrate_driver_aotuse_365!();
+        Depcrate_driver_aotuse_366!();
+        Depcrate_driver_aotuse_367!();
+        Depcrate_driver_aotuse_368!();
+        Depcrate_driver_aotuse_369!();
+        Depcrate_driver_aotuse_370!();
+        Depcrate_driver_aotuse_371!();
+        Depcrate_driver_aotuse_372!();
+        Depcrate_driver_aotuse_373!();
+        Depcrate_driver_aotdisable_incr_cache!();
+        Depcrate_driver_aotModuleCodegenResult!();
+        Depcrate_driver_aotOngoingModuleCodegen!();
+        Depcrate_driver_aotimpl_377!();
+        Depcrate_driver_aotOngoingCodegen!();
+        Depcrate_driver_aotimpl_379!();
+        Depcrate_driver_aotproduce_final_output_artifacts!();
+        Depcrate_driver_aotmake_module!();
+        Depcrate_driver_aotemit_cgu!();
+        Depcrate_driver_aotemit_module!();
+        Depcrate_driver_aotreuse_workproduct_for_cgu!();
+        Depcrate_driver_aotcodegen_cgu_content!();
+        Depcrate_driver_aotmodule_codegen!();
+        Depcrate_driver_aotemit_allocator_module!();
+        Depcrate_driver_aotrun_aot!();
+    };
+}

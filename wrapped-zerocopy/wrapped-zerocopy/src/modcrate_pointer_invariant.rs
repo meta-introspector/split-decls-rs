@@ -1,0 +1,39 @@
+// Generated module macro for crate::pointer::invariant
+macro_rules! Modcrate_pointer_invariant {
+() => {
+        Depcrate_pointer_invariantInvariants!();
+        Depcrate_pointer_invariantimpl_347!();
+        Depcrate_pointer_invariantAliasing!();
+        Depcrate_pointer_invariantAlignment!();
+        Depcrate_pointer_invariantValidity!();
+        Depcrate_pointer_invariantReference!();
+        Depcrate_pointer_invariantShared!();
+        Depcrate_pointer_invariantimpl_353!();
+        Depcrate_pointer_invariantimpl_354!();
+        Depcrate_pointer_invariantExclusive!();
+        Depcrate_pointer_invariantimpl_356!();
+        Depcrate_pointer_invariantimpl_357!();
+        Depcrate_pointer_invariantUnaligned!();
+        Depcrate_pointer_invariantimpl_359!();
+        Depcrate_pointer_invariantAligned!();
+        Depcrate_pointer_invariantimpl_361!();
+        Depcrate_pointer_invariantUninit!();
+        Depcrate_pointer_invariantimpl_363!();
+        Depcrate_pointer_invariantAsInitialized!();
+        Depcrate_pointer_invariantimpl_365!();
+        Depcrate_pointer_invariantInitialized!();
+        Depcrate_pointer_invariantimpl_367!();
+        Depcrate_pointer_invariantValid!();
+        Depcrate_pointer_invariantimpl_369!();
+        Depcrate_pointer_invariantCastableFrom!();
+        Depcrate_pointer_invariantimpl_371!();
+        Depcrate_pointer_invariantimpl_372!();
+        Depcrate_pointer_invariantRead!();
+        Depcrate_pointer_invariantimpl_374!();
+        Depcrate_pointer_invariantimpl_375!();
+        Depcrate_pointer_invariantBecauseExclusive!();
+        Depcrate_pointer_invariantBecauseImmutable!();
+        Depcrate_pointer_invariantuse_378!();
+        Depcrate_pointer_invariantsealed!();
+    };
+}

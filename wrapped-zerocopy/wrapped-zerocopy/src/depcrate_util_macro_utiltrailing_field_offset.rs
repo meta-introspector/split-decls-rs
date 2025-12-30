@@ -1,0 +1,9 @@
+// Generated macro for trailing_field_offset (macro)
+macro_rules! Depcrate_util_macro_utiltrailing_field_offset {
+() => {
+// Module: crate::util::macro_util
+// Provides: {"trailing_field_offset"}
+// Dependencies: {}
+# [doc = " Computes the offset of the base of the field `$trailing_field_name` within"] # [doc = " the type `$ty`."] # [doc = ""] # [doc = " `trailing_field_offset!` produces code which is valid in a `const` context."] # [cfg (__ZEROCOPY_INTERNAL_USE_ONLY_NIGHTLY_FEATURES_IN_TESTS)] # [doc (hidden)] # [macro_export] macro_rules ! trailing_field_offset { ($ ty : ty , $ trailing_field_name : tt) => { { let min_size = { let zero_elems : * const [()] = $ crate :: util :: macro_util :: core_reexport :: ptr :: slice_from_raw_parts ($ crate :: util :: macro_util :: core_reexport :: ptr :: NonNull ::< () >:: dangling () . as_ptr () . cast_const () , 0 ,) ; unsafe { # [allow (clippy :: as_conversions)] $ crate :: util :: macro_util :: core_reexport :: mem :: size_of_val_raw (zero_elems as * const $ ty ,) } } ; assert ! (min_size <= _64K) ; # [allow (clippy :: as_conversions)] let ptr = ALIGNED_64K_ALLOCATION . as_ptr () as * const $ ty ; let field = unsafe { $ crate :: util :: macro_util :: core_reexport :: ptr :: addr_of ! ((* ptr) .$ trailing_field_name) } ; let offset = unsafe { field . cast ::< u8 > () . offset_from (ptr . cast ::< u8 > ()) } ; assert ! (offset >= 0) ; Some (# [allow (clippy :: as_conversions)] { offset as usize } ,) } } ; }
+};
+}

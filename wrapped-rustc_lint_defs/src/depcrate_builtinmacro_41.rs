@@ -1,0 +1,9 @@
+// Generated macro for macro_41 (macro)
+macro_rules! Depcrate_builtinmacro_41 {
+() => {
+// Module: crate::builtin
+// Provides: {"macro_41"}
+// Dependencies: {}
+declare_lint ! { # [doc = " The `bindings_with_variant_name` lint detects pattern bindings with"] # [doc = " the same name as one of the matched variants."] # [doc = ""] # [doc = " ### Example"] # [doc = ""] # [doc = " ```rust,compile_fail"] # [doc = " pub enum Enum {"] # [doc = "     Foo,"] # [doc = "     Bar,"] # [doc = " }"] # [doc = ""] # [doc = " pub fn foo(x: Enum) {"] # [doc = "     match x {"] # [doc = "         Foo => {}"] # [doc = "         Bar => {}"] # [doc = "     }"] # [doc = " }"] # [doc = " ```"] # [doc = ""] # [doc = " {{produces}}"] # [doc = ""] # [doc = " ### Explanation"] # [doc = ""] # [doc = " It is usually a mistake to specify an enum variant name as an"] # [doc = " [identifier pattern]. In the example above, the `match` arms are"] # [doc = " specifying a variable name to bind the value of `x` to. The second arm"] # [doc = " is ignored because the first one matches *all* values. The likely"] # [doc = " intent is that the arm was intended to match on the enum variant."] # [doc = ""] # [doc = " Two possible solutions are:"] # [doc = ""] # [doc = " * Specify the enum variant using a [path pattern], such as"] # [doc = "   `Enum::Foo`."] # [doc = " * Bring the enum variants into local scope, such as adding `use"] # [doc = "   Enum::*;` to the beginning of the `foo` function in the example"] # [doc = "   above."] # [doc = ""] # [doc = " [identifier pattern]: https://doc.rust-lang.org/reference/patterns.html#identifier-patterns"] # [doc = " [path pattern]: https://doc.rust-lang.org/reference/patterns.html#path-patterns"] pub BINDINGS_WITH_VARIANT_NAME , Deny , "detects pattern bindings with the same name as one of the matched variants" }
+};
+}

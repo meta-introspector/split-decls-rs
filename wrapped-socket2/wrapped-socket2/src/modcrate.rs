@@ -1,0 +1,55 @@
+// Generated module macro for crate
+macro_rules! Modcrate {
+() => {
+        Depcrateuse_1!();
+        Depcrateuse_2!();
+        Depcrateuse_3!();
+        Depcrateuse_4!();
+        Depcrateuse_5!();
+        Depcrateuse_6!();
+        Depcrateuse_7!();
+        Depcrateuse_8!();
+        Depcrateimpl_debug!();
+        Depcratefrom!();
+        Depcrateman_links!();
+        Depcratesockaddr!();
+        Depcratesocket!();
+        Depcratesockref!();
+        Depcratesys!();
+        Depcratemacro_86!();
+        Depcrateuse_87!();
+        Depcrateuse_88!();
+        Depcrateuse_89!();
+        Depcrateuse_90!();
+        Depcrateuse_91!();
+        Depcrateuse_92!();
+        Depcrateuse_93!();
+        DepcrateDomain!();
+        Depcrateimpl_95!();
+        Depcrateimpl_96!();
+        Depcrateimpl_97!();
+        DepcrateType!();
+        Depcrateimpl_99!();
+        Depcrateimpl_100!();
+        Depcrateimpl_101!();
+        DepcrateProtocol!();
+        Depcrateimpl_103!();
+        Depcrateimpl_104!();
+        Depcrateimpl_105!();
+        DepcrateRecvFlags!();
+        Depcrateimpl_107!();
+        DepcrateMaybeUninitSlice!();
+        Depcrateimpl_109!();
+        Depcrateimpl_110!();
+        Depcrateimpl_111!();
+        Depcrateimpl_112!();
+        DepcrateTcpKeepalive!();
+        Depcrateimpl_114!();
+        DepcrateMsgHdr!();
+        Depcrateimpl_116!();
+        Depcrateimpl_117!();
+        DepcrateMsgHdrMut!();
+        Depcrateimpl_119!();
+        Depcrateimpl_120!();
+    };
+}

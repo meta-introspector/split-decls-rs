@@ -1,0 +1,40 @@
+// Generated module macro for crate::iterator::backend
+macro_rules! Modcrate_iterator_backend {
+() => {
+        Depcrate_iterator_backenduse_14!();
+        Depcrate_iterator_backenduse_15!();
+        Depcrate_iterator_backenduse_16!();
+        Depcrate_iterator_backenduse_17!();
+        Depcrate_iterator_backenduse_18!();
+        Depcrate_iterator_backenduse_19!();
+        Depcrate_iterator_backenduse_20!();
+        Depcrate_iterator_backenduse_21!();
+        Depcrate_iterator_backenduse_22!();
+        Depcrate_iterator_backenduse_23!();
+        Depcrate_iterator_backenduse_24!();
+        Depcrate_iterator_backenduse_25!();
+        Depcrate_iterator_backendMAX_SIGNUM!();
+        Depcrate_iterator_backendSelfPipeWrite!();
+        Depcrate_iterator_backendimpl_28!();
+        Depcrate_iterator_backendDeliveryState!();
+        Depcrate_iterator_backendimpl_30!();
+        Depcrate_iterator_backendimpl_31!();
+        Depcrate_iterator_backendPendingSignals!();
+        Depcrate_iterator_backendimpl_33!();
+        Depcrate_iterator_backendAddSignal!();
+        Depcrate_iterator_backendimpl_35!();
+        Depcrate_iterator_backendimpl_36!();
+        Depcrate_iterator_backendHandle!();
+        Depcrate_iterator_backendimpl_38!();
+        Depcrate_iterator_backendSignalDelivery!();
+        Depcrate_iterator_backendimpl_40!();
+        Depcrate_iterator_backendPending!();
+        Depcrate_iterator_backendimpl_42!();
+        Depcrate_iterator_backendimpl_43!();
+        Depcrate_iterator_backendPollResult!();
+        Depcrate_iterator_backendSignalIterator!();
+        Depcrate_iterator_backendimpl_46!();
+        Depcrate_iterator_backendOwningSignalIterator!();
+        Depcrate_iterator_backendRefSignalIterator!();
+    };
+}

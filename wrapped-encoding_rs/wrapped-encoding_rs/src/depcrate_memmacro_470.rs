@@ -1,0 +1,9 @@
+// Generated macro for macro_470 (macro)
+macro_rules! Depcrate_memmacro_470 {
+() => {
+// Module: crate::mem
+// Provides: {"macro_470"}
+// Dependencies: {}
+cfg_if ! { if # [cfg (all (feature = "simd-accel" , any (target_feature = "sse2" , all (target_endian = "little" , target_arch = "aarch64") , all (target_endian = "little" , target_feature = "neon"))))] { # [inline (always)] fn is_str_latin1_impl (buffer : & str) -> Option < usize > { let mut offset = 0usize ; let bytes = buffer . as_bytes () ; let len = bytes . len () ; if len >= SIMD_STRIDE_SIZE { let src = bytes . as_ptr () ; let mut until_alignment = (SIMD_ALIGNMENT - ((src as usize) & SIMD_ALIGNMENT_MASK)) & SIMD_ALIGNMENT_MASK ; if until_alignment + SIMD_STRIDE_SIZE <= len { while until_alignment != 0 { if bytes [offset] > 0xC3 { return Some (offset) ; } offset += 1 ; until_alignment -= 1 ; } let len_minus_stride = len - SIMD_STRIDE_SIZE ; loop { if ! simd_is_str_latin1 (unsafe { * (src . add (offset) as * const u8x16) }) { while bytes [offset] & 0xC0 == 0x80 { offset += 1 ; } return Some (offset) ; } offset += SIMD_STRIDE_SIZE ; if offset > len_minus_stride { break ; } } } } for i in offset .. len { if bytes [i] > 0xC3 { return Some (i) ; } } None } } else { # [inline (always)] fn is_str_latin1_impl (buffer : & str) -> Option < usize > { let mut bytes = buffer . as_bytes () ; let mut total = 0 ; loop { if let Some ((byte , offset)) = validate_ascii (bytes) { total += offset ; if byte > 0xC3 { return Some (total) ; } bytes = & bytes [offset + 2 ..] ; total += 2 ; } else { return None ; } } } } }
+};
+}

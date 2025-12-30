@@ -1,0 +1,55 @@
+// Generated module macro for crate::collections::vec_deque::tests
+macro_rules! Modcrate_collections_vec_deque_tests {
+() => {
+        Depcrate_collections_vec_deque_testsuse_989!();
+        Depcrate_collections_vec_deque_testsuse_990!();
+        Depcrate_collections_vec_deque_testsuse_991!();
+        Depcrate_collections_vec_deque_testsbench_push_back_100!();
+        Depcrate_collections_vec_deque_testsbench_push_front_100!();
+        Depcrate_collections_vec_deque_testsbench_pop_back_100!();
+        Depcrate_collections_vec_deque_testsbench_retain_whole_10000!();
+        Depcrate_collections_vec_deque_testsbench_retain_odd_10000!();
+        Depcrate_collections_vec_deque_testsbench_retain_half_10000!();
+        Depcrate_collections_vec_deque_testsbench_pop_front_100!();
+        Depcrate_collections_vec_deque_teststest_swap_front_back_remove!();
+        Depcrate_collections_vec_deque_teststest_insert!();
+        Depcrate_collections_vec_deque_teststest_get!();
+        Depcrate_collections_vec_deque_teststest_get_mut!();
+        Depcrate_collections_vec_deque_teststest_swap!();
+        Depcrate_collections_vec_deque_teststest_swap_panic!();
+        Depcrate_collections_vec_deque_teststest_reserve_exact!();
+        Depcrate_collections_vec_deque_teststest_reserve_exact_panic!();
+        Depcrate_collections_vec_deque_teststest_try_reserve_exact!();
+        Depcrate_collections_vec_deque_teststest_try_reserve!();
+        Depcrate_collections_vec_deque_teststest_contains!();
+        Depcrate_collections_vec_deque_teststest_rotate_left_right!();
+        Depcrate_collections_vec_deque_teststest_rotate_left_panic!();
+        Depcrate_collections_vec_deque_teststest_rotate_right_panic!();
+        Depcrate_collections_vec_deque_teststest_binary_search!();
+        Depcrate_collections_vec_deque_teststest_binary_search_by!();
+        Depcrate_collections_vec_deque_teststest_binary_search_key!();
+        Depcrate_collections_vec_deque_testsmake_contiguous_big_head!();
+        Depcrate_collections_vec_deque_testsmake_contiguous_big_tail!();
+        Depcrate_collections_vec_deque_testsmake_contiguous_small_free!();
+        Depcrate_collections_vec_deque_testsmake_contiguous_head_to_end!();
+        Depcrate_collections_vec_deque_testsmake_contiguous_head_to_end_2!();
+        Depcrate_collections_vec_deque_teststest_remove!();
+        Depcrate_collections_vec_deque_teststest_range!();
+        Depcrate_collections_vec_deque_teststest_range_mut!();
+        Depcrate_collections_vec_deque_teststest_drain!();
+        Depcrate_collections_vec_deque_testsissue_108453!();
+        Depcrate_collections_vec_deque_teststest_shrink_to!();
+        Depcrate_collections_vec_deque_teststest_shrink_to_fit!();
+        Depcrate_collections_vec_deque_teststest_split_off!();
+        Depcrate_collections_vec_deque_teststest_from_vec!();
+        Depcrate_collections_vec_deque_teststest_extend_basic!();
+        Depcrate_collections_vec_deque_teststest_extend_trusted_len!();
+        Depcrate_collections_vec_deque_teststest_extend_impl!();
+        Depcrate_collections_vec_deque_teststest_from_array!();
+        Depcrate_collections_vec_deque_teststest_vec_from_vecdeque!();
+        Depcrate_collections_vec_deque_teststest_clone_from!();
+        Depcrate_collections_vec_deque_teststest_vec_deque_truncate_drop!();
+        Depcrate_collections_vec_deque_testsissue_53529!();
+        Depcrate_collections_vec_deque_testsissue_80303!();
+    };
+}

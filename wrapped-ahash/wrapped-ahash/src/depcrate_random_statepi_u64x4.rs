@@ -1,0 +1,9 @@
+// Generated macro for PI_U64X4 (const)
+macro_rules! Depcrate_random_statePI_U64X4 {
+() => {
+// Module: crate::random_state
+// Provides: {"PI_U64X4"}
+// Dependencies: {}
+pub (crate) const PI_U64X4 : [u64 ; 4] = [0x243f_6a88_85a3_08d3 , 0x1319_8a2e_0370_7344 , 0xa409_3822_299f_31d0 , 0x082e_fa98_ec4e_6c89 ,] ;
+};
+}

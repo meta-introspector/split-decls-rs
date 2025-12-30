@@ -1,0 +1,47 @@
+// Generated module macro for crate::xxhash3
+macro_rules! Modcrate_xxhash3 {
+() => {
+        Depcrate_xxhash3use_70!();
+        Depcrate_xxhash3use_71!();
+        Depcrate_xxhash3large!();
+        Depcrate_xxhash3use_73!();
+        Depcrate_xxhash3use_74!();
+        Depcrate_xxhash3secret!();
+        Depcrate_xxhash3use_76!();
+        Depcrate_xxhash3streaming!();
+        Depcrate_xxhash3use_78!();
+        Depcrate_xxhash3use_79!();
+        Depcrate_xxhash3primes!();
+        Depcrate_xxhash3CUTOFF!();
+        Depcrate_xxhash3DEFAULT_SEED!();
+        Depcrate_xxhash3DEFAULT_SECRET_LENGTH!();
+        Depcrate_xxhash3DefaultSecret!();
+        Depcrate_xxhash3DEFAULT_SECRET_RAW!();
+        Depcrate_xxhash3DEFAULT_SECRET!();
+        Depcrate_xxhash3derive_secret!();
+        Depcrate_xxhash3OneshotWithSecretError!();
+        Depcrate_xxhash3impl_89!();
+        Depcrate_xxhash3impl_90!();
+        Depcrate_xxhash3assert_input_range!();
+        Depcrate_xxhash3use_92!();
+        Depcrate_xxhash3impl_1_to_3_bytes_combined!();
+        Depcrate_xxhash3impl_17_to_128_bytes_iter!();
+        Depcrate_xxhash3mix_step!();
+        Depcrate_xxhash3to_u64s!();
+        Depcrate_xxhash3pairs_of_u64_bytes!();
+        Depcrate_xxhash3avalanche!();
+        Depcrate_xxhash3avalanche_xxh64!();
+        Depcrate_xxhash3stripes_with_tail!();
+        Depcrate_xxhash3X128!();
+        Depcrate_xxhash3impl_102!();
+        Depcrate_xxhash3impl_103!();
+        Depcrate_xxhash3Halves!();
+        Depcrate_xxhash3impl_105!();
+        Depcrate_xxhash3impl_106!();
+        Depcrate_xxhash3U8SliceExt!();
+        Depcrate_xxhash3impl_108!();
+        Depcrate_xxhash3SliceBackport!();
+        Depcrate_xxhash3impl_110!();
+        Depcrate_xxhash3test!();
+    };
+}

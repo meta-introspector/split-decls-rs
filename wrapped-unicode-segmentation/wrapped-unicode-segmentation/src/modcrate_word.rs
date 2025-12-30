@@ -1,0 +1,49 @@
+// Generated module macro for crate::word
+macro_rules! Modcrate_word {
+() => {
+        Depcrate_worduse_56!();
+        Depcrate_worduse_57!();
+        Depcrate_worduse_58!();
+        Depcrate_wordUnicodeWords!();
+        Depcrate_wordimpl_60!();
+        Depcrate_wordimpl_61!();
+        Depcrate_wordUnicodeWordIndices!();
+        Depcrate_wordimpl_63!();
+        Depcrate_wordimpl_64!();
+        Depcrate_wordUWordBounds!();
+        Depcrate_wordUWordBoundIndices!();
+        Depcrate_wordimpl_67!();
+        Depcrate_wordimpl_68!();
+        Depcrate_wordimpl_69!();
+        Depcrate_wordUWordBoundsState!();
+        Depcrate_wordFormatExtendType!();
+        Depcrate_wordRegionalState!();
+        Depcrate_wordis_emoji!();
+        Depcrate_wordimpl_74!();
+        Depcrate_wordimpl_75!();
+        Depcrate_wordimpl_76!();
+        Depcrate_wordAsciiWordBoundIter!();
+        Depcrate_wordimpl_78!();
+        Depcrate_wordimpl_79!();
+        Depcrate_wordimpl_80!();
+        Depcrate_wordascii_word_ok!();
+        Depcrate_wordunicode_word_ok!();
+        Depcrate_wordAsciiWordsIter!();
+        Depcrate_wordUnicodeWordsIter!();
+        Depcrate_wordAsciiIndicesIter!();
+        Depcrate_wordUnicodeIndicesIter!();
+        Depcrate_wordWordsIter!();
+        Depcrate_wordIndicesIter!();
+        Depcrate_wordnew_unicode_words!();
+        Depcrate_wordnew_unicode_word_indices!();
+        Depcrate_wordnew_word_bounds!();
+        Depcrate_wordnew_word_bound_indices!();
+        Depcrate_wordnew_ascii_word_bound_indices!();
+        Depcrate_wordhas_alphanumeric!();
+        Depcrate_wordhas_ascii_alphanumeric!();
+        Depcrate_wordstrip_pos!();
+        Depcrate_wordnew_unicode_words_ascii!();
+        Depcrate_wordnew_unicode_words_general!();
+        Depcrate_wordtests!();
+    };
+}

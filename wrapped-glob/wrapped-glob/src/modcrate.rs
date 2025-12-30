@@ -1,0 +1,56 @@
+// Generated module macro for crate
+macro_rules! Modcrate {
+() => {
+        Depcrateother_1!();
+        Depcratemacro_2!();
+        Depcrateuse_3!();
+        Depcrateuse_4!();
+        Depcrateuse_5!();
+        Depcrateuse_6!();
+        Depcrateuse_7!();
+        Depcrateuse_8!();
+        Depcrateuse_9!();
+        Depcrateuse_10!();
+        Depcrateuse_11!();
+        Depcrateuse_12!();
+        Depcrateuse_13!();
+        Depcrateuse_14!();
+        Depcrateuse_15!();
+        Depcrateuse_16!();
+        Depcrateuse_17!();
+        DepcratePaths!();
+        Depcrateglob!();
+        Depcrateglob_with!();
+        DepcrateGlobError!();
+        Depcrateimpl_22!();
+        Depcrateimpl_23!();
+        Depcrateimpl_24!();
+        Depcrateimpl_25!();
+        DepcratePathWrapper!();
+        Depcrateimpl_27!();
+        Depcrateimpl_28!();
+        Depcrateimpl_29!();
+        DepcrateGlobResult!();
+        Depcrateimpl_31!();
+        DepcratePatternError!();
+        Depcrateimpl_33!();
+        Depcrateimpl_34!();
+        DepcratePattern!();
+        Depcrateimpl_36!();
+        Depcrateimpl_37!();
+        DepcratePatternToken!();
+        DepcrateCharSpecifier!();
+        DepcrateMatchResult!();
+        DepcrateERROR_WILDCARDS!();
+        DepcrateERROR_RECURSIVE_WILDCARDS!();
+        DepcrateERROR_INVALID_RANGE!();
+        Depcrateimpl_44!();
+        Depcratefill_todo!();
+        Depcrateparse_char_specifiers!();
+        Depcratein_char_specifiers!();
+        Depcratechars_eq!();
+        DepcrateMatchOptions!();
+        Depcrateimpl_50!();
+        Depcratetest!();
+    };
+}

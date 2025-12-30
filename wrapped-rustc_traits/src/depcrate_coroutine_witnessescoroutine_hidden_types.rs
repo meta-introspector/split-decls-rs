@@ -1,0 +1,9 @@
+// Generated macro for coroutine_hidden_types (function)
+macro_rules! Depcrate_coroutine_witnessescoroutine_hidden_types {
+() => {
+// Module: crate::coroutine_witnesses
+// Provides: {"coroutine_hidden_types"}
+// Dependencies: {}
+# [doc = " Return the set of types that should be taken into account when checking"] # [doc = " trait bounds on a coroutine's internal state. This properly replaces"] # [doc = " `ReErased` with new existential bound lifetimes."] pub (crate) fn coroutine_hidden_types < 'tcx > (tcx : TyCtxt < 'tcx > , def_id : DefId ,) -> ty :: EarlyBinder < 'tcx , ty :: Binder < 'tcx , ty :: CoroutineWitnessTypes < TyCtxt < 'tcx > > > > { let coroutine_layout = tcx . mir_coroutine_witnesses (def_id) ; let mut vars = vec ! [] ; let bound_tys = tcx . mk_type_list_from_iter (coroutine_layout . as_ref () . map_or_else (| | [] . iter () , | l | l . field_tys . iter ()) . filter (| decl | ! decl . ignore_for_traits) . map (| decl | { let ty = fold_regions (tcx , decl . ty , | re , debruijn | { assert_eq ! (re , tcx . lifetimes . re_erased) ; let var = ty :: BoundVar :: from_usize (vars . len ()) ; vars . push (ty :: BoundVariableKind :: Region (ty :: BoundRegionKind :: Anon)) ; ty :: Region :: new_bound (tcx , debruijn , ty :: BoundRegion { var , kind : ty :: BoundRegionKind :: Anon } ,) }) ; ty }) ,) ; let assumptions = compute_assumptions (tcx , def_id , bound_tys) ; ty :: EarlyBinder :: bind (ty :: Binder :: bind_with_vars (ty :: CoroutineWitnessTypes { types : bound_tys , assumptions } , tcx . mk_bound_variable_kinds (& vars) ,)) }
+};
+}

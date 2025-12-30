@@ -1,0 +1,9 @@
+// Generated macro for impl_Integer128 (macro)
+macro_rules! Depcrateimpl_Integer128 {
+() => {
+// Module: crate
+// Provides: {"impl_Integer128"}
+// Dependencies: {}
+macro_rules ! impl_Integer128 { ($ t : ty [len = $ max_len : expr]) => { impl Integer for $ t { const MAX_STR_LEN : usize = $ max_len ; } impl private :: Sealed for $ t { type Buffer = [MaybeUninit < u8 >; $ max_len] ; # [allow (unused_comparisons)] # [inline] # [cfg_attr (feature = "no-panic" , no_panic)] fn write (self , buf : & mut [MaybeUninit < u8 >; $ max_len]) -> & str { let is_nonnegative = self >= 0 ; let n = if is_nonnegative { self as u128 } else { (! (self as u128)) . wrapping_add (1) } ; let mut curr = buf . len () ; let buf_ptr = buf . as_mut_ptr () as * mut u8 ; let (n , rem) = udiv128 :: udivmod_1e19 (n) ; let buf1 = unsafe { buf_ptr . add (curr - u64 :: MAX_STR_LEN) as * mut [MaybeUninit < u8 >; u64 :: MAX_STR_LEN] } ; curr -= rem . write (unsafe { & mut * buf1 }) . len () ; if n != 0 { let target = buf . len () - 19 ; unsafe { ptr :: write_bytes (buf_ptr . add (target) , b'0' , curr - target) ; } curr = target ; let (n , rem) = udiv128 :: udivmod_1e19 (n) ; let buf2 = unsafe { buf_ptr . add (curr - u64 :: MAX_STR_LEN) as * mut [MaybeUninit < u8 >; u64 :: MAX_STR_LEN] } ; curr -= rem . write (unsafe { & mut * buf2 }) . len () ; if n != 0 { let target = buf . len () - 38 ; unsafe { ptr :: write_bytes (buf_ptr . add (target) , b'0' , curr - target) ; } curr = target ; curr -= 1 ; unsafe { * buf_ptr . add (curr) = (n as u8) + b'0' ; } } } if ! is_nonnegative { curr -= 1 ; unsafe { * buf_ptr . add (curr) = b'-' ; } } let len = buf . len () - curr ; let bytes = unsafe { slice :: from_raw_parts (buf_ptr . add (curr) , len) } ; unsafe { str :: from_utf8_unchecked (bytes) } } } } ; }
+};
+}

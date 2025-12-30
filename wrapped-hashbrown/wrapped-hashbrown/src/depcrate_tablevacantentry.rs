@@ -1,0 +1,9 @@
+// Generated macro for VacantEntry (struct)
+macro_rules! Depcrate_tableVacantEntry {
+() => {
+// Module: crate::table
+// Provides: {"VacantEntry"}
+// Dependencies: {}
+# [doc = " A view into a vacant entry in a `HashTable`."] # [doc = " It is part of the [`Entry`] enum."] # [doc = ""] # [doc = " [`Entry`]: enum.Entry.html"] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " # #[cfg(feature = \"nightly\")]"] # [doc = " # fn test() {"] # [doc = " use hashbrown::hash_table::{Entry, VacantEntry};"] # [doc = " use hashbrown::{HashTable, DefaultHashBuilder};"] # [doc = " use std::hash::BuildHasher;"] # [doc = ""] # [doc = " let mut table: HashTable<&str> = HashTable::new();"] # [doc = " let hasher = DefaultHashBuilder::default();"] # [doc = " let hasher = |val: &_| hasher.hash_one(val);"] # [doc = ""] # [doc = " let entry_v: VacantEntry<_, _> = match table.entry(hasher(&\"a\"), |&x| x == \"a\", hasher) {"] # [doc = "     Entry::Vacant(view) => view,"] # [doc = "     Entry::Occupied(_) => unreachable!(),"] # [doc = " };"] # [doc = " entry_v.insert(\"a\");"] # [doc = " assert!(table.find(hasher(&\"a\"), |&x| x == \"a\").is_some() && table.len() == 1);"] # [doc = ""] # [doc = " // Nonexistent key (insert)"] # [doc = " match table.entry(hasher(&\"b\"), |&x| x == \"b\", hasher) {"] # [doc = "     Entry::Vacant(view) => {"] # [doc = "         view.insert(\"b\");"] # [doc = "     }"] # [doc = "     Entry::Occupied(_) => unreachable!(),"] # [doc = " }"] # [doc = " assert!(table.find(hasher(&\"b\"), |&x| x == \"b\").is_some() && table.len() == 2);"] # [doc = " # }"] # [doc = " # fn main() {"] # [doc = " #     #[cfg(feature = \"nightly\")]"] # [doc = " #     test()"] # [doc = " # }"] # [doc = " ```"] pub struct VacantEntry < 'a , T , A = Global > where A : Allocator , { hash : u64 , index : usize , table : & 'a mut HashTable < T , A > , }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for ConstructorSet (enum)
+macro_rules! Depcrate_constructorConstructorSet {
+() => {
+// Module: crate::constructor
+// Provides: {"ConstructorSet"}
+// Dependencies: {}
+# [doc = " Describes the set of all constructors for a type. For details, in particular about the emptiness"] # [doc = " of constructors, see the top of the file."] # [doc = ""] # [doc = " In terms of division of responsibility, [`ConstructorSet::split`] handles all of the"] # [doc = " `exhaustive_patterns` feature."] # [derive (Debug)] pub enum ConstructorSet < Cx : PatCx > { # [doc = " The type is a tuple or struct. `empty` tracks whether the type is empty."] Struct { empty : bool } , # [doc = " This type has the following list of constructors. If `variants` is empty and"] # [doc = " `non_exhaustive` is false, don't use this; use `NoConstructors` instead."] Variants { variants : IndexVec < Cx :: VariantIdx , VariantVisibility > , non_exhaustive : bool } , # [doc = " The type is `&T`."] Ref , # [doc = " The type is a union."] Union , # [doc = " Booleans."] Bool , # [doc = " The type is spanned by integer values. The range or ranges give the set of allowed values."] # [doc = " The second range is only useful for `char`."] Integers { range_1 : IntRange , range_2 : Option < IntRange > } , # [doc = " The type is matched by slices. `array_len` is the compile-time length of the array, if"] # [doc = " known. If `subtype_is_empty`, all constructors are empty except possibly the zero-length"] # [doc = " slice `[]`."] Slice { array_len : Option < usize > , subtype_is_empty : bool } , # [doc = " The constructors cannot be listed, and the type cannot be matched exhaustively. E.g. `str`,"] # [doc = " floats."] Unlistable , # [doc = " The type has no constructors (not even empty ones). This is `!` and empty enums."] NoConstructors , }
+};
+}

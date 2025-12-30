@@ -1,0 +1,40 @@
+// Generated module macro for crate::traits
+macro_rules! Modcrate_traits {
+() => {
+        Depcrate_traitsengine!();
+        Depcrate_traitsproject!();
+        Depcrate_traitsstructural_impls!();
+        Depcrate_traitsutil!();
+        Depcrate_traitsuse_628!();
+        Depcrate_traitsuse_629!();
+        Depcrate_traitsuse_630!();
+        Depcrate_traitsuse_631!();
+        Depcrate_traitsuse_632!();
+        Depcrate_traitsuse_633!();
+        Depcrate_traitsuse_634!();
+        Depcrate_traitsuse_635!();
+        Depcrate_traitsuse_636!();
+        Depcrate_traitsuse_637!();
+        Depcrate_traitsuse_638!();
+        Depcrate_traitsuse_639!();
+        Depcrate_traitsuse_640!();
+        Depcrate_traitsuse_641!();
+        Depcrate_traitsuse_642!();
+        Depcrate_traitsObligation!();
+        Depcrate_traitsimpl_644!();
+        Depcrate_traitsimpl_645!();
+        Depcrate_traitsimpl_646!();
+        Depcrate_traitsimpl_647!();
+        Depcrate_traitsPredicateObligation!();
+        Depcrate_traitsTraitObligation!();
+        Depcrate_traitsPolyTraitObligation!();
+        Depcrate_traitsPredicateObligations!();
+        Depcrate_traitsimpl_652!();
+        Depcrate_traitsimpl_653!();
+        Depcrate_traitsmacro_654!();
+        Depcrate_traitsSelection!();
+        Depcrate_traitsObligationInspector!();
+        Depcrate_traitsimpl_657!();
+        Depcrate_traitsimpl_658!();
+    };
+}

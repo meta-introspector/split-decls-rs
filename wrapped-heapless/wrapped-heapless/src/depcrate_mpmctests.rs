@@ -1,0 +1,9 @@
+// Generated macro for tests (module)
+macro_rules! Depcrate_mpmctests {
+() => {
+// Module: crate::mpmc
+// Provides: {"tests"}
+// Dependencies: {}
+# [cfg (test)] mod tests { use static_assertions :: assert_not_impl_any ; use super :: Queue ; assert_not_impl_any ! (Queue <* const () , 4 >: Send) ; # [test] fn memory_leak () { droppable ! () ; # [expect (deprecated)] let q = Queue :: < _ , 2 > :: new () ; q . enqueue (Droppable :: new ()) . unwrap_or_else (| _ | panic ! ()) ; q . enqueue (Droppable :: new ()) . unwrap_or_else (| _ | panic ! ()) ; drop (q) ; assert_eq ! (Droppable :: count () , 0) ; } # [test] fn sanity () { # [expect (deprecated)] let q = Queue :: < _ , 2 > :: new () ; q . enqueue (0) . unwrap () ; q . enqueue (1) . unwrap () ; assert ! (q . enqueue (2) . is_err ()) ; assert_eq ! (q . dequeue () , Some (0)) ; assert_eq ! (q . dequeue () , Some (1)) ; assert_eq ! (q . dequeue () , None) ; } # [test] fn drain_at_pos255 () { # [expect (deprecated)] let q = Queue :: < _ , 2 > :: new () ; for _ in 0 .. 255 { assert ! (q . enqueue (0) . is_ok ()) ; assert_eq ! (q . dequeue () , Some (0)) ; } assert_eq ! (q . dequeue () , None) ; } # [test] fn full_at_wrapped_pos0 () { # [expect (deprecated)] let q = Queue :: < _ , 2 > :: new () ; for _ in 0 .. 254 { assert ! (q . enqueue (0) . is_ok ()) ; assert_eq ! (q . dequeue () , Some (0)) ; } assert ! (q . enqueue (0) . is_ok ()) ; assert ! (q . enqueue (0) . is_ok ()) ; assert ! (q . enqueue (0) . is_err ()) ; } # [test] fn enqueue_full () { # [cfg (not (feature = "mpmc_large"))] const CAPACITY : usize = 128 ; # [cfg (feature = "mpmc_large")] const CAPACITY : usize = 256 ; # [expect (deprecated)] let q : Queue < u8 , CAPACITY > = Queue :: new () ; assert_eq ! (q . capacity () , CAPACITY) ; for _ in 0 .. CAPACITY { q . enqueue (0xAA) . unwrap () ; } q . enqueue (0x55) . unwrap_err () ; } }
+};
+}

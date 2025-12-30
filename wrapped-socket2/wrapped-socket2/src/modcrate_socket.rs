@@ -1,0 +1,40 @@
+// Generated module macro for crate::socket
+macro_rules! Modcrate_socket {
+() => {
+        Depcrate_socketuse_37!();
+        Depcrate_socketuse_38!();
+        Depcrate_socketuse_39!();
+        Depcrate_socketuse_40!();
+        Depcrate_socketuse_41!();
+        Depcrate_socketuse_42!();
+        Depcrate_socketuse_43!();
+        Depcrate_socketuse_44!();
+        Depcrate_socketuse_45!();
+        Depcrate_socketuse_46!();
+        Depcrate_socketuse_47!();
+        Depcrate_socketuse_48!();
+        Depcrate_socketuse_49!();
+        Depcrate_socketSocket!();
+        Depcrate_socketimpl_51!();
+        Depcrate_socketset_common_type!();
+        Depcrate_socketset_common_flags!();
+        Depcrate_socketInterfaceIndexOrAddress!();
+        Depcrate_socketimpl_55!();
+        Depcrate_socketfrom_linger!();
+        Depcrate_socketinto_linger!();
+        Depcrate_socketimpl_58!();
+        Depcrate_socketimpl_59!();
+        Depcrate_socketimpl_60!();
+        Depcrate_socketimpl_61!();
+        Depcrate_socketimpl_62!();
+        Depcrate_socketimpl_63!();
+        Depcrate_socketimpl_64!();
+        Depcrate_socketimpl_65!();
+        Depcrate_socketmacro_66!();
+        Depcrate_socketmacro_67!();
+        Depcrate_socketmacro_68!();
+        Depcrate_socketmacro_69!();
+        Depcrate_socketmacro_70!();
+        Depcrate_socketmacro_71!();
+    };
+}

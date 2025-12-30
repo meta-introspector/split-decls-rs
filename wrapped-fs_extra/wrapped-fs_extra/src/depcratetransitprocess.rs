@@ -1,0 +1,9 @@
+// Generated macro for TransitProcess (struct)
+macro_rules! DepcrateTransitProcess {
+() => {
+// Module: crate
+// Provides: {"TransitProcess"}
+// Dependencies: {}
+# [doc = " A structure which includes information about the current status of copying or moving a directory."] pub struct TransitProcess { # [doc = " Already copied bytes"] pub copied_bytes : u64 , # [doc = " All the bytes which should be copied or moved (dir size)."] pub total_bytes : u64 , # [doc = " Copied bytes on this time for file."] pub file_bytes_copied : u64 , # [doc = " Size of currently copied file."] pub file_total_bytes : u64 , # [doc = " Name of currently copied file."] pub file_name : String , # [doc = " Name of currently copied folder."] pub dir_name : String , # [doc = " Transit state"] pub state : dir :: TransitState , }
+};
+}

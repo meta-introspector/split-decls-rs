@@ -1,0 +1,9 @@
+// Generated macro for by_unit_check_alu (macro)
+macro_rules! Depcrate_memby_unit_check_alu {
+() => {
+// Module: crate::mem
+// Provides: {"by_unit_check_alu"}
+// Dependencies: {}
+# [allow (unused_macros)] macro_rules ! by_unit_check_alu { ($ name : ident , $ unit : ty , $ bound : expr , $ mask : ident) => { # [allow (clippy :: cast_ptr_alignment)] # [inline (always)] fn $ name (buffer : & [$ unit]) -> bool { let mut offset = 0usize ; let mut accu = 0usize ; let unit_size = :: core :: mem :: size_of ::<$ unit > () ; let len = buffer . len () ; if len >= ALU_ALIGNMENT / unit_size { if buffer [0] >= $ bound { return false ; } let src = buffer . as_ptr () ; let mut until_alignment = ((ALU_ALIGNMENT - ((src as usize) & ALU_ALIGNMENT_MASK)) & ALU_ALIGNMENT_MASK) / unit_size ; if until_alignment + ALU_ALIGNMENT / unit_size <= len { if until_alignment != 0 { accu |= buffer [offset] as usize ; offset += 1 ; until_alignment -= 1 ; while until_alignment != 0 { accu |= buffer [offset] as usize ; offset += 1 ; until_alignment -= 1 ; } if accu >= $ bound { return false ; } } let len_minus_stride = len - ALU_ALIGNMENT / unit_size ; if offset + (4 * (ALU_ALIGNMENT / unit_size)) <= len { let len_minus_unroll = len - (4 * (ALU_ALIGNMENT / unit_size)) ; loop { let unroll_accu = unsafe { * (src . add (offset) as * const usize) } | unsafe { * (src . add (offset + (ALU_ALIGNMENT / unit_size)) as * const usize) } | unsafe { * (src . add (offset + (2 * (ALU_ALIGNMENT / unit_size))) as * const usize) } | unsafe { * (src . add (offset + (3 * (ALU_ALIGNMENT / unit_size))) as * const usize) } ; if unroll_accu & $ mask != 0 { return false ; } offset += 4 * (ALU_ALIGNMENT / unit_size) ; if offset > len_minus_unroll { break ; } } } while offset <= len_minus_stride { accu |= unsafe { * (src . add (offset) as * const usize) } ; offset += ALU_ALIGNMENT / unit_size ; } } } for & unit in & buffer [offset ..] { accu |= unit as usize ; } accu & $ mask == 0 } } ; }
+};
+}

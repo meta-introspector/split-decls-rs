@@ -1,0 +1,9 @@
+// Generated macro for macro_22 (macro)
+macro_rules! Depcratemacro_22 {
+() => {
+// Module: crate
+// Provides: {"macro_22"}
+// Dependencies: {}
+rustc_index :: newtype_index ! { # [doc = " An `ItemLocalId` uniquely identifies something within a given \"item-like\";"] # [doc = " that is, within a `hir::Item`, `hir::TraitItem`, or `hir::ImplItem`. There is no"] # [doc = " guarantee that the numerical value of a given `ItemLocalId` corresponds to"] # [doc = " the node's position within the owning item in any way, but there is a"] # [doc = " guarantee that the `ItemLocalId`s within an owner occupy a dense range of"] # [doc = " integers starting at zero, so a mapping that maps all or most nodes within"] # [doc = " an \"item-like\" to something else can be implemented by a `Vec` instead of a"] # [doc = " tree or hash map."] # [derive (HashStable_Generic)] # [encodable] # [orderable] pub struct ItemLocalId { } }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for DesugaringKind (enum)
+macro_rules! Depcrate_hygieneDesugaringKind {
+() => {
+// Module: crate::hygiene
+// Provides: {"DesugaringKind"}
+// Dependencies: {}
+# [doc = " The kind of compiler desugaring."] # [derive (Clone , Copy , PartialEq , Debug , Encodable , Decodable , HashStable_Generic)] pub enum DesugaringKind { QuestionMark , TryBlock , YeetExpr , # [doc = " Desugaring of an `impl Trait` in return type position"] # [doc = " to an `type Foo = impl Trait;` and replacing the"] # [doc = " `impl Trait` with `Foo`."] OpaqueTy , Async , Await , ForLoop , WhileLoop , # [doc = " `async Fn()` bound modifier"] BoundModifier , # [doc = " Calls to contract checks (`#[requires]` to precond, `#[ensures]` to postcond)"] Contract , # [doc = " A pattern type range start/end"] PatTyRange , # [doc = " A format literal."] FormatLiteral { # [doc = " Was this format literal written in the source?"] # [doc = " - `format!(\"boo\")` => Yes,"] # [doc = " - `format!(concat!(\"b\", \"o\", \"o\"))` => No,"] # [doc = " - `format!(include_str!(\"boo.txt\"))` => No,"] # [doc = ""] # [doc = " If it wasn't written in the source then we have to be careful with suggestions about"] # [doc = " rewriting it."] source : bool , } , }
+};
+}

@@ -1,0 +1,42 @@
+// Generated module macro for crate::groupbylazy
+macro_rules! Modcrate_groupbylazy {
+() => {
+        Depcrate_groupbylazyuse_347!();
+        Depcrate_groupbylazyuse_348!();
+        Depcrate_groupbylazyuse_349!();
+        Depcrate_groupbylazyKeyFunction!();
+        Depcrate_groupbylazyimpl_351!();
+        Depcrate_groupbylazyChunkIndex!();
+        Depcrate_groupbylazyimpl_353!();
+        Depcrate_groupbylazyimpl_354!();
+        Depcrate_groupbylazyGroupInner!();
+        Depcrate_groupbylazyimpl_356!();
+        Depcrate_groupbylazyimpl_357!();
+        Depcrate_groupbylazyimpl_358!();
+        Depcrate_groupbylazyGroupBy!();
+        Depcrate_groupbylazyChunkBy!();
+        Depcrate_groupbylazyimpl_361!();
+        Depcrate_groupbylazynew!();
+        Depcrate_groupbylazyimpl_363!();
+        Depcrate_groupbylazyimpl_364!();
+        Depcrate_groupbylazyGroups!();
+        Depcrate_groupbylazyimpl_366!();
+        Depcrate_groupbylazyimpl_367!();
+        Depcrate_groupbylazyGroup!();
+        Depcrate_groupbylazyimpl_369!();
+        Depcrate_groupbylazyimpl_370!();
+        Depcrate_groupbylazyimpl_371!();
+        Depcrate_groupbylazynew_chunks!();
+        Depcrate_groupbylazyIntoChunks!();
+        Depcrate_groupbylazyimpl_374!();
+        Depcrate_groupbylazyimpl_375!();
+        Depcrate_groupbylazyimpl_376!();
+        Depcrate_groupbylazyimpl_377!();
+        Depcrate_groupbylazyChunks!();
+        Depcrate_groupbylazyimpl_379!();
+        Depcrate_groupbylazyimpl_380!();
+        Depcrate_groupbylazyChunk!();
+        Depcrate_groupbylazyimpl_382!();
+        Depcrate_groupbylazyimpl_383!();
+    };
+}

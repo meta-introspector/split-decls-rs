@@ -1,0 +1,9 @@
+// Generated macro for Iter (struct)
+macro_rules! Depcrate_arch_generic_memchrIter {
+() => {
+// Module: crate::arch::generic::memchr
+// Provides: {"Iter"}
+// Dependencies: {}
+# [doc = " An iterator over all occurrences of a set of bytes in a haystack."] # [doc = ""] # [doc = " This iterator implements the routines necessary to provide a"] # [doc = " `DoubleEndedIterator` impl, which means it can also be used to find"] # [doc = " occurrences in reverse order."] # [doc = ""] # [doc = " The lifetime parameters are as follows:"] # [doc = ""] # [doc = " * `'h` refers to the lifetime of the haystack being searched."] # [doc = ""] # [doc = " This type is intended to be used to implement all iterators for the"] # [doc = " `memchr` family of functions. It handles a tiny bit of marginally tricky"] # [doc = " raw pointer math, but otherwise expects the caller to provide `find_raw`"] # [doc = " and `rfind_raw` routines for each call of `next` and `next_back`,"] # [doc = " respectively."] # [derive (Clone , Debug)] pub (crate) struct Iter < 'h > { # [doc = " The original starting point into the haystack. We use this to convert"] # [doc = " pointers to offsets."] original_start : * const u8 , # [doc = " The current starting point into the haystack. That is, where the next"] # [doc = " search will begin."] start : * const u8 , # [doc = " The current ending point into the haystack. That is, where the next"] # [doc = " reverse search will begin."] end : * const u8 , # [doc = " A marker for tracking the lifetime of the start/cur_start/cur_end"] # [doc = " pointers above, which all point into the haystack."] haystack : core :: marker :: PhantomData < & 'h [u8] > , }
+};
+}

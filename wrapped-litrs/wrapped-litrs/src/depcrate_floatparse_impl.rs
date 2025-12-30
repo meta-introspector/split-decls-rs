@@ -1,0 +1,9 @@
+// Generated macro for parse_impl (function)
+macro_rules! Depcrate_floatparse_impl {
+() => {
+// Module: crate::float
+// Provides: {"parse_impl"}
+// Dependencies: {}
+# [doc = " Precondition: first byte of string has to be in `b'0'..=b'9'`."] # [inline (never)] pub (crate) fn parse_impl (input : & str) -> Result < FloatLit < & str > , ParseError > { let end_integer_part = end_dec_digits (input . as_bytes ()) ; let rest = & input [end_integer_part ..] ; let end_fractional_part = if rest . as_bytes () . get (0) == Some (& b'.') { if rest . as_bytes () . get (1) == Some (& b'_') { return Err (perr (end_integer_part + 1 , UnexpectedChar)) ; } end_dec_digits (rest [1 ..] . as_bytes ()) + 1 + end_integer_part } else { end_integer_part } ; let rest = & input [end_fractional_part ..] ; if end_integer_part + 1 == end_fractional_part && ! rest . is_empty () { return Err (perr (end_integer_part + 1 , UnexpectedChar)) ; } let end_number_part = if rest . starts_with ('e') || rest . starts_with ('E') { let exp_number_start = match rest . as_bytes () . get (1) { Some (b'-') | Some (b'+') => 2 , _ => 1 , } ; let end_exponent = end_dec_digits (rest [exp_number_start ..] . as_bytes ()) + exp_number_start ; if ! rest [exp_number_start .. end_exponent] . bytes () . any (| b | matches ! (b , b'0' ..= b'9')) { return Err (perr (end_fractional_part .. end_fractional_part + end_exponent , NoExponentDigits ,)) ; } end_exponent + end_fractional_part } else { end_fractional_part } ; let suffix = & input [end_number_part ..] ; check_suffix (suffix) . map_err (| kind | perr (end_number_part .. input . len () , kind)) ? ; if end_integer_part == end_number_part { return Err (perr (None , UnexpectedIntegerLit)) ; } Ok (FloatLit { raw : input , end_integer_part , end_fractional_part , end_number_part , }) }
+};
+}

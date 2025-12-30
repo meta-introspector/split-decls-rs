@@ -1,0 +1,52 @@
+// Generated module macro for crate::paserk
+macro_rules! Modcrate_paserk {
+() => {
+        Depcrate_paserkuse_76!();
+        Depcrate_paserkuse_77!();
+        Depcrate_paserkuse_78!();
+        Depcrate_paserkuse_79!();
+        Depcrate_paserkuse_80!();
+        Depcrate_paserkuse_81!();
+        Depcrate_paserkuse_82!();
+        Depcrate_paserkuse_83!();
+        Depcrate_paserkuse_84!();
+        Depcrate_paserkuse_85!();
+        Depcrate_paserkuse_86!();
+        Depcrate_paserkuse_87!();
+        Depcrate_paserkuse_88!();
+        Depcrate_paserkuse_89!();
+        Depcrate_paserkuse_90!();
+        Depcrate_paserkuse_91!();
+        Depcrate_paserkvalidate_paserk_string!();
+        Depcrate_paserkFormatAsPaserk!();
+        Depcrate_paserkimpl_94!();
+        Depcrate_paserkimpl_95!();
+        Depcrate_paserkimpl_96!();
+        Depcrate_paserkimpl_97!();
+        Depcrate_paserkimpl_98!();
+        Depcrate_paserkimpl_99!();
+        Depcrate_paserkimpl_100!();
+        Depcrate_paserkimpl_101!();
+        Depcrate_paserkimpl_102!();
+        Depcrate_paserkimpl_103!();
+        Depcrate_paserkimpl_104!();
+        Depcrate_paserkimpl_105!();
+        Depcrate_paserkimpl_106!();
+        Depcrate_paserkimpl_107!();
+        Depcrate_paserkimpl_108!();
+        Depcrate_paserkimpl_109!();
+        Depcrate_paserkId!();
+        Depcrate_paserkimpl_111!();
+        Depcrate_paserkimpl_112!();
+        Depcrate_paserkimpl_113!();
+        Depcrate_paserkimpl_114!();
+        Depcrate_paserkimpl_115!();
+        Depcrate_paserkimpl_116!();
+        Depcrate_paserkimpl_117!();
+        Depcrate_paserkimpl_118!();
+        Depcrate_paserkimpl_119!();
+        Depcrate_paserkimpl_120!();
+        Depcrate_paserkimpl_121!();
+        Depcrate_paserktests!();
+    };
+}

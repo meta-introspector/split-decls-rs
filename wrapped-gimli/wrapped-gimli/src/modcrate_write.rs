@@ -1,0 +1,49 @@
+// Generated module macro for crate::write
+macro_rules! Modcrate_write {
+() => {
+        Depcrate_writeuse_850!();
+        Depcrate_writeuse_851!();
+        Depcrate_writeuse_852!();
+        Depcrate_writeuse_853!();
+        Depcrate_writeFnvIndexMap!();
+        Depcrate_writeFnvIndexSet!();
+        Depcrate_writeendian_vec!();
+        Depcrate_writeuse_865!();
+        Depcrate_writewriter!();
+        Depcrate_writeuse_875!();
+        Depcrate_writerelocate!();
+        Depcrate_writeuse_885!();
+        Depcrate_writesection!();
+        Depcrate_writeuse_898!();
+        Depcrate_writedefine_id!();
+        Depcrate_writedefine_offsets!();
+        Depcrate_writeabbrev!();
+        Depcrate_writeuse_915!();
+        Depcrate_writecfi!();
+        Depcrate_writeuse_939!();
+        Depcrate_writedwarf!();
+        Depcrate_writeuse_949!();
+        Depcrate_writeline!();
+        Depcrate_writeuse_974!();
+        Depcrate_writeloc!();
+        Depcrate_writeuse_991!();
+        Depcrate_writeop!();
+        Depcrate_writeuse_1005!();
+        Depcrate_writerange!();
+        Depcrate_writeuse_1021!();
+        Depcrate_writestr!();
+        Depcrate_writeuse_1035!();
+        Depcrate_writeunit!();
+        Depcrate_writeuse_1065!();
+        Depcrate_writeError!();
+        Depcrate_writeimpl_1067!();
+        Depcrate_writeimpl_1068!();
+        Depcrate_writeResult!();
+        Depcrate_writeAddress!();
+        Depcrate_writeBaseId!();
+        Depcrate_writeBaseId!();
+        Depcrate_writeimpl_1073!();
+        Depcrate_writeconvert!();
+        Depcrate_writeuse_1075!();
+    };
+}

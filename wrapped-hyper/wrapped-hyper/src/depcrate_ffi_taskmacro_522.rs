@@ -1,0 +1,9 @@
+// Generated macro for macro_522 (macro)
+macro_rules! Depcrate_ffi_taskmacro_522 {
+() => {
+// Module: crate::ffi::task
+// Provides: {"macro_522"}
+// Dependencies: {}
+ffi_fn ! { # [doc = " Free a waker."] # [doc = ""] # [doc = " This should only be used if the request isn't consumed by"] # [doc = " `hyper_waker_wake`."] fn hyper_waker_free (waker : * mut hyper_waker) { drop (non_null ! (Box :: from_raw (waker) ?= ())) ; } }
+};
+}

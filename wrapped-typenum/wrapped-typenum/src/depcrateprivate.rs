@@ -1,0 +1,9 @@
+// Generated macro for private (module)
+macro_rules! Depcrateprivate {
+() => {
+// Module: crate
+// Provides: {"private"}
+// Dependencies: {}
+pub mod private ;
+};
+}

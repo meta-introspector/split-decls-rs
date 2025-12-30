@@ -1,0 +1,40 @@
+// Generated module macro for crate::iter::unzip
+macro_rules! Modcrate_iter_unzip {
+() => {
+        Depcrate_iter_unzipuse_1192!();
+        Depcrate_iter_unzipuse_1193!();
+        Depcrate_iter_unzipUnzipOp!();
+        Depcrate_iter_unzipexecute!();
+        Depcrate_iter_unzipexecute_into!();
+        Depcrate_iter_unzipunzip!();
+        Depcrate_iter_unzipunzip_indexed!();
+        Depcrate_iter_unzipUnzip!();
+        Depcrate_iter_unzipimpl_1200!();
+        Depcrate_iter_unzippartition!();
+        Depcrate_iter_unzipPartition!();
+        Depcrate_iter_unzipimpl_1203!();
+        Depcrate_iter_unzippartition_map!();
+        Depcrate_iter_unzipPartitionMap!();
+        Depcrate_iter_unzipimpl_1206!();
+        Depcrate_iter_unzipUnzipA!();
+        Depcrate_iter_unzipimpl_1208!();
+        Depcrate_iter_unzipUnzipB!();
+        Depcrate_iter_unzipimpl_1210!();
+        Depcrate_iter_unzipUnzipConsumer!();
+        Depcrate_iter_unzipimpl_1212!();
+        Depcrate_iter_unzipimpl_1213!();
+        Depcrate_iter_unzipUnzipFolder!();
+        Depcrate_iter_unzipimpl_1215!();
+        Depcrate_iter_unzipUnzipReducer!();
+        Depcrate_iter_unzipimpl_1217!();
+        Depcrate_iter_unzipimpl_1218!();
+        Depcrate_iter_unzipimpl_1219!();
+        Depcrate_iter_unzipUnEither!();
+        Depcrate_iter_unzipimpl_1221!();
+        Depcrate_iter_unzipimpl_1222!();
+        Depcrate_iter_unzipimpl_1223!();
+        Depcrate_iter_unzipCollector!();
+        Depcrate_iter_unzipimpl_1225!();
+        Depcrate_iter_unzipimpl_1226!();
+    };
+}

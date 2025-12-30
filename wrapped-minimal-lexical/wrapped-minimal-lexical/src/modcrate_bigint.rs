@@ -1,0 +1,53 @@
+// Generated module macro for crate::bigint
+macro_rules! Modcrate_bigint {
+() => {
+        Depcrate_bigintuse_18!();
+        Depcrate_bigintuse_19!();
+        Depcrate_bigintuse_20!();
+        Depcrate_bigintuse_21!();
+        Depcrate_bigintuse_22!();
+        Depcrate_bigintBIGINT_BITS!();
+        Depcrate_bigintBIGINT_LIMBS!();
+        Depcrate_bigintVecType!();
+        Depcrate_bigintVecType!();
+        Depcrate_bigintBigint!();
+        Depcrate_bigintimpl_28!();
+        Depcrate_bigintimpl_29!();
+        Depcrate_bigintReverseView!();
+        Depcrate_bigintimpl_31!();
+        Depcrate_bigintrview!();
+        Depcrate_bigintcompare!();
+        Depcrate_bigintnormalize!();
+        Depcrate_bigintis_normalized!();
+        Depcrate_bigintfrom_u64!();
+        Depcrate_bigintnonzero!();
+        Depcrate_bigintu32_to_hi64_1!();
+        Depcrate_bigintu32_to_hi64_2!();
+        Depcrate_bigintu32_to_hi64_3!();
+        Depcrate_bigintu64_to_hi64_1!();
+        Depcrate_bigintu64_to_hi64_2!();
+        Depcrate_biginthi!();
+        Depcrate_biginthi64!();
+        Depcrate_bigintpow!();
+        Depcrate_bigintscalar_add!();
+        Depcrate_bigintscalar_mul!();
+        Depcrate_bigintsmall_add_from!();
+        Depcrate_bigintsmall_add!();
+        Depcrate_bigintsmall_mul!();
+        Depcrate_bigintlarge_add_from!();
+        Depcrate_bigintlarge_add!();
+        Depcrate_bigintlong_mul!();
+        Depcrate_bigintlarge_mul!();
+        Depcrate_bigintshl_bits!();
+        Depcrate_bigintshl_limbs!();
+        Depcrate_bigintshl!();
+        Depcrate_bigintleading_zeros!();
+        Depcrate_bigintbit_length!();
+        Depcrate_bigintLimb!();
+        Depcrate_bigintWide!();
+        Depcrate_bigintLIMB_BITS!();
+        Depcrate_bigintLimb!();
+        Depcrate_bigintWide!();
+        Depcrate_bigintLIMB_BITS!();
+    };
+}

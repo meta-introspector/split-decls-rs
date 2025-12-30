@@ -1,0 +1,9 @@
+// Generated macro for parse_quote_spanned (macro)
+macro_rules! Depcrate_parse_quoteparse_quote_spanned {
+() => {
+// Module: crate::parse_quote
+// Provides: {"parse_quote_spanned"}
+// Dependencies: {}
+# [doc = " This macro is [`parse_quote!`] + [`quote_spanned!`][quote::quote_spanned]."] # [doc = ""] # [doc = " Please refer to each of their documentation."] # [doc = ""] # [doc = " # Example"] # [doc = ""] # [doc = " ```"] # [doc = " use quote::{quote, quote_spanned};"] # [doc = " use syn::spanned::Spanned;"] # [doc = " use syn::{parse_quote_spanned, ReturnType, Signature};"] # [doc = ""] # [doc = " // Changes `fn()` to `fn() -> Pin<Box<dyn Future<Output = ()>>>`,"] # [doc = " // and `fn() -> T` to `fn() -> Pin<Box<dyn Future<Output = T>>>`,"] # [doc = " // without introducing any call_site() spans."] # [doc = " fn make_ret_pinned_future(sig: &mut Signature) {"] # [doc = "     let ret = match &sig.output {"] # [doc = "         ReturnType::Default => quote_spanned!(sig.paren_token.span=> ()),"] # [doc = "         ReturnType::Type(_, ret) => quote!(#ret),"] # [doc = "     };"] # [doc = "     sig.output = parse_quote_spanned! {ret.span()=>"] # [doc = "         -> ::std::pin::Pin<::std::boxed::Box<dyn ::std::future::Future<Output = #ret>>>"] # [doc = "     };"] # [doc = " }"] # [doc = " ```"] # [cfg_attr (docsrs , doc (cfg (all (feature = "parsing" , feature = "printing"))))] # [macro_export] macro_rules ! parse_quote_spanned { ($ span : expr => $ ($ tt : tt) *) => { $ crate :: __private :: parse_quote ($ crate :: __private :: quote :: quote_spanned ! ($ span => $ ($ tt) *)) } ; }
+};
+}

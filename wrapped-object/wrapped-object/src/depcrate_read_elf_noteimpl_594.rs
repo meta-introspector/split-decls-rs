@@ -1,0 +1,9 @@
+// Generated macro for impl_594 (impl)
+macro_rules! Depcrate_read_elf_noteimpl_594 {
+() => {
+// Module: crate::read::elf::note
+// Provides: {"impl_594"}
+// Dependencies: {}
+impl < Endian : endian :: Endian > NoteHeader for elf :: NoteHeader64 < Endian > { type Endian = Endian ; # [inline] fn n_namesz (& self , endian : Self :: Endian) -> u32 { self . n_namesz . get (endian) } # [inline] fn n_descsz (& self , endian : Self :: Endian) -> u32 { self . n_descsz . get (endian) } # [inline] fn n_type (& self , endian : Self :: Endian) -> u32 { self . n_type . get (endian) } }
+};
+}

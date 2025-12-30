@@ -1,0 +1,9 @@
+// Generated macro for tests (module)
+macro_rules! Depcrate_mapref_onetests {
+() => {
+// Module: crate::mapref::one
+// Provides: {"tests"}
+// Dependencies: {}
+# [cfg (test)] mod tests { use crate :: DashMap ; # [test] fn downgrade () { let data = DashMap :: new () ; data . insert ("test" , "test") ; if let Some (mut w_ref) = data . get_mut ("test") { * w_ref . value_mut () = "test2" ; let r_ref = w_ref . downgrade () ; assert_eq ! (* r_ref . value () , "test2") ; } ; } # [test] fn mapped_mut () { let data = DashMap :: new () ; data . insert ("test" , * b"test") ; if let Some (b_ref) = data . get_mut ("test") { let mut s_ref = b_ref . try_map (| b | std :: str :: from_utf8_mut (b) . ok ()) . unwrap () ; s_ref . value_mut () . make_ascii_uppercase () ; } assert_eq ! (data . get ("test") . unwrap () . value () , b"TEST") ; } # [test] fn mapped_mut_again () { let data = DashMap :: new () ; data . insert ("test" , * b"hello world") ; if let Some (b_ref) = data . get_mut ("test") { let s_ref = b_ref . try_map (| b | std :: str :: from_utf8_mut (b) . ok ()) . unwrap () ; let mut hello_ref = s_ref . try_map (| s | s . get_mut (.. 5)) . unwrap () ; hello_ref . value_mut () . make_ascii_uppercase () ; } assert_eq ! (data . get ("test") . unwrap () . value () , b"HELLO world") ; } # [test] fn mapped_ref () { let data = DashMap :: new () ; data . insert ("test" , * b"test") ; if let Some (b_ref) = data . get ("test") { let s_ref = b_ref . try_map (| b | std :: str :: from_utf8 (b) . ok ()) . unwrap () ; assert_eq ! (s_ref . value () , "test") ; } ; } # [test] fn mapped_ref_again () { let data = DashMap :: new () ; data . insert ("test" , * b"hello world") ; if let Some (b_ref) = data . get ("test") { let s_ref = b_ref . try_map (| b | std :: str :: from_utf8 (b) . ok ()) . unwrap () ; let hello_ref = s_ref . try_map (| s | s . get (.. 5)) . unwrap () ; assert_eq ! (hello_ref . value () , "hello") ; } ; } }
+};
+}

@@ -1,0 +1,51 @@
+// Generated module macro for crate::stability
+macro_rules! Modcrate_stability {
+() => {
+        Depcrate_stabilityuse_524!();
+        Depcrate_stabilityuse_525!();
+        Depcrate_stabilityuse_526!();
+        Depcrate_stabilityuse_527!();
+        Depcrate_stabilityuse_528!();
+        Depcrate_stabilityuse_529!();
+        Depcrate_stabilityuse_530!();
+        Depcrate_stabilityuse_531!();
+        Depcrate_stabilityuse_532!();
+        Depcrate_stabilityuse_533!();
+        Depcrate_stabilityuse_534!();
+        Depcrate_stabilityuse_535!();
+        Depcrate_stabilityuse_536!();
+        Depcrate_stabilityuse_537!();
+        Depcrate_stabilityuse_538!();
+        Depcrate_stabilityuse_539!();
+        Depcrate_stabilityuse_540!();
+        Depcrate_stabilityuse_541!();
+        Depcrate_stabilityuse_542!();
+        Depcrate_stabilityuse_543!();
+        Depcrate_stabilityuse_544!();
+        Depcrate_stabilityuse_545!();
+        Depcrate_stabilityAnnotationKind!();
+        Depcrate_stabilityinherit_deprecation!();
+        Depcrate_stabilityinherit_const_stability!();
+        Depcrate_stabilityannotation_kind!();
+        Depcrate_stabilitylookup_deprecation_entry!();
+        Depcrate_stabilityinherit_stability!();
+        Depcrate_stabilityFORCE_UNSTABLE!();
+        Depcrate_stabilitylookup_stability!();
+        Depcrate_stabilitylookup_default_body_stability!();
+        Depcrate_stabilitylookup_const_stability!();
+        Depcrate_stabilitystability_implications!();
+        Depcrate_stabilityMissingStabilityAnnotations!();
+        Depcrate_stabilityimpl_558!();
+        Depcrate_stabilityimpl_559!();
+        Depcrate_stabilitycheck_mod_unstable_api_usage!();
+        Depcrate_stabilityprovide!();
+        Depcrate_stabilityChecker!();
+        Depcrate_stabilityimpl_563!();
+        Depcrate_stabilityis_unstable_reexport!();
+        Depcrate_stabilityCheckTraitImplStable!();
+        Depcrate_stabilityimpl_566!();
+        Depcrate_stabilitycheck_unused_or_stable_features!();
+        Depcrate_stabilityunnecessary_partially_stable_feature_lint!();
+        Depcrate_stabilityunnecessary_stable_feature_lint!();
+    };
+}

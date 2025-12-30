@@ -1,0 +1,9 @@
+// Generated macro for get_attribute_size (function)
+macro_rules! Depcrate_read_abbrevget_attribute_size {
+() => {
+// Module: crate::read::abbrev
+// Provides: {"get_attribute_size"}
+// Dependencies: {}
+# [inline] pub (crate) fn get_attribute_size (form : constants :: DwForm , encoding : Encoding) -> Option < u8 > { match form { constants :: DW_FORM_addr => Some (encoding . address_size) , constants :: DW_FORM_implicit_const | constants :: DW_FORM_flag_present => Some (0) , constants :: DW_FORM_data1 | constants :: DW_FORM_flag | constants :: DW_FORM_strx1 | constants :: DW_FORM_ref1 | constants :: DW_FORM_addrx1 => Some (1) , constants :: DW_FORM_data2 | constants :: DW_FORM_ref2 | constants :: DW_FORM_addrx2 | constants :: DW_FORM_strx2 => Some (2) , constants :: DW_FORM_addrx3 | constants :: DW_FORM_strx3 => Some (3) , constants :: DW_FORM_data4 | constants :: DW_FORM_ref_sup4 | constants :: DW_FORM_ref4 | constants :: DW_FORM_strx4 | constants :: DW_FORM_addrx4 => Some (4) , constants :: DW_FORM_data8 | constants :: DW_FORM_ref8 | constants :: DW_FORM_ref_sig8 | constants :: DW_FORM_ref_sup8 => Some (8) , constants :: DW_FORM_data16 => Some (16) , constants :: DW_FORM_sec_offset | constants :: DW_FORM_GNU_ref_alt | constants :: DW_FORM_strp | constants :: DW_FORM_strp_sup | constants :: DW_FORM_GNU_strp_alt | constants :: DW_FORM_line_strp => Some (encoding . format . word_size ()) , constants :: DW_FORM_ref_addr => { Some (if encoding . version == 2 { encoding . address_size } else { encoding . format . word_size () }) } constants :: DW_FORM_block | constants :: DW_FORM_block1 | constants :: DW_FORM_block2 | constants :: DW_FORM_block4 | constants :: DW_FORM_exprloc | constants :: DW_FORM_ref_udata | constants :: DW_FORM_string | constants :: DW_FORM_sdata | constants :: DW_FORM_udata | constants :: DW_FORM_indirect => None , _ => None , } }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for macro_440 (macro)
+macro_rules! Depcrate_ffi_http_typesmacro_440 {
+() => {
+// Module: crate::ffi::http_types
+// Provides: {"macro_440"}
+// Dependencies: {}
+ffi_fn ! { # [doc = " Take ownership of the body of this response."] # [doc = ""] # [doc = " It is safe to free the response even after taking ownership of its body."] # [doc = ""] # [doc = " To avoid a memory leak, the body must eventually be consumed by"] # [doc = " `hyper_body_free`, `hyper_body_foreach`, or `hyper_request_set_body`."] fn hyper_response_body (resp : * mut hyper_response) -> * mut hyper_body { let body = std :: mem :: replace (non_null ! (& mut * resp ?= std :: ptr :: null_mut ()) . 0 . body_mut () , IncomingBody :: empty ()) ; Box :: into_raw (Box :: new (hyper_body (body))) } ?= std :: ptr :: null_mut () }
+};
+}

@@ -1,0 +1,43 @@
+// Generated module macro for crate::impl_trait_overcaptures
+macro_rules! Modcrate_impl_trait_overcaptures {
+() => {
+        Depcrate_impl_trait_overcapturesuse_438!();
+        Depcrate_impl_trait_overcapturesuse_439!();
+        Depcrate_impl_trait_overcapturesuse_440!();
+        Depcrate_impl_trait_overcapturesuse_441!();
+        Depcrate_impl_trait_overcapturesuse_442!();
+        Depcrate_impl_trait_overcapturesuse_443!();
+        Depcrate_impl_trait_overcapturesuse_444!();
+        Depcrate_impl_trait_overcapturesuse_445!();
+        Depcrate_impl_trait_overcapturesuse_446!();
+        Depcrate_impl_trait_overcapturesuse_447!();
+        Depcrate_impl_trait_overcapturesuse_448!();
+        Depcrate_impl_trait_overcapturesuse_449!();
+        Depcrate_impl_trait_overcapturesuse_450!();
+        Depcrate_impl_trait_overcapturesuse_451!();
+        Depcrate_impl_trait_overcapturesuse_452!();
+        Depcrate_impl_trait_overcapturesuse_453!();
+        Depcrate_impl_trait_overcapturesuse_454!();
+        Depcrate_impl_trait_overcapturesuse_455!();
+        Depcrate_impl_trait_overcapturesuse_456!();
+        Depcrate_impl_trait_overcapturesuse_457!();
+        Depcrate_impl_trait_overcapturesuse_458!();
+        Depcrate_impl_trait_overcapturesuse_459!();
+        Depcrate_impl_trait_overcapturesuse_460!();
+        Depcrate_impl_trait_overcapturesmacro_461!();
+        Depcrate_impl_trait_overcapturesmacro_462!();
+        Depcrate_impl_trait_overcapturesmacro_463!();
+        Depcrate_impl_trait_overcapturesimpl_464!();
+        Depcrate_impl_trait_overcapturesParamKind!();
+        Depcrate_impl_trait_overcapturescheck_fn!();
+        Depcrate_impl_trait_overcapturesVisitOpaqueTypes!();
+        Depcrate_impl_trait_overcapturesimpl_468!();
+        Depcrate_impl_trait_overcapturesImplTraitOvercapturesLint!();
+        Depcrate_impl_trait_overcapturesimpl_470!();
+        Depcrate_impl_trait_overcapturesImplTraitRedundantCapturesLint!();
+        Depcrate_impl_trait_overcapturesextract_def_id_from_arg!();
+        Depcrate_impl_trait_overcapturesFunctionalVariances!();
+        Depcrate_impl_trait_overcapturesimpl_474!();
+        Depcrate_impl_trait_overcapturesunify!();
+    };
+}

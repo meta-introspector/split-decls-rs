@@ -1,0 +1,9 @@
+// Generated macro for create_object_file (function)
+macro_rules! Depcrate_back_metadatacreate_object_file {
+() => {
+// Module: crate::back::metadata
+// Provides: {"create_object_file"}
+// Dependencies: {}
+pub (crate) fn create_object_file (sess : & Session) -> Option < write :: Object < 'static > > { let endianness = match sess . target . options . endian { Endian :: Little => Endianness :: Little , Endian :: Big => Endianness :: Big , } ; let Some ((architecture , sub_architecture)) = sess . target . object_architecture (& sess . unstable_target_features) else { return None ; } ; let binary_format = sess . target . binary_format . to_object () ; let mut file = write :: Object :: new (binary_format , architecture , endianness) ; file . set_sub_architecture (sub_architecture) ; if sess . target . is_like_darwin { if macho_is_arm64e (& sess . target) { file . set_macho_cpu_subtype (object :: macho :: CPU_SUBTYPE_ARM64E) ; } file . set_macho_build_version (macho_object_build_version_for_target (sess)) } if binary_format == BinaryFormat :: Coff { let original_mangling = file . mangling () ; file . set_mangling (object :: write :: Mangling :: None) ; let mut feature = 0 ; if file . architecture () == object :: Architecture :: I386 { feature |= 1 ; } file . add_symbol (object :: write :: Symbol { name : "@feat.00" . into () , value : feature , size : 0 , kind : object :: SymbolKind :: Data , scope : object :: SymbolScope :: Compilation , weak : false , section : object :: write :: SymbolSection :: Absolute , flags : object :: SymbolFlags :: None , }) ; file . set_mangling (original_mangling) ; } let e_flags = elf_e_flags (architecture , sess) ; let os_abi = elf_os_abi (sess) ; let abi_version = 0 ; add_gnu_property_note (& mut file , architecture , binary_format , endianness) ; file . flags = FileFlags :: Elf { os_abi , abi_version , e_flags } ; Some (file) }
+};
+}

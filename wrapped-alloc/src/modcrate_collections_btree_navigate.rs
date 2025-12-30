@@ -1,0 +1,46 @@
+// Generated module macro for crate::collections::btree::navigate
+macro_rules! Modcrate_collections_btree_navigate {
+() => {
+        Depcrate_collections_btree_navigateuse_523!();
+        Depcrate_collections_btree_navigateuse_524!();
+        Depcrate_collections_btree_navigateuse_525!();
+        Depcrate_collections_btree_navigateuse_526!();
+        Depcrate_collections_btree_navigateuse_527!();
+        Depcrate_collections_btree_navigateuse_528!();
+        Depcrate_collections_btree_navigateuse_529!();
+        Depcrate_collections_btree_navigateLeafRange!();
+        Depcrate_collections_btree_navigateimpl_531!();
+        Depcrate_collections_btree_navigateimpl_532!();
+        Depcrate_collections_btree_navigateimpl_533!();
+        Depcrate_collections_btree_navigateimpl_534!();
+        Depcrate_collections_btree_navigateimpl_535!();
+        Depcrate_collections_btree_navigateimpl_536!();
+        Depcrate_collections_btree_navigateLazyLeafHandle!();
+        Depcrate_collections_btree_navigateimpl_538!();
+        Depcrate_collections_btree_navigateimpl_539!();
+        Depcrate_collections_btree_navigateLazyLeafRange!();
+        Depcrate_collections_btree_navigateimpl_541!();
+        Depcrate_collections_btree_navigateimpl_542!();
+        Depcrate_collections_btree_navigateimpl_543!();
+        Depcrate_collections_btree_navigateimpl_544!();
+        Depcrate_collections_btree_navigateimpl_545!();
+        Depcrate_collections_btree_navigateimpl_546!();
+        Depcrate_collections_btree_navigateimpl_547!();
+        Depcrate_collections_btree_navigateimpl_548!();
+        Depcrate_collections_btree_navigatefull_range!();
+        Depcrate_collections_btree_navigateimpl_550!();
+        Depcrate_collections_btree_navigateimpl_551!();
+        Depcrate_collections_btree_navigateimpl_552!();
+        Depcrate_collections_btree_navigateimpl_553!();
+        Depcrate_collections_btree_navigateimpl_554!();
+        Depcrate_collections_btree_navigateimpl_555!();
+        Depcrate_collections_btree_navigateimpl_556!();
+        Depcrate_collections_btree_navigateimpl_557!();
+        Depcrate_collections_btree_navigateimpl_558!();
+        Depcrate_collections_btree_navigateimpl_559!();
+        Depcrate_collections_btree_navigatePosition!();
+        Depcrate_collections_btree_navigateimpl_561!();
+        Depcrate_collections_btree_navigateimpl_562!();
+        Depcrate_collections_btree_navigateimpl_563!();
+    };
+}

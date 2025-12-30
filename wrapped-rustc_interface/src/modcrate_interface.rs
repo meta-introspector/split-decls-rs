@@ -1,0 +1,39 @@
+// Generated module macro for crate::interface
+macro_rules! Modcrate_interface {
+() => {
+        Depcrate_interfaceuse_39!();
+        Depcrate_interfaceuse_40!();
+        Depcrate_interfaceuse_41!();
+        Depcrate_interfaceuse_42!();
+        Depcrate_interfaceuse_43!();
+        Depcrate_interfaceuse_44!();
+        Depcrate_interfaceuse_45!();
+        Depcrate_interfaceuse_46!();
+        Depcrate_interfaceuse_47!();
+        Depcrate_interfaceuse_48!();
+        Depcrate_interfaceuse_49!();
+        Depcrate_interfaceuse_50!();
+        Depcrate_interfaceuse_51!();
+        Depcrate_interfaceuse_52!();
+        Depcrate_interfaceuse_53!();
+        Depcrate_interfaceuse_54!();
+        Depcrate_interfaceuse_55!();
+        Depcrate_interfaceuse_56!();
+        Depcrate_interfaceuse_57!();
+        Depcrate_interfaceuse_58!();
+        Depcrate_interfaceuse_59!();
+        Depcrate_interfaceuse_60!();
+        Depcrate_interfaceuse_61!();
+        Depcrate_interfaceuse_62!();
+        Depcrate_interfaceuse_63!();
+        Depcrate_interfaceuse_64!();
+        Depcrate_interfaceResult!();
+        Depcrate_interfaceCompiler!();
+        Depcrate_interfaceparse_cfg!();
+        Depcrate_interfaceparse_check_cfg!();
+        Depcrate_interfaceConfig!();
+        Depcrate_interfaceinitialize_checked_jobserver!();
+        Depcrate_interfacerun_compiler!();
+        Depcrate_interfacetry_print_query_stack!();
+    };
+}

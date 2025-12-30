@@ -1,0 +1,50 @@
+// Generated module macro for crate::report
+macro_rules! Modcrate_report {
+() => {
+        Depcrate_reportuse_448!();
+        Depcrate_reportuse_449!();
+        Depcrate_reportuse_450!();
+        Depcrate_reportuse_451!();
+        Depcrate_reportuse_452!();
+        Depcrate_reportuse_453!();
+        Depcrate_reportuse_454!();
+        Depcrate_reportuse_455!();
+        Depcrate_reportuse_456!();
+        Depcrate_reportuse_457!();
+        Depcrate_reportuse_458!();
+        Depcrate_reportuse_459!();
+        Depcrate_reportuse_460!();
+        Depcrate_reportuse_461!();
+        Depcrate_reportuse_462!();
+        Depcrate_reportuse_463!();
+        Depcrate_reportuse_464!();
+        Depcrate_reportuse_465!();
+        Depcrate_reportMAX_DIRECTORY_NAME_LEN!();
+        Depcrate_reportMAX_TITLE_LEN!();
+        Depcrate_reportComparisonData!();
+        Depcrate_reportMeasurementData!();
+        Depcrate_reportimpl_470!();
+        Depcrate_reportValueType!();
+        Depcrate_reportBenchmarkId!();
+        Depcrate_reporttruncate_to_character_boundary!();
+        Depcrate_reportmake_filename_safe!();
+        Depcrate_reportimpl_475!();
+        Depcrate_reportimpl_476!();
+        Depcrate_reportimpl_477!();
+        Depcrate_reportReportContext!();
+        Depcrate_reportimpl_479!();
+        Depcrate_reportReport!();
+        Depcrate_reportReports!();
+        Depcrate_reportreports_impl!();
+        Depcrate_reportimpl_483!();
+        Depcrate_reportCliVerbosity!();
+        Depcrate_reportCliReport!();
+        Depcrate_reportimpl_486!();
+        Depcrate_reportimpl_487!();
+        Depcrate_reportBencherReport!();
+        Depcrate_reportimpl_489!();
+        Depcrate_reportComparisonResult!();
+        Depcrate_reportcompare_to_threshold!();
+        Depcrate_reporttest!();
+    };
+}

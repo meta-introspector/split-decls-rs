@@ -1,0 +1,9 @@
+// Generated macro for FromUtf8Error (struct)
+macro_rules! Depcrate_stringFromUtf8Error {
+() => {
+// Module: crate::string
+// Provides: {"FromUtf8Error"}
+// Dependencies: {}
+# [doc = " A possible error value when converting a `String` from a UTF-8 byte vector."] # [doc = ""] # [doc = " This type is the error type for the [`from_utf8`] method on [`String`]. It"] # [doc = " is designed in such a way to carefully avoid reallocations: the"] # [doc = " [`into_bytes`] method will give back the byte vector that was used in the"] # [doc = " conversion attempt."] # [doc = ""] # [doc = " [`from_utf8`]: String::from_utf8"] # [doc = " [`into_bytes`]: FromUtf8Error::into_bytes"] # [doc = ""] # [doc = " The [`Utf8Error`] type provided by [`std::str`] represents an error that may"] # [doc = " occur when converting a slice of [`u8`]s to a [`&str`]. In this sense, it's"] # [doc = " an analogue to `FromUtf8Error`, and you can get one from a `FromUtf8Error`"] # [doc = " through the [`utf8_error`] method."] # [doc = ""] # [doc = " [`Utf8Error`]: str::Utf8Error \"std::str::Utf8Error\""] # [doc = " [`std::str`]: core::str \"std::str\""] # [doc = " [`&str`]: prim@str \"&str\""] # [doc = " [`utf8_error`]: FromUtf8Error::utf8_error"] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " // some invalid bytes, in a vector"] # [doc = " let bytes = vec![0, 159];"] # [doc = ""] # [doc = " let value = String::from_utf8(bytes);"] # [doc = ""] # [doc = " assert!(value.is_err());"] # [doc = " assert_eq!(vec![0, 159], value.unwrap_err().into_bytes());"] # [doc = " ```"] # [stable (feature = "rust1" , since = "1.0.0")] # [cfg_attr (not (no_global_oom_handling) , derive (Clone))] # [derive (Debug , PartialEq , Eq)] pub struct FromUtf8Error { bytes : Vec < u8 > , error : Utf8Error , }
+};
+}

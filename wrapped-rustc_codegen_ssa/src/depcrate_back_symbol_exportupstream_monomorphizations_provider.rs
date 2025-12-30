@@ -1,0 +1,9 @@
+// Generated macro for upstream_monomorphizations_provider (function)
+macro_rules! Depcrate_back_symbol_exportupstream_monomorphizations_provider {
+() => {
+// Module: crate::back::symbol_export
+// Provides: {"upstream_monomorphizations_provider"}
+// Dependencies: {}
+fn upstream_monomorphizations_provider (tcx : TyCtxt < '_ > , () : () ,) -> DefIdMap < UnordMap < GenericArgsRef < '_ > , CrateNum > > { let cnums = tcx . crates (()) ; let mut instances : DefIdMap < UnordMap < _ , _ > > = Default :: default () ; let drop_in_place_fn_def_id = tcx . lang_items () . drop_in_place_fn () ; let async_drop_in_place_fn_def_id = tcx . lang_items () . async_drop_in_place_fn () ; for & cnum in cnums . iter () { for (exported_symbol , _) in tcx . exported_generic_symbols (cnum) . iter () { let (def_id , args) = match * exported_symbol { ExportedSymbol :: Generic (def_id , args) => (def_id , args) , ExportedSymbol :: DropGlue (ty) => { if let Some (drop_in_place_fn_def_id) = drop_in_place_fn_def_id { (drop_in_place_fn_def_id , tcx . mk_args (& [ty . into ()])) } else { continue ; } } ExportedSymbol :: AsyncDropGlueCtorShim (ty) => { if let Some (async_drop_in_place_fn_def_id) = async_drop_in_place_fn_def_id { (async_drop_in_place_fn_def_id , tcx . mk_args (& [ty . into ()])) } else { continue ; } } ExportedSymbol :: AsyncDropGlue (def_id , ty) => (def_id , tcx . mk_args (& [ty . into ()])) , ExportedSymbol :: NonGeneric (..) | ExportedSymbol :: ThreadLocalShim (..) | ExportedSymbol :: NoDefId (..) => unreachable ! ("{exported_symbol:?}") , } ; let args_map = instances . entry (def_id) . or_default () ; match args_map . entry (args) { Occupied (mut e) => { let other_cnum = * e . get () ; if tcx . stable_crate_id (other_cnum) > tcx . stable_crate_id (cnum) { e . insert (cnum) ; } } Vacant (e) => { e . insert (cnum) ; } } } } instances }
+};
+}

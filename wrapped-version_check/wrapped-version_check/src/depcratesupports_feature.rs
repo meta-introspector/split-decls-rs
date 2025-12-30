@@ -1,0 +1,9 @@
+// Generated macro for supports_feature (function)
+macro_rules! Depcratesupports_feature {
+() => {
+// Module: crate
+// Provides: {"supports_feature"}
+// Dependencies: {}
+# [doc = " Checks whether the running or installed `rustc` supports `feature`."] # [doc = ""] # [doc = " **Please see the note on [feature detection](crate#feature-detection).**"] # [doc = ""] # [doc = " Returns _true_ _iff_ [`is_feature_flaggable()`] returns `true` _and_ the"] # [doc = " feature is not disabled via exclusion in `allow-features` via `RUSTFLAGS` or"] # [doc = " `CARGO_ENCODED_RUSTFLAGS`. If the version could not be determined, returns"] # [doc = " `None`."] # [doc = ""] # [doc = " # Example"] # [doc = ""] # [doc = " ```rust"] # [doc = " use version_check as rustc;"] # [doc = ""] # [doc = " if let Some(true) = rustc::supports_feature(\"doc_cfg\") {"] # [doc = "    println!(\"cargo:rustc-cfg=has_doc_cfg\");"] # [doc = " }"] # [doc = " ```"] pub fn supports_feature (feature : & str) -> Option < bool > { match is_feature_flaggable () { Some (true) => { } Some (false) => return Some (false) , None => return None , } let env_flags = env :: var_os ("CARGO_ENCODED_RUSTFLAGS") . map (| flags | (flags , '\x1f')) . or_else (| | env :: var_os ("RUSTFLAGS") . map (| flags | (flags , ' '))) ; if let Some ((flags , delim)) = env_flags { const ALLOW_FEATURES : & 'static str = "allow-features=" ; let rustflags = flags . to_string_lossy () ; let allow_features = rustflags . split (delim) . map (| flag | flag . trim_left_matches ("-Z") . trim ()) . filter (| flag | flag . starts_with (ALLOW_FEATURES)) . map (| flag | & flag [ALLOW_FEATURES . len () ..]) ; if let Some (allow_features) = allow_features . last () { return Some (allow_features . split (',') . any (| f | f . trim () == feature)) ; } } Some (true) }
+};
+}

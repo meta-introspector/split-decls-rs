@@ -1,0 +1,9 @@
+// Generated macro for VirtualMemoryMapAddress (enum)
+macro_rules! Depcrate_process_prctlVirtualMemoryMapAddress {
+() => {
+// Module: crate::process::prctl
+// Provides: {"VirtualMemoryMapAddress"}
+// Dependencies: {}
+# [doc = " `PR_SET_MM_*` values for use with [`set_virtual_memory_map_address`]."] # [derive (Copy , Clone , Debug , Eq , PartialEq)] # [repr (u32)] pub enum VirtualMemoryMapAddress { # [doc = " Set the address above which the program text can run."] CodeStart = PR_SET_MM_START_CODE , # [doc = " Set the address below which the program text can run."] CodeEnd = PR_SET_MM_END_CODE , # [doc = " Set the address above which initialized and uninitialized (bss) data"] # [doc = " are placed."] DataStart = PR_SET_MM_START_DATA , # [doc = " Set the address below which initialized and uninitialized (bss) data"] # [doc = " are placed."] DataEnd = PR_SET_MM_END_DATA , # [doc = " Set the start address of the stack."] StackStart = PR_SET_MM_START_STACK , # [doc = " Set the address above which the program heap can be expanded with `brk`"] # [doc = " call."] BrkStart = PR_SET_MM_START_BRK , # [doc = " Set the current `brk` value."] BrkCurrent = PR_SET_MM_BRK , # [doc = " Set the address above which the program command line is placed."] ArgStart = PR_SET_MM_ARG_START , # [doc = " Set the address below which the program command line is placed."] ArgEnd = PR_SET_MM_ARG_END , # [doc = " Set the address above which the program environment is placed."] EnvironmentStart = PR_SET_MM_ENV_START , # [doc = " Set the address below which the program environment is placed."] EnvironmentEnd = PR_SET_MM_ENV_END , }
+};
+}

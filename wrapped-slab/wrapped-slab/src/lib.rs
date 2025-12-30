@@ -1,0 +1,75 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcrateimpl_44.rs");
+include!("depcrate_builderimpl_17.rs");
+include!("depcrateimpl_31.rs");
+include!("depcrateimpl_58.rs");
+include!("depcrategetdisjointmuterror.rs");
+include!("depcrateother_2.rs");
+include!("depcrateuse_20.rs");
+include!("depcrateimpl_61.rs");
+include!("depcrateslab.rs");
+include!("depcrateimpl_26.rs");
+include!("depcratebuilder.rs");
+include!("depcrateimpl_54.rs");
+include!("depcrateimpl_48.rs");
+include!("depcrateimpl_52.rs");
+include!("depcrateserde.rs");
+include!("depcrate_serdeslabvisitor.rs");
+include!("depcrateentry.rs");
+include!("depcrate_builderbuilder.rs");
+include!("depcrateimpl_47.rs");
+include!("depcrateuse_21.rs");
+include!("depcrateimpl_35.rs");
+include!("depcrateimpl_45.rs");
+include!("depcrateuse_18.rs");
+include!("depcrateimpl_46.rs");
+include!("depcrate_serdeimpl_10.rs");
+include!("depcrateimpl_38.rs");
+include!("depcrateimpl_56.rs");
+include!("depcrate_serdeuse_7.rs");
+include!("depcratevacantentry.rs");
+include!("depcrateimpl_23.rs");
+include!("depcrateiter.rs");
+include!("depcrateimpl_27.rs");
+include!("depcrate_serdeuse_9.rs");
+include!("depcrateimpl_24.rs");
+include!("depcrateintoiter.rs");
+include!("depcrateimpl_50.rs");
+include!("depcrateitermut.rs");
+include!("depcrateimpl_53.rs");
+include!("depcrate_serdeimpl_13.rs");
+include!("depcrateimpl_60.rs");
+include!("depcrate_serdeimpl_12.rs");
+include!("depcrateimpl_40.rs");
+include!("depcrate_builderuse_15.rs");
+include!("depcrateimpl_63.rs");
+include!("depcrateimpl_41.rs");
+include!("depcrate_serdeuse_8.rs");
+include!("depcrateimpl_49.rs");
+include!("depcrateother_3.rs");
+include!("depcrateimpl_55.rs");
+include!("depcrateimpl_57.rs");
+include!("depcrateuse_19.rs");
+include!("depcrateimpl_36.rs");
+include!("depcrate_serdeuse_5.rs");
+include!("depcrateimpl_62.rs");
+include!("depcrateimpl_37.rs");
+include!("depcrateimpl_51.rs");
+include!("depcrateimpl_39.rs");
+include!("depcrateimpl_43.rs");
+include!("depcrateimpl_42.rs");
+include!("depcrateother_1.rs");
+include!("depcratedrain.rs");
+include!("depcrate_serdeuse_6.rs");
+include!("depcrateimpl_59.rs");
+include!("modcrate_serde.rs");
+include!("modcrate_builder.rs");
+include!("modcrate.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate_serde!();
+    Modcrate_builder!();
+    Modcrate!();
+}

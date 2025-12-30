@@ -1,0 +1,9 @@
+// Generated macro for FrameDescriptionEntry (struct)
+macro_rules! Depcrate_read_cfiFrameDescriptionEntry {
+() => {
+// Module: crate::read::cfi
+// Provides: {"FrameDescriptionEntry"}
+// Dependencies: {}
+# [doc = " A `FrameDescriptionEntry` is a set of CFA instructions for an address range."] # [derive (Clone , Debug , PartialEq , Eq)] pub struct FrameDescriptionEntry < R , Offset = < R as Reader > :: Offset > where R : Reader < Offset = Offset > , Offset : ReaderOffset , { # [doc = " The start of this entry within its containing section."] offset : Offset , # [doc = " > A constant that gives the number of bytes of the header and"] # [doc = " > instruction stream for this function, not including the length field"] # [doc = " > itself (see Section 7.2.2). The size of the length field plus the value"] # [doc = " > of length must be an integral multiple of the address size."] length : Offset , format : Format , # [doc = " \"A constant offset into the .debug_frame section that denotes the CIE"] # [doc = " that is associated with this FDE.\""] # [doc = ""] # [doc = " This is the CIE at that offset."] cie : CommonInformationEntry < R , Offset > , # [doc = " > The address of the first location associated with this table entry. If"] # [doc = " > the segment_size field of this FDE's CIE is non-zero, the initial"] # [doc = " > location is preceded by a segment selector of the given length."] initial_address : u64 , # [doc = " \"The number of bytes of program instructions described by this entry.\""] address_range : u64 , # [doc = " The parsed augmentation data, if we have any."] augmentation : Option < AugmentationData > , # [doc = " \"A sequence of table defining instructions that are described below.\""] # [doc = ""] # [doc = " This is followed by `DW_CFA_nop` padding until `length` bytes of the"] # [doc = " input are consumed."] instructions : R , }
+};
+}

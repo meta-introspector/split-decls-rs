@@ -1,0 +1,9 @@
+// Generated macro for ksx1001_encode_misc (function)
+macro_rules! Depcrate_euc_krksx1001_encode_misc {
+() => {
+// Module: crate::euc_kr
+// Provides: {"ksx1001_encode_misc"}
+// Dependencies: {}
+fn ksx1001_encode_misc (bmp : u16) -> Option < (usize , usize) > { if in_inclusive_range16 (bmp , 0x3000 , 0x3015) { if let Some (pos) = position (& KSX1001_SYMBOLS [.. (0xAB - 0x60)] , bmp) { return Some ((0xA1 , pos + 0xA1)) ; } } if let Some (other_pointer) = ksx1001_other_encode (bmp) { let other_lead = ((other_pointer as usize) / 94) + (0x81 + 0x22) ; let other_trail = ((other_pointer as usize) % 94) + 0xA1 ; return Some ((other_lead , other_trail)) ; } if in_range16 (bmp , 0x00AA , 0x0168) { if let Some (pos) = position (& KSX1001_LOWERCASE [..] , bmp) { return Some ((0x81 + 0x28 , 0xA1 + pos)) ; } if let Some (pos) = position (& KSX1001_UPPERCASE [..] , bmp) { return Some ((0x81 + 0x27 , 0xA1 + pos)) ; } } else if in_range16 (bmp , 0x2500 , 0x254C) { if let Some (pos) = position (& KSX1001_BOX [..] , bmp) { return Some ((0x81 + 0x25 , 0xA1 + pos)) ; } } if in_inclusive_range16 (bmp , 0x2015 , 0x266D) || in_inclusive_range16 (bmp , 0x321C , 0x33D8) || in_inclusive_range16 (bmp , 0xFF3C , 0xFFE5) || in_inclusive_range16 (bmp , 0x00A1 , 0x00F7) || in_inclusive_range16 (bmp , 0x02C7 , 0x02DD) { if let Some (pos) = position (& KSX1001_SYMBOLS [3 ..] , bmp) { if pos < (94 - 3) { return Some ((0xA1 , pos + 0xA1 + 3)) ; } return Some ((0xA2 , pos - (94 - 3) + 0xA1)) ; } } None }
+};
+}

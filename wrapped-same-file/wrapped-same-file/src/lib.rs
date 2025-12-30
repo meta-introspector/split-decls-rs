@@ -1,0 +1,66 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcratemacro_1.rs");
+include!("depcrate_uniximpl_16.rs");
+include!("depcrate_unknownerror_message.rs");
+include!("depcrate_unixuse_12.rs");
+include!("depcrateuse_5.rs");
+include!("depcrate_unixuse_10.rs");
+include!("depcrate_unixuse_13.rs");
+include!("depcrate_winuse_35.rs");
+include!("depcrate_winhandle.rs");
+include!("depcrate_winimpl_44.rs");
+include!("depcrate_winimpl_45.rs");
+include!("depcrateuse_4.rs");
+include!("depcrate_uniximpl_20.rs");
+include!("depcrate_unixhandle.rs");
+include!("depcrateuse_7.rs");
+include!("depcrate_unixuse_14.rs");
+include!("depcrate_uniximpl_21.rs");
+include!("depcrate_unknownhandle.rs");
+include!("depcrateimpl_50.rs");
+include!("depcrate_unknownuse_25.rs");
+include!("depcrate_unknownerror.rs");
+include!("depcrateunknown.rs");
+include!("depcrate_winuse_34.rs");
+include!("depcrateuse_3.rs");
+include!("depcrate_winimpl_47.rs");
+include!("depcrate_winkey.rs");
+include!("depcrate_uniximpl_17.rs");
+include!("depcrate_winuse_39.rs");
+include!("depcratehandle.rs");
+include!("depcrate_uniximpl_19.rs");
+include!("depcrate_uniximpl_18.rs");
+include!("depcrateuse_6.rs");
+include!("depcrate_unknownimpl_29.rs");
+include!("depcratewin.rs");
+include!("depcrate_winhandlekind.rs");
+include!("depcrate_unknownuse_24.rs");
+include!("depcrateuse_2.rs");
+include!("depcrate_unknownuse_26.rs");
+include!("depcrateis_same_file.rs");
+include!("depcrate_winimpl_43.rs");
+include!("depcrateunix.rs");
+include!("depcrate_unknownimpl_31.rs");
+include!("depcrate_unixuse_9.rs");
+include!("depcrate_winimpl_46.rs");
+include!("depcrate_unixuse_11.rs");
+include!("depcrate_winuse_37.rs");
+include!("depcrate_winuse_38.rs");
+include!("depcrate_winimpl_48.rs");
+include!("depcratetests.rs");
+include!("depcrate_uniximpl_22.rs");
+include!("depcrate_unknownimpl_30.rs");
+include!("depcrate_winuse_36.rs");
+include!("modcrate_win.rs");
+include!("modcrate_unknown.rs");
+include!("modcrate_unix.rs");
+include!("modcrate.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate_win!();
+    Modcrate_unknown!();
+    Modcrate_unix!();
+    Modcrate!();
+}

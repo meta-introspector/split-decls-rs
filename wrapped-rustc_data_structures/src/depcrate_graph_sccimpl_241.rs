@@ -1,0 +1,9 @@
+// Generated macro for impl_241 (impl)
+macro_rules! Depcrate_graph_sccimpl_241 {
+() => {
+// Module: crate::graph::scc
+// Provides: {"impl_241"}
+// Dependencies: {}
+impl < N : Idx , S : Idx + Ord > Sccs < N , S > { # [doc = " Compute SCCs without annotations."] pub fn new (graph : & impl Successors < Node = N >) -> Self { Self :: new_with_annotation (graph , & mut NoAnnotations (PhantomData :: < S >)) } # [doc = " Compute SCCs and annotate them with a user-supplied annotation"] pub fn new_with_annotation < A : Annotations < N , SccIdx = S > > (graph : & impl Successors < Node = N > , annotations : & mut A ,) -> Self { SccsConstruction :: construct (graph , annotations) } pub fn scc_indices (& self) -> & IndexSlice < N , S > { & self . scc_indices } # [doc = " Returns the number of SCCs in the graph."] pub fn num_sccs (& self) -> usize { self . scc_data . len () } # [doc = " Returns an iterator over the SCCs in the graph."] # [doc = ""] # [doc = " The SCCs will be iterated in **dependency order** (or **post order**),"] # [doc = " meaning that if `S1 -> S2`, we will visit `S2` first and `S1` after."] # [doc = " This is convenient when the edges represent dependencies: when you visit"] # [doc = " `S1`, the value for `S2` will already have been computed."] pub fn all_sccs (& self) -> impl Iterator < Item = S > + 'static { (0 .. self . scc_data . len ()) . map (S :: new) } # [doc = " Returns the SCC to which a node `r` belongs."] pub fn scc (& self , r : N) -> S { self . scc_indices [r] } # [doc = " Returns the successors of the given SCC."] pub fn successors (& self , scc : S) -> & [S] { self . scc_data . successors (scc) } # [doc = " Construct the reverse graph of the SCC graph."] pub fn reverse (& self) -> VecGraph < S > { VecGraph :: new (self . num_sccs () , self . all_sccs () . flat_map (| source | { self . successors (source) . iter () . map (move | & target | (target , source)) }) . collect () ,) } }
+};
+}

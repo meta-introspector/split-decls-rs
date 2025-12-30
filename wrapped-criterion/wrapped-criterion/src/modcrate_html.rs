@@ -1,0 +1,43 @@
+// Generated module macro for crate::html
+macro_rules! Modcrate_html {
+() => {
+        Depcrate_htmluse_207!();
+        Depcrate_htmluse_208!();
+        Depcrate_htmluse_209!();
+        Depcrate_htmluse_210!();
+        Depcrate_htmluse_211!();
+        Depcrate_htmluse_212!();
+        Depcrate_htmluse_213!();
+        Depcrate_htmluse_214!();
+        Depcrate_htmluse_215!();
+        Depcrate_htmluse_216!();
+        Depcrate_htmluse_217!();
+        Depcrate_htmluse_218!();
+        Depcrate_htmluse_219!();
+        Depcrate_htmluse_220!();
+        Depcrate_htmluse_221!();
+        Depcrate_htmlTHUMBNAIL_SIZE!();
+        Depcrate_htmldebug_context!();
+        Depcrate_htmlContext!();
+        Depcrate_htmlIndividualBenchmark!();
+        Depcrate_htmlimpl_226!();
+        Depcrate_htmlSummaryContext!();
+        Depcrate_htmlConfidenceInterval!();
+        Depcrate_htmlPlot!();
+        Depcrate_htmlimpl_230!();
+        Depcrate_htmlComparison!();
+        Depcrate_htmlif_exists!();
+        Depcrate_htmlReportLink!();
+        Depcrate_htmlimpl_234!();
+        Depcrate_htmlBenchmarkValueGroup!();
+        Depcrate_htmlBenchmarkGroup!();
+        Depcrate_htmlimpl_237!();
+        Depcrate_htmlIndexContext!();
+        Depcrate_htmlHtml!();
+        Depcrate_htmlimpl_240!();
+        Depcrate_htmlimpl_241!();
+        Depcrate_htmlimpl_242!();
+        Depcrate_htmlComparisonResult!();
+        Depcrate_htmlcompare_to_threshold!();
+    };
+}

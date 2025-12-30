@@ -1,0 +1,9 @@
+// Generated macro for fmt_state_indicator (function)
+macro_rules! Depcrate_automatonfmt_state_indicator {
+() => {
+// Module: crate::automaton
+// Provides: {"fmt_state_indicator"}
+// Dependencies: {}
+# [doc = " Write a prefix \"state\" indicator for fmt::Debug impls. It always writes"] # [doc = " exactly two printable bytes to the given formatter."] # [doc = ""] # [doc = " Specifically, this tries to succinctly distinguish the different types of"] # [doc = " states: dead states, start states and match states. It even accounts for"] # [doc = " the possible overlappings of different state types. (The only possible"] # [doc = " overlapping is that of match and start states.)"] pub (crate) fn fmt_state_indicator < A : Automaton > (f : & mut core :: fmt :: Formatter < '_ > , aut : A , id : StateID ,) -> core :: fmt :: Result { if aut . is_dead (id) { write ! (f , "D ") ? ; } else if aut . is_match (id) { if aut . is_start (id) { write ! (f , "*>") ? ; } else { write ! (f , "* ") ? ; } } else if aut . is_start (id) { write ! (f , " >") ? ; } else { write ! (f , "  ") ? ; } Ok (()) }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for Clause (trait)
+macro_rules! Depcrate_inherentClause {
+() => {
+// Module: crate::inherent
+// Provides: {"Clause"}
+// Dependencies: {}
+pub trait Clause < I : Interner < Clause = Self > > : Copy + Debug + Hash + Eq + TypeFoldable < I > + UpcastFrom < I , ty :: Binder < I , ty :: ClauseKind < I > > > + UpcastFrom < I , ty :: TraitRef < I > > + UpcastFrom < I , ty :: Binder < I , ty :: TraitRef < I > > > + UpcastFrom < I , ty :: TraitPredicate < I > > + UpcastFrom < I , ty :: Binder < I , ty :: TraitPredicate < I > > > + UpcastFrom < I , ty :: ProjectionPredicate < I > > + UpcastFrom < I , ty :: Binder < I , ty :: ProjectionPredicate < I > > > + IntoKind < Kind = ty :: Binder < I , ty :: ClauseKind < I > > > + Elaboratable < I > { fn as_predicate (self) -> I :: Predicate ; fn as_trait_clause (self) -> Option < ty :: Binder < I , ty :: TraitPredicate < I > > > { self . kind () . map_bound (| clause | if let ty :: ClauseKind :: Trait (t) = clause { Some (t) } else { None }) . transpose () } fn as_host_effect_clause (self) -> Option < ty :: Binder < I , ty :: HostEffectPredicate < I > > > { self . kind () . map_bound (| clause | if let ty :: ClauseKind :: HostEffect (t) = clause { Some (t) } else { None } ,) . transpose () } fn as_projection_clause (self) -> Option < ty :: Binder < I , ty :: ProjectionPredicate < I > > > { self . kind () . map_bound (| clause | { if let ty :: ClauseKind :: Projection (p) = clause { Some (p) } else { None } } ,) . transpose () } # [doc = " Performs a instantiation suitable for going from a"] # [doc = " poly-trait-ref to supertraits that must hold if that"] # [doc = " poly-trait-ref holds. This is slightly different from a normal"] # [doc = " instantiation in terms of what happens with bound regions."] fn instantiate_supertrait (self , cx : I , trait_ref : ty :: Binder < I , ty :: TraitRef < I > >) -> Self ; }
+};
+}

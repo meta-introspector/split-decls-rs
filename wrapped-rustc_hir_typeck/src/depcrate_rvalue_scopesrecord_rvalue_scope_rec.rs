@@ -1,0 +1,9 @@
+// Generated macro for record_rvalue_scope_rec (function)
+macro_rules! Depcrate_rvalue_scopesrecord_rvalue_scope_rec {
+() => {
+// Module: crate::rvalue_scopes
+// Provides: {"record_rvalue_scope_rec"}
+// Dependencies: {}
+# [doc = " Applied to an expression `expr` if `expr` -- or something owned or partially owned by"] # [doc = " `expr` -- is going to be indirectly referenced by a variable in a let statement. In that"] # [doc = " case, the \"temporary lifetime\" or `expr` is extended to be the block enclosing the `let`"] # [doc = " statement."] # [doc = ""] # [doc = " More formally, if `expr` matches the grammar `ET`, record the rvalue scope of the matching"] # [doc = " `<rvalue>` as `blk_id`:"] # [doc = ""] # [doc = " ```text"] # [doc = "     ET = *ET"] # [doc = "        | ET[...]"] # [doc = "        | ET.f"] # [doc = "        | (ET)"] # [doc = "        | <rvalue>"] # [doc = " ```"] # [doc = ""] # [doc = " Note: ET is intended to match \"rvalues or places based on rvalues\"."] fn record_rvalue_scope_rec (rvalue_scopes : & mut RvalueScopes , mut expr : & hir :: Expr < '_ > , lifetime : Option < Scope > , compat : ScopeCompatibility ,) { loop { rvalue_scopes . record_rvalue_scope (expr . hir_id . local_id , lifetime , compat) ; match expr . kind { hir :: ExprKind :: AddrOf (_ , _ , subexpr) | hir :: ExprKind :: Unary (hir :: UnOp :: Deref , subexpr) | hir :: ExprKind :: Field (subexpr , _) | hir :: ExprKind :: Index (subexpr , _ , _) => { expr = subexpr ; } _ => { return ; } } } }
+};
+}

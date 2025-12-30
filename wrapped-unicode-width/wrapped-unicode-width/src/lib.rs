@@ -1,0 +1,67 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcrate_tablessingle_char_width.rs");
+include!("depcrate_tablesstarts_emoji_presentation_seq.rs");
+include!("depcrate_tableslookup_width.rs");
+include!("depcrateprivate.rs");
+include!("depcrate_tablestext_presentation_leaf_4.rs");
+include!("depcrate_tablestext_presentation_leaf_7.rs");
+include!("depcrate_tablesemoji_modifier_leaf_7.rs");
+include!("depcrate_tablesstarts_non_ideographic_text_presentation_seq.rs");
+include!("depcrate_tableswidthinfo.rs");
+include!("depcrate_tablestext_presentation_leaf_3.rs");
+include!("depcrateuse_1.rs");
+include!("depcrate_tablesnon_transparent_zero_widths.rs");
+include!("depcrate_tablesemoji_modifier_leaf_3.rs");
+include!("depcrate_tablesis_transparent_zero_width.rs");
+include!("depcrate_tablesis_ligature_transparent.rs");
+include!("depcrate_tablesemoji_modifier_leaf_0.rs");
+include!("depcrate_tablesemoji_modifier_leaf_1.rs");
+include!("depcrate_tableswidth_leaves_len.rs");
+include!("depcratetables.rs");
+include!("depcrate_tablestext_presentation_leaf_5.rs");
+include!("depcrate_tableswidth_leaves.rs");
+include!("depcrate_tablesunicode_version.rs");
+include!("depcrate_tableswidth_root.rs");
+include!("depcrate_tablessolidus_transparent.rs");
+include!("depcrate_tablessingle_char_width_cjk.rs");
+include!("depcrate_tablesemoji_modifier_leaf_4.rs");
+include!("depcrateunicodewidthstr.rs");
+include!("depcrate_tablesimpl_6.rs");
+include!("depcrate_tablesemoji_presentation_leaves.rs");
+include!("depcrate_tableswidth_in_str_cjk.rs");
+include!("depcrate_tableswidth_in_str.rs");
+include!("depcrate_tablesis_solidus_transparent.rs");
+include!("depcrate_tablestext_presentation_leaf_6.rs");
+include!("depcrate_tablesstr_width_cjk.rs");
+include!("depcrate_tableswidth_root_cjk.rs");
+include!("depcrate_tablesalign64.rs");
+include!("depcrate_tablestext_presentation_leaf_2.rs");
+include!("depcrate_tablesalign128.rs");
+include!("depcrate_tableswidth_middle.rs");
+include!("depcrate_tablesis_emoji_modifier_base.rs");
+include!("depcrate_tablesalign32.rs");
+include!("depcrate_tableswidth_middle_len.rs");
+include!("depcrate_tablestext_presentation_leaf_8.rs");
+include!("depcrate_tableslookup_width_cjk.rs");
+include!("depcrate_tablestext_presentation_leaf_1.rs");
+include!("depcrate_tablesstr_width.rs");
+include!("depcrate_tablesligature_transparent_mask.rs");
+include!("depcrate_tablestests.rs");
+include!("depcrateimpl_59.rs");
+include!("depcrate_tablesemoji_modifier_leaf_6.rs");
+include!("depcrate_tablesemoji_modifier_leaf_2.rs");
+include!("depcrateunicodewidthchar.rs");
+include!("depcrate_tablestext_presentation_leaf_0.rs");
+include!("depcrate_tablesemoji_modifier_leaf_5.rs");
+include!("depcrate_tablesuse_3.rs");
+include!("depcrate_tablestext_presentation_leaf_9.rs");
+include!("depcrateimpl_57.rs");
+include!("modcrate.rs");
+include!("modcrate_tables.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate!();
+    Modcrate_tables!();
+}

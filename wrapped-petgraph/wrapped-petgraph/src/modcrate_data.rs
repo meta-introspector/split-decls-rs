@@ -1,0 +1,43 @@
+// Generated module macro for crate::data
+macro_rules! Modcrate_data {
+() => {
+        Depcrate_datause_249!();
+        Depcrate_datause_250!();
+        Depcrate_datause_251!();
+        Depcrate_datause_252!();
+        Depcrate_datause_253!();
+        Depcrate_datause_254!();
+        Depcrate_datause_255!();
+        Depcrate_datamacro_256!();
+        Depcrate_dataaccess0!();
+        Depcrate_datamacro_258!();
+        Depcrate_datamacro_259!();
+        Depcrate_datamacro_260!();
+        Depcrate_datamacro_261!();
+        Depcrate_datamacro_262!();
+        Depcrate_datamacro_263!();
+        Depcrate_dataBuild!();
+        Depcrate_dataCreate!();
+        Depcrate_dataimpl_266!();
+        Depcrate_dataimpl_267!();
+        Depcrate_dataimpl_268!();
+        Depcrate_dataimpl_269!();
+        Depcrate_dataimpl_270!();
+        Depcrate_dataimpl_271!();
+        Depcrate_dataimpl_272!();
+        Depcrate_dataimpl_273!();
+        Depcrate_dataimpl_274!();
+        Depcrate_dataimpl_275!();
+        Depcrate_dataimpl_276!();
+        Depcrate_dataElement!();
+        Depcrate_dataFromElements!();
+        Depcrate_datafrom_elements_indexable!();
+        Depcrate_dataimpl_280!();
+        Depcrate_dataimpl_281!();
+        Depcrate_dataimpl_282!();
+        Depcrate_dataElementIterator!();
+        Depcrate_dataimpl_284!();
+        Depcrate_dataFilterElements!();
+        Depcrate_dataimpl_286!();
+    };
+}

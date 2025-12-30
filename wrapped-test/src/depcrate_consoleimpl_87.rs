@@ -1,0 +1,9 @@
+// Generated macro for impl_87 (impl)
+macro_rules! Depcrate_consoleimpl_87 {
+() => {
+// Module: crate::console
+// Provides: {"impl_87"}
+// Dependencies: {}
+impl ConsoleTestState { pub (crate) fn new (opts : & TestOpts) -> io :: Result < ConsoleTestState > { let log_out = match opts . logfile { Some (ref path) => Some (File :: create (path) ?) , None => None , } ; Ok (ConsoleTestState { log_out , total : 0 , passed : 0 , failed : 0 , ignored : 0 , filtered_out : 0 , measured : 0 , exec_time : None , metrics : MetricMap :: new () , failures : Vec :: new () , not_failures : Vec :: new () , ignores : Vec :: new () , time_failures : Vec :: new () , options : opts . options , }) } pub (crate) fn write_log < F , S > (& mut self , msg : F) -> io :: Result < () > where S : AsRef < str > , F : FnOnce () -> S , { match self . log_out { None => Ok (()) , Some (ref mut o) => { let msg = msg () ; let msg = msg . as_ref () ; o . write_all (msg . as_bytes ()) } } } pub (crate) fn write_log_result (& mut self , test : & TestDesc , result : & TestResult , exec_time : Option < & TestExecTime > ,) -> io :: Result < () > { self . write_log (| | { let TestDesc { name , ignore_message , .. } = test ; format ! ("{} {}" , match * result { TestResult :: TrOk => "ok" . to_owned () , TestResult :: TrFailed => "failed" . to_owned () , TestResult :: TrFailedMsg (ref msg) => format ! ("failed: {msg}") , TestResult :: TrIgnored => { if let Some (msg) = ignore_message { format ! ("ignored: {msg}") } else { "ignored" . to_owned () } } TestResult :: TrBench (ref bs) => fmt_bench_samples (bs) , TestResult :: TrTimedFail => "failed (time limit exceeded)" . to_owned () , } , name ,) }) ? ; if let Some (exec_time) = exec_time { self . write_log (| | format ! (" <{exec_time}>")) ? ; } self . write_log (| | "\n") } fn current_test_count (& self) -> usize { self . passed + self . failed + self . ignored + self . measured } }
+};
+}

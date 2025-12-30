@@ -1,0 +1,9 @@
+// Generated macro for slow (function)
+macro_rules! Depcrate_slowslow {
+() => {
+// Module: crate::slow
+// Provides: {"slow"}
+// Dependencies: {}
+# [doc = " Parse the significant digits and biased, binary exponent of a float."] # [doc = ""] # [doc = " This is a fallback algorithm that uses a big-integer representation"] # [doc = " of the float, and therefore is considerably slower than faster"] # [doc = " approximations. However, it will always determine how to round"] # [doc = " the significant digits to the nearest machine float, allowing"] # [doc = " use to handle near half-way cases."] # [doc = ""] # [doc = " Near half-way cases are halfway between two consecutive machine floats."] # [doc = " For example, the float `16777217.0` has a bitwise representation of"] # [doc = " `100000000000000000000000 1`. Rounding to a single-precision float,"] # [doc = " the trailing `1` is truncated. Using round-nearest, tie-even, any"] # [doc = " value above `16777217.0` must be rounded up to `16777218.0`, while"] # [doc = " any value before or equal to `16777217.0` must be rounded down"] # [doc = " to `16777216.0`. These near-halfway conversions therefore may require"] # [doc = " a large number of digits to unambiguously determine how to round."] # [inline] pub fn slow < 'a , F , Iter1 , Iter2 > (num : Number , fp : ExtendedFloat , integer : Iter1 , fraction : Iter2 ,) -> ExtendedFloat where F : Float , Iter1 : Iterator < Item = & 'a u8 > + Clone , Iter2 : Iterator < Item = & 'a u8 > + Clone , { debug_assert ! (fp . mant & (1 << 63) != 0) ; let sci_exp = scientific_exponent (& num) ; let (bigmant , digits) = parse_mantissa (integer , fraction , F :: MAX_DIGITS) ; let exponent = sci_exp + 1 - digits as i32 ; if exponent >= 0 { positive_digit_comp :: < F > (bigmant , exponent) } else { negative_digit_comp :: < F > (bigmant , fp , exponent) } }
+};
+}

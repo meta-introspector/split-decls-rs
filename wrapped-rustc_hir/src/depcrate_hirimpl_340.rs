@@ -1,0 +1,9 @@
+// Generated macro for impl_340 (impl)
+macro_rules! Depcrate_hirimpl_340 {
+() => {
+// Module: crate::hir
+// Provides: {"impl_340"}
+// Dependencies: {}
+impl < 'hir > TraitItem < 'hir > { # [inline] pub fn hir_id (& self) -> HirId { HirId :: make_owner (self . owner_id . def_id) } pub fn trait_item_id (& self) -> TraitItemId { TraitItemId { owner_id : self . owner_id } } expect_methods_self_kind ! { expect_const , (&'hir Ty <'hir >, Option < BodyId >) , TraitItemKind :: Const (ty , body) , (ty , * body) ; expect_fn , (& FnSig <'hir >, & TraitFn <'hir >) , TraitItemKind :: Fn (ty , trfn) , (ty , trfn) ; expect_type , (GenericBounds <'hir >, Option <&'hir Ty <'hir >>) , TraitItemKind :: Type (bounds , ty) , (bounds , * ty) ; } }
+};
+}

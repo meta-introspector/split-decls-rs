@@ -1,0 +1,9 @@
+// Generated macro for macro_1273 (macro)
+macro_rules! Depcrate_typesmacro_1273 {
+() => {
+// Module: crate::types
+// Provides: {"macro_1273"}
+// Dependencies: {}
+declare_lint ! { # [doc = " The `overflowing_literals` lint detects literals out of range for their type."] # [doc = ""] # [doc = " ### Example"] # [doc = ""] # [doc = " ```rust,compile_fail"] # [doc = " let x: u8 = 1000;"] # [doc = " ```"] # [doc = ""] # [doc = " {{produces}}"] # [doc = ""] # [doc = " ### Explanation"] # [doc = ""] # [doc = " It is usually a mistake to use a literal that overflows its type"] # [doc = " Change either the literal or its type such that the literal is"] # [doc = " within the range of its type."] OVERFLOWING_LITERALS , Deny , "literal out of range for its type" }
+};
+}

@@ -1,0 +1,49 @@
+// Generated module macro for crate::ring_buffer
+macro_rules! Modcrate_ring_buffer {
+() => {
+        Depcrate_ring_bufferuse_183!();
+        Depcrate_ring_bufferuse_184!();
+        Depcrate_ring_bufferuse_185!();
+        Depcrate_ring_bufferuse_186!();
+        Depcrate_ring_bufferuse_187!();
+        Depcrate_ring_bufferuse_188!();
+        Depcrate_ring_bufferuse_189!();
+        Depcrate_ring_bufferuse_190!();
+        Depcrate_ring_bufferuse_191!();
+        Depcrate_ring_bufferindex!();
+        Depcrate_ring_bufferuse_213!();
+        Depcrate_ring_bufferiter!();
+        Depcrate_ring_bufferuse_240!();
+        Depcrate_ring_bufferslice!();
+        Depcrate_ring_bufferuse_290!();
+        Depcrate_ring_bufferrefpool!();
+        Depcrate_ring_bufferRingBuffer!();
+        Depcrate_ring_bufferimpl_300!();
+        Depcrate_ring_bufferimpl_301!();
+        Depcrate_ring_bufferimpl_302!();
+        Depcrate_ring_bufferimpl_303!();
+        Depcrate_ring_bufferimpl_304!();
+        Depcrate_ring_bufferimpl_305!();
+        Depcrate_ring_bufferimpl_306!();
+        Depcrate_ring_bufferimpl_307!();
+        Depcrate_ring_bufferimpl_308!();
+        Depcrate_ring_bufferimpl_309!();
+        Depcrate_ring_bufferimpl_310!();
+        Depcrate_ring_bufferimpl_311!();
+        Depcrate_ring_bufferimpl_312!();
+        Depcrate_ring_bufferimpl_313!();
+        Depcrate_ring_bufferimpl_314!();
+        Depcrate_ring_bufferimpl_315!();
+        Depcrate_ring_bufferimpl_316!();
+        Depcrate_ring_bufferimpl_317!();
+        Depcrate_ring_bufferimpl_318!();
+        Depcrate_ring_bufferimpl_319!();
+        Depcrate_ring_bufferimpl_320!();
+        Depcrate_ring_bufferimpl_321!();
+        Depcrate_ring_bufferimpl_322!();
+        Depcrate_ring_bufferimpl_323!();
+        Depcrate_ring_bufferimpl_324!();
+        Depcrate_ring_bufferimpl_325!();
+        Depcrate_ring_buffertest!();
+    };
+}

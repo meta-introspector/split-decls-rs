@@ -1,0 +1,47 @@
+// Generated module macro for crate::specialize
+macro_rules! Modcrate_specialize {
+() => {
+        Depcrate_specializeuse_110!();
+        Depcrate_specializeuse_111!();
+        Depcrate_specializeuse_112!();
+        Depcrate_specializeuse_113!();
+        Depcrate_specializeother_114!();
+        Depcrate_specializeother_115!();
+        Depcrate_specializeuse_116!();
+        Depcrate_specializeuse_117!();
+        Depcrate_specializeCallHasher!();
+        Depcrate_specializeimpl_119!();
+        Depcrate_specializeimpl_120!();
+        Depcrate_specializecall_hasher_impl_u64!();
+        Depcrate_specializemacro_122!();
+        Depcrate_specializemacro_123!();
+        Depcrate_specializemacro_124!();
+        Depcrate_specializemacro_125!();
+        Depcrate_specializemacro_126!();
+        Depcrate_specializemacro_127!();
+        Depcrate_specializemacro_128!();
+        Depcrate_specializemacro_129!();
+        Depcrate_specializemacro_130!();
+        Depcrate_specializemacro_131!();
+        Depcrate_specializemacro_132!();
+        Depcrate_specializemacro_133!();
+        Depcrate_specializemacro_134!();
+        Depcrate_specializemacro_135!();
+        Depcrate_specializemacro_136!();
+        Depcrate_specializemacro_137!();
+        Depcrate_specializecall_hasher_impl_fixed_length!();
+        Depcrate_specializemacro_139!();
+        Depcrate_specializemacro_140!();
+        Depcrate_specializemacro_141!();
+        Depcrate_specializemacro_142!();
+        Depcrate_specializemacro_143!();
+        Depcrate_specializemacro_144!();
+        Depcrate_specializemacro_145!();
+        Depcrate_specializemacro_146!();
+        Depcrate_specializeimpl_147!();
+        Depcrate_specializeimpl_148!();
+        Depcrate_specializeimpl_149!();
+        Depcrate_specializeimpl_150!();
+        Depcrate_specializetest!();
+    };
+}

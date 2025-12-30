@@ -1,0 +1,9 @@
+// Generated macro for convert_to_hir_projections_and_truncate_for_capture (function)
+macro_rules! Depcrate_builder_expr_as_placeconvert_to_hir_projections_and_truncate_for_capture {
+() => {
+// Module: crate::builder::expr::as_place
+// Provides: {"convert_to_hir_projections_and_truncate_for_capture"}
+// Dependencies: {}
+# [doc = " Given a list of MIR projections, convert them to list of HIR ProjectionKind."] # [doc = " The projections are truncated to represent a path that might be captured by a"] # [doc = " closure/coroutine. This implies the vector returned from this function doesn't contain"] # [doc = " ProjectionElems `Downcast`, `ConstantIndex`, `Index`, or `Subslice` because those will never be"] # [doc = " part of a path that is captured by a closure. We stop applying projections once we see the first"] # [doc = " projection that isn't captured by a closure."] fn convert_to_hir_projections_and_truncate_for_capture (mir_projections : & [PlaceElem < '_ >] ,) -> Vec < HirProjectionKind > { let mut hir_projections = Vec :: new () ; let mut variant = None ; for mir_projection in mir_projections { let hir_projection = match mir_projection { ProjectionElem :: Deref => HirProjectionKind :: Deref , ProjectionElem :: Field (field , _) => { let variant = variant . unwrap_or (FIRST_VARIANT) ; HirProjectionKind :: Field (* field , variant) } ProjectionElem :: Downcast (.. , idx) => { variant = Some (* idx) ; continue ; } ProjectionElem :: UnwrapUnsafeBinder (_) => HirProjectionKind :: UnwrapUnsafeBinder , ProjectionElem :: OpaqueCast (_) | ProjectionElem :: Subtype (..) => continue , ProjectionElem :: Index (..) | ProjectionElem :: ConstantIndex { .. } | ProjectionElem :: Subslice { .. } => { break ; } } ; variant = None ; hir_projections . push (hir_projection) ; } hir_projections }
+};
+}

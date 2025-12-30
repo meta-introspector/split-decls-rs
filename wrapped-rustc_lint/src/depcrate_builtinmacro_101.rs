@@ -1,0 +1,9 @@
+// Generated macro for macro_101 (macro)
+macro_rules! Depcrate_builtinmacro_101 {
+() => {
+// Module: crate::builtin
+// Provides: {"macro_101"}
+// Dependencies: {}
+declare_lint ! { # [doc = " The `no_mangle_generic_items` lint detects generic items that must be"] # [doc = " mangled."] # [doc = ""] # [doc = " ### Example"] # [doc = ""] # [doc = " ```rust"] # [doc = " #[unsafe(no_mangle)]"] # [doc = " fn foo<T>(t: T) {}"] # [doc = ""] # [doc = " #[unsafe(export_name = \"bar\")]"] # [doc = " fn bar<T>(t: T) {}"] # [doc = " ```"] # [doc = ""] # [doc = " {{produces}}"] # [doc = ""] # [doc = " ### Explanation"] # [doc = ""] # [doc = " A function with generics must have its symbol mangled to accommodate"] # [doc = " the generic parameter. The [`no_mangle`] and [`export_name`] attributes"] # [doc = " have no effect in this situation, and should be removed."] # [doc = ""] # [doc = " [`no_mangle`]: https://doc.rust-lang.org/reference/abi.html#the-no_mangle-attribute"] # [doc = " [`export_name`]: https://doc.rust-lang.org/reference/abi.html#the-export_name-attribute"] NO_MANGLE_GENERIC_ITEMS , Warn , "generic items must be mangled" }
+};
+}

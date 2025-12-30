@@ -1,0 +1,9 @@
+// Generated macro for Steal (struct)
+macro_rules! Depcrate_stealSteal {
+() => {
+// Module: crate::steal
+// Provides: {"Steal"}
+// Dependencies: {}
+# [doc = " The `Steal` struct is intended to used as the value for a query."] # [doc = " Specifically, we sometimes have queries (*cough* MIR *cough*)"] # [doc = " where we create a large, complex value that we want to iteratively"] # [doc = " update (e.g., optimize). We could clone the value for each"] # [doc = " optimization, but that'd be expensive. And yet we don't just want"] # [doc = " to mutate it in place, because that would spoil the idea that"] # [doc = " queries are these pure functions that produce an immutable value"] # [doc = " (since if you did the query twice, you could observe the mutations)."] # [doc = " So instead we have the query produce a `&'tcx Steal<mir::Body<'tcx>>`"] # [doc = " (to be very specific). Now we can read from this"] # [doc = " as much as we want (using `borrow()`), but you can also"] # [doc = " `steal()`. Once you steal, any further attempt to read will panic."] # [doc = " Therefore, we know that -- assuming no ICE -- nobody is observing"] # [doc = " the fact that the MIR was updated."] # [doc = ""] # [doc = " Obviously, whenever you have a query that yields a `Steal` value,"] # [doc = " you must treat it with caution, and make sure that you know that"] # [doc = " -- once the value is stolen -- it will never be read from again."] # [derive (Debug)] pub struct Steal < T > { value : RwLock < Option < T > > , }
+};
+}

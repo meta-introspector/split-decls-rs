@@ -1,0 +1,39 @@
+// Generated module macro for crate::arc
+macro_rules! Modcrate_arc {
+() => {
+        Depcrate_arcuse_144!();
+        Depcrate_arcMAX_REFCOUNT!();
+        Depcrate_arcArcInner!();
+        Depcrate_arcimpl_147!();
+        Depcrate_arcimpl_148!();
+        Depcrate_arcArc!();
+        Depcrate_arcimpl_150!();
+        Depcrate_arcimpl_151!();
+        Depcrate_arcimpl_152!();
+        Depcrate_arcimpl_153!();
+        Depcrate_arcimpl_154!();
+        Depcrate_arcimpl_155!();
+        Depcrate_arcimpl_156!();
+        Depcrate_arcimpl_157!();
+        Depcrate_arcimpl_158!();
+        Depcrate_arcimpl_159!();
+        Depcrate_arcimpl_160!();
+        Depcrate_arcimpl_161!();
+        Depcrate_arcimpl_162!();
+        Depcrate_arcHeaderSlice!();
+        Depcrate_arcimpl_164!();
+        Depcrate_arcimpl_165!();
+        Depcrate_arcThinArc!();
+        Depcrate_arcimpl_167!();
+        Depcrate_arcimpl_168!();
+        Depcrate_arcthin_to_thick!();
+        Depcrate_arcimpl_170!();
+        Depcrate_arcimpl_171!();
+        Depcrate_arcimpl_172!();
+        Depcrate_arcimpl_173!();
+        Depcrate_arcimpl_174!();
+        Depcrate_arcimpl_175!();
+        Depcrate_arcimpl_176!();
+        Depcrate_arcimpl_177!();
+    };
+}

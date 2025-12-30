@@ -1,0 +1,9 @@
+// Generated macro for macro_130 (macro)
+macro_rules! Depcrate_builtinmacro_130 {
+() => {
+// Module: crate::builtin
+// Provides: {"macro_130"}
+// Dependencies: {}
+declare_lint_pass ! (# [doc = " Does nothing as a lint pass, but registers some `Lint`s"] # [doc = " which are used by other parts of the compiler."] SoftLints => [WHILE_TRUE , NON_SHORTHAND_FIELD_PATTERNS , UNSAFE_CODE , MISSING_DOCS , MISSING_COPY_IMPLEMENTATIONS , MISSING_DEBUG_IMPLEMENTATIONS , ANONYMOUS_PARAMETERS , UNUSED_DOC_COMMENTS , NO_MANGLE_CONST_ITEMS , NO_MANGLE_GENERIC_ITEMS , MUTABLE_TRANSMUTES , UNSTABLE_FEATURES , UNREACHABLE_PUB , TYPE_ALIAS_BOUNDS , TRIVIAL_BOUNDS , DOUBLE_NEGATIONS]) ;
+};
+}

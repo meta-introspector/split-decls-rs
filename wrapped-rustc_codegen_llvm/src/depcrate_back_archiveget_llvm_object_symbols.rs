@@ -1,0 +1,9 @@
+// Generated macro for get_llvm_object_symbols (function)
+macro_rules! Depcrate_back_archiveget_llvm_object_symbols {
+() => {
+// Module: crate::back::archive
+// Provides: {"get_llvm_object_symbols"}
+// Dependencies: {}
+# [deny (unsafe_op_in_unsafe_fn)] fn get_llvm_object_symbols (buf : & [u8] , f : & mut dyn FnMut (& [u8]) -> io :: Result < () > ,) -> io :: Result < bool > { let mut state = Box :: new (f) ; let err = unsafe { llvm :: LLVMRustGetSymbols (buf . as_ptr () , buf . len () , (& raw mut * state) as * mut c_void , callback , error_callback ,) } ; if err . is_null () { return Ok (true) ; } else { let error = unsafe { * Box :: from_raw (err as * mut io :: Error) } ; if buf . starts_with (& [0xDE , 0xCE , 0x17 , 0x0B]) || buf . starts_with (& [b'B' , b'C' , 0xC0 , 0xDE]) { eprintln ! ("warning: Failed to read symbol table from LLVM bitcode: {}" , error) ; return Ok (true) ; } else { return Err (error) ; } } unsafe extern "C" fn callback (state : * mut c_void , symbol_name : * const c_char) -> * mut c_void { let f = unsafe { & mut * (state as * mut & mut dyn FnMut (& [u8]) -> io :: Result < () >) } ; match f (unsafe { CStr :: from_ptr (symbol_name) } . to_bytes ()) { Ok (()) => std :: ptr :: null_mut () , Err (err) => Box :: into_raw (Box :: new (err) as Box < io :: Error >) as * mut c_void , } } unsafe extern "C" fn error_callback (error : * const c_char) -> * mut c_void { let error = unsafe { CStr :: from_ptr (error) } ; Box :: into_raw (Box :: new (io :: Error :: new (io :: ErrorKind :: Other , format ! ("LLVM error: {}" , error . to_string_lossy ()) ,)) as Box < io :: Error >) as * mut c_void } }
+};
+}

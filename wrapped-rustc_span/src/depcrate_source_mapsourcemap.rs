@@ -1,0 +1,9 @@
+// Generated macro for SourceMap (struct)
+macro_rules! Depcrate_source_mapSourceMap {
+() => {
+// Module: crate::source_map
+// Provides: {"SourceMap"}
+// Dependencies: {}
+pub struct SourceMap { files : RwLock < SourceMapFiles > , file_loader : IntoDynSyncSend < Box < dyn FileLoader + Sync + Send > > , path_mapping : FilePathMapping , # [doc = " The algorithm used for hashing the contents of each source file."] hash_kind : SourceFileHashAlgorithm , # [doc = " Similar to `hash_kind`, however this algorithm is used for checksums to determine if a crate is fresh."] # [doc = " `cargo` is the primary user of these."] # [doc = ""] # [doc = " If this is equal to `hash_kind` then the checksum won't be computed twice."] checksum_hash_kind : Option < SourceFileHashAlgorithm > , }
+};
+}

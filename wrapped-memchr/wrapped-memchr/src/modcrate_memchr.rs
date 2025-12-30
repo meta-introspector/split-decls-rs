@@ -1,0 +1,42 @@
+// Generated module macro for crate::memchr
+macro_rules! Modcrate_memchr {
+() => {
+        Depcrate_memchruse_323!();
+        Depcrate_memchruse_324!();
+        Depcrate_memchrmemchr!();
+        Depcrate_memchrmemrchr!();
+        Depcrate_memchrmemchr2!();
+        Depcrate_memchrmemrchr2!();
+        Depcrate_memchrmemchr3!();
+        Depcrate_memchrmemrchr3!();
+        Depcrate_memchrmemchr_iter!();
+        Depcrate_memchrmemrchr_iter!();
+        Depcrate_memchrmemchr2_iter!();
+        Depcrate_memchrmemrchr2_iter!();
+        Depcrate_memchrmemchr3_iter!();
+        Depcrate_memchrmemrchr3_iter!();
+        Depcrate_memchrMemchr!();
+        Depcrate_memchrimpl_338!();
+        Depcrate_memchrimpl_339!();
+        Depcrate_memchrimpl_340!();
+        Depcrate_memchrimpl_341!();
+        Depcrate_memchrMemchr2!();
+        Depcrate_memchrimpl_343!();
+        Depcrate_memchrimpl_344!();
+        Depcrate_memchrimpl_345!();
+        Depcrate_memchrimpl_346!();
+        Depcrate_memchrMemchr3!();
+        Depcrate_memchrimpl_348!();
+        Depcrate_memchrimpl_349!();
+        Depcrate_memchrimpl_350!();
+        Depcrate_memchrimpl_351!();
+        Depcrate_memchrmemchr_raw!();
+        Depcrate_memchrmemrchr_raw!();
+        Depcrate_memchrmemchr2_raw!();
+        Depcrate_memchrmemrchr2_raw!();
+        Depcrate_memchrmemchr3_raw!();
+        Depcrate_memchrmemrchr3_raw!();
+        Depcrate_memchrcount_raw!();
+        Depcrate_memchrtests!();
+    };
+}

@@ -1,0 +1,49 @@
+// Generated module macro for crate::dep_graph::serialized
+macro_rules! Modcrate_dep_graph_serialized {
+() => {
+        Depcrate_dep_graph_serializeduse_130!();
+        Depcrate_dep_graph_serializeduse_131!();
+        Depcrate_dep_graph_serializeduse_132!();
+        Depcrate_dep_graph_serializeduse_133!();
+        Depcrate_dep_graph_serializeduse_134!();
+        Depcrate_dep_graph_serializeduse_135!();
+        Depcrate_dep_graph_serializeduse_136!();
+        Depcrate_dep_graph_serializeduse_137!();
+        Depcrate_dep_graph_serializeduse_138!();
+        Depcrate_dep_graph_serializeduse_139!();
+        Depcrate_dep_graph_serializeduse_140!();
+        Depcrate_dep_graph_serializeduse_141!();
+        Depcrate_dep_graph_serializeduse_142!();
+        Depcrate_dep_graph_serializeduse_143!();
+        Depcrate_dep_graph_serializeduse_144!();
+        Depcrate_dep_graph_serializeduse_145!();
+        Depcrate_dep_graph_serializeduse_146!();
+        Depcrate_dep_graph_serializeduse_147!();
+        Depcrate_dep_graph_serializeduse_148!();
+        Depcrate_dep_graph_serializeduse_149!();
+        Depcrate_dep_graph_serializeduse_150!();
+        Depcrate_dep_graph_serializeduse_151!();
+        Depcrate_dep_graph_serializedmacro_152!();
+        Depcrate_dep_graph_serializedDEP_NODE_SIZE!();
+        Depcrate_dep_graph_serializedDEP_NODE_PAD!();
+        Depcrate_dep_graph_serializedDEP_NODE_WIDTH_BITS!();
+        Depcrate_dep_graph_serializedSerializedDepGraph!();
+        Depcrate_dep_graph_serializedimpl_157!();
+        Depcrate_dep_graph_serializedEdgeHeader!();
+        Depcrate_dep_graph_serializedimpl_159!();
+        Depcrate_dep_graph_serializedmask!();
+        Depcrate_dep_graph_serializedimpl_161!();
+        Depcrate_dep_graph_serializedSerializedNodeHeader!();
+        Depcrate_dep_graph_serializedUnpacked!();
+        Depcrate_dep_graph_serializedimpl_164!();
+        Depcrate_dep_graph_serializedNodeInfo!();
+        Depcrate_dep_graph_serializedimpl_166!();
+        Depcrate_dep_graph_serializedStat!();
+        Depcrate_dep_graph_serializedLocalEncoderState!();
+        Depcrate_dep_graph_serializedLocalEncoderResult!();
+        Depcrate_dep_graph_serializedEncoderState!();
+        Depcrate_dep_graph_serializedimpl_171!();
+        Depcrate_dep_graph_serializedGraphEncoder!();
+        Depcrate_dep_graph_serializedimpl_173!();
+    };
+}

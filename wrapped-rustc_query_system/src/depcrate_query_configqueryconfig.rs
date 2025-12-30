@@ -1,0 +1,9 @@
+// Generated macro for QueryConfig (trait)
+macro_rules! Depcrate_query_configQueryConfig {
+() => {
+// Module: crate::query::config
+// Provides: {"QueryConfig"}
+// Dependencies: {}
+pub trait QueryConfig < Qcx : QueryContext > : Copy { fn name (self) -> & 'static str ; type Key : DepNodeParams < Qcx :: DepContext > + Eq + Hash + Copy + Debug ; type Value : Copy ; type Cache : QueryCache < Key = Self :: Key , Value = Self :: Value > ; fn format_value (self) -> fn (& Self :: Value) -> String ; fn query_state < 'a > (self , tcx : Qcx) -> & 'a QueryState < Self :: Key , Qcx :: QueryInfo > where Qcx : 'a ; fn query_cache < 'a > (self , tcx : Qcx) -> & 'a Self :: Cache where Qcx : 'a ; fn cache_on_disk (self , tcx : Qcx :: DepContext , key : & Self :: Key) -> bool ; fn execute_query (self , tcx : Qcx :: DepContext , k : Self :: Key) -> Self :: Value ; fn compute (self , tcx : Qcx , key : Self :: Key) -> Self :: Value ; fn try_load_from_disk (self , tcx : Qcx , key : & Self :: Key , prev_index : SerializedDepNodeIndex , index : DepNodeIndex ,) -> Option < Self :: Value > ; fn loadable_from_disk (self , qcx : Qcx , key : & Self :: Key , idx : SerializedDepNodeIndex) -> bool ; # [doc = " Synthesize an error value to let compilation continue after a cycle."] fn value_from_cycle_error (self , tcx : Qcx :: DepContext , cycle_error : & CycleError < QueryStackFrameExtra > , guar : ErrorGuaranteed ,) -> Self :: Value ; fn anon (self) -> bool ; fn eval_always (self) -> bool ; fn depth_limit (self) -> bool ; fn feedable (self) -> bool ; fn dep_kind (self) -> DepKind ; fn handle_cycle_error (self) -> HandleCycleError ; fn hash_result (self) -> HashResult < Self :: Value > ; fn construct_dep_node (self , tcx : Qcx :: DepContext , key : & Self :: Key) -> DepNode { DepNode :: construct (tcx , self . dep_kind () , key) } }
+};
+}

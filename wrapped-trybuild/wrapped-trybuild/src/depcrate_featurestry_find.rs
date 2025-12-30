@@ -1,0 +1,9 @@
+// Generated macro for try_find (function)
+macro_rules! Depcrate_featurestry_find {
+() => {
+// Module: crate::features
+// Provides: {"try_find"}
+// Dependencies: {}
+fn try_find () -> Result < Vec < String > , Ignored > { let test_binary = env :: args_os () . next () . ok_or (Ignored) ? ; let test_binary_lossy = test_binary . to_string_lossy () ; let hash_range = if cfg ! (windows) { test_binary_lossy . len () - 21 .. test_binary_lossy . len () - 4 } else { test_binary_lossy . len () - 17 .. test_binary_lossy . len () } ; let hash = test_binary_lossy . get (hash_range) . ok_or (Ignored) ? ; if ! hash . starts_with ('-') || ! hash [1 ..] . bytes () . all (is_lower_hex_digit) { return Err (Ignored) ; } let binary_path = PathBuf :: from (& test_binary) ; let up = binary_path . parent () . ok_or (Ignored) ? . parent () . ok_or (Ignored) ? ; let fingerprint_dir = up . join (".fingerprint") ; if ! fingerprint_dir . is_dir () { return Err (Ignored) ; } let mut hash_matches = Vec :: new () ; for entry in fingerprint_dir . read_dir () ? { let entry = entry ? ; let is_dir = entry . file_type () ? . is_dir () ; let matching_hash = entry . file_name () . to_string_lossy () . ends_with (hash) ; if is_dir && matching_hash { hash_matches . push (entry . path ()) ; } } if hash_matches . len () != 1 { return Err (Ignored) ; } let mut json_matches = Vec :: new () ; for entry in hash_matches [0] . read_dir () ? { let entry = entry ? ; let is_file = entry . file_type () ? . is_file () ; let is_json = entry . path () . extension () == Some (OsStr :: new ("json")) ; if is_file && is_json { json_matches . push (entry . path ()) ; } } if json_matches . len () != 1 { return Err (Ignored) ; } let build_json = fs :: read_to_string (& json_matches [0]) ? ; let build : Build = serde_json :: from_str (& build_json) ? ; Ok (build . features) }
+};
+}

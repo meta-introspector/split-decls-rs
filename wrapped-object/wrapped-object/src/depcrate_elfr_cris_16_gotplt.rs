@@ -1,0 +1,9 @@
+// Generated macro for R_CRIS_16_GOTPLT (const)
+macro_rules! Depcrate_elfR_CRIS_16_GOTPLT {
+() => {
+// Module: crate::elf
+// Provides: {"R_CRIS_16_GOTPLT"}
+// Dependencies: {}
+pub const R_CRIS_16_GOTPLT : u32 = 15 ;
+};
+}

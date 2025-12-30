@@ -1,0 +1,9 @@
+// Generated macro for ascii_to_basic_latin_simd_double_stride (macro)
+macro_rules! Depcrate_asciiascii_to_basic_latin_simd_double_stride {
+() => {
+// Module: crate::ascii
+// Provides: {"ascii_to_basic_latin_simd_double_stride"}
+// Dependencies: {}
+# [allow (unused_macros)] macro_rules ! ascii_to_basic_latin_simd_double_stride { ($ name : ident , $ store : ident) => { # [doc = " Safety: src must be valid for 2*SIMD_STRIDE_SIZE bytes of aligned reads,"] # [doc = " aligned to either 16x8 or u8x16."] # [doc = " dst must be valid for 2*SIMD_STRIDE_SIZE bytes of aligned or unaligned reads"] # [inline (always)] pub unsafe fn $ name (src : * const u8 , dst : * mut u16) -> Option < usize > { let first = load16_aligned (src) ; let second = load16_aligned (src . add (SIMD_STRIDE_SIZE)) ; let (a , b) = simd_unpack (first) ; $ store (dst , a) ; $ store (dst . add (SIMD_STRIDE_SIZE / 2) , b) ; if unlikely (! simd_is_ascii (first | second)) { let mask_first = mask_ascii (first) ; if mask_first != 0 { return Some (mask_first . trailing_zeros () as usize) ; } let (c , d) = simd_unpack (second) ; $ store (dst . add (SIMD_STRIDE_SIZE) , c) ; $ store (dst . add (SIMD_STRIDE_SIZE + (SIMD_STRIDE_SIZE / 2)) , d) ; let mask_second = mask_ascii (second) ; return Some (SIMD_STRIDE_SIZE + mask_second . trailing_zeros () as usize) ; } let (c , d) = simd_unpack (second) ; $ store (dst . add (SIMD_STRIDE_SIZE) , c) ; $ store (dst . add (SIMD_STRIDE_SIZE + (SIMD_STRIDE_SIZE / 2)) , d) ; None } } ; }
+};
+}

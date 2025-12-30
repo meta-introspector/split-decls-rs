@@ -1,0 +1,39 @@
+// Generated module macro for crate::read::coff::symbol
+macro_rules! Modcrate_read_coff_symbol {
+() => {
+        Depcrate_read_coff_symboluse_304!();
+        Depcrate_read_coff_symboluse_305!();
+        Depcrate_read_coff_symboluse_306!();
+        Depcrate_read_coff_symboluse_307!();
+        Depcrate_read_coff_symboluse_308!();
+        Depcrate_read_coff_symboluse_309!();
+        Depcrate_read_coff_symboluse_310!();
+        Depcrate_read_coff_symboluse_311!();
+        Depcrate_read_coff_symboluse_312!();
+        Depcrate_read_coff_symboluse_313!();
+        Depcrate_read_coff_symboluse_314!();
+        Depcrate_read_coff_symbolSymbolTable!();
+        Depcrate_read_coff_symbolimpl_316!();
+        Depcrate_read_coff_symbolimpl_317!();
+        Depcrate_read_coff_symbolSymbolIterator!();
+        Depcrate_read_coff_symbolimpl_319!();
+        Depcrate_read_coff_symbolCoffBigSymbolTable!();
+        Depcrate_read_coff_symbolCoffSymbolTable!();
+        Depcrate_read_coff_symbolimpl_322!();
+        Depcrate_read_coff_symbolimpl_323!();
+        Depcrate_read_coff_symbolCoffBigSymbolIterator!();
+        Depcrate_read_coff_symbolCoffSymbolIterator!();
+        Depcrate_read_coff_symbolimpl_326!();
+        Depcrate_read_coff_symbolimpl_327!();
+        Depcrate_read_coff_symbolimpl_328!();
+        Depcrate_read_coff_symbolCoffBigSymbol!();
+        Depcrate_read_coff_symbolCoffSymbol!();
+        Depcrate_read_coff_symbolimpl_331!();
+        Depcrate_read_coff_symbolimpl_332!();
+        Depcrate_read_coff_symbolimpl_333!();
+        Depcrate_read_coff_symbolImageSymbol!();
+        Depcrate_read_coff_symbolimpl_335!();
+        Depcrate_read_coff_symbolimpl_336!();
+        Depcrate_read_coff_symbolimpl_337!();
+    };
+}

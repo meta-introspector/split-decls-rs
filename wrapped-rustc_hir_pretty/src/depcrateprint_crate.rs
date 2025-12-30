@@ -1,0 +1,9 @@
+// Generated macro for print_crate (function)
+macro_rules! Depcrateprint_crate {
+() => {
+// Module: crate
+// Provides: {"print_crate"}
+// Dependencies: {}
+# [doc = " Requires you to pass an input filename and reader so that"] # [doc = " it can scan the input text for comments to copy forward."] pub fn print_crate < 'a > (sm : & 'a SourceMap , krate : & hir :: Mod < '_ > , filename : FileName , input : String , attrs : & 'a dyn Fn (HirId) -> & 'a [hir :: Attribute] , ann : & 'a dyn PpAnn ,) -> String { let mut s = State { s : pp :: Printer :: new () , comments : Some (Comments :: new (sm , filename , input)) , attrs , ann , } ; for attr in s . attrs (hir :: CRATE_HIR_ID) { s . print_attribute_as_style (attr , ast :: AttrStyle :: Inner) ; } s . print_mod (krate) ; s . print_remaining_comments () ; s . s . eof () }
+};
+}

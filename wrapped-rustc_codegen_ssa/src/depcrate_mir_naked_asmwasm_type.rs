@@ -1,0 +1,9 @@
+// Generated macro for wasm_type (function)
+macro_rules! Depcrate_mir_naked_asmwasm_type {
+() => {
+// Module: crate::mir::naked_asm
+// Provides: {"wasm_type"}
+// Dependencies: {}
+fn wasm_type < 'tcx > (signature : & mut String , arg_abi : & ArgAbi < '_ , Ty < 'tcx > > , ptr_type : & 'static str) { match arg_abi . mode { PassMode :: Ignore => { } PassMode :: Direct (_) => { let direct_type = match arg_abi . layout . backend_repr { BackendRepr :: Scalar (scalar) => wasm_primitive (scalar . primitive () , ptr_type) , BackendRepr :: SimdVector { .. } => "v128" , other => unreachable ! ("unexpected BackendRepr: {:?}" , other) , } ; signature . push_str (direct_type) ; } PassMode :: Pair (_ , _) => match arg_abi . layout . backend_repr { BackendRepr :: ScalarPair (a , b) => { signature . push_str (wasm_primitive (a . primitive () , ptr_type)) ; signature . push_str (", ") ; signature . push_str (wasm_primitive (b . primitive () , ptr_type)) ; } other => unreachable ! ("{other:?}") , } , PassMode :: Cast { pad_i32 , ref cast } => { assert ! (! pad_i32 , "not currently used by wasm calling convention") ; assert ! (cast . prefix [0] . is_none () , "no prefix") ; assert_eq ! (cast . rest . total , arg_abi . layout . size , "single item") ; let wrapped_wasm_type = match cast . rest . unit . kind { RegKind :: Integer => match cast . rest . unit . size . bytes () { ..= 4 => "i32" , ..= 8 => "i64" , _ => ptr_type , } , RegKind :: Float => match cast . rest . unit . size . bytes () { ..= 4 => "f32" , ..= 8 => "f64" , _ => ptr_type , } , RegKind :: Vector => "v128" , } ; signature . push_str (wrapped_wasm_type) ; } PassMode :: Indirect { .. } => signature . push_str (ptr_type) , } }
+};
+}

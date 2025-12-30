@@ -1,0 +1,53 @@
+// Generated module macro for crate::query::plumbing
+macro_rules! Modcrate_query_plumbing {
+() => {
+        Depcrate_query_plumbinguse_243!();
+        Depcrate_query_plumbinguse_244!();
+        Depcrate_query_plumbinguse_245!();
+        Depcrate_query_plumbinguse_246!();
+        Depcrate_query_plumbinguse_247!();
+        Depcrate_query_plumbinguse_248!();
+        Depcrate_query_plumbinguse_249!();
+        Depcrate_query_plumbinguse_250!();
+        Depcrate_query_plumbinguse_251!();
+        Depcrate_query_plumbinguse_252!();
+        Depcrate_query_plumbinguse_253!();
+        Depcrate_query_plumbinguse_254!();
+        Depcrate_query_plumbinguse_255!();
+        Depcrate_query_plumbinguse_256!();
+        Depcrate_query_plumbinguse_257!();
+        Depcrate_query_plumbinguse_258!();
+        Depcrate_query_plumbinguse_259!();
+        Depcrate_query_plumbinguse_260!();
+        Depcrate_query_plumbinguse_261!();
+        Depcrate_query_plumbingequivalent_key!();
+        Depcrate_query_plumbingQueryState!();
+        Depcrate_query_plumbingQueryResult!();
+        Depcrate_query_plumbingimpl_265!();
+        Depcrate_query_plumbingimpl_266!();
+        Depcrate_query_plumbingimpl_267!();
+        Depcrate_query_plumbingJobOwner!();
+        Depcrate_query_plumbingmk_cycle!();
+        Depcrate_query_plumbinghandle_cycle_error!();
+        Depcrate_query_plumbingimpl_271!();
+        Depcrate_query_plumbingimpl_272!();
+        Depcrate_query_plumbingCycleError!();
+        Depcrate_query_plumbingimpl_274!();
+        Depcrate_query_plumbingtry_get_cached!();
+        Depcrate_query_plumbingcycle_error!();
+        Depcrate_query_plumbingwait_for_query!();
+        Depcrate_query_plumbingtry_execute_query!();
+        Depcrate_query_plumbingexecute_job!();
+        Depcrate_query_plumbingexecute_job_non_incr!();
+        Depcrate_query_plumbingexecute_job_incr!();
+        Depcrate_query_plumbingtry_load_from_disk_and_cache_in_memory!();
+        Depcrate_query_plumbingincremental_verify_ich!();
+        Depcrate_query_plumbingincremental_verify_ich_not_green!();
+        Depcrate_query_plumbingincremental_verify_ich_failed!();
+        Depcrate_query_plumbingensure_must_run!();
+        Depcrate_query_plumbingQueryMode!();
+        Depcrate_query_plumbingget_query_non_incr!();
+        Depcrate_query_plumbingget_query_incr!();
+        Depcrate_query_plumbingforce_query!();
+    };
+}

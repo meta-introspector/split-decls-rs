@@ -1,0 +1,9 @@
+// Generated macro for impl_238 (impl)
+macro_rules! Depcrate_ioimpl_238 {
+() => {
+// Module: crate::io
+// Provides: {"impl_238"}
+// Dependencies: {}
+impl < T > AssertAsync < T > { # [doc = " Wraps an I/O handle implementing [`std::io`] traits."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " use futures_lite::io::AssertAsync;"] # [doc = ""] # [doc = " let reader: &[u8] = b\"hello\";"] # [doc = ""] # [doc = " let async_reader = AssertAsync::new(reader);"] # [doc = " ```"] # [inline (always)] pub fn new (io : T) -> Self { AssertAsync (io) } # [doc = " Gets a reference to the inner I/O handle."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " use futures_lite::io::AssertAsync;"] # [doc = ""] # [doc = " let reader: &[u8] = b\"hello\";"] # [doc = ""] # [doc = " let async_reader = AssertAsync::new(reader);"] # [doc = " let r = async_reader.get_ref();"] # [doc = " ```"] # [inline (always)] pub fn get_ref (& self) -> & T { & self . 0 } # [doc = " Gets a mutable reference to the inner I/O handle."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " use futures_lite::io::AssertAsync;"] # [doc = ""] # [doc = " let reader: &[u8] = b\"hello\";"] # [doc = ""] # [doc = " let mut async_reader = AssertAsync::new(reader);"] # [doc = " let r = async_reader.get_mut();"] # [doc = " ```"] # [inline (always)] pub fn get_mut (& mut self) -> & mut T { & mut self . 0 } # [doc = " Extracts the inner I/O handle."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " use futures_lite::io::AssertAsync;"] # [doc = ""] # [doc = " let reader: &[u8] = b\"hello\";"] # [doc = ""] # [doc = " let async_reader = AssertAsync::new(reader);"] # [doc = " let inner = async_reader.into_inner();"] # [doc = " ```"] # [inline (always)] pub fn into_inner (self) -> T { self . 0 } }
+};
+}

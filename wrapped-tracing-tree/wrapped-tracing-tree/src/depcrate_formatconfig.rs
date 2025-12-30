@@ -1,0 +1,9 @@
+// Generated macro for Config (struct)
+macro_rules! Depcrate_formatConfig {
+() => {
+// Module: crate::format
+// Provides: {"Config"}
+// Dependencies: {}
+# [derive (Debug)] pub struct Config { # [doc = " Whether to use colors."] pub ansi : bool , # [doc = " Whether an ascii art tree is used or (if false) whether to just use whitespace indent"] pub indent_lines : bool , # [doc = " The amount of chars to indent."] pub indent_amount : usize , # [doc = " Whether to show the module paths."] pub targets : bool , # [doc = " Whether to show thread ids."] pub render_thread_ids : bool , # [doc = " Whether to show thread names."] pub render_thread_names : bool , # [doc = " Specifies after how many indentation levels we will wrap back around to zero"] pub wraparound : usize , # [doc = " Whether to print the current span before activating a new one"] pub verbose_entry : bool , # [doc = " Whether to print the current span before exiting it."] pub verbose_exit : bool , # [doc = " Print the path leading up to a span if a different span was entered concurrently"] pub span_retrace : bool , # [doc = " Whether to print squiggly brackets (`{}`) around the list of fields in a span."] pub bracketed_fields : bool , # [doc = " Defer printing a span until an event is generated inside of it"] pub deferred_spans : bool , # [doc = " Print a label of the span mode (open/close etc)."] pub span_modes : bool , }
+};
+}

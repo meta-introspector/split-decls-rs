@@ -1,0 +1,46 @@
+// Generated module macro for crate::util::prefilter
+macro_rules! Modcrate_util_prefilter {
+() => {
+        Depcrate_util_prefilteruse_409!();
+        Depcrate_util_prefilteruse_410!();
+        Depcrate_util_prefilteruse_411!();
+        Depcrate_util_prefilterPrefilter!();
+        Depcrate_util_prefilterimpl_413!();
+        Depcrate_util_prefilterCandidate!();
+        Depcrate_util_prefilterimpl_415!();
+        Depcrate_util_prefilterPrefilterI!();
+        Depcrate_util_prefilterimpl_417!();
+        Depcrate_util_prefilterBuilder!();
+        Depcrate_util_prefilterimpl_419!();
+        Depcrate_util_prefilterPacked!();
+        Depcrate_util_prefilterimpl_421!();
+        Depcrate_util_prefilterMemmemBuilder!();
+        Depcrate_util_prefilterimpl_423!();
+        Depcrate_util_prefilterMemmem!();
+        Depcrate_util_prefilterimpl_425!();
+        Depcrate_util_prefilterRareBytesBuilder!();
+        Depcrate_util_prefilterRareByteOffsets!();
+        Depcrate_util_prefilterimpl_428!();
+        Depcrate_util_prefilterimpl_429!();
+        Depcrate_util_prefilterRareByteOffset!();
+        Depcrate_util_prefilterimpl_431!();
+        Depcrate_util_prefilterimpl_432!();
+        Depcrate_util_prefilterimpl_433!();
+        Depcrate_util_prefilterRareBytesOne!();
+        Depcrate_util_prefilterimpl_435!();
+        Depcrate_util_prefilterRareBytesTwo!();
+        Depcrate_util_prefilterimpl_437!();
+        Depcrate_util_prefilterRareBytesThree!();
+        Depcrate_util_prefilterimpl_439!();
+        Depcrate_util_prefilterStartBytesBuilder!();
+        Depcrate_util_prefilterimpl_441!();
+        Depcrate_util_prefilterStartBytesOne!();
+        Depcrate_util_prefilterimpl_443!();
+        Depcrate_util_prefilterStartBytesTwo!();
+        Depcrate_util_prefilterimpl_445!();
+        Depcrate_util_prefilterStartBytesThree!();
+        Depcrate_util_prefilterimpl_447!();
+        Depcrate_util_prefilteropposite_ascii_case!();
+        Depcrate_util_prefilterfreq_rank!();
+    };
+}

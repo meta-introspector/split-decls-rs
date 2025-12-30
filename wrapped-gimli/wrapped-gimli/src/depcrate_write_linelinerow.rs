@@ -1,0 +1,9 @@
+// Generated macro for LineRow (struct)
+macro_rules! Depcrate_write_lineLineRow {
+() => {
+// Module: crate::write::line
+// Provides: {"LineRow"}
+// Dependencies: {}
+# [doc = " A row in the line number table that corresponds to a machine instruction."] # [derive (Debug , Clone , Copy , PartialEq , Eq)] pub struct LineRow { # [doc = " The offset of the instruction from the start address of the sequence."] pub address_offset : u64 , # [doc = " The index of an operation within a VLIW instruction."] # [doc = ""] # [doc = " The index of the first operation is 0."] # [doc = " Set to 0 for non-VLIW instructions."] pub op_index : u64 , # [doc = " The source file corresponding to the instruction."] pub file : FileId , # [doc = " The line number within the source file."] # [doc = ""] # [doc = " Lines are numbered beginning at 1. Set to 0 if there is no source line."] pub line : u64 , # [doc = " The column number within the source line."] # [doc = ""] # [doc = " Columns are numbered beginning at 1. Set to 0 for the \"left edge\" of the line."] pub column : u64 , # [doc = " An additional discriminator used to distinguish between source locations."] # [doc = " This value is assigned arbitrarily by the DWARF producer."] pub discriminator : u64 , # [doc = " Set to true if the instruction is a recommended breakpoint for a statement."] pub is_statement : bool , # [doc = " Set to true if the instruction is the beginning of a basic block."] pub basic_block : bool , # [doc = " Set to true if the instruction is a recommended breakpoint at the entry of a"] # [doc = " function."] pub prologue_end : bool , # [doc = " Set to true if the instruction is a recommended breakpoint prior to the exit of"] # [doc = " a function."] pub epilogue_begin : bool , # [doc = " The instruction set architecture of the instruction."] # [doc = ""] # [doc = " Set to 0 for the default ISA. Other values are defined by the architecture ABI."] pub isa : u64 , }
+};
+}

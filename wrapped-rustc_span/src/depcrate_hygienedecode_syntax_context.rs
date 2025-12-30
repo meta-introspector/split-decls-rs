@@ -1,0 +1,9 @@
+// Generated macro for decode_syntax_context (function)
+macro_rules! Depcrate_hygienedecode_syntax_context {
+() => {
+// Module: crate::hygiene
+// Provides: {"decode_syntax_context"}
+// Dependencies: {}
+pub fn decode_syntax_context < D : Decoder > (d : & mut D , context : & HygieneDecodeContext , decode_data : impl FnOnce (& mut D , u32) -> SyntaxContextKey ,) -> SyntaxContext { let raw_id : u32 = Decodable :: decode (d) ; if raw_id == 0 { trace ! ("decode_syntax_context: deserialized root") ; return SyntaxContext :: root () ; } if let Some (Some (ctxt)) = context . remapped_ctxts . lock () . get (raw_id) { return * ctxt ; } let (parent , expn_id , transparency) = decode_data (d , raw_id) ; let ctxt = HygieneData :: with (| hygiene_data | hygiene_data . alloc_ctxt (parent , expn_id , transparency)) ; context . remapped_ctxts . lock () . insert (raw_id , ctxt) ; ctxt }
+};
+}

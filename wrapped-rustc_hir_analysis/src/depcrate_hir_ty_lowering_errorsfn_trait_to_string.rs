@@ -1,0 +1,9 @@
+// Generated macro for fn_trait_to_string (function)
+macro_rules! Depcrate_hir_ty_lowering_errorsfn_trait_to_string {
+() => {
+// Module: crate::hir_ty_lowering::errors
+// Provides: {"fn_trait_to_string"}
+// Dependencies: {}
+pub (crate) fn fn_trait_to_string (tcx : TyCtxt < '_ > , trait_segment : & hir :: PathSegment < '_ > , parenthesized : bool ,) -> String { let args = trait_segment . args . and_then (| args | args . args . first ()) . and_then (| arg | match arg { hir :: GenericArg :: Type (ty) => match ty . kind { hir :: TyKind :: Tup (t) => t . iter () . map (| e | tcx . sess . source_map () . span_to_snippet (e . span)) . collect :: < Result < Vec < _ > , _ > > () . map (| a | a . join (", ")) , _ => tcx . sess . source_map () . span_to_snippet (ty . span) , } . map (| s | { if parenthesized || s . is_empty () { format ! ("({s})") } else { format ! ("({s},)") } }) . ok () , _ => None , }) . unwrap_or_else (| | "()" . to_string ()) ; let ret = trait_segment . args () . constraints . iter () . find_map (| c | { if c . ident . name == sym :: Output && let Some (ty) = c . ty () && ty . span != tcx . hir_span (trait_segment . hir_id) { tcx . sess . source_map () . span_to_snippet (ty . span) . ok () } else { None } }) . unwrap_or_else (| | "()" . to_string ()) ; if parenthesized { format ! ("{}{} -> {}" , trait_segment . ident , args , ret) } else { format ! ("{}<{}, Output={}>" , trait_segment . ident , args , ret) } }
+};
+}

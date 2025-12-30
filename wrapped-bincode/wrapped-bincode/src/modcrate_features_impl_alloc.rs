@@ -1,0 +1,55 @@
+// Generated module macro for crate::features::impl_alloc
+macro_rules! Modcrate_features_impl_alloc {
+() => {
+        Depcrate_features_impl_allocuse_46!();
+        Depcrate_features_impl_allocuse_47!();
+        Depcrate_features_impl_allocuse_48!();
+        Depcrate_features_impl_allocVecWriter!();
+        Depcrate_features_impl_allocimpl_50!();
+        Depcrate_features_impl_allocimpl_51!();
+        Depcrate_features_impl_allocencode_to_vec!();
+        Depcrate_features_impl_allocimpl_53!();
+        Depcrate_features_impl_allocimpl_54!();
+        Depcrate_features_impl_allocimpl_55!();
+        Depcrate_features_impl_allocimpl_56!();
+        Depcrate_features_impl_allocimpl_57!();
+        Depcrate_features_impl_allocimpl_58!();
+        Depcrate_features_impl_allocimpl_59!();
+        Depcrate_features_impl_allocimpl_60!();
+        Depcrate_features_impl_allocimpl_61!();
+        Depcrate_features_impl_allocimpl_62!();
+        Depcrate_features_impl_allocimpl_63!();
+        Depcrate_features_impl_allocimpl_64!();
+        Depcrate_features_impl_allocimpl_65!();
+        Depcrate_features_impl_allocimpl_66!();
+        Depcrate_features_impl_allocimpl_67!();
+        Depcrate_features_impl_allocimpl_68!();
+        Depcrate_features_impl_allocmacro_69!();
+        Depcrate_features_impl_allocimpl_70!();
+        Depcrate_features_impl_allocmacro_71!();
+        Depcrate_features_impl_allocimpl_72!();
+        Depcrate_features_impl_allocimpl_73!();
+        Depcrate_features_impl_allocimpl_74!();
+        Depcrate_features_impl_allocimpl_75!();
+        Depcrate_features_impl_allocimpl_76!();
+        Depcrate_features_impl_allocimpl_77!();
+        Depcrate_features_impl_allocimpl_78!();
+        Depcrate_features_impl_allocimpl_79!();
+        Depcrate_features_impl_allocimpl_80!();
+        Depcrate_features_impl_alloctest_cow_round_trip!();
+        Depcrate_features_impl_allocimpl_82!();
+        Depcrate_features_impl_allocimpl_83!();
+        Depcrate_features_impl_allocimpl_84!();
+        Depcrate_features_impl_allocimpl_85!();
+        Depcrate_features_impl_allocimpl_86!();
+        Depcrate_features_impl_allocimpl_87!();
+        Depcrate_features_impl_allocimpl_88!();
+        Depcrate_features_impl_allocimpl_89!();
+        Depcrate_features_impl_allocimpl_90!();
+        Depcrate_features_impl_allocimpl_91!();
+        Depcrate_features_impl_allocimpl_92!();
+        Depcrate_features_impl_allocimpl_93!();
+        Depcrate_features_impl_allocimpl_94!();
+        Depcrate_features_impl_allocimpl_95!();
+    };
+}

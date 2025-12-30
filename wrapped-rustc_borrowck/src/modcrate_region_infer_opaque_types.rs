@@ -1,0 +1,50 @@
+// Generated module macro for crate::region_infer::opaque_types
+macro_rules! Modcrate_region_infer_opaque_types {
+() => {
+        Depcrate_region_infer_opaque_typesuse_868!();
+        Depcrate_region_infer_opaque_typesuse_869!();
+        Depcrate_region_infer_opaque_typesuse_870!();
+        Depcrate_region_infer_opaque_typesuse_871!();
+        Depcrate_region_infer_opaque_typesuse_872!();
+        Depcrate_region_infer_opaque_typesuse_873!();
+        Depcrate_region_infer_opaque_typesuse_874!();
+        Depcrate_region_infer_opaque_typesuse_875!();
+        Depcrate_region_infer_opaque_typesuse_876!();
+        Depcrate_region_infer_opaque_typesuse_877!();
+        Depcrate_region_infer_opaque_typesuse_878!();
+        Depcrate_region_infer_opaque_typesuse_879!();
+        Depcrate_region_infer_opaque_typesuse_880!();
+        Depcrate_region_infer_opaque_typesuse_881!();
+        Depcrate_region_infer_opaque_typesuse_882!();
+        Depcrate_region_infer_opaque_typesuse_883!();
+        Depcrate_region_infer_opaque_typesuse_884!();
+        Depcrate_region_infer_opaque_typesuse_885!();
+        Depcrate_region_infer_opaque_typesuse_886!();
+        Depcrate_region_infer_opaque_typesuse_887!();
+        Depcrate_region_infer_opaque_typesuse_888!();
+        Depcrate_region_infer_opaque_typesuse_889!();
+        Depcrate_region_infer_opaque_typesuse_890!();
+        Depcrate_region_infer_opaque_typesuse_891!();
+        Depcrate_region_infer_opaque_typesuse_892!();
+        Depcrate_region_infer_opaque_typesmember_constraints!();
+        Depcrate_region_infer_opaque_typesregion_ctxt!();
+        Depcrate_region_infer_opaque_typesuse_925!();
+        Depcrate_region_infer_opaque_typesuse_926!();
+        Depcrate_region_infer_opaque_typesDeferredOpaqueTypeError!();
+        Depcrate_region_infer_opaque_typesclone_and_resolve_opaque_types!();
+        Depcrate_region_infer_opaque_typesnll_var_to_universal_region!();
+        Depcrate_region_infer_opaque_typesadd_concrete_opaque_type!();
+        Depcrate_region_infer_opaque_typesget_concrete_opaque_type!();
+        Depcrate_region_infer_opaque_typesDefiningUse!();
+        Depcrate_region_infer_opaque_typescompute_concrete_opaque_types!();
+        Depcrate_region_infer_opaque_typescollect_defining_uses!();
+        Depcrate_region_infer_opaque_typescompute_concrete_types_from_defining_uses!();
+        Depcrate_region_infer_opaque_typesToArgRegionsFolder!();
+        Depcrate_region_infer_opaque_typesimpl_937!();
+        Depcrate_region_infer_opaque_typesimpl_938!();
+        Depcrate_region_infer_opaque_typesapply_computed_concrete_opaque_types!();
+        Depcrate_region_infer_opaque_typesdetect_opaque_types_added_while_handling_opaque_types!();
+        Depcrate_region_infer_opaque_typesimpl_941!();
+        Depcrate_region_infer_opaque_typesimpl_942!();
+    };
+}

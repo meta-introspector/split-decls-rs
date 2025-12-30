@@ -1,0 +1,9 @@
+// Generated macro for constant_time_eq_sse2 (function)
+macro_rules! Depcrate_sse2constant_time_eq_sse2 {
+() => {
+// Module: crate::sse2
+// Provides: {"constant_time_eq_sse2"}
+// Dependencies: {}
+# [doc = " SSE2/AVX implementation of `constant_time_eq` and `constant_time_eq_n`."] # [must_use] # [inline (always)] fn constant_time_eq_sse2 (mut a : & [u8] , mut b : & [u8]) -> bool { if a . len () != b . len () { return false ; } b = & b [.. a . len ()] ; const LANES : usize = size_of :: < __m128i > () ; let tmp = if a . len () >= LANES * 2 { let tmpa0 = loadu_si128 (& a [.. LANES]) ; let tmpb0 = loadu_si128 (& b [.. LANES]) ; let tmpa1 = loadu_si128 (& a [LANES .. LANES * 2]) ; let tmpb1 = loadu_si128 (& b [LANES .. LANES * 2]) ; a = & a [LANES * 2 ..] ; b = & b [LANES * 2 ..] ; let mut mask0 = cmpeq_epi8 (tmpa0 , tmpb0) ; let mut mask1 = cmpeq_epi8 (tmpa1 , tmpb1) ; while a . len () >= LANES * 2 { let tmpa0 = loadu_si128 (& a [.. LANES]) ; let tmpb0 = loadu_si128 (& b [.. LANES]) ; let tmpa1 = loadu_si128 (& a [LANES .. LANES * 2]) ; let tmpb1 = loadu_si128 (& b [LANES .. LANES * 2]) ; a = & a [LANES * 2 ..] ; b = & b [LANES * 2 ..] ; let tmp0 = cmpeq_epi8 (tmpa0 , tmpb0) ; let tmp1 = cmpeq_epi8 (tmpa1 , tmpb1) ; mask0 = and_si128 (mask0 , tmp0) ; mask1 = and_si128 (mask1 , tmp1) ; } if a . len () >= LANES { let tmpa = loadu_si128 (& a [.. LANES]) ; let tmpb = loadu_si128 (& b [.. LANES]) ; a = & a [LANES ..] ; b = & b [LANES ..] ; let tmp = cmpeq_epi8 (tmpa , tmpb) ; mask0 = and_si128 (mask0 , tmp) ; } let mask = and_si128 (mask0 , mask1) ; movemask_epi8 (mask) ^ 0xFFFF } else if a . len () >= LANES { let tmpa = loadu_si128 (& a [.. LANES]) ; let tmpb = loadu_si128 (& b [.. LANES]) ; a = & a [LANES ..] ; b = & b [LANES ..] ; let mask = cmpeq_epi8 (tmpa , tmpb) ; movemask_epi8 (mask) ^ 0xFFFF } else { 0 } ; crate :: generic :: constant_time_eq_impl (a , b , tmp . into ()) }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for ascii_alu (macro)
+macro_rules! Depcrate_asciiascii_alu {
+() => {
+// Module: crate::ascii
+// Provides: {"ascii_alu"}
+// Dependencies: {}
+# [allow (unused_macros)] macro_rules ! ascii_alu { ($ name : ident , $ src_unit : ty , $ dst_unit : ty , $ stride_fn : ident) => { # [doc = " Safety: src and dst must have len elements, src is valid for read, dst is valid for"] # [doc = " write"] # [doc = " Safety-usable invariant: will return Some() when it fails"] # [doc = " to convert. The first value will be a u8 that is > 127."] # [allow (clippy :: never_loop , clippy :: cast_ptr_alignment)] # [inline (always)] pub unsafe fn $ name (src : * const $ src_unit , dst : * mut $ dst_unit , len : usize ,) -> Option < ($ src_unit , usize) > { let mut offset = 0usize ; loop { let mut until_alignment = { let src_alignment = (src as usize) & ALU_ALIGNMENT_MASK ; let dst_alignment = (dst as usize) & ALU_ALIGNMENT_MASK ; if src_alignment != dst_alignment { break ; } (ALU_ALIGNMENT - src_alignment) & ALU_ALIGNMENT_MASK } ; if until_alignment + ALU_STRIDE_SIZE <= len { while until_alignment != 0 { let code_unit = * (src . add (offset)) ; if code_unit > 127 { return Some ((code_unit , offset)) ; } * (dst . add (offset)) = code_unit as $ dst_unit ; offset += 1 ; until_alignment -= 1 ; } let len_minus_stride = len - ALU_STRIDE_SIZE ; loop { if let Some (num_ascii) = $ stride_fn (src . add (offset) as * const usize , dst . add (offset) as * mut usize ,) { offset += num_ascii ; return Some ((* (src . add (offset)) , offset)) ; } offset += ALU_STRIDE_SIZE ; if offset > len_minus_stride { break ; } } } break ; } while offset < len { let code_unit = * (src . add (offset)) ; if code_unit > 127 { return Some ((code_unit , offset)) ; } * (dst . add (offset)) = code_unit as $ dst_unit ; offset += 1 ; } None } } ; }
+};
+}

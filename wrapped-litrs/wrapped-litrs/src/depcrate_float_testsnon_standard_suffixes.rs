@@ -1,0 +1,9 @@
+// Generated macro for non_standard_suffixes (function)
+macro_rules! Depcrate_float_testsnon_standard_suffixes {
+() => {
+// Module: crate::float::tests
+// Provides: {"non_standard_suffixes"}
+// Dependencies: {}
+# [test] fn non_standard_suffixes () { # [track_caller] fn check_suffix (input : & str , integer_part : & str , fractional_part : Option < & str > , exponent_part : & str , suffix : & str ,) { let lit = FloatLit :: parse (input) . unwrap_or_else (| e | panic ! ("expected to parse '{}' but got {}" , input , e)) ; assert_eq ! (lit . integer_part () , integer_part) ; assert_eq ! (lit . fractional_part () , fractional_part) ; assert_eq ! (lit . exponent_part () , exponent_part) ; assert_eq ! (lit . suffix () , suffix) ; let lit = match Literal :: parse (input) { Ok (Literal :: Float (f)) => f , other => panic ! ("Expected float literal, but got {other:?} for '{input}'") , } ; assert_eq ! (lit . integer_part () , integer_part) ; assert_eq ! (lit . fractional_part () , fractional_part) ; assert_eq ! (lit . exponent_part () , exponent_part) ; assert_eq ! (lit . suffix () , suffix) ; } check_suffix ("7.1f23" , "7" , Some ("1") , "" , "f23") ; check_suffix ("7.1f320" , "7" , Some ("1") , "" , "f320") ; check_suffix ("7.1f64_" , "7" , Some ("1") , "" , "f64_") ; check_suffix ("8.1f649" , "8" , Some ("1") , "" , "f649") ; check_suffix ("8.1f64f32" , "8" , Some ("1") , "" , "f64f32") ; check_suffix ("23e2_banana" , "23" , None , "e2_" , "banana") ; check_suffix ("23.2_banana" , "23" , Some ("2_") , "" , "banana") ; check_suffix ("23e2pe55ter" , "23" , None , "e2" , "pe55ter") ; check_suffix ("23e2p_e55ter" , "23" , None , "e2" , "p_e55ter") ; check_suffix ("3.15Jürgen" , "3" , Some ("15") , "" , "Jürgen") ; check_suffix ("3e2e5" , "3" , None , "e2" , "e5") ; check_suffix ("3e2e5f" , "3" , None , "e2" , "e5f") ; }
+};
+}

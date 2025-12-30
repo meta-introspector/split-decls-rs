@@ -1,0 +1,9 @@
+// Generated macro for tests (module)
+macro_rules! Depcrate_low_level_pipetests {
+() => {
+// Module: crate::low_level::pipe
+// Provides: {"tests"}
+// Dependencies: {}
+# [cfg (test)] mod tests { use std :: io :: Read ; use std :: os :: unix :: net :: { UnixDatagram , UnixStream } ; use super :: * ; fn wakeup () { crate :: low_level :: raise (libc :: SIGUSR1) . unwrap () ; } # [test] fn register_with_socket () -> Result < () , Error > { let (mut read , write) = UnixStream :: pair () ? ; register (libc :: SIGUSR1 , write) ? ; wakeup () ; let mut buff = [0 ; 1] ; read . read_exact (& mut buff) ? ; assert_eq ! (b"X" , & buff) ; Ok (()) } # [test] # [cfg (not (target_os = "haiku"))] fn register_dgram_socket () -> Result < () , Error > { let (read , write) = UnixDatagram :: pair () ? ; register (libc :: SIGUSR1 , write) ? ; wakeup () ; let mut buff = [0 ; 1] ; for _ in 0 .. 3 { let len = read . recv (& mut buff) ? ; if len == 1 && & buff == b"X" { return Ok (()) ; } } panic ! ("Haven't received the right data") ; } # [test] fn register_with_pipe () -> Result < () , Error > { let mut fds = [0 ; 2] ; unsafe { assert_eq ! (0 , libc :: pipe (fds . as_mut_ptr ())) } ; register_raw (libc :: SIGUSR1 , fds [1]) ? ; wakeup () ; let mut buff = [0 ; 1] ; unsafe { assert_eq ! (1 , libc :: read (fds [0] , buff . as_mut_ptr () as * mut _ , 1)) } assert_eq ! (b"X" , & buff) ; Ok (()) } }
+};
+}

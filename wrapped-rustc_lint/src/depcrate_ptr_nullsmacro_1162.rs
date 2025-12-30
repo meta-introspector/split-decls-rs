@@ -1,0 +1,9 @@
+// Generated macro for macro_1162 (macro)
+macro_rules! Depcrate_ptr_nullsmacro_1162 {
+() => {
+// Module: crate::ptr_nulls
+// Provides: {"macro_1162"}
+// Dependencies: {}
+declare_lint ! { # [doc = " The `useless_ptr_null_checks` lint checks for useless null checks against pointers"] # [doc = " obtained from non-null types."] # [doc = ""] # [doc = " ### Example"] # [doc = ""] # [doc = " ```rust"] # [doc = " # fn test() {}"] # [doc = " let fn_ptr: fn() = /* somehow obtained nullable function pointer */"] # [doc = " #   test;"] # [doc = ""] # [doc = " if (fn_ptr as *const ()).is_null() { /* ... */ }"] # [doc = " ```"] # [doc = ""] # [doc = " {{produces}}"] # [doc = ""] # [doc = " ### Explanation"] # [doc = ""] # [doc = " Function pointers and references are assumed to be non-null, checking them for null"] # [doc = " will always return false."] USELESS_PTR_NULL_CHECKS , Warn , "useless checking of non-null-typed pointer" }
+};
+}

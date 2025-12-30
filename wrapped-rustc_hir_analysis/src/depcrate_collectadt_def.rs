@@ -1,0 +1,9 @@
+// Generated macro for adt_def (function)
+macro_rules! Depcrate_collectadt_def {
+() => {
+// Module: crate::collect
+// Provides: {"adt_def"}
+// Dependencies: {}
+fn adt_def (tcx : TyCtxt < '_ > , def_id : LocalDefId) -> ty :: AdtDef < '_ > { use rustc_hir :: * ; let Node :: Item (item) = tcx . hir_node_by_def_id (def_id) else { bug ! ("expected ADT to be an item") ; } ; let repr = tcx . repr_options_of_def (def_id) ; let (kind , variants) = match & item . kind { ItemKind :: Enum (_ , _ , def) => { let mut distance_from_explicit = 0 ; let variants = def . variants . iter () . map (| v | { let discr = if let Some (e) = & v . disr_expr { distance_from_explicit = 0 ; ty :: VariantDiscr :: Explicit (e . def_id . to_def_id ()) } else { ty :: VariantDiscr :: Relative (distance_from_explicit) } ; distance_from_explicit += 1 ; lower_variant (tcx , Some (v . def_id) , v . ident , discr , & v . data , AdtKind :: Enum , def_id ,) }) . collect () ; (AdtKind :: Enum , variants) } ItemKind :: Struct (ident , _ , def) | ItemKind :: Union (ident , _ , def) => { let adt_kind = match item . kind { ItemKind :: Struct (..) => AdtKind :: Struct , _ => AdtKind :: Union , } ; let variants = std :: iter :: once (lower_variant (tcx , None , * ident , ty :: VariantDiscr :: Relative (0) , def , adt_kind , def_id ,)) . collect () ; (adt_kind , variants) } _ => bug ! ("{:?} is not an ADT" , item . owner_id . def_id) , } ; tcx . mk_adt_def (def_id . to_def_id () , kind , variants , repr) }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for first_non_ascii_byte_fallback (function)
+macro_rules! Depcrate_asciifirst_non_ascii_byte_fallback {
+() => {
+// Module: crate::ascii
+// Provides: {"first_non_ascii_byte_fallback"}
+// Dependencies: {}
+# [cfg (any (test , miri , not (target_arch = "x86_64")))] fn first_non_ascii_byte_fallback (slice : & [u8]) -> usize { let start_ptr = slice . as_ptr () ; let end_ptr = slice [slice . len () ..] . as_ptr () ; let mut ptr = start_ptr ; unsafe { if slice . len () < USIZE_BYTES { return first_non_ascii_byte_slow (start_ptr , end_ptr , ptr) ; } let chunk = read_unaligned_usize (ptr) ; let mask = chunk & ASCII_MASK ; if mask != 0 { return first_non_ascii_byte_mask (mask) ; } ptr = ptr_add (ptr , USIZE_BYTES - (start_ptr as usize & ALIGN_MASK)) ; debug_assert ! (ptr > start_ptr) ; debug_assert ! (ptr_sub (end_ptr , USIZE_BYTES) >= start_ptr) ; if slice . len () >= FALLBACK_LOOP_SIZE { while ptr <= ptr_sub (end_ptr , FALLBACK_LOOP_SIZE) { debug_assert_eq ! (0 , (ptr as usize) % USIZE_BYTES) ; let a = * (ptr as * const usize) ; let b = * (ptr_add (ptr , USIZE_BYTES) as * const usize) ; if (a | b) & ASCII_MASK != 0 { # [inline (never)] unsafe fn findpos (start_ptr : * const u8 , ptr : * const u8 ,) -> usize { let a = * (ptr as * const usize) ; let b = * (ptr_add (ptr , USIZE_BYTES) as * const usize) ; let mut at = sub (ptr , start_ptr) ; let maska = a & ASCII_MASK ; if maska != 0 { return at + first_non_ascii_byte_mask (maska) ; } at += USIZE_BYTES ; let maskb = b & ASCII_MASK ; debug_assert ! (maskb != 0) ; return at + first_non_ascii_byte_mask (maskb) ; } return findpos (start_ptr , ptr) ; } ptr = ptr_add (ptr , FALLBACK_LOOP_SIZE) ; } } first_non_ascii_byte_slow (start_ptr , end_ptr , ptr) } }
+};
+}

@@ -1,0 +1,42 @@
+// Generated module macro for crate::dynamic
+macro_rules! Modcrate_dynamic {
+() => {
+        Depcrate_dynamicmacros!();
+        Depcrate_dynamicbase!();
+        Depcrate_dynamiccheck!();
+        Depcrate_dynamicdirective!();
+        Depcrate_dynamicr#enum!();
+        Depcrate_dynamicerror!();
+        Depcrate_dynamicfield!();
+        Depcrate_dynamicinput_object!();
+        Depcrate_dynamicinput_value!();
+        Depcrate_dynamicinterface!();
+        Depcrate_dynamicobject!();
+        Depcrate_dynamicrequest!();
+        Depcrate_dynamicresolve!();
+        Depcrate_dynamicscalar!();
+        Depcrate_dynamicschema!();
+        Depcrate_dynamicsubscription!();
+        Depcrate_dynamicr#type!();
+        Depcrate_dynamictype_ref!();
+        Depcrate_dynamicunion!();
+        Depcrate_dynamicvalue_accessor!();
+        Depcrate_dynamicuse_720!();
+        Depcrate_dynamicuse_721!();
+        Depcrate_dynamicuse_722!();
+        Depcrate_dynamicuse_723!();
+        Depcrate_dynamicuse_724!();
+        Depcrate_dynamicuse_725!();
+        Depcrate_dynamicuse_726!();
+        Depcrate_dynamicuse_727!();
+        Depcrate_dynamicuse_728!();
+        Depcrate_dynamicuse_729!();
+        Depcrate_dynamicuse_730!();
+        Depcrate_dynamicuse_731!();
+        Depcrate_dynamicuse_732!();
+        Depcrate_dynamicuse_733!();
+        Depcrate_dynamicuse_734!();
+        Depcrate_dynamicuse_735!();
+        Depcrate_dynamicuse_736!();
+    };
+}

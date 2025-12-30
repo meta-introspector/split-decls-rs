@@ -1,0 +1,9 @@
+// Generated macro for QueryResult (type)
+macro_rules! Depcrate_solveQueryResult {
+() => {
+// Module: crate::solve
+// Provides: {"QueryResult"}
+// Dependencies: {}
+# [doc = " The result of evaluating a canonical query."] # [doc = ""] # [doc = " FIXME: We use a different type than the existing canonical queries. This is because"] # [doc = " we need to add a `Certainty` for `overflow` and may want to restructure this code without"] # [doc = " having to worry about changes to currently used code. Once we've made progress on this"] # [doc = " solver, merge the two responses again."] pub type QueryResult < I > = Result < CanonicalResponse < I > , NoSolution > ;
+};
+}

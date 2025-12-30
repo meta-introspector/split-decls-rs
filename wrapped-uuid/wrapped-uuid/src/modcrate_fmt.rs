@@ -1,0 +1,39 @@
+// Generated module macro for crate::fmt
+macro_rules! Modcrate_fmt {
+() => {
+        Depcrate_fmtuse_52!();
+        Depcrate_fmtuse_53!();
+        Depcrate_fmtuse_54!();
+        Depcrate_fmtimpl_55!();
+        Depcrate_fmtimpl_56!();
+        Depcrate_fmtimpl_57!();
+        Depcrate_fmtimpl_58!();
+        Depcrate_fmtimpl_59!();
+        Depcrate_fmtimpl_60!();
+        Depcrate_fmtHyphenated!();
+        Depcrate_fmtSimple!();
+        Depcrate_fmtUrn!();
+        Depcrate_fmtBraced!();
+        Depcrate_fmtimpl_65!();
+        Depcrate_fmtUPPER!();
+        Depcrate_fmtLOWER!();
+        Depcrate_fmtformat_simple!();
+        Depcrate_fmtformat_hyphenated!();
+        Depcrate_fmtencode_simple!();
+        Depcrate_fmtencode_hyphenated!();
+        Depcrate_fmtencode_braced!();
+        Depcrate_fmtencode_urn!();
+        Depcrate_fmtimpl_74!();
+        Depcrate_fmtimpl_75!();
+        Depcrate_fmtimpl_76!();
+        Depcrate_fmtimpl_77!();
+        Depcrate_fmtimpl_78!();
+        Depcrate_fmtimpl_79!();
+        Depcrate_fmtimpl_80!();
+        Depcrate_fmtimpl_81!();
+        Depcrate_fmtimpl_fmt_traits!();
+        Depcrate_fmtimpl_fmt_from!();
+        Depcrate_fmtmacro_84!();
+        Depcrate_fmttests!();
+    };
+}

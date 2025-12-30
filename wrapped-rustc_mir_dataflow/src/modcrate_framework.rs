@@ -1,0 +1,41 @@
+// Generated module macro for crate::framework
+macro_rules! Modcrate_framework {
+() => {
+        Depcrate_frameworkuse_43!();
+        Depcrate_frameworkuse_44!();
+        Depcrate_frameworkuse_45!();
+        Depcrate_frameworkuse_46!();
+        Depcrate_frameworkuse_47!();
+        Depcrate_frameworkuse_48!();
+        Depcrate_frameworkuse_49!();
+        Depcrate_frameworkuse_50!();
+        Depcrate_frameworkuse_51!();
+        Depcrate_frameworkuse_52!();
+        Depcrate_frameworkcursor!();
+        Depcrate_frameworkdirection!();
+        Depcrate_frameworkfmt!();
+        Depcrate_frameworkgraphviz!();
+        Depcrate_frameworklattice!();
+        Depcrate_frameworkresults!();
+        Depcrate_frameworkvisitor!();
+        Depcrate_frameworkuse_169!();
+        Depcrate_frameworkuse_170!();
+        Depcrate_frameworkuse_171!();
+        Depcrate_frameworkuse_172!();
+        Depcrate_frameworkuse_173!();
+        Depcrate_frameworkuse_174!();
+        Depcrate_frameworkBitSetExt!();
+        Depcrate_frameworkimpl_176!();
+        Depcrate_frameworkimpl_177!();
+        Depcrate_frameworkAnalysis!();
+        Depcrate_frameworkGenKill!();
+        Depcrate_frameworkimpl_180!();
+        Depcrate_frameworkimpl_181!();
+        Depcrate_frameworkimpl_182!();
+        Depcrate_frameworkEffect!();
+        Depcrate_frameworkimpl_184!();
+        Depcrate_frameworkEffectIndex!();
+        Depcrate_frameworkimpl_186!();
+        Depcrate_frameworktests!();
+    };
+}

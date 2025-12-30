@@ -1,0 +1,41 @@
+// Generated module macro for crate::types
+macro_rules! Modcrate_types {
+() => {
+        Depcrate_typessealed!();
+        Depcrate_typesuse_218!();
+        Depcrate_typesuse_219!();
+        Depcrate_typesuse_220!();
+        Depcrate_typesuse_221!();
+        Depcrate_typesuse_222!();
+        Depcrate_typesuse_223!();
+        Depcrate_typesuse_224!();
+        Depcrate_typesRwFlags!();
+        Depcrate_typesuse_226!();
+        Depcrate_typesIORING_ZCRX_AREA_MASK!();
+        Depcrate_typesstatx!();
+        Depcrate_typesepoll_event!();
+        Depcrate_typesFd!();
+        Depcrate_typesFixed!();
+        Depcrate_typesmacro_232!();
+        Depcrate_typesmacro_233!();
+        Depcrate_typesmacro_234!();
+        Depcrate_typesOpenHow!();
+        Depcrate_typesimpl_236!();
+        Depcrate_typesTimespec!();
+        Depcrate_typesimpl_238!();
+        Depcrate_typesimpl_239!();
+        Depcrate_typesSubmitArgs!();
+        Depcrate_typesimpl_241!();
+        Depcrate_typesBufRingEntry!();
+        Depcrate_typesimpl_243!();
+        Depcrate_typesDestinationSlot!();
+        Depcrate_typesimpl_245!();
+        Depcrate_typesRecvMsgOut!();
+        Depcrate_typesimpl_247!();
+        Depcrate_typesCancelBuilder!();
+        Depcrate_typesimpl_249!();
+        Depcrate_typesFutexWaitV!();
+        Depcrate_typesimpl_251!();
+        Depcrate_typestests!();
+    };
+}

@@ -1,0 +1,55 @@
+// Generated module macro for crate::debuginfo
+macro_rules! Modcrate_debuginfo {
+() => {
+        Depcrate_debuginfouse_611!();
+        Depcrate_debuginfouse_612!();
+        Depcrate_debuginfouse_613!();
+        Depcrate_debuginfouse_614!();
+        Depcrate_debuginfouse_615!();
+        Depcrate_debuginfouse_616!();
+        Depcrate_debuginfouse_617!();
+        Depcrate_debuginfouse_618!();
+        Depcrate_debuginfouse_619!();
+        Depcrate_debuginfouse_620!();
+        Depcrate_debuginfouse_621!();
+        Depcrate_debuginfouse_622!();
+        Depcrate_debuginfouse_623!();
+        Depcrate_debuginfouse_624!();
+        Depcrate_debuginfouse_625!();
+        Depcrate_debuginfouse_626!();
+        Depcrate_debuginfouse_627!();
+        Depcrate_debuginfouse_628!();
+        Depcrate_debuginfouse_629!();
+        Depcrate_debuginfouse_630!();
+        Depcrate_debuginfouse_631!();
+        Depcrate_debuginfouse_632!();
+        Depcrate_debuginfouse_633!();
+        Depcrate_debuginfouse_634!();
+        Depcrate_debuginfouse_635!();
+        Depcrate_debuginfouse_636!();
+        Depcrate_debuginfouse_637!();
+        Depcrate_debuginfouse_638!();
+        Depcrate_debuginfouse_639!();
+        Depcrate_debuginfouse_640!();
+        Depcrate_debuginfouse_641!();
+        Depcrate_debuginfouse_642!();
+        Depcrate_debuginfocreate_scope_map!();
+        Depcrate_debuginfodwarf_const!();
+        Depcrate_debuginfogdb!();
+        Depcrate_debuginfometadata!();
+        Depcrate_debuginfonamespace!();
+        Depcrate_debuginfoutils!();
+        Depcrate_debuginfouse_803!();
+        Depcrate_debuginfouse_804!();
+        Depcrate_debuginfoDW_TAG_auto_variable!();
+        Depcrate_debuginfoDW_TAG_arg_variable!();
+        Depcrate_debuginfoCodegenUnitDebugContext!();
+        Depcrate_debuginfoimpl_808!();
+        Depcrate_debuginfofinalize!();
+        Depcrate_debuginfoimpl_810!();
+        Depcrate_debuginfoimpl_811!();
+        Depcrate_debuginfoDebugLoc!();
+        Depcrate_debuginfoimpl_813!();
+        Depcrate_debuginfoimpl_814!();
+    };
+}

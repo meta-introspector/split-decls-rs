@@ -1,0 +1,40 @@
+// Generated module macro for crate::diagnostics::region_errors
+macro_rules! Modcrate_diagnostics_region_errors {
+() => {
+        Depcrate_diagnostics_region_errorsuse_439!();
+        Depcrate_diagnostics_region_errorsuse_440!();
+        Depcrate_diagnostics_region_errorsuse_441!();
+        Depcrate_diagnostics_region_errorsuse_442!();
+        Depcrate_diagnostics_region_errorsuse_443!();
+        Depcrate_diagnostics_region_errorsuse_444!();
+        Depcrate_diagnostics_region_errorsuse_445!();
+        Depcrate_diagnostics_region_errorsuse_446!();
+        Depcrate_diagnostics_region_errorsuse_447!();
+        Depcrate_diagnostics_region_errorsuse_448!();
+        Depcrate_diagnostics_region_errorsuse_449!();
+        Depcrate_diagnostics_region_errorsuse_450!();
+        Depcrate_diagnostics_region_errorsuse_451!();
+        Depcrate_diagnostics_region_errorsuse_452!();
+        Depcrate_diagnostics_region_errorsuse_453!();
+        Depcrate_diagnostics_region_errorsuse_454!();
+        Depcrate_diagnostics_region_errorsuse_455!();
+        Depcrate_diagnostics_region_errorsuse_456!();
+        Depcrate_diagnostics_region_errorsuse_457!();
+        Depcrate_diagnostics_region_errorsuse_458!();
+        Depcrate_diagnostics_region_errorsuse_459!();
+        Depcrate_diagnostics_region_errorsuse_460!();
+        Depcrate_diagnostics_region_errorsuse_461!();
+        Depcrate_diagnostics_region_errorsuse_462!();
+        Depcrate_diagnostics_region_errorsuse_463!();
+        Depcrate_diagnostics_region_errorsuse_464!();
+        Depcrate_diagnostics_region_errorsuse_465!();
+        Depcrate_diagnostics_region_errorsuse_466!();
+        Depcrate_diagnostics_region_errorsimpl_467!();
+        Depcrate_diagnostics_region_errorsRegionErrors!();
+        Depcrate_diagnostics_region_errorsimpl_469!();
+        Depcrate_diagnostics_region_errorsimpl_470!();
+        Depcrate_diagnostics_region_errorsRegionErrorKind!();
+        Depcrate_diagnostics_region_errorsErrorConstraintInfo!();
+        Depcrate_diagnostics_region_errorsimpl_473!();
+    };
+}

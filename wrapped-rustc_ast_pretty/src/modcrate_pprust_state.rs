@@ -1,0 +1,47 @@
+// Generated module macro for crate::pprust::state
+macro_rules! Modcrate_pprust_state {
+() => {
+        Depcrate_pprust_stateexpr!();
+        Depcrate_pprust_statefixup!();
+        Depcrate_pprust_stateitem!();
+        Depcrate_pprust_stateuse_42!();
+        Depcrate_pprust_stateuse_43!();
+        Depcrate_pprust_stateuse_44!();
+        Depcrate_pprust_stateuse_45!();
+        Depcrate_pprust_stateuse_46!();
+        Depcrate_pprust_stateuse_47!();
+        Depcrate_pprust_stateuse_48!();
+        Depcrate_pprust_stateuse_49!();
+        Depcrate_pprust_stateuse_50!();
+        Depcrate_pprust_stateuse_51!();
+        Depcrate_pprust_stateuse_52!();
+        Depcrate_pprust_stateuse_53!();
+        Depcrate_pprust_stateuse_54!();
+        Depcrate_pprust_stateuse_55!();
+        Depcrate_pprust_stateuse_56!();
+        Depcrate_pprust_stateMacHeader!();
+        Depcrate_pprust_stateAnnNode!();
+        Depcrate_pprust_statePpAnn!();
+        Depcrate_pprust_stateNoAnn!();
+        Depcrate_pprust_stateimpl_61!();
+        Depcrate_pprust_stateComments!();
+        Depcrate_pprust_stateall_whitespace!();
+        Depcrate_pprust_statetrim_whitespace_prefix!();
+        Depcrate_pprust_statesplit_block_comment_into_lines!();
+        Depcrate_pprust_stategather_comments!();
+        Depcrate_pprust_stateimpl_67!();
+        Depcrate_pprust_stateState!();
+        Depcrate_pprust_stateINDENT_UNIT!();
+        Depcrate_pprust_stateprint_crate!();
+        Depcrate_pprust_stateprint_crate_as_interface!();
+        Depcrate_pprust_stateprint_crate_inner!();
+        Depcrate_pprust_statespace_between!();
+        Depcrate_pprust_statedoc_comment_to_string!();
+        Depcrate_pprust_stateliteral_to_string!();
+        Depcrate_pprust_stateimpl_76!();
+        Depcrate_pprust_stateimpl_77!();
+        Depcrate_pprust_statePrintState!();
+        Depcrate_pprust_stateimpl_79!();
+        Depcrate_pprust_stateimpl_80!();
+    };
+}

@@ -1,0 +1,9 @@
+// Generated macro for impl_866 (impl)
+macro_rules! Depcrate_region_infer_graphvizimpl_866 {
+() => {
+// Module: crate::region_infer::graphviz
+// Provides: {"impl_866"}
+// Dependencies: {}
+impl < 'a , 'this , 'tcx > dot :: GraphWalk < 'this > for SccConstraints < 'a , 'tcx > { type Node = ConstraintSccIndex ; type Edge = (ConstraintSccIndex , ConstraintSccIndex) ; fn nodes (& 'this self) -> dot :: Nodes < 'this , ConstraintSccIndex > { let vids : Vec < ConstraintSccIndex > = self . regioncx . constraint_sccs . all_sccs () . collect () ; vids . into () } fn edges (& 'this self) -> dot :: Edges < 'this , (ConstraintSccIndex , ConstraintSccIndex) > { let edges : Vec < _ > = self . regioncx . constraint_sccs . all_sccs () . flat_map (| scc_a | { self . regioncx . constraint_sccs . successors (scc_a) . iter () . map (move | & scc_b | (scc_a , scc_b)) }) . collect () ; edges . into () } fn source (& 'this self , edge : & (ConstraintSccIndex , ConstraintSccIndex)) -> ConstraintSccIndex { edge . 0 } fn target (& 'this self , edge : & (ConstraintSccIndex , ConstraintSccIndex)) -> ConstraintSccIndex { edge . 1 } }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for start_codegen (function)
+macro_rules! Depcrate_passesstart_codegen {
+() => {
+// Module: crate::passes
+// Provides: {"start_codegen"}
+// Dependencies: {}
+# [doc = " Runs the codegen backend, after which the AST and analysis can"] # [doc = " be discarded."] pub (crate) fn start_codegen < 'tcx > (codegen_backend : & dyn CodegenBackend , tcx : TyCtxt < 'tcx > ,) -> (Box < dyn Any > , EncodedMetadata) { tcx . sess . timings . start_section (tcx . sess . dcx () , TimingSection :: Codegen) ; if let Some ((def_id , _)) = tcx . entry_fn (()) && tcx . has_attr (def_id , sym :: rustc_delayed_bug_from_inside_query) { tcx . ensure_ok () . trigger_delayed_bug (def_id) ; } if tcx . sess . opts . output_types . should_codegen () { rustc_symbol_mangling :: test :: report_symbol_names (tcx) ; } if let Some (guar) = tcx . sess . dcx () . has_errors_or_delayed_bugs () { guar . raise_fatal () ; } info ! ("Pre-codegen\n{:?}" , tcx . debug_stats ()) ; let metadata = rustc_metadata :: fs :: encode_and_write_metadata (tcx) ; let codegen = tcx . sess . time ("codegen_crate" , move | | codegen_backend . codegen_crate (tcx)) ; info ! ("Post-codegen\n{:?}" , tcx . debug_stats ()) ; if tcx . sess . opts . unstable_opts . print_type_sizes { tcx . sess . code_stats . print_type_sizes () ; } (codegen , metadata) }
+};
+}

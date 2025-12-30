@@ -1,0 +1,9 @@
+// Generated macro for normalize_canonicalized_projection_ty (function)
+macro_rules! Depcrate_normalize_projection_tynormalize_canonicalized_projection_ty {
+() => {
+// Module: crate::normalize_projection_ty
+// Provides: {"normalize_canonicalized_projection_ty"}
+// Dependencies: {}
+fn normalize_canonicalized_projection_ty < 'tcx > (tcx : TyCtxt < 'tcx > , goal : CanonicalAliasGoal < 'tcx > ,) -> Result < & 'tcx Canonical < 'tcx , QueryResponse < 'tcx , NormalizationResult < 'tcx > > > , NoSolution > { debug ! ("normalize_canonicalized_projection_ty(goal={:#?})" , goal) ; tcx . infer_ctxt () . enter_canonical_trait_query (& goal , | ocx , ParamEnvAnd { param_env , value : goal } | { debug_assert ! (! ocx . infcx . next_trait_solver ()) ; let selcx = & mut SelectionContext :: new (ocx . infcx) ; let cause = ObligationCause :: dummy () ; let mut obligations = PredicateObligations :: new () ; let answer = traits :: normalize_projection_term (selcx , param_env , goal . into () , cause , 0 , & mut obligations ,) ; ocx . register_obligations (obligations) ; let errors = ocx . select_where_possible () ; if ! errors . is_empty () { if ! tcx . sess . opts . actually_rustdoc { for error in & errors { if let ScrubbedTraitError :: Cycle (cycle) = & error { ocx . infcx . err_ctxt () . report_overflow_obligation_cycle (cycle) ; } } } return Err (NoSolution) ; } Ok (NormalizationResult { normalized_ty : answer . expect_type () }) } ,) }
+};
+}

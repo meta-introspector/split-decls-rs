@@ -1,0 +1,9 @@
+// Generated macro for Transparency (enum)
+macro_rules! Depcrate_hygieneTransparency {
+() => {
+// Module: crate::hygiene
+// Provides: {"Transparency"}
+// Dependencies: {}
+# [doc = " A property of a macro expansion that determines how identifiers"] # [doc = " produced by that expansion are resolved."] # [derive (Copy , Clone , PartialEq , Eq , PartialOrd , Hash , Debug , Encodable , Decodable)] # [derive (HashStable_Generic)] pub enum Transparency { # [doc = " Identifier produced by a transparent expansion is always resolved at call-site."] # [doc = " Call-site spans in procedural macros, hygiene opt-out in `macro` should use this."] Transparent , # [doc = " Identifier produced by a semi-opaque expansion may be resolved"] # [doc = " either at call-site or at definition-site."] # [doc = " If it's a local variable, label or `$crate` then it's resolved at def-site."] # [doc = " Otherwise it's resolved at call-site."] # [doc = " `macro_rules` macros behave like this, built-in macros currently behave like this too,"] # [doc = " but that's an implementation detail."] SemiOpaque , # [doc = " Identifier produced by an opaque expansion is always resolved at definition-site."] # [doc = " Def-site spans in procedural macros, identifiers from `macro` by default use this."] Opaque , }
+};
+}

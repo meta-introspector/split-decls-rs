@@ -1,0 +1,45 @@
+// Generated module macro for crate::str
+macro_rules! Modcrate_str {
+() => {
+        Depcrate_struse_1368!();
+        Depcrate_struse_1369!();
+        Depcrate_struse_1370!();
+        Depcrate_struse_1371!();
+        Depcrate_struse_1372!();
+        Depcrate_struse_1373!();
+        Depcrate_struse_1374!();
+        Depcrate_struse_1375!();
+        Depcrate_struse_1376!();
+        Depcrate_struse_1377!();
+        Depcrate_struse_1378!();
+        Depcrate_struse_1379!();
+        Depcrate_struse_1380!();
+        Depcrate_struse_1381!();
+        Depcrate_struse_1382!();
+        Depcrate_struse_1383!();
+        Depcrate_struse_1384!();
+        Depcrate_struse_1385!();
+        Depcrate_struse_1386!();
+        Depcrate_struse_1387!();
+        Depcrate_struse_1388!();
+        Depcrate_struse_1389!();
+        Depcrate_struse_1390!();
+        Depcrate_struse_1391!();
+        Depcrate_struse_1392!();
+        Depcrate_struse_1393!();
+        Depcrate_struse_1394!();
+        Depcrate_struse_1395!();
+        Depcrate_strimpl_1396!();
+        Depcrate_strimpl_1397!();
+        Depcrate_strspecialize_for_lengths!();
+        Depcrate_strcopy_slice_and_advance!();
+        Depcrate_strjoin_generic_copy!();
+        Depcrate_strimpl_1401!();
+        Depcrate_strimpl_1402!();
+        Depcrate_strimpl_1403!();
+        Depcrate_strimpl_1404!();
+        Depcrate_strfrom_boxed_utf8_unchecked!();
+        Depcrate_strconvert_while_ascii!();
+        Depcrate_strreplace_ascii!();
+    };
+}

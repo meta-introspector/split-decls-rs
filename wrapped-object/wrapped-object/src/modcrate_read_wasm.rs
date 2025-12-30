@@ -1,0 +1,49 @@
+// Generated module macro for crate::read::wasm
+macro_rules! Modcrate_read_wasm {
+() => {
+        Depcrate_read_wasmuse_1066!();
+        Depcrate_read_wasmuse_1067!();
+        Depcrate_read_wasmuse_1068!();
+        Depcrate_read_wasmuse_1069!();
+        Depcrate_read_wasmuse_1070!();
+        Depcrate_read_wasmuse_1071!();
+        Depcrate_read_wasmuse_1072!();
+        Depcrate_read_wasmSectionId!();
+        Depcrate_read_wasmMAX_SECTION_ID!();
+        Depcrate_read_wasmWasmFile!();
+        Depcrate_read_wasmSectionHeader!();
+        Depcrate_read_wasmLocalFunctionKind!();
+        Depcrate_read_wasmimpl_1078!();
+        Depcrate_read_wasmimpl_1079!();
+        Depcrate_read_wasmimpl_1080!();
+        Depcrate_read_wasmimpl_1081!();
+        Depcrate_read_wasmWasmSegmentIterator!();
+        Depcrate_read_wasmimpl_1083!();
+        Depcrate_read_wasmWasmSegment!();
+        Depcrate_read_wasmimpl_1085!();
+        Depcrate_read_wasmimpl_1086!();
+        Depcrate_read_wasmWasmSectionIterator!();
+        Depcrate_read_wasmimpl_1088!();
+        Depcrate_read_wasmWasmSection!();
+        Depcrate_read_wasmimpl_1090!();
+        Depcrate_read_wasmimpl_1091!();
+        Depcrate_read_wasmWasmComdatIterator!();
+        Depcrate_read_wasmimpl_1093!();
+        Depcrate_read_wasmWasmComdat!();
+        Depcrate_read_wasmimpl_1095!();
+        Depcrate_read_wasmimpl_1096!();
+        Depcrate_read_wasmWasmComdatSectionIterator!();
+        Depcrate_read_wasmimpl_1098!();
+        Depcrate_read_wasmWasmSymbolTable!();
+        Depcrate_read_wasmimpl_1100!();
+        Depcrate_read_wasmimpl_1101!();
+        Depcrate_read_wasmWasmSymbolIterator!();
+        Depcrate_read_wasmimpl_1103!();
+        Depcrate_read_wasmWasmSymbol!();
+        Depcrate_read_wasmWasmSymbolInternal!();
+        Depcrate_read_wasmimpl_1106!();
+        Depcrate_read_wasmimpl_1107!();
+        Depcrate_read_wasmWasmRelocationIterator!();
+        Depcrate_read_wasmimpl_1109!();
+    };
+}

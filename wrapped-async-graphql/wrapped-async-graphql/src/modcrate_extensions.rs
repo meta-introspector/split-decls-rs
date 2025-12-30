@@ -1,0 +1,46 @@
+// Generated module macro for crate::extensions
+macro_rules! Modcrate_extensions {
+() => {
+        Depcrate_extensionsanalyzer!();
+        Depcrate_extensionsapollo_persisted_queries!();
+        Depcrate_extensionsapollo_tracing!();
+        Depcrate_extensionslogger!();
+        Depcrate_extensionsopentelemetry!();
+        Depcrate_extensionstracing!();
+        Depcrate_extensionsuse_814!();
+        Depcrate_extensionsuse_815!();
+        Depcrate_extensionsuse_816!();
+        Depcrate_extensionsuse_817!();
+        Depcrate_extensionsuse_818!();
+        Depcrate_extensionsuse_819!();
+        Depcrate_extensionsuse_820!();
+        Depcrate_extensionsuse_821!();
+        Depcrate_extensionsExtensionContext!();
+        Depcrate_extensionsimpl_823!();
+        Depcrate_extensionsimpl_824!();
+        Depcrate_extensionsResolveInfo!();
+        Depcrate_extensionsRequestFut!();
+        Depcrate_extensionsParseFut!();
+        Depcrate_extensionsValidationFut!();
+        Depcrate_extensionsExecuteFutFactory!();
+        Depcrate_extensionsResolveFut!();
+        Depcrate_extensionsNextRequest!();
+        Depcrate_extensionsimpl_832!();
+        Depcrate_extensionsNextSubscribe!();
+        Depcrate_extensionsimpl_834!();
+        Depcrate_extensionsNextPrepareRequest!();
+        Depcrate_extensionsimpl_836!();
+        Depcrate_extensionsNextParseQuery!();
+        Depcrate_extensionsimpl_838!();
+        Depcrate_extensionsNextValidation!();
+        Depcrate_extensionsimpl_840!();
+        Depcrate_extensionsNextExecute!();
+        Depcrate_extensionsimpl_842!();
+        Depcrate_extensionsNextResolve!();
+        Depcrate_extensionsimpl_844!();
+        Depcrate_extensionsExtension!();
+        Depcrate_extensionsExtensionFactory!();
+        Depcrate_extensionsExtensions!();
+        Depcrate_extensionsimpl_848!();
+    };
+}

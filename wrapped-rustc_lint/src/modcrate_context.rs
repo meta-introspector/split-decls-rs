@@ -1,0 +1,53 @@
+// Generated module macro for crate::context
+macro_rules! Modcrate_context {
+() => {
+        Depcrate_contextuse_168!();
+        Depcrate_contextuse_169!();
+        Depcrate_contextuse_170!();
+        Depcrate_contextuse_171!();
+        Depcrate_contextuse_172!();
+        Depcrate_contextuse_173!();
+        Depcrate_contextuse_174!();
+        Depcrate_contextuse_175!();
+        Depcrate_contextuse_176!();
+        Depcrate_contextuse_177!();
+        Depcrate_contextuse_178!();
+        Depcrate_contextuse_179!();
+        Depcrate_contextuse_180!();
+        Depcrate_contextuse_181!();
+        Depcrate_contextuse_182!();
+        Depcrate_contextuse_183!();
+        Depcrate_contextuse_184!();
+        Depcrate_contextuse_185!();
+        Depcrate_contextuse_186!();
+        Depcrate_contextuse_187!();
+        Depcrate_contextuse_188!();
+        Depcrate_contextuse_189!();
+        Depcrate_contextuse_190!();
+        Depcrate_contextuse_191!();
+        Depcrate_contextuse_192!();
+        Depcrate_contextuse_193!();
+        Depcrate_contextuse_194!();
+        Depcrate_contextuse_195!();
+        Depcrate_contextEarlyLintPassFactory!();
+        Depcrate_contextLateLintPassFactory!();
+        Depcrate_contextLintStore!();
+        Depcrate_contextimpl_199!();
+        Depcrate_contextTargetLint!();
+        Depcrate_contextLintAlias!();
+        Depcrate_contextLintGroup!();
+        Depcrate_contextCheckLintNameResult!();
+        Depcrate_contextimpl_204!();
+        Depcrate_contextLateContext!();
+        Depcrate_contextEarlyContext!();
+        Depcrate_contextLintContext!();
+        Depcrate_contextimpl_208!();
+        Depcrate_contextimpl_209!();
+        Depcrate_contextimpl_210!();
+        Depcrate_contextimpl_211!();
+        Depcrate_contextimpl_212!();
+        Depcrate_contextimpl_213!();
+        Depcrate_contextimpl_214!();
+        Depcrate_contextimpl_215!();
+    };
+}

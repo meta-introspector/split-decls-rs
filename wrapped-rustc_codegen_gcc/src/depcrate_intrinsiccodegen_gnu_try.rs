@@ -1,0 +1,9 @@
+// Generated macro for codegen_gnu_try (function)
+macro_rules! Depcrate_intrinsiccodegen_gnu_try {
+() => {
+// Module: crate::intrinsic
+// Provides: {"codegen_gnu_try"}
+// Dependencies: {}
+# [cfg (feature = "master")] fn codegen_gnu_try < 'gcc , 'tcx > (bx : & mut Builder < '_ , 'gcc , 'tcx > , try_func : RValue < 'gcc > , data : RValue < 'gcc > , catch_func : RValue < 'gcc > , dest : PlaceRef < 'tcx , RValue < 'gcc > > ,) { let cx : & CodegenCx < 'gcc , '_ > = bx . cx ; let (llty , func) = get_rust_try_fn (cx , & mut | mut bx | { let then = bx . append_sibling_block ("then") ; let catch = bx . append_sibling_block ("catch") ; let func = bx . current_func () ; let try_func = func . get_param (0) . to_rvalue () ; let data = func . get_param (1) . to_rvalue () ; let catch_func = func . get_param (2) . to_rvalue () ; let try_func_ty = bx . type_func (& [bx . type_i8p ()] , bx . type_void ()) ; let current_block = bx . block ; bx . switch_to_block (then) ; bx . ret (bx . const_i32 (0)) ; bx . switch_to_block (catch) ; bx . set_personality_fn (bx . eh_personality ()) ; let eh_pointer_builtin = bx . cx . context . get_target_builtin_function ("__builtin_eh_pointer") ; let zero = bx . cx . context . new_rvalue_zero (bx . int_type) ; let ptr = bx . cx . context . new_call (None , eh_pointer_builtin , & [zero]) ; let catch_ty = bx . type_func (& [bx . type_i8p () , bx . type_i8p ()] , bx . type_void ()) ; bx . call (catch_ty , None , None , catch_func , & [data , ptr] , None , None) ; bx . ret (bx . const_i32 (1)) ; bx . switch_to_block (current_block) ; bx . invoke (try_func_ty , None , None , try_func , & [data] , then , catch , None , None) ; }) ; let func = unsafe { std :: mem :: transmute :: < Function < 'gcc > , RValue < 'gcc > > (func) } ; let ret = bx . call (llty , None , None , func , & [try_func , data , catch_func] , None , None) ; OperandValue :: Immediate (ret) . store (bx , dest) ; }
+};
+}

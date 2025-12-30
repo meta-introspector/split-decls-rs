@@ -1,0 +1,39 @@
+// Generated module macro for crate::string
+macro_rules! Modcrate_string {
+() => {
+        Depcrate_stringuse_159!();
+        Depcrate_stringuse_160!();
+        Depcrate_stringuse_161!();
+        Depcrate_stringuse_162!();
+        Depcrate_stringuse_163!();
+        Depcrate_stringStrExt!();
+        Depcrate_stringStrSlice!();
+        Depcrate_stringimpl_166!();
+        Depcrate_stringimpl_167!();
+        Depcrate_stringPrefixes!();
+        Depcrate_stringimpl_169!();
+        Depcrate_stringSuffixes!();
+        Depcrate_stringimpl_171!();
+        Depcrate_stringSubstrings!();
+        Depcrate_stringimpl_173!();
+        Depcrate_stringStringExt!();
+        Depcrate_stringimpl_175!();
+        Depcrate_stringStrChunksWindows!();
+        Depcrate_stringimpl_177!();
+        Depcrate_stringCharChunks!();
+        Depcrate_stringimpl_179!();
+        Depcrate_stringimpl_180!();
+        Depcrate_stringCharWindows!();
+        Depcrate_stringimpl_182!();
+        Depcrate_stringchar_get!();
+        Depcrate_stringimpl_184!();
+        Depcrate_stringCharStr!();
+        Depcrate_stringimpl_186!();
+        Depcrate_stringimpl_187!();
+        Depcrate_stringtest_char_str!();
+        Depcrate_stringstr_windows!();
+        Depcrate_stringstr_windows_not_0!();
+        Depcrate_stringtest_string_ext!();
+        Depcrate_stringtest_slice!();
+    };
+}

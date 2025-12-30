@@ -1,0 +1,9 @@
+// Generated macro for AssocItemKind (enum)
+macro_rules! Depcrate_astAssocItemKind {
+() => {
+// Module: crate::ast
+// Provides: {"AssocItemKind"}
+// Dependencies: {}
+# [doc = " Represents associated item kinds."] # [doc = ""] # [doc = " The term \"provided\" in the variants below refers to the item having a default"] # [doc = " definition / body. Meanwhile, a \"required\" item lacks a definition / body."] # [doc = " In an implementation, all items must be provided."] # [doc = " The `Option`s below denote the bodies, where `Some(_)`"] # [doc = " means \"provided\" and conversely `None` means \"required\"."] # [derive (Clone , Encodable , Decodable , Debug)] pub enum AssocItemKind { # [doc = " An associated constant, `const $ident: $ty $def?;` where `def ::= \"=\" $expr? ;`."] # [doc = " If `def` is parsed, then the constant is provided, and otherwise required."] Const (Box < ConstItem >) , # [doc = " An associated function."] Fn (Box < Fn >) , # [doc = " An associated type."] Type (Box < TyAlias >) , # [doc = " A macro expanding to associated items."] MacCall (Box < MacCall >) , # [doc = " An associated delegation item."] Delegation (Box < Delegation >) , # [doc = " An associated list or glob delegation item."] DelegationMac (Box < DelegationMac >) , }
+};
+}

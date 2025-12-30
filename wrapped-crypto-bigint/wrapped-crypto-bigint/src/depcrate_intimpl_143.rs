@@ -1,0 +1,9 @@
+// Generated macro for impl_143 (impl)
+macro_rules! Depcrate_intimpl_143 {
+() => {
+// Module: crate::int
+// Provides: {"impl_143"}
+// Dependencies: {}
+impl < const LIMBS : usize > num_traits :: One for Int < LIMBS > { # [inline (always)] fn one () -> Self { Self :: ONE } fn is_one (& self) -> bool { self . 0 . ct_eq (& Self :: ONE . 0) . into () } }
+};
+}

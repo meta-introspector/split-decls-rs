@@ -1,0 +1,39 @@
+// Generated module macro for crate::read::elf::symbol
+macro_rules! Modcrate_read_elf_symbol {
+() => {
+        Depcrate_read_elf_symboluse_454!();
+        Depcrate_read_elf_symboluse_455!();
+        Depcrate_read_elf_symboluse_456!();
+        Depcrate_read_elf_symboluse_457!();
+        Depcrate_read_elf_symboluse_458!();
+        Depcrate_read_elf_symboluse_459!();
+        Depcrate_read_elf_symboluse_460!();
+        Depcrate_read_elf_symboluse_461!();
+        Depcrate_read_elf_symboluse_462!();
+        Depcrate_read_elf_symboluse_463!();
+        Depcrate_read_elf_symboluse_464!();
+        Depcrate_read_elf_symbolSymbolTable!();
+        Depcrate_read_elf_symbolimpl_466!();
+        Depcrate_read_elf_symbolimpl_467!();
+        Depcrate_read_elf_symbolElfSymbolTable32!();
+        Depcrate_read_elf_symbolElfSymbolTable64!();
+        Depcrate_read_elf_symbolElfSymbolTable!();
+        Depcrate_read_elf_symbolimpl_471!();
+        Depcrate_read_elf_symbolimpl_472!();
+        Depcrate_read_elf_symbolElfSymbolIterator32!();
+        Depcrate_read_elf_symbolElfSymbolIterator64!();
+        Depcrate_read_elf_symbolElfSymbolIterator!();
+        Depcrate_read_elf_symbolimpl_476!();
+        Depcrate_read_elf_symbolimpl_477!();
+        Depcrate_read_elf_symbolimpl_478!();
+        Depcrate_read_elf_symbolElfSymbol32!();
+        Depcrate_read_elf_symbolElfSymbol64!();
+        Depcrate_read_elf_symbolElfSymbol!();
+        Depcrate_read_elf_symbolimpl_482!();
+        Depcrate_read_elf_symbolimpl_483!();
+        Depcrate_read_elf_symbolimpl_484!();
+        Depcrate_read_elf_symbolSym!();
+        Depcrate_read_elf_symbolimpl_486!();
+        Depcrate_read_elf_symbolimpl_487!();
+    };
+}

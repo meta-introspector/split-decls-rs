@@ -1,0 +1,9 @@
+// Generated macro for CrateType (enum)
+macro_rules! DepcrateCrateType {
+() => {
+// Module: crate
+// Provides: {"CrateType"}
+// Dependencies: {}
+# [doc = " Similar to `kind`, but only reports the"] # [doc = " [Cargo crate types](https://doc.rust-lang.org/cargo/reference/cargo-targets.html#the-crate-type-field):"] # [doc = ""] # [doc = " `bin`, `lib`, `rlib`, `dylib`, `cdylib`, `staticlib`, `proc-macro`."] # [doc = " Everything that's not a proc macro or a library of some kind is reported as \"bin\"."] # [doc = ""] # [doc = " Other possible values may be added in the future."] # [derive (Clone , Serialize , Deserialize , Debug , PartialEq , Eq , Hash , PartialOrd , Ord)] # [non_exhaustive] pub enum CrateType { # [doc = " Binary executable target"] # [serde (rename = "bin")] Bin , # [doc = " Dynamic system library target"] # [serde (rename = "cdylib")] CDyLib , # [doc = " Dynamic Rust library target"] # [serde (rename = "dylib")] DyLib , # [doc = " Rust library"] # [serde (rename = "lib")] Lib , # [doc = " Procedural Macro"] # [serde (rename = "proc-macro")] ProcMacro , # [doc = " Rust library for use as an intermediate artifact"] # [serde (rename = "rlib")] RLib , # [doc = " Static system library"] # [serde (rename = "staticlib")] StaticLib , # [doc = " Unkown type"] # [serde (untagged)] Unknown (String) , }
+};
+}

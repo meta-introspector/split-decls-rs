@@ -1,0 +1,55 @@
+// Generated module macro for crate::tracked_struct
+macro_rules! Modcrate_tracked_struct {
+() => {
+        Depcrate_tracked_structuse_532!();
+        Depcrate_tracked_structuse_533!();
+        Depcrate_tracked_structuse_534!();
+        Depcrate_tracked_structuse_535!();
+        Depcrate_tracked_structuse_536!();
+        Depcrate_tracked_structuse_537!();
+        Depcrate_tracked_structuse_538!();
+        Depcrate_tracked_structuse_539!();
+        Depcrate_tracked_structuse_540!();
+        Depcrate_tracked_structuse_541!();
+        Depcrate_tracked_structuse_542!();
+        Depcrate_tracked_structuse_543!();
+        Depcrate_tracked_structuse_544!();
+        Depcrate_tracked_structuse_545!();
+        Depcrate_tracked_structuse_546!();
+        Depcrate_tracked_structuse_547!();
+        Depcrate_tracked_structuse_548!();
+        Depcrate_tracked_structuse_549!();
+        Depcrate_tracked_structuse_550!();
+        Depcrate_tracked_structuse_551!();
+        Depcrate_tracked_structuse_552!();
+        Depcrate_tracked_structuse_553!();
+        Depcrate_tracked_structuse_554!();
+        Depcrate_tracked_structuse_555!();
+        Depcrate_tracked_structtracked_field!();
+        Depcrate_tracked_structConfiguration!();
+        Depcrate_tracked_structJarImpl!();
+        Depcrate_tracked_structimpl_559!();
+        Depcrate_tracked_structimpl_560!();
+        Depcrate_tracked_structTrackedStructInDb!();
+        Depcrate_tracked_structIngredientImpl!();
+        Depcrate_tracked_structIdentity!();
+        Depcrate_tracked_structimpl_564!();
+        Depcrate_tracked_structIdentityHash!();
+        Depcrate_tracked_structIdentityMap!();
+        Depcrate_tracked_structimpl_567!();
+        Depcrate_tracked_structTrackedEntry!();
+        Depcrate_tracked_structValue!();
+        Depcrate_tracked_structDisambiguator!();
+        Depcrate_tracked_structDisambiguatorMap!();
+        Depcrate_tracked_structimpl_572!();
+        Depcrate_tracked_structimpl_573!();
+        Depcrate_tracked_structStructEntry!();
+        Depcrate_tracked_structimpl_575!();
+        Depcrate_tracked_structimpl_576!();
+        Depcrate_tracked_structimpl_577!();
+        Depcrate_tracked_structimpl_578!();
+        Depcrate_tracked_structimpl_579!();
+        Depcrate_tracked_structtests!();
+        Depcrate_tracked_structpersistence!();
+    };
+}

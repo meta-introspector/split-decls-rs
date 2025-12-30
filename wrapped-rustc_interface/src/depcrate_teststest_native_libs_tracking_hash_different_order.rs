@@ -1,0 +1,9 @@
+// Generated macro for test_native_libs_tracking_hash_different_order (function)
+macro_rules! Depcrate_teststest_native_libs_tracking_hash_different_order {
+() => {
+// Module: crate::tests
+// Provides: {"test_native_libs_tracking_hash_different_order"}
+// Dependencies: {}
+# [test] fn test_native_libs_tracking_hash_different_order () { let mut v1 = Options :: default () ; let mut v2 = Options :: default () ; let mut v3 = Options :: default () ; v1 . libs = vec ! [NativeLib { name : String :: from ("a") , new_name : None , kind : NativeLibKind :: Static { bundle : None , whole_archive : None } , verbatim : None , } , NativeLib { name : String :: from ("b") , new_name : None , kind : NativeLibKind :: Framework { as_needed : None } , verbatim : None , } , NativeLib { name : String :: from ("c") , new_name : None , kind : NativeLibKind :: Unspecified , verbatim : None , } ,] ; v2 . libs = vec ! [NativeLib { name : String :: from ("b") , new_name : None , kind : NativeLibKind :: Framework { as_needed : None } , verbatim : None , } , NativeLib { name : String :: from ("a") , new_name : None , kind : NativeLibKind :: Static { bundle : None , whole_archive : None } , verbatim : None , } , NativeLib { name : String :: from ("c") , new_name : None , kind : NativeLibKind :: Unspecified , verbatim : None , } ,] ; v3 . libs = vec ! [NativeLib { name : String :: from ("c") , new_name : None , kind : NativeLibKind :: Unspecified , verbatim : None , } , NativeLib { name : String :: from ("a") , new_name : None , kind : NativeLibKind :: Static { bundle : None , whole_archive : None } , verbatim : None , } , NativeLib { name : String :: from ("b") , new_name : None , kind : NativeLibKind :: Framework { as_needed : None } , verbatim : None , } ,] ; assert_different_hash (& v1 , & v2) ; assert_different_hash (& v1 , & v3) ; assert_different_hash (& v2 , & v3) ; }
+};
+}

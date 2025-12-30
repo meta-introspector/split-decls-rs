@@ -1,0 +1,9 @@
+// Generated macro for use_73 (use)
+macro_rules! Depcrate_poduse_73 {
+() => {
+// Module: crate::pod
+// Provides: {"use_73"}
+// Dependencies: {}
+use core :: { mem , result , slice } ;
+};
+}

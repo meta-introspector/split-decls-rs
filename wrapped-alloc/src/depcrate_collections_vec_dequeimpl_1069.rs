@@ -1,0 +1,9 @@
+// Generated macro for impl_1069 (impl)
+macro_rules! Depcrate_collections_vec_dequeimpl_1069 {
+() => {
+// Module: crate::collections::vec_deque
+// Provides: {"impl_1069"}
+// Dependencies: {}
+# [stable (feature = "vecdeque_vec_conversions" , since = "1.10.0")] impl < T , A : Allocator > From < VecDeque < T , A > > for Vec < T , A > { # [doc = " Turn a [`VecDeque<T>`] into a [`Vec<T>`]."] # [doc = ""] # [doc = " [`Vec<T>`]: crate::vec::Vec"] # [doc = " [`VecDeque<T>`]: crate::collections::VecDeque"] # [doc = ""] # [doc = " This never needs to re-allocate, but does need to do *O*(*n*) data movement if"] # [doc = " the circular buffer doesn't happen to be at the beginning of the allocation."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " use std::collections::VecDeque;"] # [doc = ""] # [doc = " // This one is *O*(1)."] # [doc = " let deque: VecDeque<_> = (1..5).collect();"] # [doc = " let ptr = deque.as_slices().0.as_ptr();"] # [doc = " let vec = Vec::from(deque);"] # [doc = " assert_eq!(vec, [1, 2, 3, 4]);"] # [doc = " assert_eq!(vec.as_ptr(), ptr);"] # [doc = ""] # [doc = " // This one needs data rearranging."] # [doc = " let mut deque: VecDeque<_> = (1..5).collect();"] # [doc = " deque.push_front(9);"] # [doc = " deque.push_front(8);"] # [doc = " let ptr = deque.as_slices().1.as_ptr();"] # [doc = " let vec = Vec::from(deque);"] # [doc = " assert_eq!(vec, [8, 9, 1, 2, 3, 4]);"] # [doc = " assert_eq!(vec.as_ptr(), ptr);"] # [doc = " ```"] fn from (mut other : VecDeque < T , A >) -> Self { other . make_contiguous () ; unsafe { let other = ManuallyDrop :: new (other) ; let buf = other . buf . ptr () ; let len = other . len () ; let cap = other . capacity () ; let alloc = ptr :: read (other . allocator ()) ; if other . head != 0 { ptr :: copy (buf . add (other . head) , buf , len) ; } Vec :: from_raw_parts_in (buf , len , cap , alloc) } } }
+};
+}

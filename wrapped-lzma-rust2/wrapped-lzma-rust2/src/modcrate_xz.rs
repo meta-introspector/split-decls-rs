@@ -1,0 +1,57 @@
+// Generated module macro for crate::xz
+macro_rules! Modcrate_xz {
+() => {
+        Depcrate_xzreader!();
+        Depcrate_xzreader_mt!();
+        Depcrate_xzwriter!();
+        Depcrate_xzwriter_mt!();
+        Depcrate_xzuse_165!();
+        Depcrate_xzuse_166!();
+        Depcrate_xzuse_167!();
+        Depcrate_xzuse_168!();
+        Depcrate_xzuse_169!();
+        Depcrate_xzuse_170!();
+        Depcrate_xzuse_171!();
+        Depcrate_xzuse_172!();
+        Depcrate_xzuse_173!();
+        Depcrate_xzuse_174!();
+        Depcrate_xzCRC32!();
+        Depcrate_xzCRC64!();
+        Depcrate_xzXZ_MAGIC!();
+        Depcrate_xzXZ_FOOTER_MAGIC!();
+        Depcrate_xzIndexRecord!();
+        Depcrate_xzIndex!();
+        Depcrate_xzStreamHeader!();
+        Depcrate_xzStreamFooter!();
+        Depcrate_xzBlockHeader!();
+        Depcrate_xzBlock!();
+        Depcrate_xzFilterConfig!();
+        Depcrate_xzimpl_186!();
+        Depcrate_xzCheckType!();
+        Depcrate_xzimpl_188!();
+        Depcrate_xzFilterType!();
+        Depcrate_xzimpl_190!();
+        Depcrate_xzparse_multibyte_integer!();
+        Depcrate_xzcount_multibyte_integer_size!();
+        Depcrate_xzparse_multibyte_integer_from_reader!();
+        Depcrate_xzcount_multibyte_integer_size_for_value!();
+        Depcrate_xzencode_multibyte_integer!();
+        Depcrate_xzimpl_196!();
+        Depcrate_xzChecksumCalculator!();
+        Depcrate_xzimpl_198!();
+        Depcrate_xzimpl_199!();
+        Depcrate_xzimpl_200!();
+        Depcrate_xzimpl_201!();
+        Depcrate_xzwrite_xz_stream_header!();
+        Depcrate_xzencode_lzma2_dict_size!();
+        Depcrate_xzupdate_crc_with_padding!();
+        Depcrate_xzscan_blocks!();
+        Depcrate_xzcreate_filter_chain!();
+        Depcrate_xzadd_padding!();
+        Depcrate_xzgenerate_block_header_data!();
+        Depcrate_xzwrite_xz_block_header!();
+        Depcrate_xzwrite_xz_index!();
+        Depcrate_xzwrite_xz_stream_footer!();
+        Depcrate_xztests!();
+    };
+}

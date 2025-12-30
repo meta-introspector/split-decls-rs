@@ -1,0 +1,9 @@
+// Generated macro for sanitize_attrs (function)
+macro_rules! Depcrate_attributessanitize_attrs {
+() => {
+// Module: crate::attributes
+// Provides: {"sanitize_attrs"}
+// Dependencies: {}
+# [doc = " Get LLVM sanitize attributes."] # [inline] pub (crate) fn sanitize_attrs < 'll > (cx : & CodegenCx < 'll , '_ > , no_sanitize : SanitizerSet ,) -> SmallVec < [& 'll Attribute ; 4] > { let mut attrs = SmallVec :: new () ; let enabled = cx . tcx . sess . opts . unstable_opts . sanitizer - no_sanitize ; if enabled . contains (SanitizerSet :: ADDRESS) || enabled . contains (SanitizerSet :: KERNELADDRESS) { attrs . push (llvm :: AttributeKind :: SanitizeAddress . create_attr (cx . llcx)) ; } if enabled . contains (SanitizerSet :: MEMORY) { attrs . push (llvm :: AttributeKind :: SanitizeMemory . create_attr (cx . llcx)) ; } if enabled . contains (SanitizerSet :: THREAD) { attrs . push (llvm :: AttributeKind :: SanitizeThread . create_attr (cx . llcx)) ; } if enabled . contains (SanitizerSet :: HWADDRESS) { attrs . push (llvm :: AttributeKind :: SanitizeHWAddress . create_attr (cx . llcx)) ; } if enabled . contains (SanitizerSet :: SHADOWCALLSTACK) { attrs . push (llvm :: AttributeKind :: ShadowCallStack . create_attr (cx . llcx)) ; } if enabled . contains (SanitizerSet :: MEMTAG) { let features = cx . tcx . global_backend_features (()) ; let mte_feature = features . iter () . map (| s | & s [..]) . rfind (| n | ["+mte" , "-mte"] . contains (& & n [..])) ; if let None | Some ("-mte") = mte_feature { cx . tcx . dcx () . emit_err (SanitizerMemtagRequiresMte) ; } attrs . push (llvm :: AttributeKind :: SanitizeMemTag . create_attr (cx . llcx)) ; } if enabled . contains (SanitizerSet :: SAFESTACK) { attrs . push (llvm :: AttributeKind :: SanitizeSafeStack . create_attr (cx . llcx)) ; } attrs }
+};
+}

@@ -1,0 +1,49 @@
+// Generated module macro for crate::errors
+macro_rules! Modcrate_errors {
+() => {
+        Depcrate_errorsuse_34!();
+        Depcrate_errorsuse_35!();
+        Depcrate_errorsuse_36!();
+        Depcrate_errorsUnrecognizedDepNode!();
+        Depcrate_errorsMissingDepNode!();
+        Depcrate_errorsMissingIfThisChanged!();
+        Depcrate_errorsOk!();
+        Depcrate_errorsNoPath!();
+        Depcrate_errorsAssertionAuto!();
+        Depcrate_errorsUndefinedCleanDirtyItem!();
+        Depcrate_errorsUndefinedCleanDirty!();
+        Depcrate_errorsRepeatedDepNodeLabel!();
+        Depcrate_errorsUnrecognizedDepNodeLabel!();
+        Depcrate_errorsNotDirty!();
+        Depcrate_errorsNotClean!();
+        Depcrate_errorsNotLoaded!();
+        Depcrate_errorsUnknownRustcCleanArgument!();
+        Depcrate_errorsNoCfg!();
+        Depcrate_errorsAssociatedValueExpectedFor!();
+        Depcrate_errorsAssociatedValueExpected!();
+        Depcrate_errorsUncheckedClean!();
+        Depcrate_errorsDeleteOld!();
+        Depcrate_errorsCreateNew!();
+        Depcrate_errorsWriteNew!();
+        Depcrate_errorsCanonicalizePath!();
+        Depcrate_errorsCreateIncrCompDir!();
+        Depcrate_errorsCreateLock!();
+        Depcrate_errorsDeleteLock!();
+        Depcrate_errorsHardLinkFailed!();
+        Depcrate_errorsDeletePartial!();
+        Depcrate_errorsDeleteFull!();
+        Depcrate_errorsFinalize!();
+        Depcrate_errorsInvalidGcFailed!();
+        Depcrate_errorsFinalizedGcFailed!();
+        Depcrate_errorsSessionGcFailed!();
+        Depcrate_errorsAssertNotLoaded!();
+        Depcrate_errorsAssertLoaded!();
+        Depcrate_errorsDeleteIncompatible!();
+        Depcrate_errorsLoadDepGraph!();
+        Depcrate_errorsMoveDepGraph!();
+        Depcrate_errorsCreateDepGraph!();
+        Depcrate_errorsCopyWorkProductToCache!();
+        Depcrate_errorsDeleteWorkProduct!();
+        Depcrate_errorsCorruptFile!();
+    };
+}

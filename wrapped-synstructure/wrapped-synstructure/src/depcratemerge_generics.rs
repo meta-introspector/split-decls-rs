@@ -1,0 +1,9 @@
+// Generated macro for merge_generics (function)
+macro_rules! Depcratemerge_generics {
+() => {
+// Module: crate
+// Provides: {"merge_generics"}
+// Dependencies: {}
+fn merge_generics (into : & mut Generics , from : & Generics) -> Result < () > { for p in & from . params { for op in & into . params { match (op , p) { (GenericParam :: Type (otp) , GenericParam :: Type (tp)) => { if otp . ident == tp . ident { return Err (Error :: new_spanned (p , format ! ("Attempted to merge conflicting generic parameters: {} and {}" , quote ! (# op) , quote ! (# p)) ,)) ; } } (GenericParam :: Lifetime (olp) , GenericParam :: Lifetime (lp)) => { if olp . lifetime == lp . lifetime { return Err (Error :: new_spanned (p , format ! ("Attempted to merge conflicting generic parameters: {} and {}" , quote ! (# op) , quote ! (# p)) ,)) ; } } _ => () , } } into . params . push (p . clone ()) ; } if let Some (from_clause) = & from . where_clause { into . make_where_clause () . predicates . extend (from_clause . predicates . iter () . cloned ()) ; } Ok (()) }
+};
+}

@@ -1,0 +1,39 @@
+// Generated module macro for crate
+macro_rules! Modcrate {
+() => {
+        Depcratecheck!();
+        Depcrateautoderef!();
+        Depcratecheck_unused!();
+        Depcratecoherence!();
+        Depcratecollect!();
+        Depcrateconstrained_generic_params!();
+        Depcratedelegation!();
+        Depcrateerrors!();
+        Depcratehir_ty_lowering!();
+        Depcratehir_wf_check!();
+        Depcrateimpl_wf_check!();
+        Depcrateoutlives!();
+        Depcratevariance!();
+        Depcrateuse_1035!();
+        Depcrateuse_1036!();
+        Depcrateuse_1037!();
+        Depcrateuse_1038!();
+        Depcrateuse_1039!();
+        Depcrateuse_1040!();
+        Depcrateuse_1041!();
+        Depcrateuse_1042!();
+        Depcrateuse_1043!();
+        Depcrateuse_1044!();
+        Depcrateuse_1045!();
+        Depcrateuse_1046!();
+        Depcrateuse_1047!();
+        Depcrateuse_1048!();
+        Depcratemacro_1049!();
+        Depcratecheck_c_variadic_abi!();
+        Depcrateprovide!();
+        Depcrateemit_delayed_lint!();
+        Depcratecheck_crate!();
+        Depcratelower_ty!();
+        Depcratelower_const_arg_for_rustdoc!();
+    };
+}

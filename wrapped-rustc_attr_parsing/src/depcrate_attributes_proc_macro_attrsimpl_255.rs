@@ -1,0 +1,9 @@
+// Generated macro for impl_255 (impl)
+macro_rules! Depcrate_attributes_proc_macro_attrsimpl_255 {
+() => {
+// Module: crate::attributes::proc_macro_attrs
+// Provides: {"impl_255"}
+// Dependencies: {}
+impl < S : Stage > SingleAttributeParser < S > for RustcBuiltinMacroParser { const PATH : & [Symbol] = & [sym :: rustc_builtin_macro] ; const ATTRIBUTE_ORDER : AttributeOrder = AttributeOrder :: KeepOutermost ; const ON_DUPLICATE : OnDuplicate < S > = OnDuplicate :: Error ; const ALLOWED_TARGETS : AllowedTargets = AllowedTargets :: AllowList (& [Allow (Target :: MacroDef)]) ; const TEMPLATE : AttributeTemplate = template ! (List : & ["TraitName" , "TraitName, attributes(name1, name2, ...)"]) ; fn convert (cx : & mut AcceptContext < '_ , '_ , S > , args : & ArgParser < '_ >) -> Option < AttributeKind > { let (builtin_name , helper_attrs) = parse_derive_like (cx , args , false) ? ; Some (AttributeKind :: RustcBuiltinMacro { builtin_name , helper_attrs , span : cx . attr_span }) } }
+};
+}

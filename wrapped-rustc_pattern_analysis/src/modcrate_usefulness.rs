@@ -1,0 +1,55 @@
+// Generated module macro for crate::usefulness
+macro_rules! Modcrate_usefulness {
+() => {
+        Depcrate_usefulnessuse_146!();
+        Depcrate_usefulnessuse_147!();
+        Depcrate_usefulnessuse_148!();
+        Depcrate_usefulnessuse_149!();
+        Depcrate_usefulnessuse_150!();
+        Depcrate_usefulnessuse_151!();
+        Depcrate_usefulnessuse_152!();
+        Depcrate_usefulnessuse_153!();
+        Depcrate_usefulnessuse_154!();
+        Depcrate_usefulnessuse_155!();
+        Depcrate_usefulnessensure_sufficient_stack!();
+        Depcrate_usefulnessBranchPatUsefulness!();
+        Depcrate_usefulnessimpl_158!();
+        Depcrate_usefulnessimpl_159!();
+        Depcrate_usefulnessUsefulnessCtxt!();
+        Depcrate_usefulnessimpl_161!();
+        Depcrate_usefulnessPlaceCtxt!();
+        Depcrate_usefulnessimpl_163!();
+        Depcrate_usefulnessimpl_164!();
+        Depcrate_usefulnessimpl_165!();
+        Depcrate_usefulnessimpl_166!();
+        Depcrate_usefulnessPlaceValidity!();
+        Depcrate_usefulnessimpl_168!();
+        Depcrate_usefulnessimpl_169!();
+        Depcrate_usefulnessPlaceInfo!();
+        Depcrate_usefulnessimpl_171!();
+        Depcrate_usefulnessimpl_172!();
+        Depcrate_usefulnessPatStack!();
+        Depcrate_usefulnessimpl_174!();
+        Depcrate_usefulnessimpl_175!();
+        Depcrate_usefulnessimpl_176!();
+        Depcrate_usefulnessMatrixRow!();
+        Depcrate_usefulnessimpl_178!();
+        Depcrate_usefulnessimpl_179!();
+        Depcrate_usefulnessMatrix!();
+        Depcrate_usefulnessimpl_181!();
+        Depcrate_usefulnessimpl_182!();
+        Depcrate_usefulnessWitnessStack!();
+        Depcrate_usefulnessimpl_184!();
+        Depcrate_usefulnessimpl_185!();
+        Depcrate_usefulnessWitnessMatrix!();
+        Depcrate_usefulnessimpl_187!();
+        Depcrate_usefulnessimpl_188!();
+        Depcrate_usefulnesscollect_overlapping_range_endpoints!();
+        Depcrate_usefulnesscollect_non_contiguous_range_endpoints!();
+        Depcrate_usefulnesscompute_exhaustiveness_and_usefulness!();
+        Depcrate_usefulnessRedundancyExplanation!();
+        Depcrate_usefulnessUsefulness!();
+        Depcrate_usefulnessUsefulnessReport!();
+        Depcrate_usefulnesscompute_match_usefulness!();
+    };
+}

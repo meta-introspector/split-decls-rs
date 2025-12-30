@@ -1,0 +1,56 @@
+// Generated module macro for crate::rayon::set
+macro_rules! Modcrate_rayon_set {
+() => {
+        Depcrate_rayon_setuse_212!();
+        Depcrate_rayon_setuse_213!();
+        Depcrate_rayon_setuse_214!();
+        Depcrate_rayon_setuse_215!();
+        Depcrate_rayon_setuse_216!();
+        Depcrate_rayon_setuse_217!();
+        Depcrate_rayon_setuse_218!();
+        Depcrate_rayon_setuse_219!();
+        Depcrate_rayon_setuse_220!();
+        Depcrate_rayon_setuse_221!();
+        Depcrate_rayon_setuse_222!();
+        Depcrate_rayon_setBucket!();
+        Depcrate_rayon_setimpl_224!();
+        Depcrate_rayon_setimpl_225!();
+        Depcrate_rayon_setIntoParIter!();
+        Depcrate_rayon_setimpl_227!();
+        Depcrate_rayon_setimpl_228!();
+        Depcrate_rayon_setimpl_229!();
+        Depcrate_rayon_setimpl_230!();
+        Depcrate_rayon_setimpl_231!();
+        Depcrate_rayon_setParIter!();
+        Depcrate_rayon_setimpl_233!();
+        Depcrate_rayon_setimpl_234!();
+        Depcrate_rayon_setimpl_235!();
+        Depcrate_rayon_setimpl_236!();
+        Depcrate_rayon_setimpl_237!();
+        Depcrate_rayon_setParDrain!();
+        Depcrate_rayon_setimpl_239!();
+        Depcrate_rayon_setimpl_240!();
+        Depcrate_rayon_setimpl_241!();
+        Depcrate_rayon_setParDifference!();
+        Depcrate_rayon_setimpl_243!();
+        Depcrate_rayon_setimpl_244!();
+        Depcrate_rayon_setimpl_245!();
+        Depcrate_rayon_setParIntersection!();
+        Depcrate_rayon_setimpl_247!();
+        Depcrate_rayon_setimpl_248!();
+        Depcrate_rayon_setimpl_249!();
+        Depcrate_rayon_setParSymmetricDifference!();
+        Depcrate_rayon_setimpl_251!();
+        Depcrate_rayon_setimpl_252!();
+        Depcrate_rayon_setimpl_253!();
+        Depcrate_rayon_setParUnion!();
+        Depcrate_rayon_setimpl_255!();
+        Depcrate_rayon_setimpl_256!();
+        Depcrate_rayon_setimpl_257!();
+        Depcrate_rayon_setimpl_258!();
+        Depcrate_rayon_setimpl_259!();
+        Depcrate_rayon_setimpl_260!();
+        Depcrate_rayon_setimpl_261!();
+        Depcrate_rayon_settests!();
+    };
+}

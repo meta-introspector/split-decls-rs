@@ -1,0 +1,40 @@
+// Generated module macro for crate::slice::sort
+macro_rules! Modcrate_slice_sort {
+() => {
+        Depcrate_slice_sortuse_1509!();
+        Depcrate_slice_sortuse_1510!();
+        Depcrate_slice_sortuse_1511!();
+        Depcrate_slice_sortuse_1512!();
+        Depcrate_slice_sortuse_1513!();
+        Depcrate_slice_sortuse_1514!();
+        Depcrate_slice_sortuse_1515!();
+        Depcrate_slice_sortInsertionHole!();
+        Depcrate_slice_sortimpl_1517!();
+        Depcrate_slice_sortinsert_tail!();
+        Depcrate_slice_sortinsert_head!();
+        Depcrate_slice_sortinsertion_sort_shift_left!();
+        Depcrate_slice_sortinsertion_sort_shift_right!();
+        Depcrate_slice_sortpartial_insertion_sort!();
+        Depcrate_slice_sortheapsort!();
+        Depcrate_slice_sortpartition_in_blocks!();
+        Depcrate_slice_sortpartition!();
+        Depcrate_slice_sortpartition_equal!();
+        Depcrate_slice_sortbreak_patterns!();
+        Depcrate_slice_sortchoose_pivot!();
+        Depcrate_slice_sortrecurse!();
+        Depcrate_slice_sortpar_quicksort!();
+        Depcrate_slice_sortmerge!();
+        Depcrate_slice_sortMergeHole!();
+        Depcrate_slice_sortimpl_1533!();
+        Depcrate_slice_sortMergeSortResult!();
+        Depcrate_slice_sortmerge_sort!();
+        Depcrate_slice_sortTimSortRun!();
+        Depcrate_slice_sortprovide_sorted_batch!();
+        Depcrate_slice_sortfind_streak!();
+        Depcrate_slice_sortsplit_for_merge!();
+        Depcrate_slice_sortpar_merge!();
+        Depcrate_slice_sortmerge_recurse!();
+        Depcrate_slice_sortpar_mergesort!();
+        Depcrate_slice_sorttests!();
+    };
+}

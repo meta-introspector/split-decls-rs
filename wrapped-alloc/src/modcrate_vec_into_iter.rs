@@ -1,0 +1,39 @@
+// Generated module macro for crate::vec::into_iter
+macro_rules! Modcrate_vec_into_iter {
+() => {
+        Depcrate_vec_into_iteruse_1760!();
+        Depcrate_vec_into_iteruse_1761!();
+        Depcrate_vec_into_iteruse_1762!();
+        Depcrate_vec_into_iteruse_1763!();
+        Depcrate_vec_into_iteruse_1764!();
+        Depcrate_vec_into_iteruse_1765!();
+        Depcrate_vec_into_iteruse_1766!();
+        Depcrate_vec_into_iteruse_1767!();
+        Depcrate_vec_into_iteruse_1768!();
+        Depcrate_vec_into_iteruse_1769!();
+        Depcrate_vec_into_iteruse_1770!();
+        Depcrate_vec_into_iteruse_1771!();
+        Depcrate_vec_into_iterother_1772!();
+        Depcrate_vec_into_iterIntoIter!();
+        Depcrate_vec_into_iterimpl_1774!();
+        Depcrate_vec_into_iterimpl_1775!();
+        Depcrate_vec_into_iterimpl_1776!();
+        Depcrate_vec_into_iterimpl_1777!();
+        Depcrate_vec_into_iterimpl_1778!();
+        Depcrate_vec_into_iterimpl_1779!();
+        Depcrate_vec_into_iterimpl_1780!();
+        Depcrate_vec_into_iterimpl_1781!();
+        Depcrate_vec_into_iterimpl_1782!();
+        Depcrate_vec_into_iterimpl_1783!();
+        Depcrate_vec_into_iterimpl_1784!();
+        Depcrate_vec_into_iterimpl_1785!();
+        Depcrate_vec_into_iterNonDrop!();
+        Depcrate_vec_into_iterimpl_1787!();
+        Depcrate_vec_into_iterimpl_1788!();
+        Depcrate_vec_into_iterimpl_1789!();
+        Depcrate_vec_into_iterimpl_1790!();
+        Depcrate_vec_into_iterimpl_1791!();
+        Depcrate_vec_into_iterimpl_1792!();
+        Depcrate_vec_into_iterimpl_1793!();
+    };
+}

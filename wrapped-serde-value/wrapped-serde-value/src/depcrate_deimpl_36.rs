@@ -1,0 +1,9 @@
+// Generated macro for impl_36 (impl)
+macro_rules! Depcrate_deimpl_36 {
+() => {
+// Module: crate::de
+// Provides: {"impl_36"}
+// Dependencies: {}
+impl < 'de , E > de :: VariantAccess < 'de > for VariantDeserializer < E > where E : de :: Error , { type Error = E ; fn unit_variant (self) -> Result < () , Self :: Error > { match self . value { Some (value) => de :: Deserialize :: deserialize (ValueDeserializer :: new (value)) , None => Ok (()) , } } fn newtype_variant_seed < T > (self , seed : T) -> Result < T :: Value , Self :: Error > where T : de :: DeserializeSeed < 'de > , { match self . value { Some (value) => seed . deserialize (ValueDeserializer :: new (value)) , None => Err (de :: Error :: invalid_type (de :: Unexpected :: UnitVariant , & "newtype variant" ,)) , } } fn tuple_variant < V > (self , _len : usize , visitor : V) -> Result < V :: Value , Self :: Error > where V : de :: Visitor < 'de > , { match self . value { Some (Value :: Seq (v)) => de :: Deserializer :: deserialize_any (de :: value :: SeqDeserializer :: new (v . into_iter () . map (ValueDeserializer :: new)) , visitor ,) , Some (other) => Err (de :: Error :: invalid_type (other . unexpected () , & "tuple variant" ,)) , None => Err (de :: Error :: invalid_type (de :: Unexpected :: UnitVariant , & "tuple variant" ,)) , } } fn struct_variant < V > (self , _fields : & 'static [& 'static str] , visitor : V ,) -> Result < V :: Value , Self :: Error > where V : de :: Visitor < 'de > , { match self . value { Some (Value :: Map (v)) => de :: Deserializer :: deserialize_any (de :: value :: MapDeserializer :: new (v . into_iter () . map (| (k , v) | (ValueDeserializer :: new (k) , ValueDeserializer :: new (v))) ,) , visitor ,) , Some (other) => Err (de :: Error :: invalid_type (other . unexpected () , & "struct variant" ,)) , None => Err (de :: Error :: invalid_type (de :: Unexpected :: UnitVariant , & "struct variant" ,)) , } } }
+};
+}

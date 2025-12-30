@@ -1,0 +1,9 @@
+// Generated macro for stderr (function)
+macro_rules! Depcrate_stdiostderr {
+() => {
+// Module: crate::stdio
+// Provides: {"stderr"}
+// Dependencies: {}
+# [doc = " `STDERR_FILENO`—Standard error, borrowed."] # [doc = ""] # [doc = " In `std`-using configurations, this is a safe function, because the"] # [doc = " standard library already assumes that the stderr file descriptor is always"] # [doc = " valid. In `no_std` configurations, it is `unsafe`."] # [doc = ""] # [doc = " # Safety"] # [doc = ""] # [doc = " In `no_std` configurations, the process' stderr file descriptor can be"] # [doc = " closed, potentially on other threads, in which case the file descriptor"] # [doc = " index number (`STDERR_FILENO`) could be dynamically reused for other"] # [doc = " purposes, potentially on different threads."] # [doc = ""] # [doc = " # References"] # [doc = "  - [POSIX]"] # [doc = "  - [Linux]"] # [doc = "  - [FreeBSD]"] # [doc = "  - [NetBSD]"] # [doc = "  - [OpenBSD]"] # [doc = "  - [DragonFly BSD]"] # [doc = "  - [illumos]"] # [doc = "  - [glibc]"] # [doc = ""] # [doc = " [POSIX]: https://pubs.opengroup.org/onlinepubs/9799919799/functions/stderr.html"] # [doc = " [Linux]: https://man7.org/linux/man-pages/man3/stderr.3.html"] # [doc = " [FreeBSD]: https://man.freebsd.org/cgi/man.cgi?query=stderr&sektion=4"] # [doc = " [NetBSD]: https://man.netbsd.org/stderr.4"] # [doc = " [OpenBSD]: https://man.openbsd.org/stderr.4"] # [doc = " [DragonFly BSD]: https://man.dragonflybsd.org/?command=stderr&section=4"] # [doc = " [illumos]: https://illumos.org/man/4FS/stderr"] # [doc = " [glibc]: https://sourceware.org/glibc/manual/latest/html_node/Standard-Streams.html#index-stderr"] # [cfg (not (feature = "std"))] # [doc (alias = "STDERR_FILENO")] # [inline] pub const unsafe fn stderr () -> BorrowedFd < 'static > { BorrowedFd :: borrow_raw (c :: STDERR_FILENO as RawFd) }
+};
+}

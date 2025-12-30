@@ -1,0 +1,49 @@
+// Generated module macro for crate::sized_chunk
+macro_rules! Modcrate_sized_chunk {
+() => {
+        Depcrate_sized_chunkuse_53!();
+        Depcrate_sized_chunkuse_54!();
+        Depcrate_sized_chunkuse_55!();
+        Depcrate_sized_chunkuse_56!();
+        Depcrate_sized_chunkuse_57!();
+        Depcrate_sized_chunkuse_58!();
+        Depcrate_sized_chunkuse_59!();
+        Depcrate_sized_chunkuse_60!();
+        Depcrate_sized_chunkuse_61!();
+        Depcrate_sized_chunkuse_62!();
+        Depcrate_sized_chunkuse_63!();
+        Depcrate_sized_chunkiter!();
+        Depcrate_sized_chunkuse_77!();
+        Depcrate_sized_chunkrefpool!();
+        Depcrate_sized_chunkChunk!();
+        Depcrate_sized_chunkimpl_86!();
+        Depcrate_sized_chunkimpl_87!();
+        Depcrate_sized_chunkimpl_88!();
+        Depcrate_sized_chunkimpl_89!();
+        Depcrate_sized_chunkimpl_90!();
+        Depcrate_sized_chunkimpl_91!();
+        Depcrate_sized_chunkimpl_92!();
+        Depcrate_sized_chunkimpl_93!();
+        Depcrate_sized_chunkimpl_94!();
+        Depcrate_sized_chunkimpl_95!();
+        Depcrate_sized_chunkimpl_96!();
+        Depcrate_sized_chunkimpl_97!();
+        Depcrate_sized_chunkimpl_98!();
+        Depcrate_sized_chunkimpl_99!();
+        Depcrate_sized_chunkimpl_100!();
+        Depcrate_sized_chunkimpl_101!();
+        Depcrate_sized_chunkimpl_102!();
+        Depcrate_sized_chunkimpl_103!();
+        Depcrate_sized_chunkimpl_104!();
+        Depcrate_sized_chunkimpl_105!();
+        Depcrate_sized_chunkimpl_106!();
+        Depcrate_sized_chunkimpl_107!();
+        Depcrate_sized_chunkimpl_108!();
+        Depcrate_sized_chunkimpl_109!();
+        Depcrate_sized_chunkimpl_110!();
+        Depcrate_sized_chunkimpl_111!();
+        Depcrate_sized_chunkimpl_112!();
+        Depcrate_sized_chunkimpl_113!();
+        Depcrate_sized_chunktest!();
+    };
+}

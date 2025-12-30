@@ -1,0 +1,9 @@
+// Generated macro for c_enum (macro)
+macro_rules! Depcrate_macrosc_enum {
+() => {
+// Module: crate::macros
+// Provides: {"c_enum"}
+// Dependencies: {}
+# [doc = " Represent a C enum as Rust constants and a type."] # [doc = ""] # [doc = " C enums can't soundly be mapped to Rust enums since C enums are allowed to have duplicates or"] # [doc = " unlisted values, but this is UB in Rust. This enum doesn't implement any traits, its main"] # [doc = " purpose is to calculate the correct enum values."] # [doc = ""] # [doc = " See <https://github.com/rust-lang/libc/issues/4419> for more."] macro_rules ! c_enum { ($ ($ (# [repr ($ repr : ty)]) ? pub enum $ ty_name : ident { $ ($ variant : ident $ (= $ value : expr) ?,) + }) +) => { $ (c_enum ! (@ expand ; $ (# [repr ($ repr)]) ? pub enum $ ty_name { $ ($ variant $ (= $ value) ?,) + }) ;) + } ; (@ expand ; $ (# [repr ($ repr : ty)]) ? pub enum $ ty_name : ident { $ ($ variant : ident $ (= $ value : expr) ?,) + }) => { pub type $ ty_name = c_enum ! (@ ty $ ($ repr) ?) ; c_enum ! (@ one ; $ ty_name ; 0 ; $ ($ variant $ (= $ value) ?,) +) ; } ; (@ one ; $ _ty_name : ident ; $ _idx : expr ;) => { } ; (@ one ; $ ty_name : ident ; $ default_val : expr ; $ variant : ident $ (= $ value : expr) ?, $ ($ tail : tt) *) => { pub const $ variant : $ ty_name = { # [allow (unused_variables)] let r = $ default_val ; $ (let r = $ value ;) ? r } ; c_enum ! (@ one ; $ ty_name ; $ variant + 1 ; $ ($ tail) *) ; } ; (@ ty $ repr : ty) => { $ repr } ; (@ ty) => { $ crate :: c_uint } ; }
+};
+}

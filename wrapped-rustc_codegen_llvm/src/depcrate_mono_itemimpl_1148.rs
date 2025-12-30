@@ -1,0 +1,9 @@
+// Generated macro for impl_1148 (impl)
+macro_rules! Depcrate_mono_itemimpl_1148 {
+() => {
+// Module: crate::mono_item
+// Provides: {"impl_1148"}
+// Dependencies: {}
+impl CodegenCx < '_ , '_ > { # [doc = " Whether a definition or declaration can be assumed to be local to a group of"] # [doc = " libraries that form a single DSO or executable."] # [doc = " Marks the local as DSO if so."] pub (crate) fn assume_dso_local (& self , llval : & llvm :: Value , is_declaration : bool) -> bool { let assume = self . should_assume_dso_local (llval , is_declaration) ; if assume { llvm :: set_dso_local (llval) ; } assume } fn should_assume_dso_local (& self , llval : & llvm :: Value , is_declaration : bool) -> bool { let linkage = llvm :: get_linkage (llval) ; let visibility = llvm :: get_visibility (llval) ; if matches ! (linkage , llvm :: Linkage :: InternalLinkage | llvm :: Linkage :: PrivateLinkage) { return true ; } if visibility != llvm :: Visibility :: Default && linkage != llvm :: Linkage :: ExternalWeakLinkage { return true ; } let all_exe = self . tcx . crate_types () . iter () . all (| ty | * ty == CrateType :: Executable) ; let is_declaration_for_linker = is_declaration || linkage == llvm :: Linkage :: AvailableExternallyLinkage ; if all_exe && ! is_declaration_for_linker { return true ; } if matches ! (&* self . tcx . sess . target . arch , "powerpc64" | "powerpc64le") { return false ; } if self . tcx . sess . target . is_like_darwin { return false ; } if self . tcx . sess . relocation_model () == RelocModel :: Pie && ! is_declaration { return true ; } let is_thread_local_var = llvm :: LLVMIsAGlobalVariable (llval) . is_some_and (| v | llvm :: LLVMIsThreadLocal (v) . is_true ()) ; if is_thread_local_var { return false ; } if let Some (direct) = self . tcx . sess . direct_access_external_data () { return direct ; } self . tcx . sess . relocation_model () == RelocModel :: Static } }
+};
+}

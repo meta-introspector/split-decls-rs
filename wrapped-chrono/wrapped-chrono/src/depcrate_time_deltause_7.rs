@@ -1,0 +1,9 @@
+// Generated macro for use_7 (use)
+macro_rules! Depcrate_time_deltause_7 {
+() => {
+// Module: crate::time_delta
+// Provides: {"use_7"}
+// Dependencies: {}
+# [cfg (feature = "std")] use std :: error :: Error ;
+};
+}

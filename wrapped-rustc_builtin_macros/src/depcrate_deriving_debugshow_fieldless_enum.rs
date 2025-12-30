@@ -1,0 +1,9 @@
+// Generated macro for show_fieldless_enum (function)
+macro_rules! Depcrate_deriving_debugshow_fieldless_enum {
+() => {
+// Module: crate::deriving::debug
+// Provides: {"show_fieldless_enum"}
+// Dependencies: {}
+# [doc = " Special case for enums with no fields. Builds:"] # [doc = " ```text"] # [doc = " impl ::core::fmt::Debug for A {"] # [doc = "     fn fmt(&self, f: &mut ::core::fmt::Formatter) -> ::core::fmt::Result {"] # [doc = "          ::core::fmt::Formatter::write_str(f,"] # [doc = "             match self {"] # [doc = "                 A::A => \"A\","] # [doc = "                 A::B() => \"B\","] # [doc = "                 A::C {} => \"C\","] # [doc = "             })"] # [doc = "     }"] # [doc = " }"] # [doc = " ```"] fn show_fieldless_enum (cx : & ExtCtxt < '_ > , span : Span , def : & EnumDef , substr : & Substructure < '_ > ,) -> BlockOrExpr { let fmt = substr . nonselflike_args [0] . clone () ; let arms = def . variants . iter () . map (| v | { let variant_path = cx . path (span , vec ! [substr . type_ident , v . ident]) ; let pat = match & v . data { ast :: VariantData :: Tuple (fields , _) => { debug_assert ! (fields . is_empty ()) ; cx . pat_tuple_struct (span , variant_path , ThinVec :: new ()) } ast :: VariantData :: Struct { fields , .. } => { debug_assert ! (fields . is_empty ()) ; cx . pat_struct (span , variant_path , ThinVec :: new ()) } ast :: VariantData :: Unit (_) => cx . pat_path (span , variant_path) , } ; cx . arm (span , pat , cx . expr_str (span , v . ident . name)) }) . collect :: < ThinVec < _ > > () ; let name = cx . expr_match (span , cx . expr_self (span) , arms) ; let fn_path_write_str = cx . std_path (& [sym :: fmt , sym :: Formatter , sym :: write_str]) ; BlockOrExpr :: new_expr (cx . expr_call_global (span , fn_path_write_str , thin_vec ! [fmt , name])) }
+};
+}

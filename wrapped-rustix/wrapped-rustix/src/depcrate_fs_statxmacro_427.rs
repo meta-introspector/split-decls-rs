@@ -1,0 +1,9 @@
+// Generated macro for macro_427 (macro)
+macro_rules! Depcrate_fs_statxmacro_427 {
+() => {
+// Module: crate::fs::statx
+// Provides: {"macro_427"}
+// Dependencies: {}
+bitflags ! { # [doc = " `STATX_*` constants for use with [`statx`]."] # [doc = ""] # [doc = " [`statx`]: crate::fs::statx"] # [repr (transparent)] # [derive (Copy , Clone , Eq , PartialEq , Hash , Debug)] pub struct StatxFlags : u32 { # [doc = " `STATX_TYPE`"] const TYPE = c :: STATX_TYPE ; # [doc = " `STATX_MODE`"] const MODE = c :: STATX_MODE ; # [doc = " `STATX_NLINK`"] const NLINK = c :: STATX_NLINK ; # [doc = " `STATX_UID`"] const UID = c :: STATX_UID ; # [doc = " `STATX_GID`"] const GID = c :: STATX_GID ; # [doc = " `STATX_ATIME`"] const ATIME = c :: STATX_ATIME ; # [doc = " `STATX_MTIME`"] const MTIME = c :: STATX_MTIME ; # [doc = " `STATX_CTIME`"] const CTIME = c :: STATX_CTIME ; # [doc = " `STATX_INO`"] const INO = c :: STATX_INO ; # [doc = " `STATX_SIZE`"] const SIZE = c :: STATX_SIZE ; # [doc = " `STATX_BLOCKS`"] const BLOCKS = c :: STATX_BLOCKS ; # [doc = " `STATX_BASIC_STATS`"] const BASIC_STATS = c :: STATX_BASIC_STATS ; # [doc = " `STATX_BTIME`"] const BTIME = c :: STATX_BTIME ; # [doc = " `STATX_MNT_ID` (since Linux 5.8)"] const MNT_ID = c :: STATX_MNT_ID ; # [doc = " `STATX_DIOALIGN` (since Linux 6.1)"] const DIOALIGN = c :: STATX_DIOALIGN ; # [doc = " `STATX_ALL`"] const ALL = c :: STATX_ALL ; # [doc = " <https://docs.rs/bitflags/*/bitflags/#externally-defined-flags>"] const _ = ! 0 ; } }
+};
+}

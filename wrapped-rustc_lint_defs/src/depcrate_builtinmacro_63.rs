@@ -1,0 +1,9 @@
+// Generated macro for macro_63 (macro)
+macro_rules! Depcrate_builtinmacro_63 {
+() => {
+// Module: crate::builtin
+// Provides: {"macro_63"}
+// Dependencies: {}
+declare_lint ! { # [doc = " The `single_use_lifetimes` lint detects lifetimes that are only used"] # [doc = " once."] # [doc = ""] # [doc = " ### Example"] # [doc = ""] # [doc = " ```rust,compile_fail"] # [doc = " #![deny(single_use_lifetimes)]"] # [doc = ""] # [doc = " fn foo<'a>(x: &'a u32) {}"] # [doc = " ```"] # [doc = ""] # [doc = " {{produces}}"] # [doc = ""] # [doc = " ### Explanation"] # [doc = ""] # [doc = " Specifying an explicit lifetime like `'a` in a function or `impl`"] # [doc = " should only be used to link together two things. Otherwise, you should"] # [doc = " just use `'_` to indicate that the lifetime is not linked to anything,"] # [doc = " or elide the lifetime altogether if possible."] # [doc = ""] # [doc = " This lint is \"allow\" by default because it was introduced at a time"] # [doc = " when `'_` and elided lifetimes were first being introduced, and this"] # [doc = " lint would be too noisy. Also, there are some known false positives"] # [doc = " that it produces. See [RFC 2115] for historical context, and [issue"] # [doc = " #44752] for more details."] # [doc = ""] # [doc = " [RFC 2115]: https://github.com/rust-lang/rfcs/blob/master/text/2115-argument-lifetimes.md"] # [doc = " [issue #44752]: https://github.com/rust-lang/rust/issues/44752"] pub SINGLE_USE_LIFETIMES , Allow , "detects lifetime parameters that are only used once" }
+};
+}

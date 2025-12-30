@@ -1,0 +1,40 @@
+// Generated module macro for crate
+macro_rules! Modcrate {
+() => {
+        Depcratemacro_1!();
+        Depcrateother_2!();
+        Depcrateother_3!();
+        Depcrateother_4!();
+        Depcrateother_5!();
+        Depcrateuse_6!();
+        Depcrateuse_7!();
+        Depcrateuse_8!();
+        Depcrateuse_9!();
+        Depcrateuse_10!();
+        Depcrateuse_11!();
+        Depcrateuse_12!();
+        Depcratemaybe_small!();
+        Depcratemaybe_small!();
+        Depcrateframe!();
+        Depcrateuse_31!();
+        Depcratefunction!();
+        Depcrateline!();
+        Depcrateloader!();
+        Depcrateuse_100!();
+        Depcratelookup!();
+        Depcrateuse_117!();
+        Depcrateunit!();
+        Depcrateuse_140!();
+        DepcrateError!();
+        DepcrateLazyResult!();
+        DepcrateDebugFile!();
+        DepcrateContext!();
+        Depcrateimpl_145!();
+        Depcrateimpl_146!();
+        Depcrateimpl_147!();
+        DepcrateRangeAttributes!();
+        Depcrateimpl_149!();
+        Depcrateimpl_150!();
+        Depcratetests!();
+    };
+}

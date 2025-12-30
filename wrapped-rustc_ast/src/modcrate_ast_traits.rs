@@ -1,0 +1,39 @@
+// Generated module macro for crate::ast_traits
+macro_rules! Modcrate_ast_traits {
+() => {
+        Depcrate_ast_traitsuse_262!();
+        Depcrate_ast_traitsuse_263!();
+        Depcrate_ast_traitsuse_264!();
+        Depcrate_ast_traitsuse_265!();
+        Depcrate_ast_traitsHasNodeId!();
+        Depcrate_ast_traitsimpl_has_node_id!();
+        Depcrate_ast_traitsmacro_268!();
+        Depcrate_ast_traitsimpl_269!();
+        Depcrate_ast_traitsHasTokens!();
+        Depcrate_ast_traitsimpl_has_tokens!();
+        Depcrate_ast_traitsimpl_has_tokens_none!();
+        Depcrate_ast_traitsmacro_273!();
+        Depcrate_ast_traitsmacro_274!();
+        Depcrate_ast_traitsimpl_275!();
+        Depcrate_ast_traitsimpl_276!();
+        Depcrate_ast_traitsimpl_277!();
+        Depcrate_ast_traitsimpl_278!();
+        Depcrate_ast_traitsimpl_279!();
+        Depcrate_ast_traitsHasAttrs!();
+        Depcrate_ast_traitsimpl_has_attrs!();
+        Depcrate_ast_traitsimpl_has_attrs_none!();
+        Depcrate_ast_traitsmacro_283!();
+        Depcrate_ast_traitsmacro_284!();
+        Depcrate_ast_traitsmacro_285!();
+        Depcrate_ast_traitsimpl_286!();
+        Depcrate_ast_traitsimpl_287!();
+        Depcrate_ast_traitsimpl_288!();
+        Depcrate_ast_traitsimpl_289!();
+        Depcrate_ast_traitsAstNodeWrapper!();
+        Depcrate_ast_traitsimpl_291!();
+        Depcrate_ast_traitsimpl_292!();
+        Depcrate_ast_traitsimpl_293!();
+        Depcrate_ast_traitsimpl_294!();
+        Depcrate_ast_traitsimpl_295!();
+    };
+}

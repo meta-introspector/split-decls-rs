@@ -1,0 +1,55 @@
+// Generated module macro for crate::check
+macro_rules! Modcrate_check {
+() => {
+        Depcrate_checkalways_applicable!();
+        Depcrate_checkcheck!();
+        Depcrate_checkcompare_impl_item!();
+        Depcrate_checkentry!();
+        Depcrate_checkintrinsic!();
+        Depcrate_checkregion!();
+        Depcrate_checkwfcheck!();
+        Depcrate_checkuse_281!();
+        Depcrate_checkuse_282!();
+        Depcrate_checkuse_283!();
+        Depcrate_checkuse_284!();
+        Depcrate_checkuse_285!();
+        Depcrate_checkuse_286!();
+        Depcrate_checkuse_287!();
+        Depcrate_checkuse_288!();
+        Depcrate_checkuse_289!();
+        Depcrate_checkuse_290!();
+        Depcrate_checkuse_291!();
+        Depcrate_checkuse_292!();
+        Depcrate_checkuse_293!();
+        Depcrate_checkuse_294!();
+        Depcrate_checkuse_295!();
+        Depcrate_checkuse_296!();
+        Depcrate_checkuse_297!();
+        Depcrate_checkuse_298!();
+        Depcrate_checkuse_299!();
+        Depcrate_checkuse_300!();
+        Depcrate_checkuse_301!();
+        Depcrate_checkuse_302!();
+        Depcrate_checkuse_303!();
+        Depcrate_checkuse_304!();
+        Depcrate_checkuse_305!();
+        Depcrate_checkuse_306!();
+        Depcrate_checkuse_307!();
+        Depcrate_checkprovide!();
+        Depcrate_checkadt_destructor!();
+        Depcrate_checkadt_async_destructor!();
+        Depcrate_checkget_owner_return_paths!();
+        Depcrate_checkmaybe_check_static_with_link_section!();
+        Depcrate_checkreport_forbidden_specialization!();
+        Depcrate_checkmissing_items_err!();
+        Depcrate_checkmissing_items_must_implement_one_of_err!();
+        Depcrate_checkdefault_body_is_unstable!();
+        Depcrate_checkbounds_from_generic_predicates!();
+        Depcrate_checkfn_sig_suggestion!();
+        Depcrate_checksuggestion_signature!();
+        Depcrate_checkbad_variant_count!();
+        Depcrate_checkbad_non_zero_sized_fields!();
+        Depcrate_checkpotentially_plural_count!();
+        Depcrate_checkcheck_function_signature!();
+    };
+}

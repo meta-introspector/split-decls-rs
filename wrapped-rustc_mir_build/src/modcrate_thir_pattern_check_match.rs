@@ -1,0 +1,51 @@
+// Generated module macro for crate::thir::pattern::check_match
+macro_rules! Modcrate_thir_pattern_check_match {
+() => {
+        Depcrate_thir_pattern_check_matchuse_631!();
+        Depcrate_thir_pattern_check_matchuse_632!();
+        Depcrate_thir_pattern_check_matchuse_633!();
+        Depcrate_thir_pattern_check_matchuse_634!();
+        Depcrate_thir_pattern_check_matchuse_635!();
+        Depcrate_thir_pattern_check_matchuse_636!();
+        Depcrate_thir_pattern_check_matchuse_637!();
+        Depcrate_thir_pattern_check_matchuse_638!();
+        Depcrate_thir_pattern_check_matchuse_639!();
+        Depcrate_thir_pattern_check_matchuse_640!();
+        Depcrate_thir_pattern_check_matchuse_641!();
+        Depcrate_thir_pattern_check_matchuse_642!();
+        Depcrate_thir_pattern_check_matchuse_643!();
+        Depcrate_thir_pattern_check_matchuse_644!();
+        Depcrate_thir_pattern_check_matchuse_645!();
+        Depcrate_thir_pattern_check_matchuse_646!();
+        Depcrate_thir_pattern_check_matchuse_647!();
+        Depcrate_thir_pattern_check_matchuse_648!();
+        Depcrate_thir_pattern_check_matchuse_649!();
+        Depcrate_thir_pattern_check_matchuse_650!();
+        Depcrate_thir_pattern_check_matchuse_651!();
+        Depcrate_thir_pattern_check_matchuse_652!();
+        Depcrate_thir_pattern_check_matchuse_653!();
+        Depcrate_thir_pattern_check_matchuse_654!();
+        Depcrate_thir_pattern_check_matchuse_655!();
+        Depcrate_thir_pattern_check_matchuse_656!();
+        Depcrate_thir_pattern_check_matchcheck_match!();
+        Depcrate_thir_pattern_check_matchRefutableFlag!();
+        Depcrate_thir_pattern_check_matchuse_659!();
+        Depcrate_thir_pattern_check_matchLetSource!();
+        Depcrate_thir_pattern_check_matchMatchVisitor!();
+        Depcrate_thir_pattern_check_matchimpl_662!();
+        Depcrate_thir_pattern_check_matchimpl_663!();
+        Depcrate_thir_pattern_check_matchcheck_borrow_conflicts_in_at_patterns!();
+        Depcrate_thir_pattern_check_matchcheck_for_bindings_named_same_as_variants!();
+        Depcrate_thir_pattern_check_matchcheck_never_pattern!();
+        Depcrate_thir_pattern_check_matchreport_irrefutable_let_patterns!();
+        Depcrate_thir_pattern_check_matchreport_unreachable_pattern!();
+        Depcrate_thir_pattern_check_matchfind_fallback_pattern_typo!();
+        Depcrate_thir_pattern_check_matchreport_arm_reachability!();
+        Depcrate_thir_pattern_check_matchpat_is_catchall!();
+        Depcrate_thir_pattern_check_matchreport_non_exhaustive_match!();
+        Depcrate_thir_pattern_check_matchjoined_uncovered_patterns!();
+        Depcrate_thir_pattern_check_matchcollect_special_tys!();
+        Depcrate_thir_pattern_check_matchreport_adt_defined_here!();
+        Depcrate_thir_pattern_check_matchmaybe_point_at_variant!();
+    };
+}

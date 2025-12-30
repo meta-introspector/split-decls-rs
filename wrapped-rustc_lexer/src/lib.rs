@@ -1,0 +1,63 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcrate_cursorfrontmatterallowed.rs");
+include!("depcratestrip_shebang.rs");
+include!("depcrate_teststest_valid_shebang.rs");
+include!("depcrate_cursorcursor.rs");
+include!("depcrate_testssmoke_test.rs");
+include!("depcrate_cursorimpl_6.rs");
+include!("depcrate_testsliteral_suffixes.rs");
+include!("depcrateimpl_36.rs");
+include!("depcratevalidate_raw_str.rs");
+include!("depcrateis_horizontal_whitespace.rs");
+include!("depcrateis_id_start.rs");
+include!("depcrate_teststest_too_many_terminators.rs");
+include!("depcratetokenkind.rs");
+include!("depcrateis_ident.rs");
+include!("depcrate_teststest_naked_raw_str.rs");
+include!("depcrateliteralkind.rs");
+include!("depcrateimpl_51.rs");
+include!("depcrateuse_33.rs");
+include!("depcrate_teststest_unterminated_no_pound.rs");
+include!("depcrate_teststest_invalid_start.rs");
+include!("depcratetoken.rs");
+include!("depcraterawstrerror.rs");
+include!("depcratedocstyle.rs");
+include!("depcrate_teststest_unterminated.rs");
+include!("depcrateuse_31.rs");
+include!("depcrateis_id_continue.rs");
+include!("depcrate_testsuse_9.rs");
+include!("depcrate_teststest_too_many_hashes.rs");
+include!("depcrate_testscheck_lexing.rs");
+include!("depcrate_testsfrontmatter_allowed.rs");
+include!("depcrateis_whitespace.rs");
+include!("depcrate_cursoruse_2.rs");
+include!("depcrate_cursoreof_char.rs");
+include!("depcrate_testscomment_flavors.rs");
+include!("depcrate_testscharacters.rs");
+include!("depcrate_testscheck_raw_str.rs");
+include!("depcrateuse_32.rs");
+include!("depcratetokenize.rs");
+include!("depcrate_testsraw_string.rs");
+include!("depcratecursor.rs");
+include!("depcrateuse_29.rs");
+include!("depcrateuse_34.rs");
+include!("depcrate_testslifetime.rs");
+include!("depcrate_teststest_raw_no_start.rs");
+include!("depcrateguardedstr.rs");
+include!("depcrate_testsfrontmatter_disallowed.rs");
+include!("depcrate_testsuse_8.rs");
+include!("depcrate_testsnested_block_comments.rs");
+include!("depcratetests.rs");
+include!("depcrateuse_30.rs");
+include!("depcratebase.rs");
+include!("modcrate.rs");
+include!("modcrate_cursor.rs");
+include!("modcrate_tests.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate!();
+    Modcrate_cursor!();
+    Modcrate_tests!();
+}

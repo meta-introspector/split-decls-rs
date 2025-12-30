@@ -1,0 +1,9 @@
+// Generated macro for test (module)
+macro_rules! Depcrate_future_try_join_tupletest {
+() => {
+// Module: crate::future::try_join::tuple
+// Provides: {"test"}
+// Dependencies: {}
+# [cfg (test)] mod test { use super :: * ; use core :: convert :: Infallible ; use core :: future ; # [test] fn all_ok () { futures_lite :: future :: block_on (async { let a = async { Ok :: < _ , Infallible > ("aaaa") } ; let b = async { Ok :: < _ , Infallible > (1) } ; let c = async { Ok :: < _ , Infallible > ('z') } ; let result = (a , b , c) . try_join () . await ; assert_eq ! (result , Ok (("aaaa" , 1 , 'z'))) ; }) } # [test] fn one_err () { futures_lite :: future :: block_on (async { let res : Result < (_ , char) , () > = (future :: ready (Ok ("hello")) , future :: ready (Err (()))) . try_join () . await ; assert_eq ! (res , Err (())) ; }) } # [test] fn issue_135_resume_after_completion () { use futures_lite :: future :: yield_now ; futures_lite :: future :: block_on (async { let ok = async { Ok :: < _ , () > (()) } ; let err = async { yield_now () . await ; Ok :: < _ , () > (()) } ; let res = (ok , err) . try_join () . await ; assert_eq ! (res . unwrap () , (() , ())) ; }) ; } # [test] # [cfg (feature = "std")] fn does_not_leak_memory () { use core :: cell :: RefCell ; use futures_lite :: future :: pending ; thread_local ! { static NOT_LEAKING : RefCell < bool > = const { RefCell :: new (false) } ; } ; struct FlipFlagAtDrop ; impl Drop for FlipFlagAtDrop { fn drop (& mut self) { NOT_LEAKING . with (| v | { * v . borrow_mut () = true ; }) ; } } futures_lite :: future :: block_on (async { let string = future :: ready (Result :: Ok ("memory leak" . to_owned ())) ; let flip = future :: ready (Result :: Ok (FlipFlagAtDrop)) ; let leak = (string , flip , pending :: < Result < u8 , () > > ()) . try_join () ; _ = futures_lite :: future :: poll_once (leak) . await ; }) ; NOT_LEAKING . with (| flag | { assert ! (* flag . borrow ()) ; }) } }
+};
+}

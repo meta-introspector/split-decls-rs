@@ -1,0 +1,9 @@
+// Generated macro for check_packed (function)
+macro_rules! Depcrate_check_checkcheck_packed {
+() => {
+// Module: crate::check::check
+// Provides: {"check_packed"}
+// Dependencies: {}
+pub (super) fn check_packed (tcx : TyCtxt < '_ > , sp : Span , def : ty :: AdtDef < '_ >) { let repr = def . repr () ; if repr . packed () { if let Some (reprs) = find_attr ! (tcx . get_all_attrs (def . did ()) , attrs :: AttributeKind :: Repr { reprs , .. } => reprs) { for (r , _) in reprs { if let ReprPacked (pack) = r && let Some (repr_pack) = repr . pack && pack != & repr_pack { struct_span_code_err ! (tcx . dcx () , sp , E0634 , "type has conflicting packed representation hints") . emit () ; } } } if repr . align . is_some () { struct_span_code_err ! (tcx . dcx () , sp , E0587 , "type has conflicting packed and align representation hints") . emit () ; } else if let Some (def_spans) = check_packed_inner (tcx , def . did () , & mut vec ! []) { let mut err = struct_span_code_err ! (tcx . dcx () , sp , E0588 , "packed type cannot transitively contain a `#[repr(align)]` type") ; err . span_note (tcx . def_span (def_spans [0] . 0) , format ! ("`{}` has a `#[repr(align)]` attribute" , tcx . item_name (def_spans [0] . 0)) ,) ; if def_spans . len () > 2 { let mut first = true ; for (adt_def , span) in def_spans . iter () . skip (1) . rev () { let ident = tcx . item_name (* adt_def) ; err . span_note (* span , if first { format ! ("`{}` contains a field of type `{}`" , tcx . type_of (def . did ()) . instantiate_identity () , ident) } else { format ! ("...which contains a field of type `{ident}`") } ,) ; first = false ; } } err . emit () ; } } }
+};
+}

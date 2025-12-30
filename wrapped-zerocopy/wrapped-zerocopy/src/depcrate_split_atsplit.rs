@@ -1,0 +1,9 @@
+// Generated macro for Split (struct)
+macro_rules! Depcrate_split_atSplit {
+() => {
+// Module: crate::split_at
+// Provides: {"Split"}
+// Dependencies: {}
+# [doc = " A `T` that has been split into two possibly-overlapping parts."] # [doc = ""] # [doc = " For some dynamically sized types, the padding that appears after the"] # [doc = " trailing slice field [is a dynamic function of the trailing slice"] # [doc = " length](KnownLayout#slice-dst-layout). If `T` is split at a length that"] # [doc = " requires trailing padding, the trailing padding of the left part of the"] # [doc = " split `T` will overlap the right part. If `T` is a mutable reference or"] # [doc = " permits interior mutation, you must ensure that the left and right parts do"] # [doc = " not overlap. You can do this at zero-cost using using"] # [doc = " [`Self::via_immutable`], [`Self::via_into_bytes`], or"] # [doc = " [`Self::via_unaligned`], or with a dynamic check by using"] # [doc = " [`Self::via_runtime_check`]."] # [derive (Debug)] pub struct Split < T > { # [doc = " A pointer to the source slice DST."] source : T , # [doc = " The length of the future left half of `source`."] # [doc = ""] # [doc = " # Safety"] # [doc = ""] # [doc = " If `source` is a pointer to a slice DST, `l_len` is no greater than"] # [doc = " `source`'s length."] l_len : usize , }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for impl_121 (impl)
+macro_rules! Depcrate_read_read_cacheimpl_121 {
+() => {
+// Module: crate::read::read_cache
+// Provides: {"impl_121"}
+// Dependencies: {}
+impl < R : ReadCacheOps > ReadCache < R > { # [doc = " Create an empty `ReadCache` for the given stream."] pub fn new (read : R) -> Self { ReadCache { cache : RefCell :: new (ReadCacheInternal { read , bufs : Map :: new () , strings : Map :: new () , len : None , }) , } } # [doc = " Return an implementation of `ReadRef` that restricts reads"] # [doc = " to the given range of the stream."] pub fn range (& self , offset : u64 , size : u64) -> ReadCacheRange < '_ , R > { ReadCacheRange { r : self , offset , size , } } # [doc = " Free buffers used by the cache."] pub fn clear (& mut self) { self . cache . borrow_mut () . bufs . clear () ; } # [doc = " Unwrap this `ReadCache<R>`, returning the underlying reader."] pub fn into_inner (self) -> R { self . cache . into_inner () . read } }
+};
+}

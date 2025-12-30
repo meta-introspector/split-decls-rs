@@ -1,0 +1,39 @@
+// Generated module macro for crate::filter_utils
+macro_rules! Modcrate_filter_utils {
+() => {
+        Depcrate_filter_utilsuse_179!();
+        Depcrate_filter_utilsuse_180!();
+        Depcrate_filter_utilsuse_181!();
+        Depcrate_filter_utilsOrderedF64!();
+        Depcrate_filter_utilsimpl_183!();
+        Depcrate_filter_utilsimpl_184!();
+        Depcrate_filter_utilsimpl_185!();
+        Depcrate_filter_utilsimpl_186!();
+        Depcrate_filter_utilstotal_cmp!();
+        Depcrate_filter_utilsArrayLen!();
+        Depcrate_filter_utilsGetValue!();
+        Depcrate_filter_utilsimpl_190!();
+        Depcrate_filter_utilsimpl_191!();
+        Depcrate_filter_utilsimpl_192!();
+        Depcrate_filter_utilsimpl_193!();
+        Depcrate_filter_utilsimpl_194!();
+        Depcrate_filter_utilsSortPairs!();
+        Depcrate_filter_utilsSortNumbers!();
+        Depcrate_filter_utilsSortBools!();
+        Depcrate_filter_utilsSortStrings!();
+        Depcrate_filter_utilsSortArrays!();
+        Depcrate_filter_utilsimpl_200!();
+        Depcrate_filter_utilsSortStrategy!();
+        Depcrate_filter_utilsimpl_202!();
+        Depcrate_filter_utilsget_sort_strategy_for_type!();
+        Depcrate_filter_utilsUnique!();
+        Depcrate_filter_utilsUniqueNumbers!();
+        Depcrate_filter_utilsUniqueBools!();
+        Depcrate_filter_utilsUniqueStrings!();
+        Depcrate_filter_utilsUniqueStrategy!();
+        Depcrate_filter_utilsimpl_209!();
+        Depcrate_filter_utilsimpl_210!();
+        Depcrate_filter_utilsimpl_211!();
+        Depcrate_filter_utilsget_unique_strategy_for_type!();
+    };
+}

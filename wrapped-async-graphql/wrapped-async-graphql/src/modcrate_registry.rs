@@ -1,0 +1,40 @@
+// Generated module macro for crate::registry
+macro_rules! Modcrate_registry {
+() => {
+        Depcrate_registrycache_control!();
+        Depcrate_registryexport_sdl!();
+        Depcrate_registrystringify_exec_doc!();
+        Depcrate_registryuse_1528!();
+        Depcrate_registryuse_1529!();
+        Depcrate_registryuse_1530!();
+        Depcrate_registryuse_1531!();
+        Depcrate_registryuse_1532!();
+        Depcrate_registryuse_1533!();
+        Depcrate_registrystrip_brackets!();
+        Depcrate_registryMetaTypeName!();
+        Depcrate_registryimpl_1536!();
+        Depcrate_registryimpl_1537!();
+        Depcrate_registryMetaDirectiveInvocation!();
+        Depcrate_registryimpl_1539!();
+        Depcrate_registryMetaInputValue!();
+        Depcrate_registryComputeComplexityFn!();
+        Depcrate_registryDeprecation!();
+        Depcrate_registryimpl_1543!();
+        Depcrate_registryMetaField!();
+        Depcrate_registryMetaEnumValue!();
+        Depcrate_registryMetaVisibleFn!();
+        Depcrate_registryMetaTypeId!();
+        Depcrate_registryimpl_1548!();
+        Depcrate_registryimpl_1549!();
+        Depcrate_registryScalarValidatorFn!();
+        Depcrate_registryMetaType!();
+        Depcrate_registryimpl_1552!();
+        Depcrate_registryMetaDirective!();
+        Depcrate_registryimpl_1554!();
+        Depcrate_registryRegistry!();
+        Depcrate_registryimpl_1556!();
+        Depcrate_registryis_visible!();
+        Depcrate_registryis_system_type!();
+        Depcrate_registrytest!();
+    };
+}

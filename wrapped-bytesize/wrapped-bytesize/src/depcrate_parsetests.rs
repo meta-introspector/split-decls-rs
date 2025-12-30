@@ -1,0 +1,9 @@
+// Generated macro for tests (module)
+macro_rules! Depcrate_parsetests {
+() => {
+// Module: crate::parse
+// Provides: {"tests"}
+// Dependencies: {}
+# [cfg (test)] mod tests { use alloc :: string :: ToString as _ ; use super :: * ; # [test] fn when_ok () { fn parse (s : & str) -> u64 { s . parse :: < ByteSize > () . unwrap () . 0 } assert_eq ! ("0" . parse ::< ByteSize > () . unwrap () . 0 , 0) ; assert_eq ! (parse ("0") , 0) ; assert_eq ! (parse ("500") , 500) ; assert_eq ! (parse ("1K") , Unit :: KiloByte * 1) ; assert_eq ! (parse ("1Ki") , Unit :: KibiByte * 1) ; assert_eq ! (parse ("1.5Ki") , (1.5 * Unit :: KibiByte) as u64) ; assert_eq ! (parse ("1KiB") , 1 * Unit :: KibiByte) ; assert_eq ! (parse ("1.5KiB") , (1.5 * Unit :: KibiByte) as u64) ; assert_eq ! (parse ("3 MB") , Unit :: MegaByte * 3) ; assert_eq ! (parse ("4 MiB") , Unit :: MebiByte * 4) ; assert_eq ! (parse ("6 GB") , 6 * Unit :: GigaByte) ; assert_eq ! (parse ("4 GiB") , 4 * Unit :: GibiByte) ; assert_eq ! (parse ("88TB") , 88 * Unit :: TeraByte) ; assert_eq ! (parse ("521TiB") , 521 * Unit :: TebiByte) ; assert_eq ! (parse ("8 PB") , 8 * Unit :: PetaByte) ; assert_eq ! (parse ("8P") , 8 * Unit :: PetaByte) ; assert_eq ! (parse ("12 PiB") , 12 * Unit :: PebiByte) ; } # [test] fn when_err () { fn parse (s : & str) -> Result < ByteSize , String > { s . parse :: < ByteSize > () } assert ! (parse ("") . is_err ()) ; assert ! (parse ("a124GB") . is_err ()) ; assert ! (parse ("1.3 42.0 B") . is_err ()) ; assert ! (parse ("1.3 ... B") . is_err ()) ; assert ! (parse ("1 000 B") . is_err ()) ; } # [test] fn to_and_from_str () { fn parse (s : & str) -> u64 { s . parse :: < ByteSize > () . unwrap () . 0 } assert_eq ! (parse (& parse ("128GB") . to_string ()) , 128 * Unit :: GigaByte) ; assert_eq ! (parse (& ByteSize (parse ("128.000 GiB")) . to_string ()) , 128 * Unit :: GibiByte ,) ; } }
+};
+}

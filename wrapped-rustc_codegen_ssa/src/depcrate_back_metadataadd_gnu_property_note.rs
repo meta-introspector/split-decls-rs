@@ -1,0 +1,9 @@
+// Generated macro for add_gnu_property_note (function)
+macro_rules! Depcrate_back_metadataadd_gnu_property_note {
+() => {
+// Module: crate::back::metadata
+// Provides: {"add_gnu_property_note"}
+// Dependencies: {}
+fn add_gnu_property_note (file : & mut write :: Object < 'static > , architecture : Architecture , binary_format : BinaryFormat , endianness : Endianness ,) { if binary_format != BinaryFormat :: Elf || ! matches ! (architecture , Architecture :: X86_64 | Architecture :: Aarch64) { return ; } let section = file . add_section (file . segment_name (StandardSegment :: Data) . to_vec () , b".note.gnu.property" . to_vec () , SectionKind :: Note ,) ; let mut data : Vec < u8 > = Vec :: new () ; let n_namsz : u32 = 4 ; let n_descsz : u32 = 16 ; let n_type : u32 = object :: elf :: NT_GNU_PROPERTY_TYPE_0 ; let header_values = [n_namsz , n_descsz , n_type] ; header_values . iter () . for_each (| v | { data . extend_from_slice (& match endianness { Endianness :: Little => v . to_le_bytes () , Endianness :: Big => v . to_be_bytes () , }) }) ; data . extend_from_slice (b"GNU\0") ; let pr_type : u32 = match architecture { Architecture :: X86_64 => object :: elf :: GNU_PROPERTY_X86_FEATURE_1_AND , Architecture :: Aarch64 => object :: elf :: GNU_PROPERTY_AARCH64_FEATURE_1_AND , _ => unreachable ! () , } ; let pr_datasz : u32 = 4 ; let pr_data : u32 = 3 ; let pr_padding : u32 = 0 ; let property_values = [pr_type , pr_datasz , pr_data , pr_padding] ; property_values . iter () . for_each (| v | { data . extend_from_slice (& match endianness { Endianness :: Little => v . to_le_bytes () , Endianness :: Big => v . to_be_bytes () , }) }) ; file . append_section_data (section , & data , 8) ; }
+};
+}

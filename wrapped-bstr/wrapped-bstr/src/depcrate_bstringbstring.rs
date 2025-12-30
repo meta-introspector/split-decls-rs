@@ -1,0 +1,9 @@
+// Generated macro for BString (struct)
+macro_rules! Depcrate_bstringBString {
+() => {
+// Module: crate::bstring
+// Provides: {"BString"}
+// Dependencies: {}
+# [doc = " A wrapper for `Vec<u8>` that provides convenient string oriented trait"] # [doc = " impls."] # [doc = ""] # [doc = " A `BString` has ownership over its contents and corresponds to"] # [doc = " a growable or shrinkable buffer. Its borrowed counterpart is a"] # [doc = " [`BStr`](struct.BStr.html), called a byte string slice."] # [doc = ""] # [doc = " Using a `BString` is just like using a `Vec<u8>`, since `BString`"] # [doc = " implements `Deref` to `Vec<u8>`. So all methods available on `Vec<u8>`"] # [doc = " are also available on `BString`."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " You can create a new `BString` from a `Vec<u8>` via a `From` impl:"] # [doc = ""] # [doc = " ```"] # [doc = " use bstr::BString;"] # [doc = ""] # [doc = " let s = BString::from(\"Hello, world!\");"] # [doc = " ```"] # [doc = ""] # [doc = " # Deref"] # [doc = ""] # [doc = " The `BString` type implements `Deref` and `DerefMut`, where the target"] # [doc = " types are `&Vec<u8>` and `&mut Vec<u8>`, respectively. `Deref` permits all of the"] # [doc = " methods defined on `Vec<u8>` to be implicitly callable on any `BString`."] # [doc = ""] # [doc = " For more information about how deref works, see the documentation for the"] # [doc = " [`std::ops::Deref`](https://doc.rust-lang.org/std/ops/trait.Deref.html)"] # [doc = " trait."] # [doc = ""] # [doc = " # Representation"] # [doc = ""] # [doc = " A `BString` has the same representation as a `Vec<u8>` and a `String`."] # [doc = " That is, it is made up of three word sized components: a pointer to a"] # [doc = " region of memory containing the bytes, a length and a capacity."] # [derive (Clone)] pub struct BString { bytes : Vec < u8 > , }
+};
+}

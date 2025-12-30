@@ -1,0 +1,9 @@
+// Generated macro for cfg (function)
+macro_rules! Depcratecfg {
+() => {
+// Module: crate
+// Provides: {"cfg"}
+// Dependencies: {}
+# [cfg (not (cfg_macro_not_allowed))] # [proc_macro] pub fn cfg (input : TokenStream) -> TokenStream { use proc_macro :: { Ident , Span , TokenTree } ; (| | { let ref mut args = iter :: new (input) ; let expr = expr :: parse (args) ? ; token :: parse_end (args) ? ; let boolean = expr . eval (RUSTVERSION) ; let ident = Ident :: new (& boolean . to_string () , Span :: call_site ()) ; Ok (TokenStream :: from (TokenTree :: Ident (ident))) }) () . unwrap_or_else (Error :: into_compile_error) }
+};
+}

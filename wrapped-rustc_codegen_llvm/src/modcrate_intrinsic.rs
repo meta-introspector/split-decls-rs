@@ -1,0 +1,48 @@
+// Generated module macro for crate::intrinsic
+macro_rules! Modcrate_intrinsic {
+() => {
+        Depcrate_intrinsicuse_864!();
+        Depcrate_intrinsicuse_865!();
+        Depcrate_intrinsicuse_866!();
+        Depcrate_intrinsicuse_867!();
+        Depcrate_intrinsicuse_868!();
+        Depcrate_intrinsicuse_869!();
+        Depcrate_intrinsicuse_870!();
+        Depcrate_intrinsicuse_871!();
+        Depcrate_intrinsicuse_872!();
+        Depcrate_intrinsicuse_873!();
+        Depcrate_intrinsicuse_874!();
+        Depcrate_intrinsicuse_875!();
+        Depcrate_intrinsicuse_876!();
+        Depcrate_intrinsicuse_877!();
+        Depcrate_intrinsicuse_878!();
+        Depcrate_intrinsicuse_879!();
+        Depcrate_intrinsicuse_880!();
+        Depcrate_intrinsicuse_881!();
+        Depcrate_intrinsicuse_882!();
+        Depcrate_intrinsicuse_883!();
+        Depcrate_intrinsicuse_884!();
+        Depcrate_intrinsicuse_885!();
+        Depcrate_intrinsicuse_886!();
+        Depcrate_intrinsicuse_887!();
+        Depcrate_intrinsicuse_888!();
+        Depcrate_intrinsicuse_889!();
+        Depcrate_intrinsicuse_890!();
+        Depcrate_intrinsicuse_891!();
+        Depcrate_intrinsicuse_892!();
+        Depcrate_intrinsicuse_893!();
+        Depcrate_intrinsicuse_894!();
+        Depcrate_intrinsiccall_simple_intrinsic!();
+        Depcrate_intrinsicimpl_896!();
+        Depcrate_intrinsiccatch_unwind_intrinsic!();
+        Depcrate_intrinsiccodegen_msvc_try!();
+        Depcrate_intrinsiccodegen_wasm_try!();
+        Depcrate_intrinsiccodegen_gnu_try!();
+        Depcrate_intrinsiccodegen_emcc_try!();
+        Depcrate_intrinsicgen_fn!();
+        Depcrate_intrinsicget_rust_try_fn!();
+        Depcrate_intrinsiccodegen_autodiff!();
+        Depcrate_intrinsicget_args_from_tuple!();
+        Depcrate_intrinsicgeneric_simd_intrinsic!();
+    };
+}

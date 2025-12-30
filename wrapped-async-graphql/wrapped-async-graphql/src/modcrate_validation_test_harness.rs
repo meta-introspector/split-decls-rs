@@ -1,0 +1,42 @@
+// Generated module macro for crate::validation::test_harness
+macro_rules! Modcrate_validation_test_harness {
+() => {
+        Depcrate_validation_test_harnessuse_192!();
+        Depcrate_validation_test_harnessuse_193!();
+        Depcrate_validation_test_harnessTestInput!();
+        Depcrate_validation_test_harnessimpl_195!();
+        Depcrate_validation_test_harnessDogCommand!();
+        Depcrate_validation_test_harnessDog!();
+        Depcrate_validation_test_harnessimpl_198!();
+        Depcrate_validation_test_harnessFurColor!();
+        Depcrate_validation_test_harnessCat!();
+        Depcrate_validation_test_harnessimpl_201!();
+        Depcrate_validation_test_harnessCatOrDog!();
+        Depcrate_validation_test_harnessHuman!();
+        Depcrate_validation_test_harnessimpl_204!();
+        Depcrate_validation_test_harnessAlien!();
+        Depcrate_validation_test_harnessimpl_206!();
+        Depcrate_validation_test_harnessDogOrHuman!();
+        Depcrate_validation_test_harnessHumanOrAlien!();
+        Depcrate_validation_test_harnessBeing!();
+        Depcrate_validation_test_harnessPet!();
+        Depcrate_validation_test_harnessCanine!();
+        Depcrate_validation_test_harnessIntelligent!();
+        Depcrate_validation_test_harnessComplexInput!();
+        Depcrate_validation_test_harnessComplicatedArgs!();
+        Depcrate_validation_test_harnessimpl_215!();
+        Depcrate_validation_test_harnessOneofArg!();
+        Depcrate_validation_test_harnessQuery!();
+        Depcrate_validation_test_harnessimpl_218!();
+        Depcrate_validation_test_harnessMutation!();
+        Depcrate_validation_test_harnessimpl_220!();
+        Depcrate_validation_test_harnessSubscription!();
+        Depcrate_validation_test_harnessimpl_222!();
+        Depcrate_validation_test_harnessTEST_HARNESS!();
+        Depcrate_validation_test_harnessvalidate!();
+        Depcrate_validation_test_harnessexpect_passes_rule_!();
+        Depcrate_validation_test_harnessexpect_passes_rule!();
+        Depcrate_validation_test_harnessexpect_fails_rule_!();
+        Depcrate_validation_test_harnessexpect_fails_rule!();
+    };
+}

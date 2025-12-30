@@ -1,0 +1,9 @@
+// Generated macro for impl_545 (impl)
+macro_rules! Depcrate_read_elf_comdatimpl_545 {
+() => {
+// Module: crate::read::elf::comdat
+// Provides: {"impl_545"}
+// Dependencies: {}
+impl < 'data , 'file , Elf , R > ElfComdatIterator < 'data , 'file , Elf , R > where Elf : FileHeader , R : ReadRef < 'data > , { pub (super) fn new (file : & 'file ElfFile < 'data , Elf , R > ,) -> ElfComdatIterator < 'data , 'file , Elf , R > { let mut iter = file . sections . iter () . enumerate () ; iter . next () ; ElfComdatIterator { file , iter } } }
+};
+}

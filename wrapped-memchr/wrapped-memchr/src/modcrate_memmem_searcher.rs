@@ -1,0 +1,44 @@
+// Generated module macro for crate::memmem::searcher
+macro_rules! Modcrate_memmem_searcher {
+() => {
+        Depcrate_memmem_searcheruse_365!();
+        Depcrate_memmem_searcheruse_366!();
+        Depcrate_memmem_searcheruse_367!();
+        Depcrate_memmem_searcheruse_368!();
+        Depcrate_memmem_searcherSearcher!();
+        Depcrate_memmem_searcherimpl_370!();
+        Depcrate_memmem_searcherimpl_371!();
+        Depcrate_memmem_searcherother_372!();
+        Depcrate_memmem_searcherTwoWayWithPrefilter!();
+        Depcrate_memmem_searcherSearcherKindFn!();
+        Depcrate_memmem_searchersearcher_kind_empty!();
+        Depcrate_memmem_searchersearcher_kind_one_byte!();
+        Depcrate_memmem_searchersearcher_kind_two_way!();
+        Depcrate_memmem_searchersearcher_kind_two_way_with_prefilter!();
+        Depcrate_memmem_searchersearcher_kind_sse2!();
+        Depcrate_memmem_searchersearcher_kind_avx2!();
+        Depcrate_memmem_searchersearcher_kind_simd128!();
+        Depcrate_memmem_searchersearcher_kind_neon!();
+        Depcrate_memmem_searcherSearcherRev!();
+        Depcrate_memmem_searcherSearcherRevKind!();
+        Depcrate_memmem_searcherimpl_385!();
+        Depcrate_memmem_searcherPrefilterConfig!();
+        Depcrate_memmem_searcherimpl_387!();
+        Depcrate_memmem_searcherimpl_388!();
+        Depcrate_memmem_searcherPrefilter!();
+        Depcrate_memmem_searcherimpl_390!();
+        Depcrate_memmem_searcherimpl_391!();
+        Depcrate_memmem_searcherother_392!();
+        Depcrate_memmem_searcherPrefilterKindFn!();
+        Depcrate_memmem_searcherprefilter_kind_fallback!();
+        Depcrate_memmem_searcherprefilter_kind_sse2!();
+        Depcrate_memmem_searcherprefilter_kind_avx2!();
+        Depcrate_memmem_searcherprefilter_kind_simd128!();
+        Depcrate_memmem_searcherprefilter_kind_neon!();
+        Depcrate_memmem_searcherPrefilterState!();
+        Depcrate_memmem_searcherimpl_400!();
+        Depcrate_memmem_searcherPre!();
+        Depcrate_memmem_searcherimpl_402!();
+        Depcrate_memmem_searcherdo_packed_search!();
+    };
+}

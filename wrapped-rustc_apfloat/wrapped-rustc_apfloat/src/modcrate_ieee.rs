@@ -1,0 +1,44 @@
+// Generated module macro for crate::ieee
+macro_rules! Modcrate_ieee {
+() => {
+        Depcrate_ieeeuse_26!();
+        Depcrate_ieeeuse_27!();
+        Depcrate_ieeeuse_28!();
+        Depcrate_ieeeuse_29!();
+        Depcrate_ieeeuse_30!();
+        Depcrate_ieeeuse_31!();
+        Depcrate_ieeeuse_32!();
+        Depcrate_ieeeuse_33!();
+        Depcrate_ieeeIeeeFloat!();
+        Depcrate_ieeeLimb!();
+        Depcrate_ieeeLIMB_BITS!();
+        Depcrate_ieeelimbs_for_bits!();
+        Depcrate_ieeeDynPrecisionLimbVec!();
+        Depcrate_ieeeLoss!();
+        Depcrate_ieeeNonfiniteBehavior!();
+        Depcrate_ieeeNegExt!();
+        Depcrate_ieeeimpl_42!();
+        Depcrate_ieeeSemantics!();
+        Depcrate_ieeeimpl_44!();
+        Depcrate_ieeeimpl_45!();
+        Depcrate_ieeeieee_semantics!();
+        Depcrate_ieeemacro_47!();
+        Depcrate_ieeeX87DoubleExtendedS!();
+        Depcrate_ieeeX87DoubleExtended!();
+        Depcrate_ieeeimpl_50!();
+        Depcrate_ieeemacro_51!();
+        Depcrate_ieeeimpl_52!();
+        Depcrate_ieeeimpl_53!();
+        Depcrate_ieeeimpl_54!();
+        Depcrate_ieeeimpl_55!();
+        Depcrate_ieeeimpl_56!();
+        Depcrate_ieeeIeeeDefaultExceptionHandling!();
+        Depcrate_ieeeimpl_58!();
+        Depcrate_ieeeimpl_59!();
+        Depcrate_ieeeimpl_60!();
+        Depcrate_ieeeimpl_61!();
+        Depcrate_ieeeimpl_62!();
+        Depcrate_ieeeimpl_63!();
+        Depcrate_ieeesig!();
+    };
+}

@@ -1,0 +1,9 @@
+// Generated macro for impl_86 (impl)
+macro_rules! Depcrate_astimpl_86 {
+() => {
+// Module: crate::ast
+// Provides: {"impl_86"}
+// Dependencies: {}
+impl BinOpKind { pub fn as_str (& self) -> & 'static str { use BinOpKind :: * ; match self { Add => "+" , Sub => "-" , Mul => "*" , Div => "/" , Rem => "%" , And => "&&" , Or => "||" , BitXor => "^" , BitAnd => "&" , BitOr => "|" , Shl => "<<" , Shr => ">>" , Eq => "==" , Lt => "<" , Le => "<=" , Ne => "!=" , Ge => ">=" , Gt => ">" , } } pub fn is_lazy (& self) -> bool { matches ! (self , BinOpKind :: And | BinOpKind :: Or) } pub fn precedence (& self) -> ExprPrecedence { use BinOpKind :: * ; match * self { Mul | Div | Rem => ExprPrecedence :: Product , Add | Sub => ExprPrecedence :: Sum , Shl | Shr => ExprPrecedence :: Shift , BitAnd => ExprPrecedence :: BitAnd , BitXor => ExprPrecedence :: BitXor , BitOr => ExprPrecedence :: BitOr , Lt | Gt | Le | Ge | Eq | Ne => ExprPrecedence :: Compare , And => ExprPrecedence :: LAnd , Or => ExprPrecedence :: LOr , } } pub fn fixity (& self) -> Fixity { use BinOpKind :: * ; match self { Eq | Ne | Lt | Le | Gt | Ge => Fixity :: None , Add | Sub | Mul | Div | Rem | And | Or | BitXor | BitAnd | BitOr | Shl | Shr => { Fixity :: Left } } } pub fn is_comparison (self) -> bool { use BinOpKind :: * ; match self { Eq | Ne | Lt | Le | Gt | Ge => true , Add | Sub | Mul | Div | Rem | And | Or | BitXor | BitAnd | BitOr | Shl | Shr => false , } } # [doc = " Returns `true` if the binary operator takes its arguments by value."] pub fn is_by_value (self) -> bool { ! self . is_comparison () } }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for impl_234 (impl)
+macro_rules! Depcrate_read_cfiimpl_234 {
+() => {
+// Module: crate::read::cfi
+// Provides: {"impl_234"}
+// Dependencies: {}
+impl < 'bases , Section , R > CfiEntriesIter < 'bases , Section , R > where R : Reader , Section : UnwindSection < R > , { # [doc = " Advance the iterator to the next entry."] pub fn next (& mut self) -> Result < Option < CieOrFde < 'bases , Section , R > > > { loop { if self . input . is_empty () { return Ok (None) ; } match parse_cfi_entry (self . bases , & self . section , & mut self . input) { Ok (Some (entry)) => return Ok (Some (entry)) , Err (e) => { self . input . empty () ; return Err (e) ; } Ok (None) => { if Section :: has_zero_terminator () { self . input . empty () ; return Ok (None) ; } continue ; } } } } }
+};
+}

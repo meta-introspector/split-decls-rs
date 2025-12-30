@@ -1,0 +1,9 @@
+// Generated macro for impl_54 (impl)
+macro_rules! Depcrate_cursorimpl_54 {
+() => {
+// Module: crate::cursor
+// Provides: {"impl_54"}
+// Dependencies: {}
+impl Preorder { fn new (start : SyntaxNode) -> Preorder { let next = Some (WalkEvent :: Enter (start . clone ())) ; Preorder { start , next , skip_subtree : false } } pub fn skip_subtree (& mut self) { self . skip_subtree = true ; } # [cold] fn do_skip (& mut self) { self . next = self . next . take () . map (| next | match next { WalkEvent :: Enter (first_child) => WalkEvent :: Leave (first_child . parent () . unwrap ()) , WalkEvent :: Leave (parent) => WalkEvent :: Leave (parent) , }) } }
+};
+}

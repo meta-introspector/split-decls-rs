@@ -1,0 +1,9 @@
+// Generated macro for test_date_checked_add_signed (function)
+macro_rules! Depcrate_naive_date_teststest_date_checked_add_signed {
+() => {
+// Module: crate::naive::date::tests
+// Provides: {"test_date_checked_add_signed"}
+// Dependencies: {}
+# [test] fn test_date_checked_add_signed () { fn check (lhs : Option < NaiveDate > , delta : TimeDelta , rhs : Option < NaiveDate >) { assert_eq ! (lhs . unwrap () . checked_add_signed (delta) , rhs) ; assert_eq ! (lhs . unwrap () . checked_sub_signed (- delta) , rhs) ; } let ymd = NaiveDate :: from_ymd_opt ; check (ymd (2014 , 1 , 1) , TimeDelta :: zero () , ymd (2014 , 1 , 1)) ; check (ymd (2014 , 1 , 1) , TimeDelta :: try_seconds (86399) . unwrap () , ymd (2014 , 1 , 1)) ; check (ymd (2014 , 1 , 1) , TimeDelta :: try_seconds (- 86399) . unwrap () , ymd (2014 , 1 , 1)) ; check (ymd (2014 , 1 , 1) , TimeDelta :: try_days (1) . unwrap () , ymd (2014 , 1 , 2)) ; check (ymd (2014 , 1 , 1) , TimeDelta :: try_days (- 1) . unwrap () , ymd (2013 , 12 , 31)) ; check (ymd (2014 , 1 , 1) , TimeDelta :: try_days (364) . unwrap () , ymd (2014 , 12 , 31)) ; check (ymd (2014 , 1 , 1) , TimeDelta :: try_days (365 * 4 + 1) . unwrap () , ymd (2018 , 1 , 1)) ; check (ymd (2014 , 1 , 1) , TimeDelta :: try_days (365 * 400 + 97) . unwrap () , ymd (2414 , 1 , 1)) ; check (ymd (- 7 , 1 , 1) , TimeDelta :: try_days (365 * 12 + 3) . unwrap () , ymd (5 , 1 , 1)) ; check (ymd (0 , 1 , 1) , TimeDelta :: try_days (MAX_DAYS_FROM_YEAR_0 as i64) . unwrap () , ymd (MAX_YEAR , 12 , 31) ,) ; check (ymd (0 , 1 , 1) , TimeDelta :: try_days (MAX_DAYS_FROM_YEAR_0 as i64 + 1) . unwrap () , None) ; check (ymd (0 , 1 , 1) , TimeDelta :: MAX , None) ; check (ymd (0 , 1 , 1) , TimeDelta :: try_days (MIN_DAYS_FROM_YEAR_0 as i64) . unwrap () , ymd (MIN_YEAR , 1 , 1) ,) ; check (ymd (0 , 1 , 1) , TimeDelta :: try_days (MIN_DAYS_FROM_YEAR_0 as i64 - 1) . unwrap () , None) ; check (ymd (0 , 1 , 1) , TimeDelta :: MIN , None) ; }
+};
+}

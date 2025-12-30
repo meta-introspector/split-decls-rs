@@ -1,0 +1,9 @@
+// Generated macro for REPLACEMENT (static)
+macro_rules! DepcrateREPLACEMENT {
+() => {
+// Module: crate
+// Provides: {"REPLACEMENT"}
+// Dependencies: {}
+# [doc = " The replacement encoding."] # [doc = ""] # [doc = " This decode-only encoding decodes all non-zero-length streams to a single"] # [doc = " REPLACEMENT CHARACTER. Its purpose is to avoid the use of an"] # [doc = " ASCII-compatible fallback encoding (typically windows-1252) for some"] # [doc = " encodings that are no longer supported by the Web Platform and that"] # [doc = " would be dangerous to treat as ASCII-compatible."] # [doc = ""] # [doc = " There is no corresponding encoder. The output encoding of this encoding"] # [doc = " is UTF-8."] # [doc = ""] # [doc = " This encoding does not have a Windows code page number."] # [doc = ""] # [doc = " This will change from `static` to `const` if Rust changes"] # [doc = " to make the referent of `pub const FOO: &'static Encoding`"] # [doc = " unique cross-crate, so don't take the address of this"] # [doc = " `static`."] pub static REPLACEMENT : & 'static Encoding = & REPLACEMENT_INIT ;
+};
+}

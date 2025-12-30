@@ -1,0 +1,9 @@
+// Generated macro for impl_14 (impl)
+macro_rules! Depcrate_errorimpl_14 {
+() => {
+// Module: crate::error
+// Provides: {"impl_14"}
+// Dependencies: {}
+impl fmt :: Display for Error { fn fmt (& self , f : & mut fmt :: Formatter) -> fmt :: Result { write ! (f , "{}" , self . message) } }
+};
+}

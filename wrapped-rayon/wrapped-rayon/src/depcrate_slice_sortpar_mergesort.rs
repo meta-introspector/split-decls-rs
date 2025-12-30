@@ -1,0 +1,9 @@
+// Generated macro for par_mergesort (function)
+macro_rules! Depcrate_slice_sortpar_mergesort {
+() => {
+// Module: crate::slice::sort
+// Provides: {"par_mergesort"}
+// Dependencies: {}
+# [doc = " Sorts `v` using merge sort in parallel."] # [doc = ""] # [doc = " The algorithm is stable, allocates memory, and `O(n log n)` worst-case."] # [doc = " The allocated temporary buffer is of the same length as is `v`."] pub (super) fn par_mergesort < T , F > (v : & mut [T] , is_less : F) where T : Send , F : Fn (& T , & T) -> bool + Sync , { const MAX_INSERTION : usize = 20 ; const CHUNK_LENGTH : usize = 2000 ; if size_of :: < T > () == 0 { return ; } let len = v . len () ; if len <= MAX_INSERTION { if len >= 2 { insertion_sort_shift_left (v , 1 , & is_less) ; } return ; } let mut buf = Vec :: < T > :: with_capacity (len) ; let buf = buf . as_mut_ptr () ; if len <= CHUNK_LENGTH { let res = unsafe { merge_sort (v , buf , & is_less) } ; if res == MergeSortResult :: Descending { v . reverse () ; } return ; } let mut iter = { let buf = SendPtr (buf) ; let is_less = & is_less ; v . par_chunks_mut (CHUNK_LENGTH) . with_max_len (1) . enumerate () . map (move | (i , chunk) | { let l = CHUNK_LENGTH * i ; let r = l + chunk . len () ; unsafe { let buf = buf . get () . add (l) ; (l , r , merge_sort (chunk , buf , is_less)) } }) . collect :: < Vec < _ > > () . into_iter () . peekable () } ; let mut chunks = Vec :: with_capacity (iter . len ()) ; while let Some ((a , mut b , res)) = iter . next () { if res != MergeSortResult :: Sorted { while let Some (& (x , y , r)) = iter . peek () { if r == res && (r == MergeSortResult :: Descending) == is_less (& v [x] , & v [x - 1]) { b = y ; iter . next () ; } else { break ; } } } if res == MergeSortResult :: Descending { v [a .. b] . reverse () ; } chunks . push ((a , b)) ; } unsafe { merge_recurse (v . as_mut_ptr () , buf , & chunks , false , & is_less) ; } }
+};
+}

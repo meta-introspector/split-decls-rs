@@ -1,0 +1,9 @@
+// Generated macro for reducer_does_not_preserve_order (function)
+macro_rules! Depcrate_iter_collect_testreducer_does_not_preserve_order {
+() => {
+// Module: crate::iter::collect::test
+// Provides: {"reducer_does_not_preserve_order"}
+// Dependencies: {}
+# [test] # [should_panic (expected = "expected 4 total writes, but got 2")] fn reducer_does_not_preserve_order () { let mut v = vec ! [] ; collect_with_consumer (& mut v , 4 , | consumer | { let reducer = consumer . to_reducer () ; let (left_consumer , right_consumer , _) = consumer . split_at (2) ; let mut left_folder = left_consumer . into_folder () ; let mut right_folder = right_consumer . into_folder () ; left_folder = left_folder . consume (0) . consume (1) ; right_folder = right_folder . consume (2) . consume (3) ; let left_result = left_folder . complete () ; let right_result = right_folder . complete () ; reducer . reduce (right_result , left_result) }) ; }
+};
+}

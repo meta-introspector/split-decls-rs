@@ -1,0 +1,45 @@
+// Generated module macro for crate::back::symbol_export
+macro_rules! Modcrate_back_symbol_export {
+() => {
+        Depcrate_back_symbol_exportuse_364!();
+        Depcrate_back_symbol_exportuse_365!();
+        Depcrate_back_symbol_exportuse_366!();
+        Depcrate_back_symbol_exportuse_367!();
+        Depcrate_back_symbol_exportuse_368!();
+        Depcrate_back_symbol_exportuse_369!();
+        Depcrate_back_symbol_exportuse_370!();
+        Depcrate_back_symbol_exportuse_371!();
+        Depcrate_back_symbol_exportuse_372!();
+        Depcrate_back_symbol_exportuse_373!();
+        Depcrate_back_symbol_exportuse_374!();
+        Depcrate_back_symbol_exportuse_375!();
+        Depcrate_back_symbol_exportuse_376!();
+        Depcrate_back_symbol_exportuse_377!();
+        Depcrate_back_symbol_exportuse_378!();
+        Depcrate_back_symbol_exportuse_379!();
+        Depcrate_back_symbol_exportuse_380!();
+        Depcrate_back_symbol_exportthreshold!();
+        Depcrate_back_symbol_exportcrate_export_threshold!();
+        Depcrate_back_symbol_exportcrates_export_threshold!();
+        Depcrate_back_symbol_exportreachable_non_generics_provider!();
+        Depcrate_back_symbol_exportis_reachable_non_generic_provider_local!();
+        Depcrate_back_symbol_exportis_reachable_non_generic_provider_extern!();
+        Depcrate_back_symbol_exportexported_non_generic_symbols_provider_local!();
+        Depcrate_back_symbol_exportexported_generic_symbols_provider_local!();
+        Depcrate_back_symbol_exportupstream_monomorphizations_provider!();
+        Depcrate_back_symbol_exportupstream_monomorphizations_for_provider!();
+        Depcrate_back_symbol_exportupstream_drop_glue_for_provider!();
+        Depcrate_back_symbol_exportupstream_async_drop_glue_for_provider!();
+        Depcrate_back_symbol_exportis_unreachable_local_definition_provider!();
+        Depcrate_back_symbol_exportprovide!();
+        Depcrate_back_symbol_exportallocator_shim_symbols!();
+        Depcrate_back_symbol_exportsymbol_export_level!();
+        Depcrate_back_symbol_exportsymbol_name_for_instance_in_crate!();
+        Depcrate_back_symbol_exportcalling_convention_for_symbol!();
+        Depcrate_back_symbol_exportlinking_symbol_name_for_instance_in_crate!();
+        Depcrate_back_symbol_exportexporting_symbol_name_for_instance_in_crate!();
+        Depcrate_back_symbol_exportextend_exported_symbols!();
+        Depcrate_back_symbol_exportmaybe_emutls_symbol_name!();
+        Depcrate_back_symbol_exportwasm_import_module_map!();
+    };
+}

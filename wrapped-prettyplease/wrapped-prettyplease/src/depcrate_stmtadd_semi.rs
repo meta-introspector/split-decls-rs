@@ -1,0 +1,9 @@
+// Generated macro for add_semi (function)
+macro_rules! Depcrate_stmtadd_semi {
+() => {
+// Module: crate::stmt
+// Provides: {"add_semi"}
+// Dependencies: {}
+pub fn add_semi (expr : & Expr) -> bool { match expr { # ! [cfg_attr (all (test , exhaustive) , deny (non_exhaustive_omitted_patterns))] Expr :: Assign (_) | Expr :: Break (_) | Expr :: Continue (_) | Expr :: Return (_) | Expr :: Yield (_) => { true } Expr :: Binary (expr) => { match expr . op { # ! [cfg_attr (all (test , exhaustive) , deny (non_exhaustive_omitted_patterns))] BinOp :: AddAssign (_) | BinOp :: SubAssign (_) | BinOp :: MulAssign (_) | BinOp :: DivAssign (_) | BinOp :: RemAssign (_) | BinOp :: BitXorAssign (_) | BinOp :: BitAndAssign (_) | BinOp :: BitOrAssign (_) | BinOp :: ShlAssign (_) | BinOp :: ShrAssign (_) => true , BinOp :: Add (_) | BinOp :: Sub (_) | BinOp :: Mul (_) | BinOp :: Div (_) | BinOp :: Rem (_) | BinOp :: And (_) | BinOp :: Or (_) | BinOp :: BitXor (_) | BinOp :: BitAnd (_) | BinOp :: BitOr (_) | BinOp :: Shl (_) | BinOp :: Shr (_) | BinOp :: Eq (_) | BinOp :: Lt (_) | BinOp :: Le (_) | BinOp :: Ne (_) | BinOp :: Ge (_) | BinOp :: Gt (_) => false , _ => unimplemented ! ("unknown BinOp") , } } Expr :: Group (group) => add_semi (& group . expr) , Expr :: Array (_) | Expr :: Async (_) | Expr :: Await (_) | Expr :: Block (_) | Expr :: Call (_) | Expr :: Cast (_) | Expr :: Closure (_) | Expr :: Const (_) | Expr :: Field (_) | Expr :: ForLoop (_) | Expr :: If (_) | Expr :: Index (_) | Expr :: Infer (_) | Expr :: Let (_) | Expr :: Lit (_) | Expr :: Loop (_) | Expr :: Macro (_) | Expr :: Match (_) | Expr :: MethodCall (_) | Expr :: Paren (_) | Expr :: Path (_) | Expr :: Range (_) | Expr :: RawAddr (_) | Expr :: Reference (_) | Expr :: Repeat (_) | Expr :: Struct (_) | Expr :: Try (_) | Expr :: TryBlock (_) | Expr :: Tuple (_) | Expr :: Unary (_) | Expr :: Unsafe (_) | Expr :: Verbatim (_) | Expr :: While (_) => false , _ => false , } }
+};
+}

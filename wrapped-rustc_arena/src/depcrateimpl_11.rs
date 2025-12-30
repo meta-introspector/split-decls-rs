@@ -1,0 +1,9 @@
+// Generated macro for impl_11 (impl)
+macro_rules! Depcrateimpl_11 {
+() => {
+// Module: crate
+// Provides: {"impl_11"}
+// Dependencies: {}
+impl < T > ArenaChunk < T > { # [inline] unsafe fn new (capacity : usize) -> ArenaChunk < T > { ArenaChunk { storage : NonNull :: from (Box :: leak (Box :: new_uninit_slice (capacity))) , entries : 0 , } } # [doc = " Destroys this arena chunk."] # [doc = ""] # [doc = " # Safety"] # [doc = ""] # [doc = " The caller must ensure that `len` elements of this chunk have been initialized."] # [inline] unsafe fn destroy (& mut self , len : usize) { if mem :: needs_drop :: < T > () { unsafe { let slice = self . storage . as_mut () ; slice [.. len] . assume_init_drop () ; } } } # [inline] fn start (& mut self) -> * mut T { self . storage . as_ptr () as * mut T } # [inline] fn end (& mut self) -> * mut T { unsafe { if size_of :: < T > () == 0 { ptr :: without_provenance_mut (! 0) } else { self . start () . add (self . storage . len ()) } } } }
+};
+}

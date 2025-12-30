@@ -1,0 +1,9 @@
+// Generated macro for highest_var_in_clauses (function)
+macro_rules! Depcrate_infer_canonical_instantiatehighest_var_in_clauses {
+() => {
+// Module: crate::infer::canonical::instantiate
+// Provides: {"highest_var_in_clauses"}
+// Dependencies: {}
+fn highest_var_in_clauses < 'tcx > (c : ty :: Clauses < 'tcx >) -> usize { struct HighestVarInClauses { max_var : usize , current_index : ty :: DebruijnIndex , } impl < 'tcx > TypeVisitor < TyCtxt < 'tcx > > for HighestVarInClauses { fn visit_binder < T : TypeVisitable < TyCtxt < 'tcx > > > (& mut self , t : & ty :: Binder < 'tcx , T > ,) -> Self :: Result { self . current_index . shift_in (1) ; let t = t . super_visit_with (self) ; self . current_index . shift_out (1) ; t } fn visit_ty (& mut self , t : Ty < 'tcx >) { if let ty :: Bound (debruijn , bound_ty) = * t . kind () && debruijn == self . current_index { self . max_var = self . max_var . max (bound_ty . var . as_usize ()) ; } else if t . has_vars_bound_at_or_above (self . current_index) { t . super_visit_with (self) ; } } fn visit_region (& mut self , r : ty :: Region < 'tcx >) { if let ty :: ReBound (debruijn , bound_region) = r . kind () && debruijn == self . current_index { self . max_var = self . max_var . max (bound_region . var . as_usize ()) ; } } fn visit_const (& mut self , ct : ty :: Const < 'tcx >) { if let ty :: ConstKind :: Bound (debruijn , bound_const) = ct . kind () && debruijn == self . current_index { self . max_var = self . max_var . max (bound_const . var . as_usize ()) ; } else if ct . has_vars_bound_at_or_above (self . current_index) { ct . super_visit_with (self) ; } } } let mut visitor = HighestVarInClauses { max_var : 0 , current_index : ty :: INNERMOST } ; c . visit_with (& mut visitor) ; visitor . max_var }
+};
+}

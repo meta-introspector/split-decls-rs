@@ -1,0 +1,52 @@
+// Generated module macro for crate::read::macho::dyld_cache
+macro_rules! Modcrate_read_macho_dyld_cache {
+() => {
+        Depcrate_read_macho_dyld_cacheuse_667!();
+        Depcrate_read_macho_dyld_cacheuse_668!();
+        Depcrate_read_macho_dyld_cacheuse_669!();
+        Depcrate_read_macho_dyld_cacheuse_670!();
+        Depcrate_read_macho_dyld_cacheuse_671!();
+        Depcrate_read_macho_dyld_cacheuse_672!();
+        Depcrate_read_macho_dyld_cacheuse_673!();
+        Depcrate_read_macho_dyld_cacheDyldCache!();
+        Depcrate_read_macho_dyld_cacheDyldSubCacheSlice!();
+        Depcrate_read_macho_dyld_cacheMIN_HEADER_SIZE_SUBCACHES_V1!();
+        Depcrate_read_macho_dyld_cacheMIN_HEADER_SIZE_SUBCACHES_V2!();
+        Depcrate_read_macho_dyld_cacheimpl_678!();
+        Depcrate_read_macho_dyld_cacheDyldFile!();
+        Depcrate_read_macho_dyld_cacheimpl_680!();
+        Depcrate_read_macho_dyld_cacheDyldCacheImageIterator!();
+        Depcrate_read_macho_dyld_cacheimpl_682!();
+        Depcrate_read_macho_dyld_cacheDyldCacheImage!();
+        Depcrate_read_macho_dyld_cacheimpl_684!();
+        Depcrate_read_macho_dyld_cacheDyldCacheMappingSlice!();
+        Depcrate_read_macho_dyld_cacheMIN_HEADER_SIZE_MAPPINGS_V2!();
+        Depcrate_read_macho_dyld_cacheDyldCacheMappingIterator!();
+        Depcrate_read_macho_dyld_cacheDyldCacheMappingVersionIterator!();
+        Depcrate_read_macho_dyld_cacheimpl_689!();
+        Depcrate_read_macho_dyld_cacheDyldCacheMapping!();
+        Depcrate_read_macho_dyld_cacheDyldCacheMappingVersion!();
+        Depcrate_read_macho_dyld_cacheimpl_692!();
+        Depcrate_read_macho_dyld_cacheimpl_693!();
+        Depcrate_read_macho_dyld_cacheDyldCacheSlideInfo!();
+        Depcrate_read_macho_dyld_cacheDyldCacheRelocationIterator!();
+        Depcrate_read_macho_dyld_cacheimpl_696!();
+        Depcrate_read_macho_dyld_cacheDyldCacheRelocationIteratorVersion!();
+        Depcrate_read_macho_dyld_cacheRelocationStateV2!();
+        Depcrate_read_macho_dyld_cacheDyldCacheRelocationIteratorV2!();
+        Depcrate_read_macho_dyld_cacheimpl_700!();
+        Depcrate_read_macho_dyld_cacheRelocationStateV3!();
+        Depcrate_read_macho_dyld_cacheDyldCacheRelocationIteratorV3!();
+        Depcrate_read_macho_dyld_cacheimpl_703!();
+        Depcrate_read_macho_dyld_cacheRelocationStateV5!();
+        Depcrate_read_macho_dyld_cacheDyldCacheRelocationIteratorV5!();
+        Depcrate_read_macho_dyld_cacheimpl_706!();
+        Depcrate_read_macho_dyld_cacheDyldRelocation!();
+        Depcrate_read_macho_dyld_cacheimpl_708!();
+        Depcrate_read_macho_dyld_cacheDyldRelocationAuth!();
+        Depcrate_read_macho_dyld_cacheimpl_710!();
+        Depcrate_read_macho_dyld_cacheimpl_711!();
+        Depcrate_read_macho_dyld_cacheimpl_712!();
+        Depcrate_read_macho_dyld_cacheimpl_713!();
+    };
+}

@@ -1,0 +1,9 @@
+// Generated macro for tests (module)
+macro_rules! Depcrate_mapref_entry_reftests {
+() => {
+// Module: crate::mapref::entry_ref
+// Provides: {"tests"}
+// Dependencies: {}
+# [cfg (test)] mod tests { use equivalent :: Equivalent ; use crate :: DashMap ; use super :: * ; # [derive (Hash , PartialEq , Eq , Debug)] struct K (u32) ; impl From < & K > for u32 { fn from (value : & K) -> Self { value . 0 } } impl Equivalent < u32 > for K { fn equivalent (& self , key : & u32) -> bool { self . 0 == * key } } # [test] fn test_insert_into_vacant () { let map : DashMap < u32 , u32 > = DashMap :: new () ; let entry = map . entry_ref (& K (1)) ; assert ! (matches ! (entry , EntryRef :: Vacant (_))) ; let val = entry . insert (2) ; assert_eq ! (* val , 2) ; drop (val) ; assert_eq ! (* map . get (& 1) . unwrap () , 2) ; } # [test] fn test_insert_into_occupied () { let map : DashMap < u32 , u32 > = DashMap :: new () ; map . insert (1 , 1000) ; let entry = map . entry_ref (& K (1)) ; assert ! (matches ! (& entry , EntryRef :: Occupied (entry) if * entry . get () == 1000)) ; let val = entry . insert (2) ; assert_eq ! (* val , 2) ; drop (val) ; assert_eq ! (* map . get (& 1) . unwrap () , 2) ; } # [test] fn test_insert_entry_into_vacant () { let map : DashMap < u32 , u32 > = DashMap :: new () ; let entry = map . entry_ref (& K (1)) ; assert ! (matches ! (entry , EntryRef :: Vacant (_))) ; let entry = entry . insert_entry (2) ; assert_eq ! (* entry . get () , 2) ; drop (entry) ; assert_eq ! (* map . get (& 1) . unwrap () , 2) ; } # [test] fn test_insert_entry_into_occupied () { let map : DashMap < u32 , u32 > = DashMap :: new () ; map . insert (1 , 1000) ; let entry = map . entry_ref (& K (1)) ; assert ! (matches ! (& entry , EntryRef :: Occupied (entry) if * entry . get () == 1000)) ; let entry = entry . insert_entry (2) ; assert_eq ! (* entry . get () , 2) ; drop (entry) ; assert_eq ! (* map . get (& 1) . unwrap () , 2) ; } }
+};
+}

@@ -1,0 +1,55 @@
+// Generated module macro for crate::check_attr
+macro_rules! Modcrate_check_attr {
+() => {
+        Depcrate_check_attruse_20!();
+        Depcrate_check_attruse_21!();
+        Depcrate_check_attruse_22!();
+        Depcrate_check_attruse_23!();
+        Depcrate_check_attruse_24!();
+        Depcrate_check_attruse_25!();
+        Depcrate_check_attruse_26!();
+        Depcrate_check_attruse_27!();
+        Depcrate_check_attruse_28!();
+        Depcrate_check_attruse_29!();
+        Depcrate_check_attruse_30!();
+        Depcrate_check_attruse_31!();
+        Depcrate_check_attruse_32!();
+        Depcrate_check_attruse_33!();
+        Depcrate_check_attruse_34!();
+        Depcrate_check_attruse_35!();
+        Depcrate_check_attruse_36!();
+        Depcrate_check_attruse_37!();
+        Depcrate_check_attruse_38!();
+        Depcrate_check_attruse_39!();
+        Depcrate_check_attruse_40!();
+        Depcrate_check_attruse_41!();
+        Depcrate_check_attruse_42!();
+        Depcrate_check_attruse_43!();
+        Depcrate_check_attruse_44!();
+        Depcrate_check_attruse_45!();
+        Depcrate_check_attruse_46!();
+        Depcrate_check_attruse_47!();
+        Depcrate_check_attruse_48!();
+        Depcrate_check_attruse_49!();
+        Depcrate_check_attruse_50!();
+        Depcrate_check_attruse_51!();
+        Depcrate_check_attruse_52!();
+        Depcrate_check_attrDiagnosticOnUnimplementedOnlyForTraits!();
+        Depcrate_check_attrtarget_from_impl_item!();
+        Depcrate_check_attrItemLike!();
+        Depcrate_check_attrProcMacroKind!();
+        Depcrate_check_attrimpl_57!();
+        Depcrate_check_attrDocFakeItemKind!();
+        Depcrate_check_attrimpl_59!();
+        Depcrate_check_attrCheckAttrVisitor!();
+        Depcrate_check_attrimpl_61!();
+        Depcrate_check_attrimpl_62!();
+        Depcrate_check_attris_c_like_enum!();
+        Depcrate_check_attrcheck_invalid_crate_level_attr!();
+        Depcrate_check_attrcheck_non_exported_macro_for_invalid_attrs!();
+        Depcrate_check_attrcheck_mod_attrs!();
+        Depcrate_check_attrprovide!();
+        Depcrate_check_attrcheck_duplicates!();
+        Depcrate_check_attrdoc_fake_variadic_is_allowed_self_ty!();
+    };
+}

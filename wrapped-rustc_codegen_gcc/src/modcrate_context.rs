@@ -1,0 +1,39 @@
+// Generated module macro for crate::context
+macro_rules! Modcrate_context {
+() => {
+        Depcrate_contextuse_285!();
+        Depcrate_contextuse_286!();
+        Depcrate_contextuse_287!();
+        Depcrate_contextuse_288!();
+        Depcrate_contextuse_289!();
+        Depcrate_contextuse_290!();
+        Depcrate_contextuse_291!();
+        Depcrate_contextuse_292!();
+        Depcrate_contextuse_293!();
+        Depcrate_contextuse_294!();
+        Depcrate_contextuse_295!();
+        Depcrate_contextuse_296!();
+        Depcrate_contextuse_297!();
+        Depcrate_contextuse_298!();
+        Depcrate_contextuse_299!();
+        Depcrate_contextuse_300!();
+        Depcrate_contextuse_301!();
+        Depcrate_contextuse_302!();
+        Depcrate_contextuse_303!();
+        Depcrate_contextuse_304!();
+        Depcrate_contextuse_305!();
+        Depcrate_contextCodegenCx!();
+        Depcrate_contextimpl_307!();
+        Depcrate_contextimpl_308!();
+        Depcrate_contextimpl_309!();
+        Depcrate_contextimpl_310!();
+        Depcrate_contextimpl_311!();
+        Depcrate_contextimpl_312!();
+        Depcrate_contextimpl_313!();
+        Depcrate_contextimpl_314!();
+        Depcrate_contextimpl_315!();
+        Depcrate_contextimpl_316!();
+        Depcrate_contextimpl_317!();
+        Depcrate_contextto_gcc_tls_mode!();
+    };
+}

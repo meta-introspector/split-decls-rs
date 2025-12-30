@@ -1,0 +1,45 @@
+// Generated module macro for crate::constants
+macro_rules! Modcrate_constants {
+() => {
+        Depcrate_constantsuse_66!();
+        Depcrate_constantsdw!();
+        Depcrate_constantsmacro_68!();
+        Depcrate_constantsmacro_69!();
+        Depcrate_constantsmacro_70!();
+        Depcrate_constantsmacro_71!();
+        Depcrate_constantsmacro_72!();
+        Depcrate_constantsmacro_73!();
+        Depcrate_constantsmacro_74!();
+        Depcrate_constantsmacro_75!();
+        Depcrate_constantsmacro_76!();
+        Depcrate_constantsmacro_77!();
+        Depcrate_constantsmacro_78!();
+        Depcrate_constantsmacro_79!();
+        Depcrate_constantsmacro_80!();
+        Depcrate_constantsmacro_81!();
+        Depcrate_constantsmacro_82!();
+        Depcrate_constantsmacro_83!();
+        Depcrate_constantsimpl_84!();
+        Depcrate_constantsmacro_85!();
+        Depcrate_constantsmacro_86!();
+        Depcrate_constantsmacro_87!();
+        Depcrate_constantsmacro_88!();
+        Depcrate_constantsmacro_89!();
+        Depcrate_constantsmacro_90!();
+        Depcrate_constantsmacro_91!();
+        Depcrate_constantsmacro_92!();
+        Depcrate_constantsmacro_93!();
+        Depcrate_constantsmacro_94!();
+        Depcrate_constantsmacro_95!();
+        Depcrate_constantsmacro_96!();
+        Depcrate_constantsmacro_97!();
+        Depcrate_constantsmacro_98!();
+        Depcrate_constantsmacro_99!();
+        Depcrate_constantsmacro_100!();
+        Depcrate_constantsDW_EH_PE_FORMAT_MASK!();
+        Depcrate_constantsDW_EH_PE_APPLICATION_MASK!();
+        Depcrate_constantsimpl_103!();
+        Depcrate_constantsimpl_104!();
+        Depcrate_constantstests!();
+    };
+}

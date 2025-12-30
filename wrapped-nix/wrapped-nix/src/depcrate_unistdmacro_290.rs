@@ -1,0 +1,9 @@
+// Generated macro for macro_290 (macro)
+macro_rules! Depcrate_unistdmacro_290 {
+() => {
+// Module: crate::unistd
+// Provides: {"macro_290"}
+// Dependencies: {}
+feature ! { #! [feature = "fs"] # [doc = " Creates a regular file which persists even after process termination"] # [doc = ""] # [doc = " * `template`: a path whose 6 rightmost characters must be X, e.g. `/tmp/tmpfile_XXXXXX`"] # [doc = " * returns: tuple of file descriptor and filename"] # [doc = ""] # [doc = " Err is returned either if no temporary filename could be created or the template doesn't"] # [doc = " end with XXXXXX"] # [doc = ""] # [doc = " See also [mkstemp(2)](https://pubs.opengroup.org/onlinepubs/9699919799/functions/mkstemp.html)"] # [doc = ""] # [doc = " # Example"] # [doc = ""] # [doc = " ```rust"] # [doc = " use nix::unistd;"] # [doc = ""] # [doc = " let _ = match unistd::mkstemp(\"/tmp/tempfile_XXXXXX\") {"] # [doc = "     Ok((fd, path)) => {"] # [doc = "         unistd::unlink(path.as_path()).unwrap(); // flag file to be deleted at app termination"] # [doc = "         fd"] # [doc = "     }"] # [doc = "     Err(e) => panic!(\"mkstemp failed: {}\", e)"] # [doc = " };"] # [doc = " // do something with fd"] # [doc = " ```"] # [inline] pub fn mkstemp < P : ? Sized + NixPath > (template : & P) -> Result < (std :: os :: fd :: OwnedFd , PathBuf) > { use std :: os :: fd :: OwnedFd ; use std :: os :: fd :: FromRawFd ; let mut path = template . with_nix_path (| path | path . to_bytes_with_nul () . to_owned ()) ?; let p = path . as_mut_ptr () . cast () ; let fd = unsafe { libc :: mkstemp (p) } ; let last = path . pop () ; debug_assert ! (last == Some (b'\0')) ; let pathname = OsString :: from_vec (path) ; Errno :: result (fd) ?; let fd = unsafe { OwnedFd :: from_raw_fd (fd) } ; Ok ((fd , PathBuf :: from (pathname))) } }
+};
+}

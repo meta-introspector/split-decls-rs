@@ -1,0 +1,12 @@
+// Generated macro for EvaluationStorage (trait)
+macro_rules! Depcrate_read_opEvaluationStorage {
+() => {
+// Module: crate::read::op
+// Provides: {"EvaluationStorage"}
+// Dependencies: {}
+# [doc = " Specification of what storage should be used for [`Evaluation`]."] # [doc = ""] # [cfg_attr (feature = "read" , doc = "
+Normally you would only need to use [`StoreOnHeap`], which places the stacks and the results
+on the heap using [`Vec`]. This is the default storage type parameter for [`Evaluation`].
+")] # [doc = ""] # [doc = " If you need to avoid [`Evaluation`] from allocating memory, e.g. for signal safety,"] # [doc = " you can provide you own storage specification:"] # [doc = " ```rust,no_run"] # [doc = " # use gimli::*;"] # [doc = " # let bytecode = EndianSlice::new(&[], LittleEndian);"] # [doc = " # let encoding = unimplemented!();"] # [doc = " # let get_register_value = |_, _| Value::Generic(42);"] # [doc = " # let get_frame_base = || 0xdeadbeef;"] # [doc = " #"] # [doc = " struct StoreOnStack;"] # [doc = ""] # [doc = " impl<R: Reader> EvaluationStorage<R> for StoreOnStack {"] # [doc = "     type Stack = [Value; 64];"] # [doc = "     type ExpressionStack = [(R, R); 4];"] # [doc = "     type Result = [Piece<R>; 1];"] # [doc = " }"] # [doc = ""] # [doc = " let mut eval = Evaluation::<_, StoreOnStack>::new_in(bytecode, encoding);"] # [doc = " let mut result = eval.evaluate().unwrap();"] # [doc = " while result != EvaluationResult::Complete {"] # [doc = "   match result {"] # [doc = "     EvaluationResult::RequiresRegister { register, base_type } => {"] # [doc = "       let value = get_register_value(register, base_type);"] # [doc = "       result = eval.resume_with_register(value).unwrap();"] # [doc = "     },"] # [doc = "     EvaluationResult::RequiresFrameBase => {"] # [doc = "       let frame_base = get_frame_base();"] # [doc = "       result = eval.resume_with_frame_base(frame_base).unwrap();"] # [doc = "     },"] # [doc = "     _ => unimplemented!(),"] # [doc = "   };"] # [doc = " }"] # [doc = ""] # [doc = " let result = eval.as_result();"] # [doc = " println!(\"{:?}\", result);"] # [doc = " ```"] pub trait EvaluationStorage < R : Reader > { # [doc = " The storage used for the evaluation stack."] type Stack : ArrayLike < Item = Value > ; # [doc = " The storage used for the expression stack."] type ExpressionStack : ArrayLike < Item = (R , R) > ; # [doc = " The storage used for the results."] type Result : ArrayLike < Item = Piece < R > > ; }
+};
+}

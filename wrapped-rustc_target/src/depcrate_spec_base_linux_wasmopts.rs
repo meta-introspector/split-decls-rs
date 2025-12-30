@@ -1,0 +1,9 @@
+// Generated macro for opts (function)
+macro_rules! Depcrate_spec_base_linux_wasmopts {
+() => {
+// Module: crate::spec::base::linux_wasm
+// Provides: {"opts"}
+// Dependencies: {}
+pub (crate) fn opts () -> TargetOptions { macro_rules ! args { ($ prefix : literal) => { & [concat ! ($ prefix , "-z") , concat ! ($ prefix , "stack-size=1048576") , concat ! ($ prefix , "--stack-first") , concat ! ($ prefix , "--allow-undefined") , concat ! ($ prefix , "--no-demangle") ,] } ; } let mut pre_link_args = TargetOptions :: link_args (LinkerFlavor :: WasmLld (Cc :: No) , args ! ("")) ; add_link_args (& mut pre_link_args , LinkerFlavor :: WasmLld (Cc :: Yes) , args ! ("-Wl,")) ; TargetOptions { is_like_wasm : true , families : cvs ! ["wasm" , "unix"] , os : "linux" . into () , env : "musl" . into () , dynamic_linking : true , only_cdylib : true , exe_suffix : ".wasm" . into () , dll_prefix : "" . into () , dll_suffix : ".wasm" . into () , eh_frame_header : false , max_atomic_width : Some (64) , panic_strategy : PanicStrategy :: Abort , limit_rdylib_exports : false , linker : Some ("rust-lld" . into ()) , linker_flavor : LinkerFlavor :: WasmLld (Cc :: No) , pre_link_args , link_self_contained : LinkSelfContainedDefault :: True , pre_link_objects_self_contained : crt_objects :: pre_wasi_self_contained () , post_link_objects_self_contained : crt_objects :: post_wasi_self_contained () , relocation_model : RelocModel :: Static , has_thread_local : true , tls_model : TlsModel :: LocalExec , singlethread : false , emit_debug_gdb_scripts : false , generate_arange_section : false , crt_static_default : true , crt_static_respected : true , crt_static_allows_dylibs : true , main_needs_argc_argv : false , entry_name : "__main_void" . into () , features : "+atomics,+bulk-memory,+mutable-globals,+sign-ext" . into () , .. Default :: default () } }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for declare_features (macro)
+macro_rules! Depcrate_unstabledeclare_features {
+() => {
+// Module: crate::unstable
+// Provides: {"declare_features"}
+// Dependencies: {}
+macro_rules ! declare_features { ($ ($ (# [doc = $ doc : tt]) * ($ status : ident , $ feature : ident , $ ver : expr , $ issue : expr) ,) +) => { # [doc = " Unstable language features that are being implemented or being"] # [doc = " considered for acceptance (stabilization) or removal."] pub static UNSTABLE_LANG_FEATURES : & [Feature] = & [$ (Feature { name : sym ::$ feature , since : $ ver , issue : to_nonzero ($ issue) , }) ,+] ; impl Features { $ (pub fn $ feature (& self) -> bool { self . enabled_features . contains (& sym ::$ feature) }) * # [doc = " Some features are known to be incomplete and using them is likely to have"] # [doc = " unanticipated results, such as compiler crashes. We warn the user about these"] # [doc = " to alert them."] pub fn incomplete (& self , feature : Symbol) -> bool { match feature { $ (sym ::$ feature => status_to_enum ! ($ status) == FeatureStatus :: Incomplete ,) * _ if self . enabled_features . contains (& feature) => { false } _ => panic ! ("`{}` was not listed in `declare_features`" , feature) , } } # [doc = " Some features are internal to the compiler and standard library and should not"] # [doc = " be used in normal projects. We warn the user about these to alert them."] pub fn internal (& self , feature : Symbol) -> bool { match feature { $ (sym ::$ feature => status_to_enum ! ($ status) == FeatureStatus :: Internal ,) * _ if self . enabled_features . contains (& feature) => { let name = feature . as_str () ; name == "core_intrinsics" || name . ends_with ("_internal") || name . ends_with ("_internals") } _ => panic ! ("`{}` was not listed in `declare_features`" , feature) , } } } } ; }
+};
+}

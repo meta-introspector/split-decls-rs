@@ -1,0 +1,9 @@
+// Generated macro for BIND_SUBOPCODE_THREADED_SET_BIND_ORDINAL_TABLE_SIZE_ULEB (const)
+macro_rules! Depcrate_machoBIND_SUBOPCODE_THREADED_SET_BIND_ORDINAL_TABLE_SIZE_ULEB {
+() => {
+// Module: crate::macho
+// Provides: {"BIND_SUBOPCODE_THREADED_SET_BIND_ORDINAL_TABLE_SIZE_ULEB"}
+// Dependencies: {}
+pub const BIND_SUBOPCODE_THREADED_SET_BIND_ORDINAL_TABLE_SIZE_ULEB : u8 = 0x00 ;
+};
+}

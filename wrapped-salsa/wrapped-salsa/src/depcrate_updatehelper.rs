@@ -1,0 +1,9 @@
+// Generated macro for helper (module)
+macro_rules! Depcrate_updatehelper {
+() => {
+// Module: crate::update
+// Provides: {"helper"}
+// Dependencies: {}
+# [doc = " This is used by the macro generated code."] # [doc = " If possible, uses `Update` trait, but else requires `'static`."] # [doc = ""] # [doc = " To use:"] # [doc = ""] # [doc = " ```rust,ignore"] # [doc = " use crate::update::helper::Fallback;"] # [doc = " update::helper::Dispatch::<$ty>::maybe_update(pointer, new_value);"] # [doc = " ```"] # [doc = ""] # [doc = " It is important that you specify the `$ty` explicitly."] # [doc = ""] # [doc = " This uses the [\"method dispatch hack\"](https://github.com/nvzqz/impls#how-it-works)"] # [doc = " to use the `Update` trait if it is available and else fallback to `'static`."] pub mod helper { use std :: marker :: PhantomData ; use super :: { update_fallback , Update } ; pub struct Dispatch < D > (PhantomData < D >) ; # [allow (clippy :: new_without_default)] impl < D > Dispatch < D > { pub fn new () -> Self { Dispatch (PhantomData) } } impl < D > Dispatch < D > where D : Update , { # [doc = " # Safety"] # [doc = ""] # [doc = " See the `maybe_update` method in the [`Update`][] trait."] pub unsafe fn maybe_update (old_pointer : * mut D , new_value : D) -> bool { unsafe { D :: maybe_update (old_pointer , new_value) } } } # [doc = " # Safety"] # [doc = ""] # [doc = " Impl will fulfill the postconditions of `maybe_update`"] pub unsafe trait Fallback < T > { # [doc = " # Safety"] # [doc = ""] # [doc = " Same safety conditions as `Update::maybe_update`"] unsafe fn maybe_update (old_pointer : * mut T , new_value : T) -> bool ; } unsafe impl < T : 'static + PartialEq > Fallback < T > for Dispatch < T > { unsafe fn maybe_update (old_pointer : * mut T , new_value : T) -> bool { unsafe { update_fallback (old_pointer , new_value) } } } }
+};
+}

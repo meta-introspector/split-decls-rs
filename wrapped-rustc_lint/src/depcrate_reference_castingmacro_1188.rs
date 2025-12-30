@@ -1,0 +1,9 @@
+// Generated macro for macro_1188 (macro)
+macro_rules! Depcrate_reference_castingmacro_1188 {
+() => {
+// Module: crate::reference_casting
+// Provides: {"macro_1188"}
+// Dependencies: {}
+declare_lint ! { # [doc = " The `invalid_reference_casting` lint checks for casts of `&T` to `&mut T`"] # [doc = " without using interior mutability."] # [doc = ""] # [doc = " ### Example"] # [doc = ""] # [doc = " ```rust,compile_fail"] # [doc = " fn x(r: &i32) {"] # [doc = "     unsafe {"] # [doc = "         *(r as *const i32 as *mut i32) += 1;"] # [doc = "     }"] # [doc = " }"] # [doc = " ```"] # [doc = ""] # [doc = " {{produces}}"] # [doc = ""] # [doc = " ### Explanation"] # [doc = ""] # [doc = " Casting `&T` to `&mut T` without using interior mutability is undefined behavior,"] # [doc = " as it's a violation of Rust reference aliasing requirements."] # [doc = ""] # [doc = " `UnsafeCell` is the only way to obtain aliasable data that is considered"] # [doc = " mutable."] INVALID_REFERENCE_CASTING , Deny , "casts of `&T` to `&mut T` without interior mutability" }
+};
+}

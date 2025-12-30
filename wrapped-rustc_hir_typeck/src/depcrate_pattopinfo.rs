@@ -1,0 +1,9 @@
+// Generated macro for TopInfo (struct)
+macro_rules! Depcrate_patTopInfo {
+() => {
+// Module: crate::pat
+// Provides: {"TopInfo"}
+// Dependencies: {}
+# [doc = " Information about the expected type at the top level of type checking a pattern."] # [doc = ""] # [doc = " **NOTE:** This is only for use by diagnostics. Do NOT use for type checking logic!"] # [derive (Copy , Clone)] struct TopInfo < 'tcx > { # [doc = " The `expected` type at the top level of type checking a pattern."] expected : Ty < 'tcx > , # [doc = " Was the origin of the `span` from a scrutinee expression?"] # [doc = ""] # [doc = " Otherwise there is no scrutinee and it could be e.g. from the type of a formal parameter."] origin_expr : Option < & 'tcx hir :: Expr < 'tcx > > , # [doc = " The span giving rise to the `expected` type, if one could be provided."] # [doc = ""] # [doc = " If `origin_expr` is `true`, then this is the span of the scrutinee as in:"] # [doc = ""] # [doc = " - `match scrutinee { ... }`"] # [doc = " - `let _ = scrutinee;`"] # [doc = ""] # [doc = " This is used to point to add context in type errors."] # [doc = " In the following example, `span` corresponds to the `a + b` expression:"] # [doc = ""] # [doc = " ```text"] # [doc = " error[E0308]: mismatched types"] # [doc = "  --> src/main.rs:L:C"] # [doc = "   |"] # [doc = " L |    let temp: usize = match a + b {"] # [doc = "   |                            ----- this expression has type `usize`"] # [doc = " L |         Ok(num) => num,"] # [doc = "   |         ^^^^^^^ expected `usize`, found enum `std::result::Result`"] # [doc = "   |"] # [doc = "   = note: expected type `usize`"] # [doc = "              found type `std::result::Result<_, _>`"] # [doc = " ```"] span : Option < Span > , # [doc = " The [`HirId`] of the top-level pattern."] hir_id : HirId , }
+};
+}

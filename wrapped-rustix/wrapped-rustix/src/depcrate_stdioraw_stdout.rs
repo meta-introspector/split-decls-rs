@@ -1,0 +1,9 @@
+// Generated macro for raw_stdout (function)
+macro_rules! Depcrate_stdioraw_stdout {
+() => {
+// Module: crate::stdio
+// Provides: {"raw_stdout"}
+// Dependencies: {}
+# [doc = " `STDOUT_FILENO`—Standard output, raw."] # [doc = ""] # [doc = " This is similar to [`stdout`], however it returns a `RawFd`."] # [doc = ""] # [doc = " # Other hazards"] # [doc = ""] # [doc = " This has the same hazards as [`stdout`]."] # [doc = ""] # [doc = " # References"] # [doc = "  - [POSIX]"] # [doc = "  - [Linux]"] # [doc = "  - [FreeBSD]"] # [doc = "  - [NetBSD]"] # [doc = "  - [OpenBSD]"] # [doc = "  - [DragonFly BSD]"] # [doc = "  - [illumos]"] # [doc = "  - [glibc]"] # [doc = ""] # [doc = " [POSIX]: https://pubs.opengroup.org/onlinepubs/9799919799/functions/stdout.html"] # [doc = " [Linux]: https://man7.org/linux/man-pages/man3/stdout.3.html"] # [doc = " [FreeBSD]: https://man.freebsd.org/cgi/man.cgi?query=stdout&sektion=4"] # [doc = " [NetBSD]: https://man.netbsd.org/stdout.4"] # [doc = " [OpenBSD]: https://man.openbsd.org/stdout.4"] # [doc = " [DragonFly BSD]: https://man.dragonflybsd.org/?command=stdout&section=4"] # [doc = " [illumos]: https://illumos.org/man/4FS/stdout"] # [doc = " [glibc]: https://sourceware.org/glibc/manual/latest/html_node/Standard-Streams.html#index-stdout"] # [doc (alias = "STDOUT_FILENO")] # [inline] pub const fn raw_stdout () -> RawFd { c :: STDOUT_FILENO as RawFd }
+};
+}

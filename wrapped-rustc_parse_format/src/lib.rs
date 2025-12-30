@@ -1,0 +1,64 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcrate_testsdiagnostic_format_flags.rs");
+include!("depcratecount.rs");
+include!("depcrate_testsuse_24.rs");
+include!("depcrate_testsformat_position_nothing_else.rs");
+include!("depcrateparseerror.rs");
+include!("depcrate_testsinvalid_precision.rs");
+include!("depcrate_testsasm_linespans.rs");
+include!("depcrateuse_4.rs");
+include!("depcrateuse_2.rs");
+include!("depcrate_testsformat_align_fill.rs");
+include!("depcrate_testsformat_counts.rs");
+include!("depcrate_testsformat_position.rs");
+include!("depcrateposition.rs");
+include!("depcrate_testssame.rs");
+include!("depcrateimpl_8.rs");
+include!("depcrate_testsinvalid06.rs");
+include!("depcrate_testsinvalid_position.rs");
+include!("depcrate_testsfmtdflt.rs");
+include!("depcrate_testsinvalid01.rs");
+include!("depcratesign.rs");
+include!("depcrateimpl_11.rs");
+include!("depcrate_testsuse_23.rs");
+include!("depcrateimpl_19.rs");
+include!("depcrate_testsinvalid05.rs");
+include!("depcrate_testsformat_tab_empty.rs");
+include!("depcrate_testsdiagnostic_format_mod.rs");
+include!("depcrateparsemode.rs");
+include!("depcrate_testsformat_flags.rs");
+include!("depcratepiece.rs");
+include!("depcrateformatspec.rs");
+include!("depcrateuse_3.rs");
+include!("depcrate_testsformat_raw.rs");
+include!("depcrate_testsformat_whitespace.rs");
+include!("depcrate_testsasm_concat.rs");
+include!("depcratesuggestion.rs");
+include!("depcrateuse_1.rs");
+include!("depcrate_testsinvalid_width.rs");
+include!("depcrateparser.rs");
+include!("depcrate_testsformat_open_brace_tab.rs");
+include!("depcrate_testsmusterr.rs");
+include!("depcrate_testssimple.rs");
+include!("depcrate_testsinvalid04.rs");
+include!("depcrate_testsformat_empty.rs");
+include!("depcrate_testsformat_named.rs");
+include!("depcrate_testsformat_named_space_nothing.rs");
+include!("depcratemacro_21.rs");
+include!("depcrate_testsformat_type.rs");
+include!("depcrate_testsinvalid02.rs");
+include!("depcrate_testsformat_mixture.rs");
+include!("depcratetests.rs");
+include!("depcratedebughex.rs");
+include!("depcrateargument.rs");
+include!("depcratealignment.rs");
+include!("depcrateimpl_20.rs");
+include!("modcrate.rs");
+include!("modcrate_tests.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate!();
+    Modcrate_tests!();
+}

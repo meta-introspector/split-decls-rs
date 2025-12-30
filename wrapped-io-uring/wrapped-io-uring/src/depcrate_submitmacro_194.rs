@@ -1,0 +1,9 @@
+// Generated macro for macro_194 (macro)
+macro_rules! Depcrate_submitmacro_194 {
+() => {
+// Module: crate::submit
+// Provides: {"macro_194"}
+// Dependencies: {}
+bitflags ! (# [doc = " See man page for complete description:"] # [doc = " https://man7.org/linux/man-pages/man2/io_uring_enter.2.html"] # [derive (Debug , Clone , Copy , PartialEq , Eq , PartialOrd , Ord)] pub struct EnterFlags : u32 { # [doc = " Wait for at least `min_complete` events to complete."] const GETEVENTS = sys :: IORING_ENTER_GETEVENTS ; # [doc = " If the kernel thread is sleeping, wake it up."] const SQ_WAKEUP = sys :: IORING_ENTER_SQ_WAKEUP ; # [doc = " Wait for at least one submission queue entry to be available."] const SQ_WAIT = sys :: IORING_ENTER_SQ_WAIT ; # [doc = " Use the extended argument structure."] const EXT_ARG = sys :: IORING_ENTER_EXT_ARG ; # [doc = " Submit using registered submission queue ring."] const REGISTERED_RING = sys :: IORING_ENTER_REGISTERED_RING ; # [doc = " Timeout argument interpreted as absolute time."] const ABS_TIMER = sys :: IORING_ENTER_ABS_TIMER ; # [doc = " Arg is offset into an area of wait regions previously registered."] const EXT_ARG_REG = sys :: IORING_ENTER_EXT_ARG_REG ; # [doc = " Don't mark waiting task as being in iowait in certain cases."] const NO_IOWAIT = sys :: IORING_ENTER_NO_IOWAIT ; }) ;
+};
+}

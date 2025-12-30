@@ -1,0 +1,9 @@
+// Generated macro for TEXT_PRESENTATION_LEAF_6 (static)
+macro_rules! Depcrate_tablesTEXT_PRESENTATION_LEAF_6 {
+() => {
+// Module: crate::tables
+// Provides: {"TEXT_PRESENTATION_LEAF_6"}
+// Dependencies: {}
+# [rustfmt :: skip] static TEXT_PRESENTATION_LEAF_6 : [(u8 , u8) ; 13] = [(0x0D , 0x0F) , (0x15 , 0x15) , (0x1C , 0x1C) , (0x78 , 0x78) , (0x93 , 0x93) , (0xA7 , 0xA7) , (0xAC , 0xAE) , (0xC2 , 0xC2) , (0xC4 , 0xC4) , (0xC6 , 0xC6) , (0xCA , 0xCA) , (0xE0 , 0xE0) , (0xED , 0xED) ,] ;
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for TwoPhaseActivation (enum)
+macro_rules! Depcrate_borrow_setTwoPhaseActivation {
+() => {
+// Module: crate::borrow_set
+// Provides: {"TwoPhaseActivation"}
+// Dependencies: {}
+# [doc = " Location where a two-phase borrow is activated, if a borrow"] # [doc = " is in fact a two-phase borrow."] # [derive (Copy , Clone , PartialEq , Eq , Debug)] pub enum TwoPhaseActivation { NotTwoPhase , NotActivated , ActivatedAt (Location) , }
+};
+}

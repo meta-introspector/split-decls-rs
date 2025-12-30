@@ -1,0 +1,9 @@
+// Generated macro for impl_188 (impl)
+macro_rules! Depcrate_astimpl_188 {
+() => {
+// Module: crate::ast
+// Provides: {"impl_188"}
+// Dependencies: {}
+impl CoroutineKind { pub fn span (self) -> Span { match self { CoroutineKind :: Async { span , .. } => span , CoroutineKind :: Gen { span , .. } => span , CoroutineKind :: AsyncGen { span , .. } => span , } } pub fn as_str (self) -> & 'static str { match self { CoroutineKind :: Async { .. } => "async" , CoroutineKind :: Gen { .. } => "gen" , CoroutineKind :: AsyncGen { .. } => "async gen" , } } pub fn closure_id (self) -> NodeId { match self { CoroutineKind :: Async { closure_id , .. } | CoroutineKind :: Gen { closure_id , .. } | CoroutineKind :: AsyncGen { closure_id , .. } => closure_id , } } # [doc = " In this case this is an `async` or `gen` return, the `NodeId` for the generated `impl Trait`"] # [doc = " item."] pub fn return_id (self) -> (NodeId , Span) { match self { CoroutineKind :: Async { return_impl_trait_id , span , .. } | CoroutineKind :: Gen { return_impl_trait_id , span , .. } | CoroutineKind :: AsyncGen { return_impl_trait_id , span , .. } => { (return_impl_trait_id , span) } } } }
+};
+}

@@ -1,0 +1,43 @@
+// Generated module macro for crate::visit
+macro_rules! Modcrate_visit {
+() => {
+        Depcrate_visituse_691!();
+        Depcrate_visituse_692!();
+        Depcrate_visituse_693!();
+        Depcrate_visituse_694!();
+        Depcrate_visituse_695!();
+        Depcrate_visituse_696!();
+        Depcrate_visituse_697!();
+        Depcrate_visituse_698!();
+        Depcrate_visituse_699!();
+        Depcrate_visituse_700!();
+        Depcrate_visitTypeVisitable!();
+        Depcrate_visitTypeSuperVisitable!();
+        Depcrate_visitTypeVisitor!();
+        Depcrate_visitimpl_704!();
+        Depcrate_visitimpl_705!();
+        Depcrate_visitimpl_706!();
+        Depcrate_visitimpl_707!();
+        Depcrate_visitimpl_708!();
+        Depcrate_visitimpl_709!();
+        Depcrate_visitimpl_710!();
+        Depcrate_visitimpl_711!();
+        Depcrate_visitimpl_712!();
+        Depcrate_visitimpl_713!();
+        Depcrate_visitimpl_714!();
+        Depcrate_visitimpl_715!();
+        Depcrate_visitimpl_716!();
+        Depcrate_visitFlags!();
+        Depcrate_visitTypeVisitableExt!();
+        Depcrate_visitimpl_719!();
+        Depcrate_visitFoundFlags!();
+        Depcrate_visitHasTypeFlagsVisitor!();
+        Depcrate_visitimpl_722!();
+        Depcrate_visitimpl_723!();
+        Depcrate_visitFoundEscapingVars!();
+        Depcrate_visitHasEscapingVarsVisitor!();
+        Depcrate_visitimpl_726!();
+        Depcrate_visitHasErrorVisitor!();
+        Depcrate_visitimpl_728!();
+    };
+}

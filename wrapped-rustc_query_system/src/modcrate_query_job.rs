@@ -1,0 +1,46 @@
+// Generated module macro for crate::query::job
+macro_rules! Modcrate_query_job {
+() => {
+        Depcrate_query_jobuse_297!();
+        Depcrate_query_jobuse_298!();
+        Depcrate_query_jobuse_299!();
+        Depcrate_query_jobuse_300!();
+        Depcrate_query_jobuse_301!();
+        Depcrate_query_jobuse_302!();
+        Depcrate_query_jobuse_303!();
+        Depcrate_query_jobuse_304!();
+        Depcrate_query_jobuse_305!();
+        Depcrate_query_jobuse_306!();
+        Depcrate_query_jobuse_307!();
+        Depcrate_query_jobuse_308!();
+        Depcrate_query_jobuse_309!();
+        Depcrate_query_jobuse_310!();
+        Depcrate_query_jobuse_311!();
+        Depcrate_query_jobuse_312!();
+        Depcrate_query_jobuse_313!();
+        Depcrate_query_jobQueryInfo!();
+        Depcrate_query_jobimpl_315!();
+        Depcrate_query_jobQueryMap!();
+        Depcrate_query_jobQueryJobId!();
+        Depcrate_query_jobimpl_318!();
+        Depcrate_query_jobQueryJobInfo!();
+        Depcrate_query_jobQueryJob!();
+        Depcrate_query_jobimpl_321!();
+        Depcrate_query_jobimpl_322!();
+        Depcrate_query_jobimpl_323!();
+        Depcrate_query_jobQueryWaiter!();
+        Depcrate_query_jobQueryLatchInfo!();
+        Depcrate_query_jobQueryLatch!();
+        Depcrate_query_jobimpl_327!();
+        Depcrate_query_jobimpl_328!();
+        Depcrate_query_jobWaiter!();
+        Depcrate_query_jobvisit_waiters!();
+        Depcrate_query_jobcycle_check!();
+        Depcrate_query_jobconnected_to_root!();
+        Depcrate_query_jobpick_query!();
+        Depcrate_query_jobremove_cycle!();
+        Depcrate_query_jobbreak_query_cycles!();
+        Depcrate_query_jobreport_cycle!();
+        Depcrate_query_jobprint_query_stack!();
+    };
+}

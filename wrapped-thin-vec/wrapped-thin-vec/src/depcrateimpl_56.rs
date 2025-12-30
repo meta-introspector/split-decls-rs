@@ -1,0 +1,9 @@
+// Generated macro for impl_56 (impl)
+macro_rules! Depcrateimpl_56 {
+() => {
+// Module: crate
+// Provides: {"impl_56"}
+// Dependencies: {}
+# [cfg (feature = "serde")] impl < 'de , T : serde :: Deserialize < 'de > > serde :: Deserialize < 'de > for ThinVec < T > { fn deserialize < D > (deserializer : D) -> Result < Self , D :: Error > where D : serde :: Deserializer < 'de > , { use serde :: de :: { SeqAccess , Visitor } ; use serde :: Deserialize ; struct ThinVecVisitor < T > (PhantomData < T >) ; impl < 'de , T : Deserialize < 'de > > Visitor < 'de > for ThinVecVisitor < T > { type Value = ThinVec < T > ; fn expecting (& self , formatter : & mut fmt :: Formatter) -> fmt :: Result { write ! (formatter , "a sequence") } fn visit_seq < SA > (self , mut seq : SA) -> Result < Self :: Value , SA :: Error > where SA : SeqAccess < 'de > , { let initial_capacity = seq . size_hint () . unwrap_or_default () . min (4096) ; let mut values = ThinVec :: < T > :: with_capacity (initial_capacity) ; while let Some (value) = seq . next_element () ? { values . push (value) ; } Ok (values) } } deserializer . deserialize_seq (ThinVecVisitor :: < T > (PhantomData)) } }
+};
+}

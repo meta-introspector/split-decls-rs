@@ -1,0 +1,47 @@
+// Generated module macro for crate::spec::base
+macro_rules! Modcrate_spec_base {
+() => {
+        Depcrate_spec_baseaix!();
+        Depcrate_spec_baseandroid!();
+        Depcrate_spec_baseapple!();
+        Depcrate_spec_baseavr!();
+        Depcrate_spec_basebpf!();
+        Depcrate_spec_basecygwin!();
+        Depcrate_spec_basedragonfly!();
+        Depcrate_spec_basefreebsd!();
+        Depcrate_spec_basefuchsia!();
+        Depcrate_spec_basehaiku!();
+        Depcrate_spec_basehermit!();
+        Depcrate_spec_basehurd!();
+        Depcrate_spec_basehurd_gnu!();
+        Depcrate_spec_baseillumos!();
+        Depcrate_spec_basel4re!();
+        Depcrate_spec_baselinux!();
+        Depcrate_spec_baselinux_gnu!();
+        Depcrate_spec_baselinux_musl!();
+        Depcrate_spec_baselinux_ohos!();
+        Depcrate_spec_baselinux_uclibc!();
+        Depcrate_spec_baselinux_wasm!();
+        Depcrate_spec_baselynxos178!();
+        Depcrate_spec_basemanagarm_mlibc!();
+        Depcrate_spec_basemsvc!();
+        Depcrate_spec_basenetbsd!();
+        Depcrate_spec_basento_qnx!();
+        Depcrate_spec_baseopenbsd!();
+        Depcrate_spec_baseredox!();
+        Depcrate_spec_basesolaris!();
+        Depcrate_spec_basesolid!();
+        Depcrate_spec_baseteeos!();
+        Depcrate_spec_basethumb!();
+        Depcrate_spec_baseuefi_msvc!();
+        Depcrate_spec_baseunikraft_linux_musl!();
+        Depcrate_spec_basevxworks!();
+        Depcrate_spec_basewasm!();
+        Depcrate_spec_basewindows_gnu!();
+        Depcrate_spec_basewindows_gnullvm!();
+        Depcrate_spec_basewindows_msvc!();
+        Depcrate_spec_basewindows_uwp_gnu!();
+        Depcrate_spec_basewindows_uwp_msvc!();
+        Depcrate_spec_basextensa!();
+    };
+}

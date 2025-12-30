@@ -1,0 +1,67 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcrate_privateuse_44.rs");
+include!("depcrate_privateuse_45.rs");
+include!("depcratemacro_49.rs");
+include!("depcrate_aserrorimpl_17.rs");
+include!("depcrate_aserrorimpl_15.rs");
+include!("depcrate_privateuse_47.rs");
+include!("depcrate_aserrorimpl_8.rs");
+include!("depcrateprovide.rs");
+include!("depcrate_varvar.rs");
+include!("depcrateprivate.rs");
+include!("depcratevar.rs");
+include!("depcrateuse_41.rs");
+include!("depcrate_aserrorimpl_12.rs");
+include!("depcrate_providesealed.rs");
+include!("depcrate_aserrorimpl_9.rs");
+include!("depcrate_displayimpl_29.rs");
+include!("depcrate_displayimpl_25.rs");
+include!("depcrateother_3.rs");
+include!("depcrateother_2.rs");
+include!("depcrate_aserroruse_5.rs");
+include!("depcrate_provideuse_32.rs");
+include!("depcratedisplay.rs");
+include!("depcrate_providethiserrorprovide.rs");
+include!("depcrate_displayuse_20.rs");
+include!("depcrateaserror.rs");
+include!("depcrate_aserroruse_6.rs");
+include!("depcrate_displayimpl_24.rs");
+include!("depcrate_displayimpl_28.rs");
+include!("depcrate_aserrorasdynerror.rs");
+include!("depcrate_aserrorimpl_16.rs");
+include!("depcrate_displayplaceholder.rs");
+include!("depcrate_displayuse_21.rs");
+include!("depcrate_displaysealed.rs");
+include!("depcrate_displayasdisplay.rs");
+include!("depcrate_provideimpl_34.rs");
+include!("depcrate_displayimpl_27.rs");
+include!("depcrate_varuse_38.rs");
+include!("depcrate_privateuse_46.rs");
+include!("depcrate_privateuse_48.rs");
+include!("depcrate_aserrorimpl_11.rs");
+include!("depcratemacro_1.rs");
+include!("depcrate_aserrorimpl_14.rs");
+include!("depcrate_varimpl_40.rs");
+include!("depcrate_provideimpl_36.rs");
+include!("depcrate_displayimpl_23.rs");
+include!("depcrate_aserrorimpl_10.rs");
+include!("depcrate_aserrorimpl_18.rs");
+include!("depcrate_privateuse_43.rs");
+include!("depcrate_aserrorsealed.rs");
+include!("modcrate_var.rs");
+include!("modcrate_private.rs");
+include!("modcrate_aserror.rs");
+include!("modcrate_provide.rs");
+include!("modcrate.rs");
+include!("modcrate_display.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate_var!();
+    Modcrate_private!();
+    Modcrate_aserror!();
+    Modcrate_provide!();
+    Modcrate!();
+    Modcrate_display!();
+}

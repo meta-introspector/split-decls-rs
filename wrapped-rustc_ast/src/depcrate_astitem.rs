@@ -1,0 +1,9 @@
+// Generated macro for Item (struct)
+macro_rules! Depcrate_astItem {
+() => {
+// Module: crate::ast
+// Provides: {"Item"}
+// Dependencies: {}
+# [doc = " An item definition."] # [derive (Clone , Encodable , Decodable , Debug)] pub struct Item < K = ItemKind > { pub attrs : AttrVec , pub id : NodeId , pub span : Span , pub vis : Visibility , pub kind : K , # [doc = " Original tokens this item was parsed from. This isn't necessarily"] # [doc = " available for all items, although over time more and more items should"] # [doc = " have this be `Some`. Right now this is primarily used for procedural"] # [doc = " macros, notably custom attributes."] # [doc = ""] # [doc = " Note that the tokens here do not include the outer attributes, but will"] # [doc = " include inner attributes."] pub tokens : Option < LazyAttrTokenStream > , }
+};
+}

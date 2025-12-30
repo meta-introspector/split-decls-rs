@@ -1,0 +1,48 @@
+// Generated module macro for crate::character::streaming
+macro_rules! Modcrate_character_streaming {
+() => {
+        Depcrate_character_streaminguse_685!();
+        Depcrate_character_streaminguse_686!();
+        Depcrate_character_streaminguse_687!();
+        Depcrate_character_streaminguse_688!();
+        Depcrate_character_streaminguse_689!();
+        Depcrate_character_streaminguse_690!();
+        Depcrate_character_streaminguse_691!();
+        Depcrate_character_streaminguse_692!();
+        Depcrate_character_streaminguse_693!();
+        Depcrate_character_streaminguse_694!();
+        Depcrate_character_streaminguse_695!();
+        Depcrate_character_streamingchar!();
+        Depcrate_character_streamingsatisfy!();
+        Depcrate_character_streamingone_of!();
+        Depcrate_character_streamingnone_of!();
+        Depcrate_character_streamingcrlf!();
+        Depcrate_character_streamingnot_line_ending!();
+        Depcrate_character_streamingline_ending!();
+        Depcrate_character_streamingnewline!();
+        Depcrate_character_streamingtab!();
+        Depcrate_character_streaminganychar!();
+        Depcrate_character_streamingalpha0!();
+        Depcrate_character_streamingalpha1!();
+        Depcrate_character_streamingdigit0!();
+        Depcrate_character_streamingdigit1!();
+        Depcrate_character_streaminghex_digit0!();
+        Depcrate_character_streaminghex_digit1!();
+        Depcrate_character_streamingoct_digit0!();
+        Depcrate_character_streamingoct_digit1!();
+        Depcrate_character_streamingbin_digit0!();
+        Depcrate_character_streamingbin_digit1!();
+        Depcrate_character_streamingalphanumeric0!();
+        Depcrate_character_streamingalphanumeric1!();
+        Depcrate_character_streamingspace0!();
+        Depcrate_character_streamingspace1!();
+        Depcrate_character_streamingmultispace0!();
+        Depcrate_character_streamingmultispace1!();
+        Depcrate_character_streamingsign!();
+        Depcrate_character_streamingints!();
+        Depcrate_character_streamingmacro_724!();
+        Depcrate_character_streaminguints!();
+        Depcrate_character_streamingmacro_726!();
+        Depcrate_character_streamingtests!();
+    };
+}

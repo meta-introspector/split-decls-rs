@@ -1,0 +1,41 @@
+// Generated module macro for crate::deque
+macro_rules! Modcrate_deque {
+() => {
+        Depcrate_dequeuse_36!();
+        Depcrate_dequeuse_37!();
+        Depcrate_dequeuse_38!();
+        Depcrate_dequeDequeInner!();
+        Depcrate_dequeDeque!();
+        Depcrate_dequeDequeView!();
+        Depcrate_dequeimpl_42!();
+        Depcrate_dequeimpl_43!();
+        Depcrate_dequeIter!();
+        Depcrate_dequeIterMut!();
+        Depcrate_dequeimpl_46!();
+        Depcrate_dequeimpl_47!();
+        Depcrate_dequeimpl_48!();
+        Depcrate_dequeimpl_49!();
+        Depcrate_dequeimpl_50!();
+        Depcrate_dequeimpl_51!();
+        Depcrate_dequeimpl_52!();
+        Depcrate_dequeimpl_53!();
+        Depcrate_dequeimpl_54!();
+        Depcrate_dequeimpl_55!();
+        Depcrate_dequeimpl_56!();
+        Depcrate_dequeimpl_57!();
+        Depcrate_dequeimpl_58!();
+        Depcrate_dequeIntoIter!();
+        Depcrate_dequeimpl_60!();
+        Depcrate_dequeimpl_61!();
+        Depcrate_dequeimpl_62!();
+        Depcrate_dequeimpl_63!();
+        Depcrate_dequeimpl_64!();
+        Depcrate_dequeimpl_65!();
+        Depcrate_dequeimpl_66!();
+        Depcrate_dequeimpl_67!();
+        Depcrate_dequeimpl_68!();
+        Depcrate_dequeimpl_69!();
+        Depcrate_dequeimpl_70!();
+        Depcrate_dequetests!();
+    };
+}

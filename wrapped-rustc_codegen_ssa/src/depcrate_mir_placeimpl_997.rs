@@ -1,0 +1,9 @@
+// Generated macro for impl_997 (impl)
+macro_rules! Depcrate_mir_placeimpl_997 {
+() => {
+// Module: crate::mir::place
+// Provides: {"impl_997"}
+// Dependencies: {}
+impl < 'a , 'tcx , V : CodegenObject > PlaceRef < 'tcx , V > { pub fn new_sized (llval : V , layout : TyAndLayout < 'tcx >) -> PlaceRef < 'tcx , V > { PlaceRef :: new_sized_aligned (llval , layout , layout . align . abi) } pub fn new_sized_aligned (llval : V , layout : TyAndLayout < 'tcx > , align : Align ,) -> PlaceRef < 'tcx , V > { assert ! (layout . is_sized ()) ; PlaceValue :: new_sized (llval , align) . with_type (layout) } pub fn alloca < Bx : BuilderMethods < 'a , 'tcx , Value = V > > (bx : & mut Bx , layout : TyAndLayout < 'tcx > ,) -> Self { Self :: alloca_size (bx , layout . size , layout) } pub fn alloca_size < Bx : BuilderMethods < 'a , 'tcx , Value = V > > (bx : & mut Bx , size : Size , layout : TyAndLayout < 'tcx > ,) -> Self { assert ! (layout . is_sized () , "tried to statically allocate unsized place") ; PlaceValue :: alloca (bx , size , layout . align . abi) . with_type (layout) } # [doc = " Returns a place for an indirect reference to an unsized place."] pub fn alloca_unsized_indirect < Bx : BuilderMethods < 'a , 'tcx , Value = V > > (bx : & mut Bx , layout : TyAndLayout < 'tcx > ,) -> Self { assert ! (layout . is_unsized () , "tried to allocate indirect place for sized values") ; let ptr_ty = Ty :: new_mut_ptr (bx . cx () . tcx () , layout . ty) ; let ptr_layout = bx . cx () . layout_of (ptr_ty) ; Self :: alloca (bx , ptr_layout) } pub fn len < Cx : ConstCodegenMethods < Value = V > > (& self , cx : & Cx) -> V { if let FieldsShape :: Array { count , .. } = self . layout . fields { if self . layout . is_unsized () { assert_eq ! (count , 0) ; self . val . llextra . unwrap () } else { cx . const_usize (count) } } else { bug ! ("unexpected layout `{:#?}` in PlaceRef::len" , self . layout) } } }
+};
+}

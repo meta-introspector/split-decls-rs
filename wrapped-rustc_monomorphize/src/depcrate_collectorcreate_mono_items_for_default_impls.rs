@@ -1,0 +1,10 @@
+// Generated macro for create_mono_items_for_default_impls (function)
+macro_rules! Depcrate_collectorcreate_mono_items_for_default_impls {
+() => {
+// Module: crate::collector
+// Provides: {"create_mono_items_for_default_impls"}
+// Dependencies: {}
+# [instrument (level = "debug" , skip (tcx , output))] fn create_mono_items_for_default_impls < 'tcx > (tcx : TyCtxt < 'tcx > , item : hir :: ItemId , output : & mut MonoItems < 'tcx > ,) { let Some (impl_) = tcx . impl_trait_header (item . owner_id) else { return ; } ; if matches ! (impl_ . polarity , ty :: ImplPolarity :: Negative) { return ; } if tcx . generics_of (item . owner_id) . own_requires_monomorphization () { return ; } let only_region_params = | param : & ty :: GenericParamDef , _ : & _ | match param . kind { GenericParamDefKind :: Lifetime => tcx . lifetimes . re_erased . into () , GenericParamDefKind :: Type { .. } | GenericParamDefKind :: Const { .. } => { unreachable ! ("`own_requires_monomorphization` check means that \
+                we should have no type/const params") } } ; let impl_args = GenericArgs :: for_item (tcx , item . owner_id . to_def_id () , only_region_params) ; let trait_ref = impl_ . trait_ref . instantiate (tcx , impl_args) ; if tcx . instantiate_and_check_impossible_predicates ((item . owner_id . to_def_id () , impl_args)) { return ; } let typing_env = ty :: TypingEnv :: fully_monomorphized () ; let trait_ref = tcx . normalize_erasing_regions (typing_env , trait_ref) ; let overridden_methods = tcx . impl_item_implementor_ids (item . owner_id) ; for method in tcx . provided_trait_methods (trait_ref . def_id) { if overridden_methods . contains_key (& method . def_id) { continue ; } if tcx . generics_of (method . def_id) . own_requires_monomorphization () { continue ; } let args = trait_ref . args . extend_to (tcx , method . def_id , only_region_params) ; let instance = ty :: Instance :: expect_resolve (tcx , typing_env , method . def_id , args , DUMMY_SP) ; let mono_item = create_fn_mono_item (tcx , instance , DUMMY_SP) ; if mono_item . node . is_instantiable (tcx) && tcx . should_codegen_locally (instance) { output . push (mono_item) ; } } }
+};
+}

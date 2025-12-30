@@ -1,0 +1,42 @@
+// Generated module macro for crate::context
+macro_rules! Modcrate_context {
+() => {
+        Depcrate_contextuse_464!();
+        Depcrate_contextuse_465!();
+        Depcrate_contextuse_466!();
+        Depcrate_contextuse_467!();
+        Depcrate_contextuse_468!();
+        Depcrate_contextuse_469!();
+        Depcrate_contextDataContext!();
+        Depcrate_contextData!();
+        Depcrate_contextimpl_472!();
+        Depcrate_contextimpl_473!();
+        Depcrate_contextimpl_474!();
+        Depcrate_contextContextSelectionSet!();
+        Depcrate_contextContext!();
+        Depcrate_contextContextDirective!();
+        Depcrate_contextQueryPathSegment!();
+        Depcrate_contextQueryPathNode!();
+        Depcrate_contextimpl_480!();
+        Depcrate_contextimpl_481!();
+        Depcrate_contextimpl_482!();
+        Depcrate_contextParents!();
+        Depcrate_contextimpl_484!();
+        Depcrate_contextimpl_485!();
+        Depcrate_contextimpl_486!();
+        Depcrate_contextContextBase!();
+        Depcrate_contextQueryEnvInner!();
+        Depcrate_contextQueryEnv!();
+        Depcrate_contextimpl_490!();
+        Depcrate_contextimpl_491!();
+        Depcrate_contextimpl_492!();
+        Depcrate_contextimpl_493!();
+        Depcrate_contextimpl_494!();
+        Depcrate_contextimpl_495!();
+        Depcrate_contextSelectionField!();
+        Depcrate_contextimpl_497!();
+        Depcrate_contextimpl_498!();
+        Depcrate_contextSelectionFieldsIter!();
+        Depcrate_contextimpl_500!();
+    };
+}

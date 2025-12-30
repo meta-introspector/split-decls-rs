@@ -1,0 +1,41 @@
+// Generated module macro for crate::rustc_literal_escaper
+macro_rules! Modcrate_rustc_literal_escaper {
+() => {
+        Depcrate_rustc_literal_escaperuse_195!();
+        Depcrate_rustc_literal_escaperuse_196!();
+        Depcrate_rustc_literal_escaperuse_197!();
+        Depcrate_rustc_literal_escaperuse_198!();
+        Depcrate_rustc_literal_escaperuse_199!();
+        Depcrate_rustc_literal_escaperEscapeError!();
+        Depcrate_rustc_literal_escaperimpl_201!();
+        Depcrate_rustc_literal_escapercheck_raw_str!();
+        Depcrate_rustc_literal_escapercheck_raw_byte_str!();
+        Depcrate_rustc_literal_escapercheck_raw_c_str!();
+        Depcrate_rustc_literal_escaperCheckRaw!();
+        Depcrate_rustc_literal_escaperimpl_206!();
+        Depcrate_rustc_literal_escaperimpl_207!();
+        Depcrate_rustc_literal_escaperchar2byte!();
+        Depcrate_rustc_literal_escaperimpl_209!();
+        Depcrate_rustc_literal_escaperunescape_char!();
+        Depcrate_rustc_literal_escaperunescape_byte!();
+        Depcrate_rustc_literal_escaperunescape_str!();
+        Depcrate_rustc_literal_escaperunescape_byte_str!();
+        Depcrate_rustc_literal_escaperunescape_c_str!();
+        Depcrate_rustc_literal_escaperMixedUnit!();
+        Depcrate_rustc_literal_escaperimpl_216!();
+        Depcrate_rustc_literal_escaperimpl_217!();
+        Depcrate_rustc_literal_escaperimpl_218!();
+        Depcrate_rustc_literal_escaperimpl_219!();
+        Depcrate_rustc_literal_escaperUnescape!();
+        Depcrate_rustc_literal_escapersimple_escape!();
+        Depcrate_rustc_literal_escaperhex_escape!();
+        Depcrate_rustc_literal_escaperunicode_escape!();
+        Depcrate_rustc_literal_escaperskip_ascii_whitespace!();
+        Depcrate_rustc_literal_escaperimpl_225!();
+        Depcrate_rustc_literal_escaperimpl_226!();
+        Depcrate_rustc_literal_escaperimpl_227!();
+        Depcrate_rustc_literal_escaperMode!();
+        Depcrate_rustc_literal_escaperimpl_229!();
+        Depcrate_rustc_literal_escapercheck_for_errors!();
+    };
+}

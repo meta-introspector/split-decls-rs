@@ -1,0 +1,40 @@
+// Generated module macro for crate::tester
+macro_rules! Modcrate_tester {
+() => {
+        Depcrate_testeruse_89!();
+        Depcrate_testeruse_90!();
+        Depcrate_testeruse_91!();
+        Depcrate_testeruse_92!();
+        Depcrate_testeruse_93!();
+        Depcrate_testerQuickCheck!();
+        Depcrate_testerqc_tests!();
+        Depcrate_testerqc_max_tests!();
+        Depcrate_testerqc_gen_size!();
+        Depcrate_testerqc_min_tests_passed!();
+        Depcrate_testerimpl_99!();
+        Depcrate_testerimpl_100!();
+        Depcrate_testerquickcheck!();
+        Depcrate_testerTestResult!();
+        Depcrate_testerStatus!();
+        Depcrate_testerimpl_104!();
+        Depcrate_testerimpl_105!();
+        Depcrate_testerTestable!();
+        Depcrate_testerimpl_107!();
+        Depcrate_testerimpl_108!();
+        Depcrate_testerimpl_109!();
+        Depcrate_testerimpl_110!();
+        Depcrate_testerdebug_reprs!();
+        Depcrate_testertestable_fn!();
+        Depcrate_testermacro_113!();
+        Depcrate_testermacro_114!();
+        Depcrate_testermacro_115!();
+        Depcrate_testermacro_116!();
+        Depcrate_testermacro_117!();
+        Depcrate_testermacro_118!();
+        Depcrate_testermacro_119!();
+        Depcrate_testermacro_120!();
+        Depcrate_testermacro_121!();
+        Depcrate_testersafe!();
+        Depcrate_testertest!();
+    };
+}

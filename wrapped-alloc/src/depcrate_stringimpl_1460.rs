@@ -1,0 +1,9 @@
+// Generated macro for impl_1460 (impl)
+macro_rules! Depcrate_stringimpl_1460 {
+() => {
+// Module: crate::string
+// Provides: {"impl_1460"}
+// Dependencies: {}
+# [doc = " Implements the `+` operator for concatenating two strings."] # [doc = ""] # [doc = " This consumes the `String` on the left-hand side and re-uses its buffer (growing it if"] # [doc = " necessary). This is done to avoid allocating a new `String` and copying the entire contents on"] # [doc = " every operation, which would lead to *O*(*n*^2) running time when building an *n*-byte string by"] # [doc = " repeated concatenation."] # [doc = ""] # [doc = " The string on the right-hand side is only borrowed; its contents are copied into the returned"] # [doc = " `String`."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " Concatenating two `String`s takes the first by value and borrows the second:"] # [doc = ""] # [doc = " ```"] # [doc = " let a = String::from(\"hello\");"] # [doc = " let b = String::from(\" world\");"] # [doc = " let c = a + &b;"] # [doc = " // `a` is moved and can no longer be used here."] # [doc = " ```"] # [doc = ""] # [doc = " If you want to keep using the first `String`, you can clone it and append to the clone instead:"] # [doc = ""] # [doc = " ```"] # [doc = " let a = String::from(\"hello\");"] # [doc = " let b = String::from(\" world\");"] # [doc = " let c = a.clone() + &b;"] # [doc = " // `a` is still valid here."] # [doc = " ```"] # [doc = ""] # [doc = " Concatenating `&str` slices can be done by converting the first to a `String`:"] # [doc = ""] # [doc = " ```"] # [doc = " let a = \"hello\";"] # [doc = " let b = \" world\";"] # [doc = " let c = a.to_string() + b;"] # [doc = " ```"] # [cfg (not (no_global_oom_handling))] # [stable (feature = "rust1" , since = "1.0.0")] impl Add < & str > for String { type Output = String ; # [inline] fn add (mut self , other : & str) -> String { self . push_str (other) ; self } }
+};
+}

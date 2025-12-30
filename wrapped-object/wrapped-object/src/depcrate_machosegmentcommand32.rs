@@ -1,0 +1,9 @@
+// Generated macro for SegmentCommand32 (struct)
+macro_rules! Depcrate_machoSegmentCommand32 {
+() => {
+// Module: crate::macho
+// Provides: {"SegmentCommand32"}
+// Dependencies: {}
+# [doc = " 32-bit segment load command."] # [doc = ""] # [doc = " The segment load command indicates that a part of this file is to be"] # [doc = " mapped into the task's address space.  The size of this segment in memory,"] # [doc = " vmsize, maybe equal to or larger than the amount to map from this file,"] # [doc = " filesize.  The file is mapped starting at fileoff to the beginning of"] # [doc = " the segment in memory, vmaddr.  The rest of the memory of the segment,"] # [doc = " if any, is allocated zero fill on demand.  The segment's maximum virtual"] # [doc = " memory protection and initial virtual memory protection are specified"] # [doc = " by the maxprot and initprot fields.  If the segment has sections then the"] # [doc = " `Section32` structures directly follow the segment command and their size is"] # [doc = " reflected in `cmdsize`."] # [derive (Debug , Clone , Copy)] # [repr (C)] pub struct SegmentCommand32 < E : Endian > { # [doc = " LC_SEGMENT"] pub cmd : U32 < E > , # [doc = " includes sizeof section structs"] pub cmdsize : U32 < E > , # [doc = " segment name"] pub segname : [u8 ; 16] , # [doc = " memory address of this segment"] pub vmaddr : U32 < E > , # [doc = " memory size of this segment"] pub vmsize : U32 < E > , # [doc = " file offset of this segment"] pub fileoff : U32 < E > , # [doc = " amount to map from the file"] pub filesize : U32 < E > , # [doc = " maximum VM protection"] pub maxprot : U32 < E > , # [doc = " initial VM protection"] pub initprot : U32 < E > , # [doc = " number of sections in segment"] pub nsects : U32 < E > , # [doc = " flags"] pub flags : U32 < E > , }
+};
+}

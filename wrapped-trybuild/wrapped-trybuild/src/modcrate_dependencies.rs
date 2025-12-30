@@ -1,0 +1,40 @@
+// Generated module macro for crate::dependencies
+macro_rules! Modcrate_dependencies {
+() => {
+        Depcrate_dependenciesuse_50!();
+        Depcrate_dependenciesuse_51!();
+        Depcrate_dependenciesuse_52!();
+        Depcrate_dependenciesuse_53!();
+        Depcrate_dependenciesuse_54!();
+        Depcrate_dependenciesuse_55!();
+        Depcrate_dependenciesuse_56!();
+        Depcrate_dependenciesuse_57!();
+        Depcrate_dependenciesuse_58!();
+        Depcrate_dependenciesuse_59!();
+        Depcrate_dependenciesuse_60!();
+        Depcrate_dependenciesuse_61!();
+        Depcrate_dependenciesuse_62!();
+        Depcrate_dependenciesuse_63!();
+        Depcrate_dependenciesget_manifest!();
+        Depcrate_dependenciesget_workspace_manifest!();
+        Depcrate_dependenciestry_get_workspace_manifest!();
+        Depcrate_dependenciesfix_dependencies!();
+        Depcrate_dependenciesfix_patches!();
+        Depcrate_dependenciesfix_replacements!();
+        Depcrate_dependenciesWorkspaceManifest!();
+        Depcrate_dependenciesWorkspaceWorkspace!();
+        Depcrate_dependenciesWorkspacePackage!();
+        Depcrate_dependenciesManifest!();
+        Depcrate_dependenciesPackage!();
+        Depcrate_dependenciesEditionOrInherit!();
+        Depcrate_dependenciesDependency!();
+        Depcrate_dependenciesTargetDependencies!();
+        Depcrate_dependenciesRegistryPatch!();
+        Depcrate_dependenciesPatch!();
+        Depcrate_dependenciesis_false!();
+        Depcrate_dependenciesimpl_81!();
+        Depcrate_dependenciesimpl_82!();
+        Depcrate_dependenciesimpl_83!();
+        Depcrate_dependenciesimpl_84!();
+    };
+}

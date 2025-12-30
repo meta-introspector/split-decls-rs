@@ -1,0 +1,9 @@
+// Generated macro for apply_overrides (function)
+macro_rules! Depcrate_codegen_attrsapply_overrides {
+() => {
+// Module: crate::codegen_attrs
+// Provides: {"apply_overrides"}
+// Dependencies: {}
+# [doc = " Applies overrides for codegen fn attrs. These often have a specific reason why they're necessary."] # [doc = " Please comment why when adding a new one!"] fn apply_overrides (tcx : TyCtxt < '_ > , did : LocalDefId , codegen_fn_attrs : & mut CodegenFnAttrs) { codegen_fn_attrs . alignment = Ord :: max (codegen_fn_attrs . alignment , tcx . sess . opts . unstable_opts . min_function_alignment) ; codegen_fn_attrs . no_sanitize |= tcx . disabled_sanitizers_for (did) ; codegen_fn_attrs . alignment = Ord :: max (codegen_fn_attrs . alignment , tcx . inherited_align (did)) ; if codegen_fn_attrs . flags . contains (CodegenFnAttrFlags :: NAKED) { codegen_fn_attrs . inline = InlineAttr :: Never ; } if tcx . is_closure_like (did . to_def_id ()) && codegen_fn_attrs . inline != InlineAttr :: Always { let owner_id = tcx . parent (did . to_def_id ()) ; if tcx . def_kind (owner_id) . has_codegen_attrs () { codegen_fn_attrs . target_features . extend (tcx . codegen_fn_attrs (owner_id) . target_features . iter () . copied ()) ; } } let crate_attrs = tcx . hir_attrs (rustc_hir :: CRATE_HIR_ID) ; let no_builtins = attr :: contains_name (crate_attrs , sym :: no_builtins) ; if no_builtins { codegen_fn_attrs . flags |= CodegenFnAttrFlags :: NO_BUILTINS ; } if tcx . should_inherit_track_caller (did) { codegen_fn_attrs . flags |= CodegenFnAttrFlags :: TRACK_CALLER ; } if tcx . is_foreign_item (did) { codegen_fn_attrs . flags |= CodegenFnAttrFlags :: FOREIGN_ITEM ; if codegen_fn_attrs . flags . contains (CodegenFnAttrFlags :: RUSTC_STD_INTERNAL_SYMBOL) { } else if codegen_fn_attrs . symbol_name . is_some () { } else { codegen_fn_attrs . flags |= CodegenFnAttrFlags :: NO_MANGLE ; } } }
+};
+}

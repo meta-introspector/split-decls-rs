@@ -1,0 +1,9 @@
+// Generated macro for unicode_escape (function)
+macro_rules! Depcrateunicode_escape {
+() => {
+// Module: crate
+// Provides: {"unicode_escape"}
+// Dependencies: {}
+# [doc = " Interpret a unicode escape"] # [doc = ""] # [doc = " Parse the braces with hexadecimal characters (and underscores) part of a unicode escape."] # [doc = " This r\"{...}\" normally comes after r\"\\u\" and cannot start with an underscore."] # [inline] fn unicode_escape (chars : & mut impl Iterator < Item = char >) -> Result < u32 , EscapeError > { if chars . next () != Some ('{') { return Err (EscapeError :: NoBraceInUnicodeEscape) ; } let mut value : u32 = match chars . next () . ok_or (EscapeError :: UnclosedUnicodeEscape) ? { '_' => return Err (EscapeError :: LeadingUnderscoreUnicodeEscape) , '}' => return Err (EscapeError :: EmptyUnicodeEscape) , c => c . to_digit (16) . ok_or (EscapeError :: InvalidCharInUnicodeEscape) ? , } ; let mut n_digits = 1 ; loop { match chars . next () { None => return Err (EscapeError :: UnclosedUnicodeEscape) , Some ('_') => continue , Some ('}') => { return if n_digits > 6 { Err (EscapeError :: OverlongUnicodeEscape) } else { Ok (value) } ; } Some (c) => { let digit : u32 = c . to_digit (16) . ok_or (EscapeError :: InvalidCharInUnicodeEscape) ? ; n_digits += 1 ; if n_digits > 6 { continue ; } value = value * 16 + digit ; } } ; } }
+};
+}

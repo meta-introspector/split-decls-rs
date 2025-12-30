@@ -1,0 +1,42 @@
+// Generated module macro for crate::read::pe::file
+macro_rules! Modcrate_read_pe_file {
+() => {
+        Depcrate_read_pe_fileuse_901!();
+        Depcrate_read_pe_fileuse_902!();
+        Depcrate_read_pe_fileuse_903!();
+        Depcrate_read_pe_fileuse_904!();
+        Depcrate_read_pe_fileuse_905!();
+        Depcrate_read_pe_fileuse_906!();
+        Depcrate_read_pe_fileuse_907!();
+        Depcrate_read_pe_fileuse_908!();
+        Depcrate_read_pe_fileuse_909!();
+        Depcrate_read_pe_fileuse_910!();
+        Depcrate_read_pe_filePeFile32!();
+        Depcrate_read_pe_filePeFile64!();
+        Depcrate_read_pe_filePeFile!();
+        Depcrate_read_pe_fileimpl_914!();
+        Depcrate_read_pe_fileimpl_915!();
+        Depcrate_read_pe_fileimpl_916!();
+        Depcrate_read_pe_filePeComdatIterator32!();
+        Depcrate_read_pe_filePeComdatIterator64!();
+        Depcrate_read_pe_filePeComdatIterator!();
+        Depcrate_read_pe_fileimpl_920!();
+        Depcrate_read_pe_filePeComdat32!();
+        Depcrate_read_pe_filePeComdat64!();
+        Depcrate_read_pe_filePeComdat!();
+        Depcrate_read_pe_fileimpl_924!();
+        Depcrate_read_pe_fileimpl_925!();
+        Depcrate_read_pe_filePeComdatSectionIterator32!();
+        Depcrate_read_pe_filePeComdatSectionIterator64!();
+        Depcrate_read_pe_filePeComdatSectionIterator!();
+        Depcrate_read_pe_fileimpl_929!();
+        Depcrate_read_pe_fileimpl_930!();
+        Depcrate_read_pe_fileoptional_header_magic!();
+        Depcrate_read_pe_fileImageNtHeaders!();
+        Depcrate_read_pe_fileImageOptionalHeader!();
+        Depcrate_read_pe_fileimpl_934!();
+        Depcrate_read_pe_fileimpl_935!();
+        Depcrate_read_pe_fileimpl_936!();
+        Depcrate_read_pe_fileimpl_937!();
+    };
+}

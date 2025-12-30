@@ -1,0 +1,41 @@
+// Generated module macro for crate::params
+macro_rules! Modcrate_params {
+() => {
+        Depcrate_paramsuse_314!();
+        Depcrate_paramssealed!();
+        Depcrate_paramsuse_316!();
+        Depcrate_paramsParams!();
+        Depcrate_paramsimpl_318!();
+        Depcrate_paramsimpl_319!();
+        Depcrate_paramsimpl_320!();
+        Depcrate_paramsimpl_321!();
+        Depcrate_paramsimpl_322!();
+        Depcrate_paramsimpl_323!();
+        Depcrate_paramsimpl_324!();
+        Depcrate_paramsimpl_325!();
+        Depcrate_paramsimpl_326!();
+        Depcrate_paramsimpl_327!();
+        Depcrate_paramssingle_tuple_impl!();
+        Depcrate_paramsmacro_329!();
+        Depcrate_paramsmacro_330!();
+        Depcrate_paramsmacro_331!();
+        Depcrate_paramsmacro_332!();
+        Depcrate_paramsmacro_333!();
+        Depcrate_paramsmacro_334!();
+        Depcrate_paramsmacro_335!();
+        Depcrate_paramsmacro_336!();
+        Depcrate_paramsmacro_337!();
+        Depcrate_paramsmacro_338!();
+        Depcrate_paramsmacro_339!();
+        Depcrate_paramsmacro_340!();
+        Depcrate_paramsmacro_341!();
+        Depcrate_paramsmacro_342!();
+        Depcrate_paramsmacro_343!();
+        Depcrate_paramsimpl_for_array_ref!();
+        Depcrate_paramsmacro_345!();
+        Depcrate_paramsParamsFromIter!();
+        Depcrate_paramsparams_from_iter!();
+        Depcrate_paramsimpl_348!();
+        Depcrate_paramsimpl_349!();
+    };
+}

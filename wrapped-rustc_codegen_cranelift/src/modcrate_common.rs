@@ -1,0 +1,42 @@
+// Generated module macro for crate::common
+macro_rules! Modcrate_common {
+() => {
+        Depcrate_commonuse_169!();
+        Depcrate_commonuse_170!();
+        Depcrate_commonuse_171!();
+        Depcrate_commonuse_172!();
+        Depcrate_commonuse_173!();
+        Depcrate_commonuse_174!();
+        Depcrate_commonuse_175!();
+        Depcrate_commonuse_176!();
+        Depcrate_commonuse_177!();
+        Depcrate_commonuse_178!();
+        Depcrate_commonuse_179!();
+        Depcrate_commonuse_180!();
+        Depcrate_commonpointer_ty!();
+        Depcrate_commonscalar_to_clif_type!();
+        Depcrate_commonclif_type_from_ty!();
+        Depcrate_commonclif_pair_type_from_ty!();
+        Depcrate_commoncodegen_icmp_imm!();
+        Depcrate_commoncodegen_bitcast!();
+        Depcrate_commontype_zero_value!();
+        Depcrate_commontype_min_max_value!();
+        Depcrate_commontype_sign!();
+        Depcrate_commoncreate_wrapper_function!();
+        Depcrate_commonFunctionCx!();
+        Depcrate_commonimpl_192!();
+        Depcrate_commonimpl_193!();
+        Depcrate_commonimpl_194!();
+        Depcrate_commonimpl_195!();
+        Depcrate_commonimpl_196!();
+        Depcrate_commonimpl_197!();
+        Depcrate_commonimpl_198!();
+        Depcrate_commonFullyMonomorphizedLayoutCx!();
+        Depcrate_commonimpl_200!();
+        Depcrate_commonimpl_201!();
+        Depcrate_commonimpl_202!();
+        Depcrate_commonimpl_203!();
+        Depcrate_commonimpl_204!();
+        Depcrate_commonimpl_205!();
+    };
+}

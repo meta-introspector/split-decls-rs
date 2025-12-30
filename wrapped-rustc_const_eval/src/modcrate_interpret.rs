@@ -1,0 +1,40 @@
+// Generated module macro for crate::interpret
+macro_rules! Modcrate_interpret {
+() => {
+        Depcrate_interpretcall!();
+        Depcrate_interpretcast!();
+        Depcrate_interpretdiscriminant!();
+        Depcrate_interpreteval_context!();
+        Depcrate_interpretintern!();
+        Depcrate_interpretintrinsics!();
+        Depcrate_interpretmachine!();
+        Depcrate_interpretmemory!();
+        Depcrate_interpretoperand!();
+        Depcrate_interpretoperator!();
+        Depcrate_interpretplace!();
+        Depcrate_interpretprojection!();
+        Depcrate_interpretstack!();
+        Depcrate_interpretstep!();
+        Depcrate_interprettraits!();
+        Depcrate_interpretutil!();
+        Depcrate_interpretvalidity!();
+        Depcrate_interpretvisitor!();
+        Depcrate_interpretuse_770!();
+        Depcrate_interpretuse_771!();
+        Depcrate_interpretuse_772!();
+        Depcrate_interpretuse_773!();
+        Depcrate_interpretuse_774!();
+        Depcrate_interpretuse_775!();
+        Depcrate_interpretuse_776!();
+        Depcrate_interpretuse_777!();
+        Depcrate_interpretuse_778!();
+        Depcrate_interpretuse_779!();
+        Depcrate_interpretuse_780!();
+        Depcrate_interpretuse_781!();
+        Depcrate_interpretuse_782!();
+        Depcrate_interpretuse_783!();
+        Depcrate_interpretuse_784!();
+        Depcrate_interpretuse_785!();
+        Depcrate_interpretuse_786!();
+    };
+}

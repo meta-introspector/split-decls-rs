@@ -1,0 +1,9 @@
+// Generated macro for YEAR_TO_FLAGS (const)
+macro_rules! Depcrate_naive_internalsYEAR_TO_FLAGS {
+() => {
+// Module: crate::naive::internals
+// Provides: {"YEAR_TO_FLAGS"}
+// Dependencies: {}
+const YEAR_TO_FLAGS : & [YearFlags ; 400] = & [BA , G , F , E , DC , B , A , G , FE , D , C , B , AG , F , E , D , CB , A , G , F , ED , C , B , A , GF , E , D , C , BA , G , F , E , DC , B , A , G , FE , D , C , B , AG , F , E , D , CB , A , G , F , ED , C , B , A , GF , E , D , C , BA , G , F , E , DC , B , A , G , FE , D , C , B , AG , F , E , D , CB , A , G , F , ED , C , B , A , GF , E , D , C , BA , G , F , E , DC , B , A , G , FE , D , C , B , AG , F , E , D , C , B , A , G , FE , D , C , B , AG , F , E , D , CB , A , G , F , ED , C , B , A , GF , E , D , C , BA , G , F , E , DC , B , A , G , FE , D , C , B , AG , F , E , D , CB , A , G , F , ED , C , B , A , GF , E , D , C , BA , G , F , E , DC , B , A , G , FE , D , C , B , AG , F , E , D , CB , A , G , F , ED , C , B , A , GF , E , D , C , BA , G , F , E , DC , B , A , G , FE , D , C , B , AG , F , E , D , CB , A , G , F , E , D , C , B , AG , F , E , D , CB , A , G , F , ED , C , B , A , GF , E , D , C , BA , G , F , E , DC , B , A , G , FE , D , C , B , AG , F , E , D , CB , A , G , F , ED , C , B , A , GF , E , D , C , BA , G , F , E , DC , B , A , G , FE , D , C , B , AG , F , E , D , CB , A , G , F , ED , C , B , A , GF , E , D , C , BA , G , F , E , DC , B , A , G , FE , D , C , B , AG , F , E , D , CB , A , G , F , ED , C , B , A , G , F , E , D , CB , A , G , F , ED , C , B , A , GF , E , D , C , BA , G , F , E , DC , B , A , G , FE , D , C , B , AG , F , E , D , CB , A , G , F , ED , C , B , A , GF , E , D , C , BA , G , F , E , DC , B , A , G , FE , D , C , B , AG , F , E , D , CB , A , G , F , ED , C , B , A , GF , E , D , C , BA , G , F , E , DC , B , A , G , FE , D , C , B , AG , F , E , D , CB , A , G , F , ED , C , B , A , GF , E , D , C ,] ;
+};
+}

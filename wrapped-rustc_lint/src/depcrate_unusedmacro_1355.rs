@@ -1,0 +1,9 @@
+// Generated macro for macro_1355 (macro)
+macro_rules! Depcrate_unusedmacro_1355 {
+() => {
+// Module: crate::unused
+// Provides: {"macro_1355"}
+// Dependencies: {}
+declare_lint ! { # [doc = " The `unused_import_braces` lint catches unnecessary braces around an"] # [doc = " imported item."] # [doc = ""] # [doc = " ### Example"] # [doc = ""] # [doc = " ```rust,compile_fail"] # [doc = " #![deny(unused_import_braces)]"] # [doc = " use test::{A};"] # [doc = ""] # [doc = " pub mod test {"] # [doc = "     pub struct A;"] # [doc = " }"] # [doc = " # fn main() {}"] # [doc = " ```"] # [doc = ""] # [doc = " {{produces}}"] # [doc = ""] # [doc = " ### Explanation"] # [doc = ""] # [doc = " If there is only a single item, then remove the braces (`use test::A;`"] # [doc = " for example)."] # [doc = ""] # [doc = " This lint is \"allow\" by default because it is only enforcing a"] # [doc = " stylistic choice."] UNUSED_IMPORT_BRACES , Allow , "unnecessary braces around an imported item" }
+};
+}

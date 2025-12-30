@@ -1,0 +1,9 @@
+// Generated macro for take_while1 (function)
+macro_rules! Depcrate_bytes_completetake_while1 {
+() => {
+// Module: crate::bytes::complete
+// Provides: {"take_while1"}
+// Dependencies: {}
+# [doc = " Returns the longest (at least 1) input slice that matches the predicate."] # [doc = ""] # [doc = " The parser will return the longest slice that matches the given predicate *(a function that"] # [doc = " takes the input and returns a bool)*."] # [doc = ""] # [doc = " It will return an `Err(Err::Error((_, ErrorKind::TakeWhile1)))` if the pattern wasn't met."] # [doc = " # Example"] # [doc = " ```rust"] # [doc = " # use nom::{Err, error::{Error, ErrorKind}, Needed, IResult};"] # [doc = " use nom::bytes::complete::take_while1;"] # [doc = " use nom::AsChar;"] # [doc = ""] # [doc = " fn alpha(s: &[u8]) -> IResult<&[u8], &[u8]> {"] # [doc = "   take_while1(AsChar::is_alpha)(s)"] # [doc = " }"] # [doc = ""] # [doc = " assert_eq!(alpha(b\"latin123\"), Ok((&b\"123\"[..], &b\"latin\"[..])));"] # [doc = " assert_eq!(alpha(b\"latin\"), Ok((&b\"\"[..], &b\"latin\"[..])));"] # [doc = " assert_eq!(alpha(b\"12345\"), Err(Err::Error(Error::new(&b\"12345\"[..], ErrorKind::TakeWhile1))));"] # [doc = " ```"] pub fn take_while1 < F , I , Error : ParseError < I > > (cond : F) -> impl FnMut (I) -> IResult < I , I , Error > where I : Input , F : Fn (< I as Input > :: Item) -> bool , { let mut parser = super :: take_while1 (cond) ; move | i : I | parser . process :: < OutputM < Emit , Emit , Complete > > (i) }
+};
+}

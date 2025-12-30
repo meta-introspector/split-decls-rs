@@ -1,0 +1,9 @@
+// Generated macro for doc_comment_from_desc (function)
+macro_rules! Depcrate_querydoc_comment_from_desc {
+() => {
+// Module: crate::query
+// Provides: {"doc_comment_from_desc"}
+// Dependencies: {}
+fn doc_comment_from_desc (list : & Punctuated < Expr , token :: Comma >) -> Result < Attribute > { use :: syn :: * ; let mut iter = list . iter () ; let format_str : String = match iter . next () { Some (& Expr :: Lit (ExprLit { lit : Lit :: Str (ref lit_str) , .. })) => { lit_str . value () . replace ("`{}`" , "{}") } _ => return Err (Error :: new (list . span () , "Expected a string literal")) , } ; let mut fmt_fragments = format_str . split ("{}") ; let mut doc_string = fmt_fragments . next () . unwrap () . to_string () ; iter . map (:: quote :: ToTokens :: to_token_stream) . zip (fmt_fragments) . for_each (| (tts , next_fmt_fragment) | { use :: core :: fmt :: Write ; write ! (& mut doc_string , " `{}` {}" , tts . to_string () . replace (" . " , ".") , next_fmt_fragment ,) . unwrap () ; } ,) ; let doc_string = format ! ("[query description - consider adding a doc-comment!] {doc_string}") ; Ok (parse_quote ! { # [doc = # doc_string] }) }
+};
+}

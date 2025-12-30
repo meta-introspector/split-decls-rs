@@ -1,0 +1,9 @@
+// Generated macro for custom_punctuation_len (macro)
+macro_rules! Depcrate_custom_punctuationcustom_punctuation_len {
+() => {
+// Module: crate::custom_punctuation
+// Provides: {"custom_punctuation_len"}
+// Dependencies: {}
+# [doc (hidden)] # [macro_export] # [rustfmt :: skip] macro_rules ! custom_punctuation_len { ($ mode : ident , &) => { 1 } ; ($ mode : ident , &&) => { 2 } ; ($ mode : ident , &=) => { 2 } ; ($ mode : ident , @) => { 1 } ; ($ mode : ident , ^) => { 1 } ; ($ mode : ident , ^=) => { 2 } ; ($ mode : ident , :) => { 1 } ; ($ mode : ident , ,) => { 1 } ; ($ mode : ident , $) => { 1 } ; ($ mode : ident , .) => { 1 } ; ($ mode : ident , ..) => { 2 } ; ($ mode : ident , ...) => { 3 } ; ($ mode : ident , ..=) => { 3 } ; ($ mode : ident , =) => { 1 } ; ($ mode : ident , ==) => { 2 } ; ($ mode : ident , =>) => { 2 } ; ($ mode : ident , >=) => { 2 } ; ($ mode : ident , >) => { 1 } ; ($ mode : ident , <-) => { 2 } ; ($ mode : ident , <=) => { 2 } ; ($ mode : ident , <) => { 1 } ; ($ mode : ident , -) => { 1 } ; ($ mode : ident , -=) => { 2 } ; ($ mode : ident , !=) => { 2 } ; ($ mode : ident , !) => { 1 } ; ($ mode : ident , |) => { 1 } ; ($ mode : ident , |=) => { 2 } ; ($ mode : ident , ||) => { 2 } ; ($ mode : ident , ::) => { 2 } ; ($ mode : ident , %) => { 1 } ; ($ mode : ident , %=) => { 2 } ; ($ mode : ident , +) => { 1 } ; ($ mode : ident , +=) => { 2 } ; ($ mode : ident , #) => { 1 } ; ($ mode : ident , ?) => { 1 } ; ($ mode : ident , ->) => { 2 } ; ($ mode : ident , ;) => { 1 } ; ($ mode : ident , <<) => { 2 } ; ($ mode : ident , <<=) => { 3 } ; ($ mode : ident , >>) => { 2 } ; ($ mode : ident , >>=) => { 3 } ; ($ mode : ident , /) => { 1 } ; ($ mode : ident , /=) => { 2 } ; ($ mode : ident , *) => { 1 } ; ($ mode : ident , *=) => { 2 } ; ($ mode : ident , ~) => { 1 } ; (lenient , $ tt : tt) => { 0 } ; (strict , $ tt : tt) => { { $ crate :: custom_punctuation_unexpected ! ($ tt) ; 0 } } ; }
+};
+}

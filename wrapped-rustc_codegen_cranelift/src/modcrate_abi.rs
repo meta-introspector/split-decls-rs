@@ -1,0 +1,39 @@
+// Generated module macro for crate::abi
+macro_rules! Modcrate_abi {
+() => {
+        Depcrate_abicomments!();
+        Depcrate_abipass_mode!();
+        Depcrate_abireturning!();
+        Depcrate_abiuse_63!();
+        Depcrate_abiuse_64!();
+        Depcrate_abiuse_65!();
+        Depcrate_abiuse_66!();
+        Depcrate_abiuse_67!();
+        Depcrate_abiuse_68!();
+        Depcrate_abiuse_69!();
+        Depcrate_abiuse_70!();
+        Depcrate_abiuse_71!();
+        Depcrate_abiuse_72!();
+        Depcrate_abiuse_73!();
+        Depcrate_abiuse_74!();
+        Depcrate_abiuse_75!();
+        Depcrate_abiuse_76!();
+        Depcrate_abiuse_77!();
+        Depcrate_abiuse_78!();
+        Depcrate_abiuse_79!();
+        Depcrate_abiuse_80!();
+        Depcrate_abiuse_81!();
+        Depcrate_abiclif_sig_from_fn_abi!();
+        Depcrate_abiconv_to_call_conv!();
+        Depcrate_abiget_function_sig!();
+        Depcrate_abiimport_function!();
+        Depcrate_abiimpl_86!();
+        Depcrate_abimake_local_place!();
+        Depcrate_abicodegen_fn_prelude!();
+        Depcrate_abiCallArgument!();
+        Depcrate_abicodegen_call_argument_operand!();
+        Depcrate_abicodegen_terminator_call!();
+        Depcrate_abicodegen_drop!();
+        Depcrate_abilib_call_arg_param!();
+    };
+}

@@ -1,0 +1,45 @@
+// Generated module macro for crate::search_graph
+macro_rules! Modcrate_search_graph {
+() => {
+        Depcrate_search_graphuse_188!();
+        Depcrate_search_graphuse_189!();
+        Depcrate_search_graphuse_190!();
+        Depcrate_search_graphuse_191!();
+        Depcrate_search_graphuse_192!();
+        Depcrate_search_graphuse_193!();
+        Depcrate_search_graphuse_194!();
+        Depcrate_search_graphuse_195!();
+        Depcrate_search_graphuse_196!();
+        Depcrate_search_graphuse_197!();
+        Depcrate_search_graphuse_198!();
+        Depcrate_search_graphstack!();
+        Depcrate_search_graphuse_209!();
+        Depcrate_search_graphglobal_cache!();
+        Depcrate_search_graphuse_221!();
+        Depcrate_search_graphuse_222!();
+        Depcrate_search_graphCx!();
+        Depcrate_search_graphDelegate!();
+        Depcrate_search_graphPathKind!();
+        Depcrate_search_graphimpl_226!();
+        Depcrate_search_graphHeadUsages!();
+        Depcrate_search_graphimpl_228!();
+        Depcrate_search_graphCandidateHeadUsages!();
+        Depcrate_search_graphimpl_230!();
+        Depcrate_search_graphAvailableDepth!();
+        Depcrate_search_graphimpl_232!();
+        Depcrate_search_graphCycleHead!();
+        Depcrate_search_graphCycleHeads!();
+        Depcrate_search_graphimpl_235!();
+        Depcrate_search_graphmacro_236!();
+        Depcrate_search_graphimpl_237!();
+        Depcrate_search_graphimpl_238!();
+        Depcrate_search_graphNestedGoals!();
+        Depcrate_search_graphimpl_240!();
+        Depcrate_search_graphProvisionalCacheEntry!();
+        Depcrate_search_graphEvaluationResult!();
+        Depcrate_search_graphimpl_243!();
+        Depcrate_search_graphSearchGraph!();
+        Depcrate_search_graphUpdateParentGoalCtxt!();
+        Depcrate_search_graphimpl_246!();
+    };
+}

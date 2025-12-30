@@ -1,0 +1,9 @@
+// Generated macro for use_2282 (use)
+macro_rules! Depcrate_fs_statxuse_2282 {
+() => {
+// Module: crate::fs::statx
+// Provides: {"use_2282"}
+// Dependencies: {}
+# [cfg (feature = "linux_4_11")] use backend :: fs :: syscalls :: statx as _statx ;
+};
+}

@@ -1,0 +1,41 @@
+// Generated module macro for crate::offset::local::tz_info::rule
+macro_rules! Modcrate_offset_local_tz_info_rule {
+() => {
+        Depcrate_offset_local_tz_info_ruleuse_821!();
+        Depcrate_offset_local_tz_info_ruleuse_822!();
+        Depcrate_offset_local_tz_info_ruleuse_823!();
+        Depcrate_offset_local_tz_info_ruleuse_824!();
+        Depcrate_offset_local_tz_info_ruleuse_825!();
+        Depcrate_offset_local_tz_info_ruleTransitionRule!();
+        Depcrate_offset_local_tz_info_ruleimpl_827!();
+        Depcrate_offset_local_tz_info_ruleimpl_828!();
+        Depcrate_offset_local_tz_info_ruleimpl_829!();
+        Depcrate_offset_local_tz_info_ruleAlternateTime!();
+        Depcrate_offset_local_tz_info_ruleimpl_831!();
+        Depcrate_offset_local_tz_info_ruleparse_name!();
+        Depcrate_offset_local_tz_info_ruleparse_offset!();
+        Depcrate_offset_local_tz_info_ruleparse_rule_time!();
+        Depcrate_offset_local_tz_info_ruleparse_rule_time_extended!();
+        Depcrate_offset_local_tz_info_ruleparse_hhmmss!();
+        Depcrate_offset_local_tz_info_ruleparse_signed_hhmmss!();
+        Depcrate_offset_local_tz_info_ruleRuleDay!();
+        Depcrate_offset_local_tz_info_ruleimpl_839!();
+        Depcrate_offset_local_tz_info_ruleUtcDateTime!();
+        Depcrate_offset_local_tz_info_ruleimpl_841!();
+        Depcrate_offset_local_tz_info_ruleNANOSECONDS_PER_SECOND!();
+        Depcrate_offset_local_tz_info_ruleSECONDS_PER_MINUTE!();
+        Depcrate_offset_local_tz_info_ruleSECONDS_PER_HOUR!();
+        Depcrate_offset_local_tz_info_ruleMINUTES_PER_HOUR!();
+        Depcrate_offset_local_tz_info_ruleMONTHS_PER_YEAR!();
+        Depcrate_offset_local_tz_info_ruleDAYS_PER_NORMAL_YEAR!();
+        Depcrate_offset_local_tz_info_ruleDAYS_PER_4_YEARS!();
+        Depcrate_offset_local_tz_info_ruleDAYS_PER_100_YEARS!();
+        Depcrate_offset_local_tz_info_ruleDAYS_PER_400_YEARS!();
+        Depcrate_offset_local_tz_info_ruleUNIX_OFFSET_SECS!();
+        Depcrate_offset_local_tz_info_ruleOFFSET_YEAR!();
+        Depcrate_offset_local_tz_info_ruleDAY_IN_MONTHS_LEAP_YEAR_FROM_MARCH!();
+        Depcrate_offset_local_tz_info_ruledays_since_unix_epoch!();
+        Depcrate_offset_local_tz_info_ruleis_leap_year!();
+        Depcrate_offset_local_tz_info_ruletests!();
+    };
+}

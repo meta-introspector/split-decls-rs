@@ -1,0 +1,9 @@
+// Generated macro for macro_537 (macro)
+macro_rules! Depcrate_invalid_from_utf8macro_537 {
+() => {
+// Module: crate::invalid_from_utf8
+// Provides: {"macro_537"}
+// Dependencies: {}
+declare_lint ! { # [doc = " The `invalid_from_utf8_unchecked` lint checks for calls to"] # [doc = " `std::str::from_utf8_unchecked` and `std::str::from_utf8_unchecked_mut`"] # [doc = " with a known invalid UTF-8 value."] # [doc = ""] # [doc = " ### Example"] # [doc = ""] # [doc = " ```rust,compile_fail"] # [doc = " # #[allow(unused)]"] # [doc = " unsafe {"] # [doc = "     std::str::from_utf8_unchecked(b\"Ru\\x82st\");"] # [doc = " }"] # [doc = " ```"] # [doc = ""] # [doc = " {{produces}}"] # [doc = ""] # [doc = " ### Explanation"] # [doc = ""] # [doc = " Creating such a `str` would result in undefined behavior as per documentation"] # [doc = " for `std::str::from_utf8_unchecked` and `std::str::from_utf8_unchecked_mut`."] pub INVALID_FROM_UTF8_UNCHECKED , Deny , "using a non UTF-8 literal in `std::str::from_utf8_unchecked`" }
+};
+}

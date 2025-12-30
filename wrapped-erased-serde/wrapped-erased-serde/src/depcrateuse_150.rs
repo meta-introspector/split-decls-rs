@@ -1,0 +1,9 @@
+// Generated macro for use_150 (pub_use)
+macro_rules! Depcrateuse_150 {
+() => {
+// Module: crate
+// Provides: {"use_150"}
+// Dependencies: {}
+pub use crate :: error :: { Error , Result } ;
+};
+}

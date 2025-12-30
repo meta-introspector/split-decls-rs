@@ -1,0 +1,42 @@
+// Generated module macro for crate::back::lto
+macro_rules! Modcrate_back_lto {
+() => {
+        Depcrate_back_ltouse_103!();
+        Depcrate_back_ltouse_104!();
+        Depcrate_back_ltouse_105!();
+        Depcrate_back_ltouse_106!();
+        Depcrate_back_ltouse_107!();
+        Depcrate_back_ltouse_108!();
+        Depcrate_back_ltouse_109!();
+        Depcrate_back_ltouse_110!();
+        Depcrate_back_ltouse_111!();
+        Depcrate_back_ltouse_112!();
+        Depcrate_back_ltouse_113!();
+        Depcrate_back_ltouse_114!();
+        Depcrate_back_ltouse_115!();
+        Depcrate_back_ltouse_116!();
+        Depcrate_back_ltouse_117!();
+        Depcrate_back_ltouse_118!();
+        Depcrate_back_ltouse_119!();
+        Depcrate_back_ltouse_120!();
+        Depcrate_back_ltouse_121!();
+        Depcrate_back_ltouse_122!();
+        Depcrate_back_ltoLtoData!();
+        Depcrate_back_ltoprepare_lto!();
+        Depcrate_back_ltosave_as_file!();
+        Depcrate_back_ltorun_fat!();
+        Depcrate_back_ltofat_lto!();
+        Depcrate_back_ltoModuleBuffer!();
+        Depcrate_back_ltoimpl_129!();
+        Depcrate_back_ltoimpl_130!();
+        Depcrate_back_ltorun_thin!();
+        Depcrate_back_ltoprepare_thin!();
+        Depcrate_back_ltothin_lto!();
+        Depcrate_back_ltooptimize_thin_module!();
+        Depcrate_back_ltoThinBuffer!();
+        Depcrate_back_ltoimpl_136!();
+        Depcrate_back_ltoimpl_137!();
+        Depcrate_back_ltoThinData!();
+        Depcrate_back_ltomodule_name_to_str!();
+    };
+}

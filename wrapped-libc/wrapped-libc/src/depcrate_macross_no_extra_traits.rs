@@ -1,0 +1,9 @@
+// Generated macro for s_no_extra_traits (macro)
+macro_rules! Depcrate_macross_no_extra_traits {
+() => {
+// Module: crate::macros
+// Provides: {"s_no_extra_traits"}
+// Dependencies: {}
+# [doc = " Implement `Clone` and `Copy` for a struct with no `extra_traits` feature, as well as `Debug`"] # [doc = " with `extra_traits` since that can always be derived."] # [doc = ""] # [doc = " Most items will prefer to use [`s`]."] macro_rules ! s_no_extra_traits { ($ ($ (# [$ attr : meta]) * pub $ t : ident $ i : ident { $ ($ field : tt) * }) *) => ($ (s_no_extra_traits ! (it : $ (# [$ attr]) * pub $ t $ i { $ ($ field) * }) ;) *) ; (it : $ (# [$ attr : meta]) * pub union $ i : ident { $ ($ field : tt) * }) => (__item ! { # [repr (C)] # [:: core :: prelude :: v1 :: derive (:: core :: clone :: Clone , :: core :: marker :: Copy)] $ (# [$ attr]) * pub union $ i { $ ($ field) * } } # [cfg (feature = "extra_traits")] impl :: core :: fmt :: Debug for $ i { fn fmt (& self , f : & mut :: core :: fmt :: Formatter <'_ >) -> :: core :: fmt :: Result { f . debug_struct (:: core :: stringify ! ($ i)) . finish_non_exhaustive () } }) ; (it : $ (# [$ attr : meta]) * pub struct $ i : ident { $ ($ field : tt) * }) => (__item ! { # [repr (C)] # [:: core :: prelude :: v1 :: derive (:: core :: clone :: Clone , :: core :: marker :: Copy)] # [cfg_attr (feature = "extra_traits" , :: core :: prelude :: v1 :: derive (Debug))] $ (# [$ attr]) * pub struct $ i { $ ($ field) * } }) ; }
+};
+}

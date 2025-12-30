@@ -1,0 +1,9 @@
+// Generated macro for collect_into_array (function)
+macro_rules! Depcrate_de_impl_corecollect_into_array {
+() => {
+// Module: crate::de::impl_core
+// Provides: {"collect_into_array"}
+// Dependencies: {}
+# [doc = " Pulls `N` items from `iter` and returns them as an array. If the iterator"] # [doc = " yields fewer than `N` items, `None` is returned and all already yielded"] # [doc = " items are dropped."] # [doc = ""] # [doc = " Since the iterator is passed as a mutable reference and this function calls"] # [doc = " `next` at most `N` times, the iterator can still be used afterwards to"] # [doc = " retrieve the remaining items."] # [doc = ""] # [doc = " If `iter.next()` panicks, all items already yielded by the iterator are"] # [doc = " dropped."] # [allow (clippy :: while_let_on_iterator)] pub fn collect_into_array < E , I , T , const N : usize > (iter : & mut I) -> Option < Result < [T ; N] , E > > where I : Iterator < Item = Result < T , E > > , { if N == 0 { return unsafe { Some (Ok (mem :: zeroed ())) } ; } struct Guard < 'a , T , const N : usize > { array_mut : & 'a mut [MaybeUninit < T > ; N] , initialized : usize , } impl < T , const N : usize > Drop for Guard < '_ , T , N > { fn drop (& mut self) { debug_assert ! (self . initialized <= N) ; unsafe { core :: ptr :: drop_in_place (slice_assume_init_mut (self . array_mut . get_unchecked_mut (.. self . initialized) ,)) ; } } } let mut array = uninit_array :: < T , N > () ; let mut guard = Guard { array_mut : & mut array , initialized : 0 , } ; while let Some (item_rslt) = iter . next () { let item = match item_rslt { Err (err) => { return Some (Err (err)) ; } Ok (elem) => elem , } ; unsafe { guard . array_mut . get_unchecked_mut (guard . initialized) . write (item) ; } guard . initialized += 1 ; if guard . initialized == N { mem :: forget (guard) ; let out = unsafe { array_assume_init (array) } ; return Some (Ok (out)) ; } } None }
+};
+}

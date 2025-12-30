@@ -1,0 +1,41 @@
+// Generated module macro for crate::linear_map
+macro_rules! Modcrate_linear_map {
+() => {
+        Depcrate_linear_mapuse_196!();
+        Depcrate_linear_mapuse_197!();
+        Depcrate_linear_mapuse_198!();
+        Depcrate_linear_mapstorage!();
+        Depcrate_linear_mapuse_200!();
+        Depcrate_linear_mapOwnedStorage!();
+        Depcrate_linear_mapViewStorage!();
+        Depcrate_linear_mapLinearMapInner!();
+        Depcrate_linear_mapLinearMap!();
+        Depcrate_linear_mapLinearMapView!();
+        Depcrate_linear_mapimpl_206!();
+        Depcrate_linear_mapimpl_207!();
+        Depcrate_linear_mapimpl_208!();
+        Depcrate_linear_mapimpl_209!();
+        Depcrate_linear_mapimpl_210!();
+        Depcrate_linear_mapimpl_211!();
+        Depcrate_linear_mapimpl_212!();
+        Depcrate_linear_mapimpl_213!();
+        Depcrate_linear_mapIntoIter!();
+        Depcrate_linear_mapimpl_215!();
+        Depcrate_linear_mapimpl_216!();
+        Depcrate_linear_mapimpl_217!();
+        Depcrate_linear_mapimpl_218!();
+        Depcrate_linear_mapimpl_219!();
+        Depcrate_linear_mapIter!();
+        Depcrate_linear_mapimpl_221!();
+        Depcrate_linear_mapIterMut!();
+        Depcrate_linear_mapimpl_223!();
+        Depcrate_linear_mapimpl_224!();
+        Depcrate_linear_mapimpl_225!();
+        Depcrate_linear_mapEntry!();
+        Depcrate_linear_mapOccupiedEntry!();
+        Depcrate_linear_mapimpl_228!();
+        Depcrate_linear_mapVacantEntry!();
+        Depcrate_linear_mapimpl_230!();
+        Depcrate_linear_maptest!();
+    };
+}

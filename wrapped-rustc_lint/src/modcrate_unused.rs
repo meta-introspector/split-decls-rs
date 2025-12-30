@@ -1,0 +1,50 @@
+// Generated module macro for crate::unused
+macro_rules! Modcrate_unused {
+() => {
+        Depcrate_unuseduse_1317!();
+        Depcrate_unuseduse_1318!();
+        Depcrate_unuseduse_1319!();
+        Depcrate_unuseduse_1320!();
+        Depcrate_unuseduse_1321!();
+        Depcrate_unuseduse_1322!();
+        Depcrate_unuseduse_1323!();
+        Depcrate_unuseduse_1324!();
+        Depcrate_unuseduse_1325!();
+        Depcrate_unuseduse_1326!();
+        Depcrate_unuseduse_1327!();
+        Depcrate_unuseduse_1328!();
+        Depcrate_unuseduse_1329!();
+        Depcrate_unuseduse_1330!();
+        Depcrate_unuseduse_1331!();
+        Depcrate_unuseduse_1332!();
+        Depcrate_unuseduse_1333!();
+        Depcrate_unusedmacro_1334!();
+        Depcrate_unusedmacro_1335!();
+        Depcrate_unusedmacro_1336!();
+        Depcrate_unusedimpl_1337!();
+        Depcrate_unusedmacro_1338!();
+        Depcrate_unusedmacro_1339!();
+        Depcrate_unusedimpl_1340!();
+        Depcrate_unusedUnusedDelimsCtx!();
+        Depcrate_unusedimpl_1342!();
+        Depcrate_unusedUnusedDelimLint!();
+        Depcrate_unusedmacro_1344!();
+        Depcrate_unusedUnusedParens!();
+        Depcrate_unusedNoBoundsException!();
+        Depcrate_unusedmacro_1347!();
+        Depcrate_unusedimpl_1348!();
+        Depcrate_unusedimpl_1349!();
+        Depcrate_unusedimpl_1350!();
+        Depcrate_unusedmacro_1351!();
+        Depcrate_unusedmacro_1352!();
+        Depcrate_unusedimpl_1353!();
+        Depcrate_unusedimpl_1354!();
+        Depcrate_unusedmacro_1355!();
+        Depcrate_unusedmacro_1356!();
+        Depcrate_unusedimpl_1357!();
+        Depcrate_unusedimpl_1358!();
+        Depcrate_unusedmacro_1359!();
+        Depcrate_unusedmacro_1360!();
+        Depcrate_unusedimpl_1361!();
+    };
+}

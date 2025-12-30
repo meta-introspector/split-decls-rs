@@ -1,0 +1,9 @@
+// Generated macro for remove_semi (function)
+macro_rules! Depcrate_stmtremove_semi {
+() => {
+// Module: crate::stmt
+// Provides: {"remove_semi"}
+// Dependencies: {}
+fn remove_semi (expr : & Expr) -> bool { match expr { # ! [cfg_attr (all (test , exhaustive) , deny (non_exhaustive_omitted_patterns))] Expr :: ForLoop (_) | Expr :: While (_) => true , Expr :: Group (group) => remove_semi (& group . expr) , Expr :: If (expr) => match & expr . else_branch { Some ((_else_token , else_branch)) => remove_semi (else_branch) , None => true , } , Expr :: Array (_) | Expr :: Assign (_) | Expr :: Async (_) | Expr :: Await (_) | Expr :: Binary (_) | Expr :: Block (_) | Expr :: Break (_) | Expr :: Call (_) | Expr :: Cast (_) | Expr :: Closure (_) | Expr :: Continue (_) | Expr :: Const (_) | Expr :: Field (_) | Expr :: Index (_) | Expr :: Infer (_) | Expr :: Let (_) | Expr :: Lit (_) | Expr :: Loop (_) | Expr :: Macro (_) | Expr :: Match (_) | Expr :: MethodCall (_) | Expr :: Paren (_) | Expr :: Path (_) | Expr :: Range (_) | Expr :: RawAddr (_) | Expr :: Reference (_) | Expr :: Repeat (_) | Expr :: Return (_) | Expr :: Struct (_) | Expr :: Try (_) | Expr :: TryBlock (_) | Expr :: Tuple (_) | Expr :: Unary (_) | Expr :: Unsafe (_) | Expr :: Verbatim (_) | Expr :: Yield (_) => false , _ => false , } }
+};
+}

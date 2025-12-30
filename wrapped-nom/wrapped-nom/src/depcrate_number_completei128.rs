@@ -1,0 +1,9 @@
+// Generated macro for i128 (function)
+macro_rules! Depcrate_number_completei128 {
+() => {
+// Module: crate::number::complete
+// Provides: {"i128"}
+// Dependencies: {}
+# [doc = " Recognizes a signed 16 byte integer"] # [doc = ""] # [doc = " If the parameter is `nom::number::Endianness::Big`, parse a big endian i128 integer,"] # [doc = " otherwise if `nom::number::Endianness::Little` parse a little endian i128 integer."] # [doc = " *complete version*: returns an error if there is not enough input data"] # [doc = " ```rust"] # [doc = " # use nom::{Err, error::ErrorKind, Needed};"] # [doc = " # use nom::Needed::Size;"] # [doc = " use nom::number::complete::i128;"] # [doc = ""] # [doc = " let be_i128 = |s| {"] # [doc = "   i128(nom::number::Endianness::Big)(s)"] # [doc = " };"] # [doc = ""] # [doc = " assert_eq!(be_i128(&b\"\\x00\\x01\\x02\\x03\\x04\\x05\\x06\\x07\\x00\\x01\\x02\\x03\\x04\\x05\\x06\\x07abcefg\"[..]), Ok((&b\"abcefg\"[..], 0x00010203040506070001020304050607)));"] # [doc = " assert_eq!(be_i128(&b\"\\x01\"[..]), Err(Err::Error((&[0x01][..], ErrorKind::Eof))));"] # [doc = ""] # [doc = " let le_i128 = |s| {"] # [doc = "   i128(nom::number::Endianness::Little)(s)"] # [doc = " };"] # [doc = ""] # [doc = " assert_eq!(le_i128(&b\"\\x00\\x01\\x02\\x03\\x04\\x05\\x06\\x07\\x00\\x01\\x02\\x03\\x04\\x05\\x06\\x07abcefg\"[..]), Ok((&b\"abcefg\"[..], 0x07060504030201000706050403020100)));"] # [doc = " assert_eq!(le_i128(&b\"\\x01\"[..]), Err(Err::Error((&[0x01][..], ErrorKind::Eof))));"] # [doc = " ```"] # [inline] pub fn i128 < I , E : ParseError < I > > (endian : crate :: number :: Endianness ,) -> impl Fn (I) -> IResult < I , i128 , E > where I : Input < Item = u8 > , { move | input | super :: i128 (endian) . parse_complete (input) }
+};
+}

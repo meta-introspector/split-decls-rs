@@ -1,0 +1,41 @@
+// Generated module macro for crate::deriving::generic
+macro_rules! Modcrate_deriving_generic {
+() => {
+        Depcrate_deriving_genericuse_258!();
+        Depcrate_deriving_genericuse_259!();
+        Depcrate_deriving_genericuse_260!();
+        Depcrate_deriving_genericuse_261!();
+        Depcrate_deriving_genericuse_262!();
+        Depcrate_deriving_genericuse_263!();
+        Depcrate_deriving_genericuse_264!();
+        Depcrate_deriving_genericuse_265!();
+        Depcrate_deriving_genericuse_266!();
+        Depcrate_deriving_genericuse_267!();
+        Depcrate_deriving_genericuse_268!();
+        Depcrate_deriving_genericuse_269!();
+        Depcrate_deriving_genericuse_270!();
+        Depcrate_deriving_genericuse_271!();
+        Depcrate_deriving_genericuse_272!();
+        Depcrate_deriving_genericuse_273!();
+        Depcrate_deriving_genericty!();
+        Depcrate_deriving_genericTraitDef!();
+        Depcrate_deriving_genericMethodDef!();
+        Depcrate_deriving_genericFieldlessVariantsStrategy!();
+        Depcrate_deriving_genericSubstructure!();
+        Depcrate_deriving_genericFieldInfo!();
+        Depcrate_deriving_genericIsTuple!();
+        Depcrate_deriving_genericStaticFields!();
+        Depcrate_deriving_genericSubstructureFields!();
+        Depcrate_deriving_genericCombineSubstructureFunc!();
+        Depcrate_deriving_genericcombine_substructure!();
+        Depcrate_deriving_genericTypeParameter!();
+        Depcrate_deriving_genericBlockOrExpr!();
+        Depcrate_deriving_genericimpl_303!();
+        Depcrate_deriving_genericfind_type_parameters!();
+        Depcrate_deriving_genericimpl_305!();
+        Depcrate_deriving_genericimpl_306!();
+        Depcrate_deriving_genericimpl_307!();
+        Depcrate_deriving_genericCsFold!();
+        Depcrate_deriving_genericcs_fold!();
+    };
+}

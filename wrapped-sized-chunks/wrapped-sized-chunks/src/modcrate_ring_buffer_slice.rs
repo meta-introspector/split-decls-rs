@@ -1,0 +1,53 @@
+// Generated module macro for crate::ring_buffer::slice
+macro_rules! Modcrate_ring_buffer_slice {
+() => {
+        Depcrate_ring_buffer_sliceuse_242!();
+        Depcrate_ring_buffer_sliceuse_243!();
+        Depcrate_ring_buffer_sliceuse_244!();
+        Depcrate_ring_buffer_sliceuse_245!();
+        Depcrate_ring_buffer_sliceuse_246!();
+        Depcrate_ring_buffer_sliceuse_247!();
+        Depcrate_ring_buffer_sliceuse_248!();
+        Depcrate_ring_buffer_sliceuse_249!();
+        Depcrate_ring_buffer_sliceuse_250!();
+        Depcrate_ring_buffer_sliceuse_251!();
+        Depcrate_ring_buffer_sliceuse_252!();
+        Depcrate_ring_buffer_sliceSlice!();
+        Depcrate_ring_buffer_sliceimpl_254!();
+        Depcrate_ring_buffer_sliceimpl_255!();
+        Depcrate_ring_buffer_sliceimpl_256!();
+        Depcrate_ring_buffer_sliceimpl_257!();
+        Depcrate_ring_buffer_sliceimpl_258!();
+        Depcrate_ring_buffer_sliceimpl_259!();
+        Depcrate_ring_buffer_sliceimpl_260!();
+        Depcrate_ring_buffer_sliceimpl_261!();
+        Depcrate_ring_buffer_sliceimpl_262!();
+        Depcrate_ring_buffer_sliceimpl_263!();
+        Depcrate_ring_buffer_sliceimpl_264!();
+        Depcrate_ring_buffer_sliceimpl_265!();
+        Depcrate_ring_buffer_sliceimpl_266!();
+        Depcrate_ring_buffer_sliceimpl_267!();
+        Depcrate_ring_buffer_sliceimpl_268!();
+        Depcrate_ring_buffer_sliceimpl_269!();
+        Depcrate_ring_buffer_sliceSliceMut!();
+        Depcrate_ring_buffer_sliceimpl_271!();
+        Depcrate_ring_buffer_sliceimpl_272!();
+        Depcrate_ring_buffer_sliceimpl_273!();
+        Depcrate_ring_buffer_sliceimpl_274!();
+        Depcrate_ring_buffer_sliceimpl_275!();
+        Depcrate_ring_buffer_sliceimpl_276!();
+        Depcrate_ring_buffer_sliceimpl_277!();
+        Depcrate_ring_buffer_sliceimpl_278!();
+        Depcrate_ring_buffer_sliceimpl_279!();
+        Depcrate_ring_buffer_sliceimpl_280!();
+        Depcrate_ring_buffer_sliceimpl_281!();
+        Depcrate_ring_buffer_sliceimpl_282!();
+        Depcrate_ring_buffer_sliceimpl_283!();
+        Depcrate_ring_buffer_sliceimpl_284!();
+        Depcrate_ring_buffer_sliceimpl_285!();
+        Depcrate_ring_buffer_sliceimpl_286!();
+        Depcrate_ring_buffer_sliceimpl_287!();
+        Depcrate_ring_buffer_sliceimpl_288!();
+        Depcrate_ring_buffer_sliceimpl_289!();
+    };
+}

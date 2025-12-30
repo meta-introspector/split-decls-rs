@@ -1,0 +1,49 @@
+// Generated module macro for crate::ffi::http_types
+macro_rules! Modcrate_ffi_http_types {
+() => {
+        Depcrate_ffi_http_typesuse_408!();
+        Depcrate_ffi_http_typesuse_409!();
+        Depcrate_ffi_http_typesuse_410!();
+        Depcrate_ffi_http_typesuse_411!();
+        Depcrate_ffi_http_typesuse_412!();
+        Depcrate_ffi_http_typesuse_413!();
+        Depcrate_ffi_http_typesuse_414!();
+        Depcrate_ffi_http_typesuse_415!();
+        Depcrate_ffi_http_typesuse_416!();
+        Depcrate_ffi_http_typesuse_417!();
+        Depcrate_ffi_http_typesuse_418!();
+        Depcrate_ffi_http_typeshyper_request!();
+        Depcrate_ffi_http_typeshyper_response!();
+        Depcrate_ffi_http_typeshyper_headers!();
+        Depcrate_ffi_http_typesOnInformational!();
+        Depcrate_ffi_http_typeshyper_request_on_informational_callback!();
+        Depcrate_ffi_http_typesmacro_424!();
+        Depcrate_ffi_http_typesmacro_425!();
+        Depcrate_ffi_http_typesmacro_426!();
+        Depcrate_ffi_http_typesmacro_427!();
+        Depcrate_ffi_http_typesmacro_428!();
+        Depcrate_ffi_http_typesmacro_429!();
+        Depcrate_ffi_http_typesmacro_430!();
+        Depcrate_ffi_http_typesmacro_431!();
+        Depcrate_ffi_http_typesmacro_432!();
+        Depcrate_ffi_http_typesimpl_433!();
+        Depcrate_ffi_http_typesmacro_434!();
+        Depcrate_ffi_http_typesmacro_435!();
+        Depcrate_ffi_http_typesmacro_436!();
+        Depcrate_ffi_http_typesmacro_437!();
+        Depcrate_ffi_http_typesmacro_438!();
+        Depcrate_ffi_http_typesmacro_439!();
+        Depcrate_ffi_http_typesmacro_440!();
+        Depcrate_ffi_http_typesimpl_441!();
+        Depcrate_ffi_http_typesimpl_442!();
+        Depcrate_ffi_http_typeshyper_headers_foreach_callback!();
+        Depcrate_ffi_http_typesimpl_444!();
+        Depcrate_ffi_http_typesmacro_445!();
+        Depcrate_ffi_http_typesmacro_446!();
+        Depcrate_ffi_http_typesmacro_447!();
+        Depcrate_ffi_http_typesimpl_448!();
+        Depcrate_ffi_http_typesraw_name_value!();
+        Depcrate_ffi_http_typesimpl_450!();
+        Depcrate_ffi_http_typestests!();
+    };
+}

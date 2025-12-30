@@ -1,0 +1,9 @@
+// Generated macro for trace (function)
+macro_rules! Depcrate_type_check_liveness_tracetrace {
+() => {
+// Module: crate::type_check::liveness::trace
+// Provides: {"trace"}
+// Dependencies: {}
+# [doc = " This is the heart of the liveness computation. For each variable X"] # [doc = " that requires a liveness computation, it walks over all the uses"] # [doc = " of X and does a reverse depth-first search (\"trace\") through the"] # [doc = " MIR. This search stops when we find a definition of that variable."] # [doc = " The points visited in this search is the USE-LIVE set for the variable;"] # [doc = " of those points is added to all the regions that appear in the variable's"] # [doc = " type."] # [doc = ""] # [doc = " We then also walks through each *drop* of those variables and does"] # [doc = " another search, stopping when we reach a use or definition. This"] # [doc = " is the DROP-LIVE set of points. Each of the points in the"] # [doc = " DROP-LIVE set are to the liveness sets for regions found in the"] # [doc = " `dropck_outlives` result of the variable's type (in particular,"] # [doc = " this respects `#[may_dangle]` annotations)."] pub (super) fn trace < 'tcx > (typeck : & mut TypeChecker < '_ , 'tcx > , location_map : & DenseLocationMap , move_data : & MoveData < 'tcx > , relevant_live_locals : Vec < Local > , boring_locals : Vec < Local > ,) { let local_use_map = & LocalUseMap :: build (& relevant_live_locals , location_map , typeck . body) ; let cx = LivenessContext { typeck , flow_inits : None , location_map , local_use_map , move_data , drop_data : FxIndexMap :: default () , } ; let mut results = LivenessResults :: new (cx) ; results . add_extra_drop_facts (& relevant_live_locals) ; results . compute_for_all_locals (relevant_live_locals) ; results . dropck_boring_locals (boring_locals) ; }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for internalize_symbols (function)
+macro_rules! Depcrate_partitioninginternalize_symbols {
+() => {
+// Module: crate::partitioning
+// Provides: {"internalize_symbols"}
+// Dependencies: {}
+fn internalize_symbols < 'tcx > (cx : & PartitioningCx < '_ , 'tcx > , codegen_units : & mut [CodegenUnit < 'tcx >] , internalization_candidates : UnordSet < MonoItem < 'tcx > > ,) { # [doc = " For symbol internalization, we need to know whether a symbol/mono-item"] # [doc = " is used from outside the codegen unit it is defined in. This type is"] # [doc = " used to keep track of that."] # [derive (Clone , PartialEq , Eq , Debug)] enum MonoItemPlacement { SingleCgu (Symbol) , MultipleCgus , } let mut mono_item_placements = UnordMap :: default () ; let single_codegen_unit = codegen_units . len () == 1 ; if ! single_codegen_unit { for cgu in codegen_units . iter () { for item in cgu . items () . keys () { match mono_item_placements . entry (* item) { Entry :: Occupied (e) => { let placement = e . into_mut () ; debug_assert ! (match * placement { MonoItemPlacement :: SingleCgu (cgu_name) => cgu_name != cgu . name () , MonoItemPlacement :: MultipleCgus => true , }) ; * placement = MonoItemPlacement :: MultipleCgus ; } Entry :: Vacant (e) => { e . insert (MonoItemPlacement :: SingleCgu (cgu . name ())) ; } } } } } for cgu in codegen_units { let home_cgu = MonoItemPlacement :: SingleCgu (cgu . name ()) ; for (item , data) in cgu . items_mut () { if ! internalization_candidates . contains (item) { continue ; } if ! single_codegen_unit { debug_assert_eq ! (mono_item_placements [item] , home_cgu) ; if cx . usage_map . get_user_items (* item) . iter () . filter_map (| user_item | { mono_item_placements . get (user_item) }) . any (| placement | * placement != home_cgu) { continue ; } } data . linkage = Linkage :: Internal ; data . visibility = Visibility :: Default ; } } }
+};
+}

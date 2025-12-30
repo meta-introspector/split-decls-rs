@@ -1,0 +1,53 @@
+// Generated module macro for crate::runtime
+macro_rules! Modcrate_runtime {
+() => {
+        Depcrate_runtimeuse_2007!();
+        Depcrate_runtimeuse_2008!();
+        Depcrate_runtimeuse_2009!();
+        Depcrate_runtimeuse_2010!();
+        Depcrate_runtimeuse_2011!();
+        Depcrate_runtimeuse_2012!();
+        Depcrate_runtimeuse_2013!();
+        Depcrate_runtimeuse_2014!();
+        Depcrate_runtimeKernelSigaction!();
+        Depcrate_runtimemacro_2016!();
+        Depcrate_runtimeKernelSigrestore!();
+        Depcrate_runtimeKernelSighandler!();
+        Depcrate_runtimekernel_sig_ign!();
+        Depcrate_runtimeKERNEL_SIG_DFL!();
+        Depcrate_runtimeuse_2021!();
+        Depcrate_runtimeuse_2022!();
+        Depcrate_runtimeuse_2023!();
+        Depcrate_runtimeHow!();
+        Depcrate_runtimeset_thread_area!();
+        Depcrate_runtimearm_set_tls!();
+        Depcrate_runtimeset_fs!();
+        Depcrate_runtimeset_tid_address!();
+        Depcrate_runtimeuse_2029!();
+        Depcrate_runtimeexit_thread!();
+        Depcrate_runtimeexit_group!();
+        Depcrate_runtimeEXIT_SUCCESS!();
+        Depcrate_runtimeEXIT_FAILURE!();
+        Depcrate_runtimeexe_phdrs!();
+        Depcrate_runtimeentry!();
+        Depcrate_runtimerandom!();
+        Depcrate_runtimekernel_fork!();
+        Depcrate_runtimeFork!();
+        Depcrate_runtimeexecveat!();
+        Depcrate_runtimeexecve!();
+        Depcrate_runtimekernel_sigaction!();
+        Depcrate_runtimekernel_sigaltstack!();
+        Depcrate_runtimetkill!();
+        Depcrate_runtimekernel_sigprocmask!();
+        Depcrate_runtimekernel_sigpending!();
+        Depcrate_runtimekernel_sigsuspend!();
+        Depcrate_runtimekernel_sigwait!();
+        Depcrate_runtimekernel_sigwaitinfo!();
+        Depcrate_runtimekernel_sigtimedwait!();
+        Depcrate_runtimelinux_secure!();
+        Depcrate_runtimekernel_brk!();
+        Depcrate_runtimeKERNEL_SIGRTMIN!();
+        Depcrate_runtimeKERNEL_SIGRTMAX!();
+        Depcrate_runtimetests!();
+    };
+}

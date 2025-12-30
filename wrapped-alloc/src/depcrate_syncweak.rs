@@ -1,0 +1,9 @@
+// Generated macro for Weak (struct)
+macro_rules! Depcrate_syncWeak {
+() => {
+// Module: crate::sync
+// Provides: {"Weak"}
+// Dependencies: {}
+# [doc = " `Weak` is a version of [`Arc`] that holds a non-owning reference to the"] # [doc = " managed allocation."] # [doc = ""] # [doc = " The allocation is accessed by calling [`upgrade`] on the `Weak`"] # [doc = " pointer, which returns an <code>[Option]<[Arc]\\<T>></code>."] # [doc = ""] # [doc = " Since a `Weak` reference does not count towards ownership, it will not"] # [doc = " prevent the value stored in the allocation from being dropped, and `Weak` itself makes no"] # [doc = " guarantees about the value still being present. Thus it may return [`None`]"] # [doc = " when [`upgrade`]d. Note however that a `Weak` reference *does* prevent the allocation"] # [doc = " itself (the backing store) from being deallocated."] # [doc = ""] # [doc = " A `Weak` pointer is useful for keeping a temporary reference to the allocation"] # [doc = " managed by [`Arc`] without preventing its inner value from being dropped. It is also used to"] # [doc = " prevent circular references between [`Arc`] pointers, since mutual owning references"] # [doc = " would never allow either [`Arc`] to be dropped. For example, a tree could"] # [doc = " have strong [`Arc`] pointers from parent nodes to children, and `Weak`"] # [doc = " pointers from children back to their parents."] # [doc = ""] # [doc = " The typical way to obtain a `Weak` pointer is to call [`Arc::downgrade`]."] # [doc = ""] # [doc = " [`upgrade`]: Weak::upgrade"] # [stable (feature = "arc_weak" , since = "1.4.0")] # [rustc_diagnostic_item = "ArcWeak"] pub struct Weak < T : ? Sized , # [unstable (feature = "allocator_api" , issue = "32838")] A : Allocator = Global , > { ptr : NonNull < ArcInner < T > > , alloc : A , }
+};
+}

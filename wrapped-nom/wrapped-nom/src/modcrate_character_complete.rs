@@ -1,0 +1,48 @@
+// Generated module macro for crate::character::complete
+macro_rules! Modcrate_character_complete {
+() => {
+        Depcrate_character_completeuse_641!();
+        Depcrate_character_completeuse_642!();
+        Depcrate_character_completeuse_643!();
+        Depcrate_character_completeuse_644!();
+        Depcrate_character_completeuse_645!();
+        Depcrate_character_completeuse_646!();
+        Depcrate_character_completeuse_647!();
+        Depcrate_character_completeuse_648!();
+        Depcrate_character_completeuse_649!();
+        Depcrate_character_completeuse_650!();
+        Depcrate_character_completeuse_651!();
+        Depcrate_character_completechar!();
+        Depcrate_character_completesatisfy!();
+        Depcrate_character_completeone_of!();
+        Depcrate_character_completenone_of!();
+        Depcrate_character_completecrlf!();
+        Depcrate_character_completenot_line_ending!();
+        Depcrate_character_completeline_ending!();
+        Depcrate_character_completenewline!();
+        Depcrate_character_completetab!();
+        Depcrate_character_completeanychar!();
+        Depcrate_character_completealpha0!();
+        Depcrate_character_completealpha1!();
+        Depcrate_character_completedigit0!();
+        Depcrate_character_completedigit1!();
+        Depcrate_character_completehex_digit0!();
+        Depcrate_character_completehex_digit1!();
+        Depcrate_character_completeoct_digit0!();
+        Depcrate_character_completeoct_digit1!();
+        Depcrate_character_completebin_digit0!();
+        Depcrate_character_completebin_digit1!();
+        Depcrate_character_completealphanumeric0!();
+        Depcrate_character_completealphanumeric1!();
+        Depcrate_character_completespace0!();
+        Depcrate_character_completespace1!();
+        Depcrate_character_completemultispace0!();
+        Depcrate_character_completemultispace1!();
+        Depcrate_character_completesign!();
+        Depcrate_character_completeints!();
+        Depcrate_character_completemacro_680!();
+        Depcrate_character_completeuints!();
+        Depcrate_character_completemacro_682!();
+        Depcrate_character_completetests!();
+    };
+}

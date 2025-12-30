@@ -1,0 +1,9 @@
+// Generated macro for hex_encode_avx2 (function)
+macro_rules! Depcrate_encodehex_encode_avx2 {
+() => {
+// Module: crate::encode
+// Provides: {"hex_encode_avx2"}
+// Dependencies: {}
+# [target_feature (enable = "avx2")] # [cfg (any (target_arch = "x86" , target_arch = "x86_64"))] unsafe fn hex_encode_avx2 (mut src : & [u8] , dst : & mut [u8] , upper_case : bool) { let ascii_zero = _mm256_set1_epi8 (b'0' as i8) ; let nines = _mm256_set1_epi8 (9) ; let ascii_a = if upper_case { _mm256_set1_epi8 ((b'A' - 9 - 1) as i8) } else { _mm256_set1_epi8 ((b'a' - 9 - 1) as i8) } ; let and4bits = _mm256_set1_epi8 (0xf) ; let mut i = 0_isize ; while src . len () >= 32 { let invec = _mm256_loadu_si256 (src . as_ptr () as * const _) ; let masked1 = _mm256_and_si256 (invec , and4bits) ; let masked2 = _mm256_and_si256 (_mm256_srli_epi64 (invec , 4) , and4bits) ; let cmpmask1 = _mm256_cmpgt_epi8 (masked1 , nines) ; let cmpmask2 = _mm256_cmpgt_epi8 (masked2 , nines) ; let masked1 = _mm256_add_epi8 (masked1 , _mm256_blendv_epi8 (ascii_zero , ascii_a , cmpmask1)) ; let masked2 = _mm256_add_epi8 (masked2 , _mm256_blendv_epi8 (ascii_zero , ascii_a , cmpmask2)) ; let res1 = _mm256_unpacklo_epi8 (masked2 , masked1) ; let res2 = _mm256_unpackhi_epi8 (masked2 , masked1) ; let base = dst . as_mut_ptr () . offset (i * 2) ; let base1 = base . offset (0) as * mut _ ; let base2 = base . offset (16) as * mut _ ; let base3 = base . offset (32) as * mut _ ; let base4 = base . offset (48) as * mut _ ; _mm256_storeu2_m128i (base3 , base1 , res1) ; _mm256_storeu2_m128i (base4 , base2 , res2) ; src = & src [32 ..] ; i += 32 ; } let i = i as usize ; hex_encode_sse41 (src , & mut dst [i * 2 ..] , upper_case) ; }
+};
+}

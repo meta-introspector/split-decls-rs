@@ -1,0 +1,53 @@
+// Generated module macro for crate::diagnostics::utils
+macro_rules! Modcrate_diagnostics_utils {
+() => {
+        Depcrate_diagnostics_utilsuse_75!();
+        Depcrate_diagnostics_utilsuse_76!();
+        Depcrate_diagnostics_utilsuse_77!();
+        Depcrate_diagnostics_utilsuse_78!();
+        Depcrate_diagnostics_utilsuse_79!();
+        Depcrate_diagnostics_utilsuse_80!();
+        Depcrate_diagnostics_utilsuse_81!();
+        Depcrate_diagnostics_utilsuse_82!();
+        Depcrate_diagnostics_utilsuse_83!();
+        Depcrate_diagnostics_utilsuse_84!();
+        Depcrate_diagnostics_utilsuse_85!();
+        Depcrate_diagnostics_utilsuse_86!();
+        Depcrate_diagnostics_utilsuse_87!();
+        Depcrate_diagnostics_utilsuse_88!();
+        Depcrate_diagnostics_utilsmacro_89!();
+        Depcrate_diagnostics_utilsnew_code_ident!();
+        Depcrate_diagnostics_utilstype_matches_path!();
+        Depcrate_diagnostics_utilstype_is_unit!();
+        Depcrate_diagnostics_utilstype_is_bool!();
+        Depcrate_diagnostics_utilsreport_type_error!();
+        Depcrate_diagnostics_utilsreport_error_if_not_applied_to_ty!();
+        Depcrate_diagnostics_utilsreport_error_if_not_applied_to_applicability!();
+        Depcrate_diagnostics_utilsreport_error_if_not_applied_to_span!();
+        Depcrate_diagnostics_utilsFieldInnerTy!();
+        Depcrate_diagnostics_utilsimpl_99!();
+        Depcrate_diagnostics_utilsFieldInfo!();
+        Depcrate_diagnostics_utilsSetOnce!();
+        Depcrate_diagnostics_utilsSpannedOption!();
+        Depcrate_diagnostics_utilsimpl_103!();
+        Depcrate_diagnostics_utilsFieldMap!();
+        Depcrate_diagnostics_utilsHasFieldMap!();
+        Depcrate_diagnostics_utilsApplicability!();
+        Depcrate_diagnostics_utilsimpl_107!();
+        Depcrate_diagnostics_utilsimpl_108!();
+        Depcrate_diagnostics_utilsbuild_field_mapping!();
+        Depcrate_diagnostics_utilsAllowMultipleAlternatives!();
+        Depcrate_diagnostics_utilsparse_suggestion_values!();
+        Depcrate_diagnostics_utilsbuild_suggestion_code!();
+        Depcrate_diagnostics_utilsSuggestionKind!();
+        Depcrate_diagnostics_utilsimpl_114!();
+        Depcrate_diagnostics_utilsimpl_115!();
+        Depcrate_diagnostics_utilsimpl_116!();
+        Depcrate_diagnostics_utilsSubdiagnosticKind!();
+        Depcrate_diagnostics_utilsSubdiagnosticVariant!();
+        Depcrate_diagnostics_utilsimpl_119!();
+        Depcrate_diagnostics_utilsimpl_120!();
+        Depcrate_diagnostics_utilsshould_generate_arg!();
+        Depcrate_diagnostics_utilsis_doc_comment!();
+    };
+}

@@ -1,0 +1,9 @@
+// Generated macro for impl_22 (impl)
+macro_rules! Depcrate_asm_aarch64impl_22 {
+() => {
+// Module: crate::asm::aarch64
+// Provides: {"impl_22"}
+// Dependencies: {}
+impl AArch64InlineAsmRegClass { pub fn valid_modifiers (self , _arch : super :: InlineAsmArch) -> & 'static [char] { match self { Self :: reg => & ['w' , 'x'] , Self :: vreg | Self :: vreg_low16 => & ['b' , 'h' , 's' , 'd' , 'q' , 'v'] , Self :: preg => & [] , } } pub fn suggest_class (self , _arch : InlineAsmArch , _ty : InlineAsmType) -> Option < Self > { None } pub fn suggest_modifier (self , _arch : InlineAsmArch , ty : InlineAsmType) -> Option < ModifierInfo > { match self { Self :: reg => match ty . size () . bits () { 64 => None , _ => Some (('w' , "w0" , 32) . into ()) , } , Self :: vreg | Self :: vreg_low16 => match ty . size () . bits () { 8 => Some (('b' , "b0" , 8) . into ()) , 16 => Some (('h' , "h0" , 16) . into ()) , 32 => Some (('s' , "s0" , 32) . into ()) , 64 => Some (('d' , "d0" , 64) . into ()) , 128 => Some (('q' , "q0" , 128) . into ()) , _ => None , } , Self :: preg => None , } } pub fn default_modifier (self , _arch : InlineAsmArch) -> Option < ModifierInfo > { match self { Self :: reg => Some (('x' , "x0" , 64) . into ()) , Self :: vreg | Self :: vreg_low16 => Some (('v' , "v0" , 128) . into ()) , Self :: preg => None , } } pub fn supported_types (self , _arch : InlineAsmArch ,) -> & 'static [(InlineAsmType , Option < Symbol >)] { match self { Self :: reg => types ! { _ : I8 , I16 , I32 , I64 , F16 , F32 , F64 ; } , Self :: vreg | Self :: vreg_low16 => types ! { neon : I8 , I16 , I32 , I64 , F16 , F32 , F64 , F128 , VecI8 (8) , VecI16 (4) , VecI32 (2) , VecI64 (1) , VecF16 (4) , VecF32 (2) , VecF64 (1) , VecI8 (16) , VecI16 (8) , VecI32 (4) , VecI64 (2) , VecF16 (8) , VecF32 (4) , VecF64 (2) ; } , Self :: preg => & [] , } } }
+};
+}

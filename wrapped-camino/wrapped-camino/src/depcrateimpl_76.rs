@@ -1,0 +1,9 @@
+// Generated macro for impl_76 (impl)
+macro_rules! Depcrateimpl_76 {
+() => {
+// Module: crate
+// Provides: {"impl_76"}
+// Dependencies: {}
+impl < 'a > Utf8PrefixComponent < 'a > { # [doc = " Returns the parsed prefix data."] # [doc = ""] # [doc = " See [`Utf8Prefix`]'s documentation for more information on the different"] # [doc = " kinds of prefixes."] # [must_use] pub fn kind (& self) -> Utf8Prefix < 'a > { match self . 0 . kind () { Prefix :: Verbatim (prefix) => Utf8Prefix :: Verbatim (unsafe { str_assume_utf8 (prefix) }) , Prefix :: VerbatimUNC (server , share) => { let server = unsafe { str_assume_utf8 (server) } ; let share = unsafe { str_assume_utf8 (share) } ; Utf8Prefix :: VerbatimUNC (server , share) } Prefix :: VerbatimDisk (drive) => Utf8Prefix :: VerbatimDisk (drive) , Prefix :: DeviceNS (prefix) => Utf8Prefix :: DeviceNS (unsafe { str_assume_utf8 (prefix) }) , Prefix :: UNC (server , share) => { let server = unsafe { str_assume_utf8 (server) } ; let share = unsafe { str_assume_utf8 (share) } ; Utf8Prefix :: UNC (server , share) } Prefix :: Disk (drive) => Utf8Prefix :: Disk (drive) , } } # [doc = " Returns the [`str`] slice for this prefix."] # [must_use] # [inline] pub fn as_str (& self) -> & 'a str { unsafe { str_assume_utf8 (self . as_os_str ()) } } # [doc = " Returns the raw [`OsStr`] slice for this prefix."] # [must_use] # [inline] pub fn as_os_str (& self) -> & 'a OsStr { self . 0 . as_os_str () } }
+};
+}

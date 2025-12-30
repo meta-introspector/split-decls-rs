@@ -1,0 +1,9 @@
+// Generated macro for test_main_with_exit_callback (function)
+macro_rules! Depcratetest_main_with_exit_callback {
+() => {
+// Module: crate
+// Provides: {"test_main_with_exit_callback"}
+// Dependencies: {}
+pub fn test_main_with_exit_callback < F : FnOnce () > (args : & [String] , tests : Vec < TestDescAndFn > , options : Option < Options > , exit_callback : F ,) { let mut opts = match cli :: parse_opts (args) { Some (Ok (o)) => o , Some (Err (msg)) => { eprintln ! ("error: {msg}") ; process :: exit (ERROR_EXIT_CODE) ; } None => return , } ; if let Some (options) = options { opts . options = options ; } if opts . list { if let Err (e) = console :: list_tests_console (& opts , tests) { eprintln ! ("error: io error when listing tests: {e:?}") ; process :: exit (ERROR_EXIT_CODE) ; } } else { if ! opts . nocapture { let builtin_panic_hook = panic :: take_hook () ; let hook = Box :: new ({ move | info : & '_ PanicHookInfo < '_ > | { if ! info . can_unwind () { std :: mem :: forget (std :: io :: stderr () . lock ()) ; let mut stdout = ManuallyDrop :: new (std :: io :: stdout () . lock ()) ; if let Some (captured) = io :: set_output_capture (None) { if let Ok (data) = captured . lock () { let _ = stdout . write_all (& data) ; let _ = stdout . flush () ; } } } builtin_panic_hook (info) ; } }) ; panic :: set_hook (hook) ; std :: thread :: add_spawn_hook (| _ | { let output_capture = io :: set_output_capture (None) ; io :: set_output_capture (output_capture . clone ()) ; | | { io :: set_output_capture (output_capture) ; } }) ; } let res = console :: run_tests_console (& opts , tests) ; drop (panic :: take_hook ()) ; exit_callback () ; match res { Ok (true) => { } Ok (false) => process :: exit (ERROR_EXIT_CODE) , Err (e) => { eprintln ! ("error: io error when listing tests: {e:?}") ; process :: exit (ERROR_EXIT_CODE) ; } } } }
+};
+}

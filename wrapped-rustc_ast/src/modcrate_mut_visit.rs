@@ -1,0 +1,47 @@
+// Generated module macro for crate::mut_visit
+macro_rules! Modcrate_mut_visit {
+() => {
+        Depcrate_mut_visituse_406!();
+        Depcrate_mut_visituse_407!();
+        Depcrate_mut_visituse_408!();
+        Depcrate_mut_visituse_409!();
+        Depcrate_mut_visituse_410!();
+        Depcrate_mut_visituse_411!();
+        Depcrate_mut_visituse_412!();
+        Depcrate_mut_visituse_413!();
+        Depcrate_mut_visituse_414!();
+        Depcrate_mut_visituse_415!();
+        Depcrate_mut_visitsealed!();
+        Depcrate_mut_visituse_417!();
+        Depcrate_mut_visitMutVisitable!();
+        Depcrate_mut_visitimpl_419!();
+        Depcrate_mut_visitimpl_420!();
+        Depcrate_mut_visitimpl_421!();
+        Depcrate_mut_visitimpl_422!();
+        Depcrate_mut_visitimpl_423!();
+        Depcrate_mut_visitimpl_424!();
+        Depcrate_mut_visitimpl_425!();
+        Depcrate_mut_visitimpl_426!();
+        Depcrate_mut_visitimpl_427!();
+        Depcrate_mut_visitMutWalkable!();
+        Depcrate_mut_visitvisit_visitable!();
+        Depcrate_mut_visitvisit_visitable_with!();
+        Depcrate_mut_visitwalk_walkable!();
+        Depcrate_mut_visitimpl_visitable!();
+        Depcrate_mut_visitimpl_walkable!();
+        Depcrate_mut_visitimpl_visitable_noop!();
+        Depcrate_mut_visitimpl_visitable_list!();
+        Depcrate_mut_visitimpl_visitable_direct!();
+        Depcrate_mut_visitimpl_visitable_calling_walkable!();
+        Depcrate_mut_visitdefine_named_walk!();
+        Depcrate_mut_visitmacro_439!();
+        Depcrate_mut_visitgenerate_flat_map_visitor_fns!();
+        Depcrate_mut_visitmacro_441!();
+        Depcrate_mut_visitwalk_flat_map_pat_field!();
+        Depcrate_mut_visitgenerate_walk_flat_map_fns!();
+        Depcrate_mut_visitmacro_444!();
+        Depcrate_mut_visitwalk_filter_map_expr!();
+        Depcrate_mut_visitwalk_flat_map_stmt!();
+        Depcrate_mut_visitwalk_flat_map_stmt_kind!();
+    };
+}

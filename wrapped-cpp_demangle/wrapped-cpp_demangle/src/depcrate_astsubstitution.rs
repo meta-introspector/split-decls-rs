@@ -1,0 +1,9 @@
+// Generated macro for Substitution (enum)
+macro_rules! Depcrate_astSubstitution {
+() => {
+// Module: crate::ast
+// Provides: {"Substitution"}
+// Dependencies: {}
+# [doc = " The `<substitution>` form: a back-reference to some component we've already"] # [doc = " parsed."] # [doc = ""] # [doc = " ```text"] # [doc = " <substitution> ::= S <seq-id> _"] # [doc = "                ::= S_"] # [doc = "                ::= St # ::std::"] # [doc = "                ::= Sa # ::std::allocator"] # [doc = "                ::= Sb # ::std::basic_string"] # [doc = "                ::= Ss # ::std::basic_string < char,"] # [doc = "                                               ::std::char_traits<char>,"] # [doc = "                                               ::std::allocator<char> >"] # [doc = "                ::= Si # ::std::basic_istream<char,  std::char_traits<char> >"] # [doc = "                ::= So # ::std::basic_ostream<char,  std::char_traits<char> >"] # [doc = "                ::= Sd # ::std::basic_iostream<char, std::char_traits<char> >"] # [doc = " ```"] # [derive (Clone , Debug , PartialEq , Eq)] pub enum Substitution { # [doc = " A reference to an entity that already occurred, ie the `S_` and `S"] # [doc = " <seq-id> _` forms."] BackReference (usize) , # [doc = " A well-known substitution component. These are the components that do"] # [doc = " not appear in the substitution table, but have abbreviations specified"] # [doc = " directly in the grammar."] WellKnown (WellKnownComponent) , }
+};
+}

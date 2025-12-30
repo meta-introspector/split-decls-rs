@@ -1,0 +1,39 @@
+// Generated module macro for crate::simd_funcs
+macro_rules! Modcrate_simd_funcs {
+() => {
+        Depcrate_simd_funcsuse_25!();
+        Depcrate_simd_funcsuse_26!();
+        Depcrate_simd_funcsuse_27!();
+        Depcrate_simd_funcsuse_28!();
+        Depcrate_simd_funcsuse_29!();
+        Depcrate_simd_funcsuse_30!();
+        Depcrate_simd_funcsuse_31!();
+        Depcrate_simd_funcsuse_32!();
+        Depcrate_simd_funcsuse_33!();
+        Depcrate_simd_funcsuse_34!();
+        Depcrate_simd_funcsuse_35!();
+        Depcrate_simd_funcsuse_36!();
+        Depcrate_simd_funcsload16_unaligned!();
+        Depcrate_simd_funcsload16_aligned!();
+        Depcrate_simd_funcsstore16_unaligned!();
+        Depcrate_simd_funcsstore16_aligned!();
+        Depcrate_simd_funcsload8_unaligned!();
+        Depcrate_simd_funcsload8_aligned!();
+        Depcrate_simd_funcsstore8_unaligned!();
+        Depcrate_simd_funcsstore8_aligned!();
+        Depcrate_simd_funcsmacro_45!();
+        Depcrate_simd_funcssimd_byte_swap!();
+        Depcrate_simd_funcsto_u16_lanes!();
+        Depcrate_simd_funcsmacro_48!();
+        Depcrate_simd_funcsmacro_49!();
+        Depcrate_simd_funcsmacro_50!();
+        Depcrate_simd_funcsmacro_51!();
+        Depcrate_simd_funcscontains_surrogates!();
+        Depcrate_simd_funcsmacro_53!();
+        Depcrate_simd_funcsin_range16x8!();
+        Depcrate_simd_funcsis_u16x8_bidi!();
+        Depcrate_simd_funcssimd_unpack!();
+        Depcrate_simd_funcsmacro_57!();
+        Depcrate_simd_funcstests!();
+    };
+}

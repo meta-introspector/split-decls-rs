@@ -1,0 +1,51 @@
+// Generated module macro for crate::llvm_util
+macro_rules! Modcrate_llvm_util {
+() => {
+        Depcrate_llvm_utiluse_1085!();
+        Depcrate_llvm_utiluse_1086!();
+        Depcrate_llvm_utiluse_1087!();
+        Depcrate_llvm_utiluse_1088!();
+        Depcrate_llvm_utiluse_1089!();
+        Depcrate_llvm_utiluse_1090!();
+        Depcrate_llvm_utiluse_1091!();
+        Depcrate_llvm_utiluse_1092!();
+        Depcrate_llvm_utiluse_1093!();
+        Depcrate_llvm_utiluse_1094!();
+        Depcrate_llvm_utiluse_1095!();
+        Depcrate_llvm_utiluse_1096!();
+        Depcrate_llvm_utiluse_1097!();
+        Depcrate_llvm_utiluse_1098!();
+        Depcrate_llvm_utiluse_1099!();
+        Depcrate_llvm_utiluse_1100!();
+        Depcrate_llvm_utiluse_1101!();
+        Depcrate_llvm_utiluse_1102!();
+        Depcrate_llvm_utiluse_1103!();
+        Depcrate_llvm_utiluse_1104!();
+        Depcrate_llvm_utilINIT!();
+        Depcrate_llvm_utilinit!();
+        Depcrate_llvm_utilrequire_inited!();
+        Depcrate_llvm_utilconfigure_llvm!();
+        Depcrate_llvm_utiltime_trace_profiler_finish!();
+        Depcrate_llvm_utilTargetFeatureFoldStrength!();
+        Depcrate_llvm_utilimpl_1111!();
+        Depcrate_llvm_utilLLVMFeature!();
+        Depcrate_llvm_utilimpl_1113!();
+        Depcrate_llvm_utilimpl_1114!();
+        Depcrate_llvm_utilto_llvm_features!();
+        Depcrate_llvm_utiltarget_config!();
+        Depcrate_llvm_utilupdate_target_reliable_float_cfg!();
+        Depcrate_llvm_utilprint_version!();
+        Depcrate_llvm_utilget_version!();
+        Depcrate_llvm_utilprint_passes!();
+        Depcrate_llvm_utilllvm_target_features!();
+        Depcrate_llvm_utilprint!();
+        Depcrate_llvm_utilprint_target_cpus!();
+        Depcrate_llvm_utilprint_target_features!();
+        Depcrate_llvm_utilget_host_cpu_name!();
+        Depcrate_llvm_utilhandle_native!();
+        Depcrate_llvm_utiltarget_cpu!();
+        Depcrate_llvm_utilllvm_features_by_flags!();
+        Depcrate_llvm_utilglobal_llvm_features!();
+        Depcrate_llvm_utiltune_cpu!();
+    };
+}

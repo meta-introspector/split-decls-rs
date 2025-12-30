@@ -1,0 +1,9 @@
+// Generated macro for impl_write_unsigned_leb128 (macro)
+macro_rules! Depcrate_leb128impl_write_unsigned_leb128 {
+() => {
+// Module: crate::leb128
+// Provides: {"impl_write_unsigned_leb128"}
+// Dependencies: {}
+macro_rules ! impl_write_unsigned_leb128 { ($ fn_name : ident , $ int_ty : ty) => { # [inline] pub fn $ fn_name (out : & mut [u8 ; max_leb128_len ::<$ int_ty > ()] , mut value : $ int_ty) -> usize { let mut i = 0 ; loop { if value < 0x80 { unsafe { * out . get_unchecked_mut (i) = value as u8 ; } i = i . debug_strict_add (1) ; break ; } else { unsafe { * out . get_unchecked_mut (i) = ((value & 0x7f) | 0x80) as u8 ; } value >>= 7 ; i = i . debug_strict_add (1) ; } } i } } ; }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for LocalizedOutlivesConstraint (struct)
+macro_rules! Depcrate_polonius_constraintsLocalizedOutlivesConstraint {
+() => {
+// Module: crate::polonius::constraints
+// Provides: {"LocalizedOutlivesConstraint"}
+// Dependencies: {}
+# [doc = " A localized outlives constraint reifies the CFG location where the outlives constraint holds,"] # [doc = " within the origins themselves as if they were different from point to point: from `a: b`"] # [doc = " outlives constraints to `a@p: b@p`, where `p` is the point in the CFG."] # [doc = ""] # [doc = " This models two sources of constraints:"] # [doc = " - constraints that traverse the subsets between regions at a given point, `a@p: b@p`. These"] # [doc = "   depend on typeck constraints generated via assignments, calls, etc."] # [doc = " - constraints that traverse the CFG via the same region, `a@p: a@q`, where `p` is a predecessor"] # [doc = "   of `q`. These depend on the liveness of the regions at these points, as well as their"] # [doc = "   variance."] # [doc = ""] # [doc = " The `source` origin at `from` flows into the `target` origin at `to`."] # [doc = ""] # [doc = " This dual of NLL's [crate::constraints::OutlivesConstraint] therefore encodes the"] # [doc = " position-dependent outlives constraints used by Polonius, to model the flow-sensitive loan"] # [doc = " propagation via reachability within a graph of localized constraints."] # [derive (Copy , Clone , PartialEq , Eq , Debug , Hash)] pub (crate) struct LocalizedOutlivesConstraint { pub source : RegionVid , pub from : PointIndex , pub target : RegionVid , pub to : PointIndex , }
+};
+}

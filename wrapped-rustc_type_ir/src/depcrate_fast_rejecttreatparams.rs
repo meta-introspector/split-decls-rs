@@ -1,0 +1,9 @@
+// Generated macro for TreatParams (enum)
+macro_rules! Depcrate_fast_rejectTreatParams {
+() => {
+// Module: crate::fast_reject
+// Provides: {"TreatParams"}
+// Dependencies: {}
+# [doc = " Generic parameters are pretty much just bound variables, e.g."] # [doc = " the type of `fn foo<'a, T>(x: &'a T) -> u32 { ... }` can be thought of as"] # [doc = " `for<'a, T> fn(&'a T) -> u32`."] # [doc = ""] # [doc = " Typecheck of `foo` has to succeed for all possible generic arguments, so"] # [doc = " during typeck, we have to treat its generic parameters as if they"] # [doc = " were placeholders."] # [doc = ""] # [doc = " But when calling `foo` we only have to provide a specific generic argument."] # [doc = " In that case the generic parameters are instantiated with inference variables."] # [doc = " As we use `simplify_type` before that instantiation happens, we just treat"] # [doc = " generic parameters as if they were inference variables in that case."] # [derive (PartialEq , Eq , Debug , Clone , Copy)] pub enum TreatParams { # [doc = " Treat parameters as infer vars. This is the correct mode for caching"] # [doc = " an impl's type for lookup."] InstantiateWithInfer , # [doc = " Treat parameters as placeholders in the given environment. This is the"] # [doc = " correct mode for *lookup*, as during candidate selection."] # [doc = ""] # [doc = " This also treats projections with inference variables as infer vars"] # [doc = " since they could be further normalized."] AsRigid , }
+};
+}

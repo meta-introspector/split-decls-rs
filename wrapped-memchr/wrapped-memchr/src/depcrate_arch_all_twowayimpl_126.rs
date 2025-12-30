@@ -1,0 +1,9 @@
+// Generated macro for impl_126 (impl)
+macro_rules! Depcrate_arch_all_twowayimpl_126 {
+() => {
+// Module: crate::arch::all::twoway
+// Provides: {"impl_126"}
+// Dependencies: {}
+impl Shift { # [doc = " Compute the shift for a given needle in the forward direction."] # [doc = ""] # [doc = " This requires a lower bound on the period and a critical position."] # [doc = " These can be computed by extracting both the minimal and maximal"] # [doc = " lexicographic suffixes, and choosing the right-most starting position."] # [doc = " The lower bound on the period is then the period of the chosen suffix."] fn forward (needle : & [u8] , period_lower_bound : usize , critical_pos : usize ,) -> Shift { let large = cmp :: max (critical_pos , needle . len () - critical_pos) ; if critical_pos * 2 >= needle . len () { return Shift :: Large { shift : large } ; } let (u , v) = needle . split_at (critical_pos) ; if ! is_suffix (& v [.. period_lower_bound] , u) { return Shift :: Large { shift : large } ; } Shift :: Small { period : period_lower_bound } } # [doc = " Compute the shift for a given needle in the reverse direction."] # [doc = ""] # [doc = " This requires a lower bound on the period and a critical position."] # [doc = " These can be computed by extracting both the minimal and maximal"] # [doc = " lexicographic suffixes, and choosing the left-most starting position."] # [doc = " The lower bound on the period is then the period of the chosen suffix."] fn reverse (needle : & [u8] , period_lower_bound : usize , critical_pos : usize ,) -> Shift { let large = cmp :: max (critical_pos , needle . len () - critical_pos) ; if (needle . len () - critical_pos) * 2 >= needle . len () { return Shift :: Large { shift : large } ; } let (v , u) = needle . split_at (critical_pos) ; if ! is_prefix (& v [v . len () - period_lower_bound ..] , u) { return Shift :: Large { shift : large } ; } Shift :: Small { period : period_lower_bound } } }
+};
+}

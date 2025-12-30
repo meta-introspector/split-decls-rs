@@ -1,0 +1,9 @@
+// Generated macro for bron_kerbosch_pivot (function)
+macro_rules! Depcrate_algo_maximal_cliquesbron_kerbosch_pivot {
+() => {
+// Module: crate::algo::maximal_cliques
+// Provides: {"bron_kerbosch_pivot"}
+// Dependencies: {}
+# [doc = " Finds maximal cliques containing all the vertices in r, some of the"] # [doc = " vertices in p, and none of the vertices in x."] # [doc = ""] # [doc = " By default, only works on undirected graphs. It can be used on directed graphs"] # [doc = " if the graph is symmetric. I.e., if an edge (u, v) exists, then (v, u) also exists."] # [doc = ""] # [doc = " Uses the [Bron–Kerbosch algorithm][1] with pivoting."] # [doc = ""] # [doc = " [1]: https://en.wikipedia.org/wiki/Bron%E2%80%93Kerbosch_algorithm"] fn bron_kerbosch_pivot < G > (g : G , adj_mat : & G :: AdjMatrix , r : HashSet < G :: NodeId > , mut p : HashSet < G :: NodeId > , mut x : HashSet < G :: NodeId > ,) -> Vec < HashSet < G :: NodeId > > where G : GetAdjacencyMatrix + IntoNeighbors , G :: NodeId : Eq + Hash , { let mut cliques = Vec :: with_capacity (1) ; if p . is_empty () { if x . is_empty () { cliques . push (r) ; } return cliques ; } let u = p . iter () . max_by_key (| & v | g . neighbors (* v) . count ()) . unwrap () ; let mut todo = p . iter () . filter (| & v | * u == * v || ! g . is_adjacent (adj_mat , * u , * v) || ! g . is_adjacent (adj_mat , * v , * u)) . cloned () . collect :: < Vec < G :: NodeId > > () ; while let Some (v) = todo . pop () { let neighbors = HashSet :: from_iter (g . neighbors (v)) ; p . remove (& v) ; let mut next_r = r . clone () ; next_r . insert (v) ; let next_p = p . intersection (& neighbors) . cloned () . collect :: < HashSet < G :: NodeId > > () ; let next_x = x . intersection (& neighbors) . cloned () . collect :: < HashSet < G :: NodeId > > () ; cliques . extend (bron_kerbosch_pivot (g , adj_mat , next_r , next_p , next_x)) ; x . insert (v) ; } cliques }
+};
+}

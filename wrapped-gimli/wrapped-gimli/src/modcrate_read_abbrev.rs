@@ -1,0 +1,42 @@
+// Generated module macro for crate::read::abbrev
+macro_rules! Modcrate_read_abbrev {
+() => {
+        Depcrate_read_abbrevuse_415!();
+        Depcrate_read_abbrevuse_416!();
+        Depcrate_read_abbrevuse_417!();
+        Depcrate_read_abbrevuse_418!();
+        Depcrate_read_abbrevuse_419!();
+        Depcrate_read_abbrevuse_420!();
+        Depcrate_read_abbrevuse_421!();
+        Depcrate_read_abbrevuse_422!();
+        Depcrate_read_abbrevuse_423!();
+        Depcrate_read_abbrevuse_424!();
+        Depcrate_read_abbrevuse_425!();
+        Depcrate_read_abbrevDebugAbbrev!();
+        Depcrate_read_abbrevimpl_427!();
+        Depcrate_read_abbrevimpl_428!();
+        Depcrate_read_abbrevimpl_429!();
+        Depcrate_read_abbrevimpl_430!();
+        Depcrate_read_abbrevimpl_431!();
+        Depcrate_read_abbrevAbbreviationsCacheStrategy!();
+        Depcrate_read_abbrevAbbreviationsCache!();
+        Depcrate_read_abbrevimpl_434!();
+        Depcrate_read_abbrevAbbreviations!();
+        Depcrate_read_abbrevimpl_436!();
+        Depcrate_read_abbrevAbbreviation!();
+        Depcrate_read_abbrevimpl_438!();
+        Depcrate_read_abbrevAttributes!();
+        Depcrate_read_abbrevMAX_ATTRIBUTES_INLINE!();
+        Depcrate_read_abbrevimpl_441!();
+        Depcrate_read_abbrevimpl_442!();
+        Depcrate_read_abbrevimpl_443!();
+        Depcrate_read_abbrevimpl_444!();
+        Depcrate_read_abbrevimpl_445!();
+        Depcrate_read_abbrevimpl_446!();
+        Depcrate_read_abbrevimpl_447!();
+        Depcrate_read_abbrevAttributeSpecification!();
+        Depcrate_read_abbrevimpl_449!();
+        Depcrate_read_abbrevget_attribute_size!();
+        Depcrate_read_abbrevtests!();
+    };
+}

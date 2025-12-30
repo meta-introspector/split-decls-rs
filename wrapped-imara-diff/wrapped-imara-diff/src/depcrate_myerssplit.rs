@@ -1,0 +1,9 @@
+// Generated macro for Split (struct)
+macro_rules! Depcrate_myersSplit {
+() => {
+// Module: crate::myers
+// Provides: {"Split"}
+// Dependencies: {}
+# [derive (Debug)] struct Split { token_idx1 : i32 , token_idx2 : i32 , minimized_lo : bool , minimized_hi : bool , }
+};
+}

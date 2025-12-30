@@ -1,0 +1,9 @@
+// Generated macro for macro_368 (macro)
+macro_rules! Depcrate_fs_ioctlmacro_368 {
+() => {
+// Module: crate::fs::ioctl
+// Provides: {"macro_368"}
+// Dependencies: {}
+# [cfg (linux_raw_dep)] bitflags ! { # [doc = " `FS_*` constants for use with [`ioctl_getflags`]."] # [doc = ""] # [doc = " [`ioctl_getflags`]: crate::fs::ioctl::ioctl_getflags"] # [repr (transparent)] # [derive (Copy , Clone , Eq , PartialEq , Hash , Debug)] pub struct IFlags : ffi :: c_uint { # [doc = " `FS_APPEND_FL`"] const APPEND = linux_raw_sys :: general :: FS_APPEND_FL ; # [doc = " `FS_COMPR_FL`"] const COMPRESSED = linux_raw_sys :: general :: FS_COMPR_FL ; # [doc = " `FS_DIRSYNC_FL`"] const DIRSYNC = linux_raw_sys :: general :: FS_DIRSYNC_FL ; # [doc = " `FS_IMMUTABLE_FL`"] const IMMUTABLE = linux_raw_sys :: general :: FS_IMMUTABLE_FL ; # [doc = " `FS_JOURNAL_DATA_FL`"] const JOURNALING = linux_raw_sys :: general :: FS_JOURNAL_DATA_FL ; # [doc = " `FS_NOATIME_FL`"] const NOATIME = linux_raw_sys :: general :: FS_NOATIME_FL ; # [doc = " `FS_NOCOW_FL`"] const NOCOW = linux_raw_sys :: general :: FS_NOCOW_FL ; # [doc = " `FS_NODUMP_FL`"] const NODUMP = linux_raw_sys :: general :: FS_NODUMP_FL ; # [doc = " `FS_NOTAIL_FL`"] const NOTAIL = linux_raw_sys :: general :: FS_NOTAIL_FL ; # [doc = " `FS_PROJINHERIT_FL`"] const PROJECT_INHERIT = linux_raw_sys :: general :: FS_PROJINHERIT_FL ; # [doc = " `FS_SECRM_FL`"] const SECURE_REMOVAL = linux_raw_sys :: general :: FS_SECRM_FL ; # [doc = " `FS_SYNC_FL`"] const SYNC = linux_raw_sys :: general :: FS_SYNC_FL ; # [doc = " `FS_TOPDIR_FL`"] const TOPDIR = linux_raw_sys :: general :: FS_TOPDIR_FL ; # [doc = " `FS_UNRM_FL`"] const UNRM = linux_raw_sys :: general :: FS_UNRM_FL ; } }
+};
+}
