@@ -1,9 +1,15 @@
 use anyhow::Result;
+use rayon::prelude::*;
 use std::fs;
 use std::path::{Path, PathBuf};
 use std::collections::{HashMap, HashSet};
+use std::cell::RefCell;
 use syn::{File, Item};
 use quote::ToTokens;
+
+thread_local! {
+    static VISITED_FILES: RefCell<HashSet<PathBuf>> = RefCell::new(HashSet::new());
+}
 
 #[derive(Debug, Clone)]
 struct WrappedItem {
@@ -24,18 +30,194 @@ struct ModuleMacros {
 
 fn main() -> Result<()> {
     let args: Vec<String> = std::env::args().collect();
-    if args.len() < 2 {
-        eprintln!("Usage: {} <crate_path> [--output-dir <dir>]", args[0]);
+    
+    // Parse arguments
+    let mut crate_path: Option<&str> = None;
+    let mut output_dir = "output2";
+    let mut config_file: Option<&str> = None;
+    let mut recurse = false;
+    let mut jobs = 1;
+    
+    let mut i = 1;
+    while i < args.len() {
+        match args[i].as_str() {
+            "--output-dir" => {
+                if i + 1 < args.len() {
+                    output_dir = &args[i + 1];
+                    i += 2;
+                } else {
+                    eprintln!("❌ --output-dir requires a value");
+                    std::process::exit(1);
+                }
+            }
+            "--config" => {
+                if i + 1 < args.len() {
+                    config_file = Some(&args[i + 1]);
+                    i += 2;
+                } else {
+                    eprintln!("❌ --config requires a value");
+                    std::process::exit(1);
+                }
+            }
+            "--recurse" => {
+                recurse = true;
+                i += 1;
+            }
+            "--jobs" => {
+                if i + 1 < args.len() {
+                    jobs = args[i + 1].parse().unwrap_or(1);
+                    i += 2;
+                } else {
+                    eprintln!("❌ --jobs requires a value");
+                    std::process::exit(1);
+                }
+            }
+            _ => {
+                if crate_path.is_none() {
+                    crate_path = Some(&args[i]);
+                }
+                i += 1;
+            }
+        }
+    }
+    
+    if recurse && config_file.is_some() {
+        // Process all crates from config file
+        process_all_crates_from_config(config_file.unwrap(), output_dir, jobs)
+    } else if let Some(path) = crate_path {
+        // Process single crate
+        process_single_crate(Path::new(path), Path::new(output_dir))
+    } else {
+        eprintln!("Usage: {} <crate_path> [--output-dir <dir>] [--config <file> --recurse --jobs <n>]", args[0]);
         std::process::exit(1);
     }
+}
 
-    let crate_path = Path::new(&args[1]);
-    let output_dir = if args.len() > 3 && args[2] == "--output-dir" {
-        Path::new(&args[3])
+fn process_all_crates_from_config(config_file: &str, output_dir: &str, jobs: usize) -> Result<()> {
+    println!("🚀 Simple Split: Processing all crates from config");
+    println!("📋 Config: {}", config_file);
+    println!("📁 Output: {}", output_dir);
+    println!("🔧 Jobs: {}", jobs);
+    
+    // Set rayon thread pool
+    rayon::ThreadPoolBuilder::new().num_threads(jobs).build_global().unwrap();
+    
+    // Load config
+    let config_content = fs::read_to_string(config_file)?;
+    let config: toml::Value = toml::from_str(&config_content)?;
+    
+    // Extract crate names
+    let crates = if let Some(crates_array) = config.get("crates").and_then(|v| v.as_array()) {
+        crates_array.iter().filter_map(|v| v.as_str()).map(|s| s.to_string()).collect::<Vec<_>>()
+    } else if let Some(wrapping) = config.get("wrapping") {
+        if let Some(crates_array) = wrapping.get("crates").and_then(|v| v.as_array()) {
+            crates_array.iter().filter_map(|v| v.as_str()).map(|s| s.to_string()).collect::<Vec<_>>()
+        } else if let Some(crates_table) = wrapping.get("crates").and_then(|v| v.as_table()) {
+            crates_table.keys().cloned().collect::<Vec<_>>()
+        } else {
+            return Err(anyhow::anyhow!("No crates found in config"));
+        }
     } else {
-        Path::new("output2")
+        return Err(anyhow::anyhow!("No crates found in config"));
     };
+    
+    println!("📦 Found {} crates to process", crates.len());
+    
+    // Create logs directory
+    fs::create_dir_all("logs")?;
+    
+    // Process crates in parallel
+    let results: Vec<_> = crates.par_iter().map(|crate_name| {
+        // Find all Cargo.toml files for this crate
+        let search_paths = vec![
+            Path::new("..").join(crate_name).to_path_buf(),
+        ];
+        
+        let mut found_crates = Vec::new();
+        
+        // Search for the crate in common locations
+        for search_path in search_paths {
+            if let Ok(entries) = std::fs::read_dir("..") {
+                for entry in entries.flatten() {
+                    let path = entry.path();
+                    if path.is_dir() {
+                        // Look for crate_name anywhere in the directory tree
+                        if let Ok(output) = std::process::Command::new("find")
+                            .arg(&path)
+                            .arg("-name")
+                            .arg("Cargo.toml")
+                            .arg("-path")
+                            .arg(&format!("*{}*", crate_name))
+                            .output() {
+                            let cargo_tomls = String::from_utf8_lossy(&output.stdout);
+                            for cargo_toml in cargo_tomls.lines() {
+                                if !cargo_toml.is_empty() {
+                                    let crate_dir = Path::new(cargo_toml).parent().unwrap();
+                                    found_crates.push(crate_dir.to_path_buf());
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        // If no specific matches, try direct path
+        if found_crates.is_empty() {
+            let direct_path = Path::new("..").join(crate_name);
+            if direct_path.join("Cargo.toml").exists() {
+                found_crates.push(direct_path);
+            }
+        }
+        
+        // Process all found crates
+        let mut all_success = true;
+        let crate_count = found_crates.len();
+        for crate_path in found_crates {
+            let output_path = Path::new(output_dir).join(format!("wrapped-{}", crate_path.file_name().unwrap().to_str().unwrap()));
+            
+            match process_single_crate(&crate_path, &output_path) {
+                Ok(_) => {},
+                Err(e) => {
+                    eprintln!("❌ {}: {}", crate_path.display(), e);
+                    all_success = false;
+                }
+            }
+        }
+        
+        if crate_count == 0 {
+            eprintln!("❌ {}: No Cargo.toml found", crate_name);
+            all_success = false;
+        }
+        
+        let log_content = if all_success && crate_count > 0 {
+            format!("✅ Successfully processed {} (found {} subcrates)\n", crate_name, crate_count)
+        } else {
+            format!("❌ Error processing {}\n", crate_name)
+        };
+        let _ = fs::write(format!("logs/{}.log", crate_name), log_content);
+        
+        (crate_name.clone(), all_success && crate_count > 0)
+    }).collect();
+    
+    // Report results
+    let success_count = results.iter().filter(|(_, success)| *success).count();
+    let error_count = results.len() - success_count;
+    
+    println!("\n📊 Summary: {} success, {} errors", success_count, error_count);
+    
+    for (crate_name, success) in results {
+        if success {
+            println!("✅ {}", crate_name);
+        } else {
+            println!("❌ {}", crate_name);
+        }
+    }
+    
+    Ok(())
+}
 
+fn process_single_crate(crate_path: &Path, output_dir: &Path) -> Result<()> {
     println!("🚀 Simple Split: Wrapping all items in macros");
     println!("📂 Crate: {}", crate_path.display());
     println!("📁 Output: {}", output_dir.display());
@@ -44,15 +226,27 @@ fn main() -> Result<()> {
     let mut modules = HashMap::new();
     let mut count = 0;
 
-    let lib_rs = crate_path.join("src/lib.rs");
-    if !lib_rs.exists() {
-        eprintln!("❌ No src/lib.rs found in {}", crate_path.display());
-        std::process::exit(1);
+    // Look for Cargo.toml first
+    let cargo_toml = crate_path.join("Cargo.toml");
+    if !cargo_toml.exists() {
+        return Err(anyhow::anyhow!("No Cargo.toml found in {}", crate_path.display()));
     }
 
-    // Process the crate starting from lib.rs
+    // Try to find the main source file (lib.rs or main.rs)
+    let lib_rs = crate_path.join("src/lib.rs");
+    let main_rs = crate_path.join("src/main.rs");
+    
+    let source_file = if lib_rs.exists() {
+        lib_rs
+    } else if main_rs.exists() {
+        main_rs
+    } else {
+        return Err(anyhow::anyhow!("No src/lib.rs or src/main.rs found in {}", crate_path.display()));
+    };
+
+    // Process the crate starting from the main source file
     let crate_name = crate_path.file_name().unwrap().to_str().unwrap();
-    process_file_recursively(&lib_rs, crate_path, output_dir, &mut wrapped_items, &mut modules, "crate", &mut count)?;
+    process_file_recursively(&source_file, crate_path, output_dir, &mut wrapped_items, &mut modules, "crate", &mut count)?;
 
     // Generate macro files
     generate_macro_files(output_dir, crate_name, &wrapped_items, &modules)?;
@@ -61,7 +255,7 @@ fn main() -> Result<()> {
     Ok(())
 }
 
-fn process_file_recursively(
+pub fn process_file_recursively(
     file_path: &Path,
     crate_root: &Path,
     output_dir: &Path,
@@ -70,6 +264,21 @@ fn process_file_recursively(
     current_module: &str,
     count: &mut usize,
 ) -> Result<()> {
+    // Prevent infinite recursion by tracking visited files
+    let already_visited = VISITED_FILES.with(|visited| {
+        let mut visited = visited.borrow_mut();
+        if visited.contains(file_path) {
+            true
+        } else {
+            visited.insert(file_path.to_path_buf());
+            false
+        }
+    });
+    
+    if already_visited {
+        return Ok(());
+    }
+    
     println!("📖 Processing file: {} (module: {})", file_path.display(), current_module);
     
     let content = fs::read_to_string(file_path)?;
@@ -203,7 +412,7 @@ fn find_module_file(current_file: &Path, module_name: &str) -> Result<Option<Pat
     Ok(None)
 }
 
-fn generate_macro_files(
+pub fn generate_macro_files(
     output_dir: &Path,
     crate_name: &str,
     wrapped_items: &HashMap<String, WrappedItem>,

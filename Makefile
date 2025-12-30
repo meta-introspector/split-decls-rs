@@ -273,3 +273,10 @@ clean-test:
 bisect-test:
 	@echo "🔄 Quick bisection test..."
 	@cargo run --bin rustc_traced_compile 2>&1 | grep -E "(error\[|Loading:)" | head -10
+simple_split_all:
+	cargo run --bin simple_split -- --config split-decls-rs.toml --recurse --jobs 40 > simple_split_all.log 2>&1
+	@echo "📊 Processing complete. Results:"
+	@grep "✅" simple_split_all.log | wc -l | xargs echo "✅ Success:"
+	@grep "❌" simple_split_all.log | wc -l | xargs echo "❌ Errors:"
+	@echo "📋 Top 10 error types:"
+	@grep "❌" simple_split_all.log | sort | uniq -c | sort -rn | head -10

@@ -1,0 +1,78 @@
+# Parallel wrapping of all Rust compiler crates
+RUST_COMPILER_DIRS := $(shell find ../rust/compiler -name "Cargo.toml" -exec dirname {} \;)
+RUST_LIBRARY_DIRS := $(shell find ../rust/library -name "Cargo.toml" -exec dirname {} \;)
+RUST_TOOL_DIRS := $(shell find ../rust/src/tools -name "Cargo.toml" -exec dirname {} \;)
+
+.PHONY: wrap-all-rust wrap-compiler wrap-library wrap-tools list-crates
+
+# Main target to wrap everything
+wrap-all-rust: wrap-compiler wrap-library wrap-tools
+	@echo "✅ All Rust crates wrapped with enhanced simple_split"
+
+# List what crates we found
+list-crates:
+	@echo "Compiler crates found:"
+	@echo "$(RUST_COMPILER_DIRS)" | tr ' ' '\n' | wc -l
+	@echo "Library crates found:"
+	@echo "$(RUST_LIBRARY_DIRS)" | tr ' ' '\n' | wc -l
+	@echo "Tool crates found:"
+	@echo "$(RUST_TOOL_DIRS)" | tr ' ' '\n' | wc -l
+
+# Wrap all compiler crates in parallel
+wrap-compiler:
+	@echo "🚀 Wrapping $(words $(RUST_COMPILER_DIRS)) compiler crates..."
+	@$(foreach dir,$(RUST_COMPILER_DIRS), \
+		echo "📦 Processing $(notdir $(dir))..." && \
+		if cargo run --bin simple_split -- $(dir) --output-dir output2 > logs/$(notdir $(dir)).log 2>&1; then \
+			echo "✅ $(notdir $(dir))"; \
+		else \
+			echo "❌ $(notdir $(dir)) - see logs/$(notdir $(dir)).log"; \
+			rm -rf output2/wrapped-$(notdir $(dir)) 2>/dev/null || true; \
+		fi; \
+	)
+
+# Wrap all library crates in parallel  
+wrap-library:
+	@echo "🚀 Wrapping $(words $(RUST_LIBRARY_DIRS)) library crates..."
+	@$(foreach dir,$(RUST_LIBRARY_DIRS), \
+		echo "📦 Processing $(notdir $(dir))..." && \
+		if cargo run --bin simple_split -- $(dir) --output-dir output2 > logs/$(notdir $(dir)).log 2>&1; then \
+			echo "✅ $(notdir $(dir))"; \
+		else \
+			echo "❌ $(notdir $(dir)) - see logs/$(notdir $(dir)).log"; \
+			rm -rf output2/wrapped-$(notdir $(dir)) 2>/dev/null || true; \
+		fi; \
+	)
+
+# Wrap all tool crates in parallel
+wrap-tools:
+	@echo "🚀 Wrapping $(words $(RUST_TOOL_DIRS)) tool crates..."
+	@$(foreach dir,$(RUST_TOOL_DIRS), \
+		echo "📦 Processing $(notdir $(dir))..." && \
+		if cargo run --bin simple_split -- $(dir) --output-dir output2 > logs/$(notdir $(dir)).log 2>&1; then \
+			echo "✅ $(notdir $(dir))"; \
+		else \
+			echo "❌ $(notdir $(dir)) - see logs/$(notdir $(dir)).log"; \
+			rm -rf output2/wrapped-$(notdir $(dir)) 2>/dev/null || true; \
+		fi; \
+	)
+
+# Setup logs directory
+setup-logs:
+	@mkdir -p logs
+
+# Main target to wrap everything
+wrap-all-rust: setup-logs wrap-compiler wrap-library wrap-tools
+	@echo "✅ All Rust crates wrapped with enhanced simple_split"
+	@echo "📊 Results summary:"
+	@echo "  ✅ Success: $$(ls output2/wrapped-* 2>/dev/null | wc -l) crates"
+	@echo "  ❌ Failed: $$(ls logs/*.log 2>/dev/null | wc -l) logs"
+
+# Quick test with just compiler crates
+wrap-test:
+	@echo "🧪 Testing with first 3 compiler crates..."
+	@echo "$(RUST_COMPILER_DIRS)" | tr ' ' '\n' | head -3 | while read dir; do \
+		echo "📦 Processing $$(basename $$dir)..."; \
+		cargo run --bin simple_split -- $$dir --output-dir output2 >/dev/null 2>&1 && \
+		echo "✅ $$(basename $$dir)" || echo "❌ $$(basename $$dir)"; \
+	done

@@ -1,6 +1,6 @@
 use std::fs;
 use split_decls_rs::macro_interpreter::RdfStateMachine;
-use split_decls_rs::ast_statistics::AstStatistics;
+//use split_decls_rs::ast_statistics::AstStatistics;
 use split_decls_rs::{interpret_wrapped_decl, interpret_syn_function};
 
 fn main() -> anyhow::Result<()> {
@@ -8,7 +8,7 @@ fn main() -> anyhow::Result<()> {
     println!("Using wrapped syn macros to analyze and compress code into 8D type manifolds\n");
 
     let mut rdf_state = RdfStateMachine::new();
-    let mut ast_stats = AstStatistics::new();
+    //let mut ast_stats = AstStatistics::new();
 
     // Start by analyzing our own macro interpreter code
     println!("📊 ANALYZING MACRO INTERPRETER CODE:");
