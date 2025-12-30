@@ -1,0 +1,9 @@
+// Generated macro for STATUS_LOST_WRITEBEHIND_DATA_NETWORK_DISCONNECTED (const)
+macro_rules! Depcrate_shared_ntstatusSTATUS_LOST_WRITEBEHIND_DATA_NETWORK_DISCONNECTED {
+() => {
+// Module: crate::shared::ntstatus
+// Provides: {"STATUS_LOST_WRITEBEHIND_DATA_NETWORK_DISCONNECTED"}
+// Dependencies: {}
+pub const STATUS_LOST_WRITEBEHIND_DATA_NETWORK_DISCONNECTED : NTSTATUS = 0xC000A080 ;
+};
+}

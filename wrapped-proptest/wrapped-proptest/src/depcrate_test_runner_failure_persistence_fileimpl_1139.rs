@@ -1,0 +1,12 @@
+// Generated macro for impl_1139 (impl)
+macro_rules! Depcrate_test_runner_failure_persistence_fileimpl_1139 {
+() => {
+// Module: crate::test_runner::failure_persistence::file
+// Provides: {"impl_1139"}
+// Dependencies: {}
+impl FailurePersistence for FileFailurePersistence { fn load_persisted_failures2 (& self , source_file : Option < & 'static str > ,) -> Vec < PersistedSeed > { let p = self . resolve (source_file . and_then (| s | absolutize_source_file (Path :: new (s))) . as_ref () . map (| cow | & * * cow) ,) ; let path : Option < & PathBuf > = p . as_ref () ; let result : io :: Result < Vec < PersistedSeed > > = path . map_or_else (| | Ok (vec ! []) , | path | { let _lock = PERSISTENCE_LOCK . read () . ok () ; io :: BufReader :: new (fs :: File :: open (path) ?) . lines () . enumerate () . filter_map (| (lineno , line) | match line { Err (err) => Some (Err (err)) , Ok (line) => parse_seed_line (line , path , lineno) . map (Ok) , }) . collect () } ,) ; unwrap_or ! (result , err => { if io :: ErrorKind :: NotFound != err . kind () { eprintln ! ("proptest: failed to open {}: {}" , & path . map (| x | &** x) . unwrap_or_else (|| Path :: new ("??")) . display () , err) ; } vec ! [] }) } fn save_persisted_failure2 (& mut self , source_file : Option < & 'static str > , seed : PersistedSeed , shrunken_value : & dyn Debug ,) { let path = self . resolve (source_file . map (Path :: new)) ; if let Some (path) = path { let _lock = PERSISTENCE_LOCK . write () . ok () ; let is_new = ! path . is_file () ; let mut to_write = Vec :: < u8 > :: new () ; if is_new { write_header (& mut to_write) . expect ("proptest: couldn't write header.") ; } write_seed_line (& mut to_write , & seed , shrunken_value) . expect ("proptest: couldn't write seed line.") ; if let Err (e) = write_seed_data_to_file (& path , & to_write) { eprintln ! ("proptest: failed to append to {}: {}" , path . display () , e) ; } else { eprintln ! ("proptest: Saving this and future failures in {}\n\
+                     proptest: If this test was run on a CI system, you may \
+                     wish to add the following line to your copy of the file.{}\n\
+                     {}" , path . display () , if is_new { " (You may need to create it.)" } else { "" } , seed) ; } } } fn box_clone (& self) -> Box < dyn FailurePersistence > { Box :: new (* self) } fn eq (& self , other : & dyn FailurePersistence) -> bool { other . as_any () . downcast_ref :: < Self > () . map_or (false , | x | x == self) } fn as_any (& self) -> & dyn Any { self } }
+};
+}

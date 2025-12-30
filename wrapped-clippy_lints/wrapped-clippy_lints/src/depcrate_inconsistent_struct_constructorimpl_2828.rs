@@ -1,0 +1,9 @@
+// Generated macro for impl_2828 (impl)
+macro_rules! Depcrate_inconsistent_struct_constructorimpl_2828 {
+() => {
+// Module: crate::inconsistent_struct_constructor
+// Provides: {"impl_2828"}
+// Dependencies: {}
+impl < 'tcx > LateLintPass < 'tcx > for InconsistentStructConstructor { fn check_expr (& mut self , cx : & LateContext < 'tcx > , expr : & 'tcx hir :: Expr < '_ >) { let ExprKind :: Struct (_ , fields , _) = expr . kind else { return ; } ; let all_fields_are_shorthand = fields . iter () . all (| f | f . is_shorthand) ; let applicability = if all_fields_are_shorthand { Applicability :: MachineApplicable } else if self . check_inconsistent_struct_field_initializers { Applicability :: MaybeIncorrect } else { return ; } ; if ! expr . span . from_expansion () && let ty = cx . typeck_results () . expr_ty (expr) && let Some (adt_def) = ty . ty_adt_def () && adt_def . is_struct () && let Some (local_def_id) = adt_def . did () . as_local () && let ty_hir_id = cx . tcx . local_def_id_to_hir_id (local_def_id) && let Some (variant) = adt_def . variants () . iter () . next () { let mut def_order_map = FxHashMap :: default () ; for (idx , field) in variant . fields . iter () . enumerate () { def_order_map . insert (field . name , idx) ; } if is_consistent_order (fields , & def_order_map) { return ; } let span = field_with_attrs_span (cx . tcx , fields . first () . unwrap ()) . with_hi (field_with_attrs_span (cx . tcx , fields . last () . unwrap ()) . hi ()) ; if ! fulfill_or_allowed (cx , INCONSISTENT_STRUCT_CONSTRUCTOR , Some (ty_hir_id)) { span_lint_and_then (cx , INCONSISTENT_STRUCT_CONSTRUCTOR , span , "struct constructor field order is inconsistent with struct definition field order" , | diag | { let msg = if all_fields_are_shorthand { "try" } else { "if the field evaluation order doesn't matter, try" } ; let sugg = suggestion (cx , fields , & def_order_map) ; diag . span_suggestion (span , msg , sugg , applicability) ; } ,) ; } } } }
+};
+}

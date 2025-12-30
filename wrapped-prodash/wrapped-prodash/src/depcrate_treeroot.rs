@@ -1,9 +1,9 @@
-// Generated macro for root (module)
-macro_rules! Depcrate_treeroot {
+// Generated macro for Root (struct)
+macro_rules! Depcrate_treeRoot {
 () => {
 // Module: crate::tree
-// Provides: {"root"}
+// Provides: {"Root"}
 // Dependencies: {}
-# [doc = ""] pub mod root ;
+# [doc = " The top-level of the progress tree."] # [derive (Debug)] pub struct Root { pub (crate) inner : parking_lot :: Mutex < Item > , }
 };
 }

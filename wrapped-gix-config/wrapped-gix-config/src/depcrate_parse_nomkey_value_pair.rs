@@ -1,0 +1,9 @@
+// Generated macro for key_value_pair (function)
+macro_rules! Depcrate_parse_nomkey_value_pair {
+() => {
+// Module: crate::parse::nom
+// Provides: {"key_value_pair"}
+// Dependencies: {}
+fn key_value_pair < 'i > (i : & mut & 'i [u8] , node : & mut ParseNode , dispatch : & mut dyn FnMut (Event < 'i >) ,) -> ModalResult < () , NomError < & 'i [u8] > > { * node = ParseNode :: Name ; if let Some (name) = opt (config_name) . parse_next (i) ? { dispatch (Event :: SectionValueName (section :: ValueName (Cow :: Borrowed (name)))) ; if let Some (whitespace) = opt (take_spaces1) . parse_next (i) ? { dispatch (Event :: Whitespace (Cow :: Borrowed (whitespace))) ; } * node = ParseNode :: Value ; config_value (i , dispatch) } else { Ok (()) } }
+};
+}

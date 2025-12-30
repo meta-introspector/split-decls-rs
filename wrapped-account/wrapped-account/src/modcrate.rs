@@ -1,0 +1,53 @@
+// Generated module macro for crate
+macro_rules! Modcrate {
+() => {
+        Depcrateuse_1!();
+        Depcrateuse_2!();
+        Depcrateuse_3!();
+        Depcrateuse_4!();
+        Depcrateuse_5!();
+        Depcratestate_traits!();
+        DepcrateAccount!();
+        Depcrateaccount_serialize!();
+        Depcrateimpl_16!();
+        Depcrateimpl_17!();
+        DepcrateAccountSharedData!();
+        Depcrateaccounts_equal!();
+        Depcrateimpl_20!();
+        Depcrateimpl_21!();
+        DepcrateWritableAccount!();
+        DepcrateReadableAccount!();
+        Depcrateimpl_24!();
+        Depcrateimpl_25!();
+        Depcrateimpl_26!();
+        Depcrateimpl_27!();
+        Depcrateimpl_28!();
+        Depcrateimpl_29!();
+        Depcratedebug_fmt!();
+        Depcrateimpl_31!();
+        Depcrateimpl_32!();
+        Depcrateshared_new!();
+        Depcrateshared_new_rent_epoch!();
+        Depcrateshared_new_ref!();
+        Depcrateshared_new_data!();
+        Depcrateshared_new_ref_data!();
+        Depcrateshared_new_data_with_space!();
+        Depcrateshared_new_ref_data_with_space!();
+        Depcrateshared_deserialize_data!();
+        Depcrateshared_serialize_data!();
+        Depcrateimpl_42!();
+        Depcrateimpl_43!();
+        DepcrateInheritableAccountFields!();
+        DepcrateDUMMY_INHERITABLE_ACCOUNT_FIELDS!();
+        Depcratecreate_account_with_fields!();
+        Depcratecreate_account_for_test!();
+        Depcratecreate_account_shared_data_with_fields!();
+        Depcratecreate_account_shared_data_for_test!();
+        Depcratefrom_account!();
+        Depcrateto_account!();
+        Depcrateimpl_52!();
+        Depcratecreate_is_signer_account_infos!();
+        DepcratePROGRAM_OWNERS!();
+        Depcratetests!();
+    };
+}

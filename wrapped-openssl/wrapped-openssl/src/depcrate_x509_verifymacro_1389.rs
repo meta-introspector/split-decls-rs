@@ -1,0 +1,9 @@
+// Generated macro for macro_1389 (macro)
+macro_rules! Depcrate_x509_verifymacro_1389 {
+() => {
+// Module: crate::x509::verify
+// Provides: {"macro_1389"}
+// Dependencies: {}
+bitflags ! { # [doc = " Flags used to verify an `X509` certificate chain."] # [derive (Copy , Clone , Debug , Eq , Hash , Ord , PartialEq , PartialOrd)] # [repr (transparent)] pub struct X509VerifyFlags : c_ulong { const CB_ISSUER_CHECK = ffi :: X509_V_FLAG_CB_ISSUER_CHECK as _ ; const USE_CHECK_TIME = ffi :: X509_V_FLAG_USE_CHECK_TIME as _ ; const CRL_CHECK = ffi :: X509_V_FLAG_CRL_CHECK as _ ; const CRL_CHECK_ALL = ffi :: X509_V_FLAG_CRL_CHECK_ALL as _ ; const IGNORE_CRITICAL = ffi :: X509_V_FLAG_IGNORE_CRITICAL as _ ; const X509_STRICT = ffi :: X509_V_FLAG_X509_STRICT as _ ; const ALLOW_PROXY_CERTS = ffi :: X509_V_FLAG_ALLOW_PROXY_CERTS as _ ; const POLICY_CHECK = ffi :: X509_V_FLAG_POLICY_CHECK as _ ; const EXPLICIT_POLICY = ffi :: X509_V_FLAG_EXPLICIT_POLICY as _ ; const INHIBIT_ANY = ffi :: X509_V_FLAG_INHIBIT_ANY as _ ; const INHIBIT_MAP = ffi :: X509_V_FLAG_INHIBIT_MAP as _ ; const NOTIFY_POLICY = ffi :: X509_V_FLAG_NOTIFY_POLICY as _ ; const EXTENDED_CRL_SUPPORT = ffi :: X509_V_FLAG_EXTENDED_CRL_SUPPORT as _ ; const USE_DELTAS = ffi :: X509_V_FLAG_USE_DELTAS as _ ; const CHECK_SS_SIGNATURE = ffi :: X509_V_FLAG_CHECK_SS_SIGNATURE as _ ; const TRUSTED_FIRST = ffi :: X509_V_FLAG_TRUSTED_FIRST as _ ; # [cfg (ossl102)] const SUITEB_128_LOS_ONLY = ffi :: X509_V_FLAG_SUITEB_128_LOS_ONLY ; # [cfg (ossl102)] const SUITEB_192_LOS = ffi :: X509_V_FLAG_SUITEB_128_LOS ; # [cfg (ossl102)] const SUITEB_128_LOS = ffi :: X509_V_FLAG_SUITEB_192_LOS ; const PARTIAL_CHAIN = ffi :: X509_V_FLAG_PARTIAL_CHAIN as _ ; # [cfg (any (ossl110 , boringssl , awslc , libressl))] const NO_ALT_CHAINS = ffi :: X509_V_FLAG_NO_ALT_CHAINS as _ ; # [cfg (any (ossl110 , boringssl , awslc , libressl))] const NO_CHECK_TIME = ffi :: X509_V_FLAG_NO_CHECK_TIME as _ ; } }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for DatagramSocketRecvExt (trait)
+macro_rules! Depcrate_datagramDatagramSocketRecvExt {
+() => {
+// Module: crate::datagram
+// Provides: {"DatagramSocketRecvExt"}
+// Dependencies: {}
+# [doc = " Reads datagrams from a socket."] # [doc = ""] # [doc = " Implemented as an extension trait, adding utility methods to all"] # [doc = " [`DatagramSocketRecv`] types. Callers will tend to import this trait instead"] # [doc = " of [`DatagramSocketRecv`]."] # [doc = ""] # [doc = " [`DatagramSocketRecv`]: DatagramSocketRecv"] pub trait DatagramSocketRecvExt : DatagramSocketRecv { # [doc = " Receives a single datagram message on the socket from the remote address"] # [doc = " to which it is connected. On success, returns the number of bytes read."] fn recv (& mut self , buf : & mut [u8] ,) -> impl Future < Output = io :: Result < usize > > + Send { poll_fn (| cx | { let mut buf = ReadBuf :: new (buf) ; ready ! (self . poll_recv (cx , & mut buf) ?) ; Poll :: Ready (Ok (buf . filled () . len ())) }) } # [doc = " Receives a single datagram message on the socket. On success, returns"] # [doc = " the number of bytes read and the origin."] fn recv_from (& mut self , buf : & mut [u8] ,) -> impl Future < Output = io :: Result < (usize , SocketAddr) > > + Send { poll_fn (| cx | { let mut buf = ReadBuf :: new (buf) ; let addr = ready ! (self . poll_recv_from (cx , & mut buf) ?) ; Poll :: Ready (Ok ((buf . filled () . len () , addr))) }) } # [doc = " Receives multiple datagrams on the socket from the remote address"] # [doc = " to which it is connected. Returns the number of buffers used (i.e."] # [doc = " number of datagrams read). Each used buffer can be read up to its"] # [doc = " `filled().len()`."] fn recv_many (& mut self , bufs : & mut [ReadBuf < '_ >] ,) -> impl Future < Output = io :: Result < usize > > + Send { poll_fn (| cx | self . poll_recv_many (cx , bufs)) } }
+};
+}

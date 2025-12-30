@@ -1,0 +1,46 @@
+// Generated module macro for crate::derive
+macro_rules! Modcrate_derive {
+() => {
+        Depcrate_deriveuse_116!();
+        Depcrate_deriveuse_117!();
+        Depcrate_deriveuse_118!();
+        Depcrate_deriveuse_119!();
+        Depcrate_deriveuse_120!();
+        Depcrate_deriveuse_121!();
+        Depcrate_deriveuse_122!();
+        Depcrate_deriveuse_123!();
+        Depcrate_deriveuse_124!();
+        Depcrate_deriveimpl_proptest_arbitrary!();
+        Depcrate_deriveDeriveData!();
+        Depcrate_derivederive_proptest_arbitrary!();
+        Depcrate_derivederive_struct!();
+        Depcrate_deriveadd_top_filter!();
+        Depcrate_deriveadd_filter_self!();
+        Depcrate_deriveadd_top_params!();
+        Depcrate_derivederive_product_has_params!();
+        Depcrate_deriveproduct_handle_default_params!();
+        Depcrate_derivederive_product_no_params!();
+        Depcrate_deriveextract_nparam!();
+        Depcrate_derivederive_enum!();
+        Depcrate_derivederive_enum_no_params!();
+        Depcrate_deriveensure_union_has_strategies!();
+        Depcrate_derivederive_variant_with_fields!();
+        Depcrate_derivevariant_no_explicit_strategy!();
+        Depcrate_derivevariant_handle_default_params!();
+        Depcrate_derivedeny_all_attrs_on_fields!();
+        Depcrate_derivederive_enum_has_params!();
+        Depcrate_derivekeep_inhabited_variant!();
+        Depcrate_deriveensure_has_only_skip_attr!();
+        Depcrate_derivepair_unit_variant!();
+        Depcrate_derivePartsAcc!();
+        Depcrate_deriveimpl_148!();
+        Depcrate_deriveimpl_149!();
+        Depcrate_deriveimpl_150!();
+        Depcrate_deriveParamAcc!();
+        Depcrate_deriveimpl_152!();
+        Depcrate_deriveStratAcc!();
+        Depcrate_deriveimpl_154!();
+        Depcrate_deriveimpl_155!();
+        Depcrate_deriveimpl_156!();
+    };
+}

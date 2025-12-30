@@ -1,0 +1,50 @@
+// Generated module macro for crate::signed_decimal
+macro_rules! Modcrate_signed_decimal {
+() => {
+        Depcrate_signed_decimaluse_110!();
+        Depcrate_signed_decimaluse_111!();
+        Depcrate_signed_decimaluse_112!();
+        Depcrate_signed_decimaluse_113!();
+        Depcrate_signed_decimaluse_114!();
+        Depcrate_signed_decimaluse_115!();
+        Depcrate_signed_decimaluse_116!();
+        Depcrate_signed_decimalDecimal!();
+        Depcrate_signed_decimalimpl_118!();
+        Depcrate_signed_decimalimpl_119!();
+        Depcrate_signed_decimalimpl_from_signed_integer_type!();
+        Depcrate_signed_decimalmacro_121!();
+        Depcrate_signed_decimalmacro_122!();
+        Depcrate_signed_decimalmacro_123!();
+        Depcrate_signed_decimalmacro_124!();
+        Depcrate_signed_decimalmacro_125!();
+        Depcrate_signed_decimalmacro_126!();
+        Depcrate_signed_decimalimpl_from_unsigned_integer_type!();
+        Depcrate_signed_decimalmacro_128!();
+        Depcrate_signed_decimalmacro_129!();
+        Depcrate_signed_decimalmacro_130!();
+        Depcrate_signed_decimalmacro_131!();
+        Depcrate_signed_decimalmacro_132!();
+        Depcrate_signed_decimalmacro_133!();
+        Depcrate_signed_decimalimpl_134!();
+        Depcrate_signed_decimalimpl_135!();
+        Depcrate_signed_decimalimpl_136!();
+        Depcrate_signed_decimalimpl_137!();
+        Depcrate_signed_decimalimpl_138!();
+        Depcrate_signed_decimalmacro_139!();
+        Depcrate_signed_decimaltest_basic!();
+        Depcrate_signed_decimaltest_from_str!();
+        Depcrate_signed_decimaltest_from_str_scientific!();
+        Depcrate_signed_decimaltest_isize_limits!();
+        Depcrate_signed_decimaltest_ui128_limits!();
+        Depcrate_signed_decimaltest_zero_str_bounds!();
+        Depcrate_signed_decimaltest_syntax_error!();
+        Depcrate_signed_decimaltest_pad!();
+        Depcrate_signed_decimaltest_sign_display!();
+        Depcrate_signed_decimaltest_set_max_position!();
+        Depcrate_signed_decimaltest_pad_start_bounds!();
+        Depcrate_signed_decimaltest_pad_end_bounds!();
+        Depcrate_signed_decimaltest_rounding!();
+        Depcrate_signed_decimaltest_concatenate!();
+        Depcrate_signed_decimaltest_rounding_increment!();
+    };
+}

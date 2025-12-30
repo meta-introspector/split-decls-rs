@@ -1,0 +1,9 @@
+// Generated macro for encode_name_entry (function)
+macro_rules! Depcrate_x509_commonencode_name_entry {
+() => {
+// Module: crate::x509::common
+// Provides: {"encode_name_entry"}
+// Dependencies: {}
+pub (crate) fn encode_name_entry < 'p > (py : pyo3 :: Python < '_ > , ka : & 'p cryptography_keepalive :: KeepAlive < pyo3 :: pybacked :: PyBackedBytes > , py_name_entry : & pyo3 :: Bound < '_ , pyo3 :: PyAny > ,) -> CryptographyResult < AttributeTypeValue < 'p > > { let attr_type = py_name_entry . getattr (pyo3 :: intern ! (py , "_type")) ? ; let tag = attr_type . getattr (pyo3 :: intern ! (py , "value")) ? . extract :: < u8 > () ? ; let raw_value = py_name_entry . getattr (pyo3 :: intern ! (py , "value")) ? ; let value = if attr_type . is (& types :: ASN1_TYPE_BIT_STRING . get (py) ?) { AttributeValue :: AnyString (RawTlv :: new (asn1 :: BitString :: TAG , ka . add (raw_value . extract () ?) ,)) } else if attr_type . is (& types :: ASN1_TYPE_BMP_STRING . get (py) ?) { AttributeValue :: BmpString (asn1 :: BMPString :: new (ka . add (raw_value . call_method1 (pyo3 :: intern ! (py , "encode") , ("utf_16_be" ,)) ? . extract () ? ,) ,) . unwrap () ,) } else if attr_type . is (& types :: ASN1_TYPE_UNIVERSAL_STRING . get (py) ?) { AttributeValue :: UniversalString (asn1 :: UniversalString :: new (ka . add (raw_value . call_method1 (pyo3 :: intern ! (py , "encode") , ("utf_32_be" ,)) ? . extract () ? ,) ,) . unwrap () ,) } else { AttributeValue :: AnyString (RawTlv :: new (asn1 :: Tag :: from_bytes (& [tag]) ? . 0 , ka . add (raw_value . call_method1 (pyo3 :: intern ! (py , "encode") , ("utf8" ,)) ? . extract () ? ,) ,)) } ; let py_oid = py_name_entry . getattr (pyo3 :: intern ! (py , "oid")) ? ; let oid = py_oid_to_oid (py_oid) ? ; Ok (AttributeTypeValue { type_id : oid , value , }) }
+};
+}

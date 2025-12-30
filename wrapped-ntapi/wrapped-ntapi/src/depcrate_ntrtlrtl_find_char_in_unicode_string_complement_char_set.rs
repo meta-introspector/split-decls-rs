@@ -1,0 +1,9 @@
+// Generated macro for RTL_FIND_CHAR_IN_UNICODE_STRING_COMPLEMENT_CHAR_SET (const)
+macro_rules! Depcrate_ntrtlRTL_FIND_CHAR_IN_UNICODE_STRING_COMPLEMENT_CHAR_SET {
+() => {
+// Module: crate::ntrtl
+// Provides: {"RTL_FIND_CHAR_IN_UNICODE_STRING_COMPLEMENT_CHAR_SET"}
+// Dependencies: {}
+pub const RTL_FIND_CHAR_IN_UNICODE_STRING_COMPLEMENT_CHAR_SET : ULONG = 0x00000002 ;
+};
+}

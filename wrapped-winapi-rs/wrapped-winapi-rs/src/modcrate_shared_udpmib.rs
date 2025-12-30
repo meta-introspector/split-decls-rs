@@ -1,0 +1,45 @@
+// Generated module macro for crate::shared::udpmib
+macro_rules! Modcrate_shared_udpmib {
+() => {
+        Depcrate_shared_udpmibuse_10447!();
+        Depcrate_shared_udpmibuse_10448!();
+        Depcrate_shared_udpmibuse_10449!();
+        Depcrate_shared_udpmibuse_10450!();
+        Depcrate_shared_udpmibANY_SIZE!();
+        Depcrate_shared_udpmibTCPIP_OWNING_MODULE_SIZE!();
+        Depcrate_shared_udpmibmacro_10453!();
+        Depcrate_shared_udpmibPMIB_UDPROW!();
+        Depcrate_shared_udpmibmacro_10455!();
+        Depcrate_shared_udpmibPMIB_UDPTABLE!();
+        Depcrate_shared_udpmibmacro_10457!();
+        Depcrate_shared_udpmibPMIB_UDPROW_OWNER_PID!();
+        Depcrate_shared_udpmibmacro_10459!();
+        Depcrate_shared_udpmibPMIB_UDPTABLE_OWNER_PID!();
+        Depcrate_shared_udpmibmacro_10461!();
+        Depcrate_shared_udpmibmacro_10462!();
+        Depcrate_shared_udpmibmacro_10463!();
+        Depcrate_shared_udpmibmacro_10464!();
+        Depcrate_shared_udpmibPMIB_UDPROW_OWNER_MODULE!();
+        Depcrate_shared_udpmibmacro_10466!();
+        Depcrate_shared_udpmibPMIB_UDPTABLE_OWNER_MODULE!();
+        Depcrate_shared_udpmibmacro_10468!();
+        Depcrate_shared_udpmibPMIB_UDP6ROW!();
+        Depcrate_shared_udpmibmacro_10470!();
+        Depcrate_shared_udpmibPMIB_UDP6TABLE!();
+        Depcrate_shared_udpmibmacro_10472!();
+        Depcrate_shared_udpmibPMIB_UDP6ROW_OWNER_PID!();
+        Depcrate_shared_udpmibmacro_10474!();
+        Depcrate_shared_udpmibPMIB_UDP6TABLE_OWNER_PID!();
+        Depcrate_shared_udpmibmacro_10476!();
+        Depcrate_shared_udpmibmacro_10477!();
+        Depcrate_shared_udpmibmacro_10478!();
+        Depcrate_shared_udpmibmacro_10479!();
+        Depcrate_shared_udpmibPMIB_UDP6ROW_OWNER_MODULE!();
+        Depcrate_shared_udpmibmacro_10481!();
+        Depcrate_shared_udpmibPMIB_UDP6TABLE_OWNER_MODULE!();
+        Depcrate_shared_udpmibmacro_10483!();
+        Depcrate_shared_udpmibPMIB_UDPSTATS!();
+        Depcrate_shared_udpmibmacro_10485!();
+        Depcrate_shared_udpmibPMIB_UDPSTATS2!();
+    };
+}

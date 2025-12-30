@@ -1,0 +1,69 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcrateuse_3.rs");
+include!("depcrate_rootuse_7.rs");
+include!("depcrate_globuse_38.rs");
+include!("depcrate_globimpl_47.rs");
+include!("depcrateglob.rs");
+include!("depcrate_globuse_37.rs");
+include!("depcrate_globimpl_43.rs");
+include!("depcrate_rootimpl_16.rs");
+include!("depcrate_rootmacro_14.rs");
+include!("depcrate_rootuse_6.rs");
+include!("depcrateother_2.rs");
+include!("depcrate_rootuse_12.rs");
+include!("depcrate_rootreaddir.rs");
+include!("depcrate_glob_teststest_fragment.rs");
+include!("depcrate_globtests.rs");
+include!("depcrate_globimpl_41.rs");
+include!("depcrate_globuse_33.rs");
+include!("depcrate_rootuse_8.rs");
+include!("depcrate_globuse_30.rs");
+include!("depcrate_globuse_32.rs");
+include!("depcrate_globimpl_45.rs");
+include!("depcrate_globmatcher.rs");
+include!("depcrate_rootimp.rs");
+include!("depcrate_rootuse_5.rs");
+include!("depcrate_rootimpl_22.rs");
+include!("depcrate_globuse_34.rs");
+include!("depcrate_globcomponent.rs");
+include!("depcrate_globcompile_pattern.rs");
+include!("depcrateroot.rs");
+include!("depcrate_globimpl_48.rs");
+include!("depcrate_rootroot.rs");
+include!("depcrate_rootmetadata.rs");
+include!("depcrate_globuse_35.rs");
+include!("depcrate_globerrorkind.rs");
+include!("depcrateuse_25.rs");
+include!("depcrate_rootimpl_24.rs");
+include!("depcrate_rootdirentry.rs");
+include!("depcrateother_1.rs");
+include!("depcrate_glob_testsuse_28.rs");
+include!("depcrate_rootimpl_18.rs");
+include!("depcrate_rootuse_11.rs");
+include!("depcrate_rootopenoptions.rs");
+include!("depcrate_globerror.rs");
+include!("depcrate_globglob.rs");
+include!("depcrate_globpart.rs");
+include!("depcrate_globfragment.rs");
+include!("depcrate_globimpl_55.rs");
+include!("depcrate_globuse_31.rs");
+include!("depcrate_globimpl_42.rs");
+include!("depcrate_rootuse_10.rs");
+include!("depcrate_rootuse_9.rs");
+include!("depcrate_globresult.rs");
+include!("depcrate_globuse_36.rs");
+include!("depcrate_globimpl_50.rs");
+include!("depcrate_rootimpl_20.rs");
+include!("modcrate_root.rs");
+include!("modcrate.rs");
+include!("modcrate_glob_tests.rs");
+include!("modcrate_glob.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate_root!();
+    Modcrate!();
+    Modcrate_glob_tests!();
+    Modcrate_glob!();
+}

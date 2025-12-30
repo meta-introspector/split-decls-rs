@@ -1,0 +1,9 @@
+// Generated macro for TOKEN_MANDATORY_POLICY_VALID_MASK (const)
+macro_rules! Depcrate_um_winntTOKEN_MANDATORY_POLICY_VALID_MASK {
+() => {
+// Module: crate::um::winnt
+// Provides: {"TOKEN_MANDATORY_POLICY_VALID_MASK"}
+// Dependencies: {}
+pub const TOKEN_MANDATORY_POLICY_VALID_MASK : DWORD = TOKEN_MANDATORY_POLICY_NO_WRITE_UP | TOKEN_MANDATORY_POLICY_NEW_PROCESS_MIN ;
+};
+}

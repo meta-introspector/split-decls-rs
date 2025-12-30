@@ -1,0 +1,9 @@
+// Generated macro for accept_one_byte_at_a_time (function)
+macro_rules! Depcrate_testaccept_one_byte_at_a_time {
+() => {
+// Module: crate::test
+// Provides: {"accept_one_byte_at_a_time"}
+// Dependencies: {}
+# [test] fn accept_one_byte_at_a_time () { let cert = match localhost_cert () { Some (cert) => cert , None => return , } ; # [derive (Debug)] struct OneByteAtATime < S > { inner : S , } impl < S : Read > Read for OneByteAtATime < S > { fn read (& mut self , buf : & mut [u8]) -> io :: Result < usize > { self . inner . read (& mut buf [.. 1]) } } impl < S : Write > Write for OneByteAtATime < S > { fn write (& mut self , buf : & [u8]) -> io :: Result < usize > { self . inner . write (& buf [.. 1]) } fn flush (& mut self) -> io :: Result < () > { self . inner . flush () } } let listener = TcpListener :: bind ("127.0.0.1:0") . unwrap () ; let addr = listener . local_addr () . unwrap () ; let t = thread :: spawn (move | | { let stream = TcpStream :: connect (& addr) . unwrap () ; let creds = SchannelCred :: builder () . acquire (Direction :: Outbound) . unwrap () ; let mut stream = tls_stream :: Builder :: new () . domain ("localhost") . connect (creds , OneByteAtATime { inner : stream }) . unwrap () ; stream . write_all (& [1 , 2 , 3 , 4]) . unwrap () ; stream . flush () . unwrap () ; assert_eq ! (stream . read (& mut [0 ; 1024]) . unwrap () , 4) ; stream . shutdown () . unwrap () ; }) ; let stream = listener . accept () . unwrap () . 0 ; let creds = SchannelCred :: builder () . cert (cert) . acquire (Direction :: Inbound) . unwrap () ; let mut stream = tls_stream :: Builder :: new () . accept (creds , OneByteAtATime { inner : stream }) . unwrap () ; assert_eq ! (stream . read (& mut [0 ; 1024]) . unwrap () , 4) ; stream . write_all (& [1 , 2 , 3 , 4]) . unwrap () ; stream . flush () . unwrap () ; let mut buf = [0 ; 1] ; assert_eq ! (stream . read (& mut buf) . unwrap () , 0) ; t . join () . unwrap () ; }
+};
+}

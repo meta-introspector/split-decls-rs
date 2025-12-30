@@ -1,0 +1,9 @@
+// Generated macro for missing_retry_source_connection_id (function)
+macro_rules! Depcrate_testsmissing_retry_source_connection_id {
+() => {
+// Module: crate::tests
+// Provides: {"missing_retry_source_connection_id"}
+// Dependencies: {}
+# [rstest] fn missing_retry_source_connection_id (# [values ("cubic" , "bbr2" , "bbr2_gcongestion")] cc_algorithm_name : & str ,) { let mut buf = [0 ; 65535] ; let mut config = Config :: new (PROTOCOL_VERSION) . unwrap () ; assert_eq ! (config . set_cc_algorithm_name (cc_algorithm_name) , Ok (())) ; config . load_cert_chain_from_pem_file ("examples/cert.crt") . unwrap () ; config . load_priv_key_from_pem_file ("examples/cert.key") . unwrap () ; config . set_application_protos (& [b"proto1" , b"proto2"]) . unwrap () ; let mut pipe = test_utils :: Pipe :: with_server_config (& mut config) . unwrap () ; let (mut len , _) = pipe . client . send (& mut buf) . unwrap () ; let hdr = Header :: from_slice (& mut buf [.. len] , MAX_CONN_ID_LEN) . unwrap () ; let mut scid = [0 ; MAX_CONN_ID_LEN] ; rand :: rand_bytes (& mut scid [..]) ; let scid = ConnectionId :: from_ref (& scid) ; let token = b"quiche test retry token" ; len = packet :: retry (& hdr . scid , & hdr . dcid , & scid , token , hdr . version , & mut buf) . unwrap () ; assert_eq ! (pipe . client_recv (& mut buf [.. len]) , Ok (len)) ; let (len , _) = pipe . client . send (& mut buf) . unwrap () ; let from = "127.0.0.1:1234" . parse () . unwrap () ; pipe . server = accept (& scid , None , test_utils :: Pipe :: server_addr () , from , & mut config ,) . unwrap () ; assert_eq ! (pipe . server_recv (& mut buf [.. len]) , Ok (len)) ; let flight = test_utils :: emit_flight (& mut pipe . server) . unwrap () ; assert_eq ! (test_utils :: process_flight (& mut pipe . client , flight) , Err (Error :: InvalidTransportParam)) ; }
+};
+}

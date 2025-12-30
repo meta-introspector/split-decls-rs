@@ -1,0 +1,9 @@
+// Generated macro for STATUS_GRAPHICS_INVALID_MONITOR_CAPABILITY_ORIGIN (const)
+macro_rules! Depcrate_shared_ntstatusSTATUS_GRAPHICS_INVALID_MONITOR_CAPABILITY_ORIGIN {
+() => {
+// Module: crate::shared::ntstatus
+// Provides: {"STATUS_GRAPHICS_INVALID_MONITOR_CAPABILITY_ORIGIN"}
+// Dependencies: {}
+pub const STATUS_GRAPHICS_INVALID_MONITOR_CAPABILITY_ORIGIN : NTSTATUS = 0xC01E0357 ;
+};
+}

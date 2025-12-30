@@ -1,0 +1,9 @@
+// Generated macro for Span (struct)
+macro_rules! Depcrate_util_searchSpan {
+() => {
+// Module: crate::util::search
+// Provides: {"Span"}
+// Dependencies: {}
+# [doc = " A representation of a span reported by a regex engine."] # [doc = ""] # [doc = " A span corresponds to the starting and ending _byte offsets_ of a"] # [doc = " contiguous region of bytes. The starting offset is inclusive while the"] # [doc = " ending offset is exclusive. That is, a span is a half-open interval."] # [doc = ""] # [doc = " A span is used to report the offsets of a match, but it is also used to"] # [doc = " convey which region of a haystack should be searched via routines like"] # [doc = " [`Input::span`]."] # [doc = ""] # [doc = " This is basically equivalent to a `std::ops::Range<usize>`, except this"] # [doc = " type implements `Copy` which makes it more ergonomic to use in the context"] # [doc = " of this crate. Like a range, this implements `Index` for `[u8]` and `str`,"] # [doc = " and `IndexMut` for `[u8]`. For convenience, this also impls `From<Range>`,"] # [doc = " which means things like `Span::from(5..10)` work."] # [derive (Clone , Copy , Eq , Hash , PartialEq)] pub struct Span { # [doc = " The start offset of the span, inclusive."] pub start : usize , # [doc = " The end offset of the span, exclusive."] pub end : usize , }
+};
+}

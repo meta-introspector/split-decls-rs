@@ -1,9 +1,9 @@
-// Generated macro for metadata (function)
-macro_rules! Depcrate_cargometadata {
+// Generated macro for Metadata (struct)
+macro_rules! Depcrate_cargoMetadata {
 () => {
 // Module: crate::cargo
-// Provides: {"metadata"}
+// Provides: {"Metadata"}
 // Dependencies: {}
-pub (crate) fn metadata () -> Result < Metadata > { let output = raw_cargo () . arg ("metadata") . arg ("--format-version=1") . output () . map_err (Error :: Cargo) ? ; serde_json :: from_slice (& output . stdout) . map_err (Error :: CargoMetadata) }
+# [derive (Deserialize)] pub struct Metadata { pub target_directory : PathBuf , pub workspace_root : PathBuf , }
 };
 }

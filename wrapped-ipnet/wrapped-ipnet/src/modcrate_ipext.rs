@@ -1,0 +1,44 @@
+// Generated module macro for crate::ipext
+macro_rules! Modcrate_ipext {
+() => {
+        Depcrate_ipextuse_10!();
+        Depcrate_ipextuse_11!();
+        Depcrate_ipextuse_12!();
+        Depcrate_ipextuse_13!();
+        Depcrate_ipextuse_14!();
+        Depcrate_ipextIpAdd!();
+        Depcrate_ipextIpSub!();
+        Depcrate_ipextIpBitAnd!();
+        Depcrate_ipextIpBitOr!();
+        Depcrate_ipextip_add_impl!();
+        Depcrate_ipextip_sub_impl!();
+        Depcrate_ipextmacro_21!();
+        Depcrate_ipextmacro_22!();
+        Depcrate_ipextmacro_23!();
+        Depcrate_ipextmacro_24!();
+        Depcrate_ipextmacro_25!();
+        Depcrate_ipextmacro_26!();
+        Depcrate_ipextip_bitops_impl!();
+        Depcrate_ipextmacro_28!();
+        Depcrate_ipextIpStep!();
+        Depcrate_ipextimpl_30!();
+        Depcrate_ipextimpl_31!();
+        Depcrate_ipextIpAddrRange!();
+        Depcrate_ipextIpv4AddrRange!();
+        Depcrate_ipextIpv6AddrRange!();
+        Depcrate_ipextimpl_35!();
+        Depcrate_ipextimpl_36!();
+        Depcrate_ipextimpl_37!();
+        Depcrate_ipextimpl_38!();
+        Depcrate_ipextimpl_39!();
+        Depcrate_ipextimpl_40!();
+        Depcrate_ipextimpl_41!();
+        Depcrate_ipextimpl_42!();
+        Depcrate_ipextimpl_43!();
+        Depcrate_ipextimpl_44!();
+        Depcrate_ipextimpl_45!();
+        Depcrate_ipextimpl_46!();
+        Depcrate_ipextimpl_47!();
+        Depcrate_ipexttests!();
+    };
+}

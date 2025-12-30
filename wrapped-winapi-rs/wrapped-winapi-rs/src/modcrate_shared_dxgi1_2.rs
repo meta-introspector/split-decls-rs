@@ -1,0 +1,55 @@
+// Generated module macro for crate::shared::dxgi1_2
+macro_rules! Modcrate_shared_dxgi1_2 {
+() => {
+        Depcrate_shared_dxgi1_2use_3363!();
+        Depcrate_shared_dxgi1_2use_3364!();
+        Depcrate_shared_dxgi1_2use_3365!();
+        Depcrate_shared_dxgi1_2use_3366!();
+        Depcrate_shared_dxgi1_2use_3367!();
+        Depcrate_shared_dxgi1_2use_3368!();
+        Depcrate_shared_dxgi1_2use_3369!();
+        Depcrate_shared_dxgi1_2use_3370!();
+        Depcrate_shared_dxgi1_2use_3371!();
+        Depcrate_shared_dxgi1_2use_3372!();
+        Depcrate_shared_dxgi1_2use_3373!();
+        Depcrate_shared_dxgi1_2macro_3374!();
+        Depcrate_shared_dxgi1_2macro_3375!();
+        Depcrate_shared_dxgi1_2macro_3376!();
+        Depcrate_shared_dxgi1_2macro_3377!();
+        Depcrate_shared_dxgi1_2macro_3378!();
+        Depcrate_shared_dxgi1_2macro_3379!();
+        Depcrate_shared_dxgi1_2macro_3380!();
+        Depcrate_shared_dxgi1_2macro_3381!();
+        Depcrate_shared_dxgi1_2macro_3382!();
+        Depcrate_shared_dxgi1_2macro_3383!();
+        Depcrate_shared_dxgi1_2macro_3384!();
+        Depcrate_shared_dxgi1_2macro_3385!();
+        Depcrate_shared_dxgi1_2macro_3386!();
+        Depcrate_shared_dxgi1_2macro_3387!();
+        Depcrate_shared_dxgi1_2macro_3388!();
+        Depcrate_shared_dxgi1_2macro_3389!();
+        Depcrate_shared_dxgi1_2macro_3390!();
+        Depcrate_shared_dxgi1_2macro_3391!();
+        Depcrate_shared_dxgi1_2macro_3392!();
+        Depcrate_shared_dxgi1_2macro_3393!();
+        Depcrate_shared_dxgi1_2macro_3394!();
+        Depcrate_shared_dxgi1_2macro_3395!();
+        Depcrate_shared_dxgi1_2macro_3396!();
+        Depcrate_shared_dxgi1_2macro_3397!();
+        Depcrate_shared_dxgi1_2macro_3398!();
+        Depcrate_shared_dxgi1_2DXGI_OFFER_RESOURCE_PRIORITY!();
+        Depcrate_shared_dxgi1_2DXGI_ENUM_MODES_DISABLED_STEREO!();
+        Depcrate_shared_dxgi1_2DXGI_ENUM_MODES_STEREO!();
+        Depcrate_shared_dxgi1_2DXGI_SHARED_RESOURCE_READ!();
+        Depcrate_shared_dxgi1_2DXGI_SHARED_RESOURCE_WRITE!();
+        Depcrate_shared_dxgi1_2macro_3404!();
+        Depcrate_shared_dxgi1_2macro_3405!();
+        Depcrate_shared_dxgi1_2macro_3406!();
+        Depcrate_shared_dxgi1_2macro_3407!();
+        Depcrate_shared_dxgi1_2macro_3408!();
+        Depcrate_shared_dxgi1_2macro_3409!();
+        Depcrate_shared_dxgi1_2macro_3410!();
+        Depcrate_shared_dxgi1_2macro_3411!();
+        Depcrate_shared_dxgi1_2macro_3412!();
+    };
+}

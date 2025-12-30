@@ -1,0 +1,53 @@
+// Generated module macro for crate::protocols
+macro_rules! Modcrate_protocols {
+() => {
+        Depcrate_protocolsabsolute_pointer!();
+        Depcrate_protocolsblock_io!();
+        Depcrate_protocolsbus_specific_driver_override!();
+        Depcrate_protocolsdebug_support!();
+        Depcrate_protocolsdebugport!();
+        Depcrate_protocolsdecompress!();
+        Depcrate_protocolsdevice_path!();
+        Depcrate_protocolsdevice_path_from_text!();
+        Depcrate_protocolsdevice_path_to_text!();
+        Depcrate_protocolsdevice_path_utilities!();
+        Depcrate_protocolsdisk_io!();
+        Depcrate_protocolsdisk_io2!();
+        Depcrate_protocolsdriver_binding!();
+        Depcrate_protocolsdriver_diagnostics2!();
+        Depcrate_protocolsdriver_family_override!();
+        Depcrate_protocolsfile!();
+        Depcrate_protocolsgraphics_output!();
+        Depcrate_protocolshii_database!();
+        Depcrate_protocolshii_font!();
+        Depcrate_protocolshii_font_ex!();
+        Depcrate_protocolshii_package_list!();
+        Depcrate_protocolshii_string!();
+        Depcrate_protocolsip4!();
+        Depcrate_protocolsip6!();
+        Depcrate_protocolsload_file!();
+        Depcrate_protocolsload_file2!();
+        Depcrate_protocolsloaded_image!();
+        Depcrate_protocolsloaded_image_device_path!();
+        Depcrate_protocolsmanaged_network!();
+        Depcrate_protocolsmemory_attribute!();
+        Depcrate_protocolsmp_services!();
+        Depcrate_protocolspci_io!();
+        Depcrate_protocolsplatform_driver_override!();
+        Depcrate_protocolsrng!();
+        Depcrate_protocolsservice_binding!();
+        Depcrate_protocolsshell!();
+        Depcrate_protocolsshell_dynamic_command!();
+        Depcrate_protocolsshell_parameters!();
+        Depcrate_protocolssimple_file_system!();
+        Depcrate_protocolssimple_network!();
+        Depcrate_protocolssimple_text_input!();
+        Depcrate_protocolssimple_text_input_ex!();
+        Depcrate_protocolssimple_text_output!();
+        Depcrate_protocolstcp4!();
+        Depcrate_protocolstcp6!();
+        Depcrate_protocolstimestamp!();
+        Depcrate_protocolsudp4!();
+        Depcrate_protocolsudp6!();
+    };
+}

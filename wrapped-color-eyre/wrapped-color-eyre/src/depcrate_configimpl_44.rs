@@ -1,0 +1,9 @@
+// Generated macro for impl_44 (impl)
+macro_rules! Depcrate_configimpl_44 {
+() => {
+// Module: crate::config
+// Provides: {"impl_44"}
+// Dependencies: {}
+impl EyreHook { # [allow (unused_variables)] pub (crate) fn default (& self , error : & (dyn std :: error :: Error + 'static)) -> crate :: Handler { let backtrace = if lib_verbosity () != Verbosity :: Minimal { Some (backtrace :: Backtrace :: new ()) } else { None } ; # [cfg (feature = "capture-spantrace")] let span_trace = if self . spantrace_capture_enabled () && crate :: handler :: get_deepest_spantrace (error) . is_none () { Some (tracing_error :: SpanTrace :: capture ()) } else { None } ; crate :: Handler { filters : self . filters . clone () , backtrace , suppress_backtrace : false , # [cfg (feature = "capture-spantrace")] span_trace , sections : Vec :: new () , display_env_section : self . display_env_section , # [cfg (feature = "track-caller")] display_location_section : self . display_location_section , # [cfg (feature = "issue-url")] issue_url : self . issue_url . clone () , # [cfg (feature = "issue-url")] issue_metadata : self . issue_metadata . clone () , # [cfg (feature = "issue-url")] issue_filter : self . issue_filter . clone () , theme : self . theme , # [cfg (feature = "track-caller")] location : None , } } # [cfg (feature = "capture-spantrace")] fn spantrace_capture_enabled (& self) -> bool { std :: env :: var ("RUST_SPANTRACE") . map (| val | val != "0") . unwrap_or (self . capture_span_trace_by_default) } # [doc = " Installs self as the global eyre handling hook via `eyre::set_hook`"] pub fn install (self) -> Result < () , crate :: eyre :: InstallError > { crate :: eyre :: set_hook (self . into_eyre_hook ()) } # [doc = " Convert the self into the boxed type expected by `eyre::set_hook`."] pub fn into_eyre_hook (self) -> HookFunc { Box :: new (move | e | Box :: new (self . default (e))) } }
+};
+}

@@ -1,0 +1,43 @@
+// Generated module macro for crate::unicodeset_parse::parse
+macro_rules! Modcrate_unicodeset_parse_parse {
+() => {
+        Depcrate_unicodeset_parse_parseuse_1114!();
+        Depcrate_unicodeset_parse_parseuse_1115!();
+        Depcrate_unicodeset_parse_parseuse_1116!();
+        Depcrate_unicodeset_parse_parseuse_1117!();
+        Depcrate_unicodeset_parse_parseuse_1118!();
+        Depcrate_unicodeset_parse_parseuse_1119!();
+        Depcrate_unicodeset_parse_parseuse_1120!();
+        Depcrate_unicodeset_parse_parseuse_1121!();
+        Depcrate_unicodeset_parse_parseuse_1122!();
+        Depcrate_unicodeset_parse_parseuse_1123!();
+        Depcrate_unicodeset_parse_parseuse_1124!();
+        Depcrate_unicodeset_parse_parseuse_1125!();
+        Depcrate_unicodeset_parse_parseuse_1126!();
+        Depcrate_unicodeset_parse_parseParseErrorKind!();
+        Depcrate_unicodeset_parse_parseuse_1128!();
+        Depcrate_unicodeset_parse_parseuse_1129!();
+        Depcrate_unicodeset_parse_parseimpl_1130!();
+        Depcrate_unicodeset_parse_parseimpl_1131!();
+        Depcrate_unicodeset_parse_parseParseError!();
+        Depcrate_unicodeset_parse_parseResult!();
+        Depcrate_unicodeset_parse_parseimpl_1134!();
+        Depcrate_unicodeset_parse_parseVariableValue!();
+        Depcrate_unicodeset_parse_parseVariableMap!();
+        Depcrate_unicodeset_parse_parseimpl_1137!();
+        Depcrate_unicodeset_parse_parselegal_char_start!();
+        Depcrate_unicodeset_parse_parselegal_char_in_string_start!();
+        Depcrate_unicodeset_parse_parseSingleOrMultiChar!();
+        Depcrate_unicodeset_parse_parseLiteral!();
+        Depcrate_unicodeset_parse_parseMainToken!();
+        Depcrate_unicodeset_parse_parseimpl_1143!();
+        Depcrate_unicodeset_parse_parseOperation!();
+        Depcrate_unicodeset_parse_parseUnicodeSetBuilder!();
+        Depcrate_unicodeset_parse_parseimpl_1146!();
+        Depcrate_unicodeset_parse_parseparse!();
+        Depcrate_unicodeset_parse_parseparse_with_variables!();
+        Depcrate_unicodeset_parse_parseparse_unstable_with_variables!();
+        Depcrate_unicodeset_parse_parseparse_unstable!();
+        Depcrate_unicodeset_parse_parsetests!();
+    };
+}

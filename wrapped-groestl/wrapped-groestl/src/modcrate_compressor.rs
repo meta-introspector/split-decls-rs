@@ -1,0 +1,47 @@
+// Generated module macro for crate::compressor
+macro_rules! Modcrate_compressor {
+() => {
+        Depcrate_compressoruse_11!();
+        Depcrate_compressoruse_12!();
+        Depcrate_compressoruse_13!();
+        Depcrate_compressoruse_14!();
+        Depcrate_compressoruse_15!();
+        Depcrate_compressorMap2!();
+        Depcrate_compressormacro_17!();
+        Depcrate_compressorX8!();
+        Depcrate_compressorimpl_19!();
+        Depcrate_compressorimpl_20!();
+        Depcrate_compressorimpl_21!();
+        Depcrate_compressorimpl_22!();
+        Depcrate_compressorimpl_23!();
+        Depcrate_compressorimpl_24!();
+        Depcrate_compressormul2!();
+        Depcrate_compressorsubmix!();
+        Depcrate_compressortranspose_a!();
+        Depcrate_compressortranspose_b!();
+        Depcrate_compressortranspose_b_inv!();
+        Depcrate_compressortranspose_o_b!();
+        Depcrate_compressortranspose_o_b_inv!();
+        Depcrate_compressorround!();
+        Depcrate_compressorrounds_p_q!();
+        Depcrate_compressortf512_impl!();
+        Depcrate_compressorof512_impl!();
+        Depcrate_compressorinit512_impl!();
+        Depcrate_compressortranspose!();
+        Depcrate_compressortranspose_inv!();
+        Depcrate_compressorrounds_p!();
+        Depcrate_compressorrounds_q!();
+        Depcrate_compressorinit1024_impl!();
+        Depcrate_compressortf1024_impl!();
+        Depcrate_compressorof1024_impl!();
+        Depcrate_compressoraes!();
+        Depcrate_compressorssse3!();
+        Depcrate_compressoruse_46!();
+        Depcrate_compressorsse2!();
+        Depcrate_compressoruse_48!();
+        Depcrate_compressoruse_49!();
+        Depcrate_compressorautodetect!();
+        Depcrate_compressoruse_51!();
+        Depcrate_compressortest!();
+    };
+}

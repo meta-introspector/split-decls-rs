@@ -1,0 +1,9 @@
+// Generated macro for macro_192 (macro)
+macro_rules! Depcratemacro_192 {
+() => {
+// Module: crate
+// Provides: {"macro_192"}
+// Dependencies: {}
+arrays ! { # [doc = " `Int8Array()`"] # [doc = " https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int8Array"] Int8Array : i8 , # [doc = " `Int16Array()`"] # [doc = " https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int16Array"] Int16Array : i16 , # [doc = " `Int32Array()`"] # [doc = " https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int32Array"] Int32Array : i32 , # [doc = " `Uint8Array()`"] # [doc = " https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array"] Uint8Array : u8 , # [doc = " `Uint8ClampedArray()`"] # [doc = " https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8ClampedArray"] Uint8ClampedArray : u8 , # [doc = " `Uint16Array()`"] # [doc = " https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint16Array"] Uint16Array : u16 , # [doc = " `Uint32Array()`"] # [doc = " https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint32Array"] Uint32Array : u32 , # [doc = " `Float32Array()`"] # [doc = " https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float32Array"] Float32Array : f32 , # [doc = " `Float64Array()`"] # [doc = " https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float64Array"] Float64Array : f64 , # [doc = " `BigInt64Array()`"] # [doc = " https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt64Array"] BigInt64Array : i64 , # [doc = " `BigUint64Array()`"] # [doc = " https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigUint64Array"] BigUint64Array : u64 , }
+};
+}

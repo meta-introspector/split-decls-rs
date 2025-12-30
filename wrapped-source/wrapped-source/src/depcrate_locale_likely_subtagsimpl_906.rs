@@ -1,0 +1,9 @@
+// Generated macro for impl_906 (impl)
+macro_rules! Depcrate_locale_likely_subtagsimpl_906 {
+() => {
+// Module: crate::locale::likely_subtags
+// Provides: {"impl_906"}
+// Dependencies: {}
+impl < 'a > LikelySubtagsResources < 'a > { pub (crate) fn try_from_cldr_cache (cache : & 'a super :: super :: CldrCache ,) -> Result < LikelySubtagsResources < 'a > , DataError > { let likely_subtags : & cldr_serde :: likely_subtags :: Resource = cache . core () . read_and_parse ("supplemental/likelySubtags.json") ? ; let coverage_levels : & cldr_serde :: coverage_levels :: Resource = cache . core () . read_and_parse ("coverageLevels.json") ? ; let basic_plus_languages = Self :: get_basic_plus_languages (coverage_levels) ; Ok (Self { likely_subtags , basic_plus_languages , }) } fn get_basic_plus_languages (coverage_levels : & cldr_serde :: coverage_levels :: Resource ,) -> HashSet < Language > { # [expect (clippy :: unnecessary_filter_map)] coverage_levels . coverage_levels . iter () . filter_map (| (langid , level) | { match level { CoverageLevel :: Basic | CoverageLevel :: Moderate | CoverageLevel :: Modern => { Some (langid . language) } } }) . collect () } fn common_predicate (& self , min_max : & (& LanguageIdentifier , & LanguageIdentifier)) -> bool { let (minimized , maximized) = min_max ; self . basic_plus_languages . contains (& maximized . language) || minimized . is_unknown () } pub (crate) fn get_common (& self ,) -> impl Iterator < Item = (& LanguageIdentifier , & LanguageIdentifier) > + '_ { self . likely_subtags . supplemental . likely_subtags . iter () . filter (| min_max | self . common_predicate (min_max)) } pub (crate) fn get_extended (& self ,) -> impl Iterator < Item = (& LanguageIdentifier , & LanguageIdentifier) > + '_ { self . likely_subtags . supplemental . likely_subtags . iter () . filter (| min_max | ! self . common_predicate (min_max)) } }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for SV_LOCKVIOLATIONOFFSET_INFOLOEVEL (const)
+macro_rules! Depcrate_um_lmserverSV_LOCKVIOLATIONOFFSET_INFOLOEVEL {
+() => {
+// Module: crate::um::lmserver
+// Provides: {"SV_LOCKVIOLATIONOFFSET_INFOLOEVEL"}
+// Dependencies: {}
+pub const SV_LOCKVIOLATIONOFFSET_INFOLOEVEL : DWORD = PARMNUM_BASE_INFOLEVEL + SV_LOCKVIOLATIONOFFSET_PARMNUM ;
+};
+}

@@ -1,0 +1,44 @@
+// Generated module macro for crate::value
+macro_rules! Modcrate_value {
+() => {
+        Depcrate_valueuse_214!();
+        Depcrate_valueuse_215!();
+        Depcrate_valueValue!();
+        Depcrate_valueimpl_217!();
+        Depcrate_valueserde_impls!();
+        Depcrate_valueimpl_219!();
+        Depcrate_valueimpl_220!();
+        Depcrate_valueimpl_221!();
+        Depcrate_valueimpl_222!();
+        Depcrate_valueimpl_223!();
+        Depcrate_valueimpl_224!();
+        Depcrate_valueimpl_225!();
+        Depcrate_valueimpl_226!();
+        Depcrate_valueimpl_227!();
+        Depcrate_valueimpl_228!();
+        Depcrate_valueimpl_229!();
+        Depcrate_valueimpl_230!();
+        Depcrate_valueimpl_231!();
+        Depcrate_valueimpl_232!();
+        Depcrate_valueimpl_233!();
+        Depcrate_valueimpl_234!();
+        Depcrate_valueimpl_235!();
+        Depcrate_valueimpl_236!();
+        Depcrate_valueimpl_237!();
+        Depcrate_valueimpl_238!();
+        Depcrate_valueimpl_239!();
+        Depcrate_valueimpl_240!();
+        Depcrate_valueimpl_241!();
+        Depcrate_valueimpl_242!();
+        Depcrate_valueimpl_243!();
+        Depcrate_valueimpl_244!();
+        Depcrate_valueimpl_245!();
+        Depcrate_valueimpl_246!();
+        Depcrate_valueStackItem!();
+        Depcrate_valueBuilder!();
+        Depcrate_valueimpl_249!();
+        Depcrate_valueimpl_250!();
+        Depcrate_valueimpl_251!();
+        Depcrate_valuetests!();
+    };
+}

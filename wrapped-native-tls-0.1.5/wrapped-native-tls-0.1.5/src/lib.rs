@@ -1,0 +1,75 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcrateimpl_32.rs");
+include!("depcrate_check_kinds.rs");
+include!("depcrate_backendsecurity_framework.rs");
+include!("depcrate_backend_schanneluse_17.rs");
+include!("depcrate_testtests.rs");
+include!("depcrateimpl_30.rs");
+include!("depcratetlsconnector.rs");
+include!("depcrateresult.rs");
+include!("depcrate_testuse_23.rs");
+include!("depcrate_testuse_21.rs");
+include!("depcratetlsstream.rs");
+include!("depcrateuse_3.rs");
+include!("depcrate_testuse_24.rs");
+include!("depcrate_backend_schanneluse_16.rs");
+include!("depcrateerror.rs");
+include!("depcrateuse_5.rs");
+include!("depcratepkcs12.rs");
+include!("depcrate_backend_schanneluse_15.rs");
+include!("depcrate_backend_security_frameworkuse_12.rs");
+include!("depcrate_testuse_25.rs");
+include!("depcratetest.rs");
+include!("depcratemidhandshaketlsstream.rs");
+include!("depcratebackend.rs");
+include!("depcrateimpl_42.rs");
+include!("depcrateimpl_54.rs");
+include!("depcrateuse_6.rs");
+include!("depcrateimpl_47.rs");
+include!("depcrateprotocol.rs");
+include!("depcrateimpl_51.rs");
+include!("depcrateimpl_49.rs");
+include!("depcrateimpl_45.rs");
+include!("depcratetlsconnectorbuilder.rs");
+include!("depcrateimpl_53.rs");
+include!("depcratetlsacceptor.rs");
+include!("depcrateimpl_34.rs");
+include!("depcratetlsacceptorbuilder.rs");
+include!("depcrateimpl_55.rs");
+include!("depcrateimpl_31.rs");
+include!("depcrateuse_4.rs");
+include!("depcrate_testp.rs");
+include!("depcrateimpl_38.rs");
+include!("depcrateimpl_41.rs");
+include!("depcrateimpl_36.rs");
+include!("depcrateimpl_39.rs");
+include!("depcratecertificate.rs");
+include!("depcrate_backendschannel.rs");
+include!("depcrateuse_8.rs");
+include!("depcrate_testuse_22.rs");
+include!("depcratehandshakeerror.rs");
+include!("depcrate_backendopenssl.rs");
+include!("depcrateuse_2.rs");
+include!("depcrateimpl_56.rs");
+include!("depcrateother_1.rs");
+include!("depcrate_backend_security_frameworkuse_11.rs");
+include!("depcrate_backend_schanneluse_18.rs");
+include!("depcrateuse_7.rs");
+include!("depcrate_backend_security_frameworkuse_13.rs");
+include!("modcrate_backend_openssl.rs");
+include!("modcrate_backend.rs");
+include!("modcrate_backend_security_framework.rs");
+include!("modcrate_backend_schannel.rs");
+include!("modcrate_test.rs");
+include!("modcrate.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate_backend_openssl!();
+    Modcrate_backend!();
+    Modcrate_backend_security_framework!();
+    Modcrate_backend_schannel!();
+    Modcrate_test!();
+    Modcrate!();
+}

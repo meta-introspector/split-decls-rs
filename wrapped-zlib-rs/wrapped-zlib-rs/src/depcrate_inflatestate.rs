@@ -1,0 +1,9 @@
+// Generated macro for State (struct)
+macro_rules! Depcrate_inflateState {
+() => {
+// Module: crate::inflate
+// Provides: {"State"}
+// Dependencies: {}
+# [repr (C , align (64))] pub (crate) struct State < 'a > { # [doc = " Current inflate mode"] mode : Mode , flags : Flags , # [doc = " log base 2 of requested window size"] wbits : u8 , # [doc = " bitflag"] # [doc = ""] # [doc = " - bit 0 true if zlib"] # [doc = " - bit 1 true if gzip"] # [doc = " - bit 2 true to validate check value"] wrap : u8 , flush : InflateFlush , window : Window < 'a > , # [doc = " number of code length code lengths"] ncode : usize , # [doc = " number of length code lengths"] nlen : usize , # [doc = " number of distance code lengths"] ndist : usize , # [doc = " number of code lengths in lens[]"] have : usize , # [doc = " next available space in codes[]"] next : usize , bit_reader : BitReader < 'a > , writer : Writer < 'a > , total : usize , # [doc = " length of a block to copy"] length : usize , # [doc = " distance back to copy the string from"] offset : usize , # [doc = " extra bits needed"] extra : usize , # [doc = " bits back of last unprocessed length/lit"] back : usize , # [doc = " initial length of match"] was : usize , # [doc = " size of memory copying chunk"] chunksize : usize , in_available : usize , out_available : usize , gzip_flags : i32 , checksum : u32 , crc_fold : Crc32Fold , error_message : Option < & 'static str > , # [doc = " place to store gzip header if needed"] head : Option < & 'a mut gz_header > , dmax : usize , # [doc = " table for length/literal codes"] len_table : Table , # [doc = " table for dist codes"] dist_table : Table , codes_codes : [Code ; crate :: ENOUGH_LENS] , len_codes : [Code ; crate :: ENOUGH_LENS] , dist_codes : [Code ; crate :: ENOUGH_DISTS] , # [doc = " temporary storage space for code lengths"] lens : [u16 ; 320] , # [doc = " work area for code table building"] work : [u16 ; 288] , }
+};
+}

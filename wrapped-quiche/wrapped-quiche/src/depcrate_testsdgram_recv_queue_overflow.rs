@@ -1,0 +1,9 @@
+// Generated macro for dgram_recv_queue_overflow (function)
+macro_rules! Depcrate_testsdgram_recv_queue_overflow {
+() => {
+// Module: crate::tests
+// Provides: {"dgram_recv_queue_overflow"}
+// Dependencies: {}
+# [rstest] fn dgram_recv_queue_overflow (# [values ("cubic" , "bbr2" , "bbr2_gcongestion")] cc_algorithm_name : & str ,) { let mut buf = [0 ; 65535] ; let mut config = Config :: new (PROTOCOL_VERSION) . unwrap () ; assert_eq ! (config . set_cc_algorithm_name (cc_algorithm_name) , Ok (())) ; config . load_cert_chain_from_pem_file ("examples/cert.crt") . unwrap () ; config . load_priv_key_from_pem_file ("examples/cert.key") . unwrap () ; config . set_application_protos (& [b"proto1" , b"proto2"]) . unwrap () ; config . set_initial_max_data (30) ; config . set_initial_max_stream_data_bidi_local (15) ; config . set_initial_max_stream_data_bidi_remote (15) ; config . set_initial_max_stream_data_uni (10) ; config . set_initial_max_streams_bidi (3) ; config . set_initial_max_streams_uni (3) ; config . enable_dgram (true , 2 , 10) ; config . set_max_recv_udp_payload_size (1200) ; config . verify_peer (false) ; let mut pipe = test_utils :: Pipe :: with_config (& mut config) . unwrap () ; assert_eq ! (pipe . handshake () , Ok (())) ; assert_eq ! (pipe . client . dgram_send (b"hello, world") , Ok (())) ; assert_eq ! (pipe . client . dgram_send (b"ciao, mondo") , Ok (())) ; assert_eq ! (pipe . client . dgram_send (b"hola, mundo") , Ok (())) ; assert_eq ! (pipe . advance () , Ok (())) ; let result1 = pipe . server . dgram_recv (& mut buf) ; assert_eq ! (result1 , Ok (11)) ; assert_eq ! (buf [0] , b'c') ; assert_eq ! (buf [1] , b'i') ; let result2 = pipe . server . dgram_recv (& mut buf) ; assert_eq ! (result2 , Ok (11)) ; assert_eq ! (buf [0] , b'h') ; assert_eq ! (buf [1] , b'o') ; let result3 = pipe . server . dgram_recv (& mut buf) ; assert_eq ! (result3 , Err (Error :: Done)) ; }
+};
+}

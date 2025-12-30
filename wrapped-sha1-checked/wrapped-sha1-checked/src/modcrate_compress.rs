@@ -1,0 +1,43 @@
+// Generated module macro for crate::compress
+macro_rules! Modcrate_compress {
+() => {
+        Depcrate_compressuse_9!();
+        Depcrate_compressK!();
+        Depcrate_compressmix!();
+        Depcrate_compressf1!();
+        Depcrate_compressf2!();
+        Depcrate_compressf3!();
+        Depcrate_compressf4!();
+        Depcrate_compressround3_step!();
+        Depcrate_compressround4_step!();
+        Depcrate_compressround1_step_bw!();
+        Depcrate_compressround2_step_bw!();
+        Depcrate_compressround3_step_bw!();
+        Depcrate_compressround4_step_bw!();
+        Depcrate_compressfull_round3_step!();
+        Depcrate_compressfull_round4_step!();
+        Depcrate_compressround2_step4!();
+        Depcrate_compressround3_step4!();
+        Depcrate_compressround4_step4!();
+        Depcrate_compressfull_round1_step_load4!();
+        Depcrate_compressround1_step4!();
+        Depcrate_compressfull_round1_step_expand4!();
+        Depcrate_compressfull_round2_step4!();
+        Depcrate_compressfull_round3_step4!();
+        Depcrate_compressfull_round4_step4!();
+        Depcrate_compressround1_step_bw4!();
+        Depcrate_compressround2_step_bw4!();
+        Depcrate_compressround3_step_bw4!();
+        Depcrate_compressround4_step_bw4!();
+        Depcrate_compressadd_assign!();
+        Depcrate_compresscompression_w!();
+        Depcrate_compresscompression_states!();
+        Depcrate_compressrecompress_fast_58!();
+        Depcrate_compressrecompress_fast_65!();
+        Depcrate_compressrecompression_step!();
+        Depcrate_compressxor!();
+        Depcrate_compresscompress!();
+        Depcrate_compressSHA1_PADDING!();
+        Depcrate_compressfinalize!();
+    };
+}

@@ -1,0 +1,48 @@
+// Generated module macro for crate
+macro_rules! Modcrate {
+() => {
+        Depcrateuse_1!();
+        Depcratemacro_2!();
+        Depcrateuse_3!();
+        Depcrateuse_4!();
+        Depcrateuse_5!();
+        Depcrateuse_6!();
+        Depcrateuse_7!();
+        Depcrateuse_8!();
+        Depcrateuse_9!();
+        Depcrateuse_10!();
+        Depcrateuse_11!();
+        Depcrateother_12!();
+        DepcrateOSStatus!();
+        DepcrateByte!();
+        DepcrateBoolean!();
+        DepcrateConstStr255Param!();
+        DepcrateConstStringPtr!();
+        DepcrateFourCharCode!();
+        DepcrateLangCode!();
+        DepcrateOSType!();
+        DepcrateRegionCode!();
+        DepcrateResType!();
+        DepcrateStringPtr!();
+        DepcrateUniChar!();
+        DepcrateUTF32Char!();
+        DepcrateByteCount!();
+        DepcrateOSErr!();
+        DepcrateGLbitfield!();
+        DepcrateGLboolean!();
+        DepcrateGLenum!();
+        DepcrateGLfloat!();
+        DepcrateGLint!();
+        DepcrateGLsizei!();
+        DepcrateGLuint!();
+        DepcrateURefCon!();
+        DepcrateSRefCon!();
+        DepcrateURefCon!();
+        DepcrateSRefCon!();
+        Depcrateos_activity_id_t!();
+        Depcrateos_signpost_id_t!();
+        Depcratecheck_method!();
+        Depcratecheck_static_nonnull!();
+        Depcratesmoke_test_encoding!();
+    };
+}

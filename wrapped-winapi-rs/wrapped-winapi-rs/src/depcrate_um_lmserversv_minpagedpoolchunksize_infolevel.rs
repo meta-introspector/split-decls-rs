@@ -1,0 +1,9 @@
+// Generated macro for SV_MINPAGEDPOOLCHUNKSIZE_INFOLEVEL (const)
+macro_rules! Depcrate_um_lmserverSV_MINPAGEDPOOLCHUNKSIZE_INFOLEVEL {
+() => {
+// Module: crate::um::lmserver
+// Provides: {"SV_MINPAGEDPOOLCHUNKSIZE_INFOLEVEL"}
+// Dependencies: {}
+pub const SV_MINPAGEDPOOLCHUNKSIZE_INFOLEVEL : DWORD = PARMNUM_BASE_INFOLEVEL + SV_MINPAGEDPOOLCHUNKSIZE_PARMNUM ;
+};
+}

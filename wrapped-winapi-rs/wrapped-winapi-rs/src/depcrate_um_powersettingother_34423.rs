@@ -1,0 +1,9 @@
+// Generated macro for other_34423 (other)
+macro_rules! Depcrate_um_powersettingother_34423 {
+() => {
+// Module: crate::um::powersetting
+// Provides: {"other_34423"}
+// Dependencies: {}
+extern "system" { pub fn PowerReadACValue (RootPowerKey : HKEY , SchemeGuid : * const GUID , SubGroupOfPowerSettingsGuid : * const GUID , PowerSettingGuid : * const GUID , Type : PULONG , Buffer : LPBYTE , BufferSize : LPDWORD ,) -> DWORD ; pub fn PowerReadDCValue (RootPowerKey : HKEY , SchemeGuid : * const GUID , SubGroupOfPowerSettingsGuid : * const GUID , PowerSettingGuid : * const GUID , Type : PULONG , Buffer : PUCHAR , BufferSize : LPDWORD ,) -> DWORD ; pub fn PowerWriteACValueIndex (RootPowerKey : HKEY , SchemeGuid : * const GUID , SubGroupOfPowerSettingsGuid : * const GUID , PowerSettingGuid : * const GUID , AcValueIndex : DWORD ,) -> DWORD ; pub fn PowerWriteDCValueIndex (RootPowerKey : HKEY , SchemeGuid : * const GUID , SubGroupOfPowerSettingsGuid : * const GUID , PowerSettingGuid : * const GUID , DcValueIndex : DWORD ,) -> DWORD ; pub fn PowerGetActiveScheme (UserRootPowerKey : HKEY , ActivePolicyGuid : * mut * mut GUID ,) -> DWORD ; pub fn PowerSetActiveScheme (UserRootPowerKey : HKEY , SchemeGuid : * const GUID ,) -> DWORD ; pub fn PowerSettingRegisterNotification (SettingGuid : LPCGUID , Flags : DWORD , Recipient : HANDLE , RegistrationHandle : PHPOWERNOTIFY ,) -> DWORD ; pub fn PowerSettingUnregisterNotification (RegistrationHandle : HPOWERNOTIFY ,) -> DWORD ; }
+};
+}

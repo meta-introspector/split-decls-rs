@@ -1,0 +1,9 @@
+// Generated macro for extract_trait_constraints_from_source (function)
+macro_rules! Depcrate_expandextract_trait_constraints_from_source {
+() => {
+// Module: crate::expand
+// Provides: {"extract_trait_constraints_from_source"}
+// Dependencies: {}
+# [doc = " Map each declared generic type parameter to the set of all trait boundaries declared on it."] # [doc = ""] # [doc = " These boundaries may come from the declaration site:"] # [doc = "     pub enum E<T: MyTrait> { ... }"] # [doc = " or a `where` clause after the parameter declarations:"] # [doc = "     pub enum E<T> where T: MyTrait { ... }"] # [doc = " This method will return the boundaries from both of those cases."] fn extract_trait_constraints_from_source (where_clause : & WhereClause , type_params : & [& TypeParam] ,) -> BTreeMap < Ident , Vec < TraitBound > > { let mut param_constraint_mapping : BTreeMap < Ident , Vec < TraitBound > > = type_params . iter () . map (| type_param | { let trait_bounds : Vec < TraitBound > = type_param . bounds . iter () . flat_map (| bound | match bound { TypeParamBound :: Trait (trait_bound) => Some (trait_bound) , _ => None , }) . cloned () . collect () ; (type_param . ident . clone () , trait_bounds) }) . collect () ; for predicate in where_clause . predicates . iter () { if let WherePredicate :: Type (ref pred_ty) = predicate { let ident = match & pred_ty . bounded_ty { Type :: Path (TypePath { path , qself : None }) => match path . get_ident () { None => continue , Some (ident) => ident , } , _ => continue , } ; if let Some ((_ , ref mut known_bounds)) = param_constraint_mapping . iter_mut () . find (| (id , _) | * id == ident) { for bound in pred_ty . bounds . iter () { if let TypeParamBound :: Trait (ref bound) = bound { known_bounds . push (bound . clone ()) ; } } } } } param_constraint_mapping }
+};
+}

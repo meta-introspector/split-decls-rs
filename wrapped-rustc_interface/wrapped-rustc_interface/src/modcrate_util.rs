@@ -1,0 +1,47 @@
+// Generated module macro for crate::util
+macro_rules! Modcrate_util {
+() => {
+        Depcrate_utiluse_178!();
+        Depcrate_utiluse_179!();
+        Depcrate_utiluse_180!();
+        Depcrate_utiluse_181!();
+        Depcrate_utiluse_182!();
+        Depcrate_utiluse_183!();
+        Depcrate_utiluse_184!();
+        Depcrate_utiluse_185!();
+        Depcrate_utiluse_186!();
+        Depcrate_utiluse_187!();
+        Depcrate_utiluse_188!();
+        Depcrate_utiluse_189!();
+        Depcrate_utiluse_190!();
+        Depcrate_utiluse_191!();
+        Depcrate_utiluse_192!();
+        Depcrate_utiluse_193!();
+        Depcrate_utiluse_194!();
+        Depcrate_utiluse_195!();
+        Depcrate_utiluse_196!();
+        Depcrate_utiluse_197!();
+        Depcrate_utiluse_198!();
+        Depcrate_utiluse_199!();
+        Depcrate_utiluse_200!();
+        Depcrate_utiluse_201!();
+        Depcrate_utiluse_202!();
+        Depcrate_utilMakeBackendFn!();
+        Depcrate_utiladd_configuration!();
+        Depcrate_utilcheck_abi_required_features!();
+        Depcrate_utilSTACK_SIZE!();
+        Depcrate_utilDEFAULT_STACK_SIZE!();
+        Depcrate_utilinit_stack_size!();
+        Depcrate_utilrun_in_thread_with_globals!();
+        Depcrate_utilrun_in_thread_pool_with_globals!();
+        Depcrate_utilload_backend_from_dylib!();
+        Depcrate_utilget_codegen_backend!();
+        Depcrate_utilrustc_path!();
+        Depcrate_utilget_codegen_sysroot!();
+        Depcrate_utilcheck_attr_crate_type!();
+        Depcrate_utilmultiple_output_types_to_stdout!();
+        Depcrate_utilbuild_output_filenames!();
+        Depcrate_utilother_218!();
+        Depcrate_utilrustc_version_str!();
+    };
+}

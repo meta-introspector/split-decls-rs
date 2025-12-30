@@ -1,0 +1,40 @@
+// Generated module macro for crate::authorization
+macro_rules! Modcrate_authorization {
+() => {
+        Depcrate_authorizationuse_31!();
+        Depcrate_authorizationuse_32!();
+        Depcrate_authorizationuse_33!();
+        Depcrate_authorizationuse_34!();
+        Depcrate_authorizationuse_35!();
+        Depcrate_authorizationuse_36!();
+        Depcrate_authorizationuse_37!();
+        Depcrate_authorizationuse_38!();
+        Depcrate_authorizationuse_39!();
+        Depcrate_authorizationuse_40!();
+        Depcrate_authorizationuse_41!();
+        Depcrate_authorizationuse_42!();
+        Depcrate_authorizationuse_43!();
+        Depcrate_authorizationuse_44!();
+        Depcrate_authorizationuse_45!();
+        Depcrate_authorizationuse_46!();
+        Depcrate_authorizationuse_47!();
+        Depcrate_authorizationoptional_str_to_cfref!();
+        Depcrate_authorizationcstring_or_err!();
+        Depcrate_authorizationmacro_50!();
+        Depcrate_authorizationimpl_51!();
+        Depcrate_authorizationAuthorizationItem!();
+        Depcrate_authorizationimpl_53!();
+        Depcrate_authorizationAuthorizationItemSet!();
+        Depcrate_authorizationimpl_55!();
+        Depcrate_authorizationAuthorizationItemSetStorage!();
+        Depcrate_authorizationimpl_57!();
+        Depcrate_authorizationAuthorizationItemSetBuilder!();
+        Depcrate_authorizationimpl_59!();
+        Depcrate_authorizationRightDefinition!();
+        Depcrate_authorizationAuthorization!();
+        Depcrate_authorizationimpl_62!();
+        Depcrate_authorizationimpl_63!();
+        Depcrate_authorizationimpl_64!();
+        Depcrate_authorizationtests!();
+    };
+}

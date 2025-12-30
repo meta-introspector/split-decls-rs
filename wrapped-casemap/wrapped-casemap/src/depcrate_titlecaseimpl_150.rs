@@ -1,0 +1,9 @@
+// Generated macro for impl_150 (impl)
+macro_rules! Depcrate_titlecaseimpl_150 {
+() => {
+// Module: crate::titlecase
+// Provides: {"impl_150"}
+// Dependencies: {}
+impl < CM : AsRef < CaseMapper > > TitlecaseMapper < CM > { icu_provider :: gen_buffer_data_constructors ! ((casemapper : CM) -> error : DataError , functions : [new_with_mapper : skip , try_new_with_mapper_with_buffer_provider , try_new_with_mapper_unstable , Self ,]) ; # [doc = " A constructor which creates a [`TitlecaseMapper`] from an existing [`CaseMapper`]"] # [doc = " (either owned or as a reference) and compiled data"] # [doc = ""] # [doc = " ✨ *Enabled with the `compiled_data` Cargo feature.*"] # [doc = ""] # [doc = " [📚 Help choosing a constructor](icu_provider::constructors)"] # [cfg (feature = "compiled_data")] pub const fn new_with_mapper (casemapper : CM) -> Self { Self { cm : casemapper , gc : icu_properties :: CodePointMapData :: < icu_properties :: props :: GeneralCategory > :: new () . static_to_owned () , } } # [doc = " Construct this object to wrap an existing CaseMapper (or a reference to one), loading additional data as needed."] # [doc = icu_provider :: gen_buffer_unstable_docs ! (UNSTABLE , Self :: new_with_mapper)] pub fn try_new_with_mapper_unstable < P > (provider : & P , casemapper : CM) -> Result < Self , DataError > where P : DataProvider < CaseMapV1 > + DataProvider < PropertyEnumGeneralCategoryV1 > + ? Sized , { let gc = icu_properties :: CodePointMapData :: < icu_properties :: props :: GeneralCategory > :: try_new_unstable (provider) ? ; Ok (Self { cm : casemapper , gc }) } # [doc = " Constructs a borrowed version of this type for more efficient querying."] pub fn as_borrowed (& self) -> TitlecaseMapperBorrowed < '_ > { TitlecaseMapperBorrowed { cm : self . cm . as_ref () . as_borrowed () , gc : self . gc . as_borrowed () , } } }
+};
+}

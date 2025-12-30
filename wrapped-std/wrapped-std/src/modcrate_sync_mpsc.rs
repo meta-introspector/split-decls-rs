@@ -1,0 +1,54 @@
+// Generated module macro for crate::sync::mpsc
+macro_rules! Modcrate_sync_mpsc {
+() => {
+        Depcrate_sync_mpscuse_3223!();
+        Depcrate_sync_mpscuse_3224!();
+        Depcrate_sync_mpscuse_3225!();
+        Depcrate_sync_mpscReceiver!();
+        Depcrate_sync_mpscimpl_3227!();
+        Depcrate_sync_mpscimpl_3228!();
+        Depcrate_sync_mpscIter!();
+        Depcrate_sync_mpscTryIter!();
+        Depcrate_sync_mpscIntoIter!();
+        Depcrate_sync_mpscSender!();
+        Depcrate_sync_mpscimpl_3233!();
+        Depcrate_sync_mpscimpl_3234!();
+        Depcrate_sync_mpscSyncSender!();
+        Depcrate_sync_mpscimpl_3236!();
+        Depcrate_sync_mpscSendError!();
+        Depcrate_sync_mpscRecvError!();
+        Depcrate_sync_mpscTryRecvError!();
+        Depcrate_sync_mpscRecvTimeoutError!();
+        Depcrate_sync_mpscTrySendError!();
+        Depcrate_sync_mpscchannel!();
+        Depcrate_sync_mpscsync_channel!();
+        Depcrate_sync_mpscimpl_3244!();
+        Depcrate_sync_mpscimpl_3245!();
+        Depcrate_sync_mpscimpl_3246!();
+        Depcrate_sync_mpscimpl_3247!();
+        Depcrate_sync_mpscimpl_3248!();
+        Depcrate_sync_mpscimpl_3249!();
+        Depcrate_sync_mpscimpl_3250!();
+        Depcrate_sync_mpscimpl_3251!();
+        Depcrate_sync_mpscimpl_3252!();
+        Depcrate_sync_mpscimpl_3253!();
+        Depcrate_sync_mpscimpl_3254!();
+        Depcrate_sync_mpscimpl_3255!();
+        Depcrate_sync_mpscimpl_3256!();
+        Depcrate_sync_mpscimpl_3257!();
+        Depcrate_sync_mpscimpl_3258!();
+        Depcrate_sync_mpscimpl_3259!();
+        Depcrate_sync_mpscimpl_3260!();
+        Depcrate_sync_mpscimpl_3261!();
+        Depcrate_sync_mpscimpl_3262!();
+        Depcrate_sync_mpscimpl_3263!();
+        Depcrate_sync_mpscimpl_3264!();
+        Depcrate_sync_mpscimpl_3265!();
+        Depcrate_sync_mpscimpl_3266!();
+        Depcrate_sync_mpscimpl_3267!();
+        Depcrate_sync_mpscimpl_3268!();
+        Depcrate_sync_mpscimpl_3269!();
+        Depcrate_sync_mpscimpl_3270!();
+        Depcrate_sync_mpscimpl_3271!();
+    };
+}

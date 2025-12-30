@@ -1,0 +1,53 @@
+// Generated module macro for crate::xml_parser
+macro_rules! Modcrate_xml_parser {
+() => {
+        Depcrate_xml_parseruse_927!();
+        Depcrate_xml_parseruse_928!();
+        Depcrate_xml_parseruse_929!();
+        Depcrate_xml_parseruse_930!();
+        Depcrate_xml_parseruse_931!();
+        Depcrate_xml_parseruse_932!();
+        Depcrate_xml_parseruse_933!();
+        Depcrate_xml_parser__CFXMLParser!();
+        Depcrate_xml_parserCFXMLParserRef!();
+        Depcrate_xml_parserCFXMLParserOptions!();
+        Depcrate_xml_parserkCFXMLParserValidateDocument!();
+        Depcrate_xml_parserkCFXMLParserSkipMetaData!();
+        Depcrate_xml_parserkCFXMLParserReplacePhysicalEntities!();
+        Depcrate_xml_parserkCFXMLParserSkipWhitespace!();
+        Depcrate_xml_parserkCFXMLParserResolveExternalEntities!();
+        Depcrate_xml_parserkCFXMLParserAddImpliedAttributes!();
+        Depcrate_xml_parserkCFXMLParserAllOptions!();
+        Depcrate_xml_parserkCFXMLParserNoOptions!();
+        Depcrate_xml_parserCFXMLParserStatusCode!();
+        Depcrate_xml_parserkCFXMLStatusParseNotBegun!();
+        Depcrate_xml_parserkCFXMLStatusParseInProgress!();
+        Depcrate_xml_parserkCFXMLStatusParseSuccessful!();
+        Depcrate_xml_parserkCFXMLErrorUnexpectedEOF!();
+        Depcrate_xml_parserkCFXMLErrorUnknownEncoding!();
+        Depcrate_xml_parserkCFXMLErrorEncodingConversionFailure!();
+        Depcrate_xml_parserkCFXMLErrorMalformedProcessingInstruction!();
+        Depcrate_xml_parserkCFXMLErrorMalformedDTD!();
+        Depcrate_xml_parserkCFXMLErrorMalformedName!();
+        Depcrate_xml_parserkCFXMLErrorMalformedCDSect!();
+        Depcrate_xml_parserkCFXMLErrorMalformedCloseTag!();
+        Depcrate_xml_parserkCFXMLErrorMalformedStartTag!();
+        Depcrate_xml_parserkCFXMLErrorMalformedDocument!();
+        Depcrate_xml_parserkCFXMLErrorElementlessDocument!();
+        Depcrate_xml_parserkCFXMLErrorMalformedComment!();
+        Depcrate_xml_parserkCFXMLErrorMalformedCharacterReference!();
+        Depcrate_xml_parserkCFXMLErrorMalformedParsedCharacterData!();
+        Depcrate_xml_parserkCFXMLErrorNoData!();
+        Depcrate_xml_parserCFXMLParserCreateXMLStructureCallBack!();
+        Depcrate_xml_parserCFXMLParserAddChildCallBack!();
+        Depcrate_xml_parserCFXMLParserEndXMLStructureCallBack!();
+        Depcrate_xml_parserCFXMLParserResolveExternalEntityCallBack!();
+        Depcrate_xml_parserCFXMLParserHandleErrorCallBack!();
+        Depcrate_xml_parserCFXMLParserCallBacks!();
+        Depcrate_xml_parserCFXMLParserRetainCallBack!();
+        Depcrate_xml_parserCFXMLParserReleaseCallBack!();
+        Depcrate_xml_parserCFXMLParserCopyDescriptionCallBack!();
+        Depcrate_xml_parserCFXMLParserContext!();
+        Depcrate_xml_parserother_974!();
+    };
+}

@@ -1,0 +1,9 @@
+// Generated macro for shiftr (module)
+macro_rules! Depcrate_stm32f413_rtcshiftr {
+() => {
+// Module: crate::stm32f413::rtc
+// Provides: {"shiftr"}
+// Dependencies: {}
+# [doc = "shift control register"] pub mod shiftr ;
+};
+}

@@ -1,0 +1,54 @@
+// Generated module macro for crate::strategy::shuffle
+macro_rules! Modcrate_strategy_shuffle {
+() => {
+        Depcrate_strategy_shuffleuse_916!();
+        Depcrate_strategy_shuffleuse_917!();
+        Depcrate_strategy_shuffleuse_918!();
+        Depcrate_strategy_shuffleuse_919!();
+        Depcrate_strategy_shuffleuse_920!();
+        Depcrate_strategy_shuffleShuffle!();
+        Depcrate_strategy_shuffleShuffleable!();
+        Depcrate_strategy_shuffleshuffleable!();
+        Depcrate_strategy_shufflemacro_924!();
+        Depcrate_strategy_shufflemacro_925!();
+        Depcrate_strategy_shufflemacro_926!();
+        Depcrate_strategy_shufflemacro_927!();
+        Depcrate_strategy_shufflemacro_928!();
+        Depcrate_strategy_shufflemacro_929!();
+        Depcrate_strategy_shufflemacro_930!();
+        Depcrate_strategy_shufflemacro_931!();
+        Depcrate_strategy_shufflemacro_932!();
+        Depcrate_strategy_shufflemacro_933!();
+        Depcrate_strategy_shufflemacro_934!();
+        Depcrate_strategy_shufflemacro_935!();
+        Depcrate_strategy_shufflemacro_936!();
+        Depcrate_strategy_shufflemacro_937!();
+        Depcrate_strategy_shufflemacro_938!();
+        Depcrate_strategy_shufflemacro_939!();
+        Depcrate_strategy_shufflemacro_940!();
+        Depcrate_strategy_shufflemacro_941!();
+        Depcrate_strategy_shufflemacro_942!();
+        Depcrate_strategy_shufflemacro_943!();
+        Depcrate_strategy_shufflemacro_944!();
+        Depcrate_strategy_shufflemacro_945!();
+        Depcrate_strategy_shufflemacro_946!();
+        Depcrate_strategy_shufflemacro_947!();
+        Depcrate_strategy_shufflemacro_948!();
+        Depcrate_strategy_shufflemacro_949!();
+        Depcrate_strategy_shufflemacro_950!();
+        Depcrate_strategy_shufflemacro_951!();
+        Depcrate_strategy_shufflemacro_952!();
+        Depcrate_strategy_shufflemacro_953!();
+        Depcrate_strategy_shufflemacro_954!();
+        Depcrate_strategy_shufflemacro_955!();
+        Depcrate_strategy_shufflemacro_956!();
+        Depcrate_strategy_shufflemacro_957!();
+        Depcrate_strategy_shufflemacro_958!();
+        Depcrate_strategy_shufflemacro_959!();
+        Depcrate_strategy_shuffleimpl_960!();
+        Depcrate_strategy_shuffleShuffleValueTree!();
+        Depcrate_strategy_shuffleimpl_962!();
+        Depcrate_strategy_shuffleimpl_963!();
+        Depcrate_strategy_shuffletest!();
+    };
+}

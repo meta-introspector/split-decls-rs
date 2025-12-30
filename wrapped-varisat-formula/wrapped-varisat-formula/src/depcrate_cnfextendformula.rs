@@ -1,0 +1,9 @@
+// Generated macro for ExtendFormula (trait)
+macro_rules! Depcrate_cnfExtendFormula {
+() => {
+// Module: crate::cnf
+// Provides: {"ExtendFormula"}
+// Dependencies: {}
+# [doc = " Extend a formula with new variables and clauses."] pub trait ExtendFormula : Sized { # [doc = " Appends a clause to the formula."] fn add_clause (& mut self , literals : & [Lit]) ; # [doc = " Add a new variable to the formula and return it."] fn new_var (& mut self) -> Var ; # [doc = " Add a new variable to the formula and return it as positive literal."] fn new_lit (& mut self) -> Lit { self . new_var () . positive () } # [doc = " Iterator over multiple new variables."] fn new_var_iter (& mut self , count : usize) -> NewVarIter < Self > { NewVarIter { formula : self , vars_left : count , phantom : std :: marker :: PhantomData , } } # [doc = " Iterator over multiple new literals."] fn new_lit_iter (& mut self , count : usize) -> NewVarIter < Self , Lit > { NewVarIter { formula : self , vars_left : count , phantom : std :: marker :: PhantomData , } } # [doc = " Add multiple new variables and return them."] # [doc = ""] # [doc = " Returns a uniform tuple of variables. The number of variables is inferred, so it can be used"] # [doc = " like `let (x, y, z) = formula.new_vars()`."] fn new_vars < Vars : UniformTuple < Var > > (& mut self) -> Vars { Vars :: tuple_from_iter (self . new_var_iter (Vars :: tuple_len ())) } # [doc = " Add multiple new variables and return them as positive literals."] # [doc = ""] # [doc = " Returns a uniform tuple of variables. The number of variables is inferred, so it can be used"] # [doc = " like `let (x, y, z) = formula.new_lits()`."] fn new_lits < Lits : UniformTuple < Lit > > (& mut self) -> Lits { Lits :: tuple_from_iter (self . new_lit_iter (Lits :: tuple_len ())) } }
+};
+}

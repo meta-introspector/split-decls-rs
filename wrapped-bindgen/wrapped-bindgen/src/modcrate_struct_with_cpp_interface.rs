@@ -1,0 +1,44 @@
+// Generated module macro for crate::struct_with_cpp_interface
+macro_rules! Modcrate_struct_with_cpp_interface {
+() => {
+        Depcrate_struct_with_cpp_interfaceD3D12_RESOURCE_UAV_BARRIER!();
+        Depcrate_struct_with_cpp_interfacemacro_694!();
+        Depcrate_struct_with_cpp_interfaceimpl_695!();
+        Depcrate_struct_with_cpp_interfacemacro_696!();
+        Depcrate_struct_with_cpp_interfaceimpl_697!();
+        Depcrate_struct_with_cpp_interfaceID3D12DeviceChild_Vtbl!();
+        Depcrate_struct_with_cpp_interfaceimpl_699!();
+        Depcrate_struct_with_cpp_interfaceimpl_700!();
+        Depcrate_struct_with_cpp_interfaceID3D12DeviceChild_Impl!();
+        Depcrate_struct_with_cpp_interfaceimpl_702!();
+        Depcrate_struct_with_cpp_interfaceimpl_703!();
+        Depcrate_struct_with_cpp_interfacemacro_704!();
+        Depcrate_struct_with_cpp_interfacemacro_705!();
+        Depcrate_struct_with_cpp_interfaceimpl_706!();
+        Depcrate_struct_with_cpp_interfaceID3D12Object_Vtbl!();
+        Depcrate_struct_with_cpp_interfaceimpl_708!();
+        Depcrate_struct_with_cpp_interfaceimpl_709!();
+        Depcrate_struct_with_cpp_interfaceID3D12Object_Impl!();
+        Depcrate_struct_with_cpp_interfaceimpl_711!();
+        Depcrate_struct_with_cpp_interfaceimpl_712!();
+        Depcrate_struct_with_cpp_interfacemacro_713!();
+        Depcrate_struct_with_cpp_interfaceimpl_714!();
+        Depcrate_struct_with_cpp_interfacemacro_715!();
+        Depcrate_struct_with_cpp_interfaceID3D12Pageable_Vtbl!();
+        Depcrate_struct_with_cpp_interfaceimpl_717!();
+        Depcrate_struct_with_cpp_interfaceimpl_718!();
+        Depcrate_struct_with_cpp_interfaceID3D12Pageable_Impl!();
+        Depcrate_struct_with_cpp_interfaceimpl_720!();
+        Depcrate_struct_with_cpp_interfaceimpl_721!();
+        Depcrate_struct_with_cpp_interfacemacro_722!();
+        Depcrate_struct_with_cpp_interfaceimpl_723!();
+        Depcrate_struct_with_cpp_interfacemacro_724!();
+        Depcrate_struct_with_cpp_interfaceimpl_725!();
+        Depcrate_struct_with_cpp_interfaceID3D12Resource_Vtbl!();
+        Depcrate_struct_with_cpp_interfaceimpl_727!();
+        Depcrate_struct_with_cpp_interfaceimpl_728!();
+        Depcrate_struct_with_cpp_interfaceID3D12Resource_Impl!();
+        Depcrate_struct_with_cpp_interfaceimpl_730!();
+        Depcrate_struct_with_cpp_interfaceimpl_731!();
+    };
+}

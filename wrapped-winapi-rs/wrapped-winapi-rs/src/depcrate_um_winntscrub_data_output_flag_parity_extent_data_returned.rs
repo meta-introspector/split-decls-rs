@@ -1,0 +1,9 @@
+// Generated macro for SCRUB_DATA_OUTPUT_FLAG_PARITY_EXTENT_DATA_RETURNED (const)
+macro_rules! Depcrate_um_winntSCRUB_DATA_OUTPUT_FLAG_PARITY_EXTENT_DATA_RETURNED {
+() => {
+// Module: crate::um::winnt
+// Provides: {"SCRUB_DATA_OUTPUT_FLAG_PARITY_EXTENT_DATA_RETURNED"}
+// Dependencies: {}
+pub const SCRUB_DATA_OUTPUT_FLAG_PARITY_EXTENT_DATA_RETURNED : DWORD = 0x00020000 ;
+};
+}

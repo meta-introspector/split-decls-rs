@@ -1,0 +1,55 @@
+// Generated module macro for crate::filters::fs
+macro_rules! Modcrate_filters_fs {
+() => {
+        Depcrate_filters_fsuse_356!();
+        Depcrate_filters_fsuse_357!();
+        Depcrate_filters_fsuse_358!();
+        Depcrate_filters_fsuse_359!();
+        Depcrate_filters_fsuse_360!();
+        Depcrate_filters_fsuse_361!();
+        Depcrate_filters_fsuse_362!();
+        Depcrate_filters_fsuse_363!();
+        Depcrate_filters_fsuse_364!();
+        Depcrate_filters_fsuse_365!();
+        Depcrate_filters_fsuse_366!();
+        Depcrate_filters_fsuse_367!();
+        Depcrate_filters_fsuse_368!();
+        Depcrate_filters_fsuse_369!();
+        Depcrate_filters_fsuse_370!();
+        Depcrate_filters_fsuse_371!();
+        Depcrate_filters_fsuse_372!();
+        Depcrate_filters_fsuse_373!();
+        Depcrate_filters_fsuse_374!();
+        Depcrate_filters_fsuse_375!();
+        Depcrate_filters_fsuse_376!();
+        Depcrate_filters_fsuse_377!();
+        Depcrate_filters_fsuse_378!();
+        Depcrate_filters_fsfile!();
+        Depcrate_filters_fsdir!();
+        Depcrate_filters_fspath_from_tail!();
+        Depcrate_filters_fssanitize_path!();
+        Depcrate_filters_fsConditionals!();
+        Depcrate_filters_fsCond!();
+        Depcrate_filters_fsimpl_385!();
+        Depcrate_filters_fsconditionals!();
+        Depcrate_filters_fsFile!();
+        Depcrate_filters_fsimpl_388!();
+        Depcrate_filters_fsArcPath!();
+        Depcrate_filters_fsimpl_390!();
+        Depcrate_filters_fsimpl_391!();
+        Depcrate_filters_fsfile_reply!();
+        Depcrate_filters_fsfile_metadata!();
+        Depcrate_filters_fsfile_conditional!();
+        Depcrate_filters_fsBadRange!();
+        Depcrate_filters_fsbytes_range!();
+        Depcrate_filters_fsfile_stream!();
+        Depcrate_filters_fsreserve_at_least!();
+        Depcrate_filters_fsDEFAULT_READ_BUF_SIZE!();
+        Depcrate_filters_fsoptimal_buf_size!();
+        Depcrate_filters_fsget_block_size!();
+        Depcrate_filters_fsget_block_size!();
+        Depcrate_filters_fsmacro_403!();
+        Depcrate_filters_fsmacro_404!();
+        Depcrate_filters_fstests!();
+    };
+}

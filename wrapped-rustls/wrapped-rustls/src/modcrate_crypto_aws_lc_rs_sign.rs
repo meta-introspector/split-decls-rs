@@ -1,0 +1,42 @@
+// Generated module macro for crate::crypto::aws_lc_rs::sign
+macro_rules! Modcrate_crypto_aws_lc_rs_sign {
+() => {
+        Depcrate_crypto_aws_lc_rs_signuse_1132!();
+        Depcrate_crypto_aws_lc_rs_signuse_1133!();
+        Depcrate_crypto_aws_lc_rs_signuse_1134!();
+        Depcrate_crypto_aws_lc_rs_signuse_1135!();
+        Depcrate_crypto_aws_lc_rs_signuse_1136!();
+        Depcrate_crypto_aws_lc_rs_signuse_1137!();
+        Depcrate_crypto_aws_lc_rs_signuse_1138!();
+        Depcrate_crypto_aws_lc_rs_signuse_1139!();
+        Depcrate_crypto_aws_lc_rs_signuse_1140!();
+        Depcrate_crypto_aws_lc_rs_signuse_1141!();
+        Depcrate_crypto_aws_lc_rs_signuse_1142!();
+        Depcrate_crypto_aws_lc_rs_signuse_1143!();
+        Depcrate_crypto_aws_lc_rs_signuse_1144!();
+        Depcrate_crypto_aws_lc_rs_signRsaSigningKey!();
+        Depcrate_crypto_aws_lc_rs_signimpl_1146!();
+        Depcrate_crypto_aws_lc_rs_signimpl_1147!();
+        Depcrate_crypto_aws_lc_rs_signimpl_1148!();
+        Depcrate_crypto_aws_lc_rs_signimpl_1149!();
+        Depcrate_crypto_aws_lc_rs_signRsaSigner!();
+        Depcrate_crypto_aws_lc_rs_signimpl_1151!();
+        Depcrate_crypto_aws_lc_rs_signimpl_1152!();
+        Depcrate_crypto_aws_lc_rs_signimpl_1153!();
+        Depcrate_crypto_aws_lc_rs_signEcdsaSigner!();
+        Depcrate_crypto_aws_lc_rs_signimpl_1155!();
+        Depcrate_crypto_aws_lc_rs_signimpl_1156!();
+        Depcrate_crypto_aws_lc_rs_signimpl_1157!();
+        Depcrate_crypto_aws_lc_rs_signimpl_1158!();
+        Depcrate_crypto_aws_lc_rs_signimpl_1159!();
+        Depcrate_crypto_aws_lc_rs_signEd25519Signer!();
+        Depcrate_crypto_aws_lc_rs_signimpl_1161!();
+        Depcrate_crypto_aws_lc_rs_signimpl_1162!();
+        Depcrate_crypto_aws_lc_rs_signimpl_1163!();
+        Depcrate_crypto_aws_lc_rs_signimpl_1164!();
+        Depcrate_crypto_aws_lc_rs_signimpl_1165!();
+        Depcrate_crypto_aws_lc_rs_signload_key!();
+        Depcrate_crypto_aws_lc_rs_signtests!();
+        Depcrate_crypto_aws_lc_rs_signbenchmarks!();
+    };
+}

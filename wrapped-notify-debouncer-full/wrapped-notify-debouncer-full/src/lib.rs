@@ -1,0 +1,71 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcrate_cacheimpl_12.rs");
+include!("depcrate_testingimpl_32.rs");
+include!("depcrateimpl_54.rs");
+include!("depcrate_cachefileidmap.rs");
+include!("depcrate_cacheuse_3.rs");
+include!("depcrate_cacheuse_5.rs");
+include!("depcrate_cacheimpl_9.rs");
+include!("depcrate_testinguse_21.rs");
+include!("depcrate_timebuild.rs");
+include!("depcrateuse_36.rs");
+include!("depcrate_testinguse_22.rs");
+include!("depcrate_testinguse_24.rs");
+include!("depcrate_cachefileidcache.rs");
+include!("depcratecache.rs");
+include!("depcrateimpl_43.rs");
+include!("depcratetime.rs");
+include!("depcrate_timeuse_18.rs");
+include!("depcrate_cacheuse_2.rs");
+include!("depcrate_testingschema.rs");
+include!("depcrateuse_40.rs");
+include!("depcrateimpl_45.rs");
+include!("depcrateimpl_44.rs");
+include!("depcrateuse_34.rs");
+include!("depcrate_testingimpl_31.rs");
+include!("depcrate_testingimpl_28.rs");
+include!("depcrate_timeuse_16.rs");
+include!("depcratenew_debouncer.rs");
+include!("depcratedebounceeventhandler.rs");
+include!("depcrateimpl_49.rs");
+include!("depcratesort_events.rs");
+include!("depcrate_timetest.rs");
+include!("depcrate_testinguse_23.rs");
+include!("depcratenew_debouncer_opt.rs");
+include!("depcratetesting.rs");
+include!("depcrateuse_35.rs");
+include!("depcrate_testingtestcache.rs");
+include!("depcrate_testinguse_25.rs");
+include!("depcrate_testingimpl_29.rs");
+include!("depcratedebouncer.rs");
+include!("depcrateimpl_51.rs");
+include!("depcrateimpl_42.rs");
+include!("depcrateuse_33.rs");
+include!("depcratedebouncedata.rs");
+include!("depcrate_cacheuse_4.rs");
+include!("depcrateuse_38.rs");
+include!("depcrate_cacheimpl_8.rs");
+include!("depcrate_cacheimpl_11.rs");
+include!("depcrate_cacherecommendedcache.rs");
+include!("depcratequeue.rs");
+include!("depcrateuse_37.rs");
+include!("depcrateimpl_53.rs");
+include!("depcratetests.rs");
+include!("depcrateuse_39.rs");
+include!("depcratedebouncedatainner.rs");
+include!("depcratedebounceeventresult.rs");
+include!("depcrate_cachenocache.rs");
+include!("depcrate_testingimpl_27.rs");
+include!("modcrate.rs");
+include!("modcrate_testing.rs");
+include!("modcrate_time.rs");
+include!("modcrate_cache.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate!();
+    Modcrate_testing!();
+    Modcrate_time!();
+    Modcrate_cache!();
+}

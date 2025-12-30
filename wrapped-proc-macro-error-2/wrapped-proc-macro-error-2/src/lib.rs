@@ -1,0 +1,72 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcrateuse_3.rs");
+include!("depcratesealed.rs");
+include!("depcrateabort_now.rs");
+include!("depcratemacro_54.rs");
+include!("depcratecheck_correctness.rs");
+include!("depcrate_diagnosticimpl_24.rs");
+include!("depcrate_dummyset_dummy.rs");
+include!("depcrateabortnow.rs");
+include!("depcrate_diagnosticuse_18.rs");
+include!("depcrateresultext.rs");
+include!("depcrate_macrosemit_call_site_error.rs");
+include!("depcratediagnostic.rs");
+include!("depcrate_dummycleanup.rs");
+include!("depcrateuse_2.rs");
+include!("depcrate_dummymacro_12.rs");
+include!("depcrate_macrosemit_warning.rs");
+include!("depcrate_dummyappend_dummy.rs");
+include!("depcrate_macrosabort.rs");
+include!("depcratespanrange.rs");
+include!("depcrate__export.rs");
+include!("depcrate_diagnosticimpl_30.rs");
+include!("depcrate_macros__pme__suggestions.rs");
+include!("depcrate_dummyuse_9.rs");
+include!("depcrateother_1.rs");
+include!("depcrate_sealedsealed.rs");
+include!("depcrate_dummyuse_10.rs");
+include!("depcrate_macrosabort_call_site.rs");
+include!("depcrateimpl_50.rs");
+include!("depcrateentry_point.rs");
+include!("depcrate_diagnosticuse_17.rs");
+include!("depcrate_diagnosticlevel.rs");
+include!("depcrateuse_4.rs");
+include!("depcrate_diagnosticdiagnosticext.rs");
+include!("depcrate_diagnosticimpl_25.rs");
+include!("depcrate_diagnosticuse_19.rs");
+include!("depcrate_diagnosticimpl_29.rs");
+include!("depcrate_macrosdiagnostic.rs");
+include!("depcrateuse_6.rs");
+include!("depcrateuse_5.rs");
+include!("depcrate_diagnosticimpl_26.rs");
+include!("depcrate_macrosemit_error.rs");
+include!("depcrate_diagnosticsuggestionkind.rs");
+include!("depcratedummy.rs");
+include!("depcrate_macrosemit_call_site_warning.rs");
+include!("depcratemacros.rs");
+include!("depcrate_dummyuse_11.rs");
+include!("depcrate_diagnosticimpl_27.rs");
+include!("depcrate_sealedimpl_42.rs");
+include!("depcrateimp.rs");
+include!("depcrate_diagnosticuse_20.rs");
+include!("depcrateimpl_46.rs");
+include!("depcrateoptionext.rs");
+include!("depcrateabort_if_dirty.rs");
+include!("depcrateimpl_51.rs");
+include!("depcrate_diagnosticdiagnostic.rs");
+include!("depcrateuse_7.rs");
+include!("modcrate_sealed.rs");
+include!("modcrate.rs");
+include!("modcrate_diagnostic.rs");
+include!("modcrate_dummy.rs");
+include!("modcrate_macros.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate_sealed!();
+    Modcrate!();
+    Modcrate_diagnostic!();
+    Modcrate_dummy!();
+    Modcrate_macros!();
+}

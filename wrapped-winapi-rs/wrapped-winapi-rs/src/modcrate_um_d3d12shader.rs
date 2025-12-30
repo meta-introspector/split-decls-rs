@@ -1,0 +1,51 @@
+// Generated module macro for crate::um::d3d12shader
+macro_rules! Modcrate_um_d3d12shader {
+() => {
+        Depcrate_um_d3d12shaderuse_26433!();
+        Depcrate_um_d3d12shaderuse_26434!();
+        Depcrate_um_d3d12shaderuse_26435!();
+        Depcrate_um_d3d12shaderuse_26436!();
+        Depcrate_um_d3d12shaderuse_26437!();
+        Depcrate_um_d3d12shadermacro_26438!();
+        Depcrate_um_d3d12shadermacro_26439!();
+        Depcrate_um_d3d12shadermacro_26440!();
+        Depcrate_um_d3d12shadermacro_26441!();
+        Depcrate_um_d3d12shadermacro_26442!();
+        Depcrate_um_d3d12shadermacro_26443!();
+        Depcrate_um_d3d12shadermacro_26444!();
+        Depcrate_um_d3d12shadermacro_26445!();
+        Depcrate_um_d3d12shadermacro_26446!();
+        Depcrate_um_d3d12shadermacro_26447!();
+        Depcrate_um_d3d12shadermacro_26448!();
+        Depcrate_um_d3d12shadermacro_26449!();
+        Depcrate_um_d3d12shadermacro_26450!();
+        Depcrate_um_d3d12shadermacro_26451!();
+        Depcrate_um_d3d12shadermacro_26452!();
+        Depcrate_um_d3d12shadermacro_26453!();
+        Depcrate_um_d3d12shadermacro_26454!();
+        Depcrate_um_d3d12shadermacro_26455!();
+        Depcrate_um_d3d12shadermacro_26456!();
+        Depcrate_um_d3d12shadermacro_26457!();
+        Depcrate_um_d3d12shadermacro_26458!();
+        Depcrate_um_d3d12shadermacro_26459!();
+        Depcrate_um_d3d12shadermacro_26460!();
+        Depcrate_um_d3d12shadermacro_26461!();
+        Depcrate_um_d3d12shaderD3D12_CBUFFER_TYPE!();
+        Depcrate_um_d3d12shaderD3D12_RESOURCE_RETURN_TYPE!();
+        Depcrate_um_d3d12shaderD3D12_TESSELLATOR_DOMAIN!();
+        Depcrate_um_d3d12shaderD3D12_TESSELLATOR_OUTPUT_PRIMITIVE!();
+        Depcrate_um_d3d12shaderD3D12_TESSELLATOR_PARTITIONING!();
+        Depcrate_um_d3d12shaderLPD3D12FUNCTIONPARAMETERREFLECTION!();
+        Depcrate_um_d3d12shaderLPD3D12FUNCTIONREFLECTION!();
+        Depcrate_um_d3d12shaderLPD3D12LIBRARYREFLECTION!();
+        Depcrate_um_d3d12shaderLPD3D12SHADERREFLECTION!();
+        Depcrate_um_d3d12shaderLPD3D12SHADERREFLECTIONCONSTANTBUFFER!();
+        Depcrate_um_d3d12shaderLPD3D12SHADERREFLECTIONTYPE!();
+        Depcrate_um_d3d12shaderLPD3D12SHADERREFLECTIONVARIABLE!();
+        Depcrate_um_d3d12shaderD3D_SHADER_REQUIRES_INNER_COVERAGE!();
+        Depcrate_um_d3d12shaderD3D_SHADER_REQUIRES_ROVS!();
+        Depcrate_um_d3d12shaderD3D_SHADER_REQUIRES_STENCIL_REF!();
+        Depcrate_um_d3d12shaderD3D_SHADER_REQUIRES_TYPED_UAV_LOAD_ADDITIONAL_FORMATS!();
+        Depcrate_um_d3d12shaderD3D_SHADER_REQUIRES_VIEWPORT_AND_RT_ARRAY_INDEX_FROM_ANY_SHADER_FEEDING_RASTERIZER!();
+    };
+}

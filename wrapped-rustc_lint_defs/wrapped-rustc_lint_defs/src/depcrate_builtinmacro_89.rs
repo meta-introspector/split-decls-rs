@@ -1,0 +1,9 @@
+// Generated macro for macro_89 (macro)
+macro_rules! Depcrate_builtinmacro_89 {
+() => {
+// Module: crate::builtin
+// Provides: {"macro_89"}
+// Dependencies: {}
+declare_lint ! { # [doc = " The `unnameable_test_items` lint detects [`#[test]`][test] functions"] # [doc = " that are not able to be run by the test harness because they are in a"] # [doc = " position where they are not nameable."] # [doc = ""] # [doc = " [test]: https://doc.rust-lang.org/reference/attributes/testing.html#the-test-attribute"] # [doc = ""] # [doc = " ### Example"] # [doc = ""] # [doc = " ```rust,test"] # [doc = " fn main() {"] # [doc = "     #[test]"] # [doc = "     fn foo() {"] # [doc = "         // This test will not fail because it does not run."] # [doc = "         assert_eq!(1, 2);"] # [doc = "     }"] # [doc = " }"] # [doc = " ```"] # [doc = ""] # [doc = " {{produces}}"] # [doc = ""] # [doc = " ### Explanation"] # [doc = ""] # [doc = " In order for the test harness to run a test, the test function must be"] # [doc = " located in a position where it can be accessed from the crate root."] # [doc = " This generally means it must be defined in a module, and not anywhere"] # [doc = " else such as inside another function. The compiler previously allowed"] # [doc = " this without an error, so a lint was added as an alert that a test is"] # [doc = " not being used. Whether or not this should be allowed has not yet been"] # [doc = " decided, see [RFC 2471] and [issue #36629]."] # [doc = ""] # [doc = " [RFC 2471]: https://github.com/rust-lang/rfcs/pull/2471#issuecomment-397414443"] # [doc = " [issue #36629]: https://github.com/rust-lang/rust/issues/36629"] pub UNNAMEABLE_TEST_ITEMS , Warn , "detects an item that cannot be named being marked as `#[test_case]`" , report_in_external_macro }
+};
+}

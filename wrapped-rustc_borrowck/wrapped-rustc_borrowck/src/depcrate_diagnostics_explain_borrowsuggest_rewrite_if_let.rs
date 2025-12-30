@@ -1,0 +1,9 @@
+// Generated macro for suggest_rewrite_if_let (function)
+macro_rules! Depcrate_diagnostics_explain_borrowsuggest_rewrite_if_let {
+() => {
+// Module: crate::diagnostics::explain_borrow
+// Provides: {"suggest_rewrite_if_let"}
+// Dependencies: {}
+fn suggest_rewrite_if_let < G : EmissionGuarantee > (tcx : TyCtxt < '_ > , expr : & hir :: Expr < '_ > , pat : & str , init : & hir :: Expr < '_ > , conseq : & hir :: Expr < '_ > , alt : Option < & hir :: Expr < '_ > > , err : & mut Diag < '_ , G > ,) { let source_map = tcx . sess . source_map () ; err . span_note (source_map . end_point (conseq . span) , "lifetimes for temporaries generated in `if let`s have been shortened in Edition 2024 so that they are dropped here instead" ,) ; if expr . span . can_be_used_for_suggestions () && conseq . span . can_be_used_for_suggestions () { let needs_block = if let Some (hir :: Node :: Expr (expr)) = alt . and_then (| alt | tcx . hir_parent_iter (alt . hir_id) . next ()) . map (| (_ , node) | node) { matches ! (expr . kind , hir :: ExprKind :: If (..)) } else { false } ; let mut sugg = vec ! [(expr . span . shrink_to_lo () . between (init . span) , if needs_block { "{ match " . into () } else { "match " . into () } ,) , (conseq . span . shrink_to_lo () , format ! (" {{ {pat} => ")) ,] ; let expr_end = expr . span . shrink_to_hi () ; let mut expr_end_code ; if let Some (alt) = alt { sugg . push ((conseq . span . between (alt . span) , " _ => " . into ())) ; expr_end_code = "}" . to_string () ; } else { expr_end_code = " _ => {} }" . into () ; } expr_end_code . push ('}') ; sugg . push ((expr_end , expr_end_code)) ; err . multipart_suggestion ("consider rewriting the `if` into `match` which preserves the extended lifetime" , sugg , Applicability :: MaybeIncorrect ,) ; } }
+};
+}

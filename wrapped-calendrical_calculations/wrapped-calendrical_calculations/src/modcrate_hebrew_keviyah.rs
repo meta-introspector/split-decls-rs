@@ -1,0 +1,45 @@
+// Generated module macro for crate::hebrew_keviyah
+macro_rules! Modcrate_hebrew_keviyah {
+() => {
+        Depcrate_hebrew_keviyahuse_116!();
+        Depcrate_hebrew_keviyahuse_117!();
+        Depcrate_hebrew_keviyahuse_118!();
+        Depcrate_hebrew_keviyahmonths_preceding_molad!();
+        Depcrate_hebrew_keviyahḥal!();
+        Depcrate_hebrew_keviyahMOLAD_BEHERAD_OFFSET!();
+        Depcrate_hebrew_keviyahHEBREW_LUNATION_TIME!();
+        Depcrate_hebrew_keviyahḤALAKIM_IN_WEEK!();
+        Depcrate_hebrew_keviyahHEBREW_MIN_YEAR!();
+        Depcrate_hebrew_keviyahHEBREW_MIN_RD!();
+        Depcrate_hebrew_keviyahHEBREW_MAX_YEAR!();
+        Depcrate_hebrew_keviyahHEBREW_MAX_RD!();
+        Depcrate_hebrew_keviyahmolad_details!();
+        Depcrate_hebrew_keviyahYearInfo!();
+        Depcrate_hebrew_keviyahimpl_130!();
+        Depcrate_hebrew_keviyahKeviyah!();
+        Depcrate_hebrew_keviyahYearType!();
+        Depcrate_hebrew_keviyahimpl_133!();
+        Depcrate_hebrew_keviyahStartOfYear!();
+        Depcrate_hebrew_keviyahTISHREI!();
+        Depcrate_hebrew_keviyahḤESHVAN!();
+        Depcrate_hebrew_keviyahKISLEV!();
+        Depcrate_hebrew_keviyahTEVET!();
+        Depcrate_hebrew_keviyahSHEVAT!();
+        Depcrate_hebrew_keviyahADAR!();
+        Depcrate_hebrew_keviyahNISAN!();
+        Depcrate_hebrew_keviyahIYYAR!();
+        Depcrate_hebrew_keviyahSIVAN!();
+        Depcrate_hebrew_keviyahTAMMUZ!();
+        Depcrate_hebrew_keviyahAV!();
+        Depcrate_hebrew_keviyahELUL!();
+        Depcrate_hebrew_keviyahimpl_147!();
+        Depcrate_hebrew_keviyahMetonicCycleType!();
+        Depcrate_hebrew_keviyahimpl_149!();
+        Depcrate_hebrew_keviyahFOUR_GATES_LMINUSONE!();
+        Depcrate_hebrew_keviyahFOUR_GATES_LPLUSONE!();
+        Depcrate_hebrew_keviyahFOUR_GATES_LPLUSMINUSONE!();
+        Depcrate_hebrew_keviyahFOUR_GATES_LEAP!();
+        Depcrate_hebrew_keviyahkeviyah_for!();
+        Depcrate_hebrew_keviyahtest!();
+    };
+}

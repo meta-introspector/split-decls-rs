@@ -1,0 +1,9 @@
+// Generated macro for D3D11_TESSELLATOR_PARTITIONING_POW2 (const)
+macro_rules! Depcrate_um_d3dcommonD3D11_TESSELLATOR_PARTITIONING_POW2 {
+() => {
+// Module: crate::um::d3dcommon
+// Provides: {"D3D11_TESSELLATOR_PARTITIONING_POW2"}
+// Dependencies: {}
+pub const D3D11_TESSELLATOR_PARTITIONING_POW2 : D3D_TESSELLATOR_PARTITIONING = D3D_TESSELLATOR_PARTITIONING_POW2 ;
+};
+}

@@ -1,0 +1,46 @@
+// Generated module macro for crate::nodes::btree
+macro_rules! Modcrate_nodes_btree {
+() => {
+        Depcrate_nodes_btreeuse_10!();
+        Depcrate_nodes_btreeuse_11!();
+        Depcrate_nodes_btreeuse_12!();
+        Depcrate_nodes_btreeuse_13!();
+        Depcrate_nodes_btreeuse_14!();
+        Depcrate_nodes_btreeuse_15!();
+        Depcrate_nodes_btreeuse_16!();
+        Depcrate_nodes_btreeuse_17!();
+        Depcrate_nodes_btreeuse_18!();
+        Depcrate_nodes_btreeuse_19!();
+        Depcrate_nodes_btreeNODE_SIZE!();
+        Depcrate_nodes_btreeMEDIAN!();
+        Depcrate_nodes_btreeBTreeValue!();
+        Depcrate_nodes_btreeNode!();
+        Depcrate_nodes_btreecast_uninit!();
+        Depcrate_nodes_btreeimpl_25!();
+        Depcrate_nodes_btreeimpl_26!();
+        Depcrate_nodes_btreeInsert!();
+        Depcrate_nodes_btreeInsertAction!();
+        Depcrate_nodes_btreeRemove!();
+        Depcrate_nodes_btreeBoundary!();
+        Depcrate_nodes_btreeRemoveAction!();
+        Depcrate_nodes_btreeimpl_32!();
+        Depcrate_nodes_btreeimpl_33!();
+        Depcrate_nodes_btreeimpl_34!();
+        Depcrate_nodes_btreeimpl_35!();
+        Depcrate_nodes_btreeIter!();
+        Depcrate_nodes_btreeimpl_37!();
+        Depcrate_nodes_btreeimpl_38!();
+        Depcrate_nodes_btreeimpl_39!();
+        Depcrate_nodes_btreeConsumingIterItem!();
+        Depcrate_nodes_btreeConsumingIter!();
+        Depcrate_nodes_btreeimpl_42!();
+        Depcrate_nodes_btreeimpl_43!();
+        Depcrate_nodes_btreeimpl_44!();
+        Depcrate_nodes_btreeimpl_45!();
+        Depcrate_nodes_btreeDiffIter!();
+        Depcrate_nodes_btreeDiffItem!();
+        Depcrate_nodes_btreeIterItem!();
+        Depcrate_nodes_btreeimpl_49!();
+        Depcrate_nodes_btreeimpl_50!();
+    };
+}

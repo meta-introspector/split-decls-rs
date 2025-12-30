@@ -1,0 +1,40 @@
+// Generated module macro for crate::text
+macro_rules! Modcrate_text {
+() => {
+        Depcrate_textuse_191!();
+        Depcrate_textuse_192!();
+        Depcrate_textuse_193!();
+        Depcrate_textuse_194!();
+        Depcrate_textabstraction!();
+        Depcrate_textinline!();
+        Depcrate_textutils!();
+        Depcrate_textuse_242!();
+        Depcrate_textuse_243!();
+        Depcrate_textuse_244!();
+        Depcrate_textuse_245!();
+        Depcrate_textuse_246!();
+        Depcrate_textuse_247!();
+        Depcrate_textuse_248!();
+        Depcrate_textuse_249!();
+        Depcrate_textDeadline!();
+        Depcrate_textimpl_251!();
+        Depcrate_textTextDiffConfig!();
+        Depcrate_textimpl_253!();
+        Depcrate_textTextDiff!();
+        Depcrate_textimpl_255!();
+        Depcrate_textimpl_256!();
+        Depcrate_textget_close_matches!();
+        Depcrate_texttest_captured_ops!();
+        Depcrate_texttest_captured_word_ops!();
+        Depcrate_texttest_unified_diff!();
+        Depcrate_texttest_line_ops!();
+        Depcrate_texttest_virtual_newlines!();
+        Depcrate_texttest_char_diff!();
+        Depcrate_texttest_ratio!();
+        Depcrate_texttest_get_close_matches!();
+        Depcrate_texttest_lifetimes_on_iter!();
+        Depcrate_texttest_serde!();
+        Depcrate_texttest_serde_ops!();
+        Depcrate_texttest_regression_issue_37!();
+    };
+}

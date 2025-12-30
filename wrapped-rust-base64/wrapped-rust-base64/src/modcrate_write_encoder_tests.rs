@@ -1,0 +1,39 @@
+// Generated module macro for crate::write::encoder_tests
+macro_rules! Modcrate_write_encoder_tests {
+() => {
+        Depcrate_write_encoder_testsuse_84!();
+        Depcrate_write_encoder_testsuse_85!();
+        Depcrate_write_encoder_testsuse_86!();
+        Depcrate_write_encoder_testsuse_87!();
+        Depcrate_write_encoder_testsuse_88!();
+        Depcrate_write_encoder_testsURL_SAFE_ENGINE!();
+        Depcrate_write_encoder_testsNO_PAD_ENGINE!();
+        Depcrate_write_encoder_testsencode_three_bytes!();
+        Depcrate_write_encoder_testsencode_nine_bytes_two_writes!();
+        Depcrate_write_encoder_testsencode_one_then_two_bytes!();
+        Depcrate_write_encoder_testsencode_one_then_five_bytes!();
+        Depcrate_write_encoder_testsencode_1_2_3_bytes!();
+        Depcrate_write_encoder_testsencode_with_padding!();
+        Depcrate_write_encoder_testsencode_with_padding_multiple_writes!();
+        Depcrate_write_encoder_testsfinish_writes_extra_byte!();
+        Depcrate_write_encoder_testswrite_partial_chunk_encodes_partial_chunk!();
+        Depcrate_write_encoder_testswrite_1_chunk_encodes_complete_chunk!();
+        Depcrate_write_encoder_testswrite_1_chunk_and_partial_encodes_only_complete_chunk!();
+        Depcrate_write_encoder_testswrite_2_partials_to_exactly_complete_chunk_encodes_complete_chunk!();
+        Depcrate_write_encoder_testswrite_partial_then_enough_to_complete_chunk_but_not_complete_another_chunk_encodes_complete_chunk_without_consuming_remaining!();
+        Depcrate_write_encoder_testswrite_partial_then_enough_to_complete_chunk_and_another_chunk_encodes_complete_chunks!();
+        Depcrate_write_encoder_testswrite_partial_then_enough_to_complete_chunk_and_another_chunk_and_another_partial_chunk_encodes_only_complete_chunks!();
+        Depcrate_write_encoder_testsdrop_calls_finish_for_you!();
+        Depcrate_write_encoder_testsevery_possible_split_of_input!();
+        Depcrate_write_encoder_testsencode_random_config_matches_normal_encode_reasonable_input_len!();
+        Depcrate_write_encoder_testsencode_random_config_matches_normal_encode_tiny_input_len!();
+        Depcrate_write_encoder_testsretrying_writes_that_error_with_interrupted_works!();
+        Depcrate_write_encoder_testswrites_that_only_write_part_of_input_and_sometimes_interrupt_produce_correct_encoded_data!();
+        Depcrate_write_encoder_testsretry_interrupted_write_all!();
+        Depcrate_write_encoder_testsdo_encode_random_config_matches_normal_encode!();
+        Depcrate_write_encoder_testsInterruptingWriter!();
+        Depcrate_write_encoder_testsimpl_115!();
+        Depcrate_write_encoder_testsPartialInterruptingWriter!();
+        Depcrate_write_encoder_testsimpl_117!();
+    };
+}

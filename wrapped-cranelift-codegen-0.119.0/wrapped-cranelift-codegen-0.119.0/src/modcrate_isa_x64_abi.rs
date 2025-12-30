@@ -1,0 +1,44 @@
+// Generated module macro for crate::isa::x64::abi
+macro_rules! Modcrate_isa_x64_abi {
+() => {
+        Depcrate_isa_x64_abiuse_1150!();
+        Depcrate_isa_x64_abiuse_1151!();
+        Depcrate_isa_x64_abiuse_1152!();
+        Depcrate_isa_x64_abiuse_1153!();
+        Depcrate_isa_x64_abiuse_1154!();
+        Depcrate_isa_x64_abiuse_1155!();
+        Depcrate_isa_x64_abiuse_1156!();
+        Depcrate_isa_x64_abiuse_1157!();
+        Depcrate_isa_x64_abiuse_1158!();
+        Depcrate_isa_x64_abiuse_1159!();
+        Depcrate_isa_x64_abiuse_1160!();
+        Depcrate_isa_x64_abiuse_1161!();
+        Depcrate_isa_x64_abiuse_1162!();
+        Depcrate_isa_x64_abiuse_1163!();
+        Depcrate_isa_x64_abiuse_1164!();
+        Depcrate_isa_x64_abiuse_1165!();
+        Depcrate_isa_x64_abiuse_1166!();
+        Depcrate_isa_x64_abiX64Callee!();
+        Depcrate_isa_x64_abiX64CallSite!();
+        Depcrate_isa_x64_abiX64ABIMachineSpec!();
+        Depcrate_isa_x64_abiimpl_1170!();
+        Depcrate_isa_x64_abiimpl_1171!();
+        Depcrate_isa_x64_abiimpl_1172!();
+        Depcrate_isa_x64_abiimpl_1173!();
+        Depcrate_isa_x64_abiimpl_1174!();
+        Depcrate_isa_x64_abiget_intreg_for_arg!();
+        Depcrate_isa_x64_abiget_fltreg_for_arg!();
+        Depcrate_isa_x64_abiget_intreg_for_retval!();
+        Depcrate_isa_x64_abiget_fltreg_for_retval!();
+        Depcrate_isa_x64_abiis_callee_save_systemv!();
+        Depcrate_isa_x64_abiis_callee_save_fastcall!();
+        Depcrate_isa_x64_abicompute_clobber_size!();
+        Depcrate_isa_x64_abiWINDOWS_CLOBBERS!();
+        Depcrate_isa_x64_abiSYSV_CLOBBERS!();
+        Depcrate_isa_x64_abiALL_CLOBBERS!();
+        Depcrate_isa_x64_abiwindows_clobbers!();
+        Depcrate_isa_x64_abisysv_clobbers!();
+        Depcrate_isa_x64_abiall_clobbers!();
+        Depcrate_isa_x64_abicreate_reg_env_systemv!();
+    };
+}

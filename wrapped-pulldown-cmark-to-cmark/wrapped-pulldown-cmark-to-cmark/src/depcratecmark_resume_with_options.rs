@@ -1,0 +1,9 @@
+// Generated macro for cmark_resume_with_options (function)
+macro_rules! Depcratecmark_resume_with_options {
+() => {
+// Module: crate
+// Provides: {"cmark_resume_with_options"}
+// Dependencies: {}
+# [doc = " Serialize a stream of [pulldown-cmark-Events][Event] into a string-backed buffer."] # [doc = ""] # [doc = " 1. **events**"] # [doc = "    * An iterator over [`Events`][Event], for example as returned by the [`Parser`][pulldown_cmark::Parser]"] # [doc = " 1. **formatter**"] # [doc = "    * A format writer, can be a `String`."] # [doc = " 1. **state**"] # [doc = "    * The optional initial state of the serialization."] # [doc = " 1. **options**"] # [doc = "    * Customize the appearance of the serialization. All otherwise magic values are contained"] # [doc = "      here."] # [doc = ""] # [doc = " *Returns* the [`State`] of the serialization on success. You can use it as initial state in the"] # [doc = " next call if you are halting event serialization."] # [doc = ""] # [doc = " *Errors* if the underlying buffer fails (which is unlikely) or if the [`Event`] stream"] # [doc = " cannot ever be produced by deserializing valid Markdown. Each failure mode corresponds to one"] # [doc = " of [`Error`]'s variants."] pub fn cmark_resume_with_options < 'a , I , E , F > (events : I , mut formatter : F , state : Option < State < 'a > > , options : Options < '_ > ,) -> Result < State < 'a > , Error > where I : Iterator < Item = E > , E : Borrow < Event < 'a > > , F : fmt :: Write , { let mut state = state . unwrap_or_default () ; let mut events = events . peekable () ; while let Some (event) = events . next () { state . next_is_link_like = matches ! (events . peek () . map (Borrow :: borrow) , Some (Event :: Start (Tag :: Link { .. } | Tag :: Image { .. } | Tag :: FootnoteDefinition (..)) | Event :: FootnoteReference (..))) ; cmark_resume_one_event (event , & mut formatter , & mut state , & options) ? ; } Ok (state) }
+};
+}

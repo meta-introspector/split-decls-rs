@@ -1,0 +1,9 @@
+// Generated macro for atomic_compare_exchange_zacas (function)
+macro_rules! Depcrate_imp_atomic64_riscv32atomic_compare_exchange_zacas {
+() => {
+// Module: crate::imp::atomic64::riscv32
+// Provides: {"atomic_compare_exchange_zacas"}
+// Dependencies: {}
+# [inline] unsafe fn atomic_compare_exchange_zacas (dst : * mut u64 , old : u64 , new : u64 , success : Ordering , failure : Ordering ,) -> (u64 , bool) { debug_assert ! (dst as usize % 8 == 0) ; debug_assert_zacas ! () ; let order = crate :: utils :: upgrade_success_ordering (success , failure) ; let old = U64 { whole : old } ; let new = U64 { whole : new } ; let (prev_lo , prev_hi) ; unsafe { # [cfg (not (portable_atomic_pre_llvm_20))] macro_rules ! cmpxchg { ($ fence : tt , $ asm_order : tt) => { asm ! (start_zacas ! () , $ fence , concat ! ("amocas.d" , $ asm_order , " a4, a2, 0({dst})") , end_zacas ! () , dst = in (reg) ptr_reg ! (dst) , inout ("a4") old . pair . lo => prev_lo , inout ("a5") old . pair . hi => prev_hi , in ("a2") new . pair . lo , in ("a3") new . pair . hi , options (nostack , preserves_flags) ,) } ; } # [cfg (not (portable_atomic_pre_llvm_20))] atomic_rmw_amocas_order ! (cmpxchg , order , failure = failure) ; # [cfg (portable_atomic_pre_llvm_20)] macro_rules ! cmpxchg { ($ fence : tt , $ insn_order : tt) => { asm ! ($ fence , concat ! (".4byte 0x2" , $ insn_order , "c5372f") , in ("a0") ptr_reg ! (dst) , inout ("a4") old . pair . lo => prev_lo , inout ("a5") old . pair . hi => prev_hi , in ("a2") new . pair . lo , in ("a3") new . pair . hi , options (nostack , preserves_flags) ,) } ; } # [cfg (portable_atomic_pre_llvm_20)] atomic_rmw_amocas_order_insn ! (cmpxchg , order , failure = failure) ; let prev = U64 { pair : Pair { lo : prev_lo , hi : prev_hi } } . whole ; (prev , prev == old . whole) } }
+};
+}

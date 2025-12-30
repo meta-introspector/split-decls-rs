@@ -1,0 +1,9 @@
+// Generated macro for use_734 (pub_use)
+macro_rules! Depcrate_generateduse_734 {
+() => {
+// Module: crate::generated
+// Provides: {"use_734"}
+// Dependencies: {}
+# [cfg (feature = "SecBase")] pub use self :: __SecBase :: errSecBufferTooSmall ;
+};
+}

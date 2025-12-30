@@ -1,0 +1,9 @@
+// Generated macro for SECURITY_BUILTIN_PACKAGE_ANY_PACKAGE (const)
+macro_rules! Depcrate_um_winntSECURITY_BUILTIN_PACKAGE_ANY_PACKAGE {
+() => {
+// Module: crate::um::winnt
+// Provides: {"SECURITY_BUILTIN_PACKAGE_ANY_PACKAGE"}
+// Dependencies: {}
+pub const SECURITY_BUILTIN_PACKAGE_ANY_PACKAGE : DWORD = 0x00000001 ;
+};
+}

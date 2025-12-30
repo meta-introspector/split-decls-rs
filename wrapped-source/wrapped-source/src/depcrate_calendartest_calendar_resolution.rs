@@ -1,0 +1,9 @@
+// Generated macro for test_calendar_resolution (function)
+macro_rules! Depcrate_calendartest_calendar_resolution {
+() => {
+// Module: crate::calendar
+// Provides: {"test_calendar_resolution"}
+// Dependencies: {}
+# [test] fn test_calendar_resolution () { use std :: collections :: BTreeMap ; use icu :: { calendar :: { preferences :: CalendarAlgorithm , AnyCalendarKind } , locale :: { extensions :: unicode :: Value , subtags :: { Language , Region } , LanguageIdentifier , } , } ; # [derive (serde :: Deserialize)] struct Resource { supplemental : Supplemental , } # [derive (serde :: Deserialize)] # [serde (rename_all = "camelCase")] struct Supplemental { calendar_preference_data : BTreeMap < Region , Vec < String > > , } for (& region , algorithms) in & crate :: SourceDataProvider :: new_testing () . cldr () . unwrap () . core () . read_and_parse :: < Resource > ("supplemental/calendarPreferenceData.json") . unwrap () . supplemental . calendar_preference_data { let mut region_preferences = LanguageIdentifier :: from ((Language :: UNKNOWN , None , Some (region))) . into () ; let algorithms = algorithms . iter () . map (| a | match a . as_str () { "gregorian" => CalendarAlgorithm :: Gregory , a => CalendarAlgorithm :: try_from (& Value :: try_from_str (a) . unwrap ()) . unwrap () , }) . collect :: < Vec < _ > > () ; assert_eq ! (AnyCalendarKind :: new (region_preferences) , AnyCalendarKind :: try_from (algorithms [0]) . unwrap () , "{region:?}" ,) ; if let Some (& preferred_islamic_algorithm) = algorithms . iter () . find (| & & a | matches ! (a , CalendarAlgorithm :: Hijri (Some (_)))) { region_preferences . calendar_algorithm = Some (CalendarAlgorithm :: Hijri (None)) ; assert_eq ! (AnyCalendarKind :: new (region_preferences) , AnyCalendarKind :: try_from (preferred_islamic_algorithm) . unwrap () , "{region:?}" ,) ; } } }
+};
+}

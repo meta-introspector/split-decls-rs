@@ -1,0 +1,9 @@
+// Generated macro for macro_35958 (macro)
+macro_rules! Depcrate_um_propsysmacro_35958 {
+() => {
+// Module: crate::um::propsys
+// Provides: {"macro_35958"}
+// Dependencies: {}
+ENUM ! { enum GETPROPERTYSTOREFLAGS { GPS_DEFAULT = 0 , GPS_HANDLERPROPERTIESONLY = 0x1 , GPS_READWRITE = 0x2 , GPS_TEMPORARY = 0x4 , GPS_FASTPROPERTIESONLY = 0x8 , GPS_OPENSLOWITEM = 0x10 , GPS_DELAYCREATION = 0x20 , GPS_BESTEFFORT = 0x40 , GPS_NO_OPLOCK = 0x80 , GPS_PREFERQUERYPROPERTIES = 0x100 , GPS_EXTRINSICPROPERTIES = 0x200 , GPS_EXTRINSICPROPERTIESONLY = 0x400 , GPS_MASK_VALID = 0x7ff , } }
+};
+}

@@ -1,0 +1,44 @@
+// Generated module macro for crate::generated
+macro_rules! Modcrate_generated {
+() => {
+        Depcrate_generatedother_4!();
+        Depcrate_generated__BAAppExtensionInfo!();
+        Depcrate_generated__BAAssetPack!();
+        Depcrate_generated__BAAssetPackManager!();
+        Depcrate_generated__BAAssetPackManifest!();
+        Depcrate_generated__BAAssetPackStatus!();
+        Depcrate_generated__BABase!();
+        Depcrate_generated__BADownload!();
+        Depcrate_generated__BADownloadManager!();
+        Depcrate_generated__BADownloaderExtension!();
+        Depcrate_generated__BAError!();
+        Depcrate_generated__BAManagedAssetPackDownloadDelegate!();
+        Depcrate_generated__BAManagedDownloaderExtension!();
+        Depcrate_generated__BAManagedError!();
+        Depcrate_generated__BATypes!();
+        Depcrate_generated__BAURLDownload!();
+        Depcrate_generateduse_20!();
+        Depcrate_generateduse_21!();
+        Depcrate_generateduse_22!();
+        Depcrate_generateduse_23!();
+        Depcrate_generateduse_24!();
+        Depcrate_generateduse_25!();
+        Depcrate_generateduse_26!();
+        Depcrate_generateduse_27!();
+        Depcrate_generateduse_28!();
+        Depcrate_generateduse_29!();
+        Depcrate_generateduse_30!();
+        Depcrate_generateduse_31!();
+        Depcrate_generateduse_32!();
+        Depcrate_generateduse_33!();
+        Depcrate_generateduse_34!();
+        Depcrate_generateduse_35!();
+        Depcrate_generateduse_36!();
+        Depcrate_generateduse_37!();
+        Depcrate_generateduse_38!();
+        Depcrate_generateduse_39!();
+        Depcrate_generateduse_40!();
+        Depcrate_generateduse_41!();
+        Depcrate_generateduse_42!();
+    };
+}

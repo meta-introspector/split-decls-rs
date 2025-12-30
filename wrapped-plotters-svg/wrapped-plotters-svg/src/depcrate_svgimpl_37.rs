@@ -1,0 +1,9 @@
+// Generated macro for impl_37 (impl)
+macro_rules! Depcrate_svgimpl_37 {
+() => {
+// Module: crate::svg
+// Provides: {"impl_37"}
+// Dependencies: {}
+impl < 'a > SVGBackend < 'a > { fn escape_and_push (buf : & mut String , value : & str) { value . chars () . for_each (| c | FormatEscaped :: format_escaped (buf , c)) ; } fn close_tag (& mut self) -> bool { if let Some (tag) = self . tag_stack . pop () { let buf = self . target . get_mut () ; buf . push_str ("</") ; buf . push_str (tag . to_tag_name ()) ; buf . push_str (">\n") ; return true ; } false } # [doc = " Opens a tag and provides facilities for writing attrs and closing the tag"] fn open_tag (& mut self , tag : SVGTag) -> AttrWriter < '_ , Init > { AttrWriter :: open_tag (self . target . get_mut () , tag , & mut self . tag_stack) } fn init_svg_file (& mut self , size : (u32 , u32)) { let mut attrwriter = self . open_tag (SVGTag :: Svg) ; attrwriter . write_key ("width") . write_value (size . 0) ; attrwriter . write_key ("height") . write_value (size . 1) ; attrwriter . write_key ("viewBox") . write_value (("0 0 " , size . 0 , ' ' , size . 1)) ; attrwriter . write_key ("xmlns") . write_value ("http://www.w3.org/2000/svg") ; attrwriter . finish_without_closing () ; } # [doc = " Create a new SVG drawing backend"] pub fn new < T : AsRef < Path > + ? Sized > (path : & 'a T , size : (u32 , u32)) -> Self { let mut ret = Self { target : Target :: File (String :: default () , path . as_ref ()) , size , tag_stack : vec ! [] , saved : false , } ; ret . init_svg_file (size) ; ret } # [doc = " Create a new SVG drawing backend and store the document into a String buffer"] pub fn with_string (buf : & 'a mut String , size : (u32 , u32)) -> Self { let mut ret = Self { target : Target :: Buffer (buf) , size , tag_stack : vec ! [] , saved : false , } ; ret . init_svg_file (size) ; ret } }
+};
+}

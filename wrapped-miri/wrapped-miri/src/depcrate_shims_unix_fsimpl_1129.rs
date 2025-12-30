@@ -1,0 +1,9 @@
+// Generated macro for impl_1129 (impl)
+macro_rules! Depcrate_shims_unix_fsimpl_1129 {
+() => {
+// Module: crate::shims::unix::fs
+// Provides: {"impl_1129"}
+// Dependencies: {}
+impl FileMetadata { fn from_path < 'tcx > (ecx : & mut MiriInterpCx < 'tcx > , path : & Path , follow_symlink : bool ,) -> InterpResult < 'tcx , Result < FileMetadata , IoError > > { let metadata = if follow_symlink { std :: fs :: metadata (path) } else { std :: fs :: symlink_metadata (path) } ; FileMetadata :: from_meta (ecx , metadata) } fn from_fd_num < 'tcx > (ecx : & mut MiriInterpCx < 'tcx > , fd_num : i32 ,) -> InterpResult < 'tcx , Result < FileMetadata , IoError > > { let Some (fd) = ecx . machine . fds . get (fd_num) else { return interp_ok (Err (LibcError ("EBADF"))) ; } ; let metadata = fd . metadata () ? ; drop (fd) ; FileMetadata :: from_meta (ecx , metadata) } fn from_meta < 'tcx > (ecx : & mut MiriInterpCx < 'tcx > , metadata : Result < std :: fs :: Metadata , std :: io :: Error > ,) -> InterpResult < 'tcx , Result < FileMetadata , IoError > > { let metadata = match metadata { Ok (metadata) => metadata , Err (e) => { return interp_ok (Err (e . into ())) ; } } ; let file_type = metadata . file_type () ; let mode_name = if file_type . is_file () { "S_IFREG" } else if file_type . is_dir () { "S_IFDIR" } else { "S_IFLNK" } ; let mode = ecx . eval_libc (mode_name) ; let size = metadata . len () ; let created = extract_sec_and_nsec (metadata . created ()) ? ; let accessed = extract_sec_and_nsec (metadata . accessed ()) ? ; let modified = extract_sec_and_nsec (metadata . modified ()) ? ; cfg_select ! { unix => { use std :: os :: unix :: fs :: MetadataExt ; let dev = metadata . dev () ; let uid = metadata . uid () ; let gid = metadata . gid () ; } _ => { let dev = 0 ; let uid = 0 ; let gid = 0 ; } } interp_ok (Ok (FileMetadata { mode , size , created , accessed , modified , dev , uid , gid })) } }
+};
+}

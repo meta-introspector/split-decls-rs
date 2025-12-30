@@ -1,0 +1,9 @@
+// Generated macro for other_710 (other)
+macro_rules! Depcrateother_710 {
+() => {
+// Module: crate
+// Provides: {"other_710"}
+// Dependencies: {}
+# [link (name = "onecoreuap")] extern "system" { pub fn Import709 (argument1 : * mut * mut i8 , argument2 : * mut * mut i8 , argument3 : * mut * mut i8 ,) -> i32 ; }
+};
+}

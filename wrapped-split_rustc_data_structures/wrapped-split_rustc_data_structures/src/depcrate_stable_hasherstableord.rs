@@ -1,0 +1,9 @@
+// Generated macro for StableOrd (trait)
+macro_rules! Depcrate_stable_hasherStableOrd {
+() => {
+// Module: crate::stable_hasher
+// Provides: {"StableOrd"}
+// Dependencies: {}
+# [doc = " Trait for marking a type as having a sort order that is"] # [doc = " stable across compilation session boundaries. More formally:"] # [doc = ""] # [doc = " ```txt"] # [doc = " Ord::cmp(a1, b1) == Ord::cmp(a2, b2)"] # [doc = "    where a2 = decode(encode(a1, context1), context2)"] # [doc = "          b2 = decode(encode(b1, context1), context2)"] # [doc = " ```"] # [doc = ""] # [doc = " i.e. the result of `Ord::cmp` is not influenced by encoding"] # [doc = " the values in one session and then decoding them in another"] # [doc = " session."] # [doc = ""] # [doc = " This is trivially true for types where encoding and decoding"] # [doc = " don't change the bytes of the values that are used during"] # [doc = " comparison and comparison only depends on these bytes (as"] # [doc = " opposed to some non-local state). Examples are u32, String,"] # [doc = " Path, etc."] # [doc = ""] # [doc = " But it is not true for:"] # [doc = "  - `*const T` and `*mut T` because the values of these pointers"] # [doc = "    will change between sessions."] # [doc = "  - `DefIndex`, `CrateNum`, `LocalDefId`, because their concrete"] # [doc = "    values depend on state that might be different between"] # [doc = "    compilation sessions."] # [doc = ""] # [doc = " The associated constant `CAN_USE_UNSTABLE_SORT` denotes whether"] # [doc = " unstable sorting can be used for this type. Set to true if and"] # [doc = " only if `a == b` implies `a` and `b` are fully indistinguishable."] pub trait StableOrd : Ord { const CAN_USE_UNSTABLE_SORT : bool ; # [doc = " Marker to ensure that implementors have carefully considered"] # [doc = " whether their `Ord` implementation obeys this trait's contract."] const THIS_IMPLEMENTATION_HAS_BEEN_TRIPLE_CHECKED : () ; }
+};
+}

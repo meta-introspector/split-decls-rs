@@ -1,0 +1,43 @@
+// Generated module macro for crate::reader
+macro_rules! Modcrate_reader {
+() => {
+        Depcrate_readeruse_398!();
+        Depcrate_readeruse_399!();
+        Depcrate_readeruse_400!();
+        Depcrate_readeruse_401!();
+        Depcrate_readeruse_402!();
+        Depcrate_readeruse_403!();
+        Depcrate_readeruse_404!();
+        Depcrate_readeruse_405!();
+        Depcrate_readerConfig!();
+        Depcrate_readerimpl_407!();
+        Depcrate_readerimpl_408!();
+        Depcrate_readerread_event_impl!();
+        Depcrate_readerread_until_close!();
+        Depcrate_readerread_to_end!();
+        Depcrate_readerasync_tokio!();
+        Depcrate_readerbuffered_reader!();
+        Depcrate_readerns_reader!();
+        Depcrate_readerslice_reader!();
+        Depcrate_readerstate!();
+        Depcrate_readeruse_489!();
+        Depcrate_readerSpan!();
+        Depcrate_readerParseState!();
+        Depcrate_readerEncodingRef!();
+        Depcrate_readerimpl_493!();
+        Depcrate_readerBinaryStream!();
+        Depcrate_readerimpl_495!();
+        Depcrate_readerimpl_496!();
+        Depcrate_readerimpl_497!();
+        Depcrate_readerReader!();
+        Depcrate_readerimpl_499!();
+        Depcrate_readerimpl_500!();
+        Depcrate_readerimpl_501!();
+        Depcrate_readerReadTextResult!();
+        Depcrate_readerReadRefResult!();
+        Depcrate_readerXmlSource!();
+        Depcrate_readerBangType!();
+        Depcrate_readerimpl_506!();
+        Depcrate_readertest!();
+    };
+}

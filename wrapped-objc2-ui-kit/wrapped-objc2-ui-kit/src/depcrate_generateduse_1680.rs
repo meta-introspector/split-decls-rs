@@ -1,0 +1,9 @@
+// Generated macro for use_1680 (pub_use)
+macro_rules! Depcrate_generateduse_1680 {
+() => {
+// Module: crate::generated
+// Provides: {"use_1680"}
+// Dependencies: {}
+# [cfg (feature = "UIPageControlProgress")] pub use self :: __UIPageControlProgress :: UIPageControlTimerProgress ;
+};
+}

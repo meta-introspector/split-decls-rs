@@ -1,0 +1,9 @@
+// Generated macro for AudioFileComponentReadBytes (function)
+macro_rules! Depcrate_generatedAudioFileComponentReadBytes {
+() => {
+// Module: crate::generated
+// Provides: {"AudioFileComponentReadBytes"}
+// Dependencies: {}
+# [doc = " implements AudioFileReadBytes."] # [doc = ""] # [doc = ""] # [doc = " Returns kAudioFileEndOfFileError when read encounters end of file."] # [doc = ""] # [doc = " Parameter `inComponent`: an AudioFileComponent"] # [doc = ""] # [doc = " Parameter `inUseCache`: true if it is desired to cache the data upon read, else false"] # [doc = ""] # [doc = " Parameter `inStartingByte`: the byte offset of the audio data desired to be returned"] # [doc = ""] # [doc = " Parameter `ioNumBytes`: on input, the number of bytes to read, on output, the number of"] # [doc = " bytes actually read."] # [doc = ""] # [doc = " Parameter `outBuffer`: outBuffer should be a void * to user allocated memory large enough for the requested bytes."] # [doc = ""] # [doc = " Returns: returns noErr if successful."] # [doc = ""] # [doc = " # Safety"] # [doc = ""] # [doc = " - `in_component` must be a valid pointer."] # [doc = " - `io_num_bytes` must be a valid pointer."] # [doc = " - `out_buffer` must be a valid pointer."] # [cfg (feature = "AudioComponent")] # [inline] pub unsafe extern "C-unwind" fn AudioFileComponentReadBytes (in_component : AudioFileComponent , in_use_cache : bool , in_starting_byte : i64 , io_num_bytes : NonNull < u32 > , out_buffer : NonNull < c_void > ,) -> OSStatus { extern "C-unwind" { fn AudioFileComponentReadBytes (in_component : AudioFileComponent , in_use_cache : Boolean , in_starting_byte : i64 , io_num_bytes : NonNull < u32 > , out_buffer : NonNull < c_void > ,) -> OSStatus ; } unsafe { AudioFileComponentReadBytes (in_component , in_use_cache as _ , in_starting_byte , io_num_bytes , out_buffer ,) } }
+};
+}

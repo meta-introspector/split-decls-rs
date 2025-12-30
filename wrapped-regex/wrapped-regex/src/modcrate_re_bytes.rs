@@ -1,0 +1,53 @@
+// Generated module macro for crate::re_bytes
+macro_rules! Modcrate_re_bytes {
+() => {
+        Depcrate_re_bytesuse_281!();
+        Depcrate_re_bytesuse_282!();
+        Depcrate_re_bytesuse_283!();
+        Depcrate_re_bytesuse_284!();
+        Depcrate_re_bytesuse_285!();
+        Depcrate_re_bytesuse_286!();
+        Depcrate_re_bytesuse_287!();
+        Depcrate_re_bytesuse_288!();
+        Depcrate_re_bytesuse_289!();
+        Depcrate_re_bytesuse_290!();
+        Depcrate_re_bytesuse_291!();
+        Depcrate_re_bytesuse_292!();
+        Depcrate_re_bytesuse_293!();
+        Depcrate_re_bytesRegex!();
+        Depcrate_re_bytesimpl_295!();
+        Depcrate_re_bytesimpl_296!();
+        Depcrate_re_bytesimpl_297!();
+        Depcrate_re_bytesimpl_298!();
+        Depcrate_re_bytesimpl_299!();
+        Depcrate_re_bytesFindMatches!();
+        Depcrate_re_bytesimpl_301!();
+        Depcrate_re_bytesFindCaptures!();
+        Depcrate_re_bytesimpl_303!();
+        Depcrate_re_bytesSplits!();
+        Depcrate_re_bytesimpl_305!();
+        Depcrate_re_bytesSplitsN!();
+        Depcrate_re_bytesimpl_307!();
+        Depcrate_re_bytesCaptureNames!();
+        Depcrate_re_bytesimpl_309!();
+        Depcrate_re_bytesCaptures!();
+        Depcrate_re_bytesimpl_311!();
+        Depcrate_re_bytesimpl_312!();
+        Depcrate_re_bytesCapturesDebug!();
+        Depcrate_re_bytesimpl_314!();
+        Depcrate_re_bytesimpl_315!();
+        Depcrate_re_bytesimpl_316!();
+        Depcrate_re_bytesSubCaptures!();
+        Depcrate_re_bytesimpl_318!();
+        Depcrate_re_bytesSubCapturesPos!();
+        Depcrate_re_bytesimpl_320!();
+        Depcrate_re_bytesSubCapturesNamed!();
+        Depcrate_re_bytesimpl_322!();
+        Depcrate_re_bytesReplacer!();
+        Depcrate_re_bytesimpl_324!();
+        Depcrate_re_bytesimpl_325!();
+        Depcrate_re_bytesNoExpand!();
+        Depcrate_re_bytesimpl_327!();
+        Depcrate_re_bytesextend_from_slice!();
+    };
+}

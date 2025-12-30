@@ -1,0 +1,9 @@
+// Generated macro for impl_160 (impl)
+macro_rules! Depcrate_graphql_enumimpl_160 {
+() => {
+// Module: crate::graphql_enum
+// Provides: {"impl_160"}
+// Dependencies: {}
+impl Parse for ContainerAttr { fn parse (input : ParseStream < '_ >) -> syn :: Result < Self > { let mut out = Self :: default () ; while ! input . is_empty () { let ident = input . parse_any_ident () ? ; match ident . to_string () . as_str () { "name" => { input . parse :: < token :: Eq > () ? ; let name = input . parse :: < syn :: LitStr > () ? ; out . name . replace (SpanContainer :: new (ident . span () , Some (name . span ()) , name . value () ,)) . none_or_else (| _ | err :: dup_arg (& ident)) ? } "desc" | "description" => { input . parse :: < token :: Eq > () ? ; let desc = input . parse :: < Description > () ? ; out . description . replace (SpanContainer :: new (ident . span () , Some (desc . span ()) , desc)) . none_or_else (| _ | err :: dup_arg (& ident)) ? } "ctx" | "context" | "Context" => { input . parse :: < token :: Eq > () ? ; let ctx = input . parse :: < syn :: Type > () ? ; out . context . replace (SpanContainer :: new (ident . span () , Some (ctx . span ()) , ctx)) . none_or_else (| _ | err :: dup_arg (& ident)) ? } "scalar" | "Scalar" | "ScalarValue" => { input . parse :: < token :: Eq > () ? ; let scl = input . parse :: < scalar :: AttrValue > () ? ; out . scalar . replace (SpanContainer :: new (ident . span () , Some (scl . span ()) , scl)) . none_or_else (| _ | err :: dup_arg (& ident)) ? } "rename_all" => { input . parse :: < token :: Eq > () ? ; let val = input . parse :: < syn :: LitStr > () ? ; out . rename_values . replace (SpanContainer :: new (ident . span () , Some (val . span ()) , val . try_into () ? ,)) . none_or_else (| _ | err :: dup_arg (& ident)) ? ; } "internal" => { out . is_internal = true ; } name => { return Err (err :: unknown_arg (& ident , name)) ; } } input . try_parse :: < token :: Comma > () ? ; } Ok (out) } }
+};
+}

@@ -1,0 +1,40 @@
+// Generated module macro for crate::verification::windows
+macro_rules! Modcrate_verification_windows {
+() => {
+        Depcrate_verification_windowsuse_59!();
+        Depcrate_verification_windowsuse_60!();
+        Depcrate_verification_windowsuse_61!();
+        Depcrate_verification_windowsuse_62!();
+        Depcrate_verification_windowsuse_63!();
+        Depcrate_verification_windowsuse_64!();
+        Depcrate_verification_windowsuse_65!();
+        Depcrate_verification_windowsCERT_CHAIN_PARA!();
+        Depcrate_verification_windowsuse_67!();
+        Depcrate_verification_windowsimpl_68!();
+        Depcrate_verification_windowsimpl_69!();
+        Depcrate_verification_windowsimpl_70!();
+        Depcrate_verification_windowsimpl_71!();
+        Depcrate_verification_windowsCertChain!();
+        Depcrate_verification_windowsimpl_73!();
+        Depcrate_verification_windowsimpl_74!();
+        Depcrate_verification_windowsCertificate!();
+        Depcrate_verification_windowsimpl_76!();
+        Depcrate_verification_windowsimpl_77!();
+        Depcrate_verification_windowsCertEngine!();
+        Depcrate_verification_windowsimpl_79!();
+        Depcrate_verification_windowsimpl_80!();
+        Depcrate_verification_windowsimpl_81!();
+        Depcrate_verification_windowsimpl_82!();
+        Depcrate_verification_windowsCertificateStore!();
+        Depcrate_verification_windowsimpl_84!();
+        Depcrate_verification_windowsimpl_85!();
+        Depcrate_verification_windowsimpl_86!();
+        Depcrate_verification_windowsimpl_87!();
+        Depcrate_verification_windowsEnginePtr!();
+        Depcrate_verification_windowscall_with_last_error!();
+        Depcrate_verification_windowsVerifier!();
+        Depcrate_verification_windowsimpl_91!();
+        Depcrate_verification_windowsimpl_92!();
+        Depcrate_verification_windowsZeroedWithSize!();
+    };
+}

@@ -1,0 +1,9 @@
+// Generated macro for usize_to_u32 (function)
+macro_rules! Depcrate_backtrackusize_to_u32 {
+() => {
+// Module: crate::backtrack
+// Provides: {"usize_to_u32"}
+// Dependencies: {}
+fn usize_to_u32 (n : usize) -> u32 { if (n as u64) > (:: std :: u32 :: MAX as u64) { panic ! ("BUG: {} is too big to fit into u32" , n) } n as u32 }
+};
+}

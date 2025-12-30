@@ -1,0 +1,9 @@
+// Generated macro for impl_135 (impl)
+macro_rules! Depcrateimpl_135 {
+() => {
+// Module: crate
+// Provides: {"impl_135"}
+// Dependencies: {}
+impl Row { fn new (constant : f64) -> Row { Row { cells : HashMap :: new () , constant : constant } } fn add (& mut self , v : f64) -> f64 { self . constant += v ; self . constant } fn insert_symbol (& mut self , s : Symbol , coefficient : f64) { match self . cells . entry (s) { Entry :: Vacant (entry) => if ! near_zero (coefficient) { entry . insert (coefficient) ; } , Entry :: Occupied (mut entry) => { * entry . get_mut () += coefficient ; if near_zero (* entry . get_mut ()) { entry . remove () ; } } } } fn insert_row (& mut self , other : & Row , coefficient : f64) -> bool { let constant_diff = other . constant * coefficient ; self . constant += constant_diff ; for (s , v) in & other . cells { self . insert_symbol (* s , v * coefficient) ; } constant_diff != 0.0 } fn remove (& mut self , s : Symbol) { self . cells . remove (& s) ; } fn reverse_sign (& mut self) { self . constant = - self . constant ; for (_ , v) in & mut self . cells { * v = - * v ; } } fn solve_for_symbol (& mut self , s : Symbol) { let coeff = - 1.0 / match self . cells . entry (s) { Entry :: Occupied (entry) => entry . remove () , Entry :: Vacant (_) => unreachable ! () } ; self . constant *= coeff ; for (_ , v) in & mut self . cells { * v *= coeff ; } } fn solve_for_symbols (& mut self , lhs : Symbol , rhs : Symbol) { self . insert_symbol (lhs , - 1.0) ; self . solve_for_symbol (rhs) ; } fn coefficient_for (& self , s : Symbol) -> f64 { self . cells . get (& s) . cloned () . unwrap_or (0.0) } fn substitute (& mut self , s : Symbol , row : & Row) -> bool { if let Some (coeff) = self . cells . remove (& s) { self . insert_row (row , coeff) } else { false } } }
+};
+}

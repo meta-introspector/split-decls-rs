@@ -1,0 +1,9 @@
+// Generated macro for ACTIVATION_CONTEXT_SECTION_ASSEMBLY_INFORMATION (const)
+macro_rules! Depcrate_um_winntACTIVATION_CONTEXT_SECTION_ASSEMBLY_INFORMATION {
+() => {
+// Module: crate::um::winnt
+// Provides: {"ACTIVATION_CONTEXT_SECTION_ASSEMBLY_INFORMATION"}
+// Dependencies: {}
+pub const ACTIVATION_CONTEXT_SECTION_ASSEMBLY_INFORMATION : ULONG = 1 ;
+};
+}

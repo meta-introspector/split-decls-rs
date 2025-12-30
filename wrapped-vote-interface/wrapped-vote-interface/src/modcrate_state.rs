@@ -1,0 +1,43 @@
+// Generated module macro for crate::state
+macro_rules! Modcrate_state {
+() => {
+        Depcrate_stateuse_44!();
+        Depcrate_stateuse_45!();
+        Depcrate_stateuse_46!();
+        Depcrate_stateuse_47!();
+        Depcrate_stateuse_48!();
+        Depcrate_statevote_state_1_14_11!();
+        Depcrate_stateuse_57!();
+        Depcrate_statevote_state_versions!();
+        Depcrate_stateuse_67!();
+        Depcrate_statevote_state_v3!();
+        Depcrate_stateuse_78!();
+        Depcrate_statevote_state_v4!();
+        Depcrate_stateuse_89!();
+        Depcrate_statevote_instruction_data!();
+        Depcrate_stateuse_110!();
+        Depcrate_statevote_state_deserialize!();
+        Depcrate_stateBLS_PUBLIC_KEY_COMPRESSED_SIZE!();
+        Depcrate_stateBLS_PROOF_OF_POSSESSION_COMPRESSED_SIZE!();
+        Depcrate_stateMAX_LOCKOUT_HISTORY!();
+        Depcrate_stateINITIAL_LOCKOUT!();
+        Depcrate_stateMAX_EPOCH_CREDITS_HISTORY!();
+        Depcrate_stateDEFAULT_PRIOR_VOTERS_OFFSET!();
+        Depcrate_stateVOTE_CREDITS_GRACE_SLOTS!();
+        Depcrate_stateVOTE_CREDITS_MAXIMUM_PER_SLOT!();
+        Depcrate_stateLockout!();
+        Depcrate_stateimpl_138!();
+        Depcrate_stateLandedVote!();
+        Depcrate_stateimpl_140!();
+        Depcrate_stateimpl_141!();
+        Depcrate_stateimpl_142!();
+        Depcrate_stateBlockTimestamp!();
+        Depcrate_stateMAX_ITEMS!();
+        Depcrate_stateCircBuf!();
+        Depcrate_stateimpl_146!();
+        Depcrate_stateimpl_147!();
+        Depcrate_stateserde_compact_vote_state_update!();
+        Depcrate_stateserde_tower_sync!();
+        Depcrate_statetests!();
+    };
+}

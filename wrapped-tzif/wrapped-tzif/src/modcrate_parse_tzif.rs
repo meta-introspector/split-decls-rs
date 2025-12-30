@@ -1,0 +1,44 @@
+// Generated module macro for crate::parse::tzif
+macro_rules! Modcrate_parse_tzif {
+() => {
+        Depcrate_parse_tzifuse_75!();
+        Depcrate_parse_tzifuse_76!();
+        Depcrate_parse_tzifuse_77!();
+        Depcrate_parse_tzifuse_78!();
+        Depcrate_parse_tzifuse_79!();
+        Depcrate_parse_tzifuse_80!();
+        Depcrate_parse_tzifuse_81!();
+        Depcrate_parse_tzifuse_82!();
+        Depcrate_parse_tzifmagic_sequence!();
+        Depcrate_parse_tzifversion!();
+        Depcrate_parse_tzifisutcnt!();
+        Depcrate_parse_tzifisstdcnt!();
+        Depcrate_parse_tzifleapcnt!();
+        Depcrate_parse_tziftimecnt!();
+        Depcrate_parse_tziftypecnt!();
+        Depcrate_parse_tzifcharcnt!();
+        Depcrate_parse_tzifheader!();
+        Depcrate_parse_tzifhistoric_transition_time!();
+        Depcrate_parse_tzifhistoric_transition_times!();
+        Depcrate_parse_tziftransition_types!();
+        Depcrate_parse_tzifutoff!();
+        Depcrate_parse_tzifboolean!();
+        Depcrate_parse_tzifis_dst!();
+        Depcrate_parse_tzifidx!();
+        Depcrate_parse_tziflocal_time_type_record!();
+        Depcrate_parse_tziflocal_time_type_records!();
+        Depcrate_parse_tziftime_zone_designations!();
+        Depcrate_parse_tzifleap_second_occurrence!();
+        Depcrate_parse_tzifleap_second_correction!();
+        Depcrate_parse_tzifleap_second_record!();
+        Depcrate_parse_tzifleap_second_records!();
+        Depcrate_parse_tzifstandard_wall_indicator!();
+        Depcrate_parse_tzifstandard_wall_indicators!();
+        Depcrate_parse_tzifut_local_indicator!();
+        Depcrate_parse_tzifut_local_indicators!();
+        Depcrate_parse_tzifdata_block!();
+        Depcrate_parse_tziffooter!();
+        Depcrate_parse_tziftzif!();
+        Depcrate_parse_tziftest!();
+    };
+}

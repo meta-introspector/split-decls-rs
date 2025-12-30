@@ -1,0 +1,47 @@
+// Generated module macro for crate
+macro_rules! Modcrate {
+() => {
+        Depcrateuse_1!();
+        Depcrateuse_2!();
+        Depcrateuse_3!();
+        Depcrateuse_4!();
+        Depcrateuse_5!();
+        Depcrateuse_6!();
+        Depcratesymbol_name!();
+        DepcrateRESOURCE_IMPORT_BASE_CLASS_NAME!();
+        DepcrateRESOURCE_EXPORT_BASE_CLASS_NAME!();
+        DepcrateRESOURCE_TABLE_NAME!();
+        DepcrateOWNED_CLASS_NAME!();
+        DepcratePOINTER_SIZE_EXPRESSION!();
+        DepcrateCppType!();
+        DepcrateFlavor!();
+        DepcrateHighlevelSignature!();
+        DepcrateIncludes!();
+        DepcrateSourceWithState!();
+        DepcrateDirection!();
+        DepcrateCpp!();
+        DepcrateOpts!();
+        DepcrateAPIStyle!();
+        Depcrateimpl_26!();
+        Depcrateimpl_27!();
+        DepcrateOwnership!();
+        Depcrateimpl_29!();
+        Depcrateimpl_30!();
+        Depcrateimpl_31!();
+        Depcrateimpl_32!();
+        DepcrateFileContext!();
+        Depcrateimpl_34!();
+        Depcratenamespace!();
+        Depcrateimpl_36!();
+        DepcrateCppInterfaceGenerator!();
+        Depcrateimpl_38!();
+        Depcrateimpl_39!();
+        DepcrateCabiPostInformation!();
+        DepcrateFunctionBindgen!();
+        Depcrateimpl_42!();
+        Depcratemove_if_necessary!();
+        Depcrateimpl_44!();
+        DepcrateSpecialMethod!();
+        Depcrateis_special_method!();
+    };
+}

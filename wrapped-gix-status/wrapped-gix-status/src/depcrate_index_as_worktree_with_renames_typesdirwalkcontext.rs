@@ -1,0 +1,9 @@
+// Generated macro for DirwalkContext (struct)
+macro_rules! Depcrate_index_as_worktree_with_renames_typesDirwalkContext {
+() => {
+// Module: crate::index_as_worktree_with_renames::types
+// Provides: {"DirwalkContext"}
+// Dependencies: {}
+# [doc = " All information that is required to perform a [dirwalk](gix_dir::walk())."] pub struct DirwalkContext < 'a > { # [doc = " The `git_dir` of the parent repository, after a call to [`gix_path::realpath()`]."] # [doc = ""] # [doc = " It's used to help us differentiate our own `.git` directory from nested unrelated repositories,"] # [doc = " which is needed if `core.worktree` is used to nest the `.git` directory deeper within."] pub git_dir_realpath : & 'a std :: path :: Path , # [doc = " The current working directory as returned by `gix_fs::current_dir()` to assure it respects `core.precomposeUnicode`."] # [doc = " It's used to produce the realpath of the git-dir of a repository candidate to assure it's not our own repository."] pub current_dir : & 'a std :: path :: Path , # [doc = " A utility to lookup index entries faster, and deal with ignore-case handling."] # [doc = ""] # [doc = " Must be set if [`ignore_case`](gix_dir::walk::Options::ignore_case) is `true`, or else some entries won't be found if their case is different."] # [doc = ""] # [doc = " [Read more in `gix-dir`](gix_dir::walk::Context::ignore_case_index_lookup)."] pub ignore_case_index_lookup : Option < & 'a gix_index :: AccelerateLookup < 'a > > , }
+};
+}

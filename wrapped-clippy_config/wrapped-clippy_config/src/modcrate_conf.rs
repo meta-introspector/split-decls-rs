@@ -1,0 +1,55 @@
+// Generated module macro for crate::conf
+macro_rules! Modcrate_conf {
+() => {
+        Depcrate_confuse_8!();
+        Depcrate_confuse_9!();
+        Depcrate_confuse_10!();
+        Depcrate_confuse_11!();
+        Depcrate_confuse_12!();
+        Depcrate_confuse_13!();
+        Depcrate_confuse_14!();
+        Depcrate_confuse_15!();
+        Depcrate_confuse_16!();
+        Depcrate_confuse_17!();
+        Depcrate_confuse_18!();
+        Depcrate_confuse_19!();
+        Depcrate_confuse_20!();
+        Depcrate_confuse_21!();
+        Depcrate_confuse_22!();
+        Depcrate_confuse_23!();
+        Depcrate_confuse_24!();
+        Depcrate_confDEFAULT_DOC_VALID_IDENTS!();
+        Depcrate_confDEFAULT_DISALLOWED_NAMES!();
+        Depcrate_confDEFAULT_ALLOWED_IDENTS_BELOW_MIN_CHARS!();
+        Depcrate_confDEFAULT_ALLOWED_PREFIXES!();
+        Depcrate_confDEFAULT_ALLOWED_TRAITS_WITH_RENAMED_PARAMS!();
+        Depcrate_confDEFAULT_MODULE_ITEM_ORDERING_GROUPS!();
+        Depcrate_confDEFAULT_TRAIT_ASSOC_ITEM_KINDS_ORDER!();
+        Depcrate_confDEFAULT_SOURCE_ITEM_ORDERING!();
+        Depcrate_confTryConf!();
+        Depcrate_confimpl_34!();
+        Depcrate_confConfError!();
+        Depcrate_confimpl_36!();
+        Depcrate_confsanitize_explanation!();
+        Depcrate_confwrap_option!();
+        Depcrate_confdefault_text!();
+        Depcrate_confdeserialize!();
+        Depcrate_confdefine_Conf!();
+        Depcrate_confunion!();
+        Depcrate_confspan_from_toml_range!();
+        Depcrate_confmacro_44!();
+        Depcrate_conflookup_conf_file!();
+        Depcrate_confdeserialize!();
+        Depcrate_confextend_vec_if_indicator_present!();
+        Depcrate_confimpl_48!();
+        Depcrate_confSEPARATOR_WIDTH!();
+        Depcrate_confFieldError!();
+        Depcrate_confSuggestion!();
+        Depcrate_confimpl_52!();
+        Depcrate_confimpl_53!();
+        Depcrate_confimpl_54!();
+        Depcrate_confcalculate_dimensions!();
+        Depcrate_confsuggest_candidate!();
+        Depcrate_conftests!();
+    };
+}

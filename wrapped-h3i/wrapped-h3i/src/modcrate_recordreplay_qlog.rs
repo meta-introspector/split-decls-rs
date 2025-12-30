@@ -1,0 +1,46 @@
+// Generated module macro for crate::recordreplay::qlog
+macro_rules! Modcrate_recordreplay_qlog {
+() => {
+        Depcrate_recordreplay_qloguse_517!();
+        Depcrate_recordreplay_qloguse_518!();
+        Depcrate_recordreplay_qloguse_519!();
+        Depcrate_recordreplay_qloguse_520!();
+        Depcrate_recordreplay_qloguse_521!();
+        Depcrate_recordreplay_qloguse_522!();
+        Depcrate_recordreplay_qloguse_523!();
+        Depcrate_recordreplay_qloguse_524!();
+        Depcrate_recordreplay_qloguse_525!();
+        Depcrate_recordreplay_qloguse_526!();
+        Depcrate_recordreplay_qloguse_527!();
+        Depcrate_recordreplay_qloguse_528!();
+        Depcrate_recordreplay_qloguse_529!();
+        Depcrate_recordreplay_qloguse_530!();
+        Depcrate_recordreplay_qloguse_531!();
+        Depcrate_recordreplay_qloguse_532!();
+        Depcrate_recordreplay_qloguse_533!();
+        Depcrate_recordreplay_qloguse_534!();
+        Depcrate_recordreplay_qloguse_535!();
+        Depcrate_recordreplay_qloguse_536!();
+        Depcrate_recordreplay_qloguse_537!();
+        Depcrate_recordreplay_qloguse_538!();
+        Depcrate_recordreplay_qloguse_539!();
+        Depcrate_recordreplay_qloguse_540!();
+        Depcrate_recordreplay_qloguse_541!();
+        Depcrate_recordreplay_qloguse_542!();
+        Depcrate_recordreplay_qloguse_543!();
+        Depcrate_recordreplay_qloguse_544!();
+        Depcrate_recordreplay_qlogQlogEvent!();
+        Depcrate_recordreplay_qlogQlogEvents!();
+        Depcrate_recordreplay_qlogH3Actions!();
+        Depcrate_recordreplay_qlogH3FrameCreatedEx!();
+        Depcrate_recordreplay_qlogimpl_549!();
+        Depcrate_recordreplay_qlogactions_from_qlog!();
+        Depcrate_recordreplay_qlogimpl_551!();
+        Depcrate_recordreplay_qlogimpl_552!();
+        Depcrate_recordreplay_qlogmap_header!();
+        Depcrate_recordreplay_qlogimpl_554!();
+        Depcrate_recordreplay_qlogfrom_qlog_stream_type_set!();
+        Depcrate_recordreplay_qlogparse_ex_data!();
+        Depcrate_recordreplay_qlogtests!();
+    };
+}

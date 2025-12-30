@@ -1,0 +1,9 @@
+// Generated macro for impl_16 (impl)
+macro_rules! Depcrate_bytesimpl_16 {
+() => {
+// Module: crate::bytes
+// Provides: {"impl_16"}
+// Dependencies: {}
+impl < 'a > Shlex < 'a > { pub fn new (in_bytes : & 'a [u8]) -> Self { Shlex { in_iter : in_bytes . iter () , line_no : 1 , had_error : false , } } fn parse_word (& mut self , mut ch : u8) -> Option < Vec < u8 > > { let mut result : Vec < u8 > = Vec :: new () ; loop { match ch as char { '"' => if let Err (()) = self . parse_double (& mut result) { self . had_error = true ; return None ; } , '\'' => if let Err (()) = self . parse_single (& mut result) { self . had_error = true ; return None ; } , '\\' => if let Some (ch2) = self . next_char () { if ch2 != '\n' as u8 { result . push (ch2) ; } } else { self . had_error = true ; return None ; } , ' ' | '\t' | '\n' => { break ; } , _ => { result . push (ch as u8) ; } , } if let Some (ch2) = self . next_char () { ch = ch2 ; } else { break ; } } Some (result) } fn parse_double (& mut self , result : & mut Vec < u8 >) -> Result < () , () > { loop { if let Some (ch2) = self . next_char () { match ch2 as char { '\\' => { if let Some (ch3) = self . next_char () { match ch3 as char { '$' | '`' | '"' | '\\' => { result . push (ch3) ; } , '\n' => { } , _ => { result . push ('\\' as u8) ; result . push (ch3) ; } } } else { return Err (()) ; } } , '"' => { return Ok (()) ; } , _ => { result . push (ch2) ; } , } } else { return Err (()) ; } } } fn parse_single (& mut self , result : & mut Vec < u8 >) -> Result < () , () > { loop { if let Some (ch2) = self . next_char () { match ch2 as char { '\'' => { return Ok (()) ; } , _ => { result . push (ch2) ; } , } } else { return Err (()) ; } } } fn next_char (& mut self) -> Option < u8 > { let res = self . in_iter . next () . copied () ; if res == Some (b'\n') { self . line_no += 1 ; } res } }
+};
+}

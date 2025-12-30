@@ -1,0 +1,9 @@
+// Generated macro for impl_31 (impl)
+macro_rules! Depcrate_fragmentsimpl_31 {
+() => {
+// Module: crate::fragments
+// Provides: {"impl_31"}
+// Dependencies: {}
+impl < 'a > sval :: Stream < 'a > for BinaryCollector < 'a > { fn binary_begin (& mut self , _ : Option < usize >) -> sval :: Result { Ok (()) } fn binary_fragment (& mut self , fragment : & 'a [u8]) -> sval :: Result { self . try_catch (| buf | buf . push_fragment (fragment)) } fn binary_fragment_computed (& mut self , fragment : & [u8]) -> sval :: Result { self . try_catch (| buf | buf . push_fragment_computed (fragment)) } fn binary_end (& mut self) -> sval :: Result { Ok (()) } fn text_begin (& mut self , _ : Option < usize >) -> sval :: Result { self . fail (Error :: unsupported ("binary" , "text")) } fn text_fragment_computed (& mut self , _ : & str) -> sval :: Result { self . fail (Error :: unsupported ("binary" , "text")) } fn text_end (& mut self) -> sval :: Result { self . fail (Error :: unsupported ("binary" , "text")) } fn null (& mut self) -> sval :: Result { self . fail (Error :: unsupported ("binary" , "null")) } fn bool (& mut self , _ : bool) -> sval :: Result { self . fail (Error :: unsupported ("binary" , "boolean")) } fn u8 (& mut self , value : u8) -> sval :: Result { self . try_catch (| buf | buf . push_fragment_computed (& [value])) } fn i64 (& mut self , _ : i64) -> sval :: Result { self . fail (Error :: unsupported ("binary" , "integer")) } fn f64 (& mut self , _ : f64) -> sval :: Result { self . fail (Error :: unsupported ("binary" , "floating point")) } fn map_begin (& mut self , _ : Option < usize >) -> sval :: Result { self . fail (Error :: unsupported ("binary" , "map")) } fn seq_begin (& mut self , _ : Option < usize >) -> sval :: Result { Ok (()) } fn seq_value_begin (& mut self) -> sval :: Result { Ok (()) } fn seq_value_end (& mut self) -> sval :: Result { Ok (()) } fn seq_end (& mut self) -> sval :: Result { Ok (()) } }
+};
+}

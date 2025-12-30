@@ -1,0 +1,9 @@
+// Generated macro for Header (enum)
+macro_rules! Depcrate_data_entry_headerHeader {
+() => {
+// Module: crate::data::entry::header
+// Provides: {"Header"}
+// Dependencies: {}
+# [doc = " The header portion of a pack data entry, identifying the kind of stored object."] # [derive (PartialEq , Eq , Debug , Hash , Ord , PartialOrd , Clone , Copy)] # [cfg_attr (feature = "serde" , derive (serde :: Serialize , serde :: Deserialize))] # [allow (missing_docs)] pub enum Header { # [doc = " The object is a commit"] Commit , # [doc = " The object is a tree"] Tree , # [doc = " The object is a blob"] Blob , # [doc = " The object is a tag"] Tag , # [doc = " Describes a delta-object which needs to be applied to a base. The base object is identified by the `base_id` field"] # [doc = " which is found within the parent repository."] # [doc = " Most commonly used for **thin-packs** when receiving pack files from the server to refer to objects that are not"] # [doc = " part of the pack but expected to be present in the receivers repository."] # [doc = ""] # [doc = " # Note"] # [doc = " This could also be an object within this pack if the LSB encoded offset would be larger than 20 bytes, which is unlikely to"] # [doc = " happen."] # [doc = ""] # [doc = " **The naming** is exactly the same as the canonical implementation uses, namely **REF_DELTA**."] RefDelta { base_id : gix_hash :: ObjectId } , # [doc = " Describes a delta-object present in this pack which acts as base for this object."] # [doc = " The base object is measured as a distance from this objects"] # [doc = " pack offset, so that `base_pack_offset = this_objects_pack_offset - base_distance`"] # [doc = ""] # [doc = " # Note"] # [doc = ""] # [doc = " **The naming** is exactly the same as the canonical implementation uses, namely **OFS_DELTA**."] OfsDelta { base_distance : u64 } , }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for WLAN_REASON_CODE_MSMSEC_CAPABILITY_DISCOVERY (const)
+macro_rules! Depcrate_um_wlanapiWLAN_REASON_CODE_MSMSEC_CAPABILITY_DISCOVERY {
+() => {
+// Module: crate::um::wlanapi
+// Provides: {"WLAN_REASON_CODE_MSMSEC_CAPABILITY_DISCOVERY"}
+// Dependencies: {}
+pub const WLAN_REASON_CODE_MSMSEC_CAPABILITY_DISCOVERY : WLAN_REASON_CODE = WLAN_REASON_CODE_MSMSEC_BASE + 21 ;
+};
+}

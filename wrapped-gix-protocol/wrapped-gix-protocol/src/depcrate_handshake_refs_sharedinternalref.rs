@@ -1,0 +1,9 @@
+// Generated macro for InternalRef (enum)
+macro_rules! Depcrate_handshake_refs_sharedInternalRef {
+() => {
+// Module: crate::handshake::refs::shared
+// Provides: {"InternalRef"}
+// Dependencies: {}
+# [cfg_attr (test , derive (PartialEq , Eq , Debug , Clone))] pub (crate) enum InternalRef { # [doc = " A ref pointing to a `tag` object, which in turns points to an `object`, usually a commit"] Peeled { path : BString , tag : gix_hash :: ObjectId , object : gix_hash :: ObjectId , } , # [doc = " A ref pointing to a commit object"] Direct { path : BString , object : gix_hash :: ObjectId } , # [doc = " A symbolic ref pointing to `target` ref, which in turn points to an `object`"] Symbolic { path : BString , # [doc = " It is `None` if the target is unreachable as it points to another namespace than the one is currently set"] # [doc = " on the server (i.e. based on the repository at hand or the user performing the operation)."] # [doc = ""] # [doc = " The latter is more of an edge case, please [this issue][#205] for details."] target : Option < BString > , tag : Option < gix_hash :: ObjectId > , object : gix_hash :: ObjectId , } , # [doc = " extracted from V1 capabilities, which contain some important symbolic refs along with their targets"] # [doc = " These don't contain the Id"] SymbolicForLookup { path : BString , target : Option < BString > } , }
+};
+}

@@ -1,0 +1,50 @@
+// Generated module macro for crate::um::tlhelp32
+macro_rules! Modcrate_um_tlhelp32 {
+() => {
+        Depcrate_um_tlhelp32use_39040!();
+        Depcrate_um_tlhelp32use_39041!();
+        Depcrate_um_tlhelp32use_39042!();
+        Depcrate_um_tlhelp32MAX_MODULE_NAME32!();
+        Depcrate_um_tlhelp32other_39044!();
+        Depcrate_um_tlhelp32TH32CS_SNAPHEAPLIST!();
+        Depcrate_um_tlhelp32TH32CS_SNAPPROCESS!();
+        Depcrate_um_tlhelp32TH32CS_SNAPTHREAD!();
+        Depcrate_um_tlhelp32TH32CS_SNAPMODULE!();
+        Depcrate_um_tlhelp32TH32CS_SNAPMODULE32!();
+        Depcrate_um_tlhelp32TH32CS_SNAPALL!();
+        Depcrate_um_tlhelp32TH32CS_INHERIT!();
+        Depcrate_um_tlhelp32macro_39052!();
+        Depcrate_um_tlhelp32PHEAPLIST32!();
+        Depcrate_um_tlhelp32LPHEAPLIST32!();
+        Depcrate_um_tlhelp32HF32_DEFAULT!();
+        Depcrate_um_tlhelp32HF32_SHARED!();
+        Depcrate_um_tlhelp32other_39057!();
+        Depcrate_um_tlhelp32macro_39058!();
+        Depcrate_um_tlhelp32PHEAPENTRY32!();
+        Depcrate_um_tlhelp32LPHEAPENTRY32!();
+        Depcrate_um_tlhelp32LF32_FIXED!();
+        Depcrate_um_tlhelp32LF32_FREE!();
+        Depcrate_um_tlhelp32LF32_MOVEABLE!();
+        Depcrate_um_tlhelp32other_39064!();
+        Depcrate_um_tlhelp32macro_39065!();
+        Depcrate_um_tlhelp32PPROCESSENTRY32W!();
+        Depcrate_um_tlhelp32LPPROCESSENTRY32W!();
+        Depcrate_um_tlhelp32other_39068!();
+        Depcrate_um_tlhelp32macro_39069!();
+        Depcrate_um_tlhelp32PPROCESSENTRY32!();
+        Depcrate_um_tlhelp32LPPROCESSENTRY32!();
+        Depcrate_um_tlhelp32other_39072!();
+        Depcrate_um_tlhelp32macro_39073!();
+        Depcrate_um_tlhelp32PTHREADENTRY32!();
+        Depcrate_um_tlhelp32LPTHREADENTRY32!();
+        Depcrate_um_tlhelp32other_39076!();
+        Depcrate_um_tlhelp32macro_39077!();
+        Depcrate_um_tlhelp32PMODULEENTRY32W!();
+        Depcrate_um_tlhelp32LPMODULEENTRY32W!();
+        Depcrate_um_tlhelp32other_39080!();
+        Depcrate_um_tlhelp32macro_39081!();
+        Depcrate_um_tlhelp32PMODULEENTRY32!();
+        Depcrate_um_tlhelp32LPMODULEENTRY32!();
+        Depcrate_um_tlhelp32other_39084!();
+    };
+}

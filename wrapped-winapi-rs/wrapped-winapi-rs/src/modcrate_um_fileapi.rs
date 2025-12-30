@@ -1,0 +1,44 @@
+// Generated module macro for crate::um::fileapi
+macro_rules! Modcrate_um_fileapi {
+() => {
+        Depcrate_um_fileapiuse_28618!();
+        Depcrate_um_fileapiuse_28619!();
+        Depcrate_um_fileapiuse_28620!();
+        Depcrate_um_fileapiCREATE_NEW!();
+        Depcrate_um_fileapiCREATE_ALWAYS!();
+        Depcrate_um_fileapiOPEN_EXISTING!();
+        Depcrate_um_fileapiOPEN_ALWAYS!();
+        Depcrate_um_fileapiTRUNCATE_EXISTING!();
+        Depcrate_um_fileapiINVALID_FILE_SIZE!();
+        Depcrate_um_fileapiINVALID_SET_FILE_POINTER!();
+        Depcrate_um_fileapiINVALID_FILE_ATTRIBUTES!();
+        Depcrate_um_fileapimacro_28629!();
+        Depcrate_um_fileapiLPWIN32_FILE_ATTRIBUTE_DATA!();
+        Depcrate_um_fileapimacro_28631!();
+        Depcrate_um_fileapiPBY_HANDLE_FILE_INFORMATION!();
+        Depcrate_um_fileapiLPBY_HANDLE_FILE_INFORMATION!();
+        Depcrate_um_fileapimacro_28634!();
+        Depcrate_um_fileapiPCREATEFILE2_EXTENDED_PARAMETERS!();
+        Depcrate_um_fileapiLPCREATEFILE2_EXTENDED_PARAMETERS!();
+        Depcrate_um_fileapimacro_28637!();
+        Depcrate_um_fileapimacro_28638!();
+        Depcrate_um_fileapimacro_28639!();
+        Depcrate_um_fileapimacro_28640!();
+        Depcrate_um_fileapimacro_28641!();
+        Depcrate_um_fileapimacro_28642!();
+        Depcrate_um_fileapimacro_28643!();
+        Depcrate_um_fileapimacro_28644!();
+        Depcrate_um_fileapimacro_28645!();
+        Depcrate_um_fileapimacro_28646!();
+        Depcrate_um_fileapimacro_28647!();
+        Depcrate_um_fileapimacro_28648!();
+        Depcrate_um_fileapimacro_28649!();
+        Depcrate_um_fileapimacro_28650!();
+        Depcrate_um_fileapimacro_28651!();
+        Depcrate_um_fileapimacro_28652!();
+        Depcrate_um_fileapimacro_28653!();
+        Depcrate_um_fileapiother_28654!();
+        Depcrate_um_fileapimacro_28655!();
+        Depcrate_um_fileapiother_28656!();
+    };
+}

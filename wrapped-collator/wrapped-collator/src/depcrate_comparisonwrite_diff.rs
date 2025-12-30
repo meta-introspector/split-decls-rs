@@ -1,0 +1,9 @@
+// Generated macro for write_diff (function)
+macro_rules! Depcrate_comparisonwrite_diff {
+() => {
+// Module: crate::comparison
+// Provides: {"write_diff"}
+// Dependencies: {}
+fn write_diff < S > (mut diff : i32 , sink : & mut S , state : & mut S :: State) -> Result < () , S :: Error > where S : CollationKeySink + ? Sized , { let mut out = | b | sink . write_byte (state , b) ; if diff >= SLOPE_REACH_NEG_1 { if diff <= SLOPE_REACH_POS_1 { out ((SLOPE_MIDDLE + diff) as _) ? ; } else if diff <= SLOPE_REACH_POS_2 { out ((SLOPE_START_POS_2 + (diff / SLOPE_TAIL_COUNT)) as _) ? ; out ((SLOPE_MIN + diff % SLOPE_TAIL_COUNT) as _) ? ; } else if diff <= SLOPE_REACH_POS_3 { let p2 = SLOPE_MIN + diff % SLOPE_TAIL_COUNT ; diff /= SLOPE_TAIL_COUNT ; let p1 = SLOPE_MIN + diff % SLOPE_TAIL_COUNT ; let p0 = SLOPE_START_POS_3 + (diff / SLOPE_TAIL_COUNT) ; out (p0 as _) ? ; out (p1 as _) ? ; out (p2 as _) ? ; } else { let p3 = SLOPE_MIN + diff % SLOPE_TAIL_COUNT ; diff /= SLOPE_TAIL_COUNT ; let p2 = SLOPE_MIN + diff % SLOPE_TAIL_COUNT ; diff /= SLOPE_TAIL_COUNT ; let p1 = SLOPE_MIN + diff % SLOPE_TAIL_COUNT ; out (SLOPE_MAX as _) ? ; out (p1 as _) ? ; out (p2 as _) ? ; out (p3 as _) ? ; } } else { let mut m ; if diff >= SLOPE_REACH_NEG_2 { negdivmod ! (diff , SLOPE_TAIL_COUNT , m) ; out ((SLOPE_START_NEG_2 + diff) as _) ? ; out ((SLOPE_MIN + m) as _) ? ; } else if diff >= SLOPE_REACH_NEG_3 { negdivmod ! (diff , SLOPE_TAIL_COUNT , m) ; let p2 = SLOPE_MIN + m ; negdivmod ! (diff , SLOPE_TAIL_COUNT , m) ; let p1 = SLOPE_MIN + m ; let p0 = SLOPE_START_NEG_3 + diff ; out (p0 as _) ? ; out (p1 as _) ? ; out (p2 as _) ? ; } else { negdivmod ! (diff , SLOPE_TAIL_COUNT , m) ; let p3 = SLOPE_MIN + m ; negdivmod ! (diff , SLOPE_TAIL_COUNT , m) ; let p2 = SLOPE_MIN + m ; negdivmod ! (diff , SLOPE_TAIL_COUNT , m) ; let p1 = SLOPE_MIN + m ; let _ = diff ; out (SLOPE_MIN as _) ? ; out (p1 as _) ? ; out (p2 as _) ? ; out (p3 as _) ? ; } } Ok (()) }
+};
+}

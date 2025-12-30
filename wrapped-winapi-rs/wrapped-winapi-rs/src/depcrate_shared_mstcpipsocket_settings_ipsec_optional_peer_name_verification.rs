@@ -1,0 +1,9 @@
+// Generated macro for SOCKET_SETTINGS_IPSEC_OPTIONAL_PEER_NAME_VERIFICATION (const)
+macro_rules! Depcrate_shared_mstcpipSOCKET_SETTINGS_IPSEC_OPTIONAL_PEER_NAME_VERIFICATION {
+() => {
+// Module: crate::shared::mstcpip
+// Provides: {"SOCKET_SETTINGS_IPSEC_OPTIONAL_PEER_NAME_VERIFICATION"}
+// Dependencies: {}
+pub const SOCKET_SETTINGS_IPSEC_OPTIONAL_PEER_NAME_VERIFICATION : ULONG = 0x2 ;
+};
+}

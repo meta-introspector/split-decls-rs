@@ -1,0 +1,51 @@
+// Generated module macro for crate::pipe
+macro_rules! Modcrate_pipe {
+() => {
+        Depcrate_pipeuse_100!();
+        Depcrate_pipeuse_101!();
+        Depcrate_pipeuse_102!();
+        Depcrate_pipeuse_103!();
+        Depcrate_pipeuse_104!();
+        Depcrate_pipeuse_105!();
+        Depcrate_pipeuse_106!();
+        Depcrate_pipeuse_107!();
+        Depcrate_pipeuse_108!();
+        Depcrate_pipeuse_109!();
+        Depcrate_pipeuse_110!();
+        Depcrate_pipeuse_111!();
+        Depcrate_pipeuse_112!();
+        Depcrate_pipeuse_113!();
+        Depcrate_pipeuse_114!();
+        Depcrate_pipeuse_115!();
+        Depcrate_pipeAnonRead!();
+        Depcrate_pipeAnonWrite!();
+        Depcrate_pipeNamedPipe!();
+        Depcrate_pipeNamedPipeBuilder!();
+        Depcrate_pipeanonymous!();
+        Depcrate_pipeimpl_121!();
+        Depcrate_pipeimpl_122!();
+        Depcrate_pipeimpl_123!();
+        Depcrate_pipeimpl_124!();
+        Depcrate_pipeimpl_125!();
+        Depcrate_pipeimpl_126!();
+        Depcrate_pipeimpl_127!();
+        Depcrate_pipeimpl_128!();
+        Depcrate_pipeimpl_129!();
+        Depcrate_pipeimpl_130!();
+        Depcrate_pipeconnect!();
+        Depcrate_pipe_connect!();
+        Depcrate_pipeimpl_133!();
+        Depcrate_pipemacro_134!();
+        Depcrate_pipewith_threadlocal_overlapped!();
+        Depcrate_pipeimpl_136!();
+        Depcrate_pipeimpl_137!();
+        Depcrate_pipeimpl_138!();
+        Depcrate_pipeimpl_139!();
+        Depcrate_pipeimpl_140!();
+        Depcrate_pipeimpl_141!();
+        Depcrate_pipeimpl_142!();
+        Depcrate_pipeflag!();
+        Depcrate_pipeimpl_144!();
+        Depcrate_pipetests!();
+    };
+}

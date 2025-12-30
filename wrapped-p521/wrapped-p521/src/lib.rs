@@ -1,0 +1,72 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcrate_ecdsasignature.rs");
+include!("depcrate_arithmeticuse_10.rs");
+include!("depcrate_arithmeticimpl_15.rs");
+include!("depcrate_arithmeticuse_8.rs");
+include!("depcrate_ecdhuse_18.rs");
+include!("depcrate_ecdhsharedsecret.rs");
+include!("depcrateuse_35.rs");
+include!("depcratearithmetic.rs");
+include!("depcrateuse_36.rs");
+include!("depcrate_test_vectorsecdsa.rs");
+include!("depcrateuse_37.rs");
+include!("depcrateuse_40.rs");
+include!("depcrateimpl_45.rs");
+include!("depcrate_arithmeticuse_9.rs");
+include!("depcrateimpl_46.rs");
+include!("depcrate_arithmeticimpl_13.rs");
+include!("depcrateimpl_49.rs");
+include!("depcrate_arithmetichash2curve.rs");
+include!("depcrate_ecdhephemeralsecret.rs");
+include!("depcrateuse_41.rs");
+include!("depcrate_ecdsause_22.rs");
+include!("depcrateencodedpoint.rs");
+include!("depcratenistp521.rs");
+include!("depcrateuse_39.rs");
+include!("depcrateimpl_57.rs");
+include!("depcrateimpl_47.rs");
+include!("depcrate_ecdsasigningkey.rs");
+include!("depcrate_ecdsaimpl_30.rs");
+include!("depcrateecdsa.rs");
+include!("depcrate_test_vectorsgroup.rs");
+include!("depcrate_arithmeticaffinepoint.rs");
+include!("depcrate_ecdsadersignature.rs");
+include!("depcrateuse_38.rs");
+include!("depcrateorder_hex.rs");
+include!("depcrate_arithmeticimpl_14.rs");
+include!("depcrate_ecdsaverifyingkey.rs");
+include!("depcrate_arithmeticfield.rs");
+include!("depcrate_ecdsause_23.rs");
+include!("depcrateimpl_53.rs");
+include!("depcrate_arithmeticutil.rs");
+include!("depcratefieldbytes.rs");
+include!("depcratepublickey.rs");
+include!("depcrate_arithmeticuse_6.rs");
+include!("depcratetest_vectors.rs");
+include!("depcrateimpl_48.rs");
+include!("depcrate_ecdsatests.rs");
+include!("depcrate_arithmeticscalar.rs");
+include!("depcrate_ecdhuse_17.rs");
+include!("depcrate_arithmeticprojectivepoint.rs");
+include!("depcratecompressedpoint.rs");
+include!("depcratenonzeroscalar.rs");
+include!("depcrate_arithmeticuse_7.rs");
+include!("depcrateecdh.rs");
+include!("depcrate_ecdsause_24.rs");
+include!("depcrate_ecdsaimpl_27.rs");
+include!("depcratesecretkey.rs");
+include!("modcrate_ecdsa.rs");
+include!("modcrate_ecdh.rs");
+include!("modcrate_arithmetic.rs");
+include!("modcrate_test_vectors.rs");
+include!("modcrate.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate_ecdsa!();
+    Modcrate_ecdh!();
+    Modcrate_arithmetic!();
+    Modcrate_test_vectors!();
+    Modcrate!();
+}

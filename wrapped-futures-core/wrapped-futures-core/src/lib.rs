@@ -1,0 +1,77 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcrate_futureuse_7.rs");
+include!("depcrate_futureprivate_try_future.rs");
+include!("depcrate_streamlocalboxstream.rs");
+include!("depcrate_streamtrystream.rs");
+include!("depcrate_task___internal_atomic_wakeruse_46.rs");
+include!("depcrate_futurefusedfuture.rs");
+include!("depcrate_streamimpl_32.rs");
+include!("depcrate_streamif_alloc.rs");
+include!("depcratetask.rs");
+include!("depcrate_futureimpl_12.rs");
+include!("depcrate_streamstream.rs");
+include!("depcrate_task___internal_atomic_wakerwaiting.rs");
+include!("depcrate_futureimpl_11.rs");
+include!("depcrate_task___internal_atomic_wakerimpl_54.rs");
+include!("depcrate_streamfusedstream.rs");
+include!("depcrate_task___internaluse_56.rs");
+include!("depcrate_streamimpl_25.rs");
+include!("depcrate_futurelocalboxfuture.rs");
+include!("depcrate_task___internal_atomic_wakeruse_40.rs");
+include!("depcrate_task___internal_atomic_wakerregistering.rs");
+include!("depcrate_task___internal_atomic_wakeratomicwaker.rs");
+include!("depcrate_streamimpl_28.rs");
+include!("depcrate_taskuse_57.rs");
+include!("depcrate_task__internal.rs");
+include!("depcrate_streamboxstream.rs");
+include!("depcrate_task___internal_atomic_wakeruse_41.rs");
+include!("depcrate_streamuse_20.rs");
+include!("depcrate_task___internal_atomic_wakeruse_45.rs");
+include!("depcrate_streamprivate_try_stream.rs");
+include!("depcrate_streamuse_21.rs");
+include!("depcrate_task___internal_atomic_wakeruse_44.rs");
+include!("depcrate_futureif_alloc.rs");
+include!("depcrate_task___internal_atomic_wakeruse_43.rs");
+include!("depcrate_futureimpl_15.rs");
+include!("depcrate_streamimpl_29.rs");
+include!("depcrate_task_pollready.rs");
+include!("depcrate_taskpoll.rs");
+include!("depcrate_task___internal_atomic_wakerimpl_52.rs");
+include!("depcrateuse_34.rs");
+include!("depcrate_task___internal_atomic_wakerimpl_53.rs");
+include!("depcrate_task___internal_atomic_wakerimpl_55.rs");
+include!("depcrate_futuretryfuture.rs");
+include!("depcrate_task___internal_atomic_wakerwaking.rs");
+include!("depcrate_streamuse_19.rs");
+include!("depcrate_streamimpl_26.rs");
+include!("depcratestream.rs");
+include!("depcrate_futureuse_4.rs");
+include!("depcrate_task___internal_atomic_wakerimpl_51.rs");
+include!("depcrateother_1.rs");
+include!("depcrate_futureuse_6.rs");
+include!("depcratefuture.rs");
+include!("depcrateother_2.rs");
+include!("depcrate_futureboxfuture.rs");
+include!("depcrate_task___internal_atomic_wakeruse_42.rs");
+include!("depcrate_task___internalatomic_waker.rs");
+include!("depcrate_futureuse_5.rs");
+include!("depcrateuse_17.rs");
+include!("modcrate_task___internal_atomic_waker.rs");
+include!("modcrate_task_poll.rs");
+include!("modcrate_task.rs");
+include!("modcrate.rs");
+include!("modcrate_stream.rs");
+include!("modcrate_future.rs");
+include!("modcrate_task___internal.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate_task___internal_atomic_waker!();
+    Modcrate_task_poll!();
+    Modcrate_task!();
+    Modcrate!();
+    Modcrate_stream!();
+    Modcrate_future!();
+    Modcrate_task___internal!();
+}

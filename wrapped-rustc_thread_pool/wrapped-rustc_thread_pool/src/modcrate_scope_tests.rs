@@ -1,0 +1,57 @@
+// Generated module macro for crate::scope::tests
+macro_rules! Modcrate_scope_tests {
+() => {
+        Depcrate_scope_testsuse_201!();
+        Depcrate_scope_testsuse_202!();
+        Depcrate_scope_testsuse_203!();
+        Depcrate_scope_testsuse_204!();
+        Depcrate_scope_testsuse_205!();
+        Depcrate_scope_testsuse_206!();
+        Depcrate_scope_testsuse_207!();
+        Depcrate_scope_testsscope_empty!();
+        Depcrate_scope_testsscope_result!();
+        Depcrate_scope_testsscope_two!();
+        Depcrate_scope_testsscope_divide_and_conquer!();
+        Depcrate_scope_testsdivide_and_conquer!();
+        Depcrate_scope_testsdivide_and_conquer_seq!();
+        Depcrate_scope_testsTree!();
+        Depcrate_scope_testsimpl_215!();
+        Depcrate_scope_testsrandom_tree!();
+        Depcrate_scope_testsrandom_tree1!();
+        Depcrate_scope_testsupdate_tree!();
+        Depcrate_scope_testslinear_stack_growth!();
+        Depcrate_scope_teststhe_final_countdown!();
+        Depcrate_scope_testspanic_propagate_scope!();
+        Depcrate_scope_testspanic_propagate_spawn!();
+        Depcrate_scope_testspanic_propagate_nested_spawn!();
+        Depcrate_scope_testspanic_propagate_nested_scope_spawn!();
+        Depcrate_scope_testspanic_propagate_still_execute_1!();
+        Depcrate_scope_testspanic_propagate_still_execute_2!();
+        Depcrate_scope_testspanic_propagate_still_execute_3!();
+        Depcrate_scope_testspanic_propagate_still_execute_4!();
+        Depcrate_scope_teststest_order!();
+        Depcrate_scope_testslifo_order!();
+        Depcrate_scope_testsfifo_order!();
+        Depcrate_scope_teststest_nested_order!();
+        Depcrate_scope_testsnested_lifo_order!();
+        Depcrate_scope_testsnested_fifo_order!();
+        Depcrate_scope_testsnested_lifo_fifo_order!();
+        Depcrate_scope_testsnested_fifo_lifo_order!();
+        Depcrate_scope_testsspawn_push!();
+        Depcrate_scope_teststest_mixed_order!();
+        Depcrate_scope_testsmixed_lifo_order!();
+        Depcrate_scope_testsmixed_fifo_order!();
+        Depcrate_scope_testsmixed_lifo_fifo_order!();
+        Depcrate_scope_testsmixed_fifo_lifo_order!();
+        Depcrate_scope_testsstatic_scope!();
+        Depcrate_scope_testsstatic_scope_fifo!();
+        Depcrate_scope_testsmixed_lifetime_scope!();
+        Depcrate_scope_testsmixed_lifetime_scope_fifo!();
+        Depcrate_scope_testsscope_spawn_broadcast!();
+        Depcrate_scope_testsscope_fifo_spawn_broadcast!();
+        Depcrate_scope_testsscope_spawn_broadcast_nested!();
+        Depcrate_scope_testsscope_spawn_broadcast_barrier!();
+        Depcrate_scope_testsscope_spawn_broadcast_panic_one!();
+        Depcrate_scope_testsscope_spawn_broadcast_panic_many!();
+    };
+}

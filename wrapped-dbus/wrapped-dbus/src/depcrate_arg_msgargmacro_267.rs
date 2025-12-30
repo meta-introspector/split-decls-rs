@@ -1,0 +1,9 @@
+// Generated macro for macro_267 (macro)
+macro_rules! Depcrate_arg_msgargmacro_267 {
+() => {
+// Module: crate::arg::msgarg
+// Provides: {"macro_267"}
+// Dependencies: {}
+argall_impl ! (a A str , b B str , c C str , d D str , e E str , f F str , g G str , h H str , i I str ,) ;
+};
+}

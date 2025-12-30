@@ -1,0 +1,50 @@
+// Generated module macro for crate::repr::num
+macro_rules! Modcrate_repr_num {
+() => {
+        Depcrate_repr_numuse_209!();
+        Depcrate_repr_numuse_210!();
+        Depcrate_repr_numuse_211!();
+        Depcrate_repr_numuse_212!();
+        Depcrate_repr_numDEC_DIGITS_LUT!();
+        Depcrate_repr_numimpl_IntoRepr!();
+        Depcrate_repr_nummacro_215!();
+        Depcrate_repr_nummacro_216!();
+        Depcrate_repr_nummacro_217!();
+        Depcrate_repr_nummacro_218!();
+        Depcrate_repr_nummacro_219!();
+        Depcrate_repr_nummacro_220!();
+        Depcrate_repr_nummacro_221!();
+        Depcrate_repr_nummacro_222!();
+        Depcrate_repr_nummacro_223!();
+        Depcrate_repr_nummacro_224!();
+        Depcrate_repr_nummacro_225!();
+        Depcrate_repr_nummacro_226!();
+        Depcrate_repr_numimpl_227!();
+        Depcrate_repr_numimpl_228!();
+        Depcrate_repr_numimpl_NonZero_IntoRepr!();
+        Depcrate_repr_nummacro_230!();
+        Depcrate_repr_nummacro_231!();
+        Depcrate_repr_nummacro_232!();
+        Depcrate_repr_nummacro_233!();
+        Depcrate_repr_nummacro_234!();
+        Depcrate_repr_nummacro_235!();
+        Depcrate_repr_nummacro_236!();
+        Depcrate_repr_nummacro_237!();
+        Depcrate_repr_nummacro_238!();
+        Depcrate_repr_nummacro_239!();
+        Depcrate_repr_nummacro_240!();
+        Depcrate_repr_nummacro_241!();
+        Depcrate_repr_numNumChars!();
+        Depcrate_repr_numimpl_243!();
+        Depcrate_repr_numimpl_244!();
+        Depcrate_repr_numimpl_245!();
+        Depcrate_repr_numimpl_246!();
+        Depcrate_repr_numimpl_247!();
+        Depcrate_repr_numimpl_248!();
+        Depcrate_repr_numimpl_249!();
+        Depcrate_repr_numimpl_250!();
+        Depcrate_repr_numimpl_251!();
+        Depcrate_repr_numimpl_252!();
+        Depcrate_repr_numtests!();
+    };
+}

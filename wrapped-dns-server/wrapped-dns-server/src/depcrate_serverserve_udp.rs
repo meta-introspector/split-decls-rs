@@ -1,0 +1,9 @@
+// Generated macro for serve_udp (function)
+macro_rules! Depcrate_serverserve_udp {
+() => {
+// Module: crate::server
+// Provides: {"serve_udp"}
+// Dependencies: {}
+# [doc = " # Errors"] # [doc = " Returns `Err` when socket operations fail."] # [allow (clippy :: missing_panics_doc)] pub fn serve_udp (permit : & Permit , sock : & UdpSocket , mut response_bytes_rate_limiter : ProbRateLimiter , handler : & impl Fn (& DnsQuestion) -> Vec < DnsRecord > ,) -> Result < () , String > { sock . set_read_timeout (Some (Duration :: from_millis (500))) . map_err (| e | format ! ("error setting socket read timeout: {e}")) ? ; let addr = sock . local_addr () . map_err (| e | format ! ("error getting socket local address: {e}")) ? ; while ! permit . is_revoked () { let mut buf : FixedBuf < 512 > = FixedBuf :: new () ; let addr = match sock . recv_from (buf . writable ()) { Ok ((len , _)) if len > buf . writable () . len () => { println ! ("dropping over-long request") ; continue ; } Ok ((len , addr)) => { buf . wrote (len) ; addr } Err (e) if e . kind () == ErrorKind :: WouldBlock || e . kind () == ErrorKind :: TimedOut => { continue } Err (e) => return Err (format ! ("error reading DNS server UDP socket {addr:?}: {e}")) , } ; let now = Instant :: now () ; if ! response_bytes_rate_limiter . attempt (now) { println ! ("dropping request") ; continue ; } let out = match process_datagram (& mut buf , handler) { Ok (buf) => buf , Err (e) => { println ! ("dropping bad request: {e:?}") ; continue ; } } ; if out . is_empty () { unreachable ! () ; } response_bytes_rate_limiter . record (u32 :: try_from (out . len ()) . unwrap ()) ; let sent_len = sock . send_to (out . readable () , addr) . map_err (| e | format ! ("error sending response to {addr:?}: {e}")) ? ; if sent_len != out . len () { return Err (format ! ("sent only {sent_len} bytes of {} byte response to {addr:?}" , out . len ())) ; } } Ok (()) }
+};
+}

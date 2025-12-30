@@ -1,0 +1,9 @@
+// Generated macro for impl_267 (impl)
+macro_rules! Depcrate_providerimpl_267 {
+() => {
+// Module: crate::provider
+// Provides: {"impl_267"}
+// Dependencies: {}
+impl CollationMetadata { const MAX_VARIABLE_MASK : u32 = 0b11 ; const TAILORED_MASK : u32 = 1 << 3 ; const TAILORED_DIACRITICS_MASK : u32 = 1 << 4 ; const REORDERING_MASK : u32 = 1 << 5 ; const LITHUANIAN_DOT_ABOVE_MASK : u32 = 1 << 6 ; const BACWARD_SECOND_LEVEL_MASK : u32 = 1 << 7 ; const ALTERNATE_SHIFTED_MASK : u32 = 1 << 8 ; const CASE_FIRST_MASK : u32 = 1 << 9 ; const UPPER_FIRST_MASK : u32 = 1 << 10 ; # [inline (always)] pub (crate) fn max_variable (self) -> MaxVariable { unsafe { core :: mem :: transmute ((self . bits & CollationMetadata :: MAX_VARIABLE_MASK) as u8) } } # [inline (always)] pub (crate) fn tailored (self) -> bool { self . bits & CollationMetadata :: TAILORED_MASK != 0 } # [doc = " Vietnamese and Ewe"] # [inline (always)] pub (crate) fn tailored_diacritics (self) -> bool { self . bits & CollationMetadata :: TAILORED_DIACRITICS_MASK != 0 } # [doc = " Lithuanian"] # [inline (always)] pub (crate) fn lithuanian_dot_above (self) -> bool { self . bits & CollationMetadata :: LITHUANIAN_DOT_ABOVE_MASK != 0 } # [doc = " Canadian French"] # [inline (always)] pub (crate) fn backward_second_level (self) -> bool { self . bits & CollationMetadata :: BACWARD_SECOND_LEVEL_MASK != 0 } # [inline (always)] pub (crate) fn reordering (self) -> bool { self . bits & CollationMetadata :: REORDERING_MASK != 0 } # [doc = " Thai"] # [inline (always)] pub (crate) fn alternate_shifted (self) -> bool { self . bits & CollationMetadata :: ALTERNATE_SHIFTED_MASK != 0 } # [inline (always)] pub (crate) fn case_first (self) -> CollationCaseFirst { if self . bits & CollationMetadata :: CASE_FIRST_MASK != 0 { if self . bits & CollationMetadata :: UPPER_FIRST_MASK != 0 { CollationCaseFirst :: Upper } else { CollationCaseFirst :: Lower } } else { CollationCaseFirst :: False } } }
+};
+}

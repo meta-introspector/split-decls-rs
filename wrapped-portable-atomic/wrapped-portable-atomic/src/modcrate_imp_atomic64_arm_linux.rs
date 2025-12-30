@@ -1,0 +1,40 @@
+// Generated module macro for crate::imp::atomic64::arm_linux
+macro_rules! Modcrate_imp_atomic64_arm_linux {
+() => {
+        Depcrate_imp_atomic64_arm_linuxmacro_253!();
+        Depcrate_imp_atomic64_arm_linuxfallback!();
+        Depcrate_imp_atomic64_arm_linuxtest_detect_auxv!();
+        Depcrate_imp_atomic64_arm_linuxuse_256!();
+        Depcrate_imp_atomic64_arm_linuxuse_257!();
+        Depcrate_imp_atomic64_arm_linuxuse_258!();
+        Depcrate_imp_atomic64_arm_linuxKUSER_HELPER_VERSION!();
+        Depcrate_imp_atomic64_arm_linuxKUSER_CMPXCHG64!();
+        Depcrate_imp_atomic64_arm_linux__kuser_helper_version!();
+        Depcrate_imp_atomic64_arm_linuxhas_kuser_cmpxchg64!();
+        Depcrate_imp_atomic64_arm_linux__kuser_cmpxchg64!();
+        Depcrate_imp_atomic64_arm_linuxbyte_wise_atomic_load!();
+        Depcrate_imp_atomic64_arm_linuxselect_atomic!();
+        Depcrate_imp_atomic64_arm_linuxmacro_266!();
+        Depcrate_imp_atomic64_arm_linuxatomic_store!();
+        Depcrate_imp_atomic64_arm_linuxmacro_268!();
+        Depcrate_imp_atomic64_arm_linuxatomic_compare_exchange!();
+        Depcrate_imp_atomic64_arm_linuxuse_270!();
+        Depcrate_imp_atomic64_arm_linuxmacro_271!();
+        Depcrate_imp_atomic64_arm_linuxmacro_272!();
+        Depcrate_imp_atomic64_arm_linuxmacro_273!();
+        Depcrate_imp_atomic64_arm_linuxmacro_274!();
+        Depcrate_imp_atomic64_arm_linuxmacro_275!();
+        Depcrate_imp_atomic64_arm_linuxmacro_276!();
+        Depcrate_imp_atomic64_arm_linuxmacro_277!();
+        Depcrate_imp_atomic64_arm_linuxmacro_278!();
+        Depcrate_imp_atomic64_arm_linuxmacro_279!();
+        Depcrate_imp_atomic64_arm_linuxmacro_280!();
+        Depcrate_imp_atomic64_arm_linuxmacro_281!();
+        Depcrate_imp_atomic64_arm_linuxmacro_282!();
+        Depcrate_imp_atomic64_arm_linuxis_lock_free!();
+        Depcrate_imp_atomic64_arm_linuxIS_ALWAYS_LOCK_FREE!();
+        Depcrate_imp_atomic64_arm_linuxmacro_285!();
+        Depcrate_imp_atomic64_arm_linuxmacro_286!();
+        Depcrate_imp_atomic64_arm_linuxtests!();
+    };
+}

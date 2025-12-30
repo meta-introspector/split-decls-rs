@@ -1,0 +1,9 @@
+// Generated macro for PSYSTEM_PROCESSOR_CYCLE_TIME_INFORMATION (type)
+macro_rules! Depcrate_um_winntPSYSTEM_PROCESSOR_CYCLE_TIME_INFORMATION {
+() => {
+// Module: crate::um::winnt
+// Provides: {"PSYSTEM_PROCESSOR_CYCLE_TIME_INFORMATION"}
+// Dependencies: {}
+pub type PSYSTEM_PROCESSOR_CYCLE_TIME_INFORMATION = * mut SYSTEM_PROCESSOR_CYCLE_TIME_INFORMATION ;
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for PIMAGE_PROLOGUE_DYNAMIC_RELOCATION_HEADER (type)
+macro_rules! Depcrate_um_winntPIMAGE_PROLOGUE_DYNAMIC_RELOCATION_HEADER {
+() => {
+// Module: crate::um::winnt
+// Provides: {"PIMAGE_PROLOGUE_DYNAMIC_RELOCATION_HEADER"}
+// Dependencies: {}
+pub type PIMAGE_PROLOGUE_DYNAMIC_RELOCATION_HEADER = * mut IMAGE_PROLOGUE_DYNAMIC_RELOCATION_HEADER ;
+};
+}

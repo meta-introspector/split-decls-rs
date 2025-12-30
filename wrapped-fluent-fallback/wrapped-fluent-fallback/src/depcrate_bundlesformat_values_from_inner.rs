@@ -1,0 +1,9 @@
+// Generated macro for format_values_from_inner (macro)
+macro_rules! Depcrate_bundlesformat_values_from_inner {
+() => {
+// Module: crate::bundles
+// Provides: {"format_values_from_inner"}
+// Dependencies: {}
+macro_rules ! format_values_from_inner { ($ step : expr , $ keys : expr , $ errors : expr) => { let mut cells = vec ! [Value :: None ; $ keys . len ()] ; while let Some (bundle) = $ step { let bundle = bundle . as_ref () . unwrap_or_else (| (bundle , err) | { $ errors . extend (err . iter () . cloned () . map (Into :: into)) ; bundle }) ; let mut has_missing = false ; for (key , cell) in $ keys . iter () . zip (& mut cells) . filter (| (_ , cell) | ! matches ! (cell , Value :: Present (_))) { if let Some (msg) = bundle . get_message (& key . id) { if let Some (value) = msg . value () { let mut format_errors = vec ! [] ; * cell = Value :: Present (bundle . format_pattern (value , key . args . as_ref () , & mut format_errors ,)) ; if ! format_errors . is_empty () { $ errors . push (LocalizationError :: Resolver { id : key . id . to_string () , locale : bundle . locales [0] . clone () , errors : format_errors , }) ; } } else { * cell = Value :: Missing ; has_missing = true ; $ errors . push (LocalizationError :: MissingValue { id : key . id . to_string () , locale : Some (bundle . locales [0] . clone ()) , }) ; } } else { has_missing = true ; $ errors . push (LocalizationError :: MissingMessage { id : key . id . to_string () , locale : Some (bundle . locales [0] . clone ()) , }) ; } } if ! has_missing { break ; } } return $ keys . iter () . zip (cells) . map (| (key , value) | match value { Value :: Present (value) => Some (value) , Value :: Missing => { $ errors . push (LocalizationError :: MissingValue { id : key . id . to_string () , locale : None , }) ; None } Value :: None => { $ errors . push (LocalizationError :: MissingMessage { id : key . id . to_string () , locale : None , }) ; None } }) . collect () ; } ; }
+};
+}

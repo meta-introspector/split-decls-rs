@@ -1,0 +1,9 @@
+// Generated macro for ERROR_GRAPHICS_INVALID_MONITORDESCRIPTORSET (const)
+macro_rules! Depcrate_shared_winerrorERROR_GRAPHICS_INVALID_MONITORDESCRIPTORSET {
+() => {
+// Module: crate::shared::winerror
+// Provides: {"ERROR_GRAPHICS_INVALID_MONITORDESCRIPTORSET"}
+// Dependencies: {}
+pub const ERROR_GRAPHICS_INVALID_MONITORDESCRIPTORSET : HRESULT = 0xC026232A ;
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for ERROR_DELETING_EXISTING_APPLICATIONDATA_STORE_FAILED (const)
+macro_rules! Depcrate_shared_winerrorERROR_DELETING_EXISTING_APPLICATIONDATA_STORE_FAILED {
+() => {
+// Module: crate::shared::winerror
+// Provides: {"ERROR_DELETING_EXISTING_APPLICATIONDATA_STORE_FAILED"}
+// Dependencies: {}
+pub const ERROR_DELETING_EXISTING_APPLICATIONDATA_STORE_FAILED : DWORD = 15621 ;
+};
+}

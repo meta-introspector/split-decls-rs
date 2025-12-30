@@ -1,0 +1,9 @@
+// Generated macro for macro_33836 (macro)
+macro_rules! Depcrate_um_objidlmacro_33836 {
+() => {
+// Module: crate::um::objidl
+// Provides: {"macro_33836"}
+// Dependencies: {}
+RIDL ! { # [uuid (0x0000000b , 0x0000 , 0x0000 , 0xc0 , 0x00 , 0x00 , 0x00 , 0x00 , 0x00 , 0x00 , 0x46)] interface IStorage (IStorageVtbl) : IUnknown (IUnknownVtbl) { fn CreateStream (pwcsName : * const OLECHAR , grfMode : DWORD , reserved1 : DWORD , reserved2 : DWORD , ppstm : * mut * mut IStream ,) -> HRESULT , fn OpenStream (pwcsName : * const OLECHAR , reserved1 : * const c_void , grfMode : DWORD , reserved2 : DWORD , ppstm : * mut * mut IStream ,) -> HRESULT , fn CreateStorage (pwcsName : * const OLECHAR , grfMode : DWORD , reserved1 : DWORD , reserved2 : DWORD , ppstg : * mut * mut IStorage ,) -> HRESULT , fn OpenStorage (pwcsName : * const OLECHAR , pstgPriority : IStorage , grfMode : DWORD , snbExclude : SNB , reserved : DWORD , ppstg : * mut * mut IStorage ,) -> HRESULT , fn CopyTo (ciidExclude : DWORD , rgiidExclude : * const IID , snbExclude : SNB , pstgDest : * const IStorage ,) -> HRESULT , fn MoveElementTo (pwcsName : * const OLECHAR , pstgDest : * const IStorage , pwcsNewName : * const OLECHAR , grfFlags : DWORD ,) -> HRESULT , fn Commit (grfCommitFlags : DWORD ,) -> HRESULT , fn Revert () -> HRESULT , fn EnumElements (reserved1 : DWORD , reserved2 : * const c_void , reserved3 : DWORD , ppenum : * mut * mut IEnumSTATSTG ,) -> HRESULT , fn DestroyElement (pwcsName : * const OLECHAR ,) -> HRESULT , fn RenameElement (pwcsOldName : * const OLECHAR , pwcsNewName : * const OLECHAR ,) -> HRESULT , fn SetElementTimes (pwcsName : * const OLECHAR , pctime : * const FILETIME , patime : * const FILETIME , pmtime : * const FILETIME ,) -> HRESULT , fn SetClass (clsid : REFCLSID ,) -> HRESULT , fn SetStateBits (grfStateBits : DWORD , grfMask : DWORD ,) -> HRESULT , fn Stat (pstatstg : * mut STATSTG , grfStatFlag : DWORD ,) -> HRESULT , } }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for USB_ENDPOINT_TYPE_ISOCHRONOUS_USAGE_FEEDBACK_ENDPOINT (const)
+macro_rules! Depcrate_shared_usbspecUSB_ENDPOINT_TYPE_ISOCHRONOUS_USAGE_FEEDBACK_ENDPOINT {
+() => {
+// Module: crate::shared::usbspec
+// Provides: {"USB_ENDPOINT_TYPE_ISOCHRONOUS_USAGE_FEEDBACK_ENDPOINT"}
+// Dependencies: {}
+pub const USB_ENDPOINT_TYPE_ISOCHRONOUS_USAGE_FEEDBACK_ENDPOINT : UCHAR = 0x10 ;
+};
+}

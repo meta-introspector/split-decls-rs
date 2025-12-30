@@ -1,0 +1,9 @@
+// Generated macro for impl_731 (impl)
+macro_rules! Depcrate_ty_type_certainty_certaintyimpl_731 {
+() => {
+// Module: crate::ty::type_certainty::certainty
+// Provides: {"impl_731"}
+// Dependencies: {}
+impl Certainty { # [doc = " Join two `Certainty`s preserving their `DefId`s (if any). Generally speaking, this method"] # [doc = " should be used only when `self` and `other` refer directly to types. Otherwise,"] # [doc = " `join_clearing_def_ids` should be used."] pub fn join (self , other : Self) -> Self { match (self , other) { (Certainty :: Contradiction , _) | (_ , Certainty :: Contradiction) => Certainty :: Contradiction , (Certainty :: Certain (lhs) , Certainty :: Certain (rhs)) => { if let Some (inner) = lhs . try_join (rhs) { Certainty :: Certain (inner) } else { debug_assert ! (false , "Contradiction with {lhs:?} and {rhs:?}") ; Certainty :: Contradiction } } , (Certainty :: Certain (inner) , _) | (_ , Certainty :: Certain (inner)) => Certainty :: Certain (inner) , (Certainty :: Uncertain , Certainty :: Uncertain) => Certainty :: Uncertain , } } # [doc = " Join two `Certainty`s after clearing their `DefId`s. This method should be used when `self`"] # [doc = " or `other` do not necessarily refer to types, e.g., when they are aggregations of other"] # [doc = " `Certainty`s."] pub fn join_clearing_def_ids (self , other : Self) -> Self { self . clear_def_id () . join (other . clear_def_id ()) } pub fn clear_def_id (self) -> Certainty { if matches ! (self , Certainty :: Certain (_)) { Certainty :: Certain (None) } else { self } } pub fn with_def_id (self , def_id : DefId) -> Certainty { if matches ! (self , Certainty :: Certain (_)) { Certainty :: Certain (Some (def_id)) } else { self } } pub fn to_def_id (self) -> Option < DefId > { match self { Certainty :: Certain (inner) => inner , _ => None , } } pub fn is_certain (self) -> bool { matches ! (self , Self :: Certain (_)) } }
+};
+}

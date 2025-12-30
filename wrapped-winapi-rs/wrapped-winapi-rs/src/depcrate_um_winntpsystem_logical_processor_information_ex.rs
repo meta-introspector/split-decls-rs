@@ -1,0 +1,9 @@
+// Generated macro for PSYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX (type)
+macro_rules! Depcrate_um_winntPSYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX {
+() => {
+// Module: crate::um::winnt
+// Provides: {"PSYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX"}
+// Dependencies: {}
+pub type PSYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX = * mut SYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX ;
+};
+}

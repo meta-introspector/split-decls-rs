@@ -1,0 +1,9 @@
+// Generated macro for try_resolve_did (function)
+macro_rules! Depcrate_helperstry_resolve_did {
+() => {
+// Module: crate::helpers
+// Provides: {"try_resolve_did"}
+// Dependencies: {}
+# [doc = " Gets an instance for a path."] # [doc = ""] # [doc = " A `None` namespace indicates we are looking for a module."] fn try_resolve_did (tcx : TyCtxt < '_ > , path : & [& str] , namespace : Option < Namespace >) -> Option < DefId > { let _trace = enter_trace_span ! ("try_resolve_did" , ? path) ; # [doc = " Yield all children of the given item, that have the given name."] fn find_children < 'tcx : 'a , 'a > (tcx : TyCtxt < 'tcx > , item : DefId , name : & 'a str ,) -> impl Iterator < Item = DefId > + 'a { let name = Symbol :: intern (name) ; tcx . module_children (item) . iter () . filter (move | item | item . ident . name == name) . map (move | item | item . res . def_id ()) } let (& crate_name , path) = path . split_first () . expect ("paths must have at least one segment") ; let (modules , item) = if let Some (namespace) = namespace { let (& item_name , modules) = path . split_last () . expect ("non-module paths must have at least 2 segments") ; (modules , Some ((item_name , namespace))) } else { (path , None) } ; 'crates : for krate in tcx . crates (()) . iter () . filter (| & & krate | tcx . crate_name (krate) . as_str () == crate_name) { let mut cur_item = DefId { krate : * krate , index : CRATE_DEF_INDEX } ; for & segment in modules { let Some (next_item) = find_children (tcx , cur_item , segment) . find (| item | tcx . def_kind (item) == DefKind :: Mod) else { continue 'crates ; } ; cur_item = next_item ; } match item { Some ((item_name , namespace)) => { let Some (item) = find_children (tcx , cur_item , item_name) . find (| item | tcx . def_kind (item) . ns () == Some (namespace)) else { continue 'crates ; } ; return Some (item) ; } None => { return Some (cur_item) ; } } } None }
+};
+}

@@ -1,0 +1,45 @@
+// Generated module macro for crate::endpoint
+macro_rules! Modcrate_endpoint {
+() => {
+        Depcrate_endpointuse_54!();
+        Depcrate_endpointuse_55!();
+        Depcrate_endpointuse_56!();
+        Depcrate_endpointuse_57!();
+        Depcrate_endpointuse_58!();
+        Depcrate_endpointuse_59!();
+        Depcrate_endpointuse_60!();
+        Depcrate_endpointuse_61!();
+        Depcrate_endpointuse_62!();
+        Depcrate_endpointuse_63!();
+        Depcrate_endpointuse_64!();
+        Depcrate_endpointuse_65!();
+        Depcrate_endpointEndpoint!();
+        Depcrate_endpointimpl_67!();
+        Depcrate_endpointEndpointStats!();
+        Depcrate_endpointEndpointDriver!();
+        Depcrate_endpointimpl_70!();
+        Depcrate_endpointimpl_71!();
+        Depcrate_endpointEndpointInner!();
+        Depcrate_endpointimpl_73!();
+        Depcrate_endpointState!();
+        Depcrate_endpointShared!();
+        Depcrate_endpointimpl_76!();
+        Depcrate_endpointimpl_77!();
+        Depcrate_endpointrespond!();
+        Depcrate_endpointproto_ecn!();
+        Depcrate_endpointConnectionSet!();
+        Depcrate_endpointimpl_81!();
+        Depcrate_endpointensure_ipv6!();
+        Depcrate_endpointmacro_83!();
+        Depcrate_endpointimpl_84!();
+        Depcrate_endpointEndpointRef!();
+        Depcrate_endpointimpl_86!();
+        Depcrate_endpointimpl_87!();
+        Depcrate_endpointimpl_88!();
+        Depcrate_endpointimpl_89!();
+        Depcrate_endpointRecvState!();
+        Depcrate_endpointimpl_91!();
+        Depcrate_endpointimpl_92!();
+        Depcrate_endpointPollProgress!();
+    };
+}

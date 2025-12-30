@@ -1,0 +1,39 @@
+// Generated module macro for crate::traits
+macro_rules! Modcrate_traits {
+() => {
+        Depcrate_traitsuse_149!();
+        Depcrate_traitsuse_150!();
+        Depcrate_traitsuse_151!();
+        Depcrate_traitsuse_152!();
+        Depcrate_traitsuse_153!();
+        Depcrate_traitsuse_154!();
+        Depcrate_traitsuse_155!();
+        Depcrate_traitsprivate!();
+        Depcrate_traitsBlockFn!();
+        Depcrate_traitsIntoBlock!();
+        Depcrate_traitsimpl_traits!();
+        Depcrate_traitsmacro_160!();
+        Depcrate_traitsmacro_161!();
+        Depcrate_traitsmacro_162!();
+        Depcrate_traitsmacro_163!();
+        Depcrate_traitsmacro_164!();
+        Depcrate_traitsmacro_165!();
+        Depcrate_traitsmacro_166!();
+        Depcrate_traitsmacro_167!();
+        Depcrate_traitsmacro_168!();
+        Depcrate_traitsmacro_169!();
+        Depcrate_traitsmacro_170!();
+        Depcrate_traitsmacro_171!();
+        Depcrate_traitsmacro_172!();
+        Depcrate_traitsManualBlockEncoding!();
+        Depcrate_traitsNoBlockEncoding!();
+        Depcrate_traitsimpl_175!();
+        Depcrate_traitsManualBlockEncodingExt!();
+        Depcrate_traitsimpl_177!();
+        Depcrate_traitsimpl_178!();
+        Depcrate_traitsUserSpecified!();
+        Depcrate_traitsimpl_180!();
+        Depcrate_traitsdebug_assert_block_encoding!();
+        Depcrate_traitstests!();
+    };
+}

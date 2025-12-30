@@ -1,0 +1,9 @@
+// Generated macro for diff (function)
+macro_rules! Depcrate_jsondiff {
+() => {
+// Module: crate::json
+// Provides: {"diff"}
+// Dependencies: {}
+# [doc = " Generates and prints a diff between two sets of lint warnings."] # [doc = ""] # [doc = " Compares warnings from `old_path` and `new_path`, then displays a summary table"] # [doc = " and detailed information about added, removed, and changed warnings."] pub (crate) fn diff (old_path : & Path , new_path : & Path , truncate : bool , write_summary : Option < PathBuf >) { let old_warnings = load_warnings (old_path) ; let new_warnings = load_warnings (new_path) ; let mut lint_warnings = vec ! [] ; for (name , changes) in & itertools :: merge_join_by (old_warnings , new_warnings , | old , new | old . key () . cmp (& new . key ())) . chunk_by (| change | change . as_ref () . into_left () . name . clone ()) { let mut added = Vec :: new () ; let mut removed = Vec :: new () ; let mut changed = Vec :: new () ; for change in changes { match change { EitherOrBoth :: Both (old , new) => { if old . rendered != new . rendered { changed . push ((old , new)) ; } } , EitherOrBoth :: Left (old) => removed . push (old) , EitherOrBoth :: Right (new) => added . push (new) , } } if ! added . is_empty () || ! removed . is_empty () || ! changed . is_empty () { lint_warnings . push (LintWarnings { name , added , removed , changed , }) ; } } if lint_warnings . is_empty () { return ; } let summary = Summary :: new (& lint_warnings) ; if let Some (path) = write_summary { let json = serde_json :: to_string (& summary) . unwrap () ; fs :: write (path , json) . unwrap () ; } let truncate_after = if truncate { DEFAULT_LIMIT_PER_LINT . min (TRUNCATION_TOTAL_TARGET / lint_warnings . len ()) . max (15) } else { usize :: MAX } ; println ! ("{summary}") ; for lint in lint_warnings { print_lint_warnings (& lint , truncate_after) ; } }
+};
+}

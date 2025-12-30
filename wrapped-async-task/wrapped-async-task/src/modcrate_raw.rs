@@ -1,0 +1,41 @@
+// Generated module macro for crate::raw
+macro_rules! Modcrate_raw {
+() => {
+        Depcrate_rawuse_22!();
+        Depcrate_rawuse_23!();
+        Depcrate_rawuse_24!();
+        Depcrate_rawuse_25!();
+        Depcrate_rawuse_26!();
+        Depcrate_rawuse_27!();
+        Depcrate_rawuse_28!();
+        Depcrate_rawuse_29!();
+        Depcrate_rawuse_30!();
+        Depcrate_rawuse_31!();
+        Depcrate_rawuse_32!();
+        Depcrate_rawuse_33!();
+        Depcrate_rawuse_34!();
+        Depcrate_rawPanic!();
+        Depcrate_rawPanic!();
+        Depcrate_rawTaskVTable!();
+        Depcrate_rawimpl_38!();
+        Depcrate_rawTaskLayout!();
+        Depcrate_rawRawTask!();
+        Depcrate_rawimpl_41!();
+        Depcrate_rawimpl_42!();
+        Depcrate_rawimpl_43!();
+        Depcrate_rawallocate_task!();
+        Depcrate_rawuse_45!();
+        Depcrate_rawimpl_46!();
+        Depcrate_rawGuard!();
+        Depcrate_rawimpl_48!();
+        Depcrate_rawschedule!();
+        Depcrate_rawdrop_waker!();
+        Depcrate_rawdrop_future!();
+        Depcrate_rawwake!();
+        Depcrate_rawwake_by_ref!();
+        Depcrate_rawdestroy!();
+        Depcrate_rawdrop_ref!();
+        Depcrate_rawPointerPolyfill!();
+        Depcrate_rawimpl_57!();
+    };
+}

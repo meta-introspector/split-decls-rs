@@ -1,0 +1,9 @@
+// Generated macro for StdinLock (struct)
+macro_rules! Depcrate_io_stdioStdinLock {
+() => {
+// Module: crate::io::stdio
+// Provides: {"StdinLock"}
+// Dependencies: {}
+# [doc = " A locked reference to the [`Stdin`] handle."] # [doc = ""] # [doc = " This handle implements both the [`Read`] and [`BufRead`] traits, and"] # [doc = " is constructed via the [`Stdin::lock`] method."] # [doc = ""] # [doc = " ### Note: Windows Portability Considerations"] # [doc = ""] # [doc = " When operating in a console, the Windows implementation of this stream does not support"] # [doc = " non-UTF-8 byte sequences. Attempting to read bytes that are not valid UTF-8 will return"] # [doc = " an error."] # [doc = ""] # [doc = " In a process with a detached console, such as one using"] # [doc = " `#![windows_subsystem = \"windows\"]`, or in a child process spawned from such a process,"] # [doc = " the contained handle will be null. In such cases, the standard library's `Read` and"] # [doc = " `Write` will do nothing and silently succeed. All other I/O operations, via the"] # [doc = " standard library or via raw Windows API calls, will fail."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```no_run"] # [doc = " use std::io::{self, BufRead};"] # [doc = ""] # [doc = " fn main() -> io::Result<()> {"] # [doc = "     let mut buffer = String::new();"] # [doc = "     let stdin = io::stdin(); // We get `Stdin` here."] # [doc = "     {"] # [doc = "         let mut handle = stdin.lock(); // We get `StdinLock` here."] # [doc = "         handle.read_line(&mut buffer)?;"] # [doc = "     } // `StdinLock` is dropped here."] # [doc = "     Ok(())"] # [doc = " }"] # [doc = " ```"] # [must_use = "if unused stdin will immediately unlock"] # [stable (feature = "rust1" , since = "1.0.0")] pub struct StdinLock < 'a > { inner : MutexGuard < 'a , BufReader < StdinRaw > > , }
+};
+}

@@ -1,0 +1,45 @@
+// Generated module macro for crate::hmac
+macro_rules! Modcrate_hmac {
+() => {
+        Depcrate_hmacuse_265!();
+        Depcrate_hmacuse_266!();
+        Depcrate_hmacuse_267!();
+        Depcrate_hmacuse_268!();
+        Depcrate_hmacuse_269!();
+        Depcrate_hmacuse_270!();
+        Depcrate_hmacuse_271!();
+        Depcrate_hmacSignature!();
+        Depcrate_hmacSigningContext!();
+        Depcrate_hmacSigningKey!();
+        Depcrate_hmacVerificationKey!();
+        Depcrate_hmacAlgorithm!();
+        Depcrate_hmacimpl_277!();
+        Depcrate_hmacHMAC_SHA1_FOR_LEGACY_USE_ONLY!();
+        Depcrate_hmacHMAC_SHA224!();
+        Depcrate_hmacHMAC_SHA256!();
+        Depcrate_hmacHMAC_SHA384!();
+        Depcrate_hmacHMAC_SHA512!();
+        Depcrate_hmacTag!();
+        Depcrate_hmacimpl_284!();
+        Depcrate_hmacLcHmacCtx!();
+        Depcrate_hmacimpl_286!();
+        Depcrate_hmacimpl_287!();
+        Depcrate_hmacimpl_288!();
+        Depcrate_hmacimpl_289!();
+        Depcrate_hmacKey!();
+        Depcrate_hmacimpl_291!();
+        Depcrate_hmacimpl_292!();
+        Depcrate_hmacimpl_293!();
+        Depcrate_hmacimpl_294!();
+        Depcrate_hmacimpl_295!();
+        Depcrate_hmacimpl_296!();
+        Depcrate_hmacContext!();
+        Depcrate_hmacimpl_298!();
+        Depcrate_hmacimpl_299!();
+        Depcrate_hmacimpl_300!();
+        Depcrate_hmacimpl_301!();
+        Depcrate_hmacsign!();
+        Depcrate_hmacverify!();
+        Depcrate_hmactests!();
+    };
+}

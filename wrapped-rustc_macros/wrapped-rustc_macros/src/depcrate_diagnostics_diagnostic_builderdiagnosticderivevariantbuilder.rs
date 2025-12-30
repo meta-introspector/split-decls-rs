@@ -1,0 +1,9 @@
+// Generated macro for DiagnosticDeriveVariantBuilder (struct)
+macro_rules! Depcrate_diagnostics_diagnostic_builderDiagnosticDeriveVariantBuilder {
+() => {
+// Module: crate::diagnostics::diagnostic_builder
+// Provides: {"DiagnosticDeriveVariantBuilder"}
+// Dependencies: {}
+# [doc = " Tracks persistent information required for a specific variant when building up individual calls"] # [doc = " to diagnostic methods for generated diagnostic derives - both `Diagnostic` for"] # [doc = " fatal/errors/warnings and `LintDiagnostic` for lints."] pub (crate) struct DiagnosticDeriveVariantBuilder { # [doc = " The kind for the entire type."] pub kind : DiagnosticDeriveKind , # [doc = " Initialization of format strings for code suggestions."] pub formatting_init : TokenStream , # [doc = " Span of the struct or the enum variant."] pub span : proc_macro :: Span , # [doc = " Store a map of field name to its corresponding field. This is built on construction of the"] # [doc = " derive builder."] pub field_map : FieldMap , # [doc = " Slug is a mandatory part of the struct attribute as corresponds to the Fluent message that"] # [doc = " has the actual diagnostic message."] pub slug : SpannedOption < Path > , # [doc = " Error codes are a optional part of the struct attribute - this is only set to detect"] # [doc = " multiple specifications."] pub code : SpannedOption < () > , }
+};
+}

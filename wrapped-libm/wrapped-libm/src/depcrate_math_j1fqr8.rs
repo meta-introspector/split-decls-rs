@@ -1,0 +1,9 @@
+// Generated macro for QR8 (const)
+macro_rules! Depcrate_math_j1fQR8 {
+() => {
+// Module: crate::math::j1f
+// Provides: {"QR8"}
+// Dependencies: {}
+const QR8 : [f32 ; 6] = [0.0000000000e+00 , - 1.0253906250e-01 , - 1.6271753311e+01 , - 7.5960174561e+02 , - 1.1849806641e+04 , - 4.8438511719e+04 ,] ;
+};
+}

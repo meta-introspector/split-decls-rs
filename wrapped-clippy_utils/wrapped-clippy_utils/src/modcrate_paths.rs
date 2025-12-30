@@ -1,0 +1,53 @@
+// Generated module macro for crate::paths
+macro_rules! Modcrate_paths {
+() => {
+        Depcrate_pathsuse_456!();
+        Depcrate_pathsuse_457!();
+        Depcrate_pathsuse_458!();
+        Depcrate_pathsuse_459!();
+        Depcrate_pathsuse_460!();
+        Depcrate_pathsuse_461!();
+        Depcrate_pathsuse_462!();
+        Depcrate_pathsuse_463!();
+        Depcrate_pathsuse_464!();
+        Depcrate_pathsuse_465!();
+        Depcrate_pathsuse_466!();
+        Depcrate_pathsuse_467!();
+        Depcrate_pathsuse_468!();
+        Depcrate_pathsuse_469!();
+        Depcrate_pathsPathNS!();
+        Depcrate_pathsimpl_471!();
+        Depcrate_pathsPathLookup!();
+        Depcrate_pathsimpl_473!();
+        Depcrate_pathspath_macros!();
+        Depcrate_pathsmacro_475!();
+        Depcrate_pathsFUTURES_IO_ASYNCREADEXT!();
+        Depcrate_pathsFUTURES_IO_ASYNCWRITEEXT!();
+        Depcrate_pathsITERTOOLS_NEXT_TUPLE!();
+        Depcrate_pathsPARKING_LOT_GUARDS!();
+        Depcrate_pathsREGEX_BUILDER_NEW!();
+        Depcrate_pathsREGEX_BYTES_BUILDER_NEW!();
+        Depcrate_pathsREGEX_BYTES_NEW!();
+        Depcrate_pathsREGEX_BYTES_SET_NEW!();
+        Depcrate_pathsREGEX_NEW!();
+        Depcrate_pathsREGEX_SET_NEW!();
+        Depcrate_pathsSERDE_DESERIALIZE!();
+        Depcrate_pathsSERDE_DE_VISITOR!();
+        Depcrate_pathsTOKIO_FILE_OPTIONS!();
+        Depcrate_pathsTOKIO_IO_ASYNCREADEXT!();
+        Depcrate_pathsTOKIO_IO_ASYNCWRITEEXT!();
+        Depcrate_pathsTOKIO_IO_OPEN_OPTIONS!();
+        Depcrate_pathsTOKIO_IO_OPEN_OPTIONS_NEW!();
+        Depcrate_pathsLAZY_STATIC!();
+        Depcrate_pathsONCE_CELL_SYNC_LAZY!();
+        Depcrate_pathsONCE_CELL_SYNC_LAZY_NEW!();
+        Depcrate_pathslookup_path_str!();
+        Depcrate_pathslookup_path!();
+        Depcrate_pathsfind_crates!();
+        Depcrate_pathsfind_primitive_impls!();
+        Depcrate_pathslookup_with_base!();
+        Depcrate_pathsitem_child_by_name!();
+        Depcrate_pathslocal_item_child_by_name!();
+        Depcrate_pathsnon_local_item_child_by_name!();
+    };
+}

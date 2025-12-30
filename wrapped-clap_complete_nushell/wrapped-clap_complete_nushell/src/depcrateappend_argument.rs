@@ -1,0 +1,9 @@
+// Generated macro for append_argument (function)
+macro_rules! Depcrateappend_argument {
+() => {
+// Module: crate
+// Provides: {"append_argument"}
+// Dependencies: {}
+fn append_argument (arg : & Arg , name : & str , s : & mut String) { let possible_values = arg . get_possible_values () ; if arg . is_positional () { if matches ! (arg . get_action () , ArgAction :: Append) { s . push_str (format ! ("    ...{}" , arg . get_id ()) . as_str ()) ; } else { s . push_str (format ! ("    {}" , arg . get_id ()) . as_str ()) ; if ! arg . is_required_set () { s . push ('?') ; } } append_value_completion_and_help (arg , name , & possible_values , s) ; return ; } let shorts = arg . get_short_and_visible_aliases () ; let longs = arg . get_long_and_visible_aliases () ; match shorts { Some (shorts) => match longs { Some (longs) => { s . push_str (format ! ("    --{}(-{})" , longs . first () . expect ("At least one long option expected") , shorts . first () . expect ("At lease one short option expected")) . as_str () ,) ; append_value_completion_and_help (arg , name , & possible_values , s) ; for long in longs . iter () . skip (1) { s . push_str (format ! ("    --{long}") . as_str ()) ; append_value_completion_and_help (arg , name , & possible_values , s) ; } for short in shorts . iter () . skip (1) { s . push_str (format ! ("    -{short}") . as_str ()) ; append_value_completion_and_help (arg , name , & possible_values , s) ; } } None => { for short in shorts { s . push_str (format ! ("    -{short}") . as_str ()) ; append_value_completion_and_help (arg , name , & possible_values , s) ; } } } , None => match longs { Some (longs) => { for long in longs { s . push_str (format ! ("    --{long}") . as_str ()) ; append_value_completion_and_help (arg , name , & possible_values , s) ; } } None => unreachable ! ("No short or long options found") , } , } }
+};
+}

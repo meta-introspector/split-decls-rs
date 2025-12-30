@@ -1,0 +1,9 @@
+// Generated macro for impl_447 (impl)
+macro_rules! Depcrate_compiler_cimpl_447 {
+() => {
+// Module: crate::compiler::c
+// Provides: {"impl_447"}
+// Dependencies: {}
+# [cfg (feature = "dist-client")] impl pkg :: InputsPackager for CInputsPackager { fn write_inputs (self : Box < Self > , wtr : & mut dyn io :: Write) -> Result < dist :: PathTransformer > { let CInputsPackager { input_path , mut path_transformer , preprocessed_input , extra_dist_files , extra_hash_files , } = * self ; let mut builder = tar :: Builder :: new (wtr) ; { let input_path = pkg :: simplify_path (& input_path) ? ; let dist_input_path = path_transformer . as_dist (& input_path) . with_context (| | { format ! ("unable to transform input path {}" , input_path . display ()) }) ? ; let mut file_header = pkg :: make_tar_header (& input_path , & dist_input_path) ? ; file_header . set_size (preprocessed_input . len () as u64) ; file_header . set_cksum () ; builder . append (& file_header , preprocessed_input . as_slice ()) ? ; } for input_path in extra_hash_files . iter () . chain (extra_dist_files . iter ()) { let input_path = pkg :: simplify_path (input_path) ? ; if ! super :: CAN_DIST_DYLIBS && input_path . extension () . is_some_and (| ext | ext == std :: env :: consts :: DLL_EXTENSION) { bail ! ("Cannot distribute dylib input {} on this platform" , input_path . display ()) } let dist_input_path = path_transformer . as_dist (& input_path) . with_context (| | { format ! ("unable to transform input path {}" , input_path . display ()) }) ? ; let mut file = io :: BufReader :: new (fs :: File :: open (& input_path) ?) ; let mut output = vec ! [] ; io :: copy (& mut file , & mut output) ? ; let mut file_header = pkg :: make_tar_header (& input_path , & dist_input_path) ? ; file_header . set_size (output . len () as u64) ; file_header . set_cksum () ; builder . append (& file_header , & * output) ? ; } let _ = builder . into_inner () ; Ok (path_transformer) } }
+};
+}

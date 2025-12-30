@@ -1,0 +1,9 @@
+// Generated macro for impl_1281 (impl)
+macro_rules! Depcrate_style_textimpl_1281 {
+() => {
+// Module: crate::style::text
+// Provides: {"impl_1281"}
+// Dependencies: {}
+impl < 'a > TextStyle < 'a > { # [doc = " Sets the color of the style."] # [doc = ""] # [doc = " - `color`: The required color"] # [doc = " - **returns** The up-to-dated text style"] # [doc = ""] # [doc = " ```rust"] # [doc = " use plotters::prelude::*;"] # [doc = ""] # [doc = " let style = TextStyle::from((\"sans-serif\", 20).into_font()).color(&RED);"] # [doc = " ```"] pub fn color < C : Color > (& self , color : & 'a C) -> Self { Self { font : self . font . clone () , color : color . to_backend_color () , pos : self . pos , } } # [doc = " Sets the font transformation of the style."] # [doc = ""] # [doc = " - `trans`: The required transformation"] # [doc = " - **returns** The up-to-dated text style"] # [doc = ""] # [doc = " ```rust"] # [doc = " use plotters::prelude::*;"] # [doc = ""] # [doc = " let style = TextStyle::from((\"sans-serif\", 20).into_font()).transform(FontTransform::Rotate90);"] # [doc = " ```"] pub fn transform (& self , trans : FontTransform) -> Self { Self { font : self . font . clone () . transform (trans) , color : self . color , pos : self . pos , } } # [doc = " Sets the anchor position."] # [doc = ""] # [doc = " - `pos`: The required anchor position"] # [doc = " - **returns** The up-to-dated text style"] # [doc = ""] # [doc = " ```rust"] # [doc = " use plotters::prelude::*;"] # [doc = " use plotters::style::text_anchor::{Pos, HPos, VPos};"] # [doc = ""] # [doc = " let pos = Pos::new(HPos::Left, VPos::Top);"] # [doc = " let style = TextStyle::from((\"sans-serif\", 20).into_font()).pos(pos);"] # [doc = " ```"] # [doc = ""] # [doc = " # See also"] # [doc = ""] # [doc = " [`IntoTextStyle::with_anchor()`]"] pub fn pos (& self , pos : text_anchor :: Pos) -> Self { Self { font : self . font . clone () , color : self . color , pos , } } }
+};
+}

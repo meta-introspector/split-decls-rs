@@ -1,0 +1,9 @@
+// Generated macro for macro_23904 (macro)
+macro_rules! Depcrate_um_d2d1_1macro_23904 {
+() => {
+// Module: crate::um::d2d1_1
+// Provides: {"macro_23904"}
+// Dependencies: {}
+ENUM ! { enum D2D1_BITMAP_OPTIONS { D2D1_BITMAP_OPTIONS_NONE = 0x00000000 , D2D1_BITMAP_OPTIONS_TARGET = 0x00000001 , D2D1_BITMAP_OPTIONS_CANNOT_DRAW = 0x00000002 , D2D1_BITMAP_OPTIONS_CPU_READ = 0x00000004 , D2D1_BITMAP_OPTIONS_GDI_COMPATIBLE = 0x00000008 , D2D1_BITMAP_OPTIONS_FORCE_DWORD = 0xffffffff , } }
+};
+}

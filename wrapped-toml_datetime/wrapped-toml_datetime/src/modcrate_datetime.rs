@@ -1,0 +1,46 @@
+// Generated module macro for crate::datetime
+macro_rules! Modcrate_datetime {
+() => {
+        Depcrate_datetimeuse_3!();
+        Depcrate_datetimeuse_4!();
+        Depcrate_datetimeDatetime!();
+        Depcrate_datetimeFIELD!();
+        Depcrate_datetimeNAME!();
+        Depcrate_datetimeis_datetime!();
+        Depcrate_datetimeDate!();
+        Depcrate_datetimeTime!();
+        Depcrate_datetimeOffset!();
+        Depcrate_datetimeimpl_12!();
+        Depcrate_datetimeimpl_13!();
+        Depcrate_datetimeimpl_14!();
+        Depcrate_datetimeimpl_15!();
+        Depcrate_datetimeimpl_16!();
+        Depcrate_datetimeimpl_17!();
+        Depcrate_datetimeimpl_18!();
+        Depcrate_datetimeimpl_19!();
+        Depcrate_datetimeimpl_20!();
+        Depcrate_datetimeimpl_21!();
+        Depcrate_datetimes_to_nanoseconds!();
+        Depcrate_datetimeToken!();
+        Depcrate_datetimeimpl_24!();
+        Depcrate_datetimeTokenKind!();
+        Depcrate_datetimeLexer!();
+        Depcrate_datetimeimpl_27!();
+        Depcrate_datetimeimpl_28!();
+        Depcrate_datetimeDatetimeParseError!();
+        Depcrate_datetimeimpl_30!();
+        Depcrate_datetimeimpl_31!();
+        Depcrate_datetimeimpl_32!();
+        Depcrate_datetimeimpl_33!();
+        Depcrate_datetimeimpl_34!();
+        Depcrate_datetimeimpl_35!();
+        Depcrate_datetimeimpl_36!();
+        Depcrate_datetimeimpl_37!();
+        Depcrate_datetimeimpl_38!();
+        Depcrate_datetimeimpl_39!();
+        Depcrate_datetimeDatetimeKey!();
+        Depcrate_datetimeimpl_41!();
+        Depcrate_datetimeDatetimeFromString!();
+        Depcrate_datetimeimpl_43!();
+    };
+}

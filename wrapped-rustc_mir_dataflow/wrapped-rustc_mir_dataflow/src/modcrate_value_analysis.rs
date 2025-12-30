@@ -1,0 +1,47 @@
+// Generated module macro for crate::value_analysis
+macro_rules! Modcrate_value_analysis {
+() => {
+        Depcrate_value_analysisuse_382!();
+        Depcrate_value_analysisuse_383!();
+        Depcrate_value_analysisuse_384!();
+        Depcrate_value_analysisuse_385!();
+        Depcrate_value_analysisuse_386!();
+        Depcrate_value_analysisuse_387!();
+        Depcrate_value_analysisuse_388!();
+        Depcrate_value_analysisuse_389!();
+        Depcrate_value_analysisuse_390!();
+        Depcrate_value_analysisuse_391!();
+        Depcrate_value_analysisuse_392!();
+        Depcrate_value_analysisuse_393!();
+        Depcrate_value_analysisuse_394!();
+        Depcrate_value_analysismacro_395!();
+        Depcrate_value_analysismacro_396!();
+        Depcrate_value_analysisStateData!();
+        Depcrate_value_analysisimpl_398!();
+        Depcrate_value_analysisimpl_399!();
+        Depcrate_value_analysisimpl_400!();
+        Depcrate_value_analysisState!();
+        Depcrate_value_analysisimpl_402!();
+        Depcrate_value_analysisimpl_403!();
+        Depcrate_value_analysisimpl_404!();
+        Depcrate_value_analysisMap!();
+        Depcrate_value_analysisimpl_406!();
+        Depcrate_value_analysisPlaceCollector!();
+        Depcrate_value_analysisimpl_408!();
+        Depcrate_value_analysisimpl_409!();
+        Depcrate_value_analysisimpl_410!();
+        Depcrate_value_analysisPlaceInfo!();
+        Depcrate_value_analysisimpl_412!();
+        Depcrate_value_analysisChildren!();
+        Depcrate_value_analysisimpl_414!();
+        Depcrate_value_analysisimpl_415!();
+        Depcrate_value_analysisValueOrPlace!();
+        Depcrate_value_analysisimpl_417!();
+        Depcrate_value_analysisTrackElem!();
+        Depcrate_value_analysisimpl_419!();
+        Depcrate_value_analysisiter_fields!();
+        Depcrate_value_analysisexcluded_locals!();
+        Depcrate_value_analysisdebug_with_context_rec!();
+        Depcrate_value_analysisdebug_with_context!();
+    };
+}

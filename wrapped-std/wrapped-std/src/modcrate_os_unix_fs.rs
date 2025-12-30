@@ -1,0 +1,39 @@
+// Generated module macro for crate::os::unix::fs
+macro_rules! Modcrate_os_unix_fs {
+() => {
+        Depcrate_os_unix_fsuse_1425!();
+        Depcrate_os_unix_fsuse_1426!();
+        Depcrate_os_unix_fsuse_1427!();
+        Depcrate_os_unix_fsuse_1428!();
+        Depcrate_os_unix_fsuse_1429!();
+        Depcrate_os_unix_fsuse_1430!();
+        Depcrate_os_unix_fsuse_1431!();
+        Depcrate_os_unix_fsuse_1432!();
+        Depcrate_os_unix_fsuse_1433!();
+        Depcrate_os_unix_fsuse_1434!();
+        Depcrate_os_unix_fstests!();
+        Depcrate_os_unix_fsFileExt!();
+        Depcrate_os_unix_fsimpl_1437!();
+        Depcrate_os_unix_fsPermissionsExt!();
+        Depcrate_os_unix_fsimpl_1439!();
+        Depcrate_os_unix_fsOpenOptionsExt!();
+        Depcrate_os_unix_fsimpl_1441!();
+        Depcrate_os_unix_fsMetadataExt!();
+        Depcrate_os_unix_fsimpl_1443!();
+        Depcrate_os_unix_fsFileTypeExt!();
+        Depcrate_os_unix_fsimpl_1445!();
+        Depcrate_os_unix_fsDirEntryExt!();
+        Depcrate_os_unix_fsimpl_1447!();
+        Depcrate_os_unix_fsDirEntryExt2!();
+        Depcrate_os_unix_fsimpl_1449!();
+        Depcrate_os_unix_fsimpl_1450!();
+        Depcrate_os_unix_fssymlink!();
+        Depcrate_os_unix_fsDirBuilderExt!();
+        Depcrate_os_unix_fsimpl_1453!();
+        Depcrate_os_unix_fschown!();
+        Depcrate_os_unix_fsfchown!();
+        Depcrate_os_unix_fslchown!();
+        Depcrate_os_unix_fschroot!();
+        Depcrate_os_unix_fsmkfifo!();
+    };
+}

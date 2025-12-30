@@ -1,0 +1,9 @@
+// Generated macro for test_udp_send_with_dest (function)
+macro_rules! Depcrate_tests_nettest_udp_send_with_dest {
+() => {
+// Module: crate::tests::net
+// Provides: {"test_udp_send_with_dest"}
+// Dependencies: {}
+pub fn test_udp_send_with_dest < S : squeue :: EntryMarker , C : cqueue :: EntryMarker > (ring : & mut IoUring < S , C > , test : & Test ,) -> anyhow :: Result < () > { require ! (test ; test . probe . is_supported (opcode :: Recv :: CODE) ; test . probe . is_supported (opcode :: Send :: CODE) ;) ; println ! ("test udp_send_with_dest") ; let socket : socket2 :: Socket = std :: net :: UdpSocket :: bind ("127.0.0.1:0") . unwrap () . into () ; let addr = socket . local_addr () ? ; let fd = Fd (socket . as_raw_fd ()) ; let mut in_buf = vec ! [0 ; 1024] ; let recv = opcode :: Recv :: new (fd , in_buf . as_mut_ptr () , in_buf . len () as u32) . build () . user_data (1) . into () ; let out_buf = b"test message" ; let send1 = opcode :: Send :: new (fd , out_buf . as_ptr () , out_buf . len () as u32) . build () . user_data (2) . into () ; let send2 = opcode :: Send :: new (fd , out_buf . as_ptr () , out_buf . len () as u32) . dest_addr (addr . as_ptr ()) . dest_addr_len (addr . len ()) . build () . user_data (3) . into () ; unsafe { ring . submission () . push_multiple (& [recv , send1 , send2]) ? } ; ring . submitter () . submit_and_wait (3) ? ; let cqes : Vec < cqueue :: Entry > = ring . completion () . map (Into :: into) . collect () ; assert_eq ! (cqes . len () , 3) ; for cqe in cqes { match cqe . user_data () { 1 => { let n_received = cqe . result () ; assert_eq ! (n_received , out_buf . len () as i32) ; assert_eq ! (& in_buf [.. n_received as usize] , out_buf) ; } 2 => { assert_eq ! (cqe . result () , - libc :: EDESTADDRREQ) ; } 3 => { let n_sent = cqe . result () ; assert_eq ! (n_sent , out_buf . len () as i32) ; } _ => unreachable ! ("We only submit user data 1, 2, and 3.") , } } Ok (()) }
+};
+}

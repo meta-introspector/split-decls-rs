@@ -1,0 +1,9 @@
+// Generated macro for bytes_to_key (function)
+macro_rules! Depcrate_pkcs5bytes_to_key {
+() => {
+// Module: crate::pkcs5
+// Provides: {"bytes_to_key"}
+// Dependencies: {}
+# [doc = " Derives a key and an IV from various parameters."] # [doc = ""] # [doc = " If specified, `salt` must be 8 bytes in length."] # [doc = ""] # [doc = " If the total key and IV length is less than 16 bytes and MD5 is used then"] # [doc = " the algorithm is compatible with the key derivation algorithm from PKCS#5"] # [doc = " v1.5 or PBKDF1 from PKCS#5 v2.0."] # [doc = ""] # [doc = " New applications should not use this and instead use"] # [doc = " `pbkdf2_hmac` or another more modern key derivation algorithm."] # [corresponds (EVP_BytesToKey)] # [allow (clippy :: useless_conversion)] # [cfg (not (any (boringssl , awslc)))] pub fn bytes_to_key (cipher : Cipher , digest : MessageDigest , data : & [u8] , salt : Option < & [u8] > , count : i32 ,) -> Result < KeyIvPair , ErrorStack > { unsafe { assert ! (data . len () <= c_int :: MAX as usize) ; let salt_ptr = match salt { Some (salt) => { assert_eq ! (salt . len () , ffi :: PKCS5_SALT_LEN as usize) ; salt . as_ptr () } None => ptr :: null () , } ; ffi :: init () ; let mut iv = cipher . iv_len () . map (| l | vec ! [0 ; l]) ; let cipher = cipher . as_ptr () ; let digest = digest . as_ptr () ; let len = cvt (ffi :: EVP_BytesToKey (cipher , digest , salt_ptr , ptr :: null () , data . len () as c_int , count . into () , ptr :: null_mut () , ptr :: null_mut () ,)) ? ; let mut key = vec ! [0 ; len as usize] ; let iv_ptr = iv . as_mut () . map (| v | v . as_mut_ptr ()) . unwrap_or (ptr :: null_mut ()) ; cvt (ffi :: EVP_BytesToKey (cipher , digest , salt_ptr , data . as_ptr () , data . len () as c_int , count as c_int , key . as_mut_ptr () , iv_ptr ,)) ? ; Ok (KeyIvPair { key , iv }) } }
+};
+}

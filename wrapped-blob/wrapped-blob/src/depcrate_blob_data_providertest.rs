@@ -1,0 +1,9 @@
+// Generated macro for test (module)
+macro_rules! Depcrate_blob_data_providertest {
+() => {
+// Module: crate::blob_data_provider
+// Provides: {"test"}
+// Dependencies: {}
+# [cfg (test)] mod test { use super :: * ; use crate :: export :: * ; use icu_provider :: export :: * ; use icu_provider :: hello_world :: * ; icu_provider :: data_marker ! (HelloSingletonV1 , HelloSingleton , is_singleton = true) ; # [derive (Clone , Copy , yoke :: Yokeable , zerofrom :: ZeroFrom)] pub struct HelloSingleton ; # [test] fn test_empty () { let mut blob : Vec < u8 > = Vec :: new () ; { let mut exporter = BlobExporter :: new_with_sink (Box :: new (& mut blob)) ; exporter . flush (HelloWorldV1 :: INFO , Default :: default ()) . unwrap () ; exporter . close () . unwrap () ; } let provider = BlobDataProvider :: try_new_from_blob (blob . into ()) . unwrap () ; assert ! (matches ! (provider . load_data (HelloWorldV1 :: INFO , Default :: default ()) , Err (DataError { kind : DataErrorKind :: IdentifierNotFound , .. })) , "Empty blob test") ; } # [test] fn test_singleton () { let mut blob : Vec < u8 > = Vec :: new () ; { let mut exporter = BlobExporter :: new_with_sink (Box :: new (& mut blob)) ; exporter . flush (HelloSingletonV1 :: INFO , Default :: default ()) . unwrap () ; exporter . close () . unwrap () ; } let provider = BlobDataProvider :: try_new_from_blob (blob . into ()) . unwrap () ; assert ! (matches ! (provider . load_data (HelloSingletonV1 :: INFO , DataRequest { id : DataIdentifierBorrowed :: for_locale (& icu_locale_core :: langid ! ("de") . into ()) , .. Default :: default () }) , Err (DataError { kind : DataErrorKind :: InvalidRequest , .. })) , "Singleton blob test") ; assert ! (matches ! (provider . load_data (HelloSingletonV1 :: INFO , Default :: default ()) , Err (DataError { kind : DataErrorKind :: IdentifierNotFound , .. })) , "Singleton blob test") ; } }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for StandardSink (struct)
+macro_rules! Depcrate_standardStandardSink {
+() => {
+// Module: crate::standard
+// Provides: {"StandardSink"}
+// Dependencies: {}
+# [doc = " An implementation of `Sink` associated with a matcher and an optional file"] # [doc = " path for the standard printer."] # [doc = ""] # [doc = " A `Sink` can be created via the [`Standard::sink`] or"] # [doc = " [`Standard::sink_with_path`] methods, depending on whether you want to"] # [doc = " include a file path in the printer's output."] # [doc = ""] # [doc = " Building a `StandardSink` is cheap, and callers should create a new one"] # [doc = " for each thing that is searched. After a search has completed, callers may"] # [doc = " query this sink for information such as whether a match occurred or whether"] # [doc = " binary data was found (and if so, the offset at which it occurred)."] # [doc = ""] # [doc = " This type is generic over a few type parameters:"] # [doc = ""] # [doc = " * `'p` refers to the lifetime of the file path, if one is provided. When"] # [doc = " no file path is given, then this is `'static`."] # [doc = " * `'s` refers to the lifetime of the [`Standard`] printer that this type"] # [doc = " borrows."] # [doc = " * `M` refers to the type of matcher used by"] # [doc = " `grep_searcher::Searcher` that is reporting results to this sink."] # [doc = " * `W` refers to the underlying writer that this printer is writing its"] # [doc = " output to."] # [derive (Debug)] pub struct StandardSink < 'p , 's , M : Matcher , W > { matcher : M , standard : & 's mut Standard < W > , replacer : Replacer < M > , interpolator : hyperlink :: Interpolator , path : Option < PrinterPath < 'p > > , start_time : Instant , match_count : u64 , binary_byte_offset : Option < u64 > , stats : Option < Stats > , needs_match_granularity : bool , }
+};
+}

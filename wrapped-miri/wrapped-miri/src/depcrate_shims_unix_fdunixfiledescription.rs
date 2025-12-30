@@ -1,0 +1,9 @@
+// Generated macro for UnixFileDescription (trait)
+macro_rules! Depcrate_shims_unix_fdUnixFileDescription {
+() => {
+// Module: crate::shims::unix::fd
+// Provides: {"UnixFileDescription"}
+// Dependencies: {}
+# [doc = " Represents unix-specific file descriptions."] pub trait UnixFileDescription : FileDescription { # [doc = " Reads as much as possible into the given buffer `ptr` from a given offset."] # [doc = " `len` indicates how many bytes we should try to read."] # [doc = " `dest` is where the return value should be stored: number of bytes read, or `-1` in case of error."] fn pread < 'tcx > (& self , _communicate_allowed : bool , _offset : u64 , _ptr : Pointer , _len : usize , _ecx : & mut MiriInterpCx < 'tcx > , _finish : DynMachineCallback < 'tcx , Result < usize , IoError > > ,) -> InterpResult < 'tcx > { throw_unsup_format ! ("cannot pread from {}" , self . name ()) ; } # [doc = " Writes as much as possible from the given buffer `ptr` starting at a given offset."] # [doc = " `ptr` is the pointer to the user supplied read buffer."] # [doc = " `len` indicates how many bytes we should try to write."] # [doc = " `dest` is where the return value should be stored: number of bytes written, or `-1` in case of error."] fn pwrite < 'tcx > (& self , _communicate_allowed : bool , _ptr : Pointer , _len : usize , _offset : u64 , _ecx : & mut MiriInterpCx < 'tcx > , _finish : DynMachineCallback < 'tcx , Result < usize , IoError > > ,) -> InterpResult < 'tcx > { throw_unsup_format ! ("cannot pwrite to {}" , self . name ()) ; } fn flock < 'tcx > (& self , _communicate_allowed : bool , _op : FlockOp ,) -> InterpResult < 'tcx , io :: Result < () > > { throw_unsup_format ! ("cannot flock {}" , self . name ()) ; } # [doc = " Check the readiness of file description."] fn get_epoll_ready_events < 'tcx > (& self) -> InterpResult < 'tcx , EpollReadyEvents > { throw_unsup_format ! ("{}: epoll does not support this file description" , self . name ()) ; } }
+};
+}

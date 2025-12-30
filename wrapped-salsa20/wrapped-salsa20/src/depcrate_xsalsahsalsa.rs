@@ -1,0 +1,9 @@
+// Generated macro for hsalsa (function)
+macro_rules! Depcrate_xsalsahsalsa {
+() => {
+// Module: crate::xsalsa
+// Provides: {"hsalsa"}
+// Dependencies: {}
+# [doc = " The HSalsa20 function defined in the paper \"Extending the Salsa20 nonce\""] # [doc = ""] # [doc = " <https://cr.yp.to/snuffle/xsalsa-20110204.pdf>"] # [doc = ""] # [doc = " HSalsa20 takes 512-bits of input:"] # [doc = ""] # [doc = " - Constants (`u32` x 4)"] # [doc = " - Key (`u32` x 8)"] # [doc = " - Nonce (`u32` x 4)"] # [doc = ""] # [doc = " It produces 256-bits of output suitable for use as a Salsa20 key"] pub fn hsalsa < R : Unsigned > (key : & Key , input : & Array < u8 , U16 >) -> Array < u8 , U32 > { # [inline (always)] fn to_u32 (chunk : & [u8]) -> u32 { u32 :: from_le_bytes (chunk . try_into () . unwrap ()) } let mut state = [0u32 ; 16] ; state [0] = CONSTANTS [0] ; state [1 .. 5] . iter_mut () . zip (key [0 .. 16] . chunks_exact (4)) . for_each (| (v , chunk) | * v = to_u32 (chunk)) ; state [5] = CONSTANTS [1] ; state [6 .. 10] . iter_mut () . zip (input . chunks_exact (4)) . for_each (| (v , chunk) | * v = to_u32 (chunk)) ; state [10] = CONSTANTS [2] ; state [11 .. 15] . iter_mut () . zip (key [16 ..] . chunks_exact (4)) . for_each (| (v , chunk) | * v = to_u32 (chunk)) ; state [15] = CONSTANTS [3] ; for _ in 0 .. R :: USIZE { quarter_round (0 , 4 , 8 , 12 , & mut state) ; quarter_round (5 , 9 , 13 , 1 , & mut state) ; quarter_round (10 , 14 , 2 , 6 , & mut state) ; quarter_round (15 , 3 , 7 , 11 , & mut state) ; quarter_round (0 , 1 , 2 , 3 , & mut state) ; quarter_round (5 , 6 , 7 , 4 , & mut state) ; quarter_round (10 , 11 , 8 , 9 , & mut state) ; quarter_round (15 , 12 , 13 , 14 , & mut state) ; } let mut output = Array :: default () ; let key_idx : [usize ; 8] = [0 , 5 , 10 , 15 , 6 , 7 , 8 , 9] ; for (i , chunk) in output . chunks_exact_mut (4) . enumerate () { chunk . copy_from_slice (& state [key_idx [i]] . to_le_bytes ()) ; } output }
+};
+}

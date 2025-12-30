@@ -1,0 +1,9 @@
+// Generated macro for WordBreakOptions (struct)
+macro_rules! Depcrate_wordWordBreakOptions {
+() => {
+// Module: crate::word
+// Provides: {"WordBreakOptions"}
+// Dependencies: {}
+# [doc = " Options to tailor word breaking behavior."] # [non_exhaustive] # [derive (Copy , Clone , PartialEq , Eq , Debug , Default)] pub struct WordBreakOptions < 'a > { # [doc = " Content locale for word segmenter"] # [doc = ""] # [doc = " If you know the language of the text being segmented, provide it here in order to produce"] # [doc = " higher quality breakpoints."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " Normally, a colon character ':' is a word separator:"] # [doc = ""] # [doc = " ```rust"] # [doc = " use icu::segmenter::WordSegmenter;"] # [doc = ""] # [doc = " let segmenter = WordSegmenter::new_auto(Default::default());"] # [doc = ""] # [doc = " let breakpoints: Vec<usize> = segmenter.segment_str(\"EU:ssa\").collect();"] # [doc = " assert_eq!(&breakpoints, &[0, 2, 3, 6]);"] # [doc = " ```"] # [doc = ""] # [doc = " But not in Finnish, where it is used for loanwords:"] # [doc = ""] # [doc = " ```rust"] # [doc = " use icu::locale::langid;"] # [doc = " use icu::segmenter::options::WordBreakOptions;"] # [doc = " use icu::segmenter::WordSegmenter;"] # [doc = ""] # [doc = " let mut options = WordBreakOptions::default();"] # [doc = " let langid = &langid!(\"fi\");"] # [doc = " options.content_locale = Some(langid);"] # [doc = " let segmenter = WordSegmenter::try_new_auto(options).unwrap();"] # [doc = ""] # [doc = " let breakpoints: Vec<usize> ="] # [doc = "     segmenter.as_borrowed().segment_str(\"EU:ssa\").collect();"] # [doc = " assert_eq!(&breakpoints, &[0, 6]);"] # [doc = " ```"] pub content_locale : Option < & 'a LanguageIdentifier > , # [doc = " Options independent of the locale"] pub invariant_options : WordBreakInvariantOptions , }
+};
+}

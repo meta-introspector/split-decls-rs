@@ -1,0 +1,9 @@
+// Generated macro for D3D11_SRV_DIMENSION_TEXTURECUBEARRAY (const)
+macro_rules! Depcrate_um_d3dcommonD3D11_SRV_DIMENSION_TEXTURECUBEARRAY {
+() => {
+// Module: crate::um::d3dcommon
+// Provides: {"D3D11_SRV_DIMENSION_TEXTURECUBEARRAY"}
+// Dependencies: {}
+pub const D3D11_SRV_DIMENSION_TEXTURECUBEARRAY : D3D_SRV_DIMENSION = D3D_SRV_DIMENSION_TEXTURECUBEARRAY ;
+};
+}

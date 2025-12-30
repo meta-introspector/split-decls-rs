@@ -1,0 +1,9 @@
+// Generated macro for impl_5363 (impl)
+macro_rules! Depcrate_stm32f410impl_5363 {
+() => {
+// Module: crate::stm32f410
+// Provides: {"impl_5363"}
+// Dependencies: {}
+impl core :: fmt :: Debug for TIM1 { fn fmt (& self , f : & mut core :: fmt :: Formatter) -> core :: fmt :: Result { f . debug_struct ("TIM1") . finish () } }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for CACHEGROUP_READWRITE_MASK (const)
+macro_rules! Depcrate_um_wininetCACHEGROUP_READWRITE_MASK {
+() => {
+// Module: crate::um::wininet
+// Provides: {"CACHEGROUP_READWRITE_MASK"}
+// Dependencies: {}
+pub const CACHEGROUP_READWRITE_MASK : DWORD = CACHEGROUP_ATTRIBUTE_TYPE | CACHEGROUP_ATTRIBUTE_QUOTA | CACHEGROUP_ATTRIBUTE_GROUPNAME | CACHEGROUP_ATTRIBUTE_STORAGE ;
+};
+}

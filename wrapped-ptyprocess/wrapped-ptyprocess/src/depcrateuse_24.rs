@@ -1,0 +1,9 @@
+// Generated macro for use_24 (use)
+macro_rules! Depcrateuse_24 {
+() => {
+// Module: crate
+// Provides: {"use_24"}
+// Dependencies: {}
+use std :: os :: unix :: prelude :: { AsRawFd , CommandExt , FromRawFd , RawFd } ;
+};
+}

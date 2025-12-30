@@ -1,0 +1,9 @@
+// Generated macro for Kind (enum)
+macro_rules! Depcrate_data_output_entryKind {
+() => {
+// Module: crate::data::output::entry
+// Provides: {"Kind"}
+// Dependencies: {}
+# [doc = " The kind of pack entry to be written"] # [derive (PartialEq , Eq , Debug , Hash , Ord , PartialOrd , Clone , Copy)] # [cfg_attr (feature = "serde" , derive (serde :: Serialize , serde :: Deserialize))] pub enum Kind { # [doc = " A complete base object, including its kind"] Base (gix_object :: Kind) , # [doc = " A delta against the object with the given index. It's always an index that was already encountered to refer only"] # [doc = " to object we have written already."] DeltaRef { # [doc = " The absolute index to the object to serve as base. It's up to the writer to maintain enough state to allow producing"] # [doc = " a packed delta object from it."] object_index : usize , } , # [doc = " A delta against the given object as identified by its `ObjectId`."] # [doc = " This is the case for thin packs only, i.e. those that are sent over the wire."] # [doc = " Note that there is the option of the `ObjectId` being used to refer to an object within"] # [doc = " the same pack, but it's a discontinued practice which won't be encountered here."] DeltaOid { # [doc = " The object serving as base for this delta"] id : ObjectId , } , }
+};
+}

@@ -1,0 +1,44 @@
+// Generated module macro for crate::flycheck
+macro_rules! Modcrate_flycheck {
+() => {
+        Depcrate_flycheckuse_92!();
+        Depcrate_flycheckuse_93!();
+        Depcrate_flycheckuse_94!();
+        Depcrate_flycheckuse_95!();
+        Depcrate_flycheckuse_96!();
+        Depcrate_flycheckuse_97!();
+        Depcrate_flycheckuse_98!();
+        Depcrate_flycheckuse_99!();
+        Depcrate_flycheckuse_100!();
+        Depcrate_flycheckuse_101!();
+        Depcrate_flycheckuse_102!();
+        Depcrate_flycheckuse_103!();
+        Depcrate_flycheckuse_104!();
+        Depcrate_flycheckuse_105!();
+        Depcrate_flycheckInvocationStrategy!();
+        Depcrate_flycheckCargoOptions!();
+        Depcrate_flycheckTarget!();
+        Depcrate_flycheckimpl_109!();
+        Depcrate_flycheckFlycheckConfig!();
+        Depcrate_flycheckimpl_111!();
+        Depcrate_flycheckimpl_112!();
+        Depcrate_flycheckFlycheckHandle!();
+        Depcrate_flycheckimpl_114!();
+        Depcrate_flycheckClearDiagnosticsKind!();
+        Depcrate_flycheckClearScope!();
+        Depcrate_flycheckFlycheckMessage!();
+        Depcrate_flycheckimpl_118!();
+        Depcrate_flycheckProgress!();
+        Depcrate_flycheckFlycheckScope!();
+        Depcrate_flycheckStateChange!();
+        Depcrate_flycheckFlycheckActor!();
+        Depcrate_flycheckDiagnosticsReceived!();
+        Depcrate_flycheckEvent!();
+        Depcrate_flycheckSAVED_FILE_PLACEHOLDER!();
+        Depcrate_flycheckimpl_126!();
+        Depcrate_flycheckCargoCheckMessage!();
+        Depcrate_flycheckCargoCheckParser!();
+        Depcrate_flycheckimpl_129!();
+        Depcrate_flycheckJsonMessage!();
+    };
+}

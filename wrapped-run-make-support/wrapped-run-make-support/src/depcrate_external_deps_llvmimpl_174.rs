@@ -1,0 +1,9 @@
+// Generated macro for impl_174 (impl)
+macro_rules! Depcrate_external_deps_llvmimpl_174 {
+() => {
+// Module: crate::external_deps::llvm
+// Provides: {"impl_174"}
+// Dependencies: {}
+impl LlvmReadobj { # [doc = " Construct a new `llvm-readobj` invocation with the `GNU` output style."] # [doc = " This assumes that `llvm-readobj` is available at `$LLVM_BIN_DIR/llvm-readobj`."] # [track_caller] pub fn new () -> Self { let llvm_readobj = llvm_bin_dir () . join ("llvm-readobj") ; let cmd = Command :: new (llvm_readobj) ; let mut readobj = Self { cmd } ; readobj . elf_output_style ("GNU") ; readobj } # [doc = " Specify the format of the ELF information."] # [doc = ""] # [doc = " Valid options are `LLVM` (default), `GNU`, and `JSON`."] pub fn elf_output_style (& mut self , style : & str) -> & mut Self { self . cmd . arg ("--elf-output-style") ; self . cmd . arg (style) ; self } # [doc = " Provide an input file."] pub fn input < P : AsRef < Path > > (& mut self , path : P) -> & mut Self { self . cmd . arg (path . as_ref ()) ; self } # [doc = " Pass `--file-header` to display file headers."] pub fn file_header (& mut self) -> & mut Self { self . cmd . arg ("--file-header") ; self } # [doc = " Pass `--program-headers` to display program headers."] pub fn program_headers (& mut self) -> & mut Self { self . cmd . arg ("--program-headers") ; self } # [doc = " Pass `--symbols` to display the symbol table, including both local"] # [doc = " and global symbols."] pub fn symbols (& mut self) -> & mut Self { self . cmd . arg ("--symbols") ; self } # [doc = " Pass `--dynamic-table` to display the dynamic symbol table."] pub fn dynamic_table (& mut self) -> & mut Self { self . cmd . arg ("--dynamic-table") ; self } # [doc = " Specify the section to display."] pub fn section (& mut self , section : & str) -> & mut Self { self . cmd . arg ("--string-dump") ; self . cmd . arg (section) ; self } }
+};
+}

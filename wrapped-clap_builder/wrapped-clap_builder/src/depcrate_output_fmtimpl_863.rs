@@ -1,0 +1,9 @@
+// Generated macro for impl_863 (impl)
+macro_rules! Depcrate_output_fmtimpl_863 {
+() => {
+// Module: crate::output::fmt
+// Provides: {"impl_863"}
+// Dependencies: {}
+# [doc = " Printing methods."] impl Colorizer { # [cfg (feature = "color")] pub (crate) fn print (& self) -> std :: io :: Result < () > { let color_when = match self . color_when { ColorChoice :: Always => anstream :: ColorChoice :: Always , ColorChoice :: Auto => anstream :: ColorChoice :: Auto , ColorChoice :: Never => anstream :: ColorChoice :: Never , } ; let mut stdout ; let mut stderr ; let writer : & mut dyn std :: io :: Write = match self . stream { Stream :: Stderr => { stderr = anstream :: AutoStream :: new (std :: io :: stderr () . lock () , color_when) ; & mut stderr } Stream :: Stdout => { stdout = anstream :: AutoStream :: new (std :: io :: stdout () . lock () , color_when) ; & mut stdout } } ; self . content . write_to (writer) } # [cfg (not (feature = "color"))] pub (crate) fn print (& self) -> std :: io :: Result < () > { match self . stream { Stream :: Stdout => { let stdout = std :: io :: stdout () ; let mut stdout = stdout . lock () ; self . content . write_to (& mut stdout) } Stream :: Stderr => { let stderr = std :: io :: stderr () ; let mut stderr = stderr . lock () ; self . content . write_to (& mut stderr) } } } }
+};
+}

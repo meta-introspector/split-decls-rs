@@ -1,0 +1,56 @@
+// Generated module macro for crate::executor
+macro_rules! Modcrate_executor {
+() => {
+        Depcrate_executoruse_182!();
+        Depcrate_executoruse_183!();
+        Depcrate_executoruse_184!();
+        Depcrate_executoruse_185!();
+        Depcrate_executoruse_186!();
+        Depcrate_executoruse_187!();
+        Depcrate_executorlook_ahead!();
+        Depcrate_executorowned_executor!();
+        Depcrate_executorFieldPath!();
+        Depcrate_executorExecutor!();
+        Depcrate_executorExecutionError!();
+        Depcrate_executorimpl_244!();
+        Depcrate_executorimpl_245!();
+        Depcrate_executorimpl_246!();
+        Depcrate_executorimpl_247!();
+        Depcrate_executorFieldError!();
+        Depcrate_executorimpl_249!();
+        Depcrate_executorimpl_250!();
+        Depcrate_executorFieldResult!();
+        Depcrate_executorExecutionResult!();
+        Depcrate_executorValuesStream!();
+        Depcrate_executorVariables!();
+        Depcrate_executorIntoFieldError!();
+        Depcrate_executorimpl_256!();
+        Depcrate_executorimpl_257!();
+        Depcrate_executorimpl_258!();
+        Depcrate_executorimpl_259!();
+        Depcrate_executorimpl_260!();
+        Depcrate_executorimpl_261!();
+        Depcrate_executorIntoResolvable!();
+        Depcrate_executorimpl_263!();
+        Depcrate_executorimpl_264!();
+        Depcrate_executorimpl_265!();
+        Depcrate_executorimpl_266!();
+        Depcrate_executorimpl_267!();
+        Depcrate_executorimpl_268!();
+        Depcrate_executorFromContext!();
+        Depcrate_executorContext!();
+        Depcrate_executorimpl_271!();
+        Depcrate_executorNULL_CONTEXT!();
+        Depcrate_executorimpl_273!();
+        Depcrate_executorimpl_274!();
+        Depcrate_executorimpl_275!();
+        Depcrate_executorimpl_276!();
+        Depcrate_executorimpl_277!();
+        Depcrate_executorexecute_validated_query!();
+        Depcrate_executorexecute_validated_query_async!();
+        Depcrate_executorget_operation!();
+        Depcrate_executorresolve_validated_subscription!();
+        Depcrate_executorRegistry!();
+        Depcrate_executorimpl_283!();
+    };
+}

@@ -1,0 +1,39 @@
+// Generated module macro for crate::content
+macro_rules! Modcrate_content {
+() => {
+        Depcrate_contentuse_21!();
+        Depcrate_contentuse_22!();
+        Depcrate_contentuse_23!();
+        Depcrate_contentuse_24!();
+        Depcrate_contentuse_25!();
+        Depcrate_contentuse_26!();
+        Depcrate_contentuse_27!();
+        Depcrate_contentuse_28!();
+        Depcrate_contentContent!();
+        Depcrate_contentimpl_30!();
+        Depcrate_contentimpl_31!();
+        Depcrate_contentContentVisitor!();
+        Depcrate_contentimpl_33!();
+        Depcrate_contentContentDeserializer!();
+        Depcrate_contentimpl_35!();
+        Depcrate_contentimpl_36!();
+        Depcrate_contentimpl_37!();
+        Depcrate_contentvisit_content_seq!();
+        Depcrate_contentvisit_content_map!();
+        Depcrate_contentimpl_40!();
+        Depcrate_contentimpl_41!();
+        Depcrate_contentEnumDeserializer!();
+        Depcrate_contentimpl_43!();
+        Depcrate_contentimpl_44!();
+        Depcrate_contentVariantDeserializer!();
+        Depcrate_contentimpl_46!();
+        Depcrate_contentSeqDeserializer!();
+        Depcrate_contentimpl_48!();
+        Depcrate_contentimpl_49!();
+        Depcrate_contentimpl_50!();
+        Depcrate_contentMapDeserializer!();
+        Depcrate_contentimpl_52!();
+        Depcrate_contentimpl_53!();
+        Depcrate_contentimpl_54!();
+    };
+}

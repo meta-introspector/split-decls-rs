@@ -1,0 +1,9 @@
+// Generated macro for create_new_process (function)
+macro_rules! Depcrate_unix_apple_macos_processcreate_new_process {
+() => {
+// Module: crate::unix::apple::macos::process
+// Provides: {"create_new_process"}
+// Dependencies: {}
+unsafe fn create_new_process (pid : Pid , now : u64 , refresh_kind : ProcessRefreshKind , info : Option < libc :: proc_bsdinfo > , timebase_to_ms : f64 ,) -> Result < Option < Process > , () > { let info = match info { Some (info) => info , None => { let mut p = ProcessInner :: new_empty (pid) ; unsafe { if get_exe_and_name_backup (& mut p , refresh_kind , false) { get_cwd_root (& mut p , refresh_kind) ; return Ok (Some (Process { inner : p })) ; } return Err (()) ; } } } ; let parent = get_parent (& info) ; let start_time = info . pbi_start_tvsec ; let run_time = now . saturating_sub (start_time) ; let mut p = ProcessInner :: new (pid , parent , start_time , run_time) ; unsafe { if ! get_process_infos (& mut p , refresh_kind) && ! get_exe_and_name_backup (& mut p , refresh_kind , false) { return Err (()) ; } get_cwd_root (& mut p , refresh_kind) ; if refresh_kind . cpu () || refresh_kind . memory () { let task_info = get_task_info (pid) ; p . old_stime = task_info . pti_total_system ; p . old_utime = task_info . pti_total_user ; if refresh_kind . cpu () { p . accumulated_cpu_time = (task_info . pti_total_user . saturating_add (task_info . pti_total_system) as f64 * timebase_to_ms) as u64 ; } if refresh_kind . memory () { p . memory = task_info . pti_resident_size ; p . virtual_memory = task_info . pti_virtual_size ; } } p . user_id = Some (Uid (info . pbi_ruid)) ; p . effective_user_id = Some (Uid (info . pbi_uid)) ; p . group_id = Some (Gid (info . pbi_rgid)) ; p . effective_group_id = Some (Gid (info . pbi_gid)) ; p . process_status = ProcessStatus :: from (info . pbi_status) ; if refresh_kind . disk_usage () { update_proc_disk_activity (& mut p) ; } Ok (Some (Process { inner : p })) } }
+};
+}

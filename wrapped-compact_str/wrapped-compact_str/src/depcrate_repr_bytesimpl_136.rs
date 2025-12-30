@@ -1,0 +1,9 @@
+// Generated macro for impl_136 (impl)
+macro_rules! Depcrate_repr_bytesimpl_136 {
+() => {
+// Module: crate::repr::bytes
+// Provides: {"impl_136"}
+// Dependencies: {}
+impl Repr { # [doc = " Converts a [`Buf`] of bytes to a [`Repr`], checking that the provided bytes are valid UTF-8"] pub (crate) fn from_utf8_buf < B : Buf > (buf : & mut B) -> Result < Self , Utf8Error > { let (repr , bytes_written) = unsafe { Self :: collect_buf (buf) } ; match core :: str :: from_utf8 (& repr . as_slice () [.. bytes_written]) { Ok (_) => Ok (repr) , Err (e) => Err (e) , } } # [doc = " Converts a [`Buf`] of bytes to a [`Repr`], without checking for valid UTF-8"] # [doc = ""] # [doc = " # Safety"] # [doc = " * The provided buffer must be valid UTF-8"] pub (crate) unsafe fn from_utf8_buf_unchecked < B : Buf > (buf : & mut B) -> Self { let (repr , _bytes_written) = Self :: collect_buf (buf) ; repr } # [doc = " Collects the bytes from a [`Buf`] into a [`Repr`]"] # [doc = ""] # [doc = " # Safety"] # [doc = " * The caller must guarantee that `buf` is valid UTF-8"] unsafe fn collect_buf < B : Buf > (buf : & mut B) -> (Self , usize) { let mut repr = super :: EMPTY ; let mut bytes_written = 0 ; debug_assert_eq ! (repr . len () , bytes_written) ; while buf . has_remaining () { let chunk = buf . chunk () ; let chunk_len = chunk . len () ; if bytes_written < MAX_SIZE && bytes_written + chunk_len == MAX_SIZE { let last_byte = chunk [chunk_len - 1] ; if last_byte >= 0b11000000 { repr . reserve (MAX_SIZE + 1) . unwrap_with_msg () ; } } repr . reserve (chunk_len) . unwrap_with_msg () ; let slice = repr . as_mut_buf () ; slice [bytes_written .. bytes_written + chunk_len] . copy_from_slice (chunk) ; bytes_written += chunk_len ; repr . set_len (bytes_written) ; buf . advance (chunk_len) ; } (repr , bytes_written) } }
+};
+}

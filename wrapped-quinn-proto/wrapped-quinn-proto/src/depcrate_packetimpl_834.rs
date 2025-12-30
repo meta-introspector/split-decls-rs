@@ -1,0 +1,9 @@
+// Generated macro for impl_834 (impl)
+macro_rules! Depcrate_packetimpl_834 {
+() => {
+// Module: crate::packet
+// Provides: {"impl_834"}
+// Dependencies: {}
+impl PacketNumber { pub (crate) fn new (n : u64 , largest_acked : u64) -> Self { let range = (n - largest_acked) * 2 ; if range < 1 << 8 { Self :: U8 (n as u8) } else if range < 1 << 16 { Self :: U16 (n as u16) } else if range < 1 << 24 { Self :: U24 (n as u32) } else if range < 1 << 32 { Self :: U32 (n as u32) } else { panic ! ("packet number too large to encode") } } pub (crate) fn len (self) -> usize { use PacketNumber :: * ; match self { U8 (_) => 1 , U16 (_) => 2 , U24 (_) => 3 , U32 (_) => 4 , } } pub (crate) fn encode < W : BufMut > (self , w : & mut W) { use PacketNumber :: * ; match self { U8 (x) => w . write (x) , U16 (x) => w . write (x) , U24 (x) => w . put_uint (u64 :: from (x) , 3) , U32 (x) => w . write (x) , } } pub (crate) fn decode < R : Buf > (len : usize , r : & mut R) -> Result < Self , PacketDecodeError > { use PacketNumber :: * ; let pn = match len { 1 => U8 (r . get () ?) , 2 => U16 (r . get () ?) , 3 => U24 (r . get_uint (3) as u32) , 4 => U32 (r . get () ?) , _ => unreachable ! () , } ; Ok (pn) } pub (crate) fn decode_len (tag : u8) -> usize { 1 + (tag & 0x03) as usize } fn tag (self) -> u8 { use PacketNumber :: * ; match self { U8 (_) => 0b00 , U16 (_) => 0b01 , U24 (_) => 0b10 , U32 (_) => 0b11 , } } pub (crate) fn expand (self , expected : u64) -> u64 { use PacketNumber :: * ; let truncated = match self { U8 (x) => u64 :: from (x) , U16 (x) => u64 :: from (x) , U24 (x) => u64 :: from (x) , U32 (x) => u64 :: from (x) , } ; let nbits = self . len () * 8 ; let win = 1 << nbits ; let hwin = win / 2 ; let mask = win - 1 ; let candidate = (expected & ! mask) | truncated ; if expected . checked_sub (hwin) . is_some_and (| x | candidate <= x) { candidate + win } else if candidate > expected + hwin && candidate > win { candidate - win } else { candidate } } }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for PSYSTEM_SET_TIME_ADJUST_INFORMATION_PRECISE (type)
+macro_rules! Depcrate_ntexapiPSYSTEM_SET_TIME_ADJUST_INFORMATION_PRECISE {
+() => {
+// Module: crate::ntexapi
+// Provides: {"PSYSTEM_SET_TIME_ADJUST_INFORMATION_PRECISE"}
+// Dependencies: {}
+pub type PSYSTEM_SET_TIME_ADJUST_INFORMATION_PRECISE = * mut SYSTEM_SET_TIME_ADJUST_INFORMATION_PRECISE ;
+};
+}

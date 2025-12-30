@@ -1,0 +1,39 @@
+// Generated module macro for crate::um::highlevelmonitorconfigurationapi
+macro_rules! Modcrate_um_highlevelmonitorconfigurationapi {
+() => {
+        Depcrate_um_highlevelmonitorconfigurationapiuse_28728!();
+        Depcrate_um_highlevelmonitorconfigurationapiuse_28729!();
+        Depcrate_um_highlevelmonitorconfigurationapiuse_28730!();
+        Depcrate_um_highlevelmonitorconfigurationapiMC_CAPS_NONE!();
+        Depcrate_um_highlevelmonitorconfigurationapiMC_CAPS_MONITOR_TECHNOLOGY_TYPE!();
+        Depcrate_um_highlevelmonitorconfigurationapiMC_CAPS_BRIGHTNESS!();
+        Depcrate_um_highlevelmonitorconfigurationapiMC_CAPS_CONTRAST!();
+        Depcrate_um_highlevelmonitorconfigurationapiMC_CAPS_COLOR_TEMPERATURE!();
+        Depcrate_um_highlevelmonitorconfigurationapiMC_CAPS_RED_GREEN_BLUE_GAIN!();
+        Depcrate_um_highlevelmonitorconfigurationapiMC_CAPS_RED_GREEN_BLUE_DRIVE!();
+        Depcrate_um_highlevelmonitorconfigurationapiMC_CAPS_DEGAUSS!();
+        Depcrate_um_highlevelmonitorconfigurationapiMC_CAPS_DISPLAY_AREA_POSITION!();
+        Depcrate_um_highlevelmonitorconfigurationapiMC_CAPS_DISPLAY_AREA_SIZE!();
+        Depcrate_um_highlevelmonitorconfigurationapiMC_CAPS_RESTORE_FACTORY_DEFAULTS!();
+        Depcrate_um_highlevelmonitorconfigurationapiMC_CAPS_RESTORE_FACTORY_COLOR_DEFAULTS!();
+        Depcrate_um_highlevelmonitorconfigurationapiMC_RESTORE_FACTORY_DEFAULTS_ENABLES_MONITOR_SETTINGS!();
+        Depcrate_um_highlevelmonitorconfigurationapiMC_SUPPORTED_COLOR_TEMPERATURE_NONE!();
+        Depcrate_um_highlevelmonitorconfigurationapiMC_SUPPORTED_COLOR_TEMPERATURE_4000K!();
+        Depcrate_um_highlevelmonitorconfigurationapiMC_SUPPORTED_COLOR_TEMPERATURE_5000K!();
+        Depcrate_um_highlevelmonitorconfigurationapiMC_SUPPORTED_COLOR_TEMPERATURE_6500K!();
+        Depcrate_um_highlevelmonitorconfigurationapiMC_SUPPORTED_COLOR_TEMPERATURE_7500K!();
+        Depcrate_um_highlevelmonitorconfigurationapiMC_SUPPORTED_COLOR_TEMPERATURE_8200K!();
+        Depcrate_um_highlevelmonitorconfigurationapiMC_SUPPORTED_COLOR_TEMPERATURE_9300K!();
+        Depcrate_um_highlevelmonitorconfigurationapiMC_SUPPORTED_COLOR_TEMPERATURE_10000K!();
+        Depcrate_um_highlevelmonitorconfigurationapiMC_SUPPORTED_COLOR_TEMPERATURE_11500K!();
+        Depcrate_um_highlevelmonitorconfigurationapimacro_28753!();
+        Depcrate_um_highlevelmonitorconfigurationapiLPMC_DISPLAY_TECHNOLOGY_TYPE!();
+        Depcrate_um_highlevelmonitorconfigurationapimacro_28755!();
+        Depcrate_um_highlevelmonitorconfigurationapimacro_28756!();
+        Depcrate_um_highlevelmonitorconfigurationapimacro_28757!();
+        Depcrate_um_highlevelmonitorconfigurationapimacro_28758!();
+        Depcrate_um_highlevelmonitorconfigurationapimacro_28759!();
+        Depcrate_um_highlevelmonitorconfigurationapiLPMC_COLOR_TEMPERATURE!();
+        Depcrate_um_highlevelmonitorconfigurationapiother_28761!();
+    };
+}

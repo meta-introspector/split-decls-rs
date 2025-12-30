@@ -1,0 +1,9 @@
+// Generated macro for impl_461 (impl)
+macro_rules! Depcrate_parser_combinatorimpl_461 {
+() => {
+// Module: crate::parser::combinator
+// Provides: {"impl_461"}
+// Dependencies: {}
+impl < Input , L , R > Parser < Input > for Either < L , R > where Input : Stream , L : Parser < Input > , R : Parser < Input , Output = L :: Output > , { type Output = L :: Output ; type PartialState = Option < Either < L :: PartialState , R :: PartialState > > ; # [inline] fn parse_lazy (& mut self , input : & mut Input ,) -> ParseResult < Self :: Output , < Input as StreamOnce > :: Error > { match * self { Either :: Left (ref mut x) => x . parse_lazy (input) , Either :: Right (ref mut x) => x . parse_lazy (input) , } } parse_mode ! (Input) ; # [inline] fn parse_mode_impl < M > (& mut self , mode : M , input : & mut Input , state : & mut Self :: PartialState ,) -> ParseResult < Self :: Output , < Input as StreamOnce > :: Error > where M : ParseMode , { match * self { Either :: Left (ref mut x) => { match * state { None | Some (Either :: Right (_)) => { * state = Some (Either :: Left (L :: PartialState :: default ())) } Some (Either :: Left (_)) => () , } x . parse_mode (mode , input , match state { Some (Either :: Left (state)) => state , _ => unreachable ! () , } ,) } Either :: Right (ref mut x) => { match * state { None | Some (Either :: Left (_)) => { * state = Some (Either :: Right (R :: PartialState :: default ())) } Some (Either :: Right (_)) => () , } x . parse_mode (mode , input , match state { Some (Either :: Right (state)) => state , _ => unreachable ! () , } ,) } } } # [inline] fn add_error (& mut self , error : & mut Tracked < < Input as StreamOnce > :: Error >) { match * self { Either :: Left (ref mut x) => x . add_error (error) , Either :: Right (ref mut x) => x . add_error (error) , } } }
+};
+}

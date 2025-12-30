@@ -1,0 +1,63 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcrate_generated__vsuseraccount.rs");
+include!("depcrate_generated__vsautosignintokenupdatecontext.rs");
+include!("depcrate_generateduse_42.rs");
+include!("depcrate_generated__vsaccountmetadata.rs");
+include!("depcrate_generateduse_27.rs");
+include!("depcrate_generated__videosubscriberaccountdefines.rs");
+include!("depcrate_generateduse_30.rs");
+include!("depcrate_generateduse_29.rs");
+include!("depcrate_generateduse_33.rs");
+include!("depcrate_generateduse_34.rs");
+include!("depcrate_generated__vsautosignintoken.rs");
+include!("depcrate_generated__vsautosigninauthorization.rs");
+include!("depcrate_generateduse_24.rs");
+include!("depcrate_generated__vsapplesubscription.rs");
+include!("depcrate_generateduse_37.rs");
+include!("depcrate_generateduse_38.rs");
+include!("depcrate_generateduse_39.rs");
+include!("depcrate_generateduse_32.rs");
+include!("depcrate_generated__vsaccountapplicationprovider.rs");
+include!("depcrate_generateduse_47.rs");
+include!("depcrate_generateduse_50.rs");
+include!("depcrate_generated__vsaccountmanagerresult.rs");
+include!("depcrate_generateduse_52.rs");
+include!("depcrate_generated__vsaccountmanager.rs");
+include!("depcrate_generateduse_22.rs");
+include!("depcrate_generatedother_4.rs");
+include!("depcrateother_2.rs");
+include!("depcrate_generateduse_46.rs");
+include!("depcrategenerated.rs");
+include!("depcrateother_1.rs");
+include!("depcrate_generated__vsaccountproviderresponse.rs");
+include!("depcrate_generateduse_45.rs");
+include!("depcrate_generated__vssubscriptionregistrationcenter.rs");
+include!("depcrate_generateduse_25.rs");
+include!("depcrate_generateduse_40.rs");
+include!("depcrate_generateduse_43.rs");
+include!("depcrateuse_53.rs");
+include!("depcrate_generateduse_26.rs");
+include!("depcrate_generated__videosubscriberaccounterrors.rs");
+include!("depcrate_generateduse_23.rs");
+include!("depcrate_generated__vsaccountmetadatarequest.rs");
+include!("depcrate_generated__vsuseraccountmanager.rs");
+include!("depcrate_generateduse_28.rs");
+include!("depcrate_generateduse_31.rs");
+include!("depcrate_generateduse_21.rs");
+include!("depcrate_generateduse_35.rs");
+include!("depcrate_generateduse_36.rs");
+include!("depcrate_generateduse_41.rs");
+include!("depcrate_generateduse_44.rs");
+include!("depcrate_generateduse_51.rs");
+include!("depcrate_generateduse_48.rs");
+include!("depcrate_generated__vssubscription.rs");
+include!("depcrate_generateduse_49.rs");
+include!("modcrate.rs");
+include!("modcrate_generated.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate!();
+    Modcrate_generated!();
+}

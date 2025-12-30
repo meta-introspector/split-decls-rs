@@ -1,0 +1,49 @@
+// Generated module macro for crate::attr
+macro_rules! Modcrate_attr {
+() => {
+        Depcrate_attruse_71!();
+        Depcrate_attruse_72!();
+        Depcrate_attruse_73!();
+        Depcrate_attruse_74!();
+        Depcrate_attruse_75!();
+        Depcrate_attruse_76!();
+        Depcrate_attruse_77!();
+        Depcrate_attrParsedAttributes!();
+        Depcrate_attrStratMode!();
+        Depcrate_attrParamsMode!();
+        Depcrate_attrimpl_81!();
+        Depcrate_attrimpl_82!();
+        Depcrate_attrparse_attributes!();
+        Depcrate_attrparse_top_attributes!();
+        Depcrate_attrhas_no_bound!();
+        Depcrate_attrparse_attributes_base!();
+        Depcrate_attrParseAcc!();
+        Depcrate_attrparse_accumulate!();
+        Depcrate_attris_proptest_attr!();
+        Depcrate_attrextract_modifiers!();
+        Depcrate_attris_outer_attr!();
+        Depcrate_attrdispatch_attribute!();
+        Depcrate_attrdispatch_unknown_mod!();
+        Depcrate_attrparse_no_bound!();
+        Depcrate_attrparse_skip!();
+        Depcrate_attrparse_weight!();
+        Depcrate_attrparse_filter!();
+        Depcrate_attrparse_regex!();
+        Depcrate_attrparse_value!();
+        Depcrate_attrparse_strategy!();
+        Depcrate_attrparse_strategy_base!();
+        Depcrate_attrparse_strat_mode!();
+        Depcrate_attrparse_params_mode!();
+        Depcrate_attrparse_params!();
+        Depcrate_attrparse_no_params!();
+        Depcrate_attrparse_bare_modifier!();
+        Depcrate_attrerror_if_set!();
+        Depcrate_attrident_to_type!();
+        Depcrate_attrextract_lit!();
+        Depcrate_attrextract_expr!();
+        Depcrate_attrlit_to_expr!();
+        Depcrate_attrfunction_call!();
+        Depcrate_attrNormMeta!();
+        Depcrate_attrnormalize_meta!();
+    };
+}

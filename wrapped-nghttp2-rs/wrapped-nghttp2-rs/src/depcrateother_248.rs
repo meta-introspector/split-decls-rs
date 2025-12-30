@@ -1,0 +1,9 @@
+// Generated macro for other_248 (other)
+macro_rules! Depcrateother_248 {
+() => {
+// Module: crate
+// Provides: {"other_248"}
+// Dependencies: {}
+extern "C" { # [doc = " @function"] # [doc = ""] # [doc = " Submits PRIORITY frame to change the priority of stream |stream_id|"] # [doc = " to the priority specification |pri_spec|."] # [doc = ""] # [doc = " The |flags| is currently ignored and should be"] # [doc = " :enum:`NGHTTP2_FLAG_NONE`."] # [doc = ""] # [doc = " The |pri_spec| is priority specification of this request.  ``NULL``"] # [doc = " is not allowed for this function. To specify the priority, use"] # [doc = " `nghttp2_priority_spec_init()`.  This function will copy its data"] # [doc = " members."] # [doc = ""] # [doc = " The ``pri_spec->weight`` must be in [:enum:`NGHTTP2_MIN_WEIGHT`,"] # [doc = " :enum:`NGHTTP2_MAX_WEIGHT`], inclusive.  If ``pri_spec->weight`` is"] # [doc = " strictly less than :enum:`NGHTTP2_MIN_WEIGHT`, it becomes"] # [doc = " :enum:`NGHTTP2_MIN_WEIGHT`.  If it is strictly greater than"] # [doc = " :enum:`NGHTTP2_MAX_WEIGHT`, it becomes :enum:`NGHTTP2_MAX_WEIGHT`."] # [doc = ""] # [doc = " This function returns 0 if it succeeds, or one of the following"] # [doc = " negative error codes:"] # [doc = ""] # [doc = " :enum:`NGHTTP2_ERR_NOMEM`"] # [doc = "     Out of memory."] # [doc = " :enum:`NGHTTP2_ERR_INVALID_ARGUMENT`"] # [doc = "     The |stream_id| is 0; or the |pri_spec| is NULL; or trying to"] # [doc = "     depend on itself."] pub fn nghttp2_submit_priority (session : * mut nghttp2_session , flags : u8 , stream_id : i32 , pri_spec : * const nghttp2_priority_spec ,) -> :: std :: os :: raw :: c_int ; }
+};
+}

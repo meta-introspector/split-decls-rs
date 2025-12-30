@@ -1,0 +1,9 @@
+// Generated macro for parse_name_attribute (function)
+macro_rules! Depcrate_x509_commonparse_name_attribute {
+() => {
+// Module: crate::x509::common
+// Provides: {"parse_name_attribute"}
+// Dependencies: {}
+fn parse_name_attribute < 'p > (py : pyo3 :: Python < 'p > , attribute : AttributeTypeValue < '_ > ,) -> CryptographyResult < pyo3 :: Bound < 'p , pyo3 :: PyAny > > { let oid = oid_to_py_oid (py , & attribute . type_id) ? ; let tag_val = attribute . value . tag () . as_u8 () . ok_or_else (| | { CryptographyError :: from (pyo3 :: exceptions :: PyValueError :: new_err ("Long-form tags are not supported in NameAttribute values" ,)) }) ? ; let py_tag = types :: ASN1_TYPE_TO_ENUM . get (py) ? . get_item (tag_val) ? ; let py_data = match attribute . value { AttributeValue :: AnyString (s) => { if s . tag () == asn1 :: BitString :: TAG { pyo3 :: types :: PyBytes :: new (py , s . data ()) . into_any () } else { let parsed = std :: str :: from_utf8 (s . data ()) . map_err (| _ | asn1 :: ParseError :: new (asn1 :: ParseErrorKind :: InvalidValue)) ? ; pyo3 :: types :: PyString :: new (py , parsed) . into_any () } } AttributeValue :: PrintableString (printable_string) => { pyo3 :: types :: PyString :: new (py , printable_string . as_str ()) . into_any () } AttributeValue :: UniversalString (universal_string) => { let py_bytes = pyo3 :: types :: PyBytes :: new (py , universal_string . as_utf32_be_bytes ()) ; py_bytes . call_method1 (pyo3 :: intern ! (py , "decode") , ("utf_32_be" ,)) ? } AttributeValue :: BmpString (bmp_string) => { let py_bytes = pyo3 :: types :: PyBytes :: new (py , bmp_string . as_utf16_be_bytes ()) ; py_bytes . call_method1 (pyo3 :: intern ! (py , "decode") , ("utf_16_be" ,)) ? } } ; let kwargs = [(pyo3 :: intern ! (py , "_validate") , false)] . into_py_dict (py) ? ; Ok (types :: NAME_ATTRIBUTE . get (py) ? . call ((oid , py_data , py_tag) , Some (& kwargs)) ?) }
+};
+}

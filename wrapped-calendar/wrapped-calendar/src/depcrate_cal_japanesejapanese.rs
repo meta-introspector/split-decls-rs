@@ -1,0 +1,9 @@
+// Generated macro for Japanese (struct)
+macro_rules! Depcrate_cal_japaneseJapanese {
+() => {
+// Module: crate::cal::japanese
+// Provides: {"Japanese"}
+// Dependencies: {}
+# [doc = " The [Japanese Calendar] (with modern eras only)"] # [doc = ""] # [doc = " The [Japanese Calendar] is a variant of the [`Gregorian`](crate::cal::Gregorian) calendar"] # [doc = " created by the Japanese government. It is identical to the Gregorian calendar except that"] # [doc = " is uses Japanese eras instead of the Common Era."] # [doc = ""] # [doc = " This implementation extends proleptically for dates before the calendar's creation"] # [doc = " in 6 Meiji (1873 CE)."] # [doc = " The Meiji era is used proleptically back to and including 1868-10-23, Gregorian eras are used before that."] # [doc = ""] # [doc = " For a variant that uses approximations of historical Japanese eras proleptically, check out [`JapaneseExtended`]."] # [doc = ""] # [doc = " This corresponds to the `\"japanese\"` [CLDR calendar](https://unicode.org/reports/tr35/#UnicodeCalendarIdentifier)."] # [doc = ""] # [doc = " [Japanese calendar]: https://en.wikipedia.org/wiki/Japanese_calendar"] # [doc = ""] # [doc = " # Era codes"] # [doc = ""] # [doc = " This calendar currently supports seven era codes. It supports the five eras since its"] # [doc = " introduction (`meiji`, `taisho`, `showa`, `heisei`, `reiwa`), as well as the Gregorian"] # [doc = " `bce` (alias `bc`), and `ce` (alias `ad`) for earlier dates."] # [doc = ""] # [doc = " Future eras will also be added to this type when they are decided."] # [doc = ""] # [doc = " These eras are loaded from data, requiring a data provider capable of providing [`CalendarJapaneseModernV1`]"] # [doc = " data."] # [derive (Clone , Debug , Default)] pub struct Japanese { eras : DataPayload < CalendarJapaneseModernV1 > , }
+};
+}

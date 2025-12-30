@@ -1,0 +1,9 @@
+// Generated macro for impl_17 (impl)
+macro_rules! Depcrate_uniximpl_17 {
+() => {
+// Module: crate::unix
+// Provides: {"impl_17"}
+// Dependencies: {}
+impl From < Async < std :: os :: unix :: net :: UnixListener > > for UnixListener { fn from (listener : Async < std :: os :: unix :: net :: UnixListener >) -> UnixListener { UnixListener :: new (Arc :: new (listener)) } }
+};
+}

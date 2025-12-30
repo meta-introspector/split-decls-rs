@@ -1,0 +1,9 @@
+// Generated macro for impl_95 (impl)
+macro_rules! Depcrate_cargo_workspaceimpl_95 {
+() => {
+// Module: crate::cargo_workspace
+// Provides: {"impl_95"}
+// Dependencies: {}
+impl TargetKind { pub fn new (kinds : & [cargo_metadata :: TargetKind]) -> TargetKind { for kind in kinds { return match kind { cargo_metadata :: TargetKind :: Bin => TargetKind :: Bin , cargo_metadata :: TargetKind :: Test => TargetKind :: Test , cargo_metadata :: TargetKind :: Bench => TargetKind :: Bench , cargo_metadata :: TargetKind :: Example => TargetKind :: Example , cargo_metadata :: TargetKind :: CustomBuild => TargetKind :: BuildScript , cargo_metadata :: TargetKind :: ProcMacro => TargetKind :: Lib { is_proc_macro : true } , cargo_metadata :: TargetKind :: Lib | cargo_metadata :: TargetKind :: DyLib | cargo_metadata :: TargetKind :: CDyLib | cargo_metadata :: TargetKind :: StaticLib | cargo_metadata :: TargetKind :: RLib => TargetKind :: Lib { is_proc_macro : false } , _ => continue , } ; } TargetKind :: Other } pub fn is_executable (self) -> bool { matches ! (self , TargetKind :: Bin | TargetKind :: Example) } pub fn is_proc_macro (self) -> bool { matches ! (self , TargetKind :: Lib { is_proc_macro : true }) } # [doc = " If this is a valid cargo target, returns the name cargo uses in command line arguments"] # [doc = " and output, otherwise None."] # [doc = " https://docs.rs/cargo_metadata/latest/cargo_metadata/enum.TargetKind.html"] pub fn as_cargo_target (self) -> Option < & 'static str > { match self { TargetKind :: Bin => Some ("bin") , TargetKind :: Lib { is_proc_macro : true } => Some ("proc-macro") , TargetKind :: Lib { is_proc_macro : false } => Some ("lib") , TargetKind :: Example => Some ("example") , TargetKind :: Test => Some ("test") , TargetKind :: Bench => Some ("bench") , TargetKind :: BuildScript => Some ("custom-build") , TargetKind :: Other => None , } } }
+};
+}

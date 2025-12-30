@@ -1,0 +1,39 @@
+// Generated module macro for crate::ser
+macro_rules! Modcrate_ser {
+() => {
+        Depcrate_seruse_108!();
+        Depcrate_seruse_109!();
+        Depcrate_seruse_110!();
+        Depcrate_seruse_111!();
+        Depcrate_seruse_112!();
+        Depcrate_seruse_113!();
+        Depcrate_serpath_meta!();
+        Depcrate_serraw!();
+        Depcrate_sertests!();
+        Depcrate_servalue!();
+        Depcrate_serto_writer!();
+        Depcrate_serto_writer_pretty!();
+        Depcrate_serto_string!();
+        Depcrate_serto_string_pretty!();
+        Depcrate_serPretty!();
+        Depcrate_serPrettyConfig!();
+        Depcrate_serimpl_169!();
+        Depcrate_serimpl_170!();
+        Depcrate_serSerializer!();
+        Depcrate_serindent!();
+        Depcrate_serimpl_173!();
+        Depcrate_serguard_recursion!();
+        Depcrate_serimpl_175!();
+        Depcrate_serState!();
+        Depcrate_serCompound!();
+        Depcrate_serimpl_178!();
+        Depcrate_serimpl_179!();
+        Depcrate_serimpl_180!();
+        Depcrate_serimpl_181!();
+        Depcrate_serimpl_182!();
+        Depcrate_serimpl_183!();
+        Depcrate_serimpl_184!();
+        Depcrate_serimpl_185!();
+        Depcrate_serimpl_186!();
+    };
+}

@@ -1,0 +1,9 @@
+// Generated macro for impl_104 (impl)
+macro_rules! Depcrate_item_typeimpl_104 {
+() => {
+// Module: crate::item_type
+// Provides: {"impl_104"}
+// Dependencies: {}
+impl HelperAttributeKinds { fn new (derive_ex : bool) -> Self { Self { derive_ex , .. Self :: default () } } fn extend (& mut self , es : & [DeriveEntry]) { for e in es { match e . kind { DeriveItemKind :: Default => self . default = true , DeriveItemKind :: Debug => self . debug = true , DeriveItemKind :: CompareOp (op) => match op { CompareOp :: Ord => self . ord = true , CompareOp :: PartialOrd => self . partial_ord = true , CompareOp :: Eq => self . eq = true , CompareOp :: PartialEq => self . partial_eq = true , CompareOp :: Hash => self . hash = true , } , _ => { } } } } fn is_match_cmp_attr (& self , op : CompareOp) -> bool { match op { CompareOp :: Ord => { self . ord || self . is_match_cmp_attr (CompareOp :: PartialEq) || self . is_match_cmp_attr (CompareOp :: Eq) } CompareOp :: PartialOrd => { self . partial_ord || self . is_match_cmp_attr (CompareOp :: PartialEq) } CompareOp :: Eq => self . eq || self . is_match_cmp_attr (CompareOp :: PartialEq) , CompareOp :: PartialEq => self . partial_eq , CompareOp :: Hash => self . hash , } } fn is_match (& self , attr : & Attribute) -> bool { let p = attr . path () ; let Some (i) = p . get_ident () else { return false ; } ; match i . to_string () . as_str () { "derive_ex" => self . derive_ex , "default" => self . default , "debug" => self . debug , "ord" => self . is_match_cmp_attr (CompareOp :: Ord) , "partial_ord" => self . is_match_cmp_attr (CompareOp :: PartialOrd) , "eq" => self . is_match_cmp_attr (CompareOp :: Eq) , "partial_eq" => self . is_match_cmp_attr (CompareOp :: PartialEq) , "hash" => self . is_match_cmp_attr (CompareOp :: Hash) , _ => false , } } fn without_derive_ex (& self) -> HelperAttributeKinds { HelperAttributeKinds { derive_ex : false , .. * self } } }
+};
+}

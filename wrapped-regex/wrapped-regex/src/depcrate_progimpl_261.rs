@@ -1,0 +1,9 @@
+// Generated macro for impl_261 (impl)
+macro_rules! Depcrate_progimpl_261 {
+() => {
+// Module: crate::prog
+// Provides: {"impl_261"}
+// Dependencies: {}
+impl fmt :: Debug for Program { fn fmt (& self , f : & mut fmt :: Formatter) -> fmt :: Result { use self :: Inst :: * ; fn with_goto (cur : usize , goto : usize , fmtd : String) -> String { if goto == cur + 1 { fmtd } else { format ! ("{} (goto: {})" , fmtd , goto) } } fn visible_byte (b : u8) -> String { use std :: ascii :: escape_default ; let escaped = escape_default (b) . collect :: < Vec < u8 > > () ; String :: from_utf8_lossy (& escaped) . into_owned () } for (pc , inst) in self . iter () . enumerate () { match * inst { Match (slot) => { try ! (write ! (f , "{:04} Match({:?})" , pc , slot)) } Save (ref inst) => { let s = format ! ("{:04} Save({})" , pc , inst . slot) ; try ! (write ! (f , "{}" , with_goto (pc , inst . goto , s))) ; } Split (ref inst) => { try ! (write ! (f , "{:04} Split({}, {})" , pc , inst . goto1 , inst . goto2)) ; } EmptyLook (ref inst) => { let s = format ! ("{:?}" , inst . look) ; try ! (write ! (f , "{:04} {}" , pc , with_goto (pc , inst . goto , s))) ; } Char (ref inst) => { let s = format ! ("{:?}" , inst . c) ; try ! (write ! (f , "{:04} {}" , pc , with_goto (pc , inst . goto , s))) ; } Ranges (ref inst) => { let ranges = inst . ranges . iter () . map (| r | format ! ("{:?}-{:?}" , r . 0 , r . 1)) . collect :: < Vec < String > > () . join (", ") ; let s = format ! ("{}" , ranges) ; try ! (write ! (f , "{:04} {}" , pc , with_goto (pc , inst . goto , s))) ; } Bytes (ref inst) => { let s = format ! ("Bytes({}, {})" , visible_byte (inst . start) , visible_byte (inst . end)) ; try ! (write ! (f , "{:04} {}" , pc , with_goto (pc , inst . goto , s))) ; } } if pc == self . start { try ! (write ! (f , " (start)")) ; } try ! (write ! (f , "\n")) ; } Ok (()) } }
+};
+}

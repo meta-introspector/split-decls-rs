@@ -1,0 +1,67 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcrate_patternuse_32.rs");
+include!("depcrateimpl_47.rs");
+include!("depcrate_converterimpl_29.rs");
+include!("depcrate_boundarygrapheme_is_uppercase.rs");
+include!("depcratetest.rs");
+include!("depcrate_boundarytests.rs");
+include!("depcrate_boundaryuse_4.rs");
+include!("depcrate_caseuse_15.rs");
+include!("depcrate_patternlowercase_word.rs");
+include!("depcrateuse_44.rs");
+include!("depcrate_converteruse_22.rs");
+include!("depcrate_converteruse_23.rs");
+include!("depcrate_boundarygrapheme_is_digit.rs");
+include!("depcrate_boundaryboundary.rs");
+include!("depcrate_converteruse_21.rs");
+include!("depcrate_caseimpl_19.rs");
+include!("depcrate_converteruse_26.rs");
+include!("depcrate_converterimpl_28.rs");
+include!("depcrateconverter.rs");
+include!("depcrate_converteruse_25.rs");
+include!("depcrate_patternuse_34.rs");
+include!("depcrateboundary.rs");
+include!("depcrate_caseuse_16.rs");
+include!("depcrate_patterntest.rs");
+include!("depcrateuse_2.rs");
+include!("depcrate_patterncapital_word.rs");
+include!("depcrateuse_42.rs");
+include!("depcratecasing.rs");
+include!("depcrateimpl_49.rs");
+include!("depcrateccase.rs");
+include!("depcrate_boundaryuse_5.rs");
+include!("depcrate_boundarysplit.rs");
+include!("depcrate_caseuse_14.rs");
+include!("depcrate_caseuse_17.rs");
+include!("depcrate_casecase.rs");
+include!("depcrate_boundarygrapheme_is_lowercase.rs");
+include!("depcrate_patternuppercase_word.rs");
+include!("depcrate_patternimpl_40.rs");
+include!("depcratestateconverter.rs");
+include!("depcratecase.rs");
+include!("depcrate_converterconverter.rs");
+include!("depcrate_patternuse_33.rs");
+include!("depcrate_patternpattern.rs");
+include!("depcrateuse_43.rs");
+include!("depcrateuse_45.rs");
+include!("depcrate_converteruse_24.rs");
+include!("depcrateother_1.rs");
+include!("depcrate_boundaryimpl_10.rs");
+include!("depcrate_patterntoggle_word.rs");
+include!("depcrate_convertertest.rs");
+include!("depcratepattern.rs");
+include!("modcrate_boundary.rs");
+include!("modcrate_case.rs");
+include!("modcrate_pattern.rs");
+include!("modcrate.rs");
+include!("modcrate_converter.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate_boundary!();
+    Modcrate_case!();
+    Modcrate_pattern!();
+    Modcrate!();
+    Modcrate_converter!();
+}

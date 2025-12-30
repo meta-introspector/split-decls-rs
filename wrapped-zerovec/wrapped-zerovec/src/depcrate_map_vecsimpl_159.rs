@@ -1,0 +1,9 @@
+// Generated macro for impl_159 (impl)
+macro_rules! Depcrate_map_vecsimpl_159 {
+() => {
+// Module: crate::map::vecs
+// Provides: {"impl_159"}
+// Dependencies: {}
+impl < 'a , T > MutableZeroVecLike < 'a , T > for ZeroVec < 'a , T > where T : AsULE + Copy + 'static , { type OwnedType = T ; fn zvl_insert (& mut self , index : usize , value : & T) { self . with_mut (| v | v . insert (index , value . to_unaligned ())) } fn zvl_remove (& mut self , index : usize) -> T { T :: from_unaligned (self . with_mut (| v | v . remove (index))) } fn zvl_replace (& mut self , index : usize , value : & T) -> T { # [expect (clippy :: indexing_slicing)] let unaligned = self . with_mut (| vec | { debug_assert ! (index < vec . len ()) ; mem :: replace (& mut vec [index] , value . to_unaligned ()) }) ; T :: from_unaligned (unaligned) } fn zvl_push (& mut self , value : & T) { self . with_mut (| v | v . push (value . to_unaligned ())) } fn zvl_with_capacity (cap : usize) -> Self { if cap == 0 { ZeroVec :: new () } else { ZeroVec :: new_owned (Vec :: with_capacity (cap)) } } fn zvl_clear (& mut self) { self . with_mut (| v | v . clear ()) } fn zvl_reserve (& mut self , addl : usize) { self . with_mut (| v | v . reserve (addl)) } fn owned_as_t (o : & Self :: OwnedType) -> & T { o } fn zvl_from_borrowed (b : & 'a ZeroSlice < T >) -> Self { b . as_zerovec () } fn zvl_as_borrowed_inner (& self) -> Option < & 'a ZeroSlice < T > > { self . as_maybe_borrowed () } # [expect (clippy :: indexing_slicing)] fn zvl_permute (& mut self , permutation : & mut [usize]) { assert_eq ! (permutation . len () , self . zvl_len ()) ; let vec = self . to_mut_slice () ; for cycle_start in 0 .. permutation . len () { let mut curr = cycle_start ; let mut next = permutation [curr] ; while next != cycle_start { vec . swap (curr , next) ; permutation [curr] = curr ; curr = next ; next = permutation [next] ; } permutation [curr] = curr ; } } }
+};
+}

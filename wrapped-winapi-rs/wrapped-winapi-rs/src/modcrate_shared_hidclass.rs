@@ -1,0 +1,46 @@
+// Generated module macro for crate::shared::hidclass
+macro_rules! Modcrate_shared_hidclass {
+() => {
+        Depcrate_shared_hidclassuse_4004!();
+        Depcrate_shared_hidclassuse_4005!();
+        Depcrate_shared_hidclassuse_4006!();
+        Depcrate_shared_hidclassuse_4007!();
+        Depcrate_shared_hidclassmacro_4008!();
+        Depcrate_shared_hidclassGUID_CLASS_INPUT!();
+        Depcrate_shared_hidclassmacro_4010!();
+        Depcrate_shared_hidclassmacro_4011!();
+        Depcrate_shared_hidclassHID_REVISION!();
+        Depcrate_shared_hidclassIOCTL_HID_GET_DRIVER_CONFIG!();
+        Depcrate_shared_hidclassIOCTL_HID_SET_DRIVER_CONFIG!();
+        Depcrate_shared_hidclassIOCTL_HID_GET_POLL_FREQUENCY_MSEC!();
+        Depcrate_shared_hidclassIOCTL_HID_SET_POLL_FREQUENCY_MSEC!();
+        Depcrate_shared_hidclassIOCTL_GET_NUM_DEVICE_INPUT_BUFFERS!();
+        Depcrate_shared_hidclassIOCTL_SET_NUM_DEVICE_INPUT_BUFFERS!();
+        Depcrate_shared_hidclassIOCTL_HID_GET_COLLECTION_INFORMATION!();
+        Depcrate_shared_hidclassIOCTL_HID_ENABLE_WAKE_ON_SX!();
+        Depcrate_shared_hidclassIOCTL_HID_SET_S0_IDLE_TIMEOUT!();
+        Depcrate_shared_hidclassIOCTL_HID_GET_COLLECTION_DESCRIPTOR!();
+        Depcrate_shared_hidclassIOCTL_HID_FLUSH_QUEUE!();
+        Depcrate_shared_hidclassIOCTL_HID_SET_FEATURE!();
+        Depcrate_shared_hidclassIOCTL_HID_SET_OUTPUT_REPORT!();
+        Depcrate_shared_hidclassIOCTL_HID_GET_FEATURE!();
+        Depcrate_shared_hidclassIOCTL_GET_PHYSICAL_DESCRIPTOR!();
+        Depcrate_shared_hidclassIOCTL_HID_GET_HARDWARE_ID!();
+        Depcrate_shared_hidclassIOCTL_HID_GET_INPUT_REPORT!();
+        Depcrate_shared_hidclassIOCTL_HID_GET_OUTPUT_REPORT!();
+        Depcrate_shared_hidclassIOCTL_HID_GET_MANUFACTURER_STRING!();
+        Depcrate_shared_hidclassIOCTL_HID_GET_PRODUCT_STRING!();
+        Depcrate_shared_hidclassIOCTL_HID_GET_SERIALNUMBER_STRING!();
+        Depcrate_shared_hidclassIOCTL_HID_GET_INDEXED_STRING!();
+        Depcrate_shared_hidclassIOCTL_HID_GET_MS_GENRE_DESCRIPTOR!();
+        Depcrate_shared_hidclassIOCTL_HID_ENABLE_SECURE_READ!();
+        Depcrate_shared_hidclassIOCTL_HID_DISABLE_SECURE_READ!();
+        Depcrate_shared_hidclassIOCTL_HID_DEVICERESET_NOTIFICATION!();
+        Depcrate_shared_hidclassmacro_4039!();
+        Depcrate_shared_hidclassPHID_XFER_PACKET!();
+        Depcrate_shared_hidclassmacro_4041!();
+        Depcrate_shared_hidclassPHID_COLLECTION_INFORMATION!();
+        Depcrate_shared_hidclassmacro_4043!();
+        Depcrate_shared_hidclassPHID_DRIVER_CONFIG!();
+    };
+}

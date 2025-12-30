@@ -1,0 +1,9 @@
+// Generated macro for assert_type_ne_all (macro)
+macro_rules! Depcrate_assert_typeassert_type_ne_all {
+() => {
+// Module: crate::assert_type
+// Provides: {"assert_type_ne_all"}
+// Dependencies: {}
+# [doc = " Asserts that _all_ types are **not** equal to each other."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " Rust has all sorts of slices, but they represent different types of data:"] # [doc = ""] # [doc = " ```"] # [doc = " # #[macro_use] extern crate static_assertions; fn main() {}"] # [doc = " assert_type_ne_all!([u8], [u16], str);"] # [doc = " ```"] # [doc = ""] # [doc = " The following example fails to compile because [`c_uchar`] is a type alias"] # [doc = " for [`u8`]:"] # [doc = ""] # [doc = " ```compile_fail"] # [doc = " # #[macro_use] extern crate static_assertions; fn main() {}"] # [doc = " use std::os::raw::c_uchar;"] # [doc = ""] # [doc = " assert_type_ne_all!(c_uchar, u8, u32);"] # [doc = " ```"] # [doc = ""] # [doc = " [`c_uchar`]: https://doc.rust-lang.org/std/os/raw/type.c_uchar.html"] # [doc = " [`u8`]: https://doc.rust-lang.org/std/primitive.u8.html"] # [macro_export] macro_rules ! assert_type_ne_all { ($ x : ty , $ ($ y : ty) ,+ $ (,) ?) => { const _ : fn () = || { trait MutuallyExclusive { } impl MutuallyExclusive for $ x { } $ (impl MutuallyExclusive for $ y { }) + } ; } ; }
+};
+}

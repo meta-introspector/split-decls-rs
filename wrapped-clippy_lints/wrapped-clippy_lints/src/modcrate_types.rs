@@ -1,0 +1,39 @@
+// Generated module macro for crate::types
+macro_rules! Modcrate_types {
+() => {
+        Depcrate_typesborrowed_box!();
+        Depcrate_typesbox_collection!();
+        Depcrate_typeslinked_list!();
+        Depcrate_typesoption_option!();
+        Depcrate_typesowned_cow!();
+        Depcrate_typesrc_buffer!();
+        Depcrate_typesrc_mutex!();
+        Depcrate_typesredundant_allocation!();
+        Depcrate_typestype_complexity!();
+        Depcrate_typesutils!();
+        Depcrate_typesvec_box!();
+        Depcrate_typesuse_10603!();
+        Depcrate_typesuse_10604!();
+        Depcrate_typesuse_10605!();
+        Depcrate_typesuse_10606!();
+        Depcrate_typesuse_10607!();
+        Depcrate_typesuse_10608!();
+        Depcrate_typesuse_10609!();
+        Depcrate_typesuse_10610!();
+        Depcrate_typesmacro_10611!();
+        Depcrate_typesmacro_10612!();
+        Depcrate_typesmacro_10613!();
+        Depcrate_typesmacro_10614!();
+        Depcrate_typesmacro_10615!();
+        Depcrate_typesmacro_10616!();
+        Depcrate_typesmacro_10617!();
+        Depcrate_typesmacro_10618!();
+        Depcrate_typesmacro_10619!();
+        Depcrate_typesmacro_10620!();
+        Depcrate_typesTypes!();
+        Depcrate_typesmacro_10622!();
+        Depcrate_typesimpl_10623!();
+        Depcrate_typesimpl_10624!();
+        Depcrate_typesCheckTyContext!();
+    };
+}

@@ -1,0 +1,9 @@
+// Generated macro for Spacing (enum)
+macro_rules! DepcrateSpacing {
+() => {
+// Module: crate
+// Provides: {"Spacing"}
+// Dependencies: {}
+# [doc = " Indicates whether a `Punct` token can join with the following token"] # [doc = " to form a multi-character operator."] # [derive (Copy , Clone , Debug , PartialEq , Eq)] # [stable (feature = "proc_macro_lib2" , since = "1.29.0")] pub enum Spacing { # [doc = " A `Punct` token can join with the following token to form a multi-character operator."] # [doc = ""] # [doc = " In token streams constructed using proc macro interfaces, `Joint` punctuation tokens can be"] # [doc = " followed by any other tokens. However, in token streams parsed from source code, the"] # [doc = " compiler will only set spacing to `Joint` in the following cases."] # [doc = " - When a `Punct` is immediately followed by another `Punct` without a whitespace. E.g. `+`"] # [doc = "   is `Joint` in `+=` and `++`."] # [doc = " - When a single quote `'` is immediately followed by an identifier without a whitespace."] # [doc = "   E.g. `'` is `Joint` in `'lifetime`."] # [doc = ""] # [doc = " This list may be extended in the future to enable more token combinations."] # [stable (feature = "proc_macro_lib2" , since = "1.29.0")] Joint , # [doc = " A `Punct` token cannot join with the following token to form a multi-character operator."] # [doc = ""] # [doc = " `Alone` punctuation tokens can be followed by any other tokens. In token streams parsed"] # [doc = " from source code, the compiler will set spacing to `Alone` in all cases not covered by the"] # [doc = " conditions for `Joint` above. E.g. `+` is `Alone` in `+ =`, `+ident` and `+()`. In"] # [doc = " particular, tokens not followed by anything will be marked as `Alone`."] # [stable (feature = "proc_macro_lib2" , since = "1.29.0")] Alone , }
+};
+}

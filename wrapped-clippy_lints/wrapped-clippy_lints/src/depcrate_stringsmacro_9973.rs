@@ -1,0 +1,9 @@
+// Generated macro for macro_9973 (macro)
+macro_rules! Depcrate_stringsmacro_9973 {
+() => {
+// Module: crate::strings
+// Provides: {"macro_9973"}
+// Dependencies: {}
+declare_clippy_lint ! { # [doc = " ### What it does"] # [doc = " Checks for the `as_bytes` method called on string literals"] # [doc = " that contain only ASCII characters."] # [doc = ""] # [doc = " ### Why is this bad?"] # [doc = " Byte string literals (e.g., `b\"foo\"`) can be used"] # [doc = " instead. They are shorter but less discoverable than `as_bytes()`."] # [doc = ""] # [doc = " ### Known problems"] # [doc = " `\"str\".as_bytes()` and the suggested replacement of `b\"str\"` are not"] # [doc = " equivalent because they have different types. The former is `&[u8]`"] # [doc = " while the latter is `&[u8; 3]`. That means in general they will have a"] # [doc = " different set of methods and different trait implementations."] # [doc = ""] # [doc = " ```compile_fail"] # [doc = " fn f(v: Vec<u8>) {}"] # [doc = ""] # [doc = " f(\"...\".as_bytes().to_owned()); // works"] # [doc = " f(b\"...\".to_owned()); // does not work, because arg is [u8; 3] not Vec<u8>"] # [doc = ""] # [doc = " fn g(r: impl std::io::Read) {}"] # [doc = ""] # [doc = " g(\"...\".as_bytes()); // works"] # [doc = " g(b\"...\"); // does not work"] # [doc = " ```"] # [doc = ""] # [doc = " The actual equivalent of `\"str\".as_bytes()` with the same type is not"] # [doc = " `b\"str\"` but `&b\"str\"[..]`, which is a great deal of punctuation and not"] # [doc = " more readable than a function call."] # [doc = ""] # [doc = " ### Example"] # [doc = " ```no_run"] # [doc = " let bstr = \"a byte string\".as_bytes();"] # [doc = " ```"] # [doc = ""] # [doc = " Use instead:"] # [doc = " ```no_run"] # [doc = " let bstr = b\"a byte string\";"] # [doc = " ```"] # [clippy :: version = "pre 1.29.0"] pub STRING_LIT_AS_BYTES , nursery , "calling `as_bytes` on a string literal instead of using a byte string literal" }
+};
+}

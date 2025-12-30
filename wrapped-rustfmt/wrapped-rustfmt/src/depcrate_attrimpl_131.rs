@@ -1,0 +1,9 @@
+// Generated macro for impl_131 (impl)
+macro_rules! Depcrate_attrimpl_131 {
+() => {
+// Module: crate::attr
+// Provides: {"impl_131"}
+// Dependencies: {}
+impl Rewrite for ast :: Attribute { fn rewrite (& self , context : & RewriteContext < '_ > , shape : Shape) -> Option < String > { self . rewrite_result (context , shape) . ok () } fn rewrite_result (& self , context : & RewriteContext < '_ > , shape : Shape) -> RewriteResult { let snippet = context . snippet (self . span) ; if self . is_doc_comment () { rewrite_doc_comment (snippet , shape . comment (context . config) , context . config) } else { let should_skip = self . ident () . map (| s | context . skip_context . attributes . skip (s . name . as_str ())) . unwrap_or (false) ; let prefix = attr_prefix (self) ; if should_skip || contains_comment (snippet) { return Ok (snippet . to_owned ()) ; } if let Some (ref meta) = self . meta () { if context . config . normalize_doc_attributes () && meta . has_name (sym :: doc) { if let Some (ref literal) = meta . value_str () { let comment_style = match self . style { ast :: AttrStyle :: Inner => CommentStyle :: Doc , ast :: AttrStyle :: Outer => CommentStyle :: TripleSlash , } ; let literal_str = literal . as_str () ; let doc_comment_formatter = DocCommentFormatter :: new (literal_str , comment_style) ; let doc_comment = format ! ("{doc_comment_formatter}") ; return rewrite_doc_comment (& doc_comment , shape . comment (context . config) , context . config ,) ; } } let shape = shape . offset_left (prefix . len () + 1 , self . span) ? ; Ok (meta . rewrite_result (context , shape) . map_or_else (| _ | snippet . to_owned () , | rw | match & self . kind { ast :: AttrKind :: Normal (normal_attr) => match normal_attr . item . unsafety { ast :: Safety :: Unsafe (_) => format ! ("{}[unsafe({})]" , prefix , rw) , _ => format ! ("{}[{}]" , prefix , rw) , } , _ => format ! ("{}[{}]" , prefix , rw) , } ,)) } else { Ok (snippet . to_owned ()) } } } }
+};
+}

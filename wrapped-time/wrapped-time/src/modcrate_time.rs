@@ -1,0 +1,47 @@
+// Generated module macro for crate::time
+macro_rules! Modcrate_time {
+() => {
+        Depcrate_timeuse_1012!();
+        Depcrate_timeuse_1013!();
+        Depcrate_timeuse_1014!();
+        Depcrate_timeuse_1015!();
+        Depcrate_timeuse_1016!();
+        Depcrate_timeuse_1017!();
+        Depcrate_timeuse_1018!();
+        Depcrate_timeuse_1019!();
+        Depcrate_timeuse_1020!();
+        Depcrate_timeuse_1021!();
+        Depcrate_timeuse_1022!();
+        Depcrate_timeuse_1023!();
+        Depcrate_timeuse_1024!();
+        Depcrate_timeuse_1025!();
+        Depcrate_timeuse_1026!();
+        Depcrate_timeuse_1027!();
+        Depcrate_timeuse_1028!();
+        Depcrate_timePadding!();
+        Depcrate_timeHours!();
+        Depcrate_timeMinutes!();
+        Depcrate_timeSeconds!();
+        Depcrate_timeNanoseconds!();
+        Depcrate_timeTime!();
+        Depcrate_timeimpl_1035!();
+        Depcrate_timeimpl_1036!();
+        Depcrate_timeimpl_1037!();
+        Depcrate_timeimpl_1038!();
+        Depcrate_timeimpl_1039!();
+        Depcrate_timeimpl_1040!();
+        Depcrate_timeimpl_1041!();
+        Depcrate_timeprivate!();
+        Depcrate_timeuse_1043!();
+        Depcrate_timeimpl_1044!();
+        Depcrate_timeimpl_1045!();
+        Depcrate_timeimpl_1046!();
+        Depcrate_timeimpl_1047!();
+        Depcrate_timeimpl_1048!();
+        Depcrate_timemacro_1049!();
+        Depcrate_timeimpl_1050!();
+        Depcrate_timeimpl_1051!();
+        Depcrate_timemacro_1052!();
+        Depcrate_timeimpl_1053!();
+    };
+}

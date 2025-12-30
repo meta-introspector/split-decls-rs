@@ -1,0 +1,9 @@
+// Generated macro for impl_202 (impl)
+macro_rules! Depcrate_visitimpl_202 {
+() => {
+// Module: crate::visit
+// Provides: {"impl_202"}
+// Dependencies: {}
+impl < 'a , 'v , T : ? Sized > Visit < 'v > for & 'a mut T where T : Visit < 'v > , { # [inline] fn visit_any (& mut self , value : ValueBag) -> Result < () , Error > { (* * self) . visit_any (value) } # [inline] fn visit_empty (& mut self) -> Result < () , Error > { (* * self) . visit_empty () } # [inline] fn visit_u64 (& mut self , value : u64) -> Result < () , Error > { (* * self) . visit_u64 (value) } # [inline] fn visit_i64 (& mut self , value : i64) -> Result < () , Error > { (* * self) . visit_i64 (value) } # [inline] fn visit_u128 (& mut self , value : u128) -> Result < () , Error > { (* * self) . visit_u128 (value) } # [inline] fn visit_i128 (& mut self , value : i128) -> Result < () , Error > { (* * self) . visit_i128 (value) } # [inline] fn visit_f64 (& mut self , value : f64) -> Result < () , Error > { (* * self) . visit_f64 (value) } # [inline] fn visit_bool (& mut self , value : bool) -> Result < () , Error > { (* * self) . visit_bool (value) } # [inline] fn visit_str (& mut self , value : & str) -> Result < () , Error > { (* * self) . visit_str (value) } # [inline] fn visit_borrowed_str (& mut self , value : & 'v str) -> Result < () , Error > { (* * self) . visit_borrowed_str (value) } # [inline] fn visit_char (& mut self , value : char) -> Result < () , Error > { (* * self) . visit_char (value) } # [inline] # [cfg (feature = "error")] fn visit_error (& mut self , err : & (dyn crate :: std :: error :: Error + 'static)) -> Result < () , Error > { (* * self) . visit_error (err) } # [inline] # [cfg (feature = "error")] fn visit_borrowed_error (& mut self , err : & 'v (dyn crate :: std :: error :: Error + 'static) ,) -> Result < () , Error > { (* * self) . visit_borrowed_error (err) } }
+};
+}

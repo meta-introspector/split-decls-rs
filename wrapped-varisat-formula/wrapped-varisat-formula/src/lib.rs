@@ -1,0 +1,65 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcratetest.rs");
+include!("depcrate_cnfimpl_13.rs");
+include!("depcrate_litimpl_38.rs");
+include!("depcratelit.rs");
+include!("depcrate_cnfimpl_18.rs");
+include!("depcrate_litimpl_40.rs");
+include!("depcrateuse_52.rs");
+include!("depcrate_cnfimpl_11.rs");
+include!("depcrateuse_53.rs");
+include!("depcrate_testconditional_pigeon_hole.rs");
+include!("depcrate_testuse_48.rs");
+include!("depcratecnf_formula.rs");
+include!("depcrate_cnfmacro_25.rs");
+include!("depcrate_cnfcnfformula.rs");
+include!("depcrate_testuse_47.rs");
+include!("depcrate_litvar.rs");
+include!("depcrate_cnfimpl_14.rs");
+include!("depcrate_cnfuse_8.rs");
+include!("depcratevar.rs");
+include!("depcrate_cnfuniformtuple.rs");
+include!("depcratelits.rs");
+include!("depcratevars.rs");
+include!("depcrate_cnfuse_9.rs");
+include!("depcrate_cnfignore_first.rs");
+include!("depcrate_cnfmacro_24.rs");
+include!("depcrate_cnftests.rs");
+include!("depcrate_litlitidx.rs");
+include!("depcrate_litimpl_35.rs");
+include!("depcrate_litimpl_42.rs");
+include!("depcrate_litimpl_43.rs");
+include!("depcrate_cnfstrategy.rs");
+include!("depcrate_cnfimpl_12.rs");
+include!("depcrate_cnfmacro_23.rs");
+include!("depcrate_cnfmacro_26.rs");
+include!("depcrate_litimpl_39.rs");
+include!("depcrate_cnfextendformula.rs");
+include!("depcrate_cnfarray_like_impl.rs");
+include!("depcrate_lituse_31.rs");
+include!("depcrate_cnfimpl_17.rs");
+include!("depcrate_litimpl_34.rs");
+include!("depcrate_litlit.rs");
+include!("depcrate_cnfnewvariter.rs");
+include!("depcrate_cnfmacro_27.rs");
+include!("depcrate_cnfarray_like_impl_4.rs");
+include!("depcrate_litimpl_36.rs");
+include!("depcrate_litstrategy.rs");
+include!("depcrate_litimpl_41.rs");
+include!("depcrate_testuse_46.rs");
+include!("depcrate_testsgen_unsat_formula.rs");
+include!("depcratecnf.rs");
+include!("depcrate_testsat_formula.rs");
+include!("modcrate_lit.rs");
+include!("modcrate_cnf.rs");
+include!("modcrate_test.rs");
+include!("modcrate.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate_lit!();
+    Modcrate_cnf!();
+    Modcrate_test!();
+    Modcrate!();
+}

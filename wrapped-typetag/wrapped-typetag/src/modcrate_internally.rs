@@ -1,0 +1,44 @@
+// Generated module macro for crate::internally
+macro_rules! Modcrate_internally {
+() => {
+        Depcrate_internallyuse_80!();
+        Depcrate_internallyuse_81!();
+        Depcrate_internallyuse_82!();
+        Depcrate_internallyuse_83!();
+        Depcrate_internallyuse_84!();
+        Depcrate_internallyuse_85!();
+        Depcrate_internallyuse_86!();
+        Depcrate_internallyuse_87!();
+        Depcrate_internallyuse_88!();
+        Depcrate_internallyuse_89!();
+        Depcrate_internallyuse_90!();
+        Depcrate_internallyuse_91!();
+        Depcrate_internallyserialize!();
+        Depcrate_internallydeserialize!();
+        Depcrate_internallyDEFAULT_KEY!();
+        Depcrate_internallyTaggedVisitor!();
+        Depcrate_internallyimpl_96!();
+        Depcrate_internallyKey!();
+        Depcrate_internallyKeyVisitor!();
+        Depcrate_internallyimpl_99!();
+        Depcrate_internallyimpl_100!();
+        Depcrate_internallyMapWithStringKeys!();
+        Depcrate_internallyimpl_102!();
+        Depcrate_internallydeserialize_default_key!();
+        Depcrate_internallyimpl_104!();
+        Depcrate_internallyimpl_105!();
+        Depcrate_internallyMapEntryAsEnum!();
+        Depcrate_internallyimpl_107!();
+        Depcrate_internallyimpl_108!();
+        Depcrate_internallyStringKeySeed!();
+        Depcrate_internallyimpl_110!();
+        Depcrate_internallyStringKeyDeserializer!();
+        Depcrate_internallyimpl_112!();
+        Depcrate_internallyDefaultKey!();
+        Depcrate_internallyimpl_114!();
+        Depcrate_internallyimpl_115!();
+        Depcrate_internallyMapValueAsDeserializer!();
+        Depcrate_internallydeserialize_map_value!();
+        Depcrate_internallyimpl_118!();
+    };
+}

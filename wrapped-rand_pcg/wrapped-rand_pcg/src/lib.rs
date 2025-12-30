@@ -1,0 +1,59 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcrate_pcg128cmoutput_dxsm.rs");
+include!("depcratepcg128cm.rs");
+include!("depcrate_pcg128use_4.rs");
+include!("depcrate_pcg64lcg64xsh32.rs");
+include!("depcrate_pcg64use_32.rs");
+include!("depcrate_pcg128cmimpl_27.rs");
+include!("depcrate_pcg128cmuse_21.rs");
+include!("depcrate_pcg128cmimpl_28.rs");
+include!("depcrate_pcg128cmuse_23.rs");
+include!("depcrate_pcg128impl_16.rs");
+include!("depcrate_pcg128impl_15.rs");
+include!("depcrate_pcg64impl_39.rs");
+include!("depcrate_pcg128impl_11.rs");
+include!("depcrate_pcg128lcg128xsl64.rs");
+include!("depcrate_pcg128output_xsl_rr.rs");
+include!("depcrate_pcg128pcg64.rs");
+include!("depcratepcg128.rs");
+include!("depcrate_pcg64multiplier.rs");
+include!("depcrate_pcg64pcg32.rs");
+include!("depcrate_pcg64impl_41.rs");
+include!("depcratepcg64.rs");
+include!("depcrateuse_43.rs");
+include!("depcrate_pcg128impl_14.rs");
+include!("depcrate_pcg128cmpcg64dxsm.rs");
+include!("depcrateuse_45.rs");
+include!("depcrate_pcg128impl_17.rs");
+include!("depcrate_pcg128cmuse_22.rs");
+include!("depcrate_pcg128use_3.rs");
+include!("depcrate_pcg64use_33.rs");
+include!("depcrate_pcg128pcg64mcg.rs");
+include!("depcrate_pcg64use_34.rs");
+include!("depcrate_pcg128multiplier.rs");
+include!("depcrate_pcg64impl_40.rs");
+include!("depcrate_pcg128impl_10.rs");
+include!("depcrateuse_42.rs");
+include!("depcrateuse_44.rs");
+include!("depcrate_pcg128cmimpl_26.rs");
+include!("depcrate_pcg128cmmultiplier.rs");
+include!("depcrate_pcg128mcg128xsl64.rs");
+include!("depcrate_pcg128impl_8.rs");
+include!("depcrate_pcg128cmlcg128cmdxsm64.rs");
+include!("depcrate_pcg128use_5.rs");
+include!("depcrate_pcg128cmimpl_29.rs");
+include!("depcrate_pcg64impl_38.rs");
+include!("depcrate_pcg128impl_9.rs");
+include!("modcrate_pcg64.rs");
+include!("modcrate_pcg128.rs");
+include!("modcrate_pcg128cm.rs");
+include!("modcrate.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate_pcg64!();
+    Modcrate_pcg128!();
+    Modcrate_pcg128cm!();
+    Modcrate!();
+}

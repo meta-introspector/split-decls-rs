@@ -1,0 +1,57 @@
+// Generated module macro for crate::tls13::key_schedule
+macro_rules! Modcrate_tls13_key_schedule {
+() => {
+        Depcrate_tls13_key_scheduleuse_1740!();
+        Depcrate_tls13_key_scheduleuse_1741!();
+        Depcrate_tls13_key_scheduleuse_1742!();
+        Depcrate_tls13_key_scheduleuse_1743!();
+        Depcrate_tls13_key_scheduleuse_1744!();
+        Depcrate_tls13_key_scheduleuse_1745!();
+        Depcrate_tls13_key_scheduleuse_1746!();
+        Depcrate_tls13_key_scheduleuse_1747!();
+        Depcrate_tls13_key_scheduleuse_1748!();
+        Depcrate_tls13_key_scheduleuse_1749!();
+        Depcrate_tls13_key_scheduleuse_1750!();
+        Depcrate_tls13_key_scheduleKeyScheduleEarly!();
+        Depcrate_tls13_key_scheduleimpl_1752!();
+        Depcrate_tls13_key_scheduleKeySchedulePreHandshake!();
+        Depcrate_tls13_key_scheduleimpl_1754!();
+        Depcrate_tls13_key_scheduleimpl_1755!();
+        Depcrate_tls13_key_scheduleKeyScheduleHandshakeStart!();
+        Depcrate_tls13_key_scheduleimpl_1757!();
+        Depcrate_tls13_key_scheduleKeyScheduleHandshake!();
+        Depcrate_tls13_key_scheduleimpl_1759!();
+        Depcrate_tls13_key_scheduleKeyScheduleBeforeFinished!();
+        Depcrate_tls13_key_scheduleimpl_1761!();
+        Depcrate_tls13_key_scheduleKeyScheduleClientBeforeFinished!();
+        Depcrate_tls13_key_scheduleimpl_1763!();
+        Depcrate_tls13_key_scheduleKeyScheduleTrafficWithClientFinishedPending!();
+        Depcrate_tls13_key_scheduleimpl_1765!();
+        Depcrate_tls13_key_scheduleKeyScheduleTraffic!();
+        Depcrate_tls13_key_scheduleimpl_1767!();
+        Depcrate_tls13_key_scheduleKeyScheduleExporter!();
+        Depcrate_tls13_key_scheduleimpl_1769!();
+        Depcrate_tls13_key_scheduleKeyScheduleResumption!();
+        Depcrate_tls13_key_scheduleimpl_1771!();
+        Depcrate_tls13_key_scheduleexpand_secret!();
+        Depcrate_tls13_key_scheduleKeySchedule!();
+        Depcrate_tls13_key_scheduleimpl_1774!();
+        Depcrate_tls13_key_scheduleimpl_1775!();
+        Depcrate_tls13_key_scheduleKeyScheduleSuite!();
+        Depcrate_tls13_key_scheduleimpl_1777!();
+        Depcrate_tls13_key_scheduleimpl_1778!();
+        Depcrate_tls13_key_schedulederive_traffic_key!();
+        Depcrate_tls13_key_schedulederive_traffic_iv!();
+        Depcrate_tls13_key_schedulehkdf_expand_label!();
+        Depcrate_tls13_key_schedulehkdf_expand_label_block!();
+        Depcrate_tls13_key_schedulehkdf_expand_label_aead_key!();
+        Depcrate_tls13_key_schedulehkdf_expand_label_iv!();
+        Depcrate_tls13_key_schedulehkdf_expand_label_slice!();
+        Depcrate_tls13_key_scheduleserver_ech_hrr_confirmation_secret!();
+        Depcrate_tls13_key_schedulehkdf_expand_label_inner!();
+        Depcrate_tls13_key_scheduleSecretKind!();
+        Depcrate_tls13_key_scheduleimpl_1789!();
+        Depcrate_tls13_key_scheduletests!();
+        Depcrate_tls13_key_schedulebenchmarks!();
+    };
+}

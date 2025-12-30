@@ -1,0 +1,9 @@
+// Generated macro for OpenOptions (struct)
+macro_rules! DepcrateOpenOptions {
+() => {
+// Module: crate
+// Provides: {"OpenOptions"}
+// Dependencies: {}
+# [doc = " A builder for opening files with configurable options."] # [doc = ""] # [doc = " Files can be opened in [`read`][`OpenOptions::read()`] and/or"] # [doc = " [`write`][`OpenOptions::write()`] mode."] # [doc = ""] # [doc = " The [`append`][`OpenOptions::append()`] option opens files in a special writing mode that"] # [doc = " moves the file cursor to the end of file before every write operation."] # [doc = ""] # [doc = " It is also possible to [`truncate`][`OpenOptions::truncate()`] the file right after opening,"] # [doc = " to [`create`][`OpenOptions::create()`] a file if it doesn't exist yet, or to always create a"] # [doc = " new file with [`create_new`][`OpenOptions::create_new()`]."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " Open a file for reading:"] # [doc = ""] # [doc = " ```no_run"] # [doc = " use async_fs::OpenOptions;"] # [doc = ""] # [doc = " # futures_lite::future::block_on(async {"] # [doc = " let file = OpenOptions::new()"] # [doc = "     .read(true)"] # [doc = "     .open(\"a.txt\")"] # [doc = "     .await?;"] # [doc = " # std::io::Result::Ok(()) });"] # [doc = " ```"] # [doc = ""] # [doc = " Open a file for both reading and writing, and create it if it doesn't exist yet:"] # [doc = ""] # [doc = " ```no_run"] # [doc = " use async_fs::OpenOptions;"] # [doc = ""] # [doc = " # futures_lite::future::block_on(async {"] # [doc = " let file = OpenOptions::new()"] # [doc = "     .read(true)"] # [doc = "     .write(true)"] # [doc = "     .create(true)"] # [doc = "     .open(\"a.txt\")"] # [doc = "     .await?;"] # [doc = " # std::io::Result::Ok(()) });"] # [doc = " ```"] # [derive (Clone , Debug)] pub struct OpenOptions (std :: fs :: OpenOptions) ;
+};
+}

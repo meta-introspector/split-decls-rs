@@ -1,0 +1,9 @@
+// Generated macro for macro_2144 (macro)
+macro_rules! Depcrate_io_buf_readermacro_2144 {
+() => {
+// Module: crate::io::buf_reader
+// Provides: {"macro_2144"}
+// Dependencies: {}
+pin_project ! { # [doc = " The `BufReader` struct adds buffering to any reader."] # [doc = ""] # [doc = " It can be excessively inefficient to work directly with a [`AsyncRead`]"] # [doc = " instance. A `BufReader` performs large, infrequent reads on the underlying"] # [doc = " [`AsyncRead`] and maintains an in-memory buffer of the results."] # [doc = ""] # [doc = " `BufReader` can improve the speed of programs that make *small* and"] # [doc = " *repeated* read calls to the same file or network socket. It does not"] # [doc = " help when reading very large amounts at once, or reading just one or a few"] # [doc = " times. It also provides no advantage when reading from a source that is"] # [doc = " already in memory, like a `Vec<u8>`."] # [doc = ""] # [doc = " When the `BufReader` is dropped, the contents of its buffer will be"] # [doc = " discarded. Creating multiple instances of a `BufReader` on the same"] # [doc = " stream can cause data loss."] # [doc = ""] # [doc = " [`AsyncRead`]: futures_io::AsyncRead"] # [doc = ""] pub struct BufReader < R > { # [pin] inner : R , buffer : Box < [u8] >, pos : usize , cap : usize , } }
+};
+}

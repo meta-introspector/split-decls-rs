@@ -1,0 +1,9 @@
+// Generated macro for macro_2469 (macro)
+macro_rules! Depcrate_ntrtlmacro_2469 {
+() => {
+// Module: crate::ntrtl
+// Provides: {"macro_2469"}
+// Dependencies: {}
+EXTERN ! { extern "system" { fn RtlQueryImageMitigationPolicy (ImagePath : PWSTR , Policy : IMAGE_MITIGATION_POLICY , Flags : ULONG , Buffer : PVOID , BufferSize : ULONG ,) -> NTSTATUS ; fn RtlSetImageMitigationPolicy (ImagePath : PWSTR , Policy : IMAGE_MITIGATION_POLICY , Flags : ULONG , Buffer : PVOID , BufferSize : ULONG ,) -> NTSTATUS ; fn RtlGetCurrentServiceSessionId () -> ULONG ; fn RtlGetActiveConsoleId () -> ULONG ; fn RtlGetConsoleSessionForegroundProcessId () -> ULONGLONG ; fn RtlGetTokenNamedObjectPath (Token : HANDLE , Sid : PSID , ObjectPath : PUNICODE_STRING ,) -> NTSTATUS ; fn RtlGetAppContainerNamedObjectPath (Token : HANDLE , AppContainerSid : PSID , RelativePath : BOOLEAN , ObjectPath : PUNICODE_STRING ,) -> NTSTATUS ; fn RtlGetAppContainerParent (AppContainerSid : PSID , AppContainerSidParent : * mut PSID ,) -> NTSTATUS ; fn RtlCheckSandboxedToken (TokenHandle : HANDLE , IsSandboxed : PBOOLEAN ,) -> NTSTATUS ; fn RtlCheckTokenCapability (TokenHandle : HANDLE , CapabilitySidToCheck : PSID , HasCapability : PBOOLEAN ,) -> NTSTATUS ; fn RtlCapabilityCheck (TokenHandle : HANDLE , CapabilityName : PUNICODE_STRING , HasCapability : PBOOLEAN ,) -> NTSTATUS ; fn RtlCheckTokenMembership (TokenHandle : HANDLE , SidToCheck : PSID , IsMember : PBOOLEAN ,) -> NTSTATUS ; fn RtlCheckTokenMembershipEx (TokenHandle : HANDLE , SidToCheck : PSID , Flags : ULONG , IsMember : PBOOLEAN ,) -> NTSTATUS ; fn RtlIsParentOfChildAppContainer (ParentAppContainerSid : PSID , ChildAppContainerSid : PSID ,) -> NTSTATUS ; fn RtlIsCapabilitySid (Sid : PSID ,) -> BOOLEAN ; fn RtlIsPackageSid (Sid : PSID ,) -> BOOLEAN ; fn RtlIsValidProcessTrustLabelSid (Sid : PSID ,) -> BOOLEAN ; fn RtlIsStateSeparationEnabled () -> BOOLEAN ; } }
+};
+}

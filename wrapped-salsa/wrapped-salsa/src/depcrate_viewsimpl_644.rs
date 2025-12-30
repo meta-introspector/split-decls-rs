@@ -4,6 +4,6 @@ macro_rules! Depcrate_viewsimpl_644 {
 // Module: crate::views
 // Provides: {"impl_644"}
 // Dependencies: {}
-impl < DbView : ? Sized > Clone for DatabaseDownCaster < DbView > { fn clone (& self) -> Self { * self } }
+impl std :: fmt :: Debug for Views { fn fmt (& self , f : & mut std :: fmt :: Formatter < '_ >) -> std :: fmt :: Result { f . debug_struct ("Views") . field ("view_casters" , & self . view_casters) . finish () } }
 };
 }

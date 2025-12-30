@@ -1,0 +1,46 @@
+// Generated module macro for crate::target_features
+macro_rules! Modcrate_target_features {
+() => {
+        Depcrate_target_featuresuse_810!();
+        Depcrate_target_featuresuse_811!();
+        Depcrate_target_featuresuse_812!();
+        Depcrate_target_featuresuse_813!();
+        Depcrate_target_featuresRUSTC_SPECIFIC_FEATURES!();
+        Depcrate_target_featuresStability!();
+        Depcrate_target_featuresuse_816!();
+        Depcrate_target_featuresimpl_817!();
+        Depcrate_target_featuresimpl_818!();
+        Depcrate_target_featuresImpliedFeatures!();
+        Depcrate_target_featuresARM_FEATURES!();
+        Depcrate_target_featuresAARCH64_FEATURES!();
+        Depcrate_target_featuresAARCH64_TIED_FEATURES!();
+        Depcrate_target_featuresX86_FEATURES!();
+        Depcrate_target_featuresHEXAGON_FEATURES!();
+        Depcrate_target_featuresPOWERPC_FEATURES!();
+        Depcrate_target_featuresMIPS_FEATURES!();
+        Depcrate_target_featuresNVPTX_FEATURES!();
+        Depcrate_target_featuresRISCV_FEATURES!();
+        Depcrate_target_featuresWASM_FEATURES!();
+        Depcrate_target_featuresBPF_FEATURES!();
+        Depcrate_target_featuresCSKY_FEATURES!();
+        Depcrate_target_featuresLOONGARCH_FEATURES!();
+        Depcrate_target_featuresIBMZ_FEATURES!();
+        Depcrate_target_featuresSPARC_FEATURES!();
+        Depcrate_target_featuresM68K_FEATURES!();
+        Depcrate_target_featuresall_rust_features!();
+        Depcrate_target_featuresX86_FEATURES_FOR_CORRECT_VECTOR_ABI!();
+        Depcrate_target_featuresAARCH64_FEATURES_FOR_CORRECT_VECTOR_ABI!();
+        Depcrate_target_featuresARM_FEATURES_FOR_CORRECT_VECTOR_ABI!();
+        Depcrate_target_featuresPOWERPC_FEATURES_FOR_CORRECT_VECTOR_ABI!();
+        Depcrate_target_featuresWASM_FEATURES_FOR_CORRECT_VECTOR_ABI!();
+        Depcrate_target_featuresS390X_FEATURES_FOR_CORRECT_VECTOR_ABI!();
+        Depcrate_target_featuresRISCV_FEATURES_FOR_CORRECT_VECTOR_ABI!();
+        Depcrate_target_featuresSPARC_FEATURES_FOR_CORRECT_VECTOR_ABI!();
+        Depcrate_target_featuresHEXAGON_FEATURES_FOR_CORRECT_VECTOR_ABI!();
+        Depcrate_target_featuresMIPS_FEATURES_FOR_CORRECT_VECTOR_ABI!();
+        Depcrate_target_featuresCSKY_FEATURES_FOR_CORRECT_VECTOR_ABI!();
+        Depcrate_target_featuresLOONGARCH_FEATURES_FOR_CORRECT_VECTOR_ABI!();
+        Depcrate_target_featuresFeatureConstraints!();
+        Depcrate_target_featuresimpl_850!();
+    };
+}

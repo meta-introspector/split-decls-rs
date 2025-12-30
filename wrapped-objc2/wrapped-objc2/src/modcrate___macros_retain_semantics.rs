@@ -1,0 +1,45 @@
+// Generated module macro for crate::__macros::retain_semantics
+macro_rules! Modcrate___macros_retain_semantics {
+() => {
+        Depcrate___macros_retain_semanticsuse_347!();
+        Depcrate___macros_retain_semanticsuse_348!();
+        Depcrate___macros_retain_semanticsuse_349!();
+        Depcrate___macros_retain_semanticsuse_350!();
+        Depcrate___macros_retain_semanticsuse_351!();
+        Depcrate___macros_retain_semanticsuse_352!();
+        Depcrate___macros_retain_semanticsuse_353!();
+        Depcrate___macros_retain_semanticsKindSendMessageSuper!();
+        Depcrate___macros_retain_semanticsKindSendMessage!();
+        Depcrate___macros_retain_semanticsKindDefined!();
+        Depcrate___macros_retain_semanticsSendMessage!();
+        Depcrate___macros_retain_semanticsimpl_358!();
+        Depcrate___macros_retain_semanticsimpl_359!();
+        Depcrate___macros_retain_semanticsNotSuper!();
+        Depcrate___macros_retain_semanticsimpl_361!();
+        Depcrate___macros_retain_semanticsimpl_362!();
+        Depcrate___macros_retain_semanticsIsSuper!();
+        Depcrate___macros_retain_semanticsimpl_364!();
+        Depcrate___macros_retain_semanticsRetainSemantics!();
+        Depcrate___macros_retain_semanticsimpl_366!();
+        Depcrate___macros_retain_semanticsimpl_367!();
+        Depcrate___macros_retain_semanticsimpl_368!();
+        Depcrate___macros_retain_semanticsimpl_369!();
+        Depcrate___macros_retain_semanticsimpl_370!();
+        Depcrate___macros_retain_semanticsnew_fail!();
+        Depcrate___macros_retain_semanticsimpl_372!();
+        Depcrate___macros_retain_semanticsimpl_373!();
+        Depcrate___macros_retain_semanticsimpl_374!();
+        Depcrate___macros_retain_semanticsimpl_375!();
+        Depcrate___macros_retain_semanticsimpl_376!();
+        Depcrate___macros_retain_semanticsinit_fail!();
+        Depcrate___macros_retain_semanticsimpl_378!();
+        Depcrate___macros_retain_semanticsimpl_379!();
+        Depcrate___macros_retain_semanticscopy_fail!();
+        Depcrate___macros_retain_semanticsimpl_381!();
+        Depcrate___macros_retain_semanticsimpl_382!();
+        Depcrate___macros_retain_semanticsmutable_copy_fail!();
+        Depcrate___macros_retain_semanticsimpl_384!();
+        Depcrate___macros_retain_semanticsimpl_385!();
+        Depcrate___macros_retain_semanticsnone_fail!();
+    };
+}

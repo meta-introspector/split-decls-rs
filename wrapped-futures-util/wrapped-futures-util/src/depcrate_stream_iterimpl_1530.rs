@@ -1,0 +1,9 @@
+// Generated macro for impl_1530 (impl)
+macro_rules! Depcrate_stream_iterimpl_1530 {
+() => {
+// Module: crate::stream::iter
+// Provides: {"impl_1530"}
+// Dependencies: {}
+impl < I > Stream for Iter < I > where I : Iterator , { type Item = I :: Item ; fn poll_next (mut self : Pin < & mut Self > , _ : & mut Context < '_ >) -> Poll < Option < I :: Item > > { Poll :: Ready (self . iter . next ()) } fn size_hint (& self) -> (usize , Option < usize >) { self . iter . size_hint () } }
+};
+}

@@ -1,0 +1,43 @@
+// Generated module macro for crate::ext_ctxt_def
+macro_rules! Modcrate_ext_ctxt_def {
+() => {
+        Depcrate_ext_ctxt_defuse_5!();
+        Depcrate_ext_ctxt_defuse_6!();
+        Depcrate_ext_ctxt_defuse_7!();
+        Depcrate_ext_ctxt_defuse_8!();
+        Depcrate_ext_ctxt_defuse_9!();
+        Depcrate_ext_ctxt_defuse_10!();
+        Depcrate_ext_ctxt_defuse_11!();
+        Depcrate_ext_ctxt_defuse_12!();
+        Depcrate_ext_ctxt_defuse_13!();
+        Depcrate_ext_ctxt_defuse_14!();
+        Depcrate_ext_ctxt_defuse_15!();
+        Depcrate_ext_ctxt_defuse_16!();
+        Depcrate_ext_ctxt_defuse_17!();
+        Depcrate_ext_ctxt_defuse_18!();
+        Depcrate_ext_ctxt_defuse_19!();
+        Depcrate_ext_ctxt_defuse_20!();
+        Depcrate_ext_ctxt_defuse_21!();
+        Depcrate_ext_ctxt_defuse_22!();
+        Depcrate_ext_ctxt_defuse_23!();
+        Depcrate_ext_ctxt_defuse_24!();
+        Depcrate_ext_ctxt_defuse_25!();
+        Depcrate_ext_ctxt_defuse_26!();
+        Depcrate_ext_ctxt_defuse_27!();
+        Depcrate_ext_ctxt_defuse_28!();
+        Depcrate_ext_ctxt_defuse_29!();
+        Depcrate_ext_ctxt_defuse_30!();
+        Depcrate_ext_ctxt_defuse_31!();
+        Depcrate_ext_ctxt_defuse_32!();
+        Depcrate_ext_ctxt_defuse_33!();
+        Depcrate_ext_ctxt_defuse_34!();
+        Depcrate_ext_ctxt_defuse_35!();
+        Depcrate_ext_ctxt_defuse_36!();
+        Depcrate_ext_ctxt_defuse_37!();
+        Depcrate_ext_ctxt_defuse_38!();
+        Depcrate_ext_ctxt_defuse_39!();
+        Depcrate_ext_ctxt_defLintStoreExpand!();
+        Depcrate_ext_ctxt_defLintStoreExpandDyn!();
+        Depcrate_ext_ctxt_defExtCtxt_Def!();
+    };
+}

@@ -1,0 +1,9 @@
+// Generated macro for impl_306 (impl)
+macro_rules! Depcrate_normalimpl_306 {
+() => {
+// Module: crate::normal
+// Provides: {"impl_306"}
+// Dependencies: {}
+impl < F > Normal < F > where F : Float , StandardNormal : Distribution < F > , { # [doc = " Construct, from mean and standard deviation"] # [doc = ""] # [doc = " Parameters:"] # [doc = ""] # [doc = " -   mean (`μ`, unrestricted)"] # [doc = " -   standard deviation (`σ`, must be finite)"] # [inline] pub fn new (mean : F , std_dev : F) -> Result < Normal < F > , Error > { if ! std_dev . is_finite () { return Err (Error :: BadVariance) ; } Ok (Normal { mean , std_dev }) } # [doc = " Construct, from mean and coefficient of variation"] # [doc = ""] # [doc = " Parameters:"] # [doc = ""] # [doc = " -   mean (`μ`, unrestricted)"] # [doc = " -   coefficient of variation (`cv = abs(σ / μ)`)"] # [inline] pub fn from_mean_cv (mean : F , cv : F) -> Result < Normal < F > , Error > { if ! cv . is_finite () || cv < F :: zero () { return Err (Error :: BadVariance) ; } let std_dev = cv * mean ; Ok (Normal { mean , std_dev }) } # [doc = " Sample from a z-score"] # [doc = ""] # [doc = " This may be useful for generating correlated samples `x1` and `x2`"] # [doc = " from two different distributions, as follows."] # [doc = " ```"] # [doc = " # use rand::prelude::*;"] # [doc = " # use rand_distr::{Normal, StandardNormal};"] # [doc = " let mut rng = rand::rng();"] # [doc = " let z = StandardNormal.sample(&mut rng);"] # [doc = " let x1 = Normal::new(0.0, 1.0).unwrap().from_zscore(z);"] # [doc = " let x2 = Normal::new(2.0, -3.0).unwrap().from_zscore(z);"] # [doc = " ```"] # [inline] pub fn from_zscore (& self , zscore : F) -> F { self . mean + self . std_dev * zscore } # [doc = " Returns the mean (`μ`) of the distribution."] pub fn mean (& self) -> F { self . mean } # [doc = " Returns the standard deviation (`σ`) of the distribution."] pub fn std_dev (& self) -> F { self . std_dev } }
+};
+}

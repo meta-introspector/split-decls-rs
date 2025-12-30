@@ -1,0 +1,46 @@
+// Generated module macro for crate::token
+macro_rules! Modcrate_token {
+() => {
+        Depcrate_tokenuse_457!();
+        Depcrate_tokenuse_458!();
+        Depcrate_tokenuse_459!();
+        Depcrate_tokenuse_460!();
+        Depcrate_tokenuse_461!();
+        Depcrate_tokenuse_462!();
+        Depcrate_tokenuse_463!();
+        Depcrate_tokenuse_464!();
+        Depcrate_tokenuse_465!();
+        Depcrate_tokenuse_466!();
+        Depcrate_tokenuse_467!();
+        Depcrate_tokenuse_468!();
+        Depcrate_tokenuse_469!();
+        Depcrate_tokenCommentKind!();
+        Depcrate_tokenInvisibleOrigin!();
+        Depcrate_tokenimpl_472!();
+        Depcrate_tokenMetaVarKind!();
+        Depcrate_tokenimpl_474!();
+        Depcrate_tokenDelimiter!();
+        Depcrate_tokenimpl_476!();
+        Depcrate_tokenLitKind!();
+        Depcrate_tokenLit!();
+        Depcrate_tokenimpl_479!();
+        Depcrate_tokenimpl_480!();
+        Depcrate_tokenimpl_481!();
+        Depcrate_tokenident_can_begin_expr!();
+        Depcrate_tokenident_can_begin_type!();
+        Depcrate_tokenIdentIsRaw!();
+        Depcrate_tokenimpl_485!();
+        Depcrate_tokenimpl_486!();
+        Depcrate_tokenTokenKind!();
+        Depcrate_tokenToken!();
+        Depcrate_tokenimpl_489!();
+        Depcrate_tokenimpl_490!();
+        Depcrate_tokenimpl_491!();
+        Depcrate_tokenNtPatKind!();
+        Depcrate_tokenNtExprKind!();
+        Depcrate_tokenNonterminalKind!();
+        Depcrate_tokenimpl_495!();
+        Depcrate_tokenimpl_496!();
+        Depcrate_tokensize_asserts!();
+    };
+}

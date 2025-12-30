@@ -1,0 +1,9 @@
+// Generated macro for BY_NAME (const)
+macro_rules! Depcrate_unicode_tables_ageBY_NAME {
+() => {
+// Module: crate::unicode_tables::age
+// Provides: {"BY_NAME"}
+// Dependencies: {}
+pub const BY_NAME : & 'static [(& 'static str , & 'static [(char , char)])] = & [("V10_0" , V10_0) , ("V11_0" , V11_0) , ("V12_0" , V12_0) , ("V12_1" , V12_1) , ("V13_0" , V13_0) , ("V14_0" , V14_0) , ("V15_0" , V15_0) , ("V15_1" , V15_1) , ("V16_0" , V16_0) , ("V1_1" , V1_1) , ("V2_0" , V2_0) , ("V2_1" , V2_1) , ("V3_0" , V3_0) , ("V3_1" , V3_1) , ("V3_2" , V3_2) , ("V4_0" , V4_0) , ("V4_1" , V4_1) , ("V5_0" , V5_0) , ("V5_1" , V5_1) , ("V5_2" , V5_2) , ("V6_0" , V6_0) , ("V6_1" , V6_1) , ("V6_2" , V6_2) , ("V6_3" , V6_3) , ("V7_0" , V7_0) , ("V8_0" , V8_0) , ("V9_0" , V9_0) ,] ;
+};
+}

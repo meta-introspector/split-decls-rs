@@ -1,0 +1,9 @@
+// Generated macro for impl_284 (impl)
+macro_rules! Depcrate_map2d_serdeimpl_284 {
+() => {
+// Module: crate::map2d::serde
+// Provides: {"impl_284"}
+// Dependencies: {}
+# [doc = " This impl requires enabling the optional `serde` Cargo feature of the `zerovec` crate"] impl < 'de , 'a , K0 , K1 , V > Deserialize < 'de > for ZeroMap2d < 'a , K0 , K1 , V > where K0 : ZeroMapKV < 'a > + Ord + ? Sized , K1 : ZeroMapKV < 'a > + Ord + ? Sized , V : ZeroMapKV < 'a > + ? Sized , K0 :: Container : Deserialize < 'de > , K1 :: Container : Deserialize < 'de > , V :: Container : Deserialize < 'de > , K0 :: OwnedType : Deserialize < 'de > , K1 :: OwnedType : Deserialize < 'de > , V :: OwnedType : Deserialize < 'de > , 'de : 'a , { fn deserialize < D > (deserializer : D) -> Result < Self , D :: Error > where D : Deserializer < 'de > , { if deserializer . is_human_readable () { deserializer . deserialize_map (ZeroMap2dMapVisitor :: < 'a , K0 , K1 , V > :: new ()) } else { let (keys0 , joiner , keys1 , values) : (K0 :: Container , ZeroVec < u32 > , K1 :: Container , V :: Container ,) = Deserialize :: deserialize (deserializer) ? ; if keys0 . zvl_len () != joiner . len () { return Err (de :: Error :: custom ("Mismatched keys0 and joiner sizes in ZeroMap2d" ,)) ; } if keys1 . zvl_len () != values . zvl_len () { return Err (de :: Error :: custom ("Mismatched keys1 and value sizes in ZeroMap2d" ,)) ; } if ! joiner . zvl_is_ascending () { return Err (de :: Error :: custom ("ZeroMap2d deserializing joiner array out of order" ,)) ; } if let Some (last_joiner0) = joiner . last () { if keys1 . zvl_len () != last_joiner0 as usize { return Err (de :: Error :: custom ("ZeroMap2d deserializing joiner array malformed" ,)) ; } } let result = Self { keys0 , joiner , keys1 , values , } ; # [cfg (debug_assertions)] result . check_invariants () ; Ok (result) } } }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for PTOKEN_SECURITY_ATTRIBUTES_INFORMATION (type)
+macro_rules! Depcrate_ntseapiPTOKEN_SECURITY_ATTRIBUTES_INFORMATION {
+() => {
+// Module: crate::ntseapi
+// Provides: {"PTOKEN_SECURITY_ATTRIBUTES_INFORMATION"}
+// Dependencies: {}
+pub type PTOKEN_SECURITY_ATTRIBUTES_INFORMATION = * mut TOKEN_SECURITY_ATTRIBUTES_INFORMATION ;
+};
+}

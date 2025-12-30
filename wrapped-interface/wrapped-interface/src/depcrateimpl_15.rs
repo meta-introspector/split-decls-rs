@@ -1,0 +1,9 @@
+// Generated macro for impl_15 (impl)
+macro_rules! Depcrateimpl_15 {
+() => {
+// Module: crate
+// Provides: {"impl_15"}
+// Dependencies: {}
+impl syn :: parse :: Parse for InterfaceMethod { fn parse (input : syn :: parse :: ParseStream) -> syn :: Result < Self > { let docs = input . call (syn :: Attribute :: parse_outer) ? ; let visibility = input . parse :: < syn :: Visibility > () ? ; let method = input . parse :: < syn :: TraitItemFn > () ? ; unexpected_token ! (docs . iter () . find (| a | ! a . path () . is_ident ("doc")) , "attribute") ; unexpected_token ! (method . default , "default method implementation") ; let sig = method . sig ; unexpected_token ! (sig . abi , "abi declaration") ; unexpected_token ! (sig . asyncness , "async declaration") ; unexpected_token ! (sig . generics . params . iter () . next () , "generics declaration") ; unexpected_token ! (sig . constness , "const declaration") ; expected_token ! (sig . receiver () , "the method to have &self as its first argument") ; unexpected_token ! (sig . variadic , "variadic args") ; let args = sig . inputs . into_iter () . filter_map (| a | match a { syn :: FnArg :: Receiver (_) => None , syn :: FnArg :: Typed (p) => Some (p) , }) . map (| p | { Ok (InterfaceMethodArg { ty : p . ty , pat : p . pat , }) }) . collect :: < Result < Vec < InterfaceMethodArg > , syn :: Error > > () ? ; let ret = sig . output ; Ok (Self { name : sig . ident , visibility , args , ret , docs , }) } }
+};
+}

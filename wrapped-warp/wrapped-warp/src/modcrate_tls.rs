@@ -1,0 +1,41 @@
+// Generated module macro for crate::tls
+macro_rules! Modcrate_tls {
+() => {
+        Depcrate_tlsuse_850!();
+        Depcrate_tlsuse_851!();
+        Depcrate_tlsuse_852!();
+        Depcrate_tlsuse_853!();
+        Depcrate_tlsuse_854!();
+        Depcrate_tlsuse_855!();
+        Depcrate_tlsuse_856!();
+        Depcrate_tlsuse_857!();
+        Depcrate_tlsuse_858!();
+        Depcrate_tlsuse_859!();
+        Depcrate_tlsuse_860!();
+        Depcrate_tlsuse_861!();
+        Depcrate_tlsuse_862!();
+        Depcrate_tlsuse_863!();
+        Depcrate_tlsuse_864!();
+        Depcrate_tlsuse_865!();
+        Depcrate_tlsTlsConfigError!();
+        Depcrate_tlsimpl_867!();
+        Depcrate_tlsimpl_868!();
+        Depcrate_tlsTlsClientAuth!();
+        Depcrate_tlsTlsConfigBuilder!();
+        Depcrate_tlsimpl_871!();
+        Depcrate_tlsimpl_872!();
+        Depcrate_tlsLazyFile!();
+        Depcrate_tlsimpl_874!();
+        Depcrate_tlsimpl_875!();
+        Depcrate_tlsimpl_876!();
+        Depcrate_tlsState!();
+        Depcrate_tlsTlsStream!();
+        Depcrate_tlsimpl_879!();
+        Depcrate_tlsimpl_880!();
+        Depcrate_tlsimpl_881!();
+        Depcrate_tlsTlsAcceptor!();
+        Depcrate_tlsimpl_883!();
+        Depcrate_tlsimpl_884!();
+        Depcrate_tlstests!();
+    };
+}

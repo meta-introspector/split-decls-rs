@@ -1,0 +1,40 @@
+// Generated module macro for crate::array
+macro_rules! Modcrate_array {
+() => {
+        Depcrate_arrayuse_551!();
+        Depcrate_arrayuse_552!();
+        Depcrate_arrayATerm!();
+        Depcrate_arrayimpl_554!();
+        Depcrate_arrayTArr!();
+        Depcrate_arrayimpl_556!();
+        Depcrate_arraytarr!();
+        Depcrate_arrayimpl_558!();
+        Depcrate_arrayimpl_559!();
+        Depcrate_array_!();
+        Depcrate_arrayimpl_561!();
+        Depcrate_array_!();
+        Depcrate_arrayimpl_563!();
+        Depcrate_arrayimpl_564!();
+        Depcrate_arrayimpl_565!();
+        Depcrate_arrayimpl_566!();
+        Depcrate_arrayimpl_567!();
+        Depcrate_arrayimpl_568!();
+        Depcrate_arrayimpl_569!();
+        Depcrate_arrayimpl_570!();
+        Depcrate_arrayimpl_571!();
+        Depcrate_arrayimpl_572!();
+        Depcrate_arrayimpl_573!();
+        Depcrate_arrayimpl_574!();
+        Depcrate_arrayimpl_575!();
+        Depcrate_arrayimpl_576!();
+        Depcrate_arrayimpl_577!();
+        Depcrate_arrayimpl_578!();
+        Depcrate_arrayimpl_579!();
+        Depcrate_arrayuse_580!();
+        Depcrate_arrayimpl_581!();
+        Depcrate_arrayimpl_582!();
+        Depcrate_arrayuse_583!();
+        Depcrate_arrayimpl_584!();
+        Depcrate_arrayimpl_585!();
+    };
+}

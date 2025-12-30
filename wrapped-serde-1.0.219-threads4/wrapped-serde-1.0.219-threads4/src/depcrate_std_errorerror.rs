@@ -1,0 +1,9 @@
+// Generated macro for Error (trait)
+macro_rules! Depcrate_std_errorError {
+() => {
+// Module: crate::std_error
+// Provides: {"Error"}
+// Dependencies: {}
+# [doc = " Either a re-export of std::error::Error or a new identical trait, depending"] # [doc = " on whether Serde's \"std\" feature is enabled."] # [doc = ""] # [doc = " Serde's error traits [`serde::ser::Error`] and [`serde::de::Error`] require"] # [doc = " [`std::error::Error`] as a supertrait, but only when Serde is built with"] # [doc = " \"std\" enabled. Data formats that don't care about no\\_std support should"] # [doc = " generally provide their error types with a `std::error::Error` impl"] # [doc = " directly:"] # [doc = ""] # [doc = " ```edition2021"] # [doc = " #[derive(Debug)]"] # [doc = " struct MySerError {...}"] # [doc = ""] # [doc = " impl serde::ser::Error for MySerError {...}"] # [doc = ""] # [doc = " impl std::fmt::Display for MySerError {...}"] # [doc = ""] # [doc = " // We don't support no_std!"] # [doc = " impl std::error::Error for MySerError {}"] # [doc = " ```"] # [doc = ""] # [doc = " Data formats that *do* support no\\_std may either have a \"std\" feature of"] # [doc = " their own:"] # [doc = ""] # [doc = " ```toml"] # [doc = " [features]"] # [doc = " std = [\"serde/std\"]"] # [doc = " ```"] # [doc = ""] # [doc = " ```edition2021"] # [doc = " #[cfg(feature = \"std\")]"] # [doc = " impl std::error::Error for MySerError {}"] # [doc = " ```"] # [doc = ""] # [doc = " ... or else provide the std Error impl unconditionally via Serde's"] # [doc = " re-export:"] # [doc = ""] # [doc = " ```edition2021"] # [doc = " impl serde::ser::StdError for MySerError {}"] # [doc = " ```"] pub trait Error : Debug + Display { # [doc = " The underlying cause of this error, if any."] fn source (& self) -> Option < & (Error + 'static) > { None } }
+};
+}

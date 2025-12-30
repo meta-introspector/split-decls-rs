@@ -1,0 +1,9 @@
+// Generated macro for impl_445 (impl)
+macro_rules! Depcrate_compiler_cimpl_445 {
+() => {
+// Module: crate::compiler::c
+// Provides: {"impl_445"}
+// Dependencies: {}
+impl < T : CommandCreatorSync , I : CCompilerImpl > Compilation < T > for CCompilation < I > { fn generate_compile_commands (& self , path_transformer : & mut dist :: PathTransformer , rewrite_includes_only : bool ,) -> Result < (Box < dyn CompileCommand < T > > , Option < dist :: CompileCommand > , Cacheable ,) > { self . compiler . generate_compile_commands (path_transformer , & self . executable , & self . parsed_args , & self . cwd , & self . env_vars , rewrite_includes_only ,) } # [cfg (feature = "dist-client")] fn into_dist_packagers (self : Box < Self > , path_transformer : dist :: PathTransformer ,) -> Result < DistPackagers > { let CCompilation { parsed_args , cwd , preprocessed_input , executable , compiler , .. } = * self ; trace ! ("Dist inputs: {:?}" , parsed_args . input) ; let input_path = cwd . join (& parsed_args . input) ; let inputs_packager = Box :: new (CInputsPackager { input_path , preprocessed_input , path_transformer , extra_dist_files : parsed_args . extra_dist_files , extra_hash_files : parsed_args . extra_hash_files , }) ; let toolchain_packager = Box :: new (CToolchainPackager { executable , kind : compiler . kind () , }) ; let outputs_rewriter = Box :: new (NoopOutputsRewriter) ; Ok ((inputs_packager , toolchain_packager , outputs_rewriter)) } fn is_locally_preprocessed (& self) -> bool { self . is_locally_preprocessed } fn outputs < 'a > (& 'a self) -> Box < dyn Iterator < Item = FileObjectSource > + 'a > { Box :: new (self . parsed_args . outputs . iter () . map (| (k , output) | FileObjectSource { key : k . to_string () , path : output . path . clone () , optional : output . optional , }) ,) } }
+};
+}

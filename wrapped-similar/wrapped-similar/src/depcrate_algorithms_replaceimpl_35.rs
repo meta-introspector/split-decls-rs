@@ -1,0 +1,9 @@
+// Generated macro for impl_35 (impl)
+macro_rules! Depcrate_algorithms_replaceimpl_35 {
+() => {
+// Module: crate::algorithms::replace
+// Provides: {"impl_35"}
+// Dependencies: {}
+impl < D : DiffHook > DiffHook for Replace < D > { type Error = D :: Error ; fn equal (& mut self , old_index : usize , new_index : usize , len : usize) -> Result < () , D :: Error > { self . flush_del_ins () ? ; self . eq = if let Some ((eq_old_index , eq_new_index , eq_len)) = self . eq . take () { Some ((eq_old_index , eq_new_index , eq_len + len)) } else { Some ((old_index , new_index , len)) } ; Ok (()) } fn delete (& mut self , old_index : usize , old_len : usize , new_index : usize ,) -> Result < () , D :: Error > { self . flush_eq () ? ; if let Some ((del_old_index , del_old_len , del_new_index)) = self . del . take () { debug_assert_eq ! (old_index , del_old_index + del_old_len) ; self . del = Some ((del_old_index , del_old_len + old_len , del_new_index)) ; } else { self . del = Some ((old_index , old_len , new_index)) ; } Ok (()) } fn insert (& mut self , old_index : usize , new_index : usize , new_len : usize ,) -> Result < () , D :: Error > { self . flush_eq () ? ; self . ins = if let Some ((ins_old_index , ins_new_index , ins_new_len)) = self . ins . take () { debug_assert_eq ! (ins_new_index + ins_new_len , new_index) ; Some ((ins_old_index , ins_new_index , new_len + ins_new_len)) } else { Some ((old_index , new_index , new_len)) } ; Ok (()) } fn replace (& mut self , old_index : usize , old_len : usize , new_index : usize , new_len : usize ,) -> Result < () , D :: Error > { self . flush_eq () ? ; self . d . replace (old_index , old_len , new_index , new_len) } fn finish (& mut self) -> Result < () , D :: Error > { self . flush_eq () ? ; self . flush_del_ins () ? ; self . d . finish () } }
+};
+}

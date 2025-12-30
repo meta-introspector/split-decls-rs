@@ -1,0 +1,42 @@
+// Generated module macro for crate::schema
+macro_rules! Modcrate_schema {
+() => {
+        Depcrate_schemause_6!();
+        Depcrate_schemause_7!();
+        Depcrate_schemause_8!();
+        Depcrate_schemaTryCmd!();
+        Depcrate_schemaimpl_10!();
+        Depcrate_schemaoverwrite_toml_output!();
+        Depcrate_schemaoverwrite_toml_status!();
+        Depcrate_schemaoverwrite_trycmd_status!();
+        Depcrate_schemareplace_lines!();
+        Depcrate_schemaimpl_15!();
+        Depcrate_schemaimpl_16!();
+        Depcrate_schemaStep!();
+        Depcrate_schemaimpl_18!();
+        Depcrate_schemaOneShot!();
+        Depcrate_schemaimpl_20!();
+        Depcrate_schemaArgs!();
+        Depcrate_schemaimpl_22!();
+        Depcrate_schemaimpl_23!();
+        Depcrate_schemaimpl_24!();
+        Depcrate_schemaJoinedArgs!();
+        Depcrate_schemaimpl_26!();
+        Depcrate_schemaimpl_27!();
+        Depcrate_schemaimpl_28!();
+        Depcrate_schemaimpl_29!();
+        Depcrate_schemaimpl_30!();
+        Depcrate_schemaFilesystem!();
+        Depcrate_schemaimpl_32!();
+        Depcrate_schemaEnv!();
+        Depcrate_schemaimpl_34!();
+        Depcrate_schemaBin!();
+        Depcrate_schemaimpl_36!();
+        Depcrate_schemaimpl_37!();
+        Depcrate_schemaimpl_38!();
+        Depcrate_schemaimpl_39!();
+        Depcrate_schemaCommandStatus!();
+        Depcrate_schemaimpl_41!();
+        Depcrate_schematest!();
+    };
+}

@@ -1,0 +1,9 @@
+// Generated macro for use_238 (pub_use)
+macro_rules! Depcrate_generateduse_238 {
+() => {
+// Module: crate::generated
+// Provides: {"use_238"}
+// Dependencies: {}
+# [cfg (all (feature = "AUComponent" , feature = "AudioComponent"))] pub use self :: __AUComponent :: AudioUnitUninitialize ;
+};
+}

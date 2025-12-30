@@ -1,0 +1,9 @@
+// Generated macro for check (function)
+macro_rules! Depcrate_methods_uninit_assumed_initcheck {
+() => {
+// Module: crate::methods::uninit_assumed_init
+// Provides: {"check"}
+// Dependencies: {}
+# [doc = " lint for `MaybeUninit::uninit().assume_init()` (we already have the latter)"] pub (super) fn check (cx : & LateContext < '_ > , expr : & hir :: Expr < '_ > , recv : & hir :: Expr < '_ >) { if let hir :: ExprKind :: Call (callee , []) = recv . kind && callee . ty_rel_def (cx) . is_diag_item (cx , sym :: maybe_uninit_uninit) && ! is_uninit_value_valid_for_ty (cx , cx . typeck_results () . expr_ty_adjusted (expr)) { span_lint (cx , UNINIT_ASSUMED_INIT , expr . span , "this call for this type may be undefined behavior" ,) ; } }
+};
+}

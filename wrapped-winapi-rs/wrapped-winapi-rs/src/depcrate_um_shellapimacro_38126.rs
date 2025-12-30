@@ -1,0 +1,9 @@
+// Generated macro for macro_38126 (macro)
+macro_rules! Depcrate_um_shellapimacro_38126 {
+() => {
+// Module: crate::um::shellapi
+// Provides: {"macro_38126"}
+// Dependencies: {}
+ENUM ! { enum ASSOCCLASS { ASSOCCLASS_SHELL_KEY = 0 , ASSOCCLASS_PROGID_KEY , ASSOCCLASS_PROGID_STR , ASSOCCLASS_CLSID_KEY , ASSOCCLASS_CLSID_STR , ASSOCCLASS_APP_KEY , ASSOCCLASS_APP_STR , ASSOCCLASS_SYSTEM_STR , ASSOCCLASS_FOLDER , ASSOCCLASS_STAR , ASSOCCLASS_FIXED_PROGID_STR , ASSOCCLASS_PROTOCOL_STR , } }
+};
+}

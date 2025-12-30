@@ -1,0 +1,9 @@
+// Generated macro for macro_23800 (macro)
+macro_rules! Depcrate_um_d2d1macro_23800 {
+() => {
+// Module: crate::um::d2d1
+// Provides: {"macro_23800"}
+// Dependencies: {}
+ENUM ! { enum D2D1_BITMAP_INTERPOLATION_MODE { D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR = D2D1_INTERPOLATION_MODE_DEFINITION_NEAREST_NEIGHBOR , D2D1_BITMAP_INTERPOLATION_MODE_LINEAR = D2D1_INTERPOLATION_MODE_DEFINITION_LINEAR , } }
+};
+}

@@ -1,0 +1,68 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcrate_forksafetempfileortemppath.rs");
+include!("depcrate_handleuse_23.rs");
+include!("depcrate_handleimpl_29.rs");
+include!("depcrate_signaluse_10.rs");
+include!("depcrate_signalhandler.rs");
+include!("depcrate_handlemode.rs");
+include!("depcrate_signaluse_8.rs");
+include!("depcrate_handleimpl_32.rs");
+include!("depcrate_handleio_impls.rs");
+include!("depcrate_forksafeuse_16.rs");
+include!("depcrateforksafe.rs");
+include!("depcrate_handleimpl_35.rs");
+include!("depcrateuse_2.rs");
+include!("depcrate_signaluse_9.rs");
+include!("depcrate_handleuse_25.rs");
+include!("depcrate_handleexpect_none.rs");
+include!("depcratehandle.rs");
+include!("depcrateregistry.rs");
+include!("depcratesignal.rs");
+include!("depcrate_handleimpl_31.rs");
+include!("depcrate_forksafeimpl_19.rs");
+include!("depcrate_handleuse_24.rs");
+include!("depcratenext_map_index.rs");
+include!("depcrateregistry.rs");
+include!("depcrateautoremove.rs");
+include!("depcratehashmap.rs");
+include!("depcrate_registrycleanup_tempfiles_signal_safe.rs");
+include!("depcrateimpl_47.rs");
+include!("depcratenew.rs");
+include!("depcrate_forksafeuse_15.rs");
+include!("depcrate_handlepersist.rs");
+include!("depcratewritable_at.rs");
+include!("depcrateuse_21.rs");
+include!("depcratemark_at.rs");
+include!("depcrateuse_6.rs");
+include!("depcratehandle.rs");
+include!("depcrate_forksafeforksafetempfile.rs");
+include!("depcrate_signalsetup.rs");
+include!("depcrate_handleimpl_37.rs");
+include!("depcrate_forksafeuse_14.rs");
+include!("depcrateuse_38.rs");
+include!("depcrate_registryuse_40.rs");
+include!("depcratecontainingdirectory.rs");
+include!("depcrate_handleimpl_30.rs");
+include!("depcrate_registrycleanup_tempfiles.rs");
+include!("depcrateuse_1.rs");
+include!("depcrate_handleclosed.rs");
+include!("depcratewritable_at_with_permissions.rs");
+include!("depcratemark_at_with_permissions.rs");
+include!("depcrate_forksafeimpl_20.rs");
+include!("depcrate_handlewritable.rs");
+include!("depcratehashmap.rs");
+include!("modcrate.rs");
+include!("modcrate_forksafe.rs");
+include!("modcrate_handle.rs");
+include!("modcrate_signal.rs");
+include!("modcrate_registry.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate!();
+    Modcrate_forksafe!();
+    Modcrate_handle!();
+    Modcrate_signal!();
+    Modcrate_registry!();
+}

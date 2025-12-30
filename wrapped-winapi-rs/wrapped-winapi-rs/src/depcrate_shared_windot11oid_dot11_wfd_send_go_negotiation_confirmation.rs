@@ -1,0 +1,9 @@
+// Generated macro for OID_DOT11_WFD_SEND_GO_NEGOTIATION_CONFIRMATION (const)
+macro_rules! Depcrate_shared_windot11OID_DOT11_WFD_SEND_GO_NEGOTIATION_CONFIRMATION {
+() => {
+// Module: crate::shared::windot11
+// Provides: {"OID_DOT11_WFD_SEND_GO_NEGOTIATION_CONFIRMATION"}
+// Dependencies: {}
+pub const OID_DOT11_WFD_SEND_GO_NEGOTIATION_CONFIRMATION : u32 = NWF_DEFINE_OID ! (0x0C , NWF_WFD_DEVICE_OID , NWF_MANDATORY_OID) ;
+};
+}

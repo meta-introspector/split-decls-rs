@@ -1,0 +1,9 @@
+// Generated macro for tests (module)
+macro_rules! Depcrate_matchertests {
+() => {
+// Module: crate::matcher
+// Provides: {"tests"}
+// Dependencies: {}
+# [cfg (test)] mod tests { use super :: * ; use pretty_assertions :: assert_eq ; # [test] fn trimmed () { let data = [("" , Some ("")) , ("test" , Some ("test")) , (" 		 test" , Some ("test")) , ("test  	   " , Some ("test")) , ("  test 	" , Some ("test")) ,] ; let matcher = Matcher :: AllTrimmed ; for (input , expected) in & data { let result = matcher . find (input) ; assert_eq ! (result . as_deref () , * expected) ; } } # [test] fn prefixed_word () { let data = [("" , None) , ("test" , Some ("")) , ("test1" , Some ("1")) , ("test 1" , Some ("1")) , (" test 1" , Some ("1")) , ("test 1.2.3" , Some ("1.2.3")) , (" 		test 1.2.3" , Some ("1.2.3")) ,] ; let matcher = Matcher :: PrefixedWord { prefix : "test" } ; for (input , expected) in & data { let result = matcher . find (input) ; assert_eq ! (result . as_deref () , * expected) ; } } # [test] fn prefixed_version () { let data = [("" , None) , ("test" , Some ("")) , ("test 1" , Some ("1")) , ("test .1" , None) , ("test 1." , None) , ("test .1." , None) , (" test 1" , Some ("1")) , ("test 1.2.3" , Some ("1.2.3")) , (" 		test 1.2.3" , Some ("1.2.3")) ,] ; let matcher = Matcher :: PrefixedVersion { prefix : "test" } ; for (input , expected) in & data { let result = matcher . find (input) ; assert_eq ! (result . as_deref () , * expected) ; } } # [test] fn key_value () { let data = [("" , None) , ("key" , None) , ("key=value" , Some ("value")) , ("key=1" , Some ("1")) , ("key=\"1\"" , Some ("1")) , ("key=\"CentOS Linux\"" , Some ("CentOS Linux")) ,] ; let matcher = Matcher :: KeyValue { key : "key" } ; for (input , expected) in & data { let result = matcher . find (input) ; assert_eq ! (result . as_deref () , * expected) ; } } }
+};
+}

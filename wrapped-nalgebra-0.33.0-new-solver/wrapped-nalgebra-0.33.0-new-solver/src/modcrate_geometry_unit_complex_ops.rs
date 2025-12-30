@@ -1,0 +1,43 @@
+// Generated module macro for crate::geometry::unit_complex_ops
+macro_rules! Modcrate_geometry_unit_complex_ops {
+() => {
+        Depcrate_geometry_unit_complex_opsuse_1947!();
+        Depcrate_geometry_unit_complex_opsuse_1948!();
+        Depcrate_geometry_unit_complex_opsuse_1949!();
+        Depcrate_geometry_unit_complex_opsuse_1950!();
+        Depcrate_geometry_unit_complex_opsuse_1951!();
+        Depcrate_geometry_unit_complex_opsimpl_1952!();
+        Depcrate_geometry_unit_complex_opsimpl_1953!();
+        Depcrate_geometry_unit_complex_opsimpl_1954!();
+        Depcrate_geometry_unit_complex_opsimpl_1955!();
+        Depcrate_geometry_unit_complex_opsimpl_1956!();
+        Depcrate_geometry_unit_complex_opsimpl_1957!();
+        Depcrate_geometry_unit_complex_opsimpl_1958!();
+        Depcrate_geometry_unit_complex_opsimpl_1959!();
+        Depcrate_geometry_unit_complex_opscomplex_op_impl!();
+        Depcrate_geometry_unit_complex_opscomplex_op_impl_all!();
+        Depcrate_geometry_unit_complex_opsmacro_1962!();
+        Depcrate_geometry_unit_complex_opsmacro_1963!();
+        Depcrate_geometry_unit_complex_opsmacro_1964!();
+        Depcrate_geometry_unit_complex_opsmacro_1965!();
+        Depcrate_geometry_unit_complex_opsmacro_1966!();
+        Depcrate_geometry_unit_complex_opsmacro_1967!();
+        Depcrate_geometry_unit_complex_opsmacro_1968!();
+        Depcrate_geometry_unit_complex_opsmacro_1969!();
+        Depcrate_geometry_unit_complex_opsmacro_1970!();
+        Depcrate_geometry_unit_complex_opsmacro_1971!();
+        Depcrate_geometry_unit_complex_opsmacro_1972!();
+        Depcrate_geometry_unit_complex_opsimpl_1973!();
+        Depcrate_geometry_unit_complex_opsimpl_1974!();
+        Depcrate_geometry_unit_complex_opsimpl_1975!();
+        Depcrate_geometry_unit_complex_opsimpl_1976!();
+        Depcrate_geometry_unit_complex_opsimpl_1977!();
+        Depcrate_geometry_unit_complex_opsimpl_1978!();
+        Depcrate_geometry_unit_complex_opsimpl_1979!();
+        Depcrate_geometry_unit_complex_opsimpl_1980!();
+        Depcrate_geometry_unit_complex_opsimpl_1981!();
+        Depcrate_geometry_unit_complex_opsimpl_1982!();
+        Depcrate_geometry_unit_complex_opsimpl_1983!();
+        Depcrate_geometry_unit_complex_opsimpl_1984!();
+    };
+}

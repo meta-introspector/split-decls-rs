@@ -1,0 +1,9 @@
+// Generated macro for NoVariantNamed (struct)
+macro_rules! Depcrate_errorsNoVariantNamed {
+() => {
+// Module: crate::errors
+// Provides: {"NoVariantNamed"}
+// Dependencies: {}
+# [derive (Diagnostic)] # [diag (hir_analysis_no_variant_named , code = E0599)] pub struct NoVariantNamed < 'tcx > { # [primary_span] pub span : Span , pub ident : Ident , pub ty : Ty < 'tcx > , }
+};
+}

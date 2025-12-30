@@ -1,0 +1,46 @@
+// Generated module macro for crate::core::build_steps::setup
+macro_rules! Modcrate_core_build_steps_setup {
+() => {
+        Depcrate_core_build_steps_setupuse_509!();
+        Depcrate_core_build_steps_setupuse_510!();
+        Depcrate_core_build_steps_setupuse_511!();
+        Depcrate_core_build_steps_setupuse_512!();
+        Depcrate_core_build_steps_setupuse_513!();
+        Depcrate_core_build_steps_setupuse_514!();
+        Depcrate_core_build_steps_setupuse_515!();
+        Depcrate_core_build_steps_setupuse_516!();
+        Depcrate_core_build_steps_setupuse_517!();
+        Depcrate_core_build_steps_setupuse_518!();
+        Depcrate_core_build_steps_setupuse_519!();
+        Depcrate_core_build_steps_setupuse_520!();
+        Depcrate_core_build_steps_setupuse_521!();
+        Depcrate_core_build_steps_setuptests!();
+        Depcrate_core_build_steps_setupProfile!();
+        Depcrate_core_build_steps_setupPROFILE_DIR!();
+        Depcrate_core_build_steps_setupimpl_525!();
+        Depcrate_core_build_steps_setupimpl_526!();
+        Depcrate_core_build_steps_setupimpl_527!();
+        Depcrate_core_build_steps_setupimpl_528!();
+        Depcrate_core_build_steps_setupsetup!();
+        Depcrate_core_build_steps_setupsetup_config_toml!();
+        Depcrate_core_build_steps_setupLink!();
+        Depcrate_core_build_steps_setupimpl_532!();
+        Depcrate_core_build_steps_setuprustup_installed!();
+        Depcrate_core_build_steps_setupstage_dir_exists!();
+        Depcrate_core_build_steps_setupattempt_toolchain_link!();
+        Depcrate_core_build_steps_setuptoolchain_is_linked!();
+        Depcrate_core_build_steps_setuptry_link_toolchain!();
+        Depcrate_core_build_steps_setupensure_stage1_toolchain_placeholder_exists!();
+        Depcrate_core_build_steps_setupinteractive_path!();
+        Depcrate_core_build_steps_setupPromptResult!();
+        Depcrate_core_build_steps_setupprompt_user!();
+        Depcrate_core_build_steps_setupHook!();
+        Depcrate_core_build_steps_setupimpl_543!();
+        Depcrate_core_build_steps_setupinstall_git_hook_maybe!();
+        Depcrate_core_build_steps_setupEditorKind!();
+        Depcrate_core_build_steps_setupimpl_546!();
+        Depcrate_core_build_steps_setupEditor!();
+        Depcrate_core_build_steps_setupimpl_548!();
+        Depcrate_core_build_steps_setupcreate_editor_settings_maybe!();
+    };
+}

@@ -1,0 +1,64 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcrate_generated__tvcontentidentifier.rs");
+include!("depcrate_generateduse_27.rs");
+include!("depcrate_generated__tvtopshelfaction.rs");
+include!("depcrate_generated__tvtopshelfitem.rs");
+include!("depcrate_generated__tvtopshelfitemcollection.rs");
+include!("depcrate_generated__tvtopshelfinsetcontent.rs");
+include!("depcrate_generated__tvtopshelfcontent.rs");
+include!("depcrate_generated__tvtopshelfnamedattribute.rs");
+include!("depcrate_generateduse_26.rs");
+include!("depcrate_generateduse_44.rs");
+include!("depcrate_generateduse_24.rs");
+include!("depcrate_generateduse_30.rs");
+include!("depcrate_generateduse_29.rs");
+include!("depcrate_generateduse_36.rs");
+include!("depcrate_generateduse_45.rs");
+include!("depcrate_generated__tvtopshelfcontentprovider.rs");
+include!("depcrate_generateduse_48.rs");
+include!("depcrate_generateduse_49.rs");
+include!("depcrate_generateduse_53.rs");
+include!("depcrate_generateduse_50.rs");
+include!("depcrate_generateduse_31.rs");
+include!("depcrate_generated__tvservicesdefines.rs");
+include!("depcrate_generated__tvtopshelfprovider.rs");
+include!("depcrateother_1.rs");
+include!("depcrate_generateduse_25.rs");
+include!("depcrate_generateduse_33.rs");
+include!("depcrate_generateduse_34.rs");
+include!("depcrate_generateduse_37.rs");
+include!("depcrate_generateduse_41.rs");
+include!("depcrate_generateduse_43.rs");
+include!("depcrate_generateduse_52.rs");
+include!("depcrate_generateduse_38.rs");
+include!("depcrate_generateduse_39.rs");
+include!("depcrate_generateduse_35.rs");
+include!("depcrate_generateduse_46.rs");
+include!("depcrate_generated__tvtopshelfobject.rs");
+include!("depcrate_generateduse_47.rs");
+include!("depcrate_generated__tvusermanager.rs");
+include!("depcrategenerated.rs");
+include!("depcrate_generatedother_4.rs");
+include!("depcrate_generated__tvappprofiledescriptor.rs");
+include!("depcrateother_2.rs");
+include!("depcrate_generated__tvtopshelfsectionedcontent.rs");
+include!("depcrate_generated__tvcontentitem.rs");
+include!("depcrate_generated__tvtopshelfcarouselcontent.rs");
+include!("depcrate_generated__tvtopshelfcarouselitem.rs");
+include!("depcrate_generated__nsuseractivity_tvservices.rs");
+include!("depcrate_generated__tvtopshelfsectioneditem.rs");
+include!("depcrate_generateduse_32.rs");
+include!("depcrate_generateduse_40.rs");
+include!("depcrate_generateduse_42.rs");
+include!("depcrate_generateduse_51.rs");
+include!("depcrateuse_54.rs");
+include!("depcrate_generateduse_28.rs");
+include!("modcrate_generated.rs");
+include!("modcrate.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate_generated!();
+    Modcrate!();
+}

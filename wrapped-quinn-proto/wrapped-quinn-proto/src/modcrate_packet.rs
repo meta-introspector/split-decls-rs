@@ -1,0 +1,44 @@
+// Generated module macro for crate::packet
+macro_rules! Modcrate_packet {
+() => {
+        Depcrate_packetuse_815!();
+        Depcrate_packetuse_816!();
+        Depcrate_packetuse_817!();
+        Depcrate_packetuse_818!();
+        Depcrate_packetPartialDecode!();
+        Depcrate_packetimpl_820!();
+        Depcrate_packetPacket!();
+        Depcrate_packetimpl_822!();
+        Depcrate_packetInitialPacket!();
+        Depcrate_packetimpl_824!();
+        Depcrate_packetHeader!();
+        Depcrate_packetimpl_826!();
+        Depcrate_packetPartialEncode!();
+        Depcrate_packetimpl_828!();
+        Depcrate_packetProtectedHeader!();
+        Depcrate_packetimpl_830!();
+        Depcrate_packetProtectedInitialHeader!();
+        Depcrate_packetInitialHeader!();
+        Depcrate_packetPacketNumber!();
+        Depcrate_packetimpl_834!();
+        Depcrate_packetFixedLengthConnectionIdParser!();
+        Depcrate_packetimpl_836!();
+        Depcrate_packetimpl_837!();
+        Depcrate_packetConnectionIdParser!();
+        Depcrate_packetLongHeaderType!();
+        Depcrate_packetimpl_840!();
+        Depcrate_packetimpl_841!();
+        Depcrate_packetLongType!();
+        Depcrate_packetPacketDecodeError!();
+        Depcrate_packetimpl_844!();
+        Depcrate_packetLONG_HEADER_FORM!();
+        Depcrate_packetFIXED_BIT!();
+        Depcrate_packetSPIN_BIT!();
+        Depcrate_packetSHORT_RESERVED_BITS!();
+        Depcrate_packetLONG_RESERVED_BITS!();
+        Depcrate_packetKEY_PHASE_BIT!();
+        Depcrate_packetSpaceId!();
+        Depcrate_packetimpl_852!();
+        Depcrate_packettests!();
+    };
+}

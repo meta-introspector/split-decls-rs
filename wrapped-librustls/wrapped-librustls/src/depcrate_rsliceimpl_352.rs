@@ -1,0 +1,9 @@
+// Generated macro for impl_352 (impl)
+macro_rules! Depcrate_rsliceimpl_352 {
+() => {
+// Module: crate::rslice
+// Provides: {"impl_352"}
+// Dependencies: {}
+# [doc = " rustls_str represents a string that can be passed to C code."] # [doc = ""] # [doc = " The string should not have any internal NUL bytes and is not NUL terminated."] # [doc = " C code should not create rustls_str objects, they should only be created in Rust"] # [doc = " code."] impl rustls_str < '_ > { pub fn from_str_unchecked (s : & 'static str) -> rustls_str < 'static > { rustls_str { data : s . as_ptr () as * const _ , len : s . len () , phantom : PhantomData , } } # [doc = " Change a rustls_str's lifetime to 'static."] # [doc = ""] # [doc = " This doesn't actually change how long the pointed-to data lives, but"] # [doc = " is necessary when returning a rustls_str (as opposed to passing it"] # [doc = " into a callback), because Rust can't figure out the \"real\" lifetime."] # [doc = ""] # [doc = " # Safety"] # [doc = ""] # [doc = " The caller is responsible for requiring (usually via"] # [doc = " documentation) that nothing uses the resulting rustls_str past its"] # [doc = " actual validity period. The validity period is somewhat ill-defined"] # [doc = " at present, but the Stacked Borrows experiment provides one definition,"] # [doc = " by which a shared reference is valid until a mutable reference (to"] # [doc = " the object or a parent object) is created."] pub unsafe fn into_static (self) -> rustls_str < 'static > { std :: mem :: transmute (self) } # [doc = " Change a rustls_str back to a &str."] # [doc = ""] # [doc = " # Safety"] # [doc = ""] # [doc = " The caller must ensure the rustls_str data is valid utf8"] pub unsafe fn to_str (& self) -> & str { str :: from_utf8_unchecked (slice :: from_raw_parts (self . data as * const u8 , self . len)) } }
+};
+}

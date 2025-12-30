@@ -1,0 +1,9 @@
+// Generated macro for tests (module)
+macro_rules! Depcratetests {
+() => {
+// Module: crate
+// Provides: {"tests"}
+// Dependencies: {}
+# [cfg (test)] mod tests { use super :: * ; # [test] fn it_works () -> Result < () , String > { let result = add (2 , 2) ; if result == 4 { Ok (()) } else { Err (String :: from ("two plus two does not equal four")) } } }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for impl_2048 (impl)
+macro_rules! Depcrate_isa_riscv64_inst_argsimpl_2048 {
+() => {
+// Module: crate::isa::riscv64::inst::args
+// Provides: {"impl_2048"}
+// Dependencies: {}
+impl IntegerCompare { pub (crate) fn op_code (self) -> u32 { 0b1100011 } pub (crate) fn funct3 (& self) -> (BranchFunct3 , bool) { match self . kind { IntCC :: Equal => (BranchFunct3 :: Eq , false) , IntCC :: NotEqual => (BranchFunct3 :: Ne , false) , IntCC :: SignedLessThan => (BranchFunct3 :: Lt , false) , IntCC :: SignedGreaterThanOrEqual => (BranchFunct3 :: Ge , false) , IntCC :: SignedGreaterThan => (BranchFunct3 :: Lt , true) , IntCC :: SignedLessThanOrEqual => (BranchFunct3 :: Ge , true) , IntCC :: UnsignedLessThan => (BranchFunct3 :: Ltu , false) , IntCC :: UnsignedGreaterThanOrEqual => (BranchFunct3 :: Geu , false) , IntCC :: UnsignedGreaterThan => (BranchFunct3 :: Ltu , true) , IntCC :: UnsignedLessThanOrEqual => (BranchFunct3 :: Geu , true) , } } # [inline] pub (crate) fn op_name (& self) -> & 'static str { match self . kind { IntCC :: Equal => "beq" , IntCC :: NotEqual => "bne" , IntCC :: SignedLessThan => "blt" , IntCC :: SignedGreaterThanOrEqual => "bge" , IntCC :: SignedGreaterThan => "bgt" , IntCC :: SignedLessThanOrEqual => "ble" , IntCC :: UnsignedLessThan => "bltu" , IntCC :: UnsignedGreaterThanOrEqual => "bgeu" , IntCC :: UnsignedGreaterThan => "bgtu" , IntCC :: UnsignedLessThanOrEqual => "bleu" , } } pub (crate) fn emit (self) -> u32 { let (funct3 , reverse) = self . funct3 () ; let (rs1 , rs2) = if reverse { (self . rs2 , self . rs1) } else { (self . rs1 , self . rs2) } ; self . op_code () | funct3 . funct3 () << 12 | reg_to_gpr_num (rs1) << 15 | reg_to_gpr_num (rs2) << 20 } pub (crate) fn inverse (self) -> Self { Self { kind : self . kind . complement () , .. self } } pub (crate) fn regs (& self) -> [Reg ; 2] { [self . rs1 , self . rs2] } }
+};
+}

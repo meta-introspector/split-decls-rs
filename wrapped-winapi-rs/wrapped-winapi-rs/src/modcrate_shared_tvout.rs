@@ -1,0 +1,48 @@
+// Generated module macro for crate::shared::tvout
+macro_rules! Modcrate_shared_tvout {
+() => {
+        Depcrate_shared_tvoutuse_10403!();
+        Depcrate_shared_tvoutuse_10404!();
+        Depcrate_shared_tvoutmacro_10405!();
+        Depcrate_shared_tvoutPVIDEOPARAMETERS!();
+        Depcrate_shared_tvoutLPVIDEOPARAMETERS!();
+        Depcrate_shared_tvoutVP_COMMAND_GET!();
+        Depcrate_shared_tvoutVP_COMMAND_SET!();
+        Depcrate_shared_tvoutVP_FLAGS_TV_MODE!();
+        Depcrate_shared_tvoutVP_FLAGS_TV_STANDARD!();
+        Depcrate_shared_tvoutVP_FLAGS_FLICKER!();
+        Depcrate_shared_tvoutVP_FLAGS_OVERSCAN!();
+        Depcrate_shared_tvoutVP_FLAGS_MAX_UNSCALED!();
+        Depcrate_shared_tvoutVP_FLAGS_POSITION!();
+        Depcrate_shared_tvoutVP_FLAGS_BRIGHTNESS!();
+        Depcrate_shared_tvoutVP_FLAGS_CONTRAST!();
+        Depcrate_shared_tvoutVP_FLAGS_COPYPROTECT!();
+        Depcrate_shared_tvoutVP_MODE_WIN_GRAPHICS!();
+        Depcrate_shared_tvoutVP_MODE_TV_PLAYBACK!();
+        Depcrate_shared_tvoutVP_TV_STANDARD_NTSC_M!();
+        Depcrate_shared_tvoutVP_TV_STANDARD_NTSC_M_J!();
+        Depcrate_shared_tvoutVP_TV_STANDARD_PAL_B!();
+        Depcrate_shared_tvoutVP_TV_STANDARD_PAL_D!();
+        Depcrate_shared_tvoutVP_TV_STANDARD_PAL_H!();
+        Depcrate_shared_tvoutVP_TV_STANDARD_PAL_I!();
+        Depcrate_shared_tvoutVP_TV_STANDARD_PAL_M!();
+        Depcrate_shared_tvoutVP_TV_STANDARD_PAL_N!();
+        Depcrate_shared_tvoutVP_TV_STANDARD_SECAM_B!();
+        Depcrate_shared_tvoutVP_TV_STANDARD_SECAM_D!();
+        Depcrate_shared_tvoutVP_TV_STANDARD_SECAM_G!();
+        Depcrate_shared_tvoutVP_TV_STANDARD_SECAM_H!();
+        Depcrate_shared_tvoutVP_TV_STANDARD_SECAM_K!();
+        Depcrate_shared_tvoutVP_TV_STANDARD_SECAM_K1!();
+        Depcrate_shared_tvoutVP_TV_STANDARD_SECAM_L!();
+        Depcrate_shared_tvoutVP_TV_STANDARD_WIN_VGA!();
+        Depcrate_shared_tvoutVP_TV_STANDARD_NTSC_433!();
+        Depcrate_shared_tvoutVP_TV_STANDARD_PAL_G!();
+        Depcrate_shared_tvoutVP_TV_STANDARD_PAL_60!();
+        Depcrate_shared_tvoutVP_TV_STANDARD_SECAM_L1!();
+        Depcrate_shared_tvoutVP_CP_TYPE_APS_TRIGGER!();
+        Depcrate_shared_tvoutVP_CP_TYPE_MACROVISION!();
+        Depcrate_shared_tvoutVP_CP_CMD_ACTIVATE!();
+        Depcrate_shared_tvoutVP_CP_CMD_DEACTIVATE!();
+        Depcrate_shared_tvoutVP_CP_CMD_CHANGE!();
+    };
+}

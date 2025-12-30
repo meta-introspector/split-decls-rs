@@ -1,0 +1,9 @@
+// Generated macro for FVE_E_POLICY_REQUIRES_STARTUP_PIN_ON_TOUCH_DEVICE (const)
+macro_rules! Depcrate_shared_winerrorFVE_E_POLICY_REQUIRES_STARTUP_PIN_ON_TOUCH_DEVICE {
+() => {
+// Module: crate::shared::winerror
+// Provides: {"FVE_E_POLICY_REQUIRES_STARTUP_PIN_ON_TOUCH_DEVICE"}
+// Dependencies: {}
+pub const FVE_E_POLICY_REQUIRES_STARTUP_PIN_ON_TOUCH_DEVICE : HRESULT = 0x803100B7 ;
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for nghttp2_on_invalid_frame_recv_callback (type)
+macro_rules! Depcratenghttp2_on_invalid_frame_recv_callback {
+() => {
+// Module: crate
+// Provides: {"nghttp2_on_invalid_frame_recv_callback"}
+// Dependencies: {}
+# [doc = " @functypedef"] # [doc = ""] # [doc = " Callback function invoked by `nghttp2_session_recv()` and"] # [doc = " `nghttp2_session_mem_recv()` when an invalid non-DATA frame is"] # [doc = " received.  The error is indicated by the |lib_error_code|, which is"] # [doc = " one of the values defined in :type:`nghttp2_error`.  When this"] # [doc = " callback function is invoked, the library automatically submits"] # [doc = " either RST_STREAM or GOAWAY frame.  The |user_data| pointer is the"] # [doc = " third argument passed in to the call to"] # [doc = " `nghttp2_session_client_new()` or `nghttp2_session_server_new()`."] # [doc = ""] # [doc = " If frame is HEADERS or PUSH_PROMISE, the ``nva`` and ``nvlen``"] # [doc = " member of their data structure are always ``NULL`` and 0"] # [doc = " respectively."] # [doc = ""] # [doc = " The implementation of this function must return 0 if it succeeds."] # [doc = " If nonzero is returned, it is treated as fatal error and"] # [doc = " `nghttp2_session_recv()` and `nghttp2_session_mem_recv()` functions"] # [doc = " immediately return :enum:`NGHTTP2_ERR_CALLBACK_FAILURE`."] # [doc = ""] # [doc = " To set this callback to :type:`nghttp2_session_callbacks`, use"] # [doc = " `nghttp2_session_callbacks_set_on_invalid_frame_recv_callback()`."] pub type nghttp2_on_invalid_frame_recv_callback = :: std :: option :: Option < unsafe extern "C" fn (session : * mut nghttp2_session , frame : * const nghttp2_frame , lib_error_code : :: std :: os :: raw :: c_int , user_data : * mut :: std :: os :: raw :: c_void ,) -> :: std :: os :: raw :: c_int , > ;
+};
+}

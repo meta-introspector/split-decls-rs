@@ -1,0 +1,47 @@
+// Generated module macro for crate::provider::fields::symbols
+macro_rules! Modcrate_provider_fields_symbols {
+() => {
+        Depcrate_provider_fields_symbolsuse_390!();
+        Depcrate_provider_fields_symbolsuse_391!();
+        Depcrate_provider_fields_symbolsuse_392!();
+        Depcrate_provider_fields_symbolsuse_393!();
+        Depcrate_provider_fields_symbolsuse_394!();
+        Depcrate_provider_fields_symbolsuse_395!();
+        Depcrate_provider_fields_symbolsuse_396!();
+        Depcrate_provider_fields_symbolsSymbolError!();
+        Depcrate_provider_fields_symbolsimpl_398!();
+        Depcrate_provider_fields_symbolsFieldSymbol!();
+        Depcrate_provider_fields_symbolsimpl_400!();
+        Depcrate_provider_fields_symbolsFieldSymbolULE!();
+        Depcrate_provider_fields_symbolsimpl_402!();
+        Depcrate_provider_fields_symbolsimpl_403!();
+        Depcrate_provider_fields_symbolsimpl_404!();
+        Depcrate_provider_fields_symbolsTextOrNumeric!();
+        Depcrate_provider_fields_symbolsLengthType!();
+        Depcrate_provider_fields_symbolsimpl_407!();
+        Depcrate_provider_fields_symbolsimpl_408!();
+        Depcrate_provider_fields_symbolsimpl_409!();
+        Depcrate_provider_fields_symbolsimpl_410!();
+        Depcrate_provider_fields_symbolsimpl_411!();
+        Depcrate_provider_fields_symbolsfield_type!();
+        Depcrate_provider_fields_symbolsmacro_413!();
+        Depcrate_provider_fields_symbolsimpl_414!();
+        Depcrate_provider_fields_symbolsmacro_415!();
+        Depcrate_provider_fields_symbolsimpl_416!();
+        Depcrate_provider_fields_symbolsmacro_417!();
+        Depcrate_provider_fields_symbolsmacro_418!();
+        Depcrate_provider_fields_symbolsimpl_419!();
+        Depcrate_provider_fields_symbolsmacro_420!();
+        Depcrate_provider_fields_symbolsmacro_421!();
+        Depcrate_provider_fields_symbolsimpl_422!();
+        Depcrate_provider_fields_symbolsmacro_423!();
+        Depcrate_provider_fields_symbolsimpl_424!();
+        Depcrate_provider_fields_symbolsimpl_425!();
+        Depcrate_provider_fields_symbolsmacro_426!();
+        Depcrate_provider_fields_symbolsmacro_427!();
+        Depcrate_provider_fields_symbolsimpl_428!();
+        Depcrate_provider_fields_symbolsDecimalSecond!();
+        Depcrate_provider_fields_symbolsimpl_430!();
+        Depcrate_provider_fields_symbolsimpl_431!();
+    };
+}

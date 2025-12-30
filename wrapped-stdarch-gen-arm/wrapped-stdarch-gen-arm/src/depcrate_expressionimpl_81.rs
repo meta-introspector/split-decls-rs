@@ -1,0 +1,9 @@
+// Generated macro for impl_81 (impl)
+macro_rules! Depcrate_expressionimpl_81 {
+() => {
+// Module: crate::expression
+// Provides: {"impl_81"}
+// Dependencies: {}
+impl < 'de > Deserialize < 'de > for Expression { fn deserialize < D > (deserializer : D) -> Result < Self , D :: Error > where D : Deserializer < 'de > , { struct CustomExpressionVisitor ; impl < 'de > Visitor < 'de > for CustomExpressionVisitor { type Value = Expression ; fn expecting (& self , formatter : & mut fmt :: Formatter) -> fmt :: Result { formatter . write_str ("integer, float, boolean, string or map") } fn visit_bool < E > (self , v : bool) -> Result < Self :: Value , E > where E : de :: Error , { Ok (Expression :: BoolConstant (v)) } fn visit_i64 < E > (self , v : i64) -> Result < Self :: Value , E > where E : de :: Error , { Ok (Expression :: IntConstant (v as i32)) } fn visit_u64 < E > (self , v : u64) -> Result < Self :: Value , E > where E : de :: Error , { Ok (Expression :: IntConstant (v as i32)) } fn visit_f64 < E > (self , v : f64) -> Result < Self :: Value , E > where E : de :: Error , { Ok (Expression :: FloatConstant (v as f32)) } fn visit_str < E > (self , value : & str) -> Result < Self :: Value , E > where E : de :: Error , { FromStr :: from_str (value) . map_err (de :: Error :: custom) } fn visit_seq < A > (self , mut seq : A) -> Result < Self :: Value , A :: Error > where A : de :: SeqAccess < 'de > , { let arr = std :: iter :: from_fn (| | seq . next_element :: < Self :: Value > () . transpose ()) . try_collect () ? ; Ok (Expression :: Array (arr)) } fn visit_map < M > (self , map : M) -> Result < Expression , M :: Error > where M : MapAccess < 'de > , { Expression :: deserialize (de :: value :: MapAccessDeserializer :: new (map)) } } deserializer . deserialize_any (CustomExpressionVisitor) } }
+};
+}

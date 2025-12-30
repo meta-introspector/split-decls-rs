@@ -1,0 +1,9 @@
+// Generated macro for macro_261 (macro)
+macro_rules! Depcrate_propsmacro_261 {
+() => {
+// Module: crate::props
+// Provides: {"macro_261"}
+// Dependencies: {}
+make_binary_property ! { name : "XID_Continue" ; short_name : "XIDC" ; ident : XidContinue ; data_marker : crate :: provider :: PropertyBinaryXidContinueV1 ; singleton : SINGLETON_PROPERTY_BINARY_XID_CONTINUE_V1 ; # [doc = " Characters that can come after the first character in an identifier."] # [doc = ""] # [doc = " See [`Unicode Standard Annex"] # [doc = " #31`](https://www.unicode.org/reports/tr31/tr31-35.html) for more details."] # [doc = ""] # [doc = " # Example"] # [doc = ""] # [doc = " ```"] # [doc = " use icu::properties::CodePointSetData;"] # [doc = " use icu::properties::props::XidContinue;"] # [doc = ""] # [doc = " let xid_continue = CodePointSetData::new::<XidContinue>();"] # [doc = ""] # [doc = " assert!(xid_continue.contains('x'));"] # [doc = " assert!(xid_continue.contains('1'));"] # [doc = " assert!(xid_continue.contains('_'));"] # [doc = " assert!(xid_continue.contains('ߝ'));  // U+07DD NKO LETTER FA"] # [doc = " assert!(!xid_continue.contains('ⓧ'));  // U+24E7 CIRCLED LATIN SMALL LETTER X"] # [doc = " assert!(!xid_continue.contains('\\u{FC5E}'));  // ARABIC LIGATURE SHADDA WITH DAMMATAN ISOLATED FORM"] # [doc = " ```"] }
+};
+}

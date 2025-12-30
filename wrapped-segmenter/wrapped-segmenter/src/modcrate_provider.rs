@@ -1,0 +1,39 @@
+// Generated module macro for crate::provider
+macro_rules! Modcrate_provider {
+() => {
+        Depcrate_providerlstm!();
+        Depcrate_provideruse_318!();
+        Depcrate_provideruse_319!();
+        Depcrate_provideruse_320!();
+        Depcrate_provideruse_321!();
+        Depcrate_provideruse_322!();
+        Depcrate_providerBaked!();
+        Depcrate_provider_!();
+        Depcrate_providermacro_325!();
+        Depcrate_providermacro_326!();
+        Depcrate_providermacro_327!();
+        Depcrate_providermacro_328!();
+        Depcrate_providermacro_329!();
+        Depcrate_providermacro_330!();
+        Depcrate_providermacro_331!();
+        Depcrate_providermacro_332!();
+        Depcrate_providermacro_333!();
+        Depcrate_provideruse_334!();
+        Depcrate_providerMARKERS!();
+        Depcrate_providerRuleBreakData!();
+        Depcrate_providermacro_337!();
+        Depcrate_providerUCharDictionaryBreakData!();
+        Depcrate_providermacro_339!();
+        Depcrate_providerUCharDictionaryBreakDataV1!();
+        Depcrate_providerimpl_341!();
+        Depcrate_providerRuleBreakDataOverride!();
+        Depcrate_providermacro_343!();
+        Depcrate_providerBreakState!();
+        Depcrate_providerimpl_345!();
+        Depcrate_providerimpl_346!();
+        Depcrate_providerimpl_347!();
+        Depcrate_providerimpl_348!();
+        Depcrate_providerimpl_349!();
+        Depcrate_providerimpl_350!();
+    };
+}

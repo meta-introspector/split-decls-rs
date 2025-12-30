@@ -1,0 +1,9 @@
+// Generated macro for check (function)
+macro_rules! Depcrate_methods_get_unwrapcheck {
+() => {
+// Module: crate::methods::get_unwrap
+// Provides: {"check"}
+// Dependencies: {}
+pub (super) fn check < 'tcx > (cx : & LateContext < 'tcx > , expr : & hir :: Expr < '_ > , recv : & 'tcx hir :: Expr < 'tcx > , get_arg : & 'tcx hir :: Expr < '_ > , is_mut : bool ,) { let expr_ty = cx . typeck_results () . expr_ty (recv) ; let caller_type = if derefs_to_slice (cx , recv , expr_ty) . is_some () { "slice" } else { match expr_ty . ty_adt_def () . and_then (| def | cx . tcx . get_diagnostic_name (def . did ())) { Some (sym :: Vec) => "Vec" , Some (sym :: VecDeque) => "VecDeque" , Some (sym :: HashMap) if ! is_mut => "HashMap" , Some (sym :: BTreeMap) if ! is_mut => "BTreeMap" , _ => return , } } ; let mut span = expr . span ; let needs_ref = if let Some (parent) = get_parent_expr (cx , expr) && let hir :: ExprKind :: Unary (hir :: UnOp :: Deref , _) | hir :: ExprKind :: MethodCall (..) | hir :: ExprKind :: Field (..) | hir :: ExprKind :: Index (..) = parent . kind { if let hir :: ExprKind :: Unary (hir :: UnOp :: Deref , _) = parent . kind { span = parent . span ; } false } else { true } ; let mut_str = if is_mut { "_mut" } else { "" } ; span_lint_and_then (cx , GET_UNWRAP , span , format ! ("called `.get{mut_str}().unwrap()` on a {caller_type}") , | diag | { let mut applicability = Applicability :: MachineApplicable ; let get_args_str = snippet_with_applicability (cx , get_arg . span , ".." , & mut applicability) ; let borrow_str = if ! needs_ref { "" } else if is_mut { "&mut " } else { "&" } ; diag . span_suggestion_verbose (span , "using `[]` is clearer and more concise" , format ! ("{borrow_str}{}[{get_args_str}]" , snippet_with_applicability (cx , recv . span , ".." , & mut applicability)) , applicability ,) ; } ,) ; }
+};
+}

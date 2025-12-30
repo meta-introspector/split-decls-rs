@@ -1,0 +1,9 @@
+// Generated macro for impl_3914 (impl)
+macro_rules! Depcrate_loopsimpl_3914 {
+() => {
+// Module: crate::loops
+// Provides: {"impl_3914"}
+// Dependencies: {}
+impl Loops { # [allow (clippy :: too_many_arguments)] fn check_for_loop < 'tcx > (& self , cx : & LateContext < 'tcx > , pat : & 'tcx Pat < '_ > , arg : & 'tcx Expr < '_ > , body : & 'tcx Expr < '_ > , expr : & 'tcx Expr < '_ > , span : Span , label : Option < Label > ,) { let is_manual_memcpy_triggered = manual_memcpy :: check (cx , pat , arg , body , expr) ; if ! is_manual_memcpy_triggered { manual_slice_fill :: check (cx , pat , arg , body , expr , self . msrv) ; needless_range_loop :: check (cx , pat , arg , body , expr) ; explicit_counter_loop :: check (cx , pat , arg , body , expr , label) ; } self . check_for_loop_arg (cx , pat , arg) ; for_kv_map :: check (cx , pat , arg , body) ; mut_range_bound :: check (cx , arg , body) ; single_element_loop :: check (cx , pat , arg , body , expr) ; same_item_push :: check (cx , pat , arg , body , expr , self . msrv) ; manual_flatten :: check (cx , pat , arg , body , span , self . msrv) ; manual_find :: check (cx , pat , arg , body , span , expr) ; unused_enumerate_index :: check (cx , pat , arg , body) ; char_indices_as_byte_indices :: check (cx , pat , arg , body) ; } fn check_for_loop_arg (& self , cx : & LateContext < '_ > , _ : & Pat < '_ > , arg : & Expr < '_ >) { if ! arg . span . from_expansion () && let ExprKind :: MethodCall (method , self_arg , [] , _) = arg . kind { match method . ident . name { sym :: iter | sym :: iter_mut => { explicit_iter_loop :: check (cx , self_arg , arg , self . msrv , self . enforce_iter_loop_reborrow) ; } , sym :: into_iter => { explicit_into_iter_loop :: check (cx , self_arg , arg) ; } , sym :: next => { iter_next_loop :: check (cx , arg) ; } , _ => { } , } } } }
+};
+}

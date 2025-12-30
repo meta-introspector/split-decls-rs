@@ -1,0 +1,9 @@
+// Generated macro for EAS_E_PASSWORD_POLICY_NOT_ENFORCEABLE_FOR_CONNECTED_ADMINS (const)
+macro_rules! Depcrate_shared_winerrorEAS_E_PASSWORD_POLICY_NOT_ENFORCEABLE_FOR_CONNECTED_ADMINS {
+() => {
+// Module: crate::shared::winerror
+// Provides: {"EAS_E_PASSWORD_POLICY_NOT_ENFORCEABLE_FOR_CONNECTED_ADMINS"}
+// Dependencies: {}
+pub const EAS_E_PASSWORD_POLICY_NOT_ENFORCEABLE_FOR_CONNECTED_ADMINS : HRESULT = 0x8055000A ;
+};
+}

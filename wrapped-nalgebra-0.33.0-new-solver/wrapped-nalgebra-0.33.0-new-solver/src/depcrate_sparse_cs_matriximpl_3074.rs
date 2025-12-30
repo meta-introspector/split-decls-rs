@@ -1,0 +1,9 @@
+// Generated macro for impl_3074 (impl)
+macro_rules! Depcrate_sparse_cs_matriximpl_3074 {
+() => {
+// Module: crate::sparse::cs_matrix
+// Provides: {"impl_3074"}
+// Dependencies: {}
+impl < T : Scalar , R : Dim , C : Dim > CsMatrix < T , R , C > where DefaultAllocator : Allocator < C > , { pub (crate) fn sort (& mut self) where T : Zero , DefaultAllocator : Allocator < R > , { let nrows = self . data . shape () . 0 ; let mut workspace = Matrix :: zeros_generic (nrows , Const :: < 1 >) ; self . sort_with_workspace (workspace . as_mut_slice ()) ; } pub (crate) fn sort_with_workspace (& mut self , workspace : & mut [T]) { assert ! (workspace . len () >= self . nrows () , "Workspace must be able to hold at least self.nrows() elements.") ; for j in 0 .. self . ncols () { for (irow , val) in self . data . column_entries (j) { workspace [irow] = val ; } let range = self . data . column_range (j) ; self . data . i [range . clone ()] . sort_unstable () ; for (i , irow) in range . clone () . zip (self . data . i [range] . iter () . cloned ()) { self . data . vals [i] = workspace [irow] . clone () ; } } } pub (crate) fn dedup (& mut self) where T : Zero + ClosedAddAssign , { let mut curr_i = 0 ; for j in 0 .. self . ncols () { let range = self . data . column_range (j) ; self . data . p [j] = curr_i ; if range . start != range . end { let mut value = T :: zero () ; let mut irow = self . data . i [range . start] ; for idx in range { let curr_irow = self . data . i [idx] ; if curr_irow == irow { value += self . data . vals [idx] . clone () ; } else { self . data . i [curr_i] = irow ; self . data . vals [curr_i] = value ; value = self . data . vals [idx] . clone () ; irow = curr_irow ; curr_i += 1 ; } } self . data . i [curr_i] = irow ; self . data . vals [curr_i] = value ; curr_i += 1 ; } } self . data . i . truncate (curr_i) ; self . data . i . shrink_to_fit () ; self . data . vals . truncate (curr_i) ; self . data . vals . shrink_to_fit () ; } }
+};
+}

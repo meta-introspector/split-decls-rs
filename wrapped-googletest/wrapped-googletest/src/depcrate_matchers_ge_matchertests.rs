@@ -1,0 +1,14 @@
+// Generated macro for tests (module)
+macro_rules! Depcrate_matchers_ge_matchertests {
+() => {
+// Module: crate::matchers::ge_matcher
+// Provides: {"tests"}
+// Dependencies: {}
+# [cfg (test)] mod tests { use crate :: matcher :: MatcherResult ; use crate :: prelude :: * ; use crate :: Result ; use indoc :: indoc ; use std :: ffi :: OsString ; # [test] fn ge_matches_i32_with_i32 () -> Result < () > { let actual : i32 = 0 ; let expected : i32 = 0 ; verify_that ! (actual , ge (expected)) } # [test] fn ge_does_not_match_smaller_i32 () -> Result < () > { let matcher = ge (10) ; let result = matcher . matches (9) ; verify_that ! (result , eq (MatcherResult :: NoMatch)) } # [test] fn ge_matches_bigger_str () -> Result < () > { verify_that ! ("B" , ge ("A")) } # [test] fn ge_does_not_match_lesser_str () -> Result < () > { let matcher = ge ("z") ; let result = matcher . matches ("a") ; verify_that ! (result , eq (MatcherResult :: NoMatch)) } # [test] fn ge_mismatch_contains_actual_and_expected () -> Result < () > { let result = verify_that ! (591 , ge (927)) ; verify_that ! (result , err (displays_as (contains_substring (indoc ! ("
+                Value of: 591
+                Expected: is greater than or equal to 927
+                Actual: 591,
+                  which is less than 927
+                "))))) } # [test] fn ge_matches_owned_osstring_reference_with_string_reference () -> Result < () > { let expected = "A" ; let actual : OsString = "B" . to_string () . into () ; verify_that ! (& actual , ge (expected)) } # [test] fn ge_matches_ipv6addr_with_ipaddr () -> Result < () > { use std :: net :: IpAddr ; use std :: net :: Ipv6Addr ; let actual : Ipv6Addr = "2001:4860:4860::8844" . parse () . unwrap () ; let expected : IpAddr = "127.0.0.1" . parse () . unwrap () ; verify_that ! (actual , ge (expected)) } # [test] fn ge_matches_with_custom_partial_ord () -> Result < () > { # [doc = " A custom \"number\" that is lower than all other numbers. The only"] # [doc = " things we define about this \"special\" number is `PartialOrd` and"] # [doc = " `PartialEq` against `u32`."] # [derive (Debug)] struct VeryLowNumber { } impl std :: cmp :: PartialEq < u32 > for VeryLowNumber { fn eq (& self , _other : & u32) -> bool { false } } impl std :: cmp :: PartialOrd < u32 > for VeryLowNumber { fn partial_cmp (& self , _other : & u32) -> Option < std :: cmp :: Ordering > { Some (std :: cmp :: Ordering :: Less) } } impl std :: cmp :: PartialEq < VeryLowNumber > for u32 { fn eq (& self , _other : & VeryLowNumber) -> bool { false } } impl std :: cmp :: PartialOrd < VeryLowNumber > for u32 { fn partial_cmp (& self , _other : & VeryLowNumber) -> Option < std :: cmp :: Ordering > { Some (std :: cmp :: Ordering :: Greater) } } let actual : u32 = 42 ; let expected = VeryLowNumber { } ; verify_that ! (actual , ge (expected)) } }
+};
+}

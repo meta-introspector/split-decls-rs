@@ -1,0 +1,9 @@
+// Generated macro for INIT_384 (const)
+macro_rules! Depcrate_constsINIT_384 {
+() => {
+// Module: crate::consts
+// Provides: {"INIT_384"}
+// Dependencies: {}
+pub (crate) const INIT_384 : ([u32 ; 12] , [u32 ; 16] , [u32 ; 16]) = ([0xC8FC_A331 , 0xE55C_504E , 0x003E_BF26 , 0xBB6B_8D83 , 0x7B04_48C1 , 0x41B8_2789 , 0x0A7C_9601 , 0x8D65_9CFF , 0xB6E2_673E , 0xCA54_C77B , 0x1460_FD7E , 0x3FCB_8F2D ,] , [0x5272_91FC , 0x2A16_455F , 0x78E6_27E5 , 0x944F_169F , 0x1CA6_F016 , 0xA854_EA25 , 0x8DB9_8ABE , 0xF2C6_2641 , 0x3011_7DCB , 0xCF5C_4309 , 0x9371_1A25 , 0xF9F6_71B8 , 0xB01D_2116 , 0x333F_4B89 , 0xB285_D165 , 0x8682_9B36 ,] , [0xF764_B11A , 0x7617_2146 , 0xCEF6_934D , 0xC6D2_8399 , 0xFE09_5F61 , 0x5E60_18B4 , 0x5048_ECF5 , 0x5135_3261 , 0x6E6E_36DC , 0x6313_0DAD , 0xA9C6_9BD6 , 0x1E90_EA0C , 0x7C35_073B , 0x28D9_5E6D , 0xAA34_0E0D , 0xCB3D_EE70 ,] ,) ;
+};
+}

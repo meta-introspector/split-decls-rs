@@ -1,0 +1,9 @@
+// Generated macro for RwLock (struct)
+macro_rules! Depcrate_concurrency_syncRwLock {
+() => {
+// Module: crate::concurrency::sync
+// Provides: {"RwLock"}
+// Dependencies: {}
+# [doc = " The read-write lock state."] # [derive (Default , Debug)] struct RwLock { # [doc = " The writer thread that currently owns the lock."] writer : Option < ThreadId > , # [doc = " The readers that currently own the lock and how many times they acquired"] # [doc = " the lock."] readers : FxHashMap < ThreadId , usize > , # [doc = " The queue of writer threads waiting for this lock."] writer_queue : VecDeque < ThreadId > , # [doc = " The queue of reader threads waiting for this lock."] reader_queue : VecDeque < ThreadId > , # [doc = " Data race clock for writers. Tracks the happens-before"] # [doc = " ordering between each write access to a rwlock and is updated"] # [doc = " after a sequence of concurrent readers to track the happens-"] # [doc = " before ordering between the set of previous readers and"] # [doc = " the current writer."] # [doc = " Contains the clock of the last thread to release a writer"] # [doc = " lock or the joined clock of the set of last threads to release"] # [doc = " shared reader locks."] clock_unlocked : VClock , # [doc = " Data race clock for readers. This is temporary storage"] # [doc = " for the combined happens-before ordering for between all"] # [doc = " concurrent readers and the next writer, and the value"] # [doc = " is stored to the main data_race variable once all"] # [doc = " readers are finished."] # [doc = " Has to be stored separately since reader lock acquires"] # [doc = " must load the clock of the last write and must not"] # [doc = " add happens-before orderings between shared reader"] # [doc = " locks."] # [doc = " This is only relevant when there is an active reader."] clock_current_readers : VClock , }
+};
+}

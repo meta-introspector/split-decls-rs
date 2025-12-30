@@ -1,0 +1,9 @@
+// Generated macro for impl_11572 (impl)
+macro_rules! Depcrate_zombie_processesimpl_11572 {
+() => {
+// Module: crate::zombie_processes
+// Provides: {"impl_11572"}
+// Dependencies: {}
+impl < 'tcx > LateLintPass < 'tcx > for ZombieProcesses { fn check_expr (& mut self , cx : & LateContext < 'tcx > , expr : & 'tcx Expr < 'tcx >) { if let ExprKind :: Call (..) | ExprKind :: MethodCall (..) = expr . kind && let child_ty = cx . typeck_results () . expr_ty (expr) && child_ty . is_diag_item (cx , sym :: Child) { match cx . tcx . parent_hir_node (expr . hir_id) { Node :: LetStmt (local) if let PatKind :: Binding (_ , local_id , ..) = local . pat . kind && let Some (enclosing_block) = get_enclosing_block (cx , expr . hir_id) => { let mut vis = WaitFinder { cx , local_id , create_id : expr . hir_id , body_id : cx . tcx . hir_enclosing_body_owner (expr . hir_id) , state : VisitorState :: WalkUpToCreate , early_return : None , missing_wait_branch : None , } ; let res = (walk_block (& mut vis , enclosing_block) , vis . missing_wait_branch , vis . early_return ,) ; let cause = match res { (Break (MaybeWait (wait_span)) , _ , Some (return_span)) => { Cause :: EarlyReturn { wait_span , return_span } } , (Break (MaybeWait (_)) , _ , None) => return , (Continue (()) , None , _) => Cause :: NeverWait , (Continue (()) , Some (MissingWaitBranch :: MissingElse { if_span , wait_span }) , _) => { Cause :: MissingElse { wait_span , if_span } } , (Continue (()) , Some (MissingWaitBranch :: MissingWaitInBranch { branch_span , wait_span }) , _) => { Cause :: MissingWaitInBranch { wait_span , branch_span } } , } ; check (cx , expr , cause , false) ; } , Node :: LetStmt (& LetStmt { pat , .. }) if let PatKind :: Wild = pat . kind => { check (cx , expr , Cause :: NeverWait , true) ; } , Node :: Stmt (& Stmt { kind : StmtKind :: Semi (_) , .. }) => { check (cx , expr , Cause :: NeverWait , true) ; } , _ => { } , } } } }
+};
+}

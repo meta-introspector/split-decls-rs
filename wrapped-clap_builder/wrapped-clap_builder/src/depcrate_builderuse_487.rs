@@ -1,0 +1,9 @@
+// Generated macro for use_487 (pub_use)
+macro_rules! Depcrate_builderuse_487 {
+() => {
+// Module: crate::builder
+// Provides: {"use_487"}
+// Dependencies: {}
+pub use arg :: Arg ;
+};
+}

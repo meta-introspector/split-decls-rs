@@ -1,0 +1,47 @@
+// Generated module macro for crate::repr
+macro_rules! Modcrate_repr {
+() => {
+        Depcrate_repruse_127!();
+        Depcrate_repruse_128!();
+        Depcrate_repruse_129!();
+        Depcrate_repruse_130!();
+        Depcrate_reprbytes!();
+        Depcrate_reprsmallvec!();
+        Depcrate_reprcapacity!();
+        Depcrate_reprheap!();
+        Depcrate_reprinline!();
+        Depcrate_repriter!();
+        Depcrate_reprlast_utf8_char!();
+        Depcrate_reprnum!();
+        Depcrate_reprstatic_str!();
+        Depcrate_reprtraits!();
+        Depcrate_repruse_275!();
+        Depcrate_repruse_276!();
+        Depcrate_repruse_277!();
+        Depcrate_repruse_278!();
+        Depcrate_repruse_279!();
+        Depcrate_repruse_280!();
+        Depcrate_repruse_281!();
+        Depcrate_repruse_282!();
+        Depcrate_reprMAX_SIZE!();
+        Depcrate_reprHEAP_MASK!();
+        Depcrate_reprSTATIC_STR_MASK!();
+        Depcrate_reprLENGTH_MASK!();
+        Depcrate_reprEMPTY!();
+        Depcrate_reprRepr!();
+        Depcrate_reprmacro_289!();
+        Depcrate_reprimpl_290!();
+        Depcrate_reprimpl_291!();
+        Depcrate_reprimpl_292!();
+        Depcrate_reprimpl_293!();
+        Depcrate_reprimpl_294!();
+        Depcrate_reprimpl_295!();
+        Depcrate_reprimpl_296!();
+        Depcrate_reprimpl_297!();
+        Depcrate_reprimpl_298!();
+        Depcrate_reprimpl_299!();
+        Depcrate_reprimpl_300!();
+        Depcrate_reprensure_read!();
+        Depcrate_reprtests!();
+    };
+}

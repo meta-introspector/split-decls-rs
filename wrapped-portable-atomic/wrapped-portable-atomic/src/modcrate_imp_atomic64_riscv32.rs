@@ -1,0 +1,43 @@
+// Generated module macro for crate::imp::atomic64::riscv32
+macro_rules! Modcrate_imp_atomic64_riscv32 {
+() => {
+        Depcrate_imp_atomic64_riscv32macro_289!();
+        Depcrate_imp_atomic64_riscv32fallback!();
+        Depcrate_imp_atomic64_riscv32detect!();
+        Depcrate_imp_atomic64_riscv32use_292!();
+        Depcrate_imp_atomic64_riscv32use_293!();
+        Depcrate_imp_atomic64_riscv32use_294!();
+        Depcrate_imp_atomic64_riscv32debug_assert_zacas!();
+        Depcrate_imp_atomic64_riscv32start_zacas!();
+        Depcrate_imp_atomic64_riscv32end_zacas!();
+        Depcrate_imp_atomic64_riscv32atomic_rmw_amocas_order!();
+        Depcrate_imp_atomic64_riscv32atomic_rmw_amocas_order_insn!();
+        Depcrate_imp_atomic64_riscv32use_300!();
+        Depcrate_imp_atomic64_riscv32atomic_load!();
+        Depcrate_imp_atomic64_riscv32atomic_load_zacas!();
+        Depcrate_imp_atomic64_riscv32atomic_store!();
+        Depcrate_imp_atomic64_riscv32atomic_compare_exchange!();
+        Depcrate_imp_atomic64_riscv32atomic_compare_exchange_zacas!();
+        Depcrate_imp_atomic64_riscv32use_306!();
+        Depcrate_imp_atomic64_riscv32byte_wise_atomic_load!();
+        Depcrate_imp_atomic64_riscv32select_atomic_rmw!();
+        Depcrate_imp_atomic64_riscv32macro_309!();
+        Depcrate_imp_atomic64_riscv32macro_310!();
+        Depcrate_imp_atomic64_riscv32macro_311!();
+        Depcrate_imp_atomic64_riscv32macro_312!();
+        Depcrate_imp_atomic64_riscv32macro_313!();
+        Depcrate_imp_atomic64_riscv32macro_314!();
+        Depcrate_imp_atomic64_riscv32macro_315!();
+        Depcrate_imp_atomic64_riscv32macro_316!();
+        Depcrate_imp_atomic64_riscv32macro_317!();
+        Depcrate_imp_atomic64_riscv32macro_318!();
+        Depcrate_imp_atomic64_riscv32macro_319!();
+        Depcrate_imp_atomic64_riscv32macro_320!();
+        Depcrate_imp_atomic64_riscv32macro_321!();
+        Depcrate_imp_atomic64_riscv32is_lock_free!();
+        Depcrate_imp_atomic64_riscv32IS_ALWAYS_LOCK_FREE!();
+        Depcrate_imp_atomic64_riscv32macro_324!();
+        Depcrate_imp_atomic64_riscv32macro_325!();
+        Depcrate_imp_atomic64_riscv32tests!();
+    };
+}

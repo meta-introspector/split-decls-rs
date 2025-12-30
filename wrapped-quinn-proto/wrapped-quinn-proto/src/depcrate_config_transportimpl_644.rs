@@ -1,0 +1,9 @@
+// Generated macro for impl_644 (impl)
+macro_rules! Depcrate_config_transportimpl_644 {
+() => {
+// Module: crate::config::transport
+// Provides: {"impl_644"}
+// Dependencies: {}
+impl MtuDiscoveryConfig { # [doc = " Specifies the time to wait after completing MTU discovery before starting a new MTU"] # [doc = " discovery run."] # [doc = ""] # [doc = " Defaults to 600 seconds, as recommended by [RFC"] # [doc = " 8899](https://www.rfc-editor.org/rfc/rfc8899)."] pub fn interval (& mut self , value : Duration) -> & mut Self { self . interval = value ; self } # [doc = " Specifies the upper bound to the max UDP payload size that MTU discovery will search for."] # [doc = ""] # [doc = " Defaults to 1452, to stay within Ethernet's MTU when using IPv4 and IPv6. The highest"] # [doc = " allowed value is 65527, which corresponds to the maximum permitted UDP payload on IPv6."] # [doc = ""] # [doc = " It is safe to use an arbitrarily high upper bound, regardless of the network path's MTU. The"] # [doc = " only drawback is that MTU discovery might take more time to finish."] pub fn upper_bound (& mut self , value : u16) -> & mut Self { self . upper_bound = value . min (MAX_UDP_PAYLOAD) ; self } # [doc = " Specifies the amount of time that MTU discovery should wait after a black hole was detected"] # [doc = " before running again. Defaults to one minute."] # [doc = ""] # [doc = " Black hole detection can be spuriously triggered in case of congestion, so it makes sense to"] # [doc = " try MTU discovery again after a short period of time."] pub fn black_hole_cooldown (& mut self , value : Duration) -> & mut Self { self . black_hole_cooldown = value ; self } # [doc = " Specifies the minimum MTU change to stop the MTU discovery phase."] # [doc = " Defaults to 20."] pub fn minimum_change (& mut self , value : u16) -> & mut Self { self . minimum_change = value ; self } }
+};
+}

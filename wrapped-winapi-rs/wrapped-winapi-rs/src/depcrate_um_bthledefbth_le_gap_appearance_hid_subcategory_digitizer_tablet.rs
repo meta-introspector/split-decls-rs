@@ -1,0 +1,9 @@
+// Generated macro for BTH_LE_GAP_APPEARANCE_HID_SUBCATEGORY_DIGITIZER_TABLET (const)
+macro_rules! Depcrate_um_bthledefBTH_LE_GAP_APPEARANCE_HID_SUBCATEGORY_DIGITIZER_TABLET {
+() => {
+// Module: crate::um::bthledef
+// Provides: {"BTH_LE_GAP_APPEARANCE_HID_SUBCATEGORY_DIGITIZER_TABLET"}
+// Dependencies: {}
+pub const BTH_LE_GAP_APPEARANCE_HID_SUBCATEGORY_DIGITIZER_TABLET : UCHAR = 0x05 ;
+};
+}

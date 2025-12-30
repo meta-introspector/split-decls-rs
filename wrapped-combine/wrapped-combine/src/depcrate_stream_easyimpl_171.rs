@@ -1,0 +1,9 @@
+// Generated macro for impl_171 (impl)
+macro_rules! Depcrate_stream_easyimpl_171 {
+() => {
+// Module: crate::stream::easy
+// Provides: {"impl_171"}
+// Dependencies: {}
+impl < Item , Range , Position > crate :: error :: ParseError < Item , Range , Position > for Errors < Item , Range , Position > where Item : PartialEq , Range : PartialEq , Position : Ord + Clone , { type StreamError = Error < Item , Range > ; # [inline] fn empty (pos : Position) -> Self { Errors :: empty (pos) } # [inline] fn from_error (position : Position , err : Self :: StreamError) -> Self { Self :: new (position , err) } # [inline] fn position (& self) -> Position { self . position . clone () } # [inline] fn set_position (& mut self , position : Position) { self . position = position ; } # [inline] fn merge (self , other : Self) -> Self { Errors :: merge (self , other) } # [inline] fn add (& mut self , err : Self :: StreamError) { self . add_error (err) ; } # [inline] fn set_expected < F > (self_ : & mut Tracked < Self > , info : Self :: StreamError , f : F) where F : FnOnce (& mut Tracked < Self >) , { let start = self_ . error . errors . len () ; f (self_) ; let mut i = 0 ; self_ . error . errors . retain (| e | { if i < start { i += 1 ; true } else { match * e { Error :: Expected (_) => false , _ => true , } } }) ; self_ . error . add (info) ; } fn clear_expected (& mut self) { self . errors . retain (| e | match * e { Error :: Expected (_) => false , _ => true , }) } fn is_unexpected_end_of_input (& self) -> bool { self . errors . iter () . any (StreamError :: is_unexpected_end_of_input) } # [inline] fn into_other < T > (mut self) -> T where T : crate :: error :: ParseError < Item , Range , Position > , { match self . errors . pop () { Some (err) => T :: from_error (self . position , StreamError :: into_other (err)) , None => T :: empty (self . position) , } } }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for RmpRead (trait)
+macro_rules! Depcrate_decodeRmpRead {
+() => {
+// Module: crate::decode
+// Provides: {"RmpRead"}
+// Dependencies: {}
+# [doc = " A type that `rmp` supports reading from."] # [doc = ""] # [doc = " The methods of this trait should be considered an implementation detail (for now)."] # [doc = " It is currently sealed (can not be implemented by the user)."] # [doc = ""] # [doc = " See also [`std::io::Read`] and [`byteorder::ReadBytesExt`]"] # [doc = ""] # [doc = " Its primary implementations are [`std::io::Read`] and [Bytes]."] pub trait RmpRead : sealed :: Sealed { type Error : RmpReadErr ; # [doc = " Read a single (unsigned) byte from this stream"] # [inline] fn read_u8 (& mut self) -> Result < u8 , Self :: Error > { let mut buf = [0 ; 1] ; self . read_exact_buf (& mut buf) ? ; Ok (buf [0]) } # [doc = " Read the exact number of bytes needed to fill the specified buffer."] # [doc = ""] # [doc = " If there are not enough bytes, this will return an error."] # [doc = ""] # [doc = " See also [`std::io::Read::read_exact`]"] fn read_exact_buf (& mut self , buf : & mut [u8]) -> Result < () , Self :: Error > ; # [doc = " Read a single (unsigned) byte from this stream."] # [inline] # [doc (hidden)] fn read_data_u8 (& mut self) -> Result < u8 , ValueReadError < Self :: Error > > { self . read_u8 () . map_err (ValueReadError :: InvalidDataRead) } # [doc = " Read a single (signed) byte from this stream."] # [inline] # [doc (hidden)] fn read_data_i8 (& mut self) -> Result < i8 , ValueReadError < Self :: Error > > { self . read_data_u8 () . map (| b | b as i8) } read_byteorder_utils ! (read_data_u16 => u16 , read_data_u32 => u32 , read_data_u64 => u64 , read_data_i16 => i16 , read_data_i32 => i32 , read_data_i64 => i64 , read_data_f32 => f32 , read_data_f64 => f64) ; }
+};
+}

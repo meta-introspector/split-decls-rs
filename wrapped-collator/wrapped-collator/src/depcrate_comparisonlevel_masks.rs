@@ -1,0 +1,9 @@
+// Generated macro for LEVEL_MASKS (const)
+macro_rules! Depcrate_comparisonLEVEL_MASKS {
+() => {
+// Module: crate::comparison
+// Provides: {"LEVEL_MASKS"}
+// Dependencies: {}
+const LEVEL_MASKS : [u8 ; Strength :: Identical as usize + 1] = [PRIMARY_LEVEL_FLAG , PRIMARY_LEVEL_FLAG | SECONDARY_LEVEL_FLAG , PRIMARY_LEVEL_FLAG | SECONDARY_LEVEL_FLAG | TERTIARY_LEVEL_FLAG , PRIMARY_LEVEL_FLAG | SECONDARY_LEVEL_FLAG | TERTIARY_LEVEL_FLAG | QUATERNARY_LEVEL_FLAG , 0 , 0 , 0 , PRIMARY_LEVEL_FLAG | SECONDARY_LEVEL_FLAG | TERTIARY_LEVEL_FLAG | QUATERNARY_LEVEL_FLAG ,] ;
+};
+}

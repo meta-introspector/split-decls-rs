@@ -1,0 +1,48 @@
+// Generated module macro for crate::der
+macro_rules! Modcrate_der {
+() => {
+        Depcrate_deruse_4!();
+        Depcrate_deruse_5!();
+        Depcrate_deruse_6!();
+        Depcrate_derDerIterator!();
+        Depcrate_derimpl_8!();
+        Depcrate_derimpl_9!();
+        Depcrate_derFromDer!();
+        Depcrate_derread_all!();
+        Depcrate_derTag!();
+        Depcrate_derCONSTRUCTED!();
+        Depcrate_derCONTEXT_SPECIFIC!();
+        Depcrate_derimpl_15!();
+        Depcrate_derimpl_16!();
+        Depcrate_derexpect_tag_and_get_value_limited!();
+        Depcrate_dernested_limited!();
+        Depcrate_dernested!();
+        Depcrate_derexpect_tag!();
+        Depcrate_derread_tag_and_get_value!();
+        Depcrate_derread_tag_and_get_value_limited!();
+        Depcrate_derasn1_wrap!();
+        Depcrate_derTWO_BYTE_DER_SIZE!();
+        Depcrate_derMAX_DER_SIZE!();
+        Depcrate_derHIGH_TAG_RANGE_START!();
+        Depcrate_derSHORT_FORM_LEN_MAX!();
+        Depcrate_derLONG_FORM_LEN_ONE_BYTE!();
+        Depcrate_derLONG_FORM_LEN_ONE_BYTE_MAX!();
+        Depcrate_derLONG_FORM_LEN_TWO_BYTES!();
+        Depcrate_derLONG_FORM_LEN_TWO_BYTES_MAX!();
+        Depcrate_derLONG_FORM_LEN_THREE_BYTES!();
+        Depcrate_derLONG_FORM_LEN_THREE_BYTES_MAX!();
+        Depcrate_derLONG_FORM_LEN_FOUR_BYTES!();
+        Depcrate_derLONG_FORM_LEN_FOUR_BYTES_MAX!();
+        Depcrate_dernested_of_mut!();
+        Depcrate_derbit_string_with_no_unused_bits!();
+        Depcrate_derBitStringFlags!();
+        Depcrate_derimpl_39!();
+        Depcrate_derbit_string_flags!();
+        Depcrate_derimpl_41!();
+        Depcrate_dernonnegative_integer!();
+        Depcrate_derend_of_input_err!();
+        Depcrate_derimpl_44!();
+        Depcrate_deroid!();
+        Depcrate_dertests!();
+    };
+}

@@ -1,0 +1,9 @@
+// Generated macro for TimestampArithmetic (struct)
+macro_rules! Depcrate_timestampTimestampArithmetic {
+() => {
+// Module: crate::timestamp
+// Provides: {"TimestampArithmetic"}
+// Dependencies: {}
+# [doc = " Options for [`Timestamp::checked_add`] and [`Timestamp::checked_sub`]."] # [doc = ""] # [doc = " This type provides a way to ergonomically add one of a few different"] # [doc = " duration types to a [`Timestamp`]."] # [doc = ""] # [doc = " The main way to construct values of this type is with its `From` trait"] # [doc = " implementations:"] # [doc = ""] # [doc = " * `From<Span> for TimestampArithmetic` adds (or subtracts) the given span"] # [doc = " to the receiver timestamp."] # [doc = " * `From<SignedDuration> for TimestampArithmetic` adds (or subtracts)"] # [doc = " the given signed duration to the receiver timestamp."] # [doc = " * `From<std::time::Duration> for TimestampArithmetic` adds (or subtracts)"] # [doc = " the given unsigned duration to the receiver timestamp."] # [doc = ""] # [doc = " # Example"] # [doc = ""] # [doc = " ```"] # [doc = " use std::time::Duration;"] # [doc = ""] # [doc = " use jiff::{SignedDuration, Timestamp, ToSpan};"] # [doc = ""] # [doc = " let ts: Timestamp = \"2024-02-28T00:00:00Z\".parse()?;"] # [doc = " assert_eq!("] # [doc = "     ts.checked_add(48.hours())?,"] # [doc = "     \"2024-03-01T00:00:00Z\".parse()?,"] # [doc = " );"] # [doc = " assert_eq!("] # [doc = "     ts.checked_add(SignedDuration::from_hours(48))?,"] # [doc = "     \"2024-03-01T00:00:00Z\".parse()?,"] # [doc = " );"] # [doc = " assert_eq!("] # [doc = "     ts.checked_add(Duration::from_secs(48 * 60 * 60))?,"] # [doc = "     \"2024-03-01T00:00:00Z\".parse()?,"] # [doc = " );"] # [doc = ""] # [doc = " # Ok::<(), Box<dyn std::error::Error>>(())"] # [doc = " ```"] # [derive (Clone , Copy , Debug)] pub struct TimestampArithmetic { duration : Duration , }
+};
+}

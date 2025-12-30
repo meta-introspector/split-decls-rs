@@ -1,0 +1,47 @@
+// Generated module macro for crate::ffi
+macro_rules! Modcrate_ffi {
+() => {
+        Depcrate_ffiuse_594!();
+        Depcrate_ffiuse_595!();
+        Depcrate_ffigenerate_linking_tests!();
+        Depcrate_ffiextern_c!();
+        Depcrate_ffiextern_c_unwind!();
+        Depcrate_fficlass!();
+        Depcrate_fficonstants!();
+        Depcrate_ffiexception!();
+        Depcrate_ffilibc!();
+        Depcrate_ffimessage!();
+        Depcrate_ffimethod!();
+        Depcrate_ffiobject!();
+        Depcrate_ffiproperty!();
+        Depcrate_ffiprotocol!();
+        Depcrate_ffirc!();
+        Depcrate_ffiselector!();
+        Depcrate_ffitypes!();
+        Depcrate_ffivarious!();
+        Depcrate_ffiuse_689!();
+        Depcrate_ffiuse_690!();
+        Depcrate_ffiuse_691!();
+        Depcrate_ffiuse_692!();
+        Depcrate_ffiuse_693!();
+        Depcrate_ffiuse_694!();
+        Depcrate_ffiuse_695!();
+        Depcrate_ffiuse_696!();
+        Depcrate_ffiuse_697!();
+        Depcrate_ffiuse_698!();
+        Depcrate_ffiuse_699!();
+        Depcrate_ffiuse_700!();
+        Depcrate_ffiuse_701!();
+        Depcrate_ffiobjc_class!();
+        Depcrate_ffiobjc_object!();
+        Depcrate_ffiIMP!();
+        Depcrate_ffiobjc_method!();
+        Depcrate_ffiobjc_ivar!();
+        Depcrate_ffiid!();
+        Depcrate_ffiBOOL!();
+        Depcrate_ffiYES!();
+        Depcrate_ffiNO!();
+        Depcrate_ffiOpaqueData!();
+        Depcrate_ffitests!();
+    };
+}

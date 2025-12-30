@@ -29,6 +29,6 @@ macro_rules! Modcrate_tests {
         Depcrate_teststruncate!();
         Depcrate_testsunion!();
         Depcrate_testsunknown!();
-        Depcrate_testsmacro_146!();
+        Depcrate_testsmacro_117!();
     };
 }

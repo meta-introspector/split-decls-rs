@@ -1,0 +1,9 @@
+// Generated macro for LineAlignSetting (enum)
+macro_rules! Depcrate_features_gen_LineAlignSettingLineAlignSetting {
+() => {
+// Module: crate::features::gen_LineAlignSetting
+// Provides: {"LineAlignSetting"}
+// Dependencies: {}
+# [wasm_bindgen] # [doc = "The `LineAlignSetting` enum."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `LineAlignSetting`*"] # [derive (Debug , Clone , Copy , PartialEq , Eq)] pub enum LineAlignSetting { Start = "start" , Center = "center" , End = "end" , }
+};
+}

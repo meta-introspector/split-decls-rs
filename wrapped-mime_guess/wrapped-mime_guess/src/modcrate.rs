@@ -1,0 +1,42 @@
+// Generated module macro for crate
+macro_rules! Modcrate {
+() => {
+        Depcrateother_1!();
+        Depcrateother_2!();
+        Depcrateuse_3!();
+        Depcrateuse_4!();
+        Depcrateuse_5!();
+        Depcrateuse_6!();
+        Depcrateuse_7!();
+        Depcrateimpl_!();
+        Depcrateimpl_!();
+        DepcrateMimeGuess!();
+        Depcrateimpl_11!();
+        Depcrateimpl_12!();
+        Depcrateimpl_13!();
+        DepcrateIter!();
+        Depcrateimpl_15!();
+        Depcrateimpl_16!();
+        Depcrateimpl_17!();
+        Depcrateimpl_18!();
+        DepcrateIterRaw!();
+        Depcrateimpl_20!();
+        Depcrateimpl_21!();
+        Depcrateimpl_22!();
+        Depcrateimpl_23!();
+        Depcrateexpect_mime!();
+        Depcratefrom_ext!();
+        Depcratefrom_path!();
+        Depcrateguess_mime_type!();
+        Depcrateguess_mime_type_opt!();
+        Depcratemime_str_for_path_ext!();
+        Depcrateget_mime_type!();
+        Depcrateget_mime_type_opt!();
+        Depcrateget_mime_type_str!();
+        Depcrateget_mime_extensions!();
+        Depcrateget_mime_extensions_str!();
+        Depcrateget_extensions!();
+        Depcrateoctet_stream!();
+        Depcratetests!();
+    };
+}

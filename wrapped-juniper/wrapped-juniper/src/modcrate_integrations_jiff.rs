@@ -1,0 +1,39 @@
+// Generated module macro for crate::integrations::jiff
+macro_rules! Modcrate_integrations_jiff {
+() => {
+        Depcrate_integrations_jiffuse_1186!();
+        Depcrate_integrations_jiffuse_1187!();
+        Depcrate_integrations_jiffuse_1188!();
+        Depcrate_integrations_jiffLocalDate!();
+        Depcrate_integrations_jifflocal_date!();
+        Depcrate_integrations_jiffLocalTime!();
+        Depcrate_integrations_jifflocal_time!();
+        Depcrate_integrations_jiffLocalDateTime!();
+        Depcrate_integrations_jifflocal_date_time!();
+        Depcrate_integrations_jiffDateTime!();
+        Depcrate_integrations_jiffdate_time!();
+        Depcrate_integrations_jiffZonedDateTime!();
+        Depcrate_integrations_jiffzoned_date_time!();
+        Depcrate_integrations_jiffDuration!();
+        Depcrate_integrations_jiffduration!();
+        Depcrate_integrations_jiffTimeZoneOrUtcOffset!();
+        Depcrate_integrations_jifftime_zone_or_utc_offset!();
+        Depcrate_integrations_jiffTimeZoneParsingError!();
+        Depcrate_integrations_jiffTimeZone!();
+        Depcrate_integrations_jiffimpl_1205!();
+        Depcrate_integrations_jiffimpl_1206!();
+        Depcrate_integrations_jifftime_zone!();
+        Depcrate_integrations_jiffUtcOffset!();
+        Depcrate_integrations_jiffutc_offset!();
+        Depcrate_integrations_jifflocal_date_test!();
+        Depcrate_integrations_jifflocal_time_test!();
+        Depcrate_integrations_jifflocal_date_time_test!();
+        Depcrate_integrations_jiffdate_time_test!();
+        Depcrate_integrations_jiffzoned_date_time_test!();
+        Depcrate_integrations_jiffduration_test!();
+        Depcrate_integrations_jifftime_zone_or_utc_offset_test!();
+        Depcrate_integrations_jifftime_zone_test!();
+        Depcrate_integrations_jiffutc_offset_test!();
+        Depcrate_integrations_jiffintegration_test!();
+    };
+}

@@ -1,0 +1,9 @@
+// Generated macro for impl_83 (impl)
+macro_rules! Depcrate_valueimpl_83 {
+() => {
+// Module: crate::value
+// Provides: {"impl_83"}
+// Dependencies: {}
+impl < 'sval > ValueBuf < 'sval > { fn push_kind (& mut self , kind : ValueKind < 'sval >) -> Result < () , Error > { self . parts . push (ValuePart { kind }) } fn push_begin (& mut self , kind : ValueKind < 'sval >) -> Result < () , Error > { self . stack . push (self . parts . len ()) ? ; self . parts . push (ValuePart { kind }) } fn push_end (& mut self) -> Result < () , Error > { let index = self . stack . pop () . ok_or_else (| | Error :: invalid_value ("unbalanced calls to `begin` and `end`")) ? ; let len = self . parts . len () - index - 1 ; * match & mut self . parts . get_mut (index) . unwrap () . kind { ValueKind :: Map { len , .. } => len , ValueKind :: MapKey { len } => len , ValueKind :: MapValue { len } => len , ValueKind :: Seq { len , .. } => len , ValueKind :: SeqValue { len } => len , ValueKind :: Enum { len , .. } => len , ValueKind :: Tagged { len , .. } => len , ValueKind :: Record { len , .. } => len , ValueKind :: RecordValue { len , .. } => len , ValueKind :: Tuple { len , .. } => len , ValueKind :: TupleValue { len , .. } => len , ValueKind :: RecordTuple { len , .. } => len , ValueKind :: RecordTupleValue { len , .. } => len , ValueKind :: Null | ValueKind :: Bool (_) | ValueKind :: U8 (_) | ValueKind :: U16 (_) | ValueKind :: U32 (_) | ValueKind :: U64 (_) | ValueKind :: U128 (_) | ValueKind :: I8 (_) | ValueKind :: I16 (_) | ValueKind :: I32 (_) | ValueKind :: I64 (_) | ValueKind :: I128 (_) | ValueKind :: F32 (_) | ValueKind :: F64 (_) | ValueKind :: Text (_) | ValueKind :: Binary (_) | ValueKind :: Tag { .. } | ValueKind :: TagHint { .. } => { return Err (Error :: invalid_value ("can't end at this index")) } } = len ; Ok (()) } fn current_mut (& mut self) -> & mut ValuePart < 'sval > { self . parts . last_mut () . expect ("missing current") } }
+};
+}

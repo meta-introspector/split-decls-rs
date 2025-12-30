@@ -1,0 +1,9 @@
+// Generated macro for suggestion_snippet_for_continue_inside_else (function)
+macro_rules! Depcrate_needless_continuesuggestion_snippet_for_continue_inside_else {
+() => {
+// Module: crate::needless_continue
+// Provides: {"suggestion_snippet_for_continue_inside_else"}
+// Dependencies: {}
+fn suggestion_snippet_for_continue_inside_else (cx : & LateContext < '_ > , data : & LintData < '_ >) -> String { let mut applicability = Applicability :: MachineApplicable ; let (cond_code , _) = snippet_with_context (cx , data . if_cond . span , data . if_expr . span . ctxt () , ".." , & mut applicability ,) ; let block_code = erode_from_back (& snippet_block (cx , data . if_block . span , ".." , Some (data . if_expr . span))) ; let indent = span_of_first_expr_in_block (data . if_block) . and_then (| span | indent_of (cx , span)) . unwrap_or (0) ; let to_annex = if let Some (stmt_idx) = data . stmt_idx { let mut lines = data . loop_block . stmts [stmt_idx + 1 ..] . iter () . map (| stmt | { let span = cx . sess () . source_map () . stmt_span (stmt . span , data . loop_block . span) ; let snip = snippet_block (cx , span , ".." , None) ; snip . lines () . map (| line | format ! ("{}{line}" , " " . repeat (indent))) . collect :: < Vec < _ > > () . join ("\n") }) . collect :: < Vec < _ > > () ; if let Some (expr) = data . loop_block . expr { let span = expr . span ; let snip = snippet_block (cx , span , ".." , None) ; let expr_lines = snip . lines () . map (| line | format ! ("{}{line}" , " " . repeat (indent))) . collect :: < Vec < _ > > () . join ("\n") ; lines . push (expr_lines) ; } lines . join ("\n") } else { String :: new () } ; let indent_if = indent_of (cx , data . if_expr . span) . unwrap_or (0) ; format ! ("{indent_if}if {cond_code} {block_code}\n{indent}// merged code follows:\n{to_annex}\n{indent_if}}}" , indent = " " . repeat (indent) , indent_if = " " . repeat (indent_if) ,) }
+};
+}

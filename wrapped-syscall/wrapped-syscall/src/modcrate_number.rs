@@ -1,0 +1,57 @@
+// Generated module macro for crate::number
+macro_rules! Modcrate_number {
+() => {
+        Depcrate_numberSYS_CLASS!();
+        Depcrate_numberSYS_CLASS_PATH!();
+        Depcrate_numberSYS_CLASS_FILE!();
+        Depcrate_numberSYS_ARG!();
+        Depcrate_numberSYS_ARG_SLICE!();
+        Depcrate_numberSYS_ARG_MSLICE!();
+        Depcrate_numberSYS_ARG_PATH!();
+        Depcrate_numberSYS_RET!();
+        Depcrate_numberSYS_RET_FILE!();
+        Depcrate_numberSYS_OPEN!();
+        Depcrate_numberSYS_OPENAT!();
+        Depcrate_numberSYS_RMDIR!();
+        Depcrate_numberSYS_UNLINK!();
+        Depcrate_numberSYS_CLOSE!();
+        Depcrate_numberSYS_DUP!();
+        Depcrate_numberSYS_DUP2!();
+        Depcrate_numberSYS_READ!();
+        Depcrate_numberSYS_READ2!();
+        Depcrate_numberSYS_WRITE!();
+        Depcrate_numberSYS_WRITE2!();
+        Depcrate_numberSYS_LSEEK!();
+        Depcrate_numberSYS_FCHMOD!();
+        Depcrate_numberSYS_FCHOWN!();
+        Depcrate_numberSYS_FCNTL!();
+        Depcrate_numberSYS_FEVENT!();
+        Depcrate_numberSYS_CALL!();
+        Depcrate_numberSYS_SENDFD!();
+        Depcrate_numberSYS_GETDENTS!();
+        Depcrate_numberSYS_FMAP_OLD!();
+        Depcrate_numberSYS_FMAP!();
+        Depcrate_numberSYS_FUNMAP_OLD!();
+        Depcrate_numberSYS_FUNMAP!();
+        Depcrate_numberSYS_MREMAP!();
+        Depcrate_numberSYS_FLINK!();
+        Depcrate_numberSYS_FPATH!();
+        Depcrate_numberSYS_FRENAME!();
+        Depcrate_numberSYS_FSTAT!();
+        Depcrate_numberSYS_FSTATVFS!();
+        Depcrate_numberSYS_FSYNC!();
+        Depcrate_numberSYS_FTRUNCATE!();
+        Depcrate_numberSYS_FUTIMENS!();
+        Depcrate_numberKSMSG_MMAP!();
+        Depcrate_numberKSMSG_MSYNC!();
+        Depcrate_numberKSMSG_MUNMAP!();
+        Depcrate_numberKSMSG_MMAP_PREP!();
+        Depcrate_numberKSMSG_CANCEL!();
+        Depcrate_numberSYS_CLOCK_GETTIME!();
+        Depcrate_numberSYS_FUTEX!();
+        Depcrate_numberSYS_MPROTECT!();
+        Depcrate_numberSYS_MKNS!();
+        Depcrate_numberSYS_NANOSLEEP!();
+        Depcrate_numberSYS_YIELD!();
+    };
+}

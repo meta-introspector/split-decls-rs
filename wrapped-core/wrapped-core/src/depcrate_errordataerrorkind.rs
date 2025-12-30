@@ -1,0 +1,9 @@
+// Generated macro for DataErrorKind (enum)
+macro_rules! Depcrate_errorDataErrorKind {
+() => {
+// Module: crate::error
+// Provides: {"DataErrorKind"}
+// Dependencies: {}
+# [doc = " A list specifying general categories of data provider error."] # [doc = ""] # [doc = " Errors may be caused either by a malformed request or by the data provider"] # [doc = " not being able to fulfill a well-formed request."] # [derive (Clone , Copy , Eq , PartialEq , Display , Debug)] # [non_exhaustive] pub enum DataErrorKind { # [doc = " No data for the requested data marker. This is only returned by [`DynamicDataProvider`]."] # [displaydoc ("Missing data for marker")] MarkerNotFound , # [doc = " There is data for the data marker, but not for this particular data identifier."] # [displaydoc ("Missing data for identifier")] IdentifierNotFound , # [doc = " The request is invalid, such as a request for a singleton marker containing a data identifier."] # [displaydoc ("Invalid request")] InvalidRequest , # [doc = " The data for two [`DataMarker`]s is not consistent."] # [displaydoc ("The data for two markers is not consistent: {0:?} (were they generated in different datagen invocations?)")] InconsistentData (DataMarkerInfo) , # [doc = " An error occured during [`Any`](core::any::Any) downcasting."] # [displaydoc ("Downcast: expected {0}, found")] Downcast (& 'static str) , # [doc = " An error occured during [`serde`] deserialization."] # [doc = ""] # [doc = " Check debug logs for potentially more information."] # [displaydoc ("Deserialize")] Deserialize , # [doc = " An unspecified error occurred."] # [doc = ""] # [doc = " Check debug logs for potentially more information."] # [displaydoc ("Custom")] Custom , # [doc = " An error occurred while accessing a system resource."] # [displaydoc ("I/O: {0:?}")] # [cfg (feature = "std")] Io (std :: io :: ErrorKind) , }
+};
+}

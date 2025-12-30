@@ -1,0 +1,9 @@
+// Generated macro for remove_file (function)
+macro_rules! Depcrate_fsremove_file {
+() => {
+// Module: crate::fs
+// Provides: {"remove_file"}
+// Dependencies: {}
+# [doc = " Removes a file from the filesystem."] # [doc = ""] # [doc = " Note that there is no"] # [doc = " guarantee that the file is immediately deleted (e.g., depending on"] # [doc = " platform, other open file descriptors may prevent immediate removal)."] # [doc = ""] # [doc = " # Platform-specific behavior"] # [doc = ""] # [doc = " This function currently corresponds to the `unlink` function on Unix."] # [doc = " On Windows, `DeleteFile` is used or `CreateFileW` and `SetInformationByHandle` for readonly files."] # [doc = " Note that, this [may change in the future][changes]."] # [doc = ""] # [doc = " [changes]: io#platform-specific-behavior"] # [doc = ""] # [doc = " # Errors"] # [doc = ""] # [doc = " This function will return an error in the following situations, but is not"] # [doc = " limited to just these cases:"] # [doc = ""] # [doc = " * `path` points to a directory."] # [doc = " * The file doesn't exist."] # [doc = " * The user lacks permissions to remove the file."] # [doc = ""] # [doc = " This function will only ever return an error of kind `NotFound` if the given"] # [doc = " path does not exist. Note that the inverse is not true,"] # [doc = " ie. if a path does not exist, its removal may fail for a number of reasons,"] # [doc = " such as insufficient permissions."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```no_run"] # [doc = " use std::fs;"] # [doc = ""] # [doc = " fn main() -> std::io::Result<()> {"] # [doc = "     fs::remove_file(\"a.txt\")?;"] # [doc = "     Ok(())"] # [doc = " }"] # [doc = " ```"] # [doc (alias = "rm" , alias = "unlink" , alias = "DeleteFile")] # [stable (feature = "rust1" , since = "1.0.0")] pub fn remove_file < P : AsRef < Path > > (path : P) -> io :: Result < () > { fs_imp :: remove_file (path . as_ref ()) }
+};
+}

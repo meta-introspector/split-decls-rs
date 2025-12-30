@@ -1,0 +1,9 @@
+// Generated macro for WINCODEC_ERR_SOURCERECTDOESNOTMATCHDIMENSIONS (const)
+macro_rules! Depcrate_shared_winerrorWINCODEC_ERR_SOURCERECTDOESNOTMATCHDIMENSIONS {
+() => {
+// Module: crate::shared::winerror
+// Provides: {"WINCODEC_ERR_SOURCERECTDOESNOTMATCHDIMENSIONS"}
+// Dependencies: {}
+pub const WINCODEC_ERR_SOURCERECTDOESNOTMATCHDIMENSIONS : HRESULT = 0x88982F49 ;
+};
+}

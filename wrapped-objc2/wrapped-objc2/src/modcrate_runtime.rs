@@ -1,0 +1,53 @@
+// Generated module macro for crate::runtime
+macro_rules! Modcrate_runtime {
+() => {
+        Depcrate_runtimeMallocSlice!();
+        Depcrate_runtimeMallocCStr!();
+        Depcrate_runtimestandard_pointer_impls!();
+        Depcrate_runtime__nsstring!();
+        Depcrate_runtimeanyclass!();
+        Depcrate_runtimeanyobject!();
+        Depcrate_runtimeanyprotocol!();
+        Depcrate_runtimebool!();
+        Depcrate_runtimedefine!();
+        Depcrate_runtimeivar!();
+        Depcrate_runtimemalloc!();
+        Depcrate_runtimemessage_receiver!();
+        Depcrate_runtimemethod!();
+        Depcrate_runtimemethod_encoding_iter!();
+        Depcrate_runtimemethod_implementation!();
+        Depcrate_runtimensobject!();
+        Depcrate_runtimensproxy!();
+        Depcrate_runtimenszone!();
+        Depcrate_runtimeprotocol_object!();
+        Depcrate_runtimeretain_release_fast!();
+        Depcrate_runtimesel!();
+        Depcrate_runtimetest_utils!();
+        Depcrate_runtimeverify!();
+        Depcrate_runtimeuse_1318!();
+        Depcrate_runtimeuse_1319!();
+        Depcrate_runtimeuse_1320!();
+        Depcrate_runtimeuse_1321!();
+        Depcrate_runtimeuse_1322!();
+        Depcrate_runtimeuse_1323!();
+        Depcrate_runtimeuse_1324!();
+        Depcrate_runtimeuse_1325!();
+        Depcrate_runtimeuse_1326!();
+        Depcrate_runtimeuse_1327!();
+        Depcrate_runtimeuse_1328!();
+        Depcrate_runtimeuse_1329!();
+        Depcrate_runtimeuse_1330!();
+        Depcrate_runtimeuse_1331!();
+        Depcrate_runtimeuse_1332!();
+        Depcrate_runtimeuse_1333!();
+        Depcrate_runtimeuse_1334!();
+        Depcrate_runtimeuse_1335!();
+        Depcrate_runtimeuse_1336!();
+        Depcrate_runtimeuse_1337!();
+        Depcrate_runtimeuse_1338!();
+        Depcrate_runtimeuse_1339!();
+        Depcrate_runtimeuse_1340!();
+        Depcrate_runtimeuse_1341!();
+        Depcrate_runtimetests!();
+    };
+}

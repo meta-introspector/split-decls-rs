@@ -1,0 +1,9 @@
+// Generated macro for parse_with_variables (function)
+macro_rules! Depcrate_unicodeset_parse_parseparse_with_variables {
+() => {
+// Module: crate::unicodeset_parse::parse
+// Provides: {"parse_with_variables"}
+// Dependencies: {}
+# [doc = " Parses a UnicodeSet pattern with support for variables enabled."] # [doc = ""] # [doc = " See [`parse`] for more information."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " use icu::experimental::unicodeset_parse::*;"] # [doc = ""] # [doc = " let (my_set, _) = parse(\"[abc]\").unwrap();"] # [doc = ""] # [doc = " let mut variable_map = VariableMap::new();"] # [doc = " variable_map.insert_char(\"start\".into(), 'a').unwrap();"] # [doc = " variable_map.insert_char(\"end\".into(), 'z').unwrap();"] # [doc = " variable_map.insert_string(\"str\".into(), \"Hello World\".into()).unwrap();"] # [doc = " variable_map.insert_set(\"the_set\".into(), my_set).unwrap();"] # [doc = ""] # [doc = " // If a variable already exists, `Err` is returned, and the map is not updated."] # [doc = " variable_map.insert_char(\"end\".into(), 'Ω').unwrap_err();"] # [doc = ""] # [doc = " let source = \"[[$start-$end]-$the_set $str]\";"] # [doc = " let (set, consumed) = parse_with_variables(source, &variable_map).unwrap();"] # [doc = " assert_eq!(consumed, source.len());"] # [doc = " assert!(set.code_points().contains_range('d'..='z'));"] # [doc = " assert!(set.contains_str(\"Hello World\"));"] # [doc = " assert_eq!(set.size(), 1 + ('d'..='z').count());"] # [cfg (feature = "compiled_data")] pub fn parse_with_variables (source : & str , variable_map : & VariableMap < '_ > ,) -> Result < (CodePointInversionListAndStringList < 'static > , usize) > { parse_unstable_with_variables (source , variable_map , & icu_properties :: provider :: Baked) }
+};
+}

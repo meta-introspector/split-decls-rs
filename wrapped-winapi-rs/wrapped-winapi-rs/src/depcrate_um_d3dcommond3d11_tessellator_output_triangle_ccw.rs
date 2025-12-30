@@ -1,0 +1,9 @@
+// Generated macro for D3D11_TESSELLATOR_OUTPUT_TRIANGLE_CCW (const)
+macro_rules! Depcrate_um_d3dcommonD3D11_TESSELLATOR_OUTPUT_TRIANGLE_CCW {
+() => {
+// Module: crate::um::d3dcommon
+// Provides: {"D3D11_TESSELLATOR_OUTPUT_TRIANGLE_CCW"}
+// Dependencies: {}
+pub const D3D11_TESSELLATOR_OUTPUT_TRIANGLE_CCW : D3D_TESSELLATOR_OUTPUT_PRIMITIVE = D3D_TESSELLATOR_OUTPUT_TRIANGLE_CCW ;
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for impl_246 (impl)
+macro_rules! Depcrate_session_async_sessionimpl_246 {
+() => {
+// Module: crate::session::async_session
+// Provides: {"impl_246"}
+// Dependencies: {}
+impl < P , S > Session < P , S > { # [doc = " Create a new session."] pub fn new (process : P , stream : S) -> io :: Result < Self > { Ok (Self { process , stream : Stream :: new (stream) , }) } # [doc = " Get a reference to original stream."] pub fn get_stream (& self) -> & S { self . stream . as_ref () } # [doc = " Get a mut reference to original stream."] pub fn get_stream_mut (& mut self) -> & mut S { self . stream . as_mut () } # [doc = " Get a reference to a process running program."] pub fn get_process (& self) -> & P { & self . process } # [doc = " Get a mut reference to a process running program."] pub fn get_process_mut (& mut self) -> & mut P { & mut self . process } # [doc = " Set the pty session's expect timeout."] pub fn set_expect_timeout (& mut self , expect_timeout : Option < Duration >) { self . stream . set_expect_timeout (expect_timeout) ; } # [doc = " Set a expect algorithm to be either gready or lazy."] # [doc = ""] # [doc = " Default algorithm is gready."] # [doc = ""] # [doc = " See [Session::expect]."] pub fn set_expect_lazy (& mut self , is_lazy : bool) { self . stream . expect_lazy = is_lazy ; } pub (crate) fn swap_stream < F : FnOnce (S) -> R , R > (mut self , new_stream : F ,) -> Result < Session < P , R > , Error > { let buf = self . stream . get_available () . to_owned () ; let stream = self . stream . into_inner () ; let stream = new_stream (stream) ; let mut session = Session :: new (self . process , stream) ? ; session . stream . keep (& buf) ; Ok (session) } # [doc = " Verifyes if stream is empty or not."] pub async fn is_empty (& mut self) -> io :: Result < bool > where S : AsyncRead + Unpin , { self . stream . is_empty () . await } }
+};
+}

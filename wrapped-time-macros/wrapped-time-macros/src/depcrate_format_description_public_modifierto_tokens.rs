@@ -1,0 +1,9 @@
+// Generated macro for to_tokens (macro)
+macro_rules! Depcrate_format_description_public_modifierto_tokens {
+() => {
+// Module: crate::format_description::public::modifier
+// Provides: {"to_tokens"}
+// Dependencies: {}
+macro_rules ! to_tokens { ($ (# [$ struct_attr : meta]) * $ struct_vis : vis struct $ struct_name : ident { $ ($ (# [$ field_attr : meta]) * $ field_vis : vis $ field_name : ident : $ field_ty : ty = $ default : pat) ,* $ (,) ? }) => { $ (# [$ struct_attr]) * $ struct_vis struct $ struct_name { $ ($ (# [$ field_attr]) * $ field_vis $ field_name : $ field_ty) ,* } impl ToTokenTree for $ struct_name { fn into_token_tree (self) -> TokenTree { let Self { $ ($ field_name) ,* } = self ; # [allow (clippy :: redundant_pattern_matching)] if matches ! (($ (&$ field_name ,) *) , ($ ($ default ,) *)) { return TokenTree :: Group (Group :: new (Delimiter :: None , quote_ ! { $ struct_name :: default () })) ; } let mut tokens = quote_ ! { let mut value = $ struct_name :: default () ; } ; $ (# [allow (clippy :: redundant_pattern_matching)] if ! matches ! ($ field_name , $ default) { quote_append ! (tokens value .$ field_name =) ; $ field_name . append_to (& mut tokens) ; quote_append ! (tokens ;) ; }) * quote_append ! (tokens value) ; TokenTree :: Group (Group :: new (Delimiter :: Brace , tokens ,)) } } } ; ($ (# [$ enum_attr : meta]) * $ enum_vis : vis enum $ enum_name : ident { $ ($ (# [$ variant_attr : meta]) * $ variant_name : ident) ,+ $ (,) ? }) => { $ (# [$ enum_attr]) * $ enum_vis enum $ enum_name { $ ($ (# [$ variant_attr]) * $ variant_name) ,+ } impl ToTokenStream for $ enum_name { fn append_to (self , ts : & mut TokenStream) { quote_append ! { ts $ enum_name :: } ; let name = match self { $ (Self ::$ variant_name => stringify ! ($ variant_name)) ,+ } ; ts . extend ([TokenTree :: Ident (Ident :: new (name , Span :: mixed_site ()))]) ; } } } }
+};
+}

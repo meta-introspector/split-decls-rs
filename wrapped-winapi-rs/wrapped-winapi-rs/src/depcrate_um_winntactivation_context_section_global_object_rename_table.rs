@@ -1,0 +1,9 @@
+// Generated macro for ACTIVATION_CONTEXT_SECTION_GLOBAL_OBJECT_RENAME_TABLE (const)
+macro_rules! Depcrate_um_winntACTIVATION_CONTEXT_SECTION_GLOBAL_OBJECT_RENAME_TABLE {
+() => {
+// Module: crate::um::winnt
+// Provides: {"ACTIVATION_CONTEXT_SECTION_GLOBAL_OBJECT_RENAME_TABLE"}
+// Dependencies: {}
+pub const ACTIVATION_CONTEXT_SECTION_GLOBAL_OBJECT_RENAME_TABLE : ULONG = 8 ;
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for impl_91 (impl)
+macro_rules! Depcrateimpl_91 {
+() => {
+// Module: crate
+// Provides: {"impl_91"}
+// Dependencies: {}
+impl ReprOptions { # [inline] pub fn simd (& self) -> bool { self . flags . contains (ReprFlags :: IS_SIMD) } # [inline] pub fn c (& self) -> bool { self . flags . contains (ReprFlags :: IS_C) } # [inline] pub fn packed (& self) -> bool { self . pack . is_some () } # [inline] pub fn transparent (& self) -> bool { self . flags . contains (ReprFlags :: IS_TRANSPARENT) } # [inline] pub fn linear (& self) -> bool { self . flags . contains (ReprFlags :: IS_LINEAR) } # [doc = " Returns the discriminant type, given these `repr` options."] # [doc = " This must only be called on enums!"] pub fn discr_type (& self) -> IntegerType { self . int . unwrap_or (IntegerType :: Pointer (true)) } # [doc = " Returns `true` if this `#[repr()]` should inhabit \"smart enum"] # [doc = " layout\" optimizations, such as representing `Foo<&T>` as a"] # [doc = " single pointer."] pub fn inhibit_enum_layout_opt (& self) -> bool { self . c () || self . int . is_some () } pub fn inhibit_newtype_abi_optimization (& self) -> bool { self . flags . intersects (ReprFlags :: ABI_UNOPTIMIZABLE) } # [doc = " Returns `true` if this `#[repr()]` guarantees a fixed field order,"] # [doc = " e.g. `repr(C)` or `repr(<int>)`."] pub fn inhibit_struct_field_reordering (& self) -> bool { self . flags . intersects (ReprFlags :: FIELD_ORDER_UNOPTIMIZABLE) || self . int . is_some () } # [doc = " Returns `true` if this type is valid for reordering and `-Z randomize-layout`"] # [doc = " was enabled for its declaration crate."] pub fn can_randomize_type_layout (& self) -> bool { ! self . inhibit_struct_field_reordering () && self . flags . contains (ReprFlags :: RANDOMIZE_LAYOUT) } # [doc = " Returns `true` if this `#[repr()]` should inhibit union ABI optimisations."] pub fn inhibits_union_abi_opt (& self) -> bool { self . c () } }
+};
+}

@@ -1,0 +1,61 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcratetests.rs");
+include!("depcrate_executor_futures_03use_19.rs");
+include!("depcrate_executor_futures_03impl_20.rs");
+include!("depcratemacro_27.rs");
+include!("depcrateimpl_34.rs");
+include!("depcratewithdispatch.rs");
+include!("depcrateimpl_35.rs");
+include!("depcrateimpl_40.rs");
+include!("depcrateimpl_29.rs");
+include!("depcratestdlib.rs");
+include!("depcrate_executor_futures_01impl_13.rs");
+include!("depcrateuse_7.rs");
+include!("depcrate_executor_futures_01use_12.rs");
+include!("depcrate_executor_futures_03impl_23.rs");
+include!("depcrate_executoruse_24.rs");
+include!("depcrateimpl_36.rs");
+include!("depcrate_stdlibuse_3.rs");
+include!("depcrateimpl_38.rs");
+include!("depcrateimpl_39.rs");
+include!("depcrate_executorfutures_03.rs");
+include!("depcratewithsubscriber.rs");
+include!("depcrateimpl_43.rs");
+include!("depcrateuse_1.rs");
+include!("depcrate_executor_futures_01use_15.rs");
+include!("depcrateimpl_41.rs");
+include!("depcrateuse_8.rs");
+include!("depcrate_stdlibno_std.rs");
+include!("depcrateinstrumented.rs");
+include!("depcrateimpl_42.rs");
+include!("depcrateimpl_37.rs");
+include!("depcrate_executor_futures_03use_18.rs");
+include!("depcrateexecutor.rs");
+include!("depcrateuse_6.rs");
+include!("depcrate_executorfutures_01.rs");
+include!("depcrateimpl_28.rs");
+include!("depcrate_executor_futures_03impl_22.rs");
+include!("depcrateimpl_44.rs");
+include!("depcrate_executor_futures_01impl_14.rs");
+include!("depcrate_executor_futures_01tokio.rs");
+include!("depcrate_executor_futures_03impl_21.rs");
+include!("depcrate_stdlibuse_4.rs");
+include!("depcrateimpl_33.rs");
+include!("depcrateinstrument.rs");
+include!("depcrate_executor_futures_01use_11.rs");
+include!("depcratemacro_31.rs");
+include!("modcrate_executor_futures_01.rs");
+include!("modcrate.rs");
+include!("modcrate_executor_futures_03.rs");
+include!("modcrate_executor.rs");
+include!("modcrate_stdlib.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate_executor_futures_01!();
+    Modcrate!();
+    Modcrate_executor_futures_03!();
+    Modcrate_executor!();
+    Modcrate_stdlib!();
+}

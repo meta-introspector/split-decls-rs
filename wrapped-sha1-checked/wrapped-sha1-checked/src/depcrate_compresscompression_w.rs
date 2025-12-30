@@ -1,0 +1,9 @@
+// Generated macro for compression_w (function)
+macro_rules! Depcrate_compresscompression_w {
+() => {
+// Module: crate::compress
+// Provides: {"compression_w"}
+// Dependencies: {}
+fn compression_w (ihv : & mut [u32 ; 5] , w : & [u32 ; 80]) { let & mut [mut a , mut b , mut c , mut d , mut e] = ihv ; round1_step4 (& mut a , & mut b , & mut c , & mut d , & mut e , w , 0) ; round1_step4 (& mut b , & mut c , & mut d , & mut e , & mut a , w , 4) ; round1_step4 (& mut c , & mut d , & mut e , & mut a , & mut b , w , 8) ; round1_step4 (& mut d , & mut e , & mut a , & mut b , & mut c , w , 12) ; round1_step4 (& mut e , & mut a , & mut b , & mut c , & mut d , w , 16) ; round2_step4 (& mut a , & mut b , & mut c , & mut d , & mut e , w , 20) ; round2_step4 (& mut b , & mut c , & mut d , & mut e , & mut a , w , 24) ; round2_step4 (& mut c , & mut d , & mut e , & mut a , & mut b , w , 28) ; round2_step4 (& mut d , & mut e , & mut a , & mut b , & mut c , w , 32) ; round2_step4 (& mut e , & mut a , & mut b , & mut c , & mut d , w , 36) ; round3_step4 (& mut a , & mut b , & mut c , & mut d , & mut e , w , 40) ; round3_step4 (& mut b , & mut c , & mut d , & mut e , & mut a , w , 44) ; round3_step4 (& mut c , & mut d , & mut e , & mut a , & mut b , w , 48) ; round3_step4 (& mut d , & mut e , & mut a , & mut b , & mut c , w , 52) ; round3_step4 (& mut e , & mut a , & mut b , & mut c , & mut d , w , 56) ; round4_step4 (& mut a , & mut b , & mut c , & mut d , & mut e , w , 60) ; round4_step4 (& mut b , & mut c , & mut d , & mut e , & mut a , w , 64) ; round4_step4 (& mut c , & mut d , & mut e , & mut a , & mut b , w , 68) ; round4_step4 (& mut d , & mut e , & mut a , & mut b , & mut c , w , 72) ; round4_step4 (& mut e , & mut a , & mut b , & mut c , & mut d , w , 76) ; add_assign (ihv , [a , b , c , d , e]) ; }
+};
+}

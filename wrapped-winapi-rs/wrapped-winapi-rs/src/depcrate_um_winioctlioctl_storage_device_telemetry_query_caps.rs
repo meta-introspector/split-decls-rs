@@ -1,0 +1,9 @@
+// Generated macro for IOCTL_STORAGE_DEVICE_TELEMETRY_QUERY_CAPS (const)
+macro_rules! Depcrate_um_winioctlIOCTL_STORAGE_DEVICE_TELEMETRY_QUERY_CAPS {
+() => {
+// Module: crate::um::winioctl
+// Provides: {"IOCTL_STORAGE_DEVICE_TELEMETRY_QUERY_CAPS"}
+// Dependencies: {}
+pub const IOCTL_STORAGE_DEVICE_TELEMETRY_QUERY_CAPS : DWORD = CTL_CODE ! (IOCTL_STORAGE_BASE , 0x0472 , METHOD_BUFFERED , FILE_READ_ACCESS | FILE_WRITE_ACCESS) ;
+};
+}

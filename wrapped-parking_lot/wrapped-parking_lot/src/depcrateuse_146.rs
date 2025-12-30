@@ -4,6 +4,6 @@ macro_rules! Depcrateuse_146 {
 // Module: crate
 // Provides: {"use_146"}
 // Dependencies: {}
-pub use self :: raw_mutex :: RawMutex ;
+pub use self :: remutex :: { const_reentrant_mutex , MappedReentrantMutexGuard , RawThreadId , ReentrantMutex , ReentrantMutexGuard , } ;
 };
 }

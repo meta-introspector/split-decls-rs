@@ -1,0 +1,42 @@
+// Generated module macro for crate::stm32f405::sdio
+macro_rules! Modcrate_stm32f405_sdio {
+() => {
+        Depcrate_stm32f405_sdioRegisterBlock!();
+        Depcrate_stm32f405_sdioPOWER!();
+        Depcrate_stm32f405_sdiopower!();
+        Depcrate_stm32f405_sdioCLKCR!();
+        Depcrate_stm32f405_sdioclkcr!();
+        Depcrate_stm32f405_sdioARG!();
+        Depcrate_stm32f405_sdioarg!();
+        Depcrate_stm32f405_sdioCMD!();
+        Depcrate_stm32f405_sdiocmd!();
+        Depcrate_stm32f405_sdioRESPCMD!();
+        Depcrate_stm32f405_sdiorespcmd!();
+        Depcrate_stm32f405_sdioRESP1!();
+        Depcrate_stm32f405_sdioresp1!();
+        Depcrate_stm32f405_sdioRESP2!();
+        Depcrate_stm32f405_sdioresp2!();
+        Depcrate_stm32f405_sdioRESP3!();
+        Depcrate_stm32f405_sdioresp3!();
+        Depcrate_stm32f405_sdioRESP4!();
+        Depcrate_stm32f405_sdioresp4!();
+        Depcrate_stm32f405_sdioDTIMER!();
+        Depcrate_stm32f405_sdiodtimer!();
+        Depcrate_stm32f405_sdioDLEN!();
+        Depcrate_stm32f405_sdiodlen!();
+        Depcrate_stm32f405_sdioDCTRL!();
+        Depcrate_stm32f405_sdiodctrl!();
+        Depcrate_stm32f405_sdioDCOUNT!();
+        Depcrate_stm32f405_sdiodcount!();
+        Depcrate_stm32f405_sdioSTA!();
+        Depcrate_stm32f405_sdiosta!();
+        Depcrate_stm32f405_sdioICR!();
+        Depcrate_stm32f405_sdioicr!();
+        Depcrate_stm32f405_sdioMASK!();
+        Depcrate_stm32f405_sdiomask!();
+        Depcrate_stm32f405_sdioFIFOCNT!();
+        Depcrate_stm32f405_sdiofifocnt!();
+        Depcrate_stm32f405_sdioFIFO!();
+        Depcrate_stm32f405_sdiofifo!();
+    };
+}

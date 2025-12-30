@@ -1,0 +1,9 @@
+// Generated macro for dbghelp (macro)
+macro_rules! Depcrate_dbghelpdbghelp {
+() => {
+// Module: crate::dbghelp
+// Provides: {"dbghelp"}
+// Dependencies: {}
+macro_rules ! dbghelp { (extern "system" { $ (fn $ name : ident ($ ($ arg : ident : $ argty : ty) ,*) -> $ ret : ty ;) * }) => (pub struct Dbghelp { # [doc = " The loaded DLL for `dbghelp.dll`"] dll : HINSTANCE , $ ($ name : usize ,) * } static mut DBGHELP : Dbghelp = Dbghelp { dll : ptr :: null_mut () , $ ($ name : 0 ,) * } ; $ (pub type $ name = unsafe extern "system" fn ($ ($ argty) ,*) -> $ ret ;) * impl Dbghelp { # [doc = " Attempts to open `dbghelp.dll`. Returns success if it works or"] # [doc = " error if `LoadLibraryW` fails."] fn ensure_open (& mut self) -> Result < () , () > { if ! self . dll . is_null () { return Ok (()) } let lib = b"dbghelp.dll\0" ; unsafe { self . dll = LoadLibraryA (lib . as_ptr ()) ; if self . dll . is_null () { Err (()) } else { Ok (()) } } } $ (pub fn $ name (& mut self) -> Option <$ name > { cfg_if :: cfg_if ! { if # [cfg (any (target_arch = "x86" , not (windows_raw_dylib)))] { let _ : unsafe extern "system" fn ($ ($ argty) ,*) -> $ ret = super :: windows_sys ::$ name ; } else { let _ : unsafe extern "C" fn ($ ($ argty) ,*) -> $ ret = super :: windows_sys ::$ name ; } } unsafe { if self .$ name == 0 { let name = concat ! (stringify ! ($ name) , "\0") ; self .$ name = self . symbol (name . as_bytes ()) ?; } Some (mem :: transmute ::< usize , $ name > (self .$ name)) } }) * fn symbol (& self , symbol : & [u8]) -> Option < usize > { unsafe { GetProcAddress (self . dll , symbol . as_ptr ()) . map (| address | address as usize) } } } # [allow (dead_code)] impl Init { $ (pub fn $ name (& self) -> $ name { # [allow (static_mut_refs)] unsafe { DBGHELP .$ name () . unwrap () } }) * pub fn dbghelp (& self) -> * mut Dbghelp { # [allow (unused_unsafe)] unsafe { ptr :: addr_of_mut ! (DBGHELP) } } }) }
+};
+}

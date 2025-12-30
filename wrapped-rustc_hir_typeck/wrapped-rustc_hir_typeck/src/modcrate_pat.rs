@@ -1,0 +1,51 @@
+// Generated module macro for crate::pat
+macro_rules! Modcrate_pat {
+() => {
+        Depcrate_patuse_883!();
+        Depcrate_patuse_884!();
+        Depcrate_patuse_885!();
+        Depcrate_patuse_886!();
+        Depcrate_patuse_887!();
+        Depcrate_patuse_888!();
+        Depcrate_patuse_889!();
+        Depcrate_patuse_890!();
+        Depcrate_patuse_891!();
+        Depcrate_patuse_892!();
+        Depcrate_patuse_893!();
+        Depcrate_patuse_894!();
+        Depcrate_patuse_895!();
+        Depcrate_patuse_896!();
+        Depcrate_patuse_897!();
+        Depcrate_patuse_898!();
+        Depcrate_patuse_899!();
+        Depcrate_patuse_900!();
+        Depcrate_patuse_901!();
+        Depcrate_patuse_902!();
+        Depcrate_patuse_903!();
+        Depcrate_patuse_904!();
+        Depcrate_patuse_905!();
+        Depcrate_patuse_906!();
+        Depcrate_patuse_907!();
+        Depcrate_patuse_908!();
+        Depcrate_patuse_909!();
+        Depcrate_patuse_910!();
+        Depcrate_patuse_911!();
+        Depcrate_patuse_912!();
+        Depcrate_patuse_913!();
+        Depcrate_patCANNOT_IMPLICITLY_DEREF_POINTER_TRAIT_OBJ!();
+        Depcrate_patis_number!();
+        Depcrate_patTopInfo!();
+        Depcrate_patPatInfo!();
+        Depcrate_patimpl_918!();
+        Depcrate_patAdjustMode!();
+        Depcrate_patPeelKind!();
+        Depcrate_patimpl_921!();
+        Depcrate_patMutblCap!();
+        Depcrate_patimpl_923!();
+        Depcrate_patInheritedRefMatchRule!();
+        Depcrate_patResolvedPat!();
+        Depcrate_patResolvedPatKind!();
+        Depcrate_patimpl_927!();
+        Depcrate_patimpl_928!();
+    };
+}

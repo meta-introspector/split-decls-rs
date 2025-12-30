@@ -1,0 +1,9 @@
+// Generated macro for macro_28267 (macro)
+macro_rules! Depcrate_um_dxva2apimacro_28267 {
+() => {
+// Module: crate::um::dxva2api
+// Provides: {"macro_28267"}
+// Dependencies: {}
+RIDL ! { # [uuid (0xfc51a552 , 0xd5e7 , 0x11d9 , 0xaf , 0x55 , 0x00 , 0x05 , 0x4e , 0x43 , 0xff , 0x02)] interface IDirectXVideoProcessorService (IDirectXVideoProcessorServiceVtbl) : IDirectXVideoAccelerationService (IDirectXVideoAccelerationServiceVtbl) { fn RegisterVideoProcessorSoftwareDevice (pCallbacks : * mut c_void ,) -> HRESULT , fn GetVideoProcessorDeviceGuids (pVideoDesc : * mut DXVA2_VideoDesc , pCount : * mut UINT , pGuids : * mut * mut GUID ,) -> HRESULT , fn GetVideoProcessorRenderTargets (VideoProcDeviceGuid : REFGUID , pVideoDesc : * const DXVA2_VideoDesc , pCount : * mut UINT , pFormats : * mut * mut D3DFORMAT ,) -> HRESULT , fn GetVideoProcessorSubStreamFormats (VideoProcDeviceGuid : REFGUID , pVideoDesc : * const DXVA2_VideoDesc , RenderTargetFormat : D3DFORMAT , pCount : * mut UINT , pFormats : * mut * mut D3DFORMAT ,) -> HRESULT , fn GetVideoProcessorCaps (VideoProcDeviceGuid : REFGUID , pVideoDesc : * const DXVA2_VideoDesc , RenderTargetFormat : D3DFORMAT , pCaps : * mut DXVA2_VideoProcessorCaps ,) -> HRESULT , fn GetProcAmpRange (VideoProcDeviceGuid : REFGUID , pVideoDesc : * const DXVA2_VideoDesc , RenderTargetFormat : D3DFORMAT , ProcAmpCap : UINT , pRange : * mut DXVA2_ValueRange ,) -> HRESULT , fn GetFilterPropertyRange (VideoProcDeviceGuid : REFGUID , pVideoDesc : * const DXVA2_VideoDesc , RenderTargetFormat : D3DFORMAT , FilterSetting : UINT , pRange : * mut DXVA2_ValueRange ,) -> HRESULT , fn CreateVideoProcessor (VideoProcDeviceGuid : REFGUID , pVideoDesc : * const DXVA2_VideoDesc , RenderTargetFormat : D3DFORMAT , MaxNumSubStreams : UINT , ppVidProcess : * mut * mut IDirectXVideoProcessor ,) -> HRESULT , } }
+};
+}

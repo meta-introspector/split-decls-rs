@@ -1,0 +1,9 @@
+// Generated macro for macro_25028 (macro)
+macro_rules! Depcrate_um_d3d11macro_25028 {
+() => {
+// Module: crate::um::d3d11
+// Provides: {"macro_25028"}
+// Dependencies: {}
+ENUM ! { enum D3D11_CONSERVATIVE_RASTERIZATION_TIER { D3D11_CONSERVATIVE_RASTERIZATION_NOT_SUPPORTED = 0 , D3D11_CONSERVATIVE_RASTERIZATION_TIER_1 = 1 , D3D11_CONSERVATIVE_RASTERIZATION_TIER_2 = 2 , D3D11_CONSERVATIVE_RASTERIZATION_TIER_3 = 3 , } }
+};
+}

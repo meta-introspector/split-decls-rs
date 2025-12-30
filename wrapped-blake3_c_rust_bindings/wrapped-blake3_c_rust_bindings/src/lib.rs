@@ -1,0 +1,63 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcrate_testcompressxoffn.rs");
+include!("depcrateout_len.rs");
+include!("depcrate_testtest_cases.rs");
+include!("depcrate_testtest_xof_many_fn.rs");
+include!("depcrate_testuse_4.rs");
+include!("depcrate_testtest_compress_sse2.rs");
+include!("depcrateuse_2.rs");
+include!("depcrate_testtest_compress_sse41.rs");
+include!("depcrate_testhashmanyfn.rs");
+include!("depcrate_testtest_compare_reference_impl.rs");
+include!("depcrate_testtest_hash_many_avx512.rs");
+include!("depcrate_testreference_hash.rs");
+include!("depcrate_testtest_hash_many_portable.rs");
+include!("depcrate_testtest_hash_many_fn.rs");
+include!("depcrate_testtest_reset.rs");
+include!("depcrateblock_len.rs");
+include!("depcrateimpl_52.rs");
+include!("depcratesse41_detected.rs");
+include!("depcrate_testuse_7.rs");
+include!("depcrateuse_1.rs");
+include!("depcrate_testtest_compress_fn.rs");
+include!("depcrate_testtest_key.rs");
+include!("depcratesse2_detected.rs");
+include!("depcrate_testtest_hash_many_sse2.rs");
+include!("depcrateavx2_detected.rs");
+include!("depcrateavx512_detected.rs");
+include!("depcrate_testuse_5.rs");
+include!("depcrate_testroot.rs");
+include!("depcrate_testtest_compress_avx512.rs");
+include!("depcrate_testtest_finalize_seek.rs");
+include!("depcrate_testcompressinplacefn.rs");
+include!("depcrate_testuse_8.rs");
+include!("depcrate_testle_bytes_from_words_32.rs");
+include!("depcratechunk_len.rs");
+include!("depcrate_testtest_compare_update_multiple.rs");
+include!("depcratehasher.rs");
+include!("depcrate_testchunk_start.rs");
+include!("depcrate_testtest_key_words.rs");
+include!("depcrate_testpaint_test_input.rs");
+include!("depcrate_testtest_hash_many_neon.rs");
+include!("depcrate_testtest_cases_max.rs");
+include!("depcrate_testtest_xof_many_avx512.rs");
+include!("depcratetest.rs");
+include!("depcrate_testuse_6.rs");
+include!("depcrateffi.rs");
+include!("depcrate_testtest_hash_many_avx2.rs");
+include!("depcrate_testkeyed_hash.rs");
+include!("depcrate_testtest_compress_portable.rs");
+include!("depcrate_testparent.rs");
+include!("depcrate_testtest_fuzz_hasher.rs");
+include!("depcrate_testchunk_end.rs");
+include!("depcrate_testxofmanyfunction.rs");
+include!("depcrate_testtest_hash_many_sse41.rs");
+include!("modcrate_test.rs");
+include!("modcrate.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate_test!();
+    Modcrate!();
+}

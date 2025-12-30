@@ -1,0 +1,9 @@
+// Generated macro for check_error_span_exclusive (function)
+macro_rules! Depcrate_util_span_substringcheck_error_span_exclusive {
+() => {
+// Module: crate::util::span_substring
+// Provides: {"check_error_span_exclusive"}
+// Dependencies: {}
+# [doc = " Given a string `ron`, a [`SpannedResult`], and a substring, verify that trying to parse `ron` results in an error"] # [doc = " equal to the [`SpannedResult`] with a Span that exclusively (as in `[start..end]`) selects that substring."] # [doc = " Note that there are two versions of this helper, inclusive and exclusive. This is because while the parser cursor"] # [doc = " arithmetic that computes span positions always produces exclusive spans (as in `[start..end]`),"] # [doc = " when doing validation against a target substring, the inclusive check including the final grapheme that triggered"] # [doc = " the error is often a more intuitive target to check against."] # [doc = " Meanwhile, if the parser threw an EOF, for example, there is no final grapheme to check, and so"] # [doc = " only the exclusive check would produce a meaningful result."] # [allow (clippy :: unwrap_used)] # [allow (clippy :: missing_panics_doc)] pub fn check_error_span_exclusive < T : serde :: de :: DeserializeOwned + PartialEq + core :: fmt :: Debug > (ron : & str , check : SpannedResult < T > , substr : & str ,) { let res_str = crate :: de :: from_str :: < T > (ron) ; assert_eq ! (res_str , check) ; let res_bytes = crate :: de :: from_bytes :: < T > (ron . as_bytes ()) ; assert_eq ! (res_bytes , check) ; # [cfg (feature = "std")] { let res_reader = crate :: de :: from_reader :: < & [u8] , T > (ron . as_bytes ()) ; assert_eq ! (res_reader , check) ; } assert_eq ! (check . unwrap_err () . span . substring_exclusive (ron) . unwrap () , substr) ; }
+};
+}

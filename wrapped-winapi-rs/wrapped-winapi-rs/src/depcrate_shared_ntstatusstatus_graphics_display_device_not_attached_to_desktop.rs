@@ -1,0 +1,9 @@
+// Generated macro for STATUS_GRAPHICS_DISPLAY_DEVICE_NOT_ATTACHED_TO_DESKTOP (const)
+macro_rules! Depcrate_shared_ntstatusSTATUS_GRAPHICS_DISPLAY_DEVICE_NOT_ATTACHED_TO_DESKTOP {
+() => {
+// Module: crate::shared::ntstatus
+// Provides: {"STATUS_GRAPHICS_DISPLAY_DEVICE_NOT_ATTACHED_TO_DESKTOP"}
+// Dependencies: {}
+pub const STATUS_GRAPHICS_DISPLAY_DEVICE_NOT_ATTACHED_TO_DESKTOP : NTSTATUS = 0xC01E05E2 ;
+};
+}

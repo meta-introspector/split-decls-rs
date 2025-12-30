@@ -1,0 +1,9 @@
+// Generated macro for EpollEventInterest (struct)
+macro_rules! Depcrate_shims_unix_linux_like_epollEpollEventInterest {
+() => {
+// Module: crate::shims::unix::linux_like::epoll
+// Provides: {"EpollEventInterest"}
+// Dependencies: {}
+# [doc = " EpollEventInterest registers the file description information to an epoll"] # [doc = " instance during a successful `epoll_ctl` call. It also stores additional"] # [doc = " information needed to check and update readiness state for `epoll_wait`."] # [doc = ""] # [doc = " `events` and `data` field matches the `epoll_event` struct defined"] # [doc = " by the epoll_ctl man page. For more information"] # [doc = " see the man page:"] # [doc = ""] # [doc = " <https://man7.org/linux/man-pages/man2/epoll_ctl.2.html>"] # [derive (Debug)] pub struct EpollEventInterest { # [doc = " The file descriptor value of the file description registered."] # [doc = " This is only used for ready_list, to inform userspace which FD triggered an event."] # [doc = " For that, it is crucial to preserve the original FD number."] # [doc = " This FD number must never be \"dereferenced\" to a file description inside Miri."] fd_num : i32 , # [doc = " The events bitmask retrieved from `epoll_event`."] events : u32 , # [doc = " The data retrieved from `epoll_event`."] # [doc = " libc's data field in epoll_event can store integer or pointer,"] # [doc = " but only u64 is supported for now."] # [doc = " <https://man7.org/linux/man-pages/man3/epoll_event.3type.html>"] data : u64 , # [doc = " The epoll file description that this EpollEventInterest is registered under."] # [doc = " This is weak to avoid cycles, but an upgrade is always guaranteed to succeed"] # [doc = " because only the `Epoll` holds a strong ref to a `EpollEventInterest`."] weak_epfd : WeakFileDescriptionRef < Epoll > , }
+};
+}

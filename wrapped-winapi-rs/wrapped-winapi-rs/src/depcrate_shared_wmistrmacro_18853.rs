@@ -1,0 +1,9 @@
+// Generated macro for macro_18853 (macro)
+macro_rules! Depcrate_shared_wmistrmacro_18853 {
+() => {
+// Module: crate::shared::wmistr
+// Provides: {"macro_18853"}
+// Dependencies: {}
+ENUM ! { enum WMIDPREQUESTCODE { WMI_GET_ALL_DATA = 0 , WMI_GET_SINGLE_INSTANCE = 1 , WMI_SET_SINGLE_INSTANCE = 2 , WMI_SET_SINGLE_ITEM = 3 , WMI_ENABLE_EVENTS = 4 , WMI_DISABLE_EVENTS = 5 , WMI_ENABLE_COLLECTION = 6 , WMI_DISABLE_COLLECTION = 7 , WMI_REGINFO = 8 , WMI_EXECUTE_METHOD = 9 , WMI_CAPTURE_STATE = 10 , } }
+};
+}

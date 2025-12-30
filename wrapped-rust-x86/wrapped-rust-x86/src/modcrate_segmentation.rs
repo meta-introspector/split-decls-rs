@@ -1,0 +1,45 @@
+// Generated module macro for crate::segmentation
+macro_rules! Modcrate_segmentation {
+() => {
+        Depcrate_segmentationuse_1698!();
+        Depcrate_segmentationuse_1699!();
+        Depcrate_segmentationuse_1700!();
+        Depcrate_segmentationuse_1701!();
+        Depcrate_segmentationmacro_1702!();
+        Depcrate_segmentationimpl_1703!();
+        Depcrate_segmentationimpl_1704!();
+        Depcrate_segmentationSystemDescriptorTypes64!();
+        Depcrate_segmentationSystemDescriptorTypes32!();
+        Depcrate_segmentationDataSegmentType!();
+        Depcrate_segmentationCodeSegmentType!();
+        Depcrate_segmentationDescriptorType!();
+        Depcrate_segmentationGateDescriptorBuilder!();
+        Depcrate_segmentationTaskGateDescriptorBuilder!();
+        Depcrate_segmentationSegmentDescriptorBuilder!();
+        Depcrate_segmentationLdtDescriptorBuilder!();
+        Depcrate_segmentationBuildDescriptor!();
+        Depcrate_segmentationDescriptorBuilder!();
+        Depcrate_segmentationimpl_1716!();
+        Depcrate_segmentationimpl_1717!();
+        Depcrate_segmentationimpl_1718!();
+        Depcrate_segmentationimpl_1719!();
+        Depcrate_segmentationimpl_1720!();
+        Depcrate_segmentationimpl_1721!();
+        Depcrate_segmentationDescriptor!();
+        Depcrate_segmentationimpl_1723!();
+        Depcrate_segmentationimpl_1724!();
+        Depcrate_segmentationload_ss!();
+        Depcrate_segmentationload_ds!();
+        Depcrate_segmentationload_es!();
+        Depcrate_segmentationload_fs!();
+        Depcrate_segmentationload_gs!();
+        Depcrate_segmentationuse_1730!();
+        Depcrate_segmentationcs!();
+        Depcrate_segmentationes!();
+        Depcrate_segmentationss!();
+        Depcrate_segmentationds!();
+        Depcrate_segmentationfs!();
+        Depcrate_segmentationgs!();
+        Depcrate_segmentationtest!();
+    };
+}

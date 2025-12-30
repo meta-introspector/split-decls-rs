@@ -1,0 +1,9 @@
+// Generated macro for impl_340 (impl)
+macro_rules! Depcrate_os_macos_code_signingimpl_340 {
+() => {
+// Module: crate::os::macos::code_signing
+// Provides: {"impl_340"}
+// Dependencies: {}
+impl SecCode { # [doc = " Retrieves the code object for the code making the call."] pub fn for_self (flags : Flags) -> Result < Self > { let mut code = MaybeUninit :: uninit () ; unsafe { cvt (SecCodeCopySelf (flags . bits () , code . as_mut_ptr ())) ? ; Ok (Self :: wrap_under_create_rule (code . assume_init ())) } } # [doc = " Performs dynamic validation of signed code."] pub fn check_validity (& self , flags : Flags , requirement : & SecRequirement) -> Result < () > { unsafe { cvt (SecCodeCheckValidity (self . as_concrete_TypeRef () , flags . bits () , requirement . as_concrete_TypeRef () ,)) } } # [doc = " Asks a code host to identify one of its guests given"] # [doc = " the type and value of specific attributes of the guest code."] # [doc = ""] # [doc = " If `host` is `None` then the code signing root of trust (currently, the"] pub fn copy_guest_with_attribues (host : Option < & Self > , attrs : & GuestAttributes , flags : Flags ,) -> Result < Self > { let mut code = MaybeUninit :: uninit () ; let host = match host { Some (host) => host . as_concrete_TypeRef () , None => std :: ptr :: null_mut () , } ; unsafe { cvt (SecCodeCopyGuestWithAttributes (host , attrs . inner . as_concrete_TypeRef () , flags . bits () , code . as_mut_ptr () ,)) ? ; Ok (Self :: wrap_under_create_rule (code . assume_init ())) } } # [doc = " Retrieves the location on disk of signed code, given a code or static"] # [doc = " code object."] pub fn path (& self , flags : Flags) -> Result < CFURL > { let mut url = MaybeUninit :: uninit () ; unsafe { cvt (SecCodeCopyPath (self . as_CFTypeRef () as _ , flags . bits () , url . as_mut_ptr () ,)) ? ; Ok (CFURL :: wrap_under_create_rule (url . assume_init ())) } } }
+};
+}

@@ -1,0 +1,51 @@
+// Generated module macro for crate::repository
+macro_rules! Modcrate_repository {
+() => {
+        Depcrate_repositoryuse_286!();
+        Depcrate_repositoryuse_287!();
+        Depcrate_repositoryuse_288!();
+        Depcrate_repositoryuse_289!();
+        Depcrate_repositoryarchive!();
+        Depcrate_repositorybranch!();
+        Depcrate_repositorycat!();
+        Depcrate_repositoryuse_308!();
+        Depcrate_repositoryblame!();
+        Depcrate_repositorycommit!();
+        Depcrate_repositoryconfig!();
+        Depcrate_repositorycredential!();
+        Depcrate_repositoryuse_333!();
+        Depcrate_repositoryattributes!();
+        Depcrate_repositoryclean!();
+        Depcrate_repositorydiff!();
+        Depcrate_repositorydirty!();
+        Depcrate_repositoryuse_367!();
+        Depcrate_repositoryclone!();
+        Depcrate_repositoryexclude!();
+        Depcrate_repositoryfetch!();
+        Depcrate_repositoryuse_387!();
+        Depcrate_repositoryuse_388!();
+        Depcrate_repositorycommitgraph!();
+        Depcrate_repositoryfsck!();
+        Depcrate_repositoryuse_402!();
+        Depcrate_repositoryindex!();
+        Depcrate_repositorylog!();
+        Depcrate_repositorymailmap!();
+        Depcrate_repositorymerge_base!();
+        Depcrate_repositoryuse_434!();
+        Depcrate_repositorymerge!();
+        Depcrate_repositoryodb!();
+        Depcrate_repositoryremote!();
+        Depcrate_repositoryrevision!();
+        Depcrate_repositorystatus!();
+        Depcrate_repositorysubmodule!();
+        Depcrate_repositorytag!();
+        Depcrate_repositorytree!();
+        Depcrate_repositoryverify!();
+        Depcrate_repositoryworktree!();
+        Depcrate_repositoryinit!();
+        Depcrate_repositoryPathsOrPatterns!();
+        Depcrate_repositoryHexId!();
+        Depcrate_repositoryimpl_553!();
+        Depcrate_repositoryimpl_554!();
+    };
+}

@@ -1,0 +1,50 @@
+// Generated module macro for crate::options::config
+macro_rules! Modcrate_options_config {
+() => {
+        Depcrate_options_configuse_460!();
+        Depcrate_options_configuse_461!();
+        Depcrate_options_configuse_462!();
+        Depcrate_options_configuse_463!();
+        Depcrate_options_configuse_464!();
+        Depcrate_options_configuse_465!();
+        Depcrate_options_configuse_466!();
+        Depcrate_options_configThemeConfig!();
+        Depcrate_options_configimpl_468!();
+        Depcrate_options_configFromOverride!();
+        Depcrate_options_configimpl_470!();
+        Depcrate_options_configcolor_from_str!();
+        Depcrate_options_configdeserialize_color!();
+        Depcrate_options_configStyleOverride!();
+        Depcrate_options_configimpl_474!();
+        Depcrate_options_configIconStyleOverride!();
+        Depcrate_options_configimpl_476!();
+        Depcrate_options_configimpl_477!();
+        Depcrate_options_configFileNameStyleOverride!();
+        Depcrate_options_configimpl_479!();
+        Depcrate_options_configimpl_480!();
+        Depcrate_options_configFileKindsOverride!();
+        Depcrate_options_configimpl_482!();
+        Depcrate_options_configPermissionsOverride!();
+        Depcrate_options_configimpl_484!();
+        Depcrate_options_configSizeOverride!();
+        Depcrate_options_configimpl_486!();
+        Depcrate_options_configUsersOverride!();
+        Depcrate_options_configimpl_488!();
+        Depcrate_options_configLinksOverride!();
+        Depcrate_options_configimpl_490!();
+        Depcrate_options_configGitOverride!();
+        Depcrate_options_configimpl_492!();
+        Depcrate_options_configGitRepoOverride!();
+        Depcrate_options_configimpl_494!();
+        Depcrate_options_configSELinuxContextOverride!();
+        Depcrate_options_configimpl_496!();
+        Depcrate_options_configSecurityContextOverride!();
+        Depcrate_options_configimpl_498!();
+        Depcrate_options_configFileTypeOverride!();
+        Depcrate_options_configimpl_500!();
+        Depcrate_options_configUiStylesOverride!();
+        Depcrate_options_configimpl_502!();
+        Depcrate_options_configimpl_503!();
+        Depcrate_options_configtests!();
+    };
+}

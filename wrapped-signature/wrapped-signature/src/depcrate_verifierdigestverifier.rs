@@ -1,0 +1,9 @@
+// Generated macro for DigestVerifier (trait)
+macro_rules! Depcrate_verifierDigestVerifier {
+() => {
+// Module: crate::verifier
+// Provides: {"DigestVerifier"}
+// Dependencies: {}
+# [doc = " Verify the provided signature for the given prehashed message `Digest`"] # [doc = " is authentic."] # [doc = ""] # [doc = " ## Notes"] # [doc = ""] # [doc = " This trait is primarily intended for signature algorithms based on the"] # [doc = " [Fiat-Shamir heuristic], a method for converting an interactive"] # [doc = " challenge/response-based proof-of-knowledge protocol into an offline"] # [doc = " digital signature through the use of a random oracle, i.e. a digest"] # [doc = " function."] # [doc = ""] # [doc = " The security of such protocols critically rests upon the inability of"] # [doc = " an attacker to solve for the output of the random oracle, as generally"] # [doc = " otherwise such signature algorithms are a system of linear equations and"] # [doc = " therefore doing so would allow the attacker to trivially forge signatures."] # [doc = ""] # [doc = " To prevent misuse which would potentially allow this to be possible, this"] # [doc = " API accepts a message by updating the received `Digest` with it, rather"] # [doc = " than a raw digest value."] # [doc = ""] # [doc = " [Fiat-Shamir heuristic]: https://en.wikipedia.org/wiki/Fiat%E2%80%93Shamir_heuristic"] # [cfg (feature = "digest")] pub trait DigestVerifier < D : Update , S > { # [doc = " Verify the signature against the received `Digest` output,"] # [doc = " by updating it with the message."] # [doc = ""] # [doc = " The given function can be invoked multiple times. It is expected that"] # [doc = " in each invocation the `Digest` is updated with the entire equal message."] fn verify_digest < F : Fn (& mut D) -> Result < () , Error > > (& self , f : F , signature : & S ,) -> Result < () , Error > ; }
+};
+}

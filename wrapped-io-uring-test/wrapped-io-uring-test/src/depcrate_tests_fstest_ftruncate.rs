@@ -1,0 +1,9 @@
+// Generated macro for test_ftruncate (function)
+macro_rules! Depcrate_tests_fstest_ftruncate {
+() => {
+// Module: crate::tests::fs
+// Provides: {"test_ftruncate"}
+// Dependencies: {}
+pub fn test_ftruncate < S : squeue :: EntryMarker , C : cqueue :: EntryMarker > (ring : & mut IoUring < S , C > , test : & Test ,) -> anyhow :: Result < () > { require ! (test ; test . probe . is_supported (opcode :: Ftruncate :: CODE) ;) ; println ! ("test ftruncate") ; let dir = tempfile :: TempDir :: new_in (".") ? ; let dir = dir . path () ; let file = dir . join ("io-uring-test-file-input") ; let input = & [0x9f ; 1024] ; fs :: write (& file , input) ? ; let fd = fs :: OpenOptions :: new () . write (true) . open (& file) ? ; let fd = types :: Fd (fd . as_raw_fd ()) ; let ftruncate_e = opcode :: Ftruncate :: new (fd , 512) ; unsafe { ring . submission () . push (& ftruncate_e . build () . user_data (0x33) . into ()) . expect ("queue is full") ; } ring . submit_and_wait (1) ? ; let cqes : Vec < cqueue :: Entry > = ring . completion () . map (Into :: into) . collect () ; assert_eq ! (cqes . len () , 1) ; assert_eq ! (cqes [0] . user_data () , 0x33) ; assert_eq ! (cqes [0] . result () , 0) ; assert_eq ! (fs :: read (& file) . expect ("could not read truncated file") , & input [.. 512]) ; let ftruncate_e = opcode :: Ftruncate :: new (fd , 0) ; unsafe { ring . submission () . push (& ftruncate_e . build () . user_data (0x34) . into ()) . expect ("queue is full") ; } ring . submit_and_wait (1) ? ; let cqes : Vec < cqueue :: Entry > = ring . completion () . map (Into :: into) . collect () ; assert_eq ! (cqes . len () , 1) ; assert_eq ! (cqes [0] . user_data () , 0x34) ; assert_eq ! (cqes [0] . result () , 0) ; assert_eq ! (fs :: metadata (& file) . expect ("could not read truncated file") . len () , 0) ; Ok (()) }
+};
+}

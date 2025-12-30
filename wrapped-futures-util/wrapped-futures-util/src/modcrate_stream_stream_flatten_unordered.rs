@@ -1,0 +1,43 @@
+// Generated module macro for crate::stream::stream::flatten_unordered
+macro_rules! Modcrate_stream_stream_flatten_unordered {
+() => {
+        Depcrate_stream_stream_flatten_unordereduse_1054!();
+        Depcrate_stream_stream_flatten_unordereduse_1055!();
+        Depcrate_stream_stream_flatten_unordereduse_1056!();
+        Depcrate_stream_stream_flatten_unordereduse_1057!();
+        Depcrate_stream_stream_flatten_unordereduse_1058!();
+        Depcrate_stream_stream_flatten_unordereduse_1059!();
+        Depcrate_stream_stream_flatten_unordereduse_1060!();
+        Depcrate_stream_stream_flatten_unorderedFlattenUnordered!();
+        Depcrate_stream_stream_flatten_unorderedNONE!();
+        Depcrate_stream_stream_flatten_unorderedNEED_TO_POLL_INNER_STREAMS!();
+        Depcrate_stream_stream_flatten_unorderedNEED_TO_POLL_STREAM!();
+        Depcrate_stream_stream_flatten_unorderedNEED_TO_POLL_ALL!();
+        Depcrate_stream_stream_flatten_unorderedPOLLING!();
+        Depcrate_stream_stream_flatten_unorderedWAKING!();
+        Depcrate_stream_stream_flatten_unorderedWOKEN!();
+        Depcrate_stream_stream_flatten_unorderedSharedPollState!();
+        Depcrate_stream_stream_flatten_unorderedimpl_1070!();
+        Depcrate_stream_stream_flatten_unorderedPollStateBomb!();
+        Depcrate_stream_stream_flatten_unorderedimpl_1072!();
+        Depcrate_stream_stream_flatten_unorderedimpl_1073!();
+        Depcrate_stream_stream_flatten_unorderedWrappedWaker!();
+        Depcrate_stream_stream_flatten_unorderedimpl_1075!();
+        Depcrate_stream_stream_flatten_unorderedimpl_1076!();
+        Depcrate_stream_stream_flatten_unorderedimpl_1077!();
+        Depcrate_stream_stream_flatten_unorderedimpl_1078!();
+        Depcrate_stream_stream_flatten_unorderedmacro_1079!();
+        Depcrate_stream_stream_flatten_unorderedimpl_1080!();
+        Depcrate_stream_stream_flatten_unorderedimpl_1081!();
+        Depcrate_stream_stream_flatten_unorderedmacro_1082!();
+        Depcrate_stream_stream_flatten_unorderedimpl_1083!();
+        Depcrate_stream_stream_flatten_unorderedimpl_1084!();
+        Depcrate_stream_stream_flatten_unorderedFlowController!();
+        Depcrate_stream_stream_flatten_unorderedimpl_1086!();
+        Depcrate_stream_stream_flatten_unorderedFlowStep!();
+        Depcrate_stream_stream_flatten_unorderedimpl_1088!();
+        Depcrate_stream_stream_flatten_unorderedimpl_1089!();
+        Depcrate_stream_stream_flatten_unorderedimpl_1090!();
+        Depcrate_stream_stream_flatten_unorderedimpl_1091!();
+    };
+}

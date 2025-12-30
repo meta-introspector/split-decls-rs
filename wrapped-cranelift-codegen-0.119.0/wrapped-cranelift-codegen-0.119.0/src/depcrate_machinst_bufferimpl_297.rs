@@ -1,0 +1,9 @@
+// Generated macro for impl_297 (impl)
+macro_rules! Depcrate_machinst_bufferimpl_297 {
+() => {
+// Module: crate::machinst::buffer
+// Provides: {"impl_297"}
+// Dependencies: {}
+impl < I : VCodeInst > TextSectionBuilder for MachTextSectionBuilder < I > { fn append (& mut self , labeled : bool , func : & [u8] , align : u32 , ctrl_plane : & mut ControlPlane ,) -> u64 { let size = func . len () as u32 ; if self . force_veneers == ForceVeneers :: Yes || self . buf . island_needed (size) { self . buf . emit_island_maybe_forced (self . force_veneers , size , ctrl_plane) ; } self . buf . align_to (align) ; let pos = self . buf . cur_offset () ; if labeled { self . buf . bind_label (MachLabel :: from_block (BlockIndex :: new (self . next_func)) , ctrl_plane ,) ; self . next_func += 1 ; } self . buf . put_data (func) ; u64 :: from (pos) } fn resolve_reloc (& mut self , offset : u64 , reloc : Reloc , addend : Addend , target : usize) -> bool { crate :: trace ! ("Resolving relocation @ {offset:#x} + {addend:#x} to target {target} of kind {reloc:?}") ; let label = MachLabel :: from_block (BlockIndex :: new (target)) ; let offset = u32 :: try_from (offset) . unwrap () ; match I :: LabelUse :: from_reloc (reloc , addend) { Some (label_use) => { self . buf . use_label_at_offset (offset , label , label_use) ; true } None => false , } } fn force_veneers (& mut self) { self . force_veneers = ForceVeneers :: Yes ; } fn write (& mut self , offset : u64 , data : & [u8]) { self . buf . data [offset . try_into () . unwrap () ..] [.. data . len ()] . copy_from_slice (data) ; } fn finish (& mut self , ctrl_plane : & mut ControlPlane) -> Vec < u8 > { assert_eq ! (self . next_func , self . buf . label_offsets . len ()) ; self . buf . finish_emission_maybe_forcing_veneers (self . force_veneers , ctrl_plane) ; mem :: take (& mut self . buf . data) . into_vec () } }
+};
+}

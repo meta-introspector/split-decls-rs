@@ -1,0 +1,9 @@
+// Generated macro for impl_128 (impl)
+macro_rules! Depcrate_generatorimpl_128 {
+() => {
+// Module: crate::generator
+// Provides: {"impl_128"}
+// Dependencies: {}
+impl Function < '_ > { fn generate (& self , options : & Options , parent_name : & Ident , parent_js_name : String ,) -> TokenStream { let Function { name , js_name , arguments , ret_ty , catch , variadic , unstable , } = self ; let unstable_attr = maybe_unstable_attr (* unstable) ; let unstable_docs = maybe_unstable_docs (* unstable) ; let js_namespace = raw_ident (& parent_js_name) ; let doc_comment = format ! ("The `{parent_js_name}.{js_name}()` function.\n\n{}" , mdn_doc (& parent_js_name , Some (js_name))) ; let mut features = BTreeSet :: new () ; for (_ , _ , ty) in arguments . iter () { add_features (& mut features , ty) ; } if let Some (ty) = ret_ty { add_features (& mut features , ty) ; } features . remove (& parent_name . to_string ()) ; let cfg_features = get_cfg_features (options , & features) ; features . insert (parent_name . to_string ()) ; let doc_comment = comment (doc_comment , & required_doc_string (options , & features)) ; let ret = ret_ty . as_ref () . map (| ret | quote ! (# ret)) ; let ret = if * catch { let ret = ret . unwrap_or_else (| | quote ! (())) ; Some (quote ! (Result <# ret , JsValue >)) } else { ret } ; let ret = ret . as_ref () . map (| ret | quote ! (-> # ret)) ; let catch = if * catch { Some (quote ! (catch ,)) } else { None } ; let arguments = generate_arguments (arguments , * variadic) ; let variadic = generate_variadic (* variadic) ; let js_name = raw_ident (js_name) ; quote ! { # unstable_attr # cfg_features # [wasm_bindgen (# catch # variadic js_namespace = # js_namespace , js_name = # js_name)] # doc_comment # unstable_docs pub fn # name (# (# arguments) ,*) # ret ; } } }
+};
+}

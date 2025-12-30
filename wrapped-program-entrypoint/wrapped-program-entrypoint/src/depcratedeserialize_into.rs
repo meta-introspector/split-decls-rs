@@ -1,0 +1,9 @@
+// Generated macro for deserialize_into (function)
+macro_rules! Depcratedeserialize_into {
+() => {
+// Module: crate
+// Provides: {"deserialize_into"}
+// Dependencies: {}
+# [doc = " Deserialize the input arguments"] # [doc = ""] # [doc = " Differs from `deserialize` by writing the account infos into an uninitialized"] # [doc = " slice, which provides better performance, roughly 30 CUs per unique account"] # [doc = " provided to the instruction."] # [doc = ""] # [doc = " Panics if the input slice is not large enough."] # [doc = ""] # [doc = " The integer arithmetic in this method is safe when called on a buffer that was"] # [doc = " serialized by runtime. Use with buffers serialized otherwise is unsupported and"] # [doc = " done at one's own risk."] # [doc = ""] # [doc = " # Safety"] # [allow (clippy :: arithmetic_side_effects)] pub unsafe fn deserialize_into < 'a > (input : * mut u8 , accounts : & mut [MaybeUninit < AccountInfo < 'a > >] ,) -> (& 'a Pubkey , usize , & 'a [u8]) { let mut offset : usize = 0 ; # [allow (clippy :: cast_ptr_alignment)] let num_accounts = * (input . add (offset) as * const u64) as usize ; offset += size_of :: < u64 > () ; if num_accounts > accounts . len () { panic ! ("{} accounts provided, but only {} are supported" , num_accounts , accounts . len ()) ; } for i in 0 .. num_accounts { let dup_info = * (input . add (offset) as * const u8) ; offset += size_of :: < u8 > () ; if dup_info == NON_DUP_MARKER { let (account_info , new_offset) = deserialize_account_info (input , offset) ; offset = new_offset ; accounts [i] . write (account_info) ; } else { offset += 7 ; accounts [i] . write (accounts [dup_info as usize] . assume_init_ref () . clone ()) ; } } let (instruction_data , new_offset) = deserialize_instruction_data (input , offset) ; offset = new_offset ; let program_id : & Pubkey = & * (input . add (offset) as * const Pubkey) ; (program_id , num_accounts , instruction_data) }
+};
+}

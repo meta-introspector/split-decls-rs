@@ -1,0 +1,45 @@
+// Generated module macro for crate::base
+macro_rules! Modcrate_base {
+() => {
+        Depcrate_baseuse_54!();
+        Depcrate_baseuse_55!();
+        Depcrate_baseuse_56!();
+        Depcrate_baseOpaqueSecKeychainRef!();
+        Depcrate_baseSecKeychainRef!();
+        Depcrate_baseOpaqueSecKeychainItemRef!();
+        Depcrate_baseSecKeychainItemRef!();
+        Depcrate_baseSecKeychainAttrType!();
+        Depcrate_baseSecKeychainAttribute!();
+        Depcrate_baseSecKeychainAttributeList!();
+        Depcrate_baseOpaqueSecCertificateRef!();
+        Depcrate_baseSecCertificateRef!();
+        Depcrate_baseOpaqueSecAccessRef!();
+        Depcrate_baseSecAccessRef!();
+        Depcrate_baseOpaqueSecAccessControlRef!();
+        Depcrate_baseSecAccessControlRef!();
+        Depcrate_baseOpaqueSecKeyRef!();
+        Depcrate_baseSecKeyRef!();
+        Depcrate_baseOpaqueSecIdentityRef!();
+        Depcrate_baseSecIdentityRef!();
+        Depcrate_baseOpaqueSecPolicyRef!();
+        Depcrate_baseSecPolicyRef!();
+        Depcrate_baseerrSecSuccess!();
+        Depcrate_baseerrSecUnimplemented!();
+        Depcrate_baseerrSecIO!();
+        Depcrate_baseerrSecParam!();
+        Depcrate_baseerrSecBadReq!();
+        Depcrate_baseerrSecNoTrustSettings!();
+        Depcrate_baseerrSecAuthFailed!();
+        Depcrate_baseerrSecDuplicateItem!();
+        Depcrate_baseerrSecItemNotFound!();
+        Depcrate_baseerrSecCreateChainFailed!();
+        Depcrate_baseerrSecConversionError!();
+        Depcrate_baseerrSecHostNameMismatch!();
+        Depcrate_baseerrSecInvalidExtendedKeyUsage!();
+        Depcrate_baseerrSecTrustSettingDeny!();
+        Depcrate_baseerrSecCertificateRevoked!();
+        Depcrate_baseerrSecNotTrusted!();
+        Depcrate_baseerrSecInternalComponent!();
+        Depcrate_baseother_93!();
+    };
+}

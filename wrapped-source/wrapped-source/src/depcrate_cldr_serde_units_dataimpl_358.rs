@@ -1,0 +1,9 @@
+// Generated macro for impl_358 (impl)
+macro_rules! Depcrate_cldr_serde_units_dataimpl_358 {
+() => {
+// Module: crate::cldr_serde::units::data
+// Provides: {"impl_358"}
+// Dependencies: {}
+impl < 'de > Deserialize < 'de > for UnitsData { fn deserialize < D > (deserializer : D) -> Result < Self , D :: Error > where D : serde :: Deserializer < 'de > , { # [derive (Deserialize)] struct Raw { long : BTreeMap < String , Patterns > , short : BTreeMap < String , Patterns > , narrow : BTreeMap < String , Patterns > , # [serde (flatten)] duration : DurationUnits , } let Raw { long , short , narrow , duration , } = Raw :: deserialize (deserializer) ? ; let construct = | mut map : BTreeMap < String , Patterns > | UnitsLengthData { per : map . remove ("per") . unwrap () , times : map . remove ("times") . unwrap () , powers : map . iter () . filter_map (| (k , v) | Some ((k . strip_prefix ("power") ? . parse () . ok () ? , v . clone ()))) . collect () , binary : map . iter () . filter_map (| (k , v) | Some ((k . strip_prefix ("1024p") ? . parse () . ok () ? , v . clone ()))) . collect () , decimal : map . iter () . filter_map (| (k , v) | Some ((k . strip_prefix ("10p") ? . parse () . ok () ? , v . clone ()))) . collect () , categories : map . into_iter () . filter_map (| (k , v) | { if k . starts_with ("10p") || k . starts_with ("1024p") || (k . starts_with ("power") && ! k . starts_with ("power-")) { return None ; } k . split_once ('-') . map (| (category , unit) | (category . to_string () , unit . to_string () , v)) }) . fold (BTreeMap :: new () , | mut acc , (category , unit , pattern) | { acc . entry (category) . or_default () . insert (unit , pattern) ; acc }) , } ; Ok (Self { long : construct (long) , short : construct (short) , narrow : construct (narrow) , duration , }) } }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for macro_382 (macro)
+macro_rules! Depcrate_preferences_extensions_unicode_keywords_collationmacro_382 {
+() => {
+// Module: crate::preferences::extensions::unicode::keywords::collation
+// Provides: {"macro_382"}
+// Dependencies: {}
+enum_keyword ! (# [doc = " A Unicode Collation Identifier defines a type of collation (sort order)."] # [doc = ""] # [doc = " The valid values are listed in [LDML](https://unicode.org/reports/tr35/#UnicodeCollationIdentifier)."] CollationType { # [doc = " A previous version of the ordering, for compatibility"] ("compat" => Compat) , # [doc = " Dictionary style ordering (such as in Sinhala)"] ("dict" => Dict) , # [doc = " The default Unicode collation element table order"] ("ducet" => Ducet) , # [doc = " Recommended ordering for emoji characters"] ("emoji" => Emoji) , # [doc = " European ordering rules"] ("eor" => Eor) , # [doc = " Phonebook style ordering (such as in German)"] ("phonebk" => Phonebk) , # [doc = " Phonetic ordering (sorting based on pronunciation)"] ("phonetic" => Phonetic) , # [doc = " Pinyin ordering for Latin and for CJK characters (used in Chinese)"] ("pinyin" => Pinyin) , # [doc = " Special collation type for string search"] ("search" => Search) , # [doc = " Special collation type for Korean initial consonant search"] ("searchjl" => Searchjl) , # [doc = " Default ordering for each language"] ("standard" => Standard) , # [doc = " Pinyin ordering for Latin, stroke order for CJK characters (used in Chinese)"] ("stroke" => Stroke) , # [doc = " Traditional style ordering (such as in Spanish)"] ("trad" => Trad) , # [doc = " Pinyin ordering for Latin, Unihan radical-stroke ordering for CJK characters (used in Chinese)"] ("unihan" => Unihan) , # [doc = " Pinyin ordering for Latin, zhuyin order for Bopomofo and CJK characters (used in Chinese)"] ("zhuyin" => Zhuyin) , } , "co") ;
+};
+}

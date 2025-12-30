@@ -1,0 +1,43 @@
+// Generated module macro for crate::util::search
+macro_rules! Modcrate_util_search {
+() => {
+        Depcrate_util_searchuse_1037!();
+        Depcrate_util_searchuse_1038!();
+        Depcrate_util_searchInput!();
+        Depcrate_util_searchimpl_1040!();
+        Depcrate_util_searchimpl_1041!();
+        Depcrate_util_searchimpl_1042!();
+        Depcrate_util_searchSpan!();
+        Depcrate_util_searchimpl_1044!();
+        Depcrate_util_searchimpl_1045!();
+        Depcrate_util_searchimpl_1046!();
+        Depcrate_util_searchimpl_1047!();
+        Depcrate_util_searchimpl_1048!();
+        Depcrate_util_searchimpl_1049!();
+        Depcrate_util_searchimpl_1050!();
+        Depcrate_util_searchimpl_1051!();
+        Depcrate_util_searchimpl_1052!();
+        Depcrate_util_searchHalfMatch!();
+        Depcrate_util_searchimpl_1054!();
+        Depcrate_util_searchMatch!();
+        Depcrate_util_searchimpl_1056!();
+        Depcrate_util_searchPatternSet!();
+        Depcrate_util_searchimpl_1058!();
+        Depcrate_util_searchPatternSetInsertError!();
+        Depcrate_util_searchimpl_1060!();
+        Depcrate_util_searchimpl_1061!();
+        Depcrate_util_searchPatternSetIter!();
+        Depcrate_util_searchimpl_1063!();
+        Depcrate_util_searchimpl_1064!();
+        Depcrate_util_searchAnchored!();
+        Depcrate_util_searchimpl_1066!();
+        Depcrate_util_searchMatchKind!();
+        Depcrate_util_searchimpl_1068!();
+        Depcrate_util_searchMatchError!();
+        Depcrate_util_searchimpl_1070!();
+        Depcrate_util_searchMatchErrorKind!();
+        Depcrate_util_searchimpl_1072!();
+        Depcrate_util_searchimpl_1073!();
+        Depcrate_util_searchtests!();
+    };
+}

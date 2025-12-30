@@ -1,0 +1,56 @@
+// Generated module macro for crate::token::tests
+macro_rules! Modcrate_token_tests {
+() => {
+        Depcrate_token_testsuse_1111!();
+        Depcrate_token_testsuse_1112!();
+        Depcrate_token_testsuse_1113!();
+        Depcrate_token_testsuse_1114!();
+        Depcrate_token_testsuse_1115!();
+        Depcrate_token_testsuse_1116!();
+        Depcrate_token_testsuse_1117!();
+        Depcrate_token_testsuse_1118!();
+        Depcrate_token_testsuse_1119!();
+        Depcrate_token_testsuse_1120!();
+        Depcrate_token_testsuse_1121!();
+        Depcrate_token_testsuse_1122!();
+        Depcrate_token_testscomplete_take_while_m_n_utf8_all_matching!();
+        Depcrate_token_testscomplete_take_while_m_n_utf8_all_matching_substring!();
+        Depcrate_token_testsmacro_1125!();
+        Depcrate_token_testsmodel_complete_take_while_m_n!();
+        Depcrate_token_testscomplete_take_until!();
+        Depcrate_token_testscomplete_take_until_empty!();
+        Depcrate_token_testscomplete_literal_case_insensitive!();
+        Depcrate_token_testscomplete_literal_fixed_size_array!();
+        Depcrate_token_testscomplete_literal_char!();
+        Depcrate_token_testscomplete_literal_byte!();
+        Depcrate_token_testspartial_any_str!();
+        Depcrate_token_testspartial_one_of_test!();
+        Depcrate_token_testschar_byteslice!();
+        Depcrate_token_testschar_str!();
+        Depcrate_token_testspartial_none_of_test!();
+        Depcrate_token_testspartial_is_a!();
+        Depcrate_token_testspartial_is_not!();
+        Depcrate_token_testspartial_take_until_incomplete!();
+        Depcrate_token_testspartial_take_until_incomplete_s!();
+        Depcrate_token_testspartial_take!();
+        Depcrate_token_testspartial_take_while0!();
+        Depcrate_token_testspartial_take_while1!();
+        Depcrate_token_testspartial_take_while_m_n!();
+        Depcrate_token_testspartial_take_till0!();
+        Depcrate_token_testspartial_take_till1!();
+        Depcrate_token_testspartial_take_while_utf8!();
+        Depcrate_token_testspartial_take_till0_utf8!();
+        Depcrate_token_testspartial_take_utf8!();
+        Depcrate_token_testspartial_take_while_m_n_utf8_fixed!();
+        Depcrate_token_testspartial_take_while_m_n_utf8_range!();
+        Depcrate_token_testspartial_take_while_m_n_utf8_full_match_fixed!();
+        Depcrate_token_testspartial_take_while_m_n_utf8_full_match_range!();
+        Depcrate_token_testspartial_take_take_while0!();
+        Depcrate_token_testspartial_literal_case_insensitive!();
+        Depcrate_token_testspartial_literal_fixed_size_array!();
+        Depcrate_token_testsrest_on_slices!();
+        Depcrate_token_testsrest_on_strs!();
+        Depcrate_token_testsrest_len_on_slices!();
+        Depcrate_token_teststokenslice_literals!();
+    };
+}

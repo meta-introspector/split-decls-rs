@@ -1,0 +1,9 @@
+// Generated macro for use_1280 (pub_use)
+macro_rules! Depcrate_netuse_1280 {
+() => {
+// Module: crate::net
+// Provides: {"use_1280"}
+// Dependencies: {}
+# [stable (feature = "rust1" , since = "1.0.0")] pub use self :: udp :: UdpSocket ;
+};
+}

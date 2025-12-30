@@ -1,0 +1,9 @@
+// Generated macro for trace (function)
+macro_rules! Depcrate_combinator_debugtrace {
+() => {
+// Module: crate::combinator::debug
+// Provides: {"trace"}
+// Dependencies: {}
+# [doc = " Trace the execution of the parser"] # [doc = ""] # [doc = " Note that [`Parser::context`] also provides high level trace information."] # [doc = ""] # [doc = " See [tutorial][crate::_tutorial::chapter_8] for more details."] # [doc = ""] # [doc = " # Example"] # [doc = ""] # [doc = " ```rust"] # [doc = " # use winnow::{error::ErrMode, error::Needed};"] # [doc = " # use winnow::token::take_while;"] # [doc = " # use winnow::stream::AsChar;"] # [doc = " # use winnow::prelude::*;"] # [doc = " use winnow::combinator::trace;"] # [doc = ""] # [doc = " fn short_alpha<'s>(s: &mut &'s [u8]) -> ModalResult<&'s [u8]> {"] # [doc = "   trace(\"short_alpha\","] # [doc = "     take_while(3..=6, AsChar::is_alpha)"] # [doc = "   ).parse_next(s)"] # [doc = " }"] # [doc = ""] # [doc = " assert_eq!(short_alpha.parse_peek(b\"latin123\"), Ok((&b\"123\"[..], &b\"latin\"[..])));"] # [doc = " assert_eq!(short_alpha.parse_peek(b\"lengthy\"), Ok((&b\"y\"[..], &b\"length\"[..])));"] # [doc = " assert_eq!(short_alpha.parse_peek(b\"latin\"), Ok((&b\"\"[..], &b\"latin\"[..])));"] # [doc = " assert!(short_alpha.parse_peek(b\"ed\").is_err());"] # [doc = " assert!(short_alpha.parse_peek(b\"12345\").is_err());"] # [doc = " ```"] # [cfg_attr (not (feature = "debug") , allow (unused_variables))] # [cfg_attr (not (feature = "debug") , allow (unused_mut))] # [cfg_attr (not (feature = "debug") , inline (always))] pub fn trace < I : Stream , O , E : ParserError < I > > (name : impl core :: fmt :: Display , parser : impl Parser < I , O , E > ,) -> impl Parser < I , O , E > { # [cfg (feature = "debug")] { internals :: Trace :: new (parser , name) } # [cfg (not (feature = "debug"))] { parser } }
+};
+}

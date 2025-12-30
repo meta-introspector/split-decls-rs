@@ -1,0 +1,50 @@
+// Generated module macro for crate::um::dwrite_3
+macro_rules! Modcrate_um_dwrite_3 {
+() => {
+        Depcrate_um_dwrite_3use_28058!();
+        Depcrate_um_dwrite_3use_28059!();
+        Depcrate_um_dwrite_3use_28060!();
+        Depcrate_um_dwrite_3use_28061!();
+        Depcrate_um_dwrite_3use_28062!();
+        Depcrate_um_dwrite_3use_28063!();
+        Depcrate_um_dwrite_3use_28064!();
+        Depcrate_um_dwrite_3use_28065!();
+        Depcrate_um_dwrite_3use_28066!();
+        Depcrate_um_dwrite_3use_28067!();
+        Depcrate_um_dwrite_3DWRITE_E_REMOTEFONT!();
+        Depcrate_um_dwrite_3DWRITE_E_DOWNLOADCANCELLED!();
+        Depcrate_um_dwrite_3DWRITE_E_DOWNLOADFAILED!();
+        Depcrate_um_dwrite_3DWRITE_E_TOOMANYDOWNLOADS!();
+        Depcrate_um_dwrite_3macro_28072!();
+        Depcrate_um_dwrite_3macro_28073!();
+        Depcrate_um_dwrite_3macro_28074!();
+        Depcrate_um_dwrite_3macro_28075!();
+        Depcrate_um_dwrite_3macro_28076!();
+        Depcrate_um_dwrite_3macro_28077!();
+        Depcrate_um_dwrite_3macro_28078!();
+        Depcrate_um_dwrite_3macro_28079!();
+        Depcrate_um_dwrite_3macro_28080!();
+        Depcrate_um_dwrite_3macro_28081!();
+        Depcrate_um_dwrite_3macro_28082!();
+        Depcrate_um_dwrite_3macro_28083!();
+        Depcrate_um_dwrite_3macro_28084!();
+        Depcrate_um_dwrite_3macro_28085!();
+        Depcrate_um_dwrite_3macro_28086!();
+        Depcrate_um_dwrite_3macro_28087!();
+        Depcrate_um_dwrite_3macro_28088!();
+        Depcrate_um_dwrite_3macro_28089!();
+        Depcrate_um_dwrite_3macro_28090!();
+        Depcrate_um_dwrite_3macro_28091!();
+        Depcrate_um_dwrite_3macro_28092!();
+        Depcrate_um_dwrite_3macro_28093!();
+        Depcrate_um_dwrite_3macro_28094!();
+        Depcrate_um_dwrite_3macro_28095!();
+        Depcrate_um_dwrite_3macro_28096!();
+        Depcrate_um_dwrite_3macro_28097!();
+        Depcrate_um_dwrite_3macro_28098!();
+        Depcrate_um_dwrite_3macro_28099!();
+        Depcrate_um_dwrite_3macro_28100!();
+        Depcrate_um_dwrite_3macro_28101!();
+        Depcrate_um_dwrite_3macro_28102!();
+    };
+}

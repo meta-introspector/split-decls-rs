@@ -1,0 +1,9 @@
+// Generated macro for main (function)
+macro_rules! Depcratemain {
+() => {
+// Module: crate
+// Provides: {"main"}
+// Dependencies: {}
+fn main () -> anyhow :: Result < () > { unsafe { std :: env :: set_var ("RUST_BACKTRACE" , "1") ; } env_logger :: builder () . filter_level (LevelFilter :: Info) . format_timestamp_millis () . parse_default_env () . init () ; let args = Args :: parse () ; println ! ("Running optimized build pipeline with args `{:?}`" , args) ; with_log_group ("Environment values" , | | { println ! ("Environment values\n{}" , format_env_variables ()) ; }) ; with_log_group ("Printing bootstrap.toml" , | | { let config_file = if std :: path :: Path :: new ("bootstrap.toml") . exists () { "bootstrap.toml" } else { "config.toml" } ; if let Ok (config) = std :: fs :: read_to_string (config_file) { println ! ("Contents of `bootstrap.toml`:\n{config}") ; } else { eprintln ! ("Failed to read `{}`" , config_file) ; } }) ; let (env , mut build_args) = create_environment (args) . context ("Cannot create environment") ? ; if is_fast_try_build () { log :: info ! ("Skipping building of unimportant components for a fast try build") ; for target in ["rust-docs" , "rustc-docs" , "rustc-dev" , "rust-dev" , "rust-docs-json" , "rust-analyzer" , "rustc-src" , "extended" , "clippy" , "miri" , "rustfmt" , "gcc" , "generate-copyright" , "bootstrap" ,] { build_args . extend (["--skip" . to_string () , target . to_string ()]) ; } } let mut timer = Timer :: new () ; let result = execute_pipeline (& env , & mut timer , build_args) ; log :: info ! ("Timer results\n{}" , timer . format_stats ()) ; if let Ok (summary_path) = std :: env :: var ("GITHUB_STEP_SUMMARY") { write_timer_to_summary (& summary_path , & timer) ? ; } print_free_disk_space () ? ; result . context ("Optimized build pipeline has failed") ? ; print_binary_sizes (& env) ? ; Ok (()) }
+};
+}

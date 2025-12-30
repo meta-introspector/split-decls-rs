@@ -1,0 +1,9 @@
+// Generated macro for FVE_E_KEY_PROTECTOR_NOT_SUPPORTED (const)
+macro_rules! Depcrate_shared_winerrorFVE_E_KEY_PROTECTOR_NOT_SUPPORTED {
+() => {
+// Module: crate::shared::winerror
+// Provides: {"FVE_E_KEY_PROTECTOR_NOT_SUPPORTED"}
+// Dependencies: {}
+pub const FVE_E_KEY_PROTECTOR_NOT_SUPPORTED : HRESULT = 0x80310069 ;
+};
+}

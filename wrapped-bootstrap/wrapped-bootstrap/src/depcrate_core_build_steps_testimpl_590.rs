@@ -1,0 +1,9 @@
+// Generated macro for impl_590 (impl)
+macro_rules! Depcrate_core_build_steps_testimpl_590 {
+() => {
+// Module: crate::core::build_steps::test
+// Provides: {"impl_590"}
+// Dependencies: {}
+impl Step for Cargotest { type Output = () ; const IS_HOST : bool = true ; fn should_run (run : ShouldRun < '_ >) -> ShouldRun < '_ > { run . path ("src/tools/cargotest") } fn make_run (run : RunConfig < '_ >) { if run . builder . top_stage == 0 { eprintln ! ("ERROR: running cargotest with stage 0 is currently unsupported. Use at least stage 1.") ; exit ! (1) ; } run . builder . ensure (Cargotest { build_compiler : run . builder . compiler (run . builder . top_stage - 1 , run . target) , host : run . target , }) ; } # [doc = " Runs the `cargotest` tool as compiled in `stage` by the `host` compiler."] # [doc = ""] # [doc = " This tool in `src/tools` will check out a few Rust projects and run `cargo"] # [doc = " test` to ensure that we don't regress the test suites there."] fn run (self , builder : & Builder < '_ >) { let cargo = builder . ensure (tool :: Cargo :: from_build_compiler (self . build_compiler , self . host)) ; let tested_compiler = builder . compiler (self . build_compiler . stage + 1 , self . host) ; builder . std (tested_compiler , self . host) ; let out_dir = builder . out . join ("ct") ; t ! (fs :: create_dir_all (& out_dir)) ; let _time = helpers :: timeit (builder) ; let mut cmd = builder . tool_cmd (Tool :: CargoTest) ; cmd . arg (& cargo . tool_path) . arg (& out_dir) . args (builder . config . test_args ()) . env ("RUSTC" , builder . rustc (tested_compiler)) . env ("RUSTDOC" , builder . rustdoc_for_compiler (tested_compiler)) ; add_rustdoc_cargo_linker_args (& mut cmd , builder , tested_compiler . host , LldThreads :: No) ; cmd . delay_failure () . run (builder) ; } fn metadata (& self) -> Option < StepMetadata > { Some (StepMetadata :: test ("cargotest" , self . host) . stage (self . build_compiler . stage + 1)) } }
+};
+}

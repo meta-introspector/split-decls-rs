@@ -1,0 +1,9 @@
+// Generated macro for Binomial (struct)
+macro_rules! Depcrate_binomialBinomial {
+() => {
+// Module: crate::binomial
+// Provides: {"Binomial"}
+// Dependencies: {}
+# [doc = " The [binomial distribution](https://en.wikipedia.org/wiki/Binomial_distribution) `Binomial(n, p)`."] # [doc = ""] # [doc = " The binomial distribution is a discrete probability distribution"] # [doc = " which describes the probability of seeing `k` successes in `n`"] # [doc = " independent trials, each of which has success probability `p`."] # [doc = ""] # [doc = " # Density function"] # [doc = ""] # [doc = " `f(k) = n!/(k! (n-k)!) p^k (1-p)^(n-k)` for `k >= 0`."] # [doc = ""] # [doc = " # Plot"] # [doc = ""] # [doc = " The following plot of the binomial distribution illustrates the"] # [doc = " probability of `k` successes out of `n = 10` trials with `p = 0.2`"] # [doc = " and `p = 0.6` for `0 <= k <= n`."] # [doc = ""] # [doc = " ![Binomial distribution](https://raw.githubusercontent.com/rust-random/charts/main/charts/binomial.svg)"] # [doc = ""] # [doc = " # Example"] # [doc = ""] # [doc = " ```"] # [doc = " use rand_distr::{Binomial, Distribution};"] # [doc = ""] # [doc = " let bin = Binomial::new(20, 0.3).unwrap();"] # [doc = " let v = bin.sample(&mut rand::rng());"] # [doc = " println!(\"{} is from a binomial distribution\", v);"] # [doc = " ```"] # [doc = ""] # [doc = " # Numerics"] # [doc = " The implementation uses `f64` internally, which leads to rounding errors for big numbers."] # [doc = " For very large samples (`> 2^53`) the least significant bits of the output will not be random."] # [doc = " This means that something like `bin.sample(&mut rand::rng()) % 4` will not follow the correct distribution."] # [doc = " The more significant bits should be correctly distributed."] # [derive (Clone , Copy , Debug , PartialEq)] # [cfg_attr (feature = "serde" , derive (serde :: Serialize , serde :: Deserialize))] pub struct Binomial { method : Method , }
+};
+}

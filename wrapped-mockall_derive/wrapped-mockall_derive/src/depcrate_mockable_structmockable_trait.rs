@@ -1,0 +1,9 @@
+// Generated macro for mockable_trait (function)
+macro_rules! Depcrate_mockable_structmockable_trait {
+() => {
+// Module: crate::mockable_struct
+// Provides: {"mockable_trait"}
+// Dependencies: {}
+# [doc = " Generates a mockable item impl from a trait method definition"] fn mockable_trait (trait_ : ItemTrait , name : & Ident , generics : & Generics) -> ItemImpl { let items = trait_ . items . into_iter () . map (| ti | { match ti { TraitItem :: Fn (mut tif) => { mockable_trait_method (& mut tif , name , generics) ; ImplItem :: Fn (tif2iif (tif , & Visibility :: Inherited)) } , TraitItem :: Const (tic) => { ImplItem :: Const (tic2iic (tic , & Visibility :: Inherited)) } , TraitItem :: Type (tit) => { ImplItem :: Type (tit2iit (tit , & Visibility :: Inherited)) } , _ => { compile_error (ti . span () , "Unsupported in this context") ; ImplItem :: Verbatim (TokenStream :: new ()) } } }) . collect :: < Vec < _ > > () ; let mut trait_path = Path :: from (trait_ . ident) ; let mut struct_path = Path :: from (name . clone ()) ; let (_ , stg , _) = generics . split_for_impl () ; let (_ , ttg , _) = trait_ . generics . split_for_impl () ; if let Ok (abga) = parse2 :: < AngleBracketedGenericArguments > (quote ! (# stg)) { struct_path . segments . last_mut () . unwrap () . arguments = PathArguments :: AngleBracketed (abga) ; } if let Ok (abga) = parse2 :: < AngleBracketedGenericArguments > (quote ! (# ttg)) { trait_path . segments . last_mut () . unwrap () . arguments = PathArguments :: AngleBracketed (abga) ; } let self_ty = Box :: new (Type :: Path (TypePath { qself : None , path : struct_path , })) ; ItemImpl { attrs : trait_ . attrs , defaultness : None , unsafety : trait_ . unsafety , impl_token : < Token ! [impl] > :: default () , generics : generics . clone () , trait_ : Some ((None , trait_path , < Token ! [for] > :: default ())) , self_ty , brace_token : trait_ . brace_token , items } }
+};
+}

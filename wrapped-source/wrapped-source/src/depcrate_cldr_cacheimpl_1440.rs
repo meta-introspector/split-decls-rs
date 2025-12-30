@@ -1,0 +1,9 @@
+// Generated macro for impl_1440 (impl)
+macro_rules! Depcrate_cldr_cacheimpl_1440 {
+() => {
+// Module: crate::cldr_cache
+// Provides: {"impl_1440"}
+// Dependencies: {}
+impl < 'a > CldrDirLang < 'a > { pub (crate) fn read_and_parse < S > (& self , locale : & DataLocale , file_name : & str ,) -> Result < & 'a S , DataError > where for < 'de > S : serde :: Deserialize < 'de > + 'static + Send + Sync , { let dir_suffix = self . 0 . dir_suffix () ? ; let path = format ! ("{}-{dir_suffix}/main/{locale}/{file_name}" , self . 1) ; if self . 0 . serde_cache . file_exists (& path) ? { self . 0 . serde_cache . read_and_parse_json (& path) } else if let Some (new_locale) = self . 0 . add_script_extended (locale) ? { self . read_and_parse (& new_locale , file_name) } else { Err (DataErrorKind :: Io (std :: io :: ErrorKind :: NotFound) . into_error () . with_display_context (& path)) } } pub (crate) fn list_locales (& self) -> Result < impl Iterator < Item = DataLocale > + '_ , DataError > { let dir_suffix = self . 0 . dir_suffix () ? ; let path = format ! ("{}-{dir_suffix}/main" , self . 1) ; Ok (self . 0 . serde_cache . list (& path) ? . map (| path | -> Result < DataLocale , DataError > { let locale = DataLocale :: from_str (& path) . unwrap () ; Ok (self . 0 . remove_script_extended (& locale) ? . unwrap_or (locale)) }) . collect :: < Result < Vec < _ > , _ > > () ? . into_iter ()) } pub (crate) fn file_exists (& self , lang : & DataLocale , file_name : & str ,) -> Result < bool , DataError > { let dir_suffix = self . 0 . dir_suffix () ? ; let path = format ! ("{}-{dir_suffix}/main/{lang}/{file_name}" , self . 1) ; if self . 0 . serde_cache . file_exists (& path) ? { Ok (true) } else if let Some (new_locale) = self . 0 . add_script_extended (lang) ? { self . file_exists (& new_locale , file_name) } else { Ok (false) } } }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for convert_path_tt (function)
+macro_rules! Depcrate_mod_pathconvert_path_tt {
+() => {
+// Module: crate::mod_path
+// Provides: {"convert_path_tt"}
+// Dependencies: {}
+fn convert_path_tt (db : & dyn ExpandDatabase , tt : tt :: TokenTreesView < '_ >) -> Option < ModPath > { let mut leaves = tt . iter () . filter_map (| tt | match tt { tt :: TtElement :: Leaf (leaf) => Some (leaf) , tt :: TtElement :: Subtree (..) => None , }) ; let mut segments = smallvec :: smallvec ! [] ; let kind = match leaves . next () ? { tt :: Leaf :: Punct (tt :: Punct { char : ':' , .. }) => match leaves . next () ? { tt :: Leaf :: Punct (tt :: Punct { char : ':' , .. }) => PathKind :: Abs , _ => return None , } , tt :: Leaf :: Ident (tt :: Ident { sym : text , span , .. }) if * text == sym :: dollar_crate => { resolve_crate_root (db , span . ctx) . map (PathKind :: DollarCrate) . unwrap_or (PathKind :: Crate) } tt :: Leaf :: Ident (tt :: Ident { sym : text , .. }) if * text == sym :: self_ => PathKind :: SELF , tt :: Leaf :: Ident (tt :: Ident { sym : text , .. }) if * text == sym :: super_ => { let mut deg = 1 ; while let Some (tt :: Leaf :: Ident (tt :: Ident { sym : text , span , is_raw : _ })) = leaves . next () { if * text != sym :: super_ { segments . push (Name :: new_symbol (text . clone () , span . ctx)) ; break ; } deg += 1 ; } PathKind :: Super (deg) } tt :: Leaf :: Ident (tt :: Ident { sym : text , .. }) if * text == sym :: crate_ => PathKind :: Crate , tt :: Leaf :: Ident (ident) => { segments . push (Name :: new_symbol (ident . sym . clone () , ident . span . ctx)) ; PathKind :: Plain } _ => return None , } ; segments . extend (leaves . filter_map (| leaf | match leaf { :: tt :: Leaf :: Ident (ident) => Some (Name :: new_symbol (ident . sym . clone () , ident . span . ctx)) , _ => None , })) ; Some (ModPath { kind , segments }) }
+};
+}

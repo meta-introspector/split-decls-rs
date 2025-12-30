@@ -1,0 +1,9 @@
+// Generated macro for PFILE_NETWORK_PHYSICAL_NAME_INFORMATION (type)
+macro_rules! Depcrate_ntioapiPFILE_NETWORK_PHYSICAL_NAME_INFORMATION {
+() => {
+// Module: crate::ntioapi
+// Provides: {"PFILE_NETWORK_PHYSICAL_NAME_INFORMATION"}
+// Dependencies: {}
+pub type PFILE_NETWORK_PHYSICAL_NAME_INFORMATION = * mut FILE_NETWORK_PHYSICAL_NAME_INFORMATION ;
+};
+}

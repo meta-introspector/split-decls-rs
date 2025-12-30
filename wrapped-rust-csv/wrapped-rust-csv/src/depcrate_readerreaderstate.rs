@@ -1,0 +1,9 @@
+// Generated macro for ReaderState (struct)
+macro_rules! Depcrate_readerReaderState {
+() => {
+// Module: crate::reader
+// Provides: {"ReaderState"}
+// Dependencies: {}
+# [derive (Debug)] struct ReaderState { # [doc = " When set, this contains the first row of any parsed CSV data."] # [doc = ""] # [doc = " This is always populated, regardless of whether `has_headers` is set."] headers : Option < Headers > , # [doc = " When set, the first row of parsed CSV data is excluded from things"] # [doc = " that read records, like iterators and `read_record`."] has_headers : bool , # [doc = " When set, there is no restriction on the length of records. When not"] # [doc = " set, every record must have the same number of fields, or else an error"] # [doc = " is reported."] flexible : bool , trim : Trim , # [doc = " The number of fields in the first record parsed."] first_field_count : Option < u64 > , # [doc = " The current position of the parser."] # [doc = ""] # [doc = " Note that this position is only observable by callers at the start"] # [doc = " of a record. More granular positions are not supported."] cur_pos : Position , # [doc = " Whether the first record has been read or not."] first : bool , # [doc = " Whether the reader has been seeked or not."] seeked : bool , # [doc = " Whether EOF of the underlying reader has been reached or not."] # [doc = ""] # [doc = " IO errors on the underlying reader will be considered as an EOF for"] # [doc = " subsequent read attempts, as it would be incorrect to keep on trying"] # [doc = " to read when the underlying reader has broken."] # [doc = ""] # [doc = " For clarity, having the best `Debug` impl and in case they need to be"] # [doc = " treated differently at some point, we store whether the `EOF` is"] # [doc = " considered because an actual EOF happened, or because we encoundered"] # [doc = " an IO error."] # [doc = " This has no additional runtime cost."] eof : ReaderEofState , }
+};
+}

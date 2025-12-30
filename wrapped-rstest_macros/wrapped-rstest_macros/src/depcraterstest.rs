@@ -1,0 +1,9 @@
+// Generated macro for rstest (function)
+macro_rules! Depcraterstest {
+() => {
+// Module: crate
+// Provides: {"rstest"}
+// Dependencies: {}
+# [allow (missing_docs)] # [proc_macro_attribute] pub fn rstest (args : proc_macro :: TokenStream , input : proc_macro :: TokenStream ,) -> proc_macro :: TokenStream { let mut test = parse_macro_input ! (input as ItemFn) ; let mut info = parse_macro_input ! (args as RsTestInfo) ; let extend_result = info . extend_with_function_attrs (& mut test) ; let mut errors = error :: rstest (& test , & info) ; if let Err (attrs_errors) = extend_result { attrs_errors . to_tokens (& mut errors) ; } if errors . is_empty () { if info . data . has_list_values () { render :: matrix (test , info) } else if info . data . has_cases () { render :: parametrize (test , info) } else { render :: single (test , info) } } else { errors } . into () }
+};
+}

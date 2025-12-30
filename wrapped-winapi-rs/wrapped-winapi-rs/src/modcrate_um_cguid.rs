@@ -1,0 +1,52 @@
+// Generated module macro for crate::um::cguid
+macro_rules! Modcrate_um_cguid {
+() => {
+        Depcrate_um_cguidmacro_20922!();
+        Depcrate_um_cguidmacro_20923!();
+        Depcrate_um_cguidmacro_20924!();
+        Depcrate_um_cguidmacro_20925!();
+        Depcrate_um_cguidmacro_20926!();
+        Depcrate_um_cguidmacro_20927!();
+        Depcrate_um_cguidmacro_20928!();
+        Depcrate_um_cguidmacro_20929!();
+        Depcrate_um_cguidmacro_20930!();
+        Depcrate_um_cguidmacro_20931!();
+        Depcrate_um_cguidmacro_20932!();
+        Depcrate_um_cguidmacro_20933!();
+        Depcrate_um_cguidmacro_20934!();
+        Depcrate_um_cguidmacro_20935!();
+        Depcrate_um_cguidmacro_20936!();
+        Depcrate_um_cguidmacro_20937!();
+        Depcrate_um_cguidmacro_20938!();
+        Depcrate_um_cguidmacro_20939!();
+        Depcrate_um_cguidmacro_20940!();
+        Depcrate_um_cguidmacro_20941!();
+        Depcrate_um_cguidmacro_20942!();
+        Depcrate_um_cguidmacro_20943!();
+        Depcrate_um_cguidmacro_20944!();
+        Depcrate_um_cguidmacro_20945!();
+        Depcrate_um_cguidmacro_20946!();
+        Depcrate_um_cguidmacro_20947!();
+        Depcrate_um_cguidmacro_20948!();
+        Depcrate_um_cguidmacro_20949!();
+        Depcrate_um_cguidmacro_20950!();
+        Depcrate_um_cguidmacro_20951!();
+        Depcrate_um_cguidmacro_20952!();
+        Depcrate_um_cguidmacro_20953!();
+        Depcrate_um_cguidmacro_20954!();
+        Depcrate_um_cguidmacro_20955!();
+        Depcrate_um_cguidmacro_20956!();
+        Depcrate_um_cguidmacro_20957!();
+        Depcrate_um_cguidmacro_20958!();
+        Depcrate_um_cguidmacro_20959!();
+        Depcrate_um_cguidmacro_20960!();
+        Depcrate_um_cguidmacro_20961!();
+        Depcrate_um_cguidmacro_20962!();
+        Depcrate_um_cguidmacro_20963!();
+        Depcrate_um_cguidmacro_20964!();
+        Depcrate_um_cguidmacro_20965!();
+        Depcrate_um_cguidmacro_20966!();
+        Depcrate_um_cguidmacro_20967!();
+        Depcrate_um_cguidmacro_20968!();
+    };
+}

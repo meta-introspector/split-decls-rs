@@ -1,0 +1,9 @@
+// Generated macro for gzgets_basic (function)
+macro_rules! Depcrate_gzgzgets_basic {
+() => {
+// Module: crate::gz
+// Provides: {"gzgets_basic"}
+// Dependencies: {}
+# [test] fn gzgets_basic () { let file_name = crate_path ("src/test-data/text.gz") ; let file = unsafe { gzopen (CString :: new (file_name . as_str ()) . unwrap () . as_ptr () , CString :: new ("r") . unwrap () . as_ptr () ,) } ; assert ! (! file . is_null ()) ; let mut buf = [127 as c_char ; 4] ; let ret = unsafe { gzgets (file , buf . as_mut_ptr () , buf . len () as _) } ; assert ! (! ret . is_null ()) ; assert_eq ! (unsafe { CStr :: from_ptr (buf . as_ptr ()) . to_str () . unwrap () } , "gzi") ; let mut buf = [127 as c_char ; 100] ; let ret = unsafe { gzgets (file , buf . as_mut_ptr () , buf . len () as _) } ; assert ! (! ret . is_null ()) ; assert_eq ! (unsafe { CStr :: from_ptr (buf . as_ptr ()) . to_str () . unwrap () } , "p\n") ; let mut buf = [127 as c_char ; 1] ; let ret = unsafe { gzgets (file , buf . as_mut_ptr () , buf . len () as _) } ; assert ! (! ret . is_null ()) ; assert_eq ! (buf [0] , 0 as c_char) ; let mut buf = [127 as c_char ; 14] ; let ret = unsafe { gzgets (file , buf . as_mut_ptr () , buf . len () as _) } ; assert ! (! ret . is_null ()) ; assert ! (! ret . is_null ()) ; assert_eq ! (unsafe { CStr :: from_ptr (buf . as_ptr ()) . to_str () . unwrap () } , "example data\n") ; let mut buf = [127 as c_char ; 100] ; let ret = unsafe { gzgets (file , buf . as_mut_ptr () , buf . len () as _) } ; assert ! (! ret . is_null ()) ; assert ! (! ret . is_null ()) ; assert_eq ! (unsafe { CStr :: from_ptr (buf . as_ptr ()) . to_str () . unwrap () } , "for tests") ; let mut buf = [127 as c_char ; 100] ; let ret = unsafe { gzgets (file , buf . as_mut_ptr () , buf . len () as _) } ; assert ! (ret . is_null ()) ; assert_eq ! (unsafe { gzclose (file) } , Z_OK) ; }
+};
+}

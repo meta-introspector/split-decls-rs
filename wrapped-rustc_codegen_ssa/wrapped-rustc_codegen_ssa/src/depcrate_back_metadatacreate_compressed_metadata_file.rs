@@ -1,0 +1,9 @@
+// Generated macro for create_compressed_metadata_file (function)
+macro_rules! Depcrate_back_metadatacreate_compressed_metadata_file {
+() => {
+// Module: crate::back::metadata
+// Provides: {"create_compressed_metadata_file"}
+// Dependencies: {}
+pub fn create_compressed_metadata_file (sess : & Session , metadata : & EncodedMetadata , symbol_name : & str ,) -> Vec < u8 > { let mut packed_metadata = rustc_metadata :: METADATA_HEADER . to_vec () ; packed_metadata . write_all (& (metadata . stub_or_full () . len () as u64) . to_le_bytes ()) . unwrap () ; packed_metadata . extend (metadata . stub_or_full ()) ; let Some (mut file) = create_object_file (sess) else { if sess . target . is_like_wasm { return create_metadata_file_for_wasm (sess , & packed_metadata , ".rustc") ; } return packed_metadata . to_vec () ; } ; if file . format () == BinaryFormat :: Xcoff { return create_compressed_metadata_file_for_xcoff (file , & packed_metadata , symbol_name) ; } let section = file . add_section (file . segment_name (StandardSegment :: Data) . to_vec () , b".rustc" . to_vec () , SectionKind :: ReadOnlyData ,) ; match file . format () { BinaryFormat :: Elf => { file . section_mut (section) . flags = SectionFlags :: Elf { sh_flags : 0 } ; } _ => { } } ; let offset = file . append_section_data (section , & packed_metadata , 1) ; file . add_symbol (Symbol { name : symbol_name . as_bytes () . to_vec () , value : offset , size : packed_metadata . len () as u64 , kind : SymbolKind :: Data , scope : SymbolScope :: Dynamic , weak : false , section : SymbolSection :: Section (section) , flags : SymbolFlags :: None , }) ; file . write () . unwrap () }
+};
+}

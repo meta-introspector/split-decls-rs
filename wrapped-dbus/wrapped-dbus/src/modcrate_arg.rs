@@ -1,0 +1,39 @@
+// Generated module macro for crate::arg
+macro_rules! Modcrate_arg {
+() => {
+        Depcrate_argmsgarg!();
+        Depcrate_argbasic_impl!();
+        Depcrate_argvariantstruct_impl!();
+        Depcrate_argarray_impl!();
+        Depcrate_argmessageitem!();
+        Depcrate_arguse_499!();
+        Depcrate_arguse_500!();
+        Depcrate_arguse_501!();
+        Depcrate_arguse_502!();
+        Depcrate_arguse_503!();
+        Depcrate_arguse_504!();
+        Depcrate_arguse_505!();
+        Depcrate_arguse_506!();
+        Depcrate_arguse_507!();
+        Depcrate_argcheck!();
+        Depcrate_argffi_iter!();
+        Depcrate_arguse_510!();
+        Depcrate_argOwnedFd!();
+        Depcrate_argowned_fd_impl!();
+        Depcrate_argimpl_513!();
+        Depcrate_argIterAppend!();
+        Depcrate_argimpl_515!();
+        Depcrate_argIter!();
+        Depcrate_argimpl_517!();
+        Depcrate_argimpl_518!();
+        Depcrate_argimpl_519!();
+        Depcrate_argArgType!();
+        Depcrate_argALL_ARG_TYPES!();
+        Depcrate_argimpl_522!();
+        Depcrate_argTypeMismatchError!();
+        Depcrate_argimpl_524!();
+        Depcrate_argimpl_525!();
+        Depcrate_argimpl_526!();
+        Depcrate_argtest_compile!();
+    };
+}

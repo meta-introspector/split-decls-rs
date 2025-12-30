@@ -1,0 +1,9 @@
+// Generated macro for ERROR_SXS_PRIVATE_MANIFEST_CROSS_PATH_WITH_REPARSE_POINT (const)
+macro_rules! Depcrate_shared_winerrorERROR_SXS_PRIVATE_MANIFEST_CROSS_PATH_WITH_REPARSE_POINT {
+() => {
+// Module: crate::shared::winerror
+// Provides: {"ERROR_SXS_PRIVATE_MANIFEST_CROSS_PATH_WITH_REPARSE_POINT"}
+// Dependencies: {}
+pub const ERROR_SXS_PRIVATE_MANIFEST_CROSS_PATH_WITH_REPARSE_POINT : DWORD = 14020 ;
+};
+}

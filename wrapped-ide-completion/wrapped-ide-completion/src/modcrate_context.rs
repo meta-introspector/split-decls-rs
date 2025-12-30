@@ -1,0 +1,49 @@
+// Generated module macro for crate::context
+macro_rules! Modcrate_context {
+() => {
+        Depcrate_contextanalysis!();
+        Depcrate_contexttests!();
+        Depcrate_contextuse_133!();
+        Depcrate_contextuse_134!();
+        Depcrate_contextuse_135!();
+        Depcrate_contextuse_136!();
+        Depcrate_contextuse_137!();
+        Depcrate_contextuse_138!();
+        Depcrate_contextuse_139!();
+        Depcrate_contextCOMPLETION_MARKER!();
+        Depcrate_contextPatternRefutability!();
+        Depcrate_contextVisible!();
+        Depcrate_contextQualifierCtx!();
+        Depcrate_contextimpl_144!();
+        Depcrate_contextPathCompletionCtx!();
+        Depcrate_contextimpl_146!();
+        Depcrate_contextPathKind!();
+        Depcrate_contextExistingDerives!();
+        Depcrate_contextAttrCtx!();
+        Depcrate_contextPathExprCtx!();
+        Depcrate_contextTypeLocation!();
+        Depcrate_contextimpl_152!();
+        Depcrate_contextTypeAscriptionTarget!();
+        Depcrate_contextItemListKind!();
+        Depcrate_contextQualified!();
+        Depcrate_contextPatternContext!();
+        Depcrate_contextParamContext!();
+        Depcrate_contextLifetimeContext!();
+        Depcrate_contextLifetimeKind!();
+        Depcrate_contextNameContext!();
+        Depcrate_contextNameKind!();
+        Depcrate_contextNameRefContext!();
+        Depcrate_contextNameRefKind!();
+        Depcrate_contextCompletionAnalysis!();
+        Depcrate_contextDotAccess!();
+        Depcrate_contextDotAccessKind!();
+        Depcrate_contextDotAccessExprCtx!();
+        Depcrate_contextBreakableKind!();
+        Depcrate_contextParamKind!();
+        Depcrate_contextCompletionContext!();
+        Depcrate_contextCompleteSemicolon!();
+        Depcrate_contextimpl_172!();
+        Depcrate_contextimpl_173!();
+        Depcrate_contextOP_TRAIT_LANG_NAMES!();
+    };
+}

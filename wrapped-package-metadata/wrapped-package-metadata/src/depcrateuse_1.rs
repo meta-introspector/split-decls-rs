@@ -1,0 +1,9 @@
+// Generated macro for use_1 (pub_use)
+macro_rules! Depcrateuse_1 {
+() => {
+// Module: crate
+// Provides: {"use_1"}
+// Dependencies: {}
+# [doc = " Macro for accessing data from the `package.metadata` section of the Cargo manifest"] # [doc = ""] # [doc = " # Arguments"] # [doc = " * `key` - A string slice of a dot-separated path to the TOML key of interest"] # [doc = ""] # [doc = " # Example"] # [doc = " Given the following `Cargo.toml`:"] # [doc = " ```ignore"] # [doc = " [package]"] # [doc = " name = \"MyApp\""] # [doc = " version = \"0.1.0\""] # [doc = ""] # [doc = " [package.metadata]"] # [doc = " copyright = \"Copyright (c) 2024 ACME Inc.\""] # [doc = " ```"] # [doc = ""] # [doc = " You can fetch the copyright with the following:"] # [doc = " ```ignore"] # [doc = " use solana_package_metadata::package_metadata;"] # [doc = ""] # [doc = " pub fn main() {"] # [doc = "     let copyright = package_metadata!(\"copyright\");"] # [doc = "     assert_eq!(copyright, \"Copyright (c) 2024 ACME Inc.\");"] # [doc = " }"] # [doc = " ```"] # [doc = ""] # [doc = " ## TOML Support"] # [doc = " This macro only supports static data:"] # [doc = " * Strings"] # [doc = " * Integers"] # [doc = " * Floating-point numbers"] # [doc = " * Booleans"] # [doc = " * Datetimes"] # [doc = " * Arrays"] # [doc = ""] # [doc = " ## Array Example"] # [doc = " Given the following Cargo manifest:"] # [doc = " ```ignore"] # [doc = " [package.metadata.arrays]"] # [doc = " some_array = [ 1, 2, 3 ]"] # [doc = " ```"] # [doc = ""] # [doc = " This is legal:"] # [doc = " ```ignore"] # [doc = " static ARR: [i64; 3] = package_metadata!(\"arrays.some_array\");"] # [doc = " ```"] # [doc = ""] # [doc = " It does *not* currently support accessing TOML array elements directly."] # [doc = " TOML tables are not supported."] pub use solana_package_metadata_macro :: package_metadata ;
+};
+}

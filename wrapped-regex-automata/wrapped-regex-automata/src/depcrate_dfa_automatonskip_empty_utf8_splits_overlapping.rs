@@ -1,0 +1,9 @@
+// Generated macro for skip_empty_utf8_splits_overlapping (function)
+macro_rules! Depcrate_dfa_automatonskip_empty_utf8_splits_overlapping {
+() => {
+// Module: crate::dfa::automaton
+// Provides: {"skip_empty_utf8_splits_overlapping"}
+// Dependencies: {}
+# [doc = " Runs the given overlapping `search` function (forwards or backwards) until"] # [doc = " a match is found whose offset does not split a codepoint."] # [doc = ""] # [doc = " This is *not* always correct to call. It should only be called when the DFA"] # [doc = " has UTF-8 mode enabled *and* it can produce zero-width matches. Calling"] # [doc = " this when both of those things aren't true might result in legitimate"] # [doc = " matches getting skipped."] # [cold] # [inline (never)] fn skip_empty_utf8_splits_overlapping < F > (input : & Input < '_ > , state : & mut OverlappingState , mut search : F ,) -> Result < () , MatchError > where F : FnMut (& Input < '_ > , & mut OverlappingState) -> Result < () , MatchError > , { let mut hm = match state . get_match () { None => return Ok (()) , Some (hm) => hm , } ; if input . get_anchored () . is_anchored () { if ! input . is_char_boundary (hm . offset ()) { state . mat = None ; } return Ok (()) ; } while ! input . is_char_boundary (hm . offset ()) { search (input , state) ? ; hm = match state . get_match () { None => return Ok (()) , Some (hm) => hm , } ; } Ok (()) }
+};
+}

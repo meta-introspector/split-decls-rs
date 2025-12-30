@@ -1,0 +1,45 @@
+// Generated module macro for crate::h3::ffi
+macro_rules! Modcrate_h3_ffi {
+() => {
+        Depcrate_h3_ffiuse_715!();
+        Depcrate_h3_ffiuse_716!();
+        Depcrate_h3_ffiuse_717!();
+        Depcrate_h3_ffiuse_718!();
+        Depcrate_h3_ffiuse_719!();
+        Depcrate_h3_ffiuse_720!();
+        Depcrate_h3_ffiuse_721!();
+        Depcrate_h3_ffiuse_722!();
+        Depcrate_h3_ffiuse_723!();
+        Depcrate_h3_ffiuse_724!();
+        Depcrate_h3_ffiquiche_h3_config_new!();
+        Depcrate_h3_ffiquiche_h3_config_set_max_field_section_size!();
+        Depcrate_h3_ffiquiche_h3_config_set_qpack_max_table_capacity!();
+        Depcrate_h3_ffiquiche_h3_config_set_qpack_blocked_streams!();
+        Depcrate_h3_ffiquiche_h3_config_enable_extended_connect!();
+        Depcrate_h3_ffiquiche_h3_config_free!();
+        Depcrate_h3_ffiquiche_h3_conn_new_with_transport!();
+        Depcrate_h3_ffiquiche_h3_for_each_setting!();
+        Depcrate_h3_ffiquiche_h3_conn_poll!();
+        Depcrate_h3_ffiquiche_h3_event_type!();
+        Depcrate_h3_ffiquiche_h3_event_for_each_header!();
+        Depcrate_h3_ffiquiche_h3_event_headers_has_more_frames!();
+        Depcrate_h3_ffiquiche_h3_extended_connect_enabled_by_peer!();
+        Depcrate_h3_ffiquiche_h3_event_free!();
+        Depcrate_h3_ffiHeader!();
+        Depcrate_h3_ffiquiche_h3_send_request!();
+        Depcrate_h3_ffiquiche_h3_send_response!();
+        Depcrate_h3_ffiquiche_h3_send_response_with_priority!();
+        Depcrate_h3_ffiquiche_h3_send_additional_headers!();
+        Depcrate_h3_ffiquiche_h3_send_body!();
+        Depcrate_h3_ffiquiche_h3_recv_body!();
+        Depcrate_h3_ffiquiche_h3_send_goaway!();
+        Depcrate_h3_ffiquiche_h3_parse_extensible_priority!();
+        Depcrate_h3_ffiquiche_h3_send_priority_update_for_request!();
+        Depcrate_h3_ffiquiche_h3_take_last_priority_update!();
+        Depcrate_h3_ffiquiche_h3_dgram_enabled_by_peer!();
+        Depcrate_h3_ffiquiche_h3_conn_free!();
+        Depcrate_h3_ffiheaders_from_ptr!();
+        Depcrate_h3_ffiStats!();
+        Depcrate_h3_ffiquiche_h3_conn_stats!();
+    };
+}

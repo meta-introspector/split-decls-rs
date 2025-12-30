@@ -1,0 +1,62 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcratemain.rs");
+include!("depcrate_coverageuse_21.rs");
+include!("depcrate_coverageuse_24.rs");
+include!("depcrate_utiluse_36.rs");
+include!("depcrate_coveragecoveragereport.rs");
+include!("depcrate_utiluse_35.rs");
+include!("depcrate_commandsuse_7.rs");
+include!("depcrate_commandsuse_13.rs");
+include!("depcrate_utiluse_32.rs");
+include!("depcrate_utilactive_toolchain.rs");
+include!("depcrate_utilflagsplit.rs");
+include!("depcrate_coverageimpl_27.rs");
+include!("depcrateutil.rs");
+include!("depcrateuse_44.rs");
+include!("depcrate_commandsuse_2.rs");
+include!("depcrate_commandsuse_6.rs");
+include!("depcrate_utilmiri_dir.rs");
+include!("depcrate_commandsuse_5.rs");
+include!("depcrate_coverageuse_20.rs");
+include!("depcratecoverage.rs");
+include!("depcrate_commandsuse_9.rs");
+include!("depcratecommands.rs");
+include!("depcrate_utiluse_34.rs");
+include!("depcrate_commandsimpl_18.rs");
+include!("depcrate_utiluse_29.rs");
+include!("depcrate_utilmirienv.rs");
+include!("depcrate_utiluse_33.rs");
+include!("depcrate_utiluse_31.rs");
+include!("depcrate_utilimpl_42.rs");
+include!("depcrate_commandsimpl_17.rs");
+include!("depcrate_coverageuse_23.rs");
+include!("depcrate_coverageuse_25.rs");
+include!("depcratecli.rs");
+include!("depcrate_commandsuse_4.rs");
+include!("depcrate_commandsuse_11.rs");
+include!("depcrateuse_43.rs");
+include!("depcrate_commandsuse_3.rs");
+include!("depcrate_commandsuse_10.rs");
+include!("depcrate_coverageuse_22.rs");
+include!("depcrate_commandsuse_12.rs");
+include!("depcrate_commandsuse_15.rs");
+include!("depcrate_commandsuse_8.rs");
+include!("depcrate_commandsuse_14.rs");
+include!("depcrate_commandsuse_16.rs");
+include!("depcrate_utiluse_30.rs");
+include!("depcrate_utilfeatures_to_args.rs");
+include!("depcrateimpl_46.rs");
+include!("depcratecommand.rs");
+include!("modcrate.rs");
+include!("modcrate_commands.rs");
+include!("modcrate_util.rs");
+include!("modcrate_coverage.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate!();
+    Modcrate_commands!();
+    Modcrate_util!();
+    Modcrate_coverage!();
+}

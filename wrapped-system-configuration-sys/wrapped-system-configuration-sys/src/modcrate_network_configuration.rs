@@ -1,0 +1,42 @@
+// Generated module macro for crate::network_configuration
+macro_rules! Modcrate_network_configuration {
+() => {
+        Depcrate_network_configurationuse_30!();
+        Depcrate_network_configurationuse_31!();
+        Depcrate_network_configurationuse_32!();
+        Depcrate_network_configurationuse_33!();
+        Depcrate_network_configurationuse_34!();
+        Depcrate_network_configurationuse_35!();
+        Depcrate_network_configurationuse_36!();
+        Depcrate_network_configurationuse_37!();
+        Depcrate_network_configurationuse_38!();
+        Depcrate_network_configuration__SCNetworkConnection!();
+        Depcrate_network_configuration__SCNetworkInterface!();
+        Depcrate_network_configuration__SCBondStatus!();
+        Depcrate_network_configuration__SCNetworkProtocol!();
+        Depcrate_network_configuration__SCNetworkService!();
+        Depcrate_network_configuration__SCNetworkSet!();
+        Depcrate_network_configurationSCNetworkConnectionFlags!();
+        Depcrate_network_configurationother_46!();
+        Depcrate_network_configurationSCNetworkConnectionRef!();
+        Depcrate_network_configurationSCNetworkConnectionContext!();
+        Depcrate_network_configurationSCNetworkConnectionStatus!();
+        Depcrate_network_configurationSCNetworkConnectionCallBack!();
+        Depcrate_network_configurationother_51!();
+        Depcrate_network_configurationSCNetworkInterfaceRef!();
+        Depcrate_network_configurationother_53!();
+        Depcrate_network_configurationSCBondInterfaceRef!();
+        Depcrate_network_configurationSCBondStatusRef!();
+        Depcrate_network_configurationkSCBondStatusOK!();
+        Depcrate_network_configurationkSCBondStatusLinkInvalid!();
+        Depcrate_network_configurationkSCBondStatusNoPartner!();
+        Depcrate_network_configurationkSCBondStatusNotInActiveGroup!();
+        Depcrate_network_configurationkSCBondStatusUnknown!();
+        Depcrate_network_configuration_bindgen_ty_286!();
+        Depcrate_network_configurationother_62!();
+        Depcrate_network_configurationSCNetworkProtocolRef!();
+        Depcrate_network_configurationSCNetworkServiceRef!();
+        Depcrate_network_configurationSCNetworkSetRef!();
+        Depcrate_network_configurationother_66!();
+    };
+}

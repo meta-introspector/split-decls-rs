@@ -1,0 +1,9 @@
+// Generated macro for get_apple_sdk_root (function)
+macro_rules! Depcrate_back_linkget_apple_sdk_root {
+() => {
+// Module: crate::back::link
+// Provides: {"get_apple_sdk_root"}
+// Dependencies: {}
+fn get_apple_sdk_root (sess : & Session) -> Option < PathBuf > { if let Ok (sdkroot) = env :: var ("SDKROOT") { let p = PathBuf :: from (& sdkroot) ; match & * apple :: sdk_name (& sess . target) . to_lowercase () { "appletvos" if sdkroot . contains ("TVSimulator.platform") || sdkroot . contains ("MacOSX.platform") => { } "appletvsimulator" if sdkroot . contains ("TVOS.platform") || sdkroot . contains ("MacOSX.platform") => { } "iphoneos" if sdkroot . contains ("iPhoneSimulator.platform") || sdkroot . contains ("MacOSX.platform") => { } "iphonesimulator" if sdkroot . contains ("iPhoneOS.platform") || sdkroot . contains ("MacOSX.platform") => { } "macosx" if sdkroot . contains ("iPhoneOS.platform") || sdkroot . contains ("iPhoneSimulator.platform") || sdkroot . contains ("AppleTVOS.platform") || sdkroot . contains ("AppleTVSimulator.platform") || sdkroot . contains ("WatchOS.platform") || sdkroot . contains ("WatchSimulator.platform") || sdkroot . contains ("XROS.platform") || sdkroot . contains ("XRSimulator.platform") => { } "watchos" if sdkroot . contains ("WatchSimulator.platform") || sdkroot . contains ("MacOSX.platform") => { } "watchsimulator" if sdkroot . contains ("WatchOS.platform") || sdkroot . contains ("MacOSX.platform") => { } "xros" if sdkroot . contains ("XRSimulator.platform") || sdkroot . contains ("MacOSX.platform") => { } "xrsimulator" if sdkroot . contains ("XROS.platform") || sdkroot . contains ("MacOSX.platform") => { } _ if ! p . is_absolute () || p == Path :: new ("/") || ! p . exists () => { } _ => return Some (p) , } } apple :: get_sdk_root (sess) }
+};
+}

@@ -1,0 +1,40 @@
+// Generated module macro for crate::error
+macro_rules! Modcrate_error {
+() => {
+        Depcrate_erroruse_12!();
+        Depcrate_erroruse_13!();
+        Depcrate_erroruse_14!();
+        Depcrate_erroruse_15!();
+        Depcrate_erroruse_16!();
+        Depcrate_erroruse_17!();
+        Depcrate_erroruse_18!();
+        Depcrate_erroruse_19!();
+        Depcrate_erroruse_20!();
+        Depcrate_erroruse_21!();
+        Depcrate_erroruse_22!();
+        Depcrate_erroruse_23!();
+        Depcrate_erroruse_24!();
+        Depcrate_erroruse_25!();
+        Depcrate_erroruse_26!();
+        Depcrate_erroruse_27!();
+        Depcrate_errorError!();
+        Depcrate_errorimpl_29!();
+        Depcrate_errorErrorVariant!();
+        Depcrate_errorimpl_31!();
+        Depcrate_errorInputLocation!();
+        Depcrate_errorLineColLocation!();
+        Depcrate_errorimpl_34!();
+        Depcrate_errorimpl_35!();
+        Depcrate_errorRuleToMessageFn!();
+        Depcrate_errorIsWhitespaceFn!();
+        Depcrate_errorimpl_38!();
+        Depcrate_errorimpl_39!();
+        Depcrate_errorimpl_40!();
+        Depcrate_errorimpl_41!();
+        Depcrate_errorimpl_42!();
+        Depcrate_errorimpl_43!();
+        Depcrate_errorvisualize_whitespace!();
+        Depcrate_errormiette_adapter!();
+        Depcrate_errortests!();
+    };
+}

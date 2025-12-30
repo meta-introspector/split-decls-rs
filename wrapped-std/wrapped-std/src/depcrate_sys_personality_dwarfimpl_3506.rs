@@ -1,0 +1,9 @@
+// Generated macro for impl_3506 (impl)
+macro_rules! Depcrate_sys_personality_dwarfimpl_3506 {
+() => {
+// Module: crate::sys::personality::dwarf
+// Provides: {"impl_3506"}
+// Dependencies: {}
+impl DwarfReader { pub fn new (ptr : * const u8) -> DwarfReader { DwarfReader { ptr } } # [doc = " Read a type T and then bump the pointer by that amount."] # [doc = ""] # [doc = " DWARF streams are \"packed\", so all types must be read at align 1."] pub unsafe fn read < T : Copy > (& mut self) -> T { unsafe { let result = self . ptr . cast :: < T > () . read_unaligned () ; self . ptr = self . ptr . byte_add (size_of :: < T > ()) ; result } } # [doc = " ULEB128 and SLEB128 encodings are defined in Section 7.6 - \"Variable Length Data\"."] pub unsafe fn read_uleb128 (& mut self) -> u64 { let mut shift : usize = 0 ; let mut result : u64 = 0 ; let mut byte : u8 ; loop { byte = unsafe { self . read :: < u8 > () } ; result |= ((byte & 0x7F) as u64) << shift ; shift += 7 ; if byte & 0x80 == 0 { break ; } } result } pub unsafe fn read_sleb128 (& mut self) -> i64 { let mut shift : u32 = 0 ; let mut result : u64 = 0 ; let mut byte : u8 ; loop { byte = unsafe { self . read :: < u8 > () } ; result |= ((byte & 0x7F) as u64) << shift ; shift += 7 ; if byte & 0x80 == 0 { break ; } } if shift < u64 :: BITS && (byte & 0x40) != 0 { result |= (! 0 as u64) << shift ; } result as i64 } }
+};
+}

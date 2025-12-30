@@ -1,0 +1,9 @@
+// Generated macro for impl_327 (impl)
+macro_rules! Depcrateimpl_327 {
+() => {
+// Module: crate
+// Provides: {"impl_327"}
+// Dependencies: {}
+impl Bump < 1 > { # [doc = " Construct a new arena to bump allocate into."] # [doc = ""] # [doc = " ## Example"] # [doc = ""] # [doc = " ```"] # [doc = " let bump = bumpalo::Bump::new();"] # [doc = " # let _ = bump;"] # [doc = " ```"] pub fn new () -> Self { Self :: with_capacity (0) } # [doc = " Attempt to construct a new arena to bump allocate into."] # [doc = ""] # [doc = " ## Example"] # [doc = ""] # [doc = " ```"] # [doc = " let bump = bumpalo::Bump::try_new();"] # [doc = " # let _ = bump.unwrap();"] # [doc = " ```"] pub fn try_new () -> Result < Self , AllocErr > { Bump :: try_with_capacity (0) } # [doc = " Construct a new arena with the specified byte capacity to bump allocate"] # [doc = " into."] # [doc = ""] # [doc = " ## Example"] # [doc = ""] # [doc = " ```"] # [doc = " let bump = bumpalo::Bump::with_capacity(100);"] # [doc = " # let _ = bump;"] # [doc = " ```"] # [doc = ""] # [doc = " ## Panics"] # [doc = ""] # [doc = " Panics if allocating the initial capacity fails."] pub fn with_capacity (capacity : usize) -> Self { Self :: try_with_capacity (capacity) . unwrap_or_else (| _ | oom ()) } # [doc = " Attempt to construct a new arena with the specified byte capacity to"] # [doc = " bump allocate into."] # [doc = ""] # [doc = " Propagates errors when allocating the initial capacity."] # [doc = ""] # [doc = " ## Example"] # [doc = ""] # [doc = " ```"] # [doc = " # fn _foo() -> Result<(), bumpalo::AllocErr> {"] # [doc = " let bump = bumpalo::Bump::try_with_capacity(100)?;"] # [doc = " # let _ = bump;"] # [doc = " # Ok(())"] # [doc = " # }"] # [doc = " ```"] pub fn try_with_capacity (capacity : usize) -> Result < Self , AllocErr > { Self :: try_with_min_align_and_capacity (capacity) } }
+};
+}

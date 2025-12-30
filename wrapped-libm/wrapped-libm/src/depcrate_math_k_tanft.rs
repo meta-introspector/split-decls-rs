@@ -1,0 +1,9 @@
+// Generated macro for T (const)
+macro_rules! Depcrate_math_k_tanfT {
+() => {
+// Module: crate::math::k_tanf
+// Provides: {"T"}
+// Dependencies: {}
+const T : [f64 ; 6] = [0.333331395030791399758 , 0.133392002712976742718 , 0.0533812378445670393523 , 0.0245283181166547278873 , 0.00297435743359967304927 , 0.00946564784943673166728 ,] ;
+};
+}

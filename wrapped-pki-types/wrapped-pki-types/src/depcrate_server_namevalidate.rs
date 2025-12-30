@@ -1,0 +1,9 @@
+// Generated macro for validate (function)
+macro_rules! Depcrate_server_namevalidate {
+() => {
+// Module: crate::server_name
+// Provides: {"validate"}
+// Dependencies: {}
+const fn validate (input : & [u8]) -> Result < () , InvalidDnsNameError > { enum State { Start , Next , NumericOnly { len : usize } , NextAfterNumericOnly , Subsequent { len : usize } , Hyphen { len : usize } , } use State :: * ; let mut state = Start ; # [doc = " \"Labels must be 63 characters or less.\""] const MAX_LABEL_LENGTH : usize = 63 ; # [doc = " https://devblogs.microsoft.com/oldnewthing/20120412-00/?p=7873"] const MAX_NAME_LENGTH : usize = 253 ; if input . len () > MAX_NAME_LENGTH { return Err (InvalidDnsNameError) ; } let mut idx = 0 ; while idx < input . len () { let ch = input [idx] ; state = match (state , ch) { (Start | Next | NextAfterNumericOnly | Hyphen { .. } , b'.') => { return Err (InvalidDnsNameError) ; } (Subsequent { .. } , b'.') => Next , (NumericOnly { .. } , b'.') => NextAfterNumericOnly , (Subsequent { len } | NumericOnly { len } | Hyphen { len } , _) if len >= MAX_LABEL_LENGTH => { return Err (InvalidDnsNameError) ; } (Start | Next | NextAfterNumericOnly , b'0' ..= b'9') => NumericOnly { len : 1 } , (NumericOnly { len } , b'0' ..= b'9') => NumericOnly { len : len + 1 } , (Start | Next | NextAfterNumericOnly , b'a' ..= b'z' | b'A' ..= b'Z' | b'_') => { Subsequent { len : 1 } } (Subsequent { len } | NumericOnly { len } | Hyphen { len } , b'-') => { Hyphen { len : len + 1 } } (Subsequent { len } | NumericOnly { len } | Hyphen { len } , b'a' ..= b'z' | b'A' ..= b'Z' | b'_' | b'0' ..= b'9' ,) => Subsequent { len : len + 1 } , _ => return Err (InvalidDnsNameError) , } ; idx += 1 ; } if matches ! (state , Start | Hyphen { .. } | NumericOnly { .. } | NextAfterNumericOnly) { return Err (InvalidDnsNameError) ; } Ok (()) }
+};
+}

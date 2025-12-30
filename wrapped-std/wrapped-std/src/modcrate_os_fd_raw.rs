@@ -1,0 +1,41 @@
+// Generated module macro for crate::os::fd::raw
+macro_rules! Modcrate_os_fd_raw {
+() => {
+        Depcrate_os_fd_rawuse_2616!();
+        Depcrate_os_fd_rawuse_2617!();
+        Depcrate_os_fd_rawuse_2618!();
+        Depcrate_os_fd_rawuse_2619!();
+        Depcrate_os_fd_rawuse_2620!();
+        Depcrate_os_fd_rawuse_2621!();
+        Depcrate_os_fd_rawuse_2622!();
+        Depcrate_os_fd_rawuse_2623!();
+        Depcrate_os_fd_rawuse_2624!();
+        Depcrate_os_fd_rawRawFd!();
+        Depcrate_os_fd_rawRawFd!();
+        Depcrate_os_fd_rawAsRawFd!();
+        Depcrate_os_fd_rawFromRawFd!();
+        Depcrate_os_fd_rawIntoRawFd!();
+        Depcrate_os_fd_rawimpl_2630!();
+        Depcrate_os_fd_rawimpl_2631!();
+        Depcrate_os_fd_rawimpl_2632!();
+        Depcrate_os_fd_rawimpl_2633!();
+        Depcrate_os_fd_rawimpl_2634!();
+        Depcrate_os_fd_rawimpl_2635!();
+        Depcrate_os_fd_rawimpl_2636!();
+        Depcrate_os_fd_rawimpl_2637!();
+        Depcrate_os_fd_rawimpl_2638!();
+        Depcrate_os_fd_rawimpl_2639!();
+        Depcrate_os_fd_rawimpl_2640!();
+        Depcrate_os_fd_rawimpl_2641!();
+        Depcrate_os_fd_rawimpl_2642!();
+        Depcrate_os_fd_rawimpl_2643!();
+        Depcrate_os_fd_rawimpl_2644!();
+        Depcrate_os_fd_rawimpl_2645!();
+        Depcrate_os_fd_rawimpl_2646!();
+        Depcrate_os_fd_rawimpl_2647!();
+        Depcrate_os_fd_rawimpl_2648!();
+        Depcrate_os_fd_rawimpl_2649!();
+        Depcrate_os_fd_rawimpl_2650!();
+        Depcrate_os_fd_rawimpl_2651!();
+    };
+}

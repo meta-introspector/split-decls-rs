@@ -1,0 +1,9 @@
+// Generated macro for impl_1709 (impl)
+macro_rules! Depcrate_geometryimpl_1709 {
+() => {
+// Module: crate::geometry
+// Provides: {"impl_1709"}
+// Dependencies: {}
+impl CGSize { # [doc = " Create a new size with the given dimensions."] # [doc = ""] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " use objc2_core_foundation::CGSize;"] # [doc = " let size = CGSize::new(10.0, 2.3);"] # [doc = " assert_eq!(size.width, 10.0);"] # [doc = " assert_eq!(size.height, 2.3);"] # [doc = " ```"] # [doc = ""] # [doc = " Negative values are allowed (though often undesired)."] # [doc = ""] # [doc = " ```"] # [doc = " use objc2_core_foundation::CGSize;"] # [doc = " let size = CGSize::new(-1.0, 0.0);"] # [doc = " assert_eq!(size.width, -1.0);"] # [doc = " ```"] # [inline] # [doc (alias = "NSMakeSize")] # [doc (alias = "CGSizeMake")] pub const fn new (width : CGFloat , height : CGFloat) -> Self { Self { width , height } } # [doc = " Convert the size to a non-negative size."] # [doc = ""] # [doc = " This can be used to convert the size to a safe value."] # [doc = ""] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " use objc2_core_foundation::CGSize;"] # [doc = " assert_eq!(CGSize::new(-1.0, 1.0).abs(), CGSize::new(1.0, 1.0));"] # [doc = " ```"] # [inline] # [cfg (feature = "std")] pub fn abs (self) -> Self { Self :: new (self . width . abs () , self . height . abs ()) } # [doc = " A size that is 0.0 in both dimensions."] # [doc = ""] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " use objc2_core_foundation::CGSize;"] # [doc = " assert_eq!(CGSize::ZERO, CGSize { width: 0.0, height: 0.0 });"] # [doc = " ```"] # [doc (alias = "NSZeroSize")] # [doc (alias = "CGSizeZero")] pub const ZERO : Self = Self :: new (0.0 , 0.0) ; }
+};
+}

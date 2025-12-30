@@ -1,0 +1,9 @@
+// Generated macro for ALRMSSR (type)
+macro_rules! Depcrate_stm32f427_rtcALRMSSR {
+() => {
+// Module: crate::stm32f427::rtc
+// Provides: {"ALRMSSR"}
+// Dependencies: {}
+# [doc = "ALRMSSR register accessor: an alias for `Reg<ALRMSSR_SPEC>`"] pub type ALRMSSR = crate :: Reg < alrmssr :: ALRMSSR_SPEC > ;
+};
+}

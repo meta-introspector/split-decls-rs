@@ -1,0 +1,42 @@
+// Generated module macro for crate::utils
+macro_rules! Modcrate_utils {
+() => {
+        Depcrate_utilsuse_627!();
+        Depcrate_utilsuse_628!();
+        Depcrate_utilsuse_629!();
+        Depcrate_utilsuse_630!();
+        Depcrate_utilsuse_631!();
+        Depcrate_utilsuse_632!();
+        Depcrate_utilsuse_633!();
+        Depcrate_utilsuse_634!();
+        Depcrate_utilswrite_cow_string!();
+        Depcrate_utilswrite_byte_string!();
+        Depcrate_utilsCowRef!();
+        Depcrate_utilsimpl_638!();
+        Depcrate_utilsimpl_639!();
+        Depcrate_utilsimpl_640!();
+        Depcrate_utilsByteBuf!();
+        Depcrate_utilsimpl_642!();
+        Depcrate_utilsimpl_643!();
+        Depcrate_utilsimpl_644!();
+        Depcrate_utilsBytes!();
+        Depcrate_utilsimpl_646!();
+        Depcrate_utilsimpl_647!();
+        Depcrate_utilsimpl_648!();
+        Depcrate_utilsFountain!();
+        Depcrate_utilsimpl_650!();
+        Depcrate_utilsimpl_651!();
+        Depcrate_utilsimpl_652!();
+        Depcrate_utilsimpl_653!();
+        Depcrate_utilsis_whitespace!();
+        Depcrate_utilsname_len!();
+        Depcrate_utilstrim_xml_start!();
+        Depcrate_utilstrim_xml_end!();
+        Depcrate_utilstrim_xml_spaces!();
+        Depcrate_utilsCDataIterator!();
+        Depcrate_utilsimpl_660!();
+        Depcrate_utilsimpl_661!();
+        Depcrate_utilsimpl_662!();
+        Depcrate_utilstests!();
+    };
+}

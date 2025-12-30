@@ -1,0 +1,45 @@
+// Generated module macro for crate::isa::pulley_shared::inst::args
+macro_rules! Modcrate_isa_pulley_shared_inst_args {
+() => {
+        Depcrate_isa_pulley_shared_inst_argsuse_2545!();
+        Depcrate_isa_pulley_shared_inst_argsuse_2546!();
+        Depcrate_isa_pulley_shared_inst_argsuse_2547!();
+        Depcrate_isa_pulley_shared_inst_argsuse_2548!();
+        Depcrate_isa_pulley_shared_inst_argsuse_2549!();
+        Depcrate_isa_pulley_shared_inst_argsuse_2550!();
+        Depcrate_isa_pulley_shared_inst_argsnewtype_of_reg!();
+        Depcrate_isa_pulley_shared_inst_argsmacro_2552!();
+        Depcrate_isa_pulley_shared_inst_argsmacro_2553!();
+        Depcrate_isa_pulley_shared_inst_argsmacro_2554!();
+        Depcrate_isa_pulley_shared_inst_argsimpl_2555!();
+        Depcrate_isa_pulley_shared_inst_argsuse_2556!();
+        Depcrate_isa_pulley_shared_inst_argsimpl_2557!();
+        Depcrate_isa_pulley_shared_inst_argsimpl_2558!();
+        Depcrate_isa_pulley_shared_inst_argsimpl_2559!();
+        Depcrate_isa_pulley_shared_inst_argsOperandSize!();
+        Depcrate_isa_pulley_shared_inst_argsuse_2561!();
+        Depcrate_isa_pulley_shared_inst_argsimpl_2562!();
+        Depcrate_isa_pulley_shared_inst_argsimpl_2563!();
+        Depcrate_isa_pulley_shared_inst_argsPulleyCall!();
+        Depcrate_isa_pulley_shared_inst_argsuse_2565!();
+        Depcrate_isa_pulley_shared_inst_argsimpl_2566!();
+        Depcrate_isa_pulley_shared_inst_argsimpl_2567!();
+        Depcrate_isa_pulley_shared_inst_argsimpl_2568!();
+        Depcrate_isa_pulley_shared_inst_argsimpl_2569!();
+        Depcrate_isa_pulley_shared_inst_argsuse_2570!();
+        Depcrate_isa_pulley_shared_inst_argsimpl_2571!();
+        Depcrate_isa_pulley_shared_inst_argsimpl_2572!();
+        Depcrate_isa_pulley_shared_inst_argsimpl_2573!();
+        Depcrate_isa_pulley_shared_inst_argsimpl_2574!();
+        Depcrate_isa_pulley_shared_inst_argsuse_2575!();
+        Depcrate_isa_pulley_shared_inst_argsimpl_2576!();
+        Depcrate_isa_pulley_shared_inst_argsimpl_2577!();
+        Depcrate_isa_pulley_shared_inst_argsimpl_2578!();
+        Depcrate_isa_pulley_shared_inst_argsimpl_2579!();
+        Depcrate_isa_pulley_shared_inst_argsuse_2580!();
+        Depcrate_isa_pulley_shared_inst_argsimpl_2581!();
+        Depcrate_isa_pulley_shared_inst_argsimpl_2582!();
+        Depcrate_isa_pulley_shared_inst_argsimpl_2583!();
+        Depcrate_isa_pulley_shared_inst_argsimpl_2584!();
+    };
+}

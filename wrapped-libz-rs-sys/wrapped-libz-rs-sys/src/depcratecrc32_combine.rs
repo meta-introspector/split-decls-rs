@@ -1,0 +1,9 @@
+// Generated macro for crc32_combine (function)
+macro_rules! Depcratecrc32_combine {
+() => {
+// Module: crate
+// Provides: {"crc32_combine"}
+// Dependencies: {}
+# [doc = " Combines the checksum of two slices into one."] # [doc = ""] # [doc = " The combined value is equivalent to calculating the checksum of the whole input."] # [doc = ""] # [doc = " This function can be used when input arrives in chunks, or when different threads"] # [doc = " calculate the checksum of different sections of the input."] # [doc = ""] # [doc = " # Example"] # [doc = ""] # [doc = " ```"] # [doc = " use libz_rs_sys::{crc32, crc32_combine};"] # [doc = ""] # [doc = " let input = [1, 2, 3, 4, 5, 6, 7, 8];"] # [doc = " let lo = &input[..4];"] # [doc = " let hi = &input[4..];"] # [doc = ""] # [doc = " unsafe {"] # [doc = "     let full = crc32(0, input.as_ptr(), input.len() as _);"] # [doc = ""] # [doc = "     let crc1 = crc32(0, lo.as_ptr(), lo.len() as _);"] # [doc = "     let crc2 = crc32(0, hi.as_ptr(), hi.len() as _);"] # [doc = ""] # [doc = "     let combined = crc32_combine(crc1, crc2, hi.len() as _);"] # [doc = ""] # [doc = "     assert_eq!(full, combined);"] # [doc = " }"] # [doc = " ```"] # [cfg_attr (feature = "export-symbols" , export_name = prefix ! (crc32_combine))] pub extern "C-unwind" fn crc32_combine (crc1 : c_ulong , crc2 : c_ulong , len2 : z_off_t) -> c_ulong { zlib_rs :: crc32_combine (crc1 as u32 , crc2 as u32 , len2 as u64) as c_ulong }
+};
+}

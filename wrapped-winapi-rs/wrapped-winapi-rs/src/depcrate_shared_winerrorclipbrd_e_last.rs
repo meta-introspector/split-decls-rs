@@ -1,0 +1,9 @@
+// Generated macro for CLIPBRD_E_LAST (const)
+macro_rules! Depcrate_shared_winerrorCLIPBRD_E_LAST {
+() => {
+// Module: crate::shared::winerror
+// Provides: {"CLIPBRD_E_LAST"}
+// Dependencies: {}
+pub const CLIPBRD_E_LAST : HRESULT = 0x800401DF ;
+};
+}

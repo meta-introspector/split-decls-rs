@@ -1,0 +1,9 @@
+// Generated macro for CombinedSnapshot (struct)
+macro_rules! Depcrate_infer_snapshotCombinedSnapshot {
+() => {
+// Module: crate::infer::snapshot
+// Provides: {"CombinedSnapshot"}
+// Dependencies: {}
+# [must_use = "once you start a snapshot, you should always consume it"] pub struct CombinedSnapshot < 'tcx > { pub (super) undo_snapshot : Snapshot < 'tcx > , region_constraints_snapshot : RegionSnapshot , universe : ty :: UniverseIndex , }
+};
+}

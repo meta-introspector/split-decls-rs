@@ -1,0 +1,9 @@
+// Generated macro for impl_998 (impl)
+macro_rules! Depcrate_machineimpl_998 {
+() => {
+// Module: crate::machine
+// Provides: {"impl_998"}
+// Dependencies: {}
+impl VisitProvenance for MiriMachine < '_ > { fn visit_provenance (& self , visit : & mut VisitWith < '_ >) { # [rustfmt :: skip] let MiriMachine { threads , thread_cpu_affinity : _ , tls , env_vars , main_fn_ret_place , argc , argv , cmd_line , extern_statics , dirs , borrow_tracker , data_race , alloc_addresses , fds , epoll_interests : _ , tcx : _ , isolated_op : _ , validation : _ , monotonic_clock : _ , layouts : _ , static_roots : _ , profiler : _ , string_cache : _ , exported_symbols_cache : _ , backtrace_style : _ , user_relevant_crates : _ , rng : _ , allocator : _ , tracked_alloc_ids : _ , track_alloc_accesses : _ , check_alignment : _ , cmpxchg_weak_failure_rate : _ , preemption_rate : _ , report_progress : _ , basic_block_count : _ , native_lib : _ , gc_interval : _ , since_gc : _ , num_cpus : _ , page_size : _ , stack_addr : _ , stack_size : _ , collect_leak_backtraces : _ , allocation_spans : _ , symbolic_alignment : _ , union_data_ranges : _ , pthread_mutex_sanity : _ , pthread_rwlock_sanity : _ , pthread_condvar_sanity : _ , allocator_shim_symbols : _ , mangle_internal_symbol_cache : _ , force_intrinsic_fallback : _ , float_nondet : _ , float_rounding_error : _ , short_fd_operations : _ , } = self ; threads . visit_provenance (visit) ; tls . visit_provenance (visit) ; env_vars . visit_provenance (visit) ; dirs . visit_provenance (visit) ; fds . visit_provenance (visit) ; data_race . visit_provenance (visit) ; borrow_tracker . visit_provenance (visit) ; alloc_addresses . visit_provenance (visit) ; main_fn_ret_place . visit_provenance (visit) ; argc . visit_provenance (visit) ; argv . visit_provenance (visit) ; cmd_line . visit_provenance (visit) ; for ptr in extern_statics . values () { ptr . visit_provenance (visit) ; } } }
+};
+}

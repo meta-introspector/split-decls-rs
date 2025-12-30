@@ -1,0 +1,9 @@
+// Generated macro for overlapping (function)
+macro_rules! Depcrate_matches_overlapping_armsoverlapping {
+() => {
+// Module: crate::matches::overlapping_arms
+// Provides: {"overlapping"}
+// Dependencies: {}
+fn overlapping < T > (ranges : & [SpannedRange < T >]) -> Option < (& SpannedRange < T > , & SpannedRange < T >) > where T : Copy + Ord , { # [derive (Copy , Clone , Debug , Eq , Ord , PartialEq , PartialOrd)] enum BoundKind { EndExcluded , Start , EndIncluded , } # [derive (Copy , Clone , Debug , Eq , PartialEq)] struct RangeBound < 'a , T > (T , BoundKind , & 'a SpannedRange < T >) ; impl < T : Copy + Ord > PartialOrd for RangeBound < '_ , T > { fn partial_cmp (& self , other : & Self) -> Option < Ordering > { Some (self . cmp (other)) } } impl < T : Copy + Ord > Ord for RangeBound < '_ , T > { fn cmp (& self , RangeBound (other_value , other_kind , _) : & Self) -> Ordering { let RangeBound (self_value , self_kind , _) = * self ; (self_value , self_kind) . cmp (& (* other_value , * other_kind)) } } let mut values = Vec :: with_capacity (2 * ranges . len ()) ; for r @ SpannedRange { node : (start , end) , .. } in ranges { values . push (RangeBound (* start , BoundKind :: Start , r)) ; values . push (match end { EndBound :: Excluded (val) => RangeBound (* val , BoundKind :: EndExcluded , r) , EndBound :: Included (val) => RangeBound (* val , BoundKind :: EndIncluded , r) , }) ; } values . sort () ; let mut started = vec ! [] ; for RangeBound (_ , kind , range) in values { match kind { BoundKind :: Start => started . push (range) , BoundKind :: EndExcluded | BoundKind :: EndIncluded => { let mut overlap = None ; while let Some (last_started) = started . pop () { if last_started == range { break ; } overlap = Some (last_started) ; } if let Some (first_overlapping) = overlap { return Some ((range , first_overlapping)) ; } } , } } None }
+};
+}

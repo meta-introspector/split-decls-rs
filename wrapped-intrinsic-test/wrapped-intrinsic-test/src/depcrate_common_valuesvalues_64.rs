@@ -1,0 +1,9 @@
+// Generated macro for VALUES_64 (const)
+macro_rules! Depcrate_common_valuesVALUES_64 {
+() => {
+// Module: crate::common::values
+// Provides: {"VALUES_64"}
+// Dependencies: {}
+pub const VALUES_64 : & [u64] = & [0x0000000000000000 , 0x0010000000000000 , 0x3fdfffffffffffff , 0x3fe0000000000000 , 0x3fe0000000000001 , 0x3fefffffffffffff , 0x3ff0000000000000 , 0x3ff0000000000001 , 0x3ff8000000000000 , 0x4024000000000000 , 0x7fefffffffffffff , 0x7ff0000000000000 , 0x7ff923456789abcd , 0x7ff8000000000000 , 0x7ff123456789abcd , 0x7ff0000000000000 , 0x000123456789abcd , 0x000fffffffffffff , 0x0000000000000001 , 0x8000000000000000 , 0x8010000000000000 , 0xbfdfffffffffffff , 0xbfe0000000000000 , 0xbfe0000000000001 , 0xbfefffffffffffff , 0xbff0000000000000 , 0xbff0000000000001 , 0xbff8000000000000 , 0xc024000000000000 , 0xffefffffffffffff , 0xfff0000000000000 , 0xfff923456789abcd , 0xfff8000000000000 , 0xfff123456789abcd , 0xfff0000000000000 , 0x800123456789abcd , 0x800fffffffffffff , 0x8000000000000001 ,] ;
+};
+}

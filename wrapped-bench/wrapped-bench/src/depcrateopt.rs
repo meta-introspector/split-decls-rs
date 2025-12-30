@@ -1,0 +1,9 @@
+// Generated macro for Opt (struct)
+macro_rules! DepcrateOpt {
+() => {
+// Module: crate
+// Provides: {"Opt"}
+// Dependencies: {}
+# [derive (Parser , Debug , Clone , Copy)] # [clap (name = "bulk")] pub struct Opt { # [doc = " The total number of clients which should be created"] # [clap (long = "clients" , short = 'c' , default_value = "1")] pub clients : usize , # [doc = " The total number of streams which should be created"] # [clap (long = "streams" , short = 'n' , default_value = "1")] pub streams : usize , # [doc = " The amount of concurrent streams which should be used"] # [clap (long = "max_streams" , short = 'm' , default_value = "1")] pub max_streams : usize , # [doc = " Number of bytes to transmit from server to client"] # [doc = ""] # [doc = " This can use SI suffixes for sizes. For example, 1M will transfer"] # [doc = " 1MiB, 10G will transfer 10GiB."] # [clap (long , default_value = "1G" , value_parser = parse_byte_size)] pub download_size : u64 , # [doc = " Number of bytes to transmit from client to server"] # [doc = ""] # [doc = " This can use SI suffixes for sizes. For example, 1M will transfer"] # [doc = " 1MiB, 10G will transfer 10GiB."] # [clap (long , default_value = "0" , value_parser = parse_byte_size)] pub upload_size : u64 , # [doc = " Show connection stats the at the end of the benchmark"] # [clap (long = "stats")] pub stats : bool , # [doc = " Whether to use the unordered read API"] # [clap (long = "unordered")] pub read_unordered : bool , # [doc = " Allows to configure the desired cipher suite"] # [doc = ""] # [doc = " Valid options are: aes128, aes256, chacha20"] # [clap (long = "cipher" , default_value = "aes128")] pub cipher : CipherSuite , # [doc = " Starting guess for maximum UDP payload size"] # [clap (long , default_value = "1200")] pub initial_mtu : u16 , }
+};
+}

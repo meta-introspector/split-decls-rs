@@ -1,0 +1,9 @@
+// Generated macro for Error (enum)
+macro_rules! Depcrate_errorError {
+() => {
+// Module: crate::error
+// Provides: {"Error"}
+// Dependencies: {}
+# [non_exhaustive] # [derive (Debug , thiserror :: Error)] pub enum Error { # [error ("invalid range {0:?}, start is larger than end")] InvalidRange (Range < usize >) , # [error ("invalid range {0:?}, original data is only {1} byte long")] DataLengthExceeded (Range < usize > , usize) , # [non_exhaustive] # [error ("cannot replace slice of data that was already replaced")] AlreadyReplaced { # [doc = " The location of the intended replacement."] range : Range < usize > , # [doc = " Whether the modification exactly matches (both range and data) the one it conflicts with."] # [doc = " Some clients may wish to simply ignore this condition."] is_identical : bool , } , # [error (transparent)] Utf8 (# [from] std :: string :: FromUtf8Error) , }
+};
+}

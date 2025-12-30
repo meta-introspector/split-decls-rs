@@ -1,0 +1,9 @@
+// Generated macro for FloatPrecision (enum)
+macro_rules! Depcrate_roundingFloatPrecision {
+() => {
+// Module: crate::rounding
+// Provides: {"FloatPrecision"}
+// Dependencies: {}
+# [doc = " Specifies the precision of a floating point value when constructing a Decimal."] # [doc = ""] # [doc = " **The primary definition of this type is in the [`fixed_decimal`](https://docs.rs/fixed_decimal) crate. Other ICU4X crates re-export it for convenience.**"] # [doc = ""] # [doc = " IEEE 754 is a representation of a point on the number line. On the other hand, Decimal"] # [doc = " specifies not only the point on the number line but also the precision of the number to a"] # [doc = " specific power of 10. This enum augments a floating-point value with the additional"] # [doc = " information required by Decimal."] # [non_exhaustive] # [cfg (feature = "ryu")] # [derive (Debug , Clone , Copy)] pub enum FloatPrecision { # [doc = " Specify that the floating point number is integer-valued."] # [doc = ""] # [doc = " If the floating point is not actually integer-valued, an error will be returned."] Integer , # [doc = " Specify that the floating point number is precise to a specific power of 10."] # [doc = " The number may be rounded or trailing zeros may be added as necessary."] Magnitude (i16) , # [doc = " Specify that the floating point number is precise to a specific number of significant digits."] # [doc = " The number may be rounded or trailing zeros may be added as necessary."] # [doc = ""] # [doc = " The number requested may not be zero"] SignificantDigits (u8) , # [doc = " Specify that the floating point number is precise to the maximum representable by IEEE."] # [doc = ""] # [doc = " This results in a Decimal having enough digits to recover the original floating point"] # [doc = " value, with no trailing zeros."] RoundTrip , }
+};
+}

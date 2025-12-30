@@ -1,0 +1,9 @@
+// Generated macro for macro_2793 (macro)
+macro_rules! Depcrate_shared_d3dkmdtmacro_2793 {
+() => {
+// Module: crate::shared::d3dkmdt
+// Provides: {"macro_2793"}
+// Dependencies: {}
+ENUM ! { enum DXGK_ENGINE_TYPE { DXGK_ENGINE_TYPE_OTHER , DXGK_ENGINE_TYPE_3D , DXGK_ENGINE_TYPE_VIDEO_DECODE , DXGK_ENGINE_TYPE_VIDEO_ENCODE , DXGK_ENGINE_TYPE_VIDEO_PROCESSING , DXGK_ENGINE_TYPE_SCENE_ASSEMBLY , DXGK_ENGINE_TYPE_COPY , DXGK_ENGINE_TYPE_OVERLAY , DXGK_ENGINE_TYPE_CRYPTO , DXGK_ENGINE_TYPE_MAX , } }
+};
+}

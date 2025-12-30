@@ -1,0 +1,9 @@
+// Generated macro for FVE_E_PASSPHRASE_PROTECTOR_CHANGE_BY_STD_USER_DISALLOWED (const)
+macro_rules! Depcrate_shared_winerrorFVE_E_PASSPHRASE_PROTECTOR_CHANGE_BY_STD_USER_DISALLOWED {
+() => {
+// Module: crate::shared::winerror
+// Provides: {"FVE_E_PASSPHRASE_PROTECTOR_CHANGE_BY_STD_USER_DISALLOWED"}
+// Dependencies: {}
+pub const FVE_E_PASSPHRASE_PROTECTOR_CHANGE_BY_STD_USER_DISALLOWED : HRESULT = 0x803100C1 ;
+};
+}

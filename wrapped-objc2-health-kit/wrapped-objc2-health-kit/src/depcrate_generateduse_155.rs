@@ -1,0 +1,9 @@
+// Generated macro for use_155 (pub_use)
+macro_rules! Depcrate_generateduse_155 {
+() => {
+// Module: crate::generated
+// Provides: {"use_155"}
+// Dependencies: {}
+# [cfg (all (feature = "HKClinicalRecord" , feature = "HKObject" , feature = "HKSample"))] pub use self :: __HKClinicalRecord :: HKClinicalRecord ;
+};
+}

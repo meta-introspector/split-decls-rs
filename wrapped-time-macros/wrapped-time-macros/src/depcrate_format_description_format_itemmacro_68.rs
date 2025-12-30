@@ -1,0 +1,9 @@
+// Generated macro for macro_68 (macro)
+macro_rules! Depcrate_format_description_format_itemmacro_68 {
+() => {
+// Module: crate::format_description::format_item
+// Provides: {"macro_68"}
+// Dependencies: {}
+modifier ! { enum HourBase (bool) { Twelve (true) = b"12" , # [default] TwentyFour (false) = b"24" , } enum MonthCaseSensitive (bool) { False (false) = b"false" , # [default] True (true) = b"true" , } enum MonthRepr { # [default] Numerical = b"numerical" , Long = b"long" , Short = b"short" , } enum Padding { Space = b"space" , # [default] Zero = b"zero" , None = b"none" , } enum PeriodCase (bool) { Lower (false) = b"lower" , # [default] Upper (true) = b"upper" , } enum PeriodCaseSensitive (bool) { False (false) = b"false" , # [default] True (true) = b"true" , } enum SignBehavior (bool) { # [default] Automatic (false) = b"automatic" , Mandatory (true) = b"mandatory" , } enum SubsecondDigits { One = b"1" , Two = b"2" , Three = b"3" , Four = b"4" , Five = b"5" , Six = b"6" , Seven = b"7" , Eight = b"8" , Nine = b"9" , # [default] OneOrMore = b"1+" , } enum UnixTimestampPrecision { # [default] Second = b"second" , Millisecond = b"millisecond" , Microsecond = b"microsecond" , Nanosecond = b"nanosecond" , } enum WeekNumberRepr { # [default] Iso = b"iso" , Sunday = b"sunday" , Monday = b"monday" , } enum WeekdayCaseSensitive (bool) { False (false) = b"false" , # [default] True (true) = b"true" , } enum WeekdayOneIndexed (bool) { False (false) = b"false" , # [default] True (true) = b"true" , } enum WeekdayRepr { Short = b"short" , # [default] Long = b"long" , Sunday = b"sunday" , Monday = b"monday" , } enum YearBase (bool) { # [default] Calendar (false) = b"calendar" , IsoWeek (true) = b"iso_week" , } enum YearRepr { # [default] Full = b"full" , Century = b"century" , LastTwo = b"last_two" , } enum YearRange { Standard = b"standard" , # [default] Extended = b"extended" , } }
+};
+}

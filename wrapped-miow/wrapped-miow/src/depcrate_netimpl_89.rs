@@ -1,0 +1,9 @@
+// Generated macro for impl_89 (impl)
+macro_rules! Depcrate_netimpl_89 {
+() => {
+// Module: crate::net
+// Provides: {"impl_89"}
+// Dependencies: {}
+impl UdpSocketExt for UdpSocket { unsafe fn recv_from_overlapped (& self , buf : & mut [u8] , addr : * mut SocketAddrBuf , overlapped : * mut OVERLAPPED ,) -> io :: Result < Option < usize > > { let buf = slice2buf (buf) ; let mut flags = 0 ; let mut received_bytes : u32 = 0 ; let r = WSARecvFrom (self . as_raw_socket () as SOCKET , & buf , 1 , & mut received_bytes , & mut flags , & mut (* addr) . buf as * mut _ as * mut _ , & mut (* addr) . len , overlapped , None ,) ; cvt (r , received_bytes) } unsafe fn recv_overlapped (& self , buf : & mut [u8] , overlapped : * mut OVERLAPPED ,) -> io :: Result < Option < usize > > { let buf = slice2buf (buf) ; let mut flags = 0 ; let mut received_bytes : u32 = 0 ; let r = WSARecv (self . as_raw_socket () as SOCKET , & buf , 1 , & mut received_bytes , & mut flags , overlapped , None ,) ; cvt (r , received_bytes) } unsafe fn send_to_overlapped (& self , buf : & [u8] , addr : & SocketAddr , overlapped : * mut OVERLAPPED ,) -> io :: Result < Option < usize > > { let (addr_buf , addr_len) = socket_addr_to_ptrs (addr) ; let buf = slice2buf (buf) ; let mut sent_bytes = 0 ; let r = WSASendTo (self . as_raw_socket () as SOCKET , & buf , 1 , & mut sent_bytes , 0 , addr_buf . as_ptr () as * const _ , addr_len , overlapped , None ,) ; cvt (r , sent_bytes) } unsafe fn send_overlapped (& self , buf : & [u8] , overlapped : * mut OVERLAPPED ,) -> io :: Result < Option < usize > > { let buf = slice2buf (buf) ; let mut sent_bytes = 0 ; let r = WSASend (self . as_raw_socket () as SOCKET , & buf , 1 , & mut sent_bytes , 0 , overlapped , None ,) ; cvt (r , sent_bytes) } unsafe fn result (& self , overlapped : * mut OVERLAPPED) -> io :: Result < (usize , u32) > { result (self . as_raw_socket () as SOCKET , overlapped) } }
+};
+}

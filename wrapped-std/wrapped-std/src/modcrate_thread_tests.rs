@@ -1,0 +1,47 @@
+// Generated module macro for crate::thread::tests
+macro_rules! Modcrate_thread_tests {
+() => {
+        Depcrate_thread_testsuse_112!();
+        Depcrate_thread_testsuse_113!();
+        Depcrate_thread_testsuse_114!();
+        Depcrate_thread_testsuse_115!();
+        Depcrate_thread_testsuse_116!();
+        Depcrate_thread_testsuse_117!();
+        Depcrate_thread_testsuse_118!();
+        Depcrate_thread_testsuse_119!();
+        Depcrate_thread_testsuse_120!();
+        Depcrate_thread_teststest_unnamed_thread!();
+        Depcrate_thread_teststest_named_thread!();
+        Depcrate_thread_teststest_named_thread_truncation!();
+        Depcrate_thread_teststest_invalid_named_thread!();
+        Depcrate_thread_teststest_run_basic!();
+        Depcrate_thread_teststest_is_finished!();
+        Depcrate_thread_teststest_join_panic!();
+        Depcrate_thread_teststest_spawn_sched!();
+        Depcrate_thread_teststest_spawn_sched_childs_on_default_sched!();
+        Depcrate_thread_testsavoid_copying_the_body!();
+        Depcrate_thread_teststest_avoid_copying_the_body_spawn!();
+        Depcrate_thread_teststest_avoid_copying_the_body_thread_spawn!();
+        Depcrate_thread_teststest_avoid_copying_the_body_join!();
+        Depcrate_thread_teststest_child_doesnt_ref_parent!();
+        Depcrate_thread_teststest_simple_newsched_spawn!();
+        Depcrate_thread_teststest_try_panic_message_string_literal!();
+        Depcrate_thread_teststest_try_panic_any_message_owned_str!();
+        Depcrate_thread_teststest_try_panic_any_message_any!();
+        Depcrate_thread_teststest_try_panic_any_message_unit_struct!();
+        Depcrate_thread_teststest_park_unpark_before!();
+        Depcrate_thread_teststest_park_unpark_called_other_thread!();
+        Depcrate_thread_teststest_park_timeout_unpark_before!();
+        Depcrate_thread_teststest_park_timeout_unpark_not_called!();
+        Depcrate_thread_teststest_park_timeout_unpark_called_other_thread!();
+        Depcrate_thread_testssleep_ms_smoke!();
+        Depcrate_thread_teststest_size_of_option_thread_id!();
+        Depcrate_thread_teststest_thread_id_equal!();
+        Depcrate_thread_teststest_thread_id_not_equal!();
+        Depcrate_thread_teststest_thread_os_id_not_equal!();
+        Depcrate_thread_teststest_scoped_threads_drop_result_before_join!();
+        Depcrate_thread_teststest_scoped_threads_nll!();
+        Depcrate_thread_testsscope_join_race!();
+        Depcrate_thread_teststest_minimal_thread_stack!();
+    };
+}

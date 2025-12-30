@@ -1,0 +1,9 @@
+// Generated macro for impl_1198 (impl)
+macro_rules! Depcrate_test_runner_replayimpl_1198 {
+() => {
+// Module: crate::test_runner::replay
+// Provides: {"impl_1198"}
+// Dependencies: {}
+impl Replay { # [doc = " Write the full state of this `Replay` to the given output."] pub fn init_file (& self , mut file : impl Write) -> io :: Result < () > { writeln ! (file , "{}" , SENTINEL) ? ; writeln ! (file , "{}" , self . seed . to_persistence ()) ? ; let mut step_data = Vec :: < u8 > :: new () ; for step in & self . steps { step_data . push (step_to_char (step) as u8) ; } file . write_all (& step_data) ? ; Ok (()) } # [doc = " Mark the replay as complete in the file."] pub fn complete (mut file : impl Write) -> io :: Result < () > { write ! (file , ".") } # [doc = " Parse a `Replay` out of the given file."] # [doc = ""] # [doc = " The reader is implicitly seeked to the beginning before reading."] pub fn parse_from (mut file : impl Read + Seek ,) -> io :: Result < ReplayFileStatus > { file . seek (io :: SeekFrom :: Start (0)) ? ; let mut reader = io :: BufReader :: new (& mut file) ; let mut line = String :: new () ; reader . read_line (& mut line) ? ; if SENTINEL != line . trim () { return Ok (ReplayFileStatus :: Corrupt) ; } line . clear () ; reader . read_line (& mut line) ? ; let seed = match Seed :: from_persistence (& line) { Some (seed) => seed , None => return Ok (ReplayFileStatus :: Corrupt) , } ; line . clear () ; reader . read_line (& mut line) ? ; let mut steps = Vec :: new () ; for ch in line . chars () { match ch { '+' => steps . push (Ok (())) , '-' => steps . push (Err (TestCaseError :: fail ("failed in other process"))) , '!' => steps . push (Err (TestCaseError :: reject ("rejected in other process" ,))) , '.' => { return Ok (ReplayFileStatus :: Terminated (Replay { seed , steps , })) } ' ' => () , _ => return Ok (ReplayFileStatus :: Corrupt) , } } Ok (ReplayFileStatus :: InProgress (Replay { seed , steps })) } }
+};
+}

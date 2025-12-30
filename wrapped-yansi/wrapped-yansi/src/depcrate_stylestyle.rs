@@ -1,0 +1,9 @@
+// Generated macro for Style (struct)
+macro_rules! Depcrate_styleStyle {
+() => {
+// Module: crate::style
+// Provides: {"Style"}
+// Dependencies: {}
+# [doc = " A set of styling options."] # [doc = ""] # [doc = " ## Equivalence and Ordering"] # [doc = ""] # [doc = " Only a style's `foreground`, `background`, and set of `attributes` are"] # [doc = " considered when testing for equivalence or producing an ordering via"] # [doc = " `PartialEq` or `Eq`, and `PartialOrd` or `Ord`. A style's quirks and"] # [doc = " conditions are ignored."] # [derive (Default , Debug , Copy , Clone)] pub struct Style { # [doc = " The foreground color. Defaults to `None`."] # [doc = ""] # [doc = " ```rust"] # [doc = " use yansi::{Style, Color};"] # [doc = ""] # [doc = " assert_eq!(Style::new().foreground, None);"] # [doc = " assert_eq!(Style::new().green().foreground, Some(Color::Green));"] # [doc = " ```"] pub foreground : Option < Color > , # [doc = " The background color. Defaults to `None`."] # [doc = ""] # [doc = " ```rust"] # [doc = " use yansi::{Style, Color};"] # [doc = ""] # [doc = " assert_eq!(Style::new().background, None);"] # [doc = " assert_eq!(Style::new().on_red().background, Some(Color::Red));"] # [doc = " ```"] pub background : Option < Color > , pub (crate) attributes : Set < Attribute > , pub (crate) quirks : Set < Quirk > , # [doc = " The condition."] # [doc = ""] # [doc = " To check a style's condition directly, use [`Style::enabled()`]:"] # [doc = ""] # [doc = " ```rust"] # [doc = " use yansi::{Style, Condition};"] # [doc = ""] # [doc = " let style = Style::new().whenever(Condition::ALWAYS);"] # [doc = " assert!(style.enabled());"] # [doc = ""] # [doc = " let style = Style::new().whenever(Condition::NEVER);"] # [doc = " assert!(!style.enabled());"] # [doc = " ```"] pub condition : Option < Condition > , }
+};
+}

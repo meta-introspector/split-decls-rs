@@ -1,0 +1,44 @@
+// Generated module macro for crate::um::d2d1svg
+macro_rules! Modcrate_um_d2d1svg {
+() => {
+        Depcrate_um_d2d1svguse_24274!();
+        Depcrate_um_d2d1svguse_24275!();
+        Depcrate_um_d2d1svguse_24276!();
+        Depcrate_um_d2d1svguse_24277!();
+        Depcrate_um_d2d1svguse_24278!();
+        Depcrate_um_d2d1svguse_24279!();
+        Depcrate_um_d2d1svguse_24280!();
+        Depcrate_um_d2d1svguse_24281!();
+        Depcrate_um_d2d1svguse_24282!();
+        Depcrate_um_d2d1svgmacro_24283!();
+        Depcrate_um_d2d1svgmacro_24284!();
+        Depcrate_um_d2d1svgmacro_24285!();
+        Depcrate_um_d2d1svgmacro_24286!();
+        Depcrate_um_d2d1svgmacro_24287!();
+        Depcrate_um_d2d1svgmacro_24288!();
+        Depcrate_um_d2d1svgmacro_24289!();
+        Depcrate_um_d2d1svgmacro_24290!();
+        Depcrate_um_d2d1svgmacro_24291!();
+        Depcrate_um_d2d1svgmacro_24292!();
+        Depcrate_um_d2d1svgmacro_24293!();
+        Depcrate_um_d2d1svgmacro_24294!();
+        Depcrate_um_d2d1svgmacro_24295!();
+        Depcrate_um_d2d1svgmacro_24296!();
+        Depcrate_um_d2d1svgmacro_24297!();
+        Depcrate_um_d2d1svgmacro_24298!();
+        Depcrate_um_d2d1svgmacro_24299!();
+        Depcrate_um_d2d1svgmacro_24300!();
+        Depcrate_um_d2d1svgmacro_24301!();
+        Depcrate_um_d2d1svgmacro_24302!();
+        Depcrate_um_d2d1svgmacro_24303!();
+        Depcrate_um_d2d1svgmacro_24304!();
+        Depcrate_um_d2d1svgmacro_24305!();
+        Depcrate_um_d2d1svgmacro_24306!();
+        Depcrate_um_d2d1svgmacro_24307!();
+        Depcrate_um_d2d1svgmacro_24308!();
+        Depcrate_um_d2d1svgmacro_24309!();
+        Depcrate_um_d2d1svgmacro_24310!();
+        Depcrate_um_d2d1svgmacro_24311!();
+        Depcrate_um_d2d1svgmacro_24312!();
+    };
+}

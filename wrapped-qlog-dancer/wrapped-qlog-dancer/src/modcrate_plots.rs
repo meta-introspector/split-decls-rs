@@ -1,0 +1,40 @@
+// Generated module macro for crate::plots
+macro_rules! Modcrate_plots {
+() => {
+        Depcrate_plotsuse_121!();
+        Depcrate_plotsuse_122!();
+        Depcrate_plotsuse_123!();
+        Depcrate_plotsuse_124!();
+        Depcrate_plotsuse_125!();
+        Depcrate_plotsuse_126!();
+        Depcrate_plotsuse_127!();
+        Depcrate_plotsuse_128!();
+        Depcrate_plotsChartOutputType!();
+        Depcrate_plotsChartConfig!();
+        Depcrate_plotsimpl_131!();
+        Depcrate_plotsmake_chart_bitmap_area!();
+        Depcrate_plotsmake_chart_canvas_area!();
+        Depcrate_plotsmake_chart_config!();
+        Depcrate_plotschart_title_style!();
+        Depcrate_plotschart_subtitle_style!();
+        Depcrate_plotschart_label_style!();
+        Depcrate_plotsdraw_mesh!();
+        Depcrate_plotsClampParams!();
+        Depcrate_plotsChartSize!();
+        Depcrate_plotsChartMargin!();
+        Depcrate_plotsAreaMargin!();
+        Depcrate_plotsPlotParameters!();
+        Depcrate_plotsdraw_line!();
+        Depcrate_plotscolors!();
+        Depcrate_plotscongestion_control!();
+        Depcrate_plotsconn_flow_control!();
+        Depcrate_plotsconn_overview!();
+        Depcrate_plotsminmax!();
+        Depcrate_plotspacket_received!();
+        Depcrate_plotspacket_sent!();
+        Depcrate_plotspending!();
+        Depcrate_plotsrtt!();
+        Depcrate_plotsstream_multiplex!();
+        Depcrate_plotsstream_sparks!();
+    };
+}

@@ -1,0 +1,9 @@
+// Generated macro for H3AuditStats (struct)
+macro_rules! Depcrate_http3_statsH3AuditStats {
+() => {
+// Module: crate::http3::stats
+// Provides: {"H3AuditStats"}
+// Dependencies: {}
+# [doc = " Stream-level HTTP/3 audit statistics recorded by"] # [doc = " [H3Driver](crate::http3::driver::H3Driver)."] # [derive (Debug)] pub struct H3AuditStats { # [doc = " The stream ID of this session."] stream_id : u64 , # [doc = " The number of bytes sent over the stream."] downstream_bytes_sent : AtomicU64 , # [doc = " The number of bytes received over the stream."] downstream_bytes_recvd : AtomicU64 , # [doc = " A STOP_SENDING error code received from the peer."] # [doc = ""] # [doc = " -1 indicates that this error code was not received yet."] recvd_stop_sending_error_code : AtomicI64 , # [doc = " A RESET_STREAM error code received from the peer."] # [doc = ""] # [doc = " -1 indicates that this error code was not received yet."] recvd_reset_stream_error_code : AtomicI64 , # [doc = " A STOP_SENDING error code sent to the peer."] # [doc = ""] # [doc = " -1 indicates that this error code was not received yet."] sent_stop_sending_error_code : AtomicI64 , # [doc = " A RESET_STREAM error code sent to the peer."] # [doc = ""] # [doc = " -1 indicates that this error code was not received yet."] sent_reset_stream_error_code : AtomicI64 , # [doc = " Stream FIN received from the peer."] recvd_stream_fin : AtomicCell < StreamClosureKind > , # [doc = " Stream FIN sent to the peer."] sent_stream_fin : AtomicCell < StreamClosureKind > , # [doc = " Cumulative time between HEADERS failed flush and complete."] # [doc = ""] # [doc = " Measured as the duration between the first moment a HEADERS frame was"] # [doc = " not flushed in full, and the moment that it was completely flushed."] # [doc = " Measured across all HEADERS frames sent on the stream. A value of 0"] # [doc = " indicates there was no failed flushing."] headers_flush_duration : AtomicCell < Duration > , }
+};
+}

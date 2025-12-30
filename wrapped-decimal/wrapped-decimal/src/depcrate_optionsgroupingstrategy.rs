@@ -1,0 +1,9 @@
+// Generated macro for GroupingStrategy (enum)
+macro_rules! Depcrate_optionsGroupingStrategy {
+() => {
+// Module: crate::options
+// Provides: {"GroupingStrategy"}
+// Dependencies: {}
+# [doc = " Configuration for how often to render grouping separators."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " use icu::decimal::options;"] # [doc = " use icu::decimal::DecimalFormatter;"] # [doc = " use icu::locale::Locale;"] # [doc = " use writeable::assert_writeable_eq;"] # [doc = ""] # [doc = " let locale = Default::default();"] # [doc = " let mut options: options::DecimalFormatterOptions = Default::default();"] # [doc = " options.grouping_strategy = Some(options::GroupingStrategy::Min2);"] # [doc = " let formatter = DecimalFormatter::try_new(locale, options)"] # [doc = "     .expect(\"locale should be present\");"] # [doc = ""] # [doc = " let one_thousand = 1000.into();"] # [doc = " assert_writeable_eq!(formatter.format(&one_thousand), \"1000\");"] # [doc = ""] # [doc = " let ten_thousand = 10000.into();"] # [doc = " assert_writeable_eq!(formatter.format(&ten_thousand), \"10,000\");"] # [doc = " ```"] # [non_exhaustive] # [derive (Debug , Eq , PartialEq , Clone , Copy , Hash , Default)] pub enum GroupingStrategy { # [doc = " Render grouping separators according to locale preferences."] # [default] Auto , # [doc = " Never render grouping separators."] Never , # [doc = " Always render grouping separators."] # [doc = ""] # [doc = " For [`DecimalFormatter`](crate::DecimalFormatter), [`GroupingStrategy::Always`]"] # [doc = " has the same behavior as [`GroupingStrategy::Auto`]."] Always , # [doc = " Render grouping separators only if there are at least 2 digits before the final grouping"] # [doc = " separator. In most locales, this means that numbers between 1000 and 9999 do not get"] # [doc = " grouping separators, but numbers 10,000 and above will."] Min2 , }
+};
+}

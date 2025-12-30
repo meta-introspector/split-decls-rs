@@ -1,0 +1,9 @@
+// Generated macro for Node (struct)
+macro_rules! Depcrate_obligation_forestNode {
+() => {
+// Module: crate::obligation_forest
+// Provides: {"Node"}
+// Dependencies: {}
+# [derive (Debug)] struct Node < O > { obligation : O , state : Cell < NodeState > , # [doc = " Obligations that depend on this obligation for their completion. They"] # [doc = " must all be in a non-pending state."] dependents : Vec < usize > , # [doc = " If true, `dependents[0]` points to a \"parent\" node, which requires"] # [doc = " special treatment upon error but is otherwise treated the same."] # [doc = " (It would be more idiomatic to store the parent node in a separate"] # [doc = " `Option<usize>` field, but that slows down the common case of"] # [doc = " iterating over the parent and other descendants together.)"] has_parent : bool , # [doc = " Identifier of the obligation tree to which this node belongs."] obligation_tree_id : ObligationTreeId , }
+};
+}

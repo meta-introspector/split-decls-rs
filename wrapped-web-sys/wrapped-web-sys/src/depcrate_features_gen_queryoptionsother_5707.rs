@@ -1,0 +1,9 @@
+// Generated macro for other_5707 (other)
+macro_rules! Depcrate_features_gen_QueryOptionsother_5707 {
+() => {
+// Module: crate::features::gen_QueryOptions
+// Provides: {"other_5707"}
+// Dependencies: {}
+# [cfg (web_sys_unstable_apis)] # [wasm_bindgen] extern "C" { # [wasm_bindgen (extends = :: js_sys :: Object , js_name = QueryOptions)] # [derive (Debug , Clone , PartialEq , Eq)] # [doc = "The `QueryOptions` dictionary."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `QueryOptions`*"] # [doc = ""] # [doc = "*This API is unstable and requires `--cfg=web_sys_unstable_apis` to be activated, as"] # [doc = "[described in the `wasm-bindgen` guide](https://wasm-bindgen.github.io/wasm-bindgen/web-sys/unstable-apis.html)*"] pub type QueryOptions ; # [cfg (web_sys_unstable_apis)] # [doc = "Get the `postscriptNames` field of this object."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `QueryOptions`*"] # [doc = ""] # [doc = "*This API is unstable and requires `--cfg=web_sys_unstable_apis` to be activated, as"] # [doc = "[described in the `wasm-bindgen` guide](https://wasm-bindgen.github.io/wasm-bindgen/web-sys/unstable-apis.html)*"] # [wasm_bindgen (method , getter = "postscriptNames")] pub fn get_postscript_names (this : & QueryOptions) -> Option < :: js_sys :: Array > ; # [cfg (web_sys_unstable_apis)] # [doc = "Change the `postscriptNames` field of this object."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `QueryOptions`*"] # [doc = ""] # [doc = "*This API is unstable and requires `--cfg=web_sys_unstable_apis` to be activated, as"] # [doc = "[described in the `wasm-bindgen` guide](https://wasm-bindgen.github.io/wasm-bindgen/web-sys/unstable-apis.html)*"] # [wasm_bindgen (method , setter = "postscriptNames")] pub fn set_postscript_names (this : & QueryOptions , val : & :: wasm_bindgen :: JsValue) ; }
+};
+}

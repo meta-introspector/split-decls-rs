@@ -1,0 +1,9 @@
+// Generated macro for impl_262 (impl)
+macro_rules! Depcrate_generatedimpl_262 {
+() => {
+// Module: crate::generated
+// Provides: {"impl_262"}
+// Dependencies: {}
+impl XCTSourceCodeFrame { extern_methods ! (# [unsafe (method (initWithAddress : symbolInfo :))] # [unsafe (method_family = init)] pub fn initWithAddress_symbolInfo (this : Allocated < Self >, address : u64 , symbol_info : Option <& XCTSourceCodeSymbolInfo >,) -> Retained < Self >; # [unsafe (method (initWithAddress :))] # [unsafe (method_family = init)] pub fn initWithAddress (this : Allocated < Self >, address : u64) -> Retained < Self >; # [unsafe (method (init))] # [unsafe (method_family = init)] pub unsafe fn init (this : Allocated < Self >) -> Retained < Self >; # [unsafe (method (new))] # [unsafe (method_family = new)] pub unsafe fn new () -> Retained < Self >; # [unsafe (method (address))] # [unsafe (method_family = none)] pub fn address (& self) -> u64 ; # [unsafe (method (symbolInfo))] # [unsafe (method_family = none)] pub fn symbolInfo (& self) -> Option < Retained < XCTSourceCodeSymbolInfo >>; # [doc = " Error previously returned for symbolication attempt. This is not serialized when the frame is encoded."] # [unsafe (method (symbolicationError))] # [unsafe (method_family = none)] pub fn symbolicationError (& self) -> Option < Retained < NSError >>; # [doc = " method -symbolInfoWithError:"] # [doc = " Attempts to get symbol information for the address. This can fail if required symbol data is not available. Only"] # [doc = " one attempt will be made and the error will be stored and returned for future requests."] # [unsafe (method (symbolInfoWithError : _))] # [unsafe (method_family = none)] pub fn symbolInfoWithError (& self ,) -> Result < Retained < XCTSourceCodeSymbolInfo >, Retained < NSError >>;) ; }
+};
+}

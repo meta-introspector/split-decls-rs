@@ -1,0 +1,46 @@
+// Generated module macro for crate::image
+macro_rules! Modcrate_image {
+() => {
+        Depcrate_imageuse_367!();
+        Depcrate_imageuse_368!();
+        Depcrate_imageuse_369!();
+        Depcrate_imageuse_370!();
+        Depcrate_imageuse_371!();
+        Depcrate_imageuse_372!();
+        Depcrate_imageuse_373!();
+        Depcrate_imageuse_374!();
+        Depcrate_imageuse_375!();
+        Depcrate_imageuse_376!();
+        Depcrate_imageuse_377!();
+        Depcrate_imageuse_378!();
+        Depcrate_imageuse_379!();
+        Depcrate_imageImageFormat!();
+        Depcrate_imageimpl_381!();
+        Depcrate_imageImageReadBuffer!();
+        Depcrate_imageimpl_383!();
+        Depcrate_imageload_rect!();
+        Depcrate_imagedecoder_to_vec!();
+        Depcrate_imageImageDecoder!();
+        Depcrate_imageimpl_387!();
+        Depcrate_imageImageDecoderRect!();
+        Depcrate_imageAnimationDecoder!();
+        Depcrate_imageImageEncoder!();
+        Depcrate_imagePixels!();
+        Depcrate_imageimpl_392!();
+        Depcrate_imageimpl_393!();
+        Depcrate_imageGenericImageView!();
+        Depcrate_imageGenericImage!();
+        Depcrate_imageSubImage!();
+        Depcrate_imageSubImageInner!();
+        Depcrate_imageDerefPixel!();
+        Depcrate_imageDerefSubpixel!();
+        Depcrate_imageimpl_400!();
+        Depcrate_imageimpl_401!();
+        Depcrate_imageimpl_402!();
+        Depcrate_imageimpl_403!();
+        Depcrate_imageimpl_404!();
+        Depcrate_imageimpl_405!();
+        Depcrate_imageimpl_406!();
+        Depcrate_imagetests!();
+    };
+}

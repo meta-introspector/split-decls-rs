@@ -1,0 +1,72 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcrate_readertrans_size.rs");
+include!("depcrateterminator.rs");
+include!("depcrate_readerimpl_14.rs");
+include!("depcrate_writerwriterstate.rs");
+include!("depcratereader.rs");
+include!("depcrate_writeruse_39.rs");
+include!("depcrate_readertests.rs");
+include!("depcrate_writertests.rs");
+include!("depcrate_writerquote.rs");
+include!("depcrate_readernfainputaction.rs");
+include!("depcrate_readerdfa_states.rs");
+include!("depcrate_readerimpl_30.rs");
+include!("depcrate_readerimpl_28.rs");
+include!("depcrateimpl_59.rs");
+include!("depcrate_readerreadfieldnocopyresult.rs");
+include!("depcrate_writeruse_38.rs");
+include!("depcrate_writerimpl_43.rs");
+include!("depcrate_readerimpl_26.rs");
+include!("depcrate_readernfa_states.rs");
+include!("depcrate_readerimpl_11.rs");
+include!("depcratewriter.rs");
+include!("depcrate_writerimpl_51.rs");
+include!("depcrate_writerimpl_46.rs");
+include!("depcrate_readerreadrecordresult.rs");
+include!("depcrate_readerimpl_20.rs");
+include!("depcratequotestyle.rs");
+include!("depcrateuse_1.rs");
+include!("depcrate_readeruse_5.rs");
+include!("depcrate_writerwriteresult.rs");
+include!("depcrate_readerimpl_19.rs");
+include!("depcrate_readertrans_classes.rs");
+include!("depcrate_readeruse_4.rs");
+include!("depcrate_writeris_non_numeric.rs");
+include!("depcrate_readerimpl_9.rs");
+include!("depcrate_writerwriterbuilder.rs");
+include!("depcrate_readerimpl_32.rs");
+include!("depcrate_writermoving.rs");
+include!("depcrate_readerclass_size.rs");
+include!("depcrate_readerimpl_34.rs");
+include!("depcrate_writeruse_37.rs");
+include!("depcrate_writerimpl_42.rs");
+include!("depcrate_readernfastate.rs");
+include!("depcrate_writerimpl_50.rs");
+include!("depcrate_readerdfastate.rs");
+include!("depcrate_writerwrite_optimistic.rs");
+include!("depcrate_readerimpl_7.rs");
+include!("depcrate_readerreadfieldresult.rs");
+include!("depcrate_readerreader.rs");
+include!("depcrate_readerimpl_31.rs");
+include!("depcrateuse_2.rs");
+include!("depcrate_readerreadrecordnocopyresult.rs");
+include!("depcrate_writerwriter.rs");
+include!("depcrate_readerdfaclasses.rs");
+include!("depcrate_writeruse_40.rs");
+include!("depcrate_readerimpl_33.rs");
+include!("depcrate_writerimpl_49.rs");
+include!("depcrate_writerimpl_47.rs");
+include!("depcrate_writerwrite_pessimistic.rs");
+include!("depcrate_readerdfa.rs");
+include!("depcrate_readerreaderbuilder.rs");
+include!("modcrate_writer.rs");
+include!("modcrate_reader.rs");
+include!("modcrate.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate_writer!();
+    Modcrate_reader!();
+    Modcrate!();
+}

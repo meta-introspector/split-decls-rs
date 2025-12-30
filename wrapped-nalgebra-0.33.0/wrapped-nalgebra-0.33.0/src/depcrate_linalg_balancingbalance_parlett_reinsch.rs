@@ -1,0 +1,9 @@
+// Generated macro for balance_parlett_reinsch (function)
+macro_rules! Depcrate_linalg_balancingbalance_parlett_reinsch {
+() => {
+// Module: crate::linalg::balancing
+// Provides: {"balance_parlett_reinsch"}
+// Dependencies: {}
+# [doc = " Applies in-place a modified Parlett and Reinsch matrix balancing with 2-norm to the matrix and returns"] # [doc = " the corresponding diagonal transformation."] # [doc = ""] # [doc = " See <https://arxiv.org/pdf/1401.5766.pdf>"] pub fn balance_parlett_reinsch < T : RealField , D : Dim > (matrix : & mut OMatrix < T , D , D >) -> OVector < T , D > where DefaultAllocator : Allocator < D , D > + Allocator < D > , { assert ! (matrix . is_square () , "Unable to balance a non-square matrix.") ; let dim = matrix . shape_generic () . 0 ; let radix : T = crate :: convert (2.0f64) ; let mut d = OVector :: from_element_generic (dim , Const :: < 1 > , T :: one ()) ; let mut converged = false ; while ! converged { converged = true ; for i in 0 .. dim . value () { let mut n_col = matrix . column (i) . norm_squared () ; let mut n_row = matrix . row (i) . norm_squared () ; let mut f = T :: one () ; let s = n_col . clone () + n_row . clone () ; n_col = n_col . sqrt () ; n_row = n_row . sqrt () ; if n_col . clone () . is_zero () || n_row . clone () . is_zero () { continue ; } while n_col . clone () < n_row . clone () / radix . clone () { n_col *= radix . clone () ; n_row /= radix . clone () ; f *= radix . clone () ; } while n_col . clone () >= n_row . clone () * radix . clone () { n_col /= radix . clone () ; n_row *= radix . clone () ; f /= radix . clone () ; } let eps : T = crate :: convert (0.95) ; # [allow (clippy :: suspicious_operation_groupings)] if n_col . clone () * n_col + n_row . clone () * n_row < eps * s { converged = false ; d [i] *= f . clone () ; matrix . column_mut (i) . mul_assign (f . clone ()) ; matrix . row_mut (i) . div_assign (f . clone ()) ; } } } d }
+};
+}

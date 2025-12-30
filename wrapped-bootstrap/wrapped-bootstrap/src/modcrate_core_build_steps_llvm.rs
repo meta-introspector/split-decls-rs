@@ -1,0 +1,47 @@
+// Generated module macro for crate::core::build_steps::llvm
+macro_rules! Modcrate_core_build_steps_llvm {
+() => {
+        Depcrate_core_build_steps_llvmuse_408!();
+        Depcrate_core_build_steps_llvmuse_409!();
+        Depcrate_core_build_steps_llvmuse_410!();
+        Depcrate_core_build_steps_llvmuse_411!();
+        Depcrate_core_build_steps_llvmuse_412!();
+        Depcrate_core_build_steps_llvmuse_413!();
+        Depcrate_core_build_steps_llvmuse_414!();
+        Depcrate_core_build_steps_llvmuse_415!();
+        Depcrate_core_build_steps_llvmuse_416!();
+        Depcrate_core_build_steps_llvmuse_417!();
+        Depcrate_core_build_steps_llvmuse_418!();
+        Depcrate_core_build_steps_llvmuse_419!();
+        Depcrate_core_build_steps_llvmLlvmResult!();
+        Depcrate_core_build_steps_llvmMeta!();
+        Depcrate_core_build_steps_llvmLlvmBuildStatus!();
+        Depcrate_core_build_steps_llvmimpl_423!();
+        Depcrate_core_build_steps_llvmLdFlags!();
+        Depcrate_core_build_steps_llvmimpl_425!();
+        Depcrate_core_build_steps_llvmprebuilt_llvm_config!();
+        Depcrate_core_build_steps_llvmLLVM_INVALIDATION_PATHS!();
+        Depcrate_core_build_steps_llvmdetect_llvm_freshness!();
+        Depcrate_core_build_steps_llvmis_ci_llvm_available_for_target!();
+        Depcrate_core_build_steps_llvmLlvm!();
+        Depcrate_core_build_steps_llvmimpl_431!();
+        Depcrate_core_build_steps_llvmget_llvm_version!();
+        Depcrate_core_build_steps_llvmget_llvm_version_major!();
+        Depcrate_core_build_steps_llvmcheck_llvm_version!();
+        Depcrate_core_build_steps_llvmconfigure_cmake!();
+        Depcrate_core_build_steps_llvmconfigure_llvm!();
+        Depcrate_core_build_steps_llvmget_var!();
+        Depcrate_core_build_steps_llvmEnzyme!();
+        Depcrate_core_build_steps_llvmimpl_439!();
+        Depcrate_core_build_steps_llvmLld!();
+        Depcrate_core_build_steps_llvmimpl_441!();
+        Depcrate_core_build_steps_llvmSanitizers!();
+        Depcrate_core_build_steps_llvmimpl_443!();
+        Depcrate_core_build_steps_llvmSanitizerRuntime!();
+        Depcrate_core_build_steps_llvmsupported_sanitizers!();
+        Depcrate_core_build_steps_llvmCrtBeginEnd!();
+        Depcrate_core_build_steps_llvmimpl_447!();
+        Depcrate_core_build_steps_llvmLibunwind!();
+        Depcrate_core_build_steps_llvmimpl_449!();
+    };
+}

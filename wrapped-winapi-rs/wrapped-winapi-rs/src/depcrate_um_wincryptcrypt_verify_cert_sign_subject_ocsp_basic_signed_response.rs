@@ -1,0 +1,9 @@
+// Generated macro for CRYPT_VERIFY_CERT_SIGN_SUBJECT_OCSP_BASIC_SIGNED_RESPONSE (const)
+macro_rules! Depcrate_um_wincryptCRYPT_VERIFY_CERT_SIGN_SUBJECT_OCSP_BASIC_SIGNED_RESPONSE {
+() => {
+// Module: crate::um::wincrypt
+// Provides: {"CRYPT_VERIFY_CERT_SIGN_SUBJECT_OCSP_BASIC_SIGNED_RESPONSE"}
+// Dependencies: {}
+pub const CRYPT_VERIFY_CERT_SIGN_SUBJECT_OCSP_BASIC_SIGNED_RESPONSE : DWORD = 4 ;
+};
+}

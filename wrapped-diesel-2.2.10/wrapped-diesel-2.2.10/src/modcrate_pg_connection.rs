@@ -1,0 +1,53 @@
+// Generated module macro for crate::pg::connection
+macro_rules! Modcrate_pg_connection {
+() => {
+        Depcrate_pg_connectioncopy!();
+        Depcrate_pg_connectioncursor!();
+        Depcrate_pg_connectionraw!();
+        Depcrate_pg_connectionresult!();
+        Depcrate_pg_connectionrow!();
+        Depcrate_pg_connectionstmt!();
+        Depcrate_pg_connectionuse_3283!();
+        Depcrate_pg_connectionuse_3284!();
+        Depcrate_pg_connectionuse_3285!();
+        Depcrate_pg_connectionuse_3286!();
+        Depcrate_pg_connectionuse_3287!();
+        Depcrate_pg_connectionuse_3288!();
+        Depcrate_pg_connectionuse_3289!();
+        Depcrate_pg_connectionuse_3290!();
+        Depcrate_pg_connectionuse_3291!();
+        Depcrate_pg_connectionuse_3292!();
+        Depcrate_pg_connectionuse_3293!();
+        Depcrate_pg_connectionuse_3294!();
+        Depcrate_pg_connectionuse_3295!();
+        Depcrate_pg_connectionuse_3296!();
+        Depcrate_pg_connectionuse_3297!();
+        Depcrate_pg_connectionuse_3298!();
+        Depcrate_pg_connectionuse_3299!();
+        Depcrate_pg_connectionuse_3300!();
+        Depcrate_pg_connectionuse_3301!();
+        Depcrate_pg_connectionuse_3302!();
+        Depcrate_pg_connectionuse_3303!();
+        Depcrate_pg_connectionuse_3304!();
+        Depcrate_pg_connectionuse_3305!();
+        Depcrate_pg_connectionuse_3306!();
+        Depcrate_pg_connectionuse_3307!();
+        Depcrate_pg_connectionuse_3308!();
+        Depcrate_pg_connectionuse_3309!();
+        Depcrate_pg_connectionPgConnection!();
+        Depcrate_pg_connectionimpl_3311!();
+        Depcrate_pg_connectionimpl_3312!();
+        Depcrate_pg_connectionPgRowByRowLoadingMode!();
+        Depcrate_pg_connectionimpl_3314!();
+        Depcrate_pg_connectionimpl_3315!();
+        Depcrate_pg_connectionimpl_3316!();
+        Depcrate_pg_connectionimpl_3317!();
+        Depcrate_pg_connectionupdate_transaction_manager_status!();
+        Depcrate_pg_connectionimpl_3319!();
+        Depcrate_pg_connectionimpl_3320!();
+        Depcrate_pg_connectionimpl_3321!();
+        Depcrate_pg_connectionnoop_notice_processor!();
+        Depcrate_pg_connectionprivate!();
+        Depcrate_pg_connectiontests!();
+    };
+}

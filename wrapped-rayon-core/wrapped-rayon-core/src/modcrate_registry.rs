@@ -1,0 +1,52 @@
+// Generated module macro for crate::registry
+macro_rules! Modcrate_registry {
+() => {
+        Depcrate_registryuse_144!();
+        Depcrate_registryuse_145!();
+        Depcrate_registryuse_146!();
+        Depcrate_registryuse_147!();
+        Depcrate_registryuse_148!();
+        Depcrate_registryuse_149!();
+        Depcrate_registryuse_150!();
+        Depcrate_registryuse_151!();
+        Depcrate_registryuse_152!();
+        Depcrate_registryuse_153!();
+        Depcrate_registryuse_154!();
+        Depcrate_registryuse_155!();
+        Depcrate_registryuse_156!();
+        Depcrate_registryuse_157!();
+        Depcrate_registryuse_158!();
+        Depcrate_registryuse_159!();
+        Depcrate_registryThreadBuilder!();
+        Depcrate_registryimpl_161!();
+        Depcrate_registryimpl_162!();
+        Depcrate_registryThreadSpawn!();
+        Depcrate_registryDefaultSpawn!();
+        Depcrate_registryimpl_165!();
+        Depcrate_registryCustomSpawn!();
+        Depcrate_registryimpl_167!();
+        Depcrate_registryimpl_168!();
+        Depcrate_registryRegistry!();
+        Depcrate_registryTHE_REGISTRY!();
+        Depcrate_registryTHE_REGISTRY_SET!();
+        Depcrate_registryglobal_registry!();
+        Depcrate_registryinit_global_registry!();
+        Depcrate_registryset_global_registry!();
+        Depcrate_registrydefault_global_registry!();
+        Depcrate_registryTerminator!();
+        Depcrate_registryimpl_177!();
+        Depcrate_registryimpl_178!();
+        Depcrate_registryRegistryId!();
+        Depcrate_registryThreadInfo!();
+        Depcrate_registryimpl_181!();
+        Depcrate_registryWorkerThread!();
+        Depcrate_registrymacro_183!();
+        Depcrate_registryimpl_184!();
+        Depcrate_registryimpl_185!();
+        Depcrate_registryimpl_186!();
+        Depcrate_registrymain_loop!();
+        Depcrate_registryin_worker!();
+        Depcrate_registryXorShift64Star!();
+        Depcrate_registryimpl_190!();
+    };
+}

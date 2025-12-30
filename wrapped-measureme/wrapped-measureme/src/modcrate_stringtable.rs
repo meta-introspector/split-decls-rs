@@ -1,0 +1,44 @@
+// Generated module macro for crate::stringtable
+macro_rules! Modcrate_stringtable {
+() => {
+        Depcrate_stringtableuse_105!();
+        Depcrate_stringtableuse_106!();
+        Depcrate_stringtableuse_107!();
+        Depcrate_stringtableuse_108!();
+        Depcrate_stringtableStringId!();
+        Depcrate_stringtableimpl_110!();
+        Depcrate_stringtableTERMINATOR!();
+        Depcrate_stringtableSTRING_REF_TAG!();
+        Depcrate_stringtableSTRING_REF_ENCODED_SIZE!();
+        Depcrate_stringtableMAX_USER_VIRTUAL_STRING_ID!();
+        Depcrate_stringtableMETADATA_STRING_ID!();
+        Depcrate_stringtableINVALID_STRING_ID!();
+        Depcrate_stringtableFIRST_REGULAR_STRING_ID!();
+        Depcrate_stringtableStringTableBuilder!();
+        Depcrate_stringtableSerializableString!();
+        Depcrate_stringtableimpl_120!();
+        Depcrate_stringtableStringComponent!();
+        Depcrate_stringtableimpl_122!();
+        Depcrate_stringtableimpl_123!();
+        Depcrate_stringtableimpl_serializable_string_for_fixed_size!();
+        Depcrate_stringtablemacro_125!();
+        Depcrate_stringtablemacro_126!();
+        Depcrate_stringtablemacro_127!();
+        Depcrate_stringtablemacro_128!();
+        Depcrate_stringtablemacro_129!();
+        Depcrate_stringtablemacro_130!();
+        Depcrate_stringtablemacro_131!();
+        Depcrate_stringtablemacro_132!();
+        Depcrate_stringtablemacro_133!();
+        Depcrate_stringtablemacro_134!();
+        Depcrate_stringtablemacro_135!();
+        Depcrate_stringtablemacro_136!();
+        Depcrate_stringtablemacro_137!();
+        Depcrate_stringtablemacro_138!();
+        Depcrate_stringtablemacro_139!();
+        Depcrate_stringtablemacro_140!();
+        Depcrate_stringtablemacro_141!();
+        Depcrate_stringtableserialize_index_entry!();
+        Depcrate_stringtableimpl_143!();
+    };
+}

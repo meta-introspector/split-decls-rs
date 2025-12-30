@@ -1,0 +1,9 @@
+// Generated macro for impl_21 (impl)
+macro_rules! Depcrate_consoleimpl_21 {
+() => {
+// Module: crate::console
+// Provides: {"impl_21"}
+// Dependencies: {}
+impl ScreenBufferInfo { # [doc = " Returns the size of the console screen buffer, in character columns and"] # [doc = " rows."] # [doc = ""] # [doc = " This corresponds to `dwSize`."] pub fn size (& self) -> (i16 , i16) { (self . 0 . dwSize . X , self . 0 . dwSize . Y) } # [doc = " Returns the position of the cursor in terms of column and row"] # [doc = " coordinates of the console screen buffer."] # [doc = ""] # [doc = " This corresponds to `dwCursorPosition`."] pub fn cursor_position (& self) -> (i16 , i16) { (self . 0 . dwCursorPosition . X , self . 0 . dwCursorPosition . Y) } # [doc = " Returns the character attributes associated with this console."] # [doc = ""] # [doc = " This corresponds to `wAttributes`."] # [doc = ""] # [doc = " See [`char info`] for more details."] # [doc = ""] # [doc = " [`char info`]: https://docs.microsoft.com/en-us/windows/console/char-info-str"] pub fn attributes (& self) -> u16 { self . 0 . wAttributes } # [doc = " Returns the maximum size of the console window, in character columns"] # [doc = " and rows, given the current screen buffer size and font and the screen"] # [doc = " size."] pub fn max_window_size (& self) -> (i16 , i16) { (self . 0 . dwMaximumWindowSize . X , self . 0 . dwMaximumWindowSize . Y) } # [doc = " Returns the console screen buffer coordinates of the upper-left and"] # [doc = " lower-right corners of the display window."] # [doc = ""] # [doc = " This corresponds to `srWindow`."] pub fn window_rect (& self) -> SmallRect { SmallRect { left : self . 0 . srWindow . Left , top : self . 0 . srWindow . Top , right : self . 0 . srWindow . Right , bottom : self . 0 . srWindow . Bottom , } } }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for impl_273 (impl)
+macro_rules! Depcrate_ansiimpl_273 {
+() => {
+// Module: crate::ansi
+// Provides: {"impl_273"}
+// Dependencies: {}
+impl State { fn is_final (& self) -> bool { # [allow (clippy :: match_like_matches_macro)] match self { Self :: S3 | Self :: S5 | Self :: S6 | Self :: S7 | Self :: S8 | Self :: S9 | Self :: S11 => true , _ => false , } } fn is_trapped (& self) -> bool { # [allow (clippy :: match_like_matches_macro)] match self { Self :: Trap => true , _ => false , } } fn transition (& mut self , c : char) { * self = match c { '\u{1b}' | '\u{9b}' => match self { Self :: Start => Self :: S1 , _ => Self :: Trap , } , '(' | ')' => match self { Self :: S1 => Self :: S2 , Self :: S2 | Self :: S4 => Self :: S4 , _ => Self :: Trap , } , ';' => match self { Self :: S1 | Self :: S2 | Self :: S4 => Self :: S4 , Self :: S5 | Self :: S6 | Self :: S7 | Self :: S8 | Self :: S10 => Self :: S10 , _ => Self :: Trap , } , '[' | '#' | '?' => match self { Self :: S1 | Self :: S2 | Self :: S4 => Self :: S4 , _ => Self :: Trap , } , '0' ..= '2' => match self { Self :: S1 | Self :: S4 => Self :: S5 , Self :: S2 => Self :: S3 , Self :: S5 => Self :: S6 , Self :: S6 => Self :: S7 , Self :: S7 => Self :: S8 , Self :: S8 => Self :: S9 , Self :: S10 => Self :: S5 , _ => Self :: Trap , } , '3' ..= '9' => match self { Self :: S1 | Self :: S4 => Self :: S5 , Self :: S2 => Self :: S5 , Self :: S5 => Self :: S6 , Self :: S6 => Self :: S7 , Self :: S7 => Self :: S8 , Self :: S8 => Self :: S9 , Self :: S10 => Self :: S5 , _ => Self :: Trap , } , 'A' ..= 'P' | 'R' | 'Z' | 'c' | 'f' ..= 'n' | 'q' | 'r' | 'y' | '=' | '>' | '<' => { match self { Self :: S1 | Self :: S2 | Self :: S4 | Self :: S5 | Self :: S6 | Self :: S7 | Self :: S8 | Self :: S10 => Self :: S11 , _ => Self :: Trap , } } _ => Self :: Trap , } ; } }
+};
+}

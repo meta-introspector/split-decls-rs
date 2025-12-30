@@ -1,0 +1,49 @@
+// Generated module macro for crate::array
+macro_rules! Modcrate_array {
+() => {
+        Depcrate_arrayuse_557!();
+        Depcrate_arrayuse_558!();
+        Depcrate_arrayuse_559!();
+        Depcrate_arrayUniformArrayStrategy!();
+        Depcrate_arrayimpl_561!();
+        Depcrate_arrayArrayValueTree!();
+        Depcrate_arrayuniform!();
+        Depcrate_arraysmall_array!();
+        Depcrate_arrayimpl_565!();
+        Depcrate_arrayimpl_566!();
+        Depcrate_arrayimpl_567!();
+        Depcrate_arraymacro_568!();
+        Depcrate_arraymacro_569!();
+        Depcrate_arraymacro_570!();
+        Depcrate_arraymacro_571!();
+        Depcrate_arraymacro_572!();
+        Depcrate_arraymacro_573!();
+        Depcrate_arraymacro_574!();
+        Depcrate_arraymacro_575!();
+        Depcrate_arraymacro_576!();
+        Depcrate_arraymacro_577!();
+        Depcrate_arraymacro_578!();
+        Depcrate_arraymacro_579!();
+        Depcrate_arraymacro_580!();
+        Depcrate_arraymacro_581!();
+        Depcrate_arraymacro_582!();
+        Depcrate_arraymacro_583!();
+        Depcrate_arraymacro_584!();
+        Depcrate_arraymacro_585!();
+        Depcrate_arraymacro_586!();
+        Depcrate_arraymacro_587!();
+        Depcrate_arraymacro_588!();
+        Depcrate_arraymacro_589!();
+        Depcrate_arraymacro_590!();
+        Depcrate_arraymacro_591!();
+        Depcrate_arraymacro_592!();
+        Depcrate_arraymacro_593!();
+        Depcrate_arraymacro_594!();
+        Depcrate_arraymacro_595!();
+        Depcrate_arraymacro_596!();
+        Depcrate_arraymacro_597!();
+        Depcrate_arraymacro_598!();
+        Depcrate_arraymacro_599!();
+        Depcrate_arraytest!();
+    };
+}

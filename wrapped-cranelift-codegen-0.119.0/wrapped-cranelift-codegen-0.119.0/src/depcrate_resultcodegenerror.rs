@@ -1,0 +1,9 @@
+// Generated macro for CodegenError (enum)
+macro_rules! Depcrate_resultCodegenError {
+() => {
+// Module: crate::result
+// Provides: {"CodegenError"}
+// Dependencies: {}
+# [doc = " A compilation error."] # [doc = ""] # [doc = " When Cranelift fails to compile a function, it will return one of these error codes."] # [derive (Debug)] pub enum CodegenError { # [doc = " A list of IR verifier errors."] # [doc = ""] # [doc = " This always represents a bug, either in the code that generated IR for Cranelift, or a bug"] # [doc = " in Cranelift itself."] Verifier (VerifierErrors) , # [doc = " An implementation limit was exceeded."] # [doc = ""] # [doc = " Cranelift can compile very large and complicated functions, but the [implementation has"] # [doc = " limits][limits] that cause compilation to fail when they are exceeded."] # [doc = ""] # [doc = " [limits]: https://github.com/bytecodealliance/wasmtime/blob/main/cranelift/docs/ir.md#implementation-limits"] ImplLimitExceeded , # [doc = " The code size for the function is too large."] # [doc = ""] # [doc = " Different target ISAs may impose a limit on the size of a compiled function. If that limit"] # [doc = " is exceeded, compilation fails."] CodeTooLarge , # [doc = " Something is not supported by the code generator. This might be an indication that a"] # [doc = " feature is used without explicitly enabling it, or that something is temporarily"] # [doc = " unsupported by a given target backend."] Unsupported (String) , # [doc = " A failure to map Cranelift register representation to a DWARF register representation."] # [cfg (feature = "unwind")] RegisterMappingError (crate :: isa :: unwind :: systemv :: RegisterMappingError) , # [doc = " Register allocator internal error discovered by the symbolic checker."] Regalloc (CheckerErrors) , # [doc = " Proof-carrying-code validation error."] Pcc (PccError) , }
+};
+}

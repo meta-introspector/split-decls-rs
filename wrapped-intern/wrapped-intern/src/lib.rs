@@ -1,0 +1,61 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcrate_symbol_.rs");
+include!("depcrate_symboluse_8.rs");
+include!("depcrate_symboluse_10.rs");
+include!("depcrateimpl_42.rs");
+include!("depcrateimpl_52.rs");
+include!("depcrateuse_59.rs");
+include!("depcrate_symbolsymbol.rs");
+include!("depcrate_symbolimpl_31.rs");
+include!("depcrate_symbolincrease_arc_refcount.rs");
+include!("depcrateimpl_53.rs");
+include!("depcrateuse_2.rs");
+include!("depcrate_symbolimpl_35.rs");
+include!("depcrate_symboltests.rs");
+include!("depcrateuse_4.rs");
+include!("depcratesymbol.rs");
+include!("depcrateimpl_43.rs");
+include!("depcrateimpl_46.rs");
+include!("depcrateimpl_49.rs");
+include!("depcrateimpl_50.rs");
+include!("depcrateuse_3.rs");
+include!("depcrateimpl_45.rs");
+include!("depcrateimpl_51.rs");
+include!("depcrate_symbolsymbols.rs");
+include!("depcrate_symbolimpl_26.rs");
+include!("depcrateuse_1.rs");
+include!("depcrateimpl_44.rs");
+include!("depcrateinternstorage.rs");
+include!("depcrateimpl_56.rs");
+include!("depcrateimpl_55.rs");
+include!("depcrateimpl_41.rs");
+include!("depcrate_symbolimpl_32.rs");
+include!("depcrate_symboltaggedarcptr.rs");
+include!("depcrate_symbolmap.rs");
+include!("depcrateinternmap.rs");
+include!("depcrate_impl_internable.rs");
+include!("depcrate_symbolimpl_23.rs");
+include!("depcratemacro_60.rs");
+include!("depcrate_symbolmap.rs");
+include!("depcrate_symbolimpl_33.rs");
+include!("depcrateimpl_47.rs");
+include!("depcrateinternable.rs");
+include!("depcrate_symbolimpl_22.rs");
+include!("depcrate_symboluse_11.rs");
+include!("depcrateimpl_40.rs");
+include!("depcrate_symbolimpl_24.rs");
+include!("depcrateimpl_48.rs");
+include!("depcrateinterned.rs");
+include!("depcrateimpl_39.rs");
+include!("depcrateuse_37.rs");
+include!("depcrate_symboluse_9.rs");
+include!("depcrate_symboluse_7.rs");
+include!("modcrate_symbol.rs");
+include!("modcrate.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate_symbol!();
+    Modcrate!();
+}

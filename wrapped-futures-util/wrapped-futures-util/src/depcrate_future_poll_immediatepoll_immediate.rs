@@ -1,0 +1,9 @@
+// Generated macro for poll_immediate (function)
+macro_rules! Depcrate_future_poll_immediatepoll_immediate {
+() => {
+// Module: crate::future::poll_immediate
+// Provides: {"poll_immediate"}
+// Dependencies: {}
+# [doc = " Creates a future that is immediately ready with an Option of a value."] # [doc = " Specifically this means that [poll](core::future::Future::poll()) always returns [Poll::Ready](core::task::Poll::Ready)."] # [doc = ""] # [doc = " # Caution"] # [doc = ""] # [doc = " When consuming the future by this function, note the following:"] # [doc = ""] # [doc = " - This function does not guarantee that the future will run to completion, so it is generally incompatible with passing the non-cancellation-safe future by value."] # [doc = " - Even if the future is cancellation-safe, creating and dropping new futures frequently may lead to performance problems."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " # futures::executor::block_on(async {"] # [doc = " use futures::future;"] # [doc = ""] # [doc = " let r = future::poll_immediate(async { 1_u32 });"] # [doc = " assert_eq!(r.await, Some(1));"] # [doc = ""] # [doc = " let p = future::poll_immediate(future::pending::<i32>());"] # [doc = " assert_eq!(p.await, None);"] # [doc = " # });"] # [doc = " ```"] # [doc = ""] # [doc = " ### Reusing a future"] # [doc = ""] # [doc = " ```"] # [doc = " # futures::executor::block_on(async {"] # [doc = " use core::pin::pin;"] # [doc = ""] # [doc = " use futures::future;"] # [doc = ""] # [doc = " let f = async {futures::pending!(); 42_u8};"] # [doc = " let mut f = pin!(f);"] # [doc = " assert_eq!(None, future::poll_immediate(&mut f).await);"] # [doc = " assert_eq!(42, f.await);"] # [doc = " # });"] # [doc = " ```"] pub fn poll_immediate < F : Future > (f : F) -> PollImmediate < F > { assert_future :: < Option < F :: Output > , PollImmediate < F > > (PollImmediate { future : Some (f) }) }
+};
+}

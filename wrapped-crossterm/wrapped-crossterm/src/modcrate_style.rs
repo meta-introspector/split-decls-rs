@@ -1,0 +1,48 @@
+// Generated module macro for crate::style
+macro_rules! Modcrate_style {
+() => {
+        Depcrate_styleuse_115!();
+        Depcrate_styleuse_116!();
+        Depcrate_styleuse_117!();
+        Depcrate_styleuse_118!();
+        Depcrate_styleattributes!();
+        Depcrate_stylecontent_style!();
+        Depcrate_stylestyled_content!();
+        Depcrate_stylestylize!();
+        Depcrate_stylesys!();
+        Depcrate_styletypes!();
+        Depcrate_stylestyle!();
+        Depcrate_styleavailable_color_count!();
+        Depcrate_styleforce_color_output!();
+        Depcrate_styleSetForegroundColor!();
+        Depcrate_styleimpl_129!();
+        Depcrate_styleSetBackgroundColor!();
+        Depcrate_styleimpl_131!();
+        Depcrate_styleSetUnderlineColor!();
+        Depcrate_styleimpl_133!();
+        Depcrate_styleSetColors!();
+        Depcrate_styleimpl_135!();
+        Depcrate_styleSetAttribute!();
+        Depcrate_styleimpl_137!();
+        Depcrate_styleSetAttributes!();
+        Depcrate_styleimpl_139!();
+        Depcrate_styleSetStyle!();
+        Depcrate_styleimpl_141!();
+        Depcrate_stylePrintStyledContent!();
+        Depcrate_styleimpl_143!();
+        Depcrate_styleResetColor!();
+        Depcrate_styleimpl_145!();
+        Depcrate_stylePrint!();
+        Depcrate_styleimpl_147!();
+        Depcrate_styleimpl_148!();
+        Depcrate_stylemacro_149!();
+        Depcrate_stylemacro_150!();
+        Depcrate_stylemacro_151!();
+        Depcrate_stylemacro_152!();
+        Depcrate_stylemacro_153!();
+        Depcrate_stylemacro_154!();
+        Depcrate_stylemacro_155!();
+        Depcrate_styleparse_next_u8!();
+        Depcrate_styletests!();
+    };
+}

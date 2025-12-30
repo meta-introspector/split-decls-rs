@@ -1,0 +1,43 @@
+// Generated module macro for crate::bridge::rpc
+macro_rules! Modcrate_bridge_rpc {
+() => {
+        Depcrate_bridge_rpcuse_95!();
+        Depcrate_bridge_rpcuse_96!();
+        Depcrate_bridge_rpcuse_97!();
+        Depcrate_bridge_rpcuse_98!();
+        Depcrate_bridge_rpcWriter!();
+        Depcrate_bridge_rpcEncode!();
+        Depcrate_bridge_rpcReader!();
+        Depcrate_bridge_rpcDecode!();
+        Depcrate_bridge_rpcDecodeMut!();
+        Depcrate_bridge_rpcrpc_encode_decode!();
+        Depcrate_bridge_rpcimpl_105!();
+        Depcrate_bridge_rpcimpl_106!();
+        Depcrate_bridge_rpcimpl_107!();
+        Depcrate_bridge_rpcimpl_108!();
+        Depcrate_bridge_rpcmacro_109!();
+        Depcrate_bridge_rpcmacro_110!();
+        Depcrate_bridge_rpcimpl_111!();
+        Depcrate_bridge_rpcimpl_112!();
+        Depcrate_bridge_rpcimpl_113!();
+        Depcrate_bridge_rpcimpl_114!();
+        Depcrate_bridge_rpcimpl_115!();
+        Depcrate_bridge_rpcimpl_116!();
+        Depcrate_bridge_rpcimpl_117!();
+        Depcrate_bridge_rpcimpl_118!();
+        Depcrate_bridge_rpcimpl_119!();
+        Depcrate_bridge_rpcimpl_120!();
+        Depcrate_bridge_rpcimpl_121!();
+        Depcrate_bridge_rpcimpl_122!();
+        Depcrate_bridge_rpcimpl_123!();
+        Depcrate_bridge_rpcimpl_124!();
+        Depcrate_bridge_rpcimpl_125!();
+        Depcrate_bridge_rpcimpl_126!();
+        Depcrate_bridge_rpcPanicMessage!();
+        Depcrate_bridge_rpcimpl_128!();
+        Depcrate_bridge_rpcimpl_129!();
+        Depcrate_bridge_rpcimpl_130!();
+        Depcrate_bridge_rpcimpl_131!();
+        Depcrate_bridge_rpcimpl_132!();
+    };
+}

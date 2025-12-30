@@ -1,0 +1,52 @@
+// Generated module macro for crate::address
+macro_rules! Modcrate_address {
+() => {
+        Depcrate_addressuse_18!();
+        Depcrate_addresschannel!();
+        Depcrate_addressenvelope!();
+        Depcrate_addressmessage!();
+        Depcrate_addressqueue!();
+        Depcrate_addressuse_101!();
+        Depcrate_addressuse_102!();
+        Depcrate_addressuse_103!();
+        Depcrate_addressuse_104!();
+        Depcrate_addressSendError!();
+        Depcrate_addressMailboxError!();
+        Depcrate_addressimpl_107!();
+        Depcrate_addressimpl_108!();
+        Depcrate_addressimpl_109!();
+        Depcrate_addressimpl_110!();
+        Depcrate_addressimpl_111!();
+        Depcrate_addressimpl_112!();
+        Depcrate_addressimpl_113!();
+        Depcrate_addressAddr!();
+        Depcrate_addressimpl_115!();
+        Depcrate_addressimpl_116!();
+        Depcrate_addressimpl_117!();
+        Depcrate_addressimpl_118!();
+        Depcrate_addressimpl_119!();
+        Depcrate_addressimpl_120!();
+        Depcrate_addressWeakAddr!();
+        Depcrate_addressimpl_122!();
+        Depcrate_addressimpl_123!();
+        Depcrate_addressimpl_124!();
+        Depcrate_addressimpl_125!();
+        Depcrate_addressimpl_126!();
+        Depcrate_addressRecipient!();
+        Depcrate_addressimpl_128!();
+        Depcrate_addressimpl_129!();
+        Depcrate_addressimpl_130!();
+        Depcrate_addressimpl_131!();
+        Depcrate_addressimpl_132!();
+        Depcrate_addressimpl_133!();
+        Depcrate_addressimpl_134!();
+        Depcrate_addressWeakRecipient!();
+        Depcrate_addressimpl_136!();
+        Depcrate_addressimpl_137!();
+        Depcrate_addressimpl_138!();
+        Depcrate_addressimpl_139!();
+        Depcrate_addressimpl_140!();
+        Depcrate_addressimpl_141!();
+        Depcrate_addresstests!();
+    };
+}

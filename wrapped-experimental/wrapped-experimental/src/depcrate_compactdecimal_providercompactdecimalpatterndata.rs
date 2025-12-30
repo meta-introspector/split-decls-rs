@@ -1,0 +1,9 @@
+// Generated macro for CompactDecimalPatternData (struct)
+macro_rules! Depcrate_compactdecimal_providerCompactDecimalPatternData {
+() => {
+// Module: crate::compactdecimal::provider
+// Provides: {"CompactDecimalPatternData"}
+// Dependencies: {}
+# [doc = " Compact Decimal Pattern  data struct."] # [doc = ""] # [doc = " As in CLDR, this is a mapping from type (a power of ten, corresponding to"] # [doc = " the magnitude of the number being formatted) and count (a plural case or an"] # [doc = " explicit 1) to a pattern."] # [doc = ""] # [doc = " However, plural cases that are identical to the other case are omitted, thus"] # [doc = " given"] # [doc = " > (1000, one) ↦ 0K, (1000, other) ↦ 0K"] # [doc = ""] # [doc = " only"] # [doc = " > (1000, other) ↦ 0K"] # [doc = ""] # [doc = " is stored."] # [doc = ""] # [doc = " Further, if all plural cases are compatible across consecutive types, the"] # [doc = " larger types are omitted, thus given"] # [doc = " > (1000, other) ↦ 0K, (10000, other) ↦ 00K, (100000, other) ↦ 000K"] # [doc = ""] # [doc = " only"] # [doc = " > (1000, other) ↦ 0K"] # [doc = ""] # [doc = " is stored."] # [doc = ""] # [doc = " Finally, the pattern indicating noncompact notation for the first few powers"] # [doc = " of ten is omitted; that is, there is an implicit (1, other) ↦ 0."] # [derive (Debug , Clone , Default , PartialEq , yoke :: Yokeable , zerofrom :: ZeroFrom)] # [cfg_attr (feature = "serde" , derive (serde :: Deserialize))] # [cfg_attr (feature = "datagen" , derive (serde :: Serialize , databake :: Bake))] # [cfg_attr (feature = "datagen" , databake (path = icu_experimental :: compactdecimal :: provider))] # [yoke (prove_covariance_manually)] pub struct CompactDecimalPatternData < 'data > { # [doc = " A map keyed on log10 of the CLDR `type` attribute and the CLDR `count` attribute."] # [cfg_attr (feature = "serde" , serde (borrow))] pub patterns : ZeroMap2d < 'data , i8 , Count , PatternULE > , }
+};
+}

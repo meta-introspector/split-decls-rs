@@ -1,0 +1,9 @@
+// Generated macro for IORegistryEntryCreateCFProperty (function)
+macro_rules! Depcrate_generatedIORegistryEntryCreateCFProperty {
+() => {
+// Module: crate::generated
+// Provides: {"IORegistryEntryCreateCFProperty"}
+// Dependencies: {}
+# [doc = " Create a CF representation of a registry entry's property."] # [doc = ""] # [doc = " This function creates an instantaneous snapshot of a registry entry property, creating a CF container analogue in the caller's task. Not every object available in the kernel is represented as a CF container; currently OSDictionary, OSArray, OSSet, OSSymbol, OSString, OSData, OSNumber, OSBoolean are created as their CF counterparts."] # [doc = ""] # [doc = " Parameter `entry`: The registry entry handle whose property to copy."] # [doc = ""] # [doc = " Parameter `key`: A CFString specifying the property name."] # [doc = ""] # [doc = " Parameter `allocator`: The CF allocator to use when creating the CF container."] # [doc = ""] # [doc = " Parameter `options`: No options are currently defined."] # [doc = ""] # [doc = " Returns: A CF container is created and returned the caller on success. The caller should release with CFRelease."] # [doc = ""] # [doc = " # Safety"] # [doc = ""] # [doc = " - `key` might not allow `None`."] # [doc = " - `allocator` might not allow `None`."] # [cfg (feature = "libc")] # [inline] pub unsafe extern "C-unwind" fn IORegistryEntryCreateCFProperty (entry : io_registry_entry_t , key : Option < & CFString > , allocator : Option < & CFAllocator > , options : IOOptionBits ,) -> Option < CFRetained < CFType > > { extern "C-unwind" { fn IORegistryEntryCreateCFProperty (entry : io_registry_entry_t , key : Option < & CFString > , allocator : Option < & CFAllocator > , options : IOOptionBits ,) -> Option < NonNull < CFType > > ; } let ret = unsafe { IORegistryEntryCreateCFProperty (entry , key , allocator , options) } ; ret . map (| ret | unsafe { CFRetained :: from_raw (ret) }) }
+};
+}

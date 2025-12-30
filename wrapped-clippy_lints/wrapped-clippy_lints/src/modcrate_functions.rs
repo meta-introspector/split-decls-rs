@@ -1,0 +1,45 @@
+// Generated module macro for crate::functions
+macro_rules! Modcrate_functions {
+() => {
+        Depcrate_functionsduplicate_underscore_argument!();
+        Depcrate_functionsimpl_trait_in_params!();
+        Depcrate_functionsmisnamed_getters!();
+        Depcrate_functionsmust_use!();
+        Depcrate_functionsnot_unsafe_ptr_arg_deref!();
+        Depcrate_functionsref_option!();
+        Depcrate_functionsrenamed_function_params!();
+        Depcrate_functionsresult!();
+        Depcrate_functionstoo_many_arguments!();
+        Depcrate_functionstoo_many_lines!();
+        Depcrate_functionsuse_2594!();
+        Depcrate_functionsuse_2595!();
+        Depcrate_functionsuse_2596!();
+        Depcrate_functionsuse_2597!();
+        Depcrate_functionsuse_2598!();
+        Depcrate_functionsuse_2599!();
+        Depcrate_functionsuse_2600!();
+        Depcrate_functionsuse_2601!();
+        Depcrate_functionsuse_2602!();
+        Depcrate_functionsuse_2603!();
+        Depcrate_functionsuse_2604!();
+        Depcrate_functionsmacro_2605!();
+        Depcrate_functionsmacro_2606!();
+        Depcrate_functionsmacro_2607!();
+        Depcrate_functionsmacro_2608!();
+        Depcrate_functionsmacro_2609!();
+        Depcrate_functionsmacro_2610!();
+        Depcrate_functionsmacro_2611!();
+        Depcrate_functionsmacro_2612!();
+        Depcrate_functionsmacro_2613!();
+        Depcrate_functionsmacro_2614!();
+        Depcrate_functionsmacro_2615!();
+        Depcrate_functionsmacro_2616!();
+        Depcrate_functionsmacro_2617!();
+        Depcrate_functionsmacro_2618!();
+        Depcrate_functionsimpl_2619!();
+        Depcrate_functionsFunctions!();
+        Depcrate_functionsimpl_2621!();
+        Depcrate_functionsmacro_2622!();
+        Depcrate_functionsimpl_2623!();
+    };
+}

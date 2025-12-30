@@ -1,0 +1,9 @@
+// Generated macro for APPUSERMODEL_STARTPINOPTION_NOPINONINSTALL (const)
+macro_rules! Depcrate_um_propkeyAPPUSERMODEL_STARTPINOPTION_NOPINONINSTALL {
+() => {
+// Module: crate::um::propkey
+// Provides: {"APPUSERMODEL_STARTPINOPTION_NOPINONINSTALL"}
+// Dependencies: {}
+pub const APPUSERMODEL_STARTPINOPTION_NOPINONINSTALL : DWORD = 1 ;
+};
+}

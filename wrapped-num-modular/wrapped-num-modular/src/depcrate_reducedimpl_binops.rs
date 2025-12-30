@@ -1,0 +1,9 @@
+// Generated macro for impl_binops (macro)
+macro_rules! Depcrate_reducedimpl_binops {
+() => {
+// Module: crate::reduced
+// Provides: {"impl_binops"}
+// Dependencies: {}
+macro_rules ! impl_binops { ($ method : ident , impl $ op : ident) => { impl < T : PartialEq , R : Reducer < T >> $ op for ReducedInt < T , R > { type Output = Self ; fn $ method (self , rhs : Self) -> Self :: Output { self . check_modulus_eq (& rhs) ; let Self { a , r } = self ; let a = r .$ method (& a , & rhs . a) ; Self { a , r } } } impl < T : PartialEq + Clone , R : Reducer < T >> $ op <& Self > for ReducedInt < T , R > { type Output = Self ; # [inline] fn $ method (self , rhs : & Self) -> Self :: Output { self . check_modulus_eq (& rhs) ; let Self { a , r } = self ; let a = r .$ method (& a , & rhs . a) ; Self { a , r } } } impl < T : PartialEq + Clone , R : Reducer < T >> $ op < ReducedInt < T , R >> for & ReducedInt < T , R > { type Output = ReducedInt < T , R >; # [inline] fn $ method (self , rhs : ReducedInt < T , R >) -> Self :: Output { self . check_modulus_eq (& rhs) ; let ReducedInt { a , r } = rhs ; let a = r .$ method (& self . a , & a) ; ReducedInt { a , r } } } impl < T : PartialEq + Clone , R : Reducer < T > + Clone > $ op <& ReducedInt < T , R >> for & ReducedInt < T , R > { type Output = ReducedInt < T , R >; # [inline] fn $ method (self , rhs : & ReducedInt < T , R >) -> Self :: Output { self . check_modulus_eq (& rhs) ; let a = self . r .$ method (& self . a , & rhs . a) ; ReducedInt { a , r : self . r . clone () , } } } impl < T : PartialEq , R : Reducer < T >> $ op < T > for ReducedInt < T , R > { type Output = Self ; fn $ method (self , rhs : T) -> Self :: Output { let Self { a , r } = self ; let rhs = r . transform (rhs) ; let a = r .$ method (& a , & rhs) ; Self { a , r } } } } ; }
+};
+}

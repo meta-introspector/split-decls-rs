@@ -1,0 +1,9 @@
+// Generated macro for CREATE_BOUNDARY_DESCRIPTOR_ADD_APPCONTAINER_SID (const)
+macro_rules! Depcrate_um_winntCREATE_BOUNDARY_DESCRIPTOR_ADD_APPCONTAINER_SID {
+() => {
+// Module: crate::um::winnt
+// Provides: {"CREATE_BOUNDARY_DESCRIPTOR_ADD_APPCONTAINER_SID"}
+// Dependencies: {}
+pub const CREATE_BOUNDARY_DESCRIPTOR_ADD_APPCONTAINER_SID : DWORD = 0x1 ;
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for use_8 (use)
+macro_rules! Depcrateuse_8 {
+() => {
+// Module: crate
+// Provides: {"use_8"}
+// Dependencies: {}
+use rustc_macros :: { Decodable , Encodable , HashStable_Generic } ;
+};
+}

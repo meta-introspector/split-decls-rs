@@ -1,0 +1,9 @@
+// Generated macro for undo (function)
+macro_rules! Depcrate_identundo {
+() => {
+// Module: crate::ident
+// Provides: {"undo"}
+// Dependencies: {}
+# [doc = " Undo identifiers like `$Id:<hexsha>$` to `$Id$` in `src` and write to `buf`. Newlines between dollars are ignored."] # [doc = " Return `true` if `buf` was written or `false` if `src` was left unaltered (as there was nothing to do)."] pub fn undo (src : & [u8] , buf : & mut Vec < u8 >) -> Result < bool , std :: collections :: TryReserveError > { fn find_range (input : & [u8]) -> Option < Range < usize > > { let mut ofs = 0 ; loop { let mut cursor = input . get (ofs ..) ? ; let start = cursor . find (b"$Id:") ? ; cursor = cursor . get ((start + 4) ..) ? ; let maybe_end = cursor . find_byteset (b"$\n") ? ; if cursor [maybe_end] == b'\n' { ofs += start + 4 + maybe_end + 1 ; continue ; } else { return Some ((ofs + start) .. (ofs + start + 4 + maybe_end + 1)) ; } } } let mut ofs = 0 ; let mut initialized = false ; while let Some (range) = find_range (& src [ofs ..]) { if ! initialized { clear_and_set_capacity (buf , src . len ()) ? ; initialized = true ; } buf . push_str (& src [ofs ..] [.. range . start]) ; buf . push_str (b"$Id$") ; ofs += range . end ; } if initialized { buf . push_str (& src [ofs ..]) ; } Ok (initialized) }
+};
+}

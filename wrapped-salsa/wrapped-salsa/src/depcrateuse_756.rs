@@ -4,6 +4,6 @@ macro_rules! Depcrateuse_756 {
 // Module: crate
 // Provides: {"use_756"}
 // Dependencies: {}
-pub use self :: database_impl :: DatabaseImpl ;
+pub use self :: id :: Id ;
 };
 }

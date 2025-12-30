@@ -1,0 +1,47 @@
+// Generated module macro for crate::unvalidated
+macro_rules! Modcrate_unvalidated {
+() => {
+        Depcrate_unvalidateduse_42!();
+        Depcrate_unvalidateduse_43!();
+        Depcrate_unvalidateduse_44!();
+        Depcrate_unvalidatedUnvalidatedTinyAsciiStr!();
+        Depcrate_unvalidatedimpl_46!();
+        Depcrate_unvalidatedimpl_47!();
+        Depcrate_unvalidatedimpl_48!();
+        Depcrate_unvalidatedimpl_49!();
+        Depcrate_unvalidatedimpl_50!();
+        Depcrate_unvalidateddeserialize!();
+        Depcrate_unvalidatedmacro_52!();
+        Depcrate_unvalidatedmacro_53!();
+        Depcrate_unvalidatedmacro_54!();
+        Depcrate_unvalidatedmacro_55!();
+        Depcrate_unvalidatedmacro_56!();
+        Depcrate_unvalidatedmacro_57!();
+        Depcrate_unvalidatedmacro_58!();
+        Depcrate_unvalidatedmacro_59!();
+        Depcrate_unvalidatedmacro_60!();
+        Depcrate_unvalidatedmacro_61!();
+        Depcrate_unvalidatedmacro_62!();
+        Depcrate_unvalidatedmacro_63!();
+        Depcrate_unvalidatedmacro_64!();
+        Depcrate_unvalidatedmacro_65!();
+        Depcrate_unvalidatedmacro_66!();
+        Depcrate_unvalidatedmacro_67!();
+        Depcrate_unvalidatedmacro_68!();
+        Depcrate_unvalidatedmacro_69!();
+        Depcrate_unvalidatedmacro_70!();
+        Depcrate_unvalidatedmacro_71!();
+        Depcrate_unvalidatedmacro_72!();
+        Depcrate_unvalidatedmacro_73!();
+        Depcrate_unvalidatedmacro_74!();
+        Depcrate_unvalidatedmacro_75!();
+        Depcrate_unvalidatedmacro_76!();
+        Depcrate_unvalidatedmacro_77!();
+        Depcrate_unvalidatedmacro_78!();
+        Depcrate_unvalidatedmacro_79!();
+        Depcrate_unvalidatedmacro_80!();
+        Depcrate_unvalidatedmacro_81!();
+        Depcrate_unvalidatedmacro_82!();
+        Depcrate_unvalidatedmacro_83!();
+    };
+}

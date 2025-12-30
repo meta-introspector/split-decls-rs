@@ -1,0 +1,9 @@
+// Generated macro for ErrMode (enum)
+macro_rules! Depcrate_errorErrMode {
+() => {
+// Module: crate::error
+// Provides: {"ErrMode"}
+// Dependencies: {}
+# [doc = " Add parse error state to [`ParserError`]s"] # [doc = ""] # [doc = " Needed for"] # [doc = " - [`Partial`][crate::stream::Partial] to track whether the [`Stream`] is [`ErrMode::Incomplete`]."] # [doc = "   See also [`crate::_topic::partial`]"] # [doc = " - Marking errors as unrecoverable ([`ErrMode::Cut`]) and not retrying alternative parsers."] # [doc = "   See also [`crate::_tutorial::chapter_7#error-cuts`]"] # [derive (Debug , Clone , PartialEq)] pub enum ErrMode < E > { # [doc = " There was not enough data to determine the appropriate action"] # [doc = ""] # [doc = " More data needs to be buffered before retrying the parse."] # [doc = ""] # [doc = " This must only be set when the [`Stream`] is [partial][`crate::stream::StreamIsPartial`], like with"] # [doc = " [`Partial`][crate::Partial]"] # [doc = ""] # [doc = " Convert this into an `Backtrack` with [`Parser::complete_err`]"] Incomplete (Needed) , # [doc = " The parser failed with a recoverable error (the default)."] # [doc = ""] # [doc = " For example, a parser for json values might include a"] # [doc = " [`dec_uint`][crate::ascii::dec_uint] as one case in an [`alt`][crate::combinator::alt]"] # [doc = " combinator. If it fails, the next case should be tried."] Backtrack (E) , # [doc = " The parser had an unrecoverable error."] # [doc = ""] # [doc = " The parser was on the right branch, so directly report it to the user rather than trying"] # [doc = " other branches. You can use [`cut_err()`][crate::combinator::cut_err] combinator to switch"] # [doc = " from `ErrMode::Backtrack` to `ErrMode::Cut`."] # [doc = ""] # [doc = " For example, one case in an [`alt`][crate::combinator::alt] combinator found a unique prefix"] # [doc = " and you want any further errors parsing the case to be reported to the user."] Cut (E) , }
+};
+}

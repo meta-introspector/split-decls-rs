@@ -1,0 +1,9 @@
+// Generated macro for INIT_224 (const)
+macro_rules! Depcrate_constsINIT_224 {
+() => {
+// Module: crate::consts
+// Provides: {"INIT_224"}
+// Dependencies: {}
+pub (crate) const INIT_224 : ([u32 ; 12] , [u32 ; 16] , [u32 ; 16]) = ([0xA520_1467 , 0xA9B8_D94A , 0xD4CE_D997 , 0x6837_9D7B , 0xA7FC_73BA , 0xF1A2_546B , 0x6067_82BF , 0xE0BC_FD0F , 0x2F25_374E , 0x069A_149F , 0x5E2D_FF25 , 0xFAEC_F061 ,] , [0xEC99_05D8 , 0xF218_50CF , 0xC0A7_46C8 , 0x21DA_D498 , 0x3515_6EEB , 0x088C_97F2 , 0x2630_3E40 , 0x8A2D_4FB5 , 0xFEEE_44B6 , 0x8A1E_9573 , 0x7B81_111A , 0xCBC1_39F0 , 0xA351_3861 , 0x1D2C_362E , 0x918C_580E , 0xB58E_1B9C ,] , [0xE4B5_73A1 , 0x4C1A_0880 , 0x1E90_7C51 , 0x0480_7EFD , 0x3AD8_CDE5 , 0x16B2_1302 , 0x0251_2C53 , 0x2204_CB18 , 0x9940_5F2D , 0xE5B6_48A1 , 0x70AB_1D43 , 0xA10C_25C2 , 0x16F1_AC05 , 0x38BB_EB56 , 0x9B01_DC60 , 0xB109_6D83 ,] ,) ;
+};
+}

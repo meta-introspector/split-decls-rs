@@ -1,0 +1,9 @@
+// Generated macro for print_reloc_dir (function)
+macro_rules! Depcrate_readobj_peprint_reloc_dir {
+() => {
+// Module: crate::readobj::pe
+// Provides: {"print_reloc_dir"}
+// Dependencies: {}
+fn print_reloc_dir (p : & mut Printer < '_ > , data : & [u8] , machine : u16 , sections : & SectionTable , data_directories : & DataDirectories ,) -> Option < () > { if ! p . options . pe_base_relocs { return Some (()) ; } let proc = match machine { IMAGE_FILE_MACHINE_IA64 => FLAGS_IMAGE_REL_IA64_BASED , IMAGE_FILE_MACHINE_MIPS16 | IMAGE_FILE_MACHINE_MIPSFPU | IMAGE_FILE_MACHINE_MIPSFPU16 => { FLAGS_IMAGE_REL_MIPS_BASED } IMAGE_FILE_MACHINE_ARM => FLAGS_IMAGE_REL_ARM_BASED , IMAGE_FILE_MACHINE_RISCV32 | IMAGE_FILE_MACHINE_RISCV64 | IMAGE_FILE_MACHINE_RISCV128 => { FLAGS_IMAGE_REL_RISCV_BASED } _ => & [] , } ; let mut blocks = data_directories . relocation_blocks (data , sections) . print_err (p) ? ? ; while let Some (block) = blocks . next () . print_err (p) ? { let block_address = block . virtual_address () ; let block_data = sections . pe_data_at (data , block_address) . map (Bytes) ; for reloc in block { p . group ("ImageBaseRelocation" , | p | { p . field_hex ("VirtualAddress" , reloc . virtual_address) ; p . field_enums ("Type" , reloc . typ , & [proc , FLAGS_IMAGE_REL_BASED]) ; let offset = (reloc . virtual_address - block_address) as usize ; if let Some (addend) = match reloc . typ { IMAGE_REL_BASED_HIGHLOW => block_data . and_then (| data | data . read_at :: < U32Bytes < LE > > (offset) . ok ()) . map (| addend | u64 :: from (addend . get (LE))) , IMAGE_REL_BASED_DIR64 => block_data . and_then (| data | data . read_at :: < U64Bytes < LE > > (offset) . ok ()) . map (| addend | addend . get (LE)) , _ => None , } { p . field_hex ("Addend" , addend) ; } }) ; } } Some (()) }
+};
+}

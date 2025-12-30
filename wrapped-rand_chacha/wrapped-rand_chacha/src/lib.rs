@@ -1,0 +1,64 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcrate_chachause_4.rs");
+include!("depcrate_gutsmacro_46.rs");
+include!("depcrate_gutsmacro_47.rs");
+include!("depcrate_chachause_5.rs");
+include!("depcrate_gutsbufsz64.rs");
+include!("depcrate_gutsadd_pos.rs");
+include!("depcrate_chachabuf_blocks.rs");
+include!("depcrate_chachaimpl_13.rs");
+include!("depcrate_gutsuse_24.rs");
+include!("depcrate_gutsuse_22.rs");
+include!("depcrate_gutsuse_23.rs");
+include!("depcrate_gutsblock64.rs");
+include!("depcrate_gutsmacro_45.rs");
+include!("depcrate_gutsmacro_50.rs");
+include!("depcrate_gutsround.rs");
+include!("depcratechacharng.rs");
+include!("depcrate_chachaimpl_14.rs");
+include!("depcrate_gutsread_u32le.rs");
+include!("depcrate_chachachacha_impl.rs");
+include!("depcrate_gutsstate.rs");
+include!("depcrate_chachaimpl_11.rs");
+include!("depcratechacha.rs");
+include!("depcrate_gutsrefill_wide_impl.rs");
+include!("depcrateguts.rs");
+include!("depcrate_gutsbufsz.rs");
+include!("depcrate_chachaimpl_12.rs");
+include!("depcrate_chachamacro_19.rs");
+include!("depcrate_gutslog2_bufblocks.rs");
+include!("depcrate_chachause_7.rs");
+include!("depcrate_chachamacro_18.rs");
+include!("depcrate_gutsstream_param_block.rs");
+include!("depcrate_gutschacha.rs");
+include!("depcrate_gutsmacro_51.rs");
+include!("depcrate_gutsbufblocks.rs");
+include!("depcrate_gutsstream_param_nonce.rs");
+include!("depcrate_gutsdiagonalize.rs");
+include!("depcrate_gutsmacro_44.rs");
+include!("depcrateuse_52.rs");
+include!("depcrate_chachablock_words.rs");
+include!("depcratechachacore.rs");
+include!("depcrate_chachaarray64.rs");
+include!("depcrate_chachause_6.rs");
+include!("depcrate_gutsmacro_48.rs");
+include!("depcrate_gutsd0123.rs");
+include!("depcrate_chachaimpl_15.rs");
+include!("depcrate_chachause_3.rs");
+include!("depcrate_chachatest.rs");
+include!("depcrate_gutsblock.rs");
+include!("depcrate_gutsimpl_38.rs");
+include!("depcrateuse_1.rs");
+include!("depcrate_gutsundiagonalize.rs");
+include!("depcrate_chachamacro_17.rs");
+include!("modcrate.rs");
+include!("modcrate_chacha.rs");
+include!("modcrate_guts.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate!();
+    Modcrate_chacha!();
+    Modcrate_guts!();
+}

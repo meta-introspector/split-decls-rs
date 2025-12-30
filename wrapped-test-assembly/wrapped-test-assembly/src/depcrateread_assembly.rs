@@ -1,0 +1,9 @@
+// Generated macro for read_assembly (function)
+macro_rules! Depcrateread_assembly {
+() => {
+// Module: crate
+// Provides: {"read_assembly"}
+// Dependencies: {}
+pub fn read_assembly < P : AsRef < Path > > (path : P , package_path : & Path) -> io :: Result < String > { let s = fs :: read_to_string (path . as_ref ()) ? ; let workspace_dir = Path :: new (env ! ("CARGO_MANIFEST_DIR")) . parent () . unwrap () . as_os_str () . to_str () . unwrap () ; let s = s . replace (workspace_dir , "$WORKSPACE") ; let s = s . replace (package_path . as_os_str () . to_str () . unwrap () . strip_prefix (workspace_dir) . unwrap () . strip_prefix ('/') . unwrap () , "$DIR" ,) ; let s = regex :: Regex :: new (r"/rustc/[0-9a-f]*/") . unwrap () . replace_all (& s , | _ : & regex :: Captures < '_ > | "$RUSTC/") ; let s = regex :: Regex :: new (r"/.*/rustlib/src/rust/") . unwrap () . replace_all (& s , | _ : & regex :: Captures < '_ > | "$RUSTC/") ; let s = s . replace (".asciz\t\"}\\000" , ".asciz\t\"p\\000") ; let s = s . replace (".asciz\t\"L\\000" , ".asciz\t\"p\\000") ; let s = s . replace (".asciz\t\"t\\000" , ".asciz\t\"p\\000") ; let s = s . replace (".asciz\t\"{\\000" , ".asciz\t\"p\\000") ; let s = s . replace (".asciz\t\"T\\000" , ".asciz\t\"P\\000") ; let s = s . replace (".asciz\t\"\\202\\000" , ".asciz\t\"\\20x\\000") ; let s = s . replace (".asciz\t\"\\204\\000" , ".asciz\t\"\\20x\\000") ; let s = s . replace (".asciz\t\"\\000\\000\\000\\000`\\000\\000\"" , ".asciz\t\"\\000\\000\\000\\000@\\000\\000\"" ,) ; let s = strip_lines (& s , ".cfi_") ; let s = strip_lines (& s , ".macosx_version_") ; let s = strip_lines (& s , ".ios_version_") ; let s = strip_lines (& s , ".build_version") ; let s = strip_lines (& s , ".file") ; let s = strip_lines (& s , ".no_dead_strip") ; let s = strip_lines (& s , ".ident\t\"rustc ") ; let s = strip_section (& s , "__LLVM") ; let s = demangle_assembly (& s) ; Ok (s) }
+};
+}

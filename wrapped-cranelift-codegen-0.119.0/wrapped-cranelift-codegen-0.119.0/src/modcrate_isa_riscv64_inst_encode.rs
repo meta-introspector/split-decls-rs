@@ -1,0 +1,46 @@
+// Generated module macro for crate::isa::riscv64::inst::encode
+macro_rules! Modcrate_isa_riscv64_inst_encode {
+() => {
+        Depcrate_isa_riscv64_inst_encodeuse_2159!();
+        Depcrate_isa_riscv64_inst_encodeuse_2160!();
+        Depcrate_isa_riscv64_inst_encodeuse_2161!();
+        Depcrate_isa_riscv64_inst_encodeunsigned_field_width!();
+        Depcrate_isa_riscv64_inst_encodeencode_r_type_bits!();
+        Depcrate_isa_riscv64_inst_encodeencode_r_type!();
+        Depcrate_isa_riscv64_inst_encodeencode_i_type_bits!();
+        Depcrate_isa_riscv64_inst_encodeencode_i_type!();
+        Depcrate_isa_riscv64_inst_encodeencode_s_type!();
+        Depcrate_isa_riscv64_inst_encodeencode_valu!();
+        Depcrate_isa_riscv64_inst_encodeencode_valu_rr_imm!();
+        Depcrate_isa_riscv64_inst_encodeencode_valu_rrrr!();
+        Depcrate_isa_riscv64_inst_encodeencode_valu_rrr_imm!();
+        Depcrate_isa_riscv64_inst_encodeencode_valu_rr!();
+        Depcrate_isa_riscv64_inst_encodeencode_valu_r_imm!();
+        Depcrate_isa_riscv64_inst_encodeencode_vcfg_imm!();
+        Depcrate_isa_riscv64_inst_encodeencode_vmem_load!();
+        Depcrate_isa_riscv64_inst_encodeencode_vmem_store!();
+        Depcrate_isa_riscv64_inst_encodeencode_csr_reg!();
+        Depcrate_isa_riscv64_inst_encodeencode_csr_imm!();
+        Depcrate_isa_riscv64_inst_encodeencode_cr_type!();
+        Depcrate_isa_riscv64_inst_encodeencode_cr2_type!();
+        Depcrate_isa_riscv64_inst_encodeencode_ca_type!();
+        Depcrate_isa_riscv64_inst_encodeencode_cj_type!();
+        Depcrate_isa_riscv64_inst_encodeencode_ci_type!();
+        Depcrate_isa_riscv64_inst_encodeencode_ci_sp_load!();
+        Depcrate_isa_riscv64_inst_encodeencode_c_addi16sp!();
+        Depcrate_isa_riscv64_inst_encodeencode_ciw_type!();
+        Depcrate_isa_riscv64_inst_encodeencode_cb_type!();
+        Depcrate_isa_riscv64_inst_encodeencode_css_type!();
+        Depcrate_isa_riscv64_inst_encodeencode_cs_type!();
+        Depcrate_isa_riscv64_inst_encodeencode_cl_type!();
+        Depcrate_isa_riscv64_inst_encodeencode_cs_cl_type_bits!();
+        Depcrate_isa_riscv64_inst_encodeencode_cszn_type!();
+        Depcrate_isa_riscv64_inst_encodeencode_zcbmem_bits!();
+        Depcrate_isa_riscv64_inst_encodeencode_zcbmem_load!();
+        Depcrate_isa_riscv64_inst_encodeencode_zcbmem_store!();
+        Depcrate_isa_riscv64_inst_encodeencode_fli!();
+        Depcrate_isa_riscv64_inst_encodeencode_fp_rr!();
+        Depcrate_isa_riscv64_inst_encodeencode_fp_rrr!();
+        Depcrate_isa_riscv64_inst_encodeencode_fp_rrrr!();
+    };
+}

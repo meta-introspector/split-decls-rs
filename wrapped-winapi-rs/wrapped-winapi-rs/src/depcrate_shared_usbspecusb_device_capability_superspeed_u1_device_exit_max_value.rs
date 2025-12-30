@@ -1,0 +1,9 @@
+// Generated macro for USB_DEVICE_CAPABILITY_SUPERSPEED_U1_DEVICE_EXIT_MAX_VALUE (const)
+macro_rules! Depcrate_shared_usbspecUSB_DEVICE_CAPABILITY_SUPERSPEED_U1_DEVICE_EXIT_MAX_VALUE {
+() => {
+// Module: crate::shared::usbspec
+// Provides: {"USB_DEVICE_CAPABILITY_SUPERSPEED_U1_DEVICE_EXIT_MAX_VALUE"}
+// Dependencies: {}
+pub const USB_DEVICE_CAPABILITY_SUPERSPEED_U1_DEVICE_EXIT_MAX_VALUE : UCHAR = 0x0A ;
+};
+}

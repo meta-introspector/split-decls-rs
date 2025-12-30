@@ -1,0 +1,57 @@
+// Generated module macro for crate::um::sql
+macro_rules! Modcrate_um_sql {
+() => {
+        Depcrate_um_sqluse_38565!();
+        Depcrate_um_sqlSQL_NULL_DATA!();
+        Depcrate_um_sqlSQL_DATA_AT_EXEC!();
+        Depcrate_um_sqlSQL_SUCCESS!();
+        Depcrate_um_sqlSQL_SUCCESS_WITH_INFO!();
+        Depcrate_um_sqlSQL_NO_DATA!();
+        Depcrate_um_sqlSQL_PARAM_DATA_AVAILABLE!();
+        Depcrate_um_sqlSQL_ERROR!();
+        Depcrate_um_sqlSQL_INVALID_HANDLE!();
+        Depcrate_um_sqlSQL_STILL_EXECUTING!();
+        Depcrate_um_sqlSQL_NEED_DATA!();
+        Depcrate_um_sqlSQL_NTS!();
+        Depcrate_um_sqlSQL_MAX_MESSAGE_LENGTH!();
+        Depcrate_um_sqlSQL_DATE_LEN!();
+        Depcrate_um_sqlSQL_TIME_LEN!();
+        Depcrate_um_sqlSQL_TIMESTAMP_LEN!();
+        Depcrate_um_sqlSQL_HANDLE_ENV!();
+        Depcrate_um_sqlSQL_HANDLE_DBC!();
+        Depcrate_um_sqlSQL_HANDLE_STMT!();
+        Depcrate_um_sqlSQL_HANDLE_DESC!();
+        Depcrate_um_sqlSQL_ATTR_OUTPUT_NTS!();
+        Depcrate_um_sqlSQL_ATTR_AUTO_IPD!();
+        Depcrate_um_sqlSQL_ATTR_METADATA_ID!();
+        Depcrate_um_sqlSQL_ATTR_APP_ROW_DESC!();
+        Depcrate_um_sqlSQL_ATTR_APP_PARAM_DESC!();
+        Depcrate_um_sqlSQL_ATTR_IMP_ROW_DESC!();
+        Depcrate_um_sqlSQL_ATTR_IMP_PARAM_DESC!();
+        Depcrate_um_sqlSQL_ATTR_CURSOR_SCROLLABLE!();
+        Depcrate_um_sqlSQL_ATTR_CURSOR_SENSITIVITY!();
+        Depcrate_um_sqlSQL_UNKNOWN_TYPE!();
+        Depcrate_um_sqlSQL_CHAR!();
+        Depcrate_um_sqlSQL_NUMERIC!();
+        Depcrate_um_sqlSQL_DECIMAL!();
+        Depcrate_um_sqlSQL_INTEGER!();
+        Depcrate_um_sqlSQL_SMALLINT!();
+        Depcrate_um_sqlSQL_FLOAT!();
+        Depcrate_um_sqlSQL_REAL!();
+        Depcrate_um_sqlSQL_DOUBLE!();
+        Depcrate_um_sqlSQL_DATETIME!();
+        Depcrate_um_sqlSQL_VARCHAR!();
+        Depcrate_um_sqlSQL_TYPE_DATE!();
+        Depcrate_um_sqlSQL_TYPE_TIME!();
+        Depcrate_um_sqlSQL_TYPE_TIMESTAMP!();
+        Depcrate_um_sqlSQL_NO_NULLS!();
+        Depcrate_um_sqlSQL_NULLABLE!();
+        Depcrate_um_sqlSQL_NULLABLE_UNKNOWN!();
+        Depcrate_um_sqlSQL_CLOSE!();
+        Depcrate_um_sqlSQL_DROP!();
+        Depcrate_um_sqlSQL_UNBIND!();
+        Depcrate_um_sqlSQL_RESET_PARAMS!();
+        Depcrate_um_sqlSQL_NULL_HANDLE!();
+        Depcrate_um_sqlother_38616!();
+    };
+}

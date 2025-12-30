@@ -1,0 +1,9 @@
+// Generated macro for STATUS_THREADPOOL_RELEASE_MUTEX_ON_COMPLETION_FAILED (const)
+macro_rules! Depcrate_shared_ntstatusSTATUS_THREADPOOL_RELEASE_MUTEX_ON_COMPLETION_FAILED {
+() => {
+// Module: crate::shared::ntstatus
+// Provides: {"STATUS_THREADPOOL_RELEASE_MUTEX_ON_COMPLETION_FAILED"}
+// Dependencies: {}
+pub const STATUS_THREADPOOL_RELEASE_MUTEX_ON_COMPLETION_FAILED : NTSTATUS = 0xC000070D ;
+};
+}

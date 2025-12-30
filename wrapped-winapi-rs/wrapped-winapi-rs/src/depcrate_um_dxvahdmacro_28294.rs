@@ -1,0 +1,9 @@
+// Generated macro for macro_28294 (macro)
+macro_rules! Depcrate_um_dxvahdmacro_28294 {
+() => {
+// Module: crate::um::dxvahd
+// Provides: {"macro_28294"}
+// Dependencies: {}
+ENUM ! { enum DXVAHD_FILTER_CAPS { DXVAHD_FILTER_CAPS_BRIGHTNESS = 0x1 , DXVAHD_FILTER_CAPS_CONTRAST = 0x2 , DXVAHD_FILTER_CAPS_HUE = 0x4 , DXVAHD_FILTER_CAPS_SATURATION = 0x8 , DXVAHD_FILTER_CAPS_NOISE_REDUCTION = 0x10 , DXVAHD_FILTER_CAPS_EDGE_ENHANCEMENT = 0x20 , DXVAHD_FILTER_CAPS_ANAMORPHIC_SCALING = 0x40 , } }
+};
+}

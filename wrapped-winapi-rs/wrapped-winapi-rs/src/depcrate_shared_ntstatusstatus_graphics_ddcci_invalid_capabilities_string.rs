@@ -1,0 +1,9 @@
+// Generated macro for STATUS_GRAPHICS_DDCCI_INVALID_CAPABILITIES_STRING (const)
+macro_rules! Depcrate_shared_ntstatusSTATUS_GRAPHICS_DDCCI_INVALID_CAPABILITIES_STRING {
+() => {
+// Module: crate::shared::ntstatus
+// Provides: {"STATUS_GRAPHICS_DDCCI_INVALID_CAPABILITIES_STRING"}
+// Dependencies: {}
+pub const STATUS_GRAPHICS_DDCCI_INVALID_CAPABILITIES_STRING : NTSTATUS = 0xC01E0587 ;
+};
+}

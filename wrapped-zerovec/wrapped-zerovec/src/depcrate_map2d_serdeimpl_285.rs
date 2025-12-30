@@ -1,0 +1,9 @@
+// Generated macro for impl_285 (impl)
+macro_rules! Depcrate_map2d_serdeimpl_285 {
+() => {
+// Module: crate::map2d::serde
+// Provides: {"impl_285"}
+// Dependencies: {}
+# [doc = " This impl requires enabling the optional `serde` Cargo feature of the `zerovec` crate"] impl < 'de , 'a , K0 , K1 , V > Deserialize < 'de > for ZeroMap2dBorrowed < 'a , K0 , K1 , V > where K0 : ZeroMapKV < 'a > + Ord + ? Sized , K1 : ZeroMapKV < 'a > + Ord + ? Sized , V : ZeroMapKV < 'a > + ? Sized , K0 :: Container : Deserialize < 'de > , K1 :: Container : Deserialize < 'de > , V :: Container : Deserialize < 'de > , K0 :: OwnedType : Deserialize < 'de > , K1 :: OwnedType : Deserialize < 'de > , V :: OwnedType : Deserialize < 'de > , 'de : 'a , { fn deserialize < D > (deserializer : D) -> Result < Self , D :: Error > where D : Deserializer < 'de > , { if deserializer . is_human_readable () { Err (de :: Error :: custom ("ZeroMap2dBorrowed cannot be deserialized from human-readable formats" ,)) } else { let deserialized : ZeroMap2d < 'a , K0 , K1 , V > = ZeroMap2d :: deserialize (deserializer) ? ; let keys0 = if let Some (keys0) = deserialized . keys0 . zvl_as_borrowed_inner () { keys0 } else { return Err (de :: Error :: custom ("ZeroMap2dBorrowed can only deserialize in zero-copy ways" ,)) ; } ; let joiner = if let Some (joiner) = deserialized . joiner . zvl_as_borrowed_inner () { joiner } else { return Err (de :: Error :: custom ("ZeroMap2dBorrowed can only deserialize in zero-copy ways" ,)) ; } ; let keys1 = if let Some (keys1) = deserialized . keys1 . zvl_as_borrowed_inner () { keys1 } else { return Err (de :: Error :: custom ("ZeroMap2dBorrowed can only deserialize in zero-copy ways" ,)) ; } ; let values = if let Some (values) = deserialized . values . zvl_as_borrowed_inner () { values } else { return Err (de :: Error :: custom ("ZeroMap2dBorrowed can only deserialize in zero-copy ways" ,)) ; } ; Ok (Self { keys0 , joiner , keys1 , values , }) } } }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for impl_186 (impl)
+macro_rules! Depcrate_readerimpl_186 {
+() => {
+// Module: crate::reader
+// Provides: {"impl_186"}
+// Dependencies: {}
+# [cfg (feature = "alloc")] impl Iterator for ZeroTrieIterator < '_ > { type Item = (Vec < u8 > , usize) ; fn next (& mut self) -> Option < Self :: Item > { let (mut trie , mut string , mut branch_idx) ; (trie , string , branch_idx) = self . state . pop () ? ; loop { let (b , x , span , search) ; let return_trie = trie ; (b , trie) = match trie . split_first () { Some (tpl) => tpl , None => { (trie , string , branch_idx) = self . state . pop () ? ; continue ; } } ; let byte_type = byte_type (* b) ; if matches ! (byte_type , NodeType :: Ascii) { string . push (* b) ; continue ; } (x , trie) = match byte_type { NodeType :: Ascii => (0 , trie) , NodeType :: Span | NodeType :: Value => read_varint_meta3 (* b , trie) , NodeType :: Branch => read_varint_meta2 (* b , trie) , } ; if matches ! (byte_type , NodeType :: Span) { (span , trie) = trie . debug_split_at (x) ; string . extend (span) ; continue ; } if matches ! (byte_type , NodeType :: Value) { let retval = string . clone () ; self . state . push ((trie , string , 0)) ; return Some ((retval , x)) ; } let (x , w) = if x >= 256 { (x & 0xff , x >> 8) } else { (x , 0) } ; let x = if x == 0 { 256 } else { x } ; if branch_idx + 1 < x { self . state . push ((return_trie , string . clone () , branch_idx + 1)) ; } let byte = if x < 16 || ! self . use_phf { (search , trie) = trie . debug_split_at (x) ; debug_unwrap ! (search . get (branch_idx) , return None) } else { (search , trie) = trie . debug_split_at (x * 2 + 1) ; debug_unwrap ! (search . get (branch_idx + x + 1) , return None) } ; string . push (* byte) ; trie = if w == 0 { get_branch_w0 (trie , branch_idx , x) } else { get_branch (trie , branch_idx , x , w) } ; branch_idx = 0 ; } } }
+};
+}

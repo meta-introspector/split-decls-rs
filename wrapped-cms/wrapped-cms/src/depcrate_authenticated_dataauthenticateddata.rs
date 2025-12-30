@@ -1,0 +1,9 @@
+// Generated macro for AuthenticatedData (struct)
+macro_rules! Depcrate_authenticated_dataAuthenticatedData {
+() => {
+// Module: crate::authenticated_data
+// Provides: {"AuthenticatedData"}
+// Dependencies: {}
+# [doc = " The `AuthenticatedData` type is defined in [RFC 5652 Section 9.1]."] # [doc = ""] # [doc = " ```text"] # [doc = "   AuthenticatedData ::= SEQUENCE {"] # [doc = "       version CMSVersion,"] # [doc = "       originatorInfo [0] IMPLICIT OriginatorInfo OPTIONAL,"] # [doc = "       recipientInfos RecipientInfos,"] # [doc = "       macAlgorithm MessageAuthenticationCodeAlgorithm,"] # [doc = "       digestAlgorithm [1] DigestAlgorithmIdentifier OPTIONAL,"] # [doc = "       encapContentInfo EncapsulatedContentInfo,"] # [doc = "       authAttrs [2] IMPLICIT AuthAttributes OPTIONAL,"] # [doc = "       mac MessageAuthenticationCode,"] # [doc = "       unauthAttrs [3] IMPLICIT UnauthAttributes OPTIONAL }"] # [doc = " ```"] # [doc = ""] # [doc = " [RFC 5652 Section 9.1]: https://www.rfc-editor.org/rfc/rfc5652#section-9.1"] # [derive (Clone , Debug , Eq , PartialEq , Sequence)] # [allow (missing_docs)] pub struct AuthenticatedData { pub version : CmsVersion , # [asn1 (context_specific = "0" , tag_mode = "IMPLICIT" , constructed = "true" , optional = "true")] pub originator_info : Option < OriginatorInfo > , pub recip_infos : RecipientInfos , pub mac_alg : AlgorithmIdentifierOwned , # [asn1 (context_specific = "1" , tag_mode = "IMPLICIT" , constructed = "true" , optional = "true")] pub digest_alg : Option < AlgorithmIdentifierOwned > , pub encap_content_info : EncapsulatedContentInfo , # [asn1 (context_specific = "2" , tag_mode = "IMPLICIT" , constructed = "true" , optional = "true")] pub auth_attrs : Option < Attributes > , pub mac : MessageAuthenticationCode , # [asn1 (context_specific = "3" , tag_mode = "IMPLICIT" , constructed = "true" , optional = "true")] pub unauth_attrs : Option < Attributes > , }
+};
+}

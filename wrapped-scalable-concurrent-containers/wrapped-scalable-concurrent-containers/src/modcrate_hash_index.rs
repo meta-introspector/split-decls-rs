@@ -1,0 +1,56 @@
+// Generated module macro for crate::hash_index
+macro_rules! Modcrate_hash_index {
+() => {
+        Depcrate_hash_indexuse_57!();
+        Depcrate_hash_indexuse_58!();
+        Depcrate_hash_indexuse_59!();
+        Depcrate_hash_indexuse_60!();
+        Depcrate_hash_indexuse_61!();
+        Depcrate_hash_indexuse_62!();
+        Depcrate_hash_indexuse_63!();
+        Depcrate_hash_indexuse_64!();
+        Depcrate_hash_indexuse_65!();
+        Depcrate_hash_indexuse_66!();
+        Depcrate_hash_indexuse_67!();
+        Depcrate_hash_indexuse_68!();
+        Depcrate_hash_indexuse_69!();
+        Depcrate_hash_indexuse_70!();
+        Depcrate_hash_indexuse_71!();
+        Depcrate_hash_indexuse_72!();
+        Depcrate_hash_indexuse_73!();
+        Depcrate_hash_indexHashIndex!();
+        Depcrate_hash_indexEntry!();
+        Depcrate_hash_indexOccupiedEntry!();
+        Depcrate_hash_indexVacantEntry!();
+        Depcrate_hash_indexReserve!();
+        Depcrate_hash_indexIter!();
+        Depcrate_hash_indeximpl_80!();
+        Depcrate_hash_indeximpl_81!();
+        Depcrate_hash_indeximpl_82!();
+        Depcrate_hash_indeximpl_83!();
+        Depcrate_hash_indeximpl_84!();
+        Depcrate_hash_indeximpl_85!();
+        Depcrate_hash_indeximpl_86!();
+        Depcrate_hash_indeximpl_87!();
+        Depcrate_hash_indeximpl_88!();
+        Depcrate_hash_indeximpl_89!();
+        Depcrate_hash_indeximpl_90!();
+        Depcrate_hash_indeximpl_91!();
+        Depcrate_hash_indeximpl_92!();
+        Depcrate_hash_indeximpl_93!();
+        Depcrate_hash_indeximpl_94!();
+        Depcrate_hash_indeximpl_95!();
+        Depcrate_hash_indeximpl_96!();
+        Depcrate_hash_indeximpl_97!();
+        Depcrate_hash_indeximpl_98!();
+        Depcrate_hash_indeximpl_99!();
+        Depcrate_hash_indeximpl_100!();
+        Depcrate_hash_indeximpl_101!();
+        Depcrate_hash_indeximpl_102!();
+        Depcrate_hash_indeximpl_103!();
+        Depcrate_hash_indeximpl_104!();
+        Depcrate_hash_indeximpl_105!();
+        Depcrate_hash_indeximpl_106!();
+        Depcrate_hash_indeximpl_107!();
+    };
+}

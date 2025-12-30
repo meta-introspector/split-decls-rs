@@ -1,0 +1,49 @@
+// Generated module macro for crate::next_solver
+macro_rules! Modcrate_next_solver {
+() => {
+        Depcrate_next_solverabi!();
+        Depcrate_next_solverconsts!();
+        Depcrate_next_solverdef_id!();
+        Depcrate_next_solverfold!();
+        Depcrate_next_solverfulfill!();
+        Depcrate_next_solvergeneric_arg!();
+        Depcrate_next_solvergenerics!();
+        Depcrate_next_solverinfer!();
+        Depcrate_next_solverinspect!();
+        Depcrate_next_solverinterner!();
+        Depcrate_next_solverir_print!();
+        Depcrate_next_solvernormalize!();
+        Depcrate_next_solverobligation_ctxt!();
+        Depcrate_next_solveropaques!();
+        Depcrate_next_solverpredicate!();
+        Depcrate_next_solverregion!();
+        Depcrate_next_solversolver!();
+        Depcrate_next_solverstructural_normalize!();
+        Depcrate_next_solverty!();
+        Depcrate_next_solverutil!();
+        Depcrate_next_solveruse_264!();
+        Depcrate_next_solveruse_265!();
+        Depcrate_next_solveruse_266!();
+        Depcrate_next_solveruse_267!();
+        Depcrate_next_solveruse_268!();
+        Depcrate_next_solveruse_269!();
+        Depcrate_next_solveruse_270!();
+        Depcrate_next_solveruse_271!();
+        Depcrate_next_solveruse_272!();
+        Depcrate_next_solveruse_273!();
+        Depcrate_next_solveruse_274!();
+        Depcrate_next_solverBinder!();
+        Depcrate_next_solverEarlyBinder!();
+        Depcrate_next_solverCanonical!();
+        Depcrate_next_solverCanonicalVarValues!();
+        Depcrate_next_solverCanonicalVarKind!();
+        Depcrate_next_solverCanonicalQueryInput!();
+        Depcrate_next_solverAliasTy!();
+        Depcrate_next_solverFnSig!();
+        Depcrate_next_solverPolyFnSig!();
+        Depcrate_next_solverTypingMode!();
+        Depcrate_next_solverTypeError!();
+        Depcrate_next_solverQueryResult!();
+        Depcrate_next_solverFxIndexMap!();
+    };
+}

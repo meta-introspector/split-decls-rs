@@ -1,0 +1,9 @@
+// Generated macro for non_trivia_sibling (function)
+macro_rules! Depcrate_algonon_trivia_sibling {
+() => {
+// Module: crate::algo
+// Provides: {"non_trivia_sibling"}
+// Dependencies: {}
+# [doc = " Finds the first sibling in the given direction which is not `trivia`"] pub fn non_trivia_sibling (element : SyntaxElement , direction : Direction) -> Option < SyntaxElement > { return match element { NodeOrToken :: Node (node) => node . siblings_with_tokens (direction) . skip (1) . find (not_trivia) , NodeOrToken :: Token (token) => token . siblings_with_tokens (direction) . skip (1) . find (not_trivia) , } ; fn not_trivia (element : & SyntaxElement) -> bool { match element { NodeOrToken :: Node (_) => true , NodeOrToken :: Token (token) => ! token . kind () . is_trivia () , } } }
+};
+}

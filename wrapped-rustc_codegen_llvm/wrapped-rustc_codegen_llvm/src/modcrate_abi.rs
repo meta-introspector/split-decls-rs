@@ -1,0 +1,43 @@
+// Generated module macro for crate::abi
+macro_rules! Modcrate_abi {
+() => {
+        Depcrate_abiuse_25!();
+        Depcrate_abiuse_26!();
+        Depcrate_abiuse_27!();
+        Depcrate_abiuse_28!();
+        Depcrate_abiuse_29!();
+        Depcrate_abiuse_30!();
+        Depcrate_abiuse_31!();
+        Depcrate_abiuse_32!();
+        Depcrate_abiuse_33!();
+        Depcrate_abiuse_34!();
+        Depcrate_abiuse_35!();
+        Depcrate_abiuse_36!();
+        Depcrate_abiuse_37!();
+        Depcrate_abiuse_38!();
+        Depcrate_abiuse_39!();
+        Depcrate_abiuse_40!();
+        Depcrate_abiuse_41!();
+        Depcrate_abiuse_42!();
+        Depcrate_abiuse_43!();
+        Depcrate_abiuse_44!();
+        Depcrate_abiuse_45!();
+        Depcrate_abiuse_46!();
+        Depcrate_abiuse_47!();
+        Depcrate_abiArgAttributesExt!();
+        Depcrate_abiABI_AFFECTING_ATTRIBUTES!();
+        Depcrate_abiOPTIMIZATION_ATTRIBUTES!();
+        Depcrate_abiget_attrs!();
+        Depcrate_abiimpl_52!();
+        Depcrate_abiLlvmType!();
+        Depcrate_abiimpl_54!();
+        Depcrate_abiimpl_55!();
+        Depcrate_abiArgAbiExt!();
+        Depcrate_abiimpl_57!();
+        Depcrate_abiimpl_58!();
+        Depcrate_abiFnAbiLlvmExt!();
+        Depcrate_abiimpl_60!();
+        Depcrate_abiimpl_61!();
+        Depcrate_abiimpl_62!();
+    };
+}

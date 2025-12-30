@@ -1,0 +1,9 @@
+// Generated macro for test_get_managed_objects (function)
+macro_rules! Depcrate_leavestest_get_managed_objects {
+() => {
+// Module: crate::leaves
+// Provides: {"test_get_managed_objects"}
+// Dependencies: {}
+# [test] fn test_get_managed_objects () { use std :: collections :: BTreeMap ; use crate :: Factory ; use dbus :: arg :: { Dict , Variant } ; # [derive (Default , Debug)] struct Custom ; impl DataType for Custom { type Tree = () ; type ObjectPath = () ; type Interface = () ; type Property = i32 ; type Method = () ; type Signal = () ; } let f = Factory :: new_fn :: < Custom > () ; let tree = f . tree (()) . add (f . object_path ("/test" , ()) . introspectable () . object_manager () . add (f . interface ("com.example.test" , ()) . add_p (f . property :: < i32 , _ > ("Value1" , 5i32) . default_get ()) . add_p (f . property :: < i32 , _ > ("Value2" , 9i32) . default_get ()))) . add (f . object_path ("/test/subtest" , ()) . introspectable () . add (f . interface ("com.example.subtest" , ()) . add_p (f . property :: < i32 , _ > ("Value3" , 7i32) . default_get ()))) ; let mut msg = Message :: new_method_call ("com.example.test" , "/test" , "org.freedesktop.DBus.ObjectManager" , "GetManagedObjects") . unwrap () ; msg . set_serial (4) ; let res = tree . handle (& msg) . unwrap () ; let pdict : arg :: Dict < Path , Dict < & str , Dict < & str , Variant < i32 > , _ > , _ > , _ > = res [0] . get1 () . unwrap () ; let pmap : BTreeMap < _ , _ > = pdict . collect () ; assert ! (pmap . get (& Path :: from ("/test")) . is_none ()) ; let idict = pmap . get (& Path :: from ("/test/subtest")) . unwrap () ; let imap : BTreeMap < _ , _ > = idict . collect () ; let propdict = imap . get ("com.example.subtest") . unwrap () ; let propmap : BTreeMap < _ , _ > = propdict . collect () ; assert_eq ! (propmap . get ("Value3") , Some (& arg :: Variant (7i32))) ; }
+};
+}

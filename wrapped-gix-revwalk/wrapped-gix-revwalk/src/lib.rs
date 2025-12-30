@@ -1,0 +1,64 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcrate_graphuse_5.rs");
+include!("depcrategraph.rs");
+include!("depcrate_graph_commituse_11.rs");
+include!("depcrategraph.rs");
+include!("depcrate_graphuse_19.rs");
+include!("depcratepriorityqueue.rs");
+include!("depcrate_queueimpl_46.rs");
+include!("depcrate_queueimpl_49.rs");
+include!("depcrate_queueimpl_50.rs");
+include!("depcrate_queueimpl_44.rs");
+include!("depcrate_graphtry_lookup.rs");
+include!("depcrate_queueuse_39.rs");
+include!("depcratequeue.rs");
+include!("depcrate_graphuse_4.rs");
+include!("depcrate_graphgeneration.rs");
+include!("depcrate_grapherrors.rs");
+include!("depcrate_graphlazycommit.rs");
+include!("depcrate_graph_commituse_9.rs");
+include!("depcrate_queueimpl_43.rs");
+include!("depcrate_graphuse_20.rs");
+include!("depcrate_graph_commititer_parents.rs");
+include!("depcrate_queueimpl_42.rs");
+include!("depcrate_graphimpl_32.rs");
+include!("depcrate_graph_commitimpl_15.rs");
+include!("depcrate_graphuse_3.rs");
+include!("depcrate_graphimpl_24.rs");
+include!("depcrate_graphimpl_26.rs");
+include!("depcrate_graph_committo_owned.rs");
+include!("depcrate_graphimpl_27.rs");
+include!("depcrate_graphimpl_28.rs");
+include!("depcrate_graph_commituse_12.rs");
+include!("depcrate_graphcommit.rs");
+include!("depcrate_graphuse_6.rs");
+include!("depcrate_graphimpl_33.rs");
+include!("depcrate_grapheither.rs");
+include!("depcrate_graphimpl_30.rs");
+include!("depcrate_queueimpl_45.rs");
+include!("depcrate_queueuse_38.rs");
+include!("depcrate_queueitem.rs");
+include!("depcrate_queueimpl_41.rs");
+include!("depcrate_graphcommit.rs");
+include!("depcrate_graphidmap.rs");
+include!("depcrate_queueimpl_47.rs");
+include!("depcrate_queueimpl_48.rs");
+include!("depcrate_graph_commitparents.rs");
+include!("depcrate_graphimpl_23.rs");
+include!("depcrate_graphimpl_25.rs");
+include!("depcrate_graph_commituse_10.rs");
+include!("depcrate_graph_commitimpl_13.rs");
+include!("depcrate_graphimpl_22.rs");
+include!("modcrate.rs");
+include!("modcrate_graph.rs");
+include!("modcrate_queue.rs");
+include!("modcrate_graph_commit.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate!();
+    Modcrate_graph!();
+    Modcrate_queue!();
+    Modcrate_graph_commit!();
+}

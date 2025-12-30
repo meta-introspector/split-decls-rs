@@ -1,0 +1,40 @@
+// Generated module macro for crate::dictionary
+macro_rules! Modcrate_dictionary {
+() => {
+        Depcrate_dictionaryuse_2!();
+        Depcrate_dictionaryuse_3!();
+        Depcrate_dictionaryuse_4!();
+        Depcrate_dictionaryDictionary!();
+        Depcrate_dictionaryimpl_6!();
+        Depcrate_dictionaryimpl_7!();
+        Depcrate_dictionaryimpl_8!();
+        Depcrate_dictionaryimpl_9!();
+        Depcrate_dictionaryimpl_10!();
+        Depcrate_dictionaryimpl_11!();
+        Depcrate_dictionarydelegate_iterator!();
+        Depcrate_dictionaryEntry!();
+        Depcrate_dictionaryVacantEntry!();
+        Depcrate_dictionaryOccupiedEntry!();
+        Depcrate_dictionaryimpl_16!();
+        Depcrate_dictionaryimpl_17!();
+        Depcrate_dictionaryimpl_18!();
+        Depcrate_dictionaryimpl_19!();
+        Depcrate_dictionaryIter!();
+        Depcrate_dictionaryIterImpl!();
+        Depcrate_dictionarymacro_22!();
+        Depcrate_dictionaryimpl_23!();
+        Depcrate_dictionaryIterMut!();
+        Depcrate_dictionarymacro_25!();
+        Depcrate_dictionaryimpl_26!();
+        Depcrate_dictionaryIntoIter!();
+        Depcrate_dictionarymacro_28!();
+        Depcrate_dictionaryKeys!();
+        Depcrate_dictionarymacro_30!();
+        Depcrate_dictionaryValues!();
+        Depcrate_dictionarymacro_32!();
+        Depcrate_dictionaryValuesMut!();
+        Depcrate_dictionarymacro_34!();
+        Depcrate_dictionaryserde_impls!();
+        Depcrate_dictionarytests!();
+    };
+}

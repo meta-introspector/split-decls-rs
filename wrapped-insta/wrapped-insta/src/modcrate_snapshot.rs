@@ -1,0 +1,50 @@
+// Generated module macro for crate::snapshot
+macro_rules! Modcrate_snapshot {
+() => {
+        Depcrate_snapshotuse_337!();
+        Depcrate_snapshotuse_338!();
+        Depcrate_snapshotuse_339!();
+        Depcrate_snapshotuse_340!();
+        Depcrate_snapshotuse_341!();
+        Depcrate_snapshotuse_342!();
+        Depcrate_snapshotuse_343!();
+        Depcrate_snapshotuse_344!();
+        Depcrate_snapshotuse_345!();
+        Depcrate_snapshotuse_346!();
+        Depcrate_snapshotuse_347!();
+        Depcrate_snapshotRUN_ID!();
+        Depcrate_snapshotPendingInlineSnapshot!();
+        Depcrate_snapshotimpl_350!();
+        Depcrate_snapshotSnapshotKind!();
+        Depcrate_snapshotMetaData!();
+        Depcrate_snapshotimpl_353!();
+        Depcrate_snapshotTextSnapshotKind!();
+        Depcrate_snapshotSnapshot!();
+        Depcrate_snapshotimpl_356!();
+        Depcrate_snapshotSnapshotContents!();
+        Depcrate_snapshotTextSnapshotContents!();
+        Depcrate_snapshotimpl_359!();
+        Depcrate_snapshotimpl_360!();
+        Depcrate_snapshotimpl_361!();
+        Depcrate_snapshotimpl_362!();
+        Depcrate_snapshotimpl_363!();
+        Depcrate_snapshotbuild_binary_path!();
+        Depcrate_snapshotrequired_hashes!();
+        Depcrate_snapshottest_required_hashes!();
+        Depcrate_snapshotleading_space!();
+        Depcrate_snapshotmin_indentation!();
+        Depcrate_snapshotnormalize_inline!();
+        Depcrate_snapshottest_normalize_inline_snapshot!();
+        Depcrate_snapshotnames_of_path!();
+        Depcrate_snapshottest_names_of_path!();
+        Depcrate_snapshotlegacy_inline_normalize!();
+        Depcrate_snapshottest_snapshot_contents_to_inline!();
+        Depcrate_snapshottest_snapshot_contents_hashes!();
+        Depcrate_snapshottest_min_indentation!();
+        Depcrate_snapshottest_min_indentation_additional!();
+        Depcrate_snapshottest_inline_snapshot_value_newline!();
+        Depcrate_snapshottest_parse_yaml_error!();
+        Depcrate_snapshottest_ownership!();
+        Depcrate_snapshottest_empty_lines!();
+    };
+}

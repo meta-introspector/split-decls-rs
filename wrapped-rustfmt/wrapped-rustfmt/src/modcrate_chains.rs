@@ -1,0 +1,46 @@
+// Generated module macro for crate::chains
+macro_rules! Modcrate_chains {
+() => {
+        Depcrate_chainsuse_136!();
+        Depcrate_chainsuse_137!();
+        Depcrate_chainsuse_138!();
+        Depcrate_chainsuse_139!();
+        Depcrate_chainsuse_140!();
+        Depcrate_chainsuse_141!();
+        Depcrate_chainsuse_142!();
+        Depcrate_chainsuse_143!();
+        Depcrate_chainsuse_144!();
+        Depcrate_chainsuse_145!();
+        Depcrate_chainsuse_146!();
+        Depcrate_chainsuse_147!();
+        Depcrate_chainsuse_148!();
+        Depcrate_chainsuse_149!();
+        Depcrate_chainsuse_150!();
+        Depcrate_chainsformat_overflow_style!();
+        Depcrate_chainsformat_chain_item!();
+        Depcrate_chainsget_block_child_shape!();
+        Depcrate_chainsget_visual_style_child_shape!();
+        Depcrate_chainsrewrite_chain!();
+        Depcrate_chainsCommentPosition!();
+        Depcrate_chainsSubExpr!();
+        Depcrate_chainsChainItem!();
+        Depcrate_chainsChainItemKind!();
+        Depcrate_chainsimpl_160!();
+        Depcrate_chainsimpl_161!();
+        Depcrate_chainsimpl_162!();
+        Depcrate_chainsChain!();
+        Depcrate_chainsimpl_164!();
+        Depcrate_chainsimpl_165!();
+        Depcrate_chainsChainFormatter!();
+        Depcrate_chainsChainFormatterShared!();
+        Depcrate_chainsimpl_168!();
+        Depcrate_chainsChainFormatterBlock!();
+        Depcrate_chainsimpl_170!();
+        Depcrate_chainsimpl_171!();
+        Depcrate_chainsChainFormatterVisual!();
+        Depcrate_chainsimpl_173!();
+        Depcrate_chainsimpl_174!();
+        Depcrate_chainstrim_tries!();
+        Depcrate_chainsshould_add_parens!();
+    };
+}

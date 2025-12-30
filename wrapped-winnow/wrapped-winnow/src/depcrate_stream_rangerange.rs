@@ -1,0 +1,9 @@
+// Generated macro for Range (struct)
+macro_rules! Depcrate_stream_rangeRange {
+() => {
+// Module: crate::stream::range
+// Provides: {"Range"}
+// Dependencies: {}
+# [doc = " A range bounded inclusively for counting parses performed"] # [doc = ""] # [doc = " This is flexible in what can be converted to a [Range]:"] # [doc = " ```rust"] # [doc = " # #[cfg(feature = \"std\")] {"] # [doc = " # use winnow::prelude::*;"] # [doc = " # use winnow::token::any;"] # [doc = " # use winnow::combinator::repeat;"] # [doc = " # fn inner(input: &mut &str) -> ModalResult<char> {"] # [doc = " #     any.parse_next(input)"] # [doc = " # }"] # [doc = " # let mut input = \"0123456789012345678901234567890123456789\";"] # [doc = " # let input = &mut input;"] # [doc = " let parser: Vec<_> = repeat(5, inner).parse_next(input).unwrap();"] # [doc = " # let mut input = \"0123456789012345678901234567890123456789\";"] # [doc = " # let input = &mut input;"] # [doc = " let parser: Vec<_> = repeat(.., inner).parse_next(input).unwrap();"] # [doc = " # let mut input = \"0123456789012345678901234567890123456789\";"] # [doc = " # let input = &mut input;"] # [doc = " let parser: Vec<_> = repeat(1.., inner).parse_next(input).unwrap();"] # [doc = " # let mut input = \"0123456789012345678901234567890123456789\";"] # [doc = " # let input = &mut input;"] # [doc = " let parser: Vec<_> = repeat(5..8, inner).parse_next(input).unwrap();"] # [doc = " # let mut input = \"0123456789012345678901234567890123456789\";"] # [doc = " # let input = &mut input;"] # [doc = " let parser: Vec<_> = repeat(5..=8, inner).parse_next(input).unwrap();"] # [doc = " # }"] # [doc = " ```"] # [derive (PartialEq , Eq , Copy , Clone)] pub struct Range { pub (crate) start_inclusive : usize , pub (crate) end_inclusive : Option < usize > , }
+};
+}

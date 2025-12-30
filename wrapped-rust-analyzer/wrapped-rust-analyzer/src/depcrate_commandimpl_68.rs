@@ -1,0 +1,9 @@
+// Generated macro for impl_68 (impl)
+macro_rules! Depcrate_commandimpl_68 {
+() => {
+// Module: crate::command
+// Provides: {"impl_68"}
+// Dependencies: {}
+impl < T : Sized + Send + 'static > CommandHandle < T > { pub (crate) fn spawn (mut command : Command , parser : impl CargoParser < T > , sender : Sender < T > , out_file : Option < Utf8PathBuf > ,) -> std :: io :: Result < Self > { command . stdout (Stdio :: piped ()) . stderr (Stdio :: piped ()) . stdin (Stdio :: null ()) ; let program = command . get_program () . into () ; let arguments = command . get_args () . map (| arg | arg . into ()) . collect :: < Vec < OsString > > () ; let current_dir = command . get_current_dir () . map (| arg | arg . to_path_buf ()) ; let mut child = StdCommandWrap :: from (command) ; # [cfg (unix)] child . wrap (process_wrap :: std :: ProcessSession) ; # [cfg (windows)] child . wrap (process_wrap :: std :: JobObject) ; let mut child = child . spawn () . map (JodGroupChild) ? ; let stdout = child . 0 . stdout () . take () . unwrap () ; let stderr = child . 0 . stderr () . take () . unwrap () ; let actor = CargoActor :: < T > :: new (parser , sender , stdout , stderr) ; let thread = stdx :: thread :: Builder :: new (stdx :: thread :: ThreadIntent :: Worker , "CommandHandle") . spawn (move | | actor . run (out_file)) . expect ("failed to spawn thread") ; Ok (CommandHandle { program , arguments , current_dir , child , thread , _phantom : PhantomData }) } pub (crate) fn cancel (mut self) { let _ = self . child . 0 . kill () ; let _ = self . child . 0 . wait () ; } pub (crate) fn join (mut self) -> io :: Result < () > { let exit_status = self . child . 0 . wait () ? ; let (read_at_least_one_message , error) = self . thread . join () ? ; if read_at_least_one_message || exit_status . success () { Ok (()) } else { Err (io :: Error :: other (format ! ("Cargo watcher failed, the command produced no valid metadata (exit code: {exit_status:?}):\n{error}"))) } } }
+};
+}

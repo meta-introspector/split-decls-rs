@@ -1,0 +1,46 @@
+// Generated module macro for crate::stm32f427::dma2d
+macro_rules! Modcrate_stm32f427_dma2d {
+() => {
+        Depcrate_stm32f427_dma2dRegisterBlock!();
+        Depcrate_stm32f427_dma2dCR!();
+        Depcrate_stm32f427_dma2dcr!();
+        Depcrate_stm32f427_dma2dISR!();
+        Depcrate_stm32f427_dma2disr!();
+        Depcrate_stm32f427_dma2dIFCR!();
+        Depcrate_stm32f427_dma2difcr!();
+        Depcrate_stm32f427_dma2dFGMAR!();
+        Depcrate_stm32f427_dma2dfgmar!();
+        Depcrate_stm32f427_dma2dFGOR!();
+        Depcrate_stm32f427_dma2dfgor!();
+        Depcrate_stm32f427_dma2dBGMAR!();
+        Depcrate_stm32f427_dma2dbgmar!();
+        Depcrate_stm32f427_dma2dBGOR!();
+        Depcrate_stm32f427_dma2dbgor!();
+        Depcrate_stm32f427_dma2dFGPFCCR!();
+        Depcrate_stm32f427_dma2dfgpfccr!();
+        Depcrate_stm32f427_dma2dFGCOLR!();
+        Depcrate_stm32f427_dma2dfgcolr!();
+        Depcrate_stm32f427_dma2dBGPFCCR!();
+        Depcrate_stm32f427_dma2dbgpfccr!();
+        Depcrate_stm32f427_dma2dBGCOLR!();
+        Depcrate_stm32f427_dma2dbgcolr!();
+        Depcrate_stm32f427_dma2dFGCMAR!();
+        Depcrate_stm32f427_dma2dfgcmar!();
+        Depcrate_stm32f427_dma2dBGCMAR!();
+        Depcrate_stm32f427_dma2dbgcmar!();
+        Depcrate_stm32f427_dma2dOPFCCR!();
+        Depcrate_stm32f427_dma2dopfccr!();
+        Depcrate_stm32f427_dma2dOCOLR!();
+        Depcrate_stm32f427_dma2docolr!();
+        Depcrate_stm32f427_dma2dOMAR!();
+        Depcrate_stm32f427_dma2domar!();
+        Depcrate_stm32f427_dma2dOOR!();
+        Depcrate_stm32f427_dma2door!();
+        Depcrate_stm32f427_dma2dNLR!();
+        Depcrate_stm32f427_dma2dnlr!();
+        Depcrate_stm32f427_dma2dLWR!();
+        Depcrate_stm32f427_dma2dlwr!();
+        Depcrate_stm32f427_dma2dAMTCR!();
+        Depcrate_stm32f427_dma2damtcr!();
+    };
+}

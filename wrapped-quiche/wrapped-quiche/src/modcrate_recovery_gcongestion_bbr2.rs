@@ -1,0 +1,41 @@
+// Generated module macro for crate::recovery::gcongestion::bbr2
+macro_rules! Modcrate_recovery_gcongestion_bbr2 {
+() => {
+        Depcrate_recovery_gcongestion_bbr2drain!();
+        Depcrate_recovery_gcongestion_bbr2mode!();
+        Depcrate_recovery_gcongestion_bbr2network_model!();
+        Depcrate_recovery_gcongestion_bbr2probe_bw!();
+        Depcrate_recovery_gcongestion_bbr2probe_rtt!();
+        Depcrate_recovery_gcongestion_bbr2startup!();
+        Depcrate_recovery_gcongestion_bbr2use_1486!();
+        Depcrate_recovery_gcongestion_bbr2use_1487!();
+        Depcrate_recovery_gcongestion_bbr2use_1488!();
+        Depcrate_recovery_gcongestion_bbr2use_1489!();
+        Depcrate_recovery_gcongestion_bbr2use_1490!();
+        Depcrate_recovery_gcongestion_bbr2use_1491!();
+        Depcrate_recovery_gcongestion_bbr2use_1492!();
+        Depcrate_recovery_gcongestion_bbr2use_1493!();
+        Depcrate_recovery_gcongestion_bbr2use_1494!();
+        Depcrate_recovery_gcongestion_bbr2use_1495!();
+        Depcrate_recovery_gcongestion_bbr2use_1496!();
+        Depcrate_recovery_gcongestion_bbr2use_1497!();
+        Depcrate_recovery_gcongestion_bbr2use_1498!();
+        Depcrate_recovery_gcongestion_bbr2use_1499!();
+        Depcrate_recovery_gcongestion_bbr2MAX_MODE_CHANGES_PER_CONGESTION_EVENT!();
+        Depcrate_recovery_gcongestion_bbr2Params!();
+        Depcrate_recovery_gcongestion_bbr2impl_1502!();
+        Depcrate_recovery_gcongestion_bbr2DEFAULT_PARAMS!();
+        Depcrate_recovery_gcongestion_bbr2BwLoMode!();
+        Depcrate_recovery_gcongestion_bbr2impl_1505!();
+        Depcrate_recovery_gcongestion_bbr2Limits!();
+        Depcrate_recovery_gcongestion_bbr2impl_1507!();
+        Depcrate_recovery_gcongestion_bbr2impl_1508!();
+        Depcrate_recovery_gcongestion_bbr2initial_pacing_rate!();
+        Depcrate_recovery_gcongestion_bbr2BBRv2!();
+        Depcrate_recovery_gcongestion_bbr2BBRv2CongestionEvent!();
+        Depcrate_recovery_gcongestion_bbr2impl_1512!();
+        Depcrate_recovery_gcongestion_bbr2impl_1513!();
+        Depcrate_recovery_gcongestion_bbr2impl_1514!();
+        Depcrate_recovery_gcongestion_bbr2tests!();
+    };
+}

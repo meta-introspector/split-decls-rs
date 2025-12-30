@@ -1,0 +1,55 @@
+// Generated module macro for crate::commands
+macro_rules! Modcrate_commands {
+() => {
+        Depcrate_commandsuse_291!();
+        Depcrate_commandsuse_292!();
+        Depcrate_commandsuse_293!();
+        Depcrate_commandsuse_294!();
+        Depcrate_commandsuse_295!();
+        Depcrate_commandsuse_296!();
+        Depcrate_commandsuse_297!();
+        Depcrate_commandsuse_298!();
+        Depcrate_commandsuse_299!();
+        Depcrate_commandsuse_300!();
+        Depcrate_commandsuse_301!();
+        Depcrate_commandsuse_302!();
+        Depcrate_commandsuse_303!();
+        Depcrate_commandsuse_304!();
+        Depcrate_commandsuse_305!();
+        Depcrate_commandsuse_306!();
+        Depcrate_commandsuse_307!();
+        Depcrate_commandsuse_308!();
+        Depcrate_commandsuse_309!();
+        Depcrate_commandsuse_310!();
+        Depcrate_commandsuse_311!();
+        Depcrate_commandsuse_312!();
+        Depcrate_commandsuse_313!();
+        Depcrate_commandsuse_314!();
+        Depcrate_commandsuse_315!();
+        Depcrate_commandsuse_316!();
+        Depcrate_commandsuse_317!();
+        Depcrate_commandsDEFAULT_PORT!();
+        Depcrate_commandsSERVER_STARTUP_TIMEOUT!();
+        Depcrate_commandsget_addr!();
+        Depcrate_commandsignore_all_server_io_errors!();
+        Depcrate_commandsread_server_startup_status!();
+        Depcrate_commandsrun_server_process!();
+        Depcrate_commandsredirect_stderr!();
+        Depcrate_commandsredirect_stderr!();
+        Depcrate_commandscreate_error_log!();
+        Depcrate_commandsredirect_error_log!();
+        Depcrate_commandsrun_server_process!();
+        Depcrate_commandsconnect_or_start_server!();
+        Depcrate_commandsrequest_zero_stats!();
+        Depcrate_commandsrequest_stats!();
+        Depcrate_commandsrequest_dist_status!();
+        Depcrate_commandsrequest_shutdown!();
+        Depcrate_commandsrequest_compile!();
+        Depcrate_commandsstatus_signal!();
+        Depcrate_commandsstatus_signal!();
+        Depcrate_commandshandle_compile_finished!();
+        Depcrate_commandshandle_compile_response!();
+        Depcrate_commandsdo_compile!();
+        Depcrate_commandsrun_command!();
+    };
+}

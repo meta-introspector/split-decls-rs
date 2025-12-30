@@ -1,0 +1,9 @@
+// Generated macro for ENCODE_D3D10_SB_RESINFO_INSTRUCTION_RETURN_TYPE (function)
+macro_rules! Depcrate_um_d3d11tokenizedprogramformatENCODE_D3D10_SB_RESINFO_INSTRUCTION_RETURN_TYPE {
+() => {
+// Module: crate::um::d3d11tokenizedprogramformat
+// Provides: {"ENCODE_D3D10_SB_RESINFO_INSTRUCTION_RETURN_TYPE"}
+// Dependencies: {}
+# [inline] pub fn ENCODE_D3D10_SB_RESINFO_INSTRUCTION_RETURN_TYPE (ReturnType : D3D10_SB_RESINFO_INSTRUCTION_RETURN_TYPE ,) -> DWORD { (ReturnType << D3D10_SB_RESINFO_INSTRUCTION_RETURN_TYPE_SHIFT) & D3D10_SB_RESINFO_INSTRUCTION_RETURN_TYPE_MASK }
+};
+}

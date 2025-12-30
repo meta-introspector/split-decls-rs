@@ -1,0 +1,50 @@
+// Generated module macro for crate
+macro_rules! Modcrate {
+() => {
+        Depcrateother_1!();
+        Depcratebacktrace!();
+        Depcratechain!();
+        Depcratecontext!();
+        Depcrateerror!();
+        Depcratefmt!();
+        Depcratekind!();
+        Depcratemacros!();
+        Depcrateoption!();
+        Depcrateptr!();
+        Depcratewrapper!();
+        Depcrateuse_149!();
+        Depcrateuse_150!();
+        Depcrateuse_151!();
+        Depcrateuse_152!();
+        Depcrateuse_153!();
+        Depcrateuse_154!();
+        Depcrateuse_155!();
+        Depcrateuse_156!();
+        Depcrateuse_157!();
+        Depcrateuse_158!();
+        Depcrateuse_159!();
+        Depcrateuse_160!();
+        Depcrateuse_161!();
+        DepcrateReport!();
+        DepcrateErrorHook!();
+        DepcrateHOOK!();
+        DepcrateInstallError!();
+        Depcrateimpl_166!();
+        Depcrateimpl_167!();
+        Depcrateset_hook!();
+        Depcratecapture_handler!();
+        Depcrateimpl_170!();
+        DepcrateEyreHandler!();
+        DepcrateDefaultHandler!();
+        Depcrateimpl_173!();
+        Depcrateimpl_174!();
+        Depcrateimpl_175!();
+        DepcrateChain!();
+        DepcrateResult!();
+        DepcrateWrapErr!();
+        DepcrateOptionExt!();
+        DepcrateContextCompat!();
+        DepcrateOk!();
+        Depcrateprivate!();
+    };
+}

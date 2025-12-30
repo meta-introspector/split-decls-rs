@@ -1,0 +1,64 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcrate_validityis_valid_bus_name.rs");
+include!("depcratemacro_36.rs");
+include!("depcratemacro_41.rs");
+include!("depcratemacro_43.rs");
+include!("depcrateimpl_44.rs");
+include!("depcratemacro_49.rs");
+include!("depcrateuse_2.rs");
+include!("depcratetype_conversions.rs");
+include!("depcrate_validitystring.rs");
+include!("depcrate_validitybus.rs");
+include!("depcratevalidity.rs");
+include!("depcrateimpl_45.rs");
+include!("depcrate_validityis_az_hyphen.rs");
+include!("depcrate_validityis_valid_unique_conn_name.rs");
+include!("depcrateerrors.rs");
+include!("depcrate_validityis_valid_interface_name.rs");
+include!("depcrate_validityinterface.rs");
+include!("depcratestringlike.rs");
+include!("depcratemacro_50.rs");
+include!("depcrate_validityis_valid_error_name.rs");
+include!("depcrate_validityis_az_.rs");
+include!("depcrateimpl_46.rs");
+include!("depcratemacro_42.rs");
+include!("depcrateimpl_31.rs");
+include!("depcrate_validityis_valid_member_name.rs");
+include!("depcrateuse_6.rs");
+include!("depcratemacro_40.rs");
+include!("depcrate_validityis_az09_.rs");
+include!("depcratestring_wrapper.rs");
+include!("depcrate_validitysig_multi.rs");
+include!("depcratesig_split.rs");
+include!("depcrate_validityobject_path.rs");
+include!("depcrateuse_3.rs");
+include!("depcrate_validityis_valid_signature_single.rs");
+include!("depcrate_validityis_valid_object_path.rs");
+include!("depcrate_validityis_valid_string.rs");
+include!("depcrate_validitybasic_types.rs");
+include!("depcrateinvalidstringerror.rs");
+include!("depcrateuse_4.rs");
+include!("depcrateimpl_38.rs");
+include!("depcrateimpl_48.rs");
+include!("depcrate_validitymember.rs");
+include!("depcrate_validitysig_single.rs");
+include!("depcratemacro_51.rs");
+include!("depcrate_validityis_valid_signature_multi.rs");
+include!("depcrate_validitysignature.rs");
+include!("depcratestring_wrapper_base.rs");
+include!("depcrate_validityis_az09_hyphen.rs");
+include!("depcrateimpl_39.rs");
+include!("depcrateimpl_37.rs");
+include!("depcrateuse_5.rs");
+include!("depcrateuse_1.rs");
+include!("depcrateimpl_47.rs");
+include!("depcrateimpl_32.rs");
+include!("modcrate_validity.rs");
+include!("modcrate.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate_validity!();
+    Modcrate!();
+}

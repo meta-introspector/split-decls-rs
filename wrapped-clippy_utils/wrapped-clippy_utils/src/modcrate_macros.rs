@@ -1,0 +1,50 @@
+// Generated module macro for crate::macros
+macro_rules! Modcrate_macros {
+() => {
+        Depcrate_macrosuse_323!();
+        Depcrate_macrosuse_324!();
+        Depcrate_macrosuse_325!();
+        Depcrate_macrosuse_326!();
+        Depcrate_macrosuse_327!();
+        Depcrate_macrosuse_328!();
+        Depcrate_macrosuse_329!();
+        Depcrate_macrosuse_330!();
+        Depcrate_macrosuse_331!();
+        Depcrate_macrosuse_332!();
+        Depcrate_macrosuse_333!();
+        Depcrate_macrosuse_334!();
+        Depcrate_macrosFORMAT_MACRO_DIAG_ITEMS!();
+        Depcrate_macrosis_format_macro!();
+        Depcrate_macrosMacroCall!();
+        Depcrate_macrosimpl_338!();
+        Depcrate_macrosexpn_backtrace!();
+        Depcrate_macrosspan_is_local!();
+        Depcrate_macrosexpn_is_local!();
+        Depcrate_macrosmacro_backtrace!();
+        Depcrate_macrosroot_macro_call!();
+        Depcrate_macrosmatching_root_macro_call!();
+        Depcrate_macrosroot_macro_call_first_node!();
+        Depcrate_macrosfirst_node_macro_backtrace!();
+        Depcrate_macrosfirst_node_in_macro!();
+        Depcrate_macrosis_panic!();
+        Depcrate_macrosis_assert_macro!();
+        Depcrate_macrosPanicExpn!();
+        Depcrate_macrosimpl_351!();
+        Depcrate_macrosfind_assert_args!();
+        Depcrate_macrosfind_assert_eq_args!();
+        Depcrate_macrosfind_assert_args_inner!();
+        Depcrate_macrosfind_assert_within_debug_assert!();
+        Depcrate_macrosis_assert_arg!();
+        Depcrate_macrosFormatArgsStorage!();
+        Depcrate_macrosimpl_358!();
+        Depcrate_macrosfind_format_arg_expr!();
+        Depcrate_macrosformat_placeholder_format_span!();
+        Depcrate_macrosformat_args_inputs_span!();
+        Depcrate_macrosformat_arg_removal_span!();
+        Depcrate_macrosFormatParamUsage!();
+        Depcrate_macrosHirNode!();
+        Depcrate_macrosimpl_hir_node!();
+        Depcrate_macrosmacro_366!();
+        Depcrate_macrosimpl_367!();
+    };
+}

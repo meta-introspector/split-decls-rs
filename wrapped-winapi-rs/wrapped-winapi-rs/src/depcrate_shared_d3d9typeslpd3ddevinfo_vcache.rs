@@ -1,0 +1,9 @@
+// Generated macro for LPD3DDEVINFO_VCACHE (type)
+macro_rules! Depcrate_shared_d3d9typesLPD3DDEVINFO_VCACHE {
+() => {
+// Module: crate::shared::d3d9types
+// Provides: {"LPD3DDEVINFO_VCACHE"}
+// Dependencies: {}
+pub type LPD3DDEVINFO_VCACHE = * mut D3DDEVINFO_VCACHE ;
+};
+}

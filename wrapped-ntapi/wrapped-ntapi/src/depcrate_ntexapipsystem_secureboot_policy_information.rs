@@ -1,0 +1,9 @@
+// Generated macro for PSYSTEM_SECUREBOOT_POLICY_INFORMATION (type)
+macro_rules! Depcrate_ntexapiPSYSTEM_SECUREBOOT_POLICY_INFORMATION {
+() => {
+// Module: crate::ntexapi
+// Provides: {"PSYSTEM_SECUREBOOT_POLICY_INFORMATION"}
+// Dependencies: {}
+pub type PSYSTEM_SECUREBOOT_POLICY_INFORMATION = * mut SYSTEM_SECUREBOOT_POLICY_INFORMATION ;
+};
+}

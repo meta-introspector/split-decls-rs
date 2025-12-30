@@ -1,0 +1,46 @@
+// Generated module macro for crate::meta::regex
+macro_rules! Modcrate_meta_regex {
+() => {
+        Depcrate_meta_regexuse_380!();
+        Depcrate_meta_regexuse_381!();
+        Depcrate_meta_regexuse_382!();
+        Depcrate_meta_regexuse_383!();
+        Depcrate_meta_regexCachePool!();
+        Depcrate_meta_regexCachePoolGuard!();
+        Depcrate_meta_regexCachePoolFn!();
+        Depcrate_meta_regexRegex!();
+        Depcrate_meta_regexRegexI!();
+        Depcrate_meta_regeximpl_389!();
+        Depcrate_meta_regeximpl_390!();
+        Depcrate_meta_regeximpl_391!();
+        Depcrate_meta_regeximpl_392!();
+        Depcrate_meta_regeximpl_393!();
+        Depcrate_meta_regeximpl_394!();
+        Depcrate_meta_regexRegexInfo!();
+        Depcrate_meta_regexRegexInfoI!();
+        Depcrate_meta_regeximpl_397!();
+        Depcrate_meta_regexFindMatches!();
+        Depcrate_meta_regeximpl_399!();
+        Depcrate_meta_regeximpl_400!();
+        Depcrate_meta_regeximpl_401!();
+        Depcrate_meta_regexCapturesMatches!();
+        Depcrate_meta_regeximpl_403!();
+        Depcrate_meta_regeximpl_404!();
+        Depcrate_meta_regeximpl_405!();
+        Depcrate_meta_regexSplit!();
+        Depcrate_meta_regeximpl_407!();
+        Depcrate_meta_regeximpl_408!();
+        Depcrate_meta_regeximpl_409!();
+        Depcrate_meta_regexSplitN!();
+        Depcrate_meta_regeximpl_411!();
+        Depcrate_meta_regeximpl_412!();
+        Depcrate_meta_regeximpl_413!();
+        Depcrate_meta_regexCache!();
+        Depcrate_meta_regeximpl_415!();
+        Depcrate_meta_regexConfig!();
+        Depcrate_meta_regeximpl_417!();
+        Depcrate_meta_regexBuilder!();
+        Depcrate_meta_regeximpl_419!();
+        Depcrate_meta_regextests!();
+    };
+}

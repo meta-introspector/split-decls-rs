@@ -1,0 +1,9 @@
+// Generated macro for impl_7781 (impl)
+macro_rules! Depcrate_needless_borrowed_refimpl_7781 {
+() => {
+// Module: crate::needless_borrowed_ref
+// Provides: {"impl_7781"}
+// Dependencies: {}
+impl < 'tcx > LateLintPass < 'tcx > for NeedlessBorrowedRef { fn check_pat (& mut self , cx : & LateContext < 'tcx > , ref_pat : & 'tcx Pat < '_ >) { if let PatKind :: Ref (pat , Pinnedness :: Not , Mutability :: Not) = ref_pat . kind && ! ref_pat . span . from_expansion () && cx . tcx . hir_parent_iter (ref_pat . hir_id) . map_while (| (_ , parent) | if let Node :: Pat (pat) = parent { Some (pat) } else { None }) . all (| pat | ! matches ! (pat . kind , PatKind :: Or (_))) { match pat . kind { PatKind :: Binding (BindingMode :: REF , _ , ident , None) => { span_lint_and_then (cx , NEEDLESS_BORROWED_REFERENCE , ref_pat . span , "this pattern takes a reference on something that is being dereferenced" , | diag | { let span = ref_pat . span . until (ident . span) ; diag . span_suggestion_verbose (span , "try removing the `&ref` part" , String :: new () , Applicability :: MachineApplicable ,) ; } ,) ; } , PatKind :: Slice (before , None | Some (Pat { kind : PatKind :: Wild , .. }) , after ,) => { check_subpatterns (cx , "dereferencing a slice pattern where every element takes a reference" , ref_pat , pat , itertools :: chain (before , after) ,) ; } , PatKind :: Tuple (subpatterns , _) | PatKind :: TupleStruct (_ , subpatterns , _) => { check_subpatterns (cx , "dereferencing a tuple pattern where every element takes a reference" , ref_pat , pat , subpatterns ,) ; } , PatKind :: Struct (_ , fields , _) => { check_subpatterns (cx , "dereferencing a struct pattern where every field's pattern takes a reference" , ref_pat , pat , fields . iter () . map (| field | field . pat) ,) ; } , _ => { } , } } } }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for impl_798 (impl)
+macro_rules! Depcrate_util_lookimpl_798 {
+() => {
+// Module: crate::util::look
+// Provides: {"impl_798"}
+// Dependencies: {}
+impl Iterator for LookSetIter { type Item = Look ; # [inline] fn next (& mut self) -> Option < Look > { if self . set . is_empty () { return None ; } let bit = u16 :: try_from (self . set . bits . trailing_zeros ()) . unwrap () ; let look = Look :: from_repr (1 << bit) ? ; self . set = self . set . remove (look) ; Some (look) } }
+};
+}

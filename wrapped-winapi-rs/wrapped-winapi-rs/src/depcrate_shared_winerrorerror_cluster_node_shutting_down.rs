@@ -1,0 +1,9 @@
+// Generated macro for ERROR_CLUSTER_NODE_SHUTTING_DOWN (const)
+macro_rules! Depcrate_shared_winerrorERROR_CLUSTER_NODE_SHUTTING_DOWN {
+() => {
+// Module: crate::shared::winerror
+// Provides: {"ERROR_CLUSTER_NODE_SHUTTING_DOWN"}
+// Dependencies: {}
+pub const ERROR_CLUSTER_NODE_SHUTTING_DOWN : DWORD = 5073 ;
+};
+}

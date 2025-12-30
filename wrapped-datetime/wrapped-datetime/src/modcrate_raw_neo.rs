@@ -1,0 +1,44 @@
+// Generated module macro for crate::raw::neo
+macro_rules! Modcrate_raw_neo {
+() => {
+        Depcrate_raw_neouse_846!();
+        Depcrate_raw_neouse_847!();
+        Depcrate_raw_neouse_848!();
+        Depcrate_raw_neouse_849!();
+        Depcrate_raw_neouse_850!();
+        Depcrate_raw_neouse_851!();
+        Depcrate_raw_neouse_852!();
+        Depcrate_raw_neouse_853!();
+        Depcrate_raw_neouse_854!();
+        Depcrate_raw_neouse_855!();
+        Depcrate_raw_neouse_856!();
+        Depcrate_raw_neouse_857!();
+        Depcrate_raw_neouse_858!();
+        Depcrate_raw_neouse_859!();
+        Depcrate_raw_neouse_860!();
+        Depcrate_raw_neoRawOptions!();
+        Depcrate_raw_neoimpl_862!();
+        Depcrate_raw_neoRawPreferences!();
+        Depcrate_raw_neoimpl_864!();
+        Depcrate_raw_neoDatePatternSelectionData!();
+        Depcrate_raw_neoDatePatternDataBorrowed!();
+        Depcrate_raw_neoTimePatternSelectionData!();
+        Depcrate_raw_neoTimePatternDataBorrowed!();
+        Depcrate_raw_neoZonePatternSelectionData!();
+        Depcrate_raw_neoZonePatternDataBorrowed!();
+        Depcrate_raw_neoItemsAndOptions!();
+        Depcrate_raw_neoimpl_872!();
+        Depcrate_raw_neoDateTimeZonePatternSelectionData!();
+        Depcrate_raw_neoDateTimeZonePatternDataBorrowed!();
+        Depcrate_raw_neoimpl_875!();
+        Depcrate_raw_neoimpl_876!();
+        Depcrate_raw_neoimpl_877!();
+        Depcrate_raw_neoimpl_878!();
+        Depcrate_raw_neoimpl_879!();
+        Depcrate_raw_neoimpl_880!();
+        Depcrate_raw_neoimpl_881!();
+        Depcrate_raw_neoimpl_882!();
+        Depcrate_raw_neoimpl_883!();
+        Depcrate_raw_neoimpl_884!();
+    };
+}

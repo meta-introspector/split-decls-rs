@@ -1,0 +1,9 @@
+// Generated macro for OpenOptions (struct)
+macro_rules! Depcrate_fsOpenOptions {
+() => {
+// Module: crate::fs
+// Provides: {"OpenOptions"}
+// Dependencies: {}
+# [doc = " Options and flags which can be used to configure how a file is opened."] # [doc = ""] # [doc = " This builder exposes the ability to configure how a [`File`] is opened and"] # [doc = " what operations are permitted on the open file. The [`File::open`] and"] # [doc = " [`File::create`] methods are aliases for commonly used options using this"] # [doc = " builder."] # [doc = ""] # [doc = " Generally speaking, when using `OpenOptions`, you'll first call"] # [doc = " [`OpenOptions::new`], then chain calls to methods to set each option, then"] # [doc = " call [`OpenOptions::open`], passing the path of the file you're trying to"] # [doc = " open. This will give you a [`io::Result`] with a [`File`] inside that you"] # [doc = " can further operate on."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " Opening a file to read:"] # [doc = ""] # [doc = " ```no_run"] # [doc = " use std::fs::OpenOptions;"] # [doc = ""] # [doc = " let file = OpenOptions::new().read(true).open(\"foo.txt\");"] # [doc = " ```"] # [doc = ""] # [doc = " Opening a file for both reading and writing, as well as creating it if it"] # [doc = " doesn't exist:"] # [doc = ""] # [doc = " ```no_run"] # [doc = " use std::fs::OpenOptions;"] # [doc = ""] # [doc = " let file = OpenOptions::new()"] # [doc = "             .read(true)"] # [doc = "             .write(true)"] # [doc = "             .create(true)"] # [doc = "             .open(\"foo.txt\");"] # [doc = " ```"] # [derive (Clone , Debug)] # [stable (feature = "rust1" , since = "1.0.0")] # [cfg_attr (not (test) , rustc_diagnostic_item = "FsOpenOptions")] pub struct OpenOptions (fs_imp :: OpenOptions) ;
+};
+}

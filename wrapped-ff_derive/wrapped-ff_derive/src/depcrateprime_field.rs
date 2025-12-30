@@ -1,0 +1,9 @@
+// Generated macro for prime_field (function)
+macro_rules! Depcrateprime_field {
+() => {
+// Module: crate
+// Provides: {"prime_field"}
+// Dependencies: {}
+# [doc = " Derive the `PrimeField` trait."] # [proc_macro_derive (PrimeField , attributes (PrimeFieldModulus , PrimeFieldGenerator , PrimeFieldReprEndianness))] pub fn prime_field (input : proc_macro :: TokenStream) -> proc_macro :: TokenStream { let ast : syn :: DeriveInput = syn :: parse (input) . unwrap () ; let modulus : BigUint = fetch_attr ("PrimeFieldModulus" , & ast . attrs) . expect ("Please supply a PrimeFieldModulus attribute") . parse () . expect ("PrimeFieldModulus should be a number") ; let generator : BigUint = fetch_attr ("PrimeFieldGenerator" , & ast . attrs) . expect ("Please supply a PrimeFieldGenerator attribute") . parse () . expect ("PrimeFieldGenerator should be a number") ; let endianness = fetch_attr ("PrimeFieldReprEndianness" , & ast . attrs) . expect ("Please supply a PrimeFieldReprEndianness attribute") . parse () . expect ("PrimeFieldReprEndianness should be 'big' or 'little'") ; let mut limbs = 1 ; { let mod2 = (& modulus) << 1 ; let mut cur = BigUint :: one () << 64 ; while cur < mod2 { limbs += 1 ; cur <<= 64 ; } } if let Some (err) = validate_struct (& ast , limbs) { return err . into () ; } let repr_ident = syn :: Ident :: new (& format ! ("{}Repr" , ast . ident) , proc_macro2 :: Span :: call_site () ,) ; let mut gen = proc_macro2 :: TokenStream :: new () ; let (constants_impl , sqrt_impl) = prime_field_constants_and_sqrt (& ast . ident , & modulus , limbs , generator) ; gen . extend (constants_impl) ; gen . extend (prime_field_repr_impl (& repr_ident , & endianness , limbs * 8)) ; gen . extend (prime_field_impl (& ast . ident , & repr_ident , & modulus , & endianness , limbs , sqrt_impl ,)) ; gen . into () }
+};
+}

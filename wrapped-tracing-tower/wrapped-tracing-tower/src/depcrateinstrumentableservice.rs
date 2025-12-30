@@ -1,0 +1,9 @@
+// Generated macro for InstrumentableService (trait)
+macro_rules! DepcrateInstrumentableService {
+() => {
+// Module: crate
+// Provides: {"InstrumentableService"}
+// Dependencies: {}
+pub trait InstrumentableService < Request > where Self : Service < Request > + Sized , { fn instrument < G > (self , svc_span : G) -> InstrumentedService < Self , Request > where G : GetSpan < Self > , Request : fmt :: Debug , { let req_span : fn (& Request) -> tracing :: Span = | request | tracing :: span ! (Level :: TRACE , "request" , ? request) ; let svc_span = svc_span . span_for (& self) ; self . trace_requests (req_span) . trace_service (svc_span) } fn trace_requests < G > (self , get_span : G) -> request_span :: Service < Self , Request , G > where G : GetSpan < Request > + Clone , { request_span :: Service :: new (self , get_span) } fn trace_service < G > (self , get_span : G) -> service_span :: Service < Self > where G : GetSpan < Self > , { let span = get_span . span_for (& self) ; service_span :: Service :: new (self , span) } }
+};
+}

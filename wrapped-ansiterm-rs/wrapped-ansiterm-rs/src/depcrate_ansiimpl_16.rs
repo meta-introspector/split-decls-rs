@@ -1,0 +1,9 @@
+// Generated macro for impl_16 (impl)
+macro_rules! Depcrate_ansiimpl_16 {
+() => {
+// Module: crate::ansi
+// Provides: {"impl_16"}
+// Dependencies: {}
+impl Colour { # [doc = " The prefix bytes for this colour as a `Style`. These are the bytes"] # [doc = " that tell the terminal to use a different colour or font style."] # [doc = ""] # [doc = " See also [`Style::prefix`](struct.Style.html#method.prefix)."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " use ansiterm::Colour::Green;"] # [doc = ""] # [doc = " assert_eq!(\"\\x1b[0m\","] # [doc = "            Green.suffix().to_string());"] # [doc = " ```"] pub fn prefix (self) -> Prefix { Prefix (self . normal ()) } # [doc = " The infix bytes between this colour and `next` colour. These are the bytes"] # [doc = " that tell the terminal to use the `next` colour, or to do nothing if"] # [doc = " the two colours are equal."] # [doc = ""] # [doc = " See also [`Style::infix`](struct.Style.html#method.infix)."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " use ansiterm::Colour::{Red, Yellow};"] # [doc = ""] # [doc = " assert_eq!(\"\\x1b[33m\","] # [doc = "            Red.infix(Yellow).to_string());"] # [doc = " ```"] pub fn infix (self , next : Colour) -> Infix { Infix (self . normal () , next . normal ()) } # [doc = " The suffix for this colour as a `Style`. These are the bytes that"] # [doc = " tell the terminal to reset back to its normal colour and font style."] # [doc = ""] # [doc = " See also [`Style::suffix`](struct.Style.html#method.suffix)."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " use ansiterm::Colour::Purple;"] # [doc = ""] # [doc = " assert_eq!(\"\\x1b[0m\","] # [doc = "            Purple.suffix().to_string());"] # [doc = " ```"] pub fn suffix (self) -> Suffix { Suffix (self . normal ()) } }
+};
+}

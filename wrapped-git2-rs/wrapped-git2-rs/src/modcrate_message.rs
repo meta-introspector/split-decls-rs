@@ -1,0 +1,42 @@
+// Generated module macro for crate::message
+macro_rules! Modcrate_message {
+() => {
+        Depcrate_messageuse_680!();
+        Depcrate_messageuse_681!();
+        Depcrate_messageuse_682!();
+        Depcrate_messageuse_683!();
+        Depcrate_messageuse_684!();
+        Depcrate_messageuse_685!();
+        Depcrate_messageuse_686!();
+        Depcrate_messageuse_687!();
+        Depcrate_messagemessage_prettify!();
+        Depcrate_message_message_prettify!();
+        Depcrate_messageDEFAULT_COMMENT_CHAR!();
+        Depcrate_messagemessage_trailers_strs!();
+        Depcrate_messagemessage_trailers_bytes!();
+        Depcrate_message_message_trailers!();
+        Depcrate_messageMessageTrailersStrs!();
+        Depcrate_messageimpl_695!();
+        Depcrate_messageMessageTrailersBytes!();
+        Depcrate_messageimpl_697!();
+        Depcrate_messageMessageTrailers!();
+        Depcrate_messageimpl_699!();
+        Depcrate_messageimpl_700!();
+        Depcrate_messageimpl_701!();
+        Depcrate_messageMessageTrailersIterator!();
+        Depcrate_messageto_raw_tuple!();
+        Depcrate_messageMessageTrailersStrsIterator!();
+        Depcrate_messageimpl_705!();
+        Depcrate_messageimpl_706!();
+        Depcrate_messageimpl_707!();
+        Depcrate_messageimpl_708!();
+        Depcrate_messageto_str_tuple!();
+        Depcrate_messageMessageTrailersBytesIterator!();
+        Depcrate_messageimpl_711!();
+        Depcrate_messageimpl_712!();
+        Depcrate_messageimpl_713!();
+        Depcrate_messageimpl_714!();
+        Depcrate_messageto_bytes_tuple!();
+        Depcrate_messagetests!();
+    };
+}

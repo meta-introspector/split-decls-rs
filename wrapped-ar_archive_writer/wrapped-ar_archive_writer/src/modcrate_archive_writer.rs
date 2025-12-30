@@ -1,0 +1,44 @@
+// Generated module macro for crate::archive_writer
+macro_rules! Modcrate_archive_writer {
+() => {
+        Depcrate_archive_writeruse_9!();
+        Depcrate_archive_writeruse_10!();
+        Depcrate_archive_writeruse_11!();
+        Depcrate_archive_writeruse_12!();
+        Depcrate_archive_writeruse_13!();
+        Depcrate_archive_writeruse_14!();
+        Depcrate_archive_writeruse_15!();
+        Depcrate_archive_writeruse_16!();
+        Depcrate_archive_writerBIG_AR_MEM_HDR_SIZE!();
+        Depcrate_archive_writerSymMap!();
+        Depcrate_archive_writerNewArchiveMember!();
+        Depcrate_archive_writerimpl_20!();
+        Depcrate_archive_writeris_darwin!();
+        Depcrate_archive_writeris_aix_big_archive!();
+        Depcrate_archive_writeris_coff_archive!();
+        Depcrate_archive_writeris_bsd_like!();
+        Depcrate_archive_writerprint_rest_of_member_header!();
+        Depcrate_archive_writerprint_gnu_small_member_header!();
+        Depcrate_archive_writerprint_bsd_member_header!();
+        Depcrate_archive_writerprint_big_archive_member_header!();
+        Depcrate_archive_writeruse_string_table!();
+        Depcrate_archive_writeris_64bit_kind!();
+        Depcrate_archive_writerprint_member_header!();
+        Depcrate_archive_writerMemberData!();
+        Depcrate_archive_writercompute_string_table!();
+        Depcrate_archive_writernow!();
+        Depcrate_archive_writerprint_n_bits!();
+        Depcrate_archive_writercompute_symbol_table_size_and_pad!();
+        Depcrate_archive_writercompute_symbol_map_size_and_pad!();
+        Depcrate_archive_writercompute_ec_symbols_size_and_pad!();
+        Depcrate_archive_writerwrite_symbol_table_header!();
+        Depcrate_archive_writercompute_headers_size!();
+        Depcrate_archive_writerwrite_symbol_table!();
+        Depcrate_archive_writerwrite_symbol_map!();
+        Depcrate_archive_writerwrite_ec_symbols!();
+        Depcrate_archive_writeris_import_descriptor!();
+        Depcrate_archive_writerwrite_symbols!();
+        Depcrate_archive_writercompute_member_data!();
+        Depcrate_archive_writerwrite_archive_to_stream!();
+    };
+}

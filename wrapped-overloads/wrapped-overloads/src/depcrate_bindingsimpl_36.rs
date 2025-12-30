@@ -1,0 +1,9 @@
+// Generated macro for impl_36 (impl)
+macro_rules! Depcrate_bindingsimpl_36 {
+() => {
+// Module: crate::bindings
+// Provides: {"impl_36"}
+// Dependencies: {}
+impl E { pub fn new () -> windows_core :: Result < Self > { Self :: IActivationFactory (| f | f . ActivateInstance :: < Self > ()) } fn IActivationFactory < R , F : FnOnce (& windows_core :: imp :: IGenericFactory) -> windows_core :: Result < R > , > (callback : F ,) -> windows_core :: Result < R > { static SHARED : windows_core :: imp :: FactoryCache < E , windows_core :: imp :: IGenericFactory > = windows_core :: imp :: FactoryCache :: new () ; SHARED . call (callback) } pub fn MethodOne (& self) -> windows_core :: Result < i32 > { let this = self ; unsafe { let mut result__ = core :: mem :: zeroed () ; (windows_core :: Interface :: vtable (this) . MethodOne) (windows_core :: Interface :: as_raw (this) , & mut result__ ,) . map (| | result__) } } pub fn MethodTwo (& self , a : i32) -> windows_core :: Result < i32 > { let this = self ; unsafe { let mut result__ = core :: mem :: zeroed () ; (windows_core :: Interface :: vtable (this) . MethodTwo) (windows_core :: Interface :: as_raw (this) , a , & mut result__ ,) . map (| | result__) } } pub fn MethodThree (& self , a : i32 , b : i32) -> windows_core :: Result < i32 > { let this = & windows_core :: Interface :: cast :: < IE2 > (self) ? ; unsafe { let mut result__ = core :: mem :: zeroed () ; (windows_core :: Interface :: vtable (this) . MethodThree) (windows_core :: Interface :: as_raw (this) , a , b , & mut result__ ,) . map (| | result__) } } pub fn MethodFour (& self , a : i32 , b : i32 , c : i32) -> windows_core :: Result < i32 > { let this = & windows_core :: Interface :: cast :: < IE2 > (self) ? ; unsafe { let mut result__ = core :: mem :: zeroed () ; (windows_core :: Interface :: vtable (this) . MethodFour) (windows_core :: Interface :: as_raw (this) , a , b , c , & mut result__ ,) . map (| | result__) } } }
+};
+}

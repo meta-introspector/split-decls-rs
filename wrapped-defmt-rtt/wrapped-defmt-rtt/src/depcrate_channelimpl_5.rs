@@ -1,0 +1,9 @@
+// Generated macro for impl_5 (impl)
+macro_rules! Depcrate_channelimpl_5 {
+() => {
+// Module: crate::channel
+// Provides: {"impl_5"}
+// Dependencies: {}
+impl Channel { pub fn write_all (& self , mut bytes : & [u8]) { let write = match self . host_is_connected () { _ if cfg ! (feature = "disable-blocking-mode") => Self :: nonblocking_write , true => Self :: blocking_write , false => Self :: nonblocking_write , } ; while ! bytes . is_empty () { let consumed = write (self , bytes) ; if consumed != 0 { bytes = & bytes [consumed ..] ; } } } fn blocking_write (& self , bytes : & [u8]) -> usize { if bytes . is_empty () { return 0 ; } let read = self . read . load (Ordering :: Relaxed) ; let write = self . write . load (Ordering :: Acquire) ; let available = available_buffer_size (read , write) ; if available == 0 { return 0 ; } self . write_impl (bytes , write , available) } fn nonblocking_write (& self , bytes : & [u8]) -> usize { let write = self . write . load (Ordering :: Acquire) ; self . write_impl (bytes , write , BUF_SIZE) } fn write_impl (& self , bytes : & [u8] , cursor : usize , available : usize) -> usize { let len = bytes . len () . min (available) ; unsafe { if cursor + len > BUF_SIZE { let pivot = BUF_SIZE - cursor ; ptr :: copy_nonoverlapping (bytes . as_ptr () , self . buffer . add (cursor) , pivot) ; ptr :: copy_nonoverlapping (bytes . as_ptr () . add (pivot) , self . buffer , len - pivot) ; } else { ptr :: copy_nonoverlapping (bytes . as_ptr () , self . buffer . add (cursor) , len) ; } } self . write . store (cursor . wrapping_add (len) % BUF_SIZE , Ordering :: Release) ; len } pub fn flush (& self) { if ! self . host_is_connected () { return ; } let read = | | self . read . load (Ordering :: Relaxed) ; let write = | | self . write . load (Ordering :: Relaxed) ; while read () != write () { } } fn host_is_connected (& self) -> bool { self . flags . load (Ordering :: Relaxed) & MODE_MASK == MODE_BLOCK_IF_FULL } }
+};
+}

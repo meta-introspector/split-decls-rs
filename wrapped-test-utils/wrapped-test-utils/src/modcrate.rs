@@ -1,0 +1,43 @@
+// Generated module macro for crate
+macro_rules! Modcrate {
+() => {
+        Depcrateassert_linear!();
+        Depcratebench_fixture!();
+        Depcratefixture!();
+        Depcrateuse_27!();
+        Depcrateuse_28!();
+        Depcrateuse_29!();
+        Depcrateuse_30!();
+        Depcrateuse_31!();
+        Depcrateuse_32!();
+        Depcrateuse_33!();
+        Depcrateuse_34!();
+        DepcrateCURSOR_MARKER!();
+        DepcrateESCAPED_CURSOR_MARKER!();
+        Depcrateassert_eq_text!();
+        Depcrateextract_offset!();
+        Depcratetry_extract_offset!();
+        Depcrateextract_range!();
+        Depcratetry_extract_range!();
+        DepcrateRangeOrOffset!();
+        Depcrateimpl_43!();
+        Depcrateimpl_44!();
+        Depcrateextract_range_or_offset!();
+        Depcrateextract_tags!();
+        Depcratetest_extract_tags!();
+        Depcrateadd_cursor!();
+        Depcrateextract_annotations!();
+        DepcrateLineAnnotation!();
+        Depcrateextract_line_annotations!();
+        Depcratetest_extract_annotations_1!();
+        Depcratetest_extract_annotations_2!();
+        Depcrateskip_slow_tests!();
+        Depcratetarget_dir!();
+        Depcrateproject_root!();
+        Depcrateformat_diff!();
+        Depcratebench!();
+        Depcrateensure_file_contents!();
+        Depcratetry_ensure_file_contents!();
+        Depcratenormalize_newlines!();
+    };
+}

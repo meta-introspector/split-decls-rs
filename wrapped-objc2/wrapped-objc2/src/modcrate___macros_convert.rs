@@ -1,0 +1,49 @@
+// Generated module macro for crate::__macros::convert
+macro_rules! Modcrate___macros_convert {
+() => {
+        Depcrate___macros_convertuse_83!();
+        Depcrate___macros_convertuse_84!();
+        Depcrate___macros_convertuse_85!();
+        Depcrate___macros_convertuse_86!();
+        Depcrate___macros_convertargument_private!();
+        Depcrate___macros_convertConvertArgument!();
+        Depcrate___macros_convertimpl_89!();
+        Depcrate___macros_convertimpl_90!();
+        Depcrate___macros_convertimpl_91!();
+        Depcrate___macros_convertimpl_92!();
+        Depcrate___macros_convertimpl_93!();
+        Depcrate___macros_convertimpl_94!();
+        Depcrate___macros_convertimpl_95!();
+        Depcrate___macros_convertimpl_96!();
+        Depcrate___macros_convertreturn_private!();
+        Depcrate___macros_convertConvertReturn!();
+        Depcrate___macros_convertimpl_99!();
+        Depcrate___macros_convertimpl_100!();
+        Depcrate___macros_convertimpl_101!();
+        Depcrate___macros_convertimpl_102!();
+        Depcrate___macros_convertimpl_103!();
+        Depcrate___macros_convertimpl_104!();
+        Depcrate___macros_convertimpl_105!();
+        Depcrate___macros_convertConvertArguments!();
+        Depcrate___macros_convertTupleExtender!();
+        Depcrate___macros_convertargs_impl!();
+        Depcrate___macros_convertmacro_109!();
+        Depcrate___macros_convertmacro_110!();
+        Depcrate___macros_convertmacro_111!();
+        Depcrate___macros_convertmacro_112!();
+        Depcrate___macros_convertmacro_113!();
+        Depcrate___macros_convertmacro_114!();
+        Depcrate___macros_convertmacro_115!();
+        Depcrate___macros_convertmacro_116!();
+        Depcrate___macros_convertmacro_117!();
+        Depcrate___macros_convertmacro_118!();
+        Depcrate___macros_convertmacro_119!();
+        Depcrate___macros_convertmacro_120!();
+        Depcrate___macros_convertmacro_121!();
+        Depcrate___macros_convertmacro_122!();
+        Depcrate___macros_convertmacro_123!();
+        Depcrate___macros_convertmacro_124!();
+        Depcrate___macros_convertmacro_125!();
+        Depcrate___macros_converttests!();
+    };
+}

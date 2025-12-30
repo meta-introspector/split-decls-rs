@@ -1,0 +1,9 @@
+// Generated macro for get_nullable_type (function)
+macro_rules! Depcrate_typesget_nullable_type {
+() => {
+// Module: crate::types
+// Provides: {"get_nullable_type"}
+// Dependencies: {}
+# [doc = " Given a non-null scalar (or transparent) type `ty`, return the nullable version of that type."] # [doc = " If the type passed in was not scalar, returns None."] fn get_nullable_type < 'tcx > (tcx : TyCtxt < 'tcx > , typing_env : ty :: TypingEnv < 'tcx > , ty : Ty < 'tcx > ,) -> Option < Ty < 'tcx > > { let ty = tcx . try_normalize_erasing_regions (typing_env , ty) . unwrap_or (ty) ; Some (match * ty . kind () { ty :: Adt (field_def , field_args) => { let inner_field_ty = { let mut first_non_zst_ty = field_def . variants () . iter () . filter_map (| v | transparent_newtype_field (tcx , v)) ; debug_assert_eq ! (first_non_zst_ty . clone () . count () , 1 , "Wrong number of fields for transparent type") ; first_non_zst_ty . next_back () . expect ("No non-zst fields in transparent type.") . ty (tcx , field_args) } ; return get_nullable_type (tcx , typing_env , inner_field_ty) ; } ty :: Pat (base , ..) => return get_nullable_type (tcx , typing_env , base) , ty :: Int (_) | ty :: Uint (_) | ty :: RawPtr (..) => ty , ty :: Ref (_region , ty , mutbl) => Ty :: new_ptr (tcx , ty , mutbl) , ty :: FnPtr (..) => ty , ref unhandled => { debug ! ("get_nullable_type: Unhandled scalar kind: {:?} while checking {:?}" , unhandled , ty) ; return None ; } }) }
+};
+}

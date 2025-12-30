@@ -1,0 +1,9 @@
+// Generated macro for STATUS_GRAPHICS_OPM_INVALID_INFORMATION_REQUEST (const)
+macro_rules! Depcrate_shared_ntstatusSTATUS_GRAPHICS_OPM_INVALID_INFORMATION_REQUEST {
+() => {
+// Module: crate::shared::ntstatus
+// Provides: {"STATUS_GRAPHICS_OPM_INVALID_INFORMATION_REQUEST"}
+// Dependencies: {}
+pub const STATUS_GRAPHICS_OPM_INVALID_INFORMATION_REQUEST : NTSTATUS = 0xC01E051D ;
+};
+}

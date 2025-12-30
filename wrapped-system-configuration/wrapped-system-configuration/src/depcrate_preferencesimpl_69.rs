@@ -1,0 +1,9 @@
+// Generated macro for impl_69 (impl)
+macro_rules! Depcrate_preferencesimpl_69 {
+() => {
+// Module: crate::preferences
+// Provides: {"impl_69"}
+// Dependencies: {}
+impl SCPreferences { # [doc = " Initiates access to the default system preferences using the default allocator."] pub fn default (calling_process_name : & CFString) -> Self { Self :: new (None , calling_process_name , None) } # [doc = " Initiates access to the given (`prefs_id`) group of configuration preferences using the"] # [doc = " default allocator. To access the default system preferences, use the [`default`]"] # [doc = " constructor."] # [doc = ""] # [doc = " [`default`]: #method.default"] pub fn group (calling_process_name : & CFString , prefs_id : & CFString) -> Self { Self :: new (None , calling_process_name , Some (prefs_id)) } # [doc = " Initiates access to the per-system set of configuration preferences with a given"] # [doc = " allocator and preference group to access. See the underlying [SCPreferencesCreate] function"] # [doc = " documentation for details. Use the helper constructors [`default`] and [`group`] to easier"] # [doc = " create an instance using the default allocator."] # [doc = ""] # [doc = " [SCPreferencesCreate]: https://developer.apple.com/documentation/systemconfiguration/1516807-scpreferencescreate?language=objc"] # [doc = " [`default`]: #method.default"] # [doc = " [`group`]: #method.group"] pub fn new (allocator : Option < & CFAllocator > , calling_process_name : & CFString , prefs_id : Option < & CFString > ,) -> Self { let allocator_ref = match allocator { Some (allocator) => allocator . as_concrete_TypeRef () , None => ptr :: null () , } ; let prefs_id_ref = match prefs_id { Some (prefs_id) => prefs_id . as_concrete_TypeRef () , None => ptr :: null () , } ; unsafe { SCPreferences :: wrap_under_create_rule (SCPreferencesCreate (allocator_ref , calling_process_name . as_concrete_TypeRef () , prefs_id_ref ,)) } } }
+};
+}

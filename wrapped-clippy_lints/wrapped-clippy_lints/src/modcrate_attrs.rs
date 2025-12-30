@@ -1,0 +1,55 @@
+// Generated module macro for crate::attrs
+macro_rules! Modcrate_attrs {
+() => {
+        Depcrate_attrsallow_attributes!();
+        Depcrate_attrsallow_attributes_without_reason!();
+        Depcrate_attrsblanket_clippy_restriction_lints!();
+        Depcrate_attrsdeprecated_cfg_attr!();
+        Depcrate_attrsdeprecated_semver!();
+        Depcrate_attrsduplicated_attributes!();
+        Depcrate_attrsinline_always!();
+        Depcrate_attrsmixed_attributes_style!();
+        Depcrate_attrsnon_minimal_cfg!();
+        Depcrate_attrsrepr_attributes!();
+        Depcrate_attrsshould_panic_without_expect!();
+        Depcrate_attrsunnecessary_clippy_cfg!();
+        Depcrate_attrsuseless_attribute!();
+        Depcrate_attrsutils!();
+        Depcrate_attrsuse_440!();
+        Depcrate_attrsuse_441!();
+        Depcrate_attrsuse_442!();
+        Depcrate_attrsuse_443!();
+        Depcrate_attrsuse_444!();
+        Depcrate_attrsuse_445!();
+        Depcrate_attrsuse_446!();
+        Depcrate_attrsuse_447!();
+        Depcrate_attrsuse_448!();
+        Depcrate_attrsmacro_449!();
+        Depcrate_attrsmacro_450!();
+        Depcrate_attrsmacro_451!();
+        Depcrate_attrsmacro_452!();
+        Depcrate_attrsmacro_453!();
+        Depcrate_attrsmacro_454!();
+        Depcrate_attrsmacro_455!();
+        Depcrate_attrsmacro_456!();
+        Depcrate_attrsmacro_457!();
+        Depcrate_attrsmacro_458!();
+        Depcrate_attrsmacro_459!();
+        Depcrate_attrsmacro_460!();
+        Depcrate_attrsmacro_461!();
+        Depcrate_attrsmacro_462!();
+        Depcrate_attrsmacro_463!();
+        Depcrate_attrsAttributes!();
+        Depcrate_attrsmacro_465!();
+        Depcrate_attrsimpl_466!();
+        Depcrate_attrsimpl_467!();
+        Depcrate_attrsEarlyAttributes!();
+        Depcrate_attrsimpl_469!();
+        Depcrate_attrsmacro_470!();
+        Depcrate_attrsimpl_471!();
+        Depcrate_attrsPostExpansionEarlyAttributes!();
+        Depcrate_attrsimpl_473!();
+        Depcrate_attrsmacro_474!();
+        Depcrate_attrsimpl_475!();
+    };
+}

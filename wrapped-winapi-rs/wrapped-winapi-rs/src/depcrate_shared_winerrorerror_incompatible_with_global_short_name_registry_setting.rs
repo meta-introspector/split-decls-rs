@@ -1,0 +1,9 @@
+// Generated macro for ERROR_INCOMPATIBLE_WITH_GLOBAL_SHORT_NAME_REGISTRY_SETTING (const)
+macro_rules! Depcrate_shared_winerrorERROR_INCOMPATIBLE_WITH_GLOBAL_SHORT_NAME_REGISTRY_SETTING {
+() => {
+// Module: crate::shared::winerror
+// Provides: {"ERROR_INCOMPATIBLE_WITH_GLOBAL_SHORT_NAME_REGISTRY_SETTING"}
+// Dependencies: {}
+pub const ERROR_INCOMPATIBLE_WITH_GLOBAL_SHORT_NAME_REGISTRY_SETTING : DWORD = 304 ;
+};
+}

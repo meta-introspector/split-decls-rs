@@ -1,0 +1,9 @@
+// Generated macro for macro_10706 (macro)
+macro_rules! Depcrate_unused_io_amountmacro_10706 {
+() => {
+// Module: crate::unused_io_amount
+// Provides: {"macro_10706"}
+// Dependencies: {}
+declare_clippy_lint ! { # [doc = " ### What it does"] # [doc = " Checks for unused written/read amount."] # [doc = ""] # [doc = " ### Why is this bad?"] # [doc = " `io::Write::write(_vectored)` and"] # [doc = " `io::Read::read(_vectored)` are not guaranteed to"] # [doc = " process the entire buffer. They return how many bytes were processed, which"] # [doc = " might be smaller"] # [doc = " than a given buffer's length. If you don't need to deal with"] # [doc = " partial-write/read, use"] # [doc = " `write_all`/`read_exact` instead."] # [doc = ""] # [doc = " When working with asynchronous code (either with the `futures`"] # [doc = " crate or with `tokio`), a similar issue exists for"] # [doc = " `AsyncWriteExt::write()` and `AsyncReadExt::read()` : these"] # [doc = " functions are also not guaranteed to process the entire"] # [doc = " buffer.  Your code should either handle partial-writes/reads, or"] # [doc = " call the `write_all`/`read_exact` methods on those traits instead."] # [doc = ""] # [doc = " ### Known problems"] # [doc = " Detects only common patterns."] # [doc = ""] # [doc = " ### Examples"] # [doc = " ```rust,ignore"] # [doc = " use std::io;"] # [doc = " fn foo<W: io::Write>(w: &mut W) -> io::Result<()> {"] # [doc = "     w.write(b\"foo\")?;"] # [doc = "     Ok(())"] # [doc = " }"] # [doc = " ```"] # [doc = " Use instead:"] # [doc = " ```rust,ignore"] # [doc = " use std::io;"] # [doc = " fn foo<W: io::Write>(w: &mut W) -> io::Result<()> {"] # [doc = "     w.write_all(b\"foo\")?;"] # [doc = "     Ok(())"] # [doc = " }"] # [doc = " ```"] # [clippy :: version = "pre 1.29.0"] pub UNUSED_IO_AMOUNT , correctness , "unused written/read amount" }
+};
+}

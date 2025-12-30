@@ -1,0 +1,9 @@
+// Generated macro for RegisterBlock (struct)
+macro_rules! Depcrate_stm32f410_dacRegisterBlock {
+() => {
+// Module: crate::stm32f410::dac
+// Provides: {"RegisterBlock"}
+// Dependencies: {}
+# [doc = r"Register block"] # [repr (C)] pub struct RegisterBlock { # [doc = "0x00 - control register"] pub cr : crate :: Reg < cr :: CR_SPEC > , # [doc = "0x04 - software trigger register"] pub swtrigr : crate :: Reg < swtrigr :: SWTRIGR_SPEC > , # [doc = "0x08 - channel1 12-bit right-aligned data holding register"] pub dhr12r1 : crate :: Reg < dhr12r1 :: DHR12R1_SPEC > , # [doc = "0x0c - channel1 12-bit left aligned data holding register"] pub dhr12l1 : crate :: Reg < dhr12l1 :: DHR12L1_SPEC > , # [doc = "0x10 - channel1 8-bit right aligned data holding register"] pub dhr8r1 : crate :: Reg < dhr8r1 :: DHR8R1_SPEC > , # [doc = "0x14 - channel2 12-bit right aligned data holding register"] pub dhr12r2 : crate :: Reg < dhr12r2 :: DHR12R2_SPEC > , # [doc = "0x18 - channel2 12-bit left aligned data holding register"] pub dhr12l2 : crate :: Reg < dhr12l2 :: DHR12L2_SPEC > , # [doc = "0x1c - channel2 8-bit right-aligned data holding register"] pub dhr8r2 : crate :: Reg < dhr8r2 :: DHR8R2_SPEC > , # [doc = "0x20 - Dual DAC 12-bit right-aligned data holding register"] pub dhr12rd : crate :: Reg < dhr12rd :: DHR12RD_SPEC > , # [doc = "0x24 - DUAL DAC 12-bit left aligned data holding register"] pub dhr12ld : crate :: Reg < dhr12ld :: DHR12LD_SPEC > , # [doc = "0x28 - DUAL DAC 8-bit right aligned data holding register"] pub dhr8rd : crate :: Reg < dhr8rd :: DHR8RD_SPEC > , # [doc = "0x2c - channel1 data output register"] pub dor1 : crate :: Reg < dor1 :: DOR1_SPEC > , # [doc = "0x30 - channel2 data output register"] pub dor2 : crate :: Reg < dor2 :: DOR2_SPEC > , # [doc = "0x34 - status register"] pub sr : crate :: Reg < sr :: SR_SPEC > , }
+};
+}

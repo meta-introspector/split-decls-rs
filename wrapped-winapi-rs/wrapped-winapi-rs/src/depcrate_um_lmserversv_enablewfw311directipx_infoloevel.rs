@@ -1,0 +1,9 @@
+// Generated macro for SV_ENABLEWFW311DIRECTIPX_INFOLOEVEL (const)
+macro_rules! Depcrate_um_lmserverSV_ENABLEWFW311DIRECTIPX_INFOLOEVEL {
+() => {
+// Module: crate::um::lmserver
+// Provides: {"SV_ENABLEWFW311DIRECTIPX_INFOLOEVEL"}
+// Dependencies: {}
+pub const SV_ENABLEWFW311DIRECTIPX_INFOLOEVEL : DWORD = PARMNUM_BASE_INFOLEVEL + SV_ENABLEWFW311DIRECTIPX_PARMNUM ;
+};
+}

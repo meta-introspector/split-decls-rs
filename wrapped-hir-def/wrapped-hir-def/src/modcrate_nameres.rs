@@ -1,0 +1,54 @@
+// Generated module macro for crate::nameres
+macro_rules! Modcrate_nameres {
+() => {
+        Depcrate_nameresassoc!();
+        Depcrate_nameresattr_resolution!();
+        Depcrate_namerescollector!();
+        Depcrate_nameresdiagnostics!();
+        Depcrate_nameresmod_resolution!();
+        Depcrate_namerespath_resolution!();
+        Depcrate_nameresproc_macro!();
+        Depcrate_namerestests!();
+        Depcrate_nameresuse_469!();
+        Depcrate_nameresuse_470!();
+        Depcrate_nameresuse_471!();
+        Depcrate_nameresuse_472!();
+        Depcrate_nameresuse_473!();
+        Depcrate_nameresuse_474!();
+        Depcrate_nameresuse_475!();
+        Depcrate_nameresuse_476!();
+        Depcrate_nameresuse_477!();
+        Depcrate_nameresuse_478!();
+        Depcrate_nameresuse_479!();
+        Depcrate_nameresuse_480!();
+        Depcrate_nameresuse_481!();
+        Depcrate_nameresuse_482!();
+        Depcrate_nameresPREDEFINED_TOOLS!();
+        Depcrate_nameresLocalDefMap!();
+        Depcrate_nameresimpl_485!();
+        Depcrate_nameresimpl_486!();
+        Depcrate_nameresDefMap!();
+        Depcrate_nameresDefMapCrateData!();
+        Depcrate_nameresimpl_489!();
+        Depcrate_nameresBlockInfo!();
+        Depcrate_nameresBlockRelativeModuleId!();
+        Depcrate_nameresimpl_492!();
+        Depcrate_nameresimpl_493!();
+        Depcrate_nameresModuleOrigin!();
+        Depcrate_nameresimpl_495!();
+        Depcrate_nameresModuleData!();
+        Depcrate_namerescrate_def_map!();
+        Depcrate_nameresDefMapPair!();
+        Depcrate_namerescrate_local_def_map!();
+        Depcrate_nameresblock_def_map!();
+        Depcrate_nameresimpl_501!();
+        Depcrate_nameresimpl_502!();
+        Depcrate_nameresimpl_503!();
+        Depcrate_nameresimpl_504!();
+        Depcrate_nameresModuleSource!();
+        Depcrate_nameresimpl_506!();
+        Depcrate_nameresMacroSubNs!();
+        Depcrate_nameresimpl_508!();
+        Depcrate_nameressub_namespace_match!();
+    };
+}

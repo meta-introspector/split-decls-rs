@@ -1,0 +1,48 @@
+// Generated module macro for crate::pg::expression::operators
+macro_rules! Modcrate_pg_expression_operators {
+() => {
+        Depcrate_pg_expression_operatorsuse_2740!();
+        Depcrate_pg_expression_operatorsuse_2741!();
+        Depcrate_pg_expression_operatorsuse_2742!();
+        Depcrate_pg_expression_operatorsuse_2743!();
+        Depcrate_pg_expression_operatorsuse_2744!();
+        Depcrate_pg_expression_operatorsuse_2745!();
+        Depcrate_pg_expression_operatorsuse_2746!();
+        Depcrate_pg_expression_operatorsuse_2747!();
+        Depcrate_pg_expression_operatorsmacro_2748!();
+        Depcrate_pg_expression_operatorsmacro_2749!();
+        Depcrate_pg_expression_operatorsmacro_2750!();
+        Depcrate_pg_expression_operatorsmacro_2751!();
+        Depcrate_pg_expression_operatorsmacro_2752!();
+        Depcrate_pg_expression_operatorsmacro_2753!();
+        Depcrate_pg_expression_operatorsmacro_2754!();
+        Depcrate_pg_expression_operatorsmacro_2755!();
+        Depcrate_pg_expression_operatorsmacro_2756!();
+        Depcrate_pg_expression_operatorsmacro_2757!();
+        Depcrate_pg_expression_operatorsmacro_2758!();
+        Depcrate_pg_expression_operatorsmacro_2759!();
+        Depcrate_pg_expression_operatorsmacro_2760!();
+        Depcrate_pg_expression_operatorsmacro_2761!();
+        Depcrate_pg_expression_operatorsmacro_2762!();
+        Depcrate_pg_expression_operatorsmacro_2763!();
+        Depcrate_pg_expression_operatorsmacro_2764!();
+        Depcrate_pg_expression_operatorsmacro_2765!();
+        Depcrate_pg_expression_operatorsmacro_2766!();
+        Depcrate_pg_expression_operatorsmacro_2767!();
+        Depcrate_pg_expression_operatorsmacro_2768!();
+        Depcrate_pg_expression_operatorsmacro_2769!();
+        Depcrate_pg_expression_operatorsmacro_2770!();
+        Depcrate_pg_expression_operatorsmacro_2771!();
+        Depcrate_pg_expression_operatorsmacro_2772!();
+        Depcrate_pg_expression_operatorsmacro_2773!();
+        Depcrate_pg_expression_operatorsmacro_2774!();
+        Depcrate_pg_expression_operatorsArrayIndex!();
+        Depcrate_pg_expression_operatorsimpl_2776!();
+        Depcrate_pg_expression_operatorsimpl_2777!();
+        Depcrate_pg_expression_operatorsmacro_2778!();
+        Depcrate_pg_expression_operatorsimpl_2779!();
+        Depcrate_pg_expression_operatorsimpl_2780!();
+        Depcrate_pg_expression_operatorsUncorrelatedColumn!();
+        Depcrate_pg_expression_operatorsimpl_2782!();
+    };
+}

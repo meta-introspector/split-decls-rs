@@ -1,0 +1,9 @@
+// Generated macro for impl_80 (impl)
+macro_rules! Depcrate_arrayimpl_80 {
+() => {
+// Module: crate::array
+// Provides: {"impl_80"}
+// Dependencies: {}
+# [doc = " Various accessor methods."] impl < ObjectType : Message > NSArray < ObjectType > { # [doc = " The amount of elements in the array."] # [doc (alias = "count")] # [inline] pub fn len (& self) -> usize { self . count () } # [doc = " Whether the array is empty or not."] # [inline] pub fn is_empty (& self) -> bool { self . len () == 0 } # [doc = " Convert the array to a `Vec` of the array's objects."] # [doc (alias = "getObjects:")] pub fn to_vec (& self) -> Vec < Retained < ObjectType > > { let vec = unsafe { self . to_vec_unchecked () } ; vec . into_iter () . map (ObjectType :: retain) . collect () } # [doc = " Iterate over the array's elements."] # [cfg (feature = "NSEnumerator")] # [doc (alias = "objectEnumerator")] # [inline] pub fn iter (& self) -> Iter < '_ , ObjectType > { Iter (iter :: Iter :: new (self)) } # [doc = " Returns the objects within the given range."] # [doc = ""] # [doc = " # Panics"] # [doc = ""] # [doc = " Panics if the range was out of bounds."] # [doc (alias = "getObjects:range:")] # [cfg (feature = "NSRange")] pub fn objects_in_range (& self , range : core :: ops :: Range < usize >) -> Vec < Retained < ObjectType > > { let count = self . count () ; if range . end > count { panic ! ("range end index {} out of range for array of length {}" , range . end , count) ; } let range = crate :: NSRange :: from (range) ; let mut vec : Vec < NonNull < ObjectType > > = Vec :: with_capacity (range . length) ; let ptr : NonNull < NonNull < ObjectType > > = NonNull :: new (vec . as_mut_ptr ()) . unwrap () ; unsafe { self . getObjects_range (ptr , range) } ; unsafe { vec . set_len (range . length) } ; let vec = unsafe { mem :: transmute :: < Vec < NonNull < ObjectType > > , Vec < & ObjectType > > (vec) } ; vec . into_iter () . map (ObjectType :: retain) . collect () } }
+};
+}

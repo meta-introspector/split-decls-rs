@@ -1,0 +1,9 @@
+// Generated macro for tests (module)
+macro_rules! Depcrate_duration_validated_optionstests {
+() => {
+// Module: crate::duration::validated_options
+// Provides: {"tests"}
+// Dependencies: {}
+# [cfg (test)] mod tests { use super :: * ; # [test] fn test_fractional_digit_error () { let options = DurationFormatterOptions { fractional_digits : FractionalDigits :: Fixed (10) , .. Default :: default () } ; assert_eq ! (ValidatedDurationFormatterOptions :: validate (options) , Err (DurationFormatterOptionsError :: FractionalDigitsOutOfRange)) ; } # [test] fn test_invalid_style_after_two_digit () { let options = DurationFormatterOptions { hour : Some (HourStyle :: TwoDigit) , minute : Some (MinuteStyle :: Long) , .. Default :: default () } ; assert_eq ! (ValidatedDurationFormatterOptions :: validate (options) , Err (DurationFormatterOptionsError :: PreviousNumeric)) ; let options = DurationFormatterOptions { hour : Some (HourStyle :: TwoDigit) , .. options } ; assert_eq ! (ValidatedDurationFormatterOptions :: validate (options) , Err (DurationFormatterOptionsError :: PreviousNumeric)) ; } # [test] fn test_display_always_fractional_style () { let options = DurationFormatterOptions { millisecond : Some (MilliSecondStyle :: Numeric) , millisecond_visibility : Some (FieldDisplay :: Always) , .. Default :: default () } ; assert_eq ! (ValidatedDurationFormatterOptions :: validate (options) , Err (DurationFormatterOptionsError :: DisplayAlwaysFractional)) ; } # [test] fn test_previous_fractional () { let options = DurationFormatterOptions { millisecond : Some (MilliSecondStyle :: Numeric) , nanosecond : Some (NanoSecondStyle :: Long) , .. Default :: default () } ; assert_eq ! (ValidatedDurationFormatterOptions :: validate (options) , Err (DurationFormatterOptionsError :: PreviousFractional)) ; } }
+};
+}

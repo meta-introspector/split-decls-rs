@@ -1,0 +1,9 @@
+// Generated macro for impl_134 (impl)
+macro_rules! Depcrate_map_mapimpl_134 {
+() => {
+// Module: crate::map::map
+// Provides: {"impl_134"}
+// Dependencies: {}
+impl < 'a , K , V > ZeroMap < 'a , K , V > where K : ZeroMapKV < 'a > + ? Sized + Ord , V : ZeroMapKV < 'a , Container = VarZeroVec < 'a , V > > + ? Sized , V : VarULE , { # [doc = " Same as `insert()`, but allows using [EncodeAsVarULE](crate::ule::EncodeAsVarULE)"] # [doc = " types with the value to avoid an extra allocation when dealing with custom ULE types."] # [doc = ""] # [doc = " ```rust"] # [doc = " use std::borrow::Cow;"] # [doc = " use zerovec::ZeroMap;"] # [doc = ""] # [doc = " #[zerovec::make_varule(PersonULE)]"] # [doc = " #[derive(Clone, Eq, PartialEq, Ord, PartialOrd)]"] # [doc = " struct Person<'a> {"] # [doc = "     age: u8,"] # [doc = "     name: Cow<'a, str>,"] # [doc = " }"] # [doc = ""] # [doc = " let mut map: ZeroMap<u32, PersonULE> = ZeroMap::new();"] # [doc = " map.insert_var_v("] # [doc = "     &1,"] # [doc = "     &Person {"] # [doc = "         age: 20,"] # [doc = "         name: \"Joseph\".into(),"] # [doc = "     },"] # [doc = " );"] # [doc = " map.insert_var_v("] # [doc = "     &1,"] # [doc = "     &Person {"] # [doc = "         age: 35,"] # [doc = "         name: \"Carla\".into(),"] # [doc = "     },"] # [doc = " );"] # [doc = " assert_eq!(&map.get(&1).unwrap().name, \"Carla\");"] # [doc = " assert!(map.get(&3).is_none());"] # [doc = " ```"] pub fn insert_var_v < VE : EncodeAsVarULE < V > > (& mut self , key : & K , value : & VE) -> Option < Box < V > > { match self . keys . zvl_binary_search (key) { Ok (index) => { # [expect (clippy :: unwrap_used)] let ret = self . values . get (index) . unwrap () . to_boxed () ; self . values . make_mut () . replace (index , value) ; Some (ret) } Err (index) => { self . keys . zvl_insert (index , key) ; self . values . make_mut () . insert (index , value) ; None } } } }
+};
+}

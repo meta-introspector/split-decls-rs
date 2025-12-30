@@ -1,0 +1,9 @@
+// Generated macro for key_value_pair (module)
+macro_rules! Depcrate_parse_nom_testskey_value_pair {
+() => {
+// Module: crate::parse::nom::tests
+// Provides: {"key_value_pair"}
+// Dependencies: {}
+mod key_value_pair { use winnow :: error :: InputError ; use crate :: parse :: { error :: ParseNode , tests :: util :: { name_event , value_event , whitespace_event } , Event , } ; fn key_value < 'a > (mut i : & 'a [u8] , node : & mut ParseNode , events : & mut Vec < Event < 'a > > ,) -> winnow :: ModalResult < (& 'a [u8] , ()) , InputError < & 'a [u8] > > { super :: key_value_pair (& mut i , node , & mut | e | events . push (e)) . map (| _ | (i , ())) } # [test] fn nonascii_is_allowed_for_values_but_not_for_keys () { let mut node = ParseNode :: SectionHeader ; let mut vec = Default :: default () ; assert ! (key_value ("你好" . as_bytes () , & mut node , & mut vec) . is_ok () , "Verifying `is_ok` because bad keys get ignored, the caller parser handles this as error") ; assert_eq ! (vec , vec ! []) ; let mut node = ParseNode :: SectionHeader ; let mut vec = Default :: default () ; assert ! (key_value ("a = 你好 " . as_bytes () , & mut node , & mut vec) . is_ok ()) ; assert_eq ! (vec , vec ! [name_event ("a") , whitespace_event (" ") , Event :: KeyValueSeparator , whitespace_event (" ") , value_event ("你好")]) ; } # [test] fn whitespace_is_not_ambiguous () { let mut node = ParseNode :: SectionHeader ; let mut vec = Default :: default () ; assert ! (key_value (b"a =b" , & mut node , & mut vec) . is_ok ()) ; assert_eq ! (vec , vec ! [name_event ("a") , whitespace_event (" ") , Event :: KeyValueSeparator , value_event ("b")]) ; let mut vec = Default :: default () ; assert ! (key_value (b"a= b" , & mut node , & mut vec) . is_ok ()) ; assert_eq ! (vec , vec ! [name_event ("a") , Event :: KeyValueSeparator , whitespace_event (" ") , value_event ("b")]) ; } }
+};
+}

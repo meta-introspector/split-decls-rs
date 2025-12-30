@@ -1,0 +1,9 @@
+// Generated macro for impl_374 (impl)
+macro_rules! Depcrate_decompression_layerimpl_374 {
+() => {
+// Module: crate::decompression::layer
+// Provides: {"impl_374"}
+// Dependencies: {}
+impl DecompressionLayer { # [doc = " Creates a new `DecompressionLayer`."] pub fn new () -> Self { Default :: default () } # [doc = " Sets whether to request the gzip encoding."] # [cfg (feature = "decompression-gzip")] pub fn gzip (mut self , enable : bool) -> Self { self . accept . set_gzip (enable) ; self } # [doc = " Sets whether to request the Deflate encoding."] # [cfg (feature = "decompression-deflate")] pub fn deflate (mut self , enable : bool) -> Self { self . accept . set_deflate (enable) ; self } # [doc = " Sets whether to request the Brotli encoding."] # [cfg (feature = "decompression-br")] pub fn br (mut self , enable : bool) -> Self { self . accept . set_br (enable) ; self } # [doc = " Sets whether to request the Zstd encoding."] # [cfg (feature = "decompression-zstd")] pub fn zstd (mut self , enable : bool) -> Self { self . accept . set_zstd (enable) ; self } # [doc = " Disables the gzip encoding."] # [doc = ""] # [doc = " This method is available even if the `gzip` crate feature is disabled."] pub fn no_gzip (mut self) -> Self { self . accept . set_gzip (false) ; self } # [doc = " Disables the Deflate encoding."] # [doc = ""] # [doc = " This method is available even if the `deflate` crate feature is disabled."] pub fn no_deflate (mut self) -> Self { self . accept . set_deflate (false) ; self } # [doc = " Disables the Brotli encoding."] # [doc = ""] # [doc = " This method is available even if the `br` crate feature is disabled."] pub fn no_br (mut self) -> Self { self . accept . set_br (false) ; self } # [doc = " Disables the Zstd encoding."] # [doc = ""] # [doc = " This method is available even if the `zstd` crate feature is disabled."] pub fn no_zstd (mut self) -> Self { self . accept . set_zstd (false) ; self } }
+};
+}

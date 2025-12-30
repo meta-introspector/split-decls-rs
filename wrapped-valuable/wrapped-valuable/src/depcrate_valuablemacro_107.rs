@@ -1,0 +1,9 @@
+// Generated macro for macro_107 (macro)
+macro_rules! Depcrate_valuablemacro_107 {
+() => {
+// Module: crate::valuable
+// Provides: {"macro_107"}
+// Dependencies: {}
+nonzero ! { I8 (NonZeroI8) , I16 (NonZeroI16) , I32 (NonZeroI32) , I64 (NonZeroI64) , I128 (NonZeroI128) , Isize (NonZeroIsize) , U8 (NonZeroU8) , U16 (NonZeroU16) , U32 (NonZeroU32) , U64 (NonZeroU64) , U128 (NonZeroU128) , Usize (NonZeroUsize) , }
+};
+}

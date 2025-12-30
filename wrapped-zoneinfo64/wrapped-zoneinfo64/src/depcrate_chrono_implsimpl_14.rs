@@ -1,0 +1,9 @@
+// Generated macro for impl_14 (impl)
+macro_rules! Depcrate_chrono_implsimpl_14 {
+() => {
+// Module: crate::chrono_impls
+// Provides: {"impl_14"}
+// Dependencies: {}
+impl < 'a > TimeZone for Zone < 'a > { type Offset = ChronoOffset < 'a > ; fn from_offset (offset : & Self :: Offset) -> Self { offset . 1 } fn offset_from_local_date (& self , local : & NaiveDate) -> MappedLocalTime < Self :: Offset > { match self . for_date_time (local . year () , local . month () as u8 , local . day () as u8 , 0 , 0 , 0 ,) { PossibleOffset :: None { .. } => chrono :: MappedLocalTime :: None , PossibleOffset :: Single (o) => chrono :: MappedLocalTime :: Single (ChronoOffset (o , * self)) , PossibleOffset :: Ambiguous { before , after , .. } => { MappedLocalTime :: Ambiguous (ChronoOffset (before , * self) , ChronoOffset (after , * self)) } } } fn offset_from_local_datetime (& self , local : & NaiveDateTime) -> MappedLocalTime < Self :: Offset > { match self . for_date_time (local . year () , local . month () as u8 , local . day () as u8 , local . hour () as u8 , local . minute () as u8 , local . second () as u8 ,) { PossibleOffset :: None { .. } => chrono :: MappedLocalTime :: None , PossibleOffset :: Single (o) => chrono :: MappedLocalTime :: Single (ChronoOffset (o , * self)) , PossibleOffset :: Ambiguous { before , after , .. } => { MappedLocalTime :: Ambiguous (ChronoOffset (before , * self) , ChronoOffset (after , * self)) } } } fn offset_from_utc_date (& self , utc : & NaiveDate) -> Self :: Offset { ChronoOffset (self . for_timestamp (utc . and_time (chrono :: NaiveTime :: MIN) . and_utc () . timestamp ()) , * self ,) } fn offset_from_utc_datetime (& self , utc : & NaiveDateTime) -> Self :: Offset { ChronoOffset (self . for_timestamp (utc . and_utc () . timestamp ()) , * self) } }
+};
+}

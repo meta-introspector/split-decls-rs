@@ -1,0 +1,52 @@
+// Generated module macro for crate::unix
+macro_rules! Modcrate_unix {
+() => {
+        Depcrate_unixuse_2!();
+        Depcrate_unixuse_3!();
+        Depcrate_unixuse_4!();
+        Depcrate_unixuse_5!();
+        Depcrate_unixuse_6!();
+        Depcrate_unixuse_7!();
+        Depcrate_unixuse_8!();
+        Depcrate_unixuse_9!();
+        Depcrate_unixuse_10!();
+        Depcrate_unixuse_11!();
+        Depcrate_unixuse_12!();
+        Depcrate_unixuse_13!();
+        Depcrate_unixuse_14!();
+        Depcrate_unixUnixListener!();
+        Depcrate_uniximpl_16!();
+        Depcrate_uniximpl_17!();
+        Depcrate_uniximpl_18!();
+        Depcrate_uniximpl_19!();
+        Depcrate_uniximpl_20!();
+        Depcrate_uniximpl_21!();
+        Depcrate_uniximpl_22!();
+        Depcrate_uniximpl_23!();
+        Depcrate_unixIncoming!();
+        Depcrate_uniximpl_25!();
+        Depcrate_uniximpl_26!();
+        Depcrate_unixUnixStream!();
+        Depcrate_uniximpl_28!();
+        Depcrate_uniximpl_29!();
+        Depcrate_uniximpl_30!();
+        Depcrate_uniximpl_31!();
+        Depcrate_uniximpl_32!();
+        Depcrate_uniximpl_33!();
+        Depcrate_uniximpl_34!();
+        Depcrate_uniximpl_35!();
+        Depcrate_uniximpl_36!();
+        Depcrate_uniximpl_37!();
+        Depcrate_uniximpl_38!();
+        Depcrate_uniximpl_39!();
+        Depcrate_uniximpl_40!();
+        Depcrate_uniximpl_41!();
+        Depcrate_unixUnixDatagram!();
+        Depcrate_uniximpl_43!();
+        Depcrate_uniximpl_44!();
+        Depcrate_uniximpl_45!();
+        Depcrate_uniximpl_46!();
+        Depcrate_uniximpl_47!();
+        Depcrate_uniximpl_48!();
+    };
+}

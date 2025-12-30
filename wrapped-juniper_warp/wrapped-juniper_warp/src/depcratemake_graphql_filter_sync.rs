@@ -1,0 +1,9 @@
+// Generated macro for make_graphql_filter_sync (function)
+macro_rules! Depcratemake_graphql_filter_sync {
+() => {
+// Module: crate
+// Provides: {"make_graphql_filter_sync"}
+// Dependencies: {}
+# [doc = " Same as [`make_graphql_filter()`], but for [executing synchronously][1]."] # [doc = ""] # [doc = " > __NOTE__: In order to avoid blocking, this handler will use [`tokio::task::spawn_blocking()`]"] # [doc = " >           on the runtime [`warp`] is running on."] # [doc = ""] # [doc = " [1]: GraphQLBatchRequest::execute_sync"] pub fn make_graphql_filter_sync < S , Query , Mutation , Subscription , CtxT , CtxErr > (schema : impl Into < Arc < juniper :: RootNode < Query , Mutation , Subscription , S > > > , context_extractor : impl Filter < Extract = (CtxT ,) , Error = CtxErr > + Send + Sync + 'static ,) -> impl Filter < Extract = (reply :: Response ,) , Error = Rejection > + Clone + Send where Query : juniper :: GraphQLType < S , Context = CtxT > + Send + Sync + 'static , Query :: TypeInfo : Send + Sync , Mutation : juniper :: GraphQLType < S , Context = CtxT > + Send + Sync + 'static , Mutation :: TypeInfo : Send + Sync , Subscription : juniper :: GraphQLType < S , Context = CtxT > + Send + Sync + 'static , Subscription :: TypeInfo : Send + Sync , CtxT : Send + Sync + 'static , CtxErr : Into < Rejection > , S : ScalarValue + Send + Sync + 'static , { let schema = schema . into () ; let context_extractor = context_extractor . boxed () ; get_query_extractor :: < S > () . or (post_json_extractor :: < S > ()) . unify () . or (post_graphql_extractor :: < S > ()) . unify () . and (warp :: any () . map (move | | schema . clone ())) . and (context_extractor) . then (graphql_handler_sync :: < Query , Mutation , Subscription , CtxT , S >) . recover (handle_rejects) . unify () }
+};
+}

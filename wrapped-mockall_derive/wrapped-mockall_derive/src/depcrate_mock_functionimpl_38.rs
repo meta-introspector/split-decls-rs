@@ -1,0 +1,9 @@
+// Generated macro for impl_38 (impl)
+macro_rules! Depcrate_mock_functionimpl_38 {
+() => {
+// Module: crate::mock_function
+// Provides: {"impl_38"}
+// Dependencies: {}
+impl ToTokens for ConcreteExpectationGuard < '_ > { fn to_tokens (& self , tokens : & mut TokenStream) { if ! self . f . is_static { return ; } let common_methods = ExpectationGuardCommonMethods { f : self . f } ; let (_ , tg , _) = self . f . egenerics . split_for_impl () ; let ltdef = LifetimeParam :: new (Lifetime :: new ("'__mockall_lt" , Span :: call_site ())) ; let mut e_generics = self . f . egenerics . clone () ; e_generics . lt_token . get_or_insert (< Token ! [<] > :: default ()) ; e_generics . params . push (GenericParam :: Lifetime (ltdef)) ; e_generics . gt_token . get_or_insert (< Token ! [>] > :: default ()) ; let (e_ig , e_tg , e_wc) = e_generics . split_for_impl () ; let (ei_ig , _ , _) = e_generics . split_for_impl () ; let v = & self . f . privmod_vis ; quote ! (# [doc (hidden)] # v fn get_expectations () -> &'static :: std :: sync :: Mutex < Expectations > { static EXPECTATIONS : :: std :: sync :: Mutex < Expectations # tg > = :: std :: sync :: Mutex :: new (Expectations :: new ()) ; & EXPECTATIONS } # [doc = " Like an [`&Expectation`](struct.Expectation.html) but"] # [doc = " protected by a Mutex guard.  Useful for mocking static"] # [doc = " methods.  Forwards accesses to an `Expectation` object."] # v struct ExpectationGuard # e_ig # e_wc { guard : MutexGuard <'__mockall_lt , Expectations # tg >, i : usize } # [allow (clippy :: unused_unit)] impl # ei_ig ExpectationGuard # e_tg # e_wc { # [doc (hidden)] # v fn new (mut __mockall_guard : MutexGuard <'__mockall_lt , Expectations # tg >) -> Self { __mockall_guard . expect () ; let __mockall_i = __mockall_guard . 0 . len () - 1 ; ExpectationGuard { guard : __mockall_guard , i : __mockall_i } } # common_methods }) . to_tokens (tokens) ; } }
+};
+}

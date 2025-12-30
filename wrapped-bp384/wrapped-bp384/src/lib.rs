@@ -1,0 +1,62 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcratet1.rs");
+include!("depcrate_t1use_26.rs");
+include!("depcratedecode_field_bytes.rs");
+include!("depcrate_t1use_23.rs");
+include!("depcratefieldbytes.rs");
+include!("depcrate_r1use_7.rs");
+include!("depcrate_r1brainpoolp384r1.rs");
+include!("depcrate_t1brainpoolp384t1.rs");
+include!("depcrateuse_41.rs");
+include!("depcrate_r1arithmetic.rs");
+include!("depcrate_t1impl_34.rs");
+include!("depcrate_r1secretkey.rs");
+include!("depcrate_t1impl_28.rs");
+include!("depcrateuse_42.rs");
+include!("depcrate_r1impl_17.rs");
+include!("depcrateuse_39.rs");
+include!("depcrate_t1impl_31.rs");
+include!("depcrate_r1fieldbytes.rs");
+include!("depcrater1.rs");
+include!("depcrateuse_38.rs");
+include!("depcrate_r1ecdsa.rs");
+include!("depcrate_r1impl_13.rs");
+include!("depcrate_r1impl_14.rs");
+include!("depcrate_t1secretkey.rs");
+include!("depcrate_r1impl_11.rs");
+include!("depcrate_r1use_6.rs");
+include!("depcrate_r1_arithmeticscalar.rs");
+include!("depcrate_t1ecdsa.rs");
+include!("depcrate_r1impl_19.rs");
+include!("depcrate_t1fieldbytes.rs");
+include!("depcrateorder.rs");
+include!("depcrate_r1encodedpoint.rs");
+include!("depcrate_r1_arithmeticfield.rs");
+include!("depcrate_t1use_25.rs");
+include!("depcrate_r1impl_12.rs");
+include!("depcratearithmetic.rs");
+include!("depcrateuse_43.rs");
+include!("depcrateorder_hex.rs");
+include!("depcrateencode_field_bytes.rs");
+include!("depcrate_t1impl_36.rs");
+include!("depcrateuse_40.rs");
+include!("depcrate_t1impl_29.rs");
+include!("depcrate_r1use_9.rs");
+include!("depcrate_r1use_8.rs");
+include!("depcrate_t1impl_30.rs");
+include!("depcrate_t1arithmetic.rs");
+include!("depcrate_t1use_24.rs");
+include!("depcrate_t1encodedpoint.rs");
+include!("modcrate_t1.rs");
+include!("modcrate_r1.rs");
+include!("modcrate_r1_arithmetic.rs");
+include!("modcrate.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate_t1!();
+    Modcrate_r1!();
+    Modcrate_r1_arithmetic!();
+    Modcrate!();
+}

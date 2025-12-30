@@ -1,0 +1,9 @@
+// Generated macro for border (macro)
+macro_rules! Depcrate_bordersborder {
+() => {
+// Module: crate::borders
+// Provides: {"border"}
+// Dependencies: {}
+# [doc = " Macro that constructs and returns a combination of the [`Borders`] object from TOP, BOTTOM, LEFT"] # [doc = " and RIGHT."] # [doc = ""] # [doc = " When used with NONE you should consider omitting this completely. For ALL you should consider"] # [doc = " [`Block::bordered()`](crate::block::Block::bordered) instead."] # [doc = ""] # [doc = " ## Examples"] # [doc = ""] # [doc = " ```"] # [doc = " use ratatui::border;"] # [doc = " use ratatui::widgets::Block;"] # [doc = ""] # [doc = " Block::new()"] # [doc = "     .title(\"Construct Borders and use them in place\")"] # [doc = "     .borders(border!(TOP, BOTTOM));"] # [doc = " ```"] # [doc = ""] # [doc = " `border!` can be called with any number of individual sides:"] # [doc = ""] # [doc = " ```"] # [doc = " use ratatui::border;"] # [doc = " use ratatui::widgets::Borders;"] # [doc = " let right_open = border!(TOP, LEFT, BOTTOM);"] # [doc = " assert_eq!(right_open, Borders::TOP | Borders::LEFT | Borders::BOTTOM);"] # [doc = " ```"] # [doc = ""] # [doc = " Single borders work but using `Borders::` directly would be simpler."] # [doc = ""] # [doc = " ```"] # [doc = " use ratatui::border;"] # [doc = " use ratatui::widgets::Borders;"] # [doc = ""] # [doc = " assert_eq!(border!(TOP), Borders::TOP);"] # [doc = " assert_eq!(border!(ALL), Borders::ALL);"] # [doc = " assert_eq!(border!(), Borders::NONE);"] # [doc = " ```"] # [macro_export] macro_rules ! border { () => { $ crate :: borders :: Borders :: NONE } ; ($ b : ident) => { $ crate :: borders :: Borders ::$ b } ; ($ first : ident ,$ ($ other : ident) ,*) => { $ crate :: borders :: Borders ::$ first $ (. union ($ crate :: borders :: Borders ::$ other)) * } ; }
+};
+}

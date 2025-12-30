@@ -1,0 +1,9 @@
+// Generated macro for try_validation (macro)
+macro_rules! Depcrate_interpret_validitytry_validation {
+() => {
+// Module: crate::interpret::validity
+// Provides: {"try_validation"}
+// Dependencies: {}
+# [doc = " If $e throws an error matching the pattern, throw a validation failure."] # [doc = " Other errors are passed back to the caller, unchanged -- and if they reach the root of"] # [doc = " the visitor, we make sure only validation errors and `InvalidProgram` errors are left."] # [doc = " This lets you use the patterns as a kind of validation list, asserting which errors"] # [doc = " can possibly happen:"] # [doc = ""] # [doc = " ```ignore(illustrative)"] # [doc = " let v = try_validation!(some_fn(), some_path, {"] # [doc = "     Foo | Bar | Baz => { \"some failure\" },"] # [doc = " });"] # [doc = " ```"] # [doc = ""] # [doc = " The patterns must be of type `UndefinedBehaviorInfo`."] # [doc = " An additional expected parameter can also be added to the failure message:"] # [doc = ""] # [doc = " ```ignore(illustrative)"] # [doc = " let v = try_validation!(some_fn(), some_path, {"] # [doc = "     Foo | Bar | Baz => { \"some failure\" } expected { \"something that wasn't a failure\" },"] # [doc = " });"] # [doc = " ```"] # [doc = ""] # [doc = " An additional nicety is that both parameters actually take format args, so you can just write"] # [doc = " the format string in directly:"] # [doc = ""] # [doc = " ```ignore(illustrative)"] # [doc = " let v = try_validation!(some_fn(), some_path, {"] # [doc = "     Foo | Bar | Baz => { \"{:?}\", some_failure } expected { \"{}\", expected_value },"] # [doc = " });"] # [doc = " ```"] # [doc = ""] macro_rules ! try_validation { ($ e : expr , $ where : expr , $ ($ ($ p : pat_param) |+ => $ kind : expr) ,+ $ (,) ?) => { { $ e . map_err_kind (| e | { match e { $ ($ ($ p) |+ => { err_validation_failure ! ($ where , $ kind) }) ,+, e => e , } }) ? } } ; }
+};
+}

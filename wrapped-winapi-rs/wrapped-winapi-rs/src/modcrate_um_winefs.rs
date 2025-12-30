@@ -1,0 +1,57 @@
+// Generated module macro for crate::um::winefs
+macro_rules! Modcrate_um_winefs {
+() => {
+        Depcrate_um_winefsuse_44261!();
+        Depcrate_um_winefsuse_44262!();
+        Depcrate_um_winefsuse_44263!();
+        Depcrate_um_winefsuse_44264!();
+        Depcrate_um_winefsuse_44265!();
+        Depcrate_um_winefsWINEFS_SETUSERKEY_SET_CAPABILITIES!();
+        Depcrate_um_winefsmacro_44267!();
+        Depcrate_um_winefsPEFS_CERTIFICATE_BLOB!();
+        Depcrate_um_winefsmacro_44269!();
+        Depcrate_um_winefsPEFS_HASH_BLOB!();
+        Depcrate_um_winefsmacro_44271!();
+        Depcrate_um_winefsPEFS_RPC_BLOB!();
+        Depcrate_um_winefsmacro_44273!();
+        Depcrate_um_winefsPEFS_PIN_BLOB!();
+        Depcrate_um_winefsmacro_44275!();
+        Depcrate_um_winefsPEFS_KEY_INFO!();
+        Depcrate_um_winefsmacro_44277!();
+        Depcrate_um_winefsPEFS_COMPATIBILITY_INFO!();
+        Depcrate_um_winefsEFS_COMPATIBILITY_VERSION_NCRYPT_PROTECTOR!();
+        Depcrate_um_winefsEFS_COMPATIBILITY_VERSION_PFILE_PROTECTOR!();
+        Depcrate_um_winefsEFS_IS_DESCRIPTOR_VERSION!();
+        Depcrate_um_winefsEFS_SUBVER_UNKNOWN!();
+        Depcrate_um_winefsEFS_EFS_SUBVER_EFS_CERT!();
+        Depcrate_um_winefsEFS_PFILE_SUBVER_RMS!();
+        Depcrate_um_winefsEFS_PFILE_SUBVER_APPX!();
+        Depcrate_um_winefsmacro_44286!();
+        Depcrate_um_winefsPEFS_VERSION_INFO!();
+        Depcrate_um_winefsEFS_IS_APPX_VERSION!();
+        Depcrate_um_winefsmacro_44289!();
+        Depcrate_um_winefsPEFS_DECRYPTION_STATUS_INFO!();
+        Depcrate_um_winefsmacro_44291!();
+        Depcrate_um_winefsPEFS_ENCRYPTION_STATUS_INFO!();
+        Depcrate_um_winefsmacro_44293!();
+        Depcrate_um_winefsPENCRYPTION_CERTIFICATE!();
+        Depcrate_um_winefsMAX_SID_SIZE!();
+        Depcrate_um_winefsmacro_44296!();
+        Depcrate_um_winefsPENCRYPTION_CERTIFICATE_HASH!();
+        Depcrate_um_winefsmacro_44298!();
+        Depcrate_um_winefsPENCRYPTION_CERTIFICATE_HASH_LIST!();
+        Depcrate_um_winefsmacro_44300!();
+        Depcrate_um_winefsPENCRYPTION_CERTIFICATE_LIST!();
+        Depcrate_um_winefsEFS_METADATA_ADD_USER!();
+        Depcrate_um_winefsEFS_METADATA_REMOVE_USER!();
+        Depcrate_um_winefsEFS_METADATA_REPLACE_USER!();
+        Depcrate_um_winefsEFS_METADATA_GENERAL_OP!();
+        Depcrate_um_winefsmacro_44306!();
+        Depcrate_um_winefsPENCRYPTED_FILE_METADATA_SIGNATURE!();
+        Depcrate_um_winefsmacro_44308!();
+        Depcrate_um_winefsPENCRYPTION_PROTECTOR!();
+        Depcrate_um_winefsmacro_44310!();
+        Depcrate_um_winefsPENCRYPTION_PROTECTOR_LIST!();
+        Depcrate_um_winefsother_44312!();
+    };
+}

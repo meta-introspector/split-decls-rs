@@ -1,0 +1,9 @@
+// Generated macro for stat (struct)
+macro_rules! Depcrate_os_dragonfly_rawstat {
+() => {
+// Module: crate::os::dragonfly::raw
+// Provides: {"stat"}
+// Dependencies: {}
+# [repr (C)] # [derive (Clone)] # [stable (feature = "raw_ext" , since = "1.1.0")] pub struct stat { # [stable (feature = "raw_ext" , since = "1.1.0")] pub st_dev : u32 , # [stable (feature = "raw_ext" , since = "1.1.0")] pub st_ino : u32 , # [stable (feature = "raw_ext" , since = "1.1.0")] pub st_mode : u16 , # [stable (feature = "raw_ext" , since = "1.1.0")] pub st_nlink : u16 , # [stable (feature = "raw_ext" , since = "1.1.0")] pub st_uid : u32 , # [stable (feature = "raw_ext" , since = "1.1.0")] pub st_gid : u32 , # [stable (feature = "raw_ext" , since = "1.1.0")] pub st_rdev : u32 , # [stable (feature = "raw_ext" , since = "1.1.0")] pub st_atime : c_long , # [stable (feature = "raw_ext" , since = "1.1.0")] pub st_atime_nsec : c_long , # [stable (feature = "raw_ext" , since = "1.1.0")] pub st_mtime : c_long , # [stable (feature = "raw_ext" , since = "1.1.0")] pub st_mtime_nsec : c_long , # [stable (feature = "raw_ext" , since = "1.1.0")] pub st_ctime : c_long , # [stable (feature = "raw_ext" , since = "1.1.0")] pub st_ctime_nsec : c_long , # [stable (feature = "raw_ext" , since = "1.1.0")] pub st_size : i64 , # [stable (feature = "raw_ext" , since = "1.1.0")] pub st_blocks : i64 , # [stable (feature = "raw_ext" , since = "1.1.0")] pub st_blksize : u32 , # [stable (feature = "raw_ext" , since = "1.1.0")] pub st_flags : u32 , # [stable (feature = "raw_ext" , since = "1.1.0")] pub st_gen : u32 , # [stable (feature = "raw_ext" , since = "1.1.0")] pub st_lspare : i32 , # [stable (feature = "raw_ext" , since = "1.1.0")] pub st_birthtime : c_long , # [stable (feature = "raw_ext" , since = "1.1.0")] pub st_birthtime_nsec : c_long , }
+};
+}

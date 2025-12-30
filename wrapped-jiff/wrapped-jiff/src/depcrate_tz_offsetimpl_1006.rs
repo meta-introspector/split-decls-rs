@@ -1,0 +1,9 @@
+// Generated macro for impl_1006 (impl)
+macro_rules! Depcrate_tz_offsetimpl_1006 {
+() => {
+// Module: crate::tz::offset
+// Provides: {"impl_1006"}
+// Dependencies: {}
+# [doc = " Converts a `SignedDuration` to a time zone offset."] # [doc = ""] # [doc = " If the signed duration has fractional seconds, then it is automatically"] # [doc = " rounded to the nearest second. (Because an `Offset` has only second"] # [doc = " precision.)"] # [doc = ""] # [doc = " # Errors"] # [doc = ""] # [doc = " This returns an error if the duration overflows the limits of an `Offset`."] # [doc = ""] # [doc = " # Example"] # [doc = ""] # [doc = " ```"] # [doc = " use jiff::{tz::{self, Offset}, SignedDuration};"] # [doc = ""] # [doc = " let sdur = SignedDuration::from_secs(-5 * 60 * 60);"] # [doc = " let offset = Offset::try_from(sdur)?;"] # [doc = " assert_eq!(offset, tz::offset(-5));"] # [doc = ""] # [doc = " // Sub-seconds results in rounded."] # [doc = " let sdur = SignedDuration::new(-5 * 60 * 60, -500_000_000);"] # [doc = " let offset = Offset::try_from(sdur)?;"] # [doc = " assert_eq!(offset, tz::Offset::from_seconds(-(5 * 60 * 60 + 1)).unwrap());"] # [doc = ""] # [doc = " # Ok::<(), Box<dyn std::error::Error>>(())"] # [doc = " ```"] impl TryFrom < SignedDuration > for Offset { type Error = Error ; fn try_from (sdur : SignedDuration) -> Result < Offset , Error > { let mut seconds = sdur . as_secs () ; let subsec = sdur . subsec_nanos () ; if subsec >= 500_000_000 { seconds = seconds . saturating_add (1) ; } else if subsec <= - 500_000_000 { seconds = seconds . saturating_sub (1) ; } let seconds = i32 :: try_from (seconds) . map_err (| _ | { err ! ("`SignedDuration` of {sdur} overflows `Offset`") }) ? ; Offset :: from_seconds (seconds) . map_err (| _ | err ! ("`SignedDuration` of {sdur} overflows `Offset`")) } }
+};
+}

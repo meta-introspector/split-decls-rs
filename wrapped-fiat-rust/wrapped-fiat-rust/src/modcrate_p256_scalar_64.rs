@@ -1,0 +1,41 @@
+// Generated module macro for crate::p256_scalar_64
+macro_rules! Modcrate_p256_scalar_64 {
+() => {
+        Depcrate_p256_scalar_64IndexConst!();
+        Depcrate_p256_scalar_64impl_342!();
+        Depcrate_p256_scalar_64impl_343!();
+        Depcrate_p256_scalar_64fiat_p256_scalar_u1!();
+        Depcrate_p256_scalar_64fiat_p256_scalar_i1!();
+        Depcrate_p256_scalar_64fiat_p256_scalar_u2!();
+        Depcrate_p256_scalar_64fiat_p256_scalar_i2!();
+        Depcrate_p256_scalar_64fiat_p256_scalar_montgomery_domain_field_element!();
+        Depcrate_p256_scalar_64impl_349!();
+        Depcrate_p256_scalar_64impl_350!();
+        Depcrate_p256_scalar_64impl_351!();
+        Depcrate_p256_scalar_64impl_352!();
+        Depcrate_p256_scalar_64fiat_p256_scalar_non_montgomery_domain_field_element!();
+        Depcrate_p256_scalar_64impl_354!();
+        Depcrate_p256_scalar_64impl_355!();
+        Depcrate_p256_scalar_64impl_356!();
+        Depcrate_p256_scalar_64impl_357!();
+        Depcrate_p256_scalar_64fiat_p256_scalar_addcarryx_u64!();
+        Depcrate_p256_scalar_64fiat_p256_scalar_subborrowx_u64!();
+        Depcrate_p256_scalar_64fiat_p256_scalar_mulx_u64!();
+        Depcrate_p256_scalar_64fiat_p256_scalar_cmovznz_u64!();
+        Depcrate_p256_scalar_64fiat_p256_scalar_mul!();
+        Depcrate_p256_scalar_64fiat_p256_scalar_square!();
+        Depcrate_p256_scalar_64fiat_p256_scalar_add!();
+        Depcrate_p256_scalar_64fiat_p256_scalar_sub!();
+        Depcrate_p256_scalar_64fiat_p256_scalar_opp!();
+        Depcrate_p256_scalar_64fiat_p256_scalar_from_montgomery!();
+        Depcrate_p256_scalar_64fiat_p256_scalar_to_montgomery!();
+        Depcrate_p256_scalar_64fiat_p256_scalar_nonzero!();
+        Depcrate_p256_scalar_64fiat_p256_scalar_selectznz!();
+        Depcrate_p256_scalar_64fiat_p256_scalar_to_bytes!();
+        Depcrate_p256_scalar_64fiat_p256_scalar_from_bytes!();
+        Depcrate_p256_scalar_64fiat_p256_scalar_set_one!();
+        Depcrate_p256_scalar_64fiat_p256_scalar_msat!();
+        Depcrate_p256_scalar_64fiat_p256_scalar_divstep!();
+        Depcrate_p256_scalar_64fiat_p256_scalar_divstep_precomp!();
+    };
+}

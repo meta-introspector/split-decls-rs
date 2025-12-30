@@ -1,0 +1,9 @@
+// Generated macro for flush_output_buffer (function)
+macro_rules! Depcrate_deflate_coreflush_output_buffer {
+() => {
+// Module: crate::deflate::core
+// Provides: {"flush_output_buffer"}
+// Dependencies: {}
+fn flush_output_buffer (c : & mut CallbackOxide , p : & mut ParamsOxide) -> (TDEFLStatus , usize , usize) { let mut res = (TDEFLStatus :: Okay , p . src_pos , 0) ; if let CallbackOut :: Buf (ref mut cb) = c . out { let n = cmp :: min (cb . out_buf . len () - p . out_buf_ofs , p . flush_remaining as usize) ; if n != 0 { cb . out_buf [p . out_buf_ofs .. p . out_buf_ofs + n] . copy_from_slice (& p . local_buf . b [p . flush_ofs as usize .. p . flush_ofs as usize + n]) ; } p . flush_ofs += n as u32 ; p . flush_remaining -= n as u32 ; p . out_buf_ofs += n ; res . 2 = p . out_buf_ofs ; } if p . finished && p . flush_remaining == 0 { res . 0 = TDEFLStatus :: Done } res }
+};
+}

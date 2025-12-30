@@ -1,0 +1,9 @@
+// Generated macro for impl_181 (impl)
+macro_rules! Depcrate_utilimpl_181 {
+() => {
+// Module: crate::util
+// Provides: {"impl_181"}
+// Dependencies: {}
+impl < 'a > Sunk < 'a > { # [inline] pub (crate) fn empty () -> Sunk < 'static > { Sunk { bytes : & [] , absolute_byte_offset : 0 , line_number : None , context_kind : None , matches : & [] , original_matches : & [] , } } # [inline] pub (crate) fn from_sink_match (sunk : & 'a SinkMatch < 'a > , original_matches : & 'a [Match] , replacement : Option < (& 'a [u8] , & 'a [Match]) > ,) -> Sunk < 'a > { let (bytes , matches) = replacement . unwrap_or_else (| | (sunk . bytes () , original_matches)) ; Sunk { bytes , absolute_byte_offset : sunk . absolute_byte_offset () , line_number : sunk . line_number () , context_kind : None , matches , original_matches , } } # [inline] pub (crate) fn from_sink_context (sunk : & 'a SinkContext < 'a > , original_matches : & 'a [Match] , replacement : Option < (& 'a [u8] , & 'a [Match]) > ,) -> Sunk < 'a > { let (bytes , matches) = replacement . unwrap_or_else (| | (sunk . bytes () , original_matches)) ; Sunk { bytes , absolute_byte_offset : sunk . absolute_byte_offset () , line_number : sunk . line_number () , context_kind : Some (sunk . kind ()) , matches , original_matches , } } # [inline] pub (crate) fn context_kind (& self) -> Option < & 'a SinkContextKind > { self . context_kind } # [inline] pub (crate) fn bytes (& self) -> & 'a [u8] { self . bytes } # [inline] pub (crate) fn matches (& self) -> & 'a [Match] { self . matches } # [inline] pub (crate) fn original_matches (& self) -> & 'a [Match] { self . original_matches } # [inline] pub (crate) fn lines (& self , line_term : u8) -> LineIter < 'a > { LineIter :: new (line_term , self . bytes ()) } # [inline] pub (crate) fn absolute_byte_offset (& self) -> u64 { self . absolute_byte_offset } # [inline] pub (crate) fn line_number (& self) -> Option < u64 > { self . line_number } }
+};
+}

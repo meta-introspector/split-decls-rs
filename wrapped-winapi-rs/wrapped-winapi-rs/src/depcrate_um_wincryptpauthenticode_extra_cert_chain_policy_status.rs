@@ -1,0 +1,9 @@
+// Generated macro for PAUTHENTICODE_EXTRA_CERT_CHAIN_POLICY_STATUS (type)
+macro_rules! Depcrate_um_wincryptPAUTHENTICODE_EXTRA_CERT_CHAIN_POLICY_STATUS {
+() => {
+// Module: crate::um::wincrypt
+// Provides: {"PAUTHENTICODE_EXTRA_CERT_CHAIN_POLICY_STATUS"}
+// Dependencies: {}
+pub type PAUTHENTICODE_EXTRA_CERT_CHAIN_POLICY_STATUS = * mut AUTHENTICODE_EXTRA_CERT_CHAIN_POLICY_STATUS ;
+};
+}

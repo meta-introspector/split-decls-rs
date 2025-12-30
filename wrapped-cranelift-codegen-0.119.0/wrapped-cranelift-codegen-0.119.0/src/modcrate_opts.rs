@@ -1,0 +1,39 @@
+// Generated module macro for crate::opts
+macro_rules! Modcrate_opts {
+() => {
+        Depcrate_optsuse_3018!();
+        Depcrate_optsuse_3019!();
+        Depcrate_optsuse_3020!();
+        Depcrate_optsuse_3021!();
+        Depcrate_optsuse_3022!();
+        Depcrate_optsuse_3023!();
+        Depcrate_optsuse_3024!();
+        Depcrate_optsuse_3025!();
+        Depcrate_optsuse_3026!();
+        Depcrate_optsuse_3027!();
+        Depcrate_optsuse_3028!();
+        Depcrate_optsuse_3029!();
+        Depcrate_optsuse_3030!();
+        Depcrate_optsUnit!();
+        Depcrate_optsRange!();
+        Depcrate_optsValueArray2!();
+        Depcrate_optsValueArray3!();
+        Depcrate_optsMAX_ISLE_RETURNS!();
+        Depcrate_optsConstructorVec!();
+        Depcrate_optsTypeAndInstructionData!();
+        Depcrate_optsimpl_3038!();
+        Depcrate_optsgenerated_code!();
+        Depcrate_optsuse_3040!();
+        Depcrate_optsIsleContext!();
+        Depcrate_optsInstDataEtorIter!();
+        Depcrate_optsimpl_3043!();
+        Depcrate_optsimpl_3044!();
+        Depcrate_optsimpl_3045!();
+        Depcrate_optsimpl_3046!();
+        Depcrate_optsMaybeUnaryEtorIter!();
+        Depcrate_optsimpl_3048!();
+        Depcrate_optsimpl_3049!();
+        Depcrate_optsimpl_3050!();
+        Depcrate_optsimpl_3051!();
+    };
+}

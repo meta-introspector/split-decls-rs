@@ -1,0 +1,9 @@
+// Generated macro for impl_1040 (impl)
+macro_rules! Depcrate_base_propertiesimpl_1040 {
+() => {
+// Module: crate::base::properties
+// Provides: {"impl_1040"}
+// Dependencies: {}
+impl < T , R : Dim , C : Dim , S : RawStorage < T , R , C > > Matrix < T , R , C , S > { # [doc = " The total number of elements of this matrix."] # [doc = ""] # [doc = " # Examples:"] # [doc = ""] # [doc = " ```"] # [doc = " # use nalgebra::Matrix3x4;"] # [doc = " let mat = Matrix3x4::<f32>::zeros();"] # [doc = " assert_eq!(mat.len(), 12);"] # [doc = " ```"] # [inline] # [must_use] pub fn len (& self) -> usize { let (nrows , ncols) = self . shape () ; nrows * ncols } # [doc = " Returns true if the matrix contains no elements."] # [doc = ""] # [doc = " # Examples:"] # [doc = ""] # [doc = " ```"] # [doc = " # use nalgebra::Matrix3x4;"] # [doc = " let mat = Matrix3x4::<f32>::zeros();"] # [doc = " assert!(!mat.is_empty());"] # [doc = " ```"] # [inline] # [must_use] pub fn is_empty (& self) -> bool { self . len () == 0 } # [doc = " Indicates if this is a square matrix."] # [inline] # [must_use] pub fn is_square (& self) -> bool { let (nrows , ncols) = self . shape () ; nrows == ncols } # [doc = " Indicated if this is the identity matrix within a relative error of `eps`."] # [doc = ""] # [doc = " If the matrix is diagonal, this checks that diagonal elements (i.e. at coordinates `(i, i)`"] # [doc = " for i from `0` to `min(R, C)`) are equal one; and that all other elements are zero."] # [inline] # [must_use] pub fn is_identity (& self , eps : T :: Epsilon) -> bool where T : Zero + One + RelativeEq , T :: Epsilon : Clone , { let (nrows , ncols) = self . shape () ; for j in 0 .. ncols { for i in 0 .. nrows { let el = unsafe { self . get_unchecked ((i , j)) } ; if (i == j && ! relative_eq ! (* el , T :: one () , epsilon = eps . clone ())) || (i != j && ! relative_eq ! (* el , T :: zero () , epsilon = eps . clone ())) { return false ; } } } true } }
+};
+}

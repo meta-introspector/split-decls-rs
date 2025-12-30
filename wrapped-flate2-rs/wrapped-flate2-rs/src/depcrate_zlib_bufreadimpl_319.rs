@@ -1,0 +1,9 @@
+// Generated macro for impl_319 (impl)
+macro_rules! Depcrate_zlib_bufreadimpl_319 {
+() => {
+// Module: crate::zlib::bufread
+// Provides: {"impl_319"}
+// Dependencies: {}
+impl < R > ZlibDecoder < R > { # [doc = " Resets the state of this decoder entirely, swapping out the input"] # [doc = " stream for another."] # [doc = ""] # [doc = " This will reset the internal state of this decoder and replace the"] # [doc = " input stream with the one provided, returning the previous input"] # [doc = " stream. Future data read from this decoder will be the decompressed"] # [doc = " version of `r`'s data."] pub fn reset (& mut self , r : R) -> R { reset_decoder_data (self) ; mem :: replace (& mut self . obj , r) } # [doc = " Acquires a reference to the underlying stream"] pub fn get_ref (& self) -> & R { & self . obj } # [doc = " Acquires a mutable reference to the underlying stream"] # [doc = ""] # [doc = " Note that mutation of the stream may result in surprising results if"] # [doc = " this decoder is continued to be used."] pub fn get_mut (& mut self) -> & mut R { & mut self . obj } # [doc = " Consumes this decoder, returning the underlying reader."] pub fn into_inner (self) -> R { self . obj } # [doc = " Returns the number of bytes that the decompressor has consumed."] # [doc = ""] # [doc = " Note that this will likely be smaller than what the decompressor"] # [doc = " actually read from the underlying stream due to buffering."] pub fn total_in (& self) -> u64 { self . data . total_in () } # [doc = " Returns the number of bytes that the decompressor has produced."] pub fn total_out (& self) -> u64 { self . data . total_out () } }
+};
+}

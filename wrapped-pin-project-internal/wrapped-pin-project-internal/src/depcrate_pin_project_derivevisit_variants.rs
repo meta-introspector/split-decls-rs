@@ -1,0 +1,9 @@
+// Generated macro for visit_variants (function)
+macro_rules! Depcrate_pin_project_derivevisit_variants {
+() => {
+// Module: crate::pin_project::derive
+// Provides: {"visit_variants"}
+// Dependencies: {}
+fn visit_variants < 'a > (cx : & mut Context < 'a > , variants : & 'a Variants) -> Result < ProjectedVariants > { let mut proj_variants = TokenStream :: new () ; let mut proj_ref_variants = TokenStream :: new () ; let mut proj_own_variants = TokenStream :: new () ; let mut proj_arms = TokenStream :: new () ; let mut proj_ref_arms = TokenStream :: new () ; let mut proj_own_arms = TokenStream :: new () ; for Variant { ident , fields , .. } in variants { let ProjectedFields { proj_pat , proj_body , proj_fields , proj_ref_fields , proj_own_fields , proj_own_body , } = match fields { Fields :: Named (_) => visit_fields (cx , Some (ident) , fields , Delimiter :: Brace) ? , Fields :: Unnamed (_) => visit_fields (cx , Some (ident) , fields , Delimiter :: Parenthesis) ? , Fields :: Unit => ProjectedFields { proj_own_body : proj_own_body (cx , Some (ident) , None , & []) , .. Default :: default () } , } ; let proj_ident = & cx . proj . mut_ident ; let proj_ref_ident = & cx . proj . ref_ident ; proj_variants . extend (quote ! { # ident # proj_fields , }) ; proj_ref_variants . extend (quote ! { # ident # proj_ref_fields , }) ; proj_own_variants . extend (quote ! { # ident # proj_own_fields , }) ; proj_arms . extend (quote ! { Self ::# ident # proj_pat => # proj_ident ::# ident # proj_body , }) ; proj_ref_arms . extend (quote ! { Self ::# ident # proj_pat => # proj_ref_ident ::# ident # proj_body , }) ; proj_own_arms . extend (quote ! { Self ::# ident # proj_pat => { # proj_own_body } }) ; } Ok (ProjectedVariants { proj_variants , proj_ref_variants , proj_own_variants , proj_arms , proj_ref_arms , proj_own_arms , }) }
+};
+}

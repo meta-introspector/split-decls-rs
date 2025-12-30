@@ -1,0 +1,9 @@
+// Generated macro for currency_pattern_selection (function)
+macro_rules! Depcrate_currency_essentialscurrency_pattern_selection {
+() => {
+// Module: crate::currency::essentials
+// Provides: {"currency_pattern_selection"}
+// Dependencies: {}
+# [doc = " Returns the pattern selection for a currency."] # [doc = " For example:"] # [doc = "    if the pattern is ¤#,##0.00 and the symbol is EGP,"] # [doc = "    this means the return value will be PatternSelection::StandardAlphaNextToNumber"] # [doc = "    because the character closes to the number is a letter."] # [doc = " NOTE:"] # [doc = "   placeholder_value must not be empty."] fn currency_pattern_selection (provider : & SourceDataProvider , pattern : & str , placeholder_value : & str ,) -> Result < PatternSelection , DataError > { if placeholder_value . is_empty () { return Err (DataError :: custom ("Place holder value must not be empty")) ; } let pattern = pattern . split (';') . next () . unwrap () ; let currency_sign = '¤' ; let currency_sign_index = pattern . find (currency_sign) . unwrap () ; let first_num_index = pattern . find (['0' , '#']) . unwrap () ; let last_num_index = pattern . rfind (['0' , '#']) . unwrap () ; let letters_set = CodePointMapData :: < GeneralCategory > :: try_new_unstable (provider) ? . as_borrowed () . get_set_for_value_group (GeneralCategoryGroup :: Letter) ; let char_closer_to_number = if currency_sign_index < first_num_index { placeholder_value . chars () . next_back () . unwrap () } else if currency_sign_index > last_num_index { placeholder_value . chars () . next () . unwrap () } else { return Err (DataError :: custom ("Currency sign must not be in the middle of the pattern" ,)) ; } ; Ok (if letters_set . as_borrowed () . contains (char_closer_to_number) { PatternSelection :: StandardAlphaNextToNumber } else { PatternSelection :: Standard } ,) }
+};
+}

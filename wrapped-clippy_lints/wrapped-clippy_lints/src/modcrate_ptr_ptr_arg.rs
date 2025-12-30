@@ -1,0 +1,41 @@
+// Generated module macro for crate::ptr::ptr_arg
+macro_rules! Modcrate_ptr_ptr_arg {
+() => {
+        Depcrate_ptr_ptr_arguse_9012!();
+        Depcrate_ptr_ptr_arguse_9013!();
+        Depcrate_ptr_ptr_arguse_9014!();
+        Depcrate_ptr_ptr_arguse_9015!();
+        Depcrate_ptr_ptr_arguse_9016!();
+        Depcrate_ptr_ptr_arguse_9017!();
+        Depcrate_ptr_ptr_arguse_9018!();
+        Depcrate_ptr_ptr_arguse_9019!();
+        Depcrate_ptr_ptr_arguse_9020!();
+        Depcrate_ptr_ptr_arguse_9021!();
+        Depcrate_ptr_ptr_arguse_9022!();
+        Depcrate_ptr_ptr_arguse_9023!();
+        Depcrate_ptr_ptr_arguse_9024!();
+        Depcrate_ptr_ptr_arguse_9025!();
+        Depcrate_ptr_ptr_arguse_9026!();
+        Depcrate_ptr_ptr_arguse_9027!();
+        Depcrate_ptr_ptr_arguse_9028!();
+        Depcrate_ptr_ptr_arguse_9029!();
+        Depcrate_ptr_ptr_arguse_9030!();
+        Depcrate_ptr_ptr_arguse_9031!();
+        Depcrate_ptr_ptr_arguse_9032!();
+        Depcrate_ptr_ptr_argcheck_body!();
+        Depcrate_ptr_ptr_argcheck_trait_item!();
+        Depcrate_ptr_ptr_argPtrArgResult!();
+        Depcrate_ptr_ptr_argPtrArgReplacement!();
+        Depcrate_ptr_ptr_argPtrArg!();
+        Depcrate_ptr_ptr_argimpl_9038!();
+        Depcrate_ptr_ptr_argRefPrefix!();
+        Depcrate_ptr_ptr_argimpl_9040!();
+        Depcrate_ptr_ptr_argDerefTyDisplay!();
+        Depcrate_ptr_ptr_argimpl_9042!();
+        Depcrate_ptr_ptr_argDerefTy!();
+        Depcrate_ptr_ptr_argimpl_9044!();
+        Depcrate_ptr_ptr_argcheck_fn_args!();
+        Depcrate_ptr_ptr_argcheck_ptr_arg_usage!();
+        Depcrate_ptr_ptr_argmatches_preds!();
+    };
+}

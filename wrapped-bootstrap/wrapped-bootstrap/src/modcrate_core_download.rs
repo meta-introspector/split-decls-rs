@@ -1,0 +1,45 @@
+// Generated module macro for crate::core::download
+macro_rules! Modcrate_core_download {
+() => {
+        Depcrate_core_downloaduse_1224!();
+        Depcrate_core_downloaduse_1225!();
+        Depcrate_core_downloaduse_1226!();
+        Depcrate_core_downloaduse_1227!();
+        Depcrate_core_downloaduse_1228!();
+        Depcrate_core_downloaduse_1229!();
+        Depcrate_core_downloaduse_1230!();
+        Depcrate_core_downloaduse_1231!();
+        Depcrate_core_downloaduse_1232!();
+        Depcrate_core_downloaduse_1233!();
+        Depcrate_core_downloaduse_1234!();
+        Depcrate_core_downloaduse_1235!();
+        Depcrate_core_downloaduse_1236!();
+        Depcrate_core_downloaduse_1237!();
+        Depcrate_core_downloadSHOULD_FIX_BINS_AND_DYLIBS!();
+        Depcrate_core_downloadextract_curl_version!();
+        Depcrate_core_downloadimpl_1240!();
+        Depcrate_core_downloadrecorded_entries!();
+        Depcrate_core_downloadDownloadSource!();
+        Depcrate_core_downloadimpl_1243!();
+        Depcrate_core_downloadDownloadContext!();
+        Depcrate_core_downloadimpl_1245!();
+        Depcrate_core_downloadimpl_1246!();
+        Depcrate_core_downloadpath_is_dylib!();
+        Depcrate_core_downloadis_download_ci_available!();
+        Depcrate_core_downloadmaybe_download_rustfmt!();
+        Depcrate_core_downloadmaybe_download_rustfmt!();
+        Depcrate_core_downloaddownload_beta_toolchain!();
+        Depcrate_core_downloaddownload_beta_toolchain!();
+        Depcrate_core_downloaddownload_toolchain!();
+        Depcrate_core_downloadremove!();
+        Depcrate_core_downloadfix_bin_or_dylib!();
+        Depcrate_core_downloadshould_fix_bins_and_dylibs!();
+        Depcrate_core_downloaddownload_component!();
+        Depcrate_core_downloadverify!();
+        Depcrate_core_downloadunpack!();
+        Depcrate_core_downloaddownload_file!();
+        Depcrate_core_downloadtempdir!();
+        Depcrate_core_downloaddownload_http_with_retries!();
+        Depcrate_core_downloadcurl_version!();
+    };
+}

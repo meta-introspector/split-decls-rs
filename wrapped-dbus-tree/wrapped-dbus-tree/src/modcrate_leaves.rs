@@ -1,0 +1,43 @@
+// Generated module macro for crate::leaves
+macro_rules! Modcrate_leaves {
+() => {
+        Depcrate_leavesuse_45!();
+        Depcrate_leavesuse_46!();
+        Depcrate_leavesuse_47!();
+        Depcrate_leavesuse_48!();
+        Depcrate_leavesuse_49!();
+        Depcrate_leavesuse_50!();
+        Depcrate_leavesuse_51!();
+        Depcrate_leavesDebugMethod!();
+        Depcrate_leavesimpl_53!();
+        Depcrate_leavesDebugGetProp!();
+        Depcrate_leavesimpl_55!();
+        Depcrate_leavesDebugSetProp!();
+        Depcrate_leavesimpl_57!();
+        Depcrate_leavesMethod!();
+        Depcrate_leavesimpl_59!();
+        Depcrate_leavesimpl_60!();
+        Depcrate_leavesnew_method!();
+        Depcrate_leavesSignal!();
+        Depcrate_leavesimpl_63!();
+        Depcrate_leavesimpl_64!();
+        Depcrate_leavesnew_signal!();
+        Depcrate_leavesEmitsChangedSignal!();
+        Depcrate_leavesAccess!();
+        Depcrate_leavesimpl_68!();
+        Depcrate_leavesprop_append_dict!();
+        Depcrate_leavesProperty!();
+        Depcrate_leavesimpl_71!();
+        Depcrate_leavesimpl_72!();
+        Depcrate_leavesimpl_73!();
+        Depcrate_leavesimpl_74!();
+        Depcrate_leavesimpl_75!();
+        Depcrate_leavesimpl_76!();
+        Depcrate_leavesimpl_77!();
+        Depcrate_leavesnew_property!();
+        Depcrate_leavestest_prop_handlers!();
+        Depcrate_leavestest_get_managed_objects!();
+        Depcrate_leavestest_set_prop!();
+        Depcrate_leavestest_sync_prop!();
+    };
+}

@@ -1,0 +1,9 @@
+// Generated macro for delimited (function)
+macro_rules! Depcrate_combinator_sequencedelimited {
+() => {
+// Module: crate::combinator::sequence
+// Provides: {"delimited"}
+// Dependencies: {}
+# [doc = " Sequence three parsers, only returning the output of the second."] # [doc = ""] # [doc = " See also [`seq`] to generalize this across any number of fields."] # [doc = ""] # [doc = " # Example"] # [doc = ""] # [doc = " ```rust"] # [doc = " # use winnow::{error::ErrMode, error::Needed};"] # [doc = " # use winnow::error::Needed::Size;"] # [doc = " # use winnow::prelude::*;"] # [doc = " use winnow::combinator::delimited;"] # [doc = ""] # [doc = " fn parser<'i>(input: &mut &'i str) -> ModalResult<&'i str> {"] # [doc = "     delimited(\"(\", \"abc\", \")\").parse_next(input)"] # [doc = " }"] # [doc = ""] # [doc = " assert_eq!(parser.parse_peek(\"(abc)\"), Ok((\"\", \"abc\")));"] # [doc = " assert_eq!(parser.parse_peek(\"(abc)def\"), Ok((\"def\", \"abc\")));"] # [doc = " assert!(parser.parse_peek(\"\").is_err());"] # [doc = " assert!(parser.parse_peek(\"123\").is_err());"] # [doc = " ```"] # [doc (alias = "between")] # [doc (alias = "padded")] pub fn delimited < Input , Ignored1 , Output , Ignored2 , Error , IgnoredParser1 , ParseNext , IgnoredParser2 , > (mut ignored1 : IgnoredParser1 , mut parser : ParseNext , mut ignored2 : IgnoredParser2 ,) -> impl Parser < Input , Output , Error > where Input : Stream , Error : ParserError < Input > , IgnoredParser1 : Parser < Input , Ignored1 , Error > , ParseNext : Parser < Input , Output , Error > , IgnoredParser2 : Parser < Input , Ignored2 , Error > , { trace ("delimited" , move | input : & mut Input | { let _ = ignored1 . parse_next (input) ? ; let o2 = parser . parse_next (input) ? ; ignored2 . parse_next (input) . map (| _ | o2) }) }
+};
+}

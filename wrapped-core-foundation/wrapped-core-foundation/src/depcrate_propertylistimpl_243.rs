@@ -1,0 +1,9 @@
+// Generated macro for impl_243 (impl)
+macro_rules! Depcrate_propertylistimpl_243 {
+() => {
+// Module: crate::propertylist
+// Provides: {"impl_243"}
+// Dependencies: {}
+impl CFPropertyList { # [doc = " Try to downcast the [`CFPropertyList`] to a subclass. Checking if the instance is the"] # [doc = " correct subclass happens at runtime and `None` is returned if it is not the correct type."] # [doc = " Works similar to [`Box::downcast`] and [`CFType::downcast`]."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " # use core_foundation::string::CFString;"] # [doc = " # use core_foundation::propertylist::{CFPropertyList, CFPropertyListSubClass};"] # [doc = " #"] # [doc = " // Create a string."] # [doc = " let string: CFString = CFString::from_static_string(\"FooBar\");"] # [doc = " // Cast it up to a property list."] # [doc = " let propertylist: CFPropertyList = string.to_CFPropertyList();"] # [doc = " // Cast it down again."] # [doc = " assert_eq!(propertylist.downcast::<CFString>().unwrap().to_string(), \"FooBar\");"] # [doc = " ```"] # [doc = ""] # [doc = " [`CFPropertyList`]: struct.CFPropertyList.html"] # [doc = " [`Box::downcast`]: https://doc.rust-lang.org/std/boxed/struct.Box.html#method.downcast"] pub fn downcast < T : CFPropertyListSubClass > (& self) -> Option < T > { if self . instance_of :: < T > () { unsafe { let subclass_ref = T :: Ref :: from_void_ptr (self . 0) ; Some (T :: wrap_under_get_rule (subclass_ref)) } } else { None } } # [doc = " Similar to [`downcast`], but consumes self and can thus avoid touching the retain count."] # [doc = ""] # [doc = " [`downcast`]: #method.downcast"] pub fn downcast_into < T : CFPropertyListSubClass > (self) -> Option < T > { if self . instance_of :: < T > () { unsafe { let subclass_ref = T :: Ref :: from_void_ptr (self . 0) ; mem :: forget (self) ; Some (T :: wrap_under_create_rule (subclass_ref)) } } else { None } } }
+};
+}

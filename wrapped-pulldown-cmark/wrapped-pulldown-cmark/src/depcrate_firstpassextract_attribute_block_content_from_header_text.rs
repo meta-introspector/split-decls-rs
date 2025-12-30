@@ -1,0 +1,9 @@
+// Generated macro for extract_attribute_block_content_from_header_text (function)
+macro_rules! Depcrate_firstpassextract_attribute_block_content_from_header_text {
+() => {
+// Module: crate::firstpass
+// Provides: {"extract_attribute_block_content_from_header_text"}
+// Dependencies: {}
+# [doc = " Split the usual heading content range and the content inside the trailing attribute block."] # [doc = ""] # [doc = " Returns `(leading_content_len, Option<trailing_attr_block_range>)`."] # [doc = ""] # [doc = " Note that `trailing_attr_block_range` will be empty range when the block"] # [doc = " is `{}`, since the range is content inside the wrapping `{` and `}`."] # [doc = ""] # [doc = " The closing `}` of an attribute block can have trailing whitespaces."] # [doc = " They are automatically trimmed when the attribute block is being searched."] # [doc = ""] # [doc = " However, this method does not trim the trailing whitespaces of heading content."] # [doc = " It is callers' responsibility to trim them if necessary."] fn extract_attribute_block_content_from_header_text (heading : & [u8] ,) -> (usize , Option < Range < usize > >) { let heading_len = heading . len () ; let mut ix = heading_len ; ix -= scan_rev_while (heading , | b | { b == b'\n' || b == b'\r' || b == b' ' || b == b'\t' }) ; if ix == 0 { return (heading_len , None) ; } let attr_block_close = ix - 1 ; if heading . get (attr_block_close) != Some (& b'}') { return (heading_len , None) ; } ix -= 1 ; ix -= scan_rev_while (& heading [.. ix] , | b | { ! matches ! (b , b'{' | b'}' | b'<' | b'>' | b'\\' | b'\n' | b'\r') }) ; if ix == 0 { return (heading_len , None) ; } let attr_block_open = ix - 1 ; if heading [attr_block_open] != b'{' { return (heading_len , None) ; } (attr_block_open , Some (ix .. attr_block_close)) }
+};
+}

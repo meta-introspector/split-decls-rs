@@ -1,0 +1,48 @@
+// Generated module macro for crate
+macro_rules! Modcrate {
+() => {
+        Depcratehazmat!();
+        Depcrateuse_28!();
+        Depcrateuse_29!();
+        Depcrateuse_30!();
+        Depcrateuse_31!();
+        Depcrateuse_32!();
+        Depcrateuse_33!();
+        Depcrateuse_34!();
+        DepcrateBlock!();
+        DepcrateParBlocks!();
+        DepcrateOutput!();
+        DepcrateOutputSize!();
+        DepcrateKey!();
+        DepcrateIv!();
+        DepcrateAddBlockSize!();
+        DepcrateSubBlockSize!();
+        DepcrateBlockSizeUser!();
+        Depcrateimpl_44!();
+        Depcrateimpl_45!();
+        DepcrateBlockSizes!();
+        Depcrateimpl_47!();
+        Depcratesealed!();
+        DepcrateParBlocksSizeUser!();
+        DepcrateOutputSizeUser!();
+        DepcrateKeySizeUser!();
+        DepcrateIvSizeUser!();
+        DepcrateInnerUser!();
+        DepcrateReset!();
+        DepcrateAlgorithmName!();
+        DepcrateKeyInit!();
+        DepcrateKeyIvInit!();
+        DepcrateInnerInit!();
+        DepcrateInnerIvInit!();
+        DepcrateIvState!();
+        Depcrateimpl_61!();
+        Depcrateimpl_62!();
+        Depcrateimpl_63!();
+        DepcrateInvalidLength!();
+        Depcrateimpl_65!();
+        Depcrateimpl_66!();
+        DepcrateWeakKeyError!();
+        Depcrateimpl_68!();
+        Depcrateimpl_69!();
+    };
+}

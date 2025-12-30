@@ -1,0 +1,9 @@
+// Generated macro for impl_353 (impl)
+macro_rules! Depcrate_decompression_bodyimpl_353 {
+() => {
+// Module: crate::decompression::body
+// Provides: {"impl_353"}
+// Dependencies: {}
+impl < B > Body for DecompressionBody < B > where B : Body , B :: Error : Into < BoxError > , { type Data = Bytes ; type Error = BoxError ; fn poll_frame (self : Pin < & mut Self > , cx : & mut Context < '_ > ,) -> Poll < Option < Result < http_body :: Frame < Self :: Data > , Self :: Error > > > { match self . project () . inner . project () { # [cfg (feature = "decompression-gzip")] BodyInnerProj :: Gzip { inner } => inner . poll_frame (cx) , # [cfg (feature = "decompression-deflate")] BodyInnerProj :: Deflate { inner } => inner . poll_frame (cx) , # [cfg (feature = "decompression-br")] BodyInnerProj :: Brotli { inner } => inner . poll_frame (cx) , # [cfg (feature = "decompression-zstd")] BodyInnerProj :: Zstd { inner } => inner . poll_frame (cx) , BodyInnerProj :: Identity { inner } => match ready ! (inner . poll_frame (cx)) { Some (Ok (frame)) => { let frame = frame . map_data (| mut buf | buf . copy_to_bytes (buf . remaining ())) ; Poll :: Ready (Some (Ok (frame))) } Some (Err (err)) => Poll :: Ready (Some (Err (err . into ()))) , None => Poll :: Ready (None) , } , # [cfg (not (feature = "decompression-gzip"))] BodyInnerProj :: Gzip { inner } => match inner . 0 { } , # [cfg (not (feature = "decompression-deflate"))] BodyInnerProj :: Deflate { inner } => match inner . 0 { } , # [cfg (not (feature = "decompression-br"))] BodyInnerProj :: Brotli { inner } => match inner . 0 { } , # [cfg (not (feature = "decompression-zstd"))] BodyInnerProj :: Zstd { inner } => match inner . 0 { } , } } fn size_hint (& self) -> SizeHint { match self . inner { BodyInner :: Identity { ref inner } => inner . size_hint () , _ => SizeHint :: default () , } } }
+};
+}

@@ -1,0 +1,51 @@
+// Generated module macro for crate
+macro_rules! Modcrate {
+() => {
+        Depcrateuse_1!();
+        Depcrateuse_2!();
+        Depcrateuse_3!();
+        Depcrateuse_4!();
+        Depcrateuse_5!();
+        Depcrateuse_6!();
+        Depcrateuse_7!();
+        Depcrateuse_8!();
+        Depcrateuse_9!();
+        Depcrateuse_10!();
+        Depcrateuse_11!();
+        DepcrateDependencyGraph!();
+        DepcrateCli!();
+        DepcrateCommands!();
+        DepcrateIncrementalBootstrap!();
+        Depcrateimpl_16!();
+        Depcratescan_output2_binaries!();
+        Depcraterun_binary!();
+        Depcratemain!();
+        Depcrateanalyze_binary_dependencies!();
+        Depcratefind_binary_in_output2!();
+        DepcrateTokenVisitor!();
+        Depcrateimpl_23!();
+        DepcrateImportVisitor!();
+        Depcrateimpl_25!();
+        Depcratescan_output2_for_tokens!();
+        Depcratescan_decls_for_tokens!();
+        Depcrategenerate_dependency_graph!();
+        DepcrateDepNode!();
+        DepcrateOutput2Index!();
+        Depcrateimpl_31!();
+        DepcrateDepCache!();
+        Depcrateimpl_33!();
+        DepcrateCachedNode!();
+        Depcraterecursive_dependency_analysis!();
+        Depcrategenerate_evaluation_result!();
+        DepcrateEvalManifest!();
+        Depcratetopological_sort_deps!();
+        Depcratehash_content!();
+        Depcrateextract_tokens_from_content!();
+        Depcrateprint_dependency_graph!();
+        Depcrateprint_tree!();
+        Depcratetest_evaluation!();
+        Depcrateextract_imports_and_content!();
+        Depcratefind_missing_types!();
+        Depcrateresolve_dependencies_recursive!();
+    };
+}

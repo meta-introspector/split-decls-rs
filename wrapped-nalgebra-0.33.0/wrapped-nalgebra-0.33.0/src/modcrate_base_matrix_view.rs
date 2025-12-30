@@ -1,0 +1,53 @@
+// Generated module macro for crate::base::matrix_view
+macro_rules! Modcrate_base_matrix_view {
+() => {
+        Depcrate_base_matrix_viewuse_960!();
+        Depcrate_base_matrix_viewuse_961!();
+        Depcrate_base_matrix_viewuse_962!();
+        Depcrate_base_matrix_viewuse_963!();
+        Depcrate_base_matrix_viewuse_964!();
+        Depcrate_base_matrix_viewuse_965!();
+        Depcrate_base_matrix_viewuse_966!();
+        Depcrate_base_matrix_viewuse_967!();
+        Depcrate_base_matrix_viewuse_968!();
+        Depcrate_base_matrix_viewuse_969!();
+        Depcrate_base_matrix_viewuse_970!();
+        Depcrate_base_matrix_viewview_storage_impl!();
+        Depcrate_base_matrix_viewmacro_972!();
+        Depcrate_base_matrix_viewmacro_973!();
+        Depcrate_base_matrix_viewimpl_974!();
+        Depcrate_base_matrix_viewimpl_975!();
+        Depcrate_base_matrix_viewimpl_976!();
+        Depcrate_base_matrix_viewstorage_impl!();
+        Depcrate_base_matrix_viewmacro_978!();
+        Depcrate_base_matrix_viewimpl_979!();
+        Depcrate_base_matrix_viewimpl_980!();
+        Depcrate_base_matrix_viewimpl_981!();
+        Depcrate_base_matrix_viewimpl_982!();
+        Depcrate_base_matrix_viewimpl_983!();
+        Depcrate_base_matrix_viewimpl_984!();
+        Depcrate_base_matrix_viewmatrix_view_impl!();
+        Depcrate_base_matrix_viewMatrixSlice!();
+        Depcrate_base_matrix_viewMatrixView!();
+        Depcrate_base_matrix_viewMatrixSliceMut!();
+        Depcrate_base_matrix_viewMatrixViewMut!();
+        Depcrate_base_matrix_viewimpl_990!();
+        Depcrate_base_matrix_viewimpl_991!();
+        Depcrate_base_matrix_viewDimRange!();
+        Depcrate_base_matrix_viewSliceRange!();
+        Depcrate_base_matrix_viewimpl_994!();
+        Depcrate_base_matrix_viewimpl_995!();
+        Depcrate_base_matrix_viewimpl_996!();
+        Depcrate_base_matrix_viewimpl_997!();
+        Depcrate_base_matrix_viewimpl_998!();
+        Depcrate_base_matrix_viewimpl_999!();
+        Depcrate_base_matrix_viewimpl_1000!();
+        Depcrate_base_matrix_viewimpl_1001!();
+        Depcrate_base_matrix_viewimpl_1002!();
+        Depcrate_base_matrix_viewimpl_1003!();
+        Depcrate_base_matrix_viewimpl_1004!();
+        Depcrate_base_matrix_viewimpl_1005!();
+        Depcrate_base_matrix_viewimpl_1006!();
+        Depcrate_base_matrix_viewimpl_1007!();
+    };
+}

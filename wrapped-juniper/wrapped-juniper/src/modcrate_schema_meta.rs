@@ -1,0 +1,39 @@
+// Generated module macro for crate::schema::meta
+macro_rules! Modcrate_schema_meta {
+() => {
+        Depcrate_schema_metause_394!();
+        Depcrate_schema_metause_395!();
+        Depcrate_schema_metause_396!();
+        Depcrate_schema_metause_397!();
+        Depcrate_schema_metaDeprecationStatus!();
+        Depcrate_schema_metaimpl_399!();
+        Depcrate_schema_metaScalarMeta!();
+        Depcrate_schema_metaimpl_401!();
+        Depcrate_schema_metaInputValueParseFn!();
+        Depcrate_schema_metaScalarTokenParseFn!();
+        Depcrate_schema_metaListMeta!();
+        Depcrate_schema_metaimpl_405!();
+        Depcrate_schema_metaNullableMeta!();
+        Depcrate_schema_metaimpl_407!();
+        Depcrate_schema_metaObjectMeta!();
+        Depcrate_schema_metaimpl_409!();
+        Depcrate_schema_metaEnumMeta!();
+        Depcrate_schema_metaimpl_411!();
+        Depcrate_schema_metaInterfaceMeta!();
+        Depcrate_schema_metaimpl_413!();
+        Depcrate_schema_metaUnionMeta!();
+        Depcrate_schema_metaimpl_415!();
+        Depcrate_schema_metaInputObjectMeta!();
+        Depcrate_schema_metaimpl_417!();
+        Depcrate_schema_metaPlaceholderMeta!();
+        Depcrate_schema_metaField!();
+        Depcrate_schema_metaimpl_420!();
+        Depcrate_schema_metaArgument!();
+        Depcrate_schema_metaimpl_422!();
+        Depcrate_schema_metaEnumValue!();
+        Depcrate_schema_metaimpl_424!();
+        Depcrate_schema_metaMetaType!();
+        Depcrate_schema_metaimpl_426!();
+        Depcrate_schema_metatry_parse_fn!();
+    };
+}

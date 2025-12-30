@@ -1,0 +1,9 @@
+// Generated macro for use_3594 (pub_use)
+macro_rules! Depcrate_generateduse_3594 {
+() => {
+// Module: crate::generated
+// Provides: {"use_3594"}
+// Dependencies: {}
+# [cfg (feature = "cssmtype")] pub use self :: __cssmtype :: CSSM_ALGCLASS_MAC ;
+};
+}

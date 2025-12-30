@@ -1,0 +1,46 @@
+// Generated module macro for crate
+macro_rules! Modcrate {
+() => {
+        Depcrateother_1!();
+        Depcrateother_2!();
+        Depcrateother_3!();
+        Depcrateother_4!();
+        Depcrateuse_5!();
+        Depcrateuse_6!();
+        Depcrateuse_7!();
+        Depcrateuse_8!();
+        Depcrateuse_9!();
+        Depcrateuse_10!();
+        Depcrateuse_11!();
+        Depcrateuse_12!();
+        Depcrateserialize!();
+        DepcrateSer!();
+        Depcrateimpl_15!();
+        Depcrateimpl_16!();
+        Depcrateimpl_17!();
+        Depcrateimpl_18!();
+        Depcratedisplay_into_buffer!();
+        Depcratedeserialize!();
+        DepcrateDe!();
+        Depcrateimpl_22!();
+        Depcrateimpl_23!();
+        Depcrateimpl_24!();
+        Depcrateimpl_25!();
+        DepcrateSerde!();
+        DepcrateSerdeUrl!();
+        Depcrateimpl_28!();
+        Depcrateimpl_29!();
+        Depcrateimpl_30!();
+        Depcrateimpl_31!();
+        Depcrateimpl_32!();
+        Depcrateimpl_33!();
+        Depcrateimpl_34!();
+        Depcratetest_ser_de_url!();
+        Depcratetest_derive_deserialize_with_for_url!();
+        Depcratetest_derive_deserialize_with_for_option_url!();
+        Depcratetest_derive_serialize_with_for_url!();
+        Depcratetest_derive_serialize_with_for_option_url!();
+        Depcratetest_derive_with_for_url!();
+        Depcratetest_host!();
+    };
+}

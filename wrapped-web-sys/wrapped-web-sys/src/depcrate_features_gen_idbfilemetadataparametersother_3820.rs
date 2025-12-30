@@ -1,0 +1,9 @@
+// Generated macro for other_3820 (other)
+macro_rules! Depcrate_features_gen_IdbFileMetadataParametersother_3820 {
+() => {
+// Module: crate::features::gen_IdbFileMetadataParameters
+// Provides: {"other_3820"}
+// Dependencies: {}
+# [wasm_bindgen] extern "C" { # [wasm_bindgen (extends = :: js_sys :: Object , js_name = IDBFileMetadataParameters)] # [derive (Debug , Clone , PartialEq , Eq)] # [doc = "The `IdbFileMetadataParameters` dictionary."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `IdbFileMetadataParameters`*"] # [deprecated] pub type IdbFileMetadataParameters ; # [doc = "Get the `lastModified` field of this object."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `IdbFileMetadataParameters`*"] # [deprecated] # [wasm_bindgen (method , getter = "lastModified")] pub fn get_last_modified (this : & IdbFileMetadataParameters) -> Option < bool > ; # [doc = "Change the `lastModified` field of this object."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `IdbFileMetadataParameters`*"] # [deprecated] # [wasm_bindgen (method , setter = "lastModified")] pub fn set_last_modified (this : & IdbFileMetadataParameters , val : bool) ; # [doc = "Get the `size` field of this object."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `IdbFileMetadataParameters`*"] # [deprecated] # [wasm_bindgen (method , getter = "size")] pub fn get_size (this : & IdbFileMetadataParameters) -> Option < bool > ; # [doc = "Change the `size` field of this object."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `IdbFileMetadataParameters`*"] # [deprecated] # [wasm_bindgen (method , setter = "size")] pub fn set_size (this : & IdbFileMetadataParameters , val : bool) ; }
+};
+}

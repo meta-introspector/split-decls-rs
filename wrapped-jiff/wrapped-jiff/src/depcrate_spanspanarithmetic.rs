@@ -1,0 +1,9 @@
+// Generated macro for SpanArithmetic (struct)
+macro_rules! Depcrate_spanSpanArithmetic {
+() => {
+// Module: crate::span
+// Provides: {"SpanArithmetic"}
+// Dependencies: {}
+# [doc = " Options for [`Span::checked_add`] and [`Span::checked_sub`]."] # [doc = ""] # [doc = " This type provides a way to ergonomically add two spans with an optional"] # [doc = " relative datetime. Namely, a relative datetime is only needed when at least"] # [doc = " one of the two spans being added (or subtracted) has a non-zero calendar"] # [doc = " unit (years, months, weeks or days). Otherwise, an error will be returned."] # [doc = ""] # [doc = " Callers may use [`SpanArithmetic::days_are_24_hours`] to opt into 24-hour"] # [doc = " invariant days (and 7-day weeks) without providing a relative datetime."] # [doc = ""] # [doc = " The main way to construct values of this type is with its `From` trait"] # [doc = " implementations:"] # [doc = ""] # [doc = " * `From<Span> for SpanArithmetic` adds (or subtracts) the given span to the"] # [doc = " receiver in [`Span::checked_add`] (or [`Span::checked_sub`])."] # [doc = " * `From<(Span, civil::Date)> for SpanArithmetic` adds (or subtracts)"] # [doc = " the given span to the receiver in [`Span::checked_add`] (or"] # [doc = " [`Span::checked_sub`]), relative to the given date. There are also `From`"] # [doc = " implementations for `civil::DateTime`, `Zoned` and [`SpanRelativeTo`]."] # [doc = ""] # [doc = " # Example"] # [doc = ""] # [doc = " ```"] # [doc = " use jiff::ToSpan;"] # [doc = ""] # [doc = " assert_eq!("] # [doc = "     1.hour().checked_add(30.minutes())?,"] # [doc = "     1.hour().minutes(30).fieldwise(),"] # [doc = " );"] # [doc = ""] # [doc = " # Ok::<(), Box<dyn std::error::Error>>(())"] # [doc = " ```"] # [derive (Clone , Copy , Debug)] pub struct SpanArithmetic < 'a > { duration : Duration , relative : Option < SpanRelativeTo < 'a > > , }
+};
+}

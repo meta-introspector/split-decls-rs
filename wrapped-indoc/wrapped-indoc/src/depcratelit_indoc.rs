@@ -1,0 +1,9 @@
+// Generated macro for lit_indoc (function)
+macro_rules! Depcratelit_indoc {
+() => {
+// Module: crate
+// Provides: {"lit_indoc"}
+// Dependencies: {}
+fn lit_indoc (token : TokenTree , mode : Macro , preserve_empty_first_line : bool) -> Result < Literal > { let span = token . span () ; let mut single_token = Some (token) ; while let Some (TokenTree :: Group (group)) = single_token { single_token = if group . delimiter () == Delimiter :: None { let mut token_iter = group . stream () . into_iter () ; token_iter . next () . xor (token_iter . next ()) } else { None } ; } let single_token = single_token . ok_or_else (| | Error :: new (span , "argument must be a single string literal")) ? ; let repr = single_token . to_string () ; let is_string = repr . starts_with ('"') || repr . starts_with ('r') ; let is_byte_string = repr . starts_with ("b\"") || repr . starts_with ("br") ; let is_c_string = repr . starts_with ("c\"") || repr . starts_with ("cr") ; if ! is_string && ! is_byte_string && ! is_c_string { return Err (Error :: new (span , "argument must be a single string literal")) ; } if let Some (restricted_kind) = if is_byte_string { Some ("byte strings") } else if is_c_string { Some ("C-strings") } else { None } { match mode { Macro :: Indoc => { } Macro :: Format | Macro :: Print | Macro :: Eprint | Macro :: Write => { return Err (Error :: new (span , format ! ("{restricted_kind} are not supported in formatting macros") ,)) ; } Macro :: Concat => { return Err (Error :: new (span , format ! ("{restricted_kind} are not supported in concat macro") ,)) ; } } } let begin = repr . find ('"') . unwrap () + 1 ; let end = repr . rfind ('"') . unwrap () ; let repr = format ! ("{open}{content}{close}" , open = & repr [.. begin] , content = do_unindent (& repr [begin .. end] , preserve_empty_first_line) , close = & repr [end ..] ,) ; let mut lit = Literal :: from_str (& repr) . unwrap () ; lit . set_span (span) ; Ok (lit) }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for impl_422 (impl)
+macro_rules! Depcrate_weekimpl_422 {
+() => {
+// Module: crate::week
+// Provides: {"impl_422"}
+// Dependencies: {}
+impl WeekCalculator { pub (crate) const ISO : Self = Self { first_weekday : Weekday :: Monday , min_week_days : 4 , } ; # [doc = " Returns the zero based index of `weekday` vs this calendar's start of week."] fn weekday_index (self , weekday : Weekday) -> i8 { (7 + (weekday as i8) - (self . first_weekday as i8)) % 7 } # [doc = " Computes & returns the week of given month/year according to `calendar`."] # [doc = ""] # [doc = " # Arguments"] # [doc = "  - calendar: Calendar information used to compute the week number."] # [doc = "  - num_days_in_previous_unit: The number of days in the preceding month/year."] # [doc = "  - num_days_in_unit: The number of days in the month/year."] # [doc = "  - day: 1-based day of month/year."] # [doc = "  - week_day: The weekday of `day`.."] # [doc = ""] # [doc = " # Error"] # [doc = " If num_days_in_unit/num_days_in_previous_unit < MIN_UNIT_DAYS"] pub (crate) fn week_of (self , num_days_in_previous_unit : u16 , num_days_in_unit : u16 , day : u16 , week_day : Weekday ,) -> Result < WeekOf , RangeError > { let current = UnitInfo :: new (add_to_weekday (week_day , 1 - i32 :: from (day)) , num_days_in_unit ,) ? ; match current . relative_week (self , day) { RelativeWeek :: LastWeekOfPreviousUnit => { let previous = UnitInfo :: new (add_to_weekday (current . first_day , - i32 :: from (num_days_in_previous_unit)) , num_days_in_previous_unit ,) ? ; Ok (WeekOf { week : previous . num_weeks (self) , unit : RelativeUnit :: Previous , }) } RelativeWeek :: WeekOfCurrentUnit (w) => Ok (WeekOf { week : w , unit : RelativeUnit :: Current , }) , RelativeWeek :: FirstWeekOfNextUnit => Ok (WeekOf { week : 1 , unit : RelativeUnit :: Next , }) , } } }
+};
+}

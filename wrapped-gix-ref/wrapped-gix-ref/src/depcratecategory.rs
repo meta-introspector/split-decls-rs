@@ -1,0 +1,9 @@
+// Generated macro for Category (enum)
+macro_rules! DepcrateCategory {
+() => {
+// Module: crate
+// Provides: {"Category"}
+// Dependencies: {}
+# [doc = " The various known categories of references."] # [doc = ""] # [doc = " This translates into a prefix containing all references of a given category."] # [derive (PartialEq , Eq , Debug , Hash , Ord , PartialOrd , Clone , Copy)] # [cfg_attr (feature = "serde" , derive (serde :: Serialize , serde :: Deserialize))] pub enum Category < 'a > { # [doc = " A tag in `refs/tags`"] Tag , # [doc = " A branch in `refs/heads`"] LocalBranch , # [doc = " A branch in `refs/remotes`"] RemoteBranch , # [doc = " A tag in `refs/notes`"] Note , # [doc = " Something outside `ref/` in the current worktree, typically `HEAD`."] PseudoRef , # [doc = " A `PseudoRef`, but referenced so that it will always refer to the main worktree by"] # [doc = " prefixing it with `main-worktree/`."] MainPseudoRef , # [doc = " Any reference that is prefixed with `main-worktree/refs/`"] MainRef , # [doc = " A `PseudoRef` in another _linked_ worktree, never in the main one, like `worktrees/<id>/HEAD`."] LinkedPseudoRef { # [doc = " The name of the worktree."] # [cfg_attr (feature = "serde" , serde (borrow))] name : & 'a BStr , } , # [doc = " Any reference that is prefixed with `worktrees/<id>/refs/`."] LinkedRef { # [doc = " The name of the worktree."] name : & 'a BStr , } , # [doc = " A ref that is private to each worktree (_linked_ or _main_), with `refs/bisect/` prefix"] Bisect , # [doc = " A ref that is private to each worktree (_linked_ or _main_), with `refs/rewritten/` prefix"] Rewritten , # [doc = " A ref that is private to each worktree (_linked_ or _main_), with `refs/worktree/` prefix"] WorktreePrivate , }
+};
+}

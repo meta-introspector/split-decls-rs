@@ -1,0 +1,9 @@
+// Generated macro for impl_2142 (impl)
+macro_rules! Depcrate_explicit_writeimpl_2142 {
+() => {
+// Module: crate::explicit_write
+// Provides: {"impl_2142"}
+// Dependencies: {}
+impl < 'tcx > LateLintPass < 'tcx > for ExplicitWrite { fn check_expr (& mut self , cx : & LateContext < 'tcx > , expr : & 'tcx Expr < '_ >) { if let ExprKind :: MethodCall (unwrap_fun , write_call , [] , _) = expr . kind && unwrap_fun . ident . name == sym :: unwrap && let ExprKind :: MethodCall (write_fun , write_recv , [write_arg] , _) = * look_in_block (cx , & write_call . kind) && let ExprKind :: Call (write_recv_path , []) = write_recv . kind && write_fun . ident . name == sym :: write_fmt && let Some (def_id) = write_recv_path . basic_res () . opt_def_id () { let (dest_name , prefix) = match cx . tcx . get_diagnostic_name (def_id) { Some (sym :: io_stdout) => ("stdout" , "") , Some (sym :: io_stderr) => ("stderr" , "e") , _ => return , } ; let Some (format_args) = self . format_args . get (cx , write_arg , ExpnId :: root ()) else { return ; } ; if is_in_test (cx . tcx , expr . hir_id) { return ; } let calling_macro = if is_expn_of (write_call . span , sym :: writeln) . is_some () { Some ("writeln") } else if is_expn_of (write_call . span , sym :: write) . is_some () { Some ("write") } else { None } ; let (used , sugg_mac) = if let Some (macro_name) = calling_macro { (format ! ("{macro_name}!({dest_name}(), ...)") , macro_name . replace ("write" , "print") ,) } else { (format ! ("{dest_name}().write_fmt(...)") , "print" . into ()) } ; let mut applicability = Applicability :: MachineApplicable ; let inputs_snippet = snippet_with_applicability (cx , format_args_inputs_span (format_args) , ".." , & mut applicability) ; span_lint_and_sugg (cx , EXPLICIT_WRITE , expr . span , format ! ("use of `{used}.unwrap()`") , "try" , format ! ("{prefix}{sugg_mac}!({inputs_snippet})") , applicability ,) ; } } }
+};
+}

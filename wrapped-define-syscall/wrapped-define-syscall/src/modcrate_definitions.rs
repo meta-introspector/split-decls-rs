@@ -1,0 +1,46 @@
+// Generated module macro for crate::definitions
+macro_rules! Modcrate_definitions {
+() => {
+        Depcrate_definitionsuse_2!();
+        Depcrate_definitionsmacro_3!();
+        Depcrate_definitionsmacro_4!();
+        Depcrate_definitionsmacro_5!();
+        Depcrate_definitionsmacro_6!();
+        Depcrate_definitionsmacro_7!();
+        Depcrate_definitionsmacro_8!();
+        Depcrate_definitionsmacro_9!();
+        Depcrate_definitionsmacro_10!();
+        Depcrate_definitionsmacro_11!();
+        Depcrate_definitionsmacro_12!();
+        Depcrate_definitionsmacro_13!();
+        Depcrate_definitionsmacro_14!();
+        Depcrate_definitionsmacro_15!();
+        Depcrate_definitionsmacro_16!();
+        Depcrate_definitionsmacro_17!();
+        Depcrate_definitionsmacro_18!();
+        Depcrate_definitionsmacro_19!();
+        Depcrate_definitionsmacro_20!();
+        Depcrate_definitionsmacro_21!();
+        Depcrate_definitionsmacro_22!();
+        Depcrate_definitionsmacro_23!();
+        Depcrate_definitionsmacro_24!();
+        Depcrate_definitionsmacro_25!();
+        Depcrate_definitionsmacro_26!();
+        Depcrate_definitionsmacro_27!();
+        Depcrate_definitionsmacro_28!();
+        Depcrate_definitionsmacro_29!();
+        Depcrate_definitionsmacro_30!();
+        Depcrate_definitionsmacro_31!();
+        Depcrate_definitionsmacro_32!();
+        Depcrate_definitionsmacro_33!();
+        Depcrate_definitionsmacro_34!();
+        Depcrate_definitionsmacro_35!();
+        Depcrate_definitionsmacro_36!();
+        Depcrate_definitionsmacro_37!();
+        Depcrate_definitionsmacro_38!();
+        Depcrate_definitionsmacro_39!();
+        Depcrate_definitionsmacro_40!();
+        Depcrate_definitionsmacro_41!();
+        Depcrate_definitionsmacro_42!();
+    };
+}

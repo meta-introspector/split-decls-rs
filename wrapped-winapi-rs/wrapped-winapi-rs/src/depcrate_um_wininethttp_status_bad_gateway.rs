@@ -1,0 +1,9 @@
+// Generated macro for HTTP_STATUS_BAD_GATEWAY (const)
+macro_rules! Depcrate_um_wininetHTTP_STATUS_BAD_GATEWAY {
+() => {
+// Module: crate::um::wininet
+// Provides: {"HTTP_STATUS_BAD_GATEWAY"}
+// Dependencies: {}
+pub const HTTP_STATUS_BAD_GATEWAY : DWORD = 502 ;
+};
+}

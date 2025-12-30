@@ -1,0 +1,9 @@
+// Generated macro for impl_233 (impl)
+macro_rules! Depcrate_sliceimpl_233 {
+() => {
+// Module: crate::slice
+// Provides: {"impl_233"}
+// Dependencies: {}
+impl HalfFloatSliceExt for [bf16] { # [inline] fn reinterpret_cast (& self) -> & [u16] { transmute_ref ! (self) } # [inline] fn reinterpret_cast_mut (& mut self) -> & mut [u16] { transmute_mut ! (self) } # [inline] fn convert_from_f32_slice (& mut self , src : & [f32]) { assert_eq ! (self . len () , src . len () , "destination and source slices have different lengths") ; for (i , f) in src . iter () . enumerate () { self [i] = bf16 :: from_f32 (* f) ; } } # [inline] fn convert_from_f64_slice (& mut self , src : & [f64]) { assert_eq ! (self . len () , src . len () , "destination and source slices have different lengths") ; for (i , f) in src . iter () . enumerate () { self [i] = bf16 :: from_f64 (* f) ; } } # [inline] fn convert_to_f32_slice (& self , dst : & mut [f32]) { assert_eq ! (self . len () , dst . len () , "destination and source slices have different lengths") ; for (i , f) in self . iter () . enumerate () { dst [i] = f . to_f32 () ; } } # [inline] fn convert_to_f64_slice (& self , dst : & mut [f64]) { assert_eq ! (self . len () , dst . len () , "destination and source slices have different lengths") ; for (i , f) in self . iter () . enumerate () { dst [i] = f . to_f64 () ; } } # [cfg (any (feature = "alloc" , feature = "std"))] # [inline] # [allow (clippy :: uninit_vec)] fn to_f32_vec (& self) -> Vec < f32 > { let mut vec = vec ! [0f32 ; self . len ()] ; self . convert_to_f32_slice (& mut vec) ; vec } # [cfg (any (feature = "alloc" , feature = "std"))] # [inline] # [allow (clippy :: uninit_vec)] fn to_f64_vec (& self) -> Vec < f64 > { let mut vec = vec ! [0f64 ; self . len ()] ; self . convert_to_f64_slice (& mut vec) ; vec } }
+};
+}

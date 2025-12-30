@@ -1,0 +1,39 @@
+// Generated module macro for crate::config
+macro_rules! Modcrate_config {
+() => {
+        Depcrate_configuse_619!();
+        Depcrate_configuse_620!();
+        Depcrate_configuse_621!();
+        Depcrate_configuse_622!();
+        Depcrate_configuse_623!();
+        Depcrate_configuse_624!();
+        Depcrate_configuse_625!();
+        Depcrate_configuse_626!();
+        Depcrate_configtransport!();
+        Depcrate_configuse_650!();
+        Depcrate_configuse_651!();
+        Depcrate_configEndpointConfig!();
+        Depcrate_configimpl_653!();
+        Depcrate_configimpl_654!();
+        Depcrate_configimpl_655!();
+        Depcrate_configServerConfig!();
+        Depcrate_configimpl_657!();
+        Depcrate_configimpl_658!();
+        Depcrate_configimpl_659!();
+        Depcrate_configimpl_660!();
+        Depcrate_configValidationTokenConfig!();
+        Depcrate_configimpl_662!();
+        Depcrate_configimpl_663!();
+        Depcrate_configimpl_664!();
+        Depcrate_configClientConfig!();
+        Depcrate_configimpl_666!();
+        Depcrate_configimpl_667!();
+        Depcrate_configimpl_668!();
+        Depcrate_configConfigError!();
+        Depcrate_configimpl_670!();
+        Depcrate_configimpl_671!();
+        Depcrate_configTimeSource!();
+        Depcrate_configStdSystemTime!();
+        Depcrate_configimpl_674!();
+    };
+}

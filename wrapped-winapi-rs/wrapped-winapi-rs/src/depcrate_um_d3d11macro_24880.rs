@@ -1,0 +1,9 @@
+// Generated macro for macro_24880 (macro)
+macro_rules! Depcrate_um_d3d11macro_24880 {
+() => {
+// Module: crate::um::d3d11
+// Provides: {"macro_24880"}
+// Dependencies: {}
+ENUM ! { enum D3D11_BIND_FLAG { D3D11_BIND_VERTEX_BUFFER = 0x1 , D3D11_BIND_INDEX_BUFFER = 0x2 , D3D11_BIND_CONSTANT_BUFFER = 0x4 , D3D11_BIND_SHADER_RESOURCE = 0x8 , D3D11_BIND_STREAM_OUTPUT = 0x10 , D3D11_BIND_RENDER_TARGET = 0x20 , D3D11_BIND_DEPTH_STENCIL = 0x40 , D3D11_BIND_UNORDERED_ACCESS = 0x80 , D3D11_BIND_DECODER = 0x200 , D3D11_BIND_VIDEO_ENCODER = 0x400 , } }
+};
+}

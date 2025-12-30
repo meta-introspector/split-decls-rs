@@ -1,0 +1,45 @@
+// Generated module macro for crate::future::future::shared
+macro_rules! Modcrate_future_future_shared {
+() => {
+        Depcrate_future_future_shareduse_147!();
+        Depcrate_future_future_shareduse_148!();
+        Depcrate_future_future_shareduse_149!();
+        Depcrate_future_future_shareduse_150!();
+        Depcrate_future_future_shareduse_151!();
+        Depcrate_future_future_shareduse_152!();
+        Depcrate_future_future_shareduse_153!();
+        Depcrate_future_future_shareduse_154!();
+        Depcrate_future_future_shareduse_155!();
+        Depcrate_future_future_shareduse_156!();
+        Depcrate_future_future_shareduse_157!();
+        Depcrate_future_future_shareduse_158!();
+        Depcrate_future_future_sharedMutex!();
+        Depcrate_future_future_sharedMutex!();
+        Depcrate_future_future_sharedShared!();
+        Depcrate_future_future_sharedInner!();
+        Depcrate_future_future_sharedNotifier!();
+        Depcrate_future_future_sharedWeakShared!();
+        Depcrate_future_future_sharedimpl_165!();
+        Depcrate_future_future_sharedimpl_166!();
+        Depcrate_future_future_sharedimpl_167!();
+        Depcrate_future_future_sharedimpl_168!();
+        Depcrate_future_future_sharedFutureOrOutput!();
+        Depcrate_future_future_sharedimpl_170!();
+        Depcrate_future_future_sharedimpl_171!();
+        Depcrate_future_future_sharedIDLE!();
+        Depcrate_future_future_sharedPOLLING!();
+        Depcrate_future_future_sharedCOMPLETE!();
+        Depcrate_future_future_sharedPOISONED!();
+        Depcrate_future_future_sharedNULL_WAKER_KEY!();
+        Depcrate_future_future_sharedimpl_177!();
+        Depcrate_future_future_sharedimpl_178!();
+        Depcrate_future_future_sharedimpl_179!();
+        Depcrate_future_future_sharedimpl_180!();
+        Depcrate_future_future_sharedimpl_181!();
+        Depcrate_future_future_sharedimpl_182!();
+        Depcrate_future_future_sharedimpl_183!();
+        Depcrate_future_future_sharedimpl_184!();
+        Depcrate_future_future_sharedimpl_185!();
+        Depcrate_future_future_sharedimpl_186!();
+    };
+}

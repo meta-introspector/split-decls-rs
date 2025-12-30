@@ -1,0 +1,9 @@
+// Generated macro for PHTTP_SERVER_AUTHENTICATION_DIGEST_PARAMS (type)
+macro_rules! Depcrate_um_httpPHTTP_SERVER_AUTHENTICATION_DIGEST_PARAMS {
+() => {
+// Module: crate::um::http
+// Provides: {"PHTTP_SERVER_AUTHENTICATION_DIGEST_PARAMS"}
+// Dependencies: {}
+pub type PHTTP_SERVER_AUTHENTICATION_DIGEST_PARAMS = * mut HTTP_SERVER_AUTHENTICATION_DIGEST_PARAMS ;
+};
+}

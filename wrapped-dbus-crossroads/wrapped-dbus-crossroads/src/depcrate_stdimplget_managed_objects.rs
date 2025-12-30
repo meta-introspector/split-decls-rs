@@ -1,0 +1,9 @@
+// Generated macro for get_managed_objects (function)
+macro_rules! Depcrate_stdimplget_managed_objects {
+() => {
+// Module: crate::stdimpl
+// Provides: {"get_managed_objects"}
+// Dependencies: {}
+fn get_managed_objects (mut ctx : Context , cr : & mut Crossroads , _ : ()) -> Option < Context > { let parent = ctx . path () ; let children : Vec < dbus :: Path < 'static > > = cr . get_children (ctx . path () , false) . into_iter () . map (| child_path | { let mut x = String :: from (& * * parent) ; if ! x . ends_with ('/') { x . push_str ("/") ; } x . push_str (child_path) ; dbus :: Path :: from (x) . into_static () }) . collect () ; if children . len () == 0 { ctx . do_reply (| msg | { let x : PathPropMap = Default :: default () ; msg . append_all ((x ,)) ; }) ; return Some (ctx) ; } # [derive (Debug)] struct Temp { remaining : usize , temp_map : PathPropMap , octx : Option < Context > , } let r = Arc :: new (Mutex :: new (Temp { remaining : children . len () , temp_map : HashMap :: new () , octx : Some (ctx) , })) ; for subpath in children { let rclone = r . clone () ; let subpath_clone = subpath . clone () ; let octx = r . lock () . unwrap () . octx . take () ; get_all_for_path (& subpath , cr , octx , move | ictx , octx | { let mut rr = rclone . lock () . unwrap () ; if rr . octx . is_none () { rr . octx = octx . take () ; } let ifaces = std :: mem :: replace (& mut ictx . ifaces , HashMap :: new ()) ; rr . temp_map . insert (subpath_clone , ifaces) ; rr . remaining -= 1 ; if rr . remaining > 0 { return ; } let mut octx = rr . octx . take () . unwrap () ; octx . do_reply (| msg | { msg . append_all ((& rr . temp_map ,)) ; }) ; rr . octx = Some (octx) ; }) . map (| octx | { let mut rr = r . lock () . unwrap () ; if rr . octx . is_none () { rr . octx = Some (octx) ; } }) ; } let mut rr = r . lock () . unwrap () ; rr . octx . take () }
+};
+}

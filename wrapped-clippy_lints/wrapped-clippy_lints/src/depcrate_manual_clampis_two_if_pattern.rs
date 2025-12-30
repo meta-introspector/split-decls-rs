@@ -1,0 +1,9 @@
+// Generated macro for is_two_if_pattern (function)
+macro_rules! Depcrate_manual_clampis_two_if_pattern {
+() => {
+// Module: crate::manual_clamp
+// Provides: {"is_two_if_pattern"}
+// Dependencies: {}
+# [doc = " Targets patterns like"] # [doc = ""] # [doc = " ```no_run"] # [doc = " # let (input, min, max) = (0, -3, 12);"] # [doc = ""] # [doc = " let mut x = input;"] # [doc = " if x < min { x = min; }"] # [doc = " if x > max { x = max; }"] # [doc = " ```"] fn is_two_if_pattern < 'tcx > (cx : & LateContext < 'tcx > , block : & 'tcx Block < 'tcx >) -> Vec < ClampSuggestion < 'tcx > > { block_stmt_with_last (block) . tuple_windows () . filter_map (| (maybe_set_first , maybe_set_second) | { if let StmtKind :: Expr (first_expr) = * maybe_set_first && let StmtKind :: Expr (second_expr) = * maybe_set_second && let Some (If { cond : first_cond , then : first_then , r#else : None , }) = If :: hir (first_expr) && let Some (If { cond : second_cond , then : second_then , r#else : None , }) = If :: hir (second_expr) && let ExprKind :: Assign (maybe_input_first_path , maybe_min_max_first , _) = peel_blocks_with_stmt (first_then) . kind && let ExprKind :: Assign (maybe_input_second_path , maybe_min_max_second , _) = peel_blocks_with_stmt (second_then) . kind && eq_expr_value (cx , maybe_input_first_path , maybe_input_second_path) && let Some (first_bin) = BinaryOp :: new (first_cond) && let Some (second_bin) = BinaryOp :: new (second_cond) && let Some (input_min_max) = is_clamp_meta_pattern (cx , & first_bin , & second_bin , maybe_min_max_first , maybe_min_max_second , None ,) { Some (ClampSuggestion { params : InputMinMax { input : maybe_input_first_path , min : input_min_max . min , max : input_min_max . max , is_float : input_min_max . is_float , } , span : first_expr . span . to (second_expr . span) , make_assignment : Some (maybe_input_first_path) , hir_with_ignore_attr : Some (first_expr . hir_id) , }) } else { None } }) . collect () }
+};
+}

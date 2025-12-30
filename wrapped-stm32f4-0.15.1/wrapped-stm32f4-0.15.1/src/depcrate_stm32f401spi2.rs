@@ -1,0 +1,9 @@
+// Generated macro for SPI2 (struct)
+macro_rules! Depcrate_stm32f401SPI2 {
+() => {
+// Module: crate::stm32f401
+// Provides: {"SPI2"}
+// Dependencies: {}
+# [doc = "Serial peripheral interface"] pub struct SPI2 { _marker : PhantomData < * const () > , }
+};
+}

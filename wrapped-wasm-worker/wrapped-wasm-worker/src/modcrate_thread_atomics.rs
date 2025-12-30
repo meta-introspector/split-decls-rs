@@ -1,0 +1,52 @@
+// Generated module macro for crate::thread::atomics
+macro_rules! Modcrate_thread_atomics {
+() => {
+        Depcrate_thread_atomicsaudio_worklet!();
+        Depcrate_thread_atomicschannel!();
+        Depcrate_thread_atomicsjs!();
+        Depcrate_thread_atomicsmain!();
+        Depcrate_thread_atomicsmemory!();
+        Depcrate_thread_atomicsoneshot!();
+        Depcrate_thread_atomicsparker!();
+        Depcrate_thread_atomicsspawn!();
+        Depcrate_thread_atomicsurl!();
+        Depcrate_thread_atomicswait_async!();
+        Depcrate_thread_atomicsuse_283!();
+        Depcrate_thread_atomicsuse_284!();
+        Depcrate_thread_atomicsuse_285!();
+        Depcrate_thread_atomicsuse_286!();
+        Depcrate_thread_atomicsuse_287!();
+        Depcrate_thread_atomicsuse_288!();
+        Depcrate_thread_atomicsuse_289!();
+        Depcrate_thread_atomicsuse_290!();
+        Depcrate_thread_atomicsuse_291!();
+        Depcrate_thread_atomicsuse_292!();
+        Depcrate_thread_atomicsuse_293!();
+        Depcrate_thread_atomicsuse_294!();
+        Depcrate_thread_atomicsuse_295!();
+        Depcrate_thread_atomicsuse_296!();
+        Depcrate_thread_atomicsuse_297!();
+        Depcrate_thread_atomicsuse_298!();
+        Depcrate_thread_atomicsuse_299!();
+        Depcrate_thread_atomicsuse_300!();
+        Depcrate_thread_atomicsuse_301!();
+        Depcrate_thread_atomicsmacro_302!();
+        Depcrate_thread_atomicsBuilder!();
+        Depcrate_thread_atomicsimpl_304!();
+        Depcrate_thread_atomicsJoinHandle!();
+        Depcrate_thread_atomicsimpl_306!();
+        Depcrate_thread_atomicsimpl_307!();
+        Depcrate_thread_atomicsimpl_308!();
+        Depcrate_thread_atomicsScope!();
+        Depcrate_thread_atomicsimpl_310!();
+        Depcrate_thread_atomicsScopeData!();
+        Depcrate_thread_atomicsimpl_312!();
+        Depcrate_thread_atomicssleep!();
+        Depcrate_thread_atomicstest_block_support!();
+        Depcrate_thread_atomicshas_spawn_support!();
+        Depcrate_thread_atomicscurrent_id!();
+        Depcrate_thread_atomicsis_main_thread!();
+        Depcrate_thread_atomicsi32_to_buffer_index!();
+        Depcrate_thread_atomicserror_from_exception!();
+    };
+}

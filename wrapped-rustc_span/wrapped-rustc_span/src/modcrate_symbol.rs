@@ -1,0 +1,56 @@
+// Generated module macro for crate::symbol
+macro_rules! Modcrate_symbol {
+() => {
+        Depcrate_symboluse_236!();
+        Depcrate_symboluse_237!();
+        Depcrate_symboluse_238!();
+        Depcrate_symboluse_239!();
+        Depcrate_symboluse_240!();
+        Depcrate_symboluse_241!();
+        Depcrate_symboluse_242!();
+        Depcrate_symboluse_243!();
+        Depcrate_symboluse_244!();
+        Depcrate_symboltests!();
+        Depcrate_symbolmacro_246!();
+        Depcrate_symbolSTDLIB_STABLE_CRATES!();
+        Depcrate_symbolIdent!();
+        Depcrate_symbolimpl_249!();
+        Depcrate_symbolimpl_250!();
+        Depcrate_symbolimpl_251!();
+        Depcrate_symbolimpl_252!();
+        Depcrate_symbolimpl_253!();
+        Depcrate_symbolIdentPrintMode!();
+        Depcrate_symbolIdentPrinter!();
+        Depcrate_symbolimpl_256!();
+        Depcrate_symbolimpl_257!();
+        Depcrate_symbolMacroRulesNormalizedIdent!();
+        Depcrate_symbolimpl_259!();
+        Depcrate_symbolimpl_260!();
+        Depcrate_symbolimpl_261!();
+        Depcrate_symbolMacros20NormalizedIdent!();
+        Depcrate_symbolimpl_263!();
+        Depcrate_symbolimpl_264!();
+        Depcrate_symbolimpl_265!();
+        Depcrate_symbolimpl_266!();
+        Depcrate_symbolSymbol!();
+        Depcrate_symbolmacro_268!();
+        Depcrate_symbolimpl_269!();
+        Depcrate_symbolimpl_270!();
+        Depcrate_symbolimpl_271!();
+        Depcrate_symbolimpl_272!();
+        Depcrate_symbolimpl_273!();
+        Depcrate_symbolimpl_274!();
+        Depcrate_symbolByteSymbol!();
+        Depcrate_symbolimpl_276!();
+        Depcrate_symbolimpl_277!();
+        Depcrate_symbolimpl_278!();
+        Depcrate_symbolInterner!();
+        Depcrate_symbolInternerInner!();
+        Depcrate_symbolimpl_281!();
+        Depcrate_symbolkw!();
+        Depcrate_symbolsym!();
+        Depcrate_symbolimpl_284!();
+        Depcrate_symbolimpl_285!();
+        Depcrate_symbolused_keywords!();
+    };
+}

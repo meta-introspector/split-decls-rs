@@ -1,0 +1,43 @@
+// Generated module macro for crate::hir_utils
+macro_rules! Modcrate_hir_utils {
+() => {
+        Depcrate_hir_utilsuse_284!();
+        Depcrate_hir_utilsuse_285!();
+        Depcrate_hir_utilsuse_286!();
+        Depcrate_hir_utilsuse_287!();
+        Depcrate_hir_utilsuse_288!();
+        Depcrate_hir_utilsuse_289!();
+        Depcrate_hir_utilsuse_290!();
+        Depcrate_hir_utilsuse_291!();
+        Depcrate_hir_utilsuse_292!();
+        Depcrate_hir_utilsuse_293!();
+        Depcrate_hir_utilsuse_294!();
+        Depcrate_hir_utilsuse_295!();
+        Depcrate_hir_utilsuse_296!();
+        Depcrate_hir_utilsuse_297!();
+        Depcrate_hir_utilsuse_298!();
+        Depcrate_hir_utilsuse_299!();
+        Depcrate_hir_utilsuse_300!();
+        Depcrate_hir_utilsSpanlessEqCallback!();
+        Depcrate_hir_utilsPathCheck!();
+        Depcrate_hir_utilsSpanlessEq!();
+        Depcrate_hir_utilsimpl_304!();
+        Depcrate_hir_utilsHirEqInterExpr!();
+        Depcrate_hir_utilsimpl_306!();
+        Depcrate_hir_utilsreduce_exprkind!();
+        Depcrate_hir_utilsswap_binop!();
+        Depcrate_hir_utilsboth!();
+        Depcrate_hir_utilsboth_some_and!();
+        Depcrate_hir_utilsover!();
+        Depcrate_hir_utilscount_eq!();
+        Depcrate_hir_utilseq_expr_value!();
+        Depcrate_hir_utilsgeneric_path_segments!();
+        Depcrate_hir_utilsSpanlessHash!();
+        Depcrate_hir_utilsimpl_316!();
+        Depcrate_hir_utilshash_stmt!();
+        Depcrate_hir_utilsis_bool!();
+        Depcrate_hir_utilshash_expr!();
+        Depcrate_hir_utilseq_span_tokens!();
+        Depcrate_hir_utilshas_ambiguous_literal_in_expr!();
+    };
+}

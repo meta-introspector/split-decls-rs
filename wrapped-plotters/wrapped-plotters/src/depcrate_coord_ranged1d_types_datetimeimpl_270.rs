@@ -1,0 +1,9 @@
+// Generated macro for impl_270 (impl)
+macro_rules! Depcrate_coord_ranged1d_types_datetimeimpl_270 {
+() => {
+// Module: crate::coord::ranged1d::types::datetime
+// Provides: {"impl_270"}
+// Dependencies: {}
+impl < DT > Ranged for RangedDateTime < DT > where DT : Datelike + Timelike + TimeValue + Clone + PartialOrd , DT : Add < Duration , Output = DT > , DT : Sub < DT , Output = Duration > , RangedDate < DT :: DateType > : Ranged < ValueType = DT :: DateType > , { type FormatOption = DefaultFormatting ; type ValueType = DT ; fn range (& self) -> Range < DT > { self . 0 . clone () .. self . 1 . clone () } fn map (& self , value : & Self :: ValueType , limit : (i32 , i32)) -> i32 { TimeValue :: map_coord (value , & self . 0 , & self . 1 , limit) } fn key_points < HintType : KeyPointHint > (& self , hint : HintType) -> Vec < Self :: ValueType > { let max_points = hint . max_num_points () ; let total_span = self . 1 . clone () - self . 0 . clone () ; if let Some (total_ns) = total_span . num_nanoseconds () { if let Some (actual_ns_per_point) = compute_period_per_point (total_ns as u64 , max_points , true) { let start_time_ns = u64 :: from (self . 0 . num_seconds_from_midnight ()) * 1_000_000_000 + u64 :: from (self . 0 . nanosecond ()) ; let mut start_time = DT :: from_date (self . 0 . date_floor ()) + Duration :: nanoseconds (if start_time_ns % actual_ns_per_point > 0 { start_time_ns + (actual_ns_per_point - start_time_ns % actual_ns_per_point) } else { start_time_ns } as i64) ; let mut ret = vec ! [] ; while start_time < self . 1 { ret . push (start_time . clone ()) ; start_time = start_time + Duration :: nanoseconds (actual_ns_per_point as i64) ; } return ret ; } } let date_range = RangedDate (self . 0 . date_ceil () , self . 1 . date_floor ()) ; date_range . key_points (max_points) . into_iter () . map (DT :: from_date) . collect () } }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for send_sync_unwindsafe (function)
+macro_rules! Depcrate_tests_auto_traitssend_sync_unwindsafe {
+() => {
+// Module: crate::tests::auto_traits
+// Provides: {"send_sync_unwindsafe"}
+// Dependencies: {}
+# [test] fn send_sync_unwindsafe () { # [cfg (feature = "NSAttributedString")] assert_unwindsafe :: < crate :: NSAttributedString > () ; # [cfg (feature = "NSObjCRuntime")] assert_auto_traits :: < crate :: NSComparisonResult > () ; # [cfg (feature = "NSData")] assert_unwindsafe :: < crate :: NSData > () ; # [cfg (feature = "NSError")] assert_auto_traits :: < crate :: NSError > () ; # [cfg (feature = "NSException")] assert_auto_traits :: < crate :: NSException > () ; # [cfg (all (feature = "NSGeometry" , feature = "objc2-core-foundation"))] assert_auto_traits :: < crate :: NSPoint > () ; # [cfg (all (feature = "NSGeometry" , feature = "objc2-core-foundation"))] assert_auto_traits :: < crate :: NSRect > () ; # [cfg (all (feature = "NSGeometry" , feature = "objc2-core-foundation"))] assert_auto_traits :: < crate :: NSSize > () ; # [cfg (feature = "NSAttributedString")] assert_unwindsafe :: < crate :: NSMutableAttributedString > () ; # [cfg (feature = "NSData")] assert_unwindsafe :: < crate :: NSMutableData > () ; # [cfg (feature = "NSString")] assert_unwindsafe :: < crate :: NSMutableString > () ; # [cfg (feature = "NSValue")] assert_auto_traits :: < crate :: NSNumber > () ; # [cfg (feature = "NSProcessInfo")] assert_auto_traits :: < crate :: NSProcessInfo > () ; # [cfg (feature = "NSRange")] assert_auto_traits :: < crate :: NSRange > () ; # [cfg (feature = "NSString")] assert_unwindsafe :: < crate :: NSString > () ; # [cfg (feature = "NSThread")] assert_auto_traits :: < crate :: NSThread > () ; # [cfg (feature = "NSUUID")] assert_auto_traits :: < crate :: NSUUID > () ; # [cfg (feature = "NSZone")] assert_unwindsafe :: < crate :: NSZone > () ; }
+};
+}

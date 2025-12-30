@@ -15,13 +15,13 @@ macro_rules! Modcrate {
         Depcraterng!();
         Depcraterngs!();
         Depcrateseq!();
-        Depcrateuse_434!();
+        Depcrateuse_388!();
         Depcratethread_rng!();
-        Depcrateuse_436!();
-        Depcrateuse_437!();
+        Depcrateuse_390!();
+        Depcrateuse_391!();
         DepcrateRngReader!();
-        Depcrateimpl_439!();
-        Depcrateimpl_440!();
+        Depcrateimpl_393!();
+        Depcrateimpl_394!();
         Depcraterandom!();
         Depcraterandom_iter!();
         Depcraterandom_range!();

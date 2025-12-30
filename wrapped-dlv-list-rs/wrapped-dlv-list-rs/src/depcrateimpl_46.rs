@@ -1,0 +1,9 @@
+// Generated macro for impl_46 (impl)
+macro_rules! Depcrateimpl_46 {
+() => {
+// Module: crate
+// Provides: {"impl_46"}
+// Dependencies: {}
+impl < T > PartialOrd for VecList < T > where T : PartialOrd < T > , { fn partial_cmp (& self , other : & Self) -> Option < Ordering > { self . iter () . partial_cmp (other) } }
+};
+}

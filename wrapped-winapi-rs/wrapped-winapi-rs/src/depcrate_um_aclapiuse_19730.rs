@@ -1,0 +1,9 @@
+// Generated macro for use_19730 (use)
+macro_rules! Depcrate_um_aclapiuse_19730 {
+() => {
+// Module: crate::um::aclapi
+// Provides: {"use_19730"}
+// Dependencies: {}
+use um :: accctrl :: { ACCESS_MODE , MULTIPLE_TRUSTEE_OPERATION , PEXPLICIT_ACCESS_A , PEXPLICIT_ACCESS_W , PFN_OBJECT_MGR_FUNCTS , PINHERITED_FROMA , PINHERITED_FROMW , POBJECTS_AND_NAME_A , POBJECTS_AND_NAME_W , POBJECTS_AND_SID , PPROG_INVOKE_SETTING , PROG_INVOKE_SETTING , PTRUSTEE_A , PTRUSTEE_W , SE_OBJECT_TYPE , TRUSTEE_FORM , TRUSTEE_TYPE } ;
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for PiParser (struct)
+macro_rules! Depcrate_parser_piPiParser {
+() => {
+// Module: crate::parser::pi
+// Provides: {"PiParser"}
+// Dependencies: {}
+# [doc = " A parser that search a `?>` sequence in the slice."] # [doc = ""] # [doc = " To use a parser create an instance of parser and [`feed`] data into it."] # [doc = " After successful search the parser will return [`Some`] with position where"] # [doc = " processing instruction is ended (the position after `?>`). If search was"] # [doc = " unsuccessful, a [`None`] will be returned. You typically would expect positive"] # [doc = " result of search, so that you should feed new data until you get it."] # [doc = ""] # [doc = " NOTE: after successful match the parser does not returned to the initial"] # [doc = " state and should not be used anymore. Create a new parser if you want to perform"] # [doc = " new search."] # [doc = ""] # [doc = " # Example"] # [doc = ""] # [doc = " ```"] # [doc = " # use pretty_assertions::assert_eq;"] # [doc = " use quick_xml::parser::{Parser, PiParser};"] # [doc = ""] # [doc = " let mut parser = PiParser::default();"] # [doc = ""] # [doc = " // Parse `<?instruction with = 'some > and ?' inside?>and the text follow...`"] # [doc = " // splitted into three chunks"] # [doc = " assert_eq!(parser.feed(b\"<?instruction\"), None);"] # [doc = " // ...get new chunk of data"] # [doc = " assert_eq!(parser.feed(b\" with = 'some > and ?\"), None);"] # [doc = " // ...get another chunk of data"] # [doc = " assert_eq!(parser.feed(b\"' inside?>and the text follow...\"), Some(9));"] # [doc = " //                       ^        ^"] # [doc = " //                       0        9"] # [doc = " ```"] # [doc = ""] # [doc = " [`feed`]: Self::feed()"] # [derive (Clone , Copy , Debug , Default , Eq , PartialEq)] pub struct PiParser (# [doc = " A flag that indicates was the `bytes` in the previous attempt to find the"] # [doc = " end ended with `?`."] pub bool ,) ;
+};
+}

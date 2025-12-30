@@ -1,0 +1,45 @@
+// Generated module macro for crate::bindings
+macro_rules! Modcrate_bindings {
+() => {
+        Depcrate_bindingsActivatable!();
+        Depcrate_bindingsmacro_3!();
+        Depcrate_bindingsimpl_4!();
+        Depcrate_bindingsimpl_5!();
+        Depcrate_bindingsimpl_6!();
+        Depcrate_bindingsimpl_7!();
+        Depcrate_bindingsimpl_8!();
+        Depcrate_bindingsimpl_9!();
+        Depcrate_bindingsComposable!();
+        Depcrate_bindingsmacro_11!();
+        Depcrate_bindingsimpl_12!();
+        Depcrate_bindingsimpl_13!();
+        Depcrate_bindingsimpl_14!();
+        Depcrate_bindingsimpl_15!();
+        Depcrate_bindingsimpl_16!();
+        Depcrate_bindingsimpl_17!();
+        Depcrate_bindingsmacro_18!();
+        Depcrate_bindingsimpl_19!();
+        Depcrate_bindingsimpl_20!();
+        Depcrate_bindingsIActivatable_Impl!();
+        Depcrate_bindingsimpl_22!();
+        Depcrate_bindingsIActivatable_Vtbl!();
+        Depcrate_bindingsmacro_24!();
+        Depcrate_bindingsimpl_25!();
+        Depcrate_bindingsimpl_26!();
+        Depcrate_bindingsIActivatableFactory_Impl!();
+        Depcrate_bindingsimpl_28!();
+        Depcrate_bindingsIActivatableFactory_Vtbl!();
+        Depcrate_bindingsmacro_30!();
+        Depcrate_bindingsimpl_31!();
+        Depcrate_bindingsimpl_32!();
+        Depcrate_bindingsIComposable_Impl!();
+        Depcrate_bindingsimpl_34!();
+        Depcrate_bindingsIComposable_Vtbl!();
+        Depcrate_bindingsmacro_36!();
+        Depcrate_bindingsimpl_37!();
+        Depcrate_bindingsimpl_38!();
+        Depcrate_bindingsIComposableFactory_Impl!();
+        Depcrate_bindingsimpl_40!();
+        Depcrate_bindingsIComposableFactory_Vtbl!();
+    };
+}

@@ -1,0 +1,9 @@
+// Generated macro for use_1886 (pub_use)
+macro_rules! Depcrate_generateduse_1886 {
+() => {
+// Module: crate::generated
+// Provides: {"use_1886"}
+// Dependencies: {}
+# [cfg (all (feature = "NSString" , feature = "NSURLProtectionSpace"))] pub use self :: __NSURLProtectionSpace :: NSURLAuthenticationMethodNegotiate ;
+};
+}

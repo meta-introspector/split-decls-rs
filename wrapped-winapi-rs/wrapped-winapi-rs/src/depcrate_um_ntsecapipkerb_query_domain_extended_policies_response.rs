@@ -1,0 +1,9 @@
+// Generated macro for PKERB_QUERY_DOMAIN_EXTENDED_POLICIES_RESPONSE (type)
+macro_rules! Depcrate_um_ntsecapiPKERB_QUERY_DOMAIN_EXTENDED_POLICIES_RESPONSE {
+() => {
+// Module: crate::um::ntsecapi
+// Provides: {"PKERB_QUERY_DOMAIN_EXTENDED_POLICIES_RESPONSE"}
+// Dependencies: {}
+pub type PKERB_QUERY_DOMAIN_EXTENDED_POLICIES_RESPONSE = * mut KERB_QUERY_DOMAIN_EXTENDED_POLICIES_RESPONSE ;
+};
+}

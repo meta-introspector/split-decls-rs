@@ -1,0 +1,9 @@
+// Generated macro for shift_simd_by_simd (function)
+macro_rules! Depcrate_shims_x86shift_simd_by_simd {
+() => {
+// Module: crate::shims::x86
+// Provides: {"shift_simd_by_simd"}
+// Dependencies: {}
+# [doc = " Shifts each element of `left` by the corresponding element of `right`."] # [doc = ""] # [doc = " For logic shifts, when right is larger than BITS - 1, zero is produced."] # [doc = " For arithmetic right-shifts, when right is larger than BITS - 1, the sign"] # [doc = " bit is copied to all bits."] fn shift_simd_by_simd < 'tcx > (ecx : & mut crate :: MiriInterpCx < 'tcx > , left : & OpTy < 'tcx > , right : & OpTy < 'tcx > , which : ShiftOp , dest : & MPlaceTy < 'tcx > ,) -> InterpResult < 'tcx , () > { let (left , left_len) = ecx . project_to_simd (left) ? ; let (right , right_len) = ecx . project_to_simd (right) ? ; let (dest , dest_len) = ecx . project_to_simd (dest) ? ; assert_eq ! (dest_len , left_len) ; assert_eq ! (dest_len , right_len) ; for i in 0 .. dest_len { let left = ecx . read_scalar (& ecx . project_index (& left , i) ?) ? ; let right = ecx . read_scalar (& ecx . project_index (& right , i) ?) ? ; let dest = ecx . project_index (& dest , i) ? ; let shift = u32 :: try_from (right . to_uint (dest . layout . size) ?) . unwrap_or (u32 :: MAX) ; let res = match which { ShiftOp :: Left => { let left = left . to_uint (dest . layout . size) ? ; let res = left . checked_shl (shift) . unwrap_or (0) ; Scalar :: from_uint (dest . layout . size . truncate (res) , dest . layout . size) } ShiftOp :: RightLogic => { let left = left . to_uint (dest . layout . size) ? ; let res = left . checked_shr (shift) . unwrap_or (0) ; Scalar :: from_uint (res , dest . layout . size) } ShiftOp :: RightArith => { let left = left . to_int (dest . layout . size) ? ; let res = left . checked_shr (shift) . unwrap_or (left >> 127) ; Scalar :: from_int (res , dest . layout . size) } } ; ecx . write_scalar (res , & dest) ? ; } interp_ok (()) }
+};
+}

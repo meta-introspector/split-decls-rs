@@ -1,0 +1,9 @@
+// Generated macro for impl_133 (impl)
+macro_rules! Depcrate_zlib_stream_deflateimpl_133 {
+() => {
+// Module: crate::zlib::stream::deflate
+// Provides: {"impl_133"}
+// Dependencies: {}
+impl Compress { # [doc = " The number of bytes that were read from the input."] pub fn total_in (& self) -> u64 { self . 0 . total_in as _ } # [doc = " The number of compressed bytes that were written to the output."] pub fn total_out (& self) -> u64 { self . 0 . total_out as _ } # [doc = " Create a new instance - this allocates so should be done with care."] pub fn new () -> Self { let mut this = libz_rs_sys :: z_stream :: default () ; unsafe { libz_rs_sys :: deflateInit_ (& mut this , libz_rs_sys :: Z_BEST_SPEED , libz_rs_sys :: zlibVersion () , core :: mem :: size_of :: < libz_rs_sys :: z_stream > () as core :: ffi :: c_int ,) ; } Self (this) } # [doc = " Prepare the instance for a new stream."] pub fn reset (& mut self) { unsafe { libz_rs_sys :: deflateReset (& mut self . 0) } ; } # [doc = " Compress `input` and write compressed bytes to `output`, with `flush` controlling additional characteristics."] pub fn compress (& mut self , input : & [u8] , output : & mut [u8] , flush : FlushCompress) -> Result < Status , CompressError > { self . 0 . avail_in = input . len () as _ ; self . 0 . avail_out = output . len () as _ ; self . 0 . next_in = input . as_ptr () ; self . 0 . next_out = output . as_mut_ptr () ; match unsafe { libz_rs_sys :: deflate (& mut self . 0 , flush as _) } { libz_rs_sys :: Z_OK => Ok (Status :: Ok) , libz_rs_sys :: Z_BUF_ERROR => Ok (Status :: BufError) , libz_rs_sys :: Z_STREAM_END => Ok (Status :: StreamEnd) , libz_rs_sys :: Z_STREAM_ERROR => Err (CompressError :: StreamError) , libz_rs_sys :: Z_MEM_ERROR => Err (CompressError :: InsufficientMemory) , err => Err (CompressError :: Unknown { err }) , } } }
+};
+}

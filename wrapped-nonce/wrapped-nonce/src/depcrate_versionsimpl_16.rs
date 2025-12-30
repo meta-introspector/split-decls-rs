@@ -1,0 +1,9 @@
+// Generated macro for impl_16 (impl)
+macro_rules! Depcrate_versionsimpl_16 {
+() => {
+// Module: crate::versions
+// Provides: {"impl_16"}
+// Dependencies: {}
+impl Versions { pub fn new (state : State) -> Self { Self :: Current (Box :: new (state)) } pub fn state (& self) -> & State { match self { Self :: Legacy (state) => state , Self :: Current (state) => state , } } # [doc = " Checks if the recent_blockhash field in Transaction verifies, and"] # [doc = " returns nonce account data if so."] pub fn verify_recent_blockhash (& self , recent_blockhash : & Hash ,) -> Option < & Data > { match self { Self :: Legacy (_) => None , Self :: Current (state) => match * * state { State :: Uninitialized => None , State :: Initialized (ref data) => { (recent_blockhash == & data . blockhash ()) . then_some (data) } } , } } # [doc = " Upgrades legacy nonces out of chain blockhash domains."] pub fn upgrade (self) -> Option < Self > { match self { Self :: Legacy (mut state) => { match * state { State :: Uninitialized => None , State :: Initialized (ref mut data) => { data . durable_nonce = DurableNonce :: from_blockhash (& data . blockhash ()) ; Some (Self :: Current (state)) } } } Self :: Current (_) => None , } } # [doc = " Updates the authority pubkey on the nonce account."] pub fn authorize (self , signers : & HashSet < Pubkey > , authority : Pubkey ,) -> Result < Self , AuthorizeNonceError > { let data = match self . state () { State :: Uninitialized => return Err (AuthorizeNonceError :: Uninitialized) , State :: Initialized (data) => data , } ; if ! signers . contains (& data . authority) { return Err (AuthorizeNonceError :: MissingRequiredSignature (data . authority ,)) ; } let data = Data :: new (authority , data . durable_nonce , data . get_lamports_per_signature () ,) ; let state = Box :: new (State :: Initialized (data)) ; Ok (match self { Self :: Legacy (_) => Self :: Legacy , Self :: Current (_) => Self :: Current , } (state)) } }
+};
+}

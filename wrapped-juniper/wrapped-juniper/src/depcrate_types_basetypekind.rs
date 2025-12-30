@@ -1,0 +1,9 @@
+// Generated macro for TypeKind (enum)
+macro_rules! Depcrate_types_baseTypeKind {
+() => {
+// Module: crate::types::base
+// Provides: {"TypeKind"}
+// Dependencies: {}
+# [doc = " GraphQL type kind"] # [doc = ""] # [doc = " The GraphQL specification defines a number of type kinds - the meta type\\"] # [doc = " of a type."] # [derive (Clone , Eq , PartialEq , Debug , GraphQLEnum)] # [graphql (name = "__TypeKind" , internal)] pub enum TypeKind { # [doc = " ## Scalar types"] # [doc = ""] # [doc = " Scalar types appear as the leaf nodes of GraphQL queries. Strings,\\"] # [doc = " numbers, and booleans are the built in types, and while it's possible\\"] # [doc = " to define your own, it's relatively uncommon."] Scalar , # [doc = " ## Object types"] # [doc = ""] # [doc = " The most common type to be implemented by users. Objects have fields\\"] # [doc = " and can implement interfaces."] Object , # [doc = " ## Interface types"] # [doc = ""] # [doc = " Interface types are used to represent overlapping fields between\\"] # [doc = " multiple types, and can be queried for their concrete type."] Interface , # [doc = " ## Union types"] # [doc = ""] # [doc = " Unions are similar to interfaces but can not contain any fields on\\"] # [doc = " their own."] Union , # [doc = " ## Enum types"] # [doc = ""] # [doc = " Like scalars, enum types appear as the leaf nodes of GraphQL queries."] Enum , # [doc = " ## Input objects"] # [doc = ""] # [doc = " Represents complex values provided in queries _into_ the system."] InputObject , # [doc = " ## List types"] # [doc = ""] # [doc = " Represent lists of other types. This library provides implementations\\"] # [doc = " for vectors and slices, but other Rust types can be extended to serve\\"] # [doc = " as GraphQL lists."] List , # [doc = " ## Non-null types"] # [doc = ""] # [doc = " In GraphQL, nullable types are the default. By putting a `!` after a\\"] # [doc = " type, it becomes non-nullable."] NonNull , }
+};
+}

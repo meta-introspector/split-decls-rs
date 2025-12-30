@@ -1,0 +1,9 @@
+// Generated macro for impl_50 (impl)
+macro_rules! Depcrate_smart_displayimpl_50 {
+() => {
+// Module: crate::smart_display
+// Provides: {"impl_50"}
+// Dependencies: {}
+impl FormatterOptions { # [doc = " Character used as 'fill' whenever there is alignment."] # [inline] # [must_use] pub const fn fill (& self) -> char { self . fill } # [doc = " Flag indicating what form of alignment was requested."] # [inline] # [must_use] pub const fn align (& self) -> Option < Alignment > { self . align } # [doc = " Optionally specified integer width that the output should be."] # [inline] # [must_use] pub const fn width (& self) -> Option < usize > { if (self . flags >> FlagBit :: WidthIsInitialized as u8) & 1 == 1 { Some (unsafe { self . width . assume_init () }) } else { None } } # [doc = " Optionally specified precision for numeric types. Alternatively, the maximum width for"] # [doc = " string types."] # [inline] # [must_use] pub const fn precision (& self) -> Option < usize > { if (self . flags >> FlagBit :: PrecisionIsInitialized as u8) & 1 == 1 { Some (unsafe { self . precision . assume_init () }) } else { None } } # [doc = " Determines if the `+` flag was specified."] # [inline] # [must_use] pub const fn sign_plus (& self) -> bool { (self . flags >> FlagBit :: SignPlus as u8) & 1 == 1 } # [doc = " Determines if the `-` flag was specified."] # [inline] # [must_use] pub const fn sign_minus (& self) -> bool { (self . flags >> FlagBit :: SignMinus as u8) & 1 == 1 } # [doc = " Determines if the `#` flag was specified."] # [inline] # [must_use] pub const fn alternate (& self) -> bool { (self . flags >> FlagBit :: Alternate as u8) & 1 == 1 } # [doc = " Determines if the `0` flag was specified."] # [inline] # [must_use] pub const fn sign_aware_zero_pad (& self) -> bool { (self . flags >> FlagBit :: SignAwareZeroPad as u8) & 1 == 1 } }
+};
+}

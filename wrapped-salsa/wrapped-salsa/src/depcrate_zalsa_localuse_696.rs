@@ -4,6 +4,6 @@ macro_rules! Depcrate_zalsa_localuse_696 {
 // Module: crate::zalsa_local
 // Provides: {"use_696"}
 // Dependencies: {}
-use crate :: active_query :: { CompletedQuery , QueryStack } ;
+use crate :: key :: DatabaseKeyIndex ;
 };
 }

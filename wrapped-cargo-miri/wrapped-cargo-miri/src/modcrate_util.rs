@@ -1,0 +1,42 @@
+// Generated module macro for crate::util
+macro_rules! Modcrate_util {
+() => {
+        Depcrate_utiluse_45!();
+        Depcrate_utiluse_46!();
+        Depcrate_utiluse_47!();
+        Depcrate_utiluse_48!();
+        Depcrate_utiluse_49!();
+        Depcrate_utiluse_50!();
+        Depcrate_utiluse_51!();
+        Depcrate_utiluse_52!();
+        Depcrate_utiluse_53!();
+        Depcrate_utiluse_54!();
+        Depcrate_utiluse_55!();
+        Depcrate_utilshow_error_!();
+        Depcrate_utilshow_error!();
+        Depcrate_utiluse_58!();
+        Depcrate_utilCrateRunEnv!();
+        Depcrate_utilimpl_60!();
+        Depcrate_utilCrateRunInfo!();
+        Depcrate_utilimpl_62!();
+        Depcrate_utilMiriCommand!();
+        Depcrate_utilescape_for_toml!();
+        Depcrate_utilfind_miri!();
+        Depcrate_utilmiri!();
+        Depcrate_utilmiri_for_host!();
+        Depcrate_utilcargo!();
+        Depcrate_utilflagsplit!();
+        Depcrate_utilexec!();
+        Depcrate_utilexec_with_pipe!();
+        Depcrate_utilask_to_run!();
+        Depcrate_utilcargo_extra_flags!();
+        Depcrate_utilget_cargo_metadata!();
+        Depcrate_utillocal_crates!();
+        Depcrate_utildebug_cmd!();
+        Depcrate_utilget_target_dir!();
+        Depcrate_utilget_sysroot_dir!();
+        Depcrate_utilremove_dir_all_idem!();
+        Depcrate_utilclean_sysroot!();
+        Depcrate_utilclean_target_dir!();
+    };
+}

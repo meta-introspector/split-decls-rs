@@ -1,0 +1,39 @@
+// Generated module macro for crate::filters::sse
+macro_rules! Modcrate_filters_sse {
+() => {
+        Depcrate_filters_sseuse_562!();
+        Depcrate_filters_sseuse_563!();
+        Depcrate_filters_sseuse_564!();
+        Depcrate_filters_sseuse_565!();
+        Depcrate_filters_sseuse_566!();
+        Depcrate_filters_sseuse_567!();
+        Depcrate_filters_sseuse_568!();
+        Depcrate_filters_sseuse_569!();
+        Depcrate_filters_sseuse_570!();
+        Depcrate_filters_sseuse_571!();
+        Depcrate_filters_sseuse_572!();
+        Depcrate_filters_sseuse_573!();
+        Depcrate_filters_sseuse_574!();
+        Depcrate_filters_sseuse_575!();
+        Depcrate_filters_sseuse_576!();
+        Depcrate_filters_sseuse_577!();
+        Depcrate_filters_sseuse_578!();
+        Depcrate_filters_sseuse_579!();
+        Depcrate_filters_sseuse_580!();
+        Depcrate_filters_sseuse_581!();
+        Depcrate_filters_sseDataType!();
+        Depcrate_filters_sseEvent!();
+        Depcrate_filters_sseimpl_584!();
+        Depcrate_filters_sseimpl_585!();
+        Depcrate_filters_sselast_event_id!();
+        Depcrate_filters_ssereply!();
+        Depcrate_filters_sseSseReply!();
+        Depcrate_filters_sseimpl_589!();
+        Depcrate_filters_sseKeepAlive!();
+        Depcrate_filters_sseimpl_591!();
+        Depcrate_filters_sseSseKeepAlive!();
+        Depcrate_filters_ssekeep_alive!();
+        Depcrate_filters_sseimpl_594!();
+        Depcrate_filters_ssesealed!();
+    };
+}

@@ -1,0 +1,56 @@
+// Generated module macro for crate::encode
+macro_rules! Modcrate_encode {
+() => {
+        Depcrate_encodeuse_87!();
+        Depcrate_encodeuse_88!();
+        Depcrate_encodeuse_89!();
+        Depcrate_encodeuse_90!();
+        Depcrate_encodeuse_91!();
+        Depcrate_encodeuse_92!();
+        Depcrate_encodeuse_93!();
+        Depcrate_encodeuse_94!();
+        Depcrate_encodeuse_95!();
+        Depcrate_encodeuse_96!();
+        Depcrate_encodeEncodeChunk!();
+        Depcrate_encodeEncodeResult!();
+        Depcrate_encodeencode!();
+        Depcrate_encodeInterner!();
+        Depcrate_encodeLocalFile!();
+        Depcrate_encodeimpl_102!();
+        Depcrate_encodeshared_program!();
+        Depcrate_encodeshared_export!();
+        Depcrate_encodeshared_function!();
+        Depcrate_encodeshared_enum!();
+        Depcrate_encodeshared_variant!();
+        Depcrate_encodeshared_import!();
+        Depcrate_encodeshared_lit_or_expr!();
+        Depcrate_encodeshared_linked_module!();
+        Depcrate_encodeshared_module!();
+        Depcrate_encodeshared_import_kind!();
+        Depcrate_encodeshared_import_function!();
+        Depcrate_encodeshared_import_static!();
+        Depcrate_encodeshared_import_string!();
+        Depcrate_encodeshared_import_type!();
+        Depcrate_encodeshared_import_enum!();
+        Depcrate_encodeshared_struct!();
+        Depcrate_encodeshared_struct_field!();
+        Depcrate_encodeEncode!();
+        Depcrate_encodeEncoder!();
+        Depcrate_encodeLitOrExpr!();
+        Depcrate_encodeimpl_123!();
+        Depcrate_encodeimpl_124!();
+        Depcrate_encodeimpl_125!();
+        Depcrate_encodeimpl_126!();
+        Depcrate_encodeimpl_127!();
+        Depcrate_encodeimpl_128!();
+        Depcrate_encodeimpl_129!();
+        Depcrate_encodeimpl_130!();
+        Depcrate_encodeimpl_131!();
+        Depcrate_encodeimpl_132!();
+        Depcrate_encodeencode_struct!();
+        Depcrate_encodeencode_enum!();
+        Depcrate_encodeencode_api!();
+        Depcrate_encodemacro_136!();
+        Depcrate_encodefrom_ast_method_kind!();
+    };
+}

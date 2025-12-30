@@ -1,0 +1,49 @@
+// Generated module macro for crate::utils::exec
+macro_rules! Modcrate_utils_exec {
+() => {
+        Depcrate_utils_execuse_1412!();
+        Depcrate_utils_execuse_1413!();
+        Depcrate_utils_execuse_1414!();
+        Depcrate_utils_execuse_1415!();
+        Depcrate_utils_execuse_1416!();
+        Depcrate_utils_execuse_1417!();
+        Depcrate_utils_execuse_1418!();
+        Depcrate_utils_execuse_1419!();
+        Depcrate_utils_execuse_1420!();
+        Depcrate_utils_execuse_1421!();
+        Depcrate_utils_execuse_1422!();
+        Depcrate_utils_execuse_1423!();
+        Depcrate_utils_execuse_1424!();
+        Depcrate_utils_execuse_1425!();
+        Depcrate_utils_execuse_1426!();
+        Depcrate_utils_execuse_1427!();
+        Depcrate_utils_execBehaviorOnFailure!();
+        Depcrate_utils_execOutputMode!();
+        Depcrate_utils_execimpl_1430!();
+        Depcrate_utils_execCommandFingerprint!();
+        Depcrate_utils_execimpl_1432!();
+        Depcrate_utils_execCommandProfile!();
+        Depcrate_utils_execCommandProfiler!();
+        Depcrate_utils_execimpl_1435!();
+        Depcrate_utils_execExecutionTrace!();
+        Depcrate_utils_execBootstrapCommand!();
+        Depcrate_utils_execimpl_1438!();
+        Depcrate_utils_execimpl_1439!();
+        Depcrate_utils_execimpl_1440!();
+        Depcrate_utils_execCommandStatus!();
+        Depcrate_utils_execcommand!();
+        Depcrate_utils_execCommandOutput!();
+        Depcrate_utils_execimpl_1444!();
+        Depcrate_utils_execimpl_1445!();
+        Depcrate_utils_execExecutionContext!();
+        Depcrate_utils_execCommandCache!();
+        Depcrate_utils_execCommandState!();
+        Depcrate_utils_execStreamingCommand!();
+        Depcrate_utils_execDeferredCommand!();
+        Depcrate_utils_execimpl_1451!();
+        Depcrate_utils_execimpl_1452!();
+        Depcrate_utils_execimpl_1453!();
+        Depcrate_utils_execimpl_1454!();
+        Depcrate_utils_execimpl_1455!();
+    };
+}

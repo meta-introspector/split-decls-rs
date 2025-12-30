@@ -1,0 +1,9 @@
+// Generated macro for Kind (enum)
+macro_rules! Depcrate_programKind {
+() => {
+// Module: crate::program
+// Provides: {"Kind"}
+// Dependencies: {}
+# [doc = " The kind of helper program to use."] # [derive (Debug , Clone , Eq , PartialEq)] pub enum Kind { # [doc = " The built-in `git credential` helper program, part of any `git` distribution."] Builtin , # [doc = " A custom credentials helper, as identified just by the name with optional arguments"] ExternalName { # [doc = " The name like `foo` along with optional args, like `foo --arg --bar=\"a b\"`, with arguments using `sh` shell quoting rules."] # [doc = " The program executed will be `git-credential-foo [args]` if `name_and_args` starts with `foo [args]`."] # [doc = " Note that a shell is only used if it's needed."] name_and_args : BString , } , # [doc = " A custom credentials helper, as identified just by the absolute path to the program and optional arguments. The program is executed through a shell."] ExternalPath { # [doc = " The absolute path to the executable, like `/path/to/exe` along with optional args, like `/path/to/exe --arg --bar=\"a b\"`, with arguments using `sh`"] # [doc = " shell quoting rules."] path_and_args : BString , } , # [doc = " A script to execute with `sh`."] ExternalShellScript (BString) , }
+};
+}

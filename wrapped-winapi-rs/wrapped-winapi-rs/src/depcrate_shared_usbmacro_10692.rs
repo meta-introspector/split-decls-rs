@@ -1,0 +1,9 @@
+// Generated macro for macro_10692 (macro)
+macro_rules! Depcrate_shared_usbmacro_10692 {
+() => {
+// Module: crate::shared::usb
+// Provides: {"macro_10692"}
+// Dependencies: {}
+UNION ! { union URB_u { [u32 ; 24] [u64 ; 19] , UrbHeader UrbHeader_mut : URB_HEADER , UrbSelectInterface UrbSelectInterface_mut : URB_SELECT_INTERFACE , UrbSelectConfiguration UrbSelectConfiguration_mut : URB_SELECT_CONFIGURATION , UrbPipeRequest UrbPipeRequest_mut : URB_PIPE_REQUEST , UrbFrameLengthControl UrbFrameLengthControl_mut : URB_FRAME_LENGTH_CONTROL , UrbGetFrameLength UrbGetFrameLength_mut : URB_GET_FRAME_LENGTH , UrbSetFrameLength UrbSetFrameLength_mut : URB_SET_FRAME_LENGTH , UrbGetCurrentFrameNumber UrbGetCurrentFrameNumber_mut : URB_GET_CURRENT_FRAME_NUMBER , UrbControlTransfer UrbControlTransfer_mut : URB_CONTROL_TRANSFER , UrbControlTransferEx UrbControlTransferEx_mut : URB_CONTROL_TRANSFER_EX , UrbBulkOrInterruptTransfer UrbBulkOrInterruptTransfer_mut : URB_BULK_OR_INTERRUPT_TRANSFER , UrbIsochronousTransfer UrbIsochronousTransfer_mut : URB_ISOCH_TRANSFER , UrbControlDescriptorRequest UrbControlDescriptorRequest_mut : URB_CONTROL_DESCRIPTOR_REQUEST , UrbControlGetStatusRequest UrbControlGetStatusRequest_mut : URB_CONTROL_GET_STATUS_REQUEST , UrbControlFeatureRequest UrbControlFeatureRequest_mut : URB_CONTROL_FEATURE_REQUEST , UrbControlVendorClassRequest UrbControlVendorClassRequest_mut : URB_CONTROL_VENDOR_OR_CLASS_REQUEST , UrbControlGetInterfaceRequest UrbControlGetInterfaceRequest_mut : URB_CONTROL_GET_INTERFACE_REQUEST , UrbControlGetConfigurationRequest UrbControlGetConfigurationRequest_mut : URB_CONTROL_GET_CONFIGURATION_REQUEST , UrbOSFeatureDescriptorRequest UrbOSFeatureDescriptorRequest_mut : URB_OS_FEATURE_DESCRIPTOR_REQUEST , UrbOpenStaticStreams UrbOpenStaticStreams_mut : URB_OPEN_STATIC_STREAMS , } }
+};
+}

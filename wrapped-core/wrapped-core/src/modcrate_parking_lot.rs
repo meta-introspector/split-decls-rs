@@ -1,0 +1,52 @@
+// Generated module macro for crate::parking_lot
+macro_rules! Modcrate_parking_lot {
+() => {
+        Depcrate_parking_lotuse_2!();
+        Depcrate_parking_lotuse_3!();
+        Depcrate_parking_lotuse_4!();
+        Depcrate_parking_lotuse_5!();
+        Depcrate_parking_lotuse_6!();
+        Depcrate_parking_lotuse_7!();
+        Depcrate_parking_lotmacro_8!();
+        Depcrate_parking_lotNUM_THREADS!();
+        Depcrate_parking_lotHASHTABLE!();
+        Depcrate_parking_lotLOAD_FACTOR!();
+        Depcrate_parking_lotHashTable!();
+        Depcrate_parking_lotimpl_13!();
+        Depcrate_parking_lotBucket!();
+        Depcrate_parking_lotimpl_15!();
+        Depcrate_parking_lotFairTimeout!();
+        Depcrate_parking_lotimpl_17!();
+        Depcrate_parking_lotThreadData!();
+        Depcrate_parking_lotimpl_19!();
+        Depcrate_parking_lotwith_thread_data!();
+        Depcrate_parking_lotimpl_21!();
+        Depcrate_parking_lotget_hashtable!();
+        Depcrate_parking_lotcreate_hashtable!();
+        Depcrate_parking_lotgrow_hashtable!();
+        Depcrate_parking_lotrehash_bucket_into!();
+        Depcrate_parking_lothash!();
+        Depcrate_parking_lothash!();
+        Depcrate_parking_lotlock_bucket!();
+        Depcrate_parking_lotlock_bucket_checked!();
+        Depcrate_parking_lotlock_bucket_pair!();
+        Depcrate_parking_lotunlock_bucket_pair!();
+        Depcrate_parking_lotParkResult!();
+        Depcrate_parking_lotimpl_33!();
+        Depcrate_parking_lotUnparkResult!();
+        Depcrate_parking_lotRequeueOp!();
+        Depcrate_parking_lotFilterOp!();
+        Depcrate_parking_lotUnparkToken!();
+        Depcrate_parking_lotParkToken!();
+        Depcrate_parking_lotDEFAULT_UNPARK_TOKEN!();
+        Depcrate_parking_lotDEFAULT_PARK_TOKEN!();
+        Depcrate_parking_lotpark!();
+        Depcrate_parking_lotunpark_one!();
+        Depcrate_parking_lotunpark_all!();
+        Depcrate_parking_lotunpark_requeue!();
+        Depcrate_parking_lotunpark_filter!();
+        Depcrate_parking_lotdeadlock!();
+        Depcrate_parking_lotdeadlock_impl!();
+        Depcrate_parking_lottests!();
+    };
+}

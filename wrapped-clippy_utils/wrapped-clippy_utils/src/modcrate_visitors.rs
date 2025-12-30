@@ -1,0 +1,52 @@
+// Generated module macro for crate::visitors
+macro_rules! Modcrate_visitors {
+() => {
+        Depcrate_visitorsuse_874!();
+        Depcrate_visitorsuse_875!();
+        Depcrate_visitorsuse_876!();
+        Depcrate_visitorsuse_877!();
+        Depcrate_visitorsuse_878!();
+        Depcrate_visitorsuse_879!();
+        Depcrate_visitorsuse_880!();
+        Depcrate_visitorsuse_881!();
+        Depcrate_visitorsuse_882!();
+        Depcrate_visitorsuse_883!();
+        Depcrate_visitorsuse_884!();
+        Depcrate_visitorsuse_885!();
+        Depcrate_visitorsuse_886!();
+        Depcrate_visitorsuse_887!();
+        Depcrate_visitorsuse_888!();
+        Depcrate_visitorsinternal!();
+        Depcrate_visitorsuse_890!();
+        Depcrate_visitorsimpl_891!();
+        Depcrate_visitorsDescend!();
+        Depcrate_visitorsimpl_893!();
+        Depcrate_visitorsimpl_894!();
+        Depcrate_visitorsVisitable!();
+        Depcrate_visitorsimpl_896!();
+        Depcrate_visitorsimpl_897!();
+        Depcrate_visitorsimpl_898!();
+        Depcrate_visitorsvisitable_ref!();
+        Depcrate_visitorsmacro_900!();
+        Depcrate_visitorsmacro_901!();
+        Depcrate_visitorsmacro_902!();
+        Depcrate_visitorsmacro_903!();
+        Depcrate_visitorsmacro_904!();
+        Depcrate_visitorsfor_each_expr_without_closures!();
+        Depcrate_visitorsfor_each_expr!();
+        Depcrate_visitorscontains_try!();
+        Depcrate_visitorsfind_all_ret_expressions!();
+        Depcrate_visitorsis_res_used!();
+        Depcrate_visitorsis_local_used!();
+        Depcrate_visitorsis_const_evaluatable!();
+        Depcrate_visitorsis_expr_unsafe!();
+        Depcrate_visitorscontains_unsafe_block!();
+        Depcrate_visitorsfor_each_value_source!();
+        Depcrate_visitorsfor_each_local_use_after_expr!();
+        Depcrate_visitorsfor_each_unconsumed_temporary!();
+        Depcrate_visitorsany_temporaries_need_ordered_drop!();
+        Depcrate_visitorsfor_each_local_assignment!();
+        Depcrate_visitorscontains_break_or_continue!();
+        Depcrate_visitorslocal_used_once!();
+    };
+}

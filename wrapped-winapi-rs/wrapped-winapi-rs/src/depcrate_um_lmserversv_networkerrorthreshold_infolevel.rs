@@ -1,0 +1,9 @@
+// Generated macro for SV_NETWORKERRORTHRESHOLD_INFOLEVEL (const)
+macro_rules! Depcrate_um_lmserverSV_NETWORKERRORTHRESHOLD_INFOLEVEL {
+() => {
+// Module: crate::um::lmserver
+// Provides: {"SV_NETWORKERRORTHRESHOLD_INFOLEVEL"}
+// Dependencies: {}
+pub const SV_NETWORKERRORTHRESHOLD_INFOLEVEL : DWORD = PARMNUM_BASE_INFOLEVEL + SV_NETWORKERRORTHRESHOLD_PARMNUM ;
+};
+}

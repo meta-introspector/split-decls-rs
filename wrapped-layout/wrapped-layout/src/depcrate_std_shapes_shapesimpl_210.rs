@@ -1,0 +1,9 @@
+// Generated macro for impl_210 (impl)
+macro_rules! Depcrate_std_shapes_shapesimpl_210 {
+() => {
+// Module: crate::std_shapes::shapes
+// Provides: {"impl_210"}
+// Dependencies: {}
+impl Arrow { pub fn reverse (& self) -> Arrow { Arrow { start : self . end , end : self . start , line_style : self . line_style , text : self . text . clone () , look : self . look . clone () , properties : self . properties . clone () , src_port : self . dst_port . clone () , dst_port : self . src_port . clone () , } } pub fn new (start : LineEndKind , end : LineEndKind , line_style : LineStyleKind , text : & str , look : & StyleAttr , src_port : & Option < String > , dst_port : & Option < String > ,) -> Arrow { Arrow { start , end , line_style , text : String :: from (text) , look : look . clone () , properties : Option :: None , src_port : src_port . clone () , dst_port : dst_port . clone () , } } pub fn with_properties (start : LineEndKind , end : LineEndKind , line_style : LineStyleKind , text : & str , look : & StyleAttr , properties : impl Into < String > , src_port : & Option < String > , dst_port : & Option < String > ,) -> Arrow { Arrow { start , end , line_style , text : String :: from (text) , look : look . clone () , properties : Option :: Some (properties . into ()) , src_port : src_port . clone () , dst_port : dst_port . clone () , } } pub fn simple (text : & str) -> Arrow { Arrow :: new (LineEndKind :: None , LineEndKind :: Arrow , LineStyleKind :: Normal , text , & StyleAttr :: simple () , & None , & None ,) } pub fn simple_with_properties (text : & str , properties : impl Into < String > ,) -> Arrow { let mut arrow = Arrow :: simple (text) ; arrow . properties = Some (properties . into ()) ; arrow } pub fn invisible () -> Arrow { Arrow :: new (LineEndKind :: None , LineEndKind :: None , LineStyleKind :: None , "" , & StyleAttr :: simple () , & None , & None ,) } }
+};
+}

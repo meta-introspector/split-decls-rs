@@ -1,0 +1,9 @@
+// Generated macro for impl_666 (impl)
+macro_rules! Depcrate_configimpl_666 {
+() => {
+// Module: crate::config
+// Provides: {"impl_666"}
+// Dependencies: {}
+impl ClientConfig { # [doc = " Create a default config with a particular cryptographic config"] pub fn new (crypto : Arc < dyn crypto :: ClientConfig >) -> Self { Self { transport : Default :: default () , crypto , token_store : Arc :: new (TokenMemoryCache :: default ()) , initial_dst_cid_provider : Arc :: new (| | { RandomConnectionIdGenerator :: new (MAX_CID_SIZE) . generate_cid () }) , version : 1 , } } # [doc = " Configure how to populate the destination CID of the initial packet when attempting to"] # [doc = " establish a new connection"] # [doc = ""] # [doc = " By default, it's populated with random bytes with reasonable length, so unless you have"] # [doc = " a good reason, you do not need to change it."] # [doc = ""] # [doc = " When prefer to override the default, please note that the generated connection ID MUST be"] # [doc = " at least 8 bytes long and unpredictable, as per section 7.2 of RFC 9000."] pub fn initial_dst_cid_provider (& mut self , initial_dst_cid_provider : Arc < dyn Fn () -> ConnectionId + Send + Sync > ,) -> & mut Self { self . initial_dst_cid_provider = initial_dst_cid_provider ; self } # [doc = " Set a custom [`TransportConfig`]"] pub fn transport_config (& mut self , transport : Arc < TransportConfig >) -> & mut Self { self . transport = transport ; self } # [doc = " Set a custom [`TokenStore`]"] # [doc = ""] # [doc = " Defaults to [`TokenMemoryCache`], which is suitable for most internet applications."] pub fn token_store (& mut self , store : Arc < dyn TokenStore >) -> & mut Self { self . token_store = store ; self } # [doc = " Set the QUIC version to use"] pub fn version (& mut self , version : u32) -> & mut Self { self . version = version ; self } }
+};
+}

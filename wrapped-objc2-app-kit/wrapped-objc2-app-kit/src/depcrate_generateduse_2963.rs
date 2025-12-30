@@ -1,0 +1,9 @@
+// Generated macro for use_2963 (pub_use)
+macro_rules! Depcrate_generateduse_2963 {
+() => {
+// Module: crate::generated
+// Provides: {"use_2963"}
+// Dependencies: {}
+# [cfg (feature = "NSText")] pub use self :: __NSText :: NSNaturalTextAlignment ;
+};
+}

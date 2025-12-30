@@ -1,0 +1,9 @@
+// Generated macro for private (module)
+macro_rules! Depcrate_query_source_joinsprivate {
+() => {
+// Module: crate::query_source::joins
+// Provides: {"private"}
+// Dependencies: {}
+mod private { use crate :: backend :: Backend ; use crate :: expression :: { Expression , ValidGrouping } ; use crate :: query_builder :: { AstPass , QueryFragment , SelectClauseExpression } ; use crate :: { AppearsOnTable , QueryResult , SelectableExpression } ; # [derive (Debug , crate :: query_builder :: QueryId , Copy , Clone)] pub struct SkipSelectableExpressionBoundCheckWrapper < T > (pub (super) T) ; impl < DB , T > QueryFragment < DB > for SkipSelectableExpressionBoundCheckWrapper < T > where T : QueryFragment < DB > , DB : Backend , { fn walk_ast < 'b > (& 'b self , pass : AstPass < '_ , 'b , DB >) -> QueryResult < () > { self . 0 . walk_ast (pass) } } impl < T > ValidGrouping < () > for SkipSelectableExpressionBoundCheckWrapper < T > { type IsAggregate = crate :: expression :: is_aggregate :: No ; } impl < QS , T > SelectClauseExpression < QS > for SkipSelectableExpressionBoundCheckWrapper < T > where T : SelectClauseExpression < QS > , { type Selection = T :: Selection ; type SelectClauseSqlType = T :: SelectClauseSqlType ; } impl < QS , T > SelectableExpression < QS > for SkipSelectableExpressionBoundCheckWrapper < T > where Self : AppearsOnTable < QS > { } impl < QS , T > AppearsOnTable < QS > for SkipSelectableExpressionBoundCheckWrapper < T > where Self : Expression { } impl < T > Expression for SkipSelectableExpressionBoundCheckWrapper < T > where T : Expression , { type SqlType = T :: SqlType ; } impl < T , Selection > crate :: util :: TupleAppend < Selection > for SkipSelectableExpressionBoundCheckWrapper < T > where T : crate :: util :: TupleAppend < Selection > , { type Output = T :: Output ; fn tuple_append (self , right : Selection) -> Self :: Output { self . 0 . tuple_append (right) } } }
+};
+}

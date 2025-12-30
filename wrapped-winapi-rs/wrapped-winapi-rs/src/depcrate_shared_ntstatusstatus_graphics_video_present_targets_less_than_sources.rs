@@ -1,0 +1,9 @@
+// Generated macro for STATUS_GRAPHICS_VIDEO_PRESENT_TARGETS_LESS_THAN_SOURCES (const)
+macro_rules! Depcrate_shared_ntstatusSTATUS_GRAPHICS_VIDEO_PRESENT_TARGETS_LESS_THAN_SOURCES {
+() => {
+// Module: crate::shared::ntstatus
+// Provides: {"STATUS_GRAPHICS_VIDEO_PRESENT_TARGETS_LESS_THAN_SOURCES"}
+// Dependencies: {}
+pub const STATUS_GRAPHICS_VIDEO_PRESENT_TARGETS_LESS_THAN_SOURCES : NTSTATUS = 0xC01E0326 ;
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for EVENT_OBJECT_TEXTEDIT_CONVERSIONTARGETCHANGED (const)
+macro_rules! Depcrate_um_winuserEVENT_OBJECT_TEXTEDIT_CONVERSIONTARGETCHANGED {
+() => {
+// Module: crate::um::winuser
+// Provides: {"EVENT_OBJECT_TEXTEDIT_CONVERSIONTARGETCHANGED"}
+// Dependencies: {}
+pub const EVENT_OBJECT_TEXTEDIT_CONVERSIONTARGETCHANGED : UINT = 0x8030 ;
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for tests (module)
+macro_rules! Depcrate_measure_parsertests {
+() => {
+// Module: crate::measure::parser
+// Provides: {"tests"}
+// Dependencies: {}
+# [cfg (test)] mod tests { use crate :: measure :: measureunit :: MeasureUnit ; # [test] fn test_parser_cases () { let test_cases = vec ! [("meter-per-square-second" , 2 , 0) , ("portion-per-1e9" , 1 , 1_000_000_000) , ("portion-per-1000000000" , 1 , 1_000_000_000) , ("liter-per-100-kilometer" , 2 , 100) ,] ; for (input , expected_len , expected_denominator) in test_cases { let measure_unit = MeasureUnit :: try_from_str (input) . unwrap () ; assert_eq ! (measure_unit . single_units () . len () , expected_len) ; assert_eq ! (measure_unit . constant_denominator , expected_denominator) ; } } # [test] fn test_invlalid_unit_ids () { let test_cases = vec ! ["kilo" , "kilokilo" , "onekilo" , "meterkilo" , "meter-kilo" , "k" , "meter-" , "meter+" , "-meter" , "+meter" , "-kilometer" , "+kilometer" , "-pow2-meter" , "+pow2-meter" , "p2-meter" , "p4-meter" , "+" , "-" , "-mile" , "-and-mile" , "-per-mile" , "one" , "one-one" , "one-per-mile" , "one-per-cubic-centimeter" , "square--per-meter" , "metersecond" , "per-hour-and-hertz" , "hertz-and-per-hour" , "kilonewton-meter-and-newton-meter" , "meter-per--20-second" , "meter-per-1000-1e9-second" , "meter-per-1e19-second" , "per-1000" , "meter-per-1000-1000" , "meter-per-1000-second-1000-kilometer" , "1000-meter" , "meter-1000" , "meter-per-1000-1000" , "meter-per-1000-second-1000-kilometer" , "per-1000-and-per-1000" , "liter-per-kilometer-100" ,] ; for input in test_cases { if input == "meter-per-100-100-kilometer" { continue ; } let measure_unit = MeasureUnit :: try_from_str (input) ; if measure_unit . is_ok () { println ! ("OK:  {input}") ; continue ; } assert ! (measure_unit . is_err ()) ; } } }
+};
+}

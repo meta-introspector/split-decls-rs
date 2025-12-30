@@ -1,0 +1,57 @@
+// Generated module macro for crate::plumbing
+macro_rules! Modcrate_plumbing {
+() => {
+        Depcrate_plumbinguse_18!();
+        Depcrate_plumbinguse_19!();
+        Depcrate_plumbinguse_20!();
+        Depcrate_plumbinguse_21!();
+        Depcrate_plumbinguse_22!();
+        Depcrate_plumbinguse_23!();
+        Depcrate_plumbinguse_24!();
+        Depcrate_plumbinguse_25!();
+        Depcrate_plumbinguse_26!();
+        Depcrate_plumbinguse_27!();
+        Depcrate_plumbinguse_28!();
+        Depcrate_plumbinguse_29!();
+        Depcrate_plumbinguse_30!();
+        Depcrate_plumbinguse_31!();
+        Depcrate_plumbinguse_32!();
+        Depcrate_plumbinguse_33!();
+        Depcrate_plumbinguse_34!();
+        Depcrate_plumbinguse_35!();
+        Depcrate_plumbinguse_36!();
+        Depcrate_plumbinguse_37!();
+        Depcrate_plumbinguse_38!();
+        Depcrate_plumbinguse_39!();
+        Depcrate_plumbinguse_40!();
+        Depcrate_plumbingQueryCtxt!();
+        Depcrate_plumbingimpl_42!();
+        Depcrate_plumbingimpl_43!();
+        Depcrate_plumbingimpl_44!();
+        Depcrate_plumbingimpl_45!();
+        Depcrate_plumbingtry_mark_green!();
+        Depcrate_plumbingencode_all_query_results!();
+        Depcrate_plumbingquery_key_hash_verify_all!();
+        Depcrate_plumbinghandle_cycle_error!();
+        Depcrate_plumbingis_anon!();
+        Depcrate_plumbingis_eval_always!();
+        Depcrate_plumbingdepth_limit!();
+        Depcrate_plumbingfeedable!();
+        Depcrate_plumbinghash_result!();
+        Depcrate_plumbingcall_provider!();
+        Depcrate_plumbingshould_ever_cache_on_disk!();
+        Depcrate_plumbingcreate_query_frame_extra!();
+        Depcrate_plumbingcreate_query_frame!();
+        Depcrate_plumbingencode_query_results!();
+        Depcrate_plumbingquery_key_hash_verify!();
+        Depcrate_plumbingtry_load_from_on_disk_cache!();
+        Depcrate_plumbingloadable_from_disk!();
+        Depcrate_plumbingtry_load_from_disk!();
+        Depcrate_plumbingforce_from_dep_node!();
+        Depcrate_plumbingquery_callback!();
+        Depcrate_plumbingitem_if_cached!();
+        Depcrate_plumbingexpand_if_cached!();
+        Depcrate_plumbing__rust_begin_short_backtrace!();
+        Depcrate_plumbingdefine_queries!();
+    };
+}

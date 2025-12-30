@@ -1,0 +1,40 @@
+// Generated module macro for crate::borrow_tracker::tree_borrows::tree
+macro_rules! Modcrate_borrow_tracker_tree_borrows_tree {
+() => {
+        Depcrate_borrow_tracker_tree_borrows_treeuse_252!();
+        Depcrate_borrow_tracker_tree_borrows_treeuse_253!();
+        Depcrate_borrow_tracker_tree_borrows_treeuse_254!();
+        Depcrate_borrow_tracker_tree_borrows_treeuse_255!();
+        Depcrate_borrow_tracker_tree_borrows_treeuse_256!();
+        Depcrate_borrow_tracker_tree_borrows_treeuse_257!();
+        Depcrate_borrow_tracker_tree_borrows_treeuse_258!();
+        Depcrate_borrow_tracker_tree_borrows_treeuse_259!();
+        Depcrate_borrow_tracker_tree_borrows_treeuse_260!();
+        Depcrate_borrow_tracker_tree_borrows_treeuse_261!();
+        Depcrate_borrow_tracker_tree_borrows_treeuse_262!();
+        Depcrate_borrow_tracker_tree_borrows_treeuse_263!();
+        Depcrate_borrow_tracker_tree_borrows_treeuse_264!();
+        Depcrate_borrow_tracker_tree_borrows_treetests!();
+        Depcrate_borrow_tracker_tree_borrows_treeLocationState!();
+        Depcrate_borrow_tracker_tree_borrows_treeimpl_267!();
+        Depcrate_borrow_tracker_tree_borrows_treeimpl_268!();
+        Depcrate_borrow_tracker_tree_borrows_treeTree!();
+        Depcrate_borrow_tracker_tree_borrows_treeNode!();
+        Depcrate_borrow_tracker_tree_borrows_treeNodeAppArgs!();
+        Depcrate_borrow_tracker_tree_borrows_treeErrHandlerArgs!();
+        Depcrate_borrow_tracker_tree_borrows_treeTreeVisitor!();
+        Depcrate_borrow_tracker_tree_borrows_treeContinueTraversal!();
+        Depcrate_borrow_tracker_tree_borrows_treeChildrenVisitMode!();
+        Depcrate_borrow_tracker_tree_borrows_treeRecursionState!();
+        Depcrate_borrow_tracker_tree_borrows_treeTreeVisitorStack!();
+        Depcrate_borrow_tracker_tree_borrows_treeimpl_278!();
+        Depcrate_borrow_tracker_tree_borrows_treeimpl_279!();
+        Depcrate_borrow_tracker_tree_borrows_treeimpl_280!();
+        Depcrate_borrow_tracker_tree_borrows_treeimpl_281!();
+        Depcrate_borrow_tracker_tree_borrows_treeimpl_282!();
+        Depcrate_borrow_tracker_tree_borrows_treeimpl_283!();
+        Depcrate_borrow_tracker_tree_borrows_treeimpl_284!();
+        Depcrate_borrow_tracker_tree_borrows_treeAccessRelatedness!();
+        Depcrate_borrow_tracker_tree_borrows_treeimpl_286!();
+    };
+}

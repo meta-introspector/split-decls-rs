@@ -1,0 +1,44 @@
+// Generated module macro for crate::drivers::console
+macro_rules! Modcrate_drivers_console {
+() => {
+        Depcrate_drivers_consolemacro_85!();
+        Depcrate_drivers_consoleuse_86!();
+        Depcrate_drivers_consoleuse_87!();
+        Depcrate_drivers_consoleuse_88!();
+        Depcrate_drivers_consoleuse_89!();
+        Depcrate_drivers_consoleuse_90!();
+        Depcrate_drivers_consoleuse_91!();
+        Depcrate_drivers_consoleuse_92!();
+        Depcrate_drivers_consoleuse_93!();
+        Depcrate_drivers_consoleuse_94!();
+        Depcrate_drivers_consoleuse_95!();
+        Depcrate_drivers_consoleuse_96!();
+        Depcrate_drivers_consoleuse_97!();
+        Depcrate_drivers_consoleuse_98!();
+        Depcrate_drivers_consoleuse_99!();
+        Depcrate_drivers_consoleuse_100!();
+        Depcrate_drivers_consoleuse_101!();
+        Depcrate_drivers_consoleuse_102!();
+        Depcrate_drivers_consoleuse_103!();
+        Depcrate_drivers_consoleuse_104!();
+        Depcrate_drivers_consolefill_queue!();
+        Depcrate_drivers_consoleVirtioUART!();
+        Depcrate_drivers_consoleimpl_107!();
+        Depcrate_drivers_consoleimpl_108!();
+        Depcrate_drivers_consoleimpl_109!();
+        Depcrate_drivers_consoleimpl_110!();
+        Depcrate_drivers_consoleimpl_111!();
+        Depcrate_drivers_consoleRxQueue!();
+        Depcrate_drivers_consoleimpl_113!();
+        Depcrate_drivers_consoleTxQueue!();
+        Depcrate_drivers_consoleimpl_115!();
+        Depcrate_drivers_consoleConsoleDevCfg!();
+        Depcrate_drivers_consoleVirtioConsoleDriver!();
+        Depcrate_drivers_consoleimpl_118!();
+        Depcrate_drivers_consoleimpl_119!();
+        Depcrate_drivers_consoleimpl_120!();
+        Depcrate_drivers_consoleimpl_121!();
+        Depcrate_drivers_consoleimpl_122!();
+        Depcrate_drivers_consoleerror!();
+    };
+}

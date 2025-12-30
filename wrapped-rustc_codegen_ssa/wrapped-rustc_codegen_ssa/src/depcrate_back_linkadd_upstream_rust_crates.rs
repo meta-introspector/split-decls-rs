@@ -1,0 +1,9 @@
+// Generated macro for add_upstream_rust_crates (function)
+macro_rules! Depcrate_back_linkadd_upstream_rust_crates {
+() => {
+// Module: crate::back::link
+// Provides: {"add_upstream_rust_crates"}
+// Dependencies: {}
+fn add_upstream_rust_crates (cmd : & mut dyn Linker , sess : & Session , archive_builder_builder : & dyn ArchiveBuilderBuilder , codegen_results : & CodegenResults , crate_type : CrateType , tmpdir : & Path , link_output_kind : LinkOutputKind ,) { let data = codegen_results . crate_info . dependency_formats . get (& crate_type) . expect ("failed to find crate type in dependency format list") ; if sess . target . is_like_aix { cmd . link_or_cc_arg ("-bnoipath") ; } for & cnum in & codegen_results . crate_info . used_crates { let linkage = data [cnum] ; let link_static_crate = linkage == Linkage :: Static || (linkage == Linkage :: IncludedFromDylib || linkage == Linkage :: NotLinked) && (codegen_results . crate_info . compiler_builtins == Some (cnum) || codegen_results . crate_info . profiler_runtime == Some (cnum)) ; let mut bundled_libs = Default :: default () ; match linkage { Linkage :: Static | Linkage :: IncludedFromDylib | Linkage :: NotLinked => { if link_static_crate { bundled_libs = codegen_results . crate_info . native_libraries [& cnum] . iter () . filter_map (| lib | lib . filename) . collect () ; add_static_crate (cmd , sess , archive_builder_builder , codegen_results , tmpdir , cnum , & bundled_libs ,) ; } } Linkage :: Dynamic => { let src = & codegen_results . crate_info . used_crate_source [& cnum] ; add_dynamic_crate (cmd , sess , & src . dylib . as_ref () . unwrap () . 0) ; } } let link_static = link_static_crate ; let link_dynamic = false ; add_native_libs_from_crate (cmd , sess , archive_builder_builder , codegen_results , tmpdir , & bundled_libs , cnum , link_static , link_dynamic , link_output_kind ,) ; } }
+};
+}

@@ -4,6 +4,6 @@ macro_rules! Depcrate_updateimpl_594 {
 // Module: crate::update
 // Provides: {"impl_594"}
 // Dependencies: {}
-unsafe impl Update for std :: convert :: Infallible { unsafe fn maybe_update (_old_pointer : * mut Self , new_value : Self) -> bool { match new_value { } } }
+unsafe impl < T > Update for thin_vec :: ThinVec < T > where T : Update , { unsafe fn maybe_update (old_pointer : * mut Self , new_vec : Self) -> bool { maybe_update_vec ! (old_pointer , new_vec , T) } }
 };
 }

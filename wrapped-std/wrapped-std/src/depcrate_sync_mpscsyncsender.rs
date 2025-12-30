@@ -1,0 +1,9 @@
+// Generated macro for SyncSender (struct)
+macro_rules! Depcrate_sync_mpscSyncSender {
+() => {
+// Module: crate::sync::mpsc
+// Provides: {"SyncSender"}
+// Dependencies: {}
+# [doc = " The sending-half of Rust's synchronous [`sync_channel`] type."] # [doc = ""] # [doc = " Messages can be sent through this channel with [`send`] or [`try_send`]."] # [doc = ""] # [doc = " [`send`] will block if there is no space in the internal buffer."] # [doc = ""] # [doc = " [`send`]: SyncSender::send"] # [doc = " [`try_send`]: SyncSender::try_send"] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```rust"] # [doc = " use std::sync::mpsc::sync_channel;"] # [doc = " use std::thread;"] # [doc = ""] # [doc = " // Create a sync_channel with buffer size 2"] # [doc = " let (sync_sender, receiver) = sync_channel(2);"] # [doc = " let sync_sender2 = sync_sender.clone();"] # [doc = ""] # [doc = " // First thread owns sync_sender"] # [doc = " thread::spawn(move || {"] # [doc = "     sync_sender.send(1).unwrap();"] # [doc = "     sync_sender.send(2).unwrap();"] # [doc = " });"] # [doc = ""] # [doc = " // Second thread owns sync_sender2"] # [doc = " thread::spawn(move || {"] # [doc = "     sync_sender2.send(3).unwrap();"] # [doc = "     // thread will now block since the buffer is full"] # [doc = "     println!(\"Thread unblocked!\");"] # [doc = " });"] # [doc = ""] # [doc = " let mut msg;"] # [doc = ""] # [doc = " msg = receiver.recv().unwrap();"] # [doc = " println!(\"message {msg} received\");"] # [doc = ""] # [doc = " // \"Thread unblocked!\" will be printed now"] # [doc = ""] # [doc = " msg = receiver.recv().unwrap();"] # [doc = " println!(\"message {msg} received\");"] # [doc = ""] # [doc = " msg = receiver.recv().unwrap();"] # [doc = ""] # [doc = " println!(\"message {msg} received\");"] # [doc = " ```"] # [stable (feature = "rust1" , since = "1.0.0")] pub struct SyncSender < T > { inner : mpmc :: Sender < T > , }
+};
+}

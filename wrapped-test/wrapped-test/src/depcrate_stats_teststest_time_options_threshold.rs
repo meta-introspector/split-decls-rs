@@ -1,0 +1,9 @@
+// Generated macro for test_time_options_threshold (function)
+macro_rules! Depcrate_stats_teststest_time_options_threshold {
+() => {
+// Module: crate::stats::tests
+// Provides: {"test_time_options_threshold"}
+// Dependencies: {}
+# [test] fn test_time_options_threshold () { let unit = TimeThreshold :: new (Duration :: from_millis (50) , Duration :: from_millis (100)) ; let integration = TimeThreshold :: new (Duration :: from_millis (500) , Duration :: from_millis (1000)) ; let doc = TimeThreshold :: new (Duration :: from_millis (5000) , Duration :: from_millis (10000)) ; let options = TestTimeOptions { error_on_excess : false , unit_threshold : unit . clone () , integration_threshold : integration . clone () , doctest_threshold : doc . clone () , } ; let test_vector = [(TestType :: UnitTest , unit . warn . as_millis () - 1 , false , false) , (TestType :: UnitTest , unit . warn . as_millis () , true , false) , (TestType :: UnitTest , unit . critical . as_millis () , true , true) , (TestType :: IntegrationTest , integration . warn . as_millis () - 1 , false , false) , (TestType :: IntegrationTest , integration . warn . as_millis () , true , false) , (TestType :: IntegrationTest , integration . critical . as_millis () , true , true) , (TestType :: DocTest , doc . warn . as_millis () - 1 , false , false) , (TestType :: DocTest , doc . warn . as_millis () , true , false) , (TestType :: DocTest , doc . critical . as_millis () , true , true) ,] ; for (test_type , time , expected_warn , expected_critical) in test_vector . iter () { let test_desc = typed_test_desc (* test_type) ; let exec_time = test_exec_time (* time as u64) ; assert_eq ! (options . is_warn (& test_desc , & exec_time) , * expected_warn) ; assert_eq ! (options . is_critical (& test_desc , & exec_time) , * expected_critical) ; } }
+};
+}

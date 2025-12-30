@@ -1,0 +1,9 @@
+// Generated macro for analyze_source_file (function)
+macro_rules! Depcrateanalyze_source_file {
+() => {
+// Module: crate
+// Provides: {"analyze_source_file"}
+// Dependencies: {}
+# [doc = " This is adapted from the rustc_span crate, https://github.com/rust-lang/rust/blob/de59844c98f7925242a798a72c59dc3610dd0e2c/compiler/rustc_span/src/analyze_source_file.rs"] fn analyze_source_file (src : & str) -> (Vec < TextSize > , IntMap < u32 , Box < [WideChar] > >) { assert ! (src . len () < ! 0u32 as usize) ; let mut lines = vec ! [] ; let mut line_wide_chars = IntMap :: < u32 , Vec < WideChar > > :: default () ; analyze_source_file_dispatch (src , & mut lines , & mut line_wide_chars) ; (lines , line_wide_chars . into_iter () . map (| (k , v) | (k , v . into_boxed_slice ())) . collect ()) }
+};
+}

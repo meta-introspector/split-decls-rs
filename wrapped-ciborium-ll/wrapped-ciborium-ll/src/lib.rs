@@ -1,0 +1,68 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcrateinvaliderror.rs");
+include!("depcrate_decuse_3.rs");
+include!("depcrate_decimpl_6.rs");
+include!("depcratetests.rs");
+include!("depcrate_encimpl_16.rs");
+include!("depcrate_encencoder.rs");
+include!("depcrateuse_43.rs");
+include!("depcrate_hdrimpl_23.rs");
+include!("depcrate_segtests.rs");
+include!("depcrate_segimpl_30.rs");
+include!("depcrateuse_41.rs");
+include!("depcratesimple.rs");
+include!("depcrate_segimpl_38.rs");
+include!("depcrate_encimpl_17.rs");
+include!("depcrateuse_42.rs");
+include!("depcrate_hdrimpl_22.rs");
+include!("depcrateimpl_49.rs");
+include!("depcratetitle.rs");
+include!("depcrate_decimpl_8.rs");
+include!("depcrate_hdruse_19.rs");
+include!("depcrate_segtext.rs");
+include!("depcrate_segparser.rs");
+include!("depcrate_encuse_13.rs");
+include!("depcrate_hdruse_20.rs");
+include!("depcrate_encuse_12.rs");
+include!("depcrateother_1.rs");
+include!("depcrate_segimpl_37.rs");
+include!("depcrate_decimpl_9.rs");
+include!("depcrate_encimpl_15.rs");
+include!("depcrate_segsegments.rs");
+include!("depcrate_decuse_4.rs");
+include!("depcrate_decimpl_10.rs");
+include!("depcrate_hdrheader.rs");
+include!("depcratehdr.rs");
+include!("depcrate_segimpl_32.rs");
+include!("depcrate_segimpl_34.rs");
+include!("depcrateuse_40.rs");
+include!("depcrate_decerror.rs");
+include!("depcratemajor.rs");
+include!("depcrateimpl_50.rs");
+include!("depcratetag.rs");
+include!("depcrateseg.rs");
+include!("depcrate_segbytes.rs");
+include!("depcrateenc.rs");
+include!("depcrate_seguse_26.rs");
+include!("depcrate_seguse_27.rs");
+include!("depcrate_decdecoder.rs");
+include!("depcrate_segsegment.rs");
+include!("depcrate_seguse_25.rs");
+include!("depcrate_segstate.rs");
+include!("depcrateminor.rs");
+include!("depcratedec.rs");
+include!("modcrate_seg.rs");
+include!("modcrate.rs");
+include!("modcrate_enc.rs");
+include!("modcrate_dec.rs");
+include!("modcrate_hdr.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate_seg!();
+    Modcrate!();
+    Modcrate_enc!();
+    Modcrate_dec!();
+    Modcrate_hdr!();
+}

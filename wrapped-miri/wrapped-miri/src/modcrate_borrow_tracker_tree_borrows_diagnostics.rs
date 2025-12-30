@@ -1,0 +1,44 @@
+// Generated module macro for crate::borrow_tracker::tree_borrows::diagnostics
+macro_rules! Modcrate_borrow_tracker_tree_borrows_diagnostics {
+() => {
+        Depcrate_borrow_tracker_tree_borrows_diagnosticsuse_187!();
+        Depcrate_borrow_tracker_tree_borrows_diagnosticsuse_188!();
+        Depcrate_borrow_tracker_tree_borrows_diagnosticsuse_189!();
+        Depcrate_borrow_tracker_tree_borrows_diagnosticsuse_190!();
+        Depcrate_borrow_tracker_tree_borrows_diagnosticsuse_191!();
+        Depcrate_borrow_tracker_tree_borrows_diagnosticsuse_192!();
+        Depcrate_borrow_tracker_tree_borrows_diagnosticsuse_193!();
+        Depcrate_borrow_tracker_tree_borrows_diagnosticsuse_194!();
+        Depcrate_borrow_tracker_tree_borrows_diagnosticsuse_195!();
+        Depcrate_borrow_tracker_tree_borrows_diagnosticsAccessCause!();
+        Depcrate_borrow_tracker_tree_borrows_diagnosticsimpl_197!();
+        Depcrate_borrow_tracker_tree_borrows_diagnosticsimpl_198!();
+        Depcrate_borrow_tracker_tree_borrows_diagnosticsEvent!();
+        Depcrate_borrow_tracker_tree_borrows_diagnosticsHistory!();
+        Depcrate_borrow_tracker_tree_borrows_diagnosticsHistoryData!();
+        Depcrate_borrow_tracker_tree_borrows_diagnosticsimpl_202!();
+        Depcrate_borrow_tracker_tree_borrows_diagnosticsimpl_203!();
+        Depcrate_borrow_tracker_tree_borrows_diagnosticsNodeDebugInfo!();
+        Depcrate_borrow_tracker_tree_borrows_diagnosticsimpl_205!();
+        Depcrate_borrow_tracker_tree_borrows_diagnosticsimpl_206!();
+        Depcrate_borrow_tracker_tree_borrows_diagnosticsimpl_207!();
+        Depcrate_borrow_tracker_tree_borrows_diagnosticsTransitionError!();
+        Depcrate_borrow_tracker_tree_borrows_diagnosticsimpl_209!();
+        Depcrate_borrow_tracker_tree_borrows_diagnosticsTbError!();
+        Depcrate_borrow_tracker_tree_borrows_diagnosticsimpl_211!();
+        Depcrate_borrow_tracker_tree_borrows_diagnosticsS!();
+        Depcrate_borrow_tracker_tree_borrows_diagnosticsDisplayFmtWrapper!();
+        Depcrate_borrow_tracker_tree_borrows_diagnosticsDisplayFmtPermission!();
+        Depcrate_borrow_tracker_tree_borrows_diagnosticsDisplayFmtPadding!();
+        Depcrate_borrow_tracker_tree_borrows_diagnosticsDisplayFmtAccess!();
+        Depcrate_borrow_tracker_tree_borrows_diagnosticsDisplayFmt!();
+        Depcrate_borrow_tracker_tree_borrows_diagnosticsimpl_218!();
+        Depcrate_borrow_tracker_tree_borrows_diagnosticsDisplayIndent!();
+        Depcrate_borrow_tracker_tree_borrows_diagnosticsimpl_220!();
+        Depcrate_borrow_tracker_tree_borrows_diagnosticschar_repeat!();
+        Depcrate_borrow_tracker_tree_borrows_diagnosticsDisplayRepr!();
+        Depcrate_borrow_tracker_tree_borrows_diagnosticsimpl_223!();
+        Depcrate_borrow_tracker_tree_borrows_diagnosticsDEFAULT_FORMATTER!();
+        Depcrate_borrow_tracker_tree_borrows_diagnosticsimpl_225!();
+    };
+}

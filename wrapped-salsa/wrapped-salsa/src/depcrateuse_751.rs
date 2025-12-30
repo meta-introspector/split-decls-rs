@@ -4,6 +4,6 @@ macro_rules! Depcrateuse_751 {
 // Module: crate
 // Provides: {"use_751"}
 // Dependencies: {}
-# [cfg (feature = "accumulator")] pub use self :: accumulator :: Accumulator ;
+pub use self :: cycle :: Cycle ;
 };
 }

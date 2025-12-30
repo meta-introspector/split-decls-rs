@@ -1,0 +1,9 @@
+// Generated macro for Item (struct)
+macro_rules! Depcrate_itemItem {
+() => {
+// Module: crate::item
+// Provides: {"Item"}
+// Dependencies: {}
+# [derive (Clone)] pub (crate) struct Item { name : Name , casing : Sp < CasingStyle > , env_casing : Sp < CasingStyle > , ty : Option < Type > , doc_comment : Vec < Method > , methods : Vec < Method > , deprecations : Vec < Deprecation > , value_parser : Option < ValueParser > , action : Option < Action > , verbatim_doc_comment : bool , force_long_help : bool , next_display_order : Option < Method > , next_help_heading : Option < Method > , is_enum : bool , is_positional : bool , skip_group : bool , group_id : Name , group_methods : Vec < Method > , kind : Sp < Kind > , }
+};
+}

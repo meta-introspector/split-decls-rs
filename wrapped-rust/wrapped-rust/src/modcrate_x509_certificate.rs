@@ -1,0 +1,48 @@
+// Generated module macro for crate::x509::certificate
+macro_rules! Modcrate_x509_certificate {
+() => {
+        Depcrate_x509_certificateuse_808!();
+        Depcrate_x509_certificateuse_809!();
+        Depcrate_x509_certificateuse_810!();
+        Depcrate_x509_certificateuse_811!();
+        Depcrate_x509_certificateuse_812!();
+        Depcrate_x509_certificateuse_813!();
+        Depcrate_x509_certificateuse_814!();
+        Depcrate_x509_certificateuse_815!();
+        Depcrate_x509_certificateuse_816!();
+        Depcrate_x509_certificateuse_817!();
+        Depcrate_x509_certificateuse_818!();
+        Depcrate_x509_certificateuse_819!();
+        Depcrate_x509_certificateuse_820!();
+        Depcrate_x509_certificateuse_821!();
+        Depcrate_x509_certificatemacro_822!();
+        Depcrate_x509_certificateCertificate!();
+        Depcrate_x509_certificateimpl_824!();
+        Depcrate_x509_certificatecert_version!();
+        Depcrate_x509_certificateload_pem_x509_certificate!();
+        Depcrate_x509_certificateload_pem_x509_certificates!();
+        Depcrate_x509_certificateload_der_x509_certificate!();
+        Depcrate_x509_certificatewarn_if_not_positive!();
+        Depcrate_x509_certificatewarn_if_invalid_params!();
+        Depcrate_x509_certificateparse_display_text!();
+        Depcrate_x509_certificateparse_user_notice!();
+        Depcrate_x509_certificateparse_policy_qualifiers!();
+        Depcrate_x509_certificateparse_cp!();
+        Depcrate_x509_certificateparse_general_subtrees!();
+        Depcrate_x509_certificateparse_distribution_point_name!();
+        Depcrate_x509_certificateparse_distribution_point!();
+        Depcrate_x509_certificateparse_distribution_points!();
+        Depcrate_x509_certificateparse_distribution_point_reasons!();
+        Depcrate_x509_certificateencode_distribution_point_reasons!();
+        Depcrate_x509_certificateparse_authority_key_identifier!();
+        Depcrate_x509_certificateparse_access_descriptions!();
+        Depcrate_x509_certificateparse_naming_authority!();
+        Depcrate_x509_certificateparse_profession_infos!();
+        Depcrate_x509_certificateparse_admissions!();
+        Depcrate_x509_certificateparse_cert_ext!();
+        Depcrate_x509_certificatetime_from_py!();
+        Depcrate_x509_certificatetime_from_datetime!();
+        Depcrate_x509_certificatecreate_x509_certificate!();
+        Depcrate_x509_certificateset_bit!();
+    };
+}

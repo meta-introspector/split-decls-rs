@@ -1,0 +1,9 @@
+// Generated macro for Replay (struct)
+macro_rules! Depcrate_test_runner_replayReplay {
+() => {
+// Module: crate::test_runner::replay
+// Provides: {"Replay"}
+// Dependencies: {}
+# [doc = " A \"replay\" of a `TestRunner` invocation."] # [doc = ""] # [doc = " The replay mechanism is used to support forking. When a child process"] # [doc = " exits, the parent can read the replay to reproduce the state the child had;"] # [doc = " similarly, if a child crashes, a new one can be started and given a replay"] # [doc = " which steps it one complication past the input that caused the crash."] # [doc = ""] # [doc = " The replay system is tightly coupled to the `TestRunner` itself. It does"] # [doc = " not carry enough information to be used in different builds of the same"] # [doc = " application, or even two different runs of the test process since changes"] # [doc = " to the persistence file will perturb the replay."] # [doc = ""] # [doc = " `Replay` has a special string format for being stored in files. It starts"] # [doc = " with a line just containing the text in `SENTINEL`, then 16 lines"] # [doc = " containing the values of `seed`, then an unterminated line consisting of"] # [doc = " `+`, `-`, and `!` characters to indicate test case passes/failures/rejects,"] # [doc = " `.` to indicate termination of the test run, or ` ` as a dummy \"I'm alive\""] # [doc = " signal. This format makes it easy for the child process to blindly append"] # [doc = " to the file without having to worry about the possibility of appends being"] # [doc = " non-atomic."] # [derive (Clone , Debug)] pub (crate) struct Replay { # [doc = " The seed of the RNG used to start running the test cases."] pub (crate) seed : Seed , # [doc = " A log of whether certain test cases passed or failed. The runner will"] # [doc = " assume the same results occur without actually running the test cases."] pub (crate) steps : Vec < TestCaseResult > , }
+};
+}

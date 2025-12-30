@@ -1,0 +1,9 @@
+// Generated macro for D3D11_HS_OUTPUT_PATCH_CONSTANT_REGISTER_READS_PER_INST (const)
+macro_rules! Depcrate_um_d3d11D3D11_HS_OUTPUT_PATCH_CONSTANT_REGISTER_READS_PER_INST {
+() => {
+// Module: crate::um::d3d11
+// Provides: {"D3D11_HS_OUTPUT_PATCH_CONSTANT_REGISTER_READS_PER_INST"}
+// Dependencies: {}
+pub const D3D11_HS_OUTPUT_PATCH_CONSTANT_REGISTER_READS_PER_INST : DWORD = 2 ;
+};
+}

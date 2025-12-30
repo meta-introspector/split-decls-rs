@@ -1,0 +1,9 @@
+// Generated macro for check (function)
+macro_rules! Depcrate_doc_needless_doctest_maincheck {
+() => {
+// Module: crate::doc::needless_doctest_main
+// Provides: {"check"}
+// Dependencies: {}
+pub fn check (cx : & LateContext < '_ > , text : & str , offset : usize , fragments : Fragments < '_ >) { if ! text . contains ("main") { return ; } let mut tokens = tokenize_with_text (text) . filter (| & (kind , ..) | { ! matches ! (kind , TokenKind :: Whitespace | TokenKind :: BlockComment { .. } | TokenKind :: LineComment { .. }) }) ; if let Some ((TokenKind :: Ident , "fn" , fn_span)) = tokens . next () && let Some ((TokenKind :: Ident , "main" , main_span)) = tokens . next () && let Some ((TokenKind :: OpenParen , ..)) = tokens . next () && let Some ((TokenKind :: CloseParen , ..)) = tokens . next () && returns_unit (& mut tokens) { let mut depth = 1 ; for (kind , ..) in & mut tokens { match kind { TokenKind :: OpenBrace => depth += 1 , TokenKind :: CloseBrace => { depth -= 1 ; if depth == 0 { break ; } } , _ => { } , } } if tokens . next () . is_none () && let Some (span) = fragments . span (cx , fn_span . start + offset .. main_span . end + offset) { span_lint (cx , NEEDLESS_DOCTEST_MAIN , span , "needless `fn main` in doctest") ; } } }
+};
+}

@@ -1,0 +1,41 @@
+// Generated module macro for crate::helpers
+macro_rules! Modcrate_helpers {
+() => {
+        Depcrate_helpersuse_2!();
+        Depcrate_helpersuse_3!();
+        Depcrate_helpersuse_4!();
+        Depcrate_helpersuse_5!();
+        Depcrate_helpersuse_6!();
+        Depcrate_helpersuse_7!();
+        Depcrate_helpersToDep!();
+        Depcrate_helpersimpl_9!();
+        Depcrate_helpersimpl_10!();
+        Depcrate_helpersToPkgId!();
+        Depcrate_helpersimpl_12!();
+        Depcrate_helpersimpl_13!();
+        Depcrate_helpersimpl_14!();
+        Depcrate_helperspkg!();
+        Depcrate_helpersregistry_loc!();
+        Depcrate_helperspkg!();
+        Depcrate_helperspkg_dep!();
+        Depcrate_helperspkg_dep_with!();
+        Depcrate_helperspkg_dep_link!();
+        Depcrate_helperspkg_id!();
+        Depcrate_helperspkg_id_source!();
+        Depcrate_helperspkg_id_loc!();
+        Depcrate_helperspkg_loc!();
+        Depcrate_helpersremove_dep!();
+        Depcrate_helpersdep!();
+        Depcrate_helpersdep_req!();
+        Depcrate_helpersdep_req_kind!();
+        Depcrate_helpersdep_req_platform!();
+        Depcrate_helpersdep_loc!();
+        Depcrate_helpersdep_kind!();
+        Depcrate_helpersdep_platform!();
+        Depcrate_helpersregistry!();
+        Depcrate_helpersnames!();
+        Depcrate_helpersloc_names!();
+        Depcrate_helpersassert_contains!();
+        Depcrate_helpersassert_same!();
+    };
+}

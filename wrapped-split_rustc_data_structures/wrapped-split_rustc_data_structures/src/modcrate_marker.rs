@@ -1,0 +1,41 @@
+// Generated module macro for crate::marker
+macro_rules! Modcrate_marker {
+() => {
+        Depcrate_markeruse_326!();
+        Depcrate_markeruse_327!();
+        Depcrate_markerDynSend!();
+        Depcrate_markerDynSync!();
+        Depcrate_markerimpl_330!();
+        Depcrate_markerimpls_dyn_send_neg!();
+        Depcrate_markermacro_332!();
+        Depcrate_markerimpl_333!();
+        Depcrate_markeralready_send!();
+        Depcrate_markermacro_335!();
+        Depcrate_markerimpl_dyn_send!();
+        Depcrate_markermacro_337!();
+        Depcrate_markerimpls_dyn_sync_neg!();
+        Depcrate_markermacro_339!();
+        Depcrate_markerimpl_340!();
+        Depcrate_markeralready_sync!();
+        Depcrate_markermacro_342!();
+        Depcrate_markermacro_343!();
+        Depcrate_markermacro_344!();
+        Depcrate_markerimpl_dyn_sync!();
+        Depcrate_markermacro_346!();
+        Depcrate_markerassert_dyn_sync!();
+        Depcrate_markerassert_dyn_send!();
+        Depcrate_markerassert_dyn_send_val!();
+        Depcrate_markerassert_dyn_send_sync_val!();
+        Depcrate_markerFromDyn!();
+        Depcrate_markerimpl_352!();
+        Depcrate_markerimpl_353!();
+        Depcrate_markerimpl_354!();
+        Depcrate_markerimpl_355!();
+        Depcrate_markerimpl_356!();
+        Depcrate_markerIntoDynSyncSend!();
+        Depcrate_markerimpl_358!();
+        Depcrate_markerimpl_359!();
+        Depcrate_markerimpl_360!();
+        Depcrate_markerimpl_361!();
+    };
+}

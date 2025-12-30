@@ -4,6 +4,6 @@ macro_rules! Depcrate_tracked_structuse_542 {
 // Module: crate::tracked_struct
 // Provides: {"use_542"}
 // Dependencies: {}
-use crate :: hash :: { FxHashSet , FxIndexSet } ;
+use crate :: key :: DatabaseKeyIndex ;
 };
 }

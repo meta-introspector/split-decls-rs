@@ -1,0 +1,9 @@
+// Generated macro for FuturesUnordered (struct)
+macro_rules! Depcrate_stream_futures_unorderedFuturesUnordered {
+() => {
+// Module: crate::stream::futures_unordered
+// Provides: {"FuturesUnordered"}
+// Dependencies: {}
+# [doc = " A set of futures which may complete in any order."] # [doc = ""] # [doc = " See [`FuturesOrdered`](crate::stream::FuturesOrdered) for a version of this"] # [doc = " type that preserves a FIFO order."] # [doc = ""] # [doc = " This structure is optimized to manage a large number of futures."] # [doc = " Futures managed by [`FuturesUnordered`] will only be polled when they"] # [doc = " generate wake-up notifications. This reduces the required amount of work"] # [doc = " needed to poll large numbers of futures."] # [doc = ""] # [doc = " [`FuturesUnordered`] can be filled by [`collect`](Iterator::collect)ing an"] # [doc = " iterator of futures into a [`FuturesUnordered`], or by"] # [doc = " [`push`](FuturesUnordered::push)ing futures onto an existing"] # [doc = " [`FuturesUnordered`]. When new futures are added,"] # [doc = " [`poll_next`](Stream::poll_next) must be called in order to begin receiving"] # [doc = " wake-ups for new futures."] # [doc = ""] # [doc = " Note that you can create a ready-made [`FuturesUnordered`] via the"] # [doc = " [`collect`](Iterator::collect) method, or you can start with an empty set"] # [doc = " with the [`FuturesUnordered::new`] constructor."] # [doc = ""] # [doc = " This type is only available when the `std` or `alloc` feature of this"] # [doc = " library is activated, and it is activated by default."] # [must_use = "streams do nothing unless polled"] pub struct FuturesUnordered < Fut > { ready_to_run_queue : Arc < ReadyToRunQueue < Fut > > , head_all : AtomicPtr < Task < Fut > > , is_terminated : AtomicBool , }
+};
+}

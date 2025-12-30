@@ -1,0 +1,50 @@
+// Generated module macro for crate::um::d3d11_1
+macro_rules! Modcrate_um_d3d11_1 {
+() => {
+        Depcrate_um_d3d11_1use_25225!();
+        Depcrate_um_d3d11_1use_25226!();
+        Depcrate_um_d3d11_1use_25227!();
+        Depcrate_um_d3d11_1use_25228!();
+        Depcrate_um_d3d11_1use_25229!();
+        Depcrate_um_d3d11_1use_25230!();
+        Depcrate_um_d3d11_1use_25231!();
+        Depcrate_um_d3d11_1use_25232!();
+        Depcrate_um_d3d11_1use_25233!();
+        Depcrate_um_d3d11_1use_25234!();
+        Depcrate_um_d3d11_1macro_25235!();
+        Depcrate_um_d3d11_1macro_25236!();
+        Depcrate_um_d3d11_1macro_25237!();
+        Depcrate_um_d3d11_1macro_25238!();
+        Depcrate_um_d3d11_1macro_25239!();
+        Depcrate_um_d3d11_1macro_25240!();
+        Depcrate_um_d3d11_1macro_25241!();
+        Depcrate_um_d3d11_1macro_25242!();
+        Depcrate_um_d3d11_1macro_25243!();
+        Depcrate_um_d3d11_1macro_25244!();
+        Depcrate_um_d3d11_1macro_25245!();
+        Depcrate_um_d3d11_1macro_25246!();
+        Depcrate_um_d3d11_1macro_25247!();
+        Depcrate_um_d3d11_1macro_25248!();
+        Depcrate_um_d3d11_1macro_25249!();
+        Depcrate_um_d3d11_1macro_25250!();
+        Depcrate_um_d3d11_1macro_25251!();
+        Depcrate_um_d3d11_1macro_25252!();
+        Depcrate_um_d3d11_1macro_25253!();
+        Depcrate_um_d3d11_1macro_25254!();
+        Depcrate_um_d3d11_1macro_25255!();
+        Depcrate_um_d3d11_1macro_25256!();
+        Depcrate_um_d3d11_1macro_25257!();
+        Depcrate_um_d3d11_1macro_25258!();
+        Depcrate_um_d3d11_1macro_25259!();
+        Depcrate_um_d3d11_1macro_25260!();
+        Depcrate_um_d3d11_1macro_25261!();
+        Depcrate_um_d3d11_1macro_25262!();
+        Depcrate_um_d3d11_1macro_25263!();
+        Depcrate_um_d3d11_1macro_25264!();
+        Depcrate_um_d3d11_1macro_25265!();
+        Depcrate_um_d3d11_1macro_25266!();
+        Depcrate_um_d3d11_1macro_25267!();
+        Depcrate_um_d3d11_1macro_25268!();
+        Depcrate_um_d3d11_1macro_25269!();
+    };
+}

@@ -1,0 +1,9 @@
+// Generated macro for impl_507 (impl)
+macro_rules! Depcrate_currency_patternsimpl_507 {
+() => {
+// Module: crate::currency::patterns
+// Provides: {"impl_507"}
+// Dependencies: {}
+impl DataProvider < CurrencyPatternsDataV1 > for SourceDataProvider { fn load (& self , req : DataRequest) -> Result < DataResponse < CurrencyPatternsDataV1 > , DataError > { let numbers_resource : & cldr_serde :: numbers :: Resource = self . cldr () ? . numbers () . read_and_parse (req . id . locale , "numbers.json") ? ; let mut default_system = numbers_resource . main . value . numbers . default_numbering_system . as_str () ; if * req . id . locale == DataLocale :: from (icu :: locale :: locale ! ("sd")) { default_system = "latn" ; } let currency_patterns = & numbers_resource . main . value . numbers . numsys_data . currency_patterns ; let patterns = & currency_patterns . get (default_system) . ok_or (DataErrorKind :: IdentifierNotFound . into_error ()) ? ; if patterns . pattern_other . is_none () { return Err (DataErrorKind :: IdentifierNotFound . into_error ()) ; } Ok (DataResponse { metadata : Default :: default () , payload : DataPayload :: from_owned (CurrencyPatternsData { patterns : PluralElements :: new (patterns . pattern_other . as_deref () . ok_or_else (| | { DataError :: custom ("Missing patterns") . with_debug_context (currency_patterns) . with_debug_context (& req . id) } ,) ?) . with_zero_value (patterns . pattern_zero . as_deref ()) . with_one_value (patterns . pattern_one . as_deref ()) . with_two_value (patterns . pattern_two . as_deref ()) . with_few_value (patterns . pattern_few . as_deref ()) . with_many_value (patterns . pattern_many . as_deref ()) . with_explicit_one_value (patterns . pattern_explicit_one . as_deref ()) . with_explicit_zero_value (patterns . pattern_explicit_zero . as_deref ()) . into () , }) , }) } }
+};
+}

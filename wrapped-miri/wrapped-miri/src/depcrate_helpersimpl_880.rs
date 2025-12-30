@@ -1,0 +1,9 @@
+// Generated macro for impl_880 (impl)
+macro_rules! Depcrate_helpersimpl_880 {
+() => {
+// Module: crate::helpers
+// Provides: {"impl_880"}
+// Dependencies: {}
+impl < 'tcx > MiriMachine < 'tcx > { # [doc = " Get the current span in the topmost function which is workspace-local and not"] # [doc = " `#[track_caller]`."] # [doc = " This function is backed by a cache, and can be assumed to be very fast."] # [doc = " It will work even when the stack is empty."] pub fn current_user_relevant_span (& self) -> Span { self . threads . active_thread_ref () . current_user_relevant_span () } # [doc = " Returns the span of the *caller* of the current operation, again"] # [doc = " walking down the stack to find the closest frame in a local crate, if the caller of the"] # [doc = " current operation is not in a local crate."] # [doc = " This is useful when we are processing something which occurs on function-entry and we want"] # [doc = " to point at the call to the function, not the function definition generally."] pub fn caller_span (& self) -> Span { let frame_idx = self . top_user_relevant_frame () . unwrap () ; let frame_idx = cmp :: min (frame_idx , self . stack () . len () . saturating_sub (2)) ; self . stack () [frame_idx] . current_span () } fn stack (& self) -> & [Frame < 'tcx , Provenance , machine :: FrameExtra < 'tcx > >] { self . threads . active_thread_stack () } fn top_user_relevant_frame (& self) -> Option < usize > { self . threads . active_thread_ref () . top_user_relevant_frame () } # [doc = " This is the source of truth for the `user_relevance` flag in our `FrameExtra`."] pub fn user_relevance (& self , frame : & Frame < 'tcx , Provenance >) -> u8 { if frame . instance () . def . requires_caller_location (self . tcx) { return 0 ; } if self . is_local (frame . instance ()) { u8 :: MAX } else { 1 } } }
+};
+}

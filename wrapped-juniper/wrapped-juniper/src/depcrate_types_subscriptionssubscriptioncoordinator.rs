@@ -1,0 +1,9 @@
+// Generated macro for SubscriptionCoordinator (trait)
+macro_rules! Depcrate_types_subscriptionsSubscriptionCoordinator {
+() => {
+// Module: crate::types::subscriptions
+// Provides: {"SubscriptionCoordinator"}
+// Dependencies: {}
+# [doc = " Global subscription coordinator trait."] # [doc = ""] # [doc = " With regular queries we could get away with not having some in-between"] # [doc = " layer, but for subscriptions it is needed, otherwise the integration crates"] # [doc = " can become really messy and cumbersome to maintain. Subscriptions are also"] # [doc = " quite a bit more stability sensitive than regular queries, they provide a"] # [doc = " great vector for DOS attacks and can bring down a server easily if not"] # [doc = " handled right."] # [doc = ""] # [doc = " This trait implementation might include the following features:"] # [doc = "  - contains the schema"] # [doc = "  - keeps track of subscription connections"] # [doc = "  - handles subscription start, maintains a global subscription id"] # [doc = "  - max subscription limits / concurrency limits"] # [doc = "  - subscription de-duplication"] # [doc = "  - reconnection on connection loss / buffering / re-synchronisation"] # [doc = ""] # [doc = ""] # [doc = " `'a` is how long spawned connections live for."] pub trait SubscriptionCoordinator < 'a , CtxT , S > where S : ScalarValue , { # [doc = " Type of [`SubscriptionConnection`]s this [`SubscriptionCoordinator`]"] # [doc = " returns"] type Connection : SubscriptionConnection < S > ; # [doc = " Type of error while trying to spawn [`SubscriptionConnection`]"] type Error ; # [doc = " Return [`SubscriptionConnection`] based on given [`GraphQLRequest`]"] fn subscribe (& 'a self , _ : & 'a GraphQLRequest < S > , _ : & 'a CtxT ,) -> BoxFuture < 'a , Result < Self :: Connection , Self :: Error > > ; }
+};
+}

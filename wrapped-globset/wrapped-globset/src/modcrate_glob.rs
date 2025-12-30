@@ -1,0 +1,39 @@
+// Generated module macro for crate::glob
+macro_rules! Modcrate_glob {
+() => {
+        Depcrate_globuse_12!();
+        Depcrate_globuse_13!();
+        Depcrate_globuse_14!();
+        Depcrate_globuse_15!();
+        Depcrate_globMatchStrategy!();
+        Depcrate_globimpl_17!();
+        Depcrate_globGlob!();
+        Depcrate_globimpl_19!();
+        Depcrate_globimpl_20!();
+        Depcrate_globimpl_21!();
+        Depcrate_globimpl_22!();
+        Depcrate_globimpl_23!();
+        Depcrate_globimpl_24!();
+        Depcrate_globGlobMatcher!();
+        Depcrate_globimpl_26!();
+        Depcrate_globGlobStrategic!();
+        Depcrate_globimpl_28!();
+        Depcrate_globGlobBuilder!();
+        Depcrate_globGlobOptions!();
+        Depcrate_globimpl_31!();
+        Depcrate_globTokens!();
+        Depcrate_globimpl_33!();
+        Depcrate_globimpl_34!();
+        Depcrate_globToken!();
+        Depcrate_globimpl_36!();
+        Depcrate_globimpl_37!();
+        Depcrate_globimpl_38!();
+        Depcrate_globchar_to_escaped_literal!();
+        Depcrate_globbytes_to_escaped_literal!();
+        Depcrate_globParser!();
+        Depcrate_globimpl_42!();
+        Depcrate_globstarts_with!();
+        Depcrate_globends_with!();
+        Depcrate_globtests!();
+    };
+}

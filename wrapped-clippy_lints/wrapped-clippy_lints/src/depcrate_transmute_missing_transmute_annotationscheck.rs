@@ -1,0 +1,9 @@
+// Generated macro for check (function)
+macro_rules! Depcrate_transmute_missing_transmute_annotationscheck {
+() => {
+// Module: crate::transmute::missing_transmute_annotations
+// Provides: {"check"}
+// Dependencies: {}
+pub (super) fn check < 'tcx > (cx : & LateContext < 'tcx > , path : & Path < 'tcx > , arg : & Expr < 'tcx > , from_ty : Ty < 'tcx > , to_ty : Ty < 'tcx > , expr_hir_id : HirId ,) -> bool { let last = path . segments . last () . unwrap () ; if last . ident . span . in_external_macro (cx . tcx . sess . source_map ()) { return false ; } let args = last . args ; let missing_generic = match args { Some (args) if ! args . args . is_empty () => args . args . iter () . any (| arg | matches ! (arg , GenericArg :: Infer (_))) , _ => true , } ; if ! missing_generic { return false ; } if let Some (local) = get_parent_local_binding_ty (cx , expr_hir_id) { if let Some (ty) = local . ty && ! matches ! (ty . kind , TyKind :: Infer (())) { return false ; } } else if is_function_block (cx , expr_hir_id) { return false ; } let span = last . ident . span . with_hi (path . span . hi ()) ; span_lint_and_then (cx , MISSING_TRANSMUTE_ANNOTATIONS , span , "transmute used without annotations" , | diag | { let from_ty_no_name = ty_cannot_be_named (from_ty) ; let to_ty_no_name = ty_cannot_be_named (to_ty) ; if from_ty_no_name || to_ty_no_name { let to_name = match (from_ty_no_name , to_ty_no_name) { (true , false) => maybe_name_by_expr (cx , arg . span , "the origin type") , (false , true) => "the destination type" . into () , _ => "the source and destination types" . into () , } ; diag . help (format ! ("consider giving {to_name} a name, and adding missing type annotations")) ; } else { diag . span_suggestion (span , "consider adding missing annotations" , format ! ("{}::<{from_ty}, {to_ty}>" , last . ident) , Applicability :: MaybeIncorrect ,) ; } } ,) ; true }
+};
+}

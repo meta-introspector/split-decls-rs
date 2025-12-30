@@ -1,0 +1,9 @@
+// Generated macro for impl_not_nan_binop (macro)
+macro_rules! Depcrateimpl_not_nan_binop {
+() => {
+// Module: crate
+// Provides: {"impl_not_nan_binop"}
+// Dependencies: {}
+macro_rules ! impl_not_nan_binop { ($ imp : ident , $ method : ident , $ assign_imp : ident , $ assign_method : ident) => { impl < T : FloatCore > $ imp for NotNan < T > { type Output = Self ; # [inline] fn $ method (self , other : Self) -> Self { NotNan :: new (self . 0. $ method (other . 0)) . expect ("Operation on two NotNan resulted in NaN") } } impl < T : FloatCore > $ imp <& T > for NotNan < T > { type Output = T ; # [inline] fn $ method (self , other : & T) -> Self :: Output { self .$ method (* other) } } impl < T : FloatCore > $ imp <& Self > for NotNan < T > { type Output = NotNan < T >; # [inline] fn $ method (self , other : & Self) -> Self :: Output { self .$ method (* other) } } impl < T : FloatCore > $ imp for & NotNan < T > { type Output = NotNan < T >; # [inline] fn $ method (self , other : Self) -> Self :: Output { (* self) .$ method (* other) } } impl < T : FloatCore > $ imp < NotNan < T >> for & NotNan < T > { type Output = NotNan < T >; # [inline] fn $ method (self , other : NotNan < T >) -> Self :: Output { (* self) .$ method (other) } } impl < T : FloatCore > $ imp < T > for & NotNan < T > { type Output = T ; # [inline] fn $ method (self , other : T) -> Self :: Output { (* self) .$ method (other) } } impl < T : FloatCore > $ imp <& T > for & NotNan < T > { type Output = T ; # [inline] fn $ method (self , other : & T) -> Self :: Output { (* self) .$ method (* other) } } impl < T : FloatCore + $ assign_imp > $ assign_imp for NotNan < T > { # [inline] fn $ assign_method (& mut self , other : Self) { * self = (* self) .$ method (other) ; } } impl < T : FloatCore + $ assign_imp > $ assign_imp <& Self > for NotNan < T > { # [inline] fn $ assign_method (& mut self , other : & Self) { * self = (* self) .$ method (* other) ; } } } ; }
+};
+}

@@ -1,0 +1,44 @@
+// Generated module macro for crate
+macro_rules! Modcrate {
+() => {
+        Depcrateuse_1!();
+        Depcrateuse_2!();
+        Depcrateuse_3!();
+        Depcrateuse_4!();
+        Depcrateuse_5!();
+        Depcratecommit!();
+        Depcrateobject!();
+        Depcratetag!();
+        Depcratetree!();
+        Depcrateblob!();
+        Depcratedata!();
+        Depcratefind!();
+        Depcratewrite!();
+        Depcratetraits!();
+        Depcrateuse_252!();
+        Depcrateencode!();
+        Depcrateparse!();
+        Depcratekind!();
+        DepcrateKind!();
+        DepcrateBlobRef!();
+        DepcrateBlob!();
+        DepcrateCommitRef!();
+        DepcrateCommitRefIter!();
+        DepcrateCommit!();
+        DepcrateTagRef!();
+        DepcrateTagRefIter!();
+        DepcrateTag!();
+        DepcrateObjectRef!();
+        DepcrateObject!();
+        DepcrateTreeRef!();
+        DepcrateTreeRefIter!();
+        DepcrateTree!();
+        Depcrateimpl_303!();
+        DepcrateData!();
+        DepcrateHeader!();
+        Depcratedecode!();
+        Depcrateobject_hasher!();
+        Depcratecompute_hash!();
+        Depcratecompute_stream_hash!();
+    };
+}

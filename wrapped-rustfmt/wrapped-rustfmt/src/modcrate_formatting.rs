@@ -1,0 +1,44 @@
+// Generated module macro for crate::formatting
+macro_rules! Modcrate_formatting {
+() => {
+        Depcrate_formattinguse_582!();
+        Depcrate_formattinguse_583!();
+        Depcrate_formattinguse_584!();
+        Depcrate_formattinguse_585!();
+        Depcrate_formattinguse_586!();
+        Depcrate_formattinguse_587!();
+        Depcrate_formattinguse_588!();
+        Depcrate_formattinguse_589!();
+        Depcrate_formattinguse_590!();
+        Depcrate_formattinguse_591!();
+        Depcrate_formattinguse_592!();
+        Depcrate_formattinguse_593!();
+        Depcrate_formattinguse_594!();
+        Depcrate_formattinguse_595!();
+        Depcrate_formattinguse_596!();
+        Depcrate_formattinguse_597!();
+        Depcrate_formattinggenerated!();
+        Depcrate_formattingnewline_style!();
+        Depcrate_formattingSourceFile!();
+        Depcrate_formattingFileRecord!();
+        Depcrate_formattingimpl_602!();
+        Depcrate_formattingshould_skip_module!();
+        Depcrate_formattingecho_back_stdin!();
+        Depcrate_formattingformat_project!();
+        Depcrate_formattingFormatContext!();
+        Depcrate_formattingimpl_607!();
+        Depcrate_formattingFormatHandler!();
+        Depcrate_formattingimpl_609!();
+        Depcrate_formattingFormattingError!();
+        Depcrate_formattingimpl_611!();
+        Depcrate_formattingFormatErrorMap!();
+        Depcrate_formattingReportedErrors!();
+        Depcrate_formattingimpl_614!();
+        Depcrate_formattingTimer!();
+        Depcrate_formattingimpl_616!();
+        Depcrate_formattingformat_lines!();
+        Depcrate_formattingFormatLines!();
+        Depcrate_formattingimpl_619!();
+        Depcrate_formattingshould_emit_verbose!();
+    };
+}

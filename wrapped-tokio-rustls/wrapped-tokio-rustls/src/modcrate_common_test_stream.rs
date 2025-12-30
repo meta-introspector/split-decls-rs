@@ -1,0 +1,42 @@
+// Generated module macro for crate::common::test_stream
+macro_rules! Modcrate_common_test_stream {
+() => {
+        Depcrate_common_test_streamuse_76!();
+        Depcrate_common_test_streamuse_77!();
+        Depcrate_common_test_streamuse_78!();
+        Depcrate_common_test_streamuse_79!();
+        Depcrate_common_test_streamuse_80!();
+        Depcrate_common_test_streamuse_81!();
+        Depcrate_common_test_streamuse_82!();
+        Depcrate_common_test_streamuse_83!();
+        Depcrate_common_test_streamuse_84!();
+        Depcrate_common_test_streamuse_85!();
+        Depcrate_common_test_streamGood!();
+        Depcrate_common_test_streamimpl_87!();
+        Depcrate_common_test_streamimpl_88!();
+        Depcrate_common_test_streamPending!();
+        Depcrate_common_test_streamimpl_90!();
+        Depcrate_common_test_streamimpl_91!();
+        Depcrate_common_test_streamExpected!();
+        Depcrate_common_test_streamimpl_93!();
+        Depcrate_common_test_streamimpl_94!();
+        Depcrate_common_test_streamEof!();
+        Depcrate_common_test_streamimpl_96!();
+        Depcrate_common_test_streamimpl_97!();
+        Depcrate_common_test_streamstream_good!();
+        Depcrate_common_test_streamstream_good_vectored!();
+        Depcrate_common_test_streamstream_good_bufread!();
+        Depcrate_common_test_streamstream_good_impl!();
+        Depcrate_common_test_streamstream_bad!();
+        Depcrate_common_test_streamstream_handshake!();
+        Depcrate_common_test_streamstream_buffered_handshake!();
+        Depcrate_common_test_streamstream_handshake_eof!();
+        Depcrate_common_test_streamstream_handshake_write_eof!();
+        Depcrate_common_test_streamstream_handshake_regression_issues_77!();
+        Depcrate_common_test_streamstream_eof!();
+        Depcrate_common_test_streamstream_write_zero!();
+        Depcrate_common_test_streammake_pair!();
+        Depcrate_common_test_streamdo_handshake!();
+        Depcrate_common_test_streammacro_112!();
+    };
+}

@@ -1,0 +1,41 @@
+// Generated module macro for crate::tag
+macro_rules! Modcrate_tag {
+() => {
+        Depcrate_taguse_69!();
+        Depcrate_tagInternal!();
+        Depcrate_tagRequired!();
+        Depcrate_tagCaptured!();
+        Depcrate_tagAccepted!();
+        Depcrate_tagAllowAny!();
+        Depcrate_tagimpl_75!();
+        Depcrate_tagimpl_76!();
+        Depcrate_tagAllowExact!();
+        Depcrate_tagimpl_78!();
+        Depcrate_tagimpl_79!();
+        Depcrate_tagRequireAny!();
+        Depcrate_tagimpl_81!();
+        Depcrate_tagimpl_82!();
+        Depcrate_tagRequireExact!();
+        Depcrate_tagimpl_84!();
+        Depcrate_tagimpl_85!();
+        Depcrate_tagTagAccess!();
+        Depcrate_tagimpl_87!();
+        Depcrate_tagimpl_88!();
+        Depcrate_tagimpl_89!();
+        Depcrate_tagimpl_90!();
+        Depcrate_tagimpl_91!();
+        Depcrate_tagError!();
+        Depcrate_tagimpl_93!();
+        Depcrate_tagimpl_94!();
+        Depcrate_tagimpl_95!();
+        Depcrate_tagSerializer!();
+        Depcrate_tagimpl_97!();
+        Depcrate_tagimpl_98!();
+        Depcrate_tagimpl_99!();
+        Depcrate_tagimpl_100!();
+        Depcrate_tagimpl_101!();
+        Depcrate_tagimpl_102!();
+        Depcrate_tagimpl_103!();
+        Depcrate_tagimpl_104!();
+    };
+}

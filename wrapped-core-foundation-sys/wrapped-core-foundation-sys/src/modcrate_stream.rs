@@ -1,0 +1,42 @@
+// Generated module macro for crate::stream
+macro_rules! Modcrate_stream {
+() => {
+        Depcrate_streamuse_516!();
+        Depcrate_streamuse_517!();
+        Depcrate_streamuse_518!();
+        Depcrate_streamuse_519!();
+        Depcrate_streamuse_520!();
+        Depcrate_streamuse_521!();
+        Depcrate_streamuse_522!();
+        Depcrate_stream__CFReadStream!();
+        Depcrate_stream__CFWriteStream!();
+        Depcrate_streamCFReadStreamRef!();
+        Depcrate_streamCFWriteStreamRef!();
+        Depcrate_streamCFStreamPropertyKey!();
+        Depcrate_streamCFStreamStatus!();
+        Depcrate_streamCFStreamEventType!();
+        Depcrate_streamCFStreamErrorDomain!();
+        Depcrate_streamCFStreamError!();
+        Depcrate_streamkCFStreamStatusNotOpen!();
+        Depcrate_streamkCFStreamStatusOpening!();
+        Depcrate_streamkCFStreamStatusOpen!();
+        Depcrate_streamkCFStreamStatusReading!();
+        Depcrate_streamkCFStreamStatusWriting!();
+        Depcrate_streamkCFStreamStatusAtEnd!();
+        Depcrate_streamkCFStreamStatusClosed!();
+        Depcrate_streamkCFStreamStatusError!();
+        Depcrate_streamkCFStreamErrorDomainCustom!();
+        Depcrate_streamkCFStreamErrorDomainPOSIX!();
+        Depcrate_streamkCFStreamErrorDomainMacOSStatus!();
+        Depcrate_streamkCFStreamEventNone!();
+        Depcrate_streamkCFStreamEventOpenCompleted!();
+        Depcrate_streamkCFStreamEventHasBytesAvailable!();
+        Depcrate_streamkCFStreamEventCanAcceptBytes!();
+        Depcrate_streamkCFStreamEventErrorOccurred!();
+        Depcrate_streamkCFStreamEventEndEncountered!();
+        Depcrate_streamCFStreamClientContext!();
+        Depcrate_streamCFReadStreamClientCallBack!();
+        Depcrate_streamCFWriteStreamClientCallBack!();
+        Depcrate_streamother_552!();
+    };
+}

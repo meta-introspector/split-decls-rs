@@ -1,0 +1,39 @@
+// Generated module macro for crate::defs
+macro_rules! Modcrate_defs {
+() => {
+        Depcrate_defsuse_39!();
+        Depcrate_defsuse_40!();
+        Depcrate_defsuse_41!();
+        Depcrate_defsuse_42!();
+        Depcrate_defsuse_43!();
+        Depcrate_defsuse_44!();
+        Depcrate_defsuse_45!();
+        Depcrate_defsuse_46!();
+        Depcrate_defsuse_47!();
+        Depcrate_defsDefinition!();
+        Depcrate_defsimpl_49!();
+        Depcrate_defsfind_std_module!();
+        Depcrate_defsIdentClass!();
+        Depcrate_defsimpl_52!();
+        Depcrate_defsNameClass!();
+        Depcrate_defsimpl_54!();
+        Depcrate_defsOperatorClass!();
+        Depcrate_defsimpl_56!();
+        Depcrate_defsNameRefClass!();
+        Depcrate_defsimpl_58!();
+        Depcrate_defsmacro_59!();
+        Depcrate_defsimpl_60!();
+        Depcrate_defsimpl_61!();
+        Depcrate_defsimpl_62!();
+        Depcrate_defsimpl_63!();
+        Depcrate_defsimpl_64!();
+        Depcrate_defsimpl_65!();
+        Depcrate_defsimpl_66!();
+        Depcrate_defsimpl_67!();
+        Depcrate_defsimpl_68!();
+        Depcrate_defsimpl_69!();
+        Depcrate_defsimpl_70!();
+        Depcrate_defsimpl_71!();
+        Depcrate_defsimpl_72!();
+    };
+}

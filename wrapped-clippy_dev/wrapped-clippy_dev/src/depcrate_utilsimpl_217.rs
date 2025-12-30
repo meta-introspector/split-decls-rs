@@ -1,0 +1,9 @@
+// Generated macro for impl_217 (impl)
+macro_rules! Depcrate_utilsimpl_217 {
+() => {
+// Module: crate::utils
+// Provides: {"impl_217"}
+// Dependencies: {}
+impl FileUpdater { # [track_caller] fn update_file_checked_inner (& mut self , tool : & str , mode : UpdateMode , path : & Path , update : & mut dyn FnMut (& Path , & str , & mut String) -> UpdateStatus ,) { let mut file = File :: open (path , OpenOptions :: new () . read (true) . write (true)) ; file . read_to_cleared_string (& mut self . src_buf) ; self . dst_buf . clear () ; match (mode , update (path , & self . src_buf , & mut self . dst_buf)) { (UpdateMode :: Check , UpdateStatus :: Changed) => { eprintln ! ("the contents of `{}` are out of date\nplease run `{tool}` to update" , path . display ()) ; process :: exit (1) ; } , (UpdateMode :: Change , UpdateStatus :: Changed) => file . replace_contents (self . dst_buf . as_bytes ()) , (UpdateMode :: Check | UpdateMode :: Change , UpdateStatus :: Unchanged) => { } , } } # [track_caller] fn update_file_inner (& mut self , path : & Path , update : & mut dyn FnMut (& Path , & str , & mut String) -> UpdateStatus) { let mut file = File :: open (path , OpenOptions :: new () . read (true) . write (true)) ; file . read_to_cleared_string (& mut self . src_buf) ; self . dst_buf . clear () ; if update (path , & self . src_buf , & mut self . dst_buf) . is_changed () { file . replace_contents (self . dst_buf . as_bytes ()) ; } } # [track_caller] pub fn update_file_checked (& mut self , tool : & str , mode : UpdateMode , path : impl AsRef < Path > , update : & mut dyn FnMut (& Path , & str , & mut String) -> UpdateStatus ,) { self . update_file_checked_inner (tool , mode , path . as_ref () , update) ; } # [track_caller] pub fn update_file (& mut self , path : impl AsRef < Path > , update : & mut dyn FnMut (& Path , & str , & mut String) -> UpdateStatus ,) { self . update_file_inner (path . as_ref () , update) ; } }
+};
+}

@@ -1,0 +1,43 @@
+// Generated module macro for crate::os::windows::io::raw
+macro_rules! Modcrate_os_windows_io_raw {
+() => {
+        Depcrate_os_windows_io_rawuse_1902!();
+        Depcrate_os_windows_io_rawuse_1903!();
+        Depcrate_os_windows_io_rawuse_1904!();
+        Depcrate_os_windows_io_rawuse_1905!();
+        Depcrate_os_windows_io_rawuse_1906!();
+        Depcrate_os_windows_io_rawRawHandle!();
+        Depcrate_os_windows_io_rawRawSocket!();
+        Depcrate_os_windows_io_rawAsRawHandle!();
+        Depcrate_os_windows_io_rawFromRawHandle!();
+        Depcrate_os_windows_io_rawIntoRawHandle!();
+        Depcrate_os_windows_io_rawimpl_1912!();
+        Depcrate_os_windows_io_rawimpl_1913!();
+        Depcrate_os_windows_io_rawimpl_1914!();
+        Depcrate_os_windows_io_rawimpl_1915!();
+        Depcrate_os_windows_io_rawimpl_1916!();
+        Depcrate_os_windows_io_rawimpl_1917!();
+        Depcrate_os_windows_io_rawimpl_1918!();
+        Depcrate_os_windows_io_rawstdio_handle!();
+        Depcrate_os_windows_io_rawimpl_1920!();
+        Depcrate_os_windows_io_rawimpl_1921!();
+        Depcrate_os_windows_io_rawAsRawSocket!();
+        Depcrate_os_windows_io_rawFromRawSocket!();
+        Depcrate_os_windows_io_rawIntoRawSocket!();
+        Depcrate_os_windows_io_rawimpl_1925!();
+        Depcrate_os_windows_io_rawimpl_1926!();
+        Depcrate_os_windows_io_rawimpl_1927!();
+        Depcrate_os_windows_io_rawimpl_1928!();
+        Depcrate_os_windows_io_rawimpl_1929!();
+        Depcrate_os_windows_io_rawimpl_1930!();
+        Depcrate_os_windows_io_rawimpl_1931!();
+        Depcrate_os_windows_io_rawimpl_1932!();
+        Depcrate_os_windows_io_rawimpl_1933!();
+        Depcrate_os_windows_io_rawimpl_1934!();
+        Depcrate_os_windows_io_rawimpl_1935!();
+        Depcrate_os_windows_io_rawimpl_1936!();
+        Depcrate_os_windows_io_rawimpl_1937!();
+        Depcrate_os_windows_io_rawimpl_1938!();
+        Depcrate_os_windows_io_rawimpl_1939!();
+    };
+}

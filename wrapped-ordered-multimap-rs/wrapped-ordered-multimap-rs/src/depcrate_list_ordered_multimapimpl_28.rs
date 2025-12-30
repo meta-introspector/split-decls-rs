@@ -1,0 +1,9 @@
+// Generated macro for impl_28 (impl)
+macro_rules! Depcrate_list_ordered_multimapimpl_28 {
+() => {
+// Module: crate::list_ordered_multimap
+// Provides: {"impl_28"}
+// Dependencies: {}
+impl < Key > KeyWrapper < '_ , Key > { # [doc = " If the key wrapped is owned, it is returned. Otherwise, the borrowed key is cloned and returned."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " use ordered_multimap::list_ordered_multimap::KeyWrapper;"] # [doc = ""] # [doc = " let borrowed = KeyWrapper::Borrowed(&0);"] # [doc = " assert_eq!(borrowed.into_owned(), 0);"] # [doc = ""] # [doc = " let owned = KeyWrapper::Owned(0);"] # [doc = " assert_eq!(borrowed.into_owned(), 0);"] # [doc = " ```"] # [must_use] pub fn into_owned (self) -> Key where Key : Clone , { match self { KeyWrapper :: Borrowed (key) => key . clone () , KeyWrapper :: Owned (key) => key , } } # [doc = " Returns whether the wrapped key is borrowed."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " use ordered_multimap::list_ordered_multimap::KeyWrapper;"] # [doc = ""] # [doc = " let borrowed = KeyWrapper::Borrowed(&0);"] # [doc = " assert!(borrowed.is_borrowed());"] # [doc = ""] # [doc = " let owned = KeyWrapper::Owned(0);"] # [doc = " assert!(!owned.is_borrowed());"] # [doc = " ```"] # [must_use] pub fn is_borrowed (& self) -> bool { matches ! (self , KeyWrapper :: Borrowed (_)) } # [doc = " Returns whether the wrapped key is owned."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " use ordered_multimap::list_ordered_multimap::KeyWrapper;"] # [doc = ""] # [doc = " let borrowed = KeyWrapper::Borrowed(&0);"] # [doc = " assert!(!borrowed.is_owned());"] # [doc = ""] # [doc = " let owned = KeyWrapper::Owned(0);"] # [doc = " assert!(owned.is_owned());"] # [doc = " ```"] # [must_use] pub fn is_owned (& self) -> bool { matches ! (self , KeyWrapper :: Owned (_)) } }
+};
+}

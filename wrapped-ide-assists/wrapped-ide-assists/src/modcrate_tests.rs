@@ -1,0 +1,40 @@
+// Generated module macro for crate::tests
+macro_rules! Modcrate_tests {
+() => {
+        Depcrate_testsgenerated!();
+        Depcrate_testsuse_20!();
+        Depcrate_testsuse_21!();
+        Depcrate_testsuse_22!();
+        Depcrate_testsuse_23!();
+        Depcrate_testsuse_24!();
+        Depcrate_testsuse_25!();
+        Depcrate_testsuse_26!();
+        Depcrate_testsuse_27!();
+        Depcrate_testsTEST_CONFIG!();
+        Depcrate_testsTEST_CONFIG_NO_GROUPING!();
+        Depcrate_testsTEST_CONFIG_NO_SNIPPET_CAP!();
+        Depcrate_testsTEST_CONFIG_IMPORT_ONE!();
+        Depcrate_testsassists!();
+        Depcrate_testswith_single_file!();
+        Depcrate_testscheck_assist!();
+        Depcrate_testscheck_assist_with_config!();
+        Depcrate_testscheck_assist_no_snippet_cap!();
+        Depcrate_testscheck_assist_import_one!();
+        Depcrate_testscheck_assist_by_label!();
+        Depcrate_testscheck_assist_target!();
+        Depcrate_testscheck_assist_not_applicable!();
+        Depcrate_testscheck_assist_not_applicable_by_label!();
+        Depcrate_testscheck_assist_not_applicable_for_import_one!();
+        Depcrate_testscheck_assist_not_applicable_no_grouping!();
+        Depcrate_testscheck_assist_unresolved!();
+        Depcrate_testscheck_doc_test!();
+        Depcrate_testsExpectedResult!();
+        Depcrate_testscheck!();
+        Depcrate_testscheck_with_config!();
+        Depcrate_testslabels!();
+        Depcrate_testsassist_order_field_struct!();
+        Depcrate_testsassist_order_if_expr!();
+        Depcrate_testsassist_filter_works!();
+        Depcrate_testsvarious_resolve_strategies!();
+    };
+}

@@ -1,0 +1,47 @@
+// Generated module macro for crate::filter
+macro_rules! Modcrate_filter {
+() => {
+        Depcrate_filterand!();
+        Depcrate_filterand_then!();
+        Depcrate_filterboxed!();
+        Depcrate_filtermap!();
+        Depcrate_filtermap_err!();
+        Depcrate_filteror!();
+        Depcrate_filteror_else!();
+        Depcrate_filterrecover!();
+        Depcrate_filterservice!();
+        Depcrate_filterthen!();
+        Depcrate_filterunify!();
+        Depcrate_filteruntuple_one!();
+        Depcrate_filterwrap!();
+        Depcrate_filteruse_215!();
+        Depcrate_filteruse_216!();
+        Depcrate_filteruse_217!();
+        Depcrate_filteruse_218!();
+        Depcrate_filteruse_219!();
+        Depcrate_filteruse_220!();
+        Depcrate_filteruse_221!();
+        Depcrate_filteruse_222!();
+        Depcrate_filteruse_223!();
+        Depcrate_filteruse_224!();
+        Depcrate_filteruse_225!();
+        Depcrate_filteruse_226!();
+        Depcrate_filteruse_227!();
+        Depcrate_filteruse_228!();
+        Depcrate_filteruse_229!();
+        Depcrate_filteruse_230!();
+        Depcrate_filteruse_231!();
+        Depcrate_filteruse_232!();
+        Depcrate_filterFilterBase!();
+        Depcrate_filterInternal!();
+        Depcrate_filterFilter!();
+        Depcrate_filterimpl_236!();
+        Depcrate_filterFilterClone!();
+        Depcrate_filterimpl_238!();
+        Depcrate_filter_assert_object_safe!();
+        Depcrate_filterfilter_fn!();
+        Depcrate_filterfilter_fn_one!();
+        Depcrate_filterFilterFn!();
+        Depcrate_filterimpl_243!();
+    };
+}

@@ -1,0 +1,47 @@
+// Generated module macro for crate::remote
+macro_rules! Modcrate_remote {
+() => {
+        Depcrate_remoteuse_974!();
+        Depcrate_remoteuse_975!();
+        Depcrate_remoteuse_976!();
+        Depcrate_remoteuse_977!();
+        Depcrate_remoteuse_978!();
+        Depcrate_remoteuse_979!();
+        Depcrate_remoteuse_980!();
+        Depcrate_remoteuse_981!();
+        Depcrate_remoteuse_982!();
+        Depcrate_remoteuse_983!();
+        Depcrate_remoteuse_984!();
+        Depcrate_remoteuse_985!();
+        Depcrate_remoteuse_986!();
+        Depcrate_remoteuse_987!();
+        Depcrate_remoteRemote!();
+        Depcrate_remoteRefspecs!();
+        Depcrate_remoteRemoteHead!();
+        Depcrate_remoteFetchOptions!();
+        Depcrate_remotePushOptions!();
+        Depcrate_remoteRemoteConnection!();
+        Depcrate_remoteRemoteRedirect!();
+        Depcrate_remoteremote_into_raw!();
+        Depcrate_remoteimpl_996!();
+        Depcrate_remoteimpl_997!();
+        Depcrate_remoteimpl_998!();
+        Depcrate_remoteimpl_999!();
+        Depcrate_remoteimpl_1000!();
+        Depcrate_remoteimpl_1001!();
+        Depcrate_remoteimpl_1002!();
+        Depcrate_remoteimpl_1003!();
+        Depcrate_remoteimpl_1004!();
+        Depcrate_remoteimpl_1005!();
+        Depcrate_remoteimpl_1006!();
+        Depcrate_remoteimpl_1007!();
+        Depcrate_remoteimpl_1008!();
+        Depcrate_remoteimpl_1009!();
+        Depcrate_remoteimpl_1010!();
+        Depcrate_remoteimpl_1011!();
+        Depcrate_remoteimpl_1012!();
+        Depcrate_remoteimpl_1013!();
+        Depcrate_remoteimpl_1014!();
+        Depcrate_remotetests!();
+    };
+}

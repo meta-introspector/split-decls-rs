@@ -1,0 +1,9 @@
+// Generated macro for impl_668 (impl)
+macro_rules! Depcrate_element_boxplotimpl_668 {
+() => {
+// Module: crate::element::boxplot
+// Provides: {"impl_668"}
+// Dependencies: {}
+impl < K , DB : DrawingBackend , O : BoxplotOrient < K , f32 > > Drawable < DB > for Boxplot < K , O > { fn draw < I : Iterator < Item = BackendCoord > > (& self , points : I , backend : & mut DB , _ : (u32 , u32) ,) -> Result < () , DrawingErrorKind < DB :: ErrorType > > { let points : Vec < _ > = points . take (5) . collect () ; if points . len () == 5 { let width = f64 :: from (self . width) ; let moved = | coord | O :: with_offset (coord , self . offset) ; let start_bar = | coord | O :: with_offset (moved (coord) , - width / 2.0) ; let end_bar = | coord | O :: with_offset (moved (coord) , width / 2.0) ; let start_whisker = | coord | O :: with_offset (moved (coord) , - width * self . whisker_width / 2.0) ; let end_whisker = | coord | O :: with_offset (moved (coord) , width * self . whisker_width / 2.0) ; backend . draw_line (start_whisker (points [0]) , end_whisker (points [0]) , & self . style ,) ? ; backend . draw_line (moved (points [0]) , moved (points [1]) , & self . style . color . to_backend_color () ,) ? ; let corner1 = start_bar (points [3]) ; let corner2 = end_bar (points [1]) ; let upper_left = (corner1 . 0 . min (corner2 . 0) , corner1 . 1 . min (corner2 . 1)) ; let bottom_right = (corner1 . 0 . max (corner2 . 0) , corner1 . 1 . max (corner2 . 1)) ; backend . draw_rect (upper_left , bottom_right , & self . style , false) ? ; backend . draw_line (start_bar (points [2]) , end_bar (points [2]) , & self . style) ? ; backend . draw_line (moved (points [3]) , moved (points [4]) , & self . style) ? ; backend . draw_line (start_whisker (points [4]) , end_whisker (points [4]) , & self . style ,) ? ; } Ok (()) } }
+};
+}

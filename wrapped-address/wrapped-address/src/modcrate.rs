@@ -1,0 +1,48 @@
+// Generated module macro for crate
+macro_rules! Modcrate {
+() => {
+        Depcrateerror!();
+        Depcratehasher!();
+        Depcratesyscalls!();
+        Depcrateuse_27!();
+        Depcrateuse_28!();
+        Depcrateuse_29!();
+        Depcrateother_30!();
+        Depcrateother_31!();
+        Depcrateuse_32!();
+        Depcrateuse_33!();
+        Depcrateuse_34!();
+        Depcrateuse_35!();
+        Depcrateuse_36!();
+        Depcrateuse_37!();
+        Depcrateuse_38!();
+        Depcrateuse_39!();
+        DepcrateADDRESS_BYTES!();
+        DepcrateMAX_SEED_LEN!();
+        DepcrateMAX_SEEDS!();
+        DepcrateMAX_BASE58_LEN!();
+        DepcratePDA_MARKER!();
+        DepcratePDA_MARKER!();
+        DepcrateAddress!();
+        Depcrateimpl_47!();
+        Depcrateimpl_48!();
+        Depcrateimpl_49!();
+        Depcrateimpl_50!();
+        Depcrateimpl_51!();
+        Depcrateimpl_52!();
+        Depcrateimpl_53!();
+        Depcrateimpl_54!();
+        Depcratebytes_are_curve_point!();
+        Depcrateimpl_56!();
+        Depcrateimpl_57!();
+        Depcrateimpl_58!();
+        Depcratewrite_as_base58!();
+        Depcrateimpl_60!();
+        Depcrateimpl_61!();
+        Depcrateaddress_eq!();
+        Depcrateaddress!();
+        Depcratedeclare_id!();
+        Depcratedeclare_deprecated_id!();
+        Depcratetests!();
+    };
+}

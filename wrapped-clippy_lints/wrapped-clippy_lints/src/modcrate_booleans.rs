@@ -1,0 +1,47 @@
+// Generated module macro for crate::booleans
+macro_rules! Modcrate_booleans {
+() => {
+        Depcrate_booleansuse_561!();
+        Depcrate_booleansuse_562!();
+        Depcrate_booleansuse_563!();
+        Depcrate_booleansuse_564!();
+        Depcrate_booleansuse_565!();
+        Depcrate_booleansuse_566!();
+        Depcrate_booleansuse_567!();
+        Depcrate_booleansuse_568!();
+        Depcrate_booleansuse_569!();
+        Depcrate_booleansuse_570!();
+        Depcrate_booleansuse_571!();
+        Depcrate_booleansuse_572!();
+        Depcrate_booleansuse_573!();
+        Depcrate_booleansuse_574!();
+        Depcrate_booleansuse_575!();
+        Depcrate_booleansuse_576!();
+        Depcrate_booleansuse_577!();
+        Depcrate_booleansmacro_578!();
+        Depcrate_booleansmacro_579!();
+        Depcrate_booleansMETHODS_WITH_NEGATION!();
+        Depcrate_booleansNonminimalBool!();
+        Depcrate_booleansimpl_582!();
+        Depcrate_booleansmacro_583!();
+        Depcrate_booleansimpl_584!();
+        Depcrate_booleansinverted_bin_op_eq_str!();
+        Depcrate_booleansbin_op_eq_str!();
+        Depcrate_booleanscheck_inverted_bool_in_condition!();
+        Depcrate_booleanscheck_simplify_not!();
+        Depcrate_booleansNonminimalBoolVisitor!();
+        Depcrate_booleansuse_590!();
+        Depcrate_booleansHir2Qmm!();
+        Depcrate_booleansimpl_592!();
+        Depcrate_booleansSuggestContext!();
+        Depcrate_booleansimpl_594!();
+        Depcrate_booleanssimplify_not!();
+        Depcrate_booleanssuggest!();
+        Depcrate_booleanssimple_negate!();
+        Depcrate_booleansStats!();
+        Depcrate_booleansterminal_stats!();
+        Depcrate_booleansimpl_600!();
+        Depcrate_booleansimpl_601!();
+        Depcrate_booleansimplements_ord!();
+    };
+}

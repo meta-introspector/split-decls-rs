@@ -1,0 +1,9 @@
+// Generated macro for impl_11 (impl)
+macro_rules! Depcrateimpl_11 {
+() => {
+// Module: crate
+// Provides: {"impl_11"}
+// Dependencies: {}
+impl < S > GraphQLRequest < S > where S : ScalarValue , { # [doc = " Synchronously execute an incoming GraphQL query."] pub fn execute_sync < CtxT , QueryT , MutationT , SubscriptionT > (& self , root_node : & RootNode < QueryT , MutationT , SubscriptionT , S > , context : & CtxT ,) -> GraphQLResponse where QueryT : GraphQLType < S , Context = CtxT > , MutationT : GraphQLType < S , Context = CtxT > , SubscriptionT : GraphQLType < S , Context = CtxT > , { let response = self . 0 . execute_sync (root_node , context) ; let status = if response . is_ok () { Status :: Ok } else { Status :: BadRequest } ; let json = serde_json :: to_string (& response) . unwrap () ; GraphQLResponse (status , json) } # [doc = " Asynchronously execute an incoming GraphQL query."] pub async fn execute < CtxT , QueryT , MutationT , SubscriptionT > (& self , root_node : & RootNode < QueryT , MutationT , SubscriptionT , S > , context : & CtxT ,) -> GraphQLResponse where QueryT : GraphQLTypeAsync < S , Context = CtxT > , QueryT :: TypeInfo : Sync , MutationT : GraphQLTypeAsync < S , Context = CtxT > , MutationT :: TypeInfo : Sync , SubscriptionT : GraphQLSubscriptionType < S , Context = CtxT > , SubscriptionT :: TypeInfo : Sync , CtxT : Sync , S : Send + Sync , { let response = self . 0 . execute (root_node , context) . await ; let status = if response . is_ok () { Status :: Ok } else { Status :: BadRequest } ; let json = serde_json :: to_string (& response) . unwrap () ; GraphQLResponse (status , json) } # [doc = " Returns the operation names associated with this request."] # [doc = ""] # [doc = " For batch requests there will be multiple names."] pub fn operation_names (& self) -> Vec < Option < & str > > { self . 0 . operation_names () } }
+};
+}

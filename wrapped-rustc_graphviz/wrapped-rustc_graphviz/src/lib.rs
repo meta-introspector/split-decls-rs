@@ -1,0 +1,61 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcrate_testsnode.rs");
+include!("depcrateescape_html.rs");
+include!("depcraterenderoption.rs");
+include!("depcraterender_opts.rs");
+include!("depcrate_testsimpl_36.rs");
+include!("depcrateuse_1.rs");
+include!("depcrateuse_4.rs");
+include!("depcrateimpl_7.rs");
+include!("depcrate_testsuse_22.rs");
+include!("depcrate_testsimpl_37.rs");
+include!("depcrateuse_2.rs");
+include!("depcrate_testsimpl_38.rs");
+include!("depcrate_testsimpl_39.rs");
+include!("depcrate_teststest_input.rs");
+include!("depcrate_testssingle_edge.rs");
+include!("depcrateedges.rs");
+include!("depcrateimpl_9.rs");
+include!("depcrate_testsedge.rs");
+include!("depcrateuse_3.rs");
+include!("depcrate_testsimpl_32.rs");
+include!("depcrate_testssingle_edge_with_style.rs");
+include!("depcrate_teststest_some_labelled.rs");
+include!("depcrate_testshasse_diagram.rs");
+include!("depcrate_testsuse_23.rs");
+include!("depcratestyle.rs");
+include!("depcratetests.rs");
+include!("depcrate_testssingle_node.rs");
+include!("depcrate_testsuse_20.rs");
+include!("depcrate_testsleft_aligned_text.rs");
+include!("depcrateimpl_12.rs");
+include!("depcrate_testsedge.rs");
+include!("depcraterender.rs");
+include!("depcrate_testsbadly_formatted_id.rs");
+include!("depcrate_testsimpl_34.rs");
+include!("depcrate_testsuse_21.rs");
+include!("depcratelabeltext.rs");
+include!("depcratenodes.rs");
+include!("depcrate_testslabelledgraphwithescstrs.rs");
+include!("depcrate_testssingle_cyclic_node.rs");
+include!("depcratelabeller.rs");
+include!("depcrate_testsnodelabels.rs");
+include!("depcrate_testslabelledgraph.rs");
+include!("depcrate_teststrivial.rs");
+include!("depcrate_testsid_name.rs");
+include!("depcrateid.rs");
+include!("depcrate_testsuse_24.rs");
+include!("depcrate_testssingle_node_with_style.rs");
+include!("depcrategraphwalk.rs");
+include!("depcrate_testssimple_id_construction.rs");
+include!("depcrate_testsempty_graph.rs");
+include!("depcrate_testsimpl_33.rs");
+include!("modcrate_tests.rs");
+include!("modcrate.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate_tests!();
+    Modcrate!();
+}

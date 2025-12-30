@@ -1,0 +1,9 @@
+// Generated macro for macro_25077 (macro)
+macro_rules! Depcrate_um_d3d11macro_25077 {
+() => {
+// Module: crate::um::d3d11
+// Provides: {"macro_25077"}
+// Dependencies: {}
+ENUM ! { enum D3D11_VIDEO_PROCESSOR_FORMAT_CAPS { D3D11_VIDEO_PROCESSOR_FORMAT_CAPS_RGB_INTERLACED = 0x1 , D3D11_VIDEO_PROCESSOR_FORMAT_CAPS_RGB_PROCAMP = 0x2 , D3D11_VIDEO_PROCESSOR_FORMAT_CAPS_RGB_LUMA_KEY = 0x4 , D3D11_VIDEO_PROCESSOR_FORMAT_CAPS_PALETTE_INTERLACED = 0x8 , } }
+};
+}

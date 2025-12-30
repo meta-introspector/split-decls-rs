@@ -1,0 +1,9 @@
+// Generated macro for impl_fmt (macro)
+macro_rules! Depcrate_base_matriximpl_fmt {
+() => {
+// Module: crate::base::matrix
+// Provides: {"impl_fmt"}
+// Dependencies: {}
+macro_rules ! impl_fmt { ($ trait : path , $ fmt_str_without_precision : expr , $ fmt_str_with_precision : expr) => { impl < T , R : Dim , C : Dim , S > $ trait for Matrix < T , R , C , S > where T : Scalar + $ trait , S : RawStorage < T , R , C >, { fn fmt (& self , f : & mut fmt :: Formatter <'_ >) -> fmt :: Result { # [cfg (feature = "std")] fn val_width < T : Scalar + $ trait > (val : & T , f : & mut fmt :: Formatter <'_ >) -> usize { match f . precision () { Some (precision) => format ! ($ fmt_str_with_precision , val , precision) . chars () . count () , None => format ! ($ fmt_str_without_precision , val) . chars () . count () , } } # [cfg (not (feature = "std"))] fn val_width < T : Scalar + $ trait > (_ : & T , _ : & mut fmt :: Formatter <'_ >) -> usize { 4 } let (nrows , ncols) = self . shape () ; if nrows == 0 || ncols == 0 { return write ! (f , "[ ]") ; } let mut max_length = 0 ; for i in 0 .. nrows { for j in 0 .. ncols { max_length = crate :: max (max_length , val_width (& self [(i , j)] , f)) ; } } let max_length_with_space = max_length + 1 ; writeln ! (f) ?; writeln ! (f , "  ┌ {:>width$} ┐" , "" , width = max_length_with_space * ncols - 1) ?; for i in 0 .. nrows { write ! (f , "  │") ?; for j in 0 .. ncols { let number_length = val_width (& self [(i , j)] , f) + 1 ; let pad = max_length_with_space - number_length ; write ! (f , " {:>thepad$}" , "" , thepad = pad) ?; match f . precision () { Some (precision) => { write ! (f , $ fmt_str_with_precision , (* self) [(i , j)] , precision) ? } None => write ! (f , $ fmt_str_without_precision , (* self) [(i , j)]) ?, } } writeln ! (f , " │") ?; } writeln ! (f , "  └ {:>width$} ┘" , "" , width = max_length_with_space * ncols - 1) ?; writeln ! (f) } } } ; }
+};
+}

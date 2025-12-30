@@ -1,0 +1,9 @@
+// Generated macro for impl_7623 (impl)
+macro_rules! Depcrate_module_styleimpl_7623 {
+() => {
+// Module: crate::module_style
+// Provides: {"impl_7623"}
+// Dependencies: {}
+impl EarlyLintPass for ModStyle { fn check_crate (& mut self , cx : & EarlyContext < '_ > , _ : & ast :: Crate) { self . working_dir = cx . sess () . opts . working_dir . local_path () . map (Path :: to_path_buf) ; } fn check_item (& mut self , cx : & EarlyContext < '_ > , item : & ast :: Item) { if cx . builder . lint_level (MOD_MODULE_FILES) . level == Level :: Allow && cx . builder . lint_level (SELF_NAMED_MODULE_FILES) . level == Level :: Allow { return ; } if let ItemKind :: Mod (.. , ModKind :: Loaded (_ , Inline :: No { .. } , mod_spans , ..)) = & item . kind { let has_path_attr = item . attrs . iter () . any (| attr | attr . has_name (sym :: path)) ; if ! has_path_attr && let Some (current) = self . module_stack . last_mut () { current . contains_external = true ; } let mod_file = cx . sess () . source_map () . lookup_source_file (mod_spans . inner_span . lo ()) ; self . module_stack . push (ModState { contains_external : false , has_path_attr , mod_file , }) ; } } fn check_item_post (& mut self , cx : & EarlyContext < '_ > , item : & ast :: Item) { if cx . builder . lint_level (MOD_MODULE_FILES) . level == Level :: Allow && cx . builder . lint_level (SELF_NAMED_MODULE_FILES) . level == Level :: Allow { return ; } if let ItemKind :: Mod (.. , ModKind :: Loaded (_ , Inline :: No { .. } , ..)) = & item . kind && let Some (current) = self . module_stack . pop () && ! current . has_path_attr { let Some (path) = self . working_dir . as_ref () . and_then (| src | try_trim_file_path_prefix (& current . mod_file , src)) else { return ; } ; if current . contains_external { check_self_named_module (cx , path , & current . mod_file) ; } check_mod_module (cx , path , & current . mod_file) ; } } }
+};
+}

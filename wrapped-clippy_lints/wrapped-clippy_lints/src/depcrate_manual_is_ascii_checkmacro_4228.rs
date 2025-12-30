@@ -1,0 +1,9 @@
+// Generated macro for macro_4228 (macro)
+macro_rules! Depcrate_manual_is_ascii_checkmacro_4228 {
+() => {
+// Module: crate::manual_is_ascii_check
+// Provides: {"macro_4228"}
+// Dependencies: {}
+declare_clippy_lint ! { # [doc = " ### What it does"] # [doc = " Suggests to use dedicated built-in methods,"] # [doc = " `is_ascii_(lowercase|uppercase|digit|hexdigit)` for checking on corresponding"] # [doc = " ascii range"] # [doc = ""] # [doc = " ### Why is this bad?"] # [doc = " Using the built-in functions is more readable and makes it"] # [doc = " clear that it's not a specific subset of characters, but all"] # [doc = " ASCII (lowercase|uppercase|digit|hexdigit) characters."] # [doc = " ### Example"] # [doc = " ```no_run"] # [doc = " fn main() {"] # [doc = "     assert!(matches!('x', 'a'..='z'));"] # [doc = "     assert!(matches!(b'X', b'A'..=b'Z'));"] # [doc = "     assert!(matches!('2', '0'..='9'));"] # [doc = "     assert!(matches!('x', 'A'..='Z' | 'a'..='z'));"] # [doc = "     assert!(matches!('C', '0'..='9' | 'a'..='f' | 'A'..='F'));"] # [doc = ""] # [doc = "     ('0'..='9').contains(&'0');"] # [doc = "     ('a'..='z').contains(&'a');"] # [doc = "     ('A'..='Z').contains(&'A');"] # [doc = " }"] # [doc = " ```"] # [doc = " Use instead:"] # [doc = " ```no_run"] # [doc = " fn main() {"] # [doc = "     assert!('x'.is_ascii_lowercase());"] # [doc = "     assert!(b'X'.is_ascii_uppercase());"] # [doc = "     assert!('2'.is_ascii_digit());"] # [doc = "     assert!('x'.is_ascii_alphabetic());"] # [doc = "     assert!('C'.is_ascii_hexdigit());"] # [doc = ""] # [doc = "     '0'.is_ascii_digit();"] # [doc = "     'a'.is_ascii_lowercase();"] # [doc = "     'A'.is_ascii_uppercase();"] # [doc = " }"] # [doc = " ```"] # [clippy :: version = "1.67.0"] pub MANUAL_IS_ASCII_CHECK , style , "use dedicated method to check ascii range" }
+};
+}

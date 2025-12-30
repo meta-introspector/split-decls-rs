@@ -1,0 +1,9 @@
+// Generated macro for impl_559 (impl)
+macro_rules! Depcrate_zerovecimpl_559 {
+() => {
+// Module: crate::zerovec
+// Provides: {"impl_559"}
+// Dependencies: {}
+impl < 'a > ZeroVec < 'a , u8 > { # [doc = " Converts a `ZeroVec<u8>` into a `ZeroVec<T>`, retaining the current ownership model."] # [doc = ""] # [doc = " Note that the length of the ZeroVec may change."] # [doc = ""] # [doc = " ✨ *Enabled with the `alloc` Cargo feature.*"] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " Convert a borrowed `ZeroVec`:"] # [doc = ""] # [doc = " ```"] # [doc = " use zerovec::ZeroVec;"] # [doc = ""] # [doc = " let bytes: &[u8] = &[0xD3, 0x00, 0x19, 0x01, 0xA5, 0x01, 0xCD, 0x01];"] # [doc = " let zv_bytes = ZeroVec::new_borrowed(bytes);"] # [doc = " let zerovec: ZeroVec<u16> = zv_bytes.try_into_parsed().expect(\"infallible\");"] # [doc = ""] # [doc = " assert!(!zerovec.is_owned());"] # [doc = " assert_eq!(zerovec.get(0), Some(211));"] # [doc = " ```"] # [doc = ""] # [doc = " Convert an owned `ZeroVec`:"] # [doc = ""] # [doc = " ```"] # [doc = " use zerovec::ZeroVec;"] # [doc = ""] # [doc = " let bytes: Vec<u8> = vec![0xD3, 0x00, 0x19, 0x01, 0xA5, 0x01, 0xCD, 0x01];"] # [doc = " let zv_bytes = ZeroVec::new_owned(bytes);"] # [doc = " let zerovec: ZeroVec<u16> = zv_bytes.try_into_parsed().expect(\"infallible\");"] # [doc = ""] # [doc = " assert!(zerovec.is_owned());"] # [doc = " assert_eq!(zerovec.get(0), Some(211));"] # [doc = " ```"] # [cfg (feature = "alloc")] pub fn try_into_parsed < T : AsULE > (self) -> Result < ZeroVec < 'a , T > , UleError > { match self . into_cow () { Cow :: Borrowed (bytes) => { let slice : & 'a [T :: ULE] = T :: ULE :: parse_bytes_to_slice (bytes) ? ; Ok (ZeroVec :: new_borrowed (slice)) } Cow :: Owned (vec) => { let slice = Vec :: from (T :: ULE :: parse_bytes_to_slice (& vec) ?) ; Ok (ZeroVec :: new_owned (slice)) } } } }
+};
+}

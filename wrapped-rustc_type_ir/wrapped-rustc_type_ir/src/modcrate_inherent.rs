@@ -1,0 +1,48 @@
+// Generated module macro for crate::inherent
+macro_rules! Modcrate_inherent {
+() => {
+        Depcrate_inherentuse_85!();
+        Depcrate_inherentuse_86!();
+        Depcrate_inherentuse_87!();
+        Depcrate_inherentuse_88!();
+        Depcrate_inherentuse_89!();
+        Depcrate_inherentuse_90!();
+        Depcrate_inherentuse_91!();
+        Depcrate_inherentuse_92!();
+        Depcrate_inherentuse_93!();
+        Depcrate_inherentTy!();
+        Depcrate_inherentTys!();
+        Depcrate_inherentAbi!();
+        Depcrate_inherentSafety!();
+        Depcrate_inherentRegion!();
+        Depcrate_inherentConst!();
+        Depcrate_inherentValueConst!();
+        Depcrate_inherentExprConst!();
+        Depcrate_inherentGenericsOf!();
+        Depcrate_inherentGenericArg!();
+        Depcrate_inherentTerm!();
+        Depcrate_inherentGenericArgs!();
+        Depcrate_inherentPredicate!();
+        Depcrate_inherentClause!();
+        Depcrate_inherentClauses!();
+        Depcrate_inherentPlaceholderLike!();
+        Depcrate_inherentPlaceholderConst!();
+        Depcrate_inherentimpl_111!();
+        Depcrate_inherentIntoKind!();
+        Depcrate_inherentBoundVarLike!();
+        Depcrate_inherentParamLike!();
+        Depcrate_inherentAdtDef!();
+        Depcrate_inherentParamEnv!();
+        Depcrate_inherentFeatures!();
+        Depcrate_inherentDefId!();
+        Depcrate_inherentSpecificDefId!();
+        Depcrate_inherentimpl_120!();
+        Depcrate_inherentBoundExistentialPredicates!();
+        Depcrate_inherentSpan!();
+        Depcrate_inherentOpaqueTypeStorageEntries!();
+        Depcrate_inherentSliceLike!();
+        Depcrate_inherentimpl_125!();
+        Depcrate_inherentimpl_126!();
+        Depcrate_inherentimpl_127!();
+    };
+}

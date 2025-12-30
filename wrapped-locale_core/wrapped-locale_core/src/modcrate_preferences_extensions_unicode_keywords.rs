@@ -1,0 +1,41 @@
+// Generated module macro for crate::preferences::extensions::unicode::keywords
+macro_rules! Modcrate_preferences_extensions_unicode_keywords {
+() => {
+        Depcrate_preferences_extensions_unicode_keywordscalendar!();
+        Depcrate_preferences_extensions_unicode_keywordsuse_379!();
+        Depcrate_preferences_extensions_unicode_keywordscollation!();
+        Depcrate_preferences_extensions_unicode_keywordsuse_385!();
+        Depcrate_preferences_extensions_unicode_keywordscurrency!();
+        Depcrate_preferences_extensions_unicode_keywordsuse_392!();
+        Depcrate_preferences_extensions_unicode_keywordscurrency_format!();
+        Depcrate_preferences_extensions_unicode_keywordsuse_396!();
+        Depcrate_preferences_extensions_unicode_keywordsdictionary_break!();
+        Depcrate_preferences_extensions_unicode_keywordsuse_405!();
+        Depcrate_preferences_extensions_unicode_keywordsemoji!();
+        Depcrate_preferences_extensions_unicode_keywordsuse_409!();
+        Depcrate_preferences_extensions_unicode_keywordsfirst_day!();
+        Depcrate_preferences_extensions_unicode_keywordsuse_413!();
+        Depcrate_preferences_extensions_unicode_keywordshour_cycle!();
+        Depcrate_preferences_extensions_unicode_keywordsuse_417!();
+        Depcrate_preferences_extensions_unicode_keywordsline_break!();
+        Depcrate_preferences_extensions_unicode_keywordsuse_421!();
+        Depcrate_preferences_extensions_unicode_keywordsline_break_word!();
+        Depcrate_preferences_extensions_unicode_keywordsuse_425!();
+        Depcrate_preferences_extensions_unicode_keywordsmeasurement_system!();
+        Depcrate_preferences_extensions_unicode_keywordsuse_429!();
+        Depcrate_preferences_extensions_unicode_keywordsmeasurement_unit_override!();
+        Depcrate_preferences_extensions_unicode_keywordsuse_433!();
+        Depcrate_preferences_extensions_unicode_keywordsnumbering_system!();
+        Depcrate_preferences_extensions_unicode_keywordsuse_439!();
+        Depcrate_preferences_extensions_unicode_keywordsregion_override!();
+        Depcrate_preferences_extensions_unicode_keywordsuse_446!();
+        Depcrate_preferences_extensions_unicode_keywordsregional_subdivision!();
+        Depcrate_preferences_extensions_unicode_keywordsuse_453!();
+        Depcrate_preferences_extensions_unicode_keywordssentence_supression!();
+        Depcrate_preferences_extensions_unicode_keywordsuse_457!();
+        Depcrate_preferences_extensions_unicode_keywordstimezone!();
+        Depcrate_preferences_extensions_unicode_keywordsuse_463!();
+        Depcrate_preferences_extensions_unicode_keywordsvariant!();
+        Depcrate_preferences_extensions_unicode_keywordsuse_467!();
+    };
+}

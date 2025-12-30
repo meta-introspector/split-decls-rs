@@ -1,0 +1,40 @@
+// Generated module macro for crate::concurrency::sync
+macro_rules! Modcrate_concurrency_sync {
+() => {
+        Depcrate_concurrency_syncuse_447!();
+        Depcrate_concurrency_syncuse_448!();
+        Depcrate_concurrency_syncuse_449!();
+        Depcrate_concurrency_syncuse_450!();
+        Depcrate_concurrency_syncuse_451!();
+        Depcrate_concurrency_syncuse_452!();
+        Depcrate_concurrency_syncuse_453!();
+        Depcrate_concurrency_syncuse_454!();
+        Depcrate_concurrency_syncuse_455!();
+        Depcrate_concurrency_syncuse_456!();
+        Depcrate_concurrency_syncuse_457!();
+        Depcrate_concurrency_syncMutex!();
+        Depcrate_concurrency_syncMutexRef!();
+        Depcrate_concurrency_syncimpl_460!();
+        Depcrate_concurrency_syncimpl_461!();
+        Depcrate_concurrency_syncRwLock!();
+        Depcrate_concurrency_syncimpl_463!();
+        Depcrate_concurrency_syncRwLockRef!();
+        Depcrate_concurrency_syncimpl_465!();
+        Depcrate_concurrency_syncimpl_466!();
+        Depcrate_concurrency_syncCondvar!();
+        Depcrate_concurrency_syncCondvarRef!();
+        Depcrate_concurrency_syncimpl_469!();
+        Depcrate_concurrency_syncimpl_470!();
+        Depcrate_concurrency_syncFutex!();
+        Depcrate_concurrency_syncFutexRef!();
+        Depcrate_concurrency_syncimpl_473!();
+        Depcrate_concurrency_syncimpl_474!();
+        Depcrate_concurrency_syncFutexWaiter!();
+        Depcrate_concurrency_syncimpl_476!();
+        Depcrate_concurrency_syncEvalContextExtPriv!();
+        Depcrate_concurrency_syncimpl_478!();
+        Depcrate_concurrency_syncLAZY_INIT_COOKIE!();
+        Depcrate_concurrency_syncimpl_480!();
+        Depcrate_concurrency_syncEvalContextExt!();
+    };
+}

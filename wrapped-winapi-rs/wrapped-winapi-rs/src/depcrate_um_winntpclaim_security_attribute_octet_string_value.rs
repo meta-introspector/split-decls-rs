@@ -1,0 +1,9 @@
+// Generated macro for PCLAIM_SECURITY_ATTRIBUTE_OCTET_STRING_VALUE (type)
+macro_rules! Depcrate_um_winntPCLAIM_SECURITY_ATTRIBUTE_OCTET_STRING_VALUE {
+() => {
+// Module: crate::um::winnt
+// Provides: {"PCLAIM_SECURITY_ATTRIBUTE_OCTET_STRING_VALUE"}
+// Dependencies: {}
+pub type PCLAIM_SECURITY_ATTRIBUTE_OCTET_STRING_VALUE = * mut CLAIM_SECURITY_ATTRIBUTE_OCTET_STRING_VALUE ;
+};
+}

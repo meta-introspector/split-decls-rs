@@ -1,0 +1,9 @@
+// Generated macro for impl_125 (impl)
+macro_rules! Depcrate_sync_reusable_boximpl_125 {
+() => {
+// Module: crate::sync::reusable_box
+// Provides: {"impl_125"}
+// Dependencies: {}
+impl < 'a , T > ReusableBoxFuture < 'a , T > { # [doc = " Create a new `ReusableBoxFuture<T>` containing the provided future."] pub fn new < F > (future : F) -> Self where F : Future < Output = T > + Send + 'a , { Self { boxed : Box :: pin (future) , } } # [doc = " Replace the future currently stored in this box."] # [doc = ""] # [doc = " This reallocates if and only if the layout of the provided future is"] # [doc = " different from the layout of the currently stored future."] pub fn set < F > (& mut self , future : F) where F : Future < Output = T > + Send + 'a , { if let Err (future) = self . try_set (future) { * self = Self :: new (future) ; } } # [doc = " Replace the future currently stored in this box."] # [doc = ""] # [doc = " This function never reallocates, but returns an error if the provided"] # [doc = " future has a different size or alignment from the currently stored"] # [doc = " future."] pub fn try_set < F > (& mut self , future : F) -> Result < () , F > where F : Future < Output = T > + Send + 'a , { # [inline (always)] fn real_try_set < 'a , F > (this : & mut ReusableBoxFuture < 'a , F :: Output > , future : F ,) -> Result < () , F > where F : Future + Send + 'a , { let boxed = mem :: replace (& mut this . boxed , Box :: pin (future :: pending ())) ; reuse_pin_box (boxed , future , | boxed | this . boxed = Pin :: from (boxed)) } real_try_set (self , future) } # [doc = " Get a pinned reference to the underlying future."] pub fn get_pin (& mut self) -> Pin < & mut (dyn Future < Output = T > + Send) > { self . boxed . as_mut () } # [doc = " Poll the future stored inside this box."] pub fn poll (& mut self , cx : & mut Context < '_ >) -> Poll < T > { self . get_pin () . poll (cx) } }
+};
+}

@@ -1,0 +1,45 @@
+// Generated module macro for crate::floating_point_arithmetic
+macro_rules! Modcrate_floating_point_arithmetic {
+() => {
+        Depcrate_floating_point_arithmeticuse_2212!();
+        Depcrate_floating_point_arithmeticuse_2213!();
+        Depcrate_floating_point_arithmeticuse_2214!();
+        Depcrate_floating_point_arithmeticuse_2215!();
+        Depcrate_floating_point_arithmeticuse_2216!();
+        Depcrate_floating_point_arithmeticuse_2217!();
+        Depcrate_floating_point_arithmeticuse_2218!();
+        Depcrate_floating_point_arithmeticuse_2219!();
+        Depcrate_floating_point_arithmeticuse_2220!();
+        Depcrate_floating_point_arithmeticuse_2221!();
+        Depcrate_floating_point_arithmeticuse_2222!();
+        Depcrate_floating_point_arithmeticuse_2223!();
+        Depcrate_floating_point_arithmeticuse_2224!();
+        Depcrate_floating_point_arithmeticuse_2225!();
+        Depcrate_floating_point_arithmeticuse_2226!();
+        Depcrate_floating_point_arithmeticuse_2227!();
+        Depcrate_floating_point_arithmeticmacro_2228!();
+        Depcrate_floating_point_arithmeticmacro_2229!();
+        Depcrate_floating_point_arithmeticmacro_2230!();
+        Depcrate_floating_point_arithmeticget_specialized_log_method!();
+        Depcrate_floating_point_arithmeticprepare_receiver_sugg!();
+        Depcrate_floating_point_arithmeticcheck_log_base!();
+        Depcrate_floating_point_arithmeticcheck_ln1p!();
+        Depcrate_floating_point_arithmeticget_integer_from_float_constant!();
+        Depcrate_floating_point_arithmeticcheck_powf!();
+        Depcrate_floating_point_arithmeticcheck_powi!();
+        Depcrate_floating_point_arithmeticdetect_hypot!();
+        Depcrate_floating_point_arithmeticcheck_hypot!();
+        Depcrate_floating_point_arithmeticcheck_expm1!();
+        Depcrate_floating_point_arithmeticis_float_mul_expr!();
+        Depcrate_floating_point_arithmeticcheck_mul_add!();
+        Depcrate_floating_point_arithmeticis_testing_positive!();
+        Depcrate_floating_point_arithmeticis_testing_negative!();
+        Depcrate_floating_point_arithmeticis_zero!();
+        Depcrate_floating_point_arithmeticare_negated!();
+        Depcrate_floating_point_arithmeticcheck_custom_abs!();
+        Depcrate_floating_point_arithmeticare_same_base_logs!();
+        Depcrate_floating_point_arithmeticcheck_log_division!();
+        Depcrate_floating_point_arithmeticcheck_radians!();
+        Depcrate_floating_point_arithmeticimpl_2251!();
+    };
+}

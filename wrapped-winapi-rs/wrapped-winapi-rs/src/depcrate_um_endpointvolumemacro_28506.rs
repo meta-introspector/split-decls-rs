@@ -1,0 +1,9 @@
+// Generated macro for macro_28506 (macro)
+macro_rules! Depcrate_um_endpointvolumemacro_28506 {
+() => {
+// Module: crate::um::endpointvolume
+// Provides: {"macro_28506"}
+// Dependencies: {}
+RIDL ! { # [uuid (0x5cdf2c82 , 0x841e , 0x4546 , 0x97 , 0x22 , 0x0c , 0xf7 , 0x40 , 0x78 , 0x22 , 0x9a)] interface IAudioEndpointVolume (IAudioEndpointVolumeVtbl) : IUnknown (IUnknownVtbl) { fn RegisterControlChangeNotify (pNotify : * mut IAudioEndpointVolumeCallback ,) -> HRESULT , fn UnregisterControlChangeNotify (pNotify : * mut IAudioEndpointVolumeCallback ,) -> HRESULT , fn GetChannelCount (pnChannelCount : * mut UINT ,) -> HRESULT , fn SetMasterVolumeLevel (fLevelDB : c_float , pguidEventContext : LPCGUID ,) -> HRESULT , fn SetMasterVolumeLevelScalar (fLevel : c_float , pguidEventContext : LPCGUID ,) -> HRESULT , fn GetMasterVolumeLevel (pfLevelDB : * mut c_float ,) -> HRESULT , fn GetMasterVolumeLevelScalar (pfLevel : * mut c_float ,) -> HRESULT , fn SetChannelVolumeLevel (nChannel : UINT , fLevelDB : c_float , pguidEventContext : LPCGUID ,) -> HRESULT , fn SetChannelVolumeLevelScalar (nChannel : UINT , fLevel : c_float , pguidEventContext : LPCGUID ,) -> HRESULT , fn GetChannelVolumeLevel (nChannel : UINT , pfLevelDB : * mut c_float ,) -> HRESULT , fn GetChannelVolumeLevelScalar (nChannel : UINT , pfLevel : * mut c_float ,) -> HRESULT , fn SetMute (bMute : BOOL , pguidEventContext : LPCGUID ,) -> HRESULT , fn GetMute (pbMute : * mut BOOL ,) -> HRESULT , fn GetVolumeStepInfo (pnStep : * mut UINT , pnStepCount : * mut UINT ,) -> HRESULT , fn VolumeStepUp (pguidEventContext : LPCGUID ,) -> HRESULT , fn VolumeStepDown (pguidEventContext : LPCGUID ,) -> HRESULT , fn QueryHardwareSupport (pdwHardwareSupportMask : * mut DWORD ,) -> HRESULT , fn GetVolumeRange (pflVolumeMindB : * mut c_float , pflVolumeMaxdB : * mut c_float , pflVolumeIncrementdB : * mut c_float ,) -> HRESULT , } }
+};
+}

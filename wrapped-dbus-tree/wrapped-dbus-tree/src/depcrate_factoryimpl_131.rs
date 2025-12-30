@@ -1,0 +1,9 @@
+// Generated macro for impl_131 (impl)
+macro_rules! Depcrate_factoryimpl_131 {
+() => {
+// Module: crate::factory
+// Provides: {"impl_131"}
+// Dependencies: {}
+impl < M : MethodType < D > , D : DataType > Factory < M , D > { # [doc = " Creates a new property."] # [doc = ""] # [doc = " `A` is used to calculate the type signature of the property."] pub fn property < A : arg :: Arg , T : Into < String > > (& self , name : T , data : D :: Property) -> Property < M , D > { let sig = A :: signature () ; super :: leaves :: new_property (name . into () , sig , data) } # [doc = " Creates a new signal."] pub fn signal < T : Into < Member < 'static > > > (& self , name : T , data : D :: Signal) -> Signal < D > { super :: leaves :: new_signal (name . into () , data) } # [doc = " Creates a new interface."] pub fn interface < T : Into < IfaceName < 'static > > > (& self , name : T , data : D :: Interface) -> Interface < M , D > { super :: objectpath :: new_interface (name . into () , data) } # [doc = " Creates a new object path."] pub fn object_path < T : Into < Path < 'static > > > (& self , name : T , data : D :: ObjectPath) -> ObjectPath < M , D > { super :: objectpath :: new_objectpath (name . into () , data , self . 0 . clone ()) } # [doc = " Creates a new tree."] pub fn tree (& self , data : D :: Tree) -> Tree < M , D > { super :: objectpath :: new_tree (data) } # [doc = " Creates a new method - usually you'll use \"method\" instead."] # [doc = ""] # [doc = " This is useful for being able to create methods in code which is generic over methodtype."] pub fn method_sync < H , T > (& self , t : T , data : D :: Method , handler : H) -> Method < M , D > where H : Fn (& MethodInfo < M , D >) -> MethodResult + Send + Sync + 'static , T : Into < Member < 'static > > { super :: leaves :: new_method (t . into () , data , M :: make_method (handler)) } }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for macro_114 (macro)
+macro_rules! Depcrate_absolute_pathsmacro_114 {
+() => {
+// Module: crate::absolute_paths
+// Provides: {"macro_114"}
+// Dependencies: {}
+declare_clippy_lint ! { # [doc = " ### What it does"] # [doc = " Checks for usage of items through absolute paths, like `std::env::current_dir`."] # [doc = ""] # [doc = " ### Why restrict this?"] # [doc = " Many codebases have their own style when it comes to importing, but one that is seldom used"] # [doc = " is using absolute paths *everywhere*. This is generally considered unidiomatic, and you"] # [doc = " should add a `use` statement."] # [doc = ""] # [doc = " The default maximum segments (2) is pretty strict, you may want to increase this in"] # [doc = " `clippy.toml`."] # [doc = ""] # [doc = " Note: One exception to this is code from macro expansion - this does not lint such cases, as"] # [doc = " using absolute paths is the proper way of referencing items in one."] # [doc = ""] # [doc = " ### Known issues"] # [doc = ""] # [doc = " There are currently a few cases which are not caught by this lint:"] # [doc = " * Macro calls. e.g. `path::to::macro!()`"] # [doc = " * Derive macros. e.g. `#[derive(path::to::macro)]`"] # [doc = " * Attribute macros. e.g. `#[path::to::macro]`"] # [doc = ""] # [doc = " ### Example"] # [doc = " ```no_run"] # [doc = " let x = std::f64::consts::PI;"] # [doc = " ```"] # [doc = " Use any of the below instead, or anything else:"] # [doc = " ```no_run"] # [doc = " use std::f64;"] # [doc = " use std::f64::consts;"] # [doc = " use std::f64::consts::PI;"] # [doc = " let x = f64::consts::PI;"] # [doc = " let x = consts::PI;"] # [doc = " let x = PI;"] # [doc = " use std::f64::consts as f64_consts;"] # [doc = " let x = f64_consts::PI;"] # [doc = " ```"] # [clippy :: version = "1.73.0"] pub ABSOLUTE_PATHS , restriction , "checks for usage of an item without a `use` statement" }
+};
+}

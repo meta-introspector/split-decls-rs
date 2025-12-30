@@ -1,0 +1,9 @@
+// Generated macro for TyExt (trait)
+macro_rules! Depcrate_chalk_extTyExt {
+() => {
+// Module: crate::chalk_ext
+// Provides: {"TyExt"}
+// Dependencies: {}
+pub trait TyExt { fn is_unit (& self) -> bool ; fn is_integral (& self) -> bool ; fn is_scalar (& self) -> bool ; fn is_floating_point (& self) -> bool ; fn is_never (& self) -> bool ; fn is_str (& self) -> bool ; fn is_unknown (& self) -> bool ; fn contains_unknown (& self) -> bool ; fn is_ty_var (& self) -> bool ; fn is_union (& self) -> bool ; fn as_adt (& self) -> Option < (hir_def :: AdtId , & Substitution) > ; fn as_builtin (& self) -> Option < BuiltinType > ; fn as_tuple (& self) -> Option < & Substitution > ; fn as_closure (& self) -> Option < ClosureId > ; fn as_fn_def (& self , db : & dyn HirDatabase) -> Option < FunctionId > ; fn as_reference (& self) -> Option < (& Ty , Lifetime , Mutability) > ; fn as_raw_ptr (& self) -> Option < (& Ty , Mutability) > ; fn as_reference_or_ptr (& self) -> Option < (& Ty , Rawness , Mutability) > ; fn as_generic_def (& self , db : & dyn HirDatabase) -> Option < GenericDefId > ; fn callable_def (& self , db : & dyn HirDatabase) -> Option < CallableDefId > ; fn callable_sig (& self , db : & dyn HirDatabase) -> Option < CallableSig > ; fn strip_references (& self) -> & Ty ; fn strip_reference (& self) -> & Ty ; # [doc = " If this is a `dyn Trait`, returns that trait."] fn dyn_trait (& self) -> Option < TraitId > ; fn impl_trait_bounds (& self , db : & dyn HirDatabase) -> Option < Vec < QuantifiedWhereClause > > ; fn associated_type_parent_trait (& self , db : & dyn HirDatabase) -> Option < TraitId > ; fn is_copy (self , db : & dyn HirDatabase , owner : DefWithBodyId) -> bool ; # [doc = " FIXME: Get rid of this, it's not a good abstraction"] fn equals_ctor (& self , other : & Ty) -> bool ; }
+};
+}

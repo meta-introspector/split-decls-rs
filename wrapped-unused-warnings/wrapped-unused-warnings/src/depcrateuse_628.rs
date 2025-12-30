@@ -1,0 +1,9 @@
+// Generated macro for use_628 (use)
+macro_rules! Depcrateuse_628 {
+() => {
+// Module: crate
+// Provides: {"use_628"}
+// Dependencies: {}
+use foo as foo628 ;
+};
+}

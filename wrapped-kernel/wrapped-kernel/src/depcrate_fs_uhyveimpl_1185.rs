@@ -1,0 +1,9 @@
+// Generated macro for impl_1185 (impl)
+macro_rules! Depcrate_fs_uhyveimpl_1185 {
+() => {
+// Module: crate::fs::uhyve
+// Provides: {"impl_1185"}
+// Dependencies: {}
+impl VfsNode for UhyveDirectory { # [doc = " Returns the node type"] fn get_kind (& self) -> NodeKind { NodeKind :: Directory } fn traverse_stat (& self , _components : & mut Vec < & str >) -> io :: Result < FileAttr > { Err (Errno :: Nosys) } fn traverse_lstat (& self , _components : & mut Vec < & str >) -> io :: Result < FileAttr > { Err (Errno :: Nosys) } fn traverse_open (& self , components : & mut Vec < & str > , opt : OpenOption , mode : AccessPermission ,) -> io :: Result < Arc < async_lock :: RwLock < dyn ObjectInterface > > > { let path = self . traversal_path (components) ; let mut open_params = OpenParams { name : GuestPhysAddr :: new (paging :: virtual_to_physical (VirtAddr :: from_ptr (path . as_ptr ())) . unwrap () . as_u64 () ,) , flags : opt . bits () , mode : mode . bits () as i32 , ret : - 1 , } ; uhyve_hypercall (Hypercall :: FileOpen (& mut open_params)) ; if open_params . ret > 0 { Ok (Arc :: new (async_lock :: RwLock :: new (UhyveFileHandle :: new (open_params . ret ,)))) } else { Err (Errno :: Io) } } fn traverse_unlink (& self , components : & mut Vec < & str >) -> io :: Result < () > { let path = self . traversal_path (components) ; let mut unlink_params = UnlinkParams { name : GuestPhysAddr :: new (paging :: virtual_to_physical (VirtAddr :: from_ptr (path . as_ptr ())) . unwrap () . as_u64 () ,) , ret : - 1 , } ; uhyve_hypercall (Hypercall :: FileUnlink (& mut unlink_params)) ; if unlink_params . ret == 0 { Ok (()) } else { Err (Errno :: Io) } } fn traverse_rmdir (& self , _components : & mut Vec < & str >) -> io :: Result < () > { Err (Errno :: Nosys) } fn traverse_mkdir (& self , _components : & mut Vec < & str > , _mode : AccessPermission ,) -> io :: Result < () > { Err (Errno :: Nosys) } }
+};
+}

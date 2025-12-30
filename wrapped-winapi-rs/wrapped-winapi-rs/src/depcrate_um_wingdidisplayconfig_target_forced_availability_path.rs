@@ -1,0 +1,9 @@
+// Generated macro for DISPLAYCONFIG_TARGET_FORCED_AVAILABILITY_PATH (const)
+macro_rules! Depcrate_um_wingdiDISPLAYCONFIG_TARGET_FORCED_AVAILABILITY_PATH {
+() => {
+// Module: crate::um::wingdi
+// Provides: {"DISPLAYCONFIG_TARGET_FORCED_AVAILABILITY_PATH"}
+// Dependencies: {}
+pub const DISPLAYCONFIG_TARGET_FORCED_AVAILABILITY_PATH : DWORD = 0x00000008 ;
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for IA32_MC9_CTL (const)
+macro_rules! Depcrate_msrIA32_MC9_CTL {
+() => {
+// Module: crate::msr
+// Provides: {"IA32_MC9_CTL"}
+// Dependencies: {}
+# [doc = " 06_2EH"] pub const IA32_MC9_CTL : u32 = 0x424 ;
+};
+}

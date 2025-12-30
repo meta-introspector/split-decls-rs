@@ -1,0 +1,9 @@
+// Generated macro for extern_conformance (macro)
+macro_rules! Depcrate___macros_extern_conformanceextern_conformance {
+() => {
+// Module: crate::__macros::extern_conformance
+// Provides: {"extern_conformance"}
+// Dependencies: {}
+# [doc = " Implement a protocol for an external class."] # [doc = ""] # [doc = " This creates a given protocol implementation with regards to the"] # [doc = " type-system. Useful on types created with [`extern_class!`], not use this"] # [doc = " on custom classes created with [`define_class!`], instead, implement the"] # [doc = " protocol within that macro."] # [doc = ""] # [doc = " [`define_class!`]: crate::define_class!"] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " # #[cfg(not_available)]"] # [doc = " use objc2_foundation::NSObjectProtocol;"] # [doc = " # use objc2::runtime::NSObjectProtocol;"] # [doc = " use objc2::runtime::NSObject;"] # [doc = " use objc2::{extern_class, extern_conformance};"] # [doc = ""] # [doc = " extern_class!("] # [doc = "     #[unsafe(super(NSObject))]"] # [doc = "     #[derive(PartialEq, Eq, Hash, Debug)]"] # [doc = "     pub struct MyClass;"] # [doc = " );"] # [doc = ""] # [doc = " // SAFETY: The class `MyClass` conforms to the `NSObject` protocol (since"] # [doc = " // its superclass `NSObject` does)."] # [doc = " extern_conformance!(unsafe impl NSObjectProtocol for MyClass {});"] # [doc = " ```"] # [doc = ""] # [doc = " See the [`extern_class!`] macro for more examples."] # [doc = ""] # [doc = " [`extern_class!`]: crate::extern_class!"] # [doc (alias = "@interface")] # [macro_export] macro_rules ! extern_conformance { (unsafe impl $ (<$ ($ t : ident : $ ($ bound : ident) ? $ (?$ sized : ident) ? $ (+ $ b : path) *) ,* $ (,) ?>) ? $ ty : ident for $ protocol : ty { }) => { unsafe impl $ (<$ ($ t : $ ($ bound) ? $ (?$ sized) ? $ (+ $ b) *) ,*>) ? $ ty for $ protocol { } } ; }
+};
+}

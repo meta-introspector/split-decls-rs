@@ -1,0 +1,45 @@
+// Generated module macro for crate::metadata
+macro_rules! Modcrate_metadata {
+() => {
+        Depcrate_metadatause_223!();
+        Depcrate_metadatause_224!();
+        Depcrate_metadataMetadata!();
+        Depcrate_metadataKind!();
+        Depcrate_metadataLevel!();
+        Depcrate_metadataLevelFilter!();
+        Depcrate_metadataParseLevelFilterError!();
+        Depcrate_metadataMAX_LEVEL!();
+        Depcrate_metadataimpl_231!();
+        Depcrate_metadataimpl_232!();
+        Depcrate_metadataimpl_233!();
+        Depcrate_metadataimpl_234!();
+        Depcrate_metadataimpl_235!();
+        Depcrate_metadataimpl_236!();
+        Depcrate_metadataimpl_237!();
+        Depcrate_metadataimpl_238!();
+        Depcrate_metadataimpl_239!();
+        Depcrate_metadataimpl_240!();
+        Depcrate_metadataLevelInner!();
+        Depcrate_metadataimpl_242!();
+        Depcrate_metadataimpl_243!();
+        Depcrate_metadataimpl_244!();
+        Depcrate_metadataimpl_245!();
+        Depcrate_metadataimpl_246!();
+        Depcrate_metadataimpl_247!();
+        Depcrate_metadataimpl_248!();
+        Depcrate_metadataParseLevelError!();
+        Depcrate_metadataimpl_250!();
+        Depcrate_metadataimpl_251!();
+        Depcrate_metadataimpl_252!();
+        Depcrate_metadataimpl_253!();
+        Depcrate_metadataimpl_254!();
+        Depcrate_metadataimpl_255!();
+        Depcrate_metadataimpl_256!();
+        Depcrate_metadatafilter_as_usize!();
+        Depcrate_metadataimpl_258!();
+        Depcrate_metadataimpl_259!();
+        Depcrate_metadataimpl_260!();
+        Depcrate_metadataimpl_261!();
+        Depcrate_metadatatests!();
+    };
+}

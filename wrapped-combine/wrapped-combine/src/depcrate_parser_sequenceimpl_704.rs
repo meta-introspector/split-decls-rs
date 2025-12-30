@@ -1,0 +1,9 @@
+// Generated macro for impl_704 (impl)
+macro_rules! Depcrate_parser_sequenceimpl_704 {
+() => {
+// Module: crate::parser::sequence
+// Provides: {"impl_704"}
+// Dependencies: {}
+impl < Input , P , N , F > Parser < Input > for Then < P , F > where Input : Stream , F : FnMut (P :: Output) -> N , P : Parser < Input > , N : Parser < Input > , { type Output = N :: Output ; type PartialState = (P :: PartialState , Option < (bool , N) > , N :: PartialState) ; parse_mode ! (Input) ; # [inline] fn parse_mode_impl < M > (& mut self , mut mode : M , input : & mut Input , state : & mut Self :: PartialState ,) -> ParseResult < Self :: Output , < Input as StreamOnce > :: Error > where M : ParseMode , { let (ref mut p_state , ref mut n_parser_cache , ref mut n_state) = * state ; if mode . is_first () || n_parser_cache . is_none () { debug_assert ! (n_parser_cache . is_none ()) ; let (value , committed) = match self . 0 . parse_mode (mode , input , p_state) { PeekOk (value) => (value , false) , CommitOk (value) => (value , true) , PeekErr (err) => return PeekErr (err) , CommitErr (err) => return CommitErr (err) , } ; * n_parser_cache = Some ((committed , (self . 1) (value))) ; mode . set_first () ; } let result = n_parser_cache . as_mut () . unwrap () . 1 . parse_committed_mode (mode , input , n_state) ; match result { PeekOk (x) => { let (committed , _) = * n_parser_cache . as_ref () . unwrap () ; * n_parser_cache = None ; if committed { CommitOk (x) } else { PeekOk (x) } } CommitOk (x) => { * n_parser_cache = None ; CommitOk (x) } PeekErr (x) => { let (committed , _) = * n_parser_cache . as_ref () . unwrap () ; * n_parser_cache = None ; if committed { CommitErr (x . error) } else { PeekErr (x) } } CommitErr (x) => CommitErr (x) , } } fn add_error (& mut self , errors : & mut Tracked < < Input as StreamOnce > :: Error >) { self . 0 . add_error (errors) ; } }
+};
+}

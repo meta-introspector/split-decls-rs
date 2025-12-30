@@ -1,0 +1,9 @@
+// Generated macro for impl_6 (impl)
+macro_rules! Depcrateimpl_6 {
+() => {
+// Module: crate
+// Provides: {"impl_6"}
+// Dependencies: {}
+impl < 'a > ProofProcessor for WriteLrat < 'a > { fn process_step (& mut self , step : & CheckedProofStep , _data : CheckerData) -> Result < () , Error > { match step { CheckedProofStep :: AddClause { .. } => () , CheckedProofStep :: DuplicatedClause { .. } => () , _ => { if ! self . buffered_deletes . is_empty () { let buffered_deletes = replace (& mut self . buffered_deletes , vec ! []) ; self . open_delete () ? ; self . write_ids (& buffered_deletes) ? ; } } } match step { & CheckedProofStep :: AddClause { id , .. } => { self . last_added_id = id ; } & CheckedProofStep :: DuplicatedClause { id , .. } | & CheckedProofStep :: TautologicalClause { id , .. } => { self . last_added_id = id ; if self . binary { self . open_delete () ? ; self . write_ids (& [id]) ? ; } else { self . buffered_deletes . push (id) ; } } & CheckedProofStep :: AtClause { id , clause , propagations , .. } => { self . close_delete () ? ; self . last_added_id = id ; self . write_add_step () ? ; self . write_ids (& [id]) ? ; self . write_lits (clause) ? ; self . write_sep () ? ; self . write_ids (propagations) ? ; self . write_end () ? ; } & CheckedProofStep :: DeleteAtClause { id , keep_as_redundant , .. } | & CheckedProofStep :: DeleteRatClause { id , keep_as_redundant , .. } => { if ! keep_as_redundant { self . open_delete () ? ; self . write_ids (& [id]) ? ; } } & CheckedProofStep :: DeleteClause { id , .. } => { self . open_delete () ? ; self . write_ids (& [id]) ? ; } & CheckedProofStep :: UserVar { .. } | & CheckedProofStep :: MakeIrredundant { .. } | & CheckedProofStep :: Model { .. } | & CheckedProofStep :: Assumptions { .. } | & CheckedProofStep :: FailedAssumptions { .. } => () , } Ok (()) } }
+};
+}

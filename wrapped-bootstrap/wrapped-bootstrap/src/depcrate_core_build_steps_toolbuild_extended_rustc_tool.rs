@@ -1,0 +1,9 @@
+// Generated macro for build_extended_rustc_tool (function)
+macro_rules! Depcrate_core_build_steps_toolbuild_extended_rustc_tool {
+() => {
+// Module: crate::core::build_steps::tool
+// Provides: {"build_extended_rustc_tool"}
+// Dependencies: {}
+fn build_extended_rustc_tool (builder : & Builder < '_ > , compilers : RustcPrivateCompilers , tool_name : & 'static str , path : & 'static str , add_bins_to_sysroot : Option < & [& str] > , add_features : Option < fn (& Builder < '_ > , TargetSelection , & mut Vec < String >) > , cargo_args : Option < & [& 'static str] > ,) -> ToolBuildResult { let target = compilers . target () ; let mut extra_features = Vec :: new () ; if let Some (func) = add_features { func (builder , target , & mut extra_features) ; } let build_compiler = compilers . build_compiler ; let ToolBuildResult { tool_path , .. } = builder . ensure (ToolBuild { build_compiler , target , tool : tool_name , mode : Mode :: ToolRustcPrivate , path , extra_features , source_type : SourceType :: InTree , allow_features : "" , cargo_args : cargo_args . unwrap_or_default () . iter () . map (| s | String :: from (* s)) . collect () , artifact_kind : ToolArtifactKind :: Binary , }) ; let target_compiler = compilers . target_compiler ; if let Some (add_bins_to_sysroot) = add_bins_to_sysroot && ! add_bins_to_sysroot . is_empty () { let bindir = builder . sysroot (target_compiler) . join ("bin") ; t ! (fs :: create_dir_all (& bindir)) ; for add_bin in add_bins_to_sysroot { let bin_destination = bindir . join (exe (add_bin , target_compiler . host)) ; builder . copy_link (& tool_path , & bin_destination , FileType :: Executable) ; } let path = bindir . join (exe (tool_name , target_compiler . host)) ; ToolBuildResult { tool_path : path , build_compiler } } else { ToolBuildResult { tool_path , build_compiler } } }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for Task (struct)
+macro_rules! Depcrate_taskTask {
+() => {
+// Module: crate::task
+// Provides: {"Task"}
+// Dependencies: {}
+# [doc = " A spawned task."] # [doc = ""] # [doc = " A [`Task`] can be awaited to retrieve the output of its future."] # [doc = ""] # [doc = " Dropping a [`Task`] cancels it, which means its future won't be polled again. To drop the"] # [doc = " [`Task`] handle without canceling it, use [`detach()`][`Task::detach()`] instead. To cancel a"] # [doc = " task gracefully and wait until it is fully destroyed, use the [`cancel()`][Task::cancel()]"] # [doc = " method."] # [doc = ""] # [doc = " Note that canceling a task actually wakes it and reschedules one last time. Then, the executor"] # [doc = " can destroy the task by simply dropping its [`Runnable`][`super::Runnable`] or by invoking"] # [doc = " [`run()`][`super::Runnable::run()`]."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " use smol::{future, Executor};"] # [doc = " use std::thread;"] # [doc = ""] # [doc = " let ex = Executor::new();"] # [doc = ""] # [doc = " // Spawn a future onto the executor."] # [doc = " let task = ex.spawn(async {"] # [doc = "     println!(\"Hello from a task!\");"] # [doc = "     1 + 2"] # [doc = " });"] # [doc = ""] # [doc = " // Run an executor thread."] # [doc = " thread::spawn(move || future::block_on(ex.run(future::pending::<()>())));"] # [doc = ""] # [doc = " // Wait for the task's output."] # [doc = " assert_eq!(future::block_on(task), 3);"] # [doc = " ```"] # [must_use = "tasks get canceled when dropped, use `.detach()` to run them in the background"] pub struct Task < T , M = () > { # [doc = " A raw task pointer."] pub (crate) ptr : NonNull < () > , # [doc = " A marker capturing generic types `T` and `M`."] pub (crate) _marker : PhantomData < (T , M) > , }
+};
+}

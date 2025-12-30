@@ -1,0 +1,9 @@
+// Generated macro for PSYSTEM_VERIFIER_COUNTERS_INFORMATION (type)
+macro_rules! Depcrate_ntexapiPSYSTEM_VERIFIER_COUNTERS_INFORMATION {
+() => {
+// Module: crate::ntexapi
+// Provides: {"PSYSTEM_VERIFIER_COUNTERS_INFORMATION"}
+// Dependencies: {}
+pub type PSYSTEM_VERIFIER_COUNTERS_INFORMATION = * mut SYSTEM_VERIFIER_COUNTERS_INFORMATION ;
+};
+}

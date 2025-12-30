@@ -1,0 +1,41 @@
+// Generated module macro for crate::interface_iterable
+macro_rules! Modcrate_interface_iterable {
+() => {
+        Depcrate_interface_iterableIIterable!();
+        Depcrate_interface_iterableimpl_454!();
+        Depcrate_interface_iterableimpl_455!();
+        Depcrate_interface_iterableimpl_456!();
+        Depcrate_interface_iterableimpl_457!();
+        Depcrate_interface_iterableimpl_458!();
+        Depcrate_interface_iterableimpl_459!();
+        Depcrate_interface_iterableIIterable_Impl!();
+        Depcrate_interface_iterableimpl_461!();
+        Depcrate_interface_iterableIIterable_Vtbl!();
+        Depcrate_interface_iterableimpl_463!();
+        Depcrate_interface_iterableimpl_464!();
+        Depcrate_interface_iterableIIterator!();
+        Depcrate_interface_iterableimpl_466!();
+        Depcrate_interface_iterableimpl_467!();
+        Depcrate_interface_iterableimpl_468!();
+        Depcrate_interface_iterableimpl_469!();
+        Depcrate_interface_iterableimpl_470!();
+        Depcrate_interface_iterableimpl_471!();
+        Depcrate_interface_iterableIIterator_Impl!();
+        Depcrate_interface_iterableimpl_473!();
+        Depcrate_interface_iterableIIterator_Vtbl!();
+        Depcrate_interface_iterableimpl_475!();
+        Depcrate_interface_iterableIVector!();
+        Depcrate_interface_iterableimpl_477!();
+        Depcrate_interface_iterableimpl_478!();
+        Depcrate_interface_iterableimpl_479!();
+        Depcrate_interface_iterableimpl_480!();
+        Depcrate_interface_iterableimpl_481!();
+        Depcrate_interface_iterableimpl_482!();
+        Depcrate_interface_iterableimpl_483!();
+        Depcrate_interface_iterableimpl_484!();
+        Depcrate_interface_iterableimpl_485!();
+        Depcrate_interface_iterableIVector_Impl!();
+        Depcrate_interface_iterableimpl_487!();
+        Depcrate_interface_iterableIVector_Vtbl!();
+    };
+}

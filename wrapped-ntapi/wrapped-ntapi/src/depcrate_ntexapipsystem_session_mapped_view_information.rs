@@ -1,0 +1,9 @@
+// Generated macro for PSYSTEM_SESSION_MAPPED_VIEW_INFORMATION (type)
+macro_rules! Depcrate_ntexapiPSYSTEM_SESSION_MAPPED_VIEW_INFORMATION {
+() => {
+// Module: crate::ntexapi
+// Provides: {"PSYSTEM_SESSION_MAPPED_VIEW_INFORMATION"}
+// Dependencies: {}
+pub type PSYSTEM_SESSION_MAPPED_VIEW_INFORMATION = * mut SYSTEM_SESSION_MAPPED_VIEW_INFORMATION ;
+};
+}

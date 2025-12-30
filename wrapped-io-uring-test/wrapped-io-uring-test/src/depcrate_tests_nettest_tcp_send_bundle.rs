@@ -1,0 +1,9 @@
+// Generated macro for test_tcp_send_bundle (function)
+macro_rules! Depcrate_tests_nettest_tcp_send_bundle {
+() => {
+// Module: crate::tests::net
+// Provides: {"test_tcp_send_bundle"}
+// Dependencies: {}
+pub fn test_tcp_send_bundle < S : squeue :: EntryMarker , C : cqueue :: EntryMarker > (ring : & mut IoUring < S , C > , test : & Test ,) -> anyhow :: Result < () > { require ! (test ; test . probe . is_supported (opcode :: SendBundle :: CODE) ; ring . params () . is_feature_recvsend_bundle () ;) ; println ! ("test tcp_send_bundle") ; let (send_stream , mut recv_stream) = tcp_pair () ? ; let send_fd = types :: Fd (send_stream . as_raw_fd ()) ; let text = b"The quick brown fox jumps over the lazy dog." ; let mut output = vec ! [0 ; text . len ()] ; let buf_ring = register_buf_ring :: Builder :: new (0xdead) . ring_entries (2) . buf_cnt (2) . buf_len (22) . build () ? ; buf_ring . rc . register (ring) ? ; let ptr1 = buf_ring . rc . ring_start . as_ptr_mut () as * mut BufRingEntry ; unsafe { let ptr2 = ptr1 . add (1) ; std :: ptr :: copy_nonoverlapping (text . as_ptr () , ptr1 . as_mut () . unwrap () . addr () as * mut u8 , 22) ; std :: ptr :: copy_nonoverlapping (text [22 ..] . as_ptr () , ptr2 . as_mut () . unwrap () . addr () as * mut u8 , 22 ,) ; } let send_e = opcode :: SendBundle :: new (send_fd , 0xdead) ; unsafe { let mut queue = ring . submission () ; let send_e = send_e . build () . user_data (0x01) . into () ; queue . push (& send_e) . expect ("queue is full") ; } ring . submit_and_wait (1) ? ; let cqes : Vec < cqueue :: Entry > = ring . completion () . map (Into :: into) . collect () ; assert_eq ! (cqes . len () , 1) ; assert_eq ! (cqes [0] . user_data () , 0x01) ; assert_eq ! (cqes [0] . result () , text . len () as i32) ; assert_eq ! (recv_stream . read (& mut output) . expect ("could not read stream") , text . len ()) ; assert_eq ! (& output , text) ; buf_ring . rc . unregister (ring) ? ; Ok (()) }
+};
+}

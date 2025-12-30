@@ -1,0 +1,9 @@
+// Generated macro for macro_1023 (macro)
+macro_rules! Depcrate_classify_grpc_errors_as_failuresmacro_1023 {
+() => {
+// Module: crate::classify::grpc_errors_as_failures
+// Provides: {"macro_1023"}
+// Dependencies: {}
+bitflags ! { # [derive (Debug , Clone , Copy)] pub (crate) struct GrpcCodeBitmask : u32 { const OK = 0b00000000000000001 ; const CANCELLED = 0b00000000000000010 ; const UNKNOWN = 0b00000000000000100 ; const INVALID_ARGUMENT = 0b00000000000001000 ; const DEADLINE_EXCEEDED = 0b00000000000010000 ; const NOT_FOUND = 0b00000000000100000 ; const ALREADY_EXISTS = 0b00000000001000000 ; const PERMISSION_DENIED = 0b00000000010000000 ; const RESOURCE_EXHAUSTED = 0b00000000100000000 ; const FAILED_PRECONDITION = 0b00000001000000000 ; const ABORTED = 0b00000010000000000 ; const OUT_OF_RANGE = 0b00000100000000000 ; const UNIMPLEMENTED = 0b00001000000000000 ; const INTERNAL = 0b00010000000000000 ; const UNAVAILABLE = 0b00100000000000000 ; const DATA_LOSS = 0b01000000000000000 ; const UNAUTHENTICATED = 0b10000000000000000 ; } }
+};
+}

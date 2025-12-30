@@ -1,0 +1,9 @@
+// Generated macro for parse_crate (function)
+macro_rules! Depcrateparse_crate {
+() => {
+// Module: crate
+// Provides: {"parse_crate"}
+// Dependencies: {}
+fn parse_crate (crate_str : String , current_source_root_kind : SourceRootKind , explicit_non_workspace_member : bool ,) -> (String , CrateOrigin , Option < String >) { let (crate_str , force_non_lang_origin) = if let Some (s) = crate_str . strip_prefix ("r#") { (s . to_owned () , ForceNoneLangOrigin :: Yes) } else { (crate_str , ForceNoneLangOrigin :: No) } ; let (name , repo , version) = if let Some ((name , remain)) = crate_str . split_once ('@') { let (version , repo) = remain . split_once (',') . expect ("crate meta: found '@' without version and url") ; (name . to_owned () , Some (repo . to_owned ()) , Some (version . to_owned ())) } else { (crate_str , None , None) } ; let non_workspace_member = explicit_non_workspace_member || matches ! (current_source_root_kind , SourceRootKind :: Library) ; let origin = if force_non_lang_origin == ForceNoneLangOrigin :: Yes { let name = Symbol :: intern (& name) ; if non_workspace_member { CrateOrigin :: Library { repo , name } } else { CrateOrigin :: Local { repo , name : Some (name) } } } else { match LangCrateOrigin :: from (& * name) { LangCrateOrigin :: Other => { let name = Symbol :: intern (& name) ; if non_workspace_member { CrateOrigin :: Library { repo , name } } else { CrateOrigin :: Local { repo , name : Some (name) } } } origin => CrateOrigin :: Lang (origin) , } } ; (name , origin , version) }
+};
+}

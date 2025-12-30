@@ -1,0 +1,9 @@
+// Generated macro for PDOMAIN_LOCALIZABLE_ACCOUNTS_INFO_BUFFER (type)
+macro_rules! Depcrate_ntsamPDOMAIN_LOCALIZABLE_ACCOUNTS_INFO_BUFFER {
+() => {
+// Module: crate::ntsam
+// Provides: {"PDOMAIN_LOCALIZABLE_ACCOUNTS_INFO_BUFFER"}
+// Dependencies: {}
+pub type PDOMAIN_LOCALIZABLE_ACCOUNTS_INFO_BUFFER = * mut DOMAIN_LOCALIZABLE_ACCOUNTS_INFO_BUFFER ;
+};
+}

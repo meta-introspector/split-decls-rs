@@ -1,0 +1,9 @@
+// Generated macro for STATUS_VID_NOTIFICATION_QUEUE_ALREADY_ASSOCIATED (const)
+macro_rules! Depcrate_shared_ntstatusSTATUS_VID_NOTIFICATION_QUEUE_ALREADY_ASSOCIATED {
+() => {
+// Module: crate::shared::ntstatus
+// Provides: {"STATUS_VID_NOTIFICATION_QUEUE_ALREADY_ASSOCIATED"}
+// Dependencies: {}
+pub const STATUS_VID_NOTIFICATION_QUEUE_ALREADY_ASSOCIATED : NTSTATUS = 0xC0370011 ;
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for impl_121 (impl)
+macro_rules! Depcrateimpl_121 {
+() => {
+// Module: crate
+// Provides: {"impl_121"}
+// Dependencies: {}
+# [cfg (feature = "alloc")] # [allow (clippy :: len_without_is_empty)] impl PasswordHashString { # [doc = " Parse a password hash from a string in the PHC string format."] pub fn new (s : & str) -> Result < Self > { Self :: parse (s , Encoding :: default ()) } # [doc = " Parse a password hash from the given [`Encoding`]."] pub fn parse (s : & str , encoding : Encoding) -> Result < Self > { Ok (PasswordHash :: parse (s , encoding) ? . into ()) } # [doc = " Parse this owned string as a [`PasswordHash`]."] pub fn password_hash (& self) -> PasswordHash < '_ > { PasswordHash :: parse (& self . string , self . encoding) . expect ("malformed password hash") } # [doc = " Get the [`Encoding`] that this [`PasswordHashString`] is serialized with."] pub fn encoding (& self) -> Encoding { self . encoding } # [doc = " Borrow this value as a `str`."] pub fn as_str (& self) -> & str { self . string . as_str () } # [doc = " Borrow this value as bytes."] pub fn as_bytes (& self) -> & [u8] { self . as_str () . as_bytes () } # [doc = " Get the length of this value in ASCII characters."] pub fn len (& self) -> usize { self . as_str () . len () } # [doc = " Password hashing algorithm identifier."] pub fn algorithm (& self) -> Ident < '_ > { self . password_hash () . algorithm } # [doc = " Optional version field."] pub fn version (& self) -> Option < Decimal > { self . password_hash () . version } # [doc = " Algorithm-specific parameters."] pub fn params (& self) -> ParamsString { self . password_hash () . params } # [doc = " [`Salt`] string for personalizing a password hash output."] pub fn salt (& self) -> Option < Salt < '_ > > { self . password_hash () . salt } # [doc = " Password hashing function [`Output`], a.k.a. hash/digest."] pub fn hash (& self) -> Option < Output > { self . password_hash () . hash } }
+};
+}

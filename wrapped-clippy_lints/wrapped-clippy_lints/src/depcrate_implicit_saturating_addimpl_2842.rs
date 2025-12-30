@@ -1,0 +1,9 @@
+// Generated macro for impl_2842 (impl)
+macro_rules! Depcrate_implicit_saturating_addimpl_2842 {
+() => {
+// Module: crate::implicit_saturating_add
+// Provides: {"impl_2842"}
+// Dependencies: {}
+impl < 'tcx > LateLintPass < 'tcx > for ImplicitSaturatingAdd { fn check_expr (& mut self , cx : & LateContext < 'tcx > , expr : & 'tcx Expr < 'tcx >) { if let ExprKind :: If (cond , then , None) = expr . kind && let Some ((c , op_node , l)) = get_const (cx , cond) && let BinOpKind :: Ne | BinOpKind :: Lt = op_node && let ExprKind :: Block (block , None) = then . kind && let Block { stmts : [Stmt { kind : StmtKind :: Expr (ex) | StmtKind :: Semi (ex) , .. } ,] , expr : None , .. } | Block { stmts : [] , expr : Some (ex) , .. } = block && let ExprKind :: AssignOp (op1 , target , value) = ex . kind && let ty = cx . typeck_results () . expr_ty (target) && Some (c) == get_int_max (ty) && let ctxt = expr . span . ctxt () && ex . span . ctxt () == ctxt && cond . span . ctxt () == ctxt && clippy_utils :: SpanlessEq :: new (cx) . eq_expr (l , target) && AssignOpKind :: AddAssign == op1 . node && let ExprKind :: Lit (lit) = value . kind && let LitKind :: Int (Pu128 (1) , LitIntType :: Unsuffixed) = lit . node && block . expr . is_none () { let mut app = Applicability :: MachineApplicable ; let code = snippet_with_context (cx , target . span , ctxt , "_" , & mut app) . 0 ; let sugg = if let Some (parent) = get_parent_expr (cx , expr) && let ExprKind :: If (_cond , _then , Some (else_)) = parent . kind && else_ . hir_id == expr . hir_id { format ! ("{{{code} = {code}.saturating_add(1); }}") } else { format ! ("{code} = {code}.saturating_add(1);") } ; span_lint_and_sugg (cx , IMPLICIT_SATURATING_ADD , expr . span , "manual saturating add detected" , "use instead" , sugg , app ,) ; } } }
+};
+}

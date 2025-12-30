@@ -1,0 +1,43 @@
+// Generated module macro for crate::stm32f429::tim5
+macro_rules! Modcrate_stm32f429_tim5 {
+() => {
+        Depcrate_stm32f429_tim5RegisterBlock!();
+        Depcrate_stm32f429_tim5impl_12887!();
+        Depcrate_stm32f429_tim5CR1!();
+        Depcrate_stm32f429_tim5cr1!();
+        Depcrate_stm32f429_tim5CR2!();
+        Depcrate_stm32f429_tim5cr2!();
+        Depcrate_stm32f429_tim5SMCR!();
+        Depcrate_stm32f429_tim5smcr!();
+        Depcrate_stm32f429_tim5DIER!();
+        Depcrate_stm32f429_tim5dier!();
+        Depcrate_stm32f429_tim5SR!();
+        Depcrate_stm32f429_tim5sr!();
+        Depcrate_stm32f429_tim5EGR!();
+        Depcrate_stm32f429_tim5egr!();
+        Depcrate_stm32f429_tim5CCMR1_OUTPUT!();
+        Depcrate_stm32f429_tim5ccmr1_output!();
+        Depcrate_stm32f429_tim5CCMR1_INPUT!();
+        Depcrate_stm32f429_tim5ccmr1_input!();
+        Depcrate_stm32f429_tim5CCMR2_OUTPUT!();
+        Depcrate_stm32f429_tim5ccmr2_output!();
+        Depcrate_stm32f429_tim5CCMR2_INPUT!();
+        Depcrate_stm32f429_tim5ccmr2_input!();
+        Depcrate_stm32f429_tim5CCER!();
+        Depcrate_stm32f429_tim5ccer!();
+        Depcrate_stm32f429_tim5CNT!();
+        Depcrate_stm32f429_tim5cnt!();
+        Depcrate_stm32f429_tim5PSC!();
+        Depcrate_stm32f429_tim5psc!();
+        Depcrate_stm32f429_tim5ARR!();
+        Depcrate_stm32f429_tim5arr!();
+        Depcrate_stm32f429_tim5CCR!();
+        Depcrate_stm32f429_tim5ccr!();
+        Depcrate_stm32f429_tim5DCR!();
+        Depcrate_stm32f429_tim5dcr!();
+        Depcrate_stm32f429_tim5DMAR!();
+        Depcrate_stm32f429_tim5dmar!();
+        Depcrate_stm32f429_tim5OR!();
+        Depcrate_stm32f429_tim5or!();
+    };
+}

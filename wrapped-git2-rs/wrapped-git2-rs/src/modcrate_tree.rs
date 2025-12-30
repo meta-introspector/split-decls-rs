@@ -1,0 +1,47 @@
+// Generated module macro for crate::tree
+macro_rules! Modcrate_tree {
+() => {
+        Depcrate_treeuse_1262!();
+        Depcrate_treeuse_1263!();
+        Depcrate_treeuse_1264!();
+        Depcrate_treeuse_1265!();
+        Depcrate_treeuse_1266!();
+        Depcrate_treeuse_1267!();
+        Depcrate_treeuse_1268!();
+        Depcrate_treeuse_1269!();
+        Depcrate_treeuse_1270!();
+        Depcrate_treeuse_1271!();
+        Depcrate_treeuse_1272!();
+        Depcrate_treeuse_1273!();
+        Depcrate_treeTree!();
+        Depcrate_treeTreeEntry!();
+        Depcrate_treeTreeIter!();
+        Depcrate_treeTreeWalkMode!();
+        Depcrate_treeTreeWalkResult!();
+        Depcrate_treeimpl_1279!();
+        Depcrate_treeimpl_1280!();
+        Depcrate_treeimpl_1281!();
+        Depcrate_treeTreeWalkCb!();
+        Depcrate_treeTreeWalkCbData!();
+        Depcrate_treetreewalk_cb!();
+        Depcrate_treeimpl_1285!();
+        Depcrate_treeimpl_1286!();
+        Depcrate_treeimpl_1287!();
+        Depcrate_treeimpl_1288!();
+        Depcrate_treeimpl_1289!();
+        Depcrate_treeentry_from_raw_const!();
+        Depcrate_treeimpl_1291!();
+        Depcrate_treeimpl_1292!();
+        Depcrate_treeimpl_1293!();
+        Depcrate_treeimpl_1294!();
+        Depcrate_treeimpl_1295!();
+        Depcrate_treeimpl_1296!();
+        Depcrate_treeimpl_1297!();
+        Depcrate_treeimpl_1298!();
+        Depcrate_treeimpl_1299!();
+        Depcrate_treeimpl_1300!();
+        Depcrate_treeimpl_1301!();
+        Depcrate_treeimpl_1302!();
+        Depcrate_treetests!();
+    };
+}

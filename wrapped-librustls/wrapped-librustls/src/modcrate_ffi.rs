@@ -1,0 +1,50 @@
+// Generated module macro for crate::ffi
+macro_rules! Modcrate_ffi {
+() => {
+        Depcrate_ffiuse_216!();
+        Depcrate_ffiuse_217!();
+        Depcrate_ffiOwnershipBox!();
+        Depcrate_ffiOwnershipArc!();
+        Depcrate_ffiOwnershipRef!();
+        Depcrate_ffiOwnershipMarker!();
+        Depcrate_ffiimpl_222!();
+        Depcrate_ffiimpl_223!();
+        Depcrate_ffiimpl_224!();
+        Depcrate_ffiCastable!();
+        Depcrate_fficast_const_ptr!();
+        Depcrate_ffito_arc_const_ptr!();
+        Depcrate_fficlone_arc!();
+        Depcrate_ffito_box!();
+        Depcrate_ffifree_arc!();
+        Depcrate_ffifree_box!();
+        Depcrate_fficast_mut_ptr!();
+        Depcrate_ffito_boxed_mut_ptr!();
+        Depcrate_ffiset_boxed_mut_ptr!();
+        Depcrate_ffiset_arc_mut_ptr!();
+        Depcrate_ffitry_from_mut!();
+        Depcrate_ffitry_mut_from_ptr!();
+        Depcrate_ffiuse_238!();
+        Depcrate_ffitry_from_mut_mut!();
+        Depcrate_ffitry_mut_from_ptr_ptr!();
+        Depcrate_ffiuse_241!();
+        Depcrate_ffitry_from!();
+        Depcrate_ffitry_ref_from_ptr!();
+        Depcrate_ffiuse_244!();
+        Depcrate_ffitry_from_ptr!();
+        Depcrate_ffitry_ref_from_ptr_ptr!();
+        Depcrate_ffiuse_247!();
+        Depcrate_ffitry_clone_arc!();
+        Depcrate_ffiuse_249!();
+        Depcrate_ffitry_box_from!();
+        Depcrate_ffitry_box_from_ptr!();
+        Depcrate_ffiuse_252!();
+        Depcrate_ffitry_slice!();
+        Depcrate_ffiuse_254!();
+        Depcrate_ffitry_slice_mut!();
+        Depcrate_ffiuse_256!();
+        Depcrate_ffitry_callback!();
+        Depcrate_ffiuse_258!();
+        Depcrate_ffitry_take!();
+        Depcrate_ffiuse_260!();
+    };
+}

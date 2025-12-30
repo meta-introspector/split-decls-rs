@@ -1,0 +1,9 @@
+// Generated macro for build_unary_op (function)
+macro_rules! Depcrate_item_typebuild_unary_op {
+() => {
+// Module: crate::item_type
+// Provides: {"build_unary_op"}
+// Dependencies: {}
+fn build_unary_op (item : & ItemStruct , op : UnaryOp , e : & DeriveEntry , fields : & [FieldEntry] ,) -> Result < TokenStream > { let kind = DeriveItemKind :: UnaryOp (op) ; let (_ , type_g , _) = item . generics . split_for_impl () ; let this_ty_ident = & item . ident ; let this_ty : Type = parse_quote ! (# this_ty_ident # type_g) ; let generics = expand_self (& item . generics , & this_ty) ; let (impl_g , _ , _) = generics . split_for_impl () ; let trait_ = kind . to_path () ; let func_name = format_ident ! ("{}" , op . to_func_name ()) ; let build = | lhs_is_ref : bool | { let self_ty = with_ref (& this_ty , lhs_is_ref) ; let mut wcb = WhereClauseBuilder :: new (& generics) ; let use_bounds = e . push_bounds_to (& mut wcb) ; let mut values = Vec :: new () ; for field in fields { let field_ty = & field . field . ty ; let lhs = with_ref (& member (quote ! (self) , field) , lhs_is_ref) ; let lhs_ty = with_ref (field_ty , lhs_is_ref) ; values . push (quote ! (<# lhs_ty as # trait_ >::# func_name (# lhs))) ; field . push_bounds_to (use_bounds , kind , & mut wcb) ; } let ctor_args = build_ctor_args (& item . fields , & values) ; let wheres = wcb . build (| ty | match lhs_is_ref { true => quote ! (for <'a > &'a # ty : # trait_ < Output = # ty >) , false => quote ! (# ty : # trait_ < Output = # ty >) , }) ; quote ! { # [automatically_derived] impl # impl_g # trait_ for # self_ty # wheres { type Output = # this_ty ; fn # func_name (self) -> Self :: Output { # this_ty_ident # ctor_args } } } } ; let mut ts = TokenStream :: new () ; for lhs_is_ref in [false , true] { ts . extend (build (lhs_is_ref)) ; } Ok (ts) }
+};
+}

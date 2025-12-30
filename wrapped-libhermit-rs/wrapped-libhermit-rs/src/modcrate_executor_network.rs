@@ -1,0 +1,42 @@
+// Generated module macro for crate::executor::network
+macro_rules! Modcrate_executor_network {
+() => {
+        Depcrate_executor_networkuse_782!();
+        Depcrate_executor_networkuse_783!();
+        Depcrate_executor_networkuse_784!();
+        Depcrate_executor_networkuse_785!();
+        Depcrate_executor_networkuse_786!();
+        Depcrate_executor_networkuse_787!();
+        Depcrate_executor_networkuse_788!();
+        Depcrate_executor_networkuse_789!();
+        Depcrate_executor_networkuse_790!();
+        Depcrate_executor_networkuse_791!();
+        Depcrate_executor_networkuse_792!();
+        Depcrate_executor_networkuse_793!();
+        Depcrate_executor_networkuse_794!();
+        Depcrate_executor_networkuse_795!();
+        Depcrate_executor_networkuse_796!();
+        Depcrate_executor_networkuse_797!();
+        Depcrate_executor_networkuse_798!();
+        Depcrate_executor_networkuse_799!();
+        Depcrate_executor_networkuse_800!();
+        Depcrate_executor_networkuse_801!();
+        Depcrate_executor_networkuse_802!();
+        Depcrate_executor_networkNetworkState!();
+        Depcrate_executor_networknetwork_handler!();
+        Depcrate_executor_networkimpl_805!();
+        Depcrate_executor_networkHandle!();
+        Depcrate_executor_networkLOCAL_ENDPOINT!();
+        Depcrate_executor_networkNIC!();
+        Depcrate_executor_networkNetworkInterface!();
+        Depcrate_executor_networkstart_endpoint!();
+        Depcrate_executor_networkstart_endpoint!();
+        Depcrate_executor_networkstart_endpoint!();
+        Depcrate_executor_networknow!();
+        Depcrate_executor_networkdhcpv4_run!();
+        Depcrate_executor_networknetwork_run!();
+        Depcrate_executor_networkget_query_result!();
+        Depcrate_executor_networkinit!();
+        Depcrate_executor_networkimpl_818!();
+    };
+}

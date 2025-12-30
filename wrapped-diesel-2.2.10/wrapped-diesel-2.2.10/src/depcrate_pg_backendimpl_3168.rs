@@ -1,0 +1,9 @@
+// Generated macro for impl_3168 (impl)
+macro_rules! Depcrate_pg_backendimpl_3168 {
+() => {
+// Module: crate::pg::backend
+// Provides: {"impl_3168"}
+// Dependencies: {}
+impl PgTypeMetadata { # [doc = " Create a new instance of this type based on known constant [OIDs]."] # [doc = ""] # [doc = " Please refer to [PgMetadataLookup] for a way to query [OIDs]"] # [doc = " of custom types at run time"] # [doc = ""] # [doc = " [OIDs]: https://www.postgresql.org/docs/current/static/datatype-oid.html"] # [doc = " [PgMetadataLookup]: struct.PgMetadataLookup.html"] pub fn new (type_oid : u32 , array_oid : u32) -> Self { Self (Ok (InnerPgTypeMetadata { oid : type_oid , array_oid , })) } # [doc = " Create a new instance of this type based on dynamically lookup information"] # [doc = ""] # [doc = " This function is useful for third party crates that may implement a custom"] # [doc = " postgres connection type and want to bring their own lookup mechanism."] # [doc = ""] # [doc = " Otherwise refer to [PgMetadataLookup] for a way to automatically"] # [doc = " implement the corresponding lookup functionality"] # [cfg (feature = "i-implement-a-third-party-backend-and-opt-into-breaking-changes")] pub fn from_result (r : Result < (u32 , u32) , FailedToLookupTypeError >) -> Self { Self (r . map (| (oid , array_oid) | InnerPgTypeMetadata { oid , array_oid })) } # [doc = " The [OID] of `T`"] # [doc = ""] # [doc = " [OID]: https://www.postgresql.org/docs/current/static/datatype-oid.html"] pub fn oid (& self) -> Result < u32 , impl std :: error :: Error + Send + Sync > { self . 0 . as_ref () . map (| i | i . oid) . map_err (Clone :: clone) } # [doc = " The [OID] of `T[]`"] # [doc = ""] # [doc = " [OID]: https://www.postgresql.org/docs/current/static/datatype-oid.html"] pub fn array_oid (& self) -> Result < u32 , impl std :: error :: Error + Send + Sync > { self . 0 . as_ref () . map (| i | i . array_oid) . map_err (Clone :: clone) } }
+};
+}

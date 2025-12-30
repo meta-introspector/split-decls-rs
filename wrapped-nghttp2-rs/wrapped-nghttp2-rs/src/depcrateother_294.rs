@@ -1,0 +1,9 @@
+// Generated macro for other_294 (other)
+macro_rules! Depcrateother_294 {
+() => {
+// Module: crate
+// Provides: {"other_294"}
+// Dependencies: {}
+extern "C" { # [doc = " @function"] # [doc = ""] # [doc = " Signals the end of decompression for one header block."] # [doc = ""] # [doc = " This function returns 0 if it succeeds. Currently this function"] # [doc = " always succeeds."] pub fn nghttp2_hd_inflate_end_headers (inflater : * mut nghttp2_hd_inflater ,) -> :: std :: os :: raw :: c_int ; }
+};
+}

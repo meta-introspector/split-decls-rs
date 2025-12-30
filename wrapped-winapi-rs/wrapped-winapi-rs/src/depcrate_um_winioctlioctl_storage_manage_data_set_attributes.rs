@@ -1,0 +1,9 @@
+// Generated macro for IOCTL_STORAGE_MANAGE_DATA_SET_ATTRIBUTES (const)
+macro_rules! Depcrate_um_winioctlIOCTL_STORAGE_MANAGE_DATA_SET_ATTRIBUTES {
+() => {
+// Module: crate::um::winioctl
+// Provides: {"IOCTL_STORAGE_MANAGE_DATA_SET_ATTRIBUTES"}
+// Dependencies: {}
+pub const IOCTL_STORAGE_MANAGE_DATA_SET_ATTRIBUTES : DWORD = CTL_CODE ! (IOCTL_STORAGE_BASE , 0x0501 , METHOD_BUFFERED , FILE_WRITE_ACCESS) ;
+};
+}

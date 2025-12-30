@@ -1,0 +1,46 @@
+// Generated module macro for crate::shim
+macro_rules! Modcrate_shim {
+() => {
+        Depcrate_shimuse_226!();
+        Depcrate_shimuse_227!();
+        Depcrate_shimuse_228!();
+        Depcrate_shimuse_229!();
+        Depcrate_shimuse_230!();
+        Depcrate_shimuse_231!();
+        Depcrate_shimuse_232!();
+        Depcrate_shimuse_233!();
+        Depcrate_shimuse_234!();
+        Depcrate_shimuse_235!();
+        Depcrate_shimuse_236!();
+        Depcrate_shimuse_237!();
+        Depcrate_shimuse_238!();
+        Depcrate_shimuse_239!();
+        Depcrate_shimuse_240!();
+        Depcrate_shimuse_241!();
+        Depcrate_shimuse_242!();
+        Depcrate_shimuse_243!();
+        Depcrate_shimasync_destructor_ctor!();
+        Depcrate_shimprovide!();
+        Depcrate_shimFixProxyFutureDropVisitor!();
+        Depcrate_shimimpl_247!();
+        Depcrate_shimmake_shim!();
+        Depcrate_shimDerefSource!();
+        Depcrate_shimAdjustment!();
+        Depcrate_shimCallKind!();
+        Depcrate_shimlocal_decls_for_sig!();
+        Depcrate_shimdropee_emit_retag!();
+        Depcrate_shimbuild_drop_shim!();
+        Depcrate_shimnew_body!();
+        Depcrate_shimDropShimElaborator!();
+        Depcrate_shimimpl_257!();
+        Depcrate_shimimpl_258!();
+        Depcrate_shimbuild_thread_local_shim!();
+        Depcrate_shimbuild_clone_shim!();
+        Depcrate_shimCloneShimBuilder!();
+        Depcrate_shimimpl_262!();
+        Depcrate_shimbuild_call_shim!();
+        Depcrate_shimbuild_adt_ctor!();
+        Depcrate_shimbuild_fn_ptr_addr_shim!();
+        Depcrate_shimbuild_construct_coroutine_by_move_shim!();
+    };
+}

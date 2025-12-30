@@ -1,0 +1,75 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcratetest_extract_annotations_1.rs");
+include!("depcrate_fixtureparse_fixture_checks_further_indented_metadata.rs");
+include!("depcrateuse_30.rs");
+include!("depcraterangeoroffset.rs");
+include!("depcratelineannotation.rs");
+include!("depcrate_fixtureparse_fixture_gets_full_meta.rs");
+include!("depcrateassert_eq_text.rs");
+include!("depcrate_assert_linearround.rs");
+include!("depcrateskip_slow_tests.rs");
+include!("depcrateuse_32.rs");
+include!("depcratetry_extract_offset.rs");
+include!("depcrateextract_tags.rs");
+include!("depcratebench_fixture.rs");
+include!("depcrate_assert_linearimpl_7.rs");
+include!("depcratebench.rs");
+include!("depcrate_fixturefixture.rs");
+include!("depcrateextract_annotations.rs");
+include!("depcratecursor_marker.rs");
+include!("depcratetarget_dir.rs");
+include!("depcrateassert_linear.rs");
+include!("depcrate_fixtureuse_17.rs");
+include!("depcrate_bench_fixtureuse_11.rs");
+include!("depcrateadd_cursor.rs");
+include!("depcrateescaped_cursor_marker.rs");
+include!("depcrate_fixturefixturewithprojectmeta.rs");
+include!("depcrate_bench_fixturebig_struct_n.rs");
+include!("depcrate_bench_fixtureuse_9.rs");
+include!("depcratetest_extract_tags.rs");
+include!("depcrateformat_diff.rs");
+include!("depcrate_assert_linearimpl_5.rs");
+include!("depcrateuse_31.rs");
+include!("depcrateextract_offset.rs");
+include!("depcrateuse_27.rs");
+include!("depcrateimpl_44.rs");
+include!("depcrate_bench_fixtureglorious_old_parser.rs");
+include!("depcrateensure_file_contents.rs");
+include!("depcrate_assert_linearimpl_6.rs");
+include!("depcrateimpl_43.rs");
+include!("depcrateuse_34.rs");
+include!("depcrate_fixtureuse_19.rs");
+include!("depcrate_fixtureminicore.rs");
+include!("depcrateuse_28.rs");
+include!("depcrate_fixtureimpl_24.rs");
+include!("depcrateextract_range.rs");
+include!("depcratenormalize_newlines.rs");
+include!("depcrateproject_root.rs");
+include!("depcratetry_ensure_file_contents.rs");
+include!("depcrate_assert_linearuse_2.rs");
+include!("depcrateuse_33.rs");
+include!("depcrate_assert_linearassertlinear.rs");
+include!("depcrate_fixtureimpl_23.rs");
+include!("depcrateextract_range_or_offset.rs");
+include!("depcrateextract_line_annotations.rs");
+include!("depcratetest_extract_annotations_2.rs");
+include!("depcratetry_extract_range.rs");
+include!("depcrate_bench_fixtureuse_10.rs");
+include!("depcrateuse_29.rs");
+include!("depcrate_fixtureuse_18.rs");
+include!("depcrate_bench_fixturebig_struct.rs");
+include!("depcrate_bench_fixturenumerous_macro_rules.rs");
+include!("depcratefixture.rs");
+include!("modcrate_bench_fixture.rs");
+include!("modcrate_fixture.rs");
+include!("modcrate_assert_linear.rs");
+include!("modcrate.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate_bench_fixture!();
+    Modcrate_fixture!();
+    Modcrate_assert_linear!();
+    Modcrate!();
+}

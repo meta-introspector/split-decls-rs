@@ -1,0 +1,45 @@
+// Generated module macro for crate::offset_date_time
+macro_rules! Modcrate_offset_date_time {
+() => {
+        Depcrate_offset_date_timeuse_609!();
+        Depcrate_offset_date_timeuse_610!();
+        Depcrate_offset_date_timeuse_611!();
+        Depcrate_offset_date_timeuse_612!();
+        Depcrate_offset_date_timeuse_613!();
+        Depcrate_offset_date_timeuse_614!();
+        Depcrate_offset_date_timeuse_615!();
+        Depcrate_offset_date_timeuse_616!();
+        Depcrate_offset_date_timeuse_617!();
+        Depcrate_offset_date_timeuse_618!();
+        Depcrate_offset_date_timeuse_619!();
+        Depcrate_offset_date_timeuse_620!();
+        Depcrate_offset_date_timeuse_621!();
+        Depcrate_offset_date_timeuse_622!();
+        Depcrate_offset_date_timeuse_623!();
+        Depcrate_offset_date_timeuse_624!();
+        Depcrate_offset_date_timeuse_625!();
+        Depcrate_offset_date_timeUNIX_EPOCH_JULIAN_DAY!();
+        Depcrate_offset_date_timeOffsetDateTime!();
+        Depcrate_offset_date_timeimpl_628!();
+        Depcrate_offset_date_timeimpl_629!();
+        Depcrate_offset_date_timeimpl_630!();
+        Depcrate_offset_date_timeimpl_631!();
+        Depcrate_offset_date_timeraw_to_bits!();
+        Depcrate_offset_date_timeimpl_633!();
+        Depcrate_offset_date_timeimpl_634!();
+        Depcrate_offset_date_timeimpl_635!();
+        Depcrate_offset_date_timeimpl_636!();
+        Depcrate_offset_date_timeimpl_637!();
+        Depcrate_offset_date_timeimpl_638!();
+        Depcrate_offset_date_timeimpl_639!();
+        Depcrate_offset_date_timeimpl_640!();
+        Depcrate_offset_date_timeimpl_641!();
+        Depcrate_offset_date_timeimpl_642!();
+        Depcrate_offset_date_timeimpl_643!();
+        Depcrate_offset_date_timeimpl_644!();
+        Depcrate_offset_date_timeimpl_645!();
+        Depcrate_offset_date_timeimpl_646!();
+        Depcrate_offset_date_timeimpl_647!();
+        Depcrate_offset_date_timeimpl_648!();
+    };
+}

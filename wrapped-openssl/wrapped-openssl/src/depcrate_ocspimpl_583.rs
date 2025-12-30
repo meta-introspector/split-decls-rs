@@ -1,0 +1,9 @@
+// Generated macro for impl_583 (impl)
+macro_rules! Depcrate_ocspimpl_583 {
+() => {
+// Module: crate::ocsp
+// Provides: {"impl_583"}
+// Dependencies: {}
+impl OcspBasicResponseRef { # [doc = " Verifies the validity of the response."] # [doc = ""] # [doc = " The `certs` parameter contains a set of certificates that will be searched when locating the"] # [doc = " OCSP response signing certificate. Some responders do not include this in the response."] # [corresponds (OCSP_basic_verify)] pub fn verify (& self , certs : & StackRef < X509 > , store : & X509StoreRef , flags : OcspFlag ,) -> Result < () , ErrorStack > { unsafe { cvt (ffi :: OCSP_basic_verify (self . as_ptr () , certs . as_ptr () , store . as_ptr () , flags . bits () ,)) . map (| _ | ()) } } # [doc = " Looks up the status for the specified certificate ID."] # [corresponds (OCSP_resp_find_status)] pub fn find_status < 'a > (& 'a self , id : & OcspCertIdRef) -> Option < OcspStatus < 'a > > { unsafe { let mut status = ffi :: V_OCSP_CERTSTATUS_UNKNOWN ; let mut reason = ffi :: OCSP_REVOKED_STATUS_NOSTATUS ; let mut revocation_time = ptr :: null_mut () ; let mut this_update = ptr :: null_mut () ; let mut next_update = ptr :: null_mut () ; let r = ffi :: OCSP_resp_find_status (self . as_ptr () , id . as_ptr () , & mut status , & mut reason , & mut revocation_time , & mut this_update , & mut next_update ,) ; if r == 1 { let revocation_time = Asn1GeneralizedTimeRef :: from_const_ptr_opt (revocation_time) ; let next_update_opt = Asn1GeneralizedTimeRef :: from_const_ptr_opt (next_update) ; let next_update_compat = next_update_opt . unwrap_or_else (| | get_sentinel_max_time ()) ; # [allow (deprecated)] Some (OcspStatus { status : OcspCertStatus (status) , reason : OcspRevokedStatus (status) , revocation_time , this_update : Asn1GeneralizedTimeRef :: from_ptr (this_update) , next_update : next_update_compat , next_update_opt , }) } else { None } } } }
+};
+}

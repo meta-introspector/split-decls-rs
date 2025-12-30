@@ -1,0 +1,9 @@
+// Generated macro for perform_timezone_fallback (function)
+macro_rules! Depcrate_format_datetimeperform_timezone_fallback {
+() => {
+// Module: crate::format::datetime
+// Provides: {"perform_timezone_fallback"}
+// Dependencies: {}
+fn perform_timezone_fallback (w : & mut (impl writeable :: PartsWrite + ? Sized) , input : & DateTimeInputUnchecked , datetime_names : & RawDateTimeNamesBorrowed , fdf : Option < & DecimalFormatter > , field : fields :: Field , units : & [TimeZoneFormatterUnit] ,) -> Result < Result < () , FormattedDateTimePatternError > , core :: fmt :: Error > { const PART : Part = parts :: TIME_ZONE_NAME ; let payloads = datetime_names . get_payloads () ; let mut r = Err (FormatTimeZoneError :: Fallback) ; for unit in units { let mut inner_result = None ; w . with_part (PART , | w | { inner_result = Some (unit . format (w , input , payloads , fdf) ?) ; Ok (()) }) ? ; match inner_result { Some (Err (FormatTimeZoneError :: Fallback)) => { continue ; } Some (r2) => { r = r2 ; break ; } None => { debug_assert ! (false , "unreachable") ; return Err (fmt :: Error) ; } } } Ok (match r { Ok (()) => Ok (()) , Err (e) => { if let Some (offset) = input . zone_offset { w . with_part (PART , | w | { w . with_part (Part :: ERROR , | w | { Iso8601Format :: without_z (field . length) . format_infallible (w , offset) }) }) ? ; } else { w . with_part (PART , | w | write_value_missing (w , field)) ? ; } match e { FormatTimeZoneError :: DecimalFormatterNotLoaded => { Err (FormattedDateTimePatternError :: DecimalFormatterNotLoaded) } FormatTimeZoneError :: NamesNotLoaded => Err (FormattedDateTimePatternError :: NamesNotLoaded (ErrorField (field)) ,) , FormatTimeZoneError :: MissingInputField (kind) => { Err (FormattedDateTimePatternError :: MissingInputField (kind)) } FormatTimeZoneError :: Fallback => { debug_assert ! (false , "timezone fallback chain fell through {input:?}") ; Ok (()) } } } }) }
+};
+}

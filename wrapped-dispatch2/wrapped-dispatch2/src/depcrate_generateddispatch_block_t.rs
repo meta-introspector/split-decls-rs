@@ -1,0 +1,9 @@
+// Generated macro for dispatch_block_t (type)
+macro_rules! Depcrate_generateddispatch_block_t {
+() => {
+// Module: crate::generated
+// Provides: {"dispatch_block_t"}
+// Dependencies: {}
+# [doc = " The type of blocks submitted to dispatch queues, which take no arguments"] # [doc = " and have no return value."] # [doc = ""] # [doc = ""] # [doc = " When not building with Objective-C ARC, a block object allocated on or"] # [doc = " copied to the heap must be released with a -[release] message or the"] # [doc = " Block_release() function."] # [doc = ""] # [doc = " The declaration of a block literal allocates storage on the stack."] # [doc = " Therefore, this is an invalid construct:"] # [doc = " <code>"] # [doc = " dispatch_block_t block;"] # [doc = " if (x) {"] # [doc = " block = ^{ printf(\"true\\n\"); };"] # [doc = " } else {"] # [doc = " block = ^{ printf(\"false\\n\"); };"] # [doc = " }"] # [doc = " block(); // unsafe!!!"] # [doc = " </code>"] # [doc = ""] # [doc = " What is happening behind the scenes:"] # [doc = " <code>"] # [doc = " if (x) {"] # [doc = " struct Block __tmp_1 = ...; // setup details"] # [doc = " block ="] # [doc = " &"] # [doc = " __tmp_1;"] # [doc = " } else {"] # [doc = " struct Block __tmp_2 = ...; // setup details"] # [doc = " block ="] # [doc = " &"] # [doc = " __tmp_2;"] # [doc = " }"] # [doc = " </code>"] # [doc = ""] # [doc = " As the example demonstrates, the address of a stack variable is escaping the"] # [doc = " scope in which it is allocated. That is a classic C bug."] # [doc = ""] # [doc = " Instead, the block literal must be copied to the heap with the Block_copy()"] # [doc = " function or by sending it a -[copy] message."] # [doc = ""] # [doc = " See also [Apple's documentation](https://developer.apple.com/documentation/dispatch/dispatch_block_t?language=objc)"] # [cfg (feature = "block2")] pub type dispatch_block_t = * mut block2 :: DynBlock < dyn Fn () > ;
+};
+}

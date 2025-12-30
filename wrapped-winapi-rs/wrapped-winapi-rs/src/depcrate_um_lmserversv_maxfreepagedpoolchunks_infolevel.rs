@@ -1,0 +1,9 @@
+// Generated macro for SV_MAXFREEPAGEDPOOLCHUNKS_INFOLEVEL (const)
+macro_rules! Depcrate_um_lmserverSV_MAXFREEPAGEDPOOLCHUNKS_INFOLEVEL {
+() => {
+// Module: crate::um::lmserver
+// Provides: {"SV_MAXFREEPAGEDPOOLCHUNKS_INFOLEVEL"}
+// Dependencies: {}
+pub const SV_MAXFREEPAGEDPOOLCHUNKS_INFOLEVEL : DWORD = PARMNUM_BASE_INFOLEVEL + SV_MAXFREEPAGEDPOOLCHUNKS_PARMNUM ;
+};
+}

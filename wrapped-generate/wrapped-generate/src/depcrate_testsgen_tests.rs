@@ -1,0 +1,13 @@
+// Generated macro for gen_tests (function)
+macro_rules! Depcrate_testsgen_tests {
+() => {
+// Module: crate::tests
+// Provides: {"gen_tests"}
+// Dependencies: {}
+pub fn gen_tests () -> String { let high : i64 = 5 ; let uints = (0u64 .. high as u64 + 1) . flat_map (| a | (a .. a + 1) . cycle () . zip (0 .. high as u64 + 1)) ; let ints = (- high .. high + 1) . flat_map (| a | (a .. a + 1) . cycle () . zip (- high .. high + 1)) ; let mut result = String :: new () ; result . push_str ("
+use typenum::*;
+use core::ops::*;
+use core::cmp::Ordering;
+" ,) ; for (a , b) in uints { let mut tests = vec ! [uint_binary_test (a , "BitAnd" , b , a & b) , uint_binary_test (a , "BitOr" , b , a | b) , uint_binary_test (a , "BitXor" , b , a ^ b) , uint_binary_test (a , "Shl" , b , a << b) , uint_binary_test (a , "Shr" , b , a >> b) , uint_binary_test (a , "Add" , b , a + b) , uint_binary_test (a , "Mul" , b , a * b) , uint_binary_test (a , "Pow" , b , a . pow (b as u32)) , uint_binary_test (a , "Min" , b , cmp :: min (a , b)) , uint_binary_test (a , "Max" , b , cmp :: max (a , b)) , uint_binary_test (a , "Gcd" , b , gcdu (a , b)) ,] ; if a >= b { tests . push (uint_binary_test (a , "Sub" , b , a - b)) ; } if b != 0 { tests . push (uint_binary_test (a , "Div" , b , a / b)) ; tests . push (uint_binary_test (a , "Rem" , b , a % b)) ; if a % b == 0 { tests . push (uint_binary_test (a , "PartialDiv" , b , a / b)) ; } } for test in tests { result . push_str (& test . to_string ()) ; } result . push_str (& uint_cmp_test (a , b)) ; } for (a , b) in ints { let mut tests = vec ! [int_binary_test (a , "Add" , b , a + b) , int_binary_test (a , "Sub" , b , a - b) , int_binary_test (a , "Mul" , b , a * b) , int_binary_test (a , "Min" , b , cmp :: min (a , b)) , int_binary_test (a , "Max" , b , cmp :: max (a , b)) , int_binary_test (a , "Gcd" , b , gcdi (a , b)) ,] ; if b != 0 { tests . push (int_binary_test (a , "Div" , b , a / b)) ; tests . push (int_binary_test (a , "Rem" , b , a % b)) ; if a % b == 0 { tests . push (int_binary_test (a , "PartialDiv" , b , a / b)) ; } } if b >= 0 || a . abs () == 1 { let result = if b < 0 { if a == 1 { a } else if a == - 1 { a . pow ((- b) as u32) } else { unreachable ! () } } else { a . pow (b as u32) } ; tests . push (int_binary_test (a , "Pow" , b , result)) ; } for test in tests { result . push_str (& test . to_string ()) ; } result . push_str (& int_cmp_test (a , b)) ; } for n in - high .. high + 1 { let tests = vec ! [int_unary_test ("Neg" , n , - n) , int_unary_test ("Abs" , n , n . abs ()) ,] ; for test in tests { result . push_str (& test . to_string ()) ; } } result }
+};
+}

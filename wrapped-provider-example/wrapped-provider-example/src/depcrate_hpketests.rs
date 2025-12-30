@@ -1,0 +1,9 @@
+// Generated macro for tests (module)
+macro_rules! Depcrate_hpketests {
+() => {
+// Module: crate::hpke
+// Provides: {"tests"}
+// Dependencies: {}
+# [cfg (test)] mod tests { use alloc :: { format , vec } ; use super :: * ; # [test] fn smoke_test () { for suite in ALL_SUPPORTED_SUITES { _ = format ! ("{suite:?}") ; let (pk , sk) = suite . generate_key_pair () . unwrap () ; let info = & [0x4f , 0x64 , 0x65 , 0x20 , 0x6f , 0x6e , 0x20 , 0x61 , 0x20 , 0x47 , 0x72 , 0x65 , 0x63 , 0x69 , 0x61 , 0x6e , 0x20 , 0x55 , 0x72 , 0x6e ,] [..] ; let (enc , mut sealer) = suite . setup_sealer (info , & pk) . unwrap () ; _ = format ! ("{sealer:?}") ; let bad_setup_res = suite . setup_sealer (info , & HpkePublicKey (vec ! [])) ; assert ! (matches ! (bad_setup_res . unwrap_err () , Error :: Other (_))) ; let aad = & [0xC0 , 0xFF , 0xEE] ; let pt = & [0xF0 , 0x0D] ; let ct = sealer . seal (aad , pt) . unwrap () ; let mut opener = suite . setup_opener (& enc , info , & sk) . unwrap () ; _ = format ! ("{opener:?}") ; let bad_key_res = suite . setup_opener (& enc , info , & HpkePrivateKey :: from (vec ! [])) ; assert ! (matches ! (bad_key_res . unwrap_err () , Error :: Other (_))) ; let pt_prime = opener . open (aad , & ct) . unwrap () ; assert_eq ! (pt_prime , pt) ; let open_res = opener . open (& [0x0] , & ct) ; assert ! (matches ! (open_res . unwrap_err () , Error :: Other (_))) ; let mut sk_rm_prime = sk . secret_bytes () . to_vec () ; sk_rm_prime [10] ^= 0xFF ; let mut opener_two = suite . setup_opener (& enc , info , & HpkePrivateKey :: from (sk_rm_prime)) . unwrap () ; let open_res = opener_two . open (aad , & ct) ; assert ! (matches ! (open_res . unwrap_err () , Error :: Other (_))) ; } } # [test] fn test_fips () { assert ! (ALL_SUPPORTED_SUITES . iter () . all (| suite | ! suite . fips ())) ; } }
+};
+}

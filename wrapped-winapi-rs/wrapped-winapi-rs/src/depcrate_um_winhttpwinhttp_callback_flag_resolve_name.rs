@@ -1,0 +1,9 @@
+// Generated macro for WINHTTP_CALLBACK_FLAG_RESOLVE_NAME (const)
+macro_rules! Depcrate_um_winhttpWINHTTP_CALLBACK_FLAG_RESOLVE_NAME {
+() => {
+// Module: crate::um::winhttp
+// Provides: {"WINHTTP_CALLBACK_FLAG_RESOLVE_NAME"}
+// Dependencies: {}
+pub const WINHTTP_CALLBACK_FLAG_RESOLVE_NAME : DWORD = WINHTTP_CALLBACK_STATUS_RESOLVING_NAME | WINHTTP_CALLBACK_STATUS_NAME_RESOLVED ;
+};
+}

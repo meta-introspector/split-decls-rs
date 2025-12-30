@@ -1,0 +1,52 @@
+// Generated module macro for crate::bitmap
+macro_rules! Modcrate_bitmap {
+() => {
+        Depcrate_bitmapuse_2!();
+        Depcrate_bitmapuse_3!();
+        Depcrate_bitmapuse_4!();
+        Depcrate_bitmapuse_5!();
+        Depcrate_bitmapuse_6!();
+        Depcrate_bitmapBitmap!();
+        Depcrate_bitmapimpl_8!();
+        Depcrate_bitmapimpl_9!();
+        Depcrate_bitmapimpl_10!();
+        Depcrate_bitmapimpl_11!();
+        Depcrate_bitmapimpl_12!();
+        Depcrate_bitmapimpl_13!();
+        Depcrate_bitmapimpl_14!();
+        Depcrate_bitmapimpl_15!();
+        Depcrate_bitmapimpl_16!();
+        Depcrate_bitmapimpl_17!();
+        Depcrate_bitmapimpl_18!();
+        Depcrate_bitmapimpl_19!();
+        Depcrate_bitmapimpl_20!();
+        Depcrate_bitmapimpl_21!();
+        Depcrate_bitmapimpl_22!();
+        Depcrate_bitmapimpl_23!();
+        Depcrate_bitmapimpl_24!();
+        Depcrate_bitmapimpl_25!();
+        Depcrate_bitmapimpl_26!();
+        Depcrate_bitmapimpl_27!();
+        Depcrate_bitmapimpl_28!();
+        Depcrate_bitmapimpl_29!();
+        Depcrate_bitmapimpl_30!();
+        Depcrate_bitmapimpl_31!();
+        Depcrate_bitmapimpl_32!();
+        Depcrate_bitmapimpl_33!();
+        Depcrate_bitmapimpl_34!();
+        Depcrate_bitmapimpl_35!();
+        Depcrate_bitmapimpl_36!();
+        Depcrate_bitmapimpl_37!();
+        Depcrate_bitmapimpl_38!();
+        Depcrate_bitmapimpl_39!();
+        Depcrate_bitmapimpl_40!();
+        Depcrate_bitmapimpl_41!();
+        Depcrate_bitmapimpl_42!();
+        Depcrate_bitmapimpl_43!();
+        Depcrate_bitmapIter!();
+        Depcrate_bitmapimpl_45!();
+        Depcrate_bitmapimpl_46!();
+        Depcrate_bitmapx86_arch!();
+        Depcrate_bitmaptest!();
+    };
+}

@@ -1,0 +1,9 @@
+// Generated macro for OsRng (struct)
+macro_rules! Depcrate_rngs_osOsRng {
+() => {
+// Module: crate::rngs::os
+// Provides: {"OsRng"}
+// Dependencies: {}
+# [doc = " An interface over the operating-system's random data source"] # [doc = ""] # [doc = " This is a zero-sized struct. It can be freely constructed with just `OsRng`."] # [doc = ""] # [doc = " The implementation is provided by the [getrandom] crate. Refer to"] # [doc = " [getrandom] documentation for details."] # [doc = ""] # [doc = " This struct is available as `rand_core::OsRng` and as `rand::rngs::OsRng`."] # [doc = " In both cases, this requires the crate feature `os_rng` or `std`"] # [doc = " (enabled by default in `rand` but not in `rand_core`)."] # [doc = ""] # [doc = " # Blocking and error handling"] # [doc = ""] # [doc = " It is possible that when used during early boot the first call to `OsRng`"] # [doc = " will block until the system's RNG is initialised. It is also possible"] # [doc = " (though highly unlikely) for `OsRng` to fail on some platforms, most"] # [doc = " likely due to system mis-configuration."] # [doc = ""] # [doc = " After the first successful call, it is highly unlikely that failures or"] # [doc = " significant delays will occur (although performance should be expected to"] # [doc = " be much slower than a user-space"] # [doc = " [PRNG](https://rust-random.github.io/book/guide-gen.html#pseudo-random-number-generators))."] # [doc = ""] # [doc = " # Usage example"] # [doc = " ```"] # [doc = " use rand::{TryRngCore, rngs::OsRng};"] # [doc = ""] # [doc = " let mut key = [0u8; 16];"] # [doc = " OsRng.try_fill_bytes(&mut key).unwrap();"] # [doc = " let random_u64 = OsRng.try_next_u64().unwrap();"] # [doc = " ```"] # [doc = ""] # [doc = " [getrandom]: https://crates.io/crates/getrandom"] # [derive (Clone , Copy , Debug , Default)] pub struct OsRng ;
+};
+}

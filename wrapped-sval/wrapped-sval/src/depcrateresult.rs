@@ -1,9 +1,9 @@
-// Generated macro for result (module)
-macro_rules! Depcrateresult {
+// Generated macro for Result (type)
+macro_rules! DepcrateResult {
 () => {
 // Module: crate
-// Provides: {"result"}
+// Provides: {"Result"}
 // Dependencies: {}
-mod result ;
+# [doc = "\nA generic streaming result.\n"] pub type Result < T = () , E = Error > = std :: result :: Result < T , E > ;
 };
 }

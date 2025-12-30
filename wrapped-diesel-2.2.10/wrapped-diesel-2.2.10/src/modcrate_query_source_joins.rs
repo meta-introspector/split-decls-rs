@@ -1,0 +1,53 @@
+// Generated module macro for crate::query_source::joins
+macro_rules! Modcrate_query_source_joins {
+() => {
+        Depcrate_query_source_joinsuse_1847!();
+        Depcrate_query_source_joinsuse_1848!();
+        Depcrate_query_source_joinsuse_1849!();
+        Depcrate_query_source_joinsuse_1850!();
+        Depcrate_query_source_joinsuse_1851!();
+        Depcrate_query_source_joinsuse_1852!();
+        Depcrate_query_source_joinsuse_1853!();
+        Depcrate_query_source_joinsuse_1854!();
+        Depcrate_query_source_joinsuse_1855!();
+        Depcrate_query_source_joinsuse_1856!();
+        Depcrate_query_source_joinsJoin!();
+        Depcrate_query_source_joinsimpl_1858!();
+        Depcrate_query_source_joinsimpl_1859!();
+        Depcrate_query_source_joinsimpl_1860!();
+        Depcrate_query_source_joinsimpl_1861!();
+        Depcrate_query_source_joinsJoinOn!();
+        Depcrate_query_source_joinsimpl_1863!();
+        Depcrate_query_source_joinsimpl_1864!();
+        Depcrate_query_source_joinsimpl_1865!();
+        Depcrate_query_source_joinsOnKeyword!();
+        Depcrate_query_source_joinsimpl_1867!();
+        Depcrate_query_source_joinsimpl_1868!();
+        Depcrate_query_source_joinsimpl_1869!();
+        Depcrate_query_source_joinsJoinTo!();
+        Depcrate_query_source_joinsAppendSelection!();
+        Depcrate_query_source_joinsimpl_1872!();
+        Depcrate_query_source_joinsimpl_1873!();
+        Depcrate_query_source_joinsimpl_1874!();
+        Depcrate_query_source_joinsInner!();
+        Depcrate_query_source_joinsimpl_1876!();
+        Depcrate_query_source_joinsLeftOuter!();
+        Depcrate_query_source_joinsimpl_1878!();
+        Depcrate_query_source_joinsimpl_1879!();
+        Depcrate_query_source_joinsimpl_1880!();
+        Depcrate_query_source_joinsimpl_1881!();
+        Depcrate_query_source_joinsimpl_1882!();
+        Depcrate_query_source_joinsOnClauseWrapper!();
+        Depcrate_query_source_joinsimpl_1884!();
+        Depcrate_query_source_joinsimpl_1885!();
+        Depcrate_query_source_joinsimpl_1886!();
+        Depcrate_query_source_joinsimpl_1887!();
+        Depcrate_query_source_joinsimpl_1888!();
+        Depcrate_query_source_joinsToInnerJoin!();
+        Depcrate_query_source_joinsimpl_1890!();
+        Depcrate_query_source_joinsimpl_1891!();
+        Depcrate_query_source_joinsimpl_1892!();
+        Depcrate_query_source_joinsimpl_1893!();
+        Depcrate_query_source_joinsprivate!();
+    };
+}

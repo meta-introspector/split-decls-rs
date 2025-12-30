@@ -1,0 +1,9 @@
+// Generated macro for ImageEncoder (trait)
+macro_rules! Depcrate_imageImageEncoder {
+() => {
+// Module: crate::image
+// Provides: {"ImageEncoder"}
+// Dependencies: {}
+# [doc = " The trait all encoders implement"] pub trait ImageEncoder { # [doc = " Writes all the bytes in an image to the encoder."] # [doc = ""] # [doc = " This function takes a slice of bytes of the pixel data of the image"] # [doc = " and encodes them. Unlike particular format encoders inherent impl encode"] # [doc = " methods where endianness is not specified, here image data bytes should"] # [doc = " always be in native endian. The implementor will reorder the endianness"] # [doc = " as necessary for the target encoding format."] # [doc = ""] # [doc = " See also `ImageDecoder::read_image` which reads byte buffers into"] # [doc = " native endian."] # [doc = ""] # [doc = " # Panics"] # [doc = ""] # [doc = " Panics if `width * height * color_type.bytes_per_pixel() != buf.len()`."] fn write_image (self , buf : & [u8] , width : u32 , height : u32 , color_type : ExtendedColorType ,) -> ImageResult < () > ; # [doc = " Set the ICC profile to use for the image."] # [doc = ""] # [doc = " This function is a no-op for formats that don't support ICC profiles."] # [doc = " For formats that do support ICC profiles, the profile will be embedded"] # [doc = " in the image when it is saved."] # [doc = ""] # [doc = " # Errors"] # [doc = ""] # [doc = " This function returns an error if the format does not support ICC profiles."] fn set_icc_profile (& mut self , icc_profile : Vec < u8 >) -> Result < () , UnsupportedError > { let _ = icc_profile ; Err (UnsupportedError :: from_format_and_kind (ImageFormatHint :: Unknown , UnsupportedErrorKind :: GenericFeature ("ICC profiles are not supported for this format" . into () ,) ,)) } }
+};
+}

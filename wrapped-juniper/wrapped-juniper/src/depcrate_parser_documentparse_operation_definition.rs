@@ -1,0 +1,9 @@
+// Generated macro for parse_operation_definition (function)
+macro_rules! Depcrate_parser_documentparse_operation_definition {
+() => {
+// Module: crate::parser::document
+// Provides: {"parse_operation_definition"}
+// Dependencies: {}
+fn parse_operation_definition < 'a , S > (parser : & mut Parser < 'a > , schema : & SchemaType < S > ,) -> ParseResult < Operation < 'a , S > > where S : ScalarValue , { if parser . peek () . item == Token :: CurlyOpen { let fields = schema . concrete_query_type () . fields (schema) ; let fields = fields . as_ref () . map (| c | c as & [_]) ; let selection_set = parse_selection_set (parser , schema , fields) ? ; Ok (Spanning :: new (selection_set . span , Operation { operation_type : OperationType :: Query , name : None , description : None , variables_definition : None , directives : None , selection_set : selection_set . item , } ,)) } else { let start_pos = parser . peek () . span . start ; let operation_type = parse_operation_type (parser) ? ; let op = match operation_type . item { OperationType :: Query => Some (schema . concrete_query_type ()) , OperationType :: Mutation => schema . concrete_mutation_type () , OperationType :: Subscription => schema . concrete_subscription_type () , } ; let fields = op . and_then (| m | m . fields (schema)) ; let fields = fields . as_ref () . map (| c | c as & [_]) ; let name = match parser . peek () . item { Token :: Name (_) => Some (parser . expect_name () ?) , _ => None , } ; let variables_definition = parse_variables_definition (parser , schema) ? ; let directives = parse_directives (parser , schema) ? ; let selection_set = parse_selection_set (parser , schema , fields) ? ; Ok (Spanning :: start_end (& start_pos , & selection_set . span . end , Operation { operation_type : operation_type . item , name , description : None , variables_definition , directives : directives . map (| s | s . item) , selection_set : selection_set . item , } ,)) } }
+};
+}

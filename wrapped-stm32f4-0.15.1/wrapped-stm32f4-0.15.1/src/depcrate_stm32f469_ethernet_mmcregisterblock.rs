@@ -1,0 +1,9 @@
+// Generated macro for RegisterBlock (struct)
+macro_rules! Depcrate_stm32f469_ethernet_mmcRegisterBlock {
+() => {
+// Module: crate::stm32f469::ethernet_mmc
+// Provides: {"RegisterBlock"}
+// Dependencies: {}
+# [doc = r"Register block"] # [repr (C)] pub struct RegisterBlock { # [doc = "0x00 - Ethernet MMC control register"] pub mmccr : crate :: Reg < mmccr :: MMCCR_SPEC > , # [doc = "0x04 - Ethernet MMC receive interrupt register"] pub mmcrir : crate :: Reg < mmcrir :: MMCRIR_SPEC > , # [doc = "0x08 - Ethernet MMC transmit interrupt register"] pub mmctir : crate :: Reg < mmctir :: MMCTIR_SPEC > , # [doc = "0x0c - Ethernet MMC receive interrupt mask register"] pub mmcrimr : crate :: Reg < mmcrimr :: MMCRIMR_SPEC > , # [doc = "0x10 - Ethernet MMC transmit interrupt mask register"] pub mmctimr : crate :: Reg < mmctimr :: MMCTIMR_SPEC > , _reserved5 : [u8 ; 0x38] , # [doc = "0x4c - Ethernet MMC transmitted good frames after a single collision counter"] pub mmctgfsccr : crate :: Reg < mmctgfsccr :: MMCTGFSCCR_SPEC > , # [doc = "0x50 - Ethernet MMC transmitted good frames after more than a single collision"] pub mmctgfmsccr : crate :: Reg < mmctgfmsccr :: MMCTGFMSCCR_SPEC > , _reserved7 : [u8 ; 0x14] , # [doc = "0x68 - Ethernet MMC transmitted good frames counter register"] pub mmctgfcr : crate :: Reg < mmctgfcr :: MMCTGFCR_SPEC > , _reserved8 : [u8 ; 0x28] , # [doc = "0x94 - Ethernet MMC received frames with CRC error counter register"] pub mmcrfcecr : crate :: Reg < mmcrfcecr :: MMCRFCECR_SPEC > , # [doc = "0x98 - Ethernet MMC received frames with alignment error counter register"] pub mmcrfaecr : crate :: Reg < mmcrfaecr :: MMCRFAECR_SPEC > , _reserved10 : [u8 ; 0x28] , # [doc = "0xc4 - MMC received good unicast frames counter register"] pub mmcrgufcr : crate :: Reg < mmcrgufcr :: MMCRGUFCR_SPEC > , }
+};
+}

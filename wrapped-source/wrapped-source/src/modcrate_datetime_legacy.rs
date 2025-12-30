@@ -1,0 +1,48 @@
+// Generated module macro for crate::datetime::legacy
+macro_rules! Modcrate_datetime_legacy {
+() => {
+        Depcrate_datetime_legacyuse_516!();
+        Depcrate_datetime_legacyuse_517!();
+        Depcrate_datetime_legacyuse_518!();
+        Depcrate_datetime_legacyuse_519!();
+        Depcrate_datetime_legacyuse_520!();
+        Depcrate_datetime_legacyuse_521!();
+        Depcrate_datetime_legacyuse_522!();
+        Depcrate_datetime_legacyuse_523!();
+        Depcrate_datetime_legacyuse_524!();
+        Depcrate_datetime_legacyuse_525!();
+        Depcrate_datetime_legacyuse_526!();
+        Depcrate_datetime_legacyuse_527!();
+        Depcrate_datetime_legacyuse_528!();
+        Depcrate_datetime_legacyuse_529!();
+        Depcrate_datetime_legacyuse_530!();
+        Depcrate_datetime_legacyLengthPatterns!();
+        Depcrate_datetime_legacyDateLengths!();
+        Depcrate_datetime_legacyDateSymbols!();
+        Depcrate_datetime_legacymonths!();
+        Depcrate_datetime_legacyimpl_535!();
+        Depcrate_datetime_legacyimpl_536!();
+        Depcrate_datetime_legacyweekdays!();
+        Depcrate_datetime_legacyday_periods!();
+        Depcrate_datetime_legacyimpl_539!();
+        Depcrate_datetime_legacyimpl_540!();
+        Depcrate_datetime_legacyimpl_541!();
+        Depcrate_datetime_legacyimpl_542!();
+        Depcrate_datetime_legacyimpl_543!();
+        Depcrate_datetime_legacyimpl_544!();
+        Depcrate_datetime_legacyimpl_545!();
+        Depcrate_datetime_legacyimpl_546!();
+        Depcrate_datetime_legacyimpl_547!();
+        Depcrate_datetime_legacyimpl_548!();
+        Depcrate_datetime_legacyimpl_549!();
+        Depcrate_datetime_legacyimpl_550!();
+        Depcrate_datetime_legacyimpl_551!();
+        Depcrate_datetime_legacyimpl_552!();
+        Depcrate_datetime_legacyconvert_dates!();
+        Depcrate_datetime_legacytest_basic_symbols!();
+        Depcrate_datetime_legacyunalias_contexts!();
+        Depcrate_datetime_legacytest_missing_append_items_support!();
+        Depcrate_datetime_legacytest_basic_patterns!();
+        Depcrate_datetime_legacytest_with_numbering_system!();
+    };
+}

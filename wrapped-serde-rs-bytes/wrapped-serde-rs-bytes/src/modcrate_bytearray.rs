@@ -1,0 +1,40 @@
+// Generated module macro for crate::bytearray
+macro_rules! Modcrate_bytearray {
+() => {
+        Depcrate_bytearrayuse_3!();
+        Depcrate_bytearrayuse_4!();
+        Depcrate_bytearrayuse_5!();
+        Depcrate_bytearrayuse_6!();
+        Depcrate_bytearrayuse_7!();
+        Depcrate_bytearrayuse_8!();
+        Depcrate_bytearrayuse_9!();
+        Depcrate_bytearrayuse_10!();
+        Depcrate_bytearrayuse_11!();
+        Depcrate_bytearrayByteArray!();
+        Depcrate_bytearrayimpl_13!();
+        Depcrate_bytearrayimpl_14!();
+        Depcrate_bytearrayimpl_15!();
+        Depcrate_bytearrayimpl_16!();
+        Depcrate_bytearrayimpl_17!();
+        Depcrate_bytearrayimpl_18!();
+        Depcrate_bytearrayimpl_19!();
+        Depcrate_bytearrayimpl_20!();
+        Depcrate_bytearrayimpl_21!();
+        Depcrate_bytearrayimpl_22!();
+        Depcrate_bytearrayimpl_23!();
+        Depcrate_bytearrayimpl_24!();
+        Depcrate_bytearrayimpl_25!();
+        Depcrate_bytearrayimpl_26!();
+        Depcrate_bytearrayimpl_27!();
+        Depcrate_bytearrayimpl_28!();
+        Depcrate_bytearrayimpl_29!();
+        Depcrate_bytearrayimpl_30!();
+        Depcrate_bytearrayimpl_31!();
+        Depcrate_bytearrayByteArrayVisitor!();
+        Depcrate_bytearrayimpl_33!();
+        Depcrate_bytearrayimpl_34!();
+        Depcrate_bytearrayBorrowedByteArrayVisitor!();
+        Depcrate_bytearrayimpl_36!();
+        Depcrate_bytearrayimpl_37!();
+    };
+}

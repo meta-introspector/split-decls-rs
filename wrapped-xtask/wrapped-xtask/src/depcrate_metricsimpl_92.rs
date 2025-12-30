@@ -1,0 +1,9 @@
+// Generated macro for impl_92 (impl)
+macro_rules! Depcrate_metricsimpl_92 {
+() => {
+// Module: crate::metrics
+// Provides: {"impl_92"}
+// Dependencies: {}
+impl Metrics { fn measure_build (& mut self , sh : & Shell) -> anyhow :: Result < () > { eprintln ! ("\nMeasuring build") ; cmd ! (sh , "cargo fetch") . run () ? ; let time = Instant :: now () ; cmd ! (sh , "cargo build --release --package rust-analyzer --bin rust-analyzer") . run () ? ; let time = time . elapsed () ; self . report ("build" , time . as_millis () as u64 , "ms" . into ()) ; Ok (()) } fn measure_rustc_tests (& mut self , sh : & Shell) -> anyhow :: Result < () > { eprintln ! ("\nMeasuring rustc tests") ; cmd ! (sh , "git clone --depth=1 --branch 1.76.0 https://github.com/rust-lang/rust.git --single-branch ./target/metrics/rust") . run () ? ; let output = cmd ! (sh , "./target/release/rust-analyzer rustc-tests ./target/metrics/rust") . read () ? ; for (metric , value , unit) in parse_metrics (& output) { self . report (metric , value , unit . into ()) ; } Ok (()) } fn measure_analysis_stats_self (& mut self , sh : & Shell) -> anyhow :: Result < () > { self . measure_analysis_stats_path (sh , "self" , ".") } fn measure_analysis_stats (& mut self , sh : & Shell , bench : & str) -> anyhow :: Result < () > { self . measure_analysis_stats_path (sh , bench , & format ! ("./target/metrics/rustc-perf/collector/compile-benchmarks/{bench}") ,) } fn measure_analysis_stats_path (& mut self , sh : & Shell , name : & str , path : & str ,) -> anyhow :: Result < () > { assert ! (Path :: new (path) . exists () , "unable to find bench in {path}") ; eprintln ! ("\nMeasuring analysis-stats/{name}") ; let output = cmd ! (sh , "./target/release/rust-analyzer -q analysis-stats {path}") . read () ? ; for (metric , value , unit) in parse_metrics (& output) { self . report (& format ! ("analysis-stats/{name}/{metric}") , value , unit . into ()) ; } Ok (()) } }
+};
+}

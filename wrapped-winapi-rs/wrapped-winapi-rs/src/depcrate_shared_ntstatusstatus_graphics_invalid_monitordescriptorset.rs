@@ -1,0 +1,9 @@
+// Generated macro for STATUS_GRAPHICS_INVALID_MONITORDESCRIPTORSET (const)
+macro_rules! Depcrate_shared_ntstatusSTATUS_GRAPHICS_INVALID_MONITORDESCRIPTORSET {
+() => {
+// Module: crate::shared::ntstatus
+// Provides: {"STATUS_GRAPHICS_INVALID_MONITORDESCRIPTORSET"}
+// Dependencies: {}
+pub const STATUS_GRAPHICS_INVALID_MONITORDESCRIPTORSET : NTSTATUS = 0xC01E032A ;
+};
+}

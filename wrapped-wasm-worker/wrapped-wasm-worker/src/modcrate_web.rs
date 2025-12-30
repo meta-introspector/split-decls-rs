@@ -1,0 +1,54 @@
+// Generated module macro for crate::web
+macro_rules! Modcrate_web {
+() => {
+        Depcrate_webaudio_worklet!();
+        Depcrate_webmessage!();
+        Depcrate_webuse_644!();
+        Depcrate_webuse_645!();
+        Depcrate_webuse_646!();
+        Depcrate_webuse_647!();
+        Depcrate_webuse_648!();
+        Depcrate_webuse_649!();
+        Depcrate_webuse_650!();
+        Depcrate_webthread!();
+        Depcrate_webuse_652!();
+        Depcrate_webuse_653!();
+        Depcrate_webuse_654!();
+        Depcrate_webhas_block_support!();
+        Depcrate_webhas_spawn_support!();
+        Depcrate_webJoinHandleExt!();
+        Depcrate_webimpl_658!();
+        Depcrate_webJoinHandleFuture!();
+        Depcrate_webimpl_660!();
+        Depcrate_webimpl_661!();
+        Depcrate_webscope_async!();
+        Depcrate_webScopeFuture!();
+        Depcrate_webimpl_664!();
+        Depcrate_webimpl_665!();
+        Depcrate_webimpl_666!();
+        Depcrate_webScopedJoinHandleExt!();
+        Depcrate_webimpl_668!();
+        Depcrate_webScopedJoinHandleFuture!();
+        Depcrate_webimpl_670!();
+        Depcrate_webimpl_671!();
+        Depcrate_webScopeIntoJoinFuture!();
+        Depcrate_webimpl_673!();
+        Depcrate_webimpl_674!();
+        Depcrate_webimpl_675!();
+        Depcrate_webScopeJoinFuture!();
+        Depcrate_webimpl_677!();
+        Depcrate_webimpl_678!();
+        Depcrate_webimpl_679!();
+        Depcrate_webBuilderExt!();
+        Depcrate_webimpl_681!();
+        Depcrate_webScopeExt!();
+        Depcrate_webimpl_683!();
+        Depcrate_webspawn_async!();
+        Depcrate_webspawn_with_message!();
+        Depcrate_webyield_now_async!();
+        Depcrate_webYieldTime!();
+        Depcrate_webYieldNowFuture!();
+        Depcrate_webimpl_689!();
+        Depcrate_webimpl_690!();
+    };
+}

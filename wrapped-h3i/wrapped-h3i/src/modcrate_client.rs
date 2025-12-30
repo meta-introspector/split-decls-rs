@@ -1,0 +1,47 @@
+// Generated module macro for crate::client
+macro_rules! Modcrate_client {
+() => {
+        Depcrate_clientasync_client!();
+        Depcrate_clientconnection_summary!();
+        Depcrate_clientsync_client!();
+        Depcrate_clientuse_169!();
+        Depcrate_clientuse_170!();
+        Depcrate_clientuse_171!();
+        Depcrate_clientuse_172!();
+        Depcrate_clientuse_173!();
+        Depcrate_clientuse_174!();
+        Depcrate_clientuse_175!();
+        Depcrate_clientuse_176!();
+        Depcrate_clientuse_177!();
+        Depcrate_clientuse_178!();
+        Depcrate_clientuse_179!();
+        Depcrate_clientuse_180!();
+        Depcrate_clientuse_181!();
+        Depcrate_clientuse_182!();
+        Depcrate_clientuse_183!();
+        Depcrate_clientuse_184!();
+        Depcrate_clientuse_185!();
+        Depcrate_clientuse_186!();
+        Depcrate_clientuse_187!();
+        Depcrate_clientuse_188!();
+        Depcrate_clientuse_189!();
+        Depcrate_clientuse_190!();
+        Depcrate_clientuse_191!();
+        Depcrate_clientuse_192!();
+        Depcrate_clientuse_193!();
+        Depcrate_clientuse_194!();
+        Depcrate_clientMAX_DATAGRAM_SIZE!();
+        Depcrate_clientQUIC_VERSION!();
+        Depcrate_clienthandle_qlog!();
+        Depcrate_clientClientError!();
+        Depcrate_clientClient!();
+        Depcrate_clientStreamParserMap!();
+        Depcrate_clientexecute_action!();
+        Depcrate_clientparse_streams!();
+        Depcrate_clienthandle_fin!();
+        Depcrate_clienthandle_response_frame!();
+        Depcrate_clientParsedArgs!();
+        Depcrate_clientparse_args!();
+        Depcrate_clientresolve_socket_addrs!();
+    };
+}

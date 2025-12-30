@@ -1,0 +1,9 @@
+// Generated macro for impl_31 (impl)
+macro_rules! Depcrate_pointimpl_31 {
+() => {
+// Module: crate::point
+// Provides: {"impl_31"}
+// Dependencies: {}
+# [cfg (feature = "serde")] impl < Size > Serialize for EncodedPoint < Size > where Size : ModulusSize , { fn serialize < S > (& self , serializer : S) -> core :: result :: Result < S :: Ok , S :: Error > where S : ser :: Serializer , { serdect :: slice :: serialize_hex_upper_or_bin (& self . as_bytes () , serializer) } }
+};
+}

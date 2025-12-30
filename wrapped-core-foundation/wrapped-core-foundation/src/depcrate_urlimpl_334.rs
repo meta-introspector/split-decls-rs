@@ -1,0 +1,9 @@
+// Generated macro for impl_334 (impl)
+macro_rules! Depcrate_urlimpl_334 {
+() => {
+// Module: crate::url
+// Provides: {"impl_334"}
+// Dependencies: {}
+impl CFURL { pub fn from_path < P : AsRef < Path > > (path : P , isDirectory : bool) -> Option < CFURL > { let path_bytes ; # [cfg (unix)] { path_bytes = path . as_ref () . as_os_str () . as_bytes () } # [cfg (not (unix))] { path_bytes = match path . as_ref () . to_str () { Some (path) => path , None => return None , } } unsafe { let url_ref = CFURLCreateFromFileSystemRepresentation (ptr :: null_mut () , path_bytes . as_ptr () , path_bytes . len () as CFIndex , isDirectory as u8 ,) ; if url_ref . is_null () { return None ; } Some (TCFType :: wrap_under_create_rule (url_ref)) } } pub fn from_file_system_path (filePath : CFString , pathStyle : CFURLPathStyle , isDirectory : bool ,) -> CFURL { unsafe { let url_ref = CFURLCreateWithFileSystemPath (kCFAllocatorDefault , filePath . as_concrete_TypeRef () , pathStyle , isDirectory as u8 ,) ; TCFType :: wrap_under_create_rule (url_ref) } } # [cfg (unix)] pub fn to_path (& self) -> Option < PathBuf > { unsafe { let mut buf = [0u8 ; PATH_MAX as usize] ; let result = CFURLGetFileSystemRepresentation (self . 0 , true as Boolean , buf . as_mut_ptr () , buf . len () as CFIndex ,) ; if result == false as Boolean { return None ; } let len = strlen (buf . as_ptr () as * const c_char) ; let path = OsStr :: from_bytes (& buf [0 .. len]) ; Some (PathBuf :: from (path)) } } pub fn get_string (& self) -> CFString { unsafe { TCFType :: wrap_under_get_rule (CFURLGetString (self . 0)) } } pub fn get_file_system_path (& self , pathStyle : CFURLPathStyle) -> CFString { unsafe { TCFType :: wrap_under_create_rule (CFURLCopyFileSystemPath (self . as_concrete_TypeRef () , pathStyle ,)) } } pub fn absolute (& self) -> CFURL { unsafe { TCFType :: wrap_under_create_rule (CFURLCopyAbsoluteURL (self . as_concrete_TypeRef ())) } } }
+};
+}

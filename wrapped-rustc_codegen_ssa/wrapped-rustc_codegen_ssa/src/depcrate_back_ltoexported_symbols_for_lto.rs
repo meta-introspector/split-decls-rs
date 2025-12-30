@@ -1,0 +1,9 @@
+// Generated macro for exported_symbols_for_lto (function)
+macro_rules! Depcrate_back_ltoexported_symbols_for_lto {
+() => {
+// Module: crate::back::lto
+// Provides: {"exported_symbols_for_lto"}
+// Dependencies: {}
+pub (super) fn exported_symbols_for_lto (tcx : TyCtxt < '_ > , each_linked_rlib_for_lto : & [CrateNum] ,) -> Vec < String > { let export_threshold = match tcx . sess . lto () { Lto :: ThinLocal => SymbolExportLevel :: Rust , Lto :: Fat | Lto :: Thin => symbol_export :: crates_export_threshold (& tcx . crate_types ()) , Lto :: No => return vec ! [] , } ; let copy_symbols = | cnum | { tcx . exported_non_generic_symbols (cnum) . iter () . chain (tcx . exported_generic_symbols (cnum)) . filter_map (| & (s , info) : & (ExportedSymbol < '_ > , SymbolExportInfo) | { if info . level . is_below_threshold (export_threshold) || info . used { Some (symbol_name_for_instance_in_crate (tcx , s , cnum)) } else { None } }) . collect :: < Vec < _ > > () } ; let mut symbols_below_threshold = { let _timer = tcx . prof . generic_activity ("lto_generate_symbols_below_threshold") ; copy_symbols (LOCAL_CRATE) } ; info ! ("{} symbols to preserve in this crate" , symbols_below_threshold . len ()) ; if tcx . sess . lto () != Lto :: ThinLocal { for & cnum in each_linked_rlib_for_lto { let _timer = tcx . prof . generic_activity ("lto_generate_symbols_below_threshold") ; symbols_below_threshold . extend (copy_symbols (cnum)) ; } } if export_threshold == SymbolExportLevel :: Rust && allocator_kind_for_codegen (tcx) . is_some () { symbols_below_threshold . extend (allocator_shim_symbols (tcx) . map (| (name , _kind) | name)) ; } symbols_below_threshold }
+};
+}

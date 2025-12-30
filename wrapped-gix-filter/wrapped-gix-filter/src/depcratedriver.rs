@@ -1,0 +1,9 @@
+// Generated macro for Driver (struct)
+macro_rules! DepcrateDriver {
+() => {
+// Module: crate
+// Provides: {"Driver"}
+// Dependencies: {}
+# [doc = " A declaration of a driver program."] # [doc = ""] # [doc = " It consists of up to three program declarations."] # [derive (Debug , Clone)] pub struct Driver { # [doc = " The name of the driver as stored in the configuration."] pub name : BString , # [doc = " The program invocation that cleans a worktree file for storage in `git`."] # [doc = ""] # [doc = " Note that the command invocation may need its `%f` argument substituted with the name of the file to process. It will be quoted."] pub clean : Option < BString > , # [doc = " The program invocation that readies a file stored in `git` for the worktree."] # [doc = ""] # [doc = " Note that the command invocation may need its `%f` argument substituted with the name of the file to process. It will be quoted."] pub smudge : Option < BString > , # [doc = " the long-running program that can typically handle both smudge and clean, and possibly delay processing as well."] pub process : Option < BString > , # [doc = " If `true`, the `clean` or `smudge` programs need to succeed in order to make their content usable. Otherwise their"] # [doc = " exit code is ignored."] # [doc = " Note that this is more of a suggestion as we will always report errors as they happen as the driver API is streaming in nature,"] # [doc = " which makes soft-failures impossible unless the caller takes precautions."] pub required : bool , }
+};
+}

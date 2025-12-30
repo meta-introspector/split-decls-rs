@@ -1,0 +1,49 @@
+// Generated module macro for crate::builder::scope
+macro_rules! Modcrate_builder_scope {
+() => {
+        Depcrate_builder_scopeuse_348!();
+        Depcrate_builder_scopeuse_349!();
+        Depcrate_builder_scopeuse_350!();
+        Depcrate_builder_scopeuse_351!();
+        Depcrate_builder_scopeuse_352!();
+        Depcrate_builder_scopeuse_353!();
+        Depcrate_builder_scopeuse_354!();
+        Depcrate_builder_scopeuse_355!();
+        Depcrate_builder_scopeuse_356!();
+        Depcrate_builder_scopeuse_357!();
+        Depcrate_builder_scopeuse_358!();
+        Depcrate_builder_scopeuse_359!();
+        Depcrate_builder_scopeuse_360!();
+        Depcrate_builder_scopeuse_361!();
+        Depcrate_builder_scopeuse_362!();
+        Depcrate_builder_scopeuse_363!();
+        Depcrate_builder_scopeuse_364!();
+        Depcrate_builder_scopeuse_365!();
+        Depcrate_builder_scopeScopes!();
+        Depcrate_builder_scopeScope!();
+        Depcrate_builder_scopeDropData!();
+        Depcrate_builder_scopeDropKind!();
+        Depcrate_builder_scopeBreakableScope!();
+        Depcrate_builder_scopeConstContinuableScope!();
+        Depcrate_builder_scopeIfThenScope!();
+        Depcrate_builder_scopeBreakableTarget!();
+        Depcrate_builder_scopemacro_374!();
+        Depcrate_builder_scopeROOT_NODE!();
+        Depcrate_builder_scopeDropTree!();
+        Depcrate_builder_scopeDropNode!();
+        Depcrate_builder_scopeDropNodeKey!();
+        Depcrate_builder_scopeimpl_379!();
+        Depcrate_builder_scopeDropTreeBuilder!();
+        Depcrate_builder_scopeimpl_381!();
+        Depcrate_builder_scopeimpl_382!();
+        Depcrate_builder_scopeimpl_383!();
+        Depcrate_builder_scopebuild_scope_drops!();
+        Depcrate_builder_scopeimpl_385!();
+        Depcrate_builder_scopeExitScopes!();
+        Depcrate_builder_scopeimpl_387!();
+        Depcrate_builder_scopeCoroutineDrop!();
+        Depcrate_builder_scopeimpl_389!();
+        Depcrate_builder_scopeUnwind!();
+        Depcrate_builder_scopeimpl_391!();
+    };
+}

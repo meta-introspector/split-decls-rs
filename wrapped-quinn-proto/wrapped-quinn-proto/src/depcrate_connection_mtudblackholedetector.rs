@@ -1,0 +1,9 @@
+// Generated macro for BlackHoleDetector (struct)
+macro_rules! Depcrate_connection_mtudBlackHoleDetector {
+() => {
+// Module: crate::connection::mtud
+// Provides: {"BlackHoleDetector"}
+// Dependencies: {}
+# [doc = " Judges whether packet loss might indicate a drop in MTU"] # [doc = ""] # [doc = " Our MTU black hole detection scheme is a heuristic based on the order in which packets were sent"] # [doc = " (the packet number order), their sizes, and which are deemed lost."] # [doc = ""] # [doc = " First, contiguous groups of lost packets (\"loss bursts\") are aggregated, because a group of"] # [doc = " packets all lost together were probably lost for the same reason."] # [doc = ""] # [doc = " A loss burst is deemed \"suspicious\" if it contains no packets that are (a) smaller than the"] # [doc = " minimum MTU or (b) smaller than a more recent acknowledged packet, because such a burst could be"] # [doc = " fully explained by a reduction in MTU."] # [doc = ""] # [doc = " When the number of suspicious loss bursts exceeds [`BLACK_HOLE_THRESHOLD`], we judge the"] # [doc = " evidence for an MTU black hole to be sufficient."] # [derive (Clone)] struct BlackHoleDetector { # [doc = " Packet loss bursts currently considered suspicious"] suspicious_loss_bursts : Vec < LossBurst > , # [doc = " Loss burst currently being aggregated, if any"] current_loss_burst : Option < CurrentLossBurst > , # [doc = " Packet number of the biggest packet larger than `min_mtu` which we've received"] # [doc = " acknowledgment of more recently than any suspicious loss burst, if any"] largest_post_loss_packet : u64 , # [doc = " The maximum of `min_mtu` and the size of `largest_post_loss_packet`, or exactly `min_mtu` if"] # [doc = " no larger packets have been received since the most recent loss burst."] acked_mtu : u16 , # [doc = " The UDP payload size guaranteed to be supported by the network"] min_mtu : u16 , }
+};
+}

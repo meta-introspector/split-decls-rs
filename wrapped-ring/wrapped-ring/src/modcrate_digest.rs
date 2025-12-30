@@ -1,0 +1,51 @@
+// Generated module macro for crate::digest
+macro_rules! Modcrate_digest {
+() => {
+        Depcrate_digestuse_228!();
+        Depcrate_digestuse_229!();
+        Depcrate_digestuse_230!();
+        Depcrate_digestuse_231!();
+        Depcrate_digestuse_232!();
+        Depcrate_digestdynstate!();
+        Depcrate_digestsha1!();
+        Depcrate_digestsha2!();
+        Depcrate_digestBlockContext!();
+        Depcrate_digestimpl_237!();
+        Depcrate_digestInputTooLongError!();
+        Depcrate_digestmacro_239!();
+        Depcrate_digestContext!();
+        Depcrate_digestimpl_241!();
+        Depcrate_digestdigest!();
+        Depcrate_digestDigest!();
+        Depcrate_digestimpl_244!();
+        Depcrate_digestimpl_245!();
+        Depcrate_digestimpl_246!();
+        Depcrate_digestAlgorithm!();
+        Depcrate_digestAlgorithmID!();
+        Depcrate_digestimpl_249!();
+        Depcrate_digestimpl_250!();
+        Depcrate_digestmacro_251!();
+        Depcrate_digestimpl_252!();
+        Depcrate_digestSHA1_FOR_LEGACY_USE_ONLY!();
+        Depcrate_digestSHA256!();
+        Depcrate_digestSHA384!();
+        Depcrate_digestSHA512!();
+        Depcrate_digestSHA512_256!();
+        Depcrate_digestOutput!();
+        Depcrate_digestMAX_BLOCK_LEN!();
+        Depcrate_digestMAX_OUTPUT_LEN!();
+        Depcrate_digestMAX_CHAINING_LEN!();
+        Depcrate_digestformat_output!();
+        Depcrate_digestSHA1_OUTPUT_LEN!();
+        Depcrate_digestSHA256_OUTPUT_LEN!();
+        Depcrate_digestSHA384_OUTPUT_LEN!();
+        Depcrate_digestSHA512_OUTPUT_LEN!();
+        Depcrate_digestSHA512_256_OUTPUT_LEN!();
+        Depcrate_digestBlockLen!();
+        Depcrate_digestimpl_269!();
+        Depcrate_digestLenLen!();
+        Depcrate_digestOutputLen!();
+        Depcrate_digestimpl_272!();
+        Depcrate_digesttests!();
+    };
+}

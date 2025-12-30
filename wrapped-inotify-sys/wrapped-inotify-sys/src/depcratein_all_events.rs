@@ -1,0 +1,9 @@
+// Generated macro for IN_ALL_EVENTS (const)
+macro_rules! DepcrateIN_ALL_EVENTS {
+() => {
+// Module: crate
+// Provides: {"IN_ALL_EVENTS"}
+// Dependencies: {}
+# [doc = " Event: Any event occured"] # [doc = ""] # [doc = " This is a combination of all the other event constants:"] # [doc = ""] # [doc = " - [`IN_ACCESS`]"] # [doc = " - [`IN_ATTRIB`]"] # [doc = " - [`IN_CLOSE_WRITE`]"] # [doc = " - [`IN_CLOSE_NOWRITE`]"] # [doc = " - [`IN_MODIFY`]"] # [doc = " - [`IN_CREATE`]"] # [doc = " - [`IN_DELETE`]"] # [doc = " - [`IN_DELETE_SELF`]"] # [doc = " - [`IN_MODIFY`]"] # [doc = " - [`IN_MOVE_SELF`]"] # [doc = " - [`IN_MOVED_FROM`]"] # [doc = " - [`IN_MOVED_TO`]"] # [doc = " - [`IN_OPEN`]"] # [doc = ""] # [doc = " This constant can be passed to [`inotify_add_watch`], to register interest"] # [doc = " in any type of event."] # [doc = ""] # [doc = " See [man page] for additional details."] # [doc = ""] # [doc = " [`IN_ACCESS`]: constant.IN_ACCESS.html"] # [doc = " [`IN_ATTRIB`]: constant.IN_ATTRIB.html"] # [doc = " [`IN_CLOSE_WRITE`]: constant.IN_CLOSE_WRITE.html"] # [doc = " [`IN_CLOSE_NOWRITE`]: constant.IN_CLOSE_NOWRITE.html"] # [doc = " [`IN_MODIFY`]: constant.IN_MODIFY.html"] # [doc = " [`IN_CREATE`]: constant.IN_CREATE.html"] # [doc = " [`IN_DELETE`]: constant.IN_DELETE.html"] # [doc = " [`IN_DELETE_SELF`]: constant.IN_DELETE_SELF.html"] # [doc = " [`IN_MODIFY`]: constant.IN_MODIFY.html"] # [doc = " [`IN_MOVE_SELF`]: constant.IN_MOVE_SELF.html"] # [doc = " [`IN_MOVED_FROM`]: constant.IN_MOVED_FROM.html"] # [doc = " [`IN_MOVED_TO`]: constant.IN_MOVED_TO.html"] # [doc = " [`IN_OPEN`]: constant.IN_OPEN.html"] # [doc = " [`inotify_add_watch`]: fn.inotify_add_watch.html"] # [doc = " [man page]: http://man7.org/linux/man-pages/man7/inotify.7.html"] pub const IN_ALL_EVENTS : u32 = IN_ACCESS | IN_MODIFY | IN_ATTRIB | IN_CLOSE_WRITE | IN_CLOSE_NOWRITE | IN_OPEN | IN_MOVED_FROM | IN_MOVED_TO | IN_CREATE | IN_DELETE | IN_DELETE_SELF | IN_MOVE_SELF ;
+};
+}

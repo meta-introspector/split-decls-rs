@@ -1,0 +1,9 @@
+// Generated macro for tests (module)
+macro_rules! Depcrate_utiltests {
+() => {
+// Module: crate::util
+// Provides: {"tests"}
+// Dependencies: {}
+# [cfg (test)] mod tests { use super :: * ; use num_bigint :: BigUint ; use proptest :: prelude :: * ; use typenum :: U ; fn test_base_2b < OutLen : ArraySize , B : Unsigned > (x : & [u8]) { if x . len () < (OutLen :: USIZE * B :: USIZE + 7) / 8 { return ; } let a = base_2b :: < OutLen , B > (x) ; let mut b = BigUint :: from_bytes_be (& x [.. (OutLen :: USIZE * B :: USIZE + 7) / 8]) ; if (B :: USIZE * OutLen :: USIZE) % 8 != 0 { b >>= 8 - ((B :: USIZE * OutLen :: USIZE) % 8) ; } let c : BigUint = a . iter () . fold (0u8 . into () , | acc , x | (acc << B :: U8) + x) ; assert_eq ! (b , c) ; } proptest ! { # [test] fn test_base_2b_32_4 (x in prop :: collection :: vec (any ::< u8 > () , 0 .. 100)) { test_base_2b ::< U < 32 >, U < 4 >> (& x) ; } # [test] fn test_base_2b_64_4 (x in prop :: collection :: vec (any ::< u8 > () , 0 .. 100)) { test_base_2b ::< U < 64 >, U < 4 >> (& x) ; } # [test] fn test_base_2b_14_12 (x in prop :: collection :: vec (any ::< u8 > () , 0 .. 100)) { test_base_2b ::< U < 14 >, U < 12 >> (& x) ; } # [test] fn test_base_2b_33_6 (x in prop :: collection :: vec (any ::< u8 > () , 0 .. 100)) { test_base_2b ::< U < 33 >, U < 6 >> (& x) ; } # [test] fn test_base_2b_17_14 (x in prop :: collection :: vec (any ::< u8 > () , 0 .. 100)) { test_base_2b ::< U < 17 >, U < 14 >> (& x) ; } # [test] fn test_base_2b_33_8 (x in prop :: collection :: vec (any ::< u8 > () , 0 .. 100)) { test_base_2b ::< U < 33 >, U < 8 >> (& x) ; } # [test] fn test_base_2b_22_14 (x in prop :: collection :: vec (any ::< u8 > () , 0 .. 100)) { test_base_2b ::< U < 22 >, U < 14 >> (& x) ; } # [test] fn test_base_2b_35_9 (x in prop :: collection :: vec (any ::< u8 > () , 0 .. 100)) { test_base_2b ::< U < 35 >, U < 9 >> (& x) ; } } }
+};
+}

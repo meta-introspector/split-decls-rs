@@ -1,0 +1,9 @@
+// Generated macro for INTERNET_ERROR_MASK_LOGIN_FAILURE_DISPLAY_ENTITY_BODY (const)
+macro_rules! Depcrate_um_wininetINTERNET_ERROR_MASK_LOGIN_FAILURE_DISPLAY_ENTITY_BODY {
+() => {
+// Module: crate::um::wininet
+// Provides: {"INTERNET_ERROR_MASK_LOGIN_FAILURE_DISPLAY_ENTITY_BODY"}
+// Dependencies: {}
+pub const INTERNET_ERROR_MASK_LOGIN_FAILURE_DISPLAY_ENTITY_BODY : DWORD = 0x8 ;
+};
+}

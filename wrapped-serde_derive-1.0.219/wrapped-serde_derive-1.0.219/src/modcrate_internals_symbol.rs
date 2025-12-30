@@ -1,0 +1,48 @@
+// Generated module macro for crate::internals::symbol
+macro_rules! Modcrate_internals_symbol {
+() => {
+        Depcrate_internals_symboluse_153!();
+        Depcrate_internals_symboluse_154!();
+        Depcrate_internals_symbolSymbol!();
+        Depcrate_internals_symbolALIAS!();
+        Depcrate_internals_symbolBORROW!();
+        Depcrate_internals_symbolBOUND!();
+        Depcrate_internals_symbolCONTENT!();
+        Depcrate_internals_symbolCRATE!();
+        Depcrate_internals_symbolDEFAULT!();
+        Depcrate_internals_symbolDENY_UNKNOWN_FIELDS!();
+        Depcrate_internals_symbolDESERIALIZE!();
+        Depcrate_internals_symbolDESERIALIZE_WITH!();
+        Depcrate_internals_symbolEXPECTING!();
+        Depcrate_internals_symbolFIELD_IDENTIFIER!();
+        Depcrate_internals_symbolFLATTEN!();
+        Depcrate_internals_symbolFROM!();
+        Depcrate_internals_symbolGETTER!();
+        Depcrate_internals_symbolINTO!();
+        Depcrate_internals_symbolNON_EXHAUSTIVE!();
+        Depcrate_internals_symbolOTHER!();
+        Depcrate_internals_symbolREMOTE!();
+        Depcrate_internals_symbolRENAME!();
+        Depcrate_internals_symbolRENAME_ALL!();
+        Depcrate_internals_symbolRENAME_ALL_FIELDS!();
+        Depcrate_internals_symbolREPR!();
+        Depcrate_internals_symbolSERDE!();
+        Depcrate_internals_symbolSERIALIZE!();
+        Depcrate_internals_symbolSERIALIZE_WITH!();
+        Depcrate_internals_symbolSKIP!();
+        Depcrate_internals_symbolSKIP_DESERIALIZING!();
+        Depcrate_internals_symbolSKIP_SERIALIZING!();
+        Depcrate_internals_symbolSKIP_SERIALIZING_IF!();
+        Depcrate_internals_symbolTAG!();
+        Depcrate_internals_symbolTRANSPARENT!();
+        Depcrate_internals_symbolTRY_FROM!();
+        Depcrate_internals_symbolUNTAGGED!();
+        Depcrate_internals_symbolVARIANT_IDENTIFIER!();
+        Depcrate_internals_symbolWITH!();
+        Depcrate_internals_symbolimpl_191!();
+        Depcrate_internals_symbolimpl_192!();
+        Depcrate_internals_symbolimpl_193!();
+        Depcrate_internals_symbolimpl_194!();
+        Depcrate_internals_symbolimpl_195!();
+    };
+}

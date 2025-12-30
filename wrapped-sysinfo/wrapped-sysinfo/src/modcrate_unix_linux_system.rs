@@ -1,0 +1,41 @@
+// Generated module macro for crate::unix::linux::system
+macro_rules! Modcrate_unix_linux_system {
+() => {
+        Depcrate_unix_linux_systemuse_882!();
+        Depcrate_unix_linux_systemuse_883!();
+        Depcrate_unix_linux_systemuse_884!();
+        Depcrate_unix_linux_systemuse_885!();
+        Depcrate_unix_linux_systemuse_886!();
+        Depcrate_unix_linux_systemuse_887!();
+        Depcrate_unix_linux_systemuse_888!();
+        Depcrate_unix_linux_systemuse_889!();
+        Depcrate_unix_linux_systemuse_890!();
+        Depcrate_unix_linux_systemuse_891!();
+        Depcrate_unix_linux_systemuse_892!();
+        Depcrate_unix_linux_systemuse_893!();
+        Depcrate_unix_linux_systemuse_894!();
+        Depcrate_unix_linux_systemuse_895!();
+        Depcrate_unix_linux_systemuse_896!();
+        Depcrate_unix_linux_systemgetrlimit!();
+        Depcrate_unix_linux_systemget_max_nb_fds!();
+        Depcrate_unix_linux_systemremaining_files!();
+        Depcrate_unix_linux_systemmacro_900!();
+        Depcrate_unix_linux_systemSUPPORTED_SIGNALS!();
+        Depcrate_unix_linux_systemMINIMUM_CPU_UPDATE_INTERVAL!();
+        Depcrate_unix_linux_systemboot_time!();
+        Depcrate_unix_linux_systemSystemInfo!();
+        Depcrate_unix_linux_systemimpl_905!();
+        Depcrate_unix_linux_systemSystemInner!();
+        Depcrate_unix_linux_systemimpl_907!();
+        Depcrate_unix_linux_systemimpl_908!();
+        Depcrate_unix_linux_systemread_u64!();
+        Depcrate_unix_linux_systemread_table!();
+        Depcrate_unix_linux_systemread_table_key!();
+        Depcrate_unix_linux_systemimpl_912!();
+        Depcrate_unix_linux_systemInfoType!();
+        Depcrate_unix_linux_systemget_system_info_linux!();
+        Depcrate_unix_linux_systemsystem_info_as_list!();
+        Depcrate_unix_linux_systemget_system_info_android!();
+        Depcrate_unix_linux_systemtest!();
+    };
+}

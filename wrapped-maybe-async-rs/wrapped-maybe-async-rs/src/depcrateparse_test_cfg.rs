@@ -1,0 +1,10 @@
+// Generated macro for parse_test_cfg (function)
+macro_rules! Depcrateparse_test_cfg {
+() => {
+// Module: crate
+// Provides: {"parse_test_cfg"}
+// Dependencies: {}
+fn parse_test_cfg (input : ParseStream) -> Result < TokenStream2 > { if input . is_empty () { return Err (syn :: Error :: new (Span :: call_site () , "Arguments cannot be empty, at least specify the condition for sync code" ,)) ; } let sync_cond = input . call (parse_nested_meta_or_str) ? ; let mut ts = quote ! (# [cfg_attr (# sync_cond , maybe_async :: must_be_sync , test)]) ; let mut async_conditions = Vec :: new () ; while ! input . is_empty () { input . parse :: < Token ! [,] > () ? ; if input . is_empty () { break ; } if ! input . peek (Ident :: peek_any) { return Err (input . error ("Must be list of metas like: `async(condition, async_test_macro)`")) ; } let name = input . call (Ident :: parse_any) ? ; if name != "async" { return Err (syn :: Error :: new (name . span () , format ! ("Unknown path: `{}`, must be `async`" , name) ,)) ; } if ! input . peek (token :: Paren) { return Err (input . error ("Must be list of metas like: `async(condition, async_test_macro)`")) ; } let nested ; parenthesized ! (nested in input) ; let list = nested . parse_terminated (parse_nested_meta_or_str , Token ! [,]) ? ; let len = list . len () ; let mut iter = list . into_iter () ; let (Some (async_cond) , Some (async_test) , None) = (iter . next () , iter . next () , iter . next ()) else { let msg = format ! ("Must pass two metas or string literals like `async(condition, \
+                 async_test_macro)`, you passed {len} metas." ,) ; return Err (syn :: Error :: new (name . span () , msg)) ; } ; let attr = quote ! (# [cfg_attr (# async_cond , maybe_async :: must_be_async , # async_test)]) ; async_conditions . push (async_cond) ; ts . extend (attr) ; } Ok (if ! async_conditions . is_empty () { quote ! { # [cfg (any (# sync_cond , # (# async_conditions) ,*))] # ts } } else { quote ! { # [cfg (# sync_cond)] # ts } }) }
+};
+}

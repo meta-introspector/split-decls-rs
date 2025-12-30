@@ -1,0 +1,9 @@
+// Generated macro for split_args_for_threads (function)
+macro_rules! Depcrate_utilssplit_args_for_threads {
+() => {
+// Module: crate::utils
+// Provides: {"split_args_for_threads"}
+// Dependencies: {}
+# [doc = " Splits an argument list across multiple `Command` invocations."] # [doc = ""] # [doc = " The argument list will be split into a number of batches based on"] # [doc = " `thread::available_parallelism`, with `min_batch_size` setting a lower bound on the size of each"] # [doc = " batch."] # [doc = ""] # [doc = " If the size of the arguments would exceed the system limit additional batches will be created."] pub fn split_args_for_threads (min_batch_size : usize , make_cmd : impl FnMut () -> Command , args : impl ExactSizeIterator < Item : AsRef < OsStr > > ,) -> impl Iterator < Item = Command > { struct Iter < F , I > { make_cmd : F , args : I , min_batch_size : usize , batch_size : usize , thread_count : usize , } impl < F , I > Iterator for Iter < F , I > where F : FnMut () -> Command , I : ExactSizeIterator < Item : AsRef < OsStr > > , { type Item = Command ; fn next (& mut self) -> Option < Self :: Item > { if self . thread_count > 1 { self . thread_count -= 1 ; } let mut cmd = (self . make_cmd) () ; let mut cmd_len = 0usize ; for arg in self . args . by_ref () . take (self . batch_size) { cmd . arg (arg . as_ref ()) ; cmd_len += arg . as_ref () . len () + 8 ; cmd_len += 8 ; if cmd_len > 30000 { self . batch_size = self . args . len () . div_ceil (self . thread_count) . max (self . min_batch_size) ; break ; } } (cmd_len != 0) . then_some (cmd) } } let thread_count = thread :: available_parallelism () . map_or (1 , NonZero :: get) ; let batch_size = args . len () . div_ceil (thread_count) . max (min_batch_size) ; Iter { make_cmd , args , min_batch_size , batch_size , thread_count , } }
+};
+}

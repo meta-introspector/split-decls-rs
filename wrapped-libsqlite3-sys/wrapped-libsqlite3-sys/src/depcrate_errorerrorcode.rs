@@ -1,0 +1,9 @@
+// Generated macro for ErrorCode (enum)
+macro_rules! Depcrate_errorErrorCode {
+() => {
+// Module: crate::error
+// Provides: {"ErrorCode"}
+// Dependencies: {}
+# [doc = " Error Codes"] # [derive (Clone , Copy , Debug , PartialEq , Eq)] # [non_exhaustive] pub enum ErrorCode { # [doc = " Internal logic error in SQLite"] InternalMalfunction , # [doc = " Access permission denied"] PermissionDenied , # [doc = " Callback routine requested an abort"] OperationAborted , # [doc = " The database file is locked"] DatabaseBusy , # [doc = " A table in the database is locked"] DatabaseLocked , # [doc = " A `malloc()` failed"] OutOfMemory , # [doc = " Attempt to write a readonly database"] ReadOnly , # [doc = " Operation terminated by `sqlite3_interrupt()`"] OperationInterrupted , # [doc = " Some kind of disk I/O error occurred"] SystemIoFailure , # [doc = " The database disk image is malformed"] DatabaseCorrupt , # [doc = " Unknown opcode in `sqlite3_file_control()`"] NotFound , # [doc = " Insertion failed because database is full"] DiskFull , # [doc = " Unable to open the database file"] CannotOpen , # [doc = " Database lock protocol error"] FileLockingProtocolFailed , # [doc = " The database schema changed"] SchemaChanged , # [doc = " String or BLOB exceeds size limit"] TooBig , # [doc = " Abort due to constraint violation"] ConstraintViolation , # [doc = " Data type mismatch"] TypeMismatch , # [doc = " Library used incorrectly"] ApiMisuse , # [doc = " Uses OS features not supported on host"] NoLargeFileSupport , # [doc = " Authorization denied"] AuthorizationForStatementDenied , # [doc = " 2nd parameter to `sqlite3_bind` out of range"] ParameterOutOfRange , # [doc = " File opened that is not a database file"] NotADatabase , # [doc = " SQL error or missing database"] Unknown , }
+};
+}

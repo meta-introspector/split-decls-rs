@@ -1,0 +1,71 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcrate_isaacimpl_17.rs");
+include!("depcrate_isaac64use_23.rs");
+include!("depcrate_isaac64impl_33.rs");
+include!("depcrate_isaac64use_27.rs");
+include!("depcrateisaac64.rs");
+include!("depcrate_isaac_arrayimpl_48.rs");
+include!("depcrate_isaac64impl_41.rs");
+include!("depcrate_isaac_arrayuse_44.rs");
+include!("depcrate_isaac64impl_37.rs");
+include!("depcrate_isaac_arrayisaac_array_serde.rs");
+include!("depcrate_isaac64impl_38.rs");
+include!("depcrate_isaacimpl_13.rs");
+include!("depcrate_isaacuse_2.rs");
+include!("depcrate_isaac_arrayrand_size.rs");
+include!("depcrate_isaac64use_26.rs");
+include!("depcrate_isaacuse_3.rs");
+include!("depcrate_isaac64impl_40.rs");
+include!("depcrate_isaac_arrayimpl_52.rs");
+include!("depcrate_isaactest.rs");
+include!("depcrate_isaacimpl_19.rs");
+include!("depcrate_isaac64use_25.rs");
+include!("depcrate_isaacuse_7.rs");
+include!("depcrateisaac_array.rs");
+include!("depcrate_isaac_arrayisaacarray.rs");
+include!("depcrate_isaacimpl_16.rs");
+include!("depcrate_isaacimpl_12.rs");
+include!("depcrate_isaac64impl_36.rs");
+include!("depcrate_isaacuse_5.rs");
+include!("depcrate_isaacw32.rs");
+include!("depcrate_isaac64use_28.rs");
+include!("depcrate_isaacimpl_18.rs");
+include!("depcrate_isaacisaacrng.rs");
+include!("depcrate_isaac64isaac64rng.rs");
+include!("depcrate_isaac_arrayrand_size_len.rs");
+include!("depcrate_isaac64rand_size.rs");
+include!("depcrate_isaacrand_size.rs");
+include!("depcrate_isaacimpl_15.rs");
+include!("depcrateisaac.rs");
+include!("depcrate_isaacimpl_20.rs");
+include!("depcrate_isaac_arrayimpl_49.rs");
+include!("depcrate_isaac_arrayimpl_54.rs");
+include!("depcrate_isaac64isaac64core.rs");
+include!("depcrate_isaacuse_4.rs");
+include!("depcrate_isaac_arrayimpl_53.rs");
+include!("depcrate_isaac64impl_39.rs");
+include!("depcrate_isaac64rand_size_len.rs");
+include!("depcrate_isaac_arrayimpl_51.rs");
+include!("depcrate_isaac64use_24.rs");
+include!("depcrate_isaacisaaccore.rs");
+include!("depcrateuse_57.rs");
+include!("depcrate_isaacrand_size_len.rs");
+include!("depcrate_isaac64impl_34.rs");
+include!("depcrate_isaac_arrayimpl_50.rs");
+include!("depcrate_isaac64w64.rs");
+include!("depcrateuse_56.rs");
+include!("depcrate_isaac64test.rs");
+include!("depcrate_isaacuse_6.rs");
+include!("modcrate_isaac.rs");
+include!("modcrate_isaac_array.rs");
+include!("modcrate.rs");
+include!("modcrate_isaac64.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate_isaac!();
+    Modcrate_isaac_array!();
+    Modcrate!();
+    Modcrate_isaac64!();
+}

@@ -1,0 +1,9 @@
+// Generated macro for std_addr_to_c (function)
+macro_rules! Depcrate_ffistd_addr_to_c {
+() => {
+// Module: crate::ffi
+// Provides: {"std_addr_to_c"}
+// Dependencies: {}
+fn std_addr_to_c (addr : & SocketAddr , out : & mut sockaddr_storage) -> socklen_t { let sin_port = addr . port () . to_be () ; match addr { SocketAddr :: V4 (addr) => unsafe { let sa_len = size_of :: < sockaddr_in > () ; let out_in = out as * mut _ as * mut sockaddr_in ; let s_addr = u32 :: from_ne_bytes (addr . ip () . octets ()) ; # [cfg (not (windows))] let sin_addr = in_addr { s_addr } ; # [cfg (windows)] let sin_addr = in_addr { S_un : IN_ADDR_0 { S_addr : s_addr } , } ; * out_in = sockaddr_in { sin_family : AF_INET as sa_family_t , sin_addr , # [cfg (any (target_os = "macos" , target_os = "ios" , target_os = "watchos" , target_os = "freebsd" , target_os = "dragonfly" , target_os = "openbsd" , target_os = "netbsd"))] sin_len : sa_len as u8 , sin_port , sin_zero : std :: mem :: zeroed () , } ; sa_len as socklen_t } , SocketAddr :: V6 (addr) => unsafe { let sa_len = size_of :: < sockaddr_in6 > () ; let out_in6 = out as * mut _ as * mut sockaddr_in6 ; # [cfg (not (windows))] let sin6_addr = in6_addr { s6_addr : addr . ip () . octets () , } ; # [cfg (windows)] let sin6_addr = in6_addr { u : IN6_ADDR_0 { Byte : addr . ip () . octets () , } , } ; * out_in6 = sockaddr_in6 { sin6_family : AF_INET6 as sa_family_t , sin6_addr , # [cfg (any (target_os = "macos" , target_os = "ios" , target_os = "watchos" , target_os = "freebsd" , target_os = "dragonfly" , target_os = "openbsd" , target_os = "netbsd"))] sin6_len : sa_len as u8 , sin6_port : sin_port , sin6_flowinfo : addr . flowinfo () , # [cfg (not (windows))] sin6_scope_id : addr . scope_id () , # [cfg (windows)] Anonymous : SOCKADDR_IN6_0 { sin6_scope_id : addr . scope_id () , } , } ; sa_len as socklen_t } , } }
+};
+}

@@ -1,0 +1,53 @@
+// Generated module macro for crate::all
+macro_rules! Modcrate_all {
+() => {
+        Depcrate_alluse_49!();
+        Depcrate_alluse_50!();
+        Depcrate_alluse_51!();
+        Depcrate_allunique!();
+        Depcrate_allsinglebyte!();
+        Depcrate_allmacro_54!();
+        Depcrate_allmacro_55!();
+        Depcrate_allmacro_56!();
+        Depcrate_allmacro_57!();
+        Depcrate_allmacro_58!();
+        Depcrate_allmacro_59!();
+        Depcrate_allmacro_60!();
+        Depcrate_allmacro_61!();
+        Depcrate_allmacro_62!();
+        Depcrate_allmacro_63!();
+        Depcrate_allmacro_64!();
+        Depcrate_allmacro_65!();
+        Depcrate_allmacro_66!();
+        Depcrate_allmacro_67!();
+        Depcrate_allmacro_68!();
+        Depcrate_allmacro_69!();
+        Depcrate_allmacro_70!();
+        Depcrate_allmacro_71!();
+        Depcrate_allmacro_72!();
+        Depcrate_allmacro_73!();
+        Depcrate_allmacro_74!();
+        Depcrate_allmacro_75!();
+        Depcrate_allmacro_76!();
+        Depcrate_allmacro_77!();
+        Depcrate_allmacro_78!();
+        Depcrate_allmacro_79!();
+        Depcrate_allmacro_80!();
+        Depcrate_allmacro_81!();
+        Depcrate_allmacro_82!();
+        Depcrate_allmacro_83!();
+        Depcrate_allmacro_84!();
+        Depcrate_allmacro_85!();
+        Depcrate_allmacro_86!();
+        Depcrate_allmacro_87!();
+        Depcrate_allmacro_88!();
+        Depcrate_allmacro_89!();
+        Depcrate_allmacro_90!();
+        Depcrate_allmacro_91!();
+        Depcrate_allmacro_92!();
+        Depcrate_allmacro_93!();
+        Depcrate_allmacro_94!();
+        Depcrate_allwhatwg!();
+        Depcrate_allencodings!();
+    };
+}

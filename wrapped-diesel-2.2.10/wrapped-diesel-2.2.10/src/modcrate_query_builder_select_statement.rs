@@ -1,0 +1,46 @@
+// Generated module macro for crate::query_builder::select_statement
+macro_rules! Modcrate_query_builder_select_statement {
+() => {
+        Depcrate_query_builder_select_statementboxed!();
+        Depcrate_query_builder_select_statementdsl_impls!();
+        Depcrate_query_builder_select_statementuse_1254!();
+        Depcrate_query_builder_select_statementuse_1255!();
+        Depcrate_query_builder_select_statementuse_1256!();
+        Depcrate_query_builder_select_statementuse_1257!();
+        Depcrate_query_builder_select_statementuse_1258!();
+        Depcrate_query_builder_select_statementuse_1259!();
+        Depcrate_query_builder_select_statementuse_1260!();
+        Depcrate_query_builder_select_statementuse_1261!();
+        Depcrate_query_builder_select_statementuse_1262!();
+        Depcrate_query_builder_select_statementuse_1263!();
+        Depcrate_query_builder_select_statementuse_1264!();
+        Depcrate_query_builder_select_statementuse_1265!();
+        Depcrate_query_builder_select_statementuse_1266!();
+        Depcrate_query_builder_select_statementuse_1267!();
+        Depcrate_query_builder_select_statementuse_1268!();
+        Depcrate_query_builder_select_statementuse_1269!();
+        Depcrate_query_builder_select_statementuse_1270!();
+        Depcrate_query_builder_select_statementuse_1271!();
+        Depcrate_query_builder_select_statementuse_1272!();
+        Depcrate_query_builder_select_statementuse_1273!();
+        Depcrate_query_builder_select_statementuse_1274!();
+        Depcrate_query_builder_select_statementuse_1275!();
+        Depcrate_query_builder_select_statementuse_1276!();
+        Depcrate_query_builder_select_statementSelectStatement!();
+        Depcrate_query_builder_select_statementSelectStatementAccessor!();
+        Depcrate_query_builder_select_statementimpl_1279!();
+        Depcrate_query_builder_select_statementimpl_1280!();
+        Depcrate_query_builder_select_statementimpl_1281!();
+        Depcrate_query_builder_select_statementimpl_1282!();
+        Depcrate_query_builder_select_statementimpl_1283!();
+        Depcrate_query_builder_select_statementimpl_1284!();
+        Depcrate_query_builder_select_statementimpl_1285!();
+        Depcrate_query_builder_select_statementimpl_1286!();
+        Depcrate_query_builder_select_statementimpl_1287!();
+        Depcrate_query_builder_select_statementimpl_1288!();
+        Depcrate_query_builder_select_statementimpl_1289!();
+        Depcrate_query_builder_select_statementimpl_1290!();
+        Depcrate_query_builder_select_statementimpl_1291!();
+        Depcrate_query_builder_select_statementimpl_1292!();
+    };
+}

@@ -1,0 +1,41 @@
+// Generated module macro for crate::isa::aarch64::inst::args
+macro_rules! Modcrate_isa_aarch64_inst_args {
+() => {
+        Depcrate_isa_aarch64_inst_argsuse_1722!();
+        Depcrate_isa_aarch64_inst_argsuse_1723!();
+        Depcrate_isa_aarch64_inst_argsShiftOp!();
+        Depcrate_isa_aarch64_inst_argsimpl_1725!();
+        Depcrate_isa_aarch64_inst_argsShiftOpShiftImm!();
+        Depcrate_isa_aarch64_inst_argsimpl_1727!();
+        Depcrate_isa_aarch64_inst_argsShiftOpAndAmt!();
+        Depcrate_isa_aarch64_inst_argsimpl_1729!();
+        Depcrate_isa_aarch64_inst_argsExtendOp!();
+        Depcrate_isa_aarch64_inst_argsimpl_1731!();
+        Depcrate_isa_aarch64_inst_argsMemLabel!();
+        Depcrate_isa_aarch64_inst_argsimpl_1733!();
+        Depcrate_isa_aarch64_inst_argsuse_1734!();
+        Depcrate_isa_aarch64_inst_argsCond!();
+        Depcrate_isa_aarch64_inst_argsimpl_1736!();
+        Depcrate_isa_aarch64_inst_argsCondBrKind!();
+        Depcrate_isa_aarch64_inst_argsimpl_1738!();
+        Depcrate_isa_aarch64_inst_argsBranchTarget!();
+        Depcrate_isa_aarch64_inst_argsimpl_1740!();
+        Depcrate_isa_aarch64_inst_argsimpl_1741!();
+        Depcrate_isa_aarch64_inst_argsimpl_1742!();
+        Depcrate_isa_aarch64_inst_argsimpl_1743!();
+        Depcrate_isa_aarch64_inst_argsshift_for_type!();
+        Depcrate_isa_aarch64_inst_argsimpl_1745!();
+        Depcrate_isa_aarch64_inst_argsimpl_1746!();
+        Depcrate_isa_aarch64_inst_argsimpl_1747!();
+        Depcrate_isa_aarch64_inst_argsimpl_1748!();
+        Depcrate_isa_aarch64_inst_argsOperandSize!();
+        Depcrate_isa_aarch64_inst_argsimpl_1750!();
+        Depcrate_isa_aarch64_inst_argsScalarSize!();
+        Depcrate_isa_aarch64_inst_argsimpl_1752!();
+        Depcrate_isa_aarch64_inst_argsVectorSize!();
+        Depcrate_isa_aarch64_inst_argsimpl_1754!();
+        Depcrate_isa_aarch64_inst_argsimpl_1755!();
+        Depcrate_isa_aarch64_inst_argsuse_1756!();
+        Depcrate_isa_aarch64_inst_argsimpl_1757!();
+    };
+}

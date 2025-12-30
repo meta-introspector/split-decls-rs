@@ -1,0 +1,9 @@
+// Generated macro for create_wrapper_function (function)
+macro_rules! Depcrate_allocatorcreate_wrapper_function {
+() => {
+// Module: crate::allocator
+// Provides: {"create_wrapper_function"}
+// Dependencies: {}
+fn create_wrapper_function (tcx : TyCtxt < '_ > , context : & Context < '_ > , from_name : & str , to_name : Option < & str > , types : & [Type < '_ >] , output : Option < Type < '_ > > ,) { let void = context . new_type :: < () > () ; let args : Vec < _ > = types . iter () . enumerate () . map (| (index , typ) | context . new_parameter (None , * typ , format ! ("param{}" , index))) . collect () ; let func = context . new_function (None , FunctionType :: Exported , output . unwrap_or (void) , & args , from_name , false ,) ; # [cfg (feature = "master")] func . add_attribute (FnAttribute :: Visibility (symbol_visibility_to_gcc (tcx . sess . default_visibility () ,))) ; if tcx . sess . must_emit_unwind_tables () { } let block = func . new_block ("entry") ; if let Some (to_name) = to_name { let args : Vec < _ > = types . iter () . enumerate () . map (| (index , typ) | context . new_parameter (None , * typ , format ! ("param{}" , index))) . collect () ; let callee = context . new_function (None , FunctionType :: Extern , output . unwrap_or (void) , & args , to_name , false ,) ; # [cfg (feature = "master")] callee . add_attribute (FnAttribute :: Visibility (gccjit :: Visibility :: Hidden)) ; let args = args . iter () . enumerate () . map (| (i , _) | func . get_param (i as i32) . to_rvalue ()) . collect :: < Vec < _ > > () ; let ret = context . new_call (None , callee , & args) ; if output . is_some () { block . end_with_return (None , ret) ; } else { block . add_eval (None , ret) ; block . end_with_void_return (None) ; } } else { assert ! (output . is_none ()) ; block . end_with_void_return (None) ; } }
+};
+}

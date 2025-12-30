@@ -1,0 +1,9 @@
+// Generated macro for impl_1240 (impl)
+macro_rules! Depcrate_comparison_chainimpl_1240 {
+() => {
+// Module: crate::comparison_chain
+// Provides: {"impl_1240"}
+// Dependencies: {}
+impl < 'tcx > LateLintPass < 'tcx > for ComparisonChain { fn check_expr (& mut self , cx : & LateContext < 'tcx > , expr : & 'tcx Expr < '_ >) { if expr . span . from_expansion () { return ; } if is_else_clause (cx . tcx , expr) { return ; } if is_in_const_context (cx) { return ; } let (conds , blocks) = if_sequence (expr) ; if conds . len () < 2 { return ; } if blocks . len () < 3 { return ; } for cond in conds . windows (2) { if let (& ExprKind :: Binary (ref kind1 , lhs1 , rhs1) , & ExprKind :: Binary (ref kind2 , lhs2 , rhs2)) = (& cond [0] . kind , & cond [1] . kind) { if ! kind_is_cmp (kind1 . node) || ! kind_is_cmp (kind2 . node) { return ; } let mut spanless_eq = SpanlessEq :: new (cx) ; let same_fixed_operands = spanless_eq . eq_expr (lhs1 , lhs2) && spanless_eq . eq_expr (rhs1 , rhs2) ; let same_transposed_operands = spanless_eq . eq_expr (lhs1 , rhs2) && spanless_eq . eq_expr (rhs1 , lhs2) ; if ! same_fixed_operands && ! same_transposed_operands { return ; } if kind1 . node == kind2 . node { if kind1 . node == BinOpKind :: Eq { return ; } if ! same_transposed_operands { return ; } } let ty = cx . typeck_results () . expr_ty (lhs1) ; let is_ord = cx . tcx . get_diagnostic_item (sym :: Ord) . is_some_and (| id | implements_trait (cx , ty , id , & [])) ; if ! is_ord { return ; } } else { return ; } } let ExprKind :: Binary (_ , lhs , rhs) = conds [0] . kind else { unreachable ! () ; } ; let lhs = Sugg :: hir (cx , lhs , "..") . maybe_paren () ; let rhs = Sugg :: hir (cx , rhs , "..") . addr () ; span_lint_and_sugg (cx , COMPARISON_CHAIN , expr . span , "`if` chain can be rewritten with `match`" , "consider rewriting the `if` chain with `match`" , format ! ("match {lhs}.cmp({rhs}) {{...}}") , Applicability :: HasPlaceholders ,) ; } }
+};
+}

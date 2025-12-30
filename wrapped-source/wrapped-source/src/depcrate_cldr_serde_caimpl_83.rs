@@ -1,0 +1,9 @@
+// Generated macro for impl_83 (impl)
+macro_rules! Depcrate_cldr_serde_caimpl_83 {
+() => {
+// Module: crate::cldr_serde::ca
+// Provides: {"impl_83"}
+// Dependencies: {}
+impl < Symbols > Contexts < Symbols > { fn get_symbols_exact (& self , context : Context , length : Length) -> Option < & Symbols > { use { Context :: * , Length :: * } ; match (context , length) { (_ , Numeric) => self . numeric . as_ref () . map (| n | & n . all) , (Format , Abbr) => Some (& self . format . abbreviated) , (Format , Narrow) => Some (& self . format . narrow) , (Format , Wide) => Some (& self . format . wide) , (Format , Short) => self . format . short . as_ref () , (Standalone , Abbr) => self . stand_alone . as_ref () . and_then (| s | s . abbreviated . as_ref ()) , (Standalone , Narrow) => self . stand_alone . as_ref () . and_then (| s | s . narrow . as_ref ()) , (Standalone , Wide) => self . stand_alone . as_ref () . and_then (| s | s . wide . as_ref ()) , (Standalone , Short) => self . stand_alone . as_ref () . and_then (| s | s . short . as_ref ()) , } } # [doc = " Load the symbols for a given context/length pair, performing horizontal fallback"] # [doc = " if necessary"] # [doc = ""] # [doc = " Horizontal fallback is performed as specified in"] # [doc = " <https://unicode.org/reports/tr35/tr35-dates.html#months_days_quarters_eras>"] # [doc = ""] # [doc = " I.e. missing `standalone`s fall back to `format`, missing `short` falls back to"] # [doc = " `abbr`."] pub (crate) fn get_symbols (& self , context : Context , length : Length) -> & Symbols { if context == Context :: Standalone { if let Some (sym) = self . get_symbols_exact (context , length) { return sym ; } } if let Some (sym) = self . get_symbols_exact (Context :: Format , length) { return sym ; } debug_assert ! (length == Length :: Short , "Short is the only nullable format length!") ; & self . format . abbreviated } }
+};
+}

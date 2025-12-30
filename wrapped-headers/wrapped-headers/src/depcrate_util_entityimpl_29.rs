@@ -1,0 +1,9 @@
+// Generated macro for impl_29 (impl)
+macro_rules! Depcrate_util_entityimpl_29 {
+() => {
+// Module: crate::util::entity
+// Provides: {"impl_29"}
+// Dependencies: {}
+impl < T : AsRef < [u8] > > EntityTag < T > { # [doc = " Get the tag."] pub (crate) fn tag (& self) -> & [u8] { let bytes = self . 0 . as_ref () ; let end = bytes . len () - 1 ; if bytes [0] == b'W' { & bytes [3 .. end] } else { & bytes [1 .. end] } } # [doc = " Return if this is a \"weak\" tag."] pub (crate) fn is_weak (& self) -> bool { self . 0 . as_ref () [0] == b'W' } # [doc = " For strong comparison two entity-tags are equivalent if both are not weak and their"] # [doc = " opaque-tags match character-by-character."] pub (crate) fn strong_eq < R > (& self , other : & EntityTag < R >) -> bool where R : AsRef < [u8] > , { ! self . is_weak () && ! other . is_weak () && self . tag () == other . tag () } # [doc = " For weak comparison two entity-tags are equivalent if their"] # [doc = " opaque-tags match character-by-character, regardless of either or"] # [doc = " both being tagged as \"weak\"."] pub (crate) fn weak_eq < R > (& self , other : & EntityTag < R >) -> bool where R : AsRef < [u8] > , { self . tag () == other . tag () } # [doc = " The inverse of `EntityTag.strong_eq()`."] # [cfg (test)] pub (crate) fn strong_ne (& self , other : & EntityTag) -> bool { ! self . strong_eq (other) } # [doc = " The inverse of `EntityTag.weak_eq()`."] # [cfg (test)] pub (crate) fn weak_ne (& self , other : & EntityTag) -> bool { ! self . weak_eq (other) } pub (crate) fn parse (src : T) -> Option < Self > { let slice = src . as_ref () ; let length = slice . len () ; if length < 2 || slice [length - 1] != b'"' { return None ; } let start = match slice [0] { b'"' => 1 , b'W' => { if length >= 4 && slice [1] == b'/' && slice [2] == b'"' { 3 } else { return None ; } } _ => return None , } ; if check_slice_validity (& slice [start .. length - 1]) { Some (EntityTag (src)) } else { None } } }
+};
+}

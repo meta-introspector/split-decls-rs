@@ -1,0 +1,9 @@
+// Generated macro for load_library (function)
+macro_rules! Depcrate_dylibload_library {
+() => {
+// Module: crate::dylib
+// Provides: {"load_library"}
+// Dependencies: {}
+# [doc = " Loads dynamic library in platform dependent manner."] # [doc = ""] # [doc = " For unix, you have to use RTLD_DEEPBIND flag to escape problems described"] # [doc = " [here](https://github.com/fedochet/rust-proc-macro-panic-inside-panic-expample)"] # [doc = " and [here](https://github.com/rust-lang/rust/issues/60593)."] # [doc = ""] # [doc = " Usage of RTLD_DEEPBIND"] # [doc = " [here](https://github.com/fedochet/rust-proc-macro-panic-inside-panic-expample/issues/1)"] # [doc = ""] # [doc = " It seems that on Windows that behaviour is default, so we do nothing in that case."] # [doc = ""] # [doc = " # Safety"] # [doc = ""] # [doc = " The caller is responsible for ensuring that the path is valid proc-macro library"] # [cfg (unix)] unsafe fn load_library (file : & Utf8Path) -> Result < Library , libloading :: Error > { # [cfg (target_env = "gnu")] use libc :: RTLD_DEEPBIND ; use libloading :: os :: unix :: Library as UnixLibrary ; use libloading :: os :: unix :: RTLD_NOW ; # [cfg (not (target_env = "gnu"))] const RTLD_DEEPBIND : std :: os :: raw :: c_int = 0x0 ; unsafe { UnixLibrary :: open (Some (file) , RTLD_NOW | RTLD_DEEPBIND) . map (| lib | lib . into ()) } }
+};
+}

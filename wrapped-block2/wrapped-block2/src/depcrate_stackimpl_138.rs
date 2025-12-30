@@ -1,0 +1,9 @@
+// Generated macro for impl_138 (impl)
+macro_rules! Depcrate_stackimpl_138 {
+() => {
+// Module: crate::stack
+// Provides: {"impl_138"}
+// Dependencies: {}
+impl < 'f , A , R , Closure > StackBlock < 'f , A , R , Closure > { unsafe extern "C-unwind" fn empty_clone_closure (_dst : * mut c_void , _src : * const c_void) { } const DESCRIPTOR_WITH_DROP : BlockDescriptorCopyDispose = BlockDescriptorCopyDispose { reserved : 0 , size : Self :: SIZE , copy : Some (Self :: empty_clone_closure) , dispose : Some (Self :: drop_closure) , } ; # [doc = " # Safety"] # [doc = ""] # [doc = "  `_Block_copy` must be called on the resulting stack block only once."] # [inline] pub (crate) unsafe fn new_no_clone < E > (closure : Closure) -> Self where A : EncodeArguments , R : EncodeReturn , Closure : IntoBlock < 'f , A , R > , E : ManualBlockEncodingExt < Arguments = A , Return = R > , { let flags = if mem :: needs_drop :: < Self > () { BlockFlags :: BLOCK_HAS_COPY_DISPOSE } else { BlockFlags :: EMPTY } | if ! E :: IS_NONE { BlockFlags :: BLOCK_HAS_SIGNATURE } else { BlockFlags :: EMPTY } ; let descriptor = match (mem :: needs_drop :: < Self > () , E :: IS_NONE) { (true , true) => { BlockDescriptorPtr { with_copy_dispose : & Self :: DESCRIPTOR_WITH_DROP , } } (false , true) => { BlockDescriptorPtr { basic : & Self :: DESCRIPTOR_BASIC , } } (true , false) => { BlockDescriptorPtr { with_copy_dispose_signature : & < Self as EncodedDescriptors < E > > :: DESCRIPTOR_WITH_DROP_AND_ENCODING , } } (false , false) => { BlockDescriptorPtr { with_signature : & < Self as EncodedDescriptors < E > > :: DESCRIPTOR_BASIC_WITH_ENCODING , } } } ; let header = BlockHeader { # [allow (unused_unsafe)] isa : unsafe { ptr :: addr_of ! (ffi :: _NSConcreteStackBlock) } , flags , reserved : MaybeUninit :: new (0) , invoke : Some (Closure :: __get_invoke_stack_block ()) , descriptor , } ; Self { p : PhantomData , header , closure , } } }
+};
+}

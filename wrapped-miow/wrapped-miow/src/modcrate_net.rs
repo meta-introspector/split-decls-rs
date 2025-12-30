@@ -1,0 +1,47 @@
+// Generated module macro for crate::net
+macro_rules! Modcrate_net {
+() => {
+        Depcrate_netuse_57!();
+        Depcrate_netuse_58!();
+        Depcrate_netuse_59!();
+        Depcrate_netuse_60!();
+        Depcrate_netuse_61!();
+        Depcrate_netuse_62!();
+        Depcrate_netuse_63!();
+        Depcrate_netuse_64!();
+        Depcrate_netuse_65!();
+        Depcrate_netuse_66!();
+        Depcrate_netuse_67!();
+        Depcrate_netSocketAddrBuf!();
+        Depcrate_netAcceptAddrsBuf!();
+        Depcrate_netAcceptAddrs!();
+        Depcrate_netWsaExtension!();
+        Depcrate_netTcpStreamExt!();
+        Depcrate_netUdpSocketExt!();
+        Depcrate_netTcpListenerExt!();
+        Depcrate_netNetInt!();
+        Depcrate_netdoit!();
+        Depcrate_netmacro_77!();
+        Depcrate_netntoh!();
+        Depcrate_netlast_err!();
+        Depcrate_netcvt!();
+        Depcrate_netother_81!();
+        Depcrate_netimpl_82!();
+        Depcrate_netsocket_addr_to_ptrs!();
+        Depcrate_netptrs_to_socket_addr!();
+        Depcrate_netslice2buf!();
+        Depcrate_netresult!();
+        Depcrate_netimpl_87!();
+        Depcrate_netconnect_overlapped!();
+        Depcrate_netimpl_89!();
+        Depcrate_netimpl_90!();
+        Depcrate_netimpl_91!();
+        Depcrate_netimpl_92!();
+        Depcrate_netGETACCEPTEXSOCKADDRS!();
+        Depcrate_netimpl_94!();
+        Depcrate_netimpl_95!();
+        Depcrate_netimpl_96!();
+        Depcrate_netimpl_97!();
+        Depcrate_nettests!();
+    };
+}

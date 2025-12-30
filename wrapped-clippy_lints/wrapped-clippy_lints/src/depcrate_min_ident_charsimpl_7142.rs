@@ -1,0 +1,9 @@
+// Generated macro for impl_7142 (impl)
+macro_rules! Depcrate_min_ident_charsimpl_7142 {
+() => {
+// Module: crate::min_ident_chars
+// Provides: {"impl_7142"}
+// Dependencies: {}
+impl Visitor < '_ > for IdentVisitor < '_ , '_ > { fn visit_id (& mut self , hir_id : HirId) { let Self { conf , cx } = * self ; let node = if hir_id . local_id == ItemLocalId :: from_u32 (0) { Some (cx . tcx . hir_node (hir_id)) } else { let owner = cx . tcx . hir_owner_nodes (hir_id . owner) ; owner . nodes . get (hir_id . local_id) . copied () . map (| p | p . node) } ; let Some (node) = node else { return ; } ; let Some (ident) = node . ident () else { return ; } ; let str = ident . as_str () ; if conf . is_ident_too_short (cx , str , ident . span) { if matches ! (cx . tcx . parent_hir_node (hir_id) , Node :: TraitRef (_)) { return ; } let usenode = opt_as_use_node (node) . or_else (| | { cx . tcx . hir_parent_iter (hir_id) . find_map (| (_ , node) | opt_as_use_node (node)) }) ; if let Some (imported_item_path) = usenode && let Some (Res :: Def (_ , imported_item_defid)) = imported_item_path . res . value_ns && cx . tcx . item_name (imported_item_defid) . as_str () == str { return ; } if let Node :: PathSegment (path) = node { if let Res :: Def (def_kind , ..) = path . res && let DefKind :: TyParam | DefKind :: ConstParam = def_kind { return ; } if matches ! (path . res , Res :: PrimTy (..)) || path . res . opt_def_id () . is_some_and (| def_id | ! def_id . is_local ()) { return ; } } if let Node :: GenericParam (generic_param) = node && let GenericParamKind :: Type { .. } = generic_param . kind { return ; } if let Node :: GenericParam (generic_param) = node && let GenericParamKind :: Const { .. } = generic_param . kind { return ; } if is_from_proc_macro (cx , & ident) { return ; } emit_min_ident_chars (conf , cx , str , ident . span) ; } } }
+};
+}

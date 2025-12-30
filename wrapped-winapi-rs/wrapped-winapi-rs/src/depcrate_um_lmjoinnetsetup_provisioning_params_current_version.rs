@@ -1,0 +1,9 @@
+// Generated macro for NETSETUP_PROVISIONING_PARAMS_CURRENT_VERSION (const)
+macro_rules! Depcrate_um_lmjoinNETSETUP_PROVISIONING_PARAMS_CURRENT_VERSION {
+() => {
+// Module: crate::um::lmjoin
+// Provides: {"NETSETUP_PROVISIONING_PARAMS_CURRENT_VERSION"}
+// Dependencies: {}
+pub const NETSETUP_PROVISIONING_PARAMS_CURRENT_VERSION : DWORD = 0x00000002 ;
+};
+}

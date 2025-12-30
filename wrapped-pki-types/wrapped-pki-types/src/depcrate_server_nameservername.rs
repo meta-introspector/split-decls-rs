@@ -1,0 +1,9 @@
+// Generated macro for ServerName (enum)
+macro_rules! Depcrate_server_nameServerName {
+() => {
+// Module: crate::server_name
+// Provides: {"ServerName"}
+// Dependencies: {}
+# [doc = " Encodes ways a client can know the expected name of the server."] # [doc = ""] # [doc = " This currently covers knowing the DNS name of the server, but"] # [doc = " will be extended in the future to supporting privacy-preserving names"] # [doc = " for the server (\"ECH\").  For this reason this enum is `non_exhaustive`."] # [doc = ""] # [doc = " # Making one"] # [doc = ""] # [doc = " If you have a DNS name as a `&str`, this type implements `TryFrom<&str>`,"] # [doc = " so you can do:"] # [doc = ""] # [doc = " ```"] # [doc = " # use rustls_pki_types::ServerName;"] # [doc = " ServerName::try_from(\"example.com\").expect(\"invalid DNS name\");"] # [doc = " ```"] # [doc = ""] # [doc = " If you have an owned `String`, you can use `TryFrom` directly:"] # [doc = ""] # [doc = " ```"] # [doc = " # use rustls_pki_types::ServerName;"] # [doc = " let name = \"example.com\".to_string();"] # [doc = " #[cfg(feature = \"alloc\")]"] # [doc = " ServerName::try_from(name).expect(\"invalid DNS name\");"] # [doc = " ```"] # [doc = ""] # [doc = " which will yield a `ServerName<'static>` if successful."] # [doc = ""] # [doc = " or, alternatively..."] # [doc = ""] # [doc = " ```"] # [doc = " # use rustls_pki_types::ServerName;"] # [doc = " let x: ServerName = \"example.com\".try_into().expect(\"invalid DNS name\");"] # [doc = " ```"] # [non_exhaustive] # [derive (Clone , Eq , Hash , PartialEq)] pub enum ServerName < 'a > { # [doc = " The server is identified by a DNS name.  The name"] # [doc = " is sent in the TLS Server Name Indication (SNI)"] # [doc = " extension."] DnsName (DnsName < 'a >) , # [doc = " The server is identified by an IP address. SNI is not"] # [doc = " done."] IpAddress (IpAddr) , }
+};
+}

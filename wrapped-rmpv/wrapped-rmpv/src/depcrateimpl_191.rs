@@ -1,0 +1,9 @@
+// Generated macro for impl_191 (impl)
+macro_rules! Depcrateimpl_191 {
+() => {
+// Module: crate
+// Provides: {"impl_191"}
+// Dependencies: {}
+impl < 'a > Utf8StringRef < 'a > { # [doc = " Returns `true` if the string is valid UTF-8."] # [inline] # [must_use] pub fn is_str (& self) -> bool { self . s . is_ok () } # [doc = " Returns `true` if the string contains invalid UTF-8 sequence."] # [inline] # [must_use] pub fn is_err (& self) -> bool { self . s . is_err () } # [doc = " Returns the string reference if the string is valid UTF-8, or else `None`."] # [inline] # [must_use] pub fn as_str (& self) -> Option < & str > { self . s . ok () } # [doc = " Returns the underlying `Utf8Error` if the string contains invalud UTF-8 sequence, or"] # [doc = " else `None`."] # [inline] # [must_use] pub fn as_err (& self) -> Option < & Utf8Error > { match self . s { Ok (..) => None , Err ((_ , ref err)) => Some (err) , } } # [doc = " Returns a byte slice of this string contents no matter whether it's valid or not UTF-8."] # [inline] # [must_use] pub const fn as_bytes (& self) -> & [u8] { match self . s { Ok (s) => s . as_bytes () , Err (ref err) => err . 0 , } } # [doc = " Consumes this object, yielding the string if the string is valid UTF-8, or else `None`."] # [inline] # [must_use] pub fn into_string (self) -> Option < String > { self . s . ok () . map (| s | s . into ()) } # [doc = " Consumes this object, yielding the string reference if the string is valid UTF-8, or else `None`."] # [inline] # [must_use] pub fn into_str (self) -> Option < & 'a str > { self . s . ok () } # [doc = " Converts a `Utf8StringRef` into a byte vector."] # [inline] # [must_use] pub fn into_bytes (self) -> Vec < u8 > { match self . s { Ok (s) => s . as_bytes () . into () , Err (err) => err . 0 . into () , } } }
+};
+}

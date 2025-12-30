@@ -1,0 +1,9 @@
+// Generated macro for impl_773 (impl)
+macro_rules! Depcrate_query_builder_ast_passimpl_773 {
+() => {
+// Module: crate::query_builder::ast_pass
+// Provides: {"impl_773"}
+// Dependencies: {}
+impl < 'a , 'b , DB > AstPassHelper < 'a , 'b , DB > for AstPass < 'a , 'b , DB > where DB : Backend , DB :: QueryBuilder : 'a , DB :: MetadataLookup : 'a , 'b : 'a , { fn cast_database < DB2 > (self , convert_bind_collector : impl Fn (& 'a mut DB :: BindCollector < 'b >) -> & 'a mut DB2 :: BindCollector < 'b > , convert_query_builder : impl Fn (& mut DB :: QueryBuilder) -> & mut DB2 :: QueryBuilder , convert_backend : impl Fn (& DB) -> & DB2 , convert_lookup : impl Fn (& 'a mut DB :: MetadataLookup) -> & 'a mut DB2 :: MetadataLookup ,) -> AstPass < 'a , 'b , DB2 > where DB2 : Backend , DB2 :: QueryBuilder : 'a , DB2 :: MetadataLookup : 'a , 'b : 'a , { let casted_pass = match self . internals { AstPassInternals :: ToSql (qb , opts) => { AstPassInternals :: ToSql (convert_query_builder (qb) , opts) } AstPassInternals :: CollectBinds { collector , metadata_lookup , } => AstPassInternals :: CollectBinds { collector : convert_bind_collector (collector) , metadata_lookup : convert_lookup (metadata_lookup) , } , AstPassInternals :: IsSafeToCachePrepared (b) => { AstPassInternals :: IsSafeToCachePrepared (b) } AstPassInternals :: DebugBinds (b) => AstPassInternals :: DebugBinds (b) , AstPassInternals :: IsNoop (b) => AstPassInternals :: IsNoop (b) , } ; AstPass { internals : casted_pass , backend : convert_backend (self . backend) , } } fn bind_collector (& mut self) -> Option < (& mut DB :: BindCollector < 'b > , & mut DB :: MetadataLookup) > { if let AstPassInternals :: CollectBinds { collector , metadata_lookup , } = & mut self . internals { Some ((collector , metadata_lookup)) } else { None } } }
+};
+}

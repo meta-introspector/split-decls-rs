@@ -1,0 +1,9 @@
+// Generated macro for deunicode (function)
+macro_rules! Depcratedeunicode {
+() => {
+// Module: crate
+// Provides: {"deunicode"}
+// Dependencies: {}
+# [doc = " This function takes any Unicode string and returns an ASCII transliteration"] # [doc = " of that string."] # [doc = ""] # [doc = " Guarantees and Warnings"] # [doc = " -----------------------"] # [doc = " Here are some guarantees you have when calling [`deunicode()`]:"] # [doc = "   * The `String` returned will be valid ASCII; the decimal representation of"] # [doc = "     every `char` in the string will be between 0 and 127, inclusive."] # [doc = "   * Every ASCII character (0x0000 - 0x007F) is mapped to itself."] # [doc = "   * All Unicode characters will translate to a string containing newlines"] # [doc = "     (`\"\\n\"`) or ASCII characters in the range 0x0020 - 0x007E. So for example,"] # [doc = "     no Unicode character will translate to `\\u{01}`. The exception is if the"] # [doc = "     ASCII character itself is passed in, in which case it will be mapped to"] # [doc = "     itself. (So `'\\u{01}'` will be mapped to `\"\\u{01}\"`.)"] # [doc = ""] # [doc = " There are, however, some things you should keep in mind:"] # [doc = "   * As stated, some transliterations do produce `\\n` characters."] # [doc = "   * Some Unicode characters transliterate to an empty string on purpose."] # [doc = "   * Some Unicode characters are unknown and transliterate to `\"[?]\"` (see [`deunicode_with_tofu()`])"] # [doc = "   * Many Unicode characters transliterate to multi-character strings. For"] # [doc = "     example, 北 is transliterated as \"Bei \"."] # [doc = "   * Han characters are mapped to Mandarin, and will be mostly illegible to Japanese readers."] # [inline (always)] # [cfg (feature = "alloc")] # [must_use] pub fn deunicode (s : & str) -> String { deunicode_with_tofu (s , "[?]") }
+};
+}

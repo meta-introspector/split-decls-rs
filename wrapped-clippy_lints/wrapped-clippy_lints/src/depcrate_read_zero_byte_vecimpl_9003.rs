@@ -1,0 +1,9 @@
+// Generated macro for impl_9003 (impl)
+macro_rules! Depcrate_read_zero_byte_vecimpl_9003 {
+() => {
+// Module: crate::read_zero_byte_vec
+// Provides: {"impl_9003"}
+// Dependencies: {}
+impl < 'tcx > LateLintPass < 'tcx > for ReadZeroByteVec { fn check_block (& mut self , cx : & LateContext < 'tcx > , block : & hir :: Block < 'tcx >) { for stmt in block . stmts { if stmt . span . from_expansion () { return ; } if let StmtKind :: Let (local) = stmt . kind && let LetStmt { pat , init : Some (init) , .. } = local && let PatKind :: Binding (_ , id , ident , _) = pat . kind && let Some (vec_init_kind) = get_vec_init_kind (cx , init) { let mut visitor = ReadVecVisitor { local_id : id , read_zero_expr : None , has_resize : false , } ; let Some (enclosing_block) = get_enclosing_block (cx , id) else { return ; } ; visitor . visit_block (enclosing_block) ; if let Some (expr) = visitor . read_zero_expr { let applicability = Applicability :: MaybeIncorrect ; match vec_init_kind { VecInitKind :: WithConstCapacity (len) => span_lint_hir_and_then (cx , READ_ZERO_BYTE_VEC , expr . hir_id , expr . span , "reading zero byte data to `Vec`" , | diag | { diag . span_suggestion (expr . span , "try" , format ! ("{}.resize({len}, 0); {}" , ident , snippet (cx , expr . span , "..")) , applicability ,) ; } ,) , VecInitKind :: WithExprCapacity (hir_id) => { let e = cx . tcx . hir_expect_expr (hir_id) ; span_lint_hir_and_then (cx , READ_ZERO_BYTE_VEC , expr . hir_id , expr . span , "reading zero byte data to `Vec`" , | diag | { diag . span_suggestion (expr . span , "try" , format ! ("{}.resize({}, 0); {}" , ident , snippet (cx , e . span , "..") , snippet (cx , expr . span , "..")) , applicability ,) ; } ,) ; } , _ => { span_lint_hir (cx , READ_ZERO_BYTE_VEC , expr . hir_id , expr . span , "reading zero byte data to `Vec`" ,) ; } , } } } } } }
+};
+}

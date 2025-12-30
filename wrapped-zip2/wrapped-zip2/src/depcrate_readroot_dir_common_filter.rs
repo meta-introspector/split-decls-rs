@@ -1,0 +1,9 @@
+// Generated macro for root_dir_common_filter (function)
+macro_rules! Depcrate_readroot_dir_common_filter {
+() => {
+// Module: crate::read
+// Provides: {"root_dir_common_filter"}
+// Dependencies: {}
+# [doc = " Common filters when finding the root directory of a Zip archive."] # [doc = ""] # [doc = " This filter is a sensible default for most use cases and filters out common"] # [doc = " system files that are usually irrelevant to the contents of the archive."] # [doc = ""] # [doc = " Currently, the filter ignores:"] # [doc = " - `/__MACOSX/`"] # [doc = " - `/.DS_Store`"] # [doc = " - `/Thumbs.db`"] # [doc = ""] # [doc = " **This function is not guaranteed to be stable and may change in future versions.**"] # [doc = ""] # [doc = " # Example"] # [doc = ""] # [doc = " ```rust"] # [doc = " # use std::path::Path;"] # [doc = " assert!(zip::read::root_dir_common_filter(Path::new(\"foo.txt\")));"] # [doc = " assert!(!zip::read::root_dir_common_filter(Path::new(\".DS_Store\")));"] # [doc = " assert!(!zip::read::root_dir_common_filter(Path::new(\"Thumbs.db\")));"] # [doc = " assert!(!zip::read::root_dir_common_filter(Path::new(\"__MACOSX\")));"] # [doc = " assert!(!zip::read::root_dir_common_filter(Path::new(\"__MACOSX/foo.txt\")));"] # [doc = " ```"] pub fn root_dir_common_filter (path : & Path) -> bool { const COMMON_FILTER_ROOT_FILES : & [& str] = & [".DS_Store" , "Thumbs.db"] ; if path . starts_with ("__MACOSX") { return false ; } if path . components () . count () == 1 && path . file_name () . is_some_and (| file_name | { COMMON_FILTER_ROOT_FILES . iter () . map (OsStr :: new) . any (| cmp | cmp == file_name) }) { return false ; } true }
+};
+}

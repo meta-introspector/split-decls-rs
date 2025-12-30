@@ -1,0 +1,44 @@
+// Generated module macro for crate::events
+macro_rules! Modcrate_events {
+() => {
+        Depcrate_eventsuse_33!();
+        Depcrate_eventsuse_34!();
+        Depcrate_eventsuse_35!();
+        Depcrate_eventsuse_36!();
+        Depcrate_eventsuse_37!();
+        Depcrate_eventsuse_38!();
+        Depcrate_eventsuse_39!();
+        Depcrate_eventsuse_40!();
+        Depcrate_eventsuse_41!();
+        Depcrate_eventsExData!();
+        Depcrate_eventsEventType!();
+        Depcrate_eventsTimeFormat!();
+        Depcrate_eventsEvent!();
+        Depcrate_eventsimpl_46!();
+        Depcrate_eventsimpl_47!();
+        Depcrate_eventsimpl_48!();
+        Depcrate_eventsJsonEvent!();
+        Depcrate_eventsimpl_50!();
+        Depcrate_eventsEventImportance!();
+        Depcrate_eventsimpl_52!();
+        Depcrate_eventsimpl_53!();
+        Depcrate_eventsEventable!();
+        Depcrate_eventsEventCategory!();
+        Depcrate_eventsimpl_56!();
+        Depcrate_eventsimpl_57!();
+        Depcrate_eventsimpl_58!();
+        Depcrate_eventsDataRecipient!();
+        Depcrate_eventsRawInfo!();
+        Depcrate_eventsEventData!();
+        Depcrate_eventsimpl_62!();
+        Depcrate_eventsGenericEventType!();
+        Depcrate_eventsConnectionErrorCode!();
+        Depcrate_eventsApplicationErrorCode!();
+        Depcrate_eventsCryptoError!();
+        Depcrate_eventsquic!();
+        Depcrate_eventsconnectivity!();
+        Depcrate_eventsh3!();
+        Depcrate_eventsqpack!();
+        Depcrate_eventssecurity!();
+    };
+}

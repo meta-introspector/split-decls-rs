@@ -1,0 +1,9 @@
+// Generated macro for assert_debug_snapshot (macro)
+macro_rules! Depcrate_macrosassert_debug_snapshot {
+() => {
+// Module: crate::macros
+// Provides: {"assert_debug_snapshot"}
+// Dependencies: {}
+# [doc = " Asserts a [`Debug`] snapshot."] # [doc = ""] # [doc = " The value needs to implement the [`Debug`] trait.  This is useful for"] # [doc = " simple values that do not implement the [`serde::Serialize`] trait, but does not"] # [doc = " permit redactions."] # [doc = ""] # [doc = " Debug is called with `\"{:#?}\"`, which means this uses pretty-print."] # [macro_export] macro_rules ! assert_debug_snapshot { ($ ($ arg : tt) *) => { $ crate :: _assert_snapshot_base ! (transform =| v | $ crate :: _macro_support :: format ! ("{:#?}" , v) , $ ($ arg) *) } ; }
+};
+}

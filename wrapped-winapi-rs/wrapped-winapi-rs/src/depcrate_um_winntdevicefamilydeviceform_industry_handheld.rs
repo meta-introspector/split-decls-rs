@@ -1,0 +1,9 @@
+// Generated macro for DEVICEFAMILYDEVICEFORM_INDUSTRY_HANDHELD (const)
+macro_rules! Depcrate_um_winntDEVICEFAMILYDEVICEFORM_INDUSTRY_HANDHELD {
+() => {
+// Module: crate::um::winnt
+// Provides: {"DEVICEFAMILYDEVICEFORM_INDUSTRY_HANDHELD"}
+// Dependencies: {}
+pub const DEVICEFAMILYDEVICEFORM_INDUSTRY_HANDHELD : DWORD = 0x0000000C ;
+};
+}

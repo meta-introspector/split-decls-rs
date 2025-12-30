@@ -1,0 +1,9 @@
+// Generated macro for impl_229 (impl)
+macro_rules! Depcrate_generatedimpl_229 {
+() => {
+// Module: crate::generated
+// Provides: {"impl_229"}
+// Dependencies: {}
+impl SRWristTemperature { extern_methods ! (# [unsafe (method (init))] # [unsafe (method_family = init)] pub unsafe fn init (this : Allocated < Self >) -> Retained < Self >; # [unsafe (method (new))] # [unsafe (method_family = new)] pub unsafe fn new () -> Retained < Self >; # [doc = " Timestamp of when temperature measurement was taken."] # [doc = ""] # [doc = " This property is not atomic."] # [doc = ""] # [doc = " # Safety"] # [doc = ""] # [doc = " This might not be thread-safe."] # [unsafe (method (timestamp))] # [unsafe (method_family = none)] pub unsafe fn timestamp (& self) -> Retained < NSDate >; # [doc = " Temperature sensor value in celsius"] # [doc = ""] # [doc = " This property is not atomic."] # [doc = ""] # [doc = " # Safety"] # [doc = ""] # [doc = " This might not be thread-safe."] # [unsafe (method (value))] # [unsafe (method_family = none)] pub unsafe fn value (& self) -> Retained < NSMeasurement < NSUnitTemperature >>; # [doc = " Indicate system conditions that may impact the temperature sample."] # [doc = ""] # [doc = " This property is not atomic."] # [doc = ""] # [doc = " # Safety"] # [doc = ""] # [doc = " This might not be thread-safe."] # [unsafe (method (condition))] # [unsafe (method_family = none)] pub unsafe fn condition (& self) -> SRWristTemperatureCondition ; # [doc = " Estimated temperature error per sample."] # [doc = " Error could be in either positive or negative direction."] # [doc = ""] # [doc = " This property is not atomic."] # [doc = ""] # [doc = " # Safety"] # [doc = ""] # [doc = " This might not be thread-safe."] # [unsafe (method (errorEstimate))] # [unsafe (method_family = none)] pub unsafe fn errorEstimate (& self) -> Retained < NSMeasurement < NSUnitTemperature >>;) ; }
+};
+}

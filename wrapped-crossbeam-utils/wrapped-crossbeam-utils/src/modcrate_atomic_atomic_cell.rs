@@ -1,0 +1,55 @@
+// Generated module macro for crate::atomic::atomic_cell
+macro_rules! Modcrate_atomic_atomic_cell {
+() => {
+        Depcrate_atomic_atomic_celluse_16!();
+        Depcrate_atomic_atomic_celluse_17!();
+        Depcrate_atomic_atomic_celluse_18!();
+        Depcrate_atomic_atomic_celluse_19!();
+        Depcrate_atomic_atomic_celluse_20!();
+        Depcrate_atomic_atomic_celluse_21!();
+        Depcrate_atomic_atomic_celluse_22!();
+        Depcrate_atomic_atomic_celluse_23!();
+        Depcrate_atomic_atomic_celluse_24!();
+        Depcrate_atomic_atomic_cellAtomicCell!();
+        Depcrate_atomic_atomic_cellimpl_26!();
+        Depcrate_atomic_atomic_cellimpl_27!();
+        Depcrate_atomic_atomic_cellimpl_28!();
+        Depcrate_atomic_atomic_cellimpl_29!();
+        Depcrate_atomic_atomic_cellimpl_30!();
+        Depcrate_atomic_atomic_cellimpl_31!();
+        Depcrate_atomic_atomic_cellimpl_32!();
+        Depcrate_atomic_atomic_cellimpl_33!();
+        Depcrate_atomic_atomic_cellimpl_34!();
+        Depcrate_atomic_atomic_cellatomic!();
+        Depcrate_atomic_atomic_cellimpl_arithmetic!();
+        Depcrate_atomic_atomic_cellmacro_37!();
+        Depcrate_atomic_atomic_cellmacro_38!();
+        Depcrate_atomic_atomic_cellmacro_39!();
+        Depcrate_atomic_atomic_cellmacro_40!();
+        Depcrate_atomic_atomic_cellmacro_41!();
+        Depcrate_atomic_atomic_cellmacro_42!();
+        Depcrate_atomic_atomic_cellmacro_43!();
+        Depcrate_atomic_atomic_cellmacro_44!();
+        Depcrate_atomic_atomic_cellmacro_45!();
+        Depcrate_atomic_atomic_cellmacro_46!();
+        Depcrate_atomic_atomic_cellmacro_47!();
+        Depcrate_atomic_atomic_cellmacro_48!();
+        Depcrate_atomic_atomic_cellmacro_49!();
+        Depcrate_atomic_atomic_cellmacro_50!();
+        Depcrate_atomic_atomic_cellmacro_51!();
+        Depcrate_atomic_atomic_cellmacro_52!();
+        Depcrate_atomic_atomic_cellimpl_53!();
+        Depcrate_atomic_atomic_cellimpl_54!();
+        Depcrate_atomic_atomic_cellimpl_55!();
+        Depcrate_atomic_atomic_cellimpl_56!();
+        Depcrate_atomic_atomic_cellcan_transmute!();
+        Depcrate_atomic_atomic_celllock!();
+        Depcrate_atomic_atomic_cellAtomicUnit!();
+        Depcrate_atomic_atomic_cellimpl_60!();
+        Depcrate_atomic_atomic_cellatomic_is_lock_free!();
+        Depcrate_atomic_atomic_cellatomic_load!();
+        Depcrate_atomic_atomic_cellatomic_store!();
+        Depcrate_atomic_atomic_cellatomic_swap!();
+        Depcrate_atomic_atomic_cellatomic_compare_exchange_weak!();
+    };
+}

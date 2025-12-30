@@ -1,0 +1,9 @@
+// Generated macro for macro_24253 (macro)
+macro_rules! Depcrate_um_d2d1effects_1macro_24253 {
+() => {
+// Module: crate::um::d2d1effects_1
+// Provides: {"macro_24253"}
+// Dependencies: {}
+ENUM ! { enum D2D1_YCBCR_CHROMA_SUBSAMPLING { D2D1_YCBCR_CHROMA_SUBSAMPLING_AUTO = 0 , D2D1_YCBCR_CHROMA_SUBSAMPLING_420 = 1 , D2D1_YCBCR_CHROMA_SUBSAMPLING_422 = 2 , D2D1_YCBCR_CHROMA_SUBSAMPLING_444 = 3 , D2D1_YCBCR_CHROMA_SUBSAMPLING_440 = 4 , D2D1_YCBCR_CHROMA_SUBSAMPLING_FORCE_DWORD = 0xffffffff , } }
+};
+}

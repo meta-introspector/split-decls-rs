@@ -1,0 +1,9 @@
+// Generated macro for PPROCESS_MITIGATION_POLICY_INFORMATION (type)
+macro_rules! Depcrate_ntpsapiPPROCESS_MITIGATION_POLICY_INFORMATION {
+() => {
+// Module: crate::ntpsapi
+// Provides: {"PPROCESS_MITIGATION_POLICY_INFORMATION"}
+// Dependencies: {}
+pub type PPROCESS_MITIGATION_POLICY_INFORMATION = * mut PROCESS_MITIGATION_POLICY_INFORMATION ;
+};
+}

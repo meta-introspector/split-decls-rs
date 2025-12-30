@@ -1,0 +1,53 @@
+// Generated module macro for crate::data
+macro_rules! Modcrate_data {
+() => {
+        Depcrate_datause_45!();
+        Depcrate_datause_46!();
+        Depcrate_dataEvent!();
+        Depcrate_dataimpl_48!();
+        Depcrate_dataimpl_49!();
+        Depcrate_dataITimerSpec!();
+        Depcrate_dataimpl_51!();
+        Depcrate_dataimpl_52!();
+        Depcrate_dataOldMap!();
+        Depcrate_dataimpl_54!();
+        Depcrate_dataimpl_55!();
+        Depcrate_dataMap!();
+        Depcrate_dataimpl_57!();
+        Depcrate_dataimpl_58!();
+        Depcrate_dataPacket!();
+        Depcrate_dataimpl_60!();
+        Depcrate_dataimpl_61!();
+        Depcrate_dataStat!();
+        Depcrate_dataimpl_63!();
+        Depcrate_dataimpl_64!();
+        Depcrate_dataStatVfs!();
+        Depcrate_dataimpl_66!();
+        Depcrate_dataimpl_67!();
+        Depcrate_dataTimeSpec!();
+        Depcrate_dataimpl_69!();
+        Depcrate_dataimpl_70!();
+        Depcrate_dataPtraceEvent!();
+        Depcrate_dataimpl_72!();
+        Depcrate_dataimpl_73!();
+        Depcrate_dataptrace_event!();
+        Depcrate_datamacro_75!();
+        Depcrate_dataimpl_76!();
+        Depcrate_dataGrantDesc!();
+        Depcrate_dataimpl_78!();
+        Depcrate_dataimpl_79!();
+        Depcrate_dataSetSighandlerData!();
+        Depcrate_dataimpl_81!();
+        Depcrate_dataimpl_82!();
+        Depcrate_datause_83!();
+        Depcrate_dataProcSchemeAttrs!();
+        Depcrate_dataimpl_85!();
+        Depcrate_dataimpl_86!();
+        Depcrate_dataCtxtStsBuf!();
+        Depcrate_dataimpl_88!();
+        Depcrate_dataimpl_89!();
+        Depcrate_dataGlobalSchemes!();
+        Depcrate_dataimpl_91!();
+        Depcrate_dataKernelSchemeInfo!();
+    };
+}

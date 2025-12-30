@@ -1,0 +1,9 @@
+// Generated macro for impl_46 (impl)
+macro_rules! Depcrate_configimpl_46 {
+() => {
+// Module: crate::config
+// Provides: {"impl_46"}
+// Dependencies: {}
+impl fmt :: Display for BacktraceFormatter < '_ > { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { write ! (f , "{:━^80}" , " BACKTRACE ") ? ; let frames : Vec < _ > = self . inner . frames () . iter () . flat_map (| frame | frame . symbols ()) . zip (1usize ..) . map (| (sym , n) | Frame { name : sym . name () . map (| x | x . to_string ()) , lineno : sym . lineno () , filename : sym . filename () . map (| x | x . into ()) , n , }) . collect () ; let mut filtered_frames = frames . iter () . collect () ; match env :: var ("COLORBT_SHOW_HIDDEN") . ok () . as_deref () { Some ("1") | Some ("on") | Some ("y") => () , _ => { for filter in self . filters { filter (& mut filtered_frames) ; } } } if filtered_frames . is_empty () { return write ! (f , "\n<empty backtrace>") ; } let mut separated = f . header ("\n") ; filtered_frames . sort_by_key (| x | x . n) ; let mut buf = String :: new () ; macro_rules ! print_hidden { ($ n : expr) => { let n = $ n ; buf . clear () ; write ! (& mut buf , "{decorator} {n} frame{plural} hidden {decorator}" , n = n , plural = if n == 1 { "" } else { "s" } , decorator = "⋮" ,) . expect ("writing to strings doesn't panic") ; write ! (& mut separated . ready () , "{:^80}" , buf . style (self . theme . hidden_frames)) ?; } ; } let mut last_n = 0 ; for frame in & filtered_frames { let frame_delta = frame . n - last_n - 1 ; if frame_delta != 0 { print_hidden ! (frame_delta) ; } write ! (& mut separated . ready () , "{}" , StyledFrame (frame , self . theme)) ? ; last_n = frame . n ; } let last_filtered_n = filtered_frames . last () . unwrap () . n ; let last_unfiltered_n = frames . last () . unwrap () . n ; if last_filtered_n < last_unfiltered_n { print_hidden ! (last_unfiltered_n - last_filtered_n) ; } Ok (()) } }
+};
+}

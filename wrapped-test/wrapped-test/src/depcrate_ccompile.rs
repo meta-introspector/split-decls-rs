@@ -1,0 +1,9 @@
+// Generated macro for compile (function)
+macro_rules! Depcrate_ccompile {
+() => {
+// Module: crate::c
+// Provides: {"compile"}
+// Dependencies: {}
+fn compile (runner : & Runner < '_ > , compile : & Compile < '_ > , compiler : PathBuf) -> Result < () > { let config = compile . component . deserialize_lang_config :: < LangConfig > () ? ; let bindings_object = compile . output . with_extension ("bindings.o") ; let mut cmd = Command :: new (clang (runner)) ; cmd . arg (compile . bindings_dir . join (format ! ("{}.c" , compile . component . bindgen . world)) ,) . arg ("-I") . arg (& compile . bindings_dir) . arg ("-Wall") . arg ("-Wextra") . arg ("-Werror") . arg ("-Wno-unused-parameter") . arg ("-c") . arg ("-o") . arg (& bindings_object) ; for flag in Vec :: from (config . cflags . clone ()) { cmd . arg (flag) ; } runner . run_command (& mut cmd) ? ; let output = if produces_component (runner) { compile . output . to_path_buf () } else { compile . output . with_extension ("core.wasm") } ; let mut cmd = Command :: new (compiler) ; cmd . arg (& compile . component . path) . arg (& bindings_object) . arg (compile . bindings_dir . join (format ! ("{}_component_type.o" , compile . component . bindgen . world))) . arg ("-I") . arg (& compile . bindings_dir) . arg ("-Wall") . arg ("-Wextra") . arg ("-Werror") . arg ("-Wc++-compat") . arg ("-Wno-unused-parameter") . arg ("-g") . arg ("-o") . arg (& output) ; for flag in Vec :: from (config . cflags) { cmd . arg (flag) ; } match compile . component . kind { Kind :: Runner => { } Kind :: Test => { cmd . arg ("-mexec-model=reactor") ; } } runner . run_command (& mut cmd) ? ; if ! produces_component (runner) { runner . convert_p1_to_component (& output , compile) . with_context (| | format ! ("failed to convert {output:?}")) ? ; } Ok (()) }
+};
+}

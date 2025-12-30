@@ -1,0 +1,9 @@
+// Generated macro for impl_63 (impl)
+macro_rules! Depcrate_generatedimpl_63 {
+() => {
+// Module: crate::generated
+// Provides: {"impl_63"}
+// Dependencies: {}
+impl XCTestObserver { extern_methods ! (# [unsafe (method (startObserving))] # [unsafe (method_family = none)] pub fn startObserving (& self) ; # [unsafe (method (stopObserving))] # [unsafe (method_family = none)] pub fn stopObserving (& self) ; # [doc = " # Safety"] # [doc = ""] # [doc = " `test_run` might not allow `None`."] # [unsafe (method (testSuiteDidStart :))] # [unsafe (method_family = none)] pub unsafe fn testSuiteDidStart (& self , test_run : Option <& XCTestRun >) ; # [doc = " # Safety"] # [doc = ""] # [doc = " `test_run` might not allow `None`."] # [unsafe (method (testSuiteDidStop :))] # [unsafe (method_family = none)] pub unsafe fn testSuiteDidStop (& self , test_run : Option <& XCTestRun >) ; # [doc = " # Safety"] # [doc = ""] # [doc = " `test_run` might not allow `None`."] # [unsafe (method (testCaseDidStart :))] # [unsafe (method_family = none)] pub unsafe fn testCaseDidStart (& self , test_run : Option <& XCTestRun >) ; # [doc = " # Safety"] # [doc = ""] # [doc = " `test_run` might not allow `None`."] # [unsafe (method (testCaseDidStop :))] # [unsafe (method_family = none)] pub unsafe fn testCaseDidStop (& self , test_run : Option <& XCTestRun >) ; # [doc = " # Safety"] # [doc = ""] # [doc = " - `test_run` might not allow `None`."] # [doc = " - `description` might not allow `None`."] # [doc = " - `file_path` might not allow `None`."] # [unsafe (method (testCaseDidFail : withDescription : inFile : atLine :))] # [unsafe (method_family = none)] pub unsafe fn testCaseDidFail_withDescription_inFile_atLine (& self , test_run : Option <& XCTestRun >, description : Option <& NSString >, file_path : Option <& NSString >, line_number : NSUInteger ,) ;) ; }
+};
+}

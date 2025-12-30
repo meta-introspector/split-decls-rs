@@ -1,0 +1,9 @@
+// Generated macro for impl_6591 (impl)
+macro_rules! Depcrate_methods_unnecessary_fallible_conversionsimpl_6591 {
+() => {
+// Module: crate::methods::unnecessary_fallible_conversions
+// Provides: {"impl_6591"}
+// Dependencies: {}
+impl FunctionKind { fn appl_sugg (& self , parent_unwrap_call : Option < Span > , primary_span : Span) -> (Applicability , Vec < (Span , String) >) { let Some (unwrap_span) = parent_unwrap_call else { return (Applicability :: Unspecified , self . default_sugg (primary_span)) ; } ; match & self { FunctionKind :: TryFromFunction (None) | FunctionKind :: TryIntoFunction (None) => { (Applicability :: Unspecified , self . default_sugg (primary_span)) } , _ => (Applicability :: MachineApplicable , self . machine_applicable_sugg (primary_span , unwrap_span) ,) , } } fn default_sugg (& self , primary_span : Span) -> Vec < (Span , String) > { let replacement = match * self { FunctionKind :: TryFromFunction (_) => "From::from" , FunctionKind :: TryIntoFunction (_) => "Into::into" , FunctionKind :: TryIntoMethod => "into" , } ; vec ! [(primary_span , String :: from (replacement))] } fn machine_applicable_sugg (& self , primary_span : Span , unwrap_span : Span) -> Vec < (Span , String) > { let (trait_name , fn_name) = match self { FunctionKind :: TryFromFunction (_) => ("From" . to_owned () , "from" . to_owned ()) , FunctionKind :: TryIntoFunction (_) | FunctionKind :: TryIntoMethod => ("Into" . to_owned () , "into" . to_owned ()) , } ; let mut sugg = match * self { FunctionKind :: TryFromFunction (Some (spans)) | FunctionKind :: TryIntoFunction (Some (spans)) => match spans { SpansKind :: TraitFn { trait_span , fn_span } => vec ! [(trait_span , trait_name) , (fn_span , fn_name)] , SpansKind :: Fn { fn_span } => vec ! [(fn_span , fn_name)] , } , FunctionKind :: TryIntoMethod => vec ! [(primary_span , fn_name)] , _ => unreachable ! () , } ; sugg . push ((unwrap_span , String :: new ())) ; sugg } }
+};
+}

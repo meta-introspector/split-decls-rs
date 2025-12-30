@@ -1,0 +1,9 @@
+// Generated macro for impl_2249 (impl)
+macro_rules! Depcrate_mysql_connection_bindimpl_2249 {
+() => {
+// Module: crate::mysql::connection::bind
+// Provides: {"impl_2249"}
+// Dependencies: {}
+impl From < MysqlType > for (ffi :: enum_field_types , Flags) { fn from (tpe : MysqlType) -> Self { use self :: ffi :: enum_field_types ; let mut flags = Flags :: empty () ; let tpe = match tpe { MysqlType :: Tiny => enum_field_types :: MYSQL_TYPE_TINY , MysqlType :: Short => enum_field_types :: MYSQL_TYPE_SHORT , MysqlType :: Long => enum_field_types :: MYSQL_TYPE_LONG , MysqlType :: LongLong => enum_field_types :: MYSQL_TYPE_LONGLONG , MysqlType :: Float => enum_field_types :: MYSQL_TYPE_FLOAT , MysqlType :: Double => enum_field_types :: MYSQL_TYPE_DOUBLE , MysqlType :: Time => enum_field_types :: MYSQL_TYPE_TIME , MysqlType :: Date => enum_field_types :: MYSQL_TYPE_DATE , MysqlType :: DateTime => enum_field_types :: MYSQL_TYPE_DATETIME , MysqlType :: Timestamp => enum_field_types :: MYSQL_TYPE_TIMESTAMP , MysqlType :: String => enum_field_types :: MYSQL_TYPE_STRING , MysqlType :: Blob => enum_field_types :: MYSQL_TYPE_BLOB , MysqlType :: Numeric => enum_field_types :: MYSQL_TYPE_NEWDECIMAL , MysqlType :: Bit => enum_field_types :: MYSQL_TYPE_BIT , MysqlType :: UnsignedTiny => { flags = Flags :: UNSIGNED_FLAG ; enum_field_types :: MYSQL_TYPE_TINY } MysqlType :: UnsignedShort => { flags = Flags :: UNSIGNED_FLAG ; enum_field_types :: MYSQL_TYPE_SHORT } MysqlType :: UnsignedLong => { flags = Flags :: UNSIGNED_FLAG ; enum_field_types :: MYSQL_TYPE_LONG } MysqlType :: UnsignedLongLong => { flags = Flags :: UNSIGNED_FLAG ; enum_field_types :: MYSQL_TYPE_LONGLONG } MysqlType :: Set => { flags = Flags :: SET_FLAG ; enum_field_types :: MYSQL_TYPE_STRING } MysqlType :: Enum => { flags = Flags :: ENUM_FLAG ; enum_field_types :: MYSQL_TYPE_STRING } } ; (tpe , flags) } }
+};
+}

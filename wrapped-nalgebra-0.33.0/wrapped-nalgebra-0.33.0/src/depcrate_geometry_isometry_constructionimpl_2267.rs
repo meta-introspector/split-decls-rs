@@ -1,0 +1,9 @@
+// Generated macro for impl_2267 (impl)
+macro_rules! Depcrate_geometry_isometry_constructionimpl_2267 {
+() => {
+// Module: crate::geometry::isometry_construction
+// Provides: {"impl_2267"}
+// Dependencies: {}
+impl < T : SimdRealField , R : AbstractRotation < T , D > , const D : usize > Isometry < T , R , D > where T :: Element : SimdRealField , { # [doc = " Creates a new identity isometry."] # [doc = ""] # [doc = " # Example"] # [doc = ""] # [doc = " ```"] # [doc = " # use nalgebra::{Isometry2, Point2, Isometry3, Point3};"] # [doc = ""] # [doc = " let iso = Isometry2::identity();"] # [doc = " let pt = Point2::new(1.0, 2.0);"] # [doc = " assert_eq!(iso * pt, pt);"] # [doc = ""] # [doc = " let iso = Isometry3::identity();"] # [doc = " let pt = Point3::new(1.0, 2.0, 3.0);"] # [doc = " assert_eq!(iso * pt, pt);"] # [doc = " ```"] # [inline] pub fn identity () -> Self { Self :: from_parts (Translation :: identity () , R :: identity ()) } # [doc = " The isometry that applies the rotation `r` with its axis passing through the point `p`."] # [doc = " This effectively lets `p` invariant."] # [doc = ""] # [doc = " # Example"] # [doc = ""] # [doc = " ```"] # [doc = " # #[macro_use] extern crate approx;"] # [doc = " # use std::f32;"] # [doc = " # use nalgebra::{Isometry2, Point2, UnitComplex};"] # [doc = " let rot = UnitComplex::new(f32::consts::PI);"] # [doc = " let pt = Point2::new(1.0, 0.0);"] # [doc = " let iso = Isometry2::rotation_wrt_point(rot, pt);"] # [doc = ""] # [doc = " assert_eq!(iso * pt, pt); // The rotation center is not affected."] # [doc = " assert_relative_eq!(iso * Point2::new(1.0, 2.0), Point2::new(1.0, -2.0), epsilon = 1.0e-6);"] # [doc = " ```"] # [inline] pub fn rotation_wrt_point (r : R , p : Point < T , D >) -> Self { let shift = r . transform_vector (& - & p . coords) ; Self :: from_parts (Translation :: from (shift + p . coords) , r) } }
+};
+}

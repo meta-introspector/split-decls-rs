@@ -1,0 +1,9 @@
+// Generated macro for P521_FIELD (const)
+macro_rules! Depcrate_ec_constantsP521_FIELD {
+() => {
+// Module: crate::ec_constants
+// Provides: {"P521_FIELD"}
+// Dependencies: {}
+const P521_FIELD : FieldID < 'static > = FieldID { field_type : asn1 :: DefinedByMarker :: marker () , parameters : FieldParameters :: PrimeField (asn1 :: BigUint :: new (b"\x01\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff") . unwrap ()) , } ;
+};
+}

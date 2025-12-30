@@ -1,0 +1,9 @@
+// Generated macro for impl_1102 (impl)
+macro_rules! Depcrate_x509_verify_extension_policyimpl_1102 {
+() => {
+// Module: crate::x509::verify::extension_policy
+// Provides: {"impl_1102"}
+// Dependencies: {}
+impl PyExtensionPolicy { pub (super) fn clone_inner_policy (& self) -> ExtensionPolicy < 'static , PyCryptoOps > { self . inner_policy . clone () } fn new (inner_policy : ExtensionPolicy < 'static , PyCryptoOps >) -> Self { PyExtensionPolicy { inner_policy , already_set_oids : HashSet :: new () , } } fn with_assigned_validator (& self , validator : ExtensionValidator < 'static , PyCryptoOps > ,) -> PyResult < PyExtensionPolicy > { let oid = match & validator { ExtensionValidator :: NotPresent { oid } => oid , ExtensionValidator :: MaybePresent { oid , .. } => oid , ExtensionValidator :: Present { oid , .. } => oid , } . clone () ; if self . already_set_oids . contains (& oid) { return Err (pyo3 :: exceptions :: PyValueError :: new_err (format ! ("ExtensionPolicy already configured for extension with OID {oid}"))) ; } let mut policy = self . inner_policy . clone () ; match oid { AUTHORITY_INFORMATION_ACCESS_OID => policy . authority_information_access = validator , AUTHORITY_KEY_IDENTIFIER_OID => policy . authority_key_identifier = validator , SUBJECT_KEY_IDENTIFIER_OID => policy . subject_key_identifier = validator , KEY_USAGE_OID => policy . key_usage = validator , SUBJECT_ALTERNATIVE_NAME_OID => policy . subject_alternative_name = validator , BASIC_CONSTRAINTS_OID => policy . basic_constraints = validator , NAME_CONSTRAINTS_OID => policy . name_constraints = validator , EXTENDED_KEY_USAGE_OID => policy . extended_key_usage = validator , _ => { return Err (pyo3 :: exceptions :: PyValueError :: new_err (format ! ("Unsupported extension OID: {oid}" ,))) } } let mut already_set_oids = self . already_set_oids . clone () ; already_set_oids . insert (oid) ; Ok (PyExtensionPolicy { inner_policy : policy , already_set_oids , }) } }
+};
+}

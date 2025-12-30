@@ -1,0 +1,43 @@
+// Generated module macro for crate::imp::com_bindings
+macro_rules! Modcrate_imp_com_bindings {
+() => {
+        Depcrate_imp_com_bindingsRoGetAgileReference!();
+        Depcrate_imp_com_bindingsAGILEREFERENCE_DEFAULT!();
+        Depcrate_imp_com_bindingsAgileReferenceOptions!();
+        Depcrate_imp_com_bindingsCO_E_NOTINITIALIZED!();
+        Depcrate_imp_com_bindingsE_INVALIDARG!();
+        Depcrate_imp_com_bindingsE_NOINTERFACE!();
+        Depcrate_imp_com_bindingsE_POINTER!();
+        Depcrate_imp_com_bindingsmacro_43!();
+        Depcrate_imp_com_bindingsmacro_44!();
+        Depcrate_imp_com_bindingsIAgileObject_Vtbl!();
+        Depcrate_imp_com_bindingsIAgileObject_Impl!();
+        Depcrate_imp_com_bindingsimpl_47!();
+        Depcrate_imp_com_bindingsimpl_48!();
+        Depcrate_imp_com_bindingsmacro_49!();
+        Depcrate_imp_com_bindingsmacro_50!();
+        Depcrate_imp_com_bindingsimpl_51!();
+        Depcrate_imp_com_bindingsIAgileReference_Vtbl!();
+        Depcrate_imp_com_bindingsIAgileReference_Impl!();
+        Depcrate_imp_com_bindingsimpl_54!();
+        Depcrate_imp_com_bindingsimpl_55!();
+        Depcrate_imp_com_bindingsmacro_56!();
+        Depcrate_imp_com_bindingsmacro_57!();
+        Depcrate_imp_com_bindingsimpl_58!();
+        Depcrate_imp_com_bindingsIWeakReference_Vtbl!();
+        Depcrate_imp_com_bindingsIWeakReference_Impl!();
+        Depcrate_imp_com_bindingsimpl_61!();
+        Depcrate_imp_com_bindingsimpl_62!();
+        Depcrate_imp_com_bindingsmacro_63!();
+        Depcrate_imp_com_bindingsmacro_64!();
+        Depcrate_imp_com_bindingsimpl_65!();
+        Depcrate_imp_com_bindingsIWeakReferenceSource_Vtbl!();
+        Depcrate_imp_com_bindingsIWeakReferenceSource_Impl!();
+        Depcrate_imp_com_bindingsimpl_68!();
+        Depcrate_imp_com_bindingsimpl_69!();
+        Depcrate_imp_com_bindingsJSCRIPT_E_CANTEXECUTE!();
+        Depcrate_imp_com_bindingsREGDB_E_CLASSNOTREG!();
+        Depcrate_imp_com_bindingsRPC_E_DISCONNECTED!();
+        Depcrate_imp_com_bindingsS_OK!();
+    };
+}

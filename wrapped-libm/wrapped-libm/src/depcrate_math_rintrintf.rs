@@ -1,0 +1,9 @@
+// Generated macro for rintf (function)
+macro_rules! Depcrate_math_rintrintf {
+() => {
+// Module: crate::math::rint
+// Provides: {"rintf"}
+// Dependencies: {}
+# [doc = " Round `x` to the nearest integer, breaking ties toward even."] # [cfg_attr (assert_no_panic , no_panic :: no_panic)] pub fn rintf (x : f32) -> f32 { select_implementation ! { name : rintf , use_arch : any (all (target_arch = "aarch64" , target_feature = "neon") , all (target_arch = "wasm32" , intrinsics_enabled) ,) , args : x , } super :: generic :: rint_round (x , Round :: Nearest) . val }
+};
+}

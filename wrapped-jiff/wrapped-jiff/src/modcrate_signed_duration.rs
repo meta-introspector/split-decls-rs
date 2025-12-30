@@ -1,0 +1,49 @@
+// Generated module macro for crate::signed_duration
+macro_rules! Modcrate_signed_duration {
+() => {
+        Depcrate_signed_durationuse_697!();
+        Depcrate_signed_durationuse_698!();
+        Depcrate_signed_durationuse_699!();
+        Depcrate_signed_durationNANOS_PER_SEC!();
+        Depcrate_signed_durationNANOS_PER_MILLI!();
+        Depcrate_signed_durationNANOS_PER_MICRO!();
+        Depcrate_signed_durationMILLIS_PER_SEC!();
+        Depcrate_signed_durationMICROS_PER_SEC!();
+        Depcrate_signed_durationSECS_PER_MINUTE!();
+        Depcrate_signed_durationMINS_PER_HOUR!();
+        Depcrate_signed_durationSignedDuration!();
+        Depcrate_signed_durationimpl_708!();
+        Depcrate_signed_durationimpl_709!();
+        Depcrate_signed_durationimpl_710!();
+        Depcrate_signed_durationimpl_711!();
+        Depcrate_signed_durationimpl_712!();
+        Depcrate_signed_durationimpl_713!();
+        Depcrate_signed_durationimpl_714!();
+        Depcrate_signed_durationimpl_715!();
+        Depcrate_signed_durationimpl_716!();
+        Depcrate_signed_durationimpl_717!();
+        Depcrate_signed_durationimpl_718!();
+        Depcrate_signed_durationimpl_719!();
+        Depcrate_signed_durationimpl_720!();
+        Depcrate_signed_durationimpl_721!();
+        Depcrate_signed_durationimpl_722!();
+        Depcrate_signed_durationimpl_723!();
+        Depcrate_signed_durationimpl_724!();
+        Depcrate_signed_durationimpl_725!();
+        Depcrate_signed_durationimpl_726!();
+        Depcrate_signed_durationimpl_727!();
+        Depcrate_signed_durationimpl_728!();
+        Depcrate_signed_durationimpl_729!();
+        Depcrate_signed_durationimpl_730!();
+        Depcrate_signed_durationimpl_731!();
+        Depcrate_signed_durationimpl_732!();
+        Depcrate_signed_durationimpl_733!();
+        Depcrate_signed_durationSignedDurationRound!();
+        Depcrate_signed_durationimpl_735!();
+        Depcrate_signed_durationimpl_736!();
+        Depcrate_signed_durationimpl_737!();
+        Depcrate_signed_durationimpl_738!();
+        Depcrate_signed_durationparse_iso_or_friendly!();
+        Depcrate_signed_durationtests!();
+    };
+}

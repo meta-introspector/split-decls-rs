@@ -1,0 +1,9 @@
+// Generated macro for macro_8933 (macro)
+macro_rules! Depcrate_rangesmacro_8933 {
+() => {
+// Module: crate::ranges
+// Provides: {"macro_8933"}
+// Dependencies: {}
+declare_clippy_lint ! { # [doc = " ### What it does"] # [doc = " Checks for exclusive ranges where 1 is added to the"] # [doc = " upper bound, e.g., `x..(y+1)`."] # [doc = ""] # [doc = " ### Why is this bad?"] # [doc = " The code is more readable with an inclusive range"] # [doc = " like `x..=y`."] # [doc = ""] # [doc = " ### Limitations"] # [doc = " The lint is conservative and will trigger only when switching"] # [doc = " from an exclusive to an inclusive range is provably safe from"] # [doc = " a typing point of view. This corresponds to situations where"] # [doc = " the range is used as an iterator, or for indexing."] # [doc = ""] # [doc = " ### Known problems"] # [doc = " Will add unnecessary pair of parentheses when the"] # [doc = " expression is not wrapped in a pair but starts with an opening parenthesis"] # [doc = " and ends with a closing one."] # [doc = " I.e., `let _ = (f()+1)..(f()+1)` results in `let _ = ((f()+1)..=f())`."] # [doc = ""] # [doc = " Also in many cases, inclusive ranges are still slower to run than"] # [doc = " exclusive ranges, because they essentially add an extra branch that"] # [doc = " LLVM may fail to hoist out of the loop."] # [doc = ""] # [doc = " ### Example"] # [doc = " ```no_run"] # [doc = " # let x = 0;"] # [doc = " # let y = 1;"] # [doc = " for i in x..(y+1) {"] # [doc = "     // .."] # [doc = " }"] # [doc = " ```"] # [doc = ""] # [doc = " Use instead:"] # [doc = " ```no_run"] # [doc = " # let x = 0;"] # [doc = " # let y = 1;"] # [doc = " for i in x..=y {"] # [doc = "     // .."] # [doc = " }"] # [doc = " ```"] # [clippy :: version = "pre 1.29.0"] pub RANGE_PLUS_ONE , pedantic , "`x..(y+1)` reads better as `x..=y`" }
+};
+}

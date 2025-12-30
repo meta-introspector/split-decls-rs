@@ -1,0 +1,44 @@
+// Generated module macro for crate::fs::mem
+macro_rules! Modcrate_fs_mem {
+() => {
+        Depcrate_fs_memuse_1115!();
+        Depcrate_fs_memuse_1116!();
+        Depcrate_fs_memuse_1117!();
+        Depcrate_fs_memuse_1118!();
+        Depcrate_fs_memuse_1119!();
+        Depcrate_fs_memuse_1120!();
+        Depcrate_fs_memuse_1121!();
+        Depcrate_fs_memuse_1122!();
+        Depcrate_fs_memuse_1123!();
+        Depcrate_fs_memuse_1124!();
+        Depcrate_fs_memuse_1125!();
+        Depcrate_fs_memuse_1126!();
+        Depcrate_fs_memuse_1127!();
+        Depcrate_fs_memuse_1128!();
+        Depcrate_fs_memuse_1129!();
+        Depcrate_fs_memuse_1130!();
+        Depcrate_fs_memuse_1131!();
+        Depcrate_fs_memRomFileInner!();
+        Depcrate_fs_memimpl_1133!();
+        Depcrate_fs_memRomFileInterface!();
+        Depcrate_fs_memimpl_1135!();
+        Depcrate_fs_memimpl_1136!();
+        Depcrate_fs_memRamFileInner!();
+        Depcrate_fs_memimpl_1138!();
+        Depcrate_fs_memRamFileInterface!();
+        Depcrate_fs_memimpl_1140!();
+        Depcrate_fs_memimpl_1141!();
+        Depcrate_fs_memRomFile!();
+        Depcrate_fs_memimpl_1143!();
+        Depcrate_fs_memimpl_1144!();
+        Depcrate_fs_memRamFile!();
+        Depcrate_fs_memimpl_1146!();
+        Depcrate_fs_memimpl_1147!();
+        Depcrate_fs_memMemDirectoryInterface!();
+        Depcrate_fs_memimpl_1149!();
+        Depcrate_fs_memimpl_1150!();
+        Depcrate_fs_memMemDirectory!();
+        Depcrate_fs_memimpl_1152!();
+        Depcrate_fs_memimpl_1153!();
+    };
+}

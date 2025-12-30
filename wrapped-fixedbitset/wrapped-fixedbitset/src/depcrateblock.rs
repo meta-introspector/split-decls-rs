@@ -1,9 +1,9 @@
-// Generated macro for Block (type)
-macro_rules! DepcrateBlock {
+// Generated macro for block (module)
+macro_rules! Depcrateblock {
 () => {
 // Module: crate
-// Provides: {"Block"}
+// Provides: {"block"}
 // Dependencies: {}
-pub type Block = usize ;
+mod block ;
 };
 }

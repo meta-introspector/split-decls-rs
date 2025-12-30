@@ -1,0 +1,9 @@
+// Generated macro for SV_SHARINGVIOLATIONDELAY_INFOLOEVEL (const)
+macro_rules! Depcrate_um_lmserverSV_SHARINGVIOLATIONDELAY_INFOLOEVEL {
+() => {
+// Module: crate::um::lmserver
+// Provides: {"SV_SHARINGVIOLATIONDELAY_INFOLOEVEL"}
+// Dependencies: {}
+pub const SV_SHARINGVIOLATIONDELAY_INFOLOEVEL : DWORD = PARMNUM_BASE_INFOLEVEL + SV_SHARINGVIOLATIONDELAY_PARMNUM ;
+};
+}

@@ -1,0 +1,43 @@
+// Generated module macro for crate::thread::atomics::audio_worklet::register
+macro_rules! Modcrate_thread_atomics_audio_worklet_register {
+() => {
+        Depcrate_thread_atomics_audio_worklet_registermessage!();
+        Depcrate_thread_atomics_audio_worklet_registeruse_63!();
+        Depcrate_thread_atomics_audio_worklet_registeruse_64!();
+        Depcrate_thread_atomics_audio_worklet_registeruse_65!();
+        Depcrate_thread_atomics_audio_worklet_registeruse_66!();
+        Depcrate_thread_atomics_audio_worklet_registeruse_67!();
+        Depcrate_thread_atomics_audio_worklet_registeruse_68!();
+        Depcrate_thread_atomics_audio_worklet_registeruse_69!();
+        Depcrate_thread_atomics_audio_worklet_registeruse_70!();
+        Depcrate_thread_atomics_audio_worklet_registeruse_71!();
+        Depcrate_thread_atomics_audio_worklet_registeruse_72!();
+        Depcrate_thread_atomics_audio_worklet_registeruse_73!();
+        Depcrate_thread_atomics_audio_worklet_registeruse_74!();
+        Depcrate_thread_atomics_audio_worklet_registeruse_75!();
+        Depcrate_thread_atomics_audio_worklet_registeruse_76!();
+        Depcrate_thread_atomics_audio_worklet_registeruse_77!();
+        Depcrate_thread_atomics_audio_worklet_registeruse_78!();
+        Depcrate_thread_atomics_audio_worklet_registeruse_79!();
+        Depcrate_thread_atomics_audio_worklet_registeruse_80!();
+        Depcrate_thread_atomics_audio_worklet_registeruse_81!();
+        Depcrate_thread_atomics_audio_worklet_registeruse_82!();
+        Depcrate_thread_atomics_audio_worklet_registeruse_83!();
+        Depcrate_thread_atomics_audio_worklet_registeruse_84!();
+        Depcrate_thread_atomics_audio_worklet_registerTask!();
+        Depcrate_thread_atomics_audio_worklet_registerWORKLET_LOCK!();
+        Depcrate_thread_atomics_audio_worklet_registerWORKER_LOCK!();
+        Depcrate_thread_atomics_audio_worklet_registermacro_88!();
+        Depcrate_thread_atomics_audio_worklet_registerregister_thread!();
+        Depcrate_thread_atomics_audio_worklet_registerregister_thread_internal!();
+        Depcrate_thread_atomics_audio_worklet_registerRegisterThreadFuture!();
+        Depcrate_thread_atomics_audio_worklet_registerState!();
+        Depcrate_thread_atomics_audio_worklet_registerimpl_93!();
+        Depcrate_thread_atomics_audio_worklet_registerimpl_94!();
+        Depcrate_thread_atomics_audio_worklet_registerimpl_95!();
+        Depcrate_thread_atomics_audio_worklet_registerimpl_96!();
+        Depcrate_thread_atomics_audio_worklet_registerAudioWorkletHandle!();
+        Depcrate_thread_atomics_audio_worklet_registerimpl_98!();
+        Depcrate_thread_atomics_audio_worklet_register__web_thread_worklet_entry!();
+    };
+}

@@ -1,0 +1,9 @@
+// Generated macro for syntax_node_to_token_tree_modified (function)
+macro_rules! Depcratesyntax_node_to_token_tree_modified {
+() => {
+// Module: crate
+// Provides: {"syntax_node_to_token_tree_modified"}
+// Dependencies: {}
+# [doc = " Converts a syntax tree to a [`tt::Subtree`] using the provided span map to populate the"] # [doc = " subtree's spans. Additionally using the append and remove parameters, the additional tokens can"] # [doc = " be injected or hidden from the output."] pub fn syntax_node_to_token_tree_modified < Ctx , SpanMap > (node : & SyntaxNode , map : SpanMap , append : FxHashMap < SyntaxElement , Vec < tt :: Leaf < SpanData < Ctx > > > > , remove : FxHashSet < SyntaxElement > , call_site : SpanData < Ctx > , mode : DocCommentDesugarMode ,) -> tt :: TopSubtree < SpanData < Ctx > > where SpanMap : SpanMapper < SpanData < Ctx > > , SpanData < Ctx > : Copy + fmt :: Debug , { let mut c = Converter :: new (node , map , append , remove , call_site , mode) ; convert_tokens (& mut c) }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for set_handler (function)
+macro_rules! Depcrateset_handler {
+() => {
+// Module: crate
+// Provides: {"set_handler"}
+// Dependencies: {}
+# [doc = " Register signal handler for Ctrl-C."] # [doc = ""] # [doc = " Starts a new dedicated signal handling thread. Should only be called once,"] # [doc = " typically at the start of your program."] # [doc = ""] # [doc = " # Example"] # [doc = " ```no_run"] # [doc = " ctrlc::set_handler(|| println!(\"Hello world!\")).expect(\"Error setting Ctrl-C handler\");"] # [doc = " ```"] # [doc = ""] # [doc = " # Warning"] # [doc = " On Unix, the handler registration for `SIGINT`, (`SIGTERM` and `SIGHUP` if termination feature"] # [doc = " is enabled) or `SA_SIGINFO` posix signal handlers will be overwritten. On Windows, multiple"] # [doc = " handler routines are allowed, but they are called on a last-registered, first-called basis"] # [doc = " until the signal is handled."] # [doc = ""] # [doc = " ctrlc::try_set_handler will error (on Unix) if another signal handler exists for the same"] # [doc = " signal(s) that ctrlc is trying to attach the handler to."] # [doc = ""] # [doc = " On Unix, signal dispositions and signal handlers are inherited by child processes created via"] # [doc = " `fork(2)` on, but not by child processes created via `execve(2)`."] # [doc = " Signal handlers are not inherited on Windows."] # [doc = ""] # [doc = " # Errors"] # [doc = " Will return an error if a system error occurred while setting the handler."] # [doc = ""] # [doc = " # Panics"] # [doc = " Any panic in the handler will not be caught and will cause the signal handler thread to stop."] pub fn set_handler < F > (user_handler : F) -> Result < () , Error > where F : FnMut () + 'static + Send , { init_and_set_handler (user_handler , true) }
+};
+}

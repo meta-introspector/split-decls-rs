@@ -1,0 +1,9 @@
+// Generated macro for user_provided_boring_ctx (function)
+macro_rules! Depcrate_testsuser_provided_boring_ctx {
+() => {
+// Module: crate::tests
+// Provides: {"user_provided_boring_ctx"}
+// Dependencies: {}
+# [cfg (feature = "boringssl-boring-crate")] # [rstest] fn user_provided_boring_ctx (# [values ("cubic" , "bbr2" , "bbr2_gcongestion")] cc_algorithm_name : & str ,) -> Result < () > { let mut server_tls_ctx_builder = boring :: ssl :: SslContextBuilder :: new (boring :: ssl :: SslMethod :: tls ()) . unwrap () ; server_tls_ctx_builder . set_certificate_chain_file ("examples/cert.crt") . unwrap () ; server_tls_ctx_builder . set_private_key_file ("examples/cert.key" , boring :: ssl :: SslFiletype :: PEM) . unwrap () ; let mut server_config = Config :: with_boring_ssl_ctx_builder (PROTOCOL_VERSION , server_tls_ctx_builder ,) ? ; let mut client_config = Config :: new (PROTOCOL_VERSION) ? ; assert_eq ! (client_config . set_cc_algorithm_name (cc_algorithm_name) , Ok (())) ; client_config . load_cert_chain_from_pem_file ("examples/cert.crt") ? ; client_config . load_priv_key_from_pem_file ("examples/cert.key") ? ; for config in [& mut client_config , & mut server_config] { config . set_application_protos (& [b"proto1" , b"proto2"]) ? ; config . set_initial_max_data (30) ; config . set_initial_max_stream_data_bidi_local (15) ; config . set_initial_max_stream_data_bidi_remote (15) ; config . set_initial_max_stream_data_uni (10) ; config . set_initial_max_streams_bidi (3) ; config . set_initial_max_streams_uni (3) ; config . set_max_idle_timeout (180_000) ; config . verify_peer (false) ; config . set_ack_delay_exponent (8) ; } let mut pipe = test_utils :: Pipe :: with_client_and_server_config (& mut client_config , & mut server_config ,) ? ; assert_eq ! (pipe . handshake () , Ok (())) ; Ok (()) }
+};
+}

@@ -1,0 +1,49 @@
+// Generated module macro for crate::base
+macro_rules! Modcrate_base {
+() => {
+        Depcrate_baseuse_42!();
+        Depcrate_baseuse_43!();
+        Depcrate_baseuse_44!();
+        Depcrate_baseBoolean!();
+        Depcrate_basemach_port_t!();
+        Depcrate_baseCFAllocatorRef!();
+        Depcrate_baseCFNullRef!();
+        Depcrate_baseCFTypeRef!();
+        Depcrate_baseConstStr255Param!();
+        Depcrate_baseStringPtr!();
+        Depcrate_baseConstStringPtr!();
+        Depcrate_baseOSStatus!();
+        Depcrate_baseUInt8!();
+        Depcrate_baseUInt16!();
+        Depcrate_baseSInt16!();
+        Depcrate_baseSInt32!();
+        Depcrate_baseUInt32!();
+        Depcrate_baseCFTypeID!();
+        Depcrate_baseCFOptionFlags!();
+        Depcrate_baseCFHashCode!();
+        Depcrate_baseCFIndex!();
+        Depcrate_baseLangCode!();
+        Depcrate_baseRegionCode!();
+        Depcrate_baseUTF32Char!();
+        Depcrate_baseUTF16Char!();
+        Depcrate_baseUTF8Char!();
+        Depcrate_baseCFComparisonResult!();
+        Depcrate_baseCFComparatorFunction!();
+        Depcrate_baseimpl_70!();
+        Depcrate_baseCFRange!();
+        Depcrate_baseimpl_72!();
+        Depcrate_baseCFAllocatorRetainCallBack!();
+        Depcrate_baseCFAllocatorReleaseCallBack!();
+        Depcrate_baseCFAllocatorCopyDescriptionCallBack!();
+        Depcrate_baseCFAllocatorAllocateCallBack!();
+        Depcrate_baseCFAllocatorReallocateCallBack!();
+        Depcrate_baseCFAllocatorDeallocateCallBack!();
+        Depcrate_baseCFAllocatorPreferredSizeCallBack!();
+        Depcrate_baseCFAllocatorContext!();
+        Depcrate_baseTCFTypeRef!();
+        Depcrate_baseimpl_82!();
+        Depcrate_baseimpl_83!();
+        Depcrate_basekCFNotFound!();
+        Depcrate_baseother_85!();
+    };
+}

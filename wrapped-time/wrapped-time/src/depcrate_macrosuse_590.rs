@@ -1,0 +1,9 @@
+// Generated macro for use_590 (pub_use)
+macro_rules! Depcrate_macrosuse_590 {
+() => {
+// Module: crate::macros
+// Provides: {"use_590"}
+// Dependencies: {}
+# [doc = " Construct a [`Time`](crate::Time) with a statically known value."] # [doc = ""] # [doc = " The resulting expression can be used in `const` or `static` declarations."] # [doc = ""] # [doc = " Hours and minutes must be provided, while seconds defaults to zero. AM/PM is allowed"] # [doc = " (either uppercase or lowercase). Any number of subsecond digits may be provided (though any"] # [doc = " past nine will be discarded)."] # [doc = ""] # [doc = " All components are validated at compile-time. An error will be raised if any value is"] # [doc = " invalid."] # [doc = ""] # [doc = " ```rust"] # [doc = " # use time::{Time, macros::time};"] # [doc = " assert_eq!(time!(0:00), Time::from_hms(0, 0, 0)?);"] # [doc = " assert_eq!(time!(1:02:03), Time::from_hms(1, 2, 3)?);"] # [doc = " assert_eq!("] # [doc = "     time!(1:02:03.004_005_006),"] # [doc = "     Time::from_hms_nano(1, 2, 3, 4_005_006)?"] # [doc = " );"] # [doc = " assert_eq!(time!(12:00 am), Time::from_hms(0, 0, 0)?);"] # [doc = " assert_eq!(time!(1:02:03 am), Time::from_hms(1, 2, 3)?);"] # [doc = " assert_eq!("] # [doc = "     time!(1:02:03.004_005_006 am),"] # [doc = "     Time::from_hms_nano(1, 2, 3, 4_005_006)?"] # [doc = " );"] # [doc = " assert_eq!(time!(12 pm), Time::from_hms(12, 0, 0)?);"] # [doc = " assert_eq!(time!(12:00 pm), Time::from_hms(12, 0, 0)?);"] # [doc = " assert_eq!(time!(1:02:03 pm), Time::from_hms(13, 2, 3)?);"] # [doc = " assert_eq!("] # [doc = "     time!(1:02:03.004_005_006 pm),"] # [doc = "     Time::from_hms_nano(13, 2, 3, 4_005_006)?"] # [doc = " );"] # [doc = " # Ok::<_, time::Error>(())"] # [doc = " ```"] pub use time_macros :: time ;
+};
+}

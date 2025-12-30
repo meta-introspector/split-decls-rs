@@ -1,0 +1,9 @@
+// Generated macro for macro_16 (macro)
+macro_rules! Depcratemacro_16 {
+() => {
+// Module: crate
+// Provides: {"macro_16"}
+// Dependencies: {}
+zipmap_impl ! (u32x4x4 , u32x4 , Add , add) ;
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for impl_144 (impl)
+macro_rules! Depcrateimpl_144 {
+() => {
+// Module: crate
+// Provides: {"impl_144"}
+// Dependencies: {}
+impl < T > Match < T > { # [doc = " Returns true if the match result didn't match any globs."] pub fn is_none (& self) -> bool { match * self { Match :: None => true , Match :: Ignore (_) | Match :: Whitelist (_) => false , } } # [doc = " Returns true if the match result implies the path should be ignored."] pub fn is_ignore (& self) -> bool { match * self { Match :: Ignore (_) => true , Match :: None | Match :: Whitelist (_) => false , } } # [doc = " Returns true if the match result implies the path should be"] # [doc = " whitelisted."] pub fn is_whitelist (& self) -> bool { match * self { Match :: Whitelist (_) => true , Match :: None | Match :: Ignore (_) => false , } } # [doc = " Inverts the match so that `Ignore` becomes `Whitelist` and"] # [doc = " `Whitelist` becomes `Ignore`. A non-match remains the same."] pub fn invert (self) -> Match < T > { match self { Match :: None => Match :: None , Match :: Ignore (t) => Match :: Whitelist (t) , Match :: Whitelist (t) => Match :: Ignore (t) , } } # [doc = " Return the value inside this match if it exists."] pub fn inner (& self) -> Option < & T > { match * self { Match :: None => None , Match :: Ignore (ref t) => Some (t) , Match :: Whitelist (ref t) => Some (t) , } } # [doc = " Apply the given function to the value inside this match."] # [doc = ""] # [doc = " If the match has no value, then return the match unchanged."] pub fn map < U , F : FnOnce (T) -> U > (self , f : F) -> Match < U > { match self { Match :: None => Match :: None , Match :: Ignore (t) => Match :: Ignore (f (t)) , Match :: Whitelist (t) => Match :: Whitelist (f (t)) , } } # [doc = " Return the match if it is not none. Otherwise, return other."] pub fn or (self , other : Self) -> Self { if self . is_none () { other } else { self } } }
+};
+}

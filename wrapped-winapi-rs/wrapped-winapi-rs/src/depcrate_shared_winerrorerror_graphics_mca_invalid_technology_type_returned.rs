@@ -1,0 +1,9 @@
+// Generated macro for ERROR_GRAPHICS_MCA_INVALID_TECHNOLOGY_TYPE_RETURNED (const)
+macro_rules! Depcrate_shared_winerrorERROR_GRAPHICS_MCA_INVALID_TECHNOLOGY_TYPE_RETURNED {
+() => {
+// Module: crate::shared::winerror
+// Provides: {"ERROR_GRAPHICS_MCA_INVALID_TECHNOLOGY_TYPE_RETURNED"}
+// Dependencies: {}
+pub const ERROR_GRAPHICS_MCA_INVALID_TECHNOLOGY_TYPE_RETURNED : HRESULT = 0xC02625DE ;
+};
+}

@@ -1,0 +1,54 @@
+// Generated module macro for crate::drivers::net::virtio
+macro_rules! Modcrate_drivers_net_virtio {
+() => {
+        Depcrate_drivers_net_virtiomacro_389!();
+        Depcrate_drivers_net_virtiouse_390!();
+        Depcrate_drivers_net_virtiouse_391!();
+        Depcrate_drivers_net_virtiouse_392!();
+        Depcrate_drivers_net_virtiouse_393!();
+        Depcrate_drivers_net_virtiouse_394!();
+        Depcrate_drivers_net_virtiouse_395!();
+        Depcrate_drivers_net_virtiouse_396!();
+        Depcrate_drivers_net_virtiouse_397!();
+        Depcrate_drivers_net_virtiouse_398!();
+        Depcrate_drivers_net_virtiouse_399!();
+        Depcrate_drivers_net_virtiouse_400!();
+        Depcrate_drivers_net_virtiouse_401!();
+        Depcrate_drivers_net_virtiouse_402!();
+        Depcrate_drivers_net_virtiouse_403!();
+        Depcrate_drivers_net_virtiouse_404!();
+        Depcrate_drivers_net_virtiouse_405!();
+        Depcrate_drivers_net_virtiouse_406!();
+        Depcrate_drivers_net_virtiouse_407!();
+        Depcrate_drivers_net_virtiouse_408!();
+        Depcrate_drivers_net_virtiouse_409!();
+        Depcrate_drivers_net_virtiouse_410!();
+        Depcrate_drivers_net_virtiouse_411!();
+        Depcrate_drivers_net_virtiouse_412!();
+        Depcrate_drivers_net_virtioNetDevCfg!();
+        Depcrate_drivers_net_virtiodetermine_mtu!();
+        Depcrate_drivers_net_virtiodetermine_rx_buf_size!();
+        Depcrate_drivers_net_virtioRxQueues!();
+        Depcrate_drivers_net_virtioimpl_417!();
+        Depcrate_drivers_net_virtiobuffer_token_from_hdr!();
+        Depcrate_drivers_net_virtiofill_queue!();
+        Depcrate_drivers_net_virtioTxQueues!();
+        Depcrate_drivers_net_virtioimpl_421!();
+        Depcrate_drivers_net_virtioUninit!();
+        Depcrate_drivers_net_virtioInit!();
+        Depcrate_drivers_net_virtioVirtioNetDriver!();
+        Depcrate_drivers_net_virtioTxToken!();
+        Depcrate_drivers_net_virtioimpl_426!();
+        Depcrate_drivers_net_virtioimpl_427!();
+        Depcrate_drivers_net_virtioRxToken!();
+        Depcrate_drivers_net_virtioimpl_429!();
+        Depcrate_drivers_net_virtioimpl_430!();
+        Depcrate_drivers_net_virtioimpl_431!();
+        Depcrate_drivers_net_virtioimpl_432!();
+        Depcrate_drivers_net_virtioimpl_433!();
+        Depcrate_drivers_net_virtioimpl_434!();
+        Depcrate_drivers_net_virtioconstants!();
+        Depcrate_drivers_net_virtioerror!();
+        Depcrate_drivers_net_virtiopartial_checksum!();
+    };
+}

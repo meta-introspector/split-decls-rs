@@ -1,0 +1,45 @@
+// Generated module macro for crate::tls_stream
+macro_rules! Modcrate_tls_stream {
+() => {
+        Depcrate_tls_streamuse_154!();
+        Depcrate_tls_streamuse_155!();
+        Depcrate_tls_streamuse_156!();
+        Depcrate_tls_streamuse_157!();
+        Depcrate_tls_streamuse_158!();
+        Depcrate_tls_streamuse_159!();
+        Depcrate_tls_streamuse_160!();
+        Depcrate_tls_streamuse_161!();
+        Depcrate_tls_streamuse_162!();
+        Depcrate_tls_streamuse_163!();
+        Depcrate_tls_streamuse_164!();
+        Depcrate_tls_streamuse_165!();
+        Depcrate_tls_streamuse_166!();
+        Depcrate_tls_streamuse_167!();
+        Depcrate_tls_streamuse_168!();
+        Depcrate_tls_streamuse_169!();
+        Depcrate_tls_streamuse_170!();
+        Depcrate_tls_streamuse_171!();
+        Depcrate_tls_streamuse_172!();
+        Depcrate_tls_streamuse_173!();
+        Depcrate_tls_streamBuilder!();
+        Depcrate_tls_streamimpl_175!();
+        Depcrate_tls_streamimpl_176!();
+        Depcrate_tls_streamState!();
+        Depcrate_tls_streamTlsStream!();
+        Depcrate_tls_stream_is_sync!();
+        Depcrate_tls_streamHandshakeError!();
+        Depcrate_tls_streamCertValidationResult!();
+        Depcrate_tls_streamimpl_182!();
+        Depcrate_tls_streamimpl_183!();
+        Depcrate_tls_streamimpl_184!();
+        Depcrate_tls_streamMidHandshakeTlsStream!();
+        Depcrate_tls_streamimpl_186!();
+        Depcrate_tls_streamimpl_187!();
+        Depcrate_tls_streamimpl_188!();
+        Depcrate_tls_streamimpl_189!();
+        Depcrate_tls_streamimpl_190!();
+        Depcrate_tls_streamimpl_191!();
+        Depcrate_tls_streamimpl_192!();
+        Depcrate_tls_streamimpl_193!();
+    };
+}

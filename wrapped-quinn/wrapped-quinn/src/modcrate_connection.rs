@@ -1,0 +1,55 @@
+// Generated module macro for crate::connection
+macro_rules! Modcrate_connection {
+() => {
+        Depcrate_connectionuse_3!();
+        Depcrate_connectionuse_4!();
+        Depcrate_connectionuse_5!();
+        Depcrate_connectionuse_6!();
+        Depcrate_connectionuse_7!();
+        Depcrate_connectionuse_8!();
+        Depcrate_connectionuse_9!();
+        Depcrate_connectionuse_10!();
+        Depcrate_connectionuse_11!();
+        Depcrate_connectionConnecting!();
+        Depcrate_connectionimpl_13!();
+        Depcrate_connectionimpl_14!();
+        Depcrate_connectionZeroRttAccepted!();
+        Depcrate_connectionimpl_16!();
+        Depcrate_connectionConnectionDriver!();
+        Depcrate_connectionimpl_18!();
+        Depcrate_connectionConnection!();
+        Depcrate_connectionimpl_20!();
+        Depcrate_connectionmacro_21!();
+        Depcrate_connectionimpl_22!();
+        Depcrate_connectionmacro_23!();
+        Depcrate_connectionimpl_24!();
+        Depcrate_connectionpoll_open!();
+        Depcrate_connectionmacro_26!();
+        Depcrate_connectionimpl_27!();
+        Depcrate_connectionmacro_28!();
+        Depcrate_connectionimpl_29!();
+        Depcrate_connectionpoll_accept!();
+        Depcrate_connectionmacro_31!();
+        Depcrate_connectionimpl_32!();
+        Depcrate_connectionmacro_33!();
+        Depcrate_connectionimpl_34!();
+        Depcrate_connectionConnectionRef!();
+        Depcrate_connectionimpl_36!();
+        Depcrate_connectionimpl_37!();
+        Depcrate_connectionimpl_38!();
+        Depcrate_connectionimpl_39!();
+        Depcrate_connectionConnectionInner!();
+        Depcrate_connectionShared!();
+        Depcrate_connectionState!();
+        Depcrate_connectionimpl_43!();
+        Depcrate_connectionimpl_44!();
+        Depcrate_connectionimpl_45!();
+        Depcrate_connectionwake_stream!();
+        Depcrate_connectionwake_all!();
+        Depcrate_connectionwake_stream_notify!();
+        Depcrate_connectionwake_all_notify!();
+        Depcrate_connectionSendDatagramError!();
+        Depcrate_connectionMAX_TRANSMIT_DATAGRAMS!();
+        Depcrate_connectionMAX_TRANSMIT_SEGMENTS!();
+    };
+}

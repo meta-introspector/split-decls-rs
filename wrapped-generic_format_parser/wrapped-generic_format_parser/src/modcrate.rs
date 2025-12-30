@@ -1,0 +1,40 @@
+// Generated module macro for crate
+macro_rules! Modcrate {
+() => {
+        Depcrateis_id_start!();
+        Depcrateis_id_continue!();
+        Depcrateuse_3!();
+        Depcrateuse_4!();
+        Depcrateuse_5!();
+        Depcrateuse_6!();
+        Depcrateuse_7!();
+        Depcrateuse_8!();
+        Depcrateuse_9!();
+        DepcrateOptionIsSomeAndExt!();
+        Depcrateimpl_11!();
+        DepcrateInnerSpan!();
+        Depcrateimpl_13!();
+        DepcrateInnerWidthMapping!();
+        Depcrateimpl_15!();
+        DepcrateInputStringKind!();
+        DepcrateParseMode!();
+        DepcrateInnerOffset!();
+        Depcrateimpl_19!();
+        DepcratePiece!();
+        DepcrateArgument!();
+        DepcrateFormatSpec!();
+        DepcratePosition!();
+        Depcrateimpl_24!();
+        DepcrateAlignment!();
+        DepcrateSign!();
+        DepcrateDebugHex!();
+        DepcrateCount!();
+        DepcrateParseError!();
+        DepcrateSuggestion!();
+        DepcrateParser!();
+        Depcrateimpl_32!();
+        Depcrateimpl_33!();
+        Depcratefind_width_map_from_snippet!();
+        Depcrateunescape_string!();
+    };
+}

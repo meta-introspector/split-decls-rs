@@ -1,0 +1,9 @@
+// Generated macro for PSEC_APPLICATION_PROTOCOL_NEGOTIATION_EXT (type)
+macro_rules! Depcrate_shared_sspiPSEC_APPLICATION_PROTOCOL_NEGOTIATION_EXT {
+() => {
+// Module: crate::shared::sspi
+// Provides: {"PSEC_APPLICATION_PROTOCOL_NEGOTIATION_EXT"}
+// Dependencies: {}
+pub type PSEC_APPLICATION_PROTOCOL_NEGOTIATION_EXT = * mut SEC_APPLICATION_PROTOCOL_NEGOTIATION_EXT ;
+};
+}

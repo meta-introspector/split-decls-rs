@@ -1,0 +1,9 @@
+// Generated macro for assert_pred (macro)
+macro_rules! Depcrate_assertionsassert_pred {
+() => {
+// Module: crate::assertions
+// Provides: {"assert_pred"}
+// Dependencies: {}
+# [doc = " Asserts that the given predicate applied to the given arguments returns"] # [doc = " true, panicking if it does not."] # [doc = ""] # [doc = " One may optionally add arguments which will be formatted and appended to a"] # [doc = " failure message. For example:"] # [doc = ""] # [doc = " ```should_panic"] # [doc = " # use googletest::prelude::*;"] # [doc = " # fn should_fail() {"] # [doc = "     let extra_information = \"Some additional information\";"] # [doc = "     assert_pred!(1 == 2, \"Test failed. Extra information: {extra_information}.\");"] # [doc = " # }"] # [doc = " # should_fail();"] # [doc = " ```"] # [doc = ""] # [doc = " The output is as follows:"] # [doc = ""] # [doc = " ```text"] # [doc = " 1 == 2 was false with"] # [doc = " Test failed. Extra information: Some additional information."] # [doc = " ```"] # [doc = ""] # [doc = " **Note for users of [GoogleTest for C++](http://google.github.io/googletest/):**"] # [doc = " This differs from the `ASSERT_PRED*` family of macros in that it panics"] # [doc = " rather than triggering an early return from the invoking function. To get"] # [doc = " behaviour equivalent to `ASSERT_PRED*`, use [`verify_pred!`] with the `?`"] # [doc = " operator."] # [macro_export] macro_rules ! assert_pred { ($ content : expr $ (,) ?) => { match $ crate :: verify_pred ! ($ content) { Ok (_) => { } Err (e) => { panic ! ("\n{}" , e) ; } } } ; ($ content : expr $ (,) ?, $ ($ format_args : expr) ,* $ (,) ?) => { match $ crate :: GoogleTestSupport :: with_failure_message ($ crate :: verify_pred ! ($ content) , || format ! ($ ($ format_args) ,*)) { Ok (_) => { } Err (e) => { panic ! ("\n{}" , e) ; } } } ; }
+};
+}

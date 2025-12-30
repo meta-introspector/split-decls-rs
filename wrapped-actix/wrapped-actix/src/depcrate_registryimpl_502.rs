@@ -1,0 +1,9 @@
+// Generated macro for impl_502 (impl)
+macro_rules! Depcrate_registryimpl_502 {
+() => {
+// Module: crate::registry
+// Provides: {"impl_502"}
+// Dependencies: {}
+impl SystemRegistry { pub (crate) fn new (system : ArbiterHandle) -> Self { Self { system , registry : HashMap :: default () , } } # [doc = " Return address of the service. If service actor is not running"] # [doc = " it get started in the system."] pub fn get < A : SystemService + Actor < Context = Context < A > > > (& mut self) -> Addr < A > { if let Some (addr) = self . registry . get (& TypeId :: of :: < A > ()) { match addr . downcast_ref :: < Addr < A > > () { Some (addr) => return addr . clone () , None => panic ! ("Got unknown value: {:?}" , addr) , } } let addr = A :: start_service (& self . system) ; self . registry . insert (TypeId :: of :: < A > () , Box :: new (addr . clone ())) ; addr } # [doc = " Check if actor is in registry, if so, return its address"] pub fn query < A : SystemService + Actor < Context = Context < A > > > (& self) -> Option < Addr < A > > { if let Some (addr) = self . registry . get (& TypeId :: of :: < A > ()) { match addr . downcast_ref :: < Addr < A > > () { Some (addr) => return Some (addr . clone ()) , None => return None , } } None } # [doc = " Add new actor to the registry by address, panic if actor is already running"] pub fn set < A : SystemService + Actor < Context = Context < A > > > (addr : Addr < A >) { let sys = System :: current () ; let mut sreg = SREG . lock () ; let reg = sreg . entry (sys . id ()) . or_insert_with (| | SystemRegistry :: new (sys . arbiter () . clone ())) ; if let Some (addr) = reg . registry . get (& TypeId :: of :: < A > ()) { if addr . downcast_ref :: < Addr < A > > () . is_some () { panic ! ("Actor already started") ; } } reg . registry . insert (TypeId :: of :: < A > () , Box :: new (addr)) ; } }
+};
+}

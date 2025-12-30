@@ -1,0 +1,60 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcrateuse_4.rs");
+include!("depcrate_testuse_15.rs");
+include!("depcrate_testuse_16.rs");
+include!("depcrateuse_9.rs");
+include!("depcrate_testsize_hint.rs");
+include!("depcrate_testassert_size_hint.rs");
+include!("depcrateuse_3.rs");
+include!("depcrateother_1.rs");
+include!("depcrate_testsize_hint_low_initial_capacities.rs");
+include!("depcratetest.rs");
+include!("depcrateinitial_size.rs");
+include!("depcrateother_2.rs");
+include!("depcrate_testuse_17.rs");
+include!("depcrate_testdont_trust_the_iterator_size.rs");
+include!("depcrate_testiter_mut_low_capacity.rs");
+include!("depcrate_testsize_hint_many_items.rs");
+include!("depcrate_testdroptracker.rs");
+include!("depcrate_testtest_alloc_uninitialized.rs");
+include!("depcratemin_capacity.rs");
+include!("depcratechunklist.rs");
+include!("depcrateimpl_44.rs");
+include!("depcrateimpl_45.rs");
+include!("depcrate_testiter_mut_high_capacity.rs");
+include!("depcratearena.rs");
+include!("depcrateimpl_50.rs");
+include!("depcrate_testtest_alloc_extend.rs");
+include!("depcrateuse_5.rs");
+include!("depcrate_testcheck_extend_provenance.rs");
+include!("depcrateitermut.rs");
+include!("depcrateimpl_47.rs");
+include!("depcrateuse_7.rs");
+include!("depcrateitermutstate.rs");
+include!("depcrateuse_10.rs");
+include!("depcrateimpl_46.rs");
+include!("depcrateuse_6.rs");
+include!("depcrate_testuse_13.rs");
+include!("depcrate_testtest_alloc_extend_with_drop_counter.rs");
+include!("depcrateuse_11.rs");
+include!("depcrate_testtest_alloc_uninitialized_bools.rs");
+include!("depcrateuse_8.rs");
+include!("depcrate_testnode.rs");
+include!("depcrate_testarena_is_send.rs");
+include!("depcrate_testsize_hint_high_initial_capacities.rs");
+include!("depcrate_testuse_14.rs");
+include!("depcrate_testensure_into_vec_maintains_order_of_allocation.rs");
+include!("depcrate_testtest_zero_cap.rs");
+include!("depcrate_testalloc_uninitialized_with_panic.rs");
+include!("depcrate_testtest_uninitialized_array.rs");
+include!("depcrate_testimpl_19.rs");
+include!("depcrate_testarena_as_intended.rs");
+include!("modcrate_test.rs");
+include!("modcrate.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate_test!();
+    Modcrate!();
+}

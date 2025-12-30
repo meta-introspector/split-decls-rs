@@ -1,0 +1,9 @@
+// Generated macro for STATUS_GRAPHICS_UNASSIGNED_MODESET_ALREADY_EXISTS (const)
+macro_rules! Depcrate_shared_ntstatusSTATUS_GRAPHICS_UNASSIGNED_MODESET_ALREADY_EXISTS {
+() => {
+// Module: crate::shared::ntstatus
+// Provides: {"STATUS_GRAPHICS_UNASSIGNED_MODESET_ALREADY_EXISTS"}
+// Dependencies: {}
+pub const STATUS_GRAPHICS_UNASSIGNED_MODESET_ALREADY_EXISTS : NTSTATUS = 0xC01E0350 ;
+};
+}

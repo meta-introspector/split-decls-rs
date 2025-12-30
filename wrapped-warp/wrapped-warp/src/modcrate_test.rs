@@ -1,0 +1,45 @@
+// Generated module macro for crate::test
+macro_rules! Modcrate_test {
+() => {
+        Depcrate_testuse_809!();
+        Depcrate_testuse_810!();
+        Depcrate_testuse_811!();
+        Depcrate_testuse_812!();
+        Depcrate_testuse_813!();
+        Depcrate_testuse_814!();
+        Depcrate_testuse_815!();
+        Depcrate_testuse_816!();
+        Depcrate_testuse_817!();
+        Depcrate_testuse_818!();
+        Depcrate_testuse_819!();
+        Depcrate_testuse_820!();
+        Depcrate_testuse_821!();
+        Depcrate_testuse_822!();
+        Depcrate_testuse_823!();
+        Depcrate_testuse_824!();
+        Depcrate_testuse_825!();
+        Depcrate_testuse_826!();
+        Depcrate_testuse_827!();
+        Depcrate_testuse_828!();
+        Depcrate_testuse_829!();
+        Depcrate_testuse_830!();
+        Depcrate_testuse_831!();
+        Depcrate_testuse_832!();
+        Depcrate_testrequest!();
+        Depcrate_testws!();
+        Depcrate_testRequestBuilder!();
+        Depcrate_testWsBuilder!();
+        Depcrate_testWsClient!();
+        Depcrate_testWsError!();
+        Depcrate_testimpl_839!();
+        Depcrate_testimpl_840!();
+        Depcrate_testimpl_841!();
+        Depcrate_testimpl_842!();
+        Depcrate_testimpl_843!();
+        Depcrate_testimpl_844!();
+        Depcrate_testimpl_845!();
+        Depcrate_testimpl_846!();
+        Depcrate_testimpl_847!();
+        Depcrate_testinner!();
+    };
+}

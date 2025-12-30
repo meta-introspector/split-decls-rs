@@ -1,0 +1,45 @@
+// Generated module macro for crate::arbitrary
+macro_rules! Modcrate_arbitrary {
+() => {
+        Depcrate_arbitraryuse_35!();
+        Depcrate_arbitraryuse_36!();
+        Depcrate_arbitraryuse_37!();
+        Depcrate_arbitraryuse_38!();
+        Depcrate_arbitraryuse_39!();
+        Depcrate_arbitraryuse_40!();
+        Depcrate_arbitraryuse_41!();
+        Depcrate_arbitraryuse_42!();
+        Depcrate_arbitraryuse_43!();
+        Depcrate_arbitraryderive_arbitrary!();
+        Depcrate_arbitraryexpr_for_struct!();
+        Depcrate_arbitraryexpr_for_enum!();
+        Depcrate_arbitraryexpr_for_fields!();
+        Depcrate_arbitraryWeightArg!();
+        Depcrate_arbitraryimpl_49!();
+        Depcrate_arbitraryAnyArgs!();
+        Depcrate_arbitraryimpl_51!();
+        Depcrate_arbitraryimpl_52!();
+        Depcrate_arbitraryArbitraryArgsForType!();
+        Depcrate_arbitraryArbitraryArgsForFieldOrVariant!();
+        Depcrate_arbitraryFilter!();
+        Depcrate_arbitraryimpl_56!();
+        Depcrate_arbitraryUnaryFilter!();
+        Depcrate_arbitraryimpl_58!();
+        Depcrate_arbitraryFieldsFilter!();
+        Depcrate_arbitraryStrategyBuilder!();
+        Depcrate_arbitraryimpl_61!();
+        Depcrate_arbitraryStrategyItem!();
+        Depcrate_arbitraryimpl_63!();
+        Depcrate_arbitraryStrategyValueType!();
+        Depcrate_arbitraryimpl_65!();
+        Depcrate_arbitraryStrategyExpr!();
+        Depcrate_arbitraryimpl_67!();
+        Depcrate_arbitraryimpl_68!();
+        Depcrate_arbitrarybuild_constructor!();
+        Depcrate_arbitraryto_idxs!();
+        Depcrate_arbitraryinput_type!();
+        Depcrate_arbitrarycons_tuple!();
+        Depcrate_arbitraryargs_var_shared!();
+        Depcrate_arbitraryargs_var!();
+    };
+}

@@ -1,0 +1,41 @@
+// Generated module macro for crate::attributes
+macro_rules! Modcrate_attributes {
+() => {
+        Depcrate_attributesuse_116!();
+        Depcrate_attributesuse_117!();
+        Depcrate_attributesuse_118!();
+        Depcrate_attributesuse_119!();
+        Depcrate_attributesuse_120!();
+        Depcrate_attributesuse_121!();
+        Depcrate_attributesuse_122!();
+        Depcrate_attributesuse_123!();
+        Depcrate_attributesuse_124!();
+        Depcrate_attributesuse_125!();
+        Depcrate_attributesuse_126!();
+        Depcrate_attributesuse_127!();
+        Depcrate_attributesuse_128!();
+        Depcrate_attributesuse_129!();
+        Depcrate_attributesuse_130!();
+        Depcrate_attributesapply_to_llfn!();
+        Depcrate_attributesapply_to_callsite!();
+        Depcrate_attributesinline_attr!();
+        Depcrate_attributespatchable_function_entry_attrs!();
+        Depcrate_attributessanitize_attrs!();
+        Depcrate_attributesuwtable_attr!();
+        Depcrate_attributesframe_pointer_type_attr!();
+        Depcrate_attributesfunction_return_attr!();
+        Depcrate_attributesinstrument_function_attr!();
+        Depcrate_attributesnojumptables_attr!();
+        Depcrate_attributesprobestack_attr!();
+        Depcrate_attributesstackprotector_attr!();
+        Depcrate_attributesbackchain_attr!();
+        Depcrate_attributestarget_cpu_attr!();
+        Depcrate_attributestune_cpu_attr!();
+        Depcrate_attributestarget_features_attr!();
+        Depcrate_attributesnon_lazy_bind_attr!();
+        Depcrate_attributesdefault_optimisation_attrs!();
+        Depcrate_attributescreate_alloc_family_attr!();
+        Depcrate_attributesllfn_attrs_from_instance!();
+        Depcrate_attributeswasm_import_module!();
+    };
+}

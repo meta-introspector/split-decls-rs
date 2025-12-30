@@ -1,0 +1,9 @@
+// Generated macro for impl_599 (impl)
+macro_rules! Depcrate_unwind_moduleimpl_599 {
+() => {
+// Module: crate::unwind_module
+// Provides: {"impl_599"}
+// Dependencies: {}
+impl < T : Module > Module for UnwindModule < T > { fn isa (& self) -> & dyn TargetIsa { self . module . isa () } fn declarations (& self) -> & ModuleDeclarations { self . module . declarations () } fn get_name (& self , name : & str) -> Option < FuncOrDataId > { self . module . get_name (name) } fn target_config (& self) -> TargetFrontendConfig { self . module . target_config () } fn declare_function (& mut self , name : & str , linkage : Linkage , signature : & Signature ,) -> ModuleResult < FuncId > { self . module . declare_function (name , linkage , signature) } fn declare_anonymous_function (& mut self , signature : & Signature) -> ModuleResult < FuncId > { self . module . declare_anonymous_function (signature) } fn declare_data (& mut self , name : & str , linkage : Linkage , writable : bool , tls : bool ,) -> ModuleResult < DataId > { self . module . declare_data (name , linkage , writable , tls) } fn declare_anonymous_data (& mut self , writable : bool , tls : bool) -> ModuleResult < DataId > { self . module . declare_anonymous_data (writable , tls) } fn define_function_with_control_plane (& mut self , func : FuncId , ctx : & mut Context , ctrl_plane : & mut ControlPlane ,) -> ModuleResult < () > { self . module . define_function_with_control_plane (func , ctx , ctrl_plane) ? ; self . unwind_context . add_function (& mut self . module , func , ctx) ; Ok (()) } fn define_function_bytes (& mut self , _func_id : FuncId , _alignment : u64 , _bytes : & [u8] , _relocs : & [ModuleReloc] ,) -> ModuleResult < () > { unimplemented ! () } fn define_data (& mut self , data_id : DataId , data : & DataDescription) -> ModuleResult < () > { self . module . define_data (data_id , data) } }
+};
+}

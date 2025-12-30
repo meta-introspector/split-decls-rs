@@ -1,0 +1,53 @@
+// Generated module macro for crate
+macro_rules! Modcrate {
+() => {
+        Depcrateuse_1!();
+        Depcrateuse_2!();
+        Depcrateuse_3!();
+        Depcrateuse_4!();
+        Depcrateuse_5!();
+        Depcrateuse_6!();
+        Depcrateuse_7!();
+        Depcrateuse_8!();
+        Depcrateuse_9!();
+        Depcrateuse_10!();
+        Depcrateuse_11!();
+        Depcrateuse_12!();
+        Depcrateuse_13!();
+        Depcratebuiltin!();
+        Depcratepluralize!();
+        Depcratelistify!();
+        DepcrateApplicability!();
+        DepcrateLintExpectationId!();
+        Depcrateimpl_157!();
+        Depcrateimpl_158!();
+        Depcrateimpl_159!();
+        DepcrateLevel!();
+        Depcrateimpl_161!();
+        Depcrateimpl_162!();
+        DepcrateLint!();
+        DepcrateFutureIncompatibleInfo!();
+        DepcrateFutureIncompatibilityReason!();
+        Depcrateimpl_166!();
+        Depcrateimpl_167!();
+        Depcrateimpl_168!();
+        DepcrateLintId!();
+        Depcrateimpl_170!();
+        Depcrateimpl_171!();
+        Depcrateimpl_172!();
+        Depcrateimpl_173!();
+        Depcrateimpl_174!();
+        Depcrateimpl_175!();
+        Depcrateimpl_176!();
+        DepcrateAmbiguityErrorDiag!();
+        DepcrateDeprecatedSinceKind!();
+        DepcrateBuiltinLintDiag!();
+        DepcrateRegisteredTools!();
+        Depcratedeclare_lint!();
+        Depcratedeclare_tool_lint!();
+        DepcrateLintVec!();
+        DepcrateLintPass!();
+        Depcrateimpl_lint_pass!();
+        Depcratedeclare_lint_pass!();
+    };
+}

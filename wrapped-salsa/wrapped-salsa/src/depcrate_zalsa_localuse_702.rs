@@ -4,6 +4,6 @@ macro_rules! Depcrate_zalsa_localuse_702 {
 // Module: crate::zalsa_local
 // Provides: {"use_702"}
 // Dependencies: {}
-use crate :: table :: { PageIndex , Slot , Table } ;
+use crate :: { Cancelled , Id , Revision } ;
 };
 }

@@ -1,0 +1,39 @@
+// Generated module macro for crate::um::dcommon
+macro_rules! Modcrate_um_dcommon {
+() => {
+        Depcrate_um_dcommonuse_27129!();
+        Depcrate_um_dcommonuse_27130!();
+        Depcrate_um_dcommonuse_27131!();
+        Depcrate_um_dcommonuse_27132!();
+        Depcrate_um_dcommonuse_27133!();
+        Depcrate_um_dcommonmacro_27134!();
+        Depcrate_um_dcommonmacro_27135!();
+        Depcrate_um_dcommonmacro_27136!();
+        Depcrate_um_dcommonmacro_27137!();
+        Depcrate_um_dcommonmacro_27138!();
+        Depcrate_um_dcommonmacro_27139!();
+        Depcrate_um_dcommonmacro_27140!();
+        Depcrate_um_dcommonD2D_POINT_2L!();
+        Depcrate_um_dcommonmacro_27142!();
+        Depcrate_um_dcommonmacro_27143!();
+        Depcrate_um_dcommonmacro_27144!();
+        Depcrate_um_dcommonmacro_27145!();
+        Depcrate_um_dcommonmacro_27146!();
+        Depcrate_um_dcommonD2D_RECT_L!();
+        Depcrate_um_dcommonmacro_27148!();
+        Depcrate_um_dcommonmacro_27149!();
+        Depcrate_um_dcommonmacro_27150!();
+        Depcrate_um_dcommonmacro_27151!();
+        Depcrate_um_dcommonmacro_27152!();
+        Depcrate_um_dcommonmacro_27153!();
+        Depcrate_um_dcommonD2D1_POINT_2F!();
+        Depcrate_um_dcommonD2D1_POINT_2U!();
+        Depcrate_um_dcommonD2D1_POINT_2L!();
+        Depcrate_um_dcommonD2D1_RECT_F!();
+        Depcrate_um_dcommonD2D1_RECT_U!();
+        Depcrate_um_dcommonD2D1_RECT_L!();
+        Depcrate_um_dcommonD2D1_SIZE_F!();
+        Depcrate_um_dcommonD2D1_SIZE_U!();
+        Depcrate_um_dcommonD2D1_MATRIX_3X2_F!();
+    };
+}

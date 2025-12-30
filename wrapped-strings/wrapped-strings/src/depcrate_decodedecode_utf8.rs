@@ -1,0 +1,9 @@
+// Generated macro for decode_utf8 (function)
+macro_rules! Depcrate_decodedecode_utf8 {
+() => {
+// Module: crate::decode
+// Provides: {"decode_utf8"}
+// Dependencies: {}
+# [doc = " Mirror of `std::char::decode_utf16` for utf-8."] pub fn decode_utf8 (mut buffer : & [u8] ,) -> impl Iterator < Item = core :: result :: Result < char , core :: str :: Utf8Error > > + '_ { let mut current = "" . chars () ; let mut previous_error = None ; core :: iter :: from_fn (move | | { loop { match (current . next () , previous_error) { (Some (c) , _) => return Some (Ok (c)) , (None , Some (e)) => { previous_error = None ; return Some (Err (e)) ; } (None , None) if buffer . is_empty () => return None , (None , None) => { match core :: str :: from_utf8 (buffer) { Ok (s) => { current = s . chars () ; buffer = & [] ; } Err (e) => { let (valid , rest) = buffer . split_at (e . valid_up_to ()) ; let invalid_sequence_length = e . error_len () ? ; buffer = & rest [invalid_sequence_length ..] ; current = unsafe { core :: str :: from_utf8_unchecked (valid) } . chars () ; previous_error = Some (e) ; } } } } } }) }
+};
+}

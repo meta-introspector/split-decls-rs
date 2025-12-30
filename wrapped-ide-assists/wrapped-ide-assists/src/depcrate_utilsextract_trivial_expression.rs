@@ -1,0 +1,9 @@
+// Generated macro for extract_trivial_expression (function)
+macro_rules! Depcrate_utilsextract_trivial_expression {
+() => {
+// Module: crate::utils
+// Provides: {"extract_trivial_expression"}
+// Dependencies: {}
+pub fn extract_trivial_expression (block_expr : & ast :: BlockExpr) -> Option < ast :: Expr > { if block_expr . modifier () . is_some () { return None ; } let stmt_list = block_expr . stmt_list () ? ; let has_anything_else = | thing : & SyntaxNode | -> bool { let mut non_trivial_children = stmt_list . syntax () . children_with_tokens () . filter (| it | match it . kind () { WHITESPACE | T ! ['{'] | T ! ['}'] => false , _ => it . as_node () != Some (thing) , }) ; non_trivial_children . next () . is_some () } ; if stmt_list . syntax () . children_with_tokens () . filter_map (NodeOrToken :: into_token) . any (| token | token . kind () == syntax :: SyntaxKind :: COMMENT) { return None ; } if let Some (expr) = stmt_list . tail_expr () { if has_anything_else (expr . syntax ()) { return None ; } return Some (expr) ; } let stmt = stmt_list . statements () . next () ? ; if let ast :: Stmt :: ExprStmt (expr_stmt) = stmt { if has_anything_else (expr_stmt . syntax ()) { return None ; } let expr = expr_stmt . expr () ? ; if matches ! (expr . syntax () . kind () , CONTINUE_EXPR | BREAK_EXPR | RETURN_EXPR) { return Some (expr) ; } } None }
+};
+}

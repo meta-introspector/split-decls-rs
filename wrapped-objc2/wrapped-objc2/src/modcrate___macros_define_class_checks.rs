@@ -1,0 +1,43 @@
+// Generated module macro for crate::__macros::define_class::checks
+macro_rules! Modcrate___macros_define_class_checks {
+() => {
+        Depcrate___macros_define_class_checksuse_129!();
+        Depcrate___macros_define_class_checksuse_130!();
+        Depcrate___macros_define_class_checksuse_131!();
+        Depcrate___macros_define_class_checksuse_132!();
+        Depcrate___macros_define_class_checksuse_133!();
+        Depcrate___macros_define_class_checksuse_134!();
+        Depcrate___macros_define_class_checksuse_135!();
+        Depcrate___macros_define_class_checksuse_136!();
+        Depcrate___macros_define_class_checksuse_137!();
+        Depcrate___macros_define_class_checksuse_138!();
+        Depcrate___macros_define_class_checksuse_139!();
+        Depcrate___macros_define_class_checksuse_140!();
+        Depcrate___macros_define_class_checksThreadKindAutoTraits!();
+        Depcrate___macros_define_class_checksimpl_142!();
+        Depcrate___macros_define_class_checksimpl_143!();
+        Depcrate___macros_define_class_checksimpl_144!();
+        Depcrate___macros_define_class_checksimpl_145!();
+        Depcrate___macros_define_class_checksimpl_146!();
+        Depcrate___macros_define_class_checksimpl_147!();
+        Depcrate___macros_define_class_checksRetainedReturnValue!();
+        Depcrate___macros_define_class_checksimpl_149!();
+        Depcrate___macros_define_class_checksMessageReceiveRetained!();
+        Depcrate___macros_define_class_checksimpl_151!();
+        Depcrate___macros_define_class_checksimpl_152!();
+        Depcrate___macros_define_class_checksimpl_153!();
+        Depcrate___macros_define_class_checksimpl_154!();
+        Depcrate___macros_define_class_checksimpl_155!();
+        Depcrate___macros_define_class_checksMaybeOptionRetained!();
+        Depcrate___macros_define_class_checksimpl_157!();
+        Depcrate___macros_define_class_checksimpl_158!();
+        Depcrate___macros_define_class_checksclass_c_name!();
+        Depcrate___macros_define_class_checksclass_not_present!();
+        Depcrate___macros_define_class_checksclass_not_unique!();
+        Depcrate___macros_define_class_checksdefine_class!();
+        Depcrate___macros_define_class_checksClassBuilderHelper!();
+        Depcrate___macros_define_class_checksimpl_164!();
+        Depcrate___macros_define_class_checksClassProtocolMethodsBuilder!();
+        Depcrate___macros_define_class_checksimpl_166!();
+    };
+}

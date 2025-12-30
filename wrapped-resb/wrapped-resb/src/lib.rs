@@ -1,0 +1,62 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcrate_binaryimpl_20.rs");
+include!("depcrate_binaryheader.rs");
+include!("depcrate_binaryimpl_23.rs");
+include!("depcratetext.rs");
+include!("depcrate_bundleother_31.rs");
+include!("depcrate_bundlekey.rs");
+include!("depcrate_binarydeserializer.rs");
+include!("depcrate_bundleuse_33.rs");
+include!("depcrate_binarybinindex.rs");
+include!("depcrate_binarybinarydeserializererror.rs");
+include!("depcrate_bundleresourcebundle.rs");
+include!("depcrate_binaryuse_8.rs");
+include!("depcrate_bundleuse_32.rs");
+include!("depcrate_bundletable.rs");
+include!("depcrate_bundleimpl_39.rs");
+include!("depcrate_binaryhelpers.rs");
+include!("depcrate_textreader.rs");
+include!("depcrate_bundleimpl_40.rs");
+include!("depcrate_binarymacro_17.rs");
+include!("depcrate_binaryserializer.rs");
+include!("depcrate_binarydetermine_endianness.rs");
+include!("depcrate_binaryimpl_22.rs");
+include!("depcrate_binaryuse_9.rs");
+include!("depcrate_binaryread_u16.rs");
+include!("depcrate_bundleimpl_41.rs");
+include!("depcrate_binaryuse_5.rs");
+include!("depcrate_bundleimpl_42.rs");
+include!("depcrate_bundleimpl_44.rs");
+include!("depcrate_bundleimpl_47.rs");
+include!("depcrate_bundleint28.rs");
+include!("depcratebundle.rs");
+include!("depcrate_binaryget_subslice.rs");
+include!("depcrate_binaryformatversion.rs");
+include!("depcratemask_28_bit.rs");
+include!("depcrate_binaryinclude_bytes_as_u32.rs");
+include!("depcrate_textuse_29.rs");
+include!("depcrate_bundleresource.rs");
+include!("depcrate_bundleimpl_46.rs");
+include!("depcrate_binarymacro_16.rs");
+include!("depcrate_binaryprimitive_enum.rs");
+include!("depcrate_binarymacro_15.rs");
+include!("depcrateother_1.rs");
+include!("depcrate_bundleimpl_35.rs");
+include!("depcratebinary.rs");
+include!("depcrate_binaryresdescriptor.rs");
+include!("depcrate_bundleimpl_45.rs");
+include!("depcrate_binaryuse_10.rs");
+include!("depcrate_binaryerrorkind.rs");
+include!("modcrate_binary.rs");
+include!("modcrate_bundle.rs");
+include!("modcrate_text.rs");
+include!("modcrate.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate_binary!();
+    Modcrate_bundle!();
+    Modcrate_text!();
+    Modcrate!();
+}

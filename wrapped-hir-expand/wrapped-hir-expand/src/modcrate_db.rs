@@ -1,0 +1,39 @@
+// Generated module macro for crate::db
+macro_rules! Modcrate_db {
+() => {
+        Depcrate_dbuse_45!();
+        Depcrate_dbuse_46!();
+        Depcrate_dbuse_47!();
+        Depcrate_dbuse_48!();
+        Depcrate_dbuse_49!();
+        Depcrate_dbuse_50!();
+        Depcrate_dbuse_51!();
+        Depcrate_dbuse_52!();
+        Depcrate_dbuse_53!();
+        Depcrate_dbMacroArgResult!();
+        Depcrate_dbTOKEN_LIMIT!();
+        Depcrate_dbTokenExpander!();
+        Depcrate_dbExpandDatabase!();
+        Depcrate_dbSyntaxContextWrapper!();
+        Depcrate_dbsyntax_context!();
+        Depcrate_dbexpand_speculative!();
+        Depcrate_dbast_id_map!();
+        Depcrate_dbparse_or_expand!();
+        Depcrate_dbparse_macro_expansion!();
+        Depcrate_dbparse_macro_expansion_error!();
+        Depcrate_dbparse_with_map!();
+        Depcrate_dbmacro_arg_considering_derives!();
+        Depcrate_dbmacro_arg!();
+        Depcrate_dbcensor_derive_input!();
+        Depcrate_dbattr_source!();
+        Depcrate_dbimpl_70!();
+        Depcrate_dbCowArc!();
+        Depcrate_dbmacro_expand!();
+        Depcrate_dbproc_macro_span!();
+        Depcrate_dbexpand_proc_macro!();
+        Depcrate_dbtoken_tree_to_syntax_node!();
+        Depcrate_dbcheck_tt_count!();
+        Depcrate_dbintern_macro_call!();
+        Depcrate_dblookup_intern_macro_call!();
+    };
+}

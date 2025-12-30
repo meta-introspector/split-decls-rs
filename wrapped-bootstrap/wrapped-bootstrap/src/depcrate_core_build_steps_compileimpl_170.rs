@@ -1,0 +1,10 @@
+// Generated macro for impl_170 (impl)
+macro_rules! Depcrate_core_build_steps_compileimpl_170 {
+() => {
+// Module: crate::core::build_steps::compile
+// Provides: {"impl_170"}
+// Dependencies: {}
+impl Step for GccCodegenBackend { type Output = GccCodegenBackendOutput ; const IS_HOST : bool = true ; fn should_run (run : ShouldRun < '_ >) -> ShouldRun < '_ > { run . alias ("rustc_codegen_gcc") . alias ("cg_gcc") } fn make_run (run : RunConfig < '_ >) { run . builder . ensure (GccCodegenBackend { compilers : RustcPrivateCompilers :: new (run . builder , run . builder . top_stage , run . target) , }) ; } fn run (self , builder : & Builder < '_ >) -> Self :: Output { let target = self . compilers . target () ; let build_compiler = self . compilers . build_compiler () ; let stamp = build_stamp :: codegen_backend_stamp (builder , build_compiler , target , & CodegenBackendKind :: Gcc ,) ; let gcc = builder . ensure (Gcc { target }) ; if builder . config . keep_stage . contains (& build_compiler . stage) { trace ! ("`keep-stage` requested") ; builder . info ("WARNING: Using a potentially old codegen backend. \
+                This may not behave well." ,) ; return GccCodegenBackendOutput { stamp , gcc } ; } let mut cargo = builder :: Cargo :: new (builder , build_compiler , Mode :: Codegen , SourceType :: InTree , target , Kind :: Build ,) ; cargo . arg ("--manifest-path") . arg (builder . src . join ("compiler/rustc_codegen_gcc/Cargo.toml")) ; rustc_cargo_env (builder , & mut cargo , target) ; add_cg_gcc_cargo_flags (& mut cargo , & gcc) ; let _guard = builder . msg (Kind :: Build , "codegen backend gcc" , Mode :: Codegen , build_compiler , target) ; let files = run_cargo (builder , cargo , vec ! [] , & stamp , vec ! [] , false , false) ; GccCodegenBackendOutput { stamp : write_codegen_backend_stamp (stamp , files , builder . config . dry_run ()) , gcc , } } fn metadata (& self) -> Option < StepMetadata > { Some (StepMetadata :: build ("rustc_codegen_gcc" , self . compilers . target ()) . built_by (self . compilers . build_compiler ()) ,) } }
+};
+}

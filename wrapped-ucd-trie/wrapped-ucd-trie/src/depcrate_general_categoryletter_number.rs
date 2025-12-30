@@ -1,0 +1,9 @@
+// Generated macro for LETTER_NUMBER (const)
+macro_rules! Depcrate_general_categoryLETTER_NUMBER {
+() => {
+// Module: crate::general_category
+// Provides: {"LETTER_NUMBER"}
+// Dependencies: {}
+pub const LETTER_NUMBER : & 'static [(u32 , u32)] = & [(5870 , 5872) , (8544 , 8578) , (8581 , 8584) , (12295 , 12295) , (12321 , 12329) , (12344 , 12346) , (42726 , 42735) , (65856 , 65908) , (66369 , 66369) , (66378 , 66378) , (66513 , 66517) , (74752 , 74862) ,] ;
+};
+}

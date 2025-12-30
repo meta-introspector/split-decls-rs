@@ -4,6 +4,6 @@ macro_rules! Depcrateother_2 {
 // Module: crate
 // Provides: {"other_2"}
 // Dependencies: {}
-# [cfg (feature = "proc-macro")] extern crate proc_macro ;
+extern crate proc_macro2 ;
 };
 }

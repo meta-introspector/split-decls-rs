@@ -1,0 +1,9 @@
+// Generated macro for ERROR_AUTHENTICODE_TRUST_NOT_ESTABLISHED (const)
+macro_rules! Depcrate_um_setupapiERROR_AUTHENTICODE_TRUST_NOT_ESTABLISHED {
+() => {
+// Module: crate::um::setupapi
+// Provides: {"ERROR_AUTHENTICODE_TRUST_NOT_ESTABLISHED"}
+// Dependencies: {}
+pub const ERROR_AUTHENTICODE_TRUST_NOT_ESTABLISHED : DWORD = APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR | 0x242 ;
+};
+}

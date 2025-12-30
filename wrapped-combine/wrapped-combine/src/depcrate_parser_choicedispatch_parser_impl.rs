@@ -1,0 +1,9 @@
+// Generated macro for dispatch_parser_impl (macro)
+macro_rules! Depcrate_parser_choicedispatch_parser_impl {
+() => {
+// Module: crate::parser::choice
+// Provides: {"dispatch_parser_impl"}
+// Dependencies: {}
+# [macro_export] # [doc (hidden)] macro_rules ! dispatch_parser_impl { ($ parser_name : ident [$ first_ident : ident $ ($ id : ident) *] [$ ($ collected_idents : ident) *] $ expr : expr , $ ($ rest : expr ,) *) => { $ crate :: dispatch_parser_impl ! { $ parser_name [$ ($ id) *] [$ ($ collected_idents) * $ first_ident] $ ($ rest ,) * } } ; ($ parser_name : ident [$ ($ id : ident) *] [$ ($ collected_idents : ident) *]) => { $ crate :: dispatch_parser_impl ! { $ parser_name ; $ ($ collected_idents) * } } ; ($ parser_name : ident ; $ ($ id : ident) *) => { pub enum $ parser_name <$ ($ id) ,*> { $ ($ id ($ id) ,) * } # [allow (non_snake_case)] impl < Input , Output , $ ($ id) ,*> $ crate :: Parser < Input > for $ parser_name <$ ($ id) ,*> where $ ($ id : $ crate :: Parser < Input , Output = Output >,) * Input : $ crate :: Stream , { type Output = Output ; type PartialState = Option <$ parser_name <$ ($ id :: PartialState) ,*>>; $ crate :: parse_mode ! (Input) ; fn parse_mode < Mode > (& mut self , mode : Mode , input : & mut Input , state : & mut Self :: PartialState ,) -> $ crate :: error :: ParseResult < Self :: Output , < Input as $ crate :: StreamOnce >:: Error > where Mode : $ crate :: parser :: ParseMode , { match self { $ ($ parser_name ::$ id ($ id) => { let state = match state { Some ($ parser_name ::$ id (s)) => s , _ => { * state = Some ($ parser_name ::$ id (Default :: default ())) ; match state { Some ($ parser_name ::$ id (s)) => s , _ => unreachable ! () , } } } ; $ id . parse_mode (mode , input , state) }) * } } fn add_error (& mut self , error : & mut $ crate :: error :: Tracked << Input as $ crate :: StreamOnce >:: Error >) { match self { $ ($ parser_name ::$ id ($ id) => $ id . add_error (error) ,) * } } } } }
+};
+}

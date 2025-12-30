@@ -1,0 +1,9 @@
+// Generated macro for rustls_crypto_provider_builder_new_with_base (function)
+macro_rules! Depcrate_crypto_providerrustls_crypto_provider_builder_new_with_base {
+() => {
+// Module: crate::crypto_provider
+// Provides: {"rustls_crypto_provider_builder_new_with_base"}
+// Dependencies: {}
+# [doc = " Constructs a new `rustls_crypto_provider_builder` using the given `rustls_crypto_provider`"] # [doc = " as the base crypto provider to be customized."] # [doc = ""] # [doc = " The caller owns the returned `rustls_crypto_provider_builder` and must free it using"] # [doc = " `rustls_crypto_provider_builder_free`."] # [doc = ""] # [doc = " This function can be used for setting the default process wide crypto provider,"] # [doc = " or for constructing a custom crypto provider for a specific connection. A typical"] # [doc = " workflow could be to:"] # [doc = ""] # [doc = " * Call `rustls_crypto_provider_builder_new_with_base` with a custom provider"] # [doc = " * Install the custom provider as the process-wide default with"] # [doc = "   `rustls_crypto_provider_builder_build_as_default`."] # [doc = ""] # [doc = " Or, for per-connection customization:"] # [doc = ""] # [doc = " * Call `rustls_crypto_provider_builder_new_with_base` with a custom provider"] # [doc = " * Use `rustls_crypto_provider_builder_set_cipher_suites` to customize the supported"] # [doc = "   ciphersuites."] # [doc = " * Use `rustls_crypto_provider_builder_build` to build a customized provider."] # [doc = " * Provide that customized provider to client or server configuration builders."] # [no_mangle] pub extern "C" fn rustls_crypto_provider_builder_new_with_base (base : * const rustls_crypto_provider ,) -> * mut rustls_crypto_provider_builder { ffi_panic_boundary ! { to_boxed_mut_ptr (Some (CryptoProviderBuilder { base : try_clone_arc ! (base) , cipher_suites : Vec :: default () , })) } }
+};
+}

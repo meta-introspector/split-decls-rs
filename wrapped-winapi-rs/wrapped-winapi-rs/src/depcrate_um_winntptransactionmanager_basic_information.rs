@@ -1,0 +1,9 @@
+// Generated macro for PTRANSACTIONMANAGER_BASIC_INFORMATION (type)
+macro_rules! Depcrate_um_winntPTRANSACTIONMANAGER_BASIC_INFORMATION {
+() => {
+// Module: crate::um::winnt
+// Provides: {"PTRANSACTIONMANAGER_BASIC_INFORMATION"}
+// Dependencies: {}
+pub type PTRANSACTIONMANAGER_BASIC_INFORMATION = * mut TRANSACTIONMANAGER_BASIC_INFORMATION ;
+};
+}

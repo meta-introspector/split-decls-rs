@@ -1,0 +1,9 @@
+// Generated macro for macro_25102 (macro)
+macro_rules! Depcrate_um_d3d11macro_25102 {
+() => {
+// Module: crate::um::d3d11
+// Provides: {"macro_25102"}
+// Dependencies: {}
+ENUM ! { enum D3D11_VIDEO_PROCESSOR_ALPHA_FILL_MODE { D3D11_VIDEO_PROCESSOR_ALPHA_FILL_MODE_OPAQUE = 0 , D3D11_VIDEO_PROCESSOR_ALPHA_FILL_MODE_BACKGROUND = 1 , D3D11_VIDEO_PROCESSOR_ALPHA_FILL_MODE_DESTINATION = 2 , D3D11_VIDEO_PROCESSOR_ALPHA_FILL_MODE_SOURCE_STREAM = 3 , } }
+};
+}

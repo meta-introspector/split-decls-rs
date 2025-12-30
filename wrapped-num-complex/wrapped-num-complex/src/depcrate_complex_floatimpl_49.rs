@@ -1,0 +1,9 @@
+// Generated macro for impl_49 (impl)
+macro_rules! Depcrate_complex_floatimpl_49 {
+() => {
+// Module: crate::complex_float
+// Provides: {"impl_49"}
+// Dependencies: {}
+impl < T : Float + FloatConst > ComplexFloat for Complex < T > { type Real = T ; fn re (self) -> Self :: Real { self . re } fn im (self) -> Self :: Real { self . im } fn abs (self) -> Self :: Real { self . norm () } fn recip (self) -> Self { self . finv () } fn l1_norm (& self) -> Self :: Real { self . re . abs () + self . im . abs () } fn is_nan (self) -> bool { self . re . is_nan () || self . im . is_nan () } fn is_infinite (self) -> bool { ! self . is_nan () && (self . re . is_infinite () || self . im . is_infinite ()) } fn is_finite (self) -> bool { self . re . is_finite () && self . im . is_finite () } fn is_normal (self) -> bool { self . re . is_normal () && self . im . is_normal () } forward ! { Complex :: arg (self) -> Self :: Real ; Complex :: powc (self , exp : Complex < Self :: Real >) -> Complex < Self :: Real >; Complex :: exp2 (self) -> Self ; Complex :: log (self , base : Self :: Real) -> Self ; Complex :: log2 (self) -> Self ; Complex :: log10 (self) -> Self ; Complex :: powf (self , f : Self :: Real) -> Self ; Complex :: sqrt (self) -> Self ; Complex :: cbrt (self) -> Self ; Complex :: exp (self) -> Self ; Complex :: expf (self , base : Self :: Real) -> Self ; Complex :: ln (self) -> Self ; Complex :: sin (self) -> Self ; Complex :: cos (self) -> Self ; Complex :: tan (self) -> Self ; Complex :: asin (self) -> Self ; Complex :: acos (self) -> Self ; Complex :: atan (self) -> Self ; Complex :: sinh (self) -> Self ; Complex :: cosh (self) -> Self ; Complex :: tanh (self) -> Self ; Complex :: asinh (self) -> Self ; Complex :: acosh (self) -> Self ; Complex :: atanh (self) -> Self ; } forward_ref ! { Self :: powi (& self , n : i32) -> Self ; Self :: conj (& self) -> Self ; } }
+};
+}

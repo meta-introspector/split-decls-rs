@@ -1,0 +1,9 @@
+// Generated macro for impl_889 (impl)
+macro_rules! Depcrate_shareimpl_889 {
+() => {
+// Module: crate::share
+// Provides: {"impl_889"}
+// Dependencies: {}
+impl RecvStream { pub (crate) fn new (inner : FlowControl) -> Self { RecvStream { inner } } # [doc = " Get the next data frame."] pub async fn data (& mut self) -> Option < Result < Bytes , crate :: Error > > { crate :: poll_fn (move | cx | self . poll_data (cx)) . await } # [doc = " Get optional trailers for this stream."] pub async fn trailers (& mut self) -> Result < Option < HeaderMap > , crate :: Error > { crate :: poll_fn (move | cx | self . poll_trailers (cx)) . await } # [doc = " Poll for the next data frame."] pub fn poll_data (& mut self , cx : & mut Context < '_ >) -> Poll < Option < Result < Bytes , crate :: Error > > > { self . inner . inner . poll_data (cx) . map_err (Into :: into) } # [doc (hidden)] pub fn poll_trailers (& mut self , cx : & mut Context ,) -> Poll < Result < Option < HeaderMap > , crate :: Error > > { match ready ! (self . inner . inner . poll_trailers (cx)) { Some (Ok (map)) => Poll :: Ready (Ok (Some (map))) , Some (Err (e)) => Poll :: Ready (Err (e . into ())) , None => Poll :: Ready (Ok (None)) , } } # [doc = " Returns true if the receive half has reached the end of stream."] # [doc = ""] # [doc = " A return value of `true` means that calls to `poll` and `poll_trailers`"] # [doc = " will both return `None`."] pub fn is_end_stream (& self) -> bool { self . inner . inner . is_end_stream () } # [doc = " Get a mutable reference to this stream's `FlowControl`."] # [doc = ""] # [doc = " It can be used immediately, or cloned to be used later."] pub fn flow_control (& mut self) -> & mut FlowControl { & mut self . inner } # [doc = " Returns the stream ID of this stream."] # [doc = ""] # [doc = " # Panics"] # [doc = ""] # [doc = " If the lock on the stream store has been poisoned."] pub fn stream_id (& self) -> StreamId { self . inner . stream_id () } }
+};
+}

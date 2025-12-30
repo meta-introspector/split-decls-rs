@@ -1,0 +1,9 @@
+// Generated macro for impl_149 (impl)
+macro_rules! Depcrate_format_time_zoneimpl_149 {
+() => {
+// Module: crate::format::time_zone
+// Provides: {"impl_149"}
+// Dependencies: {}
+impl FormatTimeZone for ExemplarCityFormat { # [doc = " Writes the time zone exemplar city format as defined by the UTS-35 spec."] # [doc = " e.g. Los Angeles"] # [doc = " <https://unicode.org/reports/tr35/tr35-dates.html#Time_Zone_Format_Terminology>"] fn format < W : writeable :: PartsWrite + ? Sized > (& self , sink : & mut W , input : & DateTimeInputUnchecked , data_payloads : TimeZoneDataPayloadsBorrowed , _fdf : Option < & DecimalFormatter > ,) -> Result < Result < () , FormatTimeZoneError > , fmt :: Error > { let Some (time_zone_id) = input . zone_id else { return Ok (Err (FormatTimeZoneError :: MissingInputField (MissingInputFieldKind :: TimeZoneId ,))) ; } ; let Some (exemplars) = data_payloads . exemplars else { return Ok (Err (FormatTimeZoneError :: NamesNotLoaded)) ; } ; let Some (exemplars_root) = data_payloads . exemplars_root else { return Ok (Err (FormatTimeZoneError :: NamesNotLoaded)) ; } ; let Some (locations) = data_payloads . locations else { return Ok (Err (FormatTimeZoneError :: NamesNotLoaded)) ; } ; let Some (locations_root) = data_payloads . locations_root else { return Ok (Err (FormatTimeZoneError :: NamesNotLoaded)) ; } ; let Some (location) = exemplars . exemplars . get (& time_zone_id) . or_else (| | exemplars_root . exemplars . get (& time_zone_id)) . or_else (| | locations . locations . get (& time_zone_id)) . or_else (| | locations_root . locations . get (& time_zone_id)) . or_else (| | exemplars . exemplars . get (& TimeZone :: UNKNOWN)) . or_else (| | exemplars_root . exemplars . get (& TimeZone :: UNKNOWN)) else { return Ok (Err (FormatTimeZoneError :: Fallback)) ; } ; location . write_to (sink) ? ; Ok (Ok (())) } }
+};
+}

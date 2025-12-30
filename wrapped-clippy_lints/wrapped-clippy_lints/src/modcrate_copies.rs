@@ -1,0 +1,44 @@
+// Generated module macro for crate::copies
+macro_rules! Modcrate_copies {
+() => {
+        Depcrate_copiesuse_1243!();
+        Depcrate_copiesuse_1244!();
+        Depcrate_copiesuse_1245!();
+        Depcrate_copiesuse_1246!();
+        Depcrate_copiesuse_1247!();
+        Depcrate_copiesuse_1248!();
+        Depcrate_copiesuse_1249!();
+        Depcrate_copiesuse_1250!();
+        Depcrate_copiesuse_1251!();
+        Depcrate_copiesuse_1252!();
+        Depcrate_copiesuse_1253!();
+        Depcrate_copiesuse_1254!();
+        Depcrate_copiesuse_1255!();
+        Depcrate_copiesuse_1256!();
+        Depcrate_copiesuse_1257!();
+        Depcrate_copiesuse_1258!();
+        Depcrate_copiesuse_1259!();
+        Depcrate_copiesmacro_1260!();
+        Depcrate_copiesmacro_1261!();
+        Depcrate_copiesmacro_1262!();
+        Depcrate_copiesmacro_1263!();
+        Depcrate_copiesCopyAndPaste!();
+        Depcrate_copiesimpl_1265!();
+        Depcrate_copiesmacro_1266!();
+        Depcrate_copiesimpl_1267!();
+        Depcrate_copieslint_if_same_then_else!();
+        Depcrate_copieslint_branches_sharing_code!();
+        Depcrate_copiesBlockEq!();
+        Depcrate_copiesimpl_1271!();
+        Depcrate_copieseq_binding_names!();
+        Depcrate_copiesmodifies_any_local!();
+        Depcrate_copieseq_stmts!();
+        Depcrate_copiesscan_block_for_eq!();
+        Depcrate_copiesadjust_by_closest_callsite!();
+        Depcrate_copiescheck_for_warn_of_moved_symbol!();
+        Depcrate_copiesmethod_caller_is_mutable!();
+        Depcrate_copieslint_same_cond!();
+        Depcrate_copieslint_same_fns_in_if_cond!();
+        Depcrate_copiesis_expr_parent_assignment!();
+    };
+}

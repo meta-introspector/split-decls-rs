@@ -1,0 +1,9 @@
+// Generated macro for macro_2874 (macro)
+macro_rules! Depcrate_indexing_slicingmacro_2874 {
+() => {
+// Module: crate::indexing_slicing
+// Provides: {"macro_2874"}
+// Dependencies: {}
+declare_clippy_lint ! { # [doc = " ### What it does"] # [doc = " Checks for usage of indexing or slicing that may panic at runtime."] # [doc = ""] # [doc = " This lint does not report on indexing or slicing operations"] # [doc = " that always panic, clippy's `out_of_bound_indexing` already"] # [doc = " handles those cases."] # [doc = ""] # [doc = " ### Why restrict this?"] # [doc = " To avoid implicit panics from indexing and slicing."] # [doc = ""] # [doc = " There are “checked” alternatives which do not panic, and can be used with `unwrap()` to make"] # [doc = " an explicit panic when it is desired."] # [doc = ""] # [doc = " ### Limitations"] # [doc = " This lint does not check for the usage of indexing or slicing on strings. These are covered"] # [doc = " by the more specific `string_slice` lint."] # [doc = ""] # [doc = " ### Example"] # [doc = " ```rust,no_run"] # [doc = " // Vector"] # [doc = " let x = vec![0, 1, 2, 3];"] # [doc = ""] # [doc = " x[2];"] # [doc = " x[100];"] # [doc = " &x[2..100];"] # [doc = ""] # [doc = " // Array"] # [doc = " let y = [0, 1, 2, 3];"] # [doc = ""] # [doc = " let i = 10; // Could be a runtime value"] # [doc = " let j = 20;"] # [doc = " &y[i..j];"] # [doc = " ```"] # [doc = ""] # [doc = " Use instead:"] # [doc = " ```no_run"] # [doc = " # let x = vec![0, 1, 2, 3];"] # [doc = " x.get(2);"] # [doc = " x.get(100);"] # [doc = " x.get(2..100);"] # [doc = ""] # [doc = " # let y = [0, 1, 2, 3];"] # [doc = " let i = 10;"] # [doc = " let j = 20;"] # [doc = " y.get(i..j);"] # [doc = " ```"] # [clippy :: version = "pre 1.29.0"] pub INDEXING_SLICING , restriction , "indexing/slicing usage" }
+};
+}

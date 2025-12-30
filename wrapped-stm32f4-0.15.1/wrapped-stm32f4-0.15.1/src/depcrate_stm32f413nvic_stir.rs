@@ -1,0 +1,9 @@
+// Generated macro for NVIC_STIR (struct)
+macro_rules! Depcrate_stm32f413NVIC_STIR {
+() => {
+// Module: crate::stm32f413
+// Provides: {"NVIC_STIR"}
+// Dependencies: {}
+# [doc = "Nested vectored interrupt controller"] pub struct NVIC_STIR { _marker : PhantomData < * const () > , }
+};
+}

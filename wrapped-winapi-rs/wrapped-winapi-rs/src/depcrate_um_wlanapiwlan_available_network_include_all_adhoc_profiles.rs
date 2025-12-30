@@ -1,0 +1,9 @@
+// Generated macro for WLAN_AVAILABLE_NETWORK_INCLUDE_ALL_ADHOC_PROFILES (const)
+macro_rules! Depcrate_um_wlanapiWLAN_AVAILABLE_NETWORK_INCLUDE_ALL_ADHOC_PROFILES {
+() => {
+// Module: crate::um::wlanapi
+// Provides: {"WLAN_AVAILABLE_NETWORK_INCLUDE_ALL_ADHOC_PROFILES"}
+// Dependencies: {}
+pub const WLAN_AVAILABLE_NETWORK_INCLUDE_ALL_ADHOC_PROFILES : DWORD = 0x00000001 ;
+};
+}

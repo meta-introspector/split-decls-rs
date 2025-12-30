@@ -1,0 +1,9 @@
+// Generated macro for init (function)
+macro_rules! Depcrate_drivers_pciinit {
+() => {
+// Module: crate::drivers::pci
+// Provides: {"init"}
+// Dependencies: {}
+pub (crate) fn init () { without_interrupts (| | { for adapter in PCI_DEVICES . finalize () . iter () . filter (| x | { let (vendor_id , device_id) = x . id () ; vendor_id == 0x1af4 && (0x1000 ..= 0x107f) . contains (& device_id) }) { info ! ("Found virtio device with device id {:#x}" , adapter . device_id ()) ; # [cfg (any (all (feature = "virtio-net" , not (feature = "rtl8139") ,) , feature = "fuse" , feature = "vsock" , feature = "console" ,))] match pci_virtio :: init_device (adapter) { # [cfg (all (not (feature = "rtl8139") , feature = "virtio-net" ,))] Ok (VirtioDriver :: Network (drv)) => * crate :: executor :: device :: NETWORK_DEVICE . lock () = Some (drv) , # [cfg (feature = "console")] Ok (VirtioDriver :: Console (drv)) => { register_driver (PciDriver :: VirtioConsole (InterruptTicketMutex :: new (* drv))) ; info ! ("Switch to virtio console") ; crate :: console :: CONSOLE . lock () . replace_device (IoDevice :: Virtio (VirtioUART :: new ())) ; } # [cfg (feature = "vsock")] Ok (VirtioDriver :: Vsock (drv)) => { register_driver (PciDriver :: VirtioVsock (InterruptTicketMutex :: new (* drv))) ; } # [cfg (feature = "fuse")] Ok (VirtioDriver :: FileSystem (drv)) => { register_driver (PciDriver :: VirtioFs (InterruptTicketMutex :: new (drv))) ; } _ => { } } } # [cfg (feature = "rtl8139")] for adapter in PCI_DEVICES . finalize () . iter () . filter (| x | { let (vendor_id , device_id) = x . id () ; vendor_id == 0x10ec && (0x8138 ..= 0x8139) . contains (& device_id) }) { info ! ("Found Realtek network device with device id {:#x}" , adapter . device_id ()) ; if let Ok (drv) = rtl8139 :: init_device (adapter) { * crate :: executor :: device :: NETWORK_DEVICE . lock () = Some (drv) ; } } }) ; }
+};
+}

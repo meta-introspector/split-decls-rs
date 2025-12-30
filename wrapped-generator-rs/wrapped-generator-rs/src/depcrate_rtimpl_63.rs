@@ -1,0 +1,9 @@
+// Generated macro for impl_63 (impl)
+macro_rules! Depcrate_rtimpl_63 {
+() => {
+// Module: crate::rt
+// Provides: {"impl_63"}
+// Dependencies: {}
+impl ContextStack { # [cold] fn init_root () -> * mut Context { let root = Box :: leak (Box :: new (Context :: new ())) ; root . parent = root ; ROOT_CONTEXT_P . set (root) ; root } # [doc = " get the current context stack"] pub fn current () -> ContextStack { let mut root = ROOT_CONTEXT_P . get () ; if root . is_null () { root = Self :: init_root () ; } # [cfg (all (not (debug_assertions) , any (windows , target_os = "macos")))] { let _thread = std :: thread :: current () ; let _thread = std :: thread :: current () ; } ContextStack { root } } # [doc = " get the top context"] # [inline] pub fn top (& self) -> & 'static mut Context { unsafe { let root = & * self . root ; & mut * root . parent } } # [doc = " get the coroutine context"] # [inline] pub fn co_ctx (& self) -> Option < & 'static mut Context > { let mut ctx = self . top () ; while ! std :: ptr :: eq (ctx , self . root) { if ! ctx . local_data . is_null () { return Some (ctx) ; } ctx = unsafe { & mut * ctx . parent } ; } None } # [doc = " push the context to the thread context list"] # [inline] pub fn push_context (& self , ctx : * mut Context) { let root = unsafe { & mut * self . root } ; let ctx = unsafe { & mut * ctx } ; let top = unsafe { & mut * root . parent } ; let new_top = ctx . parent ; top . child = ctx ; ctx . parent = top ; root . parent = new_top ; } # [doc = " pop the context from the thread context list and return it's parent context"] # [inline] pub fn pop_context (& self , ctx : * mut Context) -> & 'static mut Context { let root = unsafe { & mut * self . root } ; let ctx = unsafe { & mut * ctx } ; let parent = unsafe { & mut * ctx . parent } ; ctx . parent = root . parent ; parent . child = ptr :: null_mut () ; root . parent = parent ; parent } }
+};
+}

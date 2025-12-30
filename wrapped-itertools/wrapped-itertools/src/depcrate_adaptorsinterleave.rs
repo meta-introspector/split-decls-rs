@@ -1,9 +1,9 @@
-// Generated macro for Interleave (struct)
-macro_rules! Depcrate_adaptorsInterleave {
+// Generated macro for interleave (function)
+macro_rules! Depcrate_adaptorsinterleave {
 () => {
 // Module: crate::adaptors
-// Provides: {"Interleave"}
+// Provides: {"interleave"}
 // Dependencies: {}
-# [doc = " An iterator adaptor that alternates elements from two iterators until both"] # [doc = " run out."] # [doc = ""] # [doc = " This iterator is *fused*."] # [doc = ""] # [doc = " See [`.interleave()`](crate::Itertools::interleave) for more information."] # [derive (Clone , Debug)] # [must_use = "iterator adaptors are lazy and do nothing unless consumed"] pub struct Interleave < I , J > { i : Fuse < I > , j : Fuse < J > , next_coming_from_j : bool , }
+# [doc = " Create an iterator that interleaves elements in `i` and `j`."] # [doc = ""] # [doc = " [`IntoIterator`] enabled version of [`Itertools::interleave`](crate::Itertools::interleave)."] pub fn interleave < I , J > (i : I , j : J ,) -> Interleave < < I as IntoIterator > :: IntoIter , < J as IntoIterator > :: IntoIter > where I : IntoIterator , J : IntoIterator < Item = I :: Item > , { Interleave { i : i . into_iter () . fuse () , j : j . into_iter () . fuse () , next_coming_from_j : false , } }
 };
 }

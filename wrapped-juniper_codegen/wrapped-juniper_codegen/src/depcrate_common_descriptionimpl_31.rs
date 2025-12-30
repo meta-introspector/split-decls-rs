@@ -1,0 +1,9 @@
+// Generated macro for impl_31 (impl)
+macro_rules! Depcrate_common_descriptionimpl_31 {
+() => {
+// Module: crate::common::description
+// Provides: {"impl_31"}
+// Dependencies: {}
+impl Description { # [doc = " Tries to parse a [`Description`] from a `#[doc = ...]` attribute (or"] # [doc = " Rust doc comment), by looking up for it in the provided"] # [doc = " [`syn::Attribute`]s."] # [doc = ""] # [doc = " # Errors"] # [doc = ""] # [doc = " If failed to parse a [`Description`] from a found `#[doc = ...]`"] # [doc = " attribute."] pub (crate) fn parse_from_doc_attrs (attrs : & [syn :: Attribute] ,) -> syn :: Result < Option < SpanContainer < Self > > > { let (mut first_span , mut descriptions) = (None , Vec :: new ()) ; for attr in attrs { match attr . meta { syn :: Meta :: NameValue (ref nv) if nv . path . is_ident ("doc") => { if let syn :: Expr :: Lit (syn :: ExprLit { lit : syn :: Lit :: Str (strlit) , .. }) = & nv . value { if first_span . is_none () { first_span = Some (strlit . span ()) ; } descriptions . push (strlit . value ()) ; } else { return Err (syn :: Error :: new (nv . value . span () , "#[doc] attributes may only have a string literal" ,)) ; } } _ => continue , } } Ok (first_span . map (| span | { SpanContainer :: new (span , None , Self (syn :: LitStr :: new (& Self :: concatenate (& descriptions) , span)) ,) })) } # [doc = " Concatenates [`Description`] strings into a single one."] fn concatenate (descriptions : & [String]) -> String { let last_index = descriptions . len () - 1 ; descriptions . iter () . map (| s | s . as_str () . trim_end ()) . map (| s | { s . strip_prefix (' ') . unwrap_or (s) }) . enumerate () . fold (String :: new () , | mut buffer , (index , s) | { if index == last_index { buffer . push_str (s) ; } else if s . ends_with ('\\') { buffer . push_str (s . trim_end_matches ('\\')) ; buffer . push (' ') ; } else { buffer . push_str (s) ; buffer . push ('\n') ; } buffer }) } }
+};
+}

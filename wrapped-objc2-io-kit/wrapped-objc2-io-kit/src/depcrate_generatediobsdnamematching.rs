@@ -1,0 +1,9 @@
+// Generated macro for IOBSDNameMatching (function)
+macro_rules! Depcrate_generatedIOBSDNameMatching {
+() => {
+// Module: crate::generated
+// Provides: {"IOBSDNameMatching"}
+// Dependencies: {}
+# [doc = " Create a matching dictionary that specifies an IOService match based on BSD device name."] # [doc = ""] # [doc = " IOServices that represent BSD devices have an associated BSD name. This function creates a matching dictionary that will match IOService's with a given BSD name."] # [doc = ""] # [doc = " Parameter `mainPort`: The main port obtained from IOMainPort(). Pass kIOMainPortDefault to look up the default main port."] # [doc = ""] # [doc = " Parameter `options`: No options are currently defined."] # [doc = ""] # [doc = " Parameter `bsdName`: The BSD name, as a const char *."] # [doc = ""] # [doc = " Returns: The matching dictionary created, is returned on success, or zero on failure. The dictionary is commonly passed to IOServiceGetMatchingServices or IOServiceAddNotification which will consume a reference, otherwise it should be released with CFRelease by the caller."] # [doc = ""] # [doc = " # Safety"] # [doc = ""] # [doc = " - `bsd_name` must be a valid pointer."] # [doc = " - The returned generic must be of the correct type."] # [doc = " - The returned generic must be of the correct type."] # [cfg (feature = "libc")] # [inline] pub unsafe extern "C-unwind" fn IOBSDNameMatching (main_port : libc :: mach_port_t , options : u32 , bsd_name : * const c_char ,) -> Option < CFRetained < CFMutableDictionary > > { extern "C-unwind" { fn IOBSDNameMatching (main_port : libc :: mach_port_t , options : u32 , bsd_name : * const c_char ,) -> Option < NonNull < CFMutableDictionary > > ; } let ret = unsafe { IOBSDNameMatching (main_port , options , bsd_name) } ; ret . map (| ret | unsafe { CFRetained :: from_raw (ret) }) }
+};
+}

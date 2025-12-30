@@ -1,0 +1,9 @@
+// Generated macro for use_6782 (use)
+macro_rules! Depcrate_methods_unnecessary_get_then_checkuse_6782 {
+() => {
+// Module: crate::methods::unnecessary_get_then_check
+// Provides: {"use_6782"}
+// Dependencies: {}
+use super :: UNNECESSARY_GET_THEN_CHECK ;
+};
+}

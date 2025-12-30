@@ -1,0 +1,56 @@
+// Generated module macro for crate::gz
+macro_rules! Modcrate_gz {
+() => {
+        Depcrate_gzuse_46!();
+        Depcrate_gzuse_47!();
+        Depcrate_gzuse_48!();
+        Depcrate_gzuse_49!();
+        Depcrate_gzuse_50!();
+        Depcrate_gzuse_51!();
+        Depcrate_gzcrate_path!();
+        Depcrate_gzpath!();
+        Depcrate_gzbinary_mode!();
+        Depcrate_gztest_open!();
+        Depcrate_gztest_fdopen!();
+        Depcrate_gzopen_close!();
+        Depcrate_gzgzclose_error!();
+        Depcrate_gzcreate!();
+        Depcrate_gztemp_base!();
+        Depcrate_gzgz_error_access!();
+        Depcrate_gzgz_direct_write!();
+        Depcrate_gzgz_direct_read!();
+        Depcrate_gzgzread_special_cases!();
+        Depcrate_gzgzread_gzip!();
+        Depcrate_gzgzread_direct!();
+        Depcrate_gzgzwrite_basic!();
+        Depcrate_gzgzwrite_error!();
+        Depcrate_gzgzflush_basic!();
+        Depcrate_gzgzflush_error!();
+        Depcrate_gzgzoffset_gztell_read!();
+        Depcrate_gzgzoffset_gztell_write!();
+        Depcrate_gzgzoffset_gztell_error!();
+        Depcrate_gzgzputc_basic!();
+        Depcrate_gzgzputc_error!();
+        Depcrate_gzgzputs_basic!();
+        Depcrate_gzgzputs_error!();
+        Depcrate_gzgzgetc_basic!();
+        Depcrate_gzgzgetc_error!();
+        Depcrate_gzgzungetc_basic!();
+        Depcrate_gzgzungetc_error!();
+        Depcrate_gzgzgets_basic!();
+        Depcrate_gzgzgets_error!();
+        Depcrate_gzgzfread_basic!();
+        Depcrate_gzgzfread_error!();
+        Depcrate_gzgzfwrite_basic!();
+        Depcrate_gzgzfwrite_error!();
+        Depcrate_gzgzsetparams_basic!();
+        Depcrate_gzgzsetparams_error!();
+        Depcrate_gzgzseek_read!();
+        Depcrate_gzgzseek_write!();
+        Depcrate_gzgzseek_gzsetparams!();
+        Depcrate_gzgzseek_error!();
+        Depcrate_gzgzrewind_error!();
+        Depcrate_gzfile_size!();
+        Depcrate_gzgzprintf!();
+    };
+}

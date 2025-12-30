@@ -1,0 +1,9 @@
+// Generated macro for Event (enum)
+macro_rules! Depcrate_stream_binary_writerEvent {
+() => {
+// Module: crate::stream::binary_writer
+// Provides: {"Event"}
+// Dependencies: {}
+# [doc = " An array of `len` elements is stored as a `Collection` event followed by `skip_len` events"] # [doc = " containing the contents of the array. e.g."] # [doc = ""] # [doc = " Collection(ty: Array, len: 2, skip_len: 2)"] # [doc = " Value"] # [doc = " Value"] # [doc = ""] # [doc = " If the array contains another array or dictionary `len` and `skip_len` will differ. e.g."] # [doc = ""] # [doc = " Collection(ty: Array, len: 2, skip_len: 3)"] # [doc = " Value"] # [doc = " Collection(ty: Array, len: 1, skip_len: 1)"] # [doc = " Value"] # [doc = ""] # [doc = " A dictionary of `len` (key, value) pairs is stored as a `Collection` event followed by"] # [doc = " `skip_len` events containing the contents of the dictionary. The dictionary values are stored"] # [doc = " first. These are followed by a `DictionaryKeys` event and then the keys themselves. e.g."] # [doc = ""] # [doc = " Collection(ty: Dictionary, len: 2, skip_len: 6)"] # [doc = " Value"] # [doc = " Collection(ty: Array, len: 1, skip_len: 1)"] # [doc = " Value"] # [doc = " DictionaryKeys(2)"] # [doc = " Value (Key)"] # [doc = " Value (Key)"] # [doc = ""] # [doc = " This arrangement simplifies writing dictionaries as they must be written in the order"] # [doc = " (key, key, value, value) instead of (key, value, key, value) as they are passed to the writer."] # [doc = " Unclosed dictionaries have their keys stored in `dictionary_key_events` and these are only"] # [doc = " moved to the end of the `BinaryWriter::events` array once the dictionary is closed in"] # [doc = " `write_end_collection`."] enum Event { Collection (Collection) , # [doc = " Index of the value in the `values` map."] Value (usize) , # [doc = " The number of dictionary keys following this event."] DictionaryKeys (usize) , }
+};
+}

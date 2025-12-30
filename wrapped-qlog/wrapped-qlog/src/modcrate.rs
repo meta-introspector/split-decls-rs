@@ -1,0 +1,39 @@
+// Generated module macro for crate
+macro_rules! Modcrate {
+() => {
+        Depcrateuse_1!();
+        Depcrateuse_2!();
+        Depcrateuse_3!();
+        Depcrateuse_4!();
+        DepcrateError!();
+        Depcrateimpl_6!();
+        Depcrateimpl_7!();
+        Depcrateimpl_8!();
+        DepcrateQLOG_VERSION!();
+        DepcrateBytes!();
+        DepcrateStatelessResetToken!();
+        DepcrateResult!();
+        DepcrateQlog!();
+        DepcrateQlogSeq!();
+        DepcrateImportanceLogLevel!();
+        DepcrateTrace!();
+        Depcrateimpl_17!();
+        DepcrateTraceSeq!();
+        Depcrateimpl_19!();
+        DepcrateVantagePoint!();
+        DepcrateVantagePointType!();
+        DepcrateConfiguration!();
+        Depcrateimpl_23!();
+        DepcrateCommonFields!();
+        DepcrateTokenType!();
+        DepcrateToken!();
+        DepcrateHexSlice!();
+        Depcrateimpl_28!();
+        Depcrateimpl_29!();
+        Depcratetesting!();
+        Depcratetests!();
+        Depcrateevents!();
+        Depcratereader!();
+        Depcratestreamer!();
+    };
+}

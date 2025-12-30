@@ -1,0 +1,9 @@
+// Generated macro for impl_309 (impl)
+macro_rules! Depcrate_matchers_contains_matcherimpl_309 {
+() => {
+// Module: crate::matchers::contains_matcher
+// Provides: {"impl_309"}
+// Dependencies: {}
+impl < T : Debug + Copy , InnerMatcherT : Matcher < T > , ContainerT : Debug + Copy > Matcher < ContainerT > for ContainsMatcher < InnerMatcherT > where ContainerT : IntoIterator < Item = T > , { fn matches (& self , actual : ContainerT) -> MatcherResult { if let Some (count) = & self . count { count . matches (self . count_matches (actual)) } else { for v in actual . into_iter () { if self . inner . matches (v) . into () { return MatcherResult :: Match ; } } MatcherResult :: NoMatch } } fn explain_match (& self , actual : ContainerT) -> Description { let count = self . count_matches (actual) ; match (count , & self . count) { (_ , Some (_)) => format ! ("which contains {count} matching elements") . into () , (0 , None) => "which does not contain a matching element" . into () , (_ , None) => "which contains a matching element" . into () , } } fn describe (& self , matcher_result : MatcherResult) -> Description { match (matcher_result , & self . count) { (MatcherResult :: Match , Some (count)) => format ! ("contains n elements which {}\n  where n {}" , self . inner . describe (MatcherResult :: Match) , count . describe (MatcherResult :: Match)) . into () , (MatcherResult :: NoMatch , Some (count)) => format ! ("doesn't contain n elements which {}\n  where n {}" , self . inner . describe (MatcherResult :: Match) , count . describe (MatcherResult :: Match)) . into () , (MatcherResult :: Match , None) => format ! ("contains at least one element which {}" , self . inner . describe (MatcherResult :: Match)) . into () , (MatcherResult :: NoMatch , None) => { format ! ("contains no element which {}" , self . inner . describe (MatcherResult :: Match)) . into () } } } }
+};
+}

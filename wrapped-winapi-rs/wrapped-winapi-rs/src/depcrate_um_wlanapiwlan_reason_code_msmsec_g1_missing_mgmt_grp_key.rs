@@ -1,0 +1,9 @@
+// Generated macro for WLAN_REASON_CODE_MSMSEC_G1_MISSING_MGMT_GRP_KEY (const)
+macro_rules! Depcrate_um_wlanapiWLAN_REASON_CODE_MSMSEC_G1_MISSING_MGMT_GRP_KEY {
+() => {
+// Module: crate::um::wlanapi
+// Provides: {"WLAN_REASON_CODE_MSMSEC_G1_MISSING_MGMT_GRP_KEY"}
+// Dependencies: {}
+pub const WLAN_REASON_CODE_MSMSEC_G1_MISSING_MGMT_GRP_KEY : WLAN_REASON_CODE = WLAN_REASON_CODE_MSMSEC_CONNECT_BASE + 27 ;
+};
+}

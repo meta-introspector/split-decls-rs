@@ -1,0 +1,43 @@
+// Generated module macro for crate::nullable
+macro_rules! Modcrate_nullable {
+() => {
+        Depcrate_nullableuse_17!();
+        Depcrate_nullableuse_18!();
+        Depcrate_nullableNullableTimestamp!();
+        Depcrate_nullableimpl_20!();
+        Depcrate_nullableimpl_21!();
+        Depcrate_nullableimpl_22!();
+        Depcrate_nullableimpl_23!();
+        Depcrate_nullableimpl_24!();
+        Depcrate_nullableimpl_25!();
+        Depcrate_nullableimpl_26!();
+        Depcrate_nullableimpl_27!();
+        Depcrate_nullableNullableDateTime!();
+        Depcrate_nullableimpl_29!();
+        Depcrate_nullableimpl_30!();
+        Depcrate_nullableimpl_31!();
+        Depcrate_nullableimpl_32!();
+        Depcrate_nullableimpl_33!();
+        Depcrate_nullableimpl_34!();
+        Depcrate_nullableNullableDate!();
+        Depcrate_nullableimpl_36!();
+        Depcrate_nullableimpl_37!();
+        Depcrate_nullableimpl_38!();
+        Depcrate_nullableimpl_39!();
+        Depcrate_nullableimpl_40!();
+        Depcrate_nullableimpl_41!();
+        Depcrate_nullableNullableTime!();
+        Depcrate_nullableimpl_43!();
+        Depcrate_nullableimpl_44!();
+        Depcrate_nullableimpl_45!();
+        Depcrate_nullableimpl_46!();
+        Depcrate_nullableimpl_47!();
+        Depcrate_nullableimpl_48!();
+        Depcrate_nullableNullableSpan!();
+        Depcrate_nullableimpl_50!();
+        Depcrate_nullableimpl_51!();
+        Depcrate_nullableimpl_52!();
+        Depcrate_nullableimpl_53!();
+        Depcrate_nullableimpl_54!();
+    };
+}

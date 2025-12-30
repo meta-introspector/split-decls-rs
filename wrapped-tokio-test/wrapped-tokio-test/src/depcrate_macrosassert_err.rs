@@ -1,0 +1,9 @@
+// Generated macro for assert_err (macro)
+macro_rules! Depcrate_macrosassert_err {
+() => {
+// Module: crate::macros
+// Provides: {"assert_err"}
+// Dependencies: {}
+# [doc = " Asserts that the expression evaluates to `Err` and returns the error."] # [doc = ""] # [doc = " This will invoke the `panic!` macro if the provided expression does not evaluate to `Err` at"] # [doc = " runtime."] # [doc = ""] # [doc = " # Custom Messages"] # [doc = ""] # [doc = " This macro has a second form, where a custom panic message can be provided with or without"] # [doc = " arguments for formatting."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " use tokio_test::assert_err;"] # [doc = " use std::str::FromStr;"] # [doc = ""] # [doc = ""] # [doc = " let err = assert_err!(u32::from_str(\"fail\"));"] # [doc = ""] # [doc = " let msg = \"fail\";"] # [doc = " let err = assert_err!(u32::from_str(msg), \"testing parsing {:?} as u32\", msg);"] # [doc = " ```"] # [macro_export] macro_rules ! assert_err { ($ e : expr) => { assert_err ! ($ e ,) ; } ; ($ e : expr ,) => { { use std :: result :: Result ::*; match $ e { Ok (v) => panic ! ("assertion failed: Ok({:?})" , v) , Err (e) => e , } } } ; ($ e : expr , $ ($ arg : tt) +) => { { use std :: result :: Result ::*; match $ e { Ok (v) => panic ! ("assertion failed: Ok({:?}): {}" , v , format_args ! ($ ($ arg) +)) , Err (e) => e , } } } ; }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for impl_1324 (impl)
+macro_rules! Depcrate_utils_build_stamp_testsimpl_1324 {
+() => {
+// Module: crate::utils::build_stamp::tests
+// Provides: {"impl_1324"}
+// Dependencies: {}
+impl ConfigBuilder { fn from_args (args : & [& str] , directory : PathBuf) -> Self { Self { args : args . iter () . copied () . map (String :: from) . collect () , directory } } pub fn path (mut self , path : & str) -> Self { self . arg (path) } pub fn paths (mut self , paths : & [& str]) -> Self { self . args (paths) } pub fn arg (mut self , arg : & str) -> Self { self . args . push (arg . to_string ()) ; self } pub fn args (mut self , args : & [& str]) -> Self { for arg in args { self = self . arg (arg) ; } self } # [doc = " Set the specified target to be treated as a no_std target."] pub fn override_target_no_std (mut self , target : & str) -> Self { self . args (& ["--set" , & format ! ("target.{target}.no-std=true")]) } pub fn hosts (mut self , targets : & [& str]) -> Self { self . args . push ("--host" . to_string ()) ; self . args . push (targets . join (",")) ; self } pub fn targets (mut self , targets : & [& str]) -> Self { self . args . push ("--target" . to_string ()) ; self . args . push (targets . join (",")) ; self } pub fn stage (mut self , stage : u32) -> Self { self . args . push ("--stage" . to_string ()) ; self . args . push (stage . to_string ()) ; self } pub fn create_config (mut self) -> Config { self . args . push ("--dry-run" . to_string ()) ; self . args . push ("--set" . to_string ()) ; self . args . push ("build.submodules=false" . to_string ()) ; self . args . push ("--set" . to_string ()) ; self . args . push ("llvm.download-ci-llvm=false" . to_string ()) ; self . args . push ("--build-dir" . to_string ()) ; self . args . push (self . directory . join ("build") . display () . to_string ()) ; Config :: parse (Flags :: parse (& self . args)) } }
+};
+}

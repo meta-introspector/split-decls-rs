@@ -4,6 +4,6 @@ macro_rules! Depcrateuse_754 {
 // Module: crate
 // Provides: {"use_754"}
 // Dependencies: {}
-pub use self :: cycle :: Cycle ;
+pub use self :: durability :: Durability ;
 };
 }

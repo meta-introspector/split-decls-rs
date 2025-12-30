@@ -1,0 +1,42 @@
+// Generated module macro for crate
+macro_rules! Modcrate {
+() => {
+        Depcrateuse_1!();
+        Depcrateuse_2!();
+        Depcrateuse_3!();
+        Depcrateuse_4!();
+        Depcrateuse_5!();
+        Depcrateuse_6!();
+        Depcrateuse_7!();
+        Depcrateunit_tests!();
+        DepcrateNAME!();
+        DepcrateDERIVE_KEY_ARG!();
+        DepcrateKEYED_ARG!();
+        DepcrateLENGTH_ARG!();
+        DepcrateNO_NAMES_ARG!();
+        DepcrateRAW_ARG!();
+        DepcrateTAG_ARG!();
+        DepcrateCHECK_ARG!();
+        DepcrateInner!();
+        DepcrateArgs!();
+        Depcrateimpl_22!();
+        Depcratehash_path!();
+        Depcratewrite_hex_output!();
+        Depcratewrite_raw_output!();
+        Depcrateread_key_from_stdin!();
+        DepcrateFilepathString!();
+        Depcratefilepath_to_string!();
+        Depcratehex_half_byte!();
+        Depcratecheck_for_invalid_characters!();
+        Depcrateunescape!();
+        DepcrateParsedCheckLine!();
+        Depcratesplit_untagged_check_line!();
+        Depcratesplit_tagged_check_line!();
+        Depcrateparse_check_line!();
+        Depcratehash_one_input!();
+        Depcratecheck_one_line!();
+        Depcratecheck_one_checkfile!();
+        Depcratemain!();
+        Depcratetest!();
+    };
+}

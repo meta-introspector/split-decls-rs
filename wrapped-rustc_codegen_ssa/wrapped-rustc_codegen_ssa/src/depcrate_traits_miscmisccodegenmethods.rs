@@ -1,0 +1,9 @@
+// Generated macro for MiscCodegenMethods (trait)
+macro_rules! Depcrate_traits_miscMiscCodegenMethods {
+() => {
+// Module: crate::traits::misc
+// Provides: {"MiscCodegenMethods"}
+// Dependencies: {}
+pub trait MiscCodegenMethods < 'tcx > : BackendTypes { fn vtables (& self ,) -> & RefCell < FxHashMap < (Ty < 'tcx > , Option < ty :: ExistentialTraitRef < 'tcx > >) , Self :: Value > > ; fn apply_vcall_visibility_metadata (& self , _ty : Ty < 'tcx > , _poly_trait_ref : Option < ty :: ExistentialTraitRef < 'tcx > > , _vtable : Self :: Value ,) { } fn get_fn (& self , instance : Instance < 'tcx >) -> Self :: Function ; fn get_fn_addr (& self , instance : Instance < 'tcx >) -> Self :: Value ; fn eh_personality (& self) -> Self :: Function ; fn sess (& self) -> & Session ; fn set_frame_pointer_type (& self , llfn : Self :: Function) ; fn apply_target_cpu_attr (& self , llfn : Self :: Function) ; # [doc = " Declares the extern \"C\" main function for the entry point. Returns None if the symbol"] # [doc = " already exists."] fn declare_c_main (& self , fn_type : Self :: Type) -> Option < Self :: Function > ; }
+};
+}

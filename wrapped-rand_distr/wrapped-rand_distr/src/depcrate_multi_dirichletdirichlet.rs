@@ -1,0 +1,9 @@
+// Generated macro for Dirichlet (struct)
+macro_rules! Depcrate_multi_dirichletDirichlet {
+() => {
+// Module: crate::multi::dirichlet
+// Provides: {"Dirichlet"}
+// Dependencies: {}
+# [doc = " The [Dirichlet distribution](https://en.wikipedia.org/wiki/Dirichlet_distribution) `Dirichlet(α₁, α₂, ..., αₖ)`."] # [doc = ""] # [doc = " The Dirichlet distribution is a family of continuous multivariate"] # [doc = " probability distributions parameterized by a vector of positive"] # [doc = " real numbers `α₁, α₂, ..., αₖ`, where `k` is the number of dimensions"] # [doc = " of the distribution. The distribution is supported on the `k-1`-dimensional"] # [doc = " simplex, which is the set of points `x = [x₁, x₂, ..., xₖ]` such that"] # [doc = " `0 ≤ xᵢ ≤ 1` and `∑ xᵢ = 1`."] # [doc = " It is a multivariate generalization of the [`Beta`](crate::Beta) distribution."] # [doc = " The distribution is symmetric when all `αᵢ` are equal."] # [doc = ""] # [doc = " # Plot"] # [doc = ""] # [doc = " The following plot illustrates the 2-dimensional simplices for various"] # [doc = " 3-dimensional Dirichlet distributions."] # [doc = ""] # [doc = " ![Dirichlet distribution](https://raw.githubusercontent.com/rust-random/charts/main/charts/dirichlet.png)"] # [doc = ""] # [doc = " # Example"] # [doc = ""] # [doc = " ```"] # [doc = " use rand::prelude::*;"] # [doc = " use rand_distr::multi::Dirichlet;"] # [doc = " use rand_distr::multi::MultiDistribution;"] # [doc = ""] # [doc = " let dirichlet = Dirichlet::new(&[1.0, 2.0, 3.0]).unwrap();"] # [doc = " let samples = dirichlet.sample(&mut rand::rng());"] # [doc = " println!(\"{:?} is from a Dirichlet(&[1.0, 2.0, 3.0]) distribution\", samples);"] # [doc = " ```"] # [cfg_attr (feature = "serde" , serde_as)] # [derive (Clone , Debug , PartialEq)] pub struct Dirichlet < F > where F : Float , StandardNormal : Distribution < F > , Exp1 : Distribution < F > , Open01 : Distribution < F > , { repr : DirichletRepr < F > , }
+};
+}

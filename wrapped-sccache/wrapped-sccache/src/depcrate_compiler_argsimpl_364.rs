@@ -1,0 +1,9 @@
+// Generated macro for impl_364 (impl)
+macro_rules! Depcrate_compiler_argsimpl_364 {
+() => {
+// Module: crate::compiler::args
+// Provides: {"impl_364"}
+// Dependencies: {}
+impl < T : ArgumentValue > Argument < T > { # [doc = " For arguments that allow both a concatenated or separated disposition,"] # [doc = " normalize a parsed argument to a preferred disposition."] pub fn normalize (self , disposition : NormalizedDisposition) -> Self { match self { Argument :: WithValue (s , v , ArgDisposition :: CanBeConcatenated (d)) | Argument :: WithValue (s , v , ArgDisposition :: CanBeSeparated (d)) => Argument :: WithValue (s , v , match disposition { NormalizedDisposition :: Separated => ArgDisposition :: Separated , NormalizedDisposition :: Concatenated => ArgDisposition :: Concatenated (d) , } ,) , a => a , } } pub fn to_os_string (& self) -> OsString { match * self { Argument :: Raw (ref s) | Argument :: UnknownFlag (ref s) => s . clone () , Argument :: Flag (ref s , _) | Argument :: WithValue (ref s , _ , _) => s . into () , } } pub fn flag_str (& self) -> Option < & 'static str > { match * self { Argument :: Flag (s , _) | Argument :: WithValue (s , _ , _) => Some (s) , _ => None , } } pub fn get_data (& self) -> Option < & T > { match * self { Argument :: Flag (_ , ref d) => Some (d) , Argument :: WithValue (_ , ref d , _) => Some (d) , _ => None , } } # [doc = " Transforms a parsed argument into an iterator."] pub fn iter_os_strings (& self) -> Iter < '_ , T > { Iter { arg : self , emitted : 0 , } } # [doc = " Transforms a parsed argument into an iterator over strings, with transformed paths."] # [cfg (feature = "dist-client")] pub fn iter_strings < F : FnMut (& Path) -> Option < String > > (& self , path_transformer : F ,) -> IterStrings < '_ , T , F > { IterStrings { arg : self , emitted : 0 , path_transformer , } } }
+};
+}

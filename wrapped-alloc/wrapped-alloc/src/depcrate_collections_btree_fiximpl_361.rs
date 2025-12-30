@@ -1,0 +1,9 @@
+// Generated macro for impl_361 (impl)
+macro_rules! Depcrate_collections_btree_fiximpl_361 {
+() => {
+// Module: crate::collections::btree::fix
+// Provides: {"impl_361"}
+// Dependencies: {}
+impl < 'a , K : 'a , V : 'a > Handle < NodeRef < marker :: Mut < 'a > , K , V , marker :: Internal > , marker :: KV > { # [doc = " Stocks up the left child, assuming the right child isn't underfull, and"] # [doc = " provisions an extra element to allow merging its children in turn"] # [doc = " without becoming underfull."] # [doc = " Returns the left child."] fn fix_left_child < A : Allocator + Clone > (self , alloc : A ,) -> NodeRef < marker :: Mut < 'a > , K , V , marker :: LeafOrInternal > { let mut internal_kv = self . consider_for_balancing () ; let left_len = internal_kv . left_child_len () ; debug_assert ! (internal_kv . right_child_len () >= MIN_LEN) ; if internal_kv . can_merge () { internal_kv . merge_tracking_child (alloc) } else { let count = (MIN_LEN + 1) . saturating_sub (left_len) ; if count > 0 { internal_kv . bulk_steal_right (count) ; } internal_kv . into_left_child () } } # [doc = " Stocks up the right child, assuming the left child isn't underfull, and"] # [doc = " provisions an extra element to allow merging its children in turn"] # [doc = " without becoming underfull."] # [doc = " Returns wherever the right child ended up."] fn fix_right_child < A : Allocator + Clone > (self , alloc : A ,) -> NodeRef < marker :: Mut < 'a > , K , V , marker :: LeafOrInternal > { let mut internal_kv = self . consider_for_balancing () ; let right_len = internal_kv . right_child_len () ; debug_assert ! (internal_kv . left_child_len () >= MIN_LEN) ; if internal_kv . can_merge () { internal_kv . merge_tracking_child (alloc) } else { let count = (MIN_LEN + 1) . saturating_sub (right_len) ; if count > 0 { internal_kv . bulk_steal_left (count) ; } internal_kv . into_right_child () } } }
+};
+}

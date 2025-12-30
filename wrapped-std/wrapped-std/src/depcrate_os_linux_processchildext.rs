@@ -1,0 +1,9 @@
+// Generated macro for ChildExt (trait)
+macro_rules! Depcrate_os_linux_processChildExt {
+() => {
+// Module: crate::os::linux::process
+// Provides: {"ChildExt"}
+// Dependencies: {}
+# [doc = " Os-specific extensions for [`Child`]"] # [doc = ""] # [doc = " [`Child`]: process::Child"] pub trait ChildExt : Sealed { # [doc = " Obtains a reference to the [`PidFd`] created for this [`Child`], if available."] # [doc = ""] # [doc = " A pidfd will only be available if its creation was requested with"] # [doc = " [`create_pidfd`] when the corresponding [`Command`] was created."] # [doc = ""] # [doc = " Even if requested, a pidfd may not be available due to an older"] # [doc = " version of Linux being in use, or if some other error occurred."] # [doc = ""] # [doc = " [`Command`]: process::Command"] # [doc = " [`create_pidfd`]: CommandExt::create_pidfd"] # [doc = " [`Child`]: process::Child"] fn pidfd (& self) -> Result < & PidFd > ; # [doc = " Returns the [`PidFd`] created for this [`Child`], if available."] # [doc = " Otherwise self is returned."] # [doc = ""] # [doc = " A pidfd will only be available if its creation was requested with"] # [doc = " [`create_pidfd`] when the corresponding [`Command`] was created."] # [doc = ""] # [doc = " Taking ownership of the PidFd consumes the Child to avoid pid reuse"] # [doc = " races. Use [`pidfd`] and [`BorrowedFd::try_clone_to_owned`] if"] # [doc = " you don't want to disassemble the Child yet."] # [doc = ""] # [doc = " Even if requested, a pidfd may not be available due to an older"] # [doc = " version of Linux being in use, or if some other error occurred."] # [doc = ""] # [doc = " [`Command`]: process::Command"] # [doc = " [`create_pidfd`]: CommandExt::create_pidfd"] # [doc = " [`pidfd`]: ChildExt::pidfd"] # [doc = " [`Child`]: process::Child"] fn into_pidfd (self) -> crate :: result :: Result < PidFd , Self > where Self : Sized ; }
+};
+}

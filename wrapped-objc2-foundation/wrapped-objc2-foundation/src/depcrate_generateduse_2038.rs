@@ -1,0 +1,9 @@
+// Generated macro for use_2038 (pub_use)
+macro_rules! Depcrate_generateduse_2038 {
+() => {
+// Module: crate::generated
+// Provides: {"use_2038"}
+// Dependencies: {}
+# [cfg (all (feature = "NSString" , feature = "NSValueTransformer"))] pub use self :: __NSValueTransformer :: NSIsNilTransformerName ;
+};
+}

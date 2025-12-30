@@ -1,0 +1,9 @@
+// Generated macro for impl_923 (impl)
+macro_rules! Depcrate_packetimpl_923 {
+() => {
+// Module: crate::packet
+// Provides: {"impl_923"}
+// Dependencies: {}
+impl PktNumManager { pub fn new () -> Self { PktNumManager { skip_pn : None , skip_pn_counter : None , } } pub fn on_packet_sent (& mut self , cwnd : usize , max_datagram_size : usize , handshake_completed : bool ,) { if let Some (counter) = & mut self . skip_pn_counter { * counter = counter . saturating_sub (1) ; } else if self . should_arm_skip_counter (handshake_completed) { self . arm_skip_counter (cwnd , max_datagram_size) ; } } fn should_arm_skip_counter (& self , handshake_completed : bool) -> bool { let counter_not_set = self . skip_pn_counter . is_none () ; let no_current_skip_packet = self . skip_pn . is_none () ; counter_not_set && no_current_skip_packet && handshake_completed } pub fn should_skip_pn (& self , handshake_completed : bool) -> bool { let no_current_skip_packet = self . skip_pn . is_none () ; let counter_expired = match self . skip_pn_counter { Some (counter) => counter == 0 , None => false , } ; counter_expired && no_current_skip_packet && handshake_completed } pub fn skip_pn (& self) -> Option < u64 > { self . skip_pn } pub fn set_skip_pn (& mut self , skip_pn : Option < u64 >) { if skip_pn . is_some () { debug_assert ! (self . skip_pn . is_none ()) ; debug_assert_eq ! (self . skip_pn_counter . unwrap () , 0) ; } self . skip_pn = skip_pn ; self . skip_pn_counter = None ; } fn arm_skip_counter (& mut self , cwnd : usize , max_datagram_size : usize) { let packets_per_cwnd = (cwnd / max_datagram_size) as u64 ; let lower = packets_per_cwnd / 2 ; let upper = packets_per_cwnd * 2 ; let skip_range = upper - lower + 1 ; let rand_skip_value = rand :: rand_u64_uniform (skip_range) ; let skip_pn_counter = MIN_SKIP_COUNTER_VALUE + lower + rand_skip_value ; self . skip_pn_counter = Some (skip_pn_counter) ; } }
+};
+}

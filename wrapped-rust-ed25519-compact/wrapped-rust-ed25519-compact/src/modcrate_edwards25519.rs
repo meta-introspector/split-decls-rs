@@ -1,0 +1,39 @@
+// Generated module macro for crate::edwards25519
+macro_rules! Modcrate_edwards25519 {
+() => {
+        Depcrate_edwards25519use_119!();
+        Depcrate_edwards25519use_120!();
+        Depcrate_edwards25519use_121!();
+        Depcrate_edwards25519use_122!();
+        Depcrate_edwards25519GeP2!();
+        Depcrate_edwards25519GeP3!();
+        Depcrate_edwards25519GeP1P1!();
+        Depcrate_edwards25519GePrecomp!();
+        Depcrate_edwards25519GeCached!();
+        Depcrate_edwards25519impl_128!();
+        Depcrate_edwards25519impl_129!();
+        Depcrate_edwards25519impl_130!();
+        Depcrate_edwards25519impl_131!();
+        Depcrate_edwards25519impl_132!();
+        Depcrate_edwards25519impl_133!();
+        Depcrate_edwards25519impl_134!();
+        Depcrate_edwards25519impl_135!();
+        Depcrate_edwards25519impl_136!();
+        Depcrate_edwards25519impl_137!();
+        Depcrate_edwards25519impl_138!();
+        Depcrate_edwards25519ge_precompute!();
+        Depcrate_edwards25519ge_scalarmult!();
+        Depcrate_edwards25519ge_scalarmult_base!();
+        Depcrate_edwards25519ge_to_x25519_vartime!();
+        Depcrate_edwards25519sc_reduce32!();
+        Depcrate_edwards25519sc_reduce!();
+        Depcrate_edwards25519sc_mul!();
+        Depcrate_edwards25519sc_sq!();
+        Depcrate_edwards25519sc_sqmul!();
+        Depcrate_edwards25519sc_invert!();
+        Depcrate_edwards25519sc_muladd!();
+        Depcrate_edwards25519sc_reject_noncanonical!();
+        Depcrate_edwards25519is_identity!();
+        Depcrate_edwards25519BI!();
+    };
+}

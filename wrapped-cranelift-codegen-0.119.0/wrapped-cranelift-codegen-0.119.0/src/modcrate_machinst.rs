@@ -1,0 +1,54 @@
+// Generated module macro for crate::machinst
+macro_rules! Modcrate_machinst {
+() => {
+        Depcrate_machinstuse_15!();
+        Depcrate_machinstuse_16!();
+        Depcrate_machinstuse_17!();
+        Depcrate_machinstuse_18!();
+        Depcrate_machinstuse_19!();
+        Depcrate_machinstuse_20!();
+        Depcrate_machinstuse_21!();
+        Depcrate_machinstuse_22!();
+        Depcrate_machinstuse_23!();
+        Depcrate_machinstuse_24!();
+        Depcrate_machinstuse_25!();
+        Depcrate_machinstuse_26!();
+        Depcrate_machinstuse_27!();
+        Depcrate_machinstuse_28!();
+        Depcrate_machinstuse_29!();
+        Depcrate_machinstisle!();
+        Depcrate_machinstlower!();
+        Depcrate_machinstuse_98!();
+        Depcrate_machinstvcode!();
+        Depcrate_machinstuse_143!();
+        Depcrate_machinstcompile!();
+        Depcrate_machinstuse_156!();
+        Depcrate_machinstblockorder!();
+        Depcrate_machinstuse_169!();
+        Depcrate_machinstabi!();
+        Depcrate_machinstuse_231!();
+        Depcrate_machinstbuffer!();
+        Depcrate_machinstuse_299!();
+        Depcrate_machinsthelpers!();
+        Depcrate_machinstuse_305!();
+        Depcrate_machinstinst_common!();
+        Depcrate_machinstuse_310!();
+        Depcrate_machinstvalueregs!();
+        Depcrate_machinstuse_327!();
+        Depcrate_machinstuse_328!();
+        Depcrate_machinstpcc!();
+        Depcrate_machinstreg!();
+        Depcrate_machinstMachInst!();
+        Depcrate_machinstMachInstLabelUse!();
+        Depcrate_machinstMachTerminator!();
+        Depcrate_machinstMachInstEmit!();
+        Depcrate_machinstMachInstEmitState!();
+        Depcrate_machinstCompiledCodeBase!();
+        Depcrate_machinstimpl_391!();
+        Depcrate_machinstimpl_392!();
+        Depcrate_machinstCompiledCodeStencil!();
+        Depcrate_machinstCompiledCode!();
+        Depcrate_machinstimpl_395!();
+        Depcrate_machinstTextSectionBuilder!();
+    };
+}

@@ -1,0 +1,9 @@
+// Generated macro for object_contains_any_symbol_substring (function)
+macro_rules! Depcrate_symbolsobject_contains_any_symbol_substring {
+() => {
+// Module: crate::symbols
+// Provides: {"object_contains_any_symbol_substring"}
+// Dependencies: {}
+# [doc = " Check an object file's symbols for any matching **substrings**. That is, if an object file"] # [doc = " contains a symbol named `hello_world`, it will be matched against a provided `substrings` of"] # [doc = " `[\"hello\", \"bar\"]`."] # [doc = ""] # [doc = " Returns `true` if **any** of the symbols found in the object file at `path` contain a"] # [doc = " **substring** listed in `substrings`."] # [doc = ""] # [doc = " Panics if `path` is not a valid object file readable by the current user or if `path` cannot be"] # [doc = " parsed as a recognized object file."] # [doc = ""] # [doc = " # Platform-specific behavior"] # [doc = ""] # [doc = " On Windows MSVC, the binary (e.g. `main.exe`) does not contain the symbols, but in the separate"] # [doc = " PDB file instead. Furthermore, you will need to use [`crate::llvm::llvm_pdbutil`] as `object`"] # [doc = " crate does not handle PDB files."] # [track_caller] pub fn object_contains_any_symbol_substring < P , S > (path : P , substrings : & [S]) -> bool where P : AsRef < Path > , S : AsRef < str > , { let path = path . as_ref () ; let blob = crate :: fs :: read (path) ; let obj = object :: File :: parse (& * blob) . unwrap_or_else (| e | panic ! ("failed to parse `{}`: {e}" , path . display ())) ; let substrings = substrings . iter () . map (| s | s . as_ref ()) . collect :: < Vec < _ > > () ; for sym in obj . symbols () { for substring in & substrings { if sym . name_bytes () . unwrap () . windows (substring . len ()) . any (| x | x == substring . as_bytes ()) { return true ; } } } false }
+};
+}

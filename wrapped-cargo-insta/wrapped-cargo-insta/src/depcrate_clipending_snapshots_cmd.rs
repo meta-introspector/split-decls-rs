@@ -1,0 +1,9 @@
+// Generated macro for pending_snapshots_cmd (function)
+macro_rules! Depcrate_clipending_snapshots_cmd {
+() => {
+// Module: crate::cli
+// Provides: {"pending_snapshots_cmd"}
+// Dependencies: {}
+fn pending_snapshots_cmd (cmd : PendingSnapshotsCommand) -> Result < () , Box < dyn Error > > { # [derive (Serialize , Debug)] # [serde (rename_all = "snake_case" , tag = "type")] enum SnapshotKey < 'a > { FileSnapshot { path : & 'a Path , } , InlineSnapshot { path : & 'a Path , line : u32 , old_snapshot : Option < & 'a str > , new_snapshot : & 'a str , expression : Option < & 'a str > , } , } let loc = handle_target_args (& cmd . target_args , & []) ? ; let (mut snapshot_containers , _) = load_snapshot_containers (& loc) ? ; for (snapshot_container , _package) in snapshot_containers . iter_mut () { let target_file = snapshot_container . target_file () . to_path_buf () ; let is_inline = snapshot_container . snapshot_file () . is_none () ; for snapshot_ref in snapshot_container . iter_snapshots () { if cmd . as_json { let old_snapshot = snapshot_ref . old . as_ref () . map (| x | match x . contents () { SnapshotContents :: Text (x) => x . to_string () , _ => unreachable ! () , }) ; let new_snapshot = match snapshot_ref . new . contents () { SnapshotContents :: Text (x) => x . to_string () , _ => unreachable ! () , } ; let info = if is_inline { SnapshotKey :: InlineSnapshot { path : & target_file , line : snapshot_ref . line . unwrap () , old_snapshot : old_snapshot . as_deref () , new_snapshot : & new_snapshot , expression : snapshot_ref . new . metadata () . expression () , } } else { SnapshotKey :: FileSnapshot { path : & target_file } } ; println ! ("{}" , serde_json :: to_string (& info) . unwrap ()) ; } else if is_inline { println ! ("{}:{}" , target_file . display () , snapshot_ref . line . unwrap ()) ; } else { println ! ("{}" , target_file . display ()) ; } } } Ok (()) }
+};
+}

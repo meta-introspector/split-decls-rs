@@ -1,0 +1,9 @@
+// Generated macro for private (module)
+macro_rules! Depcrate_unix_apple_macos_ffiprivate {
+() => {
+// Module: crate::unix::apple::macos::ffi
+// Provides: {"private"}
+// Dependencies: {}
+# [doc = " Private Apple APIs."] # [cfg (all (feature = "component" , not (feature = "apple-sandbox") , target_arch = "aarch64"))] mod private { use std :: ptr :: NonNull ; use objc2_core_foundation :: { CFAllocator , CFDictionary } ; use objc2_io_kit :: { IOHIDEventSystemClient , IOHIDServiceClient } ; # [repr (C)] pub struct IOHIDEvent (libc :: c_void) ; objc2_core_foundation :: cf_type ! (unsafe impl IOHIDEvent { }) ; # [allow (non_upper_case_globals)] pub const kIOHIDEventTypeTemperature : i64 = 15 ; # [inline] # [allow (non_snake_case)] pub fn IOHIDEventFieldBase (event_type : i64) -> i64 { event_type << 16 } # [cfg (not (feature = "apple-sandbox"))] # [link (name = "IOKit" , kind = "framework")] unsafe extern "C" { pub fn IOHIDEventSystemClientCreate (allocator : Option < & CFAllocator > ,) -> Option < NonNull < IOHIDEventSystemClient > > ; pub fn IOHIDEventSystemClientSetMatching (client : & IOHIDEventSystemClient , matches : & CFDictionary ,) -> i32 ; pub fn IOHIDServiceClientCopyEvent (service : & IOHIDServiceClient , v0 : i64 , v1 : i32 , v2 : i64 ,) -> Option < NonNull < IOHIDEvent > > ; pub fn IOHIDEventGetFloatValue (event : & IOHIDEvent , field : i64) -> f64 ; } pub (crate) const HID_DEVICE_PROPERTY_PRODUCT : & str = "Product" ; # [allow (non_upper_case_globals)] pub (crate) const kIOHIDSerialNumberKey : & str = "SerialNumber" ; pub (crate) const HID_DEVICE_PROPERTY_PRIMARY_USAGE : & str = "PrimaryUsage" ; pub (crate) const HID_DEVICE_PROPERTY_PRIMARY_USAGE_PAGE : & str = "PrimaryUsagePage" ; # [allow (non_upper_case_globals)] pub (crate) const kHIDPage_AppleVendor : i32 = 0xff00 ; # [allow (non_upper_case_globals)] pub (crate) const kHIDUsage_AppleVendor_TemperatureSensor : i32 = 0x0005 ; }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for ParsedPatternItem (enum)
+macro_rules! Depcrate_parser_tokenParsedPatternItem {
+() => {
+// Module: crate::parser::token
+// Provides: {"ParsedPatternItem"}
+// Dependencies: {}
+# [doc = " A [`PatternItem`] with additional detail returned by the [`Parser`]."] # [doc = ""] # [doc = " ✨ *Enabled with the `alloc` Cargo feature.*"] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " use icu_pattern::{ParsedPatternItem, Parser, ParserOptions};"] # [doc = ""] # [doc = " let input = \"{0}, {1}\";"] # [doc = ""] # [doc = " let mut parser = Parser::new(input, ParserOptions::default());"] # [doc = ""] # [doc = " let mut result = vec![];"] # [doc = ""] # [doc = " while let Some(element) ="] # [doc = "     parser.try_next().expect(\"Failed to advance iterator\")"] # [doc = " {"] # [doc = "     result.push(element);"] # [doc = " }"] # [doc = ""] # [doc = " assert_eq!("] # [doc = "     result,"] # [doc = "     &["] # [doc = "         ParsedPatternItem::Placeholder(0),"] # [doc = "         ParsedPatternItem::Literal {"] # [doc = "             content: \", \".into(),"] # [doc = "             quoted: false"] # [doc = "         },"] # [doc = "         ParsedPatternItem::Placeholder(1),"] # [doc = "     ]"] # [doc = " );"] # [doc = " ```"] # [doc = ""] # [doc = " # Type parameters"] # [doc = ""] # [doc = " - `P`: A placeholder type which implements [`FromStr`]."] # [doc = ""] # [doc = " # Lifetimes"] # [doc = ""] # [doc = " - `s`: The life time of an input string slice being parsed."] # [doc = ""] # [doc = " [`Parser`]: crate::Parser"] # [doc = " [`PatternItem`]: crate::PatternItem"] # [doc = " [`FromStr`]: core::str::FromStr"] # [derive (PartialEq , Debug , Clone)] # [non_exhaustive] pub enum ParsedPatternItem < 's , P > { Placeholder (P) , Literal { content : Cow < 's , str > , quoted : bool } , }
+};
+}

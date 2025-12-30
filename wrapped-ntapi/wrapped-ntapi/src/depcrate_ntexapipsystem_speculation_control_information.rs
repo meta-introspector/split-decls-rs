@@ -1,0 +1,9 @@
+// Generated macro for PSYSTEM_SPECULATION_CONTROL_INFORMATION (type)
+macro_rules! Depcrate_ntexapiPSYSTEM_SPECULATION_CONTROL_INFORMATION {
+() => {
+// Module: crate::ntexapi
+// Provides: {"PSYSTEM_SPECULATION_CONTROL_INFORMATION"}
+// Dependencies: {}
+pub type PSYSTEM_SPECULATION_CONTROL_INFORMATION = * mut SYSTEM_SPECULATION_CONTROL_INFORMATION ;
+};
+}

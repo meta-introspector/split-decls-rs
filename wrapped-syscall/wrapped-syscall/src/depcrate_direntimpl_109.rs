@@ -1,0 +1,9 @@
+// Generated macro for impl_109 (impl)
+macro_rules! Depcrate_direntimpl_109 {
+() => {
+// Module: crate::dirent
+// Provides: {"impl_109"}
+// Dependencies: {}
+impl < 'a , B : Buffer < 'a > > DirentBuf < B > { pub fn new (buffer : B , header_size : u16) -> Option < Self > { if usize :: from (header_size) < size_of :: < DirentHeader > () { return None ; } Some (Self { buffer , header_size , written : 0 , }) } pub fn entry (& mut self , entry : DirEntry < '_ >) -> Result < () > { let name16 = u16 :: try_from (entry . name . len ()) . map_err (| _ | Error :: new (EINVAL)) ? ; let record_len = self . header_size . checked_add (name16) . and_then (| l | l . checked_add (1)) . ok_or (Error :: new (ENAMETOOLONG)) ? ; let [this , remaining] = core :: mem :: replace (& mut self . buffer , B :: empty ()) . split_at (usize :: from (record_len)) . ok_or (Error :: new (EINVAL)) ? ; let [this_header_variable , this_name_and_nul] = this . split_at (usize :: from (self . header_size)) . expect ("already know header_size + ... >= header_size") ; let [this_name , this_name_nul] = this_name_and_nul . split_at (usize :: from (name16)) . expect ("already know name.len() <= name.len() + 1") ; let [this_header , this_header_extra] = this_header_variable . split_at (size_of :: < DirentHeader > ()) . expect ("already checked header_size <= size_of Header") ; this_header . copy_from_slice_exact (& DirentHeader { record_len , next_opaque_id : entry . next_opaque_id , inode : entry . inode , kind : entry . kind as u8 , }) ? ; this_header_extra . zero_out () ? ; this_name . copy_from_slice_exact (entry . name . as_bytes ()) ? ; this_name_nul . copy_from_slice_exact (& [0]) ? ; self . written += usize :: from (record_len) ; self . buffer = remaining ; Ok (()) } pub fn finalize (self) -> usize { self . written } }
+};
+}

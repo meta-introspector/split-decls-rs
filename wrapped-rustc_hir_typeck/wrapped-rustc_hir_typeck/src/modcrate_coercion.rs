@@ -1,0 +1,44 @@
+// Generated module macro for crate::coercion
+macro_rules! Modcrate_coercion {
+() => {
+        Depcrate_coercionuse_129!();
+        Depcrate_coercionuse_130!();
+        Depcrate_coercionuse_131!();
+        Depcrate_coercionuse_132!();
+        Depcrate_coercionuse_133!();
+        Depcrate_coercionuse_134!();
+        Depcrate_coercionuse_135!();
+        Depcrate_coercionuse_136!();
+        Depcrate_coercionuse_137!();
+        Depcrate_coercionuse_138!();
+        Depcrate_coercionuse_139!();
+        Depcrate_coercionuse_140!();
+        Depcrate_coercionuse_141!();
+        Depcrate_coercionuse_142!();
+        Depcrate_coercionuse_143!();
+        Depcrate_coercionuse_144!();
+        Depcrate_coercionuse_145!();
+        Depcrate_coercionuse_146!();
+        Depcrate_coercionuse_147!();
+        Depcrate_coercionuse_148!();
+        Depcrate_coercionuse_149!();
+        Depcrate_coercionuse_150!();
+        Depcrate_coercionCoerce!();
+        Depcrate_coercionimpl_152!();
+        Depcrate_coercionCoerceResult!();
+        Depcrate_coercioncoerce_mutbls!();
+        Depcrate_coercionsuccess!();
+        Depcrate_coercionimpl_156!();
+        Depcrate_coercionimpl_157!();
+        Depcrate_coercioncan_coerce!();
+        Depcrate_coercionCoerceMany!();
+        Depcrate_coercionDynamicCoerceMany!();
+        Depcrate_coercionExpressions!();
+        Depcrate_coercionimpl_162!();
+        Depcrate_coercionAsCoercionSite!();
+        Depcrate_coercionimpl_164!();
+        Depcrate_coercionimpl_165!();
+        Depcrate_coercionimpl_166!();
+        Depcrate_coercionimpl_167!();
+    };
+}

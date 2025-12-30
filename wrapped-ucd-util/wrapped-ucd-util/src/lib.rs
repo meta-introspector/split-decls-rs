@@ -1,0 +1,66 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcrate_propertypropertytable.rs");
+include!("depcrate_ideographrange_ideograph.rs");
+include!("depcrate_hangulrange_hangul_syllable.rs");
+include!("depcrateproperty.rs");
+include!("depcrate_unicode_tablesjamo_short_name.rs");
+include!("depcrate_namecharacter_name_normalize.rs");
+include!("depcrate_unicode_tablesproperty_values.rs");
+include!("depcrate_propertypropertyvalues.rs");
+include!("depcrate_hanguljamo_short_name.rs");
+include!("depcrate_hanguljamoshortname.rs");
+include!("depcrate_nametests.rs");
+include!("depcrateuse_42.rs");
+include!("depcrate_ideographideograph_name.rs");
+include!("depcrateuse_41.rs");
+include!("depcrate_hangull_base.rs");
+include!("depcrate_namecharacter_name_normalize_bytes.rs");
+include!("depcrateuse_39.rs");
+include!("depcrateuse_40.rs");
+include!("depcrate_hangult_count.rs");
+include!("depcrate_namesymbolic_name_normalize.rs");
+include!("depcrateideograph.rs");
+include!("depcrate_namesymbolic_name_normalize_bytes.rs");
+include!("depcrate_hanguls_base.rs");
+include!("depcrate_unicode_tablesproperty_names.rs");
+include!("depcrate_propertycanonical_property_name.rs");
+include!("depcrate_propertycanonical_property_value.rs");
+include!("depcrate_propertyproperty_values.rs");
+include!("depcrate_hangult_base.rs");
+include!("depcrate_propertypropertyvaluetable.rs");
+include!("depcrateunicode_tables.rs");
+include!("depcrate_ideographtests.rs");
+include!("depcrate_hangulhangul_name.rs");
+include!("depcrate_hangulv_base.rs");
+include!("depcrate_hangulhangul_full_canonical_decomposition.rs");
+include!("depcratehangul.rs");
+include!("depcrate_unicode_tables_jamo_short_namejamo_short_name.rs");
+include!("depcrate_hangultests.rs");
+include!("depcrate_unicode_tables_property_valuesproperty_values.rs");
+include!("depcrate_hanguln_count.rs");
+include!("depcrate_propertytests.rs");
+include!("depcrate_unicode_tables_property_namesproperty_names.rs");
+include!("depcratename.rs");
+include!("modcrate_hangul.rs");
+include!("modcrate.rs");
+include!("modcrate_unicode_tables_property_names.rs");
+include!("modcrate_unicode_tables_property_values.rs");
+include!("modcrate_unicode_tables.rs");
+include!("modcrate_name.rs");
+include!("modcrate_property.rs");
+include!("modcrate_ideograph.rs");
+include!("modcrate_unicode_tables_jamo_short_name.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate_hangul!();
+    Modcrate!();
+    Modcrate_unicode_tables_property_names!();
+    Modcrate_unicode_tables_property_values!();
+    Modcrate_unicode_tables!();
+    Modcrate_name!();
+    Modcrate_property!();
+    Modcrate_ideograph!();
+    Modcrate_unicode_tables_jamo_short_name!();
+}

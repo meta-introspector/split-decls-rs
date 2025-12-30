@@ -9,6 +9,6 @@ macro_rules! Modcrate_tracing {
         Depcrate_tracinginfo_span!();
         Depcrate_tracingevent!();
         Depcrate_tracingspan!();
-        Depcrate_tracinguse_530!();
+        Depcrate_tracinguse_527!();
     };
 }

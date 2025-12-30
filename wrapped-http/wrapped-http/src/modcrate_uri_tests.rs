@@ -1,0 +1,46 @@
+// Generated module macro for crate::uri::tests
+macro_rules! Modcrate_uri_tests {
+() => {
+        Depcrate_uri_testsuse_502!();
+        Depcrate_uri_testsuse_503!();
+        Depcrate_uri_teststest_char_table!();
+        Depcrate_uri_testspart!();
+        Depcrate_uri_teststest_parse!();
+        Depcrate_uri_testsmacro_507!();
+        Depcrate_uri_testsmacro_508!();
+        Depcrate_uri_testsmacro_509!();
+        Depcrate_uri_testsmacro_510!();
+        Depcrate_uri_testsmacro_511!();
+        Depcrate_uri_testsmacro_512!();
+        Depcrate_uri_testsmacro_513!();
+        Depcrate_uri_testsmacro_514!();
+        Depcrate_uri_testsmacro_515!();
+        Depcrate_uri_testsmacro_516!();
+        Depcrate_uri_testsmacro_517!();
+        Depcrate_uri_testsmacro_518!();
+        Depcrate_uri_testsmacro_519!();
+        Depcrate_uri_testsmacro_520!();
+        Depcrate_uri_testsmacro_521!();
+        Depcrate_uri_testsmacro_522!();
+        Depcrate_uri_testsmacro_523!();
+        Depcrate_uri_testsmacro_524!();
+        Depcrate_uri_testsmacro_525!();
+        Depcrate_uri_testsmacro_526!();
+        Depcrate_uri_testsmacro_527!();
+        Depcrate_uri_testsmacro_528!();
+        Depcrate_uri_testsmacro_529!();
+        Depcrate_uri_testsmacro_530!();
+        Depcrate_uri_testsmacro_531!();
+        Depcrate_uri_testsmacro_532!();
+        Depcrate_uri_testsmacro_533!();
+        Depcrate_uri_testsmacro_534!();
+        Depcrate_uri_testsmacro_535!();
+        Depcrate_uri_teststest_uri_parse_error!();
+        Depcrate_uri_teststest_max_uri_len!();
+        Depcrate_uri_teststest_overflowing_scheme!();
+        Depcrate_uri_teststest_max_length_scheme!();
+        Depcrate_uri_teststest_uri_to_path_and_query!();
+        Depcrate_uri_teststest_authority_uri_parts_round_trip!();
+        Depcrate_uri_teststest_partial_eq_path_with_terminating_questionmark!();
+    };
+}

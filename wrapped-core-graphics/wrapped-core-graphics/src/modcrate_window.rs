@@ -1,0 +1,44 @@
+// Generated module macro for crate::window
+macro_rules! Modcrate_window {
+() => {
+        Depcrate_windowuse_300!();
+        Depcrate_windowuse_301!();
+        Depcrate_windowuse_302!();
+        Depcrate_windowuse_303!();
+        Depcrate_windowuse_304!();
+        Depcrate_windowuse_305!();
+        Depcrate_windowuse_306!();
+        Depcrate_windowuse_307!();
+        Depcrate_windowCGWindowID!();
+        Depcrate_windowCGWindowLevel!();
+        Depcrate_windowkCGNullWindowID!();
+        Depcrate_windowCGWindowSharingType!();
+        Depcrate_windowkCGWindowSharingNone!();
+        Depcrate_windowkCGWindowSharingReadOnly!();
+        Depcrate_windowkCGWindowSharingReadWrite!();
+        Depcrate_windowCGWindowBackingType!();
+        Depcrate_windowkCGWindowBackingStoreRetained!();
+        Depcrate_windowkCGWindowBackingStoreNonretained!();
+        Depcrate_windowkCGWindowBackingStoreBuffered!();
+        Depcrate_windowCGWindowListOption!();
+        Depcrate_windowkCGWindowListOptionAll!();
+        Depcrate_windowkCGWindowListOptionOnScreenOnly!();
+        Depcrate_windowkCGWindowListOptionOnScreenAboveWindow!();
+        Depcrate_windowkCGWindowListOptionOnScreenBelowWindow!();
+        Depcrate_windowkCGWindowListOptionIncludingWindow!();
+        Depcrate_windowkCGWindowListExcludeDesktopElements!();
+        Depcrate_windowCGWindowImageOption!();
+        Depcrate_windowkCGWindowImageDefault!();
+        Depcrate_windowkCGWindowImageBoundsIgnoreFraming!();
+        Depcrate_windowkCGWindowImageShouldBeOpaque!();
+        Depcrate_windowkCGWindowImageOnlyShadows!();
+        Depcrate_windowkCGWindowImageBestResolution!();
+        Depcrate_windowkCGWindowImageNominalResolution!();
+        Depcrate_windowcopy_window_info!();
+        Depcrate_windowcreate_window_list!();
+        Depcrate_windowcreate_description_from_array!();
+        Depcrate_windowcreate_image!();
+        Depcrate_windowcreate_image_from_array!();
+        Depcrate_windowother_338!();
+    };
+}

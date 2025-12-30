@@ -1,0 +1,9 @@
+// Generated macro for impl_68 (impl)
+macro_rules! Depcrate_wrappersimpl_68 {
+() => {
+// Module: crate::wrappers
+// Provides: {"impl_68"}
+// Dependencies: {}
+impl Time { # [doc = " Converts this wrapper to a [`jiff::civil::Time`]."] pub fn to_jiff (self) -> jiff :: civil :: Time { self . 0 } }
+};
+}

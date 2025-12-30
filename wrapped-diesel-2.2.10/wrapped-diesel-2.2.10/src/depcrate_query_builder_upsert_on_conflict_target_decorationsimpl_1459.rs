@@ -1,0 +1,9 @@
+// Generated macro for impl_1459 (impl)
+macro_rules! Depcrate_query_builder_upsert_on_conflict_target_decorationsimpl_1459 {
+() => {
+// Module: crate::query_builder::upsert::on_conflict_target_decorations
+// Provides: {"impl_1459"}
+// Dependencies: {}
+impl < DB , T , U > QueryFragment < DB > for DecoratedConflictTarget < T , U > where DB : Backend , Self : QueryFragment < DB , DB :: OnConflictClause > , { fn walk_ast < 'b > (& 'b self , pass : AstPass < '_ , 'b , DB >) -> QueryResult < () > { < Self as QueryFragment < DB , DB :: OnConflictClause > > :: walk_ast (self , pass) } }
+};
+}

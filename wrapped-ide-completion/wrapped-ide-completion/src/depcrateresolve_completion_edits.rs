@@ -1,0 +1,9 @@
+// Generated macro for resolve_completion_edits (function)
+macro_rules! Depcrateresolve_completion_edits {
+() => {
+// Module: crate
+// Provides: {"resolve_completion_edits"}
+// Dependencies: {}
+# [doc = " Resolves additional completion data at the position given."] # [doc = " This is used for import insertion done via completions like flyimport and custom user snippets."] pub fn resolve_completion_edits (db : & RootDatabase , config : & CompletionConfig < '_ > , FilePosition { file_id , offset } : FilePosition , imports : impl IntoIterator < Item = String > ,) -> Option < Vec < TextEdit > > { let _p = tracing :: info_span ! ("resolve_completion_edits") . entered () ; let sema = hir :: Semantics :: new (db) ; let editioned_file_id = sema . attach_first_edition (file_id) ? ; let original_file = sema . parse (editioned_file_id) ; let original_token = syntax :: AstNode :: syntax (& original_file) . token_at_offset (offset) . left_biased () ? ; let position_for_import = & original_token . parent () ? ; let scope = ImportScope :: find_insert_use_container (position_for_import , & sema) ? ; let current_module = sema . scope (position_for_import) ? . module () ; let current_crate = current_module . krate () ; let current_edition = current_crate . edition (db) ; let new_ast = scope . clone_for_update () ; let mut import_insert = TextEdit :: builder () ; imports . into_iter () . for_each (| full_import_path | { insert_use :: insert_use (& new_ast , make :: path_from_text_with_edition (& full_import_path , current_edition) , & config . insert_use ,) ; }) ; diff (scope . as_syntax_node () , new_ast . as_syntax_node ()) . into_text_edit (& mut import_insert) ; Some (vec ! [import_insert . finish ()]) }
+};
+}

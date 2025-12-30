@@ -1,0 +1,9 @@
+// Generated macro for yokeable_derive (function)
+macro_rules! Depcrateyokeable_derive {
+() => {
+// Module: crate
+// Provides: {"yokeable_derive"}
+// Dependencies: {}
+# [doc = " Custom derive for `yoke::Yokeable`,"] # [doc = ""] # [doc = " If your struct contains `zerovec::ZeroMap`, then the compiler will not"] # [doc = " be able to guarantee the lifetime covariance due to the generic types on"] # [doc = " the `ZeroMap` itself. You must add the following attribute in order for"] # [doc = " the custom derive to work with `ZeroMap`."] # [doc = ""] # [doc = " ```rust,ignore"] # [doc = " #[derive(Yokeable)]"] # [doc = " #[yoke(prove_covariance_manually)]"] # [doc = " ```"] # [doc = ""] # [doc = " Beyond this case, if the derive fails to compile due to lifetime issues, it"] # [doc = " means that the lifetime is not covariant and `Yokeable` is not safe to implement."] # [proc_macro_derive (Yokeable , attributes (yoke))] pub fn yokeable_derive (input : TokenStream) -> TokenStream { let input = parse_macro_input ! (input as DeriveInput) ; TokenStream :: from (yokeable_derive_impl (& input)) }
+};
+}

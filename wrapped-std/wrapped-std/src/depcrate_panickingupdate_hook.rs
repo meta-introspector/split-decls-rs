@@ -1,0 +1,9 @@
+// Generated macro for update_hook (function)
+macro_rules! Depcrate_panickingupdate_hook {
+() => {
+// Module: crate::panicking
+// Provides: {"update_hook"}
+// Dependencies: {}
+# [doc = " Atomic combination of [`take_hook`] and [`set_hook`]. Use this to replace the panic handler with"] # [doc = " a new panic handler that does something and then executes the old handler."] # [doc = ""] # [doc = " [`take_hook`]: ./fn.take_hook.html"] # [doc = " [`set_hook`]: ./fn.set_hook.html"] # [doc = ""] # [doc = " # Panics"] # [doc = ""] # [doc = " Panics if called from a panicking thread."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " The following will print the custom message, and then the normal output of panic."] # [doc = ""] # [doc = " ```should_panic"] # [doc = " #![feature(panic_update_hook)]"] # [doc = " use std::panic;"] # [doc = ""] # [doc = " // Equivalent to"] # [doc = " // let prev = panic::take_hook();"] # [doc = " // panic::set_hook(move |info| {"] # [doc = " //     println!(\"...\");"] # [doc = " //     prev(info);"] # [doc = " // );"] # [doc = " panic::update_hook(move |prev, info| {"] # [doc = "     println!(\"Print custom message and execute panic handler as usual\");"] # [doc = "     prev(info);"] # [doc = " });"] # [doc = ""] # [doc = " panic!(\"Custom and then normal\");"] # [doc = " ```"] # [unstable (feature = "panic_update_hook" , issue = "92649")] pub fn update_hook < F > (hook_fn : F) where F : Fn (& (dyn Fn (& PanicHookInfo < '_ >) + Send + Sync + 'static) , & PanicHookInfo < '_ >) + Sync + Send + 'static , { if thread :: panicking () { panic ! ("cannot modify the panic hook from a panicking thread") ; } let mut hook = HOOK . write () . unwrap_or_else (PoisonError :: into_inner) ; let prev = mem :: take (& mut * hook) . into_box () ; * hook = Hook :: Custom (Box :: new (move | info | hook_fn (& prev , info))) ; }
+};
+}

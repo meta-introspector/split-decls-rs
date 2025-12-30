@@ -1,0 +1,53 @@
+// Generated module macro for crate::um::ncrypt
+macro_rules! Modcrate_um_ncrypt {
+() => {
+        Depcrate_um_ncryptuse_32585!();
+        Depcrate_um_ncryptuse_32586!();
+        Depcrate_um_ncryptuse_32587!();
+        Depcrate_um_ncryptuse_32588!();
+        Depcrate_um_ncryptSECURITY_STATUS!();
+        Depcrate_um_ncryptHCRYPTPROV!();
+        Depcrate_um_ncryptHCRYPTKEY!();
+        Depcrate_um_ncryptHCRYPTHASH!();
+        Depcrate_um_ncryptmacro_32593!();
+        Depcrate_um_ncryptmacro_32594!();
+        Depcrate_um_ncryptmacro_32595!();
+        Depcrate_um_ncryptNCryptBufferDesc!();
+        Depcrate_um_ncryptNCRYPT_HANDLE!();
+        Depcrate_um_ncryptNCRYPT_PROV_HANDLE!();
+        Depcrate_um_ncryptNCRYPT_KEY_HANDLE!();
+        Depcrate_um_ncryptNCRYPT_HASH_HANDLE!();
+        Depcrate_um_ncryptNCRYPT_SECRET_HANDLE!();
+        Depcrate_um_ncryptNCRYPT_NO_PADDING_FLAG!();
+        Depcrate_um_ncryptNCRYPT_PAD_PKCS1_FLAG!();
+        Depcrate_um_ncryptNCRYPT_PAD_OAEP_FLAG!();
+        Depcrate_um_ncryptNCRYPT_PAD_PSS_FLAG!();
+        Depcrate_um_ncryptNCRYPT_PAD_CIPHER_FLAG!();
+        Depcrate_um_ncryptNCRYPT_ATTESTATION_FLAG!();
+        Depcrate_um_ncryptNCRYPT_SEALING_FLAG!();
+        Depcrate_um_ncryptNCRYPT_REGISTER_NOTIFY_FLAG!();
+        Depcrate_um_ncryptNCRYPT_UNREGISTER_NOTIFY_FLAG!();
+        Depcrate_um_ncryptNCRYPT_NO_KEY_VALIDATION!();
+        Depcrate_um_ncryptNCRYPT_MACHINE_KEY_FLAG!();
+        Depcrate_um_ncryptNCRYPT_SILENT_FLAG!();
+        Depcrate_um_ncryptNCRYPT_OVERWRITE_KEY_FLAG!();
+        Depcrate_um_ncryptNCRYPT_WRITE_KEY_TO_LEGACY_STORE_FLAG!();
+        Depcrate_um_ncryptNCRYPT_DO_NOT_FINALIZE_FLAG!();
+        Depcrate_um_ncryptNCRYPT_EXPORT_LEGACY_FLAG!();
+        Depcrate_um_ncryptNCRYPT_IGNORE_DEVICE_STATE_FLAG!();
+        Depcrate_um_ncryptNCRYPT_TREAT_NIST_AS_GENERIC_ECC_FLAG!();
+        Depcrate_um_ncryptNCRYPT_NO_CACHED_PASSWORD!();
+        Depcrate_um_ncryptNCRYPT_PROTECT_TO_LOCAL_SYSTEM!();
+        Depcrate_um_ncryptNCRYPT_PERSIST_ONLY_FLAG!();
+        Depcrate_um_ncryptNCRYPT_PERSIST_FLAG!();
+        Depcrate_um_ncryptNCRYPT_PREFER_VIRTUAL_ISOLATION_FLAG!();
+        Depcrate_um_ncryptNCRYPT_USE_VIRTUAL_ISOLATION_FLAG!();
+        Depcrate_um_ncryptNCRYPT_USE_PER_BOOT_KEY_FLAG!();
+        Depcrate_um_ncryptother_32627!();
+        Depcrate_um_ncryptNCRYPT_ALLOW_EXPORT_FLAG!();
+        Depcrate_um_ncryptNCRYPT_ALLOW_PLAINTEXT_EXPORT_FLAG!();
+        Depcrate_um_ncryptNCRYPT_ALLOW_ARCHIVING_FLAG!();
+        Depcrate_um_ncryptNCRYPT_ALLOW_PLAINTEXT_ARCHIVING_FLAG!();
+        Depcrate_um_ncryptother_32632!();
+    };
+}

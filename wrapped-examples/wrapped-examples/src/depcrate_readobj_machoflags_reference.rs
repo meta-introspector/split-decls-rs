@@ -1,0 +1,9 @@
+// Generated macro for FLAGS_REFERENCE (const)
+macro_rules! Depcrate_readobj_machoFLAGS_REFERENCE {
+() => {
+// Module: crate::readobj::macho
+// Provides: {"FLAGS_REFERENCE"}
+// Dependencies: {}
+const FLAGS_REFERENCE : & [Flag < u16 >] = & flags ! (REFERENCE_FLAG_UNDEFINED_NON_LAZY , REFERENCE_FLAG_UNDEFINED_LAZY , REFERENCE_FLAG_DEFINED , REFERENCE_FLAG_PRIVATE_DEFINED , REFERENCE_FLAG_PRIVATE_UNDEFINED_NON_LAZY , REFERENCE_FLAG_PRIVATE_UNDEFINED_LAZY ,) ;
+};
+}

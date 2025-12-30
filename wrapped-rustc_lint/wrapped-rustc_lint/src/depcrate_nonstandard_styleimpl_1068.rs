@@ -1,0 +1,9 @@
+// Generated macro for impl_1068 (impl)
+macro_rules! Depcrate_nonstandard_styleimpl_1068 {
+() => {
+// Module: crate::nonstandard_style
+// Provides: {"impl_1068"}
+// Dependencies: {}
+impl EarlyLintPass for NonCamelCaseTypes { fn check_item (& mut self , cx : & EarlyContext < '_ > , it : & ast :: Item) { let has_repr_c = matches ! (AttributeParser :: parse_limited (cx . sess () , & it . attrs , sym :: repr , it . span , it . id , None) , Some (Attribute :: Parsed (AttributeKind :: Repr { reprs , .. })) if reprs . iter () . any (| (r , _) | r == & ReprAttr :: ReprC)) ; if has_repr_c { return ; } match & it . kind { ast :: ItemKind :: TyAlias (box ast :: TyAlias { ident , .. }) | ast :: ItemKind :: Enum (ident , ..) | ast :: ItemKind :: Struct (ident , ..) | ast :: ItemKind :: Union (ident , ..) => self . check_case (cx , "type" , ident) , ast :: ItemKind :: Trait (box ast :: Trait { ident , .. }) => { self . check_case (cx , "trait" , ident) } ast :: ItemKind :: TraitAlias (ident , _ , _) => self . check_case (cx , "trait alias" , ident) , ast :: ItemKind :: Impl (ast :: Impl { of_trait : None , items , .. }) => { for it in items { if let ast :: AssocItemKind :: Type (alias) = & it . kind { self . check_case (cx , "associated type" , & alias . ident) ; } } } _ => () , } } fn check_trait_item (& mut self , cx : & EarlyContext < '_ > , it : & ast :: AssocItem) { if let ast :: AssocItemKind :: Type (alias) = & it . kind { self . check_case (cx , "associated type" , & alias . ident) ; } } fn check_variant (& mut self , cx : & EarlyContext < '_ > , v : & ast :: Variant) { self . check_case (cx , "variant" , & v . ident) ; } fn check_generic_param (& mut self , cx : & EarlyContext < '_ > , param : & ast :: GenericParam) { if let ast :: GenericParamKind :: Type { .. } = param . kind { self . check_case (cx , "type parameter" , & param . ident) ; } } }
+};
+}

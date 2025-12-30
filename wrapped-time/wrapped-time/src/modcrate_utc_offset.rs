@@ -1,0 +1,39 @@
+// Generated module macro for crate::utc_offset
+macro_rules! Modcrate_utc_offset {
+() => {
+        Depcrate_utc_offsetuse_1088!();
+        Depcrate_utc_offsetuse_1089!();
+        Depcrate_utc_offsetuse_1090!();
+        Depcrate_utc_offsetuse_1091!();
+        Depcrate_utc_offsetuse_1092!();
+        Depcrate_utc_offsetuse_1093!();
+        Depcrate_utc_offsetuse_1094!();
+        Depcrate_utc_offsetuse_1095!();
+        Depcrate_utc_offsetuse_1096!();
+        Depcrate_utc_offsetuse_1097!();
+        Depcrate_utc_offsetuse_1098!();
+        Depcrate_utc_offsetuse_1099!();
+        Depcrate_utc_offsetuse_1100!();
+        Depcrate_utc_offsetuse_1101!();
+        Depcrate_utc_offsetuse_1102!();
+        Depcrate_utc_offsetuse_1103!();
+        Depcrate_utc_offsetHours!();
+        Depcrate_utc_offsetMinutes!();
+        Depcrate_utc_offsetSeconds!();
+        Depcrate_utc_offsetWholeSeconds!();
+        Depcrate_utc_offsetUtcOffset!();
+        Depcrate_utc_offsetimpl_1109!();
+        Depcrate_utc_offsetimpl_1110!();
+        Depcrate_utc_offsetimpl_1111!();
+        Depcrate_utc_offsetimpl_1112!();
+        Depcrate_utc_offsetimpl_1113!();
+        Depcrate_utc_offsetimpl_1114!();
+        Depcrate_utc_offsetimpl_1115!();
+        Depcrate_utc_offsetprivate!();
+        Depcrate_utc_offsetuse_1117!();
+        Depcrate_utc_offsetimpl_1118!();
+        Depcrate_utc_offsetimpl_1119!();
+        Depcrate_utc_offsetimpl_1120!();
+        Depcrate_utc_offsetimpl_1121!();
+    };
+}

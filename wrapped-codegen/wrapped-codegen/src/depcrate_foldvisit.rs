@@ -1,0 +1,9 @@
+// Generated macro for visit (function)
+macro_rules! Depcrate_foldvisit {
+() => {
+// Module: crate::fold
+// Provides: {"visit"}
+// Dependencies: {}
+fn visit (ty : & Type , features : & Features , defs : & Definitions , name : & TokenStream ,) -> Option < TokenStream > { match ty { Type :: Box (t) => { let res = visit (t , features , defs , & quote ! (*# name)) ? ; Some (quote ! { Box :: new (# res) }) } Type :: Vec (t) => { let Type :: Syn (t) = & * * t else { unimplemented ! () } ; if t == "Attribute" { Some (quote ! { f . fold_attributes (# name) }) } else { let method = method_name (t) ; Some (quote ! { fold_vec (# name , f , F ::# method) }) } } Type :: Punctuated (p) => { let t = & * p . element ; let Type :: Syn (t) = t else { unimplemented ! () } ; let method = method_name (t) ; Some (quote ! { crate :: punctuated :: fold (# name , f , F ::# method) }) } Type :: Option (t) => { let it = quote ! (it) ; let val = visit (t , features , defs , & it) ? ; Some (quote ! { (# name) . map (| it | # val) }) } Type :: Tuple (t) => { let mut code = TokenStream :: new () ; for (i , elem) in t . iter () . enumerate () { let i = Index :: from (i) ; let it = quote ! ((# name) .# i) ; let val = visit (elem , features , defs , & it) . unwrap_or (it) ; code . extend (val) ; code . extend (quote ! (,)) ; } Some (quote ! { (# code) }) } Type :: Syn (t) => { fn requires_full (features : & Features) -> bool { features . any . contains ("full") && features . any . len () == 1 } let mut res = simple_fold (t , name) ; let target = defs . types . iter () . find (| ty | ty . ident == * t) . unwrap () ; if requires_full (& target . features) && ! requires_full (features) { res = quote ! (full ! (# res)) ; } Some (res) } Type :: Ext (t) if gen :: TERMINAL_TYPES . contains (& & t [..]) => Some (simple_fold (t , name)) , Type :: Ext (_) | Type :: Std (_) | Type :: Token (_) | Type :: Group (_) => None , } }
+};
+}

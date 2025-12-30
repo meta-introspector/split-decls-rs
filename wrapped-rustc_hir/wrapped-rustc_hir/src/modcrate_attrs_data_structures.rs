@@ -1,0 +1,49 @@
+// Generated module macro for crate::attrs::data_structures
+macro_rules! Modcrate_attrs_data_structures {
+() => {
+        Depcrate_attrs_data_structuresuse_9!();
+        Depcrate_attrs_data_structuresuse_10!();
+        Depcrate_attrs_data_structuresuse_11!();
+        Depcrate_attrs_data_structuresuse_12!();
+        Depcrate_attrs_data_structuresuse_13!();
+        Depcrate_attrs_data_structuresuse_14!();
+        Depcrate_attrs_data_structuresuse_15!();
+        Depcrate_attrs_data_structuresuse_16!();
+        Depcrate_attrs_data_structuresuse_17!();
+        Depcrate_attrs_data_structuresuse_18!();
+        Depcrate_attrs_data_structuresuse_19!();
+        Depcrate_attrs_data_structuresuse_20!();
+        Depcrate_attrs_data_structuresuse_21!();
+        Depcrate_attrs_data_structuresuse_22!();
+        Depcrate_attrs_data_structuresuse_23!();
+        Depcrate_attrs_data_structuresuse_24!();
+        Depcrate_attrs_data_structuresInlineAttr!();
+        Depcrate_attrs_data_structuresimpl_26!();
+        Depcrate_attrs_data_structuresInstructionSetAttr!();
+        Depcrate_attrs_data_structuresOptimizeAttr!();
+        Depcrate_attrs_data_structuresimpl_29!();
+        Depcrate_attrs_data_structuresReprAttr!();
+        Depcrate_attrs_data_structuresTransparencyError!();
+        Depcrate_attrs_data_structuresIntType!();
+        Depcrate_attrs_data_structuresDeprecation!();
+        Depcrate_attrs_data_structuresDeprecatedSince!();
+        Depcrate_attrs_data_structuresCoverageAttrKind!();
+        Depcrate_attrs_data_structuresimpl_36!();
+        Depcrate_attrs_data_structuresUsedBy!();
+        Depcrate_attrs_data_structuresMacroUseArgs!();
+        Depcrate_attrs_data_structuresimpl_39!();
+        Depcrate_attrs_data_structuresStrippedCfgItem!();
+        Depcrate_attrs_data_structuresimpl_41!();
+        Depcrate_attrs_data_structuresCfgEntry!();
+        Depcrate_attrs_data_structuresLinkage!();
+        Depcrate_attrs_data_structuresMirDialect!();
+        Depcrate_attrs_data_structuresimpl_45!();
+        Depcrate_attrs_data_structuresMirPhase!();
+        Depcrate_attrs_data_structuresimpl_47!();
+        Depcrate_attrs_data_structuresPeImportNameType!();
+        Depcrate_attrs_data_structuresNativeLibKind!();
+        Depcrate_attrs_data_structuresimpl_50!();
+        Depcrate_attrs_data_structuresLinkEntry!();
+        Depcrate_attrs_data_structuresAttributeKind!();
+    };
+}

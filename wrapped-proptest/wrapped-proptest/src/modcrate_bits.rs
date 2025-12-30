@@ -1,0 +1,54 @@
+// Generated module macro for crate::bits
+macro_rules! Modcrate_bits {
+() => {
+        Depcrate_bitsuse_602!();
+        Depcrate_bitsuse_603!();
+        Depcrate_bitsuse_604!();
+        Depcrate_bitsuse_605!();
+        Depcrate_bitsuse_606!();
+        Depcrate_bitsuse_607!();
+        Depcrate_bitsuse_608!();
+        Depcrate_bitsuse_609!();
+        Depcrate_bitsuse_610!();
+        Depcrate_bitsuse_611!();
+        Depcrate_bitsBitSetLike!();
+        Depcrate_bitsint_bitset!();
+        Depcrate_bitsmacro_614!();
+        Depcrate_bitsmacro_615!();
+        Depcrate_bitsmacro_616!();
+        Depcrate_bitsmacro_617!();
+        Depcrate_bitsmacro_618!();
+        Depcrate_bitsmacro_619!();
+        Depcrate_bitsmacro_620!();
+        Depcrate_bitsmacro_621!();
+        Depcrate_bitsmacro_622!();
+        Depcrate_bitsmacro_623!();
+        Depcrate_bitsimpl_624!();
+        Depcrate_bitsimpl_625!();
+        Depcrate_bitsBitSetStrategy!();
+        Depcrate_bitsimpl_627!();
+        Depcrate_bitsimpl_628!();
+        Depcrate_bitsSampledBitSetStrategy!();
+        Depcrate_bitsimpl_630!();
+        Depcrate_bitsimpl_631!();
+        Depcrate_bitsBitSetValueTree!();
+        Depcrate_bitsimpl_633!();
+        Depcrate_bitsint_api!();
+        Depcrate_bitsmacro_635!();
+        Depcrate_bitsmacro_636!();
+        Depcrate_bitsmacro_637!();
+        Depcrate_bitsmacro_638!();
+        Depcrate_bitsmacro_639!();
+        Depcrate_bitsmacro_640!();
+        Depcrate_bitsmacro_641!();
+        Depcrate_bitsmacro_642!();
+        Depcrate_bitsminimal_api!();
+        Depcrate_bitsmacro_644!();
+        Depcrate_bitsmacro_645!();
+        Depcrate_bitsmacro_646!();
+        Depcrate_bitsmacro_647!();
+        Depcrate_bitsvarsize!();
+        Depcrate_bitsuse_649!();
+        Depcrate_bitstest!();
+    };
+}

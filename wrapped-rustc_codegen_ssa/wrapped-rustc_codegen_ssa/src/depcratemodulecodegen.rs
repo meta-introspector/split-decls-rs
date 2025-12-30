@@ -1,0 +1,9 @@
+// Generated macro for ModuleCodegen (struct)
+macro_rules! DepcrateModuleCodegen {
+() => {
+// Module: crate
+// Provides: {"ModuleCodegen"}
+// Dependencies: {}
+pub struct ModuleCodegen < M > { # [doc = " The name of the module. When the crate may be saved between"] # [doc = " compilations, incremental compilation requires that name be"] # [doc = " unique amongst **all** crates. Therefore, it should contain"] # [doc = " something unique to this crate (e.g., a module path) as well"] # [doc = " as the crate name and disambiguator."] # [doc = " We currently generate these names via CodegenUnit::build_cgu_name()."] pub name : String , pub module_llvm : M , pub kind : ModuleKind , # [doc = " Saving the ThinLTO buffer for embedding in the object file."] pub thin_lto_buffer : Option < Vec < u8 > > , }
+};
+}

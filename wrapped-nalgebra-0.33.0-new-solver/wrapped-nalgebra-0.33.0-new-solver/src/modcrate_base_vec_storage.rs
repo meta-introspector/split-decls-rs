@@ -1,0 +1,40 @@
+// Generated module macro for crate::base::vec_storage
+macro_rules! Modcrate_base_vec_storage {
+() => {
+        Depcrate_base_vec_storageuse_1089!();
+        Depcrate_base_vec_storageuse_1090!();
+        Depcrate_base_vec_storageuse_1091!();
+        Depcrate_base_vec_storageuse_1092!();
+        Depcrate_base_vec_storageuse_1093!();
+        Depcrate_base_vec_storageuse_1094!();
+        Depcrate_base_vec_storageuse_1095!();
+        Depcrate_base_vec_storageuse_1096!();
+        Depcrate_base_vec_storageuse_1097!();
+        Depcrate_base_vec_storageuse_1098!();
+        Depcrate_base_vec_storageVecStorage!();
+        Depcrate_base_vec_storageimpl_1100!();
+        Depcrate_base_vec_storageimpl_1101!();
+        Depcrate_base_vec_storageimpl_1102!();
+        Depcrate_base_vec_storageimpl_1103!();
+        Depcrate_base_vec_storageimpl_1104!();
+        Depcrate_base_vec_storageimpl_1105!();
+        Depcrate_base_vec_storageMatrixVec!();
+        Depcrate_base_vec_storageimpl_1107!();
+        Depcrate_base_vec_storageimpl_1108!();
+        Depcrate_base_vec_storageimpl_1109!();
+        Depcrate_base_vec_storageimpl_1110!();
+        Depcrate_base_vec_storageimpl_1111!();
+        Depcrate_base_vec_storageimpl_1112!();
+        Depcrate_base_vec_storageimpl_1113!();
+        Depcrate_base_vec_storageimpl_1114!();
+        Depcrate_base_vec_storageimpl_1115!();
+        Depcrate_base_vec_storageimpl_1116!();
+        Depcrate_base_vec_storageimpl_1117!();
+        Depcrate_base_vec_storageimpl_1118!();
+        Depcrate_base_vec_storageimpl_1119!();
+        Depcrate_base_vec_storageimpl_1120!();
+        Depcrate_base_vec_storageimpl_1121!();
+        Depcrate_base_vec_storageimpl_1122!();
+        Depcrate_base_vec_storageimpl_1123!();
+    };
+}

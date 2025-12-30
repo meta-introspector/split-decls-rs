@@ -1,0 +1,43 @@
+// Generated module macro for crate::primitives
+macro_rules! Modcrate_primitives {
+() => {
+        Depcrate_primitivesuse_51!();
+        Depcrate_primitivesuse_52!();
+        Depcrate_primitivesliteral!();
+        Depcrate_primitivesmacro_54!();
+        Depcrate_primitivesliteral!();
+        Depcrate_primitivesimpl_56!();
+        Depcrate_primitivesimpl_57!();
+        Depcrate_primitivesimpl_58!();
+        Depcrate_primitivesimpl_59!();
+        Depcrate_primitivesr#ref!();
+        Depcrate_primitivesimpl_61!();
+        Depcrate_primitivesimpl_62!();
+        Depcrate_primitivesslice!();
+        Depcrate_primitivesimpl_64!();
+        Depcrate_primitivesimpl_65!();
+        Depcrate_primitivesarray!();
+        Depcrate_primitivesimpl_67!();
+        Depcrate_primitivesimpl_68!();
+        Depcrate_primitivesoption!();
+        Depcrate_primitivesimpl_70!();
+        Depcrate_primitivesimpl_71!();
+        Depcrate_primitivesresult!();
+        Depcrate_primitivestuple!();
+        Depcrate_primitivesmacro_74!();
+        Depcrate_primitivesmacro_75!();
+        Depcrate_primitivesmacro_76!();
+        Depcrate_primitivesmacro_77!();
+        Depcrate_primitivesmacro_78!();
+        Depcrate_primitivesmacro_79!();
+        Depcrate_primitivesmacro_80!();
+        Depcrate_primitivesmacro_81!();
+        Depcrate_primitivesmacro_82!();
+        Depcrate_primitivesmacro_83!();
+        Depcrate_primitivesmacro_84!();
+        Depcrate_primitivestuple!();
+        Depcrate_primitivesimpl_86!();
+        Depcrate_primitivesimpl_87!();
+        Depcrate_primitivesphantom_data!();
+    };
+}

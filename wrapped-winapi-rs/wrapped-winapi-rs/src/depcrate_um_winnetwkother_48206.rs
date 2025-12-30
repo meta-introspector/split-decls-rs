@@ -1,0 +1,9 @@
+// Generated macro for other_48206 (other)
+macro_rules! Depcrate_um_winnetwkother_48206 {
+() => {
+// Module: crate::um::winnetwk
+// Provides: {"other_48206"}
+// Dependencies: {}
+extern "system" { pub fn WNetAddConnection2A (lpNetResource : LPNETRESOURCEA , lpPassword : LPCSTR , lpUsername : LPCSTR , dwFlags : DWORD ,) -> DWORD ; pub fn WNetAddConnection2W (lpNetResource : LPNETRESOURCEW , lpPassword : LPCWSTR , lpUsername : LPCWSTR , dwFlags : DWORD ,) -> DWORD ; pub fn WNetAddConnection3A (hwndOwner : HWND , lpNetResource : LPNETRESOURCEA , lpPassword : LPCSTR , lpUsername : LPCSTR , dwFlags : DWORD ,) -> DWORD ; pub fn WNetAddConnection3W (hwndOwner : HWND , lpNetResource : LPNETRESOURCEW , lpPassword : LPCWSTR , lpUsername : LPCWSTR , dwFlags : DWORD ,) -> DWORD ; pub fn WNetCancelConnectionA (lpName : LPCSTR , fForce : BOOL ,) -> DWORD ; pub fn WNetCancelConnectionW (lpName : LPCWSTR , fForce : BOOL ,) -> DWORD ; pub fn WNetCancelConnection2A (lpName : LPCSTR , dwFlags : DWORD , fForce : BOOL ,) -> DWORD ; pub fn WNetCancelConnection2W (lpName : LPCWSTR , dwFlags : DWORD , fForce : BOOL ,) -> DWORD ; pub fn WNetGetConnectionA (lpLocalName : LPCSTR , lpRemoteName : LPSTR , lpnLength : LPDWORD ,) -> DWORD ; pub fn WNetGetConnectionW (lpLocalName : LPCWSTR , lpRemoteName : LPWSTR , lpnLength : LPDWORD ,) -> DWORD ; pub fn WNetUseConnectionA (hwndOwner : HWND , lpNetResource : LPNETRESOURCEA , lpPassword : LPCSTR , lpUserId : LPCSTR , dwFlags : DWORD , lpAccessName : LPSTR , lpBufferSize : LPDWORD , lpResult : LPDWORD ,) -> DWORD ; pub fn WNetUseConnectionW (hwndOwner : HWND , lpNetResource : LPNETRESOURCEW , lpPassword : LPCWSTR , lpUserId : LPCWSTR , dwFlags : DWORD , lpAccessName : LPWSTR , lpBufferSize : LPDWORD , lpResult : LPDWORD ,) -> DWORD ; pub fn WNetConnectionDialog (hwnd : HWND , dwType : DWORD ,) -> DWORD ; pub fn WNetDisconnectDialog (hwnd : HWND , dwType : DWORD ,) -> DWORD ; }
+};
+}

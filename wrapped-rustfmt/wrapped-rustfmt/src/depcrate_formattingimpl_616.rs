@@ -1,0 +1,9 @@
+// Generated macro for impl_616 (impl)
+macro_rules! Depcrate_formattingimpl_616 {
+() => {
+// Module: crate::formatting
+// Provides: {"impl_616"}
+// Dependencies: {}
+impl Timer { fn start () -> Timer { if cfg ! (target_arch = "wasm32") { Timer :: Disabled } else { Timer :: Initialized (Instant :: now ()) } } fn done_parsing (self) -> Self { match self { Timer :: Disabled => Timer :: Disabled , Timer :: Initialized (init_time) => Timer :: DoneParsing (init_time , Instant :: now ()) , _ => panic ! ("Timer can only transition to DoneParsing from Initialized state") , } } fn done_formatting (self) -> Self { match self { Timer :: Disabled => Timer :: Disabled , Timer :: DoneParsing (init_time , parse_time) => { Timer :: DoneFormatting (init_time , parse_time , Instant :: now ()) } _ => panic ! ("Timer can only transition to DoneFormatting from DoneParsing state") , } } # [doc = " Returns the time it took to parse the source files in seconds."] fn get_parse_time (& self) -> f32 { match * self { Timer :: Disabled => panic ! ("this platform cannot time execution") , Timer :: DoneParsing (init , parse_time) | Timer :: DoneFormatting (init , parse_time , _) => { Self :: duration_to_f32 (parse_time . duration_since (init)) } Timer :: Initialized (..) => unreachable ! () , } } # [doc = " Returns the time it took to go from the parsed AST to the formatted output. Parsing time is"] # [doc = " not included."] fn get_format_time (& self) -> f32 { match * self { Timer :: Disabled => panic ! ("this platform cannot time execution") , Timer :: DoneFormatting (_init , parse_time , format_time) => { Self :: duration_to_f32 (format_time . duration_since (parse_time)) } Timer :: DoneParsing (..) | Timer :: Initialized (..) => unreachable ! () , } } fn duration_to_f32 (d : Duration) -> f32 { d . as_secs () as f32 + d . subsec_nanos () as f32 / 1_000_000_000f32 } }
+};
+}

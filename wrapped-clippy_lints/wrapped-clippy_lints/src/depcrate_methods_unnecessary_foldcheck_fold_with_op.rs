@@ -1,0 +1,9 @@
+// Generated macro for check_fold_with_op (function)
+macro_rules! Depcrate_methods_unnecessary_foldcheck_fold_with_op {
+() => {
+// Module: crate::methods::unnecessary_fold
+// Provides: {"check_fold_with_op"}
+// Dependencies: {}
+fn check_fold_with_op (cx : & LateContext < '_ > , expr : & hir :: Expr < '_ > , acc : & hir :: Expr < '_ > , fold_span : Span , op : hir :: BinOpKind , replacement : Replacement ,) { if let hir :: ExprKind :: Closure (& hir :: Closure { body , .. }) = acc . kind && let closure_body = cx . tcx . hir_body (body) && let closure_expr = peel_blocks (closure_body . value) && let hir :: ExprKind :: Binary (ref bin_op , left_expr , right_expr) = closure_expr . kind && bin_op . node == op && let [param_a , param_b] = closure_body . params && let PatKind :: Binding (_ , first_arg_id , ..) = strip_pat_refs (param_a . pat) . kind && let PatKind :: Binding (_ , second_arg_id , second_arg_ident , _) = strip_pat_refs (param_b . pat) . kind && left_expr . res_local_id () == Some (first_arg_id) && (replacement . has_args || right_expr . res_local_id () == Some (second_arg_id)) { let mut applicability = Applicability :: MachineApplicable ; let turbofish = if replacement . has_generic_return { format ! ("::<{}>" , cx . typeck_results () . expr_ty_adjusted (right_expr) . peel_refs ()) } else { String :: new () } ; let sugg = if replacement . has_args { format ! ("{method}{turbofish}(|{second_arg_ident}| {r})" , method = replacement . method_name , r = snippet_with_applicability (cx , right_expr . span , "EXPR" , & mut applicability) ,) } else { format ! ("{method}{turbofish}()" , method = replacement . method_name ,) } ; span_lint_and_sugg (cx , UNNECESSARY_FOLD , fold_span . with_hi (expr . span . hi ()) , "this `.fold` can be written more succinctly using another method" , "try" , sugg , applicability ,) ; } }
+};
+}

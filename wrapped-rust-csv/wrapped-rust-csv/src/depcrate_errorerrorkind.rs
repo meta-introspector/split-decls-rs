@@ -1,0 +1,9 @@
+// Generated macro for ErrorKind (enum)
+macro_rules! Depcrate_errorErrorKind {
+() => {
+// Module: crate::error
+// Provides: {"ErrorKind"}
+// Dependencies: {}
+# [doc = " The specific type of an error."] # [derive (Debug)] # [non_exhaustive] pub enum ErrorKind { # [doc = " An I/O error that occurred while reading CSV data."] Io (io :: Error) , # [doc = " A UTF-8 decoding error that occured while reading CSV data into Rust"] # [doc = " `String`s."] Utf8 { # [doc = " The position of the record in which this error occurred, if"] # [doc = " available."] pos : Option < Position > , # [doc = " The corresponding UTF-8 error."] err : Utf8Error , } , # [doc = " This error occurs when two records with an unequal number of fields"] # [doc = " are found. This error only occurs when the `flexible` option in a"] # [doc = " CSV reader/writer is disabled."] UnequalLengths { # [doc = " The position of the first record with an unequal number of fields"] # [doc = " to the previous record, if available."] pos : Option < Position > , # [doc = " The expected number of fields in a record. This is the number of"] # [doc = " fields in the record read prior to the record indicated by"] # [doc = " `pos`."] expected_len : u64 , # [doc = " The number of fields in the bad record."] len : u64 , } , # [doc = " This error occurs when either the `byte_headers` or `headers` methods"] # [doc = " are called on a CSV reader that was asked to `seek` before it parsed"] # [doc = " the first record."] Seek , # [doc = " An error of this kind occurs only when using the Serde serializer."] Serialize (String) , # [doc = " An error of this kind occurs only when performing automatic"] # [doc = " deserialization with serde."] Deserialize { # [doc = " The position of this error, if available."] pos : Option < Position > , # [doc = " The deserialization error."] err : DeserializeError , } , }
+};
+}

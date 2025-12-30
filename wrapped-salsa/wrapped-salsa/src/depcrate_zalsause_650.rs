@@ -4,6 +4,6 @@ macro_rules! Depcrate_zalsause_650 {
 // Module: crate::zalsa
 // Provides: {"use_650"}
 // Dependencies: {}
-use std :: any :: { Any , TypeId } ;
+use hashbrown :: HashMap ;
 };
 }

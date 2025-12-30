@@ -1,0 +1,9 @@
+// Generated macro for impl_2272 (impl)
+macro_rules! Depcrate_geometry_isometry_constructionimpl_2272 {
+() => {
+// Module: crate::geometry::isometry_construction
+// Provides: {"impl_2272"}
+// Dependencies: {}
+impl < T : SimdRealField > Isometry2 < T > where T :: Element : SimdRealField , { # [doc = " Creates a new 2D isometry from a translation and a rotation angle."] # [doc = ""] # [doc = " Its rotational part is represented as an unit complex number."] # [doc = ""] # [doc = " # Example"] # [doc = ""] # [doc = " ```"] # [doc = " # use std::f32;"] # [doc = " # use nalgebra::{IsometryMatrix2, Point2, Vector2};"] # [doc = " let iso = IsometryMatrix2::new(Vector2::new(1.0, 2.0), f32::consts::FRAC_PI_2);"] # [doc = ""] # [doc = " assert_eq!(iso * Point2::new(3.0, 4.0), Point2::new(-3.0, 5.0));"] # [doc = " ```"] # [inline] pub fn new (translation : Vector2 < T > , angle : T) -> Self { Self :: from_parts (Translation :: from (translation) , UnitComplex :: from_angle (angle) ,) } # [doc = " Creates a new isometry from the given translation coordinates."] # [inline] pub fn translation (x : T , y : T) -> Self { Self :: from_parts (Translation2 :: new (x , y) , UnitComplex :: identity ()) } # [doc = " Creates a new isometry from the given rotation angle."] # [inline] pub fn rotation (angle : T) -> Self { Self :: new (Vector2 :: zeros () , angle) } # [doc = " Cast the components of `self` to another type."] # [doc = ""] # [doc = " # Example"] # [doc = " ```"] # [doc = " # use nalgebra::Isometry2;"] # [doc = " let iso = Isometry2::<f64>::identity();"] # [doc = " let iso2 = iso.cast::<f32>();"] # [doc = " assert_eq!(iso2, Isometry2::<f32>::identity());"] # [doc = " ```"] pub fn cast < To : Scalar > (self) -> Isometry2 < To > where Isometry2 < To > : SupersetOf < Self > , { crate :: convert (self) } }
+};
+}

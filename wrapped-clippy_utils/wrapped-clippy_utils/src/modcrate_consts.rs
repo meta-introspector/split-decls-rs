@@ -1,0 +1,46 @@
+// Generated module macro for crate::consts
+macro_rules! Modcrate_consts {
+() => {
+        Depcrate_constsuse_173!();
+        Depcrate_constsuse_174!();
+        Depcrate_constsuse_175!();
+        Depcrate_constsuse_176!();
+        Depcrate_constsuse_177!();
+        Depcrate_constsuse_178!();
+        Depcrate_constsuse_179!();
+        Depcrate_constsuse_180!();
+        Depcrate_constsuse_181!();
+        Depcrate_constsuse_182!();
+        Depcrate_constsuse_183!();
+        Depcrate_constsuse_184!();
+        Depcrate_constsuse_185!();
+        Depcrate_constsuse_186!();
+        Depcrate_constsuse_187!();
+        Depcrate_constsuse_188!();
+        Depcrate_constsuse_189!();
+        Depcrate_constsuse_190!();
+        Depcrate_constsuse_191!();
+        Depcrate_constsuse_192!();
+        Depcrate_constsConstant!();
+        Depcrate_constsIntTypeBounds!();
+        Depcrate_constsimpl_195!();
+        Depcrate_constsimpl_196!();
+        Depcrate_constsimpl_197!();
+        Depcrate_constsimpl_198!();
+        Depcrate_constsimpl_199!();
+        Depcrate_constslit_to_mir_constant!();
+        Depcrate_constsConstantSource!();
+        Depcrate_constsimpl_202!();
+        Depcrate_constsFullInt!();
+        Depcrate_constsimpl_204!();
+        Depcrate_constsimpl_205!();
+        Depcrate_constsimpl_206!();
+        Depcrate_constsConstEvalCtxt!();
+        Depcrate_constsimpl_208!();
+        Depcrate_constsmir_to_const!();
+        Depcrate_constsfield_of_struct!();
+        Depcrate_constsinteger_const!();
+        Depcrate_constsis_zero_integer_const!();
+        Depcrate_constsconst_item_rhs_to_expr!();
+    };
+}

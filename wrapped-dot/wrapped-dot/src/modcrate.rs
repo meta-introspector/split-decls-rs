@@ -1,0 +1,45 @@
+// Generated module macro for crate
+macro_rules! Modcrate {
+() => {
+        Depcrateuse_1!();
+        Depcrateuse_2!();
+        Depcrateuse_3!();
+        Depcrateuse_4!();
+        Depcrateuse_5!();
+        Depcrateuse_6!();
+        DepcrateLabelText!();
+        DepcrateStyle!();
+        Depcrateimpl_9!();
+        DepcrateRankDir!();
+        Depcrateimpl_11!();
+        DepcrateId!();
+        Depcrateimpl_13!();
+        DepcrateLabeller!();
+        DepcrateCompassPoint!();
+        Depcrateimpl_16!();
+        Depcrateescape_html!();
+        Depcrateimpl_18!();
+        DepcrateArrow!();
+        Depcrateuse_20!();
+        Depcrateimpl_21!();
+        Depcrateimpl_22!();
+        Depcrateimpl_23!();
+        Depcrateimpl_24!();
+        DepcrateFill!();
+        Depcrateimpl_26!();
+        DepcrateSide!();
+        Depcrateimpl_28!();
+        DepcrateArrowShape!();
+        Depcrateimpl_30!();
+        DepcrateNodes!();
+        DepcrateEdges!();
+        DepcrateKind!();
+        Depcrateimpl_34!();
+        DepcrateGraphWalk!();
+        DepcrateRenderOption!();
+        Depcratedefault_options!();
+        Depcraterender!();
+        Depcraterender_opts!();
+        Depcratetests!();
+    };
+}

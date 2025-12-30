@@ -1,0 +1,57 @@
+// Generated module macro for crate::bindings
+macro_rules! Modcrate_bindings {
+() => {
+        Depcrate_bindingsCompositor!();
+        Depcrate_bindingsmacro_3!();
+        Depcrate_bindingsimpl_4!();
+        Depcrate_bindingsimpl_5!();
+        Depcrate_bindingsimpl_6!();
+        Depcrate_bindingsimpl_7!();
+        Depcrate_bindingsimpl_8!();
+        Depcrate_bindingsimpl_9!();
+        Depcrate_bindingsContainerVisual!();
+        Depcrate_bindingsmacro_11!();
+        Depcrate_bindingsmacro_12!();
+        Depcrate_bindingsimpl_13!();
+        Depcrate_bindingsimpl_14!();
+        Depcrate_bindingsimpl_15!();
+        Depcrate_bindingsimpl_16!();
+        Depcrate_bindingsimpl_17!();
+        Depcrate_bindingsimpl_18!();
+        Depcrate_bindingsmacro_19!();
+        Depcrate_bindingsimpl_20!();
+        Depcrate_bindingsICompositor_Vtbl!();
+        Depcrate_bindingsmacro_22!();
+        Depcrate_bindingsimpl_23!();
+        Depcrate_bindingsIContainerVisual_Vtbl!();
+        Depcrate_bindingsmacro_25!();
+        Depcrate_bindingsimpl_26!();
+        Depcrate_bindingsIContainerVisualFactory_Vtbl!();
+        Depcrate_bindingsmacro_28!();
+        Depcrate_bindingsimpl_29!();
+        Depcrate_bindingsISpriteVisual_Vtbl!();
+        Depcrate_bindingsmacro_31!();
+        Depcrate_bindingsimpl_32!();
+        Depcrate_bindingsIVisual_Vtbl!();
+        Depcrate_bindingsmacro_34!();
+        Depcrate_bindingsimpl_35!();
+        Depcrate_bindingsIVisualFactory_Vtbl!();
+        Depcrate_bindingsSpriteVisual!();
+        Depcrate_bindingsmacro_38!();
+        Depcrate_bindingsmacro_39!();
+        Depcrate_bindingsimpl_40!();
+        Depcrate_bindingsimpl_41!();
+        Depcrate_bindingsimpl_42!();
+        Depcrate_bindingsimpl_43!();
+        Depcrate_bindingsimpl_44!();
+        Depcrate_bindingsimpl_45!();
+        Depcrate_bindingsVisual!();
+        Depcrate_bindingsmacro_47!();
+        Depcrate_bindingsimpl_48!();
+        Depcrate_bindingsimpl_49!();
+        Depcrate_bindingsimpl_50!();
+        Depcrate_bindingsimpl_51!();
+        Depcrate_bindingsimpl_52!();
+        Depcrate_bindingsimpl_53!();
+    };
+}

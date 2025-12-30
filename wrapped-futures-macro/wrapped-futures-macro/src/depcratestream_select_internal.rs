@@ -1,0 +1,9 @@
+// Generated macro for stream_select_internal (function)
+macro_rules! Depcratestream_select_internal {
+() => {
+// Module: crate
+// Provides: {"stream_select_internal"}
+// Dependencies: {}
+# [doc = " The `stream_select!` macro."] # [proc_macro] pub fn stream_select_internal (input : TokenStream) -> TokenStream { crate :: stream_select :: stream_select (input . into ()) . unwrap_or_else (syn :: Error :: into_compile_error) . into () }
+};
+}

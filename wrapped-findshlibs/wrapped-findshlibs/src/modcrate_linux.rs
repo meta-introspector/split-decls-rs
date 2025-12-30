@@ -1,0 +1,43 @@
+// Generated module macro for crate::linux
+macro_rules! Modcrate_linux {
+() => {
+        Depcrate_linuxuse_32!();
+        Depcrate_linuxuse_33!();
+        Depcrate_linuxuse_34!();
+        Depcrate_linuxuse_35!();
+        Depcrate_linuxuse_36!();
+        Depcrate_linuxuse_37!();
+        Depcrate_linuxuse_38!();
+        Depcrate_linuxuse_39!();
+        Depcrate_linuxuse_40!();
+        Depcrate_linuxuse_41!();
+        Depcrate_linuxuse_42!();
+        Depcrate_linuxuse_43!();
+        Depcrate_linuxuse_44!();
+        Depcrate_linuxuse_45!();
+        Depcrate_linuxuse_46!();
+        Depcrate_linuxuse_47!();
+        Depcrate_linuxuse_48!();
+        Depcrate_linuxPhdr!();
+        Depcrate_linuxPhdr!();
+        Depcrate_linuxNT_GNU_BUILD_ID!();
+        Depcrate_linuxNhdr!();
+        Depcrate_linuxSegment!();
+        Depcrate_linuximpl_54!();
+        Depcrate_linuxtry_split_at!();
+        Depcrate_linuximpl_56!();
+        Depcrate_linuxSegmentIter!();
+        Depcrate_linuximpl_58!();
+        Depcrate_linuximpl_59!();
+        Depcrate_linuxSharedLibrary!();
+        Depcrate_linuxIterState!();
+        Depcrate_linuxCONTINUE!();
+        Depcrate_linuxBREAK!();
+        Depcrate_linuximpl_64!();
+        Depcrate_linuximpl_65!();
+        Depcrate_linuximpl_66!();
+        Depcrate_linuxDebugPhdr!();
+        Depcrate_linuximpl_68!();
+        Depcrate_linuxtests!();
+    };
+}

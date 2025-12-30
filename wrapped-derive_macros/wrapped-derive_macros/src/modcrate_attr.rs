@@ -1,0 +1,52 @@
+// Generated module macro for crate::attr
+macro_rules! Modcrate_attr {
+() => {
+        Depcrate_attruse_5!();
+        Depcrate_attruse_6!();
+        Depcrate_attruse_7!();
+        Depcrate_attrTagAttr!();
+        Depcrate_attrimpl_9!();
+        Depcrate_attrimpl_10!();
+        Depcrate_attrDataTagAttr!();
+        Depcrate_attrimpl_12!();
+        Depcrate_attrimpl_13!();
+        Depcrate_attrLabelAttr!();
+        Depcrate_attrimpl_15!();
+        Depcrate_attrimpl_16!();
+        Depcrate_attrIndexAttr!();
+        Depcrate_attrimpl_18!();
+        Depcrate_attrimpl_19!();
+        Depcrate_attrimpl_20!();
+        Depcrate_attrSkipAttr!();
+        Depcrate_attrimpl_22!();
+        Depcrate_attrimpl_23!();
+        Depcrate_attrUnlabeledFieldsAttr!();
+        Depcrate_attrimpl_25!();
+        Depcrate_attrimpl_26!();
+        Depcrate_attrUnindexedFieldsAttr!();
+        Depcrate_attrimpl_28!();
+        Depcrate_attrimpl_29!();
+        Depcrate_attrUnlabeledVariantsAttr!();
+        Depcrate_attrimpl_31!();
+        Depcrate_attrimpl_32!();
+        Depcrate_attrUnindexedVariantsAttr!();
+        Depcrate_attrimpl_34!();
+        Depcrate_attrimpl_35!();
+        Depcrate_attrDynamicAttr!();
+        Depcrate_attrimpl_37!();
+        Depcrate_attrimpl_38!();
+        Depcrate_attrTransparentAttr!();
+        Depcrate_attrimpl_40!();
+        Depcrate_attrimpl_41!();
+        Depcrate_attrFlattenAttr!();
+        Depcrate_attrimpl_43!();
+        Depcrate_attrimpl_44!();
+        Depcrate_attrRawAttribute!();
+        Depcrate_attrSvalAttribute!();
+        Depcrate_attrensure_empty!();
+        Depcrate_attrensure_missing!();
+        Depcrate_attrcheck!();
+        Depcrate_attrget_unchecked!();
+        Depcrate_attrsval_attr!();
+    };
+}

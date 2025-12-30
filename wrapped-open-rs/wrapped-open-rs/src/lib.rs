@@ -1,0 +1,75 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcrate_windowsshopenfolderandselectitems.rs");
+include!("depcrateimpl_19.rs");
+include!("depcrate_macosuse_36.rs");
+include!("depcratewith.rs");
+include!("depcrateuse_7.rs");
+include!("depcrateuse_3.rs");
+include!("depcrate_macoscommands.rs");
+include!("depcratethat_in_background.rs");
+include!("depcratethat.rs");
+include!("depcrate_windowscommands.rs");
+include!("depcrate_iosuse_40.rs");
+include!("depcrate_windowsshellexecuteexw.rs");
+include!("depcrateios.rs");
+include!("depcrate_haikuwith_command.rs");
+include!("depcrateuse_6.rs");
+include!("depcrate_windowswith_command.rs");
+include!("depcrate_ioswith_command.rs");
+include!("depcrate_windowswrap_in_quotes.rs");
+include!("depcratethat_detached.rs");
+include!("depcratemacos.rs");
+include!("depcrate_haikucommands.rs");
+include!("depcrate_redoxwith_command.rs");
+include!("depcrateintoresult.rs");
+include!("depcratehaiku.rs");
+include!("depcrateunix.rs");
+include!("depcrate_windowswide.rs");
+include!("depcrateimpl_21.rs");
+include!("depcrate_windowscreate_no_window.rs");
+include!("depcrate_windowsffi.rs");
+include!("depcrate_haikuuse_45.rs");
+include!("depcrateredox.rs");
+include!("depcrate_windowsuse_23.rs");
+include!("depcrate_redoxuse_49.rs");
+include!("depcrate_redoxcommands.rs");
+include!("depcrate_ioscommands.rs");
+include!("depcrate_unixcommands.rs");
+include!("depcrate_windowswith_detached.rs");
+include!("depcrate_windowsuse_24.rs");
+include!("depcrate_unixwsl_path.rs");
+include!("depcrateuse_9.rs");
+include!("depcratewindows.rs");
+include!("depcrate_unixuse_53.rs");
+include!("depcratemacro_8.rs");
+include!("depcrate_unixwith_command.rs");
+include!("depcratecommands.rs");
+include!("depcrateuse_5.rs");
+include!("depcrateuse_1.rs");
+include!("depcratecommandext.rs");
+include!("depcrate_macoswith_command.rs");
+include!("depcrateuse_4.rs");
+include!("depcratewith_in_background.rs");
+include!("depcrateuse_2.rs");
+include!("depcratewith_command.rs");
+include!("depcrate_windowsthat_detached.rs");
+include!("depcratewith_detached.rs");
+include!("modcrate_haiku.rs");
+include!("modcrate_unix.rs");
+include!("modcrate_redox.rs");
+include!("modcrate_ios.rs");
+include!("modcrate.rs");
+include!("modcrate_macos.rs");
+include!("modcrate_windows.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate_haiku!();
+    Modcrate_unix!();
+    Modcrate_redox!();
+    Modcrate_ios!();
+    Modcrate!();
+    Modcrate_macos!();
+    Modcrate_windows!();
+}

@@ -1,0 +1,9 @@
+// Generated macro for impl_def_datum (function)
+macro_rules! Depcrate_chalk_dbimpl_def_datum {
+() => {
+// Module: crate::chalk_db
+// Provides: {"impl_def_datum"}
+// Dependencies: {}
+fn impl_def_datum (db : & dyn HirDatabase , krate : Crate , impl_id : hir_def :: ImplId) -> Arc < ImplDatum > { let trait_ref = db . impl_trait (impl_id) . expect ("invalid impl passed to Chalk") . into_value_and_skipped_binders () . 0 ; let impl_data = db . impl_signature (impl_id) ; let generic_params = generics (db , impl_id . into ()) ; let bound_vars = generic_params . bound_vars_subst (db , DebruijnIndex :: INNERMOST) ; let trait_ = trait_ref . hir_trait_id () ; let impl_type = if impl_id . lookup (db) . container . krate () == krate { rust_ir :: ImplType :: Local } else { rust_ir :: ImplType :: External } ; let where_clauses = convert_where_clauses (db , impl_id . into () , & bound_vars) ; let negative = impl_data . flags . contains (ImplFlags :: NEGATIVE) ; let polarity = if negative { rust_ir :: Polarity :: Negative } else { rust_ir :: Polarity :: Positive } ; let impl_datum_bound = rust_ir :: ImplDatumBound { trait_ref , where_clauses } ; let trait_data = trait_ . trait_items (db) ; let associated_ty_value_ids = impl_id . impl_items (db) . items . iter () . filter_map (| (_ , item) | match item { AssocItemId :: TypeAliasId (type_alias) => Some (* type_alias) , _ => None , }) . filter (| & type_alias | { let name = & db . type_alias_signature (type_alias) . name ; trait_data . associated_type_by_name (name) . is_some () }) . map (| type_alias | TypeAliasAsValue (type_alias) . to_chalk (db)) . collect () ; debug ! ("impl_datum: {:?}" , impl_datum_bound) ; let impl_datum = ImplDatum { binders : make_binders (db , & generic_params , impl_datum_bound) , impl_type , polarity , associated_ty_value_ids , } ; Arc :: new (impl_datum) }
+};
+}

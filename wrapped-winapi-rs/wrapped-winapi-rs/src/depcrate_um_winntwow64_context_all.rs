@@ -1,0 +1,9 @@
+// Generated macro for WOW64_CONTEXT_ALL (const)
+macro_rules! Depcrate_um_winntWOW64_CONTEXT_ALL {
+() => {
+// Module: crate::um::winnt
+// Provides: {"WOW64_CONTEXT_ALL"}
+// Dependencies: {}
+pub const WOW64_CONTEXT_ALL : DWORD = WOW64_CONTEXT_CONTROL | WOW64_CONTEXT_INTEGER | WOW64_CONTEXT_SEGMENTS | WOW64_CONTEXT_FLOATING_POINT | WOW64_CONTEXT_DEBUG_REGISTERS | WOW64_CONTEXT_EXTENDED_REGISTERS ;
+};
+}

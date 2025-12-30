@@ -1,0 +1,9 @@
+// Generated macro for D3D11_TESSELLATOR_MAX_EVEN_TESSELLATION_FACTOR (const)
+macro_rules! Depcrate_um_d3d11D3D11_TESSELLATOR_MAX_EVEN_TESSELLATION_FACTOR {
+() => {
+// Module: crate::um::d3d11
+// Provides: {"D3D11_TESSELLATOR_MAX_EVEN_TESSELLATION_FACTOR"}
+// Dependencies: {}
+pub const D3D11_TESSELLATOR_MAX_EVEN_TESSELLATION_FACTOR : DWORD = 64 ;
+};
+}

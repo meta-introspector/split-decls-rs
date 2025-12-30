@@ -1,0 +1,9 @@
+// Generated macro for PJOBOBJECT_RATE_CONTROL_TOLERANCE_INTERVAL (type)
+macro_rules! Depcrate_um_winntPJOBOBJECT_RATE_CONTROL_TOLERANCE_INTERVAL {
+() => {
+// Module: crate::um::winnt
+// Provides: {"PJOBOBJECT_RATE_CONTROL_TOLERANCE_INTERVAL"}
+// Dependencies: {}
+pub type PJOBOBJECT_RATE_CONTROL_TOLERANCE_INTERVAL = * mut JOBOBJECT_RATE_CONTROL_TOLERANCE_INTERVAL ;
+};
+}

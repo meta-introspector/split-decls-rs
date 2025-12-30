@@ -1,0 +1,9 @@
+// Generated macro for PROCESS_TRUST_LABEL_SECURITY_INFORMATION (const)
+macro_rules! Depcrate_um_winntPROCESS_TRUST_LABEL_SECURITY_INFORMATION {
+() => {
+// Module: crate::um::winnt
+// Provides: {"PROCESS_TRUST_LABEL_SECURITY_INFORMATION"}
+// Dependencies: {}
+pub const PROCESS_TRUST_LABEL_SECURITY_INFORMATION : SECURITY_INFORMATION = 0x00000080 ;
+};
+}

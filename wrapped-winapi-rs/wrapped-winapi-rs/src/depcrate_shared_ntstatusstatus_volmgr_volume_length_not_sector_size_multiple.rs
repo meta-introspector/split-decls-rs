@@ -1,0 +1,9 @@
+// Generated macro for STATUS_VOLMGR_VOLUME_LENGTH_NOT_SECTOR_SIZE_MULTIPLE (const)
+macro_rules! Depcrate_shared_ntstatusSTATUS_VOLMGR_VOLUME_LENGTH_NOT_SECTOR_SIZE_MULTIPLE {
+() => {
+// Module: crate::shared::ntstatus
+// Provides: {"STATUS_VOLMGR_VOLUME_LENGTH_NOT_SECTOR_SIZE_MULTIPLE"}
+// Dependencies: {}
+pub const STATUS_VOLMGR_VOLUME_LENGTH_NOT_SECTOR_SIZE_MULTIPLE : NTSTATUS = 0xC0380048 ;
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for SECURITY_CLOUD_INFRASTRUCTURE_SERVICES_ID_BASE_RID (const)
+macro_rules! Depcrate_um_winntSECURITY_CLOUD_INFRASTRUCTURE_SERVICES_ID_BASE_RID {
+() => {
+// Module: crate::um::winnt
+// Provides: {"SECURITY_CLOUD_INFRASTRUCTURE_SERVICES_ID_BASE_RID"}
+// Dependencies: {}
+pub const SECURITY_CLOUD_INFRASTRUCTURE_SERVICES_ID_BASE_RID : DWORD = 0x00000055 ;
+};
+}

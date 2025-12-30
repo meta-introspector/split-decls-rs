@@ -1,0 +1,9 @@
+// Generated macro for impl_433 (impl)
+macro_rules! Depcrate_quic_addr_validation_tokenimpl_433 {
+() => {
+// Module: crate::quic::addr_validation_token
+// Provides: {"impl_433"}
+// Dependencies: {}
+impl AddrValidationTokenManager { pub (super) fn gen (& self , original_dcid : & [u8] , client_addr : SocketAddr ,) -> Vec < u8 > { let ip_bytes = match client_addr . ip () { IpAddr :: V4 (addr) => addr . octets () . to_vec () , IpAddr :: V6 (addr) => addr . octets () . to_vec () , } ; let token_len = HMAC_TAG_LEN + ip_bytes . len () + original_dcid . len () ; let mut token = io :: Cursor :: new (vec ! [0u8 ; token_len]) ; token . set_position (HMAC_TAG_LEN as u64) ; token . write_all (& ip_bytes) . unwrap () ; token . write_all (original_dcid) . unwrap () ; let tag = boring :: hash :: hmac_sha256 (& self . sign_key , & token . get_ref () [HMAC_TAG_LEN ..] ,) . unwrap () ; token . set_position (0) ; token . write_all (tag . as_ref ()) . unwrap () ; token . into_inner () } pub (super) fn validate_and_extract_original_dcid < 't > (& self , token : & 't [u8] , client_addr : SocketAddr ,) -> io :: Result < ConnectionId < 't > > { let ip_bytes = match client_addr . ip () { IpAddr :: V4 (addr) => addr . octets () . to_vec () , IpAddr :: V6 (addr) => addr . octets () . to_vec () , } ; let hmac_and_ip_len = HMAC_TAG_LEN + ip_bytes . len () ; if token . len () < hmac_and_ip_len { return Err ("token is too short") . into_io () ; } let (tag , payload) = token . split_at (HMAC_TAG_LEN) ; let expected_tag = boring :: hash :: hmac_sha256 (& self . sign_key , payload) . unwrap () ; if ! boring :: memcmp :: eq (& expected_tag , tag) { return Err ("signature verification failed") . into_io () ; } if payload [.. ip_bytes . len ()] != * ip_bytes { return Err ("IPs don't match") . into_io () ; } Ok (ConnectionId :: from_ref (& token [hmac_and_ip_len ..])) } }
+};
+}

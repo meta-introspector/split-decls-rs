@@ -1,0 +1,9 @@
+// Generated macro for tests (module)
+macro_rules! Depcrate_complex_languagetests {
+() => {
+// Module: crate::complex::language
+// Provides: {"tests"}
+// Dependencies: {}
+# [cfg (test)] mod tests { use super :: * ; # [test] fn test_thai_only () { let s = "ภาษาไทยภาษาไทย" ; let utf16 : Vec < u16 > = s . encode_utf16 () . collect () ; let mut iter = LanguageIteratorUtf16 :: new (& utf16) ; assert_eq ! (iter . next () , Some ((utf16 . as_slice () , Language :: Thai)) , "Thai language only with UTF-16") ; let mut iter = LanguageIterator :: new (s) ; assert_eq ! (iter . next () , Some ((s , Language :: Thai)) , "Thai language only with UTF-8") ; assert_eq ! (iter . next () , None , "Iterator for UTF-8 is finished") ; } # [test] fn test_combine () { const TEST_STR_THAI : & str = "ภาษาไทยภาษาไทย" ; const TEST_STR_BURMESE : & str = "ဗမာနွယ်ဘာသာစကားမျာ" ; let s = format ! ("{TEST_STR_THAI}{TEST_STR_BURMESE}") ; let utf16 : Vec < u16 > = s . encode_utf16 () . collect () ; let thai_utf16 : Vec < u16 > = TEST_STR_THAI . encode_utf16 () . collect () ; let burmese_utf16 : Vec < u16 > = TEST_STR_BURMESE . encode_utf16 () . collect () ; let mut iter = LanguageIteratorUtf16 :: new (& utf16) ; assert_eq ! (iter . next () , Some ((thai_utf16 . as_slice () , Language :: Thai)) , "Thai language with UTF-16 at first") ; assert_eq ! (iter . next () , Some ((burmese_utf16 . as_slice () , Language :: Burmese)) , "Burmese language with UTF-16 at second") ; assert_eq ! (iter . next () , None , "Iterator for UTF-16 is finished") ; let mut iter = LanguageIterator :: new (& s) ; assert_eq ! (iter . next () , Some ((TEST_STR_THAI , Language :: Thai)) , "Thai language with UTF-8 at first") ; assert_eq ! (iter . next () , Some ((TEST_STR_BURMESE , Language :: Burmese)) , "Burmese language with UTF-8 at second") ; assert_eq ! (iter . next () , None , "Iterator for UTF-8 is finished") ; } }
+};
+}

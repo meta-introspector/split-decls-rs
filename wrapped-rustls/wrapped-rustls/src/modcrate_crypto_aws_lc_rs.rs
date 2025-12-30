@@ -1,0 +1,53 @@
+// Generated module macro for crate::crypto::aws_lc_rs
+macro_rules! Modcrate_crypto_aws_lc_rs {
+() => {
+        Depcrate_crypto_aws_lc_rsuse_1008!();
+        Depcrate_crypto_aws_lc_rsuse_1009!();
+        Depcrate_crypto_aws_lc_rsuse_1010!();
+        Depcrate_crypto_aws_lc_rsuse_1011!();
+        Depcrate_crypto_aws_lc_rsuse_1012!();
+        Depcrate_crypto_aws_lc_rsuse_1013!();
+        Depcrate_crypto_aws_lc_rsuse_1014!();
+        Depcrate_crypto_aws_lc_rsuse_1015!();
+        Depcrate_crypto_aws_lc_rsuse_1016!();
+        Depcrate_crypto_aws_lc_rsuse_1017!();
+        Depcrate_crypto_aws_lc_rsuse_1018!();
+        Depcrate_crypto_aws_lc_rsuse_1019!();
+        Depcrate_crypto_aws_lc_rsuse_1020!();
+        Depcrate_crypto_aws_lc_rsuse_1021!();
+        Depcrate_crypto_aws_lc_rshpke!();
+        Depcrate_crypto_aws_lc_rspq!();
+        Depcrate_crypto_aws_lc_rssign!();
+        Depcrate_crypto_aws_lc_rsuse_1169!();
+        Depcrate_crypto_aws_lc_rshash!();
+        Depcrate_crypto_aws_lc_rshmac!();
+        Depcrate_crypto_aws_lc_rskx!();
+        Depcrate_crypto_aws_lc_rsquic!();
+        Depcrate_crypto_aws_lc_rsticketer!();
+        Depcrate_crypto_aws_lc_rsuse_1248!();
+        Depcrate_crypto_aws_lc_rstls12!();
+        Depcrate_crypto_aws_lc_rstls13!();
+        Depcrate_crypto_aws_lc_rsDEFAULT_PROVIDER!();
+        Depcrate_crypto_aws_lc_rsDEFAULT_TLS13_PROVIDER!();
+        Depcrate_crypto_aws_lc_rsDEFAULT_TLS12_PROVIDER!();
+        Depcrate_crypto_aws_lc_rsDEFAULT_KEY_PROVIDER!();
+        Depcrate_crypto_aws_lc_rsDEFAULT_SECURE_RANDOM!();
+        Depcrate_crypto_aws_lc_rsAwsLcRs!();
+        Depcrate_crypto_aws_lc_rsimpl_1337!();
+        Depcrate_crypto_aws_lc_rsimpl_1338!();
+        Depcrate_crypto_aws_lc_rsimpl_1339!();
+        Depcrate_crypto_aws_lc_rsDEFAULT_TLS12_CIPHER_SUITES!();
+        Depcrate_crypto_aws_lc_rsDEFAULT_TLS13_CIPHER_SUITES!();
+        Depcrate_crypto_aws_lc_rsALL_TLS12_CIPHER_SUITES!();
+        Depcrate_crypto_aws_lc_rsALL_TLS13_CIPHER_SUITES!();
+        Depcrate_crypto_aws_lc_rscipher_suite!();
+        Depcrate_crypto_aws_lc_rsSUPPORTED_SIG_ALGS!();
+        Depcrate_crypto_aws_lc_rskx_group!();
+        Depcrate_crypto_aws_lc_rsDEFAULT_KX_GROUPS!();
+        Depcrate_crypto_aws_lc_rsALL_KX_GROUPS!();
+        Depcrate_crypto_aws_lc_rsring_shim!();
+        Depcrate_crypto_aws_lc_rsfips!();
+        Depcrate_crypto_aws_lc_rsunspecified_err!();
+        Depcrate_crypto_aws_lc_rstests!();
+    };
+}

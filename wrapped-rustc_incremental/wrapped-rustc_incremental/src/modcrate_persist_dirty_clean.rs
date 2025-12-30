@@ -1,0 +1,48 @@
+// Generated module macro for crate::persist::dirty_clean
+macro_rules! Modcrate_persist_dirty_clean {
+() => {
+        Depcrate_persist_dirty_cleanuse_84!();
+        Depcrate_persist_dirty_cleanuse_85!();
+        Depcrate_persist_dirty_cleanuse_86!();
+        Depcrate_persist_dirty_cleanuse_87!();
+        Depcrate_persist_dirty_cleanuse_88!();
+        Depcrate_persist_dirty_cleanuse_89!();
+        Depcrate_persist_dirty_cleanuse_90!();
+        Depcrate_persist_dirty_cleanuse_91!();
+        Depcrate_persist_dirty_cleanuse_92!();
+        Depcrate_persist_dirty_cleanuse_93!();
+        Depcrate_persist_dirty_cleanuse_94!();
+        Depcrate_persist_dirty_cleanuse_95!();
+        Depcrate_persist_dirty_cleanLOADED_FROM_DISK!();
+        Depcrate_persist_dirty_cleanEXCEPT!();
+        Depcrate_persist_dirty_cleanCFG!();
+        Depcrate_persist_dirty_cleanBASE_CONST!();
+        Depcrate_persist_dirty_cleanBASE_FN!();
+        Depcrate_persist_dirty_cleanBASE_HIR!();
+        Depcrate_persist_dirty_cleanBASE_IMPL!();
+        Depcrate_persist_dirty_cleanBASE_MIR!();
+        Depcrate_persist_dirty_cleanBASE_STRUCT!();
+        Depcrate_persist_dirty_cleanEXTRA_ASSOCIATED!();
+        Depcrate_persist_dirty_cleanEXTRA_TRAIT!();
+        Depcrate_persist_dirty_cleanLABELS_CONST!();
+        Depcrate_persist_dirty_cleanLABELS_CONST_IN_IMPL!();
+        Depcrate_persist_dirty_cleanLABELS_CONST_IN_TRAIT!();
+        Depcrate_persist_dirty_cleanLABELS_FN!();
+        Depcrate_persist_dirty_cleanLABELS_FN_IN_IMPL!();
+        Depcrate_persist_dirty_cleanLABELS_FN_IN_TRAIT!();
+        Depcrate_persist_dirty_cleanLABELS_HIR_ONLY!();
+        Depcrate_persist_dirty_cleanLABELS_TRAIT!();
+        Depcrate_persist_dirty_cleanLABELS_IMPL!();
+        Depcrate_persist_dirty_cleanLABELS_ADT!();
+        Depcrate_persist_dirty_cleanLabels!();
+        Depcrate_persist_dirty_cleanAssertion!();
+        Depcrate_persist_dirty_cleancheck_dirty_clean_annotations!();
+        Depcrate_persist_dirty_cleanDirtyCleanVisitor!();
+        Depcrate_persist_dirty_cleanimpl_121!();
+        Depcrate_persist_dirty_cleancheck_config!();
+        Depcrate_persist_dirty_cleanexpect_associated_value!();
+        Depcrate_persist_dirty_cleanFindAllAttrs!();
+        Depcrate_persist_dirty_cleanimpl_125!();
+        Depcrate_persist_dirty_cleanimpl_126!();
+    };
+}

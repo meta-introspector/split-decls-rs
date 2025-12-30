@@ -1,0 +1,9 @@
+// Generated macro for synopsis (function)
+macro_rules! Depcrate_rendersynopsis {
+() => {
+// Module: crate::render
+// Provides: {"synopsis"}
+// Dependencies: {}
+pub (crate) fn synopsis (roff : & mut Roff , cmd : & clap :: Command) { let name = cmd . get_bin_name () . unwrap_or_else (| | cmd . get_name ()) ; let mut line = vec ! [bold (name) , roman (" ")] ; let mut opts : Vec < _ > = cmd . get_arguments () . filter (| i | ! i . is_hide_set ()) . collect () ; opts . sort_by_key (| opt | option_sort_key (opt)) ; for opt in opts { let (lhs , rhs) = option_markers (opt) ; match (opt . get_short () , opt . get_long ()) { (Some (short) , Some (long)) => { line . push (roman (lhs)) ; line . push (bold (format ! ("-{short}"))) ; line . push (roman ("|")) ; line . push (bold (format ! ("--{long}" ,))) ; line . push (roman (rhs)) ; } (Some (short) , None) => { line . push (roman (lhs)) ; line . push (bold (format ! ("-{short} "))) ; line . push (roman (rhs)) ; } (None , Some (long)) => { line . push (roman (lhs)) ; line . push (bold (format ! ("--{long}"))) ; line . push (roman (rhs)) ; } (None , None) => continue , } ; if matches ! (opt . get_action () , ArgAction :: Count) { line . push (roman ("...")) ; } line . push (roman (" ")) ; } for arg in cmd . get_positionals () { let (lhs , rhs) = option_markers (arg) ; line . push (roman (lhs)) ; if let Some (value) = arg . get_value_names () { line . push (italic (value . join (" "))) ; } else { line . push (italic (arg . get_id () . as_str ())) ; } line . push (roman (rhs)) ; line . push (roman (" ")) ; } if cmd . has_subcommands () { let (lhs , rhs) = subcommand_markers (cmd) ; line . push (roman (lhs)) ; line . push (italic (cmd . get_subcommand_value_name () . unwrap_or_else (| | subcommand_heading (cmd)) . to_lowercase () ,)) ; line . push (roman (rhs)) ; } roff . text (line) ; }
+};
+}

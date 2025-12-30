@@ -1,0 +1,9 @@
+// Generated macro for macro_33513 (macro)
+macro_rules! Depcrate_um_ntsecapimacro_33513 {
+() => {
+// Module: crate::um::ntsecapi
+// Provides: {"macro_33513"}
+// Dependencies: {}
+STRUCT ! { struct KERB_INTERACTIVE_PROFILE { MessageType : KERB_PROFILE_BUFFER_TYPE , LogonCount : USHORT , BadPasswordCount : USHORT , LogonTime : LARGE_INTEGER , LogoffTime : LARGE_INTEGER , KickOffTime : LARGE_INTEGER , PasswordLastSet : LARGE_INTEGER , PasswordCanChange : LARGE_INTEGER , PasswordMustChange : LARGE_INTEGER , LogonScript : UNICODE_STRING , HomeDirectory : UNICODE_STRING , FullName : UNICODE_STRING , ProfilePath : UNICODE_STRING , HomeDirectoryDrive : UNICODE_STRING , LogonServer : UNICODE_STRING , UserFlags : ULONG , } }
+};
+}

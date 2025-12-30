@@ -1,0 +1,9 @@
+// Generated macro for tests (module)
+macro_rules! Depcratetests {
+() => {
+// Module: crate
+// Provides: {"tests"}
+// Dependencies: {}
+# [cfg (test)] mod tests { use super :: * ; # [test] fn infer_output_file () { macro_rules ! t { ($ src : expr , $ outdir : expr , $ dst : expr , $ ldst : expr) => { let src : PathBuf = $ src . iter () . collect () ; let outdir : PathBuf = $ outdir . iter () . collect () ; let dst : PathBuf = $ dst . iter () . collect () ; let ldst : PathBuf = $ ldst . iter () . collect () ; assert_eq ! (make_output_filepath (& src , & outdir) , dst) ; assert_eq ! (make_tests_filepath (& src , & outdir) , ldst) ; } ; } t ! (["FEAT" , "ARCH.spec.yml"] , [""] , ["ARCH" , "FEAT" , "generated.rs"] , ["ARCH" , "FEAT" , "ld_st_tests_ARCH.rs"]) ; t ! (["x" , "y" , "FEAT" , "ARCH.spec.yml"] , ["out"] , ["out" , "ARCH" , "FEAT" , "generated.rs"] , ["out" , "ARCH" , "FEAT" , "ld_st_tests_ARCH.rs"]) ; t ! (["p" , "q" , "FEAT" , "ARCH.spec.yml"] , ["a" , "b"] , ["a" , "b" , "ARCH" , "FEAT" , "generated.rs"] , ["a" , "b" , "ARCH" , "FEAT" , "ld_st_tests_ARCH.rs"]) ; t ! (["FEAT" , "ARCH.variant.spec.yml"] , ["out"] , ["out" , "ARCH.variant" , "FEAT" , "generated.rs"] , ["out" , "ARCH.variant" , "FEAT" , "ld_st_tests_ARCH.variant.rs"]) ; } # [test] # [should_panic] fn infer_output_file_no_stem () { let src = PathBuf :: from ("FEAT/.spec.yml") ; make_output_filepath (& src , Path :: new ("")) ; } # [test] # [should_panic] fn infer_output_file_no_feat () { let src = PathBuf :: from ("ARCH.spec.yml") ; make_output_filepath (& src , Path :: new ("")) ; } # [test] # [should_panic] fn infer_output_file_ldst_no_stem () { let src = PathBuf :: from ("FEAT/.spec.yml") ; make_tests_filepath (& src , Path :: new ("")) ; } # [test] # [should_panic] fn infer_output_file_ldst_no_feat () { let src = PathBuf :: from ("ARCH.spec.yml") ; make_tests_filepath (& src , Path :: new ("")) ; } }
+};
+}

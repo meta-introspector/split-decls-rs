@@ -1,0 +1,9 @@
+// Generated macro for CRYPT_UNICODE_NAME_ENCODE_DISABLE_CHECK_TYPE_FLAG (const)
+macro_rules! Depcrate_um_wincryptCRYPT_UNICODE_NAME_ENCODE_DISABLE_CHECK_TYPE_FLAG {
+() => {
+// Module: crate::um::wincrypt
+// Provides: {"CRYPT_UNICODE_NAME_ENCODE_DISABLE_CHECK_TYPE_FLAG"}
+// Dependencies: {}
+pub const CRYPT_UNICODE_NAME_ENCODE_DISABLE_CHECK_TYPE_FLAG : DWORD = CERT_RDN_DISABLE_CHECK_TYPE_FLAG ;
+};
+}

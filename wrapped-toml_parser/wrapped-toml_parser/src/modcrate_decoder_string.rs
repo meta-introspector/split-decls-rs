@@ -1,0 +1,44 @@
+// Generated module macro for crate::decoder::string
+macro_rules! Modcrate_decoder_string {
+() => {
+        Depcrate_decoder_stringuse_91!();
+        Depcrate_decoder_stringuse_92!();
+        Depcrate_decoder_stringuse_93!();
+        Depcrate_decoder_stringuse_94!();
+        Depcrate_decoder_stringuse_95!();
+        Depcrate_decoder_stringuse_96!();
+        Depcrate_decoder_stringuse_97!();
+        Depcrate_decoder_stringuse_98!();
+        Depcrate_decoder_stringuse_99!();
+        Depcrate_decoder_stringuse_100!();
+        Depcrate_decoder_stringuse_101!();
+        Depcrate_decoder_stringuse_102!();
+        Depcrate_decoder_stringuse_103!();
+        Depcrate_decoder_stringuse_104!();
+        Depcrate_decoder_stringuse_105!();
+        Depcrate_decoder_stringALLOCATION_ERROR!();
+        Depcrate_decoder_stringdecode_literal_string!();
+        Depcrate_decoder_stringLITERAL_CHAR!();
+        Depcrate_decoder_stringNON_ASCII!();
+        Depcrate_decoder_stringdecode_ml_literal_string!();
+        Depcrate_decoder_stringMLL_CHAR!();
+        Depcrate_decoder_stringdecode_basic_string!();
+        Depcrate_decoder_stringbasic_unescaped!();
+        Depcrate_decoder_stringbasic_invalid!();
+        Depcrate_decoder_stringBASIC_UNESCAPED!();
+        Depcrate_decoder_stringESCAPE!();
+        Depcrate_decoder_stringescape_seq_char!();
+        Depcrate_decoder_stringhexescape!();
+        Depcrate_decoder_stringHEXDIG!();
+        Depcrate_decoder_stringDIGIT!();
+        Depcrate_decoder_stringstrip_start_newline!();
+        Depcrate_decoder_stringdecode_ml_basic_string!();
+        Depcrate_decoder_stringmlb_escaped_nl!();
+        Depcrate_decoder_stringmlb_unescaped!();
+        Depcrate_decoder_stringmlb_invalid!();
+        Depcrate_decoder_stringMLB_UNESCAPED!();
+        Depcrate_decoder_stringdecode_unquoted_key!();
+        Depcrate_decoder_stringUNQUOTED_CHAR!();
+        Depcrate_decoder_stringtest!();
+    };
+}

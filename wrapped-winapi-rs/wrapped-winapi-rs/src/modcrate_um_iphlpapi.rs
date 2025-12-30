@@ -1,0 +1,39 @@
+// Generated module macro for crate::um::iphlpapi
+macro_rules! Modcrate_um_iphlpapi {
+() => {
+        Depcrate_um_iphlpapiuse_29176!();
+        Depcrate_um_iphlpapiuse_29177!();
+        Depcrate_um_iphlpapiuse_29178!();
+        Depcrate_um_iphlpapiuse_29179!();
+        Depcrate_um_iphlpapiuse_29180!();
+        Depcrate_um_iphlpapiuse_29181!();
+        Depcrate_um_iphlpapiuse_29182!();
+        Depcrate_um_iphlpapiuse_29183!();
+        Depcrate_um_iphlpapiuse_29184!();
+        Depcrate_um_iphlpapiuse_29185!();
+        Depcrate_um_iphlpapiuse_29186!();
+        Depcrate_um_iphlpapiuse_29187!();
+        Depcrate_um_iphlpapiuse_29188!();
+        Depcrate_um_iphlpapiuse_29189!();
+        Depcrate_um_iphlpapiuse_29190!();
+        Depcrate_um_iphlpapiother_29191!();
+        Depcrate_um_iphlpapimacro_29192!();
+        Depcrate_um_iphlpapiPINTERFACE_TIMESTAMP_CAPABILITY_FLAGS!();
+        Depcrate_um_iphlpapimacro_29194!();
+        Depcrate_um_iphlpapiPINTERFACE_TIMESTAMP_CAPABILITIES!();
+        Depcrate_um_iphlpapimacro_29196!();
+        Depcrate_um_iphlpapiPINTERFACE_HARDWARE_CROSSTIMESTAMP!();
+        Depcrate_um_iphlpapimacro_29198!();
+        Depcrate_um_iphlpapiother_29199!();
+        Depcrate_um_iphlpapimacro_29200!();
+        Depcrate_um_iphlpapiPINTERFACE_TIMESTAMP_CONFIG_CHANGE_CALLBACK!();
+        Depcrate_um_iphlpapiother_29202!();
+        Depcrate_um_iphlpapimacro_29203!();
+        Depcrate_um_iphlpapiDNS_MAX_NAME_BUFFER_LENGTH!();
+        Depcrate_um_iphlpapimacro_29205!();
+        Depcrate_um_iphlpapimacro_29206!();
+        Depcrate_um_iphlpapimacro_29207!();
+        Depcrate_um_iphlpapiPNET_ADDRESS_INFO!();
+        Depcrate_um_iphlpapiother_29209!();
+    };
+}

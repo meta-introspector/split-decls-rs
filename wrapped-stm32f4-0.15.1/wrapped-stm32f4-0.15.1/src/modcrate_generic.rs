@@ -1,0 +1,53 @@
+// Generated module macro for crate::generic
+macro_rules! Modcrate_generic {
+() => {
+        Depcrate_genericuse_2!();
+        Depcrate_genericRegisterSpec!();
+        Depcrate_genericReadable!();
+        Depcrate_genericWritable!();
+        Depcrate_genericResettable!();
+        Depcrate_genericReg!();
+        Depcrate_genericimpl_8!();
+        Depcrate_genericimpl_9!();
+        Depcrate_genericimpl_10!();
+        Depcrate_genericimpl_11!();
+        Depcrate_genericimpl_12!();
+        Depcrate_genericimpl_13!();
+        Depcrate_genericR!();
+        Depcrate_genericimpl_15!();
+        Depcrate_genericimpl_16!();
+        Depcrate_genericW!();
+        Depcrate_genericimpl_18!();
+        Depcrate_genericFieldReaderRaw!();
+        Depcrate_genericimpl_20!();
+        Depcrate_genericBitReaderRaw!();
+        Depcrate_genericimpl_22!();
+        Depcrate_genericFieldReader!();
+        Depcrate_genericBitReader!();
+        Depcrate_genericimpl_25!();
+        Depcrate_genericimpl_26!();
+        Depcrate_genericimpl_27!();
+        Depcrate_genericimpl_28!();
+        Depcrate_genericSafe!();
+        Depcrate_genericUnsafe!();
+        Depcrate_genericFieldWriterRaw!();
+        Depcrate_genericimpl_32!();
+        Depcrate_genericBitWriterRaw!();
+        Depcrate_genericimpl_34!();
+        Depcrate_genericFieldWriter!();
+        Depcrate_genericFieldWriterSafe!();
+        Depcrate_genericimpl_37!();
+        Depcrate_genericimpl_38!();
+        Depcrate_genericbit_proxy!();
+        Depcrate_genericimpl_bit_proxy!();
+        Depcrate_genericmacro_41!();
+        Depcrate_genericmacro_42!();
+        Depcrate_genericmacro_43!();
+        Depcrate_genericmacro_44!();
+        Depcrate_genericmacro_45!();
+        Depcrate_genericmacro_46!();
+        Depcrate_genericmacro_47!();
+        Depcrate_genericimpl_proxy!();
+        Depcrate_genericmacro_49!();
+    };
+}

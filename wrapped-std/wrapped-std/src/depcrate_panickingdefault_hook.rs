@@ -1,0 +1,11 @@
+// Generated macro for default_hook (function)
+macro_rules! Depcrate_panickingdefault_hook {
+() => {
+// Module: crate::panicking
+// Provides: {"default_hook"}
+// Dependencies: {}
+# [doc = " The default panic handler."] # [optimize (size)] fn default_hook (info : & PanicHookInfo < '_ >) { let backtrace = if info . force_no_backtrace () { None } else if panic_count :: get_count () >= 2 { BacktraceStyle :: full () } else { crate :: panic :: get_backtrace_style () } ; let location = info . location () . unwrap () ; let msg = payload_as_str (info . payload ()) ; let write = # [optimize (size)] | err : & mut dyn crate :: io :: Write | { let mut lock = backtrace :: lock () ; thread :: with_current_name (| name | { let name = name . unwrap_or ("<unnamed>") ; let tid = thread :: current_os_id () ; let mut buffer = [0u8 ; 512] ; let mut cursor = crate :: io :: Cursor :: new (& mut buffer [..]) ; let write_msg = | dst : & mut dyn crate :: io :: Write | { writeln ! (dst , "\nthread '{name}' ({tid}) panicked at {location}:\n{msg}") } ; if write_msg (& mut cursor) . is_ok () { let pos = cursor . position () as usize ; let _ = err . write_all (& buffer [0 .. pos]) ; } else { let _ = write_msg (err) ; } ; }) ; static FIRST_PANIC : Atomic < bool > = AtomicBool :: new (true) ; match backtrace { Some (BacktraceStyle :: Short) => { drop (lock . print (err , crate :: backtrace_rs :: PrintFmt :: Short)) } Some (BacktraceStyle :: Full) => { drop (lock . print (err , crate :: backtrace_rs :: PrintFmt :: Full)) } Some (BacktraceStyle :: Off) => { if FIRST_PANIC . swap (false , Ordering :: Relaxed) { let _ = writeln ! (err , "note: run with `RUST_BACKTRACE=1` environment variable to display a \
+                             backtrace") ; if cfg ! (miri) { let _ = writeln ! (err , "note: in Miri, you may have to set `MIRIFLAGS=-Zmiri-env-forward=RUST_BACKTRACE` \
+                                for the environment variable to have an effect") ; } } } None => { } } } ; if let Ok (Some (local)) = try_set_output_capture (None) { write (& mut * local . lock () . unwrap_or_else (| e | e . into_inner ())) ; try_set_output_capture (Some (local)) . ok () ; } else if let Some (mut out) = panic_output () { write (& mut out) ; } }
+};
+}

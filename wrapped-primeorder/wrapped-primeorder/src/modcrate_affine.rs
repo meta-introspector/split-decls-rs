@@ -1,0 +1,43 @@
+// Generated module macro for crate::affine
+macro_rules! Modcrate_affine {
+() => {
+        Depcrate_affineuse_23!();
+        Depcrate_affineuse_24!();
+        Depcrate_affineuse_25!();
+        Depcrate_affineuse_26!();
+        Depcrate_affineAffinePoint!();
+        Depcrate_affineimpl_28!();
+        Depcrate_affineimpl_29!();
+        Depcrate_affineimpl_30!();
+        Depcrate_affineimpl_31!();
+        Depcrate_affineimpl_32!();
+        Depcrate_affineimpl_33!();
+        Depcrate_affineimpl_34!();
+        Depcrate_affineimpl_35!();
+        Depcrate_affineimpl_36!();
+        Depcrate_affineimpl_37!();
+        Depcrate_affineimpl_38!();
+        Depcrate_affineimpl_39!();
+        Depcrate_affineimpl_40!();
+        Depcrate_affineimpl_41!();
+        Depcrate_affineimpl_42!();
+        Depcrate_affineimpl_43!();
+        Depcrate_affineimpl_44!();
+        Depcrate_affineimpl_45!();
+        Depcrate_affineimpl_46!();
+        Depcrate_affineimpl_47!();
+        Depcrate_affineimpl_48!();
+        Depcrate_affineimpl_49!();
+        Depcrate_affineimpl_50!();
+        Depcrate_affineimpl_51!();
+        Depcrate_affineimpl_52!();
+        Depcrate_affineimpl_53!();
+        Depcrate_affineimpl_54!();
+        Depcrate_affineimpl_55!();
+        Depcrate_affineimpl_56!();
+        Depcrate_affineimpl_57!();
+        Depcrate_affineimpl_58!();
+        Depcrate_affineimpl_59!();
+        Depcrate_affineimpl_60!();
+    };
+}

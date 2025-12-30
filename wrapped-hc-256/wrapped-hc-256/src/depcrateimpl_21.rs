@@ -1,0 +1,9 @@
+// Generated macro for impl_21 (impl)
+macro_rules! Depcrateimpl_21 {
+() => {
+// Module: crate
+// Provides: {"impl_21"}
+// Dependencies: {}
+impl Hc256Core { # [inline] fn g1 (& self , x : u32 , y : u32) -> u32 { (x . rotate_right (10) ^ y . rotate_right (23)) . wrapping_add (self . qtable [(x ^ y) as usize & TABLE_MASK]) } # [inline] fn g2 (& self , x : u32 , y : u32) -> u32 { (x . rotate_right (10) ^ y . rotate_right (23)) . wrapping_add (self . ptable [(x ^ y) as usize & TABLE_MASK]) } # [inline] fn h1 (& self , x : u32) -> u32 { self . qtable [(x & 0xff) as usize] . wrapping_add (self . qtable [(256 + ((x >> 8) & 0xff)) as usize]) . wrapping_add (self . qtable [(512 + ((x >> 16) & 0xff)) as usize]) . wrapping_add (self . qtable [(768 + ((x >> 24) & 0xff)) as usize]) } # [inline] fn h2 (& self , x : u32) -> u32 { self . ptable [(x & 0xff) as usize] . wrapping_add (self . ptable [(256 + ((x >> 8) & 0xff)) as usize]) . wrapping_add (self . ptable [(512 + ((x >> 16) & 0xff)) as usize]) . wrapping_add (self . ptable [(768 + ((x >> 24) & 0xff)) as usize]) } fn gen_word (& mut self) -> u32 { let i = self . idx as usize ; let j = self . idx as usize & TABLE_MASK ; self . idx = (self . idx + 1) & (2048 - 1) ; if i < 1024 { self . ptable [j] = self . ptable [j] . wrapping_add (self . ptable [j . wrapping_sub (10) & TABLE_MASK]) . wrapping_add (self . g1 (self . ptable [j . wrapping_sub (3) & TABLE_MASK] , self . ptable [j . wrapping_sub (1023) & TABLE_MASK] ,)) ; self . h1 (self . ptable [j . wrapping_sub (12) & TABLE_MASK]) ^ self . ptable [j] } else { self . qtable [j] = self . qtable [j] . wrapping_add (self . qtable [j . wrapping_sub (10) & TABLE_MASK]) . wrapping_add (self . g2 (self . qtable [j . wrapping_sub (3) & TABLE_MASK] , self . qtable [j . wrapping_sub (1023) & TABLE_MASK] ,)) ; self . h2 (self . qtable [j . wrapping_sub (12) & TABLE_MASK]) ^ self . qtable [j] } } }
+};
+}

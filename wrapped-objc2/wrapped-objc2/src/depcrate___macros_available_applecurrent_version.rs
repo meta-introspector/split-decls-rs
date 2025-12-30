@@ -1,0 +1,9 @@
+// Generated macro for current_version (function)
+macro_rules! Depcrate___macros_available_applecurrent_version {
+() => {
+// Module: crate::__macros::available::apple
+// Provides: {"current_version"}
+// Dependencies: {}
+# [doc = " Get the current OS version."] # [doc = ""] # [doc = " # Semantics"] # [doc = ""] # [doc = " The reported version on macOS might be 10.16 if the SDK version of the binary is less than 11.0."] # [doc = " This is a workaround that Apple implemented to handle applications that assumed that macOS"] # [doc = " versions would always start with \"10\", see:"] # [doc = " <https://github.com/apple-oss-distributions/xnu/blob/xnu-11215.81.4/libsyscall/wrappers/system-version-compat.c>"] # [doc = ""] # [doc = " It _is_ possible to get the real version regardless of the SDK version of the binary, this is"] # [doc = " what Zig does:"] # [doc = " <https://github.com/ziglang/zig/blob/0.13.0/lib/std/zig/system/darwin/macos.zig>"] # [doc = ""] # [doc = " We choose to not do that, and instead follow Apple's behaviour here, and return 10.16 when"] # [doc = " compiled with an older SDK; the user should instead upgrade their tooling."] # [doc = ""] # [doc = " NOTE: `rustc` currently doesn't set the right SDK version when linking with ld64, so this will"] # [doc = " have the wrong behaviour with `-Clinker=ld` on x86_64. But that's a `rustc` bug:"] # [doc = " <https://github.com/rust-lang/rust/issues/129432>"] # [inline] pub (crate) fn current_version () -> OSVersion { static CURRENT_VERSION : AtomicU32 = AtomicU32 :: new (0) ; let version = CURRENT_VERSION . load (Ordering :: Relaxed) ; OSVersion :: from_u32 (if version == 0 { let version = lookup_version () ; CURRENT_VERSION . store (version , Ordering :: Relaxed) ; version } else { version }) }
+};
+}

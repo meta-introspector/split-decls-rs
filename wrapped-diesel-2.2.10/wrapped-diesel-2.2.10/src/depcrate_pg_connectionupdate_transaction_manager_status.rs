@@ -1,0 +1,9 @@
+// Generated macro for update_transaction_manager_status (function)
+macro_rules! Depcrate_pg_connectionupdate_transaction_manager_status {
+() => {
+// Module: crate::pg::connection
+// Provides: {"update_transaction_manager_status"}
+// Dependencies: {}
+# [inline (always)] fn update_transaction_manager_status < T > (query_result : QueryResult < T > , conn : & mut ConnectionAndTransactionManager , source : & dyn DebugQuery , final_call : bool ,) -> QueryResult < T > { # [doc = " avoid monomorphizing for every result type - this part will not be inlined"] fn non_generic_inner (conn : & mut ConnectionAndTransactionManager , is_err : bool) { let raw_conn : & mut RawConnection = & mut conn . raw_connection ; let tm : & mut AnsiTransactionManager = & mut conn . transaction_state ; match raw_conn . transaction_status () { PgTransactionStatus :: InError => { tm . status . set_requires_rollback_maybe_up_to_top_level (true) } PgTransactionStatus :: Unknown => tm . status . set_in_error () , PgTransactionStatus :: Idle => { tm . status = TransactionManagerStatus :: Valid (Default :: default ()) } PgTransactionStatus :: InTransaction => { let transaction_status = & mut tm . status ; if is_err { if ! matches ! (transaction_status , TransactionManagerStatus :: Valid (valid_tm) if valid_tm . transaction_depth () . is_some ()) { transaction_status . set_in_error () } } else { tm . status . set_requires_rollback_maybe_up_to_top_level (false) } } PgTransactionStatus :: Active => { } } } non_generic_inner (conn , query_result . is_err ()) ; if let Err (ref e) = query_result { conn . instrumentation . on_connection_event (InstrumentationEvent :: FinishQuery { query : source , error : Some (e) , }) ; } else if final_call { conn . instrumentation . on_connection_event (InstrumentationEvent :: FinishQuery { query : source , error : None , }) ; } query_result }
+};
+}

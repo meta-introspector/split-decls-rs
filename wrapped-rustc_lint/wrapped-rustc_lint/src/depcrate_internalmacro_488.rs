@@ -1,0 +1,9 @@
+// Generated macro for macro_488 (macro)
+macro_rules! Depcrate_internalmacro_488 {
+() => {
+// Module: crate::internal
+// Provides: {"macro_488"}
+// Dependencies: {}
+declare_tool_lint ! { # [doc = " The `default_hash_type` lint detects use of [`std::collections::HashMap`] and"] # [doc = " [`std::collections::HashSet`], suggesting the use of `FxHashMap`/`FxHashSet`."] # [doc = ""] # [doc = " This can help as `FxHasher` can perform better than the default hasher. DOS protection is"] # [doc = " not required as input is assumed to be trusted."] pub rustc :: DEFAULT_HASH_TYPES , Allow , "forbid HashMap and HashSet and suggest the FxHash* variants" , report_in_external_macro : true }
+};
+}

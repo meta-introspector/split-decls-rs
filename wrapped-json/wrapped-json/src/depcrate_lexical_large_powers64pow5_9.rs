@@ -1,0 +1,9 @@
+// Generated macro for POW5_9 (const)
+macro_rules! Depcrate_lexical_large_powers64POW5_9 {
+() => {
+// Module: crate::lexical::large_powers64
+// Provides: {"POW5_9"}
+// Dependencies: {}
+const POW5_9 : [u64 ; 10] = [13750482914757213185 , 1302999927698857842 , 14936872543252795590 , 2788415840139466767 , 2095640732773017264 , 7205570348933370714 , 7348167152523113408 , 9285516396840364274 , 6907659600622710236 , 349175 ,] ;
+};
+}

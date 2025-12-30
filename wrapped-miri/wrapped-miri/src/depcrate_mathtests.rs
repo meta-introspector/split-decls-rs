@@ -1,0 +1,9 @@
+// Generated macro for tests (module)
+macro_rules! Depcrate_mathtests {
+() => {
+// Module: crate::math
+// Provides: {"tests"}
+// Dependencies: {}
+# [cfg (test)] mod tests { use rustc_apfloat :: ieee :: { DoubleS , HalfS , IeeeFloat , QuadS , SingleS } ; use super :: sqrt ; # [test] fn test_sqrt () { # [track_caller] fn test < S : rustc_apfloat :: ieee :: Semantics > (x : & str , expected : & str) { let x : IeeeFloat < S > = x . parse () . unwrap () ; let expected : IeeeFloat < S > = expected . parse () . unwrap () ; let result = sqrt (x) ; assert_eq ! (result , expected) ; } fn exact_tests < S : rustc_apfloat :: ieee :: Semantics > () { test :: < S > ("0" , "0") ; test :: < S > ("1" , "1") ; test :: < S > ("1.5625" , "1.25") ; test :: < S > ("2.25" , "1.5") ; test :: < S > ("4" , "2") ; test :: < S > ("5.0625" , "2.25") ; test :: < S > ("9" , "3") ; test :: < S > ("16" , "4") ; test :: < S > ("25" , "5") ; test :: < S > ("36" , "6") ; test :: < S > ("49" , "7") ; test :: < S > ("64" , "8") ; test :: < S > ("81" , "9") ; test :: < S > ("100" , "10") ; test :: < S > ("0.5625" , "0.75") ; test :: < S > ("0.25" , "0.5") ; test :: < S > ("0.0625" , "0.25") ; test :: < S > ("0.00390625" , "0.0625") ; } exact_tests :: < HalfS > () ; exact_tests :: < SingleS > () ; exact_tests :: < DoubleS > () ; exact_tests :: < QuadS > () ; test :: < SingleS > ("2" , "1.4142135") ; test :: < DoubleS > ("2" , "1.4142135623730951") ; test :: < SingleS > ("1.1" , "1.0488088") ; test :: < DoubleS > ("1.1" , "1.0488088481701516") ; test :: < SingleS > ("2.2" , "1.4832398") ; test :: < DoubleS > ("2.2" , "1.4832396974191326") ; test :: < SingleS > ("1.22101e-40" , "1.10499205e-20") ; test :: < DoubleS > ("1.22101e-310" , "1.1049932126488395e-155") ; test :: < SingleS > ("3.4028235e38" , "1.8446743e19") ; test :: < DoubleS > ("1.7976931348623157e308" , "1.3407807929942596e154") ; } }
+};
+}

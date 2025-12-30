@@ -1,0 +1,9 @@
+// Generated macro for tests (module)
+macro_rules! Depcrate_record_layertests {
+() => {
+// Module: crate::record_layer
+// Provides: {"tests"}
+// Dependencies: {}
+# [cfg (test)] mod tests { use super :: * ; use crate :: enums :: { ContentType , ProtocolVersion } ; # [test] fn test_has_decrypted () { struct PassThroughDecrypter ; impl MessageDecrypter for PassThroughDecrypter { fn decrypt < 'a > (& mut self , m : InboundOpaqueMessage < 'a > , _ : u64 ,) -> Result < InboundPlainMessage < 'a > , Error > { Ok (m . into_plain_message ()) } } let mut record_layer = RecordLayer :: new () ; assert ! (matches ! (record_layer . decrypt_state , DirectionState :: Invalid)) ; assert_eq ! (record_layer . read_seq , 0) ; assert ! (! record_layer . has_decrypted ()) ; record_layer . prepare_message_decrypter (Box :: new (PassThroughDecrypter)) ; assert ! (matches ! (record_layer . decrypt_state , DirectionState :: Prepared)) ; assert_eq ! (record_layer . read_seq , 0) ; assert ! (! record_layer . has_decrypted ()) ; record_layer . start_decrypting () ; assert ! (matches ! (record_layer . decrypt_state , DirectionState :: Active)) ; assert_eq ! (record_layer . read_seq , 0) ; assert ! (! record_layer . has_decrypted ()) ; record_layer . decrypt_incoming (InboundOpaqueMessage :: new (ContentType :: Handshake , ProtocolVersion :: TLSv1_2 , & mut [0xC0 , 0xFF , 0xEE] ,)) . unwrap () ; assert ! (matches ! (record_layer . decrypt_state , DirectionState :: Active)) ; assert_eq ! (record_layer . read_seq , 1) ; assert ! (record_layer . has_decrypted ()) ; record_layer . set_message_decrypter (Box :: new (PassThroughDecrypter)) ; assert ! (matches ! (record_layer . decrypt_state , DirectionState :: Active)) ; assert_eq ! (record_layer . read_seq , 0) ; assert ! (record_layer . has_decrypted ()) ; } }
+};
+}

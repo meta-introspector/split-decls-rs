@@ -1,0 +1,40 @@
+// Generated module macro for crate::filters::path
+macro_rules! Modcrate_filters_path {
+() => {
+        Depcrate_filters_pathuse_501!();
+        Depcrate_filters_pathuse_502!();
+        Depcrate_filters_pathuse_503!();
+        Depcrate_filters_pathuse_504!();
+        Depcrate_filters_pathuse_505!();
+        Depcrate_filters_pathuse_506!();
+        Depcrate_filters_pathuse_507!();
+        Depcrate_filters_pathuse_508!();
+        Depcrate_filters_pathuse_509!();
+        Depcrate_filters_pathpath!();
+        Depcrate_filters_pathExact!();
+        Depcrate_filters_pathimpl_512!();
+        Depcrate_filters_pathend!();
+        Depcrate_filters_pathparam!();
+        Depcrate_filters_pathtail!();
+        Depcrate_filters_pathTail!();
+        Depcrate_filters_pathimpl_517!();
+        Depcrate_filters_pathimpl_518!();
+        Depcrate_filters_pathpeek!();
+        Depcrate_filters_pathPeek!();
+        Depcrate_filters_pathimpl_521!();
+        Depcrate_filters_pathimpl_522!();
+        Depcrate_filters_pathfull!();
+        Depcrate_filters_pathFullPath!();
+        Depcrate_filters_pathimpl_525!();
+        Depcrate_filters_pathimpl_526!();
+        Depcrate_filters_pathfilter_segment!();
+        Depcrate_filters_pathwith_segment!();
+        Depcrate_filters_pathsegment!();
+        Depcrate_filters_pathpath_and_query!();
+        Depcrate_filters_pathpath!();
+        Depcrate_filters_path__internal_path!();
+        Depcrate_filters_path_path_macro_compile_fail!();
+        Depcrate_filters_pathinternal!();
+        Depcrate_filters_pathtests!();
+    };
+}

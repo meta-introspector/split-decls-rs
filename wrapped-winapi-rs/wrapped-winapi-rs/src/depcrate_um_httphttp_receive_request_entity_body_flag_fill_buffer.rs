@@ -1,0 +1,9 @@
+// Generated macro for HTTP_RECEIVE_REQUEST_ENTITY_BODY_FLAG_FILL_BUFFER (const)
+macro_rules! Depcrate_um_httpHTTP_RECEIVE_REQUEST_ENTITY_BODY_FLAG_FILL_BUFFER {
+() => {
+// Module: crate::um::http
+// Provides: {"HTTP_RECEIVE_REQUEST_ENTITY_BODY_FLAG_FILL_BUFFER"}
+// Dependencies: {}
+pub const HTTP_RECEIVE_REQUEST_ENTITY_BODY_FLAG_FILL_BUFFER : ULONG = 0x00000001 ;
+};
+}

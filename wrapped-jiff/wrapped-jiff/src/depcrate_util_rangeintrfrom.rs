@@ -1,0 +1,9 @@
+// Generated macro for RFrom (trait)
+macro_rules! Depcrate_util_rangeintRFrom {
+() => {
+// Module: crate::util::rangeint
+// Provides: {"RFrom"}
+// Dependencies: {}
+# [doc = " A trait for losslessly converting between ranged integers."] # [doc = ""] # [doc = " This trait exists despite the fact that the standard library `From` trait"] # [doc = " is defined in precisely the same way. Indeed, the `From` trait _almost_"] # [doc = " works for our use case. The problem arises from the fact that we want"] # [doc = " to be able to write this trait impl:"] # [doc = ""] # [doc = " ```ignore"] # [doc = " impl<"] # [doc = "     const MIN1: i128,"] # [doc = "     const MAX1: i128,"] # [doc = "     const MIN2: i128,"] # [doc = "     const MAX2: i128,"] # [doc = " > From<ri64<MIN1, MAX1>> for ri64<MIN2, MAX2> {"] # [doc = " // ..."] # [doc = " }"] # [doc = " ```"] # [doc = ""] # [doc = " (We want this impl because we want to be able to freely convert between any"] # [doc = " kind of ranged integers, including ranged integers with the same primitive"] # [doc = " representation but different bounds.)"] # [doc = ""] # [doc = " But this trait impl can't exist because it overlaps with the blanket"] # [doc = " `impl From<T> for T`. Indeed, here, we do not provide that blanket impl,"] # [doc = " which lets us add the trait impl above for `RFrom`."] # [doc = ""] # [doc = " This would normally be a no-go because it's too important for library"] # [doc = " crates to provide types that work with `From` as you might expect, but"] # [doc = " range integers are thankfully a crate internal abstraction. So we just need"] # [doc = " to write `impl RFrom<T>` and do `t.rinto()` instead of `impl From<T>` and"] # [doc = " `t.into()`."] pub (crate) trait RFrom < T > : Sized { fn rfrom (value : T) -> Self ; }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for macro_47 (macro)
+macro_rules! Depcrate_generatedmacro_47 {
+() => {
+// Module: crate::generated
+// Provides: {"macro_47"}
+// Dependencies: {}
+extern_class ! (# [doc = " NFC reader session for processing NFC Data Exchange Format (NDEF) tags.  This session requires the \"com.apple.developer.nfc.readersession.formats\""] # [doc = " entitlement in your process.  In addition your application's Info.plist must contain a non-empty usage description string."] # [doc = ""] # [doc = " ```text"] # [doc = "  NFCReaderErrorSecurityViolation @link/ will be returned from @link [NFCNDEFReaderSessionDelegate readerSession:didInvalidateWithError:] @link/"] # [doc = "              if the required entitlement is missing when session is started."] # [doc = ""] # [doc = "  @note       Only one NFCNDEFReaderSession can be active at any time in the system. Subsequent opened sessions will get queued up and processed by the system in FIFO order."] # [doc = "  @note       If the delegate object implements the optional -readerSession:didDetectTags: method the NFCNDEFReaderSession will become a read-write session; see @link"] # [doc = "              NFCNDEFReaderSessionDelegate @link/ for detail description."] # [doc = "  @note       The error symbol will not be drawn on the action sheet if -invalidateSessionWithError: method is called on a session that is not a read-write session;"] # [doc = "              -invalidateSession: method should be used in a read-only session."] # [doc = "  "] # [doc = ""] # [doc = " ```"] # [doc = ""] # [doc = " See also [Apple's documentation](https://developer.apple.com/documentation/corenfc/nfcndefreadersession?language=objc)"] # [unsafe (super (NFCReaderSession , NSObject))] # [derive (Debug , PartialEq , Eq , Hash)] pub struct NFCNDEFReaderSession ;) ;
+};
+}

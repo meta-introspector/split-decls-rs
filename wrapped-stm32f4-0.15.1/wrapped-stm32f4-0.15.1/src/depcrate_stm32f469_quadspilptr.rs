@@ -1,0 +1,9 @@
+// Generated macro for LPTR (type)
+macro_rules! Depcrate_stm32f469_quadspiLPTR {
+() => {
+// Module: crate::stm32f469::quadspi
+// Provides: {"LPTR"}
+// Dependencies: {}
+# [doc = "LPTR register accessor: an alias for `Reg<LPTR_SPEC>`"] pub type LPTR = crate :: Reg < lptr :: LPTR_SPEC > ;
+};
+}

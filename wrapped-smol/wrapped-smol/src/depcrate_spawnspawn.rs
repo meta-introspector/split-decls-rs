@@ -1,0 +1,9 @@
+// Generated macro for spawn (function)
+macro_rules! Depcrate_spawnspawn {
+() => {
+// Module: crate::spawn
+// Provides: {"spawn"}
+// Dependencies: {}
+# [doc = " Spawns a task onto the global executor (single-threaded by default)."] # [doc = ""] # [doc = " There is a global executor that gets lazily initialized on first use. It is included in this"] # [doc = " library for convenience when writing unit tests and small programs, but it is otherwise"] # [doc = " more advisable to create your own [`Executor`]."] # [doc = ""] # [doc = " By default, the global executor is run by a single background thread, but you can also"] # [doc = " configure the number of threads by setting the `SMOL_THREADS` environment variable."] # [doc = ""] # [doc = " Since the executor is kept around forever, `drop` is not called for tasks when the program"] # [doc = " exits."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " let task = smol::spawn(async {"] # [doc = "     1 + 2"] # [doc = " });"] # [doc = ""] # [doc = " smol::block_on(async {"] # [doc = "     assert_eq!(task.await, 3);"] # [doc = " });"] # [doc = " ```"] pub fn spawn < T : Send + 'static > (future : impl Future < Output = T > + Send + 'static) -> Task < T > { static GLOBAL : OnceLock < Executor < '_ > > = OnceLock :: new () ; fn global () -> & 'static Executor < 'static > { GLOBAL . get_or_init (| | { let num_threads = { std :: env :: var ("SMOL_THREADS") . ok () . and_then (| s | s . parse () . ok ()) . unwrap_or (1) } ; for n in 1 ..= num_threads { thread :: Builder :: new () . name (format ! ("smol-{}" , n)) . spawn (| | loop { catch_unwind (| | block_on (global () . run (future :: pending :: < () > ()))) . ok () ; }) . expect ("cannot spawn executor thread") ; } let ex = Executor :: new () ; # [cfg (not (target_os = "espidf"))] ex . spawn (async_process :: driver ()) . detach () ; ex }) } global () . spawn (future) }
+};
+}

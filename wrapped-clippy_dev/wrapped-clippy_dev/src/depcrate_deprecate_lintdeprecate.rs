@@ -1,0 +1,9 @@
+// Generated macro for deprecate (function)
+macro_rules! Depcrate_deprecate_lintdeprecate {
+() => {
+// Module: crate::deprecate_lint
+// Provides: {"deprecate"}
+// Dependencies: {}
+# [doc = " Runs the `deprecate` command"] # [doc = ""] # [doc = " This does the following:"] # [doc = " * Adds an entry to `deprecated_lints.rs`."] # [doc = " * Removes the lint declaration (and the entire file if applicable)"] # [doc = ""] # [doc = " # Panics"] # [doc = ""] # [doc = " If a file path could not read from or written to"] pub fn deprecate < 'cx > (cx : ParseCx < 'cx > , clippy_version : Version , name : & 'cx str , reason : & 'cx str) { let mut lints = cx . find_lint_decls () ; let (mut deprecated_lints , renamed_lints) = cx . read_deprecated_lints () ; let Some (lint) = lints . iter () . find (| l | l . name == name) else { eprintln ! ("error: failed to find lint `{name}`") ; return ; } ; let prefixed_name = cx . str_buf . with (| buf | { buf . extend (["clippy::" , name]) ; cx . arena . alloc_str (buf) }) ; match deprecated_lints . binary_search_by (| x | x . name . cmp (prefixed_name)) { Ok (_) => { println ! ("`{name}` is already deprecated") ; return ; } , Err (idx) => deprecated_lints . insert (idx , DeprecatedLint { name : prefixed_name , reason , version : cx . str_buf . alloc_display (cx . arena , clippy_version . rust_display ()) , } ,) , } let mod_path = { let mut mod_path = PathBuf :: from (format ! ("clippy_lints/src/{}" , lint . module)) ; if mod_path . is_dir () { mod_path = mod_path . join ("mod") ; } mod_path . set_extension ("rs") ; mod_path } ; if remove_lint_declaration (name , & mod_path , & mut lints) . unwrap_or (false) { generate_lint_files (UpdateMode :: Change , & lints , & deprecated_lints , & renamed_lints) ; println ! ("info: `{name}` has successfully been deprecated") ; println ! ("note: you must run `cargo uitest` to update the test results") ; } else { eprintln ! ("error: lint not found") ; } }
+};
+}

@@ -1,0 +1,45 @@
+// Generated module macro for crate
+macro_rules! Modcrate {
+() => {
+        Depcrateuse_1!();
+        Depcrateuse_2!();
+        Depcrateuse_3!();
+        Depcrateext_ctxt_def!();
+        Depcrateext_ctxt_generic!();
+        Depcrateexpand_context_generic!();
+        Depcrateexpand_context_type_def!();
+        Depcrateref_a_mut_expand_context_b_drt_type_def!();
+        Depcratederive_resolution_generic!();
+        Depcratet_define_expansion_context_types_exts!();
+        Depcratelint_store_expand_dyn_def!();
+        Depcrateast_fragment!();
+        Depcrateconfig!();
+        Depcratemac_result!();
+        Depcrateplaceholders!();
+        Depcrateannotatable!();
+        Depcrateadd_semicolon!();
+        Depcrateinvocation_collector_node!();
+        Depcratedummy_ast_node!();
+        Depcratestrip_unconfigured!();
+        Depcrateinvocation_data!();
+        Depcratebase_expansion_context!();
+        Depcratecfg_false_reporter!();
+        Depcrateprelude!();
+        Depcrateexpanded_nodes!();
+        Depcrateast_traits!();
+        Depcrateresolver_traits!();
+        Depcratesyntax_extension_trait!();
+        Depcratecontext!();
+        Depcratestruct_macrostat!();
+        Depcrateerrors!();
+        Depcratetracemacro!();
+        Depcraterecursion_limit_reached!();
+        Depcratewrong_fragment_kind!();
+        Depcratety_aliases!();
+        Depcrateuse_365!();
+        Depcrateuse_366!();
+        Depcrateuse_367!();
+        Depcrateuse_368!();
+        Depcrateuse_369!();
+    };
+}

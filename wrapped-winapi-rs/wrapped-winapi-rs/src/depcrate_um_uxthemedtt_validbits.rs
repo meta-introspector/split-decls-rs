@@ -1,0 +1,9 @@
+// Generated macro for DTT_VALIDBITS (const)
+macro_rules! Depcrate_um_uxthemeDTT_VALIDBITS {
+() => {
+// Module: crate::um::uxtheme
+// Provides: {"DTT_VALIDBITS"}
+// Dependencies: {}
+pub const DTT_VALIDBITS : DWORD = DTT_TEXTCOLOR | DTT_BORDERCOLOR | DTT_SHADOWCOLOR | DTT_SHADOWTYPE | DTT_SHADOWOFFSET | DTT_BORDERSIZE | DTT_FONTPROP | DTT_COLORPROP | DTT_STATEID | DTT_CALCRECT | DTT_APPLYOVERLAY | DTT_GLOWSIZE | DTT_COMPOSITED ;
+};
+}

@@ -1,0 +1,42 @@
+// Generated module macro for crate::value
+macro_rules! Modcrate_value {
+() => {
+        Depcrate_valueuse_54!();
+        Depcrate_valueuse_55!();
+        Depcrate_valueBufMut!();
+        Depcrate_valueimpl_57!();
+        Depcrate_valueimpl_58!();
+        Depcrate_valueimpl_59!();
+        Depcrate_valueimpl_60!();
+        Depcrate_valueBuf!();
+        Depcrate_valueimpl_62!();
+        Depcrate_valueimpl_63!();
+        Depcrate_valueimpl_64!();
+        Depcrate_valueValueBuf!();
+        Depcrate_valueValue!();
+        Depcrate_valueimpl_67!();
+        Depcrate_valueimpl_68!();
+        Depcrate_valueimpl_69!();
+        Depcrate_valueimpl_70!();
+        Depcrate_valueimpl_71!();
+        Depcrate_valueimpl_72!();
+        Depcrate_valueimpl_73!();
+        Depcrate_valueimpl_74!();
+        Depcrate_valueimpl_75!();
+        Depcrate_valuestream_ref!();
+        Depcrate_valueimpl_77!();
+        Depcrate_valuestream_to_value!();
+        Depcrate_valuestream_to_value_owned!();
+        Depcrate_valueValueSlice!();
+        Depcrate_valueValuePart!();
+        Depcrate_valueValueKind!();
+        Depcrate_valueimpl_83!();
+        Depcrate_valueimpl_84!();
+        Depcrate_valueimpl_85!();
+        Depcrate_valueimpl_86!();
+        Depcrate_valueimpl_87!();
+        Depcrate_valuearray_vec!();
+        Depcrate_valuetests!();
+        Depcrate_valuealloc_tests!();
+    };
+}

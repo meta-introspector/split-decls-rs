@@ -1,0 +1,9 @@
+// Generated macro for macro_2136 (macro)
+macro_rules! Depcrate_ntrtlmacro_2136 {
+() => {
+// Module: crate::ntrtl
+// Provides: {"macro_2136"}
+// Dependencies: {}
+EXTERN ! { extern "system" { fn RtlInitBarrier (Barrier : PRTL_BARRIER , TotalThreads : ULONG , SpinCount : ULONG ,) -> NTSTATUS ; fn RtlDeleteBarrier (Barrier : PRTL_BARRIER ,) -> NTSTATUS ; fn RtlBarrier (Barrier : PRTL_BARRIER , Flags : ULONG ,) -> BOOLEAN ; fn RtlBarrierForDelete (Barrier : PRTL_BARRIER , Flags : ULONG ,) -> BOOLEAN ; fn RtlWaitOnAddress (Address : * mut VOID , CompareAddress : PVOID , AddressSize : SIZE_T , Timeout : PLARGE_INTEGER ,) -> NTSTATUS ; fn RtlWakeAddressAll (Address : PVOID ,) ; fn RtlWakeAddressSingle (Address : PVOID ,) ; fn RtlInitString (DestinationString : PSTRING , SourceString : PCSZ ,) ; fn RtlInitStringEx (DestinationString : PSTRING , SourceString : PCSZ ,) -> NTSTATUS ; fn RtlInitAnsiString (DestinationString : PANSI_STRING , SourceString : PCSZ ,) ; fn RtlInitAnsiStringEx (DestinationString : PANSI_STRING , SourceString : PCSZ ,) -> NTSTATUS ; fn RtlFreeAnsiString (AnsiString : PANSI_STRING ,) ; fn RtlFreeOemString (OemString : POEM_STRING ,) ; fn RtlCopyString (DestinationString : PSTRING , SourceString : * const STRING ,) ; fn RtlUpperChar (Character : CHAR ,) -> CHAR ; fn RtlCompareString (String1 : * const STRING , String2 : * const STRING , CaseInSensitive : BOOLEAN ,) -> LONG ; fn RtlEqualString (String1 : * const STRING , String2 : * const STRING , CaseInSensitive : BOOLEAN ,) -> BOOLEAN ; fn RtlPrefixString (String1 : * const STRING , String2 : * const STRING , CaseInSensitive : BOOLEAN ,) -> BOOLEAN ; fn RtlAppendStringToString (Destination : PSTRING , Source : * const STRING ,) -> NTSTATUS ; fn RtlAppendAsciizToString (Destination : PSTRING , Source : PSTR ,) -> NTSTATUS ; fn RtlUpperString (DestinationString : PSTRING , SourceString : * const STRING ,) ; } }
+};
+}

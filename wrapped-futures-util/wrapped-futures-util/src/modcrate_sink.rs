@@ -1,0 +1,41 @@
+// Generated module macro for crate::sink
+macro_rules! Modcrate_sink {
+() => {
+        Depcrate_sinkuse_1830!();
+        Depcrate_sinkuse_1831!();
+        Depcrate_sinkuse_1832!();
+        Depcrate_sinkuse_1833!();
+        Depcrate_sinkuse_1834!();
+        Depcrate_sinkuse_1835!();
+        Depcrate_sinkuse_1836!();
+        Depcrate_sinkclose!();
+        Depcrate_sinkuse_1847!();
+        Depcrate_sinkdrain!();
+        Depcrate_sinkuse_1860!();
+        Depcrate_sinkfanout!();
+        Depcrate_sinkuse_1871!();
+        Depcrate_sinkfeed!();
+        Depcrate_sinkuse_1882!();
+        Depcrate_sinkflush!();
+        Depcrate_sinkuse_1893!();
+        Depcrate_sinkerr_into!();
+        Depcrate_sinkuse_1904!();
+        Depcrate_sinkmap_err!();
+        Depcrate_sinkuse_1916!();
+        Depcrate_sinksend!();
+        Depcrate_sinkuse_1928!();
+        Depcrate_sinksend_all!();
+        Depcrate_sinkuse_1943!();
+        Depcrate_sinkunfold!();
+        Depcrate_sinkuse_1955!();
+        Depcrate_sinkwith!();
+        Depcrate_sinkuse_1974!();
+        Depcrate_sinkwith_flat_map!();
+        Depcrate_sinkuse_1990!();
+        Depcrate_sinkbuffer!();
+        Depcrate_sinkuse_2004!();
+        Depcrate_sinkimpl_2005!();
+        Depcrate_sinkSinkExt!();
+        Depcrate_sinkassert_sink!();
+    };
+}

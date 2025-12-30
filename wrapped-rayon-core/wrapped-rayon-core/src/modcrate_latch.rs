@@ -1,0 +1,40 @@
+// Generated module macro for crate::latch
+macro_rules! Modcrate_latch {
+() => {
+        Depcrate_latchuse_108!();
+        Depcrate_latchuse_109!();
+        Depcrate_latchuse_110!();
+        Depcrate_latchuse_111!();
+        Depcrate_latchuse_112!();
+        Depcrate_latchuse_113!();
+        Depcrate_latchLatch!();
+        Depcrate_latchAsCoreLatch!();
+        Depcrate_latchUNSET!();
+        Depcrate_latchSLEEPY!();
+        Depcrate_latchSLEEPING!();
+        Depcrate_latchSET!();
+        Depcrate_latchCoreLatch!();
+        Depcrate_latchimpl_121!();
+        Depcrate_latchimpl_122!();
+        Depcrate_latchSpinLatch!();
+        Depcrate_latchimpl_124!();
+        Depcrate_latchimpl_125!();
+        Depcrate_latchimpl_126!();
+        Depcrate_latchLockLatch!();
+        Depcrate_latchimpl_128!();
+        Depcrate_latchimpl_129!();
+        Depcrate_latchOnceLatch!();
+        Depcrate_latchimpl_131!();
+        Depcrate_latchimpl_132!();
+        Depcrate_latchCountLatch!();
+        Depcrate_latchCountLatchKind!();
+        Depcrate_latchimpl_135!();
+        Depcrate_latchimpl_136!();
+        Depcrate_latchimpl_137!();
+        Depcrate_latchLatchRef!();
+        Depcrate_latchimpl_139!();
+        Depcrate_latchimpl_140!();
+        Depcrate_latchimpl_141!();
+        Depcrate_latchimpl_142!();
+    };
+}

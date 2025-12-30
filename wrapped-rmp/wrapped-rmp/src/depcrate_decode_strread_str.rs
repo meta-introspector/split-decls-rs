@@ -1,0 +1,9 @@
+// Generated macro for read_str (function)
+macro_rules! Depcrate_decode_strread_str {
+() => {
+// Module: crate::decode::str
+// Provides: {"read_str"}
+// Dependencies: {}
+# [doc = " Attempts to read a string data from the given reader and copy it to the buffer provided."] # [doc = ""] # [doc = " On success returns a borrowed string type, allowing to view the copied bytes as properly utf-8"] # [doc = " string."] # [doc = " According to the spec, the string's data must to be encoded using utf-8."] # [doc = ""] # [doc = " # Errors"] # [doc = ""] # [doc = " Returns `Err` in the following cases:"] # [doc = ""] # [doc = "  - if any IO error (including unexpected EOF) occurs, while reading an `rd`, except the EINTR,"] # [doc = "    which is handled internally."] # [doc = "  - if the `out` buffer size is not large enough to keep all the data copied."] # [doc = "  - if the data is not utf-8, with a description as to why the provided data is not utf-8 and"] # [doc = "    with a size of bytes actually copied to be able to get them from `out`."] # [doc = ""] # [doc = " # Examples"] # [doc = " ```"] # [doc = " use rmp::decode::read_str;"] # [doc = ""] # [doc = " let buf = [0xaa, 0x6c, 0x65, 0x20, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65];"] # [doc = " let mut out = [0u8; 16];"] # [doc = ""] # [doc = " assert_eq!(\"le message\", read_str(&mut &buf[..], &mut &mut out[..]).unwrap());"] # [doc = " ```"] # [doc = ""] # [doc = " # Unstable"] # [doc = ""] # [doc = " This function is **unstable**, because it needs review."] pub fn read_str < 'r , R > (rd : & mut R , buf : & 'r mut [u8]) -> Result < & 'r str , DecodeStringError < 'r , R :: Error > > where R : RmpRead , { let len = read_str_len (rd) ? ; let ulen = len as usize ; if buf . len () < ulen { return Err (DecodeStringError :: BufferSizeTooSmall (len)) ; } read_str_data (rd , len , & mut buf [0 .. ulen]) }
+};
+}

@@ -1,0 +1,49 @@
+// Generated module macro for crate::config
+macro_rules! Modcrate_config {
+() => {
+        Depcrate_configuse_32!();
+        Depcrate_configuse_33!();
+        Depcrate_configuse_34!();
+        Depcrate_configuse_35!();
+        Depcrate_configuse_36!();
+        Depcrate_configuse_37!();
+        Depcrate_configuse_38!();
+        Depcrate_configuse_39!();
+        Depcrate_configuse_40!();
+        Depcrate_configuse_41!();
+        Depcrate_configuse_42!();
+        Depcrate_configuse_43!();
+        Depcrate_configuse_44!();
+        Depcrate_configuse_45!();
+        Depcrate_configuse_46!();
+        Depcrate_configConfig!();
+        Depcrate_configload_skipped!();
+        Depcrate_configload_config!();
+        Depcrate_configimpl_50!();
+        Depcrate_configget_version!();
+        Depcrate_configExternalData!();
+        Depcrate_configimpl_53!();
+        Depcrate_configLibraryConfig!();
+        Depcrate_configDefaultSafety!();
+        Depcrate_configlink_default!();
+        Depcrate_configbounds_checked_internally_default!();
+        Depcrate_configimpl_58!();
+        Depcrate_configModuleConfig!();
+        Depcrate_configimpl_60!();
+        Depcrate_configStmtData!();
+        Depcrate_configimpl_62!();
+        Depcrate_configCategoryData!();
+        Depcrate_configNullability!();
+        Depcrate_configimpl_65!();
+        Depcrate_configPointerBounds!();
+        Depcrate_configTypeOverride!();
+        Depcrate_configMethodData!();
+        Depcrate_configimpl_69!();
+        Depcrate_configimpl_70!();
+        Depcrate_configimpl_71!();
+        Depcrate_configdeserialize_argument_overrides!();
+        Depcrate_configItemGeneric!();
+        Depcrate_configimpl_74!();
+        Depcrate_configimpl_75!();
+    };
+}

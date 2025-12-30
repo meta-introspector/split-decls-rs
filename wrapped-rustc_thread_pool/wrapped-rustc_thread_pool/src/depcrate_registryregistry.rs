@@ -1,0 +1,9 @@
+// Generated macro for Registry (struct)
+macro_rules! Depcrate_registryRegistry {
+() => {
+// Module: crate::registry
+// Provides: {"Registry"}
+// Dependencies: {}
+pub struct Registry { thread_infos : Vec < ThreadInfo > , sleep : Sleep , injected_jobs : Injector < JobRef > , broadcasts : Mutex < Vec < Worker < JobRef > > > , panic_handler : Option < Box < PanicHandler > > , pub (crate) deadlock_handler : Option < Box < DeadlockHandler > > , start_handler : Option < Box < StartHandler > > , exit_handler : Option < Box < ExitHandler > > , pub (crate) acquire_thread_handler : Option < Box < AcquireThreadHandler > > , pub (crate) release_thread_handler : Option < Box < ReleaseThreadHandler > > , terminate_count : AtomicUsize , }
+};
+}

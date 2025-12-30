@@ -1,0 +1,9 @@
+// Generated macro for impl_1149 (impl)
+macro_rules! Depcrate_base_interpolationimpl_1149 {
+() => {
+// Module: crate::base::interpolation
+// Provides: {"impl_1149"}
+// Dependencies: {}
+# [doc = " # Interpolation"] impl < T : Scalar + Zero + One + ClosedAddAssign + ClosedSubAssign + ClosedMulAssign , D : Dim , S : Storage < T , D > , > Vector < T , D , S > { # [doc = " Returns `self * (1.0 - t) + rhs * t`, i.e., the linear blend of the vectors x and y using the scalar value a."] # [doc = ""] # [doc = " The value for a is not restricted to the range `[0, 1]`."] # [doc = ""] # [doc = " # Examples:"] # [doc = ""] # [doc = " ```"] # [doc = " # use nalgebra::Vector3;"] # [doc = " let x = Vector3::new(1.0, 2.0, 3.0);"] # [doc = " let y = Vector3::new(10.0, 20.0, 30.0);"] # [doc = " assert_eq!(x.lerp(&y, 0.1), Vector3::new(1.9, 3.8, 5.7));"] # [doc = " ```"] # [must_use] pub fn lerp < S2 : Storage < T , D > > (& self , rhs : & Vector < T , D , S2 > , t : T) -> OVector < T , D > where DefaultAllocator : Allocator < D > , { let mut res = self . clone_owned () ; res . axpy (t . clone () , rhs , T :: one () - t) ; res } # [doc = " Computes the spherical linear interpolation between two non-zero vectors."] # [doc = ""] # [doc = " The result is a unit vector."] # [doc = ""] # [doc = " # Examples:"] # [doc = ""] # [doc = " ```"] # [doc = " # use nalgebra::{Unit, Vector2};"] # [doc = ""] # [doc = " let v1 =Vector2::new(1.0, 2.0);"] # [doc = " let v2 = Vector2::new(2.0, -3.0);"] # [doc = ""] # [doc = " let v = v1.slerp(&v2, 1.0);"] # [doc = ""] # [doc = " assert_eq!(v, v2.normalize());"] # [doc = " ```"] # [must_use] pub fn slerp < S2 : Storage < T , D > > (& self , rhs : & Vector < T , D , S2 > , t : T) -> OVector < T , D > where T : RealField , DefaultAllocator : Allocator < D > , { let me = Unit :: new_normalize (self . clone_owned ()) ; let rhs = Unit :: new_normalize (rhs . clone_owned ()) ; me . slerp (& rhs , t) . into_inner () } }
+};
+}

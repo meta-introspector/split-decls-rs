@@ -4,6 +4,6 @@ macro_rules! Depcrate_wrappingimpl_499 {
 // Module: crate::wrapping
 // Provides: {"impl_499"}
 // Dependencies: {}
-impl < T : Zero > Zero for Wrapping < T > { # [inline] fn zero () -> Self { Wrapping (T :: zero ()) } }
+impl < T : fmt :: UpperHex > fmt :: UpperHex for Wrapping < T > { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { self . 0 . fmt (f) } }
 };
 }

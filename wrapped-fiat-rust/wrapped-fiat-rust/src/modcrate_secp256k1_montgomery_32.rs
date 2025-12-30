@@ -1,0 +1,41 @@
+// Generated module macro for crate::secp256k1_montgomery_32
+macro_rules! Modcrate_secp256k1_montgomery_32 {
+() => {
+        Depcrate_secp256k1_montgomery_32IndexConst!();
+        Depcrate_secp256k1_montgomery_32impl_768!();
+        Depcrate_secp256k1_montgomery_32impl_769!();
+        Depcrate_secp256k1_montgomery_32fiat_secp256k1_montgomery_u1!();
+        Depcrate_secp256k1_montgomery_32fiat_secp256k1_montgomery_i1!();
+        Depcrate_secp256k1_montgomery_32fiat_secp256k1_montgomery_u2!();
+        Depcrate_secp256k1_montgomery_32fiat_secp256k1_montgomery_i2!();
+        Depcrate_secp256k1_montgomery_32fiat_secp256k1_montgomery_montgomery_domain_field_element!();
+        Depcrate_secp256k1_montgomery_32impl_775!();
+        Depcrate_secp256k1_montgomery_32impl_776!();
+        Depcrate_secp256k1_montgomery_32impl_777!();
+        Depcrate_secp256k1_montgomery_32impl_778!();
+        Depcrate_secp256k1_montgomery_32fiat_secp256k1_montgomery_non_montgomery_domain_field_element!();
+        Depcrate_secp256k1_montgomery_32impl_780!();
+        Depcrate_secp256k1_montgomery_32impl_781!();
+        Depcrate_secp256k1_montgomery_32impl_782!();
+        Depcrate_secp256k1_montgomery_32impl_783!();
+        Depcrate_secp256k1_montgomery_32fiat_secp256k1_montgomery_addcarryx_u32!();
+        Depcrate_secp256k1_montgomery_32fiat_secp256k1_montgomery_subborrowx_u32!();
+        Depcrate_secp256k1_montgomery_32fiat_secp256k1_montgomery_mulx_u32!();
+        Depcrate_secp256k1_montgomery_32fiat_secp256k1_montgomery_cmovznz_u32!();
+        Depcrate_secp256k1_montgomery_32fiat_secp256k1_montgomery_mul!();
+        Depcrate_secp256k1_montgomery_32fiat_secp256k1_montgomery_square!();
+        Depcrate_secp256k1_montgomery_32fiat_secp256k1_montgomery_add!();
+        Depcrate_secp256k1_montgomery_32fiat_secp256k1_montgomery_sub!();
+        Depcrate_secp256k1_montgomery_32fiat_secp256k1_montgomery_opp!();
+        Depcrate_secp256k1_montgomery_32fiat_secp256k1_montgomery_from_montgomery!();
+        Depcrate_secp256k1_montgomery_32fiat_secp256k1_montgomery_to_montgomery!();
+        Depcrate_secp256k1_montgomery_32fiat_secp256k1_montgomery_nonzero!();
+        Depcrate_secp256k1_montgomery_32fiat_secp256k1_montgomery_selectznz!();
+        Depcrate_secp256k1_montgomery_32fiat_secp256k1_montgomery_to_bytes!();
+        Depcrate_secp256k1_montgomery_32fiat_secp256k1_montgomery_from_bytes!();
+        Depcrate_secp256k1_montgomery_32fiat_secp256k1_montgomery_set_one!();
+        Depcrate_secp256k1_montgomery_32fiat_secp256k1_montgomery_msat!();
+        Depcrate_secp256k1_montgomery_32fiat_secp256k1_montgomery_divstep!();
+        Depcrate_secp256k1_montgomery_32fiat_secp256k1_montgomery_divstep_precomp!();
+    };
+}

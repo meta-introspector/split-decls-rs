@@ -1,0 +1,9 @@
+// Generated macro for HelloWorldProvider (struct)
+macro_rules! Depcrate_hello_worldHelloWorldProvider {
+() => {
+// Module: crate::hello_world
+// Provides: {"HelloWorldProvider"}
+// Dependencies: {}
+# [doc = " A data provider returning Hello World strings in different languages."] # [doc = ""] # [doc = " Mostly useful for testing."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " use icu_locale_core::langid;"] # [doc = " use icu_provider::hello_world::*;"] # [doc = " use icu_provider::prelude::*;"] # [doc = ""] # [doc = " let german_hello_world: DataResponse<HelloWorldV1> = HelloWorldProvider"] # [doc = "     .load(DataRequest {"] # [doc = "         id: DataIdentifierBorrowed::for_locale(&langid!(\"de\").into()),"] # [doc = "         ..Default::default()"] # [doc = "     })"] # [doc = "     .expect(\"Loading should succeed\");"] # [doc = ""] # [doc = " assert_eq!(\"Hallo Welt\", german_hello_world.payload.get().message);"] # [doc = " ```"] # [doc = ""] # [doc = " Load the reverse string using an auxiliary key:"] # [doc = ""] # [doc = " ```"] # [doc = " use icu_locale_core::langid;"] # [doc = " use icu_provider::hello_world::*;"] # [doc = " use icu_provider::prelude::*;"] # [doc = ""] # [doc = " let reverse_hello_world: DataResponse<HelloWorldV1> = HelloWorldProvider"] # [doc = "     .load(DataRequest {"] # [doc = "         id: DataIdentifierBorrowed::for_marker_attributes_and_locale("] # [doc = "             DataMarkerAttributes::from_str_or_panic(\"reverse\"),"] # [doc = "             &langid!(\"en\").into(),"] # [doc = "         ),"] # [doc = "         ..Default::default()"] # [doc = "     })"] # [doc = "     .expect(\"Loading should succeed\");"] # [doc = ""] # [doc = " assert_eq!(\"Olleh Dlrow\", reverse_hello_world.payload.get().message);"] # [doc = " ```"] # [derive (Debug , PartialEq , Default)] pub struct HelloWorldProvider ;
+};
+}

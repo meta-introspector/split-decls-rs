@@ -1,0 +1,44 @@
+// Generated module macro for crate::fragments
+macro_rules! Modcrate_fragments {
+() => {
+        Depcrate_fragmentsuse_14!();
+        Depcrate_fragmentsuse_15!();
+        Depcrate_fragmentsTextBuf!();
+        Depcrate_fragmentsimpl_17!();
+        Depcrate_fragmentsTextCollector!();
+        Depcrate_fragmentsimpl_19!();
+        Depcrate_fragmentsimpl_20!();
+        Depcrate_fragmentsimpl_21!();
+        Depcrate_fragmentsimpl_22!();
+        Depcrate_fragmentsimpl_23!();
+        Depcrate_fragmentsimpl_24!();
+        Depcrate_fragmentsimpl_25!();
+        Depcrate_fragmentsimpl_26!();
+        Depcrate_fragmentsBinaryBuf!();
+        Depcrate_fragmentsimpl_28!();
+        Depcrate_fragmentsBinaryCollector!();
+        Depcrate_fragmentsimpl_30!();
+        Depcrate_fragmentsimpl_31!();
+        Depcrate_fragmentsimpl_32!();
+        Depcrate_fragmentsimpl_33!();
+        Depcrate_fragmentsimpl_34!();
+        Depcrate_fragmentsimpl_35!();
+        Depcrate_fragmentsimpl_36!();
+        Depcrate_fragmentsimpl_37!();
+        Depcrate_fragmentsFragment!();
+        Depcrate_fragmentsFragment!();
+        Depcrate_fragmentsimpl_40!();
+        Depcrate_fragmentsimpl_41!();
+        Depcrate_fragmentsFragmentBuf!();
+        Depcrate_fragmentsimpl_43!();
+        Depcrate_fragmentsimpl_44!();
+        Depcrate_fragmentsimpl_45!();
+        Depcrate_fragmentsimpl_46!();
+        Depcrate_fragmentsimpl_47!();
+        Depcrate_fragmentsimpl_48!();
+        Depcrate_fragmentsimpl_49!();
+        Depcrate_fragmentsimpl_50!();
+        Depcrate_fragmentsimpl_51!();
+        Depcrate_fragmentstests!();
+    };
+}

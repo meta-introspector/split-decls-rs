@@ -1,0 +1,9 @@
+// Generated macro for impl_15 (impl)
+macro_rules! Depcrate_typesimpl_15 {
+() => {
+// Module: crate::types
+// Provides: {"impl_15"}
+// Dependencies: {}
+impl BlameRanges { # [doc = " Add a single range to blame."] # [doc = ""] # [doc = " The new range will be merged with any overlapping existing ranges."] pub fn add_one_based_inclusive_range (& mut self , new_range : RangeInclusive < u32 >) -> Result < () , Error > { let zero_based_range = Self :: inclusive_to_zero_based_exclusive (new_range) ? ; self . merge_zero_based_exclusive_range (zero_based_range) ; Ok (()) } # [doc = " Adds a new ranges, merging it with any existing overlapping ranges."] fn merge_zero_based_exclusive_range (& mut self , new_range : Range < u32 >) { match self { Self :: PartialFile (ref mut ranges) => { let (mut non_overlapping , overlapping) : (Vec < _ > , Vec < _ >) = ranges . drain (..) . partition (| range | new_range . end < range . start || range . end < new_range . start) ; let merged_range = overlapping . into_iter () . fold (new_range , | acc , range | { acc . start . min (range . start) .. acc . end . max (range . end) }) ; non_overlapping . push (merged_range) ; * ranges = non_overlapping ; ranges . sort_by (| a , b | a . start . cmp (& b . start)) ; } Self :: WholeFile => * self = Self :: PartialFile (vec ! [new_range]) , } } # [doc = " Gets zero-based exclusive ranges."] pub fn to_zero_based_exclusive_ranges (& self , max_lines : u32) -> Vec < Range < u32 > > { match self { Self :: WholeFile => { let full_range = 0 .. max_lines ; vec ! [full_range] } Self :: PartialFile (ranges) => ranges . iter () . filter_map (| range | { if range . end < max_lines { return Some (range . clone ()) ; } if range . start < max_lines { Some (range . start .. max_lines) } else { None } }) . collect () , } } }
+};
+}

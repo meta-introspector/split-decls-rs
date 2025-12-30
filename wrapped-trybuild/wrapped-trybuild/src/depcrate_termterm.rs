@@ -1,9 +1,9 @@
-// Generated macro for TERM (static)
-macro_rules! Depcrate_termTERM {
+// Generated macro for Term (struct)
+macro_rules! Depcrate_termTerm {
 () => {
 // Module: crate::term
-// Provides: {"TERM"}
+// Provides: {"Term"}
 // Dependencies: {}
-static TERM : OnceLock < Mutex < Term > > = OnceLock :: new () ;
+pub (crate) struct Term { spec : ColorSpec , stream : Stream , start_of_line : bool , }
 };
 }

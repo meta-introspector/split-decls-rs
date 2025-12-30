@@ -1,0 +1,9 @@
+// Generated macro for PlaceBase (enum)
+macro_rules! Depcrate_builder_expr_as_placePlaceBase {
+() => {
+// Module: crate::builder::expr::as_place
+// Provides: {"PlaceBase"}
+// Dependencies: {}
+# [doc = " The \"outermost\" place that holds this value."] # [derive (Copy , Clone , Debug , PartialEq)] pub (crate) enum PlaceBase { # [doc = " Denotes the start of a `Place`."] Local (Local) , # [doc = " When building place for an expression within a closure, the place might start off a"] # [doc = " captured path. When `capture_disjoint_fields` is enabled, we might not know the capture"] # [doc = " index (within the desugared closure) of the captured path until most of the projections"] # [doc = " are applied. We use `PlaceBase::Upvar` to keep track of the root variable off of which the"] # [doc = " captured path starts, the closure the capture belongs to and the trait the closure"] # [doc = " implements."] # [doc = ""] # [doc = " Once we have figured out the capture index, we can convert the place builder to start from"] # [doc = " `PlaceBase::Local`."] # [doc = ""] # [doc = " Consider the following example"] # [doc = " ```rust"] # [doc = " let t = (((10, 10), 10), 10);"] # [doc = ""] # [doc = " let c = || {"] # [doc = "     println!(\"{}\", t.0.0.0);"] # [doc = " };"] # [doc = " ```"] # [doc = " Here the THIR expression for `t.0.0.0` will be something like"] # [doc = ""] # [doc = " ```ignore (illustrative)"] # [doc = " * Field(0)"] # [doc = "     * Field(0)"] # [doc = "         * Field(0)"] # [doc = "             * UpvarRef(t)"] # [doc = " ```"] # [doc = ""] # [doc = " When `capture_disjoint_fields` is enabled, `t.0.0.0` is captured and we won't be able to"] # [doc = " figure out that it is captured until all the `Field` projections are applied."] Upvar { # [doc = " HirId of the upvar"] var_hir_id : LocalVarId , # [doc = " DefId of the closure"] closure_def_id : LocalDefId , } , }
+};
+}

@@ -1,0 +1,47 @@
+// Generated module macro for crate::num
+macro_rules! Modcrate_num {
+() => {
+        Depcrate_numfloat_samplers!();
+        Depcrate_numuse_749!();
+        Depcrate_numuse_750!();
+        Depcrate_numuse_751!();
+        Depcrate_numsample_uniform!();
+        Depcrate_numsample_uniform_incl!();
+        Depcrate_numsample_uniform!();
+        Depcrate_nummacro_755!();
+        Depcrate_nummacro_756!();
+        Depcrate_nummacro_757!();
+        Depcrate_nummacro_758!();
+        Depcrate_nummacro_759!();
+        Depcrate_nummacro_760!();
+        Depcrate_numsupported_int_any!();
+        Depcrate_numunsupported_int_any!();
+        Depcrate_numunsupported_int_any!();
+        Depcrate_numint_any!();
+        Depcrate_numnumeric_api!();
+        Depcrate_numsigned_integer_bin_search!();
+        Depcrate_numunsigned_integer_bin_search!();
+        Depcrate_nummacro_768!();
+        Depcrate_nummacro_769!();
+        Depcrate_nummacro_770!();
+        Depcrate_nummacro_771!();
+        Depcrate_nummacro_772!();
+        Depcrate_nummacro_773!();
+        Depcrate_nummacro_774!();
+        Depcrate_nummacro_775!();
+        Depcrate_nummacro_776!();
+        Depcrate_nummacro_777!();
+        Depcrate_nummacro_778!();
+        Depcrate_nummacro_779!();
+        Depcrate_nummacro_780!();
+        Depcrate_numimpl_781!();
+        Depcrate_numFloatLayout!();
+        Depcrate_numimpl_783!();
+        Depcrate_numimpl_784!();
+        Depcrate_numfloat_any!();
+        Depcrate_numfloat_bin_search!();
+        Depcrate_nummacro_787!();
+        Depcrate_nummacro_788!();
+        Depcrate_numtest!();
+    };
+}

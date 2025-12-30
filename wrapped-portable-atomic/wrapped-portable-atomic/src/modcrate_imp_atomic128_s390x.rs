@@ -1,0 +1,44 @@
+// Generated module macro for crate::imp::atomic128::s390x
+macro_rules! Modcrate_imp_atomic128_s390x {
+() => {
+        Depcrate_imp_atomic128_s390xmacro_507!();
+        Depcrate_imp_atomic128_s390xuse_508!();
+        Depcrate_imp_atomic128_s390xuse_509!();
+        Depcrate_imp_atomic128_s390xserialization!();
+        Depcrate_imp_atomic128_s390xserialization!();
+        Depcrate_imp_atomic128_s390xdistinct_op!();
+        Depcrate_imp_atomic128_s390xdistinct_op!();
+        Depcrate_imp_atomic128_s390xselect_op!();
+        Depcrate_imp_atomic128_s390xselect_op!();
+        Depcrate_imp_atomic128_s390xextract_cc!();
+        Depcrate_imp_atomic128_s390xatomic_load!();
+        Depcrate_imp_atomic128_s390xatomic_store!();
+        Depcrate_imp_atomic128_s390xatomic_compare_exchange!();
+        Depcrate_imp_atomic128_s390xuse_520!();
+        Depcrate_imp_atomic128_s390xbyte_wise_atomic_load!();
+        Depcrate_imp_atomic128_s390xatomic_update!();
+        Depcrate_imp_atomic128_s390xatomic_swap!();
+        Depcrate_imp_atomic128_s390xatomic_rmw_cas_3!();
+        Depcrate_imp_atomic128_s390xatomic_rmw_cas_2!();
+        Depcrate_imp_atomic128_s390xmacro_526!();
+        Depcrate_imp_atomic128_s390xmacro_527!();
+        Depcrate_imp_atomic128_s390xmacro_528!();
+        Depcrate_imp_atomic128_s390xmacro_529!();
+        Depcrate_imp_atomic128_s390xmacro_530!();
+        Depcrate_imp_atomic128_s390xmacro_531!();
+        Depcrate_imp_atomic128_s390xmacro_532!();
+        Depcrate_imp_atomic128_s390xmacro_533!();
+        Depcrate_imp_atomic128_s390xmacro_534!();
+        Depcrate_imp_atomic128_s390xmacro_535!();
+        Depcrate_imp_atomic128_s390xmacro_536!();
+        Depcrate_imp_atomic128_s390xmacro_537!();
+        Depcrate_imp_atomic128_s390xmacro_538!();
+        Depcrate_imp_atomic128_s390xmacro_539!();
+        Depcrate_imp_atomic128_s390xmacro_540!();
+        Depcrate_imp_atomic128_s390xis_lock_free!();
+        Depcrate_imp_atomic128_s390xIS_ALWAYS_LOCK_FREE!();
+        Depcrate_imp_atomic128_s390xmacro_543!();
+        Depcrate_imp_atomic128_s390xmacro_544!();
+        Depcrate_imp_atomic128_s390xtests!();
+    };
+}

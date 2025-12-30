@@ -1,0 +1,9 @@
+// Generated macro for identify_key_type_for_algorithm_params (function)
+macro_rules! Depcrate_x509_signidentify_key_type_for_algorithm_params {
+() => {
+// Module: crate::x509::sign
+// Provides: {"identify_key_type_for_algorithm_params"}
+// Dependencies: {}
+fn identify_key_type_for_algorithm_params (params : & common :: AlgorithmParameters < '_ > ,) -> pyo3 :: PyResult < KeyType > { match params { common :: AlgorithmParameters :: RsaWithSha224 (..) | common :: AlgorithmParameters :: RsaWithSha256 (..) | common :: AlgorithmParameters :: RsaWithSha384 (..) | common :: AlgorithmParameters :: RsaWithSha512 (..) | common :: AlgorithmParameters :: RsaWithSha3_224 (..) | common :: AlgorithmParameters :: RsaWithSha3_256 (..) | common :: AlgorithmParameters :: RsaWithSha3_384 (..) | common :: AlgorithmParameters :: RsaWithSha3_512 (..) | common :: AlgorithmParameters :: RsaPss (..) => Ok (KeyType :: Rsa) , common :: AlgorithmParameters :: EcDsaWithSha224 (..) | common :: AlgorithmParameters :: EcDsaWithSha256 (..) | common :: AlgorithmParameters :: EcDsaWithSha384 (..) | common :: AlgorithmParameters :: EcDsaWithSha512 (..) | common :: AlgorithmParameters :: EcDsaWithSha3_224 | common :: AlgorithmParameters :: EcDsaWithSha3_256 | common :: AlgorithmParameters :: EcDsaWithSha3_384 | common :: AlgorithmParameters :: EcDsaWithSha3_512 => Ok (KeyType :: Ec) , common :: AlgorithmParameters :: Ed25519 => Ok (KeyType :: Ed25519) , common :: AlgorithmParameters :: Ed448 => Ok (KeyType :: Ed448) , common :: AlgorithmParameters :: DsaWithSha224 (..) | common :: AlgorithmParameters :: DsaWithSha256 (..) | common :: AlgorithmParameters :: DsaWithSha384 (..) | common :: AlgorithmParameters :: DsaWithSha512 (..) => Ok (KeyType :: Dsa) , _ => Err (pyo3 :: exceptions :: PyValueError :: new_err ("Unsupported signature algorithm" ,)) , } }
+};
+}

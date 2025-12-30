@@ -1,0 +1,9 @@
+// Generated macro for WLAN_REASON_CODE_MSMSEC_CAPABILITY_PROFILE_AUTH (const)
+macro_rules! Depcrate_um_wlanapiWLAN_REASON_CODE_MSMSEC_CAPABILITY_PROFILE_AUTH {
+() => {
+// Module: crate::um::wlanapi
+// Provides: {"WLAN_REASON_CODE_MSMSEC_CAPABILITY_PROFILE_AUTH"}
+// Dependencies: {}
+pub const WLAN_REASON_CODE_MSMSEC_CAPABILITY_PROFILE_AUTH : WLAN_REASON_CODE = WLAN_REASON_CODE_MSMSEC_BASE + 30 ;
+};
+}

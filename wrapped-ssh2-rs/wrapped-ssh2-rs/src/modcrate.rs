@@ -1,0 +1,54 @@
+// Generated module macro for crate
+macro_rules! Modcrate {
+() => {
+        Depcrateother_1!();
+        Depcrateother_2!();
+        Depcrateother_3!();
+        Depcrateother_4!();
+        Depcrateuse_5!();
+        Depcrateuse_6!();
+        Depcrateuse_7!();
+        Depcrateuse_8!();
+        Depcrateuse_9!();
+        Depcrateuse_10!();
+        Depcrateuse_11!();
+        Depcrateuse_12!();
+        Depcrateuse_13!();
+        Depcrateuse_14!();
+        Depcrateuse_15!();
+        Depcrateuse_16!();
+        Depcrateuse_17!();
+        Depcrateuse_18!();
+        Depcrateuse_19!();
+        Depcrateuse_20!();
+        Depcrateagent!();
+        Depcratechannel!();
+        Depcrateerror!();
+        Depcrateknownhosts!();
+        Depcratelistener!();
+        Depcratesession!();
+        Depcratesftp!();
+        Depcrateutil!();
+        Depcrateinit!();
+        Depcrateopt_bytes!();
+        DepcrateDisconnectCode!();
+        DepcrateHostKeyType!();
+        DepcrateMethodType!();
+        DepcrateFLUSH_EXTENDED_DATA!();
+        DepcrateFLUSH_ALL!();
+        DepcrateEXTENDED_DATA_STDERR!();
+        DepcrateHashType!();
+        DepcrateKnownHostFileKind!();
+        DepcrateCheckResult!();
+        DepcrateKnownHostKeyFormat!();
+        Depcrateimpl_200!();
+        DepcrateExtendedData!();
+        DepcratePtyModeOpcode!();
+        DepcrateExtensiblePtyModeOpcode!();
+        Depcrateimpl_204!();
+        Depcrateimpl_205!();
+        Depcrateimpl_206!();
+        DepcratePtyModes!();
+        Depcrateimpl_208!();
+    };
+}

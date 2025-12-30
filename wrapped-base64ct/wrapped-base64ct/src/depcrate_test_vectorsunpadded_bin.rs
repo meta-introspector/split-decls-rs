@@ -1,0 +1,9 @@
+// Generated macro for UNPADDED_BIN (const)
+macro_rules! Depcrate_test_vectorsUNPADDED_BIN {
+() => {
+// Module: crate::test_vectors
+// Provides: {"UNPADDED_BIN"}
+// Dependencies: {}
+pub (crate) const UNPADDED_BIN : & [u8] = & [0 , 0 , 0 , 11 , 115 , 115 , 104 , 45 , 101 , 100 , 50 , 53 , 53 , 49 , 57 , 0 , 0 , 0 , 32 , 179 , 62 , 174 , 243 , 126 , 162 , 223 , 124 , 170 , 1 , 13 , 239 , 222 , 163 , 78 , 36 , 31 , 101 , 241 , 181 , 41 , 164 , 244 , 62 , 209 , 67 , 39 , 245 , 197 , 74 , 171 , 98 ,] ;
+};
+}

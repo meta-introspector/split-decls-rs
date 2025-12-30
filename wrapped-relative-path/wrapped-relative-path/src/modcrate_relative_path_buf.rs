@@ -1,0 +1,42 @@
+// Generated module macro for crate::relative_path_buf
+macro_rules! Modcrate_relative_path_buf {
+() => {
+        Depcrate_relative_path_bufuse_58!();
+        Depcrate_relative_path_bufuse_59!();
+        Depcrate_relative_path_bufuse_60!();
+        Depcrate_relative_path_bufuse_61!();
+        Depcrate_relative_path_bufuse_62!();
+        Depcrate_relative_path_bufuse_63!();
+        Depcrate_relative_path_bufuse_64!();
+        Depcrate_relative_path_bufuse_65!();
+        Depcrate_relative_path_bufuse_66!();
+        Depcrate_relative_path_bufuse_67!();
+        Depcrate_relative_path_bufuse_68!();
+        Depcrate_relative_path_bufuse_69!();
+        Depcrate_relative_path_bufrelative_traversal!();
+        Depcrate_relative_path_bufRelativePathBuf!();
+        Depcrate_relative_path_bufimpl_72!();
+        Depcrate_relative_path_bufimpl_73!();
+        Depcrate_relative_path_bufimpl_74!();
+        Depcrate_relative_path_bufimpl_75!();
+        Depcrate_relative_path_bufimpl_76!();
+        Depcrate_relative_path_bufimpl_77!();
+        Depcrate_relative_path_bufimpl_78!();
+        Depcrate_relative_path_bufimpl_79!();
+        Depcrate_relative_path_bufimpl_80!();
+        Depcrate_relative_path_bufimpl_81!();
+        Depcrate_relative_path_bufimpl_82!();
+        Depcrate_relative_path_bufimpl_83!();
+        Depcrate_relative_path_bufimpl_84!();
+        Depcrate_relative_path_bufimpl_85!();
+        Depcrate_relative_path_bufimpl_86!();
+        Depcrate_relative_path_bufimpl_87!();
+        Depcrate_relative_path_bufimpl_88!();
+        Depcrate_relative_path_bufimpl_89!();
+        Depcrate_relative_path_bufimpl_90!();
+        Depcrate_relative_path_bufimpl_91!();
+        Depcrate_relative_path_bufimpl_92!();
+        Depcrate_relative_path_bufimpl_93!();
+        Depcrate_relative_path_bufimpl_94!();
+    };
+}

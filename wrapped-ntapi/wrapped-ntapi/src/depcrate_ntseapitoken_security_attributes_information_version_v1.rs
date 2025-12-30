@@ -1,0 +1,9 @@
+// Generated macro for TOKEN_SECURITY_ATTRIBUTES_INFORMATION_VERSION_V1 (const)
+macro_rules! Depcrate_ntseapiTOKEN_SECURITY_ATTRIBUTES_INFORMATION_VERSION_V1 {
+() => {
+// Module: crate::ntseapi
+// Provides: {"TOKEN_SECURITY_ATTRIBUTES_INFORMATION_VERSION_V1"}
+// Dependencies: {}
+pub const TOKEN_SECURITY_ATTRIBUTES_INFORMATION_VERSION_V1 : USHORT = 1 ;
+};
+}

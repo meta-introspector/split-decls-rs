@@ -1,0 +1,9 @@
+// Generated macro for other_10296 (other)
+macro_rules! Depcrate_shared_stralignother_10296 {
+() => {
+// Module: crate::shared::stralign
+// Provides: {"other_10296"}
+// Dependencies: {}
+extern "system" { pub fn uaw_lstrcmpW (String1 : PCUWSTR , String2 : PCUWSTR ,) -> c_int ; pub fn uaw_lstrcmpiW (String1 : PCUWSTR , String2 : PCUWSTR ,) -> c_int ; pub fn uaw_lstrlenW (String : LPCUWSTR ,) -> c_int ; pub fn uaw_wcschr (String : PCUWSTR , Character : WCHAR ,) -> PUWSTR ; pub fn uaw_wcscpy (Destination : PUWSTR , Source : PCUWSTR ,) -> PUWSTR ; pub fn uaw_wcsicmp (String1 : PCUWSTR , String2 : PCUWSTR ,) -> c_int ; pub fn uaw_wcslen (String : PCUWSTR ,) -> size_t ; pub fn uaw_wcsrchr (String : PCUWSTR , Character : WCHAR ,) -> PUWSTR ; }
+};
+}

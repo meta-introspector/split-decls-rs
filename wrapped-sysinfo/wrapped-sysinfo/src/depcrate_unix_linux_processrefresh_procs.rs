@@ -1,0 +1,9 @@
+// Generated macro for refresh_procs (function)
+macro_rules! Depcrate_unix_linux_processrefresh_procs {
+() => {
+// Module: crate::unix::linux::process
+// Provides: {"refresh_procs"}
+// Dependencies: {}
+# [doc = " We're forced to read the whole `/proc` folder because if a process died and another took its"] # [doc = " place, we need to get the task parent (if it's a task)."] pub (crate) fn refresh_procs (proc_list : & mut HashMap < Pid , Process > , proc_path : & Path , uptime : u64 , info : & SystemInfo , processes_to_update : ProcessesToUpdate < '_ > , refresh_kind : ProcessRefreshKind ,) -> usize { # [cfg (feature = "multithread")] use rayon :: iter :: ParallelIterator ; let nb_updated = AtomicUsize :: new (0) ; let procs = { let pid_iter : Box < dyn Iterator < Item = (PathBuf , Pid) > + Send > = match processes_to_update { ProcessesToUpdate :: All => match read_dir (proc_path) { Ok (proc_entries) => Box :: new (proc_entries . filter_map (filter_pid_entries)) , Err (_err) => { sysinfo_debug ! ("Failed to read folder {proc_path:?}: {_err:?}") ; return 0 ; } } , ProcessesToUpdate :: Some (pids) => Box :: new (pids . iter () . map (| pid | (proc_path . join (pid . to_string ()) , * pid)) ,) , } ; let proc_list = Wrap (UnsafeCell :: new (proc_list)) ; iter (pid_iter) . flat_map (| (path , pid) | { get_proc_and_tasks (path , pid , refresh_kind , processes_to_update) }) . filter_map (| e | { let proc_list = proc_list . get () ; let new_process = _get_process_data (e . path . as_path () , proc_list , e . pid , e . parent_pid , uptime , info , refresh_kind , e . tasks ,) . ok () ? ; nb_updated . fetch_add (1 , Ordering :: Relaxed) ; new_process }) . collect :: < Vec < _ > > () } ; for proc_ in procs { proc_list . insert (proc_ . pid () , proc_) ; } nb_updated . into_inner () }
+};
+}

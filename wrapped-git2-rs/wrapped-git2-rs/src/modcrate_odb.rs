@@ -1,0 +1,45 @@
+// Generated module macro for crate::odb
+macro_rules! Modcrate_odb {
+() => {
+        Depcrate_odbuse_748!();
+        Depcrate_odbuse_749!();
+        Depcrate_odbuse_750!();
+        Depcrate_odbuse_751!();
+        Depcrate_odbuse_752!();
+        Depcrate_odbuse_753!();
+        Depcrate_odbuse_754!();
+        Depcrate_odbuse_755!();
+        Depcrate_odbuse_756!();
+        Depcrate_odbOdb!();
+        Depcrate_odbimpl_758!();
+        Depcrate_odbimpl_759!();
+        Depcrate_odbimpl_760!();
+        Depcrate_odbimpl_761!();
+        Depcrate_odbimpl_762!();
+        Depcrate_odbOdbObject!();
+        Depcrate_odbimpl_764!();
+        Depcrate_odbimpl_765!();
+        Depcrate_odbimpl_766!();
+        Depcrate_odbOdbReader!();
+        Depcrate_odbimpl_768!();
+        Depcrate_odbimpl_769!();
+        Depcrate_odbimpl_770!();
+        Depcrate_odbimpl_771!();
+        Depcrate_odbOdbWriter!();
+        Depcrate_odbimpl_773!();
+        Depcrate_odbimpl_774!();
+        Depcrate_odbimpl_775!();
+        Depcrate_odbimpl_776!();
+        Depcrate_odbimpl_777!();
+        Depcrate_odbOdbPackwriterCb!();
+        Depcrate_odbOdbPackwriter!();
+        Depcrate_odbimpl_780!();
+        Depcrate_odbimpl_781!();
+        Depcrate_odbimpl_782!();
+        Depcrate_odbForeachCb!();
+        Depcrate_odbForeachCbData!();
+        Depcrate_odbforeach_cb!();
+        Depcrate_odbwrite_pack_progress_cb!();
+        Depcrate_odbtests!();
+    };
+}

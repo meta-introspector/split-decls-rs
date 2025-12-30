@@ -1,0 +1,39 @@
+// Generated module macro for crate::flavors::list
+macro_rules! Modcrate_flavors_list {
+() => {
+        Depcrate_flavors_listuse_162!();
+        Depcrate_flavors_listuse_163!();
+        Depcrate_flavors_listuse_164!();
+        Depcrate_flavors_listuse_165!();
+        Depcrate_flavors_listuse_166!();
+        Depcrate_flavors_listuse_167!();
+        Depcrate_flavors_listuse_168!();
+        Depcrate_flavors_listuse_169!();
+        Depcrate_flavors_listuse_170!();
+        Depcrate_flavors_listuse_171!();
+        Depcrate_flavors_listuse_172!();
+        Depcrate_flavors_listuse_173!();
+        Depcrate_flavors_listuse_174!();
+        Depcrate_flavors_listWRITE!();
+        Depcrate_flavors_listREAD!();
+        Depcrate_flavors_listDESTROY!();
+        Depcrate_flavors_listLAP!();
+        Depcrate_flavors_listBLOCK_CAP!();
+        Depcrate_flavors_listSHIFT!();
+        Depcrate_flavors_listMARK_BIT!();
+        Depcrate_flavors_listSlot!();
+        Depcrate_flavors_listimpl_183!();
+        Depcrate_flavors_listBlock!();
+        Depcrate_flavors_listimpl_185!();
+        Depcrate_flavors_listPosition!();
+        Depcrate_flavors_listListToken!();
+        Depcrate_flavors_listimpl_188!();
+        Depcrate_flavors_listChannel!();
+        Depcrate_flavors_listimpl_190!();
+        Depcrate_flavors_listimpl_191!();
+        Depcrate_flavors_listReceiver!();
+        Depcrate_flavors_listSender!();
+        Depcrate_flavors_listimpl_194!();
+        Depcrate_flavors_listimpl_195!();
+    };
+}

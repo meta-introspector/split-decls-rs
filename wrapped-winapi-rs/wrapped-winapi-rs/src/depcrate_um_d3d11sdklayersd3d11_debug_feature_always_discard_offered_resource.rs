@@ -1,0 +1,9 @@
+// Generated macro for D3D11_DEBUG_FEATURE_ALWAYS_DISCARD_OFFERED_RESOURCE (const)
+macro_rules! Depcrate_um_d3d11sdklayersD3D11_DEBUG_FEATURE_ALWAYS_DISCARD_OFFERED_RESOURCE {
+() => {
+// Module: crate::um::d3d11sdklayers
+// Provides: {"D3D11_DEBUG_FEATURE_ALWAYS_DISCARD_OFFERED_RESOURCE"}
+// Dependencies: {}
+pub const D3D11_DEBUG_FEATURE_ALWAYS_DISCARD_OFFERED_RESOURCE : UINT = 0x8 ;
+};
+}

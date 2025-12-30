@@ -1,0 +1,55 @@
+// Generated module macro for crate::mock_function
+macro_rules! Modcrate_mock_function {
+() => {
+        Depcrate_mock_functionuse_17!();
+        Depcrate_mock_functionuse_18!();
+        Depcrate_mock_functionuse_19!();
+        Depcrate_mock_functionuse_20!();
+        Depcrate_mock_functiondedynify!();
+        Depcrate_mock_functiondestrify!();
+        Depcrate_mock_functionownify!();
+        Depcrate_mock_functionsend_syncify!();
+        Depcrate_mock_functionBuilder!();
+        Depcrate_mock_functionimpl_26!();
+        Depcrate_mock_functionMockFunction!();
+        Depcrate_mock_functionimpl_28!();
+        Depcrate_mock_functionCommon!();
+        Depcrate_mock_functionimpl_30!();
+        Depcrate_mock_functionCommonExpectationMethods!();
+        Depcrate_mock_functionimpl_32!();
+        Depcrate_mock_functionCommonExpectationsMethods!();
+        Depcrate_mock_functionimpl_34!();
+        Depcrate_mock_functionExpectationGuardCommonMethods!();
+        Depcrate_mock_functionimpl_36!();
+        Depcrate_mock_functionConcreteExpectationGuard!();
+        Depcrate_mock_functionimpl_38!();
+        Depcrate_mock_functionGenericExpectationGuard!();
+        Depcrate_mock_functionimpl_40!();
+        Depcrate_mock_functionContext!();
+        Depcrate_mock_functionimpl_42!();
+        Depcrate_mock_functionMatcher!();
+        Depcrate_mock_functionimpl_44!();
+        Depcrate_mock_functionRefRfunc!();
+        Depcrate_mock_functionimpl_46!();
+        Depcrate_mock_functionRefMutRfunc!();
+        Depcrate_mock_functionimpl_48!();
+        Depcrate_mock_functionStaticRfunc!();
+        Depcrate_mock_functionimpl_50!();
+        Depcrate_mock_functionRefExpectation!();
+        Depcrate_mock_functionimpl_52!();
+        Depcrate_mock_functionRefMutExpectation!();
+        Depcrate_mock_functionimpl_54!();
+        Depcrate_mock_functionStaticExpectation!();
+        Depcrate_mock_functionimpl_56!();
+        Depcrate_mock_functionRefExpectations!();
+        Depcrate_mock_functionimpl_58!();
+        Depcrate_mock_functionRefMutExpectations!();
+        Depcrate_mock_functionimpl_60!();
+        Depcrate_mock_functionStaticExpectations!();
+        Depcrate_mock_functionimpl_62!();
+        Depcrate_mock_functionGenericExpectations!();
+        Depcrate_mock_functionimpl_64!();
+        Depcrate_mock_functionStaticGenericExpectations!();
+        Depcrate_mock_functionimpl_66!();
+    };
+}

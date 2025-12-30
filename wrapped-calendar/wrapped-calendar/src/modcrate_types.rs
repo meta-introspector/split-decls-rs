@@ -1,0 +1,43 @@
+// Generated module macro for crate::types
+macro_rules! Modcrate_types {
+() => {
+        Depcrate_typesuse_375!();
+        Depcrate_typesuse_376!();
+        Depcrate_typesuse_377!();
+        Depcrate_typesuse_378!();
+        Depcrate_typesuse_379!();
+        Depcrate_typesuse_380!();
+        Depcrate_typesuse_381!();
+        Depcrate_typesuse_382!();
+        Depcrate_typesunstable!();
+        Depcrate_typesimpl_384!();
+        Depcrate_typesYearInfo!();
+        Depcrate_typesimpl_386!();
+        Depcrate_typesimpl_387!();
+        Depcrate_typesimpl_388!();
+        Depcrate_typesYearAmbiguity!();
+        Depcrate_typesEraYear!();
+        Depcrate_typesCyclicYear!();
+        Depcrate_typesMonthCode!();
+        Depcrate_typesimpl_393!();
+        Depcrate_typestest_get_normal_month_code_if_leap!();
+        Depcrate_typesimpl_395!();
+        Depcrate_typesimpl_396!();
+        Depcrate_typesimpl_397!();
+        Depcrate_typesMonth!();
+        Depcrate_typesLeapStatus!();
+        Depcrate_typesimpl_400!();
+        Depcrate_typesMonthInfo!();
+        Depcrate_typesimpl_402!();
+        Depcrate_typesDayOfYear!();
+        Depcrate_typesDayOfMonth!();
+        Depcrate_typesIsoWeekOfYear!();
+        Depcrate_typesDayOfWeekInMonth!();
+        Depcrate_typesimpl_407!();
+        Depcrate_typestest_day_of_week_in_month!();
+        Depcrate_typesWeekday!();
+        Depcrate_typesSUNDAY!();
+        Depcrate_typesimpl_411!();
+        Depcrate_typesimpl_412!();
+    };
+}

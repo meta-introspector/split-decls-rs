@@ -1,0 +1,9 @@
+// Generated macro for impl_740 (impl)
+macro_rules! Depcrate_generatedimpl_740 {
+() => {
+// Module: crate::generated
+// Provides: {"impl_740"}
+// Dependencies: {}
+impl NWBonjourServiceEndpoint { extern_methods ! (# [doc = " Parameter `name`: The Bonjour service name."] # [doc = ""] # [doc = " Parameter `type`: The Bonjour service type."] # [doc = ""] # [doc = " Parameter `domain`: The Bonjour service domain."] # [doc = ""] # [doc = " Returns: An initialized NWBonjourServiceEndpoint object."] # [deprecated = "Use `nw_endpoint_create_bonjour_service` in Network framework instead, see deprecation notice in <NetworkExtension/NWBonjourServiceEndpoint.h>"] # [unsafe (method (endpointWithName : type : domain :))] # [unsafe (method_family = none)] pub unsafe fn endpointWithName_type_domain (name : & NSString , r#type : & NSString , domain : & NSString ,) -> Retained < Self >; # [doc = " The endpoint's Bonjour service name."] # [deprecated = "Use `nw_endpoint_get_bonjour_service_name` in Network framework instead, see deprecation notice in <NetworkExtension/NWBonjourServiceEndpoint.h>"] # [unsafe (method (name))] # [unsafe (method_family = none)] pub unsafe fn name (& self) -> Retained < NSString >; # [doc = " The endpoint's Bonjour service type."] # [deprecated = "Use `nw_endpoint_get_bonjour_service_type` in Network framework instead, see deprecation notice in <NetworkExtension/NWBonjourServiceEndpoint.h>"] # [unsafe (method (type))] # [unsafe (method_family = none)] pub unsafe fn r#type (& self) -> Retained < NSString >; # [doc = " The endpoint's Bonjour service domain."] # [deprecated = "Use `nw_endpoint_get_bonjour_service_domain` in Network framework instead, see deprecation notice in <NetworkExtension/NWBonjourServiceEndpoint.h>"] # [unsafe (method (domain))] # [unsafe (method_family = none)] pub unsafe fn domain (& self) -> Retained < NSString >;) ; }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for AUDIT_GENERIC_ALL (const)
+macro_rules! Depcrate_um_ntsecapiAUDIT_GENERIC_ALL {
+() => {
+// Module: crate::um::ntsecapi
+// Provides: {"AUDIT_GENERIC_ALL"}
+// Dependencies: {}
+pub const AUDIT_GENERIC_ALL : ULONG = STANDARD_RIGHTS_REQUIRED | AUDIT_SET_SYSTEM_POLICY | AUDIT_QUERY_SYSTEM_POLICY | AUDIT_SET_USER_POLICY | AUDIT_QUERY_USER_POLICY | AUDIT_ENUMERATE_USERS | AUDIT_SET_MISC_POLICY | AUDIT_QUERY_MISC_POLICY ;
+};
+}

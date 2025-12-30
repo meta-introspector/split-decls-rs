@@ -1,0 +1,9 @@
+// Generated macro for merge_rest (function)
+macro_rules! Depcrate_importsmerge_rest {
+() => {
+// Module: crate::imports
+// Provides: {"merge_rest"}
+// Dependencies: {}
+fn merge_rest (a : & [UseSegment] , b : & [UseSegment] , mut len : usize , merge_by : SharedPrefix ,) -> Option < Vec < UseSegment > > { if a . len () == len && b . len () == len { return None ; } if a . len () != len && b . len () != len { let style_edition = a [len] . style_edition ; if let UseSegmentKind :: List (ref list) = a [len] . kind { let mut list = list . clone () ; merge_use_trees_inner (& mut list , UseTree :: from_path (b [len ..] . to_vec () , DUMMY_SP) , merge_by ,) ; let mut new_path = b [.. len] . to_vec () ; let kind = UseSegmentKind :: List (list) ; new_path . push (UseSegment { kind , style_edition , }) ; return Some (new_path) ; } } else if len == 1 { let (common , rest) = if a . len () == len { (& a [0] , & b [1 ..]) } else { (& b [0] , & a [1 ..]) } ; let kind = UseSegmentKind :: Slf (common . get_alias () . map (ToString :: to_string)) ; let style_edition = a [0] . style_edition ; let mut list = vec ! [UseTree :: from_path (vec ! [UseSegment { kind , style_edition , }] , DUMMY_SP ,)] ; match rest { [UseSegment { kind : UseSegmentKind :: List (rest_list) , .. } ,] => list . extend (rest_list . clone ()) , _ => list . push (UseTree :: from_path (rest . to_vec () , DUMMY_SP)) , } return Some (vec ! [b [0] . clone () , UseSegment { kind : UseSegmentKind :: List (list) , style_edition , } ,]) ; } else { len -= 1 ; } let mut list = vec ! [UseTree :: from_path (a [len ..] . to_vec () , DUMMY_SP) , UseTree :: from_path (b [len ..] . to_vec () , DUMMY_SP) ,] ; list . sort () ; list . dedup () ; let mut new_path = b [.. len] . to_vec () ; let kind = UseSegmentKind :: List (list) ; let style_edition = a [0] . style_edition ; new_path . push (UseSegment { kind , style_edition , }) ; Some (new_path) }
+};
+}

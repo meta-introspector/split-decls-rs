@@ -1,0 +1,9 @@
+// Generated macro for other_103 (other)
+macro_rules! Depcrate_bit_vectorother_103 {
+() => {
+// Module: crate::bit_vector
+// Provides: {"other_103"}
+// Dependencies: {}
+unsafe extern "C" { pub fn CFBitVectorCreate (allocator : CFAllocatorRef , bytes : * const UInt8 , numBits : CFIndex ,) -> CFBitVectorRef ; pub fn CFBitVectorCreateCopy (allocator : CFAllocatorRef , bv : CFBitVectorRef) -> CFBitVectorRef ; pub fn CFBitVectorContainsBit (bv : CFBitVectorRef , range : CFRange , value : CFBit) -> Boolean ; pub fn CFBitVectorGetBitAtIndex (bv : CFBitVectorRef , idx : CFIndex) -> CFBit ; pub fn CFBitVectorGetBits (bv : CFBitVectorRef , range : CFRange , bytes : * mut UInt8) ; pub fn CFBitVectorGetCount (bv : CFBitVectorRef) -> CFIndex ; pub fn CFBitVectorGetCountOfBit (bv : CFBitVectorRef , range : CFRange , value : CFBit) -> CFIndex ; pub fn CFBitVectorGetFirstIndexOfBit (bv : CFBitVectorRef , range : CFRange , value : CFBit ,) -> CFIndex ; pub fn CFBitVectorGetLastIndexOfBit (bv : CFBitVectorRef , range : CFRange , value : CFBit ,) -> CFIndex ; pub fn CFBitVectorGetTypeID () -> CFTypeID ; pub fn CFBitVectorCreateMutable (allocator : CFAllocatorRef , capacity : CFIndex ,) -> CFMutableBitVectorRef ; pub fn CFBitVectorCreateMutableCopy (allocator : CFAllocatorRef , capacity : CFIndex , bv : CFBitVectorRef ,) -> CFMutableBitVectorRef ; pub fn CFBitVectorFlipBitAtIndex (bv : CFMutableBitVectorRef , idx : CFIndex) ; pub fn CFBitVectorFlipBits (bv : CFMutableBitVectorRef , range : CFRange) ; pub fn CFBitVectorSetAllBits (bv : CFMutableBitVectorRef , value : CFBit) ; pub fn CFBitVectorSetBitAtIndex (bv : CFMutableBitVectorRef , idx : CFIndex , value : CFBit) ; pub fn CFBitVectorSetBits (bv : CFMutableBitVectorRef , range : CFRange , value : CFBit) ; pub fn CFBitVectorSetCount (bv : CFMutableBitVectorRef , count : CFIndex) ; }
+};
+}

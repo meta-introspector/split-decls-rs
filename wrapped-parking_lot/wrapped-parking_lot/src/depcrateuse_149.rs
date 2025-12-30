@@ -4,6 +4,6 @@ macro_rules! Depcrateuse_149 {
 // Module: crate
 // Provides: {"use_149"}
 // Dependencies: {}
-pub use self :: rwlock :: { const_rwlock , MappedRwLockReadGuard , MappedRwLockWriteGuard , RwLock , RwLockReadGuard , RwLockUpgradableReadGuard , RwLockWriteGuard , } ;
+# [cfg (feature = "arc_lock")] pub use self :: lock_api :: { ArcMutexGuard , ArcReentrantMutexGuard , ArcRwLockReadGuard , ArcRwLockUpgradableReadGuard , ArcRwLockWriteGuard , } ;
 };
 }

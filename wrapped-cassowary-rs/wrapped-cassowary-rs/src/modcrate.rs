@@ -1,0 +1,45 @@
+// Generated module macro for crate
+macro_rules! Modcrate {
+() => {
+        Depcrateuse_1!();
+        Depcrateuse_2!();
+        Depcrateuse_3!();
+        Depcratesolver_impl!();
+        Depcrateoperators!();
+        DepcrateVARIABLE_ID!();
+        DepcrateVariable!();
+        Depcrateimpl_110!();
+        DepcrateTerm!();
+        Depcrateimpl_112!();
+        DepcrateExpression!();
+        Depcrateimpl_114!();
+        Depcrateimpl_115!();
+        Depcrateimpl_116!();
+        Depcrateimpl_117!();
+        Depcratestrength!();
+        DepcrateRelationalOperator!();
+        Depcrateimpl_120!();
+        DepcrateConstraintData!();
+        DepcrateConstraint!();
+        Depcrateimpl_123!();
+        Depcrateimpl_124!();
+        Depcrateimpl_125!();
+        Depcrateimpl_126!();
+        DepcrateWeightedRelation!();
+        Depcrateimpl_128!();
+        DepcratePartialConstraint!();
+        DepcrateSymbolType!();
+        DepcrateSymbol!();
+        Depcrateimpl_132!();
+        DepcrateRow!();
+        Depcratenear_zero!();
+        Depcrateimpl_135!();
+        DepcrateAddConstraintError!();
+        DepcrateRemoveConstraintError!();
+        DepcrateAddEditVariableError!();
+        DepcrateRemoveEditVariableError!();
+        DepcrateSuggestValueError!();
+        DepcrateInternalSolverError!();
+        Depcrateuse_142!();
+    };
+}

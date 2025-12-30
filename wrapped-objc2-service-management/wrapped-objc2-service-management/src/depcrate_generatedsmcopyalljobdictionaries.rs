@@ -1,0 +1,9 @@
+// Generated macro for SMCopyAllJobDictionaries (function)
+macro_rules! Depcrate_generatedSMCopyAllJobDictionaries {
+() => {
+// Module: crate::generated
+// Provides: {"SMCopyAllJobDictionaries"}
+// Dependencies: {}
+# [doc = " Copy the job description dictionaries for all jobs in the given domain."] # [doc = ""] # [doc = ""] # [doc = " Parameter `domain`: The job's domain (e.g. {"] # [doc = ""] # [doc = " ```text"] # [doc = "  kSMDomainSystemLaunchd} or"] # [doc = "  {@link kSMDomainUserLaunchd})."] # [doc = ""] # [doc = "  @result"] # [doc = "  A new array containing all job dictionaries, or NULL if an error occurred."] # [doc = "  Must be released by the caller."] # [doc = ""] # [doc = "  @discussion"] # [doc = "  SMCopyAllJobDictionaries returns an array of the job description dictionaries"] # [doc = "  for all jobs in the given domain, or NULL if an error occurred. This routine"] # [doc = "  is deprecated and will be removed in a future release. There will be no"] # [doc = "  provided replacement."] # [doc = ""] # [doc = "  For the specific use of testing the state of a login item that may have been"] # [doc = "  enabled with SMLoginItemSetEnabled() in order to show that state to the"] # [doc = "  user, this function remains the recommended API. A replacement API for this"] # [doc = "  specific use will be provided before this function is removed."] # [doc = "  "] # [doc = ""] # [doc = " ```"] # [doc = ""] # [doc = " # Safety"] # [doc = ""] # [doc = " `domain` might not allow `None`."] # [cfg (feature = "objc2-core-foundation")] # [deprecated] # [inline] pub unsafe extern "C-unwind" fn SMCopyAllJobDictionaries (domain : Option < & CFString > ,) -> Option < CFRetained < CFArray > > { extern "C-unwind" { fn SMCopyAllJobDictionaries (domain : Option < & CFString >) -> Option < NonNull < CFArray > > ; } let ret = unsafe { SMCopyAllJobDictionaries (domain) } ; ret . map (| ret | unsafe { CFRetained :: from_raw (ret) }) }
+};
+}

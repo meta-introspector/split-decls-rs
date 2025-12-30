@@ -1,0 +1,41 @@
+// Generated module macro for crate::fmt::strtime
+macro_rules! Modcrate_fmt_strtime {
+() => {
+        Depcrate_fmt_strtimeuse_402!();
+        Depcrate_fmt_strtimeformat!();
+        Depcrate_fmt_strtimeparse!();
+        Depcrate_fmt_strtimeparse!();
+        Depcrate_fmt_strtimeformat!();
+        Depcrate_fmt_strtimeConfig!();
+        Depcrate_fmt_strtimeimpl_429!();
+        Depcrate_fmt_strtimeimpl_430!();
+        Depcrate_fmt_strtimeCustom!();
+        Depcrate_fmt_strtimeDefaultCustom!();
+        Depcrate_fmt_strtimeimpl_433!();
+        Depcrate_fmt_strtimeimpl_434!();
+        Depcrate_fmt_strtimePosixCustom!();
+        Depcrate_fmt_strtimeimpl_436!();
+        Depcrate_fmt_strtimeimpl_437!();
+        Depcrate_fmt_strtimeBrokenDownTime!();
+        Depcrate_fmt_strtimeimpl_439!();
+        Depcrate_fmt_strtimeimpl_440!();
+        Depcrate_fmt_strtimeimpl_441!();
+        Depcrate_fmt_strtimeimpl_442!();
+        Depcrate_fmt_strtimeimpl_443!();
+        Depcrate_fmt_strtimeimpl_444!();
+        Depcrate_fmt_strtimeimpl_445!();
+        Depcrate_fmt_strtimeDisplay!();
+        Depcrate_fmt_strtimeimpl_447!();
+        Depcrate_fmt_strtimeimpl_448!();
+        Depcrate_fmt_strtimeMeridiem!();
+        Depcrate_fmt_strtimeimpl_450!();
+        Depcrate_fmt_strtimeExtension!();
+        Depcrate_fmt_strtimeimpl_452!();
+        Depcrate_fmt_strtimeFlag!();
+        Depcrate_fmt_strtimeweekday_name_full!();
+        Depcrate_fmt_strtimeweekday_name_abbrev!();
+        Depcrate_fmt_strtimemonth_name_full!();
+        Depcrate_fmt_strtimemonth_name_abbrev!();
+        Depcrate_fmt_strtimetests!();
+    };
+}

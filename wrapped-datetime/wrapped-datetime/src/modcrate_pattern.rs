@@ -1,0 +1,41 @@
+// Generated module macro for crate::pattern
+macro_rules! Modcrate_pattern {
+() => {
+        Depcrate_patternformatter!();
+        Depcrate_patternnames!();
+        Depcrate_patternpattern!();
+        Depcrate_patternuse_329!();
+        Depcrate_patternuse_330!();
+        Depcrate_patternuse_331!();
+        Depcrate_patternuse_332!();
+        Depcrate_patternuse_333!();
+        Depcrate_patternuse_334!();
+        Depcrate_patternuse_335!();
+        Depcrate_patternuse_336!();
+        Depcrate_patternuse_337!();
+        Depcrate_patternuse_338!();
+        Depcrate_patternuse_339!();
+        Depcrate_patternuse_340!();
+        Depcrate_patternuse_341!();
+        Depcrate_patternuse_342!();
+        Depcrate_patternuse_343!();
+        Depcrate_patternuse_344!();
+        Depcrate_patternuse_345!();
+        Depcrate_patternuse_346!();
+        Depcrate_patternuse_347!();
+        Depcrate_patternuse_348!();
+        Depcrate_patternuse_349!();
+        Depcrate_patternuse_350!();
+        Depcrate_patternGetNameForMonthError!();
+        Depcrate_patternGetNameForWeekdayError!();
+        Depcrate_patternGetNameForEraError!();
+        Depcrate_patternGetNameForCyclicYearError!();
+        Depcrate_patternGetNameForDayPeriodError!();
+        Depcrate_patternMonthPlaceholderValue!();
+        Depcrate_patternPatternLoadError!();
+        Depcrate_patternimpl_358!();
+        Depcrate_patternUnsupportedCalendarError!();
+        Depcrate_patternimpl_360!();
+        Depcrate_patternFormattedDateTimePatternError!();
+    };
+}

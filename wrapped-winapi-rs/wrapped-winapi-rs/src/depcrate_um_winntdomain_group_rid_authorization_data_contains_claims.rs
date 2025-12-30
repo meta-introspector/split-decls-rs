@@ -1,0 +1,9 @@
+// Generated macro for DOMAIN_GROUP_RID_AUTHORIZATION_DATA_CONTAINS_CLAIMS (const)
+macro_rules! Depcrate_um_winntDOMAIN_GROUP_RID_AUTHORIZATION_DATA_CONTAINS_CLAIMS {
+() => {
+// Module: crate::um::winnt
+// Provides: {"DOMAIN_GROUP_RID_AUTHORIZATION_DATA_CONTAINS_CLAIMS"}
+// Dependencies: {}
+pub const DOMAIN_GROUP_RID_AUTHORIZATION_DATA_CONTAINS_CLAIMS : DWORD = 0x000001F1 ;
+};
+}

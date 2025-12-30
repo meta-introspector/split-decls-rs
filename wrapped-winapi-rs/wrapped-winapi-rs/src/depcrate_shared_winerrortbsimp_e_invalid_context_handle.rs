@@ -1,0 +1,9 @@
+// Generated macro for TBSIMP_E_INVALID_CONTEXT_HANDLE (const)
+macro_rules! Depcrate_shared_winerrorTBSIMP_E_INVALID_CONTEXT_HANDLE {
+() => {
+// Module: crate::shared::winerror
+// Provides: {"TBSIMP_E_INVALID_CONTEXT_HANDLE"}
+// Dependencies: {}
+pub const TBSIMP_E_INVALID_CONTEXT_HANDLE : HRESULT = 0x80290202 ;
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for D3D12_PS_PIXEL_CENTER_FRACTIONAL_COMPONENT (const)
+macro_rules! Depcrate_um_d3d12D3D12_PS_PIXEL_CENTER_FRACTIONAL_COMPONENT {
+() => {
+// Module: crate::um::d3d12
+// Provides: {"D3D12_PS_PIXEL_CENTER_FRACTIONAL_COMPONENT"}
+// Dependencies: {}
+pub const D3D12_PS_PIXEL_CENTER_FRACTIONAL_COMPONENT : FLOAT = 0.5 ;
+};
+}

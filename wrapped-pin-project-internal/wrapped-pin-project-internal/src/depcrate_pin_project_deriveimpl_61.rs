@@ -1,0 +1,9 @@
+// Generated macro for impl_61 (impl)
+macro_rules! Depcrate_pin_project_deriveimpl_61 {
+() => {
+// Module: crate::pin_project::derive
+// Provides: {"impl_61"}
+// Dependencies: {}
+impl < 'a > Context < 'a > { fn new (attrs : & 'a [Attribute] , vis : & 'a Visibility , ident : & 'a Ident , generics : & 'a mut Generics , kind : TypeKind ,) -> Result < Self > { let Args { pinned_drop , unpin_impl , project , project_ref , project_replace } = parse_args (attrs) ? ; if let Some (name) = [project . as_ref () , project_ref . as_ref () , project_replace . ident ()] . iter () . filter_map (Option :: as_ref) . find (| name | * * name == ident) { bail ! (name , "name `{}` is the same as the original type name" , name) ; } let mut lifetime_name = String :: from ("'pin") ; determine_lifetime_name (& mut lifetime_name , generics) ; let lifetime = Lifetime :: new (& lifetime_name , Span :: call_site ()) ; let ty_generics = generics . split_for_impl () . 1 ; let ty_generics_as_generics = parse_quote ! (# ty_generics) ; let mut proj_generics = generics . clone () ; let pred = insert_lifetime_and_bound (& mut proj_generics , lifetime . clone () , & ty_generics_as_generics , ident ,) ; let mut where_clause = generics . make_where_clause () . clone () ; where_clause . predicates . push (pred) ; let own_ident = project_replace . ident () . cloned () . unwrap_or_else (| | format_ident ! ("__{}ProjectionOwned" , ident)) ; Ok (Self { kind , pinned_drop , unpin_impl , project : project . is_some () , project_ref : project_ref . is_some () , project_replace , proj : ProjectedType { vis : determine_visibility (vis) , mut_ident : project . unwrap_or_else (| | format_ident ! ("__{}Projection" , ident)) , ref_ident : project_ref . unwrap_or_else (| | format_ident ! ("__{}ProjectionRef" , ident)) , own_ident , lifetime , generics : proj_generics , where_clause , } , orig : OriginalType { attrs , vis , ident , generics } , pinned_fields : vec ! [] , }) } }
+};
+}

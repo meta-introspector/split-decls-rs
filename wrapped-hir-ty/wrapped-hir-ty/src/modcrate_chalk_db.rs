@@ -1,0 +1,47 @@
+// Generated module macro for crate::chalk_db
+macro_rules! Modcrate_chalk_db {
+() => {
+        Depcrate_chalk_dbuse_26!();
+        Depcrate_chalk_dbuse_27!();
+        Depcrate_chalk_dbuse_28!();
+        Depcrate_chalk_dbuse_29!();
+        Depcrate_chalk_dbuse_30!();
+        Depcrate_chalk_dbuse_31!();
+        Depcrate_chalk_dbuse_32!();
+        Depcrate_chalk_dbuse_33!();
+        Depcrate_chalk_dbuse_34!();
+        Depcrate_chalk_dbuse_35!();
+        Depcrate_chalk_dbuse_36!();
+        Depcrate_chalk_dbAssociatedTyDatum!();
+        Depcrate_chalk_dbTraitDatum!();
+        Depcrate_chalk_dbAdtDatum!();
+        Depcrate_chalk_dbImplDatum!();
+        Depcrate_chalk_dbOpaqueTyDatum!();
+        Depcrate_chalk_dbAssocTypeId!();
+        Depcrate_chalk_dbTraitId!();
+        Depcrate_chalk_dbAdtId!();
+        Depcrate_chalk_dbImplId!();
+        Depcrate_chalk_dbAssociatedTyValueId!();
+        Depcrate_chalk_dbAssociatedTyValue!();
+        Depcrate_chalk_dbFnDefDatum!();
+        Depcrate_chalk_dbVariances!();
+        Depcrate_chalk_dbimpl_50!();
+        Depcrate_chalk_dbimpl_51!();
+        Depcrate_chalk_dbimpl_52!();
+        Depcrate_chalk_dbprogram_clauses_for_chalk_env_query!();
+        Depcrate_chalk_dbassociated_ty_data_query!();
+        Depcrate_chalk_dbtrait_datum_query!();
+        Depcrate_chalk_dbwell_known_trait_from_lang_item!();
+        Depcrate_chalk_dblang_item_from_well_known_trait!();
+        Depcrate_chalk_dbadt_datum_query!();
+        Depcrate_chalk_dbimpl_datum_query!();
+        Depcrate_chalk_dbimpl_def_datum!();
+        Depcrate_chalk_dbassociated_ty_value_query!();
+        Depcrate_chalk_dbtype_alias_associated_ty_value!();
+        Depcrate_chalk_dbfn_def_datum_query!();
+        Depcrate_chalk_dbfn_def_variance_query!();
+        Depcrate_chalk_dbadt_variance_query!();
+        Depcrate_chalk_dbconvert_where_clauses!();
+        Depcrate_chalk_dbgeneric_predicate_to_inline_bound!();
+    };
+}

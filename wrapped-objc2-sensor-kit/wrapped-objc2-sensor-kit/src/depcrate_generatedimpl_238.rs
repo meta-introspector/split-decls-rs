@@ -1,0 +1,9 @@
+// Generated macro for impl_238 (impl)
+macro_rules! Depcrate_generatedimpl_238 {
+() => {
+// Module: crate::generated
+// Provides: {"impl_238"}
+// Dependencies: {}
+impl SRWristTemperatureSession { extern_methods ! (# [unsafe (method (init))] # [unsafe (method_family = init)] pub unsafe fn init (this : Allocated < Self >) -> Retained < Self >; # [unsafe (method (new))] # [unsafe (method_family = new)] pub unsafe fn new () -> Retained < Self >; # [doc = " Indicates when temperatures were collected."] # [doc = ""] # [doc = " This property is not atomic."] # [doc = ""] # [doc = " # Safety"] # [doc = ""] # [doc = " This might not be thread-safe."] # [unsafe (method (startDate))] # [unsafe (method_family = none)] pub unsafe fn startDate (& self) -> Retained < NSDate >; # [doc = " Precise number of seconds temperatures were collected."] # [doc = ""] # [doc = " This property is not atomic."] # [doc = ""] # [doc = " # Safety"] # [doc = ""] # [doc = " This might not be thread-safe."] # [unsafe (method (duration))] # [unsafe (method_family = none)] pub unsafe fn duration (& self) -> NSTimeInterval ; # [doc = " Algorithm version."] # [doc = ""] # [doc = " This property is not atomic."] # [doc = ""] # [doc = " # Safety"] # [doc = ""] # [doc = " This might not be thread-safe."] # [unsafe (method (version))] # [unsafe (method_family = none)] pub unsafe fn version (& self) -> Retained < NSString >; # [doc = " Enumerator which could be used to view calculated wrist temperatures, along with their reading accuracy."] # [doc = ""] # [doc = " This property is not atomic."] # [doc = ""] # [doc = " # Safety"] # [doc = ""] # [doc = " - The returned enumerator's underlying collection should not be mutated while in use."] # [doc = " - This might not be thread-safe."] # [unsafe (method (temperatures))] # [unsafe (method_family = none)] pub unsafe fn temperatures (& self) -> Retained < NSEnumerator < SRWristTemperature >>;) ; }
+};
+}

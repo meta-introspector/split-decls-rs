@@ -1,0 +1,9 @@
+// Generated macro for add_to_ancillary_data (function)
+macro_rules! Depcrate_os_unix_net_ancillaryadd_to_ancillary_data {
+() => {
+// Module: crate::os::unix::net::ancillary
+// Provides: {"add_to_ancillary_data"}
+// Dependencies: {}
+fn add_to_ancillary_data < T > (buffer : & mut [u8] , length : & mut usize , source : & [T] , cmsg_level : libc :: c_int , cmsg_type : libc :: c_int ,) -> bool { # [cfg (not (target_os = "freebsd"))] let cmsg_size = source . len () . checked_mul (size_of :: < T > ()) ; # [cfg (target_os = "freebsd")] let cmsg_size = Some (unsafe { libc :: SOCKCRED2SIZE (1) }) ; let source_len = if let Some (source_len) = cmsg_size { if let Ok (source_len) = u32 :: try_from (source_len) { source_len } else { return false ; } } else { return false ; } ; unsafe { let additional_space = libc :: CMSG_SPACE (source_len) as usize ; let new_length = if let Some (new_length) = additional_space . checked_add (* length) { new_length } else { return false ; } ; if new_length > buffer . len () { return false ; } buffer [* length .. new_length] . fill (0) ; * length = new_length ; let mut msg : libc :: msghdr = zeroed () ; msg . msg_control = buffer . as_mut_ptr () . cast () ; msg . msg_controllen = * length as _ ; let mut cmsg = libc :: CMSG_FIRSTHDR (& msg) ; let mut previous_cmsg = cmsg ; while ! cmsg . is_null () { previous_cmsg = cmsg ; cmsg = libc :: CMSG_NXTHDR (& msg , cmsg) ; if eq (cmsg , previous_cmsg) { break ; } } if previous_cmsg . is_null () { return false ; } (* previous_cmsg) . cmsg_level = cmsg_level ; (* previous_cmsg) . cmsg_type = cmsg_type ; (* previous_cmsg) . cmsg_len = libc :: CMSG_LEN (source_len) as _ ; let data = libc :: CMSG_DATA (previous_cmsg) . cast () ; libc :: memcpy (data , source . as_ptr () . cast () , source_len as usize) ; } true }
+};
+}

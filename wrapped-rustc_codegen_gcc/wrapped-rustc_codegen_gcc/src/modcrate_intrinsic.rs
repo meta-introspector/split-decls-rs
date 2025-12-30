@@ -1,0 +1,49 @@
+// Generated module macro for crate::intrinsic
+macro_rules! Modcrate_intrinsic {
+() => {
+        Depcrate_intrinsicllvm!();
+        Depcrate_intrinsicsimd!();
+        Depcrate_intrinsicuse_434!();
+        Depcrate_intrinsicuse_435!();
+        Depcrate_intrinsicuse_436!();
+        Depcrate_intrinsicuse_437!();
+        Depcrate_intrinsicuse_438!();
+        Depcrate_intrinsicuse_439!();
+        Depcrate_intrinsicuse_440!();
+        Depcrate_intrinsicuse_441!();
+        Depcrate_intrinsicuse_442!();
+        Depcrate_intrinsicuse_443!();
+        Depcrate_intrinsicuse_444!();
+        Depcrate_intrinsicuse_445!();
+        Depcrate_intrinsicuse_446!();
+        Depcrate_intrinsicuse_447!();
+        Depcrate_intrinsicuse_448!();
+        Depcrate_intrinsicuse_449!();
+        Depcrate_intrinsicuse_450!();
+        Depcrate_intrinsicuse_451!();
+        Depcrate_intrinsicuse_452!();
+        Depcrate_intrinsicuse_453!();
+        Depcrate_intrinsicuse_454!();
+        Depcrate_intrinsicuse_455!();
+        Depcrate_intrinsicuse_456!();
+        Depcrate_intrinsicuse_457!();
+        Depcrate_intrinsicuse_458!();
+        Depcrate_intrinsicuse_459!();
+        Depcrate_intrinsicuse_460!();
+        Depcrate_intrinsicget_simple_intrinsic!();
+        Depcrate_intrinsicget_simple_function!();
+        Depcrate_intrinsicget_simple_function_f128!();
+        Depcrate_intrinsicget_simple_function_f128_2args!();
+        Depcrate_intrinsicf16_builtin!();
+        Depcrate_intrinsicimpl_466!();
+        Depcrate_intrinsicimpl_467!();
+        Depcrate_intrinsicArgAbiExt!();
+        Depcrate_intrinsicimpl_469!();
+        Depcrate_intrinsicint_type_width_signed!();
+        Depcrate_intrinsicimpl_471!();
+        Depcrate_intrinsictry_intrinsic!();
+        Depcrate_intrinsiccodegen_gnu_try!();
+        Depcrate_intrinsicget_rust_try_fn!();
+        Depcrate_intrinsicgen_fn!();
+    };
+}

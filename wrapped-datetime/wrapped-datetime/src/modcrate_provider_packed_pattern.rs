@@ -1,0 +1,41 @@
+// Generated module macro for crate::provider::packed_pattern
+macro_rules! Modcrate_provider_packed_pattern {
+() => {
+        Depcrate_provider_packed_patternuse_533!();
+        Depcrate_provider_packed_patternuse_534!();
+        Depcrate_provider_packed_patternuse_535!();
+        Depcrate_provider_packed_patternuse_536!();
+        Depcrate_provider_packed_patternuse_537!();
+        Depcrate_provider_packed_patternuse_538!();
+        Depcrate_provider_packed_patternLengthPluralElements!();
+        Depcrate_provider_packed_patternPackedPatternsBuilder!();
+        Depcrate_provider_packed_patternmacro_541!();
+        Depcrate_provider_packed_patternmacro_542!();
+        Depcrate_provider_packed_patternmacro_543!();
+        Depcrate_provider_packed_patternmacro_544!();
+        Depcrate_provider_packed_patternmacro_545!();
+        Depcrate_provider_packed_patternmacro_546!();
+        Depcrate_provider_packed_patternmacro_547!();
+        Depcrate_provider_packed_patternmacro_548!();
+        Depcrate_provider_packed_patternmacro_549!();
+        Depcrate_provider_packed_patternmacro_550!();
+        Depcrate_provider_packed_patternmacro_551!();
+        Depcrate_provider_packed_patternmacro_552!();
+        Depcrate_provider_packed_patternmacro_553!();
+        Depcrate_provider_packed_patternmacro_554!();
+        Depcrate_provider_packed_patternmacro_555!();
+        Depcrate_provider_packed_patternPackedPatterns!();
+        Depcrate_provider_packed_patternmacro_557!();
+        Depcrate_provider_packed_patternconstants!();
+        Depcrate_provider_packed_patternUnpackedPatterns!();
+        Depcrate_provider_packed_patternVariantPatternIndex!();
+        Depcrate_provider_packed_patternimpl_561!();
+        Depcrate_provider_packed_patternVariantIndices!();
+        Depcrate_provider_packed_patternimpl_563!();
+        Depcrate_provider_packed_patternimpl_564!();
+        Depcrate_provider_packed_patternPackedSkeletonVariant!();
+        Depcrate_provider_packed_patternimpl_566!();
+        Depcrate_provider_packed_pattern_serde!();
+        Depcrate_provider_packed_patterntests!();
+    };
+}

@@ -1,0 +1,42 @@
+// Generated module macro for crate::polonius::legacy::facts
+macro_rules! Modcrate_polonius_legacy_facts {
+() => {
+        Depcrate_polonius_legacy_factsuse_694!();
+        Depcrate_polonius_legacy_factsuse_695!();
+        Depcrate_polonius_legacy_factsuse_696!();
+        Depcrate_polonius_legacy_factsuse_697!();
+        Depcrate_polonius_legacy_factsuse_698!();
+        Depcrate_polonius_legacy_factsuse_699!();
+        Depcrate_polonius_legacy_factsuse_700!();
+        Depcrate_polonius_legacy_factsuse_701!();
+        Depcrate_polonius_legacy_factsuse_702!();
+        Depcrate_polonius_legacy_factsuse_703!();
+        Depcrate_polonius_legacy_factsuse_704!();
+        Depcrate_polonius_legacy_factsuse_705!();
+        Depcrate_polonius_legacy_factsRustcFacts!();
+        Depcrate_polonius_legacy_factsPoloniusOutput!();
+        Depcrate_polonius_legacy_factsmacro_708!();
+        Depcrate_polonius_legacy_factsimpl_709!();
+        Depcrate_polonius_legacy_factsimpl_710!();
+        Depcrate_polonius_legacy_factsimpl_711!();
+        Depcrate_polonius_legacy_factsimpl_712!();
+        Depcrate_polonius_legacy_factsPoloniusFacts!();
+        Depcrate_polonius_legacy_factsimpl_714!();
+        Depcrate_polonius_legacy_factsimpl_715!();
+        Depcrate_polonius_legacy_factsimpl_716!();
+        Depcrate_polonius_legacy_factsFactWriter!();
+        Depcrate_polonius_legacy_factsimpl_718!();
+        Depcrate_polonius_legacy_factsFactRow!();
+        Depcrate_polonius_legacy_factsimpl_720!();
+        Depcrate_polonius_legacy_factsimpl_721!();
+        Depcrate_polonius_legacy_factsimpl_722!();
+        Depcrate_polonius_legacy_factswrite_row!();
+        Depcrate_polonius_legacy_factsFactCell!();
+        Depcrate_polonius_legacy_factsimpl_725!();
+        Depcrate_polonius_legacy_factsimpl_726!();
+        Depcrate_polonius_legacy_factsimpl_727!();
+        Depcrate_polonius_legacy_factsimpl_728!();
+        Depcrate_polonius_legacy_factsimpl_729!();
+        Depcrate_polonius_legacy_factsimpl_730!();
+    };
+}

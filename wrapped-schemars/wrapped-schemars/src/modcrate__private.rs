@@ -1,0 +1,43 @@
+// Generated module macro for crate::_private
+macro_rules! Modcrate__private {
+() => {
+        Depcrate__privateuse_303!();
+        Depcrate__privateuse_304!();
+        Depcrate__privateuse_305!();
+        Depcrate__privateuse_306!();
+        Depcrate__privateuse_307!();
+        Depcrate__privateuse_308!();
+        Depcrate__privateregex_syntax!();
+        Depcrate__privaterustdoc!();
+        Depcrate__privateother_321!();
+        Depcrate__privateother_322!();
+        Depcrate__privateuse_323!();
+        Depcrate__privatejson_schema_for_internally_tagged_enum_newtype_variant!();
+        Depcrate__privatejson_schema_for_flatten!();
+        Depcrate__privateAllowUnknownProperties!();
+        Depcrate__privateimpl_327!();
+        Depcrate__private_schemars_maybe_to_value!();
+        Depcrate__privateMaybeSerializeWrapper!();
+        Depcrate__privateNoSerialize!();
+        Depcrate__privateimpl_331!();
+        Depcrate__privateimpl_332!();
+        Depcrate__privatenew_unit_enum_variant!();
+        Depcrate__private_schemars_maybe_schema_id!();
+        Depcrate__privateMaybeJsonSchemaWrapper!();
+        Depcrate__privateNoJsonSchema!();
+        Depcrate__privateimpl_337!();
+        Depcrate__privateimpl_338!();
+        Depcrate__privatenew_externally_tagged_enum_variant!();
+        Depcrate__privateapply_internal_enum_variant_tag!();
+        Depcrate__privateinsert_object_property!();
+        Depcrate__privateinsert_metadata_property_if_nonempty!();
+        Depcrate__privateinsert_validation_property!();
+        Depcrate__privatemust_contain!();
+        Depcrate__privateapply_inner_validation!();
+        Depcrate__privateflatten!();
+        Depcrate__privatenormalise_additional_unevaluated_properties!();
+        Depcrate__privatecontains_immediate_subschema!();
+        Depcrate__privateallow_null!();
+        Depcrate__privatetests!();
+    };
+}

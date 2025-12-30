@@ -1,0 +1,9 @@
+// Generated macro for impl_2778 (impl)
+macro_rules! Depcrate_impl_hash_with_borrow_str_and_bytesimpl_2778 {
+() => {
+// Module: crate::impl_hash_with_borrow_str_and_bytes
+// Provides: {"impl_2778"}
+// Dependencies: {}
+impl LateLintPass < '_ > for ImplHashWithBorrowStrBytes { # [doc = " We are emitting this lint at the Hash impl of a type that implements all"] # [doc = " three of `Hash`, `Borrow<str>` and `Borrow<[u8]>`."] fn check_item (& mut self , cx : & LateContext < '_ > , item : & Item < '_ >) { if let ItemKind :: Impl (imp) = item . kind && let Some (of_trait) = imp . of_trait && let ty = cx . tcx . type_of (item . owner_id) . instantiate_identity () && let Some (hash_id) = cx . tcx . get_diagnostic_item (sym :: Hash) && Res :: Def (DefKind :: Trait , hash_id) == of_trait . trait_ref . path . res && let Some (borrow_id) = cx . tcx . get_diagnostic_item (sym :: Borrow) && implements_trait (cx , ty , borrow_id , & [cx . tcx . types . str_ . into ()]) && implements_trait (cx , ty , borrow_id , & [Ty :: new_slice (cx . tcx , cx . tcx . types . u8) . into ()]) { span_lint_and_then (cx , IMPL_HASH_BORROW_WITH_STR_AND_BYTES , of_trait . trait_ref . path . span , "the semantics of `Borrow<T>` around `Hash` can't be satisfied when both `Borrow<str>` and `Borrow<[u8]>` are implemented" , | diag | { diag . note ("the `Borrow` semantics require that `Hash` must behave the same for all implementations of Borrow<T>") ; diag . note ("however, the hash implementations of a string (`str`) and the bytes of a string `[u8]` do not behave the same ...") ; diag . note ("... as (`hash(\"abc\") != hash(\"abc\".as_bytes())`") ; diag . help ("consider either removing one of the  `Borrow` implementations (`Borrow<str>` or `Borrow<[u8]>`) ...") ; diag . help ("... or not implementing `Hash` for this type") ; } ,) ; } } }
+};
+}

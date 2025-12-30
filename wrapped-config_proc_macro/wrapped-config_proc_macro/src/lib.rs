@@ -1,0 +1,68 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcrate_item_structuse_37.rs");
+include!("depcrate_item_enumconfig_value_of_variant.rs");
+include!("depcrate_utilsis_unit.rs");
+include!("depcrate_attrsis_attr_name_value.rs");
+include!("depcrate_attrsget_name_value_str_lit.rs");
+include!("depcrate_item_enumuse_19.rs");
+include!("depcrate_attrsfind_doc_hint.rs");
+include!("depcrate_attrsconfig_value.rs");
+include!("depcrate_attrsis_unstable_variant.rs");
+include!("depcrate_config_typeuse_16.rs");
+include!("depcrate_item_enumvariants.rs");
+include!("depcrate_item_enumimpl_doc_hint.rs");
+include!("depcrate_item_enumimpl_serde.rs");
+include!("depcrate_attrsany_unstable_variant.rs");
+include!("depcrate_utilsuse_41.rs");
+include!("depcraterustfmt_only_ci_test.rs");
+include!("depcrate_item_enumimpl_from_str.rs");
+include!("depcrate_item_enumdoc_hint_of_variant.rs");
+include!("depcrate_attrsis_doc_hint.rs");
+include!("depcrate_config_typeuse_15.rs");
+include!("depcrate_attrsfind_config_value.rs");
+include!("depcrate_config_typeuse_14.rs");
+include!("depcrate_config_typedefine_config_type.rs");
+include!("depcrate_item_enumimpl_deserialize.rs");
+include!("depcrate_attrsis_attr_path.rs");
+include!("depcrate_item_enumunstable_of_variant.rs");
+include!("depcrate_utilsuse_40.rs");
+include!("depcrateutils.rs");
+include!("depcrate_item_enumuse_23.rs");
+include!("depcrate_utilsdebug_with_rustfmt.rs");
+include!("depcrateuse_45.rs");
+include!("depcrate_attrsdoc_hint.rs");
+include!("depcrateitem_enum.rs");
+include!("depcrate_item_enumuse_21.rs");
+include!("depcrateattrs.rs");
+include!("depcrate_item_structdefine_config_type_on_struct.rs");
+include!("depcrateitem_struct.rs");
+include!("depcrateuse_46.rs");
+include!("depcrate_item_enumimpl_display.rs");
+include!("depcrate_attrsis_config_value.rs");
+include!("depcrateconfig_type.rs");
+include!("depcrate_item_enumuse_22.rs");
+include!("depcrate_item_enumfields_in_variant.rs");
+include!("depcrate_utilsfold_quote.rs");
+include!("depcrateuse_47.rs");
+include!("depcratenightly_only_test.rs");
+include!("depcratestable_only_test.rs");
+include!("depcrate_item_enumdefine_config_type_on_enum.rs");
+include!("depcrate_item_enumuse_20.rs");
+include!("depcrate_item_enumprocess_variant.rs");
+include!("modcrate_attrs.rs");
+include!("modcrate_utils.rs");
+include!("modcrate_item_struct.rs");
+include!("modcrate_config_type.rs");
+include!("modcrate_item_enum.rs");
+include!("modcrate.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate_attrs!();
+    Modcrate_utils!();
+    Modcrate_item_struct!();
+    Modcrate_config_type!();
+    Modcrate_item_enum!();
+    Modcrate!();
+}

@@ -1,0 +1,9 @@
+// Generated macro for impl_73 (impl)
+macro_rules! Depcrate_endpointimpl_73 {
+() => {
+// Module: crate::endpoint
+// Provides: {"impl_73"}
+// Dependencies: {}
+impl EndpointInner { pub (crate) fn accept (& self , incoming : proto :: Incoming , server_config : Option < Arc < ServerConfig > > ,) -> Result < Connecting , ConnectionError > { let mut state = self . state . lock () . unwrap () ; let mut response_buffer = Vec :: new () ; let now = state . runtime . now () ; match state . inner . accept (incoming , now , & mut response_buffer , server_config) { Ok ((handle , conn)) => { state . stats . accepted_handshakes += 1 ; let sender = state . socket . create_sender () ; let runtime = state . runtime . clone () ; Ok (state . recv_state . connections . insert (handle , conn , sender , runtime)) } Err (error) => { if let Some (transmit) = error . response { respond (transmit , & response_buffer , & mut state . sender) ; } Err (error . cause) } } } pub (crate) fn refuse (& self , incoming : proto :: Incoming) { let mut state = self . state . lock () . unwrap () ; state . stats . refused_handshakes += 1 ; let mut response_buffer = Vec :: new () ; let transmit = state . inner . refuse (incoming , & mut response_buffer) ; respond (transmit , & response_buffer , & mut state . sender) ; } pub (crate) fn retry (& self , incoming : proto :: Incoming) -> Result < () , proto :: RetryError > { let mut state = self . state . lock () . unwrap () ; let mut response_buffer = Vec :: new () ; let transmit = state . inner . retry (incoming , & mut response_buffer) ? ; respond (transmit , & response_buffer , & mut state . sender) ; Ok (()) } pub (crate) fn ignore (& self , incoming : proto :: Incoming) { let mut state = self . state . lock () . unwrap () ; state . stats . ignored_handshakes += 1 ; state . inner . ignore (incoming) ; } }
+};
+}

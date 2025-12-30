@@ -1,0 +1,9 @@
+// Generated macro for provide (function)
+macro_rules! Depcrate_collectprovide {
+() => {
+// Module: crate::collect
+// Provides: {"provide"}
+// Dependencies: {}
+# [doc = " Adds query implementations to the [Providers] vtable, see [`rustc_middle::query`]"] pub (crate) fn provide (providers : & mut Providers) { resolve_bound_vars :: provide (providers) ; * providers = Providers { type_of : type_of :: type_of , type_of_opaque : type_of :: type_of_opaque , type_of_opaque_hir_typeck : type_of :: type_of_opaque_hir_typeck , type_alias_is_lazy : type_of :: type_alias_is_lazy , item_bounds : item_bounds :: item_bounds , explicit_item_bounds : item_bounds :: explicit_item_bounds , item_self_bounds : item_bounds :: item_self_bounds , explicit_item_self_bounds : item_bounds :: explicit_item_self_bounds , item_non_self_bounds : item_bounds :: item_non_self_bounds , impl_super_outlives : item_bounds :: impl_super_outlives , generics_of : generics_of :: generics_of , predicates_of : predicates_of :: predicates_of , explicit_predicates_of : predicates_of :: explicit_predicates_of , explicit_super_predicates_of : predicates_of :: explicit_super_predicates_of , explicit_implied_predicates_of : predicates_of :: explicit_implied_predicates_of , explicit_supertraits_containing_assoc_item : predicates_of :: explicit_supertraits_containing_assoc_item , trait_explicit_predicates_and_bounds : predicates_of :: trait_explicit_predicates_and_bounds , const_conditions : predicates_of :: const_conditions , explicit_implied_const_bounds : predicates_of :: explicit_implied_const_bounds , type_param_predicates : predicates_of :: type_param_predicates , trait_def , adt_def , fn_sig , impl_trait_header , coroutine_kind , coroutine_for_closure , opaque_ty_origin , rendered_precise_capturing_args , const_param_default , anon_const_kind , .. * providers } ; }
+};
+}

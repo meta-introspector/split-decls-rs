@@ -1,0 +1,9 @@
+// Generated macro for define_client_handles (macro)
+macro_rules! Depcrate_bridge_clientdefine_client_handles {
+() => {
+// Module: crate::bridge::client
+// Provides: {"define_client_handles"}
+// Dependencies: {}
+macro_rules ! define_client_handles { ('owned : $ ($ oty : ident ,) * 'interned : $ ($ ity : ident ,) *) => { # [repr (C)] # [allow (non_snake_case)] pub (super) struct HandleCounters { $ (pub (super) $ oty : AtomicU32 ,) * $ (pub (super) $ ity : AtomicU32 ,) * } static COUNTERS : HandleCounters = HandleCounters { $ ($ oty : AtomicU32 :: new (1) ,) * $ ($ ity : AtomicU32 :: new (1) ,) * } ; $ (pub (crate) struct $ oty { handle : handle :: Handle , _marker : PhantomData <* mut () >, } impl Drop for $ oty { fn drop (& mut self) { $ oty { handle : self . handle , _marker : PhantomData , } . drop () ; } } impl < S > Encode < S > for $ oty { fn encode (self , w : & mut Writer , s : & mut S) { mem :: ManuallyDrop :: new (self) . handle . encode (w , s) ; } } impl < S > Encode < S > for &$ oty { fn encode (self , w : & mut Writer , s : & mut S) { self . handle . encode (w , s) ; } } impl < S > Encode < S > for & mut $ oty { fn encode (self , w : & mut Writer , s : & mut S) { self . handle . encode (w , s) ; } } impl < S > DecodeMut <'_ , '_ , S > for $ oty { fn decode (r : & mut Reader <'_ >, s : & mut S) -> Self { $ oty { handle : handle :: Handle :: decode (r , s) , _marker : PhantomData , } } }) * $ (# [derive (Copy , Clone , PartialEq , Eq , Hash)] pub (crate) struct $ ity { handle : handle :: Handle , _marker : PhantomData <* mut () >, } impl < S > Encode < S > for $ ity { fn encode (self , w : & mut Writer , s : & mut S) { self . handle . encode (w , s) ; } } impl < S > DecodeMut <'_ , '_ , S > for $ ity { fn decode (r : & mut Reader <'_ >, s : & mut S) -> Self { $ ity { handle : handle :: Handle :: decode (r , s) , _marker : PhantomData , } } }) * } }
+};
+}

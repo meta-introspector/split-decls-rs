@@ -1,0 +1,56 @@
+// Generated module macro for crate::stm32f429::rcc
+macro_rules! Modcrate_stm32f429_rcc {
+() => {
+        Depcrate_stm32f429_rccRegisterBlock!();
+        Depcrate_stm32f429_rccCR!();
+        Depcrate_stm32f429_rcccr!();
+        Depcrate_stm32f429_rccPLLCFGR!();
+        Depcrate_stm32f429_rccpllcfgr!();
+        Depcrate_stm32f429_rccCFGR!();
+        Depcrate_stm32f429_rcccfgr!();
+        Depcrate_stm32f429_rccCIR!();
+        Depcrate_stm32f429_rcccir!();
+        Depcrate_stm32f429_rccAHB1RSTR!();
+        Depcrate_stm32f429_rccahb1rstr!();
+        Depcrate_stm32f429_rccAHB2RSTR!();
+        Depcrate_stm32f429_rccahb2rstr!();
+        Depcrate_stm32f429_rccAHB3RSTR!();
+        Depcrate_stm32f429_rccahb3rstr!();
+        Depcrate_stm32f429_rccAPB1RSTR!();
+        Depcrate_stm32f429_rccapb1rstr!();
+        Depcrate_stm32f429_rccAPB2RSTR!();
+        Depcrate_stm32f429_rccapb2rstr!();
+        Depcrate_stm32f429_rccAHB1ENR!();
+        Depcrate_stm32f429_rccahb1enr!();
+        Depcrate_stm32f429_rccAHB2ENR!();
+        Depcrate_stm32f429_rccahb2enr!();
+        Depcrate_stm32f429_rccAHB3ENR!();
+        Depcrate_stm32f429_rccahb3enr!();
+        Depcrate_stm32f429_rccAPB1ENR!();
+        Depcrate_stm32f429_rccapb1enr!();
+        Depcrate_stm32f429_rccAPB2ENR!();
+        Depcrate_stm32f429_rccapb2enr!();
+        Depcrate_stm32f429_rccAHB1LPENR!();
+        Depcrate_stm32f429_rccahb1lpenr!();
+        Depcrate_stm32f429_rccAHB2LPENR!();
+        Depcrate_stm32f429_rccahb2lpenr!();
+        Depcrate_stm32f429_rccAHB3LPENR!();
+        Depcrate_stm32f429_rccahb3lpenr!();
+        Depcrate_stm32f429_rccAPB1LPENR!();
+        Depcrate_stm32f429_rccapb1lpenr!();
+        Depcrate_stm32f429_rccAPB2LPENR!();
+        Depcrate_stm32f429_rccapb2lpenr!();
+        Depcrate_stm32f429_rccBDCR!();
+        Depcrate_stm32f429_rccbdcr!();
+        Depcrate_stm32f429_rccCSR!();
+        Depcrate_stm32f429_rcccsr!();
+        Depcrate_stm32f429_rccSSCGR!();
+        Depcrate_stm32f429_rccsscgr!();
+        Depcrate_stm32f429_rccPLLI2SCFGR!();
+        Depcrate_stm32f429_rccplli2scfgr!();
+        Depcrate_stm32f429_rccDCKCFGR!();
+        Depcrate_stm32f429_rccdckcfgr!();
+        Depcrate_stm32f429_rccPLLSAICFGR!();
+        Depcrate_stm32f429_rccpllsaicfgr!();
+    };
+}

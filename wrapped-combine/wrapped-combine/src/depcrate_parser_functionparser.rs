@@ -1,0 +1,9 @@
+// Generated macro for parser (function)
+macro_rules! Depcrate_parser_functionparser {
+() => {
+// Module: crate::parser::function
+// Provides: {"parser"}
+// Dependencies: {}
+# [doc = " Wraps a function, turning it into a parser."] # [doc = ""] # [doc = " Mainly needed to turn closures into parsers as function types can be casted to function pointers"] # [doc = " to make them usable as a parser."] # [doc = ""] # [doc = " ```"] # [doc = " extern crate combine;"] # [doc = " # use combine::*;"] # [doc = " # use combine::parser::char::digit;"] # [doc = " # use combine::error::{Commit, StreamError};"] # [doc = " # use combine::stream::easy;"] # [doc = " # fn main() {"] # [doc = " let mut even_digit = parser(|input| {"] # [doc = "     // Help type inference out"] # [doc = "     let _: &mut easy::Stream<&str> = input;"] # [doc = "     let position = input.position();"] # [doc = "     let (char_digit, committed) = digit().parse_stream(input).into_result()?;"] # [doc = "     let d = (char_digit as i32) - ('0' as i32);"] # [doc = "     if d % 2 == 0 {"] # [doc = "         Ok((d, committed))"] # [doc = "     }"] # [doc = "     else {"] # [doc = "         //Return an empty error since we only tested the first token of the stream"] # [doc = "         let errors = easy::Errors::new("] # [doc = "             position,"] # [doc = "             StreamError::expected(\"even number\")"] # [doc = "         );"] # [doc = "         Err(Commit::Peek(errors.into()))"] # [doc = "     }"] # [doc = " });"] # [doc = " let result = even_digit"] # [doc = "     .easy_parse(\"8\")"] # [doc = "     .map(|x| x.0);"] # [doc = " assert_eq!(result, Ok(8));"] # [doc = " # }"] # [doc = " ```"] pub fn parser < Input , O , F > (f : F) -> FnParser < Input , F > where Input : Stream , F : FnMut (& mut Input) -> StdParseResult < O , Input > , { FnParser (f , PhantomData) }
+};
+}

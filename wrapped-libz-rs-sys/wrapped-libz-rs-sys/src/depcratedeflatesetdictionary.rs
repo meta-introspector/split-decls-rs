@@ -1,0 +1,9 @@
+// Generated macro for deflateSetDictionary (function)
+macro_rules! DepcratedeflateSetDictionary {
+() => {
+// Module: crate
+// Provides: {"deflateSetDictionary"}
+// Dependencies: {}
+# [doc = " Initializes the compression dictionary from the given byte sequence without producing any compressed output."] # [doc = ""] # [doc = " This function may be called after [`deflateInit_`], [`deflateInit2_`] or [`deflateReset`]) and before the first call of [`deflate`]."] # [doc = ""] # [doc = " # Returns"] # [doc = ""] # [doc = " - [`Z_OK`] if success"] # [doc = " - [`Z_STREAM_ERROR`] if the stream state was inconsistent"] # [doc = ""] # [doc = " # Safety"] # [doc = ""] # [doc = " The caller must guarantee that"] # [doc = ""] # [doc = " * Either"] # [doc = "     - `strm` is `NULL`"] # [doc = "     - `strm` satisfies the requirements of `&mut *strm` and was initialized with [`deflateInit_`] or similar"] # [doc = " * Either"] # [doc = "     - `dictionary` is `NULL`"] # [doc = "     - `dictionary` and `dictLength` satisfy the requirements of [`core::slice::from_raw_parts_mut::<u8>`]"] # [cfg_attr (feature = "export-symbols" , export_name = prefix ! (deflateSetDictionary))] pub unsafe extern "C-unwind" fn deflateSetDictionary (strm : z_streamp , dictionary : * const Bytef , dictLength : uInt ,) -> c_int { let Some (dictionary) = (unsafe { slice_from_raw_parts (dictionary , dictLength as usize) }) else { return ReturnCode :: StreamError as _ ; } ; match DeflateStream :: from_stream_mut (strm) { Some (stream) => zlib_rs :: deflate :: set_dictionary (stream , dictionary) as _ , None => ReturnCode :: StreamError as _ , } }
+};
+}

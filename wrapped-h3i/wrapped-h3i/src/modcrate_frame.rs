@@ -1,0 +1,47 @@
+// Generated module macro for crate::frame
+macro_rules! Modcrate_frame {
+() => {
+        Depcrate_frameuse_214!();
+        Depcrate_frameuse_215!();
+        Depcrate_frameuse_216!();
+        Depcrate_frameuse_217!();
+        Depcrate_frameuse_218!();
+        Depcrate_frameuse_219!();
+        Depcrate_frameuse_220!();
+        Depcrate_frameuse_221!();
+        Depcrate_frameuse_222!();
+        Depcrate_frameuse_223!();
+        Depcrate_frameuse_224!();
+        Depcrate_frameuse_225!();
+        Depcrate_frameuse_226!();
+        Depcrate_frameuse_227!();
+        Depcrate_frameuse_228!();
+        Depcrate_frameBoxError!();
+        Depcrate_frameH3iFrame!();
+        Depcrate_frameimpl_231!();
+        Depcrate_frameimpl_232!();
+        Depcrate_frameimpl_233!();
+        Depcrate_frameimpl_234!();
+        Depcrate_frameHeaderMap!();
+        Depcrate_frameEnrichedHeaders!();
+        Depcrate_frameSerializableHeader!();
+        Depcrate_frameimpl_238!();
+        Depcrate_frameimpl_239!();
+        Depcrate_frameimpl_240!();
+        Depcrate_frameimpl_241!();
+        Depcrate_frameimpl_242!();
+        Depcrate_frameimpl_243!();
+        Depcrate_frameResetStream!();
+        Depcrate_frameframe_name!();
+        Depcrate_frameSerializableQFrame!();
+        Depcrate_frameimpl_247!();
+        Depcrate_frameCustomEquivalenceHandler!();
+        Depcrate_frameComparator!();
+        Depcrate_frameimpl_250!();
+        Depcrate_frameCloseTriggerFrame!();
+        Depcrate_frameimpl_252!();
+        Depcrate_frameimpl_253!();
+        Depcrate_frameimpl_254!();
+        Depcrate_frametests!();
+    };
+}

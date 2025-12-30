@@ -1,0 +1,41 @@
+// Generated module macro for crate::serde
+macro_rules! Modcrate_serde {
+() => {
+        Depcrate_serdeuse_190!();
+        Depcrate_serdeuse_191!();
+        Depcrate_serdeuse_192!();
+        Depcrate_serdeuse_193!();
+        Depcrate_serdeuse_194!();
+        Depcrate_serdeuse_195!();
+        Depcrate_serdeuse_196!();
+        Depcrate_serdeuse_197!();
+        Depcrate_serdeuse_198!();
+        Depcrate_serdeuse_199!();
+        Depcrate_serdeuse_200!();
+        Depcrate_serdeuse_201!();
+        Depcrate_serdeuse_202!();
+        Depcrate_serdeuse_203!();
+        Depcrate_serdeuse_204!();
+        Depcrate_serdeuse_205!();
+        Depcrate_serdeuse_206!();
+        Depcrate_serdeuse_207!();
+        Depcrate_serdeByteStrVisitor!();
+        Depcrate_serdeimpl_209!();
+        Depcrate_serdeimpl_210!();
+        Depcrate_serdeimpl_211!();
+        Depcrate_serdeimpl_212!();
+        Depcrate_serdeimpl_213!();
+        Depcrate_serdeimpl_214!();
+        Depcrate_serdeimpl_215!();
+        Depcrate_serdeimpl_216!();
+        Depcrate_serdeimpl_217!();
+        Depcrate_serdeimpl_218!();
+        Depcrate_serdeimpl_219!();
+        Depcrate_serdeimpl_220!();
+        Depcrate_serdeimpl_221!();
+        Depcrate_serdeimpl_222!();
+        Depcrate_serdetestdata!();
+        Depcrate_serdetests!();
+        Depcrate_serdetests_zerovec!();
+    };
+}

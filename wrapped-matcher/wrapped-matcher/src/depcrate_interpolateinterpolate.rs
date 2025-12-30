@@ -1,0 +1,9 @@
+// Generated macro for interpolate (function)
+macro_rules! Depcrate_interpolateinterpolate {
+() => {
+// Module: crate::interpolate
+// Provides: {"interpolate"}
+// Dependencies: {}
+# [doc = " Interpolate capture references in `replacement` and write the interpolation"] # [doc = " result to `dst`. References in `replacement` take the form of $N or $name,"] # [doc = " where `N` is a capture group index and `name` is a capture group name. The"] # [doc = " function provided, `name_to_index`, maps capture group names to indices."] # [doc = ""] # [doc = " The `append` function given is responsible for writing the replacement"] # [doc = " to the `dst` buffer. That is, it is called with the capture group index"] # [doc = " of a capture group reference and is expected to resolve the index to its"] # [doc = " corresponding matched text. If no such match exists, then `append` should"] # [doc = " not write anything to its given buffer."] # [inline] pub fn interpolate < A , N > (mut replacement : & [u8] , mut append : A , mut name_to_index : N , dst : & mut Vec < u8 > ,) where A : FnMut (usize , & mut Vec < u8 >) , N : FnMut (& str) -> Option < usize > , { while ! replacement . is_empty () { match memchr (b'$' , replacement) { None => break , Some (i) => { dst . extend (& replacement [.. i]) ; replacement = & replacement [i ..] ; } } if replacement . get (1) . map_or (false , | & b | b == b'$') { dst . push (b'$') ; replacement = & replacement [2 ..] ; continue ; } debug_assert ! (! replacement . is_empty ()) ; let cap_ref = match find_cap_ref (replacement) { Some (cap_ref) => cap_ref , None => { dst . push (b'$') ; replacement = & replacement [1 ..] ; continue ; } } ; replacement = & replacement [cap_ref . end ..] ; match cap_ref . cap { Ref :: Number (i) => append (i , dst) , Ref :: Named (name) => { if let Some (i) = name_to_index (name) { append (i , dst) ; } } } } dst . extend (replacement) ; }
+};
+}

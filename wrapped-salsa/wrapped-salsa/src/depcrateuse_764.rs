@@ -4,6 +4,6 @@ macro_rules! Depcrateuse_764 {
 // Module: crate
 // Provides: {"use_764"}
 // Dependencies: {}
-pub use self :: revision :: Revision ;
+pub use self :: update :: Update ;
 };
 }

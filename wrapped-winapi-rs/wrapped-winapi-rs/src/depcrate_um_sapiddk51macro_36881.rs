@@ -1,0 +1,9 @@
+// Generated macro for macro_36881 (macro)
+macro_rules! Depcrate_um_sapiddk51macro_36881 {
+() => {
+// Module: crate::um::sapiddk51
+// Provides: {"macro_36881"}
+// Dependencies: {}
+RIDL ! { # [uuid (0x3b414aec , 0x720c , 0x4883 , 0xb9 , 0xef , 0x17 , 0x8c , 0xd3 , 0x94 , 0xfb , 0x3a)] interface ISpSREngineSite (ISpSREngineSiteVtbl) : IUnknown (IUnknownVtbl) { fn Read (pv : * mut c_void , cb : ULONG , pcbRead : * mut ULONG ,) -> HRESULT , fn DataAvailable (pcb : * mut ULONG ,) -> HRESULT , fn SetBufferNotifySize (cbSize : ULONG ,) -> HRESULT , fn ParseFromTransitions (pParseInfo : * const SPPARSEINFO , ppNewPhrase : * mut * mut ISpPhraseBuilder ,) -> HRESULT , fn Recognition (pResultInfo : * const SPRECORESULTINFO ,) -> HRESULT , fn AddEvent (pEvent : * const SPEVENT , hSAPIRecoContext : SPRECOCONTEXTHANDLE ,) -> HRESULT , fn Synchronize (ullProcessedThruPos : ULONGLONG ,) -> HRESULT , fn GetWordInfo (pWordEntry : * mut SPWORDENTRY , Options : SPWORDINFOOPT ,) -> HRESULT , fn SetWordClientContext (hWord : SPWORDHANDLE , pvClientContext : * mut c_void ,) -> HRESULT , fn GetRuleInfo (pRuleEntry : * mut SPRULEENTRY , Options : SPRULEINFOOPT ,) -> HRESULT , fn SetRuleClientContext (hRule : SPRULEHANDLE , pvClientContext : * mut c_void ,) -> HRESULT , fn GetStateInfo (hState : SPSTATEHANDLE , pStateInfo : * mut SPSTATEINFO ,) -> HRESULT , fn GetResource (hRule : SPRULEHANDLE , pszResourceName : LPCWSTR , ppCoMemResource : * mut LPWSTR ,) -> HRESULT , fn GetTransitionProperty (ID : SPTRANSITIONID , ppCoMemProperty : * mut * mut SPTRANSITIONPROPERTY ,) -> HRESULT , fn IsAlternate (hRule : SPRULEHANDLE , hAltRule : SPRULEHANDLE ,) -> HRESULT , fn GetMaxAlternates (hRule : SPRULEHANDLE , pulNumAlts : * mut ULONG ,) -> HRESULT , fn GetContextMaxAlternates (hContext : SPRECOCONTEXTHANDLE , pulNumAlts : * mut ULONG ,) -> HRESULT , fn UpdateRecoPos (ullCurrentRecoPos : ULONGLONG ,) -> HRESULT , } }
+};
+}

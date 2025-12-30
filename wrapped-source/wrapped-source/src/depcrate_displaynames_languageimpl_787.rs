@@ -1,0 +1,9 @@
+// Generated macro for impl_787 (impl)
+macro_rules! Depcrate_displaynames_languageimpl_787 {
+() => {
+// Module: crate::displaynames::language
+// Provides: {"impl_787"}
+// Dependencies: {}
+impl From < & cldr_serde :: displaynames :: language :: Resource > for LanguageDisplayNames < 'static > { fn from (other : & cldr_serde :: displaynames :: language :: Resource) -> Self { let mut names = BTreeMap :: new () ; let mut short_names = BTreeMap :: new () ; let mut long_names = BTreeMap :: new () ; let mut menu_names = BTreeMap :: new () ; for (key , value) in other . main . value . localedisplaynames . languages . iter () { if let Some (lang) = key . strip_suffix (ALT_SHORT_SUBSTRING) { if let Ok (lang) = lang . parse :: < Language > () { short_names . insert (lang . to_tinystr () , value . as_ref ()) ; } } else if let Some (lang) = key . strip_suffix (ALT_LONG_SUBSTRING) { if let Ok (lang) = lang . parse :: < Language > () { long_names . insert (lang . to_tinystr () , value . as_ref ()) ; } } else if let Some (lang) = key . strip_suffix (ALT_MENU_SUBSTRING) { if let Ok (lang) = lang . parse :: < Language > () { menu_names . insert (lang . to_tinystr () , value . as_ref ()) ; } } else if let Ok (lang) = key . parse :: < Language > () { names . insert (lang . to_tinystr () , value . as_ref ()) ; } } Self { names : names . into_iter () . filter (| & (k , v) | k != v) . map (| (k , v) | (k . to_unvalidated () , v)) . collect () , short_names : short_names . into_iter () . filter (| & (k , v) | k != v) . map (| (k , v) | (k . to_unvalidated () , v)) . collect () , long_names : long_names . into_iter () . filter (| & (k , v) | k != v) . map (| (k , v) | (k . to_unvalidated () , v)) . collect () , menu_names : menu_names . into_iter () . filter (| & (k , v) | k != v) . map (| (k , v) | (k . to_unvalidated () , v)) . collect () , } } }
+};
+}

@@ -1,0 +1,44 @@
+// Generated module macro for crate::chinese_based
+macro_rules! Modcrate_chinese_based {
+() => {
+        Depcrate_chinese_baseduse_21!();
+        Depcrate_chinese_baseduse_22!();
+        Depcrate_chinese_baseduse_23!();
+        Depcrate_chinese_baseduse_24!();
+        Depcrate_chinese_baseduse_25!();
+        Depcrate_chinese_baseduse_26!();
+        Depcrate_chinese_baseduse_27!();
+        Depcrate_chinese_basedMAX_ITERS_FOR_MONTHS_OF_YEAR!();
+        Depcrate_chinese_basedWELL_BEHAVED_ASTRONOMICAL_RANGE!();
+        Depcrate_chinese_basedChineseBased!();
+        Depcrate_chinese_basedextended_from_iso!();
+        Depcrate_chinese_basediso_from_extended!();
+        Depcrate_chinese_basedChinese!();
+        Depcrate_chinese_basedDangi!();
+        Depcrate_chinese_basedimpl_35!();
+        Depcrate_chinese_basedimpl_36!();
+        Depcrate_chinese_basedYearBounds!();
+        Depcrate_chinese_basedimpl_38!();
+        Depcrate_chinese_basedmajor_solar_term_from_fixed!();
+        Depcrate_chinese_basednew_moon_on_or_after!();
+        Depcrate_chinese_basednew_moon_before!();
+        Depcrate_chinese_basedmidnight!();
+        Depcrate_chinese_basednew_year_in_sui!();
+        Depcrate_chinese_basedbind_winter_solstice!();
+        Depcrate_chinese_basedwinter_solstice_on_or_before!();
+        Depcrate_chinese_basednew_year_on_or_before_fixed_date!();
+        Depcrate_chinese_basedfixed_mid_year_from_year!();
+        Depcrate_chinese_basedis_leap_year!();
+        Depcrate_chinese_basedlast_month_day_in_year!();
+        Depcrate_chinese_baseddays_in_provided_year!();
+        Depcrate_chinese_basedChineseFromFixedResult!();
+        Depcrate_chinese_basedchinese_based_date_from_fixed!();
+        Depcrate_chinese_basedget_leap_month_from_new_year!();
+        Depcrate_chinese_basedmonth_days!();
+        Depcrate_chinese_baseddays_in_month!();
+        Depcrate_chinese_baseddays_in_prev_year!();
+        Depcrate_chinese_basedmonth_structure_for_year!();
+        Depcrate_chinese_baseddays_until_month!();
+        Depcrate_chinese_basedtest!();
+    };
+}

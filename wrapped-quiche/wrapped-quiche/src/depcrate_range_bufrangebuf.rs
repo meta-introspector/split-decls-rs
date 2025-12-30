@@ -1,0 +1,9 @@
+// Generated macro for RangeBuf (struct)
+macro_rules! Depcrate_range_bufRangeBuf {
+() => {
+// Module: crate::range_buf
+// Provides: {"RangeBuf"}
+// Dependencies: {}
+# [doc = " Buffer holding data at a specific offset."] # [doc = ""] # [doc = " The data is stored in a `Vec<u8>` in such a way that it can be shared"] # [doc = " between multiple `RangeBuf` objects."] # [doc = ""] # [doc = " Each `RangeBuf` will have its own view of that buffer, where the `start`"] # [doc = " value indicates the initial offset within the `Vec`, and `len` indicates the"] # [doc = " number of bytes, starting from `start` that are included."] # [doc = ""] # [doc = " In addition, `pos` indicates the current offset within the `Vec`, starting"] # [doc = " from the very beginning of the `Vec`."] # [doc = ""] # [doc = " Finally, `off` is the starting offset for the specific `RangeBuf` within the"] # [doc = " stream the buffer belongs to."] # [derive (Clone , Debug , Default)] pub struct RangeBuf < F = DefaultBufFactory > where F : BufFactory , { # [doc = " The internal buffer holding the data."] # [doc = ""] # [doc = " To avoid needless allocations when a RangeBuf is split, this field"] # [doc = " should be reference-counted so it can be shared between multiple"] # [doc = " RangeBuf objects, and sliced using the `start` and `len` values."] pub (crate) data : F :: Buf , # [doc = " The initial offset within the internal buffer."] pub (crate) start : usize , # [doc = " The current offset within the internal buffer."] pub (crate) pos : usize , # [doc = " The number of bytes in the buffer, from the initial offset."] pub (crate) len : usize , # [doc = " The offset of the buffer within a stream."] pub (crate) off : u64 , # [doc = " Whether this contains the final byte in the stream."] pub (crate) fin : bool , _bf : PhantomData < F > , }
+};
+}

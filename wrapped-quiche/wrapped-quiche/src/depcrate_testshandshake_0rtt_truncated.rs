@@ -1,0 +1,9 @@
+// Generated macro for handshake_0rtt_truncated (function)
+macro_rules! Depcrate_testshandshake_0rtt_truncated {
+() => {
+// Module: crate::tests
+// Provides: {"handshake_0rtt_truncated"}
+// Dependencies: {}
+# [cfg (not (feature = "openssl"))] # [rstest] fn handshake_0rtt_truncated (# [values ("cubic" , "bbr2" , "bbr2_gcongestion")] cc_algorithm_name : & str ,) { let mut buf = [0 ; 65535] ; let mut config = Config :: new (PROTOCOL_VERSION) . unwrap () ; assert_eq ! (config . set_cc_algorithm_name (cc_algorithm_name) , Ok (())) ; config . load_cert_chain_from_pem_file ("examples/cert.crt") . unwrap () ; config . load_priv_key_from_pem_file ("examples/cert.key") . unwrap () ; config . set_application_protos (& [b"proto1" , b"proto2"]) . unwrap () ; config . set_initial_max_data (30) ; config . set_initial_max_stream_data_bidi_local (15) ; config . set_initial_max_stream_data_bidi_remote (15) ; config . set_initial_max_streams_bidi (3) ; config . enable_early_data () ; config . verify_peer (false) ; let mut pipe = test_utils :: Pipe :: with_config (& mut config) . unwrap () ; assert_eq ! (pipe . handshake () , Ok (())) ; let session = pipe . client . session () . unwrap () ; let mut pipe = test_utils :: Pipe :: with_config (& mut config) . unwrap () ; assert_eq ! (pipe . client . set_session (session) , Ok (())) ; pipe . client . send (& mut buf) . unwrap () ; let pkt_type = Type :: ZeroRTT ; let frames = [frame :: Frame :: Stream { stream_id : 4 , data : < RangeBuf > :: from (b"aaaaa" , 0 , true) , }] ; let len = test_utils :: encode_pkt (& mut pipe . client , pkt_type , & frames , & mut buf) . unwrap () ; let mut zrtt = buf [.. len - 1] . to_vec () ; assert_eq ! (pipe . server_recv (& mut zrtt) , Err (Error :: InvalidPacket)) ; assert_eq ! (pipe . server . undecryptable_pkts . len () , 0) ; assert ! (pipe . server . is_closed ()) ; }
+};
+}

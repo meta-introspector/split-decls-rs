@@ -1,0 +1,49 @@
+// Generated module macro for crate::quic
+macro_rules! Modcrate_quic {
+() => {
+        Depcrate_quicuse_405!();
+        Depcrate_quicuse_406!();
+        Depcrate_quicuse_407!();
+        Depcrate_quicuse_408!();
+        Depcrate_quicuse_409!();
+        Depcrate_quicuse_410!();
+        Depcrate_quicuse_411!();
+        Depcrate_quicuse_412!();
+        Depcrate_quicuse_413!();
+        Depcrate_quicuse_414!();
+        Depcrate_quicuse_415!();
+        Depcrate_quicuse_416!();
+        Depcrate_quicuse_417!();
+        Depcrate_quicuse_418!();
+        Depcrate_quicuse_419!();
+        Depcrate_quicuse_420!();
+        Depcrate_quicuse_421!();
+        Depcrate_quicaddr_validation_token!();
+        Depcrate_quicconnection!();
+        Depcrate_quichooks!();
+        Depcrate_quicio!();
+        Depcrate_quicraw!();
+        Depcrate_quicrouter!();
+        Depcrate_quicuse_780!();
+        Depcrate_quicuse_781!();
+        Depcrate_quicuse_782!();
+        Depcrate_quicuse_783!();
+        Depcrate_quicuse_784!();
+        Depcrate_quicuse_785!();
+        Depcrate_quicuse_786!();
+        Depcrate_quicuse_787!();
+        Depcrate_quicuse_788!();
+        Depcrate_quicuse_789!();
+        Depcrate_quicuse_790!();
+        Depcrate_quicuse_791!();
+        Depcrate_quicuse_792!();
+        Depcrate_quicuse_793!();
+        Depcrate_quicuse_794!();
+        Depcrate_quicQuicheConnection!();
+        Depcrate_quicQuicheConnection!();
+        Depcrate_quicmake_qlog_writer!();
+        Depcrate_quicconnect!();
+        Depcrate_quicconnect_with_config!();
+        Depcrate_quicstart_listener!();
+    };
+}

@@ -1,0 +1,9 @@
+// Generated macro for impl_335 (impl)
+macro_rules! Depcrate_zlib_readimpl_335 {
+() => {
+// Module: crate::zlib::read
+// Provides: {"impl_335"}
+// Dependencies: {}
+impl < R : Read > ZlibDecoder < R > { # [doc = " Creates a new decoder which will decompress data read from the given"] # [doc = " stream."] pub fn new (r : R) -> ZlibDecoder < R > { ZlibDecoder :: new_with_buf (r , vec ! [0 ; 32 * 1024]) } # [doc = " Creates a new decoder which will decompress data read from the given"] # [doc = " stream `r`, using `buf` as backing to speed up reading."] # [doc = ""] # [doc = " Note that the specified buffer will only be used up to its current"] # [doc = " length. The buffer's capacity will also not grow over time."] pub fn new_with_buf (r : R , buf : Vec < u8 >) -> ZlibDecoder < R > { ZlibDecoder { inner : bufread :: ZlibDecoder :: new (BufReader :: with_buf (buf , r)) , } } # [doc = " Creates a new decoder which will decompress data read from the given"] # [doc = " stream `r`, along with `decompression` settings."] pub fn new_with_decompress (r : R , decompression : Decompress) -> ZlibDecoder < R > { ZlibDecoder :: new_with_decompress_and_buf (r , vec ! [0 ; 32 * 1024] , decompression) } # [doc = " Creates a new decoder which will decompress data read from the given"] # [doc = " stream `r`, using `buf` as backing to speed up reading,"] # [doc = " along with `decompression` settings to configure decoder."] # [doc = ""] # [doc = " Note that the specified buffer will only be used up to its current"] # [doc = " length. The buffer's capacity will also not grow over time."] pub fn new_with_decompress_and_buf (r : R , buf : Vec < u8 > , decompression : Decompress ,) -> ZlibDecoder < R > { ZlibDecoder { inner : bufread :: ZlibDecoder :: new_with_decompress (BufReader :: with_buf (buf , r) , decompression ,) , } } }
+};
+}

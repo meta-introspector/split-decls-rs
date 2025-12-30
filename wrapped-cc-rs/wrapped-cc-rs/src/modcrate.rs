@@ -1,0 +1,57 @@
+// Generated module macro for crate
+macro_rules! Modcrate {
+() => {
+        Depcrateuse_1!();
+        Depcrateuse_2!();
+        Depcrateuse_3!();
+        Depcrateuse_4!();
+        Depcrateuse_5!();
+        Depcrateuse_6!();
+        Depcrateuse_7!();
+        Depcrateuse_8!();
+        Depcrateuse_9!();
+        Depcrateuse_10!();
+        Depcrateuse_11!();
+        Depcrateparallel!();
+        Depcratetarget!();
+        Depcrateuse_57!();
+        Depcratewindows_registry!();
+        Depcratecommand_helpers!();
+        Depcrateuse_76!();
+        Depcratetool!();
+        Depcrateuse_86!();
+        Depcrateuse_87!();
+        Depcratetempfile!();
+        Depcrateutilities!();
+        Depcrateuse_112!();
+        Depcrateflags!();
+        Depcrateuse_121!();
+        DepcrateCompilerFlag!();
+        DepcrateEnv!();
+        DepcrateBuildCache!();
+        DepcrateBuild!();
+        DepcrateErrorKind!();
+        DepcrateError!();
+        Depcrateimpl_128!();
+        Depcrateimpl_129!();
+        Depcrateimpl_130!();
+        Depcrateimpl_131!();
+        DepcrateObject!();
+        Depcrateimpl_133!();
+        Depcrateimpl_134!();
+        Depcrateimpl_135!();
+        Depcrateimpl_136!();
+        Depcratefail!();
+        DepcrateNEW_STANDALONE_ANDROID_COMPILERS!();
+        Depcrateandroid_clang_compiler_uses_target_arg_internally!();
+        Depcrateis_llvm_mingw_wrapper!();
+        Depcrateautodetect_android_compiler!();
+        Depcratemap_darwin_target_from_rust_to_compiler_architecture!();
+        Depcrateis_arm!();
+        DepcrateAsmFileExt!();
+        Depcrateimpl_145!();
+        Depcrateis_disabled!();
+        Depcratecheck_disabled!();
+        Depcratetests!();
+    };
+}

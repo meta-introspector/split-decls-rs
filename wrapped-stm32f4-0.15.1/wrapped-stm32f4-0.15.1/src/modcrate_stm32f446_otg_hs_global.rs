@@ -1,0 +1,45 @@
+// Generated module macro for crate::stm32f446::otg_hs_global
+macro_rules! Modcrate_stm32f446_otg_hs_global {
+() => {
+        Depcrate_stm32f446_otg_hs_globalRegisterBlock!();
+        Depcrate_stm32f446_otg_hs_globalimpl_15268!();
+        Depcrate_stm32f446_otg_hs_globalGOTGCTL!();
+        Depcrate_stm32f446_otg_hs_globalgotgctl!();
+        Depcrate_stm32f446_otg_hs_globalGOTGINT!();
+        Depcrate_stm32f446_otg_hs_globalgotgint!();
+        Depcrate_stm32f446_otg_hs_globalGAHBCFG!();
+        Depcrate_stm32f446_otg_hs_globalgahbcfg!();
+        Depcrate_stm32f446_otg_hs_globalGUSBCFG!();
+        Depcrate_stm32f446_otg_hs_globalgusbcfg!();
+        Depcrate_stm32f446_otg_hs_globalGRSTCTL!();
+        Depcrate_stm32f446_otg_hs_globalgrstctl!();
+        Depcrate_stm32f446_otg_hs_globalGINTSTS!();
+        Depcrate_stm32f446_otg_hs_globalgintsts!();
+        Depcrate_stm32f446_otg_hs_globalGINTMSK!();
+        Depcrate_stm32f446_otg_hs_globalgintmsk!();
+        Depcrate_stm32f446_otg_hs_globalGRXSTSR_HOST!();
+        Depcrate_stm32f446_otg_hs_globalgrxstsr_host!();
+        Depcrate_stm32f446_otg_hs_globalGRXSTSP_HOST!();
+        Depcrate_stm32f446_otg_hs_globalgrxstsp_host!();
+        Depcrate_stm32f446_otg_hs_globalGRXFSIZ!();
+        Depcrate_stm32f446_otg_hs_globalgrxfsiz!();
+        Depcrate_stm32f446_otg_hs_globalGNPTXFSIZ!();
+        Depcrate_stm32f446_otg_hs_globalgnptxfsiz!();
+        Depcrate_stm32f446_otg_hs_globalTX0FSIZ!();
+        Depcrate_stm32f446_otg_hs_globaltx0fsiz!();
+        Depcrate_stm32f446_otg_hs_globalGNPTXSTS!();
+        Depcrate_stm32f446_otg_hs_globalgnptxsts!();
+        Depcrate_stm32f446_otg_hs_globalGCCFG!();
+        Depcrate_stm32f446_otg_hs_globalgccfg!();
+        Depcrate_stm32f446_otg_hs_globalCID!();
+        Depcrate_stm32f446_otg_hs_globalcid!();
+        Depcrate_stm32f446_otg_hs_globalHPTXFSIZ!();
+        Depcrate_stm32f446_otg_hs_globalhptxfsiz!();
+        Depcrate_stm32f446_otg_hs_globalDIEPTXF!();
+        Depcrate_stm32f446_otg_hs_globaldieptxf!();
+        Depcrate_stm32f446_otg_hs_globalGRXSTSR_PERIPHERAL!();
+        Depcrate_stm32f446_otg_hs_globalgrxstsr_peripheral!();
+        Depcrate_stm32f446_otg_hs_globalGRXSTSP_PERIPHERAL!();
+        Depcrate_stm32f446_otg_hs_globalgrxstsp_peripheral!();
+    };
+}

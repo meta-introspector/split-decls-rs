@@ -1,0 +1,9 @@
+// Generated macro for test_complex (function)
+macro_rules! Depcrate_teststest_complex {
+() => {
+// Module: crate::tests
+// Provides: {"test_complex"}
+// Dependencies: {}
+# [test] # [cfg (feature = "num-complex")] fn test_complex () { let ratio_coeffs = [(N :: f32 (- 1.) , N :: f32 (- 1.)) , (N :: f32 (- 1.) , N :: f32 (0.)) , (N :: f32 (- 1.) , N :: f32 (1.)) , (N :: f32 (0.) , N :: f32 (- 1.)) , (N :: f32 (0.) , N :: f32 (0.)) , (N :: f32 (0.) , N :: f32 (1.)) , (N :: f32 (1.) , N :: f32 (- 1.)) , (N :: f32 (1.) , N :: f32 (0.)) , (N :: f32 (1.) , N :: f32 (1.)) ,] ; fn expand_equiv_class_ratio (coeffs : & (N , N)) -> Vec < N > { let mut ret = Vec :: new () ; match coeffs { (N :: f32 (re) , N :: f32 (im)) if im == & 0. => ret . extend_from_slice (& [N :: c32 (Complex :: new (* re , * im)) , N :: c64 (Complex :: new (* re as f64 , * im as f64)) , N :: f32 (* re) , N :: f64 (* re as f64)]) , (N :: f32 (re) , N :: f32 (im)) => ret . extend_from_slice (& [N :: c32 (Complex :: new (* re , * im)) , N :: c64 (Complex :: new (* re as f64 , * im as f64))]) , (N :: f64 (re) , N :: f64 (im)) if im == & 0. => ret . extend_from_slice (& [N :: c64 (Complex :: new (* re , * im)) , N :: f64 (* re as f64)]) , (N :: f64 (re) , N :: f64 (im)) => ret . push (N :: c64 (Complex :: new (* re , * im))) , (_ , _) => unreachable ! () } ; ret } for icls in 0 .. ratio_coeffs . len () { let iequiv = expand_equiv_class_ratio (& ratio_coeffs [icls]) ; let hashes : Vec < u64 > = iequiv . iter () . map (hash) . collect () ; for i in 1 .. iequiv . len () { assert_eq ! (hashes [0] , hashes [i] , "Hash mismatch between {:?} and {:?}" , iequiv [0] , iequiv [i]) ; } for jcls in 0 .. ratio_coeffs . len () { let jequiv = expand_equiv_class_ratio (& ratio_coeffs [jcls]) ; let expected = icls . cmp (& jcls) ; for i in & iequiv { for j in & jequiv { assert_cmp (i , j , expected) ; } } } } }
+};
+}

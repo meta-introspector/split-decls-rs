@@ -1,0 +1,75 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcrate_bitmapimpl_50.rs");
+include!("depcrateuse_52.rs");
+include!("depcrateuse_53.rs");
+include!("depcrate_bitmap_pixeluse_30.rs");
+include!("depcrate_bitmap_pixel_bgrxuse_12.rs");
+include!("depcrate_errorimpl_34.rs");
+include!("depcrate_gif_supportuse_2.rs");
+include!("depcrate_bitmapuse_37.rs");
+include!("depcrate_bitmaptest.rs");
+include!("depcrate_bitmapimpl_46.rs");
+include!("depcrate_bitmap_pixel_pixel_formatpixelformat.rs");
+include!("depcrate_bitmapuse_39.rs");
+include!("depcrate_gif_supportimpl_7.rs");
+include!("depcrate_bitmap_pixel_bgrximpl_15.rs");
+include!("depcrate_bitmap_pixel_pixel_formatblend.rs");
+include!("depcrate_bitmapuse_38.rs");
+include!("depcrate_bitmap_pixel_rgbuse_24.rs");
+include!("depcrate_bitmap_pixel_rgbimpl_27.rs");
+include!("depcrate_bitmap_pixel_rgbuse_25.rs");
+include!("depcrate_bitmap_pixeluse_28.rs");
+include!("depcrate_bitmap_pixelbgrx.rs");
+include!("depcrate_bitmap_pixeluse_29.rs");
+include!("depcrate_gif_supportuse_5.rs");
+include!("depcrate_erroruse_32.rs");
+include!("depcrate_bitmap_pixel_pixel_formatuse_18.rs");
+include!("depcrate_bitmapuse_42.rs");
+include!("depcrate_gif_supportuse_4.rs");
+include!("depcrate_bitmapimage_encoding_support.rs");
+include!("depcrate_bitmapimpl_47.rs");
+include!("depcrate_bitmap_pixel_bgrxuse_11.rs");
+include!("depcrate_bitmap_pixelpixel_format.rs");
+include!("depcrateerror.rs");
+include!("depcrate_bitmap_pixel_bgrxuse_10.rs");
+include!("depcrate_bitmap_pixel_pixel_formatuse_17.rs");
+include!("depcrate_bitmapuse_40.rs");
+include!("depcrate_bitmap_pixel_rgbrgbpixel.rs");
+include!("depcratebitmap_pixel.rs");
+include!("depcrate_bitmapuse_44.rs");
+include!("depcrate_bitmap_pixel_rgbuse_23.rs");
+include!("depcrate_bitmapimpl_49.rs");
+include!("depcrate_bitmaptarget.rs");
+include!("depcrate_bitmapimpl_48.rs");
+include!("depcratebitmap.rs");
+include!("depcrate_bitmap_pixel_rgbuse_22.rs");
+include!("depcrate_bitmap_pixel_bgrxbgrxpixel.rs");
+include!("depcrategif_support.rs");
+include!("depcrate_gif_supportuse_3.rs");
+include!("depcrate_bitmap_pixelrgb.rs");
+include!("depcrate_gif_supportgiffile.rs");
+include!("depcrate_bitmap_pixel_bgrxuse_13.rs");
+include!("depcrate_errorbitmapbackenderror.rs");
+include!("depcrate_errorimpl_35.rs");
+include!("depcrate_bitmapbitmapbackend.rs");
+include!("modcrate.rs");
+include!("modcrate_bitmap_pixel_pixel_format.rs");
+include!("modcrate_bitmap_pixel_rgb.rs");
+include!("modcrate_error.rs");
+include!("modcrate_gif_support.rs");
+include!("modcrate_bitmap_pixel.rs");
+include!("modcrate_bitmap.rs");
+include!("modcrate_bitmap_pixel_bgrx.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate!();
+    Modcrate_bitmap_pixel_pixel_format!();
+    Modcrate_bitmap_pixel_rgb!();
+    Modcrate_error!();
+    Modcrate_gif_support!();
+    Modcrate_bitmap_pixel!();
+    Modcrate_bitmap!();
+    Modcrate_bitmap_pixel_bgrx!();
+}

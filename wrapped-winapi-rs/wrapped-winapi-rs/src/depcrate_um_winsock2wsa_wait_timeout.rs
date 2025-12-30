@@ -1,0 +1,9 @@
+// Generated macro for WSA_WAIT_TIMEOUT (const)
+macro_rules! Depcrate_um_winsock2WSA_WAIT_TIMEOUT {
+() => {
+// Module: crate::um::winsock2
+// Provides: {"WSA_WAIT_TIMEOUT"}
+// Dependencies: {}
+pub const WSA_WAIT_TIMEOUT : DWORD = WAIT_TIMEOUT ;
+};
+}

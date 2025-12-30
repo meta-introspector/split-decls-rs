@@ -1,0 +1,9 @@
+// Generated macro for impl_stringifiers (macro)
+macro_rules! Depcrate_buildimpl_stringifiers {
+() => {
+// Module: crate::build
+// Provides: {"impl_stringifiers"}
+// Dependencies: {}
+# [doc = " Implements conversions to a string."] macro_rules ! impl_stringifiers { ($ borrowed : ident , $ owned : ident) => { impl < S : Spec > Built <'_ , $ borrowed < S >> { # [doc = " Returns Ok`(())` if the IRI is normalizable by the RFC 3986 algorithm."] # [inline] pub fn ensure_rfc3986_normalizable (& self) -> Result < () , normalize :: Error > { if self . builder . authority . is_none () { let path = normalize :: PathToNormalize :: from_single_path (self . builder . path) ; path . ensure_rfc3986_normalizable_with_authority_absent () ?; } Ok (()) } } impl < S : Spec > fmt :: Display for Built <'_ , $ borrowed < S >> { # [inline] fn fmt (& self , f : & mut fmt :: Formatter <'_ >) -> fmt :: Result { self . builder . fmt_write_to ::< S > (f , self . path_is_absolute) } } # [cfg (feature = "alloc")] impl < S : Spec > ToDedicatedString for Built <'_ , $ borrowed < S >> { type Target = $ owned < S >; # [inline] fn try_to_dedicated_string (& self) -> Result < Self :: Target , TryReserveError > { let s = self . try_to_string () ?; Ok (TryFrom :: try_from (s) . expect ("[validity] the IRI to be built is already validated")) } } # [cfg (feature = "alloc")] impl < S : Spec > From < Built <'_ , $ borrowed < S >>> for $ owned < S > { # [inline] fn from (builder : Built <'_ , $ borrowed < S >>) -> Self { (& builder) . into () } } # [cfg (feature = "alloc")] impl < S : Spec > From <& Built <'_ , $ borrowed < S >>> for $ owned < S > { # [inline] fn from (builder : & Built <'_ , $ borrowed < S >>) -> Self { let s = builder . to_string () ; Self :: try_from (s) . expect ("[validity] the IRI to be built is already validated") } } } ; }
+};
+}

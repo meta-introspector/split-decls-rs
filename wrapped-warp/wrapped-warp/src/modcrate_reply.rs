@@ -1,0 +1,47 @@
+// Generated module macro for crate::reply
+macro_rules! Modcrate_reply {
+() => {
+        Depcrate_replyuse_736!();
+        Depcrate_replyuse_737!();
+        Depcrate_replyuse_738!();
+        Depcrate_replyuse_739!();
+        Depcrate_replyuse_740!();
+        Depcrate_replyuse_741!();
+        Depcrate_replyuse_742!();
+        Depcrate_replyuse_743!();
+        Depcrate_replyuse_744!();
+        Depcrate_replyuse_745!();
+        Depcrate_replyResponse!();
+        Depcrate_replyreply!();
+        Depcrate_replyjson!();
+        Depcrate_replyJson!();
+        Depcrate_replyimpl_750!();
+        Depcrate_replyhtml!();
+        Depcrate_replyHtml!();
+        Depcrate_replyimpl_753!();
+        Depcrate_replyReply!();
+        Depcrate_replyimpl_755!();
+        Depcrate_reply_assert_object_safe!();
+        Depcrate_replywith_status!();
+        Depcrate_replyWithStatus!();
+        Depcrate_replyimpl_759!();
+        Depcrate_replywith_header!();
+        Depcrate_replyWithHeader!();
+        Depcrate_replyimpl_762!();
+        Depcrate_replyimpl_763!();
+        Depcrate_replyimpl_764!();
+        Depcrate_replyimpl_765!();
+        Depcrate_replyimpl_766!();
+        Depcrate_replytext_plain!();
+        Depcrate_replyimpl_768!();
+        Depcrate_replyimpl_769!();
+        Depcrate_replyimpl_770!();
+        Depcrate_replyimpl_771!();
+        Depcrate_replyimpl_772!();
+        Depcrate_replyimpl_773!();
+        Depcrate_replyimpl_774!();
+        Depcrate_replyimpl_775!();
+        Depcrate_replysealed!();
+        Depcrate_replytests!();
+    };
+}

@@ -1,0 +1,9 @@
+// Generated macro for impl_339 (impl)
+macro_rules! Depcrate_autoderefimpl_339 {
+() => {
+// Module: crate::autoderef
+// Provides: {"impl_339"}
+// Dependencies: {}
+impl < 'a , 'tcx > Iterator for Autoderef < 'a , 'tcx > { type Item = (Ty < 'tcx > , usize) ; fn next (& mut self) -> Option < Self :: Item > { let tcx = self . infcx . tcx ; debug ! ("autoderef: steps={:?}, cur_ty={:?}" , self . state . steps , self . state . cur_ty) ; if self . state . at_start { self . state . at_start = false ; debug ! ("autoderef stage #0 is {:?}" , self . state . cur_ty) ; return Some ((self . state . cur_ty , 0)) ; } if ! tcx . recursion_limit () . value_within_limit (self . state . steps . len ()) { if ! self . silence_errors { report_autoderef_recursion_limit_error (tcx , self . span , self . state . cur_ty) ; } self . state . reached_recursion_limit = true ; return None ; } if self . state . cur_ty . is_ty_var () { return None ; } let (kind , new_ty) = if let Some (ty) = self . state . cur_ty . builtin_deref (self . include_raw_pointers) { debug_assert_eq ! (ty , self . infcx . resolve_vars_if_possible (ty)) ; if self . infcx . next_trait_solver () && let ty :: Alias (..) = ty . kind () { let (normalized_ty , obligations) = self . structurally_normalize_ty (ty) ? ; self . state . obligations . extend (obligations) ; (AutoderefKind :: Builtin , normalized_ty) } else { (AutoderefKind :: Builtin , ty) } } else if let Some (ty) = self . overloaded_deref_ty (self . state . cur_ty) { (AutoderefKind :: Overloaded , ty) } else { return None ; } ; self . state . steps . push ((self . state . cur_ty , kind)) ; debug ! ("autoderef stage #{:?} is {:?} from {:?}" , self . step_count () , new_ty , (self . state . cur_ty , kind)) ; self . state . cur_ty = new_ty ; Some ((self . state . cur_ty , self . step_count ())) } }
+};
+}

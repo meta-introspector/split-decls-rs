@@ -1,0 +1,56 @@
+// Generated module macro for crate::hstring
+macro_rules! Modcrate_hstring {
+() => {
+        Depcrate_hstringuse_25!();
+        Depcrate_hstringuse_26!();
+        Depcrate_hstringHSTRING!();
+        Depcrate_hstringimpl_28!();
+        Depcrate_hstringimpl_29!();
+        Depcrate_hstringimpl_30!();
+        Depcrate_hstringimpl_31!();
+        Depcrate_hstringimpl_32!();
+        Depcrate_hstringimpl_33!();
+        Depcrate_hstringimpl_34!();
+        Depcrate_hstringimpl_35!();
+        Depcrate_hstringimpl_36!();
+        Depcrate_hstringimpl_37!();
+        Depcrate_hstringimpl_38!();
+        Depcrate_hstringimpl_39!();
+        Depcrate_hstringimpl_40!();
+        Depcrate_hstringimpl_41!();
+        Depcrate_hstringimpl_42!();
+        Depcrate_hstringimpl_43!();
+        Depcrate_hstringimpl_44!();
+        Depcrate_hstringimpl_45!();
+        Depcrate_hstringimpl_46!();
+        Depcrate_hstringimpl_47!();
+        Depcrate_hstringimpl_48!();
+        Depcrate_hstringimpl_49!();
+        Depcrate_hstringimpl_50!();
+        Depcrate_hstringimpl_51!();
+        Depcrate_hstringimpl_52!();
+        Depcrate_hstringimpl_53!();
+        Depcrate_hstringimpl_54!();
+        Depcrate_hstringimpl_55!();
+        Depcrate_hstringimpl_56!();
+        Depcrate_hstringimpl_57!();
+        Depcrate_hstringimpl_58!();
+        Depcrate_hstringimpl_59!();
+        Depcrate_hstringimpl_60!();
+        Depcrate_hstringimpl_61!();
+        Depcrate_hstringimpl_62!();
+        Depcrate_hstringimpl_63!();
+        Depcrate_hstringimpl_64!();
+        Depcrate_hstringimpl_65!();
+        Depcrate_hstringimpl_66!();
+        Depcrate_hstringimpl_67!();
+        Depcrate_hstringimpl_68!();
+        Depcrate_hstringimpl_69!();
+        Depcrate_hstringimpl_70!();
+        Depcrate_hstringimpl_71!();
+        Depcrate_hstringimpl_72!();
+        Depcrate_hstringimpl_73!();
+        Depcrate_hstringimpl_74!();
+        Depcrate_hstringimpl_75!();
+    };
+}

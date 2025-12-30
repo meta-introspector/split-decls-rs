@@ -1,0 +1,9 @@
+// Generated macro for impl_72 (impl)
+macro_rules! Depcrate_generatedimpl_72 {
+() => {
+// Module: crate::generated
+// Provides: {"impl_72"}
+// Dependencies: {}
+impl NEAppProxyUDPFlow { extern_methods ! (# [cfg (feature = "block2")] # [doc = " Read datagrams from the flow."] # [doc = ""] # [doc = " Parameter `completionHandler`: A block that will be executed when datagrams have been read from the flow. The block takes the datagrams that were read, the destination endpoints of the datagrams, and an NSError. If an error occurred while reading then the error parameter will be non-nil."] # [deprecated] # [unsafe (method (readDatagramsWithCompletionHandler :))] # [unsafe (method_family = none)] pub unsafe fn readDatagramsWithCompletionHandler (& self , completion_handler : & block2 :: DynBlock < dyn Fn (* mut NSArray < NSData >, * mut NSArray < NWEndpoint >, * mut NSError) , >,) ; # [cfg (feature = "block2")] # [doc = " Write datagrams to the flow."] # [doc = ""] # [doc = " Parameter `datagrams`: An array of NSData objects containing the data to be written."] # [doc = ""] # [doc = " Parameter `remoteEndpoints`: The source endpoints of the datagrams."] # [doc = ""] # [doc = " Parameter `completionHandler`: A block that will be executed when the datagrams have been written to the corresponding socket's receive buffer."] # [deprecated] # [unsafe (method (writeDatagrams : sentByEndpoints : completionHandler :))] # [unsafe (method_family = none)] pub unsafe fn writeDatagrams_sentByEndpoints_completionHandler (& self , datagrams : & NSArray < NSData >, remote_endpoints : & NSArray < NWEndpoint >, completion_handler : & block2 :: DynBlock < dyn Fn (* mut NSError) >,) ; # [doc = " An NWEndpoint object containing the local endpoint of the flow's corresponding socket."] # [deprecated] # [unsafe (method (localEndpoint))] # [unsafe (method_family = none)] pub unsafe fn localEndpoint (& self) -> Option < Retained < NWEndpoint >>;) ; }
+};
+}

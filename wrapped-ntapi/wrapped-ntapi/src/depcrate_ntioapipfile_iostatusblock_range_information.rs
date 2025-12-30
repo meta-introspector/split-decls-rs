@@ -1,0 +1,9 @@
+// Generated macro for PFILE_IOSTATUSBLOCK_RANGE_INFORMATION (type)
+macro_rules! Depcrate_ntioapiPFILE_IOSTATUSBLOCK_RANGE_INFORMATION {
+() => {
+// Module: crate::ntioapi
+// Provides: {"PFILE_IOSTATUSBLOCK_RANGE_INFORMATION"}
+// Dependencies: {}
+pub type PFILE_IOSTATUSBLOCK_RANGE_INFORMATION = * mut FILE_IOSTATUSBLOCK_RANGE_INFORMATION ;
+};
+}

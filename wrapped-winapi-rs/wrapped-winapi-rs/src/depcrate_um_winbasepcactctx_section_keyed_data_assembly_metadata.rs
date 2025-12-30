@@ -1,0 +1,9 @@
+// Generated macro for PCACTCTX_SECTION_KEYED_DATA_ASSEMBLY_METADATA (type)
+macro_rules! Depcrate_um_winbasePCACTCTX_SECTION_KEYED_DATA_ASSEMBLY_METADATA {
+() => {
+// Module: crate::um::winbase
+// Provides: {"PCACTCTX_SECTION_KEYED_DATA_ASSEMBLY_METADATA"}
+// Dependencies: {}
+pub type PCACTCTX_SECTION_KEYED_DATA_ASSEMBLY_METADATA = * const ACTCTX_SECTION_KEYED_DATA_ASSEMBLY_METADATA ;
+};
+}

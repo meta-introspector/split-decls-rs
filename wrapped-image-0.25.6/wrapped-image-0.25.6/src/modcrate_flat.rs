@@ -1,0 +1,39 @@
+// Generated module macro for crate::flat
+macro_rules! Modcrate_flat {
+() => {
+        Depcrate_flatuse_180!();
+        Depcrate_flatuse_181!();
+        Depcrate_flatuse_182!();
+        Depcrate_flatuse_183!();
+        Depcrate_flatuse_184!();
+        Depcrate_flatuse_185!();
+        Depcrate_flatuse_186!();
+        Depcrate_flatuse_187!();
+        Depcrate_flatuse_188!();
+        Depcrate_flatFlatSamples!();
+        Depcrate_flatSampleLayout!();
+        Depcrate_flatDim!();
+        Depcrate_flatimpl_192!();
+        Depcrate_flatimpl_193!();
+        Depcrate_flatimpl_194!();
+        Depcrate_flatimpl_195!();
+        Depcrate_flatView!();
+        Depcrate_flatViewMut!();
+        Depcrate_flatError!();
+        Depcrate_flatNormalForm!();
+        Depcrate_flatimpl_200!();
+        Depcrate_flatimpl_201!();
+        Depcrate_flatpanic_cwh_out_of_bounds!();
+        Depcrate_flatpanic_pixel_out_of_bounds!();
+        Depcrate_flatimpl_204!();
+        Depcrate_flatimpl_205!();
+        Depcrate_flatimpl_206!();
+        Depcrate_flatimpl_207!();
+        Depcrate_flatimpl_208!();
+        Depcrate_flatimpl_209!();
+        Depcrate_flatimpl_210!();
+        Depcrate_flatimpl_211!();
+        Depcrate_flatimpl_212!();
+        Depcrate_flattests!();
+    };
+}

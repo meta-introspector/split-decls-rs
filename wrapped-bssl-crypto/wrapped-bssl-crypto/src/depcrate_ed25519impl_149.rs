@@ -1,0 +1,9 @@
+// Generated macro for impl_149 (impl)
+macro_rules! Depcrate_ed25519impl_149 {
+() => {
+// Module: crate::ed25519
+// Provides: {"impl_149"}
+// Dependencies: {}
+impl PrivateKey { # [doc = " Generates a new Ed25519 keypair."] pub fn generate () -> Self { let mut public_key = [0u8 ; PUBLIC_KEY_LEN] ; let mut private_key = [0u8 ; KEYPAIR_LEN] ; unsafe { bssl_sys :: ED25519_keypair (public_key . as_mut_ffi_ptr () , private_key . as_mut_ffi_ptr ()) } PrivateKey (private_key) } # [doc = " Returns the \"seed\" of this private key, as defined in RFC 8032."] pub fn to_seed (& self) -> [u8 ; SEED_LEN] { # [allow (clippy :: expect_used)] self . 0 [.. SEED_LEN] . try_into () . expect ("A slice of length SEED_LEN will always fit into an array of length SEED_LEN") } # [doc = " Derives a key-pair from `seed`, which is the 32-byte private key representation defined"] # [doc = " in RFC 8032."] pub fn from_seed (seed : & [u8 ; SEED_LEN]) -> Self { let mut public_key = [0u8 ; PUBLIC_KEY_LEN] ; let mut private_key = [0u8 ; KEYPAIR_LEN] ; unsafe { bssl_sys :: ED25519_keypair_from_seed (public_key . as_mut_ffi_ptr () , private_key . as_mut_ffi_ptr () , seed . as_ffi_ptr () ,) } PrivateKey (private_key) } # [doc = " Signs the given message and returns the signature."] pub fn sign (& self , msg : & [u8]) -> Signature { let mut sig_bytes = [0u8 ; SIGNATURE_LEN] ; let result = unsafe { bssl_sys :: ED25519_sign (sig_bytes . as_mut_ffi_ptr () , msg . as_ffi_ptr () , msg . len () , self . 0 . as_ffi_ptr () ,) } ; assert_eq ! (result , 1 , "allocation failure in bssl_sys::ED25519_sign") ; sig_bytes } # [doc = " Returns the [`PublicKey`] corresponding to this private key."] pub fn to_public (& self) -> PublicKey { let keypair_bytes = & self . 0 ; # [allow (clippy :: expect_used)] PublicKey (keypair_bytes [PUBLIC_KEY_LEN ..] . try_into () . expect ("The slice is always the correct size for a public key") ,) } }
+};
+}

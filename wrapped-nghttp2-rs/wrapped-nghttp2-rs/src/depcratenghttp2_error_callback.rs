@@ -1,0 +1,9 @@
+// Generated macro for nghttp2_error_callback (type)
+macro_rules! Depcratenghttp2_error_callback {
+() => {
+// Module: crate
+// Provides: {"nghttp2_error_callback"}
+// Dependencies: {}
+# [doc = " @functypedef"] # [doc = ""] # [doc = " Callback function invoked when library provides the error message"] # [doc = " intended for human consumption.  This callback is solely for"] # [doc = " debugging purpose.  The |msg| is typically NULL-terminated string"] # [doc = " of length |len|.  |len| does not include the sentinel NULL"] # [doc = " character."] # [doc = ""] # [doc = " This function is deprecated.  The new application should use"] # [doc = " :type:`nghttp2_error_callback2`."] # [doc = ""] # [doc = " The format of error message may change between nghttp2 library"] # [doc = " versions.  The application should not depend on the particular"] # [doc = " format."] # [doc = ""] # [doc = " Normally, application should return 0 from this callback.  If fatal"] # [doc = " error occurred while doing something in this callback, application"] # [doc = " should return :enum:`NGHTTP2_ERR_CALLBACK_FAILURE`.  In this case,"] # [doc = " library will return immediately with return value"] # [doc = " :enum:`NGHTTP2_ERR_CALLBACK_FAILURE`.  Currently, if nonzero value"] # [doc = " is returned from this callback, they are treated as"] # [doc = " :enum:`NGHTTP2_ERR_CALLBACK_FAILURE`, but application should not"] # [doc = " rely on this details."] pub type nghttp2_error_callback = :: std :: option :: Option < unsafe extern "C" fn (session : * mut nghttp2_session , msg : * const :: std :: os :: raw :: c_char , len : usize , user_data : * mut :: std :: os :: raw :: c_void ,) -> :: std :: os :: raw :: c_int , > ;
+};
+}

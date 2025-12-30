@@ -1,0 +1,9 @@
+// Generated macro for CRYPT_SORTED_CTL_ENCODE_HASHED_SUBJECT_IDENTIFIER_FLAG (const)
+macro_rules! Depcrate_um_wincryptCRYPT_SORTED_CTL_ENCODE_HASHED_SUBJECT_IDENTIFIER_FLAG {
+() => {
+// Module: crate::um::wincrypt
+// Provides: {"CRYPT_SORTED_CTL_ENCODE_HASHED_SUBJECT_IDENTIFIER_FLAG"}
+// Dependencies: {}
+pub const CRYPT_SORTED_CTL_ENCODE_HASHED_SUBJECT_IDENTIFIER_FLAG : DWORD = 0x10000 ;
+};
+}

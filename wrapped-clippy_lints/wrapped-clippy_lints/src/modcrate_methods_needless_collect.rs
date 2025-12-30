@@ -1,0 +1,44 @@
+// Generated module macro for crate::methods::needless_collect
+macro_rules! Modcrate_methods_needless_collect {
+() => {
+        Depcrate_methods_needless_collectuse_6108!();
+        Depcrate_methods_needless_collectuse_6109!();
+        Depcrate_methods_needless_collectuse_6110!();
+        Depcrate_methods_needless_collectuse_6111!();
+        Depcrate_methods_needless_collectuse_6112!();
+        Depcrate_methods_needless_collectuse_6113!();
+        Depcrate_methods_needless_collectuse_6114!();
+        Depcrate_methods_needless_collectuse_6115!();
+        Depcrate_methods_needless_collectuse_6116!();
+        Depcrate_methods_needless_collectuse_6117!();
+        Depcrate_methods_needless_collectuse_6118!();
+        Depcrate_methods_needless_collectuse_6119!();
+        Depcrate_methods_needless_collectuse_6120!();
+        Depcrate_methods_needless_collectuse_6121!();
+        Depcrate_methods_needless_collectuse_6122!();
+        Depcrate_methods_needless_collectuse_6123!();
+        Depcrate_methods_needless_collectuse_6124!();
+        Depcrate_methods_needless_collectNEEDLESS_COLLECT_MSG!();
+        Depcrate_methods_needless_collectcheck!();
+        Depcrate_methods_needless_collectcheck_collect_into_intoiterator!();
+        Depcrate_methods_needless_collectis_is_empty_sig!();
+        Depcrate_methods_needless_collectiterates_same_ty!();
+        Depcrate_methods_needless_collectis_contains_sig!();
+        Depcrate_methods_needless_collectIterFunction!();
+        Depcrate_methods_needless_collectimpl_6132!();
+        Depcrate_methods_needless_collectIterFunctionKind!();
+        Depcrate_methods_needless_collectIterFunctionVisitor!();
+        Depcrate_methods_needless_collectimpl_6135!();
+        Depcrate_methods_needless_collectLoopKind!();
+        Depcrate_methods_needless_collectcheck_loop_kind!();
+        Depcrate_methods_needless_collectimpl_6138!();
+        Depcrate_methods_needless_collectget_expr_and_hir_id_from_stmt!();
+        Depcrate_methods_needless_collectUsedCountVisitor!();
+        Depcrate_methods_needless_collectimpl_6141!();
+        Depcrate_methods_needless_collectdetect_iter_and_into_iters!();
+        Depcrate_methods_needless_collectget_captured_ids!();
+        Depcrate_methods_needless_collectIteratorMethodCheckVisitor!();
+        Depcrate_methods_needless_collectimpl_6145!();
+        Depcrate_methods_needless_collectcheck_iter_expr_used_only_as_iterator!();
+    };
+}

@@ -1,0 +1,9 @@
+// Generated macro for sinhf (function)
+macro_rules! Depcrate_math_sinhfsinhf {
+() => {
+// Module: crate::math::sinhf
+// Provides: {"sinhf"}
+// Dependencies: {}
+# [doc = " The hyperbolic sine of `x` (f32)."] # [cfg_attr (assert_no_panic , no_panic :: no_panic)] pub fn sinhf (x : f32) -> f32 { let mut h = 0.5f32 ; let mut ix = x . to_bits () ; if (ix >> 31) != 0 { h = - h ; } ix &= 0x7fffffff ; let absx = f32 :: from_bits (ix) ; let w = ix ; if w < 0x42b17217 { let t = expm1f (absx) ; if w < 0x3f800000 { if w < (0x3f800000 - (12 << 23)) { return x ; } return h * (2. * t - t * t / (t + 1.)) ; } return h * (t + t / (t + 1.)) ; } 2. * h * k_expo2f (absx) }
+};
+}

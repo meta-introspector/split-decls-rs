@@ -1,0 +1,9 @@
+// Generated macro for impl_79 (impl)
+macro_rules! Depcrate_verification_windowsimpl_79 {
+() => {
+// Module: crate::verification::windows
+// Provides: {"impl_79"}
+// Dependencies: {}
+impl CertEngine { fn new_with_extra_roots (roots : impl IntoIterator < Item = pki_types :: CertificateDer < 'static > > ,) -> Result < Self , TlsError > { let mut exclusive_store = CertificateStore :: new () ? ; for root in roots { exclusive_store . add_cert (& root) ? ; } let mut config = CERT_CHAIN_ENGINE_CONFIG :: zeroed_with_size () ; config . hExclusiveRoot = exclusive_store . inner . as_ptr () ; let mut engine = EnginePtr :: NULL ; let res = unsafe { CertCreateCertificateChainEngine (& config , & mut engine) } ; # [allow (clippy :: as_conversions)] let engine = call_with_last_error (| | match NonNull :: new (engine as * mut c_void) { Some (c) if res == TRUE => Some (c) , _ => None , }) ? ; Ok (Self { inner : engine }) } # [cfg (any (test , feature = "ffi-testing" , feature = "dbg"))] fn new_with_fake_root (root : & [u8]) -> Result < Self , TlsError > { use windows_sys :: Win32 :: Security :: Cryptography :: { CERT_CHAIN_CACHE_ONLY_URL_RETRIEVAL , CERT_CHAIN_ENABLE_CACHE_AUTO_UPDATE , } ; let mut root_store = CertificateStore :: new () ? ; root_store . add_cert (root) ? ; let mut config = CERT_CHAIN_ENGINE_CONFIG :: zeroed_with_size () ; config . dwFlags = CERT_CHAIN_CACHE_ONLY_URL_RETRIEVAL | CERT_CHAIN_ENABLE_CACHE_AUTO_UPDATE ; config . hExclusiveRoot = root_store . inner . as_ptr () ; let mut engine = EnginePtr :: NULL ; let res = unsafe { CertCreateCertificateChainEngine (& config , & mut engine) } ; # [allow (clippy :: as_conversions)] let engine = call_with_last_error (| | match NonNull :: new (engine as * mut c_void) { Some (c) if res == TRUE => Some (c) , _ => None , }) ? ; Ok (Self { inner : engine }) } }
+};
+}

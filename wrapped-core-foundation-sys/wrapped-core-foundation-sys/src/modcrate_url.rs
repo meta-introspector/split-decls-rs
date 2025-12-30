@@ -1,0 +1,47 @@
+// Generated module macro for crate::url
+macro_rules! Modcrate_url {
+() => {
+        Depcrate_urluse_783!();
+        Depcrate_urluse_784!();
+        Depcrate_urluse_785!();
+        Depcrate_urluse_786!();
+        Depcrate_urluse_787!();
+        Depcrate_urluse_788!();
+        Depcrate_urluse_789!();
+        Depcrate_url__CFURL!();
+        Depcrate_urlCFURLRef!();
+        Depcrate_urlCFURLBookmarkCreationOptions!();
+        Depcrate_urlCFURLBookmarkResolutionOptions!();
+        Depcrate_urlCFURLBookmarkFileCreationOptions!();
+        Depcrate_urlCFURLPathStyle!();
+        Depcrate_urlkCFURLPOSIXPathStyle!();
+        Depcrate_urlkCFURLHFSPathStyle!();
+        Depcrate_urlkCFURLWindowsPathStyle!();
+        Depcrate_urlkCFURLBookmarkCreationMinimalBookmarkMask!();
+        Depcrate_urlkCFURLBookmarkCreationSuitableForBookmarkFile!();
+        Depcrate_urlkCFURLBookmarkCreationWithSecurityScope!();
+        Depcrate_urlkCFURLBookmarkCreationSecurityScopeAllowOnlyReadAccess!();
+        Depcrate_urlkCFURLBookmarkCreationWithoutImplicitSecurityScope!();
+        Depcrate_urlkCFURLBookmarkCreationPreferFileIDResolutionMask!();
+        Depcrate_urlCFURLComponentType!();
+        Depcrate_urlkCFURLComponentScheme!();
+        Depcrate_urlkCFURLComponentNetLocation!();
+        Depcrate_urlkCFURLComponentPath!();
+        Depcrate_urlkCFURLComponentResourceSpecifier!();
+        Depcrate_urlkCFURLComponentUser!();
+        Depcrate_urlkCFURLComponentPassword!();
+        Depcrate_urlkCFURLComponentUserInfo!();
+        Depcrate_urlkCFURLComponentHost!();
+        Depcrate_urlkCFURLComponentPort!();
+        Depcrate_urlkCFURLComponentParameterString!();
+        Depcrate_urlkCFURLComponentQuery!();
+        Depcrate_urlkCFURLComponentFragment!();
+        Depcrate_urlkCFURLBookmarkResolutionWithoutUIMask!();
+        Depcrate_urlkCFURLBookmarkResolutionWithoutMountingMask!();
+        Depcrate_urlkCFURLBookmarkResolutionWithSecurityScope!();
+        Depcrate_urlkCFBookmarkResolutionWithoutUIMask!();
+        Depcrate_urlkCFBookmarkResolutionWithoutMountingMask!();
+        Depcrate_urlother_823!();
+        Depcrate_urlcan_see_excluded_from_backup_key!();
+    };
+}

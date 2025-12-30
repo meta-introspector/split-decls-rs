@@ -1,0 +1,9 @@
+// Generated macro for verify_current_test_outcome (function)
+macro_rules! Depcrateverify_current_test_outcome {
+() => {
+// Module: crate
+// Provides: {"verify_current_test_outcome"}
+// Dependencies: {}
+# [doc = " Returns a [`Result`] corresponding to the outcome of the currently running"] # [doc = " test."] # [doc = ""] # [doc = " This returns `Result::Err` precisely if the current test has recorded at"] # [doc = " least one test assertion failure via [`expect_that!`][crate::expect_that],"] # [doc = " [`expect_pred!`][crate::expect_pred], or"] # [doc = " [`GoogleTestSupport::and_log_failure`]. It can be used in concert with the"] # [doc = " `?` operator to continue execution of the test conditionally on there not"] # [doc = " having been any failure yet."] # [doc = ""] # [doc = " This requires the use of the [`#[gtest]`][crate::gtest] attribute macro."] # [doc = ""] # [doc = " ```"] # [doc = " # use googletest::prelude::*;"] # [doc = " # /* Make sure this also compiles as a doctest."] # [doc = " #[gtest]"] # [doc = " # */"] # [doc = " # fn foo() -> u32 { 1 }"] # [doc = " # fn bar() -> u32 { 2 }"] # [doc = " fn should_fail_and_not_execute_last_assertion() -> Result<()> {"] # [doc = " #   googletest::internal::test_outcome::TestOutcome::init_current_test_outcome();"] # [doc = "     expect_that!(foo(), eq(2));     // May fail, but will not abort the test."] # [doc = "     expect_that!(bar(), gt(1));     // May fail, but will not abort the test."] # [doc = "     verify_current_test_outcome()?; // Aborts the test if one of the previous assertions failed."] # [doc = "     verify_that!(foo(), gt(0))      // Does not execute if the line above aborts."] # [doc = " }"] # [doc = " # verify_that!(should_fail_and_not_execute_last_assertion(), err(displays_as(contains_substring(\"Test failed\")))).unwrap();"] # [doc = " ```"] # [track_caller] pub fn verify_current_test_outcome () -> Result < () > { TestOutcome :: get_current_test_outcome () }
+};
+}

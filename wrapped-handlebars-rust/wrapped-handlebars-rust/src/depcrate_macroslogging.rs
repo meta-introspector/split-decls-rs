@@ -1,0 +1,9 @@
+// Generated macro for logging (module)
+macro_rules! Depcrate_macroslogging {
+() => {
+// Module: crate::macros
+// Provides: {"logging"}
+// Dependencies: {}
+# [cfg (feature = "no_logging")] # [macro_use] # [doc (hidden)] pub mod logging { # [doc = " This macro is defined if the `logging` feature is set."] # [doc = ""] # [doc = " It ignores all logging calls inside the library."] # [doc (hidden)] # [macro_export] macro_rules ! debug { (target : $ target : expr , $ ($ arg : tt) *) => { } ; ($ ($ arg : tt) *) => { } ; } # [doc = " This macro is defined if the `logging` feature is not set."] # [doc = ""] # [doc = " It ignores all logging calls inside the library."] # [doc (hidden)] # [macro_export] macro_rules ! error { (target : $ target : expr , $ ($ arg : tt) *) => { } ; ($ ($ arg : tt) *) => { } ; } # [doc = " This macro is defined if the `logging` feature is not set."] # [doc = ""] # [doc = " It ignores all logging calls inside the library."] # [doc (hidden)] # [macro_export] macro_rules ! info { (target : $ target : expr , $ ($ arg : tt) *) => { } ; ($ ($ arg : tt) *) => { } ; } # [doc = " This macro is defined if the `logging` feature is not set."] # [doc = ""] # [doc = " It ignores all logging calls inside the library."] # [doc (hidden)] # [macro_export] macro_rules ! log { (target : $ target : expr , $ ($ arg : tt) *) => { } ; ($ ($ arg : tt) *) => { } ; } # [doc = " This macro is defined if the `logging` feature is not set."] # [doc = ""] # [doc = " It ignores all logging calls inside the library."] # [doc (hidden)] # [macro_export] macro_rules ! trace { (target : $ target : expr , $ ($ arg : tt) *) => { } ; ($ ($ arg : tt) *) => { } ; } # [doc = " This macro is defined if the `logging` feature is not set."] # [doc = ""] # [doc = " It ignores all logging calls inside the library."] # [doc (hidden)] # [macro_export] macro_rules ! warn { (target : $ target : expr , $ ($ arg : tt) *) => { } ; ($ ($ arg : tt) *) => { } ; } }
+};
+}

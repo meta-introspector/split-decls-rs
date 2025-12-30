@@ -1,0 +1,9 @@
+// Generated macro for FLAGS_R_SH (const)
+macro_rules! Depcrate_readobj_elfFLAGS_R_SH {
+() => {
+// Module: crate::readobj::elf
+// Provides: {"FLAGS_R_SH"}
+// Dependencies: {}
+const FLAGS_R_SH : & [Flag < u32 >] = & flags ! (R_SH_NONE , R_SH_DIR32 , R_SH_REL32 , R_SH_DIR8WPN , R_SH_IND12W , R_SH_DIR8WPL , R_SH_DIR8WPZ , R_SH_DIR8BP , R_SH_DIR8W , R_SH_DIR8L , R_SH_SWITCH16 , R_SH_SWITCH32 , R_SH_USES , R_SH_COUNT , R_SH_ALIGN , R_SH_CODE , R_SH_DATA , R_SH_LABEL , R_SH_SWITCH8 , R_SH_GNU_VTINHERIT , R_SH_GNU_VTENTRY , R_SH_TLS_GD_32 , R_SH_TLS_LD_32 , R_SH_TLS_LDO_32 , R_SH_TLS_IE_32 , R_SH_TLS_LE_32 , R_SH_TLS_DTPMOD32 , R_SH_TLS_DTPOFF32 , R_SH_TLS_TPOFF32 , R_SH_GOT32 , R_SH_PLT32 , R_SH_COPY , R_SH_GLOB_DAT , R_SH_JMP_SLOT , R_SH_RELATIVE , R_SH_GOTOFF , R_SH_GOTPC ,) ;
+};
+}

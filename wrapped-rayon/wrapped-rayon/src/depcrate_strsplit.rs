@@ -1,9 +1,9 @@
-// Generated macro for split (function)
-macro_rules! Depcrate_strsplit {
+// Generated macro for Split (struct)
+macro_rules! Depcrate_strSplit {
 () => {
 // Module: crate::str
-// Provides: {"split"}
+// Provides: {"Split"}
 // Dependencies: {}
-# [doc = " Try to split a string near the midpoint."] # [inline] fn split (chars : & str) -> Option < (& str , & str) > { let index = find_char_midpoint (chars) ; if index > 0 { Some (chars . split_at (index)) } else { None } }
+# [doc = " Parallel iterator over substrings separated by a pattern"] # [derive (Debug , Clone)] pub struct Split < 'ch , P : Pattern > { chars : & 'ch str , separator : P , }
 };
 }

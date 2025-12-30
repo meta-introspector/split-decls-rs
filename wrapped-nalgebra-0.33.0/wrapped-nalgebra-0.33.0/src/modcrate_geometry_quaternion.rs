@@ -1,0 +1,44 @@
+// Generated module macro for crate::geometry::quaternion
+macro_rules! Modcrate_geometry_quaternion {
+() => {
+        Depcrate_geometry_quaternionuse_1502!();
+        Depcrate_geometry_quaternionuse_1503!();
+        Depcrate_geometry_quaternionuse_1504!();
+        Depcrate_geometry_quaternionuse_1505!();
+        Depcrate_geometry_quaternionuse_1506!();
+        Depcrate_geometry_quaternionuse_1507!();
+        Depcrate_geometry_quaternionuse_1508!();
+        Depcrate_geometry_quaternionuse_1509!();
+        Depcrate_geometry_quaternionuse_1510!();
+        Depcrate_geometry_quaternionuse_1511!();
+        Depcrate_geometry_quaternionuse_1512!();
+        Depcrate_geometry_quaternionuse_1513!();
+        Depcrate_geometry_quaternionuse_1514!();
+        Depcrate_geometry_quaternionQuaternion!();
+        Depcrate_geometry_quaternionimpl_1516!();
+        Depcrate_geometry_quaternionimpl_1517!();
+        Depcrate_geometry_quaternionimpl_1518!();
+        Depcrate_geometry_quaternionimpl_1519!();
+        Depcrate_geometry_quaternionimpl_1520!();
+        Depcrate_geometry_quaternionimpl_1521!();
+        Depcrate_geometry_quaternionimpl_1522!();
+        Depcrate_geometry_quaternionimpl_1523!();
+        Depcrate_geometry_quaternionimpl_1524!();
+        Depcrate_geometry_quaternionimpl_1525!();
+        Depcrate_geometry_quaternionimpl_1526!();
+        Depcrate_geometry_quaternionimpl_1527!();
+        Depcrate_geometry_quaternionimpl_1528!();
+        Depcrate_geometry_quaternionimpl_1529!();
+        Depcrate_geometry_quaternionimpl_1530!();
+        Depcrate_geometry_quaternionUnitQuaternion!();
+        Depcrate_geometry_quaternionimpl_1532!();
+        Depcrate_geometry_quaternionimpl_1533!();
+        Depcrate_geometry_quaternionimpl_1534!();
+        Depcrate_geometry_quaternionimpl_1535!();
+        Depcrate_geometry_quaternionimpl_1536!();
+        Depcrate_geometry_quaternionimpl_1537!();
+        Depcrate_geometry_quaternionimpl_1538!();
+        Depcrate_geometry_quaternionimpl_1539!();
+        Depcrate_geometry_quaternionimpl_1540!();
+    };
+}

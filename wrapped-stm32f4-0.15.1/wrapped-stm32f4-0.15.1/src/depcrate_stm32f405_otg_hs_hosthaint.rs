@@ -1,0 +1,9 @@
+// Generated macro for HAINT (type)
+macro_rules! Depcrate_stm32f405_otg_hs_hostHAINT {
+() => {
+// Module: crate::stm32f405::otg_hs_host
+// Provides: {"HAINT"}
+// Dependencies: {}
+# [doc = "HAINT register accessor: an alias for `Reg<HAINT_SPEC>`"] pub type HAINT = crate :: Reg < haint :: HAINT_SPEC > ;
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for PPROCESS_REVOKE_FILE_HANDLES_INFORMATION (type)
+macro_rules! Depcrate_ntpsapiPPROCESS_REVOKE_FILE_HANDLES_INFORMATION {
+() => {
+// Module: crate::ntpsapi
+// Provides: {"PPROCESS_REVOKE_FILE_HANDLES_INFORMATION"}
+// Dependencies: {}
+pub type PPROCESS_REVOKE_FILE_HANDLES_INFORMATION = * mut PROCESS_REVOKE_FILE_HANDLES_INFORMATION ;
+};
+}

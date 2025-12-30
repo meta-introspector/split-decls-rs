@@ -1,0 +1,9 @@
+// Generated macro for impl_121 (impl)
+macro_rules! Depcrate_parseimpl_121 {
+() => {
+// Module: crate::parse
+// Provides: {"impl_121"}
+// Dependencies: {}
+impl < 'a > Allocations < 'a > { pub fn new () -> Self { Self { refdefs : RefDefs :: default () , footdefs : FootnoteDefs :: default () , links : Vec :: with_capacity (128) , cows : Vec :: new () , alignments : Vec :: new () , headings : Vec :: new () , } } pub fn allocate_cow (& mut self , cow : CowStr < 'a >) -> CowIndex { let ix = self . cows . len () ; self . cows . push (cow) ; CowIndex (ix) } pub fn allocate_link (& mut self , ty : LinkType , url : CowStr < 'a > , title : CowStr < 'a > , id : CowStr < 'a > ,) -> LinkIndex { let ix = self . links . len () ; self . links . push ((ty , url , title , id)) ; LinkIndex (ix) } pub fn allocate_alignment (& mut self , alignment : Vec < Alignment >) -> AlignmentIndex { let ix = self . alignments . len () ; self . alignments . push (alignment) ; AlignmentIndex (ix) } pub fn allocate_heading (& mut self , attrs : HeadingAttributes < 'a >) -> HeadingIndex { let ix = self . headings . len () ; self . headings . push (attrs) ; let ix_nonzero = NonZeroUsize :: new (ix . wrapping_add (1)) . expect ("too many headings") ; HeadingIndex (ix_nonzero) } pub fn take_cow (& mut self , ix : CowIndex) -> CowStr < 'a > { core :: mem :: replace (& mut self . cows [ix . 0] , "" . into ()) } pub fn take_link (& mut self , ix : LinkIndex) -> (LinkType , CowStr < 'a > , CowStr < 'a > , CowStr < 'a >) { let default_link = (LinkType :: ShortcutUnknown , "" . into () , "" . into () , "" . into ()) ; core :: mem :: replace (& mut self . links [ix . 0] , default_link) } pub fn take_alignment (& mut self , ix : AlignmentIndex) -> Vec < Alignment > { core :: mem :: take (& mut self . alignments [ix . 0]) } }
+};
+}

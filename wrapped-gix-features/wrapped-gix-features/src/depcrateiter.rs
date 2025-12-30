@@ -1,0 +1,9 @@
+// Generated macro for iter (module)
+macro_rules! Depcrateiter {
+() => {
+// Module: crate
+// Provides: {"iter"}
+// Dependencies: {}
+# [doc = ""] pub mod iter { # [doc = " An iterator over chunks of input, producing `Vec<Item>` with a size of `size`, with the last chunk being the remainder and thus"] # [doc = " potentially smaller than `size`."] pub struct Chunks < I > { # [doc = " The inner iterator to ask for items."] pub inner : I , # [doc = " The size of chunks to produce"] pub size : usize , } impl < I , Item > Iterator for Chunks < I > where I : Iterator < Item = Item > , { type Item = Vec < Item > ; fn next (& mut self) -> Option < Self :: Item > { let mut res = Vec :: with_capacity (self . size) ; let mut items_left = self . size ; for item in & mut self . inner { res . push (item) ; items_left -= 1 ; if items_left == 0 { break ; } } (! res . is_empty ()) . then_some (res) } } }
+};
+}

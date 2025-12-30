@@ -1,0 +1,9 @@
+// Generated macro for Formatter (trait)
+macro_rules! Depcrate_printerFormatter {
+() => {
+// Module: crate::printer
+// Provides: {"Formatter"}
+// Dependencies: {}
+# [doc = " Format a [`Tree`] into a `String`."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " This trait implements all `Fn(&Tree) -> Result<String, E>` types, where `E: Error + Send + Sync`."] # [doc = " If the `serde` feature is enabled, functions like `serde_json::to_string_pretty`"] # [doc = " can be used wherever a `Formatter` is required."] # [doc = " ```"] # [doc = " # use tracing::info;"] # [doc = " # #[tokio::main(flavor = \"current_thread\")]"] # [doc = " # async fn main() {"] # [doc = " tracing_forest::worker_task()"] # [doc = "     .map_receiver(|receiver| {"] # [doc = "         receiver.formatter(serde_json::to_string_pretty)"] # [doc = "     })"] # [doc = "     .build()"] # [doc = "     .on(async {"] # [doc = "         info!(\"write this as json\");"] # [doc = "     })"] # [doc = "     .await"] # [doc = " # }"] # [doc = " ```"] # [doc = " Produces the following result:"] # [doc = " ```json"] # [doc = " {"] # [doc = "   \"Event\": {"] # [doc = "     \"uuid\": \"00000000-0000-0000-0000-000000000000\","] # [doc = "     \"timestamp\": \"2022-03-24T16:08:17.761149+00:00\","] # [doc = "     \"level\": \"INFO\","] # [doc = "     \"message\": \"write this as json\","] # [doc = "     \"tag\": \"info\","] # [doc = "     \"fields\": {}"] # [doc = "   }"] # [doc = " }"] # [doc = " ```"] pub trait Formatter { # [doc = " The error type if the `Tree` cannot be stringified."] type Error : Error + Send + Sync ; # [doc = " Stringifies the `Tree`, or returns an error."] # [doc = ""] # [doc = " # Errors"] # [doc = ""] # [doc = " If the `Tree` cannot be formatted to a string, an error is returned."] fn fmt (& self , tree : & Tree) -> Result < String , Self :: Error > ; }
+};
+}

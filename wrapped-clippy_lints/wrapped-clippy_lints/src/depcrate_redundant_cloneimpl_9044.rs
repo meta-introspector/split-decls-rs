@@ -1,0 +1,9 @@
+// Generated macro for impl_9044 (impl)
+macro_rules! Depcrate_redundant_cloneimpl_9044 {
+() => {
+// Module: crate::redundant_clone
+// Provides: {"impl_9044"}
+// Dependencies: {}
+impl MirLocalUsage { fn maybe_used (& self) -> bool { matches ! (self , MirLocalUsage :: Unknown | MirLocalUsage :: Used (_)) } }
+};
+}

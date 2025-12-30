@@ -1,0 +1,9 @@
+// Generated macro for inflateCopy (function)
+macro_rules! DepcrateinflateCopy {
+() => {
+// Module: crate
+// Provides: {"inflateCopy"}
+// Dependencies: {}
+# [doc = " Sets the destination stream as a complete copy of the source stream."] # [doc = ""] # [doc = " This function can be useful when randomly accessing a large stream."] # [doc = " The first pass through the stream can periodically record the inflate state,"] # [doc = " allowing restarting inflate at those points when randomly accessing the stream."] # [doc = ""] # [doc = " # Returns"] # [doc = ""] # [doc = " - [`Z_OK`] if success"] # [doc = " - [`Z_MEM_ERROR`] if there was not enough memory"] # [doc = " - [`Z_STREAM_ERROR`] if the source stream state was inconsistent (such as zalloc being NULL)"] # [doc = ""] # [doc = " The `msg` field is left unchanged in both source and destination."] # [doc = ""] # [doc = " # Safety"] # [doc = ""] # [doc = " The caller must guarantee that"] # [doc = ""] # [doc = " * Either"] # [doc = "     - `dest` is `NULL`"] # [doc = "     - `dest` satisfies the requirements of `&mut *(dest as *mut MaybeUninit<z_stream>)`"] # [doc = " * Either"] # [doc = "     - `source` is `NULL`"] # [doc = "     - `source` satisfies the requirements of `&mut *strm` and was initialized with [`inflateInit_`] or similar"] # [cfg_attr (feature = "export-symbols" , export_name = prefix ! (inflateCopy))] pub unsafe extern "C-unwind" fn inflateCopy (dest : * mut z_stream , source : * const z_stream) -> i32 { let Some (dest) = (unsafe { dest . cast :: < MaybeUninit < InflateStream > > () . as_mut () }) else { return ReturnCode :: StreamError as _ ; } ; let Some (source) = (unsafe { InflateStream :: from_stream_ref (source) }) else { return ReturnCode :: StreamError as _ ; } ; zlib_rs :: inflate :: copy (dest , source) as _ }
+};
+}

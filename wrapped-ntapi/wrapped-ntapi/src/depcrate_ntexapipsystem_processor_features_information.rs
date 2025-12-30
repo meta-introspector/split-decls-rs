@@ -1,0 +1,9 @@
+// Generated macro for PSYSTEM_PROCESSOR_FEATURES_INFORMATION (type)
+macro_rules! Depcrate_ntexapiPSYSTEM_PROCESSOR_FEATURES_INFORMATION {
+() => {
+// Module: crate::ntexapi
+// Provides: {"PSYSTEM_PROCESSOR_FEATURES_INFORMATION"}
+// Dependencies: {}
+pub type PSYSTEM_PROCESSOR_FEATURES_INFORMATION = * mut SYSTEM_PROCESSOR_FEATURES_INFORMATION ;
+};
+}

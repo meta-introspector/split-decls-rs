@@ -1,0 +1,11 @@
+// Generated macro for parse_temporal_fraction (function)
+macro_rules! Depcrate_fmt_utilparse_temporal_fraction {
+() => {
+// Module: crate::fmt::util
+// Provides: {"parse_temporal_fraction"}
+// Dependencies: {}
+# [doc = " Parses an optional fractional number from the start of `input`."] # [doc = ""] # [doc = " If `input` does not begin with a `.` (or a `,`), then this returns `None`"] # [doc = " and no input is consumed. Otherwise, up to 9 ASCII digits are parsed after"] # [doc = " the decimal separator."] # [doc = ""] # [doc = " While this is most typically used to parse the fractional component of"] # [doc = " second units, it is also used to parse the fractional component of hours or"] # [doc = " minutes in ISO 8601 duration parsing, and milliseconds and microseconds in"] # [doc = " the \"friendly\" duration format. The return type in that case is obviously a"] # [doc = " misnomer, but the range of possible values is still correct. (That is, the"] # [doc = " fractional component of an hour is still limited to 9 decimal places per"] # [doc = " the Temporal spec.)"] # [doc = ""] # [doc = " The number returned is guaranteed to be in the range `0..=999_999_999`."] # [cfg_attr (feature = "perf-inline" , inline (always))] pub (crate) fn parse_temporal_fraction < 'i > (input : & 'i [u8] ,) -> Result < Parsed < 'i , Option < u32 > > , Error > { # [inline (never)] fn imp < 'i > (mut input : & 'i [u8]) -> Result < Parsed < 'i , Option < u32 > > , Error > { let mkdigits = parse :: slicer (input) ; while mkdigits (input) . len () <= 8 && input . first () . map_or (false , u8 :: is_ascii_digit) { input = & input [1 ..] ; } let digits = mkdigits (input) ; if digits . is_empty () { return Err (err ! ("found decimal after seconds component, \
+                 but did not find any decimal digits after decimal" ,)) ; } let nanoseconds = parse :: fraction (digits) . map_err (| err | { err ! ("failed to parse {digits:?} as fractional component \
+                 (up to 9 digits, nanosecond precision): {err}" , digits = escape :: Bytes (digits) ,) }) ? ; let nanoseconds = nanoseconds as u32 ; Ok (Parsed { value : Some (nanoseconds) , input }) } if input . is_empty () || (input [0] != b'.' && input [0] != b',') { return Ok (Parsed { value : None , input }) ; } imp (& input [1 ..]) }
+};
+}

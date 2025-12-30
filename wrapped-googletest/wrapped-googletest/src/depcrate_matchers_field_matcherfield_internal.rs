@@ -1,0 +1,9 @@
+// Generated macro for field_internal (macro)
+macro_rules! Depcrate_matchers_field_matcherfield_internal {
+() => {
+// Module: crate::matchers::field_matcher
+// Provides: {"field_internal"}
+// Dependencies: {}
+# [doc (hidden)] # [macro_export] macro_rules ! field_internal { ($ (& $ ($ _amp : literal) ?) ? $ (:: $ ($ _cs : literal) ?) ? $ ($ t : ident) ::+ $ (::<$ ($ t_ty_args : ty) ,* $ (,) ?>) ? .$ field : tt , ref $ m : expr) => { { $ crate :: field_internal ! (@ assert_empty $ ($ ($ _amp) *) * $ ($ ($ _cs) *) *) ; $ crate :: field_internal ! (@ internal struct_type : [& _] field_prefix : [$ (& $ ($ _amp) *) * $ (:: $ ($ _cs) *) * $ ($ t) ::* $ (::<$ ($ t_ty_args) ,*>) *] [$ field] [ref] [$ m]) } } ; ($ (& $ ($ _amp : literal) ?) ? $ (:: $ ($ _cs : literal) ?) ? $ ($ t : ident) ::+ $ (::<$ ($ t_ty_args : ty) ,* $ (,) ?>) ? .$ field : tt , $ m : expr) => { { $ crate :: field_internal ! (@ assert_empty $ ($ ($ _amp) *) * $ ($ ($ _cs) *) *) ; $ crate :: field_internal ! (@ internal struct_type : [$ (& $ ($ _amp) *) * & _] field_prefix : [$ (& $ ($ _amp) *) * $ (:: $ ($ _cs) *) * $ ($ t) ::* $ (::<$ ($ t_ty_args) ,*>) *] [$ field] [] [$ m]) } } ; (@ assert_empty) => { } ; (@ assert_empty $ ($ l : literal) +) => { compile_error ! ("property! argument must start with an optional `&` followed by a path") } ; (@ internal struct_type : [$ struct_ty : ty] field_prefix : [$ ($ field_prefix : tt) *] [$ field : tt] [$ ($ ref : tt) ?] [$ m : expr]) => { { $ crate :: matchers :: __internal_unstable_do_not_depend_on_these :: field_matcher (| o : $ struct_ty | { match o { $ ($ field_prefix) * { $ field : $ ($ ref) * value , .. } => Some (value) , # [allow (unreachable_patterns)] _ => None , } } , & stringify ! ($ field) , $ crate :: matcher_support :: __internal_unstable_do_not_depend_on_these :: auto_eq ! ($ m)) } } }
+};
+}

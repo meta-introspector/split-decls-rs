@@ -1,0 +1,9 @@
+// Generated macro for macro_1546 (macro)
+macro_rules! Depcrate_disallowed_macrosmacro_1546 {
+() => {
+// Module: crate::disallowed_macros
+// Provides: {"macro_1546"}
+// Dependencies: {}
+declare_clippy_lint ! { # [doc = " ### What it does"] # [doc = " Denies the configured macros in clippy.toml"] # [doc = ""] # [doc = " Note: Even though this lint is warn-by-default, it will only trigger if"] # [doc = " macros are defined in the clippy.toml file."] # [doc = ""] # [doc = " ### Why is this bad?"] # [doc = " Some macros are undesirable in certain contexts, and it's beneficial to"] # [doc = " lint for them as needed."] # [doc = ""] # [doc = " ### Example"] # [doc = " An example clippy.toml configuration:"] # [doc = " ```toml"] # [doc = " # clippy.toml"] # [doc = " disallowed-macros = ["] # [doc = "     # Can use a string as the path of the disallowed macro."] # [doc = "     \"std::print\","] # [doc = "     # Can also use an inline table with a `path` key."] # [doc = "     { path = \"std::println\" },"] # [doc = "     # When using an inline table, can add a `reason` for why the macro"] # [doc = "     # is disallowed."] # [doc = "     { path = \"serde::Serialize\", reason = \"no serializing\" },"] # [doc = "     # This would normally error if the path is incorrect, but with `allow-invalid` = `true`,"] # [doc = "     # it will be silently ignored"] # [doc = "     { path = \"std::invalid_macro\", reason = \"use alternative instead\", allow-invalid = true }"] # [doc = " ]"] # [doc = " ```"] # [doc = " ```no_run"] # [doc = " use serde::Serialize;"] # [doc = ""] # [doc = " println!(\"warns\");"] # [doc = ""] # [doc = " // The diagnostic will contain the message \"no serializing\""] # [doc = " #[derive(Serialize)]"] # [doc = " struct Data {"] # [doc = "     name: String,"] # [doc = "     value: usize,"] # [doc = " }"] # [doc = " ```"] # [clippy :: version = "1.66.0"] pub DISALLOWED_MACROS , style , "use of a disallowed macro" }
+};
+}

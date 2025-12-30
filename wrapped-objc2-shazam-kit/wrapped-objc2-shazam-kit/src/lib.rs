@@ -1,0 +1,61 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcrate_generateduse_43.rs");
+include!("depcrate_generated__shmediaitem.rs");
+include!("depcrate_generated__shmedialibrary.rs");
+include!("depcrateuse_51.rs");
+include!("depcrate_generateduse_34.rs");
+include!("depcrate_generateduse_49.rs");
+include!("depcrateother_1.rs");
+include!("depcrate_generated__uttype_shshazamadditions.rs");
+include!("depcrate_generated__shsignaturegenerator.rs");
+include!("depcrate_generateduse_29.rs");
+include!("depcrate_generateduse_18.rs");
+include!("depcrate_generated__shmatchedmediaitem.rs");
+include!("depcrate_generateduse_23.rs");
+include!("depcrate_generatedother_4.rs");
+include!("depcrate_generateduse_32.rs");
+include!("depcrate_generateduse_35.rs");
+include!("depcrate_generateduse_39.rs");
+include!("depcrate_generateduse_20.rs");
+include!("depcrate_generated__shrange.rs");
+include!("depcrate_generateduse_42.rs");
+include!("depcrate_generateduse_25.rs");
+include!("depcrate_generated__shsignature.rs");
+include!("depcrate_generateduse_27.rs");
+include!("depcrate_generateduse_33.rs");
+include!("depcrate_generated__shcustomcatalog.rs");
+include!("depcrate_generateduse_19.rs");
+include!("depcrate_generated__shcatalog.rs");
+include!("depcrate_generateduse_26.rs");
+include!("depcrate_generateduse_31.rs");
+include!("depcrate_generateduse_38.rs");
+include!("depcrate_generateduse_41.rs");
+include!("depcrate_generateduse_44.rs");
+include!("depcrategenerated.rs");
+include!("depcrate_generateduse_50.rs");
+include!("depcrate_generateduse_37.rs");
+include!("depcrate_generateduse_46.rs");
+include!("depcrate_generateduse_28.rs");
+include!("depcrate_generated__shdefines.rs");
+include!("depcrate_generated__sherror.rs");
+include!("depcrate_generateduse_22.rs");
+include!("depcrate_generateduse_24.rs");
+include!("depcrateother_2.rs");
+include!("depcrate_generateduse_40.rs");
+include!("depcrate_generateduse_21.rs");
+include!("depcrate_generateduse_30.rs");
+include!("depcrate_generateduse_36.rs");
+include!("depcrate_generated__shmatch.rs");
+include!("depcrate_generateduse_45.rs");
+include!("depcrate_generateduse_48.rs");
+include!("depcrate_generateduse_47.rs");
+include!("depcrate_generated__shsession.rs");
+include!("modcrate.rs");
+include!("modcrate_generated.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate!();
+    Modcrate_generated!();
+}

@@ -1,0 +1,9 @@
+// Generated macro for impl_1779 (impl)
+macro_rules! Depcrate_perfcnt_intel_descriptionimpl_1779 {
+() => {
+// Module: crate::perfcnt::intel::description
+// Provides: {"impl_1779"}
+// Dependencies: {}
+impl < 'a > EventDescription < 'a > { pub fn new (event_code : Tuple , umask : Tuple , event_name : & 'a str , brief_description : & 'a str , public_description : Option < & 'a str > , counter : Counter , counter_ht_off : Option < Counter > , pebs_counters : Option < Counter > , sample_after_value : u64 , msr_index : MSRIndex , msr_value : u64 , taken_alone : bool , counter_mask : u8 , invert : bool , any_thread : bool , edge_detect : bool , pebs : PebsType , precise_store : bool , collect_pebs_record : Option < u64 > , data_la : bool , l1_hit_indication : bool , errata : Option < & 'a str > , offcore : bool , unit : Option < & 'a str > , filter : Option < & 'a str > , extsel : bool , uncore : bool , deprecated : bool , event_status : u64 , fc_mask : u8 , filter_value : u64 , port_mask : u8 , umask_ext : u8 ,) -> EventDescription < 'a > { EventDescription { event_code : event_code , umask : umask , event_name : event_name , brief_description : brief_description , public_description : public_description , counter : counter , counter_ht_off : counter_ht_off , pebs_counters : pebs_counters , sample_after_value : sample_after_value , msr_index : msr_index , msr_value : msr_value , taken_alone : taken_alone , counter_mask : counter_mask , invert : invert , any_thread : any_thread , edge_detect : edge_detect , pebs : pebs , precise_store : precise_store , collect_pebs_record : collect_pebs_record , data_la : data_la , l1_hit_indication : l1_hit_indication , errata : errata , offcore : offcore , unit : unit , filter : filter , extsel : extsel , uncore : uncore , deprecated : deprecated , event_status : event_status , fc_mask : fc_mask , filter_value : filter_value , port_mask : port_mask , umask_ext : umask_ext , } } }
+};
+}

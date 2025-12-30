@@ -1,0 +1,9 @@
+// Generated macro for macro_7220 (macro)
+macro_rules! Depcrate_methodsmacro_7220 {
+() => {
+// Module: crate::methods
+// Provides: {"macro_7220"}
+// Dependencies: {}
+declare_clippy_lint ! { # [doc = " ### What it does"] # [doc = " Looks for calls to `Path::ends_with` calls where the argument looks like a file extension."] # [doc = ""] # [doc = " By default, Clippy has a short list of known filenames that start with a dot"] # [doc = " but aren't necessarily file extensions (e.g. the `.git` folder), which are allowed by default."] # [doc = " The `allowed-dotfiles` configuration can be used to allow additional"] # [doc = " file extensions that Clippy should not lint."] # [doc = ""] # [doc = " ### Why is this bad?"] # [doc = " This doesn't actually compare file extensions. Rather, `ends_with` compares the given argument"] # [doc = " to the last **component** of the path and checks if it matches exactly."] # [doc = ""] # [doc = " ### Known issues"] # [doc = " File extensions are often at most three characters long, so this only lints in those cases"] # [doc = " in an attempt to avoid false positives."] # [doc = " Any extension names longer than that are assumed to likely be real path components and are"] # [doc = " therefore ignored."] # [doc = ""] # [doc = " ### Example"] # [doc = " ```no_run"] # [doc = " # use std::path::Path;"] # [doc = " fn is_markdown(path: &Path) -> bool {"] # [doc = "     path.ends_with(\".md\")"] # [doc = " }"] # [doc = " ```"] # [doc = " Use instead:"] # [doc = " ```no_run"] # [doc = " # use std::path::Path;"] # [doc = " fn is_markdown(path: &Path) -> bool {"] # [doc = "     path.extension().is_some_and(|ext| ext == \"md\")"] # [doc = " }"] # [doc = " ```"] # [clippy :: version = "1.74.0"] pub PATH_ENDS_WITH_EXT , suspicious , "attempting to compare file extensions using `Path::ends_with`" }
+};
+}

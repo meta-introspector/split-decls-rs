@@ -1,0 +1,9 @@
+// Generated macro for macro_27912 (macro)
+macro_rules! Depcrate_um_dwritemacro_27912 {
+() => {
+// Module: crate::um::dwrite
+// Provides: {"macro_27912"}
+// Dependencies: {}
+RIDL ! { # [uuid (0xa71efdb4 , 0x9fdb , 0x4838 , 0xad , 0x90 , 0xcf , 0xc3 , 0xbe , 0x8c , 0x3d , 0xaf)] interface IDWriteFontFace1 (IDWriteFontFace1Vtbl) : IDWriteFontFace (IDWriteFontFaceVtbl) { fn GetMetrics (fontFaceMetrics : * mut DWRITE_FONT_METRICS1 ,) -> () , fn GetGdiCompatibleMetrics (emSize : FLOAT , pixelsPerDip : FLOAT , transform : * const DWRITE_MATRIX , fontFaceMetrics : * mut DWRITE_FONT_METRICS1 ,) -> HRESULT , fn GetCaretMetrics (caretMetrics : * mut DWRITE_CARET_METRICS ,) -> () , fn GetUnicodeRanges (maxRangeCount : UINT32 , unicodeRanges : * mut DWRITE_UNICODE_RANGE , actualRangeCount : * mut UINT32 ,) -> HRESULT , fn IsMonoSpacedFont () -> BOOL , fn GetDesignGlyphAdvances (glyphCount : UINT32 , glyphIndices : * const UINT16 , glyphAdvances : * mut INT32 , isSideways : BOOL ,) -> HRESULT , fn GetGdiCompatibleGlyphAdvance (emSize : FLOAT , pixelsPerDip : FLOAT , transform : * const DWRITE_MATRIX , useGdiNatural : BOOL , isSideways : BOOL , glyphCount : UINT32 , glyphIndices : * const UINT16 , glyphAdvances : * mut INT32 ,) -> HRESULT , fn GetKerningPairAdjustments (glyphCount : UINT32 , glyphIndices : * const UINT16 , glyphAdvanceAdjustments : * mut INT32 ,) -> HRESULT , fn HasKerningPairs () -> BOOL , fn GetRecommendedRenderingMode (fontEmSize : FLOAT , dpiX : FLOAT , dpiY : FLOAT , transform : * const DWRITE_MATRIX , isSideways : BOOL , outlineThreshold : DWRITE_OUTLINE_THRESHOLD , measuringMode : DWRITE_MEASURING_MODE , renderingMode : * mut DWRITE_RENDERING_MODE ,) -> HRESULT , fn GetVerticalGlyphVariants (nominalGlyphIndices : * const UINT16 , verticalGlyphIndices : * mut UINT16 ,) -> HRESULT , fn HasVerticalGlyphVariants () -> BOOL , } }
+};
+}

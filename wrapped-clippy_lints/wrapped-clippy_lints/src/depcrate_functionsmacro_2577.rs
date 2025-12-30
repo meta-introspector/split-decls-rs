@@ -1,0 +1,9 @@
+// Generated macro for macro_2577 (macro)
+macro_rules! Depcrate_functionsmacro_2577 {
+() => {
+// Module: crate::functions
+// Provides: {"macro_2577"}
+// Dependencies: {}
+declare_clippy_lint ! { # [doc = " ### What it does"] # [doc = " Checks for functions that return `Result` with an unusually large"] # [doc = " `Err`-variant."] # [doc = ""] # [doc = " ### Why is this bad?"] # [doc = " A `Result` is at least as large as the `Err`-variant. While we"] # [doc = " expect that variant to be seldom used, the compiler needs to reserve"] # [doc = " and move that much memory every single time."] # [doc = " Furthermore, errors are often simply passed up the call-stack, making"] # [doc = " use of the `?`-operator and its type-conversion mechanics. If the"] # [doc = " `Err`-variant further up the call-stack stores the `Err`-variant in"] # [doc = " question (as library code often does), it itself needs to be at least"] # [doc = " as large, propagating the problem."] # [doc = ""] # [doc = " ### Known problems"] # [doc = " The size determined by Clippy is platform-dependent."] # [doc = ""] # [doc = " ### Examples"] # [doc = " ```no_run"] # [doc = " pub enum ParseError {"] # [doc = "     UnparsedBytes([u8; 512]),"] # [doc = "     UnexpectedEof,"] # [doc = " }"] # [doc = ""] # [doc = " // The `Result` has at least 512 bytes, even in the `Ok`-case"] # [doc = " pub fn parse() -> Result<(), ParseError> {"] # [doc = "     Ok(())"] # [doc = " }"] # [doc = " ```"] # [doc = " should be"] # [doc = " ```no_run"] # [doc = " pub enum ParseError {"] # [doc = "     UnparsedBytes(Box<[u8; 512]>),"] # [doc = "     UnexpectedEof,"] # [doc = " }"] # [doc = ""] # [doc = " // The `Result` is slightly larger than a pointer"] # [doc = " pub fn parse() -> Result<(), ParseError> {"] # [doc = "     Ok(())"] # [doc = " }"] # [doc = " ```"] # [clippy :: version = "1.65.0"] pub RESULT_LARGE_ERR , perf , "function returning `Result` with large `Err` type" }
+};
+}

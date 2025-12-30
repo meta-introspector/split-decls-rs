@@ -1,0 +1,47 @@
+// Generated module macro for crate::um::d3d12sdklayers
+macro_rules! Modcrate_um_d3d12sdklayers {
+() => {
+        Depcrate_um_d3d12sdklayersuse_26390!();
+        Depcrate_um_d3d12sdklayersuse_26391!();
+        Depcrate_um_d3d12sdklayersuse_26392!();
+        Depcrate_um_d3d12sdklayersuse_26393!();
+        Depcrate_um_d3d12sdklayersuse_26394!();
+        Depcrate_um_d3d12sdklayersuse_26395!();
+        Depcrate_um_d3d12sdklayersmacro_26396!();
+        Depcrate_um_d3d12sdklayersmacro_26397!();
+        Depcrate_um_d3d12sdklayersmacro_26398!();
+        Depcrate_um_d3d12sdklayersmacro_26399!();
+        Depcrate_um_d3d12sdklayersmacro_26400!();
+        Depcrate_um_d3d12sdklayersmacro_26401!();
+        Depcrate_um_d3d12sdklayersmacro_26402!();
+        Depcrate_um_d3d12sdklayersmacro_26403!();
+        Depcrate_um_d3d12sdklayersmacro_26404!();
+        Depcrate_um_d3d12sdklayersmacro_26405!();
+        Depcrate_um_d3d12sdklayersmacro_26406!();
+        Depcrate_um_d3d12sdklayersmacro_26407!();
+        Depcrate_um_d3d12sdklayersmacro_26408!();
+        Depcrate_um_d3d12sdklayersmacro_26409!();
+        Depcrate_um_d3d12sdklayersmacro_26410!();
+        Depcrate_um_d3d12sdklayersmacro_26411!();
+        Depcrate_um_d3d12sdklayersmacro_26412!();
+        Depcrate_um_d3d12sdklayersmacro_26413!();
+        Depcrate_um_d3d12sdklayersmacro_26414!();
+        Depcrate_um_d3d12sdklayersmacro_26415!();
+        Depcrate_um_d3d12sdklayersmacro_26416!();
+        Depcrate_um_d3d12sdklayersmacro_26417!();
+        Depcrate_um_d3d12sdklayersmacro_26418!();
+        Depcrate_um_d3d12sdklayersmacro_26419!();
+        Depcrate_um_d3d12sdklayersmacro_26420!();
+        Depcrate_um_d3d12sdklayersD3D12_INFO_QUEUE_DEFAULT_MESSAGE_COUNT_LIMIT!();
+        Depcrate_um_d3d12sdklayersmacro_26422!();
+        Depcrate_um_d3d12sdklayersmacro_26423!();
+        Depcrate_um_d3d12sdklayersmacro_26424!();
+        Depcrate_um_d3d12sdklayersmacro_26425!();
+        Depcrate_um_d3d12sdklayersmacro_26426!();
+        Depcrate_um_d3d12sdklayersmacro_26427!();
+        Depcrate_um_d3d12sdklayersmacro_26428!();
+        Depcrate_um_d3d12sdklayersmacro_26429!();
+        Depcrate_um_d3d12sdklayersmacro_26430!();
+        Depcrate_um_d3d12sdklayersmacro_26431!();
+    };
+}

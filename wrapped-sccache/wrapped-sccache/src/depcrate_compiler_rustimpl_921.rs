@@ -1,0 +1,9 @@
+// Generated macro for impl_921 (impl)
+macro_rules! Depcrate_compiler_rustimpl_921 {
+() => {
+// Module: crate::compiler::rust
+// Provides: {"impl_921"}
+// Dependencies: {}
+# [cfg (feature = "dist-client")] impl OutputsRewriter for RustOutputsRewriter { fn handle_outputs (self : Box < Self > , path_transformer : & dist :: PathTransformer , output_paths : & [PathBuf] , extra_inputs : & [PathBuf] ,) -> Result < () > { use std :: io :: Write ; trace ! ("Pondering on rewriting dep file {:?}" , self . dep_info) ; if let Some (dep_info) = self . dep_info { let extra_input_str = extra_inputs . iter () . fold (String :: new () , | s , p | s + " " + & p . to_string_lossy ()) ; for dep_info_local_path in output_paths { trace ! ("Comparing with {}" , dep_info_local_path . display ()) ; if dep_info == * dep_info_local_path { info ! ("Replacing using the transformer {:?}" , path_transformer) ; let f = fs :: File :: open (& dep_info) . with_context (| | "Failed to open dep info file") ? ; let mut deps = String :: new () ; { f } . read_to_string (& mut deps) ? ; for (local_path , dist_path) in get_path_mappings (path_transformer) { let re_str = format ! ("(?m)^{}" , regex :: escape (& dist_path)) ; let local_path_str = local_path . to_str () . with_context (| | { format ! ("could not convert {} to string for RE replacement" , local_path . display ()) }) ? ; error ! ("RE replacing {} with {} in {}" , re_str , local_path_str , deps) ; let re = regex :: Regex :: new (& re_str) . expect ("Invalid regex") ; deps = re . replace_all (& deps , local_path_str) . into_owned () ; } if ! extra_inputs . is_empty () { deps = deps . replace (": " , & format ! (":{} " , extra_input_str)) ; } let f = fs :: File :: create (& dep_info) . context ("Failed to recreate dep info file") ? ; { f } . write_all (deps . as_bytes ()) ? ; return Ok (()) ; } } bail ! ("No outputs matched dep info file {}" , dep_info . display ()) ; } Ok (()) } }
+};
+}

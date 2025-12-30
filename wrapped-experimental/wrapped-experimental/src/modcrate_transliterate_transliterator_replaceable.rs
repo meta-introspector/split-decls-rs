@@ -1,0 +1,48 @@
+// Generated module macro for crate::transliterate::transliterator::replaceable
+macro_rules! Modcrate_transliterate_transliterator_replaceable {
+() => {
+        Depcrate_transliterate_transliterator_replaceableuse_1010!();
+        Depcrate_transliterate_transliterator_replaceableuse_1011!();
+        Depcrate_transliterate_transliterator_replaceableuse_1012!();
+        Depcrate_transliterate_transliterator_replaceableuse_1013!();
+        Depcrate_transliterate_transliterator_replaceableuse_1014!();
+        Depcrate_transliterate_transliterator_replaceableuse_1015!();
+        Depcrate_transliterate_transliterator_replaceableuse_1016!();
+        Depcrate_transliterate_transliterator_replaceableTransliteratorBuffer!();
+        Depcrate_transliterate_transliterator_replaceableimpl_1018!();
+        Depcrate_transliterate_transliterator_replaceableHide!();
+        Depcrate_transliterate_transliterator_replaceableimpl_1020!();
+        Depcrate_transliterate_transliterator_replaceableimpl_1021!();
+        Depcrate_transliterate_transliterator_replaceableimpl_1022!();
+        Depcrate_transliterate_transliterator_replaceableReplaceable!();
+        Depcrate_transliterate_transliterator_replaceableimpl_1024!();
+        Depcrate_transliterate_transliterator_replaceableimpl_1025!();
+        Depcrate_transliterate_transliterator_replaceableRepMatcher!();
+        Depcrate_transliterate_transliterator_replaceableimpl_1027!();
+        Depcrate_transliterate_transliterator_replaceableimpl_1028!();
+        Depcrate_transliterate_transliterator_replaceableimpl_1029!();
+        Depcrate_transliterate_transliterator_replaceableimpl_1030!();
+        Depcrate_transliterate_transliterator_replaceableimpl_1031!();
+        Depcrate_transliterate_transliterator_replaceablesealed!();
+        Depcrate_transliterate_transliterator_replaceableForward!();
+        Depcrate_transliterate_transliterator_replaceableReverse!();
+        Depcrate_transliterate_transliterator_replaceableMatchDirection!();
+        Depcrate_transliterate_transliterator_replaceableimpl_1036!();
+        Depcrate_transliterate_transliterator_replaceableimpl_1037!();
+        Depcrate_transliterate_transliterator_replaceableUtf8Matcher!();
+        Depcrate_transliterate_transliterator_replaceableMatchLengths!();
+        Depcrate_transliterate_transliterator_replaceableInsertable!();
+        Depcrate_transliterate_transliterator_replaceableimpl_1041!();
+        Depcrate_transliterate_transliterator_replaceableimpl_1042!();
+        Depcrate_transliterate_transliterator_replaceableimpl_1043!();
+        Depcrate_transliterate_transliterator_replaceableInsertableToReplaceableAdapter!();
+        Depcrate_transliterate_transliterator_replaceableimpl_1045!();
+        Depcrate_transliterate_transliterator_replaceableimpl_1046!();
+        Depcrate_transliterate_transliterator_replaceableimpl_1047!();
+        Depcrate_transliterate_transliterator_replaceableimpl_1048!();
+        Depcrate_transliterate_transliterator_replaceableInsertableGuard!();
+        Depcrate_transliterate_transliterator_replaceableimpl_1050!();
+        Depcrate_transliterate_transliterator_replaceableimpl_1051!();
+        Depcrate_transliterate_transliterator_replaceableCursorOffset!();
+    };
+}

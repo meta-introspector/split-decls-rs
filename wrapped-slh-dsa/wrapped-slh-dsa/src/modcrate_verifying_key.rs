@@ -1,0 +1,40 @@
+// Generated module macro for crate::verifying_key
+macro_rules! Modcrate_verifying_key {
+() => {
+        Depcrate_verifying_keyuse_154!();
+        Depcrate_verifying_keyuse_155!();
+        Depcrate_verifying_keyuse_156!();
+        Depcrate_verifying_keyuse_157!();
+        Depcrate_verifying_keyuse_158!();
+        Depcrate_verifying_keyuse_159!();
+        Depcrate_verifying_keyuse_160!();
+        Depcrate_verifying_keyuse_161!();
+        Depcrate_verifying_keyuse_162!();
+        Depcrate_verifying_keyuse_163!();
+        Depcrate_verifying_keyuse_164!();
+        Depcrate_verifying_keyuse_165!();
+        Depcrate_verifying_keyuse_166!();
+        Depcrate_verifying_keyVerifyingKeyLen!();
+        Depcrate_verifying_keyPkSeed!();
+        Depcrate_verifying_keyimpl_169!();
+        Depcrate_verifying_keyimpl_170!();
+        Depcrate_verifying_keyimpl_171!();
+        Depcrate_verifying_keyVerifyingKey!();
+        Depcrate_verifying_keyimpl_173!();
+        Depcrate_verifying_keyimpl_174!();
+        Depcrate_verifying_keyimpl_175!();
+        Depcrate_verifying_keyimpl_176!();
+        Depcrate_verifying_keyimpl_177!();
+        Depcrate_verifying_keyimpl_178!();
+        Depcrate_verifying_keyimpl_179!();
+        Depcrate_verifying_keyimpl_180!();
+        Depcrate_verifying_keyimpl_181!();
+        Depcrate_verifying_keyimpl_182!();
+        Depcrate_verifying_keyimpl_183!();
+        Depcrate_verifying_keyimpl_184!();
+        Depcrate_verifying_keyimpl_185!();
+        Depcrate_verifying_keyimpl_186!();
+        Depcrate_verifying_keyimpl_187!();
+        Depcrate_verifying_keytests!();
+    };
+}

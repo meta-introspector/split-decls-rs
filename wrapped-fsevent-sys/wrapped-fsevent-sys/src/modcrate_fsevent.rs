@@ -1,0 +1,50 @@
+// Generated module macro for crate::fsevent
+macro_rules! Modcrate_fsevent {
+() => {
+        Depcrate_fseventuse_2!();
+        Depcrate_fseventuse_3!();
+        Depcrate_fseventuse_4!();
+        Depcrate_fseventFSEventStreamRef!();
+        Depcrate_fseventConstFSEventStreamRef!();
+        Depcrate_fseventFSEventStreamCallback!();
+        Depcrate_fseventFSEventStreamEventId!();
+        Depcrate_fseventFSEventStreamCreateFlags!();
+        Depcrate_fseventFSEventStreamEventFlags!();
+        Depcrate_fseventkFSEventStreamEventIdSinceNow!();
+        Depcrate_fseventkFSEventStreamCreateFlagNone!();
+        Depcrate_fseventkFSEventStreamCreateFlagUseCFTypes!();
+        Depcrate_fseventkFSEventStreamCreateFlagNoDefer!();
+        Depcrate_fseventkFSEventStreamCreateFlagWatchRoot!();
+        Depcrate_fseventkFSEventStreamCreateFlagIgnoreSelf!();
+        Depcrate_fseventkFSEventStreamCreateFlagFileEvents!();
+        Depcrate_fseventkFSEventStreamCreateFlagMarkSelf!();
+        Depcrate_fseventkFSEventStreamCreateFlagUseExtendedData!();
+        Depcrate_fseventkFSEventStreamCreateFlagFullHistory!();
+        Depcrate_fseventkFSEventStreamEventFlagNone!();
+        Depcrate_fseventkFSEventStreamEventFlagMustScanSubDirs!();
+        Depcrate_fseventkFSEventStreamEventFlagUserDropped!();
+        Depcrate_fseventkFSEventStreamEventFlagKernelDropped!();
+        Depcrate_fseventkFSEventStreamEventFlagEventIdsWrapped!();
+        Depcrate_fseventkFSEventStreamEventFlagHistoryDone!();
+        Depcrate_fseventkFSEventStreamEventFlagRootChanged!();
+        Depcrate_fseventkFSEventStreamEventFlagMount!();
+        Depcrate_fseventkFSEventStreamEventFlagUnmount!();
+        Depcrate_fseventkFSEventStreamEventFlagItemCreated!();
+        Depcrate_fseventkFSEventStreamEventFlagItemRemoved!();
+        Depcrate_fseventkFSEventStreamEventFlagItemInodeMetaMod!();
+        Depcrate_fseventkFSEventStreamEventFlagItemRenamed!();
+        Depcrate_fseventkFSEventStreamEventFlagItemModified!();
+        Depcrate_fseventkFSEventStreamEventFlagItemFinderInfoMod!();
+        Depcrate_fseventkFSEventStreamEventFlagItemChangeOwner!();
+        Depcrate_fseventkFSEventStreamEventFlagItemXattrMod!();
+        Depcrate_fseventkFSEventStreamEventFlagItemIsFile!();
+        Depcrate_fseventkFSEventStreamEventFlagItemIsDir!();
+        Depcrate_fseventkFSEventStreamEventFlagItemIsSymlink!();
+        Depcrate_fseventkFSEventStreamEventFlagOwnEvent!();
+        Depcrate_fseventkFSEventStreamEventFlagItemIsHardlink!();
+        Depcrate_fseventkFSEventStreamEventFlagItemIsLastHardlink!();
+        Depcrate_fseventkFSEventStreamEventFlagItemCloned!();
+        Depcrate_fseventFSEventStreamContext!();
+        Depcrate_fseventother_46!();
+    };
+}

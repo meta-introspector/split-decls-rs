@@ -1,0 +1,9 @@
+// Generated macro for impl_18 (impl)
+macro_rules! Depcrate_algorithmimpl_18 {
+() => {
+// Module: crate::algorithm
+// Provides: {"impl_18"}
+// Dependencies: {}
+impl < 'a > AlgorithmIdentifierRef < 'a > { # [doc = " Assert `parameters` is an OID and has the expected value."] pub fn assert_parameters_oid (& self , expected_oid : ObjectIdentifier ,) -> Result < ObjectIdentifier > { let actual_oid = self . parameters_oid () ? ; if actual_oid == expected_oid { Ok (actual_oid) } else { Err (Error :: OidUnknown { oid : actual_oid }) } } # [doc = " Assert the values of the `algorithm` and `parameters` OIDs."] pub fn assert_oids (& self , algorithm : ObjectIdentifier , parameters : ObjectIdentifier ,) -> Result < () > { self . assert_algorithm_oid (algorithm) ? ; self . assert_parameters_oid (parameters) ? ; Ok (()) } # [doc = " Get the `parameters` field as an [`AnyRef`]."] # [doc = ""] # [doc = " Returns an error if `parameters` are `None`."] pub fn parameters_any (& self) -> Result < AnyRef < 'a > > { self . parameters . ok_or (Error :: AlgorithmParametersMissing) } # [doc = " Get the `parameters` field as an [`ObjectIdentifier`]."] # [doc = ""] # [doc = " Returns an error if it is absent or not an OID."] pub fn parameters_oid (& self) -> Result < ObjectIdentifier > { Ok (ObjectIdentifier :: try_from (self . parameters_any () ?) ?) } # [doc = " Convert to a pair of [`ObjectIdentifier`]s."] # [doc = ""] # [doc = " This method is helpful for decomposing in match statements. Note in"] # [doc = " particular that `NULL` parameters are treated the same as missing"] # [doc = " parameters."] # [doc = ""] # [doc = " Returns an error if parameters are present but not an OID."] pub fn oids (& self) -> der :: Result < (ObjectIdentifier , Option < ObjectIdentifier >) > { Ok ((self . oid , match self . parameters { None => None , Some (p) => { if p . is_null () { None } else { Some (p . decode_as :: < ObjectIdentifier > () ?) } } } ,)) } }
+};
+}

@@ -1,0 +1,69 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcrate_errorsimpl_14.rs");
+include!("depcrateerrors.rs");
+include!("depcrate_inoutuse_18.rs");
+include!("depcrate_errorsimpl_9.rs");
+include!("depcrate_inoutinout.rs");
+include!("depcrate_inoutimpl_27.rs");
+include!("depcrate_inout_bufuse_31.rs");
+include!("depcrate_inout_bufimpl_36.rs");
+include!("depcrate_inout_bufinoutbufiter.rs");
+include!("depcrate_errorsimpl_12.rs");
+include!("depcrate_inoutimpl_28.rs");
+include!("depcrate_inoutimpl_21.rs");
+include!("depcrate_reservedimpl_49.rs");
+include!("depcrate_errorsoutistoosmallerror.rs");
+include!("depcrate_inout_bufimpl_37.rs");
+include!("depcratereserved.rs");
+include!("depcrate_errorspaderror.rs");
+include!("depcrate_reservedimpl_47.rs");
+include!("depcrate_inoutimpl_22.rs");
+include!("depcrate_errorsimpl_5.rs");
+include!("depcrate_errorsimpl_15.rs");
+include!("depcrate_inout_bufuse_30.rs");
+include!("depcrate_inoutuse_17.rs");
+include!("depcrate_inoutimpl_23.rs");
+include!("depcrate_inout_bufimpl_34.rs");
+include!("depcrate_inout_bufuse_32.rs");
+include!("depcrate_errorsimpl_6.rs");
+include!("depcrate_errorsnotequalerror.rs");
+include!("depcrate_inout_bufimpl_38.rs");
+include!("depcrate_errorsuse_3.rs");
+include!("depcrate_inoutimpl_25.rs");
+include!("depcrate_reserveduse_45.rs");
+include!("depcrate_inout_bufimpl_39.rs");
+include!("depcrate_reservedpaddedinoutbuf.rs");
+include!("depcrateuse_53.rs");
+include!("depcrate_reserveduse_43.rs");
+include!("depcrateuse_1.rs");
+include!("depcrate_errorsimpl_8.rs");
+include!("depcrate_inout_bufinoutbuf.rs");
+include!("depcrate_inout_bufimpl_41.rs");
+include!("depcrateinout_buf.rs");
+include!("depcrate_reservedinoutbufreserved.rs");
+include!("depcrate_reservedimpl_52.rs");
+include!("depcrate_reservedimpl_50.rs");
+include!("depcrate_errorsintoarrayerror.rs");
+include!("depcrate_inoutimpl_24.rs");
+include!("depcrate_reservedimpl_48.rs");
+include!("depcrateinout.rs");
+include!("depcrate_inoutimpl_26.rs");
+include!("depcrate_errorsimpl_11.rs");
+include!("depcrate_inoutuse_19.rs");
+include!("depcrate_inout_bufimpl_35.rs");
+include!("depcrate_reserveduse_44.rs");
+include!("modcrate_reserved.rs");
+include!("modcrate_errors.rs");
+include!("modcrate.rs");
+include!("modcrate_inout_buf.rs");
+include!("modcrate_inout.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate_reserved!();
+    Modcrate_errors!();
+    Modcrate!();
+    Modcrate_inout_buf!();
+    Modcrate_inout!();
+}

@@ -1,9 +1,9 @@
-// Generated macro for TIB (const)
-macro_rules! DepcrateTIB {
+// Generated macro for tib (function)
+macro_rules! Depcratetib {
 () => {
 // Module: crate
-// Provides: {"TIB"}
+// Provides: {"tib"}
 // Dependencies: {}
-# [doc = " Number of bytes in 1 tebibyte."] pub const TIB : u64 = 1_099_511_627_776 ;
+# [doc = " Converts a quantity of tebibytes to bytes."] pub fn tib < V : Into < u64 > > (size : V) -> u64 { size . into () * TIB }
 };
 }

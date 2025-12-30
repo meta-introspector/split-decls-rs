@@ -1,0 +1,54 @@
+// Generated module macro for crate::dfa
+macro_rules! Modcrate_dfa {
+() => {
+        Depcrate_dfause_70!();
+        Depcrate_dfause_71!();
+        Depcrate_dfause_72!();
+        Depcrate_dfause_73!();
+        Depcrate_dfause_74!();
+        Depcrate_dfause_75!();
+        Depcrate_dfause_76!();
+        Depcrate_dfacan_exec!();
+        Depcrate_dfaCache!();
+        Depcrate_dfaCacheInner!();
+        Depcrate_dfaTransitions!();
+        Depcrate_dfaFsm!();
+        Depcrate_dfaResult!();
+        Depcrate_dfaimpl_83!();
+        Depcrate_dfaState!();
+        Depcrate_dfaInstPtr!();
+        Depcrate_dfapush_inst_ptr!();
+        Depcrate_dfaInstPtrs!();
+        Depcrate_dfaimpl_88!();
+        Depcrate_dfaimpl_89!();
+        Depcrate_dfaStatePtr!();
+        Depcrate_dfaSTATE_UNKNOWN!();
+        Depcrate_dfaSTATE_DEAD!();
+        Depcrate_dfaSTATE_QUIT!();
+        Depcrate_dfaSTATE_START!();
+        Depcrate_dfaSTATE_MATCH!();
+        Depcrate_dfaSTATE_MAX!();
+        Depcrate_dfaByte!();
+        Depcrate_dfaEmptyFlags!();
+        Depcrate_dfaStateFlags!();
+        Depcrate_dfaimpl_100!();
+        Depcrate_dfaimpl_101!();
+        Depcrate_dfaimpl_102!();
+        Depcrate_dfaimpl_103!();
+        Depcrate_dfaimpl_104!();
+        Depcrate_dfaimpl_105!();
+        Depcrate_dfaimpl_106!();
+        Depcrate_dfaimpl_107!();
+        Depcrate_dfaTransitionsRow!();
+        Depcrate_dfaimpl_109!();
+        Depcrate_dfaimpl_110!();
+        Depcrate_dfavb!();
+        Depcrate_dfausize_to_u32!();
+        Depcrate_dfashow_state_ptr!();
+        Depcrate_dfawrite_vari32!();
+        Depcrate_dfaread_vari32!();
+        Depcrate_dfawrite_varu32!();
+        Depcrate_dfaread_varu32!();
+        Depcrate_dfatests!();
+    };
+}

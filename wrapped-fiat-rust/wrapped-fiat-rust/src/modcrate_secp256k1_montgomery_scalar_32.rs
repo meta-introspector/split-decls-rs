@@ -1,0 +1,41 @@
+// Generated module macro for crate::secp256k1_montgomery_scalar_32
+macro_rules! Modcrate_secp256k1_montgomery_scalar_32 {
+() => {
+        Depcrate_secp256k1_montgomery_scalar_32IndexConst!();
+        Depcrate_secp256k1_montgomery_scalar_32impl_842!();
+        Depcrate_secp256k1_montgomery_scalar_32impl_843!();
+        Depcrate_secp256k1_montgomery_scalar_32fiat_secp256k1_montgomery_scalar_u1!();
+        Depcrate_secp256k1_montgomery_scalar_32fiat_secp256k1_montgomery_scalar_i1!();
+        Depcrate_secp256k1_montgomery_scalar_32fiat_secp256k1_montgomery_scalar_u2!();
+        Depcrate_secp256k1_montgomery_scalar_32fiat_secp256k1_montgomery_scalar_i2!();
+        Depcrate_secp256k1_montgomery_scalar_32fiat_secp256k1_montgomery_scalar_montgomery_domain_field_element!();
+        Depcrate_secp256k1_montgomery_scalar_32impl_849!();
+        Depcrate_secp256k1_montgomery_scalar_32impl_850!();
+        Depcrate_secp256k1_montgomery_scalar_32impl_851!();
+        Depcrate_secp256k1_montgomery_scalar_32impl_852!();
+        Depcrate_secp256k1_montgomery_scalar_32fiat_secp256k1_montgomery_scalar_non_montgomery_domain_field_element!();
+        Depcrate_secp256k1_montgomery_scalar_32impl_854!();
+        Depcrate_secp256k1_montgomery_scalar_32impl_855!();
+        Depcrate_secp256k1_montgomery_scalar_32impl_856!();
+        Depcrate_secp256k1_montgomery_scalar_32impl_857!();
+        Depcrate_secp256k1_montgomery_scalar_32fiat_secp256k1_montgomery_scalar_addcarryx_u32!();
+        Depcrate_secp256k1_montgomery_scalar_32fiat_secp256k1_montgomery_scalar_subborrowx_u32!();
+        Depcrate_secp256k1_montgomery_scalar_32fiat_secp256k1_montgomery_scalar_mulx_u32!();
+        Depcrate_secp256k1_montgomery_scalar_32fiat_secp256k1_montgomery_scalar_cmovznz_u32!();
+        Depcrate_secp256k1_montgomery_scalar_32fiat_secp256k1_montgomery_scalar_mul!();
+        Depcrate_secp256k1_montgomery_scalar_32fiat_secp256k1_montgomery_scalar_square!();
+        Depcrate_secp256k1_montgomery_scalar_32fiat_secp256k1_montgomery_scalar_add!();
+        Depcrate_secp256k1_montgomery_scalar_32fiat_secp256k1_montgomery_scalar_sub!();
+        Depcrate_secp256k1_montgomery_scalar_32fiat_secp256k1_montgomery_scalar_opp!();
+        Depcrate_secp256k1_montgomery_scalar_32fiat_secp256k1_montgomery_scalar_from_montgomery!();
+        Depcrate_secp256k1_montgomery_scalar_32fiat_secp256k1_montgomery_scalar_to_montgomery!();
+        Depcrate_secp256k1_montgomery_scalar_32fiat_secp256k1_montgomery_scalar_nonzero!();
+        Depcrate_secp256k1_montgomery_scalar_32fiat_secp256k1_montgomery_scalar_selectznz!();
+        Depcrate_secp256k1_montgomery_scalar_32fiat_secp256k1_montgomery_scalar_to_bytes!();
+        Depcrate_secp256k1_montgomery_scalar_32fiat_secp256k1_montgomery_scalar_from_bytes!();
+        Depcrate_secp256k1_montgomery_scalar_32fiat_secp256k1_montgomery_scalar_set_one!();
+        Depcrate_secp256k1_montgomery_scalar_32fiat_secp256k1_montgomery_scalar_msat!();
+        Depcrate_secp256k1_montgomery_scalar_32fiat_secp256k1_montgomery_scalar_divstep!();
+        Depcrate_secp256k1_montgomery_scalar_32fiat_secp256k1_montgomery_scalar_divstep_precomp!();
+    };
+}

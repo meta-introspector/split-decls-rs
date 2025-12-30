@@ -1,0 +1,9 @@
+// Generated macro for tests (module)
+macro_rules! Depcrate_preinvtests {
+() => {
+// Module: crate::preinv
+// Provides: {"tests"}
+// Dependencies: {}
+# [cfg (test)] mod tests { use super :: * ; use rand :: random ; # [test] fn div_exact_test () { const N : u8 = 100 ; for _ in 0 .. N { let d = random :: < u8 > () | 1 ; let pre : PreModInv < _ > = d . into () ; let n : u8 = random () ; let expect = if n % d == 0 { Some (n / d) } else { None } ; assert_eq ! (n . div_exact (d , & pre) , expect , "{} / {}" , n , d) ; let n : u16 = random () ; let expect = if n % (d as u16) == 0 { Some (n / (d as u16)) } else { None } ; assert_eq ! (n . div_exact (d , & pre) , expect , "{} / {}" , n , d) ; let d = random :: < u16 > () | 1 ; let pre : PreModInv < _ > = d . into () ; let n : u16 = random () ; let expect = if n % d == 0 { Some (n / d) } else { None } ; assert_eq ! (n . div_exact (d , & pre) , expect , "{} / {}" , n , d) ; let n : u32 = random () ; let expect = if n % (d as u32) == 0 { Some (n / (d as u32)) } else { None } ; assert_eq ! (n . div_exact (d , & pre) , expect , "{} / {}" , n , d) ; let d = random :: < u32 > () | 1 ; let pre : PreModInv < _ > = d . into () ; let n : u32 = random () ; let expect = if n % d == 0 { Some (n / d) } else { None } ; assert_eq ! (n . div_exact (d , & pre) , expect , "{} / {}" , n , d) ; let n : u64 = random () ; let expect = if n % (d as u64) == 0 { Some (n / (d as u64)) } else { None } ; assert_eq ! (n . div_exact (d , & pre) , expect , "{} / {}" , n , d) ; let d = random :: < u64 > () | 1 ; let pre : PreModInv < _ > = d . into () ; let n : u64 = random () ; let expect = if n % d == 0 { Some (n / d) } else { None } ; assert_eq ! (n . div_exact (d , & pre) , expect , "{} / {}" , n , d) ; let n : u128 = random () ; let expect = if n % (d as u128) == 0 { Some (n / (d as u128)) } else { None } ; assert_eq ! (n . div_exact (d , & pre) , expect , "{} / {}" , n , d) ; } } }
+};
+}

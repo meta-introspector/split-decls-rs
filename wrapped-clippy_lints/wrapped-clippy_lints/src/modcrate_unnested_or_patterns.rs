@@ -1,0 +1,41 @@
+// Generated module macro for crate::unnested_or_patterns
+macro_rules! Modcrate_unnested_or_patterns {
+() => {
+        Depcrate_unnested_or_patternsuse_10994!();
+        Depcrate_unnested_or_patternsuse_10995!();
+        Depcrate_unnested_or_patternsuse_10996!();
+        Depcrate_unnested_or_patternsuse_10997!();
+        Depcrate_unnested_or_patternsuse_10998!();
+        Depcrate_unnested_or_patternsuse_10999!();
+        Depcrate_unnested_or_patternsuse_11000!();
+        Depcrate_unnested_or_patternsuse_11001!();
+        Depcrate_unnested_or_patternsuse_11002!();
+        Depcrate_unnested_or_patternsuse_11003!();
+        Depcrate_unnested_or_patternsuse_11004!();
+        Depcrate_unnested_or_patternsuse_11005!();
+        Depcrate_unnested_or_patternsuse_11006!();
+        Depcrate_unnested_or_patternsuse_11007!();
+        Depcrate_unnested_or_patternsuse_11008!();
+        Depcrate_unnested_or_patternsuse_11009!();
+        Depcrate_unnested_or_patternsuse_11010!();
+        Depcrate_unnested_or_patternsuse_11011!();
+        Depcrate_unnested_or_patternsmacro_11012!();
+        Depcrate_unnested_or_patternsUnnestedOrPatterns!();
+        Depcrate_unnested_or_patternsimpl_11014!();
+        Depcrate_unnested_or_patternsmacro_11015!();
+        Depcrate_unnested_or_patternsimpl_11016!();
+        Depcrate_unnested_or_patternslint_unnested_or_patterns!();
+        Depcrate_unnested_or_patternsremove_all_parens!();
+        Depcrate_unnested_or_patternsinsert_necessary_parens!();
+        Depcrate_unnested_or_patternsunnest_or_patterns!();
+        Depcrate_unnested_or_patternsalways_pat!();
+        Depcrate_unnested_or_patternstransform_with_focus_on_idx!();
+        Depcrate_unnested_or_patternsextend_with_struct_pat!();
+        Depcrate_unnested_or_patternsextend_with_matching_product!();
+        Depcrate_unnested_or_patternstake_pat!();
+        Depcrate_unnested_or_patternsextend_with_tail_or!();
+        Depcrate_unnested_or_patternsdrain_matching!();
+        Depcrate_unnested_or_patternsextend_with_matching!();
+        Depcrate_unnested_or_patternseq_pre_post!();
+    };
+}

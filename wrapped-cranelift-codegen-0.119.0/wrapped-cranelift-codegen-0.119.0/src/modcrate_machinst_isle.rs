@@ -1,0 +1,39 @@
+// Generated module macro for crate::machinst::isle
+macro_rules! Modcrate_machinst_isle {
+() => {
+        Depcrate_machinst_isleuse_31!();
+        Depcrate_machinst_isleuse_32!();
+        Depcrate_machinst_isleuse_33!();
+        Depcrate_machinst_isleuse_34!();
+        Depcrate_machinst_isleuse_35!();
+        Depcrate_machinst_isleuse_36!();
+        Depcrate_machinst_isleuse_37!();
+        Depcrate_machinst_isleuse_38!();
+        Depcrate_machinst_isleuse_39!();
+        Depcrate_machinst_isleuse_40!();
+        Depcrate_machinst_isleuse_41!();
+        Depcrate_machinst_isleUnit!();
+        Depcrate_machinst_isleValueSlice!();
+        Depcrate_machinst_isleValueArray2!();
+        Depcrate_machinst_isleValueArray3!();
+        Depcrate_machinst_isleBlockArray2!();
+        Depcrate_machinst_isleWritableReg!();
+        Depcrate_machinst_isleVecRetPair!();
+        Depcrate_machinst_isleVecMask!();
+        Depcrate_machinst_isleValueRegs!();
+        Depcrate_machinst_isleWritableValueRegs!();
+        Depcrate_machinst_isleInstOutput!();
+        Depcrate_machinst_isleInstOutputBuilder!();
+        Depcrate_machinst_isleBoxExternalName!();
+        Depcrate_machinst_isleRange!();
+        Depcrate_machinst_isleMachLabelSlice!();
+        Depcrate_machinst_isleBoxVecMachLabel!();
+        Depcrate_machinst_isleRangeView!();
+        Depcrate_machinst_isleisle_lower_prelude_methods!();
+        Depcrate_machinst_isleshuffle_imm_as_le_lane_idx!();
+        Depcrate_machinst_isleisle_prelude_caller_methods!();
+        Depcrate_machinst_islegen_call_common_args!();
+        Depcrate_machinst_islegen_call_common!();
+        Depcrate_machinst_isleIsleContext!();
+    };
+}

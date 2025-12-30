@@ -1,0 +1,9 @@
+// Generated macro for Upgrade (struct)
+macro_rules! Depcrate_common_upgradeUpgrade {
+() => {
+// Module: crate::common::upgrade
+// Provides: {"Upgrade"}
+// Dependencies: {}
+# [doc = " `Upgrade` header, defined in [RFC7230](https://datatracker.ietf.org/doc/html/rfc7230#section-6.7)"] # [doc = ""] # [doc = " The `Upgrade` header field is intended to provide a simple mechanism"] # [doc = " for transitioning from HTTP/1.1 to some other protocol on the same"] # [doc = " connection.  A client MAY send a list of protocols in the Upgrade"] # [doc = " header field of a request to invite the server to switch to one or"] # [doc = " more of those protocols, in order of descending preference, before"] # [doc = " sending the final response.  A server MAY ignore a received Upgrade"] # [doc = " header field if it wishes to continue using the current protocol on"] # [doc = " that connection.  Upgrade cannot be used to insist on a protocol"] # [doc = " change."] # [doc = ""] # [doc = " ## ABNF"] # [doc = ""] # [doc = " ```text"] # [doc = " Upgrade          = 1#protocol"] # [doc = ""] # [doc = " protocol         = protocol-name [\"/\" protocol-version]"] # [doc = " protocol-name    = token"] # [doc = " protocol-version = token"] # [doc = " ```"] # [doc = ""] # [doc = " ## Example values"] # [doc = ""] # [doc = " * `HTTP/2.0, SHTTP/1.3, IRC/6.9, RTA/x11`"] # [doc = ""] # [doc = " # Note"] # [doc = ""] # [doc = " In practice, the `Upgrade` header is never that complicated. In most cases,"] # [doc = " it is only ever a single value, such as `\"websocket\"`."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " use headers::Upgrade;"] # [doc = ""] # [doc = " let ws = Upgrade::websocket();"] # [doc = " ```"] # [derive (Clone , Debug , PartialEq)] pub struct Upgrade (HeaderValue) ;
+};
+}

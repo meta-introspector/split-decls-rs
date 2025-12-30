@@ -1,0 +1,9 @@
+// Generated macro for ERROR_GRAPHICS_CANCEL_VIDPN_TOPOLOGY_AUGMENTATION (const)
+macro_rules! Depcrate_shared_winerrorERROR_GRAPHICS_CANCEL_VIDPN_TOPOLOGY_AUGMENTATION {
+() => {
+// Module: crate::shared::winerror
+// Provides: {"ERROR_GRAPHICS_CANCEL_VIDPN_TOPOLOGY_AUGMENTATION"}
+// Dependencies: {}
+pub const ERROR_GRAPHICS_CANCEL_VIDPN_TOPOLOGY_AUGMENTATION : HRESULT = 0xC026235A ;
+};
+}

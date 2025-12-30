@@ -1,0 +1,9 @@
+// Generated macro for dgram_send_max_size (function)
+macro_rules! Depcrate_testsdgram_send_max_size {
+() => {
+// Module: crate::tests
+// Provides: {"dgram_send_max_size"}
+// Dependencies: {}
+# [rstest] fn dgram_send_max_size (# [values ("cubic" , "bbr2" , "bbr2_gcongestion")] cc_algorithm_name : & str ,) { let mut buf = [0 ; MAX_DGRAM_FRAME_SIZE as usize] ; let mut config = Config :: new (PROTOCOL_VERSION) . unwrap () ; assert_eq ! (config . set_cc_algorithm_name (cc_algorithm_name) , Ok (())) ; config . load_cert_chain_from_pem_file ("examples/cert.crt") . unwrap () ; config . load_priv_key_from_pem_file ("examples/cert.key") . unwrap () ; config . set_application_protos (& [b"proto1" , b"proto2"]) . unwrap () ; config . set_initial_max_data (30) ; config . set_initial_max_stream_data_bidi_local (15) ; config . set_initial_max_stream_data_bidi_remote (15) ; config . set_initial_max_stream_data_uni (10) ; config . set_initial_max_streams_bidi (3) ; config . set_initial_max_streams_uni (3) ; config . enable_dgram (true , 10 , 10) ; config . set_max_recv_udp_payload_size (1452) ; config . verify_peer (false) ; let mut pipe = test_utils :: Pipe :: with_config (& mut config) . unwrap () ; assert_eq ! (pipe . client . dgram_max_writable_len () , None) ; assert_eq ! (pipe . handshake () , Ok (())) ; let max_dgram_size = pipe . client . dgram_max_writable_len () . unwrap () ; assert_eq ! (max_dgram_size , 1160) ; let dgram_packet : Vec < u8 > = vec ! [42 ; max_dgram_size] ; assert_eq ! (pipe . client . dgram_send (& dgram_packet) , Ok (())) ; assert_eq ! (pipe . advance () , Ok (())) ; let result1 = pipe . server . dgram_recv (& mut buf) ; assert_eq ! (result1 , Ok (max_dgram_size)) ; let result2 = pipe . server . dgram_recv (& mut buf) ; assert_eq ! (result2 , Err (Error :: Done)) ; }
+};
+}

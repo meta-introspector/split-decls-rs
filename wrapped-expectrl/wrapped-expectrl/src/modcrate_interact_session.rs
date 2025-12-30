@@ -1,0 +1,48 @@
+// Generated module macro for crate::interact::session
+macro_rules! Modcrate_interact_session {
+() => {
+        Depcrate_interact_sessionuse_100!();
+        Depcrate_interact_sessionuse_101!();
+        Depcrate_interact_sessionuse_102!();
+        Depcrate_interact_sessionuse_103!();
+        Depcrate_interact_sessionuse_104!();
+        Depcrate_interact_sessionuse_105!();
+        Depcrate_interact_sessionuse_106!();
+        Depcrate_interact_sessionuse_107!();
+        Depcrate_interact_sessionuse_108!();
+        Depcrate_interact_sessionuse_109!();
+        Depcrate_interact_sessionuse_110!();
+        Depcrate_interact_sessionuse_111!();
+        Depcrate_interact_sessionExpectResult!();
+        Depcrate_interact_sessionInteractSession!();
+        Depcrate_interact_sessionInteractOptions!();
+        Depcrate_interact_sessionOptAction!();
+        Depcrate_interact_sessionOptFilter!();
+        Depcrate_interact_sessionimpl_117!();
+        Depcrate_interact_sessionimpl_118!();
+        Depcrate_interact_sessionimpl_119!();
+        Depcrate_interact_sessionimpl_120!();
+        Depcrate_interact_sessionimpl_121!();
+        Depcrate_interact_sessionimpl_122!();
+        Depcrate_interact_sessionimpl_123!();
+        Depcrate_interact_sessionimpl_124!();
+        Depcrate_interact_sessionimpl_125!();
+        Depcrate_interact_sessioninteract_buzy_loop!();
+        Depcrate_interact_sessioninteract_buzy_loop!();
+        Depcrate_interact_sessioninteract_polling!();
+        Depcrate_interact_sessioninteract_polling_on_thread!();
+        Depcrate_interact_sessioninteract_async!();
+        Depcrate_interact_sessioninteract_async!();
+        Depcrate_interact_sessionasync_timeout!();
+        Depcrate_interact_sessionspin_write!();
+        Depcrate_interact_sessionspin_flush!();
+        Depcrate_interact_sessionrun_action_input!();
+        Depcrate_interact_sessionrun_action_output!();
+        Depcrate_interact_sessionrun_action_idle!();
+        Depcrate_interact_sessionopt_action!();
+        Depcrate_interact_sessioncall_filter!();
+        Depcrate_interact_sessionget_status!();
+        Depcrate_interact_sessiontry_read!();
+        Depcrate_interact_sessionget_pointer!();
+    };
+}

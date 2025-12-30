@@ -4,6 +4,6 @@ macro_rules! Depcrate_updateimpl_611 {
 // Module: crate::update
 // Provides: {"impl_611"}
 // Dependencies: {}
-unsafe impl < T > Update for Arc < T > where T : Update , { unsafe fn maybe_update (old_pointer : * mut Self , new_arc : Self) -> bool { let old_arc : & mut Arc < T > = unsafe { & mut * old_pointer } ; if Arc :: ptr_eq (old_arc , & new_arc) { return false ; } if let Some (inner) = Arc :: get_mut (old_arc) { match Arc :: try_unwrap (new_arc) { Ok (new_inner) => unsafe { T :: maybe_update (inner , new_inner) } , Err (new_arc) => { * old_arc = new_arc ; true } } } else { unsafe { * old_pointer = new_arc } ; true } } }
+# [cfg (feature = "rayon")] unsafe impl < L , R > Update for Either < L , R > where L : Update , R : Update , { unsafe fn maybe_update (old_pointer : * mut Self , new_value : Self) -> bool { let old_value = unsafe { & mut * old_pointer } ; match (old_value , new_value) { (Either :: Left (old) , Either :: Left (new)) => unsafe { L :: maybe_update (old , new) } , (Either :: Right (old) , Either :: Right (new)) => unsafe { R :: maybe_update (old , new) } , (old_value , new_value) => { * old_value = new_value ; true } } } }
 };
 }

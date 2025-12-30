@@ -1,0 +1,9 @@
+// Generated macro for camel_case_start_from_idx (function)
+macro_rules! Depcrate_str_utilscamel_case_start_from_idx {
+() => {
+// Module: crate::str_utils
+// Provides: {"camel_case_start_from_idx"}
+// Dependencies: {}
+# [doc = " Returns `StrIndex` of the last camel-case component of `s[idx..]`."] # [doc = ""] # [doc = " ```no_run"] # [doc = " # use clippy_utils::str_utils::{camel_case_start_from_idx, StrIndex};"] # [doc = " assert_eq!(camel_case_start_from_idx(\"AbcDef\", 0), StrIndex::new(0, 0));"] # [doc = " assert_eq!(camel_case_start_from_idx(\"AbcDef\", 1), StrIndex::new(3, 3));"] # [doc = " assert_eq!(camel_case_start_from_idx(\"AbcDefGhi\", 0), StrIndex::new(0, 0));"] # [doc = " assert_eq!(camel_case_start_from_idx(\"AbcDefGhi\", 1), StrIndex::new(3, 3));"] # [doc = " assert_eq!(camel_case_start_from_idx(\"Abcdefg\", 1), StrIndex::new(7, 7));"] # [doc = " ```"] pub fn camel_case_start_from_idx (s : & str , start_idx : usize) -> StrIndex { let char_count = s . chars () . count () ; let range = 0 .. char_count ; let mut iter = range . rev () . zip (s . char_indices () . rev ()) ; if let Some ((_ , (_ , first))) = iter . next () { if ! first . is_lowercase () { return StrIndex :: new (char_count , s . len ()) ; } } else { return StrIndex :: new (char_count , s . len ()) ; } let mut down = true ; let mut last_index = StrIndex :: new (char_count , s . len ()) ; for (char_index , (byte_index , c)) in iter { if byte_index < start_idx { break ; } if down { if c . is_uppercase () { down = false ; last_index . byte_index = byte_index ; last_index . char_index = char_index ; } else if ! c . is_lowercase () { return last_index ; } } else if c . is_lowercase () { down = true ; } else if c . is_uppercase () { last_index . byte_index = byte_index ; last_index . char_index = char_index ; } else { return last_index ; } } last_index }
+};
+}

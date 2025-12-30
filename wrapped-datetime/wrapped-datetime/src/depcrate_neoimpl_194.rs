@@ -1,0 +1,9 @@
+// Generated macro for impl_194 (impl)
+macro_rules! Depcrate_neoimpl_194 {
+() => {
+// Module: crate::neo
+// Provides: {"impl_194"}
+// Dependencies: {}
+impl < FSet : DateTimeMarkers > DateTimeFormatter < FSet > where FSet :: D : DateDataMarkers , FSet :: T : TimeMarkers , FSet :: Z : ZoneMarkers , FSet : GetField < CompositeFieldSet > , { # [doc = " Creates a new [`DateTimeFormatter`] from compiled data with"] # [doc = " datetime components specified at build time."] # [doc = ""] # [doc = " This method will use the calendar specified in the `calendar_algorithm` preference, or fall back to the default"] # [doc = " calendar for the preferences if unspecified or unsupported. See [`IntoFormattableAnyCalendar`] for a list of supported calendars."] # [doc = ""] # [doc = " ✨ *Enabled with the `compiled_data` Cargo feature.*"] # [doc = ""] # [doc = " [📚 Help choosing a constructor](icu_provider::constructors)"] # [inline (never)] # [cfg (feature = "compiled_data")] pub fn try_new (prefs : DateTimeFormatterPreferences , field_set_with_options : FSet ,) -> Result < Self , DateTimeFormatterLoadError > where crate :: provider :: Baked : AllAnyCalendarFormattingDataMarkers < FSet > , { Self :: try_new_internal (& crate :: provider :: Baked , & ExternalLoaderCompiledData , prefs , field_set_with_options . get_field () ,) } gen_buffer_constructors_with_external_loader ! (@ compiletime_fset , FSet , try_new , try_new_with_buffer_provider , try_new_internal) ; # [doc = icu_provider :: gen_buffer_unstable_docs ! (UNSTABLE , Self :: try_new)] pub fn try_new_unstable < P > (provider : & P , prefs : DateTimeFormatterPreferences , field_set_with_options : FSet ,) -> Result < Self , DateTimeFormatterLoadError > where P : ? Sized + AllAnyCalendarFormattingDataMarkers < FSet > + AllAnyCalendarExternalDataMarkers , { Self :: try_new_internal (provider , & ExternalLoaderUnstable (provider) , prefs , field_set_with_options . get_field () ,) } }
+};
+}

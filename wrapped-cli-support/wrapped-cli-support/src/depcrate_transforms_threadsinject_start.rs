@@ -1,0 +1,9 @@
+// Generated macro for inject_start (function)
+macro_rules! Depcrate_transforms_threadsinject_start {
+() => {
+// Module: crate::transforms::threads
+// Provides: {"inject_start"}
+// Dependencies: {}
+fn inject_start (module : & mut Module , tls : & Tls , stack : & Stack , thread_counter_addr : i32 , memory : MemoryId ,) -> Result < ThreadCount , Error > { use walrus :: ir :: * ; let local = module . locals . add (ValType :: I32) ; let thread_count = module . locals . add (ValType :: I32) ; let stack_size = module . locals . add (ValType :: I32) ; let malloc = find_function (module , "__wbindgen_malloc") ? ; let prev_start = wasm_conventions :: get_start (module) ; let mut builder = FunctionBuilder :: new (& mut module . types , & [ValType :: I32] , & []) ; if let Ok (prev_start) | Err (Some (prev_start)) = prev_start { builder . func_body () . call (prev_start) ; } let mut body = builder . func_body () ; body . i32_const (thread_counter_addr) . i32_const (1) . atomic_rmw (memory , AtomicOp :: Add , AtomicWidth :: I32 , ATOMIC_MEM_ARG) . local_tee (thread_count) . if_else (None , | body | { body . local_get (stack_size) . if_else (None , | body | { body . local_get (stack_size) . global_set (stack . size) ; } , | _ | () ,) ; with_temp_stack (body , memory , stack , | body | { body . global_get (stack . size) . i32_const (16) . call (malloc) . local_tee (local) ; }) ; body . global_set (stack . alloc) ; body . global_get (stack . alloc) . global_get (stack . size) . binop (BinaryOp :: I32Add) . global_set (stack . pointer) ; } , | _ | { } ,) ; body . i32_const (tls . size as i32) . i32_const (tls . align as i32) . call (malloc) . global_set (tls . base) . global_get (tls . base) . call (tls . init) ; let id = builder . finish (vec ! [stack_size] , & mut module . funcs) ; module . start = Some (id) ; Ok (ThreadCount (thread_count)) }
+};
+}

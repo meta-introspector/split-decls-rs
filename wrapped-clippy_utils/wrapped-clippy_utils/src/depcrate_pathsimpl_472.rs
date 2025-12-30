@@ -1,0 +1,9 @@
+// Generated macro for impl_472 (impl)
+macro_rules! Depcrate_pathsimpl_472 {
+() => {
+// Module: crate::paths
+// Provides: {"impl_472"}
+// Dependencies: {}
+impl PathLookup { # [doc = " Only exported for tests and `clippy_lints_internal`"] # [doc (hidden)] pub const fn new (ns : PathNS , path : & 'static [Symbol]) -> Self { Self { ns , path , once : OnceLock :: new () , } } # [doc = " Returns the list of [`DefId`]s that the path resolves to"] pub fn get (& self , cx : & LateContext < '_ >) -> & [DefId] { self . once . get_or_init (| | lookup_path (cx . tcx , self . ns , self . path)) } # [doc = " Returns the single [`DefId`] that the path resolves to, this can only be used for paths into"] # [doc = " stdlib crates to avoid the issue of multiple [`DefId`]s being returned"] # [doc = ""] # [doc = " May return [`None`] in `no_std`/`no_core` environments"] pub fn only (& self , cx : & LateContext < '_ >) -> Option < DefId > { let ids = self . get (cx) ; debug_assert ! (STDLIB_STABLE_CRATES . contains (& self . path [0])) ; debug_assert ! (ids . len () <= 1 , "{ids:?}") ; ids . first () . copied () } # [doc = " Checks if the path resolves to the given `def_id`"] pub fn matches (& self , cx : & LateContext < '_ > , def_id : DefId) -> bool { self . get (cx) . contains (& def_id) } # [doc = " Resolves `maybe_path` to a [`DefId`] and checks if the [`PathLookup`] matches it"] pub fn matches_path < 'tcx > (& self , cx : & LateContext < '_ > , maybe_path : & impl MaybePath < 'tcx >) -> bool { path_def_id (cx , maybe_path) . is_some_and (| def_id | self . matches (cx , def_id)) } # [doc = " Checks if the path resolves to `ty`'s definition, must be an `Adt`"] pub fn matches_ty (& self , cx : & LateContext < '_ > , ty : Ty < '_ >) -> bool { ty . ty_adt_def () . is_some_and (| adt | self . matches (cx , adt . did ())) } }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for check (function)
+macro_rules! Depcrate_casts_cast_losslesscheck {
+() => {
+// Module: crate::casts::cast_lossless
+// Provides: {"check"}
+// Dependencies: {}
+pub (super) fn check (cx : & LateContext < '_ > , expr : & Expr < '_ > , cast_from_expr : & Expr < '_ > , cast_from : Ty < '_ > , cast_to : Ty < '_ > , cast_to_hir : & rustc_hir :: Ty < '_ > , msrv : Msrv ,) { if ! should_lint (cx , cast_from , cast_to , msrv) { return ; } if expr . span . from_expansion () && ! cast_to_hir . span . eq_ctxt (expr . span) { return ; } span_lint_and_then (cx , CAST_LOSSLESS , expr . span , format ! ("casts from `{cast_from}` to `{cast_to}` can be expressed infallibly using `From`") , | diag | { diag . help ("an `as` cast can become silently lossy if the types change in the future") ; let mut applicability = Applicability :: MachineApplicable ; let from_sugg = Sugg :: hir_with_context (cx , cast_from_expr , expr . span . ctxt () , "<from>" , & mut applicability) ; let Some (ty) = hygiene :: walk_chain (cast_to_hir . span , expr . span . ctxt ()) . get_source_text (cx) else { return ; } ; match cast_to_hir . kind { TyKind :: Infer (()) => { diag . span_suggestion_verbose (expr . span , "use `Into::into` instead" , format ! ("{}.into()" , from_sugg . maybe_paren ()) , applicability ,) ; } , kind if matches ! (kind , TyKind :: Path (QPath :: Resolved (_ , path)) if path . segments . iter () . any (| s | s . args . is_some ())) || ! cast_to_hir . span . eq_ctxt (expr . span) => { diag . span_suggestion_verbose (expr . span , format ! ("use `<{ty}>::from` instead") , format ! ("<{ty}>::from({from_sugg})") , applicability ,) ; } , _ => { diag . span_suggestion_verbose (expr . span , format ! ("use `{ty}::from` instead") , format ! ("{ty}::from({from_sugg})") , applicability ,) ; } , } } ,) ; }
+};
+}

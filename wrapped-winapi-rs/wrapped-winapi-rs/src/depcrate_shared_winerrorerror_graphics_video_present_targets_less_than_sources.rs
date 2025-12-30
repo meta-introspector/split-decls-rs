@@ -1,0 +1,9 @@
+// Generated macro for ERROR_GRAPHICS_VIDEO_PRESENT_TARGETS_LESS_THAN_SOURCES (const)
+macro_rules! Depcrate_shared_winerrorERROR_GRAPHICS_VIDEO_PRESENT_TARGETS_LESS_THAN_SOURCES {
+() => {
+// Module: crate::shared::winerror
+// Provides: {"ERROR_GRAPHICS_VIDEO_PRESENT_TARGETS_LESS_THAN_SOURCES"}
+// Dependencies: {}
+pub const ERROR_GRAPHICS_VIDEO_PRESENT_TARGETS_LESS_THAN_SOURCES : HRESULT = 0xC0262326 ;
+};
+}

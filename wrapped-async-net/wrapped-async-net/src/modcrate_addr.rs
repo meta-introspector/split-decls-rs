@@ -1,0 +1,44 @@
+// Generated module macro for crate::addr
+macro_rules! Modcrate_addr {
+() => {
+        Depcrate_addruse_50!();
+        Depcrate_addruse_51!();
+        Depcrate_addruse_52!();
+        Depcrate_addruse_53!();
+        Depcrate_addruse_54!();
+        Depcrate_addruse_55!();
+        Depcrate_addruse_56!();
+        Depcrate_addruse_57!();
+        Depcrate_addruse_58!();
+        Depcrate_addruse_59!();
+        Depcrate_addrAsyncToSocketAddrs!();
+        Depcrate_addrSealed!();
+        Depcrate_addrToSocketAddrsFuture!();
+        Depcrate_addrimpl_63!();
+        Depcrate_addrimpl_64!();
+        Depcrate_addrimpl_65!();
+        Depcrate_addrimpl_66!();
+        Depcrate_addrimpl_67!();
+        Depcrate_addrimpl_68!();
+        Depcrate_addrimpl_69!();
+        Depcrate_addrimpl_70!();
+        Depcrate_addrimpl_71!();
+        Depcrate_addrimpl_72!();
+        Depcrate_addrimpl_73!();
+        Depcrate_addrimpl_74!();
+        Depcrate_addrimpl_75!();
+        Depcrate_addrimpl_76!();
+        Depcrate_addrimpl_77!();
+        Depcrate_addrimpl_78!();
+        Depcrate_addrimpl_79!();
+        Depcrate_addrimpl_80!();
+        Depcrate_addrimpl_81!();
+        Depcrate_addrimpl_82!();
+        Depcrate_addrimpl_83!();
+        Depcrate_addrimpl_84!();
+        Depcrate_addrimpl_85!();
+        Depcrate_addrimpl_86!();
+        Depcrate_addrimpl_87!();
+        Depcrate_addrimpl_88!();
+    };
+}

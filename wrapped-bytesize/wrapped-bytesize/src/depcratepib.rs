@@ -1,9 +1,9 @@
-// Generated macro for PIB (const)
-macro_rules! DepcratePIB {
+// Generated macro for pib (function)
+macro_rules! Depcratepib {
 () => {
 // Module: crate
-// Provides: {"PIB"}
+// Provides: {"pib"}
 // Dependencies: {}
-# [doc = " Number of bytes in 1 pebibyte."] pub const PIB : u64 = 1_125_899_906_842_624 ;
+# [doc = " Converts a quantity of pebibytes to bytes."] pub fn pib < V : Into < u64 > > (size : V) -> u64 { size . into () * PIB }
 };
 }

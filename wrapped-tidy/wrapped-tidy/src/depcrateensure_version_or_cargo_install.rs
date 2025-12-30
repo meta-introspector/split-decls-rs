@@ -1,0 +1,9 @@
+// Generated macro for ensure_version_or_cargo_install (function)
+macro_rules! Depcrateensure_version_or_cargo_install {
+() => {
+// Module: crate
+// Provides: {"ensure_version_or_cargo_install"}
+// Dependencies: {}
+# [doc = " If the given executable is installed with the given version, use that,"] # [doc = " otherwise install via cargo."] pub fn ensure_version_or_cargo_install (build_dir : & Path , cargo : & Path , pkg_name : & str , bin_name : & str , version : & str ,) -> io :: Result < PathBuf > { 'ck : { let Ok (output) = Command :: new (bin_name) . arg ("--version") . output () else { break 'ck ; } ; let Ok (s) = str :: from_utf8 (& output . stdout) else { break 'ck ; } ; let Some (v) = s . trim () . split_whitespace () . last () else { break 'ck ; } ; if v == version { return Ok (PathBuf :: from (bin_name)) ; } } let tool_root_dir = build_dir . join ("misc-tools") ; let tool_bin_dir = tool_root_dir . join ("bin") ; eprintln ! ("building external tool {bin_name} from package {pkg_name}@{version}") ; let cargo_exit_code = Command :: new (cargo) . args (["install" , "--locked" , "--force" , "--quiet"]) . arg ("--root") . arg (& tool_root_dir) . arg ("--target-dir") . arg (tool_root_dir . join ("target")) . arg (format ! ("{pkg_name}@{version}")) . env ("PATH" , env :: join_paths (env :: split_paths (& env :: var ("PATH") . unwrap ()) . chain (std :: iter :: once (tool_bin_dir . clone ())) ,) . expect ("build dir contains invalid char") ,) . env ("RUSTFLAGS" , "-Copt-level=0") . spawn () ? . wait () ? ; if ! cargo_exit_code . success () { return Err (io :: Error :: other ("cargo install failed")) ; } let bin_path = tool_bin_dir . join (bin_name) ; assert ! (matches ! (bin_path . try_exists () , Ok (true)) , "cargo install did not produce the expected binary") ; eprintln ! ("finished building tool {bin_name}") ; Ok (bin_path) }
+};
+}

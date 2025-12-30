@@ -1,0 +1,43 @@
+// Generated module macro for crate
+macro_rules! Modcrate {
+() => {
+        Depcrateuse_1!();
+        Depcrateuse_2!();
+        Depcrateuse_3!();
+        Depcratemacros!();
+        Depcrateanymap!();
+        Depcrateassert!();
+        Depcratenon_empty_vec!();
+        Depcratepanic_context!();
+        Depcrateprocess!();
+        Depcraterand!();
+        Depcratethread!();
+        Depcratevariance!();
+        Depcrateuse_86!();
+        Depcrateis_ci!();
+        Depcratehash_once!();
+        Depcratetimeit!();
+        Depcrateprint_backtrace!();
+        DepcrateTupleExt!();
+        Depcrateimpl_92!();
+        Depcrateimpl_93!();
+        Depcrateto_lower_snake_case!();
+        Depcrateto_upper_snake_case!();
+        Depcrateto_snake_case!();
+        Depcrateto_camel_case!();
+        Depcratechar_has_case!();
+        Depcrateis_upper_snake_case!();
+        Depcratereplace!();
+        Depcratetrim_indent!();
+        Depcrateequal_range_by!();
+        Depcratedefer!();
+        DepcrateJodChild!();
+        Depcrateimpl_105!();
+        Depcrateimpl_106!();
+        Depcrateimpl_107!();
+        Depcrateimpl_108!();
+        Depcrateiter_eq_by!();
+        Depcrateslice_tails!();
+        Depcratetests!();
+    };
+}

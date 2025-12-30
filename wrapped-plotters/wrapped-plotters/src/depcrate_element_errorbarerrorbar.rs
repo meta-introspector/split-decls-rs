@@ -1,0 +1,9 @@
+// Generated macro for ErrorBar (struct)
+macro_rules! Depcrate_element_errorbarErrorBar {
+() => {
+// Module: crate::element::errorbar
+// Provides: {"ErrorBar"}
+// Dependencies: {}
+# [doc = "\nAn error bar, which visualizes the minimum, average, and maximum of a dataset.\n\nUnlike [`crate::series::Histogram`], the `ErrorBar` code does not classify or aggregate data.\nThese operations must be done before building error bars.\n\n# Examples\n\n```\nuse plotters::prelude::*;\nlet data = [(1.0, 3.3), (2., 2.1), (3., 1.5), (4., 1.9), (5., 1.0)];\nlet drawing_area = SVGBackend::new(\"error_bars_vertical.svg\", (300, 200)).into_drawing_area();\ndrawing_area.fill(&WHITE).unwrap();\nlet mut chart_builder = ChartBuilder::on(&drawing_area);\nchart_builder.margin(10).set_left_and_bottom_label_area_size(20);\nlet mut chart_context = chart_builder.build_cartesian_2d(0.0..6.0, 0.0..6.0).unwrap();\nchart_context.configure_mesh().draw().unwrap();\nchart_context.draw_series(data.map(|(x, y)| {\n    ErrorBar::new_vertical(x, y - 0.4, y, y + 0.3, BLUE.filled(), 10)\n})).unwrap();\nchart_context.draw_series(data.map(|(x, y)| {\n    ErrorBar::new_vertical(x, y + 1.0, y + 1.9, y + 2.4, RED, 10)\n})).unwrap();\n```\n\nThis code produces two series of five error bars each, showing minima, maxima, and average values:\n\n![](https://cdn.jsdelivr.net/gh/facorread/plotters-doc-data@06d370f/apidoc/error_bars_vertical.svg)\n\n[`ErrorBar::new_vertical()`] is used to create vertical error bars. Here is an example using\n[`ErrorBar::new_horizontal()`] instead:\n\n![](https://cdn.jsdelivr.net/gh/facorread/plotters-doc-data@06d370f/apidoc/error_bars_horizontal.svg)\n"] pub struct ErrorBar < K , V , O : ErrorBarOrient < K , V > > { style : ShapeStyle , width : u32 , key : K , values : [V ; 3] , _p : PhantomData < O > , }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for macro_15 (macro)
+macro_rules! Depcrate_tysmacro_15 {
+() => {
+// Module: crate::tys
+// Provides: {"macro_15"}
+// Dependencies: {}
+tys ! { I8 U8 I16 U16 I32 U32 I64 U64 I128 U128 F32 F64 BOOLEAN FUNCTION CLOSURE CACHED_STRING STRING REF REFMUT LONGREF SLICE VECTOR EXTERNREF NAMED_EXTERNREF ENUM STRING_ENUM RUST_STRUCT CHAR OPTIONAL RESULT UNIT CLAMPED NONNULL }
+};
+}

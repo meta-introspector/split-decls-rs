@@ -1,0 +1,50 @@
+// Generated module macro for crate::uts46
+macro_rules! Modcrate_uts46 {
+() => {
+        Depcrate_uts46use_56!();
+        Depcrate_uts46use_57!();
+        Depcrate_uts46use_58!();
+        Depcrate_uts46use_59!();
+        Depcrate_uts46use_60!();
+        Depcrate_uts46use_61!();
+        Depcrate_uts46use_62!();
+        Depcrate_uts46use_63!();
+        Depcrate_uts46PUNYCODE_DECODE_MAX_INPUT_LENGTH!();
+        Depcrate_uts46PUNYCODE_ENCODE_MAX_INPUT_LENGTH!();
+        Depcrate_uts46RtlNumeralState!();
+        Depcrate_uts46upper_case_mask!();
+        Depcrate_uts46UPPER_CASE_MASK!();
+        Depcrate_uts46glyphless_mask!();
+        Depcrate_uts46GLYPHLESS_MASK!();
+        Depcrate_uts46DOT_MASK!();
+        Depcrate_uts46ldh_mask!();
+        Depcrate_uts46PUNYCODE_PREFIX!();
+        Depcrate_uts46PUNYCODE_PREFIX_MASK!();
+        Depcrate_uts46write_punycode_label!();
+        Depcrate_uts46has_punycode_prefix!();
+        Depcrate_uts46in_inclusive_range8!();
+        Depcrate_uts46in_inclusive_range_char!();
+        Depcrate_uts46is_passthrough_ascii_label!();
+        Depcrate_uts46split_ascii_fast_path_prefix!();
+        Depcrate_uts46apply_ascii_deny_list_to_lower_cased_unicode!();
+        Depcrate_uts46apply_ascii_deny_list_to_potentially_upper_case_ascii!();
+        Depcrate_uts46is_ascii!();
+        Depcrate_uts46PunycodeClassification!();
+        Depcrate_uts46classify_for_punycode!();
+        Depcrate_uts46AsciiDenyList!();
+        Depcrate_uts46impl_87!();
+        Depcrate_uts46Hyphens!();
+        Depcrate_uts46DnsLength!();
+        Depcrate_uts46ErrorPolicy!();
+        Depcrate_uts46ProcessingSuccess!();
+        Depcrate_uts46ProcessingError!();
+        Depcrate_uts46impl_93!();
+        Depcrate_uts46impl_94!();
+        Depcrate_uts46AlreadyAsciiLabel!();
+        Depcrate_uts46verify_dns_length!();
+        Depcrate_uts46Uts46!();
+        Depcrate_uts46impl_98!();
+        Depcrate_uts46impl_99!();
+        Depcrate_uts46check_hyphens!();
+    };
+}

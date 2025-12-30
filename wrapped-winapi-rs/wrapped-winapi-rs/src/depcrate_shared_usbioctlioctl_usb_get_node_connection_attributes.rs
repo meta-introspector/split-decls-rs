@@ -1,0 +1,9 @@
+// Generated macro for IOCTL_USB_GET_NODE_CONNECTION_ATTRIBUTES (const)
+macro_rules! Depcrate_shared_usbioctlIOCTL_USB_GET_NODE_CONNECTION_ATTRIBUTES {
+() => {
+// Module: crate::shared::usbioctl
+// Provides: {"IOCTL_USB_GET_NODE_CONNECTION_ATTRIBUTES"}
+// Dependencies: {}
+pub const IOCTL_USB_GET_NODE_CONNECTION_ATTRIBUTES : DWORD = CTL_CODE ! (FILE_DEVICE_USB , USB_GET_NODE_CONNECTION_ATTRIBUTES , METHOD_BUFFERED , FILE_ANY_ACCESS) ;
+};
+}

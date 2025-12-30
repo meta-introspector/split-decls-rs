@@ -1,0 +1,9 @@
+// Generated macro for impl_65 (impl)
+macro_rules! Depcrate_hashmapimpl_65 {
+() => {
+// Module: crate::hashmap
+// Provides: {"impl_65"}
+// Dependencies: {}
+impl < 'a , K , V , A , B > FromIterator < (A , B) > for ZeroHashMap < 'a , K , V > where K : ZeroMapKV < 'a > + ? Sized + Hash + Eq , V : ZeroMapKV < 'a > + ? Sized , B : Borrow < V > , A : Borrow < K > , { # [doc = " Build a [`ZeroHashMap`] from an iterator returning (K, V) tuples."] # [doc = ""] # [doc = " # Example"] # [doc = " ```"] # [doc = " use zerovec::ZeroHashMap;"] # [doc = ""] # [doc = " let hashmap = ZeroHashMap::<i32, str>::from_iter(["] # [doc = "     (1, \"a\"),"] # [doc = "     (2, \"b\"),"] # [doc = "     (3, \"c\"),"] # [doc = "     (4, \"d\"),"] # [doc = " ]);"] # [doc = " assert_eq!(hashmap.get(&1), Some(\"a\"));"] # [doc = " assert_eq!(hashmap.get(&2), Some(\"b\"));"] # [doc = " assert_eq!(hashmap.get(&3), Some(\"c\"));"] # [doc = " assert_eq!(hashmap.get(&4), Some(\"d\"));"] # [doc = " ```"] fn from_iter < T : IntoIterator < Item = (A , B) > > (iter : T) -> Self { let iter = iter . into_iter () ; let size_hint = match iter . size_hint () { (_ , Some (upper)) => upper , (lower , None) => lower , } ; let mut key_hashes = Vec :: with_capacity (size_hint) ; let mut keys = K :: Container :: zvl_with_capacity (size_hint) ; let mut values = V :: Container :: zvl_with_capacity (size_hint) ; for (k , v) in iter { keys . zvl_push (k . borrow ()) ; key_hashes . push (compute_hash (k . borrow ())) ; values . zvl_push (v . borrow ()) ; } let (displacements , mut reverse_mapping) = compute_displacements (key_hashes . into_iter ()) ; keys . zvl_permute (& mut reverse_mapping . clone ()) ; values . zvl_permute (& mut reverse_mapping) ; Self { displacements : ZeroVec :: alloc_from_slice (& displacements) , values , keys , } } }
+};
+}

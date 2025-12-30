@@ -1,0 +1,9 @@
+// Generated macro for build_full_type (function)
+macro_rules! Depcrate_methods_from_iter_instead_of_collectbuild_full_type {
+() => {
+// Module: crate::methods::from_iter_instead_of_collect
+// Provides: {"build_full_type"}
+// Dependencies: {}
+# [doc = " Build a type which can be used in a turbofish syntax from `hir_ty`, either by copying the"] # [doc = " existing generic arguments with the exception of elided lifetimes, or by inserting placeholders"] # [doc = " for types and consts without default values."] fn build_full_type (cx : & LateContext < '_ > , hir_ty : & hir :: Ty < '_ > , app : & mut Applicability) -> String { if let TyKind :: Path (ty_qpath) = hir_ty . kind && let QPath :: Resolved (None , ty_path) = & ty_qpath && let Res :: Def (_ , ty_did) = ty_path . res { let mut ty_str = join_path_idents (ty_path . segments . iter () . map (| seg | seg . ident)) ; let mut first = true ; let mut append = | arg : & str | { write ! (& mut ty_str , "{}{arg}" , [", " , "<"] [usize :: from (first)]) . unwrap () ; first = false ; } ; if let Some (args) = ty_path . segments . last () . and_then (| segment | segment . args) { args . args . iter () . filter (| arg | ! matches ! (arg , GenericArg :: Lifetime (lt) if lt . is_elided ())) . for_each (| arg | append (& snippet_with_applicability (cx , arg . span () . source_callsite () , "_" , app))) ; } else { cx . tcx . generics_of (ty_did) . own_params . iter () . filter (| param | { matches ! (param . kind , GenericParamDefKind :: Type { has_default : false , .. } | GenericParamDefKind :: Const { has_default : false , .. }) }) . for_each (| _ | append ("_")) ; } ty_str . push_str ([">" , ""] [usize :: from (first)]) ; ty_str } else { snippet_with_applicability (cx , hir_ty . span . source_callsite () , "_" , app) . into () } }
+};
+}

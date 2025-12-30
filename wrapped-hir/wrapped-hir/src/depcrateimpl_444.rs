@@ -1,0 +1,9 @@
+// Generated macro for impl_444 (impl)
+macro_rules! Depcrateimpl_444 {
+() => {
+// Module: crate
+// Provides: {"impl_444"}
+// Dependencies: {}
+impl LocalSource { pub fn as_ident_pat (& self) -> Option < & ast :: IdentPat > { match & self . source . value { Either :: Left (it) => Some (it) , Either :: Right (_) => None , } } pub fn into_ident_pat (self) -> Option < ast :: IdentPat > { match self . source . value { Either :: Left (it) => Some (it) , Either :: Right (_) => None , } } pub fn original_file (& self , db : & dyn HirDatabase) -> EditionedFileId { self . source . file_id . original_file (db) } pub fn file (& self) -> HirFileId { self . source . file_id } pub fn name (& self) -> Option < InFile < ast :: Name > > { self . source . as_ref () . map (| it | it . name ()) . transpose () } pub fn syntax (& self) -> & SyntaxNode { self . source . value . syntax () } pub fn syntax_ptr (self) -> InFile < SyntaxNodePtr > { self . source . map (| it | SyntaxNodePtr :: new (it . syntax ())) } }
+};
+}

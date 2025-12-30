@@ -1,0 +1,41 @@
+// Generated module macro for crate::p384_64
+macro_rules! Modcrate_p384_64 {
+() => {
+        Depcrate_p384_64IndexConst!();
+        Depcrate_p384_64impl_416!();
+        Depcrate_p384_64impl_417!();
+        Depcrate_p384_64fiat_p384_u1!();
+        Depcrate_p384_64fiat_p384_i1!();
+        Depcrate_p384_64fiat_p384_u2!();
+        Depcrate_p384_64fiat_p384_i2!();
+        Depcrate_p384_64fiat_p384_montgomery_domain_field_element!();
+        Depcrate_p384_64impl_423!();
+        Depcrate_p384_64impl_424!();
+        Depcrate_p384_64impl_425!();
+        Depcrate_p384_64impl_426!();
+        Depcrate_p384_64fiat_p384_non_montgomery_domain_field_element!();
+        Depcrate_p384_64impl_428!();
+        Depcrate_p384_64impl_429!();
+        Depcrate_p384_64impl_430!();
+        Depcrate_p384_64impl_431!();
+        Depcrate_p384_64fiat_p384_addcarryx_u64!();
+        Depcrate_p384_64fiat_p384_subborrowx_u64!();
+        Depcrate_p384_64fiat_p384_mulx_u64!();
+        Depcrate_p384_64fiat_p384_cmovznz_u64!();
+        Depcrate_p384_64fiat_p384_mul!();
+        Depcrate_p384_64fiat_p384_square!();
+        Depcrate_p384_64fiat_p384_add!();
+        Depcrate_p384_64fiat_p384_sub!();
+        Depcrate_p384_64fiat_p384_opp!();
+        Depcrate_p384_64fiat_p384_from_montgomery!();
+        Depcrate_p384_64fiat_p384_to_montgomery!();
+        Depcrate_p384_64fiat_p384_nonzero!();
+        Depcrate_p384_64fiat_p384_selectznz!();
+        Depcrate_p384_64fiat_p384_to_bytes!();
+        Depcrate_p384_64fiat_p384_from_bytes!();
+        Depcrate_p384_64fiat_p384_set_one!();
+        Depcrate_p384_64fiat_p384_msat!();
+        Depcrate_p384_64fiat_p384_divstep!();
+        Depcrate_p384_64fiat_p384_divstep_precomp!();
+    };
+}

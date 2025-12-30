@@ -1,0 +1,9 @@
+// Generated macro for TrackedChange (struct)
+macro_rules! Depcrate_tree_utilsTrackedChange {
+() => {
+// Module: crate::tree::utils
+// Provides: {"TrackedChange"}
+// Dependencies: {}
+# [doc = " A way to attach metadata to each change."] # [derive (Debug)] pub struct TrackedChange { # [doc = " The actual change"] pub inner : Change , # [doc = " If `true`, this change counts as written to the tree using a [`tree::Editor`]."] pub was_written : bool , # [doc = " If `Some(ours_idx_to_ignore)`, this change must be placed into the tree before handling it."] # [doc = " This makes sure that new changes aren't visible too early, which would mean the algorithm"] # [doc = " knows things too early which can be misleading."] # [doc = " The `ours_idx_to_ignore` assures that the same rewrite won't be used as matching side, which"] # [doc = " would lead to strange effects. Only set if it's a rewrite though."] pub needs_tree_insertion : Option < Option < usize > > , # [doc = " A new `(location, change_idx)` pair for the change that can happen if the location is touching a rewrite in a parent"] # [doc = " directory, but otherwise doesn't have a match. This means we shall redo the operation but with"] # [doc = " the changed path."] # [doc = " The second tuple entry `change_idx` is the change-idx we passed over, which refers to the other side that interfered."] pub rewritten_location : Option < (BString , usize) > , }
+};
+}

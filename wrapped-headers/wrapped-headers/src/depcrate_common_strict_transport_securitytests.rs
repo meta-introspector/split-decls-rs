@@ -1,0 +1,9 @@
+// Generated macro for tests (module)
+macro_rules! Depcrate_common_strict_transport_securitytests {
+() => {
+// Module: crate::common::strict_transport_security
+// Provides: {"tests"}
+// Dependencies: {}
+# [cfg (test)] mod tests { use super :: super :: test_decode ; use super :: StrictTransportSecurity ; use std :: time :: Duration ; # [test] fn test_parse_max_age () { let h = test_decode :: < StrictTransportSecurity > (& ["max-age=31536000"]) . unwrap () ; assert_eq ! (h , StrictTransportSecurity { include_subdomains : false , max_age : Duration :: from_secs (31536000) . into () , }) ; } # [test] fn test_parse_max_age_no_value () { assert_eq ! (test_decode ::< StrictTransportSecurity > (& ["max-age"]) , None ,) ; } # [test] fn test_parse_quoted_max_age () { let h = test_decode :: < StrictTransportSecurity > (& ["max-age=\"31536000\""]) . unwrap () ; assert_eq ! (h , StrictTransportSecurity { include_subdomains : false , max_age : Duration :: from_secs (31536000) . into () , }) ; } # [test] fn test_parse_spaces_max_age () { let h = test_decode :: < StrictTransportSecurity > (& ["max-age = 31536000"]) . unwrap () ; assert_eq ! (h , StrictTransportSecurity { include_subdomains : false , max_age : Duration :: from_secs (31536000) . into () , }) ; } # [test] fn test_parse_include_subdomains () { let h = test_decode :: < StrictTransportSecurity > (& ["max-age=15768000 ; includeSubDomains"]) . unwrap () ; assert_eq ! (h , StrictTransportSecurity { include_subdomains : true , max_age : Duration :: from_secs (15768000) . into () , }) ; } # [test] fn test_parse_no_max_age () { assert_eq ! (test_decode ::< StrictTransportSecurity > (& ["includeSubdomains"]) , None ,) ; } # [test] fn test_parse_max_age_nan () { assert_eq ! (test_decode ::< StrictTransportSecurity > (& ["max-age = izzy"]) , None ,) ; } # [test] fn test_parse_duplicate_directives () { assert_eq ! (test_decode ::< StrictTransportSecurity > (& ["max-age=1; max-age=2"]) , None ,) ; } }
+};
+}

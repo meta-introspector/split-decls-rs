@@ -1,0 +1,55 @@
+// Generated module macro for crate::generated
+macro_rules! Modcrate_generated {
+() => {
+        Depcrate_generatedother_4!();
+        Depcrate_generated__NSUserActivity_TVServices!();
+        Depcrate_generated__TVAppProfileDescriptor!();
+        Depcrate_generated__TVContentIdentifier!();
+        Depcrate_generated__TVContentItem!();
+        Depcrate_generated__TVServicesDefines!();
+        Depcrate_generated__TVTopShelfAction!();
+        Depcrate_generated__TVTopShelfCarouselContent!();
+        Depcrate_generated__TVTopShelfCarouselItem!();
+        Depcrate_generated__TVTopShelfContent!();
+        Depcrate_generated__TVTopShelfContentProvider!();
+        Depcrate_generated__TVTopShelfInsetContent!();
+        Depcrate_generated__TVTopShelfItem!();
+        Depcrate_generated__TVTopShelfItemCollection!();
+        Depcrate_generated__TVTopShelfNamedAttribute!();
+        Depcrate_generated__TVTopShelfObject!();
+        Depcrate_generated__TVTopShelfProvider!();
+        Depcrate_generated__TVTopShelfSectionedContent!();
+        Depcrate_generated__TVTopShelfSectionedItem!();
+        Depcrate_generated__TVUserManager!();
+        Depcrate_generateduse_24!();
+        Depcrate_generateduse_25!();
+        Depcrate_generateduse_26!();
+        Depcrate_generateduse_27!();
+        Depcrate_generateduse_28!();
+        Depcrate_generateduse_29!();
+        Depcrate_generateduse_30!();
+        Depcrate_generateduse_31!();
+        Depcrate_generateduse_32!();
+        Depcrate_generateduse_33!();
+        Depcrate_generateduse_34!();
+        Depcrate_generateduse_35!();
+        Depcrate_generateduse_36!();
+        Depcrate_generateduse_37!();
+        Depcrate_generateduse_38!();
+        Depcrate_generateduse_39!();
+        Depcrate_generateduse_40!();
+        Depcrate_generateduse_41!();
+        Depcrate_generateduse_42!();
+        Depcrate_generateduse_43!();
+        Depcrate_generateduse_44!();
+        Depcrate_generateduse_45!();
+        Depcrate_generateduse_46!();
+        Depcrate_generateduse_47!();
+        Depcrate_generateduse_48!();
+        Depcrate_generateduse_49!();
+        Depcrate_generateduse_50!();
+        Depcrate_generateduse_51!();
+        Depcrate_generateduse_52!();
+        Depcrate_generateduse_53!();
+    };
+}

@@ -1,0 +1,40 @@
+// Generated module macro for crate::filters::body
+macro_rules! Modcrate_filters_body {
+() => {
+        Depcrate_filters_bodyuse_257!();
+        Depcrate_filters_bodyuse_258!();
+        Depcrate_filters_bodyuse_259!();
+        Depcrate_filters_bodyuse_260!();
+        Depcrate_filters_bodyuse_261!();
+        Depcrate_filters_bodyuse_262!();
+        Depcrate_filters_bodyuse_263!();
+        Depcrate_filters_bodyuse_264!();
+        Depcrate_filters_bodyuse_265!();
+        Depcrate_filters_bodyuse_266!();
+        Depcrate_filters_bodyuse_267!();
+        Depcrate_filters_bodyuse_268!();
+        Depcrate_filters_bodyuse_269!();
+        Depcrate_filters_bodyuse_270!();
+        Depcrate_filters_bodyBoxError!();
+        Depcrate_filters_bodybody!();
+        Depcrate_filters_bodycontent_length_limit!();
+        Depcrate_filters_bodystream!();
+        Depcrate_filters_bodybytes!();
+        Depcrate_filters_bodyaggregate!();
+        Depcrate_filters_bodyjson!();
+        Depcrate_filters_bodyform!();
+        Depcrate_filters_bodyDecode!();
+        Depcrate_filters_bodyJson!();
+        Depcrate_filters_bodyimpl_281!();
+        Depcrate_filters_bodyForm!();
+        Depcrate_filters_bodyimpl_283!();
+        Depcrate_filters_bodyis_content_type!();
+        Depcrate_filters_bodyBodyDeserializeError!();
+        Depcrate_filters_bodyimpl_286!();
+        Depcrate_filters_bodyimpl_287!();
+        Depcrate_filters_bodyBodyReadError!();
+        Depcrate_filters_bodyimpl_289!();
+        Depcrate_filters_bodyimpl_290!();
+        Depcrate_filters_bodymacro_291!();
+    };
+}

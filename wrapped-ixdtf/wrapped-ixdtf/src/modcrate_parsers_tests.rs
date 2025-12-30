@@ -1,0 +1,54 @@
+// Generated module macro for crate::parsers::tests
+macro_rules! Modcrate_parsers_tests {
+() => {
+        Depcrate_parsers_testsother_108!();
+        Depcrate_parsers_testsuse_109!();
+        Depcrate_parsers_testsuse_110!();
+        Depcrate_parsers_testsuse_111!();
+        Depcrate_parsers_testsuse_112!();
+        Depcrate_parsers_teststemporal_parser_basic!();
+        Depcrate_parsers_teststemporal_date_time_max!();
+        Depcrate_parsers_testsgood_zoned_date_time!();
+        Depcrate_parsers_testsbad_zoned_date_time!();
+        Depcrate_parsers_testsgood_extended_year_parsing!();
+        Depcrate_parsers_testsbad_extended_year!();
+        Depcrate_parsers_testsgood_annotations_date_time!();
+        Depcrate_parsers_testsinvalid_day_for_month!();
+        Depcrate_parsers_testsinvalid_month!();
+        Depcrate_parsers_testsinvalid_annotations!();
+        Depcrate_parsers_testsinvalid_calendar_annotations!();
+        Depcrate_parsers_testsduplicate_same_calendar!();
+        Depcrate_parsers_testsvalid_calendar_annotations!();
+        Depcrate_parsers_teststemporal_year_month!();
+        Depcrate_parsers_testsinvalid_year_month!();
+        Depcrate_parsers_teststemporal_month_day!();
+        Depcrate_parsers_testsinvalid_month_day!();
+        Depcrate_parsers_teststemporal_time!();
+        Depcrate_parsers_testsinvalid_time!();
+        Depcrate_parsers_testsinvalid_ambiguous_time!();
+        Depcrate_parsers_testsvalid_unambiguous_time!();
+        Depcrate_parsers_testsambiguous_annotations!();
+        Depcrate_parsers_teststemporal_valid_instant_strings!();
+        Depcrate_parsers_teststemporal_duration_parsing!();
+        Depcrate_parsers_teststemporal_invalid_durations!();
+        Depcrate_parsers_testsmaximum_duration_fraction!();
+        Depcrate_parsers_testsduration_fraction_extended!();
+        Depcrate_parsers_testsduration_exceeds_range!();
+        Depcrate_parsers_testsmaximum_duration_units!();
+        Depcrate_parsers_teststemporal_invalid_iso_datetime_strings!();
+        Depcrate_parsers_teststest_correct_datetime!();
+        Depcrate_parsers_teststest_bad_date!();
+        Depcrate_parsers_teststest_bad_time_spec_separator!();
+        Depcrate_parsers_teststest_hour_utc_offset!();
+        Depcrate_parsers_teststest_offset_annotation!();
+        Depcrate_parsers_teststest_zulu_offset!();
+        Depcrate_parsers_testsinvalid_offset!();
+        Depcrate_parsers_testssubsecond_string_tests!();
+        Depcrate_parsers_testssubseconds_parsing_extended_nanoseconds!();
+        Depcrate_parsers_testssubseconds_parsing_extended_picoseconds!();
+        Depcrate_parsers_testssubseconds_parsing_extended_femtoseconds!();
+        Depcrate_parsers_testssubseconds_parsing_extended_truncated!();
+        Depcrate_parsers_teststz_parser_offset_invalid!();
+        Depcrate_parsers_testsutf16_basic_test!();
+    };
+}

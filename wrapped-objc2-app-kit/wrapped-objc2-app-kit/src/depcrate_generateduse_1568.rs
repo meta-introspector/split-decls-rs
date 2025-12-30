@@ -1,0 +1,9 @@
+// Generated macro for use_1568 (pub_use)
+macro_rules! Depcrate_generateduse_1568 {
+() => {
+// Module: crate::generated
+// Provides: {"use_1568"}
+// Dependencies: {}
+# [cfg (feature = "NSEvent")] pub use self :: __NSEvent :: NSF8FunctionKey ;
+};
+}

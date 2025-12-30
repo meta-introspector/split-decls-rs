@@ -1,0 +1,9 @@
+// Generated macro for ActiveStates (struct)
+macro_rules! Depcrate_nfa_thompson_pikevmActiveStates {
+() => {
+// Module: crate::nfa::thompson::pikevm
+// Provides: {"ActiveStates"}
+// Dependencies: {}
+# [doc = " A set of active states used to \"simulate\" the execution of an NFA via the"] # [doc = " PikeVM."] # [doc = ""] # [doc = " There are two sets of these used during NFA simulation. One set corresponds"] # [doc = " to the \"current\" set of states being traversed for the current position"] # [doc = " in a haystack. The other set corresponds to the \"next\" set of states being"] # [doc = " built, which will become the new \"current\" set for the next position in the"] # [doc = " haystack. These two sets correspond to CLIST and NLIST in Thompson's"] # [doc = " original paper regexes: https://dl.acm.org/doi/pdf/10.1145/363347.363387"] # [doc = ""] # [doc = " In addition to representing a set of NFA states, this also maintains slot"] # [doc = " values for each state. These slot values are what turn the NFA simulation"] # [doc = " into the \"Pike VM.\" Namely, they track capturing group values for each"] # [doc = " state. During the computation of epsilon closure, we copy slot values from"] # [doc = " states in the \"current\" set to the \"next\" set. Eventually, once a match"] # [doc = " is found, the slot values for that match state are what we write to the"] # [doc = " caller provided 'Captures' value."] # [derive (Clone , Debug)] struct ActiveStates { # [doc = " The set of active NFA states. This set preserves insertion order, which"] # [doc = " is critical for simulating the match semantics of backtracking regex"] # [doc = " engines."] set : SparseSet , # [doc = " The slots for every NFA state, where each slot stores a (possibly"] # [doc = " absent) offset. Every capturing group has two slots. One for a start"] # [doc = " offset and one for an end offset."] slot_table : SlotTable , }
+};
+}

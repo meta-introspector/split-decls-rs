@@ -1,0 +1,9 @@
+// Generated macro for other_56161 (other)
+macro_rules! Depcrate_um_winuserother_56161 {
+() => {
+// Module: crate::um::winuser
+// Provides: {"other_56161"}
+// Dependencies: {}
+extern "system" { pub fn SetPropA (hWnd : HWND , lpString : LPCSTR , hData : HANDLE ,) -> BOOL ; pub fn SetPropW (hWnd : HWND , lpString : LPCWSTR , hData : HANDLE ,) -> BOOL ; pub fn GetPropA (hwnd : HWND , lpString : LPCSTR ,) -> HANDLE ; pub fn GetPropW (hwnd : HWND , lpString : LPCWSTR ,) -> HANDLE ; pub fn RemovePropA (hWnd : HWND , lpStr : LPCSTR ,) -> HANDLE ; pub fn RemovePropW (hWnd : HWND , lpStr : LPCWSTR ,) -> HANDLE ; pub fn EnumPropsExA (hWnd : HWND , lpEnumFunc : PROPENUMPROCA , lParam : LPARAM ,) -> c_int ; pub fn EnumPropsExW (hWnd : HWND , lpEnumFunc : PROPENUMPROCW , lParam : LPARAM ,) -> c_int ; pub fn EnumPropsA (hWnd : HWND , lpEnumFunc : PROPENUMPROCA ,) -> c_int ; pub fn EnumPropsW (hWnd : HWND , lpEnumFunc : PROPENUMPROCW ,) -> c_int ; pub fn SetWindowTextA (hWnd : HWND , lpString : LPCSTR ,) -> BOOL ; pub fn SetWindowTextW (hWnd : HWND , lpString : LPCWSTR ,) -> BOOL ; pub fn GetWindowTextA (hWnd : HWND , lpString : LPSTR , nMaxCount : c_int ,) -> c_int ; pub fn GetWindowTextW (hWnd : HWND , lpString : LPWSTR , nMaxCount : c_int ,) -> c_int ; pub fn GetWindowTextLengthA (hWnd : HWND ,) -> c_int ; pub fn GetWindowTextLengthW (hWnd : HWND ,) -> c_int ; pub fn GetClientRect (hWnd : HWND , lpRect : LPRECT ,) -> BOOL ; pub fn GetWindowRect (hWnd : HWND , lpRect : LPRECT ,) -> BOOL ; pub fn AdjustWindowRect (lpRect : LPRECT , dwStyle : DWORD , bMenu : BOOL ,) -> BOOL ; pub fn AdjustWindowRectEx (lpRect : LPRECT , dwStyle : DWORD , bMenu : BOOL , dwExStyle : DWORD ,) -> BOOL ; pub fn AdjustWindowRectExForDpi (lpRect : LPRECT , dwStyle : DWORD , bMenu : BOOL , dwExStyle : DWORD , dpi : UINT ,) -> BOOL ; }
+};
+}

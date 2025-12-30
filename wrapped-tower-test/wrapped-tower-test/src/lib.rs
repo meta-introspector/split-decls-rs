@@ -1,0 +1,68 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcrate_mock_spawnuse_23.rs");
+include!("depcrate_mock_errorerror.rs");
+include!("depcrate_mock_spawnimpl_26.rs");
+include!("depcrate_mockrx.rs");
+include!("depcrate_mock_errorimpl_10.rs");
+include!("depcrate_mock_erroruse_5.rs");
+include!("depcrate_mock_errorimpl_9.rs");
+include!("depcrate_mockuse_28.rs");
+include!("depcrate_macrosassert_request_eq.rs");
+include!("depcrate_mockuse_27.rs");
+include!("depcrate_mockstate.rs");
+include!("depcrate_mockimpl_46.rs");
+include!("depcrate_mockimpl_47.rs");
+include!("depcrate_mockuse_32.rs");
+include!("depcrate_mock_errorclosed.rs");
+include!("depcrate_mockimpl_45.rs");
+include!("depcrate_mock_futureimpl_19.rs");
+include!("depcrate_mock_futureuse_15.rs");
+include!("depcrate_mock_spawnuse_21.rs");
+include!("depcrate_mock_spawnuse_22.rs");
+include!("depcrate_mock_spawnspawn.rs");
+include!("depcrate_mockrequest.rs");
+include!("depcrate_mockimpl_49.rs");
+include!("depcrate_mock_spawnimpl_25.rs");
+include!("depcrate_mock_futuremacro_16.rs");
+include!("depcrate_mockhandle.rs");
+include!("depcrate_mocksendresponse.rs");
+include!("depcrate_mockspawn_with.rs");
+include!("depcratemacros.rs");
+include!("depcrate_mockerror.rs");
+include!("depcrate_mock_errorimpl_8.rs");
+include!("depcrate_mockspawn.rs");
+include!("depcrate_mockimpl_48.rs");
+include!("depcrate_mockimpl_50.rs");
+include!("depcratemock.rs");
+include!("depcrate_mockmock.rs");
+include!("depcrate_mockpair.rs");
+include!("depcrate_mock_futureimpl_18.rs");
+include!("depcrate_mock_futureuse_12.rs");
+include!("depcrate_mockfuture.rs");
+include!("depcrate_mockspawn_layer.rs");
+include!("depcrate_mock_futureuse_14.rs");
+include!("depcrate_mocktx.rs");
+include!("depcrate_mock_futureuse_13.rs");
+include!("depcrate_mockuse_30.rs");
+include!("depcrate_mockimpl_51.rs");
+include!("depcrate_mockuse_31.rs");
+include!("depcrate_mockuse_33.rs");
+include!("depcrate_mockuse_29.rs");
+include!("depcrate_mock_futurerx.rs");
+include!("modcrate_macros.rs");
+include!("modcrate_mock.rs");
+include!("modcrate_mock_error.rs");
+include!("modcrate.rs");
+include!("modcrate_mock_spawn.rs");
+include!("modcrate_mock_future.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate_macros!();
+    Modcrate_mock!();
+    Modcrate_mock_error!();
+    Modcrate!();
+    Modcrate_mock_spawn!();
+    Modcrate_mock_future!();
+}

@@ -1,0 +1,49 @@
+// Generated module macro for crate::crypto::aws_lc_rs::tls12
+macro_rules! Modcrate_crypto_aws_lc_rs_tls12 {
+() => {
+        Depcrate_crypto_aws_lc_rs_tls12use_1250!();
+        Depcrate_crypto_aws_lc_rs_tls12use_1251!();
+        Depcrate_crypto_aws_lc_rs_tls12use_1252!();
+        Depcrate_crypto_aws_lc_rs_tls12use_1253!();
+        Depcrate_crypto_aws_lc_rs_tls12use_1254!();
+        Depcrate_crypto_aws_lc_rs_tls12use_1255!();
+        Depcrate_crypto_aws_lc_rs_tls12use_1256!();
+        Depcrate_crypto_aws_lc_rs_tls12use_1257!();
+        Depcrate_crypto_aws_lc_rs_tls12use_1258!();
+        Depcrate_crypto_aws_lc_rs_tls12use_1259!();
+        Depcrate_crypto_aws_lc_rs_tls12use_1260!();
+        Depcrate_crypto_aws_lc_rs_tls12use_1261!();
+        Depcrate_crypto_aws_lc_rs_tls12TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256!();
+        Depcrate_crypto_aws_lc_rs_tls12TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256!();
+        Depcrate_crypto_aws_lc_rs_tls12TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256!();
+        Depcrate_crypto_aws_lc_rs_tls12TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384!();
+        Depcrate_crypto_aws_lc_rs_tls12TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256!();
+        Depcrate_crypto_aws_lc_rs_tls12TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384!();
+        Depcrate_crypto_aws_lc_rs_tls12TLS12_ECDSA_SCHEMES!();
+        Depcrate_crypto_aws_lc_rs_tls12TLS12_RSA_SCHEMES!();
+        Depcrate_crypto_aws_lc_rs_tls12AES128_GCM!();
+        Depcrate_crypto_aws_lc_rs_tls12AES256_GCM!();
+        Depcrate_crypto_aws_lc_rs_tls12GcmAlgorithm!();
+        Depcrate_crypto_aws_lc_rs_tls12impl_1273!();
+        Depcrate_crypto_aws_lc_rs_tls12ChaCha20Poly1305!();
+        Depcrate_crypto_aws_lc_rs_tls12impl_1275!();
+        Depcrate_crypto_aws_lc_rs_tls12GcmMessageEncrypter!();
+        Depcrate_crypto_aws_lc_rs_tls12GcmMessageDecrypter!();
+        Depcrate_crypto_aws_lc_rs_tls12GCM_EXPLICIT_NONCE_LEN!();
+        Depcrate_crypto_aws_lc_rs_tls12GCM_OVERHEAD!();
+        Depcrate_crypto_aws_lc_rs_tls12impl_1280!();
+        Depcrate_crypto_aws_lc_rs_tls12impl_1281!();
+        Depcrate_crypto_aws_lc_rs_tls12ChaCha20Poly1305MessageEncrypter!();
+        Depcrate_crypto_aws_lc_rs_tls12ChaCha20Poly1305MessageDecrypter!();
+        Depcrate_crypto_aws_lc_rs_tls12CHACHAPOLY1305_OVERHEAD!();
+        Depcrate_crypto_aws_lc_rs_tls12impl_1285!();
+        Depcrate_crypto_aws_lc_rs_tls12impl_1286!();
+        Depcrate_crypto_aws_lc_rs_tls12gcm_iv!();
+        Depcrate_crypto_aws_lc_rs_tls12Tls12Prf!();
+        Depcrate_crypto_aws_lc_rs_tls12impl_1289!();
+        Depcrate_crypto_aws_lc_rs_tls12Tls12PrfSecret!();
+        Depcrate_crypto_aws_lc_rs_tls12impl_1291!();
+        Depcrate_crypto_aws_lc_rs_tls12Secret!();
+        Depcrate_crypto_aws_lc_rs_tls12impl_1293!();
+    };
+}

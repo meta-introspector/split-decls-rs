@@ -1,0 +1,9 @@
+// Generated macro for i686_decorated_name (function)
+macro_rules! Depcrate_commoni686_decorated_name {
+() => {
+// Module: crate::common
+// Provides: {"i686_decorated_name"}
+// Dependencies: {}
+pub fn i686_decorated_name (dll_import : & DllImport , mingw : bool , disable_name_mangling : bool , force_fully_decorated : bool ,) -> String { let name = dll_import . name . as_str () ; let (add_prefix , add_suffix) = match (force_fully_decorated , dll_import . import_name_type) { (_ , Some (PeImportNameType :: NoPrefix)) => (false , true) , (false , Some (PeImportNameType :: Undecorated)) => (false , false) , _ => (true , true) , } ; let mut decorated_name = String :: with_capacity (name . len () + 6) ; if disable_name_mangling { decorated_name . push ('\x01') ; } let prefix = if add_prefix && dll_import . is_fn { match dll_import . calling_convention { DllCallingConvention :: C | DllCallingConvention :: Vectorcall (_) => None , DllCallingConvention :: Stdcall (_) => (! mingw || dll_import . import_name_type == Some (PeImportNameType :: Decorated)) . then_some ('_') , DllCallingConvention :: Fastcall (_) => Some ('@') , } } else if ! dll_import . is_fn && ! mingw { Some ('_') } else { None } ; if let Some (prefix) = prefix { decorated_name . push (prefix) ; } decorated_name . push_str (name) ; if add_suffix && dll_import . is_fn { use std :: fmt :: Write ; match dll_import . calling_convention { DllCallingConvention :: C => { } DllCallingConvention :: Stdcall (arg_list_size) | DllCallingConvention :: Fastcall (arg_list_size) => { write ! (& mut decorated_name , "@{arg_list_size}") . unwrap () ; } DllCallingConvention :: Vectorcall (arg_list_size) => { write ! (& mut decorated_name , "@@{arg_list_size}") . unwrap () ; } } } decorated_name }
+};
+}

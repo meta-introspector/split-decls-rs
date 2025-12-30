@@ -1,0 +1,47 @@
+// Generated module macro for crate::scaffold
+macro_rules! Modcrate_scaffold {
+() => {
+        Depcrate_scaffoldcalendar!();
+        Depcrate_scaffolddynamic_impls!();
+        Depcrate_scaffoldfieldset_traits!();
+        Depcrate_scaffoldget_field!();
+        Depcrate_scaffoldnames_storage!();
+        Depcrate_scaffolduse_1168!();
+        Depcrate_scaffolduse_1169!();
+        Depcrate_scaffolduse_1170!();
+        Depcrate_scaffolduse_1171!();
+        Depcrate_scaffolduse_1172!();
+        Depcrate_scaffolduse_1173!();
+        Depcrate_scaffolduse_1174!();
+        Depcrate_scaffolduse_1175!();
+        Depcrate_scaffolduse_1176!();
+        Depcrate_scaffolduse_1177!();
+        Depcrate_scaffolduse_1178!();
+        Depcrate_scaffolduse_1179!();
+        Depcrate_scaffolduse_1180!();
+        Depcrate_scaffolduse_1181!();
+        Depcrate_scaffolduse_1182!();
+        Depcrate_scaffolduse_1183!();
+        Depcrate_scaffolduse_1184!();
+        Depcrate_scaffolduse_1185!();
+        Depcrate_scaffolduse_1186!();
+        Depcrate_scaffolduse_1187!();
+        Depcrate_scaffolduse_1188!();
+        Depcrate_scaffolduse_1189!();
+        Depcrate_scaffolduse_1190!();
+        Depcrate_scaffolduse_1191!();
+        Depcrate_scaffolduse_1192!();
+        Depcrate_scaffolduse_1193!();
+        Depcrate_scaffolduse_1194!();
+        Depcrate_scaffolduse_1195!();
+        Depcrate_scaffolduse_1196!();
+        Depcrate_scaffolduse_1197!();
+        Depcrate_scaffolduse_1198!();
+        Depcrate_scaffolduse_1199!();
+        Depcrate_scaffolduse_1200!();
+        Depcrate_scaffolduse_1201!();
+        Depcrate_scaffolduse_1202!();
+        Depcrate_scaffolduse_1203!();
+        Depcrate_scaffoldUnstableSealed!();
+    };
+}

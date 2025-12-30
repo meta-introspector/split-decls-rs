@@ -1,0 +1,9 @@
+// Generated macro for macro_19529 (macro)
+macro_rules! Depcrate_um_accctrlmacro_19529 {
+() => {
+// Module: crate::um::accctrl
+// Provides: {"macro_19529"}
+// Dependencies: {}
+ENUM ! { enum SE_OBJECT_TYPE { SE_UNKNOWN_OBJECT_TYPE = 0 , SE_FILE_OBJECT , SE_SERVICE , SE_PRINTER , SE_REGISTRY_KEY , SE_LMSHARE , SE_KERNEL_OBJECT , SE_WINDOW_OBJECT , SE_DS_OBJECT , SE_DS_OBJECT_ALL , SE_PROVIDER_DEFINED_OBJECT , SE_WMIGUID_OBJECT , SE_REGISTRY_WOW64_32KEY , SE_REGISTRY_WOW64_64KEY , } }
+};
+}

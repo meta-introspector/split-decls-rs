@@ -1,0 +1,49 @@
+// Generated module macro for crate::client
+macro_rules! Modcrate_client {
+() => {
+        Depcrate_clientuse_775!();
+        Depcrate_clientuse_776!();
+        Depcrate_clientuse_777!();
+        Depcrate_clientuse_778!();
+        Depcrate_clientuse_779!();
+        Depcrate_clientuse_780!();
+        Depcrate_clientuse_781!();
+        Depcrate_clientuse_782!();
+        Depcrate_clientuse_783!();
+        Depcrate_clientuse_784!();
+        Depcrate_clientuse_785!();
+        Depcrate_clientuse_786!();
+        Depcrate_clientuse_787!();
+        Depcrate_clientuse_788!();
+        Depcrate_clientSendRequest!();
+        Depcrate_clientReadySendRequest!();
+        Depcrate_clientConnection!();
+        Depcrate_clientResponseFuture!();
+        Depcrate_clientPushedResponseFuture!();
+        Depcrate_clientPushPromise!();
+        Depcrate_clientPushPromises!();
+        Depcrate_clientBuilder!();
+        Depcrate_clientPeer!();
+        Depcrate_clientimpl_798!();
+        Depcrate_clientimpl_799!();
+        Depcrate_clientimpl_800!();
+        Depcrate_clientimpl_801!();
+        Depcrate_clientimpl_802!();
+        Depcrate_clientimpl_803!();
+        Depcrate_clientimpl_804!();
+        Depcrate_clienthandshake!();
+        Depcrate_clientbind_connection!();
+        Depcrate_clientimpl_807!();
+        Depcrate_clientimpl_808!();
+        Depcrate_clientimpl_809!();
+        Depcrate_clientimpl_810!();
+        Depcrate_clientimpl_811!();
+        Depcrate_clientimpl_812!();
+        Depcrate_clientimpl_813!();
+        Depcrate_clientimpl_814!();
+        Depcrate_clientimpl_815!();
+        Depcrate_clientimpl_816!();
+        Depcrate_clientimpl_817!();
+        Depcrate_clientimpl_818!();
+    };
+}

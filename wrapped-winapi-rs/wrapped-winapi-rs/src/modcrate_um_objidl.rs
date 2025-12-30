@@ -1,0 +1,45 @@
+// Generated module macro for crate::um::objidl
+macro_rules! Modcrate_um_objidl {
+() => {
+        Depcrate_um_objidluse_33813!();
+        Depcrate_um_objidluse_33814!();
+        Depcrate_um_objidluse_33815!();
+        Depcrate_um_objidluse_33816!();
+        Depcrate_um_objidluse_33817!();
+        Depcrate_um_objidluse_33818!();
+        Depcrate_um_objidluse_33819!();
+        Depcrate_um_objidluse_33820!();
+        Depcrate_um_objidluse_33821!();
+        Depcrate_um_objidluse_33822!();
+        Depcrate_um_objidluse_33823!();
+        Depcrate_um_objidlmacro_33824!();
+        Depcrate_um_objidlLPBIND_OPTS!();
+        Depcrate_um_objidlmacro_33826!();
+        Depcrate_um_objidlmacro_33827!();
+        Depcrate_um_objidlmacro_33828!();
+        Depcrate_um_objidlmacro_33829!();
+        Depcrate_um_objidlmacro_33830!();
+        Depcrate_um_objidlmacro_33831!();
+        Depcrate_um_objidlmacro_33832!();
+        Depcrate_um_objidlmacro_33833!();
+        Depcrate_um_objidlmacro_33834!();
+        Depcrate_um_objidlSNB!();
+        Depcrate_um_objidlmacro_33836!();
+        Depcrate_um_objidlmacro_33837!();
+        Depcrate_um_objidlmacro_33838!();
+        Depcrate_um_objidlmacro_33839!();
+        Depcrate_um_objidlmacro_33840!();
+        Depcrate_um_objidlmacro_33841!();
+        Depcrate_um_objidlmacro_33842!();
+        Depcrate_um_objidlmacro_33843!();
+        Depcrate_um_objidlmacro_33844!();
+        Depcrate_um_objidlmacro_33845!();
+        Depcrate_um_objidlmacro_33846!();
+        Depcrate_um_objidlmacro_33847!();
+        Depcrate_um_objidlmacro_33848!();
+        Depcrate_um_objidlLPDATAOBJECT!();
+        Depcrate_um_objidlmacro_33850!();
+        Depcrate_um_objidlmacro_33851!();
+        Depcrate_um_objidlmacro_33852!();
+    };
+}

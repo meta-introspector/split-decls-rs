@@ -1,0 +1,9 @@
+// Generated macro for PTRANSACTION_ENLISTMENTS_INFORMATION (type)
+macro_rules! Depcrate_um_winntPTRANSACTION_ENLISTMENTS_INFORMATION {
+() => {
+// Module: crate::um::winnt
+// Provides: {"PTRANSACTION_ENLISTMENTS_INFORMATION"}
+// Dependencies: {}
+pub type PTRANSACTION_ENLISTMENTS_INFORMATION = * mut TRANSACTION_ENLISTMENTS_INFORMATION ;
+};
+}

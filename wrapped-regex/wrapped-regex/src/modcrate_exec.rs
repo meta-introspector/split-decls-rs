@@ -1,0 +1,45 @@
+// Generated module macro for crate::exec
+macro_rules! Modcrate_exec {
+() => {
+        Depcrate_execuse_127!();
+        Depcrate_execuse_128!();
+        Depcrate_execuse_129!();
+        Depcrate_execuse_130!();
+        Depcrate_execuse_131!();
+        Depcrate_execuse_132!();
+        Depcrate_execuse_133!();
+        Depcrate_execuse_134!();
+        Depcrate_execuse_135!();
+        Depcrate_execuse_136!();
+        Depcrate_execuse_137!();
+        Depcrate_execuse_138!();
+        Depcrate_execuse_139!();
+        Depcrate_execuse_140!();
+        Depcrate_execuse_141!();
+        Depcrate_execuse_142!();
+        Depcrate_execuse_143!();
+        Depcrate_execuse_144!();
+        Depcrate_execuse_145!();
+        Depcrate_execuse_146!();
+        Depcrate_execExec!();
+        Depcrate_execExecNoSync!();
+        Depcrate_execExecNoSyncStr!();
+        Depcrate_execExecReadOnly!();
+        Depcrate_execExecBuilder!();
+        Depcrate_execParsed!();
+        Depcrate_execimpl_153!();
+        Depcrate_execimpl_154!();
+        Depcrate_execimpl_155!();
+        Depcrate_execimpl_156!();
+        Depcrate_execimpl_157!();
+        Depcrate_execimpl_158!();
+        Depcrate_execimpl_159!();
+        Depcrate_execimpl_160!();
+        Depcrate_execMatchType!();
+        Depcrate_execMatchLiteralType!();
+        Depcrate_execMatchNfaType!();
+        Depcrate_execProgramCache!();
+        Depcrate_execProgramCacheInner!();
+        Depcrate_execimpl_166!();
+    };
+}

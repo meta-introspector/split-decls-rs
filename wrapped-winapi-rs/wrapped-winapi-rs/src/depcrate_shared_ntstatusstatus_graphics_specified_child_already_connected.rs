@@ -1,0 +1,9 @@
+// Generated macro for STATUS_GRAPHICS_SPECIFIED_CHILD_ALREADY_CONNECTED (const)
+macro_rules! Depcrate_shared_ntstatusSTATUS_GRAPHICS_SPECIFIED_CHILD_ALREADY_CONNECTED {
+() => {
+// Module: crate::shared::ntstatus
+// Provides: {"STATUS_GRAPHICS_SPECIFIED_CHILD_ALREADY_CONNECTED"}
+// Dependencies: {}
+pub const STATUS_GRAPHICS_SPECIFIED_CHILD_ALREADY_CONNECTED : NTSTATUS = 0xC01E0400 ;
+};
+}

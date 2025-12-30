@@ -1,0 +1,39 @@
+// Generated module macro for crate::needless_continue
+macro_rules! Modcrate_needless_continue {
+() => {
+        Depcrate_needless_continueuse_7817!();
+        Depcrate_needless_continueuse_7818!();
+        Depcrate_needless_continueuse_7819!();
+        Depcrate_needless_continueuse_7820!();
+        Depcrate_needless_continueuse_7821!();
+        Depcrate_needless_continueuse_7822!();
+        Depcrate_needless_continueuse_7823!();
+        Depcrate_needless_continueuse_7824!();
+        Depcrate_needless_continueuse_7825!();
+        Depcrate_needless_continuemacro_7826!();
+        Depcrate_needless_continuemacro_7827!();
+        Depcrate_needless_continueimpl_7828!();
+        Depcrate_needless_continueneedless_continue_in_else!();
+        Depcrate_needless_continueis_first_block_stmt_continue!();
+        Depcrate_needless_continuecompare_labels!();
+        Depcrate_needless_continuewith_loop_block!();
+        Depcrate_needless_continuewith_if_expr!();
+        Depcrate_needless_continueLintType!();
+        Depcrate_needless_continueLintData!();
+        Depcrate_needless_continueMSG_REDUNDANT_CONTINUE_EXPRESSION!();
+        Depcrate_needless_continueMSG_REDUNDANT_ELSE_BLOCK!();
+        Depcrate_needless_continueMSG_ELSE_BLOCK_NOT_NEEDED!();
+        Depcrate_needless_continueDROP_ELSE_BLOCK_AND_MERGE_MSG!();
+        Depcrate_needless_continueDROP_ELSE_BLOCK_MSG!();
+        Depcrate_needless_continueDROP_CONTINUE_EXPRESSION_MSG!();
+        Depcrate_needless_continueemit_warning!();
+        Depcrate_needless_continuesuggestion_snippet_for_continue_inside_if!();
+        Depcrate_needless_continuesuggestion_snippet_for_continue_inside_else!();
+        Depcrate_needless_continuecheck_last_stmt_in_expr!();
+        Depcrate_needless_continuecheck_last_stmt_in_block!();
+        Depcrate_needless_continuecheck_and_warn!();
+        Depcrate_needless_continueerode_from_back!();
+        Depcrate_needless_continuespan_of_first_expr_in_block!();
+        Depcrate_needless_continuetest!();
+    };
+}

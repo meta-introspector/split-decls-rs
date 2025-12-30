@@ -1,0 +1,51 @@
+// Generated module macro for crate::serde_tests
+macro_rules! Modcrate_serde_tests {
+() => {
+        Depcrate_serde_testsuse_319!();
+        Depcrate_serde_testsuse_320!();
+        Depcrate_serde_testsuse_321!();
+        Depcrate_serde_testsVecWriter!();
+        Depcrate_serde_testsimpl_323!();
+        Depcrate_serde_testsimpl_324!();
+        Depcrate_serde_testsimpl_325!();
+        Depcrate_serde_testsnew_serializer!();
+        Depcrate_serde_testsnew_deserializer!();
+        Depcrate_serde_testsassert_roundtrip!();
+        Depcrate_serde_testsAnimal!();
+        Depcrate_serde_testsDogOuter!();
+        Depcrate_serde_testsDogInner!();
+        Depcrate_serde_testscow!();
+        Depcrate_serde_testsdog!();
+        Depcrate_serde_testsfrog!();
+        Depcrate_serde_testscat_with_firmware!();
+        Depcrate_serde_testscat_without_firmware!();
+        Depcrate_serde_testsNewtypeStruct!();
+        Depcrate_serde_testsNewtypeInner!();
+        Depcrate_serde_testsnewtype_struct!();
+        Depcrate_serde_testsTypeWithOptions!();
+        Depcrate_serde_teststype_with_options!();
+        Depcrate_serde_testsTypeWithDate!();
+        Depcrate_serde_teststype_with_date!();
+        Depcrate_serde_testsoption_some!();
+        Depcrate_serde_testsoption_none!();
+        Depcrate_serde_testsoption_some_some!();
+        Depcrate_serde_testsoption_some_none!();
+        Depcrate_serde_testsoption_dictionary_values!();
+        Depcrate_serde_testsoption_dictionary_keys!();
+        Depcrate_serde_testsoption_array!();
+        Depcrate_serde_testsenum_variant_types!();
+        Depcrate_serde_testsdeserialise_old_enum_unit_variant_encoding!();
+        Depcrate_serde_testsdeserialize_dictionary_xml!();
+        Depcrate_serde_testsdeserialize_dictionary_binary!();
+        Depcrate_serde_testscheck_common_plist!();
+        Depcrate_serde_testsdeserialize_dictionary_binary_nskeyedarchiver!();
+        Depcrate_serde_teststry_parse_xml!();
+        Depcrate_serde_testsxml_detection!();
+        Depcrate_serde_testsdictionary_deserialize_dictionary_in_struct!();
+        Depcrate_serde_testsdictionary_serialize_xml!();
+        Depcrate_serde_testsempty_array_and_dictionary_serialize_to_xml!();
+        Depcrate_serde_testsserde_yaml_to_value!();
+        Depcrate_serde_testsserialize_to_from_value!();
+        Depcrate_serde_testsdeserialize_with_trailing_events_fails!();
+    };
+}

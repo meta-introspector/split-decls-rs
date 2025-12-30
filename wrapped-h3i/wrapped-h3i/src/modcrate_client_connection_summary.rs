@@ -1,0 +1,39 @@
+// Generated module macro for crate::client::connection_summary
+macro_rules! Modcrate_client_connection_summary {
+() => {
+        Depcrate_client_connection_summaryuse_102!();
+        Depcrate_client_connection_summaryuse_103!();
+        Depcrate_client_connection_summaryuse_104!();
+        Depcrate_client_connection_summaryuse_105!();
+        Depcrate_client_connection_summaryuse_106!();
+        Depcrate_client_connection_summaryuse_107!();
+        Depcrate_client_connection_summaryuse_108!();
+        Depcrate_client_connection_summaryuse_109!();
+        Depcrate_client_connection_summaryuse_110!();
+        Depcrate_client_connection_summaryuse_111!();
+        Depcrate_client_connection_summaryuse_112!();
+        Depcrate_client_connection_summaryuse_113!();
+        Depcrate_client_connection_summaryuse_114!();
+        Depcrate_client_connection_summaryuse_115!();
+        Depcrate_client_connection_summaryMAX_SERIALIZED_BUFFER_LEN!();
+        Depcrate_client_connection_summaryConnectionSummary!();
+        Depcrate_client_connection_summaryimpl_118!();
+        Depcrate_client_connection_summaryStreamMap!();
+        Depcrate_client_connection_summaryimpl_120!();
+        Depcrate_client_connection_summaryimpl_121!();
+        Depcrate_client_connection_summaryCloseTriggerFrames!();
+        Depcrate_client_connection_summaryimpl_123!();
+        Depcrate_client_connection_summaryimpl_124!();
+        Depcrate_client_connection_summaryConnectionCloseDetails!();
+        Depcrate_client_connection_summaryimpl_126!();
+        Depcrate_client_connection_summaryimpl_127!();
+        Depcrate_client_connection_summaryimpl_128!();
+        Depcrate_client_connection_summarySerializablePathStats!();
+        Depcrate_client_connection_summaryimpl_130!();
+        Depcrate_client_connection_summarySerializableStats!();
+        Depcrate_client_connection_summaryimpl_132!();
+        Depcrate_client_connection_summarySerializableConnectionError!();
+        Depcrate_client_connection_summaryimpl_134!();
+        Depcrate_client_connection_summarytests!();
+    };
+}

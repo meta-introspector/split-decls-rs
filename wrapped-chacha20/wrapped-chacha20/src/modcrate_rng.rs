@@ -1,0 +1,39 @@
+// Generated module macro for crate::rng
+macro_rules! Modcrate_rng {
+() => {
+        Depcrate_rnguse_33!();
+        Depcrate_rnguse_34!();
+        Depcrate_rnguse_35!();
+        Depcrate_rnguse_36!();
+        Depcrate_rnguse_37!();
+        Depcrate_rngBLOCK_WORDS!();
+        Depcrate_rngSeed!();
+        Depcrate_rngimpl_40!();
+        Depcrate_rngimpl_41!();
+        Depcrate_rngimpl_42!();
+        Depcrate_rngimpl_43!();
+        Depcrate_rngimpl_44!();
+        Depcrate_rngimpl_45!();
+        Depcrate_rngimpl_46!();
+        Depcrate_rngU32x2!();
+        Depcrate_rngimpl_48!();
+        Depcrate_rngimpl_49!();
+        Depcrate_rngimpl_50!();
+        Depcrate_rngimpl_51!();
+        Depcrate_rngStreamId!();
+        Depcrate_rngBlockPos!();
+        Depcrate_rngBlockRngResults!();
+        Depcrate_rngimpl_55!();
+        Depcrate_rngimpl_56!();
+        Depcrate_rngimpl_57!();
+        Depcrate_rngimpl_58!();
+        Depcrate_rngBUFFER_SIZE!();
+        Depcrate_rngBUF_BLOCKS!();
+        Depcrate_rngimpl_61!();
+        Depcrate_rngimpl_chacha_rng!();
+        Depcrate_rngmacro_63!();
+        Depcrate_rngmacro_64!();
+        Depcrate_rngmacro_65!();
+        Depcrate_rngtests!();
+    };
+}

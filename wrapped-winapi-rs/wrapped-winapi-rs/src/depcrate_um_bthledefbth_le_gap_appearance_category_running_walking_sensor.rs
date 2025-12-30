@@ -1,0 +1,9 @@
+// Generated macro for BTH_LE_GAP_APPEARANCE_CATEGORY_RUNNING_WALKING_SENSOR (const)
+macro_rules! Depcrate_um_bthledefBTH_LE_GAP_APPEARANCE_CATEGORY_RUNNING_WALKING_SENSOR {
+() => {
+// Module: crate::um::bthledef
+// Provides: {"BTH_LE_GAP_APPEARANCE_CATEGORY_RUNNING_WALKING_SENSOR"}
+// Dependencies: {}
+pub const BTH_LE_GAP_APPEARANCE_CATEGORY_RUNNING_WALKING_SENSOR : USHORT = 0x0011 ;
+};
+}

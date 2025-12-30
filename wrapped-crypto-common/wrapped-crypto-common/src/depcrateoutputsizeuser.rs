@@ -1,0 +1,9 @@
+// Generated macro for OutputSizeUser (trait)
+macro_rules! DepcrateOutputSizeUser {
+() => {
+// Module: crate
+// Provides: {"OutputSizeUser"}
+// Dependencies: {}
+# [doc = " Types which return data with the given size."] pub trait OutputSizeUser { # [doc = " Size of the output in bytes."] type OutputSize : ArraySize ; # [doc = " Return output size in bytes."] # [inline (always)] fn output_size () -> usize { Self :: OutputSize :: USIZE } }
+};
+}

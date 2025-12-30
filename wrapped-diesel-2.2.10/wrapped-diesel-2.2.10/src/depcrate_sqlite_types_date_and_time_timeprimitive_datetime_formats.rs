@@ -1,0 +1,9 @@
+// Generated macro for PRIMITIVE_DATETIME_FORMATS (const)
+macro_rules! Depcrate_sqlite_types_date_and_time_timePRIMITIVE_DATETIME_FORMATS {
+() => {
+// Module: crate::sqlite::types::date_and_time::time
+// Provides: {"PRIMITIVE_DATETIME_FORMATS"}
+// Dependencies: {}
+# [allow (deprecated)] const PRIMITIVE_DATETIME_FORMATS : [& [FormatItem < '_ >] ; 18] = [format_description ! ("[year]-[month]-[day] [hour]:[minute]:[second].[subsecond]") , format_description ! ("[year]-[month]-[day] [hour]:[minute]:[second].[subsecond][offset_hour sign:mandatory]:[offset_minute]") , format_description ! ("[year]-[month]-[day] [hour]:[minute]:[second]") , format_description ! ("[year]-[month]-[day] [hour]:[minute]:[second][offset_hour sign:mandatory]:[offset_minute]") , format_description ! ("[year]-[month]-[day] [hour]:[minute]") , format_description ! ("[year]-[month]-[day] [hour]:[minute]Z") , format_description ! ("[year]-[month]-[day] [hour]:[minute][offset_hour sign:mandatory]:[offset_minute]") , format_description ! ("[year]-[month]-[day] [hour]:[minute]:[second]Z") , format_description ! ("[year]-[month]-[day] [hour]:[minute]:[second].[subsecond]Z") , format_description ! ("[year]-[month]-[day]T[hour]:[minute]") , format_description ! ("[year]-[month]-[day]T[hour]:[minute]Z") , format_description ! ("[year]-[month]-[day]T[hour]:[minute][offset_hour sign:mandatory]:[offset_minute]") , format_description ! ("[year]-[month]-[day]T[hour]:[minute]:[second]") , format_description ! ("[year]-[month]-[day]T[hour]:[minute]:[second]Z") , format_description ! ("[year]-[month]-[day]T[hour]:[minute]:[second][offset_hour sign:mandatory]:[offset_minute]") , format_description ! ("[year]-[month]-[day]T[hour]:[minute]:[second].[subsecond]") , format_description ! ("[year]-[month]-[day]T[hour]:[minute]:[second].[subsecond]Z") , format_description ! ("[year]-[month]-[day]T[hour]:[minute]:[second].[subsecond][offset_hour sign:mandatory]:[offset_minute]") ,] ;
+};
+}

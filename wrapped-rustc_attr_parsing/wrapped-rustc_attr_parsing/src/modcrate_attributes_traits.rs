@@ -1,0 +1,41 @@
+// Generated module macro for crate::attributes::traits
+macro_rules! Modcrate_attributes_traits {
+() => {
+        Depcrate_attributes_traitsuse_335!();
+        Depcrate_attributes_traitsuse_336!();
+        Depcrate_attributes_traitsuse_337!();
+        Depcrate_attributes_traitsuse_338!();
+        Depcrate_attributes_traitsuse_339!();
+        Depcrate_attributes_traitsuse_340!();
+        Depcrate_attributes_traitsuse_341!();
+        Depcrate_attributes_traitsuse_342!();
+        Depcrate_attributes_traitsSkipDuringMethodDispatchParser!();
+        Depcrate_attributes_traitsimpl_344!();
+        Depcrate_attributes_traitsParenSugarParser!();
+        Depcrate_attributes_traitsimpl_346!();
+        Depcrate_attributes_traitsTypeConstParser!();
+        Depcrate_attributes_traitsimpl_348!();
+        Depcrate_attributes_traitsMarkerParser!();
+        Depcrate_attributes_traitsimpl_350!();
+        Depcrate_attributes_traitsDenyExplicitImplParser!();
+        Depcrate_attributes_traitsimpl_352!();
+        Depcrate_attributes_traitsDoNotImplementViaObjectParser!();
+        Depcrate_attributes_traitsimpl_354!();
+        Depcrate_attributes_traitsConstTraitParser!();
+        Depcrate_attributes_traitsimpl_356!();
+        Depcrate_attributes_traitsSpecializationTraitParser!();
+        Depcrate_attributes_traitsimpl_358!();
+        Depcrate_attributes_traitsUnsafeSpecializationMarkerParser!();
+        Depcrate_attributes_traitsimpl_360!();
+        Depcrate_attributes_traitsCoinductiveParser!();
+        Depcrate_attributes_traitsimpl_362!();
+        Depcrate_attributes_traitsAllowIncoherentImplParser!();
+        Depcrate_attributes_traitsimpl_364!();
+        Depcrate_attributes_traitsCoherenceIsCoreParser!();
+        Depcrate_attributes_traitsimpl_366!();
+        Depcrate_attributes_traitsFundamentalParser!();
+        Depcrate_attributes_traitsimpl_368!();
+        Depcrate_attributes_traitsPointeeParser!();
+        Depcrate_attributes_traitsimpl_370!();
+    };
+}

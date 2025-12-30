@@ -1,0 +1,9 @@
+// Generated macro for USB_DEVICE_CAPABILITY_SUPERSPEEDPLUS_SPEED_PROTOCOL_SSP (const)
+macro_rules! Depcrate_shared_usbspecUSB_DEVICE_CAPABILITY_SUPERSPEEDPLUS_SPEED_PROTOCOL_SSP {
+() => {
+// Module: crate::shared::usbspec
+// Provides: {"USB_DEVICE_CAPABILITY_SUPERSPEEDPLUS_SPEED_PROTOCOL_SSP"}
+// Dependencies: {}
+pub const USB_DEVICE_CAPABILITY_SUPERSPEEDPLUS_SPEED_PROTOCOL_SSP : ULONG = 1 ;
+};
+}

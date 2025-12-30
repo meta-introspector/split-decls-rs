@@ -1,0 +1,9 @@
+// Generated macro for SV_ENFORCEKERBEROSREAUTHENTICATION_PARMNUM (const)
+macro_rules! Depcrate_um_lmserverSV_ENFORCEKERBEROSREAUTHENTICATION_PARMNUM {
+() => {
+// Module: crate::um::lmserver
+// Provides: {"SV_ENFORCEKERBEROSREAUTHENTICATION_PARMNUM"}
+// Dependencies: {}
+pub const SV_ENFORCEKERBEROSREAUTHENTICATION_PARMNUM : DWORD = 599 ;
+};
+}

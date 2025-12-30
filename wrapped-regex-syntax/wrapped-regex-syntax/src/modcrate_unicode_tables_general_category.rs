@@ -1,0 +1,43 @@
+// Generated module macro for crate::unicode_tables::general_category
+macro_rules! Modcrate_unicode_tables_general_category {
+() => {
+        Depcrate_unicode_tables_general_categoryBY_NAME!();
+        Depcrate_unicode_tables_general_categoryCASED_LETTER!();
+        Depcrate_unicode_tables_general_categoryCLOSE_PUNCTUATION!();
+        Depcrate_unicode_tables_general_categoryCONNECTOR_PUNCTUATION!();
+        Depcrate_unicode_tables_general_categoryCONTROL!();
+        Depcrate_unicode_tables_general_categoryCURRENCY_SYMBOL!();
+        Depcrate_unicode_tables_general_categoryDASH_PUNCTUATION!();
+        Depcrate_unicode_tables_general_categoryDECIMAL_NUMBER!();
+        Depcrate_unicode_tables_general_categoryENCLOSING_MARK!();
+        Depcrate_unicode_tables_general_categoryFINAL_PUNCTUATION!();
+        Depcrate_unicode_tables_general_categoryFORMAT!();
+        Depcrate_unicode_tables_general_categoryINITIAL_PUNCTUATION!();
+        Depcrate_unicode_tables_general_categoryLETTER!();
+        Depcrate_unicode_tables_general_categoryLETTER_NUMBER!();
+        Depcrate_unicode_tables_general_categoryLINE_SEPARATOR!();
+        Depcrate_unicode_tables_general_categoryLOWERCASE_LETTER!();
+        Depcrate_unicode_tables_general_categoryMARK!();
+        Depcrate_unicode_tables_general_categoryMATH_SYMBOL!();
+        Depcrate_unicode_tables_general_categoryMODIFIER_LETTER!();
+        Depcrate_unicode_tables_general_categoryMODIFIER_SYMBOL!();
+        Depcrate_unicode_tables_general_categoryNONSPACING_MARK!();
+        Depcrate_unicode_tables_general_categoryNUMBER!();
+        Depcrate_unicode_tables_general_categoryOPEN_PUNCTUATION!();
+        Depcrate_unicode_tables_general_categoryOTHER!();
+        Depcrate_unicode_tables_general_categoryOTHER_LETTER!();
+        Depcrate_unicode_tables_general_categoryOTHER_NUMBER!();
+        Depcrate_unicode_tables_general_categoryOTHER_PUNCTUATION!();
+        Depcrate_unicode_tables_general_categoryOTHER_SYMBOL!();
+        Depcrate_unicode_tables_general_categoryPARAGRAPH_SEPARATOR!();
+        Depcrate_unicode_tables_general_categoryPRIVATE_USE!();
+        Depcrate_unicode_tables_general_categoryPUNCTUATION!();
+        Depcrate_unicode_tables_general_categorySEPARATOR!();
+        Depcrate_unicode_tables_general_categorySPACE_SEPARATOR!();
+        Depcrate_unicode_tables_general_categorySPACING_MARK!();
+        Depcrate_unicode_tables_general_categorySYMBOL!();
+        Depcrate_unicode_tables_general_categoryTITLECASE_LETTER!();
+        Depcrate_unicode_tables_general_categoryUNASSIGNED!();
+        Depcrate_unicode_tables_general_categoryUPPERCASE_LETTER!();
+    };
+}

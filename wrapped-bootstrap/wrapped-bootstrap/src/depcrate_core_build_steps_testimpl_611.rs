@@ -1,0 +1,9 @@
+// Generated macro for impl_611 (impl)
+macro_rules! Depcrate_core_build_steps_testimpl_611 {
+() => {
+// Module: crate::core::build_steps::test
+// Provides: {"impl_611"}
+// Dependencies: {}
+impl Step for RustdocJSStd { type Output = () ; const DEFAULT : bool = true ; const IS_HOST : bool = true ; fn should_run (run : ShouldRun < '_ >) -> ShouldRun < '_ > { let default = run . builder . config . nodejs . is_some () ; run . suite_path ("tests/rustdoc-js-std") . default_condition (default) } fn make_run (run : RunConfig < '_ >) { run . builder . ensure (RustdocJSStd { build_compiler : run . builder . compiler (run . builder . top_stage , run . builder . host_target) , target : run . target , }) ; } fn run (self , builder : & Builder < '_ >) { let nodejs = builder . config . nodejs . as_ref () . expect ("need nodejs to run rustdoc-js-std tests") ; let mut command = command (nodejs) ; command . arg (builder . src . join ("src/tools/rustdoc-js/tester.js")) . arg ("--crate-name") . arg ("std") . arg ("--resource-suffix") . arg (& builder . version) . arg ("--doc-folder") . arg (builder . doc_out (self . target)) . arg ("--test-folder") . arg (builder . src . join ("tests/rustdoc-js-std")) ; for path in & builder . paths { if let Some (p) = helpers :: is_valid_test_suite_arg (path , "tests/rustdoc-js-std" , builder) { if ! p . ends_with (".js") { eprintln ! ("A non-js file was given: `{}`" , path . display ()) ; panic ! ("Cannot run rustdoc-js-std tests") ; } command . arg ("--test-file") . arg (path) ; } } builder . ensure (crate :: core :: build_steps :: doc :: Std :: from_build_compiler (self . build_compiler , self . target , DocumentationFormat :: Html ,)) ; let _guard = builder . msg_test ("rustdoc-js-std" , self . target , self . build_compiler . stage) ; command . run (builder) ; } fn metadata (& self) -> Option < StepMetadata > { Some (StepMetadata :: test ("rustdoc-js-std" , self . target) . stage (self . build_compiler . stage)) } }
+};
+}

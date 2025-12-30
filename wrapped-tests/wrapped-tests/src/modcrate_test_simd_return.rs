@@ -1,0 +1,44 @@
+// Generated module macro for crate::test_simd_return
+macro_rules! Modcrate_test_simd_return {
+() => {
+        Depcrate_test_simd_returnuse_199!();
+        Depcrate_test_simd_returnuse_200!();
+        Depcrate_test_simd_returnuse_201!();
+        Depcrate_test_simd_returnmacro_202!();
+        Depcrate_test_simd_returnmethods!();
+        Depcrate_test_simd_returnencode_none!();
+        Depcrate_test_simd_returnFloat2!();
+        Depcrate_test_simd_returnmacro_206!();
+        Depcrate_test_simd_returnFloat3!();
+        Depcrate_test_simd_returnmacro_208!();
+        Depcrate_test_simd_returnFloat4!();
+        Depcrate_test_simd_returnmacro_210!();
+        Depcrate_test_simd_returnFloat8!();
+        Depcrate_test_simd_returnmacro_212!();
+        Depcrate_test_simd_returnFloat16!();
+        Depcrate_test_simd_returnmacro_214!();
+        Depcrate_test_simd_returnChar2!();
+        Depcrate_test_simd_returnmacro_216!();
+        Depcrate_test_simd_returnChar3!();
+        Depcrate_test_simd_returnmacro_218!();
+        Depcrate_test_simd_returnChar4!();
+        Depcrate_test_simd_returnmacro_220!();
+        Depcrate_test_simd_returnChar8!();
+        Depcrate_test_simd_returnmacro_222!();
+        Depcrate_test_simd_returnChar16!();
+        Depcrate_test_simd_returnmacro_224!();
+        Depcrate_test_simd_returnChar32!();
+        Depcrate_test_simd_returnmacro_226!();
+        Depcrate_test_simd_returnChar64!();
+        Depcrate_test_simd_returnmacro_228!();
+        Depcrate_test_simd_returnQuatf!();
+        Depcrate_test_simd_returnimpl_230!();
+        Depcrate_test_simd_returnFloat2x2!();
+        Depcrate_test_simd_returnimpl_232!();
+        Depcrate_test_simd_returnFloat2x4!();
+        Depcrate_test_simd_returnimpl_234!();
+        Depcrate_test_simd_returnFloat4x4!();
+        Depcrate_test_simd_returnimpl_236!();
+        Depcrate_test_simd_returnmacro_237!();
+    };
+}

@@ -1,0 +1,57 @@
+// Generated module macro for crate::com_object
+macro_rules! Modcrate_com_object {
+() => {
+        Depcrate_com_objectuse_17!();
+        Depcrate_com_objectuse_18!();
+        Depcrate_com_objectuse_19!();
+        Depcrate_com_objectuse_20!();
+        Depcrate_com_objectIFoo!();
+        Depcrate_com_objectIBar!();
+        Depcrate_com_objectIBar2!();
+        Depcrate_com_objectAPP_SIGNATURE!();
+        Depcrate_com_objectMyApp!();
+        Depcrate_com_objectimpl_26!();
+        Depcrate_com_objectimpl_27!();
+        Depcrate_com_objectimpl_28!();
+        Depcrate_com_objectimpl_29!();
+        Depcrate_com_objectimpl_30!();
+        Depcrate_com_objectimpl_31!();
+        Depcrate_com_objectimpl_32!();
+        Depcrate_com_objectimpl_33!();
+        Depcrate_com_objectimpl_34!();
+        Depcrate_com_objectimpl_35!();
+        Depcrate_com_objectimpl_36!();
+        Depcrate_com_objectTombstone!();
+        Depcrate_com_objectimpl_38!();
+        Depcrate_com_objectimpl_39!();
+        Depcrate_com_objectimpl_40!();
+        Depcrate_com_objectbasic!();
+        Depcrate_com_objectcasting!();
+        Depcrate_com_objectclone!();
+        Depcrate_com_objectget_mut!();
+        Depcrate_com_objecttake!();
+        Depcrate_com_objectas_interface!();
+        Depcrate_com_objectto_interface!();
+        Depcrate_com_objectinto_interface!();
+        Depcrate_com_objectconstruct_with_com_object_new!();
+        Depcrate_com_objectconstruct_with_com_object_from!();
+        Depcrate_com_objectconstruct_with_into!();
+        Depcrate_com_objectcom_object_debug!();
+        Depcrate_com_objectdisplay!();
+        Depcrate_com_objecthashable!();
+        Depcrate_com_objectfrom_inner_ref!();
+        Depcrate_com_objectto_object!();
+        Depcrate_com_objectdynamic_cast!();
+        Depcrate_com_objectcommon_method_name!();
+        Depcrate_com_objectinterface_debug_fmt!();
+        Depcrate_com_objectiunknown_identity!();
+        Depcrate_com_objectUnsendableThing!();
+        Depcrate_com_objectimpl_62!();
+        Depcrate_com_objectmacro_63!();
+        Depcrate_com_objectmacro_64!();
+        Depcrate_com_objectSendableThing!();
+        Depcrate_com_objectimpl_66!();
+        Depcrate_com_objectmacro_67!();
+        Depcrate_com_objectmacro_68!();
+    };
+}

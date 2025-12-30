@@ -1,0 +1,9 @@
+// Generated macro for Action (enum)
+macro_rules! Depcrate_actionsAction {
+() => {
+// Module: crate::actions
+// Provides: {"Action"}
+// Dependencies: {}
+# [derive (Arbitrary , Debug)] pub enum Action < 'a > { # [doc = " Push a character onto our strings"] Push (char) , # [doc = " Pop a number of characters off the string"] Pop (u8) , # [doc = " Push a &str onto our strings"] PushStr (& 'a str) , # [doc = " Extend our strings with a collection of characters"] ExtendChars (Vec < char >) , # [doc = " Extend our strings with a collection of strings"] ExtendStr (Vec < & 'a str >) , # [doc = " Check to make sure a subslice of our strings are the same"] CheckSubslice (u8 , u8) , # [doc = " Make both of our strings uppercase"] MakeUppercase , # [doc = " Replace a range within both strings with the provided `&str`"] ReplaceRange (u8 , u8 , & 'a str) , # [doc = " Reserve space in our string, no-ops if the `CompactString` would have a capacity > 24MB"] Reserve (u16) , # [doc = " Truncate a string to a new, shorter length"] Truncate (u8) , # [doc = " Insert a string at an index"] InsertStr (u8 , & 'a str) , # [doc = " Insert a character at an index"] Insert (u8 , char) , # [doc = " Reduce the length to zero"] Clear , # [doc = " Split the string at a given position"] SplitOff (u8) , # [doc = " Extract a range"] Drain (u8 , u8) , # [doc = " Remove a `char`"] Remove (u8) , # [doc = " First reserve additional memory, then shrink it"] ShrinkTo (u16 , u16) , # [doc = " Remove every nth character, and every character over a specific code point"] Retain (u8 , char) , # [doc = " Clones each string, and drops the originals"] CloneAndDrop , # [doc = " Calls into_bytes, validates equality, and converts back into strings"] RoundTripIntoBytes , # [doc = " Repeat the string to form a new string."] Repeat (usize) , # [doc = " Zero out the data backing the string."] Zeroize , }
+};
+}

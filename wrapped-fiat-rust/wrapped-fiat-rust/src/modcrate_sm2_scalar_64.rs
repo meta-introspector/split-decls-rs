@@ -1,0 +1,41 @@
+// Generated module macro for crate::sm2_scalar_64
+macro_rules! Modcrate_sm2_scalar_64 {
+() => {
+        Depcrate_sm2_scalar_64IndexConst!();
+        Depcrate_sm2_scalar_64impl_1027!();
+        Depcrate_sm2_scalar_64impl_1028!();
+        Depcrate_sm2_scalar_64fiat_sm2_scalar_u1!();
+        Depcrate_sm2_scalar_64fiat_sm2_scalar_i1!();
+        Depcrate_sm2_scalar_64fiat_sm2_scalar_u2!();
+        Depcrate_sm2_scalar_64fiat_sm2_scalar_i2!();
+        Depcrate_sm2_scalar_64fiat_sm2_scalar_montgomery_domain_field_element!();
+        Depcrate_sm2_scalar_64impl_1034!();
+        Depcrate_sm2_scalar_64impl_1035!();
+        Depcrate_sm2_scalar_64impl_1036!();
+        Depcrate_sm2_scalar_64impl_1037!();
+        Depcrate_sm2_scalar_64fiat_sm2_scalar_non_montgomery_domain_field_element!();
+        Depcrate_sm2_scalar_64impl_1039!();
+        Depcrate_sm2_scalar_64impl_1040!();
+        Depcrate_sm2_scalar_64impl_1041!();
+        Depcrate_sm2_scalar_64impl_1042!();
+        Depcrate_sm2_scalar_64fiat_sm2_scalar_addcarryx_u64!();
+        Depcrate_sm2_scalar_64fiat_sm2_scalar_subborrowx_u64!();
+        Depcrate_sm2_scalar_64fiat_sm2_scalar_mulx_u64!();
+        Depcrate_sm2_scalar_64fiat_sm2_scalar_cmovznz_u64!();
+        Depcrate_sm2_scalar_64fiat_sm2_scalar_mul!();
+        Depcrate_sm2_scalar_64fiat_sm2_scalar_square!();
+        Depcrate_sm2_scalar_64fiat_sm2_scalar_add!();
+        Depcrate_sm2_scalar_64fiat_sm2_scalar_sub!();
+        Depcrate_sm2_scalar_64fiat_sm2_scalar_opp!();
+        Depcrate_sm2_scalar_64fiat_sm2_scalar_from_montgomery!();
+        Depcrate_sm2_scalar_64fiat_sm2_scalar_to_montgomery!();
+        Depcrate_sm2_scalar_64fiat_sm2_scalar_nonzero!();
+        Depcrate_sm2_scalar_64fiat_sm2_scalar_selectznz!();
+        Depcrate_sm2_scalar_64fiat_sm2_scalar_to_bytes!();
+        Depcrate_sm2_scalar_64fiat_sm2_scalar_from_bytes!();
+        Depcrate_sm2_scalar_64fiat_sm2_scalar_set_one!();
+        Depcrate_sm2_scalar_64fiat_sm2_scalar_msat!();
+        Depcrate_sm2_scalar_64fiat_sm2_scalar_divstep!();
+        Depcrate_sm2_scalar_64fiat_sm2_scalar_divstep_precomp!();
+    };
+}

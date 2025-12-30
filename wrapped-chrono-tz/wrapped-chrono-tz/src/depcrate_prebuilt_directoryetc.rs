@@ -1,0 +1,9 @@
+// Generated macro for Etc (module)
+macro_rules! Depcrate_prebuilt_directoryEtc {
+() => {
+// Module: crate::prebuilt::directory
+// Provides: {"Etc"}
+// Dependencies: {}
+pub mod Etc { use crate :: timezones :: Tz ; pub const GMT : Tz = Tz :: Etc__GMT ; pub const GMTPlus0 : Tz = Tz :: Etc__GMTPlus0 ; pub const GMTPlus1 : Tz = Tz :: Etc__GMTPlus1 ; pub const GMTPlus10 : Tz = Tz :: Etc__GMTPlus10 ; pub const GMTPlus11 : Tz = Tz :: Etc__GMTPlus11 ; pub const GMTPlus12 : Tz = Tz :: Etc__GMTPlus12 ; pub const GMTPlus2 : Tz = Tz :: Etc__GMTPlus2 ; pub const GMTPlus3 : Tz = Tz :: Etc__GMTPlus3 ; pub const GMTPlus4 : Tz = Tz :: Etc__GMTPlus4 ; pub const GMTPlus5 : Tz = Tz :: Etc__GMTPlus5 ; pub const GMTPlus6 : Tz = Tz :: Etc__GMTPlus6 ; pub const GMTPlus7 : Tz = Tz :: Etc__GMTPlus7 ; pub const GMTPlus8 : Tz = Tz :: Etc__GMTPlus8 ; pub const GMTPlus9 : Tz = Tz :: Etc__GMTPlus9 ; pub const GMTMinus0 : Tz = Tz :: Etc__GMTMinus0 ; pub const GMTMinus1 : Tz = Tz :: Etc__GMTMinus1 ; pub const GMTMinus10 : Tz = Tz :: Etc__GMTMinus10 ; pub const GMTMinus11 : Tz = Tz :: Etc__GMTMinus11 ; pub const GMTMinus12 : Tz = Tz :: Etc__GMTMinus12 ; pub const GMTMinus13 : Tz = Tz :: Etc__GMTMinus13 ; pub const GMTMinus14 : Tz = Tz :: Etc__GMTMinus14 ; pub const GMTMinus2 : Tz = Tz :: Etc__GMTMinus2 ; pub const GMTMinus3 : Tz = Tz :: Etc__GMTMinus3 ; pub const GMTMinus4 : Tz = Tz :: Etc__GMTMinus4 ; pub const GMTMinus5 : Tz = Tz :: Etc__GMTMinus5 ; pub const GMTMinus6 : Tz = Tz :: Etc__GMTMinus6 ; pub const GMTMinus7 : Tz = Tz :: Etc__GMTMinus7 ; pub const GMTMinus8 : Tz = Tz :: Etc__GMTMinus8 ; pub const GMTMinus9 : Tz = Tz :: Etc__GMTMinus9 ; pub const GMT0 : Tz = Tz :: Etc__GMT0 ; pub const Greenwich : Tz = Tz :: Etc__Greenwich ; pub const UCT : Tz = Tz :: Etc__UCT ; pub const UTC : Tz = Tz :: Etc__UTC ; pub const Universal : Tz = Tz :: Etc__Universal ; pub const Zulu : Tz = Tz :: Etc__Zulu ; }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for RecordBuilder (struct)
+macro_rules! DepcrateRecordBuilder {
+() => {
+// Module: crate
+// Provides: {"RecordBuilder"}
+// Dependencies: {}
+# [doc = " Builder for [`Record`](struct.Record.html)."] # [doc = ""] # [doc = " Typically should only be used by log library creators or for testing and \"shim loggers\"."] # [doc = " The `RecordBuilder` can set the different parameters of `Record` object, and returns"] # [doc = " the created object when `build` is called."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " use log::{Level, Record};"] # [doc = ""] # [doc = " let record = Record::builder()"] # [doc = "                 .args(format_args!(\"Error!\"))"] # [doc = "                 .level(Level::Error)"] # [doc = "                 .target(\"myApp\")"] # [doc = "                 .file(Some(\"server.rs\"))"] # [doc = "                 .line(Some(144))"] # [doc = "                 .module_path(Some(\"server\"))"] # [doc = "                 .build();"] # [doc = " ```"] # [doc = ""] # [doc = " Alternatively, use [`MetadataBuilder`](struct.MetadataBuilder.html):"] # [doc = ""] # [doc = " ```"] # [doc = " use log::{Record, Level, MetadataBuilder};"] # [doc = ""] # [doc = " let error_metadata = MetadataBuilder::new()"] # [doc = "                         .target(\"myApp\")"] # [doc = "                         .level(Level::Error)"] # [doc = "                         .build();"] # [doc = ""] # [doc = " let record = Record::builder()"] # [doc = "                 .metadata(error_metadata)"] # [doc = "                 .args(format_args!(\"Error!\"))"] # [doc = "                 .line(Some(433))"] # [doc = "                 .file(Some(\"app.rs\"))"] # [doc = "                 .module_path(Some(\"server\"))"] # [doc = "                 .build();"] # [doc = " ```"] # [derive (Debug)] pub struct RecordBuilder < 'a > { record : Record < 'a > , }
+};
+}

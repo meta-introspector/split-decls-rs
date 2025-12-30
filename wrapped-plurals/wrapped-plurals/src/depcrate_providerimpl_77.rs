@@ -1,0 +1,9 @@
+// Generated macro for impl_77 (impl)
+macro_rules! Depcrate_providerimpl_77 {
+() => {
+// Module: crate::provider
+// Provides: {"impl_77"}
+// Dependencies: {}
+unsafe impl < T , V > EncodeAsVarULE < PluralElementsPackedULE < V > > for PluralElements < (FourBitMetadata , T) > where T : PartialEq + fmt :: Debug , for < 'a > & 'a T : EncodeAsVarULE < V > , V : VarULE + ? Sized , { fn encode_var_ule_as_slices < R > (& self , _cb : impl FnOnce (& [& [u8]]) -> R) -> R { unreachable ! () } fn encode_var_ule_len (& self) -> usize { let builder = self . 0 . to_packed_builder () ; 1 + builder . default . 1 . encode_var_ule_len () + match builder . specials { Some (specials) => { 1 + EncodeAsVarULE :: < PluralElementsTupleSliceVarULE < V > > :: encode_var_ule_len (& specials ,) } None => 0 , } } fn encode_var_ule_write (& self , dst : & mut [u8]) { let builder = self . 0 . to_packed_builder () ; # [expect (clippy :: unwrap_used)] let (lead_byte , remainder) = dst . split_first_mut () . unwrap () ; * lead_byte = builder . default . 0 . get () ; if let Some (specials) = builder . specials { * lead_byte |= 0x80 ; # [expect (clippy :: unwrap_used)] let (second_byte , remainder) = remainder . split_first_mut () . unwrap () ; * second_byte = match u8 :: try_from (builder . default . 1 . encode_var_ule_len ()) { Ok (x) => x , # [expect (clippy :: panic)] Err (_) => { panic ! ("other value too long to be packed: {self:?}") } } ; # [expect (clippy :: unwrap_used)] let (v_bytes , specials_bytes) = remainder . split_at_mut_checked (* second_byte as usize) . unwrap () ; builder . default . 1 . encode_var_ule_write (v_bytes) ; EncodeAsVarULE :: < PluralElementsTupleSliceVarULE < V > > :: encode_var_ule_write (& specials , specials_bytes ,) ; } else { builder . default . 1 . encode_var_ule_write (remainder) } ; } }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for impl_354 (impl)
+macro_rules! Depcrate_quartzcoreimpl_354 {
+() => {
+// Module: crate::quartzcore
+// Provides: {"impl_354"}
+// Dependencies: {}
+impl CATransform3D { pub const IDENTITY : CATransform3D = CATransform3D { m11 : 1.0 , m12 : 0.0 , m13 : 0.0 , m14 : 0.0 , m21 : 0.0 , m22 : 1.0 , m23 : 0.0 , m24 : 0.0 , m31 : 0.0 , m32 : 0.0 , m33 : 1.0 , m34 : 0.0 , m41 : 0.0 , m42 : 0.0 , m43 : 0.0 , m44 : 1.0 , } ; # [inline] pub fn from_translation (tx : CGFloat , ty : CGFloat , tz : CGFloat) -> CATransform3D { unsafe { CATransform3DMakeTranslation (tx , ty , tz) } } # [inline] pub fn from_scale (sx : CGFloat , sy : CGFloat , sz : CGFloat) -> CATransform3D { unsafe { CATransform3DMakeScale (sx , sy , sz) } } # [inline] pub fn from_rotation (angle : CGFloat , x : CGFloat , y : CGFloat , z : CGFloat) -> CATransform3D { unsafe { CATransform3DMakeRotation (angle , x , y , z) } } # [inline] pub fn affine (affine_transform : CGAffineTransform) -> CATransform3D { unsafe { CATransform3DMakeAffineTransform (affine_transform) } } # [inline] pub fn is_identity (& self) -> bool { unsafe { CATransform3DIsIdentity (* self) } } # [inline] pub fn translate (& self , tx : CGFloat , ty : CGFloat , tz : CGFloat) -> CATransform3D { unsafe { CATransform3DTranslate (* self , tx , ty , tz) } } # [inline] pub fn scale (& self , sx : CGFloat , sy : CGFloat , sz : CGFloat) -> CATransform3D { unsafe { CATransform3DScale (* self , sx , sy , sz) } } # [inline] pub fn rotate (& self , angle : CGFloat , x : CGFloat , y : CGFloat , z : CGFloat) -> CATransform3D { unsafe { CATransform3DRotate (* self , angle , x , y , z) } } # [inline] pub fn invert (& self) -> CATransform3D { unsafe { CATransform3DInvert (* self) } } # [inline] pub fn is_affine (& self) -> bool { unsafe { CATransform3DIsAffine (* self) } } # [inline] pub fn to_affine (& self) -> CGAffineTransform { unsafe { CATransform3DGetAffineTransform (* self) } } }
+};
+}

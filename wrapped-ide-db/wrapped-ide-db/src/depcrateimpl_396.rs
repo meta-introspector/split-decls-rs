@@ -1,0 +1,9 @@
+// Generated macro for impl_396 (impl)
+macro_rules! Depcrateimpl_396 {
+() => {
+// Module: crate
+// Provides: {"impl_396"}
+// Dependencies: {}
+impl From < hir :: ModuleDef > for SymbolKind { fn from (it : hir :: ModuleDef) -> Self { match it { hir :: ModuleDef :: Const (..) => SymbolKind :: Const , hir :: ModuleDef :: Variant (..) => SymbolKind :: Variant , hir :: ModuleDef :: Function (..) => SymbolKind :: Function , hir :: ModuleDef :: Macro (mac) if mac . is_proc_macro () => SymbolKind :: ProcMacro , hir :: ModuleDef :: Macro (..) => SymbolKind :: Macro , hir :: ModuleDef :: Module (..) => SymbolKind :: Module , hir :: ModuleDef :: Static (..) => SymbolKind :: Static , hir :: ModuleDef :: Adt (hir :: Adt :: Struct (..)) => SymbolKind :: Struct , hir :: ModuleDef :: Adt (hir :: Adt :: Enum (..)) => SymbolKind :: Enum , hir :: ModuleDef :: Adt (hir :: Adt :: Union (..)) => SymbolKind :: Union , hir :: ModuleDef :: Trait (..) => SymbolKind :: Trait , hir :: ModuleDef :: TypeAlias (..) => SymbolKind :: TypeAlias , hir :: ModuleDef :: BuiltinType (..) => SymbolKind :: TypeAlias , } } }
+};
+}

@@ -1,0 +1,56 @@
+// Generated module macro for crate::parser::sequence
+macro_rules! Modcrate_parser_sequence {
+() => {
+        Depcrate_parser_sequenceuse_662!();
+        Depcrate_parser_sequencecount!();
+        Depcrate_parser_sequenceSequenceState!();
+        Depcrate_parser_sequenceimpl_665!();
+        Depcrate_parser_sequenceimpl_666!();
+        Depcrate_parser_sequencelast_ident!();
+        Depcrate_parser_sequenceadd_sequence_error!();
+        Depcrate_parser_sequencetuple_parser!();
+        Depcrate_parser_sequencemacro_670!();
+        Depcrate_parser_sequencemacro_671!();
+        Depcrate_parser_sequencemacro_672!();
+        Depcrate_parser_sequencemacro_673!();
+        Depcrate_parser_sequencemacro_674!();
+        Depcrate_parser_sequencemacro_675!();
+        Depcrate_parser_sequencemacro_676!();
+        Depcrate_parser_sequencemacro_677!();
+        Depcrate_parser_sequencemacro_678!();
+        Depcrate_parser_sequencemacro_679!();
+        Depcrate_parser_sequencemacro_680!();
+        Depcrate_parser_sequencemacro_681!();
+        Depcrate_parser_sequencemacro_682!();
+        Depcrate_parser_sequencemacro_683!();
+        Depcrate_parser_sequencemacro_684!();
+        Depcrate_parser_sequencemacro_685!();
+        Depcrate_parser_sequencemacro_686!();
+        Depcrate_parser_sequencemacro_687!();
+        Depcrate_parser_sequencemacro_688!();
+        Depcrate_parser_sequencemacro_689!();
+        Depcrate_parser_sequenceseq_parser_expr!();
+        Depcrate_parser_sequenceseq_parser_pattern!();
+        Depcrate_parser_sequenceseq_parser_impl!();
+        Depcrate_parser_sequenceseq_tuple_extract!();
+        Depcrate_parser_sequenceseq_tuple_parser_impl!();
+        Depcrate_parser_sequencestruct_parser!();
+        Depcrate_parser_sequenceWith!();
+        Depcrate_parser_sequenceimpl_697!();
+        Depcrate_parser_sequencewith!();
+        Depcrate_parser_sequenceSkip!();
+        Depcrate_parser_sequenceimpl_700!();
+        Depcrate_parser_sequenceskip!();
+        Depcrate_parser_sequencemacro_702!();
+        Depcrate_parser_sequenceThen!();
+        Depcrate_parser_sequenceimpl_704!();
+        Depcrate_parser_sequencethen!();
+        Depcrate_parser_sequenceThenPartial!();
+        Depcrate_parser_sequenceimpl_707!();
+        Depcrate_parser_sequencethen_partial!();
+        Depcrate_parser_sequencetests!();
+        Depcrate_parser_sequenceThenRef!();
+        Depcrate_parser_sequenceimpl_711!();
+        Depcrate_parser_sequencethen_ref!();
+    };
+}

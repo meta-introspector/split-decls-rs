@@ -1,0 +1,9 @@
+// Generated macro for DOMAIN_GROUP_RID_AUTHORIZATION_DATA_IS_COMPOUNDED (const)
+macro_rules! Depcrate_um_winntDOMAIN_GROUP_RID_AUTHORIZATION_DATA_IS_COMPOUNDED {
+() => {
+// Module: crate::um::winnt
+// Provides: {"DOMAIN_GROUP_RID_AUTHORIZATION_DATA_IS_COMPOUNDED"}
+// Dependencies: {}
+pub const DOMAIN_GROUP_RID_AUTHORIZATION_DATA_IS_COMPOUNDED : DWORD = 0x000001F0 ;
+};
+}

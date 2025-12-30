@@ -1,0 +1,9 @@
+// Generated macro for macro_1589 (macro)
+macro_rules! Depcrate_disallowed_script_identsmacro_1589 {
+() => {
+// Module: crate::disallowed_script_idents
+// Provides: {"macro_1589"}
+// Dependencies: {}
+declare_clippy_lint ! { # [doc = " ### What it does"] # [doc = " Checks for usage of unicode scripts other than those explicitly allowed"] # [doc = " by the lint config."] # [doc = ""] # [doc = " This lint doesn't take into account non-text scripts such as `Unknown` and `Linear_A`."] # [doc = " It also ignores the `Common` script type."] # [doc = " While configuring, be sure to use official script name [aliases] from"] # [doc = " [the list of supported scripts][supported_scripts]."] # [doc = ""] # [doc = " See also: [`non_ascii_idents`]."] # [doc = ""] # [doc = " [aliases]: http://www.unicode.org/reports/tr24/tr24-31.html#Script_Value_Aliases"] # [doc = " [supported_scripts]: https://www.unicode.org/iso15924/iso15924-codes.html"] # [doc = ""] # [doc = " ### Why restrict this?"] # [doc = " It may be not desired to have many different scripts for"] # [doc = " identifiers in the codebase."] # [doc = ""] # [doc = " Note that if you only want to allow typical English, you might want to use"] # [doc = " built-in [`non_ascii_idents`] lint instead."] # [doc = ""] # [doc = " [`non_ascii_idents`]: https://doc.rust-lang.org/rustc/lints/listing/allowed-by-default.html#non-ascii-idents"] # [doc = ""] # [doc = " ### Example"] # [doc = " ```no_run"] # [doc = " // Assuming that `clippy.toml` contains the following line:"] # [doc = " // allowed-scripts = [\"Latin\", \"Cyrillic\"]"] # [doc = " let counter = 10; // OK, latin is allowed."] # [doc = " let счётчик = 10; // OK, cyrillic is allowed."] # [doc = " let zähler = 10; // OK, it's still latin."] # [doc = " let カウンタ = 10; // Will spawn the lint."] # [doc = " ```"] # [clippy :: version = "1.55.0"] pub DISALLOWED_SCRIPT_IDENTS , restriction , "usage of non-allowed Unicode scripts" }
+};
+}

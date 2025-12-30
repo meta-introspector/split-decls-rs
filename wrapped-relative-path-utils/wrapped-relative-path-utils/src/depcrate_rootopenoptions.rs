@@ -1,0 +1,9 @@
+// Generated macro for OpenOptions (struct)
+macro_rules! Depcrate_rootOpenOptions {
+() => {
+// Module: crate::root
+// Provides: {"OpenOptions"}
+// Dependencies: {}
+# [doc = " Options and flags which can be used to configure how a file is opened."] # [doc = ""] # [doc = " This builder exposes the ability to configure how a [`File`] is opened and"] # [doc = " what operations are permitted on the open file. The [`File::open`] and"] # [doc = " [`File::create`] methods are aliases for commonly used options using this"] # [doc = " builder."] # [doc = ""] # [doc = " Generally speaking, when using `OpenOptions`, you'll first call"] # [doc = " [`Root::open_options`], then chain calls to methods to set each option, then"] # [doc = " call [`OpenOptions::open`], passing the path of the file you're trying to"] # [doc = " open. This will give you a [`io::Result`] with a [`File`] inside that you"] # [doc = " can further operate on."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " Opening a file to read:"] # [doc = ""] # [doc = " ```no_run"] # [doc = " use relative_path_utils::Root;"] # [doc = ""] # [doc = " let root = Root::new(\".\")?;"] # [doc = ""] # [doc = " let file = root.open_options().read(true).open(\"foo.txt\");"] # [doc = " # Ok::<_, std::io::Error>(())"] # [doc = " ```"] # [doc = ""] # [doc = " Opening a file for both reading and writing, as well as creating it if it"] # [doc = " doesn't exist:"] # [doc = ""] # [doc = " ```no_run"] # [doc = " use relative_path_utils::Root;"] # [doc = ""] # [doc = " let root = Root::new(\".\")?;"] # [doc = ""] # [doc = " let file = root"] # [doc = "     .open_options()"] # [doc = "     .read(true)"] # [doc = "     .write(true)"] # [doc = "     .create(true)"] # [doc = "     .open(\"foo.txt\")?;"] # [doc = " # Ok::<_, std::io::Error>(())"] # [doc = " ```"] # [derive (Clone , Debug)] # [must_use] pub struct OpenOptions < 'a > { root : & 'a imp :: Root , options : imp :: OpenOptions , }
+};
+}

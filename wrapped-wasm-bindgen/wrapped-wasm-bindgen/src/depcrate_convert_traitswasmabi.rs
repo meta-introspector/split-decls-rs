@@ -1,0 +1,9 @@
+// Generated macro for WasmAbi (trait)
+macro_rules! Depcrate_convert_traitsWasmAbi {
+() => {
+// Module: crate::convert::traits
+// Provides: {"WasmAbi"}
+// Dependencies: {}
+# [doc = " A trait which represents types that can be passed across the Wasm ABI"] # [doc = " boundary, by being split into multiple Wasm primitive types."] # [doc = ""] # [doc = " Up to 4 primitives are supported; if you don't want to use all of them, you"] # [doc = " can set the rest to `()`, which will cause them to be ignored."] # [doc = ""] # [doc = " You need to be careful how many primitives you use, however:"] # [doc = " `Result<T, JsValue>` uses up 2 primitives to store the error, and so it"] # [doc = " doesn't work if `T` uses more than 2 primitives."] # [doc = ""] # [doc = " So, if you're adding support for a type that needs 3 or more primitives and"] # [doc = " is able to be returned, you have to add another primitive here."] # [doc = ""] # [doc = " There's already one type that uses 3 primitives: `&mut [T]`. However, it"] # [doc = " can't be returned anyway, so it doesn't matter that"] # [doc = " `Result<&mut [T], JsValue>` wouldn't work."] # [doc = ""] # [doc = " # ⚠\u{fe0f} Unstable"] # [doc = ""] # [doc = " This is part of the internal [`convert`](crate::convert) module, **no"] # [doc = " stability guarantees** are provided. Use at your own risk. See its"] # [doc = " documentation for more details."] pub trait WasmAbi { type Prim1 : WasmPrimitive ; type Prim2 : WasmPrimitive ; type Prim3 : WasmPrimitive ; type Prim4 : WasmPrimitive ; # [doc = " Splits this type up into primitives to be sent over the ABI."] fn split (self) -> (Self :: Prim1 , Self :: Prim2 , Self :: Prim3 , Self :: Prim4) ; # [doc = " Reconstructs this type from primitives received over the ABI."] fn join (prim1 : Self :: Prim1 , prim2 : Self :: Prim2 , prim3 : Self :: Prim3 , prim4 : Self :: Prim4) -> Self ; }
+};
+}

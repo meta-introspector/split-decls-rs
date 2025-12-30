@@ -1,0 +1,9 @@
+// Generated macro for derive_ref_cast_custom (function)
+macro_rules! Depcratederive_ref_cast_custom {
+() => {
+// Module: crate
+// Provides: {"derive_ref_cast_custom"}
+// Dependencies: {}
+# [doc = " Derive that makes the `ref_cast_custom` attribute able to generate"] # [doc = " freestanding reference casting functions for a type."] # [doc = ""] # [doc = " Please refer to the documentation of"] # [doc = " [`#[ref_cast_custom]`][macro@ref_cast_custom] where these two macros are"] # [doc = " documented together."] # [proc_macro_derive (RefCastCustom , attributes (trivial))] pub fn derive_ref_cast_custom (input : TokenStream) -> TokenStream { let input = parse_macro_input ! (input as DeriveInput) ; expand_ref_cast_custom (& input) . unwrap_or_else (Error :: into_compile_error) . into () }
+};
+}

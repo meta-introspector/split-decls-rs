@@ -1,0 +1,9 @@
+// Generated macro for impl_25 (impl)
+macro_rules! Depcrateimpl_25 {
+() => {
+// Module: crate
+// Provides: {"impl_25"}
+// Dependencies: {}
+impl App { fn run (mut self , terminal : & mut DefaultTerminal) -> Result < () > { self . update_max_scroll_offset () ; while self . is_running () { terminal . draw (| frame | frame . render_widget (self , frame . area ())) ? ; self . handle_events () ? ; } Ok (()) } const fn update_max_scroll_offset (& mut self) { self . max_scroll_offset = (self . selected_tab . get_example_count () - 1) * EXAMPLE_HEIGHT ; } fn is_running (self) -> bool { self . state == AppState :: Running } fn handle_events (& mut self) -> Result < () > { if let Some (key) = event :: read () ? . as_key_press_event () { match key . code { KeyCode :: Char ('q') | KeyCode :: Esc => self . quit () , KeyCode :: Char ('l') | KeyCode :: Right => self . next () , KeyCode :: Char ('h') | KeyCode :: Left => self . previous () , KeyCode :: Char ('j') | KeyCode :: Down => self . down () , KeyCode :: Char ('k') | KeyCode :: Up => self . up () , KeyCode :: Char ('g') | KeyCode :: Home => self . top () , KeyCode :: Char ('G') | KeyCode :: End => self . bottom () , _ => () , } } Ok (()) } const fn quit (& mut self) { self . state = AppState :: Quit ; } fn next (& mut self) { self . selected_tab = self . selected_tab . next () ; self . update_max_scroll_offset () ; self . scroll_offset = 0 ; } fn previous (& mut self) { self . selected_tab = self . selected_tab . previous () ; self . update_max_scroll_offset () ; self . scroll_offset = 0 ; } const fn up (& mut self) { self . scroll_offset = self . scroll_offset . saturating_sub (1) ; } fn down (& mut self) { self . scroll_offset = self . scroll_offset . saturating_add (1) . min (self . max_scroll_offset) ; } const fn top (& mut self) { self . scroll_offset = 0 ; } const fn bottom (& mut self) { self . scroll_offset = self . max_scroll_offset ; } }
+};
+}

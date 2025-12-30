@@ -1,0 +1,9 @@
+// Generated macro for cfg_if (macro)
+macro_rules! Depcrate_macroscfg_if {
+() => {
+// Module: crate::macros
+// Provides: {"cfg_if"}
+// Dependencies: {}
+# [doc = " A macro for defining #[cfg] if-else statements."] # [doc = ""] # [doc = " This is similar to the `if/elif` C preprocessor macro by allowing definition"] # [doc = " of a cascade of `#[cfg]` cases, emitting the implementation which matches"] # [doc = " first."] # [doc = ""] # [doc = " This allows you to conveniently provide a long list #[cfg]'d blocks of code"] # [doc = " without having to rewrite each clause multiple times."] macro_rules ! cfg_if { ($ (if # [cfg ($ ($ meta : meta) ,*)] { $ ($ it : item) * }) else * else { $ ($ it2 : item) * }) => { cfg_if ! { @ __items () ; $ ((($ ($ meta) ,*) ($ ($ it) *)) ,) * (() ($ ($ it2) *)) , } } ; (if # [cfg ($ ($ i_met : meta) ,*)] { $ ($ i_it : item) * } $ (else if # [cfg ($ ($ e_met : meta) ,*)] { $ ($ e_it : item) * }) *) => { cfg_if ! { @ __items () ; (($ ($ i_met) ,*) ($ ($ i_it) *)) , $ ((($ ($ e_met) ,*) ($ ($ e_it) *)) ,) * (() ()) , } } ; (@ __items ($ ($ not : meta ,) *) ;) => { } ; (@ __items ($ ($ not : meta ,) *) ; (($ ($ m : meta) ,*) ($ ($ it : item) *)) , $ ($ rest : tt) *) => { cfg_if ! { @ __apply cfg (all ($ ($ m ,) * not (any ($ ($ not) ,*)))) , $ ($ it) * } cfg_if ! { @ __items ($ ($ not ,) * $ ($ m ,) *) ; $ ($ rest) * } } ; (@ __apply $ m : meta , $ ($ it : item) *) => { $ (# [$ m] $ it) * } ; }
+};
+}

@@ -1,0 +1,19 @@
+// Generated module macro for crate
+macro_rules! Modcrate {
+() => {
+        Depcrateuse_1!();
+        Depcrateuse_2!();
+        Depcrateuse_3!();
+        Depcrateuse_4!();
+        DepcrateCARGO_TAG!();
+        DepcrateOnePasswordKeychain!();
+        DepcrateLogin!();
+        DepcrateField!();
+        DepcrateListItem!();
+        DepcrateUrl!();
+        Depcrateimpl_11!();
+        DepcrateOnePasswordCredential!();
+        Depcrateimpl_13!();
+        Depcratemain!();
+    };
+}

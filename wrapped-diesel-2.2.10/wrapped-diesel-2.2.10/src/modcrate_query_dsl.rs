@@ -1,0 +1,42 @@
+// Generated module macro for crate::query_dsl
+macro_rules! Modcrate_query_dsl {
+() => {
+        Depcrate_query_dsluse_1538!();
+        Depcrate_query_dsluse_1539!();
+        Depcrate_query_dsluse_1540!();
+        Depcrate_query_dsluse_1541!();
+        Depcrate_query_dsluse_1542!();
+        Depcrate_query_dsluse_1543!();
+        Depcrate_query_dsluse_1544!();
+        Depcrate_query_dsluse_1545!();
+        Depcrate_query_dslbelonging_to_dsl!();
+        Depcrate_query_dslboxed_dsl!();
+        Depcrate_query_dslcombine_dsl!();
+        Depcrate_query_dsldistinct_dsl!();
+        Depcrate_query_dslfilter_dsl!();
+        Depcrate_query_dslgroup_by_dsl!();
+        Depcrate_query_dslhaving_dsl!();
+        Depcrate_query_dsljoin_dsl!();
+        Depcrate_query_dsllimit_dsl!();
+        Depcrate_query_dslload_dsl!();
+        Depcrate_query_dsllocking_dsl!();
+        Depcrate_query_dslnullable_select_dsl!();
+        Depcrate_query_dsloffset_dsl!();
+        Depcrate_query_dslorder_dsl!();
+        Depcrate_query_dslpositional_order_dsl!();
+        Depcrate_query_dslsave_changes_dsl!();
+        Depcrate_query_dslselect_dsl!();
+        Depcrate_query_dslsingle_value_dsl!();
+        Depcrate_query_dsluse_1718!();
+        Depcrate_query_dsluse_1719!();
+        Depcrate_query_dsluse_1720!();
+        Depcrate_query_dsluse_1721!();
+        Depcrate_query_dsluse_1722!();
+        Depcrate_query_dsluse_1723!();
+        Depcrate_query_dslmethods!();
+        Depcrate_query_dslQueryDsl!();
+        Depcrate_query_dslimpl_1726!();
+        Depcrate_query_dslRunQueryDsl!();
+        Depcrate_query_dslimpl_1728!();
+    };
+}

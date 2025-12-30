@@ -1,0 +1,54 @@
+// Generated module macro for crate::builder::command
+macro_rules! Modcrate_builder_command {
+() => {
+        Depcrate_builder_commanduse_118!();
+        Depcrate_builder_commanduse_119!();
+        Depcrate_builder_commanduse_120!();
+        Depcrate_builder_commanduse_121!();
+        Depcrate_builder_commanduse_122!();
+        Depcrate_builder_commanduse_123!();
+        Depcrate_builder_commanduse_124!();
+        Depcrate_builder_commanduse_125!();
+        Depcrate_builder_commanduse_126!();
+        Depcrate_builder_commanduse_127!();
+        Depcrate_builder_commanduse_128!();
+        Depcrate_builder_commanduse_129!();
+        Depcrate_builder_commanduse_130!();
+        Depcrate_builder_commanduse_131!();
+        Depcrate_builder_commanduse_132!();
+        Depcrate_builder_commanduse_133!();
+        Depcrate_builder_commanduse_134!();
+        Depcrate_builder_commanduse_135!();
+        Depcrate_builder_commanduse_136!();
+        Depcrate_builder_commanduse_137!();
+        Depcrate_builder_commanduse_138!();
+        Depcrate_builder_commanduse_139!();
+        Depcrate_builder_commanduse_140!();
+        Depcrate_builder_commanduse_141!();
+        Depcrate_builder_commanduse_142!();
+        Depcrate_builder_commanduse_143!();
+        Depcrate_builder_commanduse_144!();
+        Depcrate_builder_commandCommand!();
+        Depcrate_builder_commandimpl_146!();
+        Depcrate_builder_commandimpl_147!();
+        Depcrate_builder_commandimpl_148!();
+        Depcrate_builder_commandimpl_149!();
+        Depcrate_builder_commandimpl_150!();
+        Depcrate_builder_commandimpl_151!();
+        Depcrate_builder_commandCaptures!();
+        Depcrate_builder_commandimpl_153!();
+        Depcrate_builder_commandimpl_154!();
+        Depcrate_builder_commandimpl_155!();
+        Depcrate_builder_commandimpl_156!();
+        Depcrate_builder_commandimpl_157!();
+        Depcrate_builder_commandimpl_158!();
+        Depcrate_builder_commandCommandExt!();
+        Depcrate_builder_commandAppExt!();
+        Depcrate_builder_commandTermWidth!();
+        Depcrate_builder_commandimpl_162!();
+        Depcrate_builder_commandMaxTermWidth!();
+        Depcrate_builder_commandimpl_164!();
+        Depcrate_builder_commandtwo_elements_of!();
+        Depcrate_builder_commandcheck_auto_traits!();
+    };
+}

@@ -1,0 +1,9 @@
+// Generated macro for impl_773 (impl)
+macro_rules! Depcrate_util_call_all_orderedimpl_773 {
+() => {
+// Module: crate::util::call_all::ordered
+// Provides: {"impl_773"}
+// Dependencies: {}
+impl < Svc , S > CallAll < Svc , S > where Svc : Service < S :: Item > , S : Stream , { # [doc = " Create new [`CallAll`] combinator."] # [doc = ""] # [doc = " Each request yielded by `stream` is passed to `svc`, and the resulting responses are"] # [doc = " yielded in the same order by the implementation of [`Stream`] for [`CallAll`]."] # [doc = ""] # [doc = " [`Stream`]: https://docs.rs/futures/latest/futures/stream/trait.Stream.html"] pub fn new (service : Svc , stream : S) -> CallAll < Svc , S > { CallAll { inner : common :: CallAll :: new (service , stream , FuturesOrdered :: new ()) , } } # [doc = " Extract the wrapped [`Service`]."] # [doc = ""] # [doc = " # Panics"] # [doc = ""] # [doc = " Panics if [`take_service`] was already called."] # [doc = ""] # [doc = " [`take_service`]: crate::util::CallAll::take_service"] pub fn into_inner (self) -> Svc { self . inner . into_inner () } # [doc = " Extract the wrapped [`Service`]."] # [doc = ""] # [doc = " This [`CallAll`] can no longer be used after this function has been called."] # [doc = ""] # [doc = " # Panics"] # [doc = ""] # [doc = " Panics if [`take_service`] was already called."] # [doc = ""] # [doc = " [`take_service`]: crate::util::CallAll::take_service"] pub fn take_service (self : Pin < & mut Self >) -> Svc { self . project () . inner . take_service () } # [doc = " Return responses as they are ready, regardless of the initial order."] # [doc = ""] # [doc = " This function must be called before the stream is polled."] # [doc = ""] # [doc = " # Panics"] # [doc = ""] # [doc = " Panics if [`poll`] was called."] # [doc = ""] # [doc = " [`poll`]: std::future::Future::poll"] pub fn unordered (self) -> super :: CallAllUnordered < Svc , S > { self . inner . unordered () } }
+};
+}

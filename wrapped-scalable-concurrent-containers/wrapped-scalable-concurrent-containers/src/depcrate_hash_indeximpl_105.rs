@@ -1,0 +1,9 @@
+// Generated macro for impl_105 (impl)
+macro_rules! Depcrate_hash_indeximpl_105 {
+() => {
+// Module: crate::hash_index
+// Provides: {"impl_105"}
+// Dependencies: {}
+impl < 'h , K , V , H > Iterator for Iter < 'h , K , V , H > where K : Eq + Hash , H : BuildHasher , { type Item = (& 'h K , & 'h V) ; # [inline] fn next (& mut self) -> Option < Self :: Item > { let mut array = if let Some (& array) = self . bucket_array . as_ref () { array } else { let current_array = self . hashindex . bucket_array () . load (Acquire , self . guard) . as_ref () ? ; let old_array_ptr = current_array . old_array (self . guard) ; let array = if let Some (old_array) = old_array_ptr . as_ref () { old_array } else { current_array } ; self . bucket_array . replace (array) ; self . bucket . replace (array . bucket (0)) ; array } ; loop { if let Some (bucket) = self . bucket . take () { if self . entry_ptr . move_to_next (bucket , self . guard) { let (k , v) = self . entry_ptr . get (array . data_block (self . index)) ; self . bucket . replace (bucket) ; return Some ((k , v)) ; } } self . entry_ptr = EntryPtr :: new (self . guard) ; if self . index + 1 == array . len () { self . index = 0 ; let current_array = self . hashindex . bucket_array () . load (Acquire , self . guard) . as_ref () ? ; if self . bucket_array . as_ref () . is_some_and (| & a | ptr :: eq (a , current_array)) { break ; } array = if let Some (old_array) = current_array . old_array (self . guard) . as_ref () { if self . bucket_array . as_ref () . is_some_and (| & a | ptr :: eq (a , old_array)) { array = current_array ; self . bucket_array . replace (current_array) ; self . bucket . replace (current_array . bucket (0)) ; continue ; } old_array } else { current_array } ; self . bucket_array . replace (array) ; self . bucket . replace (array . bucket (0)) ; } else { self . index += 1 ; self . bucket . replace (array . bucket (self . index)) ; } } None } }
+};
+}

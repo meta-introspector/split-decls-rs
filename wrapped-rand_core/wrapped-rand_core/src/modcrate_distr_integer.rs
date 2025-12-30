@@ -1,0 +1,41 @@
+// Generated module macro for crate::distr::integer
+macro_rules! Modcrate_distr_integer {
+() => {
+        Depcrate_distr_integeruse_60!();
+        Depcrate_distr_integeruse_61!();
+        Depcrate_distr_integeruse_62!();
+        Depcrate_distr_integeruse_63!();
+        Depcrate_distr_integeruse_64!();
+        Depcrate_distr_integeruse_65!();
+        Depcrate_distr_integeruse_66!();
+        Depcrate_distr_integeruse_67!();
+        Depcrate_distr_integerimpl_68!();
+        Depcrate_distr_integerimpl_69!();
+        Depcrate_distr_integerimpl_70!();
+        Depcrate_distr_integerimpl_71!();
+        Depcrate_distr_integerimpl_72!();
+        Depcrate_distr_integerimpl_int_from_uint!();
+        Depcrate_distr_integermacro_74!();
+        Depcrate_distr_integermacro_75!();
+        Depcrate_distr_integermacro_76!();
+        Depcrate_distr_integermacro_77!();
+        Depcrate_distr_integermacro_78!();
+        Depcrate_distr_integerimpl_nzint!();
+        Depcrate_distr_integermacro_80!();
+        Depcrate_distr_integermacro_81!();
+        Depcrate_distr_integermacro_82!();
+        Depcrate_distr_integermacro_83!();
+        Depcrate_distr_integermacro_84!();
+        Depcrate_distr_integermacro_85!();
+        Depcrate_distr_integermacro_86!();
+        Depcrate_distr_integermacro_87!();
+        Depcrate_distr_integermacro_88!();
+        Depcrate_distr_integermacro_89!();
+        Depcrate_distr_integerimpl_90!();
+        Depcrate_distr_integerimpl_91!();
+        Depcrate_distr_integerimpl_92!();
+        Depcrate_distr_integersimd_impl!();
+        Depcrate_distr_integermacro_94!();
+        Depcrate_distr_integertests!();
+    };
+}

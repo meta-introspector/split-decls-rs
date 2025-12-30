@@ -1,0 +1,9 @@
+// Generated macro for serve_forever (function)
+macro_rules! Depcrateserve_forever {
+() => {
+// Module: crate
+// Provides: {"serve_forever"}
+// Dependencies: {}
+async fn serve_forever (listener : TcpListener) -> std :: io :: Result < () > { let state = State { db : Arc :: new (RwLock :: new (HashMap :: new ())) , } ; let filter = error () . or (get ()) . or (set ()) ; let warp_service = warp :: service (filter) ; let service = ServiceBuilder :: new () . layer (TraceLayer :: new_for_http () . on_body_chunk (| chunk : & Bytes , latency : Duration , _ : & tracing :: Span | { tracing :: trace ! (size_bytes = chunk . len () , latency = ? latency , "sending body chunk") }) . make_span_with (DefaultMakeSpan :: new () . include_headers (true)) . on_response (DefaultOnResponse :: new () . include_headers (true) . latency_unit (LatencyUnit :: Micros)) ,) . timeout (Duration :: from_secs (10)) . layer (AddExtensionLayer :: new (state)) . layer (CompressionLayer :: new ()) . layer (SetResponseHeaderLayer :: overriding (header :: CONTENT_LENGTH , content_length_from_response ,)) . layer (SetResponseHeaderLayer :: if_not_present (header :: CONTENT_TYPE , HeaderValue :: from_static ("application/octet-stream") ,)) . layer (SetSensitiveHeadersLayer :: new (vec ! [header :: AUTHORIZATION , header :: COOKIE ,])) . service (warp_service) ; let addr = listener . local_addr () . unwrap () ; tracing :: info ! ("Listening on {}" , addr) ; let service = hyper_util :: service :: TowerToHyperService :: new (service) ; loop { let (tcp , _) = listener . accept () . await ? ; let io = hyper_util :: rt :: TokioIo :: new (tcp) ; let service = service . clone () ; tokio :: spawn (async move { if let Err (err) = hyper :: server :: conn :: http1 :: Builder :: new () . serve_connection (io , service) . await { tracing :: error ! (? err , "Error occurred on serving connection") ; } }) ; } }
+};
+}

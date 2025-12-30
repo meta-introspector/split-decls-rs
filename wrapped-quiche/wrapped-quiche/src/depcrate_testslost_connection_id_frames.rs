@@ -1,0 +1,9 @@
+// Generated macro for lost_connection_id_frames (function)
+macro_rules! Depcrate_testslost_connection_id_frames {
+() => {
+// Module: crate::tests
+// Provides: {"lost_connection_id_frames"}
+// Dependencies: {}
+# [rstest] fn lost_connection_id_frames (# [values ("cubic" , "bbr2" , "bbr2_gcongestion")] cc_algorithm_name : & str ,) { let mut config = Config :: new (PROTOCOL_VERSION) . unwrap () ; assert_eq ! (config . set_cc_algorithm_name (cc_algorithm_name) , Ok (())) ; config . load_cert_chain_from_pem_file ("examples/cert.crt") . unwrap () ; config . load_priv_key_from_pem_file ("examples/cert.key") . unwrap () ; config . set_application_protos (& [b"proto1" , b"proto2"]) . unwrap () ; config . verify_peer (false) ; config . set_active_connection_id_limit (2) ; let mut pipe = test_utils :: Pipe :: with_config (& mut config) . unwrap () ; assert_eq ! (pipe . handshake () , Ok (())) ; let scid = pipe . client . source_id () . into_owned () ; let (scid_1 , reset_token_1) = test_utils :: create_cid_and_reset_token (16) ; assert_eq ! (pipe . client . new_scid (& scid_1 , reset_token_1 , false) , Ok (1)) ; test_utils :: emit_flight (& mut pipe . client) . unwrap () ; let timer = pipe . client . timeout () . unwrap () ; std :: thread :: sleep (timer + Duration :: from_millis (1)) ; pipe . client . on_timeout () ; assert_eq ! (pipe . advance () , Ok (())) ; assert_eq ! (pipe . server . available_dcids () , 1) ; assert_eq ! (pipe . server . retire_dcid (0) , Ok (())) ; test_utils :: emit_flight (& mut pipe . server) . unwrap () ; let timer = pipe . server . timeout () . unwrap () ; std :: thread :: sleep (timer + Duration :: from_millis (1)) ; pipe . server . on_timeout () ; assert_eq ! (pipe . advance () , Ok (())) ; assert_eq ! (pipe . client . retired_scid_next () , Some (scid)) ; assert_eq ! (pipe . client . retired_scid_next () , None) ; }
+};
+}

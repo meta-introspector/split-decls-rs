@@ -1,0 +1,47 @@
+// Generated module macro for crate::js
+macro_rules! Modcrate_js {
+() => {
+        Depcrate_jsuse_94!();
+        Depcrate_jsuse_95!();
+        Depcrate_jsuse_96!();
+        Depcrate_jsuse_97!();
+        Depcrate_jsuse_98!();
+        Depcrate_jsuse_99!();
+        Depcrate_jsuse_100!();
+        Depcrate_jsuse_101!();
+        Depcrate_jsuse_102!();
+        Depcrate_jsuse_103!();
+        Depcrate_jsuse_104!();
+        Depcrate_jsuse_105!();
+        Depcrate_jsuse_106!();
+        Depcrate_jsuse_107!();
+        Depcrate_jsuse_108!();
+        Depcrate_jsuse_109!();
+        Depcrate_jsuse_110!();
+        Depcrate_jsuse_111!();
+        Depcrate_jsbinding!();
+        Depcrate_jsContext!();
+        Depcrate_jsNamespaceEntry!();
+        Depcrate_jsimpl_133!();
+        Depcrate_jsExportedClass!();
+        Depcrate_jsFieldLocation!();
+        Depcrate_jsFieldInfo!();
+        Depcrate_jsFieldAccessor!();
+        Depcrate_jsExportJs!();
+        Depcrate_jsINITIAL_HEAP_VALUES!();
+        Depcrate_jsINITIAL_HEAP_OFFSET!();
+        Depcrate_jsimpl_141!();
+        Depcrate_jsContextAdapterKind!();
+        Depcrate_jsimpl_143!();
+        Depcrate_jsiter_adapeter!();
+        Depcrate_jsiter_by_import!();
+        Depcrate_jscheck_duplicated_getter_and_setter_names!();
+        Depcrate_jsformat_doc_comments!();
+        Depcrate_jsdefine_namespace_export!();
+        Depcrate_jsrequire_class!();
+        Depcrate_jsproperty_accessor!();
+        Depcrate_jsimpl_151!();
+        Depcrate_jsMemView!();
+        Depcrate_jsimpl_153!();
+    };
+}

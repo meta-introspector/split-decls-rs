@@ -1,0 +1,66 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcrate_paramsimpl_45.rs");
+include!("depcrate_block_apix_mut.rs");
+include!("depcrate_block_apigost94core.rs");
+include!("depcrate_block_apiimpl_31.rs");
+include!("depcrate_block_apiimpl_24.rs");
+include!("depcrate_paramscryptoproparam.rs");
+include!("depcrate_block_apisbox.rs");
+include!("depcrate_block_apiencrypt.rs");
+include!("depcrate_paramsimpl_47.rs");
+include!("depcrate_block_apic.rs");
+include!("depcrate_block_apiimpl_22.rs");
+include!("depcrate_block_apiimpl_18.rs");
+include!("depcratemacro_49.rs");
+include!("depcrategost94cryptopro.rs");
+include!("depcrate_block_apiuse_3.rs");
+include!("depcrate_block_apiuse_5.rs");
+include!("depcrategost94test.rs");
+include!("depcrategost94ua.rs");
+include!("depcrateuse_48.rs");
+include!("depcrate_block_apig.rs");
+include!("depcrate_paramsimpl_40.rs");
+include!("depcrate_block_apiimpl_29.rs");
+include!("depcrate_block_apia.rs");
+include!("depcrate_block_apiimpl_25.rs");
+include!("depcrate_paramssbox.rs");
+include!("depcrateoids.rs");
+include!("depcrate_block_apiimpl_32.rs");
+include!("depcrate_paramsblock.rs");
+include!("depcrategost94s2015.rs");
+include!("depcrate_paramsuse_34.rs");
+include!("depcrate_block_apix.rs");
+include!("depcrate_block_apip.rs");
+include!("depcrate_paramstestparam.rs");
+include!("depcrate_block_apiuse_6.rs");
+include!("depcrate_block_apiuse_4.rs");
+include!("depcrate_block_apiimpl_27.rs");
+include!("depcrate_paramsimpl_44.rs");
+include!("depcrate_block_apiimpl_23.rs");
+include!("depcrate_block_apipsi.rs");
+include!("depcrate_block_apiimpl_20.rs");
+include!("depcrateuse_1.rs");
+include!("depcrate_block_apiimpl_26.rs");
+include!("depcrate_block_apiimpl_28.rs");
+include!("depcrate_block_apiimpl_21.rs");
+include!("depcrate_paramsimpl_39.rs");
+include!("depcrateblock_api.rs");
+include!("depcrate_paramsimpl_42.rs");
+include!("depcrateparams.rs");
+include!("depcrate_block_apiimpl_19.rs");
+include!("depcrate_block_apiadc.rs");
+include!("depcrate_paramsgost28147uaparam.rs");
+include!("depcrate_block_apiimpl_30.rs");
+include!("depcrate_paramsgost94params.rs");
+include!("depcrate_paramss2015param.rs");
+include!("modcrate_block_api.rs");
+include!("modcrate_params.rs");
+include!("modcrate.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate_block_api!();
+    Modcrate_params!();
+    Modcrate!();
+}

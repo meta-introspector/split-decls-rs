@@ -1,0 +1,9 @@
+// Generated macro for build_assign_op (function)
+macro_rules! Depcrate_item_typebuild_assign_op {
+() => {
+// Module: crate::item_type
+// Provides: {"build_assign_op"}
+// Dependencies: {}
+fn build_assign_op (item : & ItemStruct , op : BinaryOp , e : & DeriveEntry , fields : & [FieldEntry] ,) -> Result < TokenStream > { let kind = DeriveItemKind :: AssignOp (op) ; let (_ , type_g , _) = item . generics . split_for_impl () ; let this_ty_ident = & item . ident ; let this_ty : Type = parse_quote ! (# this_ty_ident # type_g) ; let generics = expand_self (& item . generics , & this_ty) ; let (impl_g , _ , _) = generics . split_for_impl () ; let trait_ = kind . to_path () ; let func_name = format_ident ! ("{}_assign" , op . to_func_name ()) ; let build = | rhs_is_ref : bool | { let rhs_ty = with_ref (& this_ty , rhs_is_ref) ; let mut wcb = WhereClauseBuilder :: new (& generics) ; let use_bounds = e . push_bounds_to (& mut wcb) ; let mut exprs = Vec :: new () ; for field in fields { let field_ty = & field . field . ty ; let lhs = member (quote ! (self) , field) ; let rhs = with_ref (& member (quote ! (rhs) , field) , rhs_is_ref) ; let rhs_ty = with_ref (field_ty , rhs_is_ref) ; exprs . push (quote ! (<# field_ty as # trait_ <# rhs_ty >>::# func_name (& mut # lhs , # rhs))) ; field . push_bounds_to (use_bounds , kind , & mut wcb) ; } let wheres = wcb . build (| ty | match rhs_is_ref { true => parse_quote ! (for <'a > # ty : # trait_ <&'a # ty >) , false => parse_quote ! (# ty : # trait_ <# ty >) , }) ; quote ! { # [automatically_derived] impl # impl_g # trait_ <# rhs_ty > for # this_ty # wheres { fn # func_name (& mut self , rhs : # rhs_ty) { # (# exprs ;) * } } } } ; let mut ts = TokenStream :: new () ; for rhs_is_ref in [false , true] { ts . extend (build (rhs_is_ref)) ; } Ok (ts) }
+};
+}

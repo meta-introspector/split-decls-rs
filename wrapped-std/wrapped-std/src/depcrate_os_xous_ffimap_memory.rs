@@ -1,0 +1,9 @@
+// Generated macro for map_memory (function)
+macro_rules! Depcrate_os_xous_ffimap_memory {
+() => {
+// Module: crate::os::xous::ffi
+// Provides: {"map_memory"}
+// Dependencies: {}
+# [doc = " Allocates memory from the system."] # [doc = ""] # [doc = " An optional physical and/or virtual address may be specified in order to"] # [doc = " ensure memory is allocated at specific offsets, otherwise the kernel will"] # [doc = " select an address."] # [doc = ""] # [doc = " # Safety"] # [doc = ""] # [doc = " This function is safe unless a virtual address is specified. In that case,"] # [doc = " the kernel will return an alias to the existing range. This violates Rust's"] # [doc = " pointer uniqueness guarantee."] pub (crate) unsafe fn map_memory < T > (phys : Option < core :: ptr :: NonNull < T > > , virt : Option < core :: ptr :: NonNull < T > > , count : usize , flags : MemoryFlags ,) -> Result < & 'static mut [T] , Error > { let mut a0 = Syscall :: MapMemory as usize ; let mut a1 = phys . map (| p | p . as_ptr () as usize) . unwrap_or_default () ; let mut a2 = virt . map (| p | p . as_ptr () as usize) . unwrap_or_default () ; let a3 = count * size_of :: < T > () ; let a4 = flags . bits () ; let a5 = 0 ; let a6 = 0 ; let a7 = 0 ; unsafe { core :: arch :: asm ! ("ecall" , inlateout ("a0") a0 , inlateout ("a1") a1 , inlateout ("a2") a2 , inlateout ("a3") a3 => _ , inlateout ("a4") a4 => _ , inlateout ("a5") a5 => _ , inlateout ("a6") a6 => _ , inlateout ("a7") a7 => _ ,) } ; let result = a0 ; if result == SyscallResult :: MemoryRange as usize { let start = core :: ptr :: with_exposed_provenance_mut :: < T > (a1) ; let len = a2 / size_of :: < T > () ; let end = unsafe { start . add (len) } ; Ok (unsafe { core :: slice :: from_raw_parts_mut (start , len) }) } else if result == SyscallResult :: Error as usize { Err (a1 . into ()) } else { Err (Error :: InternalError) } }
+};
+}

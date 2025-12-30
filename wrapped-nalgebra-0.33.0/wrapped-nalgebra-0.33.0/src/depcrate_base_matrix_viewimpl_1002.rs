@@ -1,0 +1,9 @@
+// Generated macro for impl_1002 (impl)
+macro_rules! Depcrate_base_matrix_viewimpl_1002 {
+() => {
+// Module: crate::base::matrix_view
+// Provides: {"impl_1002"}
+// Dependencies: {}
+impl < T , R : Dim , C : Dim , S : RawStorageMut < T , R , C > > Matrix < T , R , C , S > { # [doc = " Slices a mutable sub-matrix containing the rows indexed by the range `rows` and the columns"] # [doc = " indexed by the range `cols`."] # [deprecated = slice_deprecation_note ! (view_range_mut)] pub fn slice_range_mut < RowRange , ColRange > (& mut self , rows : RowRange , cols : ColRange ,) -> MatrixViewMut < '_ , T , RowRange :: Size , ColRange :: Size , S :: RStride , S :: CStride > where RowRange : DimRange < R > , ColRange : DimRange < C > , { self . view_range_mut (rows , cols) } # [doc = " Return a mutable view containing the rows indexed by the range `rows` and the columns"] # [doc = " indexed by the range `cols`."] pub fn view_range_mut < RowRange , ColRange > (& mut self , rows : RowRange , cols : ColRange ,) -> MatrixViewMut < '_ , T , RowRange :: Size , ColRange :: Size , S :: RStride , S :: CStride > where RowRange : DimRange < R > , ColRange : DimRange < C > , { let (nrows , ncols) = self . shape_generic () ; self . generic_view_mut ((rows . begin (nrows) , cols . begin (ncols)) , (rows . size (nrows) , cols . size (ncols)) ,) } # [doc = " Mutable view containing all the rows indexed by the range `rows`."] # [inline] pub fn rows_range_mut < RowRange : DimRange < R > > (& mut self , rows : RowRange ,) -> MatrixViewMut < '_ , T , RowRange :: Size , C , S :: RStride , S :: CStride > { self . view_range_mut (rows , ..) } # [doc = " Mutable view containing all the columns indexed by the range `cols`."] # [inline] pub fn columns_range_mut < ColRange : DimRange < C > > (& mut self , cols : ColRange ,) -> MatrixViewMut < '_ , T , R , ColRange :: Size , S :: RStride , S :: CStride > { self . view_range_mut (.. , cols) } }
+};
+}

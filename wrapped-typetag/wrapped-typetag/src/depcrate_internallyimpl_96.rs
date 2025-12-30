@@ -1,0 +1,9 @@
+// Generated macro for impl_96 (impl)
+macro_rules! Depcrate_internallyimpl_96 {
+() => {
+// Module: crate::internally
+// Provides: {"impl_96"}
+// Dependencies: {}
+impl < 'de , T : ? Sized > Visitor < 'de > for TaggedVisitor < T > { type Value = Box < T > ; fn expecting (& self , formatter : & mut fmt :: Formatter) -> fmt :: Result { write ! (formatter , "dyn {}" , self . trait_object) } fn visit_map < A > (self , mut map : A) -> Result < Self :: Value , A :: Error > where A : MapAccess < 'de > , { let key_visitor = KeyVisitor { trait_object : self . trait_object , tag : self . tag , } ; let map_lookup = MapLookupVisitor { expected : & self , registry : self . registry , } ; let mut deserialize_fn = None ; let mut entries = Vec :: new () ; while let Some (key) = map . next_key_seed (key_visitor) ? { match key { Key :: Tag => { let value = map . next_value_seed (map_lookup) ? ; if entries . is_empty () { let fn_apply = FnApply { deserialize_fn : value , } ; let rest = MapWithStringKeys { map } ; return fn_apply . deserialize (rest) ; } deserialize_fn = Some (value) ; while let Some (key) = map . next_key :: < String > () ? { let key = Content :: String (key) ; let value = map . next_value :: < Content > () ? ; entries . push ((key , value)) ; } break ; } Key :: Other (key) => { let key = Content :: String (key) ; let value = map . next_value :: < Content > () ? ; entries . push ((key , value)) ; } } } let deserialize_fn = match deserialize_fn { Some (deserialize_fn) => deserialize_fn , None => match self . default_variant { Some (variant) => map_lookup . visit_str (variant) ? , None => return Err (de :: Error :: missing_field (self . tag)) , } , } ; let fn_apply = FnApply { deserialize_fn } ; let content = Content :: Map (entries) . into_deserializer () ; fn_apply . deserialize (content) } }
+};
+}

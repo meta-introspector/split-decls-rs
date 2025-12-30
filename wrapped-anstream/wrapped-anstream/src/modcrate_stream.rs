@@ -1,0 +1,48 @@
+// Generated module macro for crate::stream
+macro_rules! Modcrate_stream {
+() => {
+        Depcrate_streamRawStream!();
+        Depcrate_streamRawStream!();
+        Depcrate_streamimpl_59!();
+        Depcrate_streamimpl_60!();
+        Depcrate_streamimpl_61!();
+        Depcrate_streamimpl_62!();
+        Depcrate_streamimpl_63!();
+        Depcrate_streamimpl_64!();
+        Depcrate_streamimpl_65!();
+        Depcrate_streamimpl_66!();
+        Depcrate_streamimpl_67!();
+        Depcrate_streamimpl_68!();
+        Depcrate_streamimpl_69!();
+        Depcrate_streamimpl_70!();
+        Depcrate_streamIsTerminal!();
+        Depcrate_streamimpl_72!();
+        Depcrate_streamimpl_73!();
+        Depcrate_streamimpl_74!();
+        Depcrate_streamimpl_75!();
+        Depcrate_streamimpl_76!();
+        Depcrate_streamimpl_77!();
+        Depcrate_streamimpl_78!();
+        Depcrate_streamimpl_79!();
+        Depcrate_streamimpl_80!();
+        Depcrate_streamimpl_81!();
+        Depcrate_streamimpl_82!();
+        Depcrate_streamimpl_83!();
+        Depcrate_streamimpl_84!();
+        Depcrate_streamAsLockedWrite!();
+        Depcrate_streamimpl_86!();
+        Depcrate_streamimpl_87!();
+        Depcrate_streamimpl_88!();
+        Depcrate_streamimpl_89!();
+        Depcrate_streamimpl_90!();
+        Depcrate_streamimpl_91!();
+        Depcrate_streamimpl_92!();
+        Depcrate_streamimpl_93!();
+        Depcrate_streamimpl_94!();
+        Depcrate_streamimpl_95!();
+        Depcrate_streamimpl_96!();
+        Depcrate_streamimpl_97!();
+        Depcrate_streamprivate!();
+        Depcrate_streamtests!();
+    };
+}

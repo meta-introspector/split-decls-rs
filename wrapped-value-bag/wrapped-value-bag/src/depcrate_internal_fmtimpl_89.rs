@@ -1,0 +1,9 @@
+// Generated macro for impl_89 (impl)
+macro_rules! Depcrate_internal_fmtimpl_89 {
+() => {
+// Module: crate::internal::fmt
+// Provides: {"impl_89"}
+// Dependencies: {}
+impl < 'v > ValueBag < 'v > { # [doc = " Get a value from a debuggable type."] # [doc = ""] # [doc = " This method will attempt to capture the given value as a well-known primitive"] # [doc = " before resorting to using its `Debug` implementation."] pub fn capture_debug < T > (value : & 'v T) -> Self where T : Debug + 'static , { Self :: try_capture (value) . unwrap_or (ValueBag { inner : Internal :: Debug (value) , }) } # [doc = " Get a value from a displayable type."] # [doc = ""] # [doc = " This method will attempt to capture the given value as a well-known primitive"] # [doc = " before resorting to using its `Display` implementation."] pub fn capture_display < T > (value : & 'v T) -> Self where T : Display + 'static , { Self :: try_capture (value) . unwrap_or (ValueBag { inner : Internal :: Display (value) , }) } # [doc = " Get a value from a debuggable type without capturing support."] pub const fn from_debug < T > (value : & 'v T) -> Self where T : Debug , { ValueBag { inner : Internal :: AnonDebug (value) , } } # [doc = " Get a value from a displayable type without capturing support."] pub const fn from_display < T > (value : & 'v T) -> Self where T : Display , { ValueBag { inner : Internal :: AnonDisplay (value) , } } # [doc = " Get a value from a debuggable type without capturing support."] # [inline] pub const fn from_dyn_debug (value : & 'v dyn Debug) -> Self { ValueBag { inner : Internal :: AnonDebug (value) , } } # [doc = " Get a value from a displayable type without capturing support."] # [inline] pub const fn from_dyn_display (value : & 'v dyn Display) -> Self { ValueBag { inner : Internal :: AnonDisplay (value) , } } }
+};
+}

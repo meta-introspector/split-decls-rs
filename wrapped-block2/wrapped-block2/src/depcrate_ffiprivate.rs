@@ -1,0 +1,9 @@
+// Generated macro for private (module)
+macro_rules! Depcrate_ffiprivate {
+() => {
+// Module: crate::ffi
+// Provides: {"private"}
+// Dependencies: {}
+# [doc = " `Block_private.h`"] # [allow (missing_docs)] # [cfg (any (test , feature = "unstable-private"))] pub mod private { use super :: * ; # [cfg (any (doc , target_vendor = "apple" , feature = "gnustep-1-7"))] use core :: ffi :: c_char ; # [cfg (any (doc , target_vendor = "apple" , feature = "compiler-rt"))] use core :: ffi :: c_ulong ; extern "C-unwind" { pub static _NSConcreteMallocBlock : Class ; # [cfg (any (doc , target_vendor = "apple" , feature = "compiler-rt"))] pub static _NSConcreteAutoBlock : Class ; # [cfg (any (doc , target_vendor = "apple" , feature = "compiler-rt"))] pub static _NSConcreteFinalizingBlock : Class ; # [cfg (any (doc , target_vendor = "apple" , feature = "compiler-rt"))] pub static _NSConcreteWeakBlockVariable : Class ; # [cfg (any (doc , target_vendor = "apple" , feature = "compiler-rt"))] pub fn Block_size (block : * mut c_void) -> c_ulong ; # [cfg (any (doc , target_vendor = "apple"))] pub fn _Block_use_stret (block : * mut c_void) -> bool ; # [cfg (any (doc , target_vendor = "apple"))] pub fn _Block_layout (block : * mut c_void) -> * const c_char ; # [cfg (any (doc , target_vendor = "apple"))] pub fn _Block_extended_layout (block : * mut c_void) -> * const c_char ; # [cfg (any (doc , target_vendor = "apple"))] pub fn _Block_tryRetain (block : * const c_void) -> bool ; # [cfg (any (doc , target_vendor = "apple"))] pub fn _Block_isDeallocating (block : * const c_void) -> bool ; # [cfg (any (doc , target_vendor = "apple" , feature = "gnustep-1-7"))] pub fn _Block_has_signature (block : * mut c_void) -> bool ; # [cfg (any (doc , target_vendor = "apple" , feature = "gnustep-1-7"))] pub fn _Block_signature (block : * mut c_void) -> * const c_char ; } }
+};
+}

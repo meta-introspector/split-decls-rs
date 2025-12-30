@@ -1,0 +1,9 @@
+// Generated macro for use_5757 (use)
+macro_rules! Depcrate_methods_iterator_step_by_zerouse_5757 {
+() => {
+// Module: crate::methods::iterator_step_by_zero
+// Provides: {"use_5757"}
+// Dependencies: {}
+use clippy_utils :: diagnostics :: span_lint ;
+};
+}

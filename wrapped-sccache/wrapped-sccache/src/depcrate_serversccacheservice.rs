@@ -1,0 +1,9 @@
+// Generated macro for SccacheService (struct)
+macro_rules! Depcrate_serverSccacheService {
+() => {
+// Module: crate::server
+// Provides: {"SccacheService"}
+// Dependencies: {}
+# [doc = " Service implementation for sccache"] # [derive (Clone)] pub struct SccacheService < C > where C : Send , { # [doc = " Server statistics."] stats : Arc < Mutex < ServerStats > > , # [doc = " Distributed sccache client"] dist_client : Arc < DistClientContainer > , # [doc = " Cache storage."] storage : Arc < dyn Storage > , # [doc = " A cache of known compiler info."] compilers : Arc < RwLock < CompilerMap < C > > > , # [doc = " map the cwd with compiler proxy path to a proxy resolver, which"] # [doc = " will dynamically resolve the input compiler for the current context"] # [doc = " (usually file or current working directory)"] # [doc = " the associated `FileTime` is the modification time of"] # [doc = " the compiler proxy, in order to track updates of the proxy itself"] compiler_proxies : Arc < RwLock < CompilerProxyMap < C > > > , # [doc = " Task pool for blocking (used mostly for disk I/O-bound tasks) and"] rt : tokio :: runtime :: Handle , # [doc = " An object for creating commands."] # [doc = ""] # [doc = " This is mostly useful for unit testing, where we"] # [doc = " can mock this out."] creator : C , # [doc = " Message channel used to learn about requests received by this server."] # [doc = ""] # [doc = " Note that messages sent along this channel will keep the server alive"] # [doc = " (reset the idle timer) and this channel can also be used to shut down"] # [doc = " the entire server immediately via a message."] tx : mpsc :: Sender < ServerMessage > , # [doc = " Information tracking how many services (connected clients) are active."] # [doc = " This field causes [WaitUntilZero] to wait until this struct drops."] # [allow (dead_code)] info : ActiveInfo , }
+};
+}

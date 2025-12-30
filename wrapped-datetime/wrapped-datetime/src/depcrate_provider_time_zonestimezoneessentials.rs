@@ -1,0 +1,9 @@
+// Generated macro for TimeZoneEssentials (struct)
+macro_rules! Depcrate_provider_time_zonesTimeZoneEssentials {
+() => {
+// Module: crate::provider::time_zones
+// Provides: {"TimeZoneEssentials"}
+// Dependencies: {}
+# [doc = " An ICU4X mapping to the CLDR timeZoneNames format strings."] # [doc = " See CLDR-JSON timeZoneNames.json and <https://cldr.unicode.org/translation/time-zones-and-city-names>"] # [doc = " for more context."] # [doc = ""] # [doc = " <div class=\"stab unstable\">"] # [doc = " 🚧 This code is considered unstable; it may change at any time, in breaking or non-breaking ways,"] # [doc = " including in SemVer minor releases. While the serde representation of data structs is guaranteed"] # [doc = " to be stable, their Rust representation might not be. Use with caution."] # [doc = " </div>"] # [derive (PartialEq , Debug , Clone , Default , yoke :: Yokeable , zerofrom :: ZeroFrom)] # [cfg_attr (feature = "datagen" , derive (serde :: Serialize , databake :: Bake))] # [cfg_attr (feature = "datagen" , databake (path = icu_datetime :: provider :: time_zones))] # [cfg_attr (feature = "serde" , derive (serde :: Deserialize))] # [yoke (prove_covariance_manually)] pub struct TimeZoneEssentials < 'data > { # [doc = " The separator sign"] # [cfg_attr (feature = "serde" , serde (borrow ,))] pub offset_separator : Cow < 'data , str > , # [doc = " The localized offset format."] # [cfg_attr (feature = "serde" , serde (borrow , deserialize_with = "icu_pattern::deserialize_borrowed_cow::<icu_pattern::SinglePlaceholder, _>"))] pub offset_pattern : Cow < 'data , SinglePlaceholderPattern > , # [doc = " The localized zero-offset format."] # [cfg_attr (feature = "serde" , serde (borrow))] pub offset_zero : Cow < 'data , str > , # [doc = " The localized unknown-offset format."] # [cfg_attr (feature = "serde" , serde (borrow))] pub offset_unknown : Cow < 'data , str > , }
+};
+}

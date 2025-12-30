@@ -1,0 +1,9 @@
+// Generated macro for STATUS_SPACES_INTERLEAVE_LENGTH_INVALID (const)
+macro_rules! Depcrate_shared_ntstatusSTATUS_SPACES_INTERLEAVE_LENGTH_INVALID {
+() => {
+// Module: crate::shared::ntstatus
+// Provides: {"STATUS_SPACES_INTERLEAVE_LENGTH_INVALID"}
+// Dependencies: {}
+pub const STATUS_SPACES_INTERLEAVE_LENGTH_INVALID : NTSTATUS = 0xC0E70009 ;
+};
+}

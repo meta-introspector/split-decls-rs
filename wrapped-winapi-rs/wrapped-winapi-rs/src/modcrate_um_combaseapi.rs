@@ -1,0 +1,47 @@
+// Generated module macro for crate::um::combaseapi
+macro_rules! Modcrate_um_combaseapi {
+() => {
+        Depcrate_um_combaseapiuse_20970!();
+        Depcrate_um_combaseapiuse_20971!();
+        Depcrate_um_combaseapiuse_20972!();
+        Depcrate_um_combaseapiuse_20973!();
+        Depcrate_um_combaseapiuse_20974!();
+        Depcrate_um_combaseapiuse_20975!();
+        Depcrate_um_combaseapiuse_20976!();
+        Depcrate_um_combaseapiuse_20977!();
+        Depcrate_um_combaseapiuse_20978!();
+        Depcrate_um_combaseapiuse_20979!();
+        Depcrate_um_combaseapiuse_20980!();
+        Depcrate_um_combaseapiLISet32!();
+        Depcrate_um_combaseapiULISet32!();
+        Depcrate_um_combaseapiCLSCTX_INPROC!();
+        Depcrate_um_combaseapiCLSCTX_ALL!();
+        Depcrate_um_combaseapiCLSCTX_SERVER!();
+        Depcrate_um_combaseapimacro_20986!();
+        Depcrate_um_combaseapimacro_20987!();
+        Depcrate_um_combaseapiother_20988!();
+        Depcrate_um_combaseapimacro_20989!();
+        Depcrate_um_combaseapiPServerInformation!();
+        Depcrate_um_combaseapiother_20991!();
+        Depcrate_um_combaseapimacro_20992!();
+        Depcrate_um_combaseapiother_20993!();
+        Depcrate_um_combaseapimacro_20994!();
+        Depcrate_um_combaseapiother_20995!();
+        Depcrate_um_combaseapiCOM_RIGHTS_EXECUTE!();
+        Depcrate_um_combaseapiCOM_RIGHTS_EXECUTE_LOCAL!();
+        Depcrate_um_combaseapiCOM_RIGHTS_EXECUTE_REMOTE!();
+        Depcrate_um_combaseapiCOM_RIGHTS_ACTIVATE_LOCAL!();
+        Depcrate_um_combaseapiCOM_RIGHTS_ACTIVATE_REMOTE!();
+        Depcrate_um_combaseapiother_21001!();
+        Depcrate_um_combaseapimacro_21002!();
+        Depcrate_um_combaseapimacro_21003!();
+        Depcrate_um_combaseapiother_21004!();
+        Depcrate_um_combaseapiCWMO_MAX_HANDLES!();
+        Depcrate_um_combaseapiother_21006!();
+        Depcrate_um_combaseapimacro_21007!();
+        Depcrate_um_combaseapiother_21008!();
+        Depcrate_um_combaseapimacro_21009!();
+        Depcrate_um_combaseapimacro_21010!();
+        Depcrate_um_combaseapiother_21011!();
+    };
+}

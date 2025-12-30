@@ -1,0 +1,9 @@
+// Generated macro for Utf16CharSplitter (struct)
+macro_rules! Depcrate_utf16_iteratorsUtf16CharSplitter {
+() => {
+// Module: crate::utf16_iterators
+// Provides: {"Utf16CharSplitter"}
+// Dependencies: {}
+# [doc = " Converts an iterator of `Utf16Char` (or `&Utf16Char`)"] # [doc = " to an iterator of `u16`s."] # [doc = ""] # [doc = " Is equivalent to calling `.flatten()` or `.flat_map()` on the original iterator,"] # [doc = " but the returned iterator is about twice as fast."] # [doc = ""] # [doc = " The exact number of units cannot be known in advance, but `size_hint()`"] # [doc = " gives the possible range."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " From iterator of values:"] # [doc = ""] # [doc = " ```"] # [doc = " use encode_unicode::{IterExt, CharExt};"] # [doc = ""] # [doc = " let iterator = \"foo\".chars().map(|c| c.to_utf16() );"] # [doc = " let mut units = [0; 4];"] # [doc = " iterator.to_units().zip(&mut units).for_each(|(u,dst)| *dst = u );"] # [doc = " assert_eq!(units, ['f' as u16, 'o' as u16, 'o' as u16, 0]);"] # [doc = " ```"] # [doc = ""] # [doc = " From iterator of references:"] # [doc = ""] # [cfg_attr (feature = "std" , doc = " ```")] # [cfg_attr (not (feature = "std") , doc = " ```no_compile")] # [doc = " use encode_unicode::{IterExt, CharExt, Utf16Char};"] # [doc = ""] # [doc = " // (💣 takes two units)"] # [doc = " let chars: Vec<Utf16Char> = \"💣 bomb 💣\".chars().map(|c| c.to_utf16() ).collect();"] # [doc = " let units: Vec<u16> = chars.iter().to_units().collect();"] # [doc = " let flat_map: Vec<u16> = chars.iter().cloned().flatten().collect();"] # [doc = " assert_eq!(units, flat_map);"] # [doc = " ```"] # [derive (Clone)] pub struct Utf16CharSplitter < U : Borrow < Utf16Char > , I : Iterator < Item = U > > { inner : I , prev_second : u16 , }
+};
+}

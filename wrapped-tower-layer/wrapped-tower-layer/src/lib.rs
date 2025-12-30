@@ -1,0 +1,61 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcrate_tupleuse_25.rs");
+include!("depcrate_tupleimpl_37.rs");
+include!("depcrate_tupleimpl_41.rs");
+include!("depcrate_layer_fnuse_10.rs");
+include!("depcrate_tupleimpl_32.rs");
+include!("depcrate_stackuse_18.rs");
+include!("depcrate_tupleimpl_28.rs");
+include!("depcrate_tupleimpl_42.rs");
+include!("depcrateother_1.rs");
+include!("depcrate_identityidentity.rs");
+include!("depcrateuse_43.rs");
+include!("depcratelayer.rs");
+include!("depcrate_layer_fnlayerfn.rs");
+include!("depcrate_tupleimpl_30.rs");
+include!("depcratelayer_fn.rs");
+include!("depcrate_layer_fnuse_11.rs");
+include!("depcrate_tupleimpl_31.rs");
+include!("depcrate_layer_fnimpl_15.rs");
+include!("depcrate_identityuse_4.rs");
+include!("depcrate_identityimpl_8.rs");
+include!("depcrate_identityuse_3.rs");
+include!("depcrate_tupleimpl_38.rs");
+include!("depcrate_tupleimpl_35.rs");
+include!("depcrate_tupleimpl_29.rs");
+include!("depcrate_tupleimpl_33.rs");
+include!("depcrate_stackuse_19.rs");
+include!("depcratetuple.rs");
+include!("depcrate_tupleimpl_40.rs");
+include!("depcrate_tupleimpl_26.rs");
+include!("depcrate_tupleimpl_27.rs");
+include!("depcrate_layer_fntests.rs");
+include!("depcrate_layer_fnlayer_fn.rs");
+include!("depcrate_stackimpl_21.rs");
+include!("depcrateimpl_45.rs");
+include!("depcratestack.rs");
+include!("depcrate_tupleimpl_36.rs");
+include!("depcrate_stackimpl_22.rs");
+include!("depcrate_tupleimpl_39.rs");
+include!("depcrateidentity.rs");
+include!("depcrate_stackimpl_23.rs");
+include!("depcrate_identityimpl_6.rs");
+include!("depcrate_layer_fnimpl_14.rs");
+include!("depcrate_tupleimpl_34.rs");
+include!("depcrate_stackstack.rs");
+include!("depcrate_identityimpl_7.rs");
+include!("modcrate.rs");
+include!("modcrate_identity.rs");
+include!("modcrate_stack.rs");
+include!("modcrate_layer_fn.rs");
+include!("modcrate_tuple.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate!();
+    Modcrate_identity!();
+    Modcrate_stack!();
+    Modcrate_layer_fn!();
+    Modcrate_tuple!();
+}

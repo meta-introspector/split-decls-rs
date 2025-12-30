@@ -1,0 +1,54 @@
+// Generated module macro for crate::decode
+macro_rules! Modcrate_decode {
+() => {
+        Depcrate_decodedec!();
+        Depcrate_decodeext!();
+        Depcrate_decodesint!();
+        Depcrate_decodestr!();
+        Depcrate_decodeuint!();
+        Depcrate_decodeest!();
+        Depcrate_decodeuse_63!();
+        Depcrate_decodeuse_64!();
+        Depcrate_decodeuse_65!();
+        Depcrate_decodeuse_66!();
+        Depcrate_decodeuse_67!();
+        Depcrate_decodeuse_68!();
+        Depcrate_decodeuse_69!();
+        Depcrate_decodeuse_70!();
+        Depcrate_decodeuse_71!();
+        Depcrate_decodeuse_72!();
+        Depcrate_decodebytes!();
+        Depcrate_decodeuse_86!();
+        Depcrate_decodeuse_87!();
+        Depcrate_decodeRmpReadErr!();
+        Depcrate_decodeimpl_89!();
+        Depcrate_decodeimpl_90!();
+        Depcrate_decoderead_byteorder_utils!();
+        Depcrate_decodesealed!();
+        Depcrate_decodeRmpRead!();
+        Depcrate_decodewrap_data_funcs_for_compatibility!();
+        Depcrate_decodemacro_95!();
+        Depcrate_decodeimpl_96!();
+        Depcrate_decodeMarkerWriteError!();
+        Depcrate_decodeimpl_98!();
+        Depcrate_decodeMarkerReadError!();
+        Depcrate_decodeValueReadError!();
+        Depcrate_decodeimpl_101!();
+        Depcrate_decodeimpl_102!();
+        Depcrate_decodeimpl_103!();
+        Depcrate_decodeimpl_104!();
+        Depcrate_decoderead_marker!();
+        Depcrate_decoderead_nil!();
+        Depcrate_decoderead_bool!();
+        Depcrate_decodeNumValueReadError!();
+        Depcrate_decodeimpl_109!();
+        Depcrate_decodeimpl_110!();
+        Depcrate_decodeimpl_111!();
+        Depcrate_decodeimpl_112!();
+        Depcrate_decoderead_int!();
+        Depcrate_decoderead_array_len!();
+        Depcrate_decoderead_map_len!();
+        Depcrate_decodemarker_to_len!();
+        Depcrate_decoderead_bin_len!();
+    };
+}

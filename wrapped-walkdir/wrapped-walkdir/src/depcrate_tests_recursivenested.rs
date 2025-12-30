@@ -1,0 +1,9 @@
+// Generated macro for nested (function)
+macro_rules! Depcrate_tests_recursivenested {
+() => {
+// Module: crate::tests::recursive
+// Provides: {"nested"}
+// Dependencies: {}
+# [test] fn nested () { let nested = PathBuf :: from ("a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z") ; let dir = Dir :: tmp () ; dir . mkdirp (& nested) ; dir . touch (nested . join ("A")) ; let wd = WalkDir :: new (dir . path ()) ; let r = dir . run_recursive (wd) ; r . assert_no_errors () ; let expected = vec ! [dir . path () . to_path_buf () , dir . join ("a") , dir . join ("a/b") , dir . join ("a/b/c") , dir . join ("a/b/c/d") , dir . join ("a/b/c/d/e") , dir . join ("a/b/c/d/e/f") , dir . join ("a/b/c/d/e/f/g") , dir . join ("a/b/c/d/e/f/g/h") , dir . join ("a/b/c/d/e/f/g/h/i") , dir . join ("a/b/c/d/e/f/g/h/i/j") , dir . join ("a/b/c/d/e/f/g/h/i/j/k") , dir . join ("a/b/c/d/e/f/g/h/i/j/k/l") , dir . join ("a/b/c/d/e/f/g/h/i/j/k/l/m") , dir . join ("a/b/c/d/e/f/g/h/i/j/k/l/m/n") , dir . join ("a/b/c/d/e/f/g/h/i/j/k/l/m/n/o") , dir . join ("a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p") , dir . join ("a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q") , dir . join ("a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r") , dir . join ("a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s") , dir . join ("a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t") , dir . join ("a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u") , dir . join ("a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v") , dir . join ("a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w") , dir . join ("a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x") , dir . join ("a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y") , dir . join ("a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z") , dir . join (& nested) . join ("A") ,] ; assert_eq ! (expected , r . sorted_paths ()) ; }
+};
+}

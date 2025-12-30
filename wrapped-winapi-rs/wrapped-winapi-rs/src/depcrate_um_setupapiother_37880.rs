@@ -1,0 +1,9 @@
+// Generated macro for other_37880 (other)
+macro_rules! Depcrate_um_setupapiother_37880 {
+() => {
+// Module: crate::um::setupapi
+// Provides: {"other_37880"}
+// Dependencies: {}
+extern "system" { pub fn SetupDiOpenDeviceInfoA (DeviceInfoSet : HDEVINFO , DeviceInstanceId : PCSTR , hwndParent : HWND , OpenFlags : DWORD , DeviceInfoData : PSP_DEVINFO_DATA ,) -> BOOL ; pub fn SetupDiOpenDeviceInfoW (DeviceInfoSet : HDEVINFO , DeviceInstanceId : PCWSTR , hwndParent : HWND , OpenFlags : DWORD , DeviceInfoData : PSP_DEVINFO_DATA ,) -> BOOL ; pub fn SetupDiGetDeviceInstanceIdA (DeviceInfoSet : HDEVINFO , DeviceInfoData : PSP_DEVINFO_DATA , DeviceInstanceId : PSTR , DeviceInstanceIdSize : DWORD , RequiredSize : PDWORD ,) -> BOOL ; pub fn SetupDiGetDeviceInstanceIdW (DeviceInfoSet : HDEVINFO , DeviceInfoData : PSP_DEVINFO_DATA , DeviceInstanceId : PWSTR , DeviceInstanceIdSize : DWORD , RequiredSize : PDWORD ,) -> BOOL ; pub fn SetupDiDeleteDeviceInfo (DeviceInfoSet : HDEVINFO , DeviceInfoData : PSP_DEVINFO_DATA ,) -> BOOL ; pub fn SetupDiEnumDeviceInfo (DeviceInfoSet : HDEVINFO , MemberIndex : DWORD , DeviceInfoData : PSP_DEVINFO_DATA ,) -> BOOL ; pub fn SetupDiDestroyDeviceInfoList (DeviceInfoSet : HDEVINFO ,) -> BOOL ; pub fn SetupDiEnumDeviceInterfaces (DeviceInfoSet : HDEVINFO , DeviceInfoData : PSP_DEVINFO_DATA , InterfaceClassGuid : * const GUID , MemberIndex : DWORD , DeviceInterfaceData : PSP_DEVICE_INTERFACE_DATA ,) -> BOOL ; pub fn SetupDiCreateDeviceInterfaceA (DeviceInfoSet : HDEVINFO , DeviceInfoData : PSP_DEVINFO_DATA , InterfaceClassGuid : * const GUID , ReferenceString : PCSTR , CreationFlags : DWORD , DeviceInterfaceData : PSP_DEVICE_INTERFACE_DATA ,) -> BOOL ; pub fn SetupDiCreateDeviceInterfaceW (DeviceInfoSet : HDEVINFO , DeviceInfoData : PSP_DEVINFO_DATA , InterfaceClassGuid : * const GUID , ReferenceString : PCWSTR , CreationFlags : DWORD , DeviceInterfaceData : PSP_DEVICE_INTERFACE_DATA ,) -> BOOL ; }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for impl_246 (impl)
+macro_rules! Depcrate_lineimpl_246 {
+() => {
+// Module: crate::line
+// Provides: {"impl_246"}
+// Dependencies: {}
+impl LineBreakType for Utf16 { fn get_linebreak_property_with_rule (iterator : & LineBreakIterator < Self > , c : u32) -> u8 { iterator . data . get_linebreak_property_utf32_with_rule (c , iterator . options . strictness , iterator . options . word_option ,) } # [inline] fn use_complex_breaking (iterator : & LineBreakIterator < Self > , c : u32) -> bool { iterator . data . use_complex_breaking_utf32 (c) } fn line_handle_complex_language (iterator : & mut LineBreakIterator < Self > , left_codepoint : Self :: CharType ,) -> Option < usize > { let start_iter = iterator . iter . clone () ; let start_point = iterator . current_pos_data ; let mut s = vec ! [left_codepoint as u16] ; loop { debug_assert ! (! iterator . is_eof ()) ; s . push (iterator . get_current_codepoint () ? as u16) ; iterator . advance_iter () ; if let Some (current_codepoint) = iterator . get_current_codepoint () { if ! Self :: use_complex_breaking (iterator , current_codepoint) { break ; } } else { break ; } } iterator . iter = start_iter ; iterator . current_pos_data = start_point ; let breaks = iterator . complex . complex_language_segment_utf16 (& s) ; iterator . result_cache = breaks ; let first_pos = * iterator . result_cache . first () ? ; let mut i = 1 ; loop { if i == first_pos { iterator . result_cache = iterator . result_cache . iter () . skip (1) . map (| r | r - i) . collect () ; return iterator . get_current_position () ; } debug_assert ! (i < first_pos , "we should always arrive at first_pos: near index {:?}" , iterator . get_current_position ()) ; i += 1 ; iterator . advance_iter () ; if iterator . is_eof () { iterator . result_cache . clear () ; return Some (iterator . len) ; } } } }
+};
+}

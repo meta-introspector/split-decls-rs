@@ -1,0 +1,44 @@
+// Generated module macro for crate
+macro_rules! Modcrate {
+() => {
+        Depcrateother_1!();
+        Depcrateother_2!();
+        Depcrateuse_3!();
+        Depcrateuse_4!();
+        Depcrateuse_5!();
+        Depcrateuse_6!();
+        Depcrateuse_7!();
+        Depcrateuse_8!();
+        Depcrateuse_9!();
+        Depcrateuse_10!();
+        Depcrateuse_11!();
+        Depcrateuse_12!();
+        Depcrateuse_13!();
+        Depcrateuse_14!();
+        Depcrateuse_15!();
+        Depcrateuse_16!();
+        Depcrateuse_17!();
+        Depcrateuse_18!();
+        Depcrateaead!();
+        Depcratehash!();
+        Depcratehmac!();
+        Depcratehpke!();
+        Depcratekx!();
+        Depcratesign!();
+        Depcrateticketer!();
+        Depcrateuse_128!();
+        Depcrateverify!();
+        Depcrateprovider!();
+        DepcrateProvider!();
+        Depcrateimpl_146!();
+        Depcrateimpl_147!();
+        Depcrateimpl_148!();
+        DepcrateALL_TLS12_CIPHER_SUITES!();
+        DepcrateALL_TLS13_CIPHER_SUITES!();
+        DepcrateTLS13_CHACHA20_POLY1305_SHA256!();
+        DepcrateTLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256!();
+        Depcrateother_err!();
+        Depcrateother_err!();
+        DepcrateSIX_HOURS!();
+    };
+}

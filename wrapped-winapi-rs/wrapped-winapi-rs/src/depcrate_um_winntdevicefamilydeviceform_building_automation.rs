@@ -1,0 +1,9 @@
+// Generated macro for DEVICEFAMILYDEVICEFORM_BUILDING_AUTOMATION (const)
+macro_rules! Depcrate_um_winntDEVICEFAMILYDEVICEFORM_BUILDING_AUTOMATION {
+() => {
+// Module: crate::um::winnt
+// Provides: {"DEVICEFAMILYDEVICEFORM_BUILDING_AUTOMATION"}
+// Dependencies: {}
+pub const DEVICEFAMILYDEVICEFORM_BUILDING_AUTOMATION : DWORD = 0x0000000F ;
+};
+}

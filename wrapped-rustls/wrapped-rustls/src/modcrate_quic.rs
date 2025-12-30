@@ -1,0 +1,43 @@
+// Generated module macro for crate::quic
+macro_rules! Modcrate_quic {
+() => {
+        Depcrate_quicuse_2104!();
+        Depcrate_quicuse_2105!();
+        Depcrate_quicuse_2106!();
+        Depcrate_quicuse_2107!();
+        Depcrate_quicuse_2108!();
+        Depcrate_quicuse_2109!();
+        Depcrate_quicuse_2110!();
+        Depcrate_quicuse_2111!();
+        Depcrate_quicuse_2112!();
+        Depcrate_quicuse_2113!();
+        Depcrate_quicuse_2114!();
+        Depcrate_quicconnection!();
+        Depcrate_quicuse_2116!();
+        Depcrate_quicQuic!();
+        Depcrate_quicimpl_2118!();
+        Depcrate_quicSecrets!();
+        Depcrate_quicimpl_2120!();
+        Depcrate_quicDirectionalKeys!();
+        Depcrate_quicimpl_2122!();
+        Depcrate_quicTAG_LEN!();
+        Depcrate_quicTag!();
+        Depcrate_quicimpl_2125!();
+        Depcrate_quicimpl_2126!();
+        Depcrate_quicAlgorithm!();
+        Depcrate_quicHeaderProtectionKey!();
+        Depcrate_quicPacketKey!();
+        Depcrate_quicPacketKeySet!();
+        Depcrate_quicimpl_2131!();
+        Depcrate_quicKeyBuilder!();
+        Depcrate_quicimpl_2133!();
+        Depcrate_quicSuite!();
+        Depcrate_quicimpl_2135!();
+        Depcrate_quicKeys!();
+        Depcrate_quicimpl_2137!();
+        Depcrate_quicKeyChange!();
+        Depcrate_quicVersion!();
+        Depcrate_quicimpl_2140!();
+        Depcrate_quictests!();
+    };
+}

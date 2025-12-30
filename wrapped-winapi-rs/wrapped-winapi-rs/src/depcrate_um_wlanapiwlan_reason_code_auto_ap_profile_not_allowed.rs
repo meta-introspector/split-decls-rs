@@ -1,0 +1,9 @@
+// Generated macro for WLAN_REASON_CODE_AUTO_AP_PROFILE_NOT_ALLOWED (const)
+macro_rules! Depcrate_um_wlanapiWLAN_REASON_CODE_AUTO_AP_PROFILE_NOT_ALLOWED {
+() => {
+// Module: crate::um::wlanapi
+// Provides: {"WLAN_REASON_CODE_AUTO_AP_PROFILE_NOT_ALLOWED"}
+// Dependencies: {}
+pub const WLAN_REASON_CODE_AUTO_AP_PROFILE_NOT_ALLOWED : WLAN_REASON_CODE = WLAN_REASON_CODE_PROFILE_BASE + 25 ;
+};
+}

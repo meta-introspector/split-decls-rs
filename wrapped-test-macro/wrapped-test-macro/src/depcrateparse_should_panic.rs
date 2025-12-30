@@ -1,0 +1,9 @@
+// Generated macro for parse_should_panic (function)
+macro_rules! Depcrateparse_should_panic {
+() => {
+// Module: crate
+// Provides: {"parse_should_panic"}
+// Dependencies: {}
+fn parse_should_panic (body : & mut std :: iter :: Peekable < token_stream :: IntoIter > , token : & TokenTree ,) -> Result < Option < (Option < Literal > , Span) > , proc_macro :: TokenStream > { match token { TokenTree :: Punct (op) if op . as_char () == '#' => () , _ => return Ok (None) , } let group = match body . peek () { Some (TokenTree :: Group (group)) if group . delimiter () == Delimiter :: Bracket => group , _ => return Ok (None) , } ; let mut stream = group . stream () . into_iter () ; let mut span = match stream . next () { Some (TokenTree :: Ident (token)) if token == "should_panic" => token . span () , _ => return Ok (None) , } ; let should_panic = span ; match stream . next () { Some (TokenTree :: Group (group)) if group . delimiter () == Delimiter :: Parenthesis => { let span = group . span () ; stream = group . stream () . into_iter () ; match stream . next () { Some (TokenTree :: Ident (token)) if token == "expected" => () , _ => { return Err (compile_error (span , "malformed `#[should_panic(...)]` attribute" ,)) } } match stream . next () { Some (TokenTree :: Punct (op)) if op . as_char () == '=' => () , _ => { return Err (compile_error (span , "malformed `#[should_panic(...)]` attribute" ,)) } } } Some (TokenTree :: Punct (op)) if op . as_char () == '=' => () , Some (token) => { return Err (compile_error (token . span () , "malformed `#[should_panic = \"...\"]` attribute" ,)) } None => { return Ok (Some ((None , should_panic))) ; } } if let Some (TokenTree :: Literal (lit)) = stream . next () { span = lit . span () ; let string = lit . to_string () ; if string . starts_with ('"') && string . ends_with ('"') { return Ok (Some ((Some (lit) , should_panic))) ; } } Err (compile_error (span , "malformed `#[should_panic]` attribute")) }
+};
+}

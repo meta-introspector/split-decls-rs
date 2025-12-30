@@ -1,0 +1,46 @@
+// Generated module macro for crate::parser::document
+macro_rules! Modcrate_parser_document {
+() => {
+        Depcrate_parser_documentuse_217!();
+        Depcrate_parser_documentuse_218!();
+        Depcrate_parser_documentuse_219!();
+        Depcrate_parser_documentuse_220!();
+        Depcrate_parser_documentuse_221!();
+        Depcrate_parser_documentuse_222!();
+        Depcrate_parser_documentuse_223!();
+        Depcrate_parser_documentuse_224!();
+        Depcrate_parser_documentuse_225!();
+        Depcrate_parser_documentuse_226!();
+        Depcrate_parser_documentuse_227!();
+        Depcrate_parser_documentuse_228!();
+        Depcrate_parser_documentparse_document!();
+        Depcrate_parser_documentparse_key!();
+        Depcrate_parser_documentparse_simple_key!();
+        Depcrate_parser_documentparse_value!();
+        Depcrate_parser_documentStream!();
+        Depcrate_parser_documentdocument!();
+        Depcrate_parser_documenton_table!();
+        Depcrate_parser_documentkey!();
+        Depcrate_parser_documenton_expression_key!();
+        Depcrate_parser_documenton_expression_dot!();
+        Depcrate_parser_documenton_expression_key_val_sep!();
+        Depcrate_parser_documentsimple_key!();
+        Depcrate_parser_documentopt_dot_keys!();
+        Depcrate_parser_documentvalue!();
+        Depcrate_parser_documenton_scalar!();
+        Depcrate_parser_documenton_array_open!();
+        Depcrate_parser_documenton_inline_table_open!();
+        Depcrate_parser_documentopt_whitespace!();
+        Depcrate_parser_documentws_comment_newline!();
+        Depcrate_parser_documenton_comment!();
+        Depcrate_parser_documenteof!();
+        Depcrate_parser_documentignore_to_newline!();
+        Depcrate_parser_documentignore_to_value_close!();
+        Depcrate_parser_documenton_missing_key!();
+        Depcrate_parser_documenton_missing_expression_key!();
+        Depcrate_parser_documenton_missing_std_table!();
+        Depcrate_parser_documentnext_token_if!();
+        Depcrate_parser_documentseek!();
+        Depcrate_parser_documentUNQUOTED_STRING!();
+    };
+}

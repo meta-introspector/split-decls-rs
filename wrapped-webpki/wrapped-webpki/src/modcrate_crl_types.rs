@@ -1,0 +1,42 @@
+// Generated module macro for crate::crl::types
+macro_rules! Modcrate_crl_types {
+() => {
+        Depcrate_crl_typesuse_250!();
+        Depcrate_crl_typesuse_251!();
+        Depcrate_crl_typesuse_252!();
+        Depcrate_crl_typesuse_253!();
+        Depcrate_crl_typesuse_254!();
+        Depcrate_crl_typesuse_255!();
+        Depcrate_crl_typesuse_256!();
+        Depcrate_crl_typesuse_257!();
+        Depcrate_crl_typesuse_258!();
+        Depcrate_crl_typesuse_259!();
+        Depcrate_crl_typesuse_260!();
+        Depcrate_crl_typesuse_261!();
+        Depcrate_crl_typesuse_262!();
+        Depcrate_crl_typesuse_263!();
+        Depcrate_crl_typesCertRevocationList!();
+        Depcrate_crl_typesimpl_265!();
+        Depcrate_crl_typesimpl_266!();
+        Depcrate_crl_typesimpl_267!();
+        Depcrate_crl_typesOwnedCertRevocationList!();
+        Depcrate_crl_typesimpl_269!();
+        Depcrate_crl_typesBorrowedCertRevocationList!();
+        Depcrate_crl_typesimpl_271!();
+        Depcrate_crl_typesimpl_272!();
+        Depcrate_crl_typesimpl_273!();
+        Depcrate_crl_typesimpl_274!();
+        Depcrate_crl_typesIssuingDistributionPoint!();
+        Depcrate_crl_typesimpl_276!();
+        Depcrate_crl_typesOwnedRevokedCert!();
+        Depcrate_crl_typesimpl_278!();
+        Depcrate_crl_typesBorrowedRevokedCert!();
+        Depcrate_crl_typesimpl_280!();
+        Depcrate_crl_typesimpl_281!();
+        Depcrate_crl_typesRevocationReason!();
+        Depcrate_crl_typesimpl_283!();
+        Depcrate_crl_typesimpl_284!();
+        Depcrate_crl_typesimpl_285!();
+        Depcrate_crl_typestests!();
+    };
+}

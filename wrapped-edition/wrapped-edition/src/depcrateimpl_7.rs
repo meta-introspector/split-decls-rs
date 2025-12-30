@@ -1,0 +1,9 @@
+// Generated macro for impl_7 (impl)
+macro_rules! Depcrateimpl_7 {
+() => {
+// Module: crate
+// Provides: {"impl_7"}
+// Dependencies: {}
+impl std :: str :: FromStr for Edition { type Err = ParseEditionError ; fn from_str (s : & str) -> Result < Self , Self :: Err > { let res = match s { "2015" => Edition :: Edition2015 , "2018" => Edition :: Edition2018 , "2021" => Edition :: Edition2021 , "2024" => Edition :: Edition2024 , _ => return Err (ParseEditionError { invalid_input : s . to_owned () }) , } ; Ok (res) } }
+};
+}

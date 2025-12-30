@@ -1,0 +1,9 @@
+// Generated macro for partition_dedup_by (function)
+macro_rules! Depcrate_store_vec_implpartition_dedup_by {
+() => {
+// Module: crate::store::vec_impl
+// Provides: {"partition_dedup_by"}
+// Dependencies: {}
+# [doc = " Moves all but the _last_ of consecutive elements to the end of the slice satisfying"] # [doc = " equality on K."] # [doc = ""] # [doc = " Returns two slices. The first contains no consecutive repeated elements."] # [doc = " The second contains all the duplicates in no specified order."] # [doc = ""] # [doc = " This is based on std::slice::partition_dedup_by (currently unstable) but retains the"] # [doc = " _last_ element of the duplicate run in the first slice (instead of first)."] # [inline] # [expect (clippy :: type_complexity)] fn partition_dedup_by < K : Eq , V > (v : & mut [(K , V)]) -> (& mut [(K , V)] , & mut [(K , V)]) { if v . len () <= 1 { return (v , & mut []) ; } let mut read_idx : usize = 1 ; let mut write_idx : usize = 1 ; while let Some ((before_read , [read , ..])) = v . split_at_mut_checked (read_idx) { # [expect (clippy :: indexing_slicing)] let prev_write = & mut before_read [write_idx - 1] ; if read . 0 == prev_write . 0 { core :: mem :: swap (read , prev_write) ; } else { if let Some (write) = before_read . get_mut (write_idx) { core :: mem :: swap (read , write) ; } write_idx += 1 ; } read_idx += 1 ; } v . split_at_mut (write_idx) }
+};
+}

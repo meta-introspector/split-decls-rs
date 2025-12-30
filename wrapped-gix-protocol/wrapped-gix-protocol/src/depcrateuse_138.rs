@@ -1,0 +1,9 @@
+// Generated macro for use_138 (pub_use)
+macro_rules! Depcrateuse_138 {
+() => {
+// Module: crate
+// Provides: {"use_138"}
+// Dependencies: {}
+pub use remote_progress :: RemoteProgress ;
+};
+}

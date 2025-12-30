@@ -1,0 +1,9 @@
+// Generated macro for impl_80 (impl)
+macro_rules! Depcrate_customimpl_80 {
+() => {
+// Module: crate::custom
+// Provides: {"impl_80"}
+// Dependencies: {}
+impl LanguageMethods for Language { fn display (& self) -> & str { & self . extension } fn comment_prefix_for_test_config (& self) -> Option < & str > { None } fn should_fail_verify (& self , _name : & str , _config : & crate :: config :: WitConfig , _args : & [String] ,) -> bool { false } fn generate_bindings (& self , runner : & Runner < '_ > , bindgen : & Bindgen , dir : & Path) -> Result < () > { runner . run_command (Command :: new (& self . script) . arg ("bindgen") . env ("WIT" , & bindgen . wit_path) . env ("BINDINGS_DIR" , dir) ,) } fn prepare (& self , runner : & mut Runner < '_ >) -> Result < () > { let dir = env :: current_dir () ? . join (& runner . opts . artifacts) . join (& self . extension) ; runner . run_command (Command :: new (& self . script) . arg ("prepare") . env ("PREP_DIR" , & dir) ,) } fn compile (& self , runner : & Runner < '_ > , compile : & Compile < '_ >) -> Result < () > { let dir = env :: current_dir () ? . join (& runner . opts . artifacts) . join (& self . extension) ; runner . run_command (Command :: new (& self . script) . arg ("compile") . env ("SOURCE" , & compile . component . path) . env ("KIND" , compile . component . kind . to_string ()) . env ("PREP_DIR" , & dir) . env ("BINDINGS_DIR" , & compile . bindings_dir) . env ("ARTIFACTS_DIR" , & compile . artifacts_dir) . env ("OUTPUT" , & compile . output) ,) } fn verify (& self , runner : & Runner < '_ > , verify : & Verify < '_ >) -> Result < () > { runner . run_command (Command :: new (& self . script) . arg ("verify") . env ("WIT" , verify . wit_test) . env ("BINDINGS_DIR" , & verify . bindings_dir) . env ("ARTIFACTS_DIR" , & verify . artifacts_dir) ,) } }
+};
+}

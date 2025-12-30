@@ -1,0 +1,9 @@
+// Generated macro for attrs_and_tokens_to_token_trees (function)
+macro_rules! Depcrate_tokenstreamattrs_and_tokens_to_token_trees {
+() => {
+// Module: crate::tokenstream
+// Provides: {"attrs_and_tokens_to_token_trees"}
+// Dependencies: {}
+fn attrs_and_tokens_to_token_trees (attrs : & [Attribute] , target_tokens : & LazyAttrTokenStream , res : & mut Vec < TokenTree > ,) { let idx = attrs . partition_point (| attr | matches ! (attr . style , crate :: AttrStyle :: Outer)) ; let (outer_attrs , inner_attrs) = attrs . split_at (idx) ; for attr in outer_attrs { res . extend (attr . token_trees ()) ; } res . extend (target_tokens . to_attr_token_stream () . to_token_trees ()) ; if ! inner_attrs . is_empty () { let found = insert_inner_attrs (inner_attrs , res) ; assert ! (found , "Failed to find trailing delimited group in: {res:?}") ; } fn insert_inner_attrs (inner_attrs : & [Attribute] , tts : & mut Vec < TokenTree >) -> bool { for tree in tts . iter_mut () . rev () { if let TokenTree :: Delimited (span , spacing , Delimiter :: Brace , stream) = tree { let mut tts = vec ! [] ; for inner_attr in inner_attrs { tts . extend (inner_attr . token_trees ()) ; } tts . extend (stream . 0 . iter () . cloned ()) ; let stream = TokenStream :: new (tts) ; * tree = TokenTree :: Delimited (* span , * spacing , Delimiter :: Brace , stream) ; return true ; } else if let TokenTree :: Delimited (span , spacing , Delimiter :: Invisible (src) , stream) = tree { let mut vec : Vec < _ > = stream . iter () . cloned () . collect () ; if insert_inner_attrs (inner_attrs , & mut vec) { * tree = TokenTree :: Delimited (* span , * spacing , Delimiter :: Invisible (* src) , TokenStream :: new (vec) ,) ; return true ; } } } false } }
+};
+}

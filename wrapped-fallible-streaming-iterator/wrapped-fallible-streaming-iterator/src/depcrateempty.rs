@@ -1,9 +1,9 @@
-// Generated macro for Empty (struct)
-macro_rules! DepcrateEmpty {
+// Generated macro for empty (function)
+macro_rules! Depcrateempty {
 () => {
 // Module: crate
-// Provides: {"Empty"}
+// Provides: {"empty"}
 // Dependencies: {}
-# [doc = " An iterator over no items."] pub struct Empty < T , E > (PhantomData < (T , E) >) ;
+# [doc = " Returns an iterator over no items."] pub fn empty < T , E > () -> Empty < T , E > { Empty (PhantomData) }
 };
 }

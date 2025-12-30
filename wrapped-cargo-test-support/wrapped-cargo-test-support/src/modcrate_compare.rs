@@ -1,0 +1,44 @@
+// Generated module macro for crate::compare
+macro_rules! Modcrate_compare {
+() => {
+        Depcrate_compareuse_25!();
+        Depcrate_compareuse_26!();
+        Depcrate_compareuse_27!();
+        Depcrate_compareuse_28!();
+        Depcrate_compareuse_29!();
+        Depcrate_compareuse_30!();
+        Depcrate_compareuse_31!();
+        Depcrate_compareuse_32!();
+        Depcrate_compareuse_33!();
+        Depcrate_compareuse_34!();
+        Depcrate_compareregex!();
+        Depcrate_compareassert_ui!();
+        Depcrate_compareassert_e2e!();
+        Depcrate_compareadd_test_support_redactions!();
+        Depcrate_compareadd_regex_redactions!();
+        Depcrate_compareMIN_LITERAL_REDACTIONS!();
+        Depcrate_compareE2E_LITERAL_REDACTIONS!();
+        Depcrate_comparematch_contains!();
+        Depcrate_comparematch_does_not_contain!();
+        Depcrate_comparematch_with_without!();
+        Depcrate_comparenormalize_actual!();
+        Depcrate_comparenormalize_expected!();
+        Depcrate_compareWildStr!();
+        Depcrate_compareimpl_48!();
+        Depcrate_compareimpl_49!();
+        Depcrate_comparemeta_cmp!();
+        Depcrate_compareimpl_51!();
+        Depcrate_compareimpl_52!();
+        Depcrate_compareInMemoryDir!();
+        Depcrate_compareimpl_54!();
+        Depcrate_compareimpl_55!();
+        Depcrate_compareimpl_56!();
+        Depcrate_compareimpl_57!();
+        Depcrate_compareimpl_58!();
+        Depcrate_compareimpl_59!();
+        Depcrate_compareimpl_from_tuple_for_inmemorydir!();
+        Depcrate_compareimpl_from_tuples_for_inmemorydir!();
+        Depcrate_comparemacro_62!();
+        Depcrate_comparetest!();
+    };
+}

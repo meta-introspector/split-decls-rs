@@ -1,0 +1,9 @@
+// Generated macro for other_47 (other)
+macro_rules! Depcrate_generatedother_47 {
+() => {
+// Module: crate::generated
+// Provides: {"other_47"}
+// Dependencies: {}
+extern "C" { # [doc = " Associates a subsystem-specific context with a dispatch queue, for a key"] # [doc = " unique to the subsystem."] # [doc = ""] # [doc = ""] # [doc = " The specified destructor will be invoked with the context on the default"] # [doc = " priority global concurrent queue when a new context is set for the same key,"] # [doc = " or after all references to the queue have been released."] # [doc = ""] # [doc = ""] # [doc = " Parameter `queue`: The dispatch queue to modify."] # [doc = " The result of passing NULL in this parameter is undefined."] # [doc = ""] # [doc = ""] # [doc = " Parameter `key`: The key to set the context for, typically a pointer to a static variable"] # [doc = " specific to the subsystem. Keys are only compared as pointers and never"] # [doc = " dereferenced. Passing a string constant directly is not recommended."] # [doc = " The NULL key is reserved and attempts to set a context for it are ignored."] # [doc = ""] # [doc = ""] # [doc = " Parameter `context`: The new subsystem-specific context for the object. This may be NULL."] # [doc = ""] # [doc = ""] # [doc = " Parameter `destructor`: The destructor function pointer. This may be NULL and is ignored if context"] # [doc = " is NULL."] # [doc = ""] # [doc = " # Safety"] # [doc = ""] # [doc = " - `queue` possibly has additional threading requirements."] # [doc = " - `key` must be a valid pointer."] # [doc = " - `context` must be a valid pointer or null."] # [doc = " - `destructor` must be implemented correctly."] pub fn dispatch_queue_set_specific (queue : & DispatchQueue , key : NonNull < c_void > , context : * mut c_void , destructor : dispatch_function_t ,) ; }
+};
+}

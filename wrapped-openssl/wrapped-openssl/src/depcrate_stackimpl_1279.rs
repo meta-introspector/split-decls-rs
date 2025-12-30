@@ -1,0 +1,9 @@
+// Generated macro for impl_1279 (impl)
+macro_rules! Depcrate_stackimpl_1279 {
+() => {
+// Module: crate::stack
+// Provides: {"impl_1279"}
+// Dependencies: {}
+impl < T : Stackable > StackRef < T > { fn as_stack (& self) -> * mut OPENSSL_STACK { self . as_ptr () as * mut _ } # [doc = " Returns the number of items in the stack."] pub fn len (& self) -> usize { unsafe { OPENSSL_sk_num (self . as_stack ()) as usize } } # [doc = " Determines if the stack is empty."] pub fn is_empty (& self) -> bool { self . len () == 0 } pub fn iter (& self) -> Iter < '_ , T > { Iter { stack : self , idxs : 0 .. self . len () as LenType , } } pub fn iter_mut (& mut self) -> IterMut < '_ , T > { IterMut { idxs : 0 .. self . len () as LenType , stack : self , } } # [doc = " Returns a reference to the element at the given index in the"] # [doc = " stack or `None` if the index is out of bounds"] pub fn get (& self , idx : usize) -> Option < & T :: Ref > { unsafe { if idx >= self . len () { return None ; } Some (T :: Ref :: from_ptr (self . _get (idx))) } } # [doc = " Returns a mutable reference to the element at the given index in the"] # [doc = " stack or `None` if the index is out of bounds"] pub fn get_mut (& mut self , idx : usize) -> Option < & mut T :: Ref > { unsafe { if idx >= self . len () { return None ; } Some (T :: Ref :: from_ptr_mut (self . _get (idx))) } } # [doc = " Pushes a value onto the top of the stack."] pub fn push (& mut self , data : T) -> Result < () , ErrorStack > { unsafe { cvt (OPENSSL_sk_push (self . as_stack () , data . as_ptr () as * mut _) as c_int) ? ; mem :: forget (data) ; Ok (()) } } # [doc = " Removes the last element from the stack and returns it."] pub fn pop (& mut self) -> Option < T > { unsafe { let ptr = OPENSSL_sk_pop (self . as_stack ()) ; T :: from_ptr_opt (ptr as * mut _) } } unsafe fn _get (& self , idx : usize) -> * mut T :: CType { OPENSSL_sk_value (self . as_stack () , idx as LenType) as * mut _ } }
+};
+}

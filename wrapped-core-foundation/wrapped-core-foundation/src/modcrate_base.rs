@@ -1,0 +1,50 @@
+// Generated module macro for crate::base
+macro_rules! Modcrate_base {
+() => {
+        Depcrate_baseuse_44!();
+        Depcrate_baseuse_45!();
+        Depcrate_baseuse_46!();
+        Depcrate_baseuse_47!();
+        Depcrate_baseuse_48!();
+        Depcrate_baseuse_49!();
+        Depcrate_baseuse_50!();
+        Depcrate_baseuse_51!();
+        Depcrate_baseuse_52!();
+        Depcrate_baseuse_53!();
+        Depcrate_baseCFIndexConvertible!();
+        Depcrate_baseimpl_55!();
+        Depcrate_basemacro_56!();
+        Depcrate_baseimpl_57!();
+        Depcrate_baseimpl_58!();
+        Depcrate_baseimpl_59!();
+        Depcrate_baseimpl_60!();
+        Depcrate_basemacro_61!();
+        Depcrate_basemacro_62!();
+        Depcrate_baseimpl_63!();
+        Depcrate_baseTCFType!();
+        Depcrate_baseimpl_65!();
+        Depcrate_baseItemRef!();
+        Depcrate_baseimpl_67!();
+        Depcrate_baseimpl_68!();
+        Depcrate_baseimpl_69!();
+        Depcrate_baseItemMutRef!();
+        Depcrate_baseimpl_71!();
+        Depcrate_baseimpl_72!();
+        Depcrate_baseimpl_73!();
+        Depcrate_baseimpl_74!();
+        Depcrate_baseFromMutVoid!();
+        Depcrate_baseimpl_76!();
+        Depcrate_baseimpl_77!();
+        Depcrate_baseimpl_78!();
+        Depcrate_baseFromVoid!();
+        Depcrate_baseimpl_80!();
+        Depcrate_baseimpl_81!();
+        Depcrate_baseimpl_82!();
+        Depcrate_baseToVoid!();
+        Depcrate_baseimpl_84!();
+        Depcrate_baseimpl_85!();
+        Depcrate_baseimpl_86!();
+        Depcrate_baseimpl_87!();
+        Depcrate_basetests!();
+    };
+}

@@ -1,0 +1,9 @@
+// Generated macro for call_main (function)
+macro_rules! Depcrate_evalcall_main {
+() => {
+// Module: crate::eval
+// Provides: {"call_main"}
+// Dependencies: {}
+fn call_main < 'tcx > (ecx : & mut MiriInterpCx < 'tcx > , entry_id : DefId , entry_type : MiriEntryFnType , argc : ImmTy < 'tcx > , argv : ImmTy < 'tcx > ,) -> InterpResult < 'tcx , () > { let tcx = ecx . tcx () ; let entry_instance = ty :: Instance :: mono (tcx , entry_id) ; let ret_place = ecx . allocate (ecx . machine . layouts . isize , MiriMemoryKind :: Machine . into ()) ? ; ecx . machine . main_fn_ret_place = Some (ret_place . clone ()) ; match entry_type { MiriEntryFnType :: Rustc (EntryFnType :: Main { .. }) => { let start_id = tcx . lang_items () . start_fn () . unwrap_or_else (| | { tcx . dcx () . fatal ("could not find start lang item") ; }) ; let main_ret_ty = tcx . fn_sig (entry_id) . no_bound_vars () . unwrap () . output () ; let main_ret_ty = main_ret_ty . no_bound_vars () . unwrap () ; let start_instance = ty :: Instance :: try_resolve (tcx , ecx . typing_env () , start_id , tcx . mk_args (& [ty :: GenericArg :: from (main_ret_ty)]) ,) . unwrap () . unwrap () ; let main_ptr = ecx . fn_ptr (FnVal :: Instance (entry_instance)) ; let sigpipe = rustc_session :: config :: sigpipe :: DEFAULT ; ecx . call_function (start_instance , ExternAbi :: Rust , & [ImmTy :: from_scalar (Scalar :: from_pointer (main_ptr , ecx) , ecx . machine . layouts . const_raw_ptr ,) , argc , argv , ImmTy :: from_uint (sigpipe , ecx . machine . layouts . u8) ,] , Some (& ret_place) , ReturnContinuation :: Stop { cleanup : true } ,) ? ; } MiriEntryFnType :: MiriStart => { ecx . call_function (entry_instance , ExternAbi :: Rust , & [argc , argv] , Some (& ret_place) , ReturnContinuation :: Stop { cleanup : true } ,) ? ; } } interp_ok (()) }
+};
+}

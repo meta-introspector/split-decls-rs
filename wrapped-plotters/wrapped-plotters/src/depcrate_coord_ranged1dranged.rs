@@ -1,0 +1,9 @@
+// Generated macro for Ranged (trait)
+macro_rules! Depcrate_coord_ranged1dRanged {
+() => {
+// Module: crate::coord::ranged1d
+// Provides: {"Ranged"}
+// Dependencies: {}
+# [doc = " The trait that indicates we have a ordered and ranged value"] # [doc = " Which is used to describe any 1D axis."] pub trait Ranged { # [doc = " This marker decides if Plotters default [ValueFormatter](trait.ValueFormatter.html) implementation should be used."] # [doc = " This associated type can be one of the following two types:"] # [doc = " - [DefaultFormatting](struct.DefaultFormatting.html) will allow Plotters to automatically impl"] # [doc = "   the formatter based on `Debug` trait, if `Debug` trait is not impl for the `Self::Value`,"] # [doc = "   [ValueFormatter](trait.ValueFormatter.html) will not impl unless you impl it manually."] # [doc = ""] # [doc = " - [NoDefaultFormatting](struct.NoDefaultFormatting.html) Disable the automatic `Debug`"] # [doc = "   based value formatting. Thus you have to impl the"] # [doc = "   [ValueFormatter](trait.ValueFormatter.html) manually."] # [doc = ""] type FormatOption : DefaultValueFormatOption ; # [doc = " The type of this value in this range specification"] type ValueType ; # [doc = " This function maps the value to i32, which is the drawing coordinate"] fn map (& self , value : & Self :: ValueType , limit : (i32 , i32)) -> i32 ; # [doc = " This function gives the key points that we can draw a grid based on this"] fn key_points < Hint : KeyPointHint > (& self , hint : Hint) -> Vec < Self :: ValueType > ; # [doc = " Get the range of this value"] fn range (& self) -> Range < Self :: ValueType > ; # [doc = " This function provides the on-axis part of its range"] # [allow (clippy :: range_plus_one)] fn axis_pixel_range (& self , limit : (i32 , i32)) -> Range < i32 > { if limit . 0 < limit . 1 { limit . 0 .. limit . 1 } else { limit . 1 .. limit . 0 } } }
+};
+}

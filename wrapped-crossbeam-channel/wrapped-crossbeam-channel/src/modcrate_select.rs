@@ -1,0 +1,44 @@
+// Generated module macro for crate::select
+macro_rules! Modcrate_select {
+() => {
+        Depcrate_selectuse_244!();
+        Depcrate_selectuse_245!();
+        Depcrate_selectuse_246!();
+        Depcrate_selectuse_247!();
+        Depcrate_selectuse_248!();
+        Depcrate_selectuse_249!();
+        Depcrate_selectuse_250!();
+        Depcrate_selectuse_251!();
+        Depcrate_selectuse_252!();
+        Depcrate_selectuse_253!();
+        Depcrate_selectuse_254!();
+        Depcrate_selectuse_255!();
+        Depcrate_selectuse_256!();
+        Depcrate_selectToken!();
+        Depcrate_selectOperation!();
+        Depcrate_selectimpl_259!();
+        Depcrate_selectSelected!();
+        Depcrate_selectimpl_261!();
+        Depcrate_selectimpl_262!();
+        Depcrate_selectSelectHandle!();
+        Depcrate_selectimpl_264!();
+        Depcrate_selectTimeout!();
+        Depcrate_selectrun_select!();
+        Depcrate_selectrun_ready!();
+        Depcrate_selecttry_select!();
+        Depcrate_selectselect!();
+        Depcrate_selectselect_timeout!();
+        Depcrate_selectselect_deadline!();
+        Depcrate_selectSelect!();
+        Depcrate_selectimpl_273!();
+        Depcrate_selectimpl_274!();
+        Depcrate_selectimpl_275!();
+        Depcrate_selectimpl_276!();
+        Depcrate_selectimpl_277!();
+        Depcrate_selectimpl_278!();
+        Depcrate_selectSelectedOperation!();
+        Depcrate_selectimpl_280!();
+        Depcrate_selectimpl_281!();
+        Depcrate_selectimpl_282!();
+    };
+}

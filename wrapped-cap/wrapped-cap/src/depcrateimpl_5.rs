@@ -1,0 +1,9 @@
+// Generated macro for impl_5 (impl)
+macro_rules! Depcrateimpl_5 {
+() => {
+// Module: crate
+// Provides: {"impl_5"}
+// Dependencies: {}
+unsafe impl < H > GlobalAlloc for Cap < H > where H : GlobalAlloc , { unsafe fn alloc (& self , l : Layout) -> * mut u8 { let size = l . size () ; let res = if self . remaining . fetch_sub (size , Ordering :: Acquire) >= size { self . allocator . alloc (l) } else { ptr :: null_mut () } ; if res . is_null () { let _ = self . remaining . fetch_add (size , Ordering :: Release) ; } else { self . update_stats (size) ; } res } unsafe fn dealloc (& self , ptr : * mut u8 , layout : Layout) { let size = layout . size () ; self . allocator . dealloc (ptr , layout) ; let _ = self . remaining . fetch_add (size , Ordering :: Release) ; } unsafe fn alloc_zeroed (& self , l : Layout) -> * mut u8 { let size = l . size () ; let res = if self . remaining . fetch_sub (size , Ordering :: Acquire) >= size { self . allocator . alloc_zeroed (l) } else { ptr :: null_mut () } ; if res . is_null () { let _ = self . remaining . fetch_add (size , Ordering :: Release) ; } else { self . update_stats (size) ; } res } unsafe fn realloc (& self , ptr : * mut u8 , old_l : Layout , new_s : usize) -> * mut u8 { let new_l = Layout :: from_size_align_unchecked (new_s , old_l . align ()) ; let (old_size , new_size) = (old_l . size () , new_l . size ()) ; let res = if new_size > old_size { let res = if self . remaining . fetch_sub (new_size - old_size , Ordering :: Acquire) >= new_size - old_size { self . allocator . realloc (ptr , old_l , new_s) } else { ptr :: null_mut () } ; if res . is_null () { let _ = self . remaining . fetch_add (new_size - old_size , Ordering :: Release) ; } res } else { let res = self . allocator . realloc (ptr , old_l , new_s) ; if ! res . is_null () { let _ = self . remaining . fetch_add (old_size - new_size , Ordering :: Release) ; } res } ; if ! res . is_null () { self . update_stats (new_size) ; } res } }
+};
+}

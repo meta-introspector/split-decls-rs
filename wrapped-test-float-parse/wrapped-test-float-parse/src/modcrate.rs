@@ -1,0 +1,39 @@
+// Generated module macro for crate
+macro_rules! Modcrate {
+() => {
+        Depcratetraits!();
+        Depcrateui!();
+        Depcratevalidate!();
+        Depcrateuse_55!();
+        Depcrateuse_56!();
+        Depcrateuse_57!();
+        Depcrateuse_58!();
+        Depcrateuse_59!();
+        Depcrateuse_60!();
+        Depcrateuse_61!();
+        Depcrateuse_62!();
+        Depcrateuse_63!();
+        Depcrateuse_64!();
+        Depcrateuse_65!();
+        Depcrateuse_66!();
+        Depcrategen_!();
+        DepcrateDEFAULT_MAX_FAILURES!();
+        DepcrateMAX_BITS_FOR_EXHAUUSTIVE!();
+        DepcrateHUGE_TEST_CUTOFF!();
+        DepcrateSEED!();
+        DepcrateConfig!();
+        Depcrateimpl_73!();
+        Depcraterun!();
+        Depcrateregister_tests!();
+        Depcrateregister_float!();
+        DepcrateTestInfo!();
+        Depcrateimpl_78!();
+        DepcrateCheckFailure!();
+        Depcrateimpl_80!();
+        DepcrateCompleted!();
+        DepcrateFinishedAll!();
+        DepcrateEarlyExit!();
+        Depcratelaunch_tests!();
+        Depcratetest_runner!();
+    };
+}

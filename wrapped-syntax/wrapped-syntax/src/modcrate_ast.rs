@@ -1,0 +1,42 @@
+// Generated module macro for crate::ast
+macro_rules! Modcrate_ast {
+() => {
+        Depcrate_astedit!();
+        Depcrate_astedit_in_place!();
+        Depcrate_astexpr_ext!();
+        Depcrate_astgenerated!();
+        Depcrate_astmake!();
+        Depcrate_astnode_ext!();
+        Depcrate_astoperators!();
+        Depcrate_astprec!();
+        Depcrate_astsyntax_factory!();
+        Depcrate_asttoken_ext!();
+        Depcrate_asttraits!();
+        Depcrate_astuse_137!();
+        Depcrate_astuse_138!();
+        Depcrate_astuse_139!();
+        Depcrate_astuse_140!();
+        Depcrate_astAstNode!();
+        Depcrate_astAstToken!();
+        Depcrate_astAstChildren!();
+        Depcrate_astimpl_144!();
+        Depcrate_astimpl_145!();
+        Depcrate_astimpl_146!();
+        Depcrate_astimpl_147!();
+        Depcrate_astRangeItem!();
+        Depcrate_astsupport!();
+        Depcrate_astassert_ast_is_dyn_compatible!();
+        Depcrate_asttest_doc_comment_none!();
+        Depcrate_asttest_outer_doc_comment_of_items!();
+        Depcrate_asttest_inner_doc_comment_of_items!();
+        Depcrate_asttest_doc_comment_of_statics!();
+        Depcrate_asttest_doc_comment_preserves_indents!();
+        Depcrate_asttest_doc_comment_preserves_newlines!();
+        Depcrate_asttest_doc_comment_single_line_block_strips_suffix!();
+        Depcrate_asttest_doc_comment_single_line_block_strips_suffix_whitespace!();
+        Depcrate_asttest_doc_comment_multi_line_block_strips_suffix!();
+        Depcrate_asttest_comments_preserve_trailing_whitespace!();
+        Depcrate_asttest_four_slash_line_comment!();
+        Depcrate_asttest_where_predicates!();
+    };
+}

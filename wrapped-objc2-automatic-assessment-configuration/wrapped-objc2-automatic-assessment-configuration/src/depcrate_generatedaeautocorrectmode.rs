@@ -1,0 +1,9 @@
+// Generated macro for AEAutocorrectMode (struct)
+macro_rules! Depcrate_generatedAEAutocorrectMode {
+() => {
+// Module: crate::generated
+// Provides: {"AEAutocorrectMode"}
+// Dependencies: {}
+# [doc = " The set of autocorrect features that you can enable during an assessment."] # [doc = ""] # [doc = " Use one or more of the autocorrect modes to set the ``AEAssessmentConfiguration/autocorrectMode-swift.property`` property of an ``AEAssessmentConfiguration`` instance. For example, you can enable both spelling and punctuation corrections by combining ``AEAssessmentConfiguration/AutocorrectMode-swift.struct/spelling`` and ``AEAssessmentConfiguration/AutocorrectMode-swift.struct/punctuation``:"] # [doc = ""] # [doc = " ```swift"] # [doc = " let config = AEAssessmentConfiguration()"] # [doc = ""] # [doc = " #if os(iOS) // Available only on iOS and iPadOS."] # [doc = " config.autocorrectMode = [.punctuation, .spelling]"] # [doc = " #endif"] # [doc = ""] # [doc = " let session = AEAssessmentSession(configuration: config)"] # [doc = " ```"] # [doc = ""] # [doc = " ## Topics"] # [doc = ""] # [doc = " ### Creating a mode"] # [doc = ""] # [doc = " - ``AEAssessmentConfiguration/AutocorrectMode-swift.struct/init(rawValue:)``"] # [doc = ""] # [doc = " ### Modes"] # [doc = ""] # [doc = " - ``AEAssessmentConfiguration/AutocorrectMode-swift.struct/punctuation``"] # [doc = " - ``AEAssessmentConfiguration/AutocorrectMode-swift.struct/spelling``"] # [doc = " - ``AEAutocorrectMode/AEAutocorrectModeNone``"] # [doc = ""] # [doc = " See also [Apple's documentation](https://developer.apple.com/documentation/automaticassessmentconfiguration/aeautocorrectmode?language=objc)"] # [repr (transparent)] # [derive (Clone , Copy , Debug , PartialEq , Eq , Hash , PartialOrd , Ord , Default)] pub struct AEAutocorrectMode (pub NSUInteger) ;
+};
+}

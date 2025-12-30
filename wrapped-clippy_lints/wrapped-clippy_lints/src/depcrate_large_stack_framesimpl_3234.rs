@@ -1,0 +1,10 @@
+// Generated macro for impl_3234 (impl)
+macro_rules! Depcrate_large_stack_framesimpl_3234 {
+() => {
+// Module: crate::large_stack_frames
+// Provides: {"impl_3234"}
+// Dependencies: {}
+impl < 'tcx > LateLintPass < 'tcx > for LargeStackFrames { fn check_fn (& mut self , cx : & LateContext < 'tcx > , fn_kind : FnKind < 'tcx > , _ : & 'tcx FnDecl < 'tcx > , _ : & 'tcx Body < 'tcx > , entire_fn_span : Span , local_def_id : LocalDefId ,) { let def_id = local_def_id . to_def_id () ; if fn_has_unsatisfiable_preds (cx , def_id) { return ; } let mir = cx . tcx . optimized_mir (def_id) ; let typing_env = mir . typing_env (cx . tcx) ; let sizes_of_locals = | | { mir . local_decls . iter () . filter_map (| local | { let layout = cx . tcx . layout_of (typing_env . as_query_input (local . ty)) . ok () ? ; Some ((local , layout . size . bytes ())) }) } ; let frame_size = sizes_of_locals () . fold (Space :: Used (0) , | sum , (_ , size) | sum + size) ; let limit = self . maximum_allowed_size ; if frame_size . exceeds_limit (limit) { let fn_span = match fn_kind { FnKind :: ItemFn (ident , _ , _) | FnKind :: Method (ident , _) => ident . span , FnKind :: Closure => entire_fn_span , } ; span_lint_and_then (cx , LARGE_STACK_FRAMES , fn_span , format ! ("this function may allocate {frame_size} on the stack") , | diag | { if let Some ((local , size)) = sizes_of_locals () . max_by_key (| & (_ , size) | size) { let local_span : Span = local . source_info . span ; let size = Space :: Used (size) ; let ty = local . ty ; if let Some (name) = local_span . get_source_text (cx) && is_ident (& name) { diag . span_label (local_span , format ! ("`{name}` is the largest part, at {size} for type `{ty}`") ,) ; } else { diag . span_label (local_span , format ! ("this is the largest part, at {size} for type `{ty}`") ,) ; } } diag . note (format ! ("{frame_size} is larger than Clippy's configured `stack-size-threshold` of {limit}")) ; diag . note_once ("allocating large amounts of stack space can overflow the stack \
+                        and cause the program to abort" ,) ; } ,) ; } } }
+};
+}

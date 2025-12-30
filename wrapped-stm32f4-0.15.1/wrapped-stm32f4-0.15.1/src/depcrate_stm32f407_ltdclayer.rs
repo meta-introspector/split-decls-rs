@@ -1,0 +1,9 @@
+// Generated macro for LAYER (struct)
+macro_rules! Depcrate_stm32f407_ltdcLAYER {
+() => {
+// Module: crate::stm32f407::ltdc
+// Provides: {"LAYER"}
+// Dependencies: {}
+# [doc = r"Register block"] # [repr (C)] pub struct LAYER { # [doc = "0x00 - Layerx Control Register"] pub cr : crate :: Reg < self :: layer :: cr :: CR_SPEC > , # [doc = "0x04 - Layerx Window Horizontal Position Configuration Register"] pub whpcr : crate :: Reg < self :: layer :: whpcr :: WHPCR_SPEC > , # [doc = "0x08 - Layerx Window Vertical Position Configuration Register"] pub wvpcr : crate :: Reg < self :: layer :: wvpcr :: WVPCR_SPEC > , # [doc = "0x0c - Layerx Color Keying Configuration Register"] pub ckcr : crate :: Reg < self :: layer :: ckcr :: CKCR_SPEC > , # [doc = "0x10 - Layerx Pixel Format Configuration Register"] pub pfcr : crate :: Reg < self :: layer :: pfcr :: PFCR_SPEC > , # [doc = "0x14 - Layerx Constant Alpha Configuration Register"] pub cacr : crate :: Reg < self :: layer :: cacr :: CACR_SPEC > , # [doc = "0x18 - Layerx Default Color Configuration Register"] pub dccr : crate :: Reg < self :: layer :: dccr :: DCCR_SPEC > , # [doc = "0x1c - Layerx Blending Factors Configuration Register"] pub bfcr : crate :: Reg < self :: layer :: bfcr :: BFCR_SPEC > , _reserved8 : [u8 ; 0x08] , # [doc = "0x28 - Layerx Color Frame Buffer Address Register"] pub cfbar : crate :: Reg < self :: layer :: cfbar :: CFBAR_SPEC > , # [doc = "0x2c - Layerx Color Frame Buffer Length Register"] pub cfblr : crate :: Reg < self :: layer :: cfblr :: CFBLR_SPEC > , # [doc = "0x30 - Layerx ColorFrame Buffer Line Number Register"] pub cfblnr : crate :: Reg < self :: layer :: cfblnr :: CFBLNR_SPEC > , _reserved11 : [u8 ; 0x0c] , # [doc = "0x40 - Layerx CLUT Write Register"] pub clutwr : crate :: Reg < self :: layer :: clutwr :: CLUTWR_SPEC > , }
+};
+}

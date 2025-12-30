@@ -1,0 +1,9 @@
+// Generated macro for macro_26355 (macro)
+macro_rules! Depcrate_um_d3d12macro_26355 {
+() => {
+// Module: crate::um::d3d12
+// Provides: {"macro_26355"}
+// Dependencies: {}
+ENUM ! { enum D3D12_RESIDENCY_PRIORITY { D3D12_RESIDENCY_PRIORITY_MINIMUM = 0x28000000 , D3D12_RESIDENCY_PRIORITY_LOW = 0x50000000 , D3D12_RESIDENCY_PRIORITY_NORMAL = 0x78000000 , D3D12_RESIDENCY_PRIORITY_HIGH = 0xa0010000 , D3D12_RESIDENCY_PRIORITY_MAXIMUM = 0xc8000000 , } }
+};
+}

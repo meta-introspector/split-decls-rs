@@ -1,0 +1,9 @@
+// Generated macro for other_6173 (other)
+macro_rules! Depcrate_features_gen_RtcIdentityProviderDetailsother_6173 {
+() => {
+// Module: crate::features::gen_RtcIdentityProviderDetails
+// Provides: {"other_6173"}
+// Dependencies: {}
+# [wasm_bindgen] extern "C" { # [wasm_bindgen (extends = :: js_sys :: Object , js_name = RTCIdentityProviderDetails)] # [derive (Debug , Clone , PartialEq , Eq)] # [doc = "The `RtcIdentityProviderDetails` dictionary."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `RtcIdentityProviderDetails`*"] pub type RtcIdentityProviderDetails ; # [doc = "Get the `domain` field of this object."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `RtcIdentityProviderDetails`*"] # [wasm_bindgen (method , getter = "domain")] pub fn get_domain (this : & RtcIdentityProviderDetails) -> :: alloc :: string :: String ; # [doc = "Change the `domain` field of this object."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `RtcIdentityProviderDetails`*"] # [wasm_bindgen (method , setter = "domain")] pub fn set_domain (this : & RtcIdentityProviderDetails , val : & str) ; # [doc = "Get the `protocol` field of this object."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `RtcIdentityProviderDetails`*"] # [wasm_bindgen (method , getter = "protocol")] pub fn get_protocol (this : & RtcIdentityProviderDetails) -> Option < :: alloc :: string :: String > ; # [doc = "Change the `protocol` field of this object."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `RtcIdentityProviderDetails`*"] # [wasm_bindgen (method , setter = "protocol")] pub fn set_protocol (this : & RtcIdentityProviderDetails , val : & str) ; }
+};
+}

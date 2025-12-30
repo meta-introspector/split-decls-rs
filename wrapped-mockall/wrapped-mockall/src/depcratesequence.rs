@@ -1,0 +1,9 @@
+// Generated macro for Sequence (struct)
+macro_rules! DepcrateSequence {
+() => {
+// Module: crate
+// Provides: {"Sequence"}
+// Dependencies: {}
+# [doc = " Used to enforce that mock calls must happen in the sequence specified."] # [doc = ""] # [doc = " Each expectation must expect to be called a fixed number of times.  Once"] # [doc = " satisfied, the next expectation in the sequence will expect to be called."] # [doc = ""] # [doc = " # Examples"] # [doc = " ```"] # [doc = " # use mockall::*;"] # [doc = " #[automock]"] # [doc = " trait Foo {"] # [doc = "     fn foo(&self);"] # [doc = "     fn bar(&self) -> u32;"] # [doc = " }"] # [doc = " let mut seq = Sequence::new();"] # [doc = ""] # [doc = " let mut mock0 = MockFoo::new();"] # [doc = " let mut mock1 = MockFoo::new();"] # [doc = ""] # [doc = " mock0.expect_foo()"] # [doc = "     .times(1)"] # [doc = "     .returning(|| ())"] # [doc = "     .in_sequence(&mut seq);"] # [doc = ""] # [doc = " mock1.expect_bar()"] # [doc = "     .times(1)"] # [doc = "     .returning(|| 42)"] # [doc = "     .in_sequence(&mut seq);"] # [doc = ""] # [doc = " mock0.foo();"] # [doc = " mock1.bar();"] # [doc = " ```"] # [doc = ""] # [doc = " It is an error to add an expectation to a `Sequence` if its call count is"] # [doc = " unspecified."] # [doc = " ```should_panic(expected = \"with an exact call count\")"] # [doc = " # use mockall::*;"] # [doc = " #[automock]"] # [doc = " trait Foo {"] # [doc = "     fn foo(&self);"] # [doc = " }"] # [doc = " let mut seq = Sequence::new();"] # [doc = ""] # [doc = " let mut mock = MockFoo::new();"] # [doc = " mock.expect_foo()"] # [doc = "     .returning(|| ())"] # [doc = "     .in_sequence(&mut seq);  // panics!"] # [doc = " ```"] # [derive (Default)] pub struct Sequence { inner : Arc < SeqInner > , # [doc = " Counter to use for the next SeqHandle associated with this Sequence"] next_seq : usize , }
+};
+}

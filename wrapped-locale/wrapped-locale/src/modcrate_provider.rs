@@ -1,0 +1,51 @@
+// Generated module macro for crate::provider
+macro_rules! Modcrate_provider {
+() => {
+        Depcrate_providerBaked!();
+        Depcrate_provider_!();
+        Depcrate_providermacro_85!();
+        Depcrate_providermacro_86!();
+        Depcrate_providermacro_87!();
+        Depcrate_providermacro_88!();
+        Depcrate_providermacro_89!();
+        Depcrate_providermacro_90!();
+        Depcrate_providermacro_91!();
+        Depcrate_providermacro_92!();
+        Depcrate_providermacro_93!();
+        Depcrate_providermacro_94!();
+        Depcrate_providermacro_95!();
+        Depcrate_providerMARKERS!();
+        Depcrate_provideruse_97!();
+        Depcrate_provideruse_98!();
+        Depcrate_provideruse_99!();
+        Depcrate_provideruse_100!();
+        Depcrate_provideruse_101!();
+        Depcrate_provideruse_102!();
+        Depcrate_provideruse_103!();
+        Depcrate_providerUnvalidatedLanguage!();
+        Depcrate_providerUnvalidatedScript!();
+        Depcrate_providerUnvalidatedRegion!();
+        Depcrate_providerUnvalidatedVariant!();
+        Depcrate_providerUnvalidatedSubdivision!();
+        Depcrate_providerSemivalidatedSubdivision!();
+        Depcrate_providerUnvalidatedLanguageIdentifier!();
+        Depcrate_providerUnvalidatedLanguageIdentifierPair!();
+        Depcrate_providerUnvalidatedLanguageVariantsPair!();
+        Depcrate_providerStrStrPair!();
+        Depcrate_providerLanguageStrStrPair!();
+        Depcrate_providerAliases!();
+        Depcrate_providermacro_116!();
+        Depcrate_providerLikelySubtagsForLanguage!();
+        Depcrate_providermacro_118!();
+        Depcrate_providerLikelySubtagsForScriptRegion!();
+        Depcrate_providermacro_120!();
+        Depcrate_providerLikelySubtagsExtended!();
+        Depcrate_providermacro_122!();
+        Depcrate_providerParents!();
+        Depcrate_providermacro_124!();
+        Depcrate_providerScriptDirection!();
+        Depcrate_providermacro_126!();
+        Depcrate_providerExemplarCharactersData!();
+        Depcrate_providermacro_128!();
+    };
+}

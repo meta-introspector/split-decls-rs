@@ -1,0 +1,9 @@
+// Generated macro for IOCTL_STORAGE_CHECK_PRIORITY_HINT_SUPPORT (const)
+macro_rules! Depcrate_um_winioctlIOCTL_STORAGE_CHECK_PRIORITY_HINT_SUPPORT {
+() => {
+// Module: crate::um::winioctl
+// Provides: {"IOCTL_STORAGE_CHECK_PRIORITY_HINT_SUPPORT"}
+// Dependencies: {}
+pub const IOCTL_STORAGE_CHECK_PRIORITY_HINT_SUPPORT : DWORD = CTL_CODE ! (IOCTL_STORAGE_BASE , 0x0620 , METHOD_BUFFERED , FILE_ANY_ACCESS) ;
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for impl_784 (impl)
+macro_rules! Depcrate_listsimpl_784 {
+() => {
+// Module: crate::lists
+// Provides: {"impl_784"}
+// Dependencies: {}
+impl < 'a > ListFormatting < 'a > { pub (crate) fn new (shape : Shape , config : & 'a Config) -> Self { ListFormatting { tactic : DefinitiveListTactic :: Vertical , separator : "," , trailing_separator : SeparatorTactic :: Never , separator_place : SeparatorPlace :: Back , shape , ends_with_newline : true , preserve_newline : false , nested : false , align_comments : true , config , } } pub (crate) fn tactic (mut self , tactic : DefinitiveListTactic) -> Self { self . tactic = tactic ; self } pub (crate) fn separator (mut self , separator : & 'a str) -> Self { self . separator = separator ; self } pub (crate) fn trailing_separator (mut self , trailing_separator : SeparatorTactic) -> Self { self . trailing_separator = trailing_separator ; self } pub (crate) fn separator_place (mut self , separator_place : SeparatorPlace) -> Self { self . separator_place = separator_place ; self } pub (crate) fn ends_with_newline (mut self , ends_with_newline : bool) -> Self { self . ends_with_newline = ends_with_newline ; self } pub (crate) fn preserve_newline (mut self , preserve_newline : bool) -> Self { self . preserve_newline = preserve_newline ; self } pub (crate) fn nested (mut self , nested : bool) -> Self { self . nested = nested ; self } pub (crate) fn align_comments (mut self , align_comments : bool) -> Self { self . align_comments = align_comments ; self } pub (crate) fn needs_trailing_separator (& self) -> bool { match self . trailing_separator { SeparatorTactic :: Always => true , SeparatorTactic :: Vertical => self . tactic == DefinitiveListTactic :: Vertical , SeparatorTactic :: Never => { self . tactic == DefinitiveListTactic :: Vertical && self . separator_place . is_front () } } } }
+};
+}

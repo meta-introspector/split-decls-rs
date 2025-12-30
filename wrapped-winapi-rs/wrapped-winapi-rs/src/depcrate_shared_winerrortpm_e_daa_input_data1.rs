@@ -1,0 +1,9 @@
+// Generated macro for TPM_E_DAA_INPUT_DATA1 (const)
+macro_rules! Depcrate_shared_winerrorTPM_E_DAA_INPUT_DATA1 {
+() => {
+// Module: crate::shared::winerror
+// Provides: {"TPM_E_DAA_INPUT_DATA1"}
+// Dependencies: {}
+pub const TPM_E_DAA_INPUT_DATA1 : HRESULT = 0x80280052 ;
+};
+}

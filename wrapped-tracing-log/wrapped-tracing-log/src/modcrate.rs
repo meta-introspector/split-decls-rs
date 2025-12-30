@@ -1,0 +1,55 @@
+// Generated module macro for crate
+macro_rules! Modcrate {
+() => {
+        Depcrateuse_1!();
+        Depcrateuse_2!();
+        Depcrateuse_3!();
+        Depcratelog_tracer!();
+        Depcrateuse_17!();
+        Depcrateuse_18!();
+        Depcrateinterest_cache!();
+        Depcrateuse_46!();
+        Depcrateformat_trace!();
+        Depcratedispatch_record!();
+        DepcrateAsLog!();
+        DepcrateAsTrace!();
+        Depcrateimpl_51!();
+        Depcrateimpl_52!();
+        Depcrateimpl_53!();
+        Depcrateimpl_54!();
+        DepcrateFields!();
+        DepcrateFIELD_NAMES!();
+        Depcrateimpl_57!();
+        Depcratelog_cs!();
+        Depcratemacro_59!();
+        Depcratemacro_60!();
+        Depcratemacro_61!();
+        Depcratemacro_62!();
+        Depcratemacro_63!();
+        DepcrateTRACE_FIELDS!();
+        DepcrateDEBUG_FIELDS!();
+        DepcrateINFO_FIELDS!();
+        DepcrateWARN_FIELDS!();
+        DepcrateERROR_FIELDS!();
+        Depcratelevel_to_cs!();
+        Depcrateloglevel_to_cs!();
+        Depcrateimpl_71!();
+        Depcrateimpl_72!();
+        Depcrateimpl_73!();
+        Depcrateimpl_74!();
+        Depcrateimpl_75!();
+        Depcrateimpl_76!();
+        Depcrateimpl_77!();
+        Depcrateimpl_78!();
+        Depcrateimpl_79!();
+        Depcrateimpl_80!();
+        DepcrateNormalizeEvent!();
+        Depcrateimpl_82!();
+        Depcrateimpl_83!();
+        DepcrateLogVisitor!();
+        Depcrateimpl_85!();
+        Depcrateimpl_86!();
+        Depcratesealed!();
+        Depcratetest!();
+    };
+}

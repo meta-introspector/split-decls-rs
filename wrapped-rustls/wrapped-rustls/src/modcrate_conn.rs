@@ -1,0 +1,50 @@
+// Generated module macro for crate::conn
+macro_rules! Modcrate_conn {
+() => {
+        Depcrate_connuse_664!();
+        Depcrate_connuse_665!();
+        Depcrate_connuse_666!();
+        Depcrate_connuse_667!();
+        Depcrate_connuse_668!();
+        Depcrate_connuse_669!();
+        Depcrate_connuse_670!();
+        Depcrate_connuse_671!();
+        Depcrate_connuse_672!();
+        Depcrate_connuse_673!();
+        Depcrate_connuse_674!();
+        Depcrate_connuse_675!();
+        Depcrate_connuse_676!();
+        Depcrate_connuse_677!();
+        Depcrate_connuse_678!();
+        Depcrate_connuse_679!();
+        Depcrate_connuse_680!();
+        Depcrate_connuse_681!();
+        Depcrate_connkernel!();
+        Depcrate_connunbuffered!();
+        Depcrate_connconnection!();
+        Depcrate_connuse_742!();
+        Depcrate_connKeyingMaterialExporter!();
+        Depcrate_connimpl_744!();
+        Depcrate_connimpl_745!();
+        Depcrate_connExporter!();
+        Depcrate_connConnectionRandoms!();
+        Depcrate_connimpl_748!();
+        Depcrate_connConnectionCommon!();
+        Depcrate_connimpl_750!();
+        Depcrate_connimpl_751!();
+        Depcrate_connimpl_752!();
+        Depcrate_connimpl_753!();
+        Depcrate_connimpl_754!();
+        Depcrate_connimpl_755!();
+        Depcrate_connUnbufferedConnectionCommon!();
+        Depcrate_connimpl_757!();
+        Depcrate_connimpl_758!();
+        Depcrate_connimpl_759!();
+        Depcrate_connConnectionCore!();
+        Depcrate_connimpl_761!();
+        Depcrate_connSideData!();
+        Depcrate_connInboundUnborrowedMessage!();
+        Depcrate_connimpl_764!();
+        Depcrate_connALLOWED_CONSECUTIVE_EMPTY_FRAGMENTS_MAX!();
+    };
+}

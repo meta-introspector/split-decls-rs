@@ -1,0 +1,9 @@
+// Generated macro for WriteExt (trait)
+macro_rules! Depcrate_fmtWriteExt {
+() => {
+// Module: crate::fmt
+// Provides: {"WriteExt"}
+// Dependencies: {}
+# [doc = " An extension trait to `Write` that provides crate internal routines."] # [doc = ""] # [doc = " These routines aren't exposed because they make use of crate internal"] # [doc = " types. Those types could perhaps be exposed if there was strong demand,"] # [doc = " but I'm skeptical."] trait WriteExt : Write { # [doc = " Write the given number as a signed decimal using ASCII digits to this"] # [doc = " buffer. The given formatter controls how the decimal is formatted."] # [inline] fn write_int (& mut self , formatter : & DecimalFormatter , n : impl Into < i64 > ,) -> Result < () , Error > { self . write_decimal (& formatter . format_signed (n . into ())) } # [doc = " Write the given number as an unsigned decimal using ASCII digits to"] # [doc = " this buffer. The given formatter controls how the decimal is formatted."] # [inline] fn write_uint (& mut self , formatter : & DecimalFormatter , n : impl Into < u64 > ,) -> Result < () , Error > { self . write_decimal (& formatter . format_unsigned (n . into ())) } # [doc = " Write the given fractional number using ASCII digits to this buffer."] # [doc = " The given formatter controls how the fractional number is formatted."] # [inline] fn write_fraction (& mut self , formatter : & FractionalFormatter , n : impl Into < u32 > ,) -> Result < () , Error > { self . write_fractional (& Fractional :: new (formatter , n . into ())) } # [doc = " Write the given decimal number to this buffer."] # [inline] fn write_decimal (& mut self , decimal : & Decimal) -> Result < () , Error > { self . write_str (decimal . as_str ()) } # [doc = " Write the given fractional number to this buffer."] # [inline] fn write_fractional (& mut self , fractional : & Fractional ,) -> Result < () , Error > { self . write_str (fractional . as_str ()) } }
+};
+}

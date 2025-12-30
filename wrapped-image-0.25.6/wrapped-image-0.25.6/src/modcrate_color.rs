@@ -1,0 +1,57 @@
+// Generated module macro for crate::color
+macro_rules! Modcrate_color {
+() => {
+        Depcrate_coloruse_267!();
+        Depcrate_coloruse_268!();
+        Depcrate_coloruse_269!();
+        Depcrate_colorColorType!();
+        Depcrate_colorimpl_271!();
+        Depcrate_colorExtendedColorType!();
+        Depcrate_colorimpl_273!();
+        Depcrate_colorimpl_274!();
+        Depcrate_colordefine_colors!();
+        Depcrate_colormacro_276!();
+        Depcrate_colorFromPrimitive!();
+        Depcrate_colorimpl_278!();
+        Depcrate_colornormalize_float!();
+        Depcrate_colorimpl_280!();
+        Depcrate_colorimpl_281!();
+        Depcrate_colorimpl_282!();
+        Depcrate_colorimpl_283!();
+        Depcrate_colorimpl_284!();
+        Depcrate_colorimpl_285!();
+        Depcrate_colorFromColor!();
+        Depcrate_colorIntoColor!();
+        Depcrate_colorimpl_288!();
+        Depcrate_colorSRGB_LUMA!();
+        Depcrate_colorSRGB_LUMA_DIV!();
+        Depcrate_colorrgb_to_luma!();
+        Depcrate_colorimpl_292!();
+        Depcrate_colorimpl_293!();
+        Depcrate_colorimpl_294!();
+        Depcrate_colorimpl_295!();
+        Depcrate_colorimpl_296!();
+        Depcrate_colorimpl_297!();
+        Depcrate_colorimpl_298!();
+        Depcrate_colorimpl_299!();
+        Depcrate_colorimpl_300!();
+        Depcrate_colorimpl_301!();
+        Depcrate_colorimpl_302!();
+        Depcrate_colorimpl_303!();
+        Depcrate_colorimpl_304!();
+        Depcrate_colorimpl_305!();
+        Depcrate_colorimpl_306!();
+        Depcrate_colorimpl_307!();
+        Depcrate_colorBlend!();
+        Depcrate_colorimpl_309!();
+        Depcrate_colorimpl_310!();
+        Depcrate_colorimpl_311!();
+        Depcrate_colorimpl_312!();
+        Depcrate_colorInvert!();
+        Depcrate_colorimpl_314!();
+        Depcrate_colorimpl_315!();
+        Depcrate_colorimpl_316!();
+        Depcrate_colorimpl_317!();
+        Depcrate_colortests!();
+    };
+}

@@ -1,0 +1,9 @@
+// Generated macro for DOMAIN_WRITE (const)
+macro_rules! Depcrate_ntsamDOMAIN_WRITE {
+() => {
+// Module: crate::ntsam
+// Provides: {"DOMAIN_WRITE"}
+// Dependencies: {}
+pub const DOMAIN_WRITE : u32 = STANDARD_RIGHTS_WRITE | DOMAIN_WRITE_OTHER_PARAMETERS | DOMAIN_WRITE_PASSWORD_PARAMS | DOMAIN_CREATE_USER | DOMAIN_CREATE_GROUP | DOMAIN_CREATE_ALIAS | DOMAIN_ADMINISTER_SERVER ;
+};
+}

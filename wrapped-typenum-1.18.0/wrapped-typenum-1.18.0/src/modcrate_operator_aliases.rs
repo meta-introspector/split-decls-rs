@@ -1,0 +1,42 @@
+// Generated module macro for crate::operator_aliases
+macro_rules! Modcrate_operator_aliases {
+() => {
+        Depcrate_operator_aliasesuse_180!();
+        Depcrate_operator_aliasesuse_181!();
+        Depcrate_operator_aliasesAnd!();
+        Depcrate_operator_aliasesOr!();
+        Depcrate_operator_aliasesXor!();
+        Depcrate_operator_aliasesShleft!();
+        Depcrate_operator_aliasesShright!();
+        Depcrate_operator_aliasesSum!();
+        Depcrate_operator_aliasesDiff!();
+        Depcrate_operator_aliasesProd!();
+        Depcrate_operator_aliasesQuot!();
+        Depcrate_operator_aliasesMod!();
+        Depcrate_operator_aliasesPartialQuot!();
+        Depcrate_operator_aliasesNegate!();
+        Depcrate_operator_aliasesAbsVal!();
+        Depcrate_operator_aliasesExp!();
+        Depcrate_operator_aliasesGcf!();
+        Depcrate_operator_aliasesAdd1!();
+        Depcrate_operator_aliasesSub1!();
+        Depcrate_operator_aliasesDouble!();
+        Depcrate_operator_aliasesSquare!();
+        Depcrate_operator_aliasesCube!();
+        Depcrate_operator_aliasesSqrt!();
+        Depcrate_operator_aliasesCompare!();
+        Depcrate_operator_aliasesLength!();
+        Depcrate_operator_aliasesFoldSum!();
+        Depcrate_operator_aliasesFoldProd!();
+        Depcrate_operator_aliasesMinimum!();
+        Depcrate_operator_aliasesMaximum!();
+        Depcrate_operator_aliasesuse_209!();
+        Depcrate_operator_aliasesLe!();
+        Depcrate_operator_aliasesEq!();
+        Depcrate_operator_aliasesGr!();
+        Depcrate_operator_aliasesGrEq!();
+        Depcrate_operator_aliasesLeEq!();
+        Depcrate_operator_aliasesNotEq!();
+        Depcrate_operator_aliasesLog2!();
+    };
+}

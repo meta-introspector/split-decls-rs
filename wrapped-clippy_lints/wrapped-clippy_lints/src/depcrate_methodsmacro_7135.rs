@@ -1,0 +1,9 @@
+// Generated macro for macro_7135 (macro)
+macro_rules! Depcrate_methodsmacro_7135 {
+() => {
+// Module: crate::methods
+// Provides: {"macro_7135"}
+// Dependencies: {}
+declare_clippy_lint ! { # [doc = " ### What it does"] # [doc = " Checks for `new` not returning a type that contains `Self`."] # [doc = ""] # [doc = " ### Why is this bad?"] # [doc = " As a convention, `new` methods are used to make a new"] # [doc = " instance of a type."] # [doc = ""] # [doc = " ### Example"] # [doc = " In an impl block:"] # [doc = " ```no_run"] # [doc = " # struct Foo;"] # [doc = " # struct NotAFoo;"] # [doc = " impl Foo {"] # [doc = "     fn new() -> NotAFoo {"] # [doc = " # NotAFoo"] # [doc = "     }"] # [doc = " }"] # [doc = " ```"] # [doc = ""] # [doc = " ```no_run"] # [doc = " # struct Foo;"] # [doc = " struct Bar(Foo);"] # [doc = " impl Foo {"] # [doc = "     // Bad. The type name must contain `Self`"] # [doc = "     fn new() -> Bar {"] # [doc = " # Bar(Foo)"] # [doc = "     }"] # [doc = " }"] # [doc = " ```"] # [doc = ""] # [doc = " ```no_run"] # [doc = " # struct Foo;"] # [doc = " # struct FooError;"] # [doc = " impl Foo {"] # [doc = "     // Good. Return type contains `Self`"] # [doc = "     fn new() -> Result<Foo, FooError> {"] # [doc = " # Ok(Foo)"] # [doc = "     }"] # [doc = " }"] # [doc = " ```"] # [doc = ""] # [doc = " Or in a trait definition:"] # [doc = " ```no_run"] # [doc = " pub trait Trait {"] # [doc = "     // Bad. The type name must contain `Self`"] # [doc = "     fn new();"] # [doc = " }"] # [doc = " ```"] # [doc = ""] # [doc = " ```no_run"] # [doc = " pub trait Trait {"] # [doc = "     // Good. Return type contains `Self`"] # [doc = "     fn new() -> Self;"] # [doc = " }"] # [doc = " ```"] # [clippy :: version = "pre 1.29.0"] pub NEW_RET_NO_SELF , style , "not returning type containing `Self` in a `new` method" }
+};
+}

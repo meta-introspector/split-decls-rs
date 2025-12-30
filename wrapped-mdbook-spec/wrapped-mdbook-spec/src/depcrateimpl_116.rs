@@ -1,0 +1,9 @@
+// Generated macro for impl_116 (impl)
+macro_rules! Depcrateimpl_116 {
+() => {
+// Module: crate
+// Provides: {"impl_116"}
+// Dependencies: {}
+impl Preprocessor for Spec { fn name (& self) -> & str { "spec" } fn run (& self , _ctx : & PreprocessorContext , mut book : Book) -> Result < Book , Error > { let mut diag = Diagnostics :: new () ; if diag . deny_warnings && self . rust_root . is_none () { bail ! ("error: SPEC_RUST_ROOT environment variable must be set") ; } let grammar = grammar :: load_grammar (& book , & mut diag) ; let rules = self . collect_rules (& book , & mut diag) ; let tests = self . collect_tests (& rules) ; let summary_table = test_links :: make_summary_table (& book , & tests , & rules) ; let git_ref = match git_ref (& self . rust_root) { Ok (s) => s , Err (e) => { warn_or_err ! (& mut diag , "{e:?}") ; "master" . into () } } ; book . for_each_mut (| item | { let BookItem :: Chapter (ch) = item else { return ; } ; if ch . is_draft_chapter () { return ; } ch . content = admonitions :: admonitions (& ch , & mut diag) ; ch . content = self . rule_link_references (& ch , & rules) ; ch . content = self . auto_link_references (& ch , & rules) ; ch . content = self . render_rule_definitions (& ch . content , & tests , & git_ref) ; if ch . name == "Test summary" { ch . content = ch . content . replace ("{{summary-table}}" , & summary_table) ; } if grammar :: is_summary (ch) { ch . content = grammar :: insert_summary (& grammar , & ch , & mut diag) ; } ch . content = grammar :: insert_grammar (& grammar , & ch , & mut diag) ; }) ; std_links :: std_links (& mut book , & mut diag) ; if diag . count > 0 { if diag . deny_warnings { eprintln ! ("mdbook-spec exiting due to {} errors" , diag . count) ; std :: process :: exit (1) ; } eprintln ! ("mdbook-spec generated {} warnings" , diag . count) ; } Ok (book) } }
+};
+}

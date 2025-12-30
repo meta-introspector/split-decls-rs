@@ -1,0 +1,9 @@
+// Generated macro for Ordering (enum)
+macro_rules! Depcrate_store_impls_dynamic_iterOrdering {
+() => {
+// Module: crate::store_impls::dynamic::iter
+// Provides: {"Ordering"}
+// Dependencies: {}
+# [doc = " Define the order in which objects are returned."] # [derive (Default , Debug , Copy , Clone)] pub enum Ordering { # [doc = " Traverse packs first as sorted by their index files in lexicographical order (sorted by object id), then traverse loose objects"] # [doc = " as sorted by their names as well."] # [doc = ""] # [doc = " This mode uses no memory as it's the natural ordering of objects, and is best to obtain all object ids as quickly as possible,"] # [doc = " while noting that these may contain duplicates. However, it's very costly to obtain object information or decode them with this"] # [doc = " scheme as cache-hits are unlikely with it and memory maps are less efficient when loading them in random order."] # [default] PackLexicographicalThenLooseLexicographical , # [doc = " Traverse packs first yielding object ids sorted by their position in the pack, with those at the beginning of the pack file coming first."] # [doc = " Then follow loose objects sorted by their names."] # [doc = ""] # [doc = " This mode allocates and as to pre-sort objects by their offsets, delaying the start of the iteration once per pack while keeping"] # [doc = " memory allocated once per pack. This price is usually worth paying once querying object information is planned as pack caches"] # [doc = " are more efficiently used that way."] PackAscendingOffsetThenLooseLexicographical , }
+};
+}

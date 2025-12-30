@@ -1,0 +1,9 @@
+// Generated macro for impl_81 (impl)
+macro_rules! Depcrate_transitionsimpl_81 {
+() => {
+// Module: crate::transitions
+// Provides: {"impl_81"}
+// Dependencies: {}
+impl TableTransitions for Table { fn timespans (& self , zone_name : & str) -> Option < FixedTimespanSet > { let mut builder = FixedTimespanSetBuilder :: default () ; let zoneset = self . get_zoneset (zone_name) ? ; for (i , zone_info) in zoneset . iter () . enumerate () { let mut dst_offset = 0 ; let use_until = i != zoneset . len () - 1 ; let utc_offset = zone_info . offset ; let mut insert_start_transition = i > 0 ; let mut start_zone_id = None ; let mut start_utc_offset = zone_info . offset ; let mut start_dst_offset = 0 ; match zone_info . saving { Saving :: NoSaving => { builder . add_fixed_saving (zone_info , 0 , & mut dst_offset , utc_offset , & mut insert_start_transition , & mut start_zone_id ,) ; } Saving :: OneOff (amount) => { builder . add_fixed_saving (zone_info , amount , & mut dst_offset , utc_offset , & mut insert_start_transition , & mut start_zone_id ,) ; } Saving :: Multiple (ref rules) => { let rules = & self . rulesets [rules] ; builder . add_multiple_saving (zone_info , rules , & mut dst_offset , use_until , utc_offset , & mut insert_start_transition , & mut start_zone_id , & mut start_utc_offset , & mut start_dst_offset ,) ; } } if insert_start_transition && start_zone_id . is_some () { let t = (builder . start_time . expect ("Start time") , FixedTimespan { utc_offset : start_utc_offset , dst_offset : start_dst_offset , name : start_zone_id . clone () . expect ("Start zone ID") , } ,) ; builder . rest . push (t) ; } if use_until { builder . start_time = Some (zone_info . end_time . expect ("End time") . to_timestamp (utc_offset , dst_offset) ,) ; } } Some (builder . build ()) } }
+};
+}

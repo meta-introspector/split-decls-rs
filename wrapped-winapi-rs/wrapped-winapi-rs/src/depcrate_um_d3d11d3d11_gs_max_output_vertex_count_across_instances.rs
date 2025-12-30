@@ -1,0 +1,9 @@
+// Generated macro for D3D11_GS_MAX_OUTPUT_VERTEX_COUNT_ACROSS_INSTANCES (const)
+macro_rules! Depcrate_um_d3d11D3D11_GS_MAX_OUTPUT_VERTEX_COUNT_ACROSS_INSTANCES {
+() => {
+// Module: crate::um::d3d11
+// Provides: {"D3D11_GS_MAX_OUTPUT_VERTEX_COUNT_ACROSS_INSTANCES"}
+// Dependencies: {}
+pub const D3D11_GS_MAX_OUTPUT_VERTEX_COUNT_ACROSS_INSTANCES : DWORD = 1024 ;
+};
+}

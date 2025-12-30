@@ -1,0 +1,9 @@
+// Generated macro for PCRYPT_VERIFY_CERT_SIGN_STRONG_PROPERTIES_INFO (type)
+macro_rules! Depcrate_um_wincryptPCRYPT_VERIFY_CERT_SIGN_STRONG_PROPERTIES_INFO {
+() => {
+// Module: crate::um::wincrypt
+// Provides: {"PCRYPT_VERIFY_CERT_SIGN_STRONG_PROPERTIES_INFO"}
+// Dependencies: {}
+pub type PCRYPT_VERIFY_CERT_SIGN_STRONG_PROPERTIES_INFO = * mut CRYPT_VERIFY_CERT_SIGN_STRONG_PROPERTIES_INFO ;
+};
+}

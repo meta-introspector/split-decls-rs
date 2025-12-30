@@ -1,0 +1,9 @@
+// Generated macro for LSA_LOOKUP_DISALLOW_CONNECTED_ACCOUNT_INTERNET_SID (const)
+macro_rules! Depcrate_um_ntlsaLSA_LOOKUP_DISALLOW_CONNECTED_ACCOUNT_INTERNET_SID {
+() => {
+// Module: crate::um::ntlsa
+// Provides: {"LSA_LOOKUP_DISALLOW_CONNECTED_ACCOUNT_INTERNET_SID"}
+// Dependencies: {}
+pub const LSA_LOOKUP_DISALLOW_CONNECTED_ACCOUNT_INTERNET_SID : ULONG = 0x80000000 ;
+};
+}

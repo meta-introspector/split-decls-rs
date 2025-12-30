@@ -1,0 +1,9 @@
+// Generated macro for DOT11_WFD_DEVICE_CAPABILITY_P2P_CLIENT_DISCOVERABILITY (const)
+macro_rules! Depcrate_shared_windot11DOT11_WFD_DEVICE_CAPABILITY_P2P_CLIENT_DISCOVERABILITY {
+() => {
+// Module: crate::shared::windot11
+// Provides: {"DOT11_WFD_DEVICE_CAPABILITY_P2P_CLIENT_DISCOVERABILITY"}
+// Dependencies: {}
+pub const DOT11_WFD_DEVICE_CAPABILITY_P2P_CLIENT_DISCOVERABILITY : u8 = 0x02 ;
+};
+}

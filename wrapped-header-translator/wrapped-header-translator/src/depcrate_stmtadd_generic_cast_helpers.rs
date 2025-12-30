@@ -1,0 +1,9 @@
+// Generated macro for add_generic_cast_helpers (function)
+macro_rules! Depcrate_stmtadd_generic_cast_helpers {
+() => {
+// Module: crate::stmt
+// Provides: {"add_generic_cast_helpers"}
+// Dependencies: {}
+# [doc = " Add `.cast_unchecked()` and `.as_opaque()` methods for converting a"] # [doc = " type's generic parameters."] # [doc = ""] # [doc = " Note: Ideally, this would probably be done with safe_transmute or smth."] fn add_generic_cast_helpers (f : & mut fmt :: Formatter < '_ > , id : & ItemIdentifier , generics : & [GenericWithBound] , cf : bool ,) -> fmt :: Result { let s = if generics . len () == 1 { "" } else { "s" } ; let bound = if cf { "?Sized" } else { "?Sized + Message" } ; let casted_generics : Vec < _ > = generics . iter () . map (| (generic , bound) | (format ! ("New{generic}") , bound . clone ())) . collect () ; writeln ! (f , "impl{} {}{} {{" , GenericParamsHelper (generics , bound) , id . path () , generic_ty (generics) ,) ? ; writeln ! (f , "    /// Unchecked conversion of the generic parameter{s}.") ? ; writeln ! (f , "    ///") ? ; writeln ! (f , "    /// # Safety") ? ; writeln ! (f , "    ///") ? ; writeln ! (f , "    /// The generic{s} must be valid to reinterpret as the given type{s}.") ? ; writeln ! (f , "    #[inline]") ? ; writeln ! (f , "    pub unsafe fn cast_unchecked{}(&self) -> &{}{} {{" , GenericParamsHelper (& casted_generics , bound) , id . path () , generic_ty (& casted_generics) ,) ? ; writeln ! (f , "        unsafe {{ &*((self as *const Self).cast()) }}" ,) ? ; writeln ! (f , "    }}") ? ; if cf { writeln ! (f) ? ; writeln ! (f , "    /// Convert to the opaque/untyped variant.") ? ; writeln ! (f , "    #[inline]") ? ; writeln ! (f , "    pub fn as_opaque(&self) -> &{} {{" , id . path ()) ? ; writeln ! (f , "        unsafe {{ self.cast_unchecked() }}" ,) ? ; writeln ! (f , "    }}") ? ; } writeln ! (f , "}}") ? ; Ok (()) }
+};
+}

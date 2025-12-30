@@ -1,0 +1,9 @@
+// Generated macro for finish_stream_flow_control_reordered (function)
+macro_rules! Depcrate_testsfinish_stream_flow_control_reordered {
+() => {
+// Module: crate::tests
+// Provides: {"finish_stream_flow_control_reordered"}
+// Dependencies: {}
+# [test] fn finish_stream_flow_control_reordered () { let _guard = subscribe () ; let mut pair = Pair :: default () ; let (client_ch , server_ch) = pair . connect () ; let s = pair . client_streams (client_ch) . open (Dir :: Uni) . unwrap () ; const MSG : & [u8] = b"hello" ; pair . client_send (client_ch , s) . write (MSG) . unwrap () ; pair . drive_client () ; pair . server . drive (pair . time , pair . client . addr) ; let mut recv = pair . server_recv (server_ch , s) ; let mut chunks = recv . read (false) . unwrap () ; assert_matches ! (chunks . next (usize :: MAX) , Ok (Some (chunk)) if chunk . offset == 0 && chunk . bytes == MSG) ; let _ = chunks . finalize () ; pair . server . drive (pair . time , pair . client . addr) ; pair . server . delay_outbound () ; pair . client_send (client_ch , s) . finish () . unwrap () ; pair . drive_client () ; pair . server . drive (pair . time , pair . client . addr) ; pair . server . finish_delay () ; pair . drive () ; assert_matches ! (pair . client_conn_mut (client_ch) . poll () , Some (Event :: Stream (StreamEvent :: Finished { id })) if id == s) ; assert_matches ! (pair . client_conn_mut (client_ch) . poll () , None) ; assert_matches ! (pair . server_conn_mut (server_ch) . poll () , Some (Event :: Stream (StreamEvent :: Opened { dir : Dir :: Uni }))) ; assert_matches ! (pair . server_streams (server_ch) . accept (Dir :: Uni) , Some (stream) if stream == s) ; let mut recv = pair . server_recv (server_ch , s) ; let mut chunks = recv . read (false) . unwrap () ; assert_matches ! (chunks . next (usize :: MAX) , Ok (None)) ; let _ = chunks . finalize () ; }
+};
+}

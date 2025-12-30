@@ -1,0 +1,9 @@
+// Generated macro for use_1204 (use)
+macro_rules! Depcrate_windows_processuse_1204 {
+() => {
+// Module: crate::windows::process
+// Provides: {"use_1204"}
+// Dependencies: {}
+use windows :: Win32 :: System :: RemoteDesktop :: ProcessIdToSessionId ;
+};
+}

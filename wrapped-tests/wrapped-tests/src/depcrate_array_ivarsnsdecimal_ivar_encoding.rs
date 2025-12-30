@@ -1,0 +1,9 @@
+// Generated macro for nsdecimal_ivar_encoding (function)
+macro_rules! Depcrate_array_ivarsnsdecimal_ivar_encoding {
+() => {
+// Module: crate::array_ivars
+// Provides: {"nsdecimal_ivar_encoding"}
+// Dependencies: {}
+# [doc = " Defined in the header as:"] # [doc = " ```objc"] # [doc = " @interface NSDecimalNumber : NSNumber {"] # [doc = " @private"] # [doc = "     signed   int _exponent:8;"] # [doc = "     unsigned int _length:4;"] # [doc = "     unsigned int _isNegative:1;"] # [doc = "     unsigned int _isCompact:1;"] # [doc = "     unsigned int _reserved:1;"] # [doc = "     unsigned int _hasExternalRefCount:1;"] # [doc = "     unsigned int _refs:16;"] # [doc = "     unsigned short _mantissa[];"] # [doc = " }"] # [doc = " ```"] # [test] # [cfg_attr (feature = "gnustep-1-7" , ignore = "bitfields have types")] fn nsdecimal_ivar_encoding () { let cls = NSDecimalNumber :: class () ; let expected = | last | { [("_exponent" , EncodingBox :: BitField (8 , None)) , ("_length" , EncodingBox :: BitField (4 , None)) , ("_isNegative" , EncodingBox :: BitField (1 , None)) , ("_isCompact" , EncodingBox :: BitField (1 , None)) , ("_reserved" , EncodingBox :: BitField (1 , None)) , ("_hasExternalRefCount" , EncodingBox :: BitField (1 , None)) , ("_refs" , EncodingBox :: BitField (16 , None)) , ("_mantissa" , last) ,] } ; let expected1 = expected (EncodingBox :: Pointer (Box :: new (EncodingBox :: UShort))) ; let expected2 = expected (EncodingBox :: Array (0 , Box :: new (EncodingBox :: UShort))) ; let actual : Vec < _ > = (* cls . instance_variables ()) . iter () . map (| ivar | { (ivar . name () . to_str () . unwrap () , EncodingBox :: from_str (ivar . type_encoding () . to_str () . unwrap ()) . unwrap () ,) }) . collect () ; assert ! (expected1 == * actual || expected2 == * actual , "{actual:#?}") ; }
+};
+}

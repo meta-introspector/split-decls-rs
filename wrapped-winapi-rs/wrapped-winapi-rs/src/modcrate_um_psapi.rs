@@ -1,0 +1,41 @@
+// Generated module macro for crate::um::psapi
+macro_rules! Modcrate_um_psapi {
+() => {
+        Depcrate_um_psapiuse_36156!();
+        Depcrate_um_psapiuse_36157!();
+        Depcrate_um_psapiuse_36158!();
+        Depcrate_um_psapiLIST_MODULES_DEFAULT!();
+        Depcrate_um_psapiLIST_MODULES_32BIT!();
+        Depcrate_um_psapiLIST_MODULES_64BIT!();
+        Depcrate_um_psapiLIST_MODULES_ALL!();
+        Depcrate_um_psapiother_36163!();
+        Depcrate_um_psapiLPMODULEINFO!();
+        Depcrate_um_psapiPPSAPI_WORKING_SET_INFORMATION!();
+        Depcrate_um_psapiPPSAPI_WORKING_SET_EX_INFORMATION!();
+        Depcrate_um_psapiPPSAPI_WS_WATCH_INFORMATION!();
+        Depcrate_um_psapiPPSAPI_WS_WATCH_INFORMATION_EX!();
+        Depcrate_um_psapiPENUM_PAGE_FILE_INFORMATION!();
+        Depcrate_um_psapiPPERFORMANCE_INFORMATION!();
+        Depcrate_um_psapiPPROCESS_MEMORY_COUNTERS!();
+        Depcrate_um_psapiPPROCESS_MEMORY_COUNTERS_EX!();
+        Depcrate_um_psapimacro_36173!();
+        Depcrate_um_psapimacro_36174!();
+        Depcrate_um_psapimacro_36175!();
+        Depcrate_um_psapimacro_36176!();
+        Depcrate_um_psapimacro_36177!();
+        Depcrate_um_psapimacro_36178!();
+        Depcrate_um_psapimacro_36179!();
+        Depcrate_um_psapimacro_36180!();
+        Depcrate_um_psapimacro_36181!();
+        Depcrate_um_psapiPPSAPI_WORKING_SET_BLOCK!();
+        Depcrate_um_psapimacro_36183!();
+        Depcrate_um_psapimacro_36184!();
+        Depcrate_um_psapimacro_36185!();
+        Depcrate_um_psapiPPSAPI_WORKING_SET_EX_BLOCK!();
+        Depcrate_um_psapimacro_36187!();
+        Depcrate_um_psapimacro_36188!();
+        Depcrate_um_psapimacro_36189!();
+        Depcrate_um_psapimacro_36190!();
+        Depcrate_um_psapiother_36191!();
+    };
+}

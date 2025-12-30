@@ -4,6 +4,6 @@ macro_rules! Depcrate_tableuse_483 {
 // Module: crate::table
 // Provides: {"use_483"}
 // Dependencies: {}
-use rustc_hash :: FxHashMap ;
+use crate :: table :: memo :: { MemoTableTypes , MemoTableWithTypes , MemoTableWithTypesMut } ;
 };
 }

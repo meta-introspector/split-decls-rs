@@ -1,0 +1,42 @@
+// Generated module macro for crate::ifacedesc
+macro_rules! Modcrate_ifacedesc {
+() => {
+        Depcrate_ifacedescuse_40!();
+        Depcrate_ifacedescuse_41!();
+        Depcrate_ifacedescuse_42!();
+        Depcrate_ifacedescuse_43!();
+        Depcrate_ifacedescuse_44!();
+        Depcrate_ifacedescuse_45!();
+        Depcrate_ifacedescuse_46!();
+        Depcrate_ifacedescuse_47!();
+        Depcrate_ifacedescRegistry!();
+        Depcrate_ifacedescimpl_49!();
+        Depcrate_ifacedescCallback!();
+        Depcrate_ifacedescPropCb!();
+        Depcrate_ifacedescCallbackDbg!();
+        Depcrate_ifacedescimpl_53!();
+        Depcrate_ifacedescAnnotations!();
+        Depcrate_ifacedescimpl_55!();
+        Depcrate_ifacedescArgument!();
+        Depcrate_ifacedescArguments!();
+        Depcrate_ifacedescimpl_58!();
+        Depcrate_ifacedescMethodDesc!();
+        Depcrate_ifacedescimpl_60!();
+        Depcrate_ifacedescSignalDesc!();
+        Depcrate_ifacedescSignalBuilder!();
+        Depcrate_ifacedescimpl_63!();
+        Depcrate_ifacedescimpl_64!();
+        Depcrate_ifacedescPropDesc!();
+        Depcrate_ifacedescIfaceDesc!();
+        Depcrate_ifacedescbuild_argvec!();
+        Depcrate_ifacedescPropBuilder!();
+        Depcrate_ifacedescimpl_69!();
+        Depcrate_ifacedescimpl_70!();
+        Depcrate_ifacedescEMITS_CHANGED!();
+        Depcrate_ifacedescDEPRECATED!();
+        Depcrate_ifacedescimpl_73!();
+        Depcrate_ifacedescimpl_74!();
+        Depcrate_ifacedescIfaceBuilder!();
+        Depcrate_ifacedescimpl_76!();
+    };
+}

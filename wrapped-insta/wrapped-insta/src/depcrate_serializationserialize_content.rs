@@ -1,0 +1,9 @@
+// Generated macro for serialize_content (function)
+macro_rules! Depcrate_serializationserialize_content {
+() => {
+// Module: crate::serialization
+// Provides: {"serialize_content"}
+// Dependencies: {}
+pub fn serialize_content (mut content : Content , format : SerializationFormat) -> String { content = Settings :: with (| settings | { if settings . sort_maps () { content . sort_maps () ; } # [cfg (feature = "redactions")] { content = settings . apply_redactions (content) ; } content }) ; match format { SerializationFormat :: Yaml => yaml :: to_string (& content) [4 ..] . to_string () , SerializationFormat :: Json => json :: to_string_pretty (& content) , SerializationFormat :: JsonCompact => json :: to_string_compact (& content) , # [cfg (feature = "csv")] SerializationFormat :: Csv => { let mut buf = Vec :: with_capacity (128) ; { let mut writer = csv :: Writer :: from_writer (& mut buf) ; if let Some (content_slice) = content . as_slice () { for content in content_slice { writer . serialize (content) . unwrap () ; } } else { writer . serialize (& content) . unwrap () ; } writer . flush () . unwrap () ; } if buf . ends_with (b"\n") { buf . truncate (buf . len () - 1) ; } String :: from_utf8 (buf) . unwrap () } # [cfg (feature = "ron")] SerializationFormat :: Ron => { let mut buf = Vec :: new () ; let mut config = ron :: ser :: PrettyConfig :: new () ; config . new_line = "\n" . to_string () ; config . indentor = "  " . to_string () ; config . struct_names = true ; let mut serializer = ron :: ser :: Serializer :: with_options (& mut buf , Some (config) , ron :: options :: Options :: default () ,) . unwrap () ; content . serialize (& mut serializer) . unwrap () ; String :: from_utf8 (buf) . unwrap () } # [cfg (feature = "toml")] SerializationFormat :: Toml => { let mut rv = toml :: to_string_pretty (& content) . unwrap () ; if rv . ends_with ('\n') { rv . truncate (rv . len () - 1) ; } rv } } }
+};
+}

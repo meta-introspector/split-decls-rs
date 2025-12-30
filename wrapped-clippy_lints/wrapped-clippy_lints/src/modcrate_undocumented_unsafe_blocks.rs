@@ -1,0 +1,47 @@
+// Generated module macro for crate::undocumented_unsafe_blocks
+macro_rules! Modcrate_undocumented_unsafe_blocks {
+() => {
+        Depcrate_undocumented_unsafe_blocksuse_10664!();
+        Depcrate_undocumented_unsafe_blocksuse_10665!();
+        Depcrate_undocumented_unsafe_blocksuse_10666!();
+        Depcrate_undocumented_unsafe_blocksuse_10667!();
+        Depcrate_undocumented_unsafe_blocksuse_10668!();
+        Depcrate_undocumented_unsafe_blocksuse_10669!();
+        Depcrate_undocumented_unsafe_blocksuse_10670!();
+        Depcrate_undocumented_unsafe_blocksuse_10671!();
+        Depcrate_undocumented_unsafe_blocksuse_10672!();
+        Depcrate_undocumented_unsafe_blocksuse_10673!();
+        Depcrate_undocumented_unsafe_blocksuse_10674!();
+        Depcrate_undocumented_unsafe_blocksuse_10675!();
+        Depcrate_undocumented_unsafe_blocksuse_10676!();
+        Depcrate_undocumented_unsafe_blocksuse_10677!();
+        Depcrate_undocumented_unsafe_blocksuse_10678!();
+        Depcrate_undocumented_unsafe_blocksmacro_10679!();
+        Depcrate_undocumented_unsafe_blocksmacro_10680!();
+        Depcrate_undocumented_unsafe_blocksUndocumentedUnsafeBlocks!();
+        Depcrate_undocumented_unsafe_blocksimpl_10682!();
+        Depcrate_undocumented_unsafe_blocksmacro_10683!();
+        Depcrate_undocumented_unsafe_blocksimpl_10684!();
+        Depcrate_undocumented_unsafe_blockscheck_has_safety_comment!();
+        Depcrate_undocumented_unsafe_blockscheck_has_no_safety_comment!();
+        Depcrate_undocumented_unsafe_blocksexpr_has_unnecessary_safety_comment!();
+        Depcrate_undocumented_unsafe_blocksis_unsafe_from_proc_macro!();
+        Depcrate_undocumented_unsafe_blocksfind_unsafe_block_parent_in_expr!();
+        Depcrate_undocumented_unsafe_blocksblock_parents_have_safety_comment!();
+        Depcrate_undocumented_unsafe_blocksis_branchy!();
+        Depcrate_undocumented_unsafe_blocksblock_has_safety_comment!();
+        Depcrate_undocumented_unsafe_blocksHasSafetyComment!();
+        Depcrate_undocumented_unsafe_blocksitem_has_safety_comment!();
+        Depcrate_undocumented_unsafe_blocksstmt_has_safety_comment!();
+        Depcrate_undocumented_unsafe_blocksCommentStartBeforeItem!();
+        Depcrate_undocumented_unsafe_blocksimpl_10697!();
+        Depcrate_undocumented_unsafe_blockscomment_start_before_item_in_mod!();
+        Depcrate_undocumented_unsafe_blocksspan_from_macro_expansion_has_safety_comment!();
+        Depcrate_undocumented_unsafe_blocksget_body_search_span!();
+        Depcrate_undocumented_unsafe_blocksspan_has_safety_comment!();
+        Depcrate_undocumented_unsafe_blockstext_has_safety_comment!();
+        Depcrate_undocumented_unsafe_blocksis_attribute!();
+        Depcrate_undocumented_unsafe_blocksspan_and_hid_of_item_alike_node!();
+        Depcrate_undocumented_unsafe_blocksis_const_or_static!();
+    };
+}

@@ -1,0 +1,9 @@
+// Generated macro for USB_ENDPOINT_TYPE_ISOCHRONOUS_SYNCHRONIZATION_MASK (const)
+macro_rules! Depcrate_shared_usbspecUSB_ENDPOINT_TYPE_ISOCHRONOUS_SYNCHRONIZATION_MASK {
+() => {
+// Module: crate::shared::usbspec
+// Provides: {"USB_ENDPOINT_TYPE_ISOCHRONOUS_SYNCHRONIZATION_MASK"}
+// Dependencies: {}
+pub const USB_ENDPOINT_TYPE_ISOCHRONOUS_SYNCHRONIZATION_MASK : UCHAR = 0x0C ;
+};
+}

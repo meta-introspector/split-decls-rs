@@ -1,0 +1,9 @@
+// Generated macro for macro_240 (macro)
+macro_rules! Depcrate_hpack_test_fixturemacro_240 {
+() => {
+// Module: crate::hpack::test::fixture
+// Provides: {"macro_240"}
+// Dependencies: {}
+fixture_mod ! (haskell_http2_linear => { (story_00 , "haskell-http2-linear/story_00.json") ; (story_01 , "haskell-http2-linear/story_01.json") ; (story_02 , "haskell-http2-linear/story_02.json") ; (story_03 , "haskell-http2-linear/story_03.json") ; (story_04 , "haskell-http2-linear/story_04.json") ; (story_05 , "haskell-http2-linear/story_05.json") ; (story_06 , "haskell-http2-linear/story_06.json") ; (story_07 , "haskell-http2-linear/story_07.json") ; (story_08 , "haskell-http2-linear/story_08.json") ; (story_09 , "haskell-http2-linear/story_09.json") ; (story_10 , "haskell-http2-linear/story_10.json") ; (story_11 , "haskell-http2-linear/story_11.json") ; (story_12 , "haskell-http2-linear/story_12.json") ; (story_13 , "haskell-http2-linear/story_13.json") ; (story_14 , "haskell-http2-linear/story_14.json") ; (story_15 , "haskell-http2-linear/story_15.json") ; (story_16 , "haskell-http2-linear/story_16.json") ; (story_17 , "haskell-http2-linear/story_17.json") ; (story_18 , "haskell-http2-linear/story_18.json") ; (story_19 , "haskell-http2-linear/story_19.json") ; (story_20 , "haskell-http2-linear/story_20.json") ; (story_21 , "haskell-http2-linear/story_21.json") ; (story_22 , "haskell-http2-linear/story_22.json") ; (story_23 , "haskell-http2-linear/story_23.json") ; (story_24 , "haskell-http2-linear/story_24.json") ; (story_25 , "haskell-http2-linear/story_25.json") ; (story_26 , "haskell-http2-linear/story_26.json") ; (story_27 , "haskell-http2-linear/story_27.json") ; (story_28 , "haskell-http2-linear/story_28.json") ; (story_29 , "haskell-http2-linear/story_29.json") ; (story_30 , "haskell-http2-linear/story_30.json") ; (story_31 , "haskell-http2-linear/story_31.json") ; }) ;
+};
+}

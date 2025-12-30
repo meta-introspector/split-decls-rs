@@ -1,0 +1,57 @@
+// Generated module macro for crate::utf16_char
+macro_rules! Modcrate_utf16_char {
+() => {
+        Depcrate_utf16_charuse_142!();
+        Depcrate_utf16_charuse_143!();
+        Depcrate_utf16_charuse_144!();
+        Depcrate_utf16_charuse_145!();
+        Depcrate_utf16_charuse_146!();
+        Depcrate_utf16_charother_147!();
+        Depcrate_utf16_charuse_148!();
+        Depcrate_utf16_charuse_149!();
+        Depcrate_utf16_charuse_150!();
+        Depcrate_utf16_charuse_151!();
+        Depcrate_utf16_charuse_152!();
+        Depcrate_utf16_charuse_153!();
+        Depcrate_utf16_charuse_154!();
+        Depcrate_utf16_charother_155!();
+        Depcrate_utf16_charuse_156!();
+        Depcrate_utf16_charUtf16Char!();
+        Depcrate_utf16_charimpl_158!();
+        Depcrate_utf16_charimpl_159!();
+        Depcrate_utf16_charimpl_160!();
+        Depcrate_utf16_charimpl_161!();
+        Depcrate_utf16_charimpl_162!();
+        Depcrate_utf16_charimpl_163!();
+        Depcrate_utf16_charimpl_164!();
+        Depcrate_utf16_charimpl_165!();
+        Depcrate_utf16_charimpl_166!();
+        Depcrate_utf16_charimpl_167!();
+        Depcrate_utf16_charimpl_168!();
+        Depcrate_utf16_charimpl_169!();
+        Depcrate_utf16_charimpl_170!();
+        Depcrate_utf16_charimpl_171!();
+        Depcrate_utf16_charimpl_172!();
+        Depcrate_utf16_charimpl_173!();
+        Depcrate_utf16_charimpl_174!();
+        Depcrate_utf16_charimpl_175!();
+        Depcrate_utf16_charimpl_176!();
+        Depcrate_utf16_charimpl_177!();
+        Depcrate_utf16_charimpl_178!();
+        Depcrate_utf16_charimpl_179!();
+        Depcrate_utf16_charimpl_180!();
+        Depcrate_utf16_charimpl_181!();
+        Depcrate_utf16_charimpl_182!();
+        Depcrate_utf16_charimpl_183!();
+        Depcrate_utf16_charimpl_184!();
+        Depcrate_utf16_charimpl_185!();
+        Depcrate_utf16_charimpl_186!();
+        Depcrate_utf16_charimpl_187!();
+        Depcrate_utf16_charimpl_188!();
+        Depcrate_utf16_charimpl_189!();
+        Depcrate_utf16_charimpl_190!();
+        Depcrate_utf16_charimpl_191!();
+        Depcrate_utf16_charimpl_192!();
+        Depcrate_utf16_charimpl_193!();
+    };
+}

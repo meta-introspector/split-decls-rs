@@ -1,0 +1,9 @@
+// Generated macro for SYRIAC (const)
+macro_rules! Depcrate_unicode_tables_script_extensionSYRIAC {
+() => {
+// Module: crate::unicode_tables::script_extension
+// Provides: {"SYRIAC"}
+// Dependencies: {}
+pub const SYRIAC : & 'static [(char , char)] = & [('\u{303}' , '\u{304}') , ('\u{307}' , '\u{308}') , ('\u{30a}' , '\u{30a}') , ('\u{320}' , '\u{320}') , ('\u{323}' , '\u{325}') , ('\u{32d}' , '\u{32e}') , ('\u{330}' , '\u{330}') , ('،' , '،') , ('؛' , '\u{61c}') , ('؟' , '؟') , ('ـ' , 'ـ') , ('\u{64b}' , '\u{655}') , ('\u{670}' , '\u{670}') , ('܀' , '܍') , ('\u{70f}' , '\u{74a}') , ('ݍ' , 'ݏ') , ('ࡠ' , 'ࡪ') , ('\u{1df8}' , '\u{1df8}') , ('\u{1dfa}' , '\u{1dfa}') ,] ;
+};
+}

@@ -1,0 +1,43 @@
+// Generated module macro for crate::dfa::onepass
+macro_rules! Modcrate_dfa_onepass {
+() => {
+        Depcrate_dfa_onepassuse_73!();
+        Depcrate_dfa_onepassuse_74!();
+        Depcrate_dfa_onepassConfig!();
+        Depcrate_dfa_onepassimpl_76!();
+        Depcrate_dfa_onepassBuilder!();
+        Depcrate_dfa_onepassimpl_78!();
+        Depcrate_dfa_onepassInternalBuilder!();
+        Depcrate_dfa_onepassimpl_80!();
+        Depcrate_dfa_onepassDFA!();
+        Depcrate_dfa_onepassimpl_82!();
+        Depcrate_dfa_onepassimpl_83!();
+        Depcrate_dfa_onepassimpl_84!();
+        Depcrate_dfa_onepassimpl_85!();
+        Depcrate_dfa_onepassimpl_86!();
+        Depcrate_dfa_onepassSparseTransitionIter!();
+        Depcrate_dfa_onepassimpl_88!();
+        Depcrate_dfa_onepassCache!();
+        Depcrate_dfa_onepassimpl_90!();
+        Depcrate_dfa_onepassTransition!();
+        Depcrate_dfa_onepassimpl_92!();
+        Depcrate_dfa_onepassimpl_93!();
+        Depcrate_dfa_onepassPatternEpsilons!();
+        Depcrate_dfa_onepassimpl_95!();
+        Depcrate_dfa_onepassimpl_96!();
+        Depcrate_dfa_onepassEpsilons!();
+        Depcrate_dfa_onepassimpl_98!();
+        Depcrate_dfa_onepassimpl_99!();
+        Depcrate_dfa_onepassSlots!();
+        Depcrate_dfa_onepassimpl_101!();
+        Depcrate_dfa_onepassimpl_102!();
+        Depcrate_dfa_onepassSlotsIter!();
+        Depcrate_dfa_onepassimpl_104!();
+        Depcrate_dfa_onepassBuildError!();
+        Depcrate_dfa_onepassBuildErrorKind!();
+        Depcrate_dfa_onepassimpl_107!();
+        Depcrate_dfa_onepassimpl_108!();
+        Depcrate_dfa_onepassimpl_109!();
+        Depcrate_dfa_onepasstests!();
+    };
+}

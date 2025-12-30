@@ -1,0 +1,9 @@
+// Generated macro for test (module)
+macro_rules! Depcrate_network_configurationtest {
+() => {
+// Module: crate::network_configuration
+// Provides: {"test"}
+// Dependencies: {}
+# [cfg (test)] mod test { use super :: * ; # [test] fn test_get_all_interfaces () { let _ = get_interfaces () ; } # [test] fn test_get_type () { for iface in get_interfaces () . into_iter () { if iface . interface_type () . is_none () { panic ! ("Interface  {:?} ({:?}) has unrecognized type {:?}" , iface . display_name () , iface . bsd_name () , iface . interface_type_string ()) } } } # [test] fn test_service_order () { let prefs = SCPreferences :: default (& CFString :: new ("test")) ; let services = SCNetworkService :: get_services (& prefs) ; let set = SCNetworkSet :: new (& prefs) ; let service_order = set . service_order () ; assert ! (service_order . iter () . all (| service_id | { services . iter () . any (| service | service . id () . as_ref () == Some (&* service_id)) })) } # [test] fn test_empty_array () { let empty = create_empty_array :: < CFString > () ; let values = empty . get_all_values () ; assert ! (values . is_empty ()) } }
+};
+}

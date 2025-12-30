@@ -1,0 +1,9 @@
+// Generated macro for ListOrderedMultimap (struct)
+macro_rules! Depcrate_list_ordered_multimapListOrderedMultimap {
+() => {
+// Module: crate::list_ordered_multimap
+// Provides: {"ListOrderedMultimap"}
+// Dependencies: {}
+# [derive (Clone)] # [doc = " A multimap that associates with each key a list of values."] # [doc = ""] # [doc = " # Ordering"] # [doc = ""] # [doc = " The primary guarantee this type gives is that regardless of what you do to the multimap, you are always able to"] # [doc = " iterate through all keys and values in the order they were inserted. Values can be iterated by their insertion order"] # [doc = " either for a specific key or for the entire map."] # [doc = ""] # [doc = " # Allocations"] # [doc = ""] # [doc = " Allocations may be performed on any key-value insertion."] pub struct ListOrderedMultimap < Key , Value , State = RandomState > { # [doc = " The hasher builder that constructs new hashers for hashing keys. We have to keep this separate from the hashmap"] # [doc = " itself as we need to be able to access it when the hashmap keys are reallocated due to changes. We cannot use the"] # [doc = " hash of the actual keys in the map as those hashes are not representative."] pub (crate) build_hasher : State , # [doc = " The list of the keys in the multimap. This is ordered by time of insertion."] pub (crate) keys : VecList < Key > , # [doc = " The map from indices of keys to the indices of their values in the value list. The list of the indices is ordered"] # [doc = " by time of insertion. We never use hasher of the hashmap explicitly here, we instead use"] # [doc = " [`ListOrderedMultimap::build_hasher`]."] pub (crate) map : HashMap < Index < Key > , MapEntry < Key , Value > , DummyState > , # [doc = " The list of the values in the multimap. This is ordered by time of insertion."] pub (crate) values : VecList < ValueEntry < Key , Value > > , }
+};
+}

@@ -1,0 +1,55 @@
+// Generated module macro for crate::struct_meta
+macro_rules! Modcrate_struct_meta {
+() => {
+        Depcrate_struct_metause_37!();
+        Depcrate_struct_metause_38!();
+        Depcrate_struct_metause_39!();
+        Depcrate_struct_metause_40!();
+        Depcrate_struct_metause_41!();
+        Depcrate_struct_metaderive_struct_meta!();
+        Depcrate_struct_metaParams!();
+        Depcrate_struct_metaimpl_44!();
+        Depcrate_struct_metaParam!();
+        Depcrate_struct_metaimpl_46!();
+        Depcrate_struct_metaParamInfo!();
+        Depcrate_struct_metaimpl_48!();
+        Depcrate_struct_metaRestParam!();
+        Depcrate_struct_metaNamedParam!();
+        Depcrate_struct_metaUnnamedParam!();
+        Depcrate_struct_metaimpl_52!();
+        Depcrate_struct_metaimpl_53!();
+        Depcrate_struct_metaimpl_54!();
+        Depcrate_struct_metabuild_ctor_arg!();
+        Depcrate_struct_metakw!();
+        Depcrate_struct_metaNameFilter!();
+        Depcrate_struct_metaimpl_58!();
+        Depcrate_struct_metaArgsForStruct!();
+        Depcrate_struct_metaimpl_60!();
+        Depcrate_struct_metaArgForStruct!();
+        Depcrate_struct_metaimpl_62!();
+        Depcrate_struct_metaArgsForField!();
+        Depcrate_struct_metaimpl_64!();
+        Depcrate_struct_metaArgForField!();
+        Depcrate_struct_metaimpl_66!();
+        Depcrate_struct_metaNamedParamType!();
+        Depcrate_struct_metaimpl_68!();
+        Depcrate_struct_metabuild_parse_expr!();
+        Depcrate_struct_metabuild_parse_expr_name_args!();
+        Depcrate_struct_metaArgKind!();
+        Depcrate_struct_metaimpl_72!();
+        Depcrate_struct_metaget_option_element!();
+        Depcrate_struct_metaget_vec_element!();
+        Depcrate_struct_metaget_name_value_element!();
+        Depcrate_struct_metaget_name_args_element!();
+        Depcrate_struct_metaget_hash_map_element!();
+        Depcrate_struct_metaget_hash_map_string_element!();
+        Depcrate_struct_metais_bool!();
+        Depcrate_struct_metais_flag!();
+        Depcrate_struct_metais_string!();
+        Depcrate_struct_metaget_element!();
+        Depcrate_struct_metaget_element2!();
+        Depcrate_struct_metaNS_STRUCTMETA!();
+        Depcrate_struct_metaNS_PRIMITIVE!();
+        Depcrate_struct_metatests!();
+    };
+}

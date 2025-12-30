@@ -1,0 +1,9 @@
+// Generated macro for impl_491 (impl)
+macro_rules! Depcrate_common_originimpl_491 {
+() => {
+// Module: crate::common::origin
+// Provides: {"impl_491"}
+// Dependencies: {}
+impl Origin { # [doc = " The literal `null` Origin header."] pub const NULL : Origin = Origin (OriginOrNull :: Null) ; # [doc = " Checks if `Origin` is `null`."] # [inline] pub fn is_null (& self) -> bool { matches ! (self . 0 , OriginOrNull :: Null) } # [doc = " Get the \"scheme\" part of this origin."] # [inline] pub fn scheme (& self) -> & str { match self . 0 { OriginOrNull :: Origin (ref scheme , _) => scheme . as_str () , OriginOrNull :: Null => "" , } } # [doc = " Get the \"hostname\" part of this origin."] # [inline] pub fn hostname (& self) -> & str { match self . 0 { OriginOrNull :: Origin (_ , ref auth) => auth . host () , OriginOrNull :: Null => "" , } } # [doc = " Get the \"port\" part of this origin."] # [inline] pub fn port (& self) -> Option < u16 > { match self . 0 { OriginOrNull :: Origin (_ , ref auth) => auth . port_u16 () , OriginOrNull :: Null => None , } } # [doc = " Tries to build a `Origin` from three parts, the scheme, the host and an optional port."] pub fn try_from_parts (scheme : & str , host : & str , port : impl Into < Option < u16 > > ,) -> Result < Self , InvalidOrigin > { struct MaybePort (Option < u16 >) ; impl fmt :: Display for MaybePort { fn fmt (& self , f : & mut fmt :: Formatter) -> fmt :: Result { if let Some (port) = self . 0 { write ! (f , ":{}" , port) } else { Ok (()) } } } let bytes = Bytes :: from (format ! ("{}://{}{}" , scheme , host , MaybePort (port . into ()))) ; HeaderValue :: from_maybe_shared (bytes) . ok () . and_then (| val | Self :: try_from_value (& val)) . ok_or (InvalidOrigin { _inner : () }) } pub (super) fn try_from_value (value : & HeaderValue) -> Option < Self > { OriginOrNull :: try_from_value (value) . map (Origin) } pub (super) fn to_value (& self) -> HeaderValue { (& self . 0) . into () } }
+};
+}

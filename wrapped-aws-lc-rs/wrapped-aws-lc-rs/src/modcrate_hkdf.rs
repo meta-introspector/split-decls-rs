@@ -1,0 +1,45 @@
+// Generated module macro for crate::hkdf
+macro_rules! Modcrate_hkdf {
+() => {
+        Depcrate_hkdfuse_224!();
+        Depcrate_hkdfuse_225!();
+        Depcrate_hkdfuse_226!();
+        Depcrate_hkdfuse_227!();
+        Depcrate_hkdfuse_228!();
+        Depcrate_hkdfuse_229!();
+        Depcrate_hkdfuse_230!();
+        Depcrate_hkdfAlgorithm!();
+        Depcrate_hkdfimpl_232!();
+        Depcrate_hkdfHKDF_SHA1_FOR_LEGACY_USE_ONLY!();
+        Depcrate_hkdfHKDF_SHA256!();
+        Depcrate_hkdfHKDF_SHA384!();
+        Depcrate_hkdfHKDF_SHA512!();
+        Depcrate_hkdfMAX_HKDF_SALT_LEN!();
+        Depcrate_hkdfHKDF_INFO_DEFAULT_CAPACITY_LEN!();
+        Depcrate_hkdfMAX_HKDF_PRK_LEN!();
+        Depcrate_hkdfimpl_240!();
+        Depcrate_hkdfSalt!();
+        Depcrate_hkdfimpl_242!();
+        Depcrate_hkdfimpl_243!();
+        Depcrate_hkdfimpl_244!();
+        Depcrate_hkdf_!();
+        Depcrate_hkdfimpl_246!();
+        Depcrate_hkdfKeyType!();
+        Depcrate_hkdfPrkMode!();
+        Depcrate_hkdfimpl_249!();
+        Depcrate_hkdfimpl_250!();
+        Depcrate_hkdfZeroizeBoxSlice!();
+        Depcrate_hkdfimpl_252!();
+        Depcrate_hkdfimpl_253!();
+        Depcrate_hkdfimpl_254!();
+        Depcrate_hkdfPrk!();
+        Depcrate_hkdfimpl_256!();
+        Depcrate_hkdfimpl_257!();
+        Depcrate_hkdfimpl_258!();
+        Depcrate_hkdfOkm!();
+        Depcrate_hkdfimpl_260!();
+        Depcrate_hkdfimpl_261!();
+        Depcrate_hkdfimpl_262!();
+        Depcrate_hkdftests!();
+    };
+}

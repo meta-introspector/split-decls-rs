@@ -1,0 +1,9 @@
+// Generated macro for other_29879 (other)
+macro_rules! Depcrate_um_lmaccessother_29879 {
+() => {
+// Module: crate::um::lmaccess
+// Provides: {"other_29879"}
+// Dependencies: {}
+extern "system" { pub fn NetLocalGroupAdd (servername : LPCWSTR , level : DWORD , buf : LPBYTE , parm_err : LPDWORD ,) -> NET_API_STATUS ; pub fn NetLocalGroupAddMember (servername : LPCWSTR , groupname : LPCWSTR , membersid : PSID ,) -> NET_API_STATUS ; pub fn NetLocalGroupEnum (servername : LPCWSTR , level : DWORD , bufptr : * mut LPBYTE , prefmaxlen : DWORD , entriesread : LPDWORD , totalentries : LPDWORD , resumehandle : PDWORD_PTR ,) -> NET_API_STATUS ; pub fn NetLocalGroupGetInfo (servername : LPCWSTR , groupname : LPCWSTR , level : DWORD , bufptr : * mut LPBYTE ,) -> NET_API_STATUS ; pub fn NetLocalGroupSetInfo (servername : LPCWSTR , groupname : LPCWSTR , level : DWORD , buf : LPBYTE , parm_err : LPDWORD ,) -> NET_API_STATUS ; pub fn NetLocalGroupDel (servername : LPCWSTR , groupname : LPCWSTR ,) -> NET_API_STATUS ; pub fn NetLocalGroupDelMember (servername : LPCWSTR , groupname : LPCWSTR , membersid : PSID ,) -> NET_API_STATUS ; pub fn NetLocalGroupGetMembers (servername : LPCWSTR , localgroupname : LPCWSTR , level : DWORD , bufptr : * mut LPBYTE , prefmaxlen : DWORD , entriesread : LPDWORD , totalentries : LPDWORD , resumehandle : PDWORD_PTR ,) -> NET_API_STATUS ; pub fn NetLocalGroupSetMembers (servername : LPCWSTR , groupname : LPCWSTR , level : DWORD , buf : LPBYTE , totalentries : DWORD ,) -> NET_API_STATUS ; pub fn NetLocalGroupAddMembers (servername : LPCWSTR , groupname : LPCWSTR , level : DWORD , buf : LPBYTE , totalentries : DWORD ,) -> NET_API_STATUS ; pub fn NetLocalGroupDelMembers (servername : LPCWSTR , groupname : LPCWSTR , level : DWORD , buf : LPBYTE , totalentries : DWORD ,) -> NET_API_STATUS ; }
+};
+}

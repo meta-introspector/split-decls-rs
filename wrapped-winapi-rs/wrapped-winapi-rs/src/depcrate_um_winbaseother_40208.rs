@@ -1,0 +1,9 @@
+// Generated macro for other_40208 (other)
+macro_rules! Depcrate_um_winbaseother_40208 {
+() => {
+// Module: crate::um::winbase
+// Provides: {"other_40208"}
+// Dependencies: {}
+extern "system" { pub fn FindActCtxSectionStringA (dwFlags : DWORD , lpExtensionGuid : * const GUID , ulSectionId : ULONG , lpStringToFind : LPCSTR , ReturnedData : PACTCTX_SECTION_KEYED_DATA ,) -> BOOL ; pub fn FindActCtxSectionStringW (dwFlags : DWORD , lpExtensionGuid : * const GUID , ulSectionId : ULONG , lpStringToFind : LPCWSTR , ReturnedData : PACTCTX_SECTION_KEYED_DATA ,) -> BOOL ; pub fn FindActCtxSectionGuid (dwFlags : DWORD , lpExtensionGuid : * const GUID , ulSectionId : ULONG , lpGuidToFind : * const GUID , ReturnedData : PACTCTX_SECTION_KEYED_DATA ,) -> BOOL ; pub fn QueryActCtxW (dwFlags : DWORD , hActCtx : HANDLE , pvSubInstance : PVOID , ulInfoClass : ULONG , pvBuffer : PVOID , cbBuffer : SIZE_T , pcbWrittenOrRequired : * mut SIZE_T ,) -> BOOL ; pub fn WTSGetActiveConsoleSessionId () -> DWORD ; pub fn GetActiveProcessorGroupCount () -> WORD ; pub fn GetMaximumProcessorGroupCount () -> WORD ; pub fn GetActiveProcessorCount (GroupNumber : WORD ,) -> DWORD ; pub fn GetMaximumProcessorCount (GroupNumber : WORD ,) -> DWORD ; pub fn GetNumaProcessorNode (Processor : UCHAR , NodeNumber : PUCHAR ,) -> BOOL ; pub fn GetNumaNodeNumberFromHandle (hFile : HANDLE , NodeNumber : PUSHORT ,) -> BOOL ; pub fn GetNumaProcessorNodeEx (Processor : PPROCESSOR_NUMBER , NodeNumber : PUSHORT ,) -> BOOL ; pub fn GetNumaNodeProcessorMask (Node : UCHAR , ProcessorMask : PULONGLONG ,) -> BOOL ; pub fn GetNumaAvailableMemoryNode (Node : UCHAR , AvailableBytes : PULONGLONG ,) -> BOOL ; pub fn GetNumaAvailableMemoryNodeEx (Node : USHORT , AvailableBytes : PULONGLONG ,) -> BOOL ; pub fn GetNumaProximityNode (ProximityId : ULONG , NodeNumber : PUCHAR ,) -> BOOL ; }
+};
+}

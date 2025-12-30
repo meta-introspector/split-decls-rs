@@ -1,0 +1,9 @@
+// Generated macro for other_481 (other)
+macro_rules! Depcrate_setother_481 {
+() => {
+// Module: crate::set
+// Provides: {"other_481"}
+// Dependencies: {}
+unsafe extern "C" { pub static kCFTypeSetCallBacks : CFSetCallBacks ; pub static kCFCopyStringSetCallBacks : CFSetCallBacks ; pub fn CFSetCreate (allocator : CFAllocatorRef , values : * const * const c_void , numValues : CFIndex , callBacks : * const CFSetCallBacks ,) -> CFSetRef ; pub fn CFSetCreateCopy (allocator : CFAllocatorRef , theSet : CFSetRef) -> CFSetRef ; pub fn CFSetContainsValue (theSet : CFSetRef , value : * const c_void) -> Boolean ; pub fn CFSetGetCount (theSet : CFSetRef) -> CFIndex ; pub fn CFSetGetCountOfValue (theSet : CFSetRef , value : * const c_void) -> CFIndex ; pub fn CFSetGetValue (theSet : CFSetRef , value : * const c_void) -> * const c_void ; pub fn CFSetGetValueIfPresent (theSet : CFSetRef , candidate : * const c_void , value : * mut * const c_void ,) -> Boolean ; pub fn CFSetGetValues (theSet : CFSetRef , values : * mut * const c_void) ; pub fn CFSetApplyFunction (theSet : CFSetRef , applier : CFSetApplierFunction , context : * const c_void ,) ; pub fn CFSetGetTypeID () -> CFTypeID ; pub fn CFSetAddValue (theSet : CFMutableSetRef , value : * const c_void) ; pub fn CFSetCreateMutable (allocator : CFAllocatorRef , capacity : CFIndex , callBacks : * const CFSetCallBacks ,) -> CFMutableSetRef ; pub fn CFSetCreateMutableCopy (allocator : CFAllocatorRef , capacity : CFIndex , theSet : CFSetRef ,) -> CFMutableSetRef ; pub fn CFSetRemoveAllValues (theSet : CFMutableSetRef) ; pub fn CFSetRemoveValue (theSet : CFMutableSetRef , value : * const c_void) ; pub fn CFSetReplaceValue (theSet : CFMutableSetRef , value : * const c_void) ; pub fn CFSetSetValue (theSet : CFMutableSetRef , value : * const c_void) ; }
+};
+}

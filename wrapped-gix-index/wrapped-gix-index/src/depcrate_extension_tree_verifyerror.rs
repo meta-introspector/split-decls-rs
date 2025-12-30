@@ -1,0 +1,9 @@
+// Generated macro for Error (enum)
+macro_rules! Depcrate_extension_tree_verifyError {
+() => {
+// Module: crate::extension::tree::verify
+// Provides: {"Error"}
+// Dependencies: {}
+# [doc = " The error returned by [`Tree::verify()`][crate::extension::Tree::verify()]."] # [derive (Debug , thiserror :: Error)] # [allow (missing_docs)] pub enum Error { # [error ("The entry {entry_id} at path '{name}' in parent tree {parent_id} wasn't found in the nodes children, making it incomplete")] MissingTreeDirectory { parent_id : gix_hash :: ObjectId , entry_id : gix_hash :: ObjectId , name : BString , } , # [error (transparent)] TreeNodeNotFound (# [from] gix_object :: find :: existing_iter :: Error) , # [error ("The tree with id {oid} should have {expected_childcount} children, but its cached representation had {actual_childcount} of them")] TreeNodeChildcountMismatch { oid : gix_hash :: ObjectId , expected_childcount : usize , actual_childcount : usize , } , # [error ("The root tree was named '{name}', even though it should be empty")] RootWithName { name : BString } , # [error ("Expected not more than {expected} entries to be reachable from the top-level, but actual count was {actual}")] EntriesCount { actual : u32 , expected : u32 } , # [error ("Parent tree '{parent_id}' contained out-of order trees prev = '{previous_path}' and next = '{current_path}'")] OutOfOrder { parent_id : gix_hash :: ObjectId , current_path : BString , previous_path : BString , } , }
+};
+}

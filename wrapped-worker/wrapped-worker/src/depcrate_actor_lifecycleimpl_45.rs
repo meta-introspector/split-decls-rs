@@ -1,0 +1,9 @@
+// Generated macro for impl_45 (impl)
+macro_rules! Depcrate_actor_lifecycleimpl_45 {
+() => {
+// Module: crate::actor::lifecycle
+// Provides: {"impl_45"}
+// Dependencies: {}
+impl < W > WorkerRunnable < W > where W : Worker + 'static , { pub fn run (self) { let mut state = self . state . borrow_mut () ; match self . event { WorkerLifecycleEvent :: Create (scope) => { if state . to_destroy { return ; } state . worker = Some ((W :: create (& scope) , scope)) ; } WorkerLifecycleEvent :: Message (msg) => { if let Some ((worker , scope)) = state . worker . as_mut () { worker . update (scope , msg) ; } } WorkerLifecycleEvent :: Remote (ToWorker :: Connected (id)) => { if state . to_destroy { return ; } let (worker , scope) = state . worker . as_mut () . expect_throw ("worker was not created to process connected messages") ; worker . connected (scope , id) ; } WorkerLifecycleEvent :: Remote (ToWorker :: ProcessInput (id , inp)) => { if state . to_destroy { return ; } let (worker , scope) = state . worker . as_mut () . expect_throw ("worker was not created to process inputs") ; worker . received (scope , inp , id) ; } WorkerLifecycleEvent :: Remote (ToWorker :: Disconnected (id)) => { if state . to_destroy { return ; } let (worker , scope) = state . worker . as_mut () . expect_throw ("worker was not created to process disconnected messages") ; worker . disconnected (scope , id) ; } WorkerLifecycleEvent :: Remote (ToWorker :: Destroy) => { if state . to_destroy { return ; } state . to_destroy = true ; let (worker , scope) = state . worker . as_mut () . expect_throw ("trying to destroy not existent worker") ; let destruct = WorkerDestroyHandle :: new (scope . clone ()) ; worker . destroy (scope , destruct) ; } WorkerLifecycleEvent :: Destroy => { state . worker . take () . expect_throw ("worker is not initialised or already destroyed") ; DedicatedWorker :: worker_self () . close () ; } } } }
+};
+}

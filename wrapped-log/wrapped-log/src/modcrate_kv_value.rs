@@ -1,0 +1,41 @@
+// Generated module macro for crate::kv::value
+macro_rules! Modcrate_kv_value {
+() => {
+        Depcrate_kv_valueuse_87!();
+        Depcrate_kv_valueuse_88!();
+        Depcrate_kv_valueToValue!();
+        Depcrate_kv_valueimpl_90!();
+        Depcrate_kv_valueimpl_91!();
+        Depcrate_kv_valueValue!();
+        Depcrate_kv_valueimpl_93!();
+        Depcrate_kv_valueimpl_94!();
+        Depcrate_kv_valueimpl_95!();
+        Depcrate_kv_valueimpl_96!();
+        Depcrate_kv_valueimpl_97!();
+        Depcrate_kv_valueimpl_98!();
+        Depcrate_kv_valueimpl_99!();
+        Depcrate_kv_valueimpl_100!();
+        Depcrate_kv_valueimpl_101!();
+        Depcrate_kv_valueimpl_102!();
+        Depcrate_kv_valueimpl_to_value_primitive!();
+        Depcrate_kv_valueimpl_to_value_nonzero_primitive!();
+        Depcrate_kv_valueimpl_value_to_primitive!();
+        Depcrate_kv_valuemacro_106!();
+        Depcrate_kv_valuemacro_107!();
+        Depcrate_kv_valuemacro_108!();
+        Depcrate_kv_valueimpl_109!();
+        Depcrate_kv_valuestd_support!();
+        Depcrate_kv_valueVisitValue!();
+        Depcrate_kv_valueimpl_112!();
+        Depcrate_kv_valueinner!();
+        Depcrate_kv_valueinner!();
+        Depcrate_kv_valueimpl_115!();
+        Depcrate_kv_valueuse_116!();
+        Depcrate_kv_valueas_debug!();
+        Depcrate_kv_valueas_display!();
+        Depcrate_kv_valueas_error!();
+        Depcrate_kv_valueas_serde!();
+        Depcrate_kv_valueas_sval!();
+        Depcrate_kv_valuetests!();
+    };
+}

@@ -1,0 +1,43 @@
+// Generated module macro for crate::method::suggest
+macro_rules! Modcrate_method_suggest {
+() => {
+        Depcrate_method_suggestuse_761!();
+        Depcrate_method_suggestuse_762!();
+        Depcrate_method_suggestuse_763!();
+        Depcrate_method_suggestuse_764!();
+        Depcrate_method_suggestuse_765!();
+        Depcrate_method_suggestuse_766!();
+        Depcrate_method_suggestuse_767!();
+        Depcrate_method_suggestuse_768!();
+        Depcrate_method_suggestuse_769!();
+        Depcrate_method_suggestuse_770!();
+        Depcrate_method_suggestuse_771!();
+        Depcrate_method_suggestuse_772!();
+        Depcrate_method_suggestuse_773!();
+        Depcrate_method_suggestuse_774!();
+        Depcrate_method_suggestuse_775!();
+        Depcrate_method_suggestuse_776!();
+        Depcrate_method_suggestuse_777!();
+        Depcrate_method_suggestuse_778!();
+        Depcrate_method_suggestuse_779!();
+        Depcrate_method_suggestuse_780!();
+        Depcrate_method_suggestuse_781!();
+        Depcrate_method_suggestuse_782!();
+        Depcrate_method_suggestuse_783!();
+        Depcrate_method_suggestuse_784!();
+        Depcrate_method_suggestuse_785!();
+        Depcrate_method_suggestuse_786!();
+        Depcrate_method_suggestuse_787!();
+        Depcrate_method_suggestuse_788!();
+        Depcrate_method_suggestuse_789!();
+        Depcrate_method_suggestuse_790!();
+        Depcrate_method_suggestuse_791!();
+        Depcrate_method_suggestuse_792!();
+        Depcrate_method_suggestuse_793!();
+        Depcrate_method_suggestimpl_794!();
+        Depcrate_method_suggestSelfSource!();
+        Depcrate_method_suggestTraitInfo!();
+        Depcrate_method_suggestall_traits!();
+        Depcrate_method_suggestprint_disambiguation_help!();
+    };
+}

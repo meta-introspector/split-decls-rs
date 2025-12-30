@@ -1,0 +1,9 @@
+// Generated macro for DOT11_WFD_GROUP_CAPABILITY_CROSS_CONNECTION_SUPPORTED (const)
+macro_rules! Depcrate_shared_windot11DOT11_WFD_GROUP_CAPABILITY_CROSS_CONNECTION_SUPPORTED {
+() => {
+// Module: crate::shared::windot11
+// Provides: {"DOT11_WFD_GROUP_CAPABILITY_CROSS_CONNECTION_SUPPORTED"}
+// Dependencies: {}
+pub const DOT11_WFD_GROUP_CAPABILITY_CROSS_CONNECTION_SUPPORTED : u8 = 0x10 ;
+};
+}

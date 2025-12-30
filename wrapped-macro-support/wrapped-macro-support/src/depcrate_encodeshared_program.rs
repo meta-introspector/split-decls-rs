@@ -1,0 +1,9 @@
+// Generated macro for shared_program (function)
+macro_rules! Depcrate_encodeshared_program {
+() => {
+// Module: crate::encode
+// Provides: {"shared_program"}
+// Dependencies: {}
+fn shared_program < 'a > (prog : & 'a ast :: Program , intern : & 'a Interner ,) -> Result < Program < 'a > , Diagnostic > { Ok (Program { exports : prog . exports . iter () . map (| a | shared_export (a , intern)) . collect :: < Result < Vec < _ > , _ > > () ? , structs : prog . structs . iter () . map (| a | shared_struct (a , intern)) . collect () , enums : prog . enums . iter () . map (| a | shared_enum (a , intern)) . collect () , imports : prog . imports . iter () . map (| a | shared_import (a , intern)) . collect :: < Result < Vec < _ > , _ > > () ? , typescript_custom_sections : prog . typescript_custom_sections . iter () . map (| x | shared_lit_or_expr (x , intern)) . collect () , linked_modules : prog . linked_modules . iter () . enumerate () . map (| (i , a) | shared_linked_module (& prog . link_function_name (i) , a , intern)) . collect :: < Result < Vec < _ > , _ > > () ? , local_modules : intern . files . borrow () . values () . map (| file | { fs :: read_to_string (& file . path) . map (| s | LocalModule { identifier : intern . intern_str (& file . new_identifier) , contents : intern . intern_str (& s) , linked_module : file . linked_module , }) . map_err (| e | { let msg = format ! ("failed to read file `{}`: {}" , file . path . display () , e) ; Diagnostic :: span_error (file . definition , msg) }) }) . collect :: < Result < Vec < _ > , _ > > () ? , inline_js : prog . inline_js . iter () . map (| js | intern . intern_str (js)) . collect () , unique_crate_identifier : intern . intern_str (& intern . unique_crate_identifier ()) , package_json : if intern . has_package_json . get () { Some (intern . intern_str (intern . root . join ("package.json") . to_str () . unwrap ())) } else { None } , }) }
+};
+}

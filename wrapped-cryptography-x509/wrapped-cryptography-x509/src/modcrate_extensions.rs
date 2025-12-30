@@ -1,0 +1,47 @@
+// Generated module macro for crate::extensions
+macro_rules! Modcrate_extensions {
+() => {
+        Depcrate_extensionsuse_125!();
+        Depcrate_extensionsuse_126!();
+        Depcrate_extensionsuse_127!();
+        Depcrate_extensionsuse_128!();
+        Depcrate_extensionsDuplicateExtensionsError!();
+        Depcrate_extensionsRawExtensions!();
+        Depcrate_extensionsExtensions!();
+        Depcrate_extensionsimpl_132!();
+        Depcrate_extensionsExtension!();
+        Depcrate_extensionsimpl_134!();
+        Depcrate_extensionsPolicyConstraints!();
+        Depcrate_extensionsAccessDescription!();
+        Depcrate_extensionsSequenceOfAccessDescriptions!();
+        Depcrate_extensionsSequenceOfPolicyQualifiers!();
+        Depcrate_extensionsPolicyInformation!();
+        Depcrate_extensionsPolicyQualifierInfo!();
+        Depcrate_extensionsQualifier!();
+        Depcrate_extensionsUserNotice!();
+        Depcrate_extensionsNoticeReference!();
+        Depcrate_extensionsDisplayText!();
+        Depcrate_extensionsSequenceOfSubtrees!();
+        Depcrate_extensionsNameConstraints!();
+        Depcrate_extensionsGeneralSubtree!();
+        Depcrate_extensionsMSCertificateTemplate!();
+        Depcrate_extensionsDistributionPoint!();
+        Depcrate_extensionsDistributionPointName!();
+        Depcrate_extensionsAuthorityKeyIdentifier!();
+        Depcrate_extensionsBasicConstraints!();
+        Depcrate_extensionsSubjectAlternativeName!();
+        Depcrate_extensionsIssuerAlternativeName!();
+        Depcrate_extensionsExtendedKeyUsage!();
+        Depcrate_extensionsKeyUsage!();
+        Depcrate_extensionsimpl_157!();
+        Depcrate_extensionsimpl_158!();
+        Depcrate_extensionsNamingAuthority!();
+        Depcrate_extensionsSequenceOfDisplayTexts!();
+        Depcrate_extensionsSequenceOfObjectIdentifiers!();
+        Depcrate_extensionsProfessionInfo!();
+        Depcrate_extensionsAdmission!();
+        Depcrate_extensionsAdmissions!();
+        Depcrate_extensionsPrivateKeyUsagePeriod!();
+        Depcrate_extensionstests!();
+    };
+}

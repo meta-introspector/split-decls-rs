@@ -1,0 +1,46 @@
+// Generated module macro for crate::res
+macro_rules! Modcrate_res {
+() => {
+        Depcrate_resuse_533!();
+        Depcrate_resuse_534!();
+        Depcrate_resuse_535!();
+        Depcrate_resuse_536!();
+        Depcrate_resuse_537!();
+        Depcrate_resuse_538!();
+        Depcrate_resuse_539!();
+        Depcrate_resHasHirId!();
+        Depcrate_resimpl_541!();
+        Depcrate_resimpl_542!();
+        Depcrate_resDefRes!();
+        Depcrate_resMaybeTypeckRes!();
+        Depcrate_resimpl_545!();
+        Depcrate_resimpl_546!();
+        Depcrate_resQPathId!();
+        Depcrate_resMaybeQPath!();
+        Depcrate_resimpl_549!();
+        Depcrate_resimpl_550!();
+        Depcrate_resimpl_551!();
+        Depcrate_resimpl_552!();
+        Depcrate_resimpl_553!();
+        Depcrate_resimpl_554!();
+        Depcrate_resimpl_555!();
+        Depcrate_resOptResPath!();
+        Depcrate_resMaybeResPath!();
+        Depcrate_resimpl_558!();
+        Depcrate_resimpl_559!();
+        Depcrate_resimpl_560!();
+        Depcrate_resimpl_561!();
+        Depcrate_resimpl_562!();
+        Depcrate_resimpl_563!();
+        Depcrate_resimpl_564!();
+        Depcrate_resMaybeDef!();
+        Depcrate_resimpl_566!();
+        Depcrate_resimpl_567!();
+        Depcrate_resimpl_568!();
+        Depcrate_resimpl_569!();
+        Depcrate_resimpl_570!();
+        Depcrate_resimpl_571!();
+        Depcrate_resimpl_572!();
+        Depcrate_resimpl_573!();
+    };
+}

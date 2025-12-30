@@ -1,0 +1,9 @@
+// Generated macro for __do_submit (macro)
+macro_rules! Depcrate__do_submit {
+() => {
+// Module: crate
+// Provides: {"__do_submit"}
+// Dependencies: {}
+# [doc (hidden)] # [macro_export] macro_rules ! __do_submit { (used = { $ ($ used : tt) + } $ ($ value : tt) *) => { # [allow (non_upper_case_globals)] const _ : () = { static __INVENTORY : $ crate :: Node = $ crate :: Node { value : & { $ ($ value) * } , next : $ crate :: core :: cell :: UnsafeCell :: new ($ crate :: core :: option :: Option :: None) , # [cfg (target_family = "wasm")] initialized : $ crate :: core :: sync :: atomic :: AtomicBool :: new (false) , } ; # [cfg_attr (any (target_os = "linux" , target_os = "android") , link_section = ".text.startup")] unsafe extern "C" fn __ctor () { unsafe { $ crate :: ErasedNode :: submit (__INVENTORY . value , & __INVENTORY) } } $ ($ used) + # [cfg_attr (all (not (target_family = "wasm") , any (target_os = "linux" , target_os = "android" , target_os = "dragonfly" , target_os = "freebsd" , target_os = "haiku" , target_os = "illumos" , target_os = "netbsd" , target_os = "openbsd" , target_os = "none" ,)) , link_section = ".init_array" ,)] # [cfg_attr (target_family = "wasm" , $ crate :: __private :: attr (any (all (stable , since (1.85)) , since (2024 - 12 - 18)) , link_section = ".init_array" ,) ,)] # [cfg_attr (any (target_os = "macos" , target_os = "ios") , link_section = "__DATA,__mod_init_func,mod_init_funcs" ,)] # [cfg_attr (windows , link_section = ".CRT$XCU")] static __CTOR : unsafe extern "C" fn () = __ctor ; } ; } ; ({ #! [used ($ ($ used : tt) +)] $ ($ value : tt) * } { $ pound : tt $ bang : tt $ brackets : tt $ ($ dup : tt) * }) => { $ crate :: __do_submit ! { used = { $ pound $ brackets } $ ($ value) * } } ; ({ $ ($ value : tt) * } { $ ($ dup : tt) * }) => { $ crate :: __do_submit ! { used = { # [used] } $ ($ value) * } } ; }
+};
+}

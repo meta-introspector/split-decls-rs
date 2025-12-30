@@ -1,0 +1,9 @@
+// Generated macro for FormatUnusedArgs (struct)
+macro_rules! Depcrate_errorsFormatUnusedArgs {
+() => {
+// Module: crate::errors
+// Provides: {"FormatUnusedArgs"}
+// Dependencies: {}
+# [derive (Diagnostic)] # [diag (builtin_macros_format_unused_args)] pub (crate) struct FormatUnusedArgs { # [primary_span] pub (crate) unused : Vec < Span > , # [label] pub (crate) fmt : Span , # [subdiagnostic] pub (crate) unused_labels : Vec < FormatUnusedArg > , }
+};
+}

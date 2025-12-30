@@ -1,0 +1,9 @@
+// Generated macro for STATUS_SXS_MANIFEST_IDENTITY_SAME_BUT_CONTENTS_DIFFERENT (const)
+macro_rules! Depcrate_shared_ntstatusSTATUS_SXS_MANIFEST_IDENTITY_SAME_BUT_CONTENTS_DIFFERENT {
+() => {
+// Module: crate::shared::ntstatus
+// Provides: {"STATUS_SXS_MANIFEST_IDENTITY_SAME_BUT_CONTENTS_DIFFERENT"}
+// Dependencies: {}
+pub const STATUS_SXS_MANIFEST_IDENTITY_SAME_BUT_CONTENTS_DIFFERENT : NTSTATUS = 0xC015001C ;
+};
+}

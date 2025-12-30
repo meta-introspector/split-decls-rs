@@ -1,0 +1,47 @@
+// Generated module macro for crate::mock_command
+macro_rules! Modcrate_mock_command {
+() => {
+        Depcrate_mock_commanduse_1270!();
+        Depcrate_mock_commanduse_1271!();
+        Depcrate_mock_commanduse_1272!();
+        Depcrate_mock_commanduse_1273!();
+        Depcrate_mock_commanduse_1274!();
+        Depcrate_mock_commanduse_1275!();
+        Depcrate_mock_commanduse_1276!();
+        Depcrate_mock_commanduse_1277!();
+        Depcrate_mock_commanduse_1278!();
+        Depcrate_mock_commanduse_1279!();
+        Depcrate_mock_commanduse_1280!();
+        Depcrate_mock_commanduse_1281!();
+        Depcrate_mock_commandCommandChild!();
+        Depcrate_mock_commandRunCommand!();
+        Depcrate_mock_commandCommandCreator!();
+        Depcrate_mock_commandCommandCreatorSync!();
+        Depcrate_mock_commandChild!();
+        Depcrate_mock_commandimpl_1287!();
+        Depcrate_mock_commandAsyncCommand!();
+        Depcrate_mock_commandimpl_1289!();
+        Depcrate_mock_commandimpl_1290!();
+        Depcrate_mock_commandimpl_1291!();
+        Depcrate_mock_commandProcessCommandCreator!();
+        Depcrate_mock_commandimpl_1293!();
+        Depcrate_mock_commandimpl_1294!();
+        Depcrate_mock_commanduse_1295!();
+        Depcrate_mock_commanduse_1296!();
+        Depcrate_mock_commandExitStatusValue!();
+        Depcrate_mock_commandExitStatusValue!();
+        Depcrate_mock_commandexit_status!();
+        Depcrate_mock_commandMockChild!();
+        Depcrate_mock_commandimpl_1301!();
+        Depcrate_mock_commandimpl_1302!();
+        Depcrate_mock_commandChildOrCall!();
+        Depcrate_mock_commandimpl_1304!();
+        Depcrate_mock_commandMockCommand!();
+        Depcrate_mock_commandimpl_1306!();
+        Depcrate_mock_commandMockCommandCreator!();
+        Depcrate_mock_commandimpl_1308!();
+        Depcrate_mock_commandimpl_1309!();
+        Depcrate_mock_commandimpl_1310!();
+        Depcrate_mock_commandtest!();
+    };
+}

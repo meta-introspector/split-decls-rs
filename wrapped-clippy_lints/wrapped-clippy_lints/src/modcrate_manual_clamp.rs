@@ -1,0 +1,50 @@
+// Generated module macro for crate::manual_clamp
+macro_rules! Modcrate_manual_clamp {
+() => {
+        Depcrate_manual_clampuse_4105!();
+        Depcrate_manual_clampuse_4106!();
+        Depcrate_manual_clampuse_4107!();
+        Depcrate_manual_clampuse_4108!();
+        Depcrate_manual_clampuse_4109!();
+        Depcrate_manual_clampuse_4110!();
+        Depcrate_manual_clampuse_4111!();
+        Depcrate_manual_clampuse_4112!();
+        Depcrate_manual_clampuse_4113!();
+        Depcrate_manual_clampuse_4114!();
+        Depcrate_manual_clampuse_4115!();
+        Depcrate_manual_clampuse_4116!();
+        Depcrate_manual_clampuse_4117!();
+        Depcrate_manual_clampuse_4118!();
+        Depcrate_manual_clampuse_4119!();
+        Depcrate_manual_clampuse_4120!();
+        Depcrate_manual_clampuse_4121!();
+        Depcrate_manual_clampuse_4122!();
+        Depcrate_manual_clampuse_4123!();
+        Depcrate_manual_clampuse_4124!();
+        Depcrate_manual_clampmacro_4125!();
+        Depcrate_manual_clampmacro_4126!();
+        Depcrate_manual_clampManualClamp!();
+        Depcrate_manual_clampimpl_4128!();
+        Depcrate_manual_clampClampSuggestion!();
+        Depcrate_manual_clampimpl_4130!();
+        Depcrate_manual_clampInputMinMax!();
+        Depcrate_manual_clampimpl_4132!();
+        Depcrate_manual_clampmaybe_emit_suggestion!();
+        Depcrate_manual_clampTypeClampability!();
+        Depcrate_manual_clampimpl_4135!();
+        Depcrate_manual_clampis_if_elseif_else_pattern!();
+        Depcrate_manual_clampis_max_min_pattern!();
+        Depcrate_manual_clampis_call_max_min_pattern!();
+        Depcrate_manual_clampis_match_pattern!();
+        Depcrate_manual_clampis_two_if_pattern!();
+        Depcrate_manual_clampis_if_elseif_pattern!();
+        Depcrate_manual_clampBinaryOp!();
+        Depcrate_manual_clampimpl_4143!();
+        Depcrate_manual_clampis_clamp_meta_pattern!();
+        Depcrate_manual_clampblock_stmt_with_last!();
+        Depcrate_manual_clampis_ord_op!();
+        Depcrate_manual_clampMaybeBorrowedStmtKind!();
+        Depcrate_manual_clampimpl_4148!();
+        Depcrate_manual_clampimpl_4149!();
+    };
+}

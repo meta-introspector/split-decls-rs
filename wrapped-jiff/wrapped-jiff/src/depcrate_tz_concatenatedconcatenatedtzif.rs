@@ -1,0 +1,9 @@
+// Generated macro for ConcatenatedTzif (struct)
+macro_rules! Depcrate_tz_concatenatedConcatenatedTzif {
+() => {
+// Module: crate::tz::concatenated
+// Provides: {"ConcatenatedTzif"}
+// Dependencies: {}
+# [doc = " An abstraction for reading data from Android's concatenated TZif data file."] # [doc = ""] # [doc = " This abstraction is designed in a way that the data is reads from is"] # [doc = " largely untrusted. This means that, no matter what sequence of bytes is"] # [doc = " given, this should never panic (or else there is a bug). Moreover, there is"] # [doc = " some guarding against disproportionate allocation. While big allocations"] # [doc = " can still happen, they require a proportionally large data file. (Thus,"] # [doc = " callers can guard against this by considering the size of the data.) What"] # [doc = " this implementation prevents against is accidentally OOMing or panicking as"] # [doc = " a result of naively doing `Vec::with_capacity(rdr.decode_integer())`."] # [doc = ""] # [doc = " This is also designed to work in alloc-only contexts mostly out of \"good"] # [doc = " sense.\" Technically we don't (currently) use this outside of `std`, since"] # [doc = " it's only used for reading tzdb on Android from the file system. But we do"] # [doc = " things this way in case we end up wanting to use it for something else."] # [doc = " If we needed this for no-alloc environments, then that's a much bigger"] # [doc = " change, if only because it would require making the TZif parser no-alloc"] # [doc = " compatible, and it's not quite clear what the best way to do that is. We"] # [doc = " achieve the alloc-only API be introducing a trait that abstracts over a"] # [doc = " `File` for random access to bytes."] # [derive (Debug)] pub (crate) struct ConcatenatedTzif < R > { rdr : R , header : Header , }
+};
+}

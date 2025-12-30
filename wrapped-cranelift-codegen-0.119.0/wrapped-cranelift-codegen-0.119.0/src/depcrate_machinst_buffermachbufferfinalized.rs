@@ -1,0 +1,9 @@
+// Generated macro for MachBufferFinalized (struct)
+macro_rules! Depcrate_machinst_bufferMachBufferFinalized {
+() => {
+// Module: crate::machinst::buffer
+// Provides: {"MachBufferFinalized"}
+// Dependencies: {}
+# [doc = " A `MachBuffer` once emission is completed: holds generated code and records,"] # [doc = " without fixups. This allows the type to be independent of the backend."] # [derive (PartialEq , Debug , Clone)] # [cfg_attr (feature = "enable-serde" , derive (serde_derive :: Serialize , serde_derive :: Deserialize))] pub struct MachBufferFinalized < T : CompilePhase > { # [doc = " The buffer contents, as raw bytes."] pub (crate) data : SmallVec < [u8 ; 1024] > , # [doc = " Any relocations referring to this code. Note that only *external*"] # [doc = " relocations are tracked here; references to labels within the buffer are"] # [doc = " resolved before emission."] pub (crate) relocs : SmallVec < [FinalizedMachReloc ; 16] > , # [doc = " Any trap records referring to this code."] pub (crate) traps : SmallVec < [MachTrap ; 16] > , # [doc = " Any call site records referring to this code."] pub (crate) call_sites : SmallVec < [MachCallSite ; 16] > , # [doc = " Any source location mappings referring to this code."] pub (crate) srclocs : SmallVec < [T :: MachSrcLocType ; 64] > , # [doc = " Any user stack maps for this code."] # [doc = ""] # [doc = " Each entry is an `(offset, span, stack_map)` triple. Entries are sorted"] # [doc = " by code offset, and each stack map covers `span` bytes on the stack."] pub (crate) user_stack_maps : SmallVec < [(CodeOffset , u32 , ir :: UserStackMap) ; 8] > , # [doc = " Any unwind info at a given location."] pub unwind_info : SmallVec < [(CodeOffset , UnwindInst) ; 8] > , # [doc = " The required alignment of this buffer."] pub alignment : u32 , }
+};
+}

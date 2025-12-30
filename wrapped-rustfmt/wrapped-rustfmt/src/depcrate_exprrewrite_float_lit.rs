@@ -1,0 +1,9 @@
+// Generated macro for rewrite_float_lit (function)
+macro_rules! Depcrate_exprrewrite_float_lit {
+() => {
+// Module: crate::expr
+// Provides: {"rewrite_float_lit"}
+// Dependencies: {}
+fn rewrite_float_lit (context : & RewriteContext < '_ > , token_lit : token :: Lit , span : Span , shape : Shape ,) -> RewriteResult { if matches ! (context . config . float_literal_trailing_zero () , FloatLiteralTrailingZero :: Preserve) { return wrap_str (context . snippet (span) . to_owned () , context . config . max_width () , shape ,) . max_width_error (shape . width , span) ; } let symbol = token_lit . symbol . as_str () ; let suffix = token_lit . suffix . as_ref () . map (| s | s . as_str ()) ; let float_parts = parse_float_symbol (symbol) . unwrap () ; let FloatSymbolParts { integer_part , fractional_part , exponent , } = float_parts ; let has_postfix = exponent . is_some () || suffix . is_some () ; let fractional_part_nonzero = ! float_parts . is_fractional_part_zero () ; let (include_period , include_fractional_part) = match context . config . float_literal_trailing_zero () { FloatLiteralTrailingZero :: Preserve => unreachable ! ("handled above") , FloatLiteralTrailingZero :: Always => (true , true) , FloatLiteralTrailingZero :: IfNoPostfix => (fractional_part_nonzero || ! has_postfix , fractional_part_nonzero || ! has_postfix ,) , FloatLiteralTrailingZero :: Never => (fractional_part_nonzero || ! has_postfix , fractional_part_nonzero ,) , } ; let period = if include_period { "." } else { "" } ; let fractional_part = if include_fractional_part { fractional_part . unwrap_or ("0") } else { "" } ; wrap_str (format ! ("{}{}{}{}{}" , integer_part , period , fractional_part , exponent . unwrap_or ("") , suffix . unwrap_or ("") ,) , context . config . max_width () , shape ,) . max_width_error (shape . width , span) }
+};
+}

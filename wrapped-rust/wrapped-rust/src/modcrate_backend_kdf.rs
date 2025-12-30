@@ -1,0 +1,57 @@
+// Generated module macro for crate::backend::kdf
+macro_rules! Modcrate_backend_kdf {
+() => {
+        Depcrate_backend_kdfuse_236!();
+        Depcrate_backend_kdfuse_237!();
+        Depcrate_backend_kdfuse_238!();
+        Depcrate_backend_kdfuse_239!();
+        Depcrate_backend_kdfuse_240!();
+        Depcrate_backend_kdfuse_241!();
+        Depcrate_backend_kdfuse_242!();
+        Depcrate_backend_kdfuse_243!();
+        Depcrate_backend_kdfuse_244!();
+        Depcrate_backend_kdfuse_245!();
+        Depcrate_backend_kdfuse_246!();
+        Depcrate_backend_kdfPbkdf2Hmac!();
+        Depcrate_backend_kdfimpl_248!();
+        Depcrate_backend_kdfimpl_249!();
+        Depcrate_backend_kdfScrypt!();
+        Depcrate_backend_kdfimpl_251!();
+        Depcrate_backend_kdfimpl_252!();
+        Depcrate_backend_kdfArgon2Variant!();
+        Depcrate_backend_kdfBaseArgon2!();
+        Depcrate_backend_kdfimpl_255!();
+        Depcrate_backend_kdfArgon2d!();
+        Depcrate_backend_kdfArgon2i!();
+        Depcrate_backend_kdfArgon2id!();
+        Depcrate_backend_kdfimpl_259!();
+        Depcrate_backend_kdfimpl_260!();
+        Depcrate_backend_kdfimpl_261!();
+        Depcrate_backend_kdfHkdf!();
+        Depcrate_backend_kdfhkdf_extract!();
+        Depcrate_backend_kdfimpl_264!();
+        Depcrate_backend_kdfimpl_265!();
+        Depcrate_backend_kdfHkdfExpand!();
+        Depcrate_backend_kdfimpl_267!();
+        Depcrate_backend_kdfimpl_268!();
+        Depcrate_backend_kdfX963Kdf!();
+        Depcrate_backend_kdfimpl_270!();
+        Depcrate_backend_kdfimpl_271!();
+        Depcrate_backend_kdfConcatKdfHash!();
+        Depcrate_backend_kdfimpl_273!();
+        Depcrate_backend_kdfimpl_274!();
+        Depcrate_backend_kdfConcatKdfHmac!();
+        Depcrate_backend_kdfimpl_276!();
+        Depcrate_backend_kdfimpl_277!();
+        Depcrate_backend_kdfKbkdfHmac!();
+        Depcrate_backend_kdfCounterLocation!();
+        Depcrate_backend_kdfKbkdfParams!();
+        Depcrate_backend_kdfvalidate_kbkdf_parameters!();
+        Depcrate_backend_kdfkbkdf_derive_into_buffer!();
+        Depcrate_backend_kdfgenerate_fixed_input!();
+        Depcrate_backend_kdfimpl_284!();
+        Depcrate_backend_kdfKbkdfCmac!();
+        Depcrate_backend_kdfimpl_286!();
+        Depcrate_backend_kdfkdf!();
+    };
+}

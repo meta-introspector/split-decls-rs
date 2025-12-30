@@ -1,0 +1,9 @@
+// Generated macro for COMADMIN_E_LEGACYCOMPS_NOT_ALLOWED_IN_NONBASE_PARTITIONS (const)
+macro_rules! Depcrate_shared_winerrorCOMADMIN_E_LEGACYCOMPS_NOT_ALLOWED_IN_NONBASE_PARTITIONS {
+() => {
+// Module: crate::shared::winerror
+// Provides: {"COMADMIN_E_LEGACYCOMPS_NOT_ALLOWED_IN_NONBASE_PARTITIONS"}
+// Dependencies: {}
+pub const COMADMIN_E_LEGACYCOMPS_NOT_ALLOWED_IN_NONBASE_PARTITIONS : HRESULT = 0x8011081B ;
+};
+}

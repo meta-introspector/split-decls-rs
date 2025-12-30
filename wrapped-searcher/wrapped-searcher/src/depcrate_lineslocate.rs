@@ -1,0 +1,9 @@
+// Generated macro for locate (function)
+macro_rules! Depcrate_lineslocate {
+() => {
+// Module: crate::lines
+// Provides: {"locate"}
+// Dependencies: {}
+# [doc = " Return the start and end offsets of the lines containing the given range"] # [doc = " of bytes."] # [doc = ""] # [doc = " Line terminators are considered part of the line they terminate."] # [inline (always)] pub (crate) fn locate (bytes : & [u8] , line_term : u8 , range : Match) -> Match { let line_start = bytes [.. range . start ()] . rfind_byte (line_term) . map_or (0 , | i | i + 1) ; let line_end = if range . end () > line_start && bytes [range . end () - 1] == line_term { range . end () } else { bytes [range . end () ..] . find_byte (line_term) . map_or (bytes . len () , | i | range . end () + i + 1) } ; Match :: new (line_start , line_end) }
+};
+}

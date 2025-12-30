@@ -1,0 +1,9 @@
+// Generated macro for check_partial_ord_on_ord (function)
+macro_rules! Depcrate_non_canonical_implscheck_partial_ord_on_ord {
+() => {
+// Module: crate::non_canonical_impls
+// Provides: {"check_partial_ord_on_ord"}
+// Dependencies: {}
+fn check_partial_ord_on_ord < 'tcx > (cx : & LateContext < 'tcx > , impl_item : & ImplItem < '_ > , item : & Item < '_ > , body : & Body < '_ > , block : & Block < 'tcx > ,) { let mut needs_fully_qualified = false ; if block . stmts . is_empty () && let Some (expr) = block . expr && expr_is_cmp (cx , expr , impl_item , & mut needs_fully_qualified) { return ; } else if block . expr . is_none () && let Some (stmt) = block . stmts . first () && let rustc_hir :: StmtKind :: Semi (Expr { kind : ExprKind :: Ret (Some (ret)) , .. }) = stmt . kind && expr_is_cmp (cx , ret , impl_item , & mut needs_fully_qualified) { return ; } else if is_from_proc_macro (cx , impl_item) { return ; } span_lint_and_then (cx , NON_CANONICAL_PARTIAL_ORD_IMPL , item . span , "non-canonical implementation of `partial_cmp` on an `Ord` type" , | diag | { let [_ , other] = body . params else { return ; } ; let Some (std_or_core) = std_or_core (cx) else { return ; } ; let suggs = match (other . pat . simple_ident () , needs_fully_qualified) { (Some (other_ident) , true) => vec ! [(block . span , format ! ("{{ Some({std_or_core}::cmp::Ord::cmp(self, {})) }}" , other_ident . name) ,)] , (Some (other_ident) , false) => { vec ! [(block . span , format ! ("{{ Some(self.cmp({})) }}" , other_ident . name))] } , (None , true) => vec ! [(block . span , format ! ("{{ Some({std_or_core}::cmp::Ord::cmp(self, other)) }}") ,) , (other . pat . span , "other" . to_owned ()) ,] , (None , false) => vec ! [(block . span , "{ Some(self.cmp(other)) }" . to_owned ()) , (other . pat . span , "other" . to_owned ()) ,] , } ; diag . multipart_suggestion ("change this to" , suggs , Applicability :: Unspecified) ; } ,) ; }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for assert_size_eq_ptr (macro)
+macro_rules! Depcrate_assert_sizeassert_size_eq_ptr {
+() => {
+// Module: crate::assert_size
+// Provides: {"assert_size_eq_ptr"}
+// Dependencies: {}
+# [doc = " Asserts that values pointed to are equal in size."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " This especially is useful for when coercing pointers between different types"] # [doc = " and ensuring the underlying values are the same size."] # [doc = ""] # [doc = " ```"] # [doc = " # #[macro_use] extern crate static_assertions; fn main() {}"] # [doc = " fn operation(x: &(u32, u32), y: &[u16; 4]) {"] # [doc = "     assert_size_eq_ptr!(x, y);"] # [doc = "     // ..."] # [doc = " }"] # [doc = " ```"] # [doc = ""] # [doc = " The following example fails to compile because byte arrays of different"] # [doc = " lengths have different sizes:"] # [doc = ""] # [doc = " ```compile_fail"] # [doc = " # #[macro_use] extern crate static_assertions;"] # [doc = " # fn main() {"] # [doc = " static BYTES: &[u8; 4] = &["] # [doc = "     /* ... */"] # [doc = "     # 0; 4"] # [doc = " ];"] # [doc = ""] # [doc = " static TABLE: &[u8; 16] = &["] # [doc = "     /* ... */"] # [doc = "     # 0; 16"] # [doc = " ];"] # [doc = ""] # [doc = " assert_size_eq_ptr!(BYTES, TABLE);"] # [doc = " ```"] # [macro_export] macro_rules ! assert_size_eq_ptr { ($ x : expr , $ ($ xs : expr) ,+ $ (,) ?) => { # [allow (unknown_lints , unsafe_code , forget_copy , useless_transmute)] let _ = || unsafe { use $ crate :: _core :: { mem , ptr } ; let mut copy = ptr :: read ($ x) ; $ (ptr :: write (& mut copy , mem :: transmute (ptr :: read ($ xs))) ;) + mem :: forget (copy) ; } ; } }
+};
+}

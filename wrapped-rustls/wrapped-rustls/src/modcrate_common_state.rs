@@ -1,0 +1,50 @@
+// Generated module macro for crate::common_state
+macro_rules! Modcrate_common_state {
+() => {
+        Depcrate_common_stateuse_589!();
+        Depcrate_common_stateuse_590!();
+        Depcrate_common_stateuse_591!();
+        Depcrate_common_stateuse_592!();
+        Depcrate_common_stateuse_593!();
+        Depcrate_common_stateuse_594!();
+        Depcrate_common_stateuse_595!();
+        Depcrate_common_stateuse_596!();
+        Depcrate_common_stateuse_597!();
+        Depcrate_common_stateuse_598!();
+        Depcrate_common_stateuse_599!();
+        Depcrate_common_stateuse_600!();
+        Depcrate_common_stateuse_601!();
+        Depcrate_common_stateuse_602!();
+        Depcrate_common_stateuse_603!();
+        Depcrate_common_stateuse_604!();
+        Depcrate_common_stateuse_605!();
+        Depcrate_common_stateuse_606!();
+        Depcrate_common_stateuse_607!();
+        Depcrate_common_stateuse_608!();
+        Depcrate_common_stateuse_609!();
+        Depcrate_common_stateuse_610!();
+        Depcrate_common_stateCommonState!();
+        Depcrate_common_stateimpl_612!();
+        Depcrate_common_stateimpl_613!();
+        Depcrate_common_stateHandshakeKind!();
+        Depcrate_common_stateIoState!();
+        Depcrate_common_stateimpl_616!();
+        Depcrate_common_stateState!();
+        Depcrate_common_stateContext!();
+        Depcrate_common_stateSide!();
+        Depcrate_common_stateimpl_620!();
+        Depcrate_common_stateProtocol!();
+        Depcrate_common_stateLimit!();
+        Depcrate_common_stateTemperCounters!();
+        Depcrate_common_stateimpl_624!();
+        Depcrate_common_stateimpl_625!();
+        Depcrate_common_stateKxState!();
+        Depcrate_common_stateimpl_627!();
+        Depcrate_common_stateHandshakeFlight!();
+        Depcrate_common_stateimpl_629!();
+        Depcrate_common_stateHandshakeFlightTls12!();
+        Depcrate_common_stateHandshakeFlightTls13!();
+        Depcrate_common_stateDEFAULT_RECEIVED_PLAINTEXT_LIMIT!();
+        Depcrate_common_stateDEFAULT_BUFFER_LIMIT!();
+    };
+}

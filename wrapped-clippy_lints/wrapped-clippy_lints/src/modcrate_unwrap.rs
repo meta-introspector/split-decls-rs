@@ -1,0 +1,49 @@
+// Generated module macro for crate::unwrap
+macro_rules! Modcrate_unwrap {
+() => {
+        Depcrate_unwrapuse_11186!();
+        Depcrate_unwrapuse_11187!();
+        Depcrate_unwrapuse_11188!();
+        Depcrate_unwrapuse_11189!();
+        Depcrate_unwrapuse_11190!();
+        Depcrate_unwrapuse_11191!();
+        Depcrate_unwrapuse_11192!();
+        Depcrate_unwrapuse_11193!();
+        Depcrate_unwrapuse_11194!();
+        Depcrate_unwrapuse_11195!();
+        Depcrate_unwrapuse_11196!();
+        Depcrate_unwrapuse_11197!();
+        Depcrate_unwrapuse_11198!();
+        Depcrate_unwrapuse_11199!();
+        Depcrate_unwrapuse_11200!();
+        Depcrate_unwrapuse_11201!();
+        Depcrate_unwrapuse_11202!();
+        Depcrate_unwrapuse_11203!();
+        Depcrate_unwrapuse_11204!();
+        Depcrate_unwrapuse_11205!();
+        Depcrate_unwrapuse_11206!();
+        Depcrate_unwrapuse_11207!();
+        Depcrate_unwrapmacro_11208!();
+        Depcrate_unwrapmacro_11209!();
+        Depcrate_unwrapUnwrap!();
+        Depcrate_unwrapimpl_11211!();
+        Depcrate_unwrapUnwrappableVariablesVisitor!();
+        Depcrate_unwrapUnwrappableKind!();
+        Depcrate_unwrapimpl_11214!();
+        Depcrate_unwrapLocal!();
+        Depcrate_unwrapimpl_11216!();
+        Depcrate_unwrapimpl_11217!();
+        Depcrate_unwrapUnwrapInfo!();
+        Depcrate_unwrapcollect_unwrap_info!();
+        Depcrate_unwrapextract_local!();
+        Depcrate_unwrapMutationVisitor!();
+        Depcrate_unwrapis_as_mut_use!();
+        Depcrate_unwrapimpl_11223!();
+        Depcrate_unwrapimpl_11224!();
+        Depcrate_unwrapAsRefKind!();
+        Depcrate_unwrapconsume_option_as_ref!();
+        Depcrate_unwrapimpl_11227!();
+        Depcrate_unwrapmacro_11228!();
+        Depcrate_unwrapimpl_11229!();
+    };
+}

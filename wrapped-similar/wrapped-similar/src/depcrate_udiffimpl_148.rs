@@ -1,0 +1,9 @@
+// Generated macro for impl_148 (impl)
+macro_rules! Depcrate_udiffimpl_148 {
+() => {
+// Module: crate::udiff
+// Provides: {"impl_148"}
+// Dependencies: {}
+impl < 'diff , 'old , 'new , 'bufs , T : DiffableStr + ? Sized > UnifiedDiffHunk < 'diff , 'old , 'new , 'bufs , T > { # [doc = " Creates a new hunk for some operations."] pub fn new (ops : Vec < DiffOp > , diff : & 'diff TextDiff < 'old , 'new , 'bufs , T > , missing_newline_hint : bool ,) -> UnifiedDiffHunk < 'diff , 'old , 'new , 'bufs , T > { UnifiedDiffHunk { diff , ops , missing_newline_hint , } } # [doc = " Returns the header for the hunk."] pub fn header (& self) -> UnifiedHunkHeader { UnifiedHunkHeader :: new (& self . ops) } # [doc = " Returns all operations in the hunk."] pub fn ops (& self) -> & [DiffOp] { & self . ops } # [doc = " Returns the value of the `missing_newline_hint` flag."] pub fn missing_newline_hint (& self) -> bool { self . missing_newline_hint } # [doc = " Iterates over all changes in a hunk."] pub fn iter_changes < 'x , 'slf > (& 'slf self) -> AllChangesIter < 'slf , 'x , T > where 'x : 'slf + 'old + 'new , 'old : 'x , 'new : 'x , { AllChangesIter :: new (self . diff . old_slices () , self . diff . new_slices () , self . ops ()) } # [doc = " Write the hunk as bytes to the output stream."] pub fn to_writer < W : io :: Write > (& self , mut w : W) -> Result < () , io :: Error > where 'diff : 'old + 'new + 'bufs , { for (idx , change) in self . iter_changes () . enumerate () { if idx == 0 { writeln ! (w , "{}" , self . header ()) ? ; } write ! (w , "{}" , change . tag ()) ? ; w . write_all (change . value () . as_bytes ()) ? ; if ! self . diff . newline_terminated () { writeln ! (w) ? ; } if self . diff . newline_terminated () && change . missing_newline () { writeln ! (w , "{}" , MissingNewlineHint (self . missing_newline_hint)) ? ; } } Ok (()) } }
+};
+}

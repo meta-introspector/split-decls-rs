@@ -1,0 +1,9 @@
+// Generated macro for impl_2697 (impl)
+macro_rules! Depcrate_implicit_hasherimpl_2697 {
+() => {
+// Module: crate::implicit_hasher
+// Provides: {"impl_2697"}
+// Dependencies: {}
+impl < 'tcx > ImplicitHasherType < 'tcx > { # [doc = " Checks that `ty` is a target type without a `BuildHasher`."] fn new (cx : & LateContext < 'tcx > , hir_ty : & hir :: Ty < 'tcx >) -> Option < Self > { if let TyKind :: Path (QPath :: Resolved (None , path)) = hir_ty . kind { let params : Vec < _ > = path . segments . last () . as_ref () ? . args . as_ref () ? . args . iter () . filter_map (| arg | match arg { GenericArg :: Type (ty) => Some (ty) , _ => None , }) . collect () ; let params_len = params . len () ; let ty = lower_ty (cx . tcx , hir_ty) ; if is_type_diagnostic_item (cx , ty , sym :: HashMap) && params_len == 2 { Some (ImplicitHasherType :: HashMap (hir_ty . span , ty , snippet (cx , params [0] . span , "K") , snippet (cx , params [1] . span , "V") ,)) } else if is_type_diagnostic_item (cx , ty , sym :: HashSet) && params_len == 1 { Some (ImplicitHasherType :: HashSet (hir_ty . span , ty , snippet (cx , params [0] . span , "T") ,)) } else { None } } else { None } } fn type_name (& self) -> & 'static str { match * self { ImplicitHasherType :: HashMap (..) => "HashMap" , ImplicitHasherType :: HashSet (..) => "HashSet" , } } fn type_arguments (& self) -> String { match * self { ImplicitHasherType :: HashMap (.. , ref k , ref v) => format ! ("{k}, {v}") , ImplicitHasherType :: HashSet (.. , ref t) => format ! ("{t}") , } } fn ty (& self) -> Ty < 'tcx > { match * self { ImplicitHasherType :: HashMap (_ , ty , ..) | ImplicitHasherType :: HashSet (_ , ty , ..) => ty , } } fn span (& self) -> Span { match * self { ImplicitHasherType :: HashMap (span , ..) | ImplicitHasherType :: HashSet (span , ..) => span , } } }
+};
+}

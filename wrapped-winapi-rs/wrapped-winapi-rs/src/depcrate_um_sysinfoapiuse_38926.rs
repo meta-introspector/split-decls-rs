@@ -1,0 +1,9 @@
+// Generated macro for use_38926 (use)
+macro_rules! Depcrate_um_sysinfoapiuse_38926 {
+() => {
+// Module: crate::um::sysinfoapi
+// Provides: {"use_38926"}
+// Dependencies: {}
+use um :: winnt :: { DWORDLONG , HANDLE , LOGICAL_PROCESSOR_RELATIONSHIP , LPCSTR , LPCWSTR , LPOSVERSIONINFOA , LPOSVERSIONINFOW , LPSTR , LPWSTR , PSYSTEM_LOGICAL_PROCESSOR_INFORMATION , PSYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX , PSYSTEM_PROCESSOR_CYCLE_TIME_INFORMATION , PULONGLONG , PVOID , ULONGLONG , } ;
+};
+}

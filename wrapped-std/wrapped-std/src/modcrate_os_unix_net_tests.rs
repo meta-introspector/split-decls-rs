@@ -1,0 +1,47 @@
+// Generated module macro for crate::os::unix::net::tests
+macro_rules! Modcrate_os_unix_net_tests {
+() => {
+        Depcrate_os_unix_net_testsuse_1598!();
+        Depcrate_os_unix_net_testsuse_1599!();
+        Depcrate_os_unix_net_testsuse_1600!();
+        Depcrate_os_unix_net_testsuse_1601!();
+        Depcrate_os_unix_net_testsuse_1602!();
+        Depcrate_os_unix_net_testsuse_1603!();
+        Depcrate_os_unix_net_testsuse_1604!();
+        Depcrate_os_unix_net_testsuse_1605!();
+        Depcrate_os_unix_net_testsuse_1606!();
+        Depcrate_os_unix_net_testsuse_1607!();
+        Depcrate_os_unix_net_testsor_panic!();
+        Depcrate_os_unix_net_testsbasic!();
+        Depcrate_os_unix_net_testsvectored!();
+        Depcrate_os_unix_net_testspair!();
+        Depcrate_os_unix_net_teststry_clone!();
+        Depcrate_os_unix_net_testsiter!();
+        Depcrate_os_unix_net_testslong_path!();
+        Depcrate_os_unix_net_teststimeouts!();
+        Depcrate_os_unix_net_teststest_read_timeout!();
+        Depcrate_os_unix_net_teststest_read_with_timeout!();
+        Depcrate_os_unix_net_teststest_unix_stream_timeout_zero_duration!();
+        Depcrate_os_unix_net_teststest_unix_datagram!();
+        Depcrate_os_unix_net_teststest_unnamed_unix_datagram!();
+        Depcrate_os_unix_net_teststest_unix_datagram_connect_to_recv_addr!();
+        Depcrate_os_unix_net_teststest_connect_unix_datagram!();
+        Depcrate_os_unix_net_teststest_unix_datagram_recv!();
+        Depcrate_os_unix_net_testsdatagram_pair!();
+        Depcrate_os_unix_net_teststest_unix_datagram_timeout_zero_duration!();
+        Depcrate_os_unix_net_testsabstract_socket_addr_debug!();
+        Depcrate_os_unix_net_testsabstract_namespace_not_allowed_connect!();
+        Depcrate_os_unix_net_teststest_abstract_stream_connect!();
+        Depcrate_os_unix_net_teststest_abstract_stream_iter!();
+        Depcrate_os_unix_net_teststest_abstract_datagram_bind_send_to_addr!();
+        Depcrate_os_unix_net_teststest_abstract_datagram_connect_addr!();
+        Depcrate_os_unix_net_teststest_abstract_name_too_long!();
+        Depcrate_os_unix_net_teststest_abstract_no_pathname_and_not_unnamed!();
+        Depcrate_os_unix_net_teststest_unix_stream_peek!();
+        Depcrate_os_unix_net_teststest_unix_datagram_peek!();
+        Depcrate_os_unix_net_teststest_unix_datagram_peek_from!();
+        Depcrate_os_unix_net_teststest_send_vectored_fds_unix_stream!();
+        Depcrate_os_unix_net_teststest_send_vectored_with_ancillary_to_unix_datagram!();
+        Depcrate_os_unix_net_teststest_send_vectored_with_ancillary_unix_datagram!();
+    };
+}

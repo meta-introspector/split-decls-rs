@@ -1,0 +1,9 @@
+// Generated macro for impl_35 (impl)
+macro_rules! Depcrate_graphql_transport_wsimpl_35 {
+() => {
+// Module: crate::graphql_transport_ws
+// Provides: {"impl_35"}
+// Dependencies: {}
+impl < S , I , T > Sink < T > for Connection < S , I > where T : TryInto < Input < S :: ScalarValue > > , T :: Error : Error , S : Schema , I : Init < S :: ScalarValue , S :: Context > + Send , { type Error = Infallible ; fn poll_ready (self : Pin < & mut Self > , cx : & mut Context) -> Poll < Result < () , Self :: Error > > { self . poll_sink (cx) . map_err (| e | panic ! ("`Connection::poll_ready()`: {e}")) } fn start_send (self : Pin < & mut Self > , item : T) -> Result < () , Self :: Error > { let s = self . get_mut () ; let state = & mut s . sink_state ; * state = match std :: mem :: replace (state , ConnectionSinkState :: Closed) { ConnectionSinkState :: Ready { state } => { match item . try_into () { Ok (Input :: Message (msg)) => ConnectionSinkState :: HandlingMessage { result : state . handle_message (msg) . boxed () , } , Ok (Input :: Close) => { s . reactions . push (Output :: Close { code : 1000 , message : "Normal Closure" . into () , } . into_stream () ,) ; ConnectionSinkState :: Closed } Err (e) => { s . reactions . push (Output :: Close { code : 4400 , message : e . to_string () , } . into_stream () ,) ; ConnectionSinkState :: Closed } } } _ => panic ! ("`Sink::start_send()`: called when not ready") , } ; Ok (()) } fn poll_flush (self : Pin < & mut Self > , cx : & mut Context) -> Poll < Result < () , Self :: Error > > { self . poll_sink (cx) . map (| _ | Ok (())) } fn poll_close (mut self : Pin < & mut Self > , _ : & mut Context) -> Poll < Result < () , Self :: Error > > { self . sink_state = ConnectionSinkState :: Closed ; if let Some (waker) = self . stream_waker . take () { waker . wake () ; } Poll :: Ready (Ok (())) } }
+};
+}

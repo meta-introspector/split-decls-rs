@@ -1,0 +1,9 @@
+// Generated macro for DISPLAYCONFIG_TARGET_FORCED_AVAILABILITY_SYSTEM (const)
+macro_rules! Depcrate_um_wingdiDISPLAYCONFIG_TARGET_FORCED_AVAILABILITY_SYSTEM {
+() => {
+// Module: crate::um::wingdi
+// Provides: {"DISPLAYCONFIG_TARGET_FORCED_AVAILABILITY_SYSTEM"}
+// Dependencies: {}
+pub const DISPLAYCONFIG_TARGET_FORCED_AVAILABILITY_SYSTEM : DWORD = 0x00000010 ;
+};
+}

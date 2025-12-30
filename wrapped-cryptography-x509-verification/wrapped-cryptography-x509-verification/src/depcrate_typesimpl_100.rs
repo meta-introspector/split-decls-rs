@@ -1,0 +1,9 @@
+// Generated macro for impl_100 (impl)
+macro_rules! Depcrate_typesimpl_100 {
+() => {
+// Module: crate::types
+// Provides: {"impl_100"}
+// Dependencies: {}
+# [doc = " An `IPConstraint` represents a CIDR-style IP address range used in a name constraints"] # [doc = " extension, as defined by [RFC 5280 4.2.1.10]."] # [doc = ""] # [doc = " [RFC 5280 4.2.1.10]: https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.10"] impl IPConstraint { # [doc = " Constructs an `IPConstraint` from a slice. The input slice must be 8 (IPv4)"] # [doc = " or 32 (IPv6) bytes long and contain two IP addresses, the first being"] # [doc = " a subnet and the second defining the subnet's mask."] # [doc = ""] # [doc = " The subnet mask must contain only one contiguous run of set bits starting"] # [doc = " from the most significant bit. For example, a valid IPv4 subnet mask would"] # [doc = " be FF FF 00 00, whereas an invalid IPv4 subnet mask would be FF EF 00 00."] pub fn from_bytes (b : & [u8]) -> Option < Self > { let slice_idx = match b . len () { 8 => 4 , 32 => 16 , _ => return None , } ; let prefix = IPAddress :: from_bytes (& b [slice_idx ..]) ? . as_prefix () ? ; Some (IPConstraint { address : IPAddress :: from_bytes (& b [.. slice_idx]) ? . mask (prefix) , prefix , }) } # [doc = " Determines if the `addr` is within the `IPConstraint`."] # [doc = ""] # [doc = " ```rust"] # [doc = " # use cryptography_x509_verification::types::{IPAddress, IPConstraint};"] # [doc = " let range_bytes = b\"\\xc6\\x33\\x64\\x00\\xff\\xff\\xff\\x00\";"] # [doc = " let range = IPConstraint::from_bytes(range_bytes).unwrap();"] # [doc = " assert!(range.matches(&IPAddress::from_str(\"198.51.100.42\").unwrap()));"] # [doc = " ```"] pub fn matches (& self , addr : & IPAddress) -> bool { self . address == addr . mask (self . prefix) } }
+};
+}

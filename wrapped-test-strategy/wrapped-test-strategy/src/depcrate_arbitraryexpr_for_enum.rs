@@ -1,0 +1,9 @@
+// Generated macro for expr_for_enum (function)
+macro_rules! Depcrate_arbitraryexpr_for_enum {
+() => {
+// Module: crate::arbitrary
+// Provides: {"expr_for_enum"}
+// Dependencies: {}
+fn expr_for_enum (input : & DeriveInput , data : & DataEnum , bounds : & mut Bounds) -> Result < TokenStream > { if data . variants . is_empty () { bail ! (Span :: call_site () , "zero variant enum was not supported.") ; } let generics = GenericParamSet :: new (& input . generics) ; let mut exprs = Vec :: new () ; for variant in & data . variants { let args : ArbitraryArgsForFieldOrVariant = parse_from_attrs (& variant . attrs , "arbitrary") ? ; let mut weight = None ; for attr in & variant . attrs { let Some (ident) = attr . path () . get_ident () else { continue ; } ; if ident == "weight" { if weight . is_some () { bail ! (attr . span () , "`#[weight]` can specify only once.") ; } weight = Some (attr . parse_args :: < WeightArg > () ?) ; } if ident == "any" || ident == "strategy" || ident == "map" || ident == "by_ref" { bail ! (attr . span () , "`#[{ident}]` cannot be specified for a variant. Consider specifying it for a field instead.") ; } } let weight = if let Some (arg) = weight { if arg . is_zero () { continue ; } else { let expr = arg . 0 ; quote_spanned ! (expr . span () => _to_weight (# expr)) } } else { quote ! (1) } ; let variant_ident = & variant . ident ; let mut bounds = bounds . child (args . bound) ; let expr = expr_for_fields (parse_quote ! (Self ::# variant_ident) , & generics , & variant . fields , & variant . attrs , false , & mut bounds ,) ? ; exprs . push (quote ! { # weight => # expr }) ; } let s : Ident = parse_quote ! (_s) ; let filter_lets = Filter :: from_enum_attrs_make_let (& input . attrs , & s) ? ; Ok (quote ! { { # [allow (dead_code)] fn _to_weight (weight : u32) -> u32 { weight } let # s = proptest :: prop_oneof ! [# (# exprs ,) *] ; # filter_lets # s } }) }
+};
+}

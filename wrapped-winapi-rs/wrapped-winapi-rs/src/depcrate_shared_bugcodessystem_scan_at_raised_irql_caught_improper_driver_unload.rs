@@ -1,0 +1,9 @@
+// Generated macro for SYSTEM_SCAN_AT_RAISED_IRQL_CAUGHT_IMPROPER_DRIVER_UNLOAD (const)
+macro_rules! Depcrate_shared_bugcodesSYSTEM_SCAN_AT_RAISED_IRQL_CAUGHT_IMPROPER_DRIVER_UNLOAD {
+() => {
+// Module: crate::shared::bugcodes
+// Provides: {"SYSTEM_SCAN_AT_RAISED_IRQL_CAUGHT_IMPROPER_DRIVER_UNLOAD"}
+// Dependencies: {}
+pub const SYSTEM_SCAN_AT_RAISED_IRQL_CAUGHT_IMPROPER_DRIVER_UNLOAD : ULONG = 0x000000D4 ;
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for D3D11_TESSELLATOR_OUTPUT_UNDEFINED (const)
+macro_rules! Depcrate_um_d3dcommonD3D11_TESSELLATOR_OUTPUT_UNDEFINED {
+() => {
+// Module: crate::um::d3dcommon
+// Provides: {"D3D11_TESSELLATOR_OUTPUT_UNDEFINED"}
+// Dependencies: {}
+pub const D3D11_TESSELLATOR_OUTPUT_UNDEFINED : D3D_TESSELLATOR_OUTPUT_PRIMITIVE = D3D_TESSELLATOR_OUTPUT_UNDEFINED ;
+};
+}

@@ -1,0 +1,42 @@
+// Generated module macro for crate::sip128
+macro_rules! Modcrate_sip128 {
+() => {
+        Depcrate_sip128use_34!();
+        Depcrate_sip128use_35!();
+        Depcrate_sip128use_36!();
+        Depcrate_sip128use_37!();
+        Depcrate_sip128use_38!();
+        Depcrate_sip128use_39!();
+        Depcrate_sip128Hash128!();
+        Depcrate_sip128impl_41!();
+        Depcrate_sip128impl_42!();
+        Depcrate_sip128impl_43!();
+        Depcrate_sip128impl_44!();
+        Depcrate_sip128SipHasher13!();
+        Depcrate_sip128SipHasher24!();
+        Depcrate_sip128SipHasher!();
+        Depcrate_sip128Hasher!();
+        Depcrate_sip128State!();
+        Depcrate_sip128Hasher128!();
+        Depcrate_sip128impl_51!();
+        Depcrate_sip128impl_52!();
+        Depcrate_sip128impl_53!();
+        Depcrate_sip128impl_54!();
+        Depcrate_sip128impl_55!();
+        Depcrate_sip128impl_56!();
+        Depcrate_sip128impl_57!();
+        Depcrate_sip128impl_58!();
+        Depcrate_sip128impl_59!();
+        Depcrate_sip128impl_60!();
+        Depcrate_sip128impl_61!();
+        Depcrate_sip128impl_62!();
+        Depcrate_sip128impl_63!();
+        Depcrate_sip128impl_64!();
+        Depcrate_sip128Sip!();
+        Depcrate_sip128Sip13Rounds!();
+        Depcrate_sip128impl_67!();
+        Depcrate_sip128Sip24Rounds!();
+        Depcrate_sip128impl_69!();
+        Depcrate_sip128impl_70!();
+    };
+}

@@ -1,0 +1,9 @@
+// Generated macro for gz_header (struct)
+macro_rules! Depcrate_c_apigz_header {
+() => {
+// Module: crate::c_api
+// Provides: {"gz_header"}
+// Dependencies: {}
+# [doc = " gzip header information passed to and from zlib routines."] # [doc = " See RFC 1952 for more details on the meanings of these fields."] # [derive (Debug)] # [repr (C)] pub struct gz_header { # [doc = " true if compressed data believed to be text"] pub text : i32 , # [doc = " modification time"] pub time : c_ulong , # [doc = " extra flags (not used when writing a gzip file)"] pub xflags : i32 , # [doc = " operating system"] pub os : i32 , # [doc = " pointer to extra field or NULL if none"] pub extra : * mut u8 , # [doc = " extra field length (valid if extra != NULL)"] pub extra_len : u32 , # [doc = " space at extra (only when reading header)"] pub extra_max : u32 , # [doc = " pointer to zero-terminated file name or NULL"] pub name : * mut u8 , # [doc = " space at name (only when reading header)"] pub name_max : u32 , # [doc = " pointer to zero-terminated comment or NULL"] pub comment : * mut u8 , # [doc = " space at comment (only when reading header)"] pub comm_max : u32 , # [doc = " true if there was or will be a header crc"] pub hcrc : i32 , # [doc = " true when done reading gzip header (not used when writing a gzip file)"] pub done : i32 , }
+};
+}

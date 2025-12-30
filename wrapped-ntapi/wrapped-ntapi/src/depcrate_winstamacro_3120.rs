@@ -1,0 +1,9 @@
+// Generated macro for macro_3120 (macro)
+macro_rules! Depcrate_winstamacro_3120 {
+() => {
+// Module: crate::winsta
+// Provides: {"macro_3120"}
+// Dependencies: {}
+BITFIELD ! { USERCONFIG Bitfields : ULONG [fInheritAutoLogon set_fInheritAutoLogon [0 .. 1] , fInheritResetBroken set_fInheritResetBroken [1 .. 2] , fInheritReconnectSame set_fInheritReconnectSame [2 .. 3] , fInheritInitialProgram set_fInheritInitialProgram [3 .. 4] , fInheritCallback set_fInheritCallback [4 .. 5] , fInheritCallbackNumber set_fInheritCallbackNumber [5 .. 6] , fInheritShadow set_fInheritShadow [6 .. 7] , fInheritMaxSessionTime set_fInheritMaxSessionTime [7 .. 8] , fInheritMaxDisconnectionTime set_fInheritMaxDisconnectionTime [8 .. 9] , fInheritMaxIdleTime set_fInheritMaxIdleTime [9 .. 10] , fInheritAutoClient set_fInheritAutoClient [10 .. 11] , fInheritSecurity set_fInheritSecurity [11 .. 12] , fPromptForPassword set_fPromptForPassword [12 .. 13] , fResetBroken set_fResetBroken [13 .. 14] , fReconnectSame set_fReconnectSame [14 .. 15] , fLogonDisabled set_fLogonDisabled [15 .. 16] , fWallPaperDisabled set_fWallPaperDisabled [16 .. 17] , fAutoClientDrives set_fAutoClientDrives [17 .. 18] , fAutoClientLpts set_fAutoClientLpts [18 .. 19] , fForceClientLptDef set_fForceClientLptDef [19 .. 20] , fRequireEncryption set_fRequireEncryption [20 .. 21] , fDisableEncryption set_fDisableEncryption [21 .. 22] , fUnused1 set_fUnused1 [22 .. 23] , fHomeDirectoryMapRoot set_fHomeDirectoryMapRoot [23 .. 24] , fUseDefaultGina set_fUseDefaultGina [24 .. 25] , fCursorBlinkDisabled set_fCursorBlinkDisabled [25 .. 26] , fPublishedApp set_fPublishedApp [26 .. 27] , fHideTitleBar set_fHideTitleBar [27 .. 28] , fMaximize set_fMaximize [28 .. 29] , fDisableCpm set_fDisableCpm [29 .. 30] , fDisableCdm set_fDisableCdm [30 .. 31] , fDisableCcm set_fDisableCcm [31 .. 32] ,] }
+};
+}

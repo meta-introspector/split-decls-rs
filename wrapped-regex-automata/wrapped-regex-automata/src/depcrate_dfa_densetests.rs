@@ -1,0 +1,9 @@
+// Generated macro for tests (module)
+macro_rules! Depcrate_dfa_densetests {
+() => {
+// Module: crate::dfa::dense
+// Provides: {"tests"}
+// Dependencies: {}
+# [cfg (all (test , feature = "syntax" , feature = "dfa-build"))] mod tests { use crate :: { Input , MatchError } ; use super :: * ; # [test] fn errors_with_unicode_word_boundary () { let pattern = r"\b" ; assert ! (Builder :: new () . build (pattern) . is_err ()) ; } # [test] fn roundtrip_never_match () { let dfa = DFA :: never_match () . unwrap () ; let (buf , _) = dfa . to_bytes_native_endian () ; let dfa : DFA < & [u32] > = DFA :: from_bytes (& buf) . unwrap () . 0 ; assert_eq ! (None , dfa . try_search_fwd (& Input :: new ("foo12345")) . unwrap ()) ; } # [test] fn roundtrip_always_match () { use crate :: HalfMatch ; let dfa = DFA :: always_match () . unwrap () ; let (buf , _) = dfa . to_bytes_native_endian () ; let dfa : DFA < & [u32] > = DFA :: from_bytes (& buf) . unwrap () . 0 ; assert_eq ! (Some (HalfMatch :: must (0 , 0)) , dfa . try_search_fwd (& Input :: new ("foo12345")) . unwrap ()) ; } # [test] fn heuristic_unicode_reverse () { let dfa = DFA :: builder () . configure (DFA :: config () . unicode_word_boundary (true)) . thompson (thompson :: Config :: new () . reverse (true)) . build (r"\b[0-9]+\b") . unwrap () ; let input = Input :: new ("β123") . range (2 ..) ; let expected = MatchError :: quit (0xB2 , 1) ; let got = dfa . try_search_rev (& input) ; assert_eq ! (Err (expected) , got) ; let input = Input :: new ("123β") . range (.. 3) ; let expected = MatchError :: quit (0xCE , 3) ; let got = dfa . try_search_rev (& input) ; assert_eq ! (Err (expected) , got) ; } # [test] fn regression_validation_order () { let mut dfa = DFA :: new ("abc") . unwrap () ; dfa . ms = MatchStates { slices : vec ! [] , pattern_ids : vec ! [] , pattern_len : 1 , } ; let (buf , _) = dfa . to_bytes_native_endian () ; DFA :: from_bytes (& buf) . unwrap_err () ; } }
+};
+}

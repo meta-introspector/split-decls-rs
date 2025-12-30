@@ -1,0 +1,44 @@
+// Generated module macro for crate::cargo_workspace
+macro_rules! Modcrate_cargo_workspace {
+() => {
+        Depcrate_cargo_workspaceuse_67!();
+        Depcrate_cargo_workspaceuse_68!();
+        Depcrate_cargo_workspaceuse_69!();
+        Depcrate_cargo_workspaceuse_70!();
+        Depcrate_cargo_workspaceuse_71!();
+        Depcrate_cargo_workspaceuse_72!();
+        Depcrate_cargo_workspaceuse_73!();
+        Depcrate_cargo_workspaceuse_74!();
+        Depcrate_cargo_workspaceuse_75!();
+        Depcrate_cargo_workspaceuse_76!();
+        Depcrate_cargo_workspaceuse_77!();
+        Depcrate_cargo_workspaceuse_78!();
+        Depcrate_cargo_workspaceuse_79!();
+        Depcrate_cargo_workspaceuse_80!();
+        Depcrate_cargo_workspaceMINIMUM_TOOLCHAIN_VERSION_SUPPORTING_LOCKFILE_PATH!();
+        Depcrate_cargo_workspaceCargoWorkspace!();
+        Depcrate_cargo_workspaceimpl_83!();
+        Depcrate_cargo_workspaceimpl_84!();
+        Depcrate_cargo_workspaceRustLibSource!();
+        Depcrate_cargo_workspaceCargoFeatures!();
+        Depcrate_cargo_workspaceimpl_87!();
+        Depcrate_cargo_workspaceTargetDirectoryConfig!();
+        Depcrate_cargo_workspaceimpl_89!();
+        Depcrate_cargo_workspaceCargoConfig!();
+        Depcrate_cargo_workspacePackage!();
+        Depcrate_cargo_workspaceTarget!();
+        Depcrate_cargo_workspacePackageData!();
+        Depcrate_cargo_workspaceRustAnalyzerPackageMetaData!();
+        Depcrate_cargo_workspacePackageDependency!();
+        Depcrate_cargo_workspaceDepKind!();
+        Depcrate_cargo_workspaceimpl_97!();
+        Depcrate_cargo_workspaceTargetData!();
+        Depcrate_cargo_workspaceTargetKind!();
+        Depcrate_cargo_workspaceimpl_100!();
+        Depcrate_cargo_workspaceCargoMetadataConfig!();
+        Depcrate_cargo_workspacePackageMetadata!();
+        Depcrate_cargo_workspaceimpl_103!();
+        Depcrate_cargo_workspaceFetchMetadata!();
+        Depcrate_cargo_workspaceimpl_105!();
+    };
+}

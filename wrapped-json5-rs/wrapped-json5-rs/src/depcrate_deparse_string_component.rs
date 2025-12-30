@@ -1,0 +1,9 @@
+// Generated macro for parse_string_component (function)
+macro_rules! Depcrate_deparse_string_component {
+() => {
+// Module: crate::de
+// Provides: {"parse_string_component"}
+// Dependencies: {}
+fn parse_string_component (pair : Pair < '_ , Rule >) -> Result < String > { let mut result = String :: new () ; let mut component_iter = pair . into_inner () ; while let Some (component) = component_iter . next () { match component . as_rule () { Rule :: char_literal => result . push_str (component . as_str ()) , Rule :: char_escape_sequence => result . push_str (parse_char_escape_sequence (& component)) , Rule :: nul_escape_sequence => result . push_str ("\u{0000}") , Rule :: hex_escape_sequence => { let hex_escape = parse_hex (component . as_str ()) ? ; match char :: from_u32 (hex_escape) { Some (c) => result . push (c) , None => return Err (de :: Error :: custom ("error parsing hex prefix")) , } } Rule :: unicode_escape_sequence => { match parse_hex (component . as_str ()) ? { 0xDC00 ..= 0xDFFF => { return Err (de :: Error :: custom ("unexpected unicode trail surrogate")) ; } rc1 @ 0xD800 ..= 0xDBFF => { let rc2 = match component_iter . next () { Some (pc2) => match parse_hex (pc2 . as_str ()) ? { rc2 @ 0xDC00 ..= 0xDFFF => rc2 , _ => { return Err (de :: Error :: custom ("expecting unicode trail surrogate" ,)) } } , None => { return Err (de :: Error :: custom ("missing unicode trail surrogate")) ; } } ; let rc = ((rc1 - 0xD800) << 10) | (rc2 - 0xDC00) + 0x1_0000 ; match char :: from_u32 (rc) { Some (c) => { result . push (c) ; } None => { return Err (de :: Error :: custom ("invalid non-BMP unicode sequence")) ; } } } rc => match char :: from_u32 (rc) { Some (c) => { result . push (c) ; } None => { return Err (de :: Error :: custom ("invalid unicode character")) ; } } , } } _ => unreachable ! () , } } Ok (result) }
+};
+}

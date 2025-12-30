@@ -1,0 +1,59 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcrate_bindingsmacro_5.rs");
+include!("depcrate_bindingsbool.rs");
+include!("depcrate_bindingsptp_pool.rs");
+include!("depcrate_pooluse_27.rs");
+include!("depcrate_bindingsmacro_6.rs");
+include!("depcrate_bindingsptp_callback_instance.rs");
+include!("depcrate_bindingsimpl_21.rs");
+include!("depcrate_bindingstp_callback_priority.rs");
+include!("depcrate_bindingsmacro_4.rs");
+include!("depcrate_poolimpl_32.rs");
+include!("depcratepool.rs");
+include!("depcratesubmit.rs");
+include!("depcrate_bindingsmacro_11.rs");
+include!("depcrate_poolimpl_37.rs");
+include!("depcrateuse_40.rs");
+include!("depcrateuse_38.rs");
+include!("depcrate_bindingsmacro_7.rs");
+include!("depcrateother_39.rs");
+include!("depcrate_poolpool.rs");
+include!("depcrate_bindingsmacro_2.rs");
+include!("depcrate_bindingsimpl_19.rs");
+include!("depcrate_bindingsother_20.rs");
+include!("depcrate_poolimpl_36.rs");
+include!("depcratecheck.rs");
+include!("depcratethread_id.rs");
+include!("depcrate_bindingsptp_simple_callback.rs");
+include!("depcrate_bindingsmacro_3.rs");
+include!("depcrate_bindingsmacro_10.rs");
+include!("depcrate_poolimpl_30.rs");
+include!("depcrate_bindingstp_callback_environ_v3.rs");
+include!("depcrate_poolimpl_34.rs");
+include!("depcratetry_submit.rs");
+include!("depcrate_pooluse_28.rs");
+include!("depcrate_bindingstp_callback_environ_v3_0_0.rs");
+include!("depcrate_bindingsptp_cleanup_group.rs");
+include!("depcrate_poolscope.rs");
+include!("depcratebindings.rs");
+include!("depcrate_bindingsptp_cleanup_group_cancel_callback.rs");
+include!("depcrate_bindingsmacro_9.rs");
+include!("depcrate_poolimpl_31.rs");
+include!("depcratesleep.rs");
+include!("depcratefor_each.rs");
+include!("depcrateuse_25.rs");
+include!("depcrate_bindingstp_callback_priority_normal.rs");
+include!("depcrate_poolimpl_33.rs");
+include!("depcrate_bindingsmacro_8.rs");
+include!("depcrateuse_41.rs");
+include!("modcrate.rs");
+include!("modcrate_bindings.rs");
+include!("modcrate_pool.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate!();
+    Modcrate_bindings!();
+    Modcrate_pool!();
+}

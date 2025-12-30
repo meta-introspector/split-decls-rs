@@ -1,0 +1,57 @@
+// Generated module macro for crate::tests::recursive
+macro_rules! Modcrate_tests_recursive {
+() => {
+        Depcrate_tests_recursiveuse_58!();
+        Depcrate_tests_recursiveuse_59!();
+        Depcrate_tests_recursiveuse_60!();
+        Depcrate_tests_recursiveuse_61!();
+        Depcrate_tests_recursivesend_sync_traits!();
+        Depcrate_tests_recursiveempty!();
+        Depcrate_tests_recursiveempty_follow!();
+        Depcrate_tests_recursiveempty_file!();
+        Depcrate_tests_recursiveempty_file_follow!();
+        Depcrate_tests_recursiveone_dir!();
+        Depcrate_tests_recursiveone_file!();
+        Depcrate_tests_recursiveone_dir_one_file!();
+        Depcrate_tests_recursivemany_files!();
+        Depcrate_tests_recursivemany_dirs!();
+        Depcrate_tests_recursivemany_mixed!();
+        Depcrate_tests_recursivenested!();
+        Depcrate_tests_recursivenested_small_max_open!();
+        Depcrate_tests_recursivesiblings!();
+        Depcrate_tests_recursivesym_root_file_nofollow!();
+        Depcrate_tests_recursivesym_root_file_follow!();
+        Depcrate_tests_recursivebroken_sym_root_dir_nofollow_and_root_nofollow!();
+        Depcrate_tests_recursivebroken_sym_root_dir_follow_and_root_nofollow!();
+        Depcrate_tests_recursivebroken_sym_root_dir_root_is_always_followed!();
+        Depcrate_tests_recursivesym_root_dir_nofollow_root_nofollow!();
+        Depcrate_tests_recursivesym_root_dir_nofollow_root_follow!();
+        Depcrate_tests_recursivesym_root_dir_follow!();
+        Depcrate_tests_recursivesym_file_nofollow!();
+        Depcrate_tests_recursivesym_file_follow!();
+        Depcrate_tests_recursivesym_dir_nofollow!();
+        Depcrate_tests_recursivesym_dir_follow!();
+        Depcrate_tests_recursivesym_noloop!();
+        Depcrate_tests_recursivesym_loop_detect!();
+        Depcrate_tests_recursivesym_self_loop_no_error!();
+        Depcrate_tests_recursivesym_file_self_loop_io_error!();
+        Depcrate_tests_recursivesym_dir_self_loop_io_error!();
+        Depcrate_tests_recursivemin_depth_1!();
+        Depcrate_tests_recursivemin_depth_2!();
+        Depcrate_tests_recursivemax_depth_0!();
+        Depcrate_tests_recursivemax_depth_1!();
+        Depcrate_tests_recursivemax_depth_2!();
+        Depcrate_tests_recursivemin_max_depth_diff_nada!();
+        Depcrate_tests_recursivemin_max_depth_diff_0!();
+        Depcrate_tests_recursivemin_max_depth_diff_1!();
+        Depcrate_tests_recursivecontents_first!();
+        Depcrate_tests_recursiveskip_current_dir!();
+        Depcrate_tests_recursivefilter_entry!();
+        Depcrate_tests_recursivesort_by!();
+        Depcrate_tests_recursivesort_by_key!();
+        Depcrate_tests_recursivesort_by_file_name!();
+        Depcrate_tests_recursivesort_max_open!();
+        Depcrate_tests_recursivesame_file_system!();
+        Depcrate_tests_recursiveregression_skip_current_dir!();
+    };
+}

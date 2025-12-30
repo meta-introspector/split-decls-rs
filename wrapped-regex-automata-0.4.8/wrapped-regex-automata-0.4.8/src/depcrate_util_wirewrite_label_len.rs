@@ -1,0 +1,9 @@
+// Generated macro for write_label_len (function)
+macro_rules! Depcrate_util_wirewrite_label_len {
+() => {
+// Module: crate::util::wire
+// Provides: {"write_label_len"}
+// Dependencies: {}
+# [doc = " Returns the total number of bytes (including padding) that would be written"] # [doc = " for the given label. This panics if the given label contains a NUL byte or"] # [doc = " is longer than 255 bytes. (The size restriction exists so that searching"] # [doc = " for a label during deserialization can be done in small bounded space.)"] pub (crate) fn write_label_len (label : & str) -> usize { if label . len () > 255 { panic ! ("label must not be longer than 255 bytes") ; } if label . as_bytes () . iter () . position (| & b | b == 0) . is_some () { panic ! ("label must not contain NUL bytes") ; } let label_len = label . len () + 1 ; label_len + padding_len (label_len) }
+};
+}

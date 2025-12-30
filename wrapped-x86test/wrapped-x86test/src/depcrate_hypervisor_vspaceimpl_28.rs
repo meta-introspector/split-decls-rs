@@ -1,0 +1,9 @@
+// Generated macro for impl_28 (impl)
+macro_rules! Depcrate_hypervisor_vspaceimpl_28 {
+() => {
+// Module: crate::hypervisor::vspace
+// Provides: {"impl_28"}
+// Dependencies: {}
+impl MapAction { # [doc = " Transform MapAction into rights for 1 GiB page."] fn to_pdpt_rights (& self) -> PDPTFlags { use self :: MapAction :: * ; match self { MapAction :: None => PDPTFlags :: empty () , ReadUser => PDPTFlags :: XD | PDPTFlags :: US , ReadKernel => PDPTFlags :: XD , ReadWriteUser => PDPTFlags :: RW | PDPTFlags :: XD | PDPTFlags :: US , ReadWriteKernel => PDPTFlags :: RW | PDPTFlags :: XD , ReadExecuteUser => PDPTFlags :: US , ReadExecuteKernel => PDPTFlags :: empty () , ReadWriteExecuteUser => PDPTFlags :: RW | PDPTFlags :: US , ReadWriteExecuteKernel => PDPTFlags :: RW , } } # [doc = " Transform MapAction into rights for 2 MiB page."] fn to_pd_rights (& self) -> PDFlags { use self :: MapAction :: * ; match self { MapAction :: None => PDFlags :: empty () , ReadUser => PDFlags :: XD | PDFlags :: US , ReadKernel => PDFlags :: XD , ReadWriteUser => PDFlags :: RW | PDFlags :: XD | PDFlags :: US , ReadWriteKernel => PDFlags :: RW | PDFlags :: XD , ReadExecuteUser => PDFlags :: US , ReadExecuteKernel => PDFlags :: empty () , ReadWriteExecuteUser => PDFlags :: RW | PDFlags :: US , ReadWriteExecuteKernel => PDFlags :: RW , } } # [doc = " Transform MapAction into rights for 4KiB page."] fn to_pt_rights (& self) -> PTFlags { use self :: MapAction :: * ; match self { MapAction :: None => PTFlags :: empty () , ReadUser => PTFlags :: XD | PTFlags :: US , ReadKernel => PTFlags :: XD , ReadWriteUser => PTFlags :: RW | PTFlags :: XD | PTFlags :: US , ReadWriteKernel => PTFlags :: RW | PTFlags :: XD , ReadExecuteUser => PTFlags :: US , ReadExecuteKernel => PTFlags :: empty () , ReadWriteExecuteUser => PTFlags :: RW | PTFlags :: US , ReadWriteExecuteKernel => PTFlags :: RW , } } }
+};
+}

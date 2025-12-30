@@ -1,0 +1,40 @@
+// Generated module macro for crate::scaffold::dynamic_impls
+macro_rules! Modcrate_scaffold_dynamic_impls {
+() => {
+        Depcrate_scaffold_dynamic_implsuse_987!();
+        Depcrate_scaffold_dynamic_implsuse_988!();
+        Depcrate_scaffold_dynamic_implsuse_989!();
+        Depcrate_scaffold_dynamic_implsuse_990!();
+        Depcrate_scaffold_dynamic_implsuse_991!();
+        Depcrate_scaffold_dynamic_implsuse_992!();
+        Depcrate_scaffold_dynamic_implsimpl_993!();
+        Depcrate_scaffold_dynamic_implsimpl_994!();
+        Depcrate_scaffold_dynamic_implsimpl_995!();
+        Depcrate_scaffold_dynamic_implsimpl_996!();
+        Depcrate_scaffold_dynamic_implsimpl_997!();
+        Depcrate_scaffold_dynamic_implsimpl_998!();
+        Depcrate_scaffold_dynamic_implsimpl_999!();
+        Depcrate_scaffold_dynamic_implsimpl_1000!();
+        Depcrate_scaffold_dynamic_implsimpl_1001!();
+        Depcrate_scaffold_dynamic_implsimpl_1002!();
+        Depcrate_scaffold_dynamic_implsimpl_1003!();
+        Depcrate_scaffold_dynamic_implsimpl_1004!();
+        Depcrate_scaffold_dynamic_implsimpl_1005!();
+        Depcrate_scaffold_dynamic_implsimpl_1006!();
+        Depcrate_scaffold_dynamic_implsimpl_1007!();
+        Depcrate_scaffold_dynamic_implsimpl_1008!();
+        Depcrate_scaffold_dynamic_implsimpl_1009!();
+        Depcrate_scaffold_dynamic_implsimpl_1010!();
+        Depcrate_scaffold_dynamic_implsimpl_1011!();
+        Depcrate_scaffold_dynamic_implsimpl_1012!();
+        Depcrate_scaffold_dynamic_implsimpl_1013!();
+        Depcrate_scaffold_dynamic_implsimpl_1014!();
+        Depcrate_scaffold_dynamic_implsimpl_1015!();
+        Depcrate_scaffold_dynamic_implsimpl_1016!();
+        Depcrate_scaffold_dynamic_implsimpl_1017!();
+        Depcrate_scaffold_dynamic_implsimpl_1018!();
+        Depcrate_scaffold_dynamic_implsimpl_1019!();
+        Depcrate_scaffold_dynamic_implsimpl_1020!();
+        Depcrate_scaffold_dynamic_implsimpl_1021!();
+    };
+}

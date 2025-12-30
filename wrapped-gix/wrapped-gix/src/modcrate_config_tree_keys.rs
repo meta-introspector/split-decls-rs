@@ -1,0 +1,44 @@
+// Generated module macro for crate::config::tree::keys
+macro_rules! Modcrate_config_tree_keys {
+() => {
+        Depcrate_config_tree_keysuse_1050!();
+        Depcrate_config_tree_keysuse_1051!();
+        Depcrate_config_tree_keysuse_1052!();
+        Depcrate_config_tree_keysAny!();
+        Depcrate_config_tree_keysimpl_1054!();
+        Depcrate_config_tree_keysimpl_1055!();
+        Depcrate_config_tree_keysimpl_1056!();
+        Depcrate_config_tree_keysimpl_1057!();
+        Depcrate_config_tree_keysimpl_1058!();
+        Depcrate_config_tree_keysimpl_1059!();
+        Depcrate_config_tree_keysimpl_1060!();
+        Depcrate_config_tree_keysimpl_1061!();
+        Depcrate_config_tree_keysTime!();
+        Depcrate_config_tree_keysLockTimeout!();
+        Depcrate_config_tree_keysDurationInMilliseconds!();
+        Depcrate_config_tree_keysUnsignedInteger!();
+        Depcrate_config_tree_keysRemoteName!();
+        Depcrate_config_tree_keysBoolean!();
+        Depcrate_config_tree_keysProgram!();
+        Depcrate_config_tree_keysExecutable!();
+        Depcrate_config_tree_keysPath!();
+        Depcrate_config_tree_keysUrl!();
+        Depcrate_config_tree_keysString!();
+        Depcrate_config_tree_keysPushRefSpec!();
+        Depcrate_config_tree_keysFetchRefSpec!();
+        Depcrate_config_tree_keysduration!();
+        Depcrate_config_tree_keyslock_timeout!();
+        Depcrate_config_tree_keysrefspecs!();
+        Depcrate_config_tree_keysurl!();
+        Depcrate_config_tree_keysimpl_1079!();
+        Depcrate_config_tree_keysimpl_1080!();
+        Depcrate_config_tree_keysimpl_1081!();
+        Depcrate_config_tree_keysimpl_1082!();
+        Depcrate_config_tree_keysworkers!();
+        Depcrate_config_tree_keystime!();
+        Depcrate_config_tree_keysboolean!();
+        Depcrate_config_tree_keysremote_name!();
+        Depcrate_config_tree_keysValidate!();
+        Depcrate_config_tree_keysvalidate!();
+    };
+}

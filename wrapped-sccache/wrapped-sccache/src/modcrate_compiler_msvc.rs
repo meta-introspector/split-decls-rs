@@ -1,0 +1,45 @@
+// Generated module macro for crate::compiler::msvc
+macro_rules! Modcrate_compiler_msvc {
+() => {
+        Depcrate_compiler_msvcuse_678!();
+        Depcrate_compiler_msvcuse_679!();
+        Depcrate_compiler_msvcuse_680!();
+        Depcrate_compiler_msvcuse_681!();
+        Depcrate_compiler_msvcuse_682!();
+        Depcrate_compiler_msvcuse_683!();
+        Depcrate_compiler_msvcuse_684!();
+        Depcrate_compiler_msvcuse_685!();
+        Depcrate_compiler_msvcuse_686!();
+        Depcrate_compiler_msvcuse_687!();
+        Depcrate_compiler_msvcuse_688!();
+        Depcrate_compiler_msvcuse_689!();
+        Depcrate_compiler_msvcuse_690!();
+        Depcrate_compiler_msvcuse_691!();
+        Depcrate_compiler_msvcuse_692!();
+        Depcrate_compiler_msvcuse_693!();
+        Depcrate_compiler_msvcMsvc!();
+        Depcrate_compiler_msvcimpl_695!();
+        Depcrate_compiler_msvcfrom_local_codepage!();
+        Depcrate_compiler_msvcfrom_local_codepage!();
+        Depcrate_compiler_msvcdetect_showincludes_prefix!();
+        Depcrate_compiler_msvcmacro_699!();
+        Depcrate_compiler_msvcuse_700!();
+        Depcrate_compiler_msvcmsvc_args!();
+        Depcrate_compiler_msvcmacro_702!();
+        Depcrate_compiler_msvcparse_arguments!();
+        Depcrate_compiler_msvcnormpath!();
+        Depcrate_compiler_msvcnormpath!();
+        Depcrate_compiler_msvcpreprocess_cmd!();
+        Depcrate_compiler_msvcpreprocess!();
+        Depcrate_compiler_msvcgenerate_compile_commands!();
+        Depcrate_compiler_msvcExpandIncludeFile!();
+        Depcrate_compiler_msvcimpl_710!();
+        Depcrate_compiler_msvcimpl_711!();
+        Depcrate_compiler_msvcread_text!();
+        Depcrate_compiler_msvcSplitMsvcResponseFileArgs!();
+        Depcrate_compiler_msvcimpl_714!();
+        Depcrate_compiler_msvcimpl_715!();
+        Depcrate_compiler_msvcimpl_716!();
+        Depcrate_compiler_msvctest!();
+    };
+}

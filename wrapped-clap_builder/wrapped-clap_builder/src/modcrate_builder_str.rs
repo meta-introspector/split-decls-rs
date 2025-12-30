@@ -1,0 +1,46 @@
+// Generated module macro for crate::builder::str
+macro_rules! Modcrate_builder_str {
+() => {
+        Depcrate_builder_struse_278!();
+        Depcrate_builder_strStr!();
+        Depcrate_builder_strimpl_280!();
+        Depcrate_builder_strimpl_281!();
+        Depcrate_builder_strimpl_282!();
+        Depcrate_builder_strimpl_283!();
+        Depcrate_builder_strimpl_284!();
+        Depcrate_builder_strimpl_285!();
+        Depcrate_builder_strimpl_286!();
+        Depcrate_builder_strimpl_287!();
+        Depcrate_builder_strimpl_288!();
+        Depcrate_builder_strimpl_289!();
+        Depcrate_builder_strimpl_290!();
+        Depcrate_builder_strimpl_291!();
+        Depcrate_builder_strimpl_292!();
+        Depcrate_builder_strimpl_293!();
+        Depcrate_builder_strimpl_294!();
+        Depcrate_builder_strimpl_295!();
+        Depcrate_builder_strimpl_296!();
+        Depcrate_builder_strimpl_297!();
+        Depcrate_builder_strimpl_298!();
+        Depcrate_builder_strimpl_299!();
+        Depcrate_builder_strimpl_300!();
+        Depcrate_builder_strimpl_301!();
+        Depcrate_builder_strimpl_302!();
+        Depcrate_builder_strimpl_303!();
+        Depcrate_builder_strimpl_304!();
+        Depcrate_builder_strimpl_305!();
+        Depcrate_builder_strimpl_306!();
+        Depcrate_builder_strimpl_307!();
+        Depcrate_builder_strimpl_308!();
+        Depcrate_builder_strinner!();
+        Depcrate_builder_strinner!();
+        Depcrate_builder_struse_311!();
+        Depcrate_builder_strimpl_312!();
+        Depcrate_builder_strimpl_313!();
+        Depcrate_builder_strimpl_314!();
+        Depcrate_builder_strimpl_315!();
+        Depcrate_builder_strimpl_316!();
+        Depcrate_builder_strimpl_317!();
+        Depcrate_builder_strtests!();
+    };
+}

@@ -1,0 +1,9 @@
+// Generated macro for impl_34 (impl)
+macro_rules! Depcrate_ast_dataimpl_34 {
+() => {
+// Module: crate::ast::data
+// Provides: {"impl_34"}
+// Dependencies: {}
+impl < T > Fields < T > { # [doc = " Creates a new [`Fields`] struct."] pub fn new (style : Style , fields : Vec < T >) -> Self { Self { style , fields , span : None , __nonexhaustive : () , } } # [doc = " Adds a [`Span`] to [`Fields`]."] pub fn with_span (mut self , span : Span) -> Self { if self . span . is_none () { self . span = Some (span) ; } self } pub fn empty_from (vd : & syn :: Fields) -> Self { Self :: new (vd . into () , Vec :: new ()) } # [doc = " Splits the `Fields` into its style and fields for further processing."] # [doc = " Returns an empty `Vec` for `Unit` data."] pub fn split (self) -> (Style , Vec < T >) { (self . style , self . fields) } # [doc = " Returns true if this variant's data makes it a newtype."] pub fn is_newtype (& self) -> bool { self . style == Style :: Tuple && self . len () == 1 } pub fn is_unit (& self) -> bool { self . style . is_unit () } pub fn is_tuple (& self) -> bool { self . style . is_tuple () } pub fn is_struct (& self) -> bool { self . style . is_struct () } pub fn as_ref (& self) -> Fields < & T > { Fields { style : self . style , fields : self . fields . iter () . collect () , span : self . span , __nonexhaustive : () , } } pub fn map < F , U > (self , map : F) -> Fields < U > where F : FnMut (T) -> U , { Fields { style : self . style , fields : self . fields . into_iter () . map (map) . collect () , span : self . span , __nonexhaustive : () , } } pub fn iter (& self) -> slice :: Iter < '_ , T > { self . fields . iter () } # [doc = " Returns the number of fields in the structure."] pub fn len (& self) -> usize { self . fields . len () } # [doc = " Returns `true` if the `Fields` contains no fields."] pub fn is_empty (& self) -> bool { self . fields . is_empty () } }
+};
+}

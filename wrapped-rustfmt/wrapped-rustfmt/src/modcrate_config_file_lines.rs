@@ -1,0 +1,39 @@
+// Generated module macro for crate::config::file_lines
+macro_rules! Modcrate_config_file_lines {
+() => {
+        Depcrate_config_file_linesuse_363!();
+        Depcrate_config_file_linesuse_364!();
+        Depcrate_config_file_linesuse_365!();
+        Depcrate_config_file_linesuse_366!();
+        Depcrate_config_file_linesuse_367!();
+        Depcrate_config_file_linesuse_368!();
+        Depcrate_config_file_linesuse_369!();
+        Depcrate_config_file_linesuse_370!();
+        Depcrate_config_file_linesuse_371!();
+        Depcrate_config_file_linesLineRange!();
+        Depcrate_config_file_linesFileName!();
+        Depcrate_config_file_linesimpl_374!();
+        Depcrate_config_file_linesimpl_375!();
+        Depcrate_config_file_linesimpl_376!();
+        Depcrate_config_file_linesimpl_377!();
+        Depcrate_config_file_linesimpl_378!();
+        Depcrate_config_file_linesRange!();
+        Depcrate_config_file_linesimpl_380!();
+        Depcrate_config_file_linesimpl_381!();
+        Depcrate_config_file_linesimpl_382!();
+        Depcrate_config_file_linesFileLines!();
+        Depcrate_config_file_linesimpl_384!();
+        Depcrate_config_file_linesnormalize_ranges!();
+        Depcrate_config_file_linesimpl_386!();
+        Depcrate_config_file_linesFiles!();
+        Depcrate_config_file_linesimpl_388!();
+        Depcrate_config_file_linescanonicalize_path_string!();
+        Depcrate_config_file_linesFileLinesError!();
+        Depcrate_config_file_linesimpl_391!();
+        Depcrate_config_file_linesJsonSpan!();
+        Depcrate_config_file_linesimpl_393!();
+        Depcrate_config_file_linesimpl_394!();
+        Depcrate_config_file_linesimpl_395!();
+        Depcrate_config_file_linestest!();
+    };
+}

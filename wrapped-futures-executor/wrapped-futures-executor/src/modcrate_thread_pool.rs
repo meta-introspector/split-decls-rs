@@ -1,0 +1,42 @@
+// Generated module macro for crate::thread_pool
+macro_rules! Modcrate_thread_pool {
+() => {
+        Depcrate_thread_pooluse_39!();
+        Depcrate_thread_pooluse_40!();
+        Depcrate_thread_pooluse_41!();
+        Depcrate_thread_pooluse_42!();
+        Depcrate_thread_pooluse_43!();
+        Depcrate_thread_pooluse_44!();
+        Depcrate_thread_pooluse_45!();
+        Depcrate_thread_pooluse_46!();
+        Depcrate_thread_pooluse_47!();
+        Depcrate_thread_pooluse_48!();
+        Depcrate_thread_pooluse_49!();
+        Depcrate_thread_pooluse_50!();
+        Depcrate_thread_pooluse_51!();
+        Depcrate_thread_pooluse_52!();
+        Depcrate_thread_pooluse_53!();
+        Depcrate_thread_pooluse_54!();
+        Depcrate_thread_poolThreadPool!();
+        Depcrate_thread_poolThreadPoolBuilder!();
+        Depcrate_thread_poolAssertSendSync!();
+        Depcrate_thread_poolimpl_58!();
+        Depcrate_thread_poolPoolState!();
+        Depcrate_thread_poolimpl_60!();
+        Depcrate_thread_poolimpl_61!();
+        Depcrate_thread_poolMessage!();
+        Depcrate_thread_poolimpl_63!();
+        Depcrate_thread_poolimpl_64!();
+        Depcrate_thread_poolimpl_65!();
+        Depcrate_thread_poolimpl_66!();
+        Depcrate_thread_poolimpl_67!();
+        Depcrate_thread_poolimpl_68!();
+        Depcrate_thread_poolimpl_69!();
+        Depcrate_thread_poolTask!();
+        Depcrate_thread_poolWakeHandle!();
+        Depcrate_thread_poolimpl_72!();
+        Depcrate_thread_poolimpl_73!();
+        Depcrate_thread_poolimpl_74!();
+        Depcrate_thread_pooltests!();
+    };
+}

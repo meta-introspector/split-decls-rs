@@ -4,6 +4,6 @@ macro_rules! Depcrateuse_760 {
 // Module: crate
 // Provides: {"use_760"}
 // Dependencies: {}
-pub use self :: input :: setter :: Setter ;
+pub use self :: return_mode :: SalsaAsRef ;
 };
 }

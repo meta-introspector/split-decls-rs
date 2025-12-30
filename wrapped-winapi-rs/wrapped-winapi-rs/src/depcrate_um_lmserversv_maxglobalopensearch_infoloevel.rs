@@ -1,0 +1,9 @@
+// Generated macro for SV_MAXGLOBALOPENSEARCH_INFOLOEVEL (const)
+macro_rules! Depcrate_um_lmserverSV_MAXGLOBALOPENSEARCH_INFOLOEVEL {
+() => {
+// Module: crate::um::lmserver
+// Provides: {"SV_MAXGLOBALOPENSEARCH_INFOLOEVEL"}
+// Dependencies: {}
+pub const SV_MAXGLOBALOPENSEARCH_INFOLOEVEL : DWORD = PARMNUM_BASE_INFOLEVEL + SV_MAXGLOBALOPENSEARCH_PARMNUM ;
+};
+}

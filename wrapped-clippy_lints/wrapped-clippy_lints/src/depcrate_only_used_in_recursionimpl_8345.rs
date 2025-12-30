@@ -1,0 +1,9 @@
+// Generated macro for impl_8345 (impl)
+macro_rules! Depcrate_only_used_in_recursionimpl_8345 {
+() => {
+// Module: crate::only_used_in_recursion
+// Provides: {"impl_8345"}
+// Dependencies: {}
+impl Params { fn insert (& mut self , param : Param , id : HirId) { let idx = self . params . len () ; self . by_id . insert (id , idx) ; self . by_fn . insert ((param . fn_id , param . idx) , idx) ; self . params . push (param) ; } fn remove_by_id (& mut self , id : HirId) { if let Some (param) = self . get_by_id_mut (id) { param . uses = Vec :: new () ; let key = (param . fn_id , param . idx) ; self . by_fn . remove (& key) ; self . by_id . swap_remove (& id) ; } } fn get_by_id_mut (& mut self , id : HirId) -> Option < & mut Param > { self . params . get_mut (* self . by_id . get (& id) ?) } fn get_by_fn (& self , id : DefId , idx : usize) -> Option < & Param > { self . params . get (* self . by_fn . get (& (id , idx)) ?) } fn clear (& mut self) { self . params . clear () ; self . by_id . clear () ; self . by_fn . clear () ; } # [doc = " Sets the `apply_lint` flag on each parameter."] fn flag_for_linting (& self) { let mut eval_stack = Vec :: new () ; for param in & self . params { self . try_disable_lint_for_param (param , & mut eval_stack) ; } } fn try_disable_lint_for_param (& self , param : & Param , eval_stack : & mut Vec < usize >) -> bool { if ! param . apply_lint . get () { true } else if param . uses . is_empty () { param . apply_lint . set (false) ; true } else if eval_stack . contains (& param . idx) { false } else { eval_stack . push (param . idx) ; for usage in param . uses . iter () . filter (| u | u . idx != param . idx) { if self . get_by_fn (param . fn_id , usage . idx) . is_none_or (| p | self . try_disable_lint_for_param (p , eval_stack)) { param . apply_lint . set (false) ; eval_stack . pop () ; return true ; } } eval_stack . pop () ; false } } }
+};
+}

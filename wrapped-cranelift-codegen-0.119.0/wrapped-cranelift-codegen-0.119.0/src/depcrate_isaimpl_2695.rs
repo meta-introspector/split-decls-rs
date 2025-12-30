@@ -1,0 +1,9 @@
+// Generated macro for impl_2695 (impl)
+macro_rules! Depcrate_isaimpl_2695 {
+() => {
+// Module: crate::isa
+// Provides: {"impl_2695"}
+// Dependencies: {}
+impl < T > IsaBuilder < T > { # [doc = " Creates a new ISA-builder from its components, namely the `triple` for"] # [doc = " the ISA, the ISA-specific settings builder, and a final constructor"] # [doc = " function to generate the ISA from its components."] pub fn new (triple : Triple , setup : settings :: Builder , constructor : fn (Triple , settings :: Flags , & settings :: Builder) -> T ,) -> Self { IsaBuilder { triple , setup , constructor , } } # [doc = " Creates a new [Builder] from a [TargetIsa], copying all flags in the"] # [doc = " process."] pub fn from_target_isa (target_isa : & dyn TargetIsa) -> Builder { let triple = target_isa . triple () . clone () ; let mut builder = self :: lookup (triple) . expect ("Could not find triple for target ISA") ; for flag in target_isa . isa_flags () { builder . set (& flag . name , & flag . value_string ()) . unwrap () ; } builder } # [doc = " Gets the triple for the builder."] pub fn triple (& self) -> & Triple { & self . triple } # [doc = " Iterates the available settings in the builder."] pub fn iter (& self) -> impl Iterator < Item = settings :: Setting > + use < T > { self . setup . iter () } # [doc = " Combine the ISA-specific settings with the provided"] # [doc = " ISA-independent settings and allocate a fully configured"] # [doc = " `TargetIsa` trait object. May return an error if some of the"] # [doc = " flags are inconsistent or incompatible: for example, some"] # [doc = " platform-independent features, like general SIMD support, may"] # [doc = " need certain ISA extensions to be enabled."] pub fn finish (& self , shared_flags : settings :: Flags) -> T { (self . constructor) (self . triple . clone () , shared_flags , & self . setup) } }
+};
+}

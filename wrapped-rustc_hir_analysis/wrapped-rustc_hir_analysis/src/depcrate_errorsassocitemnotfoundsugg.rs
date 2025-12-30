@@ -1,0 +1,9 @@
+// Generated macro for AssocItemNotFoundSugg (enum)
+macro_rules! Depcrate_errorsAssocItemNotFoundSugg {
+() => {
+// Module: crate::errors
+// Provides: {"AssocItemNotFoundSugg"}
+// Dependencies: {}
+# [derive (Subdiagnostic)] pub (crate) enum AssocItemNotFoundSugg < 'a > { # [suggestion (hir_analysis_assoc_item_not_found_similar_sugg , code = "{suggested_name}" , applicability = "maybe-incorrect")] Similar { # [primary_span] span : Span , assoc_kind : & 'static str , suggested_name : Symbol , } , # [suggestion (hir_analysis_assoc_item_not_found_similar_in_other_trait_sugg , code = "{suggested_name}" , style = "verbose" , applicability = "maybe-incorrect")] SimilarInOtherTrait { # [primary_span] span : Span , trait_name : & 'a str , assoc_kind : & 'static str , suggested_name : Symbol , } , # [multipart_suggestion (hir_analysis_assoc_item_not_found_similar_in_other_trait_qpath_sugg , style = "verbose")] SimilarInOtherTraitQPath { # [suggestion_part (code = "<")] lo : Span , # [suggestion_part (code = " as {trait_ref}>")] mi : Span , # [suggestion_part (code = "{suggested_name}")] hi : Option < Span > , trait_ref : String , suggested_name : Symbol , identically_named : bool , # [applicability] applicability : Applicability , } , # [suggestion (hir_analysis_assoc_item_not_found_other_sugg , code = "{suggested_name}" , applicability = "maybe-incorrect")] Other { # [primary_span] span : Span , qself : & 'a str , assoc_kind : & 'static str , suggested_name : Symbol , } , }
+};
+}

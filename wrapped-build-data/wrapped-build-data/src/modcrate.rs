@@ -1,0 +1,50 @@
+// Generated module macro for crate
+macro_rules! Modcrate {
+() => {
+        Depcrateuse_1!();
+        Depcrateuse_2!();
+        Depcrateuse_3!();
+        Depcrateescape_ascii!();
+        Depcrateexec!();
+        Depcrateepoch_to_date_time_utc!();
+        Depcrateformat_date!();
+        Depcrateformat_time!();
+        Depcrateformat_timestamp!();
+        Depcratenow!();
+        Depcrateget_env!();
+        Depcrateget_git_commit!();
+        Depcrateget_git_commit_short!();
+        Depcrateget_git_branch!();
+        Depcrateget_git_dirty!();
+        Depcratererun_if_git_commit_or_branch_changed!();
+        Depcrateget_hostname!();
+        Depcrateget_rustc_version!();
+        DepcrateRustChannel!();
+        Depcrateimpl_20!();
+        Depcrateparse_rustc_version!();
+        Depcrateparse_rustc_semver!();
+        Depcrateparse_rustc_channel!();
+        DepcrateSOURCE_EPOCH_SECONDS!();
+        Depcrateerase_cached_source_time!();
+        Depcrateget_source_time!();
+        Depcrateget_target_platform!();
+        Depcrateno_debug_rebuilds!();
+        Depcrateset_SOURCE_DATE!();
+        Depcrateset_SOURCE_TIME!();
+        Depcrateset_SOURCE_TIMESTAMP!();
+        Depcrateset_SOURCE_EPOCH_TIME!();
+        Depcrateset_BUILD_DATE!();
+        Depcrateset_BUILD_TIME!();
+        Depcrateset_BUILD_TIMESTAMP!();
+        Depcrateset_BUILD_EPOCH_TIME!();
+        Depcrateset_BUILD_HOSTNAME!();
+        Depcrateset_GIT_BRANCH!();
+        Depcrateset_GIT_COMMIT!();
+        Depcrateset_GIT_COMMIT_SHORT!();
+        Depcrateset_GIT_DIRTY!();
+        Depcrateset_RUSTC_VERSION!();
+        Depcrateset_RUSTC_VERSION_SEMVER!();
+        Depcrateset_RUST_CHANNEL!();
+        Depcrateset_TARGET_PLATFORM!();
+    };
+}

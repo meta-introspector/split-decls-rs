@@ -1,0 +1,45 @@
+// Generated module macro for crate
+macro_rules! Modcrate {
+() => {
+        Depcrateuse_1!();
+        Depcrateuse_2!();
+        Depcrateuse_3!();
+        DepcrateProgramResult!();
+        DepcrateBUILTIN_BIT_SHIFT!();
+        Depcrateto_builtin!();
+        DepcrateCUSTOM_ZERO!();
+        DepcrateINVALID_ARGUMENT!();
+        DepcrateINVALID_INSTRUCTION_DATA!();
+        DepcrateINVALID_ACCOUNT_DATA!();
+        DepcrateACCOUNT_DATA_TOO_SMALL!();
+        DepcrateINSUFFICIENT_FUNDS!();
+        DepcrateINCORRECT_PROGRAM_ID!();
+        DepcrateMISSING_REQUIRED_SIGNATURES!();
+        DepcrateACCOUNT_ALREADY_INITIALIZED!();
+        DepcrateUNINITIALIZED_ACCOUNT!();
+        DepcrateNOT_ENOUGH_ACCOUNT_KEYS!();
+        DepcrateACCOUNT_BORROW_FAILED!();
+        DepcrateMAX_SEED_LENGTH_EXCEEDED!();
+        DepcrateINVALID_SEEDS!();
+        DepcrateBORSH_IO_ERROR!();
+        DepcrateACCOUNT_NOT_RENT_EXEMPT!();
+        DepcrateUNSUPPORTED_SYSVAR!();
+        DepcrateILLEGAL_OWNER!();
+        DepcrateMAX_ACCOUNTS_DATA_ALLOCATIONS_EXCEEDED!();
+        DepcrateINVALID_ACCOUNT_DATA_REALLOC!();
+        DepcrateMAX_INSTRUCTION_TRACE_LENGTH_EXCEEDED!();
+        DepcrateBUILTIN_PROGRAMS_MUST_CONSUME_COMPUTE_UNITS!();
+        DepcrateINVALID_ACCOUNT_OWNER!();
+        DepcrateARITHMETIC_OVERFLOW!();
+        DepcrateIMMUTABLE!();
+        DepcrateINCORRECT_AUTHORITY!();
+        DepcrateProgramError!();
+        Depcrateimpl_34!();
+        Depcrateimpl_35!();
+        DepcrateToStr!();
+        Depcrateimpl_37!();
+        Depcrateimpl_38!();
+        Depcrateimpl_39!();
+        Depcrateimpl_40!();
+    };
+}

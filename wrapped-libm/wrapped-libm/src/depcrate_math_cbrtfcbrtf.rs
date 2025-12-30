@@ -1,0 +1,9 @@
+// Generated macro for cbrtf (function)
+macro_rules! Depcrate_math_cbrtfcbrtf {
+() => {
+// Module: crate::math::cbrtf
+// Provides: {"cbrtf"}
+// Dependencies: {}
+# [doc = " Cube root (f32)"] # [doc = ""] # [doc = " Computes the cube root of the argument."] # [cfg_attr (assert_no_panic , no_panic :: no_panic)] pub fn cbrtf (x : f32) -> f32 { let x1p24 = f32 :: from_bits (0x4b800000) ; let mut r : f64 ; let mut t : f64 ; let mut ui : u32 = x . to_bits () ; let mut hx : u32 = ui & 0x7fffffff ; if hx >= 0x7f800000 { return x + x ; } if hx < 0x00800000 { if hx == 0 { return x ; } ui = (x * x1p24) . to_bits () ; hx = ui & 0x7fffffff ; hx = hx / 3 + B2 ; } else { hx = hx / 3 + B1 ; } ui &= 0x80000000 ; ui |= hx ; t = f32 :: from_bits (ui) as f64 ; r = t * t * t ; t = t * (x as f64 + x as f64 + r) / (x as f64 + r + r) ; r = t * t * t ; t = t * (x as f64 + x as f64 + r) / (x as f64 + r + r) ; t as f32 }
+};
+}

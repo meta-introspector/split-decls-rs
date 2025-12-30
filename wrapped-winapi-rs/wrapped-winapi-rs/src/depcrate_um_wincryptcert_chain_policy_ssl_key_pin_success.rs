@@ -1,0 +1,9 @@
+// Generated macro for CERT_CHAIN_POLICY_SSL_KEY_PIN_SUCCESS (const)
+macro_rules! Depcrate_um_wincryptCERT_CHAIN_POLICY_SSL_KEY_PIN_SUCCESS {
+() => {
+// Module: crate::um::wincrypt
+// Provides: {"CERT_CHAIN_POLICY_SSL_KEY_PIN_SUCCESS"}
+// Dependencies: {}
+pub const CERT_CHAIN_POLICY_SSL_KEY_PIN_SUCCESS : LONG = 0 ;
+};
+}

@@ -1,0 +1,52 @@
+// Generated module macro for crate::generated
+macro_rules! Modcrate_generated {
+() => {
+        Depcrate_generatedother_4!();
+        Depcrate_generated__SHCatalog!();
+        Depcrate_generated__SHCustomCatalog!();
+        Depcrate_generated__SHDefines!();
+        Depcrate_generated__SHError!();
+        Depcrate_generated__SHMatch!();
+        Depcrate_generated__SHMatchedMediaItem!();
+        Depcrate_generated__SHMediaItem!();
+        Depcrate_generated__SHMediaLibrary!();
+        Depcrate_generated__SHRange!();
+        Depcrate_generated__SHSession!();
+        Depcrate_generated__SHSignature!();
+        Depcrate_generated__SHSignatureGenerator!();
+        Depcrate_generated__UTType_SHShazamAdditions!();
+        Depcrate_generateduse_18!();
+        Depcrate_generateduse_19!();
+        Depcrate_generateduse_20!();
+        Depcrate_generateduse_21!();
+        Depcrate_generateduse_22!();
+        Depcrate_generateduse_23!();
+        Depcrate_generateduse_24!();
+        Depcrate_generateduse_25!();
+        Depcrate_generateduse_26!();
+        Depcrate_generateduse_27!();
+        Depcrate_generateduse_28!();
+        Depcrate_generateduse_29!();
+        Depcrate_generateduse_30!();
+        Depcrate_generateduse_31!();
+        Depcrate_generateduse_32!();
+        Depcrate_generateduse_33!();
+        Depcrate_generateduse_34!();
+        Depcrate_generateduse_35!();
+        Depcrate_generateduse_36!();
+        Depcrate_generateduse_37!();
+        Depcrate_generateduse_38!();
+        Depcrate_generateduse_39!();
+        Depcrate_generateduse_40!();
+        Depcrate_generateduse_41!();
+        Depcrate_generateduse_42!();
+        Depcrate_generateduse_43!();
+        Depcrate_generateduse_44!();
+        Depcrate_generateduse_45!();
+        Depcrate_generateduse_46!();
+        Depcrate_generateduse_47!();
+        Depcrate_generateduse_48!();
+        Depcrate_generateduse_49!();
+        Depcrate_generateduse_50!();
+    };
+}

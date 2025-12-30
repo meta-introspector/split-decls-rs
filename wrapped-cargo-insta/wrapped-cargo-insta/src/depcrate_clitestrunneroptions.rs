@@ -1,0 +1,9 @@
+// Generated macro for TestRunnerOptions (struct)
+macro_rules! Depcrate_cliTestRunnerOptions {
+() => {
+// Module: crate::cli
+// Provides: {"TestRunnerOptions"}
+// Dependencies: {}
+# [derive (Args , Debug)] # [command (rename_all = "kebab-case" , next_help_heading = "Test Runner Options")] struct TestRunnerOptions { # [doc = " Test only this package's library unit tests"] # [arg (long)] lib : bool , # [doc = " Test only the specified binary"] # [arg (long)] bin : Option < String > , # [doc = " Test all binaries"] # [arg (long)] bins : bool , # [doc = " Test only the specified example"] # [arg (long)] example : Option < String > , # [doc = " Test all examples"] # [arg (long)] examples : bool , # [doc = " Test only the specified test targets"] # [arg (long)] test : Vec < String > , # [doc = " Test all tests"] # [arg (long)] tests : bool , # [doc = " Package to run tests for"] # [arg (short = 'p' , long)] package : Vec < String > , # [doc = " Exclude packages from the test"] # [arg (long , value_name = "SPEC")] exclude : Vec < String > , # [doc = " Space-separated list of features to activate"] # [arg (short = 'F' , long , value_name = "FEATURES")] features : Option < String > , # [doc = " Number of parallel jobs, defaults to # of CPUs"] # [arg (short = 'j' , long)] jobs : Option < usize > , # [doc = " Build artifacts in release mode, with optimizations"] # [arg (short = 'r' , long)] release : bool , # [doc = " Build artifacts with the specified profile"] # [arg (long)] profile : Option < String > , # [doc = " Test all targets (does not include doctests)"] # [arg (long)] all_targets : bool , # [doc = " Activate all available features"] # [arg (long)] all_features : bool , # [doc = " Do not activate the `default` feature"] # [arg (long)] no_default_features : bool , # [doc = " Build for the target triple"] # [arg (long)] target : Option < String > , }
+};
+}

@@ -1,0 +1,44 @@
+// Generated module macro for crate::svg
+macro_rules! Modcrate_svg {
+() => {
+        Depcrate_svguse_2!();
+        Depcrate_svguse_3!();
+        Depcrate_svguse_4!();
+        Depcrate_svguse_5!();
+        Depcrate_svguse_6!();
+        Depcrate_svguse_7!();
+        Depcrate_svgRgb!();
+        Depcrate_svgmake_svg_color!();
+        Depcrate_svgTarget!();
+        Depcrate_svgimpl_11!();
+        Depcrate_svgSVGTag!();
+        Depcrate_svgimpl_13!();
+        Depcrate_svgSVGBackend!();
+        Depcrate_svgFormatEscaped!();
+        Depcrate_svgimpl_format_escaped_tuple!();
+        Depcrate_svgmacro_17!();
+        Depcrate_svgmacro_18!();
+        Depcrate_svgmacro_19!();
+        Depcrate_svgmacro_20!();
+        Depcrate_svgmacro_21!();
+        Depcrate_svgmacro_22!();
+        Depcrate_svgmacro_23!();
+        Depcrate_svgimpl_format_escaped_plain!();
+        Depcrate_svgmacro_25!();
+        Depcrate_svgimpl_26!();
+        Depcrate_svgimpl_27!();
+        Depcrate_svgimpl_28!();
+        Depcrate_svgimpl_29!();
+        Depcrate_svgFormatEscapedIter!();
+        Depcrate_svgimpl_31!();
+        Depcrate_svgValue!();
+        Depcrate_svgInit!();
+        Depcrate_svgAttrWriter!();
+        Depcrate_svgimpl_35!();
+        Depcrate_svgimpl_36!();
+        Depcrate_svgimpl_37!();
+        Depcrate_svgimpl_38!();
+        Depcrate_svgimpl_39!();
+        Depcrate_svgtest!();
+    };
+}

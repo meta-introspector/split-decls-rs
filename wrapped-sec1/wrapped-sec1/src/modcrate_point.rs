@@ -1,0 +1,41 @@
+// Generated module macro for crate::point
+macro_rules! Modcrate_point {
+() => {
+        Depcrate_pointuse_4!();
+        Depcrate_pointuse_5!();
+        Depcrate_pointuse_6!();
+        Depcrate_pointuse_7!();
+        Depcrate_pointuse_8!();
+        Depcrate_pointuse_9!();
+        Depcrate_pointuse_10!();
+        Depcrate_pointuse_11!();
+        Depcrate_pointModulusSize!();
+        Depcrate_pointimpl_13!();
+        Depcrate_pointEncodedPoint!();
+        Depcrate_pointimpl_15!();
+        Depcrate_pointimpl_16!();
+        Depcrate_pointimpl_17!();
+        Depcrate_pointimpl_18!();
+        Depcrate_pointimpl_19!();
+        Depcrate_pointimpl_20!();
+        Depcrate_pointimpl_21!();
+        Depcrate_pointimpl_22!();
+        Depcrate_pointimpl_23!();
+        Depcrate_pointimpl_24!();
+        Depcrate_pointimpl_25!();
+        Depcrate_pointimpl_26!();
+        Depcrate_pointimpl_27!();
+        Depcrate_pointimpl_28!();
+        Depcrate_pointimpl_29!();
+        Depcrate_pointimpl_30!();
+        Depcrate_pointimpl_31!();
+        Depcrate_pointimpl_32!();
+        Depcrate_pointCoordinates!();
+        Depcrate_pointimpl_34!();
+        Depcrate_pointTag!();
+        Depcrate_pointimpl_36!();
+        Depcrate_pointimpl_37!();
+        Depcrate_pointimpl_38!();
+        Depcrate_pointtests!();
+    };
+}

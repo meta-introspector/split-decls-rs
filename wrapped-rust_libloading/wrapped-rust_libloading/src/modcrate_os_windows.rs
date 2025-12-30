@@ -1,0 +1,49 @@
+// Generated module macro for crate::os::windows
+macro_rules! Modcrate_os_windows {
+() => {
+        Depcrate_os_windowswindows_imports!();
+        Depcrate_os_windowswindows_imports!();
+        Depcrate_os_windowsuse_129!();
+        Depcrate_os_windowsuse_130!();
+        Depcrate_os_windowsuse_131!();
+        Depcrate_os_windowsuse_132!();
+        Depcrate_os_windowsuse_133!();
+        Depcrate_os_windowsLibrary!();
+        Depcrate_os_windowsimpl_135!();
+        Depcrate_os_windowsimpl_136!();
+        Depcrate_os_windowsimpl_137!();
+        Depcrate_os_windowsimpl_138!();
+        Depcrate_os_windowsimpl_139!();
+        Depcrate_os_windowsSymbol!();
+        Depcrate_os_windowsimpl_141!();
+        Depcrate_os_windowsimpl_142!();
+        Depcrate_os_windowsimpl_143!();
+        Depcrate_os_windowsimpl_144!();
+        Depcrate_os_windowsimpl_145!();
+        Depcrate_os_windowsimpl_146!();
+        Depcrate_os_windowsimpl_147!();
+        Depcrate_os_windowsErrorModeGuard!();
+        Depcrate_os_windowsimpl_149!();
+        Depcrate_os_windowsimpl_150!();
+        Depcrate_os_windowswith_get_last_error!();
+        Depcrate_os_windowsBOOL!();
+        Depcrate_os_windowsDWORD!();
+        Depcrate_os_windowsHANDLE!();
+        Depcrate_os_windowsHMODULE!();
+        Depcrate_os_windowsFARPROC!();
+        Depcrate_os_windowsLOAD_LIBRARY_FLAGS!();
+        Depcrate_os_windowsSEM_FAILCRITICALERRORS!();
+        Depcrate_os_windowsLOAD_IGNORE_CODE_AUTHZ_LEVEL!();
+        Depcrate_os_windowsLOAD_LIBRARY_AS_DATAFILE!();
+        Depcrate_os_windowsLOAD_LIBRARY_AS_DATAFILE_EXCLUSIVE!();
+        Depcrate_os_windowsLOAD_LIBRARY_AS_IMAGE_RESOURCE!();
+        Depcrate_os_windowsLOAD_LIBRARY_SEARCH_APPLICATION_DIR!();
+        Depcrate_os_windowsLOAD_LIBRARY_SEARCH_DEFAULT_DIRS!();
+        Depcrate_os_windowsLOAD_LIBRARY_SEARCH_DLL_LOAD_DIR!();
+        Depcrate_os_windowsLOAD_LIBRARY_SEARCH_SYSTEM32!();
+        Depcrate_os_windowsLOAD_LIBRARY_SEARCH_USER_DIRS!();
+        Depcrate_os_windowsLOAD_WITH_ALTERED_SEARCH_PATH!();
+        Depcrate_os_windowsLOAD_LIBRARY_REQUIRE_SIGNED_TARGET!();
+        Depcrate_os_windowsLOAD_LIBRARY_SAFE_CURRENT_DIRS!();
+    };
+}

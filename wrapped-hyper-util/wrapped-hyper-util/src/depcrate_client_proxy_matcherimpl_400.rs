@@ -1,0 +1,9 @@
+// Generated macro for impl_400 (impl)
+macro_rules! Depcrate_client_proxy_matcherimpl_400 {
+() => {
+// Module: crate::client::proxy::matcher
+// Provides: {"impl_400"}
+// Dependencies: {}
+impl Matcher { # [doc = " Create a matcher reading the current environment variables."] # [doc = ""] # [doc = " This checks for values in the following variables, treating them the"] # [doc = " same as curl does:"] # [doc = ""] # [doc = " - `ALL_PROXY`/`all_proxy`"] # [doc = " - `HTTPS_PROXY`/`https_proxy`"] # [doc = " - `HTTP_PROXY`/`http_proxy`"] # [doc = " - `NO_PROXY`/`no_proxy`"] pub fn from_env () -> Self { Builder :: from_env () . build () } # [doc = " Create a matcher from the environment or system."] # [doc = ""] # [doc = " This checks the same environment variables as `from_env()`, and if not"] # [doc = " set, checks the system configuration for values for the OS."] # [doc = ""] # [doc = " This constructor is always available, but if the `client-proxy-system`"] # [doc = " feature is enabled, it will check more configuration. Use this"] # [doc = " constructor if you want to allow users to optionally enable more, or"] # [doc = " use `from_env` if you do not want the values to change based on an"] # [doc = " enabled feature."] pub fn from_system () -> Self { Builder :: from_system () . build () } # [doc = " Start a builder to configure a matcher."] pub fn builder () -> Builder { Builder :: default () } # [doc = " Check if the destination should be intercepted by a proxy."] # [doc = ""] # [doc = " If the proxy rules match the destination, a new `Uri` will be returned"] # [doc = " to connect to."] pub fn intercept (& self , dst : & http :: Uri) -> Option < Intercept > { if self . no . contains (dst . host () ?) { return None ; } match dst . scheme_str () { Some ("http") => self . http . clone () , Some ("https") => self . https . clone () , _ => None , } } }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for impl_287 (impl)
+macro_rules! Depcrate_session_sync_sessionimpl_287 {
+() => {
+// Module: crate::session::sync_session
+// Provides: {"impl_287"}
+// Dependencies: {}
+impl < R > TryStream < R > where R : Read + NonBlocking , { # [doc = " Try to read in a non-blocking mode."] # [doc = ""] # [doc = " It raises io::ErrorKind::WouldBlock if there's nothing to read."] fn try_read (& mut self , buf : & mut [u8]) -> io :: Result < usize > { self . stream . get_mut () . set_blocking (false) ? ; let result = self . stream . inner . read (buf) ; self . stream . get_mut () . set_blocking (true) ? ; result } # [allow (clippy :: wrong_self_convention)] fn is_empty (& mut self) -> io :: Result < bool > { match self . try_read (& mut []) { Ok (0) => Ok (true) , Ok (_) => Ok (false) , Err (err) if err . kind () == io :: ErrorKind :: WouldBlock => Ok (true) , Err (err) => Err (err) , } } fn read_available (& mut self) -> io :: Result < bool > { self . stream . flush_in_buffer () ; let mut buf = [0 ; 248] ; loop { match self . try_read_inner (& mut buf) { Ok (0) => break Ok (true) , Ok (n) => { self . stream . keep_in_buffer (& buf [.. n]) ; } Err (err) if err . kind () == io :: ErrorKind :: WouldBlock => break Ok (false) , Err (err) => break Err (err) , } } } fn read_available_once (& mut self , buf : & mut [u8]) -> io :: Result < Option < usize > > { self . stream . flush_in_buffer () ; match self . try_read_inner (buf) { Ok (0) => Ok (Some (0)) , Ok (n) => { self . stream . keep_in_buffer (& buf [.. n]) ; Ok (Some (n)) } Err (err) if err . kind () == io :: ErrorKind :: WouldBlock => Ok (None) , Err (err) => Err (err) , } } fn try_read_inner (& mut self , buf : & mut [u8]) -> io :: Result < usize > { self . stream . get_mut () . set_blocking (false) ? ; let result = self . stream . get_mut () . read (buf) ; self . stream . get_mut () . set_blocking (true) ? ; result } }
+};
+}

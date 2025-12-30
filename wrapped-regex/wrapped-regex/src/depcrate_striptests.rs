@@ -1,0 +1,9 @@
+// Generated macro for tests (module)
+macro_rules! Depcrate_striptests {
+() => {
+// Module: crate::strip
+// Provides: {"tests"}
+// Dependencies: {}
+# [cfg (test)] mod tests { use regex_syntax :: Parser ; use super :: { LineTerminator , strip_from_match } ; use crate :: error :: Error ; fn roundtrip (pattern : & str , byte : u8) -> String { roundtrip_line_term (pattern , LineTerminator :: byte (byte)) . unwrap () } fn roundtrip_crlf (pattern : & str) -> String { roundtrip_line_term (pattern , LineTerminator :: crlf ()) . unwrap () } fn roundtrip_err (pattern : & str , byte : u8) -> Result < String , Error > { roundtrip_line_term (pattern , LineTerminator :: byte (byte)) } fn roundtrip_line_term (pattern : & str , line_term : LineTerminator ,) -> Result < String , Error > { let expr1 = Parser :: new () . parse (pattern) . unwrap () ; let expr2 = strip_from_match (expr1 , line_term) ? ; Ok (expr2 . to_string ()) } # [test] fn various () { assert_eq ! (roundtrip (r"[a\n]" , b'\n') , "a") ; assert_eq ! (roundtrip (r"[a\n]" , b'a') , "\n") ; assert_eq ! (roundtrip_crlf (r"[a\n]") , "a") ; assert_eq ! (roundtrip_crlf (r"[a\r]") , "a") ; assert_eq ! (roundtrip_crlf (r"[a\r\n]") , "a") ; assert_eq ! (roundtrip (r"(?-u)\s" , b'a') , r"(?-u:[\x09-\x0D\x20])") ; assert_eq ! (roundtrip (r"(?-u)\s" , b'\n') , r"(?-u:[\x09\x0B-\x0D\x20])") ; assert ! (roundtrip_err (r"\n" , b'\n') . is_err ()) ; assert ! (roundtrip_err (r"abc\n" , b'\n') . is_err ()) ; assert ! (roundtrip_err (r"\nabc" , b'\n') . is_err ()) ; assert ! (roundtrip_err (r"abc\nxyz" , b'\n') . is_err ()) ; assert ! (roundtrip_err (r"\x0A" , b'\n') . is_err ()) ; assert ! (roundtrip_err (r"\u000A" , b'\n') . is_err ()) ; assert ! (roundtrip_err (r"\U0000000A" , b'\n') . is_err ()) ; assert ! (roundtrip_err (r"\u{A}" , b'\n') . is_err ()) ; assert ! (roundtrip_err ("\n" , b'\n') . is_err ()) ; } }
+};
+}

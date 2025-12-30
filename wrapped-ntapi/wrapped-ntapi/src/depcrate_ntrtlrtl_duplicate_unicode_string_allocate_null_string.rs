@@ -1,0 +1,9 @@
+// Generated macro for RTL_DUPLICATE_UNICODE_STRING_ALLOCATE_NULL_STRING (const)
+macro_rules! Depcrate_ntrtlRTL_DUPLICATE_UNICODE_STRING_ALLOCATE_NULL_STRING {
+() => {
+// Module: crate::ntrtl
+// Provides: {"RTL_DUPLICATE_UNICODE_STRING_ALLOCATE_NULL_STRING"}
+// Dependencies: {}
+pub const RTL_DUPLICATE_UNICODE_STRING_ALLOCATE_NULL_STRING : ULONG = 0x00000002 ;
+};
+}

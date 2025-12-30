@@ -1,0 +1,9 @@
+// Generated macro for impl_183 (impl)
+macro_rules! Depcrate_inhabitednessimpl_183 {
+() => {
+// Module: crate::inhabitedness
+// Provides: {"impl_183"}
+// Dependencies: {}
+impl UninhabitedFrom < '_ > { fn visit_adt (& mut self , adt : AdtId , subst : & Substitution) -> ControlFlow < VisiblyUninhabited > { match adt { AdtId :: UnionId (_) => CONTINUE_OPAQUELY_INHABITED , AdtId :: StructId (s) => self . visit_variant (s . into () , subst) , AdtId :: EnumId (e) => { let enum_data = e . enum_variants (self . db) ; for & (variant , _ , _) in enum_data . variants . iter () { let variant_inhabitedness = self . visit_variant (variant . into () , subst) ; match variant_inhabitedness { Break (VisiblyUninhabited) => () , Continue (()) => return CONTINUE_OPAQUELY_INHABITED , } } BREAK_VISIBLY_UNINHABITED } } } fn visit_variant (& mut self , variant : VariantId , subst : & Substitution ,) -> ControlFlow < VisiblyUninhabited > { let variant_data = variant . fields (self . db) ; let fields = variant_data . fields () ; if fields . is_empty () { return CONTINUE_OPAQUELY_INHABITED ; } let is_enum = matches ! (variant , VariantId :: EnumVariantId (..)) ; let field_tys = self . db . field_types (variant) ; let field_vis = if is_enum { None } else { Some (self . db . field_visibilities (variant)) } ; for (fid , _) in fields . iter () { self . visit_field (field_vis . as_ref () . map (| it | it [fid]) , & field_tys [fid] , subst) ? ; } CONTINUE_OPAQUELY_INHABITED } fn visit_field (& mut self , vis : Option < Visibility > , ty : & Binders < Ty > , subst : & Substitution ,) -> ControlFlow < VisiblyUninhabited > { if vis . is_none_or (| it | it . is_visible_from (self . db , self . target_mod)) { let ty = ty . clone () . substitute (Interner , subst) ; ty . visit_with (self , DebruijnIndex :: INNERMOST) } else { CONTINUE_OPAQUELY_INHABITED } } }
+};
+}

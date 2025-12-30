@@ -1,0 +1,44 @@
+// Generated module macro for crate::framework::graphviz
+macro_rules! Modcrate_framework_graphviz {
+() => {
+        Depcrate_framework_graphvizuse_98!();
+        Depcrate_framework_graphvizuse_99!();
+        Depcrate_framework_graphvizuse_100!();
+        Depcrate_framework_graphvizuse_101!();
+        Depcrate_framework_graphvizuse_102!();
+        Depcrate_framework_graphvizuse_103!();
+        Depcrate_framework_graphvizuse_104!();
+        Depcrate_framework_graphvizuse_105!();
+        Depcrate_framework_graphvizuse_106!();
+        Depcrate_framework_graphvizuse_107!();
+        Depcrate_framework_graphvizuse_108!();
+        Depcrate_framework_graphvizuse_109!();
+        Depcrate_framework_graphvizuse_110!();
+        Depcrate_framework_graphvizuse_111!();
+        Depcrate_framework_graphvizuse_112!();
+        Depcrate_framework_graphvizuse_113!();
+        Depcrate_framework_graphvizuse_114!();
+        Depcrate_framework_graphvizuse_115!();
+        Depcrate_framework_graphvizwrite_graphviz_results!();
+        Depcrate_framework_graphvizRustcMirAttrs!();
+        Depcrate_framework_graphvizimpl_118!();
+        Depcrate_framework_graphvizOutputStyle!();
+        Depcrate_framework_graphvizimpl_120!();
+        Depcrate_framework_graphvizFormatter!();
+        Depcrate_framework_graphvizimpl_122!();
+        Depcrate_framework_graphvizCfgEdge!();
+        Depcrate_framework_graphvizdataflow_successors!();
+        Depcrate_framework_graphvizimpl_125!();
+        Depcrate_framework_graphvizimpl_126!();
+        Depcrate_framework_graphvizBlockFormatter!();
+        Depcrate_framework_graphvizimpl_128!();
+        Depcrate_framework_graphvizStateDiffCollector!();
+        Depcrate_framework_graphvizimpl_130!();
+        Depcrate_framework_graphvizimpl_131!();
+        Depcrate_framework_graphvizregex!();
+        Depcrate_framework_graphvizdiff_pretty!();
+        Depcrate_framework_graphvizBackground!();
+        Depcrate_framework_graphvizimpl_135!();
+        Depcrate_framework_graphvizimpl_136!();
+    };
+}

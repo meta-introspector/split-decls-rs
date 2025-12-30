@@ -1,0 +1,9 @@
+// Generated macro for rewrite_params (function)
+macro_rules! Depcrate_itemsrewrite_params {
+() => {
+// Module: crate::items
+// Provides: {"rewrite_params"}
+// Dependencies: {}
+fn rewrite_params (context : & RewriteContext < '_ > , params : & [ast :: Param] , one_line_budget : usize , multi_line_budget : usize , indent : Indent , param_indent : Indent , span : Span , variadic : bool ,) -> RewriteResult { if params . is_empty () { let comment = context . snippet (mk_sp (span . lo () , span . hi () - BytePos (1) ,)) . trim () ; return Ok (comment . to_owned ()) ; } let param_items : Vec < _ > = itemize_list (context . snippet_provider , params . iter () , ")" , "," , | param | span_lo_for_param (param) , | param | param . ty . span . hi () , | param | { param . rewrite_result (context , Shape :: legacy (multi_line_budget , param_indent)) . or_else (| _ | Ok (context . snippet (param . span ()) . to_owned ())) } , span . lo () , span . hi () , false ,) . collect () ; let tactic = definitive_tactic (& param_items , context . config . fn_params_layout () . to_list_tactic (param_items . len ()) , Separator :: Comma , one_line_budget ,) ; let budget = match tactic { DefinitiveListTactic :: Horizontal => one_line_budget , _ => multi_line_budget , } ; let indent = match context . config . indent_style () { IndentStyle :: Block => indent . block_indent (context . config) , IndentStyle :: Visual => param_indent , } ; let trailing_separator = if variadic { SeparatorTactic :: Never } else { match context . config . indent_style () { IndentStyle :: Block => context . config . trailing_comma () , IndentStyle :: Visual => SeparatorTactic :: Never , } } ; let fmt = ListFormatting :: new (Shape :: legacy (budget , indent) , context . config) . tactic (tactic) . trailing_separator (trailing_separator) . ends_with_newline (tactic . ends_with_newline (context . config . indent_style ())) . preserve_newline (true) ; write_list (& param_items , & fmt) }
+};
+}

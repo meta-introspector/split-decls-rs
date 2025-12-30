@@ -1,0 +1,9 @@
+// Generated macro for load_file (function)
+macro_rules! Depcrateload_file {
+() => {
+// Module: crate
+// Provides: {"load_file"}
+// Dependencies: {}
+fn load_file < P : AsRef < Path > > (name : P , features : Tokens , lookup : & mut Lookup ,) -> Result < () , io :: Error > { let name = name . as_ref () ; let parent = name . parent () . ok_or (io :: ErrorKind :: Other) ? ; let mut f = File :: open (name) ? ; let mut src = String :: new () ; f . read_to_string (& mut src) ? ; let file = syn :: parse_file (& src) . map_err (| _ | io :: ErrorKind :: Other) ? ; 'items : for item in & file . items { match item . node { ItemKind :: Mod (ref module) => { if module . content . is_some () { continue ; } for name in IGNORED_MODS { if module . ident . as_ref () == * name { continue 'items ; } } let features = get_features (& item . attrs , features . clone ()) ; let path = parent . join (& format ! ("{}.rs" , module . ident . as_ref ())) ; load_file (path , features , lookup) ? ; } ItemKind :: Mac (ref mac) => { let features = get_features (& item . attrs , features . clone ()) ; let found = if path_eq (& mac . path , & "ast_struct" . into ()) { syn :: parse_tokens :: < parsing :: AstStruct > (mac . tokens [0] . clone () . into_tokens ()) . map_err (| _ | io :: ErrorKind :: Other) ? . 0 } else if path_eq (& mac . path , & "ast_enum" . into ()) { syn :: parse_tokens :: < parsing :: AstEnum > (mac . tokens [0] . clone () . into_tokens ()) . map_err (| _ | io :: ErrorKind :: Other) ? . 0 } else if path_eq (& mac . path , & "ast_enum_of_structs" . into ()) { syn :: parse_tokens :: < parsing :: AstEnumOfStructs > (mac . tokens [0] . clone () . into_tokens ()) . map_err (| _ | io :: ErrorKind :: Other) ? . 0 } else { continue } ; for mut item in found { features . to_tokens (& mut item . features) ; lookup . insert (item . item . ident . clone () , item) ; } } _ => { } } } Ok (()) }
+};
+}

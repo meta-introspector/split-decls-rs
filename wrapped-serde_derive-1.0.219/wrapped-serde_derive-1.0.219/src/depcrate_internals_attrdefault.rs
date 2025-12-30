@@ -1,0 +1,9 @@
+// Generated macro for Default (enum)
+macro_rules! Depcrate_internals_attrDefault {
+() => {
+// Module: crate::internals::attr
+// Provides: {"Default"}
+// Dependencies: {}
+# [doc = " Represents the default to use for a field when deserializing."] pub enum Default { # [doc = " Field must always be specified because it does not have a default."] None , # [doc = " The default is given by `std::default::Default::default()`."] Default , # [doc = " The default is given by this function."] Path (syn :: ExprPath) , }
+};
+}

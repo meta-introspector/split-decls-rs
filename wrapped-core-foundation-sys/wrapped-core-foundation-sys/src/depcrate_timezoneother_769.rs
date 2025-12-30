@@ -1,0 +1,9 @@
+// Generated macro for other_769 (other)
+macro_rules! Depcrate_timezoneother_769 {
+() => {
+// Module: crate::timezone
+// Provides: {"other_769"}
+// Dependencies: {}
+unsafe extern "C" { pub static kCFTimeZoneSystemTimeZoneDidChangeNotification : CFNotificationName ; pub fn CFTimeZoneCreate (allocator : CFAllocatorRef , name : CFStringRef , data : CFDataRef ,) -> CFTimeZoneRef ; pub fn CFTimeZoneCreateWithName (allocator : CFAllocatorRef , name : CFStringRef , tryAbbrev : Boolean ,) -> CFTimeZoneRef ; pub fn CFTimeZoneCreateWithTimeIntervalFromGMT (allocator : CFAllocatorRef , interval : CFTimeInterval ,) -> CFTimeZoneRef ; pub fn CFTimeZoneCopyAbbreviationDictionary () -> CFDictionaryRef ; pub fn CFTimeZoneCopyAbbreviation (tz : CFTimeZoneRef , at : CFAbsoluteTime) -> CFStringRef ; pub fn CFTimeZoneCopyDefault () -> CFTimeZoneRef ; pub fn CFTimeZoneCopySystem () -> CFTimeZoneRef ; pub fn CFTimeZoneSetDefault (tz : CFTimeZoneRef) ; pub fn CFTimeZoneCopyKnownNames () -> CFArrayRef ; pub fn CFTimeZoneResetSystem () ; pub fn CFTimeZoneSetAbbreviationDictionary (dict : CFDictionaryRef) ; pub fn CFTimeZoneGetName (tz : CFTimeZoneRef) -> CFStringRef ; pub fn CFTimeZoneCopyLocalizedName (tz : CFTimeZoneRef , style : CFTimeZoneNameStyle , locale : CFLocaleRef ,) -> CFStringRef ; pub fn CFTimeZoneGetSecondsFromGMT (tz : CFTimeZoneRef , time : CFAbsoluteTime) -> CFTimeInterval ; pub fn CFTimeZoneGetData (tz : CFTimeZoneRef) -> CFDataRef ; pub fn CFTimeZoneIsDaylightSavingTime (tz : CFTimeZoneRef , at : CFAbsoluteTime) -> Boolean ; pub fn CFTimeZoneGetDaylightSavingTimeOffset (tz : CFTimeZoneRef , at : CFAbsoluteTime ,) -> CFTimeInterval ; pub fn CFTimeZoneGetNextDaylightSavingTimeTransition (tz : CFTimeZoneRef , at : CFAbsoluteTime ,) -> CFAbsoluteTime ; pub fn CFTimeZoneGetTypeID () -> CFTypeID ; }
+};
+}

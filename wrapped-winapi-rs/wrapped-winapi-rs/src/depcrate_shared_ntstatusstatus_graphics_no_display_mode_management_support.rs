@@ -1,0 +1,9 @@
+// Generated macro for STATUS_GRAPHICS_NO_DISPLAY_MODE_MANAGEMENT_SUPPORT (const)
+macro_rules! Depcrate_shared_ntstatusSTATUS_GRAPHICS_NO_DISPLAY_MODE_MANAGEMENT_SUPPORT {
+() => {
+// Module: crate::shared::ntstatus
+// Provides: {"STATUS_GRAPHICS_NO_DISPLAY_MODE_MANAGEMENT_SUPPORT"}
+// Dependencies: {}
+pub const STATUS_GRAPHICS_NO_DISPLAY_MODE_MANAGEMENT_SUPPORT : NTSTATUS = 0xC01E0341 ;
+};
+}

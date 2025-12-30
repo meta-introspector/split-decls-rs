@@ -1,0 +1,9 @@
+// Generated macro for BytesEnd (struct)
+macro_rules! Depcrate_eventsBytesEnd {
+() => {
+// Module: crate::events
+// Provides: {"BytesEnd"}
+// Dependencies: {}
+# [doc = " Closing tag data (`Event::End`): `</name>`."] # [doc = ""] # [doc = " The name can be accessed using the [`name`] or [`local_name`] methods."] # [doc = ""] # [doc = " This event implements `Deref<Target = [u8]>`. The `deref()` implementation"] # [doc = " returns the content of this event between `</` and `>`."] # [doc = ""] # [doc = " Note, that inner text will not contain `>` character inside:"] # [doc = ""] # [doc = " ```"] # [doc = " # use quick_xml::events::{BytesEnd, Event};"] # [doc = " # use quick_xml::reader::Reader;"] # [doc = " # use pretty_assertions::assert_eq;"] # [doc = " let mut reader = Reader::from_str(r#\"<element></element a1 = 'val1' a2=\"val2\" >\"#);"] # [doc = " // Note, that this entire string considered as a .name()"] # [doc = " let content = \"element a1 = 'val1' a2=\\\"val2\\\" \";"] # [doc = " let event = BytesEnd::new(content);"] # [doc = ""] # [doc = " reader.config_mut().trim_markup_names_in_closing_tags = false;"] # [doc = " reader.config_mut().check_end_names = false;"] # [doc = " reader.read_event().unwrap(); // Skip `<element>`"] # [doc = ""] # [doc = " assert_eq!(reader.read_event().unwrap(), Event::End(event.borrow()));"] # [doc = " assert_eq!(event.name().as_ref(), content.as_bytes());"] # [doc = " // deref coercion of &BytesEnd to &[u8]"] # [doc = " assert_eq!(&event as &[u8], content.as_bytes());"] # [doc = " // AsRef<[u8]> for &T + deref coercion"] # [doc = " assert_eq!(event.as_ref(), content.as_bytes());"] # [doc = " ```"] # [doc = ""] # [doc = " [`name`]: Self::name"] # [doc = " [`local_name`]: Self::local_name"] # [derive (Clone , Eq , PartialEq)] pub struct BytesEnd < 'a > { name : Cow < 'a , [u8] > , }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for D3D11_SIT_UAV_RWSTRUCTURED_WITH_COUNTER (const)
+macro_rules! Depcrate_um_d3dcommonD3D11_SIT_UAV_RWSTRUCTURED_WITH_COUNTER {
+() => {
+// Module: crate::um::d3dcommon
+// Provides: {"D3D11_SIT_UAV_RWSTRUCTURED_WITH_COUNTER"}
+// Dependencies: {}
+pub const D3D11_SIT_UAV_RWSTRUCTURED_WITH_COUNTER : D3D_SHADER_INPUT_TYPE = D3D_SIT_UAV_RWSTRUCTURED_WITH_COUNTER ;
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for ERROR_GRAPHICS_DISPLAY_DEVICE_NOT_ATTACHED_TO_DESKTOP (const)
+macro_rules! Depcrate_shared_winerrorERROR_GRAPHICS_DISPLAY_DEVICE_NOT_ATTACHED_TO_DESKTOP {
+() => {
+// Module: crate::shared::winerror
+// Provides: {"ERROR_GRAPHICS_DISPLAY_DEVICE_NOT_ATTACHED_TO_DESKTOP"}
+// Dependencies: {}
+pub const ERROR_GRAPHICS_DISPLAY_DEVICE_NOT_ATTACHED_TO_DESKTOP : HRESULT = 0xC02625E2 ;
+};
+}

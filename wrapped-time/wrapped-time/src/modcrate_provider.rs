@@ -1,0 +1,43 @@
+// Generated module macro for crate::provider
+macro_rules! Modcrate_provider {
+() => {
+        Depcrate_provideruse_3!();
+        Depcrate_provideruse_4!();
+        Depcrate_provideruse_5!();
+        Depcrate_provideruse_6!();
+        Depcrate_provideruse_7!();
+        Depcrate_provideruse_8!();
+        Depcrate_provideruse_9!();
+        Depcrate_provideriana!();
+        Depcrate_providerwindows!();
+        Depcrate_providerBaked!();
+        Depcrate_provider_!();
+        Depcrate_providerMARKERS!();
+        Depcrate_providerSECONDS_TO_EIGHTS_OF_HOURS!();
+        Depcrate_providerTimeZoneVariant!();
+        Depcrate_providerMetazoneMembershipKind!();
+        Depcrate_providerVariantOffsets!();
+        Depcrate_providerimpl_37!();
+        Depcrate_providerVariantOffsetsWithMetazoneMembershipKind!();
+        Depcrate_providerimpl_39!();
+        Depcrate_providerimpl_40!();
+        Depcrate_providerimpl_41!();
+        Depcrate_provideroffsets_ule!();
+        Depcrate_providerimpl_43!();
+        Depcrate_providerimpl_44!();
+        Depcrate_providerimpl_45!();
+        Depcrate_providerMetazoneId!();
+        Depcrate_providerTimezonePeriods!();
+        Depcrate_providerTimestamp24!();
+        Depcrate_providerimpl_49!();
+        Depcrate_providerTimeZonePeriodsSerde!();
+        Depcrate_providerimpl_51!();
+        Depcrate_providerimpl_52!();
+        Depcrate_providerMetazoneInfo!();
+        Depcrate_providerimpl_54!();
+        Depcrate_providermacro_55!();
+        Depcrate_providermacro_56!();
+        Depcrate_providerimpl_57!();
+        Depcrate_providerlegacy!();
+    };
+}

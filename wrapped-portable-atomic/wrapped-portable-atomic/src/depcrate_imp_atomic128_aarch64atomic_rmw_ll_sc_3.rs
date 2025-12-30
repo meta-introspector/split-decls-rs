@@ -1,0 +1,9 @@
+// Generated macro for atomic_rmw_ll_sc_3 (macro)
+macro_rules! Depcrate_imp_atomic128_aarch64atomic_rmw_ll_sc_3 {
+() => {
+// Module: crate::imp::atomic128::aarch64
+// Provides: {"atomic_rmw_ll_sc_3"}
+// Dependencies: {}
+# [doc = " Atomic RMW by LL/SC loop (3 arguments)"] # [doc = " `unsafe fn(dst: *mut u128, val: u128, order: Ordering) -> u128;`"] # [doc = ""] # [doc = " `$op` can use the following registers:"] # [doc = " - val_lo/val_hi pair: val argument (read-only for `$op`)"] # [doc = " - prev_lo/prev_hi pair: previous value loaded by ll (read-only for `$op`)"] # [doc = " - new_lo/new_hi pair: new value that will be stored by sc"] macro_rules ! atomic_rmw_ll_sc_3 { ($ name : ident as $ reexport_name : ident $ (($ preserves_flags : tt)) ?, $ ($ op : tt) *) => { # [cfg (not (all (any (target_feature = "lse" , portable_atomic_target_feature = "lse") , not (portable_atomic_ll_sc_rmw) ,)))] use self ::$ name as $ reexport_name ; # [cfg (any (test , not (all (any (target_feature = "lse" , portable_atomic_target_feature = "lse") , not (portable_atomic_ll_sc_rmw) ,))))] # [inline] unsafe fn $ name (dst : * mut u128 , val : u128 , order : Ordering) -> u128 { debug_assert ! (dst as usize % 16 == 0) ; unsafe { let val = U128 { whole : val } ; let (mut prev_lo , mut prev_hi) ; macro_rules ! op { ($ acquire : tt , $ release : tt , $ fence : tt) => { asm ! ("2:" , concat ! ("ld" , $ acquire , "xp {prev_lo}, {prev_hi}, [{dst}]") , $ ($ op) * concat ! ("st" , $ release , "xp {r:w}, {new_lo}, {new_hi}, [{dst}]") , "cbnz {r:w}, 2b" , $ fence , dst = in (reg) ptr_reg ! (dst) , val_lo = in (reg) val . pair . lo , val_hi = in (reg) val . pair . hi , prev_lo = out (reg) prev_lo , prev_hi = out (reg) prev_hi , new_lo = out (reg) _ , new_hi = out (reg) _ , r = out (reg) _ , options (nostack $ (, $ preserves_flags) ?) ,) } ; } atomic_rmw ! (op , order) ; U128 { pair : Pair { lo : prev_lo , hi : prev_hi } } . whole } } } ; }
+};
+}

@@ -1,0 +1,44 @@
+// Generated module macro for crate::general_category
+macro_rules! Modcrate_general_category {
+() => {
+        Depcrate_general_categoryBY_NAME!();
+        Depcrate_general_categoryCASED_LETTER!();
+        Depcrate_general_categoryCLOSE_PUNCTUATION!();
+        Depcrate_general_categoryCONNECTOR_PUNCTUATION!();
+        Depcrate_general_categoryCONTROL!();
+        Depcrate_general_categoryCURRENCY_SYMBOL!();
+        Depcrate_general_categoryDASH_PUNCTUATION!();
+        Depcrate_general_categoryDECIMAL_NUMBER!();
+        Depcrate_general_categoryENCLOSING_MARK!();
+        Depcrate_general_categoryFINAL_PUNCTUATION!();
+        Depcrate_general_categoryFORMAT!();
+        Depcrate_general_categoryINITIAL_PUNCTUATION!();
+        Depcrate_general_categoryLETTER!();
+        Depcrate_general_categoryLETTER_NUMBER!();
+        Depcrate_general_categoryLINE_SEPARATOR!();
+        Depcrate_general_categoryLOWERCASE_LETTER!();
+        Depcrate_general_categoryMARK!();
+        Depcrate_general_categoryMATH_SYMBOL!();
+        Depcrate_general_categoryMODIFIER_LETTER!();
+        Depcrate_general_categoryMODIFIER_SYMBOL!();
+        Depcrate_general_categoryNONSPACING_MARK!();
+        Depcrate_general_categoryNUMBER!();
+        Depcrate_general_categoryOPEN_PUNCTUATION!();
+        Depcrate_general_categoryOTHER!();
+        Depcrate_general_categoryOTHER_LETTER!();
+        Depcrate_general_categoryOTHER_NUMBER!();
+        Depcrate_general_categoryOTHER_PUNCTUATION!();
+        Depcrate_general_categoryOTHER_SYMBOL!();
+        Depcrate_general_categoryPARAGRAPH_SEPARATOR!();
+        Depcrate_general_categoryPRIVATE_USE!();
+        Depcrate_general_categoryPUNCTUATION!();
+        Depcrate_general_categorySEPARATOR!();
+        Depcrate_general_categorySPACE_SEPARATOR!();
+        Depcrate_general_categorySPACING_MARK!();
+        Depcrate_general_categorySURROGATE!();
+        Depcrate_general_categorySYMBOL!();
+        Depcrate_general_categoryTITLECASE_LETTER!();
+        Depcrate_general_categoryUNASSIGNED!();
+        Depcrate_general_categoryUPPERCASE_LETTER!();
+    };
+}

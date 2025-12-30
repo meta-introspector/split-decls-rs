@@ -1,0 +1,9 @@
+// Generated macro for PSYSTEM_THREAD_CID_PRIORITY_INFORMATION (type)
+macro_rules! Depcrate_ntexapiPSYSTEM_THREAD_CID_PRIORITY_INFORMATION {
+() => {
+// Module: crate::ntexapi
+// Provides: {"PSYSTEM_THREAD_CID_PRIORITY_INFORMATION"}
+// Dependencies: {}
+pub type PSYSTEM_THREAD_CID_PRIORITY_INFORMATION = * mut SYSTEM_THREAD_CID_PRIORITY_INFORMATION ;
+};
+}

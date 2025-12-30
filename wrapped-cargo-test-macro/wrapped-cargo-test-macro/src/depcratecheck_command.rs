@@ -1,0 +1,11 @@
+// Generated macro for check_command (function)
+macro_rules! Depcratecheck_command {
+() => {
+// Module: crate
+// Provides: {"check_command"}
+// Dependencies: {}
+fn check_command (command_path : & Path , args : & [& str]) -> bool { let mut command = Command :: new (command_path) ; let command_name = command . get_program () . to_str () . unwrap () . to_owned () ; command . args (args) ; let output = match command . output () { Ok (output) => output , Err (e) => { if is_ci () && ! matches ! (command_name . as_str () , "hg" | "lldb") { panic ! ("expected command `{command_name}` to be somewhere in PATH: {e}" ,) ; } return false ; } } ; if ! output . status . success () { panic ! ("expected command `{command_name}` to be runnable, got error {}:\n\
+            stderr:{}\n\
+            stdout:{}\n" , output . status , String :: from_utf8_lossy (& output . stderr) , String :: from_utf8_lossy (& output . stdout)) ; } true }
+};
+}

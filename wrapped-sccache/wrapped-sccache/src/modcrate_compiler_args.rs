@@ -1,0 +1,56 @@
+// Generated module macro for crate::compiler::args
+macro_rules! Modcrate_compiler_args {
+() => {
+        Depcrate_compiler_argsuse_343!();
+        Depcrate_compiler_argsuse_344!();
+        Depcrate_compiler_argsuse_345!();
+        Depcrate_compiler_argsuse_346!();
+        Depcrate_compiler_argsuse_347!();
+        Depcrate_compiler_argsuse_348!();
+        Depcrate_compiler_argsuse_349!();
+        Depcrate_compiler_argsuse_350!();
+        Depcrate_compiler_argsArgParseResult!();
+        Depcrate_compiler_argsArgToStringResult!();
+        Depcrate_compiler_argsPathTransformerFn!();
+        Depcrate_compiler_argsArgParseError!();
+        Depcrate_compiler_argsimpl_355!();
+        Depcrate_compiler_argsimpl_356!();
+        Depcrate_compiler_argsArgToStringError!();
+        Depcrate_compiler_argsimpl_358!();
+        Depcrate_compiler_argsimpl_359!();
+        Depcrate_compiler_argsDelimiter!();
+        Depcrate_compiler_argsArgument!();
+        Depcrate_compiler_argsArgDisposition!();
+        Depcrate_compiler_argsNormalizedDisposition!();
+        Depcrate_compiler_argsimpl_364!();
+        Depcrate_compiler_argsIter!();
+        Depcrate_compiler_argsimpl_366!();
+        Depcrate_compiler_argsIterStrings!();
+        Depcrate_compiler_argsimpl_368!();
+        Depcrate_compiler_argsArgData!();
+        Depcrate_compiler_argsArgumentValue!();
+        Depcrate_compiler_argsimpl_371!();
+        Depcrate_compiler_argsFromArg!();
+        Depcrate_compiler_argsIntoArg!();
+        Depcrate_compiler_argsimpl_374!();
+        Depcrate_compiler_argsimpl_375!();
+        Depcrate_compiler_argsimpl_376!();
+        Depcrate_compiler_argsimpl_377!();
+        Depcrate_compiler_argsimpl_378!();
+        Depcrate_compiler_argsimpl_379!();
+        Depcrate_compiler_argsimpl_380!();
+        Depcrate_compiler_argssplit_os_string_arg!();
+        Depcrate_compiler_argsArgInfo!();
+        Depcrate_compiler_argsimpl_383!();
+        Depcrate_compiler_argsbsearch!();
+        Depcrate_compiler_argsSearchableArgInfo!();
+        Depcrate_compiler_argsimpl_386!();
+        Depcrate_compiler_argsimpl_387!();
+        Depcrate_compiler_argsArgsIter!();
+        Depcrate_compiler_argsimpl_389!();
+        Depcrate_compiler_argsimpl_390!();
+        Depcrate_compiler_argsflag!();
+        Depcrate_compiler_argstake_arg!();
+        Depcrate_compiler_argstests!();
+    };
+}

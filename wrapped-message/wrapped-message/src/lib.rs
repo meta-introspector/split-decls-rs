@@ -1,0 +1,70 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcrate_legacyimpl_41.rs");
+include!("depcrate_legacytests.rs");
+include!("depcrateuse_44.rs");
+include!("depcrateuse_45.rs");
+include!("depcrateaddresslookuptableaccount.rs");
+include!("depcrate_compiled_keysuse_10.rs");
+include!("depcrate_compiled_instructionimpl_8.rs");
+include!("depcrate_inner_instructioninnerinstructionslist.rs");
+include!("depcrate_legacycompile_instructions.rs");
+include!("depcrate_inner_instructioninnerinstructions.rs");
+include!("depcrateuse_49.rs");
+include!("depcrate_legacyimpl_42.rs");
+include!("depcrate_compiled_instructionuse_4.rs");
+include!("depcratenon_bpf_modules.rs");
+include!("depcrate_inline_nonceadvance_nonce_data.rs");
+include!("depcrate_compiled_instructionuse_5.rs");
+include!("depcrate_compiled_keysimpl_14.rs");
+include!("depcrate_legacycompile_instruction.rs");
+include!("depcrate_inner_instructionuse_28.rs");
+include!("depcratecompiled_instruction.rs");
+include!("depcrate_compiled_instructionuse_3.rs");
+include!("depcrate_compiled_instructioncompiledinstruction.rs");
+include!("depcratelegacy.rs");
+include!("depcratemessage_header_length.rs");
+include!("depcrate_compiled_instructionimpl_7.rs");
+include!("depcrate_compiled_keyscompiledkeys.rs");
+include!("depcrate_compiled_keysimpl_17.rs");
+include!("depcrateuse_48.rs");
+include!("depcratecompiled_keys.rs");
+include!("depcrate_legacyuse_35.rs");
+include!("depcrate_compiled_instructionuse_2.rs");
+include!("depcrate_compiled_keysget_nonce_pubkey.rs");
+include!("depcratemessageheader.rs");
+include!("depcrate_inline_nonceadvance_nonce_account_instruction.rs");
+include!("depcrateuse_46.rs");
+include!("depcrate_legacyuse_36.rs");
+include!("depcrate_compiled_keystests.rs");
+include!("depcrateinner_instruction.rs");
+include!("depcrate_compiled_keyscompiledkeymeta.rs");
+include!("depcrate_inner_instructioninnerinstruction.rs");
+include!("depcrate_inline_nonceis_advance_nonce_instruction_data.rs");
+include!("depcrate_compiled_keysuse_11.rs");
+include!("depcrateinline_nonce.rs");
+include!("depcrate_compiled_keysnonced_tx_marker_ix_index.rs");
+include!("depcrate_inline_nonceuse_22.rs");
+include!("depcrate_compiled_keyscompileerror.rs");
+include!("depcrate_legacyuse_34.rs");
+include!("depcrate_legacyposition.rs");
+include!("depcrate_inline_noncetest.rs");
+include!("depcrate_legacymessage.rs");
+include!("depcrate_compiled_keysimpl_15.rs");
+include!("depcrate_legacyuse_33.rs");
+include!("modcrate_compiled_keys.rs");
+include!("modcrate_inline_nonce.rs");
+include!("modcrate_inner_instruction.rs");
+include!("modcrate_compiled_instruction.rs");
+include!("modcrate_legacy.rs");
+include!("modcrate.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate_compiled_keys!();
+    Modcrate_inline_nonce!();
+    Modcrate_inner_instruction!();
+    Modcrate_compiled_instruction!();
+    Modcrate_legacy!();
+    Modcrate!();
+}

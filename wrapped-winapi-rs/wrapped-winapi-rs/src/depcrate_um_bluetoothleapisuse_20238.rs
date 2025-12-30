@@ -1,0 +1,9 @@
+// Generated macro for use_20238 (use)
+macro_rules! Depcrate_um_bluetoothleapisuse_20238 {
+() => {
+// Module: crate::um::bluetoothleapis
+// Provides: {"use_20238"}
+// Dependencies: {}
+use um :: bthledef :: { BLUETOOTH_GATT_EVENT_HANDLE , BTH_LE_GATT_EVENT_TYPE , BTH_LE_GATT_RELIABLE_WRITE_CONTEXT , PBTH_LE_GATT_CHARACTERISTIC , PBTH_LE_GATT_CHARACTERISTIC_VALUE , PBTH_LE_GATT_DESCRIPTOR , PBTH_LE_GATT_DESCRIPTOR_VALUE , PBTH_LE_GATT_RELIABLE_WRITE_CONTEXT , PBTH_LE_GATT_SERVICE , PFNBLUETOOTH_GATT_EVENT_CALLBACK , } ;
+};
+}

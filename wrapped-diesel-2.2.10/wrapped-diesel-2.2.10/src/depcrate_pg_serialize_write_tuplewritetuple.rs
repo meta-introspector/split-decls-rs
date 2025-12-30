@@ -1,0 +1,9 @@
+// Generated macro for WriteTuple (trait)
+macro_rules! Depcrate_pg_serialize_write_tupleWriteTuple {
+() => {
+// Module: crate::pg::serialize::write_tuple
+// Provides: {"WriteTuple"}
+// Dependencies: {}
+# [doc = " Helper trait for writing tuples as named composite types"] # [doc = ""] # [doc = " This trait is essentially `ToSql<Record<ST>>` for tuples."] # [doc = " While we can provide a valid body of `to_sql`,"] # [doc = " PostgreSQL doesn't allow the use of bind parameters for unnamed composite types."] # [doc = " For this reason, we avoid implementing `ToSql` directly."] # [doc = ""] # [doc = " This trait can be used by `ToSql` impls of named composite types."] # [doc = ""] # [doc = " # Example"] # [doc = ""] # [doc = " ```"] # [doc = " # #[cfg(feature = \"postgres\")]"] # [doc = " # mod the_impl {"] # [doc = " #     use diesel::prelude::*;"] # [doc = " #     use diesel::pg::Pg;"] # [doc = " #     use diesel::serialize::{self, ToSql, Output, WriteTuple};"] # [doc = " #     use diesel::sql_types::{Integer, Text, SqlType};"] # [doc = " #"] # [doc = "     #[derive(SqlType)]"] # [doc = "     #[diesel(postgres_type(name = \"my_type\"))]"] # [doc = "     struct MyType;"] # [doc = ""] # [doc = "     #[derive(Debug)]"] # [doc = "     struct MyStruct<'a>(i32, &'a str);"] # [doc = ""] # [doc = "     impl<'a> ToSql<MyType, Pg> for MyStruct<'a> {"] # [doc = "         fn to_sql<'b>(&'b self, out: &mut Output<'b, '_, Pg>) -> serialize::Result {"] # [doc = "             WriteTuple::<(Integer, Text)>::write_tuple("] # [doc = "                 &(self.0, self.1),"] # [doc = "                 &mut out.reborrow(),"] # [doc = "             )"] # [doc = "         }"] # [doc = "     }"] # [doc = " # }"] # [doc = " # fn main() {}"] # [doc = " ```"] # [cfg (feature = "postgres_backend")] pub trait WriteTuple < ST > { # [doc = " See trait documentation."] fn write_tuple (& self , out : & mut Output < '_ , '_ , Pg >) -> serialize :: Result ; }
+};
+}

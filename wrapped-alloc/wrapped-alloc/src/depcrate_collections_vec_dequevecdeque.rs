@@ -1,0 +1,9 @@
+// Generated macro for VecDeque (struct)
+macro_rules! Depcrate_collections_vec_dequeVecDeque {
+() => {
+// Module: crate::collections::vec_deque
+// Provides: {"VecDeque"}
+// Dependencies: {}
+# [doc = " A double-ended queue implemented with a growable ring buffer."] # [doc = ""] # [doc = " The \"default\" usage of this type as a queue is to use [`push_back`] to add to"] # [doc = " the queue, and [`pop_front`] to remove from the queue. [`extend`] and [`append`]"] # [doc = " push onto the back in this manner, and iterating over `VecDeque` goes front"] # [doc = " to back."] # [doc = ""] # [doc = " A `VecDeque` with a known list of items can be initialized from an array:"] # [doc = ""] # [doc = " ```"] # [doc = " use std::collections::VecDeque;"] # [doc = ""] # [doc = " let deq = VecDeque::from([-1, 0, 1]);"] # [doc = " ```"] # [doc = ""] # [doc = " Since `VecDeque` is a ring buffer, its elements are not necessarily contiguous"] # [doc = " in memory. If you want to access the elements as a single slice, such as for"] # [doc = " efficient sorting, you can use [`make_contiguous`]. It rotates the `VecDeque`"] # [doc = " so that its elements do not wrap, and returns a mutable slice to the"] # [doc = " now-contiguous element sequence."] # [doc = ""] # [doc = " [`push_back`]: VecDeque::push_back"] # [doc = " [`pop_front`]: VecDeque::pop_front"] # [doc = " [`extend`]: VecDeque::extend"] # [doc = " [`append`]: VecDeque::append"] # [doc = " [`make_contiguous`]: VecDeque::make_contiguous"] # [cfg_attr (not (test) , rustc_diagnostic_item = "VecDeque")] # [stable (feature = "rust1" , since = "1.0.0")] # [rustc_insignificant_dtor] pub struct VecDeque < T , # [unstable (feature = "allocator_api" , issue = "32838")] A : Allocator = Global , > { head : usize , len : usize , buf : RawVec < T , A > , }
+};
+}

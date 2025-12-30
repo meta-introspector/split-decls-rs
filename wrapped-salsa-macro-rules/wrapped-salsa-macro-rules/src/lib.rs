@@ -1,0 +1,63 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcratemacro_if.rs");
+include!("depcrate_setup_interned_structsetup_interned_struct.rs");
+include!("depcratesetup_tracked_method_body.rs");
+include!("depcratereturn_mode.rs");
+include!("depcrate_gate_accumulatedgate_accumulated.rs");
+include!("depcrate_setup_tracked_assoc_fn_bodysetup_tracked_assoc_fn_body.rs");
+include!("depcrate_setup_accumulator_implsetup_accumulator_impl.rs");
+include!("depcratesetup_input_struct.rs");
+include!("depcrate_setup_input_structsetup_input_struct.rs");
+include!("depcrate_macro_ifmacro_if.rs");
+include!("depcrate_maybe_defaultmaybe_default_tt.rs");
+include!("depcrate_maybe_backdatemaybe_backdate.rs");
+include!("depcrate_maybe_defaultmaybe_default.rs");
+include!("depcratesetup_tracked_assoc_fn_body.rs");
+include!("depcrate_setup_tracked_method_bodysetup_tracked_method_body.rs");
+include!("depcratemaybe_backdate.rs");
+include!("depcrate_return_modereturn_mode_ty.rs");
+include!("depcratesetup_tracked_fn.rs");
+include!("depcrate_unexpected_cycle_recoveryunexpected_cycle_recovery.rs");
+include!("depcrateunexpected_cycle_recovery.rs");
+include!("depcrate_unexpected_cycle_recoveryunexpected_cycle_initial.rs");
+include!("depcratemaybe_default.rs");
+include!("depcrate_return_modereturn_mode_expression.rs");
+include!("depcratesetup_interned_struct.rs");
+include!("depcrate_setup_tracked_fnsetup_tracked_fn.rs");
+include!("depcrategate_accumulated.rs");
+include!("depcratesetup_tracked_struct.rs");
+include!("depcratesetup_accumulator_impl.rs");
+include!("depcrate_setup_tracked_structsetup_tracked_struct.rs");
+include!("modcrate_setup_input_struct.rs");
+include!("modcrate_setup_accumulator_impl.rs");
+include!("modcrate_setup_tracked_method_body.rs");
+include!("modcrate_setup_tracked_assoc_fn_body.rs");
+include!("modcrate_maybe_backdate.rs");
+include!("modcrate_setup_tracked_fn.rs");
+include!("modcrate_setup_tracked_struct.rs");
+include!("modcrate_unexpected_cycle_recovery.rs");
+include!("modcrate.rs");
+include!("modcrate_maybe_default.rs");
+include!("modcrate_return_mode.rs");
+include!("modcrate_setup_interned_struct.rs");
+include!("modcrate_gate_accumulated.rs");
+include!("modcrate_macro_if.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate_setup_input_struct!();
+    Modcrate_setup_accumulator_impl!();
+    Modcrate_setup_tracked_method_body!();
+    Modcrate_setup_tracked_assoc_fn_body!();
+    Modcrate_maybe_backdate!();
+    Modcrate_setup_tracked_fn!();
+    Modcrate_setup_tracked_struct!();
+    Modcrate_unexpected_cycle_recovery!();
+    Modcrate!();
+    Modcrate_maybe_default!();
+    Modcrate_return_mode!();
+    Modcrate_setup_interned_struct!();
+    Modcrate_gate_accumulated!();
+    Modcrate_macro_if!();
+}

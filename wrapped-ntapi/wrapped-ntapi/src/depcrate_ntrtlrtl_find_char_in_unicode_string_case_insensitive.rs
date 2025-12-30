@@ -1,0 +1,9 @@
+// Generated macro for RTL_FIND_CHAR_IN_UNICODE_STRING_CASE_INSENSITIVE (const)
+macro_rules! Depcrate_ntrtlRTL_FIND_CHAR_IN_UNICODE_STRING_CASE_INSENSITIVE {
+() => {
+// Module: crate::ntrtl
+// Provides: {"RTL_FIND_CHAR_IN_UNICODE_STRING_CASE_INSENSITIVE"}
+// Dependencies: {}
+pub const RTL_FIND_CHAR_IN_UNICODE_STRING_CASE_INSENSITIVE : ULONG = 0x00000004 ;
+};
+}

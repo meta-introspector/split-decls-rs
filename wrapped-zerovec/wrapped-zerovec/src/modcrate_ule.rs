@@ -1,0 +1,39 @@
+// Generated module macro for crate::ule
+macro_rules! Modcrate_ule {
+() => {
+        Depcrate_ulechars!();
+        Depcrate_ulecustom!();
+        Depcrate_uleencode!();
+        Depcrate_ulemacros!();
+        Depcrate_ulemulti!();
+        Depcrate_uleniche!();
+        Depcrate_uleoption!();
+        Depcrate_uleplain!();
+        Depcrate_uleslices!();
+        Depcrate_uletest_utils!();
+        Depcrate_uletuple!();
+        Depcrate_uletuplevar!();
+        Depcrate_ulevartuple!();
+        Depcrate_uleuse_767!();
+        Depcrate_uleuse_768!();
+        Depcrate_uleuse_769!();
+        Depcrate_uleuse_770!();
+        Depcrate_uleuse_771!();
+        Depcrate_uleuse_772!();
+        Depcrate_uleuse_773!();
+        Depcrate_uleuse_774!();
+        Depcrate_uleULE!();
+        Depcrate_uleAsULE!();
+        Depcrate_uleEqULE!();
+        Depcrate_uleSliceAsULE!();
+        Depcrate_uleimpl_779!();
+        Depcrate_uleimpl_780!();
+        Depcrate_uleVarULE!();
+        Depcrate_uleuse_782!();
+        Depcrate_uleuse_783!();
+        Depcrate_uleUleError!();
+        Depcrate_uleimpl_785!();
+        Depcrate_uleimpl_786!();
+        Depcrate_uleimpl_787!();
+    };
+}

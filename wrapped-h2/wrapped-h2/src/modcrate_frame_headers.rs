@@ -1,0 +1,54 @@
+// Generated module macro for crate::frame::headers
+macro_rules! Modcrate_frame_headers {
+() => {
+        Depcrate_frame_headersuse_628!();
+        Depcrate_frame_headersuse_629!();
+        Depcrate_frame_headersuse_630!();
+        Depcrate_frame_headersuse_631!();
+        Depcrate_frame_headersuse_632!();
+        Depcrate_frame_headersuse_633!();
+        Depcrate_frame_headersuse_634!();
+        Depcrate_frame_headersuse_635!();
+        Depcrate_frame_headersuse_636!();
+        Depcrate_frame_headersEncodeBuf!();
+        Depcrate_frame_headersHeaders!();
+        Depcrate_frame_headersHeadersFlag!();
+        Depcrate_frame_headersPushPromise!();
+        Depcrate_frame_headersPushPromiseFlag!();
+        Depcrate_frame_headersContinuation!();
+        Depcrate_frame_headersPseudo!();
+        Depcrate_frame_headersIter!();
+        Depcrate_frame_headersHeaderBlock!();
+        Depcrate_frame_headersEncodingHeaderBlock!();
+        Depcrate_frame_headersEND_STREAM!();
+        Depcrate_frame_headersEND_HEADERS!();
+        Depcrate_frame_headersPADDED!();
+        Depcrate_frame_headersPRIORITY!();
+        Depcrate_frame_headersALL!();
+        Depcrate_frame_headersimpl_652!();
+        Depcrate_frame_headersimpl_653!();
+        Depcrate_frame_headersimpl_654!();
+        Depcrate_frame_headersParseU64Error!();
+        Depcrate_frame_headersparse_u64!();
+        Depcrate_frame_headersPushPromiseHeaderError!();
+        Depcrate_frame_headersimpl_658!();
+        Depcrate_frame_headersimpl_659!();
+        Depcrate_frame_headersimpl_660!();
+        Depcrate_frame_headersimpl_661!();
+        Depcrate_frame_headersimpl_662!();
+        Depcrate_frame_headersimpl_663!();
+        Depcrate_frame_headersimpl_664!();
+        Depcrate_frame_headersimpl_665!();
+        Depcrate_frame_headersimpl_666!();
+        Depcrate_frame_headersimpl_667!();
+        Depcrate_frame_headersimpl_668!();
+        Depcrate_frame_headersimpl_669!();
+        Depcrate_frame_headersimpl_670!();
+        Depcrate_frame_headersimpl_671!();
+        Depcrate_frame_headersimpl_672!();
+        Depcrate_frame_headersimpl_673!();
+        Depcrate_frame_headerscalculate_headermap_size!();
+        Depcrate_frame_headersdecoded_header_size!();
+        Depcrate_frame_headerstest!();
+    };
+}

@@ -1,0 +1,9 @@
+// Generated macro for WORKER_THREAD_RETURNED_WITH_SYSTEM_PAGE_PRIORITY_ACTIVE (const)
+macro_rules! Depcrate_shared_bugcodesWORKER_THREAD_RETURNED_WITH_SYSTEM_PAGE_PRIORITY_ACTIVE {
+() => {
+// Module: crate::shared::bugcodes
+// Provides: {"WORKER_THREAD_RETURNED_WITH_SYSTEM_PAGE_PRIORITY_ACTIVE"}
+// Dependencies: {}
+pub const WORKER_THREAD_RETURNED_WITH_SYSTEM_PAGE_PRIORITY_ACTIVE : ULONG = 0x0000015B ;
+};
+}

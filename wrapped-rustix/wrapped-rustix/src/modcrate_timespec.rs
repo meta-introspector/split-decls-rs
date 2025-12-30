@@ -1,27 +1,27 @@
 // Generated module macro for crate::timespec
 macro_rules! Modcrate_timespec {
 () => {
-        Depcrate_timespecuse_2467!();
-        Depcrate_timespecuse_2468!();
-        Depcrate_timespecuse_2469!();
-        Depcrate_timespecuse_2470!();
-        Depcrate_timespecuse_2471!();
-        Depcrate_timespecuse_2472!();
+        Depcrate_timespecuse_2113!();
+        Depcrate_timespecuse_2114!();
+        Depcrate_timespecuse_2115!();
+        Depcrate_timespecuse_2116!();
+        Depcrate_timespecuse_2117!();
+        Depcrate_timespecuse_2118!();
         Depcrate_timespecTimespec!();
         Depcrate_timespecSecs!();
         Depcrate_timespecNsecs!();
         Depcrate_timespecNsecs!();
-        Depcrate_timespecimpl_2477!();
-        Depcrate_timespecimpl_2478!();
-        Depcrate_timespecimpl_2479!();
-        Depcrate_timespecimpl_2480!();
-        Depcrate_timespecimpl_2481!();
-        Depcrate_timespecimpl_2482!();
-        Depcrate_timespecimpl_2483!();
-        Depcrate_timespecimpl_2484!();
+        Depcrate_timespecimpl_2123!();
+        Depcrate_timespecimpl_2124!();
+        Depcrate_timespecimpl_2125!();
+        Depcrate_timespecimpl_2126!();
+        Depcrate_timespecimpl_2127!();
+        Depcrate_timespecimpl_2128!();
+        Depcrate_timespecimpl_2129!();
+        Depcrate_timespecimpl_2130!();
         Depcrate_timespecLibcTimespec!();
-        Depcrate_timespecimpl_2486!();
-        Depcrate_timespecimpl_2487!();
+        Depcrate_timespecimpl_2132!();
+        Depcrate_timespecimpl_2133!();
         Depcrate_timespecas_libc_timespec_ptr!();
         Depcrate_timespecas_libc_timespec_mut_ptr!();
         Depcrate_timespecoption_as_libc_timespec_ptr!();

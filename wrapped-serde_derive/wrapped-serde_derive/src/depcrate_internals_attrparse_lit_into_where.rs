@@ -1,0 +1,9 @@
+// Generated macro for parse_lit_into_where (function)
+macro_rules! Depcrate_internals_attrparse_lit_into_where {
+() => {
+// Module: crate::internals::attr
+// Provides: {"parse_lit_into_where"}
+// Dependencies: {}
+fn parse_lit_into_where (cx : & Ctxt , attr_name : Symbol , meta_item_name : Symbol , meta : & ParseNestedMeta ,) -> syn :: Result < Vec < syn :: WherePredicate > > { let Some (string) = get_lit_str2 (cx , attr_name , meta_item_name , meta) ? else { return Ok (Vec :: new ()) ; } ; Ok (match string . parse_with (Punctuated :: < syn :: WherePredicate , Token ! [,] > :: parse_terminated) { Ok (predicates) => Vec :: from_iter (predicates) , Err (err) => { cx . error_spanned_by (string , err) ; Vec :: new () } } ,) }
+};
+}

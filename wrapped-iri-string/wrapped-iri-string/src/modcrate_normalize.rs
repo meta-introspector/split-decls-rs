@@ -1,0 +1,52 @@
+// Generated module macro for crate::normalize
+macro_rules! Modcrate_normalize {
+() => {
+        Depcrate_normalizeerror!();
+        Depcrate_normalizepath!();
+        Depcrate_normalizepct_case!();
+        Depcrate_normalizeuse_144!();
+        Depcrate_normalizeuse_145!();
+        Depcrate_normalizeuse_146!();
+        Depcrate_normalizeuse_147!();
+        Depcrate_normalizeuse_148!();
+        Depcrate_normalizeuse_149!();
+        Depcrate_normalizeuse_150!();
+        Depcrate_normalizeuse_151!();
+        Depcrate_normalizeuse_152!();
+        Depcrate_normalizeuse_153!();
+        Depcrate_normalizeuse_154!();
+        Depcrate_normalizeuse_155!();
+        Depcrate_normalizeuse_156!();
+        Depcrate_normalizeNormalizationMode!();
+        Depcrate_normalizeimpl_158!();
+        Depcrate_normalizeNormalizednessCheckMode!();
+        Depcrate_normalizeNormalizationOp!();
+        Depcrate_normalizeNormalizationInput!();
+        Depcrate_normalizeimpl_162!();
+        Depcrate_normalizeimpl_163!();
+        Depcrate_normalizeimpl_164!();
+        Depcrate_normalizeimpl_165!();
+        Depcrate_normalizeimpl_166!();
+        Depcrate_normalizeimpl_167!();
+        Depcrate_normalizeNormalizedInner!();
+        Depcrate_normalizeimpl_169!();
+        Depcrate_normalizeimpl_170!();
+        Depcrate_normalizeimpl_171!();
+        Depcrate_normalizenormalize_scheme!();
+        Depcrate_normalizenormalize_authority!();
+        Depcrate_normalizenormalize_host_port!();
+        Depcrate_normalizenormalize_query!();
+        Depcrate_normalizenormalize_fragment!();
+        Depcrate_normalizeNormalized!();
+        Depcrate_normalizeimpl_178!();
+        Depcrate_normalizeimpl_179!();
+        Depcrate_normalizeimpl_180!();
+        Depcrate_normalizeimpl_181!();
+        Depcrate_normalizeimpl_182!();
+        Depcrate_normalizeimpl_183!();
+        Depcrate_normalizeimpl_184!();
+        Depcrate_normalizeimpl_185!();
+        Depcrate_normalizeimpl_186!();
+        Depcrate_normalizeimpl_187!();
+    };
+}

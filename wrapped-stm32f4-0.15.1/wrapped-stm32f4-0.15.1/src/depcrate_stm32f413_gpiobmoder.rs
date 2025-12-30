@@ -1,0 +1,9 @@
+// Generated macro for moder (module)
+macro_rules! Depcrate_stm32f413_gpiobmoder {
+() => {
+// Module: crate::stm32f413::gpiob
+// Provides: {"moder"}
+// Dependencies: {}
+# [doc = "GPIO port mode register"] pub mod moder ;
+};
+}

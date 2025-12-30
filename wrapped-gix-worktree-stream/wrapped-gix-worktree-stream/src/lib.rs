@@ -1,0 +1,67 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcrate_from_treefrom_tree.rs");
+include!("depcrate_from_tree_traversedelegate.rs");
+include!("depcrate_from_tree_traverseuse_40.rs");
+include!("depcrateimpl_48.rs");
+include!("depcrate_entryerror.rs");
+include!("depcrate_from_tree_traverseimpl_42.rs");
+include!("depcrate_protocolclear_and_set_len.rs");
+include!("depcrate_protocoluse_20.rs");
+include!("depcrateutils.rs");
+include!("depcrate_protocoluse_18.rs");
+include!("depcrate_entryuse_5.rs");
+include!("depcratestream.rs");
+include!("depcrate_entryimpl_13.rs");
+include!("depcrate_entryimpl_11.rs");
+include!("depcrate_protocolwrite_entry_header_and_path.rs");
+include!("depcrate_protocolwrite_stream.rs");
+include!("depcrateentry.rs");
+include!("depcrateadditionalentry.rs");
+include!("depcrateprotocol.rs");
+include!("depcrate_from_treeuse_31.rs");
+include!("depcrate_entryimpl_9.rs");
+include!("depcrate_entryimpl_14.rs");
+include!("depcrateimpl_49.rs");
+include!("depcrate_protocolread_entry_info.rs");
+include!("depcrate_protocolbyte_to_mode.rs");
+include!("depcratefrom_tree.rs");
+include!("depcrate_from_treerun.rs");
+include!("depcrate_entryuse_7.rs");
+include!("depcrateuse_2.rs");
+include!("depcrate_entrysource.rs");
+include!("depcrate_protocolhash_to_byte.rs");
+include!("depcrate_entryuse_6.rs");
+include!("depcrate_from_treeuse_30.rs");
+include!("depcrate_from_tree_traverseuse_38.rs");
+include!("depcrateimpl_50.rs");
+include!("depcrate_from_treeuse_32.rs");
+include!("depcrate_protocolbyte_to_hash.rs");
+include!("depcratesharederrorslot.rs");
+include!("depcrate_from_treetraverse.rs");
+include!("depcrateuse_44.rs");
+include!("depcrateentry.rs");
+include!("depcrate_entryimpl_12.rs");
+include!("depcrateuse_1.rs");
+include!("depcrate_from_tree_traverseuse_37.rs");
+include!("depcrate_from_tree_traverseuse_36.rs");
+include!("depcrate_from_tree_traverseuse_39.rs");
+include!("depcrate_from_tree_traverseimpl_43.rs");
+include!("depcrate_entryimpl_16.rs");
+include!("depcrate_protocoluse_19.rs");
+include!("depcrate_protocolmode_to_byte.rs");
+include!("depcrate_entryimpl_15.rs");
+include!("modcrate_from_tree_traverse.rs");
+include!("modcrate_entry.rs");
+include!("modcrate_protocol.rs");
+include!("modcrate_from_tree.rs");
+include!("modcrate.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate_from_tree_traverse!();
+    Modcrate_entry!();
+    Modcrate_protocol!();
+    Modcrate_from_tree!();
+    Modcrate!();
+}

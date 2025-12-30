@@ -1,0 +1,9 @@
+// Generated macro for impl_20 (impl)
+macro_rules! Depcrate_colorimpl_20 {
+() => {
+// Module: crate::color
+// Provides: {"impl_20"}
+// Dependencies: {}
+impl ColorSpecs { # [doc = " Create color specifications from a list of user supplied"] # [doc = " specifications."] pub fn new (specs : & [UserColorSpec]) -> ColorSpecs { let mut merged = ColorSpecs :: default () ; for spec in specs { match spec . ty { OutType :: Path => spec . merge_into (& mut merged . path) , OutType :: Line => spec . merge_into (& mut merged . line) , OutType :: Column => spec . merge_into (& mut merged . column) , OutType :: Match => spec . merge_into (& mut merged . matched) , OutType :: Highlight => spec . merge_into (& mut merged . highlight) , } } merged } # [doc = " Create a default set of specifications that have color."] # [doc = ""] # [doc = " This is distinct from `ColorSpecs`'s `Default` implementation in that"] # [doc = " this provides a set of default color choices, where as the `Default`"] # [doc = " implementation provides no color choices."] pub fn default_with_color () -> ColorSpecs { ColorSpecs :: new (& default_color_specs ()) } # [doc = " Return the color specification for coloring file paths."] pub fn path (& self) -> & ColorSpec { & self . path } # [doc = " Return the color specification for coloring line numbers."] pub fn line (& self) -> & ColorSpec { & self . line } # [doc = " Return the color specification for coloring column numbers."] pub fn column (& self) -> & ColorSpec { & self . column } # [doc = " Return the color specification for coloring matched text."] pub fn matched (& self) -> & ColorSpec { & self . matched } # [doc = " Return the color specification for coloring entire line if there is a"] # [doc = " matched text."] pub fn highlight (& self) -> & ColorSpec { & self . highlight } }
+};
+}

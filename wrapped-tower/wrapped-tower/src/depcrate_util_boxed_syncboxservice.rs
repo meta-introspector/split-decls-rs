@@ -1,0 +1,9 @@
+// Generated macro for BoxService (struct)
+macro_rules! Depcrate_util_boxed_syncBoxService {
+() => {
+// Module: crate::util::boxed::sync
+// Provides: {"BoxService"}
+// Dependencies: {}
+# [doc = " A boxed `Service + Send` trait object."] # [doc = ""] # [doc = " [`BoxService`] turns a service into a trait object, allowing the response"] # [doc = " future type to be dynamic. This type requires both the service and the"] # [doc = " response future to be [`Send`]."] # [doc = ""] # [doc = " If you need a boxed [`Service`] that implements [`Clone`] consider using"] # [doc = " [`BoxCloneService`](crate::util::BoxCloneService)."] # [doc = ""] # [doc = " Dynamically dispatched [`Service`] objects allow for erasing the underlying"] # [doc = " [`Service`] type and using the `Service` instances as opaque handles. This can"] # [doc = " be useful when the service instance cannot be explicitly named for whatever"] # [doc = " reason."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " use std::future::ready;"] # [doc = " # use tower_service::Service;"] # [doc = " # use tower::util::{BoxService, service_fn};"] # [doc = " // Respond to requests using a closure, but closures cannot be named..."] # [doc = " # pub fn main() {"] # [doc = " let svc = service_fn(|mut request: String| {"] # [doc = "     request.push_str(\" response\");"] # [doc = "     ready(Ok(request))"] # [doc = " });"] # [doc = ""] # [doc = " let service: BoxService<String, String, ()> = BoxService::new(svc);"] # [doc = " # drop(service);"] # [doc = " }"] # [doc = " ```"] # [doc = ""] # [doc = " [`Service`]: crate::Service"] # [doc = " [`Rc`]: std::rc::Rc"] pub struct BoxService < T , U , E > { inner : SyncWrapper < Box < dyn Service < T , Response = U , Error = E , Future = BoxFuture < U , E > > + Send > > , }
+};
+}

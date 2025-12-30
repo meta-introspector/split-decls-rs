@@ -1,0 +1,9 @@
+// Generated macro for D3D11_COMMONSHADER_TEXEL_OFFSET_MAX_POSITIVE (const)
+macro_rules! Depcrate_um_d3d11D3D11_COMMONSHADER_TEXEL_OFFSET_MAX_POSITIVE {
+() => {
+// Module: crate::um::d3d11
+// Provides: {"D3D11_COMMONSHADER_TEXEL_OFFSET_MAX_POSITIVE"}
+// Dependencies: {}
+pub const D3D11_COMMONSHADER_TEXEL_OFFSET_MAX_POSITIVE : DWORD = 7 ;
+};
+}

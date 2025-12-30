@@ -1,0 +1,42 @@
+// Generated module macro for crate::aggregate
+macro_rules! Modcrate_aggregate {
+() => {
+        Depcrate_aggregatebackwards_iter!();
+        Depcrate_aggregateuse_13!();
+        Depcrate_aggregateuse_14!();
+        Depcrate_aggregateuse_15!();
+        Depcrate_aggregateuse_16!();
+        Depcrate_aggregateuse_17!();
+        Depcrate_aggregateuse_18!();
+        Depcrate_aggregateuse_19!();
+        Depcrate_aggregateEventDescription!();
+        Depcrate_aggregateimpl_21!();
+        Depcrate_aggregateimpl_22!();
+        Depcrate_aggregateWithParent!();
+        Depcrate_aggregateimpl_24!();
+        Depcrate_aggregateSamplePoint!();
+        Depcrate_aggregateimpl_26!();
+        Depcrate_aggregateimpl_27!();
+        Depcrate_aggregateSamplePoints!();
+        Depcrate_aggregateimpl_29!();
+        Depcrate_aggregateimpl_30!();
+        Depcrate_aggregateSampleInterval!();
+        Depcrate_aggregateimpl_32!();
+        Depcrate_aggregateimpl_33!();
+        Depcrate_aggregateSampleIntervals!();
+        Depcrate_aggregateimpl_35!();
+        Depcrate_aggregateimpl_36!();
+        Depcrate_aggregateVariance!();
+        Depcrate_aggregateAggregatedSampleInterval!();
+        Depcrate_aggregateimpl_39!();
+        Depcrate_aggregateAggregatedSampleIntervals!();
+        Depcrate_aggregateimpl_41!();
+        Depcrate_aggregateimpl_42!();
+        Depcrate_aggregateExtrema!();
+        Depcrate_aggregateExtremaSources!();
+        Depcrate_aggregateimpl_45!();
+        Depcrate_aggregateimpl_46!();
+        Depcrate_aggregateimpl_47!();
+        Depcrate_aggregateaggregate_profiles!();
+    };
+}

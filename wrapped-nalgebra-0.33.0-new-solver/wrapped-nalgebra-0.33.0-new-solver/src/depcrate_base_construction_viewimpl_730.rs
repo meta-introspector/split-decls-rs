@@ -1,0 +1,9 @@
+// Generated macro for impl_730 (impl)
+macro_rules! Depcrate_base_construction_viewimpl_730 {
+() => {
+// Module: crate::base::construction_view
+// Provides: {"impl_730"}
+// Dependencies: {}
+# [doc = " # Creating matrix views from `&[T]`"] impl < 'a , T : Scalar , R : Dim , C : Dim , RStride : Dim , CStride : Dim > MatrixView < 'a , T , R , C , RStride , CStride > { # [doc = " Creates, without bounds checking, a matrix view from an array and with dimensions and strides specified by generic types instances."] # [doc = ""] # [doc = " # Safety"] # [doc = " This method is unsafe because the input data array is not checked to contain enough elements."] # [doc = " The generic types `R`, `C`, `RStride`, `CStride` can either be type-level integers or integers wrapped with `Dyn()`."] # [inline] pub unsafe fn from_slice_with_strides_generic_unchecked (data : & 'a [T] , start : usize , nrows : R , ncols : C , rstride : RStride , cstride : CStride ,) -> Self { let data = ViewStorage :: from_raw_parts (data . as_ptr () . add (start) , (nrows , ncols) , (rstride , cstride) ,) ; Self :: from_data (data) } # [doc = " Creates a matrix view from an array and with dimensions and strides specified by generic types instances."] # [doc = ""] # [doc = " Panics if the input data array dose not contain enough elements."] # [doc = " The generic types `R`, `C`, `RStride`, `CStride` can either be type-level integers or integers wrapped with `Dyn()`."] # [inline] pub fn from_slice_with_strides_generic (data : & 'a [T] , nrows : R , ncols : C , rstride : RStride , cstride : CStride ,) -> Self { assert ! (data . len () + cstride . value () + rstride . value () >= ncols . value () * cstride . value () + nrows . value () * rstride . value () + 1 , "Matrix view: input data buffer too small.") ; unsafe { Self :: from_slice_with_strides_generic_unchecked (data , 0 , nrows , ncols , rstride , cstride) } } }
+};
+}

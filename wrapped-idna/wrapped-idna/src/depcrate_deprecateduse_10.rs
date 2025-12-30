@@ -1,0 +1,9 @@
+// Generated macro for use_10 (use)
+macro_rules! Depcrate_deprecateduse_10 {
+() => {
+// Module: crate::deprecated
+// Provides: {"use_10"}
+// Dependencies: {}
+use alloc :: borrow :: Cow ;
+};
+}

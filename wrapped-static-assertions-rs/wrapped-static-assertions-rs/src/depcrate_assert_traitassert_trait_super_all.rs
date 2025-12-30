@@ -1,0 +1,9 @@
+// Generated macro for assert_trait_super_all (macro)
+macro_rules! Depcrate_assert_traitassert_trait_super_all {
+() => {
+// Module: crate::assert_trait
+// Provides: {"assert_trait_super_all"}
+// Dependencies: {}
+# [doc = " Asserts that the trait is a parent of all of the other traits."] # [doc = ""] # [doc = " Related:"] # [doc = " - [`assert_trait_sub_all!`]"] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " With this, traits `A` and `B` can both be tested to require [`Copy`] on a"] # [doc = " single line:"] # [doc = ""] # [doc = " ```"] # [doc = " # use static_assertions::assert_trait_super_all;"] # [doc = " trait A: Copy {}"] # [doc = " trait B: Copy {}"] # [doc = ""] # [doc = " assert_trait_super_all!(Copy: A, B);"] # [doc = " ```"] # [doc = ""] # [doc = " Otherwise, each sub-trait would require its own call to"] # [doc = " [`assert_trait_sub_all!`]:"] # [doc = ""] # [doc = " ```"] # [doc = " # #[macro_use] extern crate static_assertions; fn main() {}"] # [doc = " # trait A: Copy {}"] # [doc = " # trait B: Copy {}"] # [doc = " assert_trait_sub_all!(A: Copy);"] # [doc = " assert_trait_sub_all!(B: Copy);"] # [doc = " ```"] # [doc = ""] # [doc = " The following example fails to compile because trait `C` does not require"] # [doc = " [`Copy`]:"] # [doc = ""] # [doc = " ```compile_fail"] # [doc = " # use static_assertions::assert_trait_super_all;"] # [doc = " # trait A: Copy {}"] # [doc = " # trait B: Copy {}"] # [doc = " trait C {}"] # [doc = ""] # [doc = " assert_trait_super_all!(Copy: A, B, C);"] # [doc = " ```"] # [doc = ""] # [doc = " [`assert_trait_sub_all!`]: macro.assert_trait_sub_all.html"] # [doc = ""] # [doc = " [`Copy`]: https://doc.rust-lang.org/std/marker/trait.Copy.html"] # [macro_export (local_inner_macros)] macro_rules ! assert_trait_super_all { ($ super : path : $ ($ sub : path) ,+ $ (,) ?) => { $ (assert_trait_sub_all ! ($ sub : $ super) ;) + } ; }
+};
+}

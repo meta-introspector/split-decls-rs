@@ -1,0 +1,9 @@
+// Generated macro for ack_frequency_ack_delayed_from_first_of_flight (function)
+macro_rules! Depcrate_testsack_frequency_ack_delayed_from_first_of_flight {
+() => {
+// Module: crate::tests
+// Provides: {"ack_frequency_ack_delayed_from_first_of_flight"}
+// Dependencies: {}
+# [doc = " Verify that max ACK delay is counted from the first ACK-eliciting packet"] # [test] fn ack_frequency_ack_delayed_from_first_of_flight () { let _guard = subscribe () ; let (mut pair , client_ch , server_ch) = setup_ack_frequency_test (Duration :: from_millis (30)) ; pair . client_conn_mut (client_ch) . ping () ; pair . drive_client () ; pair . time += Duration :: from_millis (5) ; for _ in 0 .. 2 { pair . client_conn_mut (client_ch) . ping () ; pair . drive_client () ; } pair . time += Duration :: from_millis (5) ; let server_stats_before = pair . server_conn_mut (server_ch) . stats () ; pair . drive_server () ; let server_stats_after = pair . server_conn_mut (server_ch) . stats () ; assert_eq ! (server_stats_after . frame_rx . ping - server_stats_before . frame_rx . ping , 1) ; assert_eq ! (server_stats_after . frame_tx . acks - server_stats_before . frame_tx . acks , 0) ; pair . time += Duration :: from_millis (10) ; let server_stats_before = pair . server_conn_mut (server_ch) . stats () ; pair . drive_server () ; let server_stats_after = pair . server_conn_mut (server_ch) . stats () ; assert_eq ! (server_stats_after . frame_rx . ping - server_stats_before . frame_rx . ping , 2) ; assert_eq ! (server_stats_after . frame_tx . acks - server_stats_before . frame_tx . acks , 0) ; pair . time += Duration :: from_millis (20) ; let server_stats_before = pair . server_conn_mut (server_ch) . stats () ; pair . drive_server () ; let server_stats_after = pair . server_conn_mut (server_ch) . stats () ; assert_eq ! (server_stats_after . frame_tx . acks - server_stats_before . frame_tx . acks , 1) ; }
+};
+}

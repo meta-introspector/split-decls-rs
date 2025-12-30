@@ -1,0 +1,9 @@
+// Generated macro for impl_49 (impl)
+macro_rules! Depcrateimpl_49 {
+() => {
+// Module: crate
+// Provides: {"impl_49"}
+// Dependencies: {}
+impl SeqInner { # [doc = " Record the call identified by `seq` as fully satisfied."] fn satisfy (& self , seq : usize) { let old_sl = self . satisfaction_level . fetch_add (1 , Ordering :: Relaxed) ; assert_eq ! (old_sl , seq , "Method sequence violation.  Was an already-satisfied method called another time?") ; } # [doc = " Verify that the call identified by `seq` was called in the correct order"] fn verify < F : Fn () -> String > (& self , seq : usize , desc : F) { assert_eq ! (seq , self . satisfaction_level . load (Ordering :: Relaxed) , "{}: Method sequence violation" , & desc ()) } }
+};
+}

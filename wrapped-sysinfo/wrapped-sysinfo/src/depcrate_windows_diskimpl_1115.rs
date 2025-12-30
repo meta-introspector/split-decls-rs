@@ -1,0 +1,9 @@
+// Generated macro for impl_1115 (impl)
+macro_rules! Depcrate_windows_diskimpl_1115 {
+() => {
+// Module: crate::windows::disk
+// Provides: {"impl_1115"}
+// Dependencies: {}
+impl DiskInner { pub (crate) fn kind (& self) -> DiskKind { self . type_ } pub (crate) fn name (& self) -> & OsStr { & self . name } pub (crate) fn file_system (& self) -> & OsStr { & self . file_system } pub (crate) fn mount_point (& self) -> & Path { self . s_mount_point . as_ref () } pub (crate) fn total_space (& self) -> u64 { self . total_space } pub (crate) fn available_space (& self) -> u64 { self . available_space } pub (crate) fn is_removable (& self) -> bool { self . is_removable } pub (crate) fn is_read_only (& self) -> bool { self . is_read_only } pub (crate) fn refresh_specifics (& mut self , refreshes : DiskRefreshKind) -> bool { if refreshes . kind () || refreshes . io_usage () { unsafe { if let Some (handle) = HandleWrapper :: new_from_file (& self . device_path , Default :: default ()) { if refreshes . kind () && self . type_ == DiskKind :: Unknown (- 1) { self . type_ = get_disk_kind (& handle) ; } if refreshes . io_usage () { if let Some ((read_bytes , written_bytes)) = get_disk_io (handle) { self . old_read_bytes = self . read_bytes ; self . old_written_bytes = self . written_bytes ; self . read_bytes = read_bytes ; self . written_bytes = written_bytes ; } else { sysinfo_debug ! ("Failed to update disk i/o stats") ; } } } } } if refreshes . storage () && let Some ((total_space , available_space)) = unsafe { get_drive_size (& self . mount_point) } { self . total_space = total_space ; self . available_space = available_space ; } true } pub (crate) fn usage (& self) -> DiskUsage { DiskUsage { read_bytes : self . read_bytes . saturating_sub (self . old_read_bytes) , total_read_bytes : self . read_bytes , written_bytes : self . written_bytes . saturating_sub (self . old_written_bytes) , total_written_bytes : self . written_bytes , } } }
+};
+}

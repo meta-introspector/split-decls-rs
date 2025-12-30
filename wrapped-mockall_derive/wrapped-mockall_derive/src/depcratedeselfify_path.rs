@@ -1,0 +1,9 @@
+// Generated macro for deselfify_path (function)
+macro_rules! Depcratedeselfify_path {
+() => {
+// Module: crate
+// Provides: {"deselfify_path"}
+// Dependencies: {}
+fn deselfify_path (path : & mut Path , actual : & Ident , generics : & Generics) { for seg in path . segments . iter_mut () { if seg . ident == "Self" { seg . ident = actual . clone () ; if let PathArguments :: None = seg . arguments { if ! generics . params . is_empty () { let args = generics . params . iter () . map (| gp | { match gp { GenericParam :: Type (tp) => { let ident = tp . ident . clone () ; GenericArgument :: Type (Type :: Path (TypePath { qself : None , path : Path :: from (ident) })) } , GenericParam :: Lifetime (ld) => { GenericArgument :: Lifetime (ld . lifetime . clone ()) } _ => unimplemented ! () , } }) . collect :: < Punctuated < _ , _ > > () ; seg . arguments = PathArguments :: AngleBracketed (AngleBracketedGenericArguments { colon2_token : None , lt_token : generics . lt_token . unwrap () , args , gt_token : generics . gt_token . unwrap () , }) ; } } else { compile_error (seg . arguments . span () , "Type arguments after Self are unexpected") ; } } if let PathArguments :: AngleBracketed (abga) = & mut seg . arguments { for arg in abga . args . iter_mut () { match arg { GenericArgument :: Type (ty) => deselfify (ty , actual , generics) , GenericArgument :: AssocType (at) => deselfify (& mut at . ty , actual , generics) , _ => () , } } } } }
+};
+}

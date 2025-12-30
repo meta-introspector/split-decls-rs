@@ -1,0 +1,9 @@
+// Generated macro for ERROR_SXS_MANIFEST_MISSING_REQUIRED_DEFAULT_NAMESPACE (const)
+macro_rules! Depcrate_shared_winerrorERROR_SXS_MANIFEST_MISSING_REQUIRED_DEFAULT_NAMESPACE {
+() => {
+// Module: crate::shared::winerror
+// Provides: {"ERROR_SXS_MANIFEST_MISSING_REQUIRED_DEFAULT_NAMESPACE"}
+// Dependencies: {}
+pub const ERROR_SXS_MANIFEST_MISSING_REQUIRED_DEFAULT_NAMESPACE : DWORD = 14018 ;
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for PSYSTEM_PROCESS_INFORMATION_EXTENSION (type)
+macro_rules! Depcrate_ntexapiPSYSTEM_PROCESS_INFORMATION_EXTENSION {
+() => {
+// Module: crate::ntexapi
+// Provides: {"PSYSTEM_PROCESS_INFORMATION_EXTENSION"}
+// Dependencies: {}
+pub type PSYSTEM_PROCESS_INFORMATION_EXTENSION = * mut SYSTEM_PROCESS_INFORMATION_EXTENSION ;
+};
+}

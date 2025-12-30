@@ -1,0 +1,9 @@
+// Generated macro for impl_8132 (impl)
+macro_rules! Depcrate_non_canonical_implsimpl_8132 {
+() => {
+// Module: crate::non_canonical_impls
+// Provides: {"impl_8132"}
+// Dependencies: {}
+impl LateLintPass < '_ > for NonCanonicalImpls { fn check_item (& mut self , cx : & LateContext < '_ > , item : & Item < '_ >) { if let ItemKind :: Impl (impl_) = item . kind && (1 ..= 5) . contains (& impl_ . items . len ()) && let Some (of_trait) = impl_ . of_trait && let Some (trait_did) = of_trait . trait_ref . trait_def_id () && let trait_ = if Some (trait_did) == self . clone_trait { Trait :: Clone } else if Some (trait_did) == self . partial_ord_trait { Trait :: PartialOrd } else { return ; } && ! cx . tcx . is_automatically_derived (item . owner_id . to_def_id ()) { let mut assoc_fns = impl_ . items . iter () . map (| id | cx . tcx . hir_impl_item (* id)) . filter_map (| assoc | { if let ImplItemKind :: Fn (_ , body_id) = assoc . kind && let body = cx . tcx . hir_body (body_id) && let ExprKind :: Block (block , ..) = body . value . kind && ! block . span . in_external_macro (cx . sess () . source_map ()) { Some ((assoc , body , block)) } else { None } }) ; let trait_impl = cx . tcx . impl_trait_ref (item . owner_id) . skip_binder () ; match trait_ { Trait :: Clone => { if let Some (copy_trait) = self . copy_trait && implements_trait (cx , trait_impl . self_ty () , copy_trait , & []) { for (assoc , _ , block) in assoc_fns { check_clone_on_copy (cx , assoc , block) ; } } } , Trait :: PartialOrd => { if let [lhs , rhs] = trait_impl . args . as_slice () && lhs == rhs && let Some (ord_trait) = self . ord_trait && implements_trait (cx , trait_impl . self_ty () , ord_trait , & []) && let Some ((assoc , body , block)) = assoc_fns . find (| (assoc , _ , _) | assoc . ident . name == sym :: partial_cmp) { check_partial_ord_on_ord (cx , assoc , item , body , block) ; } } , } } } }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for impl_111 (impl)
+macro_rules! Depcrate_secret_keyimpl_111 {
+() => {
+// Module: crate::secret_key
+// Provides: {"impl_111"}
+// Dependencies: {}
+impl SecretKey { # [doc = " Constructs a new, random `BlsSecretKey` using `OsRng`"] # [allow (clippy :: new_without_default)] pub fn new () -> Self { let mut rng = OsRng ; Self (Scalar :: random (& mut rng)) } # [doc = " Derive a `BlsSecretKey` from a seed (input key material)"] pub fn derive (ikm : & [u8]) -> Result < Self , BlsError > { let mut scalar = blst_scalar :: default () ; unsafe { blst_keygen (& mut scalar as * mut blst_scalar , ikm . as_ptr () , ikm . len () , ptr :: null () , 0 ,) ; } scalar . try_into () . map (Self) . map_err (| _ | BlsError :: FieldDecode) } # [doc = " Derive a `BlsSecretKey` from a Solana signer"] # [cfg (feature = "solana-signer-derive")] pub fn derive_from_signer (signer : & dyn Signer , public_seed : & [u8]) -> Result < Self , BlsError > { let message = [b"bls-key-derive-" , public_seed] . concat () ; let signature = signer . try_sign_message (& message) . map_err (| _ | BlsError :: KeyDerivation) ? ; if bool :: from (signature . as_ref () . ct_eq (Signature :: default () . as_ref ())) { return Err (BlsError :: KeyDerivation) ; } Self :: derive (signature . as_ref ()) } # [doc = " Generate a proof of possession for the corresponding pubkey"] # [allow (clippy :: arithmetic_side_effects)] pub fn proof_of_possession (& self , payload : Option < & [u8] >) -> ProofOfPossessionProjective { let pubkey = PubkeyProjective :: from_secret (self) ; let hashed_point = hash_pubkey_to_g2 (& pubkey , payload) ; ProofOfPossessionProjective (hashed_point * self . 0) } # [doc = " Sign a message using the provided secret key"] # [allow (clippy :: arithmetic_side_effects)] pub fn sign (& self , message : & [u8]) -> SignatureProjective { let hashed_message = hash_message_to_point (message) ; SignatureProjective (hashed_message * self . 0) } }
+};
+}

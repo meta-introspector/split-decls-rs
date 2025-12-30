@@ -1,0 +1,9 @@
+// Generated macro for TreeBuilder (struct)
+macro_rules! Depcrate_tree_builderTreeBuilder {
+() => {
+// Module: crate::tree_builder
+// Provides: {"TreeBuilder"}
+// Dependencies: {}
+# [doc = " The HTML tree builder."] pub struct TreeBuilder < Handle , Sink > { # [doc = " Options controlling the behavior of the tree builder."] opts : TreeBuilderOpts , # [doc = " Consumer of tree modifications."] pub sink : Sink , # [doc = " Insertion mode."] mode : Cell < InsertionMode > , # [doc = " Original insertion mode, used by Text and InTableText modes."] orig_mode : Cell < Option < InsertionMode > > , # [doc = " Stack of template insertion modes."] template_modes : RefCell < Vec < InsertionMode > > , # [doc = " Pending table character tokens."] pending_table_text : RefCell < Vec < (SplitStatus , StrTendril) > > , # [doc = " Quirks mode as set by the parser."] # [doc = " FIXME: can scripts etc. change this?"] quirks_mode : Cell < QuirksMode > , # [doc = " The document node, which is created by the sink."] doc_handle : Handle , # [doc = " Stack of open elements, most recently added at end."] open_elems : RefCell < Vec < Handle > > , # [doc = " List of active formatting elements."] active_formatting : RefCell < Vec < FormatEntry < Handle > > > , # [doc = " Head element pointer."] head_elem : RefCell < Option < Handle > > , # [doc = " Form element pointer."] form_elem : RefCell < Option < Handle > > , # [doc = " Frameset-ok flag."] frameset_ok : Cell < bool > , # [doc = " Ignore a following U+000A LINE FEED?"] ignore_lf : Cell < bool > , # [doc = " Is foster parenting enabled?"] foster_parenting : Cell < bool > , # [doc = " The context element for the fragment parsing algorithm."] context_elem : RefCell < Option < Handle > > , # [doc = " Track current line"] current_line : Cell < u64 > , }
+};
+}

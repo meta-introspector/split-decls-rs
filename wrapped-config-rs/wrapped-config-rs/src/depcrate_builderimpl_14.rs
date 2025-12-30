@@ -1,0 +1,9 @@
+// Generated macro for impl_14 (impl)
+macro_rules! Depcrate_builderimpl_14 {
+() => {
+// Module: crate::builder
+// Provides: {"impl_14"}
+// Dependencies: {}
+# [doc = " Operations allowed in any state"] impl < St : BuilderState > ConfigBuilder < St > { # [doc = " Set a default `value` at `key`"] # [doc = ""] # [doc = " This value can be overwritten by any [`Source`], [`AsyncSource`] or override."] # [doc = ""] # [doc = " # Errors"] # [doc = ""] # [doc = " Fails if `Expression::from_str(key)` fails."] pub fn set_default < S , T > (mut self , key : S , value : T) -> Result < Self > where S : AsRef < str > , T : Into < Value > , { self . defaults . insert (Expression :: from_str (key . as_ref ()) ? , value . into ()) ; Ok (self) } # [doc = " Set an override"] # [doc = ""] # [doc = " This function sets an overwrite value. It will not be altered by any default, [`Source`] nor [`AsyncSource`]"] # [doc = ""] # [doc = " # Errors"] # [doc = ""] # [doc = " Fails if `Expression::from_str(key)` fails."] pub fn set_override < S , T > (mut self , key : S , value : T) -> Result < Self > where S : AsRef < str > , T : Into < Value > , { self . overrides . insert (Expression :: from_str (key . as_ref ()) ? , value . into ()) ; Ok (self) } # [doc = " Sets an override if value is Some(_)"] # [doc = ""] # [doc = " This function sets an overwrite value if Some(_) is passed. If None is passed, this function does nothing."] # [doc = " It will not be altered by any default, [`Source`] nor [`AsyncSource`]"] # [doc = ""] # [doc = " # Errors"] # [doc = ""] # [doc = " Fails if `Expression::from_str(key)` fails."] pub fn set_override_option < S , T > (mut self , key : S , value : Option < T >) -> Result < Self > where S : AsRef < str > , T : Into < Value > , { if let Some (value) = value { self . overrides . insert (Expression :: from_str (key . as_ref ()) ? , value . into ()) ; } Ok (self) } }
+};
+}

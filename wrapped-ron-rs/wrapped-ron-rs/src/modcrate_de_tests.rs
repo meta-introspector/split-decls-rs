@@ -1,0 +1,56 @@
+// Generated module macro for crate::de::tests
+macro_rules! Modcrate_de_tests {
+() => {
+        Depcrate_de_testsuse_23!();
+        Depcrate_de_testsuse_24!();
+        Depcrate_de_testsuse_25!();
+        Depcrate_de_testsuse_26!();
+        Depcrate_de_testsuse_27!();
+        Depcrate_de_testsuse_28!();
+        Depcrate_de_testsEmptyStruct1!();
+        Depcrate_de_testsEmptyStruct2!();
+        Depcrate_de_testsNewType!();
+        Depcrate_de_testsUnnamedNewType!();
+        Depcrate_de_testsTupleStruct!();
+        Depcrate_de_testsUnnamedTupleStruct!();
+        Depcrate_de_testsMyStruct!();
+        Depcrate_de_testsMyEnum!();
+        Depcrate_de_testsBytesStruct!();
+        Depcrate_de_teststest_empty_struct!();
+        Depcrate_de_teststest_struct!();
+        Depcrate_de_teststest_unclosed_limited_seq_struct!();
+        Depcrate_de_teststest_unclosed_limited_seq!();
+        Depcrate_de_teststest_unclosed_limited_map!();
+        Depcrate_de_teststest_option!();
+        Depcrate_de_teststest_enum!();
+        Depcrate_de_teststest_array!();
+        Depcrate_de_teststest_map!();
+        Depcrate_de_teststest_string!();
+        Depcrate_de_teststest_char!();
+        Depcrate_de_teststest_escape_char!();
+        Depcrate_de_teststest_escape!();
+        Depcrate_de_teststest_comment!();
+        Depcrate_de_testserr!();
+        Depcrate_de_teststest_err_wrong_value!();
+        Depcrate_de_teststest_perm_ws!();
+        Depcrate_de_testsuntagged!();
+        Depcrate_de_testsrename!();
+        Depcrate_de_testsforgot_apostrophes!();
+        Depcrate_de_testsexpected_attribute!();
+        Depcrate_de_testsexpected_attribute_end!();
+        Depcrate_de_testsinvalid_attribute!();
+        Depcrate_de_testsmultiple_attributes!();
+        Depcrate_de_testsuglified_attribute!();
+        Depcrate_de_testsimplicit_some!();
+        Depcrate_de_testsws_tuple_newtype_variant!();
+        Depcrate_de_teststest_byte_stream!();
+        Depcrate_de_teststest_numbers!();
+        Depcrate_de_testscheck_de_any_number!();
+        Depcrate_de_teststest_any_number_precision!();
+        Depcrate_de_teststest_value_special_floats!();
+        Depcrate_de_teststest_leading_whitespace!();
+        Depcrate_de_testscheck_from_str_bytes_reader!();
+        Depcrate_de_teststest_remainder!();
+        Depcrate_de_testsboolean_struct_name!();
+    };
+}

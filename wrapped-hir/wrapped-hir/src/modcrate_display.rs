@@ -1,0 +1,44 @@
+// Generated module macro for crate::display
+macro_rules! Modcrate_display {
+() => {
+        Depcrate_displayuse_262!();
+        Depcrate_displayuse_263!();
+        Depcrate_displayuse_264!();
+        Depcrate_displayuse_265!();
+        Depcrate_displayuse_266!();
+        Depcrate_displayuse_267!();
+        Depcrate_displayimpl_268!();
+        Depcrate_displaywrite_impl_header!();
+        Depcrate_displayimpl_270!();
+        Depcrate_displayimpl_271!();
+        Depcrate_displayimpl_272!();
+        Depcrate_displayimpl_273!();
+        Depcrate_displayimpl_274!();
+        Depcrate_displaywrite_fields!();
+        Depcrate_displaywrite_variants!();
+        Depcrate_displayimpl_277!();
+        Depcrate_displayimpl_278!();
+        Depcrate_displayimpl_279!();
+        Depcrate_displayimpl_280!();
+        Depcrate_displayimpl_281!();
+        Depcrate_displayimpl_282!();
+        Depcrate_displayimpl_283!();
+        Depcrate_displayimpl_284!();
+        Depcrate_displayimpl_285!();
+        Depcrate_displayimpl_286!();
+        Depcrate_displayimpl_287!();
+        Depcrate_displaywrite_generic_params!();
+        Depcrate_displaywrite_where_clause!();
+        Depcrate_displayhas_disaplayable_predicates!();
+        Depcrate_displaywrite_where_predicates!();
+        Depcrate_displayimpl_292!();
+        Depcrate_displayimpl_293!();
+        Depcrate_displayimpl_294!();
+        Depcrate_displayimpl_295!();
+        Depcrate_displaywrite_trait_header!();
+        Depcrate_displayimpl_297!();
+        Depcrate_displayimpl_298!();
+        Depcrate_displayimpl_299!();
+        Depcrate_displayimpl_300!();
+    };
+}

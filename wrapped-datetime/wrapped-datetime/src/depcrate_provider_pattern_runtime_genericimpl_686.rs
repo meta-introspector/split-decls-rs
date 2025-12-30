@@ -1,0 +1,9 @@
+// Generated macro for impl_686 (impl)
+macro_rules! Depcrate_provider_pattern_runtime_genericimpl_686 {
+() => {
+// Module: crate::provider::pattern::runtime::generic
+// Provides: {"impl_686"}
+// Dependencies: {}
+impl < 'data > GenericPattern < 'data > { # [doc = " The function allows for creation of new DTF pattern from a generic pattern"] # [doc = " and replacement patterns."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " use icu::datetime::provider::pattern::runtime::{GenericPattern, Pattern};"] # [doc = ""] # [doc = " let date: Pattern = \"y-M-d\".parse().expect(\"Failed to parse pattern\");"] # [doc = " let time: Pattern = \"HH:mm\".parse().expect(\"Failed to parse pattern\");"] # [doc = ""] # [doc = " let glue: GenericPattern = \"{1} 'at' {0}\""] # [doc = "     .parse()"] # [doc = "     .expect(\"Failed to parse generic pattern\");"] # [doc = " assert_eq!("] # [doc = "     glue.combined(date, time)"] # [doc = "         .expect(\"Failed to combine patterns\")"] # [doc = "         .to_string(),"] # [doc = "     \"y-M-d 'at' HH:mm\""] # [doc = " );"] # [doc = " ```"] pub fn combined (self , date : Pattern < 'data > , time : Pattern < 'data > ,) -> Result < Pattern < 'static > , PatternError > { let size = date . items . len () + time . items . len () ; let mut result = Vec :: with_capacity (self . items . len () + size) ; for item in self . items . iter () { match item { GenericPatternItem :: Placeholder (0) => { result . extend (time . items . iter ()) ; } GenericPatternItem :: Placeholder (1) => { result . extend (date . items . iter ()) ; } GenericPatternItem :: Placeholder (idx) => { # [expect (clippy :: unwrap_used)] return Err (PatternError :: UnknownSubstitution (char :: from_digit (idx as u32 , 10) . unwrap () ,)) ; } GenericPatternItem :: Literal (ch) => result . push (PatternItem :: Literal (ch)) , } } Ok (Pattern :: from (result)) } }
+};
+}

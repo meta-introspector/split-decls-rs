@@ -1,0 +1,52 @@
+// Generated module macro for crate::export
+macro_rules! Modcrate_export {
+() => {
+        Depcrate_exportintegers!();
+        Depcrate_exporttraits!();
+        Depcrate_exportuse_27!();
+        Depcrate_exportuse_28!();
+        Depcrate_exportuse_29!();
+        Depcrate_exportuse_30!();
+        Depcrate_exportUnsignedInt!();
+        Depcrate_exportimpl_32!();
+        Depcrate_exportimpl_33!();
+        Depcrate_exportimpl_34!();
+        Depcrate_exportimpl_35!();
+        Depcrate_exportimpl_36!();
+        Depcrate_exportmacro_37!();
+        Depcrate_exportfetch_string_index!();
+        Depcrate_exportfetch_add_string_index!();
+        Depcrate_exportfetch_bytes!();
+        Depcrate_exportacquire!();
+        Depcrate_exportacquire!();
+        Depcrate_exportrelease!();
+        Depcrate_exportrelease!();
+        Depcrate_exportwrite!();
+        Depcrate_exportwrite!();
+        Depcrate_exporttimestamp!();
+        Depcrate_exporttimestamp!();
+        Depcrate_exportmake_istr!();
+        Depcrate_exportmake_formatter!();
+        Depcrate_exporttruncate!();
+        Depcrate_exportinto_result!();
+        Depcrate_exportpanic!();
+        Depcrate_exportpanic!();
+        Depcrate_exportfmt!();
+        Depcrate_exportfmt_slice!();
+        Depcrate_exportf32!();
+        Depcrate_exportf64!();
+        Depcrate_exportchar!();
+        Depcrate_exportstr!();
+        Depcrate_exportslice!();
+        Depcrate_exportu8_array!();
+        Depcrate_exportfmt_array!();
+        Depcrate_exportistr!();
+        Depcrate_exportbool!();
+        Depcrate_exportdebug!();
+        Depcrate_exportdisplay!();
+        Depcrate_exportacquire_and_header!();
+        Depcrate_exportacquire_header_and_release!();
+        Depcrate_exportFmtWrite!();
+        Depcrate_exportimpl_71!();
+    };
+}

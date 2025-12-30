@@ -1,0 +1,9 @@
+// Generated macro for macro_27219 (macro)
+macro_rules! Depcrate_um_dcompmacro_27219 {
+() => {
+// Module: crate::um::dcomp
+// Provides: {"macro_27219"}
+// Dependencies: {}
+RIDL ! { # [uuid (0x4305ee5b , 0xc4a0 , 0x4c88 , 0x93 , 0x85 , 0x67 , 0x12 , 0x4e , 0x01 , 0x76 , 0x83)] interface IDCompositionLinearTransferEffect (IDCompositionLinearTransferEffectVtbl) : IDCompositionFilterEffect (IDCompositionFilterEffectVtbl) { fn SetRedYIntercept_2 (animation : * const IDCompositionAnimation ,) -> HRESULT , fn SetRedYIntercept_1 (redYIntercept : c_float ,) -> HRESULT , fn SetRedSlope_2 (animation : * const IDCompositionAnimation ,) -> HRESULT , fn SetRedSlope_1 (redSlope : c_float ,) -> HRESULT , fn SetRedDisable (redDisable : BOOL ,) -> HRESULT , fn SetGreenYIntercept_2 (animation : * const IDCompositionAnimation ,) -> HRESULT , fn SetGreenYIntercept_1 (greenYIntercept : c_float ,) -> HRESULT , fn SetGreenSlope_2 (animation : * const IDCompositionAnimation ,) -> HRESULT , fn SetGreenSlope_1 (greenSlope : c_float ,) -> HRESULT , fn SetGreenDisable (greenDisable : BOOL ,) -> HRESULT , fn SetBlueYIntercept_2 (animation : * const IDCompositionAnimation ,) -> HRESULT , fn SetBlueYIntercept_1 (blueYIntercept : c_float ,) -> HRESULT , fn SetBlueSlope_2 (animation : * const IDCompositionAnimation ,) -> HRESULT , fn SetBlueSlope_1 (blueSlope : c_float ,) -> HRESULT , fn SetBlueDisable (blueDisable : BOOL ,) -> HRESULT , fn SetAlphaYIntercept_2 (animation : * const IDCompositionAnimation ,) -> HRESULT , fn SetAlphaYIntercept_1 (alphaYIntercept : c_float ,) -> HRESULT , fn SetAlphaSlope_2 (animation : * const IDCompositionAnimation ,) -> HRESULT , fn SetAlphaSlope_1 (alphaSlope : c_float ,) -> HRESULT , fn SetAlphaDisable (alphaDisable : BOOL ,) -> HRESULT , fn SetClampOutput (clampOutput : BOOL ,) -> HRESULT , } }
+};
+}

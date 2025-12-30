@@ -1,0 +1,9 @@
+// Generated macro for impl_88 (impl)
+macro_rules! Depcrate_parseimpl_88 {
+() => {
+// Module: crate::parse
+// Provides: {"impl_88"}
+// Dependencies: {}
+impl < 'input , F : BrokenLinkCallback < 'input > > Parser < 'input , F > { # [doc = " In case the parser encounters any potential links that have a broken"] # [doc = " reference (e.g `[foo]` when there is no `[foo]: ` entry at the bottom)"] # [doc = " the provided callback will be called with the reference name,"] # [doc = " and the returned pair will be used as the link URL and title if it is not"] # [doc = " `None`."] pub fn new_with_broken_link_callback (text : & 'input str , options : Options , broken_link_callback : Option < F > ,) -> Self { let (mut tree , allocs) = run_first_pass (text , options) ; tree . reset () ; let inline_stack = Default :: default () ; let link_stack = Default :: default () ; let wikilink_stack = Default :: default () ; let html_scan_guard = Default :: default () ; Parser { broken_link_callback , inner : ParserInner { text , options , tree , allocs , inline_stack , link_stack , wikilink_stack , html_scan_guard , link_ref_expansion_limit : text . len () . max (100_000) , code_delims : CodeDelims :: new () , math_delims : MathDelims :: new () , } , } } # [doc = " Returns a reference to the internal `RefDefs` object, which provides access"] # [doc = " to the internal map of reference definitions."] pub fn reference_definitions (& self) -> & RefDefs < '_ > { & self . inner . allocs . refdefs } # [doc = " Consumes the event iterator and produces an iterator that produces"] # [doc = " `(Event, Range)` pairs, where the `Range` value maps to the corresponding"] # [doc = " range in the markdown source."] pub fn into_offset_iter (self) -> OffsetIter < 'input , F > { OffsetIter { parser : self } } }
+};
+}

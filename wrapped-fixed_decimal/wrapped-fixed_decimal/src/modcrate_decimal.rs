@@ -1,0 +1,47 @@
+// Generated module macro for crate::decimal
+macro_rules! Modcrate_decimal {
+() => {
+        Depcrate_decimaluse_14!();
+        Depcrate_decimaluse_15!();
+        Depcrate_decimaluse_16!();
+        Depcrate_decimaluse_17!();
+        Depcrate_decimaluse_18!();
+        Depcrate_decimaluse_19!();
+        Depcrate_decimaluse_20!();
+        Depcrate_decimaluse_21!();
+        Depcrate_decimaluse_22!();
+        Depcrate_decimalmacro_23!();
+        Depcrate_decimalUnsignedDecimal!();
+        Depcrate_decimalimpl_25!();
+        Depcrate_decimalimpl_from_unsigned_integer_type!();
+        Depcrate_decimalmacro_27!();
+        Depcrate_decimalmacro_28!();
+        Depcrate_decimalmacro_29!();
+        Depcrate_decimalmacro_30!();
+        Depcrate_decimalmacro_31!();
+        Depcrate_decimalmacro_32!();
+        Depcrate_decimalimpl_33!();
+        Depcrate_decimalimpl_34!();
+        Depcrate_decimalmacro_35!();
+        Depcrate_decimalimpl_36!();
+        Depcrate_decimalimpl_37!();
+        Depcrate_decimalimpl_38!();
+        Depcrate_decimaltest_float!();
+        Depcrate_decimaltest_basic!();
+        Depcrate_decimaltest_from_str!();
+        Depcrate_decimaltest_from_str_scientific!();
+        Depcrate_decimaltest_usize_limits!();
+        Depcrate_decimaltest_u128_limits!();
+        Depcrate_decimaltest_upper_magnitude_bounds!();
+        Depcrate_decimaltest_lower_magnitude_bounds!();
+        Depcrate_decimaltest_zero_str_bounds!();
+        Depcrate_decimaltest_syntax_error!();
+        Depcrate_decimaltest_pad!();
+        Depcrate_decimaltest_set_max_position!();
+        Depcrate_decimaltest_pad_start_bounds!();
+        Depcrate_decimaltest_pad_end_bounds!();
+        Depcrate_decimaltest_rounding!();
+        Depcrate_decimaltest_concatenate!();
+        Depcrate_decimaltest_rounding_increment!();
+    };
+}

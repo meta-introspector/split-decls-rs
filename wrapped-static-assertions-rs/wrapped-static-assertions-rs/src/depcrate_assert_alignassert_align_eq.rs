@@ -1,0 +1,9 @@
+// Generated macro for assert_align_eq (macro)
+macro_rules! Depcrate_assert_alignassert_align_eq {
+() => {
+// Module: crate::assert_align
+// Provides: {"assert_align_eq"}
+// Dependencies: {}
+# [doc = " Asserts that the types' alignments are equal."] # [doc = ""] # [doc = " This is useful when ensuring that pointer arithmetic is done correctly, or"] # [doc = " when [FFI] requires a type to have the same alignment as some foreign type."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " A `usize` has the same alignment as any pointer type:"] # [doc = ""] # [doc = " ```"] # [doc = " # #[macro_use] extern crate static_assertions; fn main() {}"] # [doc = " assert_align_eq!(usize, *const u8, *mut u8);"] # [doc = " ```"] # [doc = ""] # [doc = " The following passes because `[i32; 4]` has the same alignment as `i32`:"] # [doc = ""] # [doc = " ```"] # [doc = " # #[macro_use] extern crate static_assertions; fn main() {}"] # [doc = " assert_align_eq!([i32; 4], i32);"] # [doc = " ```"] # [doc = ""] # [doc = " The following example fails to compile because `i32x4` explicitly has 4"] # [doc = " times the alignment as `[i32; 4]`:"] # [doc = ""] # [doc = " ```compile_fail"] # [doc = " # #[macro_use] extern crate static_assertions; fn main() {}"] # [doc = " # #[allow(non_camel_case_types)]"] # [doc = " #[repr(align(16))]"] # [doc = " struct i32x4([i32; 4]);"] # [doc = ""] # [doc = " assert_align_eq!(i32x4, [i32; 4]);"] # [doc = " ```"] # [doc = ""] # [doc = " [FFI]: https://en.wikipedia.org/wiki/Foreign_function_interface"] # [macro_export (local_inner_macros)] macro_rules ! assert_align_eq { ($ x : ty , $ ($ y : ty) ,+ $ (,) ?) => { const _ : fn () = || { use $ crate :: _core :: mem :: align_of ; const_assert_eq_usize ! (align_of ::<$ x > () $ (, align_of ::<$ y > ()) +) ; } ; } ; }
+};
+}

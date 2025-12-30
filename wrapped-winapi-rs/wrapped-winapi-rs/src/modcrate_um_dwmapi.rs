@@ -1,0 +1,47 @@
+// Generated module macro for crate::um::dwmapi
+macro_rules! Modcrate_um_dwmapi {
+() => {
+        Depcrate_um_dwmapiuse_27832!();
+        Depcrate_um_dwmapiuse_27833!();
+        Depcrate_um_dwmapiuse_27834!();
+        Depcrate_um_dwmapiuse_27835!();
+        Depcrate_um_dwmapiuse_27836!();
+        Depcrate_um_dwmapiDWM_BB_ENABLE!();
+        Depcrate_um_dwmapiDWM_BB_BLURREGION!();
+        Depcrate_um_dwmapiDWM_BB_TRANSITIONONMAXIMIZED!();
+        Depcrate_um_dwmapimacro_27840!();
+        Depcrate_um_dwmapimacro_27841!();
+        Depcrate_um_dwmapimacro_27842!();
+        Depcrate_um_dwmapimacro_27843!();
+        Depcrate_um_dwmapiDWM_CLOAKED_APP!();
+        Depcrate_um_dwmapiDWM_CLOAKED_SHELL!();
+        Depcrate_um_dwmapiDWM_CLOAKED_INHERITED!();
+        Depcrate_um_dwmapiHTHUMBNAIL!();
+        Depcrate_um_dwmapiPHTHUMBNAIL!();
+        Depcrate_um_dwmapiDWM_TNP_RECTDESTINATION!();
+        Depcrate_um_dwmapiDWM_TNP_RECTSOURCE!();
+        Depcrate_um_dwmapiDWM_TNP_OPACITY!();
+        Depcrate_um_dwmapiDWM_TNP_VISIBLE!();
+        Depcrate_um_dwmapiDWM_TNP_SOURCECLIENTAREAONLY!();
+        Depcrate_um_dwmapimacro_27854!();
+        Depcrate_um_dwmapiPDWM_THUMBNAIL_PROPERTIES!();
+        Depcrate_um_dwmapiDWM_FRAME_COUNT!();
+        Depcrate_um_dwmapiQPC_TIME!();
+        Depcrate_um_dwmapimacro_27858!();
+        Depcrate_um_dwmapimacro_27859!();
+        Depcrate_um_dwmapimacro_27860!();
+        Depcrate_um_dwmapimacro_27861!();
+        Depcrate_um_dwmapiother_27862!();
+        Depcrate_um_dwmapiDWM_EC_DISABLECOMPOSITION!();
+        Depcrate_um_dwmapiDWM_EC_ENABLECOMPOSITION!();
+        Depcrate_um_dwmapiother_27865!();
+        Depcrate_um_dwmapiDWM_SIT_DISPLAYFRAME!();
+        Depcrate_um_dwmapiother_27867!();
+        Depcrate_um_dwmapimacro_27868!();
+        Depcrate_um_dwmapiother_27869!();
+        Depcrate_um_dwmapimacro_27870!();
+        Depcrate_um_dwmapiother_27871!();
+        Depcrate_um_dwmapimacro_27872!();
+        Depcrate_um_dwmapiother_27873!();
+    };
+}

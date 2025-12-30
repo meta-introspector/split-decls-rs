@@ -1,0 +1,9 @@
+// Generated macro for macro_25257 (macro)
+macro_rules! Depcrate_um_d3d11_1macro_25257 {
+() => {
+// Module: crate::um::d3d11_1
+// Provides: {"macro_25257"}
+// Dependencies: {}
+ENUM ! { enum D3D11_VIDEO_DECODER_CAPS { D3D11_VIDEO_DECODER_CAPS_DOWNSAMPLE = 0x1 , D3D11_VIDEO_DECODER_CAPS_NON_REAL_TIME = 0x02 , D3D11_VIDEO_DECODER_CAPS_DOWNSAMPLE_DYNAMIC = 0x04 , D3D11_VIDEO_DECODER_CAPS_DOWNSAMPLE_REQUIRED = 0x08 , D3D11_VIDEO_DECODER_CAPS_UNSUPPORTED = 0x10 , } }
+};
+}

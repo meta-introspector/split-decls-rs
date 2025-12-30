@@ -1,0 +1,48 @@
+// Generated module macro for crate::geometry::transform_ops
+macro_rules! Modcrate_geometry_transform_ops {
+() => {
+        Depcrate_geometry_transform_opsuse_2554!();
+        Depcrate_geometry_transform_opsuse_2555!();
+        Depcrate_geometry_transform_opsuse_2556!();
+        Depcrate_geometry_transform_opsuse_2557!();
+        Depcrate_geometry_transform_opsuse_2558!();
+        Depcrate_geometry_transform_opsuse_2559!();
+        Depcrate_geometry_transform_opsuse_2560!();
+        Depcrate_geometry_transform_opsimpl_2561!();
+        Depcrate_geometry_transform_opsimpl_2562!();
+        Depcrate_geometry_transform_opsmacro_2563!();
+        Depcrate_geometry_transform_opsmacro_2564!();
+        Depcrate_geometry_transform_opsmacro_2565!();
+        Depcrate_geometry_transform_opsmacro_2566!();
+        Depcrate_geometry_transform_opsmacro_2567!();
+        Depcrate_geometry_transform_opsmacro_2568!();
+        Depcrate_geometry_transform_opsmacro_2569!();
+        Depcrate_geometry_transform_opsmacro_2570!();
+        Depcrate_geometry_transform_opsmacro_2571!();
+        Depcrate_geometry_transform_opsmacro_2572!();
+        Depcrate_geometry_transform_opsmacro_2573!();
+        Depcrate_geometry_transform_opsmacro_2574!();
+        Depcrate_geometry_transform_opsmacro_2575!();
+        Depcrate_geometry_transform_opsmacro_2576!();
+        Depcrate_geometry_transform_opsmacro_2577!();
+        Depcrate_geometry_transform_opsmacro_2578!();
+        Depcrate_geometry_transform_opsmacro_2579!();
+        Depcrate_geometry_transform_opsmacro_2580!();
+        Depcrate_geometry_transform_opsmacro_2581!();
+        Depcrate_geometry_transform_opsmacro_2582!();
+        Depcrate_geometry_transform_opsmacro_2583!();
+        Depcrate_geometry_transform_opsmacro_2584!();
+        Depcrate_geometry_transform_opsmacro_2585!();
+        Depcrate_geometry_transform_opsmacro_2586!();
+        Depcrate_geometry_transform_opsmacro_2587!();
+        Depcrate_geometry_transform_opsmacro_2588!();
+        Depcrate_geometry_transform_opsmacro_2589!();
+        Depcrate_geometry_transform_opsmacro_2590!();
+        Depcrate_geometry_transform_opsmacro_2591!();
+        Depcrate_geometry_transform_opsmacro_2592!();
+        Depcrate_geometry_transform_opsmacro_2593!();
+        Depcrate_geometry_transform_opsmacro_2594!();
+        Depcrate_geometry_transform_opsmacro_2595!();
+        Depcrate_geometry_transform_opsmacro_2596!();
+    };
+}

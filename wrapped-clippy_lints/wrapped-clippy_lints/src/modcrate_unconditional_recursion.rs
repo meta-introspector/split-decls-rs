@@ -1,0 +1,41 @@
+// Generated module macro for crate::unconditional_recursion
+macro_rules! Modcrate_unconditional_recursion {
+() => {
+        Depcrate_unconditional_recursionuse_10627!();
+        Depcrate_unconditional_recursionuse_10628!();
+        Depcrate_unconditional_recursionuse_10629!();
+        Depcrate_unconditional_recursionuse_10630!();
+        Depcrate_unconditional_recursionuse_10631!();
+        Depcrate_unconditional_recursionuse_10632!();
+        Depcrate_unconditional_recursionuse_10633!();
+        Depcrate_unconditional_recursionuse_10634!();
+        Depcrate_unconditional_recursionuse_10635!();
+        Depcrate_unconditional_recursionuse_10636!();
+        Depcrate_unconditional_recursionuse_10637!();
+        Depcrate_unconditional_recursionuse_10638!();
+        Depcrate_unconditional_recursionuse_10639!();
+        Depcrate_unconditional_recursionuse_10640!();
+        Depcrate_unconditional_recursionuse_10641!();
+        Depcrate_unconditional_recursionuse_10642!();
+        Depcrate_unconditional_recursionuse_10643!();
+        Depcrate_unconditional_recursionuse_10644!();
+        Depcrate_unconditional_recursionuse_10645!();
+        Depcrate_unconditional_recursionmacro_10646!();
+        Depcrate_unconditional_recursionUnconditionalRecursion!();
+        Depcrate_unconditional_recursionmacro_10648!();
+        Depcrate_unconditional_recursionspan_error!();
+        Depcrate_unconditional_recursionget_hir_ty_def_id!();
+        Depcrate_unconditional_recursionget_return_calls_in_body!();
+        Depcrate_unconditional_recursionhas_conditional_return!();
+        Depcrate_unconditional_recursionget_impl_trait_def_id!();
+        Depcrate_unconditional_recursionmatches_ty!();
+        Depcrate_unconditional_recursioncheck_partial_eq!();
+        Depcrate_unconditional_recursioncheck_to_string!();
+        Depcrate_unconditional_recursionis_default_method_on_current_ty!();
+        Depcrate_unconditional_recursionCheckCalls!();
+        Depcrate_unconditional_recursionimpl_10659!();
+        Depcrate_unconditional_recursionimpl_10660!();
+        Depcrate_unconditional_recursioncheck_from!();
+        Depcrate_unconditional_recursionimpl_10662!();
+    };
+}

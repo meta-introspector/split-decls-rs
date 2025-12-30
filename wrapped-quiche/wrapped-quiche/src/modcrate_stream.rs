@@ -1,0 +1,54 @@
+// Generated module macro for crate::stream
+macro_rules! Modcrate_stream {
+() => {
+        Depcrate_streamuse_1610!();
+        Depcrate_streamuse_1611!();
+        Depcrate_streamuse_1612!();
+        Depcrate_streamuse_1613!();
+        Depcrate_streamuse_1614!();
+        Depcrate_streamuse_1615!();
+        Depcrate_streamuse_1616!();
+        Depcrate_streamuse_1617!();
+        Depcrate_streamuse_1618!();
+        Depcrate_streamuse_1619!();
+        Depcrate_streamuse_1620!();
+        Depcrate_streamuse_1621!();
+        Depcrate_streamuse_1622!();
+        Depcrate_streamuse_1623!();
+        Depcrate_streamDEFAULT_URGENCY!();
+        Depcrate_streamDEFAULT_STREAM_WINDOW!();
+        Depcrate_streamMAX_STREAM_WINDOW!();
+        Depcrate_streamStreamIdHasher!();
+        Depcrate_streamRecvBufResetReturn!();
+        Depcrate_streamimpl_1629!();
+        Depcrate_streamimpl_1630!();
+        Depcrate_streamBuildStreamIdHasher!();
+        Depcrate_streamStreamIdHashMap!();
+        Depcrate_streamStreamIdHashSet!();
+        Depcrate_streamStreamMap!();
+        Depcrate_streamimpl_1635!();
+        Depcrate_streamStream!();
+        Depcrate_streamimpl_1637!();
+        Depcrate_streamis_local!();
+        Depcrate_streamis_bidi!();
+        Depcrate_streamStreamPriorityKey!();
+        Depcrate_streamimpl_1641!();
+        Depcrate_streamimpl_1642!();
+        Depcrate_streamimpl_1643!();
+        Depcrate_streamimpl_1644!();
+        Depcrate_streamimpl_1645!();
+        Depcrate_streammacro_1646!();
+        Depcrate_streamimpl_1647!();
+        Depcrate_streammacro_1648!();
+        Depcrate_streamimpl_1649!();
+        Depcrate_streammacro_1650!();
+        Depcrate_streamimpl_1651!();
+        Depcrate_streamStreamIter!();
+        Depcrate_streamimpl_1653!();
+        Depcrate_streamimpl_1654!();
+        Depcrate_streamimpl_1655!();
+        Depcrate_streamtests!();
+        Depcrate_streamrecv_buf!();
+        Depcrate_streamsend_buf!();
+    };
+}

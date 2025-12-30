@@ -1,0 +1,51 @@
+// Generated module macro for crate::tests
+macro_rules! Modcrate_tests {
+() => {
+        Depcrate_testsuse_205!();
+        Depcrate_testsuse_206!();
+        Depcrate_testsuse_207!();
+        Depcrate_testsuse_208!();
+        Depcrate_testsuse_209!();
+        Depcrate_testsuse_210!();
+        Depcrate_testsuse_211!();
+        Depcrate_testsuse_212!();
+        Depcrate_testsuse_213!();
+        Depcrate_testsuse_214!();
+        Depcrate_testsuse_215!();
+        Depcrate_testsuse_216!();
+        Depcrate_testsuse_217!();
+        Depcrate_testsuse_218!();
+        Depcrate_testshandshake_timeout!();
+        Depcrate_testsclose_endpoint!();
+        Depcrate_testslocal_addr!();
+        Depcrate_testsread_after_close!();
+        Depcrate_testsexport_keying_material!();
+        Depcrate_testsip_blocking!();
+        Depcrate_testsendpoint!();
+        Depcrate_testsendpoint_with_config!();
+        Depcrate_testsEndpointFactory!();
+        Depcrate_testsimpl_228!();
+        Depcrate_testszero_rtt!();
+        Depcrate_testsecho_v6!();
+        Depcrate_testsecho_v4!();
+        Depcrate_testsecho_dualstack!();
+        Depcrate_testsstress_receive_window!();
+        Depcrate_testsstress_stream_receive_window!();
+        Depcrate_testsstress_both_windows!();
+        Depcrate_testsrun_echo!();
+        Depcrate_testsEchoArgs!();
+        Depcrate_testsecho!();
+        Depcrate_testsgen_data!();
+        Depcrate_testssubscribe!();
+        Depcrate_testsTestWriter!();
+        Depcrate_testsimpl_242!();
+        Depcrate_testsrt_basic!();
+        Depcrate_testsrt_threaded!();
+        Depcrate_testsrebind_recv!();
+        Depcrate_testsstream_id_flow_control!();
+        Depcrate_teststwo_datagram_readers!();
+        Depcrate_testsmultiple_conns_with_zero_length_cids!();
+        Depcrate_testsstream_stopped!();
+        Depcrate_testsstream_stopped_2!();
+    };
+}

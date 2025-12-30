@@ -1,0 +1,9 @@
+// Generated macro for macro_28085 (macro)
+macro_rules! Depcrate_um_dwrite_3macro_28085 {
+() => {
+// Module: crate::um::dwrite_3
+// Provides: {"macro_28085"}
+// Dependencies: {}
+RIDL ! { # [uuid (0xd37d7598 , 0x09be , 0x4222 , 0xa2 , 0x36 , 0x20 , 0x81 , 0x34 , 0x1c , 0xc1 , 0xf2)] interface IDWriteFontFace3 (IDWriteFontFace3Vtbl) : IDWriteFontFace2 (IDWriteFontFace2Vtbl) { fn GetFontFaceReference (fontFaceReference : * mut * mut IDWriteFontFaceReference ,) -> HRESULT , fn GetPanose (panose : * mut DWRITE_PANOSE ,) -> () , fn GetWeight () -> DWRITE_FONT_WEIGHT , fn GetStretch () -> DWRITE_FONT_STRETCH , fn GetStyle () -> DWRITE_FONT_STYLE , fn GetFamilyNames (names : * mut * mut IDWriteLocalizedStrings ,) -> HRESULT , fn GetFaceNames (names : * mut * mut IDWriteLocalizedStrings ,) -> HRESULT , fn GetInformationalStrings (informationalStringID : DWRITE_INFORMATIONAL_STRING_ID , informationalStrings : * mut * mut IDWriteLocalizedStrings , exists : * mut BOOL ,) -> HRESULT , fn HasCharacter (unicodeValue : UINT32 ,) -> BOOL , fn GetRecommendedRenderingMode (fontEmSize : FLOAT , dpiX : FLOAT , dpiY : FLOAT , transform : * const DWRITE_MATRIX , isSideways : BOOL , outlineThreshold : DWRITE_OUTLINE_THRESHOLD , measuringMode : DWRITE_MEASURING_MODE , renderingParams : * mut IDWriteRenderingParams , renderingMode : * mut DWRITE_RENDERING_MODE1 , gridFitMode : * mut DWRITE_GRID_FIT_MODE ,) -> HRESULT , fn IsCharacterLocal (unicodeValue : UINT32 ,) -> BOOL , fn IsGlyphLocal (glyphId : UINT16 ,) -> BOOL , fn AreCharactersLocal (characters : * const WCHAR , characterCount : UINT32 , enqueueIfNotLocal : BOOL , isLocal : * mut BOOL ,) -> HRESULT , fn AreGlyphsLocal (glyphIndices : * const UINT16 , glyphCount : UINT32 , enqueueIfNotLocal : BOOL , isLocal : * mut BOOL ,) -> HRESULT , } }
+};
+}

@@ -1,0 +1,56 @@
+// Generated module macro for crate::lifetimes
+macro_rules! Modcrate_lifetimes {
+() => {
+        Depcrate_lifetimesuse_3401!();
+        Depcrate_lifetimesuse_3402!();
+        Depcrate_lifetimesuse_3403!();
+        Depcrate_lifetimesuse_3404!();
+        Depcrate_lifetimesuse_3405!();
+        Depcrate_lifetimesuse_3406!();
+        Depcrate_lifetimesuse_3407!();
+        Depcrate_lifetimesuse_3408!();
+        Depcrate_lifetimesuse_3409!();
+        Depcrate_lifetimesuse_3410!();
+        Depcrate_lifetimesuse_3411!();
+        Depcrate_lifetimesuse_3412!();
+        Depcrate_lifetimesuse_3413!();
+        Depcrate_lifetimesuse_3414!();
+        Depcrate_lifetimesuse_3415!();
+        Depcrate_lifetimesuse_3416!();
+        Depcrate_lifetimesuse_3417!();
+        Depcrate_lifetimesuse_3418!();
+        Depcrate_lifetimesuse_3419!();
+        Depcrate_lifetimesuse_3420!();
+        Depcrate_lifetimesmacro_3421!();
+        Depcrate_lifetimesmacro_3422!();
+        Depcrate_lifetimesmacro_3423!();
+        Depcrate_lifetimesLifetimes!();
+        Depcrate_lifetimesimpl_3425!();
+        Depcrate_lifetimesmacro_3426!();
+        Depcrate_lifetimesimpl_3427!();
+        Depcrate_lifetimescheck_fn_inner!();
+        Depcrate_lifetimescould_use_elision!();
+        Depcrate_lifetimesallowed_lts_from!();
+        Depcrate_lifetimesnon_elidable_self_type!();
+        Depcrate_lifetimesnamed_lifetime_occurrences!();
+        Depcrate_lifetimesnamed_lifetime!();
+        Depcrate_lifetimesRefVisitor!();
+        Depcrate_lifetimesimpl_3435!();
+        Depcrate_lifetimesimpl_3436!();
+        Depcrate_lifetimeshas_where_lifetimes!();
+        Depcrate_lifetimesUsage!();
+        Depcrate_lifetimesLifetimeChecker!();
+        Depcrate_lifetimesimpl_3440!();
+        Depcrate_lifetimesimpl_3441!();
+        Depcrate_lifetimesis_candidate_for_elision!();
+        Depcrate_lifetimesreport_extra_lifetimes!();
+        Depcrate_lifetimesreport_extra_impl_lifetimes!();
+        Depcrate_lifetimesreport_elidable_impl_lifetimes!();
+        Depcrate_lifetimesElidableUsage!();
+        Depcrate_lifetimesreport_elidable_lifetimes!();
+        Depcrate_lifetimeselision_suggestions!();
+        Depcrate_lifetimesBodyLifetimeChecker!();
+        Depcrate_lifetimesimpl_3450!();
+        Depcrate_lifetimesimpl_3451!();
+    };
+}

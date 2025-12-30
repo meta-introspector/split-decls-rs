@@ -1,0 +1,39 @@
+// Generated module macro for crate::generated
+macro_rules! Modcrate_generated {
+() => {
+        Depcrate_generatedother_4!();
+        Depcrate_generated__MSConversation!();
+        Depcrate_generated__MSMessage!();
+        Depcrate_generated__MSMessageError!();
+        Depcrate_generated__MSMessageLayout!();
+        Depcrate_generated__MSMessageLiveLayout!();
+        Depcrate_generated__MSMessageTemplateLayout!();
+        Depcrate_generated__MSMessagesAppViewController!();
+        Depcrate_generated__MSSession!();
+        Depcrate_generated__MSSticker!();
+        Depcrate_generated__MSStickerBrowserView!();
+        Depcrate_generated__MSStickerBrowserViewController!();
+        Depcrate_generated__MSStickerBrowserViewDataSource!();
+        Depcrate_generated__MSStickerView!();
+        Depcrate_generated__MessagesDefines!();
+        Depcrate_generateduse_19!();
+        Depcrate_generateduse_20!();
+        Depcrate_generateduse_21!();
+        Depcrate_generateduse_22!();
+        Depcrate_generateduse_23!();
+        Depcrate_generateduse_24!();
+        Depcrate_generateduse_25!();
+        Depcrate_generateduse_26!();
+        Depcrate_generateduse_27!();
+        Depcrate_generateduse_28!();
+        Depcrate_generateduse_29!();
+        Depcrate_generateduse_30!();
+        Depcrate_generateduse_31!();
+        Depcrate_generateduse_32!();
+        Depcrate_generateduse_33!();
+        Depcrate_generateduse_34!();
+        Depcrate_generateduse_35!();
+        Depcrate_generateduse_36!();
+        Depcrate_generateduse_37!();
+    };
+}

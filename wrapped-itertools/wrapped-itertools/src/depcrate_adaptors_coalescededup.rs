@@ -1,9 +1,9 @@
-// Generated macro for dedup (function)
-macro_rules! Depcrate_adaptors_coalescededup {
+// Generated macro for Dedup (type)
+macro_rules! Depcrate_adaptors_coalesceDedup {
 () => {
 // Module: crate::adaptors::coalesce
-// Provides: {"dedup"}
+// Provides: {"Dedup"}
 // Dependencies: {}
-# [doc = " Create a new `Dedup`."] pub fn dedup < I > (iter : I) -> Dedup < I > where I : Iterator , { dedup_by (iter , DedupEq) }
+# [doc = " An iterator adaptor that removes repeated duplicates."] # [doc = ""] # [doc = " See [`.dedup()`](crate::Itertools::dedup) for more information."] pub type Dedup < I > = DedupBy < I , DedupEq > ;
 };
 }

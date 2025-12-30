@@ -1,0 +1,55 @@
+// Generated module macro for crate
+macro_rules! Modcrate {
+() => {
+        Depcrateuse_1!();
+        Depcrateuse_2!();
+        Depcrateuse_3!();
+        Depcrateuse_4!();
+        Depcratefnv!();
+        Depcrateglob!();
+        Depcratepathutil!();
+        Depcrateserde_impl!();
+        Depcratedebug!();
+        Depcratedebug!();
+        DepcrateError!();
+        DepcrateErrorKind!();
+        Depcrateimpl_69!();
+        Depcrateimpl_70!();
+        Depcrateimpl_71!();
+        Depcrateimpl_72!();
+        Depcrateimpl_73!();
+        Depcratenew_regex!();
+        Depcratenew_regex_set!();
+        DepcrateGlobSet!();
+        Depcrateimpl_77!();
+        Depcrateimpl_78!();
+        DepcrateGlobSetBuilder!();
+        Depcrateimpl_80!();
+        DepcrateCandidate!();
+        Depcrateimpl_82!();
+        Depcrateimpl_83!();
+        DepcrateGlobSetMatchStrategy!();
+        Depcrateimpl_85!();
+        DepcrateLiteralStrategy!();
+        Depcrateimpl_87!();
+        DepcrateBasenameLiteralStrategy!();
+        Depcrateimpl_89!();
+        DepcrateExtensionStrategy!();
+        Depcrateimpl_91!();
+        DepcratePrefixStrategy!();
+        Depcrateimpl_93!();
+        DepcrateSuffixStrategy!();
+        Depcrateimpl_95!();
+        DepcrateRequiredExtensionStrategy!();
+        Depcrateimpl_97!();
+        DepcrateRegexSetStrategy!();
+        DepcratePatternSetPoolFn!();
+        Depcrateimpl_100!();
+        DepcrateMultiStrategyBuilder!();
+        Depcrateimpl_102!();
+        DepcrateRequiredExtensionStrategyBuilder!();
+        Depcrateimpl_104!();
+        Depcrateescape!();
+        Depcratetests!();
+    };
+}

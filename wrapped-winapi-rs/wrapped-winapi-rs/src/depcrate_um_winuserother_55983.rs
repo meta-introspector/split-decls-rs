@@ -1,0 +1,9 @@
+// Generated macro for other_55983 (other)
+macro_rules! Depcrate_um_winuserother_55983 {
+() => {
+// Module: crate::um::winuser
+// Provides: {"other_55983"}
+// Dependencies: {}
+extern "system" { pub fn GetSystemMenu (hWnd : HWND , bRevert : BOOL ,) -> HMENU ; pub fn CreateMenu () -> HMENU ; pub fn CreatePopupMenu () -> HMENU ; pub fn DestroyMenu (hMenu : HMENU ,) -> BOOL ; pub fn CheckMenuItem (hMenu : HMENU , uIDCheckItem : UINT , uCheck : UINT ,) -> DWORD ; pub fn EnableMenuItem (hMenu : HMENU , uIDEnableItem : UINT , uEnable : UINT ,) -> BOOL ; pub fn GetSubMenu (hMenu : HMENU , nPos : c_int ,) -> HMENU ; pub fn GetMenuItemID (hMenu : HMENU , nPos : c_int ,) -> UINT ; pub fn GetMenuItemCount (hMenu : HMENU ,) -> c_int ; pub fn InsertMenuA (hMenu : HMENU , uPosition : UINT , uFlags : UINT , uIDNewItem : UINT_PTR , lpNewItem : LPCSTR ,) -> BOOL ; pub fn InsertMenuW (hMenu : HMENU , uPosition : UINT , uFlags : UINT , uIDNewItem : UINT_PTR , lpNewItem : LPCWSTR ,) -> BOOL ; pub fn AppendMenuA (hMenu : HMENU , uFlags : UINT , uIDNewItem : UINT_PTR , lpNewItem : LPCSTR ,) -> BOOL ; pub fn AppendMenuW (hMenu : HMENU , uFlags : UINT , uIDNewItem : UINT_PTR , lpNewItem : LPCWSTR ,) -> BOOL ; pub fn ModifyMenuA (hMnu : HMENU , uPosition : UINT , uFlags : UINT , uIDNewItem : UINT_PTR , lpNewItem : LPCSTR ,) -> BOOL ; pub fn ModifyMenuW (hMnu : HMENU , uPosition : UINT , uFlags : UINT , uIDNewItem : UINT_PTR , lpNewItem : LPCWSTR ,) -> BOOL ; pub fn RemoveMenu (hMenu : HMENU , uPosition : UINT , uFlags : UINT ,) -> BOOL ; pub fn DeleteMenu (hMenu : HMENU , uPosition : UINT , uFlags : UINT ,) -> BOOL ; pub fn SetMenuItemBitmaps (hMenu : HMENU , uPosition : UINT , uFlags : UINT , hBitmapUnchecked : HBITMAP , hBitmapChecked : HBITMAP ,) -> BOOL ; pub fn GetMenuCheckMarkDimensions () -> LONG ; pub fn TrackPopupMenu (hMenu : HMENU , uFlags : UINT , x : c_int , y : c_int , nReserved : c_int , hWnd : HWND , prcRect : * const RECT ,) -> BOOL ; }
+};
+}

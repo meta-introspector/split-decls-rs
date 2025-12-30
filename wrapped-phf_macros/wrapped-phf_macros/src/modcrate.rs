@@ -1,0 +1,45 @@
+// Generated module macro for crate
+macro_rules! Modcrate {
+() => {
+        Depcrateuse_1!();
+        Depcrateuse_2!();
+        Depcrateuse_3!();
+        Depcrateuse_4!();
+        Depcrateuse_5!();
+        Depcrateuse_6!();
+        Depcrateuse_7!();
+        Depcrateuse_8!();
+        Depcrateuse_9!();
+        Depcrateuse_10!();
+        Depcrateuse_11!();
+        DepcrateParsedKey!();
+        Depcrateimpl_13!();
+        Depcrateimpl_14!();
+        DepcrateKey!();
+        Depcrateimpl_16!();
+        Depcrateimpl_17!();
+        Depcrateextract_keys_from_expr!();
+        DepcrateEntry!();
+        Depcrateimpl_20!();
+        Depcrateimpl_21!();
+        DepcrateMap!();
+        Depcrateimpl_23!();
+        DepcrateSet!();
+        Depcrateimpl_25!();
+        Depcratecheck_duplicates!();
+        Depcratebuild_map!();
+        Depcratebuild_ordered_map!();
+        Depcratephf_map!();
+        Depcratebuild_cfg_conditions!();
+        Depcratecombine_conditions!();
+        Depcratebuild_nested_conditional!();
+        Depcratebuild_conditional_phf!();
+        Depcratebuild_conditional_phf_map!();
+        Depcratephf_set!();
+        Depcratebuild_conditional_phf_set!();
+        Depcratephf_ordered_map!();
+        Depcratebuild_conditional_phf_ordered_map!();
+        Depcratephf_ordered_set!();
+        Depcratebuild_conditional_phf_ordered_set!();
+    };
+}

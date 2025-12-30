@@ -1,0 +1,9 @@
+// Generated macro for impl_24 (impl)
+macro_rules! Depcrate_validatorimpl_24 {
+() => {
+// Module: crate::validator
+// Provides: {"impl_24"}
+// Dependencies: {}
+impl DataAccess for MockDataAccess { fn check_successful_response (& self , kind : & str , entity : & EntityIdentifier) -> Result < bool , ValidationError > { let key = entity . cache_key (kind) ; self . successful_responses . get (& key) . copied () . ok_or_else (| | ValidationError :: DataAccessError { message : format ! ("No response found for {}" , key) , }) } fn get_parquet_metadata (& self , dataset : & str , config : & str) -> Result < ParquetMetadata , ValidationError > { let key = format ! ("{}:{}" , dataset , config) ; self . parquet_metadata . get (& key) . cloned () . ok_or_else (| | ValidationError :: MetadataNotFound { entity : key , }) } fn get_split_names (& self , dataset : & str , config : & str) -> Result < Vec < String > , ValidationError > { let key = format ! ("{}:{}" , dataset , config) ; self . split_names . get (& key) . cloned () . ok_or_else (| | ValidationError :: DataAccessError { message : format ! ("No split names found for {}" , key) , }) } fn get_config_names (& self , dataset : & str) -> Result < Vec < String > , ValidationError > { self . config_names . get (dataset) . cloned () . ok_or_else (| | ValidationError :: DataAccessError { message : format ! ("No config names found for {}" , dataset) , }) } fn get_cached_validation (& self , kind : & str , entity : & EntityIdentifier) -> Result < CachedResponse , ValidationError > { let key = entity . cache_key (kind) ; self . cached_validations . get (& key) . cloned () . ok_or_else (| | ValidationError :: CacheError { message : format ! ("No cached validation found for {}" , key) , }) } fn has_indexable_columns (& self , features : & HashMap < String , String >) -> bool { features . values () . any (| v | v . contains ("string") || v . contains ("text")) } }
+};
+}

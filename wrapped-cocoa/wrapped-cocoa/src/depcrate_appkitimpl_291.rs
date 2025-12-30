@@ -1,0 +1,9 @@
+// Generated macro for impl_291 (impl)
+macro_rules! Depcrate_appkitimpl_291 {
+() => {
+// Module: crate::appkit
+// Provides: {"impl_291"}
+// Dependencies: {}
+impl NSColorSpace for id { unsafe fn deviceRGBColorSpace (_ : Self) -> id { msg_send ! [class ! (NSColorSpace) , deviceRGBColorSpace] } unsafe fn genericRGBColorSpace (_ : Self) -> id { msg_send ! [class ! (NSColorSpace) , genericRGBColorSpace] } unsafe fn deviceCMYKColorSpace (_ : Self) -> id { msg_send ! [class ! (NSColorSpace) , deviceCMYKColorSpace] } unsafe fn genericCMYKColorSpace (_ : Self) -> id { msg_send ! [class ! (NSColorSpace) , genericCMYKColorSpace] } unsafe fn deviceGrayColorSpace (_ : Self) -> id { msg_send ! [class ! (NSColorSpace) , deviceGrayColorSpace] } unsafe fn genericGrayColorSpace (_ : Self) -> id { msg_send ! [class ! (NSColorSpace) , genericGrayColorSpace] } unsafe fn sRGBColorSpace (_ : Self) -> id { msg_send ! [class ! (NSColorSpace) , sRGBColorSpace] } unsafe fn extendedSRGBColorSpace (_ : Self) -> id { msg_send ! [class ! (NSColorSpace) , extendedSRGBColorSpace] } unsafe fn displayP3ColorSpace (_ : Self) -> id { msg_send ! [class ! (NSColorSpace) , displayP3ColorSpace] } unsafe fn genericGamma22GrayColorSpace (_ : Self) -> id { msg_send ! [class ! (NSColorSpace) , genericGamma22GrayColorSpace] } unsafe fn extendedGenericGamma22GrayColorSpace (_ : Self) -> id { msg_send ! [class ! (NSColorSpace) , extendedGenericGamma22GrayColorSpace] } unsafe fn adobeRGB1998ColorSpace (_ : Self) -> id { msg_send ! [class ! (NSColorSpace) , adobeRGB1998ColorSpace] } unsafe fn alloc (_ : Self) -> id { msg_send ! [class ! (NSColorSpace) , alloc] } unsafe fn initWithCGColorSpace_ (self , cg_color_space : * const c_void ,) -> id { msg_send ! [self , initWithCGColorSpace : cg_color_space] } unsafe fn CGColorSpace (self) -> * const c_void { msg_send ! [self , CGColorSpace] } unsafe fn localizedName (self) -> id { msg_send ! [self , localizedName] } }
+};
+}

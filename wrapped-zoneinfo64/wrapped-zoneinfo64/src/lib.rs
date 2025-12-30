@@ -1,0 +1,77 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcratedeserialize.rs");
+include!("depcrateuse_29.rs");
+include!("depcrateseconds_in_utc_day.rs");
+include!("depcrate_ruletzruledate.rs");
+include!("depcrate_chrono_implsimpl_11.rs");
+include!("depcrate_deserializeregions.rs");
+include!("depcrateimpl_54.rs");
+include!("depcrate_chrono_implschronooffset.rs");
+include!("depcrate_chrono_implsuse_8.rs");
+include!("depcrate_ruleimpl_26.rs");
+include!("depcrateepoch.rs");
+include!("depcrateutcoffset.rs");
+include!("depcrate_deserializedeserialize.rs");
+include!("depcrate_rulerule.rs");
+include!("depcrate_deserializerules.rs");
+include!("depcratechrono_impls.rs");
+include!("depcrateuse_4.rs");
+include!("depcrateimpl_61.rs");
+include!("depcrateimpl_62.rs");
+include!("depcrateimpl_47.rs");
+include!("depcrate_deserializeuse_35.rs");
+include!("depcrate_rulerulemode.rs");
+include!("depcrate_deserializetzzonedataraw.rs");
+include!("depcrateimpl_51.rs");
+include!("depcrateuse_1.rs");
+include!("depcrateuse_5.rs");
+include!("depcrateimpl_56.rs");
+include!("depcrateuse_3.rs");
+include!("depcrateoffset.rs");
+include!("depcratetests.rs");
+include!("depcratetzzone.rs");
+include!("depcrate_deserializetzzoneraw.rs");
+include!("depcrate_deserializeimpl_39.rs");
+include!("depcratezoneinfo64.rs");
+include!("depcrateuse_2.rs");
+include!("depcrate_ruleuse_19.rs");
+include!("depcrate_ruletimemode.rs");
+include!("depcrateimpl_55.rs");
+include!("depcrate_ruleimpl_27.rs");
+include!("depcrate_deserializeuse_31.rs");
+include!("depcratetzzonedata.rs");
+include!("depcrate_ruleuse_18.rs");
+include!("depcratezone.rs");
+include!("depcrateimpl_59.rs");
+include!("depcraterule.rs");
+include!("depcrate_chrono_implsuse_9.rs");
+include!("depcratetransition.rs");
+include!("depcrate_chrono_implsimpl_14.rs");
+include!("depcrate_chrono_implsimpl_13.rs");
+include!("depcrateimpl_52.rs");
+include!("depcrate_chrono_implsimpl_12.rs");
+include!("depcrate_ruleuse_17.rs");
+include!("depcrate_ruletzrule.rs");
+include!("depcrate_ruleimpl_25.rs");
+include!("depcratezoneinfo64_res_for_testing.rs");
+include!("depcratepossibleoffset.rs");
+include!("depcrate_deserializeuse_32.rs");
+include!("depcrate_deserializeuse_33.rs");
+include!("depcrate_ruletests.rs");
+include!("depcrate_ruleuse_16.rs");
+include!("depcrate_deserializeuse_34.rs");
+include!("depcrate_chrono_implsuse_7.rs");
+include!("depcrate_deserializezoneinfo64raw.rs");
+include!("modcrate_chrono_impls.rs");
+include!("modcrate.rs");
+include!("modcrate_rule.rs");
+include!("modcrate_deserialize.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate_chrono_impls!();
+    Modcrate!();
+    Modcrate_rule!();
+    Modcrate_deserialize!();
+}

@@ -1,0 +1,9 @@
+// Generated macro for compute_period_per_point (function)
+macro_rules! Depcrate_coord_ranged1d_types_datetimecompute_period_per_point {
+() => {
+// Module: crate::coord::ranged1d::types::datetime
+// Provides: {"compute_period_per_point"}
+// Dependencies: {}
+# [allow (clippy :: inconsistent_digit_grouping)] fn compute_period_per_point (total_ns : u64 , max_points : usize , sub_daily : bool) -> Option < u64 > { let min_ns_per_point = total_ns as f64 / max_points as f64 ; let actual_ns_per_point : u64 = (10u64) . pow (min_ns_per_point . log10 () . floor () as u32) ; fn determine_actual_ns_per_point (total_ns : u64 , mut actual_ns_per_point : u64 , units : & [u64] , base : u64 , max_points : usize ,) -> u64 { let mut unit_per_point_idx = 0 ; while total_ns / actual_ns_per_point > max_points as u64 * units [unit_per_point_idx] { unit_per_point_idx += 1 ; if unit_per_point_idx == units . len () { unit_per_point_idx = 0 ; actual_ns_per_point *= base ; } } units [unit_per_point_idx] * actual_ns_per_point } if actual_ns_per_point < 1_000_000_000 { Some (determine_actual_ns_per_point (total_ns , actual_ns_per_point , & [1 , 2 , 5] , 10 , max_points ,)) } else if actual_ns_per_point < 3600_000_000_000 { Some (determine_actual_ns_per_point (total_ns , 1_000_000_000 , & [1 , 2 , 5 , 10 , 15 , 20 , 30] , 60 , max_points ,)) } else if actual_ns_per_point < 3600_000_000_000 * 24 { Some (determine_actual_ns_per_point (total_ns , 3600_000_000_000 , & [1 , 2 , 4 , 8 , 12] , 24 , max_points ,)) } else if ! sub_daily { if actual_ns_per_point < 3600_000_000_000 * 24 * 10 { Some (determine_actual_ns_per_point (total_ns , 3600_000_000_000 * 24 , & [1 , 2 , 5 , 7] , 10 , max_points ,)) } else { Some (determine_actual_ns_per_point (total_ns , 3600_000_000_000 * 24 * 10 , & [1 , 2 , 5] , 10 , max_points ,)) } } else { None } }
+};
+}

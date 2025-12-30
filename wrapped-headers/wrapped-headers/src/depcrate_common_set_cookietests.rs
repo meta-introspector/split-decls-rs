@@ -1,0 +1,9 @@
+// Generated macro for tests (module)
+macro_rules! Depcrate_common_set_cookietests {
+() => {
+// Module: crate::common::set_cookie
+// Provides: {"tests"}
+// Dependencies: {}
+# [cfg (test)] mod tests { use super :: super :: { test_decode , test_encode } ; use super :: * ; # [test] fn decode () { let set_cookie = test_decode :: < SetCookie > (& ["foo=bar" , "baz=quux"]) . unwrap () ; assert_eq ! (set_cookie . 0 . len () , 2) ; assert_eq ! (set_cookie . 0 [0] , "foo=bar") ; assert_eq ! (set_cookie . 0 [1] , "baz=quux") ; } # [test] fn encode () { let set_cookie = SetCookie (vec ! [HeaderValue :: from_static ("foo=bar") , HeaderValue :: from_static ("baz=quux") ,]) ; let headers = test_encode (set_cookie) ; let mut vals = headers . get_all ("set-cookie") . into_iter () ; assert_eq ! (vals . next () . unwrap () , "foo=bar") ; assert_eq ! (vals . next () . unwrap () , "baz=quux") ; assert_eq ! (vals . next () , None) ; } }
+};
+}

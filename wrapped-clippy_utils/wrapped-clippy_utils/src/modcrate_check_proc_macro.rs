@@ -1,0 +1,52 @@
+// Generated module macro for crate::check_proc_macro
+macro_rules! Modcrate_check_proc_macro {
+() => {
+        Depcrate_check_proc_macrouse_121!();
+        Depcrate_check_proc_macrouse_122!();
+        Depcrate_check_proc_macrouse_123!();
+        Depcrate_check_proc_macrouse_124!();
+        Depcrate_check_proc_macrouse_125!();
+        Depcrate_check_proc_macrouse_126!();
+        Depcrate_check_proc_macrouse_127!();
+        Depcrate_check_proc_macrouse_128!();
+        Depcrate_check_proc_macrouse_129!();
+        Depcrate_check_proc_macrouse_130!();
+        Depcrate_check_proc_macrouse_131!();
+        Depcrate_check_proc_macrouse_132!();
+        Depcrate_check_proc_macroPat!();
+        Depcrate_check_proc_macrospan_matches_pat!();
+        Depcrate_check_proc_macrolit_search_pat!();
+        Depcrate_check_proc_macroqpath_search_pat!();
+        Depcrate_check_proc_macropath_search_pat!();
+        Depcrate_check_proc_macroexpr_search_pat!();
+        Depcrate_check_proc_macrofn_header_search_pat!();
+        Depcrate_check_proc_macroitem_search_pat!();
+        Depcrate_check_proc_macrotrait_item_search_pat!();
+        Depcrate_check_proc_macroimpl_item_search_pat!();
+        Depcrate_check_proc_macrofield_def_search_pat!();
+        Depcrate_check_proc_macrovariant_search_pat!();
+        Depcrate_check_proc_macrofn_kind_pat!();
+        Depcrate_check_proc_macroattr_search_pat!();
+        Depcrate_check_proc_macroty_search_pat!();
+        Depcrate_check_proc_macroast_ty_search_pat!();
+        Depcrate_check_proc_macroident_search_pat!();
+        Depcrate_check_proc_macroWithSearchPat!();
+        Depcrate_check_proc_macroimpl_with_search_pat!();
+        Depcrate_check_proc_macromacro_152!();
+        Depcrate_check_proc_macromacro_153!();
+        Depcrate_check_proc_macromacro_154!();
+        Depcrate_check_proc_macromacro_155!();
+        Depcrate_check_proc_macromacro_156!();
+        Depcrate_check_proc_macromacro_157!();
+        Depcrate_check_proc_macromacro_158!();
+        Depcrate_check_proc_macromacro_159!();
+        Depcrate_check_proc_macromacro_160!();
+        Depcrate_check_proc_macromacro_161!();
+        Depcrate_check_proc_macromacro_162!();
+        Depcrate_check_proc_macromacro_163!();
+        Depcrate_check_proc_macroimpl_164!();
+        Depcrate_check_proc_macrois_from_proc_macro!();
+        Depcrate_check_proc_macrois_span_match!();
+        Depcrate_check_proc_macrois_span_if!();
+    };
+}

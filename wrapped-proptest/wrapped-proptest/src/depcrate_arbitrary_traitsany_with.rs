@@ -1,0 +1,9 @@
+// Generated macro for any_with (function)
+macro_rules! Depcrate_arbitrary_traitsany_with {
+() => {
+// Module: crate::arbitrary::traits
+// Provides: {"any_with"}
+// Dependencies: {}
+# [doc = " Generates a [`Strategy`] producing [`Arbitrary`] values of `A` with the"] # [doc = " given configuration arguments passed in `args`. Unlike [`arbitrary_with`],"] # [doc = " it should be used for being explicit on what `A` is."] # [doc = " For clarity, this may be a good idea."] # [doc = ""] # [doc = " Use this version instead of [`arbitrary_with`] if you want to be clear which"] # [doc = " type you want to generate a `Strategy` for, or if you don't have an anchoring"] # [doc = " type for type inference to work with."] # [doc = ""] # [doc = " If you don't want to specify any arguments and instead use the default"] # [doc = " behavior, you should use [`any::<A>()`]."] # [doc = ""] # [doc = " # Example"] # [doc = ""] # [doc = " The function can be used as:"] # [doc = ""] # [doc = " ```rust"] # [doc = " use proptest::prelude::*;"] # [doc = " use proptest::collection::size_range;"] # [doc = ""] # [doc = " proptest! {"] # [doc = "     fn reverse_reverse_is_identity"] # [doc = "         (ref vec in any_with::<Vec<u32>>(size_range(1000).lift()))"] # [doc = "     {"] # [doc = "         let vec2 = vec.iter().cloned().rev().rev().collect::<Vec<u32>>();"] # [doc = "         prop_assert_eq!(vec, &vec2);"] # [doc = "     }"] # [doc = " }"] # [doc = ""] # [doc = " fn main() {"] # [doc = "     reverse_reverse_is_identity();"] # [doc = " }"] # [doc = " ```"] # [doc = ""] # [doc = " [`any::<A>()`]: fn.any.html"] # [doc = " [`arbitrary_with`]: fn.arbitrary_with.html"] # [doc = " [`Arbitrary`]: trait.Arbitrary.html"] # [doc = " [`Strategy`]: ../strategy/trait.Strategy.html"] # [must_use = "strategies do nothing unless used"] pub fn any_with < A : Arbitrary > (args : ParamsFor < A >) -> StrategyFor < A > { A :: arbitrary_with (args) }
+};
+}

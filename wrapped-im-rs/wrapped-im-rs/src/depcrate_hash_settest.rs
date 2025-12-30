@@ -1,0 +1,9 @@
+// Generated macro for test (module)
+macro_rules! Depcrate_hash_settest {
+() => {
+// Module: crate::hash::set
+// Provides: {"test"}
+// Dependencies: {}
+# [cfg (test)] mod test { use super :: proptest :: * ; use super :: * ; use crate :: test :: LolHasher ; use :: proptest :: num :: i16 ; use :: proptest :: proptest ; use std :: hash :: BuildHasherDefault ; # [test] fn insert_failing () { let mut set : HashSet < i16 , BuildHasherDefault < LolHasher > > = Default :: default () ; set . insert (14658) ; assert_eq ! (1 , set . len ()) ; set . insert (- 19198) ; assert_eq ! (2 , set . len ()) ; } # [test] fn match_strings_with_string_slices () { let mut set : HashSet < String > = From :: from (& hashset ! ["foo" , "bar"]) ; set = set . without ("bar") ; assert ! (! set . contains ("bar")) ; set . remove ("foo") ; assert ! (! set . contains ("foo")) ; } # [test] fn macro_allows_trailing_comma () { let set1 = hashset ! { "foo" , "bar" } ; let set2 = hashset ! { "foo" , "bar" , } ; assert_eq ! (set1 , set2) ; } # [test] fn issue_60_drain_iterator_memory_corruption () { use crate :: test :: MetroHashBuilder ; for i in 0 .. 1000 { let mut lhs = vec ! [0 , 1 , 2] ; lhs . sort_unstable () ; let hasher = Ref :: from (MetroHashBuilder :: new (i)) ; let mut iset : HashSet < _ , MetroHashBuilder > = HashSet :: with_hasher (hasher . clone ()) ; for & i in & lhs { iset . insert (i) ; } let mut rhs : Vec < _ > = iset . clone () . into_iter () . collect () ; rhs . sort_unstable () ; if lhs != rhs { println ! ("iteration: {}" , i) ; println ! ("seed: {}" , hasher . seed ()) ; println ! ("lhs: {}: {:?}" , lhs . len () , & lhs) ; println ! ("rhs: {}: {:?}" , rhs . len () , & rhs) ; panic ! () ; } } } proptest ! { # [test] fn proptest_a_set (ref s in hash_set (".*" , 10 .. 100)) { assert ! (s . len () < 100) ; assert ! (s . len () >= 10) ; } } }
+};
+}

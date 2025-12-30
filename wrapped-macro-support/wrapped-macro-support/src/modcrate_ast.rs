@@ -1,0 +1,41 @@
+// Generated module macro for crate::ast
+macro_rules! Modcrate_ast {
+() => {
+        Depcrate_astuse_14!();
+        Depcrate_astuse_15!();
+        Depcrate_astuse_16!();
+        Depcrate_astuse_17!();
+        Depcrate_astuse_18!();
+        Depcrate_astProgram!();
+        Depcrate_astimpl_20!();
+        Depcrate_astimpl_21!();
+        Depcrate_astLinkToModule!();
+        Depcrate_astExport!();
+        Depcrate_astMethodSelf!();
+        Depcrate_astImport!();
+        Depcrate_astImportModule!();
+        Depcrate_astimpl_27!();
+        Depcrate_astImportKind!();
+        Depcrate_astImportFunction!();
+        Depcrate_astImportFunctionKind!();
+        Depcrate_astMethodKind!();
+        Depcrate_astOperation!();
+        Depcrate_astOperationKind!();
+        Depcrate_astImportStatic!();
+        Depcrate_astThreadLocal!();
+        Depcrate_astImportString!();
+        Depcrate_astImportType!();
+        Depcrate_astStringEnum!();
+        Depcrate_astFunction!();
+        Depcrate_astFunctionReturnData!();
+        Depcrate_astFunctionArgumentData!();
+        Depcrate_astStruct!();
+        Depcrate_astStructField!();
+        Depcrate_astEnum!();
+        Depcrate_astVariant!();
+        Depcrate_astLitOrExpr!();
+        Depcrate_astimpl_47!();
+        Depcrate_astimpl_48!();
+        Depcrate_astimpl_49!();
+    };
+}

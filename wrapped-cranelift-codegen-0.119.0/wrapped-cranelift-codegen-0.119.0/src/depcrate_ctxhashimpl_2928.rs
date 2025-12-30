@@ -1,0 +1,9 @@
+// Generated macro for impl_2928 (impl)
+macro_rules! Depcrate_ctxhashimpl_2928 {
+() => {
+// Module: crate::ctxhash
+// Provides: {"impl_2928"}
+// Dependencies: {}
+impl < K , V > CtxHashMap < K , V > { # [doc = " Insert a new key-value pair, returning the old value associated"] # [doc = " with this key (if any)."] pub fn insert < Ctx > (& mut self , k : K , v : V , ctx : & Ctx) -> Option < V > where Ctx : CtxEq < K , K > + CtxHash < K > , { let hash = compute_hash (ctx , & k) ; match self . raw . find_mut (hash as u64 , | bucket | { hash == bucket . hash && ctx . ctx_eq (& bucket . k , & k) }) { Some (bucket) => Some (std :: mem :: replace (& mut bucket . v , v)) , None => { let data = BucketData { hash , k , v } ; self . raw . insert_unique (hash as u64 , data , | bucket | bucket . hash as u64) ; None } } } # [doc = " Look up a key, returning a borrow of the value if present."] pub fn get < 'a , Q , Ctx > (& 'a self , k : & Q , ctx : & Ctx) -> Option < & 'a V > where Ctx : CtxEq < K , Q > + CtxHash < Q > + CtxHash < K > , { let hash = compute_hash (ctx , k) ; self . raw . find (hash as u64 , | bucket | { hash == bucket . hash && ctx . ctx_eq (& bucket . k , k) }) . map (| bucket | & bucket . v) } # [doc = " Look up a key, returning an `Entry` that refers to an existing"] # [doc = " value or allows inserting a new one."] pub fn entry < 'a , Ctx > (& 'a mut self , k : K , ctx : & Ctx) -> Entry < 'a , K , V > where Ctx : CtxEq < K , K > + CtxHash < K > , { let hash = compute_hash (ctx , & k) ; let raw = self . raw . entry (hash as u64 , | bucket | hash == bucket . hash && ctx . ctx_eq (& bucket . k , & k) , | bucket | compute_hash (ctx , & bucket . k) as u64 ,) ; match raw { hashbrown :: hash_table :: Entry :: Occupied (o) => Entry :: Occupied (OccupiedEntry { raw : o }) , hashbrown :: hash_table :: Entry :: Vacant (v) => Entry :: Vacant (VacantEntry { hash , key : k , raw : v , }) , } } }
+};
+}

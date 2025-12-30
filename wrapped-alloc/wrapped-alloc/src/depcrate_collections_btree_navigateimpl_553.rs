@@ -1,0 +1,9 @@
+// Generated macro for impl_553 (impl)
+macro_rules! Depcrate_collections_btree_navigateimpl_553 {
+() => {
+// Module: crate::collections::btree::navigate
+// Provides: {"impl_553"}
+// Dependencies: {}
+impl < BorrowType : marker :: BorrowType , K , V > Handle < NodeRef < BorrowType , K , V , marker :: Leaf > , marker :: Edge > { # [doc = " Given a leaf edge handle, returns [`Result::Ok`] with a handle to the neighboring KV"] # [doc = " on the right side, which is either in the same leaf node or in an ancestor node."] # [doc = " If the leaf edge is the last one in the tree, returns [`Result::Err`] with the root node."] pub (super) fn next_kv (self ,) -> Result < Handle < NodeRef < BorrowType , K , V , marker :: LeafOrInternal > , marker :: KV > , NodeRef < BorrowType , K , V , marker :: LeafOrInternal > , > { let mut edge = self . forget_node_type () ; loop { edge = match edge . right_kv () { Ok (kv) => return Ok (kv) , Err (last_edge) => match last_edge . into_node () . ascend () { Ok (parent_edge) => parent_edge . forget_node_type () , Err (root) => return Err (root) , } , } } } # [doc = " Given a leaf edge handle, returns [`Result::Ok`] with a handle to the neighboring KV"] # [doc = " on the left side, which is either in the same leaf node or in an ancestor node."] # [doc = " If the leaf edge is the first one in the tree, returns [`Result::Err`] with the root node."] pub (super) fn next_back_kv (self ,) -> Result < Handle < NodeRef < BorrowType , K , V , marker :: LeafOrInternal > , marker :: KV > , NodeRef < BorrowType , K , V , marker :: LeafOrInternal > , > { let mut edge = self . forget_node_type () ; loop { edge = match edge . left_kv () { Ok (kv) => return Ok (kv) , Err (last_edge) => match last_edge . into_node () . ascend () { Ok (parent_edge) => parent_edge . forget_node_type () , Err (root) => return Err (root) , } , } } } }
+};
+}

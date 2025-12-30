@@ -1,0 +1,43 @@
+// Generated module macro for crate::render
+macro_rules! Modcrate_render {
+() => {
+        Depcrate_renderconst_!();
+        Depcrate_renderfunction!();
+        Depcrate_renderliteral!();
+        Depcrate_rendermacro_!();
+        Depcrate_renderpattern!();
+        Depcrate_rendertype_alias!();
+        Depcrate_renderunion_literal!();
+        Depcrate_rendervariant!();
+        Depcrate_renderuse_185!();
+        Depcrate_renderuse_186!();
+        Depcrate_renderuse_187!();
+        Depcrate_renderuse_188!();
+        Depcrate_renderuse_189!();
+        Depcrate_renderRenderContext!();
+        Depcrate_renderimpl_191!();
+        Depcrate_renderrender_field!();
+        Depcrate_renderfield_with_receiver!();
+        Depcrate_renderrender_tuple_field!();
+        Depcrate_renderrender_type_inference!();
+        Depcrate_renderrender_path_resolution!();
+        Depcrate_renderrender_pattern_resolution!();
+        Depcrate_renderrender_resolution_with_import!();
+        Depcrate_renderrender_resolution_with_import_pat!();
+        Depcrate_renderrender_expr!();
+        Depcrate_renderget_import_name!();
+        Depcrate_renderscope_def_to_name!();
+        Depcrate_renderrender_resolution_pat!();
+        Depcrate_renderrender_resolution_path!();
+        Depcrate_renderrender_resolution_simple_!();
+        Depcrate_renderres_to_kind!();
+        Depcrate_renderscope_def_docs!();
+        Depcrate_renderscope_def_is_deprecated!();
+        Depcrate_rendermatch_types!();
+        Depcrate_rendercompute_type_match!();
+        Depcrate_rendercompute_exact_name_match!();
+        Depcrate_rendercompute_ref_match!();
+        Depcrate_renderpath_ref_match!();
+        Depcrate_rendertests!();
+    };
+}

@@ -1,0 +1,9 @@
+// Generated macro for RatatuiLogo (struct)
+macro_rules! Depcrate_logoRatatuiLogo {
+() => {
+// Module: crate::logo
+// Provides: {"RatatuiLogo"}
+// Dependencies: {}
+# [doc = " A widget that renders the Ratatui logo"] # [doc = ""] # [doc = " The Ratatui logo takes up two lines of text and comes in two sizes: `Tiny` and `Small`. This may"] # [doc = " be used in an application's help or about screen to show that it is powered by Ratatui."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " The [Ratatui-logo] example demonstrates how to use the `RatatuiLogo` widget. This can be run by"] # [doc = " cloning the Ratatui repository and then running the following command with an optional size"] # [doc = " argument:"] # [doc = ""] # [doc = " ```shell"] # [doc = " cargo run --example logo [size]"] # [doc = " ```"] # [doc = ""] # [doc = " [Ratatui-logo]: https://github.com/ratatui/ratatui/blob/main/ratatui-widgets/examples/logo.rs"] # [doc = ""] # [doc = " ## Tiny (default, 2x15 characters)"] # [doc = ""] # [doc = " ```"] # [doc = " use ratatui::widgets::RatatuiLogo;"] # [doc = ""] # [doc = " # fn draw(frame: &mut ratatui::Frame) {"] # [doc = " frame.render_widget(RatatuiLogo::tiny(), frame.area());"] # [doc = " # }"] # [doc = " ```"] # [doc = ""] # [doc = " Renders:"] # [doc = ""] # [doc = " ```text"] # [doc = " ▛▚▗▀▖▜▘▞▚▝▛▐ ▌▌"] # [doc = " ▛▚▐▀▌▐ ▛▜ ▌▝▄▘▌"] # [doc = " ```"] # [doc = ""] # [doc = " ## Small (2x27 characters)"] # [doc = ""] # [doc = " ```"] # [doc = " use ratatui::widgets::RatatuiLogo;"] # [doc = ""] # [doc = " # fn draw(frame: &mut ratatui::Frame) {"] # [doc = " frame.render_widget(RatatuiLogo::small(), frame.area());"] # [doc = " # }"] # [doc = " ```"] # [doc = ""] # [doc = " Renders:"] # [doc = ""] # [doc = " ```text"] # [doc = " █▀▀▄ ▄▀▀▄▝▜▛▘▄▀▀▄▝▜▛▘█  █ █"] # [doc = " █▀▀▄ █▀▀█ ▐▌ █▀▀█ ▐▌ ▀▄▄▀ █"] # [doc = " ```"] # [derive (Debug , Default , Clone , Copy , PartialEq , Eq)] pub struct RatatuiLogo { size : Size , }
+};
+}

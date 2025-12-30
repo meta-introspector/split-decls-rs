@@ -1,0 +1,42 @@
+// Generated module macro for crate::stats::tests
+macro_rules! Modcrate_stats_tests {
+() => {
+        Depcrate_stats_testsuse_204!();
+        Depcrate_stats_testsuse_205!();
+        Depcrate_stats_testsimpl_206!();
+        Depcrate_stats_testsone_ignored_one_unignored_test!();
+        Depcrate_stats_testsdo_not_run_ignored_tests!();
+        Depcrate_stats_testsignored_tests_result_in_ignored!();
+        Depcrate_stats_teststest_should_panic!();
+        Depcrate_stats_teststest_should_panic_good_message!();
+        Depcrate_stats_teststest_should_panic_bad_message!();
+        Depcrate_stats_teststest_should_panic_non_string_message_type!();
+        Depcrate_stats_teststest_should_panic_but_succeeds!();
+        Depcrate_stats_testsreport_time_test_template!();
+        Depcrate_stats_teststest_should_not_report_time!();
+        Depcrate_stats_teststest_should_report_time!();
+        Depcrate_stats_teststime_test_failure_template!();
+        Depcrate_stats_teststest_error_on_exceed!();
+        Depcrate_stats_teststyped_test_desc!();
+        Depcrate_stats_teststest_exec_time!();
+        Depcrate_stats_teststest_time_options_threshold!();
+        Depcrate_stats_testsparse_ignored_flag!();
+        Depcrate_stats_testsparse_show_output_flag!();
+        Depcrate_stats_testsparse_include_ignored_flag!();
+        Depcrate_stats_testsfilter_for_ignored_option!();
+        Depcrate_stats_testsrun_include_ignored_option!();
+        Depcrate_stats_testsexclude_should_panic_option!();
+        Depcrate_stats_testsexact_filter_match!();
+        Depcrate_stats_testssample_tests!();
+        Depcrate_stats_testsshuffle_tests!();
+        Depcrate_stats_testsshuffle_tests_with_seed!();
+        Depcrate_stats_testsorder_depends_on_more_than_seed!();
+        Depcrate_stats_teststest_metricmap_compare!();
+        Depcrate_stats_teststest_bench_once_no_iter!();
+        Depcrate_stats_teststest_bench_once_iter!();
+        Depcrate_stats_teststest_bench_no_iter!();
+        Depcrate_stats_teststest_bench_iter!();
+        Depcrate_stats_testsshould_sort_failures_before_printing_them!();
+        Depcrate_stats_teststest_dyn_bench_returning_err_fails_when_run_as_test!();
+    };
+}

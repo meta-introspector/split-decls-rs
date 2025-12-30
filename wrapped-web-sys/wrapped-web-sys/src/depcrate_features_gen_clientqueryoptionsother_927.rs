@@ -1,0 +1,9 @@
+// Generated macro for other_927 (other)
+macro_rules! Depcrate_features_gen_ClientQueryOptionsother_927 {
+() => {
+// Module: crate::features::gen_ClientQueryOptions
+// Provides: {"other_927"}
+// Dependencies: {}
+# [wasm_bindgen] extern "C" { # [wasm_bindgen (extends = :: js_sys :: Object , js_name = ClientQueryOptions)] # [derive (Debug , Clone , PartialEq , Eq)] # [doc = "The `ClientQueryOptions` dictionary."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `ClientQueryOptions`*"] pub type ClientQueryOptions ; # [doc = "Get the `includeUncontrolled` field of this object."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `ClientQueryOptions`*"] # [wasm_bindgen (method , getter = "includeUncontrolled")] pub fn get_include_uncontrolled (this : & ClientQueryOptions) -> Option < bool > ; # [doc = "Change the `includeUncontrolled` field of this object."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `ClientQueryOptions`*"] # [wasm_bindgen (method , setter = "includeUncontrolled")] pub fn set_include_uncontrolled (this : & ClientQueryOptions , val : bool) ; # [cfg (feature = "ClientType")] # [doc = "Get the `type` field of this object."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `ClientQueryOptions`, `ClientType`*"] # [wasm_bindgen (method , getter = "type")] pub fn get_type (this : & ClientQueryOptions) -> Option < ClientType > ; # [cfg (feature = "ClientType")] # [doc = "Change the `type` field of this object."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `ClientQueryOptions`, `ClientType`*"] # [wasm_bindgen (method , setter = "type")] pub fn set_type (this : & ClientQueryOptions , val : ClientType) ; }
+};
+}

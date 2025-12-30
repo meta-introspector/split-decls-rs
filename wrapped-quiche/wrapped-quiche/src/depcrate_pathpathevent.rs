@@ -1,0 +1,9 @@
+// Generated macro for PathEvent (enum)
+macro_rules! Depcrate_pathPathEvent {
+() => {
+// Module: crate::path
+// Provides: {"PathEvent"}
+// Dependencies: {}
+# [doc = " A path-specific event."] # [derive (Clone , Debug , PartialEq , Eq)] pub enum PathEvent { # [doc = " A new network path (local address, peer address) has been seen on a"] # [doc = " received packet. Note that this event is only triggered for servers, as"] # [doc = " the client is responsible from initiating new paths. The application may"] # [doc = " then probe this new path, if desired."] New (SocketAddr , SocketAddr) , # [doc = " The related network path between local `SocketAddr` and peer"] # [doc = " `SocketAddr` has been validated."] Validated (SocketAddr , SocketAddr) , # [doc = " The related network path between local `SocketAddr` and peer"] # [doc = " `SocketAddr` failed to be validated. This network path will not be used"] # [doc = " anymore, unless the application requests probing this path again."] FailedValidation (SocketAddr , SocketAddr) , # [doc = " The related network path between local `SocketAddr` and peer"] # [doc = " `SocketAddr` has been closed and is now unusable on this connection."] Closed (SocketAddr , SocketAddr) , # [doc = " The stack observes that the Source Connection ID with the given sequence"] # [doc = " number, initially used by the peer over the first pair of `SocketAddr`s,"] # [doc = " is now reused over the second pair of `SocketAddr`s."] ReusedSourceConnectionId (u64 , (SocketAddr , SocketAddr) , (SocketAddr , SocketAddr) ,) , # [doc = " The connection observed that the peer migrated over the network path"] # [doc = " denoted by the pair of `SocketAddr`, i.e., non-probing packets have been"] # [doc = " received on this network path. This is a server side only event."] # [doc = ""] # [doc = " Note that this event is only raised if the path has been validated."] PeerMigrated (SocketAddr , SocketAddr) , }
+};
+}

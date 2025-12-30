@@ -1,0 +1,9 @@
+// Generated macro for use_111 (use)
+macro_rules! Depcrate_stats_printuse_111 {
+() => {
+// Module: crate::stats_print
+// Provides: {"use_111"}
+// Dependencies: {}
+use std :: ffi :: CStr ;
+};
+}

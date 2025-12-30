@@ -4,6 +4,6 @@ macro_rules! Depcrate_tableuse_482 {
 // Module: crate::table
 // Provides: {"use_482"}
 // Dependencies: {}
-use memo :: MemoTable ;
+use crate :: sync :: { Arc , Mutex } ;
 };
 }

@@ -1,0 +1,43 @@
+// Generated module macro for crate::move_paths
+macro_rules! Modcrate_move_paths {
+() => {
+        Depcrate_move_pathsuse_289!();
+        Depcrate_move_pathsuse_290!();
+        Depcrate_move_pathsuse_291!();
+        Depcrate_move_pathsuse_292!();
+        Depcrate_move_pathsuse_293!();
+        Depcrate_move_pathsuse_294!();
+        Depcrate_move_pathsuse_295!();
+        Depcrate_move_pathsuse_296!();
+        Depcrate_move_pathsuse_297!();
+        Depcrate_move_pathsmacro_298!();
+        Depcrate_move_pathsimpl_299!();
+        Depcrate_move_pathsmacro_300!();
+        Depcrate_move_pathsmacro_301!();
+        Depcrate_move_pathsimpl_302!();
+        Depcrate_move_pathsMovePath!();
+        Depcrate_move_pathsimpl_304!();
+        Depcrate_move_pathsimpl_305!();
+        Depcrate_move_pathsimpl_306!();
+        Depcrate_move_pathsMovePathLinearIter!();
+        Depcrate_move_pathsimpl_308!();
+        Depcrate_move_pathsMoveData!();
+        Depcrate_move_pathsHasMoveData!();
+        Depcrate_move_pathsLocationMap!();
+        Depcrate_move_pathsimpl_312!();
+        Depcrate_move_pathsimpl_313!();
+        Depcrate_move_pathsimpl_314!();
+        Depcrate_move_pathsMoveOut!();
+        Depcrate_move_pathsimpl_316!();
+        Depcrate_move_pathsInit!();
+        Depcrate_move_pathsInitLocation!();
+        Depcrate_move_pathsInitKind!();
+        Depcrate_move_pathsimpl_320!();
+        Depcrate_move_pathsimpl_321!();
+        Depcrate_move_pathsMovePathLookup!();
+        Depcrate_move_pathsbuilder!();
+        Depcrate_move_pathsLookupResult!();
+        Depcrate_move_pathsimpl_340!();
+        Depcrate_move_pathsimpl_341!();
+    };
+}

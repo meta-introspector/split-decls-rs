@@ -1,0 +1,9 @@
+// Generated macro for run (function)
+macro_rules! Depcrate_runtestrun {
+() => {
+// Module: crate::runtest
+// Provides: {"run"}
+// Dependencies: {}
+pub fn run (config : Arc < Config > , stdout : & dyn ConsoleOut , stderr : & dyn ConsoleOut , testpaths : & TestPaths , revision : Option < & str > ,) { match & * config . target { "arm-linux-androideabi" | "armv7-linux-androideabi" | "thumbv7neon-linux-androideabi" | "aarch64-linux-android" => { if ! config . adb_device_status { panic ! ("android device not available") ; } } _ => { if config . debugger == Some (Debugger :: Gdb) && config . gdb . is_none () { panic ! ("gdb not available but debuginfo gdb debuginfo test requested") ; } } } if config . verbose { write ! (stdout , "\n\n") ; } debug ! ("running {}" , testpaths . file) ; let mut props = TestProps :: from_file (& testpaths . file , revision , & config) ; if props . incremental { props . incremental_dir = Some (incremental_dir (& config , testpaths , revision)) ; } let cx = TestCx { config : & config , stdout , stderr , props : & props , testpaths , revision } ; if let Err (e) = create_dir_all (& cx . output_base_dir ()) { panic ! ("failed to create output base directory {}: {e}" , cx . output_base_dir ()) ; } if props . incremental { cx . init_incremental_test () ; } if config . mode == TestMode :: Incremental { assert ! (! props . revisions . is_empty () , "Incremental tests require revisions.") ; for revision in & props . revisions { let mut revision_props = TestProps :: from_file (& testpaths . file , Some (revision) , & config) ; revision_props . incremental_dir = props . incremental_dir . clone () ; let rev_cx = TestCx { config : & config , stdout , stderr , props : & revision_props , testpaths , revision : Some (revision) , } ; rev_cx . run_revision () ; } } else { cx . run_revision () ; } cx . create_stamp () ; }
+};
+}

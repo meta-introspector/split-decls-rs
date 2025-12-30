@@ -1,0 +1,42 @@
+// Generated module macro for crate
+macro_rules! Modcrate {
+() => {
+        Depcrateuse_1!();
+        Depcrateuse_2!();
+        Depcrateuse_3!();
+        Depcrateuse_4!();
+        Depcrateuse_5!();
+        Depcrateuse_6!();
+        Depcrateuse_7!();
+        Depcrateuse_8!();
+        Depcrateuse_9!();
+        DepcrateCheckDiffError!();
+        Depcrateimpl_11!();
+        Depcrateimpl_12!();
+        Depcrateimpl_13!();
+        DepcrateGitError!();
+        Depcrateimpl_15!();
+        DepcrateDiff!();
+        Depcrateimpl_17!();
+        Depcrateimpl_18!();
+        DepcrateCheckDiffRunners!();
+        DepcrateCodeFormatter!();
+        DepcrateRustfmtRunner!();
+        Depcrateimpl_22!();
+        Depcrateimpl_23!();
+        Depcrateimpl_24!();
+        Depcrateimpl_25!();
+        Depcratecreate_config_arg!();
+        Depcrateclone_git_repo!();
+        Depcrategit_remote_add!();
+        Depcrategit_fetch!();
+        Depcrategit_switch!();
+        Depcratechange_directory_to_path!();
+        Depcrateget_ld_library_path!();
+        Depcrateget_cargo_version!();
+        Depcratebuild_rustfmt_from_src!();
+        Depcratecompile_rustfmt!();
+        Depcratesearch_for_rs_files!();
+        Depcratecheck_diff!();
+    };
+}

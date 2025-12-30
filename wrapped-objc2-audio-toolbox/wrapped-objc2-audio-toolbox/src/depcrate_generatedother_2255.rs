@@ -1,0 +1,9 @@
+// Generated macro for other_2255 (other)
+macro_rules! Depcrate_generatedother_2255 {
+() => {
+// Module: crate::generated
+// Provides: {"other_2255"}
+// Dependencies: {}
+extern "C-unwind" { # [doc = " This will return a CFArray of CFDictionaries, one per instrument found in the DLS or SF2 bank."] # [doc = " Each dictionary will contain four items accessed via CFStringRef versions of the keys kInstrumentInfoKey_MSB,"] # [doc = " kInstrumentInfoKey_LSB, kInstrumentInfoKey_Program, and kInstrumentInfoKey_Name."] # [doc = " MSB: An NSNumberRef for the most-significant byte of the bank number.  GM melodic banks will return 120 (0x78)."] # [doc = " GM percussion banks will return 121 (0x79).  Custom banks will return their literal value."] # [doc = " LSB: An NSNumberRef for the least-significant byte of the bank number.  All GM banks will return"] # [doc = " the bank variation number (0-127)."] # [doc = " Program Number: An NSNumberRef for the program number (0-127) of an instrument within a particular bank."] # [doc = " Name: A CFStringRef containing the name of the instrument."] # [doc = ""] # [doc = " Using these MSB, LSB, and Program values will guarantee that the correct instrument is loaded by the DLS synth"] # [doc = " or Sampler Audio Unit."] # [doc = " The CFArray should be released by the caller."] # [doc = ""] # [doc = ""] # [doc = " Parameter `inURL`: The URL for the sound bank."] # [doc = ""] # [doc = " Parameter `outInstrumentInfo`: A pointer to a CFArrayRef to be created and returned by the function."] # [doc = ""] # [doc = " Returns: returns noErr if successful."] # [doc = ""] # [doc = " # Safety"] # [doc = ""] # [doc = " `out_instrument_info` must be a valid pointer."] # [cfg (feature = "objc2-core-foundation")] pub fn CopyInstrumentInfoFromSoundBank (in_url : & CFURL , out_instrument_info : NonNull < * const CFArray > ,) -> OSStatus ; }
+};
+}

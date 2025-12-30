@@ -1,0 +1,9 @@
+// Generated macro for edit_distance (function)
+macro_rules! Depcrate_edit_distanceedit_distance {
+() => {
+// Module: crate::edit_distance
+// Provides: {"edit_distance"}
+// Dependencies: {}
+# [doc = " Finds the [edit distance] between two strings."] # [doc = ""] # [doc = " Returns `None` if the distance exceeds the limit."] # [doc = ""] # [doc = " [edit distance]: https://en.wikipedia.org/wiki/Edit_distance"] pub fn edit_distance (a : & str , b : & str , limit : usize) -> Option < usize > { let mut a = & a . chars () . collect :: < Vec < _ > > () [..] ; let mut b = & b . chars () . collect :: < Vec < _ > > () [..] ; if a . len () < b . len () { mem :: swap (& mut a , & mut b) ; } let min_dist = a . len () - b . len () ; if min_dist > limit { return None ; } while let Some (((b_char , b_rest) , (a_char , a_rest))) = b . split_first () . zip (a . split_first ()) && a_char == b_char { a = a_rest ; b = b_rest ; } while let Some (((b_char , b_rest) , (a_char , a_rest))) = b . split_last () . zip (a . split_last ()) && a_char == b_char { a = a_rest ; b = b_rest ; } if b . len () == 0 { return Some (min_dist) ; } let mut prev_prev = vec ! [usize :: MAX ; b . len () + 1] ; let mut prev = (0 ..= b . len ()) . collect :: < Vec < _ > > () ; let mut current = vec ! [0 ; b . len () + 1] ; for i in 1 ..= a . len () { current [0] = i ; let a_idx = i - 1 ; for j in 1 ..= b . len () { let b_idx = j - 1 ; let substitution_cost = if a [a_idx] == b [b_idx] { 0 } else { 1 } ; current [j] = cmp :: min (prev [j] + 1 , cmp :: min (current [j - 1] + 1 , prev [j - 1] + substitution_cost ,) ,) ; if (i > 1) && (j > 1) && (a [a_idx] == b [b_idx - 1]) && (a [a_idx - 1] == b [b_idx]) { current [j] = cmp :: min (current [j] , prev_prev [j - 2] + 1) ; } } [prev_prev , prev , current] = [prev , current , prev_prev] ; } let distance = prev [b . len ()] ; (distance <= limit) . then_some (distance) }
+};
+}

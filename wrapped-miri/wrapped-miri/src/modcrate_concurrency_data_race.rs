@@ -1,0 +1,55 @@
+// Generated module macro for crate::concurrency::data_race
+macro_rules! Modcrate_concurrency_data_race {
+() => {
+        Depcrate_concurrency_data_raceuse_370!();
+        Depcrate_concurrency_data_raceuse_371!();
+        Depcrate_concurrency_data_raceuse_372!();
+        Depcrate_concurrency_data_raceuse_373!();
+        Depcrate_concurrency_data_raceuse_374!();
+        Depcrate_concurrency_data_raceuse_375!();
+        Depcrate_concurrency_data_raceuse_376!();
+        Depcrate_concurrency_data_raceuse_377!();
+        Depcrate_concurrency_data_raceuse_378!();
+        Depcrate_concurrency_data_raceuse_379!();
+        Depcrate_concurrency_data_raceuse_380!();
+        Depcrate_concurrency_data_raceuse_381!();
+        Depcrate_concurrency_data_raceuse_382!();
+        Depcrate_concurrency_data_raceuse_383!();
+        Depcrate_concurrency_data_raceuse_384!();
+        Depcrate_concurrency_data_raceAllocState!();
+        Depcrate_concurrency_data_raceAtomicRwOrd!();
+        Depcrate_concurrency_data_raceAtomicReadOrd!();
+        Depcrate_concurrency_data_raceAtomicWriteOrd!();
+        Depcrate_concurrency_data_raceAtomicFenceOrd!();
+        Depcrate_concurrency_data_raceThreadClockSet!();
+        Depcrate_concurrency_data_raceimpl_391!();
+        Depcrate_concurrency_data_raceDataRace!();
+        Depcrate_concurrency_data_raceAtomicMemoryCellClocks!();
+        Depcrate_concurrency_data_raceAtomicAccessType!();
+        Depcrate_concurrency_data_raceNaReadType!();
+        Depcrate_concurrency_data_raceimpl_396!();
+        Depcrate_concurrency_data_raceNaWriteType!();
+        Depcrate_concurrency_data_raceimpl_398!();
+        Depcrate_concurrency_data_raceAccessType!();
+        Depcrate_concurrency_data_raceMemoryCellClocks!();
+        Depcrate_concurrency_data_raceThreadExtraState!();
+        Depcrate_concurrency_data_raceGlobalState!();
+        Depcrate_concurrency_data_raceimpl_403!();
+        Depcrate_concurrency_data_raceimpl_404!();
+        Depcrate_concurrency_data_raceimpl_405!();
+        Depcrate_concurrency_data_raceimpl_406!();
+        Depcrate_concurrency_data_raceimpl_407!();
+        Depcrate_concurrency_data_raceimpl_408!();
+        Depcrate_concurrency_data_raceEvalContextExt!();
+        Depcrate_concurrency_data_raceVClockAlloc!();
+        Depcrate_concurrency_data_raceimpl_411!();
+        Depcrate_concurrency_data_raceimpl_412!();
+        Depcrate_concurrency_data_raceFrameState!();
+        Depcrate_concurrency_data_raceLocalClocks!();
+        Depcrate_concurrency_data_raceimpl_415!();
+        Depcrate_concurrency_data_raceimpl_416!();
+        Depcrate_concurrency_data_raceimpl_417!();
+        Depcrate_concurrency_data_raceEvalContextPrivExt!();
+        Depcrate_concurrency_data_raceimpl_419!();
+    };
+}

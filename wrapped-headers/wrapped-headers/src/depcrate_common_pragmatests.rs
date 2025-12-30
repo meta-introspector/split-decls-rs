@@ -1,0 +1,9 @@
+// Generated macro for tests (module)
+macro_rules! Depcrate_common_pragmatests {
+() => {
+// Module: crate::common::pragma
+// Provides: {"tests"}
+// Dependencies: {}
+# [cfg (test)] mod tests { use super :: super :: test_decode ; use super :: Pragma ; # [test] fn no_cache_is_no_cache () { assert ! (Pragma :: no_cache () . is_no_cache ()) ; } # [test] fn etc_is_not_no_cache () { let ext = test_decode :: < Pragma > (& ["dexter"]) . unwrap () ; assert ! (! ext . is_no_cache ()) ; } }
+};
+}

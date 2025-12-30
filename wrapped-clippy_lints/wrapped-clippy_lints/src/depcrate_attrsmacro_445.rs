@@ -1,0 +1,9 @@
+// Generated macro for macro_445 (macro)
+macro_rules! Depcrate_attrsmacro_445 {
+() => {
+// Module: crate::attrs
+// Provides: {"macro_445"}
+// Dependencies: {}
+declare_clippy_lint ! { # [doc = " ### What it does"] # [doc = " Checks for `extern crate` and `use` items annotated with"] # [doc = " lint attributes."] # [doc = ""] # [doc = " This lint permits lint attributes for lints emitted on the items themself."] # [doc = " For `use` items these lints are:"] # [doc = " * ambiguous_glob_reexports"] # [doc = " * dead_code"] # [doc = " * deprecated"] # [doc = " * hidden_glob_reexports"] # [doc = " * unreachable_pub"] # [doc = " * unused"] # [doc = " * unused_braces"] # [doc = " * unused_import_braces"] # [doc = " * clippy::disallowed_types"] # [doc = " * clippy::enum_glob_use"] # [doc = " * clippy::macro_use_imports"] # [doc = " * clippy::module_name_repetitions"] # [doc = " * clippy::redundant_pub_crate"] # [doc = " * clippy::single_component_path_imports"] # [doc = " * clippy::unsafe_removed_from_name"] # [doc = " * clippy::wildcard_imports"] # [doc = ""] # [doc = " For `extern crate` items these lints are:"] # [doc = " * `unused_imports` on items with `#[macro_use]`"] # [doc = ""] # [doc = " ### Why is this bad?"] # [doc = " Lint attributes have no effect on crate imports. Most"] # [doc = " likely a `!` was forgotten."] # [doc = ""] # [doc = " ### Example"] # [doc = " ```ignore"] # [doc = " #[deny(dead_code)]"] # [doc = " extern crate foo;"] # [doc = " #[forbid(dead_code)]"] # [doc = " use foo::bar;"] # [doc = " ```"] # [doc = ""] # [doc = " Use instead:"] # [doc = " ```rust,ignore"] # [doc = " #[allow(unused_imports)]"] # [doc = " use foo::baz;"] # [doc = " #[allow(unused_imports)]"] # [doc = " #[macro_use]"] # [doc = " extern crate baz;"] # [doc = " ```"] # [clippy :: version = "pre 1.29.0"] pub USELESS_ATTRIBUTE , correctness , "use of lint attributes on `extern crate` items" }
+};
+}

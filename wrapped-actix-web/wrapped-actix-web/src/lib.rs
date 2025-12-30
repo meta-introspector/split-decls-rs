@@ -1,0 +1,63 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcratehandler.rs");
+include!("depcrate_handlergraphql.rs");
+include!("depcrate_requestimpl_20.rs");
+include!("depcrate_requestgraphqlrequest.rs");
+include!("depcrate_subscriptionuse_35.rs");
+include!("depcrate_subscriptionimpl_42.rs");
+include!("depcrate_subscriptiongraphqlsubscription.rs");
+include!("depcrate_subscriptionimpl_41.rs");
+include!("depcrate_subscriptiongraphqlsubscriptionactor.rs");
+include!("depcrate_requestuse_13.rs");
+include!("depcrate_subscriptionimpl_45.rs");
+include!("depcrate_requestuse_16.rs");
+include!("depcrateuse_48.rs");
+include!("depcrate_requestimpl_23.rs");
+include!("depcrate_handlerimpl_9.rs");
+include!("depcrate_requestuse_15.rs");
+include!("depcrateuse_49.rs");
+include!("depcrate_subscriptionimpl_46.rs");
+include!("depcrate_subscriptionimpl_44.rs");
+include!("depcrate_requestuse_14.rs");
+include!("depcrate_subscriptionuse_34.rs");
+include!("depcrate_subscriptionheartbeat_interval.rs");
+include!("depcrate_requestbatchtorequestmapper.rs");
+include!("depcrate_handleruse_2.rs");
+include!("depcrate_requestgraphqlresponse.rs");
+include!("depcrate_subscriptionuse_32.rs");
+include!("depcrateuse_47.rs");
+include!("depcrate_requestimpl_22.rs");
+include!("depcrate_subscriptionuse_30.rs");
+include!("depcrate_subscriptionuse_31.rs");
+include!("depcratesubscription.rs");
+include!("depcrate_handleruse_6.rs");
+include!("depcrate_requestimpl_26.rs");
+include!("depcrate_subscriptionclient_timeout.rs");
+include!("depcrate_subscriptionuse_36.rs");
+include!("depcrate_subscriptionparsegraphqlprotocolerror.rs");
+include!("depcrate_handleruse_4.rs");
+include!("depcrate_subscriptionuse_33.rs");
+include!("depcrate_handleruse_7.rs");
+include!("depcrate_requestimpl_18.rs");
+include!("depcrate_handlerimpl_10.rs");
+include!("depcrate_handleruse_3.rs");
+include!("depcraterequest.rs");
+include!("depcrate_requestuse_12.rs");
+include!("depcrate_requestgraphqlbatchrequest.rs");
+include!("depcrate_handleruse_5.rs");
+include!("depcrate_requestimpl_28.rs");
+include!("depcrate_requestimpl_25.rs");
+include!("depcrate_requestcbor.rs");
+include!("modcrate_handler.rs");
+include!("modcrate_request.rs");
+include!("modcrate.rs");
+include!("modcrate_subscription.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate_handler!();
+    Modcrate_request!();
+    Modcrate!();
+    Modcrate_subscription!();
+}

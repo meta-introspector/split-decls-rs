@@ -1,0 +1,9 @@
+// Generated macro for invert_special_case_legacy (function)
+macro_rules! Depcrate_utilsinvert_special_case_legacy {
+() => {
+// Module: crate::utils
+// Provides: {"invert_special_case_legacy"}
+// Dependencies: {}
+fn invert_special_case_legacy (expr : & ast :: Expr) -> Option < ast :: Expr > { match expr { ast :: Expr :: BinExpr (bin) => { let bin = bin . clone_subtree () ; let op_token = bin . op_token () ? ; let rev_token = match op_token . kind () { T ! [==] => T ! [!=] , T ! [!=] => T ! [==] , T ! [<] => T ! [>=] , T ! [<=] => T ! [>] , T ! [>] => T ! [<=] , T ! [>=] => T ! [<] , _ => { return Some (make :: expr_prefix (T ! [!] , make :: expr_paren (expr . clone ()) . into ()) . into () ,) ; } } ; let mut bin_editor = SyntaxEditor :: new (bin . syntax () . clone ()) ; bin_editor . replace (op_token , make :: token (rev_token)) ; ast :: Expr :: cast (bin_editor . finish () . new_root () . clone ()) } ast :: Expr :: MethodCallExpr (mce) => { let receiver = mce . receiver () ? ; let method = mce . name_ref () ? ; let arg_list = mce . arg_list () ? ; let method = match method . text () . as_str () { "is_some" => "is_none" , "is_none" => "is_some" , "is_ok" => "is_err" , "is_err" => "is_ok" , _ => return None , } ; Some (make :: expr_method_call (receiver , make :: name_ref (method) , arg_list) . into ()) } ast :: Expr :: PrefixExpr (pe) if pe . op_kind () ? == ast :: UnaryOp :: Not => match pe . expr () ? { ast :: Expr :: ParenExpr (parexpr) => parexpr . expr () , _ => pe . expr () , } , ast :: Expr :: Literal (lit) => match lit . kind () { ast :: LiteralKind :: Bool (b) => match b { true => Some (ast :: Expr :: Literal (make :: expr_literal ("false"))) , false => Some (ast :: Expr :: Literal (make :: expr_literal ("true"))) , } , _ => None , } , _ => None , } }
+};
+}

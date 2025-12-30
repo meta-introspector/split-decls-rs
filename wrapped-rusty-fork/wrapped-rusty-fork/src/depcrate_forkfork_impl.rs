@@ -1,0 +1,9 @@
+// Generated macro for fork_impl (function)
+macro_rules! Depcrate_forkfork_impl {
+() => {
+// Module: crate::fork
+// Provides: {"fork_impl"}
+// Dependencies: {}
+fn fork_impl (test_name : & str , fork_id : String , process_modifier : & mut dyn FnMut (& mut process :: Command) , in_parent : & mut dyn FnMut (& mut ChildWrapper , & mut fs :: File) , in_child : & mut dyn FnMut ()) -> Result < () > { let mut occurs = env :: var (OCCURS_ENV) . unwrap_or_else (| _ | String :: new ()) ; if occurs . contains (& fork_id) { match panic :: catch_unwind (panic :: AssertUnwindSafe (in_child)) { Ok (_) => process :: exit (0) , Err (_) => process :: exit (70) , } } else { if occurs . len () > 16 * OCCURS_TERM_LENGTH { panic ! ("rusty-fork: Not forking due to >=16 levels of recursion") ; } let file = tempfile :: tempfile () ? ; struct KillOnDrop (ChildWrapper , fs :: File) ; impl Drop for KillOnDrop { fn drop (& mut self) { let _ = self . 0 . kill () ; let _ = self . 1 . seek (io :: SeekFrom :: Start (0)) ; let mut buf = Vec :: new () ; let mut br = io :: BufReader :: new (& mut self . 1) ; loop { if br . read_until (b'\n' , & mut buf) . is_err () { break ; } if buf . is_empty () { break ; } print ! ("{}" , String :: from_utf8_lossy (& buf)) ; buf . clear () ; } } } occurs . push_str (& fork_id) ; let mut command = process :: Command :: new (env :: current_exe () . expect ("current_exe() failed, cannot fork")) ; command . args (cmdline :: strip_cmdline (env :: args ()) ?) . args (cmdline :: RUN_TEST_ARGS) . arg (test_name) . env (OCCURS_ENV , & occurs) . stdin (process :: Stdio :: null ()) . stdout (file . try_clone () ?) . stderr (file . try_clone () ?) ; process_modifier (& mut command) ; let mut child = command . spawn () . map (ChildWrapper :: new) . map (| p | KillOnDrop (p , file)) ? ; let ret = in_parent (& mut child . 0 , & mut child . 1) ; Ok (ret) } }
+};
+}

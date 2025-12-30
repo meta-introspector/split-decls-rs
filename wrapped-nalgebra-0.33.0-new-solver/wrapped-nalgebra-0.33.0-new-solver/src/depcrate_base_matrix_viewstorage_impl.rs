@@ -1,0 +1,9 @@
+// Generated macro for storage_impl (macro)
+macro_rules! Depcrate_base_matrix_viewstorage_impl {
+() => {
+// Module: crate::base::matrix_view
+// Provides: {"storage_impl"}
+// Dependencies: {}
+macro_rules ! storage_impl (($ ($ T : ident) ,* $ (,) *) => { $ (unsafe impl <'a , T , R : Dim , C : Dim , RStride : Dim , CStride : Dim > RawStorage < T , R , C > for $ T <'a , T , R , C , RStride , CStride > { type RStride = RStride ; type CStride = CStride ; # [inline] fn ptr (& self) -> * const T { self . ptr } # [inline] fn shape (& self) -> (R , C) { self . shape } # [inline] fn strides (& self) -> (Self :: RStride , Self :: CStride) { self . strides } # [inline] fn is_contiguous (& self) -> bool { if (RStride :: is ::< U1 > () && C :: is ::< U1 > ()) || (CStride :: is ::< U1 > () && R :: is ::< U1 > ()) { true } else { let (nrows , _) = self . shape () ; let (srows , scols) = self . strides () ; srows . value () == 1 && scols . value () == nrows . value () } } # [inline] unsafe fn as_slice_unchecked (& self) -> & [T] { let (nrows , ncols) = self . shape () ; if nrows . value () != 0 && ncols . value () != 0 { let sz = self . linear_index (nrows . value () - 1 , ncols . value () - 1) ; slice :: from_raw_parts (self . ptr , sz + 1) } else { slice :: from_raw_parts (self . ptr , 0) } } } unsafe impl <'a , T : Scalar , R : Dim , C : Dim , RStride : Dim , CStride : Dim > Storage < T , R , C > for $ T <'a , T , R , C , RStride , CStride > { # [inline] fn into_owned (self) -> Owned < T , R , C > where DefaultAllocator : Allocator < R , C > { self . clone_owned () } # [inline] fn clone_owned (& self) -> Owned < T , R , C > where DefaultAllocator : Allocator < R , C > { let (nrows , ncols) = self . shape () ; let it = MatrixIter :: new (self) . cloned () ; DefaultAllocator :: allocate_from_iterator (nrows , ncols , it) } # [inline] fn forget_elements (self) { } }) * }) ;
+};
+}

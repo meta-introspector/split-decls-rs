@@ -1,0 +1,9 @@
+// Generated macro for other_34454 (other)
+macro_rules! Depcrate_um_powrprofother_34454 {
+() => {
+// Module: crate::um::powrprof
+// Provides: {"other_34454"}
+// Dependencies: {}
+extern "system" { pub fn GetPwrDiskSpindownRange (puiMax : PUINT , puiMin : PUINT ,) -> BOOLEAN ; pub fn EnumPwrSchemes (lpfn : PWRSCHEMESENUMPROC , lParam : LPARAM ,) -> BOOLEAN ; pub fn ReadGlobalPwrPolicy (pGlobalPowerPolicy : PGLOBAL_POWER_POLICY ,) -> BOOLEAN ; pub fn ReadPwrScheme (uiID : UINT , pPowerPolicy : PPOWER_POLICY ,) -> BOOLEAN ; pub fn WritePwrScheme (puiID : PUINT , lpszSchemeName : LPCWSTR , lpszDescription : LPCWSTR , lpScheme : PPOWER_POLICY ,) -> BOOLEAN ; pub fn WriteGlobalPwrPolicy (pGlobalPowerPolicy : PGLOBAL_POWER_POLICY ,) -> BOOLEAN ; pub fn DeletePwrScheme (uiID : UINT ,) -> BOOLEAN ; pub fn GetActivePwrScheme (puiID : PUINT ,) -> BOOLEAN ; pub fn SetActivePwrScheme (uiID : UINT , pGlobalPowerPolicy : PGLOBAL_POWER_POLICY , pPowerPolicy : PPOWER_POLICY ,) -> BOOLEAN ; pub fn IsPwrSuspendAllowed () -> BOOLEAN ; pub fn IsPwrHibernateAllowed () -> BOOLEAN ; pub fn IsPwrShutdownAllowed () -> BOOLEAN ; pub fn IsAdminOverrideActive (papp : PADMINISTRATOR_POWER_POLICY ,) -> BOOLEAN ; pub fn SetSuspendState (bHibernate : BOOLEAN , bForce : BOOLEAN , bWakeupEventsDisabled : BOOLEAN ,) -> BOOLEAN ; pub fn GetCurrentPowerPolicies (pGlobalPowerPolicy : PGLOBAL_POWER_POLICY , pPowerPolicy : PPOWER_POLICY ,) -> BOOLEAN ; pub fn CanUserWritePwrScheme () -> BOOLEAN ; pub fn ReadProcessorPwrScheme (uiID : UINT , pMachineProcessorPowerPolicy : PMACHINE_PROCESSOR_POWER_POLICY ,) -> BOOLEAN ; pub fn WriteProcessorPwrScheme (uiID : UINT , pMachineProcessorPowerPolicy : PMACHINE_PROCESSOR_POWER_POLICY ,) -> BOOLEAN ; pub fn ValidatePowerPolicies (pGlobalPowerPolicy : PGLOBAL_POWER_POLICY , pPowerPolicy : PPOWER_POLICY ,) -> BOOLEAN ; }
+};
+}

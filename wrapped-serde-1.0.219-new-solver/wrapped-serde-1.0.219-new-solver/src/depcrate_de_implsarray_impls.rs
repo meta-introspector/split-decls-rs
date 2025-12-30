@@ -1,0 +1,9 @@
+// Generated macro for array_impls (macro)
+macro_rules! Depcrate_de_implsarray_impls {
+() => {
+// Module: crate::de::impls
+// Provides: {"array_impls"}
+// Dependencies: {}
+macro_rules ! array_impls { ($ ($ len : expr => ($ ($ n : tt) +)) +) => { $ (impl <'de , T > Visitor <'de > for ArrayVisitor < [T ; $ len] > where T : Deserialize <'de >, { type Value = [T ; $ len] ; fn expecting (& self , formatter : & mut fmt :: Formatter) -> fmt :: Result { formatter . write_str (concat ! ("an array of length " , $ len)) } # [inline] fn visit_seq < A > (self , mut seq : A) -> Result < Self :: Value , A :: Error > where A : SeqAccess <'de >, { Ok ([$ (match tri ! (seq . next_element ()) { Some (val) => val , None => return Err (Error :: invalid_length ($ n , & self)) , }) ,+]) } } impl <'a , 'de , T > Visitor <'de > for ArrayInPlaceVisitor <'a , [T ; $ len] > where T : Deserialize <'de >, { type Value = () ; fn expecting (& self , formatter : & mut fmt :: Formatter) -> fmt :: Result { formatter . write_str (concat ! ("an array of length " , $ len)) } # [inline] fn visit_seq < A > (self , mut seq : A) -> Result < Self :: Value , A :: Error > where A : SeqAccess <'de >, { let mut fail_idx = None ; for (idx , dest) in self . 0 [..] . iter_mut () . enumerate () { if tri ! (seq . next_element_seed (InPlaceSeed (dest))) . is_none () { fail_idx = Some (idx) ; break ; } } if let Some (idx) = fail_idx { return Err (Error :: invalid_length (idx , & self)) ; } Ok (()) } } impl <'de , T > Deserialize <'de > for [T ; $ len] where T : Deserialize <'de >, { fn deserialize < D > (deserializer : D) -> Result < Self , D :: Error > where D : Deserializer <'de >, { deserializer . deserialize_tuple ($ len , ArrayVisitor ::< [T ; $ len] >:: new ()) } fn deserialize_in_place < D > (deserializer : D , place : & mut Self) -> Result < () , D :: Error > where D : Deserializer <'de >, { deserializer . deserialize_tuple ($ len , ArrayInPlaceVisitor (place)) } }) + } }
+};
+}

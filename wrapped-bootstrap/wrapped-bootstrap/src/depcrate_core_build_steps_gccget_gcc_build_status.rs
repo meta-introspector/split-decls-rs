@@ -1,0 +1,10 @@
+// Generated macro for get_gcc_build_status (function)
+macro_rules! Depcrate_core_build_steps_gccget_gcc_build_status {
+() => {
+// Module: crate::core::build_steps::gcc
+// Provides: {"get_gcc_build_status"}
+// Dependencies: {}
+# [doc = " This returns information about whether GCC should be built or if it's already built."] # [doc = " It transparently handles downloading GCC from CI if needed."] # [doc = ""] # [doc = " It's used to avoid busting caches during x.py check -- if we've already built"] # [doc = " GCC, it's fine for us to not try to avoid doing so."] pub fn get_gcc_build_status (builder : & Builder < '_ > , target : TargetSelection) -> GccBuildStatus { if let Some (path) = try_download_gcc (builder , target) { return GccBuildStatus :: AlreadyBuilt (path) ; } static STAMP_HASH_MEMO : OnceLock < String > = OnceLock :: new () ; let smart_stamp_hash = STAMP_HASH_MEMO . get_or_init (| | { generate_smart_stamp_hash (builder , & builder . config . src . join ("src/gcc") , builder . in_tree_gcc_info . sha () . unwrap_or_default () ,) }) ; builder . config . update_submodule ("src/gcc") ; let root = builder . src . join ("src/gcc") ; let out_dir = builder . gcc_out (target) . join ("build") ; let install_dir = builder . gcc_out (target) . join ("install") ; let stamp = BuildStamp :: new (& out_dir) . with_prefix ("gcc") . add_stamp (smart_stamp_hash) ; if stamp . is_up_to_date () { if stamp . stamp () . is_empty () { builder . info ("Could not determine the GCC submodule commit hash. \
+                     Assuming that an GCC rebuild is not necessary." ,) ; builder . info (& format ! ("To force GCC to rebuild, remove the file `{}`" , stamp . path () . display ())) ; } let path = libgccjit_built_path (& install_dir) ; if path . is_file () { return GccBuildStatus :: AlreadyBuilt (path) ; } else { builder . info (& format ! ("GCC stamp is up-to-date, but the libgccjit.so file was not found at `{}`" , path . display () ,)) ; } } GccBuildStatus :: ShouldBuild (Meta { stamp , out_dir , install_dir , root }) }
+};
+}

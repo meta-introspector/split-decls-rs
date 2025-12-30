@@ -1,0 +1,75 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcrate_prefixerror.rs");
+include!("depcrate_verifyuse_43.rs");
+include!("depcrate_prefiximpl_38.rs");
+include!("depcrate_kinduse_50.rs");
+include!("depcrate_iouse_9.rs");
+include!("depcrate_kindimpl_52.rs");
+include!("depcrateuse_13.rs");
+include!("depcrate_prefiximpl_41.rs");
+include!("depcrate_kindimpl_55.rs");
+include!("depcrate_object_idimpl_23.rs");
+include!("depcratemacro_1.rs");
+include!("depcrate_object_idimpl_28.rs");
+include!("depcrate_object_idimpl_29.rs");
+include!("depcrateprefix.rs");
+include!("depcratekind.rs");
+include!("depcrate_object_idobjectid.rs");
+include!("depcrate_verifyerror.rs");
+include!("depcrate_object_idimpl_21.rs");
+include!("depcrate_hasher_impl.rs");
+include!("depcrate_object_idimpl_20.rs");
+include!("depcrate_object_idimpl_25.rs");
+include!("depcrate_object_idimpl_22.rs");
+include!("depcrate_object_idimpl_27.rs");
+include!("depcrate_object_idimpl_31.rs");
+include!("depcrateuse_7.rs");
+include!("depcrate_object_idimpl_30.rs");
+include!("depcrateobject_id.rs");
+include!("depcrate_prefixuse_34.rs");
+include!("depcrate_prefiximpl_39.rs");
+include!("depcrate_object_iddecode.rs");
+include!("depcrate_object_iduse_15.rs");
+include!("depcrate_prefixuse_35.rs");
+include!("depcrateverify.rs");
+include!("depcrateio.rs");
+include!("depcratesize_of_sha1_digest.rs");
+include!("depcratekind.rs");
+include!("depcrateborrowed.rs");
+include!("depcrate_object_idimpl_24.rs");
+include!("depcrate_object_idimpl_26.rs");
+include!("depcrate_prefixfrom_hex.rs");
+include!("depcrate_verifyimpl_45.rs");
+include!("depcrate_object_iduse_16.rs");
+include!("depcrate_hashererror.rs");
+include!("depcrate_ioerror.rs");
+include!("depcrateuse_32.rs");
+include!("depcrate_prefiximpl_40.rs");
+include!("depcrateprefix.rs");
+include!("depcrate_object_idimpl_18.rs");
+include!("depcrate_kinduse_51.rs");
+include!("depcrate_kindimpl_53.rs");
+include!("depcratehasher.rs");
+include!("depcrate_kindimpl_54.rs");
+include!("depcrate_iouse_12.rs");
+include!("depcrateuse_3.rs");
+include!("depcrate_io_impl.rs");
+include!("modcrate_io.rs");
+include!("modcrate_prefix.rs");
+include!("modcrate_verify.rs");
+include!("modcrate_kind.rs");
+include!("modcrate.rs");
+include!("modcrate_hasher.rs");
+include!("modcrate_object_id.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate_io!();
+    Modcrate_prefix!();
+    Modcrate_verify!();
+    Modcrate_kind!();
+    Modcrate!();
+    Modcrate_hasher!();
+    Modcrate_object_id!();
+}

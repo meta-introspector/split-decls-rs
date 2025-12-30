@@ -1,0 +1,9 @@
+// Generated macro for impl_340 (impl)
+macro_rules! Depcrate_borrow_trackerimpl_340 {
+() => {
+// Module: crate::borrow_tracker
+// Provides: {"impl_340"}
+// Dependencies: {}
+# [doc = " Utilities for initialization and ID generation"] impl GlobalStateInner { pub fn new (borrow_tracker_method : BorrowTrackerMethod , tracked_pointer_tags : FxHashSet < BorTag > , retag_fields : RetagFields ,) -> Self { GlobalStateInner { borrow_tracker_method , next_ptr_tag : BorTag :: one () , root_ptr_tags : FxHashMap :: default () , protected_tags : FxHashMap :: default () , tracked_pointer_tags , retag_fields , } } # [doc = " Generates a new pointer tag. Remember to also check track_pointer_tags and log its creation!"] fn new_ptr (& mut self) -> BorTag { let id = self . next_ptr_tag ; self . next_ptr_tag = id . succ () . unwrap () ; id } pub fn new_frame (& mut self) -> FrameState { FrameState { protected_tags : SmallVec :: new () } } fn end_call (& mut self , frame : & machine :: FrameExtra < '_ >) { for (_ , tag) in & frame . borrow_tracker . as_ref () . expect ("we should have borrow tracking data") . protected_tags { self . protected_tags . remove (tag) ; } } pub fn root_ptr_tag (& mut self , id : AllocId , machine : & MiriMachine < '_ >) -> BorTag { self . root_ptr_tags . get (& id) . copied () . unwrap_or_else (| | { let tag = self . new_ptr () ; if self . tracked_pointer_tags . contains (& tag) { machine . emit_diagnostic (NonHaltingDiagnostic :: CreatedPointerTag (tag . inner () , None , None ,)) ; } trace ! ("New allocation {:?} has rpot tag {:?}" , id , tag) ; self . root_ptr_tags . try_insert (id , tag) . unwrap () ; tag }) } pub fn remove_unreachable_allocs (& mut self , allocs : & LiveAllocs < '_ , '_ >) { self . root_ptr_tags . retain (| id , _ | allocs . is_live (* id)) ; } pub fn borrow_tracker_method (& self) -> BorrowTrackerMethod { self . borrow_tracker_method } }
+};
+}

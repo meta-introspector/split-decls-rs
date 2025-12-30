@@ -1,0 +1,39 @@
+// Generated module macro for crate::primitive_date_time
+macro_rules! Modcrate_primitive_date_time {
+() => {
+        Depcrate_primitive_date_timeuse_814!();
+        Depcrate_primitive_date_timeuse_815!();
+        Depcrate_primitive_date_timeuse_816!();
+        Depcrate_primitive_date_timeuse_817!();
+        Depcrate_primitive_date_timeuse_818!();
+        Depcrate_primitive_date_timeuse_819!();
+        Depcrate_primitive_date_timeuse_820!();
+        Depcrate_primitive_date_timeuse_821!();
+        Depcrate_primitive_date_timeuse_822!();
+        Depcrate_primitive_date_timeuse_823!();
+        Depcrate_primitive_date_timeuse_824!();
+        Depcrate_primitive_date_timeuse_825!();
+        Depcrate_primitive_date_timeuse_826!();
+        Depcrate_primitive_date_timePrimitiveDateTime!();
+        Depcrate_primitive_date_timeimpl_828!();
+        Depcrate_primitive_date_timeimpl_829!();
+        Depcrate_primitive_date_timeimpl_830!();
+        Depcrate_primitive_date_timeimpl_831!();
+        Depcrate_primitive_date_timeimpl_832!();
+        Depcrate_primitive_date_timeimpl_833!();
+        Depcrate_primitive_date_timeimpl_834!();
+        Depcrate_primitive_date_timeimpl_835!();
+        Depcrate_primitive_date_timeimpl_836!();
+        Depcrate_primitive_date_timeimpl_837!();
+        Depcrate_primitive_date_timeimpl_838!();
+        Depcrate_primitive_date_timeimpl_839!();
+        Depcrate_primitive_date_timeimpl_840!();
+        Depcrate_primitive_date_timeimpl_841!();
+        Depcrate_primitive_date_timeimpl_842!();
+        Depcrate_primitive_date_timeimpl_843!();
+        Depcrate_primitive_date_timeimpl_844!();
+        Depcrate_primitive_date_timeimpl_845!();
+        Depcrate_primitive_date_timeimpl_846!();
+        Depcrate_primitive_date_timeimpl_847!();
+    };
+}

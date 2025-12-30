@@ -1,0 +1,9 @@
+// Generated macro for macro_160 (macro)
+macro_rules! Depcrate_msgs_enumsmacro_160 {
+() => {
+// Module: crate::msgs::enums
+// Provides: {"macro_160"}
+// Dependencies: {}
+enum_builder ! { # [doc = " The `NamedGroup` TLS protocol enum.  Values in this enum are taken"] # [doc = " from the various RFCs covering TLS, and are listed by IANA."] # [doc = " The `Unknown` item is used when processing unrecognized ordinals."] # [doc = ""] # [doc = " This enum is used for recognizing key exchange groups advertised"] # [doc = " by a peer during a TLS handshake. It is **not** a list of groups that"] # [doc = " Rustls supports. See [`crate::crypto::ring::kx_group`] for the list of supported"] # [doc = " key exchange groups."] # [repr (u16)] pub enum NamedGroup { secp256r1 => 0x0017 , secp384r1 => 0x0018 , secp521r1 => 0x0019 , X25519 => 0x001d , X448 => 0x001e , # [doc = " <https://www.iana.org/go/rfc8734>"] brainpoolP256r1tls13 => 0x001f , # [doc = " <https://www.iana.org/go/rfc8734>"] brainpoolP384r1tls13 => 0x0020 , # [doc = " <https://www.iana.org/go/rfc8734>"] brainpoolP512r1tls13 => 0x0021 , # [doc = " <https://www.iana.org/go/rfc8998>"] curveSM2 => 0x0029 , FFDHE2048 => 0x0100 , FFDHE3072 => 0x0101 , FFDHE4096 => 0x0102 , FFDHE6144 => 0x0103 , FFDHE8192 => 0x0104 , # [doc = " <https://datatracker.ietf.org/doc/draft-ietf-tls-mlkem/>"] MLKEM512 => 0x0200 , # [doc = " <https://datatracker.ietf.org/doc/draft-ietf-tls-mlkem/>"] MLKEM768 => 0x0201 , # [doc = " <https://datatracker.ietf.org/doc/draft-ietf-tls-mlkem/>"] MLKEM1024 => 0x0202 , # [doc = " <https://datatracker.ietf.org/doc/draft-ietf-tls-ecdhe-mlkem/>"] secp256r1MLKEM768 => 0x11eb , # [doc = " <https://datatracker.ietf.org/doc/draft-ietf-tls-ecdhe-mlkem/>"] X25519MLKEM768 => 0x11ec , # [doc = " <https://datatracker.ietf.org/doc/draft-ietf-tls-ecdhe-mlkem/>"] secp384r1MLKEM1024 => 0x11ed , } }
+};
+}

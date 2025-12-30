@@ -1,0 +1,9 @@
+// Generated macro for macro_535 (macro)
+macro_rules! Depcrate_utilsmacro_535 {
+() => {
+// Module: crate::utils
+// Provides: {"macro_535"}
+// Dependencies: {}
+pin_project ! { # [doc = " An `ActorStream` that periodically runs a function in the actor's context."] # [doc = ""] # [doc = " Unless you specifically need access to the future, use [`Context::run_interval`] instead."] # [doc = ""] # [doc = " [`Context::run_interval`]: ../prelude/trait.AsyncContext.html#method.run_interval"] # [doc = ""] # [doc = " ```"] # [doc = " # use std::io;"] # [doc = " use std::time::Duration;"] # [doc = " use actix::prelude::*;"] # [doc = " use actix::utils::IntervalFunc;"] # [doc = ""] # [doc = " struct MyActor;"] # [doc = ""] # [doc = " impl MyActor {"] # [doc = "     fn tick(&mut self, context: &mut Context<Self>) {"] # [doc = "         println!(\"tick\");"] # [doc = "     }"] # [doc = " }"] # [doc = ""] # [doc = " impl Actor for MyActor {"] # [doc = "    type Context = Context<Self>;"] # [doc = ""] # [doc = "    fn started(&mut self, context: &mut Context<Self>) {"] # [doc = "        // spawn an interval stream into our context"] # [doc = "        IntervalFunc::new(Duration::from_millis(100), Self::tick)"] # [doc = "            .finish()"] # [doc = "            .spawn(context);"] # [doc = " #      context.run_later(Duration::from_millis(200), |_, _| System::current().stop());"] # [doc = "    }"] # [doc = " }"] # [doc = " # fn main() {"] # [doc = " #    let mut sys = System::new();"] # [doc = " #    let addr = sys.block_on(async { MyActor.start() });"] # [doc = " #    sys.run();"] # [doc = " # }"] # [doc = " ```"] # [must_use = "future do nothing unless polled"] # [allow (clippy :: type_complexity)] pub struct IntervalFunc < A : Actor > { f : Box < dyn FnMut (& mut A , & mut A :: Context) >, interval : Duration , # [pin] timer : Sleep , } }
+};
+}

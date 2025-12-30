@@ -1,9 +1,9 @@
-// Generated macro for repeatn (function)
-macro_rules! Depcrate_iter_repeatrepeatn {
+// Generated macro for RepeatN (struct)
+macro_rules! Depcrate_iter_repeatRepeatN {
 () => {
 // Module: crate::iter::repeat
-// Provides: {"repeatn"}
+// Provides: {"RepeatN"}
 // Dependencies: {}
-# [doc = " Creates a parallel iterator that produces `n` repeats of `element`"] # [doc = " (by cloning it)."] # [doc = ""] # [doc = " Deprecated in favor of [`repeat_n`] for consistency with the standard library."] # [deprecated (note = "use `repeat_n`")] pub fn repeatn < T : Clone + Send > (element : T , n : usize) -> RepeatN < T > { repeat_n (element , n) }
+# [doc = " Iterator adaptor for [the `repeat_n()` function]."] # [doc = ""] # [doc = " [the `repeat_n()` function]: repeat_n()"] # [derive (Clone)] pub struct RepeatN < T > { inner : RepeatNProducer < T > , }
 };
 }

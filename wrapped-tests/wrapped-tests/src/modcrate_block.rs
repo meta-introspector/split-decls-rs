@@ -1,0 +1,44 @@
+// Generated module macro for crate::block
+macro_rules! Modcrate_block {
+() => {
+        Depcrate_blockuse_28!();
+        Depcrate_blockuse_29!();
+        Depcrate_blockuse_30!();
+        Depcrate_blockuse_31!();
+        Depcrate_blockuse_32!();
+        Depcrate_blockuse_33!();
+        Depcrate_blockuse_34!();
+        Depcrate_blockuse_35!();
+        Depcrate_blockLargeStruct!();
+        Depcrate_blockimpl_37!();
+        Depcrate_blockimpl_38!();
+        Depcrate_blockAdd12!();
+        Depcrate_blockVoidToVoid!();
+        Depcrate_blockimpl_41!();
+        Depcrate_blockVoidToInt!();
+        Depcrate_blockimpl_43!();
+        Depcrate_blockIntToInt!();
+        Depcrate_blockimpl_45!();
+        Depcrate_blockother_46!();
+        Depcrate_blocktest_block_debugging!();
+        Depcrate_blocktest_int_block!();
+        Depcrate_blocktest_add_block!();
+        Depcrate_blocktest_add_12!();
+        Depcrate_blocktest_large_struct_block!();
+        Depcrate_blocktest_block_copy!();
+        Depcrate_blocktest_block_stack_move!();
+        Depcrate_blockCount!();
+        Depcrate_blockmacro_55!();
+        Depcrate_blockimpl_56!();
+        Depcrate_blockCloneDropTracker!();
+        Depcrate_blockimpl_58!();
+        Depcrate_blockimpl_59!();
+        Depcrate_blockimpl_60!();
+        Depcrate_blockstack_new_clone_drop!();
+        Depcrate_blockrc_new_clone_drop!();
+        Depcrate_blockstack_to_rc!();
+        Depcrate_blockretain_release_rc_block!();
+        Depcrate_blockretain_release_stack_block!();
+        Depcrate_blockcapture_retained!();
+    };
+}

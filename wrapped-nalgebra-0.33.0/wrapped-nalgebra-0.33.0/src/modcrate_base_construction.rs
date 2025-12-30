@@ -1,0 +1,42 @@
+// Generated module macro for crate::base::construction
+macro_rules! Modcrate_base_construction {
+() => {
+        Depcrate_base_constructionuse_688!();
+        Depcrate_base_constructionuse_689!();
+        Depcrate_base_constructionuse_690!();
+        Depcrate_base_constructionuse_691!();
+        Depcrate_base_constructionuse_692!();
+        Depcrate_base_constructionuse_693!();
+        Depcrate_base_constructionuse_694!();
+        Depcrate_base_constructionuse_695!();
+        Depcrate_base_constructionuse_696!();
+        Depcrate_base_constructionuse_697!();
+        Depcrate_base_constructionuse_698!();
+        Depcrate_base_constructionuse_699!();
+        Depcrate_base_constructionuse_700!();
+        Depcrate_base_constructionuse_701!();
+        Depcrate_base_constructionimpl_702!();
+        Depcrate_base_constructionimpl_703!();
+        Depcrate_base_constructionimpl_704!();
+        Depcrate_base_constructionimpl_constructors!();
+        Depcrate_base_constructionimpl_706!();
+        Depcrate_base_constructionimpl_707!();
+        Depcrate_base_constructionimpl_708!();
+        Depcrate_base_constructionimpl_709!();
+        Depcrate_base_constructionimpl_constructors_from_data!();
+        Depcrate_base_constructionmacro_711!();
+        Depcrate_base_constructionmacro_712!();
+        Depcrate_base_constructionmacro_713!();
+        Depcrate_base_constructionmacro_714!();
+        Depcrate_base_constructionimpl_715!();
+        Depcrate_base_constructionimpl_716!();
+        Depcrate_base_constructionimpl_717!();
+        Depcrate_base_constructionimpl_718!();
+        Depcrate_base_constructionimpl_719!();
+        Depcrate_base_constructionimpl_720!();
+        Depcrate_base_constructiontranspose_array!();
+        Depcrate_base_constructioncomponentwise_constructors_impl!();
+        Depcrate_base_constructionmacro_723!();
+        Depcrate_base_constructionimpl_724!();
+    };
+}

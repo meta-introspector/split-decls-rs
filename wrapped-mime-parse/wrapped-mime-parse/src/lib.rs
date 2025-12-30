@@ -1,0 +1,67 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcrateparseerror.rs");
+include!("depcrateimpl_37.rs");
+include!("depcratelower_ascii_with_params.rs");
+include!("depcrateinternparams.rs");
+include!("depcrateuse_1.rs");
+include!("depcrateimpl_48.rs");
+include!("depcrateimpl_40.rs");
+include!("depcrate_constantsmime_constant_test.rs");
+include!("depcrateuse_2.rs");
+include!("depcrateuse_22.rs");
+include!("depcrate_constantsmime_constant.rs");
+include!("depcrateimpl_38.rs");
+include!("depcrateimpl_36.rs");
+include!("depcrate_constantsnames.rs");
+include!("depcrateparamsinner.rs");
+include!("depcrateimpl_52.rs");
+include!("depcrateimpl_54.rs");
+include!("depcrateindexedpair.rs");
+include!("depcrate_constantsmacro_11.rs");
+include!("depcrate_rfc7231is_token.rs");
+include!("depcrate_constantsmacro_12.rs");
+include!("depcratemime.rs");
+include!("depcrate_constantsimpl_9.rs");
+include!("depcrate_constantsatoms.rs");
+include!("depcrate_rfc7231is_restricted_quoted_char.rs");
+include!("depcrate_rfc7231parse.rs");
+include!("depcrateimpl_35.rs");
+include!("depcrateimpl_49.rs");
+include!("depcrateimpl_27.rs");
+include!("depcratebyte.rs");
+include!("depcrate_rfc7231byte_map.rs");
+include!("depcrateparse.rs");
+include!("depcrateimpl_53.rs");
+include!("depcraterfc7231.rs");
+include!("depcrateconstants.rs");
+include!("depcrate_constantsuse_4.rs");
+include!("depcraterange.rs");
+include!("depcrate_rfc7231tests.rs");
+include!("depcrateimpl_43.rs");
+include!("depcrate_rfc7231token_map.rs");
+include!("depcrateimpl_39.rs");
+include!("depcrateuse_23.rs");
+include!("depcrateparamsource.rs");
+include!("depcrateas_u16.rs");
+include!("depcrateinline.rs");
+include!("depcrateimpl_55.rs");
+include!("depcrateparser.rs");
+include!("depcrate_rfc7231params_from_str.rs");
+include!("depcrateimpl_34.rs");
+include!("depcrateparams.rs");
+include!("depcratesealed.rs");
+include!("depcrateindexed.rs");
+include!("depcrate_rfc7231use_14.rs");
+include!("depcratesource.rs");
+include!("depcrate_constantsmimes.rs");
+include!("modcrate_rfc7231.rs");
+include!("modcrate.rs");
+include!("modcrate_constants.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate_rfc7231!();
+    Modcrate!();
+    Modcrate_constants!();
+}

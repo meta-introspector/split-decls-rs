@@ -1,0 +1,9 @@
+// Generated macro for create_diff (function)
+macro_rules! Depcrate_matcher_support_summarize_diffcreate_diff {
+() => {
+// Module: crate::matcher_support::summarize_diff
+// Provides: {"create_diff"}
+// Dependencies: {}
+# [doc = " Returns a string describing how the expected and actual lines differ."] # [doc = ""] # [doc = " This is included in a match explanation for [`EqMatcher`] and"] # [doc = " [`crate::matchers::str_matcher::StrMatcher`]."] # [doc = ""] # [doc = " If the actual value has less than two lines, or the two differ by more than"] # [doc = " the maximum edit distance, then this returns the empty string. If the two"] # [doc = " are equal, it returns a simple statement that they are equal. Otherwise,"] # [doc = " this constructs a unified diff view of the actual and expected values."] pub (crate) fn create_diff (actual_debug : & str , expected_debug : & str , diff_mode : edit_distance :: Mode ,) -> Cow < 'static , str > { if actual_debug . lines () . count () < 2 { return "" . into () ; } match edit_distance :: edit_list (actual_debug . lines () , expected_debug . lines () , diff_mode) { edit_distance :: Difference :: Equal => { let actual_newline_terminated = actual_debug . ends_with ('\n') ; let expected_newline_terminated = expected_debug . ends_with ('\n') ; if actual_newline_terminated && ! expected_newline_terminated { "Actual includes a terminating newline that is absent from expected." . into () } else if ! actual_newline_terminated && expected_newline_terminated { "Actual omits a terminating newline that is present in expected." . into () } else { "No difference found between debug strings." . into () } } edit_distance :: Difference :: Editable (edit_list) => { format ! ("{}{}" , summary_header () , edit_list . into_iter () . collect ::< BufferedSummary > () ,) . into () } edit_distance :: Difference :: Unrelated => "" . into () , } }
+};
+}

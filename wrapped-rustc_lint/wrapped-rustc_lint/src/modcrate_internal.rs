@@ -1,0 +1,56 @@
+// Generated module macro for crate::internal
+macro_rules! Modcrate_internal {
+() => {
+        Depcrate_internaluse_477!();
+        Depcrate_internaluse_478!();
+        Depcrate_internaluse_479!();
+        Depcrate_internaluse_480!();
+        Depcrate_internaluse_481!();
+        Depcrate_internaluse_482!();
+        Depcrate_internaluse_483!();
+        Depcrate_internaluse_484!();
+        Depcrate_internaluse_485!();
+        Depcrate_internaluse_486!();
+        Depcrate_internaluse_487!();
+        Depcrate_internalmacro_488!();
+        Depcrate_internalmacro_489!();
+        Depcrate_internalimpl_490!();
+        Depcrate_internalmacro_491!();
+        Depcrate_internalmacro_492!();
+        Depcrate_internalmacro_493!();
+        Depcrate_internalimpl_494!();
+        Depcrate_internalhas_unstable_into_iter_predicate!();
+        Depcrate_internalget_callee_span_generic_args_and_args!();
+        Depcrate_internalmacro_497!();
+        Depcrate_internalmacro_498!();
+        Depcrate_internalmacro_499!();
+        Depcrate_internalimpl_500!();
+        Depcrate_internallint_ty_kind_usage!();
+        Depcrate_internalis_ty_or_ty_ctxt!();
+        Depcrate_internalgen_args!();
+        Depcrate_internalmacro_504!();
+        Depcrate_internalmacro_505!();
+        Depcrate_internalmacro_506!();
+        Depcrate_internalmacro_507!();
+        Depcrate_internalmacro_508!();
+        Depcrate_internalimpl_509!();
+        Depcrate_internalmacro_510!();
+        Depcrate_internalmacro_511!();
+        Depcrate_internalimpl_512!();
+        Depcrate_internalmacro_513!();
+        Depcrate_internalmacro_514!();
+        Depcrate_internalmacro_515!();
+        Depcrate_internalimpl_516!();
+        Depcrate_internalimpl_517!();
+        Depcrate_internalmacro_518!();
+        Depcrate_internalmacro_519!();
+        Depcrate_internalimpl_520!();
+        Depcrate_internalmacro_521!();
+        Depcrate_internalmacro_522!();
+        Depcrate_internalimpl_523!();
+        Depcrate_internalis_span_ctxt_call!();
+        Depcrate_internalmacro_525!();
+        Depcrate_internalmacro_526!();
+        Depcrate_internalimpl_527!();
+    };
+}

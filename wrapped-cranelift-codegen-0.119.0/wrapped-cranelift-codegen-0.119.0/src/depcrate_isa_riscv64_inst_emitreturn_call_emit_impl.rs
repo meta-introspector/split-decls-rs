@@ -1,0 +1,9 @@
+// Generated macro for return_call_emit_impl (function)
+macro_rules! Depcrate_isa_riscv64_inst_emitreturn_call_emit_impl {
+() => {
+// Module: crate::isa::riscv64::inst::emit
+// Provides: {"return_call_emit_impl"}
+// Dependencies: {}
+# [doc = " This should not be called directly, Instead prefer to call [emit_return_call_common_sequence]."] fn return_call_emit_impl < T > (sink : & mut MachBuffer < Inst > , emit_info : & EmitInfo , state : & mut EmitState , info : & ReturnCallInfo < T > ,) { let sp_to_fp_offset = { let frame_layout = state . frame_layout () ; i64 :: from (frame_layout . clobber_size + frame_layout . fixed_frame_storage_size + frame_layout . outgoing_args_size ,) } ; let mut clobber_offset = sp_to_fp_offset - 8 ; for reg in state . frame_layout () . clobbered_callee_saves . clone () { let rreg = reg . to_reg () ; let ty = match rreg . class () { RegClass :: Int => I64 , RegClass :: Float => F64 , RegClass :: Vector => unimplemented ! ("Vector Clobber Restores") , } ; Inst :: gen_load (reg . map (Reg :: from) , AMode :: SPOffset (clobber_offset) , ty , MemFlags :: trusted () ,) . emit (sink , emit_info , state) ; clobber_offset -= 8 } let setup_area_size = i64 :: from (state . frame_layout () . setup_area_size) ; if setup_area_size > 0 { Inst :: gen_load (writable_link_reg () , AMode :: SPOffset (sp_to_fp_offset + 8) , I64 , MemFlags :: trusted () ,) . emit (sink , emit_info , state) ; Inst :: gen_load (writable_fp_reg () , AMode :: SPOffset (sp_to_fp_offset) , I64 , MemFlags :: trusted () ,) . emit (sink , emit_info , state) ; } let incoming_args_diff = i64 :: from (state . frame_layout () . tail_args_size - info . new_stack_arg_size) ; let sp_increment = sp_to_fp_offset + setup_area_size + incoming_args_diff ; if sp_increment > 0 { for inst in Riscv64MachineDeps :: gen_sp_reg_adjust (i32 :: try_from (sp_increment) . unwrap ()) { inst . emit (sink , emit_info , state) ; } } }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for use_1508 (pub_use)
+macro_rules! Depcrate_generateduse_1508 {
+() => {
+// Module: crate::generated
+// Provides: {"use_1508"}
+// Dependencies: {}
+# [cfg (all (feature = "CFString" , feature = "CFURL"))] pub use self :: __CFURL :: CFURLCreateWithBytes ;
+};
+}

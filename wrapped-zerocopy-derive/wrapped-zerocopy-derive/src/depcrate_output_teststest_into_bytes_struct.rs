@@ -1,0 +1,9 @@
+// Generated macro for test_into_bytes_struct (function)
+macro_rules! Depcrate_output_teststest_into_bytes_struct {
+() => {
+// Module: crate::output_tests
+// Provides: {"test_into_bytes_struct"}
+// Dependencies: {}
+# [test] fn test_into_bytes_struct () { test ! { IntoBytes { # [repr (C)] struct Foo ; } expands to { # [allow (deprecated)] # [automatically_derived] unsafe impl :: zerocopy :: IntoBytes for Foo { fn only_derive_is_allowed_to_implement_this_trait () { } } } no_build } test ! { IntoBytes { # [repr (C)] struct Foo { a : u8 , b : u8 , } } expands to { # [allow (deprecated)] # [automatically_derived] unsafe impl :: zerocopy :: IntoBytes for Foo where u8 : :: zerocopy :: IntoBytes , u8 : :: zerocopy :: IntoBytes , () : :: zerocopy :: util :: macro_util :: PaddingFree < Self , { :: zerocopy :: struct_padding ! (Self , [u8 , u8]) } , >, { fn only_derive_is_allowed_to_implement_this_trait () { } } } no_build } test ! { IntoBytes { # [repr (C)] struct Foo { a : u8 , b : [Trailing] , } } expands to { # [allow (deprecated)] # [automatically_derived] unsafe impl :: zerocopy :: IntoBytes for Foo where u8 : :: zerocopy :: IntoBytes , [Trailing] : :: zerocopy :: IntoBytes , () : :: zerocopy :: util :: macro_util :: DynamicPaddingFree < Self , { :: zerocopy :: repr_c_struct_has_padding ! (Self , [u8 , [Trailing]]) } , >, { fn only_derive_is_allowed_to_implement_this_trait () { } } } no_build } test ! { IntoBytes { # [repr (C)] struct Foo < Trailing > { a : u8 , b : [Trailing] , } } expands to { # [allow (deprecated)] # [automatically_derived] unsafe impl < Trailing > :: zerocopy :: IntoBytes for Foo < Trailing > where u8 : :: zerocopy :: IntoBytes + :: zerocopy :: Unaligned , [Trailing] : :: zerocopy :: IntoBytes + :: zerocopy :: Unaligned , { fn only_derive_is_allowed_to_implement_this_trait () { } } } no_build } }
+};
+}

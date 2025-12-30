@@ -1,0 +1,63 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcrate_displayimpl_31.rs");
+include!("depcrate_mixeddecode_nibble.rs");
+include!("depcrate_upperuse_20.rs");
+include!("depcrate_displayuse_29.rs");
+include!("depcrateuse_41.rs");
+include!("depcrate_lowerencode_string.rs");
+include!("depcrate_upperencode.rs");
+include!("depcrate_upperdecode_nibble.rs");
+include!("depcratelower.rs");
+include!("depcrate_errorimpl_39.rs");
+include!("depcrateencoded_len.rs");
+include!("depcrate_displayimpl_33.rs");
+include!("depcrateerror.rs");
+include!("depcrateupper.rs");
+include!("depcrate_errorimpl_38.rs");
+include!("depcrate_loweruse_4.rs");
+include!("depcrate_lowerencode.rs");
+include!("depcrate_upperencode_nibble.rs");
+include!("depcrate_errorresult.rs");
+include!("depcrate_errorimpl_40.rs");
+include!("depcrateuse_42.rs");
+include!("depcrate_upperdecode_vec.rs");
+include!("depcrate_mixeddecode.rs");
+include!("depcrate_errorerror.rs");
+include!("depcrate_erroruse_35.rs");
+include!("depcratedisplay.rs");
+include!("depcrate_upperencode_string.rs");
+include!("depcratedecode_inner.rs");
+include!("depcratemixed.rs");
+include!("depcrate_loweruse_3.rs");
+include!("depcrate_upperuse_19.rs");
+include!("depcrate_upperdecode.rs");
+include!("depcrate_lowerencode_str.rs");
+include!("depcrateother_1.rs");
+include!("depcrate_mixeddecode_vec.rs");
+include!("depcrate_displayhexdisplay.rs");
+include!("depcrate_displayimpl_32.rs");
+include!("depcrate_lowerencode_nibble.rs");
+include!("depcrate_lowerdecode_vec.rs");
+include!("depcrate_mixeduse_13.rs");
+include!("depcrate_mixeduse_14.rs");
+include!("depcrate_lowerdecode.rs");
+include!("depcrate_upperencode_str.rs");
+include!("depcrate_lowerdecode_nibble.rs");
+include!("depcratedecoded_len.rs");
+include!("modcrate_lower.rs");
+include!("modcrate_error.rs");
+include!("modcrate_display.rs");
+include!("modcrate.rs");
+include!("modcrate_upper.rs");
+include!("modcrate_mixed.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate_lower!();
+    Modcrate_error!();
+    Modcrate_display!();
+    Modcrate!();
+    Modcrate_upper!();
+    Modcrate_mixed!();
+}

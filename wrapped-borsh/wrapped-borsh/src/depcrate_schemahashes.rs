@@ -1,0 +1,9 @@
+// Generated macro for hashes (module)
+macro_rules! Depcrate_schemahashes {
+() => {
+// Module: crate::schema
+// Provides: {"hashes"}
+// Dependencies: {}
+# [doc = " Module is available if borsh is built with `features = [\"std\"]` or `features = [\"hashbrown\"]`."] # [doc = ""] # [doc = " Module defines [BorshSchema] implementation for"] # [doc = " [HashMap](std::collections::HashMap)/[HashSet](std::collections::HashSet)."] # [cfg (hash_collections)] pub mod hashes { use crate :: BorshSchema ; use super :: { add_definition , Declaration , Definition } ; use crate :: __private :: maybestd :: collections :: BTreeMap ; use crate :: __private :: maybestd :: collections :: { HashMap , HashSet } ; # [cfg (not (feature = "std"))] use alloc :: format ; impl < K , V , S > BorshSchema for HashMap < K , V , S > where K : BorshSchema , V : BorshSchema , { fn add_definitions_recursively (definitions : & mut BTreeMap < Declaration , Definition >) { let definition = Definition :: Sequence { length_width : Definition :: DEFAULT_LENGTH_WIDTH , length_range : Definition :: DEFAULT_LENGTH_RANGE , elements : < (K , V) > :: declaration () , } ; add_definition (Self :: declaration () , definition , definitions) ; < (K , V) > :: add_definitions_recursively (definitions) ; } fn declaration () -> Declaration { format ! (r#"HashMap<{}, {}>"# , K :: declaration () , V :: declaration ()) } } impl < T , S > BorshSchema for HashSet < T , S > where T : BorshSchema , { fn add_definitions_recursively (definitions : & mut BTreeMap < Declaration , Definition >) { let definition = Definition :: Sequence { length_width : Definition :: DEFAULT_LENGTH_WIDTH , length_range : Definition :: DEFAULT_LENGTH_RANGE , elements : < T > :: declaration () , } ; add_definition (Self :: declaration () , definition , definitions) ; < T > :: add_definitions_recursively (definitions) ; } fn declaration () -> Declaration { format ! (r#"HashSet<{}>"# , T :: declaration ()) } } }
+};
+}

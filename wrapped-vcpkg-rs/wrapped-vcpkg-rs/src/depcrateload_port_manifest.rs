@@ -1,0 +1,9 @@
+// Generated macro for load_port_manifest (function)
+macro_rules! Depcrateload_port_manifest {
+() => {
+// Module: crate
+// Provides: {"load_port_manifest"}
+// Dependencies: {}
+fn load_port_manifest (path : & PathBuf , port : & str , version : & str , vcpkg_target : & VcpkgTarget ,) -> Result < (Vec < String > , Vec < String >) , Error > { let manifest_file = path . join ("info") . join (format ! ("{}_{}_{}.list" , port , version , vcpkg_target . target_triplet . triplet)) ; let mut dlls = Vec :: new () ; let mut libs = Vec :: new () ; let f = try ! (File :: open (& manifest_file) . map_err (| _ | Error :: VcpkgInstallation (format ! ("Could not open port manifest file {}" , manifest_file . display ())))) ; let file = BufReader :: new (& f) ; let dll_prefix = Path :: new (& vcpkg_target . target_triplet . triplet) . join ("bin") ; let lib_prefix = Path :: new (& vcpkg_target . target_triplet . triplet) . join ("lib") ; for line in file . lines () { let line = line . unwrap () ; let file_path = Path :: new (& line) ; if let Ok (dll) = file_path . strip_prefix (& dll_prefix) { if dll . extension () == Some (OsStr :: new ("dll")) && dll . components () . collect :: < Vec < _ > > () . len () == 1 { dll . to_str () . map (| s | dlls . push (s . to_owned ())) ; } } else if let Ok (lib) = file_path . strip_prefix (& lib_prefix) { if lib . extension () == Some (OsStr :: new (& vcpkg_target . target_triplet . lib_suffix)) && lib . components () . collect :: < Vec < _ > > () . len () == 1 { if let Some (lib) = vcpkg_target . link_name_for_lib (lib) { libs . push (lib) ; } } } } let pkg_config_prefix = vcpkg_target . packages_path . join (format ! ("{}_{}" , port , vcpkg_target . target_triplet . triplet)) . join ("lib") . join ("pkgconfig") ; if let Ok (pc_files) = PcFiles :: load_pkgconfig_dir (vcpkg_target , & pkg_config_prefix) { libs = pc_files . fix_ordering (libs) ; } Ok ((dlls , libs)) }
+};
+}

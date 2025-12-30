@@ -1,0 +1,9 @@
+// Generated macro for impl_128 (impl)
+macro_rules! Depcrate_js_bindingimpl_128 {
+() => {
+// Module: crate::js::binding
+// Provides: {"impl_128"}
+// Dependencies: {}
+impl Invocation { fn from (instr : & Instruction , module : & Module) -> Result < Invocation , Error > { use Instruction :: * ; Ok (match instr { DeferFree { free , .. } => Invocation :: Core { id : * free , defer : true , } , CallExport (e) => match module . exports . get (* e) . item { walrus :: ExportItem :: Function (id) => Invocation :: Core { id , defer : false } , _ => panic ! ("can only call exported function") , } , CallAdapter (id) => Invocation :: Adapter (* id) , _ => unreachable ! () , }) } fn params_results (& self , cx : & Context) -> (usize , usize) { match self { Invocation :: Core { id , .. } => { let ty = cx . module . funcs . get (* id) . ty () ; let ty = cx . module . types . get (ty) ; (ty . params () . len () , ty . results () . len ()) } Invocation :: Adapter (id) => { let adapter = & cx . wit . adapters [id] ; (adapter . params . len () , adapter . results . len ()) } } } fn invoke (& self , cx : & mut Context , args : & [String] , prelude : & mut String , log_error : & mut bool ,) -> Result < String , Error > { match self { Invocation :: Core { id , .. } => { let name = cx . export_name_of (* id) ; Ok (format ! ("wasm.{name}({})" , args . join (", "))) } Invocation :: Adapter (id) => { let adapter = & cx . wit . adapters [id] ; let kind = match adapter . kind { AdapterKind :: Import { kind , .. } => kind , AdapterKind :: Local { .. } => { bail ! ("adapter-to-adapter calls not supported yet") ; } } ; let import = & cx . aux . import_map [id] ; let variadic = cx . aux . imports_with_variadic . contains (id) ; if cx . import_never_log_error (import) { * log_error = false ; } cx . invoke_import (import , kind , args , variadic , prelude) } } } fn defer (& self) -> bool { match self { Invocation :: Core { defer , .. } => * defer , _ => false , } } }
+};
+}

@@ -1,9 +1,9 @@
-// Generated macro for EB (const)
-macro_rules! DepcrateEB {
+// Generated macro for eb (function)
+macro_rules! Depcrateeb {
 () => {
 // Module: crate
-// Provides: {"EB"}
+// Provides: {"eb"}
 // Dependencies: {}
-# [doc = " Number of bytes in 1 exabyte."] pub const EB : u64 = 1_000_000_000_000_000_000 ;
+# [doc = " Converts a quantity of exabytes to bytes."] pub fn eb < V : Into < u64 > > (size : V) -> u64 { size . into () * EB }
 };
 }

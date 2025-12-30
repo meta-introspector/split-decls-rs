@@ -1,0 +1,9 @@
+// Generated macro for impl_799 (impl)
+macro_rules! Depcrate_ir_immediatesimpl_799 {
+() => {
+// Module: crate::ir::immediates
+// Provides: {"impl_799"}
+// Dependencies: {}
+impl Imm64 { # [doc = " Create a new `Imm64` representing the signed number `x`."] pub fn new (x : i64) -> Self { Self (x) } # [doc = " Return self negated."] pub fn wrapping_neg (self) -> Self { Self (self . 0 . wrapping_neg ()) } # [doc = " Returns the value of this immediate."] pub fn bits (& self) -> i64 { self . 0 } # [doc = " Mask this immediate to the given power-of-two bit width."] # [must_use] pub (crate) fn mask_to_width (& self , bit_width : u32) -> Self { debug_assert ! (bit_width . is_power_of_two ()) ; if bit_width >= 64 { return * self ; } let bit_width = i64 :: from (bit_width) ; let mask = (1 << bit_width) - 1 ; let masked = self . 0 & mask ; Imm64 (masked) } # [doc = " Sign extend this immediate as if it were a signed integer of the given"] # [doc = " power-of-two width."] # [must_use] pub fn sign_extend_from_width (& self , bit_width : u32) -> Self { debug_assert ! (bit_width . is_power_of_two () , "{bit_width} is not a power of two") ; if bit_width >= 64 { return * self ; } let bit_width = i64 :: from (bit_width) ; let delta = 64 - bit_width ; let sign_extended = (self . 0 << delta) >> delta ; Imm64 (sign_extended) } # [doc = " Zero extend this immediate as if it were an unsigned integer of the"] # [doc = " given power-of-two width."] # [must_use] pub fn zero_extend_from_width (& self , bit_width : u32) -> Self { debug_assert ! (bit_width . is_power_of_two () , "{bit_width} is not a power of two") ; if bit_width >= 64 { return * self ; } let bit_width = u64 :: from (bit_width) ; let delta = 64 - bit_width ; let zero_extended = (self . 0 . unsigned () << delta) >> delta ; Imm64 (zero_extended . signed ()) } }
+};
+}

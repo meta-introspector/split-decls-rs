@@ -1,0 +1,9 @@
+// Generated macro for macro_11238 (macro)
+macro_rules! Depcrate_unwrap_in_resultmacro_11238 {
+() => {
+// Module: crate::unwrap_in_result
+// Provides: {"macro_11238"}
+// Dependencies: {}
+declare_clippy_lint ! { # [doc = " ### What it does"] # [doc = " Checks for functions of type `Result` that contain `expect()` or `unwrap()`"] # [doc = ""] # [doc = " ### Why restrict this?"] # [doc = " These functions promote recoverable errors to non-recoverable errors,"] # [doc = " which may be undesirable in code bases which wish to avoid panics,"] # [doc = " or be a bug in the specific function."] # [doc = ""] # [doc = " ### Known problems"] # [doc = " This can cause false positives in functions that handle both recoverable and non recoverable errors."] # [doc = ""] # [doc = " ### Example"] # [doc = " Before:"] # [doc = " ```no_run"] # [doc = " fn divisible_by_3(i_str: String) -> Result<(), String> {"] # [doc = "     let i = i_str"] # [doc = "         .parse::<i32>()"] # [doc = "         .expect(\"cannot divide the input by three\");"] # [doc = ""] # [doc = "     if i % 3 != 0 {"] # [doc = "         Err(\"Number is not divisible by 3\")?"] # [doc = "     }"] # [doc = ""] # [doc = "     Ok(())"] # [doc = " }"] # [doc = " ```"] # [doc = ""] # [doc = " After:"] # [doc = " ```no_run"] # [doc = " fn divisible_by_3(i_str: String) -> Result<(), String> {"] # [doc = "     let i = i_str"] # [doc = "         .parse::<i32>()"] # [doc = "         .map_err(|e| format!(\"cannot divide the input by three: {}\", e))?;"] # [doc = ""] # [doc = "     if i % 3 != 0 {"] # [doc = "         Err(\"Number is not divisible by 3\")?"] # [doc = "     }"] # [doc = ""] # [doc = "     Ok(())"] # [doc = " }"] # [doc = " ```"] # [clippy :: version = "1.48.0"] pub UNWRAP_IN_RESULT , restriction , "functions of type `Result<..>` or `Option`<...> that contain `expect()` or `unwrap()`" }
+};
+}

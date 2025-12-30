@@ -1,0 +1,9 @@
+// Generated macro for macro_33831 (macro)
+macro_rules! Depcrate_um_objidlmacro_33831 {
+() => {
+// Module: crate::um::objidl
+// Provides: {"macro_33831"}
+// Dependencies: {}
+RIDL ! { # [uuid (0x0000000f , 0x0000 , 0x0000 , 0xc0 , 0x00 , 0x00 , 0x00 , 0x00 , 0x00 , 0x00 , 0x46)] interface IMoniker (IMonikerVtbl) : IPersistStream (IPersistStreamVtbl) { fn BindToObject (pbc : * mut IBindCtx , pmkToLeft : * mut IMoniker , riidResult : REFIID , ppvResult : * mut * mut c_void ,) -> HRESULT , fn BindToStorage (pbc : * mut IBindCtx , pmkToLeft : * mut IMoniker , riid : REFIID , ppvObj : * mut * mut c_void ,) -> HRESULT , fn Reduce (pbc : * mut IBindCtx , dwReduceHowFar : DWORD , ppmkToLeft : * mut * mut IMoniker , ppmkReduced : * mut * mut IMoniker ,) -> HRESULT , fn ComposeWith (pmkRight : * mut IMoniker , fOnlyIfNotGeneric : BOOL , ppmkComposite : * mut * mut IMoniker ,) -> HRESULT , fn Enum (fForward : BOOL , ppenumMoniker : * mut * mut IEnumMoniker ,) -> HRESULT , fn IsEqual (pmkOtherMoniker : * mut IMoniker ,) -> HRESULT , fn Hash (pdwHash : * mut DWORD ,) -> HRESULT , fn IsRunning (pbc : * mut IBindCtx , pmkToLeft : * mut IMoniker , pmkNewlyRunning : * mut IMoniker ,) -> HRESULT , fn GetTimeOfLastChange (pbc : * mut IBindCtx , pmkToLeft : * mut IMoniker , pFileTime : * mut FILETIME ,) -> HRESULT , fn Inverse (ppmk : * mut * mut IMoniker ,) -> HRESULT , fn CommonPrefixWith (pmkOther : * mut IMoniker , ppmkPrefix : * mut * mut IMoniker ,) -> HRESULT , fn RelativePathTo (pmkOther : * mut IMoniker , ppmkRelPath : * mut * mut IMoniker ,) -> HRESULT , fn GetDisplayName (pbc : * mut IBindCtx , pmkToLeft : * mut IMoniker , ppszDisplayName : * mut LPOLESTR ,) -> HRESULT , fn ParseDisplayName (pbc : * mut IBindCtx , pmkToLeft : * mut IMoniker , pszDisplayName : LPOLESTR , pchEaten : * mut ULONG , ppmkOut : * mut * mut IMoniker ,) -> HRESULT , fn IsSystemMoniker (pdwMksys : * mut DWORD ,) -> HRESULT , } }
+};
+}

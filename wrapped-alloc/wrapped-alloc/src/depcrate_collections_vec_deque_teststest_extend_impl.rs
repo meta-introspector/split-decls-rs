@@ -1,0 +1,9 @@
+// Generated macro for test_extend_impl (function)
+macro_rules! Depcrate_collections_vec_deque_teststest_extend_impl {
+() => {
+// Module: crate::collections::vec_deque::tests
+// Provides: {"test_extend_impl"}
+// Dependencies: {}
+fn test_extend_impl (trusted_len : bool) { struct VecDequeTester { test : VecDeque < usize > , expected : VecDeque < usize > , trusted_len : bool , } impl VecDequeTester { fn new (trusted_len : bool) -> Self { Self { test : VecDeque :: new () , expected : VecDeque :: new () , trusted_len } } fn test_extend < I > (& mut self , iter : I) where I : Iterator < Item = usize > + TrustedLen + Clone , { struct BasicIterator < I > (I) ; impl < I > Iterator for BasicIterator < I > where I : Iterator < Item = usize > , { type Item = usize ; fn next (& mut self) -> Option < Self :: Item > { self . 0 . next () } } if self . trusted_len { self . test . extend (iter . clone ()) ; } else { self . test . extend (BasicIterator (iter . clone ())) ; } for item in iter { self . expected . push_back (item) } assert_eq ! (self . test , self . expected) ; } fn drain < R : RangeBounds < usize > + Clone > (& mut self , range : R) { self . test . drain (range . clone ()) ; self . expected . drain (range) ; assert_eq ! (self . test , self . expected) ; } fn clear (& mut self) { self . test . clear () ; self . expected . clear () ; } fn remaining_capacity (& self) -> usize { self . test . capacity () - self . test . len () } } let mut tester = VecDequeTester :: new (trusted_len) ; tester . test_extend (0 .. tester . remaining_capacity ()) ; tester . test_extend (1024 .. 2048) ; tester . drain (.. 128) ; tester . test_extend (0 .. tester . remaining_capacity ()) ; tester . drain (256 ..) ; tester . test_extend (4096 .. 8196) ; tester . clear () ; tester . test_extend (0 .. 32) ; }
+};
+}

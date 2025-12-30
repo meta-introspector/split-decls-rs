@@ -1,0 +1,9 @@
+// Generated macro for insert_target_feature (function)
+macro_rules! Depcrate_wasm_conventionsinsert_target_feature {
+() => {
+// Module: crate::wasm_conventions
+// Provides: {"insert_target_feature"}
+// Dependencies: {}
+pub fn insert_target_feature (module : & mut Module , new_feature : & str) -> Result < () > { anyhow :: ensure ! (new_feature . len () <= 100_000 , "feature name too long") ; let section = module . customs . iter_mut () . find (| (_ , custom) | custom . name () == "target_features") ; let section = if let Some ((_ , section)) = section { let section : & mut RawCustomSection = section . as_any_mut () . downcast_mut () . context ("failed to read section") ? ; let mut reader = BinaryReader :: new (& section . data , 0) ; let count = reader . read_var_u32 () ? ; for _ in 0 .. count { let prefix_index = reader . current_position () ; let prefix = reader . read_u8 () ? ; let length = reader . read_var_u32 () ? ; let feature = reader . read_bytes (length as usize) ? ; if feature == new_feature . as_bytes () { if prefix == b'-' { section . data [prefix_index] = b'+' ; } return Ok (()) ; } } section } else { let mut data = Vec :: new () ; leb128 :: write :: unsigned (& mut data , 0) . unwrap () ; let id = module . customs . add (RawCustomSection { name : String :: from ("target_features") , data , }) ; module . customs . get_mut (id) . unwrap () } ; let mut data = Cursor :: new (& section . data) ; let count = leb128 :: read :: unsigned (& mut data) . unwrap () ; let mut new_count = Vec :: new () ; leb128 :: write :: unsigned (& mut new_count , count + 1) . unwrap () ; section . data . splice (0 .. data . position () as usize , new_count) ; section . data . push (b'+') ; leb128 :: write :: unsigned (& mut section . data , new_feature . len () as u64) . unwrap () ; section . data . extend (new_feature . as_bytes ()) ; Ok (()) }
+};
+}

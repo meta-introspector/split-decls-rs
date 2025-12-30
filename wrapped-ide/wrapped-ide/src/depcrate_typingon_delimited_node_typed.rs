@@ -1,0 +1,9 @@
+// Generated macro for on_delimited_node_typed (function)
+macro_rules! Depcrate_typingon_delimited_node_typed {
+() => {
+// Module: crate::typing
+// Provides: {"on_delimited_node_typed"}
+// Dependencies: {}
+fn on_delimited_node_typed (reparsed : & SourceFile , offset : TextSize , opening_bracket : char , closing_bracket : char , kinds : & [fn (SyntaxKind) -> bool] ,) -> Option < TextEdit > { let t = reparsed . syntax () . token_at_offset (offset) . right_biased () ? ; if t . prev_token () . is_some_and (| t | t . kind () . is_any_identifier ()) { return None ; } let (filter , node) = t . parent_ancestors () . take_while (| n | n . text_range () . start () == offset) . find_map (| n | kinds . iter () . find (| & kind_filter | kind_filter (n . kind ())) . zip (Some (n))) ? ; let mut node = node . ancestors () . take_while (| n | n . text_range () . start () == offset && filter (n . kind ())) . last () ? ; if let Some (parent) = node . parent () . filter (| it | filter (it . kind ())) { let all_prev_sib_attr = { let mut node = node . clone () ; loop { match node . prev_sibling () { Some (sib) if sib . kind () . is_trivia () || sib . kind () == SyntaxKind :: ATTR => { node = sib } Some (_) => break false , None => break true , } ; } } ; if all_prev_sib_attr { node = parent ; } } Some (TextEdit :: insert (node . text_range () . end () + TextSize :: of (opening_bracket) , closing_bracket . to_string () ,)) }
+};
+}

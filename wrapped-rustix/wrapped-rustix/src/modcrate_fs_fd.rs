@@ -1,17 +1,17 @@
 // Generated module macro for crate::fs::fd
 macro_rules! Modcrate_fs_fd {
 () => {
-        Depcrate_fs_fduse_2164!();
-        Depcrate_fs_fduse_2165!();
-        Depcrate_fs_fduse_2166!();
-        Depcrate_fs_fduse_2167!();
-        Depcrate_fs_fduse_2168!();
-        Depcrate_fs_fduse_2169!();
-        Depcrate_fs_fduse_2170!();
-        Depcrate_fs_fduse_2171!();
-        Depcrate_fs_fduse_2172!();
-        Depcrate_fs_fduse_2173!();
-        Depcrate_fs_fduse_2174!();
+        Depcrate_fs_fduse_305!();
+        Depcrate_fs_fduse_306!();
+        Depcrate_fs_fduse_307!();
+        Depcrate_fs_fduse_308!();
+        Depcrate_fs_fduse_309!();
+        Depcrate_fs_fduse_310!();
+        Depcrate_fs_fduse_311!();
+        Depcrate_fs_fduse_312!();
+        Depcrate_fs_fduse_313!();
+        Depcrate_fs_fduse_314!();
+        Depcrate_fs_fduse_315!();
         Depcrate_fs_fdTimestamps!();
         Depcrate_fs_fdPROC_SUPER_MAGIC!();
         Depcrate_fs_fdNFS_SUPER_MAGIC!();

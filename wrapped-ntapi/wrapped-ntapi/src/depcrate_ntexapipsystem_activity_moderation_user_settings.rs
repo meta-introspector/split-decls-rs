@@ -1,0 +1,9 @@
+// Generated macro for PSYSTEM_ACTIVITY_MODERATION_USER_SETTINGS (type)
+macro_rules! Depcrate_ntexapiPSYSTEM_ACTIVITY_MODERATION_USER_SETTINGS {
+() => {
+// Module: crate::ntexapi
+// Provides: {"PSYSTEM_ACTIVITY_MODERATION_USER_SETTINGS"}
+// Dependencies: {}
+pub type PSYSTEM_ACTIVITY_MODERATION_USER_SETTINGS = * mut SYSTEM_ACTIVITY_MODERATION_USER_SETTINGS ;
+};
+}

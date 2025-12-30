@@ -1,0 +1,9 @@
+// Generated macro for impl_10117 (impl)
+macro_rules! Depcrate_transmuteimpl_10117 {
+() => {
+// Module: crate::transmute
+// Provides: {"impl_10117"}
+// Dependencies: {}
+impl < 'tcx > LateLintPass < 'tcx > for Transmute { fn check_expr (& mut self , cx : & LateContext < 'tcx > , e : & 'tcx Expr < '_ >) { if let ExprKind :: Call (path_expr , [arg]) = e . kind && let ExprKind :: Path (QPath :: Resolved (None , path)) = path_expr . kind && let Some (def_id) = path . res . opt_def_id () && cx . tcx . is_diagnostic_item (sym :: transmute , def_id) { let const_context = is_in_const_context (cx) ; let (from_ty , from_ty_adjusted) = match cx . typeck_results () . expr_adjustments (arg) { [] => (cx . typeck_results () . expr_ty (arg) , false) , [.. , a] => (a . target , true) , } ; let to_ty = cx . typeck_results () . expr_ty (e) ; if useless_transmute :: check (cx , e , from_ty , to_ty , arg) { return ; } let linted = wrong_transmute :: check (cx , e , from_ty , to_ty) | crosspointer_transmute :: check (cx , e , from_ty , to_ty) | transmuting_null :: check (cx , e , arg , to_ty) | transmute_null_to_fn :: check (cx , e , arg , to_ty) | transmute_ptr_to_ref :: check (cx , e , from_ty , to_ty , arg , path , self . msrv) | missing_transmute_annotations :: check (cx , path , arg , from_ty , to_ty , e . hir_id) | transmute_ref_to_ref :: check (cx , e , from_ty , to_ty , arg , const_context) | transmute_ptr_to_ptr :: check (cx , e , from_ty , to_ty , arg , self . msrv) | transmute_int_to_bool :: check (cx , e , from_ty , to_ty , arg) | transmute_int_to_non_zero :: check (cx , e , from_ty , to_ty , arg) | (unsound_collection_transmute :: check (cx , e , from_ty , to_ty) || transmute_undefined_repr :: check (cx , e , from_ty , to_ty)) | (eager_transmute :: check (cx , e , arg , from_ty , to_ty)) ; if ! linted { transmutes_expressible_as_ptr_casts :: check (cx , e , from_ty , from_ty_adjusted , to_ty , arg , const_context) ; } } } }
+};
+}

@@ -1,0 +1,44 @@
+// Generated module macro for crate::ptr
+macro_rules! Modcrate_ptr {
+() => {
+        Depcrate_ptruse_823!();
+        Depcrate_ptruse_824!();
+        Depcrate_ptruse_825!();
+        Depcrate_ptrLcPtr!();
+        Depcrate_ptrDetachableLcPtr!();
+        Depcrate_ptrManagedPointer!();
+        Depcrate_ptrimpl_829!();
+        Depcrate_ptrimpl_830!();
+        Depcrate_ptrimpl_831!();
+        Depcrate_ptrimpl_832!();
+        Depcrate_ptrimpl_833!();
+        Depcrate_ptrDetachablePointer!();
+        Depcrate_ptrimpl_835!();
+        Depcrate_ptrimpl_836!();
+        Depcrate_ptrimpl_837!();
+        Depcrate_ptrimpl_838!();
+        Depcrate_ptrConstPointer!();
+        Depcrate_ptrimpl_840!();
+        Depcrate_ptrimpl_841!();
+        Depcrate_ptrimpl_842!();
+        Depcrate_ptrMutPointer!();
+        Depcrate_ptrimpl_844!();
+        Depcrate_ptrPointer!();
+        Depcrate_ptrIntoPointer!();
+        Depcrate_ptrimpl_847!();
+        Depcrate_ptrcreate_pointer!();
+        Depcrate_ptrmacro_849!();
+        Depcrate_ptrmacro_850!();
+        Depcrate_ptrmacro_851!();
+        Depcrate_ptrmacro_852!();
+        Depcrate_ptrmacro_853!();
+        Depcrate_ptrmacro_854!();
+        Depcrate_ptrmacro_855!();
+        Depcrate_ptrmacro_856!();
+        Depcrate_ptrmacro_857!();
+        Depcrate_ptrmacro_858!();
+        Depcrate_ptrmacro_859!();
+        Depcrate_ptrmacro_860!();
+        Depcrate_ptrtests!();
+    };
+}

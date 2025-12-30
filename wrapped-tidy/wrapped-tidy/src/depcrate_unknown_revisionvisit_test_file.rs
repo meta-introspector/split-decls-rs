@@ -1,0 +1,9 @@
+// Generated macro for visit_test_file (function)
+macro_rules! Depcrate_unknown_revisionvisit_test_file {
+() => {
+// Module: crate::unknown_revision
+// Provides: {"visit_test_file"}
+// Dependencies: {}
+fn visit_test_file (entry : & DirEntry , contents : & str , bad : & mut bool) { let mut revisions = HashSet :: new () ; let mut unused_revision_names = HashSet :: new () ; let mut mentioned_revisions = HashMap :: < & str , usize > :: new () ; let mut add_mentioned_revision = | line_number : usize , revision | { let first_line = mentioned_revisions . entry (revision) . or_insert (line_number) ; * first_line = (* first_line) . min (line_number) ; } ; iter_header (contents , & mut | HeaderLine { line_number , revision , directive } | { if let Some (revs) = directive . strip_prefix ("revisions:") { revisions . extend (revs . split_whitespace ()) ; } else if let Some (revs) = directive . strip_prefix ("unused-revision-names:") { unused_revision_names . extend (revs . split_whitespace ()) ; } if let Some (revision) = revision { add_mentioned_revision (line_number , revision) ; } }) ; if unused_revision_names . contains (& "*") { return ; } for_each_error_annotation_revision (contents , & mut | ErrorAnnRev { line_number , revision } | { add_mentioned_revision (line_number , revision) ; }) ; let path = entry . path () . display () ; for rev in revisions . intersection (& unused_revision_names) . copied () . collect :: < BTreeSet < _ > > () { tidy_error ! (bad , "revision name [{rev}] appears in both `revisions` and `unused-revision-names` in {path}") ; } let mut bad_revisions = mentioned_revisions . into_iter () . filter (| (rev , _) | ! revisions . contains (rev) && ! unused_revision_names . contains (rev)) . map (| (rev , line_number) | (line_number , rev)) . collect :: < Vec < _ > > () ; bad_revisions . sort () ; for (line_number , rev) in bad_revisions { tidy_error ! (bad , "unknown revision [{rev}] at {path}:{line_number}") ; } }
+};
+}

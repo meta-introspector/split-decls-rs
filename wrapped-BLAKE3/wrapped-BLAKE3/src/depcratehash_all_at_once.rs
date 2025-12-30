@@ -1,0 +1,9 @@
+// Generated macro for hash_all_at_once (function)
+macro_rules! Depcratehash_all_at_once {
+() => {
+// Module: crate
+// Provides: {"hash_all_at_once"}
+// Dependencies: {}
+fn hash_all_at_once < J : join :: Join > (input : & [u8] , key : & CVWords , flags : u8) -> Output { let platform = Platform :: detect () ; if input . len () <= CHUNK_LEN { return ChunkState :: new (key , 0 , flags , platform) . update (input) . output () ; } Output { input_chaining_value : * key , block : compress_subtree_to_parent_node :: < J > (input , key , 0 , flags , platform) , block_len : BLOCK_LEN as u8 , counter : 0 , flags : flags | PARENT , platform , } }
+};
+}

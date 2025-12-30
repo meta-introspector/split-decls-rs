@@ -1,0 +1,9 @@
+// Generated macro for MEMORY_PARTITION_ALL_ACCESS (const)
+macro_rules! Depcrate_ntmmapiMEMORY_PARTITION_ALL_ACCESS {
+() => {
+// Module: crate::ntmmapi
+// Provides: {"MEMORY_PARTITION_ALL_ACCESS"}
+// Dependencies: {}
+pub const MEMORY_PARTITION_ALL_ACCESS : u32 = STANDARD_RIGHTS_REQUIRED | SYNCHRONIZE | MEMORY_PARTITION_QUERY_ACCESS | MEMORY_PARTITION_MODIFY_ACCESS ;
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for impl_5218 (impl)
+macro_rules! Depcrate_features_gen_PerformanceEntryEventInitimpl_5218 {
+() => {
+// Module: crate::features::gen_PerformanceEntryEventInit
+// Provides: {"impl_5218"}
+// Dependencies: {}
+impl PerformanceEntryEventInit { # [doc = "Construct a new `PerformanceEntryEventInit`."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `PerformanceEntryEventInit`*"] pub fn new () -> Self { # [allow (unused_mut)] let mut ret : Self = :: wasm_bindgen :: JsCast :: unchecked_into (:: js_sys :: Object :: new ()) ; ret } # [deprecated = "Use `set_bubbles()` instead."] pub fn bubbles (& mut self , val : bool) -> & mut Self { self . set_bubbles (val) ; self } # [deprecated = "Use `set_cancelable()` instead."] pub fn cancelable (& mut self , val : bool) -> & mut Self { self . set_cancelable (val) ; self } # [deprecated = "Use `set_composed()` instead."] pub fn composed (& mut self , val : bool) -> & mut Self { self . set_composed (val) ; self } # [deprecated = "Use `set_duration()` instead."] pub fn duration (& mut self , val : f64) -> & mut Self { self . set_duration (val) ; self } # [deprecated = "Use `set_entry_type()` instead."] pub fn entry_type (& mut self , val : & str) -> & mut Self { self . set_entry_type (val) ; self } # [deprecated = "Use `set_epoch()` instead."] pub fn epoch (& mut self , val : f64) -> & mut Self { self . set_epoch (val) ; self } # [deprecated = "Use `set_name()` instead."] pub fn name (& mut self , val : & str) -> & mut Self { self . set_name (val) ; self } # [deprecated = "Use `set_origin()` instead."] pub fn origin (& mut self , val : & str) -> & mut Self { self . set_origin (val) ; self } # [deprecated = "Use `set_start_time()` instead."] pub fn start_time (& mut self , val : f64) -> & mut Self { self . set_start_time (val) ; self } }
+};
+}

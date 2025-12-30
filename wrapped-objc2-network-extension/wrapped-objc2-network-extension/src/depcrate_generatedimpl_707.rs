@@ -1,0 +1,9 @@
+// Generated macro for impl_707 (impl)
+macro_rules! Depcrate_generatedimpl_707 {
+() => {
+// Module: crate::generated
+// Provides: {"impl_707"}
+// Dependencies: {}
+impl NEPrivateLTENetwork { extern_methods ! (# [doc = " Mobile Country Code of the private LTE network."] # [unsafe (method (mobileCountryCode))] # [unsafe (method_family = none)] pub unsafe fn mobileCountryCode (& self) -> Retained < NSString >; # [doc = " Setter for [`mobileCountryCode`][Self::mobileCountryCode]."] # [doc = ""] # [doc = " This is [copied][objc2_foundation::NSCopying::copy] when set."] # [unsafe (method (setMobileCountryCode :))] # [unsafe (method_family = none)] pub unsafe fn setMobileCountryCode (& self , mobile_country_code : & NSString) ; # [doc = " Mobile Network Code of the private LTE network."] # [unsafe (method (mobileNetworkCode))] # [unsafe (method_family = none)] pub unsafe fn mobileNetworkCode (& self) -> Retained < NSString >; # [doc = " Setter for [`mobileNetworkCode`][Self::mobileNetworkCode]."] # [doc = ""] # [doc = " This is [copied][objc2_foundation::NSCopying::copy] when set."] # [unsafe (method (setMobileNetworkCode :))] # [unsafe (method_family = none)] pub unsafe fn setMobileNetworkCode (& self , mobile_network_code : & NSString) ; # [doc = " Tracking Area Code of the private LTE network. This property is only applicable for band 48 private LTE networks."] # [unsafe (method (trackingAreaCode))] # [unsafe (method_family = none)] pub unsafe fn trackingAreaCode (& self) -> Option < Retained < NSString >>; # [doc = " Setter for [`trackingAreaCode`][Self::trackingAreaCode]."] # [doc = ""] # [doc = " This is [copied][objc2_foundation::NSCopying::copy] when set."] # [unsafe (method (setTrackingAreaCode :))] # [unsafe (method_family = none)] pub unsafe fn setTrackingAreaCode (& self , tracking_area_code : Option <& NSString >) ;) ; }
+};
+}

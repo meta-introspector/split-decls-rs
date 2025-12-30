@@ -1,0 +1,45 @@
+// Generated module macro for crate
+macro_rules! Modcrate {
+() => {
+        Depcrateother_1!();
+        Depcrateuse_2!();
+        Depcrateuse_3!();
+        Depcrateuse_4!();
+        Depcrateuse_5!();
+        Depcrateuse_6!();
+        Depcrateavailability!();
+        Depcratecfgs!();
+        Depcrateconfig!();
+        Depcratecontext!();
+        Depcratedisplay_helper!();
+        Depcratedocumentation!();
+        Depcrateexpr!();
+        Depcratefn_utils!();
+        Depcrateglobal_analysis!();
+        Depcrateid!();
+        Depcratelibrary!();
+        Depcratemethod!();
+        Depcratemodule!();
+        Depcratename_translation!();
+        Depcrateobjc2_utils!();
+        Depcrateprotocol!();
+        Depcraterust_type!();
+        Depcratestmt!();
+        Depcratethread_safety!();
+        Depcrateunexposed_attr!();
+        Depcrateuse_420!();
+        Depcrateuse_421!();
+        Depcrateuse_422!();
+        Depcrateuse_423!();
+        Depcrateuse_424!();
+        Depcrateuse_425!();
+        Depcrateuse_426!();
+        Depcrateuse_427!();
+        Depcrateuse_428!();
+        Depcraterun_cargo_fmt!();
+        Depcraterun_rustfmt!();
+        Depcrateimmediate_children!();
+        Depcrateto_snake_case!();
+        DepcrateVERSION!();
+    };
+}

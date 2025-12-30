@@ -1,0 +1,39 @@
+// Generated module macro for crate::matches::redundant_pattern_match
+macro_rules! Modcrate_matches_redundant_pattern_match {
+() => {
+        Depcrate_matches_redundant_pattern_matchuse_4883!();
+        Depcrate_matches_redundant_pattern_matchuse_4884!();
+        Depcrate_matches_redundant_pattern_matchuse_4885!();
+        Depcrate_matches_redundant_pattern_matchuse_4886!();
+        Depcrate_matches_redundant_pattern_matchuse_4887!();
+        Depcrate_matches_redundant_pattern_matchuse_4888!();
+        Depcrate_matches_redundant_pattern_matchuse_4889!();
+        Depcrate_matches_redundant_pattern_matchuse_4890!();
+        Depcrate_matches_redundant_pattern_matchuse_4891!();
+        Depcrate_matches_redundant_pattern_matchuse_4892!();
+        Depcrate_matches_redundant_pattern_matchuse_4893!();
+        Depcrate_matches_redundant_pattern_matchuse_4894!();
+        Depcrate_matches_redundant_pattern_matchuse_4895!();
+        Depcrate_matches_redundant_pattern_matchuse_4896!();
+        Depcrate_matches_redundant_pattern_matchuse_4897!();
+        Depcrate_matches_redundant_pattern_matchuse_4898!();
+        Depcrate_matches_redundant_pattern_matchuse_4899!();
+        Depcrate_matches_redundant_pattern_matchuse_4900!();
+        Depcrate_matches_redundant_pattern_matchcheck!();
+        Depcrate_matches_redundant_pattern_matchcheck_if_let!();
+        Depcrate_matches_redundant_pattern_matchcheck_matches_true!();
+        Depcrate_matches_redundant_pattern_matchfind_if_let_true!();
+        Depcrate_matches_redundant_pattern_matchfind_match_true!();
+        Depcrate_matches_redundant_pattern_matchtry_get_generic_ty!();
+        Depcrate_matches_redundant_pattern_matchfind_method_and_type!();
+        Depcrate_matches_redundant_pattern_matchfind_method_sugg_for_if_let!();
+        Depcrate_matches_redundant_pattern_matchcheck_match!();
+        Depcrate_matches_redundant_pattern_matchfound_good_method!();
+        Depcrate_matches_redundant_pattern_matchget_ident!();
+        Depcrate_matches_redundant_pattern_matchget_good_method!();
+        Depcrate_matches_redundant_pattern_matchItem!();
+        Depcrate_matches_redundant_pattern_matchis_pat_variant!();
+        Depcrate_matches_redundant_pattern_matchfind_good_method_for_match!();
+        Depcrate_matches_redundant_pattern_matchfind_good_method_for_matches_macro!();
+    };
+}

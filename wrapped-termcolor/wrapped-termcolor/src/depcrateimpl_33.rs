@@ -1,0 +1,9 @@
+// Generated macro for impl_33 (impl)
+macro_rules! Depcrateimpl_33 {
+() => {
+// Module: crate
+// Provides: {"impl_33"}
+// Dependencies: {}
+impl WriterInner < IoStandardStream > { # [doc = " Create a new inner writer for a standard stream with the given color"] # [doc = " preferences."] # [cfg (not (windows))] fn create (sty : StandardStreamType , choice : ColorChoice ,) -> WriterInner < IoStandardStream > { if choice . should_attempt_color () { WriterInner :: Ansi (Ansi (IoStandardStream :: new (sty))) } else { WriterInner :: NoColor (NoColor (IoStandardStream :: new (sty))) } } # [doc = " Create a new inner writer for a standard stream with the given color"] # [doc = " preferences."] # [doc = ""] # [doc = " If coloring is desired and a Windows console could not be found, then"] # [doc = " ANSI escape sequences are used instead."] # [cfg (windows)] fn create (sty : StandardStreamType , choice : ColorChoice ,) -> WriterInner < IoStandardStream > { let mut con = match sty { StandardStreamType :: Stdout => wincon :: Console :: stdout () , StandardStreamType :: Stderr => wincon :: Console :: stderr () , StandardStreamType :: StdoutBuffered => wincon :: Console :: stdout () , StandardStreamType :: StderrBuffered => wincon :: Console :: stderr () , } ; let is_console_virtual = con . as_mut () . map (| con | con . set_virtual_terminal_processing (true) . is_ok ()) . unwrap_or (false) ; if choice . should_attempt_color () { if choice . should_ansi () || is_console_virtual { WriterInner :: Ansi (Ansi (IoStandardStream :: new (sty))) } else if let Ok (console) = con { WriterInner :: Windows { wtr : IoStandardStream :: new (sty) , console : Mutex :: new (console) , } } else { WriterInner :: Ansi (Ansi (IoStandardStream :: new (sty))) } } else { WriterInner :: NoColor (NoColor (IoStandardStream :: new (sty))) } } }
+};
+}

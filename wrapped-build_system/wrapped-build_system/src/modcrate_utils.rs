@@ -1,0 +1,40 @@
+// Generated module macro for crate::utils
+macro_rules! Modcrate_utils {
+() => {
+        Depcrate_utilsuse_157!();
+        Depcrate_utilsuse_158!();
+        Depcrate_utilsuse_159!();
+        Depcrate_utilsuse_160!();
+        Depcrate_utilsuse_161!();
+        Depcrate_utilsuse_162!();
+        Depcrate_utilsuse_163!();
+        Depcrate_utilsexec_command!();
+        Depcrate_utilsget_command_inner!();
+        Depcrate_utilscheck_exit_status!();
+        Depcrate_utilscommand_error!();
+        Depcrate_utilsrun_command!();
+        Depcrate_utilsrun_command_with_env!();
+        Depcrate_utilsrun_command_with_output!();
+        Depcrate_utilsrun_command_with_output_and_env!();
+        Depcrate_utilsrun_command_with_output_and_env_no_err!();
+        Depcrate_utilscargo_install!();
+        Depcrate_utilsget_os_name!();
+        Depcrate_utilsRustcVersionInfo!();
+        Depcrate_utilsrustc_toolchain_version_info!();
+        Depcrate_utilsrustc_version_info!();
+        Depcrate_utilsrustc_version_info_inner!();
+        Depcrate_utilsget_toolchain!();
+        Depcrate_utilsCloneResult!();
+        Depcrate_utilsgit_clone_inner!();
+        Depcrate_utilsget_repo_name!();
+        Depcrate_utilsgit_clone!();
+        Depcrate_utilscreate_dir!();
+        Depcrate_utilsgit_clone_root_dir!();
+        Depcrate_utilswalk_dir!();
+        Depcrate_utilssplit_args!();
+        Depcrate_utilsremove_file!();
+        Depcrate_utilscreate_symlink!();
+        Depcrate_utilsget_sysroot_dir!();
+        Depcrate_utilstests!();
+    };
+}

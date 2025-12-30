@@ -1,0 +1,39 @@
+// Generated module macro for crate::seg_queue
+macro_rules! Modcrate_seg_queue {
+() => {
+        Depcrate_seg_queueuse_24!();
+        Depcrate_seg_queueuse_25!();
+        Depcrate_seg_queueuse_26!();
+        Depcrate_seg_queueuse_27!();
+        Depcrate_seg_queueuse_28!();
+        Depcrate_seg_queueuse_29!();
+        Depcrate_seg_queueuse_30!();
+        Depcrate_seg_queueuse_31!();
+        Depcrate_seg_queueuse_32!();
+        Depcrate_seg_queueuse_33!();
+        Depcrate_seg_queueWRITE!();
+        Depcrate_seg_queueREAD!();
+        Depcrate_seg_queueDESTROY!();
+        Depcrate_seg_queueLAP!();
+        Depcrate_seg_queueBLOCK_CAP!();
+        Depcrate_seg_queueSHIFT!();
+        Depcrate_seg_queueHAS_NEXT!();
+        Depcrate_seg_queueSlot!();
+        Depcrate_seg_queueimpl_42!();
+        Depcrate_seg_queueBlock!();
+        Depcrate_seg_queueimpl_44!();
+        Depcrate_seg_queuePosition!();
+        Depcrate_seg_queueSegQueue!();
+        Depcrate_seg_queueimpl_47!();
+        Depcrate_seg_queueimpl_48!();
+        Depcrate_seg_queueimpl_49!();
+        Depcrate_seg_queueimpl_50!();
+        Depcrate_seg_queueimpl_51!();
+        Depcrate_seg_queueimpl_52!();
+        Depcrate_seg_queueimpl_53!();
+        Depcrate_seg_queueimpl_54!();
+        Depcrate_seg_queueimpl_55!();
+        Depcrate_seg_queueIntoIter!();
+        Depcrate_seg_queueimpl_57!();
+    };
+}

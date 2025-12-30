@@ -1,0 +1,54 @@
+// Generated module macro for crate::ext::de
+macro_rules! Modcrate_ext_de {
+() => {
+        Depcrate_ext_deuse_82!();
+        Depcrate_ext_deuse_83!();
+        Depcrate_ext_deuse_84!();
+        Depcrate_ext_deuse_85!();
+        Depcrate_ext_deuse_86!();
+        Depcrate_ext_deuse_87!();
+        Depcrate_ext_deuse_88!();
+        Depcrate_ext_deuse_89!();
+        Depcrate_ext_deuse_90!();
+        Depcrate_ext_deuse_91!();
+        Depcrate_ext_deuse_92!();
+        Depcrate_ext_defrom_value!();
+        Depcrate_ext_dedeserialize_from!();
+        Depcrate_ext_deimpl_95!();
+        Depcrate_ext_deimpl_96!();
+        Depcrate_ext_deimpl_97!();
+        Depcrate_ext_deimpl_98!();
+        Depcrate_ext_deimpl_99!();
+        Depcrate_ext_deimpl_100!();
+        Depcrate_ext_deExtDeserializer!();
+        Depcrate_ext_deimpl_102!();
+        Depcrate_ext_deimpl_103!();
+        Depcrate_ext_deimpl_104!();
+        Depcrate_ext_deimpl_105!();
+        Depcrate_ext_deSeqDeserializer!();
+        Depcrate_ext_deimpl_107!();
+        Depcrate_ext_deimpl_108!();
+        Depcrate_ext_deimpl_109!();
+        Depcrate_ext_deMapDeserializer!();
+        Depcrate_ext_deimpl_111!();
+        Depcrate_ext_deimpl_112!();
+        Depcrate_ext_deimpl_113!();
+        Depcrate_ext_deEnumDeserializer!();
+        Depcrate_ext_deimpl_115!();
+        Depcrate_ext_deimpl_116!();
+        Depcrate_ext_deVariantDeserializer!();
+        Depcrate_ext_deimpl_118!();
+        Depcrate_ext_deMapRefDeserializer!();
+        Depcrate_ext_deimpl_120!();
+        Depcrate_ext_deimpl_121!();
+        Depcrate_ext_deimpl_122!();
+        Depcrate_ext_deEnumRefDeserializer!();
+        Depcrate_ext_deimpl_124!();
+        Depcrate_ext_deimpl_125!();
+        Depcrate_ext_deVariantRefDeserializer!();
+        Depcrate_ext_deimpl_127!();
+        Depcrate_ext_deValueBase!();
+        Depcrate_ext_deimpl_129!();
+        Depcrate_ext_deimpl_130!();
+    };
+}

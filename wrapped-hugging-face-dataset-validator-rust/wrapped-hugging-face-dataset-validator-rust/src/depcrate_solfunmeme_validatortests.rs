@@ -1,0 +1,9 @@
+// Generated macro for tests (module)
+macro_rules! Depcrate_solfunmeme_validatortests {
+() => {
+// Module: crate::solfunmeme_validator
+// Provides: {"tests"}
+// Dependencies: {}
+# [cfg (test)] mod tests { use super :: * ; # [test] fn test_solfunmeme_data_access () { let base_path = "/home/mdupont/2025/08/07/solfunmeme-index" ; if ! Path :: new (base_path) . exists () { println ! ("Skipping test - dataset not found at {}" , base_path) ; return ; } let data_access = SolfunmemeDataAccess :: new (base_path) ; assert ! (data_access . health_check () . is_ok ()) ; let configs = data_access . get_config_names ("solfunmeme-index") . unwrap () ; assert ! (! configs . is_empty ()) ; assert ! (configs . contains (& "a" . to_string ())) ; let splits = data_access . get_split_names ("solfunmeme-index" , "a") . unwrap () ; assert ! (! splits . is_empty ()) ; if splits . contains (& "17751" . to_string ()) { let term = data_access . load_term ("17751") . unwrap () ; assert_eq ! (term . term , "abilities") ; assert ! (term . count > 0) ; } else { if let Some (term_id) = splits . first () { let result = data_access . load_term (term_id) ; assert ! (result . is_ok () , "Failed to load term {}: {:?}" , term_id , result . err ()) ; } } } # [test] fn test_validation_capabilities () { let base_path = "/home/mdupont/2025/08/07/solfunmeme-index" ; if ! Path :: new (base_path) . exists () { println ! ("Skipping test - dataset not found at {}" , base_path) ; return ; } let validator = create_solfunmeme_validator (base_path) . unwrap () ; let result = validate_dataset ("solfunmeme-index" , validator . data_access) ; assert ! (result . is_ok ()) ; let (validation_result , progress) = result . unwrap () ; assert_eq ! (progress , 1.0) ; assert ! (validation_result . has_any_capability ()) ; } }
+};
+}

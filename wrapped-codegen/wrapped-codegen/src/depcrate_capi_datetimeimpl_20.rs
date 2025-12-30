@@ -1,0 +1,9 @@
+// Generated macro for impl_20 (impl)
+macro_rules! Depcrate_capi_datetimeimpl_20 {
+() => {
+// Module: crate::capi_datetime
+// Provides: {"impl_20"}
+// Dependencies: {}
+impl ZonedFormatterVariant { pub fn name_lower (& self) -> & str { match self . zone_style { ZoneStyle :: SpecificLong => "specific_long" , ZoneStyle :: SpecificShort => "specific_short" , ZoneStyle :: LocalizedOffsetLong => "localized_offset_long" , ZoneStyle :: LocalizedOffsetShort => "localized_offset_short" , ZoneStyle :: GenericLong => "generic_long" , ZoneStyle :: GenericShort => "generic_short" , ZoneStyle :: Location => "location" , ZoneStyle :: ExemplarCity => "exemplar_city" , _ => unreachable ! ("unknown variant") , } } pub fn name_camel (& self) -> & str { match self . zone_style { ZoneStyle :: SpecificLong => "SpecificLong" , ZoneStyle :: SpecificShort => "SpecificShort" , ZoneStyle :: LocalizedOffsetLong => "LocalizedOffsetLong" , ZoneStyle :: LocalizedOffsetShort => "LocalizedOffsetShort" , ZoneStyle :: GenericLong => "GenericLong" , ZoneStyle :: GenericShort => "GenericShort" , ZoneStyle :: Location => "Location" , ZoneStyle :: ExemplarCity => "ExemplarCity" , _ => unreachable ! ("unknown variant") , } } pub fn load_fn (& self) -> & str { match self . zone_style { ZoneStyle :: SpecificLong => "specific_long_names_with_fallback" , ZoneStyle :: SpecificShort => "specific_short_names_with_fallback" , ZoneStyle :: LocalizedOffsetLong => "localized_offset_names_with_fallback" , ZoneStyle :: LocalizedOffsetShort => "localized_offset_names_with_fallback" , ZoneStyle :: GenericLong => "generic_long_names_with_fallback" , ZoneStyle :: GenericShort => "generic_short_names_with_fallback" , ZoneStyle :: Location => "location_names" , ZoneStyle :: ExemplarCity => "exemplar_city_names" , _ => unreachable ! ("unknown variant") , } } pub fn is_demo_constructor (& self) -> bool { matches ! (self . zone_style , ZoneStyle :: SpecificLong) } }
+};
+}

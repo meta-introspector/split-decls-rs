@@ -1,0 +1,9 @@
+// Generated macro for impl_7634 (impl)
+macro_rules! Depcrate_stm32f412impl_7634 {
+() => {
+// Module: crate::stm32f412
+// Provides: {"impl_7634"}
+// Dependencies: {}
+impl Deref for TIM9 { type Target = tim12 :: RegisterBlock ; # [inline (always)] fn deref (& self) -> & Self :: Target { unsafe { & * Self :: PTR } } }
+};
+}

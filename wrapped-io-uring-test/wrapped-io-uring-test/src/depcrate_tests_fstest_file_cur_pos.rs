@@ -1,0 +1,9 @@
+// Generated macro for test_file_cur_pos (function)
+macro_rules! Depcrate_tests_fstest_file_cur_pos {
+() => {
+// Module: crate::tests::fs
+// Provides: {"test_file_cur_pos"}
+// Dependencies: {}
+pub fn test_file_cur_pos < S : squeue :: EntryMarker , C : cqueue :: EntryMarker > (ring : & mut IoUring < S , C > , test : & Test ,) -> anyhow :: Result < () > { require ! (test ; test . probe . is_supported (opcode :: Write :: CODE) ; test . probe . is_supported (opcode :: Read :: CODE) ; ring . params () . is_feature_rw_cur_pos () ;) ; println ! ("test file_cur_pos") ; let fd = tempfile :: tempfile () ? ; let fd = types :: Fd (fd . into_raw_fd ()) ; let text = b"The quick brown fox jumps over the lazy dog." ; let mut output = vec ! [0 ; text . len ()] ; let write_e = opcode :: Write :: new (fd , text . as_ptr () , 22) . offset (u64 :: MAX) . build () . user_data (0x01) . into () ; unsafe { ring . submission () . push (& write_e) . expect ("queue is full") ; } ring . submit_and_wait (1) ? ; let write_e = opcode :: Write :: new (fd , unsafe { text . as_ptr () . add (22) } , 22) . offset (u64 :: MAX) . build () . user_data (0x02) . into () ; unsafe { ring . submission () . push (& write_e) . expect ("queue is full") ; } ring . submit_and_wait (2) ? ; let read_e = opcode :: Read :: new (fd , output . as_mut_ptr () , output . len () as _) ; unsafe { ring . submission () . push (& read_e . build () . user_data (0x03) . into ()) . expect ("queue is full") ; } ring . submit_and_wait (3) ? ; let cqes : Vec < cqueue :: Entry > = ring . completion () . map (Into :: into) . collect () ; assert_eq ! (cqes . len () , 3) ; assert_eq ! (cqes [0] . user_data () , 0x01) ; assert_eq ! (cqes [1] . user_data () , 0x02) ; assert_eq ! (cqes [2] . user_data () , 0x03) ; assert_eq ! (cqes [0] . result () , 22) ; assert_eq ! (cqes [1] . result () , 22) ; assert_eq ! (cqes [2] . result () , text . len () as i32) ; assert_eq ! (& output , text) ; Ok (()) }
+};
+}

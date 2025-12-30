@@ -1,0 +1,9 @@
+// Generated macro for Bag (struct)
+macro_rules! Depcrate_provider_fields_componentsBag {
+() => {
+// Module: crate::provider::fields::components
+// Provides: {"Bag"}
+// Dependencies: {}
+# [doc = " See the [module-level](./index.html) docs for more information."] # [doc = ""] # [doc = " <div class=\"stab unstable\">"] # [doc = " 🚧 This code is experimental; it may change at any time, in breaking or non-breaking ways,"] # [doc = " including in SemVer minor releases. It can be enabled with the `experimental` Cargo feature"] # [doc = " of the icu meta-crate. Use with caution."] # [doc = " <a href=\"https://github.com/unicode-org/icu4x/issues/1317\">#1317</a>"] # [doc = " </div>"] # [derive (Debug , Clone , Copy , PartialEq , Eq , Default , Hash)] # [non_exhaustive] pub struct Bag { # [doc = " Include the era, such as \"AD\" or \"CE\"."] pub era : Option < Text > , # [doc = " Include the year, such as \"1970\" or \"70\"."] pub year : Option < Year > , # [doc = " Include the month, such as \"April\" or \"Apr\"."] pub month : Option < Month > , # [doc = " Include the week number, such as \"51st\" or \"51\" for week 51."] pub week : Option < Week > , # [doc = " Include the day of the month/year, such as \"07\" or \"7\"."] pub day : Option < Day > , # [doc = " Include the weekday, such as \"Wednesday\" or \"Wed\"."] pub weekday : Option < Text > , # [doc = " Include the hour such as \"2\" or \"14\"."] pub hour : Option < Numeric > , # [doc = " Include the minute such as \"3\" or \"03\"."] pub minute : Option < Numeric > , # [doc = " Include the second such as \"3\" or \"03\"."] pub second : Option < Numeric > , # [doc = " Specify the number of fractional second digits such as 1 (\".3\") or 3 (\".003\")."] pub subsecond : Option < SubsecondDigits > , # [doc = " Include the time zone, such as \"GMT+05:00\"."] pub time_zone_name : Option < TimeZoneName > , # [doc = " An override of the hour cycle."] pub hour_cycle : Option < HourCycle > , }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for Frechet (struct)
+macro_rules! Depcrate_frechetFrechet {
+() => {
+// Module: crate::frechet
+// Provides: {"Frechet"}
+// Dependencies: {}
+# [doc = " The [Fréchet distribution](https://en.wikipedia.org/wiki/Fr%C3%A9chet_distribution) `Fréchet(α, μ, σ)`."] # [doc = ""] # [doc = " The Fréchet distribution is a continuous probability distribution"] # [doc = " with location parameter `μ` (`mu`), scale parameter `σ` (`sigma`),"] # [doc = " and shape parameter `α` (`alpha`). It describes the distribution"] # [doc = " of the maximum (or minimum) of a number of random variables."] # [doc = " It is also known as the Type II extreme value distribution."] # [doc = ""] # [doc = " # Density function"] # [doc = ""] # [doc = " `f(x) = [(x - μ) / σ]^(-1 - α) exp[-(x - μ) / σ]^(-α) α / σ`"] # [doc = ""] # [doc = " # Plot"] # [doc = ""] # [doc = " The plot shows the Fréchet distribution with various values of `μ`, `σ`, and `α`."] # [doc = " Note how the location parameter `μ` shifts the distribution along the x-axis,"] # [doc = " the scale parameter `σ` stretches or compresses the distribution along the x-axis,"] # [doc = " and the shape parameter `α` changes the tail behavior."] # [doc = ""] # [doc = " ![Fréchet distribution](https://raw.githubusercontent.com/rust-random/charts/main/charts/frechet.svg)"] # [doc = ""] # [doc = " # Example"] # [doc = ""] # [doc = " ```"] # [doc = " use rand::prelude::*;"] # [doc = " use rand_distr::Frechet;"] # [doc = ""] # [doc = " let val: f64 = rand::rng().sample(Frechet::new(0.0, 1.0, 1.0).unwrap());"] # [doc = " println!(\"{}\", val);"] # [doc = " ```"] # [derive (Clone , Copy , Debug , PartialEq)] # [cfg_attr (feature = "serde" , derive (serde :: Serialize , serde :: Deserialize))] pub struct Frechet < F > where F : Float , OpenClosed01 : Distribution < F > , { location : F , scale : F , shape : F , }
+};
+}

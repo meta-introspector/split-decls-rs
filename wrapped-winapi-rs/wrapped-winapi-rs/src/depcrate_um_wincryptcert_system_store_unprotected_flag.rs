@@ -1,0 +1,9 @@
+// Generated macro for CERT_SYSTEM_STORE_UNPROTECTED_FLAG (const)
+macro_rules! Depcrate_um_wincryptCERT_SYSTEM_STORE_UNPROTECTED_FLAG {
+() => {
+// Module: crate::um::wincrypt
+// Provides: {"CERT_SYSTEM_STORE_UNPROTECTED_FLAG"}
+// Dependencies: {}
+pub const CERT_SYSTEM_STORE_UNPROTECTED_FLAG : DWORD = 0x40000000 ;
+};
+}

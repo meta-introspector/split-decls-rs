@@ -1,0 +1,9 @@
+// Generated macro for tests (module)
+macro_rules! Depcrate_ir_extfunctests {
+() => {
+// Module: crate::ir::extfunc
+// Provides: {"tests"}
+// Dependencies: {}
+# [cfg (test)] mod tests { use super :: * ; use crate :: ir :: types :: { F32 , I32 , I8 } ; use alloc :: string :: ToString ; # [test] fn argument_type () { let t = AbiParam :: new (I32) ; assert_eq ! (t . to_string () , "i32") ; let mut t = t . uext () ; assert_eq ! (t . to_string () , "i32 uext") ; assert_eq ! (t . sext () . to_string () , "i32 sext") ; t . purpose = ArgumentPurpose :: StructReturn ; assert_eq ! (t . to_string () , "i32 uext sret") ; } # [test] fn argument_purpose () { let all_purpose = [(ArgumentPurpose :: Normal , "normal") , (ArgumentPurpose :: StructReturn , "sret") , (ArgumentPurpose :: VMContext , "vmctx") , (ArgumentPurpose :: StructArgument (42) , "sarg(42)") ,] ; for & (e , n) in & all_purpose { assert_eq ! (e . to_string () , n) ; assert_eq ! (Ok (e) , n . parse ()) ; } } # [test] fn call_conv () { for & cc in & [CallConv :: Fast , CallConv :: Cold , CallConv :: SystemV , CallConv :: WindowsFastcall ,] { assert_eq ! (Ok (cc) , cc . to_string () . parse ()) } } # [test] fn signatures () { let mut sig = Signature :: new (CallConv :: WindowsFastcall) ; assert_eq ! (sig . to_string () , "() windows_fastcall") ; sig . params . push (AbiParam :: new (I32)) ; assert_eq ! (sig . to_string () , "(i32) windows_fastcall") ; sig . returns . push (AbiParam :: new (F32)) ; assert_eq ! (sig . to_string () , "(i32) -> f32 windows_fastcall") ; sig . params . push (AbiParam :: new (I32 . by (4) . unwrap ())) ; assert_eq ! (sig . to_string () , "(i32, i32x4) -> f32 windows_fastcall") ; sig . returns . push (AbiParam :: new (I8)) ; assert_eq ! (sig . to_string () , "(i32, i32x4) -> f32, i8 windows_fastcall") ; } }
+};
+}

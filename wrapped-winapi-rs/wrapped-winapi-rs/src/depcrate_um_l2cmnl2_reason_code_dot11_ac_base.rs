@@ -1,0 +1,9 @@
+// Generated macro for L2_REASON_CODE_DOT11_AC_BASE (const)
+macro_rules! Depcrate_um_l2cmnL2_REASON_CODE_DOT11_AC_BASE {
+() => {
+// Module: crate::um::l2cmn
+// Provides: {"L2_REASON_CODE_DOT11_AC_BASE"}
+// Dependencies: {}
+pub const L2_REASON_CODE_DOT11_AC_BASE : u32 = L2_REASON_CODE_GEN_BASE + L2_REASON_CODE_GROUP_SIZE ;
+};
+}

@@ -1,0 +1,54 @@
+// Generated module macro for crate::bounds
+macro_rules! Modcrate_bounds {
+() => {
+        Depcrate_boundsuse_25!();
+        Depcrate_boundsuse_26!();
+        Depcrate_boundsuse_27!();
+        Depcrate_boundsuse_28!();
+        Depcrate_boundsuse_29!();
+        Depcrate_boundsBounded!();
+        Depcrate_boundsLowerBounded!();
+        Depcrate_boundsimpl_32!();
+        Depcrate_boundsUpperBounded!();
+        Depcrate_boundsimpl_34!();
+        Depcrate_boundsbounded_impl!();
+        Depcrate_boundsmacro_36!();
+        Depcrate_boundsmacro_37!();
+        Depcrate_boundsmacro_38!();
+        Depcrate_boundsmacro_39!();
+        Depcrate_boundsmacro_40!();
+        Depcrate_boundsmacro_41!();
+        Depcrate_boundsmacro_42!();
+        Depcrate_boundsmacro_43!();
+        Depcrate_boundsmacro_44!();
+        Depcrate_boundsmacro_45!();
+        Depcrate_boundsmacro_46!();
+        Depcrate_boundsmacro_47!();
+        Depcrate_boundsbounded_impl_nonzero_const!();
+        Depcrate_boundsbounded_impl_nonzero!();
+        Depcrate_boundsmacro_50!();
+        Depcrate_boundsmacro_51!();
+        Depcrate_boundsmacro_52!();
+        Depcrate_boundsmacro_53!();
+        Depcrate_boundsmacro_54!();
+        Depcrate_boundsmacro_55!();
+        Depcrate_boundsmacro_56!();
+        Depcrate_boundsmacro_57!();
+        Depcrate_boundsmacro_58!();
+        Depcrate_boundsmacro_59!();
+        Depcrate_boundsmacro_60!();
+        Depcrate_boundsmacro_61!();
+        Depcrate_boundsimpl_62!();
+        Depcrate_boundsmacro_63!();
+        Depcrate_boundsfor_each_tuple_!();
+        Depcrate_boundsfor_each_tuple!();
+        Depcrate_boundsbounded_tuple!();
+        Depcrate_boundsmacro_67!();
+        Depcrate_boundsmacro_68!();
+        Depcrate_boundswrapping_bounded!();
+        Depcrate_boundswrapping_bounded_i128!();
+        Depcrate_boundswrapping_is_bounded!();
+        Depcrate_boundsbounded_unsigned_nonzero!();
+        Depcrate_boundsbounded_signed_nonzero!();
+    };
+}

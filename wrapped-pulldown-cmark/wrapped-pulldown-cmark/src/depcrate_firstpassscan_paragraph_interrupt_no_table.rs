@@ -1,0 +1,9 @@
+// Generated macro for scan_paragraph_interrupt_no_table (function)
+macro_rules! Depcrate_firstpassscan_paragraph_interrupt_no_table {
+() => {
+// Module: crate::firstpass
+// Provides: {"scan_paragraph_interrupt_no_table"}
+// Dependencies: {}
+# [doc = " Checks whether we should break a paragraph on the given input."] # [doc = ""] # [doc = " Use `FirstPass::scan_paragraph_interrupt` in any context that allows"] # [doc = " tables to interrupt the paragraph."] fn scan_paragraph_interrupt_no_table (bytes : & [u8] , current_container : bool , has_footnote : bool , definition_list : bool , tree : & Tree < Item > , tree_position : usize ,) -> bool { scan_eol (bytes) . is_some () || scan_hrule (bytes) . is_ok () || scan_atx_heading (bytes) . is_some () || scan_code_fence (bytes) . is_some () || scan_interrupting_container_extensions_fence (bytes) || scan_blockquote_start (bytes) . is_some () || scan_listitem (bytes) . map_or (false , | (ix , delim , index , _) | { ! current_container || tree . is_in_table () || (delim == b'*' || delim == b'-' || delim == b'+' || index == 1) && (scan_blank_line (& bytes [ix ..]) . is_none ()) }) || bytes . starts_with (b"<") && (get_html_end_tag (& bytes [1 ..]) . is_some () || starts_html_block_type_6 (& bytes [1 ..])) || definition_list && ((current_container && tree . peek_up () . map_or (false , | cur | { matches ! (tree [cur] . item . body , ItemBody :: Paragraph | ItemBody :: TightParagraph | ItemBody :: MaybeDefinitionListTitle) })) || tree . walk_spine () . nth (tree_position) . map_or (false , | cur | { matches ! (tree [* cur] . item . body , ItemBody :: DefinitionListDefinition (_)) })) && bytes . starts_with (b":") || (has_footnote && bytes . starts_with (b"[^") && scan_link_label_rest (core :: str :: from_utf8 (& bytes [2 ..]) . unwrap () , & | _ | None , tree . is_in_table () ,) . map_or (false , | (len , _) | bytes . get (2 + len) == Some (& b':'))) }
+};
+}

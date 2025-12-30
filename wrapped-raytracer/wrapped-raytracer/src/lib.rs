@@ -1,0 +1,75 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcratecreate_scene.rs");
+include!("depcrate_rendercolor.rs");
+include!("depcrate_vecimpl_55.rs");
+include!("depcrate_modelimpl_33.rs");
+include!("depcrate_vecimpl_46.rs");
+include!("depcrate_vecimpl_50.rs");
+include!("depcrate_materialsmetal.rs");
+include!("depcrateuse_2.rs");
+include!("depcrate_vecrandom_in_unit_disc.rs");
+include!("depcrate_camerause_8.rs");
+include!("depcrate_vecimpl_51.rs");
+include!("depcrate_vecimpl_48.rs");
+include!("depcraterender.rs");
+include!("depcrate_renderuse_39.rs");
+include!("depcrate_modelhit.rs");
+include!("depcratemodel.rs");
+include!("depcratematerials.rs");
+include!("depcrate_materialsuse_12.rs");
+include!("depcrate_materialsscatter.rs");
+include!("depcrate_camerause_7.rs");
+include!("depcrate_modeluse_27.rs");
+include!("depcrate_materialsuse_13.rs");
+include!("depcrate_cameracamera.rs");
+include!("depcrate_materialsmaterial.rs");
+include!("depcrate_materialsimpl_17.rs");
+include!("depcrate_materialsdielectric.rs");
+include!("depcrate_renderuse_38.rs");
+include!("depcrate_materialswhite.rs");
+include!("depcrate_vecimpl_49.rs");
+include!("depcratemain.rs");
+include!("depcrate_renderuse_37.rs");
+include!("depcratevec.rs");
+include!("depcrate_modelt_min.rs");
+include!("depcrateuse_1.rs");
+include!("depcrate_vecuse_43.rs");
+include!("depcrateuse_5.rs");
+include!("depcrate_renderrender.rs");
+include!("depcrate_renderuse_36.rs");
+include!("depcrate_materialslambertian.rs");
+include!("depcrate_vecrandom_in_unit_sphere.rs");
+include!("depcrate_modelsphere.rs");
+include!("depcrateuse_3.rs");
+include!("depcrateuse_4.rs");
+include!("depcrate_materialsreflect.rs");
+include!("depcrate_modelmodel.rs");
+include!("depcratecamera.rs");
+include!("depcrate_vecimpl_45.rs");
+include!("depcrate_renderuse_35.rs");
+include!("depcrate_vecimpl_47.rs");
+include!("depcrate_cameraimpl_10.rs");
+include!("depcrate_materialsimpl_24.rs");
+include!("depcrate_modeluse_26.rs");
+include!("depcrate_materialsrefract.rs");
+include!("depcrate_materialsimpl_20.rs");
+include!("depcrate_modelimpl_32.rs");
+include!("depcrate_vecvec3.rs");
+include!("depcrate_vecray.rs");
+include!("modcrate_materials.rs");
+include!("modcrate.rs");
+include!("modcrate_vec.rs");
+include!("modcrate_render.rs");
+include!("modcrate_model.rs");
+include!("modcrate_camera.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate_materials!();
+    Modcrate!();
+    Modcrate_vec!();
+    Modcrate_render!();
+    Modcrate_model!();
+    Modcrate_camera!();
+}

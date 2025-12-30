@@ -1,0 +1,64 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcrate_issueimpl_31.rs");
+include!("depcrateuse_48.rs");
+include!("depcrate_brokeruse_4.rs");
+include!("depcrate_subscribeuse_43.rs");
+include!("depcrate_brokeruse_2.rs");
+include!("depcrate_brokerimpl_11.rs");
+include!("depcrate_brokerimpl_12.rs");
+include!("depcrate_brokerimpl_19.rs");
+include!("depcrate_issueuse_27.rs");
+include!("depcrate_brokerarbiterbroker.rs");
+include!("depcrate_brokerbroker.rs");
+include!("depcrate_brokersystembroker.rs");
+include!("depcrate_brokeruse_6.rs");
+include!("depcrate_brokerimpl_18.rs");
+include!("depcrate_brokerimpl_21.rs");
+include!("depcrate_brokerimpl_16.rs");
+include!("depcrateissue.rs");
+include!("depcrate_msgsbrokermsg.rs");
+include!("depcrate_msgsimpl_36.rs");
+include!("depcrate_brokerimpl_20.rs");
+include!("depcrate_brokerregisteredbroker.rs");
+include!("depcrate_msgsissuesync.rs");
+include!("depcrate_subscribeuse_44.rs");
+include!("depcrate_subscribeimpl_47.rs");
+include!("depcrate_brokeruse_5.rs");
+include!("depcrate_brokerimpl_17.rs");
+include!("depcrate_msgsimpl_39.rs");
+include!("depcrate_brokeruse_3.rs");
+include!("depcrate_brokerimpl_24.rs");
+include!("depcrate_msgssubscribeasync.rs");
+include!("depcrate_brokertypemap.rs");
+include!("depcrate_msgsuse_34.rs");
+include!("depcrate_issueuse_29.rs");
+include!("depcrate_issuebrokerissue.rs");
+include!("depcrate_issueuse_28.rs");
+include!("depcrate_msgsissueasync.rs");
+include!("depcrate_subscribebrokersubscribe.rs");
+include!("depcratemsgs.rs");
+include!("depcrate_subscribeuse_45.rs");
+include!("depcrate_brokerimpl_25.rs");
+include!("depcrate_msgssubscribesync.rs");
+include!("depcrate_brokerimpl_13.rs");
+include!("depcrate_brokerimpl_14.rs");
+include!("depcrate_brokerimpl_22.rs");
+include!("depcrate_brokerimpl_15.rs");
+include!("depcrate_msgsuse_33.rs");
+include!("depcratesubscribe.rs");
+include!("depcratebroker.rs");
+include!("modcrate_issue.rs");
+include!("modcrate_subscribe.rs");
+include!("modcrate_msgs.rs");
+include!("modcrate_broker.rs");
+include!("modcrate.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate_issue!();
+    Modcrate_subscribe!();
+    Modcrate_msgs!();
+    Modcrate_broker!();
+    Modcrate!();
+}

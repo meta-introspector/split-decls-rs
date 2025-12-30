@@ -1,0 +1,9 @@
+// Generated macro for not_found_when_not_a_directory (function)
+macro_rules! Depcrate_services_fs_serve_dir_testsnot_found_when_not_a_directory {
+() => {
+// Module: crate::services::fs::serve_dir::tests
+// Provides: {"not_found_when_not_a_directory"}
+// Dependencies: {}
+# [cfg (unix)] # [tokio :: test] async fn not_found_when_not_a_directory () { let svc = ServeDir :: new ("../test-files") ; let req = Request :: builder () . uri ("/index.html/some_file") . body (Body :: empty ()) . unwrap () ; let res = svc . oneshot (req) . await . unwrap () ; assert_eq ! (res . status () , StatusCode :: NOT_FOUND) ; assert ! (res . headers () . get (header :: CONTENT_TYPE) . is_none ()) ; let body = body_into_text (res . into_body ()) . await ; assert ! (body . is_empty ()) ; }
+};
+}

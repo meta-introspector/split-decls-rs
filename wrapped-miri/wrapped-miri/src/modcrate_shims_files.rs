@@ -1,0 +1,45 @@
+// Generated module macro for crate::shims::files
+macro_rules! Modcrate_shims_files {
+() => {
+        Depcrate_shims_filesuse_928!();
+        Depcrate_shims_filesuse_929!();
+        Depcrate_shims_filesuse_930!();
+        Depcrate_shims_filesuse_931!();
+        Depcrate_shims_filesuse_932!();
+        Depcrate_shims_filesuse_933!();
+        Depcrate_shims_filesuse_934!();
+        Depcrate_shims_filesuse_935!();
+        Depcrate_shims_filesuse_936!();
+        Depcrate_shims_filesuse_937!();
+        Depcrate_shims_filesuse_938!();
+        Depcrate_shims_filesFdId!();
+        Depcrate_shims_filesFdIdWith!();
+        Depcrate_shims_filesFileDescriptionRef!();
+        Depcrate_shims_filesimpl_942!();
+        Depcrate_shims_filesimpl_943!();
+        Depcrate_shims_filesimpl_944!();
+        Depcrate_shims_filesWeakFileDescriptionRef!();
+        Depcrate_shims_filesimpl_946!();
+        Depcrate_shims_filesimpl_947!();
+        Depcrate_shims_filesimpl_948!();
+        Depcrate_shims_filesimpl_949!();
+        Depcrate_shims_filesFileDescriptionExt!();
+        Depcrate_shims_filesimpl_951!();
+        Depcrate_shims_filesDynFileDescriptionRef!();
+        Depcrate_shims_filesimpl_953!();
+        Depcrate_shims_filesFileDescription!();
+        Depcrate_shims_filesimpl_955!();
+        Depcrate_shims_filesimpl_956!();
+        Depcrate_shims_filesimpl_957!();
+        Depcrate_shims_filesFileHandle!();
+        Depcrate_shims_filesimpl_959!();
+        Depcrate_shims_filesNullOutput!();
+        Depcrate_shims_filesimpl_961!();
+        Depcrate_shims_filesFdNum!();
+        Depcrate_shims_filesFdTable!();
+        Depcrate_shims_filesimpl_964!();
+        Depcrate_shims_filesimpl_965!();
+        Depcrate_shims_filesimpl_966!();
+        Depcrate_shims_filesEvalContextExt!();
+    };
+}

@@ -1,0 +1,9 @@
+// Generated macro for macro_34228 (macro)
+macro_rules! Depcrate_um_perflibmacro_34228 {
+() => {
+// Module: crate::um::perflib
+// Provides: {"macro_34228"}
+// Dependencies: {}
+ENUM ! { enum PerfRegInfoType { PERF_REG_COUNTERSET_STRUCT = 1 , PERF_REG_COUNTER_STRUCT , PERF_REG_COUNTERSET_NAME_STRING , PERF_REG_COUNTERSET_HELP_STRING , PERF_REG_COUNTER_NAME_STRINGS , PERF_REG_COUNTER_HELP_STRINGS , PERF_REG_PROVIDER_NAME , PERF_REG_PROVIDER_GUID , PERF_REG_COUNTERSET_ENGLISH_NAME , PERF_REG_COUNTER_ENGLISH_NAMES , } }
+};
+}

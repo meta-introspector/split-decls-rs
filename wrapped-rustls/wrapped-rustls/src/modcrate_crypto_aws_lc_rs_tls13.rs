@@ -1,0 +1,41 @@
+// Generated module macro for crate::crypto::aws_lc_rs::tls13
+macro_rules! Modcrate_crypto_aws_lc_rs_tls13 {
+() => {
+        Depcrate_crypto_aws_lc_rs_tls13use_1295!();
+        Depcrate_crypto_aws_lc_rs_tls13use_1296!();
+        Depcrate_crypto_aws_lc_rs_tls13use_1297!();
+        Depcrate_crypto_aws_lc_rs_tls13use_1298!();
+        Depcrate_crypto_aws_lc_rs_tls13use_1299!();
+        Depcrate_crypto_aws_lc_rs_tls13use_1300!();
+        Depcrate_crypto_aws_lc_rs_tls13use_1301!();
+        Depcrate_crypto_aws_lc_rs_tls13use_1302!();
+        Depcrate_crypto_aws_lc_rs_tls13use_1303!();
+        Depcrate_crypto_aws_lc_rs_tls13use_1304!();
+        Depcrate_crypto_aws_lc_rs_tls13use_1305!();
+        Depcrate_crypto_aws_lc_rs_tls13TLS13_CHACHA20_POLY1305_SHA256!();
+        Depcrate_crypto_aws_lc_rs_tls13TLS13_AES_256_GCM_SHA384!();
+        Depcrate_crypto_aws_lc_rs_tls13TLS13_AES_128_GCM_SHA256!();
+        Depcrate_crypto_aws_lc_rs_tls13Chacha20Poly1305Aead!();
+        Depcrate_crypto_aws_lc_rs_tls13impl_1310!();
+        Depcrate_crypto_aws_lc_rs_tls13Aes256GcmAead!();
+        Depcrate_crypto_aws_lc_rs_tls13impl_1312!();
+        Depcrate_crypto_aws_lc_rs_tls13Aes128GcmAead!();
+        Depcrate_crypto_aws_lc_rs_tls13impl_1314!();
+        Depcrate_crypto_aws_lc_rs_tls13AeadAlgorithm!();
+        Depcrate_crypto_aws_lc_rs_tls13impl_1316!();
+        Depcrate_crypto_aws_lc_rs_tls13AeadMessageEncrypter!();
+        Depcrate_crypto_aws_lc_rs_tls13AeadMessageDecrypter!();
+        Depcrate_crypto_aws_lc_rs_tls13impl_1319!();
+        Depcrate_crypto_aws_lc_rs_tls13impl_1320!();
+        Depcrate_crypto_aws_lc_rs_tls13GcmMessageEncrypter!();
+        Depcrate_crypto_aws_lc_rs_tls13impl_1322!();
+        Depcrate_crypto_aws_lc_rs_tls13GcmMessageDecrypter!();
+        Depcrate_crypto_aws_lc_rs_tls13impl_1324!();
+        Depcrate_crypto_aws_lc_rs_tls13AwsLcHkdf!();
+        Depcrate_crypto_aws_lc_rs_tls13impl_1326!();
+        Depcrate_crypto_aws_lc_rs_tls13AwsLcHkdfExpander!();
+        Depcrate_crypto_aws_lc_rs_tls13impl_1328!();
+        Depcrate_crypto_aws_lc_rs_tls13Len!();
+        Depcrate_crypto_aws_lc_rs_tls13impl_1330!();
+    };
+}

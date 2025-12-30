@@ -1,0 +1,60 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcrateif_unsigned.rs");
+include!("depcrateuse_24.rs");
+include!("depcrate_testsuse_5.rs");
+include!("depcrateopt_int.rs");
+include!("depcrateuse_23.rs");
+include!("depcratetryfrominterror.rs");
+include!("depcrateimpl_34.rs");
+include!("depcrateimpl_48.rs");
+include!("depcrate_testsuse_4.rs");
+include!("depcratetests.rs");
+include!("depcrateimpl_38.rs");
+include!("depcrateimpl_37.rs");
+include!("depcrate_teststest_ranged_conversion.rs");
+include!("depcrateunsafe_wrapper.rs");
+include!("depcrateuse_30.rs");
+include!("depcrateunsafe_unwrap_unchecked.rs");
+include!("depcrate_testsif_unsigned.rs");
+include!("depcrate_unsafe_wrapperimpl_18.rs");
+include!("depcrate_testsuse_6.rs");
+include!("depcrate_unsafe_wrapperunsafe.rs");
+include!("depcratearticle.rs");
+include!("depcrateuse_19.rs");
+include!("depcrate_testsmacro_13.rs");
+include!("depcrate_testsif_signed.rs");
+include!("depcrate_unsafe_wrapperimpl_16.rs");
+include!("depcrateuse_21.rs");
+include!("depcrateuse_28.rs");
+include!("depcrateuse_22.rs");
+include!("depcrateuse_25.rs");
+include!("depcrateother_1.rs");
+include!("depcrateif_not_manual_rand_09.rs");
+include!("depcrate_testsuse_7.rs");
+include!("depcrate_testsother_3.rs");
+include!("depcrate_teststests.rs");
+include!("depcrateint.rs");
+include!("depcrate_testserrors.rs");
+include!("depcrateuse_31.rs");
+include!("depcrateparseinterror.rs");
+include!("depcratemacro_46.rs");
+include!("depcrateuse_20.rs");
+include!("depcrateimpl_47.rs");
+include!("depcrateimpl_36.rs");
+include!("depcrate_unsafe_wrapperimpl_17.rs");
+include!("depcrateif_signed.rs");
+include!("depcrateimpl_33.rs");
+include!("depcrateimpl_ranged.rs");
+include!("depcrateconst_try_opt.rs");
+include!("depcrateuse_29.rs");
+include!("modcrate_tests.rs");
+include!("modcrate.rs");
+include!("modcrate_unsafe_wrapper.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate_tests!();
+    Modcrate!();
+    Modcrate_unsafe_wrapper!();
+}

@@ -1,0 +1,50 @@
+// Generated module macro for crate::msgs::persist
+macro_rules! Modcrate_msgs_persist {
+() => {
+        Depcrate_msgs_persistuse_433!();
+        Depcrate_msgs_persistuse_434!();
+        Depcrate_msgs_persistuse_435!();
+        Depcrate_msgs_persistuse_436!();
+        Depcrate_msgs_persistuse_437!();
+        Depcrate_msgs_persistuse_438!();
+        Depcrate_msgs_persistuse_439!();
+        Depcrate_msgs_persistuse_440!();
+        Depcrate_msgs_persistuse_441!();
+        Depcrate_msgs_persistuse_442!();
+        Depcrate_msgs_persistuse_443!();
+        Depcrate_msgs_persistuse_444!();
+        Depcrate_msgs_persistuse_445!();
+        Depcrate_msgs_persistuse_446!();
+        Depcrate_msgs_persistuse_447!();
+        Depcrate_msgs_persistuse_448!();
+        Depcrate_msgs_persistRetrieved!();
+        Depcrate_msgs_persistimpl_450!();
+        Depcrate_msgs_persistimpl_451!();
+        Depcrate_msgs_persistimpl_452!();
+        Depcrate_msgs_persistimpl_453!();
+        Depcrate_msgs_persistTls13ClientSessionValue!();
+        Depcrate_msgs_persistimpl_455!();
+        Depcrate_msgs_persistimpl_456!();
+        Depcrate_msgs_persistTls12ClientSessionValue!();
+        Depcrate_msgs_persistimpl_458!();
+        Depcrate_msgs_persistimpl_459!();
+        Depcrate_msgs_persistClientSessionCommon!();
+        Depcrate_msgs_persistimpl_461!();
+        Depcrate_msgs_persistMAX_TICKET_LIFETIME!();
+        Depcrate_msgs_persistMAX_FRESHNESS_SKEW_MS!();
+        Depcrate_msgs_persistServerSessionValue!();
+        Depcrate_msgs_persistimpl_465!();
+        Depcrate_msgs_persistTls12ServerSessionValue!();
+        Depcrate_msgs_persistimpl_467!();
+        Depcrate_msgs_persistimpl_468!();
+        Depcrate_msgs_persistimpl_469!();
+        Depcrate_msgs_persistTls13ServerSessionValue!();
+        Depcrate_msgs_persistimpl_471!();
+        Depcrate_msgs_persistimpl_472!();
+        Depcrate_msgs_persistimpl_473!();
+        Depcrate_msgs_persistCommonServerSessionValue!();
+        Depcrate_msgs_persistimpl_475!();
+        Depcrate_msgs_persistimpl_476!();
+        Depcrate_msgs_persisttests!();
+    };
+}

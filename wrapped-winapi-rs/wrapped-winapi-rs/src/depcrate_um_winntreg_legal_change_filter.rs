@@ -1,0 +1,9 @@
+// Generated macro for REG_LEGAL_CHANGE_FILTER (const)
+macro_rules! Depcrate_um_winntREG_LEGAL_CHANGE_FILTER {
+() => {
+// Module: crate::um::winnt
+// Provides: {"REG_LEGAL_CHANGE_FILTER"}
+// Dependencies: {}
+pub const REG_LEGAL_CHANGE_FILTER : DWORD = REG_NOTIFY_CHANGE_NAME | REG_NOTIFY_CHANGE_ATTRIBUTES | REG_NOTIFY_CHANGE_LAST_SET | REG_NOTIFY_CHANGE_SECURITY | REG_NOTIFY_THREAD_AGNOSTIC ;
+};
+}

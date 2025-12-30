@@ -1,0 +1,66 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcrate_testsnoncopy.rs");
+include!("depcrateimpl_11.rs");
+include!("depcrate_testsuse_33.rs");
+include!("depcrateother_26.rs");
+include!("depcrate_testsuse_31.rs");
+include!("depcrateuse_1.rs");
+include!("depcrate_teststest_typed_arena_zero_sized.rs");
+include!("depcrate_testsbench_typed_arena_clear.rs");
+include!("depcratealign_down.rs");
+include!("depcrate_testsmacro_51.rs");
+include!("depcrateimpl_18.rs");
+include!("depcrateimpl_15.rs");
+include!("depcrate_testsbench_copy.rs");
+include!("depcrate_testsimpl_48.rs");
+include!("depcrate_testssmalldroppable.rs");
+include!("depcrateiscopy.rs");
+include!("depcrate_teststest_noncopy.rs");
+include!("depcrate_teststest_typed_arena_drop_small_count.rs");
+include!("depcrate_testsbench_copy_nonarena.rs");
+include!("depcratedropless_alignment.rs");
+include!("depcrate_teststest_copy.rs");
+include!("depcratealign_up.rs");
+include!("depcratearenachunk.rs");
+include!("depcrateimpl_17.rs");
+include!("depcrate_teststest_typed_arena_clear.rs");
+include!("depcratepage.rs");
+include!("depcrate_testsimpl_35.rs");
+include!("depcrate_testsbench_typed_arena_clear_100.rs");
+include!("depcrateimpl_10.rs");
+include!("depcrate_testsdropcounter.rs");
+include!("depcratehuge_page.rs");
+include!("depcrate_teststest_typed_arena_drop_count.rs");
+include!("depcrateuse_3.rs");
+include!("depcrate_testsuse_32.rs");
+include!("depcrate_testsbench_noncopy.rs");
+include!("depcrate_testsbench_noncopy_nonarena.rs");
+include!("depcrateisnotcopy.rs");
+include!("depcrateuse_4.rs");
+include!("depcrateimpl_25.rs");
+include!("depcrateuse_6.rs");
+include!("depcrateuse_5.rs");
+include!("depcrate_teststest_arena_alloc_nested.rs");
+include!("depcrate_testsimpl_53.rs");
+include!("depcratetests.rs");
+include!("depcratedroplessarena.rs");
+include!("depcrateuse_2.rs");
+include!("depcratetypedarena.rs");
+include!("depcrateimpl_24.rs");
+include!("depcrateuse_7.rs");
+include!("depcrateimpl_16.rs");
+include!("depcrate_testsother_30.rs");
+include!("depcrateoutline.rs");
+include!("depcrateimpl_23.rs");
+include!("depcrate_testspoint.rs");
+include!("depcrate_teststest_typed_arena_drop_on_clear.rs");
+include!("depcrate_teststest_unused.rs");
+include!("modcrate_tests.rs");
+include!("modcrate.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate_tests!();
+    Modcrate!();
+}

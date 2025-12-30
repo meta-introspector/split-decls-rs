@@ -1,0 +1,73 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcrate_checkout_chunkuse_16.rs");
+include!("depcrate_checkout_entrytry_unlink_path_recursively.rs");
+include!("depcrate_checkout_entryimpl_39.rs");
+include!("depcrate_checkout_chunkuse_15.rs");
+include!("depcrate_checkoutoptions.rs");
+include!("depcrate_checkout_functionuse_54.rs");
+include!("depcrate_checkout_chunkuse_12.rs");
+include!("depcrate_checkout_entryuse_31.rs");
+include!("depcrate_checkoutoutcome.rs");
+include!("depcrate_checkout_chunkoutcome.rs");
+include!("depcrate_checkout_entrydelayedfilteredstream.rs");
+include!("depcrate_checkout_chunkuse_13.rs");
+include!("depcrate_checkout_chunkreduce.rs");
+include!("depcrate_checkout_functionuse_52.rs");
+include!("depcrate_checkout_entryoutcome.rs");
+include!("depcrate_checkoutcollision.rs");
+include!("depcrate_checkout_chunkimpl_24.rs");
+include!("depcrate_checkout_entryfinalize_entry.rs");
+include!("depcrate_checkout_entryuse_32.rs");
+include!("depcrate_checkout_functionuse_55.rs");
+include!("depcrate_checkout_functionuse_53.rs");
+include!("depcrate_checkout_entrycontext.rs");
+include!("depcrate_checkout_entrylet_readers_execute.rs");
+include!("depcrate_checkout_chunkprocess.rs");
+include!("depcrate_checkout_entrycheckout.rs");
+include!("depcrate_checkout_entryopen_file.rs");
+include!("depcrateuse_58.rs");
+include!("depcrate_checkout_entryuse_34.rs");
+include!("depcratecheckout.rs");
+include!("depcrate_checkoutentry.rs");
+include!("depcrate_checkout_entryuse_35.rs");
+include!("depcrate_checkoutchunk.rs");
+include!("depcrate_checkout_entryuse_33.rs");
+include!("depcrate_checkout_chunkhandle_error.rs");
+include!("depcrate_checkout_chunkis_collision.rs");
+include!("depcrate_checkout_functioncheckout.rs");
+include!("depcrate_checkout_entryuse_30.rs");
+include!("depcrate_checkout_entryuse_29.rs");
+include!("depcrate_checkoutuse_2.rs");
+include!("depcrate_checkout_entrydebug_assert_dest_is_no_symlink.rs");
+include!("depcrate_checkoutfunction.rs");
+include!("depcrate_checkout_chunkuse_10.rs");
+include!("depcrate_checkout_chunkcheckout_entry_handle_result.rs");
+include!("depcrate_checkouterrorrecord.rs");
+include!("depcrate_checkout_entryopen_options.rs");
+include!("depcrate_checkout_chunkprocess_delayed_filter_results.rs");
+include!("depcrate_checkout_entrytests.rs");
+include!("depcrate_checkout_chunkimpl_20.rs");
+include!("depcrate_checkouterror.rs");
+include!("depcrate_checkout_chunkcontext.rs");
+include!("depcrate_checkout_chunkuse_11.rs");
+include!("depcrate_checkout_functioncheckout_inner.rs");
+include!("depcrate_checkout_chunkwritewithprogress.rs");
+include!("depcrate_checkout_entryset_executable.rs");
+include!("depcrate_checkout_entrytry_op_or_unlink.rs");
+include!("depcrate_checkout_chunkoptions.rs");
+include!("depcrate_checkoutuse_3.rs");
+include!("modcrate_checkout.rs");
+include!("modcrate_checkout_function.rs");
+include!("modcrate_checkout_chunk.rs");
+include!("modcrate.rs");
+include!("modcrate_checkout_entry.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate_checkout!();
+    Modcrate_checkout_function!();
+    Modcrate_checkout_chunk!();
+    Modcrate!();
+    Modcrate_checkout_entry!();
+}

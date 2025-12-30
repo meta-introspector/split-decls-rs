@@ -1,0 +1,40 @@
+// Generated module macro for crate::imp::x86
+macro_rules! Modcrate_imp_x86 {
+() => {
+        Depcrate_imp_x86use_216!();
+        Depcrate_imp_x86use_217!();
+        Depcrate_imp_x86use_218!();
+        Depcrate_imp_x86ptr_modifier!();
+        Depcrate_imp_x86ptr_modifier!();
+        Depcrate_imp_x86atomic_int!();
+        Depcrate_imp_x86macro_222!();
+        Depcrate_imp_x86macro_223!();
+        Depcrate_imp_x86macro_224!();
+        Depcrate_imp_x86macro_225!();
+        Depcrate_imp_x86macro_226!();
+        Depcrate_imp_x86macro_227!();
+        Depcrate_imp_x86macro_228!();
+        Depcrate_imp_x86macro_229!();
+        Depcrate_imp_x86macro_230!();
+        Depcrate_imp_x86macro_231!();
+        Depcrate_imp_x86macro_232!();
+        Depcrate_imp_x86macro_233!();
+        Depcrate_imp_x86impl_234!();
+        Depcrate_imp_x86impl_235!();
+        Depcrate_imp_x86atomic_bit_opts!();
+        Depcrate_imp_x86macro_237!();
+        Depcrate_imp_x86macro_238!();
+        Depcrate_imp_x86macro_239!();
+        Depcrate_imp_x86macro_240!();
+        Depcrate_imp_x86macro_241!();
+        Depcrate_imp_x86macro_242!();
+        Depcrate_imp_x86macro_243!();
+        Depcrate_imp_x86macro_244!();
+        Depcrate_imp_x86macro_245!();
+        Depcrate_imp_x86macro_246!();
+        Depcrate_imp_x86macro_247!();
+        Depcrate_imp_x86macro_248!();
+        Depcrate_imp_x86macro_249!();
+        Depcrate_imp_x86macro_250!();
+    };
+}

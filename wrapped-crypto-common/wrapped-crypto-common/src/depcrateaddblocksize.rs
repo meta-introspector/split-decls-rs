@@ -1,0 +1,9 @@
+// Generated macro for AddBlockSize (type)
+macro_rules! DepcrateAddBlockSize {
+() => {
+// Module: crate
+// Provides: {"AddBlockSize"}
+// Dependencies: {}
+# [doc = " Alias for `AddBlockSize<A, B> = Sum<T, B::BlockSize>`"] pub type AddBlockSize < T , B > = Sum < T , < B as BlockSizeUser > :: BlockSize > ;
+};
+}

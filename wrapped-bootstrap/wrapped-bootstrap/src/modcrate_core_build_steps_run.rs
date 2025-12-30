@@ -1,0 +1,44 @@
+// Generated module macro for crate::core::build_steps::run
+macro_rules! Modcrate_core_build_steps_run {
+() => {
+        Depcrate_core_build_steps_runuse_469!();
+        Depcrate_core_build_steps_runuse_470!();
+        Depcrate_core_build_steps_runuse_471!();
+        Depcrate_core_build_steps_runuse_472!();
+        Depcrate_core_build_steps_runuse_473!();
+        Depcrate_core_build_steps_runuse_474!();
+        Depcrate_core_build_steps_runuse_475!();
+        Depcrate_core_build_steps_runuse_476!();
+        Depcrate_core_build_steps_runuse_477!();
+        Depcrate_core_build_steps_runuse_478!();
+        Depcrate_core_build_steps_runuse_479!();
+        Depcrate_core_build_steps_runuse_480!();
+        Depcrate_core_build_steps_runBuildManifest!();
+        Depcrate_core_build_steps_runimpl_482!();
+        Depcrate_core_build_steps_runBumpStage0!();
+        Depcrate_core_build_steps_runimpl_484!();
+        Depcrate_core_build_steps_runReplaceVersionPlaceholder!();
+        Depcrate_core_build_steps_runimpl_486!();
+        Depcrate_core_build_steps_runMiri!();
+        Depcrate_core_build_steps_runimpl_488!();
+        Depcrate_core_build_steps_runCollectLicenseMetadata!();
+        Depcrate_core_build_steps_runimpl_490!();
+        Depcrate_core_build_steps_runGenerateCopyright!();
+        Depcrate_core_build_steps_runimpl_492!();
+        Depcrate_core_build_steps_runGenerateWindowsSys!();
+        Depcrate_core_build_steps_runimpl_494!();
+        Depcrate_core_build_steps_runget_completion_paths!();
+        Depcrate_core_build_steps_runGenerateCompletions!();
+        Depcrate_core_build_steps_runimpl_497!();
+        Depcrate_core_build_steps_runUnicodeTableGenerator!();
+        Depcrate_core_build_steps_runimpl_499!();
+        Depcrate_core_build_steps_runFeaturesStatusDump!();
+        Depcrate_core_build_steps_runimpl_501!();
+        Depcrate_core_build_steps_runCyclicStep!();
+        Depcrate_core_build_steps_runimpl_503!();
+        Depcrate_core_build_steps_runCoverageDump!();
+        Depcrate_core_build_steps_runimpl_505!();
+        Depcrate_core_build_steps_runRustfmt!();
+        Depcrate_core_build_steps_runimpl_507!();
+    };
+}

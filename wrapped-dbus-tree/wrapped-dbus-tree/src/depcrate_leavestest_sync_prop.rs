@@ -1,0 +1,9 @@
+// Generated macro for test_sync_prop (function)
+macro_rules! Depcrate_leavestest_sync_prop {
+() => {
+// Module: crate::leaves
+// Provides: {"test_sync_prop"}
+// Dependencies: {}
+# [test] fn test_sync_prop () { use std :: sync :: atomic :: { AtomicUsize , Ordering } ; use std :: sync :: Arc ; use crate :: { Factory , Access , EmitsChangedSignal } ; let f = Factory :: new_sync :: < () > () ; let count = Arc :: new (AtomicUsize :: new (3)) ; let (cget , cset) = (count . clone () , count . clone ()) ; let tree1 = Arc :: new (f . tree (()) . add (f . object_path ("/syncprop" , ()) . introspectable () . add (f . interface ("com.example.syncprop" , ()) . add_p (f . property :: < u32 , _ > ("syncprop" , ()) . access (Access :: ReadWrite) . emits_changed (EmitsChangedSignal :: False) . on_get (move | i , _ | { i . append (cget . load (Ordering :: SeqCst) as u32) ; Ok (()) }) . on_set (move | i , _ | { cset . store (i . get :: < u32 > () . unwrap () as usize , Ordering :: SeqCst) ; Ok (()) }))))) ; let tree2 = tree1 . clone () ; println ! ("{:#?}" , tree2) ; :: std :: thread :: spawn (move | | { let mut msg = Message :: new_method_call ("com.example.syncprop" , "/syncprop" , "org.freedesktop.DBus.Properties" , "Set") . unwrap () . append3 ("com.example.syncprop" , "syncprop" , arg :: Variant (5u32)) ; msg . set_serial (30) ; let mut r = tree2 . handle (& msg) . unwrap () ; assert ! (r [0] . as_result () . is_ok ()) ; }) ; loop { let mut msg = Message :: new_method_call ("com.example.echoserver" , "/syncprop" , "org.freedesktop.DBus.Properties" , "Get") . unwrap () . append1 ("com.example.syncprop") . append1 ("syncprop") ; msg . set_serial (4) ; let mut r = tree1 . handle (& msg) . unwrap () ; let r = r [0] . as_result () . unwrap () ; let z : arg :: Variant < u32 > = r . get1 () . unwrap () ; if z . 0 == 5 { break ; } assert_eq ! (z . 0 , 3) ; } assert_eq ! (count . load (Ordering :: SeqCst) , 5) ; }
+};
+}

@@ -1,0 +1,55 @@
+// Generated module macro for crate::ir::dfg
+macro_rules! Modcrate_ir_dfg {
+() => {
+        Depcrate_ir_dfguse_573!();
+        Depcrate_ir_dfguse_574!();
+        Depcrate_ir_dfguse_575!();
+        Depcrate_ir_dfguse_576!();
+        Depcrate_ir_dfguse_577!();
+        Depcrate_ir_dfguse_578!();
+        Depcrate_ir_dfguse_579!();
+        Depcrate_ir_dfguse_580!();
+        Depcrate_ir_dfguse_581!();
+        Depcrate_ir_dfguse_582!();
+        Depcrate_ir_dfguse_583!();
+        Depcrate_ir_dfguse_584!();
+        Depcrate_ir_dfguse_585!();
+        Depcrate_ir_dfguse_586!();
+        Depcrate_ir_dfguse_587!();
+        Depcrate_ir_dfguse_588!();
+        Depcrate_ir_dfguse_589!();
+        Depcrate_ir_dfguse_590!();
+        Depcrate_ir_dfgInsts!();
+        Depcrate_ir_dfgimpl_592!();
+        Depcrate_ir_dfgimpl_593!();
+        Depcrate_ir_dfgBlocks!();
+        Depcrate_ir_dfgimpl_595!();
+        Depcrate_ir_dfgimpl_596!();
+        Depcrate_ir_dfgimpl_597!();
+        Depcrate_ir_dfgDataFlowGraph!();
+        Depcrate_ir_dfgimpl_599!();
+        Depcrate_ir_dfgmaybe_resolve_aliases!();
+        Depcrate_ir_dfgresolve_aliases!();
+        Depcrate_ir_dfgValues!();
+        Depcrate_ir_dfgvalid_valuedata!();
+        Depcrate_ir_dfgimpl_604!();
+        Depcrate_ir_dfgimpl_605!();
+        Depcrate_ir_dfgValueDef!();
+        Depcrate_ir_dfgimpl_607!();
+        Depcrate_ir_dfgValueData!();
+        Depcrate_ir_dfgValueDataPacked!();
+        Depcrate_ir_dfgencode_narrow_field!();
+        Depcrate_ir_dfgdecode_narrow_field!();
+        Depcrate_ir_dfgimpl_612!();
+        Depcrate_ir_dfgimpl_613!();
+        Depcrate_ir_dfgimpl_614!();
+        Depcrate_ir_dfgimpl_615!();
+        Depcrate_ir_dfgimpl_616!();
+        Depcrate_ir_dfgBlockData!();
+        Depcrate_ir_dfgimpl_618!();
+        Depcrate_ir_dfgDisplayInst!();
+        Depcrate_ir_dfgimpl_620!();
+        Depcrate_ir_dfgimpl_621!();
+        Depcrate_ir_dfgtests!();
+    };
+}

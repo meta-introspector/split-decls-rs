@@ -1,0 +1,9 @@
+// Generated macro for acosf (function)
+macro_rules! Depcrate_math_acosfacosf {
+() => {
+// Module: crate::math::acosf
+// Provides: {"acosf"}
+// Dependencies: {}
+# [doc = " Arccosine (f32)"] # [doc = ""] # [doc = " Computes the inverse cosine (arc cosine) of the input value."] # [doc = " Arguments must be in the range -1 to 1."] # [doc = " Returns values in radians, in the range of 0 to pi."] # [cfg_attr (assert_no_panic , no_panic :: no_panic)] pub fn acosf (x : f32) -> f32 { let x1p_120 = f32 :: from_bits (0x03800000) ; let z : f32 ; let w : f32 ; let s : f32 ; let mut hx = x . to_bits () ; let ix = hx & 0x7fffffff ; if ix >= 0x3f800000 { if ix == 0x3f800000 { if (hx >> 31) != 0 { return 2. * PIO2_HI + x1p_120 ; } return 0. ; } return 0. / (x - x) ; } if ix < 0x3f000000 { if ix <= 0x32800000 { return PIO2_HI + x1p_120 ; } return PIO2_HI - (x - (PIO2_LO - x * r (x * x))) ; } if (hx >> 31) != 0 { z = (1. + x) * 0.5 ; s = sqrtf (z) ; w = r (z) * s - PIO2_LO ; return 2. * (PIO2_HI - (s + w)) ; } z = (1. - x) * 0.5 ; s = sqrtf (z) ; hx = s . to_bits () ; let df = f32 :: from_bits (hx & 0xfffff000) ; let c = (z - df * df) / (s + df) ; w = r (z) * s + c ; 2. * (df + w) }
+};
+}

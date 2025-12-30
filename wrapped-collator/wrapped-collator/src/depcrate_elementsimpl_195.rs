@@ -1,0 +1,9 @@
+// Generated macro for impl_195 (impl)
+macro_rules! Depcrate_elementsimpl_195 {
+() => {
+// Module: crate::elements
+// Provides: {"impl_195"}
+// Dependencies: {}
+impl CollationElement { # [inline (always)] pub fn new (bits : u64) -> Self { CollationElement (bits) } # [inline (always)] pub fn new_from_primary (primary : u32) -> Self { CollationElement ((u64 :: from (primary) << 32) | COMMON_SEC_AND_TER_CE) } # [inline (always)] pub fn new_from_secondary (secondary : u16) -> Self { CollationElement ((u64 :: from (secondary) << 16) | COMMON_TERTIARY_CE) } # [inline (always)] pub fn new_implicit_from_char (c : char) -> Self { let mut c_with_offset = u32 :: from (c) + 1 ; let mut primary : u32 = 2 + (c_with_offset % 18) * 14 ; c_with_offset /= 18 ; primary |= (2 + (c_with_offset % 254)) << 8 ; c_with_offset /= 254 ; primary |= (4 + (c_with_offset % 251)) << 16 ; primary |= u32 :: from (UNASSIGNED_IMPLICIT_BYTE) << 24 ; CollationElement :: new_from_primary (primary) } # [inline (always)] pub fn clone_with_non_primary_zeroed (self) -> Self { CollationElement (self . 0 & 0xFFFFFFFF00000000) } # [doc = " Get the primary weight"] # [inline (always)] pub fn primary (self) -> u32 { (self . 0 >> 32) as u32 } # [doc = " Get the non-primary weights"] # [inline (always)] pub fn non_primary (self) -> NonPrimary { NonPrimary :: new (self . 0 as u32) } # [doc = " Get the secondary weight"] # [inline (always)] pub fn secondary (self) -> u16 { self . non_primary () . secondary () } # [inline (always)] pub fn quaternary (self) -> u32 { self . non_primary () . quaternary () } # [inline (always)] pub fn tertiary_ignorable (self) -> bool { self . non_primary () . tertiary_ignorable () } # [inline (always)] pub fn either_half_zero (self) -> bool { self . primary () == 0 || (self . 0 as u32) == 0 } # [inline (always)] pub const fn default () -> CollationElement { CollationElement (NO_CE_VALUE) } }
+};
+}

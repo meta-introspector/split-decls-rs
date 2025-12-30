@@ -1,0 +1,9 @@
+// Generated macro for future_to_promise (function)
+macro_rules! Depcratefuture_to_promise {
+() => {
+// Module: crate
+// Provides: {"future_to_promise"}
+// Dependencies: {}
+# [doc = " Converts a Rust `Future` into a JavaScript `Promise`."] # [doc = ""] # [doc = " This function will take any future in Rust and schedule it to be executed,"] # [doc = " returning a JavaScript `Promise` which can then be passed to JavaScript."] # [doc = ""] # [doc = " The `future` must be `'static` because it will be scheduled to run in the"] # [doc = " background and cannot contain any stack references."] # [doc = ""] # [doc = " The returned `Promise` will be resolved or rejected when the future completes,"] # [doc = " depending on whether it finishes with `Ok` or `Err`."] # [doc = ""] # [doc = " # Panics"] # [doc = ""] # [doc = " Note that in Wasm panics are currently translated to aborts, but \"abort\" in"] # [doc = " this case means that a JavaScript exception is thrown. The Wasm module is"] # [doc = " still usable (likely erroneously) after Rust panics."] # [doc = ""] # [doc = " If the `future` provided panics then the returned `Promise` **will not"] # [doc = " resolve**. Instead it will be a leaked promise. This is an unfortunate"] # [doc = " limitation of Wasm currently that's hoped to be fixed one day!"] pub fn future_to_promise < F > (future : F) -> Promise where F : Future < Output = Result < JsValue , JsValue > > + 'static , { let mut future = Some (future) ; Promise :: new (& mut | resolve , reject | { let future = future . take () . unwrap_throw () ; spawn_local (async move { match future . await { Ok (val) => { resolve . call1 (& JsValue :: undefined () , & val) . unwrap_throw () ; } Err (val) => { reject . call1 (& JsValue :: undefined () , & val) . unwrap_throw () ; } } }) ; }) }
+};
+}

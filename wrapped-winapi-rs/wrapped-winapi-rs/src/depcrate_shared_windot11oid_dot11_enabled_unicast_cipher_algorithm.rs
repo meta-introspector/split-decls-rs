@@ -1,0 +1,9 @@
+// Generated macro for OID_DOT11_ENABLED_UNICAST_CIPHER_ALGORITHM (const)
+macro_rules! Depcrate_shared_windot11OID_DOT11_ENABLED_UNICAST_CIPHER_ALGORITHM {
+() => {
+// Module: crate::shared::windot11
+// Provides: {"OID_DOT11_ENABLED_UNICAST_CIPHER_ALGORITHM"}
+// Dependencies: {}
+pub const OID_DOT11_ENABLED_UNICAST_CIPHER_ALGORITHM : u32 = NWF_DEFINE_OID ! (135 , NWF_OPERATIONAL_OID , NWF_MANDATORY_OID) ;
+};
+}

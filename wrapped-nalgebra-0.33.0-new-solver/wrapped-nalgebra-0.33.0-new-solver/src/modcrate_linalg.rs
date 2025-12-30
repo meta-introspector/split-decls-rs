@@ -1,0 +1,43 @@
+// Generated module macro for crate::linalg
+macro_rules! Modcrate_linalg {
+() => {
+        Depcrate_linalgbalancing!();
+        Depcrate_linalgbidiagonal!();
+        Depcrate_linalgcholesky!();
+        Depcrate_linalgconvolution!();
+        Depcrate_linalgdeterminant!();
+        Depcrate_linalgcol_piv_qr!();
+        Depcrate_linalgdecomposition!();
+        Depcrate_linalgexp!();
+        Depcrate_linalgfull_piv_lu!();
+        Depcrate_linalggivens!();
+        Depcrate_linalghessenberg!();
+        Depcrate_linalghouseholder!();
+        Depcrate_linalginverse!();
+        Depcrate_linalglu!();
+        Depcrate_linalgpermutation_sequence!();
+        Depcrate_linalgpow!();
+        Depcrate_linalgqr!();
+        Depcrate_linalgschur!();
+        Depcrate_linalgsolve!();
+        Depcrate_linalgsvd!();
+        Depcrate_linalgsvd2!();
+        Depcrate_linalgsvd3!();
+        Depcrate_linalgsymmetric_eigen!();
+        Depcrate_linalgsymmetric_tridiagonal!();
+        Depcrate_linalgudu!();
+        Depcrate_linalguse_3000!();
+        Depcrate_linalguse_3001!();
+        Depcrate_linalguse_3002!();
+        Depcrate_linalguse_3003!();
+        Depcrate_linalguse_3004!();
+        Depcrate_linalguse_3005!();
+        Depcrate_linalguse_3006!();
+        Depcrate_linalguse_3007!();
+        Depcrate_linalguse_3008!();
+        Depcrate_linalguse_3009!();
+        Depcrate_linalguse_3010!();
+        Depcrate_linalguse_3011!();
+        Depcrate_linalguse_3012!();
+    };
+}

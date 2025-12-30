@@ -1,0 +1,39 @@
+// Generated module macro for crate::ec
+macro_rules! Modcrate_ec {
+() => {
+        Depcrate_ecuse_326!();
+        Depcrate_ecuse_327!();
+        Depcrate_ecuse_328!();
+        Depcrate_ecuse_329!();
+        Depcrate_ecuse_330!();
+        Depcrate_ecuse_331!();
+        Depcrate_ecuse_332!();
+        Depcrate_ecuse_333!();
+        Depcrate_ecuse_334!();
+        Depcrate_ecuse_335!();
+        Depcrate_ecuse_336!();
+        Depcrate_ecuse_337!();
+        Depcrate_ecmacro_338!();
+        Depcrate_ecPointConversionForm!();
+        Depcrate_ecimpl_340!();
+        Depcrate_ecAsn1Flag!();
+        Depcrate_ecimpl_342!();
+        Depcrate_ecmacro_343!();
+        Depcrate_ecimpl_344!();
+        Depcrate_ecimpl_345!();
+        Depcrate_ecmacro_346!();
+        Depcrate_ecimpl_347!();
+        Depcrate_ecimpl_348!();
+        Depcrate_ecmacro_349!();
+        Depcrate_ecimpl_350!();
+        Depcrate_ecimpl_351!();
+        Depcrate_ecimpl_352!();
+        Depcrate_ecimpl_353!();
+        Depcrate_ecimpl_354!();
+        Depcrate_ecimpl_355!();
+        Depcrate_ecimpl_356!();
+        Depcrate_ecimpl_357!();
+        Depcrate_ecimpl_358!();
+        Depcrate_ectest!();
+    };
+}

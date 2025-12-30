@@ -1,0 +1,9 @@
+// Generated macro for impl_355 (impl)
+macro_rules! Depcrate_cryptoimpl_355 {
+() => {
+// Module: crate::crypto
+// Provides: {"impl_355"}
+// Dependencies: {}
+impl Open { pub const DECRYPT : u32 = 0 ; pub fn new (alg : Algorithm , key : Vec < u8 > , iv : Vec < u8 > , hp_key : Vec < u8 > , secret : Vec < u8 > ,) -> Result < Open > { Ok (Open { alg , secret , header : HeaderProtectionKey :: new (alg , hp_key) ? , packet : PacketKey :: new (alg , key , iv , Self :: DECRYPT) ? , }) } pub fn from_secret (aead : Algorithm , secret : & [u8]) -> Result < Open > { Ok (Open { alg : aead , secret : secret . to_vec () , header : HeaderProtectionKey :: from_secret (aead , secret) ? , packet : PacketKey :: from_secret (aead , secret , Self :: DECRYPT) ? , }) } pub fn new_mask (& self , sample : & [u8]) -> Result < [u8 ; 5] > { if cfg ! (feature = "fuzzing") { return Ok (< [u8 ; 5] > :: default ()) ; } self . header . new_mask (sample) } pub fn alg (& self) -> Algorithm { self . alg } pub fn derive_next_packet_key (& self) -> Result < Open > { let next_secret = derive_next_secret (self . alg , & self . secret) ? ; let next_packet_key = PacketKey :: from_secret (self . alg , & next_secret , Self :: DECRYPT) ? ; Ok (Open { alg : self . alg , secret : next_secret , header : self . header . clone () , packet : next_packet_key , }) } pub fn open_with_u64_counter (& self , counter : u64 , ad : & [u8] , buf : & mut [u8] ,) -> Result < usize > { if cfg ! (feature = "fuzzing") { let tag_len = self . alg . tag_len () ; let out_len = match buf . len () . checked_sub (tag_len) { Some (n) => n , None => return Err (Error :: CryptoFail) , } ; if ad . len () > tag_len && buf [out_len ..] == ad [.. tag_len] { return Err (Error :: CryptoFail) ; } return Ok (out_len) ; } self . packet . open_with_u64_counter (counter , ad , buf) } }
+};
+}

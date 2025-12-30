@@ -1,0 +1,51 @@
+// Generated module macro for crate::dynimage
+macro_rules! Modcrate_dynimage {
+() => {
+        Depcrate_dynimageuse_320!();
+        Depcrate_dynimageuse_321!();
+        Depcrate_dynimageuse_322!();
+        Depcrate_dynimageuse_323!();
+        Depcrate_dynimageuse_324!();
+        Depcrate_dynimageuse_325!();
+        Depcrate_dynimageuse_326!();
+        Depcrate_dynimageuse_327!();
+        Depcrate_dynimageuse_328!();
+        Depcrate_dynimageuse_329!();
+        Depcrate_dynimageuse_330!();
+        Depcrate_dynimageuse_331!();
+        Depcrate_dynimageuse_332!();
+        Depcrate_dynimageuse_333!();
+        Depcrate_dynimageuse_334!();
+        Depcrate_dynimageuse_335!();
+        Depcrate_dynimageuse_336!();
+        Depcrate_dynimageDynamicImage!();
+        Depcrate_dynimagedynamic_map!();
+        Depcrate_dynimageimpl_339!();
+        Depcrate_dynimageimpl_340!();
+        Depcrate_dynimageimpl_341!();
+        Depcrate_dynimageimpl_342!();
+        Depcrate_dynimageimpl_343!();
+        Depcrate_dynimageimpl_344!();
+        Depcrate_dynimageimpl_345!();
+        Depcrate_dynimageimpl_346!();
+        Depcrate_dynimageimpl_347!();
+        Depcrate_dynimageimpl_348!();
+        Depcrate_dynimageimpl_349!();
+        Depcrate_dynimageimpl_350!();
+        Depcrate_dynimageimpl_351!();
+        Depcrate_dynimageimpl_352!();
+        Depcrate_dynimageimpl_353!();
+        Depcrate_dynimageimpl_354!();
+        Depcrate_dynimageimpl_355!();
+        Depcrate_dynimagedecoder_to_image!();
+        Depcrate_dynimageopen!();
+        Depcrate_dynimageimage_dimensions!();
+        Depcrate_dynimagesave_buffer!();
+        Depcrate_dynimagesave_buffer_with_format!();
+        Depcrate_dynimagewrite_buffer_with_format!();
+        Depcrate_dynimageload_from_memory!();
+        Depcrate_dynimageload_from_memory_with_format!();
+        Depcrate_dynimagebench!();
+        Depcrate_dynimagetest!();
+    };
+}

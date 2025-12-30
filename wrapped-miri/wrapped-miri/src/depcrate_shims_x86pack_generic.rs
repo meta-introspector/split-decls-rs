@@ -1,0 +1,9 @@
+// Generated macro for pack_generic (function)
+macro_rules! Depcrate_shims_x86pack_generic {
+() => {
+// Module: crate::shims::x86
+// Provides: {"pack_generic"}
+// Dependencies: {}
+# [doc = " Packs two N-bit integer vectors to a single N/2-bit integers."] # [doc = ""] # [doc = " The conversion from N-bit to N/2-bit should be provided by `f`."] # [doc = ""] # [doc = " Each 128-bit chunk is treated independently (i.e., the value for"] # [doc = " the is i-th 128-bit chunk of `dest` is calculated with the i-th"] # [doc = " 128-bit chunks of `left` and `right`)."] fn pack_generic < 'tcx > (ecx : & mut crate :: MiriInterpCx < 'tcx > , left : & OpTy < 'tcx > , right : & OpTy < 'tcx > , dest : & MPlaceTy < 'tcx > , f : impl Fn (Scalar) -> InterpResult < 'tcx , Scalar > ,) -> InterpResult < 'tcx , () > { assert_eq ! (left . layout , right . layout) ; assert_eq ! (left . layout . size , dest . layout . size) ; let (num_chunks , op_items_per_chunk , left) = split_simd_to_128bit_chunks (ecx , left) ? ; let (_ , _ , right) = split_simd_to_128bit_chunks (ecx , right) ? ; let (_ , dest_items_per_chunk , dest) = split_simd_to_128bit_chunks (ecx , dest) ? ; assert_eq ! (dest_items_per_chunk , op_items_per_chunk . strict_mul (2)) ; for i in 0 .. num_chunks { let left = ecx . project_index (& left , i) ? ; let right = ecx . project_index (& right , i) ? ; let dest = ecx . project_index (& dest , i) ? ; for j in 0 .. op_items_per_chunk { let left = ecx . read_scalar (& ecx . project_index (& left , j) ?) ? ; let right = ecx . read_scalar (& ecx . project_index (& right , j) ?) ? ; let left_dest = ecx . project_index (& dest , j) ? ; let right_dest = ecx . project_index (& dest , j . strict_add (op_items_per_chunk)) ? ; let left_res = f (left) ? ; let right_res = f (right) ? ; ecx . write_scalar (left_res , & left_dest) ? ; ecx . write_scalar (right_res , & right_dest) ? ; } } interp_ok (()) }
+};
+}

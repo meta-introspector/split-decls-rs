@@ -1,0 +1,9 @@
+// Generated macro for ClientMessage (enum)
+macro_rules! Depcrate_graphql_transport_ws_client_messageClientMessage {
+() => {
+// Module: crate::graphql_transport_ws::client_message
+// Provides: {"ClientMessage"}
+// Dependencies: {}
+# [doc = " ClientMessage defines the message types that clients can send."] # [derive (Debug , Deserialize , PartialEq)] # [serde (bound (deserialize = "S: Deserialize<'de>"))] # [serde (rename_all = "snake_case")] # [serde (tag = "type")] pub enum ClientMessage < S > { # [doc = " ConnectionInit is sent by the client upon connecting."] ConnectionInit { # [doc = " Optional parameters of any type sent from the client. These are often used for"] # [doc = " authentication."] # [serde (default , deserialize_with = "default_for_null")] payload : Variables < S > , } , # [doc = " Ping is used for detecting failed connections, displaying latency metrics or other types of network probing."] Ping { # [doc = " Optional parameters of any type used to transfer additional details about the ping."] # [serde (default , deserialize_with = "default_for_null")] payload : Variables < S > , } , # [doc = " The response to the `Ping` message."] Pong { # [doc = " Optional parameters of any type used to transfer additional details about the pong."] # [serde (default , deserialize_with = "default_for_null")] payload : Variables < S > , } , # [doc = " Requests an operation specified in the message payload."] Subscribe { # [doc = " The id of the operation. This can be anything, but must be unique. If there are other"] # [doc = " in-flight operations with the same id, the message will cause an error."] id : String , # [doc = " The query, variables, and operation name."] payload : SubscribePayload < S > , } , # [doc = " Indicates that the client has stopped listening and wants to complete the subscription."] Complete { # [doc = " The id of the operation to stop."] id : String , } , }
+};
+}

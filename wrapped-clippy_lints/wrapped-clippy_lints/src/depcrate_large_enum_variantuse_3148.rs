@@ -1,0 +1,9 @@
+// Generated macro for use_3148 (use)
+macro_rules! Depcrate_large_enum_variantuse_3148 {
+() => {
+// Module: crate::large_enum_variant
+// Provides: {"use_3148"}
+// Dependencies: {}
+use clippy_utils :: is_no_std_crate ;
+};
+}

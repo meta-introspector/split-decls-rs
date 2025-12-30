@@ -1,0 +1,9 @@
+// Generated macro for run_aggregator_final_function (function)
+macro_rules! Depcrate_sqlite_connection_rawrun_aggregator_final_function {
+() => {
+// Module: crate::sqlite::connection::raw
+// Provides: {"run_aggregator_final_function"}
+// Dependencies: {}
+extern "C" fn run_aggregator_final_function < ArgsSqlType , RetSqlType , Args , Ret , A > (ctx : * mut ffi :: sqlite3_context ,) where A : SqliteAggregateFunction < Args , Output = Ret > + 'static + Send , Args : FromSqlRow < ArgsSqlType , Sqlite > , Ret : ToSql < RetSqlType , Sqlite > , Sqlite : HasSqlType < RetSqlType > , { static NO_AGGREGATOR_FOUND : & str = "We've written to the aggregator in the xStep callback. If xStep was never called, then ffi::sqlite_aggregate_context() would have returned a NULL pointer." ; let aggregate_context = unsafe { ffi :: sqlite3_aggregate_context (ctx , 0) } ; let result = std :: panic :: catch_unwind (| | { let mut aggregate_context = NonNull :: new (aggregate_context as * mut OptionalAggregator < A >) ; let aggregator = if let Some (a) = aggregate_context . as_mut () { let a = unsafe { a . as_mut () } ; match std :: mem :: replace (a , OptionalAggregator :: None) { OptionalAggregator :: None => { return Err (SqliteCallbackError :: Abort (NO_AGGREGATOR_FOUND)) ; } OptionalAggregator :: Some (a) => Some (a) , } } else { None } ; let res = A :: finalize (aggregator) ; let value = process_sql_function_result (& res) ? ; let r = unsafe { value . result_of (& mut * ctx) } ; r . map_err (| e | { SqliteCallbackError :: DieselError (crate :: result :: Error :: SerializationError (Box :: new (e))) }) ? ; Ok (()) }) . unwrap_or_else (| _e | { Err (SqliteCallbackError :: Panic (format ! ("{}::finalize() panicked" , std :: any :: type_name ::< A > ()))) }) ; if let Err (e) = result { e . emit (ctx) ; } }
+};
+}

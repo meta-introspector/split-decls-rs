@@ -1,0 +1,9 @@
+// Generated macro for impl_531 (impl)
+macro_rules! Depcrate_types_containersimpl_531 {
+() => {
+// Module: crate::types::containers
+// Provides: {"impl_531"}
+// Dependencies: {}
+impl < T , S , const N : usize > FromInputValue < S > for [T ; N] where T : FromInputValue < S > , S : ScalarValue , { type Error = FromInputValueArrayError < T , S > ; fn from_input_value (v : & InputValue < S >) -> Result < Self , Self :: Error > { struct PartiallyInitializedArray < T , const N : usize > { arr : [MaybeUninit < T > ; N] , init_len : usize , no_drop : bool , } impl < T , const N : usize > Drop for PartiallyInitializedArray < T , N > { fn drop (& mut self) { if self . no_drop { return ; } for elem in & mut self . arr [0 .. self . init_len] { unsafe { ptr :: drop_in_place (elem . as_mut_ptr ()) ; } } } } match * v { InputValue :: List (ref ls) => { if ls . len () != N { return Err (FromInputValueArrayError :: WrongCount { actual : ls . len () , expected : N , }) ; } if N == 0 { return Ok (unsafe { mem :: transmute_copy :: < [T ; 0] , Self > (& []) }) ; } let mut out = PartiallyInitializedArray :: < T , N > { arr : unsafe { MaybeUninit :: uninit () . assume_init () } , init_len : 0 , no_drop : false , } ; let mut items = ls . iter () . map (| i | i . item . convert ()) ; for elem in & mut out . arr [..] { if let Some (i) = items . next () . transpose () . map_err (FromInputValueArrayError :: Item) ? { * elem = MaybeUninit :: new (i) ; out . init_len += 1 ; } } out . no_drop = true ; Ok (unsafe { mem :: transmute_copy :: < _ , Self > (& out . arr) }) } InputValue :: Null => Err (FromInputValueArrayError :: Null) , ref other => { other . convert () . map_err (FromInputValueArrayError :: Item) . and_then (| e : T | { if N == 1 { Ok (unsafe { mem :: transmute_copy :: < [mem :: ManuallyDrop < T > ; 1] , Self > (& [mem :: ManuallyDrop :: new (e) ,]) }) } else { Err (FromInputValueArrayError :: WrongCount { actual : 1 , expected : N , }) } }) } } } }
+};
+}

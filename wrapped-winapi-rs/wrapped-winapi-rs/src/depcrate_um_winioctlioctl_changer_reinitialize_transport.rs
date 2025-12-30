@@ -1,0 +1,9 @@
+// Generated macro for IOCTL_CHANGER_REINITIALIZE_TRANSPORT (const)
+macro_rules! Depcrate_um_winioctlIOCTL_CHANGER_REINITIALIZE_TRANSPORT {
+() => {
+// Module: crate::um::winioctl
+// Provides: {"IOCTL_CHANGER_REINITIALIZE_TRANSPORT"}
+// Dependencies: {}
+pub const IOCTL_CHANGER_REINITIALIZE_TRANSPORT : DWORD = CTL_CODE ! (IOCTL_CHANGER_BASE , 0x000A , METHOD_BUFFERED , FILE_READ_ACCESS) ;
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for serde_impls (module)
+macro_rules! Depcrate_dateserde_impls {
+() => {
+// Module: crate::date
+// Provides: {"serde_impls"}
+// Dependencies: {}
+# [cfg (feature = "serde")] pub mod serde_impls { use serde :: { de :: { Deserialize , Deserializer , Error , Unexpected , Visitor } , ser :: { Serialize , Serializer } , } ; use std :: fmt ; use crate :: Date ; pub const DATE_NEWTYPE_STRUCT_NAME : & str = "PLIST-DATE" ; impl Serialize for Date { fn serialize < S > (& self , serializer : S) -> Result < S :: Ok , S :: Error > where S : Serializer , { let date_str = self . to_xml_format () ; serializer . serialize_newtype_struct (DATE_NEWTYPE_STRUCT_NAME , & date_str) } } struct DateNewtypeVisitor ; impl < 'de > Visitor < 'de > for DateNewtypeVisitor { type Value = Date ; fn expecting (& self , formatter : & mut fmt :: Formatter) -> fmt :: Result { formatter . write_str ("a plist date newtype") } fn visit_str < E > (self , v : & str) -> Result < Self :: Value , E > where E : Error , { DateStrVisitor . visit_str (v) } fn visit_newtype_struct < D > (self , deserializer : D) -> Result < Self :: Value , D :: Error > where D : Deserializer < 'de > , { deserializer . deserialize_str (DateStrVisitor) } } struct DateStrVisitor ; impl Visitor < '_ > for DateStrVisitor { type Value = Date ; fn expecting (& self , formatter : & mut fmt :: Formatter) -> fmt :: Result { formatter . write_str ("a plist date string") } fn visit_str < E > (self , v : & str) -> Result < Self :: Value , E > where E : Error , { Date :: from_xml_format (v) . map_err (| _ | E :: invalid_value (Unexpected :: Str (v) , & self)) } } impl < 'de > Deserialize < 'de > for Date { fn deserialize < D > (deserializer : D) -> Result < Self , D :: Error > where D : Deserializer < 'de > , { deserializer . deserialize_newtype_struct (DATE_NEWTYPE_STRUCT_NAME , DateNewtypeVisitor) } } }
+};
+}

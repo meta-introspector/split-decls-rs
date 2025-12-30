@@ -1,0 +1,9 @@
+// Generated macro for PS_ATTRIBUTE_ALL_APPLICATION_PACKAGES_POLICY (const)
+macro_rules! Depcrate_ntpsapiPS_ATTRIBUTE_ALL_APPLICATION_PACKAGES_POLICY {
+() => {
+// Module: crate::ntpsapi
+// Provides: {"PS_ATTRIBUTE_ALL_APPLICATION_PACKAGES_POLICY"}
+// Dependencies: {}
+pub const PS_ATTRIBUTE_ALL_APPLICATION_PACKAGES_POLICY : ULONG_PTR = 0x00020015 ;
+};
+}

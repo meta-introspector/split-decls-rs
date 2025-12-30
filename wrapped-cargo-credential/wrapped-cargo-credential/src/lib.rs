@@ -1,0 +1,70 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcratecredentialhello.rs");
+include!("depcrate_secretimpl_23.rs");
+include!("depcrate_errorimpl_10.rs");
+include!("depcrate_errorimpl_11.rs");
+include!("depcrate_stdiostdin_stdout_to_console.rs");
+include!("depcrate_stdiouse_30.rs");
+include!("depcrate_stdiostdio.rs");
+include!("depcrate_stdiotest.rs");
+include!("depcrateregistryinfo.rs");
+include!("depcratetests.rs");
+include!("depcrate_erroruse_5.rs");
+include!("depcrate_secretuse_20.rs");
+include!("depcrate_secretimpl_24.rs");
+include!("depcrate_secretimpl_25.rs");
+include!("depcrate_secretimpl_27.rs");
+include!("depcrate_stdioimp.rs");
+include!("depcrateaction.rs");
+include!("depcratecredentialresponse.rs");
+include!("depcrate_secretimpl_26.rs");
+include!("depcratecredentialrequest.rs");
+include!("depcrateprotocol_version_1.rs");
+include!("depcratecredential.rs");
+include!("depcrate_errorerror.rs");
+include!("depcratedoit.rs");
+include!("depcrateread_token.rs");
+include!("depcrate_errorimpl_14.rs");
+include!("depcrate_secretsecret.rs");
+include!("depcrateuse_2.rs");
+include!("depcrate_secretuse_19.rs");
+include!("depcrate_errorimpl_15.rs");
+include!("depcrateuse_1.rs");
+include!("depcratestdio.rs");
+include!("depcrate_erroruse_6.rs");
+include!("depcrate_secretuse_21.rs");
+include!("depcrate_errorimpl_9.rs");
+include!("depcrate_errorimpl_12.rs");
+include!("depcrateuse_3.rs");
+include!("depcrate_errortests.rs");
+include!("depcrateunsupportedcredential.rs");
+include!("depcrateimpl_45.rs");
+include!("depcrate_errorerror_serialize.rs");
+include!("depcrate_erroruse_7.rs");
+include!("depcratesecret.rs");
+include!("depcrate_secretimpl_28.rs");
+include!("depcrateuse_36.rs");
+include!("depcratecachecontrol.rs");
+include!("depcratedeserialize_request.rs");
+include!("depcrateloginoptions.rs");
+include!("depcrateread_line.rs");
+include!("depcrateerror.rs");
+include!("depcrateuse_37.rs");
+include!("depcrate_errorstringtypederror.rs");
+include!("depcrateuse_38.rs");
+include!("depcrateimpl_41.rs");
+include!("depcrateoperation.rs");
+include!("depcratemain.rs");
+include!("modcrate_secret.rs");
+include!("modcrate.rs");
+include!("modcrate_error.rs");
+include!("modcrate_stdio.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate_secret!();
+    Modcrate!();
+    Modcrate_error!();
+    Modcrate_stdio!();
+}

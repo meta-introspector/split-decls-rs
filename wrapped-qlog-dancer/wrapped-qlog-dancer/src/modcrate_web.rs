@@ -1,0 +1,54 @@
+// Generated module macro for crate::web
+macro_rules! Modcrate_web {
+() => {
+        Depcrate_webuse_456!();
+        Depcrate_webuse_457!();
+        Depcrate_webuse_458!();
+        Depcrate_webuse_459!();
+        Depcrate_webuse_460!();
+        Depcrate_webuse_461!();
+        Depcrate_webuse_462!();
+        Depcrate_webuse_463!();
+        Depcrate_webuse_464!();
+        Depcrate_webuse_465!();
+        Depcrate_webuse_466!();
+        Depcrate_webuse_467!();
+        Depcrate_webuse_468!();
+        Depcrate_webuse_469!();
+        Depcrate_webuse_470!();
+        Depcrate_webuse_471!();
+        Depcrate_webuse_472!();
+        Depcrate_webuse_473!();
+        Depcrate_webuse_474!();
+        Depcrate_webuse_475!();
+        Depcrate_webuse_476!();
+        Depcrate_webuse_477!();
+        Depcrate_webuse_478!();
+        Depcrate_webuse_479!();
+        Depcrate_webuse_480!();
+        Depcrate_webuse_481!();
+        Depcrate_webuse_482!();
+        Depcrate_webuse_483!();
+        Depcrate_webuse_484!();
+        Depcrate_webuse_485!();
+        Depcrate_webuse_486!();
+        Depcrate_webuse_487!();
+        Depcrate_webuse_488!();
+        Depcrate_webuse_489!();
+        Depcrate_webuse_490!();
+        Depcrate_webuse_491!();
+        Depcrate_webuse_492!();
+        Depcrate_webAREA_MARGIN!();
+        Depcrate_webCHART_MARGIN!();
+        Depcrate_webCHART_MARGIN_TIGHT!();
+        Depcrate_webPointu64!();
+        Depcrate_webChartBounds!();
+        Depcrate_webPlotRanges!();
+        Depcrate_webChartInfo!();
+        Depcrate_webimpl_500!();
+        Depcrate_webimpl_501!();
+        Depcrate_webnew_qlog_dancer!();
+        Depcrate_webQlogDancerWeb!();
+        Depcrate_webimpl_504!();
+    };
+}

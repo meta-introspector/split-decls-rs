@@ -1,0 +1,42 @@
+// Generated module macro for crate::cal
+macro_rules! Modcrate_cal {
+() => {
+        Depcrate_calbuddhist!();
+        Depcrate_calcoptic!();
+        Depcrate_caleast_asian_traditional_internal!();
+        Depcrate_calethiopian!();
+        Depcrate_calgregorian!();
+        Depcrate_calhebrew!();
+        Depcrate_calhijri_internal!();
+        Depcrate_calindian!();
+        Depcrate_caliso!();
+        Depcrate_caljapanese!();
+        Depcrate_caljulian!();
+        Depcrate_calpersian!();
+        Depcrate_calroc!();
+        Depcrate_calabstract_gregorian!();
+        Depcrate_caluse_319!();
+        Depcrate_caleast_asian_traditional!();
+        Depcrate_caluse_321!();
+        Depcrate_caluse_322!();
+        Depcrate_caluse_323!();
+        Depcrate_caluse_324!();
+        Depcrate_caluse_325!();
+        Depcrate_caluse_326!();
+        Depcrate_calhijri!();
+        Depcrate_caluse_328!();
+        Depcrate_caluse_329!();
+        Depcrate_caluse_330!();
+        Depcrate_caluse_331!();
+        Depcrate_caluse_332!();
+        Depcrate_caluse_333!();
+        Depcrate_caluse_334!();
+        Depcrate_calHijriSimulated!();
+        Depcrate_calHijriUmmAlQura!();
+        Depcrate_calHijriTabular!();
+        Depcrate_calDangi!();
+        Depcrate_calChinese!();
+        Depcrate_caluse_340!();
+        Depcrate_calscaffold!();
+    };
+}

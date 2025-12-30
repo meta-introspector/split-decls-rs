@@ -1,0 +1,9 @@
+// Generated macro for other_277 (other)
+macro_rules! Depcrateother_277 {
+() => {
+// Module: crate
+// Provides: {"other_277"}
+// Dependencies: {}
+extern "C" { # [doc = " @function"] # [doc = ""] # [doc = " Deflates the |nva|, which has the |nvlen| name/value pairs, into"] # [doc = " the |veclen| size of buf vector |vec|.  The each size of buffer"] # [doc = " must be set in len field of :type:`nghttp2_vec`.  If and only if"] # [doc = " one chunk is filled up completely, next chunk will be used.  If"] # [doc = " |vec| is not large enough to store the deflated header block, this"] # [doc = " function fails with :enum:`NGHTTP2_ERR_INSUFF_BUFSIZE`.  The caller"] # [doc = " should use `nghttp2_hd_deflate_bound()` to know the upper bound of"] # [doc = " buffer size required to deflate given header name/value pairs."] # [doc = ""] # [doc = " Once this function fails, subsequent call of this function always"] # [doc = " returns :enum:`NGHTTP2_ERR_HEADER_COMP`."] # [doc = ""] # [doc = " After this function returns, it is safe to delete the |nva|."] # [doc = ""] # [doc = " This function returns the number of bytes written to |vec| if it"] # [doc = " succeeds, or one of the following negative error codes:"] # [doc = ""] # [doc = " :enum:`NGHTTP2_ERR_NOMEM`"] # [doc = "     Out of memory."] # [doc = " :enum:`NGHTTP2_ERR_HEADER_COMP`"] # [doc = "     Deflation process has failed."] # [doc = " :enum:`NGHTTP2_ERR_INSUFF_BUFSIZE`"] # [doc = "     The provided |buflen| size is too small to hold the output."] pub fn nghttp2_hd_deflate_hd_vec (deflater : * mut nghttp2_hd_deflater , vec : * const nghttp2_vec , veclen : usize , nva : * const nghttp2_nv , nvlen : usize ,) -> isize ; }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for BASIC_CONSTRAINTS_CERT_CHAIN_POLICY_END_ENTITY_FLAG (const)
+macro_rules! Depcrate_um_wincryptBASIC_CONSTRAINTS_CERT_CHAIN_POLICY_END_ENTITY_FLAG {
+() => {
+// Module: crate::um::wincrypt
+// Provides: {"BASIC_CONSTRAINTS_CERT_CHAIN_POLICY_END_ENTITY_FLAG"}
+// Dependencies: {}
+pub const BASIC_CONSTRAINTS_CERT_CHAIN_POLICY_END_ENTITY_FLAG : DWORD = 0x40000000 ;
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for process (function)
+macro_rules! Depcrate_internals_schema_structsprocess {
+() => {
+// Module: crate::internals::schema::structs
+// Provides: {"process"}
+// Dependencies: {}
+pub fn process (input : & ItemStruct , cratename : Path) -> syn :: Result < TokenStream2 > { let name = & input . ident ; let struct_name = name . to_token_stream () . to_string () ; let generics = generics :: without_defaults (& input . generics) ; let (impl_generics , ty_generics , where_clause) = generics . split_for_impl () ; let mut where_clause = generics :: default_where (where_clause) ; let mut generics_output = schema :: GenericsOutput :: new (& generics) ; let (struct_fields , add_definitions_recursively) = process_fields (& cratename , & input . fields , & mut generics_output) ? ; let add_definitions_recursively = quote ! { fn add_definitions_recursively (definitions : & mut # cratename :: __private :: maybestd :: collections :: BTreeMap <# cratename :: schema :: Declaration , # cratename :: schema :: Definition >) { # struct_fields let definition = # cratename :: schema :: Definition :: Struct { fields } ; let no_recursion_flag = definitions . get (&< Self as # cratename :: BorshSchema >:: declaration ()) . is_none () ; # cratename :: schema :: add_definition (< Self as # cratename :: BorshSchema >:: declaration () , definition , definitions) ; if no_recursion_flag { # add_definitions_recursively } } } ; let (predicates , declaration) = generics_output . result (& struct_name , & cratename) ; where_clause . predicates . extend (predicates) ; Ok (quote ! { # [automatically_derived] impl # impl_generics # cratename :: BorshSchema for # name # ty_generics # where_clause { fn declaration () -> # cratename :: schema :: Declaration { # declaration } # add_definitions_recursively } }) }
+};
+}

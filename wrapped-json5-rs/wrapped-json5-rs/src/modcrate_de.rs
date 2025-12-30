@@ -1,0 +1,40 @@
+// Generated module macro for crate::de
+macro_rules! Modcrate_de {
+() => {
+        Depcrate_deuse_2!();
+        Depcrate_deuse_3!();
+        Depcrate_deuse_4!();
+        Depcrate_deuse_5!();
+        Depcrate_deuse_6!();
+        Depcrate_deuse_7!();
+        Depcrate_deuse_8!();
+        Depcrate_deuse_9!();
+        Depcrate_deuse_10!();
+        Depcrate_deParser!();
+        Depcrate_defrom_str!();
+        Depcrate_deDeserializer!();
+        Depcrate_deimpl_14!();
+        Depcrate_deimpl_15!();
+        Depcrate_deparse_bool!();
+        Depcrate_deparse_string_component!();
+        Depcrate_deparse_string!();
+        Depcrate_deparse_char_escape_sequence!();
+        Depcrate_deparse_number!();
+        Depcrate_deparse_integer!();
+        Depcrate_deis_int!();
+        Depcrate_deparse_hex!();
+        Depcrate_deis_hex_literal!();
+        Depcrate_deis_infinite!();
+        Depcrate_deis_nan!();
+        Depcrate_deSeq!();
+        Depcrate_deimpl_28!();
+        Depcrate_deimpl_29!();
+        Depcrate_deMap!();
+        Depcrate_deimpl_31!();
+        Depcrate_deimpl_32!();
+        Depcrate_deEnum!();
+        Depcrate_deimpl_34!();
+        Depcrate_deVariant!();
+        Depcrate_deimpl_36!();
+    };
+}

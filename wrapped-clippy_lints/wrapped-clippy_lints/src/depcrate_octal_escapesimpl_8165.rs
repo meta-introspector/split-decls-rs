@@ -1,0 +1,9 @@
+// Generated macro for impl_8165 (impl)
+macro_rules! Depcrate_octal_escapesimpl_8165 {
+() => {
+// Module: crate::octal_escapes
+// Provides: {"impl_8165"}
+// Dependencies: {}
+impl EarlyLintPass for OctalEscapes { fn check_expr (& mut self , cx : & EarlyContext < '_ > , expr : & Expr) { if let ExprKind :: Lit (lit) = & expr . kind && let start_offset = BytePos :: from_u32 (match lit . kind { LitKind :: Str => 1 , LitKind :: ByteStr | LitKind :: CStr => 2 , _ => return , }) && ! expr . span . in_external_macro (cx . sess () . source_map ()) { let s = lit . symbol . as_str () ; let mut iter = s . as_bytes () . iter () ; while let Some (& c) = iter . next () { if c == b'\\' && let Some (b'0') = iter . next () { let (tail , len , c_hi , c_lo) = match * iter . as_slice () { [c_hi @ b'0' ..= b'7' , c_lo @ b'0' ..= b'7' , ref tail @ ..] => (tail , 4 , c_hi , c_lo) , [c_lo @ b'0' ..= b'7' , ref tail @ ..] => (tail , 3 , b'0' , c_lo) , _ => continue , } ; iter = tail . iter () ; let offset = start_offset + BytePos :: from_usize (s . len () - tail . len ()) ; let data = expr . span . data () ; let span = SpanData { lo : data . lo + offset - BytePos :: from_u32 (len) , hi : data . lo + offset , .. data } . span () ; if span . check_source_text (cx , | src | match * src . as_bytes () { [b'\\' , b'0' , lo] => lo == c_lo , [b'\\' , b'0' , hi , lo] => hi == c_hi && lo == c_lo , _ => false , }) { span_lint_and_then (cx , OCTAL_ESCAPES , span , "octal-looking escape in a literal" , | diag | { diag . help_once ("octal escapes are not supported, `\\0` is always null") . span_suggestion (span , "if an octal escape is intended, use a hex escape instead" , format ! ("\\x{:02x}" , (((c_hi - b'0') << 3) | (c_lo - b'0'))) , Applicability :: MaybeIncorrect ,) . span_suggestion (span , "if a null escape is intended, disambiguate using" , format ! ("\\x00{}{}" , c_hi as char , c_lo as char) , Applicability :: MaybeIncorrect ,) ; }) ; } else { break ; } } } } } }
+};
+}

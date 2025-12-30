@@ -1,0 +1,52 @@
+// Generated module macro for crate::runtime
+macro_rules! Modcrate_runtime {
+() => {
+        Depcrate_runtimeuse_252!();
+        Depcrate_runtimeuse_253!();
+        Depcrate_runtimeuse_254!();
+        Depcrate_runtimeuse_255!();
+        Depcrate_runtimeuse_256!();
+        Depcrate_runtimeuse_257!();
+        Depcrate_runtimeuse_258!();
+        Depcrate_runtimeuse_259!();
+        Depcrate_runtimeuse_260!();
+        Depcrate_runtimeuse_261!();
+        Depcrate_runtimeuse_262!();
+        Depcrate_runtimeuse_263!();
+        Depcrate_runtimeuse_264!();
+        Depcrate_runtimeuse_265!();
+        Depcrate_runtimeuse_266!();
+        Depcrate_runtimeuse_267!();
+        Depcrate_runtimeTEST_NAME_COUNTERS!();
+        Depcrate_runtimeTEST_NAME_CLASH_DETECTION!();
+        Depcrate_runtimeINLINE_DUPLICATES!();
+        Depcrate_runtimemacro_271!();
+        Depcrate_runtimeelog!();
+        Depcrate_runtimeprint_or_panic!();
+        Depcrate_runtimeAutoName!();
+        Depcrate_runtimeInlineValue!();
+        Depcrate_runtimeSnapshotName!();
+        Depcrate_runtimeBinarySnapshotValue!();
+        Depcrate_runtimeSnapshotValue!();
+        Depcrate_runtimeimpl_279!();
+        Depcrate_runtimeimpl_280!();
+        Depcrate_runtimeimpl_281!();
+        Depcrate_runtimeimpl_282!();
+        Depcrate_runtimeimpl_283!();
+        Depcrate_runtimeimpl_284!();
+        Depcrate_runtimeimpl_285!();
+        Depcrate_runtimeis_doctest!();
+        Depcrate_runtimedetect_snapshot_name!();
+        Depcrate_runtimeadd_suffix_to_snapshot_name!();
+        Depcrate_runtimeget_snapshot_filename!();
+        Depcrate_runtimeSnapshotAssertionContext!();
+        Depcrate_runtimeimpl_291!();
+        Depcrate_runtimepath_relative_from!();
+        Depcrate_runtimeprevent_inline_duplicate!();
+        Depcrate_runtimerecord_snapshot_duplicate!();
+        Depcrate_runtimeallow_duplicates!();
+        Depcrate_runtimewith_allow_duplicates!();
+        Depcrate_runtimeassert_snapshot!();
+        Depcrate_runtime_DOCTEST1!();
+    };
+}

@@ -1,0 +1,44 @@
+// Generated module macro for crate::isa::s390x::inst
+macro_rules! Modcrate_isa_s390x_inst {
+() => {
+        Depcrate_isa_s390x_instuse_2315!();
+        Depcrate_isa_s390x_instuse_2316!();
+        Depcrate_isa_s390x_instuse_2317!();
+        Depcrate_isa_s390x_instuse_2318!();
+        Depcrate_isa_s390x_instuse_2319!();
+        Depcrate_isa_s390x_instuse_2320!();
+        Depcrate_isa_s390x_instuse_2321!();
+        Depcrate_isa_s390x_instuse_2322!();
+        Depcrate_isa_s390x_instuse_2323!();
+        Depcrate_isa_s390x_instuse_2324!();
+        Depcrate_isa_s390x_instuse_2325!();
+        Depcrate_isa_s390x_instuse_2326!();
+        Depcrate_isa_s390x_instregs!();
+        Depcrate_isa_s390x_instuse_2352!();
+        Depcrate_isa_s390x_instimms!();
+        Depcrate_isa_s390x_instuse_2368!();
+        Depcrate_isa_s390x_instargs!();
+        Depcrate_isa_s390x_instuse_2379!();
+        Depcrate_isa_s390x_instemit!();
+        Depcrate_isa_s390x_instuse_2442!();
+        Depcrate_isa_s390x_instunwind!();
+        Depcrate_isa_s390x_instemit_tests!();
+        Depcrate_isa_s390x_instuse_2451!();
+        Depcrate_isa_s390x_instReturnCallInfo!();
+        Depcrate_isa_s390x_instinst_size_test!();
+        Depcrate_isa_s390x_instRegPair!();
+        Depcrate_isa_s390x_instWritableRegPair!();
+        Depcrate_isa_s390x_instimpl_2456!();
+        Depcrate_isa_s390x_instInstructionSet!();
+        Depcrate_isa_s390x_instimpl_2458!();
+        Depcrate_isa_s390x_instmemarg_operands!();
+        Depcrate_isa_s390x_insts390x_get_operands!();
+        Depcrate_isa_s390x_instDenyReuseVisitor!();
+        Depcrate_isa_s390x_instimpl_2462!();
+        Depcrate_isa_s390x_instimpl_2463!();
+        Depcrate_isa_s390x_instmem_finalize_for_show!();
+        Depcrate_isa_s390x_instimpl_2465!();
+        Depcrate_isa_s390x_instLabelUse!();
+        Depcrate_isa_s390x_instimpl_2467!();
+    };
+}

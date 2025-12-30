@@ -1,0 +1,41 @@
+// Generated module macro for crate::types
+macro_rules! Modcrate_types {
+() => {
+        Depcrate_typesuse_281!();
+        Depcrate_typesclass!();
+        Depcrate_typescpp_const!();
+        Depcrate_typescpp_delegate!();
+        Depcrate_typescpp_enum!();
+        Depcrate_typescpp_fn!();
+        Depcrate_typescpp_interface!();
+        Depcrate_typescpp_method!();
+        Depcrate_typescpp_struct!();
+        Depcrate_typesdelegate!();
+        Depcrate_typesr#enum!();
+        Depcrate_typesinterface!();
+        Depcrate_typesmethod!();
+        Depcrate_typesr#struct!();
+        Depcrate_typesuse_372!();
+        Depcrate_typesuse_373!();
+        Depcrate_typesuse_374!();
+        Depcrate_typesuse_375!();
+        Depcrate_typesuse_376!();
+        Depcrate_typesuse_377!();
+        Depcrate_typesuse_378!();
+        Depcrate_typesuse_379!();
+        Depcrate_typesuse_380!();
+        Depcrate_typesuse_381!();
+        Depcrate_typesuse_382!();
+        Depcrate_typesuse_383!();
+        Depcrate_typesuse_384!();
+        Depcrate_typesType!();
+        Depcrate_typesimpl_386!();
+        Depcrate_typesimpl_387!();
+        Depcrate_typesRemap!();
+        Depcrate_typesimpl_389!();
+        Depcrate_typesimpl_390!();
+        Depcrate_typesinterface_signature!();
+        Depcrate_typeswrite_ptr_mut!();
+        Depcrate_typeswrite_ptr_const!();
+    };
+}

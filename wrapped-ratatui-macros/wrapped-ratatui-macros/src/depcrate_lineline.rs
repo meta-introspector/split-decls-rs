@@ -1,0 +1,9 @@
+// Generated macro for line (macro)
+macro_rules! Depcrate_lineline {
+() => {
+// Module: crate::line
+// Provides: {"line"}
+// Dependencies: {}
+# [doc = " A macro for creating a [`Line`] using vec! syntax."] # [doc = ""] # [doc = " `line!` is similar to the [`vec!`] macro, but it returns a [`Line`] instead of a `Vec`."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " * Create a [`Line`] containing a vector of [`Span`]s:"] # [doc = ""] # [doc = " ```rust"] # [doc = " # use ratatui_core::style::Stylize;"] # [doc = " use ratatui_macros::line;"] # [doc = ""] # [doc = " let line = line![\"hello\", \"world\"];"] # [doc = " let line = line![\"hello\".red(), \"world\".red().bold()];"] # [doc = " ```"] # [doc = ""] # [doc = " * Create a [`Line`] from a given [`Span`] repeated some amount of times:"] # [doc = ""] # [doc = " ```rust"] # [doc = " # use ratatui_macros::line;"] # [doc = " let line = line![\"hello\"; 2];"] # [doc = " ```"] # [doc = ""] # [doc = " * Use [`span!`] macro inside [`line!`] macro for formatting."] # [doc = ""] # [doc = " ```rust"] # [doc = " # use ratatui_core::style::Modifier;"] # [doc = " use ratatui_macros::{line, span};"] # [doc = ""] # [doc = " let line = line![span!(\"hello {}\", \"world\"), span!(Modifier::BOLD; \"goodbye {}\", \"world\")];"] # [doc = " ```"] # [doc = ""] # [doc = " [`span!`]: crate::span"] # [doc = " [`Line`]: ratatui_core::text::Line"] # [doc = " [`Span`]: ratatui_core::text::Span"] # [doc = " [`vec!`]: alloc::vec!"] # [macro_export] macro_rules ! line { () => { $ crate :: ratatui_core :: text :: Line :: default () } ; ($ span : expr ; $ n : expr) => { $ crate :: ratatui_core :: text :: Line :: from ($ crate :: vec ! [$ span . into () ; $ n]) } ; ($ ($ span : expr) ,+ $ (,) ?) => { { $ crate :: ratatui_core :: text :: Line :: from ($ crate :: vec ! [$ ($ span . into () ,) +]) } } ; }
+};
+}

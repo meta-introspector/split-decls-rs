@@ -1,0 +1,9 @@
+// Generated macro for impl_12 (impl)
+macro_rules! Depcrate_generatedimpl_12 {
+() => {
+// Module: crate::generated
+// Provides: {"impl_12"}
+// Dependencies: {}
+unsafe impl CopyingHelper for AEAssessmentApplication { type Result = Self ; }
+};
+}

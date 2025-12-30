@@ -1,0 +1,9 @@
+// Generated macro for deflate (function)
+macro_rules! Depcratedeflate {
+() => {
+// Module: crate
+// Provides: {"deflate"}
+// Dependencies: {}
+# [doc = " Compresses as much data as possible, and stops when the input buffer becomes empty or the output buffer becomes full."] # [doc = ""] # [doc = " # Returns"] # [doc = ""] # [doc = " - [`Z_OK`] if success"] # [doc = " - [`Z_STREAM_END`] if the end of the compressed data has been reached and all uncompressed output has been produced"] # [doc = " - [`Z_STREAM_ERROR`] if the stream state was inconsistent"] # [doc = " - [`Z_BUF_ERROR`] if no progress was possible or if there was not enough room in the output buffer when [`Z_FINISH`] is used"] # [doc = ""] # [doc = " Note that [`Z_BUF_ERROR`] is not fatal, and [`deflate`] can be called again with more input and more output space to continue decompressing."] # [doc = ""] # [doc = " # Safety"] # [doc = ""] # [doc = " * Either"] # [doc = "     - `strm` is `NULL`"] # [doc = "     - `strm` satisfies the requirements of `&mut *strm` and was initialized with [`deflateInit_`] or similar"] # [doc = " * Either"] # [doc = "     - `strm.next_out` is `NULL`"] # [doc = "     - `strm.next_out` and `strm.avail_out` satisfy the requirements of [`core::slice::from_raw_parts_mut::<MaybeUninit<u8>>`]"] # [doc = " * Either"] # [doc = "     - `strm.next_in` is `NULL`"] # [doc = "     - `strm.next_in` and `strm.avail_in` satisfy the requirements of [`core::slice::from_raw_parts::<u8>`]"] # [cfg_attr (feature = "export-symbols" , export_name = prefix ! (deflate))] pub unsafe extern "C-unwind" fn deflate (strm : * mut z_stream , flush : i32) -> c_int { if let Some (stream) = DeflateStream :: from_stream_mut (strm) { match DeflateFlush :: try_from (flush) { Ok (flush) => zlib_rs :: deflate :: deflate (stream , flush) as _ , Err (()) => ReturnCode :: StreamError as _ , } } else { ReturnCode :: StreamError as _ } }
+};
+}

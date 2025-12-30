@@ -1,0 +1,9 @@
+// Generated macro for preprocess_char_literal_notation (function)
+macro_rules! Depcrate_characterspreprocess_char_literal_notation {
+() => {
+// Module: crate::characters
+// Provides: {"preprocess_char_literal_notation"}
+// Dependencies: {}
+# [doc = " In the occurrence of subsequences that are used to represent character literals,"] # [doc = " like \"\\\\\\\\:\" or \"\\\\\\\\\\\\\\\\[\", excise the subsequence from the input string"] # [doc = " and prepopulate the set with the corresponding characters like \":\" and \"[\"."] # [doc = " But since Unicode code point escape sequences, like \"\\\\\\\\\\\\\\\\U00011000\" can & should"] # [doc = " be handled in a later step by the TOML parser, leave those subsequences alone."] fn preprocess_char_literal_notation (set : & mut HashSet < String > , input : & mut String) { let mut result = input . to_string () ; let possible_slash_strs = ["\\\\\\\\" , "\\\\\\" , "\\\\"] ; for slash_str in possible_slash_strs . iter () . sorted () . rev () { let mut slash_result = result . clone () ; for match_tuple in result . rmatch_indices (slash_str) { let slash_idx = match_tuple . 0 ; let maybe_next_char_idx = slash_idx + slash_str . len () ; if maybe_next_char_idx < slash_result . len () { let char_literal = slash_result [maybe_next_char_idx ..] . chars () . next () . unwrap () ; let char_literal_str = char_literal . to_string () ; if char_literal_str == "U" || char_literal_str == "u" || char_literal_str == "\\" || char_literal . is_whitespace () { continue ; } let char_literal_byte_len = char_literal_str . len () ; set . insert (char_literal_str) ; let mut new_slash_result = slash_result [.. slash_idx] . to_string () ; new_slash_result . push_str (& slash_result [(maybe_next_char_idx + char_literal_byte_len) ..]) ; slash_result = new_slash_result ; } } result . clear () ; result . push_str (& slash_result) ; } input . clear () ; input . push_str (& result) ; }
+};
+}

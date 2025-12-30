@@ -1,0 +1,40 @@
+// Generated module macro for crate::codegen
+macro_rules! Modcrate_codegen {
+() => {
+        Depcrate_codegenuse_51!();
+        Depcrate_codegenuse_52!();
+        Depcrate_codegenuse_53!();
+        Depcrate_codegenuse_54!();
+        Depcrate_codegenuse_55!();
+        Depcrate_codegenuse_56!();
+        Depcrate_codegenuse_57!();
+        Depcrate_codegenuse_58!();
+        Depcrate_codegenuse_59!();
+        Depcrate_codegenuse_60!();
+        Depcrate_codegenuse_61!();
+        Depcrate_codegenuse_62!();
+        Depcrate_codegenuse_63!();
+        Depcrate_codegenTryToTokens!();
+        Depcrate_codegenimpl_65!();
+        Depcrate_codegenimpl_66!();
+        Depcrate_codegenimpl_67!();
+        Depcrate_codegenimpl_68!();
+        Depcrate_codegenimpl_69!();
+        Depcrate_codegenimpl_70!();
+        Depcrate_codegenimpl_71!();
+        Depcrate_codegenimpl_72!();
+        Depcrate_codegenimpl_73!();
+        Depcrate_codegenDescribeImport!();
+        Depcrate_codegenimpl_75!();
+        Depcrate_codegenimpl_76!();
+        Depcrate_codegenimpl_77!();
+        Depcrate_codegenimpl_78!();
+        Depcrate_codegenthread_local_import!();
+        Depcrate_codegenstatic_init!();
+        Depcrate_codegenDescriptor!();
+        Depcrate_codegenimpl_82!();
+        Depcrate_codegenextern_fn!();
+        Depcrate_codegensplat!();
+        Depcrate_codegenrespan!();
+    };
+}

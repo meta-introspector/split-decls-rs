@@ -1,0 +1,9 @@
+// Generated macro for EntityTag (struct)
+macro_rules! Depcrate_util_entityEntityTag {
+() => {
+// Module: crate::util::entity
+// Provides: {"EntityTag"}
+// Dependencies: {}
+# [doc = " An entity tag, defined in [RFC7232](https://tools.ietf.org/html/rfc7232#section-2.3)"] # [doc = ""] # [doc = " An entity tag consists of a string enclosed by two literal double quotes."] # [doc = " Preceding the first double quote is an optional weakness indicator,"] # [doc = " which always looks like `W/`. Examples for valid tags are `\"xyzzy\"` and `W/\"xyzzy\"`."] # [doc = ""] # [doc = " # ABNF"] # [doc = ""] # [doc = " ```text"] # [doc = " entity-tag = [ weak ] opaque-tag"] # [doc = " weak       = %x57.2F ; \"W/\", case-sensitive"] # [doc = " opaque-tag = DQUOTE *etagc DQUOTE"] # [doc = " etagc      = %x21 / %x23-7E / obs-text"] # [doc = "            ; VCHAR except double quotes, plus obs-text"] # [doc = " ```"] # [doc = ""] # [doc = " # Comparison"] # [doc = " To check if two entity tags are equivalent in an application always use the `strong_eq` or"] # [doc = " `weak_eq` methods based on the context of the Tag. Only use `==` to check if two tags are"] # [doc = " identical."] # [doc = ""] # [doc = " The example below shows the results for a set of entity-tag pairs and"] # [doc = " both the weak and strong comparison function results:"] # [doc = ""] # [doc = " | ETag 1  | ETag 2  | Strong Comparison | Weak Comparison |"] # [doc = " |---------|---------|-------------------|-----------------|"] # [doc = " | `W/\"1\"` | `W/\"1\"` | no match          | match           |"] # [doc = " | `W/\"1\"` | `W/\"2\"` | no match          | no match        |"] # [doc = " | `W/\"1\"` | `\"1\"`   | no match          | match           |"] # [doc = " | `\"1\"`   | `\"1\"`   | match             | match           |"] # [derive (Clone , Eq , PartialEq)] pub (crate) struct EntityTag < T = HeaderValue > (T) ;
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for macro_28 (macro)
+macro_rules! Depcratemacro_28 {
+() => {
+// Module: crate
+// Provides: {"macro_28"}
+// Dependencies: {}
+# [cfg (not (any (target_arch = "aarch64" , target_arch = "loongarch64" , target_arch = "x86" , target_arch = "x86_64")))] compile_error ! ("This crate works only on `aarch64`, `loongarch64`, `x86`, and `x86-64` targets.") ;
+};
+}

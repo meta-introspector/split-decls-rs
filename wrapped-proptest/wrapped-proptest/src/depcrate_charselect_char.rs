@@ -1,0 +1,9 @@
+// Generated macro for select_char (function)
+macro_rules! Depcrate_charselect_char {
+() => {
+// Module: crate::char
+// Provides: {"select_char"}
+// Dependencies: {}
+# [doc = " Selects a random character the way `CharStrategy` does."] # [doc = ""] # [doc = " If `special` is non-empty, there is a 50% chance that a character from this"] # [doc = " array is chosen randomly, and will be returned if that character falls"] # [doc = " within `ranges`."] # [doc = ""] # [doc = " If `preferred` is non-empty, there is a 50% chance that any generation"] # [doc = " which gets past the `special` step picks a random element from this list,"] # [doc = " then a random character from within that range (both endpoints inclusive)."] # [doc = " That character will be returned if it falls within `ranges`."] # [doc = ""] # [doc = " In all other cases, an element is picked randomly from `ranges` and a"] # [doc = " random character within the range (both endpoints inclusive) is chosen and"] # [doc = " returned."] # [doc = ""] # [doc = " Notice that in all cases, `ranges` completely defines the set of characters"] # [doc = " that can possibly be defined."] # [doc = ""] # [doc = " It is legal for ranges in all cases to contain non-characters."] # [doc = ""] # [doc = " Both `preferred` and `ranges` bias selection towards characters in smaller"] # [doc = " ranges. This is deliberate. `preferred` is usually tuned to select"] # [doc = " particular characters anyway. `ranges` is usually derived from some"] # [doc = " external property, and the fact that a range is small often means it is"] # [doc = " more interesting."] pub fn select_char (rnd : & mut impl Rng , special : & [char] , preferred : & [CharRange] , ranges : & [CharRange] ,) -> char { let (base , offset) = select_range_index (rnd , special , preferred , ranges) ; :: core :: char :: from_u32 (base + offset) . expect ("bad character selected") }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for impl_418 (impl)
+macro_rules! Depcrate_consteval_tests_traitsimpl_418 {
+() => {
+// Module: crate::consteval::tests::traits
+// Provides: {"impl_418"}
+// Dependencies: {}
+impl FnTrait { pub const fn function_name (& self) -> & 'static str { match self { FnTrait :: FnOnce => "call_once" , FnTrait :: FnMut => "call_mut" , FnTrait :: Fn => "call" , FnTrait :: AsyncFnOnce => "async_call_once" , FnTrait :: AsyncFnMut => "async_call_mut" , FnTrait :: AsyncFn => "async_call" , } } const fn lang_item (self) -> LangItem { match self { FnTrait :: FnOnce => LangItem :: FnOnce , FnTrait :: FnMut => LangItem :: FnMut , FnTrait :: Fn => LangItem :: Fn , FnTrait :: AsyncFnOnce => LangItem :: AsyncFnOnce , FnTrait :: AsyncFnMut => LangItem :: AsyncFnMut , FnTrait :: AsyncFn => LangItem :: AsyncFn , } } pub const fn from_lang_item (lang_item : LangItem) -> Option < Self > { match lang_item { LangItem :: FnOnce => Some (FnTrait :: FnOnce) , LangItem :: FnMut => Some (FnTrait :: FnMut) , LangItem :: Fn => Some (FnTrait :: Fn) , LangItem :: AsyncFnOnce => Some (FnTrait :: AsyncFnOnce) , LangItem :: AsyncFnMut => Some (FnTrait :: AsyncFnMut) , LangItem :: AsyncFn => Some (FnTrait :: AsyncFn) , _ => None , } } pub fn method_name (self) -> Name { match self { FnTrait :: FnOnce => Name :: new_symbol_root (sym :: call_once) , FnTrait :: FnMut => Name :: new_symbol_root (sym :: call_mut) , FnTrait :: Fn => Name :: new_symbol_root (sym :: call) , FnTrait :: AsyncFnOnce => Name :: new_symbol_root (sym :: async_call_once) , FnTrait :: AsyncFnMut => Name :: new_symbol_root (sym :: async_call_mut) , FnTrait :: AsyncFn => Name :: new_symbol_root (sym :: async_call) , } } pub fn get_id (self , db : & dyn HirDatabase , krate : Crate) -> Option < TraitId > { self . lang_item () . resolve_trait (db , krate) } }
+};
+}

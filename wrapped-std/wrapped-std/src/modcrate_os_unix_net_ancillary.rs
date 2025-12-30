@@ -1,0 +1,42 @@
+// Generated module macro for crate::os::unix::net::ancillary
+macro_rules! Modcrate_os_unix_net_ancillary {
+() => {
+        Depcrate_os_unix_net_ancillaryuse_1484!();
+        Depcrate_os_unix_net_ancillaryuse_1485!();
+        Depcrate_os_unix_net_ancillaryuse_1486!();
+        Depcrate_os_unix_net_ancillaryuse_1487!();
+        Depcrate_os_unix_net_ancillaryuse_1488!();
+        Depcrate_os_unix_net_ancillaryuse_1489!();
+        Depcrate_os_unix_net_ancillaryuse_1490!();
+        Depcrate_os_unix_net_ancillaryuse_1491!();
+        Depcrate_os_unix_net_ancillaryuse_1492!();
+        Depcrate_os_unix_net_ancillarylibc!();
+        Depcrate_os_unix_net_ancillaryrecv_vectored_with_ancillary_from!();
+        Depcrate_os_unix_net_ancillarysend_vectored_with_ancillary_to!();
+        Depcrate_os_unix_net_ancillaryadd_to_ancillary_data!();
+        Depcrate_os_unix_net_ancillaryAncillaryDataIter!();
+        Depcrate_os_unix_net_ancillaryimpl_1498!();
+        Depcrate_os_unix_net_ancillaryimpl_1499!();
+        Depcrate_os_unix_net_ancillarySocketCred!();
+        Depcrate_os_unix_net_ancillarySocketCred!();
+        Depcrate_os_unix_net_ancillarySocketCred!();
+        Depcrate_os_unix_net_ancillarySocketCred!();
+        Depcrate_os_unix_net_ancillaryimpl_1504!();
+        Depcrate_os_unix_net_ancillaryimpl_1505!();
+        Depcrate_os_unix_net_ancillaryimpl_1506!();
+        Depcrate_os_unix_net_ancillaryScmRights!();
+        Depcrate_os_unix_net_ancillaryimpl_1508!();
+        Depcrate_os_unix_net_ancillaryScmCredentials!();
+        Depcrate_os_unix_net_ancillaryScmCredentials!();
+        Depcrate_os_unix_net_ancillaryScmCredentials!();
+        Depcrate_os_unix_net_ancillaryScmCredentials!();
+        Depcrate_os_unix_net_ancillaryimpl_1513!();
+        Depcrate_os_unix_net_ancillaryAncillaryError!();
+        Depcrate_os_unix_net_ancillaryAncillaryData!();
+        Depcrate_os_unix_net_ancillaryimpl_1516!();
+        Depcrate_os_unix_net_ancillaryMessages!();
+        Depcrate_os_unix_net_ancillaryimpl_1518!();
+        Depcrate_os_unix_net_ancillarySocketAncillary!();
+        Depcrate_os_unix_net_ancillaryimpl_1520!();
+    };
+}

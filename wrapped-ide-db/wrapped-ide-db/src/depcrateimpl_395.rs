@@ -1,0 +1,9 @@
+// Generated macro for impl_395 (impl)
+macro_rules! Depcrateimpl_395 {
+() => {
+// Module: crate
+// Provides: {"impl_395"}
+// Dependencies: {}
+impl From < hir :: MacroKind > for SymbolKind { fn from (it : hir :: MacroKind) -> Self { match it { hir :: MacroKind :: Declarative | hir :: MacroKind :: DeclarativeBuiltIn => SymbolKind :: Macro , hir :: MacroKind :: ProcMacro => SymbolKind :: ProcMacro , hir :: MacroKind :: Derive | hir :: MacroKind :: DeriveBuiltIn => SymbolKind :: Derive , hir :: MacroKind :: Attr | hir :: MacroKind :: AttrBuiltIn => SymbolKind :: Attribute , } } }
+};
+}

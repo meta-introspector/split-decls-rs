@@ -1,0 +1,9 @@
+// Generated macro for impl_95 (impl)
+macro_rules! Depcrateimpl_95 {
+() => {
+// Module: crate
+// Provides: {"impl_95"}
+// Dependencies: {}
+impl < T > fmt :: Display for ForcePushError < T > { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { write ! (f , "Closed") } }
+};
+}

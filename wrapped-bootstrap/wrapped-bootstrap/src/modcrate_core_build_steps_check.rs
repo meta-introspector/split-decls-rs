@@ -1,0 +1,53 @@
+// Generated module macro for crate::core::build_steps::check
+macro_rules! Modcrate_core_build_steps_check {
+() => {
+        Depcrate_core_build_steps_checkuse_23!();
+        Depcrate_core_build_steps_checkuse_24!();
+        Depcrate_core_build_steps_checkuse_25!();
+        Depcrate_core_build_steps_checkuse_26!();
+        Depcrate_core_build_steps_checkuse_27!();
+        Depcrate_core_build_steps_checkuse_28!();
+        Depcrate_core_build_steps_checkuse_29!();
+        Depcrate_core_build_steps_checkuse_30!();
+        Depcrate_core_build_steps_checkuse_31!();
+        Depcrate_core_build_steps_checkStd!();
+        Depcrate_core_build_steps_checkimpl_33!();
+        Depcrate_core_build_steps_checkimpl_34!();
+        Depcrate_core_build_steps_checkRmetaSysroot!();
+        Depcrate_core_build_steps_checkimpl_36!();
+        Depcrate_core_build_steps_checkPrepareRustcRmetaSysroot!();
+        Depcrate_core_build_steps_checkimpl_38!();
+        Depcrate_core_build_steps_checkimpl_39!();
+        Depcrate_core_build_steps_checkPrepareStdRmetaSysroot!();
+        Depcrate_core_build_steps_checkimpl_41!();
+        Depcrate_core_build_steps_checkimpl_42!();
+        Depcrate_core_build_steps_checkRustc!();
+        Depcrate_core_build_steps_checkimpl_44!();
+        Depcrate_core_build_steps_checkimpl_45!();
+        Depcrate_core_build_steps_checkCompilerForCheck!();
+        Depcrate_core_build_steps_checkimpl_47!();
+        Depcrate_core_build_steps_checkprepare_std!();
+        Depcrate_core_build_steps_checkprepare_compiler_for_check!();
+        Depcrate_core_build_steps_checkCraneliftCodegenBackend!();
+        Depcrate_core_build_steps_checkimpl_51!();
+        Depcrate_core_build_steps_checkGccCodegenBackend!();
+        Depcrate_core_build_steps_checkimpl_53!();
+        Depcrate_core_build_steps_checktool_check_step!();
+        Depcrate_core_build_steps_checkrun_tool_check_step!();
+        Depcrate_core_build_steps_checkmacro_56!();
+        Depcrate_core_build_steps_checkmacro_57!();
+        Depcrate_core_build_steps_checkmacro_58!();
+        Depcrate_core_build_steps_checkmacro_59!();
+        Depcrate_core_build_steps_checkmacro_60!();
+        Depcrate_core_build_steps_checkmacro_61!();
+        Depcrate_core_build_steps_checkmacro_62!();
+        Depcrate_core_build_steps_checkmacro_63!();
+        Depcrate_core_build_steps_checkmacro_64!();
+        Depcrate_core_build_steps_checkmacro_65!();
+        Depcrate_core_build_steps_checkmacro_66!();
+        Depcrate_core_build_steps_checkmacro_67!();
+        Depcrate_core_build_steps_checkmacro_68!();
+        Depcrate_core_build_steps_checkmacro_69!();
+        Depcrate_core_build_steps_checkmacro_70!();
+    };
+}

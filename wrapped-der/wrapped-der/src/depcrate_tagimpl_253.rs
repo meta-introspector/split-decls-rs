@@ -1,0 +1,9 @@
+// Generated macro for impl_253 (impl)
+macro_rules! Depcrate_tagimpl_253 {
+() => {
+// Module: crate::tag
+// Provides: {"impl_253"}
+// Dependencies: {}
+impl fmt :: Display for Tag { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { const FIELD_TYPE : [& str ; 2] = ["primitive" , "constructed"] ; match * self { Tag :: Boolean => f . write_str ("BOOLEAN") , Tag :: Integer => f . write_str ("INTEGER") , Tag :: BitString => f . write_str ("BIT STRING") , Tag :: OctetString => f . write_str ("OCTET STRING") , Tag :: Null => f . write_str ("NULL") , Tag :: ObjectIdentifier => f . write_str ("OBJECT IDENTIFIER") , Tag :: Real => f . write_str ("REAL") , Tag :: Enumerated => f . write_str ("ENUMERATED") , Tag :: Utf8String => f . write_str ("UTF8String") , Tag :: RelativeOid => f . write_str ("RELATIVE OID") , Tag :: Set => f . write_str ("SET") , Tag :: NumericString => f . write_str ("NumericString") , Tag :: PrintableString => f . write_str ("PrintableString") , Tag :: TeletexString => f . write_str ("TeletexString") , Tag :: VideotexString => f . write_str ("VideotexString") , Tag :: Ia5String => f . write_str ("IA5String") , Tag :: UtcTime => f . write_str ("UTCTime") , Tag :: GeneralizedTime => f . write_str ("GeneralizedTime") , Tag :: VisibleString => f . write_str ("VisibleString") , Tag :: GeneralString => f . write_str ("GeneralString") , Tag :: BmpString => f . write_str ("BMPString") , Tag :: Sequence => f . write_str ("SEQUENCE") , Tag :: Application { constructed , number , } => write ! (f , "APPLICATION [{}] ({})" , number , FIELD_TYPE [usize :: from (constructed)]) , Tag :: ContextSpecific { constructed , number , } => write ! (f , "CONTEXT-SPECIFIC [{}] ({})" , number , FIELD_TYPE [usize :: from (constructed)]) , Tag :: Private { constructed , number , } => write ! (f , "PRIVATE [{}] ({})" , number , FIELD_TYPE [usize :: from (constructed)]) , } } }
+};
+}

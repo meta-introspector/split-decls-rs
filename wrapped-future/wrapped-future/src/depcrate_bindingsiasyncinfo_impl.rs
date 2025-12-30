@@ -1,0 +1,9 @@
+// Generated macro for IAsyncInfo_Impl (trait)
+macro_rules! Depcrate_bindingsIAsyncInfo_Impl {
+() => {
+// Module: crate::bindings
+// Provides: {"IAsyncInfo_Impl"}
+// Dependencies: {}
+pub trait IAsyncInfo_Impl : windows_core :: IUnknownImpl { fn Id (& self) -> windows_core :: Result < u32 > ; fn Status (& self) -> windows_core :: Result < AsyncStatus > ; fn ErrorCode (& self) -> windows_core :: Result < windows_core :: HRESULT > ; fn Cancel (& self) -> windows_core :: Result < () > ; fn Close (& self) -> windows_core :: Result < () > ; }
+};
+}

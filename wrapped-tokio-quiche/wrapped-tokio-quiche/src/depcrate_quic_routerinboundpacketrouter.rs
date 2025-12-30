@@ -1,0 +1,9 @@
+// Generated macro for InboundPacketRouter (struct)
+macro_rules! Depcrate_quic_routerInboundPacketRouter {
+() => {
+// Module: crate::quic::router
+// Provides: {"InboundPacketRouter"}
+// Dependencies: {}
+# [doc = " An `InboundPacketRouter` maintains a map of quic connections and routes"] # [doc = " [`Incoming`] packets from the [recv half][rh] of a datagram socket to those"] # [doc = " connections or some quic initials handler."] # [doc = ""] # [doc = " [rh]: datagram_socket::DatagramSocketRecv"] # [doc = ""] # [doc = " When a packet (or batch of packets) is received, the router will either"] # [doc = " route those packets to an established"] # [doc = " [`QuicConnection`](super::QuicConnection) or have a them handled by a"] # [doc = " `InitialPacketHandler` which either acts as a quic listener or"] # [doc = " quic connector, a server or client respectively."] # [doc = ""] # [doc = " If you only have a single connection, or if you need more control over the"] # [doc = " socket, use `QuicConnection` directly instead."] pub struct InboundPacketRouter < Tx , Rx , M , I > where Tx : DatagramSocketSend + Send + 'static , M : Metrics , { socket_tx : Arc < Tx > , socket_rx : Rx , local_addr : SocketAddr , config : Config , conns : ConnectionMap , incoming_packet_handler : I , shutdown_tx : Option < mpsc :: Sender < () > > , shutdown_rx : mpsc :: Receiver < () > , conn_map_cmd_tx : mpsc :: UnboundedSender < ConnectionMapCommand > , conn_map_cmd_rx : mpsc :: UnboundedReceiver < ConnectionMapCommand > , accept_sink : mpsc :: Sender < io :: Result < InitialQuicConnection < Tx , M > > > , metrics : M , # [cfg (target_os = "linux")] udp_drop_count : u32 , # [cfg (target_os = "linux")] reusable_cmsg_space : Vec < u8 > , current_buf : PooledBuf , # [cfg (target_os = "linux")] metrics_handshake_time_seconds : TimeHistogram , # [cfg (target_os = "linux")] metrics_udp_drop_count : Counter , }
+};
+}

@@ -1,0 +1,46 @@
+// Generated module macro for crate::line
+macro_rules! Modcrate_line {
+() => {
+        Depcrate_lineuse_2!();
+        Depcrate_lineuse_3!();
+        Depcrate_lineError!();
+        Depcrate_lineimpl_5!();
+        Depcrate_lineimpl_6!();
+        Depcrate_lineYear!();
+        Depcrate_lineimpl_8!();
+        Depcrate_lineMonth!();
+        Depcrate_lineimpl_10!();
+        Depcrate_lineimpl_11!();
+        Depcrate_lineWeekday!();
+        Depcrate_lineimpl_13!();
+        Depcrate_lineimpl_14!();
+        Depcrate_lineDaySpec!();
+        Depcrate_lineimpl_16!();
+        Depcrate_lineimpl_17!();
+        Depcrate_lineis_leap!();
+        Depcrate_lineTimeSpec!();
+        Depcrate_lineimpl_20!();
+        Depcrate_lineimpl_21!();
+        Depcrate_lineTimeType!();
+        Depcrate_lineimpl_23!();
+        Depcrate_lineTimeSpecAndType!();
+        Depcrate_lineimpl_25!();
+        Depcrate_lineChangeTime!();
+        Depcrate_lineimpl_27!();
+        Depcrate_lineZoneInfo!();
+        Depcrate_lineimpl_29!();
+        Depcrate_lineZoneInfoState!();
+        Depcrate_lineSaving!();
+        Depcrate_lineimpl_32!();
+        Depcrate_lineRule!();
+        Depcrate_lineimpl_34!();
+        Depcrate_lineRuleState!();
+        Depcrate_lineZone!();
+        Depcrate_lineimpl_37!();
+        Depcrate_lineLink!();
+        Depcrate_lineimpl_39!();
+        Depcrate_lineLine!();
+        Depcrate_lineimpl_41!();
+        Depcrate_linetests!();
+    };
+}

@@ -1,0 +1,62 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcrate_bindingsservice_continue_pending.rs");
+include!("depcrate_bindingsservice_status_current_state.rs");
+include!("depcrate_bindingsservice_paused.rs");
+include!("depcrate_bindingspwstr.rs");
+include!("depcrate_bindingsservice_control_pause.rs");
+include!("depcrate_bindingsmacro_4.rs");
+include!("depcratestate.rs");
+include!("depcrate_bindingslphandler_function_ex.rs");
+include!("depcrate_bindingsservice_accept_stop.rs");
+include!("depcrate_bindingsservice_control_shutdown.rs");
+include!("depcrateimpl_44.rs");
+include!("depcrate_bindingsservice_stop_pending.rs");
+include!("depcratecommand.rs");
+include!("depcratehandler.rs");
+include!("depcrate_bindingsservice_accept_pause_continue.rs");
+include!("depcrate_bindingsservice_accept_shutdown.rs");
+include!("depcrate_bindingsservice_status_handle.rs");
+include!("depcrateimpl_43.rs");
+include!("depcrate_bindingsno_error.rs");
+include!("depcrate_bindingsservice_pause_pending.rs");
+include!("depcrate_bindingsservice_status.rs");
+include!("depcrate_bindingsimpl_30.rs");
+include!("depcrate_bindingslpservice_main_functionw.rs");
+include!("depcrate_bindingsservice_stopped.rs");
+include!("depcrate_bindingswin32_error.rs");
+include!("depcrate_bindingsservice_win32_own_process.rs");
+include!("depcrateextendedcommand.rs");
+include!("depcrateservice.rs");
+include!("depcrateuse_34.rs");
+include!("depcrate_bindingsservice_start_pending.rs");
+include!("depcrateuse_36.rs");
+include!("depcrateservicecontext.rs");
+include!("depcrateservice_context.rs");
+include!("depcrateimpl_51.rs");
+include!("depcrate_bindingsenum_service_type.rs");
+include!("depcrate_bindingsservice_control_continue.rs");
+include!("depcrate_bindingsbool.rs");
+include!("depcrate_bindingsmacro_2.rs");
+include!("depcrate_bindingsservice_control_stop.rs");
+include!("depcrateuse_33.rs");
+include!("depcrateimpl_40.rs");
+include!("depcrate_bindingsmacro_3.rs");
+include!("depcratebindings.rs");
+include!("depcrateimpl_39.rs");
+include!("depcrateservice_main.rs");
+include!("depcrateimpl_45.rs");
+include!("depcrateimpl_52.rs");
+include!("depcrateuse_35.rs");
+include!("depcrateimpl_46.rs");
+include!("depcrate_bindingsservice_running.rs");
+include!("depcrate_bindingspcwstr.rs");
+include!("depcrate_bindingsservice_table_entryw.rs");
+include!("modcrate_bindings.rs");
+include!("modcrate.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate_bindings!();
+    Modcrate!();
+}

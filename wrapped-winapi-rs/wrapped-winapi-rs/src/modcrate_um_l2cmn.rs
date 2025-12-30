@@ -1,0 +1,41 @@
+// Generated module macro for crate::um::l2cmn
+macro_rules! Modcrate_um_l2cmn {
+() => {
+        Depcrate_um_l2cmnuse_29499!();
+        Depcrate_um_l2cmnuse_29500!();
+        Depcrate_um_l2cmnuse_29501!();
+        Depcrate_um_l2cmnL2_PROFILE_MAX_NAME_LENGTH!();
+        Depcrate_um_l2cmnL2_NOTIFICATION_SOURCE_NONE!();
+        Depcrate_um_l2cmnL2_NOTIFICATION_SOURCE_DOT3_AUTO_CONFIG!();
+        Depcrate_um_l2cmnL2_NOTIFICATION_SOURCE_SECURITY!();
+        Depcrate_um_l2cmnL2_NOTIFICATION_SOURCE_ONEX!();
+        Depcrate_um_l2cmnL2_NOTIFICATION_SOURCE_WLAN_ACM!();
+        Depcrate_um_l2cmnL2_NOTIFICATION_SOURCE_WLAN_MSM!();
+        Depcrate_um_l2cmnL2_NOTIFICATION_SOURCE_WLAN_SECURITY!();
+        Depcrate_um_l2cmnL2_NOTIFICATION_SOURCE_WLAN_IHV!();
+        Depcrate_um_l2cmnL2_NOTIFICATION_SOURCE_WLAN_HNWK!();
+        Depcrate_um_l2cmnL2_NOTIFICATION_SOURCE_WCM!();
+        Depcrate_um_l2cmnL2_NOTIFICATION_SOURCE_WCM_CSP!();
+        Depcrate_um_l2cmnL2_NOTIFICATION_SOURCE_WFD!();
+        Depcrate_um_l2cmnL2_NOTIFICATION_SOURCE_ALL!();
+        Depcrate_um_l2cmnL2_NOTIFICATION_CODE_PUBLIC_BEGIN!();
+        Depcrate_um_l2cmnL2_NOTIFICATION_CODE_GROUP_SIZE!();
+        Depcrate_um_l2cmnL2_NOTIFICATION_CODE_V2_BEGIN!();
+        Depcrate_um_l2cmnL2_REASON_CODE_GROUP_SIZE!();
+        Depcrate_um_l2cmnL2_REASON_CODE_GEN_BASE!();
+        Depcrate_um_l2cmnL2_REASON_CODE_DOT11_AC_BASE!();
+        Depcrate_um_l2cmnL2_REASON_CODE_DOT11_MSM_BASE!();
+        Depcrate_um_l2cmnL2_REASON_CODE_DOT11_SECURITY_BASE!();
+        Depcrate_um_l2cmnL2_REASON_CODE_ONEX_BASE!();
+        Depcrate_um_l2cmnL2_REASON_CODE_DOT3_AC_BASE!();
+        Depcrate_um_l2cmnL2_REASON_CODE_DOT3_MSM_BASE!();
+        Depcrate_um_l2cmnL2_REASON_CODE_PROFILE_BASE!();
+        Depcrate_um_l2cmnL2_REASON_CODE_IHV_BASE!();
+        Depcrate_um_l2cmnL2_REASON_CODE_WIMAX_BASE!();
+        Depcrate_um_l2cmnL2_REASON_CODE_SUCCESS!();
+        Depcrate_um_l2cmnL2_REASON_CODE_UNKNOWN!();
+        Depcrate_um_l2cmnL2_REASON_CODE_PROFILE_MISSING!();
+        Depcrate_um_l2cmnmacro_29533!();
+        Depcrate_um_l2cmnPL2_NOTIFICATION_DATA!();
+    };
+}

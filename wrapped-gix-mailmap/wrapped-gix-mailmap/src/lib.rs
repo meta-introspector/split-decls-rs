@@ -1,0 +1,73 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcrate_snapshot_entryuse_45.rs");
+include!("depcrate_entryimpl_17.rs");
+include!("depcrate_snapshot_signatureresolvedsignature.rs");
+include!("depcrate_snapshotuse_21.rs");
+include!("depcrate_snapshotuse_42.rs");
+include!("depcrate_snapshotuse_50.rs");
+include!("depcrate_snapshot_utilimpl_40.rs");
+include!("depcrate_snapshot_entrynameentry.rs");
+include!("depcratesnapshot.rs");
+include!("depcrate_snapshot_utilencoded_string.rs");
+include!("depcrate_parseparse_line.rs");
+include!("depcrate_parseimpl_8.rs");
+include!("depcrate_snapshotuse_20.rs");
+include!("depcrate_snapshot_utilencodedstringref.rs");
+include!("depcrate_snapshot_signatureimpl_30.rs");
+include!("depcrate_snapshotimpl_51.rs");
+include!("depcrate_snapshotenriched_signature.rs");
+include!("depcrate_entryuse_15.rs");
+include!("depcrate_snapshot_utiluse_34.rs");
+include!("depcrate_snapshot_signatureuse_25.rs");
+include!("depcratesnapshot.rs");
+include!("depcrate_parseparse_name_and_email.rs");
+include!("depcrate_snapshot_signatureimpl_28.rs");
+include!("depcrate_snapshot_utiluse_33.rs");
+include!("depcrate_snapshot_signatureuse_24.rs");
+include!("depcrate_snapshotutil.rs");
+include!("depcrate_snapshot_entryimpl_49.rs");
+include!("depcrateentry.rs");
+include!("depcrate_parselines.rs");
+include!("depcrateuse_1.rs");
+include!("depcrate_parseuse_6.rs");
+include!("depcrate_parseuse_5.rs");
+include!("depcrate_entryuse_16.rs");
+include!("depcrate_snapshot_utilimpl_36.rs");
+include!("depcrate_snapshot_utilimpl_39.rs");
+include!("depcrate_snapshot_entryemailentry.rs");
+include!("depcrate_snapshot_entryimpl_48.rs");
+include!("depcrateparse.rs");
+include!("depcrate_snapshot_utilimpl_38.rs");
+include!("depcrateentry.rs");
+include!("depcrate_snapshotentry.rs");
+include!("depcrate_parseerror.rs");
+include!("depcrateparse_ignore_errors.rs");
+include!("depcrate_entryimpl_18.rs");
+include!("depcrate_snapshot_signatureimpl_27.rs");
+include!("depcrate_parseimpl_9.rs");
+include!("depcrate_snapshot_signaturesignature.rs");
+include!("depcrate_parseuse_4.rs");
+include!("depcrate_snapshotuse_22.rs");
+include!("depcrate_snapshotsignature.rs");
+include!("depcrate_snapshotuse_31.rs");
+include!("depcrate_snapshot_utilencodedstring.rs");
+include!("depcrate_snapshot_entryuse_44.rs");
+include!("modcrate_entry.rs");
+include!("modcrate_snapshot_entry.rs");
+include!("modcrate_snapshot.rs");
+include!("modcrate_parse.rs");
+include!("modcrate.rs");
+include!("modcrate_snapshot_signature.rs");
+include!("modcrate_snapshot_util.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate_entry!();
+    Modcrate_snapshot_entry!();
+    Modcrate_snapshot!();
+    Modcrate_parse!();
+    Modcrate!();
+    Modcrate_snapshot_signature!();
+    Modcrate_snapshot_util!();
+}

@@ -1,0 +1,54 @@
+// Generated module macro for crate::provider
+macro_rules! Modcrate_provider {
+() => {
+        Depcrate_provideruse_224!();
+        Depcrate_provideruse_225!();
+        Depcrate_provideruse_226!();
+        Depcrate_provideruse_227!();
+        Depcrate_provideruse_228!();
+        Depcrate_provideruse_229!();
+        Depcrate_provideruse_230!();
+        Depcrate_provideruse_231!();
+        Depcrate_provideruse_232!();
+        Depcrate_provideruse_233!();
+        Depcrate_provideruse_234!();
+        Depcrate_provideruse_235!();
+        Depcrate_provideruse_236!();
+        Depcrate_provideruse_237!();
+        Depcrate_provideruse_238!();
+        Depcrate_provideruse_239!();
+        Depcrate_provideruse_240!();
+        Depcrate_providerBaked!();
+        Depcrate_provider_!();
+        Depcrate_providerSCRIPT_FALLBACK!();
+        Depcrate_providermacro_244!();
+        Depcrate_providermacro_245!();
+        Depcrate_providermacro_246!();
+        Depcrate_providermacro_247!();
+        Depcrate_providermacro_248!();
+        Depcrate_providermacro_249!();
+        Depcrate_providermacro_250!();
+        Depcrate_providerMARKERS!();
+        Depcrate_providerSINGLE_U32!();
+        Depcrate_providerSINGLE_U64!();
+        Depcrate_providerdata_ce_to_primary!();
+        Depcrate_providerCollationData!();
+        Depcrate_providermacro_256!();
+        Depcrate_providerimpl_257!();
+        Depcrate_providerCollationDiacritics!();
+        Depcrate_providermacro_259!();
+        Depcrate_providerCollationJamo!();
+        Depcrate_providermacro_261!();
+        Depcrate_providerCollationReordering!();
+        Depcrate_providermacro_263!();
+        Depcrate_providerimpl_264!();
+        Depcrate_providerCollationMetadata!();
+        Depcrate_providermacro_266!();
+        Depcrate_providerimpl_267!();
+        Depcrate_providerCollationSpecialPrimaries!();
+        Depcrate_providerCollationSpecialPrimariesValidated!();
+        Depcrate_providerimpl_270!();
+        Depcrate_providermacro_271!();
+        Depcrate_providerimpl_272!();
+    };
+}

@@ -14,9 +14,11 @@ macro_rules! Modcrate {
         Depcrateutil!();
         Depcratedeadlock!();
         Depcratedeadlock!();
-        Depcratemacro_138!();
+        Depcratemacro_136!();
         DepcrateGuardMarker!();
         DepcrateGuardMarker!();
+        Depcrateuse_139!();
+        Depcrateuse_140!();
         Depcrateuse_141!();
         Depcrateuse_142!();
         Depcrateuse_143!();
@@ -26,7 +28,5 @@ macro_rules! Modcrate {
         Depcrateuse_147!();
         Depcrateuse_148!();
         Depcrateuse_149!();
-        Depcrateuse_150!();
-        Depcrateuse_151!();
     };
 }

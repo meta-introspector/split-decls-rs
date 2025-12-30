@@ -1,0 +1,9 @@
+// Generated macro for doc_std (function)
+macro_rules! Depcrate_core_build_steps_docdoc_std {
+() => {
+// Module: crate::core::build_steps::doc
+// Provides: {"doc_std"}
+// Dependencies: {}
+# [doc = " Build the documentation for public standard library crates."] fn doc_std (builder : & Builder < '_ > , format : DocumentationFormat , build_compiler : Compiler , target : TargetSelection , out : & Path , extra_args : & [& str] , requested_crates : & [String] ,) { let target_doc_dir_name = if format == DocumentationFormat :: Json { "json-doc" } else { "doc" } ; let target_dir = builder . stage_out (build_compiler , Mode :: Std) . join (target) . join (target_doc_dir_name) ; let out_dir = target_dir . join (target) . join ("doc") ; let mut cargo = builder :: Cargo :: new (builder , build_compiler , Mode :: Std , SourceType :: InTree , target , Kind :: Doc ,) ; compile :: std_cargo (builder , target , & mut cargo) ; cargo . arg ("--no-deps") . arg ("--target-dir") . arg (& * target_dir . to_string_lossy ()) . arg ("-Zskip-rustdoc-fingerprint") . arg ("-Zrustdoc-map") . rustdocflag ("--extern-html-root-url") . rustdocflag ("std_detect=https://docs.rs/std_detect/latest/") . rustdocflag ("--extern-html-root-takes-precedence") . rustdocflag ("--resource-suffix") . rustdocflag (& builder . version) ; for arg in extra_args { cargo . rustdocflag (arg) ; } if builder . config . library_docs_private_items { cargo . rustdocflag ("--document-private-items") . rustdocflag ("--document-hidden-items") ; } for krate in requested_crates { cargo . arg ("-p") . arg (krate) ; } let description = format ! ("library{} in {} format" , crate_description (requested_crates) , format . as_str ()) ; let _guard = builder . msg (Kind :: Doc , description , Mode :: Std , build_compiler , target) ; cargo . into_cmd () . run (builder) ; builder . cp_link_r (& out_dir , out) ; }
+};
+}

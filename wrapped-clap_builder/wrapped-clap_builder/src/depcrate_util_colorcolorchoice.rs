@@ -1,0 +1,9 @@
+// Generated macro for ColorChoice (enum)
+macro_rules! Depcrate_util_colorColorChoice {
+() => {
+// Module: crate::util::color
+// Provides: {"ColorChoice"}
+// Dependencies: {}
+# [doc = " Represents the color preferences for program output"] # [derive (Debug , Copy , Clone , Eq , PartialEq , Default)] pub enum ColorChoice { # [doc = " Enables colored output only when the output is going to a terminal or TTY."] # [doc = ""] # [doc = " <div class=\"warning\">"] # [doc = ""] # [doc = " **NOTE:** This is the default behavior of `clap`."] # [doc = ""] # [doc = " </div>"] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```rust"] # [doc = " # #[cfg(feature = \"color\")] {"] # [doc = " # use clap_builder as clap;"] # [doc = " # use clap::{Command, ColorChoice};"] # [doc = " Command::new(\"myprog\")"] # [doc = "     .color(ColorChoice::Auto)"] # [doc = "     .get_matches();"] # [doc = " # }"] # [doc = " ```"] # [default] Auto , # [doc = " Enables colored output regardless of whether or not the output is going to a terminal/TTY."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```rust"] # [doc = " # #[cfg(feature = \"color\")] {"] # [doc = " # use clap_builder as clap;"] # [doc = " # use clap::{Command, ColorChoice};"] # [doc = " Command::new(\"myprog\")"] # [doc = "     .color(ColorChoice::Always)"] # [doc = "     .get_matches();"] # [doc = " # }"] # [doc = " ```"] Always , # [doc = " Disables colored output no matter if the output is going to a terminal/TTY, or not."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```rust"] # [doc = " # #[cfg(feature = \"color\")] {"] # [doc = " # use clap_builder as clap;"] # [doc = " # use clap::{Command, ColorChoice};"] # [doc = " Command::new(\"myprog\")"] # [doc = "     .color(ColorChoice::Never)"] # [doc = "     .get_matches();"] # [doc = " # }"] # [doc = " ```"] Never , }
+};
+}

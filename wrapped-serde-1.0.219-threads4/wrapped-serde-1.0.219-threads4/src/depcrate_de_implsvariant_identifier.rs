@@ -1,0 +1,9 @@
+// Generated macro for variant_identifier (macro)
+macro_rules! Depcrate_de_implsvariant_identifier {
+() => {
+// Module: crate::de::impls
+// Provides: {"variant_identifier"}
+// Dependencies: {}
+# [cfg (any (feature = "std" , not (no_core_net)))] macro_rules ! variant_identifier { ($ name_kind : ident ($ ($ variant : ident ; $ bytes : expr ; $ index : expr) ,*) $ expecting_message : expr , $ variants_name : ident) => { enum $ name_kind { $ ($ variant) ,* } static $ variants_name : & [& str] = & [$ (stringify ! ($ variant)) ,*] ; impl <'de > Deserialize <'de > for $ name_kind { fn deserialize < D > (deserializer : D) -> Result < Self , D :: Error > where D : Deserializer <'de >, { struct KindVisitor ; impl <'de > Visitor <'de > for KindVisitor { type Value = $ name_kind ; fn expecting (& self , formatter : & mut fmt :: Formatter) -> fmt :: Result { formatter . write_str ($ expecting_message) } fn visit_u64 < E > (self , value : u64) -> Result < Self :: Value , E > where E : Error , { match value { $ ($ index => Ok ($ name_kind :: $ variant) ,) * _ => Err (Error :: invalid_value (Unexpected :: Unsigned (value) , & self) ,) , } } fn visit_str < E > (self , value : & str) -> Result < Self :: Value , E > where E : Error , { match value { $ (stringify ! ($ variant) => Ok ($ name_kind :: $ variant) ,) * _ => Err (Error :: unknown_variant (value , $ variants_name)) , } } fn visit_bytes < E > (self , value : & [u8]) -> Result < Self :: Value , E > where E : Error , { match value { $ ($ bytes => Ok ($ name_kind :: $ variant) ,) * _ => { match str :: from_utf8 (value) { Ok (value) => Err (Error :: unknown_variant (value , $ variants_name)) , Err (_) => Err (Error :: invalid_value (Unexpected :: Bytes (value) , & self)) , } } } } } deserializer . deserialize_identifier (KindVisitor) } } } }
+};
+}

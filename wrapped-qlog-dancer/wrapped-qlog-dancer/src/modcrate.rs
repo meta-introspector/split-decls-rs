@@ -1,0 +1,49 @@
+// Generated module macro for crate
+macro_rules! Modcrate {
+() => {
+        Depcrateuse_1!();
+        Depcrateuse_2!();
+        Depcrateuse_3!();
+        Depcrateuse_4!();
+        Depcrateuse_5!();
+        Depcrateuse_6!();
+        Depcrateuse_7!();
+        Depcrateuse_8!();
+        Depcrateuse_9!();
+        Depcrateuse_10!();
+        Depcrateuse_11!();
+        Depcrateuse_12!();
+        Depcrateuse_13!();
+        Depcrateuse_14!();
+        DepcrateQlogPointu64!();
+        DepcrateQlogPointf32!();
+        DepcratePacketType!();
+        Depcrateimpl_18!();
+        DepcrateSerializationFormat!();
+        Depcrateimpl_20!();
+        DepcrateVantagePointTypeShim!();
+        Depcrateimpl_22!();
+        Depcrateimpl_23!();
+        DepcrateLogFileDetails!();
+        DepcrateRawLogEvents!();
+        DepcrateLogFileData!();
+        DepcrateLogFileParseResult!();
+        Depcrateparse_log_file!();
+        Depcrateread_qlog_from_file!();
+        Depcrateqlog_seq_reader!();
+        Depcratenetlog_with_reader!();
+        Depcratestringify_last!();
+        Depcratepush_interp!();
+        Depcratecreate_file_recursive!();
+        Depcratecategory_and_type_from_name!();
+        Depcratecategory_and_type_from_event!();
+        Depcrateconfig!();
+        Depcratedatastore!();
+        Depcrateplots!();
+        Depcratereports!();
+        Depcraterequest_stub!();
+        Depcrateseriesstore!();
+        Depcrateweb!();
+        Depcratewirefilter!();
+    };
+}

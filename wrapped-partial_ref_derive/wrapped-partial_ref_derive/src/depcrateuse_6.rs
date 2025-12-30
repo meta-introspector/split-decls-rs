@@ -1,0 +1,9 @@
+// Generated macro for use_6 (use)
+macro_rules! Depcrateuse_6 {
+() => {
+// Module: crate
+// Provides: {"use_6"}
+// Dependencies: {}
+use syn :: { parse_macro_input , parse_quote , parse_str , Attribute , Data , DeriveInput , Lifetime , LifetimeDef , Lit , Member , Meta , Type , TypeParen , } ;
+};
+}

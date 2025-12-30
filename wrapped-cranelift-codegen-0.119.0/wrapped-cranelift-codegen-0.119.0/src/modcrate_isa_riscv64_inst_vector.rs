@@ -1,0 +1,52 @@
+// Generated module macro for crate::isa::riscv64::inst::vector
+macro_rules! Modcrate_isa_riscv64_inst_vector {
+() => {
+        Depcrate_isa_riscv64_inst_vectoruse_2110!();
+        Depcrate_isa_riscv64_inst_vectoruse_2111!();
+        Depcrate_isa_riscv64_inst_vectoruse_2112!();
+        Depcrate_isa_riscv64_inst_vectoruse_2113!();
+        Depcrate_isa_riscv64_inst_vectoruse_2114!();
+        Depcrate_isa_riscv64_inst_vectoruse_2115!();
+        Depcrate_isa_riscv64_inst_vectorimpl_2116!();
+        Depcrate_isa_riscv64_inst_vectorimpl_2117!();
+        Depcrate_isa_riscv64_inst_vectorimpl_2118!();
+        Depcrate_isa_riscv64_inst_vectorimpl_2119!();
+        Depcrate_isa_riscv64_inst_vectorimpl_2120!();
+        Depcrate_isa_riscv64_inst_vectorimpl_2121!();
+        Depcrate_isa_riscv64_inst_vectorimpl_2122!();
+        Depcrate_isa_riscv64_inst_vectorimpl_2123!();
+        Depcrate_isa_riscv64_inst_vectorimpl_2124!();
+        Depcrate_isa_riscv64_inst_vectorimpl_2125!();
+        Depcrate_isa_riscv64_inst_vectorimpl_2126!();
+        Depcrate_isa_riscv64_inst_vectorimpl_2127!();
+        Depcrate_isa_riscv64_inst_vectorVType!();
+        Depcrate_isa_riscv64_inst_vectorimpl_2129!();
+        Depcrate_isa_riscv64_inst_vectorimpl_2130!();
+        Depcrate_isa_riscv64_inst_vectorVState!();
+        Depcrate_isa_riscv64_inst_vectorimpl_2132!();
+        Depcrate_isa_riscv64_inst_vectorimpl_2133!();
+        Depcrate_isa_riscv64_inst_vectorimpl_2134!();
+        Depcrate_isa_riscv64_inst_vectorimpl_2135!();
+        Depcrate_isa_riscv64_inst_vectorimpl_2136!();
+        Depcrate_isa_riscv64_inst_vectorimpl_2137!();
+        Depcrate_isa_riscv64_inst_vectorimpl_2138!();
+        Depcrate_isa_riscv64_inst_vectorimpl_2139!();
+        Depcrate_isa_riscv64_inst_vectorimpl_2140!();
+        Depcrate_isa_riscv64_inst_vectorimpl_2141!();
+        Depcrate_isa_riscv64_inst_vectorimpl_2142!();
+        Depcrate_isa_riscv64_inst_vectorimpl_2143!();
+        Depcrate_isa_riscv64_inst_vectorimpl_2144!();
+        Depcrate_isa_riscv64_inst_vectorimpl_2145!();
+        Depcrate_isa_riscv64_inst_vectorimpl_2146!();
+        Depcrate_isa_riscv64_inst_vectorimpl_2147!();
+        Depcrate_isa_riscv64_inst_vectorimpl_2148!();
+        Depcrate_isa_riscv64_inst_vectorimpl_2149!();
+        Depcrate_isa_riscv64_inst_vectorimpl_2150!();
+        Depcrate_isa_riscv64_inst_vectorimpl_2151!();
+        Depcrate_isa_riscv64_inst_vectorimpl_2152!();
+        Depcrate_isa_riscv64_inst_vectorimpl_2153!();
+        Depcrate_isa_riscv64_inst_vectorimpl_2154!();
+        Depcrate_isa_riscv64_inst_vectorimpl_2155!();
+        Depcrate_isa_riscv64_inst_vectorVecInstOverlapInfo!();
+    };
+}

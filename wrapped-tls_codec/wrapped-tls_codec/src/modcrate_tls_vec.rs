@@ -1,0 +1,52 @@
+// Generated module macro for crate::tls_vec
+macro_rules! Modcrate_tls_vec {
+() => {
+        Depcrate_tls_vecuse_104!();
+        Depcrate_tls_vecuse_105!();
+        Depcrate_tls_vecuse_106!();
+        Depcrate_tls_vecuse_107!();
+        Depcrate_tls_vecuse_108!();
+        Depcrate_tls_vecuse_109!();
+        Depcrate_tls_vecimpl_size!();
+        Depcrate_tls_vecimpl_byte_size!();
+        Depcrate_tls_vecimpl_byte_deserialize!();
+        Depcrate_tls_vecimpl_deserialize!();
+        Depcrate_tls_vecimpl_deserialize_bytes!();
+        Depcrate_tls_vecimpl_serialize!();
+        Depcrate_tls_vecimpl_byte_serialize!();
+        Depcrate_tls_vecimpl_serialize_common!();
+        Depcrate_tls_vecimpl_serialize_bytes_bytes!();
+        Depcrate_tls_vecimpl_tls_vec_codec_generic!();
+        Depcrate_tls_vecimpl_tls_vec_codec_bytes!();
+        Depcrate_tls_vecimpl_vec_members!();
+        Depcrate_tls_vecimpl_tls_vec_generic!();
+        Depcrate_tls_vecimpl_tls_vec!();
+        Depcrate_tls_vecimpl_secret_tls_vec!();
+        Depcrate_tls_vecimpl_public_tls_vec!();
+        Depcrate_tls_vecimpl_tls_byte_vec!();
+        Depcrate_tls_vecmacro_127!();
+        Depcrate_tls_vecmacro_128!();
+        Depcrate_tls_vecmacro_129!();
+        Depcrate_tls_vecmacro_130!();
+        Depcrate_tls_vecmacro_131!();
+        Depcrate_tls_vecmacro_132!();
+        Depcrate_tls_vecmacro_133!();
+        Depcrate_tls_vecmacro_134!();
+        Depcrate_tls_vecmacro_135!();
+        Depcrate_tls_vecmacro_136!();
+        Depcrate_tls_vecmacro_137!();
+        Depcrate_tls_vecmacro_138!();
+        Depcrate_tls_vecimpl_tls_byte_slice!();
+        Depcrate_tls_vecmacro_140!();
+        Depcrate_tls_vecmacro_141!();
+        Depcrate_tls_vecmacro_142!();
+        Depcrate_tls_vecmacro_143!();
+        Depcrate_tls_vecimpl_tls_slice!();
+        Depcrate_tls_vecmacro_145!();
+        Depcrate_tls_vecmacro_146!();
+        Depcrate_tls_vecmacro_147!();
+        Depcrate_tls_vecmacro_148!();
+        Depcrate_tls_vecimpl_149!();
+        Depcrate_tls_vecimpl_150!();
+    };
+}

@@ -1,0 +1,49 @@
+// Generated module macro for crate::error
+macro_rules! Modcrate_error {
+() => {
+        Depcrate_erroruse_66!();
+        Depcrate_erroruse_67!();
+        Depcrate_erroruse_68!();
+        Depcrate_erroruse_69!();
+        Depcrate_erroruse_70!();
+        Depcrate_erroruse_71!();
+        Depcrate_erroruse_72!();
+        Depcrate_erroruse_73!();
+        Depcrate_erroruse_74!();
+        Depcrate_errormessages!();
+        Depcrate_errorrstest!();
+        Depcrate_errorfixture!();
+        Depcrate_errorasync_once!();
+        Depcrate_errorSearchImpl!();
+        Depcrate_errorimpl_80!();
+        Depcrate_errorimpl_81!();
+        Depcrate_errorhas_some_generics!();
+        Depcrate_errorgenerics_once!();
+        Depcrate_errorIsImplicitFixture!();
+        Depcrate_errorimpl_85!();
+        Depcrate_errorimpl_86!();
+        Depcrate_errordestruct_fixture_without_from!();
+        Depcrate_errorErrorsVec!();
+        Depcrate_error_merge_errors!();
+        Depcrate_errormerge_errors!();
+        Depcrate_errorcomposed_tuple!();
+        Depcrate_errorimpl_92!();
+        Depcrate_errorimpl_93!();
+        Depcrate_errorimpl_94!();
+        Depcrate_errorimpl_95!();
+        Depcrate_errorimpl_96!();
+        Depcrate_errorimpl_97!();
+        Depcrate_errorimpl_98!();
+        Depcrate_errorErrors!();
+        Depcrate_errormissed_arguments!();
+        Depcrate_errorduplicate_arguments!();
+        Depcrate_errorinvalid_cases!();
+        Depcrate_errorcase_args_without_cases!();
+        Depcrate_errorRenderType!();
+        Depcrate_errorimpl_105!();
+        Depcrate_errortest_attributes!();
+        Depcrate_errorasync_test_without_test_attribute!();
+        Depcrate_errormalformed_explicit_test_attr!();
+        Depcrate_errortest!();
+    };
+}

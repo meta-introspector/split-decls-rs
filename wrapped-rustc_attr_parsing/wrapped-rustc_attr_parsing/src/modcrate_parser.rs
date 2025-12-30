@@ -1,0 +1,40 @@
+// Generated module macro for crate::parser
+macro_rules! Modcrate_parser {
+() => {
+        Depcrate_parseruse_496!();
+        Depcrate_parseruse_497!();
+        Depcrate_parseruse_498!();
+        Depcrate_parseruse_499!();
+        Depcrate_parseruse_500!();
+        Depcrate_parseruse_501!();
+        Depcrate_parseruse_502!();
+        Depcrate_parseruse_503!();
+        Depcrate_parseruse_504!();
+        Depcrate_parseruse_505!();
+        Depcrate_parseruse_506!();
+        Depcrate_parseruse_507!();
+        Depcrate_parseruse_508!();
+        Depcrate_parseruse_509!();
+        Depcrate_parseruse_510!();
+        Depcrate_parseruse_511!();
+        Depcrate_parserPathParser!();
+        Depcrate_parserimpl_513!();
+        Depcrate_parserimpl_514!();
+        Depcrate_parserArgParser!();
+        Depcrate_parserimpl_516!();
+        Depcrate_parserMetaItemOrLitParser!();
+        Depcrate_parserimpl_518!();
+        Depcrate_parserMetaItemParser!();
+        Depcrate_parserimpl_520!();
+        Depcrate_parserimpl_521!();
+        Depcrate_parserimpl_522!();
+        Depcrate_parserNameValueParser!();
+        Depcrate_parserimpl_524!();
+        Depcrate_parserimpl_525!();
+        Depcrate_parserexpr_to_lit!();
+        Depcrate_parserMetaItemListParserContext!();
+        Depcrate_parserimpl_528!();
+        Depcrate_parserMetaItemListParser!();
+        Depcrate_parserimpl_530!();
+    };
+}

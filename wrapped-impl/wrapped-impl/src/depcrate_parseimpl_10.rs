@@ -1,0 +1,9 @@
+// Generated macro for impl_10 (impl)
+macro_rules! Depcrate_parseimpl_10 {
+() => {
+// Module: crate::parse
+// Provides: {"impl_10"}
+// Dependencies: {}
+impl Parse for TraitArgs { fn parse (input : ParseStream) -> Result < Self > { if input . is_empty () { return Ok (TraitArgs :: External) ; } input . parse :: < kw :: tag > () ? ; input . parse :: < Token ! [=] > () ? ; let tag : LitStr = input . parse () ? ; if ! input . is_empty () { input . parse :: < Token ! [,] > () ? ; } if input . is_empty () { return Ok (TraitArgs :: Internal { tag , default_variant : None , }) ; } let lookahead = input . lookahead1 () ; if lookahead . peek (kw :: content) { input . parse :: < kw :: content > () ? ; input . parse :: < Token ! [=] > () ? ; let content : LitStr = input . parse () ? ; if ! input . is_empty () { input . parse :: < Token ! [,] > () ? ; } let mut default_variant = None ; let mut deny_unknown_fields = false ; while ! input . is_empty () { let lookahead = input . lookahead1 () ; if default_variant . is_none () && lookahead . peek (kw :: default_variant) { input . parse :: < kw :: default_variant > () ? ; input . parse :: < Token ! [=] > () ? ; default_variant = Some (input . parse () ?) ; } else if ! deny_unknown_fields && lookahead . peek (kw :: deny_unknown_fields) { input . parse :: < kw :: deny_unknown_fields > () ? ; deny_unknown_fields = true ; } else { return Err (lookahead . error ()) ; } if ! input . is_empty () { input . parse :: < Token ! [,] > () ? ; } } Ok (TraitArgs :: Adjacent { tag , content , default_variant , deny_unknown_fields , }) } else if lookahead . peek (kw :: default_variant) { input . parse :: < kw :: default_variant > () ? ; input . parse :: < Token ! [=] > () ? ; let default_variant : LitStr = input . parse () ? ; input . parse :: < Option < Token ! [,] > > () ? ; Ok (TraitArgs :: Internal { tag , default_variant : Some (default_variant) , }) } else { Err (lookahead . error ()) } } }
+};
+}

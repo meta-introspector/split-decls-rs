@@ -1,0 +1,9 @@
+// Generated macro for LPWKSTA_INFO_302 (type)
+macro_rules! Depcrate_um_lmwkstaLPWKSTA_INFO_302 {
+() => {
+// Module: crate::um::lmwksta
+// Provides: {"LPWKSTA_INFO_302"}
+// Dependencies: {}
+pub type LPWKSTA_INFO_302 = * mut WKSTA_INFO_302 ;
+};
+}

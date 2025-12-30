@@ -1,0 +1,44 @@
+// Generated module macro for crate::config
+macro_rules! Modcrate_config {
+() => {
+        Depcrate_configuse_13!();
+        Depcrate_configuse_14!();
+        Depcrate_configuse_15!();
+        Depcrate_configuse_16!();
+        Depcrate_configuse_17!();
+        Depcrate_configuse_18!();
+        Depcrate_configuse_19!();
+        Depcrate_configTheme!();
+        Depcrate_configtheme_setters!();
+        Depcrate_configimpl_22!();
+        Depcrate_configFrame!();
+        Depcrate_configStyledFrame!();
+        Depcrate_configimpl_25!();
+        Depcrate_configSourceSection!();
+        Depcrate_configimpl_27!();
+        Depcrate_configimpl_28!();
+        Depcrate_configHookBuilder!();
+        Depcrate_configimpl_30!();
+        Depcrate_configimpl_31!();
+        Depcrate_configimpl_32!();
+        Depcrate_configdefault_frame_filter!();
+        Depcrate_configeyre_frame_filters!();
+        Depcrate_configDefaultPanicMessage!();
+        Depcrate_configimpl_36!();
+        Depcrate_configPanicReport!();
+        Depcrate_configprint_panic_info!();
+        Depcrate_configimpl_39!();
+        Depcrate_configPanicHook!();
+        Depcrate_configimpl_41!();
+        Depcrate_configEyreHook!();
+        Depcrate_configHookFunc!();
+        Depcrate_configimpl_44!();
+        Depcrate_configBacktraceFormatter!();
+        Depcrate_configimpl_46!();
+        Depcrate_configVerbosity!();
+        Depcrate_configpanic_verbosity!();
+        Depcrate_configlib_verbosity!();
+        Depcrate_configFilterCallback!();
+        Depcrate_configIssueFilterCallback!();
+    };
+}

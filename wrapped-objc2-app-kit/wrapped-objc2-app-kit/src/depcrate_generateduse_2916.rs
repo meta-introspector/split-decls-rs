@@ -1,0 +1,9 @@
+// Generated macro for use_2916 (pub_use)
+macro_rules! Depcrate_generateduse_2916 {
+() => {
+// Module: crate::generated
+// Provides: {"use_2916"}
+// Dependencies: {}
+# [cfg (feature = "NSTabViewItem")] pub use self :: __NSTabViewItem :: NSTabState ;
+};
+}

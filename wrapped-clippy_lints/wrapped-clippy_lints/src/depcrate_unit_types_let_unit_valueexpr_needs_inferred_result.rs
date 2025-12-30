@@ -1,0 +1,9 @@
+// Generated macro for expr_needs_inferred_result (function)
+macro_rules! Depcrate_unit_types_let_unit_valueexpr_needs_inferred_result {
+() => {
+// Module: crate::unit_types::let_unit_value
+// Provides: {"expr_needs_inferred_result"}
+// Dependencies: {}
+# [doc = " Checks sub-expressions which create the value returned by the given expression for whether"] # [doc = " return value inference is needed. This checks through locals to see if they also need inference"] # [doc = " at this point."] # [doc = ""] # [doc = " e.g."] # [doc = " ```rust,ignore"] # [doc = " let bar = foo();"] # [doc = " let x: u32 = if true { baz() } else { bar };"] # [doc = " ```"] # [doc = " Here the sources of the value assigned to `x` would be `baz()`, and `foo()` via the"] # [doc = " initialization of `bar`. If both `foo` and `baz` have a return type which require type"] # [doc = " inference then this function would return `true`."] fn expr_needs_inferred_result < 'tcx > (cx : & LateContext < 'tcx > , e : & 'tcx Expr < '_ >) -> bool { let mut locals_to_check = Vec :: new () ; let mut seen_locals = HirIdSet :: default () ; if ! each_value_source_needs_inference (cx , e , & mut locals_to_check , & mut seen_locals) { return false ; } while let Some (id) = locals_to_check . pop () { if let Node :: LetStmt (l) = cx . tcx . parent_hir_node (id) { if ! l . ty . is_none_or (| ty | matches ! (ty . kind , TyKind :: Infer (()))) { return false ; } if let Some (e) = l . init { if ! each_value_source_needs_inference (cx , e , & mut locals_to_check , & mut seen_locals) { return false ; } } else if for_each_local_assignment (cx , id , | e | { if each_value_source_needs_inference (cx , e , & mut locals_to_check , & mut seen_locals) { ControlFlow :: Continue (()) } else { ControlFlow :: Break (()) } }) . is_break () { return false ; } } } true }
+};
+}

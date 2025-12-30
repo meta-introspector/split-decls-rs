@@ -1,0 +1,9 @@
+// Generated macro for BuiltinDriver (enum)
+macro_rules! Depcrate_blobBuiltinDriver {
+() => {
+// Module: crate::blob
+// Provides: {"BuiltinDriver"}
+// Dependencies: {}
+# [doc = " Define a built-in way of performing a three-way merge, including auto-resolution support."] # [doc = ""] # [doc = " Some values are related to diffing, some are related to conversions."] # [derive (Default , Debug , Copy , Clone , Eq , PartialEq , Ord , PartialOrd , Hash)] pub enum BuiltinDriver { # [doc = " Perform a merge between text-sources such that conflicts are marked according to"] # [doc = " `merge.conflictStyle` in the Git configuration."] # [doc = ""] # [doc = " If any of the inputs, *base*, *ours* or *theirs* looks like non-text/binary,"] # [doc = " the [`Binary`](Self::Binary) driver will be used instead."] # [doc = ""] # [doc = " Also see [`builtin_driver::text::ConflictStyle`]."] # [default] Text , # [doc = " Merge 'unmergable' content by choosing *ours* or *theirs*, without performing"] # [doc = " an actual merge."] # [doc = ""] # [doc = " Note that if the merge operation is for virtual ancestor (a merge for merge-bases),"] # [doc = " then *ours* will always be chosen."] Binary , # [doc = " Merge text-sources and resolve conflicts by adding conflicting lines one after another,"] # [doc = " in random order, without adding conflict markers either."] # [doc = ""] # [doc = " This can be useful for files that change a lot, but will remain usable merely by adding"] # [doc = " all changed lines."] Union , }
+};
+}

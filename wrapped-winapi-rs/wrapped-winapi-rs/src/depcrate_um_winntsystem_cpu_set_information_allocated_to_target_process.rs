@@ -1,0 +1,9 @@
+// Generated macro for SYSTEM_CPU_SET_INFORMATION_ALLOCATED_TO_TARGET_PROCESS (const)
+macro_rules! Depcrate_um_winntSYSTEM_CPU_SET_INFORMATION_ALLOCATED_TO_TARGET_PROCESS {
+() => {
+// Module: crate::um::winnt
+// Provides: {"SYSTEM_CPU_SET_INFORMATION_ALLOCATED_TO_TARGET_PROCESS"}
+// Dependencies: {}
+pub const SYSTEM_CPU_SET_INFORMATION_ALLOCATED_TO_TARGET_PROCESS : BYTE = 0x4 ;
+};
+}

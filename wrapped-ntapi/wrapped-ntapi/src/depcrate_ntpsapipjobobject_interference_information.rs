@@ -1,0 +1,9 @@
+// Generated macro for PJOBOBJECT_INTERFERENCE_INFORMATION (type)
+macro_rules! Depcrate_ntpsapiPJOBOBJECT_INTERFERENCE_INFORMATION {
+() => {
+// Module: crate::ntpsapi
+// Provides: {"PJOBOBJECT_INTERFERENCE_INFORMATION"}
+// Dependencies: {}
+pub type PJOBOBJECT_INTERFERENCE_INFORMATION = * mut JOBOBJECT_INTERFERENCE_INFORMATION ;
+};
+}

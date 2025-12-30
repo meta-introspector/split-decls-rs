@@ -1,0 +1,44 @@
+// Generated module macro for crate::yoke
+macro_rules! Modcrate_yoke {
+() => {
+        Depcrate_yokeuse_90!();
+        Depcrate_yokeuse_91!();
+        Depcrate_yokeuse_92!();
+        Depcrate_yokeuse_93!();
+        Depcrate_yokeuse_94!();
+        Depcrate_yokeuse_95!();
+        Depcrate_yokeuse_96!();
+        Depcrate_yokeuse_97!();
+        Depcrate_yokeuse_98!();
+        Depcrate_yokeuse_99!();
+        Depcrate_yokeuse_100!();
+        Depcrate_yokeuse_101!();
+        Depcrate_yokeYoke!();
+        Depcrate_yokeimpl_103!();
+        Depcrate_yoketest_debug!();
+        Depcrate_yokeimpl_105!();
+        Depcrate_yokeimpl_106!();
+        Depcrate_yokeimpl_107!();
+        Depcrate_yokeimpl_108!();
+        Depcrate_yokeimpl_109!();
+        Depcrate_yokeimpl_110!();
+        Depcrate_yokeCloneableCart!();
+        Depcrate_yokeimpl_112!();
+        Depcrate_yokeimpl_113!();
+        Depcrate_yokeimpl_114!();
+        Depcrate_yokeimpl_115!();
+        Depcrate_yokeimpl_116!();
+        Depcrate_yokeimpl_117!();
+        Depcrate_yoketest_clone!();
+        Depcrate_yokeimpl_119!();
+        Depcrate_yokeimpl_120!();
+        Depcrate_yokeimpl_121!();
+        Depcrate_yokeimpl_122!();
+        Depcrate_yokeimpl_123!();
+        Depcrate_yokeimpl_124!();
+        Depcrate_yokeimpl_125!();
+        Depcrate_yoke_!();
+        Depcrate_yoke_!();
+        Depcrate_yoke_!();
+    };
+}

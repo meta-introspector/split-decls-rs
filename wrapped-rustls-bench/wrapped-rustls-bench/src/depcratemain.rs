@@ -1,0 +1,9 @@
+// Generated macro for main (function)
+macro_rules! Depcratemain {
+() => {
+// Module: crate
+// Provides: {"main"}
+// Dependencies: {}
+pub fn main () { let args = Args :: parse () ; match args . command () { Command :: Bulk { cipher_suite , plaintext_size , max_fragment_size , } => { let provider = args . provider . unwrap_or_else (Provider :: choose_default) ; for bench in lookup_matching_benches (cipher_suite , args . key_type , & provider) . iter () { bench_bulk (& Parameters :: new (bench , & args) . with_plaintext_size (* plaintext_size) . with_max_fragment (* max_fragment_size) ,) ; } } Command :: Handshake { cipher_suite } | Command :: HandshakeResume { cipher_suite } | Command :: HandshakeTicket { cipher_suite } => { let resume = ResumptionParam :: from_subcommand (args . command ()) ; let provider = args . provider . unwrap_or_else (Provider :: choose_default) ; for bench in lookup_matching_benches (cipher_suite , args . key_type , & provider) . iter () { bench_handshake (& Parameters :: new (bench , & args) . with_client_auth (ClientAuth :: No) . with_resume (resume) ,) ; } } Command :: Memory { cipher_suite , count , } => { let provider = args . provider . unwrap_or_else (Provider :: choose_default) ; for bench in lookup_matching_benches (cipher_suite , args . key_type , & provider) . iter () { let params = Parameters :: new (bench , & args) ; let client_config = params . client_config () ; let server_config = params . server_config () ; bench_memory (client_config , server_config , * count) ; } } Command :: ListSuites => { let provider = args . provider . unwrap_or_else (Provider :: choose_default) ; for bench in ALL_BENCHMARKS . iter () . filter (| t | provider . supports_benchmark (t)) { println ! ("{:?} (key={:?} version={:?})" , bench . ciphersuite , bench . key_type , bench . version) ; } } Command :: AllTests => { all_tests (& args) ; } } }
+};
+}

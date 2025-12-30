@@ -1,0 +1,9 @@
+// Generated macro for append_keys (function)
+macro_rules! Depcrate_mkeymapappend_keys {
+() => {
+// Module: crate::mkeymap
+// Provides: {"append_keys"}
+// Dependencies: {}
+# [doc = " Generate key types for an specific Arg."] fn append_keys (keys : & mut Vec < Key > , arg : & Arg , index : usize) { if let Some (pos_index) = arg . index { let key = KeyType :: Position (pos_index) ; keys . push (Key { key , index }) ; } else { if let Some (short) = arg . short { let key = KeyType :: Short (short) ; keys . push (Key { key , index }) ; } if let Some (long) = arg . long . clone () { let key = KeyType :: Long (long . into ()) ; keys . push (Key { key , index }) ; } for (short , _) in arg . short_aliases . iter () { let key = KeyType :: Short (* short) ; keys . push (Key { key , index }) ; } for (long , _) in arg . aliases . iter () { let key = KeyType :: Long (long . into ()) ; keys . push (Key { key , index }) ; } } }
+};
+}

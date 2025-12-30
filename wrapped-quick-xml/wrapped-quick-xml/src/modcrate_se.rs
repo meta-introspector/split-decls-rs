@@ -1,0 +1,40 @@
+// Generated module macro for crate::se
+macro_rules! Modcrate_se {
+() => {
+        Depcrate_sewrite_primitive!();
+        Depcrate_secontent!();
+        Depcrate_seelement!();
+        Depcrate_sekey!();
+        Depcrate_sesimple_type!();
+        Depcrate_setext!();
+        Depcrate_seuse_591!();
+        Depcrate_seuse_592!();
+        Depcrate_seuse_593!();
+        Depcrate_seuse_594!();
+        Depcrate_seuse_595!();
+        Depcrate_seuse_596!();
+        Depcrate_seuse_597!();
+        Depcrate_seuse_598!();
+        Depcrate_seuse_599!();
+        Depcrate_seto_writer!();
+        Depcrate_seto_utf8_io_writer!();
+        Depcrate_seto_string!();
+        Depcrate_seto_writer_with_root!();
+        Depcrate_seto_string_with_root!();
+        Depcrate_seTextFormat!();
+        Depcrate_seQuoteLevel!();
+        Depcrate_seWriteResult!();
+        Depcrate_seimpl_608!();
+        Depcrate_seforward!();
+        Depcrate_seis_xml11_name_start_char!();
+        Depcrate_seis_xml11_name_char!();
+        Depcrate_seXmlName!();
+        Depcrate_seimpl_613!();
+        Depcrate_seIndent!();
+        Depcrate_seimpl_615!();
+        Depcrate_seSerializer!();
+        Depcrate_seimpl_617!();
+        Depcrate_seimpl_618!();
+        Depcrate_sequote_level!();
+    };
+}

@@ -1,0 +1,44 @@
+// Generated module macro for crate
+macro_rules! Modcrate {
+() => {
+        Depcrateuse_1!();
+        Depcrateuse_2!();
+        Depcrateuse_3!();
+        Depcrateuse_4!();
+        DepcrateReceiver!();
+        DepcrateSender!();
+        DepcrateBoundSender!();
+        Depcrateunbounded!();
+        Depcratebounded!();
+        Depcrateuse_10!();
+        Depcrateuse_11!();
+        Depcrateuse_12!();
+        Depcrateuse_13!();
+        Depcrateuse_14!();
+        Depcrateuse_15!();
+        Depcratefsevent!();
+        Depcrateinotify!();
+        Depcratekqueue!();
+        Depcratewindows!();
+        Depcratenull!();
+        Depcratepoll!();
+        Depcrateconfig!();
+        Depcrateerror!();
+        Depcratetest!();
+        DepcrateEventHandler!();
+        Depcrateimpl_213!();
+        Depcrateimpl_214!();
+        Depcrateimpl_215!();
+        Depcrateimpl_216!();
+        DepcrateWatcherKind!();
+        DepcratePathsMut!();
+        DepcrateWatcher!();
+        DepcrateRecommendedWatcher!();
+        DepcrateRecommendedWatcher!();
+        DepcrateRecommendedWatcher!();
+        DepcrateRecommendedWatcher!();
+        DepcrateRecommendedWatcher!();
+        Depcraterecommended_watcher!();
+        Depcratetests!();
+    };
+}

@@ -1,0 +1,42 @@
+// Generated module macro for crate::runnable
+macro_rules! Modcrate_runnable {
+() => {
+        Depcrate_runnableuse_59!();
+        Depcrate_runnableuse_60!();
+        Depcrate_runnableuse_61!();
+        Depcrate_runnableuse_62!();
+        Depcrate_runnableuse_63!();
+        Depcrate_runnableuse_64!();
+        Depcrate_runnableuse_65!();
+        Depcrate_runnableuse_66!();
+        Depcrate_runnableuse_67!();
+        Depcrate_runnableuse_68!();
+        Depcrate_runnableuse_69!();
+        Depcrate_runnableuse_70!();
+        Depcrate_runnableuse_71!();
+        Depcrate_runnablesealed!();
+        Depcrate_runnableBuilder!();
+        Depcrate_runnableimpl_74!();
+        Depcrate_runnableScheduleInfo!();
+        Depcrate_runnableimpl_76!();
+        Depcrate_runnableSchedule!();
+        Depcrate_runnableimpl_78!();
+        Depcrate_runnableWithInfo!();
+        Depcrate_runnableimpl_80!();
+        Depcrate_runnableimpl_81!();
+        Depcrate_runnableimpl_82!();
+        Depcrate_runnablespawn_unchecked!();
+        Depcrate_runnableimpl_84!();
+        Depcrate_runnablespawn!();
+        Depcrate_runnablespawn_local!();
+        Depcrate_runnablespawn_unchecked!();
+        Depcrate_runnableRunnable!();
+        Depcrate_runnableimpl_89!();
+        Depcrate_runnableimpl_90!();
+        Depcrate_runnableimpl_91!();
+        Depcrate_runnableimpl_92!();
+        Depcrate_runnableimpl_93!();
+        Depcrate_runnableimpl_94!();
+        Depcrate_runnableimpl_95!();
+    };
+}

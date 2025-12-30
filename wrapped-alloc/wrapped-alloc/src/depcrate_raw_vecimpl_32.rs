@@ -1,0 +1,9 @@
+// Generated macro for impl_32 (impl)
+macro_rules! Depcrate_raw_vecimpl_32 {
+() => {
+// Module: crate::raw_vec
+// Provides: {"impl_32"}
+// Dependencies: {}
+impl < T > RawVec < T , Global > { # [doc = " Creates the biggest possible `RawVec` (on the system heap)"] # [doc = " without allocating. If `T` has positive size, then this makes a"] # [doc = " `RawVec` with capacity `0`. If `T` is zero-sized, then it makes a"] # [doc = " `RawVec` with capacity `usize::MAX`. Useful for implementing"] # [doc = " delayed allocation."] # [must_use] pub (crate) const fn new () -> Self { Self :: new_in (Global) } # [doc = " Creates a `RawVec` (on the system heap) with exactly the"] # [doc = " capacity and alignment requirements for a `[T; capacity]`. This is"] # [doc = " equivalent to calling `RawVec::new` when `capacity` is `0` or `T` is"] # [doc = " zero-sized. Note that if `T` is zero-sized this means you will"] # [doc = " *not* get a `RawVec` with the requested capacity."] # [doc = ""] # [doc = " Non-fallible version of `try_with_capacity`"] # [doc = ""] # [doc = " # Panics"] # [doc = ""] # [doc = " Panics if the requested capacity exceeds `isize::MAX` bytes."] # [doc = ""] # [doc = " # Aborts"] # [doc = ""] # [doc = " Aborts on OOM."] # [cfg (not (any (no_global_oom_handling , test)))] # [must_use] # [inline] # [track_caller] pub (crate) fn with_capacity (capacity : usize) -> Self { Self { inner : RawVecInner :: with_capacity (capacity , T :: LAYOUT) , _marker : PhantomData } } # [doc = " Like `with_capacity`, but guarantees the buffer is zeroed."] # [cfg (not (any (no_global_oom_handling , test)))] # [must_use] # [inline] # [track_caller] pub (crate) fn with_capacity_zeroed (capacity : usize) -> Self { Self { inner : RawVecInner :: with_capacity_zeroed_in (capacity , Global , T :: LAYOUT) , _marker : PhantomData , } } }
+};
+}

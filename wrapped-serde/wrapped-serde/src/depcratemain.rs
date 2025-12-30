@@ -1,0 +1,21 @@
+// Generated macro for main (function)
+macro_rules! Depcratemain {
+() => {
+// Module: crate
+// Provides: {"main"}
+// Dependencies: {}
+fn main () { let data = r#"
+        {
+            "name": "John Doe",
+            "age": 43,
+            "address": {
+                "street": "10 Downing Street",
+                "city": "London"
+            },
+            "phones": [
+                "+44 1234567",
+                "+44 2345678"
+            ]
+        }"# ; let person : Person = serde_json :: from_str (data) . expect ("failed to deserialize") ; println ! ("{:#?}" , person) ; }
+};
+}

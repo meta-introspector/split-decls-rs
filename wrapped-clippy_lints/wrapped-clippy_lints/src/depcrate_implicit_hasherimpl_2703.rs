@@ -1,0 +1,9 @@
+// Generated macro for impl_2703 (impl)
+macro_rules! Depcrate_implicit_hasherimpl_2703 {
+() => {
+// Module: crate::implicit_hasher
+// Provides: {"impl_2703"}
+// Dependencies: {}
+impl < 'tcx > Visitor < 'tcx > for ImplicitHasherConstructorVisitor < '_ , '_ , 'tcx > { type NestedFilter = nested_filter :: OnlyBodies ; fn visit_body (& mut self , body : & Body < 'tcx >) { let old_maybe_typeck_results = self . maybe_typeck_results . replace (self . cx . tcx . typeck_body (body . id ())) ; walk_body (self , body) ; self . maybe_typeck_results = old_maybe_typeck_results ; } fn visit_expr (& mut self , e : & 'tcx Expr < '_ >) { if let ExprKind :: Call (fun , args) = e . kind && let ExprKind :: Path (QPath :: TypeRelative (ty , method)) = fun . kind && matches ! (method . ident . name , sym :: new | sym :: with_capacity) && let TyKind :: Path (QPath :: Resolved (None , ty_path)) = ty . kind && let Some (ty_did) = ty_path . res . opt_def_id () { if self . target . ty () != self . maybe_typeck_results . unwrap () . expr_ty (e) { return ; } match (self . cx . tcx . get_diagnostic_name (ty_did) , method . ident . name) { (Some (sym :: HashMap) , sym :: new) => { self . suggestions . insert (e . span , "HashMap::default()" . to_string ()) ; } , (Some (sym :: HashMap) , sym :: with_capacity) => { self . suggestions . insert (e . span , format ! ("HashMap::with_capacity_and_hasher({}, Default::default())" , snippet (self . cx , args [0] . span , "capacity") ,) ,) ; } , (Some (sym :: HashSet) , sym :: new) => { self . suggestions . insert (e . span , "HashSet::default()" . to_string ()) ; } , (Some (sym :: HashSet) , sym :: with_capacity) => { self . suggestions . insert (e . span , format ! ("HashSet::with_capacity_and_hasher({}, Default::default())" , snippet (self . cx , args [0] . span , "capacity") ,) ,) ; } , _ => { } , } } walk_expr (self , e) ; } fn maybe_tcx (& mut self) -> Self :: MaybeTyCtxt { self . cx . tcx } }
+};
+}

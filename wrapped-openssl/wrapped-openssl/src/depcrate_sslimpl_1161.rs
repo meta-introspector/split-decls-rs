@@ -1,0 +1,9 @@
+// Generated macro for impl_1161 (impl)
+macro_rules! Depcrate_sslimpl_1161 {
+() => {
+// Module: crate::ssl
+// Provides: {"impl_1161"}
+// Dependencies: {}
+impl SslMethod { # [doc = " Support all versions of the TLS protocol."] # [corresponds (TLS_method)] pub fn tls () -> SslMethod { unsafe { SslMethod (TLS_method ()) } } # [doc = " Support all versions of the DTLS protocol."] # [corresponds (DTLS_method)] pub fn dtls () -> SslMethod { unsafe { SslMethod (DTLS_method ()) } } # [doc = " Support all versions of the TLS protocol, explicitly as a client."] # [corresponds (TLS_client_method)] pub fn tls_client () -> SslMethod { unsafe { SslMethod (TLS_client_method ()) } } # [doc = " Support all versions of the TLS protocol, explicitly as a server."] # [corresponds (TLS_server_method)] pub fn tls_server () -> SslMethod { unsafe { SslMethod (TLS_server_method ()) } } # [doc = " Support all versions of the DTLS protocol, explicitly as a client."] # [corresponds (DTLS_client_method)] # [cfg (any (boringssl , ossl110 , libressl , awslc))] pub fn dtls_client () -> SslMethod { unsafe { SslMethod (DTLS_client_method ()) } } # [doc = " Support all versions of the DTLS protocol, explicitly as a server."] # [corresponds (DTLS_server_method)] # [cfg (any (boringssl , ossl110 , libressl , awslc))] pub fn dtls_server () -> SslMethod { unsafe { SslMethod (DTLS_server_method ()) } } # [doc = " Constructs an `SslMethod` from a pointer to the underlying OpenSSL value."] # [doc = ""] # [doc = " # Safety"] # [doc = ""] # [doc = " The caller must ensure the pointer is valid."] pub unsafe fn from_ptr (ptr : * const ffi :: SSL_METHOD) -> SslMethod { SslMethod (ptr) } # [doc = " Returns a pointer to the underlying OpenSSL value."] # [allow (clippy :: trivially_copy_pass_by_ref)] pub fn as_ptr (& self) -> * const ffi :: SSL_METHOD { self . 0 } }
+};
+}

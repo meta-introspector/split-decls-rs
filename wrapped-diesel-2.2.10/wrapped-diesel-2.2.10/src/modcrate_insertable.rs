@@ -1,0 +1,44 @@
+// Generated module macro for crate::insertable
+macro_rules! Modcrate_insertable {
+() => {
+        Depcrate_insertableuse_709!();
+        Depcrate_insertableuse_710!();
+        Depcrate_insertableuse_711!();
+        Depcrate_insertableuse_712!();
+        Depcrate_insertableuse_713!();
+        Depcrate_insertableuse_714!();
+        Depcrate_insertableuse_715!();
+        Depcrate_insertableInsertable!();
+        Depcrate_insertableuse_717!();
+        Depcrate_insertableCanInsertInSingleQuery!();
+        Depcrate_insertableimpl_719!();
+        Depcrate_insertableimpl_720!();
+        Depcrate_insertableimpl_721!();
+        Depcrate_insertableInsertValues!();
+        Depcrate_insertableColumnInsertValue!();
+        Depcrate_insertableimpl_724!();
+        Depcrate_insertableDefaultableColumnInsertValue!();
+        Depcrate_insertableimpl_726!();
+        Depcrate_insertableimpl_727!();
+        Depcrate_insertableimpl_728!();
+        Depcrate_insertableimpl_729!();
+        Depcrate_insertableimpl_730!();
+        Depcrate_insertableimpl_731!();
+        Depcrate_insertableimpl_732!();
+        Depcrate_insertableimpl_733!();
+        Depcrate_insertableimpl_734!();
+        Depcrate_insertableimpl_735!();
+        Depcrate_insertableimpl_736!();
+        Depcrate_insertableimpl_737!();
+        Depcrate_insertableimpl_738!();
+        Depcrate_insertableimpl_739!();
+        Depcrate_insertableimpl_740!();
+        Depcrate_insertableprivate!();
+        Depcrate_insertableuse_742!();
+        Depcrate_insertableimpl_743!();
+        Depcrate_insertableimpl_744!();
+        Depcrate_insertableimpl_745!();
+        Depcrate_insertableimpl_746!();
+        Depcrate_insertableimpl_747!();
+    };
+}

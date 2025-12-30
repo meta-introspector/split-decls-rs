@@ -1,0 +1,47 @@
+// Generated module macro for crate::os::solid::io
+macro_rules! Modcrate_os_solid_io {
+() => {
+        Depcrate_os_solid_iouse_2476!();
+        Depcrate_os_solid_iouse_2477!();
+        Depcrate_os_solid_iouse_2478!();
+        Depcrate_os_solid_iouse_2479!();
+        Depcrate_os_solid_ioRawFd!();
+        Depcrate_os_solid_ioValidRawFd!();
+        Depcrate_os_solid_ioBorrowedFd!();
+        Depcrate_os_solid_ioOwnedFd!();
+        Depcrate_os_solid_ioimpl_2484!();
+        Depcrate_os_solid_ioimpl_2485!();
+        Depcrate_os_solid_ioimpl_2486!();
+        Depcrate_os_solid_ioimpl_2487!();
+        Depcrate_os_solid_ioimpl_2488!();
+        Depcrate_os_solid_ioimpl_2489!();
+        Depcrate_os_solid_ioimpl_2490!();
+        Depcrate_os_solid_ioimpl_2491!();
+        Depcrate_os_solid_ioimpl_2492!();
+        Depcrate_os_solid_ioimpl_2493!();
+        Depcrate_os_solid_ioimpl_is_terminal!();
+        Depcrate_os_solid_iomacro_2495!();
+        Depcrate_os_solid_ioAsFd!();
+        Depcrate_os_solid_ioimpl_2497!();
+        Depcrate_os_solid_ioimpl_2498!();
+        Depcrate_os_solid_ioimpl_2499!();
+        Depcrate_os_solid_ioimpl_2500!();
+        Depcrate_os_solid_ioimpl_owned_fd_traits!();
+        Depcrate_os_solid_iomacro_2502!();
+        Depcrate_os_solid_ioimpl_2503!();
+        Depcrate_os_solid_ioimpl_2504!();
+        Depcrate_os_solid_ioimpl_2505!();
+        Depcrate_os_solid_ioAsRawFd!();
+        Depcrate_os_solid_ioFromRawFd!();
+        Depcrate_os_solid_ioIntoRawFd!();
+        Depcrate_os_solid_ioimpl_2509!();
+        Depcrate_os_solid_ioimpl_2510!();
+        Depcrate_os_solid_ioimpl_2511!();
+        Depcrate_os_solid_ioimpl_as_raw_fd!();
+        Depcrate_os_solid_iomacro_2513!();
+        Depcrate_os_solid_ioimpl_from_raw_fd!();
+        Depcrate_os_solid_iomacro_2515!();
+        Depcrate_os_solid_ioimpl_into_raw_fd!();
+        Depcrate_os_solid_iomacro_2517!();
+    };
+}

@@ -1,0 +1,9 @@
+// Generated macro for DenseBitSet (struct)
+macro_rules! Depcrate_bit_setDenseBitSet {
+() => {
+// Module: crate::bit_set
+// Provides: {"DenseBitSet"}
+// Dependencies: {}
+# [doc = " A fixed-size bitset type with a dense representation."] # [doc = ""] # [doc = " Note 1: Since this bitset is dense, if your domain is big, and/or relatively"] # [doc = " homogeneous (for example, with long runs of bits set or unset), then it may"] # [doc = " be preferable to instead use a [MixedBitSet], or an"] # [doc = " [IntervalSet](crate::interval::IntervalSet). They should be more suited to"] # [doc = " sparse, or highly-compressible, domains."] # [doc = ""] # [doc = " Note 2: Use [`GrowableBitSet`] if you need support for resizing after creation."] # [doc = ""] # [doc = " `T` is an index type, typically a newtyped `usize` wrapper, but it can also"] # [doc = " just be `usize`."] # [doc = ""] # [doc = " All operations that involve an element will panic if the element is equal"] # [doc = " to or greater than the domain size. All operations that involve two bitsets"] # [doc = " will panic if the bitsets have differing domain sizes."] # [doc = ""] # [cfg_attr (feature = "nightly" , derive (Decodable_NoContext , Encodable_NoContext))] # [derive (Eq , PartialEq , Hash)] pub struct DenseBitSet < T > { domain_size : usize , words : SmallVec < [Word ; 2] > , marker : PhantomData < T > , }
+};
+}

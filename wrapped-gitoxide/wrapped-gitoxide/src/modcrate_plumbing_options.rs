@@ -1,0 +1,40 @@
+// Generated module macro for crate::plumbing::options
+macro_rules! Modcrate_plumbing_options {
+() => {
+        Depcrate_plumbing_optionsuse_19!();
+        Depcrate_plumbing_optionsuse_20!();
+        Depcrate_plumbing_optionsuse_21!();
+        Depcrate_plumbing_optionsuse_22!();
+        Depcrate_plumbing_optionsuse_23!();
+        Depcrate_plumbing_optionsArgs!();
+        Depcrate_plumbing_optionsSubcommands!();
+        Depcrate_plumbing_optionsarchive!();
+        Depcrate_plumbing_optionsbranch!();
+        Depcrate_plumbing_optionsstatus!();
+        Depcrate_plumbing_optionsmerge_base!();
+        Depcrate_plumbing_optionsworktree!();
+        Depcrate_plumbing_optionscorpus!();
+        Depcrate_plumbing_optionsmerge!();
+        Depcrate_plumbing_optionsdiff!();
+        Depcrate_plumbing_optionslog!();
+        Depcrate_plumbing_optionsconfig!();
+        Depcrate_plumbing_optionsfetch!();
+        Depcrate_plumbing_optionsclone!();
+        Depcrate_plumbing_optionsremote!();
+        Depcrate_plumbing_optionsmailmap!();
+        Depcrate_plumbing_optionsclean!();
+        Depcrate_plumbing_optionsodb!();
+        Depcrate_plumbing_optionsfsck!();
+        Depcrate_plumbing_optionstree!();
+        Depcrate_plumbing_optionscommit!();
+        Depcrate_plumbing_optionstag!();
+        Depcrate_plumbing_optionscredential!();
+        Depcrate_plumbing_optionscommitgraph!();
+        Depcrate_plumbing_optionsrevision!();
+        Depcrate_plumbing_optionsattributes!();
+        Depcrate_plumbing_optionsexclude!();
+        Depcrate_plumbing_optionsindex!();
+        Depcrate_plumbing_optionssubmodule!();
+        Depcrate_plumbing_optionsfree!();
+    };
+}

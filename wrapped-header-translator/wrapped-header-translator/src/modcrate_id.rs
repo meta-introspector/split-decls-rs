@@ -1,0 +1,57 @@
+// Generated module macro for crate::id
+macro_rules! Modcrate_id {
+() => {
+        Depcrate_iduse_148!();
+        Depcrate_iduse_149!();
+        Depcrate_iduse_150!();
+        Depcrate_iduse_151!();
+        Depcrate_iduse_152!();
+        Depcrate_iduse_153!();
+        Depcrate_iduse_154!();
+        Depcrate_iduse_155!();
+        Depcrate_iduse_156!();
+        Depcrate_iduse_157!();
+        Depcrate_iduse_158!();
+        Depcrate_iduse_159!();
+        Depcrate_iduse_160!();
+        Depcrate_iduse_161!();
+        Depcrate_iduse_162!();
+        Depcrate_iduse_163!();
+        Depcrate_iduse_164!();
+        Depcrate_iduse_165!();
+        Depcrate_idToOptionString!();
+        Depcrate_idimpl_167!();
+        Depcrate_idimpl_168!();
+        Depcrate_idimpl_169!();
+        Depcrate_idLocation!();
+        Depcrate_idimpl_171!();
+        Depcrate_idItemIdentifier!();
+        Depcrate_idimpl_173!();
+        Depcrate_idimpl_174!();
+        Depcrate_idimpl_175!();
+        Depcrate_idimpl_176!();
+        Depcrate_idimpl_177!();
+        Depcrate_idimpl_178!();
+        Depcrate_idimpl_179!();
+        Depcrate_idimpl_180!();
+        Depcrate_idimpl_181!();
+        Depcrate_idimpl_182!();
+        Depcrate_idimpl_183!();
+        Depcrate_idcfg_gate_ln!();
+        Depcrate_idimpl_185!();
+        Depcrate_idimpl_186!();
+        Depcrate_idimpl_187!();
+        Depcrate_idimpl_188!();
+        Depcrate_idimpl_189!();
+        Depcrate_idimpl_190!();
+        Depcrate_idItemTree!();
+        Depcrate_idimpl_192!();
+        Depcrate_idimpl_193!();
+        Depcrate_idimpl_194!();
+        Depcrate_idimpl_195!();
+        Depcrate_idimpl_196!();
+        Depcrate_idimpl_197!();
+        Depcrate_idimpl_198!();
+        Depcrate_idtests!();
+    };
+}

@@ -1,0 +1,9 @@
+// Generated macro for code_from_enum (function)
+macro_rules! Depcrate_parsecode_from_enum {
+() => {
+// Module: crate::parse
+// Provides: {"code_from_enum"}
+// Dependencies: {}
+fn code_from_enum (self_ident : & Ident , data : & DataEnum) -> Result < TokenStream > { let mut ts = TokenStream :: new () ; ts . extend (quote ! (use syn :: ext ::*;)) ; let mut input_is_forked = false ; let mut input_is_moved = false ; for index in 0 .. data . variants . len () { let variant = & data . variants [index] ; let variant_ident = & variant . ident ; let is_last = index == data . variants . len () - 1 ; let fn_ident = format_ident ! ("_parse_{}" , & variant . ident) ; let mut peeks = Vec :: new () ; let fn_expr = code_from_fields (quote ! (# self_ident ::# variant_ident) , & variant . fields , Some (& mut peeks) ,) ? ; let fn_def = quote ! { # [allow (non_snake_case)] fn # fn_ident (input : :: structmeta :: helpers :: exports :: syn :: parse :: ParseStream <'_ >) -> :: structmeta :: helpers :: exports :: syn :: Result <# self_ident > { # fn_expr } } ; let code = if peeks . is_empty () { if is_last && ! input_is_forked { input_is_moved = true ; quote ! { # fn_ident (input) } } else { input_is_forked = true ; quote ! { let fork = input . fork () ; if let Ok (value) = # fn_ident (& fork) { :: structmeta :: helpers :: exports :: syn :: parse :: discouraged :: Speculative :: advance_to (input , & fork) ; return Ok (value) ; } } } } else { let mut preds = Vec :: new () ; for (index , peek) in peeks . into_iter () . enumerate () { preds . push (to_predicate (index , & peek) ?) ; } quote ! { if # (# preds) &&* { return # fn_ident (& input) ; } } } ; ts . extend (quote ! { # fn_def # code }) ; } if ! input_is_moved { ts . extend (quote ! { Err (input . error ("parse failed.")) }) ; } Ok (ts) }
+};
+}

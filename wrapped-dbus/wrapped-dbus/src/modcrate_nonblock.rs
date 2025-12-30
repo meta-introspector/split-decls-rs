@@ -1,0 +1,55 @@
+// Generated module macro for crate::nonblock
+macro_rules! Modcrate_nonblock {
+() => {
+        Depcrate_nonblockuse_147!();
+        Depcrate_nonblockuse_148!();
+        Depcrate_nonblockuse_149!();
+        Depcrate_nonblockuse_150!();
+        Depcrate_nonblockuse_151!();
+        Depcrate_nonblockuse_152!();
+        Depcrate_nonblockuse_153!();
+        Depcrate_nonblockuse_154!();
+        Depcrate_nonblockuse_155!();
+        Depcrate_nonblockuse_156!();
+        Depcrate_nonblockuse_157!();
+        Depcrate_nonblockuse_158!();
+        Depcrate_nonblockuse_159!();
+        Depcrate_nonblockuse_160!();
+        Depcrate_nonblockgenerated_org_freedesktop_standard_interfaces!();
+        Depcrate_nonblockgenerated_org_freedesktop_dbus!();
+        Depcrate_nonblockstdintf!();
+        Depcrate_nonblockReplies!();
+        Depcrate_nonblockLocalConnection!();
+        Depcrate_nonblockConnection!();
+        Depcrate_nonblockSyncConnection!();
+        Depcrate_nonblockuse_168!();
+        Depcrate_nonblockconnimpl!();
+        Depcrate_nonblockmacro_170!();
+        Depcrate_nonblockmacro_171!();
+        Depcrate_nonblockmacro_172!();
+        Depcrate_nonblockimpl_173!();
+        Depcrate_nonblockimpl_174!();
+        Depcrate_nonblockimpl_175!();
+        Depcrate_nonblockTimeoutMakerCb!();
+        Depcrate_nonblockWakerCb!();
+        Depcrate_nonblockNonblockReply!();
+        Depcrate_nonblockProcess!();
+        Depcrate_nonblockMsgMatch!();
+        Depcrate_nonblockMatchInner!();
+        Depcrate_nonblockimpl_182!();
+        Depcrate_nonblockimpl_183!();
+        Depcrate_nonblockProxy!();
+        Depcrate_nonblockimpl_185!();
+        Depcrate_nonblockMRAwait!();
+        Depcrate_nonblockmethod_call_await!();
+        Depcrate_nonblockimpl_188!();
+        Depcrate_nonblockMRInner!();
+        Depcrate_nonblockMROuter!();
+        Depcrate_nonblockimpl_191!();
+        Depcrate_nonblockMethodReply!();
+        Depcrate_nonblockimpl_193!();
+        Depcrate_nonblockimpl_194!();
+        Depcrate_nonblockimpl_195!();
+        Depcrate_nonblocktest_conn_send_sync!();
+    };
+}

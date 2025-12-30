@@ -1,0 +1,9 @@
+// Generated macro for impl_475 (impl)
+macro_rules! Depcrate_ioimpl_475 {
+() => {
+// Module: crate::io
+// Provides: {"impl_475"}
+// Dependencies: {}
+impl < T : AsyncWrite , E : From < io :: Error > + 'static > Writer < T , E > { pub fn new < A , C > (io : T , ctx : & mut C) -> Self where A : Actor < Context = C > + WriteHandler < E > , C : AsyncContext < A > , T : Unpin + 'static , { let inner = UnsafeWriter (Rc :: new (RefCell :: new (InnerWriter { flags : Flags :: empty () , buffer : BytesMut :: new () , error : None , low : LOW_WATERMARK , high : HIGH_WATERMARK , handle : SpawnHandle :: default () , task : None , })) , Rc :: new (RefCell :: new (io)) ,) ; let h = ctx . spawn (WriterFut { inner : inner . clone () , }) ; let writer = Self { inner } ; writer . inner . 0 . borrow_mut () . handle = h ; writer } # [doc = " Gracefully closes the sink."] # [doc = ""] # [doc = " The closing happens asynchronously."] pub fn close (& mut self) { self . inner . 0 . borrow_mut () . flags . insert (Flags :: CLOSING) ; } # [doc = " Checks if the sink is closed."] pub fn closed (& self) -> bool { self . inner . 0 . borrow () . flags . contains (Flags :: CLOSED) } # [doc = " Sets the write buffer capacity."] pub fn set_buffer_capacity (& mut self , low_watermark : usize , high_watermark : usize) { let mut inner = self . inner . 0 . borrow_mut () ; inner . low = low_watermark ; inner . high = high_watermark ; } # [doc = " Sends an item to the sink."] pub fn write (& mut self , msg : & [u8]) { let mut inner = self . inner . 0 . borrow_mut () ; inner . buffer . extend_from_slice (msg) ; if let Some (task) = inner . task . take () { task . wake_by_ref () ; } } # [doc = " Returns the `SpawnHandle` for this writer."] pub fn handle (& self) -> SpawnHandle { self . inner . 0 . borrow () . handle } }
+};
+}

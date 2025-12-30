@@ -1,0 +1,9 @@
+// Generated macro for RawPluralOperands (struct)
+macro_rules! Depcrate_raw_operandsRawPluralOperands {
+() => {
+// Module: crate::raw_operands
+// Provides: {"RawPluralOperands"}
+// Dependencies: {}
+# [doc = " 🚧 \\[Experimental\\] A struct for low-level users who want to construct a [`PluralOperands`]"] # [doc = " directly based on the LDML Plural Operand definitions."] # [doc = ""] # [doc = " This may be useful"] # [doc = " for people with experimental rules parsing."] # [doc = ""] # [doc = " This struct is not intended for supported API use, and it is subject to breaking"] # [doc = " changes (ex: a new Plural Operand needs to be supported)."] # [doc = ""] # [doc = " Most users with numerical data inputs for places where [`PluralOperands`] is"] # [doc = " accepted, like [`PluralRules::category_for`](super::PluralRules::category_for), should convert to [`PluralOperands`]."] # [doc = " See [`PluralOperands`] for details."] # [doc = ""] # [doc = " <div class=\"stab unstable\">"] # [doc = " 🚧 This code is experimental; it may change at any time, in breaking or non-breaking ways,"] # [doc = " including in SemVer minor releases. Use with caution."] # [doc = " <a href=\"https://github.com/unicode-org/icu4x/issues/1091\">#1091</a>"] # [doc = " </div>"] # [cfg (feature = "experimental")] # [allow (clippy :: exhaustive_structs)] # [derive (Debug)] pub struct RawPluralOperands { # [doc = " Integer value of input"] pub i : u64 , # [doc = " Number of visible fraction digits with trailing zeros"] pub v : usize , # [doc = " Number of visible fraction digits without trailing zeros"] pub w : usize , # [doc = " Visible fraction digits with trailing zeros"] pub f : u64 , # [doc = " Visible fraction digits without trailing zeros"] pub t : u64 , # [doc = " Exponent of the power of 10 used in compact decimal formatting"] pub c : usize , }
+};
+}

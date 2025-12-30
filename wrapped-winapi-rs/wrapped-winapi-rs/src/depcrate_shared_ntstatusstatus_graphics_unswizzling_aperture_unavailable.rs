@@ -1,0 +1,9 @@
+// Generated macro for STATUS_GRAPHICS_UNSWIZZLING_APERTURE_UNAVAILABLE (const)
+macro_rules! Depcrate_shared_ntstatusSTATUS_GRAPHICS_UNSWIZZLING_APERTURE_UNAVAILABLE {
+() => {
+// Module: crate::shared::ntstatus
+// Provides: {"STATUS_GRAPHICS_UNSWIZZLING_APERTURE_UNAVAILABLE"}
+// Dependencies: {}
+pub const STATUS_GRAPHICS_UNSWIZZLING_APERTURE_UNAVAILABLE : NTSTATUS = 0xC01E0107 ;
+};
+}

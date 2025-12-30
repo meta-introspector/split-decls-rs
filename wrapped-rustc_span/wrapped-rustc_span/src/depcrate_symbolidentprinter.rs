@@ -1,0 +1,9 @@
+// Generated macro for IdentPrinter (struct)
+macro_rules! Depcrate_symbolIdentPrinter {
+() => {
+// Module: crate::symbol
+// Provides: {"IdentPrinter"}
+// Dependencies: {}
+# [doc = " The most general type to print identifiers."] # [doc = ""] # [doc = " AST pretty-printer is used as a fallback for turning AST structures into token streams for"] # [doc = " proc macros. Additionally, proc macros may stringify their input and expect it survive the"] # [doc = " stringification (especially true for proc macro derives written between Rust 1.15 and 1.30)."] # [doc = " So we need to somehow pretty-print `$crate` in a way preserving at least some of its"] # [doc = " hygiene data, most importantly name of the crate it refers to."] # [doc = " As a result we print `$crate` as `crate` if it refers to the local crate"] # [doc = " and as `::other_crate_name` if it refers to some other crate."] # [doc = " Note, that this is only done if the ident token is printed from inside of AST pretty-printing,"] # [doc = " but not otherwise. Pretty-printing is the only way for proc macros to discover token contents,"] # [doc = " so we should not perform this lossy conversion if the top level call to the pretty-printer was"] # [doc = " done for a token stream or a single token."] pub struct IdentPrinter { symbol : Symbol , mode : IdentPrintMode , # [doc = " Span used for retrieving the crate name to which `$crate` refers to,"] # [doc = " if this field is `None` then the `$crate` conversion doesn't happen."] convert_dollar_crate : Option < Span > , }
+};
+}

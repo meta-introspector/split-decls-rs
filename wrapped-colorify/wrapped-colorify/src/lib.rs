@@ -1,9 +1,9 @@
 // Generated wrapped crate with macro-based items
 
 include!("depcratehelp.rs");
-include!("depcrateprintlnc.rs");
-include!("depcrateprintc.rs");
 include!("depcratecolorify.rs");
+include!("depcrateprintc.rs");
+include!("depcrateprintlnc.rs");
 include!("modcrate.rs");
 
 // Execute all items

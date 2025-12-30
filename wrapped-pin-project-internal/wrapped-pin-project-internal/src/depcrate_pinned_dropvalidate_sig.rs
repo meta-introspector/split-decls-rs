@@ -1,0 +1,9 @@
+// Generated macro for validate_sig (function)
+macro_rules! Depcrate_pinned_dropvalidate_sig {
+() => {
+// Module: crate::pinned_drop
+// Provides: {"validate_sig"}
+// Dependencies: {}
+# [doc = " Validates the signature of given `PinnedDrop::drop` method."] # [doc = ""] # [doc = " The correct signature is: `(mut) self: (<path>::)Pin<&mut Self>`"] fn validate_sig (sig : & Signature) -> Result < () > { fn get_ty_path (ty : & Type) -> Option < & Path > { if let Type :: Path (TypePath { qself : None , path }) = ty { Some (path) } else { None } } const INVALID_ARGUMENT : & str = "method `drop` must take an argument `self: Pin<&mut Self>`" ; if sig . ident != "drop" { bail ! (sig . ident , "method `{}` is not a member of trait `PinnedDrop`" , sig . ident) ; } if let ReturnType :: Type (_ , ty) = & sig . output { match & * * ty { Type :: Tuple (ty) if ty . elems . is_empty () => { } _ => bail ! (ty , "method `drop` must return the unit type") , } } match sig . inputs . len () { 1 => { } 0 => return Err (Error :: new (sig . paren_token . span . join () , INVALID_ARGUMENT)) , _ => bail ! (sig . inputs , INVALID_ARGUMENT) , } if let Some (arg) = sig . receiver () { if let Some (path) = get_ty_path (& arg . ty) { let ty = path . segments . last () . expect ("type paths should always have at least one segment") ; if let PathArguments :: AngleBracketed (args) = & ty . arguments { if let Some (GenericArgument :: Type (Type :: Reference (TypeReference { mutability : Some (_) , elem , .. }))) = args . args . first () { if args . args . len () == 1 && ty . ident == "Pin" && get_ty_path (elem) . map_or (false , | path | path . is_ident ("Self")) { if sig . unsafety . is_some () { bail ! (sig . unsafety , "implementing the method `drop` is not unsafe") ; } return Ok (()) ; } } } } } bail ! (sig . inputs [0] , INVALID_ARGUMENT) }
+};
+}

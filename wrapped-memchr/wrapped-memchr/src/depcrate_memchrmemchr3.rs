@@ -1,9 +1,9 @@
-// Generated macro for memchr3 (function)
-macro_rules! Depcrate_memchrmemchr3 {
+// Generated macro for Memchr3 (struct)
+macro_rules! Depcrate_memchrMemchr3 {
 () => {
 // Module: crate::memchr
-// Provides: {"memchr3"}
+// Provides: {"Memchr3"}
 // Dependencies: {}
-# [doc = " Search for the first occurrence of three possible bytes in a haystack."] # [doc = ""] # [doc = " This returns the index corresponding to the first occurrence of one of the"] # [doc = " needle bytes in `haystack`, or `None` if one is not found. If an index is"] # [doc = " returned, it is guaranteed to be less than `haystack.len()`."] # [doc = ""] # [doc = " While this is semantically the same as something like"] # [doc = " `haystack.iter().position(|&b| b == needle1 || b == needle2 || b == needle3)`,"] # [doc = " this routine will attempt to use highly optimized vector operations that"] # [doc = " can be an order of magnitude faster (or more)."] # [doc = ""] # [doc = " # Example"] # [doc = ""] # [doc = " This shows how to find the first position of one of three possible bytes in"] # [doc = " a haystack."] # [doc = ""] # [doc = " ```"] # [doc = " use memchr::memchr3;"] # [doc = ""] # [doc = " let haystack = b\"the quick brown fox\";"] # [doc = " assert_eq!(memchr3(b'k', b'q', b'u', haystack), Some(4));"] # [doc = " ```"] # [inline] pub fn memchr3 (needle1 : u8 , needle2 : u8 , needle3 : u8 , haystack : & [u8] ,) -> Option < usize > { unsafe { generic :: search_slice_with_raw (haystack , | start , end | { memchr3_raw (needle1 , needle2 , needle3 , start , end) }) } }
+# [doc = " An iterator over all occurrences of three possible bytes in a haystack."] # [doc = ""] # [doc = " This iterator implements `DoubleEndedIterator`, which means it can also be"] # [doc = " used to find occurrences in reverse order."] # [doc = ""] # [doc = " This iterator is created by the [`memchr2_iter`] or `[memrchr2_iter`]"] # [doc = " functions. It can also be created with the [`Memchr3::new`] method."] # [doc = ""] # [doc = " The lifetime parameter `'h` refers to the lifetime of the haystack being"] # [doc = " searched."] # [derive (Clone , Debug)] pub struct Memchr3 < 'h > { needle1 : u8 , needle2 : u8 , needle3 : u8 , it : crate :: arch :: generic :: memchr :: Iter < 'h > , }
 };
 }

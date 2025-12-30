@@ -1,0 +1,9 @@
+// Generated macro for check_table (function)
+macro_rules! Depcrate_cargo_lint_groups_prioritycheck_table {
+() => {
+// Module: crate::cargo::lint_groups_priority
+// Provides: {"check_table"}
+// Dependencies: {}
+fn check_table (cx : & LateContext < '_ > , table : & DeTable < '_ > , known_groups : & FxHashSet < & str > , file : & SourceFile) { let mut lints = Vec :: new () ; let mut groups = Vec :: new () ; for (name , config) in table { if name . get_ref () != "warnings" && let Some (config) = LintConfig :: parse (config) { if known_groups . contains (& * * name . get_ref ()) { groups . push ((name , config)) ; } else { lints . push ((name , config)) ; } } } for (group , group_config) in groups { if let Some ((conflict , _)) = lints . iter () . rfind (| (_ , lint_config) | { lint_config . priority () == group_config . priority () && lint_config . level != group_config . level }) { span_lint_and_then (cx , LINT_GROUPS_PRIORITY , toml_span (group . span () , file) , format ! ("lint group `{}` has the same priority ({}) as a lint" , group . as_ref () , group_config . priority () ,) , | diag | { let config_span = toml_span (group_config . sp . clone () , file) ; if group_config . is_implicit () { diag . span_label (config_span , "has an implicit priority of 0") ; } diag . span_label (toml_span (conflict . span () , file) , "has the same priority as this lint") ; diag . note ("the order of the lints in the table is ignored by Cargo") ; let low_priority = lints . iter () . map (| (_ , lint_config) | lint_config . priority () . saturating_sub (1)) . min () . unwrap_or (- 1) ; diag . span_suggestion_verbose (config_span , format ! ("to have lints override the group set `{}` to a lower priority" , group . as_ref ()) , format ! ("{{ level = {:?}, priority = {low_priority} }}" , group_config . level ,) , Applicability :: MaybeIncorrect ,) ; } ,) ; } } }
+};
+}

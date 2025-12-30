@@ -1,0 +1,9 @@
+// Generated macro for NumChars (trait)
+macro_rules! Depcrate_repr_numNumChars {
+() => {
+// Module: crate::repr::num
+// Provides: {"NumChars"}
+// Dependencies: {}
+# [doc = " All of these `num_chars(...)` methods are kind of crazy, but they are necessary."] # [doc = ""] # [doc = " An alternate way to calculate the number of digits in a value is to do:"] # [doc = " ```"] # [doc = " let val = 42;"] # [doc = " let num_digits = ((val as f32).log10().floor()) as usize + 1;"] # [doc = " assert_eq!(num_digits, 2);"] # [doc = " ```"] # [doc = " But there are two problems with this approach:"] # [doc = " 1. floating point math is slow"] # [doc = " 2. results are dependent on floating point precision, which is too inaccurate for larger values"] # [doc = ""] # [doc = " For example, consider this relatively large value..."] # [doc = ""] # [doc = " ```"] # [doc = " let val = 9999995;"] # [doc = " let num_digits = ((val as f32).log10().floor()) as usize + 1;"] # [doc = ""] # [doc = " // this is wrong! There are only 7 digits in this number!"] # [doc = " assert_eq!(num_digits, 8);"] # [doc = " ```"] # [doc = ""] # [doc = " you can use `f64` to get better precision, e.g."] # [doc = ""] # [doc = " ```"] # [doc = " let val = 9999995;"] # [doc = " let num_digits = ((val as f64).log10().floor()) as usize + 1;"] # [doc = ""] # [doc = " // the precision is enough to get the correct value"] # [doc = " assert_eq!(num_digits, 7);"] # [doc = " ```"] # [doc = ""] # [doc = " ...but still not precise enough!"] # [doc = ""] # [doc = " ```"] # [doc = " let val: u64 = 9999999999999999999;"] # [doc = " let num_digits = ((val as f64).log10().floor()) as usize + 1;"] # [doc = ""] # [doc = " // this is wrong! the number is only 19 digits but the formula returns 20"] # [doc = " assert_eq!(num_digits, 20);"] # [doc = " ```"] trait NumChars { fn num_chars (val : Self) -> usize ; }
+};
+}

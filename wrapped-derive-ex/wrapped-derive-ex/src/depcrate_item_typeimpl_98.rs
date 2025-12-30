@@ -1,0 +1,9 @@
+// Generated macro for impl_98 (impl)
+macro_rules! Depcrate_item_typeimpl_98 {
+() => {
+// Module: crate::item_type
+// Provides: {"impl_98"}
+// Dependencies: {}
+impl DeriveEntry { fn from_root (attr : Option < TokenStream > , attrs : & [Attribute]) -> Result < Vec < Self > > { let mut args_list = Vec :: new () ; if let Some (attr) = attr { args_list . push (parse2 (attr) ?) ; } args_list . extend (parse_derive_ex_attrs (attrs) ?) ; Self :: from_args_list (& args_list) } fn from_args_list (args_list : & [Args]) -> Result < Vec < Self > > { let mut results = Vec :: new () ; for a in args_list { for item in & a . items { let (dump , bounds_this) = if let DeriveItemArgsOption :: Some { args , .. } = & item . args { (args . dump , Bounds :: from (& args . bound)) } else { (false , Bounds :: new ()) } ; results . push (Self { kind : DeriveItemKind :: from_ident (& item . trait_ident) ? , span : item . trait_ident . span () , dump : a . dump | dump , bounds_this , bounds_common : Bounds :: from (& a . bound) , }) ; } } Ok (results) } fn push_bounds_to (& self , wcb : & mut WhereClauseBuilder) -> bool { let mut use_bounds = wcb . push_bounds (& self . bounds_this) ; if use_bounds { use_bounds = wcb . push_bounds (& self . bounds_common) ; } use_bounds } fn push_bounds_to_with (& self , hattrs : & HelperAttributes , kind : DeriveItemKind , wcb : & mut WhereClauseBuilder ,) -> bool { let mut use_bounds = hattrs . push_bounds_to (true , kind , wcb) ; if use_bounds { use_bounds = wcb . push_bounds (& self . bounds_this) } if use_bounds { use_bounds = wcb . push_bounds (& self . bounds_common) ; } use_bounds } fn apply_dump (& self , result : Result < TokenStream >) -> TokenStream { match (result , self . dump) { (Ok (ts) , false) => ts , (Ok (ts) , true) => Error :: new (self . span , format ! ("dump:\n{ts}")) . to_compile_error () , (Err (e) , _) => e . to_compile_error () , } } }
+};
+}

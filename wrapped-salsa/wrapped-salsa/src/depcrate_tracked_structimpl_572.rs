@@ -4,6 +4,6 @@ macro_rules! Depcrate_tracked_structimpl_572 {
 // Module: crate::tracked_struct
 // Provides: {"impl_572"}
 // Dependencies: {}
-impl DisambiguatorMap { pub (crate) fn disambiguate (& mut self , key : IdentityHash) -> Disambiguator { use hashbrown :: hash_map :: RawEntryMut ; let entry = self . map . raw_entry_mut () . from_hash (key . hash , | k | * k == key) ; let disambiguator = match entry { RawEntryMut :: Occupied (occupied) => occupied . into_mut () , RawEntryMut :: Vacant (vacant) => { vacant . insert_with_hasher (key . hash , key , Disambiguator (0) , | k | k . hash) . 1 } } ; let result = * disambiguator ; disambiguator . 0 += 1 ; result } pub fn clear (& mut self) { self . map . clear () } pub fn is_empty (& self) -> bool { self . map . is_empty () } }
+impl < 'db , C > StructEntry < 'db , C > where C : Configuration , { # [doc = " Returns the `DatabaseKeyIndex` for this entry."] pub fn key (& self) -> DatabaseKeyIndex { self . key } # [doc = " Returns the tracked struct."] pub fn as_struct (& self) -> C :: Struct < '_ > { FromId :: from_id (self . key . key_index ()) } # [cfg (feature = "salsa_unstable")] pub fn value (& self) -> & 'db Value < C > { self . value } }
 };
 }

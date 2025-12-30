@@ -1,0 +1,9 @@
+// Generated macro for IMAGE_DLLCHARACTERISTICS_TERMINAL_SERVER_AWARE (const)
+macro_rules! Depcrate_um_winntIMAGE_DLLCHARACTERISTICS_TERMINAL_SERVER_AWARE {
+() => {
+// Module: crate::um::winnt
+// Provides: {"IMAGE_DLLCHARACTERISTICS_TERMINAL_SERVER_AWARE"}
+// Dependencies: {}
+pub const IMAGE_DLLCHARACTERISTICS_TERMINAL_SERVER_AWARE : WORD = 0x8000 ;
+};
+}

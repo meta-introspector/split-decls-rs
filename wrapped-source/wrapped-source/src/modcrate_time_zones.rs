@@ -1,0 +1,43 @@
+// Generated module macro for crate::time_zones
+macro_rules! Modcrate_time_zones {
+() => {
+        Depcrate_time_zonesuse_1174!();
+        Depcrate_time_zonesuse_1175!();
+        Depcrate_time_zonesuse_1176!();
+        Depcrate_time_zonesuse_1177!();
+        Depcrate_time_zonesuse_1178!();
+        Depcrate_time_zonesuse_1179!();
+        Depcrate_time_zonesuse_1180!();
+        Depcrate_time_zonesuse_1181!();
+        Depcrate_time_zonesuse_1182!();
+        Depcrate_time_zonesuse_1183!();
+        Depcrate_time_zonesuse_1184!();
+        Depcrate_time_zonesuse_1185!();
+        Depcrate_time_zonesuse_1186!();
+        Depcrate_time_zonesuse_1187!();
+        Depcrate_time_zonesuse_1188!();
+        Depcrate_time_zonesuse_1189!();
+        Depcrate_time_zonesuse_1190!();
+        Depcrate_time_zonesuse_1191!();
+        Depcrate_time_zonesuse_1192!();
+        Depcrate_time_zonesuse_1193!();
+        Depcrate_time_zonesuse_1194!();
+        Depcrate_time_zonesTimestamp!();
+        Depcrate_time_zonesconvert!();
+        Depcrate_time_zonesnames!();
+        Depcrate_time_zoneswindows!();
+        Depcrate_time_zonesCache!();
+        Depcrate_time_zonesCaches!();
+        Depcrate_time_zonesMetazoneData!();
+        Depcrate_time_zonesMzMembership!();
+        Depcrate_time_zonesimpl_1266!();
+        Depcrate_time_zonesimpl_iterable_data_provider!();
+        Depcrate_time_zonesmacro_1268!();
+        Depcrate_time_zonesimpl_1269!();
+        Depcrate_time_zonesimpl_1270!();
+        Depcrate_time_zonesTransition!();
+        Depcrate_time_zonesimpl_1272!();
+        Depcrate_time_zonesimpl_1273!();
+        Depcrate_time_zonestests!();
+    };
+}

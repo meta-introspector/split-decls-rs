@@ -1,0 +1,9 @@
+// Generated macro for impl_32 (impl)
+macro_rules! Depcrate_codec_framed_readimpl_32 {
+() => {
+// Module: crate::codec::framed_read
+// Provides: {"impl_32"}
+// Dependencies: {}
+impl < T > FramedRead < T > { pub fn new (inner : InnerFramedRead < T , LengthDelimitedCodec >) -> FramedRead < T > { let max_header_list_size = DEFAULT_SETTINGS_MAX_HEADER_LIST_SIZE ; let max_continuation_frames = calc_max_continuation_frames (max_header_list_size , inner . decoder () . max_frame_length ()) ; FramedRead { inner , hpack : hpack :: Decoder :: new (DEFAULT_SETTINGS_HEADER_TABLE_SIZE) , max_header_list_size , max_continuation_frames , partial : None , } } pub fn get_ref (& self) -> & T { self . inner . get_ref () } pub fn get_mut (& mut self) -> & mut T { self . inner . get_mut () } # [doc = " Returns the current max frame size setting"] # [inline] pub fn max_frame_size (& self) -> usize { self . inner . decoder () . max_frame_length () } # [doc = " Updates the max frame size setting."] # [doc = ""] # [doc = " Must be within 16,384 and 16,777,215."] # [inline] pub fn set_max_frame_size (& mut self , val : usize) { assert ! (DEFAULT_MAX_FRAME_SIZE as usize <= val && val <= MAX_MAX_FRAME_SIZE as usize) ; self . inner . decoder_mut () . set_max_frame_length (val) ; self . max_continuation_frames = calc_max_continuation_frames (self . max_header_list_size , val) ; } # [doc = " Update the max header list size setting."] # [inline] pub fn set_max_header_list_size (& mut self , val : usize) { self . max_header_list_size = val ; self . max_continuation_frames = calc_max_continuation_frames (val , self . max_frame_size ()) ; } # [doc = " Update the header table size setting."] # [inline] pub fn set_header_table_size (& mut self , val : usize) { self . hpack . queue_size_update (val) ; } }
+};
+}

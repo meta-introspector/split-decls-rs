@@ -1,0 +1,9 @@
+// Generated macro for TimeZoneInfo (struct)
+macro_rules! Depcrate_zoneTimeZoneInfo {
+() => {
+// Module: crate::zone
+// Provides: {"TimeZoneInfo"}
+// Dependencies: {}
+# [doc = " A utility type that can hold time zone information."] # [doc = ""] # [doc = " **The primary definition of this type is in the [`icu_time`](https://docs.rs/icu_time) crate. Other ICU4X crates re-export it for convenience.**"] # [doc = ""] # [doc = " See the docs on [`zone`](self) for more information."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " use icu::calendar::Date;"] # [doc = " use icu::locale::subtags::subtag;"] # [doc = " use icu::time::zone::IanaParser;"] # [doc = " use icu::time::zone::TimeZoneVariant;"] # [doc = " use icu::time::DateTime;"] # [doc = " use icu::time::Time;"] # [doc = " use icu::time::TimeZone;"] # [doc = ""] # [doc = " // Parse the IANA ID"] # [doc = " let id = IanaParser::new().parse(\"America/Chicago\");"] # [doc = ""] # [doc = " // Alternatively, use the BCP47 ID directly"] # [doc = " let id = TimeZone(subtag!(\"uschi\"));"] # [doc = ""] # [doc = " // Create a TimeZoneInfo<Base> by associating the ID with an offset"] # [doc = " let time_zone = id.with_offset(\"-0600\".parse().ok());"] # [doc = ""] # [doc = " // Extend to a TimeZoneInfo<AtTime> by adding a local time"] # [doc = " let time_zone_at_time = time_zone.at_date_time_iso(DateTime {"] # [doc = "     date: Date::try_new_iso(2023, 12, 2).unwrap(),"] # [doc = "     time: Time::start_of_day(),"] # [doc = " });"] # [doc = " ```"] # [derive (Debug , PartialEq , Eq)] # [allow (clippy :: exhaustive_structs)] pub struct TimeZoneInfo < Model : models :: TimeZoneModel > { id : TimeZone , offset : Option < UtcOffset > , zone_name_timestamp : Model :: ZoneNameTimestamp , variant : Model :: TimeZoneVariant , }
+};
+}

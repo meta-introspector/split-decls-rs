@@ -1,0 +1,9 @@
+// Generated macro for parse_settings_frame (function)
+macro_rules! Depcrate_h3_frameparse_settings_frame {
+() => {
+// Module: crate::h3::frame
+// Provides: {"parse_settings_frame"}
+// Dependencies: {}
+fn parse_settings_frame (b : & mut octets :: Octets , settings_length : usize ,) -> Result < Frame > { let mut max_field_section_size = None ; let mut qpack_max_table_capacity = None ; let mut qpack_blocked_streams = None ; let mut connect_protocol_enabled = None ; let mut h3_datagram = None ; let mut raw = Vec :: new () ; let mut additional_settings : Option < Vec < (u64 , u64) > > = None ; if settings_length > MAX_SETTINGS_PAYLOAD_SIZE { return Err (super :: Error :: ExcessiveLoad) ; } while b . off () < settings_length { let identifier = b . get_varint () ? ; let value = b . get_varint () ? ; raw . push ((identifier , value)) ; match identifier { SETTINGS_QPACK_MAX_TABLE_CAPACITY => { qpack_max_table_capacity = Some (value) ; } , SETTINGS_MAX_FIELD_SECTION_SIZE => { max_field_section_size = Some (value) ; } , SETTINGS_QPACK_BLOCKED_STREAMS => { qpack_blocked_streams = Some (value) ; } , SETTINGS_ENABLE_CONNECT_PROTOCOL => { if value > 1 { return Err (super :: Error :: SettingsError) ; } connect_protocol_enabled = Some (value) ; } , SETTINGS_H3_DATAGRAM_00 | SETTINGS_H3_DATAGRAM => { if value > 1 { return Err (super :: Error :: SettingsError) ; } h3_datagram = Some (value) ; } , 0x0 | 0x2 | 0x3 | 0x4 | 0x5 => return Err (super :: Error :: SettingsError) , _ => { let s : & mut Vec < (u64 , u64) > = additional_settings . get_or_insert (vec ! []) ; s . push ((identifier , value)) ; } , } } Ok (Frame :: Settings { max_field_section_size , qpack_max_table_capacity , qpack_blocked_streams , connect_protocol_enabled , h3_datagram , grease : None , raw : Some (raw) , additional_settings , }) }
+};
+}

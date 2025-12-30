@@ -1,0 +1,51 @@
+// Generated module macro for crate
+macro_rules! Modcrate {
+() => {
+        Depcrateother_1!();
+        Depcrateother_2!();
+        Depcrateother_3!();
+        Depcrateother_4!();
+        Depcrateother_5!();
+        Depcrateother_6!();
+        Depcrateother_7!();
+        Depcrateother_8!();
+        Depcrateother_9!();
+        Depcrateother_10!();
+        Depcrateother_11!();
+        Depcrateuse_12!();
+        Depcrateuse_13!();
+        Depcrateuse_14!();
+        Depcrateuse_15!();
+        Depcrateuse_16!();
+        Depcrateuse_17!();
+        Depcrateuse_18!();
+        Depcrateuse_19!();
+        Depcrateuse_20!();
+        Depcrateuse_21!();
+        Depcrateuse_22!();
+        Depcrateuse_23!();
+        Depcrateuse_24!();
+        Depcrateuse_25!();
+        Depcrateuse_26!();
+        Depcrateuse_27!();
+        Depcrateuse_28!();
+        Depcrateerrors!();
+        DepcrateClientMessage!();
+        DepcrateServerMessage!();
+        DepcrateNotification!();
+        DepcrateUpdate!();
+        DepcrateContext!();
+        DepcrateChannel!();
+        Depcratemain!();
+        Depcrateparse!();
+        Depcrateserialize!();
+        DepcrateClient!();
+        Depcrateimpl_40!();
+        Depcratetimeout!();
+        DepcratePush!();
+        Depcrateimpl_43!();
+        DepcrateStreamNext!();
+        Depcrateimpl_45!();
+        Depcrateimpl_46!();
+    };
+}

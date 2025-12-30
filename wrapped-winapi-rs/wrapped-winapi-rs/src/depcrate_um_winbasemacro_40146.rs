@@ -1,0 +1,9 @@
+// Generated macro for macro_40146 (macro)
+macro_rules! Depcrate_um_winbasemacro_40146 {
+() => {
+// Module: crate::um::winbase
+// Provides: {"macro_40146"}
+// Dependencies: {}
+ENUM ! { enum COPYFILE2_COPY_PHASE { COPYFILE2_PHASE_NONE = 0 , COPYFILE2_PHASE_PREPARE_SOURCE , COPYFILE2_PHASE_PREPARE_DEST , COPYFILE2_PHASE_READ_SOURCE , COPYFILE2_PHASE_WRITE_DESTINATION , COPYFILE2_PHASE_SERVER_COPY , COPYFILE2_PHASE_NAMEGRAFT_COPY , COPYFILE2_PHASE_MAX , } }
+};
+}

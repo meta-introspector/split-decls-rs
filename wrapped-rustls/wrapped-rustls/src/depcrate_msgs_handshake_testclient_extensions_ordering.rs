@@ -1,0 +1,12 @@
+// Generated macro for client_extensions_ordering (function)
+macro_rules! Depcrate_msgs_handshake_testclient_extensions_ordering {
+() => {
+// Module: crate::msgs::handshake_test
+// Provides: {"client_extensions_ordering"}
+// Dependencies: {}
+# [test] fn client_extensions_ordering () { let psk_offer = PresharedKeyOffer { identities : vec ! [] , binders : vec ! [] , } ; let psk_and_ech = ClientExtensions { early_data_request : Some (()) , extended_master_secret_request : Some (()) , preshared_key_offer : Some (psk_offer . clone ()) , encrypted_client_hello : Some (EncryptedClientHello :: Inner) , .. Default :: default () } ; let psk_and_ech_with_contiguous = ClientExtensions { contiguous_extensions : vec ! [ExtensionType :: ExtendedMasterSecret] , .. psk_and_ech . clone () } ; let ech = ClientExtensions { early_data_request : Some (()) , extended_master_secret_request : Some (()) , encrypted_client_hello : Some (EncryptedClientHello :: Inner) , .. Default :: default () } ; let psk = ClientExtensions { early_data_request : Some (()) , extended_master_secret_request : Some (()) , preshared_key_offer : Some (psk_offer) , .. Default :: default () } ; let neither = ClientExtensions { early_data_request : Some (()) , extended_master_secret_request : Some (()) , .. Default :: default () } ; fn encoding_with_order (order_seed : u16 , exts : & ClientExtensions < '_ >) -> Vec < u8 > { let mut e = exts . clone () ; e . order_seed = order_seed ; e . get_encoding () } assert_ne ! (encoding_with_order (0 , & psk_and_ech) , encoding_with_order (1 , & psk_and_ech)) ; assert_eq ! (encoding_with_order (0 , & psk_and_ech_with_contiguous) , encoding_with_order (1 , & psk_and_ech_with_contiguous)) ; assert_ne ! (encoding_with_order (0 , & ech) , encoding_with_order (1 , & ech)) ; assert_ne ! (encoding_with_order (0 , & psk) , encoding_with_order (1 , & psk)) ; assert_ne ! (encoding_with_order (0 , & neither) , encoding_with_order (1 , & neither)) ; for seed in 0 ..= 0xffff { assert ! (encoding_with_order (seed , & psk_and_ech) . ends_with (b"\xfe\x0d\x00\x01\x01\
+              \x00\x29\x00\x04\x00\x00\x00\x00")) ; assert ! (encoding_with_order (seed , & psk_and_ech_with_contiguous) . ends_with (b"\x00\x17\x00\x00\
+                  \xfe\x0d\x00\x01\x01\
+                  \x00\x29\x00\x04\x00\x00\x00\x00")) ; assert ! (encoding_with_order (seed , & psk) . ends_with (b"\x00\x29\x00\x04\x00\x00\x00\x00")) ; assert ! (encoding_with_order (seed , & ech) . ends_with (b"\xfe\x0d\x00\x01\x01")) ; } }
+};
+}

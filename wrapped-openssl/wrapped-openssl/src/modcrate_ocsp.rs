@@ -1,0 +1,43 @@
+// Generated module macro for crate::ocsp
+macro_rules! Modcrate_ocsp {
+() => {
+        Depcrate_ocspuse_556!();
+        Depcrate_ocspuse_557!();
+        Depcrate_ocspuse_558!();
+        Depcrate_ocspuse_559!();
+        Depcrate_ocspuse_560!();
+        Depcrate_ocspuse_561!();
+        Depcrate_ocspuse_562!();
+        Depcrate_ocspuse_563!();
+        Depcrate_ocspuse_564!();
+        Depcrate_ocspuse_565!();
+        Depcrate_ocspuse_566!();
+        Depcrate_ocspuse_567!();
+        Depcrate_ocspuse_568!();
+        Depcrate_ocspuse_569!();
+        Depcrate_ocspuse_570!();
+        Depcrate_ocspSENTINEL_MAX_TIME!();
+        Depcrate_ocspget_sentinel_max_time!();
+        Depcrate_ocspmacro_573!();
+        Depcrate_ocspOcspResponseStatus!();
+        Depcrate_ocspimpl_575!();
+        Depcrate_ocspOcspCertStatus!();
+        Depcrate_ocspimpl_577!();
+        Depcrate_ocspOcspRevokedStatus!();
+        Depcrate_ocspimpl_579!();
+        Depcrate_ocspOcspStatus!();
+        Depcrate_ocspimpl_581!();
+        Depcrate_ocspmacro_582!();
+        Depcrate_ocspimpl_583!();
+        Depcrate_ocspmacro_584!();
+        Depcrate_ocspimpl_585!();
+        Depcrate_ocspmacro_586!();
+        Depcrate_ocspimpl_587!();
+        Depcrate_ocspimpl_588!();
+        Depcrate_ocspmacro_589!();
+        Depcrate_ocspimpl_590!();
+        Depcrate_ocspimpl_591!();
+        Depcrate_ocspmacro_592!();
+        Depcrate_ocsptests!();
+    };
+}

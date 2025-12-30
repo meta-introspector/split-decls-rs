@@ -1,0 +1,9 @@
+// Generated macro for impl_297 (impl)
+macro_rules! Depcrate_cal_rocimpl_297 {
+() => {
+// Module: crate::cal::roc
+// Provides: {"impl_297"}
+// Dependencies: {}
+impl Date < Roc > { # [doc = " Construct a new Republic of China calendar Date."] # [doc = ""] # [doc = " Years are specified in the \"roc\" era. This function accepts an extended year in that era, so dates"] # [doc = " before Minguo are negative and year 0 is 1 Before Minguo. To specify dates using explicit era"] # [doc = " codes, use [`Date::try_new_from_codes()`]."] # [doc = ""] # [doc = " ```rust"] # [doc = " use icu::calendar::Date;"] # [doc = " use icu::calendar::cal::Gregorian;"] # [doc = " use tinystr::tinystr;"] # [doc = ""] # [doc = " // Create a new ROC Date"] # [doc = " let date_roc = Date::try_new_roc(1, 2, 3)"] # [doc = "     .expect(\"Failed to initialize ROC Date instance.\");"] # [doc = ""] # [doc = " assert_eq!(date_roc.era_year().era, \"roc\");"] # [doc = " assert_eq!(date_roc.era_year().year, 1, \"ROC year check failed!\");"] # [doc = " assert_eq!(date_roc.month().ordinal, 2, \"ROC month check failed!\");"] # [doc = " assert_eq!(date_roc.day_of_month().0, 3, \"ROC day of month check failed!\");"] # [doc = ""] # [doc = " // Convert to an equivalent Gregorian date"] # [doc = " let date_gregorian = date_roc.to_calendar(Gregorian);"] # [doc = ""] # [doc = " assert_eq!(date_gregorian.era_year().year, 1912, \"Gregorian from ROC year check failed!\");"] # [doc = " assert_eq!(date_gregorian.month().ordinal, 2, \"Gregorian from ROC month check failed!\");"] # [doc = " assert_eq!(date_gregorian.day_of_month().0, 3, \"Gregorian from ROC day of month check failed!\");"] pub fn try_new_roc (year : i32 , month : u8 , day : u8) -> Result < Date < Roc > , RangeError > { ArithmeticDate :: new_gregorian :: < RocEra > (year , month , day) . map (RocDateInner) . map (| i | Date :: from_raw (i , Roc)) } }
+};
+}

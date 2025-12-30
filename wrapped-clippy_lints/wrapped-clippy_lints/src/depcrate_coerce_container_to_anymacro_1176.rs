@@ -1,0 +1,9 @@
+// Generated macro for macro_1176 (macro)
+macro_rules! Depcrate_coerce_container_to_anymacro_1176 {
+() => {
+// Module: crate::coerce_container_to_any
+// Provides: {"macro_1176"}
+// Dependencies: {}
+declare_clippy_lint ! { # [doc = " ### What it does"] # [doc = ""] # [doc = " Protects against unintended coercion of references to container types to `&dyn Any` when the"] # [doc = " container type dereferences to a `dyn Any` which could be directly referenced instead."] # [doc = ""] # [doc = " ### Why is this bad?"] # [doc = ""] # [doc = " The intention is usually to get a reference to the `dyn Any` the value dereferences to,"] # [doc = " rather than coercing a reference to the container itself to `&dyn Any`."] # [doc = ""] # [doc = " ### Example"] # [doc = ""] # [doc = " Because `Box<dyn Any>` itself implements `Any`, `&Box<dyn Any>`"] # [doc = " can be coerced to an `&dyn Any` which refers to *the `Box` itself*, rather than the"] # [doc = " inner `dyn Any`."] # [doc = " ```no_run"] # [doc = " # use std::any::Any;"] # [doc = " let x: Box<dyn Any> = Box::new(0u32);"] # [doc = " let dyn_any_of_box: &dyn Any = &x;"] # [doc = ""] # [doc = " // Fails as we have a &dyn Any to the Box, not the u32"] # [doc = " assert_eq!(dyn_any_of_box.downcast_ref::<u32>(), None);"] # [doc = " ```"] # [doc = " Use instead:"] # [doc = " ```no_run"] # [doc = " # use std::any::Any;"] # [doc = " let x: Box<dyn Any> = Box::new(0u32);"] # [doc = " let dyn_any_of_u32: &dyn Any = &*x;"] # [doc = ""] # [doc = " // Succeeds since we have a &dyn Any to the inner u32!"] # [doc = " assert_eq!(dyn_any_of_u32.downcast_ref::<u32>(), Some(&0u32));"] # [doc = " ```"] # [clippy :: version = "1.89.0"] pub COERCE_CONTAINER_TO_ANY , nursery , "coercing to `&dyn Any` when dereferencing could produce a `dyn Any` without coercion is usually not intended" }
+};
+}

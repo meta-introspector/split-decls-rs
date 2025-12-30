@@ -1,0 +1,9 @@
+// Generated macro for SUPPORTED_SIG_ALGS (static)
+macro_rules! Depcrate_crypto_ringSUPPORTED_SIG_ALGS {
+() => {
+// Module: crate::crypto::ring
+// Provides: {"SUPPORTED_SIG_ALGS"}
+// Dependencies: {}
+# [doc = " A `WebPkiSupportedAlgorithms` value that reflects webpki's capabilities when"] # [doc = " compiled against *ring*."] static SUPPORTED_SIG_ALGS : WebPkiSupportedAlgorithms = WebPkiSupportedAlgorithms { all : & [webpki_algs :: ECDSA_P256_SHA256 , webpki_algs :: ECDSA_P256_SHA384 , webpki_algs :: ECDSA_P384_SHA256 , webpki_algs :: ECDSA_P384_SHA384 , webpki_algs :: ED25519 , webpki_algs :: RSA_PSS_2048_8192_SHA256_LEGACY_KEY , webpki_algs :: RSA_PSS_2048_8192_SHA384_LEGACY_KEY , webpki_algs :: RSA_PSS_2048_8192_SHA512_LEGACY_KEY , webpki_algs :: RSA_PKCS1_2048_8192_SHA256 , webpki_algs :: RSA_PKCS1_2048_8192_SHA384 , webpki_algs :: RSA_PKCS1_2048_8192_SHA512 , webpki_algs :: RSA_PKCS1_2048_8192_SHA256_ABSENT_PARAMS , webpki_algs :: RSA_PKCS1_2048_8192_SHA384_ABSENT_PARAMS , webpki_algs :: RSA_PKCS1_2048_8192_SHA512_ABSENT_PARAMS ,] , mapping : & [(SignatureScheme :: ECDSA_NISTP384_SHA384 , & [webpki_algs :: ECDSA_P384_SHA384 , webpki_algs :: ECDSA_P256_SHA384 ,] ,) , (SignatureScheme :: ECDSA_NISTP256_SHA256 , & [webpki_algs :: ECDSA_P256_SHA256 , webpki_algs :: ECDSA_P384_SHA256 ,] ,) , (SignatureScheme :: ED25519 , & [webpki_algs :: ED25519]) , (SignatureScheme :: RSA_PSS_SHA512 , & [webpki_algs :: RSA_PSS_2048_8192_SHA512_LEGACY_KEY] ,) , (SignatureScheme :: RSA_PSS_SHA384 , & [webpki_algs :: RSA_PSS_2048_8192_SHA384_LEGACY_KEY] ,) , (SignatureScheme :: RSA_PSS_SHA256 , & [webpki_algs :: RSA_PSS_2048_8192_SHA256_LEGACY_KEY] ,) , (SignatureScheme :: RSA_PKCS1_SHA512 , & [webpki_algs :: RSA_PKCS1_2048_8192_SHA512] ,) , (SignatureScheme :: RSA_PKCS1_SHA384 , & [webpki_algs :: RSA_PKCS1_2048_8192_SHA384] ,) , (SignatureScheme :: RSA_PKCS1_SHA256 , & [webpki_algs :: RSA_PKCS1_2048_8192_SHA256] ,) ,] , } ;
+};
+}

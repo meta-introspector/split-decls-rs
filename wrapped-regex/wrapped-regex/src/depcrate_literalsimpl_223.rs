@@ -1,0 +1,9 @@
+// Generated macro for impl_223 (impl)
+macro_rules! Depcrate_literalsimpl_223 {
+() => {
+// Module: crate::literals
+// Provides: {"impl_223"}
+// Dependencies: {}
+impl SingleByteSet { fn new () -> SingleByteSet { SingleByteSet { sparse : vec ! [false ; 256] , dense : vec ! [] , complete : true , all_ascii : true , } } fn prefixes (lits : & syntax :: Literals) -> SingleByteSet { let mut sset = SingleByteSet :: new () ; for lit in lits . literals () { sset . complete = sset . complete && lit . len () == 1 ; if let Some (& b) = lit . get (0) { if ! sset . sparse [b as usize] { if b > 0x7F { sset . all_ascii = false ; } sset . dense . push (b) ; sset . sparse [b as usize] = true ; } } } sset } fn suffixes (lits : & syntax :: Literals) -> SingleByteSet { let mut sset = SingleByteSet :: new () ; for lit in lits . literals () { sset . complete = sset . complete && lit . len () == 1 ; if let Some (& b) = lit . get (lit . len () . checked_sub (1) . unwrap ()) { if ! sset . sparse [b as usize] { if b > 0x7F { sset . all_ascii = false ; } sset . dense . push (b) ; sset . sparse [b as usize] = true ; } } } sset } # [doc = " Faster find that special cases certain sizes to use memchr."] # [inline (always)] fn find (& self , text : & [u8]) -> Option < usize > { match self . dense . len () { 0 => None , 1 => memchr (self . dense [0] , text) , 2 => memchr2 (self . dense [0] , self . dense [1] , text) , 3 => memchr3 (self . dense [0] , self . dense [1] , self . dense [2] , text) , _ => self . _find (text) , } } # [doc = " Generic find that works on any sized set."] fn _find (& self , haystack : & [u8]) -> Option < usize > { for (i , & b) in haystack . iter () . enumerate () { if self . sparse [b as usize] { return Some (i) ; } } None } fn approximate_size (& self) -> usize { (self . dense . len () * mem :: size_of :: < u8 > ()) + (self . sparse . len () * mem :: size_of :: < bool > ()) } }
+};
+}

@@ -1,0 +1,54 @@
+// Generated module macro for crate::datetime::neo_skeleton
+macro_rules! Modcrate_datetime_neo_skeleton {
+() => {
+        Depcrate_datetime_neo_skeletonuse_620!();
+        Depcrate_datetime_neo_skeletonuse_621!();
+        Depcrate_datetime_neo_skeletonuse_622!();
+        Depcrate_datetime_neo_skeletonuse_623!();
+        Depcrate_datetime_neo_skeletonuse_624!();
+        Depcrate_datetime_neo_skeletonuse_625!();
+        Depcrate_datetime_neo_skeletonuse_626!();
+        Depcrate_datetime_neo_skeletonuse_627!();
+        Depcrate_datetime_neo_skeletonuse_628!();
+        Depcrate_datetime_neo_skeletonuse_629!();
+        Depcrate_datetime_neo_skeletonuse_630!();
+        Depcrate_datetime_neo_skeletonuse_631!();
+        Depcrate_datetime_neo_skeletonuse_632!();
+        Depcrate_datetime_neo_skeletonuse_633!();
+        Depcrate_datetime_neo_skeletonuse_634!();
+        Depcrate_datetime_neo_skeletonuse_635!();
+        Depcrate_datetime_neo_skeletonVariantPatternsElement!();
+        Depcrate_datetime_neo_skeletonVariantPatterns!();
+        Depcrate_datetime_neo_skeletonimpl_638!();
+        Depcrate_datetime_neo_skeletonPatternsWithDistance!();
+        Depcrate_datetime_neo_skeletonimpl_640!();
+        Depcrate_datetime_neo_skeletonselect_pattern!();
+        Depcrate_datetime_neo_skeletonimpl_642!();
+        Depcrate_datetime_neo_skeletoncheck_for_field!();
+        Depcrate_datetime_neo_skeletonpreferred_hour_cycle!();
+        Depcrate_datetime_neo_skeletonimpl_645!();
+        Depcrate_datetime_neo_skeletontest_check_for_field!();
+        Depcrate_datetime_neo_skeletongen_time_components!();
+        Depcrate_datetime_neo_skeletongen_date_components!();
+        Depcrate_datetime_neo_skeletonimpl_649!();
+        Depcrate_datetime_neo_skeletonimpl_650!();
+        Depcrate_datetime_neo_skeletonimpl_neo_skeleton_datagen!();
+        Depcrate_datetime_neo_skeletonmacro_652!();
+        Depcrate_datetime_neo_skeletonmacro_653!();
+        Depcrate_datetime_neo_skeletonmacro_654!();
+        Depcrate_datetime_neo_skeletonmacro_655!();
+        Depcrate_datetime_neo_skeletonmacro_656!();
+        Depcrate_datetime_neo_skeletonmacro_657!();
+        Depcrate_datetime_neo_skeletonmacro_658!();
+        Depcrate_datetime_neo_skeletonmacro_659!();
+        Depcrate_datetime_neo_skeletonmacro_660!();
+        Depcrate_datetime_neo_skeletonmacro_661!();
+        Depcrate_datetime_neo_skeletonmacro_662!();
+        Depcrate_datetime_neo_skeletonmacro_663!();
+        Depcrate_datetime_neo_skeletonmacro_664!();
+        Depcrate_datetime_neo_skeletontest_en_year_patterns!();
+        Depcrate_datetime_neo_skeletontest_en_hour_patterns!();
+        Depcrate_datetime_neo_skeletontest_en_overlap_patterns!();
+        Depcrate_datetime_neo_skeletondate_skeleton_consistency_tests!();
+    };
+}

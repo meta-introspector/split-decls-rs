@@ -1,0 +1,47 @@
+// Generated module macro for crate::pg::query_builder::copy::copy_to
+macro_rules! Modcrate_pg_query_builder_copy_copy_to {
+() => {
+        Depcrate_pg_query_builder_copy_copy_touse_3408!();
+        Depcrate_pg_query_builder_copy_copy_touse_3409!();
+        Depcrate_pg_query_builder_copy_copy_touse_3410!();
+        Depcrate_pg_query_builder_copy_copy_touse_3411!();
+        Depcrate_pg_query_builder_copy_copy_touse_3412!();
+        Depcrate_pg_query_builder_copy_copy_touse_3413!();
+        Depcrate_pg_query_builder_copy_copy_touse_3414!();
+        Depcrate_pg_query_builder_copy_copy_touse_3415!();
+        Depcrate_pg_query_builder_copy_copy_touse_3416!();
+        Depcrate_pg_query_builder_copy_copy_touse_3417!();
+        Depcrate_pg_query_builder_copy_copy_touse_3418!();
+        Depcrate_pg_query_builder_copy_copy_touse_3419!();
+        Depcrate_pg_query_builder_copy_copy_touse_3420!();
+        Depcrate_pg_query_builder_copy_copy_touse_3421!();
+        Depcrate_pg_query_builder_copy_copy_touse_3422!();
+        Depcrate_pg_query_builder_copy_copy_touse_3423!();
+        Depcrate_pg_query_builder_copy_copy_touse_3424!();
+        Depcrate_pg_query_builder_copy_copy_toCopyToOptions!();
+        Depcrate_pg_query_builder_copy_copy_toimpl_3426!();
+        Depcrate_pg_query_builder_copy_copy_toimpl_3427!();
+        Depcrate_pg_query_builder_copy_copy_toCopyToCommand!();
+        Depcrate_pg_query_builder_copy_copy_toimpl_3429!();
+        Depcrate_pg_query_builder_copy_copy_toimpl_3430!();
+        Depcrate_pg_query_builder_copy_copy_toNotSet!();
+        Depcrate_pg_query_builder_copy_copy_toCopyToMarker!();
+        Depcrate_pg_query_builder_copy_copy_toimpl_3433!();
+        Depcrate_pg_query_builder_copy_copy_toimpl_3434!();
+        Depcrate_pg_query_builder_copy_copy_toCopyToQuery!();
+        Depcrate_pg_query_builder_copy_copy_toCopyRow!();
+        Depcrate_pg_query_builder_copy_copy_toCopyField!();
+        Depcrate_pg_query_builder_copy_copy_toimpl_3438!();
+        Depcrate_pg_query_builder_copy_copy_toimpl_3439!();
+        Depcrate_pg_query_builder_copy_copy_toimpl_3440!();
+        Depcrate_pg_query_builder_copy_copy_toimpl_3441!();
+        Depcrate_pg_query_builder_copy_copy_toimpl_3442!();
+        Depcrate_pg_query_builder_copy_copy_toimpl_3443!();
+        Depcrate_pg_query_builder_copy_copy_toExecuteCopyToConnection!();
+        Depcrate_pg_query_builder_copy_copy_toimpl_3445!();
+        Depcrate_pg_query_builder_copy_copy_toimpl_3446!();
+        Depcrate_pg_query_builder_copy_copy_toimpl_3447!();
+        Depcrate_pg_query_builder_copy_copy_toimpl_3448!();
+        Depcrate_pg_query_builder_copy_copy_tocopy_to!();
+    };
+}

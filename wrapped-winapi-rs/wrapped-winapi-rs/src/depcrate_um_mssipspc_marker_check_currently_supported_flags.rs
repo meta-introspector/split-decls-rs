@@ -1,0 +1,9 @@
+// Generated macro for SPC_MARKER_CHECK_CURRENTLY_SUPPORTED_FLAGS (const)
+macro_rules! Depcrate_um_mssipSPC_MARKER_CHECK_CURRENTLY_SUPPORTED_FLAGS {
+() => {
+// Module: crate::um::mssip
+// Provides: {"SPC_MARKER_CHECK_CURRENTLY_SUPPORTED_FLAGS"}
+// Dependencies: {}
+pub const SPC_MARKER_CHECK_CURRENTLY_SUPPORTED_FLAGS : DWORD = SPC_MARKER_CHECK_SKIP_SIP_INDIRECT_DATA_FLAG ;
+};
+}

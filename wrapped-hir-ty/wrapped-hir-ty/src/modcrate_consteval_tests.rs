@@ -1,0 +1,44 @@
+// Generated module macro for crate::consteval::tests
+macro_rules! Modcrate_consteval_tests {
+() => {
+        Depcrate_consteval_testsclosure_captures!();
+        Depcrate_consteval_testscoercion!();
+        Depcrate_consteval_testsdiagnostics!();
+        Depcrate_consteval_testsdisplay_source_code!();
+        Depcrate_consteval_testsincremental!();
+        Depcrate_consteval_testsmacros!();
+        Depcrate_consteval_testsmethod_resolution!();
+        Depcrate_consteval_testsnever_type!();
+        Depcrate_consteval_testsopaque_types!();
+        Depcrate_consteval_testspatterns!();
+        Depcrate_consteval_testsregression!();
+        Depcrate_consteval_testssimple!();
+        Depcrate_consteval_teststrait_aliases!();
+        Depcrate_consteval_teststraits!();
+        Depcrate_consteval_testsuse_424!();
+        Depcrate_consteval_testsuse_425!();
+        Depcrate_consteval_testsuse_426!();
+        Depcrate_consteval_testsuse_427!();
+        Depcrate_consteval_testsuse_428!();
+        Depcrate_consteval_testsuse_429!();
+        Depcrate_consteval_testsuse_430!();
+        Depcrate_consteval_testsuse_431!();
+        Depcrate_consteval_testsuse_432!();
+        Depcrate_consteval_testsuse_433!();
+        Depcrate_consteval_testsuse_434!();
+        Depcrate_consteval_testscheck_types!();
+        Depcrate_consteval_testscheck_types_source_code!();
+        Depcrate_consteval_testscheck_no_mismatches!();
+        Depcrate_consteval_testscheck!();
+        Depcrate_consteval_testscheck_impl!();
+        Depcrate_consteval_testsexpr_node!();
+        Depcrate_consteval_testspat_node!();
+        Depcrate_consteval_testsinfer!();
+        Depcrate_consteval_testsinfer_with_mismatches!();
+        Depcrate_consteval_testsvisit_module!();
+        Depcrate_consteval_testsellipsize!();
+        Depcrate_consteval_testscheck_infer!();
+        Depcrate_consteval_testscheck_infer_with_mismatches!();
+        Depcrate_consteval_testssalsa_bug!();
+    };
+}

@@ -1,0 +1,44 @@
+// Generated module macro for crate::spec
+macro_rules! Modcrate_spec {
+() => {
+        Depcrate_specuse_224!();
+        Depcrate_specuse_225!();
+        Depcrate_specuse_226!();
+        Depcrate_specuse_227!();
+        Depcrate_specuse_228!();
+        Depcrate_specuse_229!();
+        Depcrate_specuse_230!();
+        Depcrate_specMagic!();
+        Depcrate_specimpl_232!();
+        Depcrate_specExtraFieldMagic!();
+        Depcrate_specimpl_234!();
+        Depcrate_specZIP64_BYTES_THR!();
+        Depcrate_specZIP64_ENTRY_THR!();
+        Depcrate_specPod!();
+        Depcrate_specFixedSizeBlock!();
+        Depcrate_specfrom_le!();
+        Depcrate_specto_le!();
+        Depcrate_specto_and_from_le!();
+        Depcrate_specZip32CDEBlock!();
+        Depcrate_specimpl_243!();
+        Depcrate_specimpl_244!();
+        Depcrate_specZip32CentralDirectoryEnd!();
+        Depcrate_specimpl_246!();
+        Depcrate_specZip64CDELocatorBlock!();
+        Depcrate_specimpl_248!();
+        Depcrate_specimpl_249!();
+        Depcrate_specZip64CentralDirectoryEndLocator!();
+        Depcrate_specimpl_251!();
+        Depcrate_specZip64CDEBlock!();
+        Depcrate_specimpl_253!();
+        Depcrate_specimpl_254!();
+        Depcrate_specZip64CentralDirectoryEnd!();
+        Depcrate_specimpl_256!();
+        Depcrate_specDataAndPosition!();
+        Depcrate_specimpl_258!();
+        Depcrate_specCentralDirectoryEndInfo!();
+        Depcrate_specfind_central_directory!();
+        Depcrate_specis_dir!();
+        Depcrate_spectest!();
+    };
+}

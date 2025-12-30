@@ -1,0 +1,9 @@
+// Generated macro for FromRawHandle (trait)
+macro_rules! Depcrate_os_windows_io_rawFromRawHandle {
+() => {
+// Module: crate::os::windows::io::raw
+// Provides: {"FromRawHandle"}
+// Dependencies: {}
+# [doc = " Constructs I/O objects from raw handles."] # [stable (feature = "from_raw_os" , since = "1.1.0")] pub trait FromRawHandle { # [doc = " Constructs a new I/O object from the specified raw handle."] # [doc = ""] # [doc = " This function is typically used to **consume ownership** of the handle"] # [doc = " given, passing responsibility for closing the handle to the returned"] # [doc = " object. When used in this way, the returned object"] # [doc = " will take responsibility for closing it when the object goes out of"] # [doc = " scope."] # [doc = ""] # [doc = " However, consuming ownership is not strictly required. Use a"] # [doc = " `From<OwnedHandle>::from` implementation for an API which strictly"] # [doc = " consumes ownership."] # [doc = ""] # [doc = " # Safety"] # [doc = ""] # [doc = " The `handle` passed in must:"] # [doc = "   - be an [owned handle][io-safety]; in particular, it must be open."] # [doc = "   - be a handle for a resource that may be freed via [`CloseHandle`]"] # [doc = "     (as opposed to `RegCloseKey` or other close functions)."] # [doc = ""] # [doc = " Note that the handle *may* have the value `INVALID_HANDLE_VALUE` (-1),"] # [doc = " which is sometimes a valid handle value. See [here] for the full story."] # [doc = ""] # [doc = " [`CloseHandle`]: https://docs.microsoft.com/en-us/windows/win32/api/handleapi/nf-handleapi-closehandle"] # [doc = " [here]: https://devblogs.microsoft.com/oldnewthing/20040302-00/?p=40443"] # [doc = " [io-safety]: io#io-safety"] # [stable (feature = "from_raw_os" , since = "1.1.0")] unsafe fn from_raw_handle (handle : RawHandle) -> Self ; }
+};
+}

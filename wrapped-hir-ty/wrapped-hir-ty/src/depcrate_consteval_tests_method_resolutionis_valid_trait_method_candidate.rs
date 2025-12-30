@@ -1,0 +1,9 @@
+// Generated macro for is_valid_trait_method_candidate (function)
+macro_rules! Depcrate_consteval_tests_method_resolutionis_valid_trait_method_candidate {
+() => {
+// Module: crate::consteval::tests::method_resolution
+// Provides: {"is_valid_trait_method_candidate"}
+// Dependencies: {}
+# [doc = " Checks whether a given `AssocItemId` is applicable for `receiver_ty`."] # [tracing :: instrument (skip_all , fields (name))] fn is_valid_trait_method_candidate (table : & mut InferenceTable < '_ > , trait_id : TraitId , name : Option < & Name > , receiver_ty : Option < & Ty > , item : AssocItemId , self_ty : & Ty ,) -> IsValidCandidate { let db = table . db ; match item { AssocItemId :: FunctionId (fn_id) => { let data = db . function_signature (fn_id) ; check_that ! (name . is_none_or (| n | n == & data . name)) ; table . run_in_snapshot (| table | { let impl_subst = TyBuilder :: subst_for_def (db , trait_id , None) . fill_with_inference_vars (table) . build () ; let expect_self_ty = impl_subst . at (Interner , 0) . assert_ty_ref (Interner) . clone () ; check_that ! (table . unify (& expect_self_ty , self_ty)) ; if let Some (receiver_ty) = receiver_ty { check_that ! (data . has_self_param ()) ; let fn_subst = TyBuilder :: subst_for_def (db , fn_id , Some (impl_subst)) . fill_with_inference_vars (table) . build () ; let sig = db . callable_item_signature (fn_id . into ()) ; let expected_receiver = sig . map (| s | s . params () [0] . clone ()) . substitute (Interner , & fn_subst) ; check_that ! (table . unify (receiver_ty , & expected_receiver)) ; } IsValidCandidate :: Yes }) } AssocItemId :: ConstId (c) => { check_that ! (receiver_ty . is_none ()) ; check_that ! (name . is_none_or (| n | db . const_signature (c) . name . as_ref () == Some (n))) ; IsValidCandidate :: Yes } _ => IsValidCandidate :: No , } }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for BTH_LE_GAP_APPEARANCE_HEART_RATE_SUBCATEGORY_HEART_RATE_BELT (const)
+macro_rules! Depcrate_um_bthledefBTH_LE_GAP_APPEARANCE_HEART_RATE_SUBCATEGORY_HEART_RATE_BELT {
+() => {
+// Module: crate::um::bthledef
+// Provides: {"BTH_LE_GAP_APPEARANCE_HEART_RATE_SUBCATEGORY_HEART_RATE_BELT"}
+// Dependencies: {}
+pub const BTH_LE_GAP_APPEARANCE_HEART_RATE_SUBCATEGORY_HEART_RATE_BELT : UCHAR = 0x01 ;
+};
+}

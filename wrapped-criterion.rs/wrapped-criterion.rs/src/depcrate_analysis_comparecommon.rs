@@ -1,0 +1,9 @@
+// Generated macro for common (function)
+macro_rules! Depcrate_analysis_comparecommon {
+() => {
+// Module: crate::analysis::compare
+// Provides: {"common"}
+// Dependencies: {}
+# [allow (clippy :: type_complexity)] pub (crate) fn common < M : Measurement > (id : & BenchmarkId , avg_times : & Sample < f64 > , config : & BenchmarkConfig , criterion : & Criterion < M > ,) -> Result < (f64 , Distribution < f64 > , ChangeEstimates , ChangeDistributions , Vec < f64 > , Vec < f64 > , Vec < f64 > , Estimates ,) > { let mut sample_file = criterion . output_directory . clone () ; sample_file . push (id . as_directory_name ()) ; sample_file . push (& criterion . baseline_directory) ; sample_file . push ("sample.json") ; let sample : SavedSample = fs :: load (& sample_file) ? ; let SavedSample { iters , times , .. } = sample ; let mut estimates_file = criterion . output_directory . clone () ; estimates_file . push (id . as_directory_name ()) ; estimates_file . push (& criterion . baseline_directory) ; estimates_file . push ("estimates.json") ; let base_estimates : Estimates = fs :: load (& estimates_file) ? ; let base_avg_times : Vec < f64 > = iters . iter () . zip (times . iter ()) . map (| (iters , elapsed) | elapsed / iters) . collect () ; let base_avg_time_sample = Sample :: new (& base_avg_times) ; let mut change_dir = criterion . output_directory . clone () ; change_dir . push (id . as_directory_name ()) ; change_dir . push ("change") ; fs :: mkdirp (& change_dir) ? ; let (t_statistic , t_distribution) = t_test (avg_times , base_avg_time_sample , config) ; let (estimates , relative_distributions) = estimates (id , avg_times , base_avg_time_sample , config , criterion) ; Ok ((t_statistic , t_distribution , estimates , relative_distributions , iters , times , base_avg_times . clone () , base_estimates ,)) }
+};
+}

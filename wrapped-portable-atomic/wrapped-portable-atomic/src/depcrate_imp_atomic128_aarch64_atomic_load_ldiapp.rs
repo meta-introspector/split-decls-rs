@@ -1,0 +1,9 @@
+// Generated macro for _atomic_load_ldiapp (function)
+macro_rules! Depcrate_imp_atomic128_aarch64_atomic_load_ldiapp {
+() => {
+// Module: crate::imp::atomic128::aarch64
+// Provides: {"_atomic_load_ldiapp"}
+// Dependencies: {}
+# [cfg (any (target_feature = "lse2" , portable_atomic_target_feature = "lse2" , not (portable_atomic_no_outline_atomics) ,))] # [cfg (any (target_feature = "rcpc3" , portable_atomic_target_feature = "rcpc3" , all (not (portable_atomic_no_outline_atomics) , not (any (target_feature = "lse2" , portable_atomic_target_feature = "lse2")) ,) ,))] # [inline] unsafe fn _atomic_load_ldiapp (src : * mut u128 , order : Ordering) -> u128 { debug_assert ! (src as usize % 16 == 0) ; debug_assert_lse2 ! () ; debug_assert_rcpc3 ! () ; unsafe { let (out_lo , out_hi) ; match order { Ordering :: Acquire => { # [cfg (not (portable_atomic_pre_llvm_16))] asm ! (start_rcpc3 ! () , "ldiapp {out_lo}, {out_hi}, [{src}]" , src = in (reg) ptr_reg ! (src) , out_hi = lateout (reg) out_hi , out_lo = lateout (reg) out_lo , options (nostack , preserves_flags) ,) ; # [cfg (portable_atomic_pre_llvm_16)] asm ! (".inst 0xd9411800" , in ("x0") ptr_reg ! (src) , lateout ("x1") out_hi , lateout ("x0") out_lo , options (nostack , preserves_flags) ,) ; } Ordering :: SeqCst => { # [cfg (not (portable_atomic_pre_llvm_16))] asm ! (start_rcpc3 ! () , "ldar {tmp}, [{src}]" , "ldiapp {out_lo}, {out_hi}, [{src}]" , src = in (reg) ptr_reg ! (src) , out_hi = lateout (reg) out_hi , out_lo = lateout (reg) out_lo , tmp = out (reg) _ , options (nostack , preserves_flags) ,) ; # [cfg (portable_atomic_pre_llvm_16)] asm ! ("ldar {tmp}, [x0]" , ".inst 0xd9411800" , tmp = out (reg) _ , in ("x0") ptr_reg ! (src) , lateout ("x1") out_hi , lateout ("x0") out_lo , options (nostack , preserves_flags) ,) ; } _ => unreachable ! () , } U128 { pair : Pair { lo : out_lo , hi : out_hi } } . whole } }
+};
+}

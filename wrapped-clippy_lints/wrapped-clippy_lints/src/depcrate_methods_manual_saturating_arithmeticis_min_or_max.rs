@@ -1,0 +1,9 @@
+// Generated macro for is_min_or_max (function)
+macro_rules! Depcrate_methods_manual_saturating_arithmeticis_min_or_max {
+() => {
+// Module: crate::methods::manual_saturating_arithmetic
+// Provides: {"is_min_or_max"}
+// Dependencies: {}
+fn is_min_or_max (cx : & LateContext < '_ > , expr : & hir :: Expr < '_ >) -> Option < MinMax > { if let hir :: ExprKind :: Call (func , []) = & expr . kind && let hir :: ExprKind :: Path (hir :: QPath :: TypeRelative (_ , segment)) = & func . kind { match segment . ident . name { sym :: max_value => return Some (MinMax :: Max) , sym :: min_value => return Some (MinMax :: Min) , _ => { } , } } let ty = cx . typeck_results () . expr_ty (expr) ; if let hir :: ExprKind :: Path (hir :: QPath :: TypeRelative (base , seg)) = expr . kind && matches ! (base . basic_res () , Res :: PrimTy (_)) { match seg . ident . name { sym :: MAX => return Some (MinMax :: Max) , sym :: MIN => return Some (MinMax :: Min) , _ => { } , } } let bits = cx . layout_of (ty) . unwrap () . size . bits () ; let (minval , maxval) : (u128 , u128) = if ty . is_signed () { let minval = 1 << (bits - 1) ; let mut maxval = ! (1 << (bits - 1)) ; if bits != 128 { maxval &= (1 << bits) - 1 ; } (minval , maxval) } else { (0 , if bits == 128 { ! 0 } else { (1 << bits) - 1 }) } ; let check_lit = | expr : & hir :: Expr < '_ > , check_min : bool | { if let hir :: ExprKind :: Lit (lit) = & expr . kind && let ast :: LitKind :: Int (value , _) = lit . node { if value == maxval { return Some (MinMax :: Max) ; } if check_min && value == minval { return Some (MinMax :: Min) ; } } None } ; if let r @ Some (_) = check_lit (expr , ! ty . is_signed ()) { return r ; } if ty . is_signed () && let hir :: ExprKind :: Unary (hir :: UnOp :: Neg , val) = & expr . kind { return check_lit (val , true) ; } None }
+};
+}

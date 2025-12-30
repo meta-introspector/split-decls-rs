@@ -1,0 +1,56 @@
+// Generated module macro for crate::item
+macro_rules! Modcrate_item {
+() => {
+        Depcrate_itemuse_185!();
+        Depcrate_itemuse_186!();
+        Depcrate_itemuse_187!();
+        Depcrate_itemuse_188!();
+        Depcrate_itemuse_189!();
+        Depcrate_itemuse_190!();
+        Depcrate_itemuse_191!();
+        Depcrate_itemuse_192!();
+        Depcrate_itemuse_193!();
+        Depcrate_itemuse_194!();
+        Depcrate_itemuse_195!();
+        Depcrate_itemuse_196!();
+        Depcrate_itemuse_197!();
+        Depcrate_itemuse_198!();
+        Depcrate_itemuse_199!();
+        Depcrate_itemuse_200!();
+        Depcrate_itemuse_201!();
+        Depcrate_itemuse_202!();
+        Depcrate_itemuse_203!();
+        Depcrate_itemuse_204!();
+        Depcrate_itemuse_205!();
+        Depcrate_itemItemClass!();
+        Depcrate_itemimpl_207!();
+        Depcrate_itemKeyClass!();
+        Depcrate_itemimpl_209!();
+        Depcrate_itemLimit!();
+        Depcrate_itemimpl_211!();
+        Depcrate_itemimpl_212!();
+        Depcrate_itemCloudSync!();
+        Depcrate_itemimpl_214!();
+        Depcrate_itemItemSearchOptions!();
+        Depcrate_itemimpl_216!();
+        Depcrate_itemimpl_217!();
+        Depcrate_itemget_item!();
+        Depcrate_itemReference!();
+        Depcrate_itemSearchResult!();
+        Depcrate_itemimpl_221!();
+        Depcrate_itemimpl_222!();
+        Depcrate_itemItemAddOptions!();
+        Depcrate_itemimpl_224!();
+        Depcrate_itemItemAddValue!();
+        Depcrate_itemAddRef!();
+        Depcrate_itemimpl_227!();
+        Depcrate_itemItemUpdateOptions!();
+        Depcrate_itemimpl_229!();
+        Depcrate_itemItemUpdateValue!();
+        Depcrate_itemLocation!();
+        Depcrate_itemimpl_232!();
+        Depcrate_itemadd_item!();
+        Depcrate_itemupdate_item!();
+        Depcrate_itemtest!();
+    };
+}

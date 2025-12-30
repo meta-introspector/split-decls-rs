@@ -1,0 +1,9 @@
+// Generated macro for impl_18 (impl)
+macro_rules! Depcrate_assert_instrimpl_18 {
+() => {
+// Module: crate::assert_instr
+// Provides: {"impl_18"}
+// Dependencies: {}
+impl < 'de > Deserialize < 'de > for InstructionAssertionMethod { fn deserialize < D > (deserializer : D) -> Result < Self , D :: Error > where D : Deserializer < 'de > , { struct IAMVisitor ; impl < 'de > Visitor < 'de > for IAMVisitor { type Value = InstructionAssertionMethod ; fn expecting (& self , formatter : & mut fmt :: Formatter) -> fmt :: Result { formatter . write_str ("array, string or map") } fn visit_str < E > (self , value : & str) -> Result < InstructionAssertionMethod , E > where E : de :: Error , { Ok (InstructionAssertionMethod { default : InstructionAssertionMethodForBitsize { default : InstructionAssertion :: Basic (value . parse () . map_err (E :: custom) ?) , byte : None , halfword : None , word : None , doubleword : None , } , float : None , unsigned : None , }) } fn visit_seq < A > (self , mut seq : A) -> Result < Self :: Value , A :: Error > where A : de :: SeqAccess < 'de > , { use serde :: de :: Error ; let make_err = | | Error :: custom ("invalid number of arguments passed to assert_instruction") ; let instruction = seq . next_element () ? . ok_or_else (make_err) ? ; let args = seq . next_element () ? . ok_or_else (make_err) ? ; if let Some (true) = seq . size_hint () . map (| len | len > 0) { Err (make_err ()) } else { Ok (InstructionAssertionMethod { default : InstructionAssertionMethodForBitsize { default : InstructionAssertion :: WithArgs (instruction , args) , byte : None , halfword : None , word : None , doubleword : None , } , float : None , unsigned : None , }) } } fn visit_map < M > (self , map : M) -> Result < InstructionAssertionMethod , M :: Error > where M : MapAccess < 'de > , { InstructionAssertionMethod :: deserialize (de :: value :: MapAccessDeserializer :: new (map)) } } deserializer . deserialize_any (IAMVisitor) } }
+};
+}

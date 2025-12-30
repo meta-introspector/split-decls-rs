@@ -1,0 +1,9 @@
+// Generated macro for EVENT_FILTER_TYPE_EVENT_NAME (const)
+macro_rules! Depcrate_shared_evntprovEVENT_FILTER_TYPE_EVENT_NAME {
+() => {
+// Module: crate::shared::evntprov
+// Provides: {"EVENT_FILTER_TYPE_EVENT_NAME"}
+// Dependencies: {}
+pub const EVENT_FILTER_TYPE_EVENT_NAME : ULONG = 0x80000400 ;
+};
+}

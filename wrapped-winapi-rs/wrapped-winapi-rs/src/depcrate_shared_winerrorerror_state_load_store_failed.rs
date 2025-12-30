@@ -1,0 +1,9 @@
+// Generated macro for ERROR_STATE_LOAD_STORE_FAILED (const)
+macro_rules! Depcrate_shared_winerrorERROR_STATE_LOAD_STORE_FAILED {
+() => {
+// Module: crate::shared::winerror
+// Provides: {"ERROR_STATE_LOAD_STORE_FAILED"}
+// Dependencies: {}
+pub const ERROR_STATE_LOAD_STORE_FAILED : DWORD = 15800 ;
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for szOID_RSA_SMIMEalgESDH (const)
+macro_rules! Depcrate_um_wincryptszOID_RSA_SMIMEalgESDH {
+() => {
+// Module: crate::um::wincrypt
+// Provides: {"szOID_RSA_SMIMEalgESDH"}
+// Dependencies: {}
+pub const szOID_RSA_SMIMEalgESDH : & 'static str = "1.2.840.113549.1.9.16.3.5" ;
+};
+}

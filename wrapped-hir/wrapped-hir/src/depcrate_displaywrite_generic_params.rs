@@ -1,0 +1,9 @@
+// Generated macro for write_generic_params (function)
+macro_rules! Depcrate_displaywrite_generic_params {
+() => {
+// Module: crate::display
+// Provides: {"write_generic_params"}
+// Dependencies: {}
+fn write_generic_params < 'db > (def : GenericDefId , f : & mut HirFormatter < '_ , 'db > ,) -> Result < () , HirDisplayError > { let (params , store) = f . db . generic_params_and_store (def) ; if params . iter_lt () . next () . is_none () && params . iter_type_or_consts () . all (| it | it . 1 . const_param () . is_none ()) && params . iter_type_or_consts () . filter_map (| it | it . 1 . type_param ()) . all (| param | ! matches ! (param . provenance , TypeParamProvenance :: TypeParamList)) { return Ok (()) ; } f . write_char ('<') ? ; let mut first = true ; let mut delim = | f : & mut HirFormatter < '_ , 'db > | { if first { first = false ; Ok (()) } else { f . write_str (", ") } } ; for (_ , lifetime) in params . iter_lt () { delim (f) ? ; write ! (f , "{}" , lifetime . name . display (f . db , f . edition ())) ? ; } for (_ , ty) in params . iter_type_or_consts () { if let Some (name) = & ty . name () { match ty { TypeOrConstParamData :: TypeParamData (ty) => { if ty . provenance != TypeParamProvenance :: TypeParamList { continue ; } delim (f) ? ; write ! (f , "{}" , name . display (f . db , f . edition ())) ? ; if let Some (default) = & ty . default { f . write_str (" = ") ? ; default . hir_fmt (f , & store) ? ; } } TypeOrConstParamData :: ConstParamData (c) => { delim (f) ? ; write ! (f , "const {}: " , name . display (f . db , f . edition ())) ? ; c . ty . hir_fmt (f , & store) ? ; if let Some (default) = & c . default { f . write_str (" = ") ? ; default . hir_fmt (f , & store) ? ; } } } } } f . write_char ('>') ? ; Ok (()) }
+};
+}

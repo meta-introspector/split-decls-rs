@@ -1,0 +1,9 @@
+// Generated macro for check_decrypt_parameters (function)
+macro_rules! Depcrate_pkcs7check_decrypt_parameters {
+() => {
+// Module: crate::pkcs7
+// Provides: {"check_decrypt_parameters"}
+// Dependencies: {}
+fn check_decrypt_parameters < 'p > (py : pyo3 :: Python < 'p > , certificate : & pyo3 :: Bound < 'p , x509 :: certificate :: Certificate > , private_key : & pyo3 :: Bound < 'p , pyo3 :: PyAny > , options : & pyo3 :: Bound < 'p , pyo3 :: types :: PyList > ,) -> Result < () , CryptographyError > { if cryptography_openssl :: fips :: is_enabled () { return Err (CryptographyError :: from (exceptions :: UnsupportedAlgorithm :: new_err (("RSA with PKCS1 v1.5 padding is not supported by this version of OpenSSL." , exceptions :: Reasons :: UNSUPPORTED_PADDING ,)) ,)) ; } let pkcs7_options = types :: PKCS7_OPTIONS . get (py) ? ; for opt in options . iter () { if ! opt . is_instance (& pkcs7_options) ? { return Err (CryptographyError :: from (pyo3 :: exceptions :: PyValueError :: new_err ("options must be from the PKCS7Options enum" ,) ,)) ; } } let text_option = types :: PKCS7_TEXT . get (py) ? ; for opt in options . iter () { if ! opt . eq (text_option . clone ()) ? { return Err (CryptographyError :: from (pyo3 :: exceptions :: PyValueError :: new_err ("Only the following options are supported for decryption: Text" ,) ,)) ; } } let public_key_type = types :: RSA_PUBLIC_KEY . get (py) ? ; if ! certificate . call_method0 (pyo3 :: intern ! (py , "public_key")) ? . is_instance (& public_key_type) ? { return Err (CryptographyError :: from (pyo3 :: exceptions :: PyTypeError :: new_err ("Only certificate with RSA public keys are supported at this time." ,) ,)) ; } let private_key_type = types :: RSA_PRIVATE_KEY . get (py) ? ; if ! private_key . is_instance (& private_key_type) ? { return Err (CryptographyError :: from (pyo3 :: exceptions :: PyTypeError :: new_err ("Only RSA private keys are supported at this time." ,) ,)) ; } Ok (()) }
+};
+}

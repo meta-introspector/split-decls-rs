@@ -1,0 +1,9 @@
+// Generated macro for macro_27368 (macro)
+macro_rules! Depcrate_um_dinputmacro_27368 {
+() => {
+// Module: crate::um::dinput
+// Provides: {"macro_27368"}
+// Dependencies: {}
+DEFINE_GUID ! { GUID_RzAxis , 0xa36d02e3 , 0xc9f3 , 0x11cf , 0xbf , 0xc7 , 0x44 , 0x45 , 0x53 , 0x54 , 0x00 , 0x00 }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for prepare_cargo_test (function)
+macro_rules! Depcrate_core_build_steps_testprepare_cargo_test {
+() => {
+// Module: crate::core::build_steps::test
+// Provides: {"prepare_cargo_test"}
+// Dependencies: {}
+# [doc = " Given a `cargo test` subcommand, pass it the appropriate test flags given a `builder`."] fn prepare_cargo_test (cargo : builder :: Cargo , libtest_args : & [& str] , crates : & [String] , target : TargetSelection , builder : & Builder < '_ > ,) -> BootstrapCommand { let compiler = cargo . compiler () ; let mut cargo : BootstrapCommand = cargo . into () ; if builder . config . cmd . bless () && ! cargo . get_envs () . any (| v | v . 0 == "RUSTC_BLESS") { cargo . env ("RUSTC_BLESS" , "Gesundheit") ; } if builder . kind == Kind :: Test && ! builder . fail_fast { cargo . arg ("--no-fail-fast") ; } if builder . config . json_output { cargo . arg ("--message-format=json") ; } match builder . doc_tests { DocTests :: Only => { cargo . arg ("--doc") ; } DocTests :: No => { cargo . args (["--bins" , "--examples" , "--tests" , "--benches"]) ; } DocTests :: Yes => { } } for krate in crates { cargo . arg ("-p") . arg (krate) ; } cargo . arg ("--") . args (builder . config . test_args ()) . args (libtest_args) ; if ! builder . config . verbose_tests { cargo . arg ("--quiet") ; } if builder . kind != Kind :: Miri { let mut dylib_paths = builder . rustc_lib_paths (compiler) ; dylib_paths . push (builder . sysroot_target_libdir (compiler , target)) ; helpers :: add_dylib_path (dylib_paths , & mut cargo) ; } if builder . remote_tested (target) { cargo . env (format ! ("CARGO_TARGET_{}_RUNNER" , envify (& target . triple)) , format ! ("{} run 0" , builder . tool_exe (Tool :: RemoteTestClient) . display ()) ,) ; } else if let Some (tool) = builder . runner (target) { cargo . env (format ! ("CARGO_TARGET_{}_RUNNER" , envify (& target . triple)) , tool) ; } cargo }
+};
+}

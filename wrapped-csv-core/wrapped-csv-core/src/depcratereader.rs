@@ -1,0 +1,9 @@
+// Generated macro for reader (module)
+macro_rules! Depcratereader {
+() => {
+// Module: crate
+// Provides: {"reader"}
+// Dependencies: {}
+mod reader ;
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for impl_1110 (impl)
+macro_rules! Depcrate_ffi_c_strimpl_1110 {
+() => {
+// Module: crate::ffi::c_str
+// Provides: {"impl_1110"}
+// Dependencies: {}
+# [stable (feature = "cstring_from_vec_with_nul" , since = "1.58.0")] impl FromVecWithNulError { # [doc = " Returns a slice of [`u8`]s bytes that were attempted to convert to a [`CString`]."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " Basic usage:"] # [doc = ""] # [doc = " ```"] # [doc = " use std::ffi::CString;"] # [doc = ""] # [doc = " // Some invalid bytes in a vector"] # [doc = " let bytes = b\"f\\0oo\".to_vec();"] # [doc = ""] # [doc = " let value = CString::from_vec_with_nul(bytes.clone());"] # [doc = ""] # [doc = " assert_eq!(&bytes[..], value.unwrap_err().as_bytes());"] # [doc = " ```"] # [must_use] # [stable (feature = "cstring_from_vec_with_nul" , since = "1.58.0")] pub fn as_bytes (& self) -> & [u8] { & self . bytes [..] } # [doc = " Returns the bytes that were attempted to convert to a [`CString`]."] # [doc = ""] # [doc = " This method is carefully constructed to avoid allocation. It will"] # [doc = " consume the error, moving out the bytes, so that a copy of the bytes"] # [doc = " does not need to be made."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " Basic usage:"] # [doc = ""] # [doc = " ```"] # [doc = " use std::ffi::CString;"] # [doc = ""] # [doc = " // Some invalid bytes in a vector"] # [doc = " let bytes = b\"f\\0oo\".to_vec();"] # [doc = ""] # [doc = " let value = CString::from_vec_with_nul(bytes.clone());"] # [doc = ""] # [doc = " assert_eq!(bytes, value.unwrap_err().into_bytes());"] # [doc = " ```"] # [must_use = "`self` will be dropped if the result is not used"] # [stable (feature = "cstring_from_vec_with_nul" , since = "1.58.0")] pub fn into_bytes (self) -> Vec < u8 > { self . bytes } }
+};
+}

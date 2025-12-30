@@ -1,0 +1,9 @@
+// Generated macro for impl_7487 (impl)
+macro_rules! Depcrate_module_styleimpl_7487 {
+() => {
+// Module: crate::module_style
+// Provides: {"impl_7487"}
+// Dependencies: {}
+impl EarlyLintPass for ModStyle { fn check_crate (& mut self , cx : & EarlyContext < '_ > , _ : & ast :: Crate) { if cx . builder . lint_level (MOD_MODULE_FILES) . level == Level :: Allow && cx . builder . lint_level (SELF_NAMED_MODULE_FILES) . level == Level :: Allow { return ; } let files = cx . sess () . source_map () . files () ; let Some (trim_to_src) = cx . sess () . opts . working_dir . local_path () else { return ; } ; let mut folder_segments = FxIndexSet :: default () ; let mut mod_folders = FxHashSet :: default () ; let mut file_map = FxHashMap :: default () ; for file in files . iter () { if let FileName :: Real (name) = & file . name && let Some (lp) = name . local_path () && file . cnum == LOCAL_CRATE { let path = if lp . is_relative () { lp } else if let Ok (relative) = lp . strip_prefix (trim_to_src) { relative } else { continue ; } ; if let Some (stem) = path . file_stem () { file_map . insert (stem , (file , path)) ; } process_paths_for_mod_files (path , & mut folder_segments , & mut mod_folders) ; check_self_named_mod_exists (cx , path , file) ; } } for folder in & folder_segments { if ! mod_folders . contains (folder) && let Some ((file , path)) = file_map . get (folder) { span_lint_and_then (cx , SELF_NAMED_MODULE_FILES , Span :: new (file . start_pos , file . start_pos , SyntaxContext :: root () , None) , format ! ("`mod.rs` files are required, found `{}`" , path . display ()) , | diag | { let mut correct = path . to_path_buf () ; correct . pop () ; correct . push (folder) ; correct . push ("mod.rs") ; diag . help (format ! ("move `{}` to `{}`" , path . display () , correct . display () ,)) ; } ,) ; } } } }
+};
+}

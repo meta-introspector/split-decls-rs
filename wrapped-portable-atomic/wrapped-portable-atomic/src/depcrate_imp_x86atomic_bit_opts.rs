@@ -1,0 +1,9 @@
+// Generated macro for atomic_bit_opts (macro)
+macro_rules! Depcrate_imp_x86atomic_bit_opts {
+() => {
+// Module: crate::imp::x86
+// Provides: {"atomic_bit_opts"}
+// Dependencies: {}
+macro_rules ! atomic_bit_opts { ($ atomic_type : ident , $ int_type : ident , $ val_modifier : tt , $ ptr_size : tt) => { # [cfg (not (portable_atomic_pre_llvm_16))] impl_default_bit_opts ! ($ atomic_type , $ int_type) ; # [cfg (portable_atomic_pre_llvm_16)] impl $ atomic_type { const BITS : u32 = (core :: mem :: size_of ::<$ int_type > () * 8) as u32 ; # [inline] pub (crate) fn bit_set (& self , bit : u32 , _order : Ordering) -> bool { let dst = self . as_ptr () ; unsafe { let r : u8 ; asm ! (concat ! ("lock bts " , $ ptr_size , " ptr [{dst" , ptr_modifier ! () , "}], {bit" , $ val_modifier , "}") , "setb {r}" , dst = in (reg) dst , bit = in (reg) (bit & (Self :: BITS - 1)) as $ int_type , r = out (reg_byte) r , options (nostack) ,) ; crate :: utils :: assert_unchecked (r == 0 || r == 1) ; r != 0 } } # [inline] pub (crate) fn bit_clear (& self , bit : u32 , _order : Ordering) -> bool { let dst = self . as_ptr () ; unsafe { let r : u8 ; asm ! (concat ! ("lock btr " , $ ptr_size , " ptr [{dst" , ptr_modifier ! () , "}], {bit" , $ val_modifier , "}") , "setb {r}" , dst = in (reg) dst , bit = in (reg) (bit & (Self :: BITS - 1)) as $ int_type , r = out (reg_byte) r , options (nostack) ,) ; crate :: utils :: assert_unchecked (r == 0 || r == 1) ; r != 0 } } # [inline] pub (crate) fn bit_toggle (& self , bit : u32 , _order : Ordering) -> bool { let dst = self . as_ptr () ; unsafe { let r : u8 ; asm ! (concat ! ("lock btc " , $ ptr_size , " ptr [{dst" , ptr_modifier ! () , "}], {bit" , $ val_modifier , "}") , "setb {r}" , dst = in (reg) dst , bit = in (reg) (bit & (Self :: BITS - 1)) as $ int_type , r = out (reg_byte) r , options (nostack) ,) ; crate :: utils :: assert_unchecked (r == 0 || r == 1) ; r != 0 } } } } ; }
+};
+}

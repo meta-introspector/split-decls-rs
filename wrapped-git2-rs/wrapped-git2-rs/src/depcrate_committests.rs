@@ -1,0 +1,9 @@
+// Generated macro for tests (module)
+macro_rules! Depcrate_committests {
+() => {
+// Module: crate::commit
+// Provides: {"tests"}
+// Dependencies: {}
+# [cfg (test)] mod tests { # [test] fn smoke () { let (_td , repo) = crate :: test :: repo_init () ; let head = repo . head () . unwrap () ; let target = head . target () . unwrap () ; let commit = repo . find_commit (target) . unwrap () ; assert_eq ! (commit . message () , Some ("initial\n\nbody")) ; assert_eq ! (commit . body () , Some ("body")) ; assert_eq ! (commit . id () , target) ; commit . message_raw () . unwrap () ; commit . raw_header () . unwrap () ; commit . message_encoding () ; commit . summary () . unwrap () ; commit . body () . unwrap () ; commit . tree_id () ; commit . tree () . unwrap () ; assert_eq ! (commit . parents () . count () , 0) ; let tree_header_bytes = commit . header_field_bytes ("tree") . unwrap () ; assert_eq ! (crate :: Oid :: from_str (tree_header_bytes . as_str () . unwrap ()) . unwrap () , commit . tree_id ()) ; assert_eq ! (commit . author () . name () , Some ("name")) ; assert_eq ! (commit . author () . email () , Some ("email")) ; assert_eq ! (commit . committer () . name () , Some ("name")) ; assert_eq ! (commit . committer () . email () , Some ("email")) ; let sig = repo . signature () . unwrap () ; let tree = repo . find_tree (commit . tree_id ()) . unwrap () ; let id = repo . commit (Some ("HEAD") , & sig , & sig , "bar" , & tree , & [& commit]) . unwrap () ; let head = repo . find_commit (id) . unwrap () ; let new_head = head . amend (Some ("HEAD") , None , None , None , Some ("new message") , None) . unwrap () ; let new_head = repo . find_commit (new_head) . unwrap () ; assert_eq ! (new_head . message () , Some ("new message")) ; new_head . into_object () ; repo . find_object (target , None) . unwrap () . as_commit () . unwrap () ; repo . find_object (target , None) . unwrap () . into_commit () . ok () . unwrap () ; } }
+};
+}

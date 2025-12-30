@@ -1,0 +1,60 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcrate_versioned_sanitizedsanitizedversionedtransaction.rs");
+include!("depcrate_sanitizeduse_6.rs");
+include!("depcrateuse_3.rs");
+include!("depcratesanitized.rs");
+include!("depcrate_simple_vote_transaction_checkeris_simple_vote_transaction.rs");
+include!("depcrate_versioneduse_20.rs");
+include!("depcrate_versioneduse_23.rs");
+include!("depcrateversioned.rs");
+include!("depcrate_versioned_sanitizeduse_25.rs");
+include!("depcrateuse_4.rs");
+include!("depcratetransactionverificationmode.rs");
+include!("depcratemacro_38.rs");
+include!("depcrateuses_durable_nonce.rs");
+include!("depcrate_sanitizedmax_tx_account_locks.rs");
+include!("depcratesimple_vote_transaction_checker.rs");
+include!("depcrate_versioned_sanitizedimpl_27.rs");
+include!("depcrate_simple_vote_transaction_checkeris_simple_vote_transaction_impl.rs");
+include!("depcrateimpl_41.rs");
+include!("depcrate_simple_vote_transaction_checkeruse_16.rs");
+include!("depcrate_sanitizedmessagehash.rs");
+include!("depcrate_sanitizeduse_7.rs");
+include!("depcrate_versionedsanitized.rs");
+include!("depcrate_versionedimpl_34.rs");
+include!("depcrate_sanitizedtransactionaccountlocks.rs");
+include!("depcrateuse_2.rs");
+include!("depcrate_versionedlegacy.rs");
+include!("depcrate_versionedimpl_35.rs");
+include!("depcrate_sanitizedsanitizedtransaction.rs");
+include!("depcrate_versionedtransactionversion.rs");
+include!("depcrate_versioned_sanitizedtests.rs");
+include!("depcrate_versionedtests.rs");
+include!("depcratetests.rs");
+include!("depcrate_versioned_sanitizedimpl_28.rs");
+include!("depcratenonced_tx_marker_ix_index.rs");
+include!("depcratetransaction.rs");
+include!("depcrate_sanitizedimpl_13.rs");
+include!("depcrate_sanitizedtests.rs");
+include!("depcrateuse_1.rs");
+include!("depcrate_versionedimpl_32.rs");
+include!("depcrate_versioneduse_21.rs");
+include!("depcrate_versionedversionedtransaction.rs");
+include!("depcrateimpl_42.rs");
+include!("depcrate_sanitizedimpl_12.rs");
+include!("depcrate_versioneduse_22.rs");
+include!("modcrate_versioned.rs");
+include!("modcrate.rs");
+include!("modcrate_simple_vote_transaction_checker.rs");
+include!("modcrate_sanitized.rs");
+include!("modcrate_versioned_sanitized.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate_versioned!();
+    Modcrate!();
+    Modcrate_simple_vote_transaction_checker!();
+    Modcrate_sanitized!();
+    Modcrate_versioned_sanitized!();
+}

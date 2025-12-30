@@ -4,6 +4,6 @@ macro_rules! Depcrate_zalsa_localuse_699 {
 // Module: crate::zalsa_local
 // Provides: {"use_699"}
 // Dependencies: {}
-use crate :: key :: DatabaseKeyIndex ;
+use crate :: table :: { PageIndex , Slot , Table } ;
 };
 }

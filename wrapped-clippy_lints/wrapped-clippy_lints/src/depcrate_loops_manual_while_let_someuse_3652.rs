@@ -1,0 +1,9 @@
+// Generated macro for use_3652 (use)
+macro_rules! Depcrate_loops_manual_while_let_someuse_3652 {
+() => {
+// Module: crate::loops::manual_while_let_some
+// Provides: {"use_3652"}
+// Dependencies: {}
+use rustc_span :: { Span , Symbol , sym } ;
+};
+}

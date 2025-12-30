@@ -1,0 +1,9 @@
+// Generated macro for impl_472 (impl)
+macro_rules! Depcrate_meta_wrappersimpl_472 {
+() => {
+// Module: crate::meta::wrappers
+// Provides: {"impl_472"}
+// Dependencies: {}
+impl BoundedBacktrackerEngine { pub (crate) fn new (info : & RegexInfo , pre : Option < Prefilter > , nfa : & NFA ,) -> Result < Option < BoundedBacktrackerEngine > , BuildError > { # [cfg (feature = "nfa-backtrack")] { if ! info . config () . get_backtrack () || info . config () . get_match_kind () != MatchKind :: LeftmostFirst { return Ok (None) ; } let backtrack_config = backtrack :: Config :: new () . prefilter (pre) ; let engine = backtrack :: Builder :: new () . configure (backtrack_config) . build_from_nfa (nfa . clone ()) . map_err (BuildError :: nfa) ? ; debug ! ("BoundedBacktracker built (max haystack length: {:?})" , engine . max_haystack_len ()) ; Ok (Some (BoundedBacktrackerEngine (engine))) } # [cfg (not (feature = "nfa-backtrack"))] { Ok (None) } } # [cfg_attr (feature = "perf-inline" , inline (always))] pub (crate) fn is_match (& self , cache : & mut BoundedBacktrackerCache , input : & Input < '_ > ,) -> bool { # [cfg (feature = "nfa-backtrack")] { self . 0 . try_is_match (cache . 0 . as_mut () . unwrap () , input . clone ()) . unwrap () } # [cfg (not (feature = "nfa-backtrack"))] { unreachable ! () } } # [cfg_attr (feature = "perf-inline" , inline (always))] pub (crate) fn search_slots (& self , cache : & mut BoundedBacktrackerCache , input : & Input < '_ > , slots : & mut [Option < NonMaxUsize >] ,) -> Option < PatternID > { # [cfg (feature = "nfa-backtrack")] { self . 0 . try_search_slots (cache . 0 . as_mut () . unwrap () , input , slots) . unwrap () } # [cfg (not (feature = "nfa-backtrack"))] { unreachable ! () } } # [cfg_attr (feature = "perf-inline" , inline (always))] fn max_haystack_len (& self) -> usize { # [cfg (feature = "nfa-backtrack")] { self . 0 . max_haystack_len () } # [cfg (not (feature = "nfa-backtrack"))] { unreachable ! () } } }
+};
+}

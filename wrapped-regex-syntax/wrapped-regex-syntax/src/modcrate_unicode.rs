@@ -1,0 +1,44 @@
+// Generated module macro for crate::unicode
+macro_rules! Modcrate_unicode {
+() => {
+        Depcrate_unicodeuse_311!();
+        Depcrate_unicodeuse_312!();
+        Depcrate_unicodeRange!();
+        Depcrate_unicodeError!();
+        Depcrate_unicodeCaseFoldError!();
+        Depcrate_unicodeimpl_316!();
+        Depcrate_unicodeimpl_317!();
+        Depcrate_unicodeUnicodeWordError!();
+        Depcrate_unicodeimpl_319!();
+        Depcrate_unicodeimpl_320!();
+        Depcrate_unicodeSimpleCaseFolder!();
+        Depcrate_unicodeimpl_322!();
+        Depcrate_unicodeClassQuery!();
+        Depcrate_unicodeimpl_324!();
+        Depcrate_unicodeCanonicalClassQuery!();
+        Depcrate_unicodeclass!();
+        Depcrate_unicodeperl_word!();
+        Depcrate_unicodeperl_space!();
+        Depcrate_unicodeperl_digit!();
+        Depcrate_unicodehir_class!();
+        Depcrate_unicodeis_word_character!();
+        Depcrate_unicodePropertyValues!();
+        Depcrate_unicodecanonical_gencat!();
+        Depcrate_unicodecanonical_script!();
+        Depcrate_unicodecanonical_prop!();
+        Depcrate_unicodecanonical_value!();
+        Depcrate_unicodeproperty_values!();
+        Depcrate_unicodeproperty_set!();
+        Depcrate_unicodeages!();
+        Depcrate_unicodegencat!();
+        Depcrate_unicodescript!();
+        Depcrate_unicodescript_extension!();
+        Depcrate_unicodebool_property!();
+        Depcrate_unicodegcb!();
+        Depcrate_unicodewb!();
+        Depcrate_unicodesb!();
+        Depcrate_unicodesymbolic_name_normalize!();
+        Depcrate_unicodesymbolic_name_normalize_bytes!();
+        Depcrate_unicodetests!();
+    };
+}

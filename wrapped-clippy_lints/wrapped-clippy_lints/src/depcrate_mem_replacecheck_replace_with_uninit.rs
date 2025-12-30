@@ -1,0 +1,9 @@
+// Generated macro for check_replace_with_uninit (function)
+macro_rules! Depcrate_mem_replacecheck_replace_with_uninit {
+() => {
+// Module: crate::mem_replace
+// Provides: {"check_replace_with_uninit"}
+// Dependencies: {}
+fn check_replace_with_uninit (cx : & LateContext < '_ > , src : & Expr < '_ > , dest : & Expr < '_ > , expr_span : Span) { if let Some (method_def_id) = cx . typeck_results () . type_dependent_def_id (src . hir_id) && cx . tcx . is_diagnostic_item (sym :: assume_init , method_def_id) { let Some (top_crate) = std_or_core (cx) else { return } ; let mut applicability = Applicability :: MachineApplicable ; span_lint_and_sugg (cx , MEM_REPLACE_WITH_UNINIT , expr_span , "replacing with `mem::MaybeUninit::uninit().assume_init()`" , "consider using" , format ! ("{top_crate}::ptr::read({})" , snippet_with_applicability (cx , dest . span , "" , & mut applicability)) , applicability ,) ; return ; } if let ExprKind :: Call (repl_func , []) = src . kind && let ExprKind :: Path (ref repl_func_qpath) = repl_func . kind && let Some (repl_def_id) = cx . qpath_res (repl_func_qpath , repl_func . hir_id) . opt_def_id () { let repl_name = cx . tcx . get_diagnostic_name (repl_def_id) ; if repl_name == Some (sym :: mem_uninitialized) { let Some (top_crate) = std_or_core (cx) else { return } ; let mut applicability = Applicability :: MachineApplicable ; span_lint_and_sugg (cx , MEM_REPLACE_WITH_UNINIT , expr_span , "replacing with `mem::uninitialized()`" , "consider using" , format ! ("{top_crate}::ptr::read({})" , snippet_with_applicability (cx , dest . span , "" , & mut applicability)) , applicability ,) ; } else if repl_name == Some (sym :: mem_zeroed) && ! cx . typeck_results () . expr_ty (src) . is_primitive () { span_lint_and_help (cx , MEM_REPLACE_WITH_UNINIT , expr_span , "replacing with `mem::zeroed()`" , None , "consider using a default value or the `take_mut` crate instead" ,) ; } } }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for check (function)
+macro_rules! Depcrate_transmute_transmutes_expressible_as_ptr_castscheck {
+() => {
+// Module: crate::transmute::transmutes_expressible_as_ptr_casts
+// Provides: {"check"}
+// Dependencies: {}
+# [doc = " Checks for `transmutes_expressible_as_ptr_casts` lint."] # [doc = " Returns `true` if it's triggered, otherwise returns `false`."] pub (super) fn check < 'tcx > (cx : & LateContext < 'tcx > , e : & 'tcx Expr < '_ > , from_ty : Ty < 'tcx > , from_ty_adjusted : bool , to_ty : Ty < 'tcx > , arg : & 'tcx Expr < '_ > , const_context : bool ,) -> bool { use CastKind :: { AddrPtrCast , ArrayPtrCast , FnPtrAddrCast , FnPtrPtrCast , PtrAddrCast , PtrPtrCast } ; let mut app = Applicability :: MachineApplicable ; let mut sugg = match check_cast (cx . tcx , cx . param_env , e , from_ty , to_ty) { Some (FnPtrAddrCast | PtrAddrCast) if const_context => return false , Some (PtrPtrCast | AddrPtrCast | ArrayPtrCast | FnPtrPtrCast | FnPtrAddrCast) => { Sugg :: hir_with_context (cx , arg , e . span . ctxt () , ".." , & mut app) . as_ty (to_ty . to_string ()) . to_string () } , Some (PtrAddrCast) if ! from_ty_adjusted => Sugg :: hir_with_context (cx , arg , e . span . ctxt () , ".." , & mut app) . as_ty (to_ty . to_string ()) . to_string () , Some (PtrAddrCast) => format ! ("{} as {to_ty}" , Sugg :: hir_with_context (cx , arg , e . span . ctxt () , ".." , & mut app) . as_ty (from_ty)) , _ => return false , } ; if let Node :: Expr (parent) = cx . tcx . parent_hir_node (e . hir_id) && cx . precedence (parent) > ExprPrecedence :: Cast { sugg = format ! ("({sugg})") ; } span_lint_and_sugg (cx , TRANSMUTES_EXPRESSIBLE_AS_PTR_CASTS , e . span , format ! ("transmute from `{from_ty}` to `{to_ty}` which could be expressed as a pointer cast instead") , "try" , sugg , app ,) ; true }
+};
+}

@@ -1,0 +1,44 @@
+// Generated module macro for crate::extra_checks
+macro_rules! Modcrate_extra_checks {
+() => {
+        Depcrate_extra_checksuse_111!();
+        Depcrate_extra_checksuse_112!();
+        Depcrate_extra_checksuse_113!();
+        Depcrate_extra_checksuse_114!();
+        Depcrate_extra_checksuse_115!();
+        Depcrate_extra_checksuse_116!();
+        Depcrate_extra_checksrustdoc_js!();
+        Depcrate_extra_checksMIN_PY_REV!();
+        Depcrate_extra_checksMIN_PY_REV_STR!();
+        Depcrate_extra_checksREL_PY_PATH!();
+        Depcrate_extra_checksREL_PY_PATH!();
+        Depcrate_extra_checksRUFF_CONFIG_PATH!();
+        Depcrate_extra_checksRUFF_CACHE_PATH!();
+        Depcrate_extra_checksPIP_REQ_PATH!();
+        Depcrate_extra_checksSPELLCHECK_DIRS!();
+        Depcrate_extra_checkscheck!();
+        Depcrate_extra_checkscheck_impl!();
+        Depcrate_extra_checksrun_ruff!();
+        Depcrate_extra_checksmerge_args!();
+        Depcrate_extra_checkspy_runner!();
+        Depcrate_extra_checksget_or_create_venv!();
+        Depcrate_extra_checkscreate_venv_at_path!();
+        Depcrate_extra_checkstry_create_venv!();
+        Depcrate_extra_checksverify_py_version!();
+        Depcrate_extra_checksinstall_requirements!();
+        Depcrate_extra_checksshellcheck_runner!();
+        Depcrate_extra_checksspellcheck_runner!();
+        Depcrate_extra_checksfind_with_extension!();
+        Depcrate_extra_checksError!();
+        Depcrate_extra_checksimpl_155!();
+        Depcrate_extra_checksimpl_156!();
+        Depcrate_extra_checksExtraCheckParseError!();
+        Depcrate_extra_checksExtraCheckArg!();
+        Depcrate_extra_checksimpl_159!();
+        Depcrate_extra_checksimpl_160!();
+        Depcrate_extra_checksExtraCheckLang!();
+        Depcrate_extra_checksimpl_162!();
+        Depcrate_extra_checksExtraCheckKind!();
+        Depcrate_extra_checksimpl_164!();
+    };
+}

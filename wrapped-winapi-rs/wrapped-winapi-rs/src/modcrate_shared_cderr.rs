@@ -1,0 +1,43 @@
+// Generated module macro for crate::shared::cderr
+macro_rules! Modcrate_shared_cderr {
+() => {
+        Depcrate_shared_cderruse_1848!();
+        Depcrate_shared_cderrCDERR_DIALOGFAILURE!();
+        Depcrate_shared_cderrCDERR_GENERALCODES!();
+        Depcrate_shared_cderrCDERR_STRUCTSIZE!();
+        Depcrate_shared_cderrCDERR_INITIALIZATION!();
+        Depcrate_shared_cderrCDERR_NOTEMPLATE!();
+        Depcrate_shared_cderrCDERR_NOHINSTANCE!();
+        Depcrate_shared_cderrCDERR_LOADSTRFAILURE!();
+        Depcrate_shared_cderrCDERR_FINDRESFAILURE!();
+        Depcrate_shared_cderrCDERR_LOADRESFAILURE!();
+        Depcrate_shared_cderrCDERR_LOCKRESFAILURE!();
+        Depcrate_shared_cderrCDERR_MEMALLOCFAILURE!();
+        Depcrate_shared_cderrCDERR_MEMLOCKFAILURE!();
+        Depcrate_shared_cderrCDERR_NOHOOK!();
+        Depcrate_shared_cderrCDERR_REGISTERMSGFAIL!();
+        Depcrate_shared_cderrPDERR_PRINTERCODES!();
+        Depcrate_shared_cderrPDERR_SETUPFAILURE!();
+        Depcrate_shared_cderrPDERR_PARSEFAILURE!();
+        Depcrate_shared_cderrPDERR_RETDEFFAILURE!();
+        Depcrate_shared_cderrPDERR_LOADDRVFAILURE!();
+        Depcrate_shared_cderrPDERR_GETDEVMODEFAIL!();
+        Depcrate_shared_cderrPDERR_INITFAILURE!();
+        Depcrate_shared_cderrPDERR_NODEVICES!();
+        Depcrate_shared_cderrPDERR_NODEFAULTPRN!();
+        Depcrate_shared_cderrPDERR_DNDMMISMATCH!();
+        Depcrate_shared_cderrPDERR_CREATEICFAILURE!();
+        Depcrate_shared_cderrPDERR_PRINTERNOTFOUND!();
+        Depcrate_shared_cderrPDERR_DEFAULTDIFFERENT!();
+        Depcrate_shared_cderrCFERR_CHOOSEFONTCODES!();
+        Depcrate_shared_cderrCFERR_NOFONTS!();
+        Depcrate_shared_cderrCFERR_MAXLESSTHANMIN!();
+        Depcrate_shared_cderrFNERR_FILENAMECODES!();
+        Depcrate_shared_cderrFNERR_SUBCLASSFAILURE!();
+        Depcrate_shared_cderrFNERR_INVALIDFILENAME!();
+        Depcrate_shared_cderrFNERR_BUFFERTOOSMALL!();
+        Depcrate_shared_cderrFRERR_FINDREPLACECODES!();
+        Depcrate_shared_cderrFRERR_BUFFERLENGTHZERO!();
+        Depcrate_shared_cderrCCERR_CHOOSECOLORCODES!();
+    };
+}

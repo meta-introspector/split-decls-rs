@@ -1,0 +1,56 @@
+// Generated module macro for crate::lit
+macro_rules! Modcrate_lit {
+() => {
+        Depcrate_lituse_563!();
+        Depcrate_lituse_564!();
+        Depcrate_lituse_565!();
+        Depcrate_lituse_566!();
+        Depcrate_lituse_567!();
+        Depcrate_lituse_568!();
+        Depcrate_lituse_569!();
+        Depcrate_lituse_570!();
+        Depcrate_lituse_571!();
+        Depcrate_litmacro_572!();
+        Depcrate_litmacro_573!();
+        Depcrate_litmacro_574!();
+        Depcrate_litmacro_575!();
+        Depcrate_litmacro_576!();
+        Depcrate_litmacro_577!();
+        Depcrate_litLitRepr!();
+        Depcrate_litmacro_579!();
+        Depcrate_litLitIntRepr!();
+        Depcrate_litmacro_581!();
+        Depcrate_litLitFloatRepr!();
+        Depcrate_litmacro_583!();
+        Depcrate_litimpl_584!();
+        Depcrate_litimpl_585!();
+        Depcrate_litimpl_586!();
+        Depcrate_litimpl_587!();
+        Depcrate_litimpl_588!();
+        Depcrate_litimpl_589!();
+        Depcrate_litimpl_590!();
+        Depcrate_litimpl_591!();
+        Depcrate_litimpl_592!();
+        Depcrate_litimpl_593!();
+        Depcrate_litimpl_594!();
+        Depcrate_litimpl_595!();
+        Depcrate_litdebug_impls!();
+        Depcrate_litimpl_597!();
+        Depcrate_litimpl_598!();
+        Depcrate_litimpl_599!();
+        Depcrate_litlit_extra_traits!();
+        Depcrate_litmacro_601!();
+        Depcrate_litmacro_602!();
+        Depcrate_litmacro_603!();
+        Depcrate_litmacro_604!();
+        Depcrate_litmacro_605!();
+        Depcrate_litmacro_606!();
+        Depcrate_litmacro_607!();
+        Depcrate_litmacro_608!();
+        Depcrate_litStrStyle!();
+        Depcrate_litmacro_610!();
+        Depcrate_litparsing!();
+        Depcrate_litprinting!();
+        Depcrate_litvalue!();
+    };
+}

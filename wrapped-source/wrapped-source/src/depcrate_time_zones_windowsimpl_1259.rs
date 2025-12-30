@@ -1,0 +1,9 @@
+// Generated macro for impl_1259 (impl)
+macro_rules! Depcrate_time_zones_windowsimpl_1259 {
+() => {
+// Module: crate::time_zones::windows
+// Provides: {"impl_1259"}
+// Dependencies: {}
+impl DataProvider < TimezoneIdentifiersWindowsV1 > for SourceDataProvider { fn load (& self , _ : DataRequest ,) -> Result < DataResponse < TimezoneIdentifiersWindowsV1 > , DataError > { let resource : & cldr_serde :: time_zones :: windows_zones :: WindowsResource = self . cldr () ? . core () . read_and_parse ("supplemental/windowsZones.json") ? ; let iana2bcp = self . iana_to_bcp47_map () ? ; let windows_zones = & resource . supplemental . windows_zones ; let mut bcp47_set : BTreeSet < TimeZone > = BTreeSet :: default () ; let intermediary : Vec < (String , TimeZone) > = windows_zones . mapped_zones . iter () . map (| zone | { let primary_iana_id = zone . map_zone . iana_identifier . split_ascii_whitespace () . next () . unwrap_or (& zone . map_zone . iana_identifier) ; let bcp_47 = iana2bcp . get (primary_iana_id) . unwrap () ; let _ = bcp47_set . insert (* bcp_47) ; ((zone . map_zone . windows_id . clone () + "/" + & zone . map_zone . territory) , * bcp_47 ,) }) . collect () ; let bcp47_ids : ZeroVec < TimeZone > = bcp47_set . iter () . copied () . collect () ; let windows2bcp_map : BTreeMap < Vec < u8 > , usize > = intermediary . iter () . map (| (name , id) | { (name . as_bytes () . to_vec () , bcp47_ids . binary_search (id) . unwrap () ,) }) . collect () ; let data_struct = WindowsZonesToBcp47Map { map : ZeroTrieSimpleAscii :: try_from (& windows2bcp_map) . map_err (| e | { DataError :: custom ("Could not map windowsZones.json data") . with_display_context (& e) }) ? . convert_store () , bcp47_ids , } ; Ok (DataResponse { metadata : Default :: default () , payload : DataPayload :: from_owned (data_struct) , }) } }
+};
+}

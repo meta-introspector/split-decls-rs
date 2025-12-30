@@ -1,0 +1,9 @@
+// Generated macro for impl_87 (impl)
+macro_rules! Depcrate_curveimpl_87 {
+() => {
+// Module: crate::curve
+// Provides: {"impl_87"}
+// Dependencies: {}
+impl Set < PointSize > for Properties { # [doc = " Changes the size of the points"] # [doc = ""] # [doc = " # Panics"] # [doc = ""] # [doc = " Panics if `size` is a non-positive value"] fn set (& mut self , ps : PointSize) -> & mut Properties { let ps = ps . 0 ; assert ! (ps > 0.) ; self . point_size = Some (ps) ; self } }
+};
+}

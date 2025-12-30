@@ -1,0 +1,9 @@
+// Generated macro for impl_154 (impl)
+macro_rules! Depcrate_tendrilimpl_154 {
+() => {
+// Module: crate::tendril
+// Provides: {"impl_154"}
+// Dependencies: {}
+impl < F , A > Tendril < F , A > where F : for < 'a > fmt :: CharFormat < 'a > , A : Atomicity , { # [doc = " Remove and return the first character, if any."] # [inline] pub fn pop_front_char < 'a > (& 'a mut self) -> Option < char > { unsafe { let next_char ; let mut skip = 0 ; { let mut iter = F :: char_indices (self . as_byte_slice ()) ; match iter . next () { Some ((_ , c)) => { next_char = Some (c) ; if let Some ((n , _)) = iter . next () { skip = n as u32 ; } } None => { next_char = None ; } } } if skip != 0 { self . unsafe_pop_front (skip) ; } else { self . clear () ; } next_char } } # [doc = " Remove and return a run of characters at the front of the `Tendril`"] # [doc = " which are classified the same according to the function `classify`."] # [doc = ""] # [doc = " Returns `None` on an empty string."] # [inline] pub fn pop_front_char_run < 'a , C , R > (& 'a mut self , mut classify : C) -> Option < (Tendril < F , A > , R) > where C : FnMut (char) -> R , R : PartialEq , { let (class , first_mismatch) ; { let mut chars = unsafe { F :: char_indices (self . as_byte_slice ()) } ; let (_ , first) = unwrap_or_return ! (chars . next () , None) ; class = classify (first) ; first_mismatch = chars . find (| & (_ , ch) | & classify (ch) != & class) ; } match first_mismatch { Some ((idx , _)) => unsafe { let t = self . unsafe_subtendril (0 , idx as u32) ; self . unsafe_pop_front (idx as u32) ; Some ((t , class)) } , None => { let t = self . clone () ; self . clear () ; Some ((t , class)) } } } # [doc = " Push a character, if it can be represented in this format."] # [inline] pub fn try_push_char (& mut self , c : char) -> Result < () , () > { F :: encode_char (c , | b | unsafe { self . push_bytes_without_validating (b) ; }) } }
+};
+}

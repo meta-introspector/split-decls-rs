@@ -1,0 +1,9 @@
+// Generated macro for Expr (enum)
+macro_rules! Depcrate_parseExpr {
+() => {
+// Module: crate::parse
+// Provides: {"Expr"}
+// Dependencies: {}
+pub enum Expr < 'a , 'i : 'a , I : 'a + :: gll :: runtime :: Input > { Literal (Handle < 'a , 'i , I , LITERAL < 'a , 'i , I > >) , Paren { expr : Handle < 'a , 'i , I , Expr < 'a , 'i , I > > , } , Borrow { expr : Handle < 'a , 'i , I , Expr < 'a , 'i , I > > , mutable : Option < Handle < 'a , 'i , I , () > > , } , Box { expr : Handle < 'a , 'i , I , Expr < 'a , 'i , I > > , } , Try { expr : Handle < 'a , 'i , I , Expr < 'a , 'i , I > > , } , Range { start : Option < Handle < 'a , 'i , I , Expr < 'a , 'i , I > > > , end : Option < Handle < 'a , 'i , I , Expr < 'a , 'i , I > > > , } , RangeInclusive { start : Option < Handle < 'a , 'i , I , Expr < 'a , 'i , I > > > , end : Handle < 'a , 'i , I , Expr < 'a , 'i , I > > , } , Cast { expr : Handle < 'a , 'i , I , Expr < 'a , 'i , I > > , ty : Handle < 'a , 'i , I , IDENT < 'a , 'i , I > > , } , Index { base : Handle < 'a , 'i , I , Expr < 'a , 'i , I > > , index : Handle < 'a , 'i , I , Expr < 'a , 'i , I > > , } , Array { exprs : Handle < 'a , 'i , I , [Expr < 'a , 'i , I >] > , } , Repeat { elem : Handle < 'a , 'i , I , Expr < 'a , 'i , I > > , count : Handle < 'a , 'i , I , Expr < 'a , 'i , I > > , } , Tuple { exprs : Handle < 'a , 'i , I , [Expr < 'a , 'i , I >] > , } , Call { callee : Handle < 'a , 'i , I , Expr < 'a , 'i , I > > , args : Handle < 'a , 'i , I , [Expr < 'a , 'i , I >] > , } , MethodCall { args : Handle < 'a , 'i , I , [Expr < 'a , 'i , I >] > , receiver : Handle < 'a , 'i , I , Expr < 'a , 'i , I > > , method : Handle < 'a , 'i , I , IDENT < 'a , 'i , I > > , } , Continue (Handle < 'a , 'i , I , () >) , Break { value : Option < Handle < 'a , 'i , I , Expr < 'a , 'i , I > > > , } , Return { value : Option < Handle < 'a , 'i , I , Expr < 'a , 'i , I > > > , } , }
+};
+}

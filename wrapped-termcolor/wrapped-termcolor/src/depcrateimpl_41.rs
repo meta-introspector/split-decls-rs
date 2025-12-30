@@ -1,0 +1,9 @@
+// Generated macro for impl_41 (impl)
+macro_rules! Depcrateimpl_41 {
+() => {
+// Module: crate
+// Provides: {"impl_41"}
+// Dependencies: {}
+impl < W : io :: Write > WriteColor for WriterInner < W > { fn supports_color (& self) -> bool { match * self { WriterInner :: NoColor (_) => false , WriterInner :: Ansi (_) => true , # [cfg (windows)] WriterInner :: Windows { .. } => true , } } fn supports_hyperlinks (& self) -> bool { match * self { WriterInner :: NoColor (_) => false , WriterInner :: Ansi (_) => true , # [cfg (windows)] WriterInner :: Windows { .. } => false , } } fn set_color (& mut self , spec : & ColorSpec) -> io :: Result < () > { match * self { WriterInner :: NoColor (ref mut wtr) => wtr . set_color (spec) , WriterInner :: Ansi (ref mut wtr) => wtr . set_color (spec) , # [cfg (windows)] WriterInner :: Windows { ref mut wtr , ref console } => { wtr . flush () ? ; let mut console = console . lock () . unwrap () ; spec . write_console (& mut * console) } } } fn set_hyperlink (& mut self , link : & HyperlinkSpec) -> io :: Result < () > { match * self { WriterInner :: NoColor (ref mut wtr) => wtr . set_hyperlink (link) , WriterInner :: Ansi (ref mut wtr) => wtr . set_hyperlink (link) , # [cfg (windows)] WriterInner :: Windows { .. } => Ok (()) , } } fn reset (& mut self) -> io :: Result < () > { match * self { WriterInner :: NoColor (ref mut wtr) => wtr . reset () , WriterInner :: Ansi (ref mut wtr) => wtr . reset () , # [cfg (windows)] WriterInner :: Windows { ref mut wtr , ref mut console } => { wtr . flush () ? ; console . lock () . unwrap () . reset () ? ; Ok (()) } } } fn is_synchronous (& self) -> bool { match * self { WriterInner :: NoColor (_) => false , WriterInner :: Ansi (_) => false , # [cfg (windows)] WriterInner :: Windows { .. } => true , } } }
+};
+}

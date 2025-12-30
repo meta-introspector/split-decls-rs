@@ -1,0 +1,9 @@
+// Generated macro for get_interrupt_handlers (function)
+macro_rules! Depcrate_drivers_mmioget_interrupt_handlers {
+() => {
+// Module: crate::drivers::mmio
+// Provides: {"get_interrupt_handlers"}
+// Dependencies: {}
+pub (crate) fn get_interrupt_handlers () -> HashMap < InterruptLine , InterruptHandlerQueue , RandomState > { # [allow (unused_mut)] let mut handlers : HashMap < InterruptLine , InterruptHandlerQueue , RandomState > = HashMap :: with_hasher (RandomState :: with_seeds (0 , 0 , 0 , 0)) ; # [cfg (any (all (target_arch = "riscv64" , feature = "gem-net" , not (feature = "pci")) , feature = "virtio-net" ,))] if let Some (device) = NETWORK_DEVICE . lock () . as_ref () { handlers . entry (device . get_interrupt_number ()) . or_default () . push_back (crate :: executor :: network :: network_handler) ; } # [cfg (feature = "console")] if let Some (drv) = get_console_driver () { fn console_handler () { if let Some (driver) = get_console_driver () { driver . lock () . handle_interrupt () ; } } let irq_number = drv . lock () . get_interrupt_number () ; if let Some (map) = handlers . get_mut (& irq_number) { map . push_back (console_handler) ; } else { let mut map : InterruptHandlerQueue = VecDeque :: new () ; map . push_back (console_handler) ; handlers . insert (irq_number , map) ; } } handlers }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for check_gzip_length (function)
+macro_rules! Depcrate_inflatecheck_gzip_length {
+() => {
+// Module: crate::inflate
+// Provides: {"check_gzip_length"}
+// Dependencies: {}
+# [test] fn check_gzip_length () { inf (& [0x1f , 0x8b , 0x8 , 0x2 , 0x0 , 0x0 , 0x0 , 0x0 , 0x0 , 0x0 , 0x1d , 0x26 , 0x3 , 0x0 , 0x0 , 0x0 , 0x0 , 0x0 , 0x0 , 0x0 , 0x0 , 0x0 ,] , "check gzip length" , 0 , 47 , 0 , Z_STREAM_END ,) }
+};
+}

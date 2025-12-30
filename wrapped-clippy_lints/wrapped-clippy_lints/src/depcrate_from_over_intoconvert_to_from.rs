@@ -1,0 +1,9 @@
+// Generated macro for convert_to_from (function)
+macro_rules! Depcrate_from_over_intoconvert_to_from {
+() => {
+// Module: crate::from_over_into
+// Provides: {"convert_to_from"}
+// Dependencies: {}
+fn convert_to_from (cx : & LateContext < '_ > , into_trait_seg : & PathSegment < '_ > , target_ty : & Ty < '_ > , self_ty : & Ty < '_ > , impl_item_ref : ImplItemId ,) -> Option < Vec < (Span , String) > > { if ! target_ty . find_self_aliases () . is_empty () { return None ; } let impl_item = cx . tcx . hir_impl_item (impl_item_ref) ; let ImplItemKind :: Fn (ref sig , body_id) = impl_item . kind else { return None ; } ; let body = cx . tcx . hir_body (body_id) ; let [self_param] = body . params else { return None } ; let PatKind :: Binding (.. , self_ident , None) = self_param . pat . kind else { return None ; } ; let from = self_ty . span . get_source_text (cx) ? ; let into = target_ty . span . get_source_text (cx) ? ; let mut suggestions = vec ! [(into_trait_seg . ident . span , String :: from ("From")) , (target_ty . span , from . to_owned ()) , (self_ty . span , into . to_owned ()) , (impl_item . ident . span , String :: from ("from")) , (self_ident . span . to (self_param . ty_span) , format ! ("val: {from}")) ,] ; if let FnRetTy :: Return (_) = sig . decl . output { suggestions . push ((sig . decl . output . span () , String :: from ("Self"))) ; } let mut finder = SelfFinder { cx , upper : Vec :: new () , lower : Vec :: new () , } ; if finder . visit_expr (body . value) . is_break () { return None ; } if ! finder . upper . is_empty () && ! matches ! (self_ty . kind , TyKind :: Path (_)) { return None ; } for span in finder . upper { suggestions . push ((span , from . to_owned ())) ; } for span in finder . lower { suggestions . push ((span , String :: from ("val"))) ; } Some (suggestions) }
+};
+}

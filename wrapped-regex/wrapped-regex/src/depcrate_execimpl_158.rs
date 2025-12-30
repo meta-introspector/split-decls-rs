@@ -1,0 +1,9 @@
+// Generated macro for impl_158 (impl)
+macro_rules! Depcrate_execimpl_158 {
+() => {
+// Module: crate::exec
+// Provides: {"impl_158"}
+// Dependencies: {}
+impl Exec { # [doc = " Get a searcher that isn't Sync."] # [inline (always)] pub fn searcher (& self) -> ExecNoSync { let create = | | Box :: new (RefCell :: new (ProgramCacheInner :: new (& self . ro))) ; ExecNoSync { ro : & self . ro , cache : self . cache . get_or (create) , } } # [doc = " Get a searcher that isn't Sync and can match on &str."] # [inline (always)] pub fn searcher_str (& self) -> ExecNoSyncStr { ExecNoSyncStr (self . searcher ()) } # [doc = " Build a Regex from this executor."] pub fn into_regex (self) -> re_unicode :: Regex { re_unicode :: Regex :: from (self) } # [doc = " Build a RegexSet from this executor."] pub fn into_regex_set (self) -> re_set :: unicode :: RegexSet { re_set :: unicode :: RegexSet :: from (self) } # [doc = " Build a Regex from this executor that can match arbitrary bytes."] pub fn into_byte_regex (self) -> re_bytes :: Regex { re_bytes :: Regex :: from (self) } # [doc = " Build a RegexSet from this executor that can match arbitrary bytes."] pub fn into_byte_regex_set (self) -> re_set :: bytes :: RegexSet { re_set :: bytes :: RegexSet :: from (self) } # [doc = " The original regular expressions given by the caller that were"] # [doc = " compiled."] pub fn regex_strings (& self) -> & [String] { & self . ro . res } # [doc = " Return a slice of capture names."] # [doc = ""] # [doc = " Any capture that isn't named is None."] pub fn capture_names (& self) -> & [Option < String >] { & self . ro . nfa . captures } # [doc = " Return a reference to named groups mapping (from group name to"] # [doc = " group position)."] pub fn capture_name_idx (& self) -> & Arc < HashMap < String , usize > > { & self . ro . nfa . capture_name_idx } }
+};
+}

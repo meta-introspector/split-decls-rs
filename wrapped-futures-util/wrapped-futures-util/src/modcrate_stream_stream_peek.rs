@@ -1,0 +1,39 @@
+// Generated module macro for crate::stream::stream::peek
+macro_rules! Modcrate_stream_stream_peek {
+() => {
+        Depcrate_stream_stream_peekuse_805!();
+        Depcrate_stream_stream_peekuse_806!();
+        Depcrate_stream_stream_peekuse_807!();
+        Depcrate_stream_stream_peekuse_808!();
+        Depcrate_stream_stream_peekuse_809!();
+        Depcrate_stream_stream_peekuse_810!();
+        Depcrate_stream_stream_peekuse_811!();
+        Depcrate_stream_stream_peekuse_812!();
+        Depcrate_stream_stream_peekuse_813!();
+        Depcrate_stream_stream_peekuse_814!();
+        Depcrate_stream_stream_peekuse_815!();
+        Depcrate_stream_stream_peekmacro_816!();
+        Depcrate_stream_stream_peekimpl_817!();
+        Depcrate_stream_stream_peekimpl_818!();
+        Depcrate_stream_stream_peekimpl_819!();
+        Depcrate_stream_stream_peekimpl_820!();
+        Depcrate_stream_stream_peekmacro_821!();
+        Depcrate_stream_stream_peekimpl_822!();
+        Depcrate_stream_stream_peekimpl_823!();
+        Depcrate_stream_stream_peekimpl_824!();
+        Depcrate_stream_stream_peekmacro_825!();
+        Depcrate_stream_stream_peekimpl_826!();
+        Depcrate_stream_stream_peekimpl_827!();
+        Depcrate_stream_stream_peekimpl_828!();
+        Depcrate_stream_stream_peekmacro_829!();
+        Depcrate_stream_stream_peekimpl_830!();
+        Depcrate_stream_stream_peekimpl_831!();
+        Depcrate_stream_stream_peekimpl_832!();
+        Depcrate_stream_stream_peekmacro_833!();
+        Depcrate_stream_stream_peekimpl_834!();
+        Depcrate_stream_stream_peekimpl_835!();
+        Depcrate_stream_stream_peekimpl_836!();
+        Depcrate_stream_stream_peekNextIfEqFn!();
+        Depcrate_stream_stream_peekimpl_838!();
+    };
+}

@@ -1,0 +1,45 @@
+// Generated module macro for crate::aead
+macro_rules! Modcrate_aead {
+() => {
+        Depcrate_aeaduse_75!();
+        Depcrate_aeaduse_76!();
+        Depcrate_aeaduse_77!();
+        Depcrate_aeadNonceSequence!();
+        Depcrate_aeadBoundKey!();
+        Depcrate_aeadAad!();
+        Depcrate_aeadimpl_81!();
+        Depcrate_aeadimpl_82!();
+        Depcrate_aeadimpl_83!();
+        Depcrate_aeadimpl_84!();
+        Depcrate_aeadimpl_85!();
+        Depcrate_aeadimpl_86!();
+        Depcrate_aeadKeyInner!();
+        Depcrate_aeadmax_input_len!();
+        Depcrate_aeadTag!();
+        Depcrate_aeadimpl_90!();
+        Depcrate_aeadimpl_91!();
+        Depcrate_aeadimpl_92!();
+        Depcrate_aeadMAX_KEY_LEN!();
+        Depcrate_aeadTAG_LEN!();
+        Depcrate_aeadMAX_TAG_LEN!();
+        Depcrate_aeadmacro_96!();
+        Depcrate_aeadOverlapping!();
+        Depcrate_aeadForgedPlaintext!();
+        Depcrate_aeadopen_within!();
+        Depcrate_aeadaes!();
+        Depcrate_aeadaes_gcm!();
+        Depcrate_aeadalgorithm!();
+        Depcrate_aeadchacha!();
+        Depcrate_aeadchacha20_poly1305!();
+        Depcrate_aeadchacha20_poly1305_openssh!();
+        Depcrate_aeadgcm!();
+        Depcrate_aeadless_safe_key!();
+        Depcrate_aeadnonce!();
+        Depcrate_aeadopening_key!();
+        Depcrate_aeadoverlapping!();
+        Depcrate_aeadpoly1305!();
+        Depcrate_aeadquic!();
+        Depcrate_aeadsealing_key!();
+        Depcrate_aeadunbound_key!();
+    };
+}

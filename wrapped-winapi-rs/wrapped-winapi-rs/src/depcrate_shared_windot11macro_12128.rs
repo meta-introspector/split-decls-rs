@@ -1,0 +1,9 @@
+// Generated macro for macro_12128 (macro)
+macro_rules! Depcrate_shared_windot11macro_12128 {
+() => {
+// Module: crate::shared::windot11
+// Provides: {"macro_12128"}
+// Dependencies: {}
+DEFINE_NWF_GUID ! { GUID_NWF_CURRENT_OFFLOAD_CAPABILITY , 1 }
+};
+}

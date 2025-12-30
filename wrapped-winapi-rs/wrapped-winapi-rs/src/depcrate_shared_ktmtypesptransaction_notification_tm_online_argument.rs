@@ -1,0 +1,9 @@
+// Generated macro for PTRANSACTION_NOTIFICATION_TM_ONLINE_ARGUMENT (type)
+macro_rules! Depcrate_shared_ktmtypesPTRANSACTION_NOTIFICATION_TM_ONLINE_ARGUMENT {
+() => {
+// Module: crate::shared::ktmtypes
+// Provides: {"PTRANSACTION_NOTIFICATION_TM_ONLINE_ARGUMENT"}
+// Dependencies: {}
+pub type PTRANSACTION_NOTIFICATION_TM_ONLINE_ARGUMENT = * mut TRANSACTION_NOTIFICATION_TM_ONLINE_ARGUMENT ;
+};
+}

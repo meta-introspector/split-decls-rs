@@ -1,0 +1,9 @@
+// Generated macro for impl_816 (impl)
+macro_rules! Depcrate_base_editionimpl_816 {
+() => {
+// Module: crate::base::edition
+// Provides: {"impl_816"}
+// Dependencies: {}
+# [doc = " # Rows and columns extraction"] impl < T : Scalar , R : Dim , C : Dim , S : Storage < T , R , C > > Matrix < T , R , C , S > { # [doc = " Creates a new matrix by extracting the given set of rows from `self`."] # [cfg (any (feature = "std" , feature = "alloc"))] # [must_use] pub fn select_rows < 'a , I > (& self , irows : I) -> OMatrix < T , Dyn , C > where I : IntoIterator < Item = & 'a usize > , I :: IntoIter : ExactSizeIterator + Clone , DefaultAllocator : Allocator < Dyn , C > , { let irows = irows . into_iter () ; let ncols = self . shape_generic () . 1 ; let mut res = Matrix :: uninit (Dyn (irows . len ()) , ncols) ; for i in irows . clone () { assert ! (* i < self . nrows () , "Row index out of bounds.") } for j in 0 .. ncols . value () { let mut res = res . column_mut (j) ; let src = self . column (j) ; for (destination , source) in irows . clone () . enumerate () { unsafe { * res . vget_unchecked_mut (destination) = MaybeUninit :: new (src . vget_unchecked (* source) . clone ()) ; } } } unsafe { res . assume_init () } } # [doc = " Creates a new matrix by extracting the given set of columns from `self`."] # [cfg (any (feature = "std" , feature = "alloc"))] # [must_use] pub fn select_columns < 'a , I > (& self , icols : I) -> OMatrix < T , R , Dyn > where I : IntoIterator < Item = & 'a usize > , I :: IntoIter : ExactSizeIterator , DefaultAllocator : Allocator < R , Dyn > , { let icols = icols . into_iter () ; let nrows = self . shape_generic () . 0 ; let mut res = Matrix :: uninit (nrows , Dyn (icols . len ())) ; for (destination , source) in icols . enumerate () { res . column_mut (destination) . zip_apply (& self . column (* source) , | out , e | * out = MaybeUninit :: new (e)) ; } unsafe { res . assume_init () } } }
+};
+}

@@ -1,0 +1,44 @@
+// Generated module macro for crate
+macro_rules! Modcrate {
+() => {
+        Depcrateother_1!();
+        Depcrateuse_2!();
+        Depcrateuse_3!();
+        Depcrateuse_4!();
+        Depcrateuse_5!();
+        Depcrateuse_6!();
+        Depcrateuse_7!();
+        Depcrateuse_8!();
+        Depcrateuse_9!();
+        Depcrateuse_10!();
+        Depcrateuse_11!();
+        DepcrateConfig!();
+        DepcrateLibrary!();
+        DepcrateTargetTriplet!();
+        Depcrateimpl_15!();
+        DepcrateError!();
+        Depcrateimpl_17!();
+        Depcrateimpl_18!();
+        Depcrateprobe_package!();
+        Depcratefind_package!();
+        Depcratefind_vcpkg_root!();
+        Depcratevalidate_vcpkg_root!();
+        Depcratefind_vcpkg_target!();
+        DepcratePcFile!();
+        Depcrateimpl_25!();
+        DepcratePcFiles!();
+        Depcrateimpl_27!();
+        DepcratePort!();
+        Depcrateload_port_manifest!();
+        Depcrateload_port_file!();
+        Depcrateload_ports!();
+        DepcrateVcpkgTarget!();
+        Depcrateimpl_33!();
+        Depcrateimpl_34!();
+        Depcrateremove_item!();
+        Depcrateimpl_36!();
+        Depcrateenvify!();
+        Depcratedetect_target_triplet!();
+        Depcratetests!();
+    };
+}

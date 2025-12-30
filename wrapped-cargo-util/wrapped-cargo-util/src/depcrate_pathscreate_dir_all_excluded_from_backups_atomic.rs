@@ -1,0 +1,9 @@
+// Generated macro for create_dir_all_excluded_from_backups_atomic (function)
+macro_rules! Depcrate_pathscreate_dir_all_excluded_from_backups_atomic {
+() => {
+// Module: crate::paths
+// Provides: {"create_dir_all_excluded_from_backups_atomic"}
+// Dependencies: {}
+# [doc = " Creates an excluded from cache directory atomically with its parents as needed."] # [doc = ""] # [doc = " The atomicity only covers creating the leaf directory and exclusion from cache. Any missing"] # [doc = " parent directories will not be created in an atomic manner."] # [doc = ""] # [doc = " This function is idempotent and in addition to that it won't exclude ``p`` from cache if it"] # [doc = " already exists."] pub fn create_dir_all_excluded_from_backups_atomic (p : impl AsRef < Path >) -> Result < () > { let path = p . as_ref () ; if path . is_dir () { return Ok (()) ; } let parent = path . parent () . unwrap () ; let base = path . file_name () . unwrap () ; create_dir_all (parent) ? ; let tempdir = TempFileBuilder :: new () . prefix (base) . tempdir_in (parent) ? ; exclude_from_backups (tempdir . path ()) ; exclude_from_content_indexing (tempdir . path ()) ; if let Err (e) = fs :: rename (tempdir . path () , path) { if ! path . exists () { return Err (anyhow :: Error :: from (e)) . with_context (| | format ! ("failed to create directory `{}`" , path . display ())) ; } } Ok (()) }
+};
+}

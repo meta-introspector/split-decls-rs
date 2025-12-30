@@ -1,0 +1,9 @@
+// Generated macro for object_manager_async_property (function)
+macro_rules! Depcrate_testobject_manager_async_property {
+() => {
+// Module: crate::test
+// Provides: {"object_manager_async_property"}
+// Dependencies: {}
+# [tokio :: test] async fn object_manager_async_property () { use dbus :: channel :: MatchingReceiver ; let (resource , bus) = dbus_tokio :: connection :: new_session_sync () . unwrap () ; tokio :: spawn (async { resource . await ; }) ; bus . request_name ("com.example.dbusrs.objmgr_asyncprop" , false , true , false) . await . unwrap () ; let mut cr = Crossroads :: new () ; let spawner = Box :: new (| fut | { tokio :: spawn (fut) ; }) ; cr . set_async_support (Some ((bus . clone () , spawner))) ; let token = cr . register ("com.example.dbusrs.item" , | b : & mut IfaceBuilder < i64 > | { b . property ("asyncprop") . get_async (move | mut ctx , n | { let n = * n ; async move { ctx . reply (Ok (n)) } }) ; }) ; cr . insert ("/" , & [cr . object_manager ()] , ()) ; cr . insert ("/item1" , & [token] , 1) ; cr . insert ("/item2" , & [token] , 2) ; bus . start_receive (dbus :: message :: MatchRule :: new_method_call () , Box :: new (move | msg , conn | { cr . handle_message (msg , conn) . unwrap () ; true })) ; let proxy = dbus :: nonblock :: Proxy :: new ("com.example.dbusrs.objmgr_asyncprop" , "/" , Duration :: from_secs (5) , bus) ; let (response ,) : (HashMap < dbus :: Path < 'static > , HashMap < String , PropMap > > ,) = proxy . method_call ("org.freedesktop.DBus.ObjectManager" , "GetManagedObjects" , ()) . await . unwrap () ; let prop1 = & response [& "/item1" . into ()] ["com.example.dbusrs.item"] ["asyncprop"] ; assert_eq ! (prop1 . 0 . as_i64 () . unwrap () , 1) ; let prop2 = & response [& "/item2" . into ()] ["com.example.dbusrs.item"] ["asyncprop"] ; assert_eq ! (prop2 . 0 . as_i64 () . unwrap () , 2) ; }
+};
+}

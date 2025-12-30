@@ -1,0 +1,9 @@
+// Generated macro for stream_round_robin (function)
+macro_rules! Depcrate_testsstream_round_robin {
+() => {
+// Module: crate::tests
+// Provides: {"stream_round_robin"}
+// Dependencies: {}
+# [rstest] # [doc = " Tests that the order of flushable streams scheduled on the wire is the"] # [doc = " same as the order of `stream_send()` calls done by the application."] fn stream_round_robin (# [values ("cubic" , "bbr2" , "bbr2_gcongestion")] cc_algorithm_name : & str ,) { let mut buf = [0 ; 65535] ; let mut pipe = test_utils :: Pipe :: new (cc_algorithm_name) . unwrap () ; assert_eq ! (pipe . handshake () , Ok (())) ; assert_eq ! (pipe . client . stream_send (8 , b"aaaaa" , false) , Ok (5)) ; assert_eq ! (pipe . client . stream_send (0 , b"aaaaa" , false) , Ok (5)) ; assert_eq ! (pipe . client . stream_send (4 , b"aaaaa" , false) , Ok (5)) ; let (len , _) = pipe . client . send (& mut buf) . unwrap () ; let frames = test_utils :: decode_pkt (& mut pipe . server , & mut buf [.. len]) . unwrap () ; let mut iter = frames . iter () ; iter . next () ; assert_eq ! (iter . next () , Some (& frame :: Frame :: Stream { stream_id : 8 , data : < RangeBuf >:: from (b"aaaaa" , 0 , false) , })) ; let (len , _) = pipe . client . send (& mut buf) . unwrap () ; let frames = test_utils :: decode_pkt (& mut pipe . server , & mut buf [.. len]) . unwrap () ; assert_eq ! (frames . first () , Some (& frame :: Frame :: Stream { stream_id : 0 , data : < RangeBuf >:: from (b"aaaaa" , 0 , false) , })) ; let (len , _) = pipe . client . send (& mut buf) . unwrap () ; let frames = test_utils :: decode_pkt (& mut pipe . server , & mut buf [.. len]) . unwrap () ; assert_eq ! (frames . first () , Some (& frame :: Frame :: Stream { stream_id : 4 , data : < RangeBuf >:: from (b"aaaaa" , 0 , false) , })) ; }
+};
+}

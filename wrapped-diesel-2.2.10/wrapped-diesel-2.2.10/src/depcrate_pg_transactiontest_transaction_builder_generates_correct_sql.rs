@@ -1,0 +1,9 @@
+// Generated macro for test_transaction_builder_generates_correct_sql (function)
+macro_rules! Depcrate_pg_transactiontest_transaction_builder_generates_correct_sql {
+() => {
+// Module: crate::pg::transaction
+// Provides: {"test_transaction_builder_generates_correct_sql"}
+// Dependencies: {}
+# [test] fn test_transaction_builder_generates_correct_sql () { extern crate dotenvy ; macro_rules ! assert_sql { ($ query : expr , $ sql : expr) => { let mut query_builder = < Pg as Backend >:: QueryBuilder :: default () ; $ query . to_sql (& mut query_builder , & Pg) . unwrap () ; let sql = query_builder . finish () ; assert_eq ! (sql , $ sql) ; } ; } let database_url = dotenvy :: var ("PG_DATABASE_URL") . or_else (| _ | dotenvy :: var ("DATABASE_URL")) . expect ("DATABASE_URL must be set in order to run tests") ; let mut conn = PgConnection :: establish (& database_url) . unwrap () ; assert_sql ! (conn . build_transaction () , "BEGIN TRANSACTION") ; assert_sql ! (conn . build_transaction () . read_only () , "BEGIN TRANSACTION READ ONLY") ; assert_sql ! (conn . build_transaction () . read_write () , "BEGIN TRANSACTION READ WRITE") ; assert_sql ! (conn . build_transaction () . deferrable () , "BEGIN TRANSACTION DEFERRABLE") ; assert_sql ! (conn . build_transaction () . not_deferrable () , "BEGIN TRANSACTION NOT DEFERRABLE") ; assert_sql ! (conn . build_transaction () . read_committed () , "BEGIN TRANSACTION ISOLATION LEVEL READ COMMITTED") ; assert_sql ! (conn . build_transaction () . repeatable_read () , "BEGIN TRANSACTION ISOLATION LEVEL REPEATABLE READ") ; assert_sql ! (conn . build_transaction () . serializable () , "BEGIN TRANSACTION ISOLATION LEVEL SERIALIZABLE") ; assert_sql ! (conn . build_transaction () . serializable () . deferrable () . read_only () , "BEGIN TRANSACTION ISOLATION LEVEL SERIALIZABLE READ ONLY DEFERRABLE") ; }
+};
+}

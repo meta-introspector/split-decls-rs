@@ -1,0 +1,9 @@
+// Generated macro for DECODE_D3D10_SB_GS_OUTPUT_PRIMITIVE_TOPOLOGY (function)
+macro_rules! Depcrate_um_d3d11tokenizedprogramformatDECODE_D3D10_SB_GS_OUTPUT_PRIMITIVE_TOPOLOGY {
+() => {
+// Module: crate::um::d3d11tokenizedprogramformat
+// Provides: {"DECODE_D3D10_SB_GS_OUTPUT_PRIMITIVE_TOPOLOGY"}
+// Dependencies: {}
+# [inline] pub fn DECODE_D3D10_SB_GS_OUTPUT_PRIMITIVE_TOPOLOGY (OpcodeToken0 : DWORD ,) -> D3D10_SB_PRIMITIVE_TOPOLOGY { ((OpcodeToken0 & D3D10_SB_GS_OUTPUT_PRIMITIVE_TOPOLOGY_MASK) >> D3D10_SB_GS_OUTPUT_PRIMITIVE_TOPOLOGY_SHIFT) as D3D10_SB_PRIMITIVE_TOPOLOGY }
+};
+}

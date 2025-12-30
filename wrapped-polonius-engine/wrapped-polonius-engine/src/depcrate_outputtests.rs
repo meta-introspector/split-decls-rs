@@ -1,0 +1,9 @@
+// Generated macro for tests (module)
+macro_rules! Depcrate_outputtests {
+() => {
+// Module: crate::output
+// Provides: {"tests"}
+// Dependencies: {}
+# [cfg (test)] mod tests { use super :: * ; impl Atom for usize { fn index (self) -> usize { self } } fn compare (errors1 : & FxHashMap < usize , Vec < usize > > , errors2 : & FxHashMap < usize , Vec < usize > > ,) -> bool { let diff1 = compare_errors (errors1 , errors2) ; let diff2 = compare_errors (errors2 , errors1) ; assert_eq ! (diff1 , diff2) ; diff1 } # [test] fn test_compare_errors () { let empty = FxHashMap :: default () ; assert_eq ! (false , compare (& empty , & empty)) ; let mut empty_vec = FxHashMap :: default () ; empty_vec . insert (1 , vec ! []) ; empty_vec . insert (2 , vec ! []) ; assert_eq ! (false , compare (& empty , & empty_vec)) ; let mut singleton1 = FxHashMap :: default () ; singleton1 . insert (1 , vec ! [10]) ; assert_eq ! (false , compare (& singleton1 , & singleton1)) ; let mut singleton2 = FxHashMap :: default () ; singleton2 . insert (1 , vec ! [11]) ; assert_eq ! (false , compare (& singleton2 , & singleton2)) ; let mut singleton3 = FxHashMap :: default () ; singleton3 . insert (2 , vec ! [10]) ; assert_eq ! (false , compare (& singleton3 , & singleton3)) ; assert_eq ! (true , compare (& singleton1 , & singleton2)) ; assert_eq ! (true , compare (& singleton2 , & singleton3)) ; assert_eq ! (true , compare (& singleton1 , & singleton3)) ; assert_eq ! (true , compare (& empty , & singleton1)) ; assert_eq ! (true , compare (& empty , & singleton2)) ; assert_eq ! (true , compare (& empty , & singleton3)) ; let mut errors1 = FxHashMap :: default () ; errors1 . insert (1 , vec ! [11]) ; errors1 . insert (2 , vec ! [10]) ; assert_eq ! (false , compare (& errors1 , & errors1)) ; assert_eq ! (true , compare (& errors1 , & singleton1)) ; assert_eq ! (true , compare (& errors1 , & singleton2)) ; assert_eq ! (true , compare (& errors1 , & singleton3)) ; } }
+};
+}

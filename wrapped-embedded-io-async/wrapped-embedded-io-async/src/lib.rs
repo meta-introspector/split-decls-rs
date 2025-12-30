@@ -1,0 +1,62 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcrate_impls_blanketimpl_8.rs");
+include!("depcrate_impls_slice_mutuse_11.rs");
+include!("depcrate_impls_slice_refimpl_17.rs");
+include!("depcrate_implsboxx.rs");
+include!("depcrate_implsvec_deque.rs");
+include!("depcrate_impls_vec_dequeuse_31.rs");
+include!("depcrateimpls.rs");
+include!("depcrateseek.rs");
+include!("depcrate_impls_boxximpl_22.rs");
+include!("depcrate_impls_vec_dequeimpl_35.rs");
+include!("depcrate_impls_boxximpl_25.rs");
+include!("depcrateuse_36.rs");
+include!("depcrate_impls_boxximpl_23.rs");
+include!("depcrate_impls_vecuse_27.rs");
+include!("depcrate_implsvec.rs");
+include!("depcrateother_1.rs");
+include!("depcrate_implsblanket.rs");
+include!("depcrate_impls_slice_refimpl_18.rs");
+include!("depcrate_impls_blanketuse_5.rs");
+include!("depcrate_impls_slice_mutuse_12.rs");
+include!("depcrate_implsslice_mut.rs");
+include!("depcrate_impls_vec_dequeimpl_33.rs");
+include!("depcrateread.rs");
+include!("depcrate_impls_blanketimpl_6.rs");
+include!("depcrate_implsslice_ref.rs");
+include!("depcrate_impls_vecuse_28.rs");
+include!("depcratebufread.rs");
+include!("depcrate_impls_vec_dequeuse_32.rs");
+include!("depcrate_impls_blanketimpl_9.rs");
+include!("depcratewrite.rs");
+include!("depcrate_impls_boxxuse_20.rs");
+include!("depcrate_impls_blanketimpl_7.rs");
+include!("depcrate_impls_boxximpl_24.rs");
+include!("depcrate_impls_slice_mutimpl_14.rs");
+include!("depcrate_impls_blanketuse_4.rs");
+include!("depcrate_impls_boxxuse_21.rs");
+include!("depcrate_impls_vec_dequeimpl_34.rs");
+include!("depcrate_impls_vecimpl_29.rs");
+include!("depcrate_impls_slice_mutuse_13.rs");
+include!("depcrate_impls_slice_refuse_16.rs");
+include!("modcrate_impls_slice_mut.rs");
+include!("modcrate_impls_blanket.rs");
+include!("modcrate_impls_slice_ref.rs");
+include!("modcrate_impls_vec.rs");
+include!("modcrate_impls.rs");
+include!("modcrate_impls_vec_deque.rs");
+include!("modcrate_impls_boxx.rs");
+include!("modcrate.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate_impls_slice_mut!();
+    Modcrate_impls_blanket!();
+    Modcrate_impls_slice_ref!();
+    Modcrate_impls_vec!();
+    Modcrate_impls!();
+    Modcrate_impls_vec_deque!();
+    Modcrate_impls_boxx!();
+    Modcrate!();
+}

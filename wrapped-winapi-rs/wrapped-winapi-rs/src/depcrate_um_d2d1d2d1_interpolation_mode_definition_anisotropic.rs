@@ -1,0 +1,9 @@
+// Generated macro for D2D1_INTERPOLATION_MODE_DEFINITION_ANISOTROPIC (const)
+macro_rules! Depcrate_um_d2d1D2D1_INTERPOLATION_MODE_DEFINITION_ANISOTROPIC {
+() => {
+// Module: crate::um::d2d1
+// Provides: {"D2D1_INTERPOLATION_MODE_DEFINITION_ANISOTROPIC"}
+// Dependencies: {}
+pub const D2D1_INTERPOLATION_MODE_DEFINITION_ANISOTROPIC : DWORD = 4 ;
+};
+}

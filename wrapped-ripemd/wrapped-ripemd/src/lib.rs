@@ -1,0 +1,71 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcrateuse_1.rs");
+include!("depcrate_block_apiuse_4.rs");
+include!("depcrate_c256work_buf_len.rs");
+include!("depcrate_c128work_buf_len.rs");
+include!("depcrate_c320digest_buf_len.rs");
+include!("depcrate_c128digestbufbytelen.rs");
+include!("depcrate_c256half_digest_buf_len.rs");
+include!("depcrate_c256round.rs");
+include!("depcrate_c160round.rs");
+include!("depcratemacro_50.rs");
+include!("depcratemacro_53.rs");
+include!("depcratec320.rs");
+include!("depcrate_c128compress.rs");
+include!("depcrate_c320work_buf_len.rs");
+include!("depcrate_c160digest_buf_len.rs");
+include!("depcrate_c256digest_buf_len.rs");
+include!("depcratemacro_52.rs");
+include!("depcratemacro_51.rs");
+include!("depcrate_block_apimacro_6.rs");
+include!("depcrate_c320h0.rs");
+include!("depcrate_c160process_block.rs");
+include!("depcratec160.rs");
+include!("depcrate_c256h0.rs");
+include!("depcrate_block_apimacro_9.rs");
+include!("depcrate_c128round.rs");
+include!("depcrate_c128process_block.rs");
+include!("depcrate_c160work_buf_len.rs");
+include!("depcrate_c160use_20.rs");
+include!("depcrate_c256process_block.rs");
+include!("depcratec128.rs");
+include!("depcrate_c256digestbufbytelen.rs");
+include!("depcratec256.rs");
+include!("depcrate_block_apiuse_3.rs");
+include!("depcrate_c320use_40.rs");
+include!("depcrate_c320digestbufbytelen.rs");
+include!("depcrate_block_apiimpl_ripemd.rs");
+include!("depcrate_c160digestbufbytelen.rs");
+include!("depcrate_c160h0.rs");
+include!("depcrate_c160compress.rs");
+include!("depcrate_c128use_11.rs");
+include!("depcrate_c320round.rs");
+include!("depcrate_c320swap_idx.rs");
+include!("depcrate_c256compress.rs");
+include!("depcrate_c320compress.rs");
+include!("depcrate_c320half_digest_buf_len.rs");
+include!("depcrate_c256use_29.rs");
+include!("depcrate_c128h0.rs");
+include!("depcrate_c256swap_idx.rs");
+include!("depcrate_c320process_block.rs");
+include!("depcrate_c128digest_buf_len.rs");
+include!("depcrate_block_apimacro_8.rs");
+include!("depcrateblock_api.rs");
+include!("depcrate_block_apimacro_7.rs");
+include!("modcrate_c256.rs");
+include!("modcrate_c128.rs");
+include!("modcrate_c160.rs");
+include!("modcrate.rs");
+include!("modcrate_block_api.rs");
+include!("modcrate_c320.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate_c256!();
+    Modcrate_c128!();
+    Modcrate_c160!();
+    Modcrate!();
+    Modcrate_block_api!();
+    Modcrate_c320!();
+}

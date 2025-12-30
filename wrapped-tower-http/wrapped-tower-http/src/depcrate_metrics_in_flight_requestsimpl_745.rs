@@ -1,0 +1,9 @@
+// Generated macro for impl_745 (impl)
+macro_rules! Depcrate_metrics_in_flight_requestsimpl_745 {
+() => {
+// Module: crate::metrics::in_flight_requests
+// Provides: {"impl_745"}
+// Dependencies: {}
+impl InFlightRequestsCounter { # [doc = " Create a new `InFlightRequestsCounter`."] pub fn new () -> Self { Self :: default () } # [doc = " Get the current number of in-flight requests."] pub fn get (& self) -> usize { self . count . load (Ordering :: Relaxed) } fn increment (& self) -> IncrementGuard { self . count . fetch_add (1 , Ordering :: Relaxed) ; IncrementGuard { count : self . count . clone () , } } # [doc = " Run a future every `interval` which receives the current number of in-flight requests."] # [doc = ""] # [doc = " This can be used to send the current count to your metrics system."] # [doc = ""] # [doc = " This function will loop forever so normally it is called with [`tokio::spawn`]:"] # [doc = ""] # [doc = " ```rust,no_run"] # [doc = " use tower_http::metrics::in_flight_requests::InFlightRequestsCounter;"] # [doc = " use std::time::Duration;"] # [doc = ""] # [doc = " let counter = InFlightRequestsCounter::new();"] # [doc = ""] # [doc = " tokio::spawn("] # [doc = "     counter.run_emitter(Duration::from_secs(10), |count: usize| async move {"] # [doc = "         // Send `count` to metrics system."] # [doc = "     }),"] # [doc = " );"] # [doc = " ```"] pub async fn run_emitter < F , Fut > (mut self , interval : Duration , mut emit : F) where F : FnMut (usize) -> Fut + Send + 'static , Fut : Future < Output = () > + Send , { let mut interval = tokio :: time :: interval (interval) ; loop { match Arc :: try_unwrap (self . count) { Ok (_) => return , Err (shared_count) => { self = Self { count : shared_count , } } } interval . tick () . await ; emit (self . get ()) . await ; } } }
+};
+}

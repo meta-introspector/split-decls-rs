@@ -1,0 +1,39 @@
+// Generated module macro for crate::eq
+macro_rules! Modcrate_eq {
+() => {
+        Depcrate_equse_49!();
+        Depcrate_equse_50!();
+        Depcrate_equse_51!();
+        Depcrate_eqFloatMargin!();
+        Depcrate_eqApproxEq!();
+        Depcrate_eqF32Margin!();
+        Depcrate_eqimpl_55!();
+        Depcrate_eqimpl_56!();
+        Depcrate_eqimpl_57!();
+        Depcrate_eqf32abs!();
+        Depcrate_eqimpl_59!();
+        Depcrate_eqf32_approx_eq_test1!();
+        Depcrate_eqf32_approx_eq_test2!();
+        Depcrate_eqf32_approx_eq_test3!();
+        Depcrate_eqf32_approx_eq_test4!();
+        Depcrate_eqf32_approx_eq_test5!();
+        Depcrate_eqf32_approx_eq_test6!();
+        Depcrate_eqF64Margin!();
+        Depcrate_eqimpl_67!();
+        Depcrate_eqimpl_68!();
+        Depcrate_eqimpl_69!();
+        Depcrate_eqf64abs!();
+        Depcrate_eqimpl_71!();
+        Depcrate_eqf64_approx_eq_test1!();
+        Depcrate_eqf64_approx_eq_test2!();
+        Depcrate_eqf64_approx_eq_test3!();
+        Depcrate_eqf64_approx_eq_test4!();
+        Depcrate_eqf64_approx_eq_test5!();
+        Depcrate_eqf64_approx_eq_test6!();
+        Depcrate_eqf64_code_triggering_issue_20!();
+        Depcrate_eqimpl_79!();
+        Depcrate_eqtest_slices!();
+        Depcrate_eqimpl_81!();
+        Depcrate_eqtest_option!();
+    };
+}

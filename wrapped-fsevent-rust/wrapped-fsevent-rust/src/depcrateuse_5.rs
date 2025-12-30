@@ -1,0 +1,9 @@
+// Generated macro for use_5 (use)
+macro_rules! Depcrateuse_5 {
+() => {
+// Module: crate
+// Provides: {"use_5"}
+// Dependencies: {}
+use std :: { ffi :: CStr , fmt :: { Display , Formatter } , os :: raw :: c_void , ptr :: NonNull , slice , sync :: mpsc :: Sender , } ;
+};
+}

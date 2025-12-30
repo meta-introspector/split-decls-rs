@@ -1,0 +1,9 @@
+// Generated macro for FloatCC (enum)
+macro_rules! Depcrate_ir_condcodesFloatCC {
+() => {
+// Module: crate::ir::condcodes
+// Provides: {"FloatCC"}
+// Dependencies: {}
+# [doc = " Condition code for comparing floating point numbers."] # [doc = ""] # [doc = " This condition code is used by the `fcmp` instruction to compare floating point values. Two"] # [doc = " IEEE floating point values relate in exactly one of four ways:"] # [doc = ""] # [doc = " 1. `UN` - unordered when either value is NaN."] # [doc = " 2. `EQ` - equal numerical value."] # [doc = " 3. `LT` - `x` is less than `y`."] # [doc = " 4. `GT` - `x` is greater than `y`."] # [doc = ""] # [doc = " Note that `0.0` and `-0.0` relate as `EQ` because they both represent the number 0."] # [doc = ""] # [doc = " The condition codes described here are used to produce a single boolean value from the"] # [doc = " comparison. The 14 condition codes here cover every possible combination of the relation above"] # [doc = " except the impossible `!UN & !EQ & !LT & !GT` and the always true `UN | EQ | LT | GT`."] # [derive (Clone , Copy , PartialEq , Eq , Debug , Hash)] # [cfg_attr (feature = "enable-serde" , derive (Serialize , Deserialize))] pub enum FloatCC { # [doc = " EQ | LT | GT"] Ordered , # [doc = " UN"] Unordered , # [doc = " EQ"] Equal , # [doc = " The C '!=' operator is the inverse of '==': `NotEqual`."] # [doc = " UN | LT | GT"] NotEqual , # [doc = " LT | GT"] OrderedNotEqual , # [doc = " UN | EQ"] UnorderedOrEqual , # [doc = " LT"] LessThan , # [doc = " LT | EQ"] LessThanOrEqual , # [doc = " GT"] GreaterThan , # [doc = " GT | EQ"] GreaterThanOrEqual , # [doc = " UN | LT"] UnorderedOrLessThan , # [doc = " UN | LT | EQ"] UnorderedOrLessThanOrEqual , # [doc = " UN | GT"] UnorderedOrGreaterThan , # [doc = " UN | GT | EQ"] UnorderedOrGreaterThanOrEqual , }
+};
+}

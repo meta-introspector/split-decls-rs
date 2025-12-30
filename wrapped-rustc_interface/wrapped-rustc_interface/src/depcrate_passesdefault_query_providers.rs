@@ -1,0 +1,9 @@
+// Generated macro for DEFAULT_QUERY_PROVIDERS (static)
+macro_rules! Depcrate_passesDEFAULT_QUERY_PROVIDERS {
+() => {
+// Module: crate::passes
+// Provides: {"DEFAULT_QUERY_PROVIDERS"}
+// Dependencies: {}
+pub static DEFAULT_QUERY_PROVIDERS : LazyLock < Providers > = LazyLock :: new (| | { let providers = & mut Providers :: default () ; providers . analysis = analysis ; providers . hir_crate = rustc_ast_lowering :: lower_to_hir ; providers . resolver_for_lowering_raw = resolver_for_lowering_raw ; providers . stripped_cfg_items = | tcx , _ | & tcx . resolutions (()) . stripped_cfg_items [..] ; providers . resolutions = | tcx , () | tcx . resolver_for_lowering_raw (()) . 1 ; providers . early_lint_checks = early_lint_checks ; providers . env_var_os = env_var_os ; limits :: provide (providers) ; proc_macro_decls :: provide (providers) ; rustc_const_eval :: provide (providers) ; rustc_middle :: hir :: provide (providers) ; rustc_borrowck :: provide (providers) ; rustc_incremental :: provide (providers) ; rustc_mir_build :: provide (providers) ; rustc_mir_transform :: provide (providers) ; rustc_monomorphize :: provide (providers) ; rustc_privacy :: provide (providers) ; rustc_query_impl :: provide (providers) ; rustc_resolve :: provide (providers) ; rustc_hir_analysis :: provide (providers) ; rustc_hir_typeck :: provide (providers) ; ty :: provide (providers) ; traits :: provide (providers) ; solve :: provide (providers) ; rustc_passes :: provide (providers) ; rustc_traits :: provide (providers) ; rustc_ty_utils :: provide (providers) ; rustc_metadata :: provide (providers) ; rustc_lint :: provide (providers) ; rustc_symbol_mangling :: provide (providers) ; rustc_codegen_ssa :: provide (providers) ; * providers }) ;
+};
+}

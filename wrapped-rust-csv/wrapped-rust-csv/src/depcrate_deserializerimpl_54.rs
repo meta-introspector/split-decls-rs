@@ -1,0 +1,9 @@
+// Generated macro for impl_54 (impl)
+macro_rules! Depcrate_deserializerimpl_54 {
+() => {
+// Module: crate::deserializer
+// Provides: {"impl_54"}
+// Dependencies: {}
+impl < 'r > DeRecord < 'r > for DeStringRecord < 'r > { # [inline] fn has_headers (& self) -> bool { self . headers . is_some () } # [inline] fn next_header (& mut self) -> Result < Option < & 'r str > , DeserializeError > { Ok (self . headers . as_mut () . and_then (| it | it . next ())) } # [inline] fn next_header_bytes (& mut self ,) -> Result < Option < & 'r [u8] > , DeserializeError > { Ok (self . next_header () ? . map (| s | s . as_bytes ())) } # [inline] fn next_field (& mut self) -> Result < & 'r str , DeserializeError > { match self . it . next () { Some (field) => { self . field += 1 ; Ok (field) } None => Err (DeserializeError { field : None , kind : DEK :: UnexpectedEndOfRow , }) , } } # [inline] fn next_field_bytes (& mut self) -> Result < & 'r [u8] , DeserializeError > { self . next_field () . map (| s | s . as_bytes ()) } # [inline] fn peek_field (& mut self) -> Option < & 'r [u8] > { self . it . peek () . map (| s | s . as_bytes ()) } fn error (& self , kind : DeserializeErrorKind) -> DeserializeError { DeserializeError { field : Some (self . field . saturating_sub (1)) , kind } } fn infer_deserialize < 'de , V : Visitor < 'de > > (& mut self , visitor : V ,) -> Result < V :: Value , DeserializeError > { let x = self . next_field () ? ; if x == "true" { visitor . visit_bool (true) } else if x == "false" { visitor . visit_bool (false) } else if let Some (n) = try_positive_integer64 (x) { visitor . visit_u64 (n) } else if let Some (n) = try_negative_integer64 (x) { visitor . visit_i64 (n) } else if let Some (n) = try_positive_integer128 (x) { visitor . visit_u128 (n) } else if let Some (n) = try_negative_integer128 (x) { visitor . visit_i128 (n) } else if let Some (n) = try_float (x) { visitor . visit_f64 (n) } else { visitor . visit_str (x) } } }
+};
+}

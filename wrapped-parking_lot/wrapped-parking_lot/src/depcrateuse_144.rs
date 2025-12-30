@@ -4,6 +4,6 @@ macro_rules! Depcrateuse_144 {
 // Module: crate
 // Provides: {"use_144"}
 // Dependencies: {}
-pub use self :: once :: { Once , OnceState } ;
+pub use self :: raw_mutex :: RawMutex ;
 };
 }

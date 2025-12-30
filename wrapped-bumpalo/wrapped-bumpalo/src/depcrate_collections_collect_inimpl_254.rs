@@ -1,0 +1,9 @@
+// Generated macro for impl_254 (impl)
+macro_rules! Depcrate_collections_collect_inimpl_254 {
+() => {
+// Module: crate::collections::collect_in
+// Provides: {"impl_254"}
+// Dependencies: {}
+impl < T , E , V : FromIteratorIn < T > > FromIteratorIn < Result < T , E > > for Result < V , E > { type Alloc = V :: Alloc ; # [doc = " Takes each element in the `Iterator`: if it is an `Err`, no further"] # [doc = " elements are taken, and the `Err` is returned. Should no `Err` occur, a"] # [doc = " container with the values of each `Result` is returned."] # [doc = ""] # [doc = " Here is an example which increments every integer in a vector,"] # [doc = " checking for overflow:"] # [doc = ""] # [doc = " ```"] # [doc = " # use bumpalo::collections::{FromIteratorIn, CollectIn, Vec, String};"] # [doc = " # use bumpalo::Bump;"] # [doc = " #"] # [doc = " let bump = Bump::new();"] # [doc = ""] # [doc = " let v = vec![1, 2, u32::MAX];"] # [doc = " let res: Result<Vec<u32>, &'static str> = v.iter().take(2).map(|x: &u32|"] # [doc = "     x.checked_add(1).ok_or(\"Overflow!\")"] # [doc = " ).collect_in(&bump);"] # [doc = " assert_eq!(res, Ok(bumpalo::vec![in &bump; 2, 3]));"] # [doc = ""] # [doc = " let res: Result<Vec<u32>, &'static str> = v.iter().map(|x: &u32|"] # [doc = "     x.checked_add(1).ok_or(\"Overflow!\")"] # [doc = " ).collect_in(&bump);"] # [doc = " assert_eq!(res, Err(\"Overflow!\"));"] # [doc = " ```"] fn from_iter_in < I > (iter : I , alloc : Self :: Alloc) -> Self where I : IntoIterator < Item = Result < T , E > > , { let mut iter = iter . into_iter () ; let mut error = None ; let container = core :: iter :: from_fn (| | match iter . next () { Some (Ok (x)) => Some (x) , Some (Err (e)) => { error = Some (e) ; None } None => None , }) . collect_in (alloc) ; match error { Some (e) => Err (e) , None => Ok (container) , } } }
+};
+}

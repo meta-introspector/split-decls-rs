@@ -1,0 +1,9 @@
+// Generated macro for ptr (module)
+macro_rules! Depcrate_utilsptr {
+() => {
+// Module: crate::utils
+// Provides: {"ptr"}
+// Dependencies: {}
+# [allow (dead_code)] pub (crate) mod ptr { # [cfg (portable_atomic_no_strict_provenance)] use core :: mem ; # [cfg (not (portable_atomic_no_strict_provenance))] # [allow (unused_imports)] pub (crate) use core :: ptr :: { with_exposed_provenance , with_exposed_provenance_mut , without_provenance_mut , } ; # [cfg (portable_atomic_no_strict_provenance)] # [inline (always)] # [must_use] pub (crate) const fn without_provenance_mut < T > (addr : usize) -> * mut T { # [cfg (miri)] unsafe { mem :: transmute (addr) } # [cfg (not (miri))] { addr as * mut T } } # [cfg (portable_atomic_no_strict_provenance)] # [inline (always)] # [must_use] # [cfg_attr (miri , track_caller)] pub (crate) fn with_exposed_provenance < T > (addr : usize) -> * const T { addr as * const T } # [cfg (portable_atomic_no_strict_provenance)] # [inline (always)] # [must_use] # [cfg_attr (miri , track_caller)] pub (crate) fn with_exposed_provenance_mut < T > (addr : usize) -> * mut T { addr as * mut T } # [cfg (portable_atomic_no_strict_provenance)] pub (crate) trait PtrExt < T : ? Sized > : Copy { # [must_use] fn addr (self) -> usize ; # [must_use] fn with_addr (self , addr : usize) -> Self where T : Sized ; } # [cfg (portable_atomic_no_strict_provenance)] impl < T : ? Sized > PtrExt < T > for * mut T { # [inline (always)] # [must_use] fn addr (self) -> usize { unsafe { mem :: transmute (self as * mut ()) } } # [inline] # [must_use] fn with_addr (self , addr : usize) -> Self where T : Sized , { let self_addr = self . addr () as isize ; let dest_addr = addr as isize ; let offset = dest_addr . wrapping_sub (self_addr) ; (self as * mut u8) . wrapping_offset (offset) as * mut T } } }
+};
+}

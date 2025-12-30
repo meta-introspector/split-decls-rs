@@ -1,0 +1,9 @@
+// Generated macro for compute_budgets_for_params (function)
+macro_rules! Depcrate_itemscompute_budgets_for_params {
+() => {
+// Module: crate::items
+// Provides: {"compute_budgets_for_params"}
+// Dependencies: {}
+fn compute_budgets_for_params (context : & RewriteContext < '_ > , result : & str , indent : Indent , ret_str_len : usize , fn_brace_style : FnBraceStyle , force_vertical_layout : bool ,) -> (usize , usize , Indent) { debug ! ("compute_budgets_for_params {} {:?}, {}, {:?}" , result . len () , indent , ret_str_len , fn_brace_style ,) ; if ! result . contains ('\n') && ! force_vertical_layout { let overhead = if ret_str_len == 0 { 2 } else { 3 } ; let mut used_space = indent . width () + result . len () + ret_str_len + overhead ; match fn_brace_style { FnBraceStyle :: None => used_space += 1 , FnBraceStyle :: SameLine => used_space += 2 , FnBraceStyle :: NextLine => () , } let one_line_budget = context . budget (used_space) ; if one_line_budget > 0 { let (indent , multi_line_budget) = match context . config . indent_style () { IndentStyle :: Block => { let indent = indent . block_indent (context . config) ; (indent , context . budget (indent . width () + 1)) } IndentStyle :: Visual => { let indent = indent + result . len () + 1 ; let multi_line_overhead = match fn_brace_style { FnBraceStyle :: SameLine => 4 , _ => 2 , } + indent . width () ; (indent , context . budget (multi_line_overhead)) } } ; return (one_line_budget , multi_line_budget , indent) ; } } let new_indent = indent . block_indent (context . config) ; let used_space = match context . config . indent_style () { IndentStyle :: Block => new_indent . width () + 1 , IndentStyle :: Visual => new_indent . width () + if ret_str_len == 0 { 1 } else { 3 } , } ; (0 , context . budget (used_space) , new_indent) }
+};
+}

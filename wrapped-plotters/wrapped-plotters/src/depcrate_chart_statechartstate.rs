@@ -1,0 +1,9 @@
+// Generated macro for ChartState (struct)
+macro_rules! Depcrate_chart_stateChartState {
+() => {
+// Module: crate::chart::state
+// Provides: {"ChartState"}
+// Dependencies: {}
+# [doc = " A chart context state - This is the data that is needed to reconstruct the chart context"] # [doc = " without actually drawing the chart. This is useful when we want to do realtime rendering and"] # [doc = " want to incrementally update the chart."] # [doc = ""] # [doc = " For each frame, instead of updating the entire backend, we are able to keep the keep the figure"] # [doc = " component like axis, labels untouched and make updates only in the plotting drawing area."] # [doc = " This is very useful for incremental render."] # [doc = " ```rust"] # [doc = "   use plotters::prelude::*;"] # [doc = "    let mut buffer = vec![0u8;1024*768*3];"] # [doc = "    let area = BitMapBackend::with_buffer(&mut buffer[..], (1024, 768))"] # [doc = "        .into_drawing_area()"] # [doc = "        .split_evenly((1,2));"] # [doc = "    let chart = ChartBuilder::on(&area[0])"] # [doc = "        .caption(\"Incremental Example\", (\"sans-serif\", 20))"] # [doc = "        .set_all_label_area_size(30)"] # [doc = "        .build_cartesian_2d(0..10, 0..10)"] # [doc = "        .expect(\"Unable to build ChartContext\");"] # [doc = "    // Draw the first frame at this point"] # [doc = "    area[0].present().expect(\"Present\");"] # [doc = "    let state = chart.into_chart_state();"] # [doc = "    // Let's draw the second frame"] # [doc = "    let chart = state.restore(&area[0]);"] # [doc = "    chart.plotting_area().fill(&WHITE).unwrap(); // Clear the previously drawn graph"] # [doc = "    // At this point, you are able to draw next frame"] # [doc = "```"] # [derive (Clone)] pub struct ChartState < CT : CoordTranslate > { drawing_area_pos : (i32 , i32) , drawing_area_size : (u32 , u32) , coord : CT , }
+};
+}

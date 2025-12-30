@@ -1,0 +1,9 @@
+// Generated macro for impl_9392 (impl)
+macro_rules! Depcrate_semicolon_blockimpl_9392 {
+() => {
+// Module: crate::semicolon_block
+// Provides: {"impl_9392"}
+// Dependencies: {}
+impl SemicolonBlock { pub fn new (conf : & 'static Conf) -> Self { Self { semicolon_inside_block_ignore_singleline : conf . semicolon_inside_block_ignore_singleline , semicolon_outside_block_ignore_multiline : conf . semicolon_outside_block_ignore_multiline , } } fn semicolon_inside_block (& self , cx : & LateContext < '_ > , block : & Block < '_ > , tail : & Expr < '_ > , semi_span : Span) { let insert_span = tail . span . source_callsite () . shrink_to_hi () ; let remove_span = semi_span . with_lo (block . span . hi ()) ; if self . semicolon_inside_block_ignore_singleline && get_line (cx , remove_span) == get_line (cx , insert_span) { return ; } span_lint_and_then (cx , SEMICOLON_INSIDE_BLOCK , semi_span , "consider moving the `;` inside the block for consistent formatting" , | diag | { diag . multipart_suggestion ("put the `;` here" , vec ! [(remove_span , String :: new ()) , (insert_span , ";" . to_owned ())] , Applicability :: MachineApplicable ,) ; } ,) ; } fn semicolon_outside_block (& self , cx : & LateContext < '_ > , block : & Block < '_ > , tail_stmt_expr : & Expr < '_ >) { let insert_span = block . span . shrink_to_hi () ; let Some (remove_span) = cx . sess () . source_map () . mac_call_stmt_semi_span (tail_stmt_expr . span . source_callsite ()) else { return ; } ; if self . semicolon_outside_block_ignore_multiline && get_line (cx , remove_span) != get_line (cx , insert_span) { return ; } span_lint_and_then (cx , SEMICOLON_OUTSIDE_BLOCK , block . span , "consider moving the `;` outside the block for consistent formatting" , | diag | { diag . multipart_suggestion ("put the `;` here" , vec ! [(remove_span , String :: new ()) , (insert_span , ";" . to_owned ())] , Applicability :: MachineApplicable ,) ; } ,) ; } }
+};
+}

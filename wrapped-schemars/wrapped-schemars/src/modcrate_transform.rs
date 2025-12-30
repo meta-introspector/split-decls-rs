@@ -1,0 +1,40 @@
+// Generated module macro for crate::transform
+macro_rules! Modcrate_transform {
+() => {
+        Depcrate_transformuse_383!();
+        Depcrate_transformuse_384!();
+        Depcrate_transformuse_385!();
+        Depcrate_transformuse_386!();
+        Depcrate_transformuse_387!();
+        Depcrate_transformTransform!();
+        Depcrate_transformimpl_389!();
+        Depcrate_transformtransform_subschemas!();
+        Depcrate_transformtransform_immediate_subschemas!();
+        Depcrate_transformRecursiveTransform!();
+        Depcrate_transformimpl_393!();
+        Depcrate_transformReplaceBoolSchemas!();
+        Depcrate_transformimpl_395!();
+        Depcrate_transformRemoveRefSiblings!();
+        Depcrate_transformimpl_397!();
+        Depcrate_transformSetSingleExample!();
+        Depcrate_transformimpl_399!();
+        Depcrate_transformReplaceConstValue!();
+        Depcrate_transformimpl_401!();
+        Depcrate_transformReplacePrefixItems!();
+        Depcrate_transformimpl_403!();
+        Depcrate_transformAddNullable!();
+        Depcrate_transformimpl_405!();
+        Depcrate_transformimpl_406!();
+        Depcrate_transformReplaceUnevaluatedProperties!();
+        Depcrate_transformimpl_408!();
+        Depcrate_transformGatherPropertyNames!();
+        Depcrate_transformimpl_410!();
+        Depcrate_transformRestrictFormats!();
+        Depcrate_transformimpl_412!();
+        Depcrate_transformimpl_413!();
+        Depcrate_transformDEFINED_FORMATS!();
+        Depcrate_transformRestrictFormatsImpl!();
+        Depcrate_transformimpl_416!();
+        Depcrate_transformtests!();
+    };
+}

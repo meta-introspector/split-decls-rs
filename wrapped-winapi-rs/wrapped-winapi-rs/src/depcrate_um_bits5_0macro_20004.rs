@@ -1,0 +1,9 @@
+// Generated macro for macro_20004 (macro)
+macro_rules! Depcrate_um_bits5_0macro_20004 {
+() => {
+// Module: crate::um::bits5_0
+// Provides: {"macro_20004"}
+// Dependencies: {}
+ENUM ! { enum BITS_JOB_TRANSFER_POLICY { BITS_JOB_TRANSFER_POLICY_ALWAYS = 0x800000ff , BITS_JOB_TRANSFER_POLICY_NOT_ROAMING = 0x8000007f , BITS_JOB_TRANSFER_POLICY_NO_SURCHARGE = 0x8000006f , BITS_JOB_TRANSFER_POLICY_STANDARD = 0x80000067 , BITS_JOB_TRANSFER_POLICY_UNRESTRICTED = 0x80000021 , } }
+};
+}

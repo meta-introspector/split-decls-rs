@@ -1,0 +1,9 @@
+// Generated macro for SV_LOCKVIOLATIONRETRIES_INFOLOEVEL (const)
+macro_rules! Depcrate_um_lmserverSV_LOCKVIOLATIONRETRIES_INFOLOEVEL {
+() => {
+// Module: crate::um::lmserver
+// Provides: {"SV_LOCKVIOLATIONRETRIES_INFOLOEVEL"}
+// Dependencies: {}
+pub const SV_LOCKVIOLATIONRETRIES_INFOLOEVEL : DWORD = PARMNUM_BASE_INFOLEVEL + SV_LOCKVIOLATIONRETRIES_PARMNUM ;
+};
+}

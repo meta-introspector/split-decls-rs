@@ -1,0 +1,9 @@
+// Generated macro for PFILE_ID_GLOBAL_TX_DIR_INFORMATION (type)
+macro_rules! Depcrate_ntioapiPFILE_ID_GLOBAL_TX_DIR_INFORMATION {
+() => {
+// Module: crate::ntioapi
+// Provides: {"PFILE_ID_GLOBAL_TX_DIR_INFORMATION"}
+// Dependencies: {}
+pub type PFILE_ID_GLOBAL_TX_DIR_INFORMATION = * mut FILE_ID_GLOBAL_TX_DIR_INFORMATION ;
+};
+}

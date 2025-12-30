@@ -1,0 +1,50 @@
+// Generated module macro for crate::km::d3dkmthk
+macro_rules! Modcrate_km_d3dkmthk {
+() => {
+        Depcrate_km_d3dkmthkuse_37!();
+        Depcrate_km_d3dkmthkuse_38!();
+        Depcrate_km_d3dkmthkuse_39!();
+        Depcrate_km_d3dkmthkuse_40!();
+        Depcrate_km_d3dkmthkuse_41!();
+        Depcrate_km_d3dkmthkmacro_42!();
+        Depcrate_km_d3dkmthkmacro_43!();
+        Depcrate_km_d3dkmthkmacro_44!();
+        Depcrate_km_d3dkmthkmacro_45!();
+        Depcrate_km_d3dkmthkmacro_46!();
+        Depcrate_km_d3dkmthkmacro_47!();
+        Depcrate_km_d3dkmthkmacro_48!();
+        Depcrate_km_d3dkmthkmacro_49!();
+        Depcrate_km_d3dkmthkmacro_50!();
+        Depcrate_km_d3dkmthkmacro_51!();
+        Depcrate_km_d3dkmthkmacro_52!();
+        Depcrate_km_d3dkmthkmacro_53!();
+        Depcrate_km_d3dkmthkmacro_54!();
+        Depcrate_km_d3dkmthkmacro_55!();
+        Depcrate_km_d3dkmthkmacro_56!();
+        Depcrate_km_d3dkmthkmacro_57!();
+        Depcrate_km_d3dkmthkmacro_58!();
+        Depcrate_km_d3dkmthkmacro_59!();
+        Depcrate_km_d3dkmthkmacro_60!();
+        Depcrate_km_d3dkmthkmacro_61!();
+        Depcrate_km_d3dkmthkmacro_62!();
+        Depcrate_km_d3dkmthkmacro_63!();
+        Depcrate_km_d3dkmthkmacro_64!();
+        Depcrate_km_d3dkmthkmacro_65!();
+        Depcrate_km_d3dkmthkmacro_66!();
+        Depcrate_km_d3dkmthkmacro_67!();
+        Depcrate_km_d3dkmthkDXGK_MAX_GPUVERSION_NAME_LENGTH!();
+        Depcrate_km_d3dkmthkmacro_69!();
+        Depcrate_km_d3dkmthkmacro_70!();
+        Depcrate_km_d3dkmthkmacro_71!();
+        Depcrate_km_d3dkmthkmacro_72!();
+        Depcrate_km_d3dkmthkmacro_73!();
+        Depcrate_km_d3dkmthkmacro_74!();
+        Depcrate_km_d3dkmthkMAX_ENUM_ADAPTERS!();
+        Depcrate_km_d3dkmthkmacro_76!();
+        Depcrate_km_d3dkmthkmacro_77!();
+        Depcrate_km_d3dkmthkmacro_78!();
+        Depcrate_km_d3dkmthkmacro_79!();
+        Depcrate_km_d3dkmthkmacro_80!();
+        Depcrate_km_d3dkmthkmacro_81!();
+    };
+}

@@ -1,0 +1,9 @@
+// Generated macro for impl_25 (impl)
+macro_rules! Depcrate_identimpl_25 {
+() => {
+// Module: crate::ident
+// Provides: {"impl_25"}
+// Dependencies: {}
+impl < 'a > Ident < 'a > { # [doc = " Maximum length of an [`Ident`] - 32 ASCII characters (i.e. 32-bytes)."] # [doc = ""] # [doc = " This value corresponds to the maximum size of a function symbolic names"] # [doc = " and parameter names according to the PHC string format."] # [doc = " Maximum length of an [`Ident`] - 32 ASCII characters (i.e. 32-bytes)."] # [doc = ""] # [doc = " This value corresponds to the maximum size of a function symbolic names"] # [doc = " and parameter names according to the PHC string format."] const MAX_LENGTH : usize = 32 ; # [doc = " Parse an [`Ident`] from a string."] # [doc = ""] # [doc = " String must conform to the constraints given in the type-level"] # [doc = " documentation."] pub const fn new (s : & 'a str) -> Result < Self > { let input = s . as_bytes () ; match input . len () { 1 ..= Self :: MAX_LENGTH => { let mut i = 0 ; while i < input . len () { if ! matches ! (input [i] , b'a' ..= b'z' | b'0' ..= b'9' | b'-') { return Err (Error :: ParamNameInvalid) ; } i += 1 ; } Ok (Self (s)) } _ => Err (Error :: ParamNameInvalid) , } } # [doc = " Parse an [`Ident`] from a string, panicking on parse errors."] # [doc = ""] # [doc = " This function exists as a workaround for `unwrap` not yet being"] # [doc = " stable in `const fn` contexts, and is intended to allow the result to"] # [doc = " be bound to a constant value."] pub const fn new_unwrap (s : & 'a str) -> Self { assert ! (! s . is_empty () , "PHC ident string can't be empty") ; assert ! (s . len () <= Self :: MAX_LENGTH , "PHC ident string too long") ; match Self :: new (s) { Ok (ident) => ident , Err (_) => panic ! ("invalid PHC string format identifier") , } } # [doc = " Borrow this ident as a `str`"] pub fn as_str (& self) -> & 'a str { self . 0 } }
+};
+}

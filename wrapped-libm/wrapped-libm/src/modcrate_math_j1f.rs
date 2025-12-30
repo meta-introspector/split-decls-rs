@@ -1,0 +1,41 @@
+// Generated module macro for crate::math::j1f
+macro_rules! Modcrate_math_j1f {
+() => {
+        Depcrate_math_j1fuse_778!();
+        Depcrate_math_j1fINVSQRTPI!();
+        Depcrate_math_j1fTPI!();
+        Depcrate_math_j1fcommon!();
+        Depcrate_math_j1fR00!();
+        Depcrate_math_j1fR01!();
+        Depcrate_math_j1fR02!();
+        Depcrate_math_j1fR03!();
+        Depcrate_math_j1fS01!();
+        Depcrate_math_j1fS02!();
+        Depcrate_math_j1fS03!();
+        Depcrate_math_j1fS04!();
+        Depcrate_math_j1fS05!();
+        Depcrate_math_j1fj1f!();
+        Depcrate_math_j1fU0!();
+        Depcrate_math_j1fV0!();
+        Depcrate_math_j1fy1f!();
+        Depcrate_math_j1fPR8!();
+        Depcrate_math_j1fPS8!();
+        Depcrate_math_j1fPR5!();
+        Depcrate_math_j1fPS5!();
+        Depcrate_math_j1fPR3!();
+        Depcrate_math_j1fPS3!();
+        Depcrate_math_j1fPR2!();
+        Depcrate_math_j1fPS2!();
+        Depcrate_math_j1fponef!();
+        Depcrate_math_j1fQR8!();
+        Depcrate_math_j1fQS8!();
+        Depcrate_math_j1fQR5!();
+        Depcrate_math_j1fQS5!();
+        Depcrate_math_j1fQR3!();
+        Depcrate_math_j1fQS3!();
+        Depcrate_math_j1fQR2!();
+        Depcrate_math_j1fQS2!();
+        Depcrate_math_j1fqonef!();
+        Depcrate_math_j1ftests!();
+    };
+}

@@ -1,0 +1,48 @@
+// Generated module macro for crate::compiler::nvcc
+macro_rules! Modcrate_compiler_nvcc {
+() => {
+        Depcrate_compiler_nvccuse_719!();
+        Depcrate_compiler_nvccuse_720!();
+        Depcrate_compiler_nvccuse_721!();
+        Depcrate_compiler_nvccuse_722!();
+        Depcrate_compiler_nvccuse_723!();
+        Depcrate_compiler_nvccuse_724!();
+        Depcrate_compiler_nvccuse_725!();
+        Depcrate_compiler_nvccuse_726!();
+        Depcrate_compiler_nvccuse_727!();
+        Depcrate_compiler_nvccuse_728!();
+        Depcrate_compiler_nvccuse_729!();
+        Depcrate_compiler_nvccuse_730!();
+        Depcrate_compiler_nvccuse_731!();
+        Depcrate_compiler_nvccuse_732!();
+        Depcrate_compiler_nvccuse_733!();
+        Depcrate_compiler_nvccuse_734!();
+        Depcrate_compiler_nvccuse_735!();
+        Depcrate_compiler_nvccuse_736!();
+        Depcrate_compiler_nvccuse_737!();
+        Depcrate_compiler_nvccuse_738!();
+        Depcrate_compiler_nvccuse_739!();
+        Depcrate_compiler_nvccuse_740!();
+        Depcrate_compiler_nvccuse_741!();
+        Depcrate_compiler_nvccNvccHostCompiler!();
+        Depcrate_compiler_nvccNvcc!();
+        Depcrate_compiler_nvccimpl_744!();
+        Depcrate_compiler_nvccgenerate_compile_commands!();
+        Depcrate_compiler_nvccNvccCompileCommand!();
+        Depcrate_compiler_nvccimpl_747!();
+        Depcrate_compiler_nvccNvccGeneratedSubcommand!();
+        Depcrate_compiler_nvccgroup_nvcc_subcommands_by_compilation_stage!();
+        Depcrate_compiler_nvccselect_nvcc_subcommands!();
+        Depcrate_compiler_nvccselect_valid_dryrun_lines!();
+        Depcrate_compiler_nvccfold_env_vars_or_split_into_exe_and_args!();
+        Depcrate_compiler_nvccremap_generated_filenames!();
+        Depcrate_compiler_nvccrun_nvcc_subcommands_group!();
+        Depcrate_compiler_nvccaggregate_output!();
+        Depcrate_compiler_nvccerror_to_output!();
+        Depcrate_compiler_nvcccompile_result_to_output!();
+        Depcrate_compiler_nvccstatus_to_code!();
+        Depcrate_compiler_nvccstatus_to_code!();
+        Depcrate_compiler_nvccmacro_760!();
+        Depcrate_compiler_nvcctest!();
+    };
+}

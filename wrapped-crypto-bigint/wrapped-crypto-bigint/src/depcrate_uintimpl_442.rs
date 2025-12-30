@@ -4,6 +4,6 @@ macro_rules! Depcrate_uintimpl_442 {
 // Module: crate::uint
 // Provides: {"impl_442"}
 // Dependencies: {}
-impl < const LIMBS : usize > Bounded for Uint < LIMBS > { const BITS : u32 = Self :: BITS ; const BYTES : usize = Self :: BYTES ; }
+impl < const LIMBS : usize > ConstOne for Uint < LIMBS > { const ONE : Self = Self :: ONE ; }
 };
 }

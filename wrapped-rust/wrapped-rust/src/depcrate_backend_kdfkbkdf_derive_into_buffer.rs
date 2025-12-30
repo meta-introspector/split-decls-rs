@@ -1,0 +1,9 @@
+// Generated macro for kbkdf_derive_into_buffer (function)
+macro_rules! Depcrate_backend_kdfkbkdf_derive_into_buffer {
+() => {
+// Module: crate::backend::kdf
+// Provides: {"kbkdf_derive_into_buffer"}
+// Dependencies: {}
+fn kbkdf_derive_into_buffer < F > (py : pyo3 :: Python < '_ > , length : usize , prf_output_size : usize , params : & KbkdfParams , output : & mut [u8] , mut prf_fn : F ,) -> CryptographyResult < usize > where F : FnMut (& [u8]) -> CryptographyResult < cryptography_openssl :: hmac :: DigestBytes > , { if output . len () != length { return Err (CryptographyError :: from (pyo3 :: exceptions :: PyValueError :: new_err (format ! ("buffer must be {} bytes" , length)) ,)) ; } let fixed = generate_fixed_input (py , length , params) ? ; let (data_before_ctr , data_after_ctr) = match params . location { CounterLocation :: BeforeFixed => (& b"" [..] , & fixed [..]) , CounterLocation :: AfterFixed => (& fixed [..] , & b"" [..]) , CounterLocation :: MiddleFixed (break_location) => { if break_location > fixed . len () { return Err (CryptographyError :: from (pyo3 :: exceptions :: PyValueError :: new_err ("break_location offset > len(fixed)") ,)) ; } (& fixed [.. break_location] , & fixed [break_location ..]) } } ; let mut pos = 0usize ; let rounds = length . div_ceil (prf_output_size) ; for i in 1 ..= rounds { let py_i = pyo3 :: types :: PyInt :: new (py , i) ; let counter = py_uint_to_be_bytes_with_length (py , py_i , params . rlen) ? ; let mut input_data = Vec :: new () ; input_data . extend_from_slice (data_before_ctr) ; input_data . extend_from_slice (counter . as_ref ()) ; input_data . extend_from_slice (data_after_ctr) ; let result = prf_fn (& input_data) ? ; let copy_len = (length - pos) . min (prf_output_size) ; output [pos .. pos + copy_len] . copy_from_slice (& result [.. copy_len]) ; pos += copy_len ; } Ok (length) }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for use_1609 (pub_use)
+macro_rules! Depcrate_generateduse_1609 {
+() => {
+// Module: crate::generated
+// Provides: {"use_1609"}
+// Dependencies: {}
+# [cfg (feature = "UIMenu")] pub use self :: __UIMenu :: UIMenuStandardEdit ;
+};
+}

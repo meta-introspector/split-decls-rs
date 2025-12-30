@@ -1,0 +1,9 @@
+// Generated macro for FluentResource (struct)
+macro_rules! Depcrate_resourceFluentResource {
+() => {
+// Module: crate::resource
+// Provides: {"FluentResource"}
+// Dependencies: {}
+# [doc = " A resource containing a list of localization messages."] # [doc = ""] # [doc = " [`FluentResource`] wraps an [`Abstract Syntax Tree`](../fluent_syntax/ast/index.html) produced by the"] # [doc = " [`parser`](../fluent_syntax/parser/index.html) and provides an access to a list"] # [doc = " of its entries."] # [doc = ""] # [doc = " A good mental model for a resource is a single FTL file, but in the future"] # [doc = " there's nothing preventing a resource from being stored in a data base,"] # [doc = " pre-parsed format or in some other structured form."] # [doc = ""] # [doc = " # Example"] # [doc = ""] # [doc = " ```"] # [doc = " use fluent_bundle::FluentResource;"] # [doc = ""] # [doc = " let source = r#\""] # [doc = ""] # [doc = " hello-world = Hello World!"] # [doc = ""] # [doc = " \"#;"] # [doc = ""] # [doc = " let resource = FluentResource::try_new(source.to_string())"] # [doc = "     .expect(\"Errors encountered while parsing a resource.\");"] # [doc = ""] # [doc = " assert_eq!(resource.entries().count(), 1);"] # [doc = " ```"] # [doc = ""] # [doc = " # Ownership"] # [doc = ""] # [doc = " A resource owns the source string and the AST contains references"] # [doc = " to the slices of the source."] # [derive (Debug)] pub struct FluentResource (InnerFluentResource) ;
+};
+}

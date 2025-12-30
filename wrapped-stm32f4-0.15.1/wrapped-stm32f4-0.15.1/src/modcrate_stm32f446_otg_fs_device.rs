@@ -1,0 +1,54 @@
+// Generated module macro for crate::stm32f446::otg_fs_device
+macro_rules! Modcrate_stm32f446_otg_fs_device {
+() => {
+        Depcrate_stm32f446_otg_fs_deviceRegisterBlock!();
+        Depcrate_stm32f446_otg_fs_deviceDCFG!();
+        Depcrate_stm32f446_otg_fs_devicedcfg!();
+        Depcrate_stm32f446_otg_fs_deviceDCTL!();
+        Depcrate_stm32f446_otg_fs_devicedctl!();
+        Depcrate_stm32f446_otg_fs_deviceDSTS!();
+        Depcrate_stm32f446_otg_fs_devicedsts!();
+        Depcrate_stm32f446_otg_fs_deviceDIEPMSK!();
+        Depcrate_stm32f446_otg_fs_devicediepmsk!();
+        Depcrate_stm32f446_otg_fs_deviceDOEPMSK!();
+        Depcrate_stm32f446_otg_fs_devicedoepmsk!();
+        Depcrate_stm32f446_otg_fs_deviceDAINT!();
+        Depcrate_stm32f446_otg_fs_devicedaint!();
+        Depcrate_stm32f446_otg_fs_deviceDAINTMSK!();
+        Depcrate_stm32f446_otg_fs_devicedaintmsk!();
+        Depcrate_stm32f446_otg_fs_deviceDVBUSDIS!();
+        Depcrate_stm32f446_otg_fs_devicedvbusdis!();
+        Depcrate_stm32f446_otg_fs_deviceDVBUSPULSE!();
+        Depcrate_stm32f446_otg_fs_devicedvbuspulse!();
+        Depcrate_stm32f446_otg_fs_deviceDIEPEMPMSK!();
+        Depcrate_stm32f446_otg_fs_devicediepempmsk!();
+        Depcrate_stm32f446_otg_fs_deviceDIEPCTL0!();
+        Depcrate_stm32f446_otg_fs_devicediepctl0!();
+        Depcrate_stm32f446_otg_fs_deviceDIEPCTL!();
+        Depcrate_stm32f446_otg_fs_devicediepctl!();
+        Depcrate_stm32f446_otg_fs_deviceDOEPCTL0!();
+        Depcrate_stm32f446_otg_fs_devicedoepctl0!();
+        Depcrate_stm32f446_otg_fs_deviceDOEPCTL!();
+        Depcrate_stm32f446_otg_fs_devicedoepctl!();
+        Depcrate_stm32f446_otg_fs_deviceDIEPINT0!();
+        Depcrate_stm32f446_otg_fs_devicediepint0!();
+        Depcrate_stm32f446_otg_fs_deviceDIEPINT!();
+        Depcrate_stm32f446_otg_fs_devicediepint!();
+        Depcrate_stm32f446_otg_fs_deviceDOEPINT0!();
+        Depcrate_stm32f446_otg_fs_devicedoepint0!();
+        Depcrate_stm32f446_otg_fs_deviceDOEPINT!();
+        Depcrate_stm32f446_otg_fs_devicedoepint!();
+        Depcrate_stm32f446_otg_fs_deviceDIEPTSIZ0!();
+        Depcrate_stm32f446_otg_fs_devicedieptsiz0!();
+        Depcrate_stm32f446_otg_fs_deviceDOEPTSIZ0!();
+        Depcrate_stm32f446_otg_fs_devicedoeptsiz0!();
+        Depcrate_stm32f446_otg_fs_deviceDIEPTSIZ!();
+        Depcrate_stm32f446_otg_fs_devicedieptsiz!();
+        Depcrate_stm32f446_otg_fs_deviceDTXFSTS0!();
+        Depcrate_stm32f446_otg_fs_devicedtxfsts0!();
+        Depcrate_stm32f446_otg_fs_deviceDTXFSTS!();
+        Depcrate_stm32f446_otg_fs_devicedtxfsts!();
+        Depcrate_stm32f446_otg_fs_deviceDOEPTSIZ!();
+        Depcrate_stm32f446_otg_fs_devicedoeptsiz!();
+    };
+}

@@ -1,0 +1,9 @@
+// Generated macro for macro_146 (macro)
+macro_rules! Depcratemacro_146 {
+() => {
+// Module: crate
+// Provides: {"macro_146"}
+// Dependencies: {}
+default ! (CXIdxObjCContainerDeclInfo) ;
+};
+}

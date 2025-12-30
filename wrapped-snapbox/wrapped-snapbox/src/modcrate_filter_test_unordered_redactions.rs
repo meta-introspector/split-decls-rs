@@ -1,0 +1,42 @@
+// Generated module macro for crate::filter::test_unordered_redactions
+macro_rules! Modcrate_filter_test_unordered_redactions {
+() => {
+        Depcrate_filter_test_unordered_redactionsuse_335!();
+        Depcrate_filter_test_unordered_redactionsuse_336!();
+        Depcrate_filter_test_unordered_redactionsuse_337!();
+        Depcrate_filter_test_unordered_redactionsuse_338!();
+        Depcrate_filter_test_unordered_redactionsstr_normalize_empty!();
+        Depcrate_filter_test_unordered_redactionsstr_normalize_same_order!();
+        Depcrate_filter_test_unordered_redactionsstr_normalize_reverse_order!();
+        Depcrate_filter_test_unordered_redactionsstr_normalize_actual_missing!();
+        Depcrate_filter_test_unordered_redactionsstr_normalize_expected_missing!();
+        Depcrate_filter_test_unordered_redactionsstr_normalize_actual_duplicated!();
+        Depcrate_filter_test_unordered_redactionsstr_normalize_expected_duplicated!();
+        Depcrate_filter_test_unordered_redactionsstr_normalize_elide_delimited_with_sub!();
+        Depcrate_filter_test_unordered_redactionsstr_normalize_leading_elide!();
+        Depcrate_filter_test_unordered_redactionsstr_normalize_trailing_elide!();
+        Depcrate_filter_test_unordered_redactionsstr_normalize_middle_elide!();
+        Depcrate_filter_test_unordered_redactionsstr_normalize_post_elide_diverge!();
+        Depcrate_filter_test_unordered_redactionsstr_normalize_post_diverge_elide!();
+        Depcrate_filter_test_unordered_redactionsstr_normalize_inline_elide!();
+        Depcrate_filter_test_unordered_redactionsstr_normalize_user_literal!();
+        Depcrate_filter_test_unordered_redactionsstr_normalize_user_path!();
+        Depcrate_filter_test_unordered_redactionsstr_normalize_user_overlapping_path!();
+        Depcrate_filter_test_unordered_redactionsstr_normalize_user_disabled!();
+        Depcrate_filter_test_unordered_redactionsjson_normalize_empty!();
+        Depcrate_filter_test_unordered_redactionsjson_normalize_same_order!();
+        Depcrate_filter_test_unordered_redactionsjson_normalize_reverse_order!();
+        Depcrate_filter_test_unordered_redactionsjson_normalize_actual_missing!();
+        Depcrate_filter_test_unordered_redactionsjson_normalize_expected_missing!();
+        Depcrate_filter_test_unordered_redactionsjson_normalize_actual_duplicated!();
+        Depcrate_filter_test_unordered_redactionsjson_normalize_expected_duplicated!();
+        Depcrate_filter_test_unordered_redactionsjson_normalize_glob_for_string!();
+        Depcrate_filter_test_unordered_redactionsjson_normalize_glob_for_array!();
+        Depcrate_filter_test_unordered_redactionsjson_normalize_glob_for_obj!();
+        Depcrate_filter_test_unordered_redactionsjson_normalize_glob_array_start!();
+        Depcrate_filter_test_unordered_redactionsjson_normalize_glob_for_array_mismatch!();
+        Depcrate_filter_test_unordered_redactionsjson_normalize_obj_key!();
+        Depcrate_filter_test_unordered_redactionsjson_normalize_with_missing_obj_key!();
+        Depcrate_filter_test_unordered_redactionsjson_normalize_glob_obj_key!();
+    };
+}

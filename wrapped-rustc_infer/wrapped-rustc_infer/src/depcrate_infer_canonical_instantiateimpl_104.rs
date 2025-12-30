@@ -1,0 +1,9 @@
+// Generated macro for impl_104 (impl)
+macro_rules! Depcrate_infer_canonical_instantiateimpl_104 {
+() => {
+// Module: crate::infer::canonical::instantiate
+// Provides: {"impl_104"}
+// Dependencies: {}
+# [doc = " FIXME(-Znext-solver): This or public because it is shared with the"] # [doc = " new trait solver implementation. We should deduplicate canonicalization."] # [extension (pub trait CanonicalExt <'tcx , V >)] impl < 'tcx , V > Canonical < 'tcx , V > { # [doc = " Instantiate the wrapped value, replacing each canonical value"] # [doc = " with the value given in `var_values`."] fn instantiate (& self , tcx : TyCtxt < 'tcx > , var_values : & CanonicalVarValues < 'tcx >) -> V where V : TypeFoldable < TyCtxt < 'tcx > > , { self . instantiate_projected (tcx , var_values , | value | value . clone ()) } # [doc = " Allows one to apply a instantiation to some subset of"] # [doc = " `self.value`. Invoke `projection_fn` with `self.value` to get"] # [doc = " a value V that is expressed in terms of the same canonical"] # [doc = " variables bound in `self` (usually this extracts from subset"] # [doc = " of `self`). Apply the instantiation `var_values` to this value"] # [doc = " V, replacing each of the canonical variables."] fn instantiate_projected < T > (& self , tcx : TyCtxt < 'tcx > , var_values : & CanonicalVarValues < 'tcx > , projection_fn : impl FnOnce (& V) -> T ,) -> T where T : TypeFoldable < TyCtxt < 'tcx > > , { assert_eq ! (self . variables . len () , var_values . len ()) ; let value = projection_fn (& self . value) ; instantiate_value (tcx , var_values , value) } }
+};
+}

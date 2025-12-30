@@ -1,0 +1,40 @@
+// Generated module macro for crate::style
+macro_rules! Modcrate_style {
+() => {
+        Depcrate_styleuse_285!();
+        Depcrate_styleuse_286!();
+        Depcrate_styleuse_287!();
+        Depcrate_styleuse_288!();
+        Depcrate_styleuse_289!();
+        Depcrate_styleuse_290!();
+        Depcrate_styletests!();
+        Depcrate_styleERROR_CODE_COLS!();
+        Depcrate_styleCOLS!();
+        Depcrate_styleGOML_COLS!();
+        Depcrate_styleLINES!();
+        Depcrate_styleUNEXPLAINED_IGNORE_DOCTEST_INFO!();
+        Depcrate_styleLLVM_UNREACHABLE_INFO!();
+        Depcrate_styleDOUBLE_SPACE_AFTER_DOT!();
+        Depcrate_styleANNOTATIONS_TO_IGNORE!();
+        Depcrate_styleLINELENGTH_CHECK!();
+        Depcrate_styleCONFIGURABLE_CHECKS!();
+        Depcrate_stylegenerate_problems!();
+        Depcrate_styleROOT_PROBLEMATIC_CONSTS!();
+        Depcrate_styleLETTER_DIGIT!();
+        Depcrate_stylegenerate_problematic_strings!();
+        Depcrate_stylePROBLEMATIC_CONSTS_STRINGS!();
+        Depcrate_stylecontains_problematic_const!();
+        Depcrate_styleINTERNAL_COMPILER_DOCS_LINE!();
+        Depcrate_styleLIUState!();
+        Depcrate_styleline_is_url!();
+        Depcrate_styleshould_ignore!();
+        Depcrate_stylelong_line_is_ok!();
+        Depcrate_styleDirective!();
+        Depcrate_stylecontains_ignore_directives!();
+        Depcrate_stylesuppressible_tidy_err!();
+        Depcrate_styleis_in!();
+        Depcrate_styleskip_markdown_path!();
+        Depcrate_styleis_unexplained_ignore!();
+        Depcrate_stylecheck!();
+    };
+}

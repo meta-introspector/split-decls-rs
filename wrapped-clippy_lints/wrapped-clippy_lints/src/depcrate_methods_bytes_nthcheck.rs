@@ -1,0 +1,9 @@
+// Generated macro for check (function)
+macro_rules! Depcrate_methods_bytes_nthcheck {
+() => {
+// Module: crate::methods::bytes_nth
+// Provides: {"check"}
+// Dependencies: {}
+pub (super) fn check < 'tcx > (cx : & LateContext < 'tcx > , expr : & Expr < '_ > , recv : & 'tcx Expr < 'tcx > , n_arg : & 'tcx Expr < 'tcx >) { let ty = cx . typeck_results () . expr_ty (recv) . peel_refs () ; let caller_type = if ty . is_str () { "str" } else if ty . is_lang_item (cx , LangItem :: String) { "String" } else { return ; } ; let mut applicability = Applicability :: MachineApplicable ; let receiver = snippet_with_applicability (cx , recv . span , ".." , & mut applicability) ; let n = snippet_with_applicability (cx , n_arg . span , ".." , & mut applicability) ; if let Some (parent) = clippy_utils :: get_parent_expr (cx , expr) && let Some ((name , _ , _ , _ , _)) = method_call (parent) && name == sym :: unwrap { span_lint_and_sugg (cx , BYTES_NTH , parent . span , format ! ("called `.bytes().nth().unwrap()` on a `{caller_type}`") , "try" , format ! ("{receiver}.as_bytes()[{n}]" ,) , applicability ,) ; } else { span_lint_and_sugg (cx , BYTES_NTH , expr . span , format ! ("called `.bytes().nth()` on a `{caller_type}`") , "try" , format ! ("{receiver}.as_bytes().get({n}).copied()") , applicability ,) ; } }
+};
+}

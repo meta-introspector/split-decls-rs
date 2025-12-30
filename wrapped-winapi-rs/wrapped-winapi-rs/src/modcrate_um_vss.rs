@@ -1,0 +1,54 @@
+// Generated module macro for crate::um::vss
+macro_rules! Modcrate_um_vss {
+() => {
+        Depcrate_um_vssuse_39394!();
+        Depcrate_um_vssuse_39395!();
+        Depcrate_um_vssuse_39396!();
+        Depcrate_um_vssuse_39397!();
+        Depcrate_um_vssmacro_39398!();
+        Depcrate_um_vssPVSS_OBJECT_TYPE!();
+        Depcrate_um_vssmacro_39400!();
+        Depcrate_um_vssPVSS_SNAPSHOT_STATE!();
+        Depcrate_um_vssmacro_39402!();
+        Depcrate_um_vssPVSS_VOLUME_SNAPSHOT_ATTRIBUTES!();
+        Depcrate_um_vssmacro_39404!();
+        Depcrate_um_vssPVSS_SNAPSHOT_CONTEXT!();
+        Depcrate_um_vssmacro_39406!();
+        Depcrate_um_vssPVSS_PROVIDER_CAPABILITIES!();
+        Depcrate_um_vssmacro_39408!();
+        Depcrate_um_vssPVSS_HARDWARE_OPTIONS!();
+        Depcrate_um_vssmacro_39410!();
+        Depcrate_um_vssPVSS_RECOVERY_OPTIONS!();
+        Depcrate_um_vssmacro_39412!();
+        Depcrate_um_vssPVSS_WRITER_STATE!();
+        Depcrate_um_vssmacro_39414!();
+        Depcrate_um_vssPVSS_BACKUP_TYPE!();
+        Depcrate_um_vssmacro_39416!();
+        Depcrate_um_vssPVSS_RESTORE_TYPE!();
+        Depcrate_um_vssmacro_39418!();
+        Depcrate_um_vssPVSS_ROLLFORWARD_TYPE!();
+        Depcrate_um_vssmacro_39420!();
+        Depcrate_um_vssPVSS_PROVIDER_TYPE!();
+        Depcrate_um_vssmacro_39422!();
+        Depcrate_um_vssPVSS_APPLICATION_LEVEL!();
+        Depcrate_um_vssmacro_39424!();
+        Depcrate_um_vssmacro_39425!();
+        Depcrate_um_vssPVSS_SNAPSHOT_PROPERTY_ID!();
+        Depcrate_um_vssmacro_39427!();
+        Depcrate_um_vssPVSS_FILE_SPEC_BACKUP_TYPE!();
+        Depcrate_um_vssmacro_39429!();
+        Depcrate_um_vssPVSS_BACKUP_SCHEMA!();
+        Depcrate_um_vssVSS_ID!();
+        Depcrate_um_vssVSS_PWSZ!();
+        Depcrate_um_vssVSS_TIMESTAMP!();
+        Depcrate_um_vssmacro_39434!();
+        Depcrate_um_vssPVSS_SNAPSHOT_PROP!();
+        Depcrate_um_vssmacro_39436!();
+        Depcrate_um_vssPVSS_PROVIDER_PROP!();
+        Depcrate_um_vssmacro_39438!();
+        Depcrate_um_vssmacro_39439!();
+        Depcrate_um_vssPVSS_OBJECT_PROP!();
+        Depcrate_um_vssmacro_39441!();
+        Depcrate_um_vssmacro_39442!();
+    };
+}

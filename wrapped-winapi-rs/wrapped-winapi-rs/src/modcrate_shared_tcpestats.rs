@@ -1,0 +1,49 @@
+// Generated module macro for crate::shared::tcpestats
+macro_rules! Modcrate_shared_tcpestats {
+() => {
+        Depcrate_shared_tcpestatsuse_10298!();
+        Depcrate_shared_tcpestatsuse_10299!();
+        Depcrate_shared_tcpestatsmacro_10300!();
+        Depcrate_shared_tcpestatsPTCP_ESTATS_TYPE!();
+        Depcrate_shared_tcpestatsmacro_10302!();
+        Depcrate_shared_tcpestatsPTCP_BOOLEAN_OPTIONAL!();
+        Depcrate_shared_tcpestatsmacro_10304!();
+        Depcrate_shared_tcpestatsPTCP_ESTATS_SYN_OPTS_ROS_v0!();
+        Depcrate_shared_tcpestatsmacro_10306!();
+        Depcrate_shared_tcpestatsPTCP_SOFT_ERROR!();
+        Depcrate_shared_tcpestatsmacro_10308!();
+        Depcrate_shared_tcpestatsPTCP_ESTATS_DATA_ROD_v0!();
+        Depcrate_shared_tcpestatsmacro_10310!();
+        Depcrate_shared_tcpestatsPTCP_ESTATS_DATA_RW_v0!();
+        Depcrate_shared_tcpestatsmacro_10312!();
+        Depcrate_shared_tcpestatsPTCP_ESTATS_SND_CONG_ROD_v0!();
+        Depcrate_shared_tcpestatsmacro_10314!();
+        Depcrate_shared_tcpestatsPTCP_ESTATS_SND_CONG_ROS_v0!();
+        Depcrate_shared_tcpestatsmacro_10316!();
+        Depcrate_shared_tcpestatsPTCP_ESTATS_SND_CONG_RW_v0!();
+        Depcrate_shared_tcpestatsmacro_10318!();
+        Depcrate_shared_tcpestatsPTCP_ESTATS_PATH_ROD_v0!();
+        Depcrate_shared_tcpestatsmacro_10320!();
+        Depcrate_shared_tcpestatsPTCP_ESTATS_PATH_RW_v0!();
+        Depcrate_shared_tcpestatsmacro_10322!();
+        Depcrate_shared_tcpestatsPTCP_ESTATS_SEND_BUFF_ROD_v0!();
+        Depcrate_shared_tcpestatsmacro_10324!();
+        Depcrate_shared_tcpestatsPTCP_ESTATS_SEND_BUFF_RW_v0!();
+        Depcrate_shared_tcpestatsmacro_10326!();
+        Depcrate_shared_tcpestatsPTCP_ESTATS_REC_ROD_v0!();
+        Depcrate_shared_tcpestatsmacro_10328!();
+        Depcrate_shared_tcpestatsPTCP_ESTATS_REC_RW_v0!();
+        Depcrate_shared_tcpestatsmacro_10330!();
+        Depcrate_shared_tcpestatsPTCP_ESTATS_OBS_REC_ROD_v0!();
+        Depcrate_shared_tcpestatsmacro_10332!();
+        Depcrate_shared_tcpestatsPTCP_ESTATS_OBS_REC_RW_v0!();
+        Depcrate_shared_tcpestatsmacro_10334!();
+        Depcrate_shared_tcpestatsPTCP_ESTATS_BANDWIDTH_RW_v0!();
+        Depcrate_shared_tcpestatsmacro_10336!();
+        Depcrate_shared_tcpestatsPTCP_ESTATS_BANDWIDTH_ROD_v0!();
+        Depcrate_shared_tcpestatsmacro_10338!();
+        Depcrate_shared_tcpestatsPTCP_ESTATS_FINE_RTT_RW_v0!();
+        Depcrate_shared_tcpestatsmacro_10340!();
+        Depcrate_shared_tcpestatsPTCP_ESTATS_FINE_RTT_ROD_v0!();
+    };
+}

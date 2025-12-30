@@ -1,0 +1,40 @@
+// Generated module macro for crate::distr::uniform
+macro_rules! Modcrate_distr_uniform {
+() => {
+        Depcrate_distr_uniformfloat!();
+        Depcrate_distr_uniformuse_169!();
+        Depcrate_distr_uniformint!();
+        Depcrate_distr_uniformuse_171!();
+        Depcrate_distr_uniformother!();
+        Depcrate_distr_uniformuse_173!();
+        Depcrate_distr_uniformuse_174!();
+        Depcrate_distr_uniformuse_175!();
+        Depcrate_distr_uniformuse_176!();
+        Depcrate_distr_uniformuse_177!();
+        Depcrate_distr_uniformError!();
+        Depcrate_distr_uniformimpl_179!();
+        Depcrate_distr_uniformimpl_180!();
+        Depcrate_distr_uniformuse_181!();
+        Depcrate_distr_uniformUniform!();
+        Depcrate_distr_uniformimpl_183!();
+        Depcrate_distr_uniformimpl_184!();
+        Depcrate_distr_uniformSampleUniform!();
+        Depcrate_distr_uniformUniformSampler!();
+        Depcrate_distr_uniformimpl_187!();
+        Depcrate_distr_uniformimpl_188!();
+        Depcrate_distr_uniformSampleBorrow!();
+        Depcrate_distr_uniformimpl_190!();
+        Depcrate_distr_uniformimpl_191!();
+        Depcrate_distr_uniformSampleRange!();
+        Depcrate_distr_uniformimpl_193!();
+        Depcrate_distr_uniformimpl_194!();
+        Depcrate_distr_uniformimpl_sample_range_u!();
+        Depcrate_distr_uniformmacro_196!();
+        Depcrate_distr_uniformmacro_197!();
+        Depcrate_distr_uniformmacro_198!();
+        Depcrate_distr_uniformmacro_199!();
+        Depcrate_distr_uniformmacro_200!();
+        Depcrate_distr_uniformmacro_201!();
+        Depcrate_distr_uniformtests!();
+    };
+}

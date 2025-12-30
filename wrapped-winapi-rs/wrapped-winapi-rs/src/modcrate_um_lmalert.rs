@@ -1,0 +1,44 @@
+// Generated module macro for crate::um::lmalert
+macro_rules! Modcrate_um_lmalert {
+() => {
+        Depcrate_um_lmalertuse_30033!();
+        Depcrate_um_lmalertuse_30034!();
+        Depcrate_um_lmalertuse_30035!();
+        Depcrate_um_lmalertother_30036!();
+        Depcrate_um_lmalertmacro_30037!();
+        Depcrate_um_lmalertPSTD_ALERT!();
+        Depcrate_um_lmalertLPSTD_ALERT!();
+        Depcrate_um_lmalertmacro_30040!();
+        Depcrate_um_lmalertPADMIN_OTHER_INFO!();
+        Depcrate_um_lmalertLPADMIN_OTHER_INFO!();
+        Depcrate_um_lmalertmacro_30043!();
+        Depcrate_um_lmalertPERRLOG_OTHER_INFO!();
+        Depcrate_um_lmalertLPERRLOG_OTHER_INFO!();
+        Depcrate_um_lmalertmacro_30046!();
+        Depcrate_um_lmalertPPRINT_OTHER_INFO!();
+        Depcrate_um_lmalertLPPRINT_OTHER_INFO!();
+        Depcrate_um_lmalertmacro_30049!();
+        Depcrate_um_lmalertPUSER_OTHER_INFO!();
+        Depcrate_um_lmalertLPUSER_OTHER_INFO!();
+        Depcrate_um_lmalertALERTER_MAILSLOT!();
+        Depcrate_um_lmalertALERT_PRINT_EVENT!();
+        Depcrate_um_lmalertALERT_MESSAGE_EVENT!();
+        Depcrate_um_lmalertALERT_ERRORLOG_EVENT!();
+        Depcrate_um_lmalertALERT_ADMIN_EVENT!();
+        Depcrate_um_lmalertALERT_USER_EVENT!();
+        Depcrate_um_lmalertPRJOB_QSTATUS!();
+        Depcrate_um_lmalertPRJOB_DEVSTATUS!();
+        Depcrate_um_lmalertPRJOB_COMPLETE!();
+        Depcrate_um_lmalertPRJOB_INTERV!();
+        Depcrate_um_lmalertPRJOB_ERROR!();
+        Depcrate_um_lmalertPRJOB_DESTOFFLINE!();
+        Depcrate_um_lmalertPRJOB_DESTPAUSED!();
+        Depcrate_um_lmalertPRJOB_NOTIFY!();
+        Depcrate_um_lmalertPRJOB_DESTNOPAPER!();
+        Depcrate_um_lmalertPRJOB_DELETED!();
+        Depcrate_um_lmalertPRJOB_QS_QUEUED!();
+        Depcrate_um_lmalertPRJOB_QS_PAUSED!();
+        Depcrate_um_lmalertPRJOB_QS_SPOOLING!();
+        Depcrate_um_lmalertPRJOB_QS_PRINTING!();
+    };
+}

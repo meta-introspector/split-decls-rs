@@ -1,0 +1,9 @@
+// Generated macro for validate_job_database (function)
+macro_rules! Depcrate_jobsvalidate_job_database {
+() => {
+// Module: crate::jobs
+// Provides: {"validate_job_database"}
+// Dependencies: {}
+fn validate_job_database (db : & JobDatabase) -> anyhow :: Result < () > { fn ensure_no_duplicate_job_names (section : & str , jobs : & Vec < Job >) -> anyhow :: Result < () > { let mut job_names = HashSet :: new () ; for job in jobs { let job_name = job . name . as_str () ; if ! job_names . insert (job_name) { return Err (anyhow :: anyhow ! ("duplicate job name `{job_name}` in section `{section}`")) ; } } Ok (()) } ensure_no_duplicate_job_names ("pr" , & db . pr_jobs) ? ; ensure_no_duplicate_job_names ("auto" , & db . auto_jobs) ? ; ensure_no_duplicate_job_names ("try" , & db . try_jobs) ? ; ensure_no_duplicate_job_names ("optional" , & db . optional_jobs) ? ; fn equivalent_modulo_carve_out (pr_job : & Job , auto_job : & Job) -> anyhow :: Result < () > { let Job { name , os , only_on_channel , free_disk , doc_url , codebuild , env : _ , continue_on_error : _ , } = pr_job ; if * name == auto_job . name && * os == auto_job . os && * only_on_channel == auto_job . only_on_channel && * free_disk == auto_job . free_disk && * doc_url == auto_job . doc_url && * codebuild == auto_job . codebuild { Ok (()) } else { Err (anyhow ! ("PR job `{}` differs from corresponding Auto job `{}` in configuration other than `continue_on_error` and `env`" , pr_job . name , auto_job . name)) } } for pr_job in & db . pr_jobs { let auto_job = db . find_auto_job_by_name (& pr_job . name) . expect ("PR job must either be auto-registered as Auto job or overridden") ; equivalent_modulo_carve_out (pr_job , auto_job) ? ; } for auto_job in & db . auto_jobs { if auto_job . continue_on_error == Some (true) { return Err (anyhow ! ("Auto job `{}` cannot have `continue_on_error: true`" , auto_job . name)) ; } } Ok (()) }
+};
+}

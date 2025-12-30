@@ -1,0 +1,47 @@
+// Generated module macro for crate::transmute
+macro_rules! Modcrate_transmute {
+() => {
+        Depcrate_transmutecrosspointer_transmute!();
+        Depcrate_transmuteeager_transmute!();
+        Depcrate_transmutemissing_transmute_annotations!();
+        Depcrate_transmutetransmute_int_to_bool!();
+        Depcrate_transmutetransmute_int_to_non_zero!();
+        Depcrate_transmutetransmute_null_to_fn!();
+        Depcrate_transmutetransmute_ptr_to_ptr!();
+        Depcrate_transmutetransmute_ptr_to_ref!();
+        Depcrate_transmutetransmute_ref_to_ref!();
+        Depcrate_transmutetransmute_undefined_repr!();
+        Depcrate_transmutetransmutes_expressible_as_ptr_casts!();
+        Depcrate_transmutetransmuting_null!();
+        Depcrate_transmuteunsound_collection_transmute!();
+        Depcrate_transmuteuseless_transmute!();
+        Depcrate_transmuteutils!();
+        Depcrate_transmutewrong_transmute!();
+        Depcrate_transmuteuse_10430!();
+        Depcrate_transmuteuse_10431!();
+        Depcrate_transmuteuse_10432!();
+        Depcrate_transmuteuse_10433!();
+        Depcrate_transmuteuse_10434!();
+        Depcrate_transmuteuse_10435!();
+        Depcrate_transmuteuse_10436!();
+        Depcrate_transmutemacro_10437!();
+        Depcrate_transmutemacro_10438!();
+        Depcrate_transmutemacro_10439!();
+        Depcrate_transmutemacro_10440!();
+        Depcrate_transmutemacro_10441!();
+        Depcrate_transmutemacro_10442!();
+        Depcrate_transmutemacro_10443!();
+        Depcrate_transmutemacro_10444!();
+        Depcrate_transmutemacro_10445!();
+        Depcrate_transmutemacro_10446!();
+        Depcrate_transmutemacro_10447!();
+        Depcrate_transmutemacro_10448!();
+        Depcrate_transmutemacro_10449!();
+        Depcrate_transmutemacro_10450!();
+        Depcrate_transmutemacro_10451!();
+        Depcrate_transmuteTransmute!();
+        Depcrate_transmutemacro_10453!();
+        Depcrate_transmuteimpl_10454!();
+        Depcrate_transmuteimpl_10455!();
+    };
+}

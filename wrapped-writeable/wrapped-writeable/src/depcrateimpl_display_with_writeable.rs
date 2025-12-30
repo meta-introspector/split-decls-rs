@@ -1,0 +1,9 @@
+// Generated macro for impl_display_with_writeable (macro)
+macro_rules! Depcrateimpl_display_with_writeable {
+() => {
+// Module: crate
+// Provides: {"impl_display_with_writeable"}
+// Dependencies: {}
+# [doc = " Implements [`Display`](core::fmt::Display) for types that implement [`Writeable`]."] # [doc = ""] # [doc = " It's recommended to do this for every [`Writeable`] type, as it will add"] # [doc = " support for `core::fmt` features like [`fmt!`](std::fmt),"] # [doc = " [`print!`](std::print), [`write!`](std::write), etc."] # [doc = ""] # [doc = " This macro also adds a concrete `to_string` function. This function will shadow the"] # [doc = " standard library `ToString`, using the more efficient writeable-based code path."] # [doc = " To add only `Display`, use the `@display` macro variant."] # [macro_export] macro_rules ! impl_display_with_writeable { (@ display , $ type : ty) => { # [doc = " This trait is implemented for compatibility with [`fmt!`](alloc::fmt)."] # [doc = " To create a string, [`Writeable::write_to_string`] is usually more efficient."] impl core :: fmt :: Display for $ type { # [inline] fn fmt (& self , f : & mut core :: fmt :: Formatter) -> core :: fmt :: Result { $ crate :: Writeable :: write_to (& self , f) } } } ; ($ type : ty $ (, # [$ alloc_feature : meta]) ?) => { $ crate :: impl_display_with_writeable ! (@ display , $ type) ; $ (# [$ alloc_feature]) ? impl $ type { # [doc = " Converts the given value to a `String`."] # [doc = ""] # [doc = " Under the hood, this uses an efficient [`Writeable`] implementation."] # [doc = " However, in order to avoid allocating a string, it is more efficient"] # [doc = " to use [`Writeable`] directly."] pub fn to_string (& self) -> $ crate :: _internal :: String { $ crate :: Writeable :: write_to_string (self) . into_owned () } } } ; }
+};
+}

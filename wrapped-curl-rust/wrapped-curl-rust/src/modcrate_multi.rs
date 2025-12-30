@@ -1,0 +1,50 @@
+// Generated module macro for crate::multi
+macro_rules! Modcrate_multi {
+() => {
+        Depcrate_multiuse_182!();
+        Depcrate_multiuse_183!();
+        Depcrate_multiuse_184!();
+        Depcrate_multiuse_185!();
+        Depcrate_multiuse_186!();
+        Depcrate_multiuse_187!();
+        Depcrate_multiuse_188!();
+        Depcrate_multiuse_189!();
+        Depcrate_multiuse_190!();
+        Depcrate_multiuse_191!();
+        Depcrate_multiMulti!();
+        Depcrate_multiRawMulti!();
+        Depcrate_multiMultiData!();
+        Depcrate_multiMessage!();
+        Depcrate_multiEasyHandle!();
+        Depcrate_multiEasy2Handle!();
+        Depcrate_multiDetachGuard!();
+        Depcrate_multiEvents!();
+        Depcrate_multiSocketEvents!();
+        Depcrate_multiSocket!();
+        Depcrate_multiWaitFd!();
+        Depcrate_multiMultiWaker!();
+        Depcrate_multiimpl_204!();
+        Depcrate_multiimpl_205!();
+        Depcrate_multiimpl_206!();
+        Depcrate_multiimpl_207!();
+        Depcrate_multiimpl_208!();
+        Depcrate_multicvt!();
+        Depcrate_multiimpl_210!();
+        Depcrate_multiimpl_easy_getters!();
+        Depcrate_multiimpl_212!();
+        Depcrate_multiimpl_213!();
+        Depcrate_multiimpl_214!();
+        Depcrate_multiimpl_215!();
+        Depcrate_multiimpl_216!();
+        Depcrate_multiimpl_217!();
+        Depcrate_multiimpl_218!();
+        Depcrate_multiimpl_219!();
+        Depcrate_multiimpl_220!();
+        Depcrate_multiimpl_221!();
+        Depcrate_multiimpl_222!();
+        Depcrate_multiimpl_223!();
+        Depcrate_multiimpl_224!();
+        Depcrate_multiimpl_225!();
+        Depcrate_multiimpl_226!();
+    };
+}

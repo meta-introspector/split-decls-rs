@@ -1,0 +1,9 @@
+// Generated macro for TryFromJsValue (trait)
+macro_rules! Depcrate_convert_traitsTryFromJsValue {
+() => {
+// Module: crate::convert::traits
+// Provides: {"TryFromJsValue"}
+// Dependencies: {}
+# [doc = " [`TryFromJsValue`] is a trait for converting a JavaScript value ([`JsValue`])"] # [doc = " into a Rust type. It is used by the [`wasm_bindgen`](wasm_bindgen_macro::wasm_bindgen)"] # [doc = " proc-macro to allow conversion to user types."] # [doc = ""] # [doc = " The semantics of this trait for various types are designed to provide a runtime"] # [doc = " analog of the static semantics implemented by the IntoWasmAbi function bindgen,"] # [doc = " with the exception that conversions are constrained to not cast invalid types."] # [doc = ""] # [doc = " For example, where the Wasm static semantics will permit `foo(x: i32)` when passed"] # [doc = " from JS `foo(\"5\")` to treat that as `foo(5)`, this trait will instead throw. Apart"] # [doc = " from these reduced type conversion cases, behaviours should otherwise match the"] # [doc = " static semantics."] # [doc = ""] # [doc = " Types implementing this trait must specify their conversion logic from"] # [doc = " [`JsValue`] to the Rust type, handling any potential errors that may occur"] # [doc = " during the conversion process."] # [doc = ""] # [doc = " # ⚠\u{fe0f} Unstable"] # [doc = ""] # [doc = " This is part of the internal [`convert`](crate::convert) module, **no"] # [doc = " stability guarantees** are provided. Use at your own risk. See its"] # [doc = " documentation for more details."] pub trait TryFromJsValue : Sized { # [doc = " Performs the conversion."] fn try_from_js_value (value : JsValue) -> Result < Self , JsValue > { Self :: try_from_js_value_ref (& value) . ok_or (value) } # [doc = " Performs the conversion."] fn try_from_js_value_ref (value : & JsValue) -> Option < Self > ; }
+};
+}

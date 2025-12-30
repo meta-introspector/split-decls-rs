@@ -1,0 +1,9 @@
+// Generated macro for impl_44 (impl)
+macro_rules! Depcrate_execimpl_44 {
+() => {
+// Module: crate::exec
+// Provides: {"impl_44"}
+// Dependencies: {}
+impl CmdBuilder { pub fn arg < S : ToString > (mut self , arg : S) -> Self { self . args . push (arg . to_string ()) ; self } pub fn env (mut self , name : & str , value : & str) -> Self { self . env . insert (name . to_string () , value . to_string ()) ; self } pub fn workdir (mut self , path : & Utf8Path) -> Self { self . workdir = Some (path . to_path_buf ()) ; self } pub fn redirect_output (mut self , path : Utf8PathBuf) -> Self { self . output = Some (path) ; self } pub fn run (self) -> anyhow :: Result < () > { let mut cmd_str = String :: new () ; cmd_str . push_str (& self . env . iter () . map (| (key , value) | format ! ("{key}={value}")) . collect :: < Vec < _ > > () . join (" ") ,) ; if ! self . env . is_empty () { cmd_str . push (' ') ; } cmd_str . push_str (& self . args . join (" ")) ; if let Some (ref path) = self . output { cmd_str . push_str (& format ! (" > {path:?}")) ; } cmd_str . push_str (& format ! (" [at {}]" , self . workdir . clone () . unwrap_or_else (|| std :: env :: current_dir () . unwrap () . try_into () . unwrap ()))) ; log :: info ! ("Executing `{cmd_str}`") ; let mut cmd = Command :: new (& self . args [0]) ; cmd . stdin (Stdio :: null ()) ; cmd . args (self . args . iter () . skip (1)) ; for (key , value) in & self . env { cmd . env (key , value) ; } if let Some (ref output) = self . output { cmd . stdout (File :: create (output . clone () . into_std_path_buf ()) ?) ; } if let Some (ref workdir) = self . workdir { cmd . current_dir (workdir . clone () . into_std_path_buf ()) ; } let exit_status = cmd . spawn () ? . wait () ? ; if ! exit_status . success () { Err (anyhow :: anyhow ! ("Command {cmd_str} has failed with exit code {:?}" , exit_status . code () ,)) } else { Ok (()) } } }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for TOKEN_ALL_ACCESS_P (const)
+macro_rules! Depcrate_um_winntTOKEN_ALL_ACCESS_P {
+() => {
+// Module: crate::um::winnt
+// Provides: {"TOKEN_ALL_ACCESS_P"}
+// Dependencies: {}
+pub const TOKEN_ALL_ACCESS_P : DWORD = STANDARD_RIGHTS_REQUIRED | TOKEN_ASSIGN_PRIMARY | TOKEN_DUPLICATE | TOKEN_IMPERSONATE | TOKEN_QUERY | TOKEN_QUERY_SOURCE | TOKEN_ADJUST_PRIVILEGES | TOKEN_ADJUST_GROUPS | TOKEN_ADJUST_DEFAULT ;
+};
+}

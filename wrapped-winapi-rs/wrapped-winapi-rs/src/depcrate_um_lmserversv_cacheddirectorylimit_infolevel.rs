@@ -1,0 +1,9 @@
+// Generated macro for SV_CACHEDDIRECTORYLIMIT_INFOLEVEL (const)
+macro_rules! Depcrate_um_lmserverSV_CACHEDDIRECTORYLIMIT_INFOLEVEL {
+() => {
+// Module: crate::um::lmserver
+// Provides: {"SV_CACHEDDIRECTORYLIMIT_INFOLEVEL"}
+// Dependencies: {}
+pub const SV_CACHEDDIRECTORYLIMIT_INFOLEVEL : DWORD = PARMNUM_BASE_INFOLEVEL + SV_CACHEDDIRECTORYLIMIT_PARMNUM ;
+};
+}

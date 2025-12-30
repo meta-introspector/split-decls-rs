@@ -1,0 +1,39 @@
+// Generated module macro for crate::hash
+macro_rules! Modcrate_hash {
+() => {
+        Depcrate_hashuse_453!();
+        Depcrate_hashuse_454!();
+        Depcrate_hashuse_455!();
+        Depcrate_hashuse_456!();
+        Depcrate_hashuse_457!();
+        Depcrate_hashuse_458!();
+        Depcrate_hashuse_459!();
+        Depcrate_hashuse_460!();
+        Depcrate_hashuse_461!();
+        Depcrate_hashuse_462!();
+        Depcrate_hashuse_463!();
+        Depcrate_hashmacro_464!();
+        Depcrate_hashMessageDigest!();
+        Depcrate_hashimpl_466!();
+        Depcrate_hashimpl_467!();
+        Depcrate_hashimpl_468!();
+        Depcrate_hashState!();
+        Depcrate_hashuse_470!();
+        Depcrate_hashHasher!();
+        Depcrate_hashimpl_472!();
+        Depcrate_hashimpl_473!();
+        Depcrate_hashimpl_474!();
+        Depcrate_hashimpl_475!();
+        Depcrate_hashimpl_476!();
+        Depcrate_hashimpl_477!();
+        Depcrate_hashDigestBytes!();
+        Depcrate_hashimpl_479!();
+        Depcrate_hashimpl_480!();
+        Depcrate_hashimpl_481!();
+        Depcrate_hashimpl_482!();
+        Depcrate_hashimpl_483!();
+        Depcrate_hashhash!();
+        Depcrate_hashhash_xof!();
+        Depcrate_hashtests!();
+    };
+}

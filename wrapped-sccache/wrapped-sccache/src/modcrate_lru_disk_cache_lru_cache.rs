@@ -1,0 +1,42 @@
+// Generated module macro for crate::lru_disk_cache::lru_cache
+macro_rules! Modcrate_lru_disk_cache_lru_cache {
+() => {
+        Depcrate_lru_disk_cache_lru_cacheuse_1198!();
+        Depcrate_lru_disk_cache_lru_cacheuse_1199!();
+        Depcrate_lru_disk_cache_lru_cacheuse_1200!();
+        Depcrate_lru_disk_cache_lru_cacheuse_1201!();
+        Depcrate_lru_disk_cache_lru_cacheuse_1202!();
+        Depcrate_lru_disk_cache_lru_cacheMeter!();
+        Depcrate_lru_disk_cache_lru_cacheCount!();
+        Depcrate_lru_disk_cache_lru_cacheimpl_1205!();
+        Depcrate_lru_disk_cache_lru_cacheCountableMeter!();
+        Depcrate_lru_disk_cache_lru_cacheimpl_1207!();
+        Depcrate_lru_disk_cache_lru_cacheCountableMeterWithMeasure!();
+        Depcrate_lru_disk_cache_lru_cacheimpl_1209!();
+        Depcrate_lru_disk_cache_lru_cacheimpl_1210!();
+        Depcrate_lru_disk_cache_lru_cacheLruCache!();
+        Depcrate_lru_disk_cache_lru_cacheimpl_1212!();
+        Depcrate_lru_disk_cache_lru_cacheimpl_1213!();
+        Depcrate_lru_disk_cache_lru_cacheimpl_1214!();
+        Depcrate_lru_disk_cache_lru_cacheimpl_1215!();
+        Depcrate_lru_disk_cache_lru_cacheimpl_1216!();
+        Depcrate_lru_disk_cache_lru_cacheimpl_1217!();
+        Depcrate_lru_disk_cache_lru_cacheimpl_1218!();
+        Depcrate_lru_disk_cache_lru_cacheimpl_1219!();
+        Depcrate_lru_disk_cache_lru_cacheimpl_1220!();
+        Depcrate_lru_disk_cache_lru_cacheIntoIter!();
+        Depcrate_lru_disk_cache_lru_cacheimpl_1222!();
+        Depcrate_lru_disk_cache_lru_cacheimpl_1223!();
+        Depcrate_lru_disk_cache_lru_cacheimpl_1224!();
+        Depcrate_lru_disk_cache_lru_cacheIter!();
+        Depcrate_lru_disk_cache_lru_cacheimpl_1226!();
+        Depcrate_lru_disk_cache_lru_cacheimpl_1227!();
+        Depcrate_lru_disk_cache_lru_cacheimpl_1228!();
+        Depcrate_lru_disk_cache_lru_cacheimpl_1229!();
+        Depcrate_lru_disk_cache_lru_cacheIterMut!();
+        Depcrate_lru_disk_cache_lru_cacheimpl_1231!();
+        Depcrate_lru_disk_cache_lru_cacheimpl_1232!();
+        Depcrate_lru_disk_cache_lru_cacheimpl_1233!();
+        Depcrate_lru_disk_cache_lru_cachetests!();
+    };
+}

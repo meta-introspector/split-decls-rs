@@ -1,0 +1,40 @@
+// Generated module macro for crate::drivers::virtio::virtqueue
+macro_rules! Modcrate_drivers_virtio_virtqueue {
+() => {
+        Depcrate_drivers_virtio_virtqueuepacked!();
+        Depcrate_drivers_virtio_virtqueuesplit!();
+        Depcrate_drivers_virtio_virtqueueuse_618!();
+        Depcrate_drivers_virtio_virtqueueuse_619!();
+        Depcrate_drivers_virtio_virtqueueuse_620!();
+        Depcrate_drivers_virtio_virtqueueuse_621!();
+        Depcrate_drivers_virtio_virtqueueuse_622!();
+        Depcrate_drivers_virtio_virtqueueuse_623!();
+        Depcrate_drivers_virtio_virtqueueuse_624!();
+        Depcrate_drivers_virtio_virtqueueuse_625!();
+        Depcrate_drivers_virtio_virtqueueuse_626!();
+        Depcrate_drivers_virtio_virtqueueuse_627!();
+        Depcrate_drivers_virtio_virtqueueuse_628!();
+        Depcrate_drivers_virtio_virtqueueuse_629!();
+        Depcrate_drivers_virtio_virtqueueVirtq!();
+        Depcrate_drivers_virtio_virtqueueVirtqPrivate!();
+        Depcrate_drivers_virtio_virtqueueVirtQueue!();
+        Depcrate_drivers_virtio_virtqueueVirtqDescriptor!();
+        Depcrate_drivers_virtio_virtqueueimpl_634!();
+        Depcrate_drivers_virtio_virtqueueimpl_635!();
+        Depcrate_drivers_virtio_virtqueueTransferToken!();
+        Depcrate_drivers_virtio_virtqueueimpl_637!();
+        Depcrate_drivers_virtio_virtqueueBufferElem!();
+        Depcrate_drivers_virtio_virtqueueimpl_639!();
+        Depcrate_drivers_virtio_virtqueueAvailBufferToken!();
+        Depcrate_drivers_virtio_virtqueueUsedDeviceWritableBuffer!();
+        Depcrate_drivers_virtio_virtqueueimpl_642!();
+        Depcrate_drivers_virtio_virtqueueUsedBufferToken!();
+        Depcrate_drivers_virtio_virtqueueimpl_644!();
+        Depcrate_drivers_virtio_virtqueueimpl_645!();
+        Depcrate_drivers_virtio_virtqueueimpl_646!();
+        Depcrate_drivers_virtio_virtqueueBufferType!();
+        Depcrate_drivers_virtio_virtqueueMemPool!();
+        Depcrate_drivers_virtio_virtqueueimpl_649!();
+        Depcrate_drivers_virtio_virtqueueerror!();
+    };
+}

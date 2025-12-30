@@ -1,0 +1,9 @@
+// Generated macro for impl_571 (impl)
+macro_rules! Depcrate_format_report_formatterimpl_571 {
+() => {
+// Module: crate::format_report_formatter
+// Provides: {"impl_571"}
+// Dependencies: {}
+impl < 'a > Display for FormatReportFormatter < 'a > { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { let errors_by_file = & self . report . internal . borrow () . 0 ; let opt = FormatOptions { color : self . enable_colors , .. Default :: default () } ; for (file , errors) in errors_by_file { for error in errors { let error_kind = error . kind . to_string () ; let title = Some (Annotation { id : if error . is_internal () { Some ("internal") } else { None } , label : Some (& error_kind) , annotation_type : error_kind_to_snippet_annotation_type (& error . kind) , }) ; let message_suffix = error . msg_suffix () ; let footer = if ! message_suffix . is_empty () { Some (Annotation { id : None , label : Some (message_suffix) , annotation_type : AnnotationType :: Note , }) } else { None } ; let origin = format ! ("{}:{}" , file , error . line) ; let slice = Slice { source : & error . line_buffer . clone () , line_start : error . line , origin : Some (origin . as_str ()) , fold : false , annotations : slice_annotation (error) . into_iter () . collect () , } ; let snippet = Snippet { title , footer : footer . into_iter () . collect () , slices : vec ! [slice] , opt , } ; writeln ! (f , "{}\n" , DisplayList :: from (snippet)) ? ; } } if ! errors_by_file . is_empty () { let label = format ! ("rustfmt has failed to format. See previous {} errors." , self . report . warning_count ()) ; let snippet = Snippet { title : Some (Annotation { id : None , label : Some (& label) , annotation_type : AnnotationType :: Warning , }) , footer : Vec :: new () , slices : Vec :: new () , opt , } ; writeln ! (f , "{}" , DisplayList :: from (snippet)) ? ; } Ok (()) } }
+};
+}

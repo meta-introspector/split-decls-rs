@@ -1,0 +1,9 @@
+// Generated macro for USB_SUPERSPEEDPLUS_ISOCHRONOUS_MIN_BYTESPERINTERVAL (const)
+macro_rules! Depcrate_shared_usbspecUSB_SUPERSPEEDPLUS_ISOCHRONOUS_MIN_BYTESPERINTERVAL {
+() => {
+// Module: crate::shared::usbspec
+// Provides: {"USB_SUPERSPEEDPLUS_ISOCHRONOUS_MIN_BYTESPERINTERVAL"}
+// Dependencies: {}
+pub const USB_SUPERSPEEDPLUS_ISOCHRONOUS_MIN_BYTESPERINTERVAL : ULONG = 0xC001 ;
+};
+}

@@ -1,0 +1,49 @@
+// Generated module macro for crate::common::system
+macro_rules! Modcrate_common_system {
+() => {
+        Depcrate_common_systemuse_159!();
+        Depcrate_common_systemuse_160!();
+        Depcrate_common_systemuse_161!();
+        Depcrate_common_systemuse_162!();
+        Depcrate_common_systemuse_163!();
+        Depcrate_common_systemuse_164!();
+        Depcrate_common_systemuse_165!();
+        Depcrate_common_systemuse_166!();
+        Depcrate_common_systemuse_167!();
+        Depcrate_common_systemSystem!();
+        Depcrate_common_systemimpl_169!();
+        Depcrate_common_systemimpl_170!();
+        Depcrate_common_systemMotherboard!();
+        Depcrate_common_systemimpl_172!();
+        Depcrate_common_systemProduct!();
+        Depcrate_common_systemimpl_174!();
+        Depcrate_common_systemLoadAvg!();
+        Depcrate_common_systemSignal!();
+        Depcrate_common_systemimpl_177!();
+        Depcrate_common_systemCGroupLimits!();
+        Depcrate_common_systemProcessStatus!();
+        Depcrate_common_systemThreadKind!();
+        Depcrate_common_systemKillError!();
+        Depcrate_common_systemProcess!();
+        Depcrate_common_systemimpl_183!();
+        Depcrate_common_systempid_decl!();
+        Depcrate_common_systemmacro_185!();
+        Depcrate_common_systemUpdateKind!();
+        Depcrate_common_systemimpl_187!();
+        Depcrate_common_systemProcessesToUpdate!();
+        Depcrate_common_systemProcessRefreshKind!();
+        Depcrate_common_systemimpl_190!();
+        Depcrate_common_systemimpl_191!();
+        Depcrate_common_systemCpuRefreshKind!();
+        Depcrate_common_systemimpl_193!();
+        Depcrate_common_systemMemoryRefreshKind!();
+        Depcrate_common_systemimpl_195!();
+        Depcrate_common_systemRefreshKind!();
+        Depcrate_common_systemimpl_197!();
+        Depcrate_common_systemget_current_pid!();
+        Depcrate_common_systemCpu!();
+        Depcrate_common_systemimpl_200!();
+        Depcrate_common_systemtest!();
+        Depcrate_common_systemdoctest!();
+    };
+}

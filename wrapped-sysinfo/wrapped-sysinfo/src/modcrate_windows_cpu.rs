@@ -1,0 +1,48 @@
+// Generated module macro for crate::windows::cpu
+macro_rules! Modcrate_windows_cpu {
+() => {
+        Depcrate_windows_cpuuse_1051!();
+        Depcrate_windows_cpuuse_1052!();
+        Depcrate_windows_cpuuse_1053!();
+        Depcrate_windows_cpuuse_1054!();
+        Depcrate_windows_cpuuse_1055!();
+        Depcrate_windows_cpuuse_1056!();
+        Depcrate_windows_cpuuse_1057!();
+        Depcrate_windows_cpuuse_1058!();
+        Depcrate_windows_cpuuse_1059!();
+        Depcrate_windows_cpuuse_1060!();
+        Depcrate_windows_cpuuse_1061!();
+        Depcrate_windows_cpuuse_1062!();
+        Depcrate_windows_cpuuse_1063!();
+        Depcrate_windows_cpuuse_1064!();
+        Depcrate_windows_cpuLOADAVG_FACTOR_1F!();
+        Depcrate_windows_cpuLOADAVG_FACTOR_5F!();
+        Depcrate_windows_cpuLOADAVG_FACTOR_15F!();
+        Depcrate_windows_cpuSAMPLING_INTERVAL!();
+        Depcrate_windows_cpuload_avg!();
+        Depcrate_windows_cpuget_load_average!();
+        Depcrate_windows_cpuload_avg_callback!();
+        Depcrate_windows_cpuinit_load_avg!();
+        Depcrate_windows_cpuInternalQuery!();
+        Depcrate_windows_cpuimpl_1074!();
+        Depcrate_windows_cpuimpl_1075!();
+        Depcrate_windows_cpuimpl_1076!();
+        Depcrate_windows_cpuQuery!();
+        Depcrate_windows_cpuimpl_1078!();
+        Depcrate_windows_cpuCpusWrapper!();
+        Depcrate_windows_cpuimpl_1080!();
+        Depcrate_windows_cpuCpuUsage!();
+        Depcrate_windows_cpuimpl_1082!();
+        Depcrate_windows_cpuCpuInner!();
+        Depcrate_windows_cpuimpl_1084!();
+        Depcrate_windows_cpuget_vendor_id_not_great!();
+        Depcrate_windows_cpuget_vendor_id_and_brand!();
+        Depcrate_windows_cpuget_vendor_id_and_brand!();
+        Depcrate_windows_cpuget_key_used!();
+        Depcrate_windows_cpuget_frequencies!();
+        Depcrate_windows_cpuget_physical_core_count!();
+        Depcrate_windows_cpuinit_cpus!();
+        Depcrate_windows_cpuKeyHandler!();
+        Depcrate_windows_cpuimpl_1093!();
+    };
+}

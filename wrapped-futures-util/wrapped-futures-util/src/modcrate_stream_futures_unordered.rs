@@ -1,0 +1,45 @@
+// Generated module macro for crate::stream::futures_unordered
+macro_rules! Modcrate_stream_futures_unordered {
+() => {
+        Depcrate_stream_futures_unordereduse_1694!();
+        Depcrate_stream_futures_unordereduse_1695!();
+        Depcrate_stream_futures_unordereduse_1696!();
+        Depcrate_stream_futures_unordereduse_1697!();
+        Depcrate_stream_futures_unordereduse_1698!();
+        Depcrate_stream_futures_unordereduse_1699!();
+        Depcrate_stream_futures_unordereduse_1700!();
+        Depcrate_stream_futures_unordereduse_1701!();
+        Depcrate_stream_futures_unordereduse_1702!();
+        Depcrate_stream_futures_unordereduse_1703!();
+        Depcrate_stream_futures_unordereduse_1704!();
+        Depcrate_stream_futures_unordereduse_1705!();
+        Depcrate_stream_futures_unordereduse_1706!();
+        Depcrate_stream_futures_unordereduse_1707!();
+        Depcrate_stream_futures_unordereduse_1708!();
+        Depcrate_stream_futures_unorderedabort!();
+        Depcrate_stream_futures_unorderediter!();
+        Depcrate_stream_futures_unordereduse_1739!();
+        Depcrate_stream_futures_unorderedtask!();
+        Depcrate_stream_futures_unordereduse_1755!();
+        Depcrate_stream_futures_unorderedready_to_run_queue!();
+        Depcrate_stream_futures_unordereduse_1769!();
+        Depcrate_stream_futures_unorderedFuturesUnordered!();
+        Depcrate_stream_futures_unorderedimpl_1771!();
+        Depcrate_stream_futures_unorderedimpl_1772!();
+        Depcrate_stream_futures_unorderedimpl_1773!();
+        Depcrate_stream_futures_unorderedimpl_1774!();
+        Depcrate_stream_futures_unorderedimpl_1775!();
+        Depcrate_stream_futures_unorderedimpl_1776!();
+        Depcrate_stream_futures_unorderedimpl_1777!();
+        Depcrate_stream_futures_unorderedimpl_1778!();
+        Depcrate_stream_futures_unorderedimpl_1779!();
+        Depcrate_stream_futures_unorderedimpl_1780!();
+        Depcrate_stream_futures_unorderedimpl_1781!();
+        Depcrate_stream_futures_unorderedimpl_1782!();
+        Depcrate_stream_futures_unorderedimpl_1783!();
+        Depcrate_stream_futures_unorderedimpl_1784!();
+        Depcrate_stream_futures_unorderedimpl_1785!();
+        Depcrate_stream_futures_unorderedimpl_1786!();
+        Depcrate_stream_futures_unorderedimpl_1787!();
+    };
+}

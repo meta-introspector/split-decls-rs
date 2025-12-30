@@ -1,0 +1,9 @@
+// Generated macro for macro_32699 (macro)
+macro_rules! Depcrate_um_ntlsamacro_32699 {
+() => {
+// Module: crate::um::ntlsa
+// Provides: {"macro_32699"}
+// Dependencies: {}
+ENUM ! { enum POLICY_AUDIT_EVENT_TYPE_EX { iSystem_SecurityStateChange = SE_ADT_POLICY_AUDIT_EVENT_TYPE_EX_BEGIN , iSystem_SecuritySubsystemExtension , iSystem_Integrity , iSystem_IPSecDriverEvents , iSystem_Others , iLogon_Logon , iLogon_Logoff , iLogon_AccountLockout , iLogon_IPSecMainMode , iLogon_SpecialLogon , iLogon_IPSecQuickMode , iLogon_IPSecUsermode , iLogon_Others , iLogon_NPS , iLogon_Claims , iLogon_Groups , iObjectAccess_FileSystem , iObjectAccess_Registry , iObjectAccess_Kernel , iObjectAccess_Sam , iObjectAccess_Other , iObjectAccess_CertificationAuthority , iObjectAccess_ApplicationGenerated , iObjectAccess_HandleBasedAudits , iObjectAccess_Share , iObjectAccess_FirewallPacketDrops , iObjectAccess_FirewallConnection , iObjectAccess_DetailedFileShare , iObjectAccess_RemovableStorage , iObjectAccess_CbacStaging , iPrivilegeUse_Sensitive , iPrivilegeUse_NonSensitive , iPrivilegeUse_Others , iDetailedTracking_ProcessCreation , iDetailedTracking_ProcessTermination , iDetailedTracking_DpapiActivity , iDetailedTracking_RpcCall , iDetailedTracking_PnpActivity , iDetailedTracking_TokenRightAdjusted , iPolicyChange_AuditPolicy , iPolicyChange_AuthenticationPolicy , iPolicyChange_AuthorizationPolicy , iPolicyChange_MpsscvRulePolicy , iPolicyChange_WfpIPSecPolicy , iPolicyChange_Others , iAccountManagement_UserAccount , iAccountManagement_ComputerAccount , iAccountManagement_SecurityGroup , iAccountManagement_DistributionGroup , iAccountManagement_ApplicationGroup , iAccountManagement_Others , iDSAccess_DSAccess , iDSAccess_AdAuditChanges , iDS_Replication , iDS_DetailedReplication , iAccountLogon_CredentialValidation , iAccountLogon_Kerberos , iAccountLogon_Others , iAccountLogon_KerbCredentialValidation , iUnknownSubCategory = 999 , } }
+};
+}

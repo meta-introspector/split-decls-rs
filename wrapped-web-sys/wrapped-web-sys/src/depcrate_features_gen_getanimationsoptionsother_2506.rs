@@ -1,0 +1,9 @@
+// Generated macro for other_2506 (other)
+macro_rules! Depcrate_features_gen_GetAnimationsOptionsother_2506 {
+() => {
+// Module: crate::features::gen_GetAnimationsOptions
+// Provides: {"other_2506"}
+// Dependencies: {}
+# [cfg (web_sys_unstable_apis)] # [wasm_bindgen] extern "C" { # [wasm_bindgen (extends = :: js_sys :: Object , js_name = GetAnimationsOptions)] # [derive (Debug , Clone , PartialEq , Eq)] # [doc = "The `GetAnimationsOptions` dictionary."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `GetAnimationsOptions`*"] # [doc = ""] # [doc = "*This API is unstable and requires `--cfg=web_sys_unstable_apis` to be activated, as"] # [doc = "[described in the `wasm-bindgen` guide](https://wasm-bindgen.github.io/wasm-bindgen/web-sys/unstable-apis.html)*"] pub type GetAnimationsOptions ; # [cfg (web_sys_unstable_apis)] # [doc = "Get the `subtree` field of this object."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `GetAnimationsOptions`*"] # [doc = ""] # [doc = "*This API is unstable and requires `--cfg=web_sys_unstable_apis` to be activated, as"] # [doc = "[described in the `wasm-bindgen` guide](https://wasm-bindgen.github.io/wasm-bindgen/web-sys/unstable-apis.html)*"] # [wasm_bindgen (method , getter = "subtree")] pub fn get_subtree (this : & GetAnimationsOptions) -> Option < bool > ; # [cfg (web_sys_unstable_apis)] # [doc = "Change the `subtree` field of this object."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `GetAnimationsOptions`*"] # [doc = ""] # [doc = "*This API is unstable and requires `--cfg=web_sys_unstable_apis` to be activated, as"] # [doc = "[described in the `wasm-bindgen` guide](https://wasm-bindgen.github.io/wasm-bindgen/web-sys/unstable-apis.html)*"] # [wasm_bindgen (method , setter = "subtree")] pub fn set_subtree (this : & GetAnimationsOptions , val : bool) ; }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for presented_id_matches_constraint (function)
+macro_rules! Depcrate_subject_name_ip_addresspresented_id_matches_constraint {
+() => {
+// Module: crate::subject_name::ip_address
+// Provides: {"presented_id_matches_constraint"}
+// Dependencies: {}
+pub (super) fn presented_id_matches_constraint (name : untrusted :: Input < '_ > , constraint : untrusted :: Input < '_ > ,) -> Result < bool , Error > { match (name . len () , constraint . len ()) { (4 , 8) => () , (16 , 32) => () , (4 , 32) | (16 , 8) => { return Ok (false) ; } (4 , _) | (16 , _) => { return Err (Error :: InvalidNetworkMaskConstraint) ; } _ => { return Err (Error :: BadDer) ; } } ; let (constraint_address , constraint_mask) = constraint . read_all (Error :: BadDer , | value | { let address = value . read_bytes (constraint . len () / 2) . unwrap () ; let mask = value . read_bytes (constraint . len () / 2) . unwrap () ; Ok ((address , mask)) }) ? ; let mut name = untrusted :: Reader :: new (name) ; let mut constraint_address = untrusted :: Reader :: new (constraint_address) ; let mut constraint_mask = untrusted :: Reader :: new (constraint_mask) ; let mut seen_zero_bit = false ; loop { let name_byte = name . read_byte () . unwrap () ; let constraint_address_byte = constraint_address . read_byte () . unwrap () ; let constraint_mask_byte = constraint_mask . read_byte () . unwrap () ; let leading = constraint_mask_byte . leading_ones () ; let trailing = constraint_mask_byte . trailing_zeros () ; if leading + trailing != 8 { return Err (Error :: InvalidNetworkMaskConstraint) ; } if seen_zero_bit && constraint_mask_byte != 0x00 { return Err (Error :: InvalidNetworkMaskConstraint) ; } if constraint_mask_byte != 0xff { seen_zero_bit = true ; } if ((name_byte ^ constraint_address_byte) & constraint_mask_byte) != 0 { return Ok (false) ; } if name . at_end () { break ; } } Ok (true) }
+};
+}

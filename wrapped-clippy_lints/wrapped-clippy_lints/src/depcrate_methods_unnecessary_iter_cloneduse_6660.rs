@@ -1,0 +1,9 @@
+// Generated macro for use_6660 (use)
+macro_rules! Depcrate_methods_unnecessary_iter_cloneduse_6660 {
+() => {
+// Module: crate::methods::unnecessary_iter_cloned
+// Provides: {"use_6660"}
+// Dependencies: {}
+use rustc_errors :: Applicability ;
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for macro_12433 (macro)
+macro_rules! Depcrate_shared_windot11macro_12433 {
+() => {
+// Module: crate::shared::windot11
+// Provides: {"macro_12433"}
+// Dependencies: {}
+ENUM ! { enum DOT11_WPS_CONFIG_METHOD { DOT11_WPS_CONFIG_METHOD_NULL = 0 , DOT11_WPS_CONFIG_METHOD_DISPLAY = 0x0008 , DOT11_WPS_CONFIG_METHOD_NFC_TAG = 0x0020 , DOT11_WPS_CONFIG_METHOD_NFC_INTERFACE = 0x0040 , DOT11_WPS_CONFIG_METHOD_PUSHBUTTON = 0x0080 , DOT11_WPS_CONFIG_METHOD_KEYPAD = 0x0100 , DOT11_WPS_CONFIG_METHOD_WFDS_DEFAULT = 0x1000 , } }
+};
+}

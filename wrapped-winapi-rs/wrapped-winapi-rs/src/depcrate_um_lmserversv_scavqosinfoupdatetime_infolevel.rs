@@ -1,0 +1,9 @@
+// Generated macro for SV_SCAVQOSINFOUPDATETIME_INFOLEVEL (const)
+macro_rules! Depcrate_um_lmserverSV_SCAVQOSINFOUPDATETIME_INFOLEVEL {
+() => {
+// Module: crate::um::lmserver
+// Provides: {"SV_SCAVQOSINFOUPDATETIME_INFOLEVEL"}
+// Dependencies: {}
+pub const SV_SCAVQOSINFOUPDATETIME_INFOLEVEL : DWORD = PARMNUM_BASE_INFOLEVEL + SV_SCAVQOSINFOUPDATETIME_PARMNUM ;
+};
+}

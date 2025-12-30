@@ -1,0 +1,70 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcrateuse_51.rs");
+include!("depcratecargo_processor.rs");
+include!("depcrate_cargo_processoruse_40.rs");
+include!("depcrate_cargo_processoruse_39.rs");
+include!("depcrateuse_52.rs");
+include!("depcrate_dependenciesuse_25.rs");
+include!("depcrateuse_4.rs");
+include!("depcrate_workspaceuse_10.rs");
+include!("depcrateworkspace.rs");
+include!("depcrate_manifestwrite_manifest.rs");
+include!("depcrate_manifestuse_15.rs");
+include!("depcrate_generatoruse_34.rs");
+include!("depcrate_cargo_processoruse_41.rs");
+include!("depcrate_cargo_processoruse_38.rs");
+include!("depcrate_dependenciesextract_dependency_metadata.rs");
+include!("depcrategenerator.rs");
+include!("depcrate_cargo_processorcargoprocessor.rs");
+include!("depcrate_dependenciesconvert_to_workspace_deps_with_metadata.rs");
+include!("depcrateuse_48.rs");
+include!("depcrate_dependenciesuse_22.rs");
+include!("depcrate_dependenciesuse_24.rs");
+include!("depcrate_workspaceuse_7.rs");
+include!("depcrate_workspaceuse_6.rs");
+include!("depcrate_dependenciescollect_dependencies.rs");
+include!("depcrate_workspacecollect_all_workspace_dependencies.rs");
+include!("depcrate_manifestread_manifest.rs");
+include!("depcrate_generatorconvert_deps_to_workspace.rs");
+include!("depcrate_dependenciesuse_23.rs");
+include!("depcrate_manifestuse_17.rs");
+include!("depcrate_cargo_processoruse_43.rs");
+include!("depcrate_cargo_processorimpl_47.rs");
+include!("depcrateuse_49.rs");
+include!("depcrate_cargo_processorpackageinfo.rs");
+include!("depcrateuse_3.rs");
+include!("depcrate_dependenciescollect_dependencies_with_metadata.rs");
+include!("depcrateuse_50.rs");
+include!("depcrate_workspacecollect_workspace_members.rs");
+include!("depcrate_workspacegenerate_workspace_toml.rs");
+include!("depcrate_dependenciesdependencymetadata.rs");
+include!("depcrate_generatoruse_32.rs");
+include!("depcrateuse_1.rs");
+include!("depcrate_manifestuse_16.rs");
+include!("depcrate_generatorgenerate_wrapped_cargo_toml.rs");
+include!("depcrate_generatoruse_33.rs");
+include!("depcratemanifest.rs");
+include!("depcrate_workspaceuse_9.rs");
+include!("depcratedependencies.rs");
+include!("depcrate_workspaceuse_8.rs");
+include!("depcrate_cargo_processoruse_42.rs");
+include!("depcrate_manifestupdate_edition.rs");
+include!("depcrate_cargo_processorcargotoml.rs");
+include!("depcrateuse_2.rs");
+include!("modcrate_generator.rs");
+include!("modcrate_cargo_processor.rs");
+include!("modcrate.rs");
+include!("modcrate_manifest.rs");
+include!("modcrate_workspace.rs");
+include!("modcrate_dependencies.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate_generator!();
+    Modcrate_cargo_processor!();
+    Modcrate!();
+    Modcrate_manifest!();
+    Modcrate_workspace!();
+    Modcrate_dependencies!();
+}

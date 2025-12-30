@@ -1,0 +1,56 @@
+// Generated module macro for crate::os::iocp::afd
+macro_rules! Modcrate_os_iocp_afd {
+() => {
+        Depcrate_os_iocp_afduse_38!();
+        Depcrate_os_iocp_afduse_39!();
+        Depcrate_os_iocp_afduse_40!();
+        Depcrate_os_iocp_afduse_41!();
+        Depcrate_os_iocp_afduse_42!();
+        Depcrate_os_iocp_afduse_43!();
+        Depcrate_os_iocp_afduse_44!();
+        Depcrate_os_iocp_afduse_45!();
+        Depcrate_os_iocp_afduse_46!();
+        Depcrate_os_iocp_afduse_47!();
+        Depcrate_os_iocp_afduse_48!();
+        Depcrate_os_iocp_afduse_49!();
+        Depcrate_os_iocp_afduse_50!();
+        Depcrate_os_iocp_afduse_51!();
+        Depcrate_os_iocp_afduse_52!();
+        Depcrate_os_iocp_afduse_53!();
+        Depcrate_os_iocp_afduse_54!();
+        Depcrate_os_iocp_afduse_55!();
+        Depcrate_os_iocp_afduse_56!();
+        Depcrate_os_iocp_afdAfdPollInfo!();
+        Depcrate_os_iocp_afdAfdPollHandleInfo!();
+        Depcrate_os_iocp_afdimpl_59!();
+        Depcrate_os_iocp_afdimpl_60!();
+        Depcrate_os_iocp_afdAfdPollMask!();
+        Depcrate_os_iocp_afdimpl_62!();
+        Depcrate_os_iocp_afdimpl_63!();
+        Depcrate_os_iocp_afdimpl_64!();
+        Depcrate_os_iocp_afdimpl_65!();
+        Depcrate_os_iocp_afdimpl_66!();
+        Depcrate_os_iocp_afdimpl_67!();
+        Depcrate_os_iocp_afdHasAfdInfo!();
+        Depcrate_os_iocp_afddefine_ntdll_import!();
+        Depcrate_os_iocp_afdmacro_70!();
+        Depcrate_os_iocp_afdimpl_71!();
+        Depcrate_os_iocp_afdAfd!();
+        Depcrate_os_iocp_afdimpl_73!();
+        Depcrate_os_iocp_afdimpl_74!();
+        Depcrate_os_iocp_afdimpl_75!();
+        Depcrate_os_iocp_afdimpl_76!();
+        Depcrate_os_iocp_afdmacro_77!();
+        Depcrate_os_iocp_afdimpl_78!();
+        Depcrate_os_iocp_afdimpl_79!();
+        Depcrate_os_iocp_afdimpl_80!();
+        Depcrate_os_iocp_afdimpl_81!();
+        Depcrate_os_iocp_afdimpl_82!();
+        Depcrate_os_iocp_afdimpl_83!();
+        Depcrate_os_iocp_afdAsIoStatusBlock!();
+        Depcrate_os_iocp_afdimpl_85!();
+        Depcrate_os_iocp_afdimpl_86!();
+        Depcrate_os_iocp_afdbase_socket!();
+        Depcrate_os_iocp_afdtry_socket_ioctl!();
+    };
+}

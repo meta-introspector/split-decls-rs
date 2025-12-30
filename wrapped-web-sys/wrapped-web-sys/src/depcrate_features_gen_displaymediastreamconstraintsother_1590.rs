@@ -1,0 +1,9 @@
+// Generated macro for other_1590 (other)
+macro_rules! Depcrate_features_gen_DisplayMediaStreamConstraintsother_1590 {
+() => {
+// Module: crate::features::gen_DisplayMediaStreamConstraints
+// Provides: {"other_1590"}
+// Dependencies: {}
+# [wasm_bindgen] extern "C" { # [wasm_bindgen (extends = :: js_sys :: Object , js_name = DisplayMediaStreamConstraints)] # [derive (Debug , Clone , PartialEq , Eq)] # [doc = "The `DisplayMediaStreamConstraints` dictionary."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `DisplayMediaStreamConstraints`*"] pub type DisplayMediaStreamConstraints ; # [doc = "Get the `audio` field of this object."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `DisplayMediaStreamConstraints`*"] # [wasm_bindgen (method , getter = "audio")] pub fn get_audio (this : & DisplayMediaStreamConstraints) -> :: wasm_bindgen :: JsValue ; # [doc = "Change the `audio` field of this object."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `DisplayMediaStreamConstraints`*"] # [wasm_bindgen (method , setter = "audio")] pub fn set_audio (this : & DisplayMediaStreamConstraints , val : & :: wasm_bindgen :: JsValue) ; # [doc = "Get the `video` field of this object."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `DisplayMediaStreamConstraints`*"] # [wasm_bindgen (method , getter = "video")] pub fn get_video (this : & DisplayMediaStreamConstraints) -> :: wasm_bindgen :: JsValue ; # [doc = "Change the `video` field of this object."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `DisplayMediaStreamConstraints`*"] # [wasm_bindgen (method , setter = "video")] pub fn set_video (this : & DisplayMediaStreamConstraints , val : & :: wasm_bindgen :: JsValue) ; }
+};
+}

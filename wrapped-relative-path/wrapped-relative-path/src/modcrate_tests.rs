@@ -1,0 +1,41 @@
+// Generated module macro for crate::tests
+macro_rules! Modcrate_tests {
+() => {
+        Depcrate_testsuse_20!();
+        Depcrate_testsuse_21!();
+        Depcrate_testsuse_22!();
+        Depcrate_testsuse_23!();
+        Depcrate_testsuse_24!();
+        Depcrate_testsuse_25!();
+        Depcrate_testsuse_26!();
+        Depcrate_testsuse_27!();
+        Depcrate_testst!();
+        Depcrate_testsassert_components!();
+        Depcrate_testsrp!();
+        Depcrate_teststest_decompositions!();
+        Depcrate_teststest_stem_ext!();
+        Depcrate_teststest_set_file_name!();
+        Depcrate_teststest_set_extension!();
+        Depcrate_teststest_eq_recievers!();
+        Depcrate_teststest_compare!();
+        Depcrate_teststest_join!();
+        Depcrate_teststest_components_iterator!();
+        Depcrate_teststest_to_path_buf!();
+        Depcrate_teststest_eq!();
+        Depcrate_teststest_next_back!();
+        Depcrate_teststest_parent!();
+        Depcrate_teststest_relative_path_buf!();
+        Depcrate_teststest_normalize!();
+        Depcrate_teststest_relative_to!();
+        Depcrate_teststest_from!();
+        Depcrate_teststest_relative_path_asref_str!();
+        Depcrate_teststest_default!();
+        Depcrate_teststest_push!();
+        Depcrate_teststest_pop!();
+        Depcrate_teststest_display!();
+        Depcrate_teststest_unix_from_path!();
+        Depcrate_teststest_windows_from_path!();
+        Depcrate_teststest_unix_owned_from_path!();
+        Depcrate_teststest_windows_owned_from_path!();
+    };
+}

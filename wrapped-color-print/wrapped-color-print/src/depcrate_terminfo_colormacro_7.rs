@@ -1,0 +1,9 @@
+// Generated macro for macro_7 (macro)
+macro_rules! Depcrate_terminfo_colormacro_7 {
+() => {
+// Module: crate::terminfo::color
+// Provides: {"macro_7"}
+// Dependencies: {}
+# [rustfmt :: skip] lazy_static ! { pub static ref BLACK : String = foreground (0) ; pub static ref RED : String = foreground (1) ; pub static ref GREEN : String = foreground (2) ; pub static ref YELLOW : String = foreground (3) ; pub static ref BLUE : String = foreground (4) ; pub static ref MAGENTA : String = foreground (5) ; pub static ref CYAN : String = foreground (6) ; pub static ref WHITE : String = foreground (7) ; pub static ref BRIGHT_BLACK : String = foreground (8) ; pub static ref BRIGHT_RED : String = foreground (9) ; pub static ref BRIGHT_GREEN : String = foreground (10) ; pub static ref BRIGHT_YELLOW : String = foreground (11) ; pub static ref BRIGHT_BLUE : String = foreground (12) ; pub static ref BRIGHT_MAGENTA : String = foreground (13) ; pub static ref BRIGHT_CYAN : String = foreground (14) ; pub static ref BRIGHT_WHITE : String = foreground (15) ; pub static ref BG_BLACK : String = background (0) ; pub static ref BG_RED : String = background (1) ; pub static ref BG_GREEN : String = background (2) ; pub static ref BG_YELLOW : String = background (3) ; pub static ref BG_BLUE : String = background (4) ; pub static ref BG_MAGENTA : String = background (5) ; pub static ref BG_CYAN : String = background (6) ; pub static ref BG_WHITE : String = background (7) ; pub static ref BG_BRIGHT_BLACK : String = background (8) ; pub static ref BG_BRIGHT_RED : String = background (9) ; pub static ref BG_BRIGHT_GREEN : String = background (10) ; pub static ref BG_BRIGHT_YELLOW : String = background (11) ; pub static ref BG_BRIGHT_BLUE : String = background (12) ; pub static ref BG_BRIGHT_MAGENTA : String = background (13) ; pub static ref BG_BRIGHT_CYAN : String = background (14) ; pub static ref BG_BRIGHT_WHITE : String = background (15) ; }
+};
+}

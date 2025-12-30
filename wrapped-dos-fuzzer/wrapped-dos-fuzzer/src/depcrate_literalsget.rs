@@ -1,0 +1,9 @@
+// Generated macro for get (function)
+macro_rules! Depcrate_literalsget {
+() => {
+// Module: crate::literals
+// Provides: {"get"}
+// Dependencies: {}
+# [doc = " Get all relevant literals from pulldown-cmark to generate fuzzing input from."] # [doc = ""] # [doc = " This method iterates over the source code of pulldown-cmark (except for `entities.rs` and `main.rs`."] # [doc = " It parses the source code an extracts all literals used in consts, statics, conditions and match"] # [doc = " arm patterns and guards. Literals are Strs, ByteStrs, chars and bytes."] # [doc = " If an array is encountered, only the first element is extracted. We assume that all elements in"] # [doc = " the array are used the same way to enter the same branch, like `if [\"foo\", \"bar\"].contains(\"baz\")`."] # [doc = ""] # [doc = " Additionally, it manually adds some literals for uncovered edge-cases."] pub fn get () -> Vec < Vec < u8 > > { let walkdir = WalkDir :: new ("../pulldown-cmark/src") . into_iter () . filter_map (| e | e . ok ()) . filter (| e | e . file_type () . is_file ()) . filter (| e | { if let Some (ext) = e . path () . extension () { ext == "rs" } else { false } }) ; let mut literal_parser = LiteralParser :: new () ; let skipped_files = & [Path :: new ("../pulldown-cmark/src/entities.rs") , Path :: new ("../pulldown-cmark/src/main.rs") ,] ; for file in walkdir { if skipped_files . contains (& file . path ()) { continue ; } literal_parser . extract_literals_from_file (file . path ()) ; } let mut literals = literal_parser . into_literals () ; literals . insert ("&amp;" . into ()) ; literals . insert ("\u{a0}" . into ()) ; literals . insert ("\u{0}" . into ()) ; literals . insert ("\u{80}" . into ()) ; literals . insert ("\u{800}" . into ()) ; literals . insert ("\u{10000}" . into ()) ; literals . into_iter () . filter (| lit | ! lit . contains (& b'\n') || lit . len () == 1) . filter (| lit | ! lit . is_empty ()) . collect () }
+};
+}

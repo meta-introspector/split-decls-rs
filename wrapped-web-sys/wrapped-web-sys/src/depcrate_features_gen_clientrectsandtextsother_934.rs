@@ -1,0 +1,9 @@
+// Generated macro for other_934 (other)
+macro_rules! Depcrate_features_gen_ClientRectsAndTextsother_934 {
+() => {
+// Module: crate::features::gen_ClientRectsAndTexts
+// Provides: {"other_934"}
+// Dependencies: {}
+# [wasm_bindgen] extern "C" { # [wasm_bindgen (extends = :: js_sys :: Object , js_name = ClientRectsAndTexts)] # [derive (Debug , Clone , PartialEq , Eq)] # [doc = "The `ClientRectsAndTexts` dictionary."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `ClientRectsAndTexts`*"] pub type ClientRectsAndTexts ; # [cfg (feature = "DomRectList")] # [doc = "Get the `rectList` field of this object."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `ClientRectsAndTexts`, `DomRectList`*"] # [wasm_bindgen (method , getter = "rectList")] pub fn get_rect_list (this : & ClientRectsAndTexts) -> DomRectList ; # [cfg (feature = "DomRectList")] # [doc = "Change the `rectList` field of this object."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `ClientRectsAndTexts`, `DomRectList`*"] # [wasm_bindgen (method , setter = "rectList")] pub fn set_rect_list (this : & ClientRectsAndTexts , val : & DomRectList) ; # [doc = "Get the `textList` field of this object."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `ClientRectsAndTexts`*"] # [wasm_bindgen (method , getter = "textList")] pub fn get_text_list (this : & ClientRectsAndTexts) -> :: js_sys :: Array ; # [doc = "Change the `textList` field of this object."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `ClientRectsAndTexts`*"] # [wasm_bindgen (method , setter = "textList")] pub fn set_text_list (this : & ClientRectsAndTexts , val : & :: wasm_bindgen :: JsValue) ; }
+};
+}

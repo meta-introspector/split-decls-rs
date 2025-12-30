@@ -1,0 +1,44 @@
+// Generated module macro for crate::types
+macro_rules! Modcrate_types {
+() => {
+        Depcrate_typesuse_28!();
+        Depcrate_typesuse_29!();
+        Depcrate_typesuse_30!();
+        Depcrate_typesuse_31!();
+        Depcrate_typesuse_32!();
+        Depcrate_typesuse_33!();
+        Depcrate_typesalign_up!();
+        Depcrate_typesalign_buf_mut!();
+        Depcrate_typesalign_buf!();
+        Depcrate_typesMarshalState!();
+        Depcrate_typesDemarshalState!();
+        Depcrate_typesDemarshalError!();
+        Depcrate_typesimpl_40!();
+        Depcrate_typesimpl_41!();
+        Depcrate_typesimpl_42!();
+        Depcrate_typesZEROS!();
+        Depcrate_typesimpl_44!();
+        Depcrate_typesimpl_45!();
+        Depcrate_typesMarshal!();
+        Depcrate_typesDemarshal!();
+        Depcrate_typesStr!();
+        Depcrate_typesimpl_49!();
+        Depcrate_typesimpl_50!();
+        Depcrate_typesObjectPath!();
+        Depcrate_typesimpl_52!();
+        Depcrate_typesimpl_53!();
+        Depcrate_typesSignature!();
+        Depcrate_typesimpl_55!();
+        Depcrate_typesimpl_56!();
+        Depcrate_typesimpl_57!();
+        Depcrate_typesimpl_58!();
+        Depcrate_typesimpl_59!();
+        Depcrate_typesimpl_60!();
+        Depcrate_typesStruct!();
+        Depcrate_typesimpl_62!();
+        Depcrate_typesArray!();
+        Depcrate_typesimpl_64!();
+        Depcrate_typesVariant!();
+        Depcrate_typesimpl_66!();
+    };
+}

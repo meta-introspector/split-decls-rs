@@ -1,0 +1,42 @@
+// Generated module macro for crate::os::windows::io::socket
+macro_rules! Modcrate_os_windows_io_socket {
+() => {
+        Depcrate_os_windows_io_socketuse_1941!();
+        Depcrate_os_windows_io_socketuse_1942!();
+        Depcrate_os_windows_io_socketuse_1943!();
+        Depcrate_os_windows_io_socketuse_1944!();
+        Depcrate_os_windows_io_socketuse_1945!();
+        Depcrate_os_windows_io_socketValidRawSocket!();
+        Depcrate_os_windows_io_socketBorrowedSocket!();
+        Depcrate_os_windows_io_socketOwnedSocket!();
+        Depcrate_os_windows_io_socketimpl_1949!();
+        Depcrate_os_windows_io_socketimpl_1950!();
+        Depcrate_os_windows_io_socketimpl_1951!();
+        Depcrate_os_windows_io_socketlast_error!();
+        Depcrate_os_windows_io_socketimpl_1953!();
+        Depcrate_os_windows_io_socketimpl_1954!();
+        Depcrate_os_windows_io_socketimpl_1955!();
+        Depcrate_os_windows_io_socketimpl_1956!();
+        Depcrate_os_windows_io_socketimpl_1957!();
+        Depcrate_os_windows_io_socketimpl_1958!();
+        Depcrate_os_windows_io_socketimpl_1959!();
+        Depcrate_os_windows_io_socketAsSocket!();
+        Depcrate_os_windows_io_socketimpl_1961!();
+        Depcrate_os_windows_io_socketimpl_1962!();
+        Depcrate_os_windows_io_socketimpl_1963!();
+        Depcrate_os_windows_io_socketimpl_1964!();
+        Depcrate_os_windows_io_socketimpl_1965!();
+        Depcrate_os_windows_io_socketimpl_1966!();
+        Depcrate_os_windows_io_socketimpl_1967!();
+        Depcrate_os_windows_io_socketimpl_1968!();
+        Depcrate_os_windows_io_socketimpl_1969!();
+        Depcrate_os_windows_io_socketimpl_1970!();
+        Depcrate_os_windows_io_socketimpl_1971!();
+        Depcrate_os_windows_io_socketimpl_1972!();
+        Depcrate_os_windows_io_socketimpl_1973!();
+        Depcrate_os_windows_io_socketimpl_1974!();
+        Depcrate_os_windows_io_socketimpl_1975!();
+        Depcrate_os_windows_io_socketimpl_1976!();
+        Depcrate_os_windows_io_socketimpl_1977!();
+    };
+}

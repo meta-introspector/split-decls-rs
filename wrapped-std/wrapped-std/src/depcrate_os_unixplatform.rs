@@ -1,0 +1,9 @@
+// Generated macro for platform (module)
+macro_rules! Depcrate_os_unixplatform {
+() => {
+// Module: crate::os::unix
+// Provides: {"platform"}
+// Dependencies: {}
+# [cfg (not (doc))] mod platform { # [cfg (target_os = "aix")] pub use crate :: os :: aix :: * ; # [cfg (target_os = "android")] pub use crate :: os :: android :: * ; # [cfg (target_os = "cygwin")] pub use crate :: os :: cygwin :: * ; # [cfg (target_vendor = "apple")] pub use crate :: os :: darwin :: * ; # [cfg (target_os = "dragonfly")] pub use crate :: os :: dragonfly :: * ; # [cfg (target_os = "emscripten")] pub use crate :: os :: emscripten :: * ; # [cfg (target_os = "espidf")] pub use crate :: os :: espidf :: * ; # [cfg (target_os = "freebsd")] pub use crate :: os :: freebsd :: * ; # [cfg (target_os = "fuchsia")] pub use crate :: os :: fuchsia :: * ; # [cfg (target_os = "haiku")] pub use crate :: os :: haiku :: * ; # [cfg (target_os = "horizon")] pub use crate :: os :: horizon :: * ; # [cfg (target_os = "hurd")] pub use crate :: os :: hurd :: * ; # [cfg (target_os = "illumos")] pub use crate :: os :: illumos :: * ; # [cfg (target_os = "l4re")] pub use crate :: os :: l4re :: * ; # [cfg (target_os = "linux")] pub use crate :: os :: linux :: * ; # [cfg (target_os = "netbsd")] pub use crate :: os :: netbsd :: * ; # [cfg (target_os = "nto")] pub use crate :: os :: nto :: * ; # [cfg (target_os = "nuttx")] pub use crate :: os :: nuttx :: * ; # [cfg (target_os = "openbsd")] pub use crate :: os :: openbsd :: * ; # [cfg (target_os = "redox")] pub use crate :: os :: redox :: * ; # [cfg (target_os = "rtems")] pub use crate :: os :: rtems :: * ; # [cfg (target_os = "solaris")] pub use crate :: os :: solaris :: * ; # [cfg (target_os = "vita")] pub use crate :: os :: vita :: * ; # [cfg (target_os = "vxworks")] pub use crate :: os :: vxworks :: * ; }
+};
+}

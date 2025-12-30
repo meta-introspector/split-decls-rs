@@ -1,0 +1,49 @@
+// Generated module macro for crate::isa::s390x::abi
+macro_rules! Modcrate_isa_s390x_abi {
+() => {
+        Depcrate_isa_s390x_abiuse_2270!();
+        Depcrate_isa_s390x_abiuse_2271!();
+        Depcrate_isa_s390x_abiuse_2272!();
+        Depcrate_isa_s390x_abiuse_2273!();
+        Depcrate_isa_s390x_abiuse_2274!();
+        Depcrate_isa_s390x_abiuse_2275!();
+        Depcrate_isa_s390x_abiuse_2276!();
+        Depcrate_isa_s390x_abiuse_2277!();
+        Depcrate_isa_s390x_abiuse_2278!();
+        Depcrate_isa_s390x_abiuse_2279!();
+        Depcrate_isa_s390x_abiuse_2280!();
+        Depcrate_isa_s390x_abiuse_2281!();
+        Depcrate_isa_s390x_abiuse_2282!();
+        Depcrate_isa_s390x_abiuse_2283!();
+        Depcrate_isa_s390x_abiuse_2284!();
+        Depcrate_isa_s390x_abiuse_2285!();
+        Depcrate_isa_s390x_abiuse_2286!();
+        Depcrate_isa_s390x_abiS390xCallee!();
+        Depcrate_isa_s390x_abiin_int_reg!();
+        Depcrate_isa_s390x_abiin_flt_reg!();
+        Depcrate_isa_s390x_abiin_vec_reg!();
+        Depcrate_isa_s390x_abiget_intreg_for_arg!();
+        Depcrate_isa_s390x_abiget_fltreg_for_arg!();
+        Depcrate_isa_s390x_abiget_vecreg_for_arg!();
+        Depcrate_isa_s390x_abiget_intreg_for_ret!();
+        Depcrate_isa_s390x_abiget_fltreg_for_ret!();
+        Depcrate_isa_s390x_abiget_vecreg_for_ret!();
+        Depcrate_isa_s390x_abiREG_SAVE_AREA_SIZE!();
+        Depcrate_isa_s390x_abiimpl_2298!();
+        Depcrate_isa_s390x_abiS390xMachineDeps!();
+        Depcrate_isa_s390x_abiimpl_2300!();
+        Depcrate_isa_s390x_abiimpl_2301!();
+        Depcrate_isa_s390x_abiimpl_2302!();
+        Depcrate_isa_s390x_abiis_reg_saved_in_prologue!();
+        Depcrate_isa_s390x_abiget_clobbered_gprs!();
+        Depcrate_isa_s390x_abiget_clobbered_fprs!();
+        Depcrate_isa_s390x_abigen_restore_gprs!();
+        Depcrate_isa_s390x_abigen_restore_fprs!();
+        Depcrate_isa_s390x_abisysv_clobbers!();
+        Depcrate_isa_s390x_abiSYSV_CLOBBERS!();
+        Depcrate_isa_s390x_abitail_clobbers!();
+        Depcrate_isa_s390x_abiTAIL_CLOBBERS!();
+        Depcrate_isa_s390x_abisysv_create_machine_env!();
+        Depcrate_isa_s390x_abitail_create_machine_env!();
+    };
+}

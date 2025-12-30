@@ -1,0 +1,9 @@
+// Generated macro for rewrite_aligned_items_inner (function)
+macro_rules! Depcrate_verticalrewrite_aligned_items_inner {
+() => {
+// Module: crate::vertical
+// Provides: {"rewrite_aligned_items_inner"}
+// Dependencies: {}
+fn rewrite_aligned_items_inner < T : AlignedItem > (context : & RewriteContext < '_ > , fields : & [T] , span : Span , offset : Indent , one_line_width : usize , force_trailing_separator : bool ,) -> Option < String > { let item_shape = Shape :: indented (offset , context . config) . sub_width_opt (1) ? ; let (mut field_prefix_max_width , field_prefix_min_width) = struct_field_prefix_max_min_width (context , fields , item_shape) ; let max_diff = field_prefix_max_width . saturating_sub (field_prefix_min_width) ; if max_diff > context . config . struct_field_align_threshold () { field_prefix_max_width = 0 ; } let mut items = itemize_list (context . snippet_provider , fields . iter () , "}" , "," , | field | field . get_span () . lo () , | field | field . get_span () . hi () , | field | field . rewrite_aligned_item (context , item_shape , field_prefix_max_width) , span . lo () , span . hi () , false ,) . collect :: < Vec < _ > > () ; let tactic = definitive_tactic (& items , ListTactic :: HorizontalVertical , Separator :: Comma , one_line_width ,) ; if tactic == DefinitiveListTactic :: Horizontal { let do_rewrite = | field : & T | -> RewriteResult { field . rewrite_aligned_item (context , item_shape , 0) } ; fields . iter () . zip (items . iter_mut ()) . for_each (| (field , list_item) : (& T , & mut ListItem) | { if list_item . item . is_ok () { list_item . item = do_rewrite (field) ; } }) ; } let separator_tactic = if force_trailing_separator { SeparatorTactic :: Always } else { context . config . trailing_comma () } ; let fmt = ListFormatting :: new (item_shape , context . config) . tactic (tactic) . trailing_separator (separator_tactic) . preserve_newline (true) ; write_list (& items , & fmt) . ok () }
+};
+}

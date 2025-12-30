@@ -1,0 +1,9 @@
+// Generated macro for define_hasher (macro)
+macro_rules! Depcratedefine_hasher {
+() => {
+// Module: crate
+// Provides: {"define_hasher"}
+// Dependencies: {}
+macro_rules ! define_hasher { ($ name : ident , $ init : path , $ OutputBytes : ident) => { # [derive (Clone)] pub struct $ name { state : Compressor , buffer : BlockBuffer < U64 >, datalen : usize , } impl Debug for $ name { fn fmt (& self , f : & mut Formatter) -> Result { f . debug_struct ("Jh") . field ("state" , & "(state)") . field ("buffer" , & "(BlockBuffer<U64>)") . field ("datalen" , & self . datalen) . finish () } } impl Default for $ name { fn default () -> Self { Self { state : Compressor :: new ($ init) , buffer : BlockBuffer :: default () , datalen : 0 , } } } impl digest :: BlockInput for $ name { type BlockSize = U64 ; } impl digest :: Update for $ name { fn update (& mut self , data : impl AsRef < [u8] >) { let data = data . as_ref () ; self . datalen += data . len () ; let state = & mut self . state ; self . buffer . input_block (data , | b | state . input (b)) } } impl digest :: FixedOutputDirty for $ name { type OutputSize = $ OutputBytes ; fn finalize_into_dirty (& mut self , out : & mut DGenericArray < u8 , Self :: OutputSize >) { let state = & mut self . state ; let buffer = & mut self . buffer ; let len = self . datalen as u64 * 8 ; if buffer . position () == 0 { buffer . len64_padding_be (len , | b | state . input (b)) ; } else { use block_buffer :: block_padding :: Iso7816 ; state . input (buffer . pad_with ::< Iso7816 > () . unwrap ()) ; let mut last = BBGenericArray :: default () ; last [56 ..] . copy_from_slice (& len . to_be_bytes ()) ; state . input (& last) ; } let finalized = self . state . finalize () ; out . copy_from_slice (& finalized [(128 - $ OutputBytes :: to_usize ()) ..]) ; } } impl digest :: Reset for $ name { fn reset (& mut self) { * self = Self :: default () ; } } } ; }
+};
+}

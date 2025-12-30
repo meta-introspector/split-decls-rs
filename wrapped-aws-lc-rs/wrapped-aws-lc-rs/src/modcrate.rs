@@ -1,0 +1,57 @@
+// Generated module macro for crate
+macro_rules! Modcrate {
+() => {
+        Depcrateother_1!();
+        Depcrateother_2!();
+        Depcrateother_3!();
+        Depcrateaead!();
+        Depcrateagreement!();
+        Depcratecmac!();
+        Depcrateconstant_time!();
+        Depcratedigest!();
+        Depcrateerror!();
+        Depcratehkdf!();
+        Depcratehmac!();
+        Depcrateio!();
+        Depcratekey_wrap!();
+        Depcratepbkdf2!();
+        Depcratepkcs8!();
+        Depcraterand!();
+        Depcratesignature!();
+        Depcratetest!();
+        Depcratebn!();
+        Depcratebuffer!();
+        Depcratecbb!();
+        Depcratecbs!();
+        Depcratecipher!();
+        Depcratedebug!();
+        Depcrateec!();
+        Depcrateed25519!();
+        Depcrateencoding!();
+        Depcrateendian!();
+        Depcrateevp_pkey!();
+        Depcratefips!();
+        Depcratehex!();
+        Depcrateiv!();
+        Depcratekdf!();
+        Depcratekem!();
+        Depcratepqdsa!();
+        Depcrateptr!();
+        Depcratersa!();
+        Depcratetls_prf!();
+        Depcrateunstable!();
+        Depcrateuse_896!();
+        Depcrateuse_897!();
+        Depcrateuse_898!();
+        Depcrateuse_899!();
+        DepcrateSTART!();
+        Depcrateinit!();
+        Depcratefips_mode!();
+        Depcratetry_fips_mode!();
+        Depcratefips_cpu_jitter_entropy!();
+        Depcratetry_fips_cpu_jitter_entropy!();
+        Depcratedump_error!();
+        Depcratesealed!();
+        Depcratetests!();
+    };
+}

@@ -1,0 +1,9 @@
+// Generated macro for IOCTL_STORAGE_PERSISTENT_RESERVE_OUT (const)
+macro_rules! Depcrate_um_winioctlIOCTL_STORAGE_PERSISTENT_RESERVE_OUT {
+() => {
+// Module: crate::um::winioctl
+// Provides: {"IOCTL_STORAGE_PERSISTENT_RESERVE_OUT"}
+// Dependencies: {}
+pub const IOCTL_STORAGE_PERSISTENT_RESERVE_OUT : DWORD = CTL_CODE ! (IOCTL_STORAGE_BASE , 0x0407 , METHOD_BUFFERED , FILE_READ_ACCESS | FILE_WRITE_ACCESS) ;
+};
+}

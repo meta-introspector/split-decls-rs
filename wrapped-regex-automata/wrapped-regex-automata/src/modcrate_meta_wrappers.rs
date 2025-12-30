@@ -1,0 +1,49 @@
+// Generated module macro for crate::meta::wrappers
+macro_rules! Modcrate_meta_wrappers {
+() => {
+        Depcrate_meta_wrappersuse_460!();
+        Depcrate_meta_wrappersuse_461!();
+        Depcrate_meta_wrappersuse_462!();
+        Depcrate_meta_wrappersuse_463!();
+        Depcrate_meta_wrappersuse_464!();
+        Depcrate_meta_wrappersuse_465!();
+        Depcrate_meta_wrappersPikeVM!();
+        Depcrate_meta_wrappersimpl_467!();
+        Depcrate_meta_wrappersPikeVMEngine!();
+        Depcrate_meta_wrappersimpl_469!();
+        Depcrate_meta_wrappersPikeVMCache!();
+        Depcrate_meta_wrappersimpl_471!();
+        Depcrate_meta_wrappersBoundedBacktracker!();
+        Depcrate_meta_wrappersimpl_473!();
+        Depcrate_meta_wrappersBoundedBacktrackerEngine!();
+        Depcrate_meta_wrappersimpl_475!();
+        Depcrate_meta_wrappersBoundedBacktrackerCache!();
+        Depcrate_meta_wrappersimpl_477!();
+        Depcrate_meta_wrappersOnePass!();
+        Depcrate_meta_wrappersimpl_479!();
+        Depcrate_meta_wrappersOnePassEngine!();
+        Depcrate_meta_wrappersimpl_481!();
+        Depcrate_meta_wrappersOnePassCache!();
+        Depcrate_meta_wrappersimpl_483!();
+        Depcrate_meta_wrappersHybrid!();
+        Depcrate_meta_wrappersimpl_485!();
+        Depcrate_meta_wrappersHybridEngine!();
+        Depcrate_meta_wrappersimpl_487!();
+        Depcrate_meta_wrappersHybridCache!();
+        Depcrate_meta_wrappersimpl_489!();
+        Depcrate_meta_wrappersDFA!();
+        Depcrate_meta_wrappersimpl_491!();
+        Depcrate_meta_wrappersDFAEngine!();
+        Depcrate_meta_wrappersimpl_493!();
+        Depcrate_meta_wrappersReverseHybrid!();
+        Depcrate_meta_wrappersimpl_495!();
+        Depcrate_meta_wrappersReverseHybridEngine!();
+        Depcrate_meta_wrappersimpl_497!();
+        Depcrate_meta_wrappersReverseHybridCache!();
+        Depcrate_meta_wrappersimpl_499!();
+        Depcrate_meta_wrappersReverseDFA!();
+        Depcrate_meta_wrappersimpl_501!();
+        Depcrate_meta_wrappersReverseDFAEngine!();
+        Depcrate_meta_wrappersimpl_503!();
+    };
+}

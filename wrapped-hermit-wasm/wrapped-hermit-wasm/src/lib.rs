@@ -1,0 +1,76 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcrate_preview1block_device.rs");
+include!("depcrate_capiwasmtime_mmap_new.rs");
+include!("depcrate_archmacro_8.rs");
+include!("depcrate_preview1init.rs");
+include!("depcrate_preview1use_43.rs");
+include!("depcrate_preview1symbolic_link.rs");
+include!("depcrate_preview1character_device.rs");
+include!("depcrateuse_2.rs");
+include!("depcrateuse_3.rs");
+include!("depcrate_preview1socket_dgram.rs");
+include!("depcrate_capiwasmtime_page_size.rs");
+include!("depcrate_preview1use_41.rs");
+include!("depcrate_capiwasmtime_tls_set.rs");
+include!("depcrate_preview1regular_file.rs");
+include!("depcrate_capiother_14.rs");
+include!("depcrate_preview1use_37.rs");
+include!("depcrate_preview1directory.rs");
+include!("depcrate_capiwasmtime_trap_handler_t.rs");
+include!("depcrate_capiwasmtime_mmap_remap.rs");
+include!("depcrate_preview1filestream.rs");
+include!("depcrate_capiwasmtime_memory_image_free.rs");
+include!("depcrate_capiwasmtime_setjmp.rs");
+include!("depcrate_capiwasmtime_memory_image_new.rs");
+include!("depcrate_capiwasmtime_tls_get.rs");
+include!("depcrate_preview1use_36.rs");
+include!("depcrate_capiwasmtime_longjmp.rs");
+include!("depcrate_capiwasmtime_memory_image.rs");
+include!("depcratecapi.rs");
+include!("depcrateuse_1.rs");
+include!("depcrate_preview1use_38.rs");
+include!("depcrate_preview1filestat.rs");
+include!("depcrate_capiwasmtime_munmap.rs");
+include!("depcrate_preview1use_32.rs");
+include!("depcraterun_preview1.rs");
+include!("depcrate_preview1descriptor.rs");
+include!("depcrate_preview1socket_stream.rs");
+include!("depcrate_capiuse_10.rs");
+include!("depcrate_preview1use_44.rs");
+include!("depcrate_preview1use_42.rs");
+include!("depcrate_preview1use_35.rs");
+include!("depcrate_preview1use_40.rs");
+include!("depcratearch.rs");
+include!("depcrate_preview1use_39.rs");
+include!("depcrate_capiwasmtime_memory_image_map_at.rs");
+include!("depcrate_capiwasmtime_init_traps.rs");
+include!("depcrate_capiwasmtime_mprotect.rs");
+include!("depcrateuse_5.rs");
+include!("depcrate_preview1use_33.rs");
+include!("depcrate_preview1macro_49.rs");
+include!("depcrate_preview1fd.rs");
+include!("depcrate_preview1unknown.rs");
+include!("depcrate_preview1cvt.rs");
+include!("depcrate_capimacro_13.rs");
+include!("depcrate_capiuse_11.rs");
+include!("depcrate_capiuse_12.rs");
+include!("depcrateuse_4.rs");
+include!("depcrate_preview1fdstat.rs");
+include!("depcrateuse_6.rs");
+include!("depcrate_capitls.rs");
+include!("depcrate_preview1impl_48.rs");
+include!("depcrate_preview1use_34.rs");
+include!("depcratepreview1.rs");
+include!("modcrate_arch.rs");
+include!("modcrate_capi.rs");
+include!("modcrate_preview1.rs");
+include!("modcrate.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate_arch!();
+    Modcrate_capi!();
+    Modcrate_preview1!();
+    Modcrate!();
+}

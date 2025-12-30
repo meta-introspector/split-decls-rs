@@ -1,0 +1,9 @@
+// Generated macro for use_244 (pub_use)
+macro_rules! Depcrate_generateduse_244 {
+() => {
+// Module: crate::generated
+// Provides: {"use_244"}
+// Dependencies: {}
+# [cfg (all (feature = "GCKeyCodes" , feature = "objc2-core-foundation"))] pub use self :: __GCKeyCodes :: GCKeyCodeInternational9 ;
+};
+}

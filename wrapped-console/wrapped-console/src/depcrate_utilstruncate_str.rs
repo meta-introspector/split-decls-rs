@@ -1,0 +1,9 @@
+// Generated macro for truncate_str (function)
+macro_rules! Depcrate_utilstruncate_str {
+() => {
+// Module: crate::utils
+// Provides: {"truncate_str"}
+// Dependencies: {}
+# [doc = " Truncates a string to a certain number of characters."] # [doc = ""] # [doc = " This ensures that escape codes are not screwed up in the process."] # [doc = " If the maximum length is hit the string will be truncated but"] # [doc = " escapes code will still be honored.  If truncation takes place"] # [doc = " the tail string will be appended."] pub fn truncate_str < 'a > (s : & 'a str , width : usize , tail : & str) -> Cow < 'a , str > { if measure_text_width (s) <= width { return Cow :: Borrowed (s) ; } # [cfg (feature = "ansi-parsing")] { use core :: cmp :: Ordering ; let mut iter = AnsiCodeIterator :: new (s) ; let mut length = 0 ; let mut rv = None ; while let Some (item) = iter . next () { match item { (s , false) => { if rv . is_none () { if str_width (s) + length > width . saturating_sub (str_width (tail)) { let ts = iter . current_slice () ; let mut s_byte = 0 ; let mut s_width = 0 ; let rest_width = width . saturating_sub (str_width (tail)) . saturating_sub (length) ; for c in s . chars () { s_byte += c . len_utf8 () ; s_width += char_width (c) ; match s_width . cmp (& rest_width) { Ordering :: Equal => break , Ordering :: Greater => { s_byte -= c . len_utf8 () ; break ; } Ordering :: Less => continue , } } let idx = ts . len () - s . len () + s_byte ; let mut buf = ts [.. idx] . to_string () ; buf . push_str (tail) ; rv = Some (buf) ; } length += str_width (s) ; } } (s , true) => { if let Some (ref mut rv) = rv { rv . push_str (s) ; } } } } if let Some (buf) = rv { Cow :: Owned (buf) } else { Cow :: Borrowed (s) } } # [cfg (not (feature = "ansi-parsing"))] { Cow :: Owned (format ! ("{}{}" , & s [.. width . saturating_sub (tail . len ())] , tail)) } }
+};
+}

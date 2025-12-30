@@ -1,0 +1,9 @@
+// Generated macro for impl_14 (impl)
+macro_rules! Depcrateimpl_14 {
+() => {
+// Module: crate
+// Provides: {"impl_14"}
+// Dependencies: {}
+impl TaskKillswitch { fn new (storage : & 'static ActiveTasks) -> Self { let (signal_killed , all_killed) = watch :: channel (()) ; let signal_killed = Mutex :: new (Some (signal_killed)) ; Self { activated : AtomicBool :: new (false) , storage , signal_killed , all_killed , } } # [doc = " Creates a killswitch by allocating and leaking the task storage."] # [doc = ""] # [doc = " **NOTE:** This is intended for use in `static`s and tests. It should not"] # [doc = " be exposed publicly!"] fn with_leaked_storage () -> Self { let storage = Box :: leak (Box :: new (ActiveTasks :: default ())) ; Self :: new (storage) } fn was_activated (& self) -> bool { self . activated . load (Ordering :: Relaxed) } fn spawn_task (& self , fut : impl Future < Output = () > + Send + 'static ,) -> Option < Id > { if self . was_activated () { return None ; } let storage = self . storage ; let handle = tokio :: spawn (async move { let id = task :: id () ; let _guard = RemoveOnDrop { id , storage } ; fut . await ; }) . abort_handle () ; let id = handle . id () ; let res = self . storage . add_task_if (handle , | | ! self . was_activated ()) ; if let Err (handle) = res { handle . abort () ; return None ; } Some (id) } fn activate (& self) { assert ! (! self . activated . swap (true , Ordering :: Relaxed) , "killswitch can't be used twice") ; let tasks = self . storage ; let signal_killed = self . signal_killed . lock () . take () ; std :: thread :: spawn (move | | { tasks . kill_all () ; drop (signal_killed) ; }) ; } fn killed (& self) -> impl Future < Output = () > + Send + 'static { let mut signal = self . all_killed . clone () ; async move { let _ = signal . changed () . await ; } } }
+};
+}

@@ -1,0 +1,41 @@
+// Generated module macro for crate::pg::expression::expression_methods
+macro_rules! Modcrate_pg_expression_expression_methods {
+() => {
+        Depcrate_pg_expression_expression_methodsuse_2604!();
+        Depcrate_pg_expression_expression_methodsuse_2605!();
+        Depcrate_pg_expression_expression_methodsuse_2606!();
+        Depcrate_pg_expression_expression_methodsuse_2607!();
+        Depcrate_pg_expression_expression_methodsuse_2608!();
+        Depcrate_pg_expression_expression_methodsuse_2609!();
+        Depcrate_pg_expression_expression_methodsuse_2610!();
+        Depcrate_pg_expression_expression_methodsuse_2611!();
+        Depcrate_pg_expression_expression_methodsuse_2612!();
+        Depcrate_pg_expression_expression_methodsuse_2613!();
+        Depcrate_pg_expression_expression_methodsPgExpressionMethods!();
+        Depcrate_pg_expression_expression_methodsimpl_2615!();
+        Depcrate_pg_expression_expression_methodsPgTimestampExpressionMethods!();
+        Depcrate_pg_expression_expression_methodsimpl_2617!();
+        Depcrate_pg_expression_expression_methodsPgArrayExpressionMethods!();
+        Depcrate_pg_expression_expression_methodsimpl_2619!();
+        Depcrate_pg_expression_expression_methodsPgSortExpressionMethods!();
+        Depcrate_pg_expression_expression_methodsimpl_2621!();
+        Depcrate_pg_expression_expression_methodsimpl_2622!();
+        Depcrate_pg_expression_expression_methodsPgTextExpressionMethods!();
+        Depcrate_pg_expression_expression_methodsimpl_2624!();
+        Depcrate_pg_expression_expression_methodsimpl_2625!();
+        Depcrate_pg_expression_expression_methodsimpl_2626!();
+        Depcrate_pg_expression_expression_methodsimpl_2627!();
+        Depcrate_pg_expression_expression_methodsimpl_2628!();
+        Depcrate_pg_expression_expression_methodsPgRangeExpressionMethods!();
+        Depcrate_pg_expression_expression_methodsimpl_2630!();
+        Depcrate_pg_expression_expression_methodsPgNetExpressionMethods!();
+        Depcrate_pg_expression_expression_methodsimpl_2632!();
+        Depcrate_pg_expression_expression_methodsPgJsonbExpressionMethods!();
+        Depcrate_pg_expression_expression_methodsimpl_2634!();
+        Depcrate_pg_expression_expression_methodsPgAnyJsonExpressionMethods!();
+        Depcrate_pg_expression_expression_methodsimpl_2636!();
+        Depcrate_pg_expression_expression_methodsPgBinaryExpressionMethods!();
+        Depcrate_pg_expression_expression_methodsimpl_2638!();
+        Depcrate_pg_expression_expression_methodsprivate!();
+    };
+}

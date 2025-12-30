@@ -1,0 +1,54 @@
+// Generated module macro for crate::error
+macro_rules! Modcrate_error {
+() => {
+        Depcrate_erroruse_1590!();
+        Depcrate_erroruse_1591!();
+        Depcrate_erroruse_1592!();
+        Depcrate_erroruse_1593!();
+        Depcrate_erroruse_1594!();
+        Depcrate_erroruse_1595!();
+        Depcrate_erroruse_1596!();
+        Depcrate_erroruse_1597!();
+        Depcrate_erroruse_1598!();
+        Depcrate_erroruse_1599!();
+        Depcrate_errorError!();
+        Depcrate_errorInconsistentKeys!();
+        Depcrate_errorimpl_1602!();
+        Depcrate_errorInvalidMessage!();
+        Depcrate_errorimpl_1604!();
+        Depcrate_errorimpl_1605!();
+        Depcrate_errorPeerMisbehaved!();
+        Depcrate_errorimpl_1607!();
+        Depcrate_errorPeerIncompatible!();
+        Depcrate_errorimpl_1609!();
+        Depcrate_errorCertificateError!();
+        Depcrate_errorimpl_1611!();
+        Depcrate_errorimpl_1612!();
+        Depcrate_errorimpl_1613!();
+        Depcrate_errorimpl_1614!();
+        Depcrate_errorExtendedKeyPurpose!();
+        Depcrate_errorimpl_1616!();
+        Depcrate_errorimpl_1617!();
+        Depcrate_errorCertRevocationListError!();
+        Depcrate_errorimpl_1619!();
+        Depcrate_errorimpl_1620!();
+        Depcrate_errorEncryptedClientHelloError!();
+        Depcrate_errorimpl_1622!();
+        Depcrate_errorRejectedEch!();
+        Depcrate_errorimpl_1624!();
+        Depcrate_errorimpl_1625!();
+        Depcrate_errorjoin!();
+        Depcrate_errorimpl_1627!();
+        Depcrate_errorimpl_1628!();
+        Depcrate_errorimpl_1629!();
+        Depcrate_errorimpl_1630!();
+        Depcrate_errorApiMisuse!();
+        Depcrate_errorimpl_1632!();
+        Depcrate_errorimpl_1633!();
+        Depcrate_errorimpl_1634!();
+        Depcrate_errorother_error!();
+        Depcrate_erroruse_1636!();
+        Depcrate_erroruse_1637!();
+        Depcrate_errortests!();
+    };
+}

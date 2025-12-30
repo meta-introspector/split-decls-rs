@@ -1,0 +1,48 @@
+// Generated module macro for crate::tests::util
+macro_rules! Modcrate_tests_util {
+() => {
+        Depcrate_tests_utiluse_79!();
+        Depcrate_tests_utiluse_80!();
+        Depcrate_tests_utiluse_81!();
+        Depcrate_tests_utiluse_82!();
+        Depcrate_tests_utiluse_83!();
+        Depcrate_tests_utiluse_84!();
+        Depcrate_tests_utiluse_85!();
+        Depcrate_tests_utiluse_86!();
+        Depcrate_tests_utilDEFAULT_MTU!();
+        Depcrate_tests_utilPair!();
+        Depcrate_tests_utilimpl_89!();
+        Depcrate_tests_utilimpl_90!();
+        Depcrate_tests_utilTestEndpoint!();
+        Depcrate_tests_utilIncomingConnectionBehavior!();
+        Depcrate_tests_utilvalidate_incoming!();
+        Depcrate_tests_utilimpl_94!();
+        Depcrate_tests_utilimpl_95!();
+        Depcrate_tests_utilimpl_96!();
+        Depcrate_tests_utilsubscribe!();
+        Depcrate_tests_utilTestWriter!();
+        Depcrate_tests_utilimpl_99!();
+        Depcrate_tests_utilserver_config!();
+        Depcrate_tests_utilserver_config_with_cert!();
+        Depcrate_tests_utilserver_crypto!();
+        Depcrate_tests_utilserver_crypto_with_alpn!();
+        Depcrate_tests_utilserver_crypto_with_cert!();
+        Depcrate_tests_utilserver_crypto_inner!();
+        Depcrate_tests_utilclient_config!();
+        Depcrate_tests_utilclient_config_with_deterministic_pns!();
+        Depcrate_tests_utilclient_config_with_certs!();
+        Depcrate_tests_utilclient_crypto!();
+        Depcrate_tests_utilclient_crypto_with_alpn!();
+        Depcrate_tests_utilclient_crypto_inner!();
+        Depcrate_tests_utilmin_opt!();
+        Depcrate_tests_utilMAX_DATAGRAMS!();
+        Depcrate_tests_utilsplit_transmit!();
+        Depcrate_tests_utilpacket_size!();
+        Depcrate_tests_utilset_congestion_experienced!();
+        Depcrate_tests_utilSERVER_PORTS!();
+        Depcrate_tests_utilCLIENT_PORTS!();
+        Depcrate_tests_utilCERTIFIED_KEY!();
+        Depcrate_tests_utilSimpleTokenLog!();
+        Depcrate_tests_utilimpl_121!();
+    };
+}

@@ -1,0 +1,9 @@
+// Generated macro for codegen_fn_attrs (function)
+macro_rules! Depcrate_codegen_attrscodegen_fn_attrs {
+() => {
+// Module: crate::codegen_attrs
+// Provides: {"codegen_fn_attrs"}
+// Dependencies: {}
+# [doc = " Generate the [`CodegenFnAttrs`] for an item (identified by the [`LocalDefId`])."] # [doc = ""] # [doc = " This happens in 4 stages:"] # [doc = " - apply built-in attributes that directly translate to codegen attributes."] # [doc = " - handle lang items. These have special codegen attrs applied to them."] # [doc = " - apply overrides, like minimum requirements for alignment and other settings that don't rely directly the built-in attrs on the item."] # [doc = "   overrides come after applying built-in attributes since they may only apply when certain attributes were already set in the stage before."] # [doc = " - check that the result is valid. There's various ways in which this may not be the case, such as certain combinations of attrs."] fn codegen_fn_attrs (tcx : TyCtxt < '_ > , did : LocalDefId) -> CodegenFnAttrs { if cfg ! (debug_assertions) { let def_kind = tcx . def_kind (did) ; assert ! (def_kind . has_codegen_attrs () , "unexpected `def_kind` in `codegen_fn_attrs`: {def_kind:?}" ,) ; } let mut codegen_fn_attrs = CodegenFnAttrs :: new () ; let attrs = tcx . hir_attrs (tcx . local_def_id_to_hir_id (did)) ; let interesting_spans = process_builtin_attrs (tcx , did , attrs , & mut codegen_fn_attrs) ; handle_lang_items (tcx , did , & interesting_spans , attrs , & mut codegen_fn_attrs) ; apply_overrides (tcx , did , & mut codegen_fn_attrs) ; check_result (tcx , did , interesting_spans , & codegen_fn_attrs) ; codegen_fn_attrs }
+};
+}

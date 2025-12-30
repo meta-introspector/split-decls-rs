@@ -1,0 +1,9 @@
+// Generated macro for Persian (struct)
+macro_rules! Depcrate_cal_persianPersian {
+() => {
+// Module: crate::cal::persian
+// Provides: {"Persian"}
+// Dependencies: {}
+# [doc = " The [Persian Calendar](https://en.wikipedia.org/wiki/Solar_Hijri_calendar)"] # [doc = ""] # [doc = " The Persian Calendar is a solar calendar used officially by the countries of Iran and"] # [doc = " Afghanistan and many Persian-speaking regions."] # [doc = ""] # [doc = " This implementation extends proleptically for dates before the calendar's creation"] # [doc = " in 458 AP (1079 CE)."] # [doc = ""] # [doc = " This corresponds to the `\"persian\"` [CLDR calendar](https://unicode.org/reports/tr35/#UnicodeCalendarIdentifier)."] # [doc = ""] # [doc = " # Era codes"] # [doc = ""] # [doc = " This calendar uses a single era code `ap`, with Anno Persico/Anno Persarum starting the year of the Hijra. Dates before this era use negative years."] # [doc = ""] # [doc = " # Months and days"] # [doc = ""] # [doc = " The 12 months are called Farvardin (`M01`, 31 days), Ordibehesht (`M02`, 31 days),"] # [doc = " Khordad (`M03`, 31 days), Tir (`M04`, 31 days), Mordad (`M05`, 31 days), Shahrivar (`M06`, 31 days),"] # [doc = " Mehr (`M07`, 30 days), Aban (`M08`, 30 days), Azar (`M09`, 30 days),"] # [doc = " Dey (`M10`, 30 days), Bahman (`M11`, 30 days), Esfand (`M12`, 29 days)."] # [doc = ""] # [doc = " In leap years (determined astronomically with respect to the vernal equinox), Esfand gains a 30th day."] # [doc = ""] # [doc = " Standard years thus have 365 days, and leap years 366."] # [doc = ""] # [doc = " # Calendar drift"] # [doc = ""] # [doc = " As leap years are determined with respect to the solar year, this calendar stays anchored"] # [doc = " to the seasons."] # [derive (Copy , Clone , Debug , Default , Hash , Eq , PartialEq , PartialOrd , Ord)] # [allow (clippy :: exhaustive_structs)] pub struct Persian ;
+};
+}

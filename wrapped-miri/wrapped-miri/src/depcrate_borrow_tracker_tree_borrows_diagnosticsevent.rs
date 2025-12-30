@@ -1,0 +1,9 @@
+// Generated macro for Event (struct)
+macro_rules! Depcrate_borrow_tracker_tree_borrows_diagnosticsEvent {
+() => {
+// Module: crate::borrow_tracker::tree_borrows::diagnostics
+// Provides: {"Event"}
+// Dependencies: {}
+# [doc = " Complete data for an event:"] # [derive (Clone , Debug)] pub struct Event { # [doc = " Transformation of permissions that occurred because of this event."] pub transition : PermTransition , # [doc = " Kind of the access that triggered this event."] pub access_cause : AccessCause , # [doc = " Relative position of the tag to the one used for the access."] pub is_foreign : bool , # [doc = " User-visible range of the access."] # [doc = " `None` means that this is an implicit access to the entire allocation"] # [doc = " (used for the implicit read on protector release)."] pub access_range : Option < AllocRange > , # [doc = " The transition recorded by this event only occurred on a subrange of"] # [doc = " `access_range`: a single access on `access_range` triggers several events,"] # [doc = " each with their own mutually disjoint `transition_range`. No-op transitions"] # [doc = " should not be recorded as events, so the union of all `transition_range` is not"] # [doc = " necessarily the entire `access_range`."] # [doc = ""] # [doc = " No data from any `transition_range` should ever be user-visible, because"] # [doc = " both the start and end of `transition_range` are entirely dependent on the"] # [doc = " internal representation of `RangeMap` which is supposed to be opaque."] # [doc = " What will be shown in the error message is the first byte `error_offset` of"] # [doc = " the `TbError`, which should satisfy"] # [doc = " `event.transition_range.contains(error.error_offset)`."] pub transition_range : Range < u64 > , # [doc = " Line of code that triggered this event."] pub span : Span , }
+};
+}

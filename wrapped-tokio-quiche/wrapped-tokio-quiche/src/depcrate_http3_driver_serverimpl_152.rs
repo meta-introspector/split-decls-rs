@@ -1,0 +1,9 @@
+// Generated macro for impl_152 (impl)
+macro_rules! Depcrate_http3_driver_serverimpl_152 {
+() => {
+// Module: crate::http3::driver::server
+// Provides: {"impl_152"}
+// Dependencies: {}
+impl ServerHooks { # [doc = " Handles a new request, creating a stream context, checking for a"] # [doc = " potential DATAGRAM flow (CONNECT-{UDP,IP}) and sending a relevant"] # [doc = " [`H3Event`] to the [ServerH3Controller] for application-level"] # [doc = " processing."] fn handle_request (driver : & mut H3Driver < Self > , qconn : & mut QuicheConnection , headers : InboundHeaders ,) -> H3ConnectionResult < () > { let InboundHeaders { stream_id , headers , has_body , } = headers ; if driver . stream_map . contains_key (& stream_id) { return Ok (()) ; } let (mut stream_ctx , send , recv) = StreamCtx :: new (stream_id , STREAM_CAPACITY) ; if let Some (flow_id) = datagram :: extract_flow_id (stream_id , & headers) { let _ = driver . get_or_insert_flow (flow_id) ? ; stream_ctx . associated_dgram_flow_id = Some (flow_id) ; } let latest_priority_update : Option < RawPriorityValue > = driver . conn_mut () ? . take_last_priority_update (stream_id) . ok () . map (| v | v . into ()) ; qconn . stream_priority (stream_id , PRE_HEADERS_BOOSTED_PRIORITY_URGENCY , PRE_HEADERS_BOOSTED_PRIORITY_INCREMENTAL ,) . ok () ; let headers = IncomingH3Headers { stream_id , headers , send , recv , read_fin : ! has_body , h3_audit_stats : Arc :: clone (& stream_ctx . audit_stats) , } ; driver . waiting_streams . push (stream_ctx . wait_for_recv (stream_id)) ; driver . insert_stream (stream_id , stream_ctx) ; driver . h3_event_sender . send (ServerH3Event :: Headers { incoming_headers : headers , priority : latest_priority_update , }) . map_err (| _ | H3ConnectionError :: ControllerWentAway) ? ; driver . hooks . requests += 1 ; Ok (()) } }
+};
+}

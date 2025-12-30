@@ -1,0 +1,44 @@
+// Generated module macro for crate::imp::interrupt
+macro_rules! Modcrate_imp_interrupt {
+() => {
+        Depcrate_imp_interruptuse_623!();
+        Depcrate_imp_interruptarch!();
+        Depcrate_imp_interruptuse_625!();
+        Depcrate_imp_interruptIS_ALWAYS_LOCK_FREE!();
+        Depcrate_imp_interruptIS_ALWAYS_LOCK_FREE!();
+        Depcrate_imp_interruptwith!();
+        Depcrate_imp_interruptwith!();
+        Depcrate_imp_interruptAtomicPtr!();
+        Depcrate_imp_interruptimpl_631!();
+        Depcrate_imp_interruptimpl_632!();
+        Depcrate_imp_interruptimpl_633!();
+        Depcrate_imp_interruptatomic_int!();
+        Depcrate_imp_interruptmacro_635!();
+        Depcrate_imp_interruptmacro_636!();
+        Depcrate_imp_interruptmacro_637!();
+        Depcrate_imp_interruptmacro_638!();
+        Depcrate_imp_interruptmacro_639!();
+        Depcrate_imp_interruptmacro_640!();
+        Depcrate_imp_interruptmacro_641!();
+        Depcrate_imp_interruptmacro_642!();
+        Depcrate_imp_interruptmacro_643!();
+        Depcrate_imp_interruptmacro_644!();
+        Depcrate_imp_interruptmacro_645!();
+        Depcrate_imp_interruptmacro_646!();
+        Depcrate_imp_interruptmacro_647!();
+        Depcrate_imp_interruptmacro_648!();
+        Depcrate_imp_interruptmacro_649!();
+        Depcrate_imp_interruptmacro_650!();
+        Depcrate_imp_interruptmacro_651!();
+        Depcrate_imp_interruptmacro_652!();
+        Depcrate_imp_interruptmacro_653!();
+        Depcrate_imp_interruptmacro_654!();
+        Depcrate_imp_interruptmacro_655!();
+        Depcrate_imp_interruptmacro_656!();
+        Depcrate_imp_interruptmacro_657!();
+        Depcrate_imp_interruptmacro_658!();
+        Depcrate_imp_interruptmacro_659!();
+        Depcrate_imp_interruptmacro_660!();
+        Depcrate_imp_interrupttests!();
+    };
+}

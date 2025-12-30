@@ -1,0 +1,9 @@
+// Generated macro for impl_600 (impl)
+macro_rules! Depcrate_formattingimpl_600 {
+() => {
+// Module: crate::formatting
+// Provides: {"impl_600"}
+// Dependencies: {}
+impl < 'a , T : FormatHandler + 'a > FormatContext < 'a , T > { fn new (krate : & 'a ast :: Crate , report : FormatReport , psess : ParseSess , config : & 'a Config , handler : & 'a mut T ,) -> Self { FormatContext { krate , report , psess , config , handler , } } fn ignore_file (& self , path : & FileName) -> bool { self . psess . ignore_file (path) } fn format_file (& mut self , path : FileName , module : & Module < '_ > , is_macro_def : bool ,) -> Result < () , ErrorKind > { let snippet_provider = self . psess . snippet_provider (module . span) ; let mut visitor = FmtVisitor :: from_psess (& self . psess , self . config , & snippet_provider , self . report . clone () ,) ; visitor . skip_context . update_with_attrs (& self . krate . attrs) ; visitor . is_macro_def = is_macro_def ; visitor . last_pos = snippet_provider . start_pos () ; visitor . skip_empty_lines (snippet_provider . end_pos ()) ; visitor . format_separate_mod (module , snippet_provider . end_pos ()) ; debug_assert_eq ! (visitor . line_number , count_newlines (& visitor . buffer) , "failed in format_file visitor.buffer:\n {:?}" , & visitor . buffer) ; source_file :: append_newline (& mut visitor . buffer) ; format_lines (& mut visitor . buffer , & path , & visitor . skipped_range . borrow () , self . config , & self . report ,) ; apply_newline_style (self . config . newline_style () , & mut visitor . buffer , snippet_provider . entire_snippet () ,) ; if visitor . macro_rewrite_failure { self . report . add_macro_format_failure () ; } self . report . add_non_formatted_ranges (visitor . skipped_range . borrow () . clone ()) ; self . handler . handle_formatted_file (& self . psess , path , visitor . buffer . to_owned () , & mut self . report ,) } }
+};
+}

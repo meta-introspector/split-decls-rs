@@ -1,0 +1,76 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcrateuse_20.rs");
+include!("depcrateparse_to_token_tree.rs");
+include!("depcratesyntoken.rs");
+include!("depcraterawconverter.rs");
+include!("depcrateuse_21.rs");
+include!("depcrateconvert_tokens.rs");
+include!("depcrateuse_7.rs");
+include!("depcrateimpl_62.rs");
+include!("depcratedelim_to_str.rs");
+include!("depcrate_testsuse_27.rs");
+include!("depcrateimpl_58.rs");
+include!("depcrate_to_parser_inputuse_15.rs");
+include!("depcrate_to_parser_inputuse_18.rs");
+include!("depcrate_testsuse_25.rs");
+include!("depcrate_prettify_macro_expansionprettifywskind.rs");
+include!("depcratesyntax_node_to_token_tree_modified.rs");
+include!("depcrate_to_parser_inputuse_16.rs");
+include!("depcrateimpl_51.rs");
+include!("depcrateimpl_54.rs");
+include!("depcratedummy_test_span_utils.rs");
+include!("depcrateimpl_57.rs");
+include!("depcrateuse_1.rs");
+include!("depcrateuse_3.rs");
+include!("depcratetoken_tree_to_syntax_node.rs");
+include!("depcratetokenconverter.rs");
+include!("depcrate_testsuse_23.rs");
+include!("depcrateis_single_token_op.rs");
+include!("depcrate_prettify_macro_expansionis_text.rs");
+include!("depcrateuse_5.rs");
+include!("depcrate_testsuse_26.rs");
+include!("depcrateimpl_52.rs");
+include!("depcrateuse_2.rs");
+include!("depcrateuse_4.rs");
+include!("depcrate_to_parser_inputto_parser_input.rs");
+include!("depcrate_testsuse_24.rs");
+include!("depcrate_testspunct_spacing.rs");
+include!("depcratedoccommentdesugarmode.rs");
+include!("depcrate_to_parser_inputuse_14.rs");
+include!("depcrate_prettify_macro_expansionprettify_macro_expansion.rs");
+include!("depcrateimpl_32.rs");
+include!("depcrateto_parser_input.rs");
+include!("depcrateuse_6.rs");
+include!("depcrateconverter.rs");
+include!("depcrateimpl_50.rs");
+include!("depcrate_testscheck_punct_spacing.rs");
+include!("depcrateimpl_60.rs");
+include!("depcratesrctoken.rs");
+include!("depcratetests.rs");
+include!("depcrate_to_parser_inputuse_17.rs");
+include!("depcratespanmapper.rs");
+include!("depcrateparse_to_token_tree_static_span.rs");
+include!("depcrateconvert_doc_comment.rs");
+include!("depcratestaticrawconverter.rs");
+include!("depcrateprettify_macro_expansion.rs");
+include!("depcratedesugar_doc_comment_text.rs");
+include!("depcrateimpl_56.rs");
+include!("depcrate_testsuse_28.rs");
+include!("depcrateimpl_33.rs");
+include!("depcratesyntax_node_to_token_tree.rs");
+include!("depcratetttreesink.rs");
+include!("depcrate_prettify_macro_expansionuse_9.rs");
+include!("depcrateimpl_49.rs");
+include!("modcrate.rs");
+include!("modcrate_to_parser_input.rs");
+include!("modcrate_prettify_macro_expansion.rs");
+include!("modcrate_tests.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate!();
+    Modcrate_to_parser_input!();
+    Modcrate_prettify_macro_expansion!();
+    Modcrate_tests!();
+}

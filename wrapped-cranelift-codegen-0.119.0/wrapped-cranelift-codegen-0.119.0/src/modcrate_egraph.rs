@@ -1,0 +1,39 @@
+// Generated module macro for crate::egraph
+macro_rules! Modcrate_egraph {
+() => {
+        Depcrate_egraphuse_2936!();
+        Depcrate_egraphuse_2937!();
+        Depcrate_egraphuse_2938!();
+        Depcrate_egraphuse_2939!();
+        Depcrate_egraphuse_2940!();
+        Depcrate_egraphuse_2941!();
+        Depcrate_egraphuse_2942!();
+        Depcrate_egraphuse_2943!();
+        Depcrate_egraphuse_2944!();
+        Depcrate_egraphuse_2945!();
+        Depcrate_egraphuse_2946!();
+        Depcrate_egraphuse_2947!();
+        Depcrate_egraphuse_2948!();
+        Depcrate_egraphuse_2949!();
+        Depcrate_egraphuse_2950!();
+        Depcrate_egraphuse_2951!();
+        Depcrate_egraphuse_2952!();
+        Depcrate_egraphuse_2953!();
+        Depcrate_egraphuse_2954!();
+        Depcrate_egraphuse_2955!();
+        Depcrate_egraphuse_2956!();
+        Depcrate_egraphcost!();
+        Depcrate_egraphelaborate!();
+        Depcrate_egraphEgraphPass!();
+        Depcrate_egraphMATCHES_LIMIT!();
+        Depcrate_egraphOptimizeCtx!();
+        Depcrate_egraphNewOrExistingInst!();
+        Depcrate_egraphimpl_2963!();
+        Depcrate_egraphimpl_2964!();
+        Depcrate_egraphimpl_2965!();
+        Depcrate_egraphGVNContext!();
+        Depcrate_egraphimpl_2967!();
+        Depcrate_egraphimpl_2968!();
+        Depcrate_egraphStats!();
+    };
+}

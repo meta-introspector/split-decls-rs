@@ -1,0 +1,53 @@
+// Generated module macro for crate::geometry::transform
+macro_rules! Modcrate_geometry_transform {
+() => {
+        Depcrate_geometry_transformuse_2478!();
+        Depcrate_geometry_transformuse_2479!();
+        Depcrate_geometry_transformuse_2480!();
+        Depcrate_geometry_transformuse_2481!();
+        Depcrate_geometry_transformuse_2482!();
+        Depcrate_geometry_transformuse_2483!();
+        Depcrate_geometry_transformuse_2484!();
+        Depcrate_geometry_transformuse_2485!();
+        Depcrate_geometry_transformuse_2486!();
+        Depcrate_geometry_transformuse_2487!();
+        Depcrate_geometry_transformuse_2488!();
+        Depcrate_geometry_transformuse_2489!();
+        Depcrate_geometry_transformTCategory!();
+        Depcrate_geometry_transformTCategoryMul!();
+        Depcrate_geometry_transformSuperTCategoryOf!();
+        Depcrate_geometry_transformSubTCategoryOf!();
+        Depcrate_geometry_transformimpl_2494!();
+        Depcrate_geometry_transformTGeneral!();
+        Depcrate_geometry_transformTProjective!();
+        Depcrate_geometry_transformTAffine!();
+        Depcrate_geometry_transformimpl_2498!();
+        Depcrate_geometry_transformimpl_2499!();
+        Depcrate_geometry_transformimpl_2500!();
+        Depcrate_geometry_transformcategory_mul_impl!();
+        Depcrate_geometry_transformimpl_2502!();
+        Depcrate_geometry_transformmacro_2503!();
+        Depcrate_geometry_transformsuper_tcategory_impl!();
+        Depcrate_geometry_transformimpl_2505!();
+        Depcrate_geometry_transformmacro_2506!();
+        Depcrate_geometry_transformTransform!();
+        Depcrate_geometry_transformimpl_2508!();
+        Depcrate_geometry_transformimpl_2509!();
+        Depcrate_geometry_transformimpl_2510!();
+        Depcrate_geometry_transformimpl_2511!();
+        Depcrate_geometry_transformimpl_2512!();
+        Depcrate_geometry_transformimpl_2513!();
+        Depcrate_geometry_transformimpl_2514!();
+        Depcrate_geometry_transformimpl_2515!();
+        Depcrate_geometry_transformimpl_2516!();
+        Depcrate_geometry_transformimpl_2517!();
+        Depcrate_geometry_transformimpl_2518!();
+        Depcrate_geometry_transformimpl_2519!();
+        Depcrate_geometry_transformimpl_2520!();
+        Depcrate_geometry_transformimpl_2521!();
+        Depcrate_geometry_transformimpl_2522!();
+        Depcrate_geometry_transformimpl_2523!();
+        Depcrate_geometry_transformimpl_2524!();
+        Depcrate_geometry_transformtests!();
+    };
+}

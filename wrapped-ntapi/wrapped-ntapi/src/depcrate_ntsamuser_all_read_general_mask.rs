@@ -1,0 +1,9 @@
+// Generated macro for USER_ALL_READ_GENERAL_MASK (const)
+macro_rules! Depcrate_ntsamUSER_ALL_READ_GENERAL_MASK {
+() => {
+// Module: crate::ntsam
+// Provides: {"USER_ALL_READ_GENERAL_MASK"}
+// Dependencies: {}
+pub const USER_ALL_READ_GENERAL_MASK : ULONG = USER_ALL_USERNAME | USER_ALL_FULLNAME | USER_ALL_USERID | USER_ALL_PRIMARYGROUPID | USER_ALL_ADMINCOMMENT | USER_ALL_USERCOMMENT ;
+};
+}

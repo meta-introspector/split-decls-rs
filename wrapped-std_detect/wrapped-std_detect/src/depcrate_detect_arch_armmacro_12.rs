@@ -1,0 +1,9 @@
+// Generated macro for macro_12 (macro)
+macro_rules! Depcrate_detect_arch_armmacro_12 {
+() => {
+// Module: crate::detect::arch::arm
+// Provides: {"macro_12"}
+// Dependencies: {}
+features ! { @ TARGET : arm ; @ CFG : target_arch = "arm" ; @ MACRO_NAME : is_arm_feature_detected ; @ MACRO_ATTRS : # [doc = " Checks if `arm` feature is enabled."] # [unstable (feature = "stdarch_arm_feature_detection" , issue = "111190")] @ NO_RUNTIME_DETECTION : "v7" ; @ NO_RUNTIME_DETECTION : "vfp2" ; @ NO_RUNTIME_DETECTION : "vfp3" ; @ NO_RUNTIME_DETECTION : "vfp4" ; @ FEATURE : # [unstable (feature = "stdarch_arm_feature_detection" , issue = "111190")] neon : "neon" ; # [doc = " ARM Advanced SIMD (NEON) - Aarch32"] @ FEATURE : # [unstable (feature = "stdarch_arm_feature_detection" , issue = "111190")] pmull : "pmull" ; without cfg check : true ; # [doc = " Polynomial Multiply"] @ FEATURE : # [unstable (feature = "stdarch_arm_feature_detection" , issue = "111190")] crc : "crc" ; # [doc = " CRC32 (Cyclic Redundancy Check)"] @ FEATURE : # [unstable (feature = "stdarch_arm_feature_detection" , issue = "111190")] aes : "aes" ; # [doc = " FEAT_AES (AES instructions)"] @ FEATURE : # [unstable (feature = "stdarch_arm_feature_detection" , issue = "111190")] sha2 : "sha2" ; # [doc = " FEAT_SHA1 & FEAT_SHA256 (SHA1 & SHA2-256 instructions)"] @ FEATURE : # [unstable (feature = "stdarch_arm_feature_detection" , issue = "111190")] i8mm : "i8mm" ; # [doc = " FEAT_I8MM (integer matrix multiplication, plus ASIMD support)"] @ FEATURE : # [unstable (feature = "stdarch_arm_feature_detection" , issue = "111190")] dotprod : "dotprod" ; # [doc = " FEAT_DotProd (Vector Dot-Product - ASIMDDP)"] }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for MatrixView2x6 (type)
+macro_rules! Depcrate_base_alias_viewMatrixView2x6 {
+() => {
+// Module: crate::base::alias_view
+// Provides: {"MatrixView2x6"}
+// Dependencies: {}
+# [doc = " An immutable column-major 2x6 matrix view."] # [doc = ""] # [doc = " See [`MatrixViewMut2x6`] for a mutable version of this type."] # [doc = ""] # [doc = " **Because this is an alias, not all its methods are listed here. See the [`Matrix`](crate::base::Matrix) type too.**"] pub type MatrixView2x6 < 'a , T , RStride = U1 , CStride = U2 > = Matrix < T , U2 , U6 , ViewStorage < 'a , T , U2 , U6 , RStride , CStride > > ;
+};
+}

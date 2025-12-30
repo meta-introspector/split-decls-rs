@@ -1,0 +1,9 @@
+// Generated macro for other_233 (other)
+macro_rules! Depcrateother_233 {
+() => {
+// Module: crate
+// Provides: {"other_233"}
+// Dependencies: {}
+extern "C" { # [doc = " @function"] # [doc = ""] # [doc = " Changes priority of existing stream denoted by |stream_id|.  The"] # [doc = " new priority specification is |pri_spec|."] # [doc = ""] # [doc = " The priority is changed silently and instantly, and no PRIORITY"] # [doc = " frame will be sent to notify the peer of this change.  This"] # [doc = " function may be useful for server to change the priority of pushed"] # [doc = " stream."] # [doc = ""] # [doc = " If |session| is initialized as server, and ``pri_spec->stream_id``"] # [doc = " points to the idle stream, the idle stream is created if it does"] # [doc = " not exist.  The created idle stream will depend on root stream"] # [doc = " (stream 0) with weight 16."] # [doc = ""] # [doc = " Otherwise, if stream denoted by ``pri_spec->stream_id`` is not"] # [doc = " found, we use default priority instead of given |pri_spec|.  That"] # [doc = " is make stream depend on root stream with weight 16."] # [doc = ""] # [doc = " This function returns 0 if it succeeds, or one of the following"] # [doc = " negative error codes:"] # [doc = ""] # [doc = " :enum:`NGHTTP2_ERR_NOMEM`"] # [doc = "     Out of memory."] # [doc = " :enum:`NGHTTP2_ERR_INVALID_ARGUMENT`"] # [doc = "     Attempted to depend on itself; or no stream exist for the given"] # [doc = "     |stream_id|; or |stream_id| is 0"] pub fn nghttp2_session_change_stream_priority (session : * mut nghttp2_session , stream_id : i32 , pri_spec : * const nghttp2_priority_spec ,) -> :: std :: os :: raw :: c_int ; }
+};
+}

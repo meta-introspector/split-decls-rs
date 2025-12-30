@@ -1,0 +1,43 @@
+// Generated module macro for crate::http3::driver::server
+macro_rules! Modcrate_http3_driver_server {
+() => {
+        Depcrate_http3_driver_serveruse_116!();
+        Depcrate_http3_driver_serveruse_117!();
+        Depcrate_http3_driver_serveruse_118!();
+        Depcrate_http3_driver_serveruse_119!();
+        Depcrate_http3_driver_serveruse_120!();
+        Depcrate_http3_driver_serveruse_121!();
+        Depcrate_http3_driver_serveruse_122!();
+        Depcrate_http3_driver_serveruse_123!();
+        Depcrate_http3_driver_serveruse_124!();
+        Depcrate_http3_driver_serveruse_125!();
+        Depcrate_http3_driver_serveruse_126!();
+        Depcrate_http3_driver_serveruse_127!();
+        Depcrate_http3_driver_serveruse_128!();
+        Depcrate_http3_driver_serveruse_129!();
+        Depcrate_http3_driver_serveruse_130!();
+        Depcrate_http3_driver_serveruse_131!();
+        Depcrate_http3_driver_serveruse_132!();
+        Depcrate_http3_driver_serveruse_133!();
+        Depcrate_http3_driver_serveruse_134!();
+        Depcrate_http3_driver_serveruse_135!();
+        Depcrate_http3_driver_serveruse_136!();
+        Depcrate_http3_driver_serveruse_137!();
+        Depcrate_http3_driver_serverServerH3Driver!();
+        Depcrate_http3_driver_serverServerH3Controller!();
+        Depcrate_http3_driver_serverServerEventStream!();
+        Depcrate_http3_driver_serverRawPriorityValue!();
+        Depcrate_http3_driver_serverimpl_142!();
+        Depcrate_http3_driver_serverimpl_143!();
+        Depcrate_http3_driver_serverServerH3Event!();
+        Depcrate_http3_driver_serverimpl_145!();
+        Depcrate_http3_driver_serverServerH3Command!();
+        Depcrate_http3_driver_serverimpl_147!();
+        Depcrate_http3_driver_serverimpl_148!();
+        Depcrate_http3_driver_serverPRE_HEADERS_BOOSTED_PRIORITY_URGENCY!();
+        Depcrate_http3_driver_serverPRE_HEADERS_BOOSTED_PRIORITY_INCREMENTAL!();
+        Depcrate_http3_driver_serverServerHooks!();
+        Depcrate_http3_driver_serverimpl_152!();
+        Depcrate_http3_driver_serverimpl_153!();
+    };
+}

@@ -1,0 +1,63 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcrate_fmttofmt.rs");
+include!("depcrate_futures_03use_25.rs");
+include!("depcrate_stdto_std_error.rs");
+include!("depcrate_stdimpl_13.rs");
+include!("depcrate_stdimpl_14.rs");
+include!("depcrate_stdimpl_20.rs");
+include!("depcrate_stdimpl_17.rs");
+include!("depcrate_futures_03impl_30.rs");
+include!("depcrate_fmtimpl_3.rs");
+include!("depcrate_stdfromstd.rs");
+include!("depcrate_futures_03use_26.rs");
+include!("depcrate_stdimpl_18.rs");
+include!("depcrate_futures_03impl_32.rs");
+include!("depcrate_stduse_7.rs");
+include!("depcrate_stdimpl_21.rs");
+include!("depcrate_stdimpl_15.rs");
+include!("depcrate_futures_03use_24.rs");
+include!("depcrate_futures_03impl_31.rs");
+include!("depcrate_tokio_1impl_41.rs");
+include!("depcrate_tokio_1impl_43.rs");
+include!("depcrate_tokio_1impl_47.rs");
+include!("depcrate_futures_03impl_28.rs");
+include!("depcratetokio_1.rs");
+include!("depcrate_stdtostd.rs");
+include!("depcrate_stdimpl_11.rs");
+include!("depcrate_tokio_1fromtokio.rs");
+include!("depcratefutures_03.rs");
+include!("depcrate_tokio_1impl_45.rs");
+include!("depcrate_tokio_1impl_46.rs");
+include!("depcrate_stdimpl_9.rs");
+include!("depcrate_stdimpl_10.rs");
+include!("depcrate_futures_03impl_29.rs");
+include!("depcrate_futures_03impl_34.rs");
+include!("depcrate_tokio_1use_36.rs");
+include!("depcrate_tokio_1use_39.rs");
+include!("depcratestd.rs");
+include!("depcrate_stdimpl_12.rs");
+include!("depcrate_tokio_1impl_44.rs");
+include!("depcrate_tokio_1use_37.rs");
+include!("depcrate_tokio_1use_38.rs");
+include!("depcratefmt.rs");
+include!("depcrate_futures_03fromfutures.rs");
+include!("depcrate_futures_03impl_33.rs");
+include!("depcrate_fmtimpl_4.rs");
+include!("depcrate_tokio_1impl_42.rs");
+include!("depcrate_fmtimpl_5.rs");
+include!("depcrate_stdimpl_19.rs");
+include!("modcrate.rs");
+include!("modcrate_std.rs");
+include!("modcrate_futures_03.rs");
+include!("modcrate_fmt.rs");
+include!("modcrate_tokio_1.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate!();
+    Modcrate_std!();
+    Modcrate_futures_03!();
+    Modcrate_fmt!();
+    Modcrate_tokio_1!();
+}

@@ -1,0 +1,61 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcrate_errortests.rs");
+include!("depcrate_serdeuse_17.rs");
+include!("depcrate_serdeserialize.rs");
+include!("depcrate_errorimpl_7.rs");
+include!("depcrate_serdedeserialize.rs");
+include!("depcratehex_chars_upper.rs");
+include!("depcratefromhex.rs");
+include!("depcratedecode_table.rs");
+include!("depcrateencode_to_slice.rs");
+include!("depcrateencode_to_slice_inner.rs");
+include!("depcrateencode.rs");
+include!("depcrate_errorfromhexerror.rs");
+include!("depcrateimpl_29.rs");
+include!("depcrate_serdeuse_13.rs");
+include!("depcratedecode.rs");
+include!("depcrateencode_to_slice_upper.rs");
+include!("depcratetest.rs");
+include!("depcrateuse_24.rs");
+include!("depcratedecode_in_slice.rs");
+include!("depcrateval.rs");
+include!("depcrateother_1.rs");
+include!("depcrate_serdeuse_15.rs");
+include!("depcrate_serdeuse_12.rs");
+include!("depcrate_serdeserialize_upper.rs");
+include!("depcrateimpl_30.rs");
+include!("depcrate__.rs");
+include!("depcrateimpl_38.rs");
+include!("depcrate_serdeuse_18.rs");
+include!("depcrate_erroruse_5.rs");
+include!("depcrate_serdeuse_19.rs");
+include!("depcrateencode_to_iter.rs");
+include!("depcrateimpl_39.rs");
+include!("depcrateencode_upper.rs");
+include!("depcratebyte2hex.rs");
+include!("depcrate_serdeuse_14.rs");
+include!("depcrateuse_2.rs");
+include!("depcrate_errorimpl_8.rs");
+include!("depcrateuse_3.rs");
+include!("depcrateuse_10.rs");
+include!("depcrate_serdeuse_16.rs");
+include!("depcrateerror.rs");
+include!("depcratetohex.rs");
+include!("depcratedecode_to_slice.rs");
+include!("depcrateimpl_31.rs");
+include!("depcrateserde.rs");
+include!("depcrateuse_23.rs");
+include!("depcrateimpl_33.rs");
+include!("depcratehex_chars_lower.rs");
+include!("depcratebytestohexchars.rs");
+include!("modcrate_serde.rs");
+include!("modcrate_error.rs");
+include!("modcrate.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate_serde!();
+    Modcrate_error!();
+    Modcrate!();
+}

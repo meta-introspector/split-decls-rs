@@ -1,0 +1,59 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcrate_instructionuse_14.rs");
+include!("depcrate_hashuse_9.rs");
+include!("depcrate_hashmacro_11.rs");
+include!("depcrate_messageuse_28.rs");
+include!("depcrateuse_1.rs");
+include!("depcrate_transactionmax_transaction_size.rs");
+include!("depcrate_transactiontransaction.rs");
+include!("depcrate_transactionimpl_36.rs");
+include!("depcrate_instructionimpl_21.rs");
+include!("depcrateinstruction.rs");
+include!("depcrate_keypairimpl_26.rs");
+include!("depcratehash.rs");
+include!("depcrateaddress.rs");
+include!("depcrate_keypairkeypair.rs");
+include!("depcrate_hashhash.rs");
+include!("depcrate_addressaddress.rs");
+include!("depcrate_keypairmacro_25.rs");
+include!("depcrate_hashimpl_12.rs");
+include!("depcratemessage.rs");
+include!("depcrate_transactionuse_32.rs");
+include!("depcrate_transactionmacro_35.rs");
+include!("depcrate_addressimpl_7.rs");
+include!("depcrate_addressuse_3.rs");
+include!("depcrate_instructionaccountmeta.rs");
+include!("depcratekeypair.rs");
+include!("depcrate_addressmacro_5.rs");
+include!("depcrate_instructionimpl_18.rs");
+include!("depcrate_instructionmacro_20.rs");
+include!("depcrate_addressjs_value_to_seeds_vec.rs");
+include!("depcrate_instructioninstruction.rs");
+include!("depcrate_messagemacro_30.rs");
+include!("depcrate_instructionmacro_17.rs");
+include!("depcrate_keypairuse_23.rs");
+include!("depcratesolana_program_init.rs");
+include!("depcratedisplay_to_jsvalue.rs");
+include!("depcrate_instructionmax_instruction_data_len.rs");
+include!("depcrate_messagemessage.rs");
+include!("depcratetransaction.rs");
+include!("depcrateconversion.rs");
+include!("modcrate_address.rs");
+include!("modcrate_instruction.rs");
+include!("modcrate_transaction.rs");
+include!("modcrate.rs");
+include!("modcrate_message.rs");
+include!("modcrate_hash.rs");
+include!("modcrate_keypair.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate_address!();
+    Modcrate_instruction!();
+    Modcrate_transaction!();
+    Modcrate!();
+    Modcrate_message!();
+    Modcrate_hash!();
+    Modcrate_keypair!();
+}

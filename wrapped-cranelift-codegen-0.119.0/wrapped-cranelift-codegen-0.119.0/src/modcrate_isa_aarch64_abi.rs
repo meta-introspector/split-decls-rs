@@ -1,0 +1,39 @@
+// Generated module macro for crate::isa::aarch64::abi
+macro_rules! Modcrate_isa_aarch64_abi {
+() => {
+        Depcrate_isa_aarch64_abiuse_1585!();
+        Depcrate_isa_aarch64_abiuse_1586!();
+        Depcrate_isa_aarch64_abiuse_1587!();
+        Depcrate_isa_aarch64_abiuse_1588!();
+        Depcrate_isa_aarch64_abiuse_1589!();
+        Depcrate_isa_aarch64_abiuse_1590!();
+        Depcrate_isa_aarch64_abiuse_1591!();
+        Depcrate_isa_aarch64_abiuse_1592!();
+        Depcrate_isa_aarch64_abiuse_1593!();
+        Depcrate_isa_aarch64_abiuse_1594!();
+        Depcrate_isa_aarch64_abiuse_1595!();
+        Depcrate_isa_aarch64_abiuse_1596!();
+        Depcrate_isa_aarch64_abiuse_1597!();
+        Depcrate_isa_aarch64_abiuse_1598!();
+        Depcrate_isa_aarch64_abiuse_1599!();
+        Depcrate_isa_aarch64_abiuse_1600!();
+        Depcrate_isa_aarch64_abiuse_1601!();
+        Depcrate_isa_aarch64_abiuse_1602!();
+        Depcrate_isa_aarch64_abiAArch64Callee!();
+        Depcrate_isa_aarch64_abiAArch64CallSite!();
+        Depcrate_isa_aarch64_abiimpl_1605!();
+        Depcrate_isa_aarch64_abicompute_clobber_size!();
+        Depcrate_isa_aarch64_abiAArch64MachineDeps!();
+        Depcrate_isa_aarch64_abiimpl_1608!();
+        Depcrate_isa_aarch64_abiimpl_1609!();
+        Depcrate_isa_aarch64_abiimpl_1610!();
+        Depcrate_isa_aarch64_abiselect_api_key!();
+        Depcrate_isa_aarch64_abiimpl_1612!();
+        Depcrate_isa_aarch64_abiis_reg_saved_in_prologue!();
+        Depcrate_isa_aarch64_abidefault_aapcs_clobbers!();
+        Depcrate_isa_aarch64_abiwinch_clobbers!();
+        Depcrate_isa_aarch64_abiDEFAULT_AAPCS_CLOBBERS!();
+        Depcrate_isa_aarch64_abiWINCH_CLOBBERS!();
+        Depcrate_isa_aarch64_abicreate_reg_env!();
+    };
+}

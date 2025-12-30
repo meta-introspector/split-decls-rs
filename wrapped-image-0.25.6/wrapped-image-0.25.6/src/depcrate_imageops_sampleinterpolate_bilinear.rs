@@ -1,0 +1,9 @@
+// Generated macro for interpolate_bilinear (function)
+macro_rules! Depcrate_imageops_sampleinterpolate_bilinear {
+() => {
+// Module: crate::imageops::sample
+// Provides: {"interpolate_bilinear"}
+// Dependencies: {}
+# [doc = " Linearly sample from an image using coordinates in [0, w-1] and [0, h-1]."] pub fn interpolate_bilinear < P : Pixel > (img : & impl GenericImageView < Pixel = P > , x : f32 , y : f32 ,) -> Option < P > { assert ! (P :: CHANNEL_COUNT <= 4) ; let (w , h) = img . dimensions () ; if w == 0 || h == 0 { return None ; } if ! (0.0 ..= ((w - 1) as f32)) . contains (& x) { return None ; } if ! (0.0 ..= ((h - 1) as f32)) . contains (& y) { return None ; } let uf = x . floor () as u32 ; let vf = y . floor () as u32 ; let uc = (uf + 1) . min (w - 1) ; let vc = (vf + 1) . min (h - 1) ; let mut sxx = [[0. ; 4] ; 4] ; let mut compute = | u : u32 , v : u32 , i | { let s = img . get_pixel (u , v) ; for (j , c) in s . channels () . iter () . enumerate () { sxx [j] [i] = c . to_f32 () . unwrap () ; } s } ; let mut out : P = compute (uf , vf , 0) ; compute (uf , vc , 1) ; compute (uc , vf , 2) ; compute (uc , vc , 3) ; let ufw = x - uf as f32 ; let vfw = y - vf as f32 ; let ucw = (uf + 1) as f32 - x ; let vcw = (vf + 1) as f32 - y ; let wff = ucw * vcw ; let wfc = ucw * vfw ; let wcf = ufw * vcw ; let wcc = ufw * vfw ; debug_assert ! (f32 :: abs ((wff + wfc + wcf + wcc) - 1.) < 1e-3) ; let is_float = P :: Subpixel :: DEFAULT_MAX_VALUE . to_f32 () . unwrap () == 1.0 ; for (i , c) in out . channels_mut () . iter_mut () . enumerate () { let v = wff * sxx [i] [0] + wfc * sxx [i] [1] + wcf * sxx [i] [2] + wcc * sxx [i] [3] ; * c = < P :: Subpixel as NumCast > :: from (if is_float { v } else { v . round () }) . unwrap_or ({ if v < 0.0 { P :: Subpixel :: DEFAULT_MIN_VALUE } else { P :: Subpixel :: DEFAULT_MAX_VALUE } }) ; } Some (out) }
+};
+}

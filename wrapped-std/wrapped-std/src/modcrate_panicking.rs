@@ -1,0 +1,41 @@
+// Generated module macro for crate::panicking
+macro_rules! Modcrate_panicking {
+() => {
+        Depcrate_panickinguse_3771!();
+        Depcrate_panickinguse_3772!();
+        Depcrate_panickinguse_3773!();
+        Depcrate_panickinguse_3774!();
+        Depcrate_panickinguse_3775!();
+        Depcrate_panickinguse_3776!();
+        Depcrate_panickinguse_3777!();
+        Depcrate_panickinguse_3778!();
+        Depcrate_panickinguse_3779!();
+        Depcrate_panickinguse_3780!();
+        Depcrate_panickinguse_3781!();
+        Depcrate_panickingEMPTY_PANIC!();
+        Depcrate_panickingother_3783!();
+        Depcrate_panickingother_3784!();
+        Depcrate_panicking__rust_drop_panic!();
+        Depcrate_panicking__rust_foreign_exception!();
+        Depcrate_panickingHook!();
+        Depcrate_panickingimpl_3788!();
+        Depcrate_panickingHOOK!();
+        Depcrate_panickingset_hook!();
+        Depcrate_panickingtake_hook!();
+        Depcrate_panickingupdate_hook!();
+        Depcrate_panickingdefault_hook!();
+        Depcrate_panickingpanic_count!();
+        Depcrate_panickingpanic_count!();
+        Depcrate_panickinguse_3796!();
+        Depcrate_panickingcatch_unwind!();
+        Depcrate_panickingcatch_unwind!();
+        Depcrate_panickingpanicking!();
+        Depcrate_panickingpanic_handler!();
+        Depcrate_panickingbegin_panic!();
+        Depcrate_panickingpayload_as_str!();
+        Depcrate_panickingpanic_with_hook!();
+        Depcrate_panickingresume_unwind!();
+        Depcrate_panickingrust_panic!();
+        Depcrate_panickingrust_panic!();
+    };
+}

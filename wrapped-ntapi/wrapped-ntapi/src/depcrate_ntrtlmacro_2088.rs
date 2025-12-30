@@ -1,0 +1,9 @@
+// Generated macro for macro_2088 (macro)
+macro_rules! Depcrate_ntrtlmacro_2088 {
+() => {
+// Module: crate::ntrtl
+// Provides: {"macro_2088"}
+// Dependencies: {}
+EXTERN ! { extern "system" { fn RtlInitializeGenericTableAvl (Table : PRTL_AVL_TABLE , CompareRoutine : PRTL_AVL_COMPARE_ROUTINE , AllocateRoutine : PRTL_AVL_ALLOCATE_ROUTINE , FreeRoutine : PRTL_AVL_FREE_ROUTINE , TableContext : PVOID ,) ; fn RtlInsertElementGenericTableAvl (Table : PRTL_AVL_TABLE , Buffer : PVOID , BufferSize : CLONG , NewElement : PBOOLEAN ,) -> PVOID ; fn RtlInsertElementGenericTableFullAvl (Table : PRTL_AVL_TABLE , Buffer : PVOID , BufferSize : CLONG , NewElement : PBOOLEAN , NodeOrParent : PVOID , SearchResult : TABLE_SEARCH_RESULT ,) -> PVOID ; fn RtlDeleteElementGenericTableAvl (Table : PRTL_AVL_TABLE , Buffer : PVOID ,) -> BOOLEAN ; fn RtlLookupElementGenericTableAvl (Table : PRTL_AVL_TABLE , Buffer : PVOID ,) -> PVOID ; fn RtlLookupElementGenericTableFullAvl (Table : PRTL_AVL_TABLE , Buffer : PVOID , NodeOrParent : * mut PVOID , SearchResult : * mut TABLE_SEARCH_RESULT ,) -> PVOID ; fn RtlEnumerateGenericTableAvl (Table : PRTL_AVL_TABLE , Restart : BOOLEAN ,) -> PVOID ; fn RtlEnumerateGenericTableWithoutSplayingAvl (Table : PRTL_AVL_TABLE , RestartKey : * mut PVOID ,) -> PVOID ; fn RtlLookupFirstMatchingElementGenericTableAvl (Table : PRTL_AVL_TABLE , Buffer : PVOID , RestartKey : * mut PVOID ,) -> PVOID ; fn RtlEnumerateGenericTableLikeADirectory (Table : PRTL_AVL_TABLE , MatchFunction : PRTL_AVL_MATCH_FUNCTION , MatchData : PVOID , NextFlag : ULONG , RestartKey : * mut PVOID , DeleteCount : PULONG , Buffer : PVOID ,) -> PVOID ; fn RtlGetElementGenericTableAvl (Table : PRTL_AVL_TABLE , I : ULONG ,) -> PVOID ; fn RtlNumberGenericTableElementsAvl (Table : PRTL_AVL_TABLE ,) -> ULONG ; fn RtlIsGenericTableEmptyAvl (Table : PRTL_AVL_TABLE ,) -> BOOLEAN ; } }
+};
+}

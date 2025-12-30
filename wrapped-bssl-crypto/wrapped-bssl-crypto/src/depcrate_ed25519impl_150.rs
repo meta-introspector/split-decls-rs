@@ -1,0 +1,9 @@
+// Generated macro for impl_150 (impl)
+macro_rules! Depcrate_ed25519impl_150 {
+() => {
+// Module: crate::ed25519
+// Provides: {"impl_150"}
+// Dependencies: {}
+impl PublicKey { # [doc = " Builds the public key from an array of bytes."] pub fn from_bytes (bytes : & [u8 ; PUBLIC_KEY_LEN]) -> Self { PublicKey (* bytes) } # [doc = " Returns the bytes of the public key."] pub fn as_bytes (& self) -> & [u8 ; PUBLIC_KEY_LEN] { & self . 0 } # [doc = " Parse a public key in SubjectPublicKeyInfo format."] pub fn from_der_subject_public_key_info (spki : & [u8]) -> Option < Self > { let alg = unsafe { bssl_sys :: EVP_pkey_ed25519 () } ; let mut pkey = scoped :: EvpPkey :: from_der_subject_public_key_info (spki , core :: slice :: from_ref (& alg)) ? ; let raw_pkey : [u8 ; PUBLIC_KEY_LEN] = unsafe { with_output_array (| out , mut out_len | { assert_eq ! (1 , bssl_sys :: EVP_PKEY_get_raw_public_key (pkey . as_ffi_ptr () , out , & mut out_len)) ; assert_eq ! (out_len , PUBLIC_KEY_LEN) ; }) } ; Some (PublicKey (raw_pkey)) } # [doc = " Serialize this key in SubjectPublicKeyInfo format."] pub fn to_der_subject_public_key_info (& self) -> Buffer { let mut pkey = scoped :: EvpPkey :: from_ptr (unsafe { bssl_sys :: EVP_PKEY_from_raw_public_key (bssl_sys :: EVP_pkey_ed25519 () , self . 0 . as_ffi_ptr () , PUBLIC_KEY_LEN ,) }) ; assert ! (! pkey . as_ffi_ptr () . is_null ()) ; cbb_to_buffer (PUBLIC_KEY_LEN + 32 , | cbb | unsafe { assert_eq ! (1 , bssl_sys :: EVP_marshal_public_key (cbb , pkey . as_ffi_ptr ())) ; }) } # [doc = " Verifies that `signature` is a valid signature, by this key, of `msg`."] pub fn verify (& self , msg : & [u8] , signature : & Signature) -> Result < () , InvalidSignatureError > { let ret = unsafe { bssl_sys :: ED25519_verify (msg . as_ffi_ptr () , msg . len () , signature . as_ffi_ptr () , self . 0 . as_ffi_ptr () ,) } ; if ret == 1 { Ok (()) } else { Err (InvalidSignatureError) } } }
+};
+}

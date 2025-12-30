@@ -1,0 +1,9 @@
+// Generated macro for other_39038 (other)
+macro_rules! Depcrate_um_timezoneapiother_39038 {
+() => {
+// Module: crate::um::timezoneapi
+// Provides: {"other_39038"}
+// Dependencies: {}
+extern "system" { pub fn SystemTimeToTzSpecificLocalTime (lpTimeZoneInformation : * const TIME_ZONE_INFORMATION , lpUniversalTime : * const SYSTEMTIME , lpLocalTime : LPSYSTEMTIME ,) -> BOOL ; pub fn TzSpecificLocalTimeToSystemTime (lpTimeZoneInformation : * const TIME_ZONE_INFORMATION , lpLocalTime : * const SYSTEMTIME , lpUniversalTime : LPSYSTEMTIME ,) -> BOOL ; pub fn FileTimeToSystemTime (lpFileTime : * const FILETIME , lpSystemTime : LPSYSTEMTIME ,) -> BOOL ; pub fn SystemTimeToFileTime (lpSystemTime : * const SYSTEMTIME , lpFileTime : LPFILETIME ,) -> BOOL ; pub fn GetTimeZoneInformation (lpTimeZoneInformation : LPTIME_ZONE_INFORMATION ,) -> DWORD ; pub fn SetTimeZoneInformation (lpTimeZoneInformation : * const TIME_ZONE_INFORMATION ,) -> BOOL ; pub fn SetDynamicTimeZoneInformation (lpTimeZoneInformation : * const DYNAMIC_TIME_ZONE_INFORMATION ,) -> BOOL ; pub fn GetDynamicTimeZoneInformation (pTimeZoneInformation : PDYNAMIC_TIME_ZONE_INFORMATION ,) -> DWORD ; pub fn GetTimeZoneInformationForYear (wYear : USHORT , pdtzi : PDYNAMIC_TIME_ZONE_INFORMATION , ptzi : LPTIME_ZONE_INFORMATION ,) -> BOOL ; pub fn EnumDynamicTimeZoneInformation (dwIndex : DWORD , lpTimeZoneInformation : PDYNAMIC_TIME_ZONE_INFORMATION ,) -> DWORD ; pub fn GetDynamicTimeZoneInformationEffectiveYears (lpTimeZoneInformation : PDYNAMIC_TIME_ZONE_INFORMATION , FirstYear : LPDWORD , LastYear : LPDWORD ,) -> DWORD ; pub fn SystemTimeToTzSpecificLocalTimeEx (lpTimeZoneInformation : * const DYNAMIC_TIME_ZONE_INFORMATION , lpUniversalTime : * const SYSTEMTIME , lpLocalTime : LPSYSTEMTIME ,) -> BOOL ; pub fn TzSpecificLocalTimeToSystemTimeEx (lpTimeZoneInformation : * const DYNAMIC_TIME_ZONE_INFORMATION , lpLocalTime : * const SYSTEMTIME , lpUniversalTime : LPSYSTEMTIME ,) -> BOOL ; }
+};
+}

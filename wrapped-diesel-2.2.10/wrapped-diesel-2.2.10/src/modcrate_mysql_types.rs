@@ -1,0 +1,43 @@
+// Generated module macro for crate::mysql::types
+macro_rules! Modcrate_mysql_types {
+() => {
+        Depcrate_mysql_typesdate_and_time!();
+        Depcrate_mysql_typesjson!();
+        Depcrate_mysql_typesnumeric!();
+        Depcrate_mysql_typesprimitives!();
+        Depcrate_mysql_typesuse_2525!();
+        Depcrate_mysql_typesuse_2526!();
+        Depcrate_mysql_typesuse_2527!();
+        Depcrate_mysql_typesuse_2528!();
+        Depcrate_mysql_typesuse_2529!();
+        Depcrate_mysql_typesuse_2530!();
+        Depcrate_mysql_typesuse_2531!();
+        Depcrate_mysql_typesimpl_2532!();
+        Depcrate_mysql_typesimpl_2533!();
+        Depcrate_mysql_typesUnsigned!();
+        Depcrate_mysql_typesimpl_2535!();
+        Depcrate_mysql_typesimpl_2536!();
+        Depcrate_mysql_typesimpl_2537!();
+        Depcrate_mysql_typesimpl_2538!();
+        Depcrate_mysql_typesimpl_2539!();
+        Depcrate_mysql_typesimpl_2540!();
+        Depcrate_mysql_typesimpl_2541!();
+        Depcrate_mysql_typesimpl_2542!();
+        Depcrate_mysql_typesimpl_2543!();
+        Depcrate_mysql_typesimpl_2544!();
+        Depcrate_mysql_typesimpl_2545!();
+        Depcrate_mysql_typesimpl_2546!();
+        Depcrate_mysql_typesimpl_2547!();
+        Depcrate_mysql_typesimpl_2548!();
+        Depcrate_mysql_typesimpl_2549!();
+        Depcrate_mysql_typesimpl_2550!();
+        Depcrate_mysql_typesimpl_2551!();
+        Depcrate_mysql_typesimpl_2552!();
+        Depcrate_mysql_typesimpl_2553!();
+        Depcrate_mysql_typesimpl_2554!();
+        Depcrate_mysql_typesimpl_2555!();
+        Depcrate_mysql_typesimpl_2556!();
+        Depcrate_mysql_typesimpl_2557!();
+        Depcrate_mysql_typesDatetime!();
+    };
+}

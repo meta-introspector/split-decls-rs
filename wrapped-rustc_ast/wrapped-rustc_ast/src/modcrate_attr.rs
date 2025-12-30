@@ -1,0 +1,41 @@
+// Generated module macro for crate::attr
+macro_rules! Modcrate_attr {
+() => {
+        Depcrate_attruse_297!();
+        Depcrate_attruse_298!();
+        Depcrate_attruse_299!();
+        Depcrate_attruse_300!();
+        Depcrate_attruse_301!();
+        Depcrate_attruse_302!();
+        Depcrate_attruse_303!();
+        Depcrate_attruse_304!();
+        Depcrate_attruse_305!();
+        Depcrate_attruse_306!();
+        Depcrate_attruse_307!();
+        Depcrate_attrMarkedAttrs!();
+        Depcrate_attrimpl_309!();
+        Depcrate_attrAttrIdGenerator!();
+        Depcrate_attrimpl_311!();
+        Depcrate_attrimpl_312!();
+        Depcrate_attrimpl_313!();
+        Depcrate_attrimpl_314!();
+        Depcrate_attrimpl_315!();
+        Depcrate_attrimpl_316!();
+        Depcrate_attrimpl_317!();
+        Depcrate_attrimpl_318!();
+        Depcrate_attrmk_doc_comment!();
+        Depcrate_attrmk_attr!();
+        Depcrate_attrmk_attr_from_item!();
+        Depcrate_attrmk_attr_word!();
+        Depcrate_attrmk_attr_nested_word!();
+        Depcrate_attrmk_attr_name_value_str!();
+        Depcrate_attrfilter_by_name!();
+        Depcrate_attrfind_by_name!();
+        Depcrate_attrfirst_attr_value_str_by_name!();
+        Depcrate_attrcontains_name!();
+        Depcrate_attrlist_contains_name!();
+        Depcrate_attrimpl_330!();
+        Depcrate_attrAttributeExt!();
+        Depcrate_attrimpl_332!();
+    };
+}

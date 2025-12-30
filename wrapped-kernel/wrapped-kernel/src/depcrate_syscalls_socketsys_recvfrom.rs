@@ -1,0 +1,9 @@
+// Generated macro for sys_recvfrom (function)
+macro_rules! Depcrate_syscalls_socketsys_recvfrom {
+() => {
+// Module: crate::syscalls::socket
+// Provides: {"sys_recvfrom"}
+// Dependencies: {}
+# [hermit_macro :: system (errno)] # [unsafe (no_mangle)] pub unsafe extern "C" fn sys_recvfrom (fd : i32 , buf : * mut u8 , len : usize , _flags : i32 , addr : * mut sockaddr , addrlen : * mut socklen_t ,) -> isize { let slice = unsafe { core :: slice :: from_raw_parts_mut (buf . cast () , len) } ; let obj = get_object (fd) ; obj . map_or_else (| e | isize :: try_from (- i32 :: from (e)) . unwrap () , | v | { block_on (async { v . read () . await . recvfrom (slice) . await } , None) . map_or_else (| e | isize :: try_from (- i32 :: from (e)) . unwrap () , | (len , endpoint) | { if ! addr . is_null () && ! addrlen . is_null () { # [allow (unused_variables)] let addrlen = unsafe { & mut * addrlen } ; match endpoint { # [cfg (feature = "net")] Endpoint :: Ip (endpoint) => match endpoint . addr { IpAddress :: Ipv4 (_) => { if * addrlen >= u32 :: try_from (size_of :: < sockaddr_in > ()) . unwrap () { let addr = unsafe { & mut * addr . cast () } ; * addr = sockaddr_in :: from (endpoint) ; * addrlen = size_of :: < sockaddr_in > () . try_into () . unwrap () ; } else { return (- i32 :: from (Errno :: Inval)) . try_into () . unwrap () ; } } IpAddress :: Ipv6 (_) => { if * addrlen >= u32 :: try_from (size_of :: < sockaddr_in6 > ()) . unwrap () { let addr = unsafe { & mut * addr . cast () } ; * addr = sockaddr_in6 :: from (endpoint) ; * addrlen = size_of :: < sockaddr_in6 > () . try_into () . unwrap () ; } else { return (- i32 :: from (Errno :: Inval)) . try_into () . unwrap () ; } } } , # [cfg (feature = "vsock")] _ => { return (- i32 :: from (Errno :: Inval)) . try_into () . unwrap () ; } } } len . try_into () . unwrap () } ,) } ,) }
+};
+}

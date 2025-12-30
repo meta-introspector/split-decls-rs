@@ -1,0 +1,9 @@
+// Generated macro for impl_581 (impl)
+macro_rules! Depcrate_trace_serviceimpl_581 {
+() => {
+// Module: crate::trace::service
+// Provides: {"impl_581"}
+// Dependencies: {}
+impl < S , ReqBody , ResBody , M , OnRequestT , OnResponseT , OnFailureT , OnBodyChunkT , OnEosT , MakeSpanT , > Service < Request < ReqBody > > for Trace < S , M , MakeSpanT , OnRequestT , OnResponseT , OnBodyChunkT , OnEosT , OnFailureT > where S : Service < Request < ReqBody > , Response = Response < ResBody > > , ReqBody : Body , ResBody : Body , ResBody :: Error : fmt :: Display + 'static , S :: Error : fmt :: Display + 'static , M : MakeClassifier , M :: Classifier : Clone , MakeSpanT : MakeSpan < ReqBody > , OnRequestT : OnRequest < ReqBody > , OnResponseT : OnResponse < ResBody > + Clone , OnBodyChunkT : OnBodyChunk < ResBody :: Data > + Clone , OnEosT : OnEos + Clone , OnFailureT : OnFailure < M :: FailureClass > + Clone , { type Response = Response < ResponseBody < ResBody , M :: ClassifyEos , OnBodyChunkT , OnEosT , OnFailureT > > ; type Error = S :: Error ; type Future = ResponseFuture < S :: Future , M :: Classifier , OnResponseT , OnBodyChunkT , OnEosT , OnFailureT > ; fn poll_ready (& mut self , cx : & mut Context < '_ >) -> Poll < Result < () , Self :: Error > > { self . inner . poll_ready (cx) } fn call (& mut self , req : Request < ReqBody >) -> Self :: Future { let start = Instant :: now () ; let span = self . make_span . make_span (& req) ; let classifier = self . make_classifier . make_classifier (& req) ; let future = { let _guard = span . enter () ; self . on_request . on_request (& req , & span) ; self . inner . call (req) } ; ResponseFuture { inner : future , span , classifier : Some (classifier) , on_response : Some (self . on_response . clone ()) , on_body_chunk : Some (self . on_body_chunk . clone ()) , on_eos : Some (self . on_eos . clone ()) , on_failure : Some (self . on_failure . clone ()) , start , } } }
+};
+}

@@ -1,0 +1,41 @@
+// Generated module macro for crate::crypto
+macro_rules! Modcrate_crypto {
+() => {
+        Depcrate_cryptouse_340!();
+        Depcrate_cryptouse_341!();
+        Depcrate_cryptouse_342!();
+        Depcrate_cryptouse_343!();
+        Depcrate_cryptouse_344!();
+        Depcrate_cryptoMAX_NONCE_LEN!();
+        Depcrate_cryptoHP_MASK_LEN!();
+        Depcrate_cryptoLevel!();
+        Depcrate_cryptoimpl_348!();
+        Depcrate_cryptoAlgorithm!();
+        Depcrate_cryptoimpl_350!();
+        Depcrate_cryptoEVP_AEAD!();
+        Depcrate_cryptoEVP_MD!();
+        Depcrate_cryptoHeaderProtectionMask!();
+        Depcrate_cryptoOpen!();
+        Depcrate_cryptoimpl_355!();
+        Depcrate_cryptoSeal!();
+        Depcrate_cryptoimpl_357!();
+        Depcrate_cryptoimpl_358!();
+        Depcrate_cryptoderive_initial_key_material!();
+        Depcrate_cryptoderive_initial_secret!();
+        Depcrate_cryptoderive_client_initial_secret!();
+        Depcrate_cryptoderive_server_initial_secret!();
+        Depcrate_cryptoderive_next_secret!();
+        Depcrate_cryptoderive_hdr_key!();
+        Depcrate_cryptoderive_pkt_key!();
+        Depcrate_cryptoderive_pkt_iv!();
+        Depcrate_cryptohkdf_expand_label!();
+        Depcrate_cryptomake_nonce!();
+        Depcrate_cryptoverify_slices_are_equal!();
+        Depcrate_cryptoother_370!();
+        Depcrate_cryptotests!();
+        Depcrate_cryptoboringssl!();
+        Depcrate_cryptouse_390!();
+        Depcrate_cryptoopenssl_quictls!();
+        Depcrate_cryptouse_414!();
+    };
+}

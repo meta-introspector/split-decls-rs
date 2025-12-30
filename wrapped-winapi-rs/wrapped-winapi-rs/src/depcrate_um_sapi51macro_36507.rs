@@ -1,0 +1,9 @@
+// Generated macro for macro_36507 (macro)
+macro_rules! Depcrate_um_sapi51macro_36507 {
+() => {
+// Module: crate::um::sapi51
+// Provides: {"macro_36507"}
+// Dependencies: {}
+RIDL ! { # [uuid (0xf740a62f , 0x7c15 , 0x489e , 0x82 , 0x34 , 0x94 , 0x0a , 0x33 , 0xd9 , 0x27 , 0x2d)] interface ISpRecoContext (ISpRecoContextVtbl) : ISpEventSource (ISpEventSourceVtbl) { fn GetRecognizer (ppRecognizer : * mut * mut ISpRecognizer ,) -> HRESULT , fn CreateGrammer (ullGrammarId : ULONGLONG , ppGrammar : * mut * mut ISpRecoGrammar ,) -> HRESULT , fn GetStatus (pState : * mut SPRECOCONTEXTSTATUS ,) -> HRESULT , fn GetMaxAlternates (pcAlternates : * mut ULONG ,) -> HRESULT , fn SetMaxAlternates (cAlternates : ULONG ,) -> HRESULT , fn SetAudioOptions (Options : SPAUDIOOPTIONS , pAudioFormatId : * const GUID , pWaveFormatEx : * const WAVEFORMATEX ,) -> HRESULT , fn GetAudioOptions (pOptions : * mut SPAUDIOOPTIONS , pAudioFormatId : * mut GUID , ppCoMemWFEX : * mut * mut WAVEFORMATEX ,) -> HRESULT , fn DeserializeResult (pSerializedResult : * const SPSERIALIZEDRESULT , ppResult : * mut * mut ISpRecoResult ,) -> HRESULT , fn Bookmark (Options : SPBOOKMARKOPTIONS , ullStreamPosition : ULONGLONG , lparamEvent : LPARAM ,) -> HRESULT , fn SetAdaptionData (pAdaptionData : LPCWSTR , cch : ULONG ,) -> HRESULT , fn Pause (dwReserved : DWORD ,) -> HRESULT , fn Resume (dwReserved : DWORD ,) -> HRESULT , fn SetVoice (pVoice : * mut ISpVoice , fAllowFormatChanges : BOOL ,) -> HRESULT , fn GetVoice (ppVoice : * mut * mut ISpVoice ,) -> HRESULT , fn SetVoicePurgeEvent (ullEventIntereset : ULONGLONG ,) -> HRESULT , fn GetVoicePurgeEvent (pullEventIntereset : * mut ULONGLONG ,) -> HRESULT , fn SetContextState (eContextState : SPCONTEXTSTATE ,) -> HRESULT , fn GetContextState (peContextState : * mut SPCONTEXTSTATE ,) -> HRESULT , } }
+};
+}

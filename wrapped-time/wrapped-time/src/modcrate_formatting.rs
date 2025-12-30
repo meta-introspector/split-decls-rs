@@ -1,0 +1,42 @@
+// Generated module macro for crate::formatting
+macro_rules! Modcrate_formatting {
+() => {
+        Depcrate_formattingformattable!();
+        Depcrate_formattingiso8601!();
+        Depcrate_formattinguse_450!();
+        Depcrate_formattinguse_451!();
+        Depcrate_formattinguse_452!();
+        Depcrate_formattinguse_453!();
+        Depcrate_formattinguse_454!();
+        Depcrate_formattinguse_455!();
+        Depcrate_formattinguse_456!();
+        Depcrate_formattinguse_457!();
+        Depcrate_formattingMONTH_NAMES!();
+        Depcrate_formattingWEEKDAY_NAMES!();
+        Depcrate_formattingwrite!();
+        Depcrate_formattingwrite_if!();
+        Depcrate_formattingwrite_if_else!();
+        Depcrate_formattingf64_10_pow_x!();
+        Depcrate_formattingformat_float!();
+        Depcrate_formattingformat_number!();
+        Depcrate_formattingformat_number_pad_space!();
+        Depcrate_formattingformat_number_pad_zero!();
+        Depcrate_formattingformat_number_pad_none!();
+        Depcrate_formattingformat_component!();
+        Depcrate_formattingfmt_day!();
+        Depcrate_formattingfmt_month!();
+        Depcrate_formattingfmt_ordinal!();
+        Depcrate_formattingfmt_weekday!();
+        Depcrate_formattingfmt_week_number!();
+        Depcrate_formattingfmt_year!();
+        Depcrate_formattingfmt_hour!();
+        Depcrate_formattingfmt_minute!();
+        Depcrate_formattingfmt_period!();
+        Depcrate_formattingfmt_second!();
+        Depcrate_formattingfmt_subsecond!();
+        Depcrate_formattingfmt_offset_hour!();
+        Depcrate_formattingfmt_offset_minute!();
+        Depcrate_formattingfmt_offset_second!();
+        Depcrate_formattingfmt_unix_timestamp!();
+    };
+}

@@ -1,0 +1,50 @@
+// Generated module macro for crate::error
+macro_rules! Modcrate_error {
+() => {
+        Depcrate_erroruse_37!();
+        Depcrate_erroruse_38!();
+        Depcrate_erroruse_39!();
+        Depcrate_erroruse_40!();
+        Depcrate_erroruse_41!();
+        Depcrate_erroruse_42!();
+        Depcrate_erroruse_43!();
+        Depcrate_erroruse_44!();
+        Depcrate_erroruse_45!();
+        Depcrate_errorimpl_46!();
+        Depcrate_errorimpl_47!();
+        Depcrate_errorimpl_48!();
+        Depcrate_errorimpl_49!();
+        Depcrate_errorimpl_50!();
+        Depcrate_errorimpl_51!();
+        Depcrate_errorimpl_52!();
+        Depcrate_errorErrorVTable!();
+        Depcrate_errorobject_drop!();
+        Depcrate_errorobject_drop_front!();
+        Depcrate_errorobject_ref!();
+        Depcrate_errorobject_mut!();
+        Depcrate_errorobject_boxed!();
+        Depcrate_errorobject_downcast!();
+        Depcrate_errorobject_downcast_mut!();
+        Depcrate_errorcontext_downcast!();
+        Depcrate_errorcontext_downcast_mut!();
+        Depcrate_errorcontext_drop_rest!();
+        Depcrate_errorcontext_chain_downcast!();
+        Depcrate_errorcontext_chain_downcast_mut!();
+        Depcrate_errorcontext_chain_drop_rest!();
+        Depcrate_errorErrorHeader!();
+        Depcrate_errorErrorImpl!();
+        Depcrate_errorContextError!();
+        Depcrate_errorimpl_70!();
+        Depcrate_errorheader!();
+        Depcrate_errorheader_mut!();
+        Depcrate_errorimpl_73!();
+        Depcrate_errorimpl_74!();
+        Depcrate_errorimpl_75!();
+        Depcrate_errorimpl_76!();
+        Depcrate_errorimpl_77!();
+        Depcrate_errorimpl_78!();
+        Depcrate_errorimpl_79!();
+        Depcrate_errorimpl_80!();
+        Depcrate_errorpyo3_compat!();
+    };
+}

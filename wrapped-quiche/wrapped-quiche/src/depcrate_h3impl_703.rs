@@ -1,0 +1,9 @@
+// Generated macro for impl_703 (impl)
+macro_rules! Depcrate_h3impl_703 {
+() => {
+// Module: crate::h3
+// Provides: {"impl_703"}
+// Dependencies: {}
+# [cfg (feature = "sfv")] # [cfg_attr (docsrs , doc (cfg (feature = "sfv")))] impl TryFrom < & [u8] > for Priority { type Error = Error ; # [doc = " Try to parse an Extensible Priority field value."] # [doc = ""] # [doc = " The field value is expected to be a Structured Fields Dictionary; see"] # [doc = " [Extensible Priorities]."] # [doc = ""] # [doc = " If the `u` or `i` fields are contained with correct types, a constructed"] # [doc = " Priority object is returned. Note that urgency values outside of valid"] # [doc = " range (0 through 7) are clamped to 7."] # [doc = ""] # [doc = " If the `u` or `i` fields are contained with the wrong types,"] # [doc = " Error::Done is returned."] # [doc = ""] # [doc = " Omitted parameters will yield default values."] # [doc = ""] # [doc = " [Extensible Priorities]: https://www.rfc-editor.org/rfc/rfc9218.html#section-4."] fn try_from (value : & [u8]) -> std :: result :: Result < Self , Self :: Error > { let dict = match sfv :: Parser :: parse_dictionary (value) { Ok (v) => v , Err (_) => return Err (Error :: Done) , } ; let urgency = match dict . get ("u") { Some (sfv :: ListEntry :: Item (item)) => match item . bare_item . as_int () { Some (v) => { if ! (PRIORITY_URGENCY_LOWER_BOUND as i64 ..= PRIORITY_URGENCY_UPPER_BOUND as i64) . contains (& v) { PRIORITY_URGENCY_UPPER_BOUND } else { v as u8 } } , None => return Err (Error :: Done) , } , Some (sfv :: ListEntry :: InnerList (_)) => return Err (Error :: Done) , None => PRIORITY_URGENCY_DEFAULT , } ; let incremental = match dict . get ("i") { Some (sfv :: ListEntry :: Item (item)) => item . bare_item . as_bool () . ok_or (Error :: Done) ? , _ => false , } ; Ok (Priority :: new (urgency , incremental)) } }
+};
+}

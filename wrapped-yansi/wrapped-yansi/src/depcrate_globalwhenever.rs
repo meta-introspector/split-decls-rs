@@ -1,0 +1,9 @@
+// Generated macro for whenever (function)
+macro_rules! Depcrate_globalwhenever {
+() => {
+// Module: crate::global
+// Provides: {"whenever"}
+// Dependencies: {}
+# [doc = " Dynamically enables and disables styling globally based on `condition`."] # [doc = ""] # [doc = " `condition` is expected to be fast: it is checked dynamically, each time a"] # [doc = " [`Painted`](crate::Painted) value is displayed."] # [doc = ""] # [doc = " # Example"] # [doc = ""] # [doc = " ```rust"] # [doc = " # #[cfg(all(feature = \"detect-tty\", feature = \"detect-env\"))] {"] # [doc = " use yansi::Condition;"] # [doc = ""] # [doc = " yansi::whenever(Condition::STDOUT_IS_TTY);"] # [doc = ""] # [doc = " // On each styling, check if we have TTYs."] # [doc = " yansi::whenever(Condition::STDOUTERR_ARE_TTY_LIVE);"] # [doc = ""] # [doc = " // Check `NO_COLOR`, `CLICOLOR`, and if we have TTYs."] # [doc = " const HAVE_COLOR: Condition = Condition(|| {"] # [doc = "     std::env::var_os(\"NO_COLOR\").is_none()"] # [doc = "         && (Condition::CLICOLOR_LIVE)()"] # [doc = "         && Condition::stdouterr_are_tty_live()"] # [doc = " });"] # [doc = ""] # [doc = " // This will call `HAVE_COLOR` every time styling is needed. In this"] # [doc = " // example, this means that env vars will be checked on each styling."] # [doc = " yansi::whenever(HAVE_COLOR);"] # [doc = ""] # [doc = " // This instead caches the value (checking `env()` exactly once, now)."] # [doc = " yansi::whenever(Condition::cached((HAVE_COLOR)()));"] # [doc = ""] # [doc = " // Is identical to this:"] # [doc = " match (HAVE_COLOR)() {"] # [doc = "     true => yansi::enable(),"] # [doc = "     false => yansi::disable(),"] # [doc = " }"] # [doc = " # }"] # [doc = " ```"] pub fn whenever (condition : Condition) { ENABLED . store (condition) ; }
+};
+}

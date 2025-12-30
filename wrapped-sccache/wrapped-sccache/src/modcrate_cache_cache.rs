@@ -1,0 +1,55 @@
+// Generated module macro for crate::cache::cache
+macro_rules! Modcrate_cache_cache {
+() => {
+        Depcrate_cache_cacheuse_109!();
+        Depcrate_cache_cacheuse_110!();
+        Depcrate_cache_cacheuse_111!();
+        Depcrate_cache_cacheuse_112!();
+        Depcrate_cache_cacheuse_113!();
+        Depcrate_cache_cacheuse_114!();
+        Depcrate_cache_cacheuse_115!();
+        Depcrate_cache_cacheuse_116!();
+        Depcrate_cache_cacheuse_117!();
+        Depcrate_cache_cacheuse_118!();
+        Depcrate_cache_cacheuse_119!();
+        Depcrate_cache_cacheuse_120!();
+        Depcrate_cache_cacheuse_121!();
+        Depcrate_cache_cacheuse_122!();
+        Depcrate_cache_cacheuse_123!();
+        Depcrate_cache_cacheuse_124!();
+        Depcrate_cache_cacheuse_125!();
+        Depcrate_cache_cacheuse_126!();
+        Depcrate_cache_cacheuse_127!();
+        Depcrate_cache_cacheuse_128!();
+        Depcrate_cache_cacheuse_129!();
+        Depcrate_cache_cacheuse_130!();
+        Depcrate_cache_cacheuse_131!();
+        Depcrate_cache_cacheuse_132!();
+        Depcrate_cache_cacheget_file_mode!();
+        Depcrate_cache_cacheget_file_mode!();
+        Depcrate_cache_cacheset_file_mode!();
+        Depcrate_cache_cacheset_file_mode!();
+        Depcrate_cache_cacheFileObjectSource!();
+        Depcrate_cache_cacheCache!();
+        Depcrate_cache_cacheimpl_139!();
+        Depcrate_cache_cacheCacheMode!();
+        Depcrate_cache_cacheReadSeek!();
+        Depcrate_cache_cacheimpl_142!();
+        Depcrate_cache_cacheCacheRead!();
+        Depcrate_cache_cacheDecompressionFailure!();
+        Depcrate_cache_cacheimpl_145!();
+        Depcrate_cache_cacheimpl_146!();
+        Depcrate_cache_cacheimpl_147!();
+        Depcrate_cache_cacheCacheWrite!();
+        Depcrate_cache_cacheimpl_149!();
+        Depcrate_cache_cacheimpl_150!();
+        Depcrate_cache_cacheStorage!();
+        Depcrate_cache_cachePreprocessorCacheModeConfig!();
+        Depcrate_cache_cacheimpl_153!();
+        Depcrate_cache_cacheimpl_154!();
+        Depcrate_cache_cacheimpl_155!();
+        Depcrate_cache_cachenormalize_key!();
+        Depcrate_cache_cachestorage_from_config!();
+        Depcrate_cache_cachetest!();
+    };
+}

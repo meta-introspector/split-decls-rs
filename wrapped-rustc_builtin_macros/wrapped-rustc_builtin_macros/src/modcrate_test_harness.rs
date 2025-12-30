@@ -1,0 +1,41 @@
+// Generated module macro for crate::test_harness
+macro_rules! Modcrate_test_harness {
+() => {
+        Depcrate_test_harnessuse_662!();
+        Depcrate_test_harnessuse_663!();
+        Depcrate_test_harnessuse_664!();
+        Depcrate_test_harnessuse_665!();
+        Depcrate_test_harnessuse_666!();
+        Depcrate_test_harnessuse_667!();
+        Depcrate_test_harnessuse_668!();
+        Depcrate_test_harnessuse_669!();
+        Depcrate_test_harnessuse_670!();
+        Depcrate_test_harnessuse_671!();
+        Depcrate_test_harnessuse_672!();
+        Depcrate_test_harnessuse_673!();
+        Depcrate_test_harnessuse_674!();
+        Depcrate_test_harnessuse_675!();
+        Depcrate_test_harnessuse_676!();
+        Depcrate_test_harnessuse_677!();
+        Depcrate_test_harnessuse_678!();
+        Depcrate_test_harnessuse_679!();
+        Depcrate_test_harnessuse_680!();
+        Depcrate_test_harnessuse_681!();
+        Depcrate_test_harnessTest!();
+        Depcrate_test_harnessTestCtxt!();
+        Depcrate_test_harnessinject!();
+        Depcrate_test_harnessTestHarnessGenerator!();
+        Depcrate_test_harnessimpl_686!();
+        Depcrate_test_harnessimpl_687!();
+        Depcrate_test_harnessInnerItemLinter!();
+        Depcrate_test_harnessimpl_689!();
+        Depcrate_test_harnessentry_point_type!();
+        Depcrate_test_harnessEntryPointCleaner!();
+        Depcrate_test_harnessimpl_692!();
+        Depcrate_test_harnessgenerate_test_harness!();
+        Depcrate_test_harnessmk_main!();
+        Depcrate_test_harnessmk_tests_slice!();
+        Depcrate_test_harnessget_test_name!();
+        Depcrate_test_harnessget_test_runner!();
+    };
+}

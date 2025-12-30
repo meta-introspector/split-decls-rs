@@ -1,0 +1,49 @@
+// Generated module macro for crate::test_runner::runner
+macro_rules! Modcrate_test_runner_runner {
+() => {
+        Depcrate_test_runner_runneruse_1234!();
+        Depcrate_test_runner_runneruse_1235!();
+        Depcrate_test_runner_runneruse_1236!();
+        Depcrate_test_runner_runneruse_1237!();
+        Depcrate_test_runner_runneruse_1238!();
+        Depcrate_test_runner_runneruse_1239!();
+        Depcrate_test_runner_runneruse_1240!();
+        Depcrate_test_runner_runneruse_1241!();
+        Depcrate_test_runner_runneruse_1242!();
+        Depcrate_test_runner_runneruse_1243!();
+        Depcrate_test_runner_runneruse_1244!();
+        Depcrate_test_runner_runneruse_1245!();
+        Depcrate_test_runner_runneruse_1246!();
+        Depcrate_test_runner_runneruse_1247!();
+        Depcrate_test_runner_runneruse_1248!();
+        Depcrate_test_runner_runneruse_1249!();
+        Depcrate_test_runner_runneruse_1250!();
+        Depcrate_test_runner_runneruse_1251!();
+        Depcrate_test_runner_runnerENV_FORK_FILE!();
+        Depcrate_test_runner_runnerALWAYS!();
+        Depcrate_test_runner_runnerINFO_LOG!();
+        Depcrate_test_runner_runnerTRACE!();
+        Depcrate_test_runner_runnerverbose_message!();
+        Depcrate_test_runner_runnerverbose_message!();
+        Depcrate_test_runner_runnerRejectionDetail!();
+        Depcrate_test_runner_runnerTestRunner!();
+        Depcrate_test_runner_runnerimpl_1260!();
+        Depcrate_test_runner_runnerimpl_1261!();
+        Depcrate_test_runner_runnerimpl_1262!();
+        Depcrate_test_runner_runnerForkOutput!();
+        Depcrate_test_runner_runnerimpl_1264!();
+        Depcrate_test_runner_runnerForkOutput!();
+        Depcrate_test_runner_runnerimpl_1266!();
+        Depcrate_test_runner_runnercall_test!();
+        Depcrate_test_runner_runnercall_test!();
+        Depcrate_test_runner_runnerTestRunResult!();
+        Depcrate_test_runner_runnerimpl_1270!();
+        Depcrate_test_runner_runnerinit_replay!();
+        Depcrate_test_runner_runnerinit_replay!();
+        Depcrate_test_runner_runnerawait_child_without_timeout!();
+        Depcrate_test_runner_runnerawait_child!();
+        Depcrate_test_runner_runnerawait_child!();
+        Depcrate_test_runner_runnertest!();
+        Depcrate_test_runner_runnertimeout_tests!();
+    };
+}

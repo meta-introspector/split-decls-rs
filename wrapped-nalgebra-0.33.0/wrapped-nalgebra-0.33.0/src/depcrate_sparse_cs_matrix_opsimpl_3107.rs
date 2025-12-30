@@ -1,0 +1,9 @@
+// Generated macro for impl_3107 (impl)
+macro_rules! Depcrate_sparse_cs_matrix_opsimpl_3107 {
+() => {
+// Module: crate::sparse::cs_matrix_ops
+// Provides: {"impl_3107"}
+// Dependencies: {}
+impl < 'a , 'b , T , R1 , R2 , C1 , C2 , S1 , S2 > Add < & 'b CsMatrix < T , R2 , C2 , S2 > > for & 'a CsMatrix < T , R1 , C1 , S1 > where T : Scalar + ClosedAddAssign + ClosedMulAssign + Zero + One , R1 : Dim , C1 : Dim , R2 : Dim , C2 : Dim , S1 : CsStorage < T , R1 , C1 > , S2 : CsStorage < T , R2 , C2 > , ShapeConstraint : DimEq < R1 , R2 > + DimEq < C1 , C2 > , DefaultAllocator : Allocator < C2 > + Allocator < R1 > + Allocator < R1 > , { type Output = CsMatrix < T , R1 , C2 > ; fn add (self , rhs : & 'b CsMatrix < T , R2 , C2 , S2 >) -> Self :: Output { let (nrows1 , ncols1) = self . data . shape () ; let (nrows2 , ncols2) = rhs . data . shape () ; assert_eq ! ((nrows1 . value () , ncols1 . value ()) , (nrows2 . value () , ncols2 . value ()) , "Mismatched dimensions for matrix sum.") ; let mut res = CsMatrix :: new_uninitialized_generic (nrows1 , ncols2 , self . len () + rhs . len ()) ; let mut timestamps = OVector :: zeros_generic (nrows1 , Const :: < 1 >) ; let mut workspace = Matrix :: zeros_generic (nrows1 , Const :: < 1 >) ; let mut nz = 0 ; for j in 0 .. ncols2 . value () { res . data . p [j] = nz ; nz = self . scatter (j , T :: one () , timestamps . as_mut_slice () , j + 1 , workspace . as_mut_slice () , nz , & mut res ,) ; nz = rhs . scatter (j , T :: one () , timestamps . as_mut_slice () , j + 1 , workspace . as_mut_slice () , nz , & mut res ,) ; let range = res . data . p [j] .. nz ; res . data . i [range . clone ()] . sort_unstable () ; for p in range { res . data . vals [p] = workspace [res . data . i [p]] . clone () } } res . data . i . truncate (nz) ; res . data . i . shrink_to_fit () ; res . data . vals . truncate (nz) ; res . data . vals . shrink_to_fit () ; res } }
+};
+}

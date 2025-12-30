@@ -1,0 +1,9 @@
+// Generated macro for deflateParams (function)
+macro_rules! DepcratedeflateParams {
+() => {
+// Module: crate
+// Provides: {"deflateParams"}
+// Dependencies: {}
+# [doc = " Dynamically update the compression level and compression strategy."] # [doc = ""] # [doc = " This can be used to switch between compression and straight copy of the input data,"] # [doc = " or to switch to a different kind of input data requiring a different strategy."] # [doc = ""] # [doc = " The interpretation of level and strategy is as in [`deflateInit2_`]."] # [doc = ""] # [doc = " # Returns"] # [doc = ""] # [doc = " - [`Z_OK`] if success"] # [doc = " - [`Z_STREAM_ERROR`] if the stream state was inconsistent or if a parameter was invalid"] # [doc = " - [`Z_BUF_ERROR`] if there was not enough output space to complete the compression of the available input data before a change in the strategy or approach."] # [doc = ""] # [doc = " Note that in the case of a [`Z_BUF_ERROR`], the parameters are not changed."] # [doc = " A return value of [`Z_BUF_ERROR`] is not fatal, in which case [`deflateParams`] can be retried with more output space."] # [doc = ""] # [doc = " # Safety"] # [doc = ""] # [doc = " The caller must guarantee that"] # [doc = ""] # [doc = " * Either"] # [doc = "     - `strm` is `NULL`"] # [doc = "     - `strm` satisfies the requirements of `&mut *strm` and was initialized with [`deflateInit_`] or similar"] # [cfg_attr (feature = "export-symbols" , export_name = prefix ! (deflateParams))] pub unsafe extern "C-unwind" fn deflateParams (strm : z_streamp , level : c_int , strategy : c_int ,) -> c_int { let Ok (strategy) = Strategy :: try_from (strategy) else { return ReturnCode :: StreamError as _ ; } ; match DeflateStream :: from_stream_mut (strm) { Some (stream) => zlib_rs :: deflate :: params (stream , level , strategy) as _ , None => ReturnCode :: StreamError as _ , } }
+};
+}

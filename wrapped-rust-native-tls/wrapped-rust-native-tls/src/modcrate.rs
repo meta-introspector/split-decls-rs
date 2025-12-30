@@ -1,0 +1,49 @@
+// Generated module macro for crate
+macro_rules! Modcrate {
+() => {
+        Depcrateuse_1!();
+        Depcrateuse_2!();
+        Depcrateuse_3!();
+        Depcrateuse_4!();
+        Depcrateuse_5!();
+        Depcrateother_6!();
+        Depcrateimp!();
+        Depcrateimp!();
+        Depcrateimp!();
+        Depcratetest!();
+        DepcrateResult!();
+        DepcrateError!();
+        Depcrateimpl_42!();
+        Depcrateimpl_43!();
+        Depcrateimpl_44!();
+        Depcrateimpl_45!();
+        DepcrateIdentity!();
+        Depcrateimpl_47!();
+        DepcrateCertificate!();
+        Depcrateimpl_49!();
+        DepcrateMidHandshakeTlsStream!();
+        Depcrateimpl_51!();
+        Depcrateimpl_52!();
+        Depcrateimpl_53!();
+        DepcrateHandshakeError!();
+        Depcrateimpl_55!();
+        Depcrateimpl_56!();
+        Depcrateimpl_57!();
+        DepcrateProtocol!();
+        DepcrateTlsConnectorBuilder!();
+        Depcrateimpl_60!();
+        DepcrateTlsConnector!();
+        Depcrateimpl_62!();
+        DepcrateTlsAcceptorBuilder!();
+        Depcrateimpl_64!();
+        DepcrateTlsAcceptor!();
+        Depcrateimpl_66!();
+        DepcrateTlsStream!();
+        Depcrateimpl_68!();
+        Depcrateimpl_69!();
+        Depcrateimpl_70!();
+        Depcrateimpl_71!();
+        Depcrateimpl_72!();
+        Depcrate_check_kinds!();
+    };
+}

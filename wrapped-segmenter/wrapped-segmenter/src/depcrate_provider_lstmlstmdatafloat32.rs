@@ -1,0 +1,9 @@
+// Generated macro for LstmDataFloat32 (struct)
+macro_rules! Depcrate_provider_lstmLstmDataFloat32 {
+() => {
+// Module: crate::provider::lstm
+// Provides: {"LstmDataFloat32"}
+// Dependencies: {}
+# [doc = " The struct that stores a LSTM model."] # [doc = ""] # [doc = " <div class=\"stab unstable\">"] # [doc = " 🚧 This code is considered unstable; it may change at any time, in breaking or non-breaking ways,"] # [doc = " including in SemVer minor releases. While the serde representation of data structs is guaranteed"] # [doc = " to be stable, their Rust representation might not be. Use with caution."] # [doc = " </div>"] # [derive (PartialEq , Debug , Clone , yoke :: Yokeable , zerofrom :: ZeroFrom)] # [cfg_attr (feature = "datagen" , derive (serde :: Serialize))] # [yoke (prove_covariance_manually)] pub struct LstmDataFloat32 < 'data > { # [doc = " Type of the model"] pub (crate) model : ModelType , # [doc = " The grapheme cluster dictionary used to train the model"] pub (crate) dic : ZeroMap < 'data , PotentialUtf8 , u16 > , # [doc = " The embedding layer. Shape (dic.len + 1, e)"] pub (crate) embedding : LstmMatrix2 < 'data > , # [doc = " The forward layer's first matrix. Shape (h, 4, e)"] pub (crate) fw_w : LstmMatrix3 < 'data > , # [doc = " The forward layer's second matrix. Shape (h, 4, h)"] pub (crate) fw_u : LstmMatrix3 < 'data > , # [doc = " The forward layer's bias. Shape (h, 4)"] pub (crate) fw_b : LstmMatrix2 < 'data > , # [doc = " The backward layer's first matrix. Shape (h, 4, e)"] pub (crate) bw_w : LstmMatrix3 < 'data > , # [doc = " The backward layer's second matrix. Shape (h, 4, h)"] pub (crate) bw_u : LstmMatrix3 < 'data > , # [doc = " The backward layer's bias. Shape (h, 4)"] pub (crate) bw_b : LstmMatrix2 < 'data > , # [doc = " The output layer's weights. Shape (2, 4, h)"] pub (crate) time_w : LstmMatrix3 < 'data > , # [doc = " The output layer's bias. Shape (4)"] pub (crate) time_b : LstmMatrix1 < 'data > , }
+};
+}

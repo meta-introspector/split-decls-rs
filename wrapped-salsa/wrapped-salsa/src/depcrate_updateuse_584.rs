@@ -4,6 +4,6 @@ macro_rules! Depcrate_updateuse_584 {
 // Module: crate::update
 // Provides: {"use_584"}
 // Dependencies: {}
-use std :: hash :: { BuildHasher , Hash } ;
+# [cfg (feature = "rayon")] use rayon :: iter :: Either ;
 };
 }

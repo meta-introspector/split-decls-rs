@@ -1,0 +1,9 @@
+// Generated macro for STATUS_CLUSTER_CSV_VOLUME_DRAINING_SUCCEEDED_DOWNLEVEL (const)
+macro_rules! Depcrate_shared_ntstatusSTATUS_CLUSTER_CSV_VOLUME_DRAINING_SUCCEEDED_DOWNLEVEL {
+() => {
+// Module: crate::shared::ntstatus
+// Provides: {"STATUS_CLUSTER_CSV_VOLUME_DRAINING_SUCCEEDED_DOWNLEVEL"}
+// Dependencies: {}
+pub const STATUS_CLUSTER_CSV_VOLUME_DRAINING_SUCCEEDED_DOWNLEVEL : NTSTATUS = 0xC0130026 ;
+};
+}

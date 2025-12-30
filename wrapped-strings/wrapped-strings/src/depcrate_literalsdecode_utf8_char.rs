@@ -1,0 +1,9 @@
+// Generated macro for decode_utf8_char (function)
+macro_rules! Depcrate_literalsdecode_utf8_char {
+() => {
+// Module: crate::literals
+// Provides: {"decode_utf8_char"}
+// Dependencies: {}
+# [doc (hidden)] pub const fn decode_utf8_char (bytes : & [u8] , mut pos : usize) -> Option < (u32 , usize) > { if bytes . len () == pos { return None ; } let ch = bytes [pos] as u32 ; pos += 1 ; if ch <= 0x7f { return Some ((ch , pos)) ; } if (ch & 0xe0) == 0xc0 { if bytes . len () - pos < 1 { return None ; } let ch2 = bytes [pos] as u32 ; pos += 1 ; if (ch2 & 0xc0) != 0x80 { return None ; } let result : u32 = ((ch & 0x1f) << 6) | (ch2 & 0x3f) ; if result <= 0x7f { return None ; } return Some ((result , pos)) ; } if (ch & 0xf0) == 0xe0 { if bytes . len () - pos < 2 { return None ; } let ch2 = bytes [pos] as u32 ; pos += 1 ; let ch3 = bytes [pos] as u32 ; pos += 1 ; if (ch2 & 0xc0) != 0x80 || (ch3 & 0xc0) != 0x80 { return None ; } let result = ((ch & 0x0f) << 12) | ((ch2 & 0x3f) << 6) | (ch3 & 0x3f) ; if result <= 0x7ff || (0xd800 <= result && result <= 0xdfff) { return None ; } return Some ((result , pos)) ; } if (ch & 0xf8) == 0xf0 { if bytes . len () - pos < 3 { return None ; } let ch2 = bytes [pos] as u32 ; pos += 1 ; let ch3 = bytes [pos] as u32 ; pos += 1 ; let ch4 = bytes [pos] as u32 ; pos += 1 ; if (ch2 & 0xc0) != 0x80 || (ch3 & 0xc0) != 0x80 || (ch4 & 0xc0) != 0x80 { return None ; } let result = ((ch & 0x07) << 18) | ((ch2 & 0x3f) << 12) | ((ch3 & 0x3f) << 6) | (ch4 & 0x3f) ; if result <= 0xffff || 0x10ffff < result { return None ; } return Some ((result , pos)) ; } None }
+};
+}

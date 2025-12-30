@@ -1,0 +1,55 @@
+// Generated module macro for crate::remutex
+macro_rules! Modcrate_remutex {
+() => {
+        Depcrate_remutexuse_64!();
+        Depcrate_remutexuse_65!();
+        Depcrate_remutexuse_66!();
+        Depcrate_remutexuse_67!();
+        Depcrate_remutexuse_68!();
+        Depcrate_remutexuse_69!();
+        Depcrate_remutexuse_70!();
+        Depcrate_remutexGetThreadId!();
+        Depcrate_remutexRawReentrantMutex!();
+        Depcrate_remuteximpl_73!();
+        Depcrate_remuteximpl_74!();
+        Depcrate_remuteximpl_75!();
+        Depcrate_remuteximpl_76!();
+        Depcrate_remuteximpl_77!();
+        Depcrate_remutexReentrantMutex!();
+        Depcrate_remuteximpl_79!();
+        Depcrate_remuteximpl_80!();
+        Depcrate_remuteximpl_81!();
+        Depcrate_remuteximpl_82!();
+        Depcrate_remuteximpl_83!();
+        Depcrate_remuteximpl_84!();
+        Depcrate_remuteximpl_85!();
+        Depcrate_remuteximpl_86!();
+        Depcrate_remuteximpl_87!();
+        Depcrate_remuteximpl_88!();
+        Depcrate_remuteximpl_89!();
+        Depcrate_remuteximpl_90!();
+        Depcrate_remutexReentrantMutexGuard!();
+        Depcrate_remuteximpl_92!();
+        Depcrate_remuteximpl_93!();
+        Depcrate_remuteximpl_94!();
+        Depcrate_remuteximpl_95!();
+        Depcrate_remuteximpl_96!();
+        Depcrate_remuteximpl_97!();
+        Depcrate_remuteximpl_98!();
+        Depcrate_remuteximpl_99!();
+        Depcrate_remutexArcReentrantMutexGuard!();
+        Depcrate_remuteximpl_101!();
+        Depcrate_remuteximpl_102!();
+        Depcrate_remuteximpl_103!();
+        Depcrate_remuteximpl_104!();
+        Depcrate_remutexMappedReentrantMutexGuard!();
+        Depcrate_remuteximpl_106!();
+        Depcrate_remuteximpl_107!();
+        Depcrate_remuteximpl_108!();
+        Depcrate_remuteximpl_109!();
+        Depcrate_remuteximpl_110!();
+        Depcrate_remuteximpl_111!();
+        Depcrate_remuteximpl_112!();
+        Depcrate_remuteximpl_113!();
+    };
+}

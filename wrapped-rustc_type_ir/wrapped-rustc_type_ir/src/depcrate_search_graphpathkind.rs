@@ -1,0 +1,9 @@
+// Generated macro for PathKind (enum)
+macro_rules! Depcrate_search_graphPathKind {
+() => {
+// Module: crate::search_graph
+// Provides: {"PathKind"}
+// Dependencies: {}
+# [doc = " In the initial iteration of a cycle, we do not yet have a provisional"] # [doc = " result. In the case we return an initial provisional result depending"] # [doc = " on the kind of cycle."] # [derive (Debug , Clone , Copy , PartialEq , Eq , Hash)] # [cfg_attr (feature = "nightly" , derive (Decodable_NoContext , Encodable_NoContext , HashStable_NoContext))] pub enum PathKind { # [doc = " A path consisting of only inductive/unproductive steps. Their initial"] # [doc = " provisional result is `Err(NoSolution)`. We currently treat them as"] # [doc = " `PathKind::Unknown` during coherence until we're fully confident in"] # [doc = " our approach."] Inductive , # [doc = " A path which is not be coinductive right now but we may want"] # [doc = " to change of them to be so in the future. We return an ambiguous"] # [doc = " result in this case to prevent people from relying on this."] Unknown , # [doc = " A path with at least one coinductive step. Such cycles hold."] Coinductive , # [doc = " A path which is treated as ambiguous. Once a path has this path kind"] # [doc = " any other segment does not change its kind."] # [doc = ""] # [doc = " This is currently only used when fuzzing to support negative reasoning."] # [doc = " For more details, see #143054."] ForcedAmbiguity , }
+};
+}

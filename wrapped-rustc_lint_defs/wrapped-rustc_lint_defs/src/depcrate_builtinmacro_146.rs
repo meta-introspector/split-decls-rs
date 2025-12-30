@@ -1,0 +1,9 @@
+// Generated macro for macro_146 (macro)
+macro_rules! Depcrate_builtinmacro_146 {
+() => {
+// Module: crate::builtin
+// Provides: {"macro_146"}
+// Dependencies: {}
+declare_lint ! { # [doc = " The `supertrait_item_shadowing_definition` lint detects when the"] # [doc = " definition of an item that is provided by both a subtrait and"] # [doc = " supertrait is shadowed, preferring the subtrait."] # [doc = ""] # [doc = " ### Example"] # [doc = ""] # [doc = " ```rust,compile_fail"] # [doc = " #![feature(supertrait_item_shadowing)]"] # [doc = " #![deny(supertrait_item_shadowing_definition)]"] # [doc = ""] # [doc = " trait Upstream {"] # [doc = "     fn hello(&self) {}"] # [doc = " }"] # [doc = " impl<T> Upstream for T {}"] # [doc = ""] # [doc = " trait Downstream: Upstream {"] # [doc = "     fn hello(&self) {}"] # [doc = " }"] # [doc = " impl<T> Downstream for T {}"] # [doc = " ```"] # [doc = ""] # [doc = " {{produces}}"] # [doc = ""] # [doc = " ### Explanation"] # [doc = ""] # [doc = " RFC 3624 specified a heuristic in which a supertrait item would be"] # [doc = " shadowed by a subtrait item when ambiguity occurs during item"] # [doc = " selection. In order to mitigate side-effects of this happening"] # [doc = " silently, this lint detects these cases when users want to deny them"] # [doc = " or fix their trait definitions."] pub SUPERTRAIT_ITEM_SHADOWING_DEFINITION , Allow , "detects when a supertrait item is shadowed by a subtrait item" , @ feature_gate = supertrait_item_shadowing ; }
+};
+}

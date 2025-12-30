@@ -1,0 +1,48 @@
+// Generated module macro for crate::tcp
+macro_rules! Modcrate_tcp {
+() => {
+        Depcrate_tcpuse_90!();
+        Depcrate_tcpuse_91!();
+        Depcrate_tcpuse_92!();
+        Depcrate_tcpuse_93!();
+        Depcrate_tcpuse_94!();
+        Depcrate_tcpuse_95!();
+        Depcrate_tcpuse_96!();
+        Depcrate_tcpuse_97!();
+        Depcrate_tcpuse_98!();
+        Depcrate_tcpuse_99!();
+        Depcrate_tcpuse_100!();
+        Depcrate_tcpuse_101!();
+        Depcrate_tcpTcpListener!();
+        Depcrate_tcpimpl_103!();
+        Depcrate_tcpimpl_104!();
+        Depcrate_tcpimpl_105!();
+        Depcrate_tcpimpl_106!();
+        Depcrate_tcpimpl_107!();
+        Depcrate_tcpimpl_108!();
+        Depcrate_tcpimpl_109!();
+        Depcrate_tcpimpl_110!();
+        Depcrate_tcpimpl_111!();
+        Depcrate_tcpimpl_112!();
+        Depcrate_tcpIncoming!();
+        Depcrate_tcpimpl_114!();
+        Depcrate_tcpimpl_115!();
+        Depcrate_tcpTcpStream!();
+        Depcrate_tcpimpl_117!();
+        Depcrate_tcpimpl_118!();
+        Depcrate_tcpimpl_119!();
+        Depcrate_tcpimpl_120!();
+        Depcrate_tcpimpl_121!();
+        Depcrate_tcpimpl_122!();
+        Depcrate_tcpimpl_123!();
+        Depcrate_tcpimpl_124!();
+        Depcrate_tcpimpl_125!();
+        Depcrate_tcpimpl_126!();
+        Depcrate_tcpimpl_127!();
+        Depcrate_tcpimpl_128!();
+        Depcrate_tcpimpl_129!();
+        Depcrate_tcpimpl_130!();
+        Depcrate_tcpimpl_131!();
+        Depcrate_tcpimpl_132!();
+    };
+}

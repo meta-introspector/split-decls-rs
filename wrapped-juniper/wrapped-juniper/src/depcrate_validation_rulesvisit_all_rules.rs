@@ -1,0 +1,9 @@
+// Generated macro for visit_all_rules (function)
+macro_rules! Depcrate_validation_rulesvisit_all_rules {
+() => {
+// Module: crate::validation::rules
+// Provides: {"visit_all_rules"}
+// Dependencies: {}
+# [doc (hidden)] pub fn visit_all_rules < 'a , S > (ctx : & mut ValidatorContext < 'a , S > , doc : & 'a Document < S >) where S : Debug + ScalarValue , { let mut stage1 = MultiVisitorNil . with (self :: arguments_of_correct_type :: factory ()) . with (self :: default_values_of_correct_type :: factory ()) . with (self :: fields_on_correct_type :: factory ()) . with (self :: fragments_on_composite_types :: factory ()) . with (self :: known_argument_names :: factory ()) . with (self :: known_directives :: factory ()) . with (self :: known_fragment_names :: factory ()) . with (self :: known_type_names :: factory ()) . with (self :: lone_anonymous_operation :: factory ()) . with (self :: no_fragment_cycles :: factory ()) . with (self :: no_undefined_variables :: factory ()) . with (self :: no_unused_fragments :: factory ()) . with (self :: no_unused_variables :: factory ()) . with (self :: possible_fragment_spreads :: factory ()) . with (self :: provided_non_null_arguments :: factory ()) . with (self :: scalar_leafs :: factory ()) . with (self :: unique_argument_names :: factory ()) . with (self :: unique_fragment_names :: factory ()) . with (self :: unique_input_field_names :: factory ()) . with (self :: unique_operation_names :: factory ()) . with (self :: unique_variable_names :: factory ()) . with (self :: variables_are_input_types :: factory ()) . with (self :: variables_in_allowed_position :: factory ()) ; visit (& mut stage1 , ctx , doc) ; if ctx . has_errors () { return ; } let mut stage2 = MultiVisitorNil . with (self :: overlapping_fields_can_be_merged :: factory ()) ; visit (& mut stage2 , ctx , doc) ; }
+};
+}

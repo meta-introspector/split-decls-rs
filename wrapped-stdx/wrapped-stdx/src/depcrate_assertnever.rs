@@ -1,0 +1,9 @@
+// Generated macro for never (macro)
+macro_rules! Depcrate_assertnever {
+() => {
+// Module: crate::assert
+// Provides: {"never"}
+// Dependencies: {}
+# [doc = " Asserts that the condition is never true and returns its actual value."] # [doc = ""] # [doc = " If the condition is false does nothing and and evaluates to false."] # [doc = ""] # [doc = " If the condition is true:"] # [doc = " * panics if `force` feature or `debug_assertions` are enabled,"] # [doc = " * logs an error if the `tracing` feature is enabled,"] # [doc = " * evaluates to true."] # [doc = ""] # [doc = " Accepts `format!` style arguments."] # [doc = ""] # [doc = " Empty condition is equivalent to false:"] # [doc = ""] # [doc = " ```ignore"] # [doc = " never!(\"oups\") ~= unreachable!(\"oups\")"] # [doc = " ```"] # [macro_export] macro_rules ! never { (true $ ($ tt : tt) *) => { $ crate :: never ! ((true) $ ($ tt) *) } ; (false $ ($ tt : tt) *) => { $ crate :: never ! ((false) $ ($ tt) *) } ; () => { $ crate :: never ! ("assertion failed: entered unreachable code") } ; ($ fmt : literal $ (, $ ($ arg : tt) *) ?) => { { if cfg ! (debug_assertions) || $ crate :: assert :: __FORCE { unreachable ! ($ fmt $ (, $ ($ arg) *) ?) ; } $ crate :: assert :: __tracing_error ! ($ fmt $ (, $ ($ arg) *) ?) ; } } ; ($ cond : expr) => { { let cond = !$ crate :: always ! (!$ cond) ; cond } } ; ($ cond : expr , $ fmt : literal $ ($ arg : tt) *) => { { let cond = !$ crate :: always ! (!$ cond , $ fmt $ ($ arg) *) ; cond } } ; }
+};
+}

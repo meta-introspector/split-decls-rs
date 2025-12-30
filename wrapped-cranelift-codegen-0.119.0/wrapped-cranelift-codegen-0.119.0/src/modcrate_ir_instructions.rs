@@ -1,0 +1,43 @@
+// Generated module macro for crate::ir::instructions
+macro_rules! Modcrate_ir_instructions {
+() => {
+        Depcrate_ir_instructionsuse_844!();
+        Depcrate_ir_instructionsuse_845!();
+        Depcrate_ir_instructionsuse_846!();
+        Depcrate_ir_instructionsuse_847!();
+        Depcrate_ir_instructionsuse_848!();
+        Depcrate_ir_instructionsuse_849!();
+        Depcrate_ir_instructionsuse_850!();
+        Depcrate_ir_instructionsuse_851!();
+        Depcrate_ir_instructionsuse_852!();
+        Depcrate_ir_instructionsValueList!();
+        Depcrate_ir_instructionsValueListPool!();
+        Depcrate_ir_instructionsBlockCall!();
+        Depcrate_ir_instructionsimpl_856!();
+        Depcrate_ir_instructionsDisplayBlockCall!();
+        Depcrate_ir_instructionsimpl_858!();
+        Depcrate_ir_instructionsmacro_859!();
+        Depcrate_ir_instructionsimpl_860!();
+        Depcrate_ir_instructionsimpl_861!();
+        Depcrate_ir_instructionsimpl_862!();
+        Depcrate_ir_instructionsimpl_863!();
+        Depcrate_ir_instructionsVariableArgs!();
+        Depcrate_ir_instructionsimpl_865!();
+        Depcrate_ir_instructionsimpl_866!();
+        Depcrate_ir_instructionsimpl_867!();
+        Depcrate_ir_instructionsimpl_868!();
+        Depcrate_ir_instructionsimpl_869!();
+        Depcrate_ir_instructionsimpl_870!();
+        Depcrate_ir_instructionsCallInfo!();
+        Depcrate_ir_instructionsOpcodeConstraints!();
+        Depcrate_ir_instructionsimpl_873!();
+        Depcrate_ir_instructionsBitSet8!();
+        Depcrate_ir_instructionsBitSet16!();
+        Depcrate_ir_instructionsValueTypeSet!();
+        Depcrate_ir_instructionsimpl_877!();
+        Depcrate_ir_instructionsOperandConstraint!();
+        Depcrate_ir_instructionsimpl_879!();
+        Depcrate_ir_instructionsResolvedConstraint!();
+        Depcrate_ir_instructionstests!();
+    };
+}

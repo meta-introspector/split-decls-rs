@@ -1,0 +1,9 @@
+// Generated macro for impl_409 (impl)
+macro_rules! Depcrate_thread_safetyimpl_409 {
+() => {
+// Module: crate::thread_safety
+// Provides: {"impl_409"}
+// Dependencies: {}
+impl ThreadSafety { pub (crate) fn dummy () -> Self { Self { explicit : None , inferred : ThreadSafetyAttr :: NotSendable , } } # [allow (dead_code)] pub (crate) fn from_string (s : & str) -> Self { let attr = match s { "MainThreadOnly" => ThreadSafetyAttr :: MainThreadOnly , "Sendable" => ThreadSafetyAttr :: Sendable , "NotSendable" => ThreadSafetyAttr :: NotSendable , _ => panic ! ("invalid thread safety: {s:?}") , } ; Self { explicit : Some (attr) , inferred : attr , } } pub (crate) fn from_decl (entity : & Entity < '_ > , context : & Context < '_ >) -> Self { let explicit = ThreadSafetyAttr :: parse_explicit (entity , context , true) ; let inferred = explicit . unwrap_or_else (| | ThreadSafetyAttr :: parse_inferred_decl (entity , context)) ; Self { explicit , inferred } } # [doc = " Ideally, we'd parse thread-safety from the decl itself, since then"] # [doc = " we're _sure_ we got it right. But sometimes the item might not have"] # [doc = " been parsed itself, and then we need to fall back to what's in ."] pub (crate) fn from_ref (entity : & Entity < '_ > , context : & Context < '_ >) -> Self { let explicit = ThreadSafetyAttr :: parse_explicit (entity , context , false) ; let inferred = explicit . unwrap_or (ThreadSafetyAttr :: NotSendable) ; Self { explicit , inferred } } pub (crate) fn inferred_mainthreadonly (& self) -> bool { self . inferred == ThreadSafetyAttr :: MainThreadOnly } pub (crate) fn explicit_mainthreadonly (& self) -> bool { self . explicit == Some (ThreadSafetyAttr :: MainThreadOnly) } pub (crate) fn inferred_sendable (& self) -> bool { self . inferred == ThreadSafetyAttr :: Sendable } pub (crate) fn explicit_sendable (& self) -> bool { self . explicit == Some (ThreadSafetyAttr :: Sendable) } }
+};
+}

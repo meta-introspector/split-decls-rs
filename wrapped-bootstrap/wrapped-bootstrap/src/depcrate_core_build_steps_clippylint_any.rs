@@ -1,0 +1,9 @@
+// Generated macro for lint_any (macro)
+macro_rules! Depcrate_core_build_steps_clippylint_any {
+() => {
+// Module: crate::core::build_steps::clippy
+// Provides: {"lint_any"}
+// Dependencies: {}
+macro_rules ! lint_any { ($ ($ name : ident , $ path : expr , $ readable_name : expr , $ mode : expr $ (, lint_by_default = $ lint_by_default : expr) * ;) +) => { $ (# [derive (Debug , Clone , Hash , PartialEq , Eq)] pub struct $ name { build_compiler : CompilerForCheck , target : TargetSelection , config : LintConfig , } impl Step for $ name { type Output = () ; const DEFAULT : bool = if false $ (|| $ lint_by_default) * { true } else { false } ; fn should_run (run : ShouldRun <'_ >) -> ShouldRun <'_ > { run . path ($ path) } fn make_run (run : RunConfig <'_ >) { let config = LintConfig :: new (run . builder) ; run . builder . ensure ($ name { build_compiler : prepare_compiler_for_check (run . builder , run . target , $ mode) , target : run . target , config , }) ; } fn run (self , builder : & Builder <'_ >) -> Self :: Output { let build_compiler = self . build_compiler . build_compiler () ; let target = self . target ; let mut cargo = prepare_tool_cargo (builder , build_compiler , $ mode , target , Kind :: Clippy , $ path , SourceType :: InTree , & [] ,) ; self . build_compiler . configure_cargo (& mut cargo) ; let _guard = builder . msg (Kind :: Clippy , $ readable_name , $ mode , build_compiler , target ,) ; let stringified_name = stringify ! ($ name) . to_lowercase () ; let stamp = BuildStamp :: new (& builder . cargo_out (build_compiler , $ mode , target)) . with_prefix (& format ! ("{}-check" , stringified_name)) ; run_cargo (builder , cargo , lint_args (builder , & self . config , & []) , & stamp , vec ! [] , true , false ,) ; } fn metadata (& self) -> Option < StepMetadata > { Some (StepMetadata :: clippy ($ readable_name , self . target) . built_by (self . build_compiler . build_compiler ())) } }) + } }
+};
+}

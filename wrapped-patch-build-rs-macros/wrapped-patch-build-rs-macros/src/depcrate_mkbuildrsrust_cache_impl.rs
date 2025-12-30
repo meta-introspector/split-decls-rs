@@ -1,0 +1,176 @@
+// Generated macro for rust_cache_impl (function)
+macro_rules! Depcrate_mkbuildrsrust_cache_impl {
+() => {
+// Module: crate::mkbuildrs
+// Provides: {"rust_cache_impl"}
+// Dependencies: {}
+# [decl (fn , name = "rust_cache_impl" , vis = "pub" , hash = "2c5c0b09")] pub fn rust_cache_impl (input : TokenStream) -> TokenStream { let input_str = parse_macro_input ! (input as LitStr) ; let cache_config = input_str . value () ; quote ! { { println ! ("cargo:warning=📦 Rust cache: {}" , # cache_config) ; let cache_system = format ! (r###"
+// Rust Version Cache System
+// Config: {}
+
+use std::path::{{Path, PathBuf}};
+use std::collections::HashMap;
+
+pub struct RustCache {{
+    cache_dir: PathBuf,
+    versions: HashMap<String, PathBuf>,
+}}
+
+impl RustCache {{
+    pub fn new() -> Self {{
+        let cache_dir = std::env::var("CARGO_TARGET_DIR")
+            .unwrap_or_else(|_| "target".to_string())
+            .into();
+        let cache_dir = cache_dir.join("rust-cache");
+        
+        Self {{
+            cache_dir,
+            versions: HashMap::new(),
+        }}
+    }}
+    
+    pub fn get_version(&self, version: &str) -> Option<&PathBuf> {{
+        self.versions.get(version)
+    }}
+    
+    pub fn cache_version(&mut self, version: &str) -> Result<PathBuf, String> {{
+        let version_dir = self.cache_dir.join(format!("rust-{{}}", version));
+        
+        if version_dir.exists() {{
+            self.versions.insert(version.to_string(), version_dir.clone());
+            return Ok(version_dir);
+        }}
+        
+        // Download and cache the version
+        self.download_version(version, &version_dir)?;
+        self.versions.insert(version.to_string(), version_dir.clone());
+        
+        Ok(version_dir)
+    }}
+    
+    fn download_version(&self, version: &str, target: &Path) -> Result<(), String> {{
+        std::fs::create_dir_all(target)
+            .map_err(|e| format!("Failed to create cache dir: {{}}", e))?;
+        
+        // Try multiple download methods
+        if self.download_via_nix(version, target).is_ok() {{
+            return Ok(());
+        }}
+        
+        if self.download_via_rustup(version, target).is_ok() {{
+            return Ok(());
+        }}
+        
+        if self.download_via_github(version, target).is_ok() {{
+            return Ok(());
+        }}
+        
+        Err(format!("Failed to download Rust version {{}}", version))
+    }}
+    
+    fn download_via_nix(&self, version: &str, target: &Path) -> Result<(), String> {{
+        use std::process::Command;
+        
+        let nix_expr = format!(r#"
+        {{ pkgs ? import <nixpkgs> {{}} }}:
+        pkgs.rustc.override {{ version = "{}"; }}
+        "#, version);
+        
+        let temp_file = "/tmp/rust-version.nix";
+        std::fs::write(temp_file, nix_expr)
+            .map_err(|e| format!("Failed to write nix expr: {{}}", e))?;
+        
+        let output = Command::new("nix-build")
+            .arg(temp_file)
+            .arg("-o")
+            .arg(target)
+            .output()
+            .map_err(|e| format!("Nix build failed: {{}}", e))?;
+        
+        if output.status.success() {{
+            Ok(())
+        }} else {{
+            Err("Nix build failed".to_string())
+        }}
+    }}
+    
+    fn download_via_rustup(&self, version: &str, target: &Path) -> Result<(), String> {{
+        use std::process::Command;
+        
+        // Install via rustup
+        let install = Command::new("rustup")
+            .args(&["toolchain", "install", version])
+            .output()
+            .map_err(|e| format!("Rustup install failed: {{}}", e))?;
+        
+        if !install.status.success() {{
+            return Err("Rustup install failed".to_string());
+        }}
+        
+        // Copy to cache
+        let home = std::env::var("HOME").unwrap_or_else(|_| "/tmp".to_string());
+        let rustup_path = format!("{{}}/.rustup/toolchains/{{}}", home, version);
+        
+        let copy = Command::new("cp")
+            .args(&["-r", &rustup_path, &target.to_string_lossy()])
+            .output()
+            .map_err(|e| format!("Copy failed: {{}}", e))?;
+        
+        if copy.status.success() {{
+            Ok(())
+        }} else {{
+            Err("Copy failed".to_string())
+        }}
+    }}
+    
+    fn download_via_github(&self, version: &str, target: &Path) -> Result<(), String> {{
+        use std::process::Command;
+        
+        let url = format!("https://github.com/rust-lang/rust/archive/{{}}.tar.gz", version);
+        let temp_file = "/tmp/rust-source.tar.gz";
+        
+        // Download
+        let download = Command::new("curl")
+            .args(&["-L", &url, "-o", temp_file])
+            .output()
+            .map_err(|e| format!("Download failed: {{}}", e))?;
+        
+        if !download.status.success() {{
+            return Err("Download failed".to_string());
+        }}
+        
+        // Extract
+        let extract = Command::new("tar")
+            .args(&["xzf", temp_file, "-C", &target.to_string_lossy(), "--strip-components=1"])
+            .output()
+            .map_err(|e| format!("Extract failed: {{}}", e))?;
+        
+        if extract.status.success() {{
+            Ok(())
+        }} else {{
+            Err("Extract failed".to_string())
+        }}
+    }}
+}}
+
+// Convenience macros for cached versions
+macro_rules! cached_rust {{
+    ($version:expr) => {{
+        RustCache::new().cache_version($version)
+    }};
+}}
+
+macro_rules! rust_src_path {{
+    ($version:expr) => {{
+        cached_rust!($version).map(|p| p.join("src"))
+    }};
+}}
+
+macro_rules! rust_bin_path {{
+    ($version:expr) => {{
+        cached_rust!($version).map(|p| p.join("bin/rustc"))
+    }};
+}}
+            "### , # cache_config) ; cache_system } } . into () }
+};
+}

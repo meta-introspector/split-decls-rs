@@ -1,0 +1,9 @@
+// Generated macro for check (function)
+macro_rules! Depcrate_methods_expect_fun_callcheck {
+() => {
+// Module: crate::methods::expect_fun_call
+// Provides: {"check"}
+// Dependencies: {}
+# [doc = " Checks for the `EXPECT_FUN_CALL` lint."] pub (super) fn check < 'tcx > (cx : & LateContext < 'tcx > , format_args_storage : & FormatArgsStorage , expr : & hir :: Expr < '_ > , method_span : Span , receiver : & 'tcx hir :: Expr < 'tcx > , arg : & 'tcx hir :: Expr < 'tcx > ,) { let arg_root = get_arg_root (cx , arg) ; if contains_call (cx , arg_root) && ! contains_return (arg_root) { let receiver_type = cx . typeck_results () . expr_ty_adjusted (receiver) ; let closure_args = if receiver_type . is_diag_item (cx , sym :: Option) { "||" } else if receiver_type . is_diag_item (cx , sym :: Result) { "|_|" } else { return ; } ; let span_replace_word = method_span . with_hi (expr . span . hi ()) ; let mut applicability = Applicability :: MachineApplicable ; if let Some (macro_call) = root_macro_call_first_node (cx , arg_root) { if cx . tcx . is_diagnostic_item (sym :: format_macro , macro_call . def_id) && let Some (format_args) = format_args_storage . get (cx , arg_root , macro_call . expn) { let span = format_args_inputs_span (format_args) ; let sugg = snippet_with_applicability (cx , span , ".." , & mut applicability) ; span_lint_and_sugg (cx , EXPECT_FUN_CALL , span_replace_word , "function call inside of `expect`" , "try" , format ! ("unwrap_or_else({closure_args} panic!({sugg}))") , applicability ,) ; } return ; } let arg_root_snippet : Cow < '_ , _ > = snippet_with_applicability (cx , arg_root . span , ".." , & mut applicability) ; span_lint_and_sugg (cx , EXPECT_FUN_CALL , span_replace_word , "function call inside of `expect`" , "try" , format ! ("unwrap_or_else({closure_args} panic!(\"{{}}\", {arg_root_snippet}))") , applicability ,) ; } }
+};
+}

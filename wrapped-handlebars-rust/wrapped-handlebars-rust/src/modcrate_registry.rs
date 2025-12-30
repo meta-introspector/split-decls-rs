@@ -1,0 +1,41 @@
+// Generated module macro for crate::registry
+macro_rules! Modcrate_registry {
+() => {
+        Depcrate_registryuse_330!();
+        Depcrate_registryuse_331!();
+        Depcrate_registryuse_332!();
+        Depcrate_registryuse_333!();
+        Depcrate_registryuse_334!();
+        Depcrate_registryuse_335!();
+        Depcrate_registryuse_336!();
+        Depcrate_registryuse_337!();
+        Depcrate_registryuse_338!();
+        Depcrate_registryuse_339!();
+        Depcrate_registryuse_340!();
+        Depcrate_registryuse_341!();
+        Depcrate_registryuse_342!();
+        Depcrate_registryuse_343!();
+        Depcrate_registryuse_344!();
+        Depcrate_registryuse_345!();
+        Depcrate_registryuse_346!();
+        Depcrate_registryuse_347!();
+        Depcrate_registryuse_348!();
+        Depcrate_registryuse_349!();
+        Depcrate_registryuse_350!();
+        Depcrate_registryuse_351!();
+        Depcrate_registryuse_352!();
+        Depcrate_registryuse_353!();
+        Depcrate_registryEscapeFn!();
+        Depcrate_registryhtml_escape!();
+        Depcrate_registryno_escape!();
+        Depcrate_registryRegistry!();
+        Depcrate_registryimpl_358!();
+        Depcrate_registryimpl_359!();
+        Depcrate_registryrhai_engine!();
+        Depcrate_registryDirectorySourceOptions!();
+        Depcrate_registryimpl_362!();
+        Depcrate_registryimpl_363!();
+        Depcrate_registryimpl_364!();
+        Depcrate_registrytest!();
+    };
+}

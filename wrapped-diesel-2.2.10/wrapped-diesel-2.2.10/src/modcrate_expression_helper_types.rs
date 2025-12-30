@@ -1,0 +1,51 @@
+// Generated module macro for crate::expression::helper_types
+macro_rules! Modcrate_expression_helper_types {
+() => {
+        Depcrate_expression_helper_typesuse_404!();
+        Depcrate_expression_helper_typesuse_405!();
+        Depcrate_expression_helper_typesuse_406!();
+        Depcrate_expression_helper_typesuse_407!();
+        Depcrate_expression_helper_typesuse_408!();
+        Depcrate_expression_helper_typesuse_409!();
+        Depcrate_expression_helper_typesuse_410!();
+        Depcrate_expression_helper_typesSqlTypeOf!();
+        Depcrate_expression_helper_typesAsExpr!();
+        Depcrate_expression_helper_typesAsExprOf!();
+        Depcrate_expression_helper_typesEq!();
+        Depcrate_expression_helper_typesNotEq!();
+        Depcrate_expression_helper_typesNe!();
+        Depcrate_expression_helper_typesEqAny!();
+        Depcrate_expression_helper_typesNeAny!();
+        Depcrate_expression_helper_typesNeAll!();
+        Depcrate_expression_helper_typesIsNull!();
+        Depcrate_expression_helper_typesIsNotNull!();
+        Depcrate_expression_helper_typesGt!();
+        Depcrate_expression_helper_typesGtEq!();
+        Depcrate_expression_helper_typesGe!();
+        Depcrate_expression_helper_typesLt!();
+        Depcrate_expression_helper_typesLtEq!();
+        Depcrate_expression_helper_typesLe!();
+        Depcrate_expression_helper_typesBetween!();
+        Depcrate_expression_helper_typesNotBetween!();
+        Depcrate_expression_helper_typesConcat!();
+        Depcrate_expression_helper_typesDesc!();
+        Depcrate_expression_helper_typesAsc!();
+        Depcrate_expression_helper_typesNullable!();
+        Depcrate_expression_helper_typesAssumeNotNull!();
+        Depcrate_expression_helper_typesAnd!();
+        Depcrate_expression_helper_typesOr!();
+        Depcrate_expression_helper_typesEscape!();
+        Depcrate_expression_helper_typesLike!();
+        Depcrate_expression_helper_typesNotLike!();
+        Depcrate_expression_helper_typescase_when!();
+        Depcrate_expression_helper_typesWhen!();
+        Depcrate_expression_helper_typesOtherwise!();
+        Depcrate_expression_helper_typesAsSelect!();
+        Depcrate_expression_helper_typesIntoSql!();
+        Depcrate_expression_helper_typesField!();
+        Depcrate_expression_helper_typesFields!();
+        Depcrate_expression_helper_typesuse_447!();
+        Depcrate_expression_helper_typesuse_448!();
+        Depcrate_expression_helper_typesuse_449!();
+    };
+}

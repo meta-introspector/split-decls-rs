@@ -4,6 +4,6 @@ macro_rules! Depcrate_zalsause_656 {
 // Module: crate::zalsa
 // Provides: {"use_656"}
 // Dependencies: {}
-use crate :: hash :: TypeIdHasher ;
+use crate :: runtime :: Runtime ;
 };
 }

@@ -1,0 +1,9 @@
+// Generated macro for impls (module)
+macro_rules! Depcrate_idimpls {
+() => {
+// Module: crate::id
+// Provides: {"impls"}
+// Dependencies: {}
+mod impls { use std :: { cmp :: Ordering , hash :: Hasher } ; use gix_hash :: { oid , ObjectId } ; use crate :: { Id , Object , ObjectDetached } ; impl std :: hash :: Hash for Id < '_ > { fn hash < H : Hasher > (& self , state : & mut H) { self . inner . hash (state) ; } } impl < 'a > PartialOrd < Id < 'a > > for Id < 'a > { fn partial_cmp (& self , other : & Id < 'a >) -> Option < Ordering > { self . inner . partial_cmp (& other . inner) } } impl < 'repo > PartialEq < Id < 'repo > > for Id < 'repo > { fn eq (& self , other : & Id < 'repo >) -> bool { self . inner == other . inner } } impl PartialEq < ObjectId > for Id < '_ > { fn eq (& self , other : & ObjectId) -> bool { & self . inner == other } } impl < 'repo > PartialEq < Id < 'repo > > for ObjectId { fn eq (& self , other : & Id < 'repo >) -> bool { self == & other . inner } } impl PartialEq < oid > for Id < '_ > { fn eq (& self , other : & oid) -> bool { self . inner == other } } impl < 'repo > PartialEq < Object < 'repo > > for Id < 'repo > { fn eq (& self , other : & Object < 'repo >) -> bool { self . inner == other . id } } impl PartialEq < ObjectDetached > for Id < '_ > { fn eq (& self , other : & ObjectDetached) -> bool { self . inner == other . id } } impl std :: fmt :: Debug for Id < '_ > { fn fmt (& self , f : & mut std :: fmt :: Formatter < '_ >) -> std :: fmt :: Result { self . inner . fmt (f) } } impl std :: fmt :: Display for Id < '_ > { fn fmt (& self , f : & mut std :: fmt :: Formatter < '_ >) -> std :: fmt :: Result { self . inner . fmt (f) } } impl AsRef < oid > for Id < '_ > { fn as_ref (& self) -> & oid { & self . inner } } impl < 'repo > From < Id < 'repo > > for ObjectId { fn from (v : Id < 'repo >) -> Self { v . inner } } }
+};
+}

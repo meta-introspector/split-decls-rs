@@ -1,0 +1,9 @@
+// Generated macro for impl_9066 (impl)
+macro_rules! Depcrate_ptrimpl_9066 {
+() => {
+// Module: crate::ptr
+// Provides: {"impl_9066"}
+// Dependencies: {}
+impl < 'tcx > LateLintPass < 'tcx > for Ptr { fn check_trait_item (& mut self , cx : & LateContext < 'tcx > , item : & 'tcx TraitItem < '_ >) { if let TraitItemKind :: Fn (sig , trait_method) = & item . kind { if matches ! (trait_method , TraitFn :: Provided (_)) { return ; } mut_from_ref :: check (cx , sig , None) ; ptr_arg :: check_trait_item (cx , item . owner_id , sig) ; } } fn check_body (& mut self , cx : & LateContext < 'tcx > , body : & Body < 'tcx >) { let mut parents = cx . tcx . hir_parent_iter (body . value . hir_id) ; let (item_id , sig , is_trait_item) = match parents . next () { Some ((_ , Node :: Item (i))) => { if let ItemKind :: Fn { sig , .. } = & i . kind { (i . owner_id , sig , false) } else { return ; } } , Some ((_ , Node :: ImplItem (i))) => { if ! matches ! (parents . next () , Some ((_ , Node :: Item (i))) if matches ! (& i . kind , ItemKind :: Impl (i) if i . of_trait . is_none ())) { return ; } if let ImplItemKind :: Fn (sig , _) = & i . kind { (i . owner_id , sig , false) } else { return ; } } , Some ((_ , Node :: TraitItem (i))) => { if let TraitItemKind :: Fn (sig , _) = & i . kind { (i . owner_id , sig , true) } else { return ; } } , _ => return , } ; mut_from_ref :: check (cx , sig , Some (body)) ; ptr_arg :: check_body (cx , body , item_id , sig , is_trait_item) ; } fn check_expr (& mut self , cx : & LateContext < 'tcx > , expr : & 'tcx Expr < '_ >) { if let ExprKind :: Binary (op , l , r) = expr . kind && (op . node == BinOpKind :: Eq || op . node == BinOpKind :: Ne) { # [expect (clippy :: collapsible_if , reason = "the outer `if`s check the HIR, the inner ones run lints")] if ! cmp_null :: check (cx , expr , op . node , l , r) { ptr_eq :: check (cx , op . node , l , r , expr . span) ; } } } }
+};
+}

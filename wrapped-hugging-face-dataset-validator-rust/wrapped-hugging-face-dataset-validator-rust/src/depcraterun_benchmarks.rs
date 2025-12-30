@@ -1,0 +1,9 @@
+// Generated macro for run_benchmarks (function)
+macro_rules! Depcraterun_benchmarks {
+() => {
+// Module: crate
+// Provides: {"run_benchmarks"}
+// Dependencies: {}
+fn run_benchmarks () -> Result < () , ValidationError > { println ! ("=== Performance Benchmarks ===\n") ; let service = MockDataAccess :: default () ; let validator = DatasetValidator :: new (service . clone ()) ; println ! ("1. Single validation benchmarks:") ; let start = std :: time :: Instant :: now () ; for _ in 0 .. 1000 { let _ = validate_split ("benchmark/dataset" , "default" , "train" , service . clone ()) ? ; } let duration = start . elapsed () ; println ! ("   1000 split validations: {:?} ({:.2}μs per validation)" , duration , duration . as_micros () as f64 / 1000.0) ; println ! ("2. Batch validation benchmarks:") ; let entities : Vec < _ > = (0 .. 100) . map (| i | { (EntityIdentifier :: new_split ("benchmark/dataset" . to_string () , "default" . to_string () , format ! ("split_{}" , i)) , ValidationLevel :: Split) }) . collect () ; let start = std :: time :: Instant :: now () ; let mut successful = 0 ; for (entity , level) in & entities { if validator . validate (entity , * level) . is_ok () { successful += 1 ; } } let duration = start . elapsed () ; println ! ("   100 entity batch: {:?} ({:.2}μs per entity, {}/{} successful)" , duration , duration . as_micros () as f64 / 100.0 , successful , entities . len ()) ; println ! ("3. Memory usage test:") ; let start = std :: time :: Instant :: now () ; let large_entities : Vec < _ > = (0 .. 10000) . map (| i | { EntityIdentifier :: new_split (format ! ("dataset_{}" , i % 100) , format ! ("config_{}" , i % 10) , format ! ("split_{}" , i % 3)) }) . collect () ; let creation_time = start . elapsed () ; println ! ("   Created 10,000 entities in {:?}" , creation_time) ; println ! ("   Memory usage: ~{} KB (estimated)" , large_entities . len () * std :: mem :: size_of ::< EntityIdentifier > () / 1024) ; Ok (()) }
+};
+}

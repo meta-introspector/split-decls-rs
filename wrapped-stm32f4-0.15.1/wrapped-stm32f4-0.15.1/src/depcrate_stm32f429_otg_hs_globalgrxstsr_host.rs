@@ -1,0 +1,9 @@
+// Generated macro for grxstsr_host (module)
+macro_rules! Depcrate_stm32f429_otg_hs_globalgrxstsr_host {
+() => {
+// Module: crate::stm32f429::otg_hs_global
+// Provides: {"grxstsr_host"}
+// Dependencies: {}
+# [doc = "OTG_HS Receive status debug read register (host mode)"] pub mod grxstsr_host ;
+};
+}

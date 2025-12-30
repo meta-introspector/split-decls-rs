@@ -1,0 +1,9 @@
+// Generated macro for test (module)
+macro_rules! Depcratetest {
+() => {
+// Module: crate
+// Provides: {"test"}
+// Dependencies: {}
+# [cfg (test)] mod test { # [test] fn polled_driver () { use super :: { driver , Command } ; use futures_lite :: future ; use futures_lite :: prelude :: * ; let is_thread_spawned = | | super :: DRIVER_THREAD_SPAWNED . load (std :: sync :: atomic :: Ordering :: SeqCst) ; # [cfg (unix)] fn command () -> Command { let mut cmd = Command :: new ("sh") ; cmd . arg ("-c") . arg ("echo hello") ; cmd } # [cfg (windows)] fn command () -> Command { let mut cmd = Command :: new ("cmd") ; cmd . arg ("/C") . arg ("echo hello") ; cmd } # [cfg (unix)] const OUTPUT : & [u8] = b"hello\n" ; # [cfg (windows)] const OUTPUT : & [u8] = b"hello\r\n" ; future :: block_on (async { assert ! (! is_thread_spawned ()) ; let mut driver1 = Box :: pin (driver ()) ; future :: poll_once (& mut driver1) . await ; assert ! (! is_thread_spawned ()) ; async { (& mut driver1) . await ; } . or (async { let output = command () . output () . await . unwrap () ; assert_eq ! (output . stdout , OUTPUT) ; }) . await ; assert ! (! is_thread_spawned ()) ; let mut driver2 = Box :: pin (driver ()) ; future :: poll_once (& mut driver2) . await ; assert ! (! is_thread_spawned ()) ; async { (& mut driver1) . await ; } . or (async { (& mut driver2) . await ; }) . or (async { let output = command () . output () . await . unwrap () ; assert_eq ! (output . stdout , OUTPUT) ; }) . await ; assert ! (! is_thread_spawned ()) ; drop (driver1) ; assert ! (! is_thread_spawned ()) ; async { (& mut driver2) . await ; } . or (async { let output = command () . output () . await . unwrap () ; assert_eq ! (output . stdout , OUTPUT) ; }) . await ; assert ! (! is_thread_spawned ()) ; drop (driver2) ; assert ! (! is_thread_spawned ()) ; let output = command () . output () . await . unwrap () ; assert_eq ! (output . stdout , OUTPUT) ; assert ! (is_thread_spawned ()) ; }) ; } }
+};
+}

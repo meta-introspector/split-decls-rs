@@ -1,0 +1,9 @@
+// Generated macro for other_1188 (other)
+macro_rules! Depcrate_features_gen_ConvertCoordinateOptionsother_1188 {
+() => {
+// Module: crate::features::gen_ConvertCoordinateOptions
+// Provides: {"other_1188"}
+// Dependencies: {}
+# [wasm_bindgen] extern "C" { # [wasm_bindgen (extends = :: js_sys :: Object , js_name = ConvertCoordinateOptions)] # [derive (Debug , Clone , PartialEq , Eq)] # [doc = "The `ConvertCoordinateOptions` dictionary."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `ConvertCoordinateOptions`*"] pub type ConvertCoordinateOptions ; # [cfg (feature = "CssBoxType")] # [doc = "Get the `fromBox` field of this object."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `ConvertCoordinateOptions`, `CssBoxType`*"] # [wasm_bindgen (method , getter = "fromBox")] pub fn get_from_box (this : & ConvertCoordinateOptions) -> Option < CssBoxType > ; # [cfg (feature = "CssBoxType")] # [doc = "Change the `fromBox` field of this object."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `ConvertCoordinateOptions`, `CssBoxType`*"] # [wasm_bindgen (method , setter = "fromBox")] pub fn set_from_box (this : & ConvertCoordinateOptions , val : CssBoxType) ; # [cfg (feature = "CssBoxType")] # [doc = "Get the `toBox` field of this object."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `ConvertCoordinateOptions`, `CssBoxType`*"] # [wasm_bindgen (method , getter = "toBox")] pub fn get_to_box (this : & ConvertCoordinateOptions) -> Option < CssBoxType > ; # [cfg (feature = "CssBoxType")] # [doc = "Change the `toBox` field of this object."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `ConvertCoordinateOptions`, `CssBoxType`*"] # [wasm_bindgen (method , setter = "toBox")] pub fn set_to_box (this : & ConvertCoordinateOptions , val : CssBoxType) ; }
+};
+}

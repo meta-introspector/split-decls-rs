@@ -1,0 +1,61 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcrateimpl_38.rs");
+include!("depcratenothingprint.rs");
+include!("depcrateimpl_29.rs");
+include!("depcratedebugprint.rs");
+include!("depcrateexamples.rs");
+include!("depcrateimpl_36.rs");
+include!("depcrateimpl_45.rs");
+include!("depcratereturndefault.rs");
+include!("depcratedefaultreturner.rs");
+include!("depcrateimpl_37.rs");
+include!("depcrateimpl_40.rs");
+include!("depcratetimes.rs");
+include!("depcrateimpl_43.rs");
+include!("depcrateseqinner.rs");
+include!("depcrateuse_16.rs");
+include!("depcrateimpl_49.rs");
+include!("depcrateimpl_51.rs");
+include!("depcrateexpectedcalls.rs");
+include!("depcrateuse_1.rs");
+include!("depcrateseqhandle.rs");
+include!("depcrateuse_15.rs");
+include!("depcrateimpl_33.rs");
+include!("depcrateargprinter.rs");
+include!("depcrateviadebug.rs");
+include!("depcratemacro_22.rs");
+include!("depcrateimpl_25.rs");
+include!("depcrateimpl_27.rs");
+include!("depcrateimpl_31.rs");
+include!("depcrateimpl_34.rs");
+include!("depcrateuse_4.rs");
+include!("depcrate_examplesuse_9.rs");
+include!("depcrateuse_17.rs");
+include!("depcrateother_7.rs");
+include!("depcratesequence.rs");
+include!("depcratekey.rs");
+include!("depcrateimpl_47.rs");
+include!("depcrateuse_3.rs");
+include!("depcratetimesrange.rs");
+include!("depcrateimpl_39.rs");
+include!("depcrateanyexpectations.rs");
+include!("depcrateuse_6.rs");
+include!("depcrate_examplesmy_module.rs");
+include!("depcrateuse_5.rs");
+include!("depcrate_examplesmacro_12.rs");
+include!("depcrate_examplesffi.rs");
+include!("depcrate_examplesbah.rs");
+include!("depcratevianothing.rs");
+include!("depcrateuse_2.rs");
+include!("depcrate_examplesfoo.rs");
+include!("depcrateimpl_35.rs");
+include!("depcratemacro_19.rs");
+include!("modcrate.rs");
+include!("modcrate_examples.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate!();
+    Modcrate_examples!();
+}

@@ -1,0 +1,9 @@
+// Generated macro for PRINTER_NOTIFY_FIELD_BYTES_PRINTED (const)
+macro_rules! Depcrate_um_winspoolPRINTER_NOTIFY_FIELD_BYTES_PRINTED {
+() => {
+// Module: crate::um::winspool
+// Provides: {"PRINTER_NOTIFY_FIELD_BYTES_PRINTED"}
+// Dependencies: {}
+pub const PRINTER_NOTIFY_FIELD_BYTES_PRINTED : DWORD = 0x19 ;
+};
+}

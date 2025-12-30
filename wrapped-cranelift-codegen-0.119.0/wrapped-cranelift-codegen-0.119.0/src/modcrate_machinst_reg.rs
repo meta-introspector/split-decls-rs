@@ -1,0 +1,45 @@
+// Generated module macro for crate::machinst::reg
+macro_rules! Modcrate_machinst_reg {
+() => {
+        Depcrate_machinst_reguse_345!();
+        Depcrate_machinst_reguse_346!();
+        Depcrate_machinst_reguse_347!();
+        Depcrate_machinst_reguse_348!();
+        Depcrate_machinst_regPINNED_VREGS!();
+        Depcrate_machinst_regpinned_vreg_to_preg!();
+        Depcrate_machinst_regfirst_user_vreg_index!();
+        Depcrate_machinst_regReg!();
+        Depcrate_machinst_regimpl_353!();
+        Depcrate_machinst_regimpl_354!();
+        Depcrate_machinst_regimpl_355!();
+        Depcrate_machinst_regRealReg!();
+        Depcrate_machinst_regimpl_357!();
+        Depcrate_machinst_regimpl_358!();
+        Depcrate_machinst_regVirtualReg!();
+        Depcrate_machinst_regimpl_360!();
+        Depcrate_machinst_regimpl_361!();
+        Depcrate_machinst_regWritable!();
+        Depcrate_machinst_regimpl_363!();
+        Depcrate_machinst_regimpl_364!();
+        Depcrate_machinst_regimpl_365!();
+        Depcrate_machinst_regimpl_366!();
+        Depcrate_machinst_regimpl_367!();
+        Depcrate_machinst_regimpl_368!();
+        Depcrate_machinst_regimpl_369!();
+        Depcrate_machinst_regimpl_370!();
+        Depcrate_machinst_regimpl_371!();
+        Depcrate_machinst_regimpl_372!();
+        Depcrate_machinst_regimpl_373!();
+        Depcrate_machinst_regimpl_374!();
+        Depcrate_machinst_regSpillSlot!();
+        Depcrate_machinst_regRegClass!();
+        Depcrate_machinst_regOperandCollector!();
+        Depcrate_machinst_regimpl_378!();
+        Depcrate_machinst_regOperandVisitor!();
+        Depcrate_machinst_regOperandVisitorImpl!();
+        Depcrate_machinst_regimpl_381!();
+        Depcrate_machinst_regimpl_382!();
+        Depcrate_machinst_regimpl_383!();
+        Depcrate_machinst_regPrettyPrint!();
+    };
+}

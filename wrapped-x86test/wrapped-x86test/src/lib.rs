@@ -1,0 +1,73 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcrateuse_56.rs");
+include!("depcrateother_3.rs");
+include!("depcrate_hypervisor_vspacekernel_pt.rs");
+include!("depcrate_hypervisor_vspaceuse_21.rs");
+include!("depcrate_runnertest_summary.rs");
+include!("depcrate_hypervisor_vspaceuse_20.rs");
+include!("depcrate_hypervisorserialprinter.rs");
+include!("depcrate_hypervisor_vspacepaddr_to_vaddr.rs");
+include!("depcrateuse_59.rs");
+include!("depcrate_hypervisorimpl_39.rs");
+include!("depcrate_runnertest_before_run.rs");
+include!("depcrate_hypervisoruse_10.rs");
+include!("depcrate_hypervisoruse_14.rs");
+include!("depcrate_runnertest_success.rs");
+include!("depcrate_hypervisor_vspacekernel_elf.rs");
+include!("depcrate_runneruse_46.rs");
+include!("depcrate_hypervisor_vspacemapaction.rs");
+include!("depcrate_runneruse_47.rs");
+include!("depcrate_hypervisoruse_15.rs");
+include!("depcrate_hypervisoruse_33.rs");
+include!("depcrateother_2.rs");
+include!("depcrate_hypervisorvspace.rs");
+include!("depcrate_hypervisor_vspacevspace.rs");
+include!("depcrate_runneruse_48.rs");
+include!("depcrate_hypervisor_vspaceuse_23.rs");
+include!("depcrate_hypervisorhandle_ioexit.rs");
+include!("depcrateother_1.rs");
+include!("depcrate_hypervisorimpl_35.rs");
+include!("depcrate_hypervisoruse_9.rs");
+include!("depcrate_hypervisoriohandleerror.rs");
+include!("depcrate_hypervisoruse_11.rs");
+include!("depcrate_hypervisor_vspaceuse_22.rs");
+include!("depcrate_hypervisorimpl_40.rs");
+include!("depcrate_runnerrunner.rs");
+include!("depcrateother_7.rs");
+include!("depcrate_hypervisor_vspacedump_table.rs");
+include!("depcrate_hypervisor_vspaceimpl_31.rs");
+include!("depcraterunner.rs");
+include!("depcrate_hypervisoruse_16.rs");
+include!("depcrate_runnertest_start.rs");
+include!("depcrate_hypervisorimpl_37.rs");
+include!("depcrate_runnertest_ignored.rs");
+include!("depcrate_hypervisoruse_13.rs");
+include!("depcrate_hypervisortestenvironment.rs");
+include!("depcrate_hypervisor_vspaceimpl_29.rs");
+include!("depcratehypervisor.rs");
+include!("depcrateother_4.rs");
+include!("depcrate_hypervisor_vspaceimpl_28.rs");
+include!("depcrate_runneruse_45.rs");
+include!("depcrate_runnertest_failed.rs");
+include!("depcrateuse_58.rs");
+include!("depcrateother_6.rs");
+include!("depcrate_hypervisorphysicalmemory.rs");
+include!("depcrate_hypervisor_vspaceuse_18.rs");
+include!("depcrate_hypervisor_vspaceuse_19.rs");
+include!("depcrate_hypervisoriohandlestatus.rs");
+include!("depcrate_hypervisoruse_12.rs");
+include!("depcrateother_5.rs");
+include!("depcrateuse_57.rs");
+include!("modcrate.rs");
+include!("modcrate_hypervisor.rs");
+include!("modcrate_runner.rs");
+include!("modcrate_hypervisor_vspace.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate!();
+    Modcrate_hypervisor!();
+    Modcrate_runner!();
+    Modcrate_hypervisor_vspace!();
+}

@@ -1,0 +1,9 @@
+// Generated macro for STATUS_GRAPHICS_NO_AVAILABLE_IMPORTANCE_ORDINALS (const)
+macro_rules! Depcrate_shared_ntstatusSTATUS_GRAPHICS_NO_AVAILABLE_IMPORTANCE_ORDINALS {
+() => {
+// Module: crate::shared::ntstatus
+// Provides: {"STATUS_GRAPHICS_NO_AVAILABLE_IMPORTANCE_ORDINALS"}
+// Dependencies: {}
+pub const STATUS_GRAPHICS_NO_AVAILABLE_IMPORTANCE_ORDINALS : NTSTATUS = 0xC01E0354 ;
+};
+}

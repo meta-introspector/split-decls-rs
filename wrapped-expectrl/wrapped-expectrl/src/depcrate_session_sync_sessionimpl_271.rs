@@ -1,0 +1,9 @@
+// Generated macro for impl_271 (impl)
+macro_rules! Depcrate_session_sync_sessionimpl_271 {
+() => {
+// Module: crate::session::sync_session
+// Provides: {"impl_271"}
+// Dependencies: {}
+impl < P , S > Expect for Session < P , S > where S : Write + Read + NonBlocking , { fn expect < N > (& mut self , needle : N) -> Result < Captures , Error > where N : Needle , { match self . expect_lazy { true => self . expect_lazy (needle) , false => self . expect_gready (needle) , } } fn check < N > (& mut self , needle : N) -> Result < Captures , Error > where N : Needle , { let eof = self . stream . read_available () ? ; let buf = self . stream . get_available () ; let found = needle . check (buf , eof) ? ; if ! found . is_empty () { let end_index = Captures :: right_most_index (& found) ; let involved_bytes = buf [.. end_index] . to_vec () ; self . stream . consume_available (end_index) ; return Ok (Captures :: new (involved_bytes , found)) ; } if eof { return Err (Error :: Eof) ; } Ok (Captures :: new (Vec :: new () , Vec :: new ())) } fn is_matched < N > (& mut self , needle : N) -> Result < bool , Error > where N : Needle , { let eof = self . stream . read_available () ? ; let buf = self . stream . get_available () ; let found = needle . check (buf , eof) ? ; if ! found . is_empty () { return Ok (true) ; } if eof { return Err (Error :: Eof) ; } Ok (false) } fn send < B > (& mut self , buf : B) -> Result < () , Error > where B : AsRef < [u8] > , { self . stream . write_all (buf . as_ref ()) ? ; Ok (()) } fn send_line < B > (& mut self , buf : B) -> Result < () , Error > where B : AsRef < [u8] > , { # [cfg (windows)] const LINE_ENDING : & [u8] = b"\r\n" ; # [cfg (not (windows))] const LINE_ENDING : & [u8] = b"\n" ; self . stream . write_all (buf . as_ref ()) ? ; self . write_all (LINE_ENDING) ? ; Ok (()) } }
+};
+}

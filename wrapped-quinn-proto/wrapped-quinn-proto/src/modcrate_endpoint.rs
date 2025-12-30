@@ -1,0 +1,39 @@
+// Generated module macro for crate::endpoint
+macro_rules! Modcrate_endpoint {
+() => {
+        Depcrate_endpointuse_779!();
+        Depcrate_endpointuse_780!();
+        Depcrate_endpointuse_781!();
+        Depcrate_endpointuse_782!();
+        Depcrate_endpointuse_783!();
+        Depcrate_endpointuse_784!();
+        Depcrate_endpointuse_785!();
+        Depcrate_endpointuse_786!();
+        Depcrate_endpointEndpoint!();
+        Depcrate_endpointimpl_788!();
+        Depcrate_endpointimpl_789!();
+        Depcrate_endpointIncomingBuffer!();
+        Depcrate_endpointRouteDatagramTo!();
+        Depcrate_endpointConnectionIndex!();
+        Depcrate_endpointimpl_793!();
+        Depcrate_endpointConnectionMeta!();
+        Depcrate_endpointConnectionHandle!();
+        Depcrate_endpointimpl_796!();
+        Depcrate_endpointimpl_797!();
+        Depcrate_endpointimpl_798!();
+        Depcrate_endpointDatagramEvent!();
+        Depcrate_endpointIncoming!();
+        Depcrate_endpointimpl_801!();
+        Depcrate_endpointimpl_802!();
+        Depcrate_endpointIncomingImproperDropWarner!();
+        Depcrate_endpointimpl_804!();
+        Depcrate_endpointimpl_805!();
+        Depcrate_endpointConnectError!();
+        Depcrate_endpointAcceptError!();
+        Depcrate_endpointRetryError!();
+        Depcrate_endpointimpl_809!();
+        Depcrate_endpointResetTokenTable!();
+        Depcrate_endpointimpl_811!();
+        Depcrate_endpointFourTuple!();
+    };
+}

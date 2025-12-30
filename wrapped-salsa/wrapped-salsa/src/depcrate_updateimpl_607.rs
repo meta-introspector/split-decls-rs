@@ -4,6 +4,6 @@ macro_rules! Depcrate_updateimpl_607 {
 // Module: crate::update
 // Provides: {"impl_607"}
 // Dependencies: {}
-unsafe impl < K , S > Update for indexmap :: IndexSet < K , S > where K : Update + Eq + Hash , S : BuildHasher , { unsafe fn maybe_update (old_pointer : * mut Self , new_set : Self) -> bool { maybe_update_set ! (old_pointer , new_set) } }
+unsafe impl < T > Update for Box < [T] > where T : Update , { unsafe fn maybe_update (old_pointer : * mut Self , new_box : Self) -> bool { let old_box : & mut Box < [T] > = unsafe { & mut * old_pointer } ; if old_box . len () == new_box . len () { let mut changed = false ; for (old_element , new_element) in old_box . iter_mut () . zip (new_box) { changed |= unsafe { T :: maybe_update (old_element , new_element) } ; } changed } else { * old_box = new_box ; true } } }
 };
 }

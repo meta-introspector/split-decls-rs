@@ -1,0 +1,9 @@
+// Generated macro for BTH_LE_GATT_CHARACTERISTIC_TYPE_RECONNECTION_ADDRESS (const)
+macro_rules! Depcrate_um_bthledefBTH_LE_GATT_CHARACTERISTIC_TYPE_RECONNECTION_ADDRESS {
+() => {
+// Module: crate::um::bthledef
+// Provides: {"BTH_LE_GATT_CHARACTERISTIC_TYPE_RECONNECTION_ADDRESS"}
+// Dependencies: {}
+pub const BTH_LE_GATT_CHARACTERISTIC_TYPE_RECONNECTION_ADDRESS : USHORT = 0x2A03 ;
+};
+}

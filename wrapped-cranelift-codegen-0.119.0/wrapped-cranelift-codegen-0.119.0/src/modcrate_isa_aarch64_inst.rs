@@ -1,0 +1,43 @@
+// Generated module macro for crate::isa::aarch64::inst
+macro_rules! Modcrate_isa_aarch64_inst {
+() => {
+        Depcrate_isa_aarch64_instuse_1620!();
+        Depcrate_isa_aarch64_instuse_1621!();
+        Depcrate_isa_aarch64_instuse_1622!();
+        Depcrate_isa_aarch64_instuse_1623!();
+        Depcrate_isa_aarch64_instuse_1624!();
+        Depcrate_isa_aarch64_instuse_1625!();
+        Depcrate_isa_aarch64_instuse_1626!();
+        Depcrate_isa_aarch64_instuse_1627!();
+        Depcrate_isa_aarch64_instuse_1628!();
+        Depcrate_isa_aarch64_instuse_1629!();
+        Depcrate_isa_aarch64_instuse_1630!();
+        Depcrate_isa_aarch64_instregs!();
+        Depcrate_isa_aarch64_instuse_1674!();
+        Depcrate_isa_aarch64_instimms!();
+        Depcrate_isa_aarch64_instuse_1720!();
+        Depcrate_isa_aarch64_instargs!();
+        Depcrate_isa_aarch64_instuse_1758!();
+        Depcrate_isa_aarch64_instemit!();
+        Depcrate_isa_aarch64_instuse_1827!();
+        Depcrate_isa_aarch64_instuse_1828!();
+        Depcrate_isa_aarch64_instunwind!();
+        Depcrate_isa_aarch64_instemit_tests!();
+        Depcrate_isa_aarch64_instuse_1840!();
+        Depcrate_isa_aarch64_instFPUOpRI!();
+        Depcrate_isa_aarch64_instFPUOpRIMod!();
+        Depcrate_isa_aarch64_instimpl_1843!();
+        Depcrate_isa_aarch64_instReturnCallInfo!();
+        Depcrate_isa_aarch64_instcount_zero_half_words!();
+        Depcrate_isa_aarch64_instimpl_1846!();
+        Depcrate_isa_aarch64_instmemarg_operands!();
+        Depcrate_isa_aarch64_instpairmemarg_operands!();
+        Depcrate_isa_aarch64_instaarch64_get_operands!();
+        Depcrate_isa_aarch64_instimpl_1850!();
+        Depcrate_isa_aarch64_instmem_finalize_for_show!();
+        Depcrate_isa_aarch64_instimpl_1852!();
+        Depcrate_isa_aarch64_instLabelUse!();
+        Depcrate_isa_aarch64_instimpl_1854!();
+        Depcrate_isa_aarch64_insttests!();
+    };
+}

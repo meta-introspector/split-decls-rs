@@ -1,0 +1,9 @@
+// Generated macro for impl_188 (impl)
+macro_rules! Depcrate_thread_atomics_oneshotimpl_188 {
+() => {
+// Module: crate::thread::atomics::oneshot
+// Provides: {"impl_188"}
+// Dependencies: {}
+impl < T > Receiver < T > { # [doc = " Returns [`true`] if value is ready to be received."] pub (super) fn is_ready (& self) -> bool { let Some (state) = self . 0 . as_ref () else { return true ; } ; loop { # [allow (clippy :: significant_drop_in_scrutinee)] match state . value . try_lock () . as_deref () { Ok (State :: Result (_) | State :: Dropped | State :: Taken) => return true , Err (TryLockError :: Poisoned (error)) => { return ! matches ! (error . get_ref () . deref () , State :: Waiting) } Ok (State :: Waiting) => return false , Err (TryLockError :: WouldBlock) => () , } } } # [doc = " Block until value is received."] pub (super) fn receive (self) -> Option < T > { let state = self . 0 . expect ("value already taken by polling") ; let mut value = if super :: super :: has_block_support () { state . value . lock () . unwrap_or_else (PoisonError :: into_inner) } else { match state . value . try_lock () { Ok (value) => value , Err (TryLockError :: Poisoned (error)) => error . into_inner () , Err (TryLockError :: WouldBlock) => panic ! ("current thread type cannot be blocked") , } } ; loop { # [allow (clippy :: significant_drop_in_scrutinee)] match value . take () { Some (State :: Result (value)) => return Some (value) , None => () , Some (State :: Dropped) => return None , Some (State :: Waiting) => unreachable ! ("wrong state returns by `State::take()`") , Some (State :: Taken) => unreachable ! ("polled future left state intact") , } assert ! (super :: super :: has_block_support () , "current thread type cannot be blocked") ; value = state . cvar . wait (value) . unwrap_or_else (PoisonError :: into_inner) ; } } }
+};
+}

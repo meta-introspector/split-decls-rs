@@ -1,0 +1,9 @@
+// Generated macro for escape_item (function)
+macro_rules! Depcrate_se_simple_typeescape_item {
+() => {
+// Module: crate::se::simple_type
+// Provides: {"escape_item"}
+// Dependencies: {}
+# [doc = " Escapes atomic value that could be part of a `xs:list`. All whitespace characters"] # [doc = " additionally escaped"] fn escape_item < W > (mut writer : W , value : & str , target : QuoteTarget , level : QuoteLevel) -> fmt :: Result where W : Write , { use QuoteLevel :: * ; use QuoteTarget :: * ; match (target , level) { (CData , _) => { let mut it = CDataIterator :: new (value) ; if let Some (part) = it . next () { writer . write_str (part) ? ; } for part in it { writer . write_str ("]]><![CDATA[") ? ; writer . write_str (part) ? ; } Ok (()) } (_ , Full) => escape_into (writer , value , | ch | match ch { b' ' | b'\r' | b'\n' | b'\t' => true , b'&' | b'<' | b'>' | b'\'' | b'\"' => true , _ => false , }) , (Text , Partial) => escape_into (writer , value , | ch | match ch { b' ' | b'\r' | b'\n' | b'\t' => true , b'&' | b'<' | b'>' => true , _ => false , }) , (Text , Minimal) => escape_into (writer , value , | ch | match ch { b' ' | b'\r' | b'\n' | b'\t' => true , b'&' | b'<' => true , _ => false , }) , (DoubleQAttr , Partial) => escape_into (writer , value , | ch | match ch { b' ' | b'\r' | b'\n' | b'\t' => true , b'&' | b'<' | b'>' => true , b'"' => true , _ => false , }) , (DoubleQAttr , Minimal) => escape_into (writer , value , | ch | match ch { b' ' | b'\r' | b'\n' | b'\t' => true , b'&' | b'<' => true , b'"' => true , _ => false , }) , (SingleQAttr , Partial) => escape_into (writer , value , | ch | match ch { b' ' | b'\r' | b'\n' | b'\t' => true , b'&' | b'<' | b'>' => true , b'\'' => true , _ => false , }) , (SingleQAttr , Minimal) => escape_into (writer , value , | ch | match ch { b' ' | b'\r' | b'\n' | b'\t' => true , b'&' | b'<' => true , b'\'' => true , _ => false , }) , } }
+};
+}

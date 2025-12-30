@@ -1,0 +1,9 @@
+// Generated macro for FORMAT (const)
+macro_rules! Depcrate_unicode_tables_general_categoryFORMAT {
+() => {
+// Module: crate::unicode_tables::general_category
+// Provides: {"FORMAT"}
+// Dependencies: {}
+pub const FORMAT : & 'static [(char , char)] = & [('\u{ad}' , '\u{ad}') , ('\u{600}' , '\u{605}') , ('\u{61c}' , '\u{61c}') , ('\u{6dd}' , '\u{6dd}') , ('\u{70f}' , '\u{70f}') , ('\u{890}' , '\u{891}') , ('\u{8e2}' , '\u{8e2}') , ('\u{180e}' , '\u{180e}') , ('\u{200b}' , '\u{200f}') , ('\u{202a}' , '\u{202e}') , ('\u{2060}' , '\u{2064}') , ('\u{2066}' , '\u{206f}') , ('\u{feff}' , '\u{feff}') , ('\u{fff9}' , '\u{fffb}') , ('\u{110bd}' , '\u{110bd}') , ('\u{110cd}' , '\u{110cd}') , ('\u{13430}' , '\u{1343f}') , ('\u{1bca0}' , '\u{1bca3}') , ('\u{1d173}' , '\u{1d17a}') , ('\u{e0001}' , '\u{e0001}') , ('\u{e0020}' , '\u{e007f}') ,] ;
+};
+}

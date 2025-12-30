@@ -1,0 +1,9 @@
+// Generated macro for prepare_compiler_for_check (function)
+macro_rules! Depcrate_core_build_steps_checkprepare_compiler_for_check {
+() => {
+// Module: crate::core::build_steps::check
+// Provides: {"prepare_compiler_for_check"}
+// Dependencies: {}
+# [doc = " Prepares a compiler that will check something with the given `mode`."] pub fn prepare_compiler_for_check (builder : & Builder < '_ > , target : TargetSelection , mode : Mode ,) -> CompilerForCheck { let host = builder . host_target ; let mut rustc_rmeta_sysroot = None ; let mut std_rmeta_sysroot = None ; let build_compiler = match mode { Mode :: ToolBootstrap => builder . compiler (0 , host) , Mode :: ToolTarget => get_tool_target_compiler (builder , ToolTargetBuildMode :: Build (target)) , Mode :: ToolStd => { if builder . config . compile_time_deps { builder . compiler (0 , host) } else { let build_compiler = builder . compiler (builder . top_stage , host) ; std_rmeta_sysroot = prepare_std (builder , build_compiler , target) ; build_compiler } } Mode :: ToolRustcPrivate | Mode :: Codegen => { let compiler_for_rustc = prepare_compiler_for_check (builder , target , Mode :: Rustc) ; rustc_rmeta_sysroot = Some (builder . ensure (PrepareRustcRmetaSysroot :: new (compiler_for_rustc . clone () , target)) ,) ; let build_compiler = compiler_for_rustc . build_compiler () ; std_rmeta_sysroot = prepare_std (builder , build_compiler , target) ; build_compiler } Mode :: Rustc => { let stage = if host == target { builder . top_stage - 1 } else { builder . top_stage } ; let build_compiler = builder . compiler (stage , host) ; std_rmeta_sysroot = prepare_std (builder , build_compiler , target) ; build_compiler } Mode :: Std => { builder . compiler (builder . top_stage , host) } } ; CompilerForCheck { build_compiler , rustc_rmeta_sysroot , std_rmeta_sysroot } }
+};
+}

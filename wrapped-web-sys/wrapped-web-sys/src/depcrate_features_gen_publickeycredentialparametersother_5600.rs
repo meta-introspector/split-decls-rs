@@ -1,0 +1,9 @@
+// Generated macro for other_5600 (other)
+macro_rules! Depcrate_features_gen_PublicKeyCredentialParametersother_5600 {
+() => {
+// Module: crate::features::gen_PublicKeyCredentialParameters
+// Provides: {"other_5600"}
+// Dependencies: {}
+# [wasm_bindgen] extern "C" { # [wasm_bindgen (extends = :: js_sys :: Object , js_name = PublicKeyCredentialParameters)] # [derive (Debug , Clone , PartialEq , Eq)] # [doc = "The `PublicKeyCredentialParameters` dictionary."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `PublicKeyCredentialParameters`*"] pub type PublicKeyCredentialParameters ; # [doc = "Get the `alg` field of this object."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `PublicKeyCredentialParameters`*"] # [wasm_bindgen (method , getter = "alg")] pub fn get_alg (this : & PublicKeyCredentialParameters) -> i32 ; # [doc = "Change the `alg` field of this object."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `PublicKeyCredentialParameters`*"] # [wasm_bindgen (method , setter = "alg")] pub fn set_alg (this : & PublicKeyCredentialParameters , val : i32) ; # [cfg (feature = "PublicKeyCredentialType")] # [doc = "Get the `type` field of this object."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `PublicKeyCredentialParameters`, `PublicKeyCredentialType`*"] # [wasm_bindgen (method , getter = "type")] pub fn get_type (this : & PublicKeyCredentialParameters) -> PublicKeyCredentialType ; # [cfg (feature = "PublicKeyCredentialType")] # [doc = "Change the `type` field of this object."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `PublicKeyCredentialParameters`, `PublicKeyCredentialType`*"] # [wasm_bindgen (method , setter = "type")] pub fn set_type (this : & PublicKeyCredentialParameters , val : PublicKeyCredentialType) ; }
+};
+}

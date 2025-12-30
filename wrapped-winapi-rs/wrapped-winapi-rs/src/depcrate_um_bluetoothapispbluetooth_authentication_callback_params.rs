@@ -1,0 +1,9 @@
+// Generated macro for PBLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS (type)
+macro_rules! Depcrate_um_bluetoothapisPBLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS {
+() => {
+// Module: crate::um::bluetoothapis
+// Provides: {"PBLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS"}
+// Dependencies: {}
+pub type PBLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS = * mut BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS ;
+};
+}

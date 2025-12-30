@@ -1,0 +1,40 @@
+// Generated module macro for crate::completions
+macro_rules! Modcrate_completions {
+() => {
+        Depcrate_completionsattribute!();
+        Depcrate_completionsdot!();
+        Depcrate_completionsenv_vars!();
+        Depcrate_completionsexpr!();
+        Depcrate_completionsextern_abi!();
+        Depcrate_completionsextern_crate!();
+        Depcrate_completionsfield!();
+        Depcrate_completionsflyimport!();
+        Depcrate_completionsfn_param!();
+        Depcrate_completionsformat_string!();
+        Depcrate_completionsitem_list!();
+        Depcrate_completionskeyword!();
+        Depcrate_completionslifetime!();
+        Depcrate_completionsmod_!();
+        Depcrate_completionspattern!();
+        Depcrate_completionspostfix!();
+        Depcrate_completionsra_fixture!();
+        Depcrate_completionsrecord!();
+        Depcrate_completionssnippet!();
+        Depcrate_completionsr#type!();
+        Depcrate_completionsuse_!();
+        Depcrate_completionsvis!();
+        Depcrate_completionsuse_33!();
+        Depcrate_completionsuse_34!();
+        Depcrate_completionsuse_35!();
+        Depcrate_completionsuse_36!();
+        Depcrate_completionsuse_37!();
+        Depcrate_completionsCompletions!();
+        Depcrate_completionsimpl_39!();
+        Depcrate_completionsimpl_40!();
+        Depcrate_completionsimpl_41!();
+        Depcrate_completionsenum_variants_with_paths!();
+        Depcrate_completionscomplete_name!();
+        Depcrate_completionscomplete_name_ref!();
+        Depcrate_completionscomplete_patterns!();
+    };
+}

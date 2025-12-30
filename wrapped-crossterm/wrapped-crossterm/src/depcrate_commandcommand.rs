@@ -1,0 +1,9 @@
+// Generated macro for Command (trait)
+macro_rules! Depcrate_commandCommand {
+() => {
+// Module: crate::command
+// Provides: {"Command"}
+// Dependencies: {}
+# [doc = " An interface for a command that performs an action on the terminal."] # [doc = ""] # [doc = " Crossterm provides a set of commands,"] # [doc = " and there is no immediate reason to implement a command yourself."] # [doc = " In order to understand how to use and execute commands,"] # [doc = " it is recommended that you take a look at [Command API](./index.html#command-api) chapter."] pub trait Command { # [doc = " Write an ANSI representation of this command to the given writer."] # [doc = " An ANSI code can manipulate the terminal by writing it to the terminal buffer."] # [doc = " However, only Windows 10 and UNIX systems support this."] # [doc = ""] # [doc = " This method does not need to be accessed manually, as it is used by the crossterm's [Command API](./index.html#command-api)"] fn write_ansi (& self , f : & mut impl fmt :: Write) -> fmt :: Result ; # [doc = " Execute this command."] # [doc = ""] # [doc = " Windows versions lower than windows 10 do not support ANSI escape codes,"] # [doc = " therefore a direct WinAPI call is made."] # [doc = ""] # [doc = " This method does not need to be accessed manually, as it is used by the crossterm's [Command API](./index.html#command-api)"] # [cfg (windows)] fn execute_winapi (& self) -> io :: Result < () > ; # [doc = " Returns whether the ANSI code representation of this command is supported by windows."] # [doc = ""] # [doc = " A list of supported ANSI escape codes"] # [doc = " can be found [here](https://docs.microsoft.com/en-us/windows/console/console-virtual-terminal-sequences)."] # [cfg (windows)] fn is_ansi_code_supported (& self) -> bool { super :: ansi_support :: supports_ansi () } }
+};
+}

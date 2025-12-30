@@ -1,0 +1,9 @@
+// Generated macro for impl_3854 (impl)
+macro_rules! Depcrate_sqlite_connectionimpl_3854 {
+() => {
+// Module: crate::sqlite::connection
+// Provides: {"impl_3854"}
+// Dependencies: {}
+impl Connection for SqliteConnection { type Backend = Sqlite ; type TransactionManager = AnsiTransactionManager ; # [doc = " Establish a connection to the database specified by `database_url`."] # [doc = ""] # [doc = " See [SqliteConnection] for supported `database_url`."] # [doc = ""] # [doc = " If the database does not exist, this method will try to"] # [doc = " create a new database and then establish a connection to it."] fn establish (database_url : & str) -> ConnectionResult < Self > { let mut instrumentation = crate :: connection :: instrumentation :: get_default_instrumentation () ; instrumentation . on_connection_event (InstrumentationEvent :: StartEstablishConnection { url : database_url , }) ; let establish_result = Self :: establish_inner (database_url) ; instrumentation . on_connection_event (InstrumentationEvent :: FinishEstablishConnection { url : database_url , error : establish_result . as_ref () . err () , }) ; let mut conn = establish_result ? ; conn . instrumentation = instrumentation ; Ok (conn) } fn execute_returning_count < T > (& mut self , source : & T) -> QueryResult < usize > where T : QueryFragment < Self :: Backend > + QueryId , { let statement_use = self . prepared_query (source) ? ; statement_use . run () . and_then (| _ | { self . raw_connection . rows_affected_by_last_query () . map_err (Error :: DeserializationError) }) } fn transaction_state (& mut self) -> & mut AnsiTransactionManager where Self : Sized , { & mut self . transaction_state } fn instrumentation (& mut self) -> & mut dyn Instrumentation { & mut self . instrumentation } fn set_instrumentation (& mut self , instrumentation : impl Instrumentation) { self . instrumentation = Some (Box :: new (instrumentation)) ; } }
+};
+}

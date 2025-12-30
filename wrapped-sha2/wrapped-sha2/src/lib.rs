@@ -1,0 +1,75 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcrate_block_apiimpl_15.rs");
+include!("depcratesha256.rs");
+include!("depcrate_sha512compress512.rs");
+include!("depcratemacro_1.rs");
+include!("depcrate_block_apiimpl_32.rs");
+include!("depcrate_sha256to_u32s.rs");
+include!("depcrate_block_apiimpl_26.rs");
+include!("depcrateblock_api.rs");
+include!("depcrate_block_apiimpl_11.rs");
+include!("depcrate_block_apiimpl_16.rs");
+include!("depcratemacro_56.rs");
+include!("depcrate_constsstate512.rs");
+include!("depcrate_block_apiuse_6.rs");
+include!("depcrate_block_apiimpl_31.rs");
+include!("depcratemacro_55.rs");
+include!("depcrate_block_apiimpl_24.rs");
+include!("depcrate_constsk64.rs");
+include!("depcrate_block_apiimpl_28.rs");
+include!("depcrate_block_apiimpl_29.rs");
+include!("depcratemacro_57.rs");
+include!("depcrate_block_apiimpl_10.rs");
+include!("depcrate_block_apiimpl_18.rs");
+include!("depcrate_constsh256_224.rs");
+include!("depcrate_block_apiimpl_23.rs");
+include!("depcratemacro_54.rs");
+include!("depcrate_sha512to_u64s.rs");
+include!("depcrate_block_apiuse_5.rs");
+include!("depcrate_sha256macro_47.rs");
+include!("depcratesha512.rs");
+include!("depcrate_constsh512_256.rs");
+include!("depcrate_block_apiimpl_17.rs");
+include!("depcrateconsts.rs");
+include!("depcrateuse_3.rs");
+include!("depcrate_block_apiimpl_25.rs");
+include!("depcrate_block_apiimpl_14.rs");
+include!("depcrate_sha256compress256.rs");
+include!("depcrate_block_apiuse_8.rs");
+include!("depcrate_block_apisha512varcore.rs");
+include!("depcrate_block_apiuse_7.rs");
+include!("depcrate_block_apiimpl_20.rs");
+include!("depcrate_constsk32.rs");
+include!("depcrate_block_apiimpl_13.rs");
+include!("depcrate_constsh256_256.rs");
+include!("depcratemacro_58.rs");
+include!("depcrate_block_apisha256varcore.rs");
+include!("depcrate_constsstate256.rs");
+include!("depcrate_block_apiimpl_27.rs");
+include!("depcratemacro_59.rs");
+include!("depcrate_constsh512_224.rs");
+include!("depcrate_constsk64x2.rs");
+include!("depcrate_block_apiimpl_12.rs");
+include!("depcrate_constsh512_512.rs");
+include!("depcrate_block_apiimpl_22.rs");
+include!("depcrate_block_apiimpl_19.rs");
+include!("depcrate_constsh512_384.rs");
+include!("depcrate_block_apiimpl_30.rs");
+include!("depcrate_sha512macro_51.rs");
+include!("depcrateuse_2.rs");
+include!("depcrate_constsk32x4.rs");
+include!("modcrate_block_api.rs");
+include!("modcrate_sha256.rs");
+include!("modcrate.rs");
+include!("modcrate_consts.rs");
+include!("modcrate_sha512.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate_block_api!();
+    Modcrate_sha256!();
+    Modcrate!();
+    Modcrate_consts!();
+    Modcrate_sha512!();
+}

@@ -1,0 +1,9 @@
+// Generated macro for check_to_owned (function)
+macro_rules! Depcrate_manual_retaincheck_to_owned {
+() => {
+// Module: crate::manual_retain
+// Provides: {"check_to_owned"}
+// Dependencies: {}
+fn check_to_owned (cx : & LateContext < '_ > , left_expr : & hir :: Expr < '_ > , target_expr : & hir :: Expr < '_ > , parent_expr_span : Span , msrv : Msrv ,) { if let hir :: ExprKind :: MethodCall (_ , filter_expr , [] , _) = & target_expr . kind && let Some (to_owned_def_id) = cx . typeck_results () . type_dependent_def_id (target_expr . hir_id) && cx . tcx . is_diagnostic_item (sym :: to_owned_method , to_owned_def_id) && let hir :: ExprKind :: MethodCall (_ , chars_expr , [_] , _) = & filter_expr . kind && let Some (filter_def_id) = cx . typeck_results () . type_dependent_def_id (filter_expr . hir_id) && cx . tcx . is_diagnostic_item (sym :: iter_filter , filter_def_id) && let hir :: ExprKind :: MethodCall (_ , str_expr , [] , _) = & chars_expr . kind && let Some (chars_expr_def_id) = cx . typeck_results () . type_dependent_def_id (chars_expr . hir_id) && cx . tcx . is_diagnostic_item (sym :: str_chars , chars_expr_def_id) && let ty = cx . typeck_results () . expr_ty (str_expr) . peel_refs () && ty . is_lang_item (cx , hir :: LangItem :: String) && SpanlessEq :: new (cx) . eq_expr (left_expr , str_expr) && let hir :: ExprKind :: MethodCall (_ , _ , [closure_expr] , _) = filter_expr . kind && let hir :: ExprKind :: Closure (closure) = closure_expr . kind && let filter_body = cx . tcx . hir_body (closure . body) && let [filter_params] = filter_body . params && msrv . meets (cx , msrvs :: STRING_RETAIN) && let hir :: PatKind :: Ref (pat , _ , _) = filter_params . pat . kind { make_span_lint_and_sugg (cx , parent_expr_span , format ! ("{}.retain(|{}| {})" , snippet (cx , left_expr . span , "..") , snippet (cx , pat . span , "..") , snippet (cx , filter_body . value . span , "..")) ,) ; } }
+};
+}

@@ -1,0 +1,40 @@
+// Generated module macro for crate::source_change
+macro_rules! Modcrate_source_change {
+() => {
+        Depcrate_source_changeuse_267!();
+        Depcrate_source_changeuse_268!();
+        Depcrate_source_changeuse_269!();
+        Depcrate_source_changeuse_270!();
+        Depcrate_source_changeuse_271!();
+        Depcrate_source_changeuse_272!();
+        Depcrate_source_changeuse_273!();
+        Depcrate_source_changeuse_274!();
+        Depcrate_source_changeuse_275!();
+        Depcrate_source_changeuse_276!();
+        Depcrate_source_changeuse_277!();
+        Depcrate_source_changeuse_278!();
+        Depcrate_source_changeChangeAnnotationId!();
+        Depcrate_source_changeimpl_280!();
+        Depcrate_source_changeChangeAnnotation!();
+        Depcrate_source_changeSourceChange!();
+        Depcrate_source_changeimpl_283!();
+        Depcrate_source_changeimpl_284!();
+        Depcrate_source_changeimpl_285!();
+        Depcrate_source_changeimpl_286!();
+        Depcrate_source_changeimpl_287!();
+        Depcrate_source_changeimpl_288!();
+        Depcrate_source_changeSnippetEdit!();
+        Depcrate_source_changeimpl_290!();
+        Depcrate_source_changeSourceChangeBuilder!();
+        Depcrate_source_changeTreeMutator!();
+        Depcrate_source_changeSnippetBuilder!();
+        Depcrate_source_changeimpl_294!();
+        Depcrate_source_changeimpl_295!();
+        Depcrate_source_changeFileSystemEdit!();
+        Depcrate_source_changeimpl_297!();
+        Depcrate_source_changeSnippet!();
+        Depcrate_source_changeAnnotationSnippet!();
+        Depcrate_source_changePlaceSnippet!();
+        Depcrate_source_changeimpl_301!();
+    };
+}

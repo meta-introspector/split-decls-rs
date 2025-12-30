@@ -1,0 +1,44 @@
+// Generated module macro for crate::solve
+macro_rules! Modcrate_solve {
+() => {
+        Depcrate_solveinspect!();
+        Depcrate_solveuse_260!();
+        Depcrate_solveuse_261!();
+        Depcrate_solveuse_262!();
+        Depcrate_solveuse_263!();
+        Depcrate_solveuse_264!();
+        Depcrate_solveuse_265!();
+        Depcrate_solveuse_266!();
+        Depcrate_solveCanonicalInput!();
+        Depcrate_solveCanonicalResponse!();
+        Depcrate_solveQueryResult!();
+        Depcrate_solveNoSolution!();
+        Depcrate_solveGoal!();
+        Depcrate_solveimpl_272!();
+        Depcrate_solveimpl_273!();
+        Depcrate_solveGoalSource!();
+        Depcrate_solveQueryInput!();
+        Depcrate_solveimpl_276!();
+        Depcrate_solvePredefinedOpaquesData!();
+        Depcrate_solveimpl_278!();
+        Depcrate_solveCandidateSource!();
+        Depcrate_solveimpl_280!();
+        Depcrate_solveParamEnvSource!();
+        Depcrate_solveBuiltinImplSource!();
+        Depcrate_solveResponse!();
+        Depcrate_solveimpl_284!();
+        Depcrate_solveExternalConstraintsData!();
+        Depcrate_solveimpl_286!();
+        Depcrate_solveimpl_287!();
+        Depcrate_solveNestedNormalizationGoals!();
+        Depcrate_solveimpl_289!();
+        Depcrate_solveimpl_290!();
+        Depcrate_solveCertainty!();
+        Depcrate_solveimpl_292!();
+        Depcrate_solveMaybeCause!();
+        Depcrate_solveimpl_294!();
+        Depcrate_solveAdtDestructorKind!();
+        Depcrate_solveSizedTraitKind!();
+        Depcrate_solveimpl_297!();
+    };
+}

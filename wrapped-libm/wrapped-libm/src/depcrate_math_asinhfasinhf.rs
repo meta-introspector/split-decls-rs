@@ -1,0 +1,9 @@
+// Generated macro for asinhf (function)
+macro_rules! Depcrate_math_asinhfasinhf {
+() => {
+// Module: crate::math::asinhf
+// Provides: {"asinhf"}
+// Dependencies: {}
+# [doc = " Inverse hyperbolic sine (f32)"] # [doc = ""] # [doc = " Calculates the inverse hyperbolic sine of `x`."] # [doc = " Is defined as `sgn(x)*log(|x|+sqrt(x*x+1))`."] # [cfg_attr (assert_no_panic , no_panic :: no_panic)] pub fn asinhf (mut x : f32) -> f32 { let u = x . to_bits () ; let i = u & 0x7fffffff ; let sign = (u >> 31) != 0 ; x = f32 :: from_bits (i) ; if i >= 0x3f800000 + (12 << 23) { x = logf (x) + LN2 ; } else if i >= 0x3f800000 + (1 << 23) { x = logf (2.0 * x + 1.0 / (sqrtf (x * x + 1.0) + x)) ; } else if i >= 0x3f800000 - (12 << 23) { x = log1pf (x + x * x / (sqrtf (x * x + 1.0) + 1.0)) ; } else { let x1p120 = f32 :: from_bits (0x7b800000) ; force_eval ! (x + x1p120) ; } if sign { - x } else { x } }
+};
+}

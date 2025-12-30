@@ -1,0 +1,9 @@
+// Generated macro for impl_117 (impl)
+macro_rules! Depcrate_multi_namedimpl_117 {
+() => {
+// Module: crate::multi_named
+// Provides: {"impl_117"}
+// Dependencies: {}
+impl PatternBackend for MultiNamedPlaceholder { type PlaceholderKey < 'a > = MultiNamedPlaceholderKey < 'a > ; # [cfg (feature = "alloc")] type PlaceholderKeyCow < 'a > = MultiNamedPlaceholderKeyCow < 'a > ; type Error < 'a > = MissingNamedPlaceholderError < 'a > ; type Store = str ; type Iter < 'a > = MultiNamedPlaceholderPatternIterator < 'a > ; fn validate_store (store : & Self :: Store) -> Result < () , Error > { let mut iter = MultiNamedPlaceholderPatternIterator :: new (store) ; while iter . try_next () . map_err (| e | match e { MultiNamedPlaceholderError :: InvalidStore => Error :: InvalidPattern , MultiNamedPlaceholderError :: Unreachable => { debug_assert ! (false , "unreachable") ; Error :: InvalidPattern } }) ? . is_some () { } Ok (()) } fn iter_items (store : & Self :: Store) -> Self :: Iter < '_ > { MultiNamedPlaceholderPatternIterator :: new (store) } # [cfg (feature = "alloc")] fn try_from_items < 'cow , 'ph , I : Iterator < Item = Result < PatternItemCow < 'cow , Self :: PlaceholderKeyCow < 'ph > > , Error > > , > (items : I ,) -> Result < Box < str > , Error > { let mut string = String :: new () ; for item in items { match item ? { PatternItemCow :: Literal (s) if s . contains (| x | (x as usize) <= 0x07) => { return Err (Error :: InvalidPattern) ; } PatternItemCow :: Literal (s) => string . push_str (& s) , PatternItemCow :: Placeholder (ph_key) => { let name_length = ph_key . 0 . len () ; if name_length >= 64 { return Err (Error :: InvalidPlaceholder) ; } let lead = (name_length >> 3) as u8 ; let trail = (name_length & 0x7) as u8 ; string . push (char :: from (lead)) ; string . push (char :: from (trail)) ; string . push_str (& ph_key . 0) ; } } } Ok (string . into_boxed_str ()) } fn empty () -> & 'static Self :: Store { "" } }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for IOCTL_USB_GET_TRANSPORT_CHARACTERISTICS (const)
+macro_rules! Depcrate_shared_usbioctlIOCTL_USB_GET_TRANSPORT_CHARACTERISTICS {
+() => {
+// Module: crate::shared::usbioctl
+// Provides: {"IOCTL_USB_GET_TRANSPORT_CHARACTERISTICS"}
+// Dependencies: {}
+pub const IOCTL_USB_GET_TRANSPORT_CHARACTERISTICS : DWORD = CTL_CODE ! (FILE_DEVICE_USB , USB_GET_TRANSPORT_CHARACTERISTICS , METHOD_BUFFERED , FILE_ANY_ACCESS) ;
+};
+}

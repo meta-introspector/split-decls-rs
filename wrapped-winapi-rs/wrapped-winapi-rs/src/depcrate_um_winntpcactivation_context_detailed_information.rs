@@ -1,0 +1,9 @@
+// Generated macro for PCACTIVATION_CONTEXT_DETAILED_INFORMATION (type)
+macro_rules! Depcrate_um_winntPCACTIVATION_CONTEXT_DETAILED_INFORMATION {
+() => {
+// Module: crate::um::winnt
+// Provides: {"PCACTIVATION_CONTEXT_DETAILED_INFORMATION"}
+// Dependencies: {}
+pub type PCACTIVATION_CONTEXT_DETAILED_INFORMATION = * const ACTIVATION_CONTEXT_DETAILED_INFORMATION ;
+};
+}

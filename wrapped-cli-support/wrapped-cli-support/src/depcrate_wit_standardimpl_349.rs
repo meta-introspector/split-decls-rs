@@ -1,0 +1,9 @@
+// Generated macro for impl_349 (impl)
+macro_rules! Depcrate_wit_standardimpl_349 {
+() => {
+// Module: crate::wit::standard
+// Provides: {"impl_349"}
+// Dependencies: {}
+impl walrus :: CustomSection for NonstandardWitSection { fn name (& self) -> & str { "nonstandard wit section" } fn data (& self , _ : & walrus :: IdsToIndices) -> Cow < '_ , [u8] > { panic ! ("shouldn't emit custom sections just yet") ; } fn add_gc_roots (& self , roots : & mut walrus :: passes :: Roots) { use Instruction :: * ; for (_ , adapter) in self . adapters . iter () { let instrs = match & adapter . kind { AdapterKind :: Local { instructions } => instructions , AdapterKind :: Import { .. } => continue , } ; for instr in instrs { match instr . instr { DeferFree { free : f , .. } => { roots . push_func (f) ; } StoreRetptr { mem , .. } | LoadRetptr { mem , .. } | View { mem , .. } | OptionView { mem , .. } | MemoryToString (mem) => { roots . push_memory (mem) ; } VectorToMemory { malloc , mem , .. } | OptionVector { malloc , mem , .. } => { roots . push_memory (mem) ; roots . push_func (malloc) ; } MutableSliceToMemory { malloc , mem , .. } => { roots . push_memory (mem) ; roots . push_func (malloc) ; } VectorLoad { free , mem , .. } | OptionVectorLoad { free , mem , .. } | CachedStringLoad { free , mem , .. } => { roots . push_memory (mem) ; roots . push_func (free) ; } OptionString { mem , malloc , realloc , } | StringToMemory { mem , malloc , realloc , } => { roots . push_memory (mem) ; roots . push_func (malloc) ; if let Some (id) = realloc { roots . push_func (id) ; } } I32FromOptionExternref { table_and_alloc : Some ((table , alloc)) , } => { roots . push_table (table) ; roots . push_func (alloc) ; } UnwrapResult { table_and_drop } | UnwrapResultString { table_and_drop } => { if let Some ((table , drop)) = table_and_drop { roots . push_table (table) ; roots . push_func (drop) ; } } _ => { } } } } } }
+};
+}

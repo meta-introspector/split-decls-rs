@@ -1,0 +1,9 @@
+// Generated macro for ReadBuf (struct)
+macro_rules! Depcrate_io_read_bufReadBuf {
+() => {
+// Module: crate::io::read_buf
+// Provides: {"ReadBuf"}
+// Dependencies: {}
+# [doc = " A wrapper around a byte buffer that is incrementally filled and initialized."] # [doc = ""] # [doc = " This type is a sort of \"double cursor\". It tracks three regions in the"] # [doc = " buffer: a region at the beginning of the buffer that has been logically"] # [doc = " filled with data, a region that has been initialized at some point but not"] # [doc = " yet logically filled, and a region at the end that may be uninitialized."] # [doc = " The filled region is guaranteed to be a subset of the initialized region."] # [doc = ""] # [doc = " In summary, the contents of the buffer can be visualized as:"] # [doc = ""] # [doc = " ```not_rust"] # [doc = " [             capacity              ]"] # [doc = " [ filled |         unfilled         ]"] # [doc = " [    initialized    | uninitialized ]"] # [doc = " ```"] # [doc = ""] # [doc = " It is undefined behavior to de-initialize any bytes from the uninitialized"] # [doc = " region, since it is merely unknown whether this region is uninitialized or"] # [doc = " not, and if part of it turns out to be initialized, it must stay initialized."] pub struct ReadBuf < 'a > { buf : & 'a mut [MaybeUninit < u8 >] , filled : usize , initialized : usize , }
+};
+}

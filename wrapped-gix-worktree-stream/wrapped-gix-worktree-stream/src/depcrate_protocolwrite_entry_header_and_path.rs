@@ -1,0 +1,9 @@
+// Generated macro for write_entry_header_and_path (function)
+macro_rules! Depcrate_protocolwrite_entry_header_and_path {
+() => {
+// Module: crate::protocol
+// Provides: {"write_entry_header_and_path"}
+// Dependencies: {}
+# [doc = " This function must match the read-count of `read_entry_info` for max efficiency."] pub (crate) fn write_entry_header_and_path (path : & BStr , oid : & gix_hash :: oid , mode : gix_object :: tree :: EntryMode , stream_len : Option < usize > , out : & mut gix_features :: io :: pipe :: Writer ,) -> std :: io :: Result < () > { const HEADER_LEN : usize = std :: mem :: size_of :: < usize > () * 2 + 2 ; let mut buf = [0u8 ; HEADER_LEN + gix_hash :: Kind :: longest () . len_in_bytes ()] ; let (path_len_buf , rest) = buf . split_at_mut (std :: mem :: size_of :: < usize > ()) ; let (stream_len_buf , bytes) = rest . split_at_mut (std :: mem :: size_of :: < usize > ()) ; path_len_buf . copy_from_slice (& path . len () . to_le_bytes ()) ; stream_len_buf . copy_from_slice (& stream_len . unwrap_or (usize :: MAX) . to_le_bytes ()) ; bytes [0] = mode_to_byte (mode) ; bytes [1] = hash_to_byte (oid . kind ()) ; bytes [2 ..] [.. oid . kind () . len_in_bytes ()] . copy_from_slice (oid . as_bytes ()) ; # [allow (clippy :: unused_io_amount)] { out . write (& buf [.. HEADER_LEN + oid . kind () . len_in_bytes ()]) ? ; out . write (path) ? ; } Ok (()) }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for impl_501 (impl)
+macro_rules! Depcrate_types_baseimpl_501 {
+() => {
+// Module: crate::types::base
+// Provides: {"impl_501"}
+// Dependencies: {}
+impl < 'a , S > Arguments < 'a , S > { # [doc (hidden)] pub fn new (mut args : Option < IndexMap < & 'a str , Spanning < InputValue < S > > > > , meta_args : & 'a Option < Vec < Argument < S > > > ,) -> Self where S : Clone , { if meta_args . is_some () && args . is_none () { args = Some (IndexMap :: new ()) ; } if let (Some (args) , Some (meta_args)) = (& mut args , meta_args) { for arg in meta_args { let arg_name = arg . name . as_str () ; if args . get (arg_name) . is_none () { if let Some (val) = arg . default_value . as_ref () { args . insert (arg_name , Spanning :: unlocated (val . clone ())) ; } } } } Self { args } } # [doc = " Gets an argument by the given `name` and converts it into the desired"] # [doc = " type."] # [doc = ""] # [doc = " If the argument is found, or a default argument has been provided, the"] # [doc = " given [`InputValue`] will be converted into the type `T`."] # [doc = ""] # [doc = " Returns [`None`] if an argument with such `name` is not present."] # [doc = ""] # [doc = " # Errors"] # [doc = ""] # [doc = " If the [`FromInputValue`] conversion fails."] pub fn get < T > (& self , name : & str) -> FieldResult < Option < T > , S > where T : FromInputValue < S > , T :: Error : IntoFieldError < S > , { self . args . as_ref () . and_then (| args | args . get (name)) . map (| spanning | & spanning . item) . map (InputValue :: convert) . transpose () . map_err (IntoFieldError :: into_field_error) } # [doc = " Gets a direct reference to the [`Spanning`] argument [`InputValue`]."] pub fn get_input_value (& self , name : & str) -> Option < & Spanning < InputValue < S > > > { self . args . as_ref () . and_then (| args | args . get (name)) } }
+};
+}

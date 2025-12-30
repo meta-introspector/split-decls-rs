@@ -1,0 +1,9 @@
+// Generated macro for impl_2374 (impl)
+macro_rules! Depcrate_isa_s390x_inst_argsimpl_2374 {
+() => {
+// Module: crate::isa::s390x::inst::args
+// Provides: {"impl_2374"}
+// Dependencies: {}
+impl MemArg { # [doc = " Memory reference using an address in a register."] pub fn reg (reg : Reg , flags : MemFlags) -> MemArg { MemArg :: BXD12 { base : reg , index : zero_reg () , disp : UImm12 :: zero () , flags , } } # [doc = " Memory reference using the sum of two registers as an address."] pub fn reg_plus_reg (reg1 : Reg , reg2 : Reg , flags : MemFlags) -> MemArg { MemArg :: BXD12 { base : reg1 , index : reg2 , disp : UImm12 :: zero () , flags , } } # [doc = " Memory reference using the sum of a register an an offset as address."] pub fn reg_plus_off (reg : Reg , off : i64 , flags : MemFlags) -> MemArg { MemArg :: RegOffset { reg , off , flags } } # [doc = " Add an offset to a virtual addressing mode."] pub fn offset (base : & MemArg , offset : i64) -> MemArg { match base { & MemArg :: RegOffset { reg , off , flags } => MemArg :: RegOffset { reg , off : off + offset , flags , } , & MemArg :: InitialSPOffset { off } => MemArg :: InitialSPOffset { off : off + offset } , & MemArg :: NominalSPOffset { off } => MemArg :: NominalSPOffset { off : off + offset } , & MemArg :: SlotOffset { off } => MemArg :: SlotOffset { off : off + offset } , & MemArg :: BXD12 { .. } | & MemArg :: BXD20 { .. } | & MemArg :: Label { .. } | & MemArg :: Symbol { .. } => unreachable ! () , } } pub (crate) fn get_flags (& self) -> MemFlags { match self { MemArg :: BXD12 { flags , .. } => * flags , MemArg :: BXD20 { flags , .. } => * flags , MemArg :: RegOffset { flags , .. } => * flags , MemArg :: Label { .. } => MemFlags :: trusted () , MemArg :: Symbol { flags , .. } => * flags , MemArg :: InitialSPOffset { .. } => MemFlags :: trusted () , MemArg :: NominalSPOffset { .. } => MemFlags :: trusted () , MemArg :: SlotOffset { .. } => MemFlags :: trusted () , } } }
+};
+}

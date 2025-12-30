@@ -1,0 +1,9 @@
+// Generated macro for impl_20 (impl)
+macro_rules! Depcrate_f8_implimpl_20 {
+() => {
+// Module: crate::f8_impl
+// Provides: {"impl_20"}
+// Dependencies: {}
+impl Float for f8 { type Int = u8 ; type SignedInt = i8 ; const ZERO : Self = Self (0b0_0000_000) ; const NEG_ZERO : Self = Self (0b1_0000_000) ; const ONE : Self = Self (0b0_0111_000) ; const NEG_ONE : Self = Self (0b1_0111_000) ; const MAX : Self = Self (0b0_1110_111) ; const MIN : Self = Self (0b1_1110_111) ; const INFINITY : Self = Self (0b0_1111_000) ; const NEG_INFINITY : Self = Self (0b1_1111_000) ; const NAN : Self = Self (0b0_1111_100) ; const NEG_NAN : Self = Self (0b1_1111_100) ; const MIN_POSITIVE_NORMAL : Self = Self (1 << Self :: SIG_BITS) ; const EPSILON : Self = Self :: ZERO ; const PI : Self = Self :: ZERO ; const NEG_PI : Self = Self :: ZERO ; const FRAC_PI_2 : Self = Self :: ZERO ; const BITS : u32 = 8 ; const SIG_BITS : u32 = 3 ; const SIGN_MASK : Self :: Int = 0b1_0000_000 ; const SIG_MASK : Self :: Int = 0b0_0000_111 ; const EXP_MASK : Self :: Int = 0b0_1111_000 ; const IMPLICIT_BIT : Self :: Int = 0b0_0001_000 ; fn to_bits (self) -> Self :: Int { self . 0 } fn to_bits_signed (self) -> Self :: SignedInt { self . 0 as i8 } fn is_nan (self) -> bool { self . 0 & Self :: EXP_MASK == Self :: EXP_MASK && self . 0 & Self :: SIG_MASK != 0 } fn is_infinite (self) -> bool { self . 0 & Self :: EXP_MASK == Self :: EXP_MASK && self . 0 & Self :: SIG_MASK == 0 } fn is_sign_negative (self) -> bool { self . 0 & Self :: SIGN_MASK != 0 } fn from_bits (a : Self :: Int) -> Self { Self (a) } fn abs (self) -> Self { libm :: generic :: fabs (self) } fn copysign (self , other : Self) -> Self { libm :: generic :: copysign (self , other) } fn fma (self , _y : Self , _z : Self) -> Self { unimplemented ! () } fn normalize (_significand : Self :: Int) -> (i32 , Self :: Int) { unimplemented ! () } }
+};
+}

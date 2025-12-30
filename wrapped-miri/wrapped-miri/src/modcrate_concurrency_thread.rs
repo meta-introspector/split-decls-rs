@@ -1,0 +1,54 @@
+// Generated module macro for crate::concurrency::thread
+macro_rules! Modcrate_concurrency_thread {
+() => {
+        Depcrate_concurrency_threaduse_483!();
+        Depcrate_concurrency_threaduse_484!();
+        Depcrate_concurrency_threaduse_485!();
+        Depcrate_concurrency_threaduse_486!();
+        Depcrate_concurrency_threaduse_487!();
+        Depcrate_concurrency_threaduse_488!();
+        Depcrate_concurrency_threaduse_489!();
+        Depcrate_concurrency_threaduse_490!();
+        Depcrate_concurrency_threaduse_491!();
+        Depcrate_concurrency_threaduse_492!();
+        Depcrate_concurrency_threaduse_493!();
+        Depcrate_concurrency_threaduse_494!();
+        Depcrate_concurrency_threaduse_495!();
+        Depcrate_concurrency_threaduse_496!();
+        Depcrate_concurrency_threaduse_497!();
+        Depcrate_concurrency_threaduse_498!();
+        Depcrate_concurrency_threaduse_499!();
+        Depcrate_concurrency_threadSchedulingAction!();
+        Depcrate_concurrency_threadTlsAllocAction!();
+        Depcrate_concurrency_threadUnblockKind!();
+        Depcrate_concurrency_threadDynUnblockCallback!();
+        Depcrate_concurrency_threadThreadId!();
+        Depcrate_concurrency_threadimpl_505!();
+        Depcrate_concurrency_threadimpl_506!();
+        Depcrate_concurrency_threadimpl_507!();
+        Depcrate_concurrency_threadBlockReason!();
+        Depcrate_concurrency_threadThreadState!();
+        Depcrate_concurrency_threadimpl_510!();
+        Depcrate_concurrency_threadimpl_511!();
+        Depcrate_concurrency_threadThreadJoinStatus!();
+        Depcrate_concurrency_threadThread!();
+        Depcrate_concurrency_threadStackEmptyCallback!();
+        Depcrate_concurrency_threadimpl_515!();
+        Depcrate_concurrency_threadimpl_516!();
+        Depcrate_concurrency_threadimpl_517!();
+        Depcrate_concurrency_threadimpl_518!();
+        Depcrate_concurrency_threadimpl_519!();
+        Depcrate_concurrency_threadTimeout!();
+        Depcrate_concurrency_threadimpl_521!();
+        Depcrate_concurrency_threadTimeoutClock!();
+        Depcrate_concurrency_threadTimeoutAnchor!();
+        Depcrate_concurrency_threadThreadNotFound!();
+        Depcrate_concurrency_threadThreadManager!();
+        Depcrate_concurrency_threadimpl_526!();
+        Depcrate_concurrency_threadimpl_527!();
+        Depcrate_concurrency_threadimpl_528!();
+        Depcrate_concurrency_threadEvalContextPrivExt!();
+        Depcrate_concurrency_threadimpl_530!();
+        Depcrate_concurrency_threadEvalContextExt!();
+    };
+}

@@ -1,0 +1,9 @@
+// Generated macro for impl_203 (impl)
+macro_rules! Depcrate_generatedimpl_203 {
+() => {
+// Module: crate::generated
+// Provides: {"impl_203"}
+// Dependencies: {}
+unsafe impl CopyingHelper for NEFilterSocketFlow { type Result = Self ; }
+};
+}

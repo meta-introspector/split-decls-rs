@@ -1,0 +1,46 @@
+// Generated module macro for crate::semantics
+macro_rules! Modcrate_semantics {
+() => {
+        Depcrate_semanticschild_by_source!();
+        Depcrate_semanticssource_to_def!();
+        Depcrate_semanticsuse_88!();
+        Depcrate_semanticsuse_89!();
+        Depcrate_semanticsuse_90!();
+        Depcrate_semanticsuse_91!();
+        Depcrate_semanticsuse_92!();
+        Depcrate_semanticsuse_93!();
+        Depcrate_semanticsuse_94!();
+        Depcrate_semanticsuse_95!();
+        Depcrate_semanticsuse_96!();
+        Depcrate_semanticsuse_97!();
+        Depcrate_semanticsuse_98!();
+        Depcrate_semanticsuse_99!();
+        Depcrate_semanticsuse_100!();
+        Depcrate_semanticsCONTINUE_NO_BREAKS!();
+        Depcrate_semanticsPathResolution!();
+        Depcrate_semanticsimpl_103!();
+        Depcrate_semanticsPathResolutionPerNs!();
+        Depcrate_semanticsimpl_105!();
+        Depcrate_semanticsTypeInfo!();
+        Depcrate_semanticsimpl_107!();
+        Depcrate_semanticsSemantics!();
+        Depcrate_semanticsSemanticsImpl!();
+        Depcrate_semanticsimpl_110!();
+        Depcrate_semanticsimpl_111!();
+        Depcrate_semanticsimpl_112!();
+        Depcrate_semanticsimpl_113!();
+        Depcrate_semanticsimpl_114!();
+        Depcrate_semanticsimpl_115!();
+        Depcrate_semanticsmacro_call_to_macro_id!();
+        Depcrate_semanticsToDef!();
+        Depcrate_semanticsto_def_impls!();
+        Depcrate_semanticsmacro_119!();
+        Depcrate_semanticsfind_root!();
+        Depcrate_semanticsSemanticsScope!();
+        Depcrate_semanticsimpl_122!();
+        Depcrate_semanticsVisibleTraits!();
+        Depcrate_semanticsimpl_124!();
+        Depcrate_semanticsRenameConflictsVisitor!();
+        Depcrate_semanticsimpl_126!();
+    };
+}

@@ -1,0 +1,9 @@
+// Generated macro for impl_value (macro)
+macro_rules! Depcrate_valueimpl_value {
+() => {
+// Module: crate::value
+// Provides: {"impl_value"}
+// Dependencies: {}
+macro_rules ! impl_value { ($ ($ impl : tt) *) => { $ ($ impl) * { fn stream <'sval , S : sval :: Stream <'sval > + ? Sized > (&'sval self , mut stream : & mut S) -> sval :: Result { self . erase_value () . 0 . dispatch_stream (& mut stream) } fn tag (& self) -> Option < sval :: Tag > { self . erase_value () . 0 . dispatch_tag () } fn to_bool (& self) -> Option < bool > { self . erase_value () . 0 . dispatch_to_bool () } fn to_f32 (& self) -> Option < f32 > { self . erase_value () . 0 . dispatch_to_f32 () } fn to_f64 (& self) -> Option < f64 > { self . erase_value () . 0 . dispatch_to_f64 () } fn to_i8 (& self) -> Option < i8 > { self . erase_value () . 0 . dispatch_to_i8 () } fn to_i16 (& self) -> Option < i16 > { self . erase_value () . 0 . dispatch_to_i16 () } fn to_i32 (& self) -> Option < i32 > { self . erase_value () . 0 . dispatch_to_i32 () } fn to_i64 (& self) -> Option < i64 > { self . erase_value () . 0 . dispatch_to_i64 () } fn to_i128 (& self) -> Option < i128 > { self . erase_value () . 0 . dispatch_to_i128 () } fn to_u8 (& self) -> Option < u8 > { self . erase_value () . 0 . dispatch_to_u8 () } fn to_u16 (& self) -> Option < u16 > { self . erase_value () . 0 . dispatch_to_u16 () } fn to_u32 (& self) -> Option < u32 > { self . erase_value () . 0 . dispatch_to_u32 () } fn to_u64 (& self) -> Option < u64 > { self . erase_value () . 0 . dispatch_to_u64 () } fn to_u128 (& self) -> Option < u128 > { self . erase_value () . 0 . dispatch_to_u128 () } fn to_text (& self) -> Option <& str > { self . erase_value () . 0 . dispatch_to_text () } fn to_binary (& self) -> Option <& [u8] > { self . erase_value () . 0 . dispatch_to_binary () } } } }
+};
+}

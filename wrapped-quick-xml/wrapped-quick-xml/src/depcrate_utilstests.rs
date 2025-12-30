@@ -1,0 +1,9 @@
+// Generated macro for tests (module)
+macro_rules! Depcrate_utilstests {
+() => {
+// Module: crate::utils
+// Provides: {"tests"}
+// Dependencies: {}
+# [cfg (test)] mod tests { use super :: * ; use pretty_assertions :: assert_eq ; # [test] fn write_byte_string0 () { let bytes = ByteBuf (vec ! [10 , 32 , 32 , 32 , 32 , 32 , 32 , 32 , 32]) ; assert_eq ! (format ! ("{:?}" , bytes) , "\"0xA        \"") ; } # [test] fn write_byte_string1 () { let bytes = ByteBuf (vec ! [104 , 116 , 116 , 112 , 58 , 47 , 47 , 119 , 119 , 119 , 46 , 119 , 51 , 46 , 111 , 114 , 103 , 47 , 50 , 48 , 48 , 50 , 47 , 48 , 55 , 47 , 111 , 119 , 108 , 35 ,]) ; assert_eq ! (format ! ("{:?}" , bytes) , r##""http://www.w3.org/2002/07/owl#""##) ; } # [test] fn write_byte_string3 () { let bytes = ByteBuf (vec ! [67 , 108 , 97 , 115 , 115 , 32 , 73 , 82 , 73 , 61 , 34 , 35 , 66 , 34 ,]) ; assert_eq ! (format ! ("{:?}" , bytes) , r##""Class IRI=\"#B\"""##) ; } # [test] fn name_len () { assert_eq ! (super :: name_len (b"") , 0) ; assert_eq ! (super :: name_len (b" abc") , 0) ; assert_eq ! (super :: name_len (b" \t\r\n") , 0) ; assert_eq ! (super :: name_len (b"abc") , 3) ; assert_eq ! (super :: name_len (b"abc ") , 3) ; assert_eq ! (super :: name_len (b"a bc") , 1) ; assert_eq ! (super :: name_len (b"ab\tc") , 2) ; assert_eq ! (super :: name_len (b"ab\rc") , 2) ; assert_eq ! (super :: name_len (b"ab\nc") , 2) ; } # [test] fn trim_xml_start () { assert_eq ! (Bytes (super :: trim_xml_start (b"")) , Bytes (b"")) ; assert_eq ! (Bytes (super :: trim_xml_start (b"abc")) , Bytes (b"abc")) ; assert_eq ! (Bytes (super :: trim_xml_start (b"\r\n\t ab \t\r\nc \t\r\n")) , Bytes (b"ab \t\r\nc \t\r\n")) ; } # [test] fn trim_xml_end () { assert_eq ! (Bytes (super :: trim_xml_end (b"")) , Bytes (b"")) ; assert_eq ! (Bytes (super :: trim_xml_end (b"abc")) , Bytes (b"abc")) ; assert_eq ! (Bytes (super :: trim_xml_end (b"\r\n\t ab \t\r\nc \t\r\n")) , Bytes (b"\r\n\t ab \t\r\nc")) ; } }
+};
+}

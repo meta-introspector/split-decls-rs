@@ -1,0 +1,9 @@
+// Generated macro for attributes (module)
+macro_rules! Depcrate_worktreeattributes {
+() => {
+// Module: crate::worktree
+// Provides: {"attributes"}
+// Dependencies: {}
+# [doc = ""] # [cfg (feature = "attributes")] pub mod attributes { use crate :: { AttributeStack , Worktree } ; # [doc = " The error returned by [`Worktree::attributes()`]."] # [derive (Debug , thiserror :: Error)] # [allow (missing_docs)] pub enum Error { # [error (transparent)] OpenIndex (# [from] crate :: worktree :: open_index :: Error) , # [error (transparent)] CreateCache (# [from] crate :: repository :: attributes :: Error) , } impl < 'repo > Worktree < 'repo > { # [doc = " Configure a file-system cache checking if files below the repository are excluded or for querying their attributes."] # [doc = ""] # [doc = " This takes into consideration all the usual repository configuration, namely:"] # [doc = ""] # [doc = " * `$XDG_CONFIG_HOME/…/ignore|attributes` if `core.excludesFile|attributesFile` is *not* set, otherwise use the configured file."] # [doc = " * `$GIT_DIR/info/exclude|attributes` if present."] pub fn attributes (& self , overrides : Option < gix_ignore :: Search >) -> Result < AttributeStack < 'repo > , Error > { let index = self . index () ? ; Ok (self . parent . attributes (& index , gix_worktree :: stack :: state :: attributes :: Source :: WorktreeThenIdMapping , gix_worktree :: stack :: state :: ignore :: Source :: WorktreeThenIdMappingIfNotSkipped , overrides ,) ?) } # [doc = " Like [attributes()][Self::attributes()], but without access to exclude/ignore information."] pub fn attributes_only (& self) -> Result < AttributeStack < 'repo > , Error > { let index = self . index () ? ; self . parent . attributes_only (& index , gix_worktree :: stack :: state :: attributes :: Source :: WorktreeThenIdMapping ,) . map_err (| err | Error :: CreateCache (err . into ())) } } }
+};
+}

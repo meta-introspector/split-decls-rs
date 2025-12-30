@@ -1,0 +1,9 @@
+// Generated macro for macro_10614 (macro)
+macro_rules! Depcrate_typesmacro_10614 {
+() => {
+// Module: crate::types
+// Provides: {"macro_10614"}
+// Dependencies: {}
+declare_clippy_lint ! { # [doc = " ### What it does"] # [doc = " Checks for usage of any `LinkedList`, suggesting to use a"] # [doc = " `Vec` or a `VecDeque` (formerly called `RingBuf`)."] # [doc = ""] # [doc = " ### Why is this bad?"] # [doc = " Gankra says:"] # [doc = ""] # [doc = " > The TL;DR of `LinkedList` is that it's built on a massive amount of"] # [doc = " pointers and indirection."] # [doc = " > It wastes memory, it has terrible cache locality, and is all-around slow."] # [doc = " `RingBuf`, while"] # [doc = " > \"only\" amortized for push/pop, should be faster in the general case for"] # [doc = " almost every possible"] # [doc = " > workload, and isn't even amortized at all if you can predict the capacity"] # [doc = " you need."] # [doc = " >"] # [doc = " > `LinkedList`s are only really good if you're doing a lot of merging or"] # [doc = " splitting of lists."] # [doc = " > This is because they can just mangle some pointers instead of actually"] # [doc = " copying the data. Even"] # [doc = " > if you're doing a lot of insertion in the middle of the list, `RingBuf`"] # [doc = " can still be better"] # [doc = " > because of how expensive it is to seek to the middle of a `LinkedList`."] # [doc = ""] # [doc = " ### Known problems"] # [doc = " False positives – the instances where using a"] # [doc = " `LinkedList` makes sense are few and far between, but they can still happen."] # [doc = ""] # [doc = " ### Example"] # [doc = " ```no_run"] # [doc = " # use std::collections::LinkedList;"] # [doc = " let x: LinkedList<usize> = LinkedList::new();"] # [doc = " ```"] # [clippy :: version = "pre 1.29.0"] pub LINKEDLIST , pedantic , "usage of LinkedList, usually a vector is faster, or a more specialized data structure like a `VecDeque`" }
+};
+}

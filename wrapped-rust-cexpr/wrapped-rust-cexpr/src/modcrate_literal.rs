@@ -1,0 +1,41 @@
+// Generated module macro for crate::literal
+macro_rules! Modcrate_literal {
+() => {
+        Depcrate_literaluse_45!();
+        Depcrate_literaluse_46!();
+        Depcrate_literaluse_47!();
+        Depcrate_literaluse_48!();
+        Depcrate_literaluse_49!();
+        Depcrate_literaluse_50!();
+        Depcrate_literaluse_51!();
+        Depcrate_literaluse_52!();
+        Depcrate_literaluse_53!();
+        Depcrate_literaluse_54!();
+        Depcrate_literaluse_55!();
+        Depcrate_literaluse_56!();
+        Depcrate_literalCChar!();
+        Depcrate_literalimpl_58!();
+        Depcrate_literalimpl_59!();
+        Depcrate_literalfull!();
+        Depcrate_literalbyte!();
+        Depcrate_literalbinary!();
+        Depcrate_literaloctal!();
+        Depcrate_literaldecimal!();
+        Depcrate_literalhexadecimal!();
+        Depcrate_literalescape2char!();
+        Depcrate_literalc_raw_escape!();
+        Depcrate_literalc_unicode_escape!();
+        Depcrate_literalescaped_char!();
+        Depcrate_literalc_width_prefix!();
+        Depcrate_literalc_char!();
+        Depcrate_literalc_string!();
+        Depcrate_literalc_int_radix!();
+        Depcrate_literaltake_ul!();
+        Depcrate_literalc_int!();
+        Depcrate_literalfloat_width!();
+        Depcrate_literalfloat_exp!();
+        Depcrate_literalc_float!();
+        Depcrate_literalone_literal!();
+        Depcrate_literalparse!();
+    };
+}

@@ -1,0 +1,61 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcrate_extractorimpl_6.rs");
+include!("depcrateextractor.rs");
+include!("depcrate_queryuse_10.rs");
+include!("depcrate_responseuse_19.rs");
+include!("depcrate_subscriptionuse_29.rs");
+include!("depcrate_subscriptionuse_30.rs");
+include!("depcrate_subscriptionuse_32.rs");
+include!("depcrate_responseuse_21.rs");
+include!("depcrate_responseimpl_24.rs");
+include!("depcrate_responsegraphqlresponse.rs");
+include!("depcrate_subscriptionimpl_36.rs");
+include!("depcrate_subscriptiongraphqlwebsocket.rs");
+include!("depcratesubscription.rs");
+include!("depcrateuse_44.rs");
+include!("depcrate_extractoruse_4.rs");
+include!("depcrate_responseimpl_26.rs");
+include!("depcrate_extractorgraphqlbatchrequest.rs");
+include!("depcrate_extractoruse_2.rs");
+include!("depcrate_extractorimpl_8.rs");
+include!("depcrate_queryuse_12.rs");
+include!("depcrate_subscriptiongraphqlprotocol.rs");
+include!("depcrate_subscriptiongraphqlsubscription.rs");
+include!("depcrate_queryimpl_17.rs");
+include!("depcrate_subscriptionimpl_39.rs");
+include!("depcrateresponse.rs");
+include!("depcrate_subscriptionuse_31.rs");
+include!("depcrate_extractoruse_3.rs");
+include!("depcrate_querygraphql.rs");
+include!("depcrate_extractorgraphqlrequest.rs");
+include!("depcrate_queryuse_14.rs");
+include!("depcratequery.rs");
+include!("depcrate_queryimpl_16.rs");
+include!("depcrate_responseuse_20.rs");
+include!("depcrate_subscriptionimpl_41.rs");
+include!("depcrateuse_43.rs");
+include!("depcrateuse_45.rs");
+include!("depcrate_queryuse_11.rs");
+include!("depcrate_responseimpl_23.rs");
+include!("depcrate_responsegraphqlbatchresponse.rs");
+include!("depcrate_subscriptionimpl_34.rs");
+include!("depcrate_subscriptionimpl_40.rs");
+include!("depcrateuse_42.rs");
+include!("depcrate_responseimpl_27.rs");
+include!("depcrate_queryuse_13.rs");
+include!("depcrate_subscriptionimpl_37.rs");
+include!("modcrate_extractor.rs");
+include!("modcrate_response.rs");
+include!("modcrate.rs");
+include!("modcrate_query.rs");
+include!("modcrate_subscription.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate_extractor!();
+    Modcrate_response!();
+    Modcrate!();
+    Modcrate_query!();
+    Modcrate_subscription!();
+}

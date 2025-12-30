@@ -1,0 +1,9 @@
+// Generated macro for impl_663 (impl)
+macro_rules! Depcrate_compiler_gccimpl_663 {
+() => {
+// Module: crate::compiler::gcc
+// Provides: {"impl_663"}
+// Dependencies: {}
+# [async_trait] impl CCompilerImpl for Gcc { fn kind (& self) -> CCompilerKind { CCompilerKind :: Gcc } fn plusplus (& self) -> bool { self . gplusplus } fn version (& self) -> Option < String > { self . version . clone () } fn parse_arguments (& self , arguments : & [OsString] , cwd : & Path , _env_vars : & [(OsString , OsString)] ,) -> CompilerArguments < ParsedArguments > { parse_arguments (arguments , cwd , & ARGS [..] , self . gplusplus , self . kind ()) } # [allow (clippy :: too_many_arguments)] async fn preprocess < T > (& self , creator : & T , executable : & Path , parsed_args : & ParsedArguments , cwd : & Path , env_vars : & [(OsString , OsString)] , may_dist : bool , rewrite_includes_only : bool , preprocessor_cache_mode : bool ,) -> Result < process :: Output > where T : CommandCreatorSync , { let ignorable_whitespace_flags = if preprocessor_cache_mode { vec ! [] } else { vec ! ["-P" . to_string ()] } ; preprocess (creator , executable , parsed_args , cwd , env_vars , may_dist , self . kind () , rewrite_includes_only , ignorable_whitespace_flags , language_to_gcc_arg ,) . await } fn generate_compile_commands < T > (& self , path_transformer : & mut dist :: PathTransformer , executable : & Path , parsed_args : & ParsedArguments , cwd : & Path , env_vars : & [(OsString , OsString)] , rewrite_includes_only : bool ,) -> Result < (Box < dyn CompileCommand < T > > , Option < dist :: CompileCommand > , Cacheable ,) > where T : CommandCreatorSync , { generate_compile_commands (path_transformer , executable , parsed_args , cwd , env_vars , self . kind () , rewrite_includes_only , language_to_gcc_arg ,) . map (| (command , dist_command , cacheable) | { (CCompileCommand :: new (command) , dist_command , cacheable) }) } }
+};
+}

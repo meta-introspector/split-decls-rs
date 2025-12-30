@@ -1,0 +1,46 @@
+// Generated module macro for crate::http3::driver::client
+macro_rules! Modcrate_http3_driver_client {
+() => {
+        Depcrate_http3_driver_clientuse_30!();
+        Depcrate_http3_driver_clientuse_31!();
+        Depcrate_http3_driver_clientuse_32!();
+        Depcrate_http3_driver_clientuse_33!();
+        Depcrate_http3_driver_clientuse_34!();
+        Depcrate_http3_driver_clientuse_35!();
+        Depcrate_http3_driver_clientuse_36!();
+        Depcrate_http3_driver_clientuse_37!();
+        Depcrate_http3_driver_clientuse_38!();
+        Depcrate_http3_driver_clientuse_39!();
+        Depcrate_http3_driver_clientuse_40!();
+        Depcrate_http3_driver_clientuse_41!();
+        Depcrate_http3_driver_clientuse_42!();
+        Depcrate_http3_driver_clientuse_43!();
+        Depcrate_http3_driver_clientuse_44!();
+        Depcrate_http3_driver_clientuse_45!();
+        Depcrate_http3_driver_clientuse_46!();
+        Depcrate_http3_driver_clientuse_47!();
+        Depcrate_http3_driver_clientuse_48!();
+        Depcrate_http3_driver_clientuse_49!();
+        Depcrate_http3_driver_clientuse_50!();
+        Depcrate_http3_driver_clientuse_51!();
+        Depcrate_http3_driver_clientuse_52!();
+        Depcrate_http3_driver_clientuse_53!();
+        Depcrate_http3_driver_clientuse_54!();
+        Depcrate_http3_driver_clientClientH3Driver!();
+        Depcrate_http3_driver_clientClientH3Controller!();
+        Depcrate_http3_driver_clientClientEventStream!();
+        Depcrate_http3_driver_clientClientRequestSender!();
+        Depcrate_http3_driver_clientNewClientRequest!();
+        Depcrate_http3_driver_clientClientH3Event!();
+        Depcrate_http3_driver_clientimpl_61!();
+        Depcrate_http3_driver_clientClientH3Command!();
+        Depcrate_http3_driver_clientimpl_63!();
+        Depcrate_http3_driver_clientimpl_64!();
+        Depcrate_http3_driver_clientimpl_65!();
+        Depcrate_http3_driver_clientPendingClientRequest!();
+        Depcrate_http3_driver_clientClientHooks!();
+        Depcrate_http3_driver_clientimpl_68!();
+        Depcrate_http3_driver_clientimpl_69!();
+        Depcrate_http3_driver_clientimpl_70!();
+    };
+}

@@ -1,0 +1,9 @@
+// Generated macro for impl_263 (impl)
+macro_rules! Depcrate_de_parser_dearrayimpl_263 {
+() => {
+// Module: crate::de::parser::dearray
+// Provides: {"impl_263"}
+// Dependencies: {}
+impl < 'i > DeArray < 'i > { # [doc = " Constructs a new, empty `DeArray`."] # [doc = ""] # [doc = " This will not allocate until elements are pushed onto it."] pub const fn new () -> Self { Self { items : Vec :: new () , array_of_tables : false , } } # [doc = " Appends an element to the back of a collection."] # [doc = ""] # [doc = " # Panics"] # [doc = ""] # [doc = " Panics if the new capacity exceeds `isize::MAX` _bytes_."] pub fn push (& mut self , value : Spanned < DeValue < 'i > >) { self . items . push (value) ; } }
+};
+}

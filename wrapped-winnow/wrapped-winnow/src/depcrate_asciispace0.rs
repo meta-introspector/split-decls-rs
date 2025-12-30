@@ -1,0 +1,9 @@
+// Generated macro for space0 (function)
+macro_rules! Depcrate_asciispace0 {
+() => {
+// Module: crate::ascii
+// Provides: {"space0"}
+// Dependencies: {}
+# [doc = " Recognizes zero or more spaces and tabs."] # [doc = ""] # [doc = " *Complete version*: Will return the whole input if no terminating token is found (a non space"] # [doc = " character)."] # [doc = ""] # [doc = " *[Partial version][crate::_topic::partial]*: Will return `Err(winnow::error::ErrMode::Incomplete(_))` if there's not enough input data,"] # [doc = " or if no terminating token is found (a non space character)."] # [doc = ""] # [doc = " # Effective Signature"] # [doc = ""] # [doc = " Assuming you are parsing a `&str` [Stream]:"] # [doc = " ```rust"] # [doc = " # use winnow::prelude::*;;"] # [doc = " pub fn space0<'i>(input: &mut &'i str) -> ModalResult<&'i str>"] # [doc = " # {"] # [doc = " #     winnow::ascii::space0.parse_next(input)"] # [doc = " # }"] # [doc = " ```"] # [doc = ""] # [doc = " # Example"] # [doc = ""] # [doc = " ```rust"] # [doc = " # use winnow::prelude::*;"] # [doc = " # use winnow::{error::ErrMode, error::ContextError, error::Needed};"] # [doc = " # use winnow::Partial;"] # [doc = " # use winnow::ascii::space0;"] # [doc = " assert_eq!(space0::<_, ErrMode<ContextError>>.parse_peek(Partial::new(\" \\t21c\")), Ok((Partial::new(\"21c\"), \" \\t\")));"] # [doc = " assert_eq!(space0::<_, ErrMode<ContextError>>.parse_peek(Partial::new(\"Z21c\")), Ok((Partial::new(\"Z21c\"), \"\")));"] # [doc = " assert_eq!(space0::<_, ErrMode<ContextError>>.parse_peek(Partial::new(\"\")), Err(ErrMode::Incomplete(Needed::new(1))));"] # [doc = " ```"] # [inline (always)] pub fn space0 < Input , Error > (input : & mut Input) -> Result < < Input as Stream > :: Slice , Error > where Input : StreamIsPartial + Stream , < Input as Stream > :: Token : AsChar , Error : ParserError < Input > , { trace ("space0" , take_while (0 .. , AsChar :: is_space)) . parse_next (input) }
+};
+}

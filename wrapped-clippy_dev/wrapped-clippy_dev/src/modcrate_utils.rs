@@ -1,0 +1,54 @@
+// Generated module macro for crate::utils
+macro_rules! Modcrate_utils {
+() => {
+        Depcrate_utilsuse_196!();
+        Depcrate_utilsuse_197!();
+        Depcrate_utilsuse_198!();
+        Depcrate_utilsuse_199!();
+        Depcrate_utilsuse_200!();
+        Depcrate_utilsuse_201!();
+        Depcrate_utilsuse_202!();
+        Depcrate_utilsuse_203!();
+        Depcrate_utilsuse_204!();
+        Depcrate_utilsuse_205!();
+        Depcrate_utilsuse_206!();
+        Depcrate_utilsuse_207!();
+        Depcrate_utilsuse_208!();
+        Depcrate_utilsScoped!();
+        Depcrate_utilsimpl_210!();
+        Depcrate_utilsimpl_211!();
+        Depcrate_utilsimpl_212!();
+        Depcrate_utilsErrAction!();
+        Depcrate_utilsimpl_214!();
+        Depcrate_utilspanic_action!();
+        Depcrate_utilsexpect_action!();
+        Depcrate_utilsFile!();
+        Depcrate_utilsimpl_218!();
+        Depcrate_utilscargo_cmd!();
+        Depcrate_utilsVersion!();
+        Depcrate_utilsimpl_221!();
+        Depcrate_utilsimpl_222!();
+        Depcrate_utilsTomlPart!();
+        Depcrate_utilstoml_iter!();
+        Depcrate_utilsCargoPackage!();
+        Depcrate_utilsparse_cargo_package!();
+        Depcrate_utilsClippyInfo!();
+        Depcrate_utilsimpl_228!();
+        Depcrate_utilsUpdateStatus!();
+        Depcrate_utilsimpl_230!();
+        Depcrate_utilsUpdateMode!();
+        Depcrate_utilsimpl_232!();
+        Depcrate_utilsFileUpdater!();
+        Depcrate_utilsimpl_234!();
+        Depcrate_utilsupdate_text_region!();
+        Depcrate_utilsupdate_text_region_fn!();
+        Depcrate_utilstry_rename_file!();
+        Depcrate_utilstry_rename_dir!();
+        Depcrate_utilsrun_exit_on_err!();
+        Depcrate_utilsrun_with_output!();
+        Depcrate_utilssplit_args_for_threads!();
+        Depcrate_utilsdelete_file_if_exists!();
+        Depcrate_utilsdelete_dir_if_exists!();
+        Depcrate_utilswalk_dir_no_dot_or_target!();
+    };
+}

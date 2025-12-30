@@ -1,0 +1,44 @@
+// Generated module macro for crate::format_args
+macro_rules! Modcrate_format_args {
+() => {
+        Depcrate_format_argsuse_2272!();
+        Depcrate_format_argsuse_2273!();
+        Depcrate_format_argsuse_2274!();
+        Depcrate_format_argsuse_2275!();
+        Depcrate_format_argsuse_2276!();
+        Depcrate_format_argsuse_2277!();
+        Depcrate_format_argsuse_2278!();
+        Depcrate_format_argsuse_2279!();
+        Depcrate_format_argsuse_2280!();
+        Depcrate_format_argsuse_2281!();
+        Depcrate_format_argsuse_2282!();
+        Depcrate_format_argsuse_2283!();
+        Depcrate_format_argsuse_2284!();
+        Depcrate_format_argsuse_2285!();
+        Depcrate_format_argsuse_2286!();
+        Depcrate_format_argsuse_2287!();
+        Depcrate_format_argsuse_2288!();
+        Depcrate_format_argsuse_2289!();
+        Depcrate_format_argsuse_2290!();
+        Depcrate_format_argsuse_2291!();
+        Depcrate_format_argsuse_2292!();
+        Depcrate_format_argsuse_2293!();
+        Depcrate_format_argsuse_2294!();
+        Depcrate_format_argsuse_2295!();
+        Depcrate_format_argsuse_2296!();
+        Depcrate_format_argsmacro_2297!();
+        Depcrate_format_argsmacro_2298!();
+        Depcrate_format_argsmacro_2299!();
+        Depcrate_format_argsmacro_2300!();
+        Depcrate_format_argsmacro_2301!();
+        Depcrate_format_argsmacro_2302!();
+        Depcrate_format_argsmacro_2303!();
+        Depcrate_format_argsFormatArgs!();
+        Depcrate_format_argsimpl_2305!();
+        Depcrate_format_argsimpl_2306!();
+        Depcrate_format_argsFormatArgsExpr!();
+        Depcrate_format_argsimpl_2308!();
+        Depcrate_format_argsmake_ty_msrv_map!();
+        Depcrate_format_argscount_needed_derefs!();
+    };
+}

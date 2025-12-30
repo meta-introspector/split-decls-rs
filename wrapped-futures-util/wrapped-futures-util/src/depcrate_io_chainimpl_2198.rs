@@ -1,0 +1,9 @@
+// Generated macro for impl_2198 (impl)
+macro_rules! Depcrate_io_chainimpl_2198 {
+() => {
+// Module: crate::io::chain
+// Provides: {"impl_2198"}
+// Dependencies: {}
+impl < T , U > Chain < T , U > where T : AsyncRead , U : AsyncRead , { pub (super) fn new (first : T , second : U) -> Self { Self { first , second , done_first : false } } # [doc = " Gets references to the underlying readers in this `Chain`."] pub fn get_ref (& self) -> (& T , & U) { (& self . first , & self . second) } # [doc = " Gets mutable references to the underlying readers in this `Chain`."] # [doc = ""] # [doc = " Care should be taken to avoid modifying the internal I/O state of the"] # [doc = " underlying readers as doing so may corrupt the internal state of this"] # [doc = " `Chain`."] pub fn get_mut (& mut self) -> (& mut T , & mut U) { (& mut self . first , & mut self . second) } # [doc = " Gets pinned mutable references to the underlying readers in this `Chain`."] # [doc = ""] # [doc = " Care should be taken to avoid modifying the internal I/O state of the"] # [doc = " underlying readers as doing so may corrupt the internal state of this"] # [doc = " `Chain`."] pub fn get_pin_mut (self : Pin < & mut Self >) -> (Pin < & mut T > , Pin < & mut U >) { let this = self . project () ; (this . first , this . second) } # [doc = " Consumes the `Chain`, returning the wrapped readers."] pub fn into_inner (self) -> (T , U) { (self . first , self . second) } }
+};
+}

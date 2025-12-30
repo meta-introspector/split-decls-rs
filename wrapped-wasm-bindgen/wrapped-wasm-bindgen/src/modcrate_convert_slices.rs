@@ -1,0 +1,51 @@
+// Generated module macro for crate::convert::slices
+macro_rules! Modcrate_convert_slices {
+() => {
+        Depcrate_convert_slicesuse_118!();
+        Depcrate_convert_slicesuse_119!();
+        Depcrate_convert_slicesuse_120!();
+        Depcrate_convert_slicesuse_121!();
+        Depcrate_convert_slicesuse_122!();
+        Depcrate_convert_slicesuse_123!();
+        Depcrate_convert_slicesuse_124!();
+        Depcrate_convert_slicesuse_125!();
+        Depcrate_convert_slicesuse_126!();
+        Depcrate_convert_slicesuse_127!();
+        Depcrate_convert_slicesuse_128!();
+        Depcrate_convert_slicesuse_129!();
+        Depcrate_convert_slicesWasmSlice!();
+        Depcrate_convert_slicesimpl_131!();
+        Depcrate_convert_slicesnull_slice!();
+        Depcrate_convert_slicesWasmMutSlice!();
+        Depcrate_convert_slicesimpl_134!();
+        Depcrate_convert_slicesMutSlice!();
+        Depcrate_convert_slicesimpl_136!();
+        Depcrate_convert_slicesimpl_137!();
+        Depcrate_convert_slicesimpl_138!();
+        Depcrate_convert_slicesvectors!();
+        Depcrate_convert_slicesvectors_internal!();
+        Depcrate_convert_slicesmacro_141!();
+        Depcrate_convert_slicesimpl_142!();
+        Depcrate_convert_slicesimpl_143!();
+        Depcrate_convert_slicesimpl_144!();
+        Depcrate_convert_slicesmacro_145!();
+        Depcrate_convert_slicesimpl_146!();
+        Depcrate_convert_slicesimpl_147!();
+        Depcrate_convert_slicesimpl_148!();
+        Depcrate_convert_slicesimpl_149!();
+        Depcrate_convert_slicesimpl_150!();
+        Depcrate_convert_slicesimpl_151!();
+        Depcrate_convert_slicesimpl_152!();
+        Depcrate_convert_slicesimpl_153!();
+        Depcrate_convert_slicesimpl_154!();
+        Depcrate_convert_slicesimpl_155!();
+        Depcrate_convert_slicesimpl_156!();
+        Depcrate_convert_slicesimpl_157!();
+        Depcrate_convert_slicesimpl_158!();
+        Depcrate_convert_slicesimpl_159!();
+        Depcrate_convert_slicesimpl_160!();
+        Depcrate_convert_slicesimpl_161!();
+        Depcrate_convert_slicesimpl_162!();
+        Depcrate_convert_slicesimpl_163!();
+    };
+}

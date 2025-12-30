@@ -1,0 +1,9 @@
+// Generated macro for impl_128 (impl)
+macro_rules! Depcrate_hpack_decoderimpl_128 {
+() => {
+// Module: crate::hpack::decoder
+// Provides: {"impl_128"}
+// Dependencies: {}
+impl Table { fn new (max_size : usize) -> Table { Table { entries : VecDeque :: new () , size : 0 , max_size , } } fn size (& self) -> usize { self . size } # [doc = " Returns the entry located at the given index."] # [doc = ""] # [doc = " The table is 1-indexed and constructed in such a way that the first"] # [doc = " entries belong to the static table, followed by entries in the dynamic"] # [doc = " table. They are merged into a single index address space, though."] # [doc = ""] # [doc = " This is according to the [HPACK spec, section 2.3.3.]"] # [doc = " (http://http2.github.io/http2-spec/compression.html#index.address.space)"] pub fn get (& self , index : usize) -> Result < Header , DecoderError > { if index == 0 { return Err (DecoderError :: InvalidTableIndex) ; } if index <= 61 { return Ok (get_static (index)) ; } match self . entries . get (index - 62) { Some (e) => Ok (e . clone ()) , None => Err (DecoderError :: InvalidTableIndex) , } } fn insert (& mut self , entry : Header) { let len = entry . len () ; self . reserve (len) ; if self . size + len <= self . max_size { self . size += len ; self . entries . push_front (entry) ; } } fn set_max_size (& mut self , size : usize) { self . max_size = size ; self . consolidate () ; } fn reserve (& mut self , size : usize) { while self . size + size > self . max_size { match self . entries . pop_back () { Some (last) => { self . size -= last . len () ; } None => return , } } } fn consolidate (& mut self) { while self . size > self . max_size { { let last = match self . entries . back () { Some (x) => x , None => { panic ! ("Size of table != 0, but no headers left!") ; } } ; self . size -= last . len () ; } self . entries . pop_back () ; } } }
+};
+}

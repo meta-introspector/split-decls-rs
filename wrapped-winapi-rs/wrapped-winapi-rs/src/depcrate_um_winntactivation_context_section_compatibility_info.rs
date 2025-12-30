@@ -1,0 +1,9 @@
+// Generated macro for ACTIVATION_CONTEXT_SECTION_COMPATIBILITY_INFO (const)
+macro_rules! Depcrate_um_winntACTIVATION_CONTEXT_SECTION_COMPATIBILITY_INFO {
+() => {
+// Module: crate::um::winnt
+// Provides: {"ACTIVATION_CONTEXT_SECTION_COMPATIBILITY_INFO"}
+// Dependencies: {}
+pub const ACTIVATION_CONTEXT_SECTION_COMPATIBILITY_INFO : ULONG = 11 ;
+};
+}

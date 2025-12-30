@@ -1,0 +1,9 @@
+// Generated macro for CERT_CHAIN_DISABLE_ALL_EKU_WEAK_FLAG (const)
+macro_rules! Depcrate_um_wincryptCERT_CHAIN_DISABLE_ALL_EKU_WEAK_FLAG {
+() => {
+// Module: crate::um::wincrypt
+// Provides: {"CERT_CHAIN_DISABLE_ALL_EKU_WEAK_FLAG"}
+// Dependencies: {}
+pub const CERT_CHAIN_DISABLE_ALL_EKU_WEAK_FLAG : DWORD = 0x00010000 ;
+};
+}

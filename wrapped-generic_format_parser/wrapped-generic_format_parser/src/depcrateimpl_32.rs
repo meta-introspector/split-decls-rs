@@ -1,0 +1,9 @@
+// Generated macro for impl_32 (impl)
+macro_rules! Depcrateimpl_32 {
+() => {
+// Module: crate
+// Provides: {"impl_32"}
+// Dependencies: {}
+impl < 'a > Iterator for Parser < 'a > { type Item = Piece < 'a > ; fn next (& mut self) -> Option < Piece < 'a > > { if let Some (& (pos , c)) = self . cur . peek () { match c { '{' => { let curr_last_brace = self . last_opening_brace ; let byte_pos = self . to_span_index (pos) ; let lbrace_end = InnerOffset (byte_pos . 0 + self . to_span_width (pos)) ; self . last_opening_brace = Some (byte_pos . to (lbrace_end)) ; self . cur . next () ; if self . consume ('{') { self . last_opening_brace = curr_last_brace ; Some (String (self . string (pos + 1))) } else { let arg = self . argument (lbrace_end) ; if let Some (rbrace_pos) = self . consume_closing_brace (& arg) { if self . is_source_literal { let lbrace_byte_pos = self . to_span_index (pos) ; let rbrace_byte_pos = self . to_span_index (rbrace_pos) ; let width = self . to_span_width (rbrace_pos) ; self . arg_places . push (lbrace_byte_pos . to (InnerOffset (rbrace_byte_pos . 0 + width)) ,) ; } } else { if let Some (& (_ , maybe)) = self . cur . peek () { if maybe == '?' { self . suggest_format () ; } else { self . suggest_positional_arg_instead_of_captured_arg (arg) ; } } } Some (NextArgument (Box :: new (arg))) } } '}' => { self . cur . next () ; if self . consume ('}') { Some (String (self . string (pos + 1))) } else { let err_pos = self . to_span_index (pos) ; self . err_with_note ("unmatched `}` found" , "unmatched `}`" , "if you intended to print `}`, you can escape it using `}}`" , err_pos . to (err_pos) ,) ; None } } _ => Some (String (self . string (pos))) , } } else { if self . is_source_literal { let span = self . span (self . cur_line_start , self . input . len ()) ; if self . line_spans . last () != Some (& span) { self . line_spans . push (span) ; } } None } } }
+};
+}

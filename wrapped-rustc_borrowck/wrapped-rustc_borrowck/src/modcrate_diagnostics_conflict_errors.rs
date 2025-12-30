@@ -1,0 +1,50 @@
+// Generated module macro for crate::diagnostics::conflict_errors
+macro_rules! Modcrate_diagnostics_conflict_errors {
+() => {
+        Depcrate_diagnostics_conflict_errorsuse_291!();
+        Depcrate_diagnostics_conflict_errorsuse_292!();
+        Depcrate_diagnostics_conflict_errorsuse_293!();
+        Depcrate_diagnostics_conflict_errorsuse_294!();
+        Depcrate_diagnostics_conflict_errorsuse_295!();
+        Depcrate_diagnostics_conflict_errorsuse_296!();
+        Depcrate_diagnostics_conflict_errorsuse_297!();
+        Depcrate_diagnostics_conflict_errorsuse_298!();
+        Depcrate_diagnostics_conflict_errorsuse_299!();
+        Depcrate_diagnostics_conflict_errorsuse_300!();
+        Depcrate_diagnostics_conflict_errorsuse_301!();
+        Depcrate_diagnostics_conflict_errorsuse_302!();
+        Depcrate_diagnostics_conflict_errorsuse_303!();
+        Depcrate_diagnostics_conflict_errorsuse_304!();
+        Depcrate_diagnostics_conflict_errorsuse_305!();
+        Depcrate_diagnostics_conflict_errorsuse_306!();
+        Depcrate_diagnostics_conflict_errorsuse_307!();
+        Depcrate_diagnostics_conflict_errorsuse_308!();
+        Depcrate_diagnostics_conflict_errorsuse_309!();
+        Depcrate_diagnostics_conflict_errorsuse_310!();
+        Depcrate_diagnostics_conflict_errorsuse_311!();
+        Depcrate_diagnostics_conflict_errorsuse_312!();
+        Depcrate_diagnostics_conflict_errorsuse_313!();
+        Depcrate_diagnostics_conflict_errorsuse_314!();
+        Depcrate_diagnostics_conflict_errorsuse_315!();
+        Depcrate_diagnostics_conflict_errorsuse_316!();
+        Depcrate_diagnostics_conflict_errorsuse_317!();
+        Depcrate_diagnostics_conflict_errorsuse_318!();
+        Depcrate_diagnostics_conflict_errorsuse_319!();
+        Depcrate_diagnostics_conflict_errorsuse_320!();
+        Depcrate_diagnostics_conflict_errorsuse_321!();
+        Depcrate_diagnostics_conflict_errorsuse_322!();
+        Depcrate_diagnostics_conflict_errorsuse_323!();
+        Depcrate_diagnostics_conflict_errorsuse_324!();
+        Depcrate_diagnostics_conflict_errorsMoveSite!();
+        Depcrate_diagnostics_conflict_errorsStorageDeadOrDrop!();
+        Depcrate_diagnostics_conflict_errorsimpl_327!();
+        Depcrate_diagnostics_conflict_errorsAnnotatedBorrowFnSignature!();
+        Depcrate_diagnostics_conflict_errorsimpl_329!();
+        Depcrate_diagnostics_conflict_errorsReferencedStatementsVisitor!();
+        Depcrate_diagnostics_conflict_errorsimpl_331!();
+        Depcrate_diagnostics_conflict_errorsBreakFinder!();
+        Depcrate_diagnostics_conflict_errorsimpl_333!();
+        Depcrate_diagnostics_conflict_errorsConditionVisitor!();
+        Depcrate_diagnostics_conflict_errorsimpl_335!();
+    };
+}

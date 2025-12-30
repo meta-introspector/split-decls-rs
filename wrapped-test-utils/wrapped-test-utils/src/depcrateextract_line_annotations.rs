@@ -1,0 +1,9 @@
+// Generated macro for extract_line_annotations (function)
+macro_rules! Depcrateextract_line_annotations {
+() => {
+// Module: crate
+// Provides: {"extract_line_annotations"}
+// Dependencies: {}
+fn extract_line_annotations (mut line : & str) -> Vec < LineAnnotation > { let mut res = Vec :: new () ; let mut offset : TextSize = 0 . into () ; let marker : fn (char) -> bool = if line . contains ('^') { | c | c == '^' } else { | c | c == '|' } ; while let Some (idx) = line . find (marker) { offset += TextSize :: try_from (idx) . unwrap () ; line = & line [idx ..] ; let mut len = line . chars () . take_while (| & it | it == '^') . count () ; let mut continuation = false ; if len == 0 { assert ! (line . starts_with ('|')) ; continuation = true ; len = 1 ; } let range = TextRange :: at (offset , len . try_into () . unwrap ()) ; let line_no_caret = & line [len ..] ; let end_marker = line_no_caret . find ('$') ; let next = line_no_caret . find (marker) . map_or (line . len () , | it | it + len) ; let cond = | end_marker | { end_marker < next && (line_no_caret [end_marker + 1 ..] . is_empty () || line_no_caret [end_marker + 1 ..] . strip_prefix (| c : char | c . is_whitespace () || c == '^') . is_some ()) } ; let mut content = match end_marker { Some (end_marker) if cond (end_marker) => & line_no_caret [.. end_marker] , _ => line_no_caret [.. next - len] . trim_end () , } ; let mut file = false ; if ! continuation && content . starts_with ("file") { file = true ; content = & content ["file" . len () ..] ; } let content = content . trim_start () . to_owned () ; let annotation = if continuation { LineAnnotation :: Continuation { offset : range . end () , content } } else { LineAnnotation :: Annotation { range , content , file } } ; res . push (annotation) ; line = & line [next ..] ; offset += TextSize :: try_from (next) . unwrap () ; } res }
+};
+}

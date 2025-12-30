@@ -1,0 +1,9 @@
+// Generated macro for other_29573 (other)
+macro_rules! Depcrate_um_lmaccessother_29573 {
+() => {
+// Module: crate::um::lmaccess
+// Provides: {"other_29573"}
+// Dependencies: {}
+extern "system" { pub fn NetUserAdd (servername : LPCWSTR , level : DWORD , buf : LPBYTE , parm_err : LPDWORD ,) -> NET_API_STATUS ; pub fn NetUserEnum (servername : LPCWSTR , level : DWORD , filter : DWORD , bufptr : * mut LPBYTE , prefmaxlen : DWORD , entriesread : LPDWORD , totalentries : LPDWORD , resumehandle : LPDWORD ,) -> NET_API_STATUS ; pub fn NetUserGetInfo (servername : LPCWSTR , username : LPCWSTR , level : DWORD , bufptr : * mut LPBYTE ,) -> NET_API_STATUS ; pub fn NetUserSetInfo (servername : LPCWSTR , username : LPCWSTR , level : DWORD , buf : LPBYTE , parm_err : LPDWORD ,) -> NET_API_STATUS ; pub fn NetUserDel (servername : LPCWSTR , username : LPCWSTR ,) -> NET_API_STATUS ; pub fn NetUserGetGroups (servername : LPCWSTR , username : LPCWSTR , level : DWORD , bufptr : * mut LPBYTE , prefmaxlen : DWORD , entriesread : LPDWORD , totalentries : LPDWORD ,) -> NET_API_STATUS ; pub fn NetUserSetGroups (servername : LPCWSTR , username : LPCWSTR , level : DWORD , buf : LPBYTE , num_entries : DWORD ,) -> NET_API_STATUS ; pub fn NetUserGetLocalGroups (servername : LPCWSTR , username : LPCWSTR , level : DWORD , flags : DWORD , bufptr : * mut LPBYTE , prefmaxlen : DWORD , entriesread : LPDWORD , totalentries : LPDWORD ,) -> NET_API_STATUS ; pub fn NetUserModalsGet (servername : LPCWSTR , level : DWORD , bufptr : * mut LPBYTE ,) -> NET_API_STATUS ; pub fn NetUserModalsSet (servername : LPCWSTR , level : DWORD , buf : LPBYTE , parm_err : LPDWORD ,) -> NET_API_STATUS ; pub fn NetUserChangePassword (domainname : LPCWSTR , username : LPCWSTR , oldpassword : LPCWSTR , newpassword : LPCWSTR ,) -> NET_API_STATUS ; }
+};
+}

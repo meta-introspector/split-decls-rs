@@ -1,0 +1,9 @@
+// Generated macro for macro_653 (macro)
+macro_rules! Depcrate_parser_repeatmacro_653 {
+() => {
+// Module: crate::parser::repeat
+// Provides: {"macro_653"}
+// Dependencies: {}
+parser ! { pub struct SkipRepeatUntil ; type PartialState = < With < RepeatUntil < Sink , P , E >, Value < Input , () >> as Parser < Input >>:: PartialState ; # [doc = " Skips input until `end` is encountered or `end` indicates that it has committed input before"] # [doc = " failing (`attempt` can be used to continue skipping even if `end` has committed input)"] # [doc = ""] # [doc = " ```"] # [doc = " # extern crate combine;"] # [doc = " # use combine::*;"] # [doc = " # use combine::parser::char;"] # [doc = " # use combine::parser::byte;"] # [doc = " # use combine::parser::combinator::attempt;"] # [doc = " # use combine::parser::repeat::skip_until;"] # [doc = " # fn main() {"] # [doc = "     let mut char_parser = skip_until(char::digit());"] # [doc = "     assert_eq!(char_parser.parse(\"abc123\"), Ok(((), \"123\")));"] # [doc = ""] # [doc = "     let mut byte_parser = skip_until(byte::bytes(&b\"TAG\"[..]));"] # [doc = "     assert_eq!(byte_parser.parse(&b\"123TAG\"[..]), Ok(((), &b\"TAG\"[..])));"] # [doc = "     assert!(byte_parser.parse(&b\"123TATAG\"[..]).is_err());"] # [doc = ""] # [doc = "     // `attempt` must be used because the `end` will commit to `TA` before failing,"] # [doc = "     // but we want to continue skipping"] # [doc = "     let mut byte_parser = skip_until(attempt(byte::bytes(&b\"TAG\"[..])));"] # [doc = "     assert_eq!(byte_parser.parse(&b\"123TATAG\"[..]), Ok(((), &b\"TAG\"[..])));"] # [doc = " }"] # [doc = " ```"] pub fn repeat_skip_until [Input , P , E] (parser : P , end : E) (Input) -> () where [P : Parser < Input >, E : Parser < Input >,] { repeat_until ::< Sink , _ , _ , _ > (parser , end) . with (value (())) } }
+};
+}

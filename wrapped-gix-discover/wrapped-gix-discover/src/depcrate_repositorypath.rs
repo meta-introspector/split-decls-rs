@@ -1,0 +1,9 @@
+// Generated macro for Path (enum)
+macro_rules! Depcrate_repositoryPath {
+() => {
+// Module: crate::repository
+// Provides: {"Path"}
+// Dependencies: {}
+# [doc = " A repository path which either points to a work tree or the `.git` repository itself."] # [derive (Debug , Clone , Eq , PartialEq , Ord , PartialOrd , Hash)] pub enum Path { # [doc = " The currently checked out linked worktree along with its connected and existing git directory, or the worktree checkout of a"] # [doc = " submodule."] LinkedWorkTree { # [doc = " The base of the work tree."] work_dir : PathBuf , # [doc = " The worktree-private git dir, located within the main git directory which holds most of the information."] git_dir : PathBuf , } , # [doc = " The currently checked out or nascent work tree of a git repository"] WorkTree (PathBuf) , # [doc = " The git repository itself, typically bare and without known worktree."] # [doc = " It could also be non-bare with a worktree configured using git configuration, or no worktree at all despite"] # [doc = " not being bare (due to mis-configuration for example)."] # [doc = ""] # [doc = " Note that it might still have linked work-trees which can be accessed later, bare or not, or it might be a"] # [doc = " submodule git directory in the `.git/modules/**/<name>` directory of the parent repository."] Repository (PathBuf) , }
+};
+}

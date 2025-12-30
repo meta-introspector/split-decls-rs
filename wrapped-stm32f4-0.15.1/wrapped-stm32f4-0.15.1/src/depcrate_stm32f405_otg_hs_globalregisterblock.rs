@@ -1,0 +1,9 @@
+// Generated macro for RegisterBlock (struct)
+macro_rules! Depcrate_stm32f405_otg_hs_globalRegisterBlock {
+() => {
+// Module: crate::stm32f405::otg_hs_global
+// Provides: {"RegisterBlock"}
+// Dependencies: {}
+# [doc = r"Register block"] # [repr (C)] pub struct RegisterBlock { # [doc = "0x00 - OTG_HS control and status register"] pub gotgctl : crate :: Reg < gotgctl :: GOTGCTL_SPEC > , # [doc = "0x04 - OTG_HS interrupt register"] pub gotgint : crate :: Reg < gotgint :: GOTGINT_SPEC > , # [doc = "0x08 - OTG_HS AHB configuration register"] pub gahbcfg : crate :: Reg < gahbcfg :: GAHBCFG_SPEC > , # [doc = "0x0c - OTG_HS USB configuration register"] pub gusbcfg : crate :: Reg < gusbcfg :: GUSBCFG_SPEC > , # [doc = "0x10 - OTG_HS reset register"] pub grstctl : crate :: Reg < grstctl :: GRSTCTL_SPEC > , # [doc = "0x14 - OTG_HS core interrupt register"] pub gintsts : crate :: Reg < gintsts :: GINTSTS_SPEC > , # [doc = "0x18 - OTG_HS interrupt mask register"] pub gintmsk : crate :: Reg < gintmsk :: GINTMSK_SPEC > , _reserved_7_grxstsr : [u8 ; 0x04] , _reserved_8_grxstsp : [u8 ; 0x04] , # [doc = "0x24 - OTG_HS Receive FIFO size register"] pub grxfsiz : crate :: Reg < grxfsiz :: GRXFSIZ_SPEC > , _reserved_10_tx0fsiz : [u8 ; 0x04] , # [doc = "0x2c - OTG_HS nonperiodic transmit FIFO/queue status register"] pub gnptxsts : crate :: Reg < gnptxsts :: GNPTXSTS_SPEC > , _reserved12 : [u8 ; 0x08] , # [doc = "0x38 - OTG_HS general core configuration register"] pub gccfg : crate :: Reg < gccfg :: GCCFG_SPEC > , # [doc = "0x3c - OTG_HS core ID register"] pub cid : crate :: Reg < cid :: CID_SPEC > , _reserved14 : [u8 ; 0xc0] , # [doc = "0x100 - OTG_HS Host periodic transmit FIFO size register"] pub hptxfsiz : crate :: Reg < hptxfsiz :: HPTXFSIZ_SPEC > , # [doc = "0x104..0x118 - OTG_HS device IN endpoint transmit FIFO size register"] pub dieptxf : [crate :: Reg < dieptxf :: DIEPTXF_SPEC > ; 5] , }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for impl_829 (impl)
+macro_rules! Depcrate_base_editionimpl_829 {
+() => {
+// Module: crate::base::edition
+// Provides: {"impl_829"}
+// Dependencies: {}
+# [doc = " Extend the number of columns of the `Matrix` with elements from"] # [doc = " a given iterator."] # [cfg (any (feature = "std" , feature = "alloc"))] impl < T , R , S > Extend < T > for Matrix < T , R , Dyn , S > where T : Scalar , R : Dim , S : Extend < T > , { # [doc = " Extend the number of columns of the `Matrix` with elements"] # [doc = " from the given iterator."] # [doc = ""] # [doc = " # Example"] # [doc = " ```"] # [doc = " # use nalgebra::{DMatrix, Dyn, Matrix, OMatrix, Matrix3};"] # [doc = ""] # [doc = " let data = vec![0, 1, 2,      // column 1"] # [doc = "                 3, 4, 5];     // column 2"] # [doc = ""] # [doc = " let mut matrix = DMatrix::from_vec(3, 2, data);"] # [doc = ""] # [doc = " matrix.extend(vec![6, 7, 8]); // column 3"] # [doc = ""] # [doc = " assert!(matrix.eq(&Matrix3::new(0, 3, 6,"] # [doc = "                                 1, 4, 7,"] # [doc = "                                 2, 5, 8)));"] # [doc = " ```"] # [doc = ""] # [doc = " # Panics"] # [doc = " This function panics if the number of elements yielded by the"] # [doc = " given iterator is not a multiple of the number of rows of the"] # [doc = " `Matrix`."] # [doc = ""] # [doc = " ```should_panic"] # [doc = " # use nalgebra::{DMatrix, Dyn, OMatrix};"] # [doc = " let data = vec![0, 1, 2,  // column 1"] # [doc = "                 3, 4, 5]; // column 2"] # [doc = ""] # [doc = " let mut matrix = DMatrix::from_vec(3, 2, data);"] # [doc = ""] # [doc = " // The following panics because the vec length is not a multiple of 3."] # [doc = " matrix.extend(vec![6, 7, 8, 9]);"] # [doc = " ```"] fn extend < I : IntoIterator < Item = T > > (& mut self , iter : I) { self . data . extend (iter) ; } }
+};
+}

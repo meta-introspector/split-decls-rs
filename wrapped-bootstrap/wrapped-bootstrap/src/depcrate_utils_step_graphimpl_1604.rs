@@ -1,0 +1,9 @@
+// Generated macro for impl_1604 (impl)
+macro_rules! Depcrate_utils_step_graphimpl_1604 {
+() => {
+// Module: crate::utils::step_graph
+// Provides: {"impl_1604"}
+// Dependencies: {}
+impl StepGraph { pub fn register_step_execution < S : Step > (& mut self , step : & S , parent : Option < & Box < dyn AnyDebug > > , dry_run : bool ,) { let key = get_graph_key (dry_run) ; let graph = self . graphs . entry (key . to_string ()) . or_insert_with (| | DotGraph :: default ()) ; let node_key = render_step (step) ; let label = if let Some (metadata) = step . metadata () { format ! ("{}{} [{}]" , metadata . get_name () , metadata . get_stage () . map (| s | format ! (" stage {s}")) . unwrap_or_default () , metadata . get_target ()) } else { pretty_step_name :: < S > () } ; let node = Node { label , tooltip : node_key . clone () } ; let node_handle = graph . add_node (node_key , node) ; if let Some (parent) = parent { let parent_key = render_step (parent) ; if let Some (src_node_handle) = graph . get_handle_by_key (& parent_key) { graph . add_edge (src_node_handle , node_handle) ; } } } pub fn register_cached_step < S : Step > (& mut self , step : & S , parent : & Box < dyn AnyDebug > , dry_run : bool ,) { let key = get_graph_key (dry_run) ; let graph = self . graphs . get_mut (key) . unwrap () ; let node_key = render_step (step) ; let parent_key = render_step (parent) ; if let Some (src_node_handle) = graph . get_handle_by_key (& parent_key) { if let Some (dst_node_handle) = graph . get_handle_by_key (& node_key) { graph . add_cached_edge (src_node_handle , dst_node_handle) ; } } } pub fn store_to_dot_files (self , directory : & Path) { for (key , graph) in self . graphs . into_iter () { let filename = directory . join (format ! ("step-graph{key}.dot")) ; t ! (graph . render (& filename)) ; } } }
+};
+}

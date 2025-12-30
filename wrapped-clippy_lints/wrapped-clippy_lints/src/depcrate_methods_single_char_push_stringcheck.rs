@@ -1,0 +1,9 @@
+// Generated macro for check (function)
+macro_rules! Depcrate_methods_single_char_push_stringcheck {
+() => {
+// Module: crate::methods::single_char_push_string
+// Provides: {"check"}
+// Dependencies: {}
+# [doc = " lint for length-1 `str`s as argument for `push_str`"] pub (super) fn check (cx : & LateContext < '_ > , expr : & hir :: Expr < '_ > , receiver : & hir :: Expr < '_ > , args : & [hir :: Expr < '_ >]) { let mut applicability = Applicability :: MachineApplicable ; if let Some (extension_string) = str_literal_to_char_literal (cx , & args [0] , & mut applicability , false) { let base_string_snippet = snippet_with_applicability (cx , receiver . span . source_callsite () , ".." , & mut applicability) ; let sugg = format ! ("{base_string_snippet}.push({extension_string})") ; span_lint_and_sugg (cx , SINGLE_CHAR_ADD_STR , expr . span , "calling `push_str()` using a single-character string literal" , "consider using `push` with a character literal" , sugg , applicability ,) ; } if let ExprKind :: AddrOf (BorrowKind :: Ref , _ , arg) = & args [0] . kind && let ExprKind :: MethodCall (path_segment , method_arg , [] , _) = & arg . kind && path_segment . ident . name == rustc_span :: sym :: to_string && (is_ref_char (cx , method_arg) || is_char (cx , method_arg)) { let base_string_snippet = snippet_with_applicability (cx , receiver . span . source_callsite () , ".." , & mut applicability) ; let extension_string = snippet_with_applicability (cx , method_arg . span . source_callsite () , ".." , & mut applicability) ; let deref_string = if is_ref_char (cx , method_arg) { "*" } else { "" } ; let sugg = format ! ("{base_string_snippet}.push({deref_string}{extension_string})") ; span_lint_and_sugg (cx , SINGLE_CHAR_ADD_STR , expr . span , "calling `push_str()` using a single-character converted to string" , "consider using `push` without `to_string()`" , sugg , applicability ,) ; } }
+};
+}

@@ -1,0 +1,51 @@
+// Generated module macro for crate::sync::mpmc
+macro_rules! Modcrate_sync_mpmc {
+() => {
+        Depcrate_sync_mpmcarray!();
+        Depcrate_sync_mpmccontext!();
+        Depcrate_sync_mpmccounter!();
+        Depcrate_sync_mpmcerror!();
+        Depcrate_sync_mpmclist!();
+        Depcrate_sync_mpmcselect!();
+        Depcrate_sync_mpmcutils!();
+        Depcrate_sync_mpmcwaker!();
+        Depcrate_sync_mpmczero!();
+        Depcrate_sync_mpmcuse_3184!();
+        Depcrate_sync_mpmcuse_3185!();
+        Depcrate_sync_mpmcuse_3186!();
+        Depcrate_sync_mpmcuse_3187!();
+        Depcrate_sync_mpmcchannel!();
+        Depcrate_sync_mpmcsync_channel!();
+        Depcrate_sync_mpmcSender!();
+        Depcrate_sync_mpmcSenderFlavor!();
+        Depcrate_sync_mpmcimpl_3192!();
+        Depcrate_sync_mpmcimpl_3193!();
+        Depcrate_sync_mpmcimpl_3194!();
+        Depcrate_sync_mpmcimpl_3195!();
+        Depcrate_sync_mpmcimpl_3196!();
+        Depcrate_sync_mpmcimpl_3197!();
+        Depcrate_sync_mpmcimpl_3198!();
+        Depcrate_sync_mpmcimpl_3199!();
+        Depcrate_sync_mpmcimpl_3200!();
+        Depcrate_sync_mpmcReceiver!();
+        Depcrate_sync_mpmcIter!();
+        Depcrate_sync_mpmcTryIter!();
+        Depcrate_sync_mpmcIntoIter!();
+        Depcrate_sync_mpmcimpl_3205!();
+        Depcrate_sync_mpmcimpl_3206!();
+        Depcrate_sync_mpmcimpl_3207!();
+        Depcrate_sync_mpmcimpl_3208!();
+        Depcrate_sync_mpmcimpl_3209!();
+        Depcrate_sync_mpmcReceiverFlavor!();
+        Depcrate_sync_mpmcimpl_3211!();
+        Depcrate_sync_mpmcimpl_3212!();
+        Depcrate_sync_mpmcimpl_3213!();
+        Depcrate_sync_mpmcimpl_3214!();
+        Depcrate_sync_mpmcimpl_3215!();
+        Depcrate_sync_mpmcimpl_3216!();
+        Depcrate_sync_mpmcimpl_3217!();
+        Depcrate_sync_mpmcimpl_3218!();
+        Depcrate_sync_mpmcimpl_3219!();
+        Depcrate_sync_mpmctests!();
+    };
+}

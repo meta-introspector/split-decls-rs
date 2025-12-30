@@ -1,0 +1,9 @@
+// Generated macro for macro_7023 (macro)
+macro_rules! Depcrate_methodsmacro_7023 {
+() => {
+// Module: crate::methods
+// Provides: {"macro_7023"}
+// Dependencies: {}
+declare_clippy_lint ! { # [doc = " ### What it does"] # [doc = " Checks for the usage of `_.to_owned()`, on a `Cow<'_, _>`."] # [doc = ""] # [doc = " ### Why is this bad?"] # [doc = " Calling `to_owned()` on a `Cow` creates a clone of the `Cow`"] # [doc = " itself, without taking ownership of the `Cow` contents (i.e."] # [doc = " it's equivalent to calling `Cow::clone`)."] # [doc = " The similarly named `into_owned` method, on the other hand,"] # [doc = " clones the `Cow` contents, effectively turning any `Cow::Borrowed`"] # [doc = " into a `Cow::Owned`."] # [doc = ""] # [doc = " Given the potential ambiguity, consider replacing `to_owned`"] # [doc = " with `clone` for better readability or, if getting a `Cow::Owned`"] # [doc = " was the original intent, using `into_owned` instead."] # [doc = ""] # [doc = " ### Example"] # [doc = " ```no_run"] # [doc = " # use std::borrow::Cow;"] # [doc = " let s = \"Hello world!\";"] # [doc = " let cow = Cow::Borrowed(s);"] # [doc = ""] # [doc = " let data = cow.to_owned();"] # [doc = " assert!(matches!(data, Cow::Borrowed(_)))"] # [doc = " ```"] # [doc = " Use instead:"] # [doc = " ```no_run"] # [doc = " # use std::borrow::Cow;"] # [doc = " let s = \"Hello world!\";"] # [doc = " let cow = Cow::Borrowed(s);"] # [doc = ""] # [doc = " let data = cow.clone();"] # [doc = " assert!(matches!(data, Cow::Borrowed(_)))"] # [doc = " ```"] # [doc = " or"] # [doc = " ```no_run"] # [doc = " # use std::borrow::Cow;"] # [doc = " let s = \"Hello world!\";"] # [doc = " let cow = Cow::Borrowed(s);"] # [doc = ""] # [doc = " let _data: String = cow.into_owned();"] # [doc = " ```"] # [clippy :: version = "1.65.0"] pub SUSPICIOUS_TO_OWNED , suspicious , "calls to `to_owned` on a `Cow<'_, _>` might not do what they are expected" }
+};
+}

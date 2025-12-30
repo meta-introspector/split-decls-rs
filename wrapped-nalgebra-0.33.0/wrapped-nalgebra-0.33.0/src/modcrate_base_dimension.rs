@@ -1,0 +1,41 @@
+// Generated module macro for crate::base::dimension
+macro_rules! Modcrate_base_dimension {
+() => {
+        Depcrate_base_dimensionuse_160!();
+        Depcrate_base_dimensionuse_161!();
+        Depcrate_base_dimensionuse_162!();
+        Depcrate_base_dimensionuse_163!();
+        Depcrate_base_dimensionuse_164!();
+        Depcrate_base_dimensionuse_165!();
+        Depcrate_base_dimensionuse_166!();
+        Depcrate_base_dimensionDyn!();
+        Depcrate_base_dimensionDynamic!();
+        Depcrate_base_dimensionimpl_169!();
+        Depcrate_base_dimensionimpl_170!();
+        Depcrate_base_dimensionimpl_171!();
+        Depcrate_base_dimensionIsDynamic!();
+        Depcrate_base_dimensionIsNotStaticOne!();
+        Depcrate_base_dimensionimpl_174!();
+        Depcrate_base_dimensionimpl_175!();
+        Depcrate_base_dimensionDim!();
+        Depcrate_base_dimensionimpl_177!();
+        Depcrate_base_dimensionimpl_178!();
+        Depcrate_base_dimensionimpl_179!();
+        Depcrate_base_dimensiondim_ops!();
+        Depcrate_base_dimensionmacro_181!();
+        Depcrate_base_dimensionConst!();
+        Depcrate_base_dimensionDimName!();
+        Depcrate_base_dimensionimpl_184!();
+        Depcrate_base_dimensionimpl_185!();
+        Depcrate_base_dimensionToConst!();
+        Depcrate_base_dimensionToTypenum!();
+        Depcrate_base_dimensionimpl_188!();
+        Depcrate_base_dimensionimpl_189!();
+        Depcrate_base_dimensionU1!();
+        Depcrate_base_dimensionimpl_191!();
+        Depcrate_base_dimensionimpl_192!();
+        Depcrate_base_dimensionfrom_to_typenum!();
+        Depcrate_base_dimensionmacro_194!();
+        Depcrate_base_dimensionU1!();
+    };
+}

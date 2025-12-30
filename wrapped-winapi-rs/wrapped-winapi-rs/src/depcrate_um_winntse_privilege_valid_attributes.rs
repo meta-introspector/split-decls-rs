@@ -1,0 +1,9 @@
+// Generated macro for SE_PRIVILEGE_VALID_ATTRIBUTES (const)
+macro_rules! Depcrate_um_winntSE_PRIVILEGE_VALID_ATTRIBUTES {
+() => {
+// Module: crate::um::winnt
+// Provides: {"SE_PRIVILEGE_VALID_ATTRIBUTES"}
+// Dependencies: {}
+pub const SE_PRIVILEGE_VALID_ATTRIBUTES : DWORD = SE_PRIVILEGE_ENABLED_BY_DEFAULT | SE_PRIVILEGE_ENABLED | SE_PRIVILEGE_REMOVED | SE_PRIVILEGE_USED_FOR_ACCESS ;
+};
+}

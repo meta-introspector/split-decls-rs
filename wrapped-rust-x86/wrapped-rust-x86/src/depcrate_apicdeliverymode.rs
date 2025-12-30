@@ -1,0 +1,9 @@
+// Generated macro for DeliveryMode (enum)
+macro_rules! Depcrate_apicDeliveryMode {
+() => {
+// Module: crate::apic
+// Provides: {"DeliveryMode"}
+// Dependencies: {}
+# [doc = " Specify IPI Delivery Mode"] # [allow (clippy :: upper_case_acronyms)] # [derive (Debug , Eq , PartialEq)] # [repr (u64)] pub enum DeliveryMode { # [doc = " Delivers the interrupt specified in the vector field to the target processor or processors."] Fixed = 0b000 , # [doc = " Same as fixed mode, except that the interrupt is delivered to the processor executing at the"] # [doc = " lowest priority among the set of processors specified in the destination field. The ability"] # [doc = " for a processor to send a lowest priority IPI is model specific and should be avoided by"] # [doc = " BIOS and operating system software."] LowestPriority = 0b001 , # [doc = " Delivers an SMI interrupt to the target processor or processors."] # [doc = " The vector field must be programmed to 00H for future compatibility."] SMI = 0b010 , # [doc = " Reserved"] _Reserved = 0b11 , # [doc = " Delivers an NMI interrupt to the target processor or processors."] # [doc = " The vector information is ignored."] NMI = 0b100 , # [doc = " Delivers an INIT request to the target processor or processors, which causes them to perform an INIT."] Init = 0b101 , # [doc = " Sends a special start-up IPI (called a SIPI) to the target processor or processors."] # [doc = " The vector typically points to a start-up routine that is part of the"] # [doc = " BIOS boot-strap code (see Section 8.4, Multiple-Processor (MP) Initialization). I"] # [doc = " PIs sent with this delivery mode are not automatically retried if the source"] # [doc = " APIC is unable to deliver it. It is up to the software to deter- mine if the"] # [doc = " SIPI was not successfully delivered and to reissue the SIPI if necessary."] StartUp = 0b110 , }
+};
+}

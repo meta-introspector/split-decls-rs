@@ -1,0 +1,9 @@
+// Generated macro for spawn (function)
+macro_rules! Depcrate_runnablespawn {
+() => {
+// Module: crate::runnable
+// Provides: {"spawn"}
+// Dependencies: {}
+# [doc = " Creates a new task."] # [doc = ""] # [doc = " The returned [`Runnable`] is used to poll the `future`, and the [`Task`] is used to await its"] # [doc = " output."] # [doc = ""] # [doc = " Method [`run()`][`Runnable::run()`] polls the task's future once. Then, the [`Runnable`]"] # [doc = " vanishes and only reappears when its [`Waker`] wakes the task, thus scheduling it to be run"] # [doc = " again."] # [doc = ""] # [doc = " When the task is woken, its [`Runnable`] is passed to the `schedule` function."] # [doc = " The `schedule` function should not attempt to run the [`Runnable`] nor to drop it. Instead, it"] # [doc = " should push it into a task queue so that it can be processed later."] # [doc = ""] # [doc = " If you need to spawn a future that does not implement [`Send`] or isn't `'static`, consider"] # [doc = " using [`spawn_local()`] or [`spawn_unchecked()`] instead."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " // The future inside the task."] # [doc = " let future = async {"] # [doc = "     println!(\"Hello, world!\");"] # [doc = " };"] # [doc = ""] # [doc = " // A function that schedules the task when it gets woken up."] # [doc = " let (s, r) = flume::unbounded();"] # [doc = " let schedule = move |runnable| s.send(runnable).unwrap();"] # [doc = ""] # [doc = " // Create a task with the future and the schedule function."] # [doc = " let (runnable, task) = async_task::spawn(future, schedule);"] # [doc = " ```"] pub fn spawn < F , S > (future : F , schedule : S) -> (Runnable , Task < F :: Output >) where F : Future + Send + 'static , F :: Output : Send + 'static , S : Schedule + Send + Sync + 'static , { let builder = Builder :: new () ; unsafe { spawn_unchecked ! (F , S , () , builder , schedule , raw => { future }) } }
+};
+}

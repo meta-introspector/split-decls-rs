@@ -1,0 +1,9 @@
+// Generated macro for ReentrantLock (struct)
+macro_rules! Depcrate_sync_reentrant_lockReentrantLock {
+() => {
+// Module: crate::sync::reentrant_lock
+// Provides: {"ReentrantLock"}
+// Dependencies: {}
+# [doc = " A re-entrant mutual exclusion lock"] # [doc = ""] # [doc = " This lock will block *other* threads waiting for the lock to become"] # [doc = " available. The thread which has already locked the mutex can lock it"] # [doc = " multiple times without blocking, preventing a common source of deadlocks."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " Allow recursively calling a function needing synchronization from within"] # [doc = " a callback (this is how [`StdoutLock`](crate::io::StdoutLock) is currently"] # [doc = " implemented):"] # [doc = ""] # [doc = " ```"] # [doc = " #![feature(reentrant_lock)]"] # [doc = ""] # [doc = " use std::cell::RefCell;"] # [doc = " use std::sync::ReentrantLock;"] # [doc = ""] # [doc = " pub struct Log {"] # [doc = "     data: RefCell<String>,"] # [doc = " }"] # [doc = ""] # [doc = " impl Log {"] # [doc = "     pub fn append(&self, msg: &str) {"] # [doc = "         self.data.borrow_mut().push_str(msg);"] # [doc = "     }"] # [doc = " }"] # [doc = ""] # [doc = " static LOG: ReentrantLock<Log> = ReentrantLock::new(Log { data: RefCell::new(String::new()) });"] # [doc = ""] # [doc = " pub fn with_log<R>(f: impl FnOnce(&Log) -> R) -> R {"] # [doc = "     let log = LOG.lock();"] # [doc = "     f(&*log)"] # [doc = " }"] # [doc = ""] # [doc = " with_log(|log| {"] # [doc = "     log.append(\"Hello\");"] # [doc = "     with_log(|log| log.append(\" there!\"));"] # [doc = " });"] # [doc = " ```"] # [doc = ""] # [unstable (feature = "reentrant_lock" , issue = "121440")] pub struct ReentrantLock < T : ? Sized > { mutex : sys :: Mutex , owner : Tid , lock_count : UnsafeCell < u32 > , data : T , }
+};
+}

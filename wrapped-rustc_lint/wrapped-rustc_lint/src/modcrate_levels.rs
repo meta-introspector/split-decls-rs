@@ -1,0 +1,51 @@
+// Generated module macro for crate::levels
+macro_rules! Modcrate_levels {
+() => {
+        Depcrate_levelsuse_585!();
+        Depcrate_levelsuse_586!();
+        Depcrate_levelsuse_587!();
+        Depcrate_levelsuse_588!();
+        Depcrate_levelsuse_589!();
+        Depcrate_levelsuse_590!();
+        Depcrate_levelsuse_591!();
+        Depcrate_levelsuse_592!();
+        Depcrate_levelsuse_593!();
+        Depcrate_levelsuse_594!();
+        Depcrate_levelsuse_595!();
+        Depcrate_levelsuse_596!();
+        Depcrate_levelsuse_597!();
+        Depcrate_levelsuse_598!();
+        Depcrate_levelsuse_599!();
+        Depcrate_levelsuse_600!();
+        Depcrate_levelsuse_601!();
+        Depcrate_levelsuse_602!();
+        Depcrate_levelsuse_603!();
+        Depcrate_levelsuse_604!();
+        Depcrate_levelsuse_605!();
+        Depcrate_levelsuse_606!();
+        Depcrate_levelsuse_607!();
+        Depcrate_levelsuse_608!();
+        Depcrate_levelsuse_609!();
+        Depcrate_levelsuse_610!();
+        Depcrate_levelsLintLevelSets!();
+        Depcrate_levelsmacro_612!();
+        Depcrate_levelsLintSet!();
+        Depcrate_levelsimpl_614!();
+        Depcrate_levelslints_that_dont_need_to_run!();
+        Depcrate_levelsshallow_lint_levels_on!();
+        Depcrate_levelsTopDown!();
+        Depcrate_levelsLintLevelsProvider!();
+        Depcrate_levelsimpl_619!();
+        Depcrate_levelsLintLevelQueryMap!();
+        Depcrate_levelsimpl_621!();
+        Depcrate_levelsimpl_622!();
+        Depcrate_levelsimpl_623!();
+        Depcrate_levelsLintLevelsBuilder!();
+        Depcrate_levelsBuilderPush!();
+        Depcrate_levelsimpl_626!();
+        Depcrate_levelsimpl_627!();
+        Depcrate_levelsimpl_628!();
+        Depcrate_levelsprovide!();
+        Depcrate_levelsparse_lint_and_tool_name!();
+    };
+}

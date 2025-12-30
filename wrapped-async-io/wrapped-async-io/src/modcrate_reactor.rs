@@ -1,0 +1,51 @@
+// Generated module macro for crate::reactor
+macro_rules! Modcrate_reactor {
+() => {
+        Depcrate_reactoruse_35!();
+        Depcrate_reactoruse_36!();
+        Depcrate_reactoruse_37!();
+        Depcrate_reactoruse_38!();
+        Depcrate_reactoruse_39!();
+        Depcrate_reactoruse_40!();
+        Depcrate_reactoruse_41!();
+        Depcrate_reactoruse_42!();
+        Depcrate_reactoruse_43!();
+        Depcrate_reactoruse_44!();
+        Depcrate_reactoruse_45!();
+        Depcrate_reactoruse_46!();
+        Depcrate_reactoruse_47!();
+        Depcrate_reactoruse_48!();
+        Depcrate_reactoruse_49!();
+        Depcrate_reactoruse_50!();
+        Depcrate_reactormacro_51!();
+        Depcrate_reactorTIMER_QUEUE_SIZE!();
+        Depcrate_reactorTIMER_QUEUE_SIZE!();
+        Depcrate_reactorREAD!();
+        Depcrate_reactorWRITE!();
+        Depcrate_reactorReactor!();
+        Depcrate_reactorimpl_57!();
+        Depcrate_reactorReactorLock!();
+        Depcrate_reactorimpl_59!();
+        Depcrate_reactorTimerOp!();
+        Depcrate_reactorSource!();
+        Depcrate_reactorDirection!();
+        Depcrate_reactorimpl_63!();
+        Depcrate_reactorimpl_64!();
+        Depcrate_reactorReadable!();
+        Depcrate_reactorimpl_66!();
+        Depcrate_reactorimpl_67!();
+        Depcrate_reactorReadableOwned!();
+        Depcrate_reactorimpl_69!();
+        Depcrate_reactorimpl_70!();
+        Depcrate_reactorWritable!();
+        Depcrate_reactorimpl_72!();
+        Depcrate_reactorimpl_73!();
+        Depcrate_reactorWritableOwned!();
+        Depcrate_reactorimpl_75!();
+        Depcrate_reactorimpl_76!();
+        Depcrate_reactorReady!();
+        Depcrate_reactorimpl_78!();
+        Depcrate_reactorimpl_79!();
+        Depcrate_reactorimpl_80!();
+    };
+}

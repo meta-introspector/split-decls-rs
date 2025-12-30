@@ -1,0 +1,68 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcrate_errorimpl_33.rs");
+include!("depcrate_layeruse_42.rs");
+include!("depcrate_errorerased.rs");
+include!("depcrate_layerwithcontext.rs");
+include!("depcrate_errorimpl_29.rs");
+include!("depcrate_backtraceimpl_8.rs");
+include!("depcrate_errorinstrumenterror.rs");
+include!("depcrate_backtracespantracestatusinner.rs");
+include!("depcrate_errorimpl_28.rs");
+include!("depcrate_layeruse_41.rs");
+include!("depcrate_layererrorlayer.rs");
+include!("depcrate_errorobject_ref.rs");
+include!("depcrate_layerimpl_46.rs");
+include!("depcrateerror.rs");
+include!("depcrate_errorextractspantrace.rs");
+include!("depcrate_errorimpl_25.rs");
+include!("depcrate_backtraceimpl_11.rs");
+include!("depcrate_errorerrorvtable.rs");
+include!("depcrate_errorimpl_20.rs");
+include!("depcrate_backtraceimpl_6.rs");
+include!("depcrate_backtraceuse_3.rs");
+include!("depcrate_backtracetry_bool.rs");
+include!("depcrate_backtracespantracestatus.rs");
+include!("depcrate_errorimpl_36.rs");
+include!("depcratebacktrace.rs");
+include!("depcrate_erroruse_15.rs");
+include!("depcrate_layerimpl_49.rs");
+include!("depcrate_erroruse_16.rs");
+include!("depcrateuse_52.rs");
+include!("depcrate_backtraceuse_4.rs");
+include!("depcrateprelude.rs");
+include!("depcrateuse_53.rs");
+include!("depcrate_layerimpl_50.rs");
+include!("depcrate_backtraceuse_2.rs");
+include!("depcrate_errorimpl_30.rs");
+include!("depcrate_layeruse_43.rs");
+include!("depcrate_errorimpl_22.rs");
+include!("depcrate_errorinstrumentresult.rs");
+include!("depcrate_layerimpl_47.rs");
+include!("depcrate_layerimpl_48.rs");
+include!("depcrateuse_51.rs");
+include!("depcrate_errorimpl_27.rs");
+include!("depcratelayer.rs");
+include!("depcrate_errorerrorimpl.rs");
+include!("depcrate_erroruse_17.rs");
+include!("depcrate_layeruse_38.rs");
+include!("depcrate_backtracespantrace.rs");
+include!("depcrate_layeruse_39.rs");
+include!("depcrate_errorimpl_35.rs");
+include!("depcrate_errorimpl_26.rs");
+include!("depcrate_backtracetests.rs");
+include!("depcrate_layeruse_40.rs");
+include!("depcrate_backtraceimpl_12.rs");
+include!("depcrate_errortracederror.rs");
+include!("modcrate_layer.rs");
+include!("modcrate_error.rs");
+include!("modcrate_backtrace.rs");
+include!("modcrate.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate_layer!();
+    Modcrate_error!();
+    Modcrate_backtrace!();
+    Modcrate!();
+}

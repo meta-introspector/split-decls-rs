@@ -1,0 +1,9 @@
+// Generated macro for build_slice_type_di_node (function)
+macro_rules! Depcrate_debuginfo_metadatabuild_slice_type_di_node {
+() => {
+// Module: crate::debuginfo::metadata
+// Provides: {"build_slice_type_di_node"}
+// Dependencies: {}
+# [doc = " Create debuginfo for `[T]` and `str`. These are unsized."] # [doc = ""] # [doc = " NOTE: We currently emit just emit the debuginfo for the element type here"] # [doc = " (i.e. `T` for slices and `u8` for `str`), so that we end up with"] # [doc = " `*const T` for the `data_ptr` field of the corresponding wide-pointer"] # [doc = " debuginfo of `&[T]`."] # [doc = ""] # [doc = " It would be preferable and more accurate if we emitted a DIArray of T"] # [doc = " without an upper bound instead. That is, LLVM already supports emitting"] # [doc = " debuginfo of arrays of unknown size. But GDB currently seems to end up"] # [doc = " in an infinite loop when confronted with such a type."] # [doc = ""] # [doc = " As a side effect of the current encoding every instance of a type like"] # [doc = " `struct Foo { unsized_field: [u8] }` will look like"] # [doc = " `struct Foo { unsized_field: u8 }` in debuginfo. If the length of the"] # [doc = " slice is zero, then accessing `unsized_field` in the debugger would"] # [doc = " result in an out-of-bounds access."] fn build_slice_type_di_node < 'll , 'tcx > (cx : & CodegenCx < 'll , 'tcx > , slice_type : Ty < 'tcx > , unique_type_id : UniqueTypeId < 'tcx > ,) -> DINodeCreationResult < 'll > { let element_type = match slice_type . kind () { ty :: Slice (element_type) => * element_type , ty :: Str => cx . tcx . types . u8 , _ => { bug ! ("Only ty::Slice is valid for build_slice_type_di_node(). Found {:?} instead." , slice_type) } } ; let element_type_di_node = type_di_node (cx , element_type) ; return_if_di_node_created_in_meantime ! (cx , unique_type_id) ; DINodeCreationResult { di_node : element_type_di_node , already_stored_in_typemap : false } }
+};
+}

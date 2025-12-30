@@ -1,0 +1,9 @@
+// Generated macro for D3D11_COMMONSHADER_TEXCOORD_RANGE_REDUCTION_MIN (const)
+macro_rules! Depcrate_um_d3d11D3D11_COMMONSHADER_TEXCOORD_RANGE_REDUCTION_MIN {
+() => {
+// Module: crate::um::d3d11
+// Provides: {"D3D11_COMMONSHADER_TEXCOORD_RANGE_REDUCTION_MIN"}
+// Dependencies: {}
+pub const D3D11_COMMONSHADER_TEXCOORD_RANGE_REDUCTION_MIN : c_long = - 10 ;
+};
+}

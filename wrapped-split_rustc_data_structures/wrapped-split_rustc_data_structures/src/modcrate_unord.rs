@@ -1,0 +1,53 @@
+// Generated module macro for crate::unord
+macro_rules! Modcrate_unord {
+() => {
+        Depcrate_unorduse_842!();
+        Depcrate_unorduse_843!();
+        Depcrate_unorduse_844!();
+        Depcrate_unorduse_845!();
+        Depcrate_unorduse_846!();
+        Depcrate_unorduse_847!();
+        Depcrate_unorduse_848!();
+        Depcrate_unorduse_849!();
+        Depcrate_unorduse_850!();
+        Depcrate_unordUnordItems!();
+        Depcrate_unordimpl_852!();
+        Depcrate_unordimpl_853!();
+        Depcrate_unordimpl_854!();
+        Depcrate_unordimpl_855!();
+        Depcrate_unordimpl_856!();
+        Depcrate_unordUnordCollection!();
+        Depcrate_unordUnordSet!();
+        Depcrate_unordimpl_859!();
+        Depcrate_unordimpl_860!();
+        Depcrate_unordimpl_861!();
+        Depcrate_unordExtendUnord!();
+        Depcrate_unordimpl_863!();
+        Depcrate_unordimpl_864!();
+        Depcrate_unordimpl_865!();
+        Depcrate_unordimpl_866!();
+        Depcrate_unordimpl_867!();
+        Depcrate_unordimpl_868!();
+        Depcrate_unordUnordMap!();
+        Depcrate_unordimpl_870!();
+        Depcrate_unordimpl_871!();
+        Depcrate_unordimpl_872!();
+        Depcrate_unordimpl_873!();
+        Depcrate_unordimpl_874!();
+        Depcrate_unordimpl_875!();
+        Depcrate_unordimpl_876!();
+        Depcrate_unordimpl_877!();
+        Depcrate_unordUnordBag!();
+        Depcrate_unordimpl_879!();
+        Depcrate_unordimpl_880!();
+        Depcrate_unordimpl_881!();
+        Depcrate_unordimpl_882!();
+        Depcrate_unordimpl_883!();
+        Depcrate_unordto_sorted_vec!();
+        Depcrate_unordhash_iter_order_independent!();
+        Depcrate_unordimpl_886!();
+        Depcrate_unordimpl_887!();
+        Depcrate_unordimpl_888!();
+        Depcrate_unordimpl_889!();
+    };
+}

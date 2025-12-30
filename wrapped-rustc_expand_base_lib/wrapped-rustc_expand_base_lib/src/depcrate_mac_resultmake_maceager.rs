@@ -1,0 +1,9 @@
+// Generated macro for make_MacEager (macro)
+macro_rules! Depcrate_mac_resultmake_MacEager {
+() => {
+// Module: crate::mac_result
+// Provides: {"make_MacEager"}
+// Dependencies: {}
+macro_rules ! make_MacEager { ($ ($ fld : ident : $ t : ty ,) *) => { # [doc = " `MacResult` implementation for the common case where you've already"] # [doc = " built each form of AST that you might return."] # [derive (Default)] pub struct MacEager { $ (pub $ fld : Option <$ t >,) * } impl MacEager { $ (pub fn $ fld < DRT : OpaqueDeriveResolution + 'static > (v : $ t) -> Box < dyn MacResult < DRT >> { Box :: new (MacEager { $ fld : Some (v) , .. Default :: default () }) }) * } } }
+};
+}

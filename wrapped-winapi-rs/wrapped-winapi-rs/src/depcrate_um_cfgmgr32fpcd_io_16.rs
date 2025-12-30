@@ -1,0 +1,9 @@
+// Generated macro for fPCD_IO_16 (const)
+macro_rules! Depcrate_um_cfgmgr32fPCD_IO_16 {
+() => {
+// Module: crate::um::cfgmgr32
+// Provides: {"fPCD_IO_16"}
+// Dependencies: {}
+pub const fPCD_IO_16 : DWORD = 0x1 ;
+};
+}

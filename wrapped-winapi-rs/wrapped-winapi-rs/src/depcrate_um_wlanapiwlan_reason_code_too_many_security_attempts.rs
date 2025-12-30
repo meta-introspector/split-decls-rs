@@ -1,0 +1,9 @@
+// Generated macro for WLAN_REASON_CODE_TOO_MANY_SECURITY_ATTEMPTS (const)
+macro_rules! Depcrate_um_wlanapiWLAN_REASON_CODE_TOO_MANY_SECURITY_ATTEMPTS {
+() => {
+// Module: crate::um::wlanapi
+// Provides: {"WLAN_REASON_CODE_TOO_MANY_SECURITY_ATTEMPTS"}
+// Dependencies: {}
+pub const WLAN_REASON_CODE_TOO_MANY_SECURITY_ATTEMPTS : WLAN_REASON_CODE = WLAN_REASON_CODE_MSM_CONNECT_BASE + 18 ;
+};
+}

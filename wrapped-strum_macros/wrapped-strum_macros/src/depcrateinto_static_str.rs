@@ -1,0 +1,9 @@
+// Generated macro for into_static_str (function)
+macro_rules! Depcrateinto_static_str {
+() => {
+// Module: crate
+// Provides: {"into_static_str"}
+// Dependencies: {}
+# [doc = " Implements `From<MyEnum> for &'static str` on an enum."] # [doc = ""] # [doc = " Implements `From<YourEnum>` and `From<&'a YourEnum>` for `&'static str`. This is"] # [doc = " useful for turning an enum variant into a static string."] # [doc = " The Rust `std` provides a blanket impl of the reverse direction - i.e. `impl Into<&'static str> for YourEnum`."] # [doc = ""] # [doc = " ```"] # [doc = " use strum_macros::IntoStaticStr;"] # [doc = ""] # [doc = " #[derive(IntoStaticStr)]"] # [doc = " enum State<'a> {"] # [doc = "     Initial(&'a str),"] # [doc = "     Finished,"] # [doc = " }"] # [doc = ""] # [doc = " fn verify_state<'a>(s: &'a str) {"] # [doc = "     let mut state = State::Initial(s);"] # [doc = "     // The following won't work because the lifetime is incorrect:"] # [doc = "     // let wrong: &'static str = state.as_ref();"] # [doc = "     // using the trait implemented by the derive works however:"] # [doc = "     let right: &'static str = state.into();"] # [doc = "     assert_eq!(\"Initial\", right);"] # [doc = "     state = State::Finished;"] # [doc = "     let done: &'static str = state.into();"] # [doc = "     assert_eq!(\"Finished\", done);"] # [doc = " }"] # [doc = ""] # [doc = " verify_state(&\"hello world\".to_string());"] # [doc = " ```"] # [proc_macro_derive (IntoStaticStr , attributes (strum))] pub fn into_static_str (input : proc_macro :: TokenStream) -> proc_macro :: TokenStream { let ast = syn :: parse_macro_input ! (input as DeriveInput) ; let toks = macros :: as_ref_str :: as_static_str_inner (& ast , & macros :: as_ref_str :: GenerateTraitVariant :: From ,) . unwrap_or_else (| err | err . to_compile_error ()) ; debug_print_generated (& ast , & toks) ; toks . into () }
+};
+}

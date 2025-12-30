@@ -1,0 +1,9 @@
+// Generated macro for Format (enum)
+macro_rules! DepcrateFormat {
+() => {
+// Module: crate
+// Provides: {"Format"}
+// Dependencies: {}
+# [doc = " The supported container formats for use in [`write_stream()`]."] # [derive (Default , PartialEq , Eq , Copy , Clone , Debug)] pub enum Format { # [doc = " An internal format that is suitable only for intra-process communication."] # [doc = ""] # [doc = " All transformations in the options are ignored. Calling [`write_stream`] is disallowed"] # [doc = " as it's more efficient to call [gix_worktree_stream::Stream::into_read()] right away."] # [doc = " It is provided here as a basis available without extra dependencies, and as a debugging tool."] # [default] InternalTransientNonPersistable , # [doc = " A standard `tar` archive."] # [doc = ""] # [doc = " Use it as well if a custom container format is desired. The idea is to decode it on a separate thread"] # [doc = " to rewrite the data to the desired format."] Tar , # [doc = " A convenience format that will `gzip` deflate the `tar` stream."] TarGz { # [doc = " If `None`, use the default compression level. Otherwise use the given one which"] # [doc = " ranges from 0-9 for the deflate algorithm."] compression_level : Option < u8 > , } , # [doc = " A standard `zip` archive. Note that this format silently converts illformed UTF-8 to UTF-8, which will"] # [doc = " equal a change of path."] # [doc = ""] # [doc = " Requires the `zip` feature toggle to have an effect."] # [doc = ""] # [doc = " ### Shortcoming"] # [doc = ""] # [doc = " Even though symlinks are stored as such, for some reason at least on MacOS those aren't restored. That works,"] # [doc = " however, when letting `git` create the archive."] Zip { # [doc = " If `None`, use the default compression level. Otherwise use the given one which"] # [doc = " ranges from 0-9 for the deflate algorithm."] compression_level : Option < u8 > , } , }
+};
+}

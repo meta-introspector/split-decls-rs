@@ -1,0 +1,9 @@
+// Generated macro for function (module)
+macro_rules! Depcrate_worktree_encode_to_gitfunction {
+() => {
+// Module: crate::worktree::encode_to_git
+// Provides: {"function"}
+// Dependencies: {}
+pub (crate) mod function { use encoding_rs :: DecoderResult ; use super :: { Error , RoundTripCheck } ; # [doc = " Decode `src` according to `src_encoding` to `UTF-8` for storage in git and place it in `buf`."] # [doc = " Note that the encoding is always applied, there is no conditional even if `src_encoding` already is `UTF-8`."] pub fn encode_to_git (src : & [u8] , src_encoding : & 'static encoding_rs :: Encoding , buf : & mut Vec < u8 > , round_trip : RoundTripCheck ,) -> Result < () , Error > { let mut decoder = src_encoding . new_decoder_with_bom_removal () ; let buf_len = decoder . max_utf8_buffer_length_without_replacement (src . len ()) . ok_or (Error :: Overflow { input_len : src . len () }) ? ; buf . clear () ; buf . resize (buf_len , 0) ; let (res , read , written) = decoder . decode_to_utf8_without_replacement (src , buf , true) ; match res { DecoderResult :: InputEmpty => { assert ! (buf_len >= written , "encoding_rs estimates the maximum amount of bytes written correctly") ; assert_eq ! (read , src . len () , "input buffer should be fully consumed") ; buf . truncate (written) ; } DecoderResult :: OutputFull => { unreachable ! ("we assure that the output buffer is big enough as per the encoder's estimate") } DecoderResult :: Malformed (_ , _) => { return Err (Error :: Malformed { encoding : src_encoding . name () , }) } } match round_trip { RoundTripCheck :: Fail => { # [allow (unsafe_code)] let str = unsafe { std :: str :: from_utf8_unchecked (buf) } ; let (should_equal_src , _actual_encoding , _had_errors) = src_encoding . encode (str) ; if should_equal_src != src { return Err (Error :: RoundTrip { src_encoding : src_encoding . name () , dest_encoding : "UTF-8" , }) ; } } RoundTripCheck :: Skip => { } } Ok (()) } }
+};
+}

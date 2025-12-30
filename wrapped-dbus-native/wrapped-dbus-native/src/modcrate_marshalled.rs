@@ -1,0 +1,57 @@
+// Generated module macro for crate::marshalled
+macro_rules! Modcrate_marshalled {
+() => {
+        Depcrate_marshalledIS_BIG_ENDIAN!();
+        Depcrate_marshalledIS_BIG_ENDIAN!();
+        Depcrate_marshalledARRAY_MAX_LEN!();
+        Depcrate_marshalleduse_71!();
+        Depcrate_marshalleduse_72!();
+        Depcrate_marshalleduse_73!();
+        Depcrate_marshalleduse_74!();
+        Depcrate_marshalleduse_75!();
+        Depcrate_marshalledMulti!();
+        Depcrate_marshalledMultiIter!();
+        Depcrate_marshalledSingle!();
+        Depcrate_marshalledimpl_79!();
+        Depcrate_marshalledimpl_80!();
+        Depcrate_marshalledalign_up!();
+        Depcrate_marshalledalign_of!();
+        Depcrate_marshalledimpl_83!();
+        Depcrate_marshalledArray!();
+        Depcrate_marshalledimpl_85!();
+        Depcrate_marshalledimpl_86!();
+        Depcrate_marshalledArrayBuf!();
+        Depcrate_marshalledimpl_88!();
+        Depcrate_marshalledimpl_89!();
+        Depcrate_marshalledDictBuf!();
+        Depcrate_marshalledimpl_91!();
+        Depcrate_marshalledimpl_92!();
+        Depcrate_marshalledStructBuf!();
+        Depcrate_marshalledimpl_94!();
+        Depcrate_marshalledimpl_95!();
+        Depcrate_marshalledVariantBuf!();
+        Depcrate_marshalledimpl_97!();
+        Depcrate_marshalledimpl_98!();
+        Depcrate_marshalledDict!();
+        Depcrate_marshalledParsed!();
+        Depcrate_marshalledimpl_101!();
+        Depcrate_marshalledMultiBuf!();
+        Depcrate_marshalledimpl_103!();
+        Depcrate_marshalledZEROS!();
+        Depcrate_marshalledalign_buf!();
+        Depcrate_marshalledMarshal!();
+        Depcrate_marshalledmarshal_impl!();
+        Depcrate_marshalledmacro_108!();
+        Depcrate_marshalledmacro_109!();
+        Depcrate_marshalledmacro_110!();
+        Depcrate_marshalledmacro_111!();
+        Depcrate_marshalledmacro_112!();
+        Depcrate_marshalledmacro_113!();
+        Depcrate_marshalledmacro_114!();
+        Depcrate_marshalledmacro_115!();
+        Depcrate_marshalledimpl_116!();
+        Depcrate_marshalledimpl_117!();
+        Depcrate_marshalledimpl_118!();
+        Depcrate_marshalledimpl_119!();
+    };
+}

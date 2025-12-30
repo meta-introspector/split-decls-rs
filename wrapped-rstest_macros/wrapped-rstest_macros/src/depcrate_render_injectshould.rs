@@ -1,0 +1,27 @@
+// Generated macro for should (module)
+macro_rules! Depcrate_render_injectshould {
+() => {
+// Module: crate::render::inject
+// Provides: {"should"}
+// Dependencies: {}
+# [cfg (test)] mod should { use super :: * ; use crate :: { test :: { assert_eq , * } , utils :: fn_args , } ; # [rstest] # [case :: as_is ("fix: String" , "let fix = fix::default();")] # [case :: without_underscore ("_fix: String" , "let _fix = fix::default();")] # [case :: do_not_remove_inner_underscores ("f_i_x: String" , "let f_i_x = f_i_x::default();")] # [case :: do_not_remove_double_underscore ("__fix: String" , "let __fix = __fix::default();")] # [case :: preserve_mut_but_annotate_as_allow_unused_mut ("mut fix: String" , "#[allow(unused_mut)] let mut fix = fix::default();")] fn call_fixture (# [case] arg_str : & str , # [case] expected : & str) { let arg = arg_str . ast () ; let injected = ArgumentResolver :: new (& EmptyResolver { } , & []) . resolve (& arg) . unwrap () ; assert_eq ! (injected , expected . ast ()) ; } # [rstest] # [case :: as_is ("fix: String" , ("fix" , expr ("bar()")) , "let fix = bar();")] # [case :: with_allow_unused_mut ("mut fix: String" , ("fix" , expr ("bar()")) , "#[allow(unused_mut)] let mut fix = bar();")] # [case :: without_underscore ("_fix: String" , ("fix" , expr ("bar()")) , "let _fix = bar();")] # [case :: without_remove_underscore_if_value ("_orig: S" , ("_orig" , expr ("S{}")) , r#"let _orig = S{};"#)] fn call_given_fixture (# [case] arg_str : & str , # [case] rule : (& str , Expr) , # [case] expected : & str ,) { let arg = arg_str . ast () ; let mut resolver = std :: collections :: HashMap :: new () ; resolver . insert (pat (rule . 0) , & rule . 1) ; let injected = ArgumentResolver :: new (& resolver , & []) . resolve (& arg) . unwrap () ; assert_eq ! (injected , expected . ast ()) ; } fn _mock_conversion_code (fixture : Cow < Expr > , arg_type : & Type) -> Expr { parse_quote ! { # fixture as # arg_type } } # [rstest] # [case :: implement_it ("fn test(arg: MyType){}" , 0 , r#"let arg = "value to convert" as MyType;"#)] # [case :: discard_impl ("fn test(arg: impl AsRef<str>){}" , 0 , r#"let arg = "value to convert";"#)] # [case :: discard_generic_type ("fn test<S: AsRef<str>>(arg: S){}" , 0 , r#"let arg = "value to convert";"#)] fn handle_magic_conversion (# [case] fn_str : & str , # [case] n_arg : usize , # [case] expected : & str) { let function = fn_str . ast () ; let arg = fn_args (& function) . nth (n_arg) . unwrap () ; let generics = function . sig . generics . type_params () . map (| tp | & tp . ident) . cloned () . collect :: < Vec < _ > > () ; let mut resolver = std :: collections :: HashMap :: new () ; let expr = expr (r#""value to convert""#) ; resolver . insert (arg . maybe_pat () . unwrap () . clone () , & expr) ; let ag = ArgumentResolver { resolver : & resolver , generic_types_names : & generics , magic_conversion : & _mock_conversion_code , } ; let injected = ag . resolve (& arg) . unwrap () ; assert_eq ! (injected , expected . ast ()) ; } # [rstest] # [case :: simple_type ("fn test(arg: MyType) {}" , 0 , "let arg = {
+            use rstest::magic_conversion::*;
+            (&&&Magic::<MyType>(core::marker::PhantomData)).magic_conversion(\"value to convert\")
+        };")] # [case :: discard_impl ("fn test(arg: impl AsRef<str>) {}" , 0 , r#"let arg = "value to convert";"#)] # [case :: discard_generic_type ("fn test<S: AsRef<str>>(arg: S) {}" , 0 , r#"let arg = "value to convert";"#)] # [case :: reference_type ("fn test(arg: &MyType) {}" , 0 , "let arg = {
+            use rstest::magic_conversion::*;
+            (&&&Magic::<&MyType>(core::marker::PhantomData)).magic_conversion(\"value to convert\")
+        };")] # [case :: mutable_reference_type ("fn test(arg: &mut MyType) {}" , 0 , "let arg = {
+            use rstest::magic_conversion::*;
+            (&&&Magic::<&mut MyType>(core::marker::PhantomData)).magic_conversion(\"value to convert\")
+        };")] # [case :: generic_type_with_lifetime ("fn test<'a, T>(arg: &'a T) where T: Default {}" , 0 , "let arg = {
+            use rstest::magic_conversion::*;
+            (&&&Magic::<&'a T>(core::marker::PhantomData)).magic_conversion(\"value to convert\")
+        };")] # [case :: type_with_generic_parameters ("fn test(arg: Option<MyType>) {}" , 0 , "let arg = {
+            use rstest::magic_conversion::*;
+            (&&&Magic::<Option<MyType>>(core::marker::PhantomData)).magic_conversion(\"value to convert\")
+        };")] # [case :: complex_type ("fn test(arg: Result<Vec<MyType>, MyError>) {}" , 0 , "let arg = {
+            use rstest::magic_conversion::*;
+            (&&&Magic::<Result<Vec<MyType>, MyError>>(core::marker::PhantomData)).magic_conversion(\"value to convert\")
+        };")] fn generated_code_uses_phantom_data (# [case] fn_str : & str , # [case] n_arg : usize , # [case] expected : & str ,) { let function = fn_str . ast () ; let arg = fn_args (& function) . nth (n_arg) . unwrap () ; let generics = function . sig . generics . type_params () . map (| tp | & tp . ident) . cloned () . collect :: < Vec < _ > > () ; let mut resolver = std :: collections :: HashMap :: new () ; let expr = expr (r#""value to convert""#) ; resolver . insert (arg . maybe_pat () . unwrap () . clone () , & expr) ; let ag = ArgumentResolver :: new (& resolver , & generics) ; let injected = ag . resolve (& arg) . unwrap () ; assert_eq ! (injected , expected . ast ()) ; } }
+};
+}

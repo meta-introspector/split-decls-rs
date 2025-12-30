@@ -1,0 +1,49 @@
+// Generated module macro for crate
+macro_rules! Modcrate {
+() => {
+        Depcrateuse_1!();
+        Depcrateuse_2!();
+        Depcrateuse_3!();
+        Depcrateuse_4!();
+        Depcrateuse_5!();
+        DepcrateFFI_DIR!();
+        DepcrateFFI!();
+        DepcrateASYNC_PRIMITIVE!();
+        DepcrateASYNC_FUTURE!();
+        DepcrateASYNC_WASM_PRIMITIVE!();
+        DepcrateASYNC_WAITABLE_SET!();
+        DepcrateASYNC_SUBTASK!();
+        DepcrateASYNC_UTILS!();
+        DepcrateOpts!();
+        Depcrateimpl_15!();
+        DepcrateMoonbitSignature!();
+        DepcrateInterfaceFragment!();
+        DepcratePayloadFor!();
+        DepcrateImports!();
+        DepcrateMoonBit!();
+        Depcrateimpl_21!();
+        Depcrateimpl_22!();
+        DepcrateInterfaceGenerator!();
+        Depcrateimpl_24!();
+        Depcrateimpl_25!();
+        DepcrateBlock!();
+        DepcrateCleanup!();
+        DepcrateBlockStorage!();
+        DepcrateDeferredTaskReturn!();
+        DepcrateFunctionBindgen!();
+        Depcrateimpl_31!();
+        Depcrateimpl_32!();
+        Depcrateperform_cast!();
+        Depcratewasm_type!();
+        Depcrateflags_repr!();
+        Depcrateindent!();
+        Depcrateworld_name!();
+        Depcrateinterface_name!();
+        DepcrateToMoonBitIdent!();
+        Depcrateimpl_40!();
+        DepcrateToMoonBitTypeIdent!();
+        Depcrateimpl_42!();
+        Depcrategenerated_preamble!();
+        Depcrateprint_docs!();
+    };
+}

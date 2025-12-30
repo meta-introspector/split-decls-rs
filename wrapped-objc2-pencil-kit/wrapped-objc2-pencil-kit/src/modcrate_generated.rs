@@ -1,0 +1,46 @@
+// Generated module macro for crate::generated
+macro_rules! Modcrate_generated {
+() => {
+        Depcrate_generatedother_4!();
+        Depcrate_generated__PKContentVersion!();
+        Depcrate_generated__PKDrawing!();
+        Depcrate_generated__PKEraserTool!();
+        Depcrate_generated__PKFloatRange!();
+        Depcrate_generated__PKInk!();
+        Depcrate_generated__PKInkType!();
+        Depcrate_generated__PKInkingTool!();
+        Depcrate_generated__PKLassoTool!();
+        Depcrate_generated__PKStroke!();
+        Depcrate_generated__PKStrokePath!();
+        Depcrate_generated__PKStrokePoint!();
+        Depcrate_generated__PKTool!();
+        Depcrate_generated__PKToolPickerEraserItem!();
+        Depcrate_generated__PKToolPickerInkingItem!();
+        Depcrate_generated__PKToolPickerItem!();
+        Depcrate_generateduse_20!();
+        Depcrate_generateduse_21!();
+        Depcrate_generateduse_22!();
+        Depcrate_generateduse_23!();
+        Depcrate_generateduse_24!();
+        Depcrate_generateduse_25!();
+        Depcrate_generateduse_26!();
+        Depcrate_generateduse_27!();
+        Depcrate_generateduse_28!();
+        Depcrate_generateduse_29!();
+        Depcrate_generateduse_30!();
+        Depcrate_generateduse_31!();
+        Depcrate_generateduse_32!();
+        Depcrate_generateduse_33!();
+        Depcrate_generateduse_34!();
+        Depcrate_generateduse_35!();
+        Depcrate_generateduse_36!();
+        Depcrate_generateduse_37!();
+        Depcrate_generateduse_38!();
+        Depcrate_generateduse_39!();
+        Depcrate_generateduse_40!();
+        Depcrate_generateduse_41!();
+        Depcrate_generateduse_42!();
+        Depcrate_generateduse_43!();
+        Depcrate_generateduse_44!();
+    };
+}

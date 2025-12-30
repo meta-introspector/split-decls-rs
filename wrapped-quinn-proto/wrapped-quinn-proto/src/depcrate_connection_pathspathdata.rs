@@ -1,0 +1,9 @@
+// Generated macro for PathData (struct)
+macro_rules! Depcrate_connection_pathsPathData {
+() => {
+// Module: crate::connection::paths
+// Provides: {"PathData"}
+// Dependencies: {}
+# [doc = " Description of a particular network path"] pub (super) struct PathData { pub (super) remote : SocketAddr , pub (super) rtt : RttEstimator , # [doc = " Whether we're enabling ECN on outgoing packets"] pub (super) sending_ecn : bool , # [doc = " Congestion controller state"] pub (super) congestion : Box < dyn congestion :: Controller > , # [doc = " Pacing state"] pub (super) pacing : Pacer , pub (super) challenge : Option < u64 > , pub (super) challenge_pending : bool , # [doc = " Whether we're certain the peer can both send and receive on this address"] # [doc = ""] # [doc = " Initially equal to `use_stateless_retry` for servers, and becomes false again on every"] # [doc = " migration. Always true for clients."] pub (super) validated : bool , # [doc = " Total size of all UDP datagrams sent on this path"] pub (super) total_sent : u64 , # [doc = " Total size of all UDP datagrams received on this path"] pub (super) total_recvd : u64 , # [doc = " The state of the MTU discovery process"] pub (super) mtud : MtuDiscovery , # [doc = " Packet number of the first packet sent after an RTT sample was collected on this path"] # [doc = ""] # [doc = " Used in persistent congestion determination."] pub (super) first_packet_after_rtt_sample : Option < (SpaceId , u64) > , pub (super) in_flight : InFlight , # [doc = " Number of the first packet sent on this path"] # [doc = ""] # [doc = " Used to determine whether a packet was sent on an earlier path. Insufficient to determine if"] # [doc = " a packet was sent on a later path."] first_packet : Option < u64 > , # [doc = " Snapshot of the qlog recovery metrics"] # [cfg (feature = "qlog")] recovery_metrics : RecoveryMetrics , # [doc = " Tag uniquely identifying a path in a connection"] generation : u64 , }
+};
+}

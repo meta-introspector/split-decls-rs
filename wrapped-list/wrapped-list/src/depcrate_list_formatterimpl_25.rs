@@ -1,0 +1,9 @@
+// Generated macro for impl_25 (impl)
+macro_rules! Depcrate_list_formatterimpl_25 {
+() => {
+// Module: crate::list_formatter
+// Provides: {"impl_25"}
+// Dependencies: {}
+impl < 'a , W : Writeable + 'a , I : Iterator < Item = W > + Clone + 'a > Writeable for FormattedList < 'a , W , I > { fn write_to_parts < V : PartsWrite + ? Sized > (& self , sink : & mut V) -> fmt :: Result { macro_rules ! literal { ($ lit : ident) => { sink . with_part (parts :: LITERAL , | l | l . write_str ($ lit)) } ; } macro_rules ! value { ($ val : expr) => { sink . with_part (parts :: ELEMENT , | e | $ val . write_to_parts (e)) } ; } let patterns = self . formatter . data . get () ; let mut values = self . values . clone () ; if let Some (first) = values . next () { if let Some (second) = values . next () { if let Some (third) = values . next () { let (start_before , start_between , _) = patterns . start . parts () ; literal ! (start_before) ? ; value ! (first) ? ; literal ! (start_between) ? ; value ! (second) ? ; let mut next = third ; for next_next in values { let between = & * patterns . middle ; literal ! (between) ? ; value ! (next) ? ; next = next_next ; } let (_ , end_between , end_after) = patterns . end . parts (& next) ; literal ! (end_between) ? ; value ! (next) ? ; literal ! (end_after) } else { let (before , between , after) = patterns . pair . as_ref () . unwrap_or (& patterns . end) . parts (& second) ; literal ! (before) ? ; value ! (first) ? ; literal ! (between) ? ; value ! (second) ? ; literal ! (after) } } else { value ! (first) } } else { Ok (()) } } fn writeable_length_hint (& self) -> LengthHint { let mut count = 0 ; let item_length = self . values . clone () . map (| w | { count += 1 ; w . writeable_length_hint () }) . sum :: < LengthHint > () ; item_length + self . formatter . data . get () . length_hint (count) } }
+};
+}

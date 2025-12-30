@@ -1,0 +1,9 @@
+// Generated macro for macro_2385 (macro)
+macro_rules! Depcrate_ntrtlmacro_2385 {
+() => {
+// Module: crate::ntrtl
+// Provides: {"macro_2385"}
+// Dependencies: {}
+EXTERN ! { extern "system" { fn RtlCreateAtomTable (NumberOfBuckets : ULONG , AtomTableHandle : * mut PVOID ,) -> NTSTATUS ; fn RtlDestroyAtomTable (AtomTableHandle : PVOID ,) -> NTSTATUS ; fn RtlEmptyAtomTable (AtomTableHandle : PVOID , IncludePinnedAtoms : BOOLEAN ,) -> NTSTATUS ; fn RtlAddAtomToAtomTable (AtomTableHandle : PVOID , AtomName : PWSTR , Atom : PRTL_ATOM ,) -> NTSTATUS ; fn RtlLookupAtomInAtomTable (AtomTableHandle : PVOID , AtomName : PWSTR , Atom : PRTL_ATOM ,) -> NTSTATUS ; fn RtlDeleteAtomFromAtomTable (AtomTableHandle : PVOID , Atom : RTL_ATOM ,) -> NTSTATUS ; fn RtlPinAtomInAtomTable (AtomTableHandle : PVOID , Atom : RTL_ATOM ,) -> NTSTATUS ; fn RtlQueryAtomInAtomTable (AtomTableHandle : PVOID , Atom : RTL_ATOM , AtomUsage : PULONG , AtomFlags : PULONG , AtomName : PWSTR , AtomNameLength : PULONG ,) -> NTSTATUS ; fn RtlGetIntegerAtom (AtomName : PWSTR , IntegerAtom : PUSHORT ,) -> BOOLEAN ; fn RtlValidSid (Sid : PSID ,) -> BOOLEAN ; fn RtlEqualSid (Sid1 : PSID , Sid2 : PSID ,) -> BOOLEAN ; fn RtlEqualPrefixSid (Sid1 : PSID , Sid2 : PSID ,) -> BOOLEAN ; fn RtlLengthRequiredSid (SubAuthorityCount : ULONG ,) -> ULONG ; fn RtlFreeSid (Sid : PSID ,) -> PVOID ; fn RtlAllocateAndInitializeSid (IdentifierAuthority : PSID_IDENTIFIER_AUTHORITY , SubAuthorityCount : UCHAR , SubAuthority0 : ULONG , SubAuthority1 : ULONG , SubAuthority2 : ULONG , SubAuthority3 : ULONG , SubAuthority4 : ULONG , SubAuthority5 : ULONG , SubAuthority6 : ULONG , SubAuthority7 : ULONG , Sid : * mut PSID ,) -> NTSTATUS ; fn RtlInitializeSid (Sid : PSID , IdentifierAuthority : PSID_IDENTIFIER_AUTHORITY , SubAuthorityCount : UCHAR ,) -> NTSTATUS ; } }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for impl_377 (impl)
+macro_rules! Depcrate_ser_implsimpl_377 {
+() => {
+// Module: crate::ser::impls
+// Provides: {"impl_377"}
+// Dependencies: {}
+impl < T > Serialize for Bound < T > where T : Serialize , { fn serialize < S > (& self , serializer : S) -> Result < S :: Ok , S :: Error > where S : Serializer , { match * self { Bound :: Unbounded => serializer . serialize_unit_variant ("Bound" , 0 , "Unbounded") , Bound :: Included (ref value) => { serializer . serialize_newtype_variant ("Bound" , 1 , "Included" , value) } Bound :: Excluded (ref value) => { serializer . serialize_newtype_variant ("Bound" , 2 , "Excluded" , value) } } } }
+};
+}

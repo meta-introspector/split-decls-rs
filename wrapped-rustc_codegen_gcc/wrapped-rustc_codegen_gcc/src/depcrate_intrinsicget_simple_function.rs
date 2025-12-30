@@ -1,0 +1,9 @@
+// Generated macro for get_simple_function (function)
+macro_rules! Depcrate_intrinsicget_simple_function {
+() => {
+// Module: crate::intrinsic
+// Provides: {"get_simple_function"}
+// Dependencies: {}
+fn get_simple_function < 'gcc , 'tcx > (cx : & CodegenCx < 'gcc , 'tcx > , name : Symbol ,) -> Option < Function < 'gcc > > { let (return_type , parameters , func_name) = match name { sym :: minimumf32 => { let parameters = [cx . context . new_parameter (None , cx . float_type , "a") , cx . context . new_parameter (None , cx . float_type , "b") ,] ; (cx . float_type , parameters , "fminimumf") } sym :: minimumf64 => { let parameters = [cx . context . new_parameter (None , cx . double_type , "a") , cx . context . new_parameter (None , cx . double_type , "b") ,] ; (cx . double_type , parameters , "fminimum") } sym :: minimumf128 => { let f128_type = cx . type_f128 () ; let parameters = [cx . context . new_parameter (None , f128_type , "a") , cx . context . new_parameter (None , f128_type , "b") ,] ; (f128_type , parameters , "fminimumf128") } sym :: maximumf32 => { let parameters = [cx . context . new_parameter (None , cx . float_type , "a") , cx . context . new_parameter (None , cx . float_type , "b") ,] ; (cx . float_type , parameters , "fmaximumf") } sym :: maximumf64 => { let parameters = [cx . context . new_parameter (None , cx . double_type , "a") , cx . context . new_parameter (None , cx . double_type , "b") ,] ; (cx . double_type , parameters , "fmaximum") } sym :: maximumf128 => { let f128_type = cx . type_f128 () ; let parameters = [cx . context . new_parameter (None , f128_type , "a") , cx . context . new_parameter (None , f128_type , "b") ,] ; (f128_type , parameters , "fmaximumf128") } _ => return None , } ; Some (cx . context . new_function (None , FunctionType :: Extern , return_type , & parameters , func_name , false ,)) }
+};
+}

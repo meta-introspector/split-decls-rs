@@ -1,0 +1,9 @@
+// Generated macro for tests (module)
+macro_rules! Depcrate_unique_arctests {
+() => {
+// Module: crate::unique_arc
+// Provides: {"tests"}
+// Dependencies: {}
+# [cfg (test)] mod tests { use crate :: { Arc , HeaderSliceWithLengthUnchecked , HeaderWithLength , UniqueArc } ; use core :: { convert :: TryFrom , mem :: MaybeUninit } ; # [test] fn unique_into_inner () { let unique = UniqueArc :: new (10u64) ; assert_eq ! (UniqueArc :: into_inner (unique) , 10) ; } # [test] fn try_from_arc () { let x = Arc :: new (10_000) ; let y = x . clone () ; assert ! (UniqueArc :: try_from (x) . is_err ()) ; assert_eq ! (UniqueArc :: into_inner (UniqueArc :: try_from (y) . unwrap ()) , 10_000 ,) ; } # [test] # [allow (deprecated)] fn maybeuninit_smoke () { let mut arc : UniqueArc < MaybeUninit < _ > > = UniqueArc :: new_uninit () ; arc . write (999) ; let arc = unsafe { UniqueArc :: assume_init (arc) } ; assert_eq ! (* arc , 999) ; } # [test] fn from_header_and_uninit_slice () { let mut uarc : UniqueArc < HeaderSliceWithLengthUnchecked < u8 , MaybeUninit < u16 > > > = UniqueArc :: from_header_and_uninit_slice (HeaderWithLength :: new (1 , 3) , 3) ; uarc . slice . fill (MaybeUninit :: new (2)) ; let arc = unsafe { uarc . assume_init_slice_with_header () } . shareable () ; assert ! (arc . is_unique ()) ; let arcs = [arc . clone () , arc . clone () , arc . clone () , arc . clone () , arc . clone () ,] ; let thin = Arc :: into_thin (arc . clone ()) ; assert_eq ! (7 , Arc :: count (& arc)) ; assert_eq ! (arc . header . header , 1) ; assert_eq ! (& arc . slice , [2 , 2 , 2]) ; assert_eq ! (thin . header . header , 1) ; assert_eq ! (& thin . slice , [2 , 2 , 2]) ; drop (arcs) ; drop (thin) ; assert ! (arc . is_unique ()) ; assert_eq ! (arc . header . header , 1) ; assert_eq ! (& arc . slice , [2 , 2 , 2]) ; } }
+};
+}

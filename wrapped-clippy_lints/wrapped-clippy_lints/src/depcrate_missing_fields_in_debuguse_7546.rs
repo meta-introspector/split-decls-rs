@@ -1,0 +1,9 @@
+// Generated macro for use_7546 (use)
+macro_rules! Depcrate_missing_fields_in_debuguse_7546 {
+() => {
+// Module: crate::missing_fields_in_debug
+// Provides: {"use_7546"}
+// Dependencies: {}
+use rustc_hir :: { Block , Expr , ExprKind , Impl , Item , ItemKind , LangItem , Node , QPath , TyKind , VariantData } ;
+};
+}

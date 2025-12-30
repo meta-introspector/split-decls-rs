@@ -1,0 +1,9 @@
+// Generated macro for impl_47 (impl)
+macro_rules! Depcrate_atomicimpl_47 {
+() => {
+// Module: crate::atomic
+// Provides: {"impl_47"}
+// Dependencies: {}
+impl < T > From < * const T > for Atomic < T > { # [doc = " Returns a new atomic pointer pointing to `raw`."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " use std::ptr;"] # [doc = " use crossbeam_epoch::Atomic;"] # [doc = ""] # [doc = " let a = Atomic::<i32>::from(ptr::null::<i32>());"] # [doc = " ```"] fn from (raw : * const T) -> Self { Self :: from_ptr (raw as * mut ()) } }
+};
+}

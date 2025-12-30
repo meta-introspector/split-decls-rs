@@ -1,0 +1,9 @@
+// Generated macro for PSYSTEM_HYPERVISOR_DETAIL_INFORMATION (type)
+macro_rules! Depcrate_ntexapiPSYSTEM_HYPERVISOR_DETAIL_INFORMATION {
+() => {
+// Module: crate::ntexapi
+// Provides: {"PSYSTEM_HYPERVISOR_DETAIL_INFORMATION"}
+// Dependencies: {}
+pub type PSYSTEM_HYPERVISOR_DETAIL_INFORMATION = * mut SYSTEM_HYPERVISOR_DETAIL_INFORMATION ;
+};
+}

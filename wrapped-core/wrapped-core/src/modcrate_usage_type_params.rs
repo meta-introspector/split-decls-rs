@@ -1,0 +1,52 @@
+// Generated module macro for crate::usage::type_params
+macro_rules! Modcrate_usage_type_params {
+() => {
+        Depcrate_usage_type_paramsuse_750!();
+        Depcrate_usage_type_paramsuse_751!();
+        Depcrate_usage_type_paramsuse_752!();
+        Depcrate_usage_type_paramsUsesTypeParams!();
+        Depcrate_usage_type_paramsCollectTypeParams!();
+        Depcrate_usage_type_paramsimpl_755!();
+        Depcrate_usage_type_paramsunion_in_place!();
+        Depcrate_usage_type_paramsimpl_757!();
+        Depcrate_usage_type_paramsimpl_758!();
+        Depcrate_usage_type_paramsimpl_759!();
+        Depcrate_usage_type_paramsimpl_760!();
+        Depcrate_usage_type_paramsmacro_761!();
+        Depcrate_usage_type_paramsmacro_762!();
+        Depcrate_usage_type_paramsmacro_763!();
+        Depcrate_usage_type_paramsmacro_764!();
+        Depcrate_usage_type_paramsmacro_765!();
+        Depcrate_usage_type_paramsmacro_766!();
+        Depcrate_usage_type_paramsmacro_767!();
+        Depcrate_usage_type_paramsmacro_768!();
+        Depcrate_usage_type_paramsmacro_769!();
+        Depcrate_usage_type_paramsmacro_770!();
+        Depcrate_usage_type_paramsmacro_771!();
+        Depcrate_usage_type_paramsmacro_772!();
+        Depcrate_usage_type_paramsmacro_773!();
+        Depcrate_usage_type_paramsmacro_774!();
+        Depcrate_usage_type_paramsmacro_775!();
+        Depcrate_usage_type_paramsmacro_776!();
+        Depcrate_usage_type_paramsmacro_777!();
+        Depcrate_usage_type_paramsmacro_778!();
+        Depcrate_usage_type_paramsmacro_779!();
+        Depcrate_usage_type_paramsmacro_780!();
+        Depcrate_usage_type_paramsmacro_781!();
+        Depcrate_usage_type_paramsmacro_782!();
+        Depcrate_usage_type_paramsmacro_783!();
+        Depcrate_usage_type_paramsmacro_784!();
+        Depcrate_usage_type_paramsimpl_785!();
+        Depcrate_usage_type_paramsimpl_786!();
+        Depcrate_usage_type_paramsimpl_787!();
+        Depcrate_usage_type_paramsimpl_788!();
+        Depcrate_usage_type_paramsimpl_789!();
+        Depcrate_usage_type_paramsimpl_790!();
+        Depcrate_usage_type_paramsimpl_791!();
+        Depcrate_usage_type_paramsimpl_792!();
+        Depcrate_usage_type_paramsimpl_793!();
+        Depcrate_usage_type_paramsimpl_794!();
+        Depcrate_usage_type_paramsimpl_795!();
+        Depcrate_usage_type_paramstests!();
+    };
+}

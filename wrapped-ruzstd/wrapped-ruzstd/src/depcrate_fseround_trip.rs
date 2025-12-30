@@ -1,0 +1,9 @@
+// Generated macro for round_trip (function)
+macro_rules! Depcrate_fseround_trip {
+() => {
+// Module: crate::fse
+// Provides: {"round_trip"}
+// Dependencies: {}
+# [doc = " Only needed for testing."] # [doc = ""] # [doc = " Encodes the data with a table built from that data"] # [doc = " Decodes the result again by first decoding the table and then the data"] # [doc = " Asserts that the decoded data equals the input"] # [cfg (any (test , feature = "fuzz_exports"))] pub fn round_trip (data : & [u8]) { use crate :: bit_io :: { BitReaderReversed , BitWriter } ; use fse_encoder :: FSEEncoder ; if data . len () < 2 { return ; } if data . iter () . all (| x | * x == data [0]) { return ; } if data . len () < 64 { return ; } let mut writer = BitWriter :: new () ; let mut encoder = FSEEncoder :: new (fse_encoder :: build_table_from_data (data . iter () . copied () , 22 , false) , & mut writer ,) ; let mut dec_table = FSETable :: new (255) ; encoder . encode (data) ; let acc_log = encoder . acc_log () ; let enc_table = encoder . into_table () ; let encoded = writer . dump () ; let table_bytes = dec_table . build_decoder (& encoded , acc_log) . unwrap () ; let encoded = & encoded [table_bytes ..] ; let mut decoder = FSEDecoder :: new (& dec_table) ; check_tables (& dec_table , & enc_table) ; let mut br = BitReaderReversed :: new (encoded) ; let mut skipped_bits = 0 ; loop { let val = br . get_bits (1) ; skipped_bits += 1 ; if val == 1 || skipped_bits > 8 { break ; } } if skipped_bits > 8 { panic ! ("Corrupted end marker") ; } decoder . init_state (& mut br) . unwrap () ; let mut decoded = alloc :: vec :: Vec :: new () ; for x in data { let w = decoder . decode_symbol () ; assert_eq ! (w , * x) ; decoded . push (w) ; if decoded . len () < data . len () { decoder . update_state (& mut br) ; } } assert_eq ! (& decoded , data) ; assert_eq ! (br . bits_remaining () , 0) ; }
+};
+}

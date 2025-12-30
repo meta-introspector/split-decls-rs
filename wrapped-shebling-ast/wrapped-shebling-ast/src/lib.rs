@@ -1,0 +1,60 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcratespan.rs");
+include!("depcrate_expressionimpl_19.rs");
+include!("depcrateexpansion.rs");
+include!("depcrate_expressionunexpr.rs");
+include!("depcrate_spanimpl_28.rs");
+include!("depcrate_worduse_30.rs");
+include!("depcrate_wordimpl_36.rs");
+include!("depcrateuse_40.rs");
+include!("depcrateredirection.rs");
+include!("depcrate_expressionimpl_15.rs");
+include!("depcrate_expressionarithterm.rs");
+include!("depcrateexpression.rs");
+include!("depcrate_expressionimpl_12.rs");
+include!("depcrate_spanimpl_27.rs");
+include!("depcrate_wordimpl_33.rs");
+include!("depcrateuse_41.rs");
+include!("depcrateuse_43.rs");
+include!("depcrate_wordwordsgmt.rs");
+include!("depcrateword.rs");
+include!("depcrate_expansionuse_5.rs");
+include!("depcrate_expansionuse_4.rs");
+include!("depcrate_wordsubscriptedvar.rs");
+include!("depcratetokenizable.rs");
+include!("depcrate_spanimpl_23.rs");
+include!("depcrate_expressionmacro_10.rs");
+include!("depcrate_wordimpl_39.rs");
+include!("depcrate_spanspanned.rs");
+include!("depcrate_expressionarithtriexpr.rs");
+include!("depcrate_worduse_31.rs");
+include!("depcrate_spanimpl_25.rs");
+include!("depcrate_worddoublequotedsgmt.rs");
+include!("depcrate_worddoublequoted.rs");
+include!("depcrateuse_42.rs");
+include!("depcrate_expressionbinexpr.rs");
+include!("depcrate_expressionarithseq.rs");
+include!("depcrate_expansiondollarexp.rs");
+include!("depcrate_spanspan.rs");
+include!("depcrate_expressionuse_9.rs");
+include!("depcrateuse_44.rs");
+include!("depcrate_expressionmacro_13.rs");
+include!("depcratetoken.rs");
+include!("depcrate_expressionuse_8.rs");
+include!("depcrate_spanlocate.rs");
+include!("depcrate_wordword.rs");
+include!("modcrate.rs");
+include!("modcrate_span.rs");
+include!("modcrate_expansion.rs");
+include!("modcrate_expression.rs");
+include!("modcrate_word.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate!();
+    Modcrate_span!();
+    Modcrate_expansion!();
+    Modcrate_expression!();
+    Modcrate_word!();
+}

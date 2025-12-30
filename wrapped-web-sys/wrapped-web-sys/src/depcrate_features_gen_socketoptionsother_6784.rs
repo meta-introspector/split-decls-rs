@@ -1,0 +1,9 @@
+// Generated macro for other_6784 (other)
+macro_rules! Depcrate_features_gen_SocketOptionsother_6784 {
+() => {
+// Module: crate::features::gen_SocketOptions
+// Provides: {"other_6784"}
+// Dependencies: {}
+# [wasm_bindgen] extern "C" { # [wasm_bindgen (extends = :: js_sys :: Object , js_name = SocketOptions)] # [derive (Debug , Clone , PartialEq , Eq)] # [doc = "The `SocketOptions` dictionary."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `SocketOptions`*"] pub type SocketOptions ; # [cfg (feature = "TcpSocketBinaryType")] # [doc = "Get the `binaryType` field of this object."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `SocketOptions`, `TcpSocketBinaryType`*"] # [wasm_bindgen (method , getter = "binaryType")] pub fn get_binary_type (this : & SocketOptions) -> Option < TcpSocketBinaryType > ; # [cfg (feature = "TcpSocketBinaryType")] # [doc = "Change the `binaryType` field of this object."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `SocketOptions`, `TcpSocketBinaryType`*"] # [wasm_bindgen (method , setter = "binaryType")] pub fn set_binary_type (this : & SocketOptions , val : TcpSocketBinaryType) ; # [doc = "Get the `useSecureTransport` field of this object."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `SocketOptions`*"] # [wasm_bindgen (method , getter = "useSecureTransport")] pub fn get_use_secure_transport (this : & SocketOptions) -> Option < bool > ; # [doc = "Change the `useSecureTransport` field of this object."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `SocketOptions`*"] # [wasm_bindgen (method , setter = "useSecureTransport")] pub fn set_use_secure_transport (this : & SocketOptions , val : bool) ; }
+};
+}

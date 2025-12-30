@@ -1,0 +1,9 @@
+// Generated macro for tests (module)
+macro_rules! Depcrate_zipftests {
+() => {
+// Module: crate::zipf
+// Provides: {"tests"}
+// Dependencies: {}
+# [cfg (test)] mod tests { use super :: * ; fn test_samples < F : Float + fmt :: Debug , D : Distribution < F > > (distr : D , zero : F , expected : & [F]) { let mut rng = crate :: test :: rng (213) ; let mut buf = [zero ; 4] ; for x in & mut buf { * x = rng . sample (& distr) ; } assert_eq ! (buf , expected) ; } # [test] # [should_panic] fn zipf_s_too_small () { Zipf :: new (10. , - 1.) . unwrap () ; } # [test] # [should_panic] fn zipf_n_too_small () { Zipf :: new (0. , 1.) . unwrap () ; } # [test] # [should_panic] fn zipf_nan () { Zipf :: new (10. , f64 :: NAN) . unwrap () ; } # [test] fn zipf_sample () { let d = Zipf :: new (10. , 0.5) . unwrap () ; let mut rng = crate :: test :: rng (2) ; for _ in 0 .. 1000 { let r = d . sample (& mut rng) ; assert ! (r >= 1.) ; } } # [test] fn zipf_sample_s_1 () { let d = Zipf :: new (10. , 1.) . unwrap () ; let mut rng = crate :: test :: rng (2) ; for _ in 0 .. 1000 { let r = d . sample (& mut rng) ; assert ! (r >= 1.) ; } } # [test] fn zipf_sample_s_0 () { let d = Zipf :: new (10. , 0.) . unwrap () ; let mut rng = crate :: test :: rng (2) ; for _ in 0 .. 1000 { let r = d . sample (& mut rng) ; assert ! (r >= 1.) ; } } # [test] fn zipf_sample_large_n () { let d = Zipf :: new (f64 :: MAX , 1.5) . unwrap () ; let mut rng = crate :: test :: rng (2) ; for _ in 0 .. 1000 { let r = d . sample (& mut rng) ; assert ! (r >= 1.) ; } } # [test] fn zipf_value_stability () { test_samples (Zipf :: new (10. , 0.5) . unwrap () , 0f32 , & [10.0 , 2.0 , 6.0 , 7.0]) ; test_samples (Zipf :: new (10. , 2.0) . unwrap () , 0f64 , & [1.0 , 2.0 , 3.0 , 2.0]) ; } # [test] fn zipf_distributions_can_be_compared () { assert_eq ! (Zipf :: new (1.0 , 2.0) , Zipf :: new (1.0 , 2.0)) ; } }
+};
+}

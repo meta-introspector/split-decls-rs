@@ -1,0 +1,75 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcrate_matcherimpl_41.rs");
+include!("depcrate_versionimpl_67.rs");
+include!("depcrate_infouse_33.rs");
+include!("depcrate_infotests.rs");
+include!("depcrate_matchertests.rs");
+include!("depcrate_bitnessimpl_24.rs");
+include!("depcrate_versionparse_version.rs");
+include!("depcrate_infoimpl_36.rs");
+include!("depcrate_unameuse_53.rs");
+include!("depcrate_bitnessuse_21.rs");
+include!("depcrate_bitnessget.rs");
+include!("depcrate_os_typeuse_47.rs");
+include!("depcrate_matcherfind_prefixed_word.rs");
+include!("depcrate_bitnesstests.rs");
+include!("depcrate_os_typeimpl_49.rs");
+include!("depcrate_os_typeimpl_50.rs");
+include!("depcrate_versionuse_62.rs");
+include!("depcrate_unameuse_55.rs");
+include!("depcrate_versionuse_63.rs");
+include!("depcrate_matcherfind_by_key.rs");
+include!("depcrate_unameimpl_57.rs");
+include!("depcrate_matcheris_valid_version.rs");
+include!("depcrate_unametests.rs");
+include!("depcrateget.rs");
+include!("depcrate_architecturetests.rs");
+include!("depcrate_versionimpl_65.rs");
+include!("depcrateinfo.rs");
+include!("depcrateuname.rs");
+include!("depcratematcher.rs");
+include!("depcrateversion.rs");
+include!("depcrate_infouse_32.rs");
+include!("depcrate_os_typetests.rs");
+include!("depcrateos_type.rs");
+include!("depcrateuse_70.rs");
+include!("depcrate_architectureuse_17.rs");
+include!("depcrate_bitnessuse_22.rs");
+include!("depcrate_os_typetype.rs");
+include!("depcrateimp.rs");
+include!("depcratearchitecture.rs");
+include!("depcrate_architectureget.rs");
+include!("depcrate_unameunamefield.rs");
+include!("depcrate_unameuname_cli.rs");
+include!("depcrate_versionimpl_66.rs");
+include!("depcrate_versiontests.rs");
+include!("depcrate_infoimpl_35.rs");
+include!("depcrate_unameuname.rs");
+include!("depcrate_versionversion.rs");
+include!("depcratebitness.rs");
+include!("depcrate_infoinfo.rs");
+include!("depcrate_infoimpl_37.rs");
+include!("depcrate_bitnessbitness.rs");
+include!("depcrate_matchermatcher.rs");
+include!("depcrate_unameuse_54.rs");
+include!("modcrate_os_type.rs");
+include!("modcrate_architecture.rs");
+include!("modcrate_bitness.rs");
+include!("modcrate_info.rs");
+include!("modcrate_version.rs");
+include!("modcrate.rs");
+include!("modcrate_uname.rs");
+include!("modcrate_matcher.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate_os_type!();
+    Modcrate_architecture!();
+    Modcrate_bitness!();
+    Modcrate_info!();
+    Modcrate_version!();
+    Modcrate!();
+    Modcrate_uname!();
+    Modcrate_matcher!();
+}

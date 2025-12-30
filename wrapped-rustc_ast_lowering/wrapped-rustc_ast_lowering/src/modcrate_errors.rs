@@ -1,0 +1,57 @@
+// Generated module macro for crate::errors
+macro_rules! Modcrate_errors {
+() => {
+        Depcrate_errorsuse_71!();
+        Depcrate_errorsuse_72!();
+        Depcrate_errorsuse_73!();
+        Depcrate_errorsuse_74!();
+        Depcrate_errorsGenericTypeWithParentheses!();
+        Depcrate_errorsUseAngleBrackets!();
+        Depcrate_errorsInvalidAbi!();
+        Depcrate_errorsTupleStructWithDefault!();
+        Depcrate_errorsInvalidAbiSuggestion!();
+        Depcrate_errorsAssocTyParentheses!();
+        Depcrate_errorsAssocTyParenthesesSub!();
+        Depcrate_errorsMisplacedImplTrait!();
+        Depcrate_errorsMisplacedAssocTyBinding!();
+        Depcrate_errorsUnderscoreExprLhsAssign!();
+        Depcrate_errorsAwaitOnlyInAsyncFnAndBlocks!();
+        Depcrate_errorsCoroutineTooManyParameters!();
+        Depcrate_errorsClosureCannotBeStatic!();
+        Depcrate_errorsFunctionalRecordUpdateDestructuringAssignment!();
+        Depcrate_errorsAsyncCoroutinesNotSupported!();
+        Depcrate_errorsInlineAsmUnsupportedTarget!();
+        Depcrate_errorsAttSyntaxOnlyX86!();
+        Depcrate_errorsAbiSpecifiedMultipleTimes!();
+        Depcrate_errorsClobberAbiNotSupported!();
+        Depcrate_errorsInvalidAbiClobberAbi!();
+        Depcrate_errorsInvalidRegister!();
+        Depcrate_errorsInvalidRegisterClass!();
+        Depcrate_errorsInvalidAsmTemplateModifierRegClass!();
+        Depcrate_errorsInvalidAsmTemplateModifierRegClassSub!();
+        Depcrate_errorsInvalidAsmTemplateModifierConst!();
+        Depcrate_errorsInvalidAsmTemplateModifierSym!();
+        Depcrate_errorsInvalidAsmTemplateModifierLabel!();
+        Depcrate_errorsRegisterClassOnlyClobber!();
+        Depcrate_errorsRegisterClassOnlyClobberStable!();
+        Depcrate_errorsRegisterConflict!();
+        Depcrate_errorsSubTupleBinding!();
+        Depcrate_errorsExtraDoubleDot!();
+        Depcrate_errorsMisplacedDoubleDot!();
+        Depcrate_errorsMatchArmWithNoBody!();
+        Depcrate_errorsNeverPatternWithBody!();
+        Depcrate_errorsNeverPatternWithGuard!();
+        Depcrate_errorsArbitraryExpressionInPattern!();
+        Depcrate_errorsInclusiveRangeWithNoEnd!();
+        Depcrate_errorsRTNSuggestion!();
+        Depcrate_errorsBadReturnTypeNotation!();
+        Depcrate_errorsGenericParamDefaultInBinder!();
+        Depcrate_errorsAsyncBoundNotOnTrait!();
+        Depcrate_errorsAsyncBoundOnlyForFnTraits!();
+        Depcrate_errorsNoPreciseCapturesOnApit!();
+        Depcrate_errorsYieldInClosure!();
+        Depcrate_errorsInvalidLegacyConstGenericArg!();
+        Depcrate_errorsUseConstGenericArg!();
+        Depcrate_errorsUnionWithDefault!();
+    };
+}

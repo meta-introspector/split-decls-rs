@@ -1,0 +1,39 @@
+// Generated module macro for crate::local_pool
+macro_rules! Modcrate_local_pool {
+() => {
+        Depcrate_local_pooluse_3!();
+        Depcrate_local_pooluse_4!();
+        Depcrate_local_pooluse_5!();
+        Depcrate_local_pooluse_6!();
+        Depcrate_local_pooluse_7!();
+        Depcrate_local_pooluse_8!();
+        Depcrate_local_pooluse_9!();
+        Depcrate_local_pooluse_10!();
+        Depcrate_local_pooluse_11!();
+        Depcrate_local_pooluse_12!();
+        Depcrate_local_pooluse_13!();
+        Depcrate_local_pooluse_14!();
+        Depcrate_local_pooluse_15!();
+        Depcrate_local_pooluse_16!();
+        Depcrate_local_pooluse_17!();
+        Depcrate_local_poolLocalPool!();
+        Depcrate_local_poolLocalSpawner!();
+        Depcrate_local_poolIncoming!();
+        Depcrate_local_poolThreadNotify!();
+        Depcrate_local_poolmacro_22!();
+        Depcrate_local_poolimpl_23!();
+        Depcrate_local_poolrun_executor!();
+        Depcrate_local_poolwoken!();
+        Depcrate_local_poolimpl_26!();
+        Depcrate_local_poolimpl_27!();
+        Depcrate_local_poolblock_on!();
+        Depcrate_local_poolblock_on_stream!();
+        Depcrate_local_poolBlockingStream!();
+        Depcrate_local_poolimpl_31!();
+        Depcrate_local_poolimpl_32!();
+        Depcrate_local_poolimpl_33!();
+        Depcrate_local_poolimpl_34!();
+        Depcrate_local_poolimpl_35!();
+        Depcrate_local_poolimpl_36!();
+    };
+}

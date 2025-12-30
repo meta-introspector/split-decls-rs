@@ -1,0 +1,9 @@
+// Generated macro for test_syntax_error (function)
+macro_rules! Depcrate_signed_decimaltest_syntax_error {
+() => {
+// Module: crate::signed_decimal
+// Provides: {"test_syntax_error"}
+// Dependencies: {}
+# [test] fn test_syntax_error () { # [derive (Debug)] struct TestCase { pub input_str : & 'static str , pub expected_err : Option < ParseError > , } let cases = [TestCase { input_str : "-12a34" , expected_err : Some (ParseError :: Syntax) , } , TestCase { input_str : "0.0123√400" , expected_err : Some (ParseError :: Syntax) , } , TestCase { input_str : "0.012.3400" , expected_err : Some (ParseError :: Syntax) , } , TestCase { input_str : "-0-0123400" , expected_err : Some (ParseError :: Syntax) , } , TestCase { input_str : "0-0123400" , expected_err : Some (ParseError :: Syntax) , } , TestCase { input_str : "-0.00123400" , expected_err : None , } , TestCase { input_str : "00123400." , expected_err : Some (ParseError :: Syntax) , } , TestCase { input_str : "00123400.0" , expected_err : None , } , TestCase { input_str : "123_456" , expected_err : Some (ParseError :: Syntax) , } , TestCase { input_str : "" , expected_err : Some (ParseError :: Syntax) , } , TestCase { input_str : "-" , expected_err : Some (ParseError :: Syntax) , } , TestCase { input_str : "+" , expected_err : Some (ParseError :: Syntax) , } , TestCase { input_str : "-1" , expected_err : None , } ,] ; for cas in & cases { match Decimal :: from_str (cas . input_str) { Ok (dec) => { assert_eq ! (cas . expected_err , None , "{cas:?}") ; assert_eq ! (cas . input_str , dec . to_string () , "{cas:?}") ; } Err (err) => { assert_eq ! (cas . expected_err , Some (err) , "{cas:?}") ; } } } }
+};
+}

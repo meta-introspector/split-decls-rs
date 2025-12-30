@@ -1,0 +1,9 @@
+// Generated macro for diesel_roundtrip (function)
+macro_rules! Depcratediesel_roundtrip {
+() => {
+// Module: crate
+// Provides: {"diesel_roundtrip"}
+// Dependencies: {}
+# [test] fn diesel_roundtrip () -> Result < () , Box < dyn std :: error :: Error > > { let tempdir = tempdir () ? ; let db_path = tempdir . path () . join ("compact_str.sqlite3") ; let db_path = format_compact ! ("file://{}" , db_path . to_str () . unwrap ()) ; let mut conn = SqliteConnection :: establish (& db_path) ? ; sql_query (include_str ! ("schema.sql")) . execute (& mut conn) ? ; let todo_list = conn . transaction (| conn | todos . limit (10) . select (Todo :: as_select ()) . load (conn)) ? ; assert ! (todo_list . is_empty ()) ; conn . transaction (| conn | { let new_todo = NewTodo { title : TITLE , done : false , } ; diesel :: insert_into (todos :: table) . values (& new_todo) . execute (conn) }) ? ; let todo_list = conn . transaction (| conn | todos . limit (10) . select (Todo :: as_select ()) . load (conn)) ? ; assert_eq ! (todo_list . len () , 1) ; let todo = todo_list . first () . unwrap () ; assert ! (! todo . title . is_heap_allocated ()) ; assert_eq ! (todo . title , TITLE) ; assert ! (! todo . done) ; conn . transaction (| conn | { print ! ("Hello!") ; diesel :: update (todos . find (todo . id)) . set (done . eq (true)) . execute (conn) }) ? ; let todo_list = conn . transaction (| conn | todos . limit (10) . select (Todo :: as_select ()) . load (conn)) ? ; assert_eq ! (todo_list . len () , 1) ; let todo = todo_list . first () . unwrap () ; assert ! (! todo . title . is_heap_allocated ()) ; assert_eq ! (todo . title , TITLE) ; assert ! (todo . done) ; conn . transaction (| conn | diesel :: delete (todos . filter (title . eq (TITLE))) . execute (conn)) ? ; let todo_list = conn . transaction (| conn | todos . limit (10) . select (Todo :: as_select ()) . load (conn)) ? ; assert ! (todo_list . is_empty ()) ; Ok (()) }
+};
+}

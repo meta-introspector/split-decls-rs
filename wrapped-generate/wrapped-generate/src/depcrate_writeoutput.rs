@@ -1,0 +1,9 @@
+// Generated macro for output (function)
+macro_rules! Depcrate_writeoutput {
+() => {
+// Module: crate::write
+// Provides: {"output"}
+// Dependencies: {}
+pub fn output (properties : & Properties , index_start : & [u8] , index_continue : & [u8] , halfdense : & [u8] ,) -> Output { let mut out = Output :: new () ; writeln ! (out , "{}" , HEAD) ; writeln ! (out , "pub const UNICODE_VERSION: (u8, u8, u8) = {:?};" , properties . unicode_version () ,) ; writeln ! (out) ; let ascii_start = (0u8 .. 128) . map (| c | (properties . is_xid_start (c as char) as u128) << c) . sum :: < u128 > () ; writeln ! (out , "pub(crate) const ASCII_START: u128 = 0x{ascii_start:x};" ,) ; let ascii_continue = (0u8 .. 128) . map (| c | (properties . is_xid_continue (c as char) as u128) << c) . sum :: < u128 > () ; writeln ! (out , "pub(crate) const ASCII_CONTINUE: u128 = 0x{ascii_continue:x};" ,) ; writeln ! (out) ; writeln ! (out , "pub(crate) const CHUNK: usize = {};" , CHUNK) ; writeln ! (out) ; writeln ! (out , "pub(crate) static TRIE_START: Align8<[u8; {}]> = Align8([" , index_start . len () ,) ; for line in index_start . chunks (16) { write ! (out , "   ") ; for byte in line { write ! (out , " 0x{:02X}," , byte) ; } writeln ! (out) ; } writeln ! (out , "]);") ; writeln ! (out) ; writeln ! (out , "pub(crate) static TRIE_CONTINUE: Align8<[u8; {}]> = Align8([" , index_continue . len () ,) ; for line in index_continue . chunks (16) { write ! (out , "   ") ; for byte in line { write ! (out , " 0x{:02X}," , byte) ; } writeln ! (out) ; } writeln ! (out , "]);") ; writeln ! (out) ; writeln ! (out , "pub(crate) static LEAF: Align64<[u8; {}]> = Align64([" , halfdense . len () ,) ; for line in halfdense . chunks (16) { write ! (out , "   ") ; for byte in line { write ! (out , " 0x{:02X}," , byte) ; } writeln ! (out) ; } writeln ! (out , "]);") ; out }
+};
+}

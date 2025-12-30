@@ -1,0 +1,53 @@
+// Generated module macro for crate::partitioning
+macro_rules! Modcrate_partitioning {
+() => {
+        Depcrate_partitioninguse_124!();
+        Depcrate_partitioninguse_125!();
+        Depcrate_partitioninguse_126!();
+        Depcrate_partitioninguse_127!();
+        Depcrate_partitioninguse_128!();
+        Depcrate_partitioninguse_129!();
+        Depcrate_partitioninguse_130!();
+        Depcrate_partitioninguse_131!();
+        Depcrate_partitioninguse_132!();
+        Depcrate_partitioninguse_133!();
+        Depcrate_partitioninguse_134!();
+        Depcrate_partitioninguse_135!();
+        Depcrate_partitioninguse_136!();
+        Depcrate_partitioninguse_137!();
+        Depcrate_partitioninguse_138!();
+        Depcrate_partitioninguse_139!();
+        Depcrate_partitioninguse_140!();
+        Depcrate_partitioninguse_141!();
+        Depcrate_partitioninguse_142!();
+        Depcrate_partitioninguse_143!();
+        Depcrate_partitioninguse_144!();
+        Depcrate_partitioninguse_145!();
+        Depcrate_partitioninguse_146!();
+        Depcrate_partitioninguse_147!();
+        Depcrate_partitioninguse_148!();
+        Depcrate_partitioninguse_149!();
+        Depcrate_partitioninguse_150!();
+        Depcrate_partitioningPartitioningCx!();
+        Depcrate_partitioningPlacedMonoItems!();
+        Depcrate_partitioningpartition!();
+        Depcrate_partitioningplace_mono_items!();
+        Depcrate_partitioningmerge_codegen_units!();
+        Depcrate_partitioningcompute_inlined_overlap!();
+        Depcrate_partitioninginternalize_symbols!();
+        Depcrate_partitioningmark_code_coverage_dead_code_cgu!();
+        Depcrate_partitioningcharacteristic_def_id_of_mono_item!();
+        Depcrate_partitioningcompute_codegen_unit_name!();
+        Depcrate_partitioningfallback_cgu_name!();
+        Depcrate_partitioningmono_item_linkage_and_visibility!();
+        Depcrate_partitioningCguNameCache!();
+        Depcrate_partitioningstatic_visibility!();
+        Depcrate_partitioningmono_item_visibility!();
+        Depcrate_partitioningdefault_visibility!();
+        Depcrate_partitioningdebug_dump!();
+        Depcrate_partitioningassert_symbols_are_distinct!();
+        Depcrate_partitioningcollect_and_partition_mono_items!();
+        Depcrate_partitioningdump_mono_items_stats!();
+        Depcrate_partitioningprovide!();
+    };
+}

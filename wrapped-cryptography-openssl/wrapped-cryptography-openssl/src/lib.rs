@@ -1,0 +1,77 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcrate_hmacmacro_33.rs");
+include!("depcrate_aeadimpl_10.rs");
+include!("depcraterand.rs");
+include!("depcrate_cmacuse_15.rs");
+include!("depcrate_aeadimpl_8.rs");
+include!("depcrate_cmacmacro_17.rs");
+include!("depcrate_cmacimpl_18.rs");
+include!("depcrate_aeaduse_3.rs");
+include!("depcratecmac.rs");
+include!("depcrate_hmacuse_32.rs");
+include!("depcrate_fipsuse_24.rs");
+include!("depcrate_hmacimpl_36.rs");
+include!("depcrate_hmacimpl_37.rs");
+include!("depcrateutils.rs");
+include!("depcrate_cmacimpl_20.rs");
+include!("depcrate_hmacuse_29.rs");
+include!("depcrate_hmacuse_30.rs");
+include!("depcrate_cmacuse_13.rs");
+include!("depcrate_utilsbn_to_big_endian_bytes.rs");
+include!("depcrate_hmactests.rs");
+include!("depcrate_randuse_47.rs");
+include!("depcrate_fipsuse_23.rs");
+include!("depcrate_randrand_bytes.rs");
+include!("depcrate_fipsuse_25.rs");
+include!("depcrate_cmacimpl_21.rs");
+include!("depcrate_aeaduse_4.rs");
+include!("depcrate_hmacimpl_39.rs");
+include!("depcrate_hmacdigestbytes.rs");
+include!("depcratecvt_p.rs");
+include!("depcrate_fipsis_enabled.rs");
+include!("depcrate_cmacimpl_19.rs");
+include!("depcrate_aeadaeadtype.rs");
+include!("depcrate_cmacuse_14.rs");
+include!("depcrate_hmacuse_31.rs");
+include!("depcrate_cmacuse_12.rs");
+include!("depcratecvt.rs");
+include!("depcrate_hmacimpl_35.rs");
+include!("depcrate_cmacuse_16.rs");
+include!("depcrate_hmacimpl_34.rs");
+include!("depcrate_poly1305use_43.rs");
+include!("depcratepoly1305.rs");
+include!("depcrate_aeadmacro_6.rs");
+include!("depcrate_utilsuse_50.rs");
+include!("depcratetests.rs");
+include!("depcrate_aeadimpl_9.rs");
+include!("depcrate_fipsenable.rs");
+include!("depcrate_poly1305use_42.rs");
+include!("depcrate_poly1305poly1305state.rs");
+include!("depcrateopensslresult.rs");
+include!("depcrateaead.rs");
+include!("depcratefips.rs");
+include!("depcrate_aeadimpl_7.rs");
+include!("depcrate_poly1305impl_45.rs");
+include!("depcratehmac.rs");
+include!("depcrate_aeaduse_2.rs");
+include!("modcrate_fips.rs");
+include!("modcrate_hmac.rs");
+include!("modcrate_utils.rs");
+include!("modcrate_poly1305.rs");
+include!("modcrate_aead.rs");
+include!("modcrate.rs");
+include!("modcrate_cmac.rs");
+include!("modcrate_rand.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate_fips!();
+    Modcrate_hmac!();
+    Modcrate_utils!();
+    Modcrate_poly1305!();
+    Modcrate_aead!();
+    Modcrate!();
+    Modcrate_cmac!();
+    Modcrate_rand!();
+}

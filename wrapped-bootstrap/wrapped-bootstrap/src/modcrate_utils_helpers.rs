@@ -1,0 +1,57 @@
+// Generated module macro for crate::utils::helpers
+macro_rules! Modcrate_utils_helpers {
+() => {
+        Depcrate_utils_helpersuse_1457!();
+        Depcrate_utils_helpersuse_1458!();
+        Depcrate_utils_helpersuse_1459!();
+        Depcrate_utils_helpersuse_1460!();
+        Depcrate_utils_helpersuse_1461!();
+        Depcrate_utils_helpersuse_1462!();
+        Depcrate_utils_helpersuse_1463!();
+        Depcrate_utils_helpersuse_1464!();
+        Depcrate_utils_helpersuse_1465!();
+        Depcrate_utils_helpersuse_1466!();
+        Depcrate_utils_helpersuse_1467!();
+        Depcrate_utils_helpersuse_1468!();
+        Depcrate_utils_helperstests!();
+        Depcrate_utils_helpersPanicTracker!();
+        Depcrate_utils_helpersimpl_1471!();
+        Depcrate_utils_helperst!();
+        Depcrate_utils_helpersuse_1473!();
+        Depcrate_utils_helpersexe!();
+        Depcrate_utils_helperssplit_debuginfo!();
+        Depcrate_utils_helpersis_dylib!();
+        Depcrate_utils_helperssubmodule_path_of!();
+        Depcrate_utils_helpersis_aix_shared_archive!();
+        Depcrate_utils_helpersis_debug_info!();
+        Depcrate_utils_helperslibdir!();
+        Depcrate_utils_helpersadd_dylib_path!();
+        Depcrate_utils_helpersTimeIt!();
+        Depcrate_utils_helperstimeit!();
+        Depcrate_utils_helpersimpl_1484!();
+        Depcrate_utils_helperssymlink_dir!();
+        Depcrate_utils_helpersget_host_target!();
+        Depcrate_utils_helpersmove_file!();
+        Depcrate_utils_helpersforcing_clang_based_tests!();
+        Depcrate_utils_helpersuse_host_linker!();
+        Depcrate_utils_helperstarget_supports_cranelift_backend!();
+        Depcrate_utils_helpersis_valid_test_suite_arg!();
+        Depcrate_utils_helpersmake!();
+        Depcrate_utils_helpersmtime!();
+        Depcrate_utils_helpersup_to_date!();
+        Depcrate_utils_helpersunhashed_basename!();
+        Depcrate_utils_helpersdir_up_to_date!();
+        Depcrate_utils_helpersget_clang_cl_resource_dir!();
+        Depcrate_utils_helperslld_flag_no_threads!();
+        Depcrate_utils_helpersdir_is_empty!();
+        Depcrate_utils_helpersextract_beta_rev!();
+        Depcrate_utils_helpersLldThreads!();
+        Depcrate_utils_helperslinker_args!();
+        Depcrate_utils_helperslinker_flags!();
+        Depcrate_utils_helpersadd_rustdoc_cargo_linker_args!();
+        Depcrate_utils_helpershex_encode!();
+        Depcrate_utils_helperscheck_cfg_arg!();
+        Depcrate_utils_helpersgit!();
+        Depcrate_utils_helpersset_file_times!();
+    };
+}

@@ -1,0 +1,72 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcrate_generatoroption_type.rs");
+include!("depcratetests.rs");
+include!("depcrate_generatorgenerate_expr.rs");
+include!("depcrate_parse_deriveuse_48.rs");
+include!("depcrateother_1.rs");
+include!("depcrate_generatoruse_28.rs");
+include!("depcrate_parse_derivetests.rs");
+include!("depcrate_generatorgenerate_expr_atomic.rs");
+include!("depcrateuse_4.rs");
+include!("depcrate_generatoruse_23.rs");
+include!("depcrate_generatorgenerate.rs");
+include!("depcrate_generatorgenerate_enum.rs");
+include!("depcrate_docsconsume.rs");
+include!("depcrate_docstests.rs");
+include!("depcrate_generatortests.rs");
+include!("depcrate_generatoruse_22.rs");
+include!("depcratemacros.rs");
+include!("depcrate_docsuse_15.rs");
+include!("depcrategenerator.rs");
+include!("depcrate_generatorgenerate_builtin_rules.rs");
+include!("depcrateuse_57.rs");
+include!("depcrate_macrosinsert_builtin.rs");
+include!("depcrate_generatoruse_24.rs");
+include!("depcrate_generatorgenerate_include.rs");
+include!("depcratederive_parser.rs");
+include!("depcrate_generatorimpl_41.rs");
+include!("depcrateuse_55.rs");
+include!("depcrate_parse_deriveparse_derive.rs");
+include!("depcrateread_file.rs");
+include!("depcrate_generatoruse_25.rs");
+include!("depcrateuse_56.rs");
+include!("depcrate_generatorresult_type.rs");
+include!("depcrateuse_5.rs");
+include!("depcrate_docsuse_14.rs");
+include!("depcratedocs.rs");
+include!("depcrate_generatoruse_26.rs");
+include!("depcrate_generatorgenerate_rule.rs");
+include!("depcrate_generatorgenerate_skip.rs");
+include!("depcrateuse_2.rs");
+include!("depcrate_macrosgenerate_rule.rs");
+include!("depcrate_docsuse_16.rs");
+include!("depcrate_parse_derivegrammarsource.rs");
+include!("depcrateuse_3.rs");
+include!("depcrate_parse_deriveparsedderive.rs");
+include!("depcrate_docsdoccomment.rs");
+include!("depcrate_generatoruse_27.rs");
+include!("depcrateuse_8.rs");
+include!("depcrateuse_6.rs");
+include!("depcrate_parse_deriveget_attribute.rs");
+include!("depcrateparse_derive.rs");
+include!("depcrate_generatorbox_type.rs");
+include!("depcrateuse_7.rs");
+include!("depcrate_generatoruse_29.rs");
+include!("depcrate_generatoruse_30.rs");
+include!("depcrate_generatorgenerate_patterns.rs");
+include!("depcrate_generatorquoteoption.rs");
+include!("modcrate_generator.rs");
+include!("modcrate_docs.rs");
+include!("modcrate_macros.rs");
+include!("modcrate_parse_derive.rs");
+include!("modcrate.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate_generator!();
+    Modcrate_docs!();
+    Modcrate_macros!();
+    Modcrate_parse_derive!();
+    Modcrate!();
+}

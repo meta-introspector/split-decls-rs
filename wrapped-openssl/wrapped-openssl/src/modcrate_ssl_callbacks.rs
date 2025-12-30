@@ -1,0 +1,53 @@
+// Generated module macro for crate::ssl::callbacks
+macro_rules! Modcrate_ssl_callbacks {
+() => {
+        Depcrate_ssl_callbacksuse_932!();
+        Depcrate_ssl_callbacksuse_933!();
+        Depcrate_ssl_callbacksuse_934!();
+        Depcrate_ssl_callbacksuse_935!();
+        Depcrate_ssl_callbacksuse_936!();
+        Depcrate_ssl_callbacksuse_937!();
+        Depcrate_ssl_callbacksuse_938!();
+        Depcrate_ssl_callbacksuse_939!();
+        Depcrate_ssl_callbacksuse_940!();
+        Depcrate_ssl_callbacksuse_941!();
+        Depcrate_ssl_callbacksuse_942!();
+        Depcrate_ssl_callbacksuse_943!();
+        Depcrate_ssl_callbacksuse_944!();
+        Depcrate_ssl_callbacksuse_945!();
+        Depcrate_ssl_callbacksuse_946!();
+        Depcrate_ssl_callbacksuse_947!();
+        Depcrate_ssl_callbacksuse_948!();
+        Depcrate_ssl_callbacksuse_949!();
+        Depcrate_ssl_callbacksuse_950!();
+        Depcrate_ssl_callbacksuse_951!();
+        Depcrate_ssl_callbacksuse_952!();
+        Depcrate_ssl_callbacksuse_953!();
+        Depcrate_ssl_callbacksraw_verify!();
+        Depcrate_ssl_callbacksraw_client_psk!();
+        Depcrate_ssl_callbacksraw_server_psk!();
+        Depcrate_ssl_callbacksssl_raw_verify!();
+        Depcrate_ssl_callbacksraw_sni!();
+        Depcrate_ssl_callbacksraw_alpn_select!();
+        Depcrate_ssl_callbacksraw_tmp_dh!();
+        Depcrate_ssl_callbacksraw_tmp_ecdh!();
+        Depcrate_ssl_callbacksraw_tmp_dh_ssl!();
+        Depcrate_ssl_callbacksraw_tmp_ecdh_ssl!();
+        Depcrate_ssl_callbacksraw_tlsext_status!();
+        Depcrate_ssl_callbacksraw_new_session!();
+        Depcrate_ssl_callbacksraw_remove_session!();
+        Depcrate_ssl_callbacksmacro_967!();
+        Depcrate_ssl_callbacksraw_get_session!();
+        Depcrate_ssl_callbacksraw_keylog!();
+        Depcrate_ssl_callbacksraw_stateless_cookie_generate!();
+        Depcrate_ssl_callbacksraw_stateless_cookie_verify!();
+        Depcrate_ssl_callbacksraw_cookie_generate!();
+        Depcrate_ssl_callbacksmacro_973!();
+        Depcrate_ssl_callbacksraw_cookie_verify!();
+        Depcrate_ssl_callbacksCustomExtAddState!();
+        Depcrate_ssl_callbacksraw_custom_ext_add!();
+        Depcrate_ssl_callbacksraw_custom_ext_free!();
+        Depcrate_ssl_callbacksraw_custom_ext_parse!();
+        Depcrate_ssl_callbacksraw_client_hello!();
+    };
+}

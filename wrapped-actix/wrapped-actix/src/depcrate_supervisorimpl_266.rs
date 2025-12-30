@@ -1,0 +1,9 @@
+// Generated macro for impl_266 (impl)
+macro_rules! Depcrate_supervisorimpl_266 {
+() => {
+// Module: crate::supervisor
+// Provides: {"impl_266"}
+// Dependencies: {}
+impl < A > Supervisor < A > where A : Supervised + Actor < Context = Context < A > > , { # [doc = " Start new supervised actor in current tokio runtime."] # [doc = ""] # [doc = " Type of returned address depends on variable type. For example to get"] # [doc = " `Addr<Syn, _>` of newly created actor, use explicitly `Addr<Syn,"] # [doc = " _>` type as type of a variable."] # [doc = ""] # [doc = " ```"] # [doc = " # use actix::prelude::*;"] # [doc = " struct MyActor;"] # [doc = ""] # [doc = " impl Actor for MyActor {"] # [doc = "     type Context = Context<Self>;"] # [doc = " }"] # [doc = ""] # [doc = " # impl actix::Supervised for MyActor {}"] # [doc = " # fn main() {"] # [doc = " #    System::new().block_on(async {"] # [doc = " // Get `Addr` of a MyActor actor"] # [doc = " let addr = actix::Supervisor::start(|_| MyActor);"] # [doc = " #         System::current().stop();"] # [doc = " # });}"] # [doc = " ```"] pub fn start < F > (f : F) -> Addr < A > where F : FnOnce (& mut A :: Context) -> A + 'static , A : Actor < Context = Context < A > > , { let mut ctx = Context :: new () ; let act = f (& mut ctx) ; let addr = ctx . address () ; let fut = ctx . into_future (act) ; actix_rt :: spawn (Self { fut }) ; addr } # [doc = " Start new supervised actor in arbiter's thread."] pub fn start_in_arbiter < F > (sys : & ArbiterHandle , f : F) -> Addr < A > where A : Actor < Context = Context < A > > , F : FnOnce (& mut Context < A >) -> A + Send + 'static , { let (tx , rx) = channel :: channel (DEFAULT_CAPACITY) ; sys . spawn_fn (move | | { let mut ctx = Context :: with_receiver (rx) ; let act = f (& mut ctx) ; let fut = ctx . into_future (act) ; actix_rt :: spawn (Self { fut }) ; }) ; Addr :: new (tx) } }
+};
+}

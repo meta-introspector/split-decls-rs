@@ -1,0 +1,9 @@
+// Generated macro for impl_16 (impl)
+macro_rules! Depcrate_dictionaryimpl_16 {
+() => {
+// Module: crate::dictionary
+// Provides: {"impl_16"}
+// Dependencies: {}
+# [cfg (any (test , feature = "enable_unstable_features_that_may_break_with_minor_version_bumps"))] impl < 'a > Entry < 'a > { # [doc = " Returns a reference to this entry's key."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " let mut dict = plist::Dictionary::new();"] # [doc = " assert_eq!(dict.entry(\"serde\").key(), &\"serde\");"] # [doc = " ```"] pub fn key (& self) -> & String { match * self { Entry :: Vacant (ref e) => e . key () , Entry :: Occupied (ref e) => e . key () , } } # [doc = " Ensures a value is in the entry by inserting the default if empty, and returns a mutable"] # [doc = " reference to the value in the entry."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " let mut dict = plist::Dictionary::new();"] # [doc = " dict.entry(\"serde\").or_insert(12.into());"] # [doc = ""] # [doc = " assert_eq!(dict[\"serde\"], 12.into());"] # [doc = " ```"] pub fn or_insert (self , default : Value) -> & 'a mut Value { match self { Entry :: Vacant (entry) => entry . insert (default) , Entry :: Occupied (entry) => entry . into_mut () , } } # [doc = " Ensures a value is in the entry by inserting the result of the default function if empty,"] # [doc = " and returns a mutable reference to the value in the entry."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " let mut dict = plist::Dictionary::new();"] # [doc = " dict.entry(\"serde\").or_insert_with(|| \"hoho\".into());"] # [doc = ""] # [doc = " assert_eq!(dict[\"serde\"], \"hoho\".into());"] # [doc = " ```"] pub fn or_insert_with < F > (self , default : F) -> & 'a mut Value where F : FnOnce () -> Value , { match self { Entry :: Vacant (entry) => entry . insert (default ()) , Entry :: Occupied (entry) => entry . into_mut () , } } }
+};
+}

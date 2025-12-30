@@ -1,0 +1,9 @@
+// Generated macro for impl_786 (impl)
+macro_rules! Depcrate_test_dbimpl_786 {
+() => {
+// Module: crate::test_db
+// Provides: {"impl_786"}
+// Dependencies: {}
+# [salsa_macros :: db] impl SourceDatabase for TestDB { fn file_text (& self , file_id : base_db :: FileId) -> FileText { self . files . file_text (file_id) } fn set_file_text (& mut self , file_id : base_db :: FileId , text : & str) { let files = Arc :: clone (& self . files) ; files . set_file_text (self , file_id , text) ; } fn set_file_text_with_durability (& mut self , file_id : base_db :: FileId , text : & str , durability : Durability ,) { let files = Arc :: clone (& self . files) ; files . set_file_text_with_durability (self , file_id , text , durability) ; } # [doc = " Source root of the file."] fn source_root (& self , source_root_id : SourceRootId) -> SourceRootInput { self . files . source_root (source_root_id) } fn set_source_root_with_durability (& mut self , source_root_id : SourceRootId , source_root : Arc < SourceRoot > , durability : Durability ,) { let files = Arc :: clone (& self . files) ; files . set_source_root_with_durability (self , source_root_id , source_root , durability) ; } fn file_source_root (& self , id : base_db :: FileId) -> FileSourceRootInput { self . files . file_source_root (id) } fn set_file_source_root_with_durability (& mut self , id : base_db :: FileId , source_root_id : SourceRootId , durability : Durability ,) { let files = Arc :: clone (& self . files) ; files . set_file_source_root_with_durability (self , id , source_root_id , durability) ; } fn crates_map (& self) -> Arc < CratesMap > { self . crates_map . clone () } }
+};
+}

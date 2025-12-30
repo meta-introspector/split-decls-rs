@@ -1,0 +1,10 @@
+// Generated macro for impl_585 (impl)
+macro_rules! Depcrate_core_build_steps_testimpl_585 {
+() => {
+// Module: crate::core::build_steps::test
+// Provides: {"impl_585"}
+// Dependencies: {}
+impl Step for Linkcheck { type Output = () ; const IS_HOST : bool = true ; const DEFAULT : bool = true ; # [doc = " Runs the `linkchecker` tool as compiled in `stage` by the `host` compiler."] # [doc = ""] # [doc = " This tool in `src/tools` will verify the validity of all our links in the"] # [doc = " documentation to ensure we don't have a bunch of dead ones."] fn run (self , builder : & Builder < '_ >) { let host = self . host ; let hosts = & builder . hosts ; let targets = & builder . targets ; if (hosts != targets) && ! hosts . is_empty () && ! targets . is_empty () { panic ! ("Linkcheck currently does not support builds with different hosts and targets.
+You can skip linkcheck with --skip src/tools/linkchecker") ; } builder . info (& format ! ("Linkcheck ({host})")) ; let bootstrap_host = builder . config . host_target ; let compiler = builder . compiler (0 , bootstrap_host) ; let cargo = tool :: prepare_tool_cargo (builder , compiler , Mode :: ToolBootstrap , bootstrap_host , Kind :: Test , "src/tools/linkchecker" , SourceType :: InTree , & [] ,) ; run_cargo_test (cargo , & [] , & [] , "linkchecker self tests" , bootstrap_host , builder) ; if builder . doc_tests == DocTests :: No { return ; } builder . run_default_doc_steps () ; let linkchecker = builder . tool_cmd (Tool :: Linkchecker) ; let _guard = builder . msg_test ("Linkcheck" , bootstrap_host , 1) ; let _time = helpers :: timeit (builder) ; linkchecker . delay_failure () . arg (builder . out . join (host) . join ("doc")) . run (builder) ; } fn should_run (run : ShouldRun < '_ >) -> ShouldRun < '_ > { let builder = run . builder ; let run = run . path ("src/tools/linkchecker") ; run . default_condition (builder . config . docs) } fn make_run (run : RunConfig < '_ >) { run . builder . ensure (Linkcheck { host : run . target }) ; } fn metadata (& self) -> Option < StepMetadata > { Some (StepMetadata :: test ("link-check" , self . host)) } }
+};
+}

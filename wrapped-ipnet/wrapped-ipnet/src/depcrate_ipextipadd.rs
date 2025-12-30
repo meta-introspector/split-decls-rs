@@ -1,0 +1,9 @@
+// Generated macro for IpAdd (trait)
+macro_rules! Depcrate_ipextIpAdd {
+() => {
+// Module: crate::ipext
+// Provides: {"IpAdd"}
+// Dependencies: {}
+# [doc = " Provides a `saturating_add()` method for `Ipv4Addr` and `Ipv6Addr`."] # [doc = ""] # [doc = " Adding an integer to an IP address returns the modified IP address."] # [doc = " A `u32` may added to an IPv4 address and a `u128` may be added to"] # [doc = " an IPv6 address."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " # #[cfg(not(feature = \"std\"))]"] # [doc = " # use core::net::{Ipv4Addr, Ipv6Addr};"] # [doc = " # #[cfg(feature = \"std\")]"] # [doc = " use std::net::{Ipv4Addr, Ipv6Addr};"] # [doc = " use ipnet::IpAdd;"] # [doc = ""] # [doc = " let ip0: Ipv4Addr = \"192.168.0.0\".parse().unwrap();"] # [doc = " let ip1: Ipv4Addr = \"192.168.0.5\".parse().unwrap();"] # [doc = " let ip2: Ipv4Addr = \"255.255.255.254\".parse().unwrap();"] # [doc = " let max: Ipv4Addr = \"255.255.255.255\".parse().unwrap();"] # [doc = ""] # [doc = " assert_eq!(ip0.saturating_add(5), ip1);"] # [doc = " assert_eq!(ip2.saturating_add(1), max);"] # [doc = " assert_eq!(ip2.saturating_add(5), max);"] # [doc = ""] # [doc = " let ip0: Ipv6Addr = \"fd00::\".parse().unwrap();"] # [doc = " let ip1: Ipv6Addr = \"fd00::5\".parse().unwrap();"] # [doc = " let ip2: Ipv6Addr = \"ffff:ffff:ffff:ffff:ffff:ffff:ffff:fffe\".parse().unwrap();"] # [doc = " let max: Ipv6Addr = \"ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff\".parse().unwrap();"] # [doc = ""] # [doc = " assert_eq!(ip0.saturating_add(5), ip1);"] # [doc = " assert_eq!(ip2.saturating_add(1), max);"] # [doc = " assert_eq!(ip2.saturating_add(5), max);"] # [doc = " ```"] pub trait IpAdd < RHS = Self > { type Output ; fn saturating_add (self , rhs : RHS) -> Self :: Output ; }
+};
+}

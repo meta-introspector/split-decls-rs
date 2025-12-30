@@ -1,0 +1,9 @@
+// Generated macro for FieldMeta (trait)
+macro_rules! Depcrate_macros_reflectFieldMeta {
+() => {
+// Module: crate::macros::reflect
+// Provides: {"FieldMeta"}
+// Dependencies: {}
+# [doc = " Stores meta information of a [GraphQL field][1]:"] # [doc = " - [`Context`] and [`TypeInfo`]."] # [doc = " - Return type's [`TYPE`], [`SUB_TYPES`] and [`WRAPPED_VALUE`]."] # [doc = " - [`ARGUMENTS`]."] # [doc = ""] # [doc = " [`ARGUMENTS`]: Self::ARGUMENTS"] # [doc = " [`Context`]: Self::Context"] # [doc = " [`SUB_TYPES`]: Self::SUB_TYPES"] # [doc = " [`TYPE`]: Self::TYPE"] # [doc = " [`TypeInfo`]: Self::TypeInfo"] # [doc = " [`WRAPPED_VALUE`]: Self::WRAPPED_VALUE"] # [doc = " [1]: https://spec.graphql.org/October2021#sec-Language.Fields"] pub trait FieldMeta < S , const N : FieldName > { # [doc = " [`GraphQLValue::Context`] of this [field][1]."] # [doc = ""] # [doc = " [1]: https://spec.graphql.org/October2021#sec-Language.Fields"] type Context ; # [doc = " [`GraphQLValue::TypeInfo`] of this [GraphQL field][1]."] # [doc = ""] # [doc = " [1]: https://spec.graphql.org/October2021#sec-Language.Fields"] type TypeInfo ; # [doc = " [`Type`] of [GraphQL field's][1] return type."] # [doc = ""] # [doc = " [1]: https://spec.graphql.org/October2021#sec-Language.Fields"] const TYPE : Type ; # [doc = " [Sub-types][1] of [GraphQL field's][2] return type."] # [doc = ""] # [doc = " [1]: BaseSubTypes"] # [doc = " [2]: https://spec.graphql.org/October2021#sec-Language.Fields"] const SUB_TYPES : Types ; # [doc = " [`WrappedValue`] of [GraphQL field's][1] return type."] # [doc = ""] # [doc = " [1]: https://spec.graphql.org/October2021#sec-Language.Fields"] const WRAPPED_VALUE : WrappedValue ; # [doc = " [GraphQL field's][1] [`Arguments`]."] # [doc = ""] # [doc = " [1]: https://spec.graphql.org/October2021#sec-Language.Fields"] const ARGUMENTS : Arguments ; }
+};
+}

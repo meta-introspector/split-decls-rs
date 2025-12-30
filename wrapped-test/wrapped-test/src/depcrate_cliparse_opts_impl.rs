@@ -1,0 +1,9 @@
+// Generated macro for parse_opts_impl (function)
+macro_rules! Depcrate_cliparse_opts_impl {
+() => {
+// Module: crate::cli
+// Provides: {"parse_opts_impl"}
+// Dependencies: {}
+fn parse_opts_impl (matches : getopts :: Matches) -> OptRes { let allow_unstable = get_allow_unstable (& matches) ? ; let force_run_in_process = unstable_optflag ! (matches , allow_unstable , "force-run-in-process") ; let exclude_should_panic = unstable_optflag ! (matches , allow_unstable , "exclude-should-panic") ; let time_options = get_time_options (& matches , allow_unstable) ? ; let shuffle = get_shuffle (& matches , allow_unstable) ? ; let shuffle_seed = get_shuffle_seed (& matches , allow_unstable) ? ; let include_ignored = matches . opt_present ("include-ignored") ; let quiet = matches . opt_present ("quiet") ; let exact = matches . opt_present ("exact") ; let list = matches . opt_present ("list") ; let skip = matches . opt_strs ("skip") ; let bench_benchmarks = matches . opt_present ("bench") ; let run_tests = ! bench_benchmarks || matches . opt_present ("test") ; let logfile = get_log_file (& matches) ? ; let run_ignored = get_run_ignored (& matches , include_ignored) ? ; let filters = matches . free . clone () ; let nocapture = get_nocapture (& matches) ? ; let test_threads = get_test_threads (& matches) ? ; let color = get_color_config (& matches) ? ; let format = get_format (& matches , quiet , allow_unstable) ? ; let options = Options :: new () . display_output (matches . opt_present ("show-output")) ; if logfile . is_some () { let _ = write ! (io :: stderr () , "warning: `--logfile` is deprecated") ; } let test_opts = TestOpts { list , filters , filter_exact : exact , force_run_in_process , exclude_should_panic , run_ignored , run_tests , bench_benchmarks , logfile , nocapture , color , format , shuffle , shuffle_seed , test_threads , skip , time_options , options , fail_fast : false , } ; Ok (test_opts) }
+};
+}

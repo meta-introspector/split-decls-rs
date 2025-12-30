@@ -1,0 +1,49 @@
+// Generated module macro for crate::isa::aarch64::inst::imms
+macro_rules! Modcrate_isa_aarch64_inst_imms {
+() => {
+        Depcrate_isa_aarch64_inst_immsuse_1676!();
+        Depcrate_isa_aarch64_inst_immsuse_1677!();
+        Depcrate_isa_aarch64_inst_immsuse_1678!();
+        Depcrate_isa_aarch64_inst_immsuse_1679!();
+        Depcrate_isa_aarch64_inst_immsNZCV!();
+        Depcrate_isa_aarch64_inst_immsimpl_1681!();
+        Depcrate_isa_aarch64_inst_immsUImm5!();
+        Depcrate_isa_aarch64_inst_immsimpl_1683!();
+        Depcrate_isa_aarch64_inst_immsSImm7Scaled!();
+        Depcrate_isa_aarch64_inst_immsimpl_1685!();
+        Depcrate_isa_aarch64_inst_immsFPULeftShiftImm!();
+        Depcrate_isa_aarch64_inst_immsimpl_1687!();
+        Depcrate_isa_aarch64_inst_immsFPURightShiftImm!();
+        Depcrate_isa_aarch64_inst_immsimpl_1689!();
+        Depcrate_isa_aarch64_inst_immsSImm9!();
+        Depcrate_isa_aarch64_inst_immsimpl_1691!();
+        Depcrate_isa_aarch64_inst_immsUImm12Scaled!();
+        Depcrate_isa_aarch64_inst_immsimpl_1693!();
+        Depcrate_isa_aarch64_inst_immsImm12!();
+        Depcrate_isa_aarch64_inst_immsimpl_1695!();
+        Depcrate_isa_aarch64_inst_immsImmLogic!();
+        Depcrate_isa_aarch64_inst_immsimpl_1697!();
+        Depcrate_isa_aarch64_inst_immsImmShift!();
+        Depcrate_isa_aarch64_inst_immsimpl_1699!();
+        Depcrate_isa_aarch64_inst_immsMoveWideConst!();
+        Depcrate_isa_aarch64_inst_immsimpl_1701!();
+        Depcrate_isa_aarch64_inst_immsASIMDMovModImm!();
+        Depcrate_isa_aarch64_inst_immsimpl_1703!();
+        Depcrate_isa_aarch64_inst_immsASIMDFPModImm!();
+        Depcrate_isa_aarch64_inst_immsimpl_1705!();
+        Depcrate_isa_aarch64_inst_immsimpl_1706!();
+        Depcrate_isa_aarch64_inst_immsimpl_1707!();
+        Depcrate_isa_aarch64_inst_immsimpl_1708!();
+        Depcrate_isa_aarch64_inst_immsimpl_1709!();
+        Depcrate_isa_aarch64_inst_immsimpl_1710!();
+        Depcrate_isa_aarch64_inst_immsimpl_1711!();
+        Depcrate_isa_aarch64_inst_immsimpl_1712!();
+        Depcrate_isa_aarch64_inst_immsimpl_1713!();
+        Depcrate_isa_aarch64_inst_immsimpl_1714!();
+        Depcrate_isa_aarch64_inst_immsimpl_1715!();
+        Depcrate_isa_aarch64_inst_immsimpl_1716!();
+        Depcrate_isa_aarch64_inst_immsimpl_1717!();
+        Depcrate_isa_aarch64_inst_immsimpl_1718!();
+        Depcrate_isa_aarch64_inst_immstest!();
+    };
+}

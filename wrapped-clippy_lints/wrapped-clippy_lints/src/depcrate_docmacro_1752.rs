@@ -1,0 +1,9 @@
+// Generated macro for macro_1752 (macro)
+macro_rules! Depcrate_docmacro_1752 {
+() => {
+// Module: crate::doc
+// Provides: {"macro_1752"}
+// Dependencies: {}
+declare_clippy_lint ! { # [doc = " ### What it does"] # [doc = " Detects the use of outer doc comments (`///`, `/**`) followed by a bang (`!`): `///!`"] # [doc = ""] # [doc = " ### Why is this bad?"] # [doc = " Triple-slash comments (known as \"outer doc comments\") apply to items that follow it."] # [doc = " An outer doc comment followed by a bang (i.e. `///!`) has no specific meaning."] # [doc = ""] # [doc = " The user most likely meant to write an inner doc comment (`//!`, `/*!`), which"] # [doc = " applies to the parent item (i.e. the item that the comment is contained in,"] # [doc = " usually a module or crate)."] # [doc = ""] # [doc = " ### Known problems"] # [doc = " Inner doc comments can only appear before items, so there are certain cases where the suggestion"] # [doc = " made by this lint is not valid code. For example:"] # [doc = " ```rust"] # [doc = " fn foo() {}"] # [doc = " ///!"] # [doc = " fn bar() {}"] # [doc = " ```"] # [doc = " This lint detects the doc comment and suggests changing it to `//!`, but an inner doc comment"] # [doc = " is not valid at that position."] # [doc = ""] # [doc = " ### Example"] # [doc = " In this example, the doc comment is attached to the *function*, rather than the *module*."] # [doc = " ```no_run"] # [doc = " pub mod util {"] # [doc = "     ///! This module contains utility functions."] # [doc = ""] # [doc = "     pub fn dummy() {}"] # [doc = " }"] # [doc = " ```"] # [doc = ""] # [doc = " Use instead:"] # [doc = " ```no_run"] # [doc = " pub mod util {"] # [doc = "     //! This module contains utility functions."] # [doc = ""] # [doc = "     pub fn dummy() {}"] # [doc = " }"] # [doc = " ```"] # [clippy :: version = "1.70.0"] pub SUSPICIOUS_DOC_COMMENTS , suspicious , "suspicious usage of (outer) doc comments" }
+};
+}

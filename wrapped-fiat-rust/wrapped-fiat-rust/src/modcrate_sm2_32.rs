@@ -1,0 +1,41 @@
+// Generated module macro for crate::sm2_32
+macro_rules! Modcrate_sm2_32 {
+() => {
+        Depcrate_sm2_32IndexConst!();
+        Depcrate_sm2_32impl_916!();
+        Depcrate_sm2_32impl_917!();
+        Depcrate_sm2_32fiat_sm2_u1!();
+        Depcrate_sm2_32fiat_sm2_i1!();
+        Depcrate_sm2_32fiat_sm2_u2!();
+        Depcrate_sm2_32fiat_sm2_i2!();
+        Depcrate_sm2_32fiat_sm2_montgomery_domain_field_element!();
+        Depcrate_sm2_32impl_923!();
+        Depcrate_sm2_32impl_924!();
+        Depcrate_sm2_32impl_925!();
+        Depcrate_sm2_32impl_926!();
+        Depcrate_sm2_32fiat_sm2_non_montgomery_domain_field_element!();
+        Depcrate_sm2_32impl_928!();
+        Depcrate_sm2_32impl_929!();
+        Depcrate_sm2_32impl_930!();
+        Depcrate_sm2_32impl_931!();
+        Depcrate_sm2_32fiat_sm2_addcarryx_u32!();
+        Depcrate_sm2_32fiat_sm2_subborrowx_u32!();
+        Depcrate_sm2_32fiat_sm2_mulx_u32!();
+        Depcrate_sm2_32fiat_sm2_cmovznz_u32!();
+        Depcrate_sm2_32fiat_sm2_mul!();
+        Depcrate_sm2_32fiat_sm2_square!();
+        Depcrate_sm2_32fiat_sm2_add!();
+        Depcrate_sm2_32fiat_sm2_sub!();
+        Depcrate_sm2_32fiat_sm2_opp!();
+        Depcrate_sm2_32fiat_sm2_from_montgomery!();
+        Depcrate_sm2_32fiat_sm2_to_montgomery!();
+        Depcrate_sm2_32fiat_sm2_nonzero!();
+        Depcrate_sm2_32fiat_sm2_selectznz!();
+        Depcrate_sm2_32fiat_sm2_to_bytes!();
+        Depcrate_sm2_32fiat_sm2_from_bytes!();
+        Depcrate_sm2_32fiat_sm2_set_one!();
+        Depcrate_sm2_32fiat_sm2_msat!();
+        Depcrate_sm2_32fiat_sm2_divstep!();
+        Depcrate_sm2_32fiat_sm2_divstep_precomp!();
+    };
+}

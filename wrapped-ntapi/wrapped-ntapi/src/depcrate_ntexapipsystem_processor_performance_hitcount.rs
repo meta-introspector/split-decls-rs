@@ -1,0 +1,9 @@
+// Generated macro for PSYSTEM_PROCESSOR_PERFORMANCE_HITCOUNT (type)
+macro_rules! Depcrate_ntexapiPSYSTEM_PROCESSOR_PERFORMANCE_HITCOUNT {
+() => {
+// Module: crate::ntexapi
+// Provides: {"PSYSTEM_PROCESSOR_PERFORMANCE_HITCOUNT"}
+// Dependencies: {}
+pub type PSYSTEM_PROCESSOR_PERFORMANCE_HITCOUNT = * mut SYSTEM_PROCESSOR_PERFORMANCE_HITCOUNT ;
+};
+}

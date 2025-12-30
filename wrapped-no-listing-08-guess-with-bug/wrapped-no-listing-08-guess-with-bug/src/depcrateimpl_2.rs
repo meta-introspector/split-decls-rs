@@ -1,0 +1,9 @@
+// Generated macro for impl_2 (impl)
+macro_rules! Depcrateimpl_2 {
+() => {
+// Module: crate
+// Provides: {"impl_2"}
+// Dependencies: {}
+impl Guess { pub fn new (value : i32) -> Guess { if value < 1 { panic ! ("Guess value must be between 1 and 100, got {value}.") ; } Guess { value } } }
+};
+}

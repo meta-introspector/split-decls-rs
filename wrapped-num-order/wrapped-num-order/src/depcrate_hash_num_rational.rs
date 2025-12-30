@@ -1,0 +1,9 @@
+// Generated macro for _num_rational (module)
+macro_rules! Depcrate_hash_num_rational {
+() => {
+// Module: crate::hash
+// Provides: {"_num_rational"}
+// Dependencies: {}
+# [cfg (feature = "num-rational")] mod _num_rational { use super :: * ; use core :: ops :: Neg ; use num_rational :: Ratio ; macro_rules ! impl_hash_for_ratio { ($ ($ int : ty) *) => ($ (impl NumHash for Ratio <$ int > { fn num_hash < H : Hasher > (& self , state : & mut H) { let ub = * self . denom () as u128 ; let binv = if ub != M127U { MInt :: new (ub , & M127U) . inv () . unwrap () } else { return if self . numer () > & 0 { HASH_INF . num_hash (state) } else { HASH_NEGINF . num_hash (state) } } ; let ua = if self . numer () < & 0 { (* self . numer () as u128) . wrapping_neg () } else { * self . numer () as u128 } ; let ua = binv . convert (ua) ; let ab = (ua * binv) . residue () as i128 ; if self . numer () >= & 0 { ab . num_hash (state) } else { ab . neg () . num_hash (state) } } }) *) ; } impl_hash_for_ratio ! (i8 i16 i32 i64 i128 isize) ; # [cfg (feature = "num-bigint")] mod _num_bigint { use super :: * ; use num_bigint :: { BigInt , BigUint } ; use num_traits :: { Signed , ToPrimitive , Zero } ; impl NumHash for Ratio < BigInt > { fn num_hash < H : Hasher > (& self , state : & mut H) { let ub = (self . denom () . magnitude () % BigUint :: from (M127U)) . to_u128 () . unwrap () ; let binv = if ! ub . is_zero () { MInt :: new (ub , & M127U) . inv () . unwrap () } else { return if self . numer () . is_negative () { HASH_NEGINF . num_hash (state) } else { HASH_INF . num_hash (state) } ; } ; let ua = (self . numer () . magnitude () % BigUint :: from (M127U)) . to_u128 () . unwrap () ; let ua = binv . convert (ua) ; let ab = (ua * binv) . residue () as i128 ; if self . numer () . is_negative () { ab . neg () . num_hash (state) } else { ab . num_hash (state) } } } } }
+};
+}

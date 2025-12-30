@@ -1,0 +1,9 @@
+// Generated macro for impl_752 (impl)
+macro_rules! Depcrate_core_build_steps_toolimpl_752 {
+() => {
+// Module: crate::core::build_steps::tool
+// Provides: {"impl_752"}
+// Dependencies: {}
+impl RustcPrivateCompilers { # [doc = " Create compilers for a `rustc_private` tool with the given `stage` and for the given"] # [doc = " `target`."] pub fn new (builder : & Builder < '_ > , stage : u32 , target : TargetSelection) -> Self { let build_compiler = Self :: build_compiler_from_stage (builder , stage) ; let target_compiler = builder . compiler (build_compiler . stage + 1 , target) ; Self { build_compiler , target_compiler } } pub fn from_build_and_target_compiler (build_compiler : Compiler , target_compiler : Compiler ,) -> Self { Self { build_compiler , target_compiler } } # [doc = " Create rustc tool compilers from the build compiler."] pub fn from_build_compiler (builder : & Builder < '_ > , build_compiler : Compiler , target : TargetSelection ,) -> Self { let target_compiler = builder . compiler (build_compiler . stage + 1 , target) ; Self { build_compiler , target_compiler } } # [doc = " Create rustc tool compilers from the target compiler."] pub fn from_target_compiler (builder : & Builder < '_ > , target_compiler : Compiler) -> Self { Self { build_compiler : Self :: build_compiler_from_stage (builder , target_compiler . stage) , target_compiler , } } fn build_compiler_from_stage (builder : & Builder < '_ > , stage : u32) -> Compiler { assert ! (stage > 0) ; if builder . download_rustc () && stage == 1 { builder . compiler (1 , builder . config . host_target) } else { builder . compiler (stage - 1 , builder . config . host_target) } } pub fn build_compiler (& self) -> Compiler { self . build_compiler } pub fn target_compiler (& self) -> Compiler { self . target_compiler } # [doc = " Target of the tool being compiled"] pub fn target (& self) -> TargetSelection { self . target_compiler . host } }
+};
+}

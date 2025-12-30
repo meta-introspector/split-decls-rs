@@ -1,0 +1,59 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcrate_clientboxedfut.rs");
+include!("depcrate_clientimpl_20.rs");
+include!("depcrate_clientimpl_28.rs");
+include!("depcrate_streamuse_34.rs");
+include!("depcrate_streamuse_38.rs");
+include!("depcrate_clientuse_11.rs");
+include!("depcrate_clienthttpsconnecting.rs");
+include!("depcrate_clientimpl_17.rs");
+include!("depcrate_clientimpl_19.rs");
+include!("depcrate_clientimpl_29.rs");
+include!("depcrate_streammaybehttpsstream.rs");
+include!("depcrate_streamimpl_40.rs");
+include!("depcrateuse_3.rs");
+include!("depcrate_clientboxerror.rs");
+include!("depcrate_streamuse_32.rs");
+include!("depcrate_clientuse_9.rs");
+include!("depcrate_clientuse_6.rs");
+include!("depcrate_streamuse_33.rs");
+include!("depcrateuse_2.rs");
+include!("depcrate_streamimpl_46.rs");
+include!("depcrate_clientuse_5.rs");
+include!("depcrate_streamimpl_44.rs");
+include!("depcrate_clientforcehttpsbuturinothttps.rs");
+include!("depcrate_streamimpl_41.rs");
+include!("depcrate_streamimpl_42.rs");
+include!("depcratestream.rs");
+include!("depcrate_clientimpl_26.rs");
+include!("depcrate_clienthttpsconnector.rs");
+include!("depcrate_clientuse_8.rs");
+include!("depcrateclient.rs");
+include!("depcrate_clientuse_10.rs");
+include!("depcrate_streamuse_31.rs");
+include!("depcrateother_1.rs");
+include!("depcrate_streamimpl_43.rs");
+include!("depcrate_clienterr.rs");
+include!("depcrate_clientuse_12.rs");
+include!("depcrate_clientimpl_21.rs");
+include!("depcrate_clientimpl_18.rs");
+include!("depcrate_streamuse_36.rs");
+include!("depcrate_clientimpl_16.rs");
+include!("depcrate_streamuse_35.rs");
+include!("depcrate_clientimpl_25.rs");
+include!("depcrate_clientuse_13.rs");
+include!("depcrate_clientuse_7.rs");
+include!("depcrate_streamuse_37.rs");
+include!("depcrate_streamimpl_45.rs");
+include!("depcrate_streamnegotiated_h2.rs");
+include!("modcrate_client.rs");
+include!("modcrate_stream.rs");
+include!("modcrate.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate_client!();
+    Modcrate_stream!();
+    Modcrate!();
+}

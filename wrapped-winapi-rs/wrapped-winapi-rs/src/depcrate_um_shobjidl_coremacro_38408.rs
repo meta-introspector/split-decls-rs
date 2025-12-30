@@ -1,0 +1,9 @@
+// Generated macro for macro_38408 (macro)
+macro_rules! Depcrate_um_shobjidl_coremacro_38408 {
+() => {
+// Module: crate::um::shobjidl_core
+// Provides: {"macro_38408"}
+// Dependencies: {}
+ENUM ! { enum STPFLAG { STPF_NONE = 0 , STPF_USEAPPTHUMBNAILALWAYS = 0x1 , STPF_USEAPPTHUMBNAILWHENACTIVE = 0x2 , STPF_USEAPPPEEKALWAYS = 0x4 , STPF_USEAPPPEEKWHENACTIVE = 0x8 , } }
+};
+}

@@ -1,0 +1,40 @@
+// Generated module macro for crate::data_provider
+macro_rules! Modcrate_data_provider {
+() => {
+        Depcrate_data_provideruse_113!();
+        Depcrate_data_provideruse_114!();
+        Depcrate_data_provideruse_115!();
+        Depcrate_data_providerDataProvider!();
+        Depcrate_data_providerimpl_117!();
+        Depcrate_data_providerimpl_118!();
+        Depcrate_data_providerimpl_119!();
+        Depcrate_data_providerimpl_120!();
+        Depcrate_data_providerDryDataProvider!();
+        Depcrate_data_providerimpl_122!();
+        Depcrate_data_providerimpl_123!();
+        Depcrate_data_providerimpl_124!();
+        Depcrate_data_providerimpl_125!();
+        Depcrate_data_providerIterableDataProvider!();
+        Depcrate_data_providerDynamicDataProvider!();
+        Depcrate_data_providerimpl_128!();
+        Depcrate_data_providerimpl_129!();
+        Depcrate_data_providerimpl_130!();
+        Depcrate_data_providerimpl_131!();
+        Depcrate_data_providerDynamicDryDataProvider!();
+        Depcrate_data_providerimpl_133!();
+        Depcrate_data_providerimpl_134!();
+        Depcrate_data_providerimpl_135!();
+        Depcrate_data_providerimpl_136!();
+        Depcrate_data_providerIterableDynamicDataProvider!();
+        Depcrate_data_providerimpl_138!();
+        Depcrate_data_providerBoundDataProvider!();
+        Depcrate_data_providerimpl_140!();
+        Depcrate_data_providerimpl_141!();
+        Depcrate_data_providerimpl_142!();
+        Depcrate_data_providerimpl_143!();
+        Depcrate_data_providerDataProviderWithMarker!();
+        Depcrate_data_providerimpl_145!();
+        Depcrate_data_providerimpl_146!();
+        Depcrate_data_providertest!();
+    };
+}

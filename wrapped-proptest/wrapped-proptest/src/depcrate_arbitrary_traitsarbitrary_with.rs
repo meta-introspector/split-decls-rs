@@ -1,0 +1,9 @@
+// Generated macro for arbitrary_with (function)
+macro_rules! Depcrate_arbitrary_traitsarbitrary_with {
+() => {
+// Module: crate::arbitrary::traits
+// Provides: {"arbitrary_with"}
+// Dependencies: {}
+# [doc = " Generates a [`Strategy`] producing [`Arbitrary`] values of `A` with the"] # [doc = " given configuration arguments passed in `args`."] # [doc = " Works better with type inference than [`any_with::<A>(args)`]."] # [doc = ""] # [doc = " With this version, you shouldn't need to specify any of the (many) type"] # [doc = " parameters explicitly. This can have a positive effect on type inference."] # [doc = " However, if you want specify `A`, you should use"] # [doc = " [`any_with::<A>(args)`] instead."] # [doc = ""] # [doc = " For clarity, it is often a good idea to specify the type generated, and"] # [doc = " so using [`any_with::<A>(args)`] can be a good idea."] # [doc = ""] # [doc = " If you don't want to specify any arguments and instead use the default"] # [doc = " behavior, you should use [`arbitrary()`]."] # [doc = ""] # [doc = " # Example"] # [doc = ""] # [doc = " The function can be used as:"] # [doc = ""] # [doc = " ```rust"] # [doc = " extern crate proptest;"] # [doc = " use proptest::arbitrary::{arbitrary_with, StrategyFor};"] # [doc = " use proptest::collection::size_range;"] # [doc = ""] # [doc = " fn gen_vec_10_u32() -> StrategyFor<Vec<u32>> {"] # [doc = "     arbitrary_with(size_range(10).lift())"] # [doc = " }"] # [doc = ""] # [doc = " # fn main() {}"] # [doc = " ```"] # [doc = ""] # [doc = " [`any_with::<A>(args)`]: fn.any_with.html"] # [doc = " [`arbitrary()`]: fn.arbitrary.html"] # [doc = " [`Arbitrary`]: trait.Arbitrary.html"] # [doc = " [`Strategy`]: ../strategy/trait.Strategy.html"] # [must_use = "strategies do nothing unless used"] pub fn arbitrary_with < A , S , P > (args : P) -> S where P : Default , S : Strategy < Value = A > , A : Arbitrary < Strategy = S , Parameters = P > , { A :: arbitrary_with (args) }
+};
+}

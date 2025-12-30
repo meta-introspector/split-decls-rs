@@ -1,0 +1,9 @@
+// Generated macro for Reduce (trait)
+macro_rules! Depcrate_parallel_reduceReduce {
+() => {
+// Module: crate::parallel::reduce
+// Provides: {"Reduce"}
+// Dependencies: {}
+# [doc = " An trait for aggregating items commonly produced in threads into a single result, without itself"] # [doc = " needing to be thread safe."] pub trait Reduce { # [doc = " The type fed to the reducer in the [`feed()`][Reduce::feed()] method."] # [doc = ""] # [doc = " It's produced by a function that may run on multiple threads."] type Input ; # [doc = " The type produced in Ok(…) by [`feed()`][Reduce::feed()]."] # [doc = " Most reducers by nature use `()` here as the value is in the aggregation."] # [doc = " However, some may use it to collect statistics only and return their Input"] # [doc = " in some form as a result here for [`Stepwise`] to be useful."] type FeedProduce ; # [doc = " The type produced once by the [`finalize()`][Reduce::finalize()] method."] # [doc = ""] # [doc = " For traditional reducers, this is the value produced by the entire operation."] # [doc = " For those made for step-wise iteration this may be aggregated statistics."] type Output ; # [doc = " The error type to use for all methods of this trait."] type Error ; # [doc = " Called each time a new `item` was produced in order to aggregate it into the final result."] # [doc = ""] # [doc = " If an `Error` is returned, the entire operation will be stopped."] fn feed (& mut self , item : Self :: Input) -> Result < Self :: FeedProduce , Self :: Error > ; # [doc = " Called once for all items that were passed to `feed()`, producing the final `Output` of the operation or an `Error`."] fn finalize (self) -> Result < Self :: Output , Self :: Error > ; }
+};
+}

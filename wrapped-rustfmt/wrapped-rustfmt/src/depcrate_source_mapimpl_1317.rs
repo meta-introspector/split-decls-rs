@@ -1,0 +1,9 @@
+// Generated macro for impl_1317 (impl)
+macro_rules! Depcrate_source_mapimpl_1317 {
+() => {
+// Module: crate::source_map
+// Provides: {"impl_1317"}
+// Dependencies: {}
+impl SpanUtils for SnippetProvider { fn span_after (& self , original : Span , needle : & str) -> BytePos { self . opt_span_after (original , needle) . unwrap_or_else (| | { panic ! ("bad span: `{}`: `{}`" , needle , self . span_to_snippet (original) . unwrap ()) }) } fn span_after_last (& self , original : Span , needle : & str) -> BytePos { let snippet = self . span_to_snippet (original) . unwrap () ; let mut offset = 0 ; while let Some (additional_offset) = snippet [offset ..] . find_uncommented (needle) { offset += additional_offset + needle . len () ; } original . lo () + BytePos (offset as u32) } fn span_before (& self , original : Span , needle : & str) -> BytePos { self . opt_span_before (original , needle) . unwrap_or_else (| | { panic ! ("bad span: `{}`: `{}`" , needle , self . span_to_snippet (original) . unwrap ()) }) } fn span_before_last (& self , original : Span , needle : & str) -> BytePos { let snippet = self . span_to_snippet (original) . unwrap () ; let mut offset = 0 ; while let Some (additional_offset) = snippet [offset ..] . find_uncommented (needle) { offset += additional_offset + needle . len () ; } original . lo () + BytePos (offset as u32 - 1) } fn opt_span_after (& self , original : Span , needle : & str) -> Option < BytePos > { self . opt_span_before (original , needle) . map (| bytepos | bytepos + BytePos (needle . len () as u32)) } fn opt_span_before (& self , original : Span , needle : & str) -> Option < BytePos > { let snippet = self . span_to_snippet (original) ? ; let offset = snippet . find_uncommented (needle) ? ; Some (original . lo () + BytePos (offset as u32)) } }
+};
+}

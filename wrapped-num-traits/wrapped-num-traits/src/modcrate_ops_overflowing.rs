@@ -1,0 +1,49 @@
+// Generated module macro for crate::ops::overflowing
+macro_rules! Modcrate_ops_overflowing {
+() => {
+        Depcrate_ops_overflowinguse_479!();
+        Depcrate_ops_overflowinguse_480!();
+        Depcrate_ops_overflowinguse_481!();
+        Depcrate_ops_overflowingoverflowing_impl!();
+        Depcrate_ops_overflowingOverflowingAdd!();
+        Depcrate_ops_overflowingmacro_484!();
+        Depcrate_ops_overflowingmacro_485!();
+        Depcrate_ops_overflowingmacro_486!();
+        Depcrate_ops_overflowingmacro_487!();
+        Depcrate_ops_overflowingmacro_488!();
+        Depcrate_ops_overflowingmacro_489!();
+        Depcrate_ops_overflowingmacro_490!();
+        Depcrate_ops_overflowingmacro_491!();
+        Depcrate_ops_overflowingmacro_492!();
+        Depcrate_ops_overflowingmacro_493!();
+        Depcrate_ops_overflowingmacro_494!();
+        Depcrate_ops_overflowingmacro_495!();
+        Depcrate_ops_overflowingOverflowingSub!();
+        Depcrate_ops_overflowingmacro_497!();
+        Depcrate_ops_overflowingmacro_498!();
+        Depcrate_ops_overflowingmacro_499!();
+        Depcrate_ops_overflowingmacro_500!();
+        Depcrate_ops_overflowingmacro_501!();
+        Depcrate_ops_overflowingmacro_502!();
+        Depcrate_ops_overflowingmacro_503!();
+        Depcrate_ops_overflowingmacro_504!();
+        Depcrate_ops_overflowingmacro_505!();
+        Depcrate_ops_overflowingmacro_506!();
+        Depcrate_ops_overflowingmacro_507!();
+        Depcrate_ops_overflowingmacro_508!();
+        Depcrate_ops_overflowingOverflowingMul!();
+        Depcrate_ops_overflowingmacro_510!();
+        Depcrate_ops_overflowingmacro_511!();
+        Depcrate_ops_overflowingmacro_512!();
+        Depcrate_ops_overflowingmacro_513!();
+        Depcrate_ops_overflowingmacro_514!();
+        Depcrate_ops_overflowingmacro_515!();
+        Depcrate_ops_overflowingmacro_516!();
+        Depcrate_ops_overflowingmacro_517!();
+        Depcrate_ops_overflowingmacro_518!();
+        Depcrate_ops_overflowingmacro_519!();
+        Depcrate_ops_overflowingmacro_520!();
+        Depcrate_ops_overflowingmacro_521!();
+        Depcrate_ops_overflowingtest_overflowing_traits!();
+    };
+}

@@ -1,0 +1,9 @@
+// Generated macro for AtomicConsume (trait)
+macro_rules! Depcrate_atomic_consumeAtomicConsume {
+() => {
+// Module: crate::atomic::consume
+// Provides: {"AtomicConsume"}
+// Dependencies: {}
+# [doc = " Trait which allows reading from primitive atomic types with \"consume\" ordering."] pub trait AtomicConsume { # [doc = " Type returned by `load_consume`."] type Val ; # [doc = " Loads a value from the atomic using a \"consume\" memory ordering."] # [doc = ""] # [doc = " This is similar to the \"acquire\" ordering, except that an ordering is"] # [doc = " only guaranteed with operations that \"depend on\" the result of the load."] # [doc = " However consume loads are usually much faster than acquire loads on"] # [doc = " architectures with a weak memory model since they don't require memory"] # [doc = " fence instructions."] # [doc = ""] # [doc = " The exact definition of \"depend on\" is a bit vague, but it works as you"] # [doc = " would expect in practice since a lot of software, especially the Linux"] # [doc = " kernel, rely on this behavior."] # [doc = ""] # [doc = " This is currently only implemented on ARM and AArch64, where a fence"] # [doc = " can be avoided. On other architectures this will fall back to a simple"] # [doc = " `load(Ordering::Acquire)`."] fn load_consume (& self) -> Self :: Val ; }
+};
+}

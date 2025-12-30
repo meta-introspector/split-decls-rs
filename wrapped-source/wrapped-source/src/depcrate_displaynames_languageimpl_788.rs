@@ -1,0 +1,9 @@
+// Generated macro for impl_788 (impl)
+macro_rules! Depcrate_displaynames_languageimpl_788 {
+() => {
+// Module: crate::displaynames::language
+// Provides: {"impl_788"}
+// Dependencies: {}
+impl From < & cldr_serde :: displaynames :: language :: Resource > for LocaleDisplayNames < 'static > { fn from (other : & cldr_serde :: displaynames :: language :: Resource) -> Self { let mut names = BTreeMap :: new () ; let mut short_names = BTreeMap :: new () ; let mut long_names = BTreeMap :: new () ; let mut menu_names = BTreeMap :: new () ; for (key , value) in other . main . value . localedisplaynames . languages . iter () { if key . contains ("-menu-") { continue ; } # [expect (clippy :: collapsible_if)] if let Some (locale) = key . strip_suffix (ALT_SHORT_SUBSTRING) { if locale . contains ('-') { short_names . insert (locale , value . as_ref ()) ; } } else if let Some (locale) = key . strip_suffix (ALT_LONG_SUBSTRING) { if locale . contains ('-') { long_names . insert (locale , value . as_ref ()) ; } } else if let Some (locale) = key . strip_suffix (ALT_MENU_SUBSTRING) { if locale . contains ('-') { menu_names . insert (locale , value . as_ref ()) ; } } else if ! key . contains (ALT_SUBSTRING) { if key . contains ('-') { names . insert (key , value . as_ref ()) ; } } } Self { names : names . into_iter () . filter (| & (k , v) | k != v) . map (| (k , v) | (PotentialUtf8 :: from_str (k) , v)) . collect () , short_names : short_names . into_iter () . filter (| & (k , v) | k != v) . map (| (k , v) | (PotentialUtf8 :: from_str (k) , v)) . collect () , long_names : long_names . into_iter () . filter (| & (k , v) | k != v) . map (| (k , v) | (PotentialUtf8 :: from_str (k) , v)) . collect () , menu_names : menu_names . into_iter () . filter (| & (k , v) | k != v) . map (| (k , v) | (PotentialUtf8 :: from_str (k) , v)) . collect () , } } }
+};
+}

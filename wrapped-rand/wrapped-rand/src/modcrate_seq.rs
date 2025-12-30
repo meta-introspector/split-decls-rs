@@ -6,11 +6,11 @@ macro_rules! Modcrate_seq {
         Depcrate_seqiterator!();
         Depcrate_seqslice!();
         Depcrate_seqindex_!();
-        Depcrate_sequse_428!();
-        Depcrate_sequse_429!();
-        Depcrate_sequse_430!();
-        Depcrate_sequse_431!();
-        Depcrate_sequse_432!();
+        Depcrate_sequse_382!();
+        Depcrate_sequse_383!();
+        Depcrate_sequse_384!();
+        Depcrate_sequse_385!();
+        Depcrate_sequse_386!();
         Depcrate_seqindex!();
     };
 }

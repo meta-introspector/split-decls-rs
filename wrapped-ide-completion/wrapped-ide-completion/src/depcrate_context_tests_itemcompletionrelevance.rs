@@ -1,0 +1,9 @@
+// Generated macro for CompletionRelevance (struct)
+macro_rules! Depcrate_context_tests_itemCompletionRelevance {
+() => {
+// Module: crate::context::tests::item
+// Provides: {"CompletionRelevance"}
+// Dependencies: {}
+# [derive (Debug , Clone , Copy , Eq , PartialEq , Default)] pub struct CompletionRelevance { # [doc = " This is set when the identifier being completed matches up with the name that is expected,"] # [doc = " like in a function argument."] # [doc = ""] # [doc = " ```ignore"] # [doc = " fn f(spam: String) {}"] # [doc = " fn main() {"] # [doc = "     let spam = 92;"] # [doc = "     f($0) // name of local matches the name of param"] # [doc = " }"] # [doc = " ```"] pub exact_name_match : bool , # [doc = " See [`CompletionRelevanceTypeMatch`]."] pub type_match : Option < CompletionRelevanceTypeMatch > , # [doc = " Set for local variables."] # [doc = ""] # [doc = " ```ignore"] # [doc = " fn foo(a: u32) {"] # [doc = "     let b = 0;"] # [doc = "     $0 // `a` and `b` are local"] # [doc = " }"] # [doc = " ```"] pub is_local : bool , # [doc = " Populated when the completion item comes from a trait (impl)."] pub trait_ : Option < CompletionRelevanceTraitInfo > , # [doc = " This is set when an import is suggested in a use item whose name is already imported."] pub is_name_already_imported : bool , # [doc = " This is set for completions that will insert a `use` item."] pub requires_import : bool , # [doc = " Set for item completions that are private but in the workspace."] pub is_private_editable : bool , # [doc = " Set for postfix snippet item completions"] pub postfix_match : Option < CompletionRelevancePostfixMatch > , # [doc = " This is set for items that are function (associated or method)"] pub function : Option < CompletionRelevanceFn > , # [doc = " true when there is an `await.method()` or `iter().method()` completion."] pub is_skipping_completion : bool , }
+};
+}

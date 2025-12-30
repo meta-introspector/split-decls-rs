@@ -1,0 +1,9 @@
+// Generated macro for impl_636 (impl)
+macro_rules! Depcrate_offset_date_timeimpl_636 {
+() => {
+// Module: crate::offset_date_time
+// Provides: {"impl_636"}
+// Dependencies: {}
+# [cfg (feature = "parsing")] impl OffsetDateTime { # [doc = " Parse an `OffsetDateTime` from the input using the provided [format"] # [doc = " description](crate::format_description)."] # [doc = ""] # [doc = " ```rust"] # [doc = " # use time::OffsetDateTime;"] # [doc = " # use time_macros::{datetime, format_description};"] # [doc = " let format = format_description!("] # [doc = "     \"[year]-[month]-[day] [hour]:[minute]:[second] [offset_hour \\"] # [doc = "          sign:mandatory]:[offset_minute]:[offset_second]\""] # [doc = " );"] # [doc = " assert_eq!("] # [doc = "     OffsetDateTime::parse(\"2020-01-02 03:04:05 +06:07:08\", &format)?,"] # [doc = "     datetime!(2020-01-02 03:04:05 +06:07:08)"] # [doc = " );"] # [doc = " # Ok::<_, time::Error>(())"] # [doc = " ```"] # [inline] pub fn parse (input : & str , description : & (impl Parsable + ? Sized) ,) -> Result < Self , error :: Parse > { description . parse_offset_date_time (input . as_bytes ()) } # [doc = " A helper method to check if the `OffsetDateTime` is a valid representation of a leap second."] # [doc = " Leap seconds, when parsed, are represented as the preceding nanosecond. However, leap"] # [doc = " seconds can only occur as the last second of a month UTC."] # [cfg (feature = "parsing")] # [inline] pub (crate) const fn is_valid_leap_second_stand_in (self) -> bool { if self . nanosecond () != 999_999_999 { return false ; } let (year , ordinal , time) = self . to_utc_raw () ; let Ok (date) = Date :: from_ordinal_date (year , ordinal) else { return false ; } ; time . hour () == 23 && time . minute () == 59 && time . second () == 59 && date . day () == date . month () . length (year) } }
+};
+}

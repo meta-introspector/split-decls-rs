@@ -1,0 +1,9 @@
+// Generated macro for media_type (function)
+macro_rules! Depcratemedia_type {
+() => {
+// Module: crate
+// Provides: {"media_type"}
+// Dependencies: {}
+# [proc_macro_hack] pub fn media_type (tokens : TokenStream) -> TokenStream { let lit_str = syn :: parse_macro_input ! (tokens as syn :: LitStr) ; let mime = match parse_mime_lit (& lit_str . value ()) { Ok (mime) => mime , Err (msg) => { let err = syn :: Error :: new (Span :: call_site () , msg) ; return err . to_compile_error () . into () ; } } ; let source = match mime . private_atom () { 0 => { let s = mime . as_ref () ; quote ! { $ crate :: private :: Source :: Atom (0 , # s) } } , a => { let s = mime . as_ref () ; quote ! { $ crate :: private :: Source :: Atom (# a , # s) } } , } ; let slash = mime . private_subtype_offset () ; let plus = match mime . private_suffix_offset () { Some (i) => quote ! { :: std :: option :: Option :: Some (# i) } , None => quote ! { :: std :: option :: Option :: None } , } ; let params = match mime . private_params_source () { mime_parse :: ParamSource :: None => quote ! { $ crate :: private :: ParamSource :: None } , mime_parse :: ParamSource :: Utf8 (sc) => quote ! { $ crate :: private :: ParamSource :: Utf8 (# sc) } , mime_parse :: ParamSource :: One (sc , ((na , nz) , (va , vz))) => quote ! { $ crate :: private :: ParamSource :: One (# sc , ((# na , # nz) , (# va , # vz))) } , _ => unreachable ! ("custom params quote") , } ; let out = quote ! { unsafe { $ crate :: MediaType :: private_from_proc_macro ($ crate :: private :: Mime :: private_from_proc_macro (# source , # slash , # plus , # params ,)) } } ; out . into () }
+};
+}

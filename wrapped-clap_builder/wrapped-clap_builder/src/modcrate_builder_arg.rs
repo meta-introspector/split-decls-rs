@@ -1,0 +1,40 @@
+// Generated module macro for crate::builder::arg
+macro_rules! Modcrate_builder_arg {
+() => {
+        Depcrate_builder_arguse_62!();
+        Depcrate_builder_arguse_63!();
+        Depcrate_builder_arguse_64!();
+        Depcrate_builder_arguse_65!();
+        Depcrate_builder_arguse_66!();
+        Depcrate_builder_arguse_67!();
+        Depcrate_builder_arguse_68!();
+        Depcrate_builder_arguse_69!();
+        Depcrate_builder_arguse_70!();
+        Depcrate_builder_arguse_71!();
+        Depcrate_builder_arguse_72!();
+        Depcrate_builder_arguse_73!();
+        Depcrate_builder_arguse_74!();
+        Depcrate_builder_arguse_75!();
+        Depcrate_builder_arguse_76!();
+        Depcrate_builder_arguse_77!();
+        Depcrate_builder_arguse_78!();
+        Depcrate_builder_arguse_79!();
+        Depcrate_builder_arguse_80!();
+        Depcrate_builder_argArg!();
+        Depcrate_builder_argimpl_82!();
+        Depcrate_builder_argimpl_83!();
+        Depcrate_builder_argimpl_84!();
+        Depcrate_builder_argimpl_85!();
+        Depcrate_builder_argimpl_86!();
+        Depcrate_builder_argimpl_87!();
+        Depcrate_builder_argimpl_88!();
+        Depcrate_builder_argimpl_89!();
+        Depcrate_builder_argimpl_90!();
+        Depcrate_builder_argimpl_91!();
+        Depcrate_builder_argimpl_92!();
+        Depcrate_builder_argimpl_93!();
+        Depcrate_builder_argimpl_94!();
+        Depcrate_builder_argArgExt!();
+        Depcrate_builder_argtest!();
+    };
+}

@@ -1,0 +1,9 @@
+// Generated macro for ERROR_INVALID_DLL (const)
+macro_rules! Depcrate_shared_winerrorERROR_INVALID_DLL {
+() => {
+// Module: crate::shared::winerror
+// Provides: {"ERROR_INVALID_DLL"}
+// Dependencies: {}
+pub const ERROR_INVALID_DLL : DWORD = 1154 ;
+};
+}

@@ -1,0 +1,40 @@
+// Generated module macro for crate::hyperlink
+macro_rules! Modcrate_hyperlink {
+() => {
+        Depcrate_hyperlinkuse_36!();
+        Depcrate_hyperlinkuse_37!();
+        Depcrate_hyperlinkuse_38!();
+        Depcrate_hyperlinkuse_39!();
+        Depcrate_hyperlinkaliases!();
+        Depcrate_hyperlinkHyperlinkConfig!();
+        Depcrate_hyperlinkHyperlinkConfigInner!();
+        Depcrate_hyperlinkimpl_47!();
+        Depcrate_hyperlinkHyperlinkFormat!();
+        Depcrate_hyperlinkimpl_49!();
+        Depcrate_hyperlinkimpl_50!();
+        Depcrate_hyperlinkimpl_51!();
+        Depcrate_hyperlinkHyperlinkAlias!();
+        Depcrate_hyperlinkimpl_53!();
+        Depcrate_hyperlinkHyperlinkEnvironment!();
+        Depcrate_hyperlinkimpl_55!();
+        Depcrate_hyperlinkHyperlinkFormatError!();
+        Depcrate_hyperlinkHyperlinkFormatErrorKind!();
+        Depcrate_hyperlinkimpl_58!();
+        Depcrate_hyperlinkimpl_59!();
+        Depcrate_hyperlinkFormatBuilder!();
+        Depcrate_hyperlinkimpl_61!();
+        Depcrate_hyperlinkPart!();
+        Depcrate_hyperlinkimpl_63!();
+        Depcrate_hyperlinkimpl_64!();
+        Depcrate_hyperlinkValues!();
+        Depcrate_hyperlinkimpl_66!();
+        Depcrate_hyperlinkInterpolator!();
+        Depcrate_hyperlinkimpl_68!();
+        Depcrate_hyperlinkInterpolatorStatus!();
+        Depcrate_hyperlinkimpl_70!();
+        Depcrate_hyperlinkHyperlinkPath!();
+        Depcrate_hyperlinkimpl_72!();
+        Depcrate_hyperlinkhyperlink_aliases!();
+        Depcrate_hyperlinktests!();
+    };
+}

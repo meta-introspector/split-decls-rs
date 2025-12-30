@@ -1,0 +1,9 @@
+// Generated macro for Kind (enum)
+macro_rules! Depcrate_entryKind {
+() => {
+// Module: crate::entry
+// Provides: {"Kind"}
+// Dependencies: {}
+# [doc = " The kind of the entry, seated in their kinds available on disk."] # [derive (Debug , Clone , Copy , PartialEq , Eq , Hash , Ord , PartialOrd)] pub enum Kind { # [doc = " Something that is not a regular file, directory, or symbolic link."] # [doc = ""] # [doc = " These can only exist in the filesystem,"] # [doc = " because Git repositories do not support them, thus they cannot be tracked."] # [doc = " Hence, they do not appear as blobs in a repository, and their type is not specifiable in a tree object."] # [doc = " Examples include named pipes (FIFOs), character devices, block devices, and sockets."] Untrackable , # [doc = " The entry is a blob, representing a regular file, executable or not."] File , # [doc = " The entry is a symlink."] Symlink , # [doc = " The entry is an ordinary directory."] # [doc = ""] # [doc = " Note that since we don't check for bare repositories, this could in fact be a collapsed"] # [doc = " bare repository. To be sure, check it again with [`gix_discover::is_git()`] and act accordingly."] Directory , # [doc = " The entry is a directory which *contains* a `.git` folder, or a submodule entry in the index."] Repository , }
+};
+}

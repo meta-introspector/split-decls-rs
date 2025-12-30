@@ -1,0 +1,9 @@
+// Generated macro for Opts (struct)
+macro_rules! DepcrateOpts {
+() => {
+// Module: crate
+// Provides: {"Opts"}
+// Dependencies: {}
+# [derive (Default , Debug , Clone)] # [cfg_attr (feature = "clap" , derive (clap :: Parser))] pub struct Opts { # [doc = " Skip emitting component allocation helper functions"] # [cfg_attr (feature = "clap" , arg (long))] pub no_helpers : bool , # [doc = " Set component string encoding"] # [cfg_attr (feature = "clap" , arg (long , default_value_t = StringEncoding :: default () , value_name = "ENCODING" ,) ,)] pub string_encoding : StringEncoding , # [doc = " Skip optional null pointer and boolean result argument signature"] # [doc = " flattening"] # [cfg_attr (feature = "clap" , arg (long , default_value_t = false))] pub no_sig_flattening : bool , # [doc = " Skip generating an object file which contains type information for the"] # [doc = " world that is being generated."] # [cfg_attr (feature = "clap" , arg (long , default_value_t = false))] pub no_object_file : bool , # [doc = " Rename the interface `K` to `V` in the generated source code."] # [cfg_attr (feature = "clap" , arg (long , name = "K=V" , value_parser = parse_rename))] pub rename : Vec < (String , String) > , # [doc = " Rename the world in the generated source code and file names."] # [cfg_attr (feature = "clap" , arg (long , value_name = "NAME"))] pub rename_world : Option < String > , # [doc = " Add the specified suffix to the name of the custome section containing"] # [doc = " the component type."] # [cfg_attr (feature = "clap" , arg (long , value_name = "STRING"))] pub type_section_suffix : Option < String > , # [doc = " Configure the autodropping of borrows in exported functions."] # [cfg_attr (feature = "clap" , arg (long , default_value_t = Enabled :: default () , value_name = "ENABLED" ,) ,)] pub autodrop_borrows : Enabled , # [cfg_attr (feature = "clap" , clap (flatten))] pub async_ : AsyncFilterSet , }
+};
+}

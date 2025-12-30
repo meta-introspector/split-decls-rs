@@ -1,0 +1,9 @@
+// Generated macro for P384_ORDER (const)
+macro_rules! Depcrate_ec_constantsP384_ORDER {
+() => {
+// Module: crate::ec_constants
+// Provides: {"P384_ORDER"}
+// Dependencies: {}
+const P384_ORDER : asn1 :: BigUint < 'static > = asn1 :: BigUint :: new (b"\x00\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xc7\x63\x4d\x81\xf4\x37\x2d\xdf\x58\x1a\x0d\xb2\x48\xb0\xa7\x7a\xec\xec\x19\x6a\xcc\xc5\x29\x73") . unwrap () ;
+};
+}

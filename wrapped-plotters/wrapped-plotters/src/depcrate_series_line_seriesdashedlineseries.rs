@@ -1,0 +1,9 @@
+// Generated macro for DashedLineSeries (struct)
+macro_rules! Depcrate_series_line_seriesDashedLineSeries {
+() => {
+// Module: crate::series::line_series
+// Provides: {"DashedLineSeries"}
+// Dependencies: {}
+# [doc = " A dashed line series, map an iterable object to the dashed line element. Can be used to draw simple dashed and dotted lines."] # [doc = ""] # [doc = " If you want to use more complex shapes as points in the line, you can use `plotters::series::line_series::DottedLineSeries`."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " Dashed line:"] # [doc = " ```Rust"] # [doc = " chart_context"] # [doc = "     .draw_series(DashedLineSeries::new("] # [doc = "         data_series,"] # [doc = "         5, /* size = length of dash */"] # [doc = "         10, /* spacing */"] # [doc = "         ShapeStyle {"] # [doc = "             color: BLACK.mix(1.0),"] # [doc = "             filled: false,"] # [doc = "             stroke_width: 1,"] # [doc = "         },"] # [doc = "     ))"] # [doc = "     .unwrap();"] # [doc = " ```"] # [doc = ""] # [doc = " Dotted line: (keep `size` and `stroke_width` the same to achieve dots)"] # [doc = " ```Rust"] # [doc = " chart_context"] # [doc = "     .draw_series(DashedLineSeries::new("] # [doc = "         data_series,"] # [doc = "         1, /* size = length of dash */"] # [doc = "         4, /* spacing, best to keep this at least 1 larger than size */"] # [doc = "         ShapeStyle {"] # [doc = "             color: BLACK.mix(1.0),"] # [doc = "             filled: false,"] # [doc = "             stroke_width: 1,"] # [doc = "         },"] # [doc = "     ))"] # [doc = "     .unwrap();"] # [doc = " ```"] pub struct DashedLineSeries < I : Iterator + Clone , Size : SizeDesc > { points : I , size : Size , spacing : Size , style : ShapeStyle , }
+};
+}

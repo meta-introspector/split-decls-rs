@@ -1,0 +1,54 @@
+// Generated module macro for crate::drivers::virtio::transport::pci
+macro_rules! Modcrate_drivers_virtio_transport_pci {
+() => {
+        Depcrate_drivers_virtio_transport_pciuse_513!();
+        Depcrate_drivers_virtio_transport_pciuse_514!();
+        Depcrate_drivers_virtio_transport_pciuse_515!();
+        Depcrate_drivers_virtio_transport_pciuse_516!();
+        Depcrate_drivers_virtio_transport_pciuse_517!();
+        Depcrate_drivers_virtio_transport_pciuse_518!();
+        Depcrate_drivers_virtio_transport_pciuse_519!();
+        Depcrate_drivers_virtio_transport_pciuse_520!();
+        Depcrate_drivers_virtio_transport_pciuse_521!();
+        Depcrate_drivers_virtio_transport_pciuse_522!();
+        Depcrate_drivers_virtio_transport_pciuse_523!();
+        Depcrate_drivers_virtio_transport_pciuse_524!();
+        Depcrate_drivers_virtio_transport_pciuse_525!();
+        Depcrate_drivers_virtio_transport_pciuse_526!();
+        Depcrate_drivers_virtio_transport_pciuse_527!();
+        Depcrate_drivers_virtio_transport_pciuse_528!();
+        Depcrate_drivers_virtio_transport_pciuse_529!();
+        Depcrate_drivers_virtio_transport_pciuse_530!();
+        Depcrate_drivers_virtio_transport_pciuse_531!();
+        Depcrate_drivers_virtio_transport_pciuse_532!();
+        Depcrate_drivers_virtio_transport_pciuse_533!();
+        Depcrate_drivers_virtio_transport_pcimap_dev_cfg!();
+        Depcrate_drivers_virtio_transport_pciPciCap!();
+        Depcrate_drivers_virtio_transport_pciimpl_536!();
+        Depcrate_drivers_virtio_transport_pciUniCapsColl!();
+        Depcrate_drivers_virtio_transport_pciComCfg!();
+        Depcrate_drivers_virtio_transport_pciimpl_539!();
+        Depcrate_drivers_virtio_transport_pciVqCfgHandler!();
+        Depcrate_drivers_virtio_transport_pciimpl_541!();
+        Depcrate_drivers_virtio_transport_pciimpl_542!();
+        Depcrate_drivers_virtio_transport_pciNotifCfg!();
+        Depcrate_drivers_virtio_transport_pciimpl_544!();
+        Depcrate_drivers_virtio_transport_pciNotifCtrl!();
+        Depcrate_drivers_virtio_transport_pciimpl_546!();
+        Depcrate_drivers_virtio_transport_pciimpl_547!();
+        Depcrate_drivers_virtio_transport_pciIsrStatus!();
+        Depcrate_drivers_virtio_transport_pciimpl_549!();
+        Depcrate_drivers_virtio_transport_pciShMemCfg!();
+        Depcrate_drivers_virtio_transport_pciimpl_551!();
+        Depcrate_drivers_virtio_transport_pciShMem!();
+        Depcrate_drivers_virtio_transport_pciimpl_553!();
+        Depcrate_drivers_virtio_transport_pciimpl_554!();
+        Depcrate_drivers_virtio_transport_pciimpl_555!();
+        Depcrate_drivers_virtio_transport_pciPciBar!();
+        Depcrate_drivers_virtio_transport_pciimpl_557!();
+        Depcrate_drivers_virtio_transport_pciread_caps!();
+        Depcrate_drivers_virtio_transport_pcimap_caps!();
+        Depcrate_drivers_virtio_transport_pciinit_device!();
+        Depcrate_drivers_virtio_transport_pciVirtioDriver!();
+    };
+}

@@ -1,0 +1,9 @@
+// Generated macro for encode_key_usage (function)
+macro_rules! Depcrate_x509_extensionsencode_key_usage {
+() => {
+// Module: crate::x509::extensions
+// Provides: {"encode_key_usage"}
+// Dependencies: {}
+fn encode_key_usage (py : pyo3 :: Python < '_ > , ext : & pyo3 :: Bound < '_ , pyo3 :: PyAny > ,) -> CryptographyResult < Vec < u8 > > { let mut bs = [0 , 0] ; certificate :: set_bit (& mut bs , 0 , ext . getattr (pyo3 :: intern ! (py , "digital_signature")) ? . is_truthy () ? ,) ; certificate :: set_bit (& mut bs , 1 , ext . getattr (pyo3 :: intern ! (py , "content_commitment")) ? . is_truthy () ? ,) ; certificate :: set_bit (& mut bs , 2 , ext . getattr (pyo3 :: intern ! (py , "key_encipherment")) ? . is_truthy () ? ,) ; certificate :: set_bit (& mut bs , 3 , ext . getattr (pyo3 :: intern ! (py , "data_encipherment")) ? . is_truthy () ? ,) ; certificate :: set_bit (& mut bs , 4 , ext . getattr (pyo3 :: intern ! (py , "key_agreement")) ? . is_truthy () ? ,) ; certificate :: set_bit (& mut bs , 5 , ext . getattr (pyo3 :: intern ! (py , "key_cert_sign")) ? . is_truthy () ? ,) ; certificate :: set_bit (& mut bs , 6 , ext . getattr (pyo3 :: intern ! (py , "crl_sign")) ? . is_truthy () ? ,) ; if ext . getattr (pyo3 :: intern ! (py , "key_agreement")) ? . is_truthy () ? { certificate :: set_bit (& mut bs , 7 , ext . getattr (pyo3 :: intern ! (py , "encipher_only")) ? . is_truthy () ? ,) ; certificate :: set_bit (& mut bs , 8 , ext . getattr (pyo3 :: intern ! (py , "decipher_only")) ? . is_truthy () ? ,) ; } let (bits , unused_bits) = if bs [1] == 0 { if bs [0] == 0 { (& [] [..] , 0) } else { (& bs [.. 1] , bs [0] . trailing_zeros () as u8) } } else { (& bs [..] , bs [1] . trailing_zeros () as u8) } ; let v = asn1 :: BitString :: new (bits , unused_bits) . unwrap () ; Ok (asn1 :: write_single (& v) ?) }
+};
+}

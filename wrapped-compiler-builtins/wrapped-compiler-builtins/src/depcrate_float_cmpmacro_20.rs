@@ -1,0 +1,9 @@
+// Generated macro for macro_20 (macro)
+macro_rules! Depcrate_float_cmpmacro_20 {
+() => {
+// Module: crate::float::cmp
+// Provides: {"macro_20"}
+// Dependencies: {}
+intrinsics ! { pub extern "C" fn __lesf2 (a : f32 , b : f32) -> crate :: float :: cmp :: CmpResult { cmp (a , b) . to_le_abi () } pub extern "C" fn __gesf2 (a : f32 , b : f32) -> crate :: float :: cmp :: CmpResult { cmp (a , b) . to_ge_abi () } # [arm_aeabi_alias = __aeabi_fcmpun] pub extern "C" fn __unordsf2 (a : f32 , b : f32) -> crate :: float :: cmp :: CmpResult { unord (a , b) as crate :: float :: cmp :: CmpResult } pub extern "C" fn __eqsf2 (a : f32 , b : f32) -> crate :: float :: cmp :: CmpResult { cmp (a , b) . to_le_abi () } pub extern "C" fn __ltsf2 (a : f32 , b : f32) -> crate :: float :: cmp :: CmpResult { cmp (a , b) . to_le_abi () } pub extern "C" fn __nesf2 (a : f32 , b : f32) -> crate :: float :: cmp :: CmpResult { cmp (a , b) . to_le_abi () } pub extern "C" fn __gtsf2 (a : f32 , b : f32) -> crate :: float :: cmp :: CmpResult { cmp (a , b) . to_ge_abi () } pub extern "C" fn __ledf2 (a : f64 , b : f64) -> crate :: float :: cmp :: CmpResult { cmp (a , b) . to_le_abi () } pub extern "C" fn __gedf2 (a : f64 , b : f64) -> crate :: float :: cmp :: CmpResult { cmp (a , b) . to_ge_abi () } # [arm_aeabi_alias = __aeabi_dcmpun] pub extern "C" fn __unorddf2 (a : f64 , b : f64) -> crate :: float :: cmp :: CmpResult { unord (a , b) as crate :: float :: cmp :: CmpResult } pub extern "C" fn __eqdf2 (a : f64 , b : f64) -> crate :: float :: cmp :: CmpResult { cmp (a , b) . to_le_abi () } pub extern "C" fn __ltdf2 (a : f64 , b : f64) -> crate :: float :: cmp :: CmpResult { cmp (a , b) . to_le_abi () } pub extern "C" fn __nedf2 (a : f64 , b : f64) -> crate :: float :: cmp :: CmpResult { cmp (a , b) . to_le_abi () } pub extern "C" fn __gtdf2 (a : f64 , b : f64) -> crate :: float :: cmp :: CmpResult { cmp (a , b) . to_ge_abi () } }
+};
+}

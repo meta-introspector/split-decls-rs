@@ -1,0 +1,9 @@
+// Generated macro for impl_149 (impl)
+macro_rules! Depcrate_content_yaml_vendored_yamlimpl_149 {
+() => {
+// Module: crate::content::yaml::vendored::yaml
+// Provides: {"impl_149"}
+// Dependencies: {}
+impl MarkedEventReceiver for YamlLoader { fn on_event (& mut self , ev : Event , _ : Marker) { match ev { Event :: DocumentStart => { } Event :: DocumentEnd => { match self . doc_stack . len () { 0 => self . docs . push (Yaml :: BadValue) , 1 => self . docs . push (self . doc_stack . pop () . unwrap () . 0) , _ => unreachable ! () , } } Event :: SequenceStart (aid) => { self . doc_stack . push ((Yaml :: Array (Vec :: new ()) , aid)) ; } Event :: SequenceEnd => { let node = self . doc_stack . pop () . unwrap () ; self . insert_new_node (node) ; } Event :: MappingStart (aid) => { self . doc_stack . push ((Yaml :: Hash (Hash :: new ()) , aid)) ; self . key_stack . push (Yaml :: BadValue) ; } Event :: MappingEnd => { self . key_stack . pop () . unwrap () ; let node = self . doc_stack . pop () . unwrap () ; self . insert_new_node (node) ; } Event :: Scalar (v , style , aid , tag) => { let node = if style != TScalarStyle :: Plain { Yaml :: String (v) } else if let Some (TokenType :: Tag (ref handle , ref suffix)) = tag { if handle == "!!" { match suffix . as_ref () { "bool" => { match v . parse :: < bool > () { Err (_) => Yaml :: BadValue , Ok (v) => Yaml :: Boolean (v) , } } "int" => match v . parse :: < i64 > () { Err (_) => Yaml :: BadValue , Ok (v) => Yaml :: Integer (v) , } , "float" => match parse_f64 (& v) { Some (_) => Yaml :: Real (v) , None => Yaml :: BadValue , } , "null" => match v . as_ref () { "~" | "null" => Yaml :: Null , _ => Yaml :: BadValue , } , _ => Yaml :: String (v) , } } else { Yaml :: String (v) } } else { Yaml :: from_str (& v) } ; self . insert_new_node ((node , aid)) ; } _ => { } } } }
+};
+}

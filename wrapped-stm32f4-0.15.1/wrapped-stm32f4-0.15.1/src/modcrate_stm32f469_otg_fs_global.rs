@@ -1,0 +1,49 @@
+// Generated module macro for crate::stm32f469::otg_fs_global
+macro_rules! Modcrate_stm32f469_otg_fs_global {
+() => {
+        Depcrate_stm32f469_otg_fs_globalRegisterBlock!();
+        Depcrate_stm32f469_otg_fs_globalimpl_17023!();
+        Depcrate_stm32f469_otg_fs_globalGOTGCTL!();
+        Depcrate_stm32f469_otg_fs_globalgotgctl!();
+        Depcrate_stm32f469_otg_fs_globalGOTGINT!();
+        Depcrate_stm32f469_otg_fs_globalgotgint!();
+        Depcrate_stm32f469_otg_fs_globalGAHBCFG!();
+        Depcrate_stm32f469_otg_fs_globalgahbcfg!();
+        Depcrate_stm32f469_otg_fs_globalGUSBCFG!();
+        Depcrate_stm32f469_otg_fs_globalgusbcfg!();
+        Depcrate_stm32f469_otg_fs_globalGRSTCTL!();
+        Depcrate_stm32f469_otg_fs_globalgrstctl!();
+        Depcrate_stm32f469_otg_fs_globalGINTSTS!();
+        Depcrate_stm32f469_otg_fs_globalgintsts!();
+        Depcrate_stm32f469_otg_fs_globalGINTMSK!();
+        Depcrate_stm32f469_otg_fs_globalgintmsk!();
+        Depcrate_stm32f469_otg_fs_globalGRXSTSR_DEVICE!();
+        Depcrate_stm32f469_otg_fs_globalgrxstsr_device!();
+        Depcrate_stm32f469_otg_fs_globalGRXSTSR_HOST!();
+        Depcrate_stm32f469_otg_fs_globalgrxstsr_host!();
+        Depcrate_stm32f469_otg_fs_globalGRXFSIZ!();
+        Depcrate_stm32f469_otg_fs_globalgrxfsiz!();
+        Depcrate_stm32f469_otg_fs_globalGNPTXFSIZ_DEVICE!();
+        Depcrate_stm32f469_otg_fs_globalgnptxfsiz_device!();
+        Depcrate_stm32f469_otg_fs_globalGNPTXFSIZ_HOST!();
+        Depcrate_stm32f469_otg_fs_globalgnptxfsiz_host!();
+        Depcrate_stm32f469_otg_fs_globalGNPTXSTS!();
+        Depcrate_stm32f469_otg_fs_globalgnptxsts!();
+        Depcrate_stm32f469_otg_fs_globalGCCFG!();
+        Depcrate_stm32f469_otg_fs_globalgccfg!();
+        Depcrate_stm32f469_otg_fs_globalCID!();
+        Depcrate_stm32f469_otg_fs_globalcid!();
+        Depcrate_stm32f469_otg_fs_globalHPTXFSIZ!();
+        Depcrate_stm32f469_otg_fs_globalhptxfsiz!();
+        Depcrate_stm32f469_otg_fs_globalDIEPTXF1!();
+        Depcrate_stm32f469_otg_fs_globaldieptxf1!();
+        Depcrate_stm32f469_otg_fs_globalDIEPTXF2!();
+        Depcrate_stm32f469_otg_fs_globaldieptxf2!();
+        Depcrate_stm32f469_otg_fs_globalDIEPTXF3!();
+        Depcrate_stm32f469_otg_fs_globaldieptxf3!();
+        Depcrate_stm32f469_otg_fs_globalDIEPTXF4!();
+        Depcrate_stm32f469_otg_fs_globaldieptxf4!();
+        Depcrate_stm32f469_otg_fs_globalDIEPTXF5!();
+        Depcrate_stm32f469_otg_fs_globaldieptxf5!();
+    };
+}

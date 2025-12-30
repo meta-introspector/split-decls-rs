@@ -1,0 +1,9 @@
+// Generated macro for RuleType (enum)
+macro_rules! Depcrate_astRuleType {
+() => {
+// Module: crate::ast
+// Provides: {"RuleType"}
+// Dependencies: {}
+# [doc = " All possible rule types"] # [derive (Clone , Copy , Debug , Eq , PartialEq)] pub enum RuleType { # [doc = " The normal rule type"] Normal , # [doc = " Silent rules are just like normal rules"] # [doc = " — when run, they function the same way —"] # [doc = " except they do not produce pairs or tokens."] # [doc = " If a rule is silent, it will never appear in a parse result."] # [doc = " (their syntax is `_{ ... }`)"] Silent , # [doc = " atomic rule prevent implicit whitespace: inside an atomic rule,"] # [doc = " the tilde ~ means \"immediately followed by\","] # [doc = " and repetition operators (asterisk * and plus sign +)"] # [doc = " have no implicit separation. In addition, all other rules"] # [doc = " called from an atomic rule are also treated as atomic."] # [doc = " In an atomic rule, interior matching rules are silent."] # [doc = " (their syntax is `@{ ... }`)"] Atomic , # [doc = " Compound atomic rules are similar to atomic rules,"] # [doc = " but they produce inner tokens as normal."] # [doc = " (their syntax is `${ ... }`)"] CompoundAtomic , # [doc = " Non-atomic rules cancel the effect of atomic rules."] # [doc = " (their syntax is `!{ ... }`)"] NonAtomic , }
+};
+}

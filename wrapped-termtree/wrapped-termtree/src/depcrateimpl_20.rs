@@ -1,0 +1,9 @@
+// Generated macro for impl_20 (impl)
+macro_rules! Depcrateimpl_20 {
+() => {
+// Module: crate
+// Provides: {"impl_20"}
+// Dependencies: {}
+impl < D : Display > Display for Tree < D > { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { self . root . fmt (f) ? ; writeln ! (f) ? ; let mut queue = DisplauQueue :: new () ; let no_space = Rc :: new (Vec :: new ()) ; let default_glyphs = GlyphPalette :: new () ; let glyphs = self . glyphs . as_ref () . unwrap_or (& default_glyphs) ; enqueue_leaves (& mut queue , self , glyphs , no_space) ; while let Some ((last , leaf , glyphs , spaces)) = queue . pop_front () { let mut prefix = (if last { glyphs . last_item } else { glyphs . middle_item } , glyphs . item_indent ,) ; if leaf . multiline { let rest_prefix = (if last { glyphs . last_skip } else { glyphs . middle_skip } , glyphs . skip_indent ,) ; debug_assert_eq ! (prefix . 0 . chars () . count () , rest_prefix . 0 . chars () . count ()) ; debug_assert_eq ! (prefix . 1 . chars () . count () , rest_prefix . 1 . chars () . count ()) ; let root = if f . alternate () { format ! ("{:#}" , leaf . root) } else { format ! ("{:}" , leaf . root) } ; for line in root . lines () { for s in spaces . as_slice () { s . skip . fmt (f) ? ; s . indent . fmt (f) ? ; } prefix . 0 . fmt (f) ? ; prefix . 1 . fmt (f) ? ; line . fmt (f) ? ; writeln ! (f) ? ; prefix = rest_prefix ; } } else { for s in spaces . as_slice () { s . skip . fmt (f) ? ; s . indent . fmt (f) ? ; } prefix . 0 . fmt (f) ? ; prefix . 1 . fmt (f) ? ; leaf . root . fmt (f) ? ; writeln ! (f) ? ; } if ! leaf . leaves . is_empty () { let s : & Vec < SpacePalette > = & spaces ; let mut child_spaces = s . clone () ; child_spaces . push (if last { glyphs . last_space () } else { glyphs . middle_space () }) ; let child_spaces = Rc :: new (child_spaces) ; enqueue_leaves (& mut queue , leaf , glyphs , child_spaces) ; } } Ok (()) } }
+};
+}

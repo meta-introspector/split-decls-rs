@@ -1,0 +1,9 @@
+// Generated macro for prevent_optimistic_ack (function)
+macro_rules! Depcrate_testsprevent_optimistic_ack {
+() => {
+// Module: crate::tests
+// Provides: {"prevent_optimistic_ack"}
+// Dependencies: {}
+# [rstest] fn prevent_optimistic_ack (# [values ("cubic" , "bbr2" , "bbr2_gcongestion")] cc_algorithm_name : & str ,) { let mut config = Config :: new (PROTOCOL_VERSION) . unwrap () ; config . set_cc_algorithm_name (cc_algorithm_name) . unwrap () ; config . load_cert_chain_from_pem_file ("examples/cert.crt") . unwrap () ; config . load_priv_key_from_pem_file ("examples/cert.key") . unwrap () ; config . set_application_protos (& [b"proto1" , b"proto2"]) . unwrap () ; config . set_initial_max_data (100_0000) ; config . set_initial_max_stream_data_bidi_local (100_000) ; config . set_initial_max_stream_data_bidi_remote (100_000) ; config . set_initial_max_streams_bidi (10) ; config . verify_peer (false) ; let mut pipe = test_utils :: Pipe :: with_config (& mut config) . unwrap () ; pipe . handshake () . unwrap () ; let mut server_skip_pn = None ; let buf = [42 ; 100] ; while server_skip_pn . is_none () { pipe . server . stream_send (1 , & buf , false) . unwrap () ; let flight = test_utils :: emit_flight (& mut pipe . server) . unwrap () ; test_utils :: process_flight (& mut pipe . client , flight) . unwrap () ; if let Some (skip_pn) = pipe . server . pkt_num_manager . skip_pn () { server_skip_pn = Some (skip_pn) ; } } let pkt_type = Type :: Short ; let mut buf = [0 ; 2000] ; let skip_pn = server_skip_pn . unwrap () ; let mut ranges = ranges :: RangeSet :: default () ; ranges . insert (skip_pn .. skip_pn + 1) ; let frames = [frame :: Frame :: ACK { ack_delay : 15 , ranges , ecn_counts : None , }] ; assert_eq ! (pipe . send_pkt_to_server (pkt_type , & frames , & mut buf) . err () . unwrap () , Error :: OptimisticAckDetected) ; assert_eq ! (pipe . server . local_error . unwrap () . error_code , WireErrorCode :: ProtocolViolation as u64) ; }
+};
+}

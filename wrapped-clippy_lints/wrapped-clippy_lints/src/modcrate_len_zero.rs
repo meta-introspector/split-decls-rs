@@ -1,0 +1,45 @@
+// Generated module macro for crate::len_zero
+macro_rules! Modcrate_len_zero {
+() => {
+        Depcrate_len_zerouse_3319!();
+        Depcrate_len_zerouse_3320!();
+        Depcrate_len_zerouse_3321!();
+        Depcrate_len_zerouse_3322!();
+        Depcrate_len_zerouse_3323!();
+        Depcrate_len_zerouse_3324!();
+        Depcrate_len_zerouse_3325!();
+        Depcrate_len_zerouse_3326!();
+        Depcrate_len_zerouse_3327!();
+        Depcrate_len_zerouse_3328!();
+        Depcrate_len_zerouse_3329!();
+        Depcrate_len_zerouse_3330!();
+        Depcrate_len_zerouse_3331!();
+        Depcrate_len_zerouse_3332!();
+        Depcrate_len_zerouse_3333!();
+        Depcrate_len_zerouse_3334!();
+        Depcrate_len_zerouse_3335!();
+        Depcrate_len_zerouse_3336!();
+        Depcrate_len_zerouse_3337!();
+        Depcrate_len_zerouse_3338!();
+        Depcrate_len_zeromacro_3339!();
+        Depcrate_len_zeromacro_3340!();
+        Depcrate_len_zeromacro_3341!();
+        Depcrate_len_zeroLenZero!();
+        Depcrate_len_zeromacro_3343!();
+        Depcrate_len_zeroimpl_3344!();
+        Depcrate_len_zeroimpl_3345!();
+        Depcrate_len_zeroimpl_3346!();
+        Depcrate_len_zerospan_without_enclosing_paren!();
+        Depcrate_len_zerocheck_trait_items!();
+        Depcrate_len_zeroLenOutput!();
+        Depcrate_len_zeroextract_future_output!();
+        Depcrate_len_zerois_first_generic_integral!();
+        Depcrate_len_zeroparse_len_output!();
+        Depcrate_len_zeroimpl_3353!();
+        Depcrate_len_zerocheck_is_empty_sig!();
+        Depcrate_len_zerocheck_for_is_empty!();
+        Depcrate_len_zerois_empty_string!();
+        Depcrate_len_zerois_empty_array!();
+        Depcrate_len_zerohas_is_empty!();
+    };
+}

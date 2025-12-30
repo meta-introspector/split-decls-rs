@@ -1,0 +1,44 @@
+// Generated module macro for crate::tree_builder
+macro_rules! Modcrate_tree_builder {
+() => {
+        Depcrate_tree_builderuse_124!();
+        Depcrate_tree_builderuse_125!();
+        Depcrate_tree_builderuse_126!();
+        Depcrate_tree_builderuse_127!();
+        Depcrate_tree_builderuse_128!();
+        Depcrate_tree_builderuse_129!();
+        Depcrate_tree_builderuse_130!();
+        Depcrate_tree_builderuse_131!();
+        Depcrate_tree_builderuse_132!();
+        Depcrate_tree_builderuse_133!();
+        Depcrate_tree_builderuse_134!();
+        Depcrate_tree_builderuse_135!();
+        Depcrate_tree_builderuse_136!();
+        Depcrate_tree_builderuse_137!();
+        Depcrate_tree_builderuse_138!();
+        Depcrate_tree_builderuse_139!();
+        Depcrate_tree_builderuse_140!();
+        Depcrate_tree_builderuse_141!();
+        Depcrate_tree_builderuse_142!();
+        Depcrate_tree_builderuse_143!();
+        Depcrate_tree_builderuse_144!();
+        Depcrate_tree_buildertag_sets!();
+        Depcrate_tree_builderdata!();
+        Depcrate_tree_builderrules!();
+        Depcrate_tree_buildertypes!();
+        Depcrate_tree_builderTreeBuilderOpts!();
+        Depcrate_tree_builderimpl_210!();
+        Depcrate_tree_builderTreeBuilder!();
+        Depcrate_tree_builderimpl_212!();
+        Depcrate_tree_builderimpl_213!();
+        Depcrate_tree_builderhtml_elem!();
+        Depcrate_tree_builderActiveFormattingView!();
+        Depcrate_tree_builderimpl_216!();
+        Depcrate_tree_builderActiveFormattingIter!();
+        Depcrate_tree_builderimpl_218!();
+        Depcrate_tree_builderPushFlag!();
+        Depcrate_tree_builderBookmark!();
+        Depcrate_tree_builderqualname!();
+        Depcrate_tree_builderimpl_222!();
+    };
+}

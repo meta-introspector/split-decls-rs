@@ -1,0 +1,9 @@
+// Generated macro for any (function)
+macro_rules! Depcrate_arbitrary_traitsany {
+() => {
+// Module: crate::arbitrary::traits
+// Provides: {"any"}
+// Dependencies: {}
+# [doc = " Generates a [`Strategy`] producing [`Arbitrary`][trait Arbitrary] values of"] # [doc = " `A`. Unlike [`arbitrary`][fn arbitrary], it should be used for being"] # [doc = " explicit on what `A` is. For clarity, this may be a good idea."] # [doc = ""] # [doc = " Use this version instead of [`arbitrary`][fn arbitrary] if you want to be"] # [doc = " clear which type you want to generate a `Strategy` for, or if you don't"] # [doc = " have an anchoring type for type inference to work with."] # [doc = ""] # [doc = " If you want to customize how the strategy is generated, use"] # [doc = " [`any_with::<A>(args)`] where `args` are any arguments accepted by"] # [doc = " the `Arbitrary` impl in question."] # [doc = ""] # [doc = " # Example"] # [doc = ""] # [doc = " The function can be used as:"] # [doc = ""] # [doc = " ```rust"] # [doc = " use proptest::prelude::*;"] # [doc = ""] # [doc = " proptest! {"] # [doc = "     fn reverse_reverse_is_identity(ref vec in any::<Vec<u32>>()) {"] # [doc = "         let vec2 = vec.iter().cloned().rev().rev().collect::<Vec<u32>>();"] # [doc = "         prop_assert_eq!(vec, &vec2);"] # [doc = "     }"] # [doc = " }"] # [doc = ""] # [doc = " fn main() {"] # [doc = "     reverse_reverse_is_identity();"] # [doc = " }"] # [doc = " ```"] # [doc = ""] # [doc = " [`any_with::<A>(args)`]: fn.any_with.html"] # [doc = " [fn arbitrary]: fn.arbitrary.html"] # [doc = " [trait Arbitrary]: trait.Arbitrary.html"] # [doc = " [`Strategy`]: ../strategy/trait.Strategy.html"] # [must_use = "strategies do nothing unless used"] pub fn any < A : Arbitrary > () -> StrategyFor < A > { A :: arbitrary () }
+};
+}

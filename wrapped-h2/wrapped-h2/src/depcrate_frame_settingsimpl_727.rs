@@ -1,0 +1,9 @@
+// Generated macro for impl_727 (impl)
+macro_rules! Depcrate_frame_settingsimpl_727 {
+() => {
+// Module: crate::frame::settings
+// Provides: {"impl_727"}
+// Dependencies: {}
+impl Setting { # [doc = " Creates a new `Setting` with the correct variant corresponding to the"] # [doc = " given setting id, based on the settings IDs defined in section"] # [doc = " 6.5.2."] pub fn from_id (id : u16 , val : u32) -> Option < Setting > { use self :: Setting :: * ; match id { 1 => Some (HeaderTableSize (val)) , 2 => Some (EnablePush (val)) , 3 => Some (MaxConcurrentStreams (val)) , 4 => Some (InitialWindowSize (val)) , 5 => Some (MaxFrameSize (val)) , 6 => Some (MaxHeaderListSize (val)) , 8 => Some (EnableConnectProtocol (val)) , _ => None , } } # [doc = " Creates a new `Setting` by parsing the given buffer of 6 bytes, which"] # [doc = " contains the raw byte representation of the setting, according to the"] # [doc = " \"SETTINGS format\" defined in section 6.5.1."] # [doc = ""] # [doc = " The `raw` parameter should have length at least 6 bytes, since the"] # [doc = " length of the raw setting is exactly 6 bytes."] # [doc = ""] # [doc = " # Panics"] # [doc = ""] # [doc = " If given a buffer shorter than 6 bytes, the function will panic."] fn load (raw : & [u8]) -> Option < Setting > { let id : u16 = (u16 :: from (raw [0]) << 8) | u16 :: from (raw [1]) ; let val : u32 = unpack_octets_4 ! (raw , 2 , u32) ; Setting :: from_id (id , val) } fn encode (& self , dst : & mut BytesMut) { use self :: Setting :: * ; let (kind , val) = match * self { HeaderTableSize (v) => (1 , v) , EnablePush (v) => (2 , v) , MaxConcurrentStreams (v) => (3 , v) , InitialWindowSize (v) => (4 , v) , MaxFrameSize (v) => (5 , v) , MaxHeaderListSize (v) => (6 , v) , EnableConnectProtocol (v) => (8 , v) , } ; dst . put_u16 (kind) ; dst . put_u32 (val) ; } }
+};
+}

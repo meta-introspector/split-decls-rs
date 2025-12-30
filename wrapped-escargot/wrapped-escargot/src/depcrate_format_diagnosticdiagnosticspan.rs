@@ -1,0 +1,9 @@
+// Generated macro for DiagnosticSpan (struct)
+macro_rules! Depcrate_format_diagnosticDiagnosticSpan {
+() => {
+// Module: crate::format::diagnostic
+// Provides: {"DiagnosticSpan"}
+// Dependencies: {}
+# [doc = " A section of the source code associated with a Diagnostic"] # [derive (Debug , Clone , PartialEq , Eq , Serialize , Deserialize)] # [cfg_attr (feature = "strict_unstable" , serde (deny_unknown_fields))] # [non_exhaustive] pub struct DiagnosticSpan < 'a > { # [doc = " The file name this diagnostic comes from."] # [serde (borrow)] pub file_name : CowPath < 'a > , # [doc = " The byte offset in the file where this diagnostic starts from."] pub byte_start : u32 , # [doc = " The byte offset in the file where this diagnostic ends."] pub byte_end : u32 , # [doc = " 1-based. The line in the file."] pub line_start : usize , # [doc = " 1-based. The line in the file."] pub line_end : usize , # [doc = " 1-based, character offset."] pub column_start : usize , # [doc = " 1-based, character offset."] pub column_end : usize , # [doc = " Is this a \"primary\" span -- meaning the point, or one of the points,"] # [doc = " where the error occurred?"] pub is_primary : bool , # [doc = " Source text from the start of `line_start` to the end of `line_end`."] # [serde (borrow)] pub text : Vec < DiagnosticSpanLine < 'a > > , # [doc = " Label that should be placed at this location (if any)"] # [serde (borrow)] pub label : Option < CowStr < 'a > > , # [doc = " If we are suggesting a replacement, this will contain text"] # [doc = " that should be sliced in atop this span."] # [serde (borrow)] pub suggested_replacement : Option < CowStr < 'a > > , # [doc = " If the suggestion is approximate"] pub suggestion_applicability : Option < Applicability > , # [doc = " Macro invocations that created the code at this span, if any."] # [serde (borrow)] pub expansion : Option < Box < DiagnosticSpanMacroExpansion < 'a > > > , }
+};
+}

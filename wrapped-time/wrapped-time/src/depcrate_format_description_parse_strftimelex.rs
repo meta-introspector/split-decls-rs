@@ -1,0 +1,9 @@
+// Generated macro for lex (function)
+macro_rules! Depcrate_format_description_parse_strftimelex {
+() => {
+// Module: crate::format_description::parse::strftime
+// Provides: {"lex"}
+// Dependencies: {}
+# [inline] fn lex (mut input : & [u8]) -> iter :: Peekable < impl Iterator < Item = Result < Token < '_ > , Error > > > { let mut iter = attach_location (input . iter ()) . peekable () ; iter :: from_fn (move | | { Some (Ok (match iter . next () ? { (b'%' , percent_loc) => match iter . next () { Some ((padding @ (b'_' | b'-' | b'0') , padding_loc)) => { let padding = match padding { b'_' => Padding :: Spaces , b'-' => Padding :: None , b'0' => Padding :: Zeroes , _ => unreachable ! () , } ; let (& component , component_loc) = iter . next () ? ; input = & input [3 ..] ; Token :: Component { _percent : unused (percent_loc) , padding : padding . spanned (padding_loc . to_self ()) , component : component . spanned (component_loc . to_self ()) , } } Some ((& component , component_loc)) => { input = & input [2 ..] ; let span = component_loc . to_self () ; Token :: Component { _percent : unused (percent_loc) , padding : Padding :: Default . spanned (span) , component : component . spanned (span) , } } None => { return Some (Err (Error { _inner : unused (percent_loc . error ("unexpected end of input")) , public : InvalidFormatDescription :: Expected { what : "valid escape sequence" , index : percent_loc . byte as usize , } , })) ; } } , (_ , start_location) => { let mut bytes = 1 ; let mut end_location = start_location ; while let Some ((_ , location)) = iter . next_if (| & (& byte , _) | byte != b'%') { end_location = location ; bytes += 1 ; } let value = & input [.. bytes] ; input = & input [bytes ..] ; Token :: Literal (value . spanned (start_location . to (end_location))) } })) }) . peekable () }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for suggestion_signature (function)
+macro_rules! Depcrate_checksuggestion_signature {
+() => {
+// Module: crate::check
+// Provides: {"suggestion_signature"}
+// Dependencies: {}
+# [doc = " Return placeholder code for the given associated item."] # [doc = " Similar to `ty::AssocItem::suggestion`, but appropriate for use as the code snippet of a"] # [doc = " structured suggestion."] fn suggestion_signature < 'tcx > (tcx : TyCtxt < 'tcx > , assoc : ty :: AssocItem , impl_trait_ref : ty :: TraitRef < 'tcx > ,) -> String { let args = ty :: GenericArgs :: identity_for_item (tcx , assoc . def_id) . rebase_onto (tcx , assoc . container_id (tcx) , impl_trait_ref . with_replaced_self_ty (tcx , tcx . types . self_param) . args ,) ; match assoc . kind { ty :: AssocKind :: Fn { .. } => fn_sig_suggestion (tcx , tcx . liberate_late_bound_regions (assoc . def_id , tcx . fn_sig (assoc . def_id) . instantiate (tcx , args) ,) , assoc . ident (tcx) , tcx . predicates_of (assoc . def_id) . instantiate_own (tcx , args) , assoc ,) , ty :: AssocKind :: Type { .. } => { let (generics , where_clauses) = bounds_from_generic_predicates (tcx , tcx . predicates_of (assoc . def_id) . instantiate_own (tcx , args) , assoc ,) ; format ! ("type {}{generics} = /* Type */{where_clauses};" , assoc . name ()) } ty :: AssocKind :: Const { name } => { let ty = tcx . type_of (assoc . def_id) . instantiate_identity () ; let val = tcx . infer_ctxt () . build (TypingMode :: non_body_analysis ()) . err_ctxt () . ty_kind_suggestion (tcx . param_env (assoc . def_id) , ty) . unwrap_or_else (| | "value" . to_string ()) ; format ! ("const {}: {} = {};" , name , ty , val) } } }
+};
+}

@@ -1,0 +1,45 @@
+// Generated module macro for crate::test
+macro_rules! Modcrate_test {
+() => {
+        Depcrate_testuse_4!();
+        Depcrate_testuse_5!();
+        Depcrate_testuse_6!();
+        Depcrate_testuse_7!();
+        Depcrate_testuse_8!();
+        Depcrate_testCHUNK_START!();
+        Depcrate_testCHUNK_END!();
+        Depcrate_testPARENT!();
+        Depcrate_testROOT!();
+        Depcrate_testKEYED_HASH!();
+        Depcrate_testTEST_CASES!();
+        Depcrate_testTEST_CASES_MAX!();
+        Depcrate_testTEST_KEY!();
+        Depcrate_testTEST_KEY_WORDS!();
+        Depcrate_testpaint_test_input!();
+        Depcrate_testle_bytes_from_words_32!();
+        Depcrate_testCompressInPlaceFn!();
+        Depcrate_testCompressXofFn!();
+        Depcrate_testtest_compress_fn!();
+        Depcrate_testtest_compress_portable!();
+        Depcrate_testtest_compress_sse2!();
+        Depcrate_testtest_compress_sse41!();
+        Depcrate_testtest_compress_avx512!();
+        Depcrate_testHashManyFn!();
+        Depcrate_testtest_hash_many_fn!();
+        Depcrate_testtest_hash_many_portable!();
+        Depcrate_testtest_hash_many_sse2!();
+        Depcrate_testtest_hash_many_sse41!();
+        Depcrate_testtest_hash_many_avx2!();
+        Depcrate_testtest_hash_many_avx512!();
+        Depcrate_testtest_hash_many_neon!();
+        Depcrate_testXofManyFunction!();
+        Depcrate_testtest_xof_many_fn!();
+        Depcrate_testtest_xof_many_avx512!();
+        Depcrate_testtest_compare_reference_impl!();
+        Depcrate_testreference_hash!();
+        Depcrate_testtest_compare_update_multiple!();
+        Depcrate_testtest_fuzz_hasher!();
+        Depcrate_testtest_finalize_seek!();
+        Depcrate_testtest_reset!();
+    };
+}

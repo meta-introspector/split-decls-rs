@@ -1,0 +1,9 @@
+// Generated macro for PolicyDefinition (struct)
+macro_rules! Depcrate_policyPolicyDefinition {
+() => {
+// Module: crate::policy
+// Provides: {"PolicyDefinition"}
+// Dependencies: {}
+# [doc = " A `PolicyDefinition` describes user-configurable aspects of X.509 path validation."] pub struct PolicyDefinition < 'a , B : CryptoOps > { pub ops : B , # [doc = " A top-level constraint on the length of intermediate CA paths"] # [doc = " constructed under this policy."] # [doc = ""] # [doc = " Per RFC 5280, this limits the length of the non-self-issued intermediate"] # [doc = " CA chain, without counting either the leaf or trust anchor."] pub max_chain_depth : u8 , # [doc = " A subject (i.e. DNS name or other name format) that any EE certificates"] # [doc = " validated by this policy must match."] pub subject : Option < Subject < 'a > > , # [doc = " The validation time. All certificates validated by this policy must"] # [doc = " be valid at this time."] pub validation_time : asn1 :: DateTime , # [doc = " An extended key usage that must appear in EEs validated by this policy."] pub extended_key_usage : ObjectIdentifier , # [doc = " The minimum RSA modulus, in bits."] # [doc = " This is equivalent to the public key size, e.g. 2048 for an RSA-2048 key."] pub minimum_rsa_modulus : usize , # [doc = " The set of permitted public key algorithms, identified by their"] # [doc = " algorithm identifiers."] pub permitted_public_key_algorithms : Arc < HashSet < AlgorithmIdentifier < 'a > > > , # [doc = " The set of permitted signature algorithms, identified by their"] # [doc = " algorithm identifiers."] pub permitted_signature_algorithms : Arc < HashSet < AlgorithmIdentifier < 'a > > > , ca_extension_policy : ExtensionPolicy < 'a , B > , ee_extension_policy : ExtensionPolicy < 'a , B > , }
+};
+}

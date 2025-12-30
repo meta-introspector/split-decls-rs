@@ -1,0 +1,9 @@
+// Generated macro for CRYPT_ENCODE_ENABLE_IA5CONVERSION_FLAG (const)
+macro_rules! Depcrate_um_wincryptCRYPT_ENCODE_ENABLE_IA5CONVERSION_FLAG {
+() => {
+// Module: crate::um::wincrypt
+// Provides: {"CRYPT_ENCODE_ENABLE_IA5CONVERSION_FLAG"}
+// Dependencies: {}
+pub const CRYPT_ENCODE_ENABLE_IA5CONVERSION_FLAG : DWORD = CRYPT_ENCODE_ENABLE_PUNYCODE_FLAG | CRYPT_ENCODE_ENABLE_UTF8PERCENT_FLAG ;
+};
+}

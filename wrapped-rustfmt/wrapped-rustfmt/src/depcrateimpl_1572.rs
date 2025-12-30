@@ -1,0 +1,9 @@
+// Generated macro for impl_1572 (impl)
+macro_rules! Depcrateimpl_1572 {
+() => {
+// Module: crate
+// Provides: {"impl_1572"}
+// Dependencies: {}
+impl < 'b , T : Write + 'b > Session < 'b , T > { pub fn new (config : Config , mut out : Option < & 'b mut T >) -> Session < 'b , T > { let emitter = create_emitter (& config) ; if let Some (ref mut out) = out { let _ = emitter . emit_header (out) ; } Session { config , out , emitter , errors : ReportedErrors :: default () , source_file : SourceFile :: new () , } } # [doc = " The main entry point for Rustfmt. Formats the given input according to the"] # [doc = " given config. `out` is only necessary if required by the configuration."] pub fn format (& mut self , input : Input) -> Result < FormatReport , ErrorKind > { self . format_input_inner (input , false) } pub fn override_config < F , U > (& mut self , mut config : Config , f : F) -> U where F : FnOnce (& mut Session < 'b , T >) -> U , { mem :: swap (& mut config , & mut self . config) ; let result = f (self) ; mem :: swap (& mut config , & mut self . config) ; result } pub fn add_operational_error (& mut self) { self . errors . has_operational_errors = true ; } pub fn has_operational_errors (& self) -> bool { self . errors . has_operational_errors } pub fn has_parsing_errors (& self) -> bool { self . errors . has_parsing_errors } pub fn has_formatting_errors (& self) -> bool { self . errors . has_formatting_errors } pub fn has_check_errors (& self) -> bool { self . errors . has_check_errors } pub fn has_diff (& self) -> bool { self . errors . has_diff } pub fn has_unformatted_code_errors (& self) -> bool { self . errors . has_unformatted_code_errors } pub fn has_no_errors (& self) -> bool { ! (self . has_operational_errors () || self . has_parsing_errors () || self . has_formatting_errors () || self . has_check_errors () || self . has_diff () || self . has_unformatted_code_errors () || self . errors . has_macro_format_failure) } }
+};
+}

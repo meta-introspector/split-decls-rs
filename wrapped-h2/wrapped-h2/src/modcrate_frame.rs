@@ -1,0 +1,41 @@
+// Generated module macro for crate::frame
+macro_rules! Modcrate_frame {
+() => {
+        Depcrate_frameuse_590!();
+        Depcrate_frameuse_591!();
+        Depcrate_frameuse_592!();
+        Depcrate_frameunpack_octets_4!();
+        Depcrate_frametests!();
+        Depcrate_framedata!();
+        Depcrate_framego_away!();
+        Depcrate_framehead!();
+        Depcrate_frameheaders!();
+        Depcrate_frameping!();
+        Depcrate_framepriority!();
+        Depcrate_framereason!();
+        Depcrate_framereset!();
+        Depcrate_framesettings!();
+        Depcrate_framestream_id!();
+        Depcrate_frameutil!();
+        Depcrate_framewindow_update!();
+        Depcrate_frameuse_754!();
+        Depcrate_frameuse_755!();
+        Depcrate_frameuse_756!();
+        Depcrate_frameuse_757!();
+        Depcrate_frameuse_758!();
+        Depcrate_frameuse_759!();
+        Depcrate_frameuse_760!();
+        Depcrate_frameuse_761!();
+        Depcrate_frameuse_762!();
+        Depcrate_frameuse_763!();
+        Depcrate_frameuse_764!();
+        Depcrate_frameuse_765!();
+        Depcrate_frameuse_766!();
+        Depcrate_frameFrameSize!();
+        Depcrate_frameHEADER_LEN!();
+        Depcrate_frameFrame!();
+        Depcrate_frameimpl_770!();
+        Depcrate_frameimpl_771!();
+        Depcrate_frameError!();
+    };
+}

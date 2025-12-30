@@ -1,0 +1,9 @@
+// Generated macro for update_dollar_crate_names (function)
+macro_rules! Depcrate_hygieneupdate_dollar_crate_names {
+() => {
+// Module: crate::hygiene
+// Provides: {"update_dollar_crate_names"}
+// Dependencies: {}
+pub fn update_dollar_crate_names (mut get_name : impl FnMut (SyntaxContext) -> Symbol) { let mut to_update = vec ! [] ; HygieneData :: with (| data | { for (idx , scdata) in data . syntax_context_data . iter () . enumerate () . rev () { if scdata . dollar_crate_name == kw :: DollarCrate { to_update . push ((idx , kw :: DollarCrate)) ; } else { break ; } } }) ; for (idx , name) in & mut to_update { * name = get_name (SyntaxContext :: from_usize (* idx)) ; } HygieneData :: with (| data | { for (idx , name) in to_update { data . syntax_context_data [idx] . dollar_crate_name = name ; } }) }
+};
+}

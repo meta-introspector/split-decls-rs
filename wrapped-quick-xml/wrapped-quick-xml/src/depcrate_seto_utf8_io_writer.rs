@@ -1,0 +1,9 @@
+// Generated macro for to_utf8_io_writer (function)
+macro_rules! Depcrate_seto_utf8_io_writer {
+() => {
+// Module: crate::se
+// Provides: {"to_utf8_io_writer"}
+// Dependencies: {}
+# [doc = " Serialize struct into a `io::Write`r restricted to utf-8 encoding."] # [doc = ""] # [doc = " Returns the classification of the last written type."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " # use quick_xml::se::to_utf8_io_writer;"] # [doc = " # use serde::Serialize;"] # [doc = " # use pretty_assertions::assert_eq;"] # [doc = " # use std::io::BufWriter;"] # [doc = " #[derive(Serialize)]"] # [doc = " struct Root<'a> {"] # [doc = "     #[serde(rename = \"@attribute\")]"] # [doc = "     attribute: &'a str,"] # [doc = "     element: &'a str,"] # [doc = "     #[serde(rename = \"$text\")]"] # [doc = "     text: &'a str,"] # [doc = " }"] # [doc = ""] # [doc = " let data = Root {"] # [doc = "     attribute: \"attribute content\","] # [doc = "     element: \"element content\","] # [doc = "     text: \"text content\","] # [doc = " };"] # [doc = ""] # [doc = " let mut buffer = Vec::new();"] # [doc = " to_utf8_io_writer(&mut BufWriter::new(&mut buffer), &data).unwrap();"] # [doc = ""] # [doc = " assert_eq!("] # [doc = "     std::str::from_utf8(&buffer).unwrap(),"] # [doc = "     // The root tag name is automatically deduced from the struct name"] # [doc = "     // This will not work for other types or struct with #[serde(flatten)] fields"] # [doc = "     \"<Root attribute=\\\"attribute content\\\">\\"] # [doc = "         <element>element content</element>\\"] # [doc = "         text content\\"] # [doc = "     </Root>\""] # [doc = " );"] # [doc = " ```"] pub fn to_utf8_io_writer < W , T > (writer : W , value : & T) -> Result < WriteResult , SeError > where W : std :: io :: Write , T : ? Sized + Serialize , { value . serialize (Serializer :: new (& mut ToFmtWrite (writer))) }
+};
+}

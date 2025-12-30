@@ -1,0 +1,51 @@
+// Generated module macro for crate::macro_options
+macro_rules! Modcrate_macro_options {
+() => {
+        Depcrate_macro_optionsuse_85!();
+        Depcrate_macro_optionsuse_86!();
+        Depcrate_macro_optionsuse_87!();
+        Depcrate_macro_optionsuse_88!();
+        Depcrate_macro_optionsuse_89!();
+        Depcrate_macro_optionsuse_90!();
+        Depcrate_macro_optionsuse_91!();
+        Depcrate_macro_optionsuse_92!();
+        Depcrate_macro_optionsuse_93!();
+        Depcrate_macro_optionsuse_94!();
+        Depcrate_macro_optionsVisibilityAttr!();
+        Depcrate_macro_optionsimpl_96!();
+        Depcrate_macro_optionsimpl_97!();
+        Depcrate_macro_optionsimpl_98!();
+        Depcrate_macro_optionsBuildFnErrorGenerated!();
+        Depcrate_macro_optionsBuildFnError!();
+        Depcrate_macro_optionsimpl_101!();
+        Depcrate_macro_optionsimpl_102!();
+        Depcrate_macro_optionsBuildFn!();
+        Depcrate_macro_optionsimpl_104!();
+        Depcrate_macro_optionsimpl_105!();
+        Depcrate_macro_optionsFieldLevelFieldMeta!();
+        Depcrate_macro_optionsStructLevelSetter!();
+        Depcrate_macro_optionsimpl_108!();
+        Depcrate_macro_optionsparse_each!();
+        Depcrate_macro_optionsFieldLevelSetter!();
+        Depcrate_macro_optionsimpl_111!();
+        Depcrate_macro_optionsfield_setter!();
+        Depcrate_macro_optionsFieldForwardedAttrs!();
+        Depcrate_macro_optionsimpl_114!();
+        Depcrate_macro_optionsField!();
+        Depcrate_macro_optionsimpl_116!();
+        Depcrate_macro_optionsdistribute_and_unnest_attrs!();
+        Depcrate_macro_optionsunnest_from_one_attribute!();
+        Depcrate_macro_optionsdefault_crate_root!();
+        Depcrate_macro_optionsdefault_create_empty!();
+        Depcrate_macro_optionsStructForwardedAttrs!();
+        Depcrate_macro_optionsimpl_122!();
+        Depcrate_macro_optionsOptions!();
+        Depcrate_macro_optionsimpl_124!();
+        Depcrate_macro_optionsimpl_125!();
+        Depcrate_macro_optionsFieldWithDefaults!();
+        Depcrate_macro_optionsimpl_127!();
+        Depcrate_macro_optionsimpl_128!();
+        Depcrate_macro_optionsFieldIter!();
+        Depcrate_macro_optionsimpl_130!();
+    };
+}

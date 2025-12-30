@@ -1,0 +1,9 @@
+// Generated macro for transport_params_unknown_max_space_respected (function)
+macro_rules! Depcrate_teststransport_params_unknown_max_space_respected {
+() => {
+// Module: crate::tests
+// Provides: {"transport_params_unknown_max_space_respected"}
+// Dependencies: {}
+# [test] fn transport_params_unknown_max_space_respected () { let mut unknown_params : UnknownTransportParameters = UnknownTransportParameters { capacity : 256 , parameters : vec ! [] , } ; let massive_unknown_param = UnknownTransportParameter :: < & [u8] > { id : 5 , value : & [0xau8 ; 280] , } ; let big_unknown_param = UnknownTransportParameter :: < & [u8] > { id : 5 , value : & [0xau8 ; 232] , } ; let little_unknown_param = UnknownTransportParameter :: < & [u8] > { id : 6 , value : & [0xau8 ; 7] , } ; assert ! (unknown_params . push (massive_unknown_param) . is_err ()) ; assert ! (unknown_params . capacity == 256) ; assert ! (unknown_params . parameters . is_empty ()) ; unknown_params . push (big_unknown_param) . unwrap () ; assert ! (unknown_params . capacity == 16) ; assert ! (unknown_params . parameters . len () == 1) ; unknown_params . push (little_unknown_param . clone ()) . unwrap () ; assert ! (unknown_params . capacity == 1) ; assert ! (unknown_params . parameters . len () == 2) ; assert ! (unknown_params . push (little_unknown_param) . is_err ()) ; let mut unknown_params_iter = unknown_params . into_iter () ; let unknown_params_first = unknown_params_iter . next () . expect ("Should have a 0th element.") ; assert ! (unknown_params_first . id == 5 && unknown_params_first . value == vec ! [0xau8 ; 232]) ; let unknown_params_second = unknown_params_iter . next () . expect ("Should have a 1th element.") ; assert ! (unknown_params_second . id == 6 && unknown_params_second . value == vec ! [0xau8 ; 7]) ; }
+};
+}

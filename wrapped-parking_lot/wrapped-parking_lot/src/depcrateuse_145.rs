@@ -4,6 +4,6 @@ macro_rules! Depcrateuse_145 {
 // Module: crate
 // Provides: {"use_145"}
 // Dependencies: {}
-pub use self :: raw_fair_mutex :: RawFairMutex ;
+pub use self :: raw_rwlock :: RawRwLock ;
 };
 }

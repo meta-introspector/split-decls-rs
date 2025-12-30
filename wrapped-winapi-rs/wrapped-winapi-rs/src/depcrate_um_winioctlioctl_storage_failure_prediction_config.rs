@@ -1,0 +1,9 @@
+// Generated macro for IOCTL_STORAGE_FAILURE_PREDICTION_CONFIG (const)
+macro_rules! Depcrate_um_winioctlIOCTL_STORAGE_FAILURE_PREDICTION_CONFIG {
+() => {
+// Module: crate::um::winioctl
+// Provides: {"IOCTL_STORAGE_FAILURE_PREDICTION_CONFIG"}
+// Dependencies: {}
+pub const IOCTL_STORAGE_FAILURE_PREDICTION_CONFIG : DWORD = CTL_CODE ! (IOCTL_STORAGE_BASE , 0x0441 , METHOD_BUFFERED , FILE_ANY_ACCESS) ;
+};
+}

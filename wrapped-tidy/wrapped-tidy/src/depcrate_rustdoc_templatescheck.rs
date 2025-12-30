@@ -1,0 +1,9 @@
+// Generated macro for check (function)
+macro_rules! Depcrate_rustdoc_templatescheck {
+() => {
+// Module: crate::rustdoc_templates
+// Provides: {"check"}
+// Dependencies: {}
+pub fn check (librustdoc_path : & Path , bad : & mut bool) { walk (& librustdoc_path . join ("html/templates") , | path , is_dir | is_dir || path . extension () . is_none_or (| ext | ext != OsStr :: new ("html")) , & mut | path : & DirEntry , file_content : & str | { let mut lines = file_content . lines () . enumerate () . peekable () ; while let Some ((pos , line)) = lines . next () { let line = line . trim () ; if let Some (need_next_line_check) = TAGS . iter () . find_map (| (tag , end_tag) | { if ! line . ends_with (end_tag) { None } else if * tag != "{#" { Some (false) } else if let Some (start_pos) = line . rfind (tag) { Some (line [start_pos + 2 ..] . trim () == "#}") } else { Some (false) } }) { if need_next_line_check && lines . peek () . is_some_and (| (_ , next_line) | { let next_line = next_line . trim_start () ; TAGS . iter () . any (| (tag , _) | next_line . starts_with (tag)) }) { tidy_error ! (bad , "`{}` at line {}: unneeded `{{# #}}` tag at the end of the line" , path . path () . display () , pos + 1 ,) ; } continue ; } let Some (next_line) = lines . peek () . map (| (_ , next_line) | next_line . trim ()) else { continue ; } ; if TAGS . iter () . any (| (tag , _) | next_line . starts_with (tag)) { continue ; } match TAGS . iter () . find_map (| (tag , end_tag) | { if line . rfind (tag) . is_some () { Some (end_tag) } else { None } }) { None => { tidy_error ! (bad , "`{}` at line {}: missing `{{# #}}` at the end of the line" , path . path () . display () , pos + 1 ,) ; } Some (end_tag) => { while let Some ((_ , next_line)) = lines . peek () { if next_line . contains (end_tag) { break ; } lines . next () ; } } } } } ,) ; }
+};
+}

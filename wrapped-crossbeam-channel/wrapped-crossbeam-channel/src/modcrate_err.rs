@@ -1,0 +1,45 @@
+// Generated module macro for crate::err
+macro_rules! Modcrate_err {
+() => {
+        Depcrate_erruse_86!();
+        Depcrate_erruse_87!();
+        Depcrate_errSendError!();
+        Depcrate_errTrySendError!();
+        Depcrate_errSendTimeoutError!();
+        Depcrate_errRecvError!();
+        Depcrate_errTryRecvError!();
+        Depcrate_errRecvTimeoutError!();
+        Depcrate_errTrySelectError!();
+        Depcrate_errSelectTimeoutError!();
+        Depcrate_errTryReadyError!();
+        Depcrate_errReadyTimeoutError!();
+        Depcrate_errimpl_98!();
+        Depcrate_errimpl_99!();
+        Depcrate_errimpl_100!();
+        Depcrate_errimpl_101!();
+        Depcrate_errimpl_102!();
+        Depcrate_errimpl_103!();
+        Depcrate_errimpl_104!();
+        Depcrate_errimpl_105!();
+        Depcrate_errimpl_106!();
+        Depcrate_errimpl_107!();
+        Depcrate_errimpl_108!();
+        Depcrate_errimpl_109!();
+        Depcrate_errimpl_110!();
+        Depcrate_errimpl_111!();
+        Depcrate_errimpl_112!();
+        Depcrate_errimpl_113!();
+        Depcrate_errimpl_114!();
+        Depcrate_errimpl_115!();
+        Depcrate_errimpl_116!();
+        Depcrate_errimpl_117!();
+        Depcrate_errimpl_118!();
+        Depcrate_errimpl_119!();
+        Depcrate_errimpl_120!();
+        Depcrate_errimpl_121!();
+        Depcrate_errimpl_122!();
+        Depcrate_errimpl_123!();
+        Depcrate_errimpl_124!();
+        Depcrate_errimpl_125!();
+    };
+}

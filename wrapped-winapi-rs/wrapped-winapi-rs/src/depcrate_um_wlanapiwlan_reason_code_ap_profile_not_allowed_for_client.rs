@@ -1,0 +1,9 @@
+// Generated macro for WLAN_REASON_CODE_AP_PROFILE_NOT_ALLOWED_FOR_CLIENT (const)
+macro_rules! Depcrate_um_wlanapiWLAN_REASON_CODE_AP_PROFILE_NOT_ALLOWED_FOR_CLIENT {
+() => {
+// Module: crate::um::wlanapi
+// Provides: {"WLAN_REASON_CODE_AP_PROFILE_NOT_ALLOWED_FOR_CLIENT"}
+// Dependencies: {}
+pub const WLAN_REASON_CODE_AP_PROFILE_NOT_ALLOWED_FOR_CLIENT : WLAN_REASON_CODE = WLAN_REASON_CODE_AC_CONNECT_BASE + 15 ;
+};
+}

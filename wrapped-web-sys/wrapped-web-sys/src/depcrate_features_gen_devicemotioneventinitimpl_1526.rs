@@ -1,0 +1,9 @@
+// Generated macro for impl_1526 (impl)
+macro_rules! Depcrate_features_gen_DeviceMotionEventInitimpl_1526 {
+() => {
+// Module: crate::features::gen_DeviceMotionEventInit
+// Provides: {"impl_1526"}
+// Dependencies: {}
+impl DeviceMotionEventInit { # [doc = "Construct a new `DeviceMotionEventInit`."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `DeviceMotionEventInit`*"] pub fn new () -> Self { # [allow (unused_mut)] let mut ret : Self = :: wasm_bindgen :: JsCast :: unchecked_into (:: js_sys :: Object :: new ()) ; ret } # [deprecated = "Use `set_bubbles()` instead."] pub fn bubbles (& mut self , val : bool) -> & mut Self { self . set_bubbles (val) ; self } # [deprecated = "Use `set_cancelable()` instead."] pub fn cancelable (& mut self , val : bool) -> & mut Self { self . set_cancelable (val) ; self } # [deprecated = "Use `set_composed()` instead."] pub fn composed (& mut self , val : bool) -> & mut Self { self . set_composed (val) ; self } # [cfg (feature = "DeviceAccelerationInit")] # [deprecated = "Use `set_acceleration()` instead."] pub fn acceleration (& mut self , val : & DeviceAccelerationInit) -> & mut Self { self . set_acceleration (val) ; self } # [cfg (feature = "DeviceAccelerationInit")] # [deprecated = "Use `set_acceleration_including_gravity()` instead."] pub fn acceleration_including_gravity (& mut self , val : & DeviceAccelerationInit) -> & mut Self { self . set_acceleration_including_gravity (val) ; self } # [deprecated = "Use `set_interval()` instead."] pub fn interval (& mut self , val : Option < f64 >) -> & mut Self { self . set_interval (val) ; self } # [cfg (feature = "DeviceRotationRateInit")] # [deprecated = "Use `set_rotation_rate()` instead."] pub fn rotation_rate (& mut self , val : & DeviceRotationRateInit) -> & mut Self { self . set_rotation_rate (val) ; self } }
+};
+}

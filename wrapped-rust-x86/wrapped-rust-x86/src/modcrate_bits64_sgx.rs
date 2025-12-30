@@ -1,0 +1,39 @@
+// Generated module macro for crate::bits64::sgx
+macro_rules! Modcrate_bits64_sgx {
+() => {
+        Depcrate_bits64_sgxuse_352!();
+        Depcrate_bits64_sgxencls!();
+        Depcrate_bits64_sgxencls2!();
+        Depcrate_bits64_sgxencls3!();
+        Depcrate_bits64_sgxencls4!();
+        Depcrate_bits64_sgxEnclsCommand!();
+        Depcrate_bits64_sgxencls_eadd!();
+        Depcrate_bits64_sgxencls_eaug!();
+        Depcrate_bits64_sgxencls_eblock!();
+        Depcrate_bits64_sgxencls_create!();
+        Depcrate_bits64_sgxencls_edbgrd!();
+        Depcrate_bits64_sgxencls_edbgwr!();
+        Depcrate_bits64_sgxencls_eextend!();
+        Depcrate_bits64_sgxencls_einit!();
+        Depcrate_bits64_sgxencls_eldb!();
+        Depcrate_bits64_sgxencls_eldu!();
+        Depcrate_bits64_sgxencls_emodpr!();
+        Depcrate_bits64_sgxencls_emodt!();
+        Depcrate_bits64_sgxencls_epa!();
+        Depcrate_bits64_sgxencls_eremove!();
+        Depcrate_bits64_sgxencls_etrack!();
+        Depcrate_bits64_sgxencls_ewb!();
+        Depcrate_bits64_sgxenclu!();
+        Depcrate_bits64_sgxenclu3!();
+        Depcrate_bits64_sgxenclu4!();
+        Depcrate_bits64_sgxEncluCommand!();
+        Depcrate_bits64_sgxenclu_eaccept!();
+        Depcrate_bits64_sgxenclu_eacceptcopy!();
+        Depcrate_bits64_sgxenclu_eenter!();
+        Depcrate_bits64_sgxenclu_eexit!();
+        Depcrate_bits64_sgxenclu_egetkey!();
+        Depcrate_bits64_sgxenclu_emodepe!();
+        Depcrate_bits64_sgxenclu_ereport!();
+        Depcrate_bits64_sgxenclu_eresume!();
+    };
+}

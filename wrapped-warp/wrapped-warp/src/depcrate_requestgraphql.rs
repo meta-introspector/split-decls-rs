@@ -1,0 +1,9 @@
+// Generated macro for graphql (function)
+macro_rules! Depcrate_requestgraphql {
+() => {
+// Module: crate::request
+// Provides: {"graphql"}
+// Dependencies: {}
+# [doc = " GraphQL request filter"] # [doc = ""] # [doc = " It outputs a tuple containing the `async_graphql::Schema` and"] # [doc = " `async_graphql::Request`."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " *[Full Example](<https://github.com/async-graphql/examples/blob/master/warp/starwars/src/main.rs>)*"] # [doc = ""] # [doc = " ```no_run"] # [doc = " use std::convert::Infallible;"] # [doc = ""] # [doc = " use async_graphql::*;"] # [doc = " use async_graphql_warp::*;"] # [doc = " use warp::Filter;"] # [doc = ""] # [doc = " struct QueryRoot;"] # [doc = ""] # [doc = " #[Object]"] # [doc = " impl QueryRoot {"] # [doc = "     async fn value(&self, ctx: &Context<'_>) -> i32 {"] # [doc = "         unimplemented!()"] # [doc = "     }"] # [doc = " }"] # [doc = ""] # [doc = " type MySchema = Schema<QueryRoot, EmptyMutation, EmptySubscription>;"] # [doc = ""] # [doc = " # tokio::runtime::Runtime::new().unwrap().block_on(async {"] # [doc = " let schema = Schema::new(QueryRoot, EmptyMutation, EmptySubscription);"] # [doc = " let filter = async_graphql_warp::graphql(schema).and_then("] # [doc = "     |(schema, request): (MySchema, async_graphql::Request)| async move {"] # [doc = "         Ok::<_, Infallible>(async_graphql_warp::GraphQLResponse::from("] # [doc = "             schema.execute(request).await,"] # [doc = "         ))"] # [doc = "     },"] # [doc = " );"] # [doc = " warp::serve(filter).run(([0, 0, 0, 0], 8000)).await;"] # [doc = " # });"] # [doc = " ```"] pub fn graphql < E > (executor : E ,) -> impl Filter < Extract = ((E , async_graphql :: Request) ,) , Error = Rejection > + Clone where E : Executor , { graphql_opts (executor , Default :: default ()) }
+};
+}

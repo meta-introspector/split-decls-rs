@@ -1,0 +1,40 @@
+// Generated module macro for crate::os::windows::process
+macro_rules! Modcrate_os_windows_process {
+() => {
+        Depcrate_os_windows_processuse_1984!();
+        Depcrate_os_windows_processuse_1985!();
+        Depcrate_os_windows_processuse_1986!();
+        Depcrate_os_windows_processuse_1987!();
+        Depcrate_os_windows_processuse_1988!();
+        Depcrate_os_windows_processuse_1989!();
+        Depcrate_os_windows_processimpl_1990!();
+        Depcrate_os_windows_processimpl_1991!();
+        Depcrate_os_windows_processimpl_1992!();
+        Depcrate_os_windows_processimpl_1993!();
+        Depcrate_os_windows_processimpl_1994!();
+        Depcrate_os_windows_processimpl_1995!();
+        Depcrate_os_windows_processimpl_1996!();
+        Depcrate_os_windows_processimpl_1997!();
+        Depcrate_os_windows_processimpl_1998!();
+        Depcrate_os_windows_processimpl_1999!();
+        Depcrate_os_windows_processimpl_2000!();
+        Depcrate_os_windows_processimpl_2001!();
+        Depcrate_os_windows_processimpl_2002!();
+        Depcrate_os_windows_processimpl_2003!();
+        Depcrate_os_windows_processimpl_2004!();
+        Depcrate_os_windows_processExitStatusExt!();
+        Depcrate_os_windows_processimpl_2006!();
+        Depcrate_os_windows_processCommandExt!();
+        Depcrate_os_windows_processimpl_2008!();
+        Depcrate_os_windows_processChildExt!();
+        Depcrate_os_windows_processimpl_2010!();
+        Depcrate_os_windows_processExitCodeExt!();
+        Depcrate_os_windows_processimpl_2012!();
+        Depcrate_os_windows_processProcThreadAttributeList!();
+        Depcrate_os_windows_processimpl_2014!();
+        Depcrate_os_windows_processimpl_2015!();
+        Depcrate_os_windows_processProcThreadAttributeListBuilder!();
+        Depcrate_os_windows_processimpl_2017!();
+        Depcrate_os_windows_processProcThreadAttributeValue!();
+    };
+}

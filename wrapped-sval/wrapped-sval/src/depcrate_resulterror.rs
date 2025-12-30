@@ -1,9 +1,9 @@
-// Generated macro for error (function)
-macro_rules! Depcrate_resulterror {
+// Generated macro for Error (struct)
+macro_rules! Depcrate_resultError {
 () => {
 // Module: crate::result
-// Provides: {"error"}
+// Provides: {"Error"}
 // Dependencies: {}
-# [doc = "\nA streaming result with a generic failure.\n\nMore detailed diagnostic information will need to be stored elsewhere.\n"] # [inline (always)] pub fn error < T > () -> crate :: Result < T > { Err (Error :: new ()) }
+# [doc = "\nAn error encountered while streaming a value.\n\nErrors don't capture details of failures, that responsibility is left\nto the stream to surface.\n"] # [derive (Debug)] pub struct Error (()) ;
 };
 }

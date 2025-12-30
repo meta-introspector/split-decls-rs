@@ -1,0 +1,39 @@
+// Generated module macro for crate::filters::multipart
+macro_rules! Modcrate_filters_multipart {
+() => {
+        Depcrate_filters_multipartuse_466!();
+        Depcrate_filters_multipartuse_467!();
+        Depcrate_filters_multipartuse_468!();
+        Depcrate_filters_multipartuse_469!();
+        Depcrate_filters_multipartuse_470!();
+        Depcrate_filters_multipartuse_471!();
+        Depcrate_filters_multipartuse_472!();
+        Depcrate_filters_multipartuse_473!();
+        Depcrate_filters_multipartuse_474!();
+        Depcrate_filters_multipartuse_475!();
+        Depcrate_filters_multipartuse_476!();
+        Depcrate_filters_multipartuse_477!();
+        Depcrate_filters_multipartuse_478!();
+        Depcrate_filters_multipartuse_479!();
+        Depcrate_filters_multipartuse_480!();
+        Depcrate_filters_multipartDEFAULT_FORM_DATA_MAX_LENGTH!();
+        Depcrate_filters_multipartFormOptions!();
+        Depcrate_filters_multipartFormData!();
+        Depcrate_filters_multipartPart!();
+        Depcrate_filters_multipartform!();
+        Depcrate_filters_multipartimpl_486!();
+        Depcrate_filters_multipartFormFut!();
+        Depcrate_filters_multipartimpl_488!();
+        Depcrate_filters_multipartimpl_489!();
+        Depcrate_filters_multipartimpl_490!();
+        Depcrate_filters_multipartimpl_491!();
+        Depcrate_filters_multipartimpl_492!();
+        Depcrate_filters_multipartPartStream!();
+        Depcrate_filters_multipartimpl_494!();
+        Depcrate_filters_multipartBodyIoError!();
+        Depcrate_filters_multipartimpl_496!();
+        Depcrate_filters_multipartMultipartFieldMissingName!();
+        Depcrate_filters_multipartimpl_498!();
+        Depcrate_filters_multipartimpl_499!();
+    };
+}

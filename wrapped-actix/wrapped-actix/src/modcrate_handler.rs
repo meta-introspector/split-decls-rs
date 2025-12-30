@@ -1,0 +1,56 @@
+// Generated module macro for crate::handler
+macro_rules! Modcrate_handler {
+() => {
+        Depcrate_handleruse_190!();
+        Depcrate_handleruse_191!();
+        Depcrate_handleruse_192!();
+        Depcrate_handlerHandler!();
+        Depcrate_handlerMessage!();
+        Depcrate_handlerimpl_195!();
+        Depcrate_handlerimpl_196!();
+        Depcrate_handlerMessageResult!();
+        Depcrate_handlerAtomicResponse!();
+        Depcrate_handlerimpl_199!();
+        Depcrate_handlerimpl_200!();
+        Depcrate_handlerResponseActFuture!();
+        Depcrate_handlerResponseFuture!();
+        Depcrate_handlerMessageResponse!();
+        Depcrate_handlerimpl_204!();
+        Depcrate_handlerimpl_205!();
+        Depcrate_handlerimpl_206!();
+        Depcrate_handlerimpl_207!();
+        Depcrate_handlerimpl_208!();
+        Depcrate_handlerimpl_209!();
+        Depcrate_handlerimpl_210!();
+        Depcrate_handlerimpl_211!();
+        Depcrate_handlerResponseTypeItem!();
+        Depcrate_handlerResponse!();
+        Depcrate_handlerimpl_214!();
+        Depcrate_handlerimpl_215!();
+        Depcrate_handlerimpl_216!();
+        Depcrate_handlerActorResponseTypeItem!();
+        Depcrate_handlerActorResponse!();
+        Depcrate_handlerimpl_219!();
+        Depcrate_handlerimpl_220!();
+        Depcrate_handlerimpl_221!();
+        Depcrate_handlerimpl_222!();
+        Depcrate_handlerSIMPLE_RESULT!();
+        Depcrate_handlermacro_224!();
+        Depcrate_handlermacro_225!();
+        Depcrate_handlermacro_226!();
+        Depcrate_handlermacro_227!();
+        Depcrate_handlermacro_228!();
+        Depcrate_handlermacro_229!();
+        Depcrate_handlermacro_230!();
+        Depcrate_handlermacro_231!();
+        Depcrate_handlermacro_232!();
+        Depcrate_handlermacro_233!();
+        Depcrate_handlermacro_234!();
+        Depcrate_handlermacro_235!();
+        Depcrate_handlermacro_236!();
+        Depcrate_handlermacro_237!();
+        Depcrate_handlermacro_238!();
+        Depcrate_handlerOneshotSend!();
+        Depcrate_handlerimpl_240!();
+    };
+}

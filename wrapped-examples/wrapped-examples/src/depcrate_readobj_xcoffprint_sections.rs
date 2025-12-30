@@ -1,0 +1,9 @@
+// Generated macro for print_sections (function)
+macro_rules! Depcrate_readobj_xcoffprint_sections {
+() => {
+// Module: crate::readobj::xcoff
+// Provides: {"print_sections"}
+// Dependencies: {}
+fn print_sections < 'data , Xcoff : FileHeader > (p : & mut Printer < '_ > , data : & [u8] , symbols : Option < & SymbolTable < 'data , Xcoff > > , sections : & SectionTable < 'data , Xcoff > ,) { if ! p . options . sections { return ; } for (index , section) in sections . iter () . enumerate () { p . group ("SectionHeader" , | p | { p . field ("Index" , index + 1) ; p . field_inline_string ("Name" , section . name ()) ; p . field_hex ("PhysicalAddress" , section . s_paddr () . into ()) ; p . field_hex ("VirtualAddress" , section . s_vaddr () . into ()) ; p . field_hex ("Size" , section . s_size () . into ()) ; p . field_hex ("SectionDataPointer" , section . s_scnptr () . into ()) ; p . field_hex ("RelocationPointer" , section . s_relptr () . into ()) ; p . field_hex ("LineNumberPointer" , section . s_lnnoptr () . into ()) ; p . field ("NumberOfRelocations" , section . s_nreloc () . into ()) ; p . field ("NumberOfLineNumbers" , section . s_nlnno () . into ()) ; let flags = section . s_flags () ; p . field_enum ("Type" , flags as u16 , FLAGS_STYP) ; if flags as u16 == STYP_DWARF { p . field_enum ("SubType" , flags & 0xffff_0000 , FLAGS_SSUBTYP) ; } if let Some (relocations) = section . relocations (data) . print_err (p) { for relocation in relocations { p . group ("Relocation" , | p | { p . field_hex ("VirtualAddress" , relocation . r_vaddr () . into ()) ; let index = relocation . symbol () ; let name = symbols . and_then (| symbols | { symbols . symbol (index) . and_then (| symbol | symbol . name (symbols . strings ())) . print_err (p) }) ; p . field_string_option ("Symbol" , index . 0 , name) ; p . field_hex ("Size" , relocation . r_rsize ()) ; p . field_enum ("Type" , relocation . r_rtype () , FLAGS_R) ; }) ; } } }) ; } }
+};
+}

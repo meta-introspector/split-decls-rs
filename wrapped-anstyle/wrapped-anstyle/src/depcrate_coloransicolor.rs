@@ -1,0 +1,9 @@
+// Generated macro for AnsiColor (enum)
+macro_rules! Depcrate_colorAnsiColor {
+() => {
+// Module: crate::color
+// Provides: {"AnsiColor"}
+// Dependencies: {}
+# [doc = " Available 4-bit ANSI color palette codes"] # [doc = ""] # [doc = " The user's terminal defines the meaning of each palette code."] # [allow (clippy :: exhaustive_enums)] # [derive (Copy , Clone , Debug , PartialEq , Eq , PartialOrd , Ord , Hash)] # [repr (u8)] pub enum AnsiColor { # [doc = " Black: #0 (foreground code `30`, background code `40`)."] Black , # [doc = " Red: #1 (foreground code `31`, background code `41`)."] Red , # [doc = " Green: #2 (foreground code `32`, background code `42`)."] Green , # [doc = " Yellow: #3 (foreground code `33`, background code `43`)."] Yellow , # [doc = " Blue: #4 (foreground code `34`, background code `44`)."] Blue , # [doc = " Magenta: #5 (foreground code `35`, background code `45`)."] Magenta , # [doc = " Cyan: #6 (foreground code `36`, background code `46`)."] Cyan , # [doc = " White: #7 (foreground code `37`, background code `47`)."] White , # [doc = " Bright black: #0 (foreground code `90`, background code `100`)."] BrightBlack , # [doc = " Bright red: #1 (foreground code `91`, background code `101`)."] BrightRed , # [doc = " Bright green: #2 (foreground code `92`, background code `102`)."] BrightGreen , # [doc = " Bright yellow: #3 (foreground code `93`, background code `103`)."] BrightYellow , # [doc = " Bright blue: #4 (foreground code `94`, background code `104`)."] BrightBlue , # [doc = " Bright magenta: #5 (foreground code `95`, background code `105`)."] BrightMagenta , # [doc = " Bright cyan: #6 (foreground code `96`, background code `106`)."] BrightCyan , # [doc = " Bright white: #7 (foreground code `97`, background code `107`)."] BrightWhite , }
+};
+}

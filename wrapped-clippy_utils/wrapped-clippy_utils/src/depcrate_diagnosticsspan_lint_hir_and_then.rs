@@ -1,0 +1,9 @@
+// Generated macro for span_lint_hir_and_then (function)
+macro_rules! Depcrate_diagnosticsspan_lint_hir_and_then {
+() => {
+// Module: crate::diagnostics
+// Provides: {"span_lint_hir_and_then"}
+// Dependencies: {}
+# [doc = " Like [`span_lint_and_then`], but emits the lint at the node identified by the given `HirId`."] # [doc = ""] # [doc = " This is in contrast to [`span_lint_and_then`], which always emits the lint at the node that was"] # [doc = " last passed to the `LintPass::check_*` function."] # [doc = ""] # [doc = " The `HirId` is used for checking lint level attributes and to fulfill lint expectations defined"] # [doc = " via the `#[expect]` attribute."] # [doc = ""] # [doc = " For example:"] # [doc = " ```ignore"] # [doc = " fn f() { /* <node_1> */"] # [doc = ""] # [doc = "     #[allow(clippy::some_lint)]"] # [doc = "     let _x = /* <expr_1> */;"] # [doc = " }"] # [doc = " ```"] # [doc = " If `some_lint` does its analysis in `LintPass::check_fn` (at `<node_1>`) and emits a lint at"] # [doc = " `<expr_1>` using [`span_lint`], then allowing the lint at `<expr_1>` as attempted in the snippet"] # [doc = " will not work!"] # [doc = " Even though that is where the warning points at, which would be confusing to users."] # [doc = ""] # [doc = " Instead, use this function and also pass the `HirId` of `<expr_1>`, which will let"] # [doc = " the compiler check lint level attributes at the place of the expression and"] # [doc = " the `#[allow]` will work."] # [track_caller] pub fn span_lint_hir_and_then (cx : & LateContext < '_ > , lint : & 'static Lint , hir_id : HirId , sp : impl Into < MultiSpan > , msg : impl Into < DiagMessage > , f : impl FnOnce (& mut Diag < '_ , () >) ,) { # [expect (clippy :: disallowed_methods)] cx . tcx . node_span_lint (lint , hir_id , sp , | diag | { diag . primary_message (msg) ; f (diag) ; docs_link (diag , lint) ; # [cfg (debug_assertions)] validate_diag (diag) ; }) ; }
+};
+}

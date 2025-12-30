@@ -1,0 +1,9 @@
+// Generated macro for macro_1446 (macro)
+macro_rules! Depcrate_ntmmapimacro_1446 {
+() => {
+// Module: crate::ntmmapi
+// Provides: {"macro_1446"}
+// Dependencies: {}
+EXTERN ! { extern "system" { fn NtCreatePartition (PartitionHandle : PHANDLE , DesiredAccess : ACCESS_MASK , ObjectAttributes : POBJECT_ATTRIBUTES , PreferredNode : ULONG ,) -> NTSTATUS ; fn NtOpenPartition (PartitionHandle : PHANDLE , DesiredAccess : ACCESS_MASK , ObjectAttributes : POBJECT_ATTRIBUTES ,) -> NTSTATUS ; fn NtManagePartition (PartitionInformationClass : MEMORY_PARTITION_INFORMATION_CLASS , PartitionInformation : PVOID , PartitionInformationLength : ULONG ,) -> NTSTATUS ; fn NtMapUserPhysicalPages (VirtualAddress : PVOID , NumberOfPages : ULONG_PTR , UserPfnArray : PULONG_PTR ,) -> NTSTATUS ; fn NtMapUserPhysicalPagesScatter (VirtualAddresses : * mut PVOID , NumberOfPages : ULONG_PTR , UserPfnArray : PULONG_PTR ,) -> NTSTATUS ; fn NtAllocateUserPhysicalPages (ProcessHandle : HANDLE , NumberOfPages : PULONG_PTR , UserPfnArray : PULONG_PTR ,) -> NTSTATUS ; fn NtFreeUserPhysicalPages (ProcessHandle : HANDLE , NumberOfPages : PULONG_PTR , UserPfnArray : PULONG_PTR ,) -> NTSTATUS ; fn NtOpenSession (SessionHandle : PHANDLE , DesiredAccess : ACCESS_MASK , ObjectAttributes : POBJECT_ATTRIBUTES ,) -> NTSTATUS ; fn NtGetWriteWatch (ProcessHandle : HANDLE , Flags : ULONG , BaseAddress : PVOID , RegionSize : SIZE_T , UserAddressArray : * mut PVOID , EntriesInUserAddressArray : PULONG_PTR , Granularity : PULONG ,) -> NTSTATUS ; fn NtResetWriteWatch (ProcessHandle : HANDLE , BaseAddress : PVOID , RegionSize : SIZE_T ,) -> NTSTATUS ; fn NtCreatePagingFile (PageFileName : PUNICODE_STRING , MinimumSize : PLARGE_INTEGER , MaximumSize : PLARGE_INTEGER , Priority : ULONG ,) -> NTSTATUS ; fn NtFlushInstructionCache (ProcessHandle : HANDLE , BaseAddress : PVOID , Length : SIZE_T ,) -> NTSTATUS ; fn NtFlushWriteBuffer () -> NTSTATUS ; } }
+};
+}

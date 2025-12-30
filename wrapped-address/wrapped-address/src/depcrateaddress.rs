@@ -1,0 +1,9 @@
+// Generated macro for Address (struct)
+macro_rules! DepcrateAddress {
+() => {
+// Module: crate
+// Provides: {"Address"}
+// Dependencies: {}
+# [doc = " The address of a [Solana account][acc]."] # [doc = ""] # [doc = " Some account addresses are [ed25519] public keys, with corresponding secret"] # [doc = " keys that are managed off-chain. Often, though, account addresses do not"] # [doc = " have corresponding secret keys &mdash; as with [_program derived"] # [doc = " addresses_][pdas] &mdash; or the secret key is not relevant to the operation"] # [doc = " of a program, and may have even been disposed of. As running Solana programs"] # [doc = " can not safely create or manage secret keys, the full [`Keypair`] is not"] # [doc = " defined in `solana-program` but in `solana-sdk`."] # [doc = ""] # [doc = " [acc]: https://solana.com/docs/core/accounts"] # [doc = " [ed25519]: https://ed25519.cr.yp.to/"] # [doc = " [pdas]: https://solana.com/docs/core/cpi#program-derived-addresses"] # [doc = " [`Keypair`]: https://docs.rs/solana-sdk/latest/solana_sdk/signer/keypair/struct.Keypair.html"] # [repr (transparent)] # [cfg_attr (feature = "frozen-abi" , derive (solana_frozen_abi_macro :: AbiExample))] # [cfg_attr (feature = "borsh" , derive (BorshSerialize , BorshDeserialize) , borsh (crate = "borsh"))] # [cfg_attr (feature = "borsh" , derive (BorshSchema))] # [cfg_attr (feature = "serde" , derive (Deserialize , Serialize))] # [cfg_attr (feature = "bytemuck" , derive (Pod , Zeroable))] # [cfg_attr (feature = "wincode" , derive (SchemaWrite , SchemaRead))] # [cfg_attr (feature = "dev-context-only-utils" , derive (Arbitrary))] # [cfg_attr (not (feature = "decode") , derive (Debug))] # [cfg_attr (feature = "copy" , derive (Copy))] # [derive (Clone , Default , Eq , Ord , PartialEq , PartialOrd)] pub struct Address (pub (crate) [u8 ; 32]) ;
+};
+}

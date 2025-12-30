@@ -1,0 +1,9 @@
+// Generated macro for impl_1094 (impl)
+macro_rules! Depcrateimpl_1094 {
+() => {
+// Module: crate
+// Provides: {"impl_1094"}
+// Dependencies: {}
+impl < 'tcx > ExprUseCtxt < 'tcx > { pub fn use_node (& self , cx : & LateContext < 'tcx >) -> ExprUseNode < 'tcx > { match self . node { Node :: LetStmt (l) => ExprUseNode :: LetStmt (l) , Node :: ExprField (field) => ExprUseNode :: Field (field) , Node :: Item (& Item { kind : ItemKind :: Static (..) | ItemKind :: Const (..) , owner_id , .. }) | Node :: TraitItem (& TraitItem { kind : TraitItemKind :: Const (..) , owner_id , .. }) | Node :: ImplItem (& ImplItem { kind : ImplItemKind :: Const (..) , owner_id , .. }) => ExprUseNode :: ConstStatic (owner_id) , Node :: Item (& Item { kind : ItemKind :: Fn { .. } , owner_id , .. }) | Node :: TraitItem (& TraitItem { kind : TraitItemKind :: Fn (..) , owner_id , .. }) | Node :: ImplItem (& ImplItem { kind : ImplItemKind :: Fn (..) , owner_id , .. }) => ExprUseNode :: Return (owner_id) , Node :: Expr (use_expr) => match use_expr . kind { ExprKind :: Ret (_) => ExprUseNode :: Return (OwnerId { def_id : cx . tcx . hir_body_owner_def_id (cx . enclosing_body . unwrap ()) , }) , ExprKind :: Closure (closure) => ExprUseNode :: Return (OwnerId { def_id : closure . def_id }) , ExprKind :: Call (func , args) => match args . iter () . position (| arg | arg . hir_id == self . child_id) { Some (i) => ExprUseNode :: FnArg (func , i) , None => ExprUseNode :: Callee , } , ExprKind :: MethodCall (name , _ , args , _) => ExprUseNode :: MethodArg (use_expr . hir_id , name . args , args . iter () . position (| arg | arg . hir_id == self . child_id) . map_or (0 , | i | i + 1) ,) , ExprKind :: Field (_ , name) => ExprUseNode :: FieldAccess (name) , ExprKind :: AddrOf (kind , mutbl , _) => ExprUseNode :: AddrOf (kind , mutbl) , _ => ExprUseNode :: Other , } , _ => ExprUseNode :: Other , } } }
+};
+}

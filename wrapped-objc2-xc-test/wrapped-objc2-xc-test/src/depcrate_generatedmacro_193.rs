@@ -1,0 +1,9 @@
+// Generated macro for macro_193 (macro)
+macro_rules! Depcrate_generatedmacro_193 {
+() => {
+// Module: crate::generated
+// Provides: {"macro_193"}
+// Dependencies: {}
+extern_protocol ! (# [doc = " Defines a protocol which may be used with the -measureWithMetrics* methods on XCTestCase."] # [doc = ""] # [doc = ""] # [doc = " Classes conforming to XCTMetric must also adopt NSCopying, as a unique metric instance is copied for each iteration."] # [doc = ""] # [doc = " See also [Apple's documentation](https://developer.apple.com/documentation/xctest/xctmetric?language=objc)"] pub unsafe trait XCTMetric : NSCopying + NSObjectProtocol { # [doc = " Report measurements for the iteration that started and ended at the specified times."] # [doc = ""] # [doc = ""] # [doc = " Called after -didStopMeasuring has been invoked and when XCTest is ready to gather"] # [doc = " the measurements that were collected. You can truncate the data accumulated to be as"] # [doc = " accurate as possible with the start and end times."] # [unsafe (method (reportMeasurementsFromStartTime : toEndTime : error : _))] # [unsafe (method_family = none)] fn reportMeasurementsFromStartTime_toEndTime_error (& self , start_time : & XCTPerformanceMeasurementTimestamp , end_time : & XCTPerformanceMeasurementTimestamp ,) -> Result < Retained < NSArray < XCTPerformanceMeasurement >>, Retained < NSError >>; # [doc = " Called every iteration just before the measure block is about to be invoked."] # [doc = " You should begin measuring when this is called."] # [optional] # [unsafe (method (willBeginMeasuring))] # [unsafe (method_family = none)] fn willBeginMeasuring (& self) ; # [doc = " Called after the measure block's invocation. You should stop measuring when"] # [doc = " this is called."] # [optional] # [unsafe (method (didStopMeasuring))] # [unsafe (method_family = none)] fn didStopMeasuring (& self) ; }) ;
+};
+}

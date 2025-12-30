@@ -1,0 +1,9 @@
+// Generated macro for impl_unsigned (macro)
+macro_rules! Depcrate_primitivesimpl_unsigned {
+() => {
+// Module: crate::primitives
+// Provides: {"impl_unsigned"}
+// Dependencies: {}
+macro_rules ! impl_unsigned { ($ t : ty , $ bytes : literal) => { impl Deserialize for $ t { # [cfg (feature = "std")] # [inline] fn tls_deserialize < R : Read > (bytes : & mut R) -> Result < Self , Error > { let mut x = <$ t >:: default () . to_be_bytes () ; bytes . read_exact (& mut x) ?; Ok (<$ t >:: from_be_bytes (x)) } } impl DeserializeBytes for $ t { # [inline] fn tls_deserialize_bytes (bytes : & [u8]) -> Result < (Self , & [u8]) , Error > { let len = core :: mem :: size_of ::<$ t > () ; let out = bytes . get (.. len) . ok_or (Error :: EndOfStream) ? . try_into () . map_err (| _ | Error :: EndOfStream) ?; Ok ((<$ t >:: from_be_bytes (out) , & bytes . get (len ..) . ok_or (Error :: EndOfStream) ?,)) } } impl SerializeBytes for &$ t { # [inline] fn tls_serialize (& self) -> Result < Vec < u8 >, Error > { Ok (self . to_be_bytes () . to_vec ()) } } impl SerializeBytes for $ t { # [inline] fn tls_serialize (& self) -> Result < Vec < u8 >, Error > { <& Self as SerializeBytes >:: tls_serialize (& self) } } impl Serialize for $ t { # [cfg (feature = "std")] # [inline] fn tls_serialize < W : Write > (& self , writer : & mut W) -> Result < usize , Error > { let written = writer . write (& self . to_be_bytes ()) ?; debug_assert_eq ! (written , $ bytes) ; Ok (written) } } impl Serialize for &$ t { # [cfg (feature = "std")] # [inline] fn tls_serialize < W : Write > (& self , writer : & mut W) -> Result < usize , Error > { <$ t as Serialize >:: tls_serialize (self , writer) } } impl Size for $ t { # [inline] fn tls_serialized_len (& self) -> usize { $ bytes } } impl Size for &$ t { # [inline] fn tls_serialized_len (& self) -> usize { (* self) . tls_serialized_len () } } } ; }
+};
+}

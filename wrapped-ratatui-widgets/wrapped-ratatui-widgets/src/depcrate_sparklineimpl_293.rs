@@ -1,0 +1,9 @@
+// Generated macro for impl_293 (impl)
+macro_rules! Depcrate_sparklineimpl_293 {
+() => {
+// Module: crate::sparkline
+// Provides: {"impl_293"}
+// Dependencies: {}
+impl Sparkline < '_ > { fn render_sparkline (& self , spark_area : Rect , buf : & mut Buffer) { if spark_area . is_empty () { return ; } let max_height = self . max . unwrap_or_else (| | self . data . iter () . filter_map (| s | s . value) . max () . unwrap_or (1)) ; let max_index = min (spark_area . width as usize , self . data . len ()) ; for (i , item) in self . data . iter () . take (max_index) . enumerate () { let x = match self . direction { RenderDirection :: LeftToRight => spark_area . left () + i as u16 , RenderDirection :: RightToLeft => spark_area . right () - i as u16 - 1 , } ; let (mut height , symbol , style) = match item { SparklineBar { value : Some (value) , style , } => { let height = if max_height == 0 { 0 } else { * value * u64 :: from (spark_area . height) * 8 / max_height } ; (height , None , * style) } _ => (u64 :: from (spark_area . height) * 8 , Some (self . absent_value_symbol . 0 . as_str ()) , Some (self . absent_value_style) ,) , } ; for j in (0 .. spark_area . height) . rev () { let symbol = symbol . unwrap_or_else (| | self . symbol_for_height (height)) ; if height > 8 { height -= 8 ; } else { height = 0 ; } buf [(x , spark_area . top () + j)] . set_symbol (symbol) . set_style (self . style . patch (style . unwrap_or_default ())) ; } } } const fn symbol_for_height (& self , height : u64) -> & str { match height { 0 => self . bar_set . empty , 1 => self . bar_set . one_eighth , 2 => self . bar_set . one_quarter , 3 => self . bar_set . three_eighths , 4 => self . bar_set . half , 5 => self . bar_set . five_eighths , 6 => self . bar_set . three_quarters , 7 => self . bar_set . seven_eighths , _ => self . bar_set . full , } } }
+};
+}

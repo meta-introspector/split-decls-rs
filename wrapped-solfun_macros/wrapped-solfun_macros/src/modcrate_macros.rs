@@ -1,0 +1,44 @@
+// Generated module macro for crate::macros
+macro_rules! Modcrate_macros {
+() => {
+        Depcrate_macrosfiglet!();
+        Depcrate_macroscodegen!();
+        Depcrate_macrosticket!();
+        Depcrate_macrospr!();
+        Depcrate_macrosbranch!();
+        Depcrate_macrosbug!();
+        Depcrate_macroscompiler_parser_element!();
+        Depcrate_macroscompiler_type_check!();
+        Depcrate_macroscargo_manipulate!();
+        Depcrate_macrosreplace_version!();
+        Depcrate_macrosuse_vendored_submodules!();
+        Depcrate_macrosfork_all_repos!();
+        Depcrate_macrosreplace_all_git_hub_actions!();
+        Depcrate_macrosmake_everything_a_macro!();
+        Depcrate_macrosdwim!();
+        Depcrate_macrosmeme!();
+        Depcrate_macrosvideogen!();
+        Depcrate_macrosllm!();
+        Depcrate_macrostoolcall!();
+        Depcrate_macrosresults!();
+        Depcrate_macrosmcp!();
+        Depcrate_macrosservice_finder!();
+        Depcrate_macrosbiosemiotic!();
+        Depcrate_macrosgithub!();
+        Depcrate_macroshuggingface!();
+        Depcrate_macroscodeberg!();
+        Depcrate_macrostwitter!();
+        Depcrate_macrosdiscord!();
+        Depcrate_macrostelegram!();
+        Depcrate_macrosreddit!();
+        Depcrate_macroswikipedia!();
+        Depcrate_macroswikidata!();
+        Depcrate_macrososm!();
+        Depcrate_macrosfoaf!();
+        Depcrate_macrosowl!();
+        Depcrate_macrosoil!();
+        Depcrate_macrosdaml!();
+        Depcrate_macroscwm!();
+        Depcrate_macroseuler!();
+    };
+}

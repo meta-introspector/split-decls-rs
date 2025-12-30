@@ -1,0 +1,9 @@
+// Generated macro for macro_100 (macro)
+macro_rules! Depcrate_generatedmacro_100 {
+() => {
+// Module: crate::generated
+// Provides: {"macro_100"}
+// Dependencies: {}
+extern_class ! (# [doc = " A concrete subclass of XCTest, XCTestSuite is a collection of test cases. Suites"] # [doc = " are usually managed by the IDE, but XCTestSuite also provides API for dynamic test"] # [doc = " and suite management:"] # [doc = ""] # [doc = " ```text"] # [doc = ""] # [doc = "     XCTestSuite *suite = [XCTestSuite testSuiteWithName:@\"My tests\"];"] # [doc = "     [suite addTest:[MathTest testCaseWithSelector:@selector(testAdd)]];"] # [doc = "     [suite addTest:[MathTest testCaseWithSelector:@selector(testDivideByZero)]];"] # [doc = ""] # [doc = " ```"] # [doc = ""] # [doc = " Alternatively, a test suite can extract the tests to be run automatically. To do so,"] # [doc = " pass the class of your test case class to the suite's constructor:"] # [doc = ""] # [doc = " ```text"] # [doc = ""] # [doc = "     XCTestSuite *suite = [XCTestSuite testSuiteForTestCaseClass:[MathTest class]];"] # [doc = ""] # [doc = " ```"] # [doc = ""] # [doc = " This creates a suite with all the methods starting with \"test\" that take no arguments."] # [doc = " Also, a test suite of all the test cases found in the runtime can be created automatically:"] # [doc = ""] # [doc = " ```text"] # [doc = ""] # [doc = "     XCTestSuite *suite = XCTestSuite.defaultTestSuite;"] # [doc = ""] # [doc = " ```"] # [doc = ""] # [doc = " This creates a suite of suites with all the XCTestCase subclasses methods that start"] # [doc = " with \"test\" and take no arguments."] # [doc = ""] # [doc = " See also [Apple's documentation](https://developer.apple.com/documentation/xctest/xctestsuite?language=objc)"] # [unsafe (super (XCTest , NSObject))] # [derive (Debug , PartialEq , Eq , Hash)] pub struct XCTestSuite ;) ;
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for CaseMapDataULE (struct)
+macro_rules! Depcrate_provider_dataCaseMapDataULE {
+() => {
+// Module: crate::provider::data
+// Provides: {"CaseMapDataULE"}
+// Dependencies: {}
+# [doc = " Packed casemappingdata type"] # [doc = ""] # [doc = " Data format, copied from ICU4C casepropsbuilder.cpp:"] # [doc = ""] # [doc = " ```text"] # [doc = " Trie data word:"] # [doc = " Bits"] # [doc = " if(exception) {"] # [doc = "     15..4   unsigned exception index"] # [doc = " } else {"] # [doc = "     if(not uncased) {"] # [doc = "         15..7   signed delta to simple case mapping code point"] # [doc = "                 (add delta to input code point)"] # [doc = "     } else {"] # [doc = "         15..7   reserved, 0"] # [doc = "     }"] # [doc = "      6..5   0 normal character with cc=0"] # [doc = "             1 soft-dotted character"] # [doc = "             2 cc=230"] # [doc = "             3 other cc"] # [doc = "             The runtime code relies on these two bits to be adjacent with this encoding."] # [doc = " }"] # [doc = "     4   case-sensitive"] # [doc = "     3   exception"] # [doc = "     2   case-ignorable"] # [doc = "  1..0   0 uncased"] # [doc = "         1 lowercase"] # [doc = "         2 uppercase"] # [doc = "         3 titlecase"] # [doc = "         The runtime code relies on the case-ignorable and case type bits 2..0"] # [doc = "         to be the lowest bits with this encoding."] # [doc = " ```"] # [doc = ""] # [doc = " <div class=\"stab unstable\">"] # [doc = " 🚧 This code is considered unstable; it may change at any time, in breaking or non-breaking ways,"] # [doc = " including in SemVer minor releases. While the serde representation of data structs is guaranteed"] # [doc = " to be stable, their Rust representation might not be. Use with caution."] # [doc = " </div>"] # [derive (Copy , Clone , Debug , Eq , PartialEq)] # [repr (transparent)] pub struct CaseMapDataULE (RawBytesULE < 2 >) ;
+};
+}

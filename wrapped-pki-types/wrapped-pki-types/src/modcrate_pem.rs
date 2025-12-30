@@ -1,0 +1,39 @@
+// Generated module macro for crate::pem
+macro_rules! Modcrate_pem {
+() => {
+        Depcrate_pemuse_109!();
+        Depcrate_pemuse_110!();
+        Depcrate_pemuse_111!();
+        Depcrate_pemuse_112!();
+        Depcrate_pemuse_113!();
+        Depcrate_pemuse_114!();
+        Depcrate_pemuse_115!();
+        Depcrate_pemuse_116!();
+        Depcrate_pemuse_117!();
+        Depcrate_pemuse_118!();
+        Depcrate_pemPemObject!();
+        Depcrate_pemPemObjectFilter!();
+        Depcrate_pemimpl_121!();
+        Depcrate_pemReadIter!();
+        Depcrate_pemimpl_123!();
+        Depcrate_pemimpl_124!();
+        Depcrate_pemSliceIter!();
+        Depcrate_pemimpl_126!();
+        Depcrate_pemimpl_127!();
+        Depcrate_pemimpl_128!();
+        Depcrate_pemfrom_buf!();
+        Depcrate_pemfrom_buf_inner!();
+        Depcrate_pemread!();
+        Depcrate_pemSectionLabel!();
+        Depcrate_pemimpl_133!();
+        Depcrate_pemimpl_134!();
+        Depcrate_pemimpl_135!();
+        Depcrate_pemSectionKind!();
+        Depcrate_pemimpl_137!();
+        Depcrate_pemimpl_138!();
+        Depcrate_pemError!();
+        Depcrate_pemimpl_140!();
+        Depcrate_pemimpl_141!();
+        Depcrate_pemread_until_newline!();
+    };
+}

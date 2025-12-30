@@ -1,0 +1,48 @@
+// Generated module macro for crate::macro_impls
+macro_rules! Modcrate_macro_impls {
+() => {
+        Depcrate_macro_implsuse_3!();
+        Depcrate_macro_implsimpl_copy_type!();
+        Depcrate_macro_implsmacro_5!();
+        Depcrate_macro_implsmacro_6!();
+        Depcrate_macro_implsmacro_7!();
+        Depcrate_macro_implsmacro_8!();
+        Depcrate_macro_implsmacro_9!();
+        Depcrate_macro_implsmacro_10!();
+        Depcrate_macro_implsmacro_11!();
+        Depcrate_macro_implsmacro_12!();
+        Depcrate_macro_implsmacro_13!();
+        Depcrate_macro_implsmacro_14!();
+        Depcrate_macro_implsmacro_15!();
+        Depcrate_macro_implsmacro_16!();
+        Depcrate_macro_implsmacro_17!();
+        Depcrate_macro_implsmacro_18!();
+        Depcrate_macro_implsarray_zf_impl!();
+        Depcrate_macro_implsmacro_20!();
+        Depcrate_macro_implsmacro_21!();
+        Depcrate_macro_implsmacro_22!();
+        Depcrate_macro_implsmacro_23!();
+        Depcrate_macro_implsmacro_24!();
+        Depcrate_macro_implsmacro_25!();
+        Depcrate_macro_implsmacro_26!();
+        Depcrate_macro_implsmacro_27!();
+        Depcrate_macro_implsmacro_28!();
+        Depcrate_macro_implsmacro_29!();
+        Depcrate_macro_implsmacro_30!();
+        Depcrate_macro_implsmacro_31!();
+        Depcrate_macro_implsmacro_32!();
+        Depcrate_macro_implsmacro_33!();
+        Depcrate_macro_implsmacro_34!();
+        Depcrate_macro_implsmacro_35!();
+        Depcrate_macro_implstuple_zf_impl!();
+        Depcrate_macro_implsmacro_37!();
+        Depcrate_macro_implsmacro_38!();
+        Depcrate_macro_implsmacro_39!();
+        Depcrate_macro_implsmacro_40!();
+        Depcrate_macro_implsmacro_41!();
+        Depcrate_macro_implsmacro_42!();
+        Depcrate_macro_implsmacro_43!();
+        Depcrate_macro_implsmacro_44!();
+        Depcrate_macro_implsmacro_45!();
+    };
+}

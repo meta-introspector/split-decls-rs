@@ -1,0 +1,40 @@
+// Generated module macro for crate::oom
+macro_rules! Modcrate_oom {
+() => {
+        Depcrate_oomuse_9!();
+        Depcrate_oomuse_10!();
+        Depcrate_oomuse_11!();
+        Depcrate_oomuse_12!();
+        Depcrate_oomuse_13!();
+        Depcrate_oomuse_14!();
+        Depcrate_oomuse_15!();
+        Depcrate_oomuse_16!();
+        Depcrate_oomuse_17!();
+        Depcrate_oomOOMAllocator!();
+        Depcrate_oomimpl_19!();
+        Depcrate_oomGLOBAL!();
+        Depcrate_oomOOM_TEST!();
+        Depcrate_oomIN_PANIC!();
+        Depcrate_oomPANIC_COUNT!();
+        Depcrate_oompanic_if!();
+        Depcrate_oomExitGuard!();
+        Depcrate_oomimpl_26!();
+        Depcrate_oomimpl_27!();
+        Depcrate_oomR!();
+        Depcrate_oomimpl_29!();
+        Depcrate_oomimpl_30!();
+        Depcrate_oomimpl_31!();
+        Depcrate_oomINST_CNT!();
+        Depcrate_oomtest_oom!();
+        Depcrate_oomrun_test!();
+        Depcrate_oomebr_panic_oom!();
+        Depcrate_oomhashmap_panic_oom_1!();
+        Depcrate_oomhashmap_panic_oom_2!();
+        Depcrate_oomhashindex_panic_oom_1!();
+        Depcrate_oomhashindex_panic_oom_2!();
+        Depcrate_oomhashcache_panic_oom!();
+        Depcrate_oomtreeindex_panic_oom_1!();
+        Depcrate_oomtreeindex_panic_oom_2!();
+        Depcrate_oomoom_panic_safety!();
+    };
+}

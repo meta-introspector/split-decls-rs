@@ -1,0 +1,48 @@
+// Generated module macro for crate::base::ops
+macro_rules! Modcrate_base_ops {
+() => {
+        Depcrate_base_opsuse_230!();
+        Depcrate_base_opsuse_231!();
+        Depcrate_base_opsuse_232!();
+        Depcrate_base_opsuse_233!();
+        Depcrate_base_opsuse_234!();
+        Depcrate_base_opsuse_235!();
+        Depcrate_base_opsuse_236!();
+        Depcrate_base_opsuse_237!();
+        Depcrate_base_opsuse_238!();
+        Depcrate_base_opsuse_239!();
+        Depcrate_base_opsuse_240!();
+        Depcrate_base_opsuse_241!();
+        Depcrate_base_opsuse_242!();
+        Depcrate_base_opsuse_243!();
+        Depcrate_base_opsuse_244!();
+        Depcrate_base_opsimpl_245!();
+        Depcrate_base_opsimpl_246!();
+        Depcrate_base_opsimpl_247!();
+        Depcrate_base_opsimpl_248!();
+        Depcrate_base_opsimpl_249!();
+        Depcrate_base_opsimpl_250!();
+        Depcrate_base_opsimpl_251!();
+        Depcrate_base_opscomponentwise_binop_impl!();
+        Depcrate_base_opsmacro_253!();
+        Depcrate_base_opsmacro_254!();
+        Depcrate_base_opsimpl_255!();
+        Depcrate_base_opsimpl_256!();
+        Depcrate_base_opsimpl_257!();
+        Depcrate_base_opsimpl_258!();
+        Depcrate_base_opscomponentwise_scalarop_impl!();
+        Depcrate_base_opsmacro_260!();
+        Depcrate_base_opsmacro_261!();
+        Depcrate_base_opsleft_scalar_mul_impl!();
+        Depcrate_base_opsmacro_263!();
+        Depcrate_base_opsimpl_264!();
+        Depcrate_base_opsimpl_265!();
+        Depcrate_base_opsimpl_266!();
+        Depcrate_base_opsimpl_267!();
+        Depcrate_base_opsimpl_268!();
+        Depcrate_base_opsimpl_269!();
+        Depcrate_base_opsimpl_270!();
+        Depcrate_base_opsimpl_271!();
+        Depcrate_base_opsimpl_272!();
+    };
+}

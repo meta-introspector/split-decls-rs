@@ -1,0 +1,9 @@
+// Generated macro for impl_347 (impl)
+macro_rules! Depcrate_parser_parserimpl_347 {
+() => {
+// Module: crate::parser::parser
+// Provides: {"impl_347"}
+// Dependencies: {}
+impl UnicodeCodePoint { # [doc = " Parses a [`UnicodeCodePoint`] from an [escaped] value in the provided [`Iterator`]."] # [doc = ""] # [doc = " [escaped]: https://spec.graphql.org/September2025#EscapedUnicode"] pub (crate) fn parse_escaped (char_iter : & mut impl Iterator < Item = char > ,) -> Result < Self , ParseError > { let Some (mut curr_ch) = char_iter . next () else { return Err (LexerError :: UnknownEscapeSequence (r"\u" . into ()) . into ()) ; } ; let mut escaped_code_point = String :: with_capacity (6) ; let is_variable_width = curr_ch == '{' ; if is_variable_width { loop { curr_ch = char_iter . next () . ok_or_else (| | { LexerError :: UnknownEscapeSequence (format ! (r"\u{{{escaped_code_point}")) }) ? ; if curr_ch == '}' { break ; } else if ! curr_ch . is_alphanumeric () { return Err (LexerError :: UnknownEscapeSequence (format ! (r"\u{{{escaped_code_point}")) . into ()) ; } escaped_code_point . push (curr_ch) ; } } else { let mut char_iter = iter :: once (curr_ch) . chain (char_iter) ; for _ in 0 .. 4 { curr_ch = char_iter . next () . ok_or_else (| | { LexerError :: UnknownEscapeSequence (format ! (r"\u{escaped_code_point}")) }) ? ; if ! curr_ch . is_alphanumeric () { return Err (LexerError :: UnknownEscapeSequence (format ! (r"\u{escaped_code_point}")) . into ()) ; } escaped_code_point . push (curr_ch) ; } } let Ok (code) = u32 :: from_str_radix (& escaped_code_point , 16) else { return Err (LexerError :: UnknownEscapeSequence (if is_variable_width { format ! (r"\u{{{escaped_code_point}}}") } else { format ! (r"\u{escaped_code_point}") }) . into ()) ; } ; Ok (Self { code , is_variable_width , }) } }
+};
+}

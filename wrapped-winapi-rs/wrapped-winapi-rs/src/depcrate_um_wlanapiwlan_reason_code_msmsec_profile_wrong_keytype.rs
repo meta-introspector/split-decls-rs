@@ -1,0 +1,9 @@
+// Generated macro for WLAN_REASON_CODE_MSMSEC_PROFILE_WRONG_KEYTYPE (const)
+macro_rules! Depcrate_um_wlanapiWLAN_REASON_CODE_MSMSEC_PROFILE_WRONG_KEYTYPE {
+() => {
+// Module: crate::um::wlanapi
+// Provides: {"WLAN_REASON_CODE_MSMSEC_PROFILE_WRONG_KEYTYPE"}
+// Dependencies: {}
+pub const WLAN_REASON_CODE_MSMSEC_PROFILE_WRONG_KEYTYPE : WLAN_REASON_CODE = WLAN_REASON_CODE_MSMSEC_BASE + 24 ;
+};
+}

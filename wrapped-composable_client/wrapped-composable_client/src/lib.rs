@@ -1,0 +1,67 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcrate_bindingsimpl_50.rs");
+include!("depcrate_bindingsimpl_18.rs");
+include!("depcrate_bindingsimpl_45.rs");
+include!("depcrate_bindingsmacro_25.rs");
+include!("depcrate_bindingsimpl_40.rs");
+include!("depcrate_bindingsmacro_47.rs");
+include!("depcrate_bindingsimpl_8.rs");
+include!("depcrate_bindingscompositor.rs");
+include!("depcrate_bindingsimpl_43.rs");
+include!("depcrate_bindingsicompositor_vtbl.rs");
+include!("depcrate_bindingsimpl_32.rs");
+include!("depcrate_bindingscontainervisual.rs");
+include!("depcrate_bindingsimpl_51.rs");
+include!("depcrate_bindingsicontainervisual_vtbl.rs");
+include!("depcrate_bindingsmacro_28.rs");
+include!("depcrate_bindingsmacro_39.rs");
+include!("depcrate_bindingsimpl_7.rs");
+include!("depcrate_bindingsicontainervisualfactory_vtbl.rs");
+include!("depcrate_bindingsspritevisual.rs");
+include!("depcratebindings.rs");
+include!("depcrate_bindingsimpl_6.rs");
+include!("depcrate_bindingsimpl_52.rs");
+include!("depcrate_bindingsimpl_23.rs");
+include!("depcrate_bindingsivisualfactory_vtbl.rs");
+include!("depcrate_bindingsmacro_22.rs");
+include!("depcrate_bindingsimpl_26.rs");
+include!("depcrateuse_55.rs");
+include!("depcrate_bindingsimpl_5.rs");
+include!("depcrate_bindingsispritevisual_vtbl.rs");
+include!("depcrate_bindingsmacro_3.rs");
+include!("depcrate_bindingsimpl_17.rs");
+include!("depcrate_bindingsimpl_4.rs");
+include!("depcrate_bindingsmacro_34.rs");
+include!("depcrate_bindingsimpl_16.rs");
+include!("depcrate_bindingsmacro_19.rs");
+include!("depcrate_bindingsvisual.rs");
+include!("depcrate_bindingsimpl_35.rs");
+include!("depcrate_bindingsimpl_53.rs");
+include!("depcratetest.rs");
+include!("depcrate_bindingsimpl_9.rs");
+include!("depcrateuse_54.rs");
+include!("depcrate_bindingsimpl_14.rs");
+include!("depcrate_bindingsimpl_20.rs");
+include!("depcrate_bindingsimpl_48.rs");
+include!("depcrate_bindingsmacro_38.rs");
+include!("depcrate_bindingsmacro_11.rs");
+include!("depcrate_bindingsmacro_31.rs");
+include!("depcrate_bindingsimpl_49.rs");
+include!("depcrate_bindingsivisual_vtbl.rs");
+include!("depcrate_bindingsimpl_13.rs");
+include!("depcrate_bindingsimpl_42.rs");
+include!("depcrate_bindingsmacro_12.rs");
+include!("depcrate_bindingsimpl_41.rs");
+include!("depcrate_bindingsimpl_29.rs");
+include!("depcrate_bindingsimpl_15.rs");
+include!("depcrateother_56.rs");
+include!("depcrate_bindingsimpl_44.rs");
+include!("modcrate.rs");
+include!("modcrate_bindings.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate!();
+    Modcrate_bindings!();
+}

@@ -1,0 +1,9 @@
+// Generated macro for MathOp (trait)
+macro_rules! Depcrate_opMathOp {
+() => {
+// Module: crate::op
+// Provides: {"MathOp"}
+// Dependencies: {}
+# [doc = " Attributes ascribed to a `libm` routine including signature, type information,"] # [doc = " and naming."] pub trait MathOp { # [doc = " The float type used for this operation."] type FTy : Float ; # [doc = " The function type representing the signature in a C library."] type CFn : Copy ; # [doc = " Arguments passed to the C library function as a tuple. These may include `&mut` return"] # [doc = " values."] type CArgs < 'a > where Self : 'a ; # [doc = " The type returned by C implementations."] type CRet ; # [doc = " The signature of the Rust function as a `fn(...) -> ...` type."] type RustFn : Copy + UnwindSafe ; # [doc = " Arguments passed to the Rust library function as a tuple."] # [doc = ""] # [doc = " The required `TupleCall` bounds ensure this type can be passed either to the C function or"] # [doc = " to the Rust function."] type RustArgs : Copy + TupleCall < Self :: RustFn , Output = Self :: RustRet > + TupleCall < Self :: CFn , Output = Self :: RustRet > + RefUnwindSafe ; # [doc = " Type returned from the Rust function."] type RustRet : CheckOutput < Self :: RustArgs > ; # [doc = " The name of this function, including suffix (e.g. `sin`, `sinf`)."] const IDENTIFIER : Identifier ; # [doc = " The name as a string."] const NAME : & 'static str = Self :: IDENTIFIER . as_str () ; # [doc = " The name of the function excluding the type suffix, e.g. `sin` and `sinf` are both `sin`."] const BASE_NAME : BaseName = Self :: IDENTIFIER . base_name () ; # [doc = " The function in `libm` which can be called."] const ROUTINE : Self :: RustFn ; # [doc = " Whether or not the function is part of libm public API."] const PUBLIC : bool ; }
+};
+}

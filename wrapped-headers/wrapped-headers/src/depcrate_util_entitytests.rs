@@ -1,0 +1,9 @@
+// Generated macro for tests (module)
+macro_rules! Depcrate_util_entitytests {
+() => {
+// Module: crate::util::entity
+// Provides: {"tests"}
+// Dependencies: {}
+# [cfg (test)] mod tests { use super :: * ; fn parse (slice : & [u8]) -> Option < EntityTag > { let val = HeaderValue :: from_bytes (slice) . ok () ? ; EntityTag :: from_val (& val) } # [test] fn test_etag_parse_success () { let tag = parse (b"\"foobar\"") . unwrap () ; assert ! (! tag . is_weak ()) ; assert_eq ! (tag . tag () , b"foobar") ; let weak = parse (b"W/\"weaktag\"") . unwrap () ; assert ! (weak . is_weak ()) ; assert_eq ! (weak . tag () , b"weaktag") ; } # [test] fn test_etag_parse_failures () { macro_rules ! fails { ($ slice : expr) => { assert_eq ! (parse ($ slice) , None) ; } ; } fails ! (b"no-dquote") ; fails ! (b"w/\"the-first-w-is-case sensitive\"") ; fails ! (b"W/\"") ; fails ! (b"") ; fails ! (b"\"unmatched-dquotes1") ; fails ! (b"unmatched-dquotes2\"") ; fails ! (b"\"inner\"quotes\"") ; } # [test] fn test_cmp () { let mut etag1 = EntityTag :: from_static ("W/\"1\"") ; let mut etag2 = etag1 . clone () ; assert ! (! etag1 . strong_eq (& etag2)) ; assert ! (etag1 . weak_eq (& etag2)) ; assert ! (etag1 . strong_ne (& etag2)) ; assert ! (! etag1 . weak_ne (& etag2)) ; etag2 = EntityTag :: from_static ("W/\"2\"") ; assert ! (! etag1 . strong_eq (& etag2)) ; assert ! (! etag1 . weak_eq (& etag2)) ; assert ! (etag1 . strong_ne (& etag2)) ; assert ! (etag1 . weak_ne (& etag2)) ; etag2 = EntityTag :: from_static ("\"1\"") ; assert ! (! etag1 . strong_eq (& etag2)) ; assert ! (etag1 . weak_eq (& etag2)) ; assert ! (etag1 . strong_ne (& etag2)) ; assert ! (! etag1 . weak_ne (& etag2)) ; etag1 = EntityTag :: from_static ("\"1\"") ; assert ! (etag1 . strong_eq (& etag2)) ; assert ! (etag1 . weak_eq (& etag2)) ; assert ! (! etag1 . strong_ne (& etag2)) ; assert ! (! etag1 . weak_ne (& etag2)) ; } }
+};
+}

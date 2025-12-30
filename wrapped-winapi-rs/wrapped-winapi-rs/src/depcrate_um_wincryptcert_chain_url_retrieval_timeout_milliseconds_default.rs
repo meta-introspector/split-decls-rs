@@ -1,0 +1,9 @@
+// Generated macro for CERT_CHAIN_URL_RETRIEVAL_TIMEOUT_MILLISECONDS_DEFAULT (const)
+macro_rules! Depcrate_um_wincryptCERT_CHAIN_URL_RETRIEVAL_TIMEOUT_MILLISECONDS_DEFAULT {
+() => {
+// Module: crate::um::wincrypt
+// Provides: {"CERT_CHAIN_URL_RETRIEVAL_TIMEOUT_MILLISECONDS_DEFAULT"}
+// Dependencies: {}
+pub const CERT_CHAIN_URL_RETRIEVAL_TIMEOUT_MILLISECONDS_DEFAULT : DWORD = 15 * 1000 ;
+};
+}

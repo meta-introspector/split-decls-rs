@@ -1,0 +1,9 @@
+// Generated macro for PACTIVATION_CONTEXT_RUN_LEVEL_INFORMATION (type)
+macro_rules! Depcrate_um_winntPACTIVATION_CONTEXT_RUN_LEVEL_INFORMATION {
+() => {
+// Module: crate::um::winnt
+// Provides: {"PACTIVATION_CONTEXT_RUN_LEVEL_INFORMATION"}
+// Dependencies: {}
+pub type PACTIVATION_CONTEXT_RUN_LEVEL_INFORMATION = * mut ACTIVATION_CONTEXT_RUN_LEVEL_INFORMATION ;
+};
+}

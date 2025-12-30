@@ -1,0 +1,9 @@
+// Generated macro for impl_117 (impl)
+macro_rules! Depcrate_de_varimpl_117 {
+() => {
+// Module: crate::de::var
+// Provides: {"impl_117"}
+// Dependencies: {}
+impl < 'de , 'd , R , E > de :: VariantAccess < 'de > for VariantAccess < 'de , 'd , R , E > where R : XmlRead < 'de > , E : EntityResolver , { type Error = DeError ; fn unit_variant (self) -> Result < () , Self :: Error > { match self . de . next () ? { DeEvent :: Start (e) => self . de . read_to_end (e . name ()) , DeEvent :: Text (_) => Ok (()) , _ => unreachable ! ("Only `Start` or `Text` events are possible here") , } } fn newtype_variant_seed < T > (self , seed : T) -> Result < T :: Value , Self :: Error > where T : DeserializeSeed < 'de > , { if self . is_text { match self . de . next () ? { DeEvent :: Text (e) => seed . deserialize (SimpleTypeDeserializer :: from_text_content (e)) , _ => unreachable ! ("Only `Text` events are possible here") , } } else { seed . deserialize (self . de) } } fn tuple_variant < V > (self , len : usize , visitor : V) -> Result < V :: Value , Self :: Error > where V : Visitor < 'de > , { if self . is_text { match self . de . next () ? { DeEvent :: Text (e) => { SimpleTypeDeserializer :: from_text_content (e) . deserialize_tuple (len , visitor) } _ => unreachable ! ("Only `Text` events are possible here") , } } else { self . de . deserialize_tuple (len , visitor) } } fn struct_variant < V > (self , fields : & 'static [& 'static str] , visitor : V ,) -> Result < V :: Value , Self :: Error > where V : Visitor < 'de > , { match self . de . next () ? { DeEvent :: Start (e) => visitor . visit_map (ElementMapAccess :: new (self . de , e , fields)) , DeEvent :: Text (e) => { SimpleTypeDeserializer :: from_text_content (e) . deserialize_struct ("" , fields , visitor) } _ => unreachable ! ("Only `Start` or `Text` events are possible here") , } } }
+};
+}

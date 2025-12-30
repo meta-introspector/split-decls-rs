@@ -1,0 +1,54 @@
+// Generated module macro for crate::generated
+macro_rules! Modcrate_generated {
+() => {
+        Depcrate_generatedother_4!();
+        Depcrate_generateduse_5!();
+        Depcrate_generateduse_6!();
+        Depcrate_generateduse_7!();
+        Depcrate_generateduse_8!();
+        Depcrate_generateduse_9!();
+        Depcrate_generateduse_10!();
+        Depcrate_generatedother_11!();
+        Depcrate_generatedother_12!();
+        Depcrate_generatedother_13!();
+        Depcrate_generatedother_14!();
+        Depcrate_generatedOSSystemExtensionErrorCode!();
+        Depcrate_generatedimpl_16!();
+        Depcrate_generatedimpl_17!();
+        Depcrate_generatedimpl_18!();
+        Depcrate_generatedOSSystemExtensionReplacementAction!();
+        Depcrate_generatedimpl_20!();
+        Depcrate_generatedimpl_21!();
+        Depcrate_generatedimpl_22!();
+        Depcrate_generatedOSSystemExtensionRequestResult!();
+        Depcrate_generatedimpl_24!();
+        Depcrate_generatedimpl_25!();
+        Depcrate_generatedimpl_26!();
+        Depcrate_generatedmacro_27!();
+        Depcrate_generatedmacro_28!();
+        Depcrate_generatedimpl_29!();
+        Depcrate_generatedimpl_30!();
+        Depcrate_generatedmacro_31!();
+        Depcrate_generatedmacro_32!();
+        Depcrate_generatedimpl_33!();
+        Depcrate_generatedimpl_34!();
+        Depcrate_generatedmacro_35!();
+        Depcrate_generatedmacro_36!();
+        Depcrate_generatedmacro_37!();
+        Depcrate_generatedimpl_38!();
+        Depcrate_generatedimpl_39!();
+        Depcrate_generatedmacro_40!();
+        Depcrate_generatedimpl_41!();
+        Depcrate_generatedimpl_42!();
+        Depcrate_generatedmacro_43!();
+        Depcrate_generatedimpl_44!();
+        Depcrate_generatedimpl_45!();
+        Depcrate_generatedmacro_46!();
+        Depcrate_generatedmacro_47!();
+        Depcrate_generatedimpl_48!();
+        Depcrate_generatedimpl_49!();
+        Depcrate_generatedmacro_50!();
+        Depcrate_generatedimpl_51!();
+        Depcrate_generatedimpl_52!();
+    };
+}

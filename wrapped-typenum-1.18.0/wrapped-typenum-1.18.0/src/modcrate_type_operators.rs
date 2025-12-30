@@ -1,0 +1,52 @@
+// Generated module macro for crate::type_operators
+macro_rules! Modcrate_type_operators {
+() => {
+        Depcrate_type_operatorsuse_309!();
+        Depcrate_type_operatorsSame!();
+        Depcrate_type_operatorsimpl_311!();
+        Depcrate_type_operatorsAbs!();
+        Depcrate_type_operatorsimpl_313!();
+        Depcrate_type_operatorsimpl_314!();
+        Depcrate_type_operatorsimpl_315!();
+        Depcrate_type_operatorsPow!();
+        Depcrate_type_operatorsimpl_pow_f!();
+        Depcrate_type_operatorsmacro_318!();
+        Depcrate_type_operatorsmacro_319!();
+        Depcrate_type_operatorsimpl_pow_i!();
+        Depcrate_type_operatorsmacro_321!();
+        Depcrate_type_operatorsmacro_322!();
+        Depcrate_type_operatorspow_test!();
+        Depcrate_type_operatorsCmp!();
+        Depcrate_type_operatorsLen!();
+        Depcrate_type_operatorsFoldAdd!();
+        Depcrate_type_operatorsFoldMul!();
+        Depcrate_type_operatorsfold_test!();
+        Depcrate_type_operatorsPartialDiv!();
+        Depcrate_type_operatorsMin!();
+        Depcrate_type_operatorsMax!();
+        Depcrate_type_operatorsuse_332!();
+        Depcrate_type_operatorsIsLess!();
+        Depcrate_type_operatorsuse_334!();
+        Depcrate_type_operatorsimpl_335!();
+        Depcrate_type_operatorsIsEqual!();
+        Depcrate_type_operatorsuse_337!();
+        Depcrate_type_operatorsimpl_338!();
+        Depcrate_type_operatorsIsGreater!();
+        Depcrate_type_operatorsuse_340!();
+        Depcrate_type_operatorsimpl_341!();
+        Depcrate_type_operatorsIsLessOrEqual!();
+        Depcrate_type_operatorsuse_343!();
+        Depcrate_type_operatorsimpl_344!();
+        Depcrate_type_operatorsIsNotEqual!();
+        Depcrate_type_operatorsuse_346!();
+        Depcrate_type_operatorsimpl_347!();
+        Depcrate_type_operatorsIsGreaterOrEqual!();
+        Depcrate_type_operatorsuse_349!();
+        Depcrate_type_operatorsimpl_350!();
+        Depcrate_type_operatorscmp!();
+        Depcrate_type_operatorsSquareRoot!();
+        Depcrate_type_operatorsLogarithm2!();
+        Depcrate_type_operatorsGcd!();
+        Depcrate_type_operatorsToInt!();
+    };
+}

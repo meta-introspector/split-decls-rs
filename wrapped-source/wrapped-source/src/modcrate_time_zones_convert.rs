@@ -1,0 +1,42 @@
+// Generated module macro for crate::time_zones::convert
+macro_rules! Modcrate_time_zones_convert {
+() => {
+        Depcrate_time_zones_convertuse_1197!();
+        Depcrate_time_zones_convertuse_1198!();
+        Depcrate_time_zones_convertuse_1199!();
+        Depcrate_time_zones_convertuse_1200!();
+        Depcrate_time_zones_convertuse_1201!();
+        Depcrate_time_zones_convertuse_1202!();
+        Depcrate_time_zones_convertuse_1203!();
+        Depcrate_time_zones_convertuse_1204!();
+        Depcrate_time_zones_convertuse_1205!();
+        Depcrate_time_zones_convertuse_1206!();
+        Depcrate_time_zones_convertuse_1207!();
+        Depcrate_time_zones_convertuse_1208!();
+        Depcrate_time_zones_convertuse_1209!();
+        Depcrate_time_zones_convertuse_1210!();
+        Depcrate_time_zones_convertuse_1211!();
+        Depcrate_time_zones_convertuse_1212!();
+        Depcrate_time_zones_convertuse_1213!();
+        Depcrate_time_zones_convertuse_1214!();
+        Depcrate_time_zones_convertuse_1215!();
+        Depcrate_time_zones_convertuse_1216!();
+        Depcrate_time_zones_convertuse_1217!();
+        Depcrate_time_zones_convertimpl_1218!();
+        Depcrate_time_zones_convertimpl_1219!();
+        Depcrate_time_zones_convertimpl_1220!();
+        Depcrate_time_zones_convertimpl_1221!();
+        Depcrate_time_zones_convertimpl_1222!();
+        Depcrate_time_zones_convertimpl_1223!();
+        Depcrate_time_zones_convertimpl_1224!();
+        Depcrate_time_zones_convertimpl_1225!();
+        Depcrate_time_zones_convertimpl_1226!();
+        Depcrate_time_zones_convertimpl_1227!();
+        Depcrate_time_zones_convertimpl_1228!();
+        Depcrate_time_zones_convertimpl_1229!();
+        Depcrate_time_zones_convertiter_mz_defaults!();
+        Depcrate_time_zones_convertiter_mz_overrides!();
+        Depcrate_time_zones_convertvariant_fallback!();
+        Depcrate_time_zones_convertvariant_convert!();
+    };
+}

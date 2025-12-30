@@ -1,0 +1,9 @@
+// Generated macro for ERROR_IPSEC_IKE_AUTHORIZATION_FAILURE_WITH_OPTIONAL_RETRY (const)
+macro_rules! Depcrate_shared_winerrorERROR_IPSEC_IKE_AUTHORIZATION_FAILURE_WITH_OPTIONAL_RETRY {
+() => {
+// Module: crate::shared::winerror
+// Provides: {"ERROR_IPSEC_IKE_AUTHORIZATION_FAILURE_WITH_OPTIONAL_RETRY"}
+// Dependencies: {}
+pub const ERROR_IPSEC_IKE_AUTHORIZATION_FAILURE_WITH_OPTIONAL_RETRY : DWORD = 13907 ;
+};
+}

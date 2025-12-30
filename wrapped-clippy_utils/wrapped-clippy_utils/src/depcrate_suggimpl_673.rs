@@ -1,0 +1,9 @@
+// Generated macro for impl_673 (impl)
+macro_rules! Depcrate_suggimpl_673 {
+() => {
+// Module: crate::sugg
+// Provides: {"impl_673"}
+// Dependencies: {}
+impl < 'tcx > DerefDelegate < '_ , 'tcx > { # [doc = " build final suggestion:"] # [doc = " - create the ending part of suggestion"] # [doc = " - concatenate starting and ending parts"] # [doc = " - potentially remove needless borrowing"] pub fn finish (& mut self) -> String { let end_span = Span :: new (self . next_pos , self . closure_span . hi () , self . closure_span . ctxt () , None) ; let end_snip = snippet_with_applicability (self . cx , end_span , ".." , & mut self . applicability) ; let sugg = format ! ("{}{end_snip}" , self . suggestion_start) ; if self . closure_arg_is_type_annotated_double_ref { sugg . replacen ('&' , "" , 1) } else { sugg } } # [doc = " indicates whether the function from `parent_expr` takes its args by double reference"] fn func_takes_arg_by_double_ref (& self , parent_expr : & 'tcx hir :: Expr < '_ > , cmt_hir_id : HirId) -> bool { let ty = match parent_expr . kind { ExprKind :: MethodCall (_ , receiver , call_args , _) => { if let Some (sig) = self . cx . typeck_results () . type_dependent_def_id (parent_expr . hir_id) . map (| did | self . cx . tcx . fn_sig (did) . instantiate_identity () . skip_binder ()) { std :: iter :: once (receiver) . chain (call_args . iter ()) . position (| arg | arg . hir_id == cmt_hir_id) . map (| i | sig . inputs () [i]) } else { return false ; } } , ExprKind :: Call (func , call_args) => { if let Some (sig) = expr_sig (self . cx , func) { call_args . iter () . position (| arg | arg . hir_id == cmt_hir_id) . and_then (| i | sig . input (i)) . map (ty :: Binder :: skip_binder) } else { return false ; } } , _ => return false , } ; ty . is_some_and (| ty | matches ! (ty . kind () , ty :: Ref (_ , inner , _) if inner . is_ref ())) } }
+};
+}

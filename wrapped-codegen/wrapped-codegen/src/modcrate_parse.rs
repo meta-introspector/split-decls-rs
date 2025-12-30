@@ -1,0 +1,43 @@
+// Generated module macro for crate::parse
+macro_rules! Modcrate_parse {
+() => {
+        Depcrate_parseuse_118!();
+        Depcrate_parseuse_119!();
+        Depcrate_parseuse_120!();
+        Depcrate_parseuse_121!();
+        Depcrate_parseuse_122!();
+        Depcrate_parseuse_123!();
+        Depcrate_parseuse_124!();
+        Depcrate_parseuse_125!();
+        Depcrate_parseuse_126!();
+        Depcrate_parseuse_127!();
+        Depcrate_parseuse_128!();
+        Depcrate_parseSYN_CRATE_ROOT!();
+        Depcrate_parseTOKEN_SRC!();
+        Depcrate_parseIGNORED_MODS!();
+        Depcrate_parseEXTRA_TYPES!();
+        Depcrate_parseLookup!();
+        Depcrate_parseparse!();
+        Depcrate_parseAstItem!();
+        Depcrate_parseintrospect_item!();
+        Depcrate_parseintrospect_enum!();
+        Depcrate_parseintrospect_struct!();
+        Depcrate_parseintrospect_type!();
+        Depcrate_parseintrospect_features!();
+        Depcrate_parseis_pub!();
+        Depcrate_parseis_non_exhaustive!();
+        Depcrate_parseis_doc_hidden!();
+        Depcrate_parsefirst_arg!();
+        Depcrate_parselast_arg!();
+        Depcrate_parseparsing!();
+        Depcrate_parseclone_features!();
+        Depcrate_parseget_features!();
+        Depcrate_parseLoadFileError!();
+        Depcrate_parseimpl_150!();
+        Depcrate_parseimpl_151!();
+        Depcrate_parseload_file!();
+        Depcrate_parsedo_load_file!();
+        Depcrate_parseload_aliases!();
+        Depcrate_parseload_token_file!();
+    };
+}

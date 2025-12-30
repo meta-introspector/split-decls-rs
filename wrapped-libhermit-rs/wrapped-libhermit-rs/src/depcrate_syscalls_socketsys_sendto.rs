@@ -1,0 +1,9 @@
+// Generated macro for sys_sendto (function)
+macro_rules! Depcrate_syscalls_socketsys_sendto {
+() => {
+// Module: crate::syscalls::socket
+// Provides: {"sys_sendto"}
+// Dependencies: {}
+# [hermit_macro :: system (errno)] # [unsafe (no_mangle)] pub unsafe extern "C" fn sys_sendto (fd : i32 , buf : * const u8 , len : usize , _flags : i32 , addr : * const sockaddr , addr_len : socklen_t ,) -> isize { let endpoint ; if addr . is_null () || addr_len == 0 { return (- i32 :: from (Errno :: Inval)) . try_into () . unwrap () ; } cfg_if ! { if # [cfg (feature = "net")] { let Ok (sa_family) = (unsafe { Af :: try_from ((* addr) . sa_family) }) else { return (- i32 :: from (Errno :: Inval)) . try_into () . unwrap () ; } ; if sa_family == Af :: Inet { if addr_len < u32 :: try_from (size_of ::< sockaddr_in > ()) . unwrap () { return (- i32 :: from (Errno :: Inval)) . try_into () . unwrap () ; } endpoint = Some (Endpoint :: Ip (IpEndpoint :: from (unsafe { * (addr . cast ::< sockaddr_in > ()) }))) ; } else if sa_family == Af :: Inet6 { if addr_len < u32 :: try_from (size_of ::< sockaddr_in6 > ()) . unwrap () { return (- i32 :: from (Errno :: Inval)) . try_into () . unwrap () ; } endpoint = Some (Endpoint :: Ip (IpEndpoint :: from (unsafe { * (addr . cast ::< sockaddr_in6 > ()) }))) ; } else { endpoint = None ; } } else { endpoint = None ; } } if let Some (endpoint) = endpoint { let slice = unsafe { core :: slice :: from_raw_parts (buf , len) } ; let obj = get_object (fd) ; obj . map_or_else (| e | isize :: try_from (- i32 :: from (e)) . unwrap () , | v | { block_on (async { v . read () . await . sendto (slice , endpoint) . await } , None) . map_or_else (| e | isize :: try_from (- i32 :: from (e)) . unwrap () , | v | v . try_into () . unwrap () ,) } ,) } else { (- i32 :: from (Errno :: Inval)) . try_into () . unwrap () } }
+};
+}

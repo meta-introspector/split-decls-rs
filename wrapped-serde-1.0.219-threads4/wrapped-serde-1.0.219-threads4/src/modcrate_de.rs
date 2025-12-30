@@ -1,0 +1,41 @@
+// Generated module macro for crate::de
+macro_rules! Modcrate_de {
+() => {
+        Depcrate_deuse_11!();
+        Depcrate_devalue!();
+        Depcrate_deignored_any!();
+        Depcrate_deimpls!();
+        Depcrate_desize_hint!();
+        Depcrate_deuse_295!();
+        Depcrate_deuse_296!();
+        Depcrate_deuse_297!();
+        Depcrate_deuse_298!();
+        Depcrate_dedeclare_error_trait!();
+        Depcrate_demacro_300!();
+        Depcrate_demacro_301!();
+        Depcrate_deUnexpected!();
+        Depcrate_deimpl_303!();
+        Depcrate_deExpected!();
+        Depcrate_deimpl_305!();
+        Depcrate_deimpl_306!();
+        Depcrate_deimpl_307!();
+        Depcrate_deDeserialize!();
+        Depcrate_deDeserializeOwned!();
+        Depcrate_deimpl_310!();
+        Depcrate_deDeserializeSeed!();
+        Depcrate_deimpl_312!();
+        Depcrate_deDeserializer!();
+        Depcrate_deVisitor!();
+        Depcrate_deSeqAccess!();
+        Depcrate_deimpl_316!();
+        Depcrate_deMapAccess!();
+        Depcrate_deimpl_318!();
+        Depcrate_deEnumAccess!();
+        Depcrate_deVariantAccess!();
+        Depcrate_deIntoDeserializer!();
+        Depcrate_deOneOf!();
+        Depcrate_deimpl_323!();
+        Depcrate_deWithDecimalPoint!();
+        Depcrate_deimpl_325!();
+    };
+}

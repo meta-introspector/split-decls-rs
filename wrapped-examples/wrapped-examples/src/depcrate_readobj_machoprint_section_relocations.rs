@@ -1,0 +1,9 @@
+// Generated macro for print_section_relocations (function)
+macro_rules! Depcrate_readobj_machoprint_section_relocations {
+() => {
+// Module: crate::readobj::macho
+// Provides: {"print_section_relocations"}
+// Dependencies: {}
+fn print_section_relocations < S : Section > (p : & mut Printer < '_ > , endian : S :: Endian , data : & [u8] , section : & S , state : & MachState ,) { if ! p . options . relocations { return ; } if let Some (relocations) = section . relocations (endian , data) . print_err (p) { let proc = match state . cputype { CPU_TYPE_X86 => FLAGS_GENERIC_RELOC , CPU_TYPE_X86_64 => FLAGS_X86_64_RELOC , CPU_TYPE_ARM => FLAGS_ARM_RELOC , CPU_TYPE_ARM64 | CPU_TYPE_ARM64_32 => FLAGS_ARM64_RELOC , CPU_TYPE_POWERPC | CPU_TYPE_POWERPC64 => FLAGS_PPC_RELOC , _ => & [] , } ; for relocation in relocations { if relocation . r_scattered (endian , state . cputype) { let info = relocation . scattered_info (endian) ; p . group ("ScatteredRelocationInfo" , | p | { p . field_hex ("Address" , info . r_address) ; p . field ("PcRel" , if info . r_pcrel { "yes" } else { "no" }) ; p . field ("Length" , info . r_length) ; p . field_enum ("Type" , info . r_type , proc) ; p . field_hex ("Value" , info . r_value) ; }) ; } else { let info = relocation . info (endian) ; p . group ("RelocationInfo" , | p | { p . field_hex ("Address" , info . r_address) ; p . field ("Extern" , if info . r_extern { "yes" } else { "no" }) ; if info . r_extern { let name = state . symbols . get (info . r_symbolnum as usize) . copied () . flatten () ; p . field_string_option ("Symbol" , info . r_symbolnum , name) ; } else { let name = state . sections . get (info . r_symbolnum as usize) . map (| name | & name [..]) ; p . field_string_option ("Section" , info . r_symbolnum , name) ; } p . field ("PcRel" , if info . r_pcrel { "yes" } else { "no" }) ; p . field ("Length" , info . r_length) ; p . field_enum ("Type" , info . r_type , proc) ; }) ; } } } }
+};
+}

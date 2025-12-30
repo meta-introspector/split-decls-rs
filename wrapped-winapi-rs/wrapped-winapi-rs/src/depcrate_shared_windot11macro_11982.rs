@@ -1,0 +1,9 @@
+// Generated macro for macro_11982 (macro)
+macro_rules! Depcrate_shared_windot11macro_11982 {
+() => {
+// Module: crate::shared::windot11
+// Provides: {"macro_11982"}
+// Dependencies: {}
+STRUCT ! { struct DOT11_RECV_EXTENSION_INFO { uVersion : ULONG , pvReserved : PVOID , dot11PhyType : DOT11_PHY_TYPE , uChCenterFrequency : ULONG , lRSSI : LONG , lRSSIMin : LONG , lRSSIMax : LONG , uRSSI : ULONG , ucPriority : UCHAR , ucDataRate : UCHAR , ucPeerMacAddress : [UCHAR ; 6] , dwExtendedStatus : ULONG , hWEPOffloadContext : HANDLE , hAuthOffloadContext : HANDLE , usWEPAppliedMask : USHORT , usWPAMSDUPriority : USHORT , dot11LowestIV48Counter : DOT11_IV48_COUNTER , usDot11LeftRWBitMap : USHORT , dot11HighestIV48Counter : DOT11_IV48_COUNTER , usDot11RightRWBitMap : USHORT , usNumberOfMPDUsReceived : USHORT , usNumberOfFragments : USHORT , pNdisPackets : [PVOID ; 1] , } }
+};
+}

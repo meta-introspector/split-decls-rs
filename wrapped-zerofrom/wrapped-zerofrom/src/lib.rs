@@ -1,0 +1,73 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcrate_macro_implsmacro_37.rs");
+include!("depcrate_zero_fromimpl_53.rs");
+include!("depcrate_zero_fromzerofrom.rs");
+include!("depcrate_macro_implsmacro_39.rs");
+include!("depcrate_macro_implsmacro_31.rs");
+include!("depcrate_macro_implsmacro_42.rs");
+include!("depcrate_macro_implsmacro_30.rs");
+include!("depcrate_macro_implsmacro_33.rs");
+include!("depcrate_macro_implsmacro_27.rs");
+include!("depcrate_macro_implsmacro_12.rs");
+include!("depcrate_macro_implsmacro_10.rs");
+include!("depcrate_zero_fromuse_48.rs");
+include!("depcrate_macro_implsmacro_35.rs");
+include!("depcrate_macro_implsmacro_23.rs");
+include!("depcrate_macro_implsmacro_6.rs");
+include!("depcrate_macro_implsmacro_16.rs");
+include!("depcrate_macro_implsmacro_26.rs");
+include!("depcrate_macro_implsmacro_9.rs");
+include!("depcrate_macro_implsmacro_7.rs");
+include!("depcrate_zero_fromimpl_57.rs");
+include!("depcrate_macro_implsmacro_43.rs");
+include!("depcrate_macro_implsmacro_17.rs");
+include!("depcrate_zero_fromimpl_56.rs");
+include!("depcrateuse_60.rs");
+include!("depcrate_zero_fromuse_47.rs");
+include!("depcrate_zero_fromimpl_51.rs");
+include!("depcrate_macro_implsmacro_40.rs");
+include!("depcrate_macro_implsmacro_5.rs");
+include!("depcrate_macro_implsmacro_29.rs");
+include!("depcrate_macro_implsmacro_20.rs");
+include!("depcrate_macro_implsmacro_32.rs");
+include!("depcrate_zero_fromimpl_52.rs");
+include!("depcrate_macro_implsmacro_18.rs");
+include!("depcrate_macro_implsmacro_14.rs");
+include!("depcrate_macro_implsmacro_8.rs");
+include!("depcrate_macro_implsmacro_38.rs");
+include!("depcrate_macro_implsarray_zf_impl.rs");
+include!("depcrate_macro_implsmacro_41.rs");
+include!("depcrate_macro_implsmacro_11.rs");
+include!("depcrate_macro_implsmacro_13.rs");
+include!("depcrate_macro_implsmacro_28.rs");
+include!("depcrate_zero_fromimpl_58.rs");
+include!("depcrate_macro_implsmacro_15.rs");
+include!("depcrate_zero_fromimpl_54.rs");
+include!("depcrate_macro_implsmacro_22.rs");
+include!("depcrateuse_61.rs");
+include!("depcrate_zero_fromuse_49.rs");
+include!("depcrate_macro_implsmacro_34.rs");
+include!("depcrate_macro_implsmacro_45.rs");
+include!("depcratemacro_impls.rs");
+include!("depcrate_zero_fromimpl_55.rs");
+include!("depcrate_macro_implsuse_3.rs");
+include!("depcrate_macro_implsmacro_25.rs");
+include!("depcrate_macro_implsmacro_21.rs");
+include!("depcrate_macro_implsmacro_24.rs");
+include!("depcrate_zero_fromimpl_59.rs");
+include!("depcrate_macro_implstuple_zf_impl.rs");
+include!("depcrate_macro_implsmacro_44.rs");
+include!("depcrate_macro_implsimpl_copy_type.rs");
+include!("depcratezero_from.rs");
+include!("depcrateother_1.rs");
+include!("modcrate.rs");
+include!("modcrate_zero_from.rs");
+include!("modcrate_macro_impls.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate!();
+    Modcrate_zero_from!();
+    Modcrate_macro_impls!();
+}

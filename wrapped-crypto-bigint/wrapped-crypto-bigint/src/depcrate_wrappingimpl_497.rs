@@ -4,6 +4,6 @@ macro_rules! Depcrate_wrappingimpl_497 {
 // Module: crate::wrapping
 // Provides: {"impl_497"}
 // Dependencies: {}
-impl < T : ConditionallySelectable > ConditionallySelectable for Wrapping < T > { # [inline] fn conditional_select (a : & Self , b : & Self , choice : Choice) -> Self { Wrapping (T :: conditional_select (& a . 0 , & b . 0 , choice)) } }
+impl < T : fmt :: Octal > fmt :: Octal for Wrapping < T > { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { self . 0 . fmt (f) } }
 };
 }

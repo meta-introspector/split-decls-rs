@@ -1,0 +1,62 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcrateimpl_46.rs");
+include!("depcrate_cfgcfgexpr.rs");
+include!("depcrate_cfgis_ident_start.rs");
+include!("depcrate_cfgimpl_33.rs");
+include!("depcrateimpl_49.rs");
+include!("depcrate_cfgimpl_24.rs");
+include!("depcrate_cfgimpl_18.rs");
+include!("depcrate_errorimpl_40.rs");
+include!("depcrate_cfgimpl_26.rs");
+include!("depcrate_cfgident.rs");
+include!("depcrate_cfgimpl_21.rs");
+include!("depcrate_cfgis_ident_rest.rs");
+include!("depcrate_cfguse_8.rs");
+include!("depcrate_cfgtoken.rs");
+include!("depcrateuse_1.rs");
+include!("depcrate_cfgimpl_20.rs");
+include!("depcrate_errorimpl_39.rs");
+include!("depcrate_errorparseerrorkind.rs");
+include!("depcrate_cfguse_4.rs");
+include!("depcrate_cfgimpl_30.rs");
+include!("depcrateimpl_50.rs");
+include!("depcrate_cfgimpl_29.rs");
+include!("depcrate_cfgkeywords.rs");
+include!("depcrate_cfgtokenizer.rs");
+include!("depcrate_cfgcommasep.rs");
+include!("depcratecfg.rs");
+include!("depcrateuse_2.rs");
+include!("depcrate_cfguse_5.rs");
+include!("depcrate_cfgimpl_17.rs");
+include!("depcrate_cfgimpl_19.rs");
+include!("depcrate_errorparseerror.rs");
+include!("depcrate_cfguse_7.rs");
+include!("depcrate_erroruse_35.rs");
+include!("depcrate_errorimpl_38.rs");
+include!("depcrate_cfgcfg.rs");
+include!("depcrateerror.rs");
+include!("depcrateimpl_47.rs");
+include!("depcrate_cfguse_6.rs");
+include!("depcrate_cfgimpl_16.rs");
+include!("depcrateimpl_48.rs");
+include!("depcrate_cfgparser.rs");
+include!("depcrate_errorimpl_41.rs");
+include!("depcrateuse_43.rs");
+include!("depcrateplatform.rs");
+include!("depcrate_cfgimpl_22.rs");
+include!("depcrate_cfgimpl_25.rs");
+include!("depcrate_cfgimpl_23.rs");
+include!("depcrateuse_42.rs");
+include!("depcrate_cfgimpl_28.rs");
+include!("depcrateuse_44.rs");
+include!("modcrate_cfg.rs");
+include!("modcrate.rs");
+include!("modcrate_error.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate_cfg!();
+    Modcrate!();
+    Modcrate_error!();
+}

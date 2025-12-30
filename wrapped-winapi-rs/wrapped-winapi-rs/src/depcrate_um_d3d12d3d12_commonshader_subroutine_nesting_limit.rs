@@ -1,0 +1,9 @@
+// Generated macro for D3D12_COMMONSHADER_SUBROUTINE_NESTING_LIMIT (const)
+macro_rules! Depcrate_um_d3d12D3D12_COMMONSHADER_SUBROUTINE_NESTING_LIMIT {
+() => {
+// Module: crate::um::d3d12
+// Provides: {"D3D12_COMMONSHADER_SUBROUTINE_NESTING_LIMIT"}
+// Dependencies: {}
+pub const D3D12_COMMONSHADER_SUBROUTINE_NESTING_LIMIT : UINT = 32 ;
+};
+}

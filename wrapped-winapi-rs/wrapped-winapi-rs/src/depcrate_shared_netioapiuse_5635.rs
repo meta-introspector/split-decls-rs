@@ -1,0 +1,9 @@
+// Generated macro for use_5635 (use)
+macro_rules! Depcrate_shared_netioapiuse_5635 {
+() => {
+// Module: crate::shared::netioapi
+// Provides: {"use_5635"}
+// Dependencies: {}
+use shared :: ifdef :: { IF_MAX_PHYS_ADDRESS_LENGTH , IF_MAX_STRING_SIZE , IF_OPER_STATUS , NET_IFINDEX , NET_IF_ACCESS_TYPE , NET_IF_ADMIN_STATUS , NET_IF_COMPARTMENT_ID , NET_IF_COMPARTMENT_SCOPE , NET_IF_CONNECTION_TYPE , NET_IF_DIRECTION_TYPE , NET_IF_MEDIA_CONNECT_STATE , NET_IF_NETWORK_GUID , NET_LUID , PNET_IFINDEX , PNET_IF_COMPARTMENT_ID , PNET_IF_COMPARTMENT_SCOPE , PNET_LUID , TUNNEL_TYPE , } ;
+};
+}

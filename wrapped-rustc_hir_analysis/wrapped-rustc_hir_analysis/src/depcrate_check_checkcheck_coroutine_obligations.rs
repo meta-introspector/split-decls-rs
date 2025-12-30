@@ -1,0 +1,9 @@
+// Generated macro for check_coroutine_obligations (function)
+macro_rules! Depcrate_check_checkcheck_coroutine_obligations {
+() => {
+// Module: crate::check::check
+// Provides: {"check_coroutine_obligations"}
+// Dependencies: {}
+pub (super) fn check_coroutine_obligations (tcx : TyCtxt < '_ > , def_id : LocalDefId ,) -> Result < () , ErrorGuaranteed > { debug_assert ! (! tcx . is_typeck_child (def_id . to_def_id ())) ; let typeck_results = tcx . typeck (def_id) ; let param_env = tcx . param_env (def_id) ; debug ! (? typeck_results . coroutine_stalled_predicates) ; let mode = if tcx . next_trait_solver_globally () { TypingMode :: borrowck (tcx , def_id) } else { TypingMode :: analysis_in_body (tcx , def_id) } ; let infcx = tcx . infer_ctxt () . ignoring_regions () . build (mode) ; let ocx = ObligationCtxt :: new_with_diagnostics (& infcx) ; for (predicate , cause) in & typeck_results . coroutine_stalled_predicates { ocx . register_obligation (Obligation :: new (tcx , cause . clone () , param_env , * predicate)) ; } let errors = ocx . select_all_or_error () ; debug ! (? errors) ; if ! errors . is_empty () { return Err (infcx . err_ctxt () . report_fulfillment_errors (errors)) ; } if ! tcx . next_trait_solver_globally () { for (key , ty) in infcx . take_opaque_types () { let hidden_type = infcx . resolve_vars_if_possible (ty) ; let key = infcx . resolve_vars_if_possible (key) ; sanity_check_found_hidden_type (tcx , key , hidden_type) ? ; } } else { let _ = infcx . take_opaque_types () ; } Ok (()) }
+};
+}

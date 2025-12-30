@@ -1,0 +1,39 @@
+// Generated module macro for crate::attr
+macro_rules! Modcrate_attr {
+() => {
+        Depcrate_attruse_9!();
+        Depcrate_attruse_10!();
+        Depcrate_attruse_11!();
+        Depcrate_attruse_12!();
+        Depcrate_attruse_13!();
+        Depcrate_attruse_14!();
+        Depcrate_attrEventArgs!();
+        Depcrate_attrInstrumentArgs!();
+        Depcrate_attrimpl_17!();
+        Depcrate_attrimpl_18!();
+        Depcrate_attrimpl_19!();
+        Depcrate_attrimpl_20!();
+        Depcrate_attrLitStrOrIdent!();
+        Depcrate_attrimpl_22!();
+        Depcrate_attrimpl_23!();
+        Depcrate_attrStrArg!();
+        Depcrate_attrimpl_25!();
+        Depcrate_attrExprArg!();
+        Depcrate_attrimpl_27!();
+        Depcrate_attrSkips!();
+        Depcrate_attrimpl_29!();
+        Depcrate_attrFormatMode!();
+        Depcrate_attrFields!();
+        Depcrate_attrField!();
+        Depcrate_attrFieldKind!();
+        Depcrate_attrimpl_34!();
+        Depcrate_attrimpl_35!();
+        Depcrate_attrimpl_36!();
+        Depcrate_attrimpl_37!();
+        Depcrate_attrimpl_38!();
+        Depcrate_attrLevel!();
+        Depcrate_attrimpl_40!();
+        Depcrate_attrimpl_41!();
+        Depcrate_attrkw!();
+    };
+}

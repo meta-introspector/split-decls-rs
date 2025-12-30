@@ -1,0 +1,53 @@
+// Generated module macro for crate::tests
+macro_rules! Modcrate_tests {
+() => {
+        Depcrate_testsattribute!();
+        Depcrate_testsexpression!();
+        Depcrate_testsflyimport!();
+        Depcrate_testsfn_param!();
+        Depcrate_testsitem!();
+        Depcrate_testsitem_list!();
+        Depcrate_testspattern!();
+        Depcrate_testspredicate!();
+        Depcrate_testsproc_macros!();
+        Depcrate_testsraw_identifiers!();
+        Depcrate_testsrecord!();
+        Depcrate_testsspecial!();
+        Depcrate_teststype_pos!();
+        Depcrate_testsuse_tree!();
+        Depcrate_testsvisibility!();
+        Depcrate_testsuse_297!();
+        Depcrate_testsuse_298!();
+        Depcrate_testsuse_299!();
+        Depcrate_testsuse_300!();
+        Depcrate_testsuse_301!();
+        Depcrate_testsuse_302!();
+        Depcrate_testsuse_303!();
+        Depcrate_testsuse_304!();
+        Depcrate_testsuse_305!();
+        Depcrate_testsuse_306!();
+        Depcrate_testsBASE_ITEMS_FIXTURE!();
+        Depcrate_testsTEST_CONFIG!();
+        Depcrate_testscompletion_list!();
+        Depcrate_testscompletion_list_no_kw!();
+        Depcrate_testscompletion_list_no_kw_with_private_editable!();
+        Depcrate_testscompletion_list_with_trigger_character!();
+        Depcrate_testscompletion_list_with_config_raw!();
+        Depcrate_testscompletion_list_with_config!();
+        Depcrate_testsposition!();
+        Depcrate_testsdo_completion!();
+        Depcrate_testsdo_completion_with_config!();
+        Depcrate_testsrender_completion_list!();
+        Depcrate_testscheck_edit!();
+        Depcrate_testscheck_edit_with_config!();
+        Depcrate_testscheck!();
+        Depcrate_testscheck_with_base_items!();
+        Depcrate_testscheck_no_kw!();
+        Depcrate_testscheck_with_private_editable!();
+        Depcrate_testscheck_with_trigger_character!();
+        Depcrate_testsget_all_items!();
+        Depcrate_teststest_no_completions_in_for_loop_in_kw_pos!();
+        Depcrate_testsregression_10042!();
+        Depcrate_testsno_completions_in_comments!();
+    };
+}

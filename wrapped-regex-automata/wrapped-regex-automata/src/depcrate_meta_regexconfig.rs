@@ -1,0 +1,9 @@
+// Generated macro for Config (struct)
+macro_rules! Depcrate_meta_regexConfig {
+() => {
+// Module: crate::meta::regex
+// Provides: {"Config"}
+// Dependencies: {}
+# [doc = " An object describing the configuration of a `Regex`."] # [doc = ""] # [doc = " This configuration only includes options for the"] # [doc = " non-syntax behavior of a `Regex`, and can be applied via the"] # [doc = " [`Builder::configure`] method. For configuring the syntax options, see"] # [doc = " [`util::syntax::Config`](crate::util::syntax::Config)."] # [doc = ""] # [doc = " # Example: lower the NFA size limit"] # [doc = ""] # [doc = " In some cases, the default size limit might be too big. The size limit can"] # [doc = " be lowered, which will prevent large regex patterns from compiling."] # [doc = ""] # [doc = " ```"] # [doc = " # if cfg!(miri) { return Ok(()); } // miri takes too long"] # [doc = " use regex_automata::meta::Regex;"] # [doc = ""] # [doc = " let result = Regex::builder()"] # [doc = "     .configure(Regex::config().nfa_size_limit(Some(20 * (1<<10))))"] # [doc = "     // Not even 20KB is enough to build a single large Unicode class!"] # [doc = "     .build(r\"\\pL\");"] # [doc = " assert!(result.is_err());"] # [doc = ""] # [doc = " # Ok::<(), Box<dyn std::error::Error>>(())"] # [doc = " ```"] # [derive (Clone , Debug , Default)] pub struct Config { match_kind : Option < MatchKind > , utf8_empty : Option < bool > , autopre : Option < bool > , pre : Option < Option < Prefilter > > , which_captures : Option < WhichCaptures > , nfa_size_limit : Option < Option < usize > > , onepass_size_limit : Option < Option < usize > > , hybrid_cache_capacity : Option < usize > , hybrid : Option < bool > , dfa : Option < bool > , dfa_size_limit : Option < Option < usize > > , dfa_state_limit : Option < Option < usize > > , onepass : Option < bool > , backtrack : Option < bool > , byte_classes : Option < bool > , line_terminator : Option < u8 > , }
+};
+}

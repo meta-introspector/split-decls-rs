@@ -1,0 +1,9 @@
+// Generated macro for ERROR_TRANSACTIONMANAGER_RECOVERY_NAME_COLLISION (const)
+macro_rules! Depcrate_shared_winerrorERROR_TRANSACTIONMANAGER_RECOVERY_NAME_COLLISION {
+() => {
+// Module: crate::shared::winerror
+// Provides: {"ERROR_TRANSACTIONMANAGER_RECOVERY_NAME_COLLISION"}
+// Dependencies: {}
+pub const ERROR_TRANSACTIONMANAGER_RECOVERY_NAME_COLLISION : DWORD = 6720 ;
+};
+}

@@ -1,0 +1,10 @@
+// Generated macro for impl_505 (impl)
+macro_rules! Depcrate_blocks_in_conditionsimpl_505 {
+() => {
+// Module: crate::blocks_in_conditions
+// Provides: {"impl_505"}
+// Dependencies: {}
+impl < 'tcx > LateLintPass < 'tcx > for BlocksInConditions { fn check_expr (& mut self , cx : & LateContext < 'tcx > , expr : & 'tcx Expr < '_ >) { if expr . span . in_external_macro (cx . sess () . source_map ()) { return ; } let Some ((cond , keyword , desc)) = higher :: If :: hir (expr) . map (| hif | (hif . cond , "if" , "an `if` condition")) . or (if let ExprKind :: Match (match_ex , _ , MatchSource :: Normal) = expr . kind { Some ((match_ex , "match" , "a `match` scrutinee")) } else { None }) else { return ; } ; let complex_block_message = format ! ("in {desc}, avoid complex blocks or closures with blocks; \
+            instead, move the block or closure higher and bind it with a `let`" ,) ; if let ExprKind :: Block (block , _) = & cond . kind { if ! block . span . eq_ctxt (expr . span) { return ; } if block . rules == BlockCheckMode :: DefaultBlock { if block . stmts . is_empty () { if let Some (ex) = & block . expr { if expr . span . from_expansion () || ex . span . from_expansion () { return ; } if contains_return (block . expr) { return ; } let mut applicability = Applicability :: MachineApplicable ; span_lint_and_sugg (cx , BLOCKS_IN_CONDITIONS , cond . span , BRACED_EXPR_MESSAGE , "try" , snippet_block_with_applicability (cx , ex . span , ".." , Some (expr . span) , & mut applicability) , applicability ,) ; } } else { let span = block . expr . as_ref () . map_or_else (| | block . stmts [0] . span , | e | e . span) ; if span . from_expansion () || expr . span . from_expansion () || is_from_proc_macro (cx , cond) { return ; } let mut applicability = Applicability :: MachineApplicable ; span_lint_and_sugg (cx , BLOCKS_IN_CONDITIONS , expr . span . with_hi (cond . span . hi ()) , complex_block_message , "try" , format ! ("let res = {}; {keyword} res" , snippet_block_with_applicability (cx , block . span , ".." , Some (expr . span) , & mut applicability) ,) , applicability ,) ; } } } } }
+};
+}

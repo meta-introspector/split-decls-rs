@@ -1,0 +1,9 @@
+// Generated macro for WLAN_CONNECTION_NOTIFICATION_CONSOLE_USER_PROFILE (const)
+macro_rules! Depcrate_um_wlanapiWLAN_CONNECTION_NOTIFICATION_CONSOLE_USER_PROFILE {
+() => {
+// Module: crate::um::wlanapi
+// Provides: {"WLAN_CONNECTION_NOTIFICATION_CONSOLE_USER_PROFILE"}
+// Dependencies: {}
+pub const WLAN_CONNECTION_NOTIFICATION_CONSOLE_USER_PROFILE : DWORD = 0x00000004 ;
+};
+}

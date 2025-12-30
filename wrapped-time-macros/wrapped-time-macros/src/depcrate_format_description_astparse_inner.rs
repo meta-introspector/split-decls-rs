@@ -1,0 +1,9 @@
+// Generated macro for parse_inner (function)
+macro_rules! Depcrate_format_description_astparse_inner {
+() => {
+// Module: crate::format_description::ast
+// Provides: {"parse_inner"}
+// Dependencies: {}
+fn parse_inner < 'item , I : Iterator < Item = Result < lexer :: Token < 'item > , Error > > , const NESTED : bool , const VERSION : u8 , > (tokens : & mut lexer :: Lexed < I > ,) -> impl Iterator < Item = Result < Item < 'item > , Error > > + '_ { iter :: from_fn (move | | { if NESTED && tokens . peek_closing_bracket () . is_some () { return None ; } let next = match tokens . next () ? { Ok (token) => token , Err (err) => return Some (Err (err)) , } ; Some (match next { lexer :: Token :: Literal (Spanned { value : _ , span : _ }) if NESTED => { bug ! ("literal should not be present in nested description") } lexer :: Token :: Literal (value) => Ok (Item :: Literal (value)) , lexer :: Token :: Bracket { kind : lexer :: BracketKind :: Opening , location , } => { if version ! (..= 1) { if let Some (second_location) = tokens . next_if_opening_bracket () { Ok (Item :: EscapedBracket { _first : unused (location) , _second : unused (second_location) , }) } else { parse_component :: < _ , VERSION > (location , tokens) } } else { parse_component :: < _ , VERSION > (location , tokens) } } lexer :: Token :: Bracket { kind : lexer :: BracketKind :: Closing , location : _ , } if NESTED => { bug ! ("closing bracket should be caught by the `if` statement") } lexer :: Token :: Bracket { kind : lexer :: BracketKind :: Closing , location : _ , } => { bug ! ("closing bracket should have been consumed by `parse_component`") } lexer :: Token :: ComponentPart { kind : _ , value } if NESTED => Ok (Item :: Literal (value)) , lexer :: Token :: ComponentPart { kind : _ , value : _ } => { bug ! ("component part should have been consumed by `parse_component`") } }) }) }
+};
+}

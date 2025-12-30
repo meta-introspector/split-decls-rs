@@ -1,0 +1,9 @@
+// Generated macro for declare_id (macro)
+macro_rules! Depcratedeclare_id {
+() => {
+// Module: crate
+// Provides: {"declare_id"}
+// Dependencies: {}
+# [doc = " Convenience macro to declare a static address and functions to interact with it."] # [doc = ""] # [doc = " Input: a single literal base58 string representation of a program's ID."] # [doc = ""] # [doc = " # Example"] # [doc = ""] # [doc = " ```"] # [doc = " # // wrapper is used so that the macro invocation occurs in the item position"] # [doc = " # // rather than in the statement position which isn't allowed."] # [doc = " use std::str::FromStr;"] # [doc = " use solana_address::{declare_id, Address};"] # [doc = ""] # [doc = " # mod item_wrapper {"] # [doc = " #   use solana_address::declare_id;"] # [doc = " declare_id!(\"My11111111111111111111111111111111111111111\");"] # [doc = " # }"] # [doc = " # use item_wrapper::id;"] # [doc = ""] # [doc = " let my_id = Address::from_str(\"My11111111111111111111111111111111111111111\").unwrap();"] # [doc = " assert_eq!(id(), my_id);"] # [doc = " ```"] # [cfg (feature = "decode")] # [macro_export] macro_rules ! declare_id { ($ address : expr) => { # [cfg (not (target_arch = "bpf"))] # [doc = " The const program ID."] pub const ID : $ crate :: Address = $ crate :: Address :: from_str_const ($ address) ; # [cfg (target_arch = "bpf")] # [doc = " The const program ID."] pub static ID : $ crate :: Address = $ crate :: Address :: from_str_const ($ address) ; # [doc = " Returns `true` if given address is the ID."] pub fn check_id (id : &$ crate :: Address) -> bool { id == & ID } # [doc = " Returns the ID."] pub const fn id () -> $ crate :: Address { # [cfg (not (target_arch = "bpf"))] { ID } # [cfg (target_arch = "bpf")] $ crate :: Address :: from_str_const ($ address) } # [cfg (test)] # [test] fn test_id () { assert ! (check_id (& id ())) ; } } ; }
+};
+}

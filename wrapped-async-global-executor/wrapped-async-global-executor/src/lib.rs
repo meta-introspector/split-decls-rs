@@ -1,0 +1,70 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcrateexecutor.rs");
+include!("depcrateuse_4.rs");
+include!("depcrate_configimpl_11.rs");
+include!("depcrate_executoruse_16.rs");
+include!("depcrate_initinit_with_config.rs");
+include!("depcrate_executorspawn.rs");
+include!("depcrate_configuse_8.rs");
+include!("depcrateuse_3.rs");
+include!("depcrate_executormacro_20.rs");
+include!("depcrateinit.rs");
+include!("depcrate_configglobalexecutorconfig.rs");
+include!("depcratereactor.rs");
+include!("depcrate_threadinguse_33.rs");
+include!("depcrate_threadingspawn_more_threads.rs");
+include!("depcrate_configimpl_14.rs");
+include!("depcrate_initinit.rs");
+include!("depcrate_threadingthread_main_loop.rs");
+include!("depcrate_threadingstop_current_thread.rs");
+include!("depcratethreading.rs");
+include!("depcrate_tokiouse_47.rs");
+include!("depcrateuse_2.rs");
+include!("depcrate_threadinguse_35.rs");
+include!("depcrate_threadingwait_for_local_executor_completion.rs");
+include!("depcrate_threadingstop_thread.rs");
+include!("depcrate_threadinguse_36.rs");
+include!("depcrate_tokioenter.rs");
+include!("depcrate_executorglobal_executor.rs");
+include!("depcrate_threadingglobal_executor_expected_threads_number.rs");
+include!("depcrate_tokiotest.rs");
+include!("depcratemacro_1.rs");
+include!("depcrateuse_6.rs");
+include!("depcrate_threadingglobal_executor_threads_number.rs");
+include!("depcratetokio.rs");
+include!("depcrateuse_5.rs");
+include!("depcrateconfig.rs");
+include!("depcrate_threadinguse_34.rs");
+include!("depcrate_executorblock_on.rs");
+include!("depcrate_reactorblock_on.rs");
+include!("depcrate_executoruse_18.rs");
+include!("depcrate_tokioruntime.rs");
+include!("depcrate_threadingstop_current_executor_thread.rs");
+include!("depcrate_executorspawn_local.rs");
+include!("depcrate_configglobal_executor_config.rs");
+include!("depcrate_inituse_26.rs");
+include!("depcrate_executoruse_17.rs");
+include!("depcrate_executorspawn_blocking.rs");
+include!("depcrate_configimpl_12.rs");
+include!("depcrate_threadinguse_32.rs");
+include!("depcrate_threadingmacro_39.rs");
+include!("depcrate_configconfig.rs");
+include!("modcrate_executor.rs");
+include!("modcrate_config.rs");
+include!("modcrate_init.rs");
+include!("modcrate_reactor.rs");
+include!("modcrate.rs");
+include!("modcrate_threading.rs");
+include!("modcrate_tokio.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate_executor!();
+    Modcrate_config!();
+    Modcrate_init!();
+    Modcrate_reactor!();
+    Modcrate!();
+    Modcrate_threading!();
+    Modcrate_tokio!();
+}

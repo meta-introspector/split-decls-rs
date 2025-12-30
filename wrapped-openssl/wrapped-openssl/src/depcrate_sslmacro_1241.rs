@@ -1,0 +1,9 @@
+// Generated macro for macro_1241 (macro)
+macro_rules! Depcrate_sslmacro_1241 {
+() => {
+// Module: crate::ssl
+// Provides: {"macro_1241"}
+// Dependencies: {}
+cfg_if ! { if # [cfg (ossl110)] { unsafe fn get_new_idx (f : ffi :: CRYPTO_EX_free) -> c_int { ffi :: CRYPTO_get_ex_new_index (ffi :: CRYPTO_EX_INDEX_SSL_CTX , 0 , ptr :: null_mut () , None , None , Some (f) ,) } unsafe fn get_new_ssl_idx (f : ffi :: CRYPTO_EX_free) -> c_int { ffi :: CRYPTO_get_ex_new_index (ffi :: CRYPTO_EX_INDEX_SSL , 0 , ptr :: null_mut () , None , None , Some (f) ,) } } else { use std :: sync :: Once ; unsafe fn get_new_idx (f : ffi :: CRYPTO_EX_free) -> c_int { static ONCE : Once = Once :: new () ; ONCE . call_once (|| { cfg_if ! { if # [cfg (not (any (boringssl , awslc)))] { ffi :: SSL_CTX_get_ex_new_index (0 , ptr :: null_mut () , None , None , None) ; } else { ffi :: SSL_CTX_get_ex_new_index (0 , ptr :: null_mut () , ptr :: null_mut () , None , None) ; } } }) ; cfg_if ! { if # [cfg (not (any (boringssl , awslc)))] { ffi :: SSL_CTX_get_ex_new_index (0 , ptr :: null_mut () , None , None , Some (f)) } else { ffi :: SSL_CTX_get_ex_new_index (0 , ptr :: null_mut () , ptr :: null_mut () , None , f) } } } unsafe fn get_new_ssl_idx (f : ffi :: CRYPTO_EX_free) -> c_int { static ONCE : Once = Once :: new () ; ONCE . call_once (|| { # [cfg (not (any (boringssl , awslc)))] ffi :: SSL_get_ex_new_index (0 , ptr :: null_mut () , None , None , None) ; # [cfg (any (boringssl , awslc))] ffi :: SSL_get_ex_new_index (0 , ptr :: null_mut () , ptr :: null_mut () , None , None) ; }) ; # [cfg (not (any (boringssl , awslc)))] return ffi :: SSL_get_ex_new_index (0 , ptr :: null_mut () , None , None , Some (f)) ; # [cfg (any (boringssl , awslc))] return ffi :: SSL_get_ex_new_index (0 , ptr :: null_mut () , ptr :: null_mut () , None , f) ; } } }
+};
+}

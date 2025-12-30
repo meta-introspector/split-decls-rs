@@ -1,0 +1,9 @@
+// Generated macro for impl_69 (impl)
+macro_rules! Depcrate_contextimpl_69 {
+() => {
+// Module: crate::context
+// Provides: {"impl_69"}
+// Dependencies: {}
+impl CGContext { pub fn type_id () -> CFTypeID { unsafe { CGContextGetTypeID () } } # [doc = " Creates a `CGContext` instance from an existing [`CGContextRef`] pointer."] # [doc = ""] # [doc = " This function will internally call [`CGRetain`] and hence there is no need to call it explicitly."] # [doc = ""] # [doc = " This function is particularly useful for cases when the context is not instantiated/managed"] # [doc = " by the caller, but it's retrieve via other means (e.g., by calling the method [`NSGraphicsContext::CGContext`]"] # [doc = " in a cocoa application)."] # [doc = ""] # [doc = " [`CGContextRef`]: https://developer.apple.com/documentation/coregraphics/cgcontextref"] # [doc = " [`CGRetain`]: https://developer.apple.com/documentation/coregraphics/1586506-cgcontextretain"] # [doc = " [`NSGraphicsContext::CGContext`]: https://developer.apple.com/documentation/appkit/nsgraphicscontext/1535352-currentcontext"] pub unsafe fn from_existing_context_ptr (ctx : * mut crate :: sys :: CGContext) -> CGContext { CGContextRetain (ctx) ; Self :: from_ptr (ctx) } pub fn create_bitmap_context (data : Option < * mut c_void > , width : usize , height : usize , bits_per_component : usize , bytes_per_row : usize , space : & CGColorSpace , bitmap_info : u32 ,) -> CGContext { unsafe { let result = CGBitmapContextCreate (data . unwrap_or (ptr :: null_mut ()) , width , height , bits_per_component , bytes_per_row , space . as_ptr () , bitmap_info ,) ; assert ! (! result . is_null ()) ; Self :: from_ptr (result) } } pub fn data (& mut self) -> & mut [u8] { unsafe { slice :: from_raw_parts_mut (CGBitmapContextGetData (self . as_ptr ()) as * mut u8 , self . height () * self . bytes_per_row () ,) } } }
+};
+}

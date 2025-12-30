@@ -1,0 +1,41 @@
+// Generated module macro for crate::sm2_scalar_32
+macro_rules! Modcrate_sm2_scalar_32 {
+() => {
+        Depcrate_sm2_scalar_32IndexConst!();
+        Depcrate_sm2_scalar_32impl_990!();
+        Depcrate_sm2_scalar_32impl_991!();
+        Depcrate_sm2_scalar_32fiat_sm2_scalar_u1!();
+        Depcrate_sm2_scalar_32fiat_sm2_scalar_i1!();
+        Depcrate_sm2_scalar_32fiat_sm2_scalar_u2!();
+        Depcrate_sm2_scalar_32fiat_sm2_scalar_i2!();
+        Depcrate_sm2_scalar_32fiat_sm2_scalar_montgomery_domain_field_element!();
+        Depcrate_sm2_scalar_32impl_997!();
+        Depcrate_sm2_scalar_32impl_998!();
+        Depcrate_sm2_scalar_32impl_999!();
+        Depcrate_sm2_scalar_32impl_1000!();
+        Depcrate_sm2_scalar_32fiat_sm2_scalar_non_montgomery_domain_field_element!();
+        Depcrate_sm2_scalar_32impl_1002!();
+        Depcrate_sm2_scalar_32impl_1003!();
+        Depcrate_sm2_scalar_32impl_1004!();
+        Depcrate_sm2_scalar_32impl_1005!();
+        Depcrate_sm2_scalar_32fiat_sm2_scalar_addcarryx_u32!();
+        Depcrate_sm2_scalar_32fiat_sm2_scalar_subborrowx_u32!();
+        Depcrate_sm2_scalar_32fiat_sm2_scalar_mulx_u32!();
+        Depcrate_sm2_scalar_32fiat_sm2_scalar_cmovznz_u32!();
+        Depcrate_sm2_scalar_32fiat_sm2_scalar_mul!();
+        Depcrate_sm2_scalar_32fiat_sm2_scalar_square!();
+        Depcrate_sm2_scalar_32fiat_sm2_scalar_add!();
+        Depcrate_sm2_scalar_32fiat_sm2_scalar_sub!();
+        Depcrate_sm2_scalar_32fiat_sm2_scalar_opp!();
+        Depcrate_sm2_scalar_32fiat_sm2_scalar_from_montgomery!();
+        Depcrate_sm2_scalar_32fiat_sm2_scalar_to_montgomery!();
+        Depcrate_sm2_scalar_32fiat_sm2_scalar_nonzero!();
+        Depcrate_sm2_scalar_32fiat_sm2_scalar_selectznz!();
+        Depcrate_sm2_scalar_32fiat_sm2_scalar_to_bytes!();
+        Depcrate_sm2_scalar_32fiat_sm2_scalar_from_bytes!();
+        Depcrate_sm2_scalar_32fiat_sm2_scalar_set_one!();
+        Depcrate_sm2_scalar_32fiat_sm2_scalar_msat!();
+        Depcrate_sm2_scalar_32fiat_sm2_scalar_divstep!();
+        Depcrate_sm2_scalar_32fiat_sm2_scalar_divstep_precomp!();
+    };
+}

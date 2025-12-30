@@ -1,0 +1,9 @@
+// Generated macro for impl_8 (impl)
+macro_rules! Depcrate_size_hintimpl_8 {
+() => {
+// Module: crate::size_hint
+// Provides: {"impl_8"}
+// Dependencies: {}
+impl SizeHint { # [doc = " Returns a new `SizeHint` with default values"] # [inline] pub fn new () -> SizeHint { SizeHint :: default () } # [doc = " Returns a new `SizeHint` with both upper and lower bounds set to the"] # [doc = " given value."] # [inline] pub fn with_exact (value : u64) -> SizeHint { SizeHint { lower : value , upper : Some (value) , } } # [doc = " Returns the lower bound of data that the `Body` will yield before"] # [doc = " completing."] # [inline] pub fn lower (& self) -> u64 { self . lower } # [doc = " Set the value of the `lower` hint."] # [doc = ""] # [doc = " # Panics"] # [doc = ""] # [doc = " The function panics if `value` is greater than `upper`."] # [inline] pub fn set_lower (& mut self , value : u64) { assert ! (value <= self . upper . unwrap_or (u64 :: MAX)) ; self . lower = value ; } # [doc = " Returns the upper bound of data the `Body` will yield before"] # [doc = " completing, or `None` if the value is unknown."] # [inline] pub fn upper (& self) -> Option < u64 > { self . upper } # [doc = " Set the value of the `upper` hint value."] # [doc = ""] # [doc = " # Panics"] # [doc = ""] # [doc = " This function panics if `value` is less than `lower`."] # [inline] pub fn set_upper (& mut self , value : u64) { assert ! (value >= self . lower , "`value` is less than than `lower`") ; self . upper = Some (value) ; } # [doc = " Returns the exact size of data that will be yielded **if** the"] # [doc = " `lower` and `upper` bounds are equal."] # [inline] pub fn exact (& self) -> Option < u64 > { if Some (self . lower) == self . upper { self . upper } else { None } } # [doc = " Set the value of the `lower` and `upper` bounds to exactly the same."] # [inline] pub fn set_exact (& mut self , value : u64) { self . lower = value ; self . upper = Some (value) ; } }
+};
+}

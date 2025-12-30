@@ -1,0 +1,9 @@
+// Generated macro for impl_69 (impl)
+macro_rules! Depcrate_errorimpl_69 {
+() => {
+// Module: crate::error
+// Provides: {"impl_69"}
+// Dependencies: {}
+impl < Item , Range > StreamError < Item , Range > for StringStreamError { # [inline] fn unexpected_token (_ : Item) -> Self { StringStreamError :: UnexpectedParse } # [inline] fn unexpected_range (_ : Range) -> Self { StringStreamError :: UnexpectedParse } # [inline] fn unexpected_format < T > (_msg : T) -> Self where T : fmt :: Display , { StringStreamError :: UnexpectedParse } # [inline] fn expected_token (_ : Item) -> Self { StringStreamError :: UnexpectedParse } # [inline] fn expected_range (_ : Range) -> Self { StringStreamError :: UnexpectedParse } # [inline] fn expected_format < T > (_ : T) -> Self where T : fmt :: Display , { StringStreamError :: UnexpectedParse } # [inline] fn message_format < T > (_ : T) -> Self where T : fmt :: Display , { StringStreamError :: UnexpectedParse } # [inline] fn message_token (_ : Item) -> Self { StringStreamError :: UnexpectedParse } # [inline] fn message_range (_ : Range) -> Self { StringStreamError :: UnexpectedParse } fn message_static_message (msg : & 'static str) -> Self { if msg == CHAR_BOUNDARY_ERROR_MESSAGE { StringStreamError :: CharacterBoundary } else { StringStreamError :: UnexpectedParse } } # [inline] fn end_of_input () -> Self { StringStreamError :: Eoi } # [inline] fn is_unexpected_end_of_input (& self) -> bool { * self == StringStreamError :: Eoi } # [inline] fn into_other < T > (self) -> T where T : StreamError < Item , Range > , { let msg = match self { StringStreamError :: CharacterBoundary => CHAR_BOUNDARY_ERROR_MESSAGE , StringStreamError :: UnexpectedParse => "parse" , StringStreamError :: Eoi => return T :: end_of_input () , } ; T :: unexpected_static_message (msg) } }
+};
+}

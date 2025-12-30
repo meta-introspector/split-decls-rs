@@ -1,0 +1,9 @@
+// Generated macro for PMIB_IP_NETWORK_CONNECTION_BANDWIDTH_ESTIMATES (type)
+macro_rules! Depcrate_shared_netioapiPMIB_IP_NETWORK_CONNECTION_BANDWIDTH_ESTIMATES {
+() => {
+// Module: crate::shared::netioapi
+// Provides: {"PMIB_IP_NETWORK_CONNECTION_BANDWIDTH_ESTIMATES"}
+// Dependencies: {}
+pub type PMIB_IP_NETWORK_CONNECTION_BANDWIDTH_ESTIMATES = * mut MIB_IP_NETWORK_CONNECTION_BANDWIDTH_ESTIMATES ;
+};
+}

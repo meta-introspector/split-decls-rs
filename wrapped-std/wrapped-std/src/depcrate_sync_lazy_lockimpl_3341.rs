@@ -1,0 +1,9 @@
+// Generated macro for impl_3341 (impl)
+macro_rules! Depcrate_sync_lazy_lockimpl_3341 {
+() => {
+// Module: crate::sync::lazy_lock
+// Provides: {"impl_3341"}
+// Dependencies: {}
+impl < T , F > LazyLock < T , F > { # [doc = " Returns a mutable reference to the value if initialized. Otherwise (if uninitialized or"] # [doc = " poisoned), returns `None`."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " #![feature(lazy_get)]"] # [doc = ""] # [doc = " use std::sync::LazyLock;"] # [doc = ""] # [doc = " let mut lazy = LazyLock::new(|| 92);"] # [doc = ""] # [doc = " assert_eq!(LazyLock::get_mut(&mut lazy), None);"] # [doc = " let _ = LazyLock::force(&lazy);"] # [doc = " *LazyLock::get_mut(&mut lazy).unwrap() = 44;"] # [doc = " assert_eq!(*lazy, 44);"] # [doc = " ```"] # [inline] # [unstable (feature = "lazy_get" , issue = "129333")] pub fn get_mut (this : & mut LazyLock < T , F >) -> Option < & mut T > { let state = this . once . state () ; match state { ExclusiveState :: Complete => Some (unsafe { & mut this . data . get_mut () . value }) , _ => None , } } # [doc = " Returns a reference to the value if initialized. Otherwise (if uninitialized or poisoned),"] # [doc = " returns `None`."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " #![feature(lazy_get)]"] # [doc = ""] # [doc = " use std::sync::LazyLock;"] # [doc = ""] # [doc = " let lazy = LazyLock::new(|| 92);"] # [doc = ""] # [doc = " assert_eq!(LazyLock::get(&lazy), None);"] # [doc = " let _ = LazyLock::force(&lazy);"] # [doc = " assert_eq!(LazyLock::get(&lazy), Some(&92));"] # [doc = " ```"] # [inline] # [unstable (feature = "lazy_get" , issue = "129333")] pub fn get (this : & LazyLock < T , F >) -> Option < & T > { if this . once . is_completed () { Some (unsafe { & (* this . data . get ()) . value }) } else { None } } }
+};
+}

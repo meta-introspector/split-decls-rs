@@ -1,0 +1,9 @@
+// Generated macro for impl_680 (impl)
+macro_rules! Depcrate_evalimpl_680 {
+() => {
+// Module: crate::eval
+// Provides: {"impl_680"}
+// Dependencies: {}
+impl < 'tcx > MainThreadState < 'tcx > { fn on_main_stack_empty (& mut self , this : & mut MiriInterpCx < 'tcx > ,) -> InterpResult < 'tcx , Poll < () > > { use MainThreadState :: * ; match self { GlobalCtors { ctor_state , entry_id , entry_type , argc , argv } => { match ctor_state . on_stack_empty (this) ? { Poll :: Pending => { } Poll :: Ready (()) => { call_main (this , * entry_id , * entry_type , argc . clone () , argv . clone ()) ? ; * self = Running ; } } } Running => { * self = TlsDtors (Default :: default ()) ; } TlsDtors (state) => match state . on_stack_empty (this) ? { Poll :: Pending => { } Poll :: Ready (()) => { if this . machine . data_race . as_genmc_ref () . is_some () { * self = Done ; } else { if this . machine . preemption_rate > 0.0 { * self = Yield { remaining : MAIN_THREAD_YIELDS_AT_SHUTDOWN } ; } else { * self = Done ; } } } } , Yield { remaining } => match remaining . checked_sub (1) { None => * self = Done , Some (new_remaining) => { * remaining = new_remaining ; this . yield_active_thread () ; } } , Done => { let ret_place = this . machine . main_fn_ret_place . clone () . unwrap () ; let exit_code = this . read_target_isize (& ret_place) ? ; let exit_code = i32 :: try_from (exit_code) . unwrap_or (if exit_code >= 0 { i32 :: MAX } else { i32 :: MIN }) ; this . terminate_active_thread (TlsAllocAction :: Leak) ? ; throw_machine_stop ! (TerminationInfo :: Exit { code : exit_code , leak_check : true }) ; } } interp_ok (Poll :: Pending) } }
+};
+}

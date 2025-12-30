@@ -1,0 +1,39 @@
+// Generated module macro for crate::runtime::nsobject
+macro_rules! Modcrate_runtime_nsobject {
+() => {
+        Depcrate_runtime_nsobjectuse_1166!();
+        Depcrate_runtime_nsobjectuse_1167!();
+        Depcrate_runtime_nsobjectuse_1168!();
+        Depcrate_runtime_nsobjectuse_1169!();
+        Depcrate_runtime_nsobjectuse_1170!();
+        Depcrate_runtime_nsobjectuse_1171!();
+        Depcrate_runtime_nsobjectuse_1172!();
+        Depcrate_runtime_nsobjectuse_1173!();
+        Depcrate_runtime_nsobjectNSObject!();
+        Depcrate_runtime_nsobjectmacro_1175!();
+        Depcrate_runtime_nsobjectprivate!();
+        Depcrate_runtime_nsobjectimpl_1177!();
+        Depcrate_runtime_nsobjectimpl_1178!();
+        Depcrate_runtime_nsobjectimpl_1179!();
+        Depcrate_runtime_nsobjectimpl_1180!();
+        Depcrate_runtime_nsobjectimpl_1181!();
+        Depcrate_runtime_nsobjectimpl_1182!();
+        Depcrate_runtime_nsobjectimpl_1183!();
+        Depcrate_runtime_nsobjectimpl_1184!();
+        Depcrate_runtime_nsobjectNSObjectProtocol!();
+        Depcrate_runtime_nsobjectimpl_1186!();
+        Depcrate_runtime_nsobjectimpl_1187!();
+        Depcrate_runtime_nsobjectimpl_1188!();
+        Depcrate_runtime_nsobjectimpl_1189!();
+        Depcrate_runtime_nsobjectimpl_1190!();
+        Depcrate_runtime_nsobjectimpl_1191!();
+        Depcrate_runtime_nsobjectmacro_1192!();
+        Depcrate_runtime_nsobjectimpl_1193!();
+        Depcrate_runtime_nsobjectimpl_1194!();
+        Depcrate_runtime_nsobjectimpl_1195!();
+        Depcrate_runtime_nsobjectimpl_1196!();
+        Depcrate_runtime_nsobjectimpl_1197!();
+        Depcrate_runtime_nsobjectimpl_1198!();
+        Depcrate_runtime_nsobjecttests!();
+    };
+}

@@ -1,0 +1,69 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcrate_pkcs8impl_26.rs");
+include!("depcrate_pkcs8use_8.rs");
+include!("depcrate_pkcs8impl_17.rs");
+include!("depcrate_pkcs8impl_24.rs");
+include!("depcrateuse_37.rs");
+include!("depcrateuse_40.rs");
+include!("depcratesignature.rs");
+include!("depcrateimpl_45.rs");
+include!("depcrate_pkcs8impl_23.rs");
+include!("depcrate_pkcs8keypairbytes.rs");
+include!("depcrate_hexuse_3.rs");
+include!("depcrateuse_38.rs");
+include!("depcrate_pkcs8impl_20.rs");
+include!("depcratecomponent_size.rs");
+include!("depcrate_hexuse_2.rs");
+include!("depcrateuse_39.rs");
+include!("depcratesignaturebytes.rs");
+include!("depcrateimpl_46.rs");
+include!("depcrateimpl_48.rs");
+include!("depcrate_serdeimpl_34.rs");
+include!("depcrateimpl_49.rs");
+include!("depcratecomponentbytes.rs");
+include!("depcrateimpl_50.rs");
+include!("depcrateimpl_51.rs");
+include!("depcrate_pkcs8impl_22.rs");
+include!("depcratepkcs8.rs");
+include!("depcrate_pkcs8use_9.rs");
+include!("depcrate_pkcs8algorithm_oid.rs");
+include!("depcrate_serdeimpl_33.rs");
+include!("depcrate_pkcs8publickeybytes.rs");
+include!("depcrate_serdetests.rs");
+include!("depcrate_serdeuse_29.rs");
+include!("depcrate_pkcs8algorithm_id.rs");
+include!("depcrate_heximpl_4.rs");
+include!("depcrate_serdeuse_31.rs");
+include!("depcrateserde.rs");
+include!("depcrateimpl_53.rs");
+include!("depcrate_pkcs8use_12.rs");
+include!("depcrate_heximpl_5.rs");
+include!("depcrateimpl_54.rs");
+include!("depcrateimpl_52.rs");
+include!("depcrateimpl_55.rs");
+include!("depcrate_serdeuse_30.rs");
+include!("depcrate_pkcs8tests.rs");
+include!("depcrate_pkcs8impl_25.rs");
+include!("depcrateimpl_47.rs");
+include!("depcrate_heximpl_6.rs");
+include!("depcrate_pkcs8use_11.rs");
+include!("depcrate_pkcs8impl_16.rs");
+include!("depcrate_serdeimpl_32.rs");
+include!("depcrate_serdeimpl_35.rs");
+include!("depcrate_pkcs8impl_19.rs");
+include!("depcrate_pkcs8use_10.rs");
+include!("depcrate_pkcs8impl_18.rs");
+include!("depcratehex.rs");
+include!("modcrate_hex.rs");
+include!("modcrate_serde.rs");
+include!("modcrate_pkcs8.rs");
+include!("modcrate.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate_hex!();
+    Modcrate_serde!();
+    Modcrate_pkcs8!();
+    Modcrate!();
+}

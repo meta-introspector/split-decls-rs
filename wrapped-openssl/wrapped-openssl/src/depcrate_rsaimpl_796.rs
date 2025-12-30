@@ -1,0 +1,9 @@
+// Generated macro for impl_796 (impl)
+macro_rules! Depcrate_rsaimpl_796 {
+() => {
+// Module: crate::rsa
+// Provides: {"impl_796"}
+// Dependencies: {}
+impl Rsa < Public > { # [doc = " Creates a new RSA key with only public components."] # [doc = ""] # [doc = " `n` is the modulus common to both public and private key."] # [doc = " `e` is the public exponent."] # [doc = ""] # [doc = " This corresponds to [`RSA_new`] and uses [`RSA_set0_key`]."] # [doc = ""] # [doc = " [`RSA_new`]: https://docs.openssl.org/master/man3/RSA_new/"] # [doc = " [`RSA_set0_key`]: https://docs.openssl.org/master/man3/RSA_set0_key/"] pub fn from_public_components (n : BigNum , e : BigNum) -> Result < Rsa < Public > , ErrorStack > { unsafe { let rsa = cvt_p (ffi :: RSA_new ()) ? ; RSA_set0_key (rsa , n . as_ptr () , e . as_ptr () , ptr :: null_mut ()) ; mem :: forget ((n , e)) ; Ok (Rsa :: from_ptr (rsa)) } } from_pem ! { # [doc = " Decodes a PEM-encoded SubjectPublicKeyInfo structure containing an RSA key."] # [doc = ""] # [doc = " The input should have a header of `-----BEGIN PUBLIC KEY-----`."] # [corresponds (PEM_read_bio_RSA_PUBKEY)] public_key_from_pem , Rsa < Public >, ffi :: PEM_read_bio_RSA_PUBKEY } from_pem ! { # [doc = " Decodes a PEM-encoded PKCS#1 RSAPublicKey structure."] # [doc = ""] # [doc = " The input should have a header of `-----BEGIN RSA PUBLIC KEY-----`."] # [corresponds (PEM_read_bio_RSAPublicKey)] public_key_from_pem_pkcs1 , Rsa < Public >, ffi :: PEM_read_bio_RSAPublicKey } from_der ! { # [doc = " Decodes a DER-encoded SubjectPublicKeyInfo structure containing an RSA key."] # [corresponds (d2i_RSA_PUBKEY)] public_key_from_der , Rsa < Public >, ffi :: d2i_RSA_PUBKEY } from_der ! { # [doc = " Decodes a DER-encoded PKCS#1 RSAPublicKey structure."] # [corresponds (d2i_RSAPublicKey)] public_key_from_der_pkcs1 , Rsa < Public >, ffi :: d2i_RSAPublicKey } }
+};
+}

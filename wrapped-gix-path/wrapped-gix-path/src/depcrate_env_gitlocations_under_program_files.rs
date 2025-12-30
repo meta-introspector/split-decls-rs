@@ -1,0 +1,9 @@
+// Generated macro for locations_under_program_files (function)
+macro_rules! Depcrate_env_gitlocations_under_program_files {
+() => {
+// Module: crate::env::git
+// Provides: {"locations_under_program_files"}
+// Dependencies: {}
+# [cfg (windows)] fn locations_under_program_files < F > (var_os_func : F) -> Vec < PathBuf > where F : Fn (& str) -> Option < std :: ffi :: OsString > , { let varname_64bit = "ProgramW6432" ; let varname_x86 = "ProgramFiles(x86)" ; let varname_current = "ProgramFiles" ; let varname_user_appdata_local = "LocalAppData" ; let suffixes_64 = & [r"Git\clangarm64\bin" , r"Git\mingw64\bin"] [..] ; let suffixes_32 = & [r"Git\mingw32\bin"] [..] ; # [cfg (target_pointer_width = "64")] let suffixes_current = suffixes_64 ; # [cfg (target_pointer_width = "32")] let suffixes_current = suffixes_32 ; let suffixes_user = & [r"Programs\Git\clangarm64\bin" , r"Programs\Git\mingw64\bin" , r"Programs\Git\mingw32\bin" ,] [..] ; let rules = [(varname_user_appdata_local , suffixes_user) , (varname_64bit , suffixes_64) , (varname_x86 , suffixes_32) , (varname_current , suffixes_current) ,] ; let mut locations = vec ! [] ; for (varname , suffixes) in rules { let Some (program_files_dir) = var_os_func (varname) . map (PathBuf :: from) . filter (| p | p . is_absolute ()) else { continue ; } ; for suffix in suffixes { let location = program_files_dir . join (suffix) ; if ! locations . contains (& location) { locations . push (location) ; } } } locations }
+};
+}

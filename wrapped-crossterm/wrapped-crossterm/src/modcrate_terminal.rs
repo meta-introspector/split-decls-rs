@@ -1,0 +1,47 @@
+// Generated module macro for crate::terminal
+macro_rules! Modcrate_terminal {
+() => {
+        Depcrate_terminaluse_159!();
+        Depcrate_terminaluse_160!();
+        Depcrate_terminaluse_161!();
+        Depcrate_terminaluse_162!();
+        Depcrate_terminaluse_163!();
+        Depcrate_terminaluse_164!();
+        Depcrate_terminalsys!();
+        Depcrate_terminaluse_166!();
+        Depcrate_terminalis_raw_mode_enabled!();
+        Depcrate_terminalenable_raw_mode!();
+        Depcrate_terminaldisable_raw_mode!();
+        Depcrate_terminalsize!();
+        Depcrate_terminalWindowSize!();
+        Depcrate_terminalwindow_size!();
+        Depcrate_terminalDisableLineWrap!();
+        Depcrate_terminalimpl_174!();
+        Depcrate_terminalEnableLineWrap!();
+        Depcrate_terminalimpl_176!();
+        Depcrate_terminalEnterAlternateScreen!();
+        Depcrate_terminalimpl_178!();
+        Depcrate_terminalLeaveAlternateScreen!();
+        Depcrate_terminalimpl_180!();
+        Depcrate_terminalClearType!();
+        Depcrate_terminalScrollUp!();
+        Depcrate_terminalimpl_183!();
+        Depcrate_terminalScrollDown!();
+        Depcrate_terminalimpl_185!();
+        Depcrate_terminalClear!();
+        Depcrate_terminalimpl_187!();
+        Depcrate_terminalSetSize!();
+        Depcrate_terminalimpl_189!();
+        Depcrate_terminalSetTitle!();
+        Depcrate_terminalimpl_191!();
+        Depcrate_terminalBeginSynchronizedUpdate!();
+        Depcrate_terminalimpl_193!();
+        Depcrate_terminalEndSynchronizedUpdate!();
+        Depcrate_terminalimpl_195!();
+        Depcrate_terminalmacro_196!();
+        Depcrate_terminalmacro_197!();
+        Depcrate_terminalmacro_198!();
+        Depcrate_terminalmacro_199!();
+        Depcrate_terminaltests!();
+    };
+}

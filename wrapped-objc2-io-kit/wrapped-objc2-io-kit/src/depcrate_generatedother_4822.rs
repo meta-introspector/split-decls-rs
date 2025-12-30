@@ -1,0 +1,9 @@
+// Generated macro for other_4822 (other)
+macro_rules! Depcrate_generatedother_4822 {
+() => {
+// Module: crate::generated
+// Provides: {"other_4822"}
+// Dependencies: {}
+extern "C-unwind" { # [doc = " Map hardware or shared memory into the caller's task."] # [doc = ""] # [doc = " This is a generic method to create a mapping in the callers task. The family will interpret the type parameter to determine what sort of mapping is being requested. Cache modes and placed mappings may be requested by the caller."] # [doc = ""] # [doc = " Parameter `connect`: The connect handle created by IOServiceOpen."] # [doc = ""] # [doc = " Parameter `memoryType`: What is being requested to be mapped, not interpreted by IOKit and family defined. The family may support physical hardware or shared memory mappings."] # [doc = ""] # [doc = " Parameter `intoTask`: The task port for the task in which to create the mapping. This may be different to the task which the opened the connection."] # [doc = ""] # [doc = " Parameter `atAddress`: An in/out parameter - if the kIOMapAnywhere option is not set, the caller should pass the address where it requests the mapping be created, otherwise nothing need to set on input. The address of the mapping created is passed back on success."] # [doc = ""] # [doc = " Parameter `ofSize`: The size of the mapping created is passed back on success."] # [doc = ""] # [doc = " Returns: A kern_return_t error code."] # [doc = ""] # [doc = " # Safety"] # [doc = ""] # [doc = " - `at_address` must be a valid pointer."] # [doc = " - `of_size` must be a valid pointer."] # [cfg (feature = "libc")] pub fn IOConnectMapMemory64 (connect : io_connect_t , memory_type : u32 , into_task : task_port_t , at_address : * mut libc :: mach_vm_address_t , of_size : * mut libc :: mach_vm_size_t , options : IOOptionBits ,) -> libc :: kern_return_t ; }
+};
+}

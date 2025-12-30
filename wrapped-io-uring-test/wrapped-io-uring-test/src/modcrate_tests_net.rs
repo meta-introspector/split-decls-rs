@@ -1,0 +1,47 @@
+// Generated module macro for crate::tests::net
+macro_rules! Modcrate_tests_net {
+() => {
+        Depcrate_tests_netuse_82!();
+        Depcrate_tests_netuse_83!();
+        Depcrate_tests_netuse_84!();
+        Depcrate_tests_netuse_85!();
+        Depcrate_tests_netuse_86!();
+        Depcrate_tests_netuse_87!();
+        Depcrate_tests_netuse_88!();
+        Depcrate_tests_netuse_89!();
+        Depcrate_tests_netuse_90!();
+        Depcrate_tests_netuse_91!();
+        Depcrate_tests_netuse_92!();
+        Depcrate_tests_netuse_93!();
+        Depcrate_tests_netuse_94!();
+        Depcrate_tests_netTCP_LISTENER!();
+        Depcrate_tests_nettcp_pair!();
+        Depcrate_tests_nettest_tcp_write_read!();
+        Depcrate_tests_nettest_tcp_writev_readv!();
+        Depcrate_tests_nettest_tcp_send_recv!();
+        Depcrate_tests_nettest_tcp_send_bundle!();
+        Depcrate_tests_nettest_tcp_zero_copy_send_recv!();
+        Depcrate_tests_nettest_tcp_zero_copy_send_fixed!();
+        Depcrate_tests_nettest_tcp_sendmsg_recvmsg!();
+        Depcrate_tests_nettest_tcp_zero_copy_sendmsg_recvmsg!();
+        Depcrate_tests_nettest_tcp_accept!();
+        Depcrate_tests_nettest_tcp_accept_file_index!();
+        Depcrate_tests_nettest_tcp_accept_multi!();
+        Depcrate_tests_nettest_tcp_accept_multi_file_index!();
+        Depcrate_tests_nettest_tcp_connect!();
+        Depcrate_tests_nettest_tcp_buffer_select!();
+        Depcrate_tests_nettest_tcp_buffer_select_recvmsg!();
+        Depcrate_tests_nettest_tcp_buffer_select_readv!();
+        Depcrate_tests_nettest_tcp_recv_multi!();
+        Depcrate_tests_nettest_tcp_recv_bundle!();
+        Depcrate_tests_nettest_tcp_recv_multi_bundle!();
+        Depcrate_tests_nettest_tcp_shutdown!();
+        Depcrate_tests_nettest_socket!();
+        Depcrate_tests_nettest_socket_bind_listen!();
+        Depcrate_tests_nettest_udp_recvmsg_multishot!();
+        Depcrate_tests_nettest_udp_recvmsg_multishot_trunc!();
+        Depcrate_tests_nettest_udp_send_with_dest!();
+        Depcrate_tests_nettest_udp_sendzc_with_dest!();
+        Depcrate_tests_nettest_tcp_recvzc!();
+    };
+}

@@ -1,0 +1,9 @@
+// Generated macro for error (module)
+macro_rules! Depcrate_driverserror {
+() => {
+// Module: crate::drivers
+// Provides: {"error"}
+// Dependencies: {}
+# [doc = " A common error module for drivers."] # [doc = " [DriverError](error::DriverError) values will be"] # [doc = " passed on to higher layers."] pub mod error { # [cfg (any (all (target_arch = "riscv64" , feature = "gem-net" , not (feature = "pci")) , feature = "rtl8139" , feature = "virtio-net" , feature = "fuse" , feature = "vsock" , feature = "console" ,))] use thiserror :: Error ; # [cfg (all (target_arch = "riscv64" , feature = "gem-net" , not (feature = "pci")))] use crate :: drivers :: net :: gem :: GEMError ; # [cfg (feature = "rtl8139")] use crate :: drivers :: net :: rtl8139 :: RTL8139Error ; # [cfg (any (all (not (all (target_arch = "riscv64" , feature = "gem-net" , not (feature = "pci"))) , not (feature = "rtl8139") , feature = "virtio-net" ,) , feature = "fuse" , feature = "vsock" , feature = "console" ,))] use crate :: drivers :: virtio :: error :: VirtioError ; # [cfg (any (all (target_arch = "riscv64" , feature = "gem-net" , not (feature = "pci")) , feature = "rtl8139" , feature = "virtio-net" , feature = "fuse" , feature = "vsock" , feature = "console" ,))] # [derive (Error , Debug)] pub enum DriverError { # [cfg (any (all (not (all (target_arch = "riscv64" , feature = "gem-net" , not (feature = "pci"))) , not (feature = "rtl8139") , feature = "virtio-net" ,) , feature = "fuse" , feature = "vsock" , feature = "console" ,))] # [error ("Virtio driver failed: {0:?}")] InitVirtioDevFail (# [from] VirtioError) , # [cfg (feature = "rtl8139")] # [error ("RTL8139 driver failed: {0:?}")] InitRTL8139DevFail (# [from] RTL8139Error) , # [cfg (all (target_arch = "riscv64" , feature = "gem-net" , not (feature = "pci")))] # [error ("GEM driver failed: {0:?}")] InitGEMDevFail (# [from] GEMError) , } }
+};
+}

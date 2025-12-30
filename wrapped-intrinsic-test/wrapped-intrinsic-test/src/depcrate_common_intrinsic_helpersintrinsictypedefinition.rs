@@ -1,0 +1,9 @@
+// Generated macro for IntrinsicTypeDefinition (trait)
+macro_rules! Depcrate_common_intrinsic_helpersIntrinsicTypeDefinition {
+() => {
+// Module: crate::common::intrinsic_helpers
+// Provides: {"IntrinsicTypeDefinition"}
+// Dependencies: {}
+pub trait IntrinsicTypeDefinition : Deref < Target = IntrinsicType > { # [doc = " Determines the load function for this type."] # [doc = " can be implemented in an `impl` block"] fn get_load_function (& self , _language : Language) -> String ; # [doc = " can be implemented in an `impl` block"] fn get_lane_function (& self) -> String ; # [doc = " Gets a string containing the typename for this type in C format."] # [doc = " can be directly defined in `impl` blocks"] fn c_type (& self) -> String ; # [doc = " can be directly defined in `impl` blocks"] fn c_single_vector_type (& self) -> String ; # [doc = " Generates a std::cout for the intrinsics results that will match the"] # [doc = " rust debug output format for the return type. The generated line assumes"] # [doc = " there is an int i in scope which is the current pass number."] fn print_result_c (& self , indentation : Indentation , additional : & str) -> String ; # [doc = " Generates a std::cout for the intrinsics results that will match the"] # [doc = " rust debug output format for the return type. The generated line assumes"] # [doc = " there is an int i in scope which is the current pass number."] fn print_result_rust (& self) -> String { String :: from ("format_args!(\"{__return_value:.150?}\")") } # [doc = " To enable architecture-specific logic"] fn rust_scalar_type (& self) -> String { format ! ("{prefix}{bits}" , prefix = self . kind () . rust_prefix () , bits = self . inner_size ()) } fn generate_final_type_cast (& self) -> String { let type_data = self . c_promotion () ; if type_data . len () > 2 { format ! ("({type_data})") } else { String :: new () } } }
+};
+}

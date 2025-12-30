@@ -1,0 +1,45 @@
+// Generated module macro for crate::render
+macro_rules! Modcrate_render {
+() => {
+        Depcrate_renderuse_367!();
+        Depcrate_renderuse_368!();
+        Depcrate_renderuse_369!();
+        Depcrate_renderuse_370!();
+        Depcrate_renderuse_371!();
+        Depcrate_renderuse_372!();
+        Depcrate_renderuse_373!();
+        Depcrate_renderuse_374!();
+        Depcrate_renderuse_375!();
+        Depcrate_renderuse_376!();
+        Depcrate_renderuse_377!();
+        Depcrate_renderuse_378!();
+        Depcrate_renderuse_379!();
+        Depcrate_renderuse_380!();
+        Depcrate_renderuse_381!();
+        Depcrate_renderuse_382!();
+        Depcrate_renderuse_383!();
+        Depcrate_renderuse_384!();
+        Depcrate_renderHELPER_MISSING!();
+        Depcrate_renderBLOCK_HELPER_MISSING!();
+        Depcrate_renderRenderContext!();
+        Depcrate_renderimpl_388!();
+        Depcrate_renderimpl_389!();
+        Depcrate_renderHelper!();
+        Depcrate_renderimpl_391!();
+        Depcrate_renderDecorator!();
+        Depcrate_renderimpl_393!();
+        Depcrate_renderRenderable!();
+        Depcrate_renderEvaluable!();
+        Depcrate_rendercall_helper_for_value!();
+        Depcrate_renderimpl_397!();
+        Depcrate_renderimpl_398!();
+        Depcrate_renderimpl_399!();
+        Depcrate_renderhelper_exists!();
+        Depcrate_renderrender_helper!();
+        Depcrate_renderdo_escape!();
+        Depcrate_renderindent_aware_write!();
+        Depcrate_renderimpl_404!();
+        Depcrate_renderimpl_405!();
+        Depcrate_rendertest!();
+    };
+}

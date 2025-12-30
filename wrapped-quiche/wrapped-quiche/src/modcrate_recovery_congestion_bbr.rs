@@ -1,0 +1,39 @@
+// Generated module macro for crate::recovery::congestion::bbr
+macro_rules! Modcrate_recovery_congestion_bbr {
+() => {
+        Depcrate_recovery_congestion_bbruse_1109!();
+        Depcrate_recovery_congestion_bbruse_1110!();
+        Depcrate_recovery_congestion_bbruse_1111!();
+        Depcrate_recovery_congestion_bbruse_1112!();
+        Depcrate_recovery_congestion_bbrBBR!();
+        Depcrate_recovery_congestion_bbrBTLBW_FILTER_LEN!();
+        Depcrate_recovery_congestion_bbrPROBE_RTT_INTERVAL!();
+        Depcrate_recovery_congestion_bbrRTPROP_FILTER_LEN!();
+        Depcrate_recovery_congestion_bbrBBR_HIGH_GAIN!();
+        Depcrate_recovery_congestion_bbrBBR_MIN_PIPE_CWND_PKTS!();
+        Depcrate_recovery_congestion_bbrBBR_GAIN_CYCLE_LEN!();
+        Depcrate_recovery_congestion_bbrPROBE_RTT_DURATION!();
+        Depcrate_recovery_congestion_bbrPACING_GAIN_CYCLE!();
+        Depcrate_recovery_congestion_bbrBTLBW_GROWTH_TARGET!();
+        Depcrate_recovery_congestion_bbrBBRStateMachine!();
+        Depcrate_recovery_congestion_bbrimpl_1124!();
+        Depcrate_recovery_congestion_bbrState!();
+        Depcrate_recovery_congestion_bbrimpl_1126!();
+        Depcrate_recovery_congestion_bbrbbr_enter_recovery!();
+        Depcrate_recovery_congestion_bbrbbr_exit_recovery!();
+        Depcrate_recovery_congestion_bbron_init!();
+        Depcrate_recovery_congestion_bbron_packet_sent!();
+        Depcrate_recovery_congestion_bbron_packets_acked!();
+        Depcrate_recovery_congestion_bbrcongestion_event!();
+        Depcrate_recovery_congestion_bbrcheckpoint!();
+        Depcrate_recovery_congestion_bbrrollback!();
+        Depcrate_recovery_congestion_bbrhas_custom_pacing!();
+        Depcrate_recovery_congestion_bbrstate_str!();
+        Depcrate_recovery_congestion_bbrdebug_fmt!();
+        Depcrate_recovery_congestion_bbrtests!();
+        Depcrate_recovery_congestion_bbrinit!();
+        Depcrate_recovery_congestion_bbrpacing!();
+        Depcrate_recovery_congestion_bbrper_ack!();
+        Depcrate_recovery_congestion_bbrper_transmit!();
+    };
+}

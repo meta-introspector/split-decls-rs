@@ -4,6 +4,6 @@ macro_rules! Depcrate_updateuse_585 {
 // Module: crate::update
 // Provides: {"use_585"}
 // Dependencies: {}
-use std :: marker :: PhantomData ;
+use crate :: sync :: Arc ;
 };
 }

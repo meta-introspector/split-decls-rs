@@ -1,0 +1,9 @@
+// Generated macro for be_u8 (function)
+macro_rules! Depcrate_binarybe_u8 {
+() => {
+// Module: crate::binary
+// Provides: {"be_u8"}
+// Dependencies: {}
+# [doc = " Recognizes an unsigned 1 byte integer."] # [doc = ""] # [doc = " *Complete version*: Returns an error if there is not enough input data."] # [doc = ""] # [doc = " *[Partial version][crate::_topic::partial]*: Will return `Err(winnow::error::ErrMode::Incomplete(_))` if there is not enough data."] # [doc = ""] # [doc = " # Example"] # [doc = ""] # [doc = " ```rust"] # [doc = " # use winnow::{error::ErrMode, error::InputError, error::Needed};"] # [doc = " # use winnow::prelude::*;"] # [doc = " # use winnow::error::Needed::Size;"] # [doc = " use winnow::binary::be_u8;"] # [doc = ""] # [doc = " fn parser(s: &mut &[u8]) -> ModalResult<u8> {"] # [doc = "     be_u8.parse_next(s)"] # [doc = " }"] # [doc = ""] # [doc = " assert_eq!(parser.parse_peek(&b\"\\x00\\x03abcefg\"[..]), Ok((&b\"\\x03abcefg\"[..], 0x00)));"] # [doc = " assert!(parser.parse_peek(&b\"\"[..]).is_err());"] # [doc = " ```"] # [doc = ""] # [doc = " ```rust"] # [doc = " # use winnow::{error::ErrMode, error::InputError, error::Needed};"] # [doc = " # use winnow::prelude::*;"] # [doc = " # use winnow::Partial;"] # [doc = " use winnow::binary::be_u8;"] # [doc = ""] # [doc = " fn parser(s: &mut Partial<&[u8]>) -> ModalResult<u8> {"] # [doc = "     be_u8.parse_next(s)"] # [doc = " }"] # [doc = ""] # [doc = " assert_eq!(parser.parse_peek(Partial::new(&b\"\\x00\\x01abcd\"[..])), Ok((Partial::new(&b\"\\x01abcd\"[..]), 0x00)));"] # [doc = " assert_eq!(parser.parse_peek(Partial::new(&b\"\"[..])), Err(ErrMode::Incomplete(Needed::new(1))));"] # [doc = " ```"] # [inline (always)] pub fn be_u8 < Input , Error > (input : & mut Input) -> Result < u8 , Error > where Input : StreamIsPartial + Stream < Token = u8 > , Error : ParserError < Input > , { u8 (input) }
+};
+}

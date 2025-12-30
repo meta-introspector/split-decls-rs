@@ -1,0 +1,46 @@
+// Generated module macro for crate::signing_key
+macro_rules! Modcrate_signing_key {
+() => {
+        Depcrate_signing_keyuse_105!();
+        Depcrate_signing_keyuse_106!();
+        Depcrate_signing_keyuse_107!();
+        Depcrate_signing_keyuse_108!();
+        Depcrate_signing_keyuse_109!();
+        Depcrate_signing_keyuse_110!();
+        Depcrate_signing_keyuse_111!();
+        Depcrate_signing_keyuse_112!();
+        Depcrate_signing_keyuse_113!();
+        Depcrate_signing_keyuse_114!();
+        Depcrate_signing_keyuse_115!();
+        Depcrate_signing_keySkSeed!();
+        Depcrate_signing_keyimpl_117!();
+        Depcrate_signing_keyimpl_118!();
+        Depcrate_signing_keyimpl_119!();
+        Depcrate_signing_keySkPrf!();
+        Depcrate_signing_keyimpl_121!();
+        Depcrate_signing_keyimpl_122!();
+        Depcrate_signing_keyimpl_123!();
+        Depcrate_signing_keySigningKey!();
+        Depcrate_signing_keyimpl_125!();
+        Depcrate_signing_keyimpl_126!();
+        Depcrate_signing_keySigningKeyLen!();
+        Depcrate_signing_keyimpl_128!();
+        Depcrate_signing_keyimpl_129!();
+        Depcrate_signing_keyimpl_130!();
+        Depcrate_signing_keyimpl_131!();
+        Depcrate_signing_keyimpl_132!();
+        Depcrate_signing_keyimpl_133!();
+        Depcrate_signing_keyimpl_134!();
+        Depcrate_signing_keyimpl_135!();
+        Depcrate_signing_keyimpl_136!();
+        Depcrate_signing_keyimpl_137!();
+        Depcrate_signing_keyimpl_138!();
+        Depcrate_signing_keyimpl_139!();
+        Depcrate_signing_keyimpl_140!();
+        Depcrate_signing_keyimpl_141!();
+        Depcrate_signing_keyimpl_142!();
+        Depcrate_signing_keyimpl_143!();
+        Depcrate_signing_keyimpl_144!();
+        Depcrate_signing_keytests!();
+    };
+}

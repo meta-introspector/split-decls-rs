@@ -1,0 +1,9 @@
+// Generated macro for DN_CHANGEABLE_FLAGS (const)
+macro_rules! Depcrate_shared_cfgDN_CHANGEABLE_FLAGS {
+() => {
+// Module: crate::shared::cfg
+// Provides: {"DN_CHANGEABLE_FLAGS"}
+// Dependencies: {}
+pub const DN_CHANGEABLE_FLAGS : DWORD = DN_NOT_FIRST_TIME + DN_HARDWARE_ENUM + DN_HAS_MARK + DN_DISABLEABLE + DN_REMOVABLE + DN_MF_CHILD + DN_MF_PARENT + DN_NOT_FIRST_TIMEE + DN_STOP_FREE_RES + DN_REBAL_CANDIDATE + DN_NT_ENUMERATOR + DN_NT_DRIVER + DN_SILENT_INSTALL + DN_NO_SHOW_IN_DM ;
+};
+}

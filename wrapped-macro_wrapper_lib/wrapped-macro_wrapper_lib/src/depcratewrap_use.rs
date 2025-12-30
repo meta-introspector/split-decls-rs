@@ -1,0 +1,9 @@
+// Generated macro for wrap_use (function)
+macro_rules! Depcratewrap_use {
+() => {
+// Module: crate
+// Provides: {"wrap_use"}
+// Dependencies: {}
+# [proc_macro_attribute] pub fn wrap_use (_attr : ProcMacroTokenStream , item_ts : ProcMacroTokenStream) -> ProcMacroTokenStream { let item_use : ItemUse = parse_macro_input ! (item_ts as ItemUse) ; let mut output_tokens = TokenStream :: new () ; let hook_macro_def = generate_item_hook_macro ("use" , & Item :: Use (item_use . clone ()) , None) ; output_tokens . extend (hook_macro_def) ; output_tokens . extend (item_use . to_token_stream ()) ; output_tokens . into () }
+};
+}

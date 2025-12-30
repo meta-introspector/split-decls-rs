@@ -1,0 +1,9 @@
+// Generated macro for impl_303 (impl)
+macro_rules! Depcrate_valueimpl_303 {
+() => {
+// Module: crate::value
+// Provides: {"impl_303"}
+// Dependencies: {}
+# [doc = " Deserializer implementation for RON [`Value`]."] # [doc = " This does not support enums (because [`Value`] does not store them)."] impl < 'de > Deserializer < 'de > for Value { type Error = Error ; forward_to_deserialize_any ! { bool i8 i16 i32 i64 u8 u16 u32 u64 f32 f64 char str string bytes byte_buf option unit unit_struct newtype_struct seq tuple tuple_struct map struct enum identifier ignored_any } # [cfg (feature = "integer128")] forward_to_deserialize_any ! { i128 u128 } fn deserialize_any < V > (self , visitor : V) -> Result < V :: Value > where V : Visitor < 'de > , { match self { Value :: Bool (b) => visitor . visit_bool (b) , Value :: Char (c) => visitor . visit_char (c) , Value :: Map (m) => { let old_len = m . len () ; let mut items : Vec < (Value , Value) > = m . into_iter () . collect () ; items . reverse () ; let value = visitor . visit_map (MapAccessor { items : & mut items , value : None , }) ? ; if items . is_empty () { Ok (value) } else { Err (Error :: ExpectedDifferentLength { expected : format ! ("a map of length {}" , old_len - items . len ()) , found : old_len , }) } } Value :: Number (number) => number . visit (visitor) , Value :: Option (Some (o)) => visitor . visit_some (* o) , Value :: Option (None) => visitor . visit_none () , Value :: String (s) => visitor . visit_string (s) , Value :: Bytes (b) => visitor . visit_byte_buf (b) , Value :: Seq (mut seq) => { let old_len = seq . len () ; seq . reverse () ; let value = visitor . visit_seq (SeqAccessor { seq : & mut seq }) ? ; if seq . is_empty () { Ok (value) } else { Err (Error :: ExpectedDifferentLength { expected : format ! ("a sequence of length {}" , old_len - seq . len ()) , found : old_len , }) } } Value :: Unit => visitor . visit_unit () , } } }
+};
+}

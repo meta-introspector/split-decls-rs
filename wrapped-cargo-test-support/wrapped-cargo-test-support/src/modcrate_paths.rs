@@ -1,0 +1,39 @@
+// Generated module macro for crate::paths
+macro_rules! Modcrate_paths {
+() => {
+        Depcrate_pathsuse_119!();
+        Depcrate_pathsuse_120!();
+        Depcrate_pathsuse_121!();
+        Depcrate_pathsuse_122!();
+        Depcrate_pathsuse_123!();
+        Depcrate_pathsuse_124!();
+        Depcrate_pathsuse_125!();
+        Depcrate_pathsuse_126!();
+        Depcrate_pathsuse_127!();
+        Depcrate_pathsuse_128!();
+        Depcrate_pathsuse_129!();
+        Depcrate_pathsuse_130!();
+        Depcrate_pathsuse_131!();
+        Depcrate_pathsCARGO_INTEGRATION_TEST_DIR!();
+        Depcrate_pathsGLOBAL_ROOT!();
+        Depcrate_pathsset_global_root!();
+        Depcrate_pathsglobal_root!();
+        Depcrate_pathsmacro_136!();
+        Depcrate_pathsTestIdGuard!();
+        Depcrate_pathsinit_root!();
+        Depcrate_pathsimpl_139!();
+        Depcrate_pathsroot!();
+        Depcrate_pathshome!();
+        Depcrate_pathscargo_home!();
+        Depcrate_pathsCargoPathExt!();
+        Depcrate_pathsimpl_144!();
+        Depcrate_pathsimpl_145!();
+        Depcrate_pathsdo_op!();
+        Depcrate_pathsbuild_dir_ignored_path_patterns!();
+        Depcrate_pathsget_lib_filename!();
+        Depcrate_pathsget_lib_prefix!();
+        Depcrate_pathsget_lib_extension!();
+        Depcrate_pathssysroot!();
+        Depcrate_pathswindows_reserved_names_are_allowed!();
+    };
+}

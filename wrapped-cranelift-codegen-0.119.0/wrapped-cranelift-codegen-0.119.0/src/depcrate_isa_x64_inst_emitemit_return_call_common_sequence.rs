@@ -1,0 +1,10 @@
+// Generated macro for emit_return_call_common_sequence (function)
+macro_rules! Depcrate_isa_x64_inst_emitemit_return_call_common_sequence {
+() => {
+// Module: crate::isa::x64::inst::emit
+// Provides: {"emit_return_call_common_sequence"}
+// Dependencies: {}
+# [doc = " Emit the common sequence used for both direct and indirect tail calls:"] # [doc = ""] # [doc = " * Copy the new frame's stack arguments over the top of our current frame."] # [doc = ""] # [doc = " * Restore the old frame pointer."] # [doc = ""] # [doc = " * Initialize the tail callee's stack pointer (simultaneously deallocating"] # [doc = "   the temporary stack space we allocated when creating the new frame's stack"] # [doc = "   arguments)."] # [doc = ""] # [doc = " * Move the return address into its stack slot."] fn emit_return_call_common_sequence < T > (sink : & mut MachBuffer < Inst > , info : & EmitInfo , state : & mut EmitState , call_info : & ReturnCallInfo < T > ,) { assert ! (info . flags . preserve_frame_pointers () , "frame pointers aren't fundamentally required for tail calls, \
+                 but the current implementation relies on them being present") ; let tmp = call_info . tmp . to_writable_reg () ; for inst in X64ABIMachineSpec :: gen_clobber_restore (CallConv :: Tail , & info . flags , state . frame_layout ()) { inst . emit (sink , info , state) ; } for inst in X64ABIMachineSpec :: gen_epilogue_frame_restore (CallConv :: Tail , & info . flags , & info . isa_flags , state . frame_layout () ,) { inst . emit (sink , info , state) ; } let incoming_args_diff = state . frame_layout () . tail_args_size - call_info . new_stack_arg_size ; if incoming_args_diff > 0 { Inst :: mov64_m_r (Amode :: imm_reg (0 , regs :: rsp ()) , tmp) . emit (sink , info , state) ; Inst :: mov_r_m (OperandSize :: Size64 , tmp . to_reg () , Amode :: imm_reg (i32 :: try_from (incoming_args_diff) . unwrap () , regs :: rsp ()) ,) . emit (sink , info , state) ; Inst :: alu_rmi_r (OperandSize :: Size64 , AluRmiROpcode :: Add , RegMemImm :: imm (incoming_args_diff) , Writable :: from_reg (regs :: rsp ()) ,) . emit (sink , info , state) ; } }
+};
+}

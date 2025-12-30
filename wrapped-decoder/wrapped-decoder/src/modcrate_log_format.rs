@@ -1,0 +1,48 @@
+// Generated module macro for crate::log::format
+macro_rules! Modcrate_log_format {
+() => {
+        Depcrate_log_formatuse_52!();
+        Depcrate_log_formatuse_53!();
+        Depcrate_log_formatuse_54!();
+        Depcrate_log_formatuse_55!();
+        Depcrate_log_formatuse_56!();
+        Depcrate_log_formatuse_57!();
+        Depcrate_log_formatuse_58!();
+        Depcrate_log_formatparser!();
+        Depcrate_log_formatLogMetadata!();
+        Depcrate_log_formatimpl_79!();
+        Depcrate_log_formatLogColor!();
+        Depcrate_log_formatAlignment!();
+        Depcrate_log_formatPadding!();
+        Depcrate_log_formatLogSegment!();
+        Depcrate_log_formatLogFormat!();
+        Depcrate_log_formatimpl_85!();
+        Depcrate_log_formatFormatter!();
+        Depcrate_log_formatimpl_87!();
+        Depcrate_log_formatHostFormatter!();
+        Depcrate_log_formatimpl_89!();
+        Depcrate_log_formatInternalFormatter!();
+        Depcrate_log_formatSource!();
+        Depcrate_log_formatRecord!();
+        Depcrate_log_formatFormatterFormat!();
+        Depcrate_log_formatimpl_94!();
+        Depcrate_log_formatimpl_95!();
+        Depcrate_log_formatStyle!();
+        Depcrate_log_formatDefaultStyle!();
+        Depcrate_log_formatimpl_98!();
+        Depcrate_log_formatOneLineStyle!();
+        Depcrate_log_formatimpl_100!();
+        Depcrate_log_formatFormatterConfig!();
+        Depcrate_log_formatimpl_102!();
+        Depcrate_log_formatimpl_103!();
+        Depcrate_log_formatget_log_level_of_record!();
+        Depcrate_log_formatcolor_diff!();
+        Depcrate_log_formatcolor_for_log_level!();
+        Depcrate_log_formatapply_color!();
+        Depcrate_log_formatapply_styles!();
+        Depcrate_log_formatbuild_formatted_string!();
+        Depcrate_log_formatformat_has_timestamp!();
+        Depcrate_log_formatstring_excluding_ansi!();
+        Depcrate_log_formattests!();
+    };
+}

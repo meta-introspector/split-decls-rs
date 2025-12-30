@@ -4,6 +4,6 @@ macro_rules! Depcrateuse_757 {
 // Module: crate
 // Provides: {"use_757"}
 // Dependencies: {}
-pub use self :: durability :: Durability ;
+pub use self :: input :: setter :: Setter ;
 };
 }

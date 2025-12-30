@@ -1,0 +1,57 @@
+// Generated module macro for crate::isa::riscv64::inst
+macro_rules! Modcrate_isa_riscv64_inst {
+() => {
+        Depcrate_isa_riscv64_instuse_1950!();
+        Depcrate_isa_riscv64_instuse_1951!();
+        Depcrate_isa_riscv64_instuse_1952!();
+        Depcrate_isa_riscv64_instuse_1953!();
+        Depcrate_isa_riscv64_instuse_1954!();
+        Depcrate_isa_riscv64_instuse_1955!();
+        Depcrate_isa_riscv64_instuse_1956!();
+        Depcrate_isa_riscv64_instuse_1957!();
+        Depcrate_isa_riscv64_instuse_1958!();
+        Depcrate_isa_riscv64_instuse_1959!();
+        Depcrate_isa_riscv64_instuse_1960!();
+        Depcrate_isa_riscv64_instuse_1961!();
+        Depcrate_isa_riscv64_instuse_1962!();
+        Depcrate_isa_riscv64_instuse_1963!();
+        Depcrate_isa_riscv64_instuse_1964!();
+        Depcrate_isa_riscv64_instregs!();
+        Depcrate_isa_riscv64_instuse_1998!();
+        Depcrate_isa_riscv64_instimms!();
+        Depcrate_isa_riscv64_instuse_2030!();
+        Depcrate_isa_riscv64_instargs!();
+        Depcrate_isa_riscv64_instuse_2089!();
+        Depcrate_isa_riscv64_instemit!();
+        Depcrate_isa_riscv64_instuse_2108!();
+        Depcrate_isa_riscv64_instvector!();
+        Depcrate_isa_riscv64_instuse_2157!();
+        Depcrate_isa_riscv64_instencode!();
+        Depcrate_isa_riscv64_instuse_2200!();
+        Depcrate_isa_riscv64_instunwind!();
+        Depcrate_isa_riscv64_instuse_2203!();
+        Depcrate_isa_riscv64_instemit_tests!();
+        Depcrate_isa_riscv64_instuse_2213!();
+        Depcrate_isa_riscv64_instVecU8!();
+        Depcrate_isa_riscv64_instuse_2215!();
+        Depcrate_isa_riscv64_instuse_2216!();
+        Depcrate_isa_riscv64_instReturnCallInfo!();
+        Depcrate_isa_riscv64_instCondBrTarget!();
+        Depcrate_isa_riscv64_instimpl_2219!();
+        Depcrate_isa_riscv64_instimpl_2220!();
+        Depcrate_isa_riscv64_instenc_auipc!();
+        Depcrate_isa_riscv64_instenc_jalr!();
+        Depcrate_isa_riscv64_instgen_moves!();
+        Depcrate_isa_riscv64_instimpl_2224!();
+        Depcrate_isa_riscv64_instvec_mask_operands!();
+        Depcrate_isa_riscv64_instvec_mask_late_operands!();
+        Depcrate_isa_riscv64_instriscv64_get_operands!();
+        Depcrate_isa_riscv64_instimpl_2228!();
+        Depcrate_isa_riscv64_instreg_name!();
+        Depcrate_isa_riscv64_instimpl_2230!();
+        Depcrate_isa_riscv64_instLabelUse!();
+        Depcrate_isa_riscv64_instimpl_2232!();
+        Depcrate_isa_riscv64_instimpl_2233!();
+        Depcrate_isa_riscv64_insttest!();
+    };
+}

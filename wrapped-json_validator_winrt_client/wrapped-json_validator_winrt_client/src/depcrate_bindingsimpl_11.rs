@@ -1,0 +1,9 @@
+// Generated macro for impl_11 (impl)
+macro_rules! Depcrate_bindingsimpl_11 {
+() => {
+// Module: crate::bindings
+// Provides: {"impl_11"}
+// Dependencies: {}
+impl windows_core :: RuntimeType for JsonValidator { const SIGNATURE : windows_core :: imp :: ConstBuffer = windows_core :: imp :: ConstBuffer :: for_class :: < Self , IJsonValidator > () ; }
+};
+}

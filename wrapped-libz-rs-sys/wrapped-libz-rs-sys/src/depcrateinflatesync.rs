@@ -1,0 +1,9 @@
+// Generated macro for inflateSync (function)
+macro_rules! DepcrateinflateSync {
+() => {
+// Module: crate
+// Provides: {"inflateSync"}
+// Dependencies: {}
+# [doc = " Skips invalid compressed data until"] # [doc = ""] # [doc = " Skip invalid compressed data until a possible full flush point (see the description of deflate with [`Z_FULL_FLUSH`]) can be found,"] # [doc = " or until all available input is skipped. No output is provided."] # [doc = ""] # [doc = " [`inflateSync`] searches for a `00 00 FF FF` pattern in the compressed data."] # [doc = " All full flush points have this pattern, but not all occurrences of this pattern are full flush points."] # [doc = ""] # [doc = " # Returns"] # [doc = ""] # [doc = " - [`Z_OK`] if a possible full flush point has been found"] # [doc = " - [`Z_BUF_ERROR`] if no more input was provided"] # [doc = " - [`Z_DATA_ERROR`] if no flush point has been found"] # [doc = " - [`Z_STREAM_ERROR`] if the stream structure was inconsistent"] # [doc = ""] # [doc = " In the success case, the application may save the current value of `total_in` which indicates where valid compressed data was found."] # [doc = " In the error case, the application may repeatedly call [`inflateSync`], providing more input each time, until success or end of the input data."] # [doc = ""] # [doc = " # Safety"] # [doc = ""] # [doc = " The caller must guarantee that"] # [doc = ""] # [doc = " * Either"] # [doc = "     - `strm` is `NULL`"] # [doc = "     - `strm` satisfies the requirements of `&mut *strm` and was initialized with [`inflateInit_`] or similar"] # [cfg_attr (feature = "export-symbols" , export_name = prefix ! (inflateSync))] pub unsafe extern "C-unwind" fn inflateSync (strm : * mut z_stream) -> i32 { if let Some (stream) = InflateStream :: from_stream_mut (strm) { zlib_rs :: inflate :: sync (stream) as _ } else { ReturnCode :: StreamError as _ } }
+};
+}

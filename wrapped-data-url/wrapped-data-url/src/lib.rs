@@ -1,0 +1,70 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcrate_mimeuse_26.rs");
+include!("depcrateother_2.rs");
+include!("depcrate_forgiving_base64invalidbase64details.rs");
+include!("depcratemacro_3.rs");
+include!("depcrateother_1.rs");
+include!("depcrate_forgiving_base64impl_19.rs");
+include!("depcratedataurl.rs");
+include!("depcraterequire.rs");
+include!("depcrate_mimevalid_value.rs");
+include!("depcrate_mimeimpl_29.rs");
+include!("depcrate_forgiving_base64impl_16.rs");
+include!("depcratemime.rs");
+include!("depcrate_forgiving_base64impl_15.rs");
+include!("depcrate_forgiving_base64use_9.rs");
+include!("depcrateimpl_47.rs");
+include!("depcrate_mimeparse_parameters.rs");
+include!("depcrate_mimeis_http_token.rs");
+include!("depcrate_mimeonly_http_token_code_points.rs");
+include!("depcrate_forgiving_base64invalidbase64.rs");
+include!("depcratepercent_encode.rs");
+include!("depcrate_mimemimeparsingerror.rs");
+include!("depcrateforgiving_base64.rs");
+include!("depcratedecode_without_base64.rs");
+include!("depcrate_mimeparse.rs");
+include!("depcrate_forgiving_base64impl_12.rs");
+include!("depcrate_mimeimpl_31.rs");
+include!("depcrateimpl_48.rs");
+include!("depcrate_mimehttp_whitespace.rs");
+include!("depcrate_forgiving_base64decoder.rs");
+include!("depcrate_mimemime.rs");
+include!("depcrate_forgiving_base64impl_11.rs");
+include!("depcrate_mimesplit2.rs");
+include!("depcrateimpl_49.rs");
+include!("depcrate_forgiving_base64decodeerror.rs");
+include!("depcrateimpl_51.rs");
+include!("depcratedecode_with_base64.rs");
+include!("depcrate_forgiving_base64impossible.rs");
+include!("depcrate_mimeuse_27.rs");
+include!("depcratepretend_parse_data_url.rs");
+include!("depcratefind_comma_before_fragment.rs");
+include!("depcrateuse_4.rs");
+include!("depcrate_forgiving_base64use_8.rs");
+include!("depcrate_mimeimpl_39.rs");
+include!("depcrateremove_base64_suffix.rs");
+include!("depcratedataurlerror.rs");
+include!("depcrateparse_header.rs");
+include!("depcrate_mimeimpl_33.rs");
+include!("depcrate_mimebyte_map.rs");
+include!("depcrate_forgiving_base64impl_17.rs");
+include!("depcrate_forgiving_base64decode_to_vec.rs");
+include!("depcrateuse_5.rs");
+include!("depcrate_mimetest_basic_mime.rs");
+include!("depcrate_forgiving_base64impl_22.rs");
+include!("depcrate_mimeimpl_32.rs");
+include!("depcratefragmentidentifier.rs");
+include!("depcrate_mimecontains.rs");
+include!("depcrate_forgiving_base64base64_decode_table.rs");
+include!("depcrate_mimeuse_25.rs");
+include!("modcrate_forgiving_base64.rs");
+include!("modcrate_mime.rs");
+include!("modcrate.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate_forgiving_base64!();
+    Modcrate_mime!();
+    Modcrate!();
+}

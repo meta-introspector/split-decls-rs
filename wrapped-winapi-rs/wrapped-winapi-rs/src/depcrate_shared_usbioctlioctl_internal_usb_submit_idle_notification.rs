@@ -1,0 +1,9 @@
+// Generated macro for IOCTL_INTERNAL_USB_SUBMIT_IDLE_NOTIFICATION (const)
+macro_rules! Depcrate_shared_usbioctlIOCTL_INTERNAL_USB_SUBMIT_IDLE_NOTIFICATION {
+() => {
+// Module: crate::shared::usbioctl
+// Provides: {"IOCTL_INTERNAL_USB_SUBMIT_IDLE_NOTIFICATION"}
+// Dependencies: {}
+pub const IOCTL_INTERNAL_USB_SUBMIT_IDLE_NOTIFICATION : DWORD = CTL_CODE ! (FILE_DEVICE_USB , USB_IDLE_NOTIFICATION , METHOD_NEITHER , FILE_ANY_ACCESS) ;
+};
+}

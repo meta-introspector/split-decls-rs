@@ -1,0 +1,57 @@
+// Generated module macro for crate::signing
+macro_rules! Modcrate_signing {
+() => {
+        Depcrate_signinguse_74!();
+        Depcrate_signinguse_75!();
+        Depcrate_signinguse_76!();
+        Depcrate_signinguse_77!();
+        Depcrate_signinguse_78!();
+        Depcrate_signinguse_79!();
+        Depcrate_signinguse_80!();
+        Depcrate_signinguse_81!();
+        Depcrate_signinguse_82!();
+        Depcrate_signinguse_83!();
+        Depcrate_signinguse_84!();
+        Depcrate_signingSigningKey!();
+        Depcrate_signingimpl_86!();
+        Depcrate_signingimpl_87!();
+        Depcrate_signingimpl_88!();
+        Depcrate_signingimpl_89!();
+        Depcrate_signingimpl_90!();
+        Depcrate_signingimpl_91!();
+        Depcrate_signingimpl_92!();
+        Depcrate_signingimpl_93!();
+        Depcrate_signingimpl_94!();
+        Depcrate_signingimpl_95!();
+        Depcrate_signingimpl_96!();
+        Depcrate_signingimpl_97!();
+        Depcrate_signingimpl_98!();
+        Depcrate_signingimpl_99!();
+        Depcrate_signingimpl_100!();
+        Depcrate_signingimpl_101!();
+        Depcrate_signingimpl_102!();
+        Depcrate_signingimpl_103!();
+        Depcrate_signingimpl_104!();
+        Depcrate_signingimpl_105!();
+        Depcrate_signingimpl_106!();
+        Depcrate_signingimpl_107!();
+        Depcrate_signingimpl_108!();
+        Depcrate_signingimpl_109!();
+        Depcrate_signingimpl_110!();
+        Depcrate_signingimpl_111!();
+        Depcrate_signingimpl_112!();
+        Depcrate_signingimpl_113!();
+        Depcrate_signingimpl_114!();
+        Depcrate_signingimpl_115!();
+        Depcrate_signingimpl_116!();
+        Depcrate_signingimpl_117!();
+        Depcrate_signingimpl_118!();
+        Depcrate_signingimpl_119!();
+        Depcrate_signingimpl_120!();
+        Depcrate_signingimpl_121!();
+        Depcrate_signingimpl_122!();
+        Depcrate_signingimpl_123!();
+        Depcrate_signingimpl_124!();
+        Depcrate_signingimpl_125!();
+    };
+}

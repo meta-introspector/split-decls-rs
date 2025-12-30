@@ -1,0 +1,9 @@
+// Generated macro for bench_handshake_buffered (function)
+macro_rules! Depcratebench_handshake_buffered {
+() => {
+// Module: crate
+// Provides: {"bench_handshake_buffered"}
+// Dependencies: {}
+fn bench_handshake_buffered (mut rounds : u64 , resume : ResumptionParam , client_config : Arc < ClientConfig > , server_config : Arc < ServerConfig > , params : & Parameters ,) -> Timings { let mut timings = Timings :: default () ; let mut buffers = TempBuffers :: new () ; let mut client_latency = params . open_latency_file ("client") ; let mut server_latency = params . open_latency_file ("server") ; while rounds > 0 { let mut client_time = 0f64 ; let mut server_time = 0f64 ; let mut client = time (& mut client_time , | | { let server_name = "localhost" . try_into () . unwrap () ; ClientConnection :: new (client_config . clone () , server_name) . unwrap () }) ; let mut server = time (& mut server_time , | | { ServerConnection :: new (server_config . clone ()) . unwrap () }) ; time (& mut server_time , | | { transfer (& mut buffers , & mut client , & mut server , None) ; }) ; time (& mut client_time , | | { transfer (& mut buffers , & mut server , & mut client , None) ; }) ; time (& mut server_time , | | { transfer (& mut buffers , & mut client , & mut server , None) ; }) ; time (& mut client_time , | | { transfer (& mut buffers , & mut server , & mut client , None) ; }) ; assert ! (! client . is_handshaking ()) ; assert ! (! server . is_handshaking ()) ; if client . handshake_kind () == Some (resume . as_handshake_kind ()) && server . handshake_kind () == Some (resume . as_handshake_kind ()) { client_latency . sample (client_time) ; server_latency . sample (server_time) ; timings . client += client_time ; timings . server += server_time ; rounds -= 1 ; } else { } } timings }
+};
+}

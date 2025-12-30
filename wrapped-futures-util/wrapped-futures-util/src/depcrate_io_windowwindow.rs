@@ -1,0 +1,9 @@
+// Generated macro for Window (struct)
+macro_rules! Depcrate_io_windowWindow {
+() => {
+// Module: crate::io::window
+// Provides: {"Window"}
+// Dependencies: {}
+# [doc = " An owned window around an underlying buffer."] # [doc = ""] # [doc = " Normally slices work great for considering sub-portions of a buffer, but"] # [doc = " unfortunately a slice is a *borrowed* type in Rust which has an associated"] # [doc = " lifetime. When working with future and async I/O these lifetimes are not"] # [doc = " always appropriate, and are sometimes difficult to store in tasks. This"] # [doc = " type strives to fill this gap by providing an \"owned slice\" around an"] # [doc = " underlying buffer of bytes."] # [doc = ""] # [doc = " A `Window<T>` wraps an underlying buffer, `T`, and has configurable"] # [doc = " start/end indexes to alter the behavior of the `AsRef<[u8]>` implementation"] # [doc = " that this type carries."] # [doc = ""] # [doc = " This type can be particularly useful when working with the `write_all`"] # [doc = " combinator in this crate. Data can be sliced via `Window`, consumed by"] # [doc = " `write_all`, and then earned back once the write operation finishes through"] # [doc = " the `into_inner` method on this type."] # [derive (Debug)] pub struct Window < T > { inner : T , range : Range < usize > , }
+};
+}

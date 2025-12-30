@@ -1,0 +1,9 @@
+// Generated macro for PINTERFACE_TIMESTAMP_CONFIG_CHANGE_CALLBACK (type)
+macro_rules! Depcrate_um_iphlpapiPINTERFACE_TIMESTAMP_CONFIG_CHANGE_CALLBACK {
+() => {
+// Module: crate::um::iphlpapi
+// Provides: {"PINTERFACE_TIMESTAMP_CONFIG_CHANGE_CALLBACK"}
+// Dependencies: {}
+pub type PINTERFACE_TIMESTAMP_CONFIG_CHANGE_CALLBACK = * mut INTERFACE_TIMESTAMP_CONFIG_CHANGE_CALLBACK ;
+};
+}

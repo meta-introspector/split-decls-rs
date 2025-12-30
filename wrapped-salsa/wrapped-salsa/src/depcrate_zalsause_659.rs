@@ -4,6 +4,6 @@ macro_rules! Depcrate_zalsause_659 {
 // Module: crate::zalsa
 // Provides: {"use_659"}
 // Dependencies: {}
-use crate :: runtime :: Runtime ;
+use crate :: views :: Views ;
 };
 }

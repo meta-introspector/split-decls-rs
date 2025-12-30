@@ -1,0 +1,51 @@
+// Generated module macro for crate::verifying
+macro_rules! Modcrate_verifying {
+() => {
+        Depcrate_verifyinguse_127!();
+        Depcrate_verifyinguse_128!();
+        Depcrate_verifyinguse_129!();
+        Depcrate_verifyinguse_130!();
+        Depcrate_verifyinguse_131!();
+        Depcrate_verifyinguse_132!();
+        Depcrate_verifyinguse_133!();
+        Depcrate_verifyinguse_134!();
+        Depcrate_verifyinguse_135!();
+        Depcrate_verifyinguse_136!();
+        Depcrate_verifyinguse_137!();
+        Depcrate_verifyinguse_138!();
+        Depcrate_verifyingVerifyingKey!();
+        Depcrate_verifyingimpl_140!();
+        Depcrate_verifyingimpl_141!();
+        Depcrate_verifyingimpl_142!();
+        Depcrate_verifyingimpl_143!();
+        Depcrate_verifyingimpl_144!();
+        Depcrate_verifyingimpl_145!();
+        Depcrate_verifyingimpl_146!();
+        Depcrate_verifyingimpl_147!();
+        Depcrate_verifyingimpl_148!();
+        Depcrate_verifyingimpl_149!();
+        Depcrate_verifyingimpl_150!();
+        Depcrate_verifyingimpl_151!();
+        Depcrate_verifyingimpl_152!();
+        Depcrate_verifyingimpl_153!();
+        Depcrate_verifyingimpl_154!();
+        Depcrate_verifyingimpl_155!();
+        Depcrate_verifyingimpl_156!();
+        Depcrate_verifyingimpl_157!();
+        Depcrate_verifyingimpl_158!();
+        Depcrate_verifyingimpl_159!();
+        Depcrate_verifyingimpl_160!();
+        Depcrate_verifyingimpl_161!();
+        Depcrate_verifyingimpl_162!();
+        Depcrate_verifyingimpl_163!();
+        Depcrate_verifyingimpl_164!();
+        Depcrate_verifyingimpl_165!();
+        Depcrate_verifyingimpl_166!();
+        Depcrate_verifyingimpl_167!();
+        Depcrate_verifyingimpl_168!();
+        Depcrate_verifyingimpl_169!();
+        Depcrate_verifyingimpl_170!();
+        Depcrate_verifyingimpl_171!();
+        Depcrate_verifyingimpl_172!();
+    };
+}

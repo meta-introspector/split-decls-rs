@@ -1,0 +1,9 @@
+// Generated macro for test_large_struct_block (function)
+macro_rules! Depcrate_blocktest_large_struct_block {
+() => {
+// Module: crate::block
+// Provides: {"test_large_struct_block"}
+// Dependencies: {}
+# [test] fn test_large_struct_block () { let data = LargeStruct :: get () ; let mut expected = data ; expected . mutate () ; assert_eq ! (unsafe { invoke_large_struct_block (&* get_large_struct_block () , data) } , expected) ; assert_eq ! (unsafe { invoke_large_struct_block (&* get_large_struct_block_with (expected) , data) } , expected) ; global_block ! { static BLOCK = | data : LargeStruct | -> LargeStruct { let mut data = data ; data . mutate () ; data } ; } struct Enc ; unsafe impl ManualBlockEncoding for Enc { type Arguments = (LargeStruct ,) ; type Return = LargeStruct ; # [cfg (target_pointer_width = "64")] const ENCODING_CSTR : & 'static CStr = c"{LargeStruct=f[100C]}112@?0{LargeStruct=f[100C]}8" ; # [cfg (target_pointer_width = "32")] const ENCODING_CSTR : & 'static CStr = c"{LargeStruct=f[100C]}108@?0{LargeStruct=f[100C]}4" ; } let data = LargeStruct :: get () ; let mut new_data = data ; new_data . mutate () ; assert_eq ! (BLOCK . call ((data ,)) , new_data) ; assert_eq ! (unsafe { invoke_large_struct_block (& BLOCK , data) } , new_data) ; let block = StackBlock :: new (| mut x : LargeStruct | { x . mutate () ; x }) ; assert_eq ! (unsafe { invoke_large_struct_block (& block , data) } , new_data) ; let block = block . copy () ; assert_eq ! (unsafe { invoke_large_struct_block (& block , data) } , new_data) ; let block = StackBlock :: with_encoding :: < Enc > (| mut x : LargeStruct | { x . mutate () ; x }) ; assert_eq ! (unsafe { invoke_large_struct_block (& block , data) } , new_data) ; let block = block . copy () ; assert_eq ! (unsafe { invoke_large_struct_block (& block , data) } , new_data) ; }
+};
+}

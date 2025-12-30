@@ -1,0 +1,9 @@
+// Generated macro for spawn_local (function)
+macro_rules! Depcrate_runnablespawn_local {
+() => {
+// Module: crate::runnable
+// Provides: {"spawn_local"}
+// Dependencies: {}
+# [doc = " Creates a new thread-local task."] # [doc = ""] # [doc = " This function is same as [`spawn()`], except it does not require [`Send`] on `future`. If the"] # [doc = " [`Runnable`] is used or dropped on another thread, a panic will occur."] # [doc = ""] # [doc = " This function is only available when the `std` feature for this crate is enabled."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " use async_task::Runnable;"] # [doc = " use flume::{Receiver, Sender};"] # [doc = " use std::rc::Rc;"] # [doc = ""] # [doc = " thread_local! {"] # [doc = "     // A queue that holds scheduled tasks."] # [doc = "     static QUEUE: (Sender<Runnable>, Receiver<Runnable>) = flume::unbounded();"] # [doc = " }"] # [doc = ""] # [doc = " // Make a non-Send future."] # [doc = " let msg: Rc<str> = \"Hello, world!\".into();"] # [doc = " let future = async move {"] # [doc = "     println!(\"{}\", msg);"] # [doc = " };"] # [doc = ""] # [doc = " // A function that schedules the task when it gets woken up."] # [doc = " let s = QUEUE.with(|(s, _)| s.clone());"] # [doc = " let schedule = move |runnable| s.send(runnable).unwrap();"] # [doc = ""] # [doc = " // Create a task with the future and the schedule function."] # [doc = " let (runnable, task) = async_task::spawn_local(future, schedule);"] # [doc = " ```"] # [cfg (feature = "std")] pub fn spawn_local < F , S > (future : F , schedule : S) -> (Runnable , Task < F :: Output >) where F : Future + 'static , F :: Output : 'static , S : Schedule + Send + Sync + 'static , { Builder :: new () . spawn_local (move | () | future , schedule) }
+};
+}

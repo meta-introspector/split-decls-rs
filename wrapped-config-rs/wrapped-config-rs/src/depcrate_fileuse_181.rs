@@ -1,0 +1,9 @@
+// Generated macro for use_181 (use)
+macro_rules! Depcrate_fileuse_181 {
+() => {
+// Module: crate::file
+// Provides: {"use_181"}
+// Dependencies: {}
+use crate :: error :: { ConfigError , Result } ;
+};
+}

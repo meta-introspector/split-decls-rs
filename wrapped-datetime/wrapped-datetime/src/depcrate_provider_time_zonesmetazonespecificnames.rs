@@ -1,0 +1,9 @@
+// Generated macro for MetazoneSpecificNames (struct)
+macro_rules! Depcrate_provider_time_zonesMetazoneSpecificNames {
+() => {
+// Module: crate::provider::time_zones
+// Provides: {"MetazoneSpecificNames"}
+// Dependencies: {}
+# [doc = " An ICU4X mapping to specific metazone names."] # [doc = " Specific names include time variants such as \"daylight.\""] # [doc = " See CLDR-JSON timeZoneNames.json for more context."] # [doc = ""] # [doc = " These markers use a checksum to ensure consistency with [`icu_time::provider::TimezonePeriodsV1`]."] # [doc = ""] # [doc = " <div class=\"stab unstable\">"] # [doc = " 🚧 This code is considered unstable; it may change at any time, in breaking or non-breaking ways,"] # [doc = " including in SemVer minor releases. While the serde representation of data structs is guaranteed"] # [doc = " to be stable, their Rust representation might not be. Use with caution."] # [doc = " </div>"] # [derive (PartialEq , Debug , Clone , Default , yoke :: Yokeable , zerofrom :: ZeroFrom)] # [cfg_attr (feature = "datagen" , derive (serde :: Serialize , databake :: Bake))] # [cfg_attr (feature = "datagen" , databake (path = icu_datetime :: provider :: time_zones))] # [cfg_attr (feature = "serde" , derive (serde :: Deserialize))] # [yoke (prove_covariance_manually)] pub struct MetazoneSpecificNames < 'data > { # [doc = " The default mapping between metazone id and localized metazone name."] # [cfg_attr (feature = "serde" , serde (borrow))] pub defaults : ZeroMap < 'data , (MetazoneId , TimeZoneVariant) , str > , # [doc = " The override mapping between timezone id and localized metazone name."] # [cfg_attr (feature = "serde" , serde (borrow))] pub overrides : ZeroMap < 'data , (TimeZone , TimeZoneVariant) , str > , # [doc = " The metazones for which the standard name is in `MetazoneGenericStandardNames*V1`"] # [cfg_attr (feature = "serde" , serde (borrow))] pub use_standard : ZeroVec < 'data , MetazoneId > , }
+};
+}

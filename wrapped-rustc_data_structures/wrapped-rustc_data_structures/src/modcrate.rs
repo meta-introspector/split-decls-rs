@@ -1,0 +1,56 @@
+// Generated module macro for crate
+macro_rules! Modcrate {
+() => {
+        Depcrateuse_1!();
+        Depcrateuse_2!();
+        Depcrateuse_3!();
+        Depcrateuse_4!();
+        Depcratealigned!();
+        Depcratebase_n!();
+        Depcratebinary_search_util!();
+        Depcratefingerprint!();
+        Depcrateflat_map_in_place!();
+        Depcrateflock!();
+        Depcratefrozen!();
+        Depcratefx!();
+        Depcrategraph!();
+        Depcrateintern!();
+        Depcratejobserver!();
+        Depcratemarker!();
+        Depcratememmap!();
+        Depcrateobligation_forest!();
+        Depcrateowned_slice!();
+        Depcratepacked!();
+        Depcrateprofiling!();
+        Depcratesharded!();
+        Depcratesmall_c_str!();
+        Depcratesnapshot_map!();
+        Depcratesorted_map!();
+        Depcratesso!();
+        Depcratestable_hasher!();
+        Depcratestack!();
+        Depcratesteal!();
+        Depcratesvh!();
+        Depcratesync!();
+        Depcratetagged_ptr!();
+        Depcratetemp_dir!();
+        Depcratethinvec!();
+        Depcratethousands!();
+        Depcratetransitive_relation!();
+        Depcrateunhash!();
+        Depcrateunion_find!();
+        Depcrateunord!();
+        Depcratevec_cache!();
+        Depcratework_queue!();
+        Depcrateatomic_ref!();
+        Depcrateoutline!();
+        Depcratedefer!();
+        DepcrateOnDrop!();
+        Depcrateimpl_919!();
+        Depcrateimpl_920!();
+        DepcrateFatalErrorMarker!();
+        Depcratemake_display!();
+        Depcrate__noop_fix_for_windows_dllimport_issue!();
+        Depcrateexternal_bitflags_debug!();
+    };
+}

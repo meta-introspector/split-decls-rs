@@ -1,0 +1,9 @@
+// Generated macro for impl_129 (impl)
+macro_rules! Depcrate_iterimpl_129 {
+() => {
+// Module: crate::iter
+// Provides: {"impl_129"}
+// Dependencies: {}
+impl < Old , New , T > Iterator for ChangesIter < '_ , Old , New , T > where Old : Index < usize , Output = T > + ? Sized , New : Index < usize , Output = T > + ? Sized , T : Clone , { type Item = Change < T > ; fn next (& mut self) -> Option < Self :: Item > { match self . tag { DiffTag :: Equal => { if self . old_i < self . old_range . end { let value = self . old [self . old_i] . clone () ; self . old_i += 1 ; self . old_index += 1 ; self . new_index += 1 ; Some (Change { tag : ChangeTag :: Equal , old_index : Some (self . old_index - 1) , new_index : Some (self . new_index - 1) , value , }) } else { None } } DiffTag :: Delete => { if self . old_i < self . old_range . end { let value = self . old [self . old_i] . clone () ; self . old_i += 1 ; self . old_index += 1 ; Some (Change { tag : ChangeTag :: Delete , old_index : Some (self . old_index - 1) , new_index : None , value , }) } else { None } } DiffTag :: Insert => { if self . new_i < self . new_range . end { let value = self . new [self . new_i] . clone () ; self . new_i += 1 ; self . new_index += 1 ; Some (Change { tag : ChangeTag :: Insert , old_index : None , new_index : Some (self . new_index - 1) , value , }) } else { None } } DiffTag :: Replace => { if self . old_i < self . old_range . end { let value = self . old [self . old_i] . clone () ; self . old_i += 1 ; self . old_index += 1 ; Some (Change { tag : ChangeTag :: Delete , old_index : Some (self . old_index - 1) , new_index : None , value , }) } else if self . new_i < self . new_range . end { let value = self . new [self . new_i] . clone () ; self . new_i += 1 ; self . new_index += 1 ; Some (Change { tag : ChangeTag :: Insert , old_index : None , new_index : Some (self . new_index - 1) , value , }) } else { None } } } } }
+};
+}

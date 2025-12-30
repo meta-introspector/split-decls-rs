@@ -1,0 +1,45 @@
+// Generated module macro for crate::dereference
+macro_rules! Modcrate_dereference {
+() => {
+        Depcrate_dereferenceuse_1399!();
+        Depcrate_dereferenceuse_1400!();
+        Depcrate_dereferenceuse_1401!();
+        Depcrate_dereferenceuse_1402!();
+        Depcrate_dereferenceuse_1403!();
+        Depcrate_dereferenceuse_1404!();
+        Depcrate_dereferenceuse_1405!();
+        Depcrate_dereferenceuse_1406!();
+        Depcrate_dereferenceuse_1407!();
+        Depcrate_dereferenceuse_1408!();
+        Depcrate_dereferenceuse_1409!();
+        Depcrate_dereferenceuse_1410!();
+        Depcrate_dereferenceuse_1411!();
+        Depcrate_dereferenceuse_1412!();
+        Depcrate_dereferenceuse_1413!();
+        Depcrate_dereferenceuse_1414!();
+        Depcrate_dereferenceuse_1415!();
+        Depcrate_dereferenceuse_1416!();
+        Depcrate_dereferenceuse_1417!();
+        Depcrate_dereferencemacro_1418!();
+        Depcrate_dereferencemacro_1419!();
+        Depcrate_dereferencemacro_1420!();
+        Depcrate_dereferencemacro_1421!();
+        Depcrate_dereferencemacro_1422!();
+        Depcrate_dereferenceDereferencing!();
+        Depcrate_dereferenceStateData!();
+        Depcrate_dereferenceDerefedBorrow!();
+        Depcrate_dereferenceState!();
+        Depcrate_dereferenceRefOp!();
+        Depcrate_dereferenceRefPat!();
+        Depcrate_dereferenceimpl_1429!();
+        Depcrate_dereferenceis_deref_or_derefmut_impl!();
+        Depcrate_dereferencetry_parse_ref_op!();
+        Depcrate_dereferencederef_method_same_type!();
+        Depcrate_dereferenceis_in_method_chain!();
+        Depcrate_dereferenceTyCoercionStability!();
+        Depcrate_dereferenceimpl_1435!();
+        Depcrate_dereferencety_contains_infer!();
+        Depcrate_dereferencety_contains_field!();
+        Depcrate_dereferenceimpl_1438!();
+    };
+}

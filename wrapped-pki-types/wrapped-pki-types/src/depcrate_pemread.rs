@@ -1,0 +1,9 @@
+// Generated macro for read (function)
+macro_rules! Depcrate_pemread {
+() => {
+// Module: crate::pem
+// Provides: {"read"}
+// Dependencies: {}
+# [allow (clippy :: type_complexity)] fn read (next_line : Option < & [u8] > , section : & mut Option < SectionLabel > , b64buf : & mut Vec < u8 > ,) -> Result < ControlFlow < Option < (SectionKind , Vec < u8 >) > , () > , Error > { let line = if let Some (line) = next_line { line } else { return match section . take () { Some (label) => Err (Error :: MissingSectionEnd { end_marker : label . as_ref () . to_vec () , }) , None => Ok (ControlFlow :: Break (None)) , } ; } ; if line . starts_with (b"-----BEGIN ") { let (mut trailer , mut pos) = (0 , line . len ()) ; for (i , & b) in line . iter () . enumerate () . rev () { match b { b'-' => { trailer += 1 ; pos = i ; } b'\n' | b'\r' | b' ' => continue , _ => break , } } if trailer != 5 { return Err (Error :: IllegalSectionStart { line : line . to_vec () , }) ; } let ty = & line [11 .. pos] ; * section = Some (SectionLabel :: from (ty)) ; return Ok (ControlFlow :: Continue (())) ; } if let Some (label) = section . as_ref () { if label . is_end (line) { let kind = match label { SectionLabel :: Known (kind) => * kind , SectionLabel :: Unknown (_) => { * section = None ; b64buf . clear () ; return Ok (ControlFlow :: Continue (())) ; } } ; let mut der = vec ! [0u8 ; base64 :: decoded_length (b64buf . len ())] ; let der_len = match kind . secret () { true => base64 :: decode_secret (b64buf , & mut der) , false => base64 :: decode_public (b64buf , & mut der) , } . map_err (| err | Error :: Base64Decode (format ! ("{err:?}"))) ? . len () ; der . truncate (der_len) ; return Ok (ControlFlow :: Break (Some ((kind , der)))) ; } } if section . is_some () { b64buf . extend (line) ; } Ok (ControlFlow :: Continue (())) }
+};
+}

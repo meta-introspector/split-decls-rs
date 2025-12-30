@@ -1,0 +1,41 @@
+// Generated module macro for crate::p224_32
+macro_rules! Modcrate_p224_32 {
+() => {
+        Depcrate_p224_32IndexConst!();
+        Depcrate_p224_32impl_157!();
+        Depcrate_p224_32impl_158!();
+        Depcrate_p224_32fiat_p224_u1!();
+        Depcrate_p224_32fiat_p224_i1!();
+        Depcrate_p224_32fiat_p224_u2!();
+        Depcrate_p224_32fiat_p224_i2!();
+        Depcrate_p224_32fiat_p224_montgomery_domain_field_element!();
+        Depcrate_p224_32impl_164!();
+        Depcrate_p224_32impl_165!();
+        Depcrate_p224_32impl_166!();
+        Depcrate_p224_32impl_167!();
+        Depcrate_p224_32fiat_p224_non_montgomery_domain_field_element!();
+        Depcrate_p224_32impl_169!();
+        Depcrate_p224_32impl_170!();
+        Depcrate_p224_32impl_171!();
+        Depcrate_p224_32impl_172!();
+        Depcrate_p224_32fiat_p224_addcarryx_u32!();
+        Depcrate_p224_32fiat_p224_subborrowx_u32!();
+        Depcrate_p224_32fiat_p224_mulx_u32!();
+        Depcrate_p224_32fiat_p224_cmovznz_u32!();
+        Depcrate_p224_32fiat_p224_mul!();
+        Depcrate_p224_32fiat_p224_square!();
+        Depcrate_p224_32fiat_p224_add!();
+        Depcrate_p224_32fiat_p224_sub!();
+        Depcrate_p224_32fiat_p224_opp!();
+        Depcrate_p224_32fiat_p224_from_montgomery!();
+        Depcrate_p224_32fiat_p224_to_montgomery!();
+        Depcrate_p224_32fiat_p224_nonzero!();
+        Depcrate_p224_32fiat_p224_selectznz!();
+        Depcrate_p224_32fiat_p224_to_bytes!();
+        Depcrate_p224_32fiat_p224_from_bytes!();
+        Depcrate_p224_32fiat_p224_set_one!();
+        Depcrate_p224_32fiat_p224_msat!();
+        Depcrate_p224_32fiat_p224_divstep!();
+        Depcrate_p224_32fiat_p224_divstep_precomp!();
+    };
+}

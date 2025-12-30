@@ -1,0 +1,9 @@
+// Generated macro for macro_370 (macro)
+macro_rules! Depcrate_hexagonmacro_370 {
+() => {
+// Module: crate::hexagon
+// Provides: {"macro_370"}
+// Dependencies: {}
+global_asm ! (include_str ! ("hexagon/dfaddsub.s") , options (raw)) ;
+};
+}

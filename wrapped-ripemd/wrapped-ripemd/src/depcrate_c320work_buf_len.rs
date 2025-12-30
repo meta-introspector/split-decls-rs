@@ -1,0 +1,9 @@
+// Generated macro for WORK_BUF_LEN (const)
+macro_rules! Depcrate_c320WORK_BUF_LEN {
+() => {
+// Module: crate::c320
+// Provides: {"WORK_BUF_LEN"}
+// Dependencies: {}
+pub (super) const WORK_BUF_LEN : usize = 16 ;
+};
+}

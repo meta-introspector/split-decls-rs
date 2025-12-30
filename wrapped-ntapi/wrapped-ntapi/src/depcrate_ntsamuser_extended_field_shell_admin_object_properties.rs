@@ -1,0 +1,9 @@
+// Generated macro for USER_EXTENDED_FIELD_SHELL_ADMIN_OBJECT_PROPERTIES (const)
+macro_rules! Depcrate_ntsamUSER_EXTENDED_FIELD_SHELL_ADMIN_OBJECT_PROPERTIES {
+() => {
+// Module: crate::ntsam
+// Provides: {"USER_EXTENDED_FIELD_SHELL_ADMIN_OBJECT_PROPERTIES"}
+// Dependencies: {}
+pub const USER_EXTENDED_FIELD_SHELL_ADMIN_OBJECT_PROPERTIES : ULONG = 0x00008000 ;
+};
+}

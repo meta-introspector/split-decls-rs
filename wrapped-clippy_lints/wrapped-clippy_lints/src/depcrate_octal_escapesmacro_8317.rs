@@ -1,0 +1,9 @@
+// Generated macro for macro_8317 (macro)
+macro_rules! Depcrate_octal_escapesmacro_8317 {
+() => {
+// Module: crate::octal_escapes
+// Provides: {"macro_8317"}
+// Dependencies: {}
+declare_clippy_lint ! { # [doc = " ### What it does"] # [doc = " Checks for `\\0` escapes in string and byte literals that look like octal"] # [doc = " character escapes in C."] # [doc = ""] # [doc = " ### Why is this bad?"] # [doc = ""] # [doc = " C and other languages support octal character escapes in strings, where"] # [doc = " a backslash is followed by up to three octal digits. For example, `\\033`"] # [doc = " stands for the ASCII character 27 (ESC). Rust does not support this"] # [doc = " notation, but has the escape code `\\0` which stands for a null"] # [doc = " byte/character, and any following digits do not form part of the escape"] # [doc = " sequence. Therefore, `\\033` is not a compiler error but the result may"] # [doc = " be surprising."] # [doc = ""] # [doc = " ### Known problems"] # [doc = " The actual meaning can be the intended one. `\\x00` can be used in these"] # [doc = " cases to be unambiguous."] # [doc = ""] # [doc = " The lint does not trigger for format strings in `print!()`, `write!()`"] # [doc = " and friends since the string is already preprocessed when Clippy lints"] # [doc = " can see it."] # [doc = ""] # [doc = " ### Example"] # [doc = " ```no_run"] # [doc = " let one = \"\\033[1m Bold? \\033[0m\";  // \\033 intended as escape"] # [doc = " let two = \"\\033\\0\";                 // \\033 intended as null-3-3"] # [doc = " ```"] # [doc = ""] # [doc = " Use instead:"] # [doc = " ```no_run"] # [doc = " let one = \"\\x1b[1mWill this be bold?\\x1b[0m\";"] # [doc = " let two = \"\\x0033\\x00\";"] # [doc = " ```"] # [clippy :: version = "1.59.0"] pub OCTAL_ESCAPES , suspicious , "string escape sequences looking like octal characters" }
+};
+}

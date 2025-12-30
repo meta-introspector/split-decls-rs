@@ -1,0 +1,63 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcrateimpl_52.rs");
+include!("depcrateuse_3.rs");
+include!("depcrateserializefieldset.rs");
+include!("depcrateimpl_23.rs");
+include!("depcrateimpl_27.rs");
+include!("depcrateimpl_31.rs");
+include!("depcrate_fieldsimpl_11.rs");
+include!("depcrateserializeattributes.rs");
+include!("depcrate_fieldsuse_5.rs");
+include!("depcrateasserde.rs");
+include!("depcrateimpl_51.rs");
+include!("depcrateserializemetadata.rs");
+include!("depcrateimpl_21.rs");
+include!("depcrateimpl_38.rs");
+include!("depcrate_fieldsimpl_10.rs");
+include!("depcrateimpl_45.rs");
+include!("depcrateimpl_41.rs");
+include!("depcrate_fieldsimpl_12.rs");
+include!("depcratefields.rs");
+include!("depcrateimpl_32.rs");
+include!("depcrateserializeid.rs");
+include!("depcrateserdemapvisitor.rs");
+include!("depcrateuse_1.rs");
+include!("depcrateserializelevel.rs");
+include!("depcrateserdestructvisitor.rs");
+include!("depcrateimpl_35.rs");
+include!("depcrateimpl_47.rs");
+include!("depcrate_fieldsimpl_8.rs");
+include!("depcrateimpl_43.rs");
+include!("depcrateimpl_17.rs");
+include!("depcrate_fieldsimpl_13.rs");
+include!("depcrateimpl_29.rs");
+include!("depcrateimpl_19.rs");
+include!("depcrateimpl_34.rs");
+include!("depcrateimpl_44.rs");
+include!("depcratesealed.rs");
+include!("depcrateserializefield.rs");
+include!("depcrateuse_2.rs");
+include!("depcrateimpl_50.rs");
+include!("depcrateimpl_15.rs");
+include!("depcrate_fieldsserializefieldmap.rs");
+include!("depcrateimpl_46.rs");
+include!("depcrateimpl_49.rs");
+include!("depcrateimpl_48.rs");
+include!("depcrateimpl_25.rs");
+include!("depcrate_fieldsimpl_9.rs");
+include!("depcrate_fieldsasmap.rs");
+include!("depcrateimpl_37.rs");
+include!("depcrateserializeevent.rs");
+include!("depcrateserializerecord.rs");
+include!("depcrateimpl_39.rs");
+include!("depcrateimpl_40.rs");
+include!("depcrateimpl_42.rs");
+include!("modcrate_fields.rs");
+include!("modcrate.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate_fields!();
+    Modcrate!();
+}

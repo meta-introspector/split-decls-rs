@@ -1,0 +1,51 @@
+// Generated module macro for crate::parse
+macro_rules! Modcrate_parse {
+() => {
+        Depcrate_parseuse_343!();
+        Depcrate_parseuse_344!();
+        Depcrate_parseuse_345!();
+        Depcrate_parseuse_346!();
+        Depcrate_parseis_int_char!();
+        Depcrate_parseis_float_char!();
+        Depcrate_parseis_ident_first_char!();
+        Depcrate_parseis_ident_raw_char!();
+        Depcrate_parseis_whitespace_char!();
+        Depcrate_parseLargeUInt!();
+        Depcrate_parseLargeUInt!();
+        Depcrate_parseLargeSInt!();
+        Depcrate_parseLargeSInt!();
+        Depcrate_parseParser!();
+        Depcrate_parseParserCursor!();
+        Depcrate_parseWS_CURSOR_UNCLOSED_LINE!();
+        Depcrate_parseimpl_359!();
+        Depcrate_parseimpl_360!();
+        Depcrate_parseimpl_361!();
+        Depcrate_parseimpl_362!();
+        Depcrate_parseComment!();
+        Depcrate_parseNum!();
+        Depcrate_parseimpl_num!();
+        Depcrate_parsemacro_366!();
+        Depcrate_parsemacro_367!();
+        Depcrate_parseInteger!();
+        Depcrate_parseimpl_integer!();
+        Depcrate_parsemacro_370!();
+        Depcrate_parsemacro_371!();
+        Depcrate_parseParsedInteger!();
+        Depcrate_parseimpl_373!();
+        Depcrate_parseFloat!();
+        Depcrate_parseimpl_float!();
+        Depcrate_parsemacro_376!();
+        Depcrate_parseParsedFloat!();
+        Depcrate_parseimpl_378!();
+        Depcrate_parseStructType!();
+        Depcrate_parseNewtypeMode!();
+        Depcrate_parseTupleMode!();
+        Depcrate_parseParsedStr!();
+        Depcrate_parseParsedByteStr!();
+        Depcrate_parseimpl_384!();
+        Depcrate_parseimpl_385!();
+        Depcrate_parseEscapeEncoding!();
+        Depcrate_parseEscapeCharacter!();
+        Depcrate_parsetests!();
+    };
+}

@@ -1,0 +1,9 @@
+// Generated macro for PACTIVATION_CONTEXT_DETAILED_INFORMATION (type)
+macro_rules! Depcrate_um_winntPACTIVATION_CONTEXT_DETAILED_INFORMATION {
+() => {
+// Module: crate::um::winnt
+// Provides: {"PACTIVATION_CONTEXT_DETAILED_INFORMATION"}
+// Dependencies: {}
+pub type PACTIVATION_CONTEXT_DETAILED_INFORMATION = * mut ACTIVATION_CONTEXT_DETAILED_INFORMATION ;
+};
+}

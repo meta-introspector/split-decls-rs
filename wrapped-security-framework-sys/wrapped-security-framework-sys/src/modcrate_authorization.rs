@@ -1,0 +1,42 @@
+// Generated module macro for crate::authorization
+macro_rules! Modcrate_authorization {
+() => {
+        Depcrate_authorizationuse_16!();
+        Depcrate_authorizationuse_17!();
+        Depcrate_authorizationuse_18!();
+        Depcrate_authorizationuse_19!();
+        Depcrate_authorizationuse_20!();
+        Depcrate_authorizationerrAuthorizationSuccess!();
+        Depcrate_authorizationerrAuthorizationInvalidSet!();
+        Depcrate_authorizationerrAuthorizationInvalidRef!();
+        Depcrate_authorizationerrAuthorizationInvalidTag!();
+        Depcrate_authorizationerrAuthorizationInvalidPointer!();
+        Depcrate_authorizationerrAuthorizationDenied!();
+        Depcrate_authorizationerrAuthorizationCanceled!();
+        Depcrate_authorizationerrAuthorizationInteractionNotAllowed!();
+        Depcrate_authorizationerrAuthorizationInternal!();
+        Depcrate_authorizationerrAuthorizationExternalizeNotAllowed!();
+        Depcrate_authorizationerrAuthorizationInternalizeNotAllowed!();
+        Depcrate_authorizationerrAuthorizationInvalidFlags!();
+        Depcrate_authorizationerrAuthorizationToolExecuteFailure!();
+        Depcrate_authorizationerrAuthorizationToolEnvironmentError!();
+        Depcrate_authorizationerrAuthorizationBadAddress!();
+        Depcrate_authorizationAuthorizationFlags!();
+        Depcrate_authorizationkAuthorizationFlagDefaults!();
+        Depcrate_authorizationkAuthorizationFlagInteractionAllowed!();
+        Depcrate_authorizationkAuthorizationFlagExtendRights!();
+        Depcrate_authorizationkAuthorizationFlagPartialRights!();
+        Depcrate_authorizationkAuthorizationFlagDestroyRights!();
+        Depcrate_authorizationkAuthorizationFlagPreAuthorize!();
+        Depcrate_authorizationAuthorizationRef!();
+        Depcrate_authorizationAuthorizationString!();
+        Depcrate_authorizationAuthorizationItem!();
+        Depcrate_authorizationAuthorizationItemSet!();
+        Depcrate_authorizationkAuthorizationExternalFormLength!();
+        Depcrate_authorizationAuthorizationExternalForm!();
+        Depcrate_authorizationAuthorizationRights!();
+        Depcrate_authorizationAuthorizationEnvironment!();
+        Depcrate_authorizationAuthorizationAsyncCallback!();
+        Depcrate_authorizationother_52!();
+    };
+}

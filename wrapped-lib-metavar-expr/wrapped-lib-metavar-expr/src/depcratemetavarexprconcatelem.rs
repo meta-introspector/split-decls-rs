@@ -1,0 +1,9 @@
+// Generated macro for MetaVarExprConcatElem (enum)
+macro_rules! DepcrateMetaVarExprConcatElem {
+() => {
+// Module: crate
+// Provides: {"MetaVarExprConcatElem"}
+// Dependencies: {}
+# [doc = " Indicates what is placed in a `concat` parameter. For example, literals"] # [doc = " (`${concat(\"foo\", \"bar\")}`) or adhoc identifiers (`${concat(foo, bar)}`)."] # [derive (Debug , Decodable , Encodable , PartialEq)] pub enum MetaVarExprConcatElem { # [doc = " Identifier WITHOUT a preceding dollar sign, which means that this identifier should be"] # [doc = " interpreted as a literal."] Ident (Ident) , # [doc = " For example, a number or a string."] Literal (Symbol) , # [doc = " Identifier WITH a preceding dollar sign, which means that this identifier should be"] # [doc = " expanded and interpreted as a variable."] Var (Ident) , }
+};
+}

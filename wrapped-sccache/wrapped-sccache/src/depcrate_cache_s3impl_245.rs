@@ -1,0 +1,9 @@
+// Generated macro for impl_245 (impl)
+macro_rules! Depcrate_cache_s3impl_245 {
+() => {
+// Module: crate::cache::s3
+// Provides: {"impl_245"}
+// Dependencies: {}
+impl S3Cache { pub fn new (bucket : String , key_prefix : String , no_credentials : bool) -> Self { Self { bucket , region : None , key_prefix , no_credentials , endpoint : None , use_ssl : None , server_side_encryption : None , enable_virtual_host_style : None , } } pub fn with_region (mut self , region : Option < String >) -> Self { self . region = region ; self } pub fn with_endpoint (mut self , endpoint : Option < String >) -> Self { self . endpoint = endpoint ; self } pub fn with_use_ssl (mut self , use_ssl : Option < bool >) -> Self { self . use_ssl = use_ssl ; self } pub fn with_server_side_encryption (mut self , server_side_encryption : Option < bool >) -> Self { self . server_side_encryption = server_side_encryption ; self } pub fn with_enable_virtual_host_style (mut self , enable_virtual_host_style : Option < bool > ,) -> Self { self . enable_virtual_host_style = enable_virtual_host_style ; self } pub fn build (self) -> Result < Operator > { let mut builder = S3 :: default () . bucket (& self . bucket) . root (& self . key_prefix) ; if let Some (region) = & self . region { builder = builder . region (region) ; } if let Some (true) = & self . enable_virtual_host_style { builder = builder . enable_virtual_host_style () ; } if self . no_credentials { builder = builder . disable_config_load () . disable_ec2_metadata () . allow_anonymous () ; } if let Some (endpoint) = & self . endpoint { builder = builder . endpoint (& endpoint_resolver (endpoint , self . use_ssl) ?) ; } if self . server_side_encryption . unwrap_or_default () { builder = builder . server_side_encryption_with_s3_key () ; } let op = Operator :: new (builder) ? . layer (HttpClientLayer :: new (set_user_agent ())) . layer (LoggingLayer :: default ()) . finish () ; Ok (op) } }
+};
+}

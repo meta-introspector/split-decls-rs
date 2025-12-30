@@ -1,0 +1,9 @@
+// Generated macro for impl_1787 (impl)
+macro_rules! Depcrate_stm32f405impl_1787 {
+() => {
+// Module: crate::stm32f405
+// Provides: {"impl_1787"}
+// Dependencies: {}
+impl Deref for IWDG { type Target = iwdg :: RegisterBlock ; # [inline (always)] fn deref (& self) -> & Self :: Target { unsafe { & * Self :: PTR } } }
+};
+}

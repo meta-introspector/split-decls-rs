@@ -1,0 +1,9 @@
+// Generated macro for test (module)
+macro_rules! Depcrate_strategy_recursivetest {
+() => {
+// Module: crate::strategy::recursive
+// Provides: {"test"}
+// Dependencies: {}
+# [cfg (test)] mod test { use std :: cmp :: max ; use super :: * ; use crate :: strategy :: just :: Just ; # [derive (Clone , Debug , PartialEq)] enum Tree { Leaf , Branch (Vec < Tree >) , } impl Tree { fn stats (& self) -> (u32 , u32) { match * self { Tree :: Leaf => (0 , 1) , Tree :: Branch (ref children) => { let mut depth = 0 ; let mut count = 0 ; for child in children { let (d , c) = child . stats () ; depth = max (d , depth) ; count += c ; } (depth + 1 , count + 1) } } } } # [test] fn test_recursive () { let mut max_depth = 0 ; let mut max_count = 0 ; let strat = Just (Tree :: Leaf) . prop_recursive (4 , 64 , 16 , | element | { crate :: collection :: vec (element , 8 .. 16) . prop_map (Tree :: Branch) }) ; let mut runner = TestRunner :: deterministic () ; for _ in 0 .. 65536 { let tree = strat . new_tree (& mut runner) . unwrap () . current () ; let (depth , count) = tree . stats () ; assert ! (depth <= 4 , "Got depth {}" , depth) ; assert ! (count <= 128 , "Got count {}" , count) ; max_depth = max (depth , max_depth) ; max_count = max (count , max_count) ; } assert ! (max_depth >= 3 , "Only got max depth {}" , max_depth) ; assert ! (max_count > 48 , "Only got max count {}" , max_count) ; } # [test] fn simplifies_to_non_recursive () { let strat = Just (Tree :: Leaf) . prop_recursive (4 , 64 , 16 , | element | { crate :: collection :: vec (element , 8 .. 16) . prop_map (Tree :: Branch) }) ; let mut runner = TestRunner :: deterministic () ; for _ in 0 .. 256 { let mut value = strat . new_tree (& mut runner) . unwrap () ; while value . simplify () { } assert_eq ! (Tree :: Leaf , value . current ()) ; } } }
+};
+}

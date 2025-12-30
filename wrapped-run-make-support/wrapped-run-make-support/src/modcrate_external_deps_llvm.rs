@@ -1,0 +1,57 @@
+// Generated module macro for crate::external_deps::llvm
+macro_rules! Modcrate_external_deps_llvm {
+() => {
+        Depcrate_external_deps_llvmuse_134!();
+        Depcrate_external_deps_llvmuse_135!();
+        Depcrate_external_deps_llvmuse_136!();
+        Depcrate_external_deps_llvmllvm_readobj!();
+        Depcrate_external_deps_llvmllvm_profdata!();
+        Depcrate_external_deps_llvmllvm_filecheck!();
+        Depcrate_external_deps_llvmllvm_objdump!();
+        Depcrate_external_deps_llvmllvm_ar!();
+        Depcrate_external_deps_llvmllvm_nm!();
+        Depcrate_external_deps_llvmllvm_bcanalyzer!();
+        Depcrate_external_deps_llvmllvm_dwarfdump!();
+        Depcrate_external_deps_llvmllvm_pdbutil!();
+        Depcrate_external_deps_llvmllvm_as!();
+        Depcrate_external_deps_llvmllvm_dis!();
+        Depcrate_external_deps_llvmllvm_objcopy!();
+        Depcrate_external_deps_llvmLlvmReadobj!();
+        Depcrate_external_deps_llvmLlvmProfdata!();
+        Depcrate_external_deps_llvmLlvmFilecheck!();
+        Depcrate_external_deps_llvmLlvmObjdump!();
+        Depcrate_external_deps_llvmLlvmAr!();
+        Depcrate_external_deps_llvmLlvmNm!();
+        Depcrate_external_deps_llvmLlvmBcanalyzer!();
+        Depcrate_external_deps_llvmLlvmDwarfdump!();
+        Depcrate_external_deps_llvmLlvmPdbutil!();
+        Depcrate_external_deps_llvmLlvmAs!();
+        Depcrate_external_deps_llvmLlvmDis!();
+        Depcrate_external_deps_llvmLlvmObjcopy!();
+        Depcrate_external_deps_llvmmacro_161!();
+        Depcrate_external_deps_llvmmacro_162!();
+        Depcrate_external_deps_llvmmacro_163!();
+        Depcrate_external_deps_llvmmacro_164!();
+        Depcrate_external_deps_llvmmacro_165!();
+        Depcrate_external_deps_llvmmacro_166!();
+        Depcrate_external_deps_llvmmacro_167!();
+        Depcrate_external_deps_llvmmacro_168!();
+        Depcrate_external_deps_llvmmacro_169!();
+        Depcrate_external_deps_llvmmacro_170!();
+        Depcrate_external_deps_llvmmacro_171!();
+        Depcrate_external_deps_llvmmacro_172!();
+        Depcrate_external_deps_llvmllvm_bin_dir!();
+        Depcrate_external_deps_llvmimpl_174!();
+        Depcrate_external_deps_llvmimpl_175!();
+        Depcrate_external_deps_llvmimpl_176!();
+        Depcrate_external_deps_llvmimpl_177!();
+        Depcrate_external_deps_llvmimpl_178!();
+        Depcrate_external_deps_llvmimpl_179!();
+        Depcrate_external_deps_llvmimpl_180!();
+        Depcrate_external_deps_llvmimpl_181!();
+        Depcrate_external_deps_llvmimpl_182!();
+        Depcrate_external_deps_llvmimpl_183!();
+        Depcrate_external_deps_llvmimpl_184!();
+        Depcrate_external_deps_llvmimpl_185!();
+    };
+}

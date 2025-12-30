@@ -1,0 +1,49 @@
+// Generated module macro for crate::sync::sharded_lock
+macro_rules! Modcrate_sync_sharded_lock {
+() => {
+        Depcrate_sync_sharded_lockuse_145!();
+        Depcrate_sync_sharded_lockuse_146!();
+        Depcrate_sync_sharded_lockuse_147!();
+        Depcrate_sync_sharded_lockuse_148!();
+        Depcrate_sync_sharded_lockuse_149!();
+        Depcrate_sync_sharded_lockuse_150!();
+        Depcrate_sync_sharded_lockuse_151!();
+        Depcrate_sync_sharded_lockuse_152!();
+        Depcrate_sync_sharded_lockuse_153!();
+        Depcrate_sync_sharded_lockuse_154!();
+        Depcrate_sync_sharded_lockuse_155!();
+        Depcrate_sync_sharded_lockuse_156!();
+        Depcrate_sync_sharded_lockuse_157!();
+        Depcrate_sync_sharded_lockuse_158!();
+        Depcrate_sync_sharded_lockNUM_SHARDS!();
+        Depcrate_sync_sharded_lockShard!();
+        Depcrate_sync_sharded_lockShardedLock!();
+        Depcrate_sync_sharded_lockimpl_162!();
+        Depcrate_sync_sharded_lockimpl_163!();
+        Depcrate_sync_sharded_lockimpl_164!();
+        Depcrate_sync_sharded_lockimpl_165!();
+        Depcrate_sync_sharded_lockimpl_166!();
+        Depcrate_sync_sharded_lockimpl_167!();
+        Depcrate_sync_sharded_lockimpl_168!();
+        Depcrate_sync_sharded_lockimpl_169!();
+        Depcrate_sync_sharded_lockimpl_170!();
+        Depcrate_sync_sharded_lockShardedLockReadGuard!();
+        Depcrate_sync_sharded_lockimpl_172!();
+        Depcrate_sync_sharded_lockimpl_173!();
+        Depcrate_sync_sharded_lockimpl_174!();
+        Depcrate_sync_sharded_lockimpl_175!();
+        Depcrate_sync_sharded_lockShardedLockWriteGuard!();
+        Depcrate_sync_sharded_lockimpl_177!();
+        Depcrate_sync_sharded_lockimpl_178!();
+        Depcrate_sync_sharded_lockimpl_179!();
+        Depcrate_sync_sharded_lockimpl_180!();
+        Depcrate_sync_sharded_lockimpl_181!();
+        Depcrate_sync_sharded_lockimpl_182!();
+        Depcrate_sync_sharded_lockcurrent_index!();
+        Depcrate_sync_sharded_lockThreadIndices!();
+        Depcrate_sync_sharded_lockthread_indices!();
+        Depcrate_sync_sharded_lockRegistration!();
+        Depcrate_sync_sharded_lockimpl_187!();
+        Depcrate_sync_sharded_lockmacro_188!();
+    };
+}

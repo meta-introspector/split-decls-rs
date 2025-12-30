@@ -1,0 +1,9 @@
+// Generated macro for impl_253 (impl)
+macro_rules! Depcrate_topo_placer_bkimpl_253 {
+() => {
+// Module: crate::topo::placer::bk
+// Provides: {"impl_253"}
+// Dependencies: {}
+impl NodeAttachInfo { fn new (size : usize) -> Self { let above = vec ! [None ; size] ; let below = vec ! [None ; size] ; Self { above , below } } # [doc = " Align the node \\p from to \\p to."] fn add (& mut self , from : NodeHandle , to : NodeHandle) { assert ! (self . below (to) . is_none () , "Node is already taken") ; assert ! (self . above (from) . is_none () , "Node is already set") ; self . above [from . get_index ()] = Some (to) ; self . below [to . get_index ()] = Some (from) ; } # [doc = " \\returns the node that this node attaches to."] fn above (& self , node : NodeHandle) -> Option < NodeHandle > { self . above [node . get_index ()] } # [doc = " \\returns the node that attaches to this node."] fn below (& self , node : NodeHandle) -> Option < NodeHandle > { self . below [node . get_index ()] } # [doc = " Extract a list of vertical nodes. This method will insert all of the"] # [doc = " nodes in the graph to some vertical list of nodes based on the"] # [doc = " relationship that is expressed in this data-structure."] fn get_verticals (& mut self) -> VerticalList { let mut res = VerticalList :: new () ; let mut used : Vec < bool > = vec ! [false ; self . above . len ()] ; for i in 0 .. self . above . len () { let mut vertical : Vec < NodeHandle > = Vec :: new () ; if used [i] { continue ; } let mut idx = i ; while let Some (cur_node_handle) = self . below [idx] { idx = cur_node_handle . get_index () ; } vertical . push (NodeHandle :: from (idx)) ; assert ! (self . below [idx] . is_none () , "expected to be at the bottom!") ; while self . above [idx] . is_some () && ! used [idx] { used [idx] = true ; idx = self . above [idx] . unwrap () . get_index () ; vertical . push (NodeHandle :: from (idx)) ; } used [idx] = true ; res . push (vertical) ; } res } }
+};
+}

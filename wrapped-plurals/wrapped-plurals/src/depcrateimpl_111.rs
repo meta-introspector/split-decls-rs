@@ -1,0 +1,9 @@
+// Generated macro for impl_111 (impl)
+macro_rules! Depcrateimpl_111 {
+() => {
+// Module: crate
+// Provides: {"impl_111"}
+// Dependencies: {}
+impl PluralCategory { # [doc = " Returns an ordered iterator over variants of [`Plural Categories`]."] # [doc = ""] # [doc = " Categories are returned in alphabetical order."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " use icu::plurals::PluralCategory;"] # [doc = ""] # [doc = " let mut categories = PluralCategory::all();"] # [doc = ""] # [doc = " assert_eq!(categories.next(), Some(PluralCategory::Few));"] # [doc = " assert_eq!(categories.next(), Some(PluralCategory::Many));"] # [doc = " assert_eq!(categories.next(), Some(PluralCategory::One));"] # [doc = " assert_eq!(categories.next(), Some(PluralCategory::Other));"] # [doc = " assert_eq!(categories.next(), Some(PluralCategory::Two));"] # [doc = " assert_eq!(categories.next(), Some(PluralCategory::Zero));"] # [doc = " assert_eq!(categories.next(), None);"] # [doc = " ```"] # [doc = ""] # [doc = " [`Plural Categories`]: PluralCategory"] pub fn all () -> impl ExactSizeIterator < Item = Self > { [Self :: Few , Self :: Many , Self :: One , Self :: Other , Self :: Two , Self :: Zero ,] . iter () . copied () } # [doc = " Returns the PluralCategory corresponding to given TR35 string."] pub fn get_for_cldr_string (category : & str) -> Option < PluralCategory > { Self :: get_for_cldr_bytes (category . as_bytes ()) } # [doc = " Returns the PluralCategory corresponding to given TR35 string as bytes"] pub fn get_for_cldr_bytes (category : & [u8]) -> Option < PluralCategory > { match category { b"zero" => Some (PluralCategory :: Zero) , b"one" => Some (PluralCategory :: One) , b"two" => Some (PluralCategory :: Two) , b"few" => Some (PluralCategory :: Few) , b"many" => Some (PluralCategory :: Many) , b"other" => Some (PluralCategory :: Other) , _ => None , } } }
+};
+}

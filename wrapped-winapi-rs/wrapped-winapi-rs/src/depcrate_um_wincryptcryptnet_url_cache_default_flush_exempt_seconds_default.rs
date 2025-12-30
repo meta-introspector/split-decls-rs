@@ -1,0 +1,9 @@
+// Generated macro for CRYPTNET_URL_CACHE_DEFAULT_FLUSH_EXEMPT_SECONDS_DEFAULT (const)
+macro_rules! Depcrate_um_wincryptCRYPTNET_URL_CACHE_DEFAULT_FLUSH_EXEMPT_SECONDS_DEFAULT {
+() => {
+// Module: crate::um::wincrypt
+// Provides: {"CRYPTNET_URL_CACHE_DEFAULT_FLUSH_EXEMPT_SECONDS_DEFAULT"}
+// Dependencies: {}
+pub const CRYPTNET_URL_CACHE_DEFAULT_FLUSH_EXEMPT_SECONDS_DEFAULT : DWORD = 28 * 24 * 60 * 60 ;
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for impl_1567 (impl)
+macro_rules! Depcrate_x509impl_1567 {
+() => {
+// Module: crate::x509
+// Provides: {"impl_1567"}
+// Dependencies: {}
+impl X509NameRef { # [doc = " Returns the name entries by the nid."] pub fn entries_by_nid (& self , nid : Nid) -> X509NameEntries < '_ > { X509NameEntries { name : self , nid : Some (nid) , loc : - 1 , } } # [doc = " Returns an iterator over all `X509NameEntry` values"] pub fn entries (& self) -> X509NameEntries < '_ > { X509NameEntries { name : self , nid : None , loc : - 1 , } } # [doc = " Compare two names, like [`Ord`] but it may fail."] # [doc = ""] # [doc = " With OpenSSL versions from 3.0.0 this may return an error if the underlying `X509_NAME_cmp`"] # [doc = " call fails."] # [doc = " For OpenSSL versions before 3.0.0 it will never return an error, but due to a bug it may"] # [doc = " spuriously return `Ordering::Less` if the `X509_NAME_cmp` call fails."] # [corresponds (X509_NAME_cmp)] pub fn try_cmp (& self , other : & X509NameRef) -> Result < Ordering , ErrorStack > { let cmp = unsafe { ffi :: X509_NAME_cmp (self . as_ptr () , other . as_ptr ()) } ; if cfg ! (ossl300) && cmp == - 2 { return Err (ErrorStack :: get ()) ; } Ok (cmp . cmp (& 0)) } # [doc = " Copies the name to a new `X509Name`."] # [corresponds (X509_NAME_dup)] # [cfg (any (boringssl , ossl110 , libressl , awslc))] pub fn to_owned (& self) -> Result < X509Name , ErrorStack > { unsafe { cvt_p (ffi :: X509_NAME_dup (self . as_ptr ())) . map (| n | X509Name :: from_ptr (n)) } } to_der ! { # [doc = " Serializes the certificate into a DER-encoded X509 name structure."] # [doc = ""] # [doc = " This corresponds to [`i2d_X509_NAME`]."] # [doc = ""] # [doc = " [`i2d_X509_NAME`]: https://docs.openssl.org/master/man3/i2d_X509_NAME/"] to_der , ffi :: i2d_X509_NAME } }
+};
+}

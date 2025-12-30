@@ -1,9 +1,9 @@
-// Generated macro for Sink (struct)
-macro_rules! Depcrate_ioSink {
+// Generated macro for sink (function)
+macro_rules! Depcrate_iosink {
 () => {
 // Module: crate::io
-// Provides: {"Sink"}
+// Provides: {"sink"}
 // Dependencies: {}
-# [doc = " Writer for the [`sink()`] function."] # [derive (Debug)] pub struct Sink { _private : () , }
+# [doc = " Creates a writer that consumes and drops all data."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " use futures_lite::io::{self, AsyncWriteExt};"] # [doc = ""] # [doc = " # spin_on::spin_on(async {"] # [doc = " let mut writer = io::sink();"] # [doc = " writer.write_all(b\"hello\").await?;"] # [doc = " # std::io::Result::Ok(()) });"] # [doc = " ```"] pub fn sink () -> Sink { Sink { _private : () } }
 };
 }

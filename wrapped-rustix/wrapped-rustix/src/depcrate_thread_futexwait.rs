@@ -1,9 +1,9 @@
-// Generated macro for Wait (struct)
-macro_rules! Depcrate_thread_futexWait {
+// Generated macro for wait (function)
+macro_rules! Depcrate_thread_futexwait {
 () => {
 // Module: crate::thread::futex
-// Provides: {"Wait"}
+// Provides: {"wait"}
 // Dependencies: {}
-# [doc = " For use with [`waitv`]."] # [repr (C)] # [derive (Debug , Copy , Clone)] # [non_exhaustive] pub struct Wait { # [doc = " The expected value."] pub val : u64 , # [doc = " The address to wait for."] pub uaddr : WaitPtr , # [doc = " The type and size of futex to perform."] pub flags : WaitFlags , # [doc = " Reserved for future use."] pub (crate) __reserved : u32 , }
+# [doc = " `syscall(SYS_futex, uaddr, FUTEX_WAIT, val, timeout, NULL, 0)`"] # [doc = ""] # [doc = " This is a very low-level feature for implementing synchronization"] # [doc = " primitives. See the references links."] # [doc = ""] # [doc = " # References"] # [doc = "  - [Linux `futex` system call]"] # [doc = "  - [Linux `futex` feature]"] # [doc = ""] # [doc = " [Linux `futex` system call]: https://man7.org/linux/man-pages/man2/futex.2.html"] # [doc = " [Linux `futex` feature]: https://man7.org/linux/man-pages/man7/futex.7.html"] # [inline] pub fn wait (uaddr : & AtomicU32 , flags : Flags , val : u32 , timeout : Option < & Timespec > ,) -> io :: Result < () > { unsafe { futex_timeout (uaddr , Operation :: Wait , flags , val , timeout , ptr :: null () , 0) . map (| val | { debug_assert_eq ! (val , 0 , "The return value should always equal zero, if the call is successful") ; }) } }
 };
 }

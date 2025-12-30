@@ -1,0 +1,44 @@
+// Generated module macro for crate::sftp
+macro_rules! Modcrate_sftp {
+() => {
+        Depcrate_sftpuse_142!();
+        Depcrate_sftpuse_143!();
+        Depcrate_sftpuse_144!();
+        Depcrate_sftpuse_145!();
+        Depcrate_sftpuse_146!();
+        Depcrate_sftpuse_147!();
+        Depcrate_sftpuse_148!();
+        Depcrate_sftpuse_149!();
+        Depcrate_sftpuse_150!();
+        Depcrate_sftpuse_151!();
+        Depcrate_sftpuse_152!();
+        Depcrate_sftpuse_153!();
+        Depcrate_sftpSftp!();
+        Depcrate_sftpSftpInnerDropWrapper!();
+        Depcrate_sftpSftpInner!();
+        Depcrate_sftpimpl_157!();
+        Depcrate_sftpimpl_158!();
+        Depcrate_sftpLockedSftp!();
+        Depcrate_sftpFile!();
+        Depcrate_sftpFileInner!();
+        Depcrate_sftpimpl_162!();
+        Depcrate_sftpimpl_163!();
+        Depcrate_sftpLockedFile!();
+        Depcrate_sftpFileStat!();
+        Depcrate_sftpFileType!();
+        Depcrate_sftpmacro_167!();
+        Depcrate_sftpmacro_168!();
+        Depcrate_sftpOpenType!();
+        Depcrate_sftpimpl_170!();
+        Depcrate_sftpimpl_171!();
+        Depcrate_sftpimpl_172!();
+        Depcrate_sftpimpl_173!();
+        Depcrate_sftpimpl_174!();
+        Depcrate_sftpimpl_175!();
+        Depcrate_sftpimpl_176!();
+        Depcrate_sftpimpl_177!();
+        Depcrate_sftpimpl_178!();
+        Depcrate_sftpmkpath!();
+        Depcrate_sftpmkpath!();
+    };
+}

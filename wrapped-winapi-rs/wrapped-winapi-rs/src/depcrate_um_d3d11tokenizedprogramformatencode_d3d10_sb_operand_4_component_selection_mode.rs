@@ -1,0 +1,9 @@
+// Generated macro for ENCODE_D3D10_SB_OPERAND_4_COMPONENT_SELECTION_MODE (function)
+macro_rules! Depcrate_um_d3d11tokenizedprogramformatENCODE_D3D10_SB_OPERAND_4_COMPONENT_SELECTION_MODE {
+() => {
+// Module: crate::um::d3d11tokenizedprogramformat
+// Provides: {"ENCODE_D3D10_SB_OPERAND_4_COMPONENT_SELECTION_MODE"}
+// Dependencies: {}
+# [inline] pub fn ENCODE_D3D10_SB_OPERAND_4_COMPONENT_SELECTION_MODE (SelectionMode : D3D10_SB_OPERAND_4_COMPONENT_SELECTION_MODE ,) -> DWORD { (SelectionMode << D3D10_SB_OPERAND_4_COMPONENT_SELECTION_MODE_SHIFT) & D3D10_SB_OPERAND_4_COMPONENT_SELECTION_MODE_MASK }
+};
+}

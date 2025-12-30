@@ -1,0 +1,40 @@
+// Generated module macro for crate::stream
+macro_rules! Modcrate_stream {
+() => {
+        Depcrate_streamuse_2!();
+        Depcrate_streamuse_3!();
+        Depcrate_streamuse_4!();
+        Depcrate_streamuse_5!();
+        Depcrate_streamuse_6!();
+        Depcrate_streamuse_7!();
+        Depcrate_streamuse_8!();
+        Depcrate_streamStream!();
+        Depcrate_streamimpl_10!();
+        Depcrate_streamimpl_11!();
+        Depcrate_streamLzmaOptions!();
+        Depcrate_streamMtStreamBuilder!();
+        Depcrate_streamFilters!();
+        Depcrate_streamAction!();
+        Depcrate_streamStatus!();
+        Depcrate_streamError!();
+        Depcrate_streamCheck!();
+        Depcrate_streamMode!();
+        Depcrate_streamMatchFinder!();
+        Depcrate_streamTELL_ANY_CHECK!();
+        Depcrate_streamTELL_NO_CHECK!();
+        Depcrate_streamTELL_UNSUPPORTED_CHECK!();
+        Depcrate_streamIGNORE_CHECK!();
+        Depcrate_streamCONCATENATED!();
+        Depcrate_streamimpl_26!();
+        Depcrate_streamimpl_27!();
+        Depcrate_streamimpl_28!();
+        Depcrate_streamimpl_29!();
+        Depcrate_streamimpl_30!();
+        Depcrate_streamimpl_31!();
+        Depcrate_streamcvt!();
+        Depcrate_streamimpl_33!();
+        Depcrate_streamimpl_34!();
+        Depcrate_streamimpl_35!();
+        Depcrate_streamimpl_36!();
+    };
+}

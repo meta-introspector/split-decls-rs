@@ -1,0 +1,9 @@
+// Generated macro for tests (module)
+macro_rules! Depcratetests {
+() => {
+// Module: crate
+// Provides: {"tests"}
+// Dependencies: {}
+# [cfg (test)] mod tests { use super :: RenameRule :: * ; # [test] fn rename_variants () { for & (original , lower , camel , snake , screaming , kebab) in & [("Outcome" , "outcome" , "outcome" , "outcome" , "OUTCOME" , "outcome") , ("VeryTasty" , "verytasty" , "veryTasty" , "very_tasty" , "VERY_TASTY" , "very-tasty") , ("A" , "a" , "a" , "a" , "A" , "a") , ("Z42" , "z42" , "z42" , "z42" , "Z42" , "z42") ,] { assert_eq ! (None . apply_to_variant (original) , original) ; assert_eq ! (LowerCase . apply_to_variant (original) , lower) ; assert_eq ! (PascalCase . apply_to_variant (original) , original) ; assert_eq ! (CamelCase . apply_to_variant (original) , camel) ; assert_eq ! (SnakeCase . apply_to_variant (original) , snake) ; assert_eq ! (ScreamingSnakeCase . apply_to_variant (original) , screaming) ; assert_eq ! (KebabCase . apply_to_variant (original) , kebab) ; } } # [test] fn rename_fields () { for & (original , pascal , camel , screaming , kebab) in & [("outcome" , "Outcome" , "outcome" , "OUTCOME" , "outcome") , ("very_tasty" , "VeryTasty" , "veryTasty" , "VERY_TASTY" , "very-tasty") , ("_leading_under" , "LeadingUnder" , "leadingUnder" , "_LEADING_UNDER" , "-leading-under") , ("double__under" , "DoubleUnder" , "doubleUnder" , "DOUBLE__UNDER" , "double--under") , ("a" , "A" , "a" , "A" , "a") , ("z42" , "Z42" , "z42" , "Z42" , "z42") ,] { assert_eq ! (None . apply_to_field (original) , original) ; assert_eq ! (PascalCase . apply_to_field (original) , pascal) ; assert_eq ! (CamelCase . apply_to_field (original) , camel) ; assert_eq ! (SnakeCase . apply_to_field (original) , original) ; assert_eq ! (ScreamingSnakeCase . apply_to_field (original) , screaming) ; assert_eq ! (KebabCase . apply_to_field (original) , kebab) ; } } }
+};
+}

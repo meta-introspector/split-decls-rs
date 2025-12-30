@@ -1,0 +1,9 @@
+// Generated macro for Edition (enum)
+macro_rules! Depcrate_editionEdition {
+() => {
+// Module: crate::edition
+// Provides: {"Edition"}
+// Dependencies: {}
+# [doc = " The edition of the compiler. (See [RFC 2052](https://github.com/rust-lang/rfcs/blob/master/text/2052-epochs.md).)"] # [derive (Clone , Copy , Hash , PartialEq , PartialOrd , Debug , Encodable , Decodable , Eq)] # [derive (HashStable_Generic)] pub enum Edition { # [doc = " The 2015 edition"] Edition2015 , # [doc = " The 2018 edition"] Edition2018 , # [doc = " The 2021 edition"] Edition2021 , # [doc = " The 2024 edition"] Edition2024 , # [doc = " The future edition - this variant will always exist and features associated with this"] # [doc = " edition can be moved to the next 20XX edition when it is established and it is confirmed"] # [doc = " that those features will be part of that edition."] # [doc = ""] # [doc = " This variant allows edition changes to be implemented before being assigned to a concrete"] # [doc = " edition - primarily when there are two different unstable behaviours that need tested across"] # [doc = " an edition boundary."] # [doc = ""] # [doc = " This edition will be permanently unstable and any features associated with this edition"] # [doc = " must also be behind a feature gate."] EditionFuture , }
+};
+}

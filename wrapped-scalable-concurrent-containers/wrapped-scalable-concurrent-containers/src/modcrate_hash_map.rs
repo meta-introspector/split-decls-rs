@@ -1,0 +1,54 @@
+// Generated module macro for crate::hash_map
+macro_rules! Modcrate_hash_map {
+() => {
+        Depcrate_hash_mapuse_110!();
+        Depcrate_hash_mapuse_111!();
+        Depcrate_hash_mapuse_112!();
+        Depcrate_hash_mapuse_113!();
+        Depcrate_hash_mapuse_114!();
+        Depcrate_hash_mapuse_115!();
+        Depcrate_hash_mapuse_116!();
+        Depcrate_hash_mapuse_117!();
+        Depcrate_hash_mapuse_118!();
+        Depcrate_hash_mapuse_119!();
+        Depcrate_hash_mapuse_120!();
+        Depcrate_hash_mapuse_121!();
+        Depcrate_hash_mapuse_122!();
+        Depcrate_hash_mapuse_123!();
+        Depcrate_hash_mapuse_124!();
+        Depcrate_hash_mapHashMap!();
+        Depcrate_hash_mapEntry!();
+        Depcrate_hash_mapOccupiedEntry!();
+        Depcrate_hash_mapVacantEntry!();
+        Depcrate_hash_mapConsumableEntry!();
+        Depcrate_hash_mapReplaceResult!();
+        Depcrate_hash_mapReserve!();
+        Depcrate_hash_mapimpl_132!();
+        Depcrate_hash_mapimpl_133!();
+        Depcrate_hash_mapimpl_134!();
+        Depcrate_hash_mapimpl_135!();
+        Depcrate_hash_mapimpl_136!();
+        Depcrate_hash_mapimpl_137!();
+        Depcrate_hash_mapimpl_138!();
+        Depcrate_hash_mapimpl_139!();
+        Depcrate_hash_mapimpl_140!();
+        Depcrate_hash_mapimpl_141!();
+        Depcrate_hash_mapimpl_142!();
+        Depcrate_hash_mapimpl_143!();
+        Depcrate_hash_mapimpl_144!();
+        Depcrate_hash_mapimpl_145!();
+        Depcrate_hash_mapimpl_146!();
+        Depcrate_hash_mapimpl_147!();
+        Depcrate_hash_mapimpl_148!();
+        Depcrate_hash_mapimpl_149!();
+        Depcrate_hash_mapimpl_150!();
+        Depcrate_hash_mapimpl_151!();
+        Depcrate_hash_mapimpl_152!();
+        Depcrate_hash_mapimpl_153!();
+        Depcrate_hash_mapimpl_154!();
+        Depcrate_hash_mapimpl_155!();
+        Depcrate_hash_mapimpl_156!();
+        Depcrate_hash_mapimpl_157!();
+        Depcrate_hash_mapimpl_158!();
+    };
+}

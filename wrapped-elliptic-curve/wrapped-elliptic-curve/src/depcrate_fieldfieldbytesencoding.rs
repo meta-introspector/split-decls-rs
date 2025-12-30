@@ -1,0 +1,9 @@
+// Generated macro for FieldBytesEncoding (trait)
+macro_rules! Depcrate_fieldFieldBytesEncoding {
+() => {
+// Module: crate::field
+// Provides: {"FieldBytesEncoding"}
+// Dependencies: {}
+# [doc = " Trait for decoding/encoding `Curve::Uint` from/to [`FieldBytes`] using"] # [doc = " curve-specific rules."] # [doc = ""] # [doc = " Namely a curve's modulus may be smaller than the big integer type used to"] # [doc = " internally represent field elements (since the latter are multiples of the"] # [doc = " limb size), such as in the case of curves like NIST P-224 and P-521, and so"] # [doc = " it may need to be padded/truncated to the right length."] # [doc = ""] # [doc = " Additionally, different curves have different endianness conventions, also"] # [doc = " captured here."] pub trait FieldBytesEncoding < C > : ArrayEncoding + Integer where C : Curve , { # [doc = " Decode unsigned integer from serialized field element."] # [doc = ""] # [doc = " The default implementation assumes a big endian encoding."] fn decode_field_bytes (field_bytes : & FieldBytes < C >) -> Self { debug_assert ! (field_bytes . len () <= Self :: ByteSize :: USIZE) ; let mut byte_array = ByteArray :: < Self > :: default () ; let offset = Self :: ByteSize :: USIZE . saturating_sub (field_bytes . len ()) ; byte_array [offset ..] . copy_from_slice (field_bytes) ; Self :: from_be_byte_array (byte_array) } # [doc = " Encode unsigned integer into serialized field element."] # [doc = ""] # [doc = " The default implementation assumes a big endian encoding."] fn encode_field_bytes (& self) -> FieldBytes < C > { let mut field_bytes = FieldBytes :: < C > :: default () ; debug_assert ! (field_bytes . len () <= Self :: ByteSize :: USIZE) ; let offset = Self :: ByteSize :: USIZE . saturating_sub (field_bytes . len ()) ; field_bytes . copy_from_slice (& self . to_be_byte_array () [offset ..]) ; field_bytes } }
+};
+}

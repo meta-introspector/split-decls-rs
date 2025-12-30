@@ -1,0 +1,9 @@
+// Generated macro for demangle_assembly (function)
+macro_rules! Depcratedemangle_assembly {
+() => {
+// Module: crate
+// Provides: {"demangle_assembly"}
+// Dependencies: {}
+# [doc = " VERY BRITTLE!"] fn demangle_assembly (assembly : & str) -> String { use std :: collections :: HashMap ; use lazy_static :: lazy_static ; use regex :: Captures ; use regex :: Regex ; lazy_static ! { static ref RE_SYMBOL : Regex = Regex :: new (r"([a-zA-Z_0-9$](\.\.)?)+") . unwrap () ; static ref RE_CRATE_ID : Regex = Regex :: new (r"\[.*?\]") . unwrap () ; static ref RE_LAST : Regex = Regex :: new (r"[a-z0-9]{17}$") . unwrap () ; static ref RE_ANON : Regex = Regex :: new (r"anon\.[a-f0-9]+\.") . unwrap () ; } let mut demangle_unique : HashMap < String , Vec < String > > = HashMap :: new () ; let assembly = RE_SYMBOL . replace_all (assembly , | caps : & Captures < '_ > | { let mut symbol = caps . get (0) . unwrap () . as_str () ; let (mut prefix , mut suffix) = ("" , "") ; if symbol . starts_with ("L__") { prefix = "L" ; symbol = symbol . strip_prefix ('L') . unwrap () ; if let Some (stripped) = symbol . strip_suffix ("$non_lazy_ptr") { suffix = "$non_lazy_ptr" ; symbol = stripped ; } } match rustc_demangle :: try_demangle (symbol) { Ok (s) => { let s = s . to_string () ; let s = RE_CRATE_ID . replace_all (& s , "[CRATE_ID]") ; let s = RE_LAST . replace (& s , "GENERATED_ID") ; let list_for_this_symbol = demangle_unique . entry (s . to_string ()) . or_insert_with (| | vec ! [symbol . to_string ()]) ; let unique_identifier = list_for_this_symbol . iter () . position (| x | x == symbol) . unwrap_or_else (| | { list_for_this_symbol . push (symbol . to_string ()) ; list_for_this_symbol . len () - 1 }) ; format ! ("{prefix}SYM({s}, {unique_identifier}){suffix}") } Err (_) => format ! ("{prefix}{symbol}{suffix}") , } }) ; RE_ANON . replace_all (& assembly , "anon.[ID].") . to_string () }
+};
+}

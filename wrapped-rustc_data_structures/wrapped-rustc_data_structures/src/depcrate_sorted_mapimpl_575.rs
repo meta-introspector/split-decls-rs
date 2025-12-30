@@ -1,0 +1,9 @@
+// Generated macro for impl_575 (impl)
+macro_rules! Depcrate_sorted_mapimpl_575 {
+() => {
+// Module: crate::sorted_map
+// Provides: {"impl_575"}
+// Dependencies: {}
+impl < K : Ord , V > FromIterator < (K , V) > for SortedMap < K , V > { fn from_iter < T : IntoIterator < Item = (K , V) > > (iter : T) -> Self { let mut data : Vec < (K , V) > = iter . into_iter () . collect () ; data . sort_unstable_by (| (k1 , _) , (k2 , _) | k1 . cmp (k2)) ; data . dedup_by (| (k1 , _) , (k2 , _) | k1 == k2) ; SortedMap { data } } }
+};
+}

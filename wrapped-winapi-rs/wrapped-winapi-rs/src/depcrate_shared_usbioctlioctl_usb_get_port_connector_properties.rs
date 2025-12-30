@@ -1,0 +1,9 @@
+// Generated macro for IOCTL_USB_GET_PORT_CONNECTOR_PROPERTIES (const)
+macro_rules! Depcrate_shared_usbioctlIOCTL_USB_GET_PORT_CONNECTOR_PROPERTIES {
+() => {
+// Module: crate::shared::usbioctl
+// Provides: {"IOCTL_USB_GET_PORT_CONNECTOR_PROPERTIES"}
+// Dependencies: {}
+pub const IOCTL_USB_GET_PORT_CONNECTOR_PROPERTIES : DWORD = CTL_CODE ! (FILE_DEVICE_USB , USB_GET_PORT_CONNECTOR_PROPERTIES , METHOD_BUFFERED , FILE_ANY_ACCESS) ;
+};
+}

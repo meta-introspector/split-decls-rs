@@ -1,0 +1,45 @@
+// Generated module macro for crate
+macro_rules! Modcrate {
+() => {
+        Depcrateother_1!();
+        Depcratemacros!();
+        Depcrateinternal!();
+        Depcrateother_47!();
+        Depcratetest_helpers!();
+        Depcrateassociations!();
+        Depcratebackend!();
+        Depcrateconnection!();
+        Depcratedata_types!();
+        Depcratedeserialize!();
+        Depcrateexpression!();
+        Depcrateexpression_methods!();
+        Depcrateinsertable!();
+        Depcratequery_builder!();
+        Depcratequery_dsl!();
+        Depcratequery_source!();
+        Depcrater2d2!();
+        Depcrateresult!();
+        Depcrateserialize!();
+        Depcrateupsert!();
+        Depcratesql_types!();
+        Depcratemigration!();
+        Depcraterow!();
+        Depcratemysql!();
+        Depcratepg!();
+        Depcratesqlite!();
+        Depcratetype_impls!();
+        Depcrateutil!();
+        Depcrateuse_4127!();
+        Depcrateuse_4128!();
+        Depcratedsl!();
+        Depcratehelper_types!();
+        Depcrateprelude!();
+        Depcrateuse_4132!();
+        Depcrateuse_4133!();
+        Depcrateuse_4134!();
+        Depcrateuse_4135!();
+        Depcrateuse_4136!();
+        Depcrateuse_4137!();
+        Depcrateother_4138!();
+    };
+}

@@ -1,0 +1,9 @@
+// Generated macro for CFG_CALL_TARGET_CONVERT_EXPORT_SUPPRESSED_TO_VALID (const)
+macro_rules! Depcrate_um_winntCFG_CALL_TARGET_CONVERT_EXPORT_SUPPRESSED_TO_VALID {
+() => {
+// Module: crate::um::winnt
+// Provides: {"CFG_CALL_TARGET_CONVERT_EXPORT_SUPPRESSED_TO_VALID"}
+// Dependencies: {}
+pub const CFG_CALL_TARGET_CONVERT_EXPORT_SUPPRESSED_TO_VALID : ULONG_PTR = 0x00000004 ;
+};
+}

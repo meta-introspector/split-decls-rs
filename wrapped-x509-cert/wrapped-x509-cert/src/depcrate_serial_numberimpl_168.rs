@@ -1,0 +1,9 @@
+// Generated macro for impl_168 (impl)
+macro_rules! Depcrate_serial_numberimpl_168 {
+() => {
+// Module: crate::serial_number
+// Provides: {"impl_168"}
+// Dependencies: {}
+# [cfg (feature = "builder")] impl < P : Profile > SerialNumber < P > { # [doc = " Generates a random serial number from RNG."] # [doc = ""] # [doc = " This follows the recommendation the CAB forum [ballot 164] and uses a minimum of 64 bits"] # [doc = " of output from the CSPRNG. This currently defaults to a 17-bytes long serial number."] # [doc = ""] # [doc = " [ballot 164]: https://cabforum.org/2016/03/31/ballot-164/"] pub fn generate < R : CryptoRng + ? Sized > (rng : & mut R) -> Self { Self :: generate_with_prefix (& [] , 17 , rng) . expect ("a random of 17 is acceptable, and rng may not fail") } # [doc = " Generates a random serial number from RNG. Include a prefix value."] # [doc = ""] # [doc = " This follows the recommendation the CAB forum [ballot 164] and uses a minimum of 64 bits"] # [doc = " of output from the CSPRNG."] # [doc = ""] # [doc = " The specified length does not include the length of the prefix, the maximum length must be"] # [doc = " equal or below 19 (to account for leading sign disambiguation, and the maximum length of 20)."] # [doc = ""] # [doc = " [ballot 164]: https://cabforum.org/2016/03/31/ballot-164/"] pub fn generate_with_prefix < R : CryptoRng + ? Sized > (prefix : & [u8] , rand_len : usize , rng : & mut R ,) -> Result < Self > { if rand_len < 8 { return Err (ErrorKind :: Failed . into ()) ; } if rand_len + prefix . len () > 19 { return Err (ErrorKind :: Failed . into ()) ; } let mut buf = vec ! [0 ; prefix . len () + rand_len] ; buf [.. prefix . len ()] . copy_from_slice (prefix) ; let rand_buf = & mut buf [prefix . len () ..] ; while rand_buf [0] == 0 { rng . fill_bytes (rand_buf) ; } Self :: new (& buf) } }
+};
+}

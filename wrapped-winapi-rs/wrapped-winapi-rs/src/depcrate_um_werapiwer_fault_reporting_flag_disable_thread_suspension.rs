@@ -1,0 +1,9 @@
+// Generated macro for WER_FAULT_REPORTING_FLAG_DISABLE_THREAD_SUSPENSION (const)
+macro_rules! Depcrate_um_werapiWER_FAULT_REPORTING_FLAG_DISABLE_THREAD_SUSPENSION {
+() => {
+// Module: crate::um::werapi
+// Provides: {"WER_FAULT_REPORTING_FLAG_DISABLE_THREAD_SUSPENSION"}
+// Dependencies: {}
+pub const WER_FAULT_REPORTING_FLAG_DISABLE_THREAD_SUSPENSION : DWORD = 4 ;
+};
+}

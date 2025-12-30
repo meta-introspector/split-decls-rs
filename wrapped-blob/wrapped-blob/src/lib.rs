@@ -1,0 +1,69 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcrate_blob_data_providerimpl_10.rs");
+include!("depcrate_blob_data_provideruse_8.rs");
+include!("depcrate_blob_schemause_20.rs");
+include!("depcrate_export_blob_exporteruse_45.rs");
+include!("depcrate_export_blob_exporteruse_43.rs");
+include!("depcrate_export_blob_exporterimpl_51.rs");
+include!("depcrate_blob_schemaimpl_31.rs");
+include!("depcrate_blob_schemause_18.rs");
+include!("depcrate_blob_data_provideruse_4.rs");
+include!("depcrate_blob_data_provideruse_7.rs");
+include!("depcrate_blob_schemarequest_separator.rs");
+include!("depcrate_blob_schemause_22.rs");
+include!("depcrate_blob_schemaimpl_26.rs");
+include!("depcrateblob_schema.rs");
+include!("depcrate_export_blob_exporterimpl_47.rs");
+include!("depcrate_blob_data_provideruse_5.rs");
+include!("depcrate_blob_schemablobschemav1.rs");
+include!("depcrate_export_blob_exporterfinalizedbuffers.rs");
+include!("depcrate_export_blob_exporteruse_42.rs");
+include!("depcrateexport.rs");
+include!("depcrate_export_blob_exporteruse_37.rs");
+include!("depcrate_exportuse_52.rs");
+include!("depcrate_blob_schemause_19.rs");
+include!("depcrateblob_data_provider.rs");
+include!("depcrate_blob_data_provideruse_6.rs");
+include!("depcrate_export_blob_exporteruse_35.rs");
+include!("depcrateuse_53.rs");
+include!("depcrateother_1.rs");
+include!("depcrate_blob_data_providerimpl_14.rs");
+include!("depcrate_blob_data_providerimpl_13.rs");
+include!("depcrate_blob_data_providerimpl_12.rs");
+include!("depcrate_blob_schemaimpl_28.rs");
+include!("depcrate_blob_schemachecksum_key.rs");
+include!("depcrate_blob_schemaneverschema.rs");
+include!("depcrate_blob_schemaimpl_30.rs");
+include!("depcrate_export_blob_exporteruse_34.rs");
+include!("depcrate_export_blob_exporteruse_40.rs");
+include!("depcrate_blob_data_providertest.rs");
+include!("depcrate_blob_schemablobschema.rs");
+include!("depcrate_export_blob_exporteruse_41.rs");
+include!("depcrate_export_blob_exporteruse_44.rs");
+include!("depcrate_export_blob_exporterimpl_48.rs");
+include!("depcrate_blob_data_providerblobdataprovider.rs");
+include!("depcrate_export_blob_exporterblobexporter.rs");
+include!("depcrate_blob_schemause_21.rs");
+include!("depcrate_export_blob_exporteruse_36.rs");
+include!("depcrate_blob_data_providerimpl_11.rs");
+include!("depcrate_export_blob_exporteruse_38.rs");
+include!("depcrate_export_blob_exporterimpl_49.rs");
+include!("depcrate_export_blob_exporteruse_39.rs");
+include!("depcrate_exportblob_exporter.rs");
+include!("depcrate_blob_schemause_17.rs");
+include!("depcrate_blob_data_provideruse_3.rs");
+include!("modcrate_blob_data_provider.rs");
+include!("modcrate_export_blob_exporter.rs");
+include!("modcrate_blob_schema.rs");
+include!("modcrate_export.rs");
+include!("modcrate.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate_blob_data_provider!();
+    Modcrate_export_blob_exporter!();
+    Modcrate_blob_schema!();
+    Modcrate_export!();
+    Modcrate!();
+}

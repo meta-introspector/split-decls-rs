@@ -1,0 +1,40 @@
+// Generated module macro for crate::if_let_rescope
+macro_rules! Modcrate_if_let_rescope {
+() => {
+        Depcrate_if_let_rescopeuse_402!();
+        Depcrate_if_let_rescopeuse_403!();
+        Depcrate_if_let_rescopeuse_404!();
+        Depcrate_if_let_rescopeuse_405!();
+        Depcrate_if_let_rescopeuse_406!();
+        Depcrate_if_let_rescopeuse_407!();
+        Depcrate_if_let_rescopeuse_408!();
+        Depcrate_if_let_rescopeuse_409!();
+        Depcrate_if_let_rescopeuse_410!();
+        Depcrate_if_let_rescopeuse_411!();
+        Depcrate_if_let_rescopeuse_412!();
+        Depcrate_if_let_rescopeuse_413!();
+        Depcrate_if_let_rescopeuse_414!();
+        Depcrate_if_let_rescopeuse_415!();
+        Depcrate_if_let_rescopeuse_416!();
+        Depcrate_if_let_rescopeuse_417!();
+        Depcrate_if_let_rescopemacro_418!();
+        Depcrate_if_let_rescopeIfLetRescope!();
+        Depcrate_if_let_rescopeexpr_parent_is_else!();
+        Depcrate_if_let_rescopeexpr_parent_is_stmt!();
+        Depcrate_if_let_rescopematch_head_needs_bracket!();
+        Depcrate_if_let_rescopeimpl_423!();
+        Depcrate_if_let_rescopemacro_424!();
+        Depcrate_if_let_rescopeimpl_425!();
+        Depcrate_if_let_rescopeIfLetRescopeLint!();
+        Depcrate_if_let_rescopeIfLetRescopeRewrite!();
+        Depcrate_if_let_rescopeimpl_428!();
+        Depcrate_if_let_rescopeDestructorLabel!();
+        Depcrate_if_let_rescopeAltHead!();
+        Depcrate_if_let_rescopeConsequentRewrite!();
+        Depcrate_if_let_rescopeClosingBrackets!();
+        Depcrate_if_let_rescopeSingleArmMatchBegin!();
+        Depcrate_if_let_rescopeFindSignificantDropper!();
+        Depcrate_if_let_rescopeimpl_435!();
+        Depcrate_if_let_rescopeimpl_436!();
+    };
+}

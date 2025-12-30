@@ -1,0 +1,9 @@
+// Generated macro for other_7019 (other)
+macro_rules! Depcrate_features_gen_SvcOutputMetadataother_7019 {
+() => {
+// Module: crate::features::gen_SvcOutputMetadata
+// Provides: {"other_7019"}
+// Dependencies: {}
+# [cfg (web_sys_unstable_apis)] # [wasm_bindgen] extern "C" { # [wasm_bindgen (extends = :: js_sys :: Object , js_name = SvcOutputMetadata)] # [derive (Debug , Clone , PartialEq , Eq)] # [doc = "The `SvcOutputMetadata` dictionary."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `SvcOutputMetadata`*"] # [doc = ""] # [doc = "*This API is unstable and requires `--cfg=web_sys_unstable_apis` to be activated, as"] # [doc = "[described in the `wasm-bindgen` guide](https://wasm-bindgen.github.io/wasm-bindgen/web-sys/unstable-apis.html)*"] pub type SvcOutputMetadata ; # [cfg (web_sys_unstable_apis)] # [doc = "Get the `temporalLayerId` field of this object."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `SvcOutputMetadata`*"] # [doc = ""] # [doc = "*This API is unstable and requires `--cfg=web_sys_unstable_apis` to be activated, as"] # [doc = "[described in the `wasm-bindgen` guide](https://wasm-bindgen.github.io/wasm-bindgen/web-sys/unstable-apis.html)*"] # [wasm_bindgen (method , getter = "temporalLayerId")] pub fn get_temporal_layer_id (this : & SvcOutputMetadata) -> Option < u32 > ; # [cfg (web_sys_unstable_apis)] # [doc = "Change the `temporalLayerId` field of this object."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `SvcOutputMetadata`*"] # [doc = ""] # [doc = "*This API is unstable and requires `--cfg=web_sys_unstable_apis` to be activated, as"] # [doc = "[described in the `wasm-bindgen` guide](https://wasm-bindgen.github.io/wasm-bindgen/web-sys/unstable-apis.html)*"] # [wasm_bindgen (method , setter = "temporalLayerId")] pub fn set_temporal_layer_id (this : & SvcOutputMetadata , val : u32) ; }
+};
+}

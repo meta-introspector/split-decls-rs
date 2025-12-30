@@ -1,0 +1,45 @@
+// Generated module macro for crate::loops::manual_memcpy
+macro_rules! Modcrate_loops_manual_memcpy {
+() => {
+        Depcrate_loops_manual_memcpyuse_3634!();
+        Depcrate_loops_manual_memcpyuse_3635!();
+        Depcrate_loops_manual_memcpyuse_3636!();
+        Depcrate_loops_manual_memcpyuse_3637!();
+        Depcrate_loops_manual_memcpyuse_3638!();
+        Depcrate_loops_manual_memcpyuse_3639!();
+        Depcrate_loops_manual_memcpyuse_3640!();
+        Depcrate_loops_manual_memcpyuse_3641!();
+        Depcrate_loops_manual_memcpyuse_3642!();
+        Depcrate_loops_manual_memcpyuse_3643!();
+        Depcrate_loops_manual_memcpyuse_3644!();
+        Depcrate_loops_manual_memcpyuse_3645!();
+        Depcrate_loops_manual_memcpyuse_3646!();
+        Depcrate_loops_manual_memcpyuse_3647!();
+        Depcrate_loops_manual_memcpyuse_3648!();
+        Depcrate_loops_manual_memcpyuse_3649!();
+        Depcrate_loops_manual_memcpycheck!();
+        Depcrate_loops_manual_memcpybuild_manual_memcpy_suggestion!();
+        Depcrate_loops_manual_memcpyMinifyingSugg!();
+        Depcrate_loops_manual_memcpyimpl_3653!();
+        Depcrate_loops_manual_memcpyimpl_3654!();
+        Depcrate_loops_manual_memcpyimpl_3655!();
+        Depcrate_loops_manual_memcpyimpl_3656!();
+        Depcrate_loops_manual_memcpyimpl_3657!();
+        Depcrate_loops_manual_memcpyimpl_3658!();
+        Depcrate_loops_manual_memcpyimpl_3659!();
+        Depcrate_loops_manual_memcpyOffset!();
+        Depcrate_loops_manual_memcpyOffsetSign!();
+        Depcrate_loops_manual_memcpyimpl_3662!();
+        Depcrate_loops_manual_memcpyapply_offset!();
+        Depcrate_loops_manual_memcpyStartKind!();
+        Depcrate_loops_manual_memcpyIndexExpr!();
+        Depcrate_loops_manual_memcpyStart!();
+        Depcrate_loops_manual_memcpyget_slice_like_element_ty!();
+        Depcrate_loops_manual_memcpyfetch_cloned_expr!();
+        Depcrate_loops_manual_memcpyget_details_from_idx!();
+        Depcrate_loops_manual_memcpyget_assignment!();
+        Depcrate_loops_manual_memcpyget_assignments!();
+        Depcrate_loops_manual_memcpyget_loop_counters!();
+        Depcrate_loops_manual_memcpyis_array_length_equal_to_range!();
+    };
+}

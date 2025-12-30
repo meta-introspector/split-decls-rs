@@ -1,0 +1,9 @@
+// Generated macro for IOCTL_STORAGE_DEVICE_TELEMETRY_NOTIFY (const)
+macro_rules! Depcrate_um_winioctlIOCTL_STORAGE_DEVICE_TELEMETRY_NOTIFY {
+() => {
+// Module: crate::um::winioctl
+// Provides: {"IOCTL_STORAGE_DEVICE_TELEMETRY_NOTIFY"}
+// Dependencies: {}
+pub const IOCTL_STORAGE_DEVICE_TELEMETRY_NOTIFY : DWORD = CTL_CODE ! (IOCTL_STORAGE_BASE , 0x0471 , METHOD_BUFFERED , FILE_READ_ACCESS | FILE_WRITE_ACCESS) ;
+};
+}

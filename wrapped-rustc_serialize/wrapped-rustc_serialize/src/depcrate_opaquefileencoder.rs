@@ -1,0 +1,9 @@
+// Generated macro for FileEncoder (struct)
+macro_rules! Depcrate_opaqueFileEncoder {
+() => {
+// Module: crate::opaque
+// Provides: {"FileEncoder"}
+// Dependencies: {}
+# [doc = " `FileEncoder` encodes data to file via fixed-size buffer."] # [doc = ""] # [doc = " There used to be a `MemEncoder` type that encoded all the data into a"] # [doc = " `Vec`. `FileEncoder` is better because its memory use is determined by the"] # [doc = " size of the buffer, rather than the full length of the encoded data, and"] # [doc = " because it doesn't need to reallocate memory along the way."] pub struct FileEncoder { buf : Box < [u8 ; BUF_SIZE] > , buffered : usize , flushed : usize , file : File , res : Result < () , io :: Error > , path : PathBuf , # [cfg (debug_assertions)] finished : bool , }
+};
+}

@@ -1,0 +1,47 @@
+// Generated module macro for crate::policy
+macro_rules! Modcrate_policy {
+() => {
+        Depcrate_policyextension!();
+        Depcrate_policyuse_36!();
+        Depcrate_policyuse_37!();
+        Depcrate_policyuse_38!();
+        Depcrate_policyuse_39!();
+        Depcrate_policyuse_40!();
+        Depcrate_policyuse_41!();
+        Depcrate_policyuse_42!();
+        Depcrate_policyuse_43!();
+        Depcrate_policyuse_44!();
+        Depcrate_policyuse_45!();
+        Depcrate_policyuse_46!();
+        Depcrate_policyuse_47!();
+        Depcrate_policyuse_48!();
+        Depcrate_policyuse_49!();
+        Depcrate_policyWEBPKI_MINIMUM_RSA_MODULUS!();
+        Depcrate_policySPKI_RSA!();
+        Depcrate_policySPKI_SECP256R1!();
+        Depcrate_policySPKI_SECP384R1!();
+        Depcrate_policySPKI_SECP521R1!();
+        Depcrate_policyWEBPKI_PERMITTED_SPKI_ALGORITHMS!();
+        Depcrate_policyRSASSA_PKCS1V15_SHA256!();
+        Depcrate_policyRSASSA_PKCS1V15_SHA384!();
+        Depcrate_policyRSASSA_PKCS1V15_SHA512!();
+        Depcrate_policyRSASSA_PSS_SHA256!();
+        Depcrate_policyRSASSA_PSS_SHA384!();
+        Depcrate_policyRSASSA_PSS_SHA512!();
+        Depcrate_policyECDSA_SHA256!();
+        Depcrate_policyECDSA_SHA384!();
+        Depcrate_policyECDSA_SHA512!();
+        Depcrate_policyWEBPKI_PERMITTED_SIGNATURE_ALGORITHMS!();
+        Depcrate_policyDEFAULT_MAX_CHAIN_DEPTH!();
+        Depcrate_policySubject!();
+        Depcrate_policyimpl_68!();
+        Depcrate_policyPolicyDefinition!();
+        Depcrate_policyimpl_70!();
+        Depcrate_policyPolicy!();
+        Depcrate_policyimpl_72!();
+        Depcrate_policyimpl_73!();
+        Depcrate_policypermits_validity_date!();
+        Depcrate_policypermits_subject_alternative_name!();
+        Depcrate_policytests!();
+    };
+}

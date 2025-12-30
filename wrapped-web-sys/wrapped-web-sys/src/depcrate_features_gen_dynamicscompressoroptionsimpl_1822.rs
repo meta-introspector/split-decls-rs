@@ -1,0 +1,9 @@
+// Generated macro for impl_1822 (impl)
+macro_rules! Depcrate_features_gen_DynamicsCompressorOptionsimpl_1822 {
+() => {
+// Module: crate::features::gen_DynamicsCompressorOptions
+// Provides: {"impl_1822"}
+// Dependencies: {}
+impl DynamicsCompressorOptions { # [doc = "Construct a new `DynamicsCompressorOptions`."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `DynamicsCompressorOptions`*"] pub fn new () -> Self { # [allow (unused_mut)] let mut ret : Self = :: wasm_bindgen :: JsCast :: unchecked_into (:: js_sys :: Object :: new ()) ; ret } # [deprecated = "Use `set_channel_count()` instead."] pub fn channel_count (& mut self , val : u32) -> & mut Self { self . set_channel_count (val) ; self } # [cfg (feature = "ChannelCountMode")] # [deprecated = "Use `set_channel_count_mode()` instead."] pub fn channel_count_mode (& mut self , val : ChannelCountMode) -> & mut Self { self . set_channel_count_mode (val) ; self } # [cfg (feature = "ChannelInterpretation")] # [deprecated = "Use `set_channel_interpretation()` instead."] pub fn channel_interpretation (& mut self , val : ChannelInterpretation) -> & mut Self { self . set_channel_interpretation (val) ; self } # [deprecated = "Use `set_attack()` instead."] pub fn attack (& mut self , val : f32) -> & mut Self { self . set_attack (val) ; self } # [deprecated = "Use `set_knee()` instead."] pub fn knee (& mut self , val : f32) -> & mut Self { self . set_knee (val) ; self } # [deprecated = "Use `set_ratio()` instead."] pub fn ratio (& mut self , val : f32) -> & mut Self { self . set_ratio (val) ; self } # [deprecated = "Use `set_release()` instead."] pub fn release (& mut self , val : f32) -> & mut Self { self . set_release (val) ; self } # [deprecated = "Use `set_threshold()` instead."] pub fn threshold (& mut self , val : f32) -> & mut Self { self . set_threshold (val) ; self } }
+};
+}

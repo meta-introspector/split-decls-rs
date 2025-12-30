@@ -1,0 +1,47 @@
+// Generated module macro for crate::neo
+macro_rules! Modcrate_neo {
+() => {
+        Depcrate_neouse_162!();
+        Depcrate_neouse_163!();
+        Depcrate_neouse_164!();
+        Depcrate_neouse_165!();
+        Depcrate_neouse_166!();
+        Depcrate_neouse_167!();
+        Depcrate_neouse_168!();
+        Depcrate_neouse_169!();
+        Depcrate_neouse_170!();
+        Depcrate_neouse_171!();
+        Depcrate_neouse_172!();
+        Depcrate_neouse_173!();
+        Depcrate_neouse_174!();
+        Depcrate_neouse_175!();
+        Depcrate_neouse_176!();
+        Depcrate_neouse_177!();
+        Depcrate_neouse_178!();
+        Depcrate_neouse_179!();
+        Depcrate_neouse_180!();
+        Depcrate_neouse_181!();
+        Depcrate_neomacro_182!();
+        Depcrate_neoprefs!();
+        Depcrate_neomacro_184!();
+        Depcrate_neomacro_185!();
+        Depcrate_neogen_buffer_constructors_with_external_loader!();
+        Depcrate_neomacro_187!();
+        Depcrate_neoFixedCalendarDateTimeFormatter!();
+        Depcrate_neoimpl_189!();
+        Depcrate_neoimpl_190!();
+        Depcrate_neoimpl_191!();
+        Depcrate_neomacro_192!();
+        Depcrate_neoDateTimeFormatter!();
+        Depcrate_neoimpl_194!();
+        Depcrate_neoimpl_195!();
+        Depcrate_neoimpl_196!();
+        Depcrate_neoimpl_197!();
+        Depcrate_neoimpl_198!();
+        Depcrate_neoNoCalendarFormatter!();
+        Depcrate_neoFormattedDateTime!();
+        Depcrate_neoimpl_201!();
+        Depcrate_neomacro_202!();
+        Depcrate_neoimpl_203!();
+    };
+}

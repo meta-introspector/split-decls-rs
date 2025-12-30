@@ -1,0 +1,9 @@
+// Generated macro for use_2301 (use)
+macro_rules! Depcrate_format_push_stringuse_2301 {
+() => {
+// Module: crate::format_push_string
+// Provides: {"use_2301"}
+// Dependencies: {}
+use clippy_utils :: diagnostics :: span_lint_and_then ;
+};
+}

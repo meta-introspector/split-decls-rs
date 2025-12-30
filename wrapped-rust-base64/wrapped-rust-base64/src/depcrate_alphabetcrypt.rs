@@ -1,0 +1,9 @@
+// Generated macro for CRYPT (const)
+macro_rules! Depcrate_alphabetCRYPT {
+() => {
+// Module: crate::alphabet
+// Provides: {"CRYPT"}
+// Dependencies: {}
+# [doc = " The `crypt(3)` alphabet (with `.` and `/` as the _first_ two characters)."] # [doc = ""] # [doc = " Not standardized, but folk wisdom on the net asserts that this alphabet is what crypt uses."] pub const CRYPT : Alphabet = Alphabet :: from_str_unchecked ("./0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz" ,) ;
+};
+}

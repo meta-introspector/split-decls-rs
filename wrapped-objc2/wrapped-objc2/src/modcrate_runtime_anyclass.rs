@@ -1,0 +1,39 @@
+// Generated module macro for crate::runtime::anyclass
+macro_rules! Modcrate_runtime_anyclass {
+() => {
+        Depcrate_runtime_anyclassuse_906!();
+        Depcrate_runtime_anyclassuse_907!();
+        Depcrate_runtime_anyclassuse_908!();
+        Depcrate_runtime_anyclassuse_909!();
+        Depcrate_runtime_anyclassuse_910!();
+        Depcrate_runtime_anyclassuse_911!();
+        Depcrate_runtime_anyclassuse_912!();
+        Depcrate_runtime_anyclassuse_913!();
+        Depcrate_runtime_anyclassuse_914!();
+        Depcrate_runtime_anyclassuse_915!();
+        Depcrate_runtime_anyclassuse_916!();
+        Depcrate_runtime_anyclassuse_917!();
+        Depcrate_runtime_anyclassuse_918!();
+        Depcrate_runtime_anyclassuse_919!();
+        Depcrate_runtime_anyclassuse_920!();
+        Depcrate_runtime_anyclassuse_921!();
+        Depcrate_runtime_anyclassuse_922!();
+        Depcrate_runtime_anyclassuse_923!();
+        Depcrate_runtime_anyclassuse_924!();
+        Depcrate_runtime_anyclassAnyClass!();
+        Depcrate_runtime_anyclassClass!();
+        Depcrate_runtime_anyclassimpl_927!();
+        Depcrate_runtime_anyclassimpl_928!();
+        Depcrate_runtime_anyclassimpl_929!();
+        Depcrate_runtime_anyclassimpl_930!();
+        Depcrate_runtime_anyclassimpl_931!();
+        Depcrate_runtime_anyclassmacro_932!();
+        Depcrate_runtime_anyclassimpl_933!();
+        Depcrate_runtime_anyclassimpl_934!();
+        Depcrate_runtime_anyclassimpl_935!();
+        Depcrate_runtime_anyclassimpl_936!();
+        Depcrate_runtime_anyclassimpl_937!();
+        Depcrate_runtime_anyclassimpl_938!();
+        Depcrate_runtime_anyclasstests!();
+    };
+}

@@ -1,0 +1,9 @@
+// Generated macro for impl_476 (impl)
+macro_rules! Depcrate_tokenimpl_476 {
+() => {
+// Module: crate::token
+// Provides: {"impl_476"}
+// Dependencies: {}
+impl Delimiter { # [inline] pub fn skip (& self) -> bool { match self { Delimiter :: Parenthesis | Delimiter :: Bracket | Delimiter :: Brace => false , Delimiter :: Invisible (origin) => origin . skip () , } } pub fn eq_ignoring_invisible_origin (& self , other : & Delimiter) -> bool { match (self , other) { (Delimiter :: Parenthesis , Delimiter :: Parenthesis) => true , (Delimiter :: Brace , Delimiter :: Brace) => true , (Delimiter :: Bracket , Delimiter :: Bracket) => true , (Delimiter :: Invisible (_) , Delimiter :: Invisible (_)) => true , _ => false , } } pub fn as_open_token_kind (& self) -> TokenKind { match * self { Delimiter :: Parenthesis => OpenParen , Delimiter :: Brace => OpenBrace , Delimiter :: Bracket => OpenBracket , Delimiter :: Invisible (origin) => OpenInvisible (origin) , } } pub fn as_close_token_kind (& self) -> TokenKind { match * self { Delimiter :: Parenthesis => CloseParen , Delimiter :: Brace => CloseBrace , Delimiter :: Bracket => CloseBracket , Delimiter :: Invisible (origin) => CloseInvisible (origin) , } } }
+};
+}

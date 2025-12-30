@@ -1,0 +1,49 @@
+// Generated module macro for crate::overflow
+macro_rules! Modcrate_overflow {
+() => {
+        Depcrate_overflowuse_982!();
+        Depcrate_overflowuse_983!();
+        Depcrate_overflowuse_984!();
+        Depcrate_overflowuse_985!();
+        Depcrate_overflowuse_986!();
+        Depcrate_overflowuse_987!();
+        Depcrate_overflowuse_988!();
+        Depcrate_overflowuse_989!();
+        Depcrate_overflowuse_990!();
+        Depcrate_overflowuse_991!();
+        Depcrate_overflowuse_992!();
+        Depcrate_overflowuse_993!();
+        Depcrate_overflowuse_994!();
+        Depcrate_overflowuse_995!();
+        Depcrate_overflowuse_996!();
+        Depcrate_overflowuse_997!();
+        Depcrate_overflowuse_998!();
+        Depcrate_overflowuse_999!();
+        Depcrate_overflowuse_1000!();
+        Depcrate_overflowSPECIAL_CASE_MACROS!();
+        Depcrate_overflowSPECIAL_CASE_MACROS_V2!();
+        Depcrate_overflowSPECIAL_CASE_ATTR!();
+        Depcrate_overflowOverflowableItem!();
+        Depcrate_overflowimpl_1005!();
+        Depcrate_overflowimpl_1006!();
+        Depcrate_overflowimpl_1007!();
+        Depcrate_overflowIntoOverflowableItem!();
+        Depcrate_overflowimpl_1009!();
+        Depcrate_overflowimpl_into_overflowable_item_for_ast_node!();
+        Depcrate_overflowimpl_into_overflowable_item_for_rustfmt_types!();
+        Depcrate_overflowmacro_1012!();
+        Depcrate_overflowmacro_1013!();
+        Depcrate_overflowinto_overflowable_list!();
+        Depcrate_overflowrewrite_with_parens!();
+        Depcrate_overflowrewrite_with_angle_brackets!();
+        Depcrate_overflowrewrite_with_square_brackets!();
+        Depcrate_overflowContext!();
+        Depcrate_overflowimpl_1019!();
+        Depcrate_overflowneed_block_indent!();
+        Depcrate_overflowcan_be_overflowed!();
+        Depcrate_overflowlast_item_shape!();
+        Depcrate_overflowshape_from_indent_style!();
+        Depcrate_overflowno_long_items!();
+        Depcrate_overflowmaybe_get_args_offset!();
+    };
+}

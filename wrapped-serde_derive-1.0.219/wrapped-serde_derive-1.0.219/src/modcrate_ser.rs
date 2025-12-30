@@ -1,0 +1,53 @@
+// Generated module macro for crate::ser
+macro_rules! Modcrate_ser {
+() => {
+        Depcrate_seruse_331!();
+        Depcrate_seruse_332!();
+        Depcrate_seruse_333!();
+        Depcrate_seruse_334!();
+        Depcrate_seruse_335!();
+        Depcrate_seruse_336!();
+        Depcrate_seruse_337!();
+        Depcrate_seruse_338!();
+        Depcrate_seruse_339!();
+        Depcrate_serexpand_derive_serialize!();
+        Depcrate_serprecondition!();
+        Depcrate_serParameters!();
+        Depcrate_serimpl_343!();
+        Depcrate_serbuild_generics!();
+        Depcrate_serneeds_serialize_bound!();
+        Depcrate_serserialize_body!();
+        Depcrate_serserialize_transparent!();
+        Depcrate_serserialize_into!();
+        Depcrate_serserialize_unit_struct!();
+        Depcrate_serserialize_newtype_struct!();
+        Depcrate_serserialize_tuple_struct!();
+        Depcrate_serserialize_struct!();
+        Depcrate_serserialize_struct_tag_field!();
+        Depcrate_serserialize_struct_as_struct!();
+        Depcrate_serserialize_struct_as_map!();
+        Depcrate_serserialize_enum!();
+        Depcrate_serserialize_variant!();
+        Depcrate_serserialize_externally_tagged_variant!();
+        Depcrate_serserialize_internally_tagged_variant!();
+        Depcrate_serserialize_adjacently_tagged_variant!();
+        Depcrate_serserialize_untagged_variant!();
+        Depcrate_serTupleVariant!();
+        Depcrate_serserialize_tuple_variant!();
+        Depcrate_serStructVariant!();
+        Depcrate_serserialize_struct_variant!();
+        Depcrate_serserialize_struct_variant_with_flatten!();
+        Depcrate_serserialize_tuple_struct_visitor!();
+        Depcrate_serserialize_struct_visitor!();
+        Depcrate_serwrap_serialize_field_with!();
+        Depcrate_serwrap_serialize_variant_with!();
+        Depcrate_serwrap_serialize_with!();
+        Depcrate_sermut_if!();
+        Depcrate_serget_member!();
+        Depcrate_sereffective_style!();
+        Depcrate_serStructTrait!();
+        Depcrate_serimpl_376!();
+        Depcrate_serTupleTrait!();
+        Depcrate_serimpl_378!();
+    };
+}

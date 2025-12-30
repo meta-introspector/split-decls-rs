@@ -1,0 +1,9 @@
+// Generated macro for cast (function)
+macro_rules! Depcrate_abicast {
+() => {
+// Module: crate::abi
+// Provides: {"cast"}
+// Dependencies: {}
+fn cast (from : WasmType , to : WasmType) -> Bitcast { use WasmType :: * ; match (from , to) { (I32 , I32) | (I64 , I64) | (F32 , F32) | (F64 , F64) | (Pointer , Pointer) | (PointerOrI64 , PointerOrI64) | (Length , Length) => Bitcast :: None , (I32 , I64) => Bitcast :: I32ToI64 , (F32 , I32) => Bitcast :: F32ToI32 , (F64 , I64) => Bitcast :: F64ToI64 , (I64 , I32) => Bitcast :: I64ToI32 , (I32 , F32) => Bitcast :: I32ToF32 , (I64 , F64) => Bitcast :: I64ToF64 , (F32 , I64) => Bitcast :: F32ToI64 , (I64 , F32) => Bitcast :: I64ToF32 , (I64 , PointerOrI64) => Bitcast :: I64ToP64 , (Pointer , PointerOrI64) => Bitcast :: PToP64 , (_ , PointerOrI64) => { Bitcast :: Sequence (Box :: new ([cast (from , I64) , cast (I64 , PointerOrI64)])) } (PointerOrI64 , I64) => Bitcast :: P64ToI64 , (PointerOrI64 , Pointer) => Bitcast :: P64ToP , (PointerOrI64 , _) => Bitcast :: Sequence (Box :: new ([cast (PointerOrI64 , I64) , cast (I64 , to)])) , (I32 , Pointer) => Bitcast :: I32ToP , (Pointer , I32) => Bitcast :: PToI32 , (I32 , Length) => Bitcast :: I32ToL , (Length , I32) => Bitcast :: LToI32 , (I64 , Length) => Bitcast :: I64ToL , (Length , I64) => Bitcast :: LToI64 , (Pointer , Length) => Bitcast :: PToL , (Length , Pointer) => Bitcast :: LToP , (F32 , Pointer | Length) => Bitcast :: Sequence (Box :: new ([cast (F32 , I32) , cast (I32 , to)])) , (Pointer | Length , F32) => Bitcast :: Sequence (Box :: new ([cast (from , I32) , cast (I32 , F32)])) , (F32 , F64) | (F64 , F32) | (F64 , I32) | (I32 , F64) | (Pointer | Length , I64 | F64) | (I64 | F64 , Pointer | Length) => { unreachable ! ("Don't know how to bitcast from {:?} to {:?}" , from , to) ; } } }
+};
+}

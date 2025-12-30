@@ -1,0 +1,9 @@
+// Generated macro for impl_191 (impl)
+macro_rules! Depcrate_backend_ed25519impl_191 {
+() => {
+// Module: crate::backend::ed25519
+// Provides: {"impl_191"}
+// Dependencies: {}
+# [pyo3 :: pymethods] impl Ed25519PrivateKey { fn sign < 'p > (& self , py : pyo3 :: Python < 'p > , data : CffiBuf < '_ > ,) -> CryptographyResult < pyo3 :: Bound < 'p , pyo3 :: types :: PyBytes > > { let mut signer = openssl :: sign :: Signer :: new_without_digest (& self . pkey) ? ; let len = signer . len () ? ; Ok (pyo3 :: types :: PyBytes :: new_with (py , len , | b | { let n = signer . sign_oneshot (b , data . as_bytes ()) . map_err (CryptographyError :: from) ? ; assert_eq ! (n , b . len ()) ; Ok (()) }) ?) } fn public_key (& self) -> CryptographyResult < Ed25519PublicKey > { let raw_bytes = self . pkey . raw_public_key () ? ; Ok (Ed25519PublicKey { pkey : openssl :: pkey :: PKey :: public_key_from_raw_bytes (& raw_bytes , openssl :: pkey :: Id :: ED25519 ,) ? , }) } fn private_bytes_raw < 'p > (& self , py : pyo3 :: Python < 'p > ,) -> CryptographyResult < pyo3 :: Bound < 'p , pyo3 :: types :: PyBytes > > { let raw_bytes = self . pkey . raw_private_key () ? ; Ok (pyo3 :: types :: PyBytes :: new (py , & raw_bytes)) } fn private_bytes < 'p > (slf : & pyo3 :: Bound < 'p , Self > , py : pyo3 :: Python < 'p > , encoding : & pyo3 :: Bound < 'p , pyo3 :: PyAny > , format : & pyo3 :: Bound < 'p , pyo3 :: PyAny > , encryption_algorithm : & pyo3 :: Bound < 'p , pyo3 :: PyAny > ,) -> CryptographyResult < pyo3 :: Bound < 'p , pyo3 :: types :: PyBytes > > { utils :: pkey_private_bytes (py , slf , & slf . borrow () . pkey , encoding , format , encryption_algorithm , true , true ,) } fn __copy__ (slf : pyo3 :: PyRef < '_ , Self >) -> pyo3 :: PyRef < '_ , Self > { slf } fn __deepcopy__ < 'p > (slf : pyo3 :: PyRef < 'p , Self > , _memo : & pyo3 :: Bound < 'p , pyo3 :: PyAny > ,) -> pyo3 :: PyRef < 'p , Self > { slf } }
+};
+}

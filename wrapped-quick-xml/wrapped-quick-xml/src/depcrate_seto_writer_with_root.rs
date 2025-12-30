@@ -1,0 +1,9 @@
+// Generated macro for to_writer_with_root (function)
+macro_rules! Depcrate_seto_writer_with_root {
+() => {
+// Module: crate::se
+// Provides: {"to_writer_with_root"}
+// Dependencies: {}
+# [doc = " Serialize struct into a `Write`r using specified root tag name."] # [doc = " `root_tag` should be valid [XML name], otherwise error is returned."] # [doc = ""] # [doc = " Returns the classification of the last written type."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " # use quick_xml::se::to_writer_with_root;"] # [doc = " # use serde::Serialize;"] # [doc = " # use pretty_assertions::assert_eq;"] # [doc = " #[derive(Serialize)]"] # [doc = " struct Root<'a> {"] # [doc = "     #[serde(rename = \"@attribute\")]"] # [doc = "     attribute: &'a str,"] # [doc = "     element: &'a str,"] # [doc = "     #[serde(rename = \"$text\")]"] # [doc = "     text: &'a str,"] # [doc = " }"] # [doc = ""] # [doc = " let data = Root {"] # [doc = "     attribute: \"attribute content\","] # [doc = "     element: \"element content\","] # [doc = "     text: \"text content\","] # [doc = " };"] # [doc = ""] # [doc = " let mut buffer = String::new();"] # [doc = " to_writer_with_root(&mut buffer, \"top-level\", &data).unwrap();"] # [doc = " assert_eq!("] # [doc = "     buffer,"] # [doc = "     \"<top-level attribute=\\\"attribute content\\\">\\"] # [doc = "         <element>element content</element>\\"] # [doc = "         text content\\"] # [doc = "     </top-level>\""] # [doc = " );"] # [doc = " ```"] # [doc = ""] # [doc = " [XML name]: https://www.w3.org/TR/xml11/#NT-Name"] pub fn to_writer_with_root < W , T > (mut writer : W , root_tag : & str , value : & T ,) -> Result < WriteResult , SeError > where W : Write , T : ? Sized + Serialize , { value . serialize (Serializer :: with_root (& mut writer , Some (root_tag)) ?) }
+};
+}

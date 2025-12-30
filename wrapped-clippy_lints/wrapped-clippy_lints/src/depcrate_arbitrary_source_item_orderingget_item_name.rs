@@ -1,0 +1,9 @@
+// Generated macro for get_item_name (function)
+macro_rules! Depcrate_arbitrary_source_item_orderingget_item_name {
+() => {
+// Module: crate::arbitrary_source_item_ordering
+// Provides: {"get_item_name"}
+// Dependencies: {}
+# [doc = " Gets the item name for sorting purposes, which in the general case is"] # [doc = " `item.ident.name`."] # [doc = ""] # [doc = " For trait impls, the name used for sorting will be the written path of"] # [doc = " `item.self_ty` plus the written path of `item.of_trait`, joined with"] # [doc = " exclamation marks. Exclamation marks are used because they are the first"] # [doc = " printable ASCII character."] # [doc = ""] # [doc = " Trait impls generated using a derive-macro will have their path rewritten,"] # [doc = " such that for example `Default` is `$crate::default::Default`, and"] # [doc = " `std::clone::Clone` is `$crate::clone::Clone`. This behaviour is described"] # [doc = " further in the [Rust Reference, Paths Chapter][rust_ref]."] # [doc = ""] # [doc = " [rust_ref]: https://doc.rust-lang.org/reference/paths.html#crate-1"] fn get_item_name (item : & Item < '_ >) -> Option < String > { match item . kind { ItemKind :: Impl (im) => { if let TyKind :: Path (path) = im . self_ty . kind { match path { QPath :: Resolved (_ , path) => { let segs = path . segments . iter () ; let mut segs : Vec < String > = segs . map (| s | s . ident . name . as_str () . to_owned ()) . collect () ; if let Some (of_trait) = im . of_trait { let mut trait_segs : Vec < String > = of_trait . trait_ref . path . segments . iter () . map (| s | s . ident . name . as_str () . to_owned ()) . collect () ; segs . append (& mut trait_segs) ; } segs . push (String :: new ()) ; Some (segs . join ("!!")) } , QPath :: TypeRelative (_ , _path_seg) => { None } , } } else { None } } , _ => item . kind . ident () . map (| name | name . as_str () . to_owned ()) , } }
+};
+}

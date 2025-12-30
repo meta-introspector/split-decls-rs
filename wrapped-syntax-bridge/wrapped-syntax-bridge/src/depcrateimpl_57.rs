@@ -1,0 +1,9 @@
+// Generated macro for impl_57 (impl)
+macro_rules! Depcrateimpl_57 {
+() => {
+// Module: crate
+// Provides: {"impl_57"}
+// Dependencies: {}
+impl < SpanMap , S > SrcToken < Converter < SpanMap , S > , S > for SynToken < S > { fn kind (& self , _ctx : & Converter < SpanMap , S >) -> SyntaxKind { match self { SynToken :: Ordinary (token) => token . kind () , SynToken :: Punct { token , offset : i } => { SyntaxKind :: from_char (token . text () . chars () . nth (* i) . unwrap ()) . unwrap () } SynToken :: Leaf (_) => { never ! () ; SyntaxKind :: ERROR } } } fn to_char (& self , _ctx : & Converter < SpanMap , S >) -> Option < char > { match self { SynToken :: Ordinary (_) => None , SynToken :: Punct { token : it , offset : i } => it . text () . chars () . nth (* i) , SynToken :: Leaf (_) => None , } } fn to_text (& self , _ctx : & Converter < SpanMap , S >) -> SmolStr { match self { SynToken :: Ordinary (token) | SynToken :: Punct { token , offset : _ } => token . text () . into () , SynToken :: Leaf (_) => { never ! () ; "" . into () } } } fn as_leaf (& self) -> Option < & tt :: Leaf < S > > { match self { SynToken :: Ordinary (_) | SynToken :: Punct { .. } => None , SynToken :: Leaf (it) => Some (it) , } } }
+};
+}

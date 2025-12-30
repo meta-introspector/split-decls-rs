@@ -1,0 +1,40 @@
+// Generated module macro for crate::boxed
+macro_rules! Modcrate_boxed {
+() => {
+        Depcrate_boxeduse_3!();
+        Depcrate_boxedBox!();
+        Depcrate_boxedimpl_5!();
+        Depcrate_boxedimpl_6!();
+        Depcrate_boxedimpl_7!();
+        Depcrate_boxedimpl_8!();
+        Depcrate_boxedimpl_9!();
+        Depcrate_boxedimpl_10!();
+        Depcrate_boxedimpl_11!();
+        Depcrate_boxedimpl_12!();
+        Depcrate_boxedimpl_13!();
+        Depcrate_boxedimpl_14!();
+        Depcrate_boxedimpl_15!();
+        Depcrate_boxedimpl_16!();
+        Depcrate_boxedimpl_17!();
+        Depcrate_boxedimpl_18!();
+        Depcrate_boxedimpl_19!();
+        Depcrate_boxedimpl_20!();
+        Depcrate_boxedimpl_21!();
+        Depcrate_boxedimpl_22!();
+        Depcrate_boxedimpl_23!();
+        Depcrate_boxedimpl_24!();
+        Depcrate_boxedimpl_25!();
+        Depcrate_boxedimpl_26!();
+        Depcrate_boxedimpl_27!();
+        Depcrate_boxedimpl_28!();
+        Depcrate_boxedimpl_29!();
+        Depcrate_boxedimpl_30!();
+        Depcrate_boxedimpl_31!();
+        Depcrate_boxedimpl_32!();
+        Depcrate_boxedimpl_33!();
+        Depcrate_boxedimpl_34!();
+        Depcrate_boxedimpl_35!();
+        Depcrate_boxedimpl_36!();
+        Depcrate_boxedserialize!();
+    };
+}

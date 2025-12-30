@@ -1,9 +1,9 @@
-// Generated macro for WaitId (enum)
-macro_rules! Depcrate_process_waitWaitId {
+// Generated macro for waitid (function)
+macro_rules! Depcrate_process_waitwaitid {
 () => {
 // Module: crate::process::wait
-// Provides: {"WaitId"}
+// Provides: {"waitid"}
 // Dependencies: {}
-# [doc = " The identifier to wait on in a call to [`waitid`]."] # [cfg (not (any (target_os = "openbsd" , target_os = "redox" , target_os = "wasi")))] # [derive (Debug , Clone)] # [non_exhaustive] pub enum WaitId < 'a > { # [doc = " Wait on all processes."] # [doc (alias = "P_ALL")] All , # [doc = " Wait for a specific process ID."] # [doc (alias = "P_PID")] Pid (Pid) , # [doc = " Wait for a specific process group ID, or the calling process' group ID."] # [doc (alias = "P_PGID")] Pgid (Option < Pid >) , # [doc = " Wait for a specific process file descriptor."] # [cfg (target_os = "linux")] # [doc (alias = "P_PIDFD")] PidFd (BorrowedFd < 'a >) , # [doc = " Eat the lifetime for non-Linux platforms."] # [doc (hidden)] # [cfg (not (target_os = "linux"))] __EatLifetime (core :: marker :: PhantomData < & 'a () >) , }
+# [doc = " `waitid(_, _, _, opts)`—Wait for the specified child process to change"] # [doc = " state."] # [cfg (not (any (target_os = "cygwin" , target_os = "horizon" , target_os = "openbsd" , target_os = "redox" , target_os = "wasi" ,)))] # [inline] pub fn waitid < 'a , Id : Into < WaitId < 'a > > > (id : Id , options : WaitIdOptions ,) -> io :: Result < Option < WaitIdStatus > > { backend :: process :: syscalls :: waitid (id . into () , options) }
 };
 }

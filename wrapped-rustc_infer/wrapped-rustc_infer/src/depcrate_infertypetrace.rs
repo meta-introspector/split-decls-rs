@@ -1,0 +1,9 @@
+// Generated macro for TypeTrace (struct)
+macro_rules! Depcrate_inferTypeTrace {
+() => {
+// Module: crate::infer
+// Provides: {"TypeTrace"}
+// Dependencies: {}
+# [doc = " The trace designates the path through inference that we took to"] # [doc = " encounter an error or subtyping constraint."] # [doc = ""] # [doc = " See the `error_reporting` module for more details."] # [derive (Clone , Debug)] pub struct TypeTrace < 'tcx > { pub cause : ObligationCause < 'tcx > , pub values : ValuePairs < 'tcx > , }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for D3D11_DS_INPUT_PATCH_CONSTANT_REGISTER_COMPONENTS (const)
+macro_rules! Depcrate_um_d3d11D3D11_DS_INPUT_PATCH_CONSTANT_REGISTER_COMPONENTS {
+() => {
+// Module: crate::um::d3d11
+// Provides: {"D3D11_DS_INPUT_PATCH_CONSTANT_REGISTER_COMPONENTS"}
+// Dependencies: {}
+pub const D3D11_DS_INPUT_PATCH_CONSTANT_REGISTER_COMPONENTS : DWORD = 4 ;
+};
+}

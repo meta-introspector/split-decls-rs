@@ -4,6 +4,6 @@ macro_rules! Depcrate_updateuse_586 {
 // Module: crate::update
 // Provides: {"use_586"}
 // Dependencies: {}
-use std :: path :: PathBuf ;
+use crate :: Revision ;
 };
 }

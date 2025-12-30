@@ -1,0 +1,39 @@
+// Generated module macro for crate::um::minschannel
+macro_rules! Modcrate_um_minschannel {
+() => {
+        Depcrate_um_minschanneluse_31813!();
+        Depcrate_um_minschanneluse_31814!();
+        Depcrate_um_minschanneluse_31815!();
+        Depcrate_um_minschanneluse_31816!();
+        Depcrate_um_minschannelSECPKG_ATTR_ISSUER_LIST!();
+        Depcrate_um_minschannelSECPKG_ATTR_REMOTE_CRED!();
+        Depcrate_um_minschannelSECPKG_ATTR_LOCAL_CRED!();
+        Depcrate_um_minschannelSECPKG_ATTR_REMOTE_CERT_CONTEXT!();
+        Depcrate_um_minschannelSECPKG_ATTR_LOCAL_CERT_CONTEXT!();
+        Depcrate_um_minschannelSECPKG_ATTR_ROOT_STORE!();
+        Depcrate_um_minschannelSECPKG_ATTR_SUPPORTED_ALGS!();
+        Depcrate_um_minschannelSECPKG_ATTR_CIPHER_STRENGTHS!();
+        Depcrate_um_minschannelSECPKG_ATTR_SUPPORTED_PROTOCOLS!();
+        Depcrate_um_minschannelSECPKG_ATTR_ISSUER_LIST_EX!();
+        Depcrate_um_minschannelSECPKG_ATTR_CONNECTION_INFO!();
+        Depcrate_um_minschannelSECPKG_ATTR_EAP_KEY_BLOCK!();
+        Depcrate_um_minschannelSECPKG_ATTR_MAPPED_CRED_ATTR!();
+        Depcrate_um_minschannelSECPKG_ATTR_SESSION_INFO!();
+        Depcrate_um_minschannelSECPKG_ATTR_APP_DATA!();
+        Depcrate_um_minschannelSECPKG_ATTR_REMOTE_CERTIFICATES!();
+        Depcrate_um_minschannelSECPKG_ATTR_CLIENT_CERT_POLICY!();
+        Depcrate_um_minschannelSECPKG_ATTR_CC_POLICY_RESULT!();
+        Depcrate_um_minschannelSECPKG_ATTR_USE_NCRYPT!();
+        Depcrate_um_minschannelSECPKG_ATTR_LOCAL_CERT_INFO!();
+        Depcrate_um_minschannelSECPKG_ATTR_CIPHER_INFO!();
+        Depcrate_um_minschannelSECPKG_ATTR_EAP_PRF_INFO!();
+        Depcrate_um_minschannelSECPKG_ATTR_SUPPORTED_SIGNATURES!();
+        Depcrate_um_minschannelSECPKG_ATTR_REMOTE_CERT_CHAIN!();
+        Depcrate_um_minschannelSECPKG_ATTR_UI_INFO!();
+        Depcrate_um_minschannelSECPKG_ATTR_EARLY_START!();
+        Depcrate_um_minschannelmacro_31843!();
+        Depcrate_um_minschannelmacro_31844!();
+        Depcrate_um_minschannelmacro_31845!();
+        Depcrate_um_minschannelmacro_31846!();
+    };
+}

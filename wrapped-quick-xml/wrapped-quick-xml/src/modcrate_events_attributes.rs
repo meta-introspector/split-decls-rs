@@ -1,0 +1,39 @@
+// Generated module macro for crate::events::attributes
+macro_rules! Modcrate_events_attributes {
+() => {
+        Depcrate_events_attributesuse_239!();
+        Depcrate_events_attributesuse_240!();
+        Depcrate_events_attributesuse_241!();
+        Depcrate_events_attributesuse_242!();
+        Depcrate_events_attributesuse_243!();
+        Depcrate_events_attributesuse_244!();
+        Depcrate_events_attributesuse_245!();
+        Depcrate_events_attributesuse_246!();
+        Depcrate_events_attributesAttribute!();
+        Depcrate_events_attributesimpl_248!();
+        Depcrate_events_attributesimpl_249!();
+        Depcrate_events_attributesimpl_250!();
+        Depcrate_events_attributesimpl_251!();
+        Depcrate_events_attributesimpl_252!();
+        Depcrate_events_attributesimpl_253!();
+        Depcrate_events_attributesAttributes!();
+        Depcrate_events_attributesimpl_255!();
+        Depcrate_events_attributesimpl_256!();
+        Depcrate_events_attributesimpl_257!();
+        Depcrate_events_attributesimpl_258!();
+        Depcrate_events_attributesAttrError!();
+        Depcrate_events_attributesimpl_260!();
+        Depcrate_events_attributesimpl_261!();
+        Depcrate_events_attributesAttr!();
+        Depcrate_events_attributesimpl_263!();
+        Depcrate_events_attributesimpl_264!();
+        Depcrate_events_attributesimpl_265!();
+        Depcrate_events_attributesimpl_266!();
+        Depcrate_events_attributesAttrResult!();
+        Depcrate_events_attributesState!();
+        Depcrate_events_attributesIterState!();
+        Depcrate_events_attributesimpl_270!();
+        Depcrate_events_attributesxml!();
+        Depcrate_events_attributeshtml!();
+    };
+}

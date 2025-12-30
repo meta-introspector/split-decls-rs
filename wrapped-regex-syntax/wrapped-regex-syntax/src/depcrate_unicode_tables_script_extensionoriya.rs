@@ -1,0 +1,9 @@
+// Generated macro for ORIYA (const)
+macro_rules! Depcrate_unicode_tables_script_extensionORIYA {
+() => {
+// Module: crate::unicode_tables::script_extension
+// Provides: {"ORIYA"}
+// Dependencies: {}
+pub const ORIYA : & 'static [(char , char)] = & [('\u{951}' , '\u{952}') , ('।' , '॥') , ('\u{b01}' , 'ଃ') , ('ଅ' , 'ଌ') , ('ଏ' , 'ଐ') , ('ଓ' , 'ନ') , ('ପ' , 'ର') , ('ଲ' , 'ଳ') , ('ଵ' , 'ହ') , ('\u{b3c}' , '\u{b44}') , ('େ' , 'ୈ') , ('ୋ' , '\u{b4d}') , ('\u{b55}' , '\u{b57}') , ('ଡ଼' , 'ଢ଼') , ('ୟ' , '\u{b63}') , ('୦' , '୷') , ('\u{1cda}' , '\u{1cda}') , ('ᳲ' , 'ᳲ') ,] ;
+};
+}

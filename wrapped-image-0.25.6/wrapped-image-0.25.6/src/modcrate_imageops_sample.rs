@@ -1,0 +1,43 @@
+// Generated module macro for crate::imageops::sample
+macro_rules! Modcrate_imageops_sample {
+() => {
+        Depcrate_imageops_sampleuse_129!();
+        Depcrate_imageops_sampleuse_130!();
+        Depcrate_imageops_sampleuse_131!();
+        Depcrate_imageops_sampleuse_132!();
+        Depcrate_imageops_sampleuse_133!();
+        Depcrate_imageops_sampleuse_134!();
+        Depcrate_imageops_sampleuse_135!();
+        Depcrate_imageops_sampleFilterType!();
+        Depcrate_imageops_sampleFilter!();
+        Depcrate_imageops_sampleFloatNearest!();
+        Depcrate_imageops_sampleimpl_139!();
+        Depcrate_imageops_samplesinc!();
+        Depcrate_imageops_samplelanczos!();
+        Depcrate_imageops_samplebc_cubic_spline!();
+        Depcrate_imageops_samplegaussian!();
+        Depcrate_imageops_samplelanczos3_kernel!();
+        Depcrate_imageops_samplegaussian_kernel!();
+        Depcrate_imageops_samplecatmullrom_kernel!();
+        Depcrate_imageops_sampletriangle_kernel!();
+        Depcrate_imageops_samplebox_kernel!();
+        Depcrate_imageops_samplehorizontal_sample!();
+        Depcrate_imageops_samplesample_bilinear!();
+        Depcrate_imageops_samplesample_nearest!();
+        Depcrate_imageops_sampleinterpolate_nearest!();
+        Depcrate_imageops_sampleinterpolate_bilinear!();
+        Depcrate_imageops_samplevertical_sample!();
+        Depcrate_imageops_sampleThumbnailSum!();
+        Depcrate_imageops_sampleimpl_156!();
+        Depcrate_imageops_samplethumbnail!();
+        Depcrate_imageops_samplethumbnail_sample_block!();
+        Depcrate_imageops_samplethumbnail_sample_fraction_horizontal!();
+        Depcrate_imageops_samplethumbnail_sample_fraction_vertical!();
+        Depcrate_imageops_samplethumbnail_sample_fraction_both!();
+        Depcrate_imageops_samplefilter3x3!();
+        Depcrate_imageops_sampleresize!();
+        Depcrate_imageops_sampleblur!();
+        Depcrate_imageops_sampleunsharpen!();
+        Depcrate_imageops_sampletests!();
+    };
+}

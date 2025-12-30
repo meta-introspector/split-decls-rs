@@ -4,6 +4,6 @@ macro_rules! Depcrateuse_143 {
 // Module: crate
 // Provides: {"use_143"}
 // Dependencies: {}
-pub use self :: mutex :: { const_mutex , MappedMutexGuard , Mutex , MutexGuard } ;
+pub use self :: raw_fair_mutex :: RawFairMutex ;
 };
 }

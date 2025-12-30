@@ -1,0 +1,9 @@
+// Generated macro for local_date_test (module)
+macro_rules! Depcrate_integrations_timelocal_date_test {
+() => {
+// Module: crate::integrations::time
+// Provides: {"local_date_test"}
+// Dependencies: {}
+# [cfg (test)] mod local_date_test { use time :: macros :: date ; use crate :: { FromInputValue as _ , InputValue , ToInputValue as _ , graphql } ; use super :: LocalDate ; # [test] fn parses_correct_input () { for (raw , expected) in [("1996-12-19" , date ! (1996 - 12 - 19)) , ("1564-01-30" , date ! (1564 - 01 - 30)) ,] { let input : InputValue = graphql :: input_value ! ((raw)) ; let parsed = LocalDate :: from_input_value (& input) ; assert ! (parsed . is_ok () , "failed to parse `{raw}`: {:?}" , parsed . unwrap_err () ,) ; assert_eq ! (parsed . unwrap () , expected , "input: {raw}") ; } } # [test] fn fails_on_invalid_input () { for input in [graphql :: input_value ! ("1996-13-19") , graphql :: input_value ! ("1564-01-61") , graphql :: input_value ! ("2021-11-31") , graphql :: input_value ! ("11-31") , graphql :: input_value ! ("2021-11") , graphql :: input_value ! ("2021") , graphql :: input_value ! ("31") , graphql :: input_value ! ("i'm not even a date") , graphql :: input_value ! (2.32) , graphql :: input_value ! (1) , graphql :: input_value ! (null) , graphql :: input_value ! (false) ,] { let input : InputValue = input ; let parsed = LocalDate :: from_input_value (& input) ; assert ! (parsed . is_err () , "allows input: {input:?}") ; } } # [test] fn formats_correctly () { for (val , expected) in [(date ! (1996 - 12 - 19) , graphql :: input_value ! ("1996-12-19")) , (date ! (1564 - 01 - 30) , graphql :: input_value ! ("1564-01-30")) , (date ! (2020 - W 01 - 3) , graphql :: input_value ! ("2020-01-01")) , (date ! (2020 - 001) , graphql :: input_value ! ("2020-01-01")) ,] { let actual : InputValue = val . to_input_value () ; assert_eq ! (actual , expected , "on value: {val}") ; } } }
+};
+}

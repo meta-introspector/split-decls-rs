@@ -1,0 +1,46 @@
+// Generated module macro for crate::ntpebteb
+macro_rules! Modcrate_ntpebteb {
+() => {
+        Depcrate_ntpebtebuse_1490!();
+        Depcrate_ntpebtebuse_1491!();
+        Depcrate_ntpebtebuse_1492!();
+        Depcrate_ntpebtebuse_1493!();
+        Depcrate_ntpebtebuse_1494!();
+        Depcrate_ntpebtebuse_1495!();
+        Depcrate_ntpebtebuse_1496!();
+        Depcrate_ntpebtebuse_1497!();
+        Depcrate_ntpebtebmacro_1498!();
+        Depcrate_ntpebtebPRTL_ACTIVATION_CONTEXT_STACK_FRAME!();
+        Depcrate_ntpebtebmacro_1500!();
+        Depcrate_ntpebtebPACTIVATION_CONTEXT_STACK!();
+        Depcrate_ntpebtebmacro_1502!();
+        Depcrate_ntpebtebPAPI_SET_NAMESPACE!();
+        Depcrate_ntpebtebmacro_1504!();
+        Depcrate_ntpebtebPAPI_SET_HASH_ENTRY!();
+        Depcrate_ntpebtebmacro_1506!();
+        Depcrate_ntpebtebPAPI_SET_NAMESPACE_ENTRY!();
+        Depcrate_ntpebtebmacro_1508!();
+        Depcrate_ntpebtebPAPI_SET_VALUE_ENTRY!();
+        Depcrate_ntpebtebmacro_1510!();
+        Depcrate_ntpebtebLEAP_SECOND_DATA!();
+        Depcrate_ntpebtebmacro_1512!();
+        Depcrate_ntpebtebmacro_1513!();
+        Depcrate_ntpebtebmacro_1514!();
+        Depcrate_ntpebtebmacro_1515!();
+        Depcrate_ntpebtebmacro_1516!();
+        Depcrate_ntpebtebPPEB!();
+        Depcrate_ntpebtebGDI_BATCH_BUFFER_SIZE!();
+        Depcrate_ntpebtebmacro_1519!();
+        Depcrate_ntpebtebPGDI_TEB_BATCH!();
+        Depcrate_ntpebtebmacro_1521!();
+        Depcrate_ntpebtebPTEB_ACTIVE_FRAME_CONTEXT!();
+        Depcrate_ntpebtebmacro_1523!();
+        Depcrate_ntpebtebPTEB_ACTIVE_FRAME!();
+        Depcrate_ntpebtebmacro_1525!();
+        Depcrate_ntpebtebmacro_1526!();
+        Depcrate_ntpebtebmacro_1527!();
+        Depcrate_ntpebtebmacro_1528!();
+        Depcrate_ntpebtebmacro_1529!();
+        Depcrate_ntpebtebPTEB!();
+    };
+}

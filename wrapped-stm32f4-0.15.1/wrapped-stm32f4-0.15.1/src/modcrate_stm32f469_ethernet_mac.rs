@@ -1,0 +1,46 @@
+// Generated module macro for crate::stm32f469::ethernet_mac
+macro_rules! Modcrate_stm32f469_ethernet_mac {
+() => {
+        Depcrate_stm32f469_ethernet_macRegisterBlock!();
+        Depcrate_stm32f469_ethernet_macMACCR!();
+        Depcrate_stm32f469_ethernet_macmaccr!();
+        Depcrate_stm32f469_ethernet_macMACFFR!();
+        Depcrate_stm32f469_ethernet_macmacffr!();
+        Depcrate_stm32f469_ethernet_macMACHTHR!();
+        Depcrate_stm32f469_ethernet_macmachthr!();
+        Depcrate_stm32f469_ethernet_macMACHTLR!();
+        Depcrate_stm32f469_ethernet_macmachtlr!();
+        Depcrate_stm32f469_ethernet_macMACMIIAR!();
+        Depcrate_stm32f469_ethernet_macmacmiiar!();
+        Depcrate_stm32f469_ethernet_macMACMIIDR!();
+        Depcrate_stm32f469_ethernet_macmacmiidr!();
+        Depcrate_stm32f469_ethernet_macMACFCR!();
+        Depcrate_stm32f469_ethernet_macmacfcr!();
+        Depcrate_stm32f469_ethernet_macMACVLANTR!();
+        Depcrate_stm32f469_ethernet_macmacvlantr!();
+        Depcrate_stm32f469_ethernet_macMACPMTCSR!();
+        Depcrate_stm32f469_ethernet_macmacpmtcsr!();
+        Depcrate_stm32f469_ethernet_macMACDBGR!();
+        Depcrate_stm32f469_ethernet_macmacdbgr!();
+        Depcrate_stm32f469_ethernet_macMACSR!();
+        Depcrate_stm32f469_ethernet_macmacsr!();
+        Depcrate_stm32f469_ethernet_macMACIMR!();
+        Depcrate_stm32f469_ethernet_macmacimr!();
+        Depcrate_stm32f469_ethernet_macMACA0HR!();
+        Depcrate_stm32f469_ethernet_macmaca0hr!();
+        Depcrate_stm32f469_ethernet_macMACA0LR!();
+        Depcrate_stm32f469_ethernet_macmaca0lr!();
+        Depcrate_stm32f469_ethernet_macMACA1HR!();
+        Depcrate_stm32f469_ethernet_macmaca1hr!();
+        Depcrate_stm32f469_ethernet_macMACA1LR!();
+        Depcrate_stm32f469_ethernet_macmaca1lr!();
+        Depcrate_stm32f469_ethernet_macMACA2HR!();
+        Depcrate_stm32f469_ethernet_macmaca2hr!();
+        Depcrate_stm32f469_ethernet_macMACA2LR!();
+        Depcrate_stm32f469_ethernet_macmaca2lr!();
+        Depcrate_stm32f469_ethernet_macMACA3HR!();
+        Depcrate_stm32f469_ethernet_macmaca3hr!();
+        Depcrate_stm32f469_ethernet_macMACA3LR!();
+        Depcrate_stm32f469_ethernet_macmaca3lr!();
+    };
+}

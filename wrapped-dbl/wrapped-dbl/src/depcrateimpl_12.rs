@@ -1,0 +1,9 @@
+// Generated macro for impl_12 (impl)
+macro_rules! Depcrateimpl_12 {
+() => {
+// Module: crate
+// Provides: {"impl_12"}
+// Dependencies: {}
+impl Dbl for Array < u8 , U32 > { # [inline] fn dbl (self) -> Self { let mut val = [u64 :: from_be_bytes (self [0 .. 8] . try_into () . unwrap ()) , u64 :: from_be_bytes (self [8 .. 16] . try_into () . unwrap ()) , u64 :: from_be_bytes (self [16 .. 24] . try_into () . unwrap ()) , u64 :: from_be_bytes (self [24 .. 32] . try_into () . unwrap ()) ,] ; let a = val [0] >> 63 ; let b = val [1] >> 63 ; let c = val [2] >> 63 ; let d = val [3] >> 63 ; val [0] <<= 1 ; val [0] ^= b ; val [1] <<= 1 ; val [1] ^= c ; val [2] <<= 1 ; val [2] ^= d ; val [3] <<= 1 ; val [3] ^= a * C256 ; let mut res = Self :: default () ; res [0 .. 8] . copy_from_slice (& val [0] . to_be_bytes ()) ; res [8 .. 16] . copy_from_slice (& val [1] . to_be_bytes ()) ; res [16 .. 24] . copy_from_slice (& val [2] . to_be_bytes ()) ; res [24 .. 32] . copy_from_slice (& val [3] . to_be_bytes ()) ; res } # [inline] fn inv_dbl (self) -> Self { let mut val = [u64 :: from_be_bytes (self [0 .. 8] . try_into () . unwrap ()) , u64 :: from_be_bytes (self [8 .. 16] . try_into () . unwrap ()) , u64 :: from_be_bytes (self [16 .. 24] . try_into () . unwrap ()) , u64 :: from_be_bytes (self [24 .. 32] . try_into () . unwrap ()) ,] ; let a = (val [0] & 1) << 63 ; let b = (val [1] & 1) << 63 ; let c = (val [2] & 1) << 63 ; let d = val [3] & 1 ; val [0] >>= 1 ; val [1] >>= 1 ; val [2] >>= 1 ; val [3] >>= 1 ; val [1] ^= a ; val [2] ^= b ; val [3] ^= c ; val [0] ^= d * (1 << 63) ; val [3] ^= d * (C256 >> 1) ; let mut res = Self :: default () ; res [0 .. 8] . copy_from_slice (& val [0] . to_be_bytes ()) ; res [8 .. 16] . copy_from_slice (& val [1] . to_be_bytes ()) ; res [16 .. 24] . copy_from_slice (& val [2] . to_be_bytes ()) ; res [24 .. 32] . copy_from_slice (& val [3] . to_be_bytes ()) ; res } }
+};
+}

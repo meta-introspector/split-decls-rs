@@ -1,0 +1,9 @@
+// Generated macro for isaac_array_serde (module)
+macro_rules! Depcrate_isaac_arrayisaac_array_serde {
+() => {
+// Module: crate::isaac_array
+// Provides: {"isaac_array_serde"}
+// Dependencies: {}
+# [cfg (feature = "serde")] pub (super) mod isaac_array_serde { const RAND_SIZE_LEN : usize = 8 ; const RAND_SIZE : usize = 1 << RAND_SIZE_LEN ; use serde :: de ; use serde :: de :: { SeqAccess , Visitor } ; use serde :: { Deserialize , Deserializer , Serialize , Serializer } ; use core :: fmt ; pub fn serialize < T , S > (arr : & [T ; RAND_SIZE] , ser : S) -> Result < S :: Ok , S :: Error > where T : Serialize , S : Serializer , { use serde :: ser :: SerializeTuple ; let mut seq = ser . serialize_tuple (RAND_SIZE) ? ; for e in arr . iter () { seq . serialize_element (& e) ? ; } seq . end () } # [inline] pub fn deserialize < 'de , T , D > (de : D) -> Result < [T ; RAND_SIZE] , D :: Error > where T : Deserialize < 'de > + Default + Copy , D : Deserializer < 'de > , { use core :: marker :: PhantomData ; struct ArrayVisitor < T > { _pd : PhantomData < T > , } impl < 'de , T > Visitor < 'de > for ArrayVisitor < T > where T : Deserialize < 'de > + Default + Copy , { type Value = [T ; RAND_SIZE] ; fn expecting (& self , formatter : & mut fmt :: Formatter) -> fmt :: Result { formatter . write_str ("Isaac state array") } # [inline] fn visit_seq < A > (self , mut seq : A) -> Result < [T ; RAND_SIZE] , A :: Error > where A : SeqAccess < 'de > , { let mut out = [Default :: default () ; RAND_SIZE] ; for i in 0 .. RAND_SIZE { match seq . next_element () ? { Some (val) => out [i] = val , None => return Err (de :: Error :: invalid_length (i , & self)) , } ; } Ok (out) } } de . deserialize_tuple (RAND_SIZE , ArrayVisitor { _pd : PhantomData }) } }
+};
+}

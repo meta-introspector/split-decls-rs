@@ -1,0 +1,9 @@
+// Generated macro for test_nan (function)
+macro_rules! Depcrate_teststest_nan {
+() => {
+// Module: crate::tests
+// Provides: {"test_nan"}
+// Dependencies: {}
+# [test] fn test_nan () { let numbers : Vec < _ > = NUMBERS . iter () . map (| cls | expand_equiv_class (cls)) . collect () ; for cls in & numbers { for i in cls { assert_cmp (i , & N :: f32 (f32 :: NAN) , None) ; assert_cmp (i , & N :: f64 (f64 :: NAN) , None) ; assert_cmp (& N :: f32 (f32 :: NAN) , i , None) ; assert_cmp (& N :: f64 (f64 :: NAN) , i , None) ; # [cfg (feature = "num-complex")] { assert_cmp (i , & N :: c32 (Complex :: new (f32 :: NAN , 0.)) , None) ; assert_cmp (i , & N :: c32 (Complex :: new (0. , f32 :: NAN)) , None) ; assert_cmp (i , & N :: c32 (Complex :: new (f32 :: NAN , f32 :: NAN)) , None) ; assert_cmp (& N :: c32 (Complex :: new (f32 :: NAN , 0.)) , i , None) ; assert_cmp (& N :: c32 (Complex :: new (0. , f32 :: NAN)) , i , None) ; assert_cmp (& N :: c32 (Complex :: new (f32 :: NAN , f32 :: NAN)) , i , None) ; } } } assert_cmp (& N :: f32 (f32 :: NAN) , & N :: f32 (f32 :: NAN) , None) ; assert_cmp (& N :: f32 (f32 :: NAN) , & N :: f64 (f64 :: NAN) , None) ; assert_cmp (& N :: f64 (f64 :: NAN) , & N :: f32 (f32 :: NAN) , None) ; assert_cmp (& N :: f64 (f64 :: NAN) , & N :: f64 (f64 :: NAN) , None) ; # [cfg (feature = "num-complex")] { let cnan0 = N :: c32 (Complex :: new (f32 :: NAN , 0.)) ; let c0nan = N :: c32 (Complex :: new (0. , f32 :: NAN)) ; let cnannan = N :: c32 (Complex :: new (f32 :: NAN , f32 :: NAN)) ; assert_cmp (& cnan0 , & cnan0 , None) ; assert_cmp (& cnan0 , & c0nan , None) ; assert_cmp (& cnan0 , & cnannan , None) ; assert_cmp (& c0nan , & cnan0 , None) ; assert_cmp (& c0nan , & c0nan , None) ; assert_cmp (& c0nan , & cnannan , None) ; assert_cmp (& cnannan , & cnan0 , None) ; assert_cmp (& cnannan , & c0nan , None) ; assert_cmp (& cnannan , & cnannan , None) ; } }
+};
+}

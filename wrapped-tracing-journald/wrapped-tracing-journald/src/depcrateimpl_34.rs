@@ -1,0 +1,9 @@
+// Generated macro for impl_34 (impl)
+macro_rules! Depcrateimpl_34 {
+() => {
+// Module: crate
+// Provides: {"impl_34"}
+// Dependencies: {}
+impl < S > tracing_subscriber :: Layer < S > for Layer where S : Subscriber + for < 'span > LookupSpan < 'span > , { fn on_new_span (& self , attrs : & Attributes , id : & Id , ctx : Context < '_ , S >) { let span = ctx . span (id) . expect ("unknown span") ; let mut buf = Vec :: with_capacity (256) ; writeln ! (buf , "SPAN_NAME") . unwrap () ; put_value (& mut buf , span . name () . as_bytes ()) ; put_metadata (& mut buf , span . metadata () , Some ("SPAN_")) ; attrs . record (& mut SpanVisitor { buf : & mut buf , field_prefix : self . field_prefix . as_deref () , }) ; span . extensions_mut () . insert (SpanFields (buf)) ; } fn on_record (& self , id : & Id , values : & Record , ctx : Context < S >) { let span = ctx . span (id) . expect ("unknown span") ; let mut exts = span . extensions_mut () ; let buf = & mut exts . get_mut :: < SpanFields > () . expect ("missing fields") . 0 ; values . record (& mut SpanVisitor { buf , field_prefix : self . field_prefix . as_deref () , }) ; } fn on_event (& self , event : & Event , ctx : Context < S >) { let mut buf = Vec :: with_capacity (256) ; for span in ctx . lookup_current () . into_iter () . flat_map (| span | span . scope () . from_root ()) { let exts = span . extensions () ; let fields = exts . get :: < SpanFields > () . expect ("missing fields") ; buf . extend_from_slice (& fields . 0) ; } self . put_priority (& mut buf , event . metadata ()) ; put_metadata (& mut buf , event . metadata () , None) ; put_field_length_encoded (& mut buf , "SYSLOG_IDENTIFIER" , | buf | { write ! (buf , "{}" , self . syslog_identifier) . unwrap () }) ; buf . extend_from_slice (& self . additional_fields) ; event . record (& mut EventVisitor :: new (& mut buf , self . field_prefix . as_deref () ,)) ; let _ = self . send_payload (& buf) ; } }
+};
+}

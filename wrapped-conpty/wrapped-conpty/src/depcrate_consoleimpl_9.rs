@@ -1,0 +1,9 @@
+// Generated macro for impl_9 (impl)
+macro_rules! Depcrate_consoleimpl_9 {
+() => {
+// Module: crate::console
+// Provides: {"impl_9"}
+// Dependencies: {}
+impl Console { # [doc = " Creates a console from default stdin, stdout and stderr."] pub fn current () -> Result < Self , Error > { let stdin = unsafe { GetStdHandle (STD_INPUT_HANDLE) ? } ; let stdout = unsafe { GetStdHandle (STD_OUTPUT_HANDLE) ? } ; let stderr = unsafe { GetStdHandle (STD_ERROR_HANDLE) ? } ; let stdin_mode = get_console_mode (stdin) ? ; let stdout_mode = get_console_mode (stdout) ? ; let stderr_mode = get_console_mode (stderr) ? ; Ok (Self { stderr , stderr_mode , stdin , stdin_mode , stdout , stdout_mode , }) } # [doc = " Sets terminal in a raw mode."] # [doc = " Raw mode is a mode where most of consoles processing is ommited."] pub fn set_raw (& self) -> Result < () , Error > { set_raw_stdin (self . stdin , self . stdin_mode) ? ; unsafe { SetConsoleMode (self . stdout , self . stdout_mode | DISABLE_NEWLINE_AUTO_RETURN) ? ; } unsafe { SetConsoleMode (self . stderr , self . stderr_mode | DISABLE_NEWLINE_AUTO_RETURN) ? ; } Ok (()) } # [doc = " Sets terminal in a mode which was initially used on handles."] pub fn reset (& self) -> Result < () , Error > { for (handle , mode) in self . streams () { unsafe { SetConsoleMode (handle , mode) ? } ; } Ok (()) } # [doc = " Verifies if there's something in stdin to read."] # [doc = ""] # [doc = " It can be used to determine if the call to `[std::io::stdin].read()` will block"] pub fn is_stdin_empty (& self) -> Result < bool , Error > { let empty = unsafe { WaitForSingleObject (self . stdin , 0) == WAIT_OBJECT_0 } ; Ok (empty) } fn streams (& self) -> [(HANDLE , CONSOLE_MODE) ; 3] { [(self . stdin , self . stdin_mode) , (self . stdout , self . stdout_mode) , (self . stderr , self . stderr_mode) ,] } }
+};
+}

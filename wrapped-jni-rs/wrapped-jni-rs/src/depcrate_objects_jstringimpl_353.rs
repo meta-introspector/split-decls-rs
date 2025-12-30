@@ -1,0 +1,9 @@
+// Generated macro for impl_353 (impl)
+macro_rules! Depcrate_objects_jstringimpl_353 {
+() => {
+// Module: crate::objects::jstring
+// Provides: {"impl_353"}
+// Dependencies: {}
+# [allow (rustdoc :: invalid_html_tags)] # [doc = " Display the contents of a `JString`"] # [doc = ""] # [doc = " This implementation relies on JNI (GetStringUTFChars) to retrieve the string contents for"] # [doc = " display."] # [doc = ""] # [doc = " If you try and format a null reference this will output \"<NULL>\""] # [doc = ""] # [doc = " In case you attempt to format a JString before [`JavaVM::singleton`] has been initialized then"] # [doc = " this will simply output \"<JNI Not Initialized>\" and log an error."] # [doc = ""] # [doc = " In case of any other unexpected JNI error, this will output \"<JNI Error>\" and log the error"] # [doc = " details."] impl < 'local > std :: fmt :: Display for JString < 'local > { fn fmt (& self , f : & mut std :: fmt :: Formatter < '_ >) -> std :: fmt :: Result { # [derive (Error , Debug)] # [error (transparent)] enum FmtOrJniError { Fmt (# [from] std :: fmt :: Error) , Jni (# [from] crate :: errors :: Error) , } if self . is_null () { return write ! (f , "<NULL>") ; } JavaVM :: singleton () . map_err (FmtOrJniError :: Jni) . and_then (| vm | { vm . attach_current_thread_for_scope (| env | -> std :: result :: Result < () , FmtOrJniError > { let mutf8_chars = self . mutf8_chars (env) ? ; let s = mutf8_chars . to_str () ; write ! (f , "{}" , s) ? ; Ok (()) } ,) }) . or_else (| err | { match err { FmtOrJniError :: Fmt (err) => Err (err) , FmtOrJniError :: Jni (crate :: errors :: Error :: UninitializedJavaVM) => { log :: error ! ("error getting JavaVM singleton to format JString: {:#?}" , err) ; write ! (f , "<JNI Not Initialized>") } FmtOrJniError :: Jni (err) => { log :: error ! ("error getting JString contents: {:#?}" , err) ; write ! (f , "<JNI Error>") } } }) } }
+};
+}

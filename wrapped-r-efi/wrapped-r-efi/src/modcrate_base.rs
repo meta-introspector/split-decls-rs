@@ -1,0 +1,42 @@
+// Generated module macro for crate::base
+macro_rules! Modcrate_base {
+() => {
+        Depcrate_basemacro_2!();
+        Depcrate_basemacro_3!();
+        Depcrate_baseeficall_abi!();
+        Depcrate_baseeficall!();
+        Depcrate_baseBoolean!();
+        Depcrate_baseChar8!();
+        Depcrate_baseChar16!();
+        Depcrate_baseStatus!();
+        Depcrate_baseHandle!();
+        Depcrate_baseEvent!();
+        Depcrate_baseLba!();
+        Depcrate_baseTpl!();
+        Depcrate_basePhysicalAddress!();
+        Depcrate_baseVirtualAddress!();
+        Depcrate_baseImageEntryPoint!();
+        Depcrate_baseGuid!();
+        Depcrate_baseMacAddress!();
+        Depcrate_baseIpv4Address!();
+        Depcrate_baseIpv6Address!();
+        Depcrate_baseother_21!();
+        Depcrate_baseimpl_22!();
+        Depcrate_baseimpl_23!();
+        Depcrate_baseimpl_24!();
+        Depcrate_baseimpl_25!();
+        Depcrate_baseimpl_26!();
+        Depcrate_baseimpl_27!();
+        Depcrate_baseimpl_28!();
+        Depcrate_baseimpl_29!();
+        Depcrate_baseimpl_30!();
+        Depcrate_baseimpl_31!();
+        Depcrate_baseimpl_32!();
+        Depcrate_baseimpl_33!();
+        Depcrate_baseimpl_34!();
+        Depcrate_baseimpl_35!();
+        Depcrate_baseimpl_36!();
+        Depcrate_baseimpl_37!();
+        Depcrate_basetests!();
+    };
+}

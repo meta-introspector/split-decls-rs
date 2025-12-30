@@ -1,0 +1,9 @@
+// Generated macro for is_match_pattern (function)
+macro_rules! Depcrate_manual_clampis_match_pattern {
+() => {
+// Module: crate::manual_clamp
+// Provides: {"is_match_pattern"}
+// Dependencies: {}
+# [doc = " Targets patterns like"] # [doc = ""] # [doc = " ```no_run"] # [doc = " # let (input, min, max) = (0, -3, 12);"] # [doc = ""] # [doc = " match input {"] # [doc = "     input if input > max => max,"] # [doc = "     input if input < min => min,"] # [doc = "     input => input,"] # [doc = " }"] # [doc = " # ;"] # [doc = " ```"] fn is_match_pattern < 'tcx > (cx : & LateContext < 'tcx > , expr : & 'tcx Expr < 'tcx >) -> Option < ClampSuggestion < 'tcx > > { if let ExprKind :: Match (value , [first_arm , second_arm , last_arm] , rustc_hir :: MatchSource :: Normal) = & expr . kind { let minmax_values = | a : & 'tcx Arm < 'tcx > | { if let PatKind :: Binding (_ , var_hir_id , _ , None) = & a . pat . kind && let Some (e) = a . guard { Some ((e , var_hir_id , a . body)) } else { None } } ; let (first , first_hir_id , first_expr) = minmax_values (first_arm) ? ; let (second , second_hir_id , second_expr) = minmax_values (second_arm) ? ; let first = BinaryOp :: new (first) ? ; let second = BinaryOp :: new (second) ? ; if let PatKind :: Binding (_ , binding , _ , None) = & last_arm . pat . kind && peel_blocks_with_stmt (last_arm . body) . res_local_id () == Some (* binding) && last_arm . guard . is_none () { } else { return None ; } if let Some (params) = is_clamp_meta_pattern (cx , & first , & second , first_expr , second_expr , Some ((* first_hir_id , * second_hir_id)) ,) { return Some (ClampSuggestion { params : InputMinMax { input : value , min : params . min , max : params . max , is_float : params . is_float , } , span : expr . span , make_assignment : None , hir_with_ignore_attr : None , }) ; } } None }
+};
+}

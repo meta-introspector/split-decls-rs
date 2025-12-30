@@ -1,0 +1,9 @@
+// Generated macro for other_2008 (other)
+macro_rules! Depcrate_features_gen_ExtBlendMinmaxother_2008 {
+() => {
+// Module: crate::features::gen_ExtBlendMinmax
+// Provides: {"other_2008"}
+// Dependencies: {}
+# [wasm_bindgen] extern "C" { # [wasm_bindgen (is_type_of = | _ | false , extends = :: js_sys :: Object , js_name = EXT_blend_minmax , typescript_type = "EXT_blend_minmax")] # [derive (Debug , Clone , PartialEq , Eq)] # [doc = "The `ExtBlendMinmax` class."] # [doc = ""] # [doc = "[MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/API/EXT_blend_minmax)"] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `ExtBlendMinmax`*"] pub type ExtBlendMinmax ; }
+};
+}

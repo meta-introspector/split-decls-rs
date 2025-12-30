@@ -1,0 +1,9 @@
+// Generated macro for macro_156 (macro)
+macro_rules! Depcrate_builtinmacro_156 {
+() => {
+// Module: crate::builtin
+// Provides: {"macro_156"}
+// Dependencies: {}
+declare_lint ! { # [doc = " The `deref_nullptr` lint detects when a null pointer is dereferenced,"] # [doc = " which causes [undefined behavior]."] # [doc = ""] # [doc = " ### Example"] # [doc = ""] # [doc = " ```rust,no_run"] # [doc = " # #![allow(unused)]"] # [doc = " use std::ptr;"] # [doc = " unsafe {"] # [doc = "     let x = &*ptr::null::<i32>();"] # [doc = "     let x = ptr::addr_of!(*ptr::null::<i32>());"] # [doc = "     let x = *(0 as *const i32);"] # [doc = " }"] # [doc = " ```"] # [doc = ""] # [doc = " {{produces}}"] # [doc = ""] # [doc = " ### Explanation"] # [doc = ""] # [doc = " Dereferencing a null pointer causes [undefined behavior] if it is accessed"] # [doc = " (loaded from or stored to)."] # [doc = ""] # [doc = " [undefined behavior]: https://doc.rust-lang.org/reference/behavior-considered-undefined.html"] pub DEREF_NULLPTR , Warn , "detects when an null pointer is dereferenced" }
+};
+}

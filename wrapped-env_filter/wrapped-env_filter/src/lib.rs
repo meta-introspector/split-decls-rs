@@ -1,0 +1,76 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcrate_opimpl_36.rs");
+include!("depcrate_filterimpl_19.rs");
+include!("depcrate_filterimpl_18.rs");
+include!("depcrateuse_52.rs");
+include!("depcrateuse_57.rs");
+include!("depcrateuse_55.rs");
+include!("depcrate_filtered_loguse_26.rs");
+include!("depcrate_opuse_32.rs");
+include!("depcrate_filtered_logfilteredlog.rs");
+include!("depcrate_parserparse_spec.rs");
+include!("depcrate_parseruse_42.rs");
+include!("depcrate_parserimpl_44.rs");
+include!("depcrate_filteruse_7.rs");
+include!("depcrate_directivedirective.rs");
+include!("depcrate_filteruse_15.rs");
+include!("depcrate_filtertests.rs");
+include!("depcrate_opimpl_34.rs");
+include!("depcrate_parseruse_40.rs");
+include!("depcrate_filterimpl_20.rs");
+include!("depcrate_directiveenabled.rs");
+include!("depcrate_filterbuilder.rs");
+include!("depcrate_filteruse_10.rs");
+include!("depcrate_opimpl_35.rs");
+include!("depcrate_parseruse_39.rs");
+include!("depcrate_parsertests.rs");
+include!("depcrateparser.rs");
+include!("depcrate_filteruse_8.rs");
+include!("depcrate_parseruse_38.rs");
+include!("depcrate_directiveuse_3.rs");
+include!("depcrate_filteruse_16.rs");
+include!("depcrateuse_51.rs");
+include!("depcrate_filteruse_12.rs");
+include!("depcrate_parserimpl_47.rs");
+include!("depcratefilter.rs");
+include!("depcrate_filterfilter.rs");
+include!("depcrate_parserparseerror.rs");
+include!("depcrate_directiveuse_2.rs");
+include!("depcrate_filtered_logimpl_29.rs");
+include!("depcrate_parseruse_41.rs");
+include!("depcrate_filtered_loguse_27.rs");
+include!("depcrate_filteruse_11.rs");
+include!("depcrate_parserparseresult.rs");
+include!("depcrateuse_50.rs");
+include!("depcrate_filteruse_14.rs");
+include!("depcratedirective.rs");
+include!("depcrate_filteruse_13.rs");
+include!("depcrateuse_53.rs");
+include!("depcrate_filterimpl_23.rs");
+include!("depcrate_filteruse_9.rs");
+include!("depcrateuse_54.rs");
+include!("depcrate_filtered_logimpl_30.rs");
+include!("depcrateop.rs");
+include!("depcratefiltered_log.rs");
+include!("depcrate_opfilterop.rs");
+include!("depcrate_filterimpl_22.rs");
+include!("depcratereadmedoctests.rs");
+include!("depcrate_parserimpl_46.rs");
+include!("depcrateuse_56.rs");
+include!("modcrate_filter.rs");
+include!("modcrate_parser.rs");
+include!("modcrate_filtered_log.rs");
+include!("modcrate_directive.rs");
+include!("modcrate_op.rs");
+include!("modcrate.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate_filter!();
+    Modcrate_parser!();
+    Modcrate_filtered_log!();
+    Modcrate_directive!();
+    Modcrate_op!();
+    Modcrate!();
+}

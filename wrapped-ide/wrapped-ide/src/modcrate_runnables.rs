@@ -1,0 +1,49 @@
+// Generated module macro for crate::runnables
+macro_rules! Modcrate_runnables {
+() => {
+        Depcrate_runnablesuse_520!();
+        Depcrate_runnablesuse_521!();
+        Depcrate_runnablesuse_522!();
+        Depcrate_runnablesuse_523!();
+        Depcrate_runnablesuse_524!();
+        Depcrate_runnablesuse_525!();
+        Depcrate_runnablesuse_526!();
+        Depcrate_runnablesuse_527!();
+        Depcrate_runnablesuse_528!();
+        Depcrate_runnablesuse_529!();
+        Depcrate_runnablesuse_530!();
+        Depcrate_runnablesuse_531!();
+        Depcrate_runnablesuse_532!();
+        Depcrate_runnablesuse_533!();
+        Depcrate_runnablesuse_534!();
+        Depcrate_runnablesRunnable!();
+        Depcrate_runnablesmacro_536!();
+        Depcrate_runnablesTestId!();
+        Depcrate_runnablesimpl_538!();
+        Depcrate_runnablesRunnableKind!();
+        Depcrate_runnablesRunnableDiscKind!();
+        Depcrate_runnablesimpl_541!();
+        Depcrate_runnablesimpl_542!();
+        Depcrate_runnablesrunnables!();
+        Depcrate_runnablesrelated_tests!();
+        Depcrate_runnablescmp_runnables!();
+        Depcrate_runnablesfind_related_tests!();
+        Depcrate_runnablesfind_related_tests_in_module!();
+        Depcrate_runnablesas_test_runnable!();
+        Depcrate_runnablesparent_test_module!();
+        Depcrate_runnablesrunnable_fn!();
+        Depcrate_runnablesrunnable_mod!();
+        Depcrate_runnablesrunnable_impl!();
+        Depcrate_runnableshas_cfg_test!();
+        Depcrate_runnablesrunnable_mod_outline_definition!();
+        Depcrate_runnablesmodule_def_doctest!();
+        Depcrate_runnablesTestAttr!();
+        Depcrate_runnablesimpl_557!();
+        Depcrate_runnableshas_runnable_doc_test!();
+        Depcrate_runnableshas_test_function_or_multiple_test_submodules!();
+        Depcrate_runnablesUpdateTest!();
+        Depcrate_runnablesSNAPSHOT_TEST_MACROS!();
+        Depcrate_runnablesimpl_562!();
+        Depcrate_runnablestests!();
+    };
+}

@@ -1,0 +1,9 @@
+// Generated macro for impl_788 (impl)
+macro_rules! Depcrate_listsimpl_788 {
+() => {
+// Module: crate::lists
+// Provides: {"impl_788"}
+// Dependencies: {}
+impl ListItem { pub (crate) fn from_item (item : RewriteResult) -> ListItem { ListItem { pre_comment : None , pre_comment_style : ListItemCommentStyle :: None , item : item , post_comment : None , new_lines : false , } } pub (crate) fn inner_as_ref (& self) -> & str { self . item . as_ref () . map_or ("" , | s | s) } pub (crate) fn is_different_group (& self) -> bool { self . inner_as_ref () . contains ('\n') || self . pre_comment . is_some () || self . post_comment . as_ref () . map_or (false , | s | s . contains ('\n')) } pub (crate) fn is_multiline (& self) -> bool { self . inner_as_ref () . contains ('\n') || self . pre_comment . as_ref () . map_or (false , | s | s . contains ('\n')) || self . post_comment . as_ref () . map_or (false , | s | s . contains ('\n')) } pub (crate) fn has_single_line_comment (& self) -> bool { self . pre_comment . as_ref () . map_or (false , | comment | comment . trim_start () . starts_with ("//")) || self . post_comment . as_ref () . map_or (false , | comment | comment . trim_start () . starts_with ("//")) } pub (crate) fn has_comment (& self) -> bool { self . pre_comment . is_some () || self . post_comment . is_some () } pub (crate) fn from_str < S : Into < String > > (s : S) -> ListItem { ListItem { pre_comment : None , pre_comment_style : ListItemCommentStyle :: None , item : Ok (s . into ()) , post_comment : None , new_lines : false , } } fn is_substantial (& self) -> bool { fn empty (s : & Option < String >) -> bool { ! matches ! (* s , Some (ref s) if ! s . is_empty ()) } fn empty_result (s : & RewriteResult) -> bool { ! matches ! (* s , Ok (ref s) if ! s . is_empty ()) } ! (empty (& self . pre_comment) && empty_result (& self . item) && empty (& self . post_comment)) } }
+};
+}

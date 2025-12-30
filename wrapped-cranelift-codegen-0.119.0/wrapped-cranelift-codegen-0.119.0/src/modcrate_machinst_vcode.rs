@@ -1,0 +1,48 @@
+// Generated module macro for crate::machinst::vcode
+macro_rules! Modcrate_machinst_vcode {
+() => {
+        Depcrate_machinst_vcodeuse_100!();
+        Depcrate_machinst_vcodeuse_101!();
+        Depcrate_machinst_vcodeuse_102!();
+        Depcrate_machinst_vcodeuse_103!();
+        Depcrate_machinst_vcodeuse_104!();
+        Depcrate_machinst_vcodeuse_105!();
+        Depcrate_machinst_vcodeuse_106!();
+        Depcrate_machinst_vcodeuse_107!();
+        Depcrate_machinst_vcodeuse_108!();
+        Depcrate_machinst_vcodeuse_109!();
+        Depcrate_machinst_vcodeuse_110!();
+        Depcrate_machinst_vcodeuse_111!();
+        Depcrate_machinst_vcodeuse_112!();
+        Depcrate_machinst_vcodeuse_113!();
+        Depcrate_machinst_vcodeuse_114!();
+        Depcrate_machinst_vcodeInsnIndex!();
+        Depcrate_machinst_vcodeToBackwardsInsnIndex!();
+        Depcrate_machinst_vcodeimpl_117!();
+        Depcrate_machinst_vcodeBackwardsInsnIndex!();
+        Depcrate_machinst_vcodeimpl_119!();
+        Depcrate_machinst_vcodeBlockIndex!();
+        Depcrate_machinst_vcodeVCodeInst!();
+        Depcrate_machinst_vcodeimpl_122!();
+        Depcrate_machinst_vcodeVCode!();
+        Depcrate_machinst_vcodeEmitResult!();
+        Depcrate_machinst_vcodeVCodeBuilder!();
+        Depcrate_machinst_vcodeVCodeBuildDirection!();
+        Depcrate_machinst_vcodeimpl_127!();
+        Depcrate_machinst_vcodeNO_INST_OFFSET!();
+        Depcrate_machinst_vcodeimpl_129!();
+        Depcrate_machinst_vcodeimpl_130!();
+        Depcrate_machinst_vcodeimpl_131!();
+        Depcrate_machinst_vcodeimpl_132!();
+        Depcrate_machinst_vcodeimpl_133!();
+        Depcrate_machinst_vcodeVRegAllocator!();
+        Depcrate_machinst_vcodeimpl_135!();
+        Depcrate_machinst_vcodeVCodeConstants!();
+        Depcrate_machinst_vcodeimpl_137!();
+        Depcrate_machinst_vcodeVCodeConstant!();
+        Depcrate_machinst_vcodemacro_139!();
+        Depcrate_machinst_vcodeVCodeConstantData!();
+        Depcrate_machinst_vcodeimpl_141!();
+        Depcrate_machinst_vcodetest!();
+    };
+}

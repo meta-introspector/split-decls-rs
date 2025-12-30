@@ -1,0 +1,9 @@
+// Generated macro for parser (function)
+macro_rules! Depcrateparser {
+() => {
+// Module: crate
+// Provides: {"parser"}
+// Dependencies: {}
+# [doc = " Generates the `Parser` implementation."] # [doc = ""] # [doc = " This is far less verbose than defining the `clap::Command` struct manually,"] # [doc = " receiving an instance of `clap::ArgMatches` from conducting parsing, and then"] # [doc = " implementing a conversion code to instantiate an instance of the user"] # [doc = " context struct."] # [proc_macro_derive (Parser , attributes (clap , structopt , command , arg , group))] pub fn parser (input : TokenStream) -> TokenStream { let input : DeriveInput = parse_macro_input ! (input) ; derives :: derive_parser (& input) . unwrap_or_else (| err | { let specific_dummy = match input . data { Data :: Struct (DataStruct { fields : Fields :: Named (ref _fields) , .. }) => Some (dummies :: args (& input . ident)) , Data :: Struct (DataStruct { fields : Fields :: Unit , .. }) => Some (dummies :: args (& input . ident)) , Data :: Enum (_) => Some (dummies :: subcommand (& input . ident)) , _ => None , } ; let dummy = specific_dummy . map (| specific_dummy | { let parser_dummy = dummies :: parser (& input . ident) ; quote :: quote ! { # parser_dummy # specific_dummy } }) . unwrap_or_else (| | quote :: quote ! ()) ; to_compile_error (err , dummy) }) . into () }
+};
+}

@@ -1,0 +1,45 @@
+// Generated module macro for crate::fieldsets
+macro_rules! Modcrate_fieldsets {
+() => {
+        Depcrate_fieldsetsbuilder!();
+        Depcrate_fieldsetsenums!();
+        Depcrate_fieldsetsuse_53!();
+        Depcrate_fieldsetsuse_54!();
+        Depcrate_fieldsetsuse_55!();
+        Depcrate_fieldsetsuse_56!();
+        Depcrate_fieldsetsuse_57!();
+        Depcrate_fieldsetsuse_58!();
+        Depcrate_fieldsetsuse_59!();
+        Depcrate_fieldsetsyes_to!();
+        Depcrate_fieldsetsyes_or!();
+        Depcrate_fieldsetsternary!();
+        Depcrate_fieldsetslength_option_helper!();
+        Depcrate_fieldsetsimpl_composite!();
+        Depcrate_fieldsetsimpl_marker_length_constructors!();
+        Depcrate_fieldsetsimpl_time_precision_constructors!();
+        Depcrate_fieldsetsimpl_marker_with_options!();
+        Depcrate_fieldsetsimpl_date_to_time_helpers!();
+        Depcrate_fieldsetsimpl_combo_get_field!();
+        Depcrate_fieldsetsimpl_zone_combo_helpers!();
+        Depcrate_fieldsetsimpl_date_or_calendar_period_marker!();
+        Depcrate_fieldsetsimpl_date_marker!();
+        Depcrate_fieldsetsimpl_calendar_period_marker!();
+        Depcrate_fieldsetsimpl_time_marker!();
+        Depcrate_fieldsetsimpl_zone_marker!();
+        Depcrate_fieldsetsmacro_76!();
+        Depcrate_fieldsetsmacro_77!();
+        Depcrate_fieldsetsmacro_78!();
+        Depcrate_fieldsetsmacro_79!();
+        Depcrate_fieldsetsmacro_80!();
+        Depcrate_fieldsetsmacro_81!();
+        Depcrate_fieldsetsmacro_82!();
+        Depcrate_fieldsetsmacro_83!();
+        Depcrate_fieldsetsmacro_84!();
+        Depcrate_fieldsetsmacro_85!();
+        Depcrate_fieldsetsmacro_86!();
+        Depcrate_fieldsetszone!();
+        Depcrate_fieldsetsmacro_88!();
+        Depcrate_fieldsetsmacro_89!();
+        Depcrate_fieldsetsmacro_90!();
+    };
+}

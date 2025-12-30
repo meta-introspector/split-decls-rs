@@ -1,0 +1,43 @@
+// Generated module macro for crate::isa::pulley_shared::inst
+macro_rules! Modcrate_isa_pulley_shared_inst {
+() => {
+        Depcrate_isa_pulley_shared_instuse_2521!();
+        Depcrate_isa_pulley_shared_instuse_2522!();
+        Depcrate_isa_pulley_shared_instuse_2523!();
+        Depcrate_isa_pulley_shared_instuse_2524!();
+        Depcrate_isa_pulley_shared_instuse_2525!();
+        Depcrate_isa_pulley_shared_instuse_2526!();
+        Depcrate_isa_pulley_shared_instuse_2527!();
+        Depcrate_isa_pulley_shared_instuse_2528!();
+        Depcrate_isa_pulley_shared_instuse_2529!();
+        Depcrate_isa_pulley_shared_instuse_2530!();
+        Depcrate_isa_pulley_shared_instuse_2531!();
+        Depcrate_isa_pulley_shared_instregs!();
+        Depcrate_isa_pulley_shared_instuse_2543!();
+        Depcrate_isa_pulley_shared_instargs!();
+        Depcrate_isa_pulley_shared_instuse_2585!();
+        Depcrate_isa_pulley_shared_instemit!();
+        Depcrate_isa_pulley_shared_instuse_2605!();
+        Depcrate_isa_pulley_shared_instuse_2606!();
+        Depcrate_isa_pulley_shared_instuse_2607!();
+        Depcrate_isa_pulley_shared_instimpl_2608!();
+        Depcrate_isa_pulley_shared_instuse_2609!();
+        Depcrate_isa_pulley_shared_instgenerated!();
+        Depcrate_isa_pulley_shared_instReturnCallInfo!();
+        Depcrate_isa_pulley_shared_instimpl_2612!();
+        Depcrate_isa_pulley_shared_instpulley_get_operands!();
+        Depcrate_isa_pulley_shared_instInstAndKind!();
+        Depcrate_isa_pulley_shared_instimpl_2615!();
+        Depcrate_isa_pulley_shared_instimpl_2616!();
+        Depcrate_isa_pulley_shared_instimpl_2617!();
+        Depcrate_isa_pulley_shared_instimpl_2618!();
+        Depcrate_isa_pulley_shared_instimpl_2619!();
+        Depcrate_isa_pulley_shared_instimpl_2620!();
+        Depcrate_isa_pulley_shared_instTRAP_OPCODE!();
+        Depcrate_isa_pulley_shared_insttest_trap_encoding!();
+        Depcrate_isa_pulley_shared_instreg_name!();
+        Depcrate_isa_pulley_shared_instimpl_2624!();
+        Depcrate_isa_pulley_shared_instLabelUse!();
+        Depcrate_isa_pulley_shared_instimpl_2626!();
+    };
+}

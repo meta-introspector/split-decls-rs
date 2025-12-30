@@ -1,0 +1,57 @@
+// Generated module macro for crate
+macro_rules! Modcrate {
+() => {
+        Depcrateuse_1!();
+        Depcrateuse_2!();
+        Depcrateuse_3!();
+        Depcrateuse_4!();
+        Depcrateuse_5!();
+        Depcrateuse_6!();
+        Depcrateuse_7!();
+        Depcrateuse_8!();
+        Depcrateuse_9!();
+        Depcrateuse_10!();
+        Depcrateuse_11!();
+        Depcrateuse_12!();
+        Depcrateuse_13!();
+        Depcrateuse_14!();
+        Depcrateuse_15!();
+        Depcratediagnostic_impls!();
+        Depcrateuse_55!();
+        DepcrateFluentBundle!();
+        Depcratenew_bundle!();
+        DepcrateTranslationBundleError!();
+        Depcrateimpl_59!();
+        Depcrateimpl_60!();
+        Depcrateimpl_61!();
+        Depcrateimpl_62!();
+        Depcratefluent_bundle!();
+        Depcrateregister_functions!();
+        DepcrateLazyFallbackBundle!();
+        Depcratefallback_fluent_bundle!();
+        DepcrateFluentId!();
+        DepcrateSubdiagMessage!();
+        Depcrateimpl_69!();
+        Depcrateimpl_70!();
+        Depcrateimpl_71!();
+        DepcrateDiagMessage!();
+        Depcrateimpl_73!();
+        Depcrateimpl_74!();
+        Depcrateimpl_75!();
+        Depcrateimpl_76!();
+        Depcrateimpl_77!();
+        DepcrateSpanLabel!();
+        DepcrateMultiSpan!();
+        Depcrateimpl_80!();
+        Depcrateimpl_81!();
+        Depcrateimpl_82!();
+        Depcrateicu_locale_from_unic_langid!();
+        Depcratefluent_value_from_str_list_sep_by_and!();
+        DepcrateDiagArg!();
+        DepcrateDiagArgName!();
+        DepcrateDiagArgValue!();
+        DepcrateIntoDiagArg!();
+        Depcrateimpl_89!();
+        Depcrateimpl_90!();
+    };
+}

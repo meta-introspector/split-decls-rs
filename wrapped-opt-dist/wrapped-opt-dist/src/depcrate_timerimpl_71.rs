@@ -1,0 +1,9 @@
+// Generated macro for impl_71 (impl)
+macro_rules! Depcrate_timerimpl_71 {
+() => {
+// Module: crate::timer
+// Provides: {"impl_71"}
+// Dependencies: {}
+impl Timer { pub fn new () -> Self { Timer { root : TimerSection :: new (None) } } pub fn format_stats (& self) -> String { use std :: fmt :: Write ; let mut items = Vec :: new () ; for (name , child) in & self . root . children { match child { SectionEntry :: SubSection (section) => { section . collect_levels (0 , name , & mut items) ; } SectionEntry :: Duration (duration) => items . push ((0 , name , * duration)) , } } let rows : Vec < (String , Duration) > = items . into_iter () . map (| (level , name , duration) | (format ! ("{}{name}:" , "  " . repeat (level)) , duration)) . collect () ; let total_duration = self . total_duration () ; let total_duration_label = "Total duration:" . to_string () ; const SPACE_AFTER_LABEL : usize = 2 ; let max_label_length = 16 . max (rows . iter () . map (| (label , _) | label . len ()) . max () . unwrap_or (0)) + SPACE_AFTER_LABEL ; let table_width = max_label_length + 23 ; let divider = "-" . repeat (table_width) ; let mut output = String :: new () ; writeln ! (output , "{divider}") . unwrap () ; for (label , duration) in rows { let pct = (duration . as_millis () as f64 / total_duration . as_millis () as f64) * 100.0 ; let duration_fmt = format ! ("{:>12.2}s ({pct:>5.2}%)" , duration . as_secs_f64 ()) ; writeln ! (output , "{label:<0$} {duration_fmt}" , max_label_length) . unwrap () ; } output . push ('\n') ; let total_duration = Duration :: new (total_duration . as_secs () , 0) ; let total_duration = format ! ("{:>1$}" , humantime :: format_duration (total_duration) . to_string () , table_width - total_duration_label . len ()) ; writeln ! (output , "{total_duration_label}{total_duration}") . unwrap () ; writeln ! (output , "{divider}") . unwrap () ; output } }
+};
+}

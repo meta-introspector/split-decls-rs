@@ -1,0 +1,9 @@
+// Generated macro for tests (module)
+macro_rules! Depcrate_compactdecimal_formattertests {
+() => {
+// Module: crate::compactdecimal::formatter
+// Provides: {"tests"}
+// Dependencies: {}
+# [cfg (feature = "serde")] # [cfg (test)] mod tests { use super :: * ; use icu_decimal :: options :: GroupingStrategy ; use icu_locale_core :: locale ; use writeable :: assert_writeable_eq ; # [allow (non_snake_case)] # [test] fn test_grouping () { # [derive (Debug)] struct TestCase < 'a > { short : bool , options : CompactDecimalFormatterOptions , expected1T : & 'a str , expected10T : & 'a str , } let cases = [TestCase { short : true , options : Default :: default () , expected1T : "1000T" , expected10T : "10,000T" , } , TestCase { short : true , options : GroupingStrategy :: Always . into () , expected1T : "1,000T" , expected10T : "10,000T" , } , TestCase { short : true , options : GroupingStrategy :: Never . into () , expected1T : "1000T" , expected10T : "10000T" , } , TestCase { short : false , options : Default :: default () , expected1T : "1000 trillion" , expected10T : "10,000 trillion" , } , TestCase { short : false , options : GroupingStrategy :: Always . into () , expected1T : "1,000 trillion" , expected10T : "10,000 trillion" , } , TestCase { short : false , options : GroupingStrategy :: Never . into () , expected1T : "1000 trillion" , expected10T : "10000 trillion" , } ,] ; for case in cases { let formatter = if case . short { CompactDecimalFormatter :: try_new_short (locale ! ("en") . into () , case . options . clone ()) } else { CompactDecimalFormatter :: try_new_long (locale ! ("en") . into () , case . options . clone ()) } . unwrap () ; let result1T = formatter . format_i64 (1_000_000_000_000_000) ; assert_writeable_eq ! (result1T , case . expected1T , "{:?}" , case) ; let result10T = formatter . format_i64 (10_000_000_000_000_000) ; assert_writeable_eq ! (result10T , case . expected10T , "{:?}" , case) ; } } }
+};
+}

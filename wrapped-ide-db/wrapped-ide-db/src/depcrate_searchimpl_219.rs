@@ -1,0 +1,9 @@
+// Generated macro for impl_219 (impl)
+macro_rules! Depcrate_searchimpl_219 {
+() => {
+// Module: crate::search
+// Provides: {"impl_219"}
+// Dependencies: {}
+impl FileReferenceNode { pub fn text_range (& self) -> TextRange { match self { FileReferenceNode :: Name (it) => it . syntax () . text_range () , FileReferenceNode :: NameRef (it) => it . syntax () . text_range () , FileReferenceNode :: Lifetime (it) => it . syntax () . text_range () , FileReferenceNode :: FormatStringEntry (_ , range) => * range , } } pub fn syntax (& self) -> SyntaxElement { match self { FileReferenceNode :: Name (it) => it . syntax () . clone () . into () , FileReferenceNode :: NameRef (it) => it . syntax () . clone () . into () , FileReferenceNode :: Lifetime (it) => it . syntax () . clone () . into () , FileReferenceNode :: FormatStringEntry (it , _) => it . syntax () . clone () . into () , } } pub fn into_name_like (self) -> Option < ast :: NameLike > { match self { FileReferenceNode :: Name (it) => Some (ast :: NameLike :: Name (it)) , FileReferenceNode :: NameRef (it) => Some (ast :: NameLike :: NameRef (it)) , FileReferenceNode :: Lifetime (it) => Some (ast :: NameLike :: Lifetime (it)) , FileReferenceNode :: FormatStringEntry (_ , _) => None , } } pub fn as_name_ref (& self) -> Option < & ast :: NameRef > { match self { FileReferenceNode :: NameRef (name_ref) => Some (name_ref) , _ => None , } } pub fn as_lifetime (& self) -> Option < & ast :: Lifetime > { match self { FileReferenceNode :: Lifetime (lifetime) => Some (lifetime) , _ => None , } } pub fn text (& self) -> syntax :: TokenText < '_ > { match self { FileReferenceNode :: NameRef (name_ref) => name_ref . text () , FileReferenceNode :: Name (name) => name . text () , FileReferenceNode :: Lifetime (lifetime) => lifetime . text () , FileReferenceNode :: FormatStringEntry (it , range) => { syntax :: TokenText :: borrowed (& it . text () [* range - it . syntax () . text_range () . start ()]) } } } }
+};
+}

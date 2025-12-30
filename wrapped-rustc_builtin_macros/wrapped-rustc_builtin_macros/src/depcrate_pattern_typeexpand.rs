@@ -1,0 +1,9 @@
+// Generated macro for expand (function)
+macro_rules! Depcrate_pattern_typeexpand {
+() => {
+// Module: crate::pattern_type
+// Provides: {"expand"}
+// Dependencies: {}
+pub (crate) fn expand < 'cx > (cx : & 'cx mut ExtCtxt < '_ > , sp : Span , tts : TokenStream ,) -> MacroExpanderResult < 'cx > { let (ty , pat) = match parse_pat_ty (cx , tts) { Ok (parsed) => parsed , Err (err) => { return ExpandResult :: Ready (DummyResult :: any (sp , err . emit ())) ; } } ; ExpandResult :: Ready (base :: MacEager :: ty (cx . ty (sp , ast :: TyKind :: Pat (ty , pat)))) }
+};
+}

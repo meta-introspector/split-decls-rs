@@ -1,0 +1,9 @@
+// Generated macro for other_55724 (other)
+macro_rules! Depcrate_um_winuserother_55724 {
+() => {
+// Module: crate::um::winuser
+// Provides: {"other_55724"}
+// Dependencies: {}
+extern "system" { pub fn EndDialog (hDlg : HWND , nResult : INT_PTR ,) -> BOOL ; pub fn GetDlgItem (hDlg : HWND , nIDDlgItem : c_int ,) -> HWND ; pub fn SetDlgItemInt (hDlg : HWND , nIDDlgItem : c_int , uValue : UINT , bSigned : BOOL ,) -> BOOL ; pub fn GetDlgItemInt (hDlg : HWND , nIDDlgItem : c_int , lpTranslated : * mut BOOL , bSigned : BOOL ,) -> UINT ; pub fn SetDlgItemTextA (hDlg : HWND , nIDDlgItem : c_int , lpString : LPCSTR ,) -> BOOL ; pub fn SetDlgItemTextW (hDlg : HWND , nIDDlgItem : c_int , lpString : LPCWSTR ,) -> BOOL ; pub fn GetDlgItemTextA (hDlg : HWND , nIDDlgItem : c_int , lpString : LPSTR , nMaxCount : c_int ,) -> UINT ; pub fn GetDlgItemTextW (hDlg : HWND , nIDDlgItem : c_int , lpString : LPWSTR , nMaxCount : c_int ,) -> UINT ; pub fn CheckDlgButton (hDlg : HWND , nIDButton : c_int , uCheck : UINT ,) -> BOOL ; pub fn CheckRadioButton (hDlg : HWND , nIDFirstButton : c_int , nIDLasatButton : c_int , nIDCheckButton : c_int ,) -> BOOL ; pub fn IsDlgButtonChecked (hDlg : HWND , nIDButton : c_int ,) -> UINT ; pub fn SendDlgItemMessageA (hDlg : HWND , nIDDlgItem : c_int , Msg : UINT , wParam : WPARAM , lParam : LPARAM ,) -> LRESULT ; pub fn SendDlgItemMessageW (hDlg : HWND , nIDDlgItem : c_int , Msg : UINT , wParam : WPARAM , lParam : LPARAM ,) -> LRESULT ; pub fn GetNextDlgGroupItem (hDlg : HWND , hCtl : HWND , bPrevious : BOOL ,) -> HWND ; pub fn GetNextDlgTabItem (hDlg : HWND , hCtl : HWND , bPrevious : BOOL ,) -> HWND ; pub fn GetDlgCtrlID (hwnd : HWND ,) -> c_int ; pub fn GetDialogBaseUnits () -> LONG ; pub fn DefDlgProcA (hDlg : HWND , msg : UINT , wParam : WPARAM , lParam : LPARAM ,) -> LRESULT ; pub fn DefDlgProcW (hDlg : HWND , msg : UINT , wParam : WPARAM , lParam : LPARAM ,) -> LRESULT ; }
+};
+}

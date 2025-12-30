@@ -1,0 +1,45 @@
+// Generated module macro for crate::dfa::sparse
+macro_rules! Modcrate_dfa_sparse {
+() => {
+        Depcrate_dfa_sparseuse_130!();
+        Depcrate_dfa_sparseuse_131!();
+        Depcrate_dfa_sparseuse_132!();
+        Depcrate_dfa_sparseuse_133!();
+        Depcrate_dfa_sparseuse_134!();
+        Depcrate_dfa_sparseLABEL!();
+        Depcrate_dfa_sparseVERSION!();
+        Depcrate_dfa_sparseDFA!();
+        Depcrate_dfa_sparseimpl_138!();
+        Depcrate_dfa_sparseimpl_139!();
+        Depcrate_dfa_sparseimpl_140!();
+        Depcrate_dfa_sparseimpl_141!();
+        Depcrate_dfa_sparseimpl_142!();
+        Depcrate_dfa_sparseimpl_143!();
+        Depcrate_dfa_sparseimpl_144!();
+        Depcrate_dfa_sparseTransitions!();
+        Depcrate_dfa_sparseimpl_146!();
+        Depcrate_dfa_sparseimpl_147!();
+        Depcrate_dfa_sparseimpl_148!();
+        Depcrate_dfa_sparseStartTable!();
+        Depcrate_dfa_sparseimpl_150!();
+        Depcrate_dfa_sparseimpl_151!();
+        Depcrate_dfa_sparseimpl_152!();
+        Depcrate_dfa_sparseimpl_153!();
+        Depcrate_dfa_sparseStartStateIter!();
+        Depcrate_dfa_sparseimpl_155!();
+        Depcrate_dfa_sparseimpl_156!();
+        Depcrate_dfa_sparseStateIter!();
+        Depcrate_dfa_sparseimpl_158!();
+        Depcrate_dfa_sparseimpl_159!();
+        Depcrate_dfa_sparseState!();
+        Depcrate_dfa_sparseimpl_161!();
+        Depcrate_dfa_sparseimpl_162!();
+        Depcrate_dfa_sparseStateMut!();
+        Depcrate_dfa_sparseimpl_164!();
+        Depcrate_dfa_sparseimpl_165!();
+        Depcrate_dfa_sparseSeen!();
+        Depcrate_dfa_sparseimpl_167!();
+        Depcrate_dfa_sparseimpl_168!();
+        Depcrate_dfa_sparsetests!();
+    };
+}

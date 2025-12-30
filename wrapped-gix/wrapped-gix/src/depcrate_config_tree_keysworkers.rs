@@ -1,0 +1,9 @@
+// Generated macro for workers (module)
+macro_rules! Depcrate_config_tree_keysworkers {
+() => {
+// Module: crate::config::tree::keys
+// Provides: {"workers"}
+// Dependencies: {}
+mod workers { use crate :: config :: tree :: { keys :: UnsignedInteger , Section } ; impl UnsignedInteger { # [doc = " Create a new instance."] pub const fn new_unsigned_integer (name : & 'static str , section : & 'static dyn Section) -> Self { Self :: new_with_validate (name , section , super :: validate :: UnsignedInteger) } # [doc = " Convert `value` into a `usize` or wrap it into a specialized error."] pub fn try_into_usize (& 'static self , value : Result < i64 , gix_config :: value :: Error > ,) -> Result < usize , crate :: config :: unsigned_integer :: Error > { value . map_err (| err | crate :: config :: unsigned_integer :: Error :: from (self) . with_source (err)) . and_then (| value | { value . try_into () . map_err (| _ | crate :: config :: unsigned_integer :: Error :: from (self)) }) } # [doc = " Convert `value` into a `u64` or wrap it into a specialized error."] pub fn try_into_u64 (& 'static self , value : Result < i64 , gix_config :: value :: Error > ,) -> Result < u64 , crate :: config :: unsigned_integer :: Error > { value . map_err (| err | crate :: config :: unsigned_integer :: Error :: from (self) . with_source (err)) . and_then (| value | { value . try_into () . map_err (| _ | crate :: config :: unsigned_integer :: Error :: from (self)) }) } # [doc = " Convert `value` into a `u32` or wrap it into a specialized error."] pub fn try_into_u32 (& 'static self , value : Result < i64 , gix_config :: value :: Error > ,) -> Result < u32 , crate :: config :: unsigned_integer :: Error > { value . map_err (| err | crate :: config :: unsigned_integer :: Error :: from (self) . with_source (err)) . and_then (| value | { value . try_into () . map_err (| _ | crate :: config :: unsigned_integer :: Error :: from (self)) }) } } }
+};
+}

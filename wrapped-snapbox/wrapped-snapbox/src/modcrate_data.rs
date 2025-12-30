@@ -1,0 +1,54 @@
+// Generated module macro for crate::data
+macro_rules! Modcrate_data {
+() => {
+        Depcrate_datafilters!();
+        Depcrate_dataformat!();
+        Depcrate_dataruntime!();
+        Depcrate_datasource!();
+        Depcrate_datatests!();
+        Depcrate_datause_139!();
+        Depcrate_datause_140!();
+        Depcrate_datause_141!();
+        Depcrate_datause_142!();
+        Depcrate_datause_143!();
+        Depcrate_dataToDebug!();
+        Depcrate_dataimpl_145!();
+        Depcrate_dataIntoJson!();
+        Depcrate_dataimpl_147!();
+        Depcrate_dataIntoData!();
+        Depcrate_dataimpl_149!();
+        Depcrate_dataimpl_150!();
+        Depcrate_dataimpl_151!();
+        Depcrate_dataimpl_152!();
+        Depcrate_dataimpl_153!();
+        Depcrate_dataimpl_154!();
+        Depcrate_dataimpl_155!();
+        Depcrate_dataimpl_156!();
+        Depcrate_datafile!();
+        Depcrate_datastr!();
+        Depcrate_dataData!();
+        Depcrate_dataDataInner!();
+        Depcrate_dataimpl_161!();
+        Depcrate_dataimpl_162!();
+        Depcrate_dataimpl_163!();
+        Depcrate_dataimpl_164!();
+        Depcrate_dataDataError!();
+        Depcrate_dataimpl_166!();
+        Depcrate_dataparse_jsonlines!();
+        Depcrate_dataterm_svg_body!();
+        Depcrate_datasplit_term_svg!();
+        Depcrate_dataimpl_170!();
+        Depcrate_dataimpl_171!();
+        Depcrate_dataimpl_172!();
+        Depcrate_dataimpl_173!();
+        Depcrate_dataimpl_174!();
+        Depcrate_dataimpl_175!();
+        Depcrate_dataimpl_176!();
+        Depcrate_dataimpl_177!();
+        Depcrate_dataimpl_178!();
+        Depcrate_datais_binary!();
+        Depcrate_datais_binary!();
+        Depcrate_datagenerate_snapshot_path!();
+        Depcrate_datatest!();
+    };
+}

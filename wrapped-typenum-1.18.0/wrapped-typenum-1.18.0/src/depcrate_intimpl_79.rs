@@ -1,0 +1,9 @@
+// Generated macro for impl_79 (impl)
+macro_rules! Depcrate_intimpl_79 {
+() => {
+// Module: crate::int
+// Provides: {"impl_79"}
+// Dependencies: {}
+# [doc = " `Z0 - N = P`"] impl < U : Unsigned + NonZero > Sub < NInt < U > > for Z0 { type Output = PInt < U > ; # [inline] fn sub (self , _ : NInt < U >) -> Self :: Output { PInt :: new () } }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for conflict_step (function)
+macro_rules! Depcrate_cdclconflict_step {
+() => {
+// Module: crate::cdcl
+// Provides: {"conflict_step"}
+// Dependencies: {}
+# [doc = " Find a conflict, learn a clause and backtrack."] pub fn conflict_step < 'a > (mut ctx : partial ! (Context <'a >, mut AnalyzeConflictP , mut AssignmentP , mut AssumptionsP , mut BinaryClausesP , mut ClauseActivityP , mut ClauseAllocP , mut ClauseDbP , mut ImplGraphP , mut ModelP , mut ProofP <'a >, mut SolverStateP , mut TmpDataP , mut TmpFlagsP , mut TrailP , mut VariablesP , mut VsidsP , mut WatchlistsP ,) ,) { let conflict = find_conflict (ctx . borrow ()) ; let conflict = match conflict { Ok (()) => { reconstruct_global_model (ctx . borrow ()) ; return ; } Err (FoundConflict :: Assumption) => { ctx . part_mut (SolverStateP) . sat_state = SatState :: UnsatUnderAssumptions ; return ; } Err (FoundConflict :: Conflict (conflict)) => conflict , } ; let backtrack_to = analyze_conflict (ctx . borrow () , conflict) ; let (analyze , mut ctx) = ctx . split_part (AnalyzeConflictP) ; for & cref in analyze . involved () { bump_clause (ctx . borrow () , cref) ; } decay_clause_activities (ctx . borrow ()) ; backtrack (ctx . borrow () , backtrack_to) ; let clause = analyze . clause () ; proof :: add_step (ctx . borrow () , true , & ProofStep :: AtClause { redundant : clause . len () > 2 , clause , propagation_hashes : analyze . clause_hashes () , } ,) ; let reason = match clause . len () { 0 => { ctx . part_mut (SolverStateP) . sat_state = SatState :: Unsat ; return ; } 1 => Reason :: Unit , 2 => { ctx . part_mut (BinaryClausesP) . add_binary_clause ([clause [0] , clause [1]]) ; Reason :: Binary ([clause [1]]) } _ => { let header = assess_learned_clause (ctx . borrow () , clause) ; let cref = db :: add_clause (ctx . borrow () , header , clause) ; Reason :: Long (cref) } } ; enqueue_assignment (ctx . borrow () , clause [0] , reason) ; }
+};
+}

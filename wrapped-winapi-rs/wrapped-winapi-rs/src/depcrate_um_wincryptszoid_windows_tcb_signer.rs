@@ -1,0 +1,9 @@
+// Generated macro for szOID_WINDOWS_TCB_SIGNER (const)
+macro_rules! Depcrate_um_wincryptszOID_WINDOWS_TCB_SIGNER {
+() => {
+// Module: crate::um::wincrypt
+// Provides: {"szOID_WINDOWS_TCB_SIGNER"}
+// Dependencies: {}
+pub const szOID_WINDOWS_TCB_SIGNER : & 'static str = "1.3.6.1.4.1.311.10.3.23" ;
+};
+}

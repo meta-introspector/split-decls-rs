@@ -1,0 +1,9 @@
+// Generated macro for ERROR_AUTHENTICODE_PUBLISHER_NOT_TRUSTED (const)
+macro_rules! Depcrate_um_setupapiERROR_AUTHENTICODE_PUBLISHER_NOT_TRUSTED {
+() => {
+// Module: crate::um::setupapi
+// Provides: {"ERROR_AUTHENTICODE_PUBLISHER_NOT_TRUSTED"}
+// Dependencies: {}
+pub const ERROR_AUTHENTICODE_PUBLISHER_NOT_TRUSTED : DWORD = APPLICATION_ERROR_MASK | ERROR_SEVERITY_ERROR | 0x243 ;
+};
+}

@@ -1,0 +1,49 @@
+// Generated module macro for crate::param
+macro_rules! Modcrate_param {
+() => {
+        Depcrate_paramuse_77!();
+        Depcrate_paramuse_78!();
+        Depcrate_paramuse_79!();
+        Depcrate_paramuse_80!();
+        Depcrate_paramuse_81!();
+        Depcrate_paramuse_82!();
+        Depcrate_paramuse_83!();
+        Depcrate_paramSpecQ!();
+        Depcrate_paramSpecD!();
+        Depcrate_paramQMinus1!();
+        Depcrate_paramBitlenQMinusD!();
+        Depcrate_paramPow2DMinus1!();
+        Depcrate_paramPow2DMinus1Minus1!();
+        Depcrate_paramSamplingSize!();
+        Depcrate_paramEta!();
+        Depcrate_paramimpl_92!();
+        Depcrate_paramimpl_93!();
+        Depcrate_paramMaskSamplingSize!();
+        Depcrate_paramimpl_95!();
+        Depcrate_paramParameterSet!();
+        Depcrate_paramSigningKeyParams!();
+        Depcrate_paramEncodedS1!();
+        Depcrate_paramEncodedS2!();
+        Depcrate_paramEncodedT0!();
+        Depcrate_paramSigningKeySize!();
+        Depcrate_paramEncodedSigningKey!();
+        Depcrate_paramimpl_103!();
+        Depcrate_paramVerifyingKeyParams!();
+        Depcrate_paramVerifyingKeySize!();
+        Depcrate_paramEncodedT1!();
+        Depcrate_paramEncodedVerifyingKey!();
+        Depcrate_paramimpl_108!();
+        Depcrate_paramSignatureParams!();
+        Depcrate_paramSignatureSize!();
+        Depcrate_paramEncodedCTilde!();
+        Depcrate_paramEncodedW1!();
+        Depcrate_paramEncodedZ!();
+        Depcrate_paramEncodedHintIndices!();
+        Depcrate_paramEncodedHintCuts!();
+        Depcrate_paramEncodedHint!();
+        Depcrate_paramEncodedSignature!();
+        Depcrate_paramimpl_118!();
+        Depcrate_paramMlDsaParams!();
+        Depcrate_paramimpl_120!();
+    };
+}

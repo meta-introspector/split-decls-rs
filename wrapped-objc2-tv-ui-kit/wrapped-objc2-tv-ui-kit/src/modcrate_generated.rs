@@ -1,0 +1,40 @@
+// Generated module macro for crate::generated
+macro_rules! Modcrate_generated {
+() => {
+        Depcrate_generatedother_4!();
+        Depcrate_generated__TVCaptionButtonView!();
+        Depcrate_generated__TVCardView!();
+        Depcrate_generated__TVCollectionViewFullScreenCell!();
+        Depcrate_generated__TVCollectionViewFullScreenLayout!();
+        Depcrate_generated__TVDigitEntryViewController!();
+        Depcrate_generated__TVLockupHeaderFooterView!();
+        Depcrate_generated__TVLockupView!();
+        Depcrate_generated__TVMediaItemContentConfiguration!();
+        Depcrate_generated__TVMonogramContentConfiguration!();
+        Depcrate_generated__TVMonogramView!();
+        Depcrate_generated__TVPosterView!();
+        Depcrate_generated__TVUIKitDefines!();
+        Depcrate_generateduse_17!();
+        Depcrate_generateduse_18!();
+        Depcrate_generateduse_19!();
+        Depcrate_generateduse_20!();
+        Depcrate_generateduse_21!();
+        Depcrate_generateduse_22!();
+        Depcrate_generateduse_23!();
+        Depcrate_generateduse_24!();
+        Depcrate_generateduse_25!();
+        Depcrate_generateduse_26!();
+        Depcrate_generateduse_27!();
+        Depcrate_generateduse_28!();
+        Depcrate_generateduse_29!();
+        Depcrate_generateduse_30!();
+        Depcrate_generateduse_31!();
+        Depcrate_generateduse_32!();
+        Depcrate_generateduse_33!();
+        Depcrate_generateduse_34!();
+        Depcrate_generateduse_35!();
+        Depcrate_generateduse_36!();
+        Depcrate_generateduse_37!();
+        Depcrate_generateduse_38!();
+    };
+}

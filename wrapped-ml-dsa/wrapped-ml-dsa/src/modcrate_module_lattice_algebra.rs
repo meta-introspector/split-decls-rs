@@ -1,0 +1,51 @@
+// Generated module macro for crate::module_lattice::algebra
+macro_rules! Modcrate_module_lattice_algebra {
+() => {
+        Depcrate_module_lattice_algebrause_165!();
+        Depcrate_module_lattice_algebrause_166!();
+        Depcrate_module_lattice_algebrause_167!();
+        Depcrate_module_lattice_algebrause_168!();
+        Depcrate_module_lattice_algebrause_169!();
+        Depcrate_module_lattice_algebrause_170!();
+        Depcrate_module_lattice_algebraField!();
+        Depcrate_module_lattice_algebradefine_field!();
+        Depcrate_module_lattice_algebraElem!();
+        Depcrate_module_lattice_algebraimpl_174!();
+        Depcrate_module_lattice_algebraimpl_175!();
+        Depcrate_module_lattice_algebraimpl_176!();
+        Depcrate_module_lattice_algebraimpl_177!();
+        Depcrate_module_lattice_algebraimpl_178!();
+        Depcrate_module_lattice_algebraimpl_179!();
+        Depcrate_module_lattice_algebraPolynomial!();
+        Depcrate_module_lattice_algebraimpl_181!();
+        Depcrate_module_lattice_algebraimpl_182!();
+        Depcrate_module_lattice_algebraimpl_183!();
+        Depcrate_module_lattice_algebraimpl_184!();
+        Depcrate_module_lattice_algebraimpl_185!();
+        Depcrate_module_lattice_algebraimpl_186!();
+        Depcrate_module_lattice_algebraVector!();
+        Depcrate_module_lattice_algebraimpl_188!();
+        Depcrate_module_lattice_algebraimpl_189!();
+        Depcrate_module_lattice_algebraimpl_190!();
+        Depcrate_module_lattice_algebraimpl_191!();
+        Depcrate_module_lattice_algebraimpl_192!();
+        Depcrate_module_lattice_algebraimpl_193!();
+        Depcrate_module_lattice_algebraNttPolynomial!();
+        Depcrate_module_lattice_algebraimpl_195!();
+        Depcrate_module_lattice_algebraimpl_196!();
+        Depcrate_module_lattice_algebraimpl_197!();
+        Depcrate_module_lattice_algebraimpl_198!();
+        Depcrate_module_lattice_algebraimpl_199!();
+        Depcrate_module_lattice_algebraimpl_200!();
+        Depcrate_module_lattice_algebraNttVector!();
+        Depcrate_module_lattice_algebraimpl_202!();
+        Depcrate_module_lattice_algebraimpl_203!();
+        Depcrate_module_lattice_algebraimpl_204!();
+        Depcrate_module_lattice_algebraimpl_205!();
+        Depcrate_module_lattice_algebraimpl_206!();
+        Depcrate_module_lattice_algebraimpl_207!();
+        Depcrate_module_lattice_algebraNttMatrix!();
+        Depcrate_module_lattice_algebraimpl_209!();
+        Depcrate_module_lattice_algebraimpl_210!();
+    };
+}

@@ -1,0 +1,9 @@
+// Generated macro for impl_359 (impl)
+macro_rules! Depcrate_interface_array_returnimpl_359 {
+() => {
+// Module: crate::interface_array_return
+// Provides: {"impl_359"}
+// Dependencies: {}
+impl IDispatch_Vtbl { pub const fn new < Identity : IDispatch_Impl , const OFFSET : isize > () -> Self { unsafe extern "system" fn GetTypeInfoCount < Identity : IDispatch_Impl , const OFFSET : isize , > (this : * mut core :: ffi :: c_void , pctinfo : * mut u32 ,) -> windows_core :: HRESULT { unsafe { let this : & Identity = & * ((this as * const * const ()) . offset (OFFSET) as * const Identity) ; match IDispatch_Impl :: GetTypeInfoCount (this) { Ok (ok__) => { pctinfo . write (core :: mem :: transmute (ok__)) ; windows_core :: HRESULT (0) } Err (err) => err . into () , } } } unsafe extern "system" fn GetIDsOfNames < Identity : IDispatch_Impl , const OFFSET : isize > (this : * mut core :: ffi :: c_void , riid : * const windows_core :: GUID , rgsznames : * const windows_core :: PCWSTR , cnames : u32 , lcid : u32 , rgdispid : * mut i32 ,) -> windows_core :: HRESULT { unsafe { let this : & Identity = & * ((this as * const * const ()) . offset (OFFSET) as * const Identity) ; IDispatch_Impl :: GetIDsOfNames (this , core :: mem :: transmute_copy (& riid) , core :: mem :: transmute_copy (& rgsznames) , core :: mem :: transmute_copy (& cnames) , core :: mem :: transmute_copy (& lcid) , core :: mem :: transmute_copy (& rgdispid) ,) . into () } } Self { base__ : windows_core :: IUnknown_Vtbl :: new :: < Identity , OFFSET > () , GetTypeInfoCount : GetTypeInfoCount :: < Identity , OFFSET > , GetTypeInfo : 0 , GetIDsOfNames : GetIDsOfNames :: < Identity , OFFSET > , Invoke : 0 , } } pub fn matches (iid : & windows_core :: GUID) -> bool { iid == & < IDispatch as windows_core :: Interface > :: IID } }
+};
+}

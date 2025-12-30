@@ -1,0 +1,45 @@
+// Generated module macro for crate
+macro_rules! Modcrate {
+() => {
+        DepcrateRHO!();
+        DepcratePI!();
+        DepcrateWORDS!();
+        Depcratekeccak_function!();
+        Depcratekeccakp!();
+        Depcrateuse_12!();
+        Depcratekeccakf!();
+        Depcrateuse_20!();
+        Depcratek12!();
+        Depcrateuse_30!();
+        Depcratekeccak!();
+        Depcrateuse_36!();
+        Depcrateshake!();
+        Depcrateuse_43!();
+        Depcratesha3!();
+        Depcrateuse_49!();
+        Depcratecshake!();
+        Depcrateuse_56!();
+        Depcratekmac!();
+        Depcrateuse_65!();
+        Depcratetuple_hash!();
+        Depcrateuse_74!();
+        Depcrateparallel_hash!();
+        Depcrateuse_86!();
+        DepcrateHasher!();
+        DepcrateIntoXof!();
+        DepcrateXof!();
+        DepcrateEncodedLen!();
+        Depcrateimpl_91!();
+        Depcrateleft_encode!();
+        Depcrateright_encode!();
+        DepcrateBuffer!();
+        Depcrateimpl_95!();
+        DepcratePermutation!();
+        DepcrateMode!();
+        DepcrateKeccakState!();
+        Depcrateimpl_99!();
+        Depcrateimpl_100!();
+        Depcratebits_to_rate!();
+        Depcratetests!();
+    };
+}

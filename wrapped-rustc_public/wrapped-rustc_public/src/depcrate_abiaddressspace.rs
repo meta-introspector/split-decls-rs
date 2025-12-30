@@ -1,0 +1,9 @@
+// Generated macro for AddressSpace (struct)
+macro_rules! Depcrate_abiAddressSpace {
+() => {
+// Module: crate::abi
+// Provides: {"AddressSpace"}
+// Dependencies: {}
+# [doc = " An identifier that specifies the address space that some operation"] # [doc = " should operate on. Special address spaces have an effect on code generation,"] # [doc = " depending on the target and the address spaces it implements."] # [derive (Copy , Clone , Debug , PartialEq , Eq , PartialOrd , Ord , Hash , Serialize)] pub struct AddressSpace (pub u32) ;
+};
+}

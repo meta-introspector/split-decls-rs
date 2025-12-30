@@ -1,0 +1,65 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcratecreate_account_shared_data_for_test.rs");
+include!("depcratecreate_is_signer_account_infos.rs");
+include!("depcrateshared_new_ref_data.rs");
+include!("depcratecreate_account_shared_data_with_fields.rs");
+include!("depcratecreate_account_with_fields.rs");
+include!("depcratecreate_account_for_test.rs");
+include!("depcrateuse_5.rs");
+include!("depcrateimpl_32.rs");
+include!("depcrateshared_new.rs");
+include!("depcrate_state_traitsimpl_11.rs");
+include!("depcrateaccountshareddata.rs");
+include!("depcrateprogram_owners.rs");
+include!("depcratetests.rs");
+include!("depcrate_state_traitstests.rs");
+include!("depcrateshared_new_ref_data_with_space.rs");
+include!("depcratedummy_inheritable_account_fields.rs");
+include!("depcrateimpl_29.rs");
+include!("depcratefrom_account.rs");
+include!("depcrateimpl_24.rs");
+include!("depcrate_state_traitsuse_7.rs");
+include!("depcrateimpl_16.rs");
+include!("depcratestate_traits.rs");
+include!("depcrateshared_deserialize_data.rs");
+include!("depcrateimpl_31.rs");
+include!("depcrateimpl_52.rs");
+include!("depcrateimpl_25.rs");
+include!("depcratereadableaccount.rs");
+include!("depcrateshared_new_data_with_space.rs");
+include!("depcrateuse_1.rs");
+include!("depcrateimpl_28.rs");
+include!("depcrateshared_new_ref.rs");
+include!("depcrateuse_4.rs");
+include!("depcrateuse_2.rs");
+include!("depcrateshared_serialize_data.rs");
+include!("depcrateimpl_43.rs");
+include!("depcrateimpl_42.rs");
+include!("depcrateaccount_serialize.rs");
+include!("depcrateimpl_17.rs");
+include!("depcrateaccount.rs");
+include!("depcrateimpl_21.rs");
+include!("depcrateshared_new_rent_epoch.rs");
+include!("depcrateshared_new_data.rs");
+include!("depcrateimpl_26.rs");
+include!("depcrateinheritableaccountfields.rs");
+include!("depcrateto_account.rs");
+include!("depcrate_state_traitsstate.rs");
+include!("depcratedebug_fmt.rs");
+include!("depcrate_state_traitsimpl_10.rs");
+include!("depcrateimpl_20.rs");
+include!("depcrateuse_3.rs");
+include!("depcrateimpl_27.rs");
+include!("depcrateaccounts_equal.rs");
+include!("depcratewritableaccount.rs");
+include!("depcrate_state_traitsimpl_12.rs");
+include!("depcrate_state_traitsstatemut.rs");
+include!("modcrate_state_traits.rs");
+include!("modcrate.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate_state_traits!();
+    Modcrate!();
+}

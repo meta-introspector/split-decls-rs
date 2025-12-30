@@ -1,0 +1,50 @@
+// Generated module macro for crate::helpers
+macro_rules! Modcrate_helpers {
+() => {
+        Depcrate_helpersuse_687!();
+        Depcrate_helpersuse_688!();
+        Depcrate_helpersuse_689!();
+        Depcrate_helpersuse_690!();
+        Depcrate_helpersuse_691!();
+        Depcrate_helpersuse_692!();
+        Depcrate_helpersuse_693!();
+        Depcrate_helpersuse_694!();
+        Depcrate_helpersuse_695!();
+        Depcrate_helpersuse_696!();
+        Depcrate_helpersuse_697!();
+        Depcrate_helpersuse_698!();
+        Depcrate_helpersuse_699!();
+        Depcrate_helpersuse_700!();
+        Depcrate_helpersuse_701!();
+        Depcrate_helpersuse_702!();
+        Depcrate_helpersuse_703!();
+        Depcrate_helpersuse_704!();
+        Depcrate_helpersuse_705!();
+        Depcrate_helpersuse_706!();
+        Depcrate_helpersAccessKind!();
+        Depcrate_helperstry_resolve_did!();
+        Depcrate_helperstry_resolve_path!();
+        Depcrate_helpersresolve_path!();
+        Depcrate_helperspath_ty_layout!();
+        Depcrate_helpersiter_exported_symbols!();
+        Depcrate_helpersToHost!();
+        Depcrate_helpersToSoft!();
+        Depcrate_helpersimpl_715!();
+        Depcrate_helpersimpl_716!();
+        Depcrate_helpersimpl_717!();
+        Depcrate_helpersimpl_718!();
+        Depcrate_helpersimpl_719!();
+        Depcrate_helpersEvalContextExt!();
+        Depcrate_helpersimpl_721!();
+        Depcrate_helpersisolation_abort_error!();
+        Depcrate_helpersget_local_crates!();
+        Depcrate_helpersbool_to_simd_element!();
+        Depcrate_helperssimd_element_to_bool!();
+        Depcrate_helperswindows_check_buffer_size!();
+        Depcrate_helpersToUsize!();
+        Depcrate_helpersimpl_728!();
+        Depcrate_helpersToU64!();
+        Depcrate_helpersimpl_730!();
+        Depcrate_helpersenter_trace_span!();
+    };
+}

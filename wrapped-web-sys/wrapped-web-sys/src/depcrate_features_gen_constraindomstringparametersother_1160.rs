@@ -1,0 +1,9 @@
+// Generated macro for other_1160 (other)
+macro_rules! Depcrate_features_gen_ConstrainDomStringParametersother_1160 {
+() => {
+// Module: crate::features::gen_ConstrainDomStringParameters
+// Provides: {"other_1160"}
+// Dependencies: {}
+# [wasm_bindgen] extern "C" { # [wasm_bindgen (extends = :: js_sys :: Object , js_name = ConstrainDOMStringParameters)] # [derive (Debug , Clone , PartialEq , Eq)] # [doc = "The `ConstrainDomStringParameters` dictionary."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `ConstrainDomStringParameters`*"] pub type ConstrainDomStringParameters ; # [doc = "Get the `exact` field of this object."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `ConstrainDomStringParameters`*"] # [wasm_bindgen (method , getter = "exact")] pub fn get_exact (this : & ConstrainDomStringParameters) -> :: wasm_bindgen :: JsValue ; # [doc = "Change the `exact` field of this object."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `ConstrainDomStringParameters`*"] # [wasm_bindgen (method , setter = "exact")] pub fn set_exact (this : & ConstrainDomStringParameters , val : & :: wasm_bindgen :: JsValue) ; # [doc = "Get the `ideal` field of this object."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `ConstrainDomStringParameters`*"] # [wasm_bindgen (method , getter = "ideal")] pub fn get_ideal (this : & ConstrainDomStringParameters) -> :: wasm_bindgen :: JsValue ; # [doc = "Change the `ideal` field of this object."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `ConstrainDomStringParameters`*"] # [wasm_bindgen (method , setter = "ideal")] pub fn set_ideal (this : & ConstrainDomStringParameters , val : & :: wasm_bindgen :: JsValue) ; }
+};
+}

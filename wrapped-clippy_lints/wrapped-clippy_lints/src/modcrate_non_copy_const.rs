@@ -1,0 +1,40 @@
+// Generated module macro for crate::non_copy_const
+macro_rules! Modcrate_non_copy_const {
+() => {
+        Depcrate_non_copy_constuse_8138!();
+        Depcrate_non_copy_constuse_8139!();
+        Depcrate_non_copy_constuse_8140!();
+        Depcrate_non_copy_constuse_8141!();
+        Depcrate_non_copy_constuse_8142!();
+        Depcrate_non_copy_constuse_8143!();
+        Depcrate_non_copy_constuse_8144!();
+        Depcrate_non_copy_constuse_8145!();
+        Depcrate_non_copy_constuse_8146!();
+        Depcrate_non_copy_constuse_8147!();
+        Depcrate_non_copy_constuse_8148!();
+        Depcrate_non_copy_constuse_8149!();
+        Depcrate_non_copy_constuse_8150!();
+        Depcrate_non_copy_constuse_8151!();
+        Depcrate_non_copy_constuse_8152!();
+        Depcrate_non_copy_constuse_8153!();
+        Depcrate_non_copy_constuse_8154!();
+        Depcrate_non_copy_constuse_8155!();
+        Depcrate_non_copy_constmacro_8156!();
+        Depcrate_non_copy_constmacro_8157!();
+        Depcrate_non_copy_constIsFreeze!();
+        Depcrate_non_copy_constimpl_8159!();
+        Depcrate_non_copy_constBorrowCause!();
+        Depcrate_non_copy_constimpl_8161!();
+        Depcrate_non_copy_constBorrowSource!();
+        Depcrate_non_copy_constimpl_8163!();
+        Depcrate_non_copy_constNonCopyConst!();
+        Depcrate_non_copy_constmacro_8165!();
+        Depcrate_non_copy_constimpl_8166!();
+        Depcrate_non_copy_constimpl_8167!();
+        Depcrate_non_copy_constReplaceAssocFolder!();
+        Depcrate_non_copy_constimpl_8169!();
+        Depcrate_non_copy_constis_thread_local!();
+        Depcrate_non_copy_constdoes_adjust_borrow!();
+        Depcrate_non_copy_constget_const_hir_value!();
+    };
+}

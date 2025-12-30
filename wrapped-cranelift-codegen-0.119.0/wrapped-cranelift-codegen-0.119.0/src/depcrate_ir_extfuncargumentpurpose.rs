@@ -1,0 +1,9 @@
+// Generated macro for ArgumentPurpose (enum)
+macro_rules! Depcrate_ir_extfuncArgumentPurpose {
+() => {
+// Module: crate::ir::extfunc
+// Provides: {"ArgumentPurpose"}
+// Dependencies: {}
+# [doc = " The special purpose of a function argument."] # [doc = ""] # [doc = " Function arguments and return values are used to pass user program values between functions,"] # [doc = " but they are also used to represent special registers with significance to the ABI such as"] # [doc = " frame pointers and callee-saved registers."] # [doc = ""] # [doc = " The argument purpose is used to indicate any special meaning of an argument or return value."] # [derive (Copy , Clone , PartialEq , Eq , Debug , Hash)] # [cfg_attr (feature = "enable-serde" , derive (Serialize , Deserialize))] pub enum ArgumentPurpose { # [doc = " A normal user program value passed to or from a function."] Normal , # [doc = " A C struct passed as argument."] # [doc = ""] # [doc = " Note that this should only be used when interacting with code following"] # [doc = " a C ABI which is expecting a struct passed *by value*."] StructArgument (# [doc = " The size, in bytes, of the struct."] u32 ,) , # [doc = " Struct return pointer."] # [doc = ""] # [doc = " When a function needs to return more data than will fit in registers, the caller passes a"] # [doc = " pointer to a memory location where the return value can be written. In some ABIs, this"] # [doc = " struct return pointer is passed in a specific register."] # [doc = ""] # [doc = " This argument kind can also appear as a return value for ABIs that require a function with"] # [doc = " a `StructReturn` pointer argument to also return that pointer in a register."] StructReturn , # [doc = " A VM context pointer."] # [doc = ""] # [doc = " This is a pointer to a context struct containing details about the current sandbox. It is"] # [doc = " used as a base pointer for `vmctx` global values."] VMContext , }
+};
+}

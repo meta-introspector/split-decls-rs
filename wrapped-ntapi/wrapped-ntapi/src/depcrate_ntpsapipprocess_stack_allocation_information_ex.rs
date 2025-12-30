@@ -1,0 +1,9 @@
+// Generated macro for PPROCESS_STACK_ALLOCATION_INFORMATION_EX (type)
+macro_rules! Depcrate_ntpsapiPPROCESS_STACK_ALLOCATION_INFORMATION_EX {
+() => {
+// Module: crate::ntpsapi
+// Provides: {"PPROCESS_STACK_ALLOCATION_INFORMATION_EX"}
+// Dependencies: {}
+pub type PPROCESS_STACK_ALLOCATION_INFORMATION_EX = * mut PROCESS_STACK_ALLOCATION_INFORMATION_EX ;
+};
+}

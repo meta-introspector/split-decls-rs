@@ -1,0 +1,9 @@
+// Generated macro for create_shuffle_internal (function)
+macro_rules! Depcrate_big_endiancreate_shuffle_internal {
+() => {
+// Module: crate::big_endian
+// Provides: {"create_shuffle_internal"}
+// Dependencies: {}
+# [doc = " For creating shuffle calls, accepts function pointers for formatting for tuple"] # [doc = " types and types without a tuple"] # [doc = ""] # [doc = " Example:"] # [doc = ""] # [doc = " `a: int32x4_t` with formatting function `create_shuffle_call_fmt` creates:"] # [doc = " ```"] # [doc = " simd_shuffle!(a, a, [0, 1, 2, 3])"] # [doc = " ```"] # [doc = ""] # [doc = " `a: int32x4x2_t` creates:"] # [doc = " ```"] # [doc = " a.0 = simd_shuffle!(a.0, a.0, [0, 1, 2, 3])"] # [doc = " a.1 = simd_shuffle!(a.1, a.1, [0, 1, 2, 3])"] # [doc = " ```"] fn create_shuffle_internal (variable_name : & String , type_kind : & TypeKind , fmt_tuple : fn (variable_name : & String , idx : u32 , array_lanes : & String) -> String , fmt : fn (variable_name : & String , type_kind : & TypeKind , array_lanes : & String) -> String ,) -> Option < Expression > { let TypeKind :: Vector (vector_type) = type_kind else { return None ; } ; let lane_count = vector_type . lanes () ; let array_lanes = create_array (lane_count) ? ; let tuple_count = vector_type . tuple_size () . map_or_else (| | 0 , | t | t . to_int ()) ; if tuple_count > 0 { let capacity_estimate : usize = tuple_count as usize * (lane_count as usize + ((variable_name . len () + 2) * 3)) ; let mut string_builder = String :: with_capacity (capacity_estimate) ; for idx in 0 .. tuple_count { let formatted = fmt_tuple (variable_name , idx , & array_lanes) ; string_builder += formatted . as_str () ; } Some (create_symbol_identifier (& string_builder)) } else { let expression = fmt (variable_name , type_kind , & array_lanes) ; Some (create_symbol_identifier (& expression)) } }
+};
+}

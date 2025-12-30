@@ -1,0 +1,9 @@
+// Generated macro for OS_INDICATIONS_CAPSULE_RESULT_VAR_SUPPORTED (const)
+macro_rules! Depcrate_systemOS_INDICATIONS_CAPSULE_RESULT_VAR_SUPPORTED {
+() => {
+// Module: crate::system
+// Provides: {"OS_INDICATIONS_CAPSULE_RESULT_VAR_SUPPORTED"}
+// Dependencies: {}
+pub const OS_INDICATIONS_CAPSULE_RESULT_VAR_SUPPORTED : u64 = 0x0000000000000010u64 ;
+};
+}

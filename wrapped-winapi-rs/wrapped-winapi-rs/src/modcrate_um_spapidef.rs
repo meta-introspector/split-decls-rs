@@ -1,0 +1,49 @@
+// Generated module macro for crate::um::spapidef
+macro_rules! Modcrate_um_spapidef {
+() => {
+        Depcrate_um_spapidefuse_38494!();
+        Depcrate_um_spapidefuse_38495!();
+        Depcrate_um_spapidefSP_LOG_TOKEN!();
+        Depcrate_um_spapidefPSP_LOG_TOKEN!();
+        Depcrate_um_spapidefLOGTOKEN_TYPE_MASK!();
+        Depcrate_um_spapidefLOGTOKEN_UNSPECIFIED!();
+        Depcrate_um_spapidefLOGTOKEN_NO_LOG!();
+        Depcrate_um_spapidefLOGTOKEN_SETUPAPI_APPLOG!();
+        Depcrate_um_spapidefLOGTOKEN_SETUPAPI_DEVLOG!();
+        Depcrate_um_spapidefTXTLOG_SETUPAPI_DEVLOG!();
+        Depcrate_um_spapidefTXTLOG_SETUPAPI_CMDLINE!();
+        Depcrate_um_spapidefTXTLOG_SETUPAPI_BITS!();
+        Depcrate_um_spapidefTXTLOG_ERROR!();
+        Depcrate_um_spapidefTXTLOG_WARNING!();
+        Depcrate_um_spapidefTXTLOG_SYSTEM_STATE_CHANGE!();
+        Depcrate_um_spapidefTXTLOG_SUMMARY!();
+        Depcrate_um_spapidefTXTLOG_DETAILS!();
+        Depcrate_um_spapidefTXTLOG_VERBOSE!();
+        Depcrate_um_spapidefTXTLOG_VERY_VERBOSE!();
+        Depcrate_um_spapidefTXTLOG_RESERVED_FLAGS!();
+        Depcrate_um_spapidefTXTLOG_TIMESTAMP!();
+        Depcrate_um_spapidefTXTLOG_DEPTH_INCR!();
+        Depcrate_um_spapidefTXTLOG_DEPTH_DECR!();
+        Depcrate_um_spapidefTXTLOG_TAB_1!();
+        Depcrate_um_spapidefTXTLOG_FLUSH_FILE!();
+        Depcrate_um_spapidefTXTLOG_LEVEL!();
+        Depcrate_um_spapidefTXTLOG_DEVINST!();
+        Depcrate_um_spapidefTXTLOG_INF!();
+        Depcrate_um_spapidefTXTLOG_FILEQ!();
+        Depcrate_um_spapidefTXTLOG_COPYFILES!();
+        Depcrate_um_spapidefTXTLOG_SIGVERIF!();
+        Depcrate_um_spapidefTXTLOG_BACKUP!();
+        Depcrate_um_spapidefTXTLOG_UI!();
+        Depcrate_um_spapidefTXTLOG_UTIL!();
+        Depcrate_um_spapidefTXTLOG_INFDB!();
+        Depcrate_um_spapidefTXTLOG_POLICY!();
+        Depcrate_um_spapidefTXTLOG_NEWDEV!();
+        Depcrate_um_spapidefTXTLOG_UMPNPMGR!();
+        Depcrate_um_spapidefTXTLOG_DRIVER_STORE!();
+        Depcrate_um_spapidefTXTLOG_SETUP!();
+        Depcrate_um_spapidefTXTLOG_CMI!();
+        Depcrate_um_spapidefTXTLOG_DEVMGR!();
+        Depcrate_um_spapidefTXTLOG_INSTALLER!();
+        Depcrate_um_spapidefTXTLOG_VENDOR!();
+    };
+}

@@ -1,0 +1,9 @@
+// Generated macro for DXGKDDI_INTERFACE_VERSION_WDDM2_2 (const)
+macro_rules! Depcrate_shared_d3dukmdtDXGKDDI_INTERFACE_VERSION_WDDM2_2 {
+() => {
+// Module: crate::shared::d3dukmdt
+// Provides: {"DXGKDDI_INTERFACE_VERSION_WDDM2_2"}
+// Dependencies: {}
+pub const DXGKDDI_INTERFACE_VERSION_WDDM2_2 : ULONG = 0x700A ;
+};
+}

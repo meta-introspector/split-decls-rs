@@ -1,0 +1,9 @@
+// Generated macro for OnField (struct)
+macro_rules! Depcrate_common_field_argOnField {
+() => {
+// Module: crate::common::field::arg
+// Provides: {"OnField"}
+// Dependencies: {}
+# [doc = " Representation of a [GraphQL field argument][1] for code generation."] # [doc = ""] # [doc = " [1]: https://spec.graphql.org/October2021#sec-Language.Arguments"] # [derive (Debug)] pub (crate) struct OnField { # [doc = " Rust type that this [GraphQL field argument][1] is represented by."] # [doc = ""] # [doc = " [1]: https://spec.graphql.org/October2021#sec-Language.Arguments"] pub (crate) ty : syn :: Type , # [doc = " Name of this [GraphQL field argument][2] in GraphQL schema."] # [doc = ""] # [doc = " [1]: https://spec.graphql.org/October2021#sec-Language.Arguments"] pub (crate) name : String , # [doc = " [Description][2] of this [GraphQL field argument][1] to put into GraphQL"] # [doc = " schema."] # [doc = ""] # [doc = " [1]: https://spec.graphql.org/October2021#sec-Language.Arguments"] # [doc = " [2]: https://spec.graphql.org/October2021#sec-Descriptions"] pub (crate) description : Option < Description > , # [doc = " Default value of this [GraphQL field argument][1] in GraphQL schema."] # [doc = ""] # [doc = " If [`None`], then this [argument][1] is a [required][2] one."] # [doc = ""] # [doc = " [1]: https://spec.graphql.org/October2021#sec-Language.Arguments"] # [doc = " [2]: https://spec.graphql.org/October2021#sec-Required-Arguments"] pub (crate) default : Option < default :: Value > , # [doc = " [Deprecation][2] of this [GraphQL field argument][1] to put into GraphQL schema."] # [doc = ""] # [doc = " [1]: https://spec.graphql.org/October2021#sec-Language.Arguments"] # [doc = " [2]: https://spec.graphql.org/October2021#sec-Deprecation"] pub (crate) deprecated : Option < deprecation :: Directive > , }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for rewrite_pairs_multiline (function)
+macro_rules! Depcrate_pairsrewrite_pairs_multiline {
+() => {
+// Module: crate::pairs
+// Provides: {"rewrite_pairs_multiline"}
+// Dependencies: {}
+fn rewrite_pairs_multiline < T : Rewrite > (list : & PairList < '_ , '_ , T > , shape : Shape , context : & RewriteContext < '_ > ,) -> RewriteResult { let rhs_offset = shape . rhs_overhead (context . config) ; let nested_shape = (match context . config . indent_style () { IndentStyle :: Visual => shape . visual_indent (0) , IndentStyle :: Block => shape . block_indent (context . config . tab_spaces ()) , }) . with_max_width (context . config) . sub_width (rhs_offset , list . span) ? ; let indent_str = nested_shape . indent . to_string_with_newline (context . config) ; let mut result = String :: new () ; result . push_str (list . list [0] . 1 . as_ref () . map_err (| err | err . clone ()) ?) ; for ((e , default_rw) , s) in list . list [1 ..] . iter () . zip (list . separators . iter ()) { let offset = if result . contains ('\n') { 0 } else { shape . used_width () } ; if last_line_width (& result) + offset <= nested_shape . used_width () { if let Some (line_shape) = shape . offset_left_opt (s . len () + 2 + trimmed_last_line_width (& result)) { if let Ok (rewrite) = e . rewrite_result (context , line_shape) { result . push (' ') ; result . push_str (s) ; result . push (' ') ; result . push_str (& rewrite) ; continue ; } } } match context . config . binop_separator () { SeparatorPlace :: Back => { result . push (' ') ; result . push_str (s) ; result . push_str (& indent_str) ; } SeparatorPlace :: Front => { result . push_str (& indent_str) ; result . push_str (s) ; result . push (' ') ; } } result . push_str (default_rw . as_ref () . map_err (| err | err . clone ()) ?) ; } Ok (result) }
+};
+}

@@ -1,0 +1,41 @@
+// Generated module macro for crate::um::memoryapi
+macro_rules! Modcrate_um_memoryapi {
+() => {
+        Depcrate_um_memoryapiuse_31776!();
+        Depcrate_um_memoryapiuse_31777!();
+        Depcrate_um_memoryapiuse_31778!();
+        Depcrate_um_memoryapiuse_31779!();
+        Depcrate_um_memoryapiuse_31780!();
+        Depcrate_um_memoryapiFILE_MAP_WRITE!();
+        Depcrate_um_memoryapiFILE_MAP_READ!();
+        Depcrate_um_memoryapiFILE_MAP_ALL_ACCESS!();
+        Depcrate_um_memoryapiFILE_MAP_EXECUTE!();
+        Depcrate_um_memoryapiFILE_MAP_COPY!();
+        Depcrate_um_memoryapiFILE_MAP_RESERVE!();
+        Depcrate_um_memoryapiFILE_MAP_TARGETS_INVALID!();
+        Depcrate_um_memoryapiFILE_MAP_LARGE_PAGES!();
+        Depcrate_um_memoryapiother_31789!();
+        Depcrate_um_memoryapimacro_31790!();
+        Depcrate_um_memoryapiother_31791!();
+        Depcrate_um_memoryapiFILE_CACHE_MAX_HARD_ENABLE!();
+        Depcrate_um_memoryapiFILE_CACHE_MAX_HARD_DISABLE!();
+        Depcrate_um_memoryapiFILE_CACHE_MIN_HARD_ENABLE!();
+        Depcrate_um_memoryapiFILE_CACHE_MIN_HARD_DISABLE!();
+        Depcrate_um_memoryapiother_31796!();
+        Depcrate_um_memoryapimacro_31797!();
+        Depcrate_um_memoryapiPWIN32_MEMORY_RANGE_ENTRY!();
+        Depcrate_um_memoryapiother_31799!();
+        Depcrate_um_memoryapiMEHC_PATROL_SCRUBBER_PRESENT!();
+        Depcrate_um_memoryapiother_31801!();
+        Depcrate_um_memoryapimacro_31802!();
+        Depcrate_um_memoryapiother_31803!();
+        Depcrate_um_memoryapimacro_31804!();
+        Depcrate_um_memoryapiother_31805!();
+        Depcrate_um_memoryapimacro_31806!();
+        Depcrate_um_memoryapimacro_31807!();
+        Depcrate_um_memoryapimacro_31808!();
+        Depcrate_um_memoryapimacro_31809!();
+        Depcrate_um_memoryapimacro_31810!();
+        Depcrate_um_memoryapiother_31811!();
+    };
+}

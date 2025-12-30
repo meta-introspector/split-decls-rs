@@ -1,0 +1,9 @@
+// Generated macro for disambiguate (module)
+macro_rules! Depcrate_store_impls_dynamic_prefixdisambiguate {
+() => {
+// Module: crate::store_impls::dynamic::prefix
+// Provides: {"disambiguate"}
+// Dependencies: {}
+# [doc = ""] pub mod disambiguate { # [doc = " A potentially ambiguous prefix for use with `Handle::disambiguate_prefix()`."] # [derive (Debug , Copy , Clone)] pub struct Candidate { id : gix_hash :: ObjectId , hex_len : usize , } impl Candidate { # [doc = " Create a new potentially ambiguous prefix from an `id` and the desired minimal `hex_len`."] # [doc = ""] # [doc = " It is considered ambiguous until it's disambiguated by validating that there is only a single object"] # [doc = " matching this prefix."] pub fn new (id : impl Into < gix_hash :: ObjectId > , hex_len : usize) -> Result < Self , gix_hash :: prefix :: Error > { let id = id . into () ; gix_hash :: Prefix :: new (& id , hex_len) ? ; Ok (Candidate { id , hex_len }) } # [doc = " Transform ourselves into a `Prefix` with our current hex lengths."] pub fn to_prefix (& self) -> gix_hash :: Prefix { gix_hash :: Prefix :: new (& self . id , self . hex_len) . expect ("our hex-len to always be in bounds") } pub (crate) fn inc_hex_len (& mut self) { self . hex_len += 1 ; assert ! (self . hex_len <= self . id . kind () . len_in_hex ()) ; } pub (crate) fn id (& self) -> & gix_hash :: oid { & self . id } pub (crate) fn hex_len (& self) -> usize { self . hex_len } } # [doc = " Returned by [`Handle::disambiguate_prefix()`][crate::store::Handle::disambiguate_prefix()]"] # [derive (thiserror :: Error , Debug)] # [allow (missing_docs)] pub enum Error { # [error ("An error occurred while trying to determine if a full hash contained in the object database")] Contains (# [from] crate :: store :: find :: Error) , # [error (transparent)] Lookup (# [from] super :: lookup :: Error) , } }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for use_1820 (pub_use)
+macro_rules! Depcrate_generateduse_1820 {
+() => {
+// Module: crate::generated
+// Provides: {"use_1820"}
+// Dependencies: {}
+# [cfg (all (feature = "SecBase" , feature = "SecKeychain"))] pub use self :: __SecKeychain :: SecKeychainUnlock ;
+};
+}

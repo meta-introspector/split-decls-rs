@@ -1,0 +1,9 @@
+// Generated macro for impl_184 (impl)
+macro_rules! Depcrate_xformimpl_184 {
+() => {
+// Module: crate::xform
+// Provides: {"impl_184"}
+// Dependencies: {}
+impl syn :: visit_mut :: VisitMut for ChangeSelfPath < '_ > { fn visit_type_mut (& mut self , i : & mut syn :: Type) { if let syn :: Type :: Path (syn :: TypePath { qself : None , path }) = i { if path . segments . len () == 1 && path . segments . first () . is_some_and (| s | s . ident == "Self") { let span = path . segments . first () . unwrap () . span () ; * i = respan (self . self_ty , span) ; } } syn :: visit_mut :: visit_type_mut (self , i) ; } fn visit_type_path_mut (& mut self , i : & mut syn :: TypePath) { if i . qself . is_some () { syn :: visit_mut :: visit_type_path_mut (self , i) ; return ; } if i . path . segments . first () . is_some_and (| s | s . ident == "Self") && i . path . segments . len () > 1 { let span = i . path . segments . first () . unwrap () . span () ; let ty = Box :: new (respan :: < syn :: Type > (self . self_ty , span)) ; let lt_token = syn :: Token ! [<] (span) ; let gt_token = syn :: Token ! [>] (span) ; match self . trait_ { Some ((trait_ , member_idents)) if member_idents . contains (& i . path . segments . iter () . nth (1) . unwrap () . ident) => { let qself = syn :: QSelf { lt_token , ty , position : trait_ . segments . len () , as_token : Some (syn :: Token ! [as] (span)) , gt_token , } ; i . qself = Some (qself) ; i . path . segments = Punctuated :: from_iter (trait_ . segments . iter () . chain (i . path . segments . iter () . skip (1)) . cloned () ,) ; } _ => { let qself = syn :: QSelf { lt_token , ty , position : 0 , as_token : None , gt_token , } ; i . qself = Some (qself) ; i . path . segments = Punctuated :: from_iter (i . path . segments . iter () . skip (1) . cloned ()) ; } } } syn :: visit_mut :: visit_type_path_mut (self , i) ; } }
+};
+}

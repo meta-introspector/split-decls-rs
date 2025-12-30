@@ -1,0 +1,9 @@
+// Generated macro for span_lint_and_then (function)
+macro_rules! Depcrate_diagnosticsspan_lint_and_then {
+() => {
+// Module: crate::diagnostics
+// Provides: {"span_lint_and_then"}
+// Dependencies: {}
+# [doc = " Like [`span_lint`] but allows to add notes, help and suggestions using a closure."] # [doc = ""] # [doc = " If you need to customize your lint output a lot, use this function."] # [doc = " If you change the signature, remember to update the internal lint `CollapsibleCalls`"] # [doc = ""] # [doc = " NOTE: Lint emissions are always bound to a node in the HIR, which is used to determine"] # [doc = " the lint level."] # [doc = " For the `span_lint_and_then` function, the node that was passed into the `LintPass::check_*`"] # [doc = " function is used."] # [doc = ""] # [doc = " If you're emitting the lint at the span of a different node than the one provided by the"] # [doc = " `LintPass::check_*` function, consider using [`span_lint_hir_and_then`] instead."] # [doc = " This is needed for `#[allow]` and `#[expect]` attributes to work on the node"] # [doc = " highlighted in the displayed warning."] # [doc = ""] # [doc = " If you're unsure which function you should use, you can test if the `#[expect]` attribute works"] # [doc = " where you would expect it to."] # [doc = " If it doesn't, you likely need to use [`span_lint_hir_and_then`] instead."] # [track_caller] pub fn span_lint_and_then < C , S , M , F > (cx : & C , lint : & 'static Lint , sp : S , msg : M , f : F) where C : LintContext , S : Into < MultiSpan > , M : Into < DiagMessage > , F : FnOnce (& mut Diag < '_ , () >) , { # [expect (clippy :: disallowed_methods)] cx . span_lint (lint , sp , | diag | { diag . primary_message (msg) ; f (diag) ; docs_link (diag , lint) ; # [cfg (debug_assertions)] validate_diag (diag) ; }) ; }
+};
+}

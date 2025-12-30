@@ -1,0 +1,9 @@
+// Generated macro for PDOT11_MANUFACTURING_SELF_TEST_QUERY_RESULTS (type)
+macro_rules! Depcrate_shared_windot11PDOT11_MANUFACTURING_SELF_TEST_QUERY_RESULTS {
+() => {
+// Module: crate::shared::windot11
+// Provides: {"PDOT11_MANUFACTURING_SELF_TEST_QUERY_RESULTS"}
+// Dependencies: {}
+pub type PDOT11_MANUFACTURING_SELF_TEST_QUERY_RESULTS = * mut DOT11_MANUFACTURING_SELF_TEST_QUERY_RESULTS ;
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for CLAIM_SECURITY_ATTRIBUTES_INFORMATION_VERSION_V1 (const)
+macro_rules! Depcrate_um_winntCLAIM_SECURITY_ATTRIBUTES_INFORMATION_VERSION_V1 {
+() => {
+// Module: crate::um::winnt
+// Provides: {"CLAIM_SECURITY_ATTRIBUTES_INFORMATION_VERSION_V1"}
+// Dependencies: {}
+pub const CLAIM_SECURITY_ATTRIBUTES_INFORMATION_VERSION_V1 : WORD = 1 ;
+};
+}

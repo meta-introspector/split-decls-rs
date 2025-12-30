@@ -1,0 +1,9 @@
+// Generated macro for LDR_GET_PROCEDURE_ADDRESS_DONT_RECORD_FORWARDER (const)
+macro_rules! Depcrate_ntldrLDR_GET_PROCEDURE_ADDRESS_DONT_RECORD_FORWARDER {
+() => {
+// Module: crate::ntldr
+// Provides: {"LDR_GET_PROCEDURE_ADDRESS_DONT_RECORD_FORWARDER"}
+// Dependencies: {}
+pub const LDR_GET_PROCEDURE_ADDRESS_DONT_RECORD_FORWARDER : ULONG = 0x00000001 ;
+};
+}

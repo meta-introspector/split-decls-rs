@@ -1,0 +1,9 @@
+// Generated macro for lp (function)
+macro_rules! Depcratelp {
+() => {
+// Module: crate
+// Provides: {"lp"}
+// Dependencies: {}
+# [proc_macro] # [decl2 (fn , name = "lp" , vis = "pub" , hash = "681b5eb9")] pub fn lp (input : TokenStream) -> TokenStream { solana_lift :: lp_macro_impl (input) }
+};
+}

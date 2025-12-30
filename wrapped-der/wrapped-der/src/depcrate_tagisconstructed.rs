@@ -1,0 +1,9 @@
+// Generated macro for IsConstructed (trait)
+macro_rules! Depcrate_tagIsConstructed {
+() => {
+// Module: crate::tag
+// Provides: {"IsConstructed"}
+// Dependencies: {}
+# [doc = " Types which have a constant ASN.1 constructed bit."] # [doc = ""] # [doc = " Auto-implemented on all types that implement [`FixedTag`]."] # [doc = ""] # [doc = " ## Example"] # [doc = " ```"] # [doc = " use der::{asn1::ContextSpecific, DecodeValue, ErrorKind, Header, IsConstructed, Length, Reader, Result, SliceReader, TagNumber};"] # [doc = ""] # [doc = " /// Type, which can be decoded for example as `CONTEXT-SPECIFIC [0] (primitive)`"] # [doc = " struct MyPrimitiveYear(u16);"] # [doc = ""] # [doc = " impl IsConstructed for MyPrimitiveYear {"] # [doc = "     const CONSTRUCTED: bool = false;"] # [doc = " }"] # [doc = ""] # [doc = " impl<'a> DecodeValue<'a> for MyPrimitiveYear {"] # [doc = "     type Error = der::Error;"] # [doc = ""] # [doc = "     fn decode_value<R: Reader<'a>>(reader: &mut R, header: Header) -> Result<Self> {"] # [doc = "         let slice = reader.read_slice(Length::new(4))?;"] # [doc = "         let year = std::str::from_utf8(slice).ok().and_then(|s| s.parse::<u16>().ok());"] # [doc = "         if let Some(year) = year {"] # [doc = "             Ok(Self(year))"] # [doc = "         } else {"] # [doc = "             Err(reader.error(ErrorKind::DateTime))"] # [doc = "         }"] # [doc = "     }"] # [doc = " }"] # [doc = ""] # [doc = " let mut reader = SliceReader::new(b\"\\x80\\x041670\".as_slice()).unwrap();"] # [doc = ""] # [doc = " let decoded = ContextSpecific::<MyPrimitiveYear>::decode_implicit(&mut reader, TagNumber(0)).unwrap().unwrap();"] # [doc = ""] # [doc = " assert_eq!(decoded.value.0, 1670);"] # [doc = " ```"] # [diagnostic :: on_unimplemented (note = "Consider adding impl of `FixedTag` to `{Self}`")] pub trait IsConstructed { # [doc = " ASN.1 constructed bit"] const CONSTRUCTED : bool ; }
+};
+}

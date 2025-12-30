@@ -1,0 +1,9 @@
+// Generated macro for use_1456 (use)
+macro_rules! Depcrate_stream_try_stream_try_buffereduse_1456 {
+() => {
+// Module: crate::stream::try_stream::try_buffered
+// Provides: {"use_1456"}
+// Dependencies: {}
+use crate :: future :: { IntoFuture , TryFutureExt } ;
+};
+}

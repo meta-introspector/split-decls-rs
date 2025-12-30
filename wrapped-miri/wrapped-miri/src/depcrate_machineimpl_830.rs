@@ -1,0 +1,9 @@
+// Generated macro for impl_830 (impl)
+macro_rules! Depcrate_machineimpl_830 {
+() => {
+// Module: crate::machine
+// Provides: {"impl_830"}
+// Dependencies: {}
+impl < 'tcx > PrimitiveLayouts < 'tcx > { fn new (layout_cx : LayoutCx < 'tcx >) -> Result < Self , & 'tcx LayoutError < 'tcx > > { let tcx = layout_cx . tcx () ; let mut_raw_ptr = Ty :: new_mut_ptr (tcx , tcx . types . unit) ; let const_raw_ptr = Ty :: new_imm_ptr (tcx , tcx . types . unit) ; Ok (Self { unit : layout_cx . layout_of (tcx . types . unit) ? , i8 : layout_cx . layout_of (tcx . types . i8) ? , i16 : layout_cx . layout_of (tcx . types . i16) ? , i32 : layout_cx . layout_of (tcx . types . i32) ? , i64 : layout_cx . layout_of (tcx . types . i64) ? , i128 : layout_cx . layout_of (tcx . types . i128) ? , isize : layout_cx . layout_of (tcx . types . isize) ? , u8 : layout_cx . layout_of (tcx . types . u8) ? , u16 : layout_cx . layout_of (tcx . types . u16) ? , u32 : layout_cx . layout_of (tcx . types . u32) ? , u64 : layout_cx . layout_of (tcx . types . u64) ? , u128 : layout_cx . layout_of (tcx . types . u128) ? , usize : layout_cx . layout_of (tcx . types . usize) ? , bool : layout_cx . layout_of (tcx . types . bool) ? , mut_raw_ptr : layout_cx . layout_of (mut_raw_ptr) ? , const_raw_ptr : layout_cx . layout_of (const_raw_ptr) ? , }) } pub fn uint (& self , size : Size) -> Option < TyAndLayout < 'tcx > > { match size . bits () { 8 => Some (self . u8) , 16 => Some (self . u16) , 32 => Some (self . u32) , 64 => Some (self . u64) , 128 => Some (self . u128) , _ => None , } } pub fn int (& self , size : Size) -> Option < TyAndLayout < 'tcx > > { match size . bits () { 8 => Some (self . i8) , 16 => Some (self . i16) , 32 => Some (self . i32) , 64 => Some (self . i64) , 128 => Some (self . i128) , _ => None , } } }
+};
+}

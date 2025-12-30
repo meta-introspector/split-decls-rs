@@ -1,0 +1,9 @@
+// Generated macro for WLAN_CONNECTION_NOTIFICATION_ADHOC_NETWORK_FORMED (const)
+macro_rules! Depcrate_um_wlanapiWLAN_CONNECTION_NOTIFICATION_ADHOC_NETWORK_FORMED {
+() => {
+// Module: crate::um::wlanapi
+// Provides: {"WLAN_CONNECTION_NOTIFICATION_ADHOC_NETWORK_FORMED"}
+// Dependencies: {}
+pub const WLAN_CONNECTION_NOTIFICATION_ADHOC_NETWORK_FORMED : DWORD = 0x00000001 ;
+};
+}

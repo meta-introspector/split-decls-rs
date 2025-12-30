@@ -1,0 +1,9 @@
+// Generated macro for AnyObject (struct)
+macro_rules! Depcrate_runtime_anyobjectAnyObject {
+() => {
+// Module: crate::runtime::anyobject
+// Provides: {"AnyObject"}
+// Dependencies: {}
+# [doc = " An Objective-C object."] # [doc = ""] # [doc = " This is slightly different from [`NSObject`] in that it may represent an"] # [doc = " instance of an _arbitrary_ Objective-C class (e.g. it does not have to be"] # [doc = " a subclass of `NSObject`, so it can represent other root classes like"] # [doc = " `NSProxy`)."] # [doc = ""] # [doc = " `Retained<AnyObject>` is equivalent to Objective-C's `id _Nonnull`."] # [doc = ""] # [doc = " This is an opaque type that contains [`UnsafeCell`], and is similar to"] # [doc = " that in that one can safely access and perform interior mutability on this"] # [doc = " (both via [`msg_send!`] and through ivars), so long as Rust's mutability"] # [doc = " rules are upheld, and that data races are avoided."] # [doc = ""] # [doc = " Note: This is intentionally neither [`Sync`], [`Send`], [`UnwindSafe`],"] # [doc = " [`RefUnwindSafe`] nor [`Unpin`], since that is something that may change"] # [doc = " depending on the specific subclass. For example, `NSAutoreleasePool` is"] # [doc = " not `Send`, it has to be deallocated on the same thread that it was"] # [doc = " created. `NSLock` is not `Send` either."] # [doc = ""] # [doc = " [`NSObject`]: crate::runtime::NSObject"] # [doc = " [`UnsafeCell`]: core::cell::UnsafeCell"] # [doc = " [`msg_send!`]: crate::msg_send"] # [doc = " [`UnwindSafe`]: std::panic::UnwindSafe"] # [doc = " [`RefUnwindSafe`]: std::panic::RefUnwindSafe"] # [doc = " [`Unpin`]: std::marker::Unpin"] # [doc (alias = "id")] # [doc (alias = "objc_object")] # [repr (C)] pub struct AnyObject { _priv : [u8 ; 0] , _p : ffi :: OpaqueData , }
+};
+}

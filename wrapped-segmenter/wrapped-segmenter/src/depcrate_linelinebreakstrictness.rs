@@ -1,0 +1,9 @@
+// Generated macro for LineBreakStrictness (enum)
+macro_rules! Depcrate_lineLineBreakStrictness {
+() => {
+// Module: crate::line
+// Provides: {"LineBreakStrictness"}
+// Dependencies: {}
+# [doc = " An enum specifies the strictness of line-breaking rules. It can be passed as"] # [doc = " an argument when creating a line segmenter."] # [doc = ""] # [doc = " Each enum value has the same meaning with respect to the `line-break`"] # [doc = " property values in the CSS Text spec. See the details in"] # [doc = " <https://drafts.csswg.org/css-text-3/#line-break-property>."] # [non_exhaustive] # [derive (Copy , Clone , PartialEq , Eq , Debug , Default)] pub enum LineBreakStrictness { # [doc = " Breaks text using the least restrictive set of line-breaking rules."] # [doc = " Typically used for short lines, such as in newspapers."] # [doc = " <https://drafts.csswg.org/css-text-3/#valdef-line-break-loose>"] Loose , # [doc = " Breaks text using the most common set of line-breaking rules."] # [doc = " <https://drafts.csswg.org/css-text-3/#valdef-line-break-normal>"] Normal , # [doc = " Breaks text using the most stringent set of line-breaking rules."] # [doc = " <https://drafts.csswg.org/css-text-3/#valdef-line-break-strict>"] # [doc = ""] # [doc = " This is the default behaviour of the Unicode Line Breaking Algorithm,"] # [doc = " resolving class [CJ](https://www.unicode.org/reports/tr14/#CJ) to"] # [doc = " [NS](https://www.unicode.org/reports/tr14/#NS);"] # [doc = " see rule [LB1](https://www.unicode.org/reports/tr14/#LB1)."] # [default] Strict , # [doc = " Breaks text assuming there is a soft wrap opportunity around every"] # [doc = " typographic character unit, disregarding any prohibition against line"] # [doc = " breaks. See more details in"] # [doc = " <https://drafts.csswg.org/css-text-3/#valdef-line-break-anywhere>."] Anywhere , }
+};
+}

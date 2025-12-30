@@ -1,0 +1,51 @@
+// Generated module macro for crate::name
+macro_rules! Modcrate_name {
+() => {
+        Depcrate_nameuse_333!();
+        Depcrate_nameuse_334!();
+        Depcrate_nameuse_335!();
+        Depcrate_nameuse_336!();
+        Depcrate_nameuse_337!();
+        Depcrate_nameuse_338!();
+        Depcrate_nameNamespaceError!();
+        Depcrate_nameimpl_340!();
+        Depcrate_nameimpl_341!();
+        Depcrate_nameQName!();
+        Depcrate_nameimpl_343!();
+        Depcrate_nameimpl_344!();
+        Depcrate_nameimpl_345!();
+        Depcrate_nameLocalName!();
+        Depcrate_nameimpl_347!();
+        Depcrate_nameimpl_348!();
+        Depcrate_nameimpl_349!();
+        Depcrate_nameimpl_350!();
+        Depcrate_namePrefix!();
+        Depcrate_nameimpl_352!();
+        Depcrate_nameimpl_353!();
+        Depcrate_nameimpl_354!();
+        Depcrate_namePrefixDeclaration!();
+        Depcrate_nameimpl_356!();
+        Depcrate_nameNamespace!();
+        Depcrate_nameimpl_358!();
+        Depcrate_nameimpl_359!();
+        Depcrate_nameimpl_360!();
+        Depcrate_nameResolveResult!();
+        Depcrate_nameimpl_362!();
+        Depcrate_nameimpl_363!();
+        Depcrate_nameNamespaceBinding!();
+        Depcrate_nameimpl_365!();
+        Depcrate_nameNamespaceResolver!();
+        Depcrate_nameRESERVED_NAMESPACE_XML!();
+        Depcrate_nameRESERVED_NAMESPACE_XMLNS!();
+        Depcrate_nameimpl_369!();
+        Depcrate_nameimpl_370!();
+        Depcrate_nameNamespaceBindingsIter!();
+        Depcrate_nameimpl_372!();
+        Depcrate_nameimpl_373!();
+        Depcrate_namePrefixIter!();
+        Depcrate_nameNamespaceBindingsOfLevelIter!();
+        Depcrate_nameimpl_376!();
+        Depcrate_nameimpl_377!();
+        Depcrate_namenamespaces!();
+    };
+}

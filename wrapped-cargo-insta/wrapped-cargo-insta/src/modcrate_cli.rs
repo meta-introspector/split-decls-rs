@@ -1,0 +1,52 @@
+// Generated module macro for crate::cli
+macro_rules! Modcrate_cli {
+() => {
+        Depcrate_cliuse_7!();
+        Depcrate_cliuse_8!();
+        Depcrate_cliuse_9!();
+        Depcrate_cliuse_10!();
+        Depcrate_cliuse_11!();
+        Depcrate_cliuse_12!();
+        Depcrate_cliuse_13!();
+        Depcrate_cliuse_14!();
+        Depcrate_cliuse_15!();
+        Depcrate_cliuse_16!();
+        Depcrate_cliuse_17!();
+        Depcrate_cliuse_18!();
+        Depcrate_cliuse_19!();
+        Depcrate_cliuse_20!();
+        Depcrate_cliuse_21!();
+        Depcrate_cliuse_22!();
+        Depcrate_cliuse_23!();
+        Depcrate_cliuse_24!();
+        Depcrate_cliuse_25!();
+        Depcrate_cliOpts!();
+        Depcrate_cliColorWhen!();
+        Depcrate_cliimpl_28!();
+        Depcrate_cliCommand!();
+        Depcrate_cliTargetArgs!();
+        Depcrate_cliProcessCommand!();
+        Depcrate_cliTestRunnerOptions!();
+        Depcrate_cliTestCommand!();
+        Depcrate_cliimpl_34!();
+        Depcrate_cliPendingSnapshotsCommand!();
+        Depcrate_cliShowCommand!();
+        Depcrate_cliquery_snapshot!();
+        Depcrate_clihandle_color!();
+        Depcrate_cliLocationInfo!();
+        Depcrate_cliget_find_flags!();
+        Depcrate_clihandle_target_args!();
+        Depcrate_cliload_snapshot_containers!();
+        Depcrate_clireview_snapshots!();
+        Depcrate_clihas_doctests!();
+        Depcrate_clitest_run!();
+        Depcrate_clihandle_unreferenced_snapshots!();
+        Depcrate_cliprepare_test_runner!();
+        Depcrate_cliget_cargo_nextest_command!();
+        Depcrate_clishow_cmd!();
+        Depcrate_clipending_snapshots_cmd!();
+        Depcrate_clishow_undiscovered_hint!();
+        Depcrate_clirun!();
+        Depcrate_clitests!();
+    };
+}

@@ -1,0 +1,9 @@
+// Generated macro for impl_9771 (impl)
+macro_rules! Depcrate_significant_drop_tighteningimpl_9771 {
+() => {
+// Module: crate::significant_drop_tightening
+// Provides: {"impl_9771"}
+// Dependencies: {}
+impl < 'cx , 'others , 'tcx > AttrChecker < 'cx , 'others , 'tcx > { pub (crate) fn new (cx : & 'cx LateContext < 'tcx > , type_cache : & 'others mut FxHashMap < Ty < 'tcx > , bool >) -> Self { Self { cx , type_cache } } fn has_sig_drop_attr (& mut self , ty : Ty < 'tcx > , depth : usize) -> bool { if ! self . cx . tcx . recursion_limit () . value_within_limit (depth) { return false ; } let ty = self . cx . tcx . try_normalize_erasing_regions (self . cx . typing_env () , ty) . unwrap_or (ty) ; match self . type_cache . entry (ty) { Entry :: Occupied (e) => return * e . get () , Entry :: Vacant (e) => { e . insert (false) ; } , } let value = self . has_sig_drop_attr_uncached (ty , depth + 1) ; self . type_cache . insert (ty , value) ; value } fn has_sig_drop_attr_uncached (& mut self , ty : Ty < 'tcx > , depth : usize) -> bool { if let Some (adt) = ty . ty_adt_def () { let mut iter = get_builtin_attr (self . cx . sess () , self . cx . tcx . get_all_attrs (adt . did ()) , sym :: has_significant_drop ,) ; if iter . next () . is_some () { return true ; } } match ty . kind () { rustc_middle :: ty :: Adt (a , b) => { for f in a . all_fields () { let ty = f . ty (self . cx . tcx , b) ; if self . has_sig_drop_attr (ty , depth) { return true ; } } for generic_arg in * b { if let GenericArgKind :: Type (ty) = generic_arg . kind () && self . has_sig_drop_attr (ty , depth) { return true ; } } false } , rustc_middle :: ty :: Array (ty , _) | rustc_middle :: ty :: RawPtr (ty , _) | rustc_middle :: ty :: Ref (_ , ty , _) | rustc_middle :: ty :: Slice (ty) => self . has_sig_drop_attr (* ty , depth) , _ => false , } } }
+};
+}

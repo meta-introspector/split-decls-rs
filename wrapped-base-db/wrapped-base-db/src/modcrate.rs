@@ -1,0 +1,50 @@
+// Generated module macro for crate
+macro_rules! Modcrate {
+() => {
+        Depcrateuse_1!();
+        Depcrateuse_2!();
+        Depcratechange!();
+        Depcrateinput!();
+        Depcratetarget!();
+        Depcrateuse_98!();
+        Depcrateuse_99!();
+        Depcrateuse_100!();
+        Depcrateuse_101!();
+        Depcrateuse_102!();
+        Depcrateuse_103!();
+        Depcrateuse_104!();
+        Depcrateuse_105!();
+        Depcrateuse_106!();
+        Depcrateuse_107!();
+        Depcrateuse_108!();
+        DepcrateFxIndexSet!();
+        DepcrateFxIndexMap!();
+        Depcrateimpl_intern_key!();
+        DepcrateDEFAULT_FILE_TEXT_LRU_CAP!();
+        DepcrateDEFAULT_PARSE_LRU_CAP!();
+        DepcrateDEFAULT_BORROWCK_LRU_CAP!();
+        DepcrateFiles!();
+        Depcrateimpl_116!();
+        DepcrateEditionedFileId!();
+        Depcrateimpl_118!();
+        DepcrateFileText!();
+        DepcrateFileSourceRootInput!();
+        DepcrateSourceRootInput!();
+        DepcrateRootQueryDb!();
+        DepcrateSourceDatabase!();
+        DepcrateNEXT_NONCE!();
+        DepcrateNonce!();
+        Depcrateimpl_126!();
+        Depcrateimpl_127!();
+        DepcrateCrateWorkspaceData!();
+        Depcrateimpl_129!();
+        Depcratetoolchain_channel!();
+        Depcrateparse!();
+        Depcrateparse_errors!();
+        Depcratesource_root_crates!();
+        Depcraterelevant_crates!();
+        DepcrateDbPanicContext!();
+        Depcrateimpl_136!();
+        Depcrateimpl_137!();
+    };
+}

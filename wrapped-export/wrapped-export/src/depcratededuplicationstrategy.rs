@@ -1,0 +1,9 @@
+// Generated macro for DeduplicationStrategy (enum)
+macro_rules! DepcrateDeduplicationStrategy {
+() => {
+// Module: crate
+// Provides: {"DeduplicationStrategy"}
+// Dependencies: {}
+# [doc = " Choices for determining the deduplication of locales for exported data payloads."] # [doc = ""] # [doc = " Deduplication affects the lookup table from locales to data payloads. If a child locale"] # [doc = " points to the same payload as its parent locale, then the child locale can be removed from"] # [doc = " the lookup table. Therefore, all deduplication strategies guarantee that data requests for"] # [doc = " selected locales will succeed so long as fallback is enabled at runtime (either internally"] # [doc = " or externally). They also do not impact which _payloads_ are included: only the lookup table."] # [doc = ""] # [doc = " Comparison of the deduplication strategies:"] # [doc = ""] # [doc = " | Name | Data file size | Supported locale queries? | Needs runtime fallback? |"] # [doc = " |---|---|---|---|"] # [doc = " | [`Maximal`] | Smallest | No | Yes |"] # [doc = " | [`RetainBaseLanguages`] | Small | Yes | Yes |"] # [doc = " | [`None`] | Medium/Small | Yes | No |"] # [doc = ""] # [doc = " [`Maximal`]: DeduplicationStrategy::Maximal"] # [doc = " [`RetainBaseLanguages`]: DeduplicationStrategy::RetainBaseLanguages"] # [doc = " [`None`]: DeduplicationStrategy::None"] # [non_exhaustive] # [derive (Debug , Copy , Clone , PartialEq , Eq , Hash)] pub enum DeduplicationStrategy { # [doc = " Removes from the lookup table any locale whose parent maps to the same data."] Maximal , # [doc = " Removes from the lookup table any locale whose parent maps to the same data, except if"] # [doc = " the parent is `und`."] RetainBaseLanguages , # [doc = " Keeps all selected locales in the lookup table."] None , }
+};
+}

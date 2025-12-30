@@ -1,0 +1,54 @@
+// Generated module macro for crate::scheduler::task
+macro_rules! Modcrate_scheduler_task {
+() => {
+        Depcrate_scheduler_tasktls!();
+        Depcrate_scheduler_taskuse_1374!();
+        Depcrate_scheduler_taskuse_1375!();
+        Depcrate_scheduler_taskuse_1376!();
+        Depcrate_scheduler_taskuse_1377!();
+        Depcrate_scheduler_taskuse_1378!();
+        Depcrate_scheduler_taskuse_1379!();
+        Depcrate_scheduler_taskuse_1380!();
+        Depcrate_scheduler_taskuse_1381!();
+        Depcrate_scheduler_taskuse_1382!();
+        Depcrate_scheduler_taskuse_1383!();
+        Depcrate_scheduler_taskuse_1384!();
+        Depcrate_scheduler_taskuse_1385!();
+        Depcrate_scheduler_taskuse_1386!();
+        Depcrate_scheduler_taskuse_1387!();
+        Depcrate_scheduler_taskuse_1388!();
+        Depcrate_scheduler_taskuse_1389!();
+        Depcrate_scheduler_taskuse_1390!();
+        Depcrate_scheduler_taskuse_1391!();
+        Depcrate_scheduler_taskmsb!();
+        Depcrate_scheduler_taskTaskStatus!();
+        Depcrate_scheduler_taskTaskId!();
+        Depcrate_scheduler_taskimpl_1395!();
+        Depcrate_scheduler_taskimpl_1396!();
+        Depcrate_scheduler_taskPriority!();
+        Depcrate_scheduler_taskimpl_1398!();
+        Depcrate_scheduler_taskimpl_1399!();
+        Depcrate_scheduler_taskHIGH_PRIO!();
+        Depcrate_scheduler_taskNORMAL_PRIO!();
+        Depcrate_scheduler_taskLOW_PRIO!();
+        Depcrate_scheduler_taskIDLE_PRIO!();
+        Depcrate_scheduler_taskNO_PRIORITIES!();
+        Depcrate_scheduler_taskTaskHandle!();
+        Depcrate_scheduler_taskimpl_1406!();
+        Depcrate_scheduler_taskimpl_1407!();
+        Depcrate_scheduler_taskimpl_1408!();
+        Depcrate_scheduler_taskimpl_1409!();
+        Depcrate_scheduler_taskimpl_1410!();
+        Depcrate_scheduler_taskTaskHandlePriorityQueue!();
+        Depcrate_scheduler_taskimpl_1412!();
+        Depcrate_scheduler_taskPriorityTaskQueue!();
+        Depcrate_scheduler_taskimpl_1414!();
+        Depcrate_scheduler_taskTask!();
+        Depcrate_scheduler_taskTaskFrame!();
+        Depcrate_scheduler_taskimpl_1417!();
+        Depcrate_scheduler_taskBlockedTask!();
+        Depcrate_scheduler_taskimpl_1419!();
+        Depcrate_scheduler_taskBlockedTaskQueue!();
+        Depcrate_scheduler_taskimpl_1421!();
+    };
+}

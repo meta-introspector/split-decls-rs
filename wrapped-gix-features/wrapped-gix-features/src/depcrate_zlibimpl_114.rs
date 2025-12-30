@@ -1,0 +1,9 @@
+// Generated macro for impl_114 (impl)
+macro_rules! Depcrate_zlibimpl_114 {
+() => {
+// Module: crate::zlib
+// Provides: {"impl_114"}
+// Dependencies: {}
+impl Decompress { # [doc = " The amount of bytes consumed from the input so far."] pub fn total_in (& self) -> u64 { self . 0 . total_in as _ } # [doc = " The amount of decompressed bytes that have been written to the output thus far."] pub fn total_out (& self) -> u64 { self . 0 . total_out as _ } # [doc = " Create a new instance. Note that it allocates in various ways and thus should be re-used."] pub fn new () -> Self { let mut this = libz_rs_sys :: z_stream :: default () ; unsafe { libz_rs_sys :: inflateInit_ (& mut this , libz_rs_sys :: zlibVersion () , core :: mem :: size_of :: < libz_rs_sys :: z_stream > () as core :: ffi :: c_int ,) ; } Self (this) } # [doc = " Reset the state to allow handling a new stream."] pub fn reset (& mut self) { unsafe { libz_rs_sys :: inflateReset (& mut self . 0) } ; } # [doc = " Decompress `input` and write all decompressed bytes into `output`, with `flush` defining some details about this."] pub fn decompress (& mut self , input : & [u8] , output : & mut [u8] , flush : FlushDecompress ,) -> Result < Status , DecompressError > { self . 0 . avail_in = input . len () as _ ; self . 0 . avail_out = output . len () as _ ; self . 0 . next_in = input . as_ptr () ; self . 0 . next_out = output . as_mut_ptr () ; match unsafe { libz_rs_sys :: inflate (& mut self . 0 , flush as _) } { libz_rs_sys :: Z_OK => Ok (Status :: Ok) , libz_rs_sys :: Z_BUF_ERROR => Ok (Status :: BufError) , libz_rs_sys :: Z_STREAM_END => Ok (Status :: StreamEnd) , libz_rs_sys :: Z_STREAM_ERROR => Err (DecompressError :: StreamError) , libz_rs_sys :: Z_DATA_ERROR => Err (DecompressError :: DataError) , libz_rs_sys :: Z_MEM_ERROR => Err (DecompressError :: InsufficientMemory) , err => Err (DecompressError :: Unknown { err }) , } } }
+};
+}

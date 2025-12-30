@@ -1,0 +1,9 @@
+// Generated macro for FloatRepr (trait)
+macro_rules! DepcrateFloatRepr {
+() => {
+// Module: crate
+// Provides: {"FloatRepr"}
+// Dependencies: {}
+# [doc = " Trait implemented for types that describe a floating-point format supported"] # [doc = " by `rustc_apfloat`, but which themselves only carry the binary representation"] # [doc = " (instead of `rustc_apfloat` types or native/hardware floating-point types)."] # [doc = ""] # [doc = " Only some types that implement `FloatRepr` have native/hardware equivalents"] # [doc = " (i.e. `f32`/`f64` in Rust), and so `hard_eval_fuzz_op_if_supported` will"] # [doc = " only return `Some` for those."] # [doc = ""] # [doc = " Because of the C++ interop (exposed via the `cxx_apf_eval_fuzz_op` method),"] # [doc = " all types implementing this trait *must* be annotated with `#[repr(C, packed)]`,"] # [doc = " and `ops.rs` *must* also ensure exactly matching layout for the C++ counterpart."] trait FloatRepr : Copy + Default + Eq + fmt :: Display { type RustcApFloat : rustc_apfloat :: Float + rustc_apfloat :: Float + rustc_apfloat :: FloatConvert < rustc_apfloat :: ieee :: Single > + rustc_apfloat :: FloatConvert < rustc_apfloat :: ieee :: Double > ; const BIT_WIDTH : usize = Self :: RustcApFloat :: BITS ; const BYTE_LEN : usize = (Self :: BIT_WIDTH + 7) / 8 ; const NAME : & 'static str ; const REPR_TAG : u8 = Self :: BIT_WIDTH as u8 ; fn short_lowercase_name () -> String { Self :: NAME . to_ascii_lowercase () . replace ("ieee" , "f") } fn from_le_bytes (bytes : & [u8]) -> Self ; fn write_as_le_bytes_into (self , out_bytes : & mut Vec < u8 >) ; fn to_bits_u128 (self) -> u128 ; fn from_bits_u128 (bits : u128) -> Self ; fn cxx_apf_eval_fuzz_op (op : FuzzOp < Self >) -> Self ; fn hard_eval_fuzz_op_if_supported (op : FuzzOp < Self >) -> Option < Self > ; }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for impl_103 (impl)
+macro_rules! Depcrate_dfaimpl_103 {
+() => {
+// Module: crate::dfa
+// Provides: {"impl_103"}
+// Dependencies: {}
+impl Transitions { # [doc = " Create a new transition table."] # [doc = ""] # [doc = " The number of byte classes corresponds to the stride. Every state will"] # [doc = " have `num_byte_classes` slots for transitions."] fn new (num_byte_classes : usize) -> Transitions { Transitions { table : vec ! [] , num_byte_classes : num_byte_classes , } } # [doc = " Returns the total number of states currently in this table."] fn num_states (& self) -> usize { self . table . len () / self . num_byte_classes } # [doc = " Allocates room for one additional state and returns a pointer to it."] # [doc = ""] # [doc = " If there's no more room, None is returned."] fn add (& mut self) -> Option < StatePtr > { let si = self . table . len () ; if si > STATE_MAX as usize { return None ; } self . table . extend (repeat (STATE_UNKNOWN) . take (self . num_byte_classes)) ; Some (usize_to_u32 (si)) } # [doc = " Clears the table of all states."] fn clear (& mut self) { self . table . clear () ; } # [doc = " Sets the transition from (si, cls) to next."] fn set_next (& mut self , si : StatePtr , cls : usize , next : StatePtr) { self . table [si as usize + cls] = next ; } # [doc = " Returns the transition corresponding to (si, cls)."] fn next (& self , si : StatePtr , cls : usize) -> StatePtr { self . table [si as usize + cls] } # [doc = " The heap size, in bytes, of a single state in the transition table."] fn state_heap_size (& self) -> usize { self . num_byte_classes * mem :: size_of :: < StatePtr > () } # [doc = " Like `next`, but uses unchecked access and is therefore unsafe."] unsafe fn next_unchecked (& self , si : StatePtr , cls : usize) -> StatePtr { debug_assert ! ((si as usize) < self . table . len ()) ; debug_assert ! (cls < self . num_byte_classes) ; * self . table . get_unchecked (si as usize + cls) } }
+};
+}

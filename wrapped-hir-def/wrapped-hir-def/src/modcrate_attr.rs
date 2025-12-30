@@ -1,0 +1,44 @@
+// Generated module macro for crate::attr
+macro_rules! Modcrate_attr {
+() => {
+        Depcrate_attruse_20!();
+        Depcrate_attruse_21!();
+        Depcrate_attruse_22!();
+        Depcrate_attruse_23!();
+        Depcrate_attruse_24!();
+        Depcrate_attruse_25!();
+        Depcrate_attruse_26!();
+        Depcrate_attruse_27!();
+        Depcrate_attruse_28!();
+        Depcrate_attruse_29!();
+        Depcrate_attruse_30!();
+        Depcrate_attruse_31!();
+        Depcrate_attruse_32!();
+        Depcrate_attruse_33!();
+        Depcrate_attrAttrs!();
+        Depcrate_attrAttrsWithOwner!();
+        Depcrate_attrimpl_36!();
+        Depcrate_attrimpl_37!();
+        Depcrate_attrimpl_38!();
+        Depcrate_attrimpl_39!();
+        Depcrate_attrimpl_40!();
+        Depcrate_attrparse_rustc_legacy_const_generics!();
+        Depcrate_attrmerge_repr!();
+        Depcrate_attrparse_repr_tt!();
+        Depcrate_attrDocAtom!();
+        Depcrate_attrDocExpr!();
+        Depcrate_attrimpl_46!();
+        Depcrate_attrimpl_47!();
+        Depcrate_attrnext_doc_expr!();
+        Depcrate_attrparse_comma_sep!();
+        Depcrate_attrimpl_50!();
+        Depcrate_attrAttrSourceMap!();
+        Depcrate_attrimpl_52!();
+        Depcrate_attrAttrQuery!();
+        Depcrate_attrimpl_54!();
+        Depcrate_attrany_has_attrs!();
+        Depcrate_attrattrs_from_ast_id_loc!();
+        Depcrate_attrfields_attrs_source_map!();
+        Depcrate_attrtests!();
+    };
+}

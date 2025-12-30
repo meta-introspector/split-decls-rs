@@ -1,0 +1,9 @@
+// Generated macro for IA32_VMX_CR0_FIXED1 (const)
+macro_rules! Depcrate_msrIA32_VMX_CR0_FIXED1 {
+() => {
+// Module: crate::msr
+// Provides: {"IA32_VMX_CR0_FIXED1"}
+// Dependencies: {}
+# [doc = " Capability Reporting Register of CR0 Bits Fixed to 1 (R/O) See Appendix A.7, VMX-Fixed Bits in CR0 (If CPUID.01H:ECX.\\[bit 9\\])"] pub const IA32_VMX_CR0_FIXED1 : u32 = 0x487 ;
+};
+}

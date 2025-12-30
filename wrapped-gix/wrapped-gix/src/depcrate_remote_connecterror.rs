@@ -1,0 +1,9 @@
+// Generated macro for error (module)
+macro_rules! Depcrate_remote_connecterror {
+() => {
+// Module: crate::remote::connect
+// Provides: {"error"}
+// Dependencies: {}
+mod error { use super :: connect ; use crate :: { bstr :: BString , config , remote } ; # [doc = " The error returned by [connect()][crate::Remote::connect()]."] # [derive (Debug , thiserror :: Error)] # [allow (missing_docs)] pub enum Error { # [error ("Could not obtain options for connecting via ssh")] SshOptions (# [from] config :: ssh_connect_options :: Error) , # [error ("Could not obtain the current directory")] CurrentDir (# [from] std :: io :: Error) , # [error ("Could not access remote repository at \"{}\"" , directory . display ())] InvalidRemoteRepositoryPath { directory : std :: path :: PathBuf } , # [error (transparent)] SchemePermission (# [from] config :: protocol :: allow :: Error) , # [error ("Protocol {scheme:?} of url {url:?} is denied per configuration")] ProtocolDenied { url : BString , scheme : gix_url :: Scheme } , # [error (transparent)] Connect (# [from] connect :: Error) , # [error ("The {} url was missing - don't know where to establish a connection to" , direction . as_str ())] MissingUrl { direction : remote :: Direction } , # [error ("The given protocol version was invalid. Choose between 1 and 2")] UnknownProtocol { source : config :: key :: GenericErrorWithValue } , # [error ("Could not verify that \"{}\" url is a valid git directory before attempting to use it" , url . to_bstring ())] FileUrl { source : Box < gix_discover :: is_git :: Error > , url : gix_url :: Url , } , } impl gix_protocol :: transport :: IsSpuriousError for Error { # [doc = " Return `true` if retrying might result in a different outcome due to IO working out differently."] fn is_spurious (& self) -> bool { match self { Error :: Connect (err) => err . is_spurious () , _ => false , } } } }
+};
+}

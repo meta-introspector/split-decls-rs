@@ -1,0 +1,9 @@
+// Generated macro for use_1632 (pub_use)
+macro_rules! Depcrate_generateduse_1632 {
+() => {
+// Module: crate::generated
+// Provides: {"use_1632"}
+// Dependencies: {}
+# [cfg (feature = "SecKey")] pub use self :: __SecKey :: kSecKeyAlgorithmECDHKeyExchangeCofactorX963SHA256 ;
+};
+}

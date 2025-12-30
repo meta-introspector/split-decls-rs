@@ -4,6 +4,6 @@ macro_rules! Depcrateuse_765 {
 // Module: crate
 // Provides: {"use_765"}
 // Dependencies: {}
-pub use self :: runtime :: Runtime ;
+pub use self :: zalsa :: IngredientIndex ;
 };
 }

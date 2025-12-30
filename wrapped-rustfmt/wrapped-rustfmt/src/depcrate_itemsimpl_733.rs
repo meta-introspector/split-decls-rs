@@ -1,0 +1,9 @@
+// Generated macro for impl_733 (impl)
+macro_rules! Depcrate_itemsimpl_733 {
+() => {
+// Module: crate::items
+// Provides: {"impl_733"}
+// Dependencies: {}
+impl < 'a > StaticParts < 'a > { pub (crate) fn from_item (item : & 'a ast :: Item) -> Self { let (defaultness , prefix , safety , ident , ty , mutability , expr , generics) = match & item . kind { ast :: ItemKind :: Static (s) => (None , "static" , s . safety , s . ident , & s . ty , s . mutability , & s . expr , None ,) , ast :: ItemKind :: Const (c) => (Some (c . defaultness) , "const" , ast :: Safety :: Default , c . ident , & c . ty , ast :: Mutability :: Not , & c . expr , Some (& c . generics) ,) , _ => unreachable ! () , } ; StaticParts { prefix , safety , vis : & item . vis , ident , generics , ty , mutability , expr_opt : expr . as_ref () , defaultness , span : item . span , } } pub (crate) fn from_trait_item (ti : & 'a ast :: AssocItem , ident : Ident) -> Self { let (defaultness , ty , expr_opt , generics) = match & ti . kind { ast :: AssocItemKind :: Const (c) => (c . defaultness , & c . ty , & c . expr , Some (& c . generics)) , _ => unreachable ! () , } ; StaticParts { prefix : "const" , safety : ast :: Safety :: Default , vis : & ti . vis , ident , generics , ty , mutability : ast :: Mutability :: Not , expr_opt : expr_opt . as_ref () , defaultness : Some (defaultness) , span : ti . span , } } pub (crate) fn from_impl_item (ii : & 'a ast :: AssocItem , ident : Ident) -> Self { let (defaultness , ty , expr , generics) = match & ii . kind { ast :: AssocItemKind :: Const (c) => (c . defaultness , & c . ty , & c . expr , Some (& c . generics)) , _ => unreachable ! () , } ; StaticParts { prefix : "const" , safety : ast :: Safety :: Default , vis : & ii . vis , ident , generics , ty , mutability : ast :: Mutability :: Not , expr_opt : expr . as_ref () , defaultness : Some (defaultness) , span : ii . span , } } }
+};
+}

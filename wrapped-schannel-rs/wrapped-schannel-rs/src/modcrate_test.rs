@@ -1,0 +1,54 @@
+// Generated module macro for crate::test
+macro_rules! Modcrate_test {
+() => {
+        Depcrate_testuse_231!();
+        Depcrate_testuse_232!();
+        Depcrate_testuse_233!();
+        Depcrate_testuse_234!();
+        Depcrate_testuse_235!();
+        Depcrate_testuse_236!();
+        Depcrate_testuse_237!();
+        Depcrate_testuse_238!();
+        Depcrate_testuse_239!();
+        Depcrate_testuse_240!();
+        Depcrate_testuse_241!();
+        Depcrate_testuse_242!();
+        Depcrate_testuse_243!();
+        Depcrate_testuse_244!();
+        Depcrate_testuse_245!();
+        Depcrate_testuse_246!();
+        Depcrate_testuse_247!();
+        Depcrate_testbasic!();
+        Depcrate_testinvalid_algorithms!();
+        Depcrate_testvalid_algorithms!();
+        Depcrate_testunwrap_handshake!();
+        Depcrate_testinvalid_protocol!();
+        Depcrate_testvalid_protocol!();
+        Depcrate_testvalid_protocol_with_intermediate_certs!();
+        Depcrate_testexpired_cert!();
+        Depcrate_testself_signed_cert!();
+        Depcrate_testself_signed_cert_manual_trust!();
+        Depcrate_testwrong_host_cert!();
+        Depcrate_testwrong_host_cert_ignored!();
+        Depcrate_testshutdown!();
+        Depcrate_testvalidation_failure_is_permanent!();
+        Depcrate_testverify_callback_success!();
+        Depcrate_testtls_13!();
+        Depcrate_testverify_callback_error!();
+        Depcrate_testverify_callback_gives_failed_cert!();
+        Depcrate_testno_session_resumed!();
+        Depcrate_testbasic_session_resumed!();
+        Depcrate_testsession_resumption_thread_safety!();
+        Depcrate_testFRIENDLY_NAME!();
+        Depcrate_testinstall_certificate!();
+        Depcrate_testlocal_root_store!();
+        Depcrate_testlocalhost_cert!();
+        Depcrate_testaccept_a_socket!();
+        Depcrate_testaccept_one_byte_at_a_time!();
+        Depcrate_testsplit_cert_key!();
+        Depcrate_testtest_loopback_alpn!();
+        Depcrate_testtest_loopback_alpn_mismatch!();
+        Depcrate_testtest_external_alpn!();
+        Depcrate_testtest_alpn_list!();
+    };
+}

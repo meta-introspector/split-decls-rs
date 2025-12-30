@@ -1,0 +1,9 @@
+// Generated macro for impl_90 (impl)
+macro_rules! Depcrate_metricsimpl_90 {
+() => {
+// Module: crate::metrics
+// Provides: {"impl_90"}
+// Dependencies: {}
+impl flags :: Metrics { pub (crate) fn run (self , sh : & Shell) -> anyhow :: Result < () > { let mut metrics = Metrics :: new (sh) ? ; if ! Path :: new ("./target/rustc-perf") . exists () { sh . create_dir ("./target/rustc-perf") ? ; cmd ! (sh , "git clone https://github.com/rust-lang/rustc-perf.git ./target/rustc-perf") . run () ? ; } { let _d = sh . push_dir ("./target/rustc-perf") ; let revision = & metrics . perf_revision ; cmd ! (sh , "git reset --hard {revision}") . run () ? ; } let _env = sh . push_env ("RA_METRICS" , "1") ; let name = match & self . measurement_type { Some (ms) => { let name = ms . as_ref () ; match ms { MeasurementType :: Build => { metrics . measure_build (sh) ? ; } MeasurementType :: RustcTests => { metrics . measure_rustc_tests (sh) ? ; } MeasurementType :: AnalyzeSelf => { metrics . measure_analysis_stats_self (sh) ? ; } MeasurementType :: AnalyzeRipgrep | MeasurementType :: AnalyzeWebRender | MeasurementType :: AnalyzeDiesel | MeasurementType :: AnalyzeHyper => { metrics . measure_analysis_stats (sh , name) ? ; } } ; name } None => { metrics . measure_build (sh) ? ; metrics . measure_rustc_tests (sh) ? ; metrics . measure_analysis_stats_self (sh) ? ; metrics . measure_analysis_stats (sh , MeasurementType :: AnalyzeRipgrep . as_ref ()) ? ; metrics . measure_analysis_stats (sh , MeasurementType :: AnalyzeWebRender . as_ref ()) ? ; metrics . measure_analysis_stats (sh , MeasurementType :: AnalyzeDiesel . as_ref ()) ? ; metrics . measure_analysis_stats (sh , MeasurementType :: AnalyzeHyper . as_ref ()) ? ; "all" } } ; let mut file = fs :: File :: options () . write (true) . create (true) . open (format ! ("target/{name}.json")) ? ; writeln ! (file , "{}" , metrics . json ()) ? ; eprintln ! ("{metrics:#?}") ; Ok (()) } }
+};
+}

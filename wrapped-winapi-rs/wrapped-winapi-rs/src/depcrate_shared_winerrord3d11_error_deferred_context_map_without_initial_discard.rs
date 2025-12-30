@@ -1,0 +1,9 @@
+// Generated macro for D3D11_ERROR_DEFERRED_CONTEXT_MAP_WITHOUT_INITIAL_DISCARD (const)
+macro_rules! Depcrate_shared_winerrorD3D11_ERROR_DEFERRED_CONTEXT_MAP_WITHOUT_INITIAL_DISCARD {
+() => {
+// Module: crate::shared::winerror
+// Provides: {"D3D11_ERROR_DEFERRED_CONTEXT_MAP_WITHOUT_INITIAL_DISCARD"}
+// Dependencies: {}
+pub const D3D11_ERROR_DEFERRED_CONTEXT_MAP_WITHOUT_INITIAL_DISCARD : HRESULT = 0x887C0004 ;
+};
+}

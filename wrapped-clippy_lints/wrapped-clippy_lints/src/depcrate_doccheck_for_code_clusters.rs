@@ -1,0 +1,9 @@
+// Generated macro for check_for_code_clusters (function)
+macro_rules! Depcrate_doccheck_for_code_clusters {
+() => {
+// Module: crate::doc
+// Provides: {"check_for_code_clusters"}
+// Dependencies: {}
+# [doc = " Scan the documentation for code links that are back-to-back with code spans."] # [doc = ""] # [doc = " This is done separately from the rest of the docs, because that makes it easier to produce"] # [doc = " the correct messages."] fn check_for_code_clusters < 'a , Events : Iterator < Item = (pulldown_cmark :: Event < 'a > , Range < usize >) > > (cx : & LateContext < '_ > , events : Events , doc : & str , fragments : Fragments < '_ > ,) { let mut events = events . peekable () ; let mut code_starts_at = None ; let mut code_ends_at = None ; let mut code_includes_link = false ; while let Some ((event , range)) = events . next () { match event { Start (Link { .. }) if matches ! (events . peek () , Some ((Code (_) , _range))) => { if code_starts_at . is_some () { code_ends_at = Some (range . end) ; } else { code_starts_at = Some (range . start) ; } code_includes_link = true ; let _ = events . next () ; } , Code (_) => { if code_starts_at . is_some () { code_ends_at = Some (range . end) ; } else { code_starts_at = Some (range . start) ; } } , End (TagEnd :: Link) => { } , _ => { if let Some (start) = code_starts_at && let Some (end) = code_ends_at && code_includes_link && let Some (span) = fragments . span (cx , start .. end) { span_lint_and_then (cx , DOC_LINK_CODE , span , "code link adjacent to code text" , | diag | { let sugg = format ! ("<code>{}</code>" , doc [start .. end] . replace ('`' , "")) ; diag . span_suggestion_verbose (span , "wrap the entire group in `<code>` tags" , sugg , Applicability :: MaybeIncorrect ,) ; diag . help ("separate code snippets will be shown with a gap") ; }) ; } code_includes_link = false ; code_starts_at = None ; code_ends_at = None ; } , } } }
+};
+}

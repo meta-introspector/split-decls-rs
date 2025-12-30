@@ -1,0 +1,9 @@
+// Generated macro for impl_42 (impl)
+macro_rules! Depcrateimpl_42 {
+() => {
+// Module: crate
+// Provides: {"impl_42"}
+// Dependencies: {}
+impl Account { pub fn new (lamports : u64 , space : usize , owner : & Pubkey) -> Self { shared_new (lamports , space , owner) } pub fn new_ref (lamports : u64 , space : usize , owner : & Pubkey) -> Rc < RefCell < Self > > { shared_new_ref (lamports , space , owner) } # [cfg (feature = "bincode")] pub fn new_data < T : serde :: Serialize > (lamports : u64 , state : & T , owner : & Pubkey ,) -> Result < Self , bincode :: Error > { shared_new_data (lamports , state , owner) } # [cfg (feature = "bincode")] pub fn new_ref_data < T : serde :: Serialize > (lamports : u64 , state : & T , owner : & Pubkey ,) -> Result < RefCell < Self > , bincode :: Error > { shared_new_ref_data (lamports , state , owner) } # [cfg (feature = "bincode")] pub fn new_data_with_space < T : serde :: Serialize > (lamports : u64 , state : & T , space : usize , owner : & Pubkey ,) -> Result < Self , bincode :: Error > { shared_new_data_with_space (lamports , state , space , owner) } # [cfg (feature = "bincode")] pub fn new_ref_data_with_space < T : serde :: Serialize > (lamports : u64 , state : & T , space : usize , owner : & Pubkey ,) -> Result < RefCell < Self > , bincode :: Error > { shared_new_ref_data_with_space (lamports , state , space , owner) } pub fn new_rent_epoch (lamports : u64 , space : usize , owner : & Pubkey , rent_epoch : Epoch) -> Self { shared_new_rent_epoch (lamports , space , owner , rent_epoch) } # [cfg (feature = "bincode")] pub fn deserialize_data < T : serde :: de :: DeserializeOwned > (& self) -> Result < T , bincode :: Error > { shared_deserialize_data (self) } # [cfg (feature = "bincode")] pub fn serialize_data < T : serde :: Serialize > (& mut self , state : & T) -> Result < () , bincode :: Error > { shared_serialize_data (self , state) } }
+};
+}

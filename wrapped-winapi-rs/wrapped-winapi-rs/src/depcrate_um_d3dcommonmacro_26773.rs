@@ -1,0 +1,9 @@
+// Generated macro for macro_26773 (macro)
+macro_rules! Depcrate_um_d3dcommonmacro_26773 {
+() => {
+// Module: crate::um::d3dcommon
+// Provides: {"macro_26773"}
+// Dependencies: {}
+ENUM ! { enum D3D_TESSELLATOR_PARTITIONING { D3D_TESSELLATOR_PARTITIONING_UNDEFINED , D3D_TESSELLATOR_PARTITIONING_INTEGER , D3D_TESSELLATOR_PARTITIONING_POW2 , D3D_TESSELLATOR_PARTITIONING_FRACTIONAL_ODD , D3D_TESSELLATOR_PARTITIONING_FRACTIONAL_EVEN , } }
+};
+}

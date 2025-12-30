@@ -1,0 +1,54 @@
+// Generated module macro for crate::typekinds
+macro_rules! Modcrate_typekinds {
+() => {
+        Depcrate_typekindsuse_248!();
+        Depcrate_typekindsuse_249!();
+        Depcrate_typekindsuse_250!();
+        Depcrate_typekindsuse_251!();
+        Depcrate_typekindsuse_252!();
+        Depcrate_typekindsuse_253!();
+        Depcrate_typekindsuse_254!();
+        Depcrate_typekindsuse_255!();
+        Depcrate_typekindsuse_256!();
+        Depcrate_typekindsuse_257!();
+        Depcrate_typekindsuse_258!();
+        Depcrate_typekindsVECTOR_FULL_REGISTER_SIZE!();
+        Depcrate_typekindsVECTOR_HALF_REGISTER_SIZE!();
+        Depcrate_typekindsTypeRepr!();
+        Depcrate_typekindsToRepr!();
+        Depcrate_typekindsTypeKindOptions!();
+        Depcrate_typekindsimpl_264!();
+        Depcrate_typekindsimpl_265!();
+        Depcrate_typekindsimpl_266!();
+        Depcrate_typekindsBaseTypeKind!();
+        Depcrate_typekindsBaseType!();
+        Depcrate_typekindsVectorTupleSize!();
+        Depcrate_typekindsimpl_270!();
+        Depcrate_typekindsVectorType!();
+        Depcrate_typekindsTypeKind!();
+        Depcrate_typekindsimpl_273!();
+        Depcrate_typekindsimpl_274!();
+        Depcrate_typekindsimpl_275!();
+        Depcrate_typekindsimpl_276!();
+        Depcrate_typekindsimpl_277!();
+        Depcrate_typekindsimpl_278!();
+        Depcrate_typekindsimpl_279!();
+        Depcrate_typekindsimpl_280!();
+        Depcrate_typekindsimpl_281!();
+        Depcrate_typekindsimpl_282!();
+        Depcrate_typekindsimpl_283!();
+        Depcrate_typekindsimpl_284!();
+        Depcrate_typekindsimpl_285!();
+        Depcrate_typekindsimpl_286!();
+        Depcrate_typekindsimpl_287!();
+        Depcrate_typekindsimpl_288!();
+        Depcrate_typekindsimpl_289!();
+        Depcrate_typekindsimpl_290!();
+        Depcrate_typekindsimpl_291!();
+        Depcrate_typekindsimpl_292!();
+        Depcrate_typekindsimpl_293!();
+        Depcrate_typekindsimpl_294!();
+        Depcrate_typekindsimpl_295!();
+        Depcrate_typekindstests!();
+    };
+}

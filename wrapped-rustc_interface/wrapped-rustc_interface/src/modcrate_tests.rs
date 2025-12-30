@@ -1,0 +1,48 @@
+// Generated module macro for crate::tests
+macro_rules! Modcrate_tests {
+() => {
+        Depcrate_testsuse_225!();
+        Depcrate_testsuse_226!();
+        Depcrate_testsuse_227!();
+        Depcrate_testsuse_228!();
+        Depcrate_testsuse_229!();
+        Depcrate_testsuse_230!();
+        Depcrate_testsuse_231!();
+        Depcrate_testsuse_232!();
+        Depcrate_testsuse_233!();
+        Depcrate_testsuse_234!();
+        Depcrate_testsuse_235!();
+        Depcrate_testsuse_236!();
+        Depcrate_testsuse_237!();
+        Depcrate_testsuse_238!();
+        Depcrate_testsuse_239!();
+        Depcrate_testsuse_240!();
+        Depcrate_testsuse_241!();
+        Depcrate_testsuse_242!();
+        Depcrate_testsuse_243!();
+        Depcrate_testssess_and_cfg!();
+        Depcrate_testsnew_public_extern_entry!();
+        Depcrate_testsoptgroups!();
+        Depcrate_testsmk_map!();
+        Depcrate_testsassert_same_clone!();
+        Depcrate_testsassert_same_hash!();
+        Depcrate_testsassert_different_hash!();
+        Depcrate_testsassert_non_crate_hash_different!();
+        Depcrate_teststest_switch_implies_cfg_test!();
+        Depcrate_teststest_switch_implies_cfg_test_unless_cfg_test!();
+        Depcrate_teststest_can_print_warnings!();
+        Depcrate_teststest_output_types_tracking_hash_different_paths!();
+        Depcrate_teststest_output_types_tracking_hash_different_construction_order!();
+        Depcrate_teststest_externs_tracking_hash_different_construction_order!();
+        Depcrate_teststest_lints_tracking_hash_different_values!();
+        Depcrate_teststest_lints_tracking_hash_different_construction_order!();
+        Depcrate_teststest_lint_cap_hash_different!();
+        Depcrate_teststest_search_paths_tracking_hash_different_order!();
+        Depcrate_teststest_native_libs_tracking_hash_different_values!();
+        Depcrate_teststest_native_libs_tracking_hash_different_order!();
+        Depcrate_teststest_codegen_options_tracking_hash!();
+        Depcrate_teststest_top_level_options_tracked_no_crate!();
+        Depcrate_teststest_unstable_options_tracking_hash!();
+        Depcrate_teststest_edition_parsing!();
+    };
+}

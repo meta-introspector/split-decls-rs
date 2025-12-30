@@ -1,0 +1,9 @@
+// Generated macro for new_ed25519_instruction_with_signature (function)
+macro_rules! Depcratenew_ed25519_instruction_with_signature {
+() => {
+// Module: crate
+// Provides: {"new_ed25519_instruction_with_signature"}
+// Dependencies: {}
+pub fn new_ed25519_instruction_with_signature (message : & [u8] , signature : & [u8 ; SIGNATURE_SERIALIZED_SIZE] , pubkey : & [u8 ; PUBKEY_SERIALIZED_SIZE] ,) -> Instruction { let mut instruction_data = Vec :: with_capacity (DATA_START . saturating_add (SIGNATURE_SERIALIZED_SIZE) . saturating_add (PUBKEY_SERIALIZED_SIZE) . saturating_add (message . len ()) ,) ; let num_signatures : u8 = 1 ; let public_key_offset = DATA_START ; let signature_offset = public_key_offset . saturating_add (PUBKEY_SERIALIZED_SIZE) ; let message_data_offset = signature_offset . saturating_add (SIGNATURE_SERIALIZED_SIZE) ; instruction_data . extend_from_slice (bytes_of (& [num_signatures , 0])) ; let offsets = Ed25519SignatureOffsets { signature_offset : signature_offset as u16 , signature_instruction_index : u16 :: MAX , public_key_offset : public_key_offset as u16 , public_key_instruction_index : u16 :: MAX , message_data_offset : message_data_offset as u16 , message_data_size : message . len () as u16 , message_instruction_index : u16 :: MAX , } ; instruction_data . extend_from_slice (bytes_of (& offsets)) ; debug_assert_eq ! (instruction_data . len () , public_key_offset) ; instruction_data . extend_from_slice (pubkey) ; debug_assert_eq ! (instruction_data . len () , signature_offset) ; instruction_data . extend_from_slice (signature) ; debug_assert_eq ! (instruction_data . len () , message_data_offset) ; instruction_data . extend_from_slice (message) ; Instruction { program_id : solana_sdk_ids :: ed25519_program :: id () , accounts : vec ! [] , data : instruction_data , } }
+};
+}

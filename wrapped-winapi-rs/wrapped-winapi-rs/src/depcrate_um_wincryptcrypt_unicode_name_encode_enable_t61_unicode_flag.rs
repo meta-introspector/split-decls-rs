@@ -1,0 +1,9 @@
+// Generated macro for CRYPT_UNICODE_NAME_ENCODE_ENABLE_T61_UNICODE_FLAG (const)
+macro_rules! Depcrate_um_wincryptCRYPT_UNICODE_NAME_ENCODE_ENABLE_T61_UNICODE_FLAG {
+() => {
+// Module: crate::um::wincrypt
+// Provides: {"CRYPT_UNICODE_NAME_ENCODE_ENABLE_T61_UNICODE_FLAG"}
+// Dependencies: {}
+pub const CRYPT_UNICODE_NAME_ENCODE_ENABLE_T61_UNICODE_FLAG : DWORD = CERT_RDN_ENABLE_T61_UNICODE_FLAG ;
+};
+}

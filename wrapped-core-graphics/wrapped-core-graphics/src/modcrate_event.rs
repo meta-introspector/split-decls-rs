@@ -1,0 +1,41 @@
+// Generated module macro for crate::event
+macro_rules! Modcrate_event {
+() => {
+        Depcrate_eventuse_169!();
+        Depcrate_eventuse_170!();
+        Depcrate_eventuse_171!();
+        Depcrate_eventuse_172!();
+        Depcrate_eventuse_173!();
+        Depcrate_eventuse_174!();
+        Depcrate_eventuse_175!();
+        Depcrate_eventCGEventField!();
+        Depcrate_eventCGKeyCode!();
+        Depcrate_eventCGScrollEventUnit!();
+        Depcrate_eventmacro_179!();
+        Depcrate_eventKeyCode!();
+        Depcrate_eventimpl_181!();
+        Depcrate_eventScrollEventUnit!();
+        Depcrate_eventimpl_183!();
+        Depcrate_eventCGEventType!();
+        Depcrate_eventEventField!();
+        Depcrate_eventimpl_186!();
+        Depcrate_eventCGMouseButton!();
+        Depcrate_eventCGEventTapLocation!();
+        Depcrate_eventCGEventTapPlacement!();
+        Depcrate_eventCGEventTapOptions!();
+        Depcrate_eventCGEventMask!();
+        Depcrate_eventCGEventMaskBit!();
+        Depcrate_eventCGEventTapProxy!();
+        Depcrate_eventCallbackResult!();
+        Depcrate_eventCGEventTapCallbackFn!();
+        Depcrate_eventCGEventTapCallBackInternal!();
+        Depcrate_eventcg_event_tap_callback_internal!();
+        Depcrate_eventCGEventTap!();
+        Depcrate_eventimpl_199!();
+        Depcrate_eventimpl_200!();
+        Depcrate_eventimpl_201!();
+        Depcrate_eventmacro_202!();
+        Depcrate_eventimpl_203!();
+        Depcrate_eventother_204!();
+    };
+}

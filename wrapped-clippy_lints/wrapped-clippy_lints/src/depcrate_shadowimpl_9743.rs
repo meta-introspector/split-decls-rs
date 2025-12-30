@@ -1,0 +1,9 @@
+// Generated macro for impl_9743 (impl)
+macro_rules! Depcrate_shadowimpl_9743 {
+() => {
+// Module: crate::shadow
+// Provides: {"impl_9743"}
+// Dependencies: {}
+impl < 'tcx > LateLintPass < 'tcx > for Shadow { fn check_pat (& mut self , cx : & LateContext < 'tcx > , pat : & 'tcx Pat < '_ >) { let PatKind :: Binding (_ , id , ident , _) = pat . kind else { return ; } ; if pat . span . desugaring_kind () . is_some () || pat . span . from_expansion () { return ; } if ident . span . from_expansion () || ident . span . is_dummy () { return ; } if let Some ((_ , Node :: LetStmt (let_stmt))) = cx . tcx . hir_parent_iter (pat . hir_id) . find (| (_ , node) | ! matches ! (node , Node :: Pat (_) | Node :: PatField (_))) && let LocalSource :: AssignDesugar = let_stmt . source { return ; } let HirId { owner , local_id } = id ; let (ref mut data , scope_owner) = * self . bindings . last_mut () . unwrap () ; let items_with_name = data . entry (ident . name) . or_default () ; for & prev in items_with_name . iter () . rev () { if prev == local_id { return ; } if is_shadow (cx , scope_owner , prev , local_id) { let prev_hir_id = HirId { owner , local_id : prev } ; lint_shadow (cx , pat , prev_hir_id , ident . span) ; break ; } } items_with_name . push (local_id) ; } fn check_body (& mut self , cx : & LateContext < '_ > , body : & Body < '_ >) { let owner_id = cx . tcx . hir_body_owner_def_id (body . id ()) ; if ! matches ! (cx . tcx . hir_body_owner_kind (owner_id) , BodyOwnerKind :: Closure) { self . bindings . push ((FxHashMap :: default () , owner_id)) ; } } fn check_body_post (& mut self , cx : & LateContext < '_ > , body : & Body < '_ >) { if ! matches ! (cx . tcx . hir_body_owner_kind (cx . tcx . hir_body_owner_def_id (body . id ())) , BodyOwnerKind :: Closure) { self . bindings . pop () ; } } }
+};
+}

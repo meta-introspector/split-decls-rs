@@ -1,0 +1,9 @@
+// Generated macro for STATUS_GRAPHICS_NO_MONITORS_CORRESPOND_TO_DISPLAY_DEVICE (const)
+macro_rules! Depcrate_shared_ntstatusSTATUS_GRAPHICS_NO_MONITORS_CORRESPOND_TO_DISPLAY_DEVICE {
+() => {
+// Module: crate::shared::ntstatus
+// Provides: {"STATUS_GRAPHICS_NO_MONITORS_CORRESPOND_TO_DISPLAY_DEVICE"}
+// Dependencies: {}
+pub const STATUS_GRAPHICS_NO_MONITORS_CORRESPOND_TO_DISPLAY_DEVICE : NTSTATUS = 0xC01E05E5 ;
+};
+}

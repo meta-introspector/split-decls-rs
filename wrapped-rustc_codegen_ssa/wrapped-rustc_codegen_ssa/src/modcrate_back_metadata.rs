@@ -1,0 +1,41 @@
+// Generated module macro for crate::back::metadata
+macro_rules! Modcrate_back_metadata {
+() => {
+        Depcrate_back_metadatause_312!();
+        Depcrate_back_metadatause_313!();
+        Depcrate_back_metadatause_314!();
+        Depcrate_back_metadatause_315!();
+        Depcrate_back_metadatause_316!();
+        Depcrate_back_metadatause_317!();
+        Depcrate_back_metadatause_318!();
+        Depcrate_back_metadatause_319!();
+        Depcrate_back_metadatause_320!();
+        Depcrate_back_metadatause_321!();
+        Depcrate_back_metadatause_322!();
+        Depcrate_back_metadatause_323!();
+        Depcrate_back_metadatause_324!();
+        Depcrate_back_metadatause_325!();
+        Depcrate_back_metadatause_326!();
+        Depcrate_back_metadatause_327!();
+        Depcrate_back_metadatause_328!();
+        Depcrate_back_metadatause_329!();
+        Depcrate_back_metadatause_330!();
+        Depcrate_back_metadataDefaultMetadataLoader!();
+        Depcrate_back_metadataAIX_METADATA_SYMBOL_NAME!();
+        Depcrate_back_metadataload_metadata_with!();
+        Depcrate_back_metadataimpl_334!();
+        Depcrate_back_metadatasearch_for_section!();
+        Depcrate_back_metadataadd_gnu_property_note!();
+        Depcrate_back_metadataget_metadata_xcoff!();
+        Depcrate_back_metadatacreate_object_file!();
+        Depcrate_back_metadataelf_os_abi!();
+        Depcrate_back_metadataelf_e_flags!();
+        Depcrate_back_metadatamacho_object_build_version_for_target!();
+        Depcrate_back_metadatamacho_is_arm64e!();
+        Depcrate_back_metadataMetadataPosition!();
+        Depcrate_back_metadatacreate_wrapper_file!();
+        Depcrate_back_metadatacreate_compressed_metadata_file!();
+        Depcrate_back_metadatacreate_compressed_metadata_file_for_xcoff!();
+        Depcrate_back_metadatacreate_metadata_file_for_wasm!();
+    };
+}

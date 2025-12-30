@@ -1,0 +1,9 @@
+// Generated macro for test (module)
+macro_rules! Depcrate_transitionstest {
+() => {
+// Module: crate::transitions
+// Provides: {"test"}
+// Dependencies: {}
+# [cfg (test)] mod test { use super :: optimise ; use super :: * ; # [test] # [allow (unused_results)] fn optimise_macquarie () { let mut transitions = FixedTimespanSet { first : FixedTimespan { utc_offset : 0 , dst_offset : 0 , name : "zzz" . to_owned () , } , rest : vec ! [(- 2_214_259_200 , FixedTimespan { utc_offset : 36000 , dst_offset : 0 , name : "AEST" . to_owned () , } ,) , (- 1_680_508_800 , FixedTimespan { utc_offset : 36000 , dst_offset : 3600 , name : "AEDT" . to_owned () , } ,) , (- 1_669_892_400 , FixedTimespan { utc_offset : 36000 , dst_offset : 3600 , name : "AEDT" . to_owned () , } ,) , (- 1_665_392_400 , FixedTimespan { utc_offset : 36000 , dst_offset : 0 , name : "AEST" . to_owned () , } ,) , (- 1_601_719_200 , FixedTimespan { utc_offset : 0 , dst_offset : 0 , name : "zzz" . to_owned () , } ,) , (- 687_052_800 , FixedTimespan { utc_offset : 36000 , dst_offset : 0 , name : "AEST" . to_owned () , } ,) , (- 94_730_400 , FixedTimespan { utc_offset : 36000 , dst_offset : 0 , name : "AEST" . to_owned () , } ,) , (- 71_136_000 , FixedTimespan { utc_offset : 36000 , dst_offset : 3600 , name : "AEDT" . to_owned () , } ,) , (- 55_411_200 , FixedTimespan { utc_offset : 36000 , dst_offset : 0 , name : "AEST" . to_owned () , } ,) , (- 37_267_200 , FixedTimespan { utc_offset : 36000 , dst_offset : 3600 , name : "AEDT" . to_owned () , } ,) , (- 25_776_000 , FixedTimespan { utc_offset : 36000 , dst_offset : 0 , name : "AEST" . to_owned () , } ,) , (- 5_817_600 , FixedTimespan { utc_offset : 36000 , dst_offset : 3600 , name : "AEDT" . to_owned () , } ,) ,] , } ; let mut result = transitions . clone () ; result . rest . remove (6) ; result . rest . remove (2) ; optimise (& mut transitions) ; assert_eq ! (transitions , result) ; } }
+};
+}

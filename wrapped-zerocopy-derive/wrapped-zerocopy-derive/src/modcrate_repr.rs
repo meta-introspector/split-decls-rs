@@ -1,0 +1,40 @@
+// Generated module macro for crate::repr
+macro_rules! Modcrate_repr {
+() => {
+        Depcrate_repruse_36!();
+        Depcrate_repruse_37!();
+        Depcrate_repruse_38!();
+        Depcrate_repruse_39!();
+        Depcrate_reprRepr!();
+        Depcrate_reprCompoundRepr!();
+        Depcrate_reprPrimitiveRepr!();
+        Depcrate_reprAlignRepr!();
+        Depcrate_reprStructUnionRepr!();
+        Depcrate_reprEnumRepr!();
+        Depcrate_reprimpl_46!();
+        Depcrate_reprimpl_47!();
+        Depcrate_reprimpl_48!();
+        Depcrate_reprimpl_49!();
+        Depcrate_reprimpl_50!();
+        Depcrate_reprimpl_51!();
+        Depcrate_reprimpl_52!();
+        Depcrate_reprRawRepr!();
+        Depcrate_reprFromRawReprError!();
+        Depcrate_reprUnsupportedReprError!();
+        Depcrate_reprimpl_56!();
+        Depcrate_reprimpl_57!();
+        Depcrate_reprFromRawReprsError!();
+        Depcrate_reprtry_from_raw_reprs!();
+        Depcrate_reprFromAttrsError!();
+        Depcrate_reprimpl_61!();
+        Depcrate_reprimpl_62!();
+        Depcrate_reprimpl_63!();
+        Depcrate_reprimpl_64!();
+        Depcrate_reprimpl_65!();
+        Depcrate_reprUnrecognizedReprError!();
+        Depcrate_reprimpl_67!();
+        Depcrate_repruse_68!();
+        Depcrate_reprutil!();
+        Depcrate_reprtests!();
+    };
+}

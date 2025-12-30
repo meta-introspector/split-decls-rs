@@ -1,0 +1,9 @@
+// Generated macro for other_6191 (other)
+macro_rules! Depcrate_features_gen_RtcIdentityValidationResultother_6191 {
+() => {
+// Module: crate::features::gen_RtcIdentityValidationResult
+// Provides: {"other_6191"}
+// Dependencies: {}
+# [wasm_bindgen] extern "C" { # [wasm_bindgen (extends = :: js_sys :: Object , js_name = RTCIdentityValidationResult)] # [derive (Debug , Clone , PartialEq , Eq)] # [doc = "The `RtcIdentityValidationResult` dictionary."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `RtcIdentityValidationResult`*"] pub type RtcIdentityValidationResult ; # [doc = "Get the `contents` field of this object."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `RtcIdentityValidationResult`*"] # [wasm_bindgen (method , getter = "contents")] pub fn get_contents (this : & RtcIdentityValidationResult) -> :: alloc :: string :: String ; # [doc = "Change the `contents` field of this object."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `RtcIdentityValidationResult`*"] # [wasm_bindgen (method , setter = "contents")] pub fn set_contents (this : & RtcIdentityValidationResult , val : & str) ; # [doc = "Get the `identity` field of this object."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `RtcIdentityValidationResult`*"] # [wasm_bindgen (method , getter = "identity")] pub fn get_identity (this : & RtcIdentityValidationResult) -> :: alloc :: string :: String ; # [doc = "Change the `identity` field of this object."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `RtcIdentityValidationResult`*"] # [wasm_bindgen (method , setter = "identity")] pub fn set_identity (this : & RtcIdentityValidationResult , val : & str) ; }
+};
+}

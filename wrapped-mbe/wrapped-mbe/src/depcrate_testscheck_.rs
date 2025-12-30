@@ -1,0 +1,9 @@
+// Generated macro for check_ (function)
+macro_rules! Depcrate_testscheck_ {
+() => {
+// Module: crate::tests
+// Provides: {"check_"}
+// Dependencies: {}
+# [expect (deprecated)] fn check_ (def_edition : Edition , call_edition : Edition , macro2 : bool , decl : & str , arg : & str , render_debug : bool , expect : expect_test :: Expect , parse : parser :: TopEntryPoint ,) { let decl_tt = & syntax_bridge :: parse_to_token_tree (def_edition , SpanAnchor { file_id : EditionedFileId :: new (FileId :: from_raw (0) , def_edition) , ast_id : ROOT_ERASED_FILE_AST_ID , } , SyntaxContext :: root (Edition :: CURRENT) , decl ,) . unwrap () ; let mac = if macro2 { DeclarativeMacro :: parse_macro2 (None , decl_tt , | _ | def_edition) } else { DeclarativeMacro :: parse_macro_rules (decl_tt , | _ | def_edition) } ; let call_anchor = SpanAnchor { file_id : EditionedFileId :: new (FileId :: from_raw (1) , call_edition) , ast_id : ROOT_ERASED_FILE_AST_ID , } ; let arg_tt = syntax_bridge :: parse_to_token_tree (call_edition , call_anchor , SyntaxContext :: root (Edition :: CURRENT) , arg ,) . unwrap () ; let res = mac . expand (& arg_tt , | _ | () , Span { range : TextRange :: up_to (TextSize :: of (arg)) , anchor : call_anchor , ctx : SyntaxContext :: root (Edition :: CURRENT) , } , def_edition ,) ; let mut expect_res = String :: new () ; if let Some (err) = res . err { format_to ! (expect_res , "{err:#?}\n\n" ,) ; } if render_debug { format_to ! (expect_res , "{:#?}\n\n" , res . value . 0) ; } let (node , _) = syntax_bridge :: token_tree_to_syntax_node (& res . value . 0 , parse , & mut | _ | def_edition , def_edition ,) ; format_to ! (expect_res , "{}" , syntax_bridge :: prettify_macro_expansion :: prettify_macro_expansion (node . syntax_node () , & mut | _ | None , | _ | ())) ; expect . assert_eq (& expect_res) ; }
+};
+}

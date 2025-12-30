@@ -1,0 +1,9 @@
+// Generated macro for other_55729 (other)
+macro_rules! Depcrate_um_winuserother_55729 {
+() => {
+// Module: crate::um::winuser
+// Provides: {"other_55729"}
+// Dependencies: {}
+extern "system" { pub fn IsCharAlphaA (ch : CHAR ,) -> BOOL ; pub fn IsCharAlphaW (ch : WCHAR ,) -> BOOL ; pub fn IsCharAlphaNumericA (ch : CHAR ,) -> BOOL ; pub fn IsCharAlphaNumericW (ch : WCHAR ,) -> BOOL ; pub fn IsCharUpperA (ch : CHAR ,) -> BOOL ; pub fn IsCharUpperW (ch : WCHAR ,) -> BOOL ; pub fn IsCharLowerA (ch : CHAR ,) -> BOOL ; pub fn IsCharLowerW (ch : WCHAR ,) -> BOOL ; pub fn SetFocus (hWnd : HWND ,) -> HWND ; pub fn GetActiveWindow () -> HWND ; pub fn GetFocus () -> HWND ; pub fn GetKBCodePage () -> UINT ; pub fn GetKeyState (nVirtKey : c_int ,) -> SHORT ; pub fn GetAsyncKeyState (vKey : c_int ,) -> SHORT ; pub fn GetKeyboardState (lpKeyState : PBYTE ,) -> BOOL ; pub fn SetKeyboardState (lpKeyState : LPBYTE ,) -> BOOL ; pub fn GetKeyNameTextA (lparam : LONG , lpString : LPSTR , cchSize : c_int ,) -> c_int ; pub fn GetKeyNameTextW (lParam : LONG , lpString : LPWSTR , cchSize : c_int ,) -> c_int ; pub fn GetKeyboardType (nTypeFlag : c_int ,) -> c_int ; pub fn ToAscii (uVirtKey : UINT , uScanCode : UINT , lpKeyState : * const BYTE , lpChar : LPWORD , uFlags : UINT ,) -> c_int ; pub fn ToAsciiEx (uVirtKey : UINT , uScanCode : UINT , lpKeyState : * const BYTE , lpChar : LPWORD , uFlags : UINT , dwhkl : HKL ,) -> c_int ; pub fn ToUnicode (wVirtKey : UINT , wScanCode : UINT , lpKeyState : * const BYTE , lwszBuff : LPWSTR , cchBuff : c_int , wFlags : UINT ,) -> c_int ; pub fn OemKeyScan (wOemChar : WORD ,) -> DWORD ; pub fn VkKeyScanA (ch : CHAR ,) -> SHORT ; pub fn VkKeyScanW (ch : WCHAR ,) -> SHORT ; pub fn VkKeyScanExA (ch : CHAR , dwhkl : HKL ,) -> SHORT ; pub fn VkKeyScanExW (ch : WCHAR , dwhkl : HKL ,) -> SHORT ; }
+};
+}

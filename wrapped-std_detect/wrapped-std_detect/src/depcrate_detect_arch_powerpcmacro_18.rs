@@ -1,0 +1,9 @@
+// Generated macro for macro_18 (macro)
+macro_rules! Depcrate_detect_arch_powerpcmacro_18 {
+() => {
+// Module: crate::detect::arch::powerpc
+// Provides: {"macro_18"}
+// Dependencies: {}
+features ! { @ TARGET : powerpc ; @ CFG : target_arch = "powerpc" ; @ MACRO_NAME : is_powerpc_feature_detected ; @ MACRO_ATTRS : # [doc = " Checks if `powerpc` feature is enabled."] # [unstable (feature = "stdarch_powerpc_feature_detection" , issue = "111191")] @ FEATURE : # [unstable (feature = "stdarch_powerpc_feature_detection" , issue = "111191")] altivec : "altivec" ; # [doc = " Altivec"] @ FEATURE : # [unstable (feature = "stdarch_powerpc_feature_detection" , issue = "111191")] vsx : "vsx" ; # [doc = " VSX"] @ FEATURE : # [unstable (feature = "stdarch_powerpc_feature_detection" , issue = "111191")] power8 : "power8" ; without cfg check : true ; # [doc = " Power8"] @ FEATURE : # [unstable (feature = "stdarch_powerpc_feature_detection" , issue = "111191")] power8_altivec : "power8-altivec" ; # [doc = " Power8 altivec"] @ FEATURE : # [unstable (feature = "stdarch_powerpc_feature_detection" , issue = "111191")] power8_vector : "power8-vector" ; # [doc = " Power8 vector"] @ FEATURE : # [unstable (feature = "stdarch_powerpc_feature_detection" , issue = "111191")] power8_crypto : "power8-crypto" ; # [doc = " Power8 crypto"] @ FEATURE : # [unstable (feature = "stdarch_powerpc_feature_detection" , issue = "111191")] power9 : "power9" ; without cfg check : true ; # [doc = " Power9"] @ FEATURE : # [unstable (feature = "stdarch_powerpc_feature_detection" , issue = "111191")] power9_altivec : "power9-altivec" ; # [doc = " Power9 altivec"] @ FEATURE : # [unstable (feature = "stdarch_powerpc_feature_detection" , issue = "111191")] power9_vector : "power9-vector" ; # [doc = " Power9 vector"] }
+};
+}

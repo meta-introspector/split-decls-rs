@@ -1,0 +1,9 @@
+// Generated macro for WINCODEC_ERR_REQUESTONLYVALIDATMETADATAROOT (const)
+macro_rules! Depcrate_shared_winerrorWINCODEC_ERR_REQUESTONLYVALIDATMETADATAROOT {
+() => {
+// Module: crate::shared::winerror
+// Provides: {"WINCODEC_ERR_REQUESTONLYVALIDATMETADATAROOT"}
+// Dependencies: {}
+pub const WINCODEC_ERR_REQUESTONLYVALIDATMETADATAROOT : HRESULT = 0x88982F92 ;
+};
+}

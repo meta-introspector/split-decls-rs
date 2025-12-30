@@ -1,0 +1,9 @@
+// Generated macro for Dataset (struct)
+macro_rules! Depcrate_chartDataset {
+() => {
+// Module: crate::chart
+// Provides: {"Dataset"}
+// Dependencies: {}
+# [doc = " A group of data points"] # [doc = ""] # [doc = " This is the main element composing a [`Chart`]."] # [doc = ""] # [doc = " A dataset can be [named](Dataset::name). Only named datasets will be rendered in the legend."] # [doc = ""] # [doc = " After that, you can pass it data with [`Dataset::data`]. Data is an array of `f64` tuples"] # [doc = " (`(f64, f64)`), the first element being X and the second Y. It's also worth noting that, unlike"] # [doc = " the [`Rect`], here the Y axis is bottom to top, as in math."] # [doc = ""] # [doc = " You can also customize the rendering by using [`Dataset::marker`] and [`Dataset::graph_type`]."] # [doc = ""] # [doc = " # Example"] # [doc = ""] # [doc = " This example draws a red line between two points."] # [doc = ""] # [doc = " ```rust"] # [doc = " use ratatui::style::Stylize;"] # [doc = " use ratatui::symbols::Marker;"] # [doc = " use ratatui::widgets::{Dataset, GraphType};"] # [doc = ""] # [doc = " let dataset = Dataset::default()"] # [doc = "     .name(\"dataset 1\")"] # [doc = "     .data(&[(1., 1.), (5., 5.)])"] # [doc = "     .marker(Marker::Braille)"] # [doc = "     .graph_type(GraphType::Line)"] # [doc = "     .red();"] # [doc = " ```"] # [derive (Debug , Default , Clone , PartialEq)] pub struct Dataset < 'a > { # [doc = " Name of the dataset (used in the legend if shown)"] name : Option < Line < 'a > > , # [doc = " A reference to the actual data"] data : & 'a [(f64 , f64)] , # [doc = " Symbol used for each points of this dataset"] marker : symbols :: Marker , # [doc = " Determines graph type used for drawing points"] graph_type : GraphType , # [doc = " Style used to plot this dataset"] style : Style , }
+};
+}

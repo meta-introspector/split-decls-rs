@@ -1,0 +1,60 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcrate_block_apiuse_4.rs");
+include!("depcrate_variantssealed.rs");
+include!("depcrate_block_apiimpl_17.rs");
+include!("depcratebashhash512.rs");
+include!("depcrate_block_apiimpl_20.rs");
+include!("depcratebashhash256.rs");
+include!("depcrate_oidsimpl_27.rs");
+include!("depcrate_block_apiuse_7.rs");
+include!("depcrate_block_apibashhashcore.rs");
+include!("depcrate_block_apiimpl_18.rs");
+include!("depcrate_block_apiimpl_14.rs");
+include!("depcrate_serializeuse_30.rs");
+include!("depcrate_block_apiimpl_23.rs");
+include!("depcrateserialize.rs");
+include!("depcrate_variantsimpl_sizes.rs");
+include!("depcrateuse_2.rs");
+include!("depcrate_block_apiimpl_9.rs");
+include!("depcrate_block_apiimpl_10.rs");
+include!("depcrate_block_apiuse_5.rs");
+include!("depcrate_block_apiimpl_12.rs");
+include!("depcrate_block_apiimpl_21.rs");
+include!("depcrate_serializeuse_31.rs");
+include!("depcrate_serializeuse_32.rs");
+include!("depcrate_block_apiimpl_19.rs");
+include!("depcrate_block_apiimpl_11.rs");
+include!("depcrateuse_40.rs");
+include!("depcratebashhash384.rs");
+include!("depcrateuse_1.rs");
+include!("depcrate_oidsimpl_26.rs");
+include!("depcrate_block_apiimpl_16.rs");
+include!("depcrate_block_apiimpl_13.rs");
+include!("depcrate_variantsmacro_39.rs");
+include!("depcrate_variantsoutputsize.rs");
+include!("depcratevariants.rs");
+include!("depcrate_block_apiimpl_15.rs");
+include!("depcrate_variantsuse_35.rs");
+include!("depcrate_block_apiuse_6.rs");
+include!("depcratemacro_41.rs");
+include!("depcrate_oidsimpl_28.rs");
+include!("depcrateoids.rs");
+include!("depcrateblock_api.rs");
+include!("depcrate_oidsuse_25.rs");
+include!("depcrate_serializeimpl_33.rs");
+include!("depcrate_block_apiimpl_22.rs");
+include!("modcrate_block_api.rs");
+include!("modcrate_serialize.rs");
+include!("modcrate.rs");
+include!("modcrate_oids.rs");
+include!("modcrate_variants.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate_block_api!();
+    Modcrate_serialize!();
+    Modcrate!();
+    Modcrate_oids!();
+    Modcrate_variants!();
+}

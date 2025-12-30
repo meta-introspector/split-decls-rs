@@ -1,0 +1,9 @@
+// Generated macro for on_opening_delimiter_typed (function)
+macro_rules! Depcrate_typingon_opening_delimiter_typed {
+() => {
+// Module: crate::typing
+// Provides: {"on_opening_delimiter_typed"}
+// Dependencies: {}
+# [doc = " Inserts a closing delimiter when the user types an opening bracket, wrapping an existing expression in a"] # [doc = " block, or a part of a `use` item (for `{`)."] fn on_opening_delimiter_typed (file : & Parse < SourceFile > , offset : TextSize , opening_bracket : char , edition : Edition ,) -> Option < TextEdit > { type FilterFn = fn (SyntaxKind) -> bool ; let (closing_bracket , expected_ast_bracket , allowed_kinds) = match opening_bracket { '{' => ('}' , SyntaxKind :: L_CURLY , & [ast :: Expr :: can_cast as FilterFn] as & [FilterFn]) , '(' => (')' , SyntaxKind :: L_PAREN , & [ast :: Expr :: can_cast as FilterFn , ast :: Pat :: can_cast , ast :: Type :: can_cast] as & [FilterFn] ,) , '<' => ('>' , SyntaxKind :: L_ANGLE , & [ast :: Type :: can_cast as FilterFn] as & [FilterFn]) , _ => return None , } ; let brace_token = file . tree () . syntax () . token_at_offset (offset) . right_biased () ? ; if brace_token . kind () != expected_ast_bracket { return None ; } let range = brace_token . text_range () ; if ! stdx :: always ! (range . len () == TextSize :: of (opening_bracket)) { return None ; } let reparsed = file . reparse (range , "" , edition) . tree () ; if let Some (edit) = on_delimited_node_typed (& reparsed , offset , opening_bracket , closing_bracket , allowed_kinds) { return Some (edit) ; } match opening_bracket { '{' => on_left_brace_typed (& reparsed , offset) , '<' => on_left_angle_typed (& file . tree () , & reparsed , offset) , _ => None , } }
+};
+}

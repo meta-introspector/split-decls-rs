@@ -1,0 +1,9 @@
+// Generated macro for impl_712 (impl)
+macro_rules! Depcrate_itemsimpl_712 {
+() => {
+// Module: crate::items
+// Provides: {"impl_712"}
+// Dependencies: {}
+impl < 'a > FnSig < 'a > { pub (crate) fn from_method_sig (method_sig : & 'a ast :: FnSig , generics : & 'a ast :: Generics , visibility : & 'a ast :: Visibility ,) -> FnSig < 'a > { FnSig { safety : method_sig . header . safety , coroutine_kind : Cow :: Borrowed (& method_sig . header . coroutine_kind) , constness : method_sig . header . constness , defaultness : ast :: Defaultness :: Final , ext : method_sig . header . ext , decl : & * method_sig . decl , generics , visibility , } } pub (crate) fn from_fn_kind (fn_kind : & 'a visit :: FnKind < '_ > , decl : & 'a ast :: FnDecl , defaultness : ast :: Defaultness ,) -> FnSig < 'a > { match * fn_kind { visit :: FnKind :: Fn (visit :: FnCtxt :: Assoc (..) , vis , ast :: Fn { sig , generics , .. }) => { let mut fn_sig = FnSig :: from_method_sig (sig , generics , vis) ; fn_sig . defaultness = defaultness ; fn_sig } visit :: FnKind :: Fn (_ , vis , ast :: Fn { sig , generics , .. }) => FnSig { decl , generics , ext : sig . header . ext , constness : sig . header . constness , coroutine_kind : Cow :: Borrowed (& sig . header . coroutine_kind) , defaultness , safety : sig . header . safety , visibility : vis , } , _ => unreachable ! () , } } fn to_str (& self , context : & RewriteContext < '_ >) -> String { let mut result = String :: with_capacity (128) ; result . push_str (& * format_visibility (context , self . visibility)) ; result . push_str (format_defaultness (self . defaultness)) ; result . push_str (format_constness (self . constness)) ; self . coroutine_kind . map (| coroutine_kind | result . push_str (format_coro (& coroutine_kind))) ; result . push_str (format_safety (self . safety)) ; result . push_str (& format_extern (self . ext , context . config . force_explicit_abi () ,)) ; result } }
+};
+}

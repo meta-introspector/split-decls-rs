@@ -1,0 +1,45 @@
+// Generated module macro for crate::public_key
+macro_rules! Modcrate_public_key {
+() => {
+        Depcrate_public_keyuse_260!();
+        Depcrate_public_keyuse_261!();
+        Depcrate_public_keyuse_262!();
+        Depcrate_public_keyuse_263!();
+        Depcrate_public_keyuse_264!();
+        Depcrate_public_keyuse_265!();
+        Depcrate_public_keyuse_266!();
+        Depcrate_public_keyuse_267!();
+        Depcrate_public_keyuse_268!();
+        Depcrate_public_keyuse_269!();
+        Depcrate_public_keyuse_270!();
+        Depcrate_public_keyPublicKey!();
+        Depcrate_public_keyimpl_272!();
+        Depcrate_public_keyimpl_273!();
+        Depcrate_public_keyimpl_274!();
+        Depcrate_public_keyimpl_275!();
+        Depcrate_public_keyimpl_276!();
+        Depcrate_public_keyimpl_277!();
+        Depcrate_public_keyimpl_278!();
+        Depcrate_public_keyimpl_279!();
+        Depcrate_public_keyimpl_280!();
+        Depcrate_public_keyimpl_281!();
+        Depcrate_public_keyimpl_282!();
+        Depcrate_public_keyimpl_283!();
+        Depcrate_public_keyimpl_284!();
+        Depcrate_public_keyimpl_285!();
+        Depcrate_public_keyimpl_286!();
+        Depcrate_public_keyimpl_287!();
+        Depcrate_public_keyimpl_288!();
+        Depcrate_public_keyimpl_289!();
+        Depcrate_public_keyimpl_290!();
+        Depcrate_public_keyimpl_291!();
+        Depcrate_public_keyimpl_292!();
+        Depcrate_public_keyimpl_293!();
+        Depcrate_public_keyimpl_294!();
+        Depcrate_public_keyimpl_295!();
+        Depcrate_public_keyimpl_296!();
+        Depcrate_public_keyimpl_297!();
+        Depcrate_public_keyimpl_298!();
+        Depcrate_public_keytests!();
+    };
+}

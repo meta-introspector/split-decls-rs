@@ -1,0 +1,44 @@
+// Generated module macro for crate::bindings
+macro_rules! Modcrate_bindings {
+() => {
+        Depcrate_bindingsmacro_4!();
+        Depcrate_bindingsmacro_5!();
+        Depcrate_bindingsmacro_6!();
+        Depcrate_bindingsmacro_7!();
+        Depcrate_bindingsmacro_8!();
+        Depcrate_bindingsmacro_9!();
+        Depcrate_bindingsmacro_10!();
+        Depcrate_bindingsmacro_11!();
+        Depcrate_bindingsmacro_12!();
+        Depcrate_bindingsmacro_13!();
+        Depcrate_bindingsBOOL!();
+        Depcrate_bindingsBSTR!();
+        Depcrate_bindingsERROR_INVALID_DATA!();
+        Depcrate_bindingsERROR_NO_UNICODE_TRANSLATION!();
+        Depcrate_bindingsE_UNEXPECTED!();
+        Depcrate_bindingsFORMAT_MESSAGE_ALLOCATE_BUFFER!();
+        Depcrate_bindingsFORMAT_MESSAGE_FROM_HMODULE!();
+        Depcrate_bindingsFORMAT_MESSAGE_FROM_SYSTEM!();
+        Depcrate_bindingsFORMAT_MESSAGE_IGNORE_INSERTS!();
+        Depcrate_bindingsFORMAT_MESSAGE_OPTIONS!();
+        Depcrate_bindingsGUID!();
+        Depcrate_bindingsimpl_25!();
+        Depcrate_bindingsHANDLE!();
+        Depcrate_bindingsHEAP_FLAGS!();
+        Depcrate_bindingsHINSTANCE!();
+        Depcrate_bindingsHMODULE!();
+        Depcrate_bindingsHRESULT!();
+        Depcrate_bindingsIID_IErrorInfo!();
+        Depcrate_bindingsIErrorInfo_Vtbl!();
+        Depcrate_bindingsIID_IRestrictedErrorInfo!();
+        Depcrate_bindingsIRestrictedErrorInfo_Vtbl!();
+        Depcrate_bindingsIID_IUnknown!();
+        Depcrate_bindingsIUnknown_Vtbl!();
+        Depcrate_bindingsLOAD_LIBRARY_FLAGS!();
+        Depcrate_bindingsLOAD_LIBRARY_SEARCH_DEFAULT_DIRS!();
+        Depcrate_bindingsPCSTR!();
+        Depcrate_bindingsPCWSTR!();
+        Depcrate_bindingsPWSTR!();
+        Depcrate_bindingsWIN32_ERROR!();
+    };
+}

@@ -1,0 +1,9 @@
+// Generated macro for DebugLoc (struct)
+macro_rules! Depcrate_debuginfoDebugLoc {
+() => {
+// Module: crate::debuginfo
+// Provides: {"DebugLoc"}
+// Dependencies: {}
+# [doc = " A source code location used to generate debug information."] struct DebugLoc { # [doc = " Information about the original source file."] file : Arc < SourceFile > , # [doc = " The (1-based) line number."] line : u32 , # [doc = " The (1-based) column number."] col : u32 , }
+};
+}

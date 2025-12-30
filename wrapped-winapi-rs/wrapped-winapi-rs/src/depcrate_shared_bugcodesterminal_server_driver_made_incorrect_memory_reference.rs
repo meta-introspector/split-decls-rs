@@ -1,0 +1,9 @@
+// Generated macro for TERMINAL_SERVER_DRIVER_MADE_INCORRECT_MEMORY_REFERENCE (const)
+macro_rules! Depcrate_shared_bugcodesTERMINAL_SERVER_DRIVER_MADE_INCORRECT_MEMORY_REFERENCE {
+() => {
+// Module: crate::shared::bugcodes
+// Provides: {"TERMINAL_SERVER_DRIVER_MADE_INCORRECT_MEMORY_REFERENCE"}
+// Dependencies: {}
+pub const TERMINAL_SERVER_DRIVER_MADE_INCORRECT_MEMORY_REFERENCE : ULONG = 0x000000CF ;
+};
+}

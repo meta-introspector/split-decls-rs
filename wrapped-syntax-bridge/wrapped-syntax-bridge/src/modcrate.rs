@@ -1,0 +1,49 @@
+// Generated module macro for crate
+macro_rules! Modcrate {
+() => {
+        Depcrateuse_1!();
+        Depcrateuse_2!();
+        Depcrateuse_3!();
+        Depcrateuse_4!();
+        Depcrateuse_5!();
+        Depcrateuse_6!();
+        Depcrateuse_7!();
+        Depcrateprettify_macro_expansion!();
+        Depcrateto_parser_input!();
+        Depcrateuse_20!();
+        Depcrateuse_21!();
+        Depcratetests!();
+        DepcrateSpanMapper!();
+        Depcrateimpl_32!();
+        Depcrateimpl_33!();
+        Depcratedummy_test_span_utils!();
+        DepcrateDocCommentDesugarMode!();
+        Depcratesyntax_node_to_token_tree!();
+        Depcratesyntax_node_to_token_tree_modified!();
+        Depcratetoken_tree_to_syntax_node!();
+        Depcrateparse_to_token_tree!();
+        Depcrateparse_to_token_tree_static_span!();
+        Depcrateconvert_tokens!();
+        Depcrateis_single_token_op!();
+        Depcratedesugar_doc_comment_text!();
+        Depcrateconvert_doc_comment!();
+        DepcrateRawConverter!();
+        DepcrateStaticRawConverter!();
+        DepcrateSrcToken!();
+        DepcrateTokenConverter!();
+        Depcrateimpl_49!();
+        Depcrateimpl_50!();
+        Depcrateimpl_51!();
+        Depcrateimpl_52!();
+        DepcrateConverter!();
+        Depcrateimpl_54!();
+        DepcrateSynToken!();
+        Depcrateimpl_56!();
+        Depcrateimpl_57!();
+        Depcrateimpl_58!();
+        DepcrateTtTreeSink!();
+        Depcrateimpl_60!();
+        Depcratedelim_to_str!();
+        Depcrateimpl_62!();
+    };
+}

@@ -1,0 +1,9 @@
+// Generated macro for scalar_from_impls (macro)
+macro_rules! Depcrate_macrosscalar_from_impls {
+() => {
+// Module: crate::macros
+// Provides: {"scalar_from_impls"}
+// Dependencies: {}
+# [doc = " Writes a series of `From` impls for scalar field types."] # [macro_export] macro_rules ! scalar_from_impls { ($ curve : path , $ scalar : ty) => { impl From <$ crate :: NonZeroScalar <$ curve >> for $ scalar { fn from (scalar : $ crate :: NonZeroScalar <$ curve >) -> Self { * scalar . as_ref () } } impl From <&$ crate :: NonZeroScalar <$ curve >> for $ scalar { fn from (scalar : &$ crate :: NonZeroScalar <$ curve >) -> Self { * scalar . as_ref () } } impl From <$ crate :: ScalarValue <$ curve >> for $ scalar { fn from (w : $ crate :: ScalarValue <$ curve >) -> Self { <$ scalar >:: from (& w) } } impl From <&$ crate :: ScalarValue <$ curve >> for $ scalar { fn from (w : &$ crate :: ScalarValue <$ curve >) -> $ scalar { <$ scalar >:: from_uint_unchecked (* w . as_uint ()) } } impl From <$ scalar > for $ crate :: ScalarValue <$ curve > { fn from (scalar : $ scalar) -> $ crate :: ScalarValue <$ curve > { $ crate :: ScalarValue :: from (& scalar) } } impl From <&$ scalar > for $ crate :: ScalarValue <$ curve > { fn from (scalar : &$ scalar) -> $ crate :: ScalarValue <$ curve > { $ crate :: ScalarValue :: new (scalar . into ()) . unwrap () } } impl From <&$ crate :: SecretKey <$ curve >> for $ scalar { fn from (secret_key : &$ crate :: SecretKey <$ curve >) -> $ scalar { * secret_key . to_nonzero_scalar () } } # [doc = " The constant-time alternative is available at"] # [doc = concat ! ("[`" , stringify ! (elliptic_curve) , "::NonZeroScalar<" , stringify ! ($ curve) , ">::new()`].")] impl TryFrom <$ scalar > for $ crate :: NonZeroScalar <$ curve > { type Error = $ crate :: Error ; fn try_from (scalar : $ scalar) -> $ crate :: Result < Self > { $ crate :: NonZeroScalar :: new (scalar) . into_option () . ok_or ($ crate :: Error) } } } ; }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for USB_DEVICE_CAPABILITY_SUPERSPEED_SPEEDS_SUPPORTED_FULL (const)
+macro_rules! Depcrate_shared_usbspecUSB_DEVICE_CAPABILITY_SUPERSPEED_SPEEDS_SUPPORTED_FULL {
+() => {
+// Module: crate::shared::usbspec
+// Provides: {"USB_DEVICE_CAPABILITY_SUPERSPEED_SPEEDS_SUPPORTED_FULL"}
+// Dependencies: {}
+pub const USB_DEVICE_CAPABILITY_SUPERSPEED_SPEEDS_SUPPORTED_FULL : USHORT = 0x0002 ;
+};
+}

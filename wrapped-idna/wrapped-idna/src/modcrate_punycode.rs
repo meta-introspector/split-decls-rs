@@ -1,0 +1,39 @@
+// Generated module macro for crate::punycode
+macro_rules! Modcrate_punycode {
+() => {
+        Depcrate_punycodeuse_21!();
+        Depcrate_punycodeuse_22!();
+        Depcrate_punycodeuse_23!();
+        Depcrate_punycodeuse_24!();
+        Depcrate_punycodeBASE!();
+        Depcrate_punycodeT_MIN!();
+        Depcrate_punycodeT_MAX!();
+        Depcrate_punycodeSKEW!();
+        Depcrate_punycodeDAMP!();
+        Depcrate_punycodeINITIAL_BIAS!();
+        Depcrate_punycodeINITIAL_N!();
+        Depcrate_punycodeadapt!();
+        Depcrate_punycodedecode_to_string!();
+        Depcrate_punycodedecode!();
+        Depcrate_punycodePunycodeCaller!();
+        Depcrate_punycodeInternalCaller!();
+        Depcrate_punycodeimpl_37!();
+        Depcrate_punycodeExternalCaller!();
+        Depcrate_punycodeimpl_39!();
+        Depcrate_punycodePunycodeCodeUnit!();
+        Depcrate_punycodeimpl_41!();
+        Depcrate_punycodeimpl_42!();
+        Depcrate_punycodeDecoder!();
+        Depcrate_punycodeimpl_44!();
+        Depcrate_punycodeDecode!();
+        Depcrate_punycodeimpl_46!();
+        Depcrate_punycodeimpl_47!();
+        Depcrate_punycodeencode_str!();
+        Depcrate_punycodeencode!();
+        Depcrate_punycodePunycodeEncodeError!();
+        Depcrate_punycodeimpl_51!();
+        Depcrate_punycodeencode_into!();
+        Depcrate_punycodevalue_to_digit!();
+        Depcrate_punycodehuge_encode!();
+    };
+}

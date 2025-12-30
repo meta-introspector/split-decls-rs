@@ -1,0 +1,9 @@
+// Generated macro for STATUS_GRAPHICS_MONITOR_NO_LONGER_EXISTS (const)
+macro_rules! Depcrate_shared_ntstatusSTATUS_GRAPHICS_MONITOR_NO_LONGER_EXISTS {
+() => {
+// Module: crate::shared::ntstatus
+// Provides: {"STATUS_GRAPHICS_MONITOR_NO_LONGER_EXISTS"}
+// Dependencies: {}
+pub const STATUS_GRAPHICS_MONITOR_NO_LONGER_EXISTS : NTSTATUS = 0xC01E058D ;
+};
+}

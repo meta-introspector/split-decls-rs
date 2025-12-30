@@ -1,0 +1,9 @@
+// Generated macro for Round (struct)
+macro_rules! Depcrate_fetch_negotiateRound {
+() => {
+// Module: crate::fetch::negotiate
+// Provides: {"Round"}
+// Dependencies: {}
+# [doc = " Key information about each round in the pack-negotiation, as produced by [`one_round()`]."] # [derive (Debug , Clone , Copy)] pub struct Round { # [doc = " The amount of `HAVE` lines sent this round."] # [doc = ""] # [doc = " Each `HAVE` is an object that we tell the server about which would acknowledge each one it has as well."] pub haves_sent : usize , # [doc = " A total counter, over all previous rounds, indicating how many `HAVE`s we sent without seeing a single acknowledgement,"] # [doc = " i.e. the indication of a common object."] # [doc = ""] # [doc = " This number maybe zero or be lower compared to the previous round if we have received at least one acknowledgement."] pub in_vain : usize , # [doc = " The amount of haves we should send in this round."] # [doc = ""] # [doc = " If the value is lower than `haves_sent` (the `HAVE` lines actually sent), the negotiation algorithm has run out of options"] # [doc = " which typically indicates the end of the negotiation phase."] pub haves_to_send : usize , # [doc = " If `true`, the server reported, as response to our previous `HAVE`s, that at least one of them is in common by acknowledging it."] # [doc = ""] # [doc = " This may also lead to the server responding with a pack."] pub previous_response_had_at_least_one_in_common : bool , }
+};
+}

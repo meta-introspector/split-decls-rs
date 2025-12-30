@@ -1,0 +1,9 @@
+// Generated macro for use_10 (use)
+macro_rules! Depcrate_builduse_10 {
+() => {
+// Module: crate::build
+// Provides: {"use_10"}
+// Dependencies: {}
+# [cfg (feature = "test_unstable")] use crate :: test :: CargoTest ;
+};
+}

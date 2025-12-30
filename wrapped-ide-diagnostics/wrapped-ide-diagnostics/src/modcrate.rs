@@ -1,0 +1,42 @@
+// Generated module macro for crate
+macro_rules! Modcrate {
+() => {
+        Depcratehandlers!();
+        Depcratetests!();
+        Depcrateuse_24!();
+        Depcrateuse_25!();
+        Depcrateuse_26!();
+        Depcrateuse_27!();
+        Depcrateuse_28!();
+        Depcrateuse_29!();
+        DepcrateDiagnosticCode!();
+        Depcrateimpl_31!();
+        DepcrateDiagnostic!();
+        Depcrateimpl_33!();
+        DepcrateDiagnosticsConfig!();
+        Depcrateimpl_35!();
+        DepcrateDiagnosticsContext!();
+        Depcrateimpl_37!();
+        Depcratesyntax_diagnostics!();
+        Depcratesemantic_diagnostics!();
+        Depcratefull_diagnostics!();
+        Depcratehandle_diag_from_macros!();
+        DepcrateBuiltLint!();
+        DepcrateRUSTC_LINTS!();
+        DepcrateCLIPPY_LINTS!();
+        DepcrateLINTS_TO_REPORT_IN_EXTERNAL_MACROS!();
+        Depcratebuild_lints_map!();
+        Depcratehandle_lints!();
+        Depcratedefault_lint_severity!();
+        Depcratefind_outline_mod_lint_severity!();
+        Depcratelint_severity_at!();
+        Depcratelint_attrs!();
+        Depcratecfg_attr_lint_attrs!();
+        DepcrateLintGroups!();
+        Depcrateimpl_54!();
+        Depcratelint_groups!();
+        Depcratefix!();
+        Depcrateunresolved_fix!();
+        Depcrateadjusted_display_range!();
+    };
+}

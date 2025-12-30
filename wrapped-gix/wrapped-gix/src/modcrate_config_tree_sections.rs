@@ -1,0 +1,55 @@
+// Generated module macro for crate::config::tree::sections
+macro_rules! Modcrate_config_tree_sections {
+() => {
+        Depcrate_config_tree_sectionsAuthor!();
+        Depcrate_config_tree_sectionsauthor!();
+        Depcrate_config_tree_sectionsBranch!();
+        Depcrate_config_tree_sectionsbranch!();
+        Depcrate_config_tree_sectionsCheckout!();
+        Depcrate_config_tree_sectionscheckout!();
+        Depcrate_config_tree_sectionsClone!();
+        Depcrate_config_tree_sectionsclone!();
+        Depcrate_config_tree_sectionsCommitter!();
+        Depcrate_config_tree_sectionscommitter!();
+        Depcrate_config_tree_sectionsCore!();
+        Depcrate_config_tree_sectionscore!();
+        Depcrate_config_tree_sectionsCredential!();
+        Depcrate_config_tree_sectionscredential!();
+        Depcrate_config_tree_sectionsDiff!();
+        Depcrate_config_tree_sectionsdiff!();
+        Depcrate_config_tree_sectionsExtensions!();
+        Depcrate_config_tree_sectionsextensions!();
+        Depcrate_config_tree_sectionsFetch!();
+        Depcrate_config_tree_sectionsfetch!();
+        Depcrate_config_tree_sectionsGitoxide!();
+        Depcrate_config_tree_sectionsgitoxide!();
+        Depcrate_config_tree_sectionsHttp!();
+        Depcrate_config_tree_sectionshttp!();
+        Depcrate_config_tree_sectionsIndex!();
+        Depcrate_config_tree_sectionsindex!();
+        Depcrate_config_tree_sectionsInit!();
+        Depcrate_config_tree_sectionsinit!();
+        Depcrate_config_tree_sectionsMailmap!();
+        Depcrate_config_tree_sectionsmailmap!();
+        Depcrate_config_tree_sectionsMerge!();
+        Depcrate_config_tree_sectionsmerge!();
+        Depcrate_config_tree_sectionsPack!();
+        Depcrate_config_tree_sectionspack!();
+        Depcrate_config_tree_sectionsProtocol!();
+        Depcrate_config_tree_sectionsprotocol!();
+        Depcrate_config_tree_sectionsPush!();
+        Depcrate_config_tree_sectionspush!();
+        Depcrate_config_tree_sectionsRemote!();
+        Depcrate_config_tree_sectionsremote!();
+        Depcrate_config_tree_sectionsSafe!();
+        Depcrate_config_tree_sectionssafe!();
+        Depcrate_config_tree_sectionsSsh!();
+        Depcrate_config_tree_sectionsssh!();
+        Depcrate_config_tree_sectionsStatus!();
+        Depcrate_config_tree_sectionsstatus!();
+        Depcrate_config_tree_sectionsUser!();
+        Depcrate_config_tree_sectionsuser!();
+        Depcrate_config_tree_sectionsUrl!();
+        Depcrate_config_tree_sectionsurl!();
+    };
+}

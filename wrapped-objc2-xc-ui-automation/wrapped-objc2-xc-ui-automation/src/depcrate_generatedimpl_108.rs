@@ -1,0 +1,9 @@
+// Generated macro for impl_108 (impl)
+macro_rules! Depcrate_generatedimpl_108 {
+() => {
+// Module: crate::generated
+// Provides: {"impl_108"}
+// Dependencies: {}
+impl XCUIProtectedResource { # [doc (alias = "XCUIProtectedResourceContacts")] pub const Contacts : Self = Self (1) ; # [doc (alias = "XCUIProtectedResourceCalendar")] pub const Calendar : Self = Self (2) ; # [doc (alias = "XCUIProtectedResourceReminders")] pub const Reminders : Self = Self (3) ; # [doc (alias = "XCUIProtectedResourcePhotos")] pub const Photos : Self = Self (4) ; # [doc (alias = "XCUIProtectedResourceMicrophone")] pub const Microphone : Self = Self (5) ; # [doc (alias = "XCUIProtectedResourceCamera")] pub const Camera : Self = Self (6) ; # [doc (alias = "XCUIProtectedResourceMediaLibrary")] pub const MediaLibrary : Self = Self (7) ; # [doc (alias = "XCUIProtectedResourceHomeKit")] pub const HomeKit : Self = Self (8) ; # [doc (alias = "XCUIProtectedResourceFocus")] pub const Focus : Self = Self (9) ; # [doc (alias = "XCUIProtectedResourceSystemRootDirectory")] pub const SystemRootDirectory : Self = Self (0x40000000) ; # [doc (alias = "XCUIProtectedResourceUserDesktopDirectory")] pub const UserDesktopDirectory : Self = Self (0x40000001) ; # [doc (alias = "XCUIProtectedResourceUserDownloadsDirectory")] pub const UserDownloadsDirectory : Self = Self (0x40000002) ; # [doc (alias = "XCUIProtectedResourceUserDocumentsDirectory")] pub const UserDocumentsDirectory : Self = Self (0x40000003) ; # [doc (alias = "XCUIProtectedResourceNetworkVolumes")] pub const NetworkVolumes : Self = Self (0x40000004) ; # [doc (alias = "XCUIProtectedResourceRemovableVolumes")] pub const RemovableVolumes : Self = Self (0x40000005) ; # [doc (alias = "XCUIProtectedResourceAppleEvents")] pub const AppleEvents : Self = Self (0x40000006) ; }
+};
+}

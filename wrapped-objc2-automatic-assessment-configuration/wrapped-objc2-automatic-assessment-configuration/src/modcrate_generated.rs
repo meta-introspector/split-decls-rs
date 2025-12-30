@@ -1,0 +1,42 @@
+// Generated module macro for crate::generated
+macro_rules! Modcrate_generated {
+() => {
+        Depcrate_generatedother_4!();
+        Depcrate_generateduse_5!();
+        Depcrate_generateduse_6!();
+        Depcrate_generateduse_7!();
+        Depcrate_generateduse_8!();
+        Depcrate_generateduse_9!();
+        Depcrate_generatedmacro_10!();
+        Depcrate_generatedmacro_11!();
+        Depcrate_generatedimpl_12!();
+        Depcrate_generatedmacro_13!();
+        Depcrate_generatedimpl_14!();
+        Depcrate_generatedAEAutocorrectMode!();
+        Depcrate_generatedmacro_16!();
+        Depcrate_generatedimpl_17!();
+        Depcrate_generatedimpl_18!();
+        Depcrate_generatedmacro_19!();
+        Depcrate_generatedmacro_20!();
+        Depcrate_generatedimpl_21!();
+        Depcrate_generatedmacro_22!();
+        Depcrate_generatedimpl_23!();
+        Depcrate_generatedimpl_24!();
+        Depcrate_generatedmacro_25!();
+        Depcrate_generatedmacro_26!();
+        Depcrate_generatedimpl_27!();
+        Depcrate_generatedmacro_28!();
+        Depcrate_generatedimpl_29!();
+        Depcrate_generatedmacro_30!();
+        Depcrate_generatedmacro_31!();
+        Depcrate_generatedimpl_32!();
+        Depcrate_generatedmacro_33!();
+        Depcrate_generatedother_34!();
+        Depcrate_generatedAEAssessmentErrorCode!();
+        Depcrate_generatedimpl_36!();
+        Depcrate_generatedimpl_37!();
+        Depcrate_generatedimpl_38!();
+        Depcrate_generatedother_39!();
+        Depcrate_generatedother_40!();
+    };
+}

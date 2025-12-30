@@ -1,0 +1,9 @@
+// Generated macro for impl_10 (impl)
+macro_rules! Depcrate_lineimpl_10 {
+() => {
+// Module: crate::line
+// Provides: {"impl_10"}
+// Dependencies: {}
+impl Month { fn length (self , is_leap : bool) -> i8 { match self { Month :: January => 31 , Month :: February if is_leap => 29 , Month :: February => 28 , Month :: March => 31 , Month :: April => 30 , Month :: May => 31 , Month :: June => 30 , Month :: July => 31 , Month :: August => 31 , Month :: September => 30 , Month :: October => 31 , Month :: November => 30 , Month :: December => 31 , } } # [doc = " Get the next calendar month, with an error going from Dec->Jan"] fn next_in_year (self) -> Result < Month , & 'static str > { Ok (match self { Month :: January => Month :: February , Month :: February => Month :: March , Month :: March => Month :: April , Month :: April => Month :: May , Month :: May => Month :: June , Month :: June => Month :: July , Month :: July => Month :: August , Month :: August => Month :: September , Month :: September => Month :: October , Month :: October => Month :: November , Month :: November => Month :: December , Month :: December => Err ("Cannot wrap year from dec->jan") ? , }) } # [doc = " Get the previous calendar month, with an error going from Jan->Dec"] fn prev_in_year (self) -> Result < Month , & 'static str > { Ok (match self { Month :: January => Err ("Cannot wrap years from jan->dec") ? , Month :: February => Month :: January , Month :: March => Month :: February , Month :: April => Month :: March , Month :: May => Month :: April , Month :: June => Month :: May , Month :: July => Month :: June , Month :: August => Month :: July , Month :: September => Month :: August , Month :: October => Month :: September , Month :: November => Month :: October , Month :: December => Month :: November , }) } }
+};
+}

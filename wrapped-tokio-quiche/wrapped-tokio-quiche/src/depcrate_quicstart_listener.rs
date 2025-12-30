@@ -1,0 +1,9 @@
+// Generated macro for start_listener (function)
+macro_rules! Depcrate_quicstart_listener {
+() => {
+// Module: crate::quic
+// Provides: {"start_listener"}
+// Dependencies: {}
+pub (crate) fn start_listener < M > (socket : QuicListener , params : & ConnectionParams , cid_generator : impl ConnectionIdGenerator < 'static > , metrics : M ,) -> std :: io :: Result < QuicConnectionStream < M > > where M : Metrics , { # [cfg (unix)] assert ! (datagram_socket :: is_nonblocking (& socket) . unwrap_or_default () , "O_NONBLOCK should be set for the listening socket") ; let config = Config :: new (params , socket . capabilities) . into_io () ? ; let local_addr = socket . socket . local_addr () ? ; let socket_tx = Arc :: new (socket . socket) ; let socket_rx = Arc :: clone (& socket_tx) ; let acceptor = ConnectionAcceptor :: new (ConnectionAcceptorConfig { disable_client_ip_validation : config . disable_client_ip_validation , qlog_dir : config . qlog_dir . clone () , keylog_file : config . keylog_file . as_ref () . and_then (| f | f . try_clone () . ok ()) , # [cfg (target_os = "linux")] with_pktinfo : if local_addr . is_ipv4 () { config . has_ippktinfo } else { config . has_ipv6pktinfo } , } , Arc :: clone (& socket_tx) , socket . socket_cookie , Default :: default () , Box :: new (cid_generator) , metrics . clone () ,) ; let (socket_driver , accept_stream) = InboundPacketRouter :: new (config , socket_tx , socket_rx , local_addr , acceptor , metrics . clone () ,) ; crate :: metrics :: tokio_task :: spawn ("quic_udp_listener" , metrics , async move { match socket_driver . await { Ok (()) => log :: trace ! ("incoming packet router finished") , Err (error) => { log :: error ! ("incoming packet router failed" ; "error" => error) } , } }) ; Ok (QuicConnectionStream :: new (accept_stream)) }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for BackendTextStyle (trait)
+macro_rules! Depcrate_textBackendTextStyle {
+() => {
+// Module: crate::text
+// Provides: {"BackendTextStyle"}
+// Dependencies: {}
+# [doc = " The trait that abstracts a style of a text."] # [doc = ""] # [doc = " This is used because the the backend crate have no knowledge about how"] # [doc = " the text handling is implemented in plotters."] # [doc = ""] # [doc = " But the backend still wants to know some information about the font, for"] # [doc = " the backend doesn't handles text drawing, may want to call the `draw` method which"] # [doc = " is implemented by the plotters main crate. While for the backend that handles the"] # [doc = " text drawing, those font information provides instructions about how the text should be"] # [doc = " rendered: color, size, slant, anchor, font, etc."] # [doc = ""] # [doc = " This trait decouples the detailed implementation about the font and the backend code which"] # [doc = " wants to perform some operation on the font."] # [doc = ""] pub trait BackendTextStyle { # [doc = " The error type of this text style implementation"] type FontError : Error + Sync + Send + 'static ; fn color (& self) -> BackendColor { BackendColor { alpha : 1.0 , rgb : (0 , 0 , 0) , } } fn size (& self) -> f64 { 1.0 } fn transform (& self) -> FontTransform { FontTransform :: None } fn style (& self) -> FontStyle { FontStyle :: Normal } fn anchor (& self) -> text_anchor :: Pos { text_anchor :: Pos :: default () } fn family (& self) -> FontFamily ; # [allow (clippy :: type_complexity)] fn layout_box (& self , text : & str) -> Result < ((i32 , i32) , (i32 , i32)) , Self :: FontError > ; fn draw < E , DrawFunc : FnMut (i32 , i32 , BackendColor) -> Result < () , E > > (& self , text : & str , pos : BackendCoord , draw : DrawFunc ,) -> Result < Result < () , E > , Self :: FontError > ; }
+};
+}

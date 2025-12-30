@@ -1,0 +1,9 @@
+// Generated macro for lean4_macro_bridge (function)
+macro_rules! Depcratelean4_macro_bridge {
+() => {
+// Module: crate
+// Provides: {"lean4_macro_bridge"}
+// Dependencies: {}
+# [proc_macro] # [decl2 (fn , name = "lean4_macro_bridge" , vis = "pub" , hash = "32d96c0a")] pub fn lean4_macro_bridge (input : TokenStream) -> TokenStream { lean4_mirror :: lean4_macro_bridge_impl (input) }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for use_2442 (pub_use)
+macro_rules! Depcrate_generateduse_2442 {
+() => {
+// Module: crate::generated
+// Provides: {"use_2442"}
+// Dependencies: {}
+# [cfg (all (feature = "UIWindowSceneGeometryPreferencesVision" , feature = "objc2-core-foundation"))] pub use self :: __UIWindowSceneGeometryPreferencesVision :: UIProposedSceneSizeNoPreference ;
+};
+}

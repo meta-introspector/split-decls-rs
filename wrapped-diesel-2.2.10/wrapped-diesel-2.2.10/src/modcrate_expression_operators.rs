@@ -1,0 +1,55 @@
+// Generated module macro for crate::expression::operators
+macro_rules! Modcrate_expression_operators {
+() => {
+        Depcrate_expression_operators__diesel_operator_body!();
+        Depcrate_expression_operators__diesel_operator_to_sql!();
+        Depcrate_expression_operatorsinfix_operator!();
+        Depcrate_expression_operators__diesel_infix_operator!();
+        Depcrate_expression_operatorsdiesel_infix_operator!();
+        Depcrate_expression_operatorspostfix_operator!();
+        Depcrate_expression_operatorsdiesel_postfix_operator!();
+        Depcrate_expression_operatorsprefix_operator!();
+        Depcrate_expression_operatorsdiesel_prefix_operator!();
+        Depcrate_expression_operatorsmacro_481!();
+        Depcrate_expression_operatorsmacro_482!();
+        Depcrate_expression_operatorsmacro_483!();
+        Depcrate_expression_operatorsmacro_484!();
+        Depcrate_expression_operatorsmacro_485!();
+        Depcrate_expression_operatorsmacro_486!();
+        Depcrate_expression_operatorsmacro_487!();
+        Depcrate_expression_operatorsmacro_488!();
+        Depcrate_expression_operatorsmacro_489!();
+        Depcrate_expression_operatorsmacro_490!();
+        Depcrate_expression_operatorsmacro_491!();
+        Depcrate_expression_operatorsmacro_492!();
+        Depcrate_expression_operatorsmacro_493!();
+        Depcrate_expression_operatorsmacro_494!();
+        Depcrate_expression_operatorsmacro_495!();
+        Depcrate_expression_operatorsmacro_496!();
+        Depcrate_expression_operatorsmacro_497!();
+        Depcrate_expression_operatorsuse_498!();
+        Depcrate_expression_operatorsuse_499!();
+        Depcrate_expression_operatorsuse_500!();
+        Depcrate_expression_operatorsuse_501!();
+        Depcrate_expression_operatorsuse_502!();
+        Depcrate_expression_operatorsuse_503!();
+        Depcrate_expression_operatorsimpl_504!();
+        Depcrate_expression_operatorsimpl_505!();
+        Depcrate_expression_operatorsConcat!();
+        Depcrate_expression_operatorsimpl_507!();
+        Depcrate_expression_operatorsimpl_508!();
+        Depcrate_expression_operatorsmacro_509!();
+        Depcrate_expression_operatorsimpl_510!();
+        Depcrate_expression_operatorsimpl_511!();
+        Depcrate_expression_operatorsLike!();
+        Depcrate_expression_operatorsimpl_513!();
+        Depcrate_expression_operatorsimpl_514!();
+        Depcrate_expression_operatorsimpl_515!();
+        Depcrate_expression_operatorsimpl_516!();
+        Depcrate_expression_operatorsimpl_517!();
+        Depcrate_expression_operatorsimpl_518!();
+        Depcrate_expression_operatorsLikeIsAllowedForType!();
+        Depcrate_expression_operatorsimpl_520!();
+        Depcrate_expression_operatorsimpl_521!();
+    };
+}

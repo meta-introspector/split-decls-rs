@@ -33,6 +33,9 @@ macro_rules! Modcrate {
         Depcratezalsa!();
         Depcratezalsa_local!();
         Depcratenonce!();
+        Depcrateuse_746!();
+        Depcrateuse_747!();
+        Depcrateuse_748!();
         Depcrateuse_749!();
         Depcrateuse_750!();
         Depcrateuse_751!();
@@ -51,9 +54,6 @@ macro_rules! Modcrate {
         Depcrateuse_764!();
         Depcrateuse_765!();
         Depcrateuse_766!();
-        Depcrateuse_767!();
-        Depcrateuse_768!();
-        Depcrateuse_769!();
         Depcrateprelude!();
         Depcrateplumbing!();
     };

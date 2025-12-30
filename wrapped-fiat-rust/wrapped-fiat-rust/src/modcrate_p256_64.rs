@@ -1,0 +1,41 @@
+// Generated module macro for crate::p256_64
+macro_rules! Modcrate_p256_64 {
+() => {
+        Depcrate_p256_64IndexConst!();
+        Depcrate_p256_64impl_268!();
+        Depcrate_p256_64impl_269!();
+        Depcrate_p256_64fiat_p256_u1!();
+        Depcrate_p256_64fiat_p256_i1!();
+        Depcrate_p256_64fiat_p256_u2!();
+        Depcrate_p256_64fiat_p256_i2!();
+        Depcrate_p256_64fiat_p256_montgomery_domain_field_element!();
+        Depcrate_p256_64impl_275!();
+        Depcrate_p256_64impl_276!();
+        Depcrate_p256_64impl_277!();
+        Depcrate_p256_64impl_278!();
+        Depcrate_p256_64fiat_p256_non_montgomery_domain_field_element!();
+        Depcrate_p256_64impl_280!();
+        Depcrate_p256_64impl_281!();
+        Depcrate_p256_64impl_282!();
+        Depcrate_p256_64impl_283!();
+        Depcrate_p256_64fiat_p256_addcarryx_u64!();
+        Depcrate_p256_64fiat_p256_subborrowx_u64!();
+        Depcrate_p256_64fiat_p256_mulx_u64!();
+        Depcrate_p256_64fiat_p256_cmovznz_u64!();
+        Depcrate_p256_64fiat_p256_mul!();
+        Depcrate_p256_64fiat_p256_square!();
+        Depcrate_p256_64fiat_p256_add!();
+        Depcrate_p256_64fiat_p256_sub!();
+        Depcrate_p256_64fiat_p256_opp!();
+        Depcrate_p256_64fiat_p256_from_montgomery!();
+        Depcrate_p256_64fiat_p256_to_montgomery!();
+        Depcrate_p256_64fiat_p256_nonzero!();
+        Depcrate_p256_64fiat_p256_selectznz!();
+        Depcrate_p256_64fiat_p256_to_bytes!();
+        Depcrate_p256_64fiat_p256_from_bytes!();
+        Depcrate_p256_64fiat_p256_set_one!();
+        Depcrate_p256_64fiat_p256_msat!();
+        Depcrate_p256_64fiat_p256_divstep!();
+        Depcrate_p256_64fiat_p256_divstep_precomp!();
+    };
+}

@@ -1,0 +1,9 @@
+// Generated macro for ExceptionHeaderULE (struct)
+macro_rules! Depcrate_provider_exceptions_builderExceptionHeaderULE {
+() => {
+// Module: crate::provider::exceptions_builder
+// Provides: {"ExceptionHeaderULE"}
+// Dependencies: {}
+# [doc = " Packed exception header (format from icu4c, documented in casepropsbuilder.cpp)"] # [doc = ""] # [doc = " ```text"] # [doc = "       Bits:"] # [doc = "         0..7  Flag bits indicating which optional slots are present (if any):"] # [doc = "               0: Lowercase mapping (code point)"] # [doc = "               1: Case folding (code point)"] # [doc = "               2: Uppercase mapping (code point)"] # [doc = "               3: Titlecase mapping (code point)"] # [doc = "               4: Delta to simple case mapping (code point) (sign stored separately)"] # [doc = "               5: RESERVED"] # [doc = "               6: Closure mappings (string; see below)"] # [doc = "               7: Full mappings (strings; see below)"] # [doc = "            8  Double-width slots. If set, then each optional slot is stored as two"] # [doc = "               elements of the array (high and low halves of 32-bit values) instead of"] # [doc = "               a single element."] # [doc = "            9  Has no simple case folding, even if there is a simple lowercase mapping"] # [doc = "           10  The value in the delta slot is negative"] # [doc = "           11  Is case-sensitive (not exposed)"] # [doc = "       12..13  Dot type"] # [doc = "           14  Has conditional special casing"] # [doc = "           15  Has conditional case folding"] # [doc = " ```"] # [doc = ""] # [doc = " In this struct the RESERVED bit is still allowed to be set, and it will produce a different"] # [doc = " exception header, but it will not have any other effects."] # [derive (Copy , Clone , PartialEq , Eq , ULE)] # [repr (C , packed)] pub struct ExceptionHeaderULE { slot_presence : SlotPresence , bits : ExceptionBitsULE , }
+};
+}

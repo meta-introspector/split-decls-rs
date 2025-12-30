@@ -1,0 +1,48 @@
+// Generated module macro for crate::methods::unnecessary_to_owned
+macro_rules! Modcrate_methods_unnecessary_to_owned {
+() => {
+        Depcrate_methods_unnecessary_to_owneduse_6932!();
+        Depcrate_methods_unnecessary_to_owneduse_6933!();
+        Depcrate_methods_unnecessary_to_owneduse_6934!();
+        Depcrate_methods_unnecessary_to_owneduse_6935!();
+        Depcrate_methods_unnecessary_to_owneduse_6936!();
+        Depcrate_methods_unnecessary_to_owneduse_6937!();
+        Depcrate_methods_unnecessary_to_owneduse_6938!();
+        Depcrate_methods_unnecessary_to_owneduse_6939!();
+        Depcrate_methods_unnecessary_to_owneduse_6940!();
+        Depcrate_methods_unnecessary_to_owneduse_6941!();
+        Depcrate_methods_unnecessary_to_owneduse_6942!();
+        Depcrate_methods_unnecessary_to_owneduse_6943!();
+        Depcrate_methods_unnecessary_to_owneduse_6944!();
+        Depcrate_methods_unnecessary_to_owneduse_6945!();
+        Depcrate_methods_unnecessary_to_owneduse_6946!();
+        Depcrate_methods_unnecessary_to_owneduse_6947!();
+        Depcrate_methods_unnecessary_to_owneduse_6948!();
+        Depcrate_methods_unnecessary_to_owneduse_6949!();
+        Depcrate_methods_unnecessary_to_owneduse_6950!();
+        Depcrate_methods_unnecessary_to_owneduse_6951!();
+        Depcrate_methods_unnecessary_to_owneduse_6952!();
+        Depcrate_methods_unnecessary_to_owneduse_6953!();
+        Depcrate_methods_unnecessary_to_ownedcheck!();
+        Depcrate_methods_unnecessary_to_ownedcheck_addr_of_expr!();
+        Depcrate_methods_unnecessary_to_ownedcheck_into_iter_call_arg!();
+        Depcrate_methods_unnecessary_to_ownedcheck_string_from_utf8!();
+        Depcrate_methods_unnecessary_to_ownedcheck_split_call_arg!();
+        Depcrate_methods_unnecessary_to_ownedget_fn_name_and_arg!();
+        Depcrate_methods_unnecessary_to_ownedcheck_other_call_arg!();
+        Depcrate_methods_unnecessary_to_ownedskip_addr_of_ancestors!();
+        Depcrate_methods_unnecessary_to_ownedget_callee_generic_args_and_args!();
+        Depcrate_methods_unnecessary_to_ownedget_input_traits_and_projections!();
+        Depcrate_methods_unnecessary_to_ownedcan_change_type!();
+        Depcrate_methods_unnecessary_to_ownedhas_lifetime!();
+        Depcrate_methods_unnecessary_to_ownedis_cloned_or_copied!();
+        Depcrate_methods_unnecessary_to_ownedis_to_owned_like!();
+        Depcrate_methods_unnecessary_to_ownedis_cow_into_owned!();
+        Depcrate_methods_unnecessary_to_ownedis_to_string_on_string_like!();
+        Depcrate_methods_unnecessary_to_ownedstd_map_key!();
+        Depcrate_methods_unnecessary_to_ownedis_str_and_string!();
+        Depcrate_methods_unnecessary_to_ownedis_slice_and_vec!();
+        Depcrate_methods_unnecessary_to_ownedcheck_if_applicable_to_argument!();
+        Depcrate_methods_unnecessary_to_ownedcheck_borrow_predicate!();
+    };
+}

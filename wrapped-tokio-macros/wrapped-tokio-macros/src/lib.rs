@@ -1,0 +1,59 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcrate_entryimpl_11.rs");
+include!("depcrate_entryunhandledpanic.rs");
+include!("depcrateuse_39.rs");
+include!("depcrate_entryimpl_15.rs");
+include!("depcrate_selectuse_32.rs");
+include!("depcrate_entryparse_int.rs");
+include!("depcrate_entryimpl_28.rs");
+include!("depcrate_entryimpl_30.rs");
+include!("depcrate_entrydefault_error_config.rs");
+include!("depcrate_entrybuild_config.rs");
+include!("depcrate_selectuse_35.rs");
+include!("depcrate_entryimpl_9.rs");
+include!("depcrate_selectclean_pattern_macro.rs");
+include!("depcrate_entryparse_knobs.rs");
+include!("depcrateentry.rs");
+include!("depcrate_selectdeclare_output_enum.rs");
+include!("depcrate_entryuse_3.rs");
+include!("depcrate_entryattributeargs.rs");
+include!("depcratetest.rs");
+include!("depcrate_entryruntimeflavor.rs");
+include!("depcratetest_rt.rs");
+include!("depcrateselect_priv_clean_pattern.rs");
+include!("depcrate_entrybody.rs");
+include!("depcrate_entrytest.rs");
+include!("depcrate_entryis_test_attribute.rs");
+include!("depcratemain.rs");
+include!("depcrate_entryfinalconfig.rs");
+include!("depcrate_entryuse_5.rs");
+include!("depcrate_entryitemfn.rs");
+include!("depcrateother_1.rs");
+include!("depcrate_entryuse_6.rs");
+include!("depcratemain_fail.rs");
+include!("depcrate_entryparse_path.rs");
+include!("depcrate_selectuse_33.rs");
+include!("depcrateselect.rs");
+include!("depcrate_entryconfiguration.rs");
+include!("depcrate_entrymain.rs");
+include!("depcrate_selectuse_34.rs");
+include!("depcrate_entryparse_string.rs");
+include!("depcrate_entryparse_bool.rs");
+include!("depcrate_entrytoken_stream_with_error.rs");
+include!("depcrate_entryimpl_27.rs");
+include!("depcratemain_rt.rs");
+include!("depcrate_selectclean_pattern.rs");
+include!("depcrate_entryuse_4.rs");
+include!("depcratetest_fail.rs");
+include!("depcrateselect_priv_declare_output_enum.rs");
+include!("modcrate.rs");
+include!("modcrate_entry.rs");
+include!("modcrate_select.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate!();
+    Modcrate_entry!();
+    Modcrate_select!();
+}

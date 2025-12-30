@@ -1,0 +1,10 @@
+// Generated macro for fuzz (function)
+macro_rules! Depcratefuzz {
+() => {
+// Module: crate
+// Provides: {"fuzz"}
+// Dependencies: {}
+# [doc = " Start fuzzing on given number of threads in parallel."] fn fuzz (num_cpus : usize) { let literals = & literals :: get () ; let num_batches_finished = AtomicU64 :: new (0) ; let num_batches_finished = & num_batches_finished ; let mut rng = Xoshiro256Plus :: from_rng (& mut rand :: thread_rng ()) . unwrap () ; let start_time = Instant :: now () ; let mut pattern_times = Vec :: with_capacity (num_cpus) ; for _ in 0 .. num_cpus { pattern_times . push (Mutex :: new ((Pattern :: default () , Instant :: now ()))) ; } thread :: scope (| s | { let mut threads : Vec < _ > = (0 .. num_cpus) . map (| i | { rng . jump () ; let rng = rng . clone () ; let pattern_time = & pattern_times [i] ; s . spawn (move | _ | { worker_thread_fn (literals , & num_batches_finished , rng , pattern_time) }) }) . collect () ; threads . push (s . spawn (| _ | { let mut prev_batches = 0 ; loop { std :: thread :: sleep (Duration :: from_millis (MAX_MILLIS as u64 * 10)) ; for pattern_time in & pattern_times { let (pattern , time) = & * pattern_time . lock () . unwrap () ; if time . elapsed () . as_millis () > MAX_MILLIS * 10 { println ! ("Thread timeout triggered (thread took too long) for Pattern: {}\n\
+                             Restarting process..." , serde_json :: to_string (& pattern) . unwrap () ,) ; let args : Vec < _ > = env :: args () . collect () ; let _ = Command :: new (& args [0]) . args (& args [1 ..]) . exec () ; unreachable ! () ; } } let batches_finished = num_batches_finished . load (Ordering :: Relaxed) ; let patterns_finished = batches_finished * BATCH_SIZE as u64 ; let elapsed_secs = start_time . elapsed () . as_secs () ; if batches_finished != prev_batches && elapsed_secs > 0 && patterns_finished > 0 { println ! ("Tested patterns: {}\t\tThroughput: {} patterns / s" , patterns_finished , patterns_finished / elapsed_secs ,) ; prev_batches = batches_finished ; } } })) ; for thread in threads { println ! ("Joined thread: {:?}" , thread . join ()) ; } }) . unwrap () ; }
+};
+}

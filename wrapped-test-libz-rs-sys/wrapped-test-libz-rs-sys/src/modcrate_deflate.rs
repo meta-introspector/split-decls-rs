@@ -1,0 +1,43 @@
+// Generated module macro for crate::deflate
+macro_rules! Modcrate_deflate {
+() => {
+        Depcrate_deflateuse_2!();
+        Depcrate_deflateuse_3!();
+        Depcrate_deflateuse_4!();
+        Depcrate_deflateuse_5!();
+        Depcrate_deflateuse_6!();
+        Depcrate_deflateuse_7!();
+        Depcrate_deflateVERSION!();
+        Depcrate_deflateSTREAM_SIZE!();
+        Depcrate_deflatequick!();
+        Depcrate_deflatetest_deflate_tune!();
+        Depcrate_deflatedeflate_medium_fizzle_bug!();
+        Depcrate_deflateassert_deflate_bound_correct!();
+        Depcrate_deflatedeflate_bound_correct!();
+        Depcrate_deflatedeflate_bound_correct_basic!();
+        Depcrate_deflatedeflate_bound_correct_windows!();
+        Depcrate_deflatedeflate_bound_gzip_header_help!();
+        Depcrate_deflategz_header_text_and_hcrc_check!();
+        Depcrate_deflatedeflate_bound_gzip_header!();
+        Depcrate_deflatedeflate_bound_gzip_header_basic!();
+        Depcrate_deflatetest_compress_bound_windows!();
+        Depcrate_deflatetest_compress_bound!();
+        Depcrate_deflatetest_compress_param!();
+        Depcrate_deflatetest_dict_deflate!();
+        Depcrate_deflatetest_deflate_prime!();
+        Depcrate_deflatesmall_window!();
+        Depcrate_deflatetest_deflate_pending!();
+        Depcrate_deflatetest_flush!();
+        Depcrate_deflatetest_sync!();
+        Depcrate_deflatetest_deflate_hash_head_0!();
+        Depcrate_deflatetest_deflate_copy!();
+        Depcrate_deflateversion_error!();
+        Depcrate_deflategzip_with_header!();
+        Depcrate_deflatefuzz_based_tests!();
+        Depcrate_deflateissue_169!();
+        Depcrate_deflateflood_pending_buffer!();
+        Depcrate_deflatecopy_uninitialized_window_section!();
+        Depcrate_deflatecrc32_hash_calc_uninitialized_memory!();
+        Depcrate_deflatetest_deflate_get_dict!();
+    };
+}

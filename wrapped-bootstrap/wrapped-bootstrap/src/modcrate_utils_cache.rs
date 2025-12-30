@@ -1,0 +1,46 @@
+// Generated module macro for crate::utils::cache
+macro_rules! Modcrate_utils_cache {
+() => {
+        Depcrate_utils_cacheuse_1333!();
+        Depcrate_utils_cacheuse_1334!();
+        Depcrate_utils_cacheuse_1335!();
+        Depcrate_utils_cacheuse_1336!();
+        Depcrate_utils_cacheuse_1337!();
+        Depcrate_utils_cacheuse_1338!();
+        Depcrate_utils_cacheuse_1339!();
+        Depcrate_utils_cacheuse_1340!();
+        Depcrate_utils_cacheuse_1341!();
+        Depcrate_utils_cacheuse_1342!();
+        Depcrate_utils_cacheuse_1343!();
+        Depcrate_utils_cacheuse_1344!();
+        Depcrate_utils_cacheInterned!();
+        Depcrate_utils_cacheimpl_1346!();
+        Depcrate_utils_cacheimpl_1347!();
+        Depcrate_utils_cacheimpl_1348!();
+        Depcrate_utils_cacheimpl_1349!();
+        Depcrate_utils_cacheimpl_1350!();
+        Depcrate_utils_cacheimpl_1351!();
+        Depcrate_utils_cacheimpl_1352!();
+        Depcrate_utils_cacheimpl_1353!();
+        Depcrate_utils_cacheimpl_1354!();
+        Depcrate_utils_cacheimpl_1355!();
+        Depcrate_utils_cacheimpl_1356!();
+        Depcrate_utils_cacheimpl_1357!();
+        Depcrate_utils_cacheimpl_1358!();
+        Depcrate_utils_cacheimpl_1359!();
+        Depcrate_utils_cacheimpl_1360!();
+        Depcrate_utils_cacheTyIntern!();
+        Depcrate_utils_cacheimpl_1362!();
+        Depcrate_utils_cacheimpl_1363!();
+        Depcrate_utils_cacheInterner!();
+        Depcrate_utils_cacheInternable!();
+        Depcrate_utils_cacheimpl_1366!();
+        Depcrate_utils_cacheimpl_1367!();
+        Depcrate_utils_cacheINTERNER!();
+        Depcrate_utils_cacheCache!();
+        Depcrate_utils_cacheExecutedStep!();
+        Depcrate_utils_cacheimpl_1371!();
+        Depcrate_utils_cacheimpl_1372!();
+        Depcrate_utils_cachetests!();
+    };
+}

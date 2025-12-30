@@ -1,0 +1,9 @@
+// Generated macro for other_4398 (other)
+macro_rules! Depcrate_features_gen_MediaKeySystemMediaCapabilityother_4398 {
+() => {
+// Module: crate::features::gen_MediaKeySystemMediaCapability
+// Provides: {"other_4398"}
+// Dependencies: {}
+# [wasm_bindgen] extern "C" { # [wasm_bindgen (extends = :: js_sys :: Object , js_name = MediaKeySystemMediaCapability)] # [derive (Debug , Clone , PartialEq , Eq)] # [doc = "The `MediaKeySystemMediaCapability` dictionary."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `MediaKeySystemMediaCapability`*"] pub type MediaKeySystemMediaCapability ; # [doc = "Get the `contentType` field of this object."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `MediaKeySystemMediaCapability`*"] # [wasm_bindgen (method , getter = "contentType")] pub fn get_content_type (this : & MediaKeySystemMediaCapability ,) -> Option < :: alloc :: string :: String > ; # [doc = "Change the `contentType` field of this object."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `MediaKeySystemMediaCapability`*"] # [wasm_bindgen (method , setter = "contentType")] pub fn set_content_type (this : & MediaKeySystemMediaCapability , val : & str) ; # [doc = "Get the `robustness` field of this object."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `MediaKeySystemMediaCapability`*"] # [wasm_bindgen (method , getter = "robustness")] pub fn get_robustness (this : & MediaKeySystemMediaCapability) -> Option < :: alloc :: string :: String > ; # [doc = "Change the `robustness` field of this object."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `MediaKeySystemMediaCapability`*"] # [wasm_bindgen (method , setter = "robustness")] pub fn set_robustness (this : & MediaKeySystemMediaCapability , val : & str) ; }
+};
+}

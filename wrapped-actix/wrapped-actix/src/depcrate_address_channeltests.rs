@@ -1,0 +1,9 @@
+// Generated macro for tests (module)
+macro_rules! Depcrate_address_channeltests {
+() => {
+// Module: crate::address::channel
+// Provides: {"tests"}
+// Dependencies: {}
+# [cfg (test)] mod tests { use std :: time ; use super :: * ; use crate :: { address :: queue :: PopResult , prelude :: * } ; struct Act ; impl Actor for Act { type Context = Context < Act > ; } struct Ping ; impl Message for Ping { type Result = () ; } impl Handler < Ping > for Act { type Result = () ; fn handle (& mut self , _ : Ping , _ : & mut Context < Act >) { } } # [test] fn test_cap () { System :: new () . block_on (async { let (s1 , mut recv) = channel :: < Act > (1) ; let s2 = recv . sender () ; let arb = Arbiter :: new () ; arb . spawn_fn (move | | { let _ = s1 . send (Ping) ; }) ; thread :: sleep (time :: Duration :: from_millis (100)) ; let arb2 = Arbiter :: new () ; arb2 . spawn_fn (move | | { let _ = s2 . send (Ping) ; let _ = s2 . send (Ping) ; }) ; thread :: sleep (time :: Duration :: from_millis (100)) ; let state = decode_state (recv . inner . state . load (SeqCst)) ; assert_eq ! (state . num_messages , 2) ; let p = loop { match unsafe { recv . inner . parked_queue . pop () } { PopResult :: Data (task) => break Some (task) , PopResult :: Empty => break None , PopResult :: Inconsistent => thread :: yield_now () , } } ; assert ! (p . is_some ()) ; recv . inner . parked_queue . push (p . unwrap ()) ; recv . set_capacity (10) ; thread :: sleep (time :: Duration :: from_millis (100)) ; let state = decode_state (recv . inner . state . load (SeqCst)) ; assert_eq ! (state . num_messages , 2) ; let p = loop { match unsafe { recv . inner . parked_queue . pop () } { PopResult :: Data (task) => break Some (task) , PopResult :: Empty => break None , PopResult :: Inconsistent => thread :: yield_now () , } } ; assert ! (p . is_none ()) ; System :: current () . stop () ; }) ; } }
+};
+}

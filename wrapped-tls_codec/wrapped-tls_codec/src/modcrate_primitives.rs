@@ -1,0 +1,47 @@
+// Generated module macro for crate::primitives
+macro_rules! Modcrate_primitives {
+() => {
+        Depcrate_primitivesuse_16!();
+        Depcrate_primitivesuse_17!();
+        Depcrate_primitivesuse_18!();
+        Depcrate_primitivesuse_19!();
+        Depcrate_primitivesuse_20!();
+        Depcrate_primitivesimpl_21!();
+        Depcrate_primitivesimpl_22!();
+        Depcrate_primitivesimpl_23!();
+        Depcrate_primitivesimpl_24!();
+        Depcrate_primitivesimpl_25!();
+        Depcrate_primitivesimpl_26!();
+        Depcrate_primitivesimpl_27!();
+        Depcrate_primitivesimpl_28!();
+        Depcrate_primitivesimpl_unsigned!();
+        Depcrate_primitivesmacro_30!();
+        Depcrate_primitivesmacro_31!();
+        Depcrate_primitivesmacro_32!();
+        Depcrate_primitivesmacro_33!();
+        Depcrate_primitivesmacro_34!();
+        Depcrate_primitivesimpl_35!();
+        Depcrate_primitivesimpl_36!();
+        Depcrate_primitivesimpl_37!();
+        Depcrate_primitivesimpl_38!();
+        Depcrate_primitivesimpl_39!();
+        Depcrate_primitivesimpl_40!();
+        Depcrate_primitivesimpl_41!();
+        Depcrate_primitivesimpl_42!();
+        Depcrate_primitivesimpl_43!();
+        Depcrate_primitivesimpl_44!();
+        Depcrate_primitivesimpl_45!();
+        Depcrate_primitivesimpl_46!();
+        Depcrate_primitivesimpl_47!();
+        Depcrate_primitivesimpl_48!();
+        Depcrate_primitivesimpl_49!();
+        Depcrate_primitivesimpl_50!();
+        Depcrate_primitivesimpl_51!();
+        Depcrate_primitivesimpl_52!();
+        Depcrate_primitivesimpl_53!();
+        Depcrate_primitivesimpl_54!();
+        Depcrate_primitivesimpl_55!();
+        Depcrate_primitivesimpl_56!();
+        Depcrate_primitivesimpl_57!();
+    };
+}

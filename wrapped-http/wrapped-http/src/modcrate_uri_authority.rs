@@ -1,0 +1,41 @@
+// Generated module macro for crate::uri::authority
+macro_rules! Modcrate_uri_authority {
+() => {
+        Depcrate_uri_authorityuse_376!();
+        Depcrate_uri_authorityuse_377!();
+        Depcrate_uri_authorityuse_378!();
+        Depcrate_uri_authorityuse_379!();
+        Depcrate_uri_authorityuse_380!();
+        Depcrate_uri_authorityuse_381!();
+        Depcrate_uri_authorityuse_382!();
+        Depcrate_uri_authorityAuthority!();
+        Depcrate_uri_authorityimpl_384!();
+        Depcrate_uri_authorityimpl_385!();
+        Depcrate_uri_authorityimpl_386!();
+        Depcrate_uri_authorityimpl_387!();
+        Depcrate_uri_authorityimpl_388!();
+        Depcrate_uri_authorityimpl_389!();
+        Depcrate_uri_authorityimpl_390!();
+        Depcrate_uri_authorityimpl_391!();
+        Depcrate_uri_authorityimpl_392!();
+        Depcrate_uri_authorityimpl_393!();
+        Depcrate_uri_authorityimpl_394!();
+        Depcrate_uri_authorityimpl_395!();
+        Depcrate_uri_authorityimpl_396!();
+        Depcrate_uri_authorityimpl_397!();
+        Depcrate_uri_authorityimpl_398!();
+        Depcrate_uri_authorityimpl_399!();
+        Depcrate_uri_authorityimpl_400!();
+        Depcrate_uri_authorityimpl_401!();
+        Depcrate_uri_authorityimpl_402!();
+        Depcrate_uri_authorityimpl_403!();
+        Depcrate_uri_authorityimpl_404!();
+        Depcrate_uri_authorityimpl_405!();
+        Depcrate_uri_authorityimpl_406!();
+        Depcrate_uri_authorityimpl_407!();
+        Depcrate_uri_authorityimpl_408!();
+        Depcrate_uri_authorityhost!();
+        Depcrate_uri_authoritycreate_authority!();
+        Depcrate_uri_authoritytests!();
+    };
+}

@@ -4,6 +4,6 @@ macro_rules! Depcrate_zalsa_localimpl_724 {
 // Module: crate::zalsa_local
 // Provides: {"impl_724"}
 // Dependencies: {}
-# [doc = " SAFETY: The `input_outputs` pointer is owned and not accessed or shared concurrently."] unsafe impl Send for QueryOriginData { }
+# [cfg (feature = "persistence")] impl serde :: Serialize for QueryOrigin { fn serialize < S > (& self , serializer : S) -> Result < S :: Ok , S :: Error > where S : serde :: Serializer , { self . as_ref () . serialize (serializer) } }
 };
 }

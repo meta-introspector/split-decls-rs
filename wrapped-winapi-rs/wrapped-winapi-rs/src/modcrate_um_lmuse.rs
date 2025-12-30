@@ -1,0 +1,45 @@
+// Generated module macro for crate::um::lmuse
+macro_rules! Modcrate_um_lmuse {
+() => {
+        Depcrate_um_lmuseuse_31510!();
+        Depcrate_um_lmuseuse_31511!();
+        Depcrate_um_lmuseuse_31512!();
+        Depcrate_um_lmuseother_31513!();
+        Depcrate_um_lmusemacro_31514!();
+        Depcrate_um_lmusePUSE_INFO_0!();
+        Depcrate_um_lmuseLPUSE_INFO_0!();
+        Depcrate_um_lmusemacro_31517!();
+        Depcrate_um_lmusePUSE_INFO_1!();
+        Depcrate_um_lmuseLPUSE_INFO_1!();
+        Depcrate_um_lmusemacro_31520!();
+        Depcrate_um_lmusePUSE_INFO_2!();
+        Depcrate_um_lmuseLPUSE_INFO_2!();
+        Depcrate_um_lmusemacro_31523!();
+        Depcrate_um_lmusePUSE_INFO_3!();
+        Depcrate_um_lmusemacro_31525!();
+        Depcrate_um_lmusePUSE_INFO_4!();
+        Depcrate_um_lmuseLPUSE_INFO_4!();
+        Depcrate_um_lmuseUSE_LOCAL_PARMNUM!();
+        Depcrate_um_lmuseUSE_REMOTE_PARMNUM!();
+        Depcrate_um_lmuseUSE_PASSWORD_PARMNUM!();
+        Depcrate_um_lmuseUSE_ASGTYPE_PARMNUM!();
+        Depcrate_um_lmuseUSE_USERNAME_PARMNUM!();
+        Depcrate_um_lmuseUSE_DOMAINNAME_PARMNUM!();
+        Depcrate_um_lmuseUSE_OK!();
+        Depcrate_um_lmuseUSE_PAUSED!();
+        Depcrate_um_lmuseUSE_SESSLOST!();
+        Depcrate_um_lmuseUSE_DISCONN!();
+        Depcrate_um_lmuseUSE_NETERR!();
+        Depcrate_um_lmuseUSE_CONN!();
+        Depcrate_um_lmuseUSE_RECONN!();
+        Depcrate_um_lmuseUSE_WILDCARD!();
+        Depcrate_um_lmuseUSE_DISKDEV!();
+        Depcrate_um_lmuseUSE_SPOOLDEV!();
+        Depcrate_um_lmuseUSE_CHARDEV!();
+        Depcrate_um_lmuseUSE_IPC!();
+        Depcrate_um_lmuseCREATE_NO_CONNECT!();
+        Depcrate_um_lmuseCREATE_BYPASS_CSC!();
+        Depcrate_um_lmuseCREATE_CRED_RESET!();
+        Depcrate_um_lmuseUSE_DEFAULT_CREDENTIALS!();
+    };
+}

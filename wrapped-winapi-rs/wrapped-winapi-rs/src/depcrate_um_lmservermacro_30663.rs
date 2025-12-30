@@ -1,0 +1,9 @@
+// Generated macro for macro_30663 (macro)
+macro_rules! Depcrate_um_lmservermacro_30663 {
+() => {
+// Module: crate::um::lmserver
+// Provides: {"macro_30663"}
+// Dependencies: {}
+STRUCT ! { struct SERVER_INFO_599 { sv599_sessopens : DWORD , sv599_sessvcs : DWORD , sv599_opensearch : DWORD , sv599_sizreqbuf : DWORD , sv599_initworkitems : DWORD , sv599_maxworkitems : DWORD , sv599_rawworkitems : DWORD , sv599_irpstacksize : DWORD , sv599_maxrawbuflen : DWORD , sv599_sessusers : DWORD , sv599_sessconns : DWORD , sv599_maxpagedmemoryusage : DWORD , sv599_maxnonpagedmemoryusage : DWORD , sv599_enablesoftcompat : BOOL , sv599_enableforcedlogoff : BOOL , sv599_timesource : BOOL , sv599_acceptdownlevelapis : BOOL , sv599_lmannounce : BOOL , sv599_domain : LMSTR , sv599_maxcopyreadlen : DWORD , sv599_maxcopywritelen : DWORD , sv599_minkeepsearch : DWORD , sv599_maxkeepsearch : DWORD , sv599_minkeepcomplsearch : DWORD , sv599_maxkeepcomplsearch : DWORD , sv599_threadcountadd : DWORD , sv599_numblockthreads : DWORD , sv599_scavtimeout : DWORD , sv599_minrcvqueue : DWORD , sv599_minfreeworkitems : DWORD , sv599_xactmemsize : DWORD , sv599_threadpriority : DWORD , sv599_maxmpxct : DWORD , sv599_oplockbreakwait : DWORD , sv599_oplockbreakresponsewait : DWORD , sv599_enableoplocks : BOOL , sv599_enableoplockforceclose : BOOL , sv599_enablefcbopens : BOOL , sv599_enableraw : BOOL , sv599_enablesharednetdrives : BOOL , sv599_minfreeconnections : DWORD , sv599_maxfreeconnections : DWORD , sv599_initsesstable : DWORD , sv599_initconntable : DWORD , sv599_initfiletable : DWORD , sv599_initsearchtable : DWORD , sv599_alertschedule : DWORD , sv599_errorthreshold : DWORD , sv599_networkerrorthreshold : DWORD , sv599_diskspacethreshold : DWORD , sv599_reserved : DWORD , sv599_maxlinkdelay : DWORD , sv599_minlinkthroughput : DWORD , sv599_linkinfovalidtime : DWORD , sv599_scavqosinfoupdatetime : DWORD , sv599_maxworkitemidletime : DWORD , } }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for HTTP_RESPONSE_FLAG_MULTIPLE_ENCODINGS_AVAILABLE (const)
+macro_rules! Depcrate_um_httpHTTP_RESPONSE_FLAG_MULTIPLE_ENCODINGS_AVAILABLE {
+() => {
+// Module: crate::um::http
+// Provides: {"HTTP_RESPONSE_FLAG_MULTIPLE_ENCODINGS_AVAILABLE"}
+// Dependencies: {}
+pub const HTTP_RESPONSE_FLAG_MULTIPLE_ENCODINGS_AVAILABLE : ULONG = 0x00000001 ;
+};
+}

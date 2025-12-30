@@ -4,6 +4,6 @@ macro_rules! Depcrateuse_753 {
 // Module: crate
 // Provides: {"use_753"}
 // Dependencies: {}
-pub use self :: cancelled :: Cancelled ;
+pub use self :: database_impl :: DatabaseImpl ;
 };
 }

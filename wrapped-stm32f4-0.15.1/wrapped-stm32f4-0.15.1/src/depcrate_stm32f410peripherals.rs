@@ -1,0 +1,9 @@
+// Generated macro for Peripherals (struct)
+macro_rules! Depcrate_stm32f410Peripherals {
+() => {
+// Module: crate::stm32f410
+// Provides: {"Peripherals"}
+// Dependencies: {}
+# [doc = r"All the peripherals"] # [allow (non_snake_case)] pub struct Peripherals { # [doc = "ADC_COMMON"] pub ADC_COMMON : ADC_COMMON , # [doc = "ADC1"] pub ADC1 : ADC1 , # [doc = "CRC"] pub CRC : CRC , # [doc = "DBGMCU"] pub DBGMCU : DBGMCU , # [doc = "EXTI"] pub EXTI : EXTI , # [doc = "FLASH"] pub FLASH : FLASH , # [doc = "IWDG"] pub IWDG : IWDG , # [doc = "PWR"] pub PWR : PWR , # [doc = "RCC"] pub RCC : RCC , # [doc = "RTC"] pub RTC : RTC , # [doc = "SYSCFG"] pub SYSCFG : SYSCFG , # [doc = "TIM1"] pub TIM1 : TIM1 , # [doc = "TIM8"] pub TIM8 : TIM8 , # [doc = "TIM11"] pub TIM11 : TIM11 , # [doc = "TIM5"] pub TIM5 : TIM5 , # [doc = "TIM9"] pub TIM9 : TIM9 , # [doc = "USART1"] pub USART1 : USART1 , # [doc = "USART2"] pub USART2 : USART2 , # [doc = "USART6"] pub USART6 : USART6 , # [doc = "WWDG"] pub WWDG : WWDG , # [doc = "DMA2"] pub DMA2 : DMA2 , # [doc = "DMA1"] pub DMA1 : DMA1 , # [doc = "GPIOH"] pub GPIOH : GPIOH , # [doc = "GPIOC"] pub GPIOC : GPIOC , # [doc = "GPIOB"] pub GPIOB : GPIOB , # [doc = "GPIOA"] pub GPIOA : GPIOA , # [doc = "I2C2"] pub I2C2 : I2C2 , # [doc = "I2C1"] pub I2C1 : I2C1 , # [doc = "SPI1"] pub SPI1 : SPI1 , # [doc = "SPI2"] pub SPI2 : SPI2 , # [doc = "SPI5"] pub SPI5 : SPI5 , # [doc = "TIM6"] pub TIM6 : TIM6 , # [doc = "RNG"] pub RNG : RNG , # [doc = "DAC"] pub DAC : DAC , # [doc = "LPTIM1"] pub LPTIM1 : LPTIM1 , # [doc = "FMPI2C1"] pub FMPI2C1 : FMPI2C1 , # [doc = "FPU"] pub FPU : FPU , # [doc = "STK"] pub STK : STK , # [doc = "NVIC_STIR"] pub NVIC_STIR : NVIC_STIR , # [doc = "FPU_CPACR"] pub FPU_CPACR : FPU_CPACR , # [doc = "SCB_ACTRL"] pub SCB_ACTRL : SCB_ACTRL , }
+};
+}

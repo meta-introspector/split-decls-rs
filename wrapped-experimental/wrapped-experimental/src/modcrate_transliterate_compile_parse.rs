@@ -1,0 +1,47 @@
+// Generated module macro for crate::transliterate::compile::parse
+macro_rules! Modcrate_transliterate_compile_parse {
+() => {
+        Depcrate_transliterate_compile_parseuse_887!();
+        Depcrate_transliterate_compile_parseuse_888!();
+        Depcrate_transliterate_compile_parseuse_889!();
+        Depcrate_transliterate_compile_parseuse_890!();
+        Depcrate_transliterate_compile_parseuse_891!();
+        Depcrate_transliterate_compile_parseuse_892!();
+        Depcrate_transliterate_compile_parseuse_893!();
+        Depcrate_transliterate_compile_parseuse_894!();
+        Depcrate_transliterate_compile_parseuse_895!();
+        Depcrate_transliterate_compile_parseuse_896!();
+        Depcrate_transliterate_compile_parseResult!();
+        Depcrate_transliterate_compile_parseElementKind!();
+        Depcrate_transliterate_compile_parseimpl_899!();
+        Depcrate_transliterate_compile_parseElementLocation!();
+        Depcrate_transliterate_compile_parseUnicodeSet!();
+        Depcrate_transliterate_compile_parseFilterSet!();
+        Depcrate_transliterate_compile_parseQuantifierKind!();
+        Depcrate_transliterate_compile_parseBasicId!();
+        Depcrate_transliterate_compile_parseimpl_905!();
+        Depcrate_transliterate_compile_parseimpl_906!();
+        Depcrate_transliterate_compile_parseimpl_907!();
+        Depcrate_transliterate_compile_parseSingleId!();
+        Depcrate_transliterate_compile_parseimpl_909!();
+        Depcrate_transliterate_compile_parseElement!();
+        Depcrate_transliterate_compile_parseimpl_911!();
+        Depcrate_transliterate_compile_parseSection!();
+        Depcrate_transliterate_compile_parseHalfRule!();
+        Depcrate_transliterate_compile_parseRule!();
+        Depcrate_transliterate_compile_parseParser!();
+        Depcrate_transliterate_compile_parseimpl_916!();
+        Depcrate_transliterate_compile_parseparse!();
+        Depcrate_transliterate_compile_parsetest_full!();
+        Depcrate_transliterate_compile_parsetest_conversion_rules_ok!();
+        Depcrate_transliterate_compile_parsetest_conversion_rules_err!();
+        Depcrate_transliterate_compile_parsetest_variable_rules_ok!();
+        Depcrate_transliterate_compile_parsetest_variable_rules_err!();
+        Depcrate_transliterate_compile_parsetest_global_filters_ok!();
+        Depcrate_transliterate_compile_parsetest_global_filters_err!();
+        Depcrate_transliterate_compile_parsetest_function_calls_ok!();
+        Depcrate_transliterate_compile_parsetest_function_calls_err!();
+        Depcrate_transliterate_compile_parsetest_transform_rules_ok!();
+        Depcrate_transliterate_compile_parsetest_transform_rules_err!();
+    };
+}

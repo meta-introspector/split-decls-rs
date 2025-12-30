@@ -1,0 +1,9 @@
+// Generated macro for STATUS_SVHDX_UNIT_ATTENTION_REGISTRATIONS_PREEMPTED (const)
+macro_rules! Depcrate_shared_ntstatusSTATUS_SVHDX_UNIT_ATTENTION_REGISTRATIONS_PREEMPTED {
+() => {
+// Module: crate::shared::ntstatus
+// Provides: {"STATUS_SVHDX_UNIT_ATTENTION_REGISTRATIONS_PREEMPTED"}
+// Dependencies: {}
+pub const STATUS_SVHDX_UNIT_ATTENTION_REGISTRATIONS_PREEMPTED : NTSTATUS = 0xC05CFF05 ;
+};
+}

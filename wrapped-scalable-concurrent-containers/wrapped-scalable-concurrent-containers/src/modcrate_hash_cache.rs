@@ -1,0 +1,48 @@
+// Generated module macro for crate::hash_cache
+macro_rules! Modcrate_hash_cache {
+() => {
+        Depcrate_hash_cacheuse_12!();
+        Depcrate_hash_cacheuse_13!();
+        Depcrate_hash_cacheuse_14!();
+        Depcrate_hash_cacheuse_15!();
+        Depcrate_hash_cacheuse_16!();
+        Depcrate_hash_cacheuse_17!();
+        Depcrate_hash_cacheuse_18!();
+        Depcrate_hash_cacheuse_19!();
+        Depcrate_hash_cacheuse_20!();
+        Depcrate_hash_cacheuse_21!();
+        Depcrate_hash_cacheuse_22!();
+        Depcrate_hash_cacheuse_23!();
+        Depcrate_hash_cacheuse_24!();
+        Depcrate_hash_cacheuse_25!();
+        Depcrate_hash_cacheHashCache!();
+        Depcrate_hash_cacheDEFAULT_MAXIMUM_CAPACITY!();
+        Depcrate_hash_cacheEvictedEntry!();
+        Depcrate_hash_cacheEntry!();
+        Depcrate_hash_cacheOccupiedEntry!();
+        Depcrate_hash_cacheVacantEntry!();
+        Depcrate_hash_cacheConsumableEntry!();
+        Depcrate_hash_cacheReplaceResult!();
+        Depcrate_hash_cacheimpl_34!();
+        Depcrate_hash_cacheimpl_35!();
+        Depcrate_hash_cacheimpl_36!();
+        Depcrate_hash_cacheimpl_37!();
+        Depcrate_hash_cacheimpl_38!();
+        Depcrate_hash_cacheimpl_39!();
+        Depcrate_hash_cacheimpl_40!();
+        Depcrate_hash_cacheimpl_41!();
+        Depcrate_hash_cacheimpl_42!();
+        Depcrate_hash_cacheimpl_43!();
+        Depcrate_hash_cacheimpl_44!();
+        Depcrate_hash_cacheimpl_45!();
+        Depcrate_hash_cacheimpl_46!();
+        Depcrate_hash_cacheimpl_47!();
+        Depcrate_hash_cacheimpl_48!();
+        Depcrate_hash_cacheimpl_49!();
+        Depcrate_hash_cacheimpl_50!();
+        Depcrate_hash_cacheimpl_51!();
+        Depcrate_hash_cacheimpl_52!();
+        Depcrate_hash_cacheimpl_53!();
+        Depcrate_hash_cacheimpl_54!();
+    };
+}

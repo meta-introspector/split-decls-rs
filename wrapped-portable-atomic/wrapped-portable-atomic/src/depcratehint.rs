@@ -1,0 +1,9 @@
+// Generated macro for hint (module)
+macro_rules! Depcratehint {
+() => {
+// Module: crate
+// Provides: {"hint"}
+// Dependencies: {}
+pub mod hint { # ! [doc = " Re-export of the [`core::hint`] module."] # ! [doc = ""] # ! [doc = " The only difference from the [`core::hint`] module is that [`spin_loop`]"] # ! [doc = " is available in all rust versions that this crate supports."] # ! [doc = ""] # ! [doc = " ```"] # ! [doc = " use portable_atomic::hint;"] # ! [doc = ""] # ! [doc = " hint::spin_loop();"] # ! [doc = " ```"] # [doc (no_inline)] pub use core :: hint :: * ; # [doc = " Emits a machine instruction to signal the processor that it is running in"] # [doc = " a busy-wait spin-loop (\"spin lock\")."] # [doc = ""] # [doc = " Upon receiving the spin-loop signal the processor can optimize its behavior by,"] # [doc = " for example, saving power or switching hyper-threads."] # [doc = ""] # [doc = " This function is different from [`thread::yield_now`] which directly"] # [doc = " yields to the system's scheduler, whereas `spin_loop` does not interact"] # [doc = " with the operating system."] # [doc = ""] # [doc = " A common use case for `spin_loop` is implementing bounded optimistic"] # [doc = " spinning in a CAS loop in synchronization primitives. To avoid problems"] # [doc = " like priority inversion, it is strongly recommended that the spin loop is"] # [doc = " terminated after a finite amount of iterations and an appropriate blocking"] # [doc = " syscall is made."] # [doc = ""] # [doc = " **Note:** On platforms that do not support receiving spin-loop hints this"] # [doc = " function does not do anything at all."] # [doc = ""] # [doc = " [`thread::yield_now`]: https://doc.rust-lang.org/std/thread/fn.yield_now.html"] # [inline] pub fn spin_loop () { # [allow (deprecated)] core :: sync :: atomic :: spin_loop_hint () ; } }
+};
+}

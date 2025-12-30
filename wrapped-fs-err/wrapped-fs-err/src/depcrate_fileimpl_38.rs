@@ -1,0 +1,9 @@
+// Generated macro for impl_38 (impl)
+macro_rules! Depcrate_fileimpl_38 {
+() => {
+// Module: crate::file
+// Provides: {"impl_38"}
+// Dependencies: {}
+# [doc = " Locking methods added in Rust 1.89."] # [cfg (rustc_1_89)] impl File { # [doc = " Acquire an exclusive lock on the file. Blocks until the lock can be acquired."] # [doc = ""] # [doc = " Wrapper for [`File::lock()`](https://doc.rust-lang.org/nightly/std/fs/struct.File.html#method.lock)."] pub fn lock (& self) -> Result < () , io :: Error > { self . file . lock () . map_err (| source | self . error (source , ErrorKind :: Lock)) } # [doc = " Acquire a shared (non-exclusive) lock on the file. Blocks until the lock can be acquired."] # [doc = ""] # [doc = " Wrapper for [`File::lock_shared()`](https://doc.rust-lang.org/nightly/std/fs/struct.File.html#method.lock_shared)."] pub fn lock_shared (& self) -> Result < () , io :: Error > { self . file . lock_shared () . map_err (| source | self . error (source , ErrorKind :: Lock)) } # [doc = " Try to acquire an exclusive lock on the file."] # [doc = ""] # [doc = " Wrapper for [`File::try_lock()`](https://doc.rust-lang.org/nightly/std/fs/struct.File.html#method.try_lock)."] pub fn try_lock (& self) -> Result < () , fs :: TryLockError > { self . file . try_lock () } # [doc = " Try to acquire a shared (non-exclusive) lock on the file."] # [doc = ""] # [doc = " Wrapper for [`File::try_lock_shared()`](https://doc.rust-lang.org/nightly/std/fs/struct.File.html#method.try_lock_shared)."] pub fn try_lock_shared (& self) -> Result < () , fs :: TryLockError > { self . file . try_lock_shared () } # [doc = " Release all locks on the file."] # [doc = ""] # [doc = " Wrapper for [`File::unlock()`](https://doc.rust-lang.org/nightly/std/fs/struct.File.html#method.unlock)."] pub fn unlock (& self) -> Result < () , io :: Error > { self . file . unlock () . map_err (| source | self . error (source , ErrorKind :: Unlock)) } }
+};
+}

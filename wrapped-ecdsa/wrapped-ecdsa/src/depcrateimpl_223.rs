@@ -1,0 +1,9 @@
+// Generated macro for impl_223 (impl)
+macro_rules! Depcrateimpl_223 {
+() => {
+// Module: crate
+// Provides: {"impl_223"}
+// Dependencies: {}
+# [doc = " NOTE: this implementation assumes the default digest for the given elliptic"] # [doc = " curve as defined by [`hazmat::DigestAlgorithm`]."] # [doc = ""] # [doc = " When working with alternative digests, you will need to use e.g."] # [doc = " [`SignatureWithOid::new_with_digest`]."] # [cfg (all (feature = "digest" , feature = "hazmat"))] impl < C > TryFrom < & [u8] > for SignatureWithOid < C > where C : hazmat :: DigestAlgorithm , C :: Digest : AssociatedOid , SignatureSize < C > : ArraySize , { type Error = Error ; fn try_from (slice : & [u8]) -> Result < Self > { Self :: new (Signature :: < C > :: from_slice (slice) ? , C :: Digest :: OID) } }
+};
+}

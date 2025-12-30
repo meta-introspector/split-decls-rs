@@ -1,0 +1,43 @@
+// Generated module macro for crate::parser::token
+macro_rules! Modcrate_parser_token {
+() => {
+        Depcrate_parser_tokenuse_714!();
+        Depcrate_parser_tokenAny!();
+        Depcrate_parser_tokenimpl_716!();
+        Depcrate_parser_tokenany!();
+        Depcrate_parser_tokenSatisfy!();
+        Depcrate_parser_tokensatisfy_impl!();
+        Depcrate_parser_tokenimpl_720!();
+        Depcrate_parser_tokensatisfy!();
+        Depcrate_parser_tokenSatisfyMap!();
+        Depcrate_parser_tokenimpl_723!();
+        Depcrate_parser_tokensatisfy_map!();
+        Depcrate_parser_tokenToken!();
+        Depcrate_parser_tokenimpl_726!();
+        Depcrate_parser_tokentoken!();
+        Depcrate_parser_tokenTokens!();
+        Depcrate_parser_tokenimpl_729!();
+        Depcrate_parser_tokentokens!();
+        Depcrate_parser_tokenTokensCmp!();
+        Depcrate_parser_tokenimpl_732!();
+        Depcrate_parser_tokentokens_cmp!();
+        Depcrate_parser_tokenPosition!();
+        Depcrate_parser_tokenimpl_735!();
+        Depcrate_parser_tokenposition!();
+        Depcrate_parser_tokenOneOf!();
+        Depcrate_parser_tokenimpl_738!();
+        Depcrate_parser_tokenone_of!();
+        Depcrate_parser_tokenNoneOf!();
+        Depcrate_parser_tokenimpl_741!();
+        Depcrate_parser_tokennone_of!();
+        Depcrate_parser_tokenValue!();
+        Depcrate_parser_tokenimpl_744!();
+        Depcrate_parser_tokenvalue!();
+        Depcrate_parser_tokenProduce!();
+        Depcrate_parser_tokenimpl_747!();
+        Depcrate_parser_tokenproduce!();
+        Depcrate_parser_tokenEof!();
+        Depcrate_parser_tokenimpl_750!();
+        Depcrate_parser_tokeneof!();
+    };
+}

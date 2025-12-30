@@ -1,0 +1,9 @@
+// Generated macro for IOCTL_STORAGE_START_DATA_INTEGRITY_CHECK (const)
+macro_rules! Depcrate_um_winioctlIOCTL_STORAGE_START_DATA_INTEGRITY_CHECK {
+() => {
+// Module: crate::um::winioctl
+// Provides: {"IOCTL_STORAGE_START_DATA_INTEGRITY_CHECK"}
+// Dependencies: {}
+pub const IOCTL_STORAGE_START_DATA_INTEGRITY_CHECK : DWORD = CTL_CODE ! (IOCTL_STORAGE_BASE , 0x0621 , METHOD_BUFFERED , FILE_READ_ACCESS | FILE_WRITE_ACCESS) ;
+};
+}

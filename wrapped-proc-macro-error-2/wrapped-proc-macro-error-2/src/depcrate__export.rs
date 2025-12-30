@@ -1,0 +1,9 @@
+// Generated macro for __export (module)
+macro_rules! Depcrate__export {
+() => {
+// Module: crate
+// Provides: {"__export"}
+// Dependencies: {}
+# [doc = " **ALL THE STUFF INSIDE IS NOT PUBLIC API!!!**"] # [doc (hidden)] pub mod __export { pub use proc_macro ; pub use proc_macro2 ; use proc_macro2 :: Span ; use quote :: ToTokens ; use crate :: SpanRange ; pub trait SpanAsSpanRange { # [allow (non_snake_case)] fn FIRST_ARG_MUST_EITHER_BE_Span_OR_IMPLEMENT_ToTokens_OR_BE_SpanRange (& self) -> SpanRange ; } pub trait Span2AsSpanRange { # [allow (non_snake_case)] fn FIRST_ARG_MUST_EITHER_BE_Span_OR_IMPLEMENT_ToTokens_OR_BE_SpanRange (& self) -> SpanRange ; } pub trait ToTokensAsSpanRange { # [allow (non_snake_case)] fn FIRST_ARG_MUST_EITHER_BE_Span_OR_IMPLEMENT_ToTokens_OR_BE_SpanRange (& self) -> SpanRange ; } pub trait SpanRangeAsSpanRange { # [allow (non_snake_case)] fn FIRST_ARG_MUST_EITHER_BE_Span_OR_IMPLEMENT_ToTokens_OR_BE_SpanRange (& self) -> SpanRange ; } impl < T : ToTokens > ToTokensAsSpanRange for & T { fn FIRST_ARG_MUST_EITHER_BE_Span_OR_IMPLEMENT_ToTokens_OR_BE_SpanRange (& self) -> SpanRange { let mut ts = self . to_token_stream () . into_iter () ; let first = match ts . next () { Some (t) => t . span () , None => Span :: call_site () , } ; let last = match ts . last () { Some (t) => t . span () , None => first , } ; SpanRange { first , last } } } impl Span2AsSpanRange for Span { fn FIRST_ARG_MUST_EITHER_BE_Span_OR_IMPLEMENT_ToTokens_OR_BE_SpanRange (& self) -> SpanRange { SpanRange { first : * self , last : * self , } } } impl SpanAsSpanRange for proc_macro :: Span { fn FIRST_ARG_MUST_EITHER_BE_Span_OR_IMPLEMENT_ToTokens_OR_BE_SpanRange (& self) -> SpanRange { SpanRange { first : (* self) . into () , last : (* self) . into () , } } } impl SpanRangeAsSpanRange for SpanRange { fn FIRST_ARG_MUST_EITHER_BE_Span_OR_IMPLEMENT_ToTokens_OR_BE_SpanRange (& self) -> SpanRange { * self } } }
+};
+}

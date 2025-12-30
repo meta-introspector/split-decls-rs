@@ -1,0 +1,9 @@
+// Generated macro for PRODUCT_AZURE_SERVER_CORE (const)
+macro_rules! Depcrate_um_winntPRODUCT_AZURE_SERVER_CORE {
+() => {
+// Module: crate::um::winnt
+// Provides: {"PRODUCT_AZURE_SERVER_CORE"}
+// Dependencies: {}
+pub const PRODUCT_AZURE_SERVER_CORE : DWORD = 0x000000A8 ;
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for impl_1752 (impl)
+macro_rules! Depcrate_isa_aarch64_inst_argsimpl_1752 {
+() => {
+// Module: crate::isa::aarch64::inst::args
+// Provides: {"impl_1752"}
+// Dependencies: {}
+impl ScalarSize { # [doc = " Convert to an integer operand size."] pub fn operand_size (& self) -> OperandSize { match self { ScalarSize :: Size8 | ScalarSize :: Size16 | ScalarSize :: Size32 => OperandSize :: Size32 , ScalarSize :: Size64 => OperandSize :: Size64 , _ => panic ! ("Unexpected operand_size request for: {self:?}") , } } # [doc = " Return the encoding bits that are used by some scalar FP instructions"] # [doc = " for a particular operand size."] pub fn ftype (& self) -> u32 { match self { ScalarSize :: Size16 => 0b11 , ScalarSize :: Size32 => 0b00 , ScalarSize :: Size64 => 0b01 , _ => panic ! ("Unexpected scalar FP operand size: {self:?}") , } } # [doc = " Return the widened version of the scalar size."] pub fn widen (& self) -> ScalarSize { match self { ScalarSize :: Size8 => ScalarSize :: Size16 , ScalarSize :: Size16 => ScalarSize :: Size32 , ScalarSize :: Size32 => ScalarSize :: Size64 , ScalarSize :: Size64 => ScalarSize :: Size128 , ScalarSize :: Size128 => panic ! ("can't widen 128-bits") , } } # [doc = " Return the narrowed version of the scalar size."] pub fn narrow (& self) -> ScalarSize { match self { ScalarSize :: Size8 => panic ! ("can't narrow 8-bits") , ScalarSize :: Size16 => ScalarSize :: Size8 , ScalarSize :: Size32 => ScalarSize :: Size16 , ScalarSize :: Size64 => ScalarSize :: Size32 , ScalarSize :: Size128 => ScalarSize :: Size64 , } } # [doc = " Return a type with the same size as this scalar."] pub fn ty (& self) -> Type { match self { ScalarSize :: Size8 => I8 , ScalarSize :: Size16 => I16 , ScalarSize :: Size32 => I32 , ScalarSize :: Size64 => I64 , ScalarSize :: Size128 => I128 , } } }
+};
+}

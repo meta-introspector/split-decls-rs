@@ -1,0 +1,9 @@
+// Generated macro for ReaderState (struct)
+macro_rules! Depcrate_reader_stateReaderState {
+() => {
+// Module: crate::reader::state
+// Provides: {"ReaderState"}
+// Dependencies: {}
+# [doc = " A struct that holds a current reader state and a parser configuration."] # [doc = " It is independent on a way of reading data: the reader feed data into it and"] # [doc = " get back produced [`Event`]s."] # [derive (Clone , Debug)] pub (super) struct ReaderState { # [doc = " Number of bytes read from the source of data since the reader was created"] pub offset : u64 , # [doc = " A snapshot of an `offset` of the last error returned. It can be less than"] # [doc = " `offset`, because some errors conveniently report at earlier position,"] # [doc = " and changing `offset` is not possible, because `Error::IllFormed` errors"] # [doc = " are recoverable."] pub last_error_offset : u64 , # [doc = " Defines how to process next byte"] pub state : ParseState , # [doc = " User-defined settings that affect parsing"] pub config : Config , # [doc = " All currently Started elements which didn't have a matching"] # [doc = " End element yet."] # [doc = ""] # [doc = " For an XML"] # [doc = ""] # [doc = " ```xml"] # [doc = " <root><one/><inner attr=\"value\">|<tag></inner></root>"] # [doc = " ```"] # [doc = " when cursor at the `|` position buffer contains:"] # [doc = ""] # [doc = " ```text"] # [doc = " rootinner"] # [doc = " ^   ^"] # [doc = " ```"] # [doc = ""] # [doc = " The `^` symbols shows which positions stored in the [`Self::opened_starts`]"] # [doc = " (0 and 4 in that case)."] opened_buffer : Vec < u8 > , # [doc = " Opened name start indexes into [`Self::opened_buffer`]. See documentation"] # [doc = " for that field for details"] opened_starts : Vec < usize > , # [cfg (feature = "encoding")] # [doc = " Reference to the encoding used to read an XML"] pub encoding : EncodingRef , }
+};
+}

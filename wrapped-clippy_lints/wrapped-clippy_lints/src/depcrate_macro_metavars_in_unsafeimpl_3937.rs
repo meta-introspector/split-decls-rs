@@ -1,0 +1,9 @@
+// Generated macro for impl_3937 (impl)
+macro_rules! Depcrate_macro_metavars_in_unsafeimpl_3937 {
+() => {
+// Module: crate::macro_metavars_in_unsafe
+// Provides: {"impl_3937"}
+// Dependencies: {}
+impl < 'tcx > LateLintPass < 'tcx > for ExprMetavarsInUnsafe { fn check_body (& mut self , cx : & LateContext < 'tcx > , body : & rustc_hir :: Body < 'tcx >) { if is_lint_allowed (cx , MACRO_METAVARS_IN_UNSAFE , body . value . hir_id) { return ; } let mut vis = BodyVisitor { macro_unsafe_blocks : Vec :: new () , # [expect (clippy :: bool_to_int_with_if)] expn_depth : if body . value . span . from_expansion () { 1 } else { 0 } , cx , lint : self } ; vis . visit_body (body) ; } fn check_crate_post (& mut self , cx : & LateContext < 'tcx >) { let bad_unsafe_blocks = self . metavar_expns . iter () . filter_map (| (_ , state) | match state { MetavarState :: ReferencedInUnsafe { unsafe_blocks } => Some (unsafe_blocks . as_slice ()) , MetavarState :: ReferencedInSafe => None , }) . flatten () . copied () . inspect (| & unsafe_block | { if let LevelAndSource { level : Level :: Expect , lint_id : Some (id) , .. } = cx . tcx . lint_level_at_node (MACRO_METAVARS_IN_UNSAFE , unsafe_block) { cx . fulfill_expectation (id) ; } }) . map (| id | { let span = cx . tcx . hir_span (id) ; (id , Span :: new (span . lo () , span . hi () , SyntaxContext :: root () , None)) }) . dedup_by (| & (_ , a) , & (_ , b) | a == b) ; for (id , span) in bad_unsafe_blocks { span_lint_hir_and_then (cx , MACRO_METAVARS_IN_UNSAFE , id , span , "this macro expands metavariables in an unsafe block" , | diag | { diag . note ("this allows the user of the macro to write unsafe code outside of an unsafe block") ; diag . help ("consider expanding any metavariables outside of this block, e.g. by storing them in a variable" ,) ; diag . help ("... or also expand referenced metavariables in a safe context to require an unsafe block at callsite" ,) ; } ,) ; } } }
+};
+}

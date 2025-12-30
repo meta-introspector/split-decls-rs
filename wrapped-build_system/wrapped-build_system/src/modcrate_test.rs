@@ -1,0 +1,50 @@
+// Generated module macro for crate::test
+macro_rules! Modcrate_test {
+() => {
+        Depcrate_testuse_111!();
+        Depcrate_testuse_112!();
+        Depcrate_testuse_113!();
+        Depcrate_testuse_114!();
+        Depcrate_testuse_115!();
+        Depcrate_testuse_116!();
+        Depcrate_testuse_117!();
+        Depcrate_testuse_118!();
+        Depcrate_testuse_119!();
+        Depcrate_testEnv!();
+        Depcrate_testRunner!();
+        Depcrate_testRunners!();
+        Depcrate_testget_runners!();
+        Depcrate_testget_number_after_arg!();
+        Depcrate_testshow_usage!();
+        Depcrate_testTestArg!();
+        Depcrate_testimpl_127!();
+        Depcrate_testbuild_if_no_backend!();
+        Depcrate_testclean!();
+        Depcrate_testcargo_tests!();
+        Depcrate_testmini_tests!();
+        Depcrate_testbuild_sysroot!();
+        Depcrate_testmaybe_run_command_in_vm!();
+        Depcrate_teststd_tests!();
+        Depcrate_testsetup_rustc!();
+        Depcrate_testasm_tests!();
+        Depcrate_testrun_cargo_command!();
+        Depcrate_testrun_cargo_command_with_callback!();
+        Depcrate_testtest_projects!();
+        Depcrate_testtest_libcore!();
+        Depcrate_testextended_rand_tests!();
+        Depcrate_testextended_regex_example_tests!();
+        Depcrate_testextended_regex_tests!();
+        Depcrate_testextended_sysroot_tests!();
+        Depcrate_testvalid_ui_error_pattern_test!();
+        Depcrate_testcontains_ui_error_patterns!();
+        Depcrate_testtest_rustc_inner!();
+        Depcrate_testtest_rustc!();
+        Depcrate_testtest_failing_rustc!();
+        Depcrate_testtest_successful_rustc!();
+        Depcrate_testtest_failing_ui_pattern_tests!();
+        Depcrate_testretain_files_callback!();
+        Depcrate_testremove_files_callback!();
+        Depcrate_testrun_all!();
+        Depcrate_testrun!();
+    };
+}

@@ -1,0 +1,9 @@
+// Generated macro for DEFAULT_PARAMS (const)
+macro_rules! Depcrate_recovery_gcongestion_bbr2DEFAULT_PARAMS {
+() => {
+// Module: crate::recovery::gcongestion::bbr2
+// Provides: {"DEFAULT_PARAMS"}
+// Dependencies: {}
+const DEFAULT_PARAMS : Params = Params { startup_cwnd_gain : 2.0 , startup_pacing_gain : 2.773 , full_bw_threshold : 1.25 , startup_full_bw_rounds : 3 , max_startup_queue_rounds : 0 , startup_full_loss_count : 8 , drain_cwnd_gain : 2.0 , drain_pacing_gain : 1.0 / 2.885 , probe_bw_probe_max_rounds : 63 , enable_reno_coexistence : true , probe_bw_probe_reno_gain : 1.0 , probe_bw_probe_base_duration : Duration :: from_millis (2000) , probe_bw_full_loss_count : 2 , probe_bw_probe_up_pacing_gain : 1.25 , probe_bw_probe_down_pacing_gain : 0.9 , probe_bw_default_pacing_gain : 1.0 , probe_bw_cwnd_gain : 2.25 , probe_bw_up_cwnd_gain : 2.25 , probe_up_ignore_inflight_hi : false , max_probe_up_queue_rounds : 2 , probe_rtt_inflight_target_bdp_fraction : 0.5 , probe_rtt_period : Duration :: from_millis (10000) , probe_rtt_duration : Duration :: from_millis (200) , probe_rtt_pacing_gain : 1.0 , probe_rtt_cwnd_gain : 1.0 , initial_max_ack_height_filter_window : 10 , inflight_hi_headroom : 0.15 , loss_threshold : 0.015 , beta : 0.3 , add_ack_height_to_queueing_threshold : false , avoid_unnecessary_probe_rtt : true , limit_inflight_hi_by_max_delivered : true , startup_loss_exit_use_max_delivered_for_inflight_hi : true , use_bytes_delivered_for_inflight_hi : true , decrease_startup_pacing_at_end_of_round : true , enable_overestimate_avoidance : true , choose_a0_point_fix : false , bw_lo_mode : BwLoMode :: InflightReduction , ignore_app_limited_for_no_bandwidth_growth : false , initial_pacing_rate_bytes_per_second : None , scale_pacing_rate_by_mss : false , disable_probe_down_early_exit : false , } ;
+};
+}

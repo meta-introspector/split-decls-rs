@@ -1,0 +1,39 @@
+// Generated module macro for crate
+macro_rules! Modcrate {
+() => {
+        Depcrateother_1!();
+        Depcrateother_2!();
+        Depcratemacros!();
+        Depcratentapi_base!();
+        Depcratentdbg!();
+        Depcratentexapi!();
+        Depcratentgdi!();
+        Depcratentioapi!();
+        Depcratentkeapi!();
+        Depcratentldr!();
+        Depcratentlpcapi!();
+        Depcratentmisc!();
+        Depcratentmmapi!();
+        Depcratentnls!();
+        Depcratentobapi!();
+        Depcratentpebteb!();
+        Depcratentpfapi!();
+        Depcratentpnpapi!();
+        Depcratentpoapi!();
+        Depcratentpsapi!();
+        Depcratentregapi!();
+        Depcratentrtl!();
+        Depcratentsam!();
+        Depcratentseapi!();
+        Depcratentsmss!();
+        Depcratenttmapi!();
+        Depcratenttp!();
+        Depcratentwow64!();
+        Depcratentxcapi!();
+        Depcratentzwapi!();
+        Depcratestring!();
+        Depcratesubprocesstag!();
+        Depcratewinapi_local!();
+        Depcratewinsta!();
+    };
+}

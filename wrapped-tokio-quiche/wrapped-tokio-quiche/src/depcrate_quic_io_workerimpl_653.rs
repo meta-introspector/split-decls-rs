@@ -1,0 +1,9 @@
+// Generated macro for impl_653 (impl)
+macro_rules! Depcrate_quic_io_workerimpl_653 {
+() => {
+// Module: crate::quic::io::worker
+// Provides: {"impl_653"}
+// Dependencies: {}
+impl < Tx , M > IoWorker < Tx , M , Close > where Tx : DatagramSocketSend + Send , M : Metrics , { pub (crate) async fn close < A : ApplicationOverQuic > (mut self , qconn : & mut QuicheConnection , ctx : & mut ConnectionStageContext < A > ,) { if self . conn_stage . work_loop_result . is_ok () && self . bw_estimator . max_bandwidth > 0 { let metrics = & self . metrics ; metrics . max_bandwidth_mbps () . observe (self . bw_estimator . max_bandwidth as f64 * 1e-6) ; metrics . max_loss_pct () . observe (self . bw_estimator . max_loss_pct as f64 * 100.) ; } if ctx . application . should_act () { ctx . application . on_conn_close (qconn , & self . metrics , & self . conn_stage . work_loop_result ,) ; } let _ = self . gather_data_from_quiche_conn (qconn , ctx . buffer ()) ; self . flush_buffer_to_socket (ctx . buffer ()) . await ; * ctx . stats . lock () . unwrap () = QuicConnectionStats :: from_conn (qconn) ; if let Some (err) = qconn . peer_error () { if err . is_app { self . audit_log_stats . set_recvd_conn_close_application_error_code (err . error_code as _ ,) ; } else { self . audit_log_stats . set_recvd_conn_close_transport_error_code (err . error_code as _ ,) ; } } self . close_connection (qconn) ; if let Err (work_loop_error) = self . conn_stage . work_loop_result { self . audit_log_stats . set_connection_close_reason (work_loop_error) ; } } fn close_connection (& mut self , qconn : & QuicheConnection) { let scid = qconn . source_id () . into_owned () ; if let Some (cid) = self . cfg . pending_cid . take () { let _ = self . conn_map_cmd_tx . send (ConnectionMapCommand :: UnmapCid (cid)) ; } let _ = self . conn_map_cmd_tx . send (ConnectionMapCommand :: RemoveScid (scid)) ; self . metrics . connections_in_memory () . dec () ; } }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for impl_1555 (impl)
+macro_rules! Depcrate_geometry_quaternion_constructionimpl_1555 {
+() => {
+// Module: crate::geometry::quaternion_construction
+// Provides: {"impl_1555"}
+// Dependencies: {}
+impl < T : SimdRealField > Quaternion < T > { # [doc = " Constructs a pure quaternion."] # [inline] pub fn from_imag (vector : Vector3 < T >) -> Self { Self :: from_parts (T :: zero () , vector) } # [doc = " Creates a new quaternion from its scalar and vector parts. Note that the arguments order does"] # [doc = " **not** follow the storage order."] # [doc = ""] # [doc = " The storage order is [ vector, scalar ]."] # [doc = ""] # [doc = " # Example"] # [doc = " ```"] # [doc = " # use nalgebra::{Quaternion, Vector3, Vector4};"] # [doc = " let w = 1.0;"] # [doc = " let ijk = Vector3::new(2.0, 3.0, 4.0);"] # [doc = " let q = Quaternion::from_parts(w, ijk);"] # [doc = " assert!(q.i == 2.0 && q.j == 3.0 && q.k == 4.0 && q.w == 1.0);"] # [doc = " assert_eq!(*q.as_vector(), Vector4::new(2.0, 3.0, 4.0, 1.0));"] # [doc = " ```"] # [inline] pub fn from_parts < SB > (scalar : T , vector : Vector < T , U3 , SB >) -> Self where SB : Storage < T , U3 > , { Self :: new (scalar , vector [0] . clone () , vector [1] . clone () , vector [2] . clone () ,) } # [doc = " Constructs a real quaternion."] # [inline] pub fn from_real (r : T) -> Self { Self :: from_parts (r , Vector3 :: zero ()) } # [doc = " The quaternion multiplicative identity."] # [doc = ""] # [doc = " # Example"] # [doc = " ```"] # [doc = " # use nalgebra::Quaternion;"] # [doc = " let q = Quaternion::identity();"] # [doc = " let q2 = Quaternion::new(1.0, 2.0, 3.0, 4.0);"] # [doc = ""] # [doc = " assert_eq!(q * q2, q2);"] # [doc = " assert_eq!(q2 * q, q2);"] # [doc = " ```"] # [inline] pub fn identity () -> Self { Self :: from_real (T :: one ()) } }
+};
+}

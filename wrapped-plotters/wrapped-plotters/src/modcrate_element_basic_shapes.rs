@@ -1,0 +1,46 @@
+// Generated module macro for crate::element::basic_shapes
+macro_rules! Modcrate_element_basic_shapes {
+() => {
+        Depcrate_element_basic_shapesuse_514!();
+        Depcrate_element_basic_shapesuse_515!();
+        Depcrate_element_basic_shapesuse_516!();
+        Depcrate_element_basic_shapesto_i!();
+        Depcrate_element_basic_shapesto_f!();
+        Depcrate_element_basic_shapesPixel!();
+        Depcrate_element_basic_shapesimpl_520!();
+        Depcrate_element_basic_shapesimpl_521!();
+        Depcrate_element_basic_shapesimpl_522!();
+        Depcrate_element_basic_shapestest_pixel_element!();
+        Depcrate_element_basic_shapesPath!();
+        Depcrate_element_basic_shapesPathElement!();
+        Depcrate_element_basic_shapesimpl_526!();
+        Depcrate_element_basic_shapesimpl_527!();
+        Depcrate_element_basic_shapesimpl_528!();
+        Depcrate_element_basic_shapestest_path_element!();
+        Depcrate_element_basic_shapesDashedPathElement!();
+        Depcrate_element_basic_shapesimpl_531!();
+        Depcrate_element_basic_shapesimpl_532!();
+        Depcrate_element_basic_shapesimpl_533!();
+        Depcrate_element_basic_shapestest_dashed_path_element!();
+        Depcrate_element_basic_shapesDottedPathElement!();
+        Depcrate_element_basic_shapesimpl_536!();
+        Depcrate_element_basic_shapesimpl_537!();
+        Depcrate_element_basic_shapesimpl_538!();
+        Depcrate_element_basic_shapestest_dotted_path_element!();
+        Depcrate_element_basic_shapesRectangle!();
+        Depcrate_element_basic_shapesimpl_541!();
+        Depcrate_element_basic_shapesimpl_542!();
+        Depcrate_element_basic_shapesimpl_543!();
+        Depcrate_element_basic_shapestest_rect_element!();
+        Depcrate_element_basic_shapesCircle!();
+        Depcrate_element_basic_shapesimpl_546!();
+        Depcrate_element_basic_shapesimpl_547!();
+        Depcrate_element_basic_shapesimpl_548!();
+        Depcrate_element_basic_shapestest_circle_element!();
+        Depcrate_element_basic_shapesPolygon!();
+        Depcrate_element_basic_shapesimpl_551!();
+        Depcrate_element_basic_shapesimpl_552!();
+        Depcrate_element_basic_shapesimpl_553!();
+        Depcrate_element_basic_shapestest_polygon_element!();
+    };
+}

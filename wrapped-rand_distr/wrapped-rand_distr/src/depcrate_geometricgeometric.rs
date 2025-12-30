@@ -1,0 +1,9 @@
+// Generated macro for Geometric (struct)
+macro_rules! Depcrate_geometricGeometric {
+() => {
+// Module: crate::geometric
+// Provides: {"Geometric"}
+// Dependencies: {}
+# [doc = " The [geometric distribution](https://en.wikipedia.org/wiki/Geometric_distribution) `Geometric(p)`."] # [doc = ""] # [doc = " This is the probability distribution of the number of failures"] # [doc = " (bounded to `[0, u64::MAX]`) before the first success in a"] # [doc = " series of [`Bernoulli`](crate::Bernoulli) trials, where the"] # [doc = " probability of success on each trial is `p`."] # [doc = ""] # [doc = " This is the discrete analogue of the [exponential distribution](crate::Exp)."] # [doc = ""] # [doc = " See [`StandardGeometric`](crate::StandardGeometric) for an optimised"] # [doc = " implementation for `p = 0.5`."] # [doc = ""] # [doc = " # Density function"] # [doc = ""] # [doc = " `f(k) = (1 - p)^k p` for `k >= 0`."] # [doc = ""] # [doc = " # Plot"] # [doc = ""] # [doc = " The following plot illustrates the geometric distribution for various"] # [doc = " values of `p`. Note how higher `p` values shift the distribution to"] # [doc = " the left, and the mean of the distribution is `1/p`."] # [doc = ""] # [doc = " ![Geometric distribution](https://raw.githubusercontent.com/rust-random/charts/main/charts/geometric.svg)"] # [doc = ""] # [doc = " # Example"] # [doc = " ```"] # [doc = " use rand_distr::{Geometric, Distribution};"] # [doc = ""] # [doc = " let geo = Geometric::new(0.25).unwrap();"] # [doc = " let v = geo.sample(&mut rand::rng());"] # [doc = " println!(\"{} is from a Geometric(0.25) distribution\", v);"] # [doc = " ```"] # [derive (Copy , Clone , Debug , PartialEq)] # [cfg_attr (feature = "serde" , derive (serde :: Serialize , serde :: Deserialize))] pub struct Geometric { p : f64 , pi : f64 , k : u64 , }
+};
+}

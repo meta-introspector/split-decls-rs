@@ -1,0 +1,9 @@
+// Generated macro for impl_40 (impl)
+macro_rules! Depcrate_ipextimpl_40 {
+() => {
+// Module: crate::ipext
+// Provides: {"impl_40"}
+// Dependencies: {}
+impl Iterator for Ipv4AddrRange { type Item = Ipv4Addr ; fn next (& mut self) -> Option < Self :: Item > { match self . start . partial_cmp (& self . end) { Some (Less) => { let next = self . start . add_one () ; Some (mem :: replace (& mut self . start , next)) } , Some (Equal) => { self . end . replace_zero () ; Some (self . start . replace_one ()) } , _ => None , } } # [allow (arithmetic_overflow)] fn count (self) -> usize { match self . start . partial_cmp (& self . end) { Some (Less) => { let count : u32 = self . end . saturating_sub (self . start) ; if count <= core :: usize :: MAX as u32 { count as usize + 1 } else { core :: usize :: MAX + 2 + count as usize } } , Some (Equal) => 1 , _ => 0 } } fn last (self) -> Option < Self :: Item > { match self . start . partial_cmp (& self . end) { Some (Less) | Some (Equal) => Some (self . end) , _ => None , } } fn max (self) -> Option < Self :: Item > { self . last () } fn min (self) -> Option < Self :: Item > { match self . start . partial_cmp (& self . end) { Some (Less) | Some (Equal) => Some (self . start) , _ => None } } fn nth (& mut self , n : usize) -> Option < Self :: Item > { let n = n as u64 ; let count = self . count_u64 () ; if n >= count { self . end . replace_zero () ; self . start . replace_one () ; None } else if n == count - 1 { self . start . replace_one () ; Some (self . end . replace_zero ()) } else { let nth = self . start . saturating_add (n as u32) ; self . start = nth . add_one () ; Some (nth) } } fn size_hint (& self) -> (usize , Option < usize >) { let count = self . count_u64 () ; if count > core :: usize :: MAX as u64 { (core :: usize :: MAX , None) } else { let count = count as usize ; (count , Some (count)) } } }
+};
+}

@@ -1,0 +1,52 @@
+// Generated module macro for crate::nodes::hamt
+macro_rules! Modcrate_nodes_hamt {
+() => {
+        Depcrate_nodes_hamtuse_52!();
+        Depcrate_nodes_hamtuse_53!();
+        Depcrate_nodes_hamtuse_54!();
+        Depcrate_nodes_hamtuse_55!();
+        Depcrate_nodes_hamtuse_56!();
+        Depcrate_nodes_hamtuse_57!();
+        Depcrate_nodes_hamtuse_58!();
+        Depcrate_nodes_hamtuse_59!();
+        Depcrate_nodes_hamtuse_60!();
+        Depcrate_nodes_hamtuse_61!();
+        Depcrate_nodes_hamtuse_62!();
+        Depcrate_nodes_hamtHashWidth!();
+        Depcrate_nodes_hamtHashBits!();
+        Depcrate_nodes_hamtHASH_SHIFT!();
+        Depcrate_nodes_hamtHASH_WIDTH!();
+        Depcrate_nodes_hamtHASH_MASK!();
+        Depcrate_nodes_hamthash_key!();
+        Depcrate_nodes_hamtmask!();
+        Depcrate_nodes_hamtHashValue!();
+        Depcrate_nodes_hamtNode!();
+        Depcrate_nodes_hamtimpl_72!();
+        Depcrate_nodes_hamtimpl_73!();
+        Depcrate_nodes_hamtCollisionNode!();
+        Depcrate_nodes_hamtEntry!();
+        Depcrate_nodes_hamtimpl_76!();
+        Depcrate_nodes_hamtimpl_77!();
+        Depcrate_nodes_hamtimpl_78!();
+        Depcrate_nodes_hamtimpl_79!();
+        Depcrate_nodes_hamtimpl_80!();
+        Depcrate_nodes_hamtimpl_81!();
+        Depcrate_nodes_hamtimpl_82!();
+        Depcrate_nodes_hamtIter!();
+        Depcrate_nodes_hamtimpl_84!();
+        Depcrate_nodes_hamtimpl_85!();
+        Depcrate_nodes_hamtimpl_86!();
+        Depcrate_nodes_hamtimpl_87!();
+        Depcrate_nodes_hamtIterMut!();
+        Depcrate_nodes_hamtimpl_89!();
+        Depcrate_nodes_hamtimpl_90!();
+        Depcrate_nodes_hamtimpl_91!();
+        Depcrate_nodes_hamtimpl_92!();
+        Depcrate_nodes_hamtDrain!();
+        Depcrate_nodes_hamtimpl_94!();
+        Depcrate_nodes_hamtimpl_95!();
+        Depcrate_nodes_hamtimpl_96!();
+        Depcrate_nodes_hamtimpl_97!();
+        Depcrate_nodes_hamtimpl_98!();
+    };
+}

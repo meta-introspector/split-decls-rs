@@ -1,0 +1,42 @@
+// Generated module macro for crate::options
+macro_rules! Modcrate_options {
+() => {
+        Depcrate_optionsuse_493!();
+        Depcrate_optionsuse_494!();
+        Depcrate_optionsuse_495!();
+        Depcrate_optionsuse_496!();
+        Depcrate_optionsuse_497!();
+        Depcrate_optionsuse_498!();
+        Depcrate_optionscore!();
+        Depcrate_optionsforward_attrs!();
+        Depcrate_optionsforwarded_field!();
+        Depcrate_optionsfrom_attributes!();
+        Depcrate_optionsfrom_derive!();
+        Depcrate_optionsfrom_field!();
+        Depcrate_optionsfrom_meta!();
+        Depcrate_optionsfrom_type_param!();
+        Depcrate_optionsfrom_variant!();
+        Depcrate_optionsinput_field!();
+        Depcrate_optionsinput_variant!();
+        Depcrate_optionsouter_from!();
+        Depcrate_optionsshape!();
+        Depcrate_optionsuse_659!();
+        Depcrate_optionsuse_660!();
+        Depcrate_optionsuse_661!();
+        Depcrate_optionsuse_662!();
+        Depcrate_optionsuse_663!();
+        Depcrate_optionsuse_664!();
+        Depcrate_optionsuse_665!();
+        Depcrate_optionsuse_666!();
+        Depcrate_optionsuse_667!();
+        Depcrate_optionsuse_668!();
+        Depcrate_optionsuse_669!();
+        Depcrate_optionsuse_670!();
+        Depcrate_optionsuse_671!();
+        Depcrate_optionsDefaultExpression!();
+        Depcrate_optionsimpl_673!();
+        Depcrate_optionsParseAttribute!();
+        Depcrate_optionsparse_attr!();
+        Depcrate_optionsParseData!();
+    };
+}

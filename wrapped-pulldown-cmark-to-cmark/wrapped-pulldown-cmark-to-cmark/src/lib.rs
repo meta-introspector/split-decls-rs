@@ -1,0 +1,59 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcratecmark_with_options.rs");
+include!("depcrate_text_modificationslist_item_padding_of.rs");
+include!("depcrate_text_modificationsconsume_newlines.rs");
+include!("depcrate_text_modificationsprint_text_without_trailing_newline.rs");
+include!("depcrate_text_modificationspadding.rs");
+include!("depcratecodeblockkind.rs");
+include!("depcratesource_range.rs");
+include!("depcrateheading.rs");
+include!("depcratecmark_resume_with_options.rs");
+include!("depcrateimpl_40.rs");
+include!("depcrate_source_rangeuse_4.rs");
+include!("depcrateuse_24.rs");
+include!("depcrate_text_modificationsmax_consecutive_chars.rs");
+include!("depcratedefault_code_block_token_count.rs");
+include!("depcrate_text_modificationsescape_special_characters.rs");
+include!("depcratetext_modifications.rs");
+include!("depcratedefault_options.rs");
+include!("depcrate_source_rangecmark_with_source_range.rs");
+include!("depcrateimpl_37.rs");
+include!("depcratealignment.rs");
+include!("depcrate_text_modificationsuse_10.rs");
+include!("depcrate_text_modificationsimpl_23.rs");
+include!("depcrateerror.rs");
+include!("depcrateimpl_39.rs");
+include!("depcrateimpl_41.rs");
+include!("depcratecmark.rs");
+include!("depcratecmark_resume.rs");
+include!("depcratecmark_resume_one_event.rs");
+include!("depcratecalculate_code_block_token_count.rs");
+include!("depcrate_source_rangecmark_with_source_range_and_options.rs");
+include!("depcrate_source_rangecmark_resume_with_source_range_and_options.rs");
+include!("depcrate_text_modificationswrite_padded_newline.rs");
+include!("depcrateuse_1.rs");
+include!("depcrate_source_rangecmark_resume_with_source_range.rs");
+include!("depcrateimpl_27.rs");
+include!("depcrate_text_modificationsclose_link.rs");
+include!("depcrateimpl_36.rs");
+include!("depcrate_text_modificationsescapelinktitle.rs");
+include!("depcrateoptions.rs");
+include!("depcrateimagelink.rs");
+include!("depcrateimpl_47.rs");
+include!("depcrate_text_modificationsrepeated.rs");
+include!("depcrate_text_modificationsimpl_18.rs");
+include!("depcratelinkcategory.rs");
+include!("depcratestate.rs");
+include!("depcrateuse_25.rs");
+include!("depcrateuse_2.rs");
+include!("modcrate_source_range.rs");
+include!("modcrate_text_modifications.rs");
+include!("modcrate.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate_source_range!();
+    Modcrate_text_modifications!();
+    Modcrate!();
+}

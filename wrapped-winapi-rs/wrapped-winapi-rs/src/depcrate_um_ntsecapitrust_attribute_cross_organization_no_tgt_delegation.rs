@@ -1,0 +1,9 @@
+// Generated macro for TRUST_ATTRIBUTE_CROSS_ORGANIZATION_NO_TGT_DELEGATION (const)
+macro_rules! Depcrate_um_ntsecapiTRUST_ATTRIBUTE_CROSS_ORGANIZATION_NO_TGT_DELEGATION {
+() => {
+// Module: crate::um::ntsecapi
+// Provides: {"TRUST_ATTRIBUTE_CROSS_ORGANIZATION_NO_TGT_DELEGATION"}
+// Dependencies: {}
+pub const TRUST_ATTRIBUTE_CROSS_ORGANIZATION_NO_TGT_DELEGATION : ULONG = 0x00000200 ;
+};
+}

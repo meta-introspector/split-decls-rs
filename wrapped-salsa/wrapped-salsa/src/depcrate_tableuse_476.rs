@@ -4,6 +4,6 @@ macro_rules! Depcrate_tableuse_476 {
 // Module: crate::table
 // Provides: {"use_476"}
 // Dependencies: {}
-use std :: any :: { Any , TypeId } ;
+use std :: mem :: { self , MaybeUninit } ;
 };
 }

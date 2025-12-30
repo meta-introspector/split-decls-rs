@@ -1,0 +1,9 @@
+// Generated macro for impl_261 (impl)
+macro_rules! Depcrate_driverimpl_261 {
+() => {
+// Module: crate::driver
+// Provides: {"impl_261"}
+// Dependencies: {}
+impl < Sink : TreeSink > TendrilSink < tendril :: fmt :: Bytes > for BytesParser < Sink > { fn process (& mut self , t : ByteTendril) { if let & mut BytesParserState :: Parsing { ref mut decoder } = & mut self . state { return decoder . process (t) } let (parser , buffer) = match mem :: replace (& mut self . state , BytesParserState :: Transient) { BytesParserState :: Initial { parser } => (parser , t) , BytesParserState :: Buffering { parser , mut buffer } => { buffer . push_tendril (& t) ; (parser , buffer) } BytesParserState :: Parsing { .. } | BytesParserState :: Transient => unreachable ! () , } ; if buffer . len32 () >= PRESCAN_BYTES { self . start_parsing (parser , buffer) } else { self . state = BytesParserState :: Buffering { parser : parser , buffer : buffer , } } } fn error (& mut self , desc : Cow < 'static , str >) { match self . state { BytesParserState :: Initial { ref mut parser } => parser . error (desc) , BytesParserState :: Buffering { ref mut parser , .. } => parser . error (desc) , BytesParserState :: Parsing { ref mut decoder } => decoder . error (desc) , BytesParserState :: Transient => unreachable ! () , } } type Output = Sink :: Output ; fn finish (self) -> Self :: Output { match self . state { BytesParserState :: Initial { parser } => parser . finish () , BytesParserState :: Buffering { parser , buffer } => { let encoding = detect_encoding (& buffer , & self . opts) ; let mut decoder = LossyDecoder :: new (encoding , parser) ; decoder . process (buffer) ; decoder . finish () } , BytesParserState :: Parsing { decoder } => decoder . finish () , BytesParserState :: Transient => unreachable ! () , } } }
+};
+}

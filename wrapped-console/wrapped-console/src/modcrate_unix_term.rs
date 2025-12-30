@@ -1,0 +1,42 @@
+// Generated module macro for crate::unix_term
+macro_rules! Modcrate_unix_term {
+() => {
+        Depcrate_unix_termuse_56!();
+        Depcrate_unix_termuse_57!();
+        Depcrate_unix_termuse_58!();
+        Depcrate_unix_termuse_59!();
+        Depcrate_unix_termuse_60!();
+        Depcrate_unix_termuse_61!();
+        Depcrate_unix_termuse_62!();
+        Depcrate_unix_termuse_63!();
+        Depcrate_unix_termuse_64!();
+        Depcrate_unix_termuse_65!();
+        Depcrate_unix_termDEFAULT_WIDTH!();
+        Depcrate_unix_termis_a_terminal!();
+        Depcrate_unix_termis_a_color_terminal!();
+        Depcrate_unix_termis_a_true_color_terminal!();
+        Depcrate_unix_termc_result!();
+        Depcrate_unix_termterminal_size!();
+        Depcrate_unix_termInput!();
+        Depcrate_unix_termimpl_73!();
+        Depcrate_unix_termimpl_74!();
+        Depcrate_unix_termimpl_75!();
+        Depcrate_unix_termimpl_76!();
+        Depcrate_unix_termimpl_77!();
+        Depcrate_unix_termread_secure!();
+        Depcrate_unix_termpoll_fd!();
+        Depcrate_unix_termselect_fd!();
+        Depcrate_unix_termselect_or_poll_term_fd!();
+        Depcrate_unix_termread_single_char!();
+        Depcrate_unix_termread_bytes!();
+        Depcrate_unix_termread_single_key_impl!();
+        Depcrate_unix_termread_single_key!();
+        Depcrate_unix_termkey_from_utf8!();
+        Depcrate_unix_termIS_LANG_UTF8!();
+        Depcrate_unix_termwants_emoji!();
+        Depcrate_unix_termwants_emoji!();
+        Depcrate_unix_termset_title!();
+        Depcrate_unix_termmake_raw!();
+        Depcrate_unix_termmake_raw!();
+    };
+}

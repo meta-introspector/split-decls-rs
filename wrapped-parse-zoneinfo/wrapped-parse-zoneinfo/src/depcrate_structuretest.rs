@@ -1,0 +1,9 @@
+// Generated macro for test (module)
+macro_rules! Depcrate_structuretest {
+() => {
+// Module: crate::structure
+// Provides: {"test"}
+// Dependencies: {}
+# [cfg (test)] # [allow (unused_results)] mod test { use super :: * ; use crate :: table :: Table ; # [test] fn empty () { let table = Table :: default () ; let mut structure = table . structure () . into_iter () ; assert_eq ! (structure . next () , None) ; } # [test] fn separate () { let mut table = Table :: default () ; table . zonesets . insert ("a" . to_owned () , Vec :: new ()) ; table . zonesets . insert ("b" . to_owned () , Vec :: new ()) ; table . zonesets . insert ("c" . to_owned () , Vec :: new ()) ; let mut structure = table . structure () . into_iter () ; assert_eq ! (structure . next () , None) ; } # [test] fn child () { let mut table = Table :: default () ; table . zonesets . insert ("a/b" . to_owned () , Vec :: new ()) ; let mut structure = table . structure () . into_iter () ; assert_eq ! (structure . next () , Some (TableStructureEntry { name : "a" , children : vec ! [Child :: TimeZone ("b")] })) ; assert_eq ! (structure . next () , None) ; } # [test] fn hierarchy () { let mut table = Table :: default () ; table . zonesets . insert ("a/b/c" . to_owned () , Vec :: new ()) ; table . zonesets . insert ("a/b/d" . to_owned () , Vec :: new ()) ; table . zonesets . insert ("a/e" . to_owned () , Vec :: new ()) ; let mut structure = table . structure () . into_iter () ; assert_eq ! (structure . next () , Some (TableStructureEntry { name : "a" , children : vec ! [Child :: Submodule ("b") , Child :: TimeZone ("e")] })) ; assert_eq ! (structure . next () , Some (TableStructureEntry { name : "a/b" , children : vec ! [Child :: TimeZone ("c") , Child :: TimeZone ("d")] })) ; assert_eq ! (structure . next () , None) ; } }
+};
+}

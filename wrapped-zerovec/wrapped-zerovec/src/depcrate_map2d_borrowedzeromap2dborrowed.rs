@@ -1,0 +1,9 @@
+// Generated macro for ZeroMap2dBorrowed (struct)
+macro_rules! Depcrate_map2d_borrowedZeroMap2dBorrowed {
+() => {
+// Module: crate::map2d::borrowed
+// Provides: {"ZeroMap2dBorrowed"}
+// Dependencies: {}
+# [doc = " A borrowed-only version of [`ZeroMap2d`](super::ZeroMap2d)"] # [doc = ""] # [doc = " This is useful for fully-zero-copy deserialization from non-human-readable"] # [doc = " serialization formats. It also has the advantage that it can return references that live for"] # [doc = " the lifetime of the backing buffer as opposed to that of the [`ZeroMap2dBorrowed`] instance."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " use zerovec::maps::ZeroMap2dBorrowed;"] # [doc = ""] # [doc = " // Example byte buffer representing the map { 1: {2: \"three\" } }"] # [doc = " let BINCODE_BYTES: &[u8; 47] = &["] # [doc = "     2, 0, 0, 0, 0, 0, 0, 0, 1, 0, 4, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 2, 0,"] # [doc = "     0, 0, 0, 0, 0, 0, 2, 0, 7, 0, 0, 0, 0, 0, 0, 0, 1, 0, 116, 104, 114,"] # [doc = "     101, 101,"] # [doc = " ];"] # [doc = ""] # [doc = " // Deserializing to ZeroMap2d requires no heap allocations."] # [doc = " let zero_map: ZeroMap2dBorrowed<u16, u16, str> ="] # [doc = "     bincode::deserialize(BINCODE_BYTES)"] # [doc = "         .expect(\"Should deserialize successfully\");"] # [doc = " assert_eq!(zero_map.get_2d(&1, &2), Some(\"three\"));"] # [doc = " ```"] # [doc = ""] # [doc = " This can be obtained from a [`ZeroMap2d`](super::ZeroMap2d) via [`ZeroMap2d::as_borrowed`](super::ZeroMap2d::as_borrowed)"] pub struct ZeroMap2dBorrowed < 'a , K0 , K1 , V > where K0 : ZeroMapKV < 'a > , K1 : ZeroMapKV < 'a > , V : ZeroMapKV < 'a > , K0 : ? Sized , K1 : ? Sized , V : ? Sized , { pub (crate) keys0 : & 'a K0 :: Slice , pub (crate) joiner : & 'a ZeroSlice < u32 > , pub (crate) keys1 : & 'a K1 :: Slice , pub (crate) values : & 'a V :: Slice , }
+};
+}

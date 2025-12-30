@@ -1,0 +1,53 @@
+// Generated module macro for crate
+macro_rules! Modcrate {
+() => {
+        Depcrateuse_1!();
+        Depcrateuse_2!();
+        Depcrateuse_3!();
+        Depcrateiter!();
+        Depcratemacros!();
+        Depcratesimd!();
+        Depcrate_benchable!();
+        Depcrateis_method_token!();
+        DepcrateURI_MAP!();
+        Depcrateis_uri_token!();
+        DepcrateTOKEN_MAP!();
+        Depcrateis_header_name_token!();
+        DepcrateHEADER_VALUE_MAP!();
+        Depcrateis_header_value_token!();
+        DepcrateError!();
+        Depcrateimpl_102!();
+        Depcrateimpl_103!();
+        Depcrateimpl_104!();
+        DepcrateInvalidChunkSize!();
+        Depcrateimpl_106!();
+        DepcrateResult!();
+        DepcrateStatus!();
+        Depcrateimpl_109!();
+        DepcrateParserConfig!();
+        Depcrateimpl_111!();
+        DepcrateRequest!();
+        Depcrateimpl_113!();
+        Depcrateskip_empty_lines!();
+        Depcrateskip_spaces!();
+        DepcrateResponse!();
+        Depcrateimpl_117!();
+        DepcrateHeader!();
+        Depcrateimpl_119!();
+        DepcrateEMPTY_HEADER!();
+        Depcrateparse_version!();
+        Depcrateparse_method!();
+        Depcrateparse_reason!();
+        Depcrateparse_token!();
+        Depcrateparse_uri!();
+        Depcrateparse_code!();
+        Depcrateparse_headers!();
+        Depcrateparse_headers_iter!();
+        Depcratedeinit_slice_mut!();
+        Depcrateassume_init_slice!();
+        DepcrateHeaderParserConfig!();
+        Depcrateparse_headers_iter_uninit!();
+        Depcrateparse_chunk_size!();
+        Depcratetests!();
+    };
+}

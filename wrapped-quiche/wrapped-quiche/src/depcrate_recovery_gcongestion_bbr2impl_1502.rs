@@ -1,0 +1,9 @@
+// Generated macro for impl_1502 (impl)
+macro_rules! Depcrate_recovery_gcongestion_bbr2impl_1502 {
+() => {
+// Module: crate::recovery::gcongestion::bbr2
+// Provides: {"impl_1502"}
+// Dependencies: {}
+impl Params { fn with_overrides (mut self , custom_bbr_settings : & BbrParams) -> Self { macro_rules ! apply_override { ($ field : ident) => { if let Some (custom_value) = custom_bbr_settings .$ field { self .$ field = custom_value ; } } ; } macro_rules ! apply_optional_override { ($ field : ident) => { if let Some (custom_value) = custom_bbr_settings .$ field { self .$ field = Some (custom_value) ; } } ; } apply_override ! (startup_cwnd_gain) ; apply_override ! (startup_pacing_gain) ; apply_override ! (full_bw_threshold) ; apply_override ! (startup_full_bw_rounds) ; apply_override ! (startup_full_loss_count) ; apply_override ! (drain_cwnd_gain) ; apply_override ! (drain_pacing_gain) ; apply_override ! (enable_reno_coexistence) ; apply_override ! (enable_overestimate_avoidance) ; apply_override ! (choose_a0_point_fix) ; apply_override ! (probe_bw_probe_up_pacing_gain) ; apply_override ! (probe_bw_probe_down_pacing_gain) ; apply_override ! (probe_bw_cwnd_gain) ; apply_override ! (probe_bw_up_cwnd_gain) ; apply_override ! (probe_rtt_pacing_gain) ; apply_override ! (probe_rtt_cwnd_gain) ; apply_override ! (max_probe_up_queue_rounds) ; apply_override ! (loss_threshold) ; apply_override ! (use_bytes_delivered_for_inflight_hi) ; apply_override ! (decrease_startup_pacing_at_end_of_round) ; apply_override ! (ignore_app_limited_for_no_bandwidth_growth) ; apply_override ! (scale_pacing_rate_by_mss) ; apply_override ! (disable_probe_down_early_exit) ; apply_optional_override ! (initial_pacing_rate_bytes_per_second) ; if let Some (custom_value) = custom_bbr_settings . bw_lo_reduction_strategy { self . bw_lo_mode = custom_value . into () ; } self } }
+};
+}

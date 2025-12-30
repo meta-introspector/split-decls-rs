@@ -1,0 +1,49 @@
+// Generated module macro for crate::question_mark
+macro_rules! Modcrate_question_mark {
+() => {
+        Depcrate_question_markuse_9090!();
+        Depcrate_question_markuse_9091!();
+        Depcrate_question_markuse_9092!();
+        Depcrate_question_markuse_9093!();
+        Depcrate_question_markuse_9094!();
+        Depcrate_question_markuse_9095!();
+        Depcrate_question_markuse_9096!();
+        Depcrate_question_markuse_9097!();
+        Depcrate_question_markuse_9098!();
+        Depcrate_question_markuse_9099!();
+        Depcrate_question_markuse_9100!();
+        Depcrate_question_markuse_9101!();
+        Depcrate_question_markuse_9102!();
+        Depcrate_question_markuse_9103!();
+        Depcrate_question_markuse_9104!();
+        Depcrate_question_markuse_9105!();
+        Depcrate_question_markuse_9106!();
+        Depcrate_question_markuse_9107!();
+        Depcrate_question_markuse_9108!();
+        Depcrate_question_markuse_9109!();
+        Depcrate_question_markmacro_9110!();
+        Depcrate_question_markQuestionMark!();
+        Depcrate_question_markmacro_9112!();
+        Depcrate_question_markimpl_9113!();
+        Depcrate_question_markIfBlockType!();
+        Depcrate_question_markfind_let_else_ret_expression!();
+        Depcrate_question_markcheck_let_some_else_return_none!();
+        Depcrate_question_markis_early_return!();
+        Depcrate_question_markexpr_return_none_or_err!();
+        Depcrate_question_markcheck_is_none_or_err_and_early_return!();
+        Depcrate_question_markTryMode!();
+        Depcrate_question_markfind_try_mode!();
+        Depcrate_question_markextract_ctor_call!();
+        Depcrate_question_markextract_binding_pat!();
+        Depcrate_question_markcheck_arm_is_some_or_ok!();
+        Depcrate_question_markcheck_arm_is_none_or_err!();
+        Depcrate_question_markis_local_or_local_into!();
+        Depcrate_question_markcheck_arms_are_try!();
+        Depcrate_question_markcheck_if_try_match!();
+        Depcrate_question_markcheck_if_let_some_or_err_and_early_return!();
+        Depcrate_question_markimpl_9130!();
+        Depcrate_question_markis_try_block!();
+        Depcrate_question_markis_inferred_ret_closure!();
+        Depcrate_question_markimpl_9133!();
+    };
+}

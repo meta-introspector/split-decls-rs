@@ -1,0 +1,9 @@
+// Generated macro for FieldInnerTy (enum)
+macro_rules! Depcrate_diagnostics_utilsFieldInnerTy {
+() => {
+// Module: crate::diagnostics::utils
+// Provides: {"FieldInnerTy"}
+// Dependencies: {}
+# [doc = " Inner type of a field and type of wrapper."] # [derive (Copy , Clone)] pub (crate) enum FieldInnerTy < 'ty > { # [doc = " Field is wrapped in a `Option<$inner>`."] Option (& 'ty Type) , # [doc = " Field is wrapped in a `Vec<$inner>`."] Vec (& 'ty Type) , # [doc = " Field isn't wrapped in an outer type."] Plain (& 'ty Type) , }
+};
+}

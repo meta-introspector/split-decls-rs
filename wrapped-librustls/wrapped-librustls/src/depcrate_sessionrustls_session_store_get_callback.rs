@@ -1,0 +1,9 @@
+// Generated macro for rustls_session_store_get_callback (type)
+macro_rules! Depcrate_sessionrustls_session_store_get_callback {
+() => {
+// Module: crate::session
+// Provides: {"rustls_session_store_get_callback"}
+// Dependencies: {}
+# [doc = " Prototype of a callback that can be installed by the application at the"] # [doc = " `rustls_server_config` or `rustls_client_config`."] # [doc = ""] # [doc = " This callback will be invoked by a TLS session when looking up the data"] # [doc = " for a TLS session id."] # [doc = ""] # [doc = " `userdata` will be supplied based on rustls_{client,server}_session_set_userdata."] # [doc = ""] # [doc = " The `buf` points to `count` consecutive bytes where the"] # [doc = " callback is expected to copy the result to. The number of copied bytes"] # [doc = " needs to be written to `out_n`. The callback should not read any"] # [doc = " data from `buf`."] # [doc = ""] # [doc = " If the value to copy is larger than `count`, the callback should never"] # [doc = " do a partial copy but instead remove the value from its store and"] # [doc = " act as if it was never found."] # [doc = ""] # [doc = " The callback should return RUSTLS_RESULT_OK to indicate that a value was"] # [doc = " retrieved and written in its entirety into `buf`, or RUSTLS_RESULT_NOT_FOUND"] # [doc = " if no session was retrieved."] # [doc = ""] # [doc = " When `remove_after` is != 0, the returned data needs to be removed"] # [doc = " from the store."] # [doc = ""] # [doc = " NOTE: the passed in `key` and `buf` are only available during the"] # [doc = " callback invocation."] # [doc = " NOTE: callbacks used in several sessions via a common config"] # [doc = " must be implemented thread-safe."] pub type rustls_session_store_get_callback = Option < unsafe extern "C" fn (userdata : rustls_session_store_userdata , key : * const rustls_slice_bytes , remove_after : c_int , buf : * mut u8 , count : size_t , out_n : * mut size_t ,) -> u32 , > ;
+};
+}

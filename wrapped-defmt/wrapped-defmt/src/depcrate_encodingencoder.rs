@@ -1,0 +1,9 @@
+// Generated macro for Encoder (struct)
+macro_rules! Depcrate_encodingEncoder {
+() => {
+// Module: crate::encoding
+// Provides: {"Encoder"}
+// Dependencies: {}
+# [doc = " Encode raw defmt frames for sending over the wire."] # [doc = ""] # [doc = " defmt emits \"log frames\", which are sequences of bytes. The raw log frame data"] # [doc = " is then *encoded* prior to sending over the wire."] # [doc = ""] # [doc = " `Encoder` will encode the frames according to the currently selected"] # [doc = " `encoding-*` Cargo feature. See `Cargo.toml` for the supported encodings"] # [doc = " and their tradeoffs."] # [doc = ""] # [doc = " Encodings may perform two functions:"] # [doc = ""] # [doc = " - Framing: Adds extra data to allow the encoder to know when each frame starts"] # [doc = "   and ends in the stream. Unframed log frames already contain enough information for"] # [doc = "   the decoder to know when they end, so framing is optional. However, without framing"] # [doc = "   the decoder must receive all bytes intact or it may \"lose sync\". With framing, it can"] # [doc = "   recover from missing/corrupted data, and can start decoding from the \"middle\" of an"] # [doc = "   already-running stream."] # [doc = " - Compression: The frame data has rather low entropy (for example, it contains many"] # [doc = "   zero bytes due to encoding all integers in fixed with, and will likely contain many"] # [doc = "   repetitions). Compression can decrease the on-the-wire required bandwidth."] # [doc = ""] # [doc = " defmt provides the `Encoder` separately instead of feeding already-encoded bytes"] # [doc = " to the `Logger` because `Logger` implementations may decide to allow"] # [doc = " concurrent logging from multiple \"contexts\" such as threads or interrupt"] # [doc = " priority levels. In this case, the Logger implementation needs to create one"] # [doc = " Encoder for each such context."] pub struct Encoder { inner : inner :: Encoder , }
+};
+}

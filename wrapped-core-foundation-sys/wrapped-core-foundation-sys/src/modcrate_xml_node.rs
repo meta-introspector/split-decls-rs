@@ -1,0 +1,50 @@
+// Generated module macro for crate::xml_node
+macro_rules! Modcrate_xml_node {
+() => {
+        Depcrate_xml_nodeuse_881!();
+        Depcrate_xml_nodeuse_882!();
+        Depcrate_xml_nodeuse_883!();
+        Depcrate_xml_nodeuse_884!();
+        Depcrate_xml_nodeuse_885!();
+        Depcrate_xml_nodeuse_886!();
+        Depcrate_xml_nodeuse_887!();
+        Depcrate_xml_node__CFXMLNode!();
+        Depcrate_xml_nodeCFXMLNodeRef!();
+        Depcrate_xml_nodeCFXMLTreeRef!();
+        Depcrate_xml_nodekCFXMLNodeCurrentVersion!();
+        Depcrate_xml_nodeCFXMLNodeTypeCode!();
+        Depcrate_xml_nodekCFXMLNodeTypeDocument!();
+        Depcrate_xml_nodekCFXMLNodeTypeElement!();
+        Depcrate_xml_nodekCFXMLNodeTypeAttribute!();
+        Depcrate_xml_nodekCFXMLNodeTypeProcessingInstruction!();
+        Depcrate_xml_nodekCFXMLNodeTypeComment!();
+        Depcrate_xml_nodekCFXMLNodeTypeText!();
+        Depcrate_xml_nodekCFXMLNodeTypeCDATASection!();
+        Depcrate_xml_nodekCFXMLNodeTypeDocumentFragment!();
+        Depcrate_xml_nodekCFXMLNodeTypeEntity!();
+        Depcrate_xml_nodekCFXMLNodeTypeEntityReference!();
+        Depcrate_xml_nodekCFXMLNodeTypeDocumentType!();
+        Depcrate_xml_nodekCFXMLNodeTypeWhitespace!();
+        Depcrate_xml_nodekCFXMLNodeTypeNotation!();
+        Depcrate_xml_nodekCFXMLNodeTypeElementTypeDeclaration!();
+        Depcrate_xml_nodekCFXMLNodeTypeAttributeListDeclaration!();
+        Depcrate_xml_nodeCFXMLElementInfo!();
+        Depcrate_xml_nodeCFXMLProcessingInstructionInfo!();
+        Depcrate_xml_nodeCFXMLDocumentInfo!();
+        Depcrate_xml_nodeCFXMLExternalID!();
+        Depcrate_xml_nodeCFXMLDocumentTypeInfo!();
+        Depcrate_xml_nodeCFXMLNotationInfo!();
+        Depcrate_xml_nodeCFXMLElementTypeDeclarationInfo!();
+        Depcrate_xml_nodeCFXMLAttributeDeclarationInfo!();
+        Depcrate_xml_nodeCFXMLAttributeListDeclarationInfo!();
+        Depcrate_xml_nodeCFXMLEntityTypeCode!();
+        Depcrate_xml_nodekCFXMLEntityTypeParameter!();
+        Depcrate_xml_nodekCFXMLEntityTypeParsedInternal!();
+        Depcrate_xml_nodekCFXMLEntityTypeParsedExternal!();
+        Depcrate_xml_nodekCFXMLEntityTypeUnparsed!();
+        Depcrate_xml_nodekCFXMLEntityTypeCharacter!();
+        Depcrate_xml_nodeCFXMLEntityInfo!();
+        Depcrate_xml_nodeCFXMLEntityReferenceInfo!();
+        Depcrate_xml_nodeother_925!();
+    };
+}

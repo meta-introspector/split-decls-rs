@@ -1,0 +1,10 @@
+// Generated macro for test (module)
+macro_rules! Depcrate_output_textwraptest {
+() => {
+// Module: crate::output::textwrap
+// Provides: {"test"}
+// Dependencies: {}
+# [cfg (test)] # [cfg (feature = "wrap_help")] mod test { # [doc = " Compatibility shim to keep textwrap's tests"] fn wrap (content : & str , hard_width : usize) -> Vec < String > { super :: wrap (content , hard_width) . trim_end () . split ('\n') . map (| s | s . to_owned ()) . collect :: < Vec < _ > > () } # [test] fn no_wrap () { assert_eq ! (wrap ("foo" , 10) , vec ! ["foo"]) ; } # [test] fn wrap_simple () { assert_eq ! (wrap ("foo bar baz" , 5) , vec ! ["foo" , "bar" , "baz"]) ; } # [test] fn to_be_or_not () { assert_eq ! (wrap ("To be, or not to be, that is the question." , 10) , vec ! ["To be, or" , "not to be," , "that is" , "the" , "question."]) ; } # [test] fn multiple_words_on_first_line () { assert_eq ! (wrap ("foo bar baz" , 10) , vec ! ["foo bar" , "baz"]) ; } # [test] fn long_word () { assert_eq ! (wrap ("foo" , 0) , vec ! ["foo"]) ; } # [test] fn long_words () { assert_eq ! (wrap ("foo bar" , 0) , vec ! ["foo" , "bar"]) ; } # [test] fn max_width () { assert_eq ! (wrap ("foo bar" , usize :: MAX) , vec ! ["foo bar"]) ; let text = "Hello there! This is some English text. \
+                    It should not be wrapped given the extents below." ; assert_eq ! (wrap (text , usize :: MAX) , vec ! [text]) ; } # [test] fn leading_whitespace () { assert_eq ! (wrap ("  foo bar" , 6) , vec ! ["  foo" , "  bar"]) ; } # [test] fn leading_whitespace_empty_first_line () { assert_eq ! (wrap (" foobar baz" , 6) , vec ! [" foobar" , " baz"]) ; } # [test] fn trailing_whitespace () { assert_eq ! (wrap ("foo     bar     baz  " , 5) , vec ! ["foo" , "bar" , "baz"]) ; } # [test] fn issue_99 () { assert_eq ! (wrap ("aaabbbccc x yyyzzzwww" , 9) , vec ! ["aaabbbccc" , "x" , "yyyzzzwww"]) ; } # [test] fn issue_129 () { assert_eq ! (wrap ("x – x" , 1) , vec ! ["x" , "–" , "x"]) ; } }
+};
+}

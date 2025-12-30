@@ -1,0 +1,9 @@
+// Generated macro for PathExt (trait)
+macro_rules! Depcrate_path_extPathExt {
+() => {
+// Module: crate::path_ext
+// Provides: {"PathExt"}
+// Dependencies: {}
+# [doc = " Extension methods for [`Path`] and [`PathBuf`] to for building and"] # [doc = " interacting with [`RelativePath`]."] # [doc = ""] # [doc = " [`RelativePath`]: crate::RelativePath"] pub trait PathExt : sealed :: Sealed { # [doc = " Build a relative path from the provided directory to `self`."] # [doc = ""] # [doc = " Producing a relative path like this is a logical operation and does not"] # [doc = " guarantee that the constructed path corresponds to what the filesystem"] # [doc = " would do. On Linux for example symbolic links could mean that the"] # [doc = " logical path doesn't correspond to the filesystem path."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " use std::path::Path;"] # [doc = " use relative_path::{RelativePath, PathExt};"] # [doc = ""] # [doc = " let baz = Path::new(\"/foo/bar/baz\");"] # [doc = " let bar = Path::new(\"/foo/bar\");"] # [doc = " let qux = Path::new(\"/foo/bar/qux\");"] # [doc = ""] # [doc = " assert_eq!(bar.relative_to(baz)?, RelativePath::new(\"../\"));"] # [doc = " assert_eq!(baz.relative_to(bar)?, RelativePath::new(\"baz\"));"] # [doc = " assert_eq!(qux.relative_to(baz)?, RelativePath::new(\"../qux\"));"] # [doc = " assert_eq!(baz.relative_to(qux)?, RelativePath::new(\"../baz\"));"] # [doc = " assert_eq!(bar.relative_to(qux)?, RelativePath::new(\"../\"));"] # [doc = " # Ok::<_, relative_path::RelativeToError>(())"] # [doc = " ```"] # [doc = ""] # [doc = " # Errors"] # [doc = ""] # [doc = " Errors in case the provided path contains components which cannot be"] # [doc = " converted into a relative path as needed, such as non-utf8 data."] fn relative_to < P > (& self , root : P) -> Result < RelativePathBuf , RelativeToError > where P : AsRef < Path > ; }
+};
+}

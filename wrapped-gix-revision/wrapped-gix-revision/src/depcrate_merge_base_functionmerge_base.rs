@@ -1,0 +1,9 @@
+// Generated macro for merge_base (function)
+macro_rules! Depcrate_merge_base_functionmerge_base {
+() => {
+// Module: crate::merge_base::function
+// Provides: {"merge_base"}
+// Dependencies: {}
+# [doc = " Given a commit at `first` id, traverse the commit `graph` and return all possible merge-base between it and `others`,"] # [doc = " sorted from best to worst. Returns `None` if there is no merge-base as `first` and `others` don't share history."] # [doc = " If `others` is empty, `Some(first)` is returned."] # [doc = ""] # [doc = " Note that this function doesn't do any work if `first` is contained in `others`, which is when `first` will be returned"] # [doc = " as only merge-base right away. This is even the case if some commits of `others` are disjoint."] # [doc = ""] # [doc = " Additionally, this function isn't stable and results may differ dependeing on the order in which `first` and `others` are"] # [doc = " provided due to its special rules."] # [doc = ""] # [doc = " If a stable result is needed, use [`merge_base::octopus()`](crate::merge_base::octopus())."] # [doc = ""] # [doc = " # Performance"] # [doc = ""] # [doc = " For repeated calls, be sure to re-use `graph` as its content will be kept and reused for a great speed-up. The contained flags"] # [doc = " will automatically be cleared."] pub fn merge_base (first : ObjectId , others : & [ObjectId] , graph : & mut Graph < '_ , '_ , graph :: Commit < Flags > > ,) -> Result < Option < Vec < ObjectId > > , Error > { let _span = gix_trace :: coarse ! ("gix_revision::merge_base()" , ? first , ? others) ; if others . is_empty () || others . contains (& first) { return Ok (Some (vec ! [first])) ; } graph . clear_commit_data (| f | * f = Flags :: empty ()) ; let bases = paint_down_to_common (first , others , graph) ? ; let bases = remove_redundant (& bases , graph) ? ; Ok ((! bases . is_empty ()) . then_some (bases)) }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for other_75 (other)
+macro_rules! Depcrate_ffiother_75 {
+() => {
+// Module: crate::ffi
+// Provides: {"other_75"}
+// Dependencies: {}
+extern "C-unwind" { # [doc = " Class ISA used for global blocks."] pub static _NSConcreteGlobalBlock : Class ; # [doc = " Class ISA used for stack blocks."] pub static _NSConcreteStackBlock : Class ; # [doc = " Copy/retain a block."] # [doc = ""] # [doc = " When called on a:"] # [doc = " - Global block: Does nothing."] # [doc = " - Stack block: `memmove`s the block to a new heap allocation, calls"] # [doc = "   the copy helper, and returns the new malloc block."] # [doc = " - Malloc block: Increments the retain count."] # [doc = ""] # [doc = " Returns `NULL` on allocation failure."] # [doc (alias = "Block_copy")] pub fn _Block_copy (block : * const c_void) -> * mut c_void ; # [doc = " Release a block."] # [doc = ""] # [doc = " When called on a:"] # [doc = " - Global block: Does nothing."] # [doc = " - Stack block: Does nothing."] # [doc = " - Malloc block: Decrements the retain count, and if it reaches zero,"] # [doc = "   calls the dispose helper and frees the underlying storage."] # [doc (alias = "Block_release")] pub fn _Block_release (block : * const c_void) ; # [doc = " Copy a block field or `__block` variable from one location to another."] # [doc = ""] # [doc = " Called by C compilers to clone fields inside copy helper routines, and"] # [doc = " to handle memory management of `__block` marked variables."] pub fn _Block_object_assign (dest_addr : * mut c_void , object : * const c_void , flags : c_int) ; # [doc = " Dispose an object previously copied using `_Block_object_assign`."] # [doc = ""] # [doc = " Called by C compilers to drop fields inside dispose helper routines,"] # [doc = " and handle memory management of `__block` marked variables."] pub fn _Block_object_dispose (object : * const c_void , flags : c_int) ; }
+};
+}

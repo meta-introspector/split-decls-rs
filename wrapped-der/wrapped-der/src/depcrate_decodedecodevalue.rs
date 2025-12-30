@@ -1,0 +1,9 @@
+// Generated macro for DecodeValue (trait)
+macro_rules! Depcrate_decodeDecodeValue {
+() => {
+// Module: crate::decode
+// Provides: {"DecodeValue"}
+// Dependencies: {}
+# [doc = " DecodeValue trait parses the value part of a Tag-Length-Value object,"] # [doc = " sans the [`Tag`] and [`Length`]."] # [doc = ""] # [doc = " As opposed to [`Decode`], implementer is expected to read the inner content only,"] # [doc = " without the [`Header`], which was decoded beforehand."] # [doc = ""] # [doc = " ## Example"] # [doc = " ```"] # [doc = " use der::{Decode, DecodeValue, ErrorKind, FixedTag, Header, Reader, Tag};"] # [doc = ""] # [doc = " /// 1-byte month"] # [doc = " struct MyByteMonth(u8);"] # [doc = ""] # [doc = " impl<'a> DecodeValue<'a> for MyByteMonth {"] # [doc = "     type Error = der::Error;"] # [doc = ""] # [doc = "     fn decode_value<R: Reader<'a>>(reader: &mut R, header: Header) -> der::Result<Self> {"] # [doc = "         let month = reader.read_byte()?;"] # [doc = "         "] # [doc = "         if (0..12).contains(&month) {"] # [doc = "             Ok(Self(month))"] # [doc = "         } else {"] # [doc = "             Err(reader.error(ErrorKind::DateTime))"] # [doc = "         }"] # [doc = "     }"] # [doc = " }"] # [doc = ""] # [doc = " impl FixedTag for MyByteMonth {"] # [doc = "     const TAG: Tag = Tag::OctetString;"] # [doc = " }"] # [doc = ""] # [doc = " let month = MyByteMonth::from_der(b\"\\x04\\x01\\x09\").expect(\"month to decode\");"] # [doc = ""] # [doc = " assert_eq!(month.0, 9);"] # [doc = " ```"] pub trait DecodeValue < 'a > : Sized { # [doc = " Type returned in the event of a decoding error."] type Error : From < Error > + 'static ; # [doc = " Attempt to decode this value using the provided [`Reader`]."] fn decode_value < R : Reader < 'a > > (reader : & mut R , header : Header) -> Result < Self , Self :: Error > ; }
+};
+}

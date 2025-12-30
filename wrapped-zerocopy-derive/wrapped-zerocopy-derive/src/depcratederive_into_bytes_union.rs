@@ -1,0 +1,10 @@
+// Generated macro for derive_into_bytes_union (function)
+macro_rules! Depcratederive_into_bytes_union {
+() => {
+// Module: crate
+// Provides: {"derive_into_bytes_union"}
+// Dependencies: {}
+# [doc = " A union is `IntoBytes` if:"] # [doc = " - all fields are `IntoBytes`"] # [doc = " - `repr(C)`, `repr(transparent)`, or `repr(packed)`"] # [doc = " - no padding (size of union equals size of each field type)"] fn derive_into_bytes_union (ast : & DeriveInput , unn : & DataUnion , zerocopy_crate : & Path ,) -> Result < TokenStream , Error > { let cfg_compile_error = if cfg ! (zerocopy_derive_union_into_bytes) { quote ! () } else { let error_message = "requires --cfg zerocopy_derive_union_into_bytes;
+please let us know you use this feature: https://github.com/google/zerocopy/discussions/1802" ; quote ! (const _ : () = { # [cfg (not (zerocopy_derive_union_into_bytes))] # zerocopy_crate :: util :: macro_util :: core_reexport :: compile_error ! (# error_message) ; } ;) } ; if ! ast . generics . params . is_empty () { return Err (Error :: new (Span :: call_site () , "unsupported on types with type parameters")) ; } let repr = StructUnionRepr :: from_attrs (& ast . attrs) ? ; if ! repr . is_c () && ! repr . is_transparent () && ! repr . is_packed_1 () { return Err (Error :: new (Span :: call_site () , "must be #[repr(C)], #[repr(packed)], or #[repr(transparent)]" ,)) ; } let impl_block = ImplBlockBuilder :: new (ast , unn , Trait :: IntoBytes , FieldBounds :: ALL_SELF , zerocopy_crate) . padding_check (PaddingCheck :: Union) . build () ; Ok (quote ! (# cfg_compile_error # impl_block)) }
+};
+}

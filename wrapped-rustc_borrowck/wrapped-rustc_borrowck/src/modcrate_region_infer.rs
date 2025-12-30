@@ -1,0 +1,53 @@
+// Generated module macro for crate::region_infer
+macro_rules! Modcrate_region_infer {
+() => {
+        Depcrate_region_inferuse_811!();
+        Depcrate_region_inferuse_812!();
+        Depcrate_region_inferuse_813!();
+        Depcrate_region_inferuse_814!();
+        Depcrate_region_inferuse_815!();
+        Depcrate_region_inferuse_816!();
+        Depcrate_region_inferuse_817!();
+        Depcrate_region_inferuse_818!();
+        Depcrate_region_inferuse_819!();
+        Depcrate_region_inferuse_820!();
+        Depcrate_region_inferuse_821!();
+        Depcrate_region_inferuse_822!();
+        Depcrate_region_inferuse_823!();
+        Depcrate_region_inferuse_824!();
+        Depcrate_region_inferuse_825!();
+        Depcrate_region_inferuse_826!();
+        Depcrate_region_inferuse_827!();
+        Depcrate_region_inferuse_828!();
+        Depcrate_region_inferuse_829!();
+        Depcrate_region_inferuse_830!();
+        Depcrate_region_inferuse_831!();
+        Depcrate_region_inferuse_832!();
+        Depcrate_region_inferuse_833!();
+        Depcrate_region_inferuse_834!();
+        Depcrate_region_inferuse_835!();
+        Depcrate_region_inferuse_836!();
+        Depcrate_region_inferuse_837!();
+        Depcrate_region_inferuse_838!();
+        Depcrate_region_inferuse_839!();
+        Depcrate_region_inferuse_840!();
+        Depcrate_region_inferuse_841!();
+        Depcrate_region_inferdump_mir!();
+        Depcrate_region_infergraphviz!();
+        Depcrate_region_inferopaque_types!();
+        Depcrate_region_inferreverse_sccs!();
+        Depcrate_region_infervalues!();
+        Depcrate_region_inferRepresentative!();
+        Depcrate_region_inferimpl_982!();
+        Depcrate_region_inferConstraintSccs!();
+        Depcrate_region_inferRegionInferenceContext!();
+        Depcrate_region_inferRegionDefinition!();
+        Depcrate_region_inferCause!();
+        Depcrate_region_inferTypeTest!();
+        Depcrate_region_inferRegionRelationCheckResult!();
+        Depcrate_region_inferTrace!();
+        Depcrate_region_infersccs_info!();
+        Depcrate_region_inferimpl_991!();
+        Depcrate_region_inferBlameConstraint!();
+    };
+}

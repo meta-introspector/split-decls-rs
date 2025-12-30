@@ -1,0 +1,53 @@
+// Generated module macro for crate::properties
+macro_rules! Modcrate_properties {
+() => {
+        Depcrate_propertiesuse_18!();
+        Depcrate_propertiesuse_19!();
+        Depcrate_propertiesuse_20!();
+        Depcrate_propertiesuse_21!();
+        Depcrate_propertiesuse_22!();
+        Depcrate_propertiesuse_23!();
+        Depcrate_propertiesuse_24!();
+        Depcrate_propertiesuse_25!();
+        Depcrate_propertiesuse_26!();
+        Depcrate_propertiesuse_27!();
+        Depcrate_propertiesuse_28!();
+        Depcrate_propertiesuse_29!();
+        Depcrate_propertiesuse_30!();
+        Depcrate_propertiesuse_31!();
+        Depcrate_propertiesuse_32!();
+        Depcrate_propertiesuse_33!();
+        Depcrate_propertiesuse_34!();
+        Depcrate_propertiesuse_35!();
+        Depcrate_propertiesuse_36!();
+        Depcrate_propertiesuse_37!();
+        Depcrate_propertiesuse_38!();
+        Depcrate_propertiesuse_39!();
+        Depcrate_propertiesuse_40!();
+        Depcrate_propertiesuse_41!();
+        Depcrate_propertiesuse_42!();
+        Depcrate_propertiesuse_43!();
+        Depcrate_propertiesCanonicalCompositionBorrowed!();
+        Depcrate_propertiesimpl_45!();
+        Depcrate_propertiesimpl_46!();
+        Depcrate_propertiesimpl_47!();
+        Depcrate_propertiesCanonicalComposition!();
+        Depcrate_propertiesimpl_49!();
+        Depcrate_propertiesimpl_50!();
+        Depcrate_propertiesDecomposed!();
+        Depcrate_propertiesCanonicalDecompositionBorrowed!();
+        Depcrate_propertiesimpl_53!();
+        Depcrate_propertiesimpl_54!();
+        Depcrate_propertiesimpl_55!();
+        Depcrate_propertiesCanonicalDecomposition!();
+        Depcrate_propertiesimpl_57!();
+        Depcrate_propertiesimpl_58!();
+        Depcrate_propertiesCanonicalCombiningClassMapBorrowed!();
+        Depcrate_propertiesimpl_60!();
+        Depcrate_propertiesimpl_61!();
+        Depcrate_propertiesimpl_62!();
+        Depcrate_propertiesCanonicalCombiningClassMap!();
+        Depcrate_propertiesimpl_64!();
+        Depcrate_propertiesimpl_65!();
+    };
+}

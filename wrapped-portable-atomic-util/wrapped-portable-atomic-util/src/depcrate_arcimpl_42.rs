@@ -1,0 +1,9 @@
+// Generated macro for impl_42 (impl)
+macro_rules! Depcrate_arcimpl_42 {
+() => {
+// Module: crate::arc
+// Provides: {"impl_42"}
+// Dependencies: {}
+impl < T : ? Sized > Arc < T > { # [doc = " Returns a mutable reference into the given `Arc`, if there are"] # [doc = " no other `Arc` or [`Weak`] pointers to the same allocation."] # [doc = ""] # [doc = " Returns [`None`] otherwise, because it is not safe to"] # [doc = " mutate a shared value."] # [doc = ""] # [doc = " See also [`make_mut`][make_mut], which will [`clone`][clone]"] # [doc = " the inner value when there are other `Arc` pointers."] # [doc = ""] # [doc = " [make_mut]: Arc::make_mut"] # [doc = " [clone]: Clone::clone"] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " use portable_atomic_util::Arc;"] # [doc = ""] # [doc = " let mut x = Arc::new(3);"] # [doc = " *Arc::get_mut(&mut x).unwrap() = 4;"] # [doc = " assert_eq!(*x, 4);"] # [doc = ""] # [doc = " let _y = Arc::clone(&x);"] # [doc = " assert!(Arc::get_mut(&mut x).is_none());"] # [doc = " ```"] # [inline] pub fn get_mut (this : & mut Self) -> Option < & mut T > { if this . is_unique () { unsafe { Some (Self :: get_mut_unchecked (this)) } } else { None } } # [inline] unsafe fn get_mut_unchecked (this : & mut Self) -> & mut T { unsafe { & mut (* this . ptr . as_ptr ()) . data } } # [doc = " Determine whether this is the unique reference (including weak refs) to"] # [doc = " the underlying data."] # [doc = ""] # [doc = " Note that this requires locking the weak ref count."] fn is_unique (& mut self) -> bool { if self . inner () . weak . compare_exchange (1 , usize :: MAX , Acquire , Relaxed) . is_ok () { let unique = self . inner () . strong . load (Acquire) == 1 ; self . inner () . weak . store (1 , Release) ; unique } else { false } } }
+};
+}

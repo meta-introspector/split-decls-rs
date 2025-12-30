@@ -1,0 +1,47 @@
+// Generated module macro for crate::encode
+macro_rules! Modcrate_encode {
+() => {
+        Depcrate_encodebin!();
+        Depcrate_encodedec!();
+        Depcrate_encodeext!();
+        Depcrate_encodemap!();
+        Depcrate_encodesint!();
+        Depcrate_encodestr!();
+        Depcrate_encodeuint!();
+        Depcrate_encodevec!();
+        Depcrate_encodeuse_161!();
+        Depcrate_encodeuse_162!();
+        Depcrate_encodeuse_163!();
+        Depcrate_encodeuse_164!();
+        Depcrate_encodeuse_165!();
+        Depcrate_encodeuse_166!();
+        Depcrate_encodeuse_167!();
+        Depcrate_encodeuse_168!();
+        Depcrate_encodebuffer!();
+        Depcrate_encodeuse_187!();
+        Depcrate_encodeuse_188!();
+        Depcrate_encodeRmpWriteErr!();
+        Depcrate_encodeimpl_190!();
+        Depcrate_encodeimpl_191!();
+        Depcrate_encodeMarkerWriteError!();
+        Depcrate_encodeimpl_193!();
+        Depcrate_encodewrite_marker!();
+        Depcrate_encodeDataWriteError!();
+        Depcrate_encodeimpl_196!();
+        Depcrate_encodewrite_nil!();
+        Depcrate_encodewrite_bool!();
+        Depcrate_encodesealed!();
+        Depcrate_encodewrite_byteorder_utils!();
+        Depcrate_encodeRmpWrite!();
+        Depcrate_encodeimpl_202!();
+        Depcrate_encodeValueWriteError!();
+        Depcrate_encodeimpl_204!();
+        Depcrate_encodeimpl_205!();
+        Depcrate_encodeimpl_206!();
+        Depcrate_encodeimpl_207!();
+        Depcrate_encodeimpl_208!();
+        Depcrate_encodewrite_array_len!();
+        Depcrate_encodewrite_map_len!();
+        Depcrate_encodewrite_ext_meta!();
+    };
+}

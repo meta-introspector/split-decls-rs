@@ -1,0 +1,9 @@
+// Generated macro for recursive_dependency_analysis (function)
+macro_rules! Depcraterecursive_dependency_analysis {
+() => {
+// Module: crate
+// Provides: {"recursive_dependency_analysis"}
+// Dependencies: {}
+fn recursive_dependency_analysis (bin_name : & str , max_depth : usize) -> Result < () , Box < dyn std :: error :: Error > > { println ! ("🔄 Recursive dependency analysis for: {} (depth: {})" , bin_name , max_depth) ; let mut index = Output2Index :: new () ; index . load_or_build () ? ; let mut cache = DepCache :: new () ; let mut processed = HashSet :: new () ; let mut to_process = Vec :: new () ; let bin_path = find_binary_in_output2 (bin_name) ? ; let root_id = cache . get_or_compute (& bin_path) ? ; to_process . push ((root_id . clone () , 0)) ; let mut dependency_tree = HashMap :: new () ; while let Some ((current_id , depth)) = to_process . pop () { if processed . contains (& current_id) || depth >= max_depth { continue ; } processed . insert (current_id . clone ()) ; println ! ("📊 Processing {} at depth {}" , current_id , depth) ; let node = cache . nodes . get (& current_id) . unwrap () ; let tokens = node . tokens . clone () ; let mut dep_ids = Vec :: new () ; for token in & tokens { if let Some (paths) = index . resolve (token) { if let Some (first_path) = paths . first () { let dep_id = cache . get_or_compute (first_path) ? ; dep_ids . push (dep_id . clone ()) ; to_process . push ((dep_id , depth + 1)) ; } } } dependency_tree . insert (current_id . clone () , dep_ids) ; println ! ("  ✅ Found {} dependencies" , dependency_tree [& current_id] . len ()) ; } generate_evaluation_result (bin_name , & dependency_tree , & cache , & index) ? ; println ! ("🎯 Recursive analysis complete!") ; println ! ("   Processed {} unique nodes" , processed . len ()) ; println ! ("   Cache entries: {}" , cache . nodes . len ()) ; Ok (()) }
+};
+}

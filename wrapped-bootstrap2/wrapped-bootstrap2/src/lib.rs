@@ -1,0 +1,64 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcrate_syn_interpreteruse_26.rs");
+include!("depcrateuse_2.rs");
+include!("depcrateuse_39.rs");
+include!("depcrateuse_41.rs");
+include!("depcrate_rdf_syn_interpreteruse_33.rs");
+include!("depcrate_syn_interpretersynvalue.rs");
+include!("depcrate_emulatoruse_13.rs");
+include!("depcrate_rdf_syn_interpreterimpl_38.rs");
+include!("depcrate_rdf_syn_interpretersynvalue.rs");
+include!("depcrate_rdf_syn_interpreteruse_32.rs");
+include!("depcrate_workflowworkflowexecutor.rs");
+include!("depcrate_syn_interpreteruse_24.rs");
+include!("depcrate_workflowuse_19.rs");
+include!("depcrate_analyzerdeclarationanalyzer.rs");
+include!("depcrate_analyzerimpl_8.rs");
+include!("depcrate_syn_interpretersyninterpreter.rs");
+include!("depcrate_analyzeruse_4.rs");
+include!("depcrate_emulatorimpl_15.rs");
+include!("depcrate_emulatoruse_12.rs");
+include!("depcrate_emulatoremulatedexecutor.rs");
+include!("depcrate_analyzerdeclarationstats.rs");
+include!("depcratesyn_interpreter.rs");
+include!("depcrate_rdf_syn_interpreterrdfsyninterpreter.rs");
+include!("depcrateworkflow.rs");
+include!("depcrateuse_43.rs");
+include!("depcrateuse_42.rs");
+include!("depcratebootstrap2auditor.rs");
+include!("depcrateuse_1.rs");
+include!("depcrate_syn_interpreteruse_25.rs");
+include!("depcraterdf_syn_interpreter.rs");
+include!("depcrate_analyzeruse_5.rs");
+include!("depcrate_syn_interpreteruse_23.rs");
+include!("depcrate_rdf_syn_interpreteruse_34.rs");
+include!("depcrate_analyzeruse_6.rs");
+include!("depcrate_rdf_syn_interpreterexecutionframe.rs");
+include!("depcrateimpl_45.rs");
+include!("depcratetests.rs");
+include!("depcrate_workflowimpl_21.rs");
+include!("depcrateanalyzer.rs");
+include!("depcrate_emulatoruse_11.rs");
+include!("depcrateemulator.rs");
+include!("depcrate_workflowuse_18.rs");
+include!("depcrate_syn_interpreterimpl_29.rs");
+include!("depcrate_rdf_syn_interpreteruse_31.rs");
+include!("depcrate_workflowuse_17.rs");
+include!("depcrateuse_40.rs");
+include!("modcrate_syn_interpreter.rs");
+include!("modcrate_workflow.rs");
+include!("modcrate_rdf_syn_interpreter.rs");
+include!("modcrate.rs");
+include!("modcrate_emulator.rs");
+include!("modcrate_analyzer.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate_syn_interpreter!();
+    Modcrate_workflow!();
+    Modcrate_rdf_syn_interpreter!();
+    Modcrate!();
+    Modcrate_emulator!();
+    Modcrate_analyzer!();
+}

@@ -1,0 +1,39 @@
+// Generated module macro for crate::ffi::c
+macro_rules! Modcrate_ffi_c {
+() => {
+        Depcrate_ffi_cuse_92!();
+        Depcrate_ffi_cuse_93!();
+        Depcrate_ffi_cuse_94!();
+        Depcrate_ffi_cuse_95!();
+        Depcrate_ffi_cuse_96!();
+        Depcrate_ffi_cuse_97!();
+        Depcrate_ffi_cuse_98!();
+        Depcrate_ffi_cErrorMessage!();
+        Depcrate_ffi_cimpl_100!();
+        Depcrate_ffi_cStreamWrapper!();
+        Depcrate_ffi_cimpl_102!();
+        Depcrate_ffi_cimpl_103!();
+        Depcrate_ffi_cimpl_104!();
+        Depcrate_ffi_callocator!();
+        Depcrate_ffi_cimpl_106!();
+        Depcrate_ffi_cimpl_107!();
+        Depcrate_ffi_cDirection!();
+        Depcrate_ffi_cDirCompress!();
+        Depcrate_ffi_cDirDecompress!();
+        Depcrate_ffi_cStream!();
+        Depcrate_ffi_cimpl_112!();
+        Depcrate_ffi_cimpl_113!();
+        Depcrate_ffi_cimpl_114!();
+        Depcrate_ffi_cimpl_115!();
+        Depcrate_ffi_cInflate!();
+        Depcrate_ffi_cimpl_117!();
+        Depcrate_ffi_cimpl_118!();
+        Depcrate_ffi_cimpl_119!();
+        Depcrate_ffi_cDeflate!();
+        Depcrate_ffi_cimpl_121!();
+        Depcrate_ffi_cimpl_122!();
+        Depcrate_ffi_cimpl_123!();
+        Depcrate_ffi_cuse_124!();
+        Depcrate_ffi_cc_backend!();
+    };
+}

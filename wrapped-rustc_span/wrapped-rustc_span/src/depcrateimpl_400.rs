@@ -1,0 +1,9 @@
+// Generated macro for impl_400 (impl)
+macro_rules! Depcrateimpl_400 {
+() => {
+// Module: crate
+// Provides: {"impl_400"}
+// Dependencies: {}
+impl StableSourceFileId { fn from_filename_in_current_crate (filename : & FileName) -> Self { Self :: from_filename_and_stable_crate_id (filename , None) } pub fn from_filename_for_export (filename : & FileName , local_crate_stable_crate_id : StableCrateId ,) -> Self { Self :: from_filename_and_stable_crate_id (filename , Some (local_crate_stable_crate_id)) } fn from_filename_and_stable_crate_id (filename : & FileName , stable_crate_id : Option < StableCrateId > ,) -> Self { let mut hasher = StableHasher :: new () ; filename . hash (& mut hasher) ; stable_crate_id . hash (& mut hasher) ; StableSourceFileId (hasher . finish ()) } }
+};
+}

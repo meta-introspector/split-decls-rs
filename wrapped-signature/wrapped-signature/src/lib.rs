@@ -1,0 +1,74 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcrate_hazmatasyncprehashsigner.rs");
+include!("depcrate_hazmatprehashsigner.rs");
+include!("depcrate_errorimpl_18.rs");
+include!("depcrate_encodinguse_11.rs");
+include!("depcrate_signerrandomizedsignermut.rs");
+include!("depcrate_verifiermultipartverifier.rs");
+include!("depcrate_erroruse_14.rs");
+include!("depcrate_errorimpl_21.rs");
+include!("depcrate_hazmatrandomizedprehashsigner.rs");
+include!("depcrate_errorimpl_22.rs");
+include!("depcrate_errorimpl_19.rs");
+include!("depcrate_signerasyncsigner.rs");
+include!("depcrate_signeruse_29.rs");
+include!("depcrate_hazmatuse_3.rs");
+include!("depcrate_signeruse_28.rs");
+include!("depcrate_encodingsignatureencoding.rs");
+include!("depcrate_errorresult.rs");
+include!("depcrate_errorimpl_20.rs");
+include!("depcrateerror.rs");
+include!("depcrate_signeruse_30.rs");
+include!("depcrate_signerdigestsigner.rs");
+include!("depcrate_hazmatuse_4.rs");
+include!("depcrate_signerimpl_42.rs");
+include!("depcrate_signerasyncdigestsigner.rs");
+include!("depcratesigner.rs");
+include!("depcrate_verifieruse_47.rs");
+include!("depcrate_verifieruse_48.rs");
+include!("depcrate_signersigner.rs");
+include!("depcrate_signersignermut.rs");
+include!("depcrate_signerrandomizedmultipartsigner.rs");
+include!("depcrate_signerimpl_45.rs");
+include!("depcrate_verifierverifier.rs");
+include!("depcratekeypair.rs");
+include!("depcrateverifier.rs");
+include!("depcratehazmat.rs");
+include!("depcrateencoding.rs");
+include!("depcrateother_1.rs");
+include!("depcrate_signermultipartsigner.rs");
+include!("depcrate_signerimpl_40.rs");
+include!("depcrateuse_52.rs");
+include!("depcrate_signerrandomizedmultipartsignermut.rs");
+include!("depcrate_signerasyncrandomizedsigner.rs");
+include!("depcrateuse_53.rs");
+include!("depcrate_keypairkeypair.rs");
+include!("depcrate_erroruse_15.rs");
+include!("depcrateuse_54.rs");
+include!("depcrate_verifierdigestverifier.rs");
+include!("depcrate_keypairkeypairref.rs");
+include!("depcrate_hazmatprehashverifier.rs");
+include!("depcrate_signerrandomizeddigestsigner.rs");
+include!("depcrate_hazmatasyncrandomizedprehashsigner.rs");
+include!("depcrate_signerrandomizedsigner.rs");
+include!("depcrate_keypairimpl_26.rs");
+include!("depcrate_errorerror.rs");
+include!("modcrate_signer.rs");
+include!("modcrate_verifier.rs");
+include!("modcrate.rs");
+include!("modcrate_encoding.rs");
+include!("modcrate_error.rs");
+include!("modcrate_hazmat.rs");
+include!("modcrate_keypair.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate_signer!();
+    Modcrate_verifier!();
+    Modcrate!();
+    Modcrate_encoding!();
+    Modcrate_error!();
+    Modcrate_hazmat!();
+    Modcrate_keypair!();
+}

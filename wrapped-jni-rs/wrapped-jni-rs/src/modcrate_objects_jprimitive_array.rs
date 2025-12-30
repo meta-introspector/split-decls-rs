@@ -1,0 +1,40 @@
+// Generated module macro for crate::objects::jprimitive_array
+macro_rules! Modcrate_objects_jprimitive_array {
+() => {
+        Depcrate_objects_jprimitive_arrayuse_512!();
+        Depcrate_objects_jprimitive_arrayuse_513!();
+        Depcrate_objects_jprimitive_arrayuse_514!();
+        Depcrate_objects_jprimitive_arrayuse_515!();
+        Depcrate_objects_jprimitive_arrayuse_516!();
+        Depcrate_objects_jprimitive_arrayuse_517!();
+        Depcrate_objects_jprimitive_arrayuse_518!();
+        Depcrate_objects_jprimitive_arrayJPrimitiveArray!();
+        Depcrate_objects_jprimitive_arrayimpl_520!();
+        Depcrate_objects_jprimitive_arrayimpl_521!();
+        Depcrate_objects_jprimitive_arrayimpl_522!();
+        Depcrate_objects_jprimitive_arrayimpl_523!();
+        Depcrate_objects_jprimitive_arrayimpl_524!();
+        Depcrate_objects_jprimitive_arrayimpl_525!();
+        Depcrate_objects_jprimitive_arrayimpl_526!();
+        Depcrate_objects_jprimitive_arrayJBooleanArray!();
+        Depcrate_objects_jprimitive_arrayJByteArray!();
+        Depcrate_objects_jprimitive_arrayJCharArray!();
+        Depcrate_objects_jprimitive_arrayJShortArray!();
+        Depcrate_objects_jprimitive_arrayJIntArray!();
+        Depcrate_objects_jprimitive_arrayJLongArray!();
+        Depcrate_objects_jprimitive_arrayJFloatArray!();
+        Depcrate_objects_jprimitive_arrayJDoubleArray!();
+        Depcrate_objects_jprimitive_arrayAsJArrayRaw!();
+        Depcrate_objects_jprimitive_arrayimpl_536!();
+        Depcrate_objects_jprimitive_arrayuse_537!();
+        Depcrate_objects_jprimitive_arrayimpl_ref_for_jprimitive_array!();
+        Depcrate_objects_jprimitive_arraymacro_539!();
+        Depcrate_objects_jprimitive_arraymacro_540!();
+        Depcrate_objects_jprimitive_arraymacro_541!();
+        Depcrate_objects_jprimitive_arraymacro_542!();
+        Depcrate_objects_jprimitive_arraymacro_543!();
+        Depcrate_objects_jprimitive_arraymacro_544!();
+        Depcrate_objects_jprimitive_arraymacro_545!();
+        Depcrate_objects_jprimitive_arraymacro_546!();
+    };
+}

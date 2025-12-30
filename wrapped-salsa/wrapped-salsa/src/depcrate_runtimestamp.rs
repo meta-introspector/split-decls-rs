@@ -1,9 +1,9 @@
-// Generated macro for Stamp (struct)
-macro_rules! Depcrate_runtimeStamp {
+// Generated macro for stamp (function)
+macro_rules! Depcrate_runtimestamp {
 () => {
 // Module: crate::runtime
-// Provides: {"Stamp"}
+// Provides: {"stamp"}
 // Dependencies: {}
-# [derive (Copy , Clone , Debug)] pub struct Stamp { pub durability : Durability , pub changed_at : Revision , }
+pub fn stamp (revision : Revision , durability : Durability) -> Stamp { Stamp { durability , changed_at : revision , } }
 };
 }

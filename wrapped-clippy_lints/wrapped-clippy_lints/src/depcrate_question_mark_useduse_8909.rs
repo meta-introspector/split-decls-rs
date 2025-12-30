@@ -1,0 +1,9 @@
+// Generated macro for use_8909 (use)
+macro_rules! Depcrate_question_mark_useduse_8909 {
+() => {
+// Module: crate::question_mark_used
+// Provides: {"use_8909"}
+// Dependencies: {}
+use rustc_lint :: { LateContext , LateLintPass } ;
+};
+}

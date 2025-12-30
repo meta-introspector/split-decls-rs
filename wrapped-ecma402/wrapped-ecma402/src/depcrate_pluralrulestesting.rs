@@ -1,0 +1,9 @@
+// Generated macro for testing (module)
+macro_rules! Depcrate_pluralrulestesting {
+() => {
+// Module: crate::pluralrules
+// Provides: {"testing"}
+// Dependencies: {}
+# [cfg (test)] mod testing { use crate :: testing :: TestLocale ; use ecma402_traits :: pluralrules ; use ecma402_traits :: pluralrules :: PluralRules ; use icu_provider :: DataError ; # [test] fn plurals_per_locale () -> Result < () , DataError > { # [derive (Debug , Clone)] struct TestCase { locale : TestLocale , opts : pluralrules :: Options , numbers : & 'static [f64] , expected : & 'static [& 'static str] , } let tests = [TestCase { locale : TestLocale ("ar") , opts : Default :: default () , numbers : & [0.0 , 1.0 , 2.0 , 5.0 , 6.0 , 18.0] , expected : & ["zero" , "one" , "two" , "few" , "few" , "many"] , } , TestCase { locale : TestLocale ("ar") , opts : pluralrules :: Options { in_type : pluralrules :: options :: Type :: Ordinal , .. Default :: default () } , numbers : & [0.0 , 1.0 , 2.0 , 5.0 , 6.0 , 18.0] , expected : & ["other" , "other" , "other" , "other" , "other" , "other"] , } , TestCase { locale : TestLocale ("sr") , opts : Default :: default () , numbers : & [0.0 , 1.0 , 2.0 , 5.0 , 6.0 , 18.0] , expected : & ["other" , "one" , "few" , "other" , "other" , "other"] , } , TestCase { locale : TestLocale ("sr") , opts : pluralrules :: Options { in_type : pluralrules :: options :: Type :: Ordinal , .. Default :: default () } , numbers : & [0.0 , 1.0 , 2.0 , 5.0 , 6.0 , 18.0] , expected : & ["other" , "other" , "other" , "other" , "other" , "other"] , } ,] ; for (i , test) in tests . into_iter () . enumerate () { let plr = super :: PluralRules :: try_new (test . locale , test . opts) ? ; assert_eq ! (test . numbers . iter () . map (| n | { let mut result = String :: new () ; plr . select (* n , & mut result) . unwrap () ; result }) . collect ::< Vec < _ >> () , test . expected , "for test case: {i}") ; } Ok (()) } }
+};
+}

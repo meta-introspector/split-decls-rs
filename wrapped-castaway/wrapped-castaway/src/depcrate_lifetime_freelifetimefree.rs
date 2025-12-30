@@ -1,0 +1,9 @@
+// Generated macro for LifetimeFree (trait)
+macro_rules! Depcrate_lifetime_freeLifetimeFree {
+() => {
+// Module: crate::lifetime_free
+// Provides: {"LifetimeFree"}
+// Dependencies: {}
+# [doc = " Marker trait for types that do not contain any lifetime parameters. Such"] # [doc = " types are safe to cast from non-static type parameters if their types are"] # [doc = " equal."] # [doc = ""] # [doc = " This trait is used by [`cast!`](crate::cast) to determine what casts are legal on values"] # [doc = " without a `'static` type constraint."] # [doc = ""] # [doc = " # Safety"] # [doc = ""] # [doc = " When implementing this trait for a type, you must ensure that the type is"] # [doc = " free of any lifetime parameters. Failure to meet **all** of the requirements"] # [doc = " below may result in undefined behavior."] # [doc = ""] # [doc = " - The type must be `'static`."] # [doc = " - The type must be free of lifetime parameters. In other words, the type"] # [doc = "   must be an \"owned\" type and not contain *any* lifetime parameters."] # [doc = " - All contained fields must also be `LifetimeFree`."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " use castaway::LifetimeFree;"] # [doc = ""] # [doc = " struct Container<T>(T);"] # [doc = ""] # [doc = " // UNDEFINED BEHAVIOR!!"] # [doc = " // unsafe impl LifetimeFree for Container<&'static str> {}"] # [doc = ""] # [doc = " // UNDEFINED BEHAVIOR!!"] # [doc = " // unsafe impl<T> LifetimeFree for Container<T> {}"] # [doc = ""] # [doc = " // This is safe."] # [doc = " unsafe impl<T: LifetimeFree> LifetimeFree for Container<T> {}"] # [doc = ""] # [doc = " struct PlainOldData {"] # [doc = "     foo: u8,"] # [doc = "     bar: bool,"] # [doc = " }"] # [doc = ""] # [doc = " // This is also safe, since all fields are known to be `LifetimeFree`."] # [doc = " unsafe impl LifetimeFree for PlainOldData {}"] # [doc = " ```"] pub unsafe trait LifetimeFree { }
+};
+}

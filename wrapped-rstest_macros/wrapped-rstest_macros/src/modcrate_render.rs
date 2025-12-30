@@ -1,0 +1,47 @@
+// Generated module macro for crate::render
+macro_rules! Modcrate_render {
+() => {
+        Depcrate_rendercrate_resolver!();
+        Depcrate_renderfixture!();
+        Depcrate_rendertest!();
+        Depcrate_renderwrapper!();
+        Depcrate_renderuse_412!();
+        Depcrate_renderuse_413!();
+        Depcrate_renderuse_414!();
+        Depcrate_renderuse_415!();
+        Depcrate_renderuse_416!();
+        Depcrate_renderuse_417!();
+        Depcrate_renderuse_418!();
+        Depcrate_renderuse_419!();
+        Depcrate_renderuse_420!();
+        Depcrate_renderuse_421!();
+        Depcrate_renderuse_422!();
+        Depcrate_renderuse_423!();
+        Depcrate_renderuse_424!();
+        Depcrate_renderuse_425!();
+        Depcrate_renderapply_arguments!();
+        Depcrate_renderinject!();
+        Depcrate_rendersingle!();
+        Depcrate_renderparametrize!();
+        Depcrate_renderArgumentDataResolver!();
+        Depcrate_renderimpl_455!();
+        Depcrate_renderCaseInfo!();
+        Depcrate_renderimpl_457!();
+        Depcrate_render_matrix_recursive!();
+        Depcrate_rendermatrix!();
+        Depcrate_renderresolve_test_attr!();
+        Depcrate_renderrender_exec_call!();
+        Depcrate_renderrender_test_call!();
+        Depcrate_rendergenerics_types_ident!();
+        Depcrate_rendersingle_test_case!();
+        Depcrate_rendertrace_arguments!();
+        Depcrate_renderimpl_466!();
+        Depcrate_rendertest_group!();
+        Depcrate_renderDisplayLen!();
+        Depcrate_renderimpl_469!();
+        Depcrate_renderformat_case_name!();
+        Depcrate_renderCaseDataValues!();
+        Depcrate_renderimpl_472!();
+        Depcrate_rendercases_data!();
+    };
+}

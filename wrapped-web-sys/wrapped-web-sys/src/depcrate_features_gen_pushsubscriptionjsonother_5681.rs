@@ -1,0 +1,9 @@
+// Generated macro for other_5681 (other)
+macro_rules! Depcrate_features_gen_PushSubscriptionJsonother_5681 {
+() => {
+// Module: crate::features::gen_PushSubscriptionJson
+// Provides: {"other_5681"}
+// Dependencies: {}
+# [wasm_bindgen] extern "C" { # [wasm_bindgen (extends = :: js_sys :: Object , js_name = PushSubscriptionJSON)] # [derive (Debug , Clone , PartialEq , Eq)] # [doc = "The `PushSubscriptionJson` dictionary."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `PushSubscriptionJson`*"] pub type PushSubscriptionJson ; # [doc = "Get the `endpoint` field of this object."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `PushSubscriptionJson`*"] # [wasm_bindgen (method , getter = "endpoint")] pub fn get_endpoint (this : & PushSubscriptionJson) -> Option < :: alloc :: string :: String > ; # [doc = "Change the `endpoint` field of this object."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `PushSubscriptionJson`*"] # [wasm_bindgen (method , setter = "endpoint")] pub fn set_endpoint (this : & PushSubscriptionJson , val : & str) ; # [cfg (feature = "PushSubscriptionKeys")] # [doc = "Get the `keys` field of this object."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `PushSubscriptionJson`, `PushSubscriptionKeys`*"] # [wasm_bindgen (method , getter = "keys")] pub fn get_keys (this : & PushSubscriptionJson) -> Option < PushSubscriptionKeys > ; # [cfg (feature = "PushSubscriptionKeys")] # [doc = "Change the `keys` field of this object."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `PushSubscriptionJson`, `PushSubscriptionKeys`*"] # [wasm_bindgen (method , setter = "keys")] pub fn set_keys (this : & PushSubscriptionJson , val : & PushSubscriptionKeys) ; }
+};
+}

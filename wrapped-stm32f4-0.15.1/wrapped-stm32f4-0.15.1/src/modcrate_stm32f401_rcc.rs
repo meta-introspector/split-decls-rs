@@ -1,0 +1,48 @@
+// Generated module macro for crate::stm32f401::rcc
+macro_rules! Modcrate_stm32f401_rcc {
+() => {
+        Depcrate_stm32f401_rccRegisterBlock!();
+        Depcrate_stm32f401_rccCR!();
+        Depcrate_stm32f401_rcccr!();
+        Depcrate_stm32f401_rccPLLCFGR!();
+        Depcrate_stm32f401_rccpllcfgr!();
+        Depcrate_stm32f401_rccCFGR!();
+        Depcrate_stm32f401_rcccfgr!();
+        Depcrate_stm32f401_rccCIR!();
+        Depcrate_stm32f401_rcccir!();
+        Depcrate_stm32f401_rccAHB1RSTR!();
+        Depcrate_stm32f401_rccahb1rstr!();
+        Depcrate_stm32f401_rccAHB2RSTR!();
+        Depcrate_stm32f401_rccahb2rstr!();
+        Depcrate_stm32f401_rccAPB1RSTR!();
+        Depcrate_stm32f401_rccapb1rstr!();
+        Depcrate_stm32f401_rccAPB2RSTR!();
+        Depcrate_stm32f401_rccapb2rstr!();
+        Depcrate_stm32f401_rccAHB1ENR!();
+        Depcrate_stm32f401_rccahb1enr!();
+        Depcrate_stm32f401_rccAHB2ENR!();
+        Depcrate_stm32f401_rccahb2enr!();
+        Depcrate_stm32f401_rccAPB1ENR!();
+        Depcrate_stm32f401_rccapb1enr!();
+        Depcrate_stm32f401_rccAPB2ENR!();
+        Depcrate_stm32f401_rccapb2enr!();
+        Depcrate_stm32f401_rccAHB1LPENR!();
+        Depcrate_stm32f401_rccahb1lpenr!();
+        Depcrate_stm32f401_rccAHB2LPENR!();
+        Depcrate_stm32f401_rccahb2lpenr!();
+        Depcrate_stm32f401_rccAPB1LPENR!();
+        Depcrate_stm32f401_rccapb1lpenr!();
+        Depcrate_stm32f401_rccAPB2LPENR!();
+        Depcrate_stm32f401_rccapb2lpenr!();
+        Depcrate_stm32f401_rccBDCR!();
+        Depcrate_stm32f401_rccbdcr!();
+        Depcrate_stm32f401_rccCSR!();
+        Depcrate_stm32f401_rcccsr!();
+        Depcrate_stm32f401_rccSSCGR!();
+        Depcrate_stm32f401_rccsscgr!();
+        Depcrate_stm32f401_rccPLLI2SCFGR!();
+        Depcrate_stm32f401_rccplli2scfgr!();
+        Depcrate_stm32f401_rccDCKCFGR!();
+        Depcrate_stm32f401_rccdckcfgr!();
+    };
+}

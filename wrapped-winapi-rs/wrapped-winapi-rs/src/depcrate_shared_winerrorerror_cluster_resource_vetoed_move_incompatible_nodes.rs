@@ -1,0 +1,9 @@
+// Generated macro for ERROR_CLUSTER_RESOURCE_VETOED_MOVE_INCOMPATIBLE_NODES (const)
+macro_rules! Depcrate_shared_winerrorERROR_CLUSTER_RESOURCE_VETOED_MOVE_INCOMPATIBLE_NODES {
+() => {
+// Module: crate::shared::winerror
+// Provides: {"ERROR_CLUSTER_RESOURCE_VETOED_MOVE_INCOMPATIBLE_NODES"}
+// Dependencies: {}
+pub const ERROR_CLUSTER_RESOURCE_VETOED_MOVE_INCOMPATIBLE_NODES : DWORD = 5953 ;
+};
+}

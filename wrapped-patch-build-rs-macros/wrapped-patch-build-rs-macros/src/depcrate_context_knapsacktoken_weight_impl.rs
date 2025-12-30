@@ -1,0 +1,9 @@
+// Generated macro for token_weight_impl (function)
+macro_rules! Depcrate_context_knapsacktoken_weight_impl {
+() => {
+// Module: crate::context_knapsack
+// Provides: {"token_weight_impl"}
+// Dependencies: {}
+# [decl (fn , name = "token_weight_impl" , vis = "pub" , hash = "6239ef14")] pub fn token_weight_impl (input : TokenStream) -> TokenStream { let input_str = parse_macro_input ! (input as LitStr) ; let content = input_str . value () ; quote ! { { let char_count = # content . len () ; let word_count = # content . split_whitespace () . count () ; let token_estimate = (char_count as f64 / 4.0) as u32 ; let has_code = # content . contains ("fn ") || # content . contains ("struct ") ; let has_numbers = # content . chars () . any (| c | c . is_ascii_digit ()) ; let has_symbols = # content . chars () . any (| c | "{}[]()" . contains (c)) ; let base_value = word_count as u32 ; let code_bonus = if has_code { base_value / 2 } else { 0 } ; let data_bonus = if has_numbers { base_value / 4 } else { 0 } ; let struct_bonus = if has_symbols { base_value / 8 } else { 0 } ; let total_value = base_value + code_bonus + data_bonus + struct_bonus ; let weight_result = format ! ("TokenWeight {{ tokens: {}, value: {}, density: {:.2} }}" , token_estimate , total_value , total_value as f64 / token_estimate as f64) ; println ! ("cargo:warning=⚖️ Token analysis: {} tokens, {} value" , token_estimate , total_value) ; weight_result } } . into () }
+};
+}

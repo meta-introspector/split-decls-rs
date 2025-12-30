@@ -1,0 +1,62 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcrate_timeformat.rs");
+include!("depcrateuse_41.rs");
+include!("depcrate_timeformat.rs");
+include!("depcrate_time_initimpl_23.rs");
+include!("depcrate_time_writeuse_25.rs");
+include!("depcrate_time_formatdefault.rs");
+include!("depcrate_time_writeuse_26.rs");
+include!("depcrate_parsefunction.rs");
+include!("depcrateoffsetinseconds.rs");
+include!("depcrate_time_formatiso8601.rs");
+include!("depcrate_time_formatgit_rfc2822.rs");
+include!("depcrate_time_formatimpl_19.rs");
+include!("depcrate_time_formatgitoxide.rs");
+include!("depcrate_timeimpl_6.rs");
+include!("depcrate_parseuse_31.rs");
+include!("depcrate_parseuse_32.rs");
+include!("depcrate_timeimpl_3.rs");
+include!("depcrate_time_writeimpl_27.rs");
+include!("depcrate_parseerror.rs");
+include!("depcrate_parseimpl_35.rs");
+include!("depcrate_parseimpl_36.rs");
+include!("depcrate_timeuse_2.rs");
+include!("depcrate_timeimpl_7.rs");
+include!("depcrate_parseimpl_37.rs");
+include!("depcrate_parseimpl_38.rs");
+include!("depcrate_parseuse_30.rs");
+include!("depcrateparse.rs");
+include!("depcrate_time_formatraw.rs");
+include!("depcrate_timewrite.rs");
+include!("depcrate_parserelative.rs");
+include!("depcrate_time_formatuse_9.rs");
+include!("depcrate_time_formatshort.rs");
+include!("depcratetime.rs");
+include!("depcrate_time_writeimpl_28.rs");
+include!("depcrate_time_formatimpl_20.rs");
+include!("depcrate_timeinit.rs");
+include!("depcrate_time_formatrfc2822.rs");
+include!("depcratetime.rs");
+include!("depcratesecondssinceunixepoch.rs");
+include!("depcrate_time_formatiso8601_strict.rs");
+include!("depcrate_time_inituse_22.rs");
+include!("depcrate_time_formatunix.rs");
+include!("depcrate_parsetimebuf.rs");
+include!("depcrate_timecustomformat.rs");
+include!("modcrate_time.rs");
+include!("modcrate.rs");
+include!("modcrate_time_init.rs");
+include!("modcrate_time_format.rs");
+include!("modcrate_time_write.rs");
+include!("modcrate_parse.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate_time!();
+    Modcrate!();
+    Modcrate_time_init!();
+    Modcrate_time_format!();
+    Modcrate_time_write!();
+    Modcrate_parse!();
+}

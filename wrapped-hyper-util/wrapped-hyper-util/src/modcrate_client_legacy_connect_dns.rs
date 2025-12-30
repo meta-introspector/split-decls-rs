@@ -1,0 +1,40 @@
+// Generated module macro for crate::client::legacy::connect::dns
+macro_rules! Modcrate_client_legacy_connect_dns {
+() => {
+        Depcrate_client_legacy_connect_dnsuse_68!();
+        Depcrate_client_legacy_connect_dnsuse_69!();
+        Depcrate_client_legacy_connect_dnsuse_70!();
+        Depcrate_client_legacy_connect_dnsuse_71!();
+        Depcrate_client_legacy_connect_dnsuse_72!();
+        Depcrate_client_legacy_connect_dnsuse_73!();
+        Depcrate_client_legacy_connect_dnsuse_74!();
+        Depcrate_client_legacy_connect_dnsuse_75!();
+        Depcrate_client_legacy_connect_dnsuse_76!();
+        Depcrate_client_legacy_connect_dnsuse_77!();
+        Depcrate_client_legacy_connect_dnsName!();
+        Depcrate_client_legacy_connect_dnsGaiResolver!();
+        Depcrate_client_legacy_connect_dnsGaiAddrs!();
+        Depcrate_client_legacy_connect_dnsGaiFuture!();
+        Depcrate_client_legacy_connect_dnsimpl_82!();
+        Depcrate_client_legacy_connect_dnsimpl_83!();
+        Depcrate_client_legacy_connect_dnsimpl_84!();
+        Depcrate_client_legacy_connect_dnsimpl_85!();
+        Depcrate_client_legacy_connect_dnsInvalidNameError!();
+        Depcrate_client_legacy_connect_dnsimpl_87!();
+        Depcrate_client_legacy_connect_dnsimpl_88!();
+        Depcrate_client_legacy_connect_dnsimpl_89!();
+        Depcrate_client_legacy_connect_dnsimpl_90!();
+        Depcrate_client_legacy_connect_dnsimpl_91!();
+        Depcrate_client_legacy_connect_dnsimpl_92!();
+        Depcrate_client_legacy_connect_dnsimpl_93!();
+        Depcrate_client_legacy_connect_dnsimpl_94!();
+        Depcrate_client_legacy_connect_dnsimpl_95!();
+        Depcrate_client_legacy_connect_dnsimpl_96!();
+        Depcrate_client_legacy_connect_dnsSocketAddrs!();
+        Depcrate_client_legacy_connect_dnsimpl_98!();
+        Depcrate_client_legacy_connect_dnsimpl_99!();
+        Depcrate_client_legacy_connect_dnssealed!();
+        Depcrate_client_legacy_connect_dnsresolve!();
+        Depcrate_client_legacy_connect_dnstests!();
+    };
+}

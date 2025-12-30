@@ -1,0 +1,9 @@
+// Generated macro for FLAGS_IMAGE_REL_I386 (const)
+macro_rules! Depcrate_readobj_peFLAGS_IMAGE_REL_I386 {
+() => {
+// Module: crate::readobj::pe
+// Provides: {"FLAGS_IMAGE_REL_I386"}
+// Dependencies: {}
+const FLAGS_IMAGE_REL_I386 : & [Flag < u16 >] = & flags ! (IMAGE_REL_I386_ABSOLUTE , IMAGE_REL_I386_DIR16 , IMAGE_REL_I386_REL16 , IMAGE_REL_I386_DIR32 , IMAGE_REL_I386_DIR32NB , IMAGE_REL_I386_SEG12 , IMAGE_REL_I386_SECTION , IMAGE_REL_I386_SECREL , IMAGE_REL_I386_TOKEN , IMAGE_REL_I386_SECREL7 , IMAGE_REL_I386_REL32 ,) ;
+};
+}

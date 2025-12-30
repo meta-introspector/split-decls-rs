@@ -1,0 +1,9 @@
+// Generated macro for try_init (function)
+macro_rules! Depcrate_inittry_init {
+() => {
+// Module: crate::init
+// Provides: {"try_init"}
+// Dependencies: {}
+# [doc = " Try to initialize a terminal using reasonable defaults for most applications."] # [doc = ""] # [doc = " This function will attempt to create a [`DefaultTerminal`] and initialize it with the following"] # [doc = " defaults:"] # [doc = ""] # [doc = " - Raw mode is enabled"] # [doc = " - Alternate screen buffer enabled"] # [doc = " - A panic hook is installed that restores the terminal before panicking."] # [doc = " - A [`Terminal`] is created using [`CrosstermBackend`] writing to [`Stdout`]"] # [doc = ""] # [doc = " If any of these steps fail, the error is returned."] # [doc = ""] # [doc = " Ensure that this method is called *after* your app installs any other panic hooks to ensure the"] # [doc = " terminal is restored before the other hooks are called."] # [doc = ""] # [doc = " Generally, you should use [`init`] instead of this function, as the panic hook installed by this"] # [doc = " function will ensure that any failures during initialization will restore the terminal before"] # [doc = " panicking. This function is provided for cases where you need to handle the error yourself."] # [doc = ""] # [doc = " See the [module-level documentation](mod@crate::init) for a comparison of all initialization"] # [doc = " functions and guidance on when to use each one."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```no_run"] # [doc = " let terminal = ratatui::try_init()?;"] # [doc = " # Ok::<(), std::io::Error>(())"] # [doc = " ```"] pub fn try_init () -> io :: Result < DefaultTerminal > { set_panic_hook () ; enable_raw_mode () ? ; execute ! (stdout () , EnterAlternateScreen) ? ; let backend = CrosstermBackend :: new (stdout ()) ; Terminal :: new (backend) }
+};
+}

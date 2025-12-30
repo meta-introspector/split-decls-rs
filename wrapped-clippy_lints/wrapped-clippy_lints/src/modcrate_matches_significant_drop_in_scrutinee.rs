@@ -1,0 +1,40 @@
+// Generated module macro for crate::matches::significant_drop_in_scrutinee
+macro_rules! Modcrate_matches_significant_drop_in_scrutinee {
+() => {
+        Depcrate_matches_significant_drop_in_scrutineeuse_4925!();
+        Depcrate_matches_significant_drop_in_scrutineeuse_4926!();
+        Depcrate_matches_significant_drop_in_scrutineeuse_4927!();
+        Depcrate_matches_significant_drop_in_scrutineeuse_4928!();
+        Depcrate_matches_significant_drop_in_scrutineeuse_4929!();
+        Depcrate_matches_significant_drop_in_scrutineeuse_4930!();
+        Depcrate_matches_significant_drop_in_scrutineeuse_4931!();
+        Depcrate_matches_significant_drop_in_scrutineeuse_4932!();
+        Depcrate_matches_significant_drop_in_scrutineeuse_4933!();
+        Depcrate_matches_significant_drop_in_scrutineeuse_4934!();
+        Depcrate_matches_significant_drop_in_scrutineeuse_4935!();
+        Depcrate_matches_significant_drop_in_scrutineeuse_4936!();
+        Depcrate_matches_significant_drop_in_scrutineeuse_4937!();
+        Depcrate_matches_significant_drop_in_scrutineeuse_4938!();
+        Depcrate_matches_significant_drop_in_scrutineeuse_4939!();
+        Depcrate_matches_significant_drop_in_scrutineeuse_4940!();
+        Depcrate_matches_significant_drop_in_scrutineecheck_match!();
+        Depcrate_matches_significant_drop_in_scrutineecheck_if_let!();
+        Depcrate_matches_significant_drop_in_scrutineecheck_while_let!();
+        Depcrate_matches_significant_drop_in_scrutineeSuggestion!();
+        Depcrate_matches_significant_drop_in_scrutineecheck!();
+        Depcrate_matches_significant_drop_in_scrutineeset_suggestion!();
+        Depcrate_matches_significant_drop_in_scrutineeSigDropChecker!();
+        Depcrate_matches_significant_drop_in_scrutineeimpl_4948!();
+        Depcrate_matches_significant_drop_in_scrutineeSigDropHolder!();
+        Depcrate_matches_significant_drop_in_scrutineeSigDropHelper!();
+        Depcrate_matches_significant_drop_in_scrutineeFoundSigDrop!();
+        Depcrate_matches_significant_drop_in_scrutineeimpl_4952!();
+        Depcrate_matches_significant_drop_in_scrutineety_peel_refs!();
+        Depcrate_matches_significant_drop_in_scrutineety_has_erased_regions!();
+        Depcrate_matches_significant_drop_in_scrutineeimpl_4955!();
+        Depcrate_matches_significant_drop_in_scrutineeArmSigDropHelper!();
+        Depcrate_matches_significant_drop_in_scrutineeimpl_4957!();
+        Depcrate_matches_significant_drop_in_scrutineehas_significant_drop_in_arms!();
+        Depcrate_matches_significant_drop_in_scrutineeimpl_4959!();
+    };
+}

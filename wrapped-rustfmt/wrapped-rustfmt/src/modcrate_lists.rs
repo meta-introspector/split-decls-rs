@@ -1,0 +1,41 @@
+// Generated module macro for crate::lists
+macro_rules! Modcrate_lists {
+() => {
+        Depcrate_listsuse_780!();
+        Depcrate_listsuse_781!();
+        Depcrate_listsuse_782!();
+        Depcrate_listsuse_783!();
+        Depcrate_listsuse_784!();
+        Depcrate_listsuse_785!();
+        Depcrate_listsuse_786!();
+        Depcrate_listsuse_787!();
+        Depcrate_listsuse_788!();
+        Depcrate_listsuse_789!();
+        Depcrate_listsListFormatting!();
+        Depcrate_listsimpl_791!();
+        Depcrate_listsimpl_792!();
+        Depcrate_listsListItemCommentStyle!();
+        Depcrate_listsListItem!();
+        Depcrate_listsimpl_795!();
+        Depcrate_listsSeparator!();
+        Depcrate_listsimpl_797!();
+        Depcrate_listsdefinitive_tactic!();
+        Depcrate_listswrite_list!();
+        Depcrate_listsmax_width_of_item_with_post_comment!();
+        Depcrate_listspost_comment_alignment!();
+        Depcrate_listsListItems!();
+        Depcrate_listsextract_pre_comment!();
+        Depcrate_listsextract_post_comment!();
+        Depcrate_listsget_comment_end!();
+        Depcrate_listshas_extra_newline!();
+        Depcrate_listsimpl_807!();
+        Depcrate_listsitemize_list!();
+        Depcrate_listscalculate_width!();
+        Depcrate_liststotal_item_width!();
+        Depcrate_listscomment_len!();
+        Depcrate_listsstruct_lit_shape!();
+        Depcrate_listsstruct_lit_tactic!();
+        Depcrate_listsshape_for_tactic!();
+        Depcrate_listsstruct_lit_formatting!();
+    };
+}

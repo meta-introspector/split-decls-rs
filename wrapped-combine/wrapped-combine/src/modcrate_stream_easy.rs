@@ -1,0 +1,39 @@
+// Generated module macro for crate::stream::easy
+macro_rules! Modcrate_stream_easy {
+() => {
+        Depcrate_stream_easyuse_154!();
+        Depcrate_stream_easyuse_155!();
+        Depcrate_stream_easyuse_156!();
+        Depcrate_stream_easyInfo!();
+        Depcrate_stream_easyimpl_158!();
+        Depcrate_stream_easyimpl_159!();
+        Depcrate_stream_easyimpl_160!();
+        Depcrate_stream_easyimpl_161!();
+        Depcrate_stream_easyimpl_162!();
+        Depcrate_stream_easyimpl_163!();
+        Depcrate_stream_easyimpl_164!();
+        Depcrate_stream_easyimpl_165!();
+        Depcrate_stream_easyError!();
+        Depcrate_stream_easyimpl_167!();
+        Depcrate_stream_easyimpl_168!();
+        Depcrate_stream_easyimpl_169!();
+        Depcrate_stream_easyimpl_170!();
+        Depcrate_stream_easyimpl_171!();
+        Depcrate_stream_easyimpl_172!();
+        Depcrate_stream_easyimpl_173!();
+        Depcrate_stream_easyimpl_174!();
+        Depcrate_stream_easyimpl_175!();
+        Depcrate_stream_easyParseError!();
+        Depcrate_stream_easyErrors!();
+        Depcrate_stream_easyimpl_178!();
+        Depcrate_stream_easyimpl_179!();
+        Depcrate_stream_easyimpl_180!();
+        Depcrate_stream_easyimpl_181!();
+        Depcrate_stream_easyStream!();
+        Depcrate_stream_easyimpl_183!();
+        Depcrate_stream_easyimpl_184!();
+        Depcrate_stream_easyimpl_185!();
+        Depcrate_stream_easyimpl_186!();
+        Depcrate_stream_easyimpl_187!();
+    };
+}

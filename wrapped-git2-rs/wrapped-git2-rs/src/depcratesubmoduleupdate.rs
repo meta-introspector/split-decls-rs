@@ -1,0 +1,9 @@
+// Generated macro for SubmoduleUpdate (enum)
+macro_rules! DepcrateSubmoduleUpdate {
+() => {
+// Module: crate
+// Provides: {"SubmoduleUpdate"}
+// Dependencies: {}
+# [doc = " Submodule update values"] # [doc = ""] # [doc = " These values represent settings for the `submodule.$name.update`"] # [doc = " configuration value which says how to handle `git submodule update`"] # [doc = " for this submodule. The value is usually set in the \".gitmodules\""] # [doc = " file and copied to \".git/config\" when the submodule is initialized."] # [derive (Copy , Clone , Debug , PartialEq , Eq)] pub enum SubmoduleUpdate { # [doc = " The default; when a submodule is updated, checkout the new detached"] # [doc = " HEAD to the submodule directory."] Checkout , # [doc = " Update by rebasing the current checked out branch onto the commit from"] # [doc = " the superproject."] Rebase , # [doc = " Update by merging the commit in the superproject into the current"] # [doc = " checkout out branch of the submodule."] Merge , # [doc = " Do not update this submodule even when the commit in the superproject"] # [doc = " is updated."] None , # [doc = " Not used except as static initializer when we don't want any particular"] # [doc = " update rule to be specified."] Default , }
+};
+}

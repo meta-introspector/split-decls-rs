@@ -1,0 +1,9 @@
+// Generated macro for use_197 (pub_use)
+macro_rules! Depcrate_generateduse_197 {
+() => {
+// Module: crate::generated
+// Provides: {"use_197"}
+// Dependencies: {}
+# [cfg (all (feature = "CTFont" , feature = "CTRunDelegate" , feature = "objc2"))] pub use self :: __CTFont :: CTFontGetTypographicBoundsForAdaptiveImageProvider ;
+};
+}

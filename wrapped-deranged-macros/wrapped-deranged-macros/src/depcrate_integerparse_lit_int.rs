@@ -1,0 +1,9 @@
+// Generated macro for parse_lit_int (function)
+macro_rules! Depcrate_integerparse_lit_int {
+() => {
+// Module: crate::integer
+// Provides: {"parse_lit_int"}
+// Dependencies: {}
+fn parse_lit_int (is_negative : bool , s : & str , what : & str) -> Result < (u128 , Suffix) , String > { let s = s . as_bytes () ; let (base , mut s) = match s { [b'0' , b'x' , rest @ ..] => (16 , rest) , [b'0' , b'o' , rest @ ..] => (8 , rest) , [b'0' , b'b' , rest @ ..] => (2 , rest) , [b'0' ..= b'9' , ..] => (10 , s) , _ => return Err (format ! ("{what} must be an integer literal")) , } ; let mut value = 0u128 ; let mut has_digit = false ; loop { let digit ; (digit , s) = match s { [b @ b'0' ..= b'9' , rest @ ..] => (b - b'0' , rest) , [b @ b'a' ..= b'f' , rest @ ..] if base > 10 => (b - b'a' + 10 , rest) , [b @ b'A' ..= b'F' , rest @ ..] if base > 10 => (b - b'A' + 10 , rest) , [b'_' , rest @ ..] => { s = rest ; continue ; } [b'.' | b'e' | b'E' , ..] => return Err (format ! ("{what} must be an integer literal")) , _ => break , } ; if digit >= base { return Err ("invalid digit for base" . to_owned ()) ; } has_digit = true ; value = if is_negative { value . checked_mul (base as u128) . and_then (| value | value . checked_add (digit as u128)) . ok_or ("value too small to be represented by a primitive integer") ? } else { (value as i128) . checked_mul (base as i128) . and_then (| value | value . checked_add (digit as i128)) . ok_or ("value too large to be represented by a primitive integer") ? as u128 } ; } if ! has_digit { return Err (format ! ("{what} must be an integer literal")) ; } let suffix = match s { b"" => Suffix :: Either , b"u" if is_negative => return Err ("unsigned integer cannot be negative" . to_owned ()) , b"u" => Suffix :: Unsigned , b"i" => Suffix :: Signed , _ => return Err ("integer suffix must be `u`, `i`, or omitted" . to_owned ()) , } ; Ok ((value , suffix)) }
+};
+}

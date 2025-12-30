@@ -1,0 +1,9 @@
+// Generated macro for other_4965 (other)
+macro_rules! Depcrate_features_gen_OesElementIndexUintother_4965 {
+() => {
+// Module: crate::features::gen_OesElementIndexUint
+// Provides: {"other_4965"}
+// Dependencies: {}
+# [wasm_bindgen] extern "C" { # [wasm_bindgen (is_type_of = | _ | false , extends = :: js_sys :: Object , js_name = OES_element_index_uint , typescript_type = "OES_element_index_uint")] # [derive (Debug , Clone , PartialEq , Eq)] # [doc = "The `OesElementIndexUint` class."] # [doc = ""] # [doc = "[MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/API/OES_element_index_uint)"] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `OesElementIndexUint`*"] pub type OesElementIndexUint ; }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for check_powf (function)
+macro_rules! Depcrate_floating_point_arithmeticcheck_powf {
+() => {
+// Module: crate::floating_point_arithmetic
+// Provides: {"check_powf"}
+// Dependencies: {}
+fn check_powf (cx : & LateContext < '_ > , expr : & Expr < '_ > , receiver : & Expr < '_ > , args : & [Expr < '_ >]) { if let Some (value) = ConstEvalCtxt :: new (cx) . eval (receiver) && let Some (method) = if F32 (f32_consts :: E) == value || F64 (f64_consts :: E) == value { Some ("exp") } else if F32 (2.0) == value || F64 (2.0) == value { Some ("exp2") } else { None } { span_lint_and_sugg (cx , SUBOPTIMAL_FLOPS , expr . span , "exponent for bases 2 and e can be computed more accurately" , "consider using" , format ! ("{}.{method}()" , prepare_receiver_sugg (cx , & args [0])) , Applicability :: MachineApplicable ,) ; } if let Some (value) = ConstEvalCtxt :: new (cx) . eval (& args [0]) { let (lint , help , suggestion) = if F32 (1.0 / 2.0) == value || F64 (1.0 / 2.0) == value { (SUBOPTIMAL_FLOPS , "square-root of a number can be computed more efficiently and accurately" , format ! ("{}.sqrt()" , Sugg :: hir (cx , receiver , "..") . maybe_paren ()) ,) } else if F32 (1.0 / 3.0) == value || F64 (1.0 / 3.0) == value { (IMPRECISE_FLOPS , "cube-root of a number can be computed more accurately" , format ! ("{}.cbrt()" , Sugg :: hir (cx , receiver , "..") . maybe_paren ()) ,) } else if let Some (exponent) = get_integer_from_float_constant (& value) { (SUBOPTIMAL_FLOPS , "exponentiation with integer powers can be computed more efficiently" , format ! ("{}.powi({})" , Sugg :: hir (cx , receiver , "..") . maybe_paren () , numeric_literal :: format (& exponent . to_string () , None , false)) ,) } else { return ; } ; span_lint_and_sugg (cx , lint , expr . span , help , "consider using" , suggestion , Applicability :: MachineApplicable ,) ; } }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for STATUS_GRAPHICS_NO_DISPLAY_DEVICE_CORRESPONDS_TO_NAME (const)
+macro_rules! Depcrate_shared_ntstatusSTATUS_GRAPHICS_NO_DISPLAY_DEVICE_CORRESPONDS_TO_NAME {
+() => {
+// Module: crate::shared::ntstatus
+// Provides: {"STATUS_GRAPHICS_NO_DISPLAY_DEVICE_CORRESPONDS_TO_NAME"}
+// Dependencies: {}
+pub const STATUS_GRAPHICS_NO_DISPLAY_DEVICE_CORRESPONDS_TO_NAME : NTSTATUS = 0xC01E05E1 ;
+};
+}

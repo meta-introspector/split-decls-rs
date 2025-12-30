@@ -1,0 +1,39 @@
+// Generated module macro for crate::cow
+macro_rules! Modcrate_cow {
+() => {
+        Depcrate_cowuse_3!();
+        Depcrate_cowuse_4!();
+        Depcrate_cowuse_5!();
+        Depcrate_cowuse_6!();
+        Depcrate_cowuse_7!();
+        Depcrate_cowuse_8!();
+        Depcrate_cowuse_9!();
+        Depcrate_cowuse_10!();
+        Depcrate_cowVarZeroCow!();
+        Depcrate_cowRawVarZeroCow!();
+        Depcrate_cowimpl_13!();
+        Depcrate_cowimpl_14!();
+        Depcrate_cowimpl_15!();
+        Depcrate_cowimpl_16!();
+        Depcrate_cowimpl_17!();
+        Depcrate_cowimpl_18!();
+        Depcrate_cowimpl_19!();
+        Depcrate_cowimpl_20!();
+        Depcrate_cowimpl_21!();
+        Depcrate_cowimpl_22!();
+        Depcrate_cowimpl_23!();
+        Depcrate_cowimpl_24!();
+        Depcrate_cowimpl_25!();
+        Depcrate_cowimpl_26!();
+        Depcrate_cowimpl_27!();
+        Depcrate_cowimpl_28!();
+        Depcrate_cowimpl_29!();
+        Depcrate_cowimpl_30!();
+        Depcrate_cowimpl_31!();
+        Depcrate_cowimpl_32!();
+        Depcrate_cowimpl_33!();
+        Depcrate_cowimpl_34!();
+        Depcrate_cowimpl_35!();
+        Depcrate_cowtests!();
+    };
+}

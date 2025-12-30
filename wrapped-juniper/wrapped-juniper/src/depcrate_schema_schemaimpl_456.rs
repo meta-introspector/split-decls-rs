@@ -1,0 +1,9 @@
+// Generated macro for impl_456 (impl)
+macro_rules! Depcrate_schema_schemaimpl_456 {
+() => {
+// Module: crate::schema::schema
+// Provides: {"impl_456"}
+// Dependencies: {}
+impl < S , QueryT , MutationT , SubscriptionT > GraphQLValue < S > for RootNode < QueryT , MutationT , SubscriptionT , S > where S : ScalarValue , QueryT : GraphQLType < S > , MutationT : GraphQLType < S , Context = QueryT :: Context > , SubscriptionT : GraphQLType < S , Context = QueryT :: Context > , { type Context = QueryT :: Context ; type TypeInfo = QueryT :: TypeInfo ; fn type_name (& self , info : & Self :: TypeInfo) -> Option < ArcStr > { QueryT :: name (info) } fn concrete_type_name (& self , context : & Self :: Context , info : & Self :: TypeInfo) -> String { self . query_type . concrete_type_name (context , info) } fn resolve_field (& self , info : & Self :: TypeInfo , field : & str , args : & Arguments < S > , executor : & Executor < Self :: Context , S > ,) -> ExecutionResult < S > { match field { "__schema" => executor . replaced_context (& self . schema) . resolve (& () , & self . schema) , "__type" => { let type_name : String = args . get ("name") ? . unwrap () ; executor . replaced_context (& self . schema) . resolve (& () , & self . schema . type_by_name (& type_name)) } _ => self . query_type . resolve_field (info , field , args , executor) , } } fn resolve (& self , info : & Self :: TypeInfo , selection_set : Option < & [Selection < S >] > , executor : & Executor < Self :: Context , S > ,) -> ExecutionResult < S > { use crate :: { types :: base :: resolve_selection_set_into , value :: Object } ; if let Some (selection_set) = selection_set { let mut result = Object :: with_capacity (selection_set . len ()) ; if resolve_selection_set_into (self , info , selection_set , executor , & mut result) { Ok (Value :: Object (result)) } else { Ok (Value :: null ()) } } else { panic ! ("resolve() must be implemented by non-object output types") ; } } }
+};
+}

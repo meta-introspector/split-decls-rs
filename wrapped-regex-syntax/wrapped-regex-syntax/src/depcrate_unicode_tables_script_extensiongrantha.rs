@@ -1,0 +1,9 @@
+// Generated macro for GRANTHA (const)
+macro_rules! Depcrate_unicode_tables_script_extensionGRANTHA {
+() => {
+// Module: crate::unicode_tables::script_extension
+// Provides: {"GRANTHA"}
+// Dependencies: {}
+pub const GRANTHA : & 'static [(char , char)] = & [('\u{951}' , '\u{952}') , ('।' , '॥') , ('௦' , '௳') , ('\u{1cd0}' , '\u{1cd0}') , ('\u{1cd2}' , '᳓') , ('ᳲ' , '\u{1cf4}') , ('\u{1cf8}' , '\u{1cf9}') , ('\u{20f0}' , '\u{20f0}') , ('\u{11300}' , '𑌃') , ('𑌅' , '𑌌') , ('𑌏' , '𑌐') , ('𑌓' , '𑌨') , ('𑌪' , '𑌰') , ('𑌲' , '𑌳') , ('𑌵' , '𑌹') , ('\u{1133b}' , '𑍄') , ('𑍇' , '𑍈') , ('𑍋' , '\u{1134d}') , ('𑍐' , '𑍐') , ('\u{11357}' , '\u{11357}') , ('𑍝' , '𑍣') , ('\u{11366}' , '\u{1136c}') , ('\u{11370}' , '\u{11374}') , ('𑿐' , '𑿑') , ('𑿓' , '𑿓') ,] ;
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for all_display_hints (function)
+macro_rules! Depcrate_testsall_display_hints {
+() => {
+// Module: crate::tests
+// Provides: {"all_display_hints"}
+// Dependencies: {}
+# [rstest] # [case (":a" , DisplayHint :: Ascii)] # [case (":b" , DisplayHint :: Binary { alternate : false , zero_pad : 0 })] # [case (":#b" , DisplayHint :: Binary { alternate : true , zero_pad : 0 })] # [case (":o" , DisplayHint :: Octal { alternate : false , zero_pad : 0 })] # [case (":#o" , DisplayHint :: Octal { alternate : true , zero_pad : 0 })] # [case (":x" , DisplayHint :: Hexadecimal { alternate : false , uppercase : false , zero_pad : 0 })] # [case (":02x" , DisplayHint :: Hexadecimal { alternate : false , uppercase : false , zero_pad : 2 })] # [case (":#x" , DisplayHint :: Hexadecimal { alternate : true , uppercase : false , zero_pad : 0 })] # [case (":#04x" , DisplayHint :: Hexadecimal { alternate : true , uppercase : false , zero_pad : 4 })] # [case (":X" , DisplayHint :: Hexadecimal { alternate : false , uppercase : true , zero_pad : 0 })] # [case (":#X" , DisplayHint :: Hexadecimal { alternate : true , uppercase : true , zero_pad : 0 })] # [case (":ms" , DisplayHint :: Seconds (TimePrecision :: Millis))] # [case (":us" , DisplayHint :: Seconds (TimePrecision :: Micros))] # [case (":ts" , DisplayHint :: Time (TimePrecision :: Seconds))] # [case (":tms" , DisplayHint :: Time (TimePrecision :: Millis))] # [case (":tus" , DisplayHint :: Time (TimePrecision :: Micros))] # [case (":iso8601ms" , DisplayHint :: ISO8601 (TimePrecision :: Millis))] # [case (":iso8601s" , DisplayHint :: ISO8601 (TimePrecision :: Seconds))] # [case (":?" , DisplayHint :: Debug)] # [case (":02" , DisplayHint :: NoHint { zero_pad : 2 })] fn all_display_hints (# [case] input : & str , # [case] hint : DisplayHint) { assert_eq ! (parse_param (input , ParserMode :: Strict) , Ok (Param { index : None , ty : Type :: Format , hint : Some (hint) , })) ; }
+};
+}

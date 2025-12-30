@@ -1,0 +1,66 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcrate_systemmacro_33.rs");
+include!("depcrate_systemimpl_45.rs");
+include!("depcrate_runtimeruntime.rs");
+include!("depcrateuse_47.rs");
+include!("depcratearbiter.rs");
+include!("depcrateuse_48.rs");
+include!("depcratetask.rs");
+include!("depcrate_systemuse_28.rs");
+include!("depcrate_arbiterarbiterrunner.rs");
+include!("depcrate_arbiteruse_8.rs");
+include!("depcrate_runtimeuse_21.rs");
+include!("depcrate_systemimpl_41.rs");
+include!("depcrate_systemsystemcontroller.rs");
+include!("depcratesystem.rs");
+include!("depcrate_arbiteruse_9.rs");
+include!("depcrateuse_2.rs");
+include!("depcrate_arbiterimpl_15.rs");
+include!("depcrateruntime.rs");
+include!("depcrate_systemimpl_35.rs");
+include!("depcrate_systemimpl_39.rs");
+include!("depcrate_systemuse_30.rs");
+include!("depcrate_systemsystemcommand.rs");
+include!("depcrate_systemimpl_44.rs");
+include!("depcrate_systemuse_29.rs");
+include!("depcrateuse_46.rs");
+include!("depcrate_systemimpl_37.rs");
+include!("depcratetime.rs");
+include!("depcrate_runtimedefault_tokio_runtime.rs");
+include!("depcrate_arbiterarbitercommand.rs");
+include!("depcrate_arbiterimpl_19.rs");
+include!("depcratespawn.rs");
+include!("depcratemacro_1.rs");
+include!("depcrateuse_4.rs");
+include!("depcrate_runtimeuse_22.rs");
+include!("depcrateuse_3.rs");
+include!("depcrate_arbitermacro_11.rs");
+include!("depcrate_systemsystem_count.rs");
+include!("depcrate_systemimpl_36.rs");
+include!("depcrate_arbitercount.rs");
+include!("depcrate_arbiterarbiterhandle.rs");
+include!("depcrate_arbiterimpl_17.rs");
+include!("depcrate_runtimeimpl_25.rs");
+include!("depcrate_systemsystemrunner.rs");
+include!("depcratesignal.rs");
+include!("depcratenet.rs");
+include!("depcrate_arbiteruse_6.rs");
+include!("depcrate_systemsystem.rs");
+include!("depcrate_arbiterarbiter.rs");
+include!("depcrate_systemuse_31.rs");
+include!("depcrate_arbiteruse_7.rs");
+include!("depcrate_runtimeimpl_26.rs");
+include!("depcrate_arbiterimpl_13.rs");
+include!("modcrate_arbiter.rs");
+include!("modcrate_runtime.rs");
+include!("modcrate_system.rs");
+include!("modcrate.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate_arbiter!();
+    Modcrate_runtime!();
+    Modcrate_system!();
+    Modcrate!();
+}

@@ -1,0 +1,57 @@
+// Generated module macro for crate::ule::plain
+macro_rules! Modcrate_ule_plain {
+() => {
+        Depcrate_ule_plainuse_664!();
+        Depcrate_ule_plainuse_665!();
+        Depcrate_ule_plainuse_666!();
+        Depcrate_ule_plainuse_667!();
+        Depcrate_ule_plainRawBytesULE!();
+        Depcrate_ule_plainimpl_669!();
+        Depcrate_ule_plainimpl_670!();
+        Depcrate_ule_plainimpl_671!();
+        Depcrate_ule_plainimpl_byte_slice_size!();
+        Depcrate_ule_plainimpl_const_constructors!();
+        Depcrate_ule_plainimpl_byte_slice_type!();
+        Depcrate_ule_plainimpl_byte_slice_unsigned_type!();
+        Depcrate_ule_plainimpl_byte_slice_signed_type!();
+        Depcrate_ule_plainmacro_677!();
+        Depcrate_ule_plainmacro_678!();
+        Depcrate_ule_plainmacro_679!();
+        Depcrate_ule_plainmacro_680!();
+        Depcrate_ule_plainmacro_681!();
+        Depcrate_ule_plainmacro_682!();
+        Depcrate_ule_plainmacro_683!();
+        Depcrate_ule_plainmacro_684!();
+        Depcrate_ule_plainmacro_685!();
+        Depcrate_ule_plainmacro_686!();
+        Depcrate_ule_plainmacro_687!();
+        Depcrate_ule_plainmacro_688!();
+        Depcrate_ule_plainmacro_689!();
+        Depcrate_ule_plainmacro_690!();
+        Depcrate_ule_plainmacro_691!();
+        Depcrate_ule_plainmacro_692!();
+        Depcrate_ule_plainmacro_693!();
+        Depcrate_ule_plainmacro_694!();
+        Depcrate_ule_plainimpl_695!();
+        Depcrate_ule_plainimpl_696!();
+        Depcrate_ule_plainimpl_697!();
+        Depcrate_ule_plainimpl_698!();
+        Depcrate_ule_plainimpl_699!();
+        Depcrate_ule_plainimpl_700!();
+        Depcrate_ule_plainimpl_701!();
+        Depcrate_ule_plainimpl_702!();
+        Depcrate_ule_plainimpl_703!();
+        Depcrate_ule_plainimpl_704!();
+        Depcrate_ule_plainimpl_705!();
+        Depcrate_ule_plainimpl_706!();
+        Depcrate_ule_plainimpl_707!();
+        Depcrate_ule_plainimpl_708!();
+        Depcrate_ule_plainimpl_709!();
+        Depcrate_ule_plainimpl_710!();
+        Depcrate_ule_plainimpl_711!();
+        Depcrate_ule_plainimpl_712!();
+        Depcrate_ule_plainimpl_713!();
+        Depcrate_ule_plainimpl_714!();
+        Depcrate_ule_plainimpl_715!();
+    };
+}

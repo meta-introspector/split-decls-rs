@@ -1,0 +1,9 @@
+// Generated macro for LocationState (struct)
+macro_rules! Depcrate_borrow_tracker_tree_borrows_treeLocationState {
+() => {
+// Module: crate::borrow_tracker::tree_borrows::tree
+// Provides: {"LocationState"}
+// Dependencies: {}
+# [doc = " Data for a single *location*."] # [derive (Debug , Clone , Copy , PartialEq , Eq , Hash)] pub (super) struct LocationState { # [doc = " A location is \"accessed\" when it is child-accessed for the first time (and the initial"] # [doc = " retag initializes the location for the range covered by the type), and it then stays"] # [doc = " accessed forever."] # [doc = " For accessed locations, \"permission\" is the current permission. However, for"] # [doc = " non-accessed locations, we still need to track the \"future initial permission\": this will"] # [doc = " start out to be `default_initial_perm`, but foreign accesses need to be taken into account."] # [doc = " Crucially however, while transitions to `Disabled` would usually be UB if this location is"] # [doc = " protected, that is *not* the case for non-accessed locations. Instead we just have a latent"] # [doc = " \"future initial permission\" of `Disabled`, causing UB only if an access is ever actually"] # [doc = " performed."] # [doc = " Note that the tree root is also always accessed, as if the allocation was a write access."] accessed : bool , # [doc = " This pointer's current permission / future initial permission."] permission : Permission , # [doc = " See `foreign_access_skipping.rs`."] # [doc = " Stores an idempotent foreign access for this location and its children."] # [doc = " For correctness, this must not be too strong, and the recorded idempotent foreign access"] # [doc = " of all children must be at least as strong as this. For performance, it should be as strong as possible."] idempotent_foreign_access : IdempotentForeignAccess , }
+};
+}

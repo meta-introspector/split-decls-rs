@@ -4,6 +4,6 @@ macro_rules! Depcrateuse_755 {
 // Module: crate
 // Provides: {"use_755"}
 // Dependencies: {}
-pub use self :: database :: Database ;
+pub use self :: event :: { Event , EventKind } ;
 };
 }

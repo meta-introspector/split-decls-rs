@@ -1,0 +1,41 @@
+// Generated module macro for crate::iter
+macro_rules! Modcrate_iter {
+() => {
+        Depcrate_iteruse_32!();
+        Depcrate_iteruse_33!();
+        Depcrate_iteruse_34!();
+        Depcrate_iteruse_35!();
+        Depcrate_iteruse_36!();
+        Depcrate_iteruse_37!();
+        Depcrate_iteruse_38!();
+        Depcrate_iteruse_39!();
+        Depcrate_iterBUF_SIZE!();
+        Depcrate_iterMutationState!();
+        Depcrate_iterFastEnumeratorHelper!();
+        Depcrate_iterimpl_43!();
+        Depcrate_iterimpl_44!();
+        Depcrate_iterother_45!();
+        Depcrate_iteritems_ptr_null!();
+        Depcrate_itermutation_detected!();
+        Depcrate_iterimpl_48!();
+        Depcrate_iterFastEnumerationHelper!();
+        Depcrate_iterIterUnchecked!();
+        Depcrate_iterimpl_51!();
+        Depcrate_iterimpl_52!();
+        Depcrate_iterIter!();
+        Depcrate_iterimpl_54!();
+        Depcrate_iterimpl_55!();
+        Depcrate_iterIntoIter!();
+        Depcrate_iterimpl_57!();
+        Depcrate_iterimpl_58!();
+        Depcrate_iterIterUncheckedWithBackingEnum!();
+        Depcrate_iterimpl_60!();
+        Depcrate_iterimpl_61!();
+        Depcrate_iterIterWithBackingEnum!();
+        Depcrate_iterimpl_63!();
+        Depcrate_iterimpl_64!();
+        Depcrate_iter__impl_iter!();
+        Depcrate_iter__impl_into_iter!();
+        Depcrate_itertests!();
+    };
+}

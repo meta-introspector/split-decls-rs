@@ -1,0 +1,9 @@
+// Generated macro for impl_713 (impl)
+macro_rules! Depcrate_concurrency_genmc_schedulingimpl_713 {
+() => {
+// Module: crate::concurrency::genmc::scheduling
+// Provides: {"impl_713"}
+// Dependencies: {}
+impl GenmcCtx { # [doc = " Returns the thread ID of the next thread to schedule, or `None` to continue with the current thread."] pub (crate) fn schedule_thread < 'tcx > (& self , ecx : & InterpCx < 'tcx , MiriMachine < 'tcx > > ,) -> InterpResult < 'tcx , Option < ThreadId > > { let atomic_kind = match get_next_instruction_kind (ecx) ? { NextInstrKind :: MaybeAtomic (atomic_kind) => atomic_kind , NextInstrKind :: NonAtomic => return interp_ok (None) , } ; let active_thread_id = ecx . machine . threads . active_thread () ; let thread_infos = self . exec_state . thread_id_manager . borrow () ; let genmc_tid = thread_infos . get_genmc_tid (active_thread_id) ; let result = self . handle . borrow_mut () . pin_mut () . schedule_next (genmc_tid , atomic_kind) ; match result . exec_state { ExecutionState :: Ok => interp_ok (Some (thread_infos . get_miri_tid (result . next_thread))) , ExecutionState :: Blocked => { throw_machine_stop ! (TerminationInfo :: Exit { code : 0 , leak_check : false , }) ; } ExecutionState :: Finished => { let exit_status = self . exec_state . exit_status . get () . expect ("If the execution is finished, we should have a return value from the program." ,) ; throw_machine_stop ! (TerminationInfo :: Exit { code : exit_status . exit_code , leak_check : matches ! (exit_status . exit_type , super :: ExitType :: MainThreadFinish) , }) ; } ExecutionState :: Error => { panic ! ("GenMC found an error ({:?}), but didn't report it immediately, so we cannot provide an appropriate source code location for where it happened." , self . try_get_error () . unwrap ()) ; } _ => unreachable ! () , } } }
+};
+}

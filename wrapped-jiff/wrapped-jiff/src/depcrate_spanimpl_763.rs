@@ -1,0 +1,10 @@
+// Generated macro for impl_763 (impl)
+macro_rules! Depcrate_spanimpl_763 {
+() => {
+// Module: crate::span
+// Provides: {"impl_763"}
+// Dependencies: {}
+# [doc = " Converts a `Span` to a [`SignedDuration`]."] # [doc = ""] # [doc = " # Errors"] # [doc = ""] # [doc = " This can fail for only when the span has any non-zero units greater than"] # [doc = " hours. This is an error because it's impossible to determine the length of,"] # [doc = " e.g., a month without a reference date."] # [doc = ""] # [doc = " This can never result in overflow because a `SignedDuration` can represent"] # [doc = " a bigger span of time than `Span` when limited to units of hours or lower."] # [doc = ""] # [doc = " If you need to convert a `Span` to a `SignedDuration` that has non-zero"] # [doc = " units bigger than hours, then please use [`Span::to_duration`] with a"] # [doc = " corresponding relative date."] # [doc = ""] # [doc = " # Example: maximal span"] # [doc = ""] # [doc = " This example shows the maximum possible span using units of hours or"] # [doc = " smaller, and the corresponding `SignedDuration` value:"] # [doc = ""] # [doc = " ```"] # [doc = " use jiff::{SignedDuration, Span};"] # [doc = ""] # [doc = " let sp = Span::new()"] # [doc = "     .hours(175_307_616)"] # [doc = "     .minutes(10_518_456_960i64)"] # [doc = "     .seconds(631_107_417_600i64)"] # [doc = "     .milliseconds(631_107_417_600_000i64)"] # [doc = "     .microseconds(631_107_417_600_000_000i64)"] # [doc = "     .nanoseconds(9_223_372_036_854_775_807i64);"] # [doc = " let duration = SignedDuration::try_from(sp)?;"] # [doc = " assert_eq!(duration, SignedDuration::new(3_164_760_460_036, 854_775_807));"] # [doc = ""] # [doc = " # Ok::<(), Box<dyn std::error::Error>>(())"] # [doc = " ```"] impl TryFrom < Span > for SignedDuration { type Error = Error ; # [inline] fn try_from (sp : Span) -> Result < SignedDuration , Error > { requires_relative_date_err (sp . largest_unit ()) . context ("failed to convert span to duration without relative datetime \
+             (must use `Span::to_duration` instead)" ,) ? ; Ok (sp . to_duration_invariant ()) } }
+};
+}

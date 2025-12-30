@@ -1,0 +1,9 @@
+// Generated macro for DateTimeArithmetic (struct)
+macro_rules! Depcrate_civil_datetimeDateTimeArithmetic {
+() => {
+// Module: crate::civil::datetime
+// Provides: {"DateTimeArithmetic"}
+// Dependencies: {}
+# [doc = " Options for [`DateTime::checked_add`] and [`DateTime::checked_sub`]."] # [doc = ""] # [doc = " This type provides a way to ergonomically add one of a few different"] # [doc = " duration types to a [`DateTime`]."] # [doc = ""] # [doc = " The main way to construct values of this type is with its `From` trait"] # [doc = " implementations:"] # [doc = ""] # [doc = " * `From<Span> for DateTimeArithmetic` adds (or subtracts) the given span to"] # [doc = " the receiver datetime."] # [doc = " * `From<SignedDuration> for DateTimeArithmetic` adds (or subtracts)"] # [doc = " the given signed duration to the receiver datetime."] # [doc = " * `From<std::time::Duration> for DateTimeArithmetic` adds (or subtracts)"] # [doc = " the given unsigned duration to the receiver datetime."] # [doc = ""] # [doc = " # Example"] # [doc = ""] # [doc = " ```"] # [doc = " use std::time::Duration;"] # [doc = ""] # [doc = " use jiff::{civil::date, SignedDuration, ToSpan};"] # [doc = ""] # [doc = " let dt = date(2024, 2, 29).at(0, 0, 0, 0);"] # [doc = " assert_eq!("] # [doc = "     dt.checked_add(1.year())?,"] # [doc = "     date(2025, 2, 28).at(0, 0, 0, 0),"] # [doc = " );"] # [doc = " assert_eq!("] # [doc = "     dt.checked_add(SignedDuration::from_hours(24))?,"] # [doc = "     date(2024, 3, 1).at(0, 0, 0, 0),"] # [doc = " );"] # [doc = " assert_eq!("] # [doc = "     dt.checked_add(Duration::from_secs(24 * 60 * 60))?,"] # [doc = "     date(2024, 3, 1).at(0, 0, 0, 0),"] # [doc = " );"] # [doc = ""] # [doc = " # Ok::<(), Box<dyn std::error::Error>>(())"] # [doc = " ```"] # [derive (Clone , Copy , Debug)] pub struct DateTimeArithmetic { duration : Duration , }
+};
+}

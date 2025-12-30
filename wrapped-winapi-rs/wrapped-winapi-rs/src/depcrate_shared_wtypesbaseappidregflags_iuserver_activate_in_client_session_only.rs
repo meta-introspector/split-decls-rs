@@ -1,0 +1,9 @@
+// Generated macro for APPIDREGFLAGS_IUSERVER_ACTIVATE_IN_CLIENT_SESSION_ONLY (const)
+macro_rules! Depcrate_shared_wtypesbaseAPPIDREGFLAGS_IUSERVER_ACTIVATE_IN_CLIENT_SESSION_ONLY {
+() => {
+// Module: crate::shared::wtypesbase
+// Provides: {"APPIDREGFLAGS_IUSERVER_ACTIVATE_IN_CLIENT_SESSION_ONLY"}
+// Dependencies: {}
+pub const APPIDREGFLAGS_IUSERVER_ACTIVATE_IN_CLIENT_SESSION_ONLY : DWORD = 0x20 ;
+};
+}

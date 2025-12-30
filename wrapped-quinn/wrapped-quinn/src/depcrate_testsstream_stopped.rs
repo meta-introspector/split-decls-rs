@@ -1,0 +1,9 @@
+// Generated macro for stream_stopped (function)
+macro_rules! Depcrate_testsstream_stopped {
+() => {
+// Module: crate::tests
+// Provides: {"stream_stopped"}
+// Dependencies: {}
+# [tokio :: test] async fn stream_stopped () { let _guard = subscribe () ; let factory = EndpointFactory :: new () ; let server = { let _guard = error_span ! ("server") . entered () ; factory . endpoint () } ; let server_addr = server . local_addr () . unwrap () ; let client = { let _guard = error_span ! ("client1") . entered () ; factory . endpoint () } ; let client = async move { let conn = client . connect (server_addr , "localhost") . unwrap () . await . unwrap () ; let mut stream = conn . open_uni () . await . unwrap () ; let stopped1 = stream . stopped () ; let stopped2 = stream . stopped () ; let stopped3 = stream . stopped () ; stream . write_all (b"hi") . await . unwrap () ; let stopped1 = tokio :: task :: spawn (stopped1) ; let (stopped1 , stopped2) = tokio :: join ! (stopped1 , stopped2) ; assert ! (matches ! (stopped1 , Ok (Ok (Some (val))) if val == 42u32 . into ())) ; assert ! (matches ! (stopped2 , Ok (Some (val)) if val == 42u32 . into ())) ; drop (stream) ; let stopped3 = stopped3 . await ; assert_eq ! (stopped3 , Ok (Some (42u32 . into ()))) ; } ; let client = tokio :: time :: timeout (Duration :: from_millis (100) , client) . instrument (error_span ! ("client")) ; let server = async move { let conn = server . accept () . await . unwrap () . await . unwrap () ; let mut stream = conn . accept_uni () . await . unwrap () ; let mut buf = [0u8 ; 2] ; stream . read_exact (& mut buf) . await . unwrap () ; stream . stop (42u32 . into ()) . unwrap () ; conn } . instrument (error_span ! ("server")) ; let (client , conn) = tokio :: join ! (client , server) ; client . expect ("timeout") ; drop (conn) ; }
+};
+}

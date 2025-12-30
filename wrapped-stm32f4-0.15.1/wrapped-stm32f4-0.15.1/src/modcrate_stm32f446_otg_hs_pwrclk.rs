@@ -1,0 +1,8 @@
+// Generated module macro for crate::stm32f446::otg_hs_pwrclk
+macro_rules! Modcrate_stm32f446_otg_hs_pwrclk {
+() => {
+        Depcrate_stm32f446_otg_hs_pwrclkRegisterBlock!();
+        Depcrate_stm32f446_otg_hs_pwrclkPCGCCTL!();
+        Depcrate_stm32f446_otg_hs_pwrclkpcgcctl!();
+    };
+}

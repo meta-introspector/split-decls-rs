@@ -1,0 +1,39 @@
+// Generated module macro for crate::drivers::virtio::virtqueue::packed
+macro_rules! Modcrate_drivers_virtio_virtqueue_packed {
+() => {
+        Depcrate_drivers_virtio_virtqueue_packeduse_564!();
+        Depcrate_drivers_virtio_virtqueue_packeduse_565!();
+        Depcrate_drivers_virtio_virtqueue_packeduse_566!();
+        Depcrate_drivers_virtio_virtqueue_packeduse_567!();
+        Depcrate_drivers_virtio_virtqueue_packeduse_568!();
+        Depcrate_drivers_virtio_virtqueue_packeduse_569!();
+        Depcrate_drivers_virtio_virtqueue_packeduse_570!();
+        Depcrate_drivers_virtio_virtqueue_packeduse_571!();
+        Depcrate_drivers_virtio_virtqueue_packeduse_572!();
+        Depcrate_drivers_virtio_virtqueue_packeduse_573!();
+        Depcrate_drivers_virtio_virtqueue_packeduse_574!();
+        Depcrate_drivers_virtio_virtqueue_packeduse_575!();
+        Depcrate_drivers_virtio_virtqueue_packeduse_576!();
+        Depcrate_drivers_virtio_virtqueue_packeduse_577!();
+        Depcrate_drivers_virtio_virtqueue_packeduse_578!();
+        Depcrate_drivers_virtio_virtqueue_packeduse_579!();
+        Depcrate_drivers_virtio_virtqueue_packeduse_580!();
+        Depcrate_drivers_virtio_virtqueue_packedRingIdx!();
+        Depcrate_drivers_virtio_virtqueue_packedRingIndexRange!();
+        Depcrate_drivers_virtio_virtqueue_packedimpl_583!();
+        Depcrate_drivers_virtio_virtqueue_packedDescriptorRing!();
+        Depcrate_drivers_virtio_virtqueue_packedimpl_585!();
+        Depcrate_drivers_virtio_virtqueue_packedReadCtrl!();
+        Depcrate_drivers_virtio_virtqueue_packedimpl_587!();
+        Depcrate_drivers_virtio_virtqueue_packedWriteCtrl!();
+        Depcrate_drivers_virtio_virtqueue_packedimpl_589!();
+        Depcrate_drivers_virtio_virtqueue_packedDrvNotif!();
+        Depcrate_drivers_virtio_virtqueue_packedDevNotif!();
+        Depcrate_drivers_virtio_virtqueue_packedimpl_592!();
+        Depcrate_drivers_virtio_virtqueue_packedimpl_593!();
+        Depcrate_drivers_virtio_virtqueue_packedPackedVq!();
+        Depcrate_drivers_virtio_virtqueue_packedimpl_595!();
+        Depcrate_drivers_virtio_virtqueue_packedimpl_596!();
+        Depcrate_drivers_virtio_virtqueue_packedimpl_597!();
+    };
+}

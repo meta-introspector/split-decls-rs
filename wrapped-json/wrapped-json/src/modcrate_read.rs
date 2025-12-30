@@ -1,0 +1,54 @@
+// Generated module macro for crate::read
+macro_rules! Modcrate_read {
+() => {
+        Depcrate_readuse_682!();
+        Depcrate_readuse_683!();
+        Depcrate_readuse_684!();
+        Depcrate_readuse_685!();
+        Depcrate_readuse_686!();
+        Depcrate_readuse_687!();
+        Depcrate_readuse_688!();
+        Depcrate_readuse_689!();
+        Depcrate_readuse_690!();
+        Depcrate_readuse_691!();
+        Depcrate_readuse_692!();
+        Depcrate_readuse_693!();
+        Depcrate_readRead!();
+        Depcrate_readPosition!();
+        Depcrate_readReference!();
+        Depcrate_readimpl_697!();
+        Depcrate_readIoRead!();
+        Depcrate_readSliceRead!();
+        Depcrate_readStrRead!();
+        Depcrate_readprivate!();
+        Depcrate_readimpl_702!();
+        Depcrate_readimpl_703!();
+        Depcrate_readimpl_704!();
+        Depcrate_readimpl_705!();
+        Depcrate_readimpl_706!();
+        Depcrate_readimpl_707!();
+        Depcrate_readimpl_708!();
+        Depcrate_readimpl_709!();
+        Depcrate_readimpl_710!();
+        Depcrate_readimpl_711!();
+        Depcrate_readimpl_712!();
+        Depcrate_readimpl_713!();
+        Depcrate_readFused!();
+        Depcrate_readimpl_715!();
+        Depcrate_readimpl_716!();
+        Depcrate_readis_escape!();
+        Depcrate_readnext_or_eof!();
+        Depcrate_readpeek_or_eof!();
+        Depcrate_readerror!();
+        Depcrate_readas_str!();
+        Depcrate_readparse_escape!();
+        Depcrate_readparse_unicode_escape!();
+        Depcrate_readpush_wtf8_codepoint!();
+        Depcrate_readignore_escape!();
+        Depcrate_readdecode_hex_val_slow!();
+        Depcrate_readbuild_hex_table!();
+        Depcrate_readHEX0!();
+        Depcrate_readHEX1!();
+        Depcrate_readdecode_four_hex_digits!();
+    };
+}

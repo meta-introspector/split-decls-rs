@@ -1,0 +1,46 @@
+// Generated module macro for crate::core::config
+macro_rules! Modcrate_core_config {
+() => {
+        Depcrate_core_configconfig!();
+        Depcrate_core_configflags!();
+        Depcrate_core_configtarget_selection!();
+        Depcrate_core_configtests!();
+        Depcrate_core_configtoml!();
+        Depcrate_core_configuse_1187!();
+        Depcrate_core_configuse_1188!();
+        Depcrate_core_configuse_1189!();
+        Depcrate_core_configuse_1190!();
+        Depcrate_core_configuse_1191!();
+        Depcrate_core_configuse_1192!();
+        Depcrate_core_configuse_1193!();
+        Depcrate_core_configuse_1194!();
+        Depcrate_core_configuse_1195!();
+        Depcrate_core_configuse_1196!();
+        Depcrate_core_configuse_1197!();
+        Depcrate_core_configuse_1198!();
+        Depcrate_core_configuse_1199!();
+        Depcrate_core_configdefine_config!();
+        Depcrate_core_configcheck_ci_llvm!();
+        Depcrate_core_configMerge!();
+        Depcrate_core_configimpl_1203!();
+        Depcrate_core_configCompilerBuiltins!();
+        Depcrate_core_configimpl_1205!();
+        Depcrate_core_configDebuginfoLevel!();
+        Depcrate_core_configimpl_1207!();
+        Depcrate_core_configimpl_1208!();
+        Depcrate_core_configStringOrBool!();
+        Depcrate_core_configimpl_1210!();
+        Depcrate_core_configimpl_1211!();
+        Depcrate_core_configStringOrInt!();
+        Depcrate_core_configLlvmLibunwind!();
+        Depcrate_core_configimpl_1214!();
+        Depcrate_core_configSplitDebuginfo!();
+        Depcrate_core_configimpl_1216!();
+        Depcrate_core_configReplaceOpt!();
+        Depcrate_core_configDryRun!();
+        Depcrate_core_configRustcLto!();
+        Depcrate_core_configimpl_1220!();
+        Depcrate_core_configGccCiMode!();
+        Depcrate_core_configthreads_from_config!();
+    };
+}

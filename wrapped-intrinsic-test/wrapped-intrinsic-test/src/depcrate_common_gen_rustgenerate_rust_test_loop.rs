@@ -1,0 +1,9 @@
+// Generated macro for generate_rust_test_loop (function)
+macro_rules! Depcrate_common_gen_rustgenerate_rust_test_loop {
+() => {
+// Module: crate::common::gen_rust
+// Provides: {"generate_rust_test_loop"}
+// Dependencies: {}
+pub fn generate_rust_test_loop < T : IntrinsicTypeDefinition > (w : & mut impl std :: io :: Write , intrinsic : & Intrinsic < T > , indentation : Indentation , specializations : & [Vec < i32 >] , passes : u32 ,) -> std :: io :: Result < () > { let intrinsic_name = & intrinsic . name ; let mut coerce = String :: from ("unsafe fn(") ; for _ in intrinsic . arguments . iter () . filter (| a | ! a . has_constraint ()) { coerce += "_, " ; } coerce += ") -> _" ; match specializations { [] => { writeln ! (w , "    let specializations = [(\"\", {intrinsic_name})];") ? ; } [const_args] if const_args . is_empty () => { writeln ! (w , "    let specializations = [(\"\", {intrinsic_name})];") ? ; } _ => { writeln ! (w , "    let specializations = [") ? ; for specialization in specializations { let mut specialization : Vec < _ > = specialization . iter () . map (| d | d . to_string ()) . collect () ; let const_args = specialization . join (",") ; specialization . reverse () ; let id = specialization . join ("-") ; writeln ! (w , "        (\"-{id}\", {intrinsic_name}::<{const_args}> as {coerce}),") ? ; } writeln ! (w , "    ];") ? ; } } write ! (w , concatln ! ("    for (id, f) in specializations {{" , "        for i in 0..{passes} {{" , "            unsafe {{" , "{loaded_args}" , "                let __return_value = f({args});" , "                println!(\"Result {{id}}-{{}}: {{:?}}\", i + 1, {return_value});" , "            }}" , "        }}" , "    }}" ,) , loaded_args = intrinsic . arguments . load_values_rust (indentation . nest_by (4)) , args = intrinsic . arguments . as_call_param_rust () , return_value = intrinsic . results . print_result_rust () , passes = passes ,) }
+};
+}

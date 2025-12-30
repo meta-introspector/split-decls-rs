@@ -1,0 +1,49 @@
+// Generated module macro for crate::common
+macro_rules! Modcrate_common {
+() => {
+        Depcrate_commonuse_27!();
+        Depcrate_commonuse_28!();
+        Depcrate_commonuse_29!();
+        Depcrate_commonuse_30!();
+        Depcrate_commonuse_31!();
+        Depcrate_commonuse_32!();
+        Depcrate_commonuse_33!();
+        Depcrate_commonuse_34!();
+        Depcrate_commonuse_35!();
+        Depcrate_commonuse_36!();
+        Depcrate_commonuse_37!();
+        Depcrate_commonstdout_sink!();
+        Depcrate_commonH3_MESSAGE_ERROR!();
+        Depcrate_commonalpns!();
+        Depcrate_commonPartialRequest!();
+        Depcrate_commonPartialResponse!();
+        Depcrate_commonClientId!();
+        Depcrate_commonClient!();
+        Depcrate_commonClientIdMap!();
+        Depcrate_commonClientMap!();
+        Depcrate_commonmake_resource_writer!();
+        Depcrate_commonautoindex!();
+        Depcrate_commonmake_qlog_writer!();
+        Depcrate_commondump_json!();
+        Depcrate_commonhdrs_to_strings!();
+        Depcrate_commongenerate_cid_and_reset_token!();
+        Depcrate_commonpriority_field_value_from_query_string!();
+        Depcrate_commonpriority_from_query_string!();
+        Depcrate_commonsend_h3_dgram!();
+        Depcrate_commonHttpConn!();
+        Depcrate_commonwritable_response_streams!();
+        Depcrate_commonHttp09Request!();
+        Depcrate_commonHttp3Request!();
+        Depcrate_commonHttp3ResponseBuilderResult!();
+        Depcrate_commonHttp09Conn!();
+        Depcrate_commonimpl_62!();
+        Depcrate_commonimpl_63!();
+        Depcrate_commonimpl_64!();
+        Depcrate_commonHttp3DgramSender!();
+        Depcrate_commonimpl_66!();
+        Depcrate_commonmake_h3_config!();
+        Depcrate_commonHttp3Conn!();
+        Depcrate_commonimpl_69!();
+        Depcrate_commonimpl_70!();
+    };
+}

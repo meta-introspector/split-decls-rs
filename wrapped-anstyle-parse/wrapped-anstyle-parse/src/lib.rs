@@ -1,0 +1,77 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcrateimpl_58.rs");
+include!("depcrate_state_codegengenerate_table.rs");
+include!("depcrateutf8parser.rs");
+include!("depcrateother_1.rs");
+include!("depcrate_paramsmax_params.rs");
+include!("depcrateuse_44.rs");
+include!("depcrateasciiparser.rs");
+include!("depcrateuse_2.rs");
+include!("depcrate_statestate_change.rs");
+include!("depcrateparser.rs");
+include!("depcrate_statedefinitions.rs");
+include!("depcrate_paramsimpl_14.rs");
+include!("depcrate_statecodegen.rs");
+include!("depcrate_stateuse_39.rs");
+include!("depcrate_state_definitionsaction.rs");
+include!("depcrate_state_codegenmacro_23.rs");
+include!("depcrate_state_definitionsimpl_27.rs");
+include!("depcrate_state_definitionsstates.rs");
+include!("depcratedefaultcharaccumulator.rs");
+include!("depcrateimpl_56.rs");
+include!("depcrate_paramsparamsiter.rs");
+include!("depcratemax_osc_raw.rs");
+include!("depcrate_paramsimpl_12.rs");
+include!("depcrate_stateuse_37.rs");
+include!("depcrateuse_3.rs");
+include!("depcratemax_intermediates.rs");
+include!("depcrate_paramsimpl_10.rs");
+include!("depcrate_state_tablestate_changes.rs");
+include!("depcrate_paramsimpl_9.rs");
+include!("depcrateimpl_54.rs");
+include!("depcrate_state_definitionsstate.rs");
+include!("depcrateuse_43.rs");
+include!("depcrate_paramsparams.rs");
+include!("depcrate_paramsuse_6.rs");
+include!("depcratemax_osc_params.rs");
+include!("depcrate_statetable.rs");
+include!("depcrate_state_codegenuse_19.rs");
+include!("depcrate_stateuse_40.rs");
+include!("depcrate_state_definitionsactions.rs");
+include!("depcrate_state_definitionsimpl_30.rs");
+include!("depcrate_state_definitionsuse_25.rs");
+include!("depcrate_paramsimpl_13.rs");
+include!("depcrate_state_definitionstests.rs");
+include!("depcrateuse_4.rs");
+include!("depcrate_state_codegenuse_18.rs");
+include!("depcrate_state_definitionspack.rs");
+include!("depcrate_state_definitionsunpack.rs");
+include!("depcrate_stateuse_38.rs");
+include!("depcratestate.rs");
+include!("depcrate_statestate_change_.rs");
+include!("depcratereadmedoctests.rs");
+include!("depcrateparams.rs");
+include!("depcrateimpl_49.rs");
+include!("depcrateperform.rs");
+include!("depcratecharaccumulator.rs");
+include!("depcrate_state_codegentable.rs");
+include!("depcrate_state_codegenstate_changes.rs");
+include!("depcrate_state_codegenuse_17.rs");
+include!("depcratevtutf8receiver.rs");
+include!("modcrate_state_definitions.rs");
+include!("modcrate_state_codegen.rs");
+include!("modcrate.rs");
+include!("modcrate_params.rs");
+include!("modcrate_state_table.rs");
+include!("modcrate_state.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate_state_definitions!();
+    Modcrate_state_codegen!();
+    Modcrate!();
+    Modcrate_params!();
+    Modcrate_state_table!();
+    Modcrate_state!();
+}

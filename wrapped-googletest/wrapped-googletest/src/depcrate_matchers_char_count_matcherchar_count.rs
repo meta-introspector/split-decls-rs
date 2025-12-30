@@ -1,0 +1,9 @@
+// Generated macro for char_count (function)
+macro_rules! Depcrate_matchers_char_count_matcherchar_count {
+() => {
+// Module: crate::matchers::char_count_matcher
+// Provides: {"char_count"}
+// Dependencies: {}
+# [doc = " Matches a string whose number of Unicode scalars matches `expected`."] # [doc = ""] # [doc = " In other words, the argument must match the output of"] # [doc = " [`actual_string.chars().count()`][std::str::Chars]."] # [doc = ""] # [doc = " This can have surprising effects when what appears to be a single character"] # [doc = " is composed of multiple Unicode scalars. See [Rust documentation on"] # [doc = " character"] # [doc = " representation](https://doc.rust-lang.org/std/primitive.char.html#representation)"] # [doc = " for more information."] # [doc = ""] # [doc = " This matches against owned strings and string slices."] # [doc = ""] # [doc = " ```"] # [doc = " # use googletest::prelude::*;"] # [doc = " # fn should_pass() -> Result<()> {"] # [doc = " let string_slice = \"A string\";"] # [doc = " verify_that!(string_slice, char_count(eq(8)))?;"] # [doc = " let non_ascii_string_slice = \"Ä ſtřiɲğ\";"] # [doc = " verify_that!(non_ascii_string_slice, char_count(eq(8)))?;"] # [doc = " let owned_string = String::from(\"A string\");"] # [doc = " verify_that!(owned_string, char_count(eq(8)))?;"] # [doc = " #     Ok(())"] # [doc = " # }"] # [doc = " # should_pass().unwrap();"] # [doc = " ```"] # [doc = ""] # [doc = " The parameter `expected` can be any integer numeric matcher."] # [doc = ""] # [doc = " ```"] # [doc = " # use googletest::prelude::*;"] # [doc = " # fn should_pass() -> Result<()> {"] # [doc = " let string_slice = \"A string\";"] # [doc = " verify_that!(string_slice, char_count(gt(4)))?;"] # [doc = " #     Ok(())"] # [doc = " # }"] # [doc = " # should_pass().unwrap();"] # [doc = " ```"] pub fn char_count < E : Matcher < usize > > (expected : E) -> CharLenMatcher < E > { CharLenMatcher { expected } }
+};
+}

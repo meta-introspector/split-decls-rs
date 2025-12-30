@@ -1,0 +1,9 @@
+// Generated macro for use_1410 (pub_use)
+macro_rules! Depcrate_generateduse_1410 {
+() => {
+// Module: crate::generated
+// Provides: {"use_1410"}
+// Dependencies: {}
+# [cfg (all (feature = "NSActionCell" , feature = "NSCell" , feature = "NSDatePickerCell"))] pub use self :: __NSDatePickerCell :: NSDatePickerCell ;
+};
+}

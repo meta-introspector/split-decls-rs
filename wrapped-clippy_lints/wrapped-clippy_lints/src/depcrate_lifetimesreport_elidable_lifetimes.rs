@@ -1,0 +1,9 @@
+// Generated macro for report_elidable_lifetimes (function)
+macro_rules! Depcrate_lifetimesreport_elidable_lifetimes {
+() => {
+// Module: crate::lifetimes
+// Provides: {"report_elidable_lifetimes"}
+// Dependencies: {}
+# [doc = " Generate diagnostic messages for elidable lifetimes."] fn report_elidable_lifetimes (cx : & LateContext < '_ > , generics : & Generics < '_ > , elidable_lts : & [LocalDefId] , usages : & [Lifetime] , include_suggestions : bool ,) { let lts = elidable_lts . iter () . filter_map (| & def_id | cx . tcx . hir_node_by_def_id (def_id) . ident ()) . format (", ") ; let elidable_usages : Vec < ElidableUsage > = usages . iter () . filter (| usage | named_lifetime (usage) . is_some_and (| id | elidable_lts . contains (& id))) . map (| usage | match cx . tcx . parent_hir_node (usage . hir_id) { Node :: Ty (Ty { kind : TyKind :: Ref (..) , .. }) => ElidableUsage :: Ref (usage . ident . span) , _ => ElidableUsage :: Other (usage . ident . span) , }) . collect () ; let lint = if elidable_usages . iter () . any (| usage | matches ! (usage , ElidableUsage :: Other (_))) { ELIDABLE_LIFETIME_NAMES } else { NEEDLESS_LIFETIMES } ; span_lint_and_then (cx , lint , elidable_lts . iter () . map (| & lt | cx . tcx . def_span (lt)) . chain (usages . iter () . filter_map (| usage | { if let LifetimeKind :: Param (def_id) = usage . kind && elidable_lts . contains (& def_id) { return Some (usage . ident . span) ; } None })) . collect_vec () , format ! ("the following explicit lifetimes could be elided: {lts}") , | diag | { if ! include_suggestions { return ; } if let Some (suggestions) = elision_suggestions (cx , generics , elidable_lts , & elidable_usages) { diag . multipart_suggestion ("elide the lifetimes" , suggestions , Applicability :: MachineApplicable) ; } } ,) ; }
+};
+}

@@ -1,0 +1,47 @@
+// Generated module macro for crate::ots::modes
+macro_rules! Modcrate_ots_modes {
+() => {
+        Depcrate_ots_modesuse_115!();
+        Depcrate_ots_modesuse_116!();
+        Depcrate_ots_modesuse_117!();
+        Depcrate_ots_modesuse_118!();
+        Depcrate_ots_modesuse_119!();
+        Depcrate_ots_modesuse_120!();
+        Depcrate_ots_modesuse_121!();
+        Depcrate_ots_modesuse_122!();
+        Depcrate_ots_modesuse_123!();
+        Depcrate_ots_modesLmsOtsMode!();
+        Depcrate_ots_modesLmsOtsModeInternal!();
+        Depcrate_ots_modesimpl_126!();
+        Depcrate_ots_modesimpl_127!();
+        Depcrate_ots_modesLmsOtsSha256N32W1!();
+        Depcrate_ots_modesLmsOtsSha256N32W2!();
+        Depcrate_ots_modesLmsOtsSha256N32W4!();
+        Depcrate_ots_modesLmsOtsSha256N32W8!();
+        Depcrate_ots_modesmacro_132!();
+        Depcrate_ots_modesmacro_133!();
+        Depcrate_ots_modesmacro_134!();
+        Depcrate_ots_modesmacro_135!();
+        Depcrate_ots_modesmacro_136!();
+        Depcrate_ots_modesmacro_137!();
+        Depcrate_ots_modesmacro_138!();
+        Depcrate_ots_modesmacro_139!();
+        Depcrate_ots_modesmacro_140!();
+        Depcrate_ots_modesmacro_141!();
+        Depcrate_ots_modesmacro_142!();
+        Depcrate_ots_modesmacro_143!();
+        Depcrate_ots_modesmacro_144!();
+        Depcrate_ots_modesmacro_145!();
+        Depcrate_ots_modesmacro_146!();
+        Depcrate_ots_modesmacro_147!();
+        Depcrate_ots_modesmacro_148!();
+        Depcrate_ots_modesmacro_149!();
+        Depcrate_ots_modesmacro_150!();
+        Depcrate_ots_modesmacro_151!();
+        Depcrate_ots_modesmacro_152!();
+        Depcrate_ots_modesmacro_153!();
+        Depcrate_ots_modesmacro_154!();
+        Depcrate_ots_modesmacro_155!();
+        Depcrate_ots_modestest!();
+    };
+}

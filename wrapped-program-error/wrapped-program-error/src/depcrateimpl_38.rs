@@ -1,0 +1,9 @@
+// Generated macro for impl_38 (impl)
+macro_rules! Depcrateimpl_38 {
+() => {
+// Module: crate
+// Provides: {"impl_38"}
+// Dependencies: {}
+impl From < ProgramError > for u64 { fn from (error : ProgramError) -> Self { match error { ProgramError :: InvalidArgument => INVALID_ARGUMENT , ProgramError :: InvalidInstructionData => INVALID_INSTRUCTION_DATA , ProgramError :: InvalidAccountData => INVALID_ACCOUNT_DATA , ProgramError :: AccountDataTooSmall => ACCOUNT_DATA_TOO_SMALL , ProgramError :: InsufficientFunds => INSUFFICIENT_FUNDS , ProgramError :: IncorrectProgramId => INCORRECT_PROGRAM_ID , ProgramError :: MissingRequiredSignature => MISSING_REQUIRED_SIGNATURES , ProgramError :: AccountAlreadyInitialized => ACCOUNT_ALREADY_INITIALIZED , ProgramError :: UninitializedAccount => UNINITIALIZED_ACCOUNT , ProgramError :: NotEnoughAccountKeys => NOT_ENOUGH_ACCOUNT_KEYS , ProgramError :: AccountBorrowFailed => ACCOUNT_BORROW_FAILED , ProgramError :: MaxSeedLengthExceeded => MAX_SEED_LENGTH_EXCEEDED , ProgramError :: InvalidSeeds => INVALID_SEEDS , ProgramError :: BorshIoError => BORSH_IO_ERROR , ProgramError :: AccountNotRentExempt => ACCOUNT_NOT_RENT_EXEMPT , ProgramError :: UnsupportedSysvar => UNSUPPORTED_SYSVAR , ProgramError :: IllegalOwner => ILLEGAL_OWNER , ProgramError :: MaxAccountsDataAllocationsExceeded => { MAX_ACCOUNTS_DATA_ALLOCATIONS_EXCEEDED } ProgramError :: InvalidRealloc => INVALID_ACCOUNT_DATA_REALLOC , ProgramError :: MaxInstructionTraceLengthExceeded => { MAX_INSTRUCTION_TRACE_LENGTH_EXCEEDED } ProgramError :: BuiltinProgramsMustConsumeComputeUnits => { BUILTIN_PROGRAMS_MUST_CONSUME_COMPUTE_UNITS } ProgramError :: InvalidAccountOwner => INVALID_ACCOUNT_OWNER , ProgramError :: ArithmeticOverflow => ARITHMETIC_OVERFLOW , ProgramError :: Immutable => IMMUTABLE , ProgramError :: IncorrectAuthority => INCORRECT_AUTHORITY , ProgramError :: Custom (error) => { if error == 0 { CUSTOM_ZERO } else { error as u64 } } } } }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for impl_595 (impl)
+macro_rules! Depcrate_quic_io_utilization_estimatorimpl_595 {
+() => {
+// Module: crate::quic::io::utilization_estimator
+// Provides: {"impl_595"}
+// Dependencies: {}
+impl MaxUtilizedBandwidthEstimator { fn new () -> Self { let rounds = VecDeque :: with_capacity (EST_WIN) ; MaxUtilizedBandwidthEstimator { rounds , estimate : WindowedFilter :: new (Duration :: from_secs (120)) , bytes_sent_prev_round : 0 , } } fn new_round (& mut self , time : Instant , bytes_sent : u64 , bytes_lost : u64 , bytes_acked : u64 ,) { if self . rounds . len () == EST_WIN { let _ = self . rounds . pop_front () ; } self . rounds . push_back (Round { bytes_sent : self . bytes_sent_prev_round , bytes_acked , bytes_lost , start : time , }) ; self . bytes_sent_prev_round = bytes_sent ; let bytes_acked = self . rounds . iter () . map (| v | v . bytes_acked) . sum :: < u64 > () ; let bytes_lost = self . rounds . iter () . map (| v | v . bytes_lost) . sum :: < u64 > () ; let bytes_sent = self . rounds . iter () . map (| v | v . bytes_sent) . sum :: < u64 > () ; let loss = if bytes_lost == 0 { 0. } else { bytes_lost as f32 / bytes_sent as f32 } ; let time_delta = time . duration_since (self . rounds . front () . unwrap () . start) ; if bytes_acked > 0 { let ack_rate = bandwidth_from_bytes_and_time_delta (bytes_acked , time_delta) ; let send_rate = bandwidth_from_bytes_and_time_delta (bytes_sent , time_delta) ; let estimate = Estimate { bandwidth : ack_rate . min (send_rate) , loss , } ; if self . rounds . len () < EST_WIN / 2 { self . estimate . reset (estimate , time) } else { self . estimate . update (estimate , time) } } } pub (super) fn get (& self) -> Estimate { if self . rounds . len () < EST_WIN / 2 { return Default :: default () ; } self . estimate . get_best () . unwrap_or_default () } }
+};
+}

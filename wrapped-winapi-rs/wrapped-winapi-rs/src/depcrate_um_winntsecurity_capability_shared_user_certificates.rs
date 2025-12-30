@@ -1,0 +1,9 @@
+// Generated macro for SECURITY_CAPABILITY_SHARED_USER_CERTIFICATES (const)
+macro_rules! Depcrate_um_winntSECURITY_CAPABILITY_SHARED_USER_CERTIFICATES {
+() => {
+// Module: crate::um::winnt
+// Provides: {"SECURITY_CAPABILITY_SHARED_USER_CERTIFICATES"}
+// Dependencies: {}
+pub const SECURITY_CAPABILITY_SHARED_USER_CERTIFICATES : DWORD = 0x00000009 ;
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for impl_777 (impl)
+macro_rules! Depcrate_cors_allow_headersimpl_777 {
+() => {
+// Module: crate::cors::allow_headers
+// Provides: {"impl_777"}
+// Dependencies: {}
+impl AllowHeaders { # [doc = " Allow any headers by sending a wildcard (`*`)"] # [doc = ""] # [doc = " See [`CorsLayer::allow_headers`] for more details."] # [doc = ""] # [doc = " [`CorsLayer::allow_headers`]: super::CorsLayer::allow_headers"] pub fn any () -> Self { Self (AllowHeadersInner :: Const (Some (WILDCARD))) } # [doc = " Set multiple allowed headers"] # [doc = ""] # [doc = " See [`CorsLayer::allow_headers`] for more details."] # [doc = ""] # [doc = " [`CorsLayer::allow_headers`]: super::CorsLayer::allow_headers"] pub fn list < I > (headers : I) -> Self where I : IntoIterator < Item = HeaderName > , { Self (AllowHeadersInner :: Const (separated_by_commas (headers . into_iter () . map (Into :: into) ,))) } # [doc = " Allow any headers, by mirroring the preflight [`Access-Control-Request-Headers`][mdn]"] # [doc = " header."] # [doc = ""] # [doc = " See [`CorsLayer::allow_headers`] for more details."] # [doc = ""] # [doc = " [`CorsLayer::allow_headers`]: super::CorsLayer::allow_headers"] # [doc = ""] # [doc = " [mdn]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Request-Headers"] pub fn mirror_request () -> Self { Self (AllowHeadersInner :: MirrorRequest) } # [allow (clippy :: borrow_interior_mutable_const)] pub (super) fn is_wildcard (& self) -> bool { matches ! (& self . 0 , AllowHeadersInner :: Const (Some (v)) if v == WILDCARD) } pub (super) fn to_header (& self , parts : & RequestParts) -> Option < (HeaderName , HeaderValue) > { let allow_headers = match & self . 0 { AllowHeadersInner :: Const (v) => v . clone () ? , AllowHeadersInner :: MirrorRequest => parts . headers . get (header :: ACCESS_CONTROL_REQUEST_HEADERS) ? . clone () , } ; Some ((header :: ACCESS_CONTROL_ALLOW_HEADERS , allow_headers)) } }
+};
+}

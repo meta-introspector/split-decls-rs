@@ -1,0 +1,39 @@
+// Generated module macro for crate::global_state
+macro_rules! Modcrate_global_state {
+() => {
+        Depcrate_global_stateuse_366!();
+        Depcrate_global_stateuse_367!();
+        Depcrate_global_stateuse_368!();
+        Depcrate_global_stateuse_369!();
+        Depcrate_global_stateuse_370!();
+        Depcrate_global_stateuse_371!();
+        Depcrate_global_stateuse_372!();
+        Depcrate_global_stateuse_373!();
+        Depcrate_global_stateuse_374!();
+        Depcrate_global_stateuse_375!();
+        Depcrate_global_stateuse_376!();
+        Depcrate_global_stateuse_377!();
+        Depcrate_global_stateuse_378!();
+        Depcrate_global_stateuse_379!();
+        Depcrate_global_stateuse_380!();
+        Depcrate_global_stateuse_381!();
+        Depcrate_global_stateuse_382!();
+        Depcrate_global_stateuse_383!();
+        Depcrate_global_stateFetchWorkspaceRequest!();
+        Depcrate_global_stateFetchWorkspaceResponse!();
+        Depcrate_global_stateFetchBuildDataResponse!();
+        Depcrate_global_stateHandle!();
+        Depcrate_global_stateReqHandler!();
+        Depcrate_global_stateReqQueue!();
+        Depcrate_global_stateGlobalState!();
+        Depcrate_global_stateMiniCoreRustAnalyzerInternalOnly!();
+        Depcrate_global_stateGlobalStateSnapshot!();
+        Depcrate_global_stateimpl_393!();
+        Depcrate_global_stateimpl_394!();
+        Depcrate_global_stateimpl_395!();
+        Depcrate_global_stateimpl_396!();
+        Depcrate_global_statefile_id_to_url!();
+        Depcrate_global_stateurl_to_file_id!();
+        Depcrate_global_statevfs_path_to_file_id!();
+    };
+}

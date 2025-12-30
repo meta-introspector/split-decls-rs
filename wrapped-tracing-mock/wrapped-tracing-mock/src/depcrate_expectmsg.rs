@@ -1,0 +1,9 @@
+// Generated macro for msg (function)
+macro_rules! Depcrate_expectmsg {
+() => {
+// Module: crate::expect
+// Provides: {"msg"}
+// Dependencies: {}
+# [doc = " Construct a new message [`ExpectedField`]."] # [doc = ""] # [doc = " For details on how to set the value of the message field and"] # [doc = " how to expect multiple fields, see the [`field`] module and the"] # [doc = " [`ExpectedField`] and [`ExpectedFields`] structs."] # [doc = ""] # [doc = " This is equivalent to"] # [doc = " `expect::field(\"message\").with_value(message)`."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " use tracing_mock::{expect, subscriber};"] # [doc = ""] # [doc = " let event = expect::event().with_fields("] # [doc = "     expect::msg(\"message\"));"] # [doc = ""] # [doc = " let (subscriber, handle) = subscriber::mock()"] # [doc = "     .event(event)"] # [doc = "     .run_with_handle();"] # [doc = ""] # [doc = " tracing::subscriber::with_default(subscriber, || {"] # [doc = "     tracing::info!(\"message\");"] # [doc = " });"] # [doc = ""] # [doc = " handle.assert_finished();"] # [doc = " ```"] # [doc = ""] # [doc = " A different message value will cause the test to fail:"] # [doc = ""] # [doc = " ```should_panic"] # [doc = " use tracing_mock::{expect, subscriber};"] # [doc = ""] # [doc = " let event = expect::event().with_fields("] # [doc = "     expect::msg(\"message\"));"] # [doc = ""] # [doc = " let (subscriber, handle) = subscriber::mock()"] # [doc = "     .event(event)"] # [doc = "     .run_with_handle();"] # [doc = ""] # [doc = " tracing::subscriber::with_default(subscriber, || {"] # [doc = "     tracing::info!(\"different message\");"] # [doc = " });"] # [doc = ""] # [doc = " handle.assert_finished();"] # [doc = " ```"] pub fn msg (message : impl fmt :: Display) -> ExpectedField { ExpectedField { name : "message" . to_string () , value : ExpectedValue :: Debug (message . to_string ()) , } }
+};
+}

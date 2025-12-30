@@ -1,0 +1,9 @@
+// Generated macro for macro_1525 (macro)
+macro_rules! Depcrate_derivemacro_1525 {
+() => {
+// Module: crate::derive
+// Provides: {"macro_1525"}
+// Dependencies: {}
+declare_clippy_lint ! { # [doc = " ### What it does"] # [doc = " Lints against manual `PartialOrd` and `Ord` implementations for types with a derived `Ord`"] # [doc = " or `PartialOrd` implementation."] # [doc = ""] # [doc = " ### Why is this bad?"] # [doc = " The implementation of these traits must agree (for"] # [doc = " example for use with `sort`) so it’s probably a bad idea to use a"] # [doc = " default-generated `Ord` implementation with an explicitly defined"] # [doc = " `PartialOrd`. In particular, the following must hold for any type"] # [doc = " implementing `Ord`:"] # [doc = ""] # [doc = " ```text"] # [doc = " k1.cmp(&k2) == k1.partial_cmp(&k2).unwrap()"] # [doc = " ```"] # [doc = ""] # [doc = " ### Example"] # [doc = " ```rust,ignore"] # [doc = " #[derive(Ord, PartialEq, Eq)]"] # [doc = " struct Foo;"] # [doc = ""] # [doc = " impl PartialOrd for Foo {"] # [doc = "     ..."] # [doc = " }"] # [doc = " ```"] # [doc = " Use instead:"] # [doc = " ```rust,ignore"] # [doc = " #[derive(PartialEq, Eq)]"] # [doc = " struct Foo;"] # [doc = ""] # [doc = " impl PartialOrd for Foo {"] # [doc = "     fn partial_cmp(&self, other: &Foo) -> Option<Ordering> {"] # [doc = "        Some(self.cmp(other))"] # [doc = "     }"] # [doc = " }"] # [doc = ""] # [doc = " impl Ord for Foo {"] # [doc = "     ..."] # [doc = " }"] # [doc = " ```"] # [doc = " or, if you don't need a custom ordering:"] # [doc = " ```rust,ignore"] # [doc = " #[derive(Ord, PartialOrd, PartialEq, Eq)]"] # [doc = " struct Foo;"] # [doc = " ```"] # [clippy :: version = "1.47.0"] pub DERIVE_ORD_XOR_PARTIAL_ORD , correctness , "deriving `Ord` but implementing `PartialOrd` explicitly" }
+};
+}

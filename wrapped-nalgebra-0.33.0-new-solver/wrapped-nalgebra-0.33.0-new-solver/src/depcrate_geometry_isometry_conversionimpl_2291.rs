@@ -1,0 +1,9 @@
+// Generated macro for impl_2291 (impl)
+macro_rules! Depcrate_geometry_isometry_conversionimpl_2291 {
+() => {
+// Module: crate::geometry::isometry_conversion
+// Provides: {"impl_2291"}
+// Dependencies: {}
+impl < T1 , T2 , R , const D : usize > SubsetOf < OMatrix < T2 , DimNameSum < Const < D > , U1 > , DimNameSum < Const < D > , U1 > > > for Isometry < T1 , R , D > where T1 : RealField , T2 : RealField + SupersetOf < T1 > , R : AbstractRotation < T1 , D > + SubsetOf < OMatrix < T1 , DimNameSum < Const < D > , U1 > , DimNameSum < Const < D > , U1 > > > + SubsetOf < OMatrix < T2 , DimNameSum < Const < D > , U1 > , DimNameSum < Const < D > , U1 > > > , Const < D > : DimNameAdd < U1 > + DimMin < Const < D > , Output = Const < D > > , DefaultAllocator : Allocator < Const < D > , Const < 1 > , Buffer < T1 > = ArrayStorage < T1 , D , 1 > > + Allocator < DimNameSum < Const < D > , U1 > , DimNameSum < Const < D > , U1 > > , { # [inline] fn to_superset (& self) -> OMatrix < T2 , DimNameSum < Const < D > , U1 > , DimNameSum < Const < D > , U1 > > { self . to_homogeneous () . to_superset () } # [inline] fn is_in_subset (m : & OMatrix < T2 , DimNameSum < Const < D > , U1 > , DimNameSum < Const < D > , U1 > >) -> bool { let rot = m . fixed_view :: < D , D > (0 , 0) ; let bottom = m . fixed_view :: < 1 , D > (D , 0) ; m . iter () . all (| e | SupersetOf :: < T1 > :: is_in_subset (e)) && rot . is_special_orthogonal (T2 :: default_epsilon () * crate :: convert (100.0)) && bottom . iter () . all (| e | e . is_zero ()) && m [(D , D)] == T2 :: one () } # [inline] fn from_superset_unchecked (m : & OMatrix < T2 , DimNameSum < Const < D > , U1 > , DimNameSum < Const < D > , U1 > > ,) -> Self { let t = m . fixed_view :: < D , 1 > (0 , D) . into_owned () ; let t = Translation { vector : crate :: convert_unchecked (t) , } ; Self :: from_parts (t , crate :: convert_unchecked (m . clone_owned ())) } }
+};
+}

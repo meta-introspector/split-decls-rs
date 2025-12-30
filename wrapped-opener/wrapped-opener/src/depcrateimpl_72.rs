@@ -1,0 +1,9 @@
+// Generated macro for impl_72 (impl)
+macro_rules! Depcrateimpl_72 {
+() => {
+// Module: crate
+// Provides: {"impl_72"}
+// Dependencies: {}
+impl Display for OpenError { fn fmt (& self , f : & mut Formatter < '_ >) -> fmt :: Result { match self { OpenError :: Io (_) => { write ! (f , "IO error") ? ; } OpenError :: Spawn { cmds , source : _ } => { write ! (f , "error spawning command(s) '{cmds}'") ? ; } OpenError :: ExitStatus { cmd , status , stderr , } => { write ! (f , "command '{cmd}' did not execute successfully; {status}") ? ; let stderr = stderr . trim () ; if ! stderr . is_empty () { write ! (f , "\ncommand stderr:\n{stderr}") ? ; } } } Ok (()) } }
+};
+}

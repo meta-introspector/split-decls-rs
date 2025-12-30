@@ -1,0 +1,53 @@
+// Generated module macro for crate::fd
+macro_rules! Modcrate_fd {
+() => {
+        Depcrate_fduse_880!();
+        Depcrate_fduse_881!();
+        Depcrate_fduse_882!();
+        Depcrate_fduse_883!();
+        Depcrate_fduse_884!();
+        Depcrate_fduse_885!();
+        Depcrate_fduse_886!();
+        Depcrate_fduse_887!();
+        Depcrate_fduse_888!();
+        Depcrate_fduse_889!();
+        Depcrate_fduse_890!();
+        Depcrate_fduse_891!();
+        Depcrate_fduse_892!();
+        Depcrate_fdeventfd!();
+        Depcrate_fdsocket!();
+        Depcrate_fdstdio!();
+        Depcrate_fdSTDIN_FILENO!();
+        Depcrate_fdSTDOUT_FILENO!();
+        Depcrate_fdSTDERR_FILENO!();
+        Depcrate_fdEndpoint!();
+        Depcrate_fdListenEndpoint!();
+        Depcrate_fdSocketOption!();
+        Depcrate_fdFileDescriptor!();
+        Depcrate_fdmacro_1019!();
+        Depcrate_fdmacro_1020!();
+        Depcrate_fdimpl_1021!();
+        Depcrate_fdmacro_1022!();
+        Depcrate_fdmacro_1023!();
+        Depcrate_fdPollFd!();
+        Depcrate_fdmacro_1025!();
+        Depcrate_fdmacro_1026!();
+        Depcrate_fdimpl_1027!();
+        Depcrate_fdObjectInterface!();
+        Depcrate_fdread!();
+        Depcrate_fdlseek!();
+        Depcrate_fdchmod!();
+        Depcrate_fdwrite!();
+        Depcrate_fdtruncate!();
+        Depcrate_fdpoll_fds!();
+        Depcrate_fdpoll!();
+        Depcrate_fdfstat!();
+        Depcrate_fdeventfd!();
+        Depcrate_fdget_object!();
+        Depcrate_fdinsert_object!();
+        Depcrate_fddup_object!();
+        Depcrate_fddup_object2!();
+        Depcrate_fdremove_object!();
+        Depcrate_fdisatty!();
+    };
+}

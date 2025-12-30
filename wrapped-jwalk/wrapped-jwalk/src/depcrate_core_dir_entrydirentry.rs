@@ -1,0 +1,9 @@
+// Generated macro for DirEntry (struct)
+macro_rules! Depcrate_core_dir_entryDirEntry {
+() => {
+// Module: crate::core::dir_entry
+// Provides: {"DirEntry"}
+// Dependencies: {}
+# [doc = " Representation of a file or directory."] # [doc = ""] # [doc = " This representation does not wrap a `std::fs::DirEntry`. Instead it copies"] # [doc = " `file_name`, `file_type`, and optionally `metadata` out of the underlying"] # [doc = " `std::fs::DirEntry`. This allows it to quickly drop the underlying file"] # [doc = " descriptor."] pub struct DirEntry < C : ClientState > { # [doc = " Depth of this entry relative to the root directory where the walk"] # [doc = " started."] pub depth : usize , # [doc = " File name of this entry without leading path component."] pub file_name : OsString , # [doc = " File type for the file/directory that this entry points at."] pub file_type : FileType , # [doc = " Field where clients can store state from within the The"] # [doc = " [`process_read_dir`](struct.WalkDirGeneric.html#method.process_read_dir)"] # [doc = " callback."] pub client_state : C :: DirEntryState , # [doc = " Path used by this entry's parent to read this entry."] pub parent_path : Arc < Path > , # [doc = " Path that will be used to read child entries. This is automatically set"] # [doc = " for directories. The"] # [doc = " [`process_read_dir`](struct.WalkDirGeneric.html#method.process_read_dir) callback"] # [doc = " may set this field to `None` to skip reading the contents of a"] # [doc = " particular directory."] pub read_children_path : Option < Arc < Path > > , # [doc = " If `read_children_path` is set and resulting `fs::read_dir` generates an error"] # [doc = " then that error is stored here."] pub read_children_error : Option < Error > , follow_link : bool , follow_link_ancestors : Arc < Vec < Arc < Path > > > , }
+};
+}

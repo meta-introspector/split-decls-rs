@@ -1,0 +1,46 @@
+// Generated module macro for crate::client
+macro_rules! Modcrate_client {
+() => {
+        Depcrate_clientuse_62!();
+        Depcrate_clientuse_63!();
+        Depcrate_clientuse_64!();
+        Depcrate_clientuse_65!();
+        Depcrate_clientuse_66!();
+        Depcrate_clientuse_67!();
+        Depcrate_clientuse_68!();
+        Depcrate_clientuse_69!();
+        Depcrate_clientuse_70!();
+        Depcrate_clientuse_71!();
+        Depcrate_clientuse_72!();
+        Depcrate_clientuse_73!();
+        Depcrate_clientuse_74!();
+        Depcrate_clientuse_75!();
+        Depcrate_clientuse_76!();
+        Depcrate_clientuse_77!();
+        Depcrate_clientuse_78!();
+        Depcrate_clientuse_79!();
+        Depcrate_clientuse_80!();
+        Depcrate_clientuse_81!();
+        Depcrate_clientuse_82!();
+        Depcrate_clientrustls_client_config_builder!();
+        Depcrate_clientimpl_84!();
+        Depcrate_clientClientConfigBuilder!();
+        Depcrate_clientimpl_86!();
+        Depcrate_clientrustls_client_config!();
+        Depcrate_clientimpl_88!();
+        Depcrate_clientimpl_89!();
+        Depcrate_clientrustls_verify_server_cert_params!();
+        Depcrate_clientrustls_verify_server_cert_user_data!();
+        Depcrate_clientrustls_verify_server_cert_callback!();
+        Depcrate_clientVerifyCallback!();
+        Depcrate_clientVerifier!();
+        Depcrate_clientimpl_95!();
+        Depcrate_clientimpl_96!();
+        Depcrate_clientimpl_97!();
+        Depcrate_clientimpl_98!();
+        Depcrate_clientResolvesClientCertFromChoices!();
+        Depcrate_clientimpl_100!();
+        Depcrate_clientimpl_101!();
+        Depcrate_clienttests!();
+    };
+}

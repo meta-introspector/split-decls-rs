@@ -1,0 +1,46 @@
+// Generated module macro for crate::profiling
+macro_rules! Modcrate_profiling {
+() => {
+        Depcrate_profilinguse_459!();
+        Depcrate_profilinguse_460!();
+        Depcrate_profilinguse_461!();
+        Depcrate_profilinguse_462!();
+        Depcrate_profilinguse_463!();
+        Depcrate_profilinguse_464!();
+        Depcrate_profilinguse_465!();
+        Depcrate_profilinguse_466!();
+        Depcrate_profilinguse_467!();
+        Depcrate_profilinguse_468!();
+        Depcrate_profilinguse_469!();
+        Depcrate_profilinguse_470!();
+        Depcrate_profilinguse_471!();
+        Depcrate_profilinguse_472!();
+        Depcrate_profilinguse_473!();
+        Depcrate_profilinguse_474!();
+        Depcrate_profilinguse_475!();
+        Depcrate_profilinguse_476!();
+        Depcrate_profilingmacro_477!();
+        Depcrate_profilingEVENT_FILTERS_BY_NAME!();
+        Depcrate_profilingQueryInvocationId!();
+        Depcrate_profilingTimePassesFormat!();
+        Depcrate_profilingSelfProfilerRef!();
+        Depcrate_profilingimpl_482!();
+        Depcrate_profilingEventArgRecorder!();
+        Depcrate_profilingimpl_484!();
+        Depcrate_profilingSelfProfiler!();
+        Depcrate_profilingimpl_486!();
+        Depcrate_profilingTimingGuard!();
+        Depcrate_profilingimpl_488!();
+        Depcrate_profilingVerboseInfo!();
+        Depcrate_profilingVerboseTimingGuard!();
+        Depcrate_profilingimpl_491!();
+        Depcrate_profilingimpl_492!();
+        Depcrate_profilingJsonTimePassesEntry!();
+        Depcrate_profilingimpl_494!();
+        Depcrate_profilingprint_time_passes_entry!();
+        Depcrate_profilingduration_to_secs_str!();
+        Depcrate_profilingget_thread_id!();
+        Depcrate_profilingmacro_498!();
+        Depcrate_profilingtests!();
+    };
+}

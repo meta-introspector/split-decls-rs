@@ -1,0 +1,45 @@
+// Generated module macro for crate::coord::ranged1d::types::datetime
+macro_rules! Modcrate_coord_ranged1d_types_datetime {
+() => {
+        Depcrate_coord_ranged1d_types_datetimeuse_238!();
+        Depcrate_coord_ranged1d_types_datetimeuse_239!();
+        Depcrate_coord_ranged1d_types_datetimeuse_240!();
+        Depcrate_coord_ranged1d_types_datetimeTimeValue!();
+        Depcrate_coord_ranged1d_types_datetimeimpl_242!();
+        Depcrate_coord_ranged1d_types_datetimeimpl_243!();
+        Depcrate_coord_ranged1d_types_datetimeimpl_244!();
+        Depcrate_coord_ranged1d_types_datetimeimpl_245!();
+        Depcrate_coord_ranged1d_types_datetimeRangedDate!();
+        Depcrate_coord_ranged1d_types_datetimeimpl_247!();
+        Depcrate_coord_ranged1d_types_datetimeimpl_248!();
+        Depcrate_coord_ranged1d_types_datetimeimpl_249!();
+        Depcrate_coord_ranged1d_types_datetimeimpl_250!();
+        Depcrate_coord_ranged1d_types_datetimeimpl_251!();
+        Depcrate_coord_ranged1d_types_datetimeMonthly!();
+        Depcrate_coord_ranged1d_types_datetimeimpl_253!();
+        Depcrate_coord_ranged1d_types_datetimeimpl_254!();
+        Depcrate_coord_ranged1d_types_datetimeimpl_255!();
+        Depcrate_coord_ranged1d_types_datetimeimpl_256!();
+        Depcrate_coord_ranged1d_types_datetimeYearly!();
+        Depcrate_coord_ranged1d_types_datetimegenerate_yearly_keypoints!();
+        Depcrate_coord_ranged1d_types_datetimeimpl_259!();
+        Depcrate_coord_ranged1d_types_datetimeimpl_260!();
+        Depcrate_coord_ranged1d_types_datetimeimpl_261!();
+        Depcrate_coord_ranged1d_types_datetimeIntoMonthly!();
+        Depcrate_coord_ranged1d_types_datetimeIntoYearly!();
+        Depcrate_coord_ranged1d_types_datetimeimpl_264!();
+        Depcrate_coord_ranged1d_types_datetimeimpl_265!();
+        Depcrate_coord_ranged1d_types_datetimeRangedDateTime!();
+        Depcrate_coord_ranged1d_types_datetimeimpl_267!();
+        Depcrate_coord_ranged1d_types_datetimeimpl_268!();
+        Depcrate_coord_ranged1d_types_datetimeimpl_269!();
+        Depcrate_coord_ranged1d_types_datetimeimpl_270!();
+        Depcrate_coord_ranged1d_types_datetimeimpl_271!();
+        Depcrate_coord_ranged1d_types_datetimeRangedDuration!();
+        Depcrate_coord_ranged1d_types_datetimeimpl_273!();
+        Depcrate_coord_ranged1d_types_datetimeimpl_274!();
+        Depcrate_coord_ranged1d_types_datetimeimpl_275!();
+        Depcrate_coord_ranged1d_types_datetimecompute_period_per_point!();
+        Depcrate_coord_ranged1d_types_datetimetest!();
+    };
+}

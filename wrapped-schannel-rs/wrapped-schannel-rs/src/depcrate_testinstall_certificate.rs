@@ -1,0 +1,20 @@
+// Generated macro for install_certificate (function)
+macro_rules! Depcrate_testinstall_certificate {
+() => {
+// Module: crate::test
+// Provides: {"install_certificate"}
+// Dependencies: {}
+fn install_certificate () -> io :: Result < CertContext > { unsafe { let mut provider = 0 ; let mut hkey = 0 ; let mut buffer = "schannel-rs test suite" . encode_utf16 () . chain (Some (0)) . collect :: < Vec < _ > > () ; let res = Cryptography :: CryptAcquireContextW (& mut provider , buffer . as_ptr () , ptr :: null () , Cryptography :: PROV_RSA_FULL , Cryptography :: CRYPT_MACHINE_KEYSET ,) ; if res == 0 { let res = Cryptography :: CryptAcquireContextW (& mut provider , buffer . as_ptr () , ptr :: null () , Cryptography :: PROV_RSA_FULL , Cryptography :: CRYPT_NEWKEYSET | Cryptography :: CRYPT_MACHINE_KEYSET ,) ; if res == 0 { return Err (Error :: last_os_error ()) ; } } let res = Cryptography :: CryptGenKey (provider , Cryptography :: AT_SIGNATURE , 0x0800 << 16 | Cryptography :: CRYPT_EXPORTABLE , & mut hkey ,) ; if res == 0 { return Err (Error :: last_os_error ()) ; } let name = "CN=localhost,O=schannel-rs,OU=schannel-rs,G=schannel_rs" . encode_utf16 () . chain (Some (0)) . collect :: < Vec < _ > > () ; let mut cname_buffer : [u16 ; 257] = mem :: zeroed () ; let mut cname_len = cname_buffer . len () as u32 ; let res = Cryptography :: CertStrToNameW (Cryptography :: X509_ASN_ENCODING , name . as_ptr () , Cryptography :: CERT_X500_NAME_STR , ptr :: null_mut () , cname_buffer . as_mut_ptr () as * mut u8 , & mut cname_len , ptr :: null_mut () ,) ; if res == 0 { return Err (Error :: last_os_error ()) ; } let subject_issuer = Cryptography :: CRYPT_INTEGER_BLOB { cbData : cname_len , pbData : cname_buffer . as_ptr () as * mut u8 , } ; let key_provider = Cryptography :: CRYPT_KEY_PROV_INFO { pwszContainerName : buffer . as_mut_ptr () , pwszProvName : ptr :: null_mut () , dwProvType : Cryptography :: PROV_RSA_FULL , dwFlags : Cryptography :: CRYPT_MACHINE_KEYSET , cProvParam : 0 , rgProvParam : ptr :: null_mut () , dwKeySpec : Cryptography :: AT_SIGNATURE , } ; let sig_algorithm = Cryptography :: CRYPT_ALGORITHM_IDENTIFIER { pszObjId : Cryptography :: szOID_RSA_SHA256RSA as * mut _ , Parameters : mem :: zeroed () , } ; let mut expiration_date : Foundation :: SYSTEMTIME = mem :: zeroed () ; SystemInformation :: GetSystemTime (& mut expiration_date) ; let mut file_time : Foundation :: FILETIME = mem :: zeroed () ; let res = Time :: SystemTimeToFileTime (& expiration_date , & mut file_time) ; if res == 0 { return Err (Error :: last_os_error ()) ; } let mut timestamp : u64 = file_time . dwLowDateTime as u64 | (file_time . dwHighDateTime as u64) << 32 ; timestamp += (1E9 as u64) / 100 * (60 * 60 * 24) ; file_time . dwLowDateTime = timestamp as u32 ; file_time . dwHighDateTime = (timestamp >> 32) as u32 ; let res = Time :: FileTimeToSystemTime (& file_time , & mut expiration_date) ; if res == 0 { return Err (Error :: last_os_error ()) ; } let cert_context = Cryptography :: CertCreateSelfSignCertificate (Cryptography :: HCRYPTPROV_OR_NCRYPT_KEY_HANDLE :: default () , & subject_issuer , Cryptography :: CERT_CREATE_SELFSIGN_FLAGS :: default () , & key_provider , & sig_algorithm , ptr :: null_mut () , & expiration_date , ptr :: null_mut () ,) ; if cert_context . is_null () { return Err (Error :: last_os_error ()) ; } let cert_context = CertContext :: from_inner (cert_context) ; cert_context . set_friendly_name (FRIENDLY_NAME) ? ; io :: stdout () . write_all (br#"
+
+The schannel-rs test suite is about to add a certificate to your set of root
+and trusted certificates. This certificate should be for the domain "localhost"
+with the description related to "schannel". This certificate is only valid for
+one day and will be automatically deleted if you re-run the schannel-rs test
+suite later.
+
+If you would rather not do this please cancel the addition and re-run the
+test suite with SCHANNEL_RS_SKIP_SERVER_TESTS=1.
+
+"# ,) . unwrap () ; local_root_store () . add_cert (& cert_context , CertAdd :: ReplaceExisting) ? ; Ok (cert_context) } }
+};
+}

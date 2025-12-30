@@ -1,0 +1,9 @@
+// Generated macro for wasmtime_trap_handler_t (type)
+macro_rules! Depcrate_capiwasmtime_trap_handler_t {
+() => {
+// Module: crate::capi
+// Provides: {"wasmtime_trap_handler_t"}
+// Dependencies: {}
+# [doc = " Handler function for traps in Wasmtime passed to `wasmtime_init_traps`."] # [doc = ""] # [doc = " This function is invoked whenever a trap is caught by the system. For"] # [doc = " example this would be invoked during a signal handler on Linux. This"] # [doc = " function is passed a number of parameters indicating information about the"] # [doc = " trap:"] # [doc = ""] # [doc = " * `ip` - the instruction pointer at the time of the trap."] # [doc = " * `fp` - the frame pointer register's value at the time of the trap."] # [doc = " * `has_faulting_addr` - whether this trap is associated with an access"] # [doc = "   violation (e.g. a segfault) meaning memory was accessed when it shouldn't"] # [doc = "   be. If this is `true` then the next parameter is filled in."] # [doc = " * `faulting_addr` - if `has_faulting_addr` is true then this is the address"] # [doc = "   that was attempted to be accessed. Otherwise this value is not used."] # [doc = ""] # [doc = " If this function returns then the trap was not handled by Wasmtime. This"] # [doc = " means that it's left up to the embedder how to deal with the trap/signal"] # [doc = " depending on its default behavior. This could mean forwarding to a"] # [doc = " non-Wasmtime handler, aborting the process, logging then crashing, etc. The"] # [doc = " meaning of a trap that's not handled by Wasmtime depends on the context in"] # [doc = " which the trap was generated."] # [doc = ""] # [doc = " When this function does not return it's because `wasmtime_longjmp` is"] # [doc = " used to handle a Wasm-based trap."] # [allow (non_camel_case_types)] pub type wasmtime_trap_handler_t = extern "C" fn (ip : usize , fp : usize , has_faulting_addr : bool , faulting_addr : usize) ;
+};
+}

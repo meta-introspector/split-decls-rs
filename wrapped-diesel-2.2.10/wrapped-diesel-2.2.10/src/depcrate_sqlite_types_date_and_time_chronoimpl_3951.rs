@@ -1,0 +1,9 @@
+// Generated macro for impl_3951 (impl)
+macro_rules! Depcrate_sqlite_types_date_and_time_chronoimpl_3951 {
+() => {
+// Module: crate::sqlite::types::date_and_time::chrono
+// Provides: {"impl_3951"}
+// Dependencies: {}
+# [cfg (all (feature = "sqlite" , feature = "chrono"))] impl ToSql < Timestamp , Sqlite > for NaiveDateTime { fn to_sql < 'b > (& 'b self , out : & mut Output < 'b , '_ , Sqlite >) -> serialize :: Result { out . set_value (self . format (ENCODE_NAIVE_DATETIME_FORMAT) . to_string ()) ; Ok (IsNull :: No) } }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for other_54884 (other)
+macro_rules! Depcrate_um_winuserother_54884 {
+() => {
+// Module: crate::um::winuser
+// Provides: {"other_54884"}
+// Dependencies: {}
+extern "system" { pub fn CreateDesktopA (lpszDesktop : LPCSTR , lpszDevice : LPCSTR , pDevmode : * mut DEVMODEA , dwFlags : DWORD , dwDesiredAccess : ACCESS_MASK , lpsa : LPSECURITY_ATTRIBUTES ,) -> HDESK ; pub fn CreateDesktopW (lpszDesktop : LPCWSTR , lpszDevice : LPCWSTR , pDevmode : * mut DEVMODEW , dwFlags : DWORD , dwDesiredAccess : ACCESS_MASK , lpsa : LPSECURITY_ATTRIBUTES ,) -> HDESK ; pub fn CreateDesktopExA (lpszDesktop : LPCSTR , lpszDevice : LPCSTR , pDevmode : * mut DEVMODEA , dwFlags : DWORD , dwDesiredAccess : ACCESS_MASK , lpsa : LPSECURITY_ATTRIBUTES , ulHeapSize : ULONG , pvoid : PVOID ,) -> HDESK ; pub fn CreateDesktopExW (lpszDesktop : LPCWSTR , lpszDevice : LPCWSTR , pDevmode : * mut DEVMODEW , dwFlags : DWORD , dwDesiredAccess : ACCESS_MASK , lpsa : LPSECURITY_ATTRIBUTES , ulHeapSize : ULONG , pvoid : PVOID ,) -> HDESK ; pub fn OpenDesktopA (lpszDesktop : LPCSTR , dwFlags : DWORD , fInherit : BOOL , dwDesiredAccess : ACCESS_MASK ,) -> HDESK ; pub fn OpenDesktopW (lpszDesktop : LPCWSTR , dwFlags : DWORD , fInherit : BOOL , dwDesiredAccess : ACCESS_MASK ,) -> HDESK ; pub fn OpenInputDesktop (dwFlags : DWORD , fInherit : BOOL , dwDesiredAccess : ACCESS_MASK ,) -> HDESK ; pub fn EnumDesktopsA (hwinsta : HWINSTA , lpEnumFunc : DESKTOPENUMPROCA , lParam : LPARAM ,) -> BOOL ; pub fn EnumDesktopsW (hwinsta : HWINSTA , lpEnumFunc : DESKTOPENUMPROCW , lParam : LPARAM ,) -> BOOL ; pub fn EnumDesktopWindows (hDesktop : HDESK , lpfn : WNDENUMPROC , lParam : LPARAM ,) -> BOOL ; pub fn SwitchDesktop (hDesktop : HDESK ,) -> BOOL ; pub fn SetThreadDesktop (hDesktop : HDESK ,) -> BOOL ; pub fn CloseDesktop (hDesktop : HDESK ,) -> BOOL ; pub fn GetThreadDesktop (dwThreadId : DWORD ,) -> HDESK ; }
+};
+}

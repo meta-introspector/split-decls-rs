@@ -1,0 +1,55 @@
+// Generated module macro for crate::imports
+macro_rules! Modcrate_imports {
+() => {
+        Depcrate_importsuse_628!();
+        Depcrate_importsuse_629!();
+        Depcrate_importsuse_630!();
+        Depcrate_importsuse_631!();
+        Depcrate_importsuse_632!();
+        Depcrate_importsuse_633!();
+        Depcrate_importsuse_634!();
+        Depcrate_importsuse_635!();
+        Depcrate_importsuse_636!();
+        Depcrate_importsuse_637!();
+        Depcrate_importsuse_638!();
+        Depcrate_importsuse_639!();
+        Depcrate_importsuse_640!();
+        Depcrate_importsuse_641!();
+        Depcrate_importsuse_642!();
+        Depcrate_importsuse_643!();
+        Depcrate_importsuse_644!();
+        Depcrate_importsuse_645!();
+        Depcrate_importsuse_646!();
+        Depcrate_importspath_to_imported_ident!();
+        Depcrate_importsimpl_648!();
+        Depcrate_importsUseSegmentKind!();
+        Depcrate_importsUseSegment!();
+        Depcrate_importsUseTree!();
+        Depcrate_importsimpl_652!();
+        Depcrate_importsimpl_653!();
+        Depcrate_importsimpl_654!();
+        Depcrate_importsimpl_655!();
+        Depcrate_importsnormalize_use_trees_with_granularity!();
+        Depcrate_importsflatten_use_trees!();
+        Depcrate_importsimpl_658!();
+        Depcrate_importsimpl_659!();
+        Depcrate_importsimpl_660!();
+        Depcrate_importsimpl_661!();
+        Depcrate_importsimpl_662!();
+        Depcrate_importsimpl_663!();
+        Depcrate_importsimpl_664!();
+        Depcrate_importsimpl_665!();
+        Depcrate_importsmerge_rest!();
+        Depcrate_importsmerge_use_trees_inner!();
+        Depcrate_importsimpl_668!();
+        Depcrate_importsimpl_669!();
+        Depcrate_importsimpl_670!();
+        Depcrate_importsimpl_671!();
+        Depcrate_importsimpl_672!();
+        Depcrate_importsrewrite_nested_use_tree!();
+        Depcrate_importsimpl_674!();
+        Depcrate_importsimpl_675!();
+        Depcrate_importsSharedPrefix!();
+        Depcrate_importstest!();
+    };
+}

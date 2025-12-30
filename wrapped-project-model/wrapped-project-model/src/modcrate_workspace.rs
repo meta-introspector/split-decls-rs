@@ -1,0 +1,40 @@
+// Generated module macro for crate::workspace
+macro_rules! Modcrate_workspace {
+() => {
+        Depcrate_workspaceuse_153!();
+        Depcrate_workspaceuse_154!();
+        Depcrate_workspaceuse_155!();
+        Depcrate_workspaceuse_156!();
+        Depcrate_workspaceuse_157!();
+        Depcrate_workspaceuse_158!();
+        Depcrate_workspaceuse_159!();
+        Depcrate_workspaceuse_160!();
+        Depcrate_workspaceuse_161!();
+        Depcrate_workspaceuse_162!();
+        Depcrate_workspaceuse_163!();
+        Depcrate_workspaceuse_164!();
+        Depcrate_workspaceuse_165!();
+        Depcrate_workspaceuse_166!();
+        Depcrate_workspaceuse_167!();
+        Depcrate_workspaceFileLoader!();
+        Depcrate_workspacePackageRoot!();
+        Depcrate_workspaceProjectWorkspace!();
+        Depcrate_workspaceProjectWorkspaceKind!();
+        Depcrate_workspaceimpl_172!();
+        Depcrate_workspaceimpl_173!();
+        Depcrate_workspaceproject_json_to_crate_graph!();
+        Depcrate_workspacecargo_to_crate_graph!();
+        Depcrate_workspacedetached_file_to_crate_graph!();
+        Depcrate_workspacehandle_rustc_crates!();
+        Depcrate_workspaceadd_target_crate_root!();
+        Depcrate_workspaceSysrootPublicDeps!();
+        Depcrate_workspaceimpl_180!();
+        Depcrate_workspaceextend_crate_graph_with_sysroot!();
+        Depcrate_workspacesysroot_to_crate_graph!();
+        Depcrate_workspaceadd_dep!();
+        Depcrate_workspaceadd_dep_with_prelude!();
+        Depcrate_workspaceadd_proc_macro_dep!();
+        Depcrate_workspaceadd_dep_inner!();
+        Depcrate_workspacesysroot_metadata_config!();
+    };
+}

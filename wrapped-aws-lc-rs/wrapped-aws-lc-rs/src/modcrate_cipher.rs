@@ -1,0 +1,57 @@
+// Generated module macro for crate::cipher
+macro_rules! Modcrate_cipher {
+() => {
+        Depcrate_cipheraes!();
+        Depcrate_cipherblock!();
+        Depcrate_cipherchacha!();
+        Depcrate_cipherkey!();
+        Depcrate_cipherpadded!();
+        Depcrate_cipherstreaming!();
+        Depcrate_cipheruse_549!();
+        Depcrate_cipheruse_550!();
+        Depcrate_cipheruse_551!();
+        Depcrate_cipheruse_552!();
+        Depcrate_cipheruse_553!();
+        Depcrate_cipheruse_554!();
+        Depcrate_cipheruse_555!();
+        Depcrate_cipheruse_556!();
+        Depcrate_cipheruse_557!();
+        Depcrate_cipheruse_558!();
+        Depcrate_cipheruse_559!();
+        Depcrate_cipheruse_560!();
+        Depcrate_cipheruse_561!();
+        Depcrate_cipheruse_562!();
+        Depcrate_cipherMAX_CIPHER_KEY_LEN!();
+        Depcrate_cipheruse_564!();
+        Depcrate_cipheruse_565!();
+        Depcrate_cipheruse_566!();
+        Depcrate_cipheruse_567!();
+        Depcrate_cipherMAX_CIPHER_BLOCK_LEN!();
+        Depcrate_cipherOperatingMode!();
+        Depcrate_cipherimpl_570!();
+        Depcrate_cipherdefine_cipher_context!();
+        Depcrate_ciphermacro_572!();
+        Depcrate_ciphermacro_573!();
+        Depcrate_cipherAlgorithmId!();
+        Depcrate_cipherAlgorithm!();
+        Depcrate_cipherAES_128!();
+        Depcrate_cipherAES_192!();
+        Depcrate_cipherAES_256!();
+        Depcrate_cipherimpl_579!();
+        Depcrate_cipherimpl_580!();
+        Depcrate_cipherimpl_581!();
+        Depcrate_cipherimpl_582!();
+        Depcrate_cipherUnboundCipherKey!();
+        Depcrate_cipherimpl_584!();
+        Depcrate_cipherimpl_585!();
+        Depcrate_cipherEncryptingKey!();
+        Depcrate_cipherimpl_587!();
+        Depcrate_cipherimpl_588!();
+        Depcrate_cipherDecryptingKey!();
+        Depcrate_cipherimpl_590!();
+        Depcrate_cipherimpl_591!();
+        Depcrate_cipherencrypt!();
+        Depcrate_cipherdecrypt!();
+        Depcrate_ciphertests!();
+    };
+}

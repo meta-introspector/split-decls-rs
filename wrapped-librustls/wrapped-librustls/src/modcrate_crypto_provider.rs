@@ -1,0 +1,56 @@
+// Generated module macro for crate::crypto_provider
+macro_rules! Modcrate_crypto_provider {
+() => {
+        Depcrate_crypto_provideruse_128!();
+        Depcrate_crypto_provideruse_129!();
+        Depcrate_crypto_provideruse_130!();
+        Depcrate_crypto_provideruse_131!();
+        Depcrate_crypto_provideruse_132!();
+        Depcrate_crypto_provideruse_133!();
+        Depcrate_crypto_provideruse_134!();
+        Depcrate_crypto_provideruse_135!();
+        Depcrate_crypto_provideruse_136!();
+        Depcrate_crypto_provideruse_137!();
+        Depcrate_crypto_provideruse_138!();
+        Depcrate_crypto_provideruse_139!();
+        Depcrate_crypto_provideruse_140!();
+        Depcrate_crypto_provideruse_141!();
+        Depcrate_crypto_providerrustls_crypto_provider_builder!();
+        Depcrate_crypto_providerimpl_143!();
+        Depcrate_crypto_providerCryptoProviderBuilder!();
+        Depcrate_crypto_providerimpl_145!();
+        Depcrate_crypto_providerrustls_crypto_provider_builder_new_from_default!();
+        Depcrate_crypto_providerrustls_crypto_provider_builder_new_with_base!();
+        Depcrate_crypto_providerrustls_crypto_provider_builder_set_cipher_suites!();
+        Depcrate_crypto_providerrustls_crypto_provider_builder_build!();
+        Depcrate_crypto_providerrustls_crypto_provider_builder_build_as_default!();
+        Depcrate_crypto_providerrustls_crypto_provider_builder_free!();
+        Depcrate_crypto_providerrustls_ring_crypto_provider!();
+        Depcrate_crypto_providerrustls_aws_lc_rs_crypto_provider!();
+        Depcrate_crypto_providerrustls_default_fips_provider!();
+        Depcrate_crypto_providerrustls_crypto_provider_default!();
+        Depcrate_crypto_providerrustls_crypto_provider!();
+        Depcrate_crypto_providerimpl_157!();
+        Depcrate_crypto_providerrustls_crypto_provider_ciphersuites_len!();
+        Depcrate_crypto_providerrustls_crypto_provider_ciphersuites_get!();
+        Depcrate_crypto_providerrustls_crypto_provider_load_key!();
+        Depcrate_crypto_providerrustls_crypto_provider_random!();
+        Depcrate_crypto_providerrustls_crypto_provider_fips!();
+        Depcrate_crypto_providerrustls_crypto_provider_free!();
+        Depcrate_crypto_providerrustls_default_crypto_provider_ciphersuites_len!();
+        Depcrate_crypto_providerrustls_default_crypto_provider_ciphersuites_get!();
+        Depcrate_crypto_providerrustls_default_crypto_provider_random!();
+        Depcrate_crypto_providerrustls_signing_key!();
+        Depcrate_crypto_providerimpl_168!();
+        Depcrate_crypto_providerimpl_169!();
+        Depcrate_crypto_providerrustls_hpke!();
+        Depcrate_crypto_providerimpl_171!();
+        Depcrate_crypto_providerHpke!();
+        Depcrate_crypto_providerimpl_173!();
+        Depcrate_crypto_providerAWS_LC_RS_HPKE!();
+        Depcrate_crypto_providerrustls_supported_hpke!();
+        Depcrate_crypto_providerget_default_or_install_from_crate_features!();
+        Depcrate_crypto_providerprovider_from_crate_features!();
+        Depcrate_crypto_providertests!();
+    };
+}

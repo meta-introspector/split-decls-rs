@@ -1,0 +1,9 @@
+// Generated macro for go (macro)
+macro_rules! Depcrate_tokenizergo {
+() => {
+// Module: crate::tokenizer
+// Provides: {"go"}
+// Dependencies: {}
+macro_rules ! go (($ me : ident : $ a : tt ; $ ($ rest : tt) *) => ({ sh_trace ! ($ me : $ a) ; go ! ($ me : $ ($ rest) *) ; }) ; ($ me : ident : $ a : tt $ b : tt ; $ ($ rest : tt) *) => ({ sh_trace ! ($ me : $ a $ b) ; go ! ($ me : $ ($ rest) *) ; }) ; ($ me : ident : $ a : tt $ b : tt $ c : tt ; $ ($ rest : tt) *) => ({ sh_trace ! ($ me : $ a $ b $ c) ; go ! ($ me : $ ($ rest) *) ; }) ; ($ me : ident : $ a : tt $ b : tt $ c : tt $ d : tt ; $ ($ rest : tt) *) => ({ sh_trace ! ($ me : $ a $ b $ c $ d) ; go ! ($ me : $ ($ rest) *) ; }) ; ($ me : ident : to $ s : ident) => ({ $ me . state . set (states ::$ s) ; return ProcessResult :: Continue ; }) ; ($ me : ident : to $ s : ident $ k1 : expr) => ({ $ me . state . set (states ::$ s ($ k1)) ; return ProcessResult :: Continue ; }) ; ($ me : ident : to $ s : ident $ k1 : ident $ k2 : expr) => ({ $ me . state . set (states ::$ s ($ k1 ($ k2))) ; return ProcessResult :: Continue ; }) ; ($ me : ident : reconsume $ s : ident) => ({ $ me . reconsume . set (true) ; go ! ($ me : to $ s) ; }) ; ($ me : ident : reconsume $ s : ident $ k1 : expr) => ({ $ me . reconsume . set (true) ; go ! ($ me : to $ s $ k1) ; }) ; ($ me : ident : reconsume $ s : ident $ k1 : ident $ k2 : expr) => ({ $ me . reconsume . set (true) ; go ! ($ me : to $ s $ k1 $ k2) ; }) ; ($ me : ident : consume_char_ref) => ({ $ me . consume_char_ref () ; return ProcessResult :: Continue ; }) ; ($ me : ident : emit_tag $ s : ident) => ({ $ me . state . set (states ::$ s) ; return $ me . emit_current_tag () ; }) ; ($ me : ident : eof) => ({ $ me . emit_eof () ; return ProcessResult :: Suspend ; }) ; ($ me : ident : $ ($ cmd : tt) +) => (sh_trace ! ($ me : $ ($ cmd) +)) ; ($ me : ident :) => (()) ;) ;
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for parse_profession_infos (function)
+macro_rules! Depcrate_x509_certificateparse_profession_infos {
+() => {
+// Module: crate::x509::certificate
+// Provides: {"parse_profession_infos"}
+// Dependencies: {}
+fn parse_profession_infos < 'p , 'a > (py : pyo3 :: Python < 'p > , profession_infos : & asn1 :: SequenceOf < 'a , ProfessionInfo < 'a , Asn1Read > > ,) -> CryptographyResult < pyo3 :: Bound < 'p , pyo3 :: PyAny > > { let py_infos = pyo3 :: types :: PyList :: empty (py) ; for info in profession_infos . clone () { let py_naming_authority = match info . naming_authority { Some (data) => parse_naming_authority (py , data) ? , None => py . None () . into_bound (py) , } ; let py_profession_items = pyo3 :: types :: PyList :: empty (py) ; for item in info . profession_items { let py_item = parse_display_text (py , item) ? ; py_profession_items . append (py_item) ? ; } let py_profession_oids = match info . profession_oids { Some (oids) => { let py_oids = pyo3 :: types :: PyList :: empty (py) ; for oid in oids { let py_oid = oid_to_py_oid (py , & oid) ? ; py_oids . append (py_oid) ? ; } py_oids . into_any () } None => py . None () . into_bound (py) , } ; let py_registration_number = match info . registration_number { Some (data) => pyo3 :: types :: PyString :: new (py , data . as_str ()) . into_any () , None => py . None () . into_bound (py) , } ; let py_add_profession_info = match info . add_profession_info { Some (data) => pyo3 :: types :: PyBytes :: new (py , data) . into_any () , None => py . None () . into_bound (py) , } ; let py_info = types :: PROFESSION_INFO . get (py) ? . call1 ((py_naming_authority , py_profession_items , py_profession_oids , py_registration_number , py_add_profession_info ,)) ? ; py_infos . append (py_info) ? ; } Ok (py_infos . into_any ()) }
+};
+}

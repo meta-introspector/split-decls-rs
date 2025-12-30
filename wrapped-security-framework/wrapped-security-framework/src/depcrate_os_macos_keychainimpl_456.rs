@@ -1,0 +1,9 @@
+// Generated macro for impl_456 (impl)
+macro_rules! Depcrate_os_macos_keychainimpl_456 {
+() => {
+// Module: crate::os::macos::keychain
+// Provides: {"impl_456"}
+// Dependencies: {}
+impl CreateOptions { # [doc = " Creates a new builder with default options."] # [inline (always)] # [must_use] pub fn new () -> Self { Self :: default () } # [doc = " Sets the password to be used to protect the keychain."] # [inline] pub fn password (& mut self , password : & str) -> & mut Self { self . password = Some (password . into ()) ; self } # [doc = " If set, the user will be prompted to provide a password used to"] # [doc = " protect the keychain."] # [inline (always)] pub fn prompt_user (& mut self , prompt_user : bool) -> & mut Self { self . prompt_user = prompt_user ; self } # [doc = " Sets the access control applied to the keychain."] # [inline (always)] pub fn access (& mut self , access : SecAccess) -> & mut Self { self . access = Some (access) ; self } # [doc = " Creates a new keychain at the specified location on the filesystem."] pub fn create < P : AsRef < Path > > (& self , path : P) -> Result < SecKeychain > { unsafe { let path_name = path . as_ref () . as_os_str () . as_bytes () ; let path_name = CString :: new (path_name) . unwrap () ; let (password , password_len) = match & self . password { Some (password) => (password . as_ptr () . cast :: < c_void > () , password . len () as u32) , None => (ptr :: null () , 0) , } ; let access = match & self . access { Some (access) => access . as_concrete_TypeRef () , None => ptr :: null_mut () , } ; let mut keychain = ptr :: null_mut () ; cvt (SecKeychainCreate (path_name . as_ptr () , password_len , password , Boolean :: from (self . prompt_user) , access , & mut keychain ,)) ? ; Ok (SecKeychain :: wrap_under_create_rule (keychain)) } } }
+};
+}

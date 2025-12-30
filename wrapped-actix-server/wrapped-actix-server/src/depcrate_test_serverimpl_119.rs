@@ -1,0 +1,9 @@
+// Generated macro for impl_119 (impl)
+macro_rules! Depcrate_test_serverimpl_119 {
+() => {
+// Module: crate::test_server
+// Provides: {"impl_119"}
+// Dependencies: {}
+impl TestServer { # [doc = " Start new `TestServer` using application factory and default server config."] pub fn start (factory : impl ServerServiceFactory < TcpStream >) -> TestServerHandle { Self :: start_with_builder (Server :: build () , factory) } # [doc = " Start new `TestServer` using application factory and server builder."] pub fn start_with_builder (server_builder : ServerBuilder , factory : impl ServerServiceFactory < TcpStream > ,) -> TestServerHandle { let (tx , rx) = mpsc :: channel () ; let thread_handle = thread :: spawn (move | | { let lst = net :: TcpListener :: bind ("127.0.0.1:0") . unwrap () ; let local_addr = lst . local_addr () . unwrap () ; System :: new () . block_on (async { let server = server_builder . listen ("test" , lst , factory) . unwrap () . workers (1) . disable_signals () . run () ; tx . send ((server . handle () , local_addr)) . unwrap () ; server . await }) }) ; let (server_handle , addr) = rx . recv () . unwrap () ; let host = format ! ("{}" , addr . ip ()) ; let port = addr . port () ; TestServerHandle { addr , host , port , server_handle , thread_handle : Some (thread_handle) , } } # [doc = " Get first available unused local address."] pub fn unused_addr () -> net :: SocketAddr { use socket2 :: { Domain , Protocol , Socket , Type } ; let addr : net :: SocketAddr = "127.0.0.1:0" . parse () . unwrap () ; let domain = Domain :: for_address (addr) ; let socket = Socket :: new (domain , Type :: STREAM , Some (Protocol :: TCP)) . unwrap () ; socket . set_reuse_address (true) . unwrap () ; socket . set_nonblocking (true) . unwrap () ; socket . bind (& addr . into ()) . unwrap () ; socket . listen (1024) . unwrap () ; net :: TcpListener :: from (socket) . local_addr () . unwrap () } }
+};
+}

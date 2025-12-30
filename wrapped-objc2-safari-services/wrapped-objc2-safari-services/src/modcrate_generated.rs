@@ -1,0 +1,48 @@
+// Generated module macro for crate::generated
+macro_rules! Modcrate_generated {
+() => {
+        Depcrate_generatedother_4!();
+        Depcrate_generated__SFContentBlockerManager!();
+        Depcrate_generated__SFContentBlockerState!();
+        Depcrate_generated__SFError!();
+        Depcrate_generated__SFFoundation!();
+        Depcrate_generated__SFSafariApplication!();
+        Depcrate_generated__SFSafariExtension!();
+        Depcrate_generated__SFSafariExtensionHandler!();
+        Depcrate_generated__SFSafariExtensionHandling!();
+        Depcrate_generated__SFSafariExtensionManager!();
+        Depcrate_generated__SFSafariExtensionState!();
+        Depcrate_generated__SFSafariExtensionViewController!();
+        Depcrate_generated__SFSafariPage!();
+        Depcrate_generated__SFSafariPageProperties!();
+        Depcrate_generated__SFSafariTab!();
+        Depcrate_generated__SFSafariToolbarItem!();
+        Depcrate_generated__SFSafariWindow!();
+        Depcrate_generated__SFUniversalLink!();
+        Depcrate_generateduse_22!();
+        Depcrate_generateduse_23!();
+        Depcrate_generateduse_24!();
+        Depcrate_generateduse_25!();
+        Depcrate_generateduse_26!();
+        Depcrate_generateduse_27!();
+        Depcrate_generateduse_28!();
+        Depcrate_generateduse_29!();
+        Depcrate_generateduse_30!();
+        Depcrate_generateduse_31!();
+        Depcrate_generateduse_32!();
+        Depcrate_generateduse_33!();
+        Depcrate_generateduse_34!();
+        Depcrate_generateduse_35!();
+        Depcrate_generateduse_36!();
+        Depcrate_generateduse_37!();
+        Depcrate_generateduse_38!();
+        Depcrate_generateduse_39!();
+        Depcrate_generateduse_40!();
+        Depcrate_generateduse_41!();
+        Depcrate_generateduse_42!();
+        Depcrate_generatedSFSafariServicesVersion!();
+        Depcrate_generatedimpl_44!();
+        Depcrate_generatedimpl_45!();
+        Depcrate_generatedimpl_46!();
+    };
+}

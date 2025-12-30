@@ -1,0 +1,43 @@
+// Generated module macro for crate::isa::x64::inst
+macro_rules! Modcrate_isa_x64_inst {
+() => {
+        Depcrate_isa_x64_instuse_1267!();
+        Depcrate_isa_x64_instuse_1268!();
+        Depcrate_isa_x64_instuse_1269!();
+        Depcrate_isa_x64_instuse_1270!();
+        Depcrate_isa_x64_instuse_1271!();
+        Depcrate_isa_x64_instuse_1272!();
+        Depcrate_isa_x64_instuse_1273!();
+        Depcrate_isa_x64_instuse_1274!();
+        Depcrate_isa_x64_instuse_1275!();
+        Depcrate_isa_x64_instuse_1276!();
+        Depcrate_isa_x64_instuse_1277!();
+        Depcrate_isa_x64_instuse_1278!();
+        Depcrate_isa_x64_instuse_1279!();
+        Depcrate_isa_x64_instargs!();
+        Depcrate_isa_x64_instemit!();
+        Depcrate_isa_x64_instemit_state!();
+        Depcrate_isa_x64_instemit_tests!();
+        Depcrate_isa_x64_instexternal!();
+        Depcrate_isa_x64_instregs!();
+        Depcrate_isa_x64_inststack_switch!();
+        Depcrate_isa_x64_instunwind!();
+        Depcrate_isa_x64_instuse_1496!();
+        Depcrate_isa_x64_instuse_1497!();
+        Depcrate_isa_x64_instuse_1498!();
+        Depcrate_isa_x64_instReturnCallInfo!();
+        Depcrate_isa_x64_instinst_size_test!();
+        Depcrate_isa_x64_instlow32_will_sign_extend_to_64!();
+        Depcrate_isa_x64_instimpl_1502!();
+        Depcrate_isa_x64_instimpl_1503!();
+        Depcrate_isa_x64_instimpl_1504!();
+        Depcrate_isa_x64_instimpl_1505!();
+        Depcrate_isa_x64_instx64_get_operands!();
+        Depcrate_isa_x64_instimpl_1507!();
+        Depcrate_isa_x64_instEmitInfo!();
+        Depcrate_isa_x64_instimpl_1509!();
+        Depcrate_isa_x64_instimpl_1510!();
+        Depcrate_isa_x64_instLabelUse!();
+        Depcrate_isa_x64_instimpl_1512!();
+    };
+}

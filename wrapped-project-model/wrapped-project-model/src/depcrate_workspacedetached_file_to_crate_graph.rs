@@ -1,0 +1,9 @@
+// Generated macro for detached_file_to_crate_graph (function)
+macro_rules! Depcrate_workspacedetached_file_to_crate_graph {
+() => {
+// Module: crate::workspace
+// Provides: {"detached_file_to_crate_graph"}
+// Dependencies: {}
+fn detached_file_to_crate_graph (rustc_cfg : Vec < CfgAtom > , load : FileLoader < '_ > , detached_file : & ManifestPath , sysroot : & Sysroot , override_cfg : & CfgOverrides , set_test : bool , crate_ws_data : Arc < CrateWorkspaceData > ,) -> (CrateGraphBuilder , ProcMacroPaths) { let _p = tracing :: info_span ! ("detached_file_to_crate_graph") . entered () ; let mut crate_graph = CrateGraphBuilder :: default () ; let (public_deps , _libproc_macro) = sysroot_to_crate_graph (& mut crate_graph , sysroot , rustc_cfg . clone () , load , crate_ws_data . clone () ,) ; let mut cfg_options = CfgOptions :: from_iter (rustc_cfg) ; if set_test { cfg_options . insert_atom (sym :: test) ; } cfg_options . insert_atom (sym :: rust_analyzer) ; override_cfg . apply (& mut cfg_options , "") ; let cfg_options = cfg_options ; let file_id = match load (detached_file) { Some (file_id) => file_id , None => { error ! ("Failed to load detached file {:?}" , detached_file) ; return (crate_graph , FxHashMap :: default ()) ; } } ; let display_name = detached_file . file_stem () . map (CrateDisplayName :: from_canonical_name) ; let detached_file_crate = crate_graph . add_crate_root (file_id , Edition :: CURRENT , display_name . clone () , None , cfg_options , None , Env :: default () , CrateOrigin :: Local { repo : None , name : display_name . map (| n | n . canonical_name () . to_owned ()) , } , false , Arc :: new (detached_file . parent () . to_path_buf ()) , crate_ws_data ,) ; public_deps . add_to_crate_graph (& mut crate_graph , detached_file_crate) ; (crate_graph , FxHashMap :: default ()) }
+};
+}

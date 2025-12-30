@@ -1,0 +1,68 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcratemodules.rs");
+include!("depcrate_upwardsfunction.rs");
+include!("depcrate_upwards_utiluse_29.rs");
+include!("depcrate_issubmodule_git_dir.rs");
+include!("depcratedot_git_dir.rs");
+include!("depcrate_upwardsutil.rs");
+include!("depcrate_repositorykind.rs");
+include!("depcrate_repositorypath.rs");
+include!("depcrate_upwards_typesoptions.rs");
+include!("depcrate_repositoryimpl_8.rs");
+include!("depcrate_upwardsuse_27.rs");
+include!("depcrate_upwards_utiluse_30.rs");
+include!("depcrateuse_36.rs");
+include!("depcrateuse_17.rs");
+include!("depcrate_pathfrom_gitdir_file.rs");
+include!("depcrate_repositoryuse_4.rs");
+include!("depcrate_isgit.rs");
+include!("depcrate_pathuse_39.rs");
+include!("depcrate_isgit_with_metadata.rs");
+include!("depcrate_pathread_regular_file_content_with_size_limit.rs");
+include!("depcrate_pathfrom_plain_file.rs");
+include!("depcrate_parsegitdir.rs");
+include!("depcrate_upwards_typesuse_20.rs");
+include!("depcrate_upwardstypes.rs");
+include!("depcrate_parseuse_46.rs");
+include!("depcrate_parseuse_47.rs");
+include!("depcraterepository.rs");
+include!("depcrate_isuse_12.rs");
+include!("depcrate_upwards_typesimpl_24.rs");
+include!("depcrate_upwards_typesparse_ceiling_dirs.rs");
+include!("depcrate_upwards_utilfind_ceiling_height.rs");
+include!("depcrate_repositorypath.rs");
+include!("depcrate_upwards_typeserror.rs");
+include!("depcrate_upwards_utildevice_id.rs");
+include!("depcrateis_git.rs");
+include!("depcrate_upwards_typestests.rs");
+include!("depcrate_pathwithout_dot_git_dir.rs");
+include!("depcrateis.rs");
+include!("depcrate_pathuse_38.rs");
+include!("depcrate_upwards_typesimpl_23.rs");
+include!("depcrate_isbare.rs");
+include!("depcrate_isuse_11.rs");
+include!("depcrate_upwards_utilshorten_path_with_cwd.rs");
+include!("depcratepath.rs");
+include!("depcrateupwards.rs");
+include!("depcrateparse.rs");
+include!("modcrate_path.rs");
+include!("modcrate.rs");
+include!("modcrate_upwards.rs");
+include!("modcrate_upwards_types.rs");
+include!("modcrate_upwards_util.rs");
+include!("modcrate_repository.rs");
+include!("modcrate_is.rs");
+include!("modcrate_parse.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate_path!();
+    Modcrate!();
+    Modcrate_upwards!();
+    Modcrate_upwards_types!();
+    Modcrate_upwards_util!();
+    Modcrate_repository!();
+    Modcrate_is!();
+    Modcrate_parse!();
+}

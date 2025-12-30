@@ -1,0 +1,9 @@
+// Generated macro for ensure_version_or_cargo_install (function)
+macro_rules! Depcrateensure_version_or_cargo_install {
+() => {
+// Module: crate
+// Provides: {"ensure_version_or_cargo_install"}
+// Dependencies: {}
+# [doc = " If the given executable is installed with the given version, use that,"] # [doc = " otherwise install via cargo."] pub fn ensure_version_or_cargo_install (build_dir : & Path , required_version : Version ,) -> io :: Result < PathBuf > { let bin_path = PathBuf :: from (BIN_NAME) . with_extension (env :: consts :: EXE_EXTENSION) ; if let Some (user_version) = get_typos_version (& bin_path) { if user_version >= required_version { return Ok (bin_path) ; } } let tool_root_dir = build_dir . join ("misc-tools") ; let tool_bin_dir = tool_root_dir . join ("bin") ; let bin_path = tool_bin_dir . join (BIN_NAME) . with_extension (env :: consts :: EXE_EXTENSION) ; if let Some (misc_tools_version) = get_typos_version (& bin_path) { if misc_tools_version >= required_version { return Ok (bin_path) ; } } eprintln ! ("required `typos` version ({required_version}) not found, building from source") ; let mut cmd = Command :: new ("cargo") ; cmd . args (["install" , "--locked" , "--force" , "--quiet"]) . arg ("--root") . arg (& tool_root_dir) . arg ("--target-dir") . arg (tool_root_dir . join ("target")) . arg (format ! ("{PKG_NAME}@{required_version}")) . env ("PATH" , env :: join_paths (env :: split_paths (& env :: var ("PATH") . unwrap ()) . chain (std :: iter :: once (tool_bin_dir . clone ())) ,) . expect ("build dir contains invalid char") ,) ; let cargo_exit_code = cmd . spawn () ? . wait () ? ; if ! cargo_exit_code . success () { return Err (io :: Error :: other ("cargo install failed")) ; } assert ! (matches ! (bin_path . try_exists () , Ok (true)) , "cargo install did not produce the expected binary") ; eprintln ! ("finished {BIN_NAME}") ; Ok (bin_path) }
+};
+}

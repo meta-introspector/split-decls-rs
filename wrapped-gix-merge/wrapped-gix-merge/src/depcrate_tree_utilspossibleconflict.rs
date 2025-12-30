@@ -1,0 +1,9 @@
+// Generated macro for PossibleConflict (enum)
+macro_rules! Depcrate_tree_utilsPossibleConflict {
+() => {
+// Module: crate::tree::utils
+// Provides: {"PossibleConflict"}
+// Dependencies: {}
+# [doc = " A potential conflict that needs to be checked. It comes in several varieties and always happens"] # [doc = " if paths overlap in some way between *theirs* and *ours*."] # [derive (Debug)] pub enum PossibleConflict { # [doc = " *our* changes have a tree here, but *they* place a non-tree or edit an existing item (that we removed)."] TreeToNonTree { # [doc = " The possibly available change at this node."] change_idx : Option < usize > , } , # [doc = " A non-tree in *our* tree turned into a tree in *theirs* - this can be done with additions in *theirs*,"] # [doc = " or if we added a blob, while they added a directory."] NonTreeToTree { # [doc = " The possibly available change at this node."] change_idx : Option < usize > , } , # [doc = " A perfect match, i.e. *our* change at `a/b/c` corresponds to *their* change at the same path."] Match { # [doc = " The index to *our* change at *their* path."] change_idx : usize , } , # [doc = " *their* change at `a/b/c` passed `a/b` which is an index to *our* change indicating a directory that was rewritten,"] # [doc = " with all its contents being renamed. However, *theirs* has been added *into* that renamed directory."] PassedRewrittenDirectory { change_idx : usize } , }
+};
+}

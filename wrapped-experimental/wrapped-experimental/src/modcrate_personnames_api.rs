@@ -1,0 +1,39 @@
+// Generated module macro for crate::personnames::api
+macro_rules! Modcrate_personnames_api {
+() => {
+        Depcrate_personnames_apiuse_626!();
+        Depcrate_personnames_apiuse_627!();
+        Depcrate_personnames_apiuse_628!();
+        Depcrate_personnames_apiuse_629!();
+        Depcrate_personnames_apiuse_630!();
+        Depcrate_personnames_apiuse_631!();
+        Depcrate_personnames_apiPersonName!();
+        Depcrate_personnames_apiPersonNamesFormatterError!();
+        Depcrate_personnames_apiimpl_634!();
+        Depcrate_personnames_apiimpl_635!();
+        Depcrate_personnames_apiimpl_636!();
+        Depcrate_personnames_apiFieldModifier!();
+        Depcrate_personnames_apiimpl_638!();
+        Depcrate_personnames_apiFieldCapsStyle!();
+        Depcrate_personnames_apiimpl_640!();
+        Depcrate_personnames_apiFieldPart!();
+        Depcrate_personnames_apiimpl_642!();
+        Depcrate_personnames_apiFieldLength!();
+        Depcrate_personnames_apiimpl_644!();
+        Depcrate_personnames_apiFieldFormality!();
+        Depcrate_personnames_apiimpl_646!();
+        Depcrate_personnames_apiFieldModifierSet!();
+        Depcrate_personnames_apiimpl_648!();
+        Depcrate_personnames_apiimpl_649!();
+        Depcrate_personnames_apiimpl_650!();
+        Depcrate_personnames_apiNameField!();
+        Depcrate_personnames_apiNameFieldKind!();
+        Depcrate_personnames_apiPreferredOrder!();
+        Depcrate_personnames_apiFormattingOrder!();
+        Depcrate_personnames_apiFormattingLength!();
+        Depcrate_personnames_apiFormattingUsage!();
+        Depcrate_personnames_apiFormattingFormality!();
+        Depcrate_personnames_apiPersonNamesFormatterOptions!();
+        Depcrate_personnames_apiimpl_659!();
+    };
+}

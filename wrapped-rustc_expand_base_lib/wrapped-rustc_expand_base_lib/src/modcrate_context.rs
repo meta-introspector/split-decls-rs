@@ -1,0 +1,50 @@
+// Generated module macro for crate::context
+macro_rules! Modcrate_context {
+() => {
+        Depcrate_contextuse_297!();
+        Depcrate_contextuse_298!();
+        Depcrate_contextuse_299!();
+        Depcrate_contextuse_300!();
+        Depcrate_contextuse_301!();
+        Depcrate_contextuse_302!();
+        Depcrate_contextuse_303!();
+        Depcrate_contextuse_304!();
+        Depcrate_contextuse_305!();
+        Depcrate_contextuse_306!();
+        Depcrate_contextuse_307!();
+        Depcrate_contextuse_308!();
+        Depcrate_contextuse_309!();
+        Depcrate_contextuse_310!();
+        Depcrate_contextuse_311!();
+        Depcrate_contextuse_312!();
+        Depcrate_contextuse_313!();
+        Depcrate_contextuse_314!();
+        Depcrate_contextuse_315!();
+        Depcrate_contextuse_316!();
+        Depcrate_contextuse_317!();
+        Depcrate_contextuse_318!();
+        Depcrate_contextuse_319!();
+        Depcrate_contextuse_320!();
+        Depcrate_contextuse_321!();
+        Depcrate_contextuse_322!();
+        Depcrate_contextuse_323!();
+        Depcrate_contextuse_324!();
+        Depcrate_contextuse_325!();
+        Depcrate_contextuse_326!();
+        Depcrate_contextuse_327!();
+        Depcrate_contextuse_328!();
+        Depcrate_contextuse_329!();
+        Depcrate_contextuse_330!();
+        Depcrate_contextuse_331!();
+        Depcrate_contextuse_332!();
+        Depcrate_contextuse_333!();
+        Depcrate_contextuse_334!();
+        Depcrate_contextuse_335!();
+        Depcrate_contextuse_336!();
+        Depcrate_contextuse_337!();
+        Depcrate_contextuse_338!();
+        Depcrate_contextmacro_339!();
+        Depcrate_contextdefine_expansion_context_types!();
+        Depcrate_contextuse_341!();
+    };
+}

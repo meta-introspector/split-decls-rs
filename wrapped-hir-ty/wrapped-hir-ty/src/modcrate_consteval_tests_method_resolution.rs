@@ -1,0 +1,49 @@
+// Generated module macro for crate::consteval::tests::method_resolution
+macro_rules! Modcrate_consteval_tests_method_resolution {
+() => {
+        Depcrate_consteval_tests_method_resolutionconfirm!();
+        Depcrate_consteval_tests_method_resolutionprobe!();
+        Depcrate_consteval_tests_method_resolutionuse_350!();
+        Depcrate_consteval_tests_method_resolutionuse_351!();
+        Depcrate_consteval_tests_method_resolutionuse_352!();
+        Depcrate_consteval_tests_method_resolutionuse_353!();
+        Depcrate_consteval_tests_method_resolutionuse_354!();
+        Depcrate_consteval_tests_method_resolutionuse_355!();
+        Depcrate_consteval_tests_method_resolutionuse_356!();
+        Depcrate_consteval_tests_method_resolutionuse_357!();
+        Depcrate_consteval_tests_method_resolutionuse_358!();
+        Depcrate_consteval_tests_method_resolutionuse_359!();
+        Depcrate_consteval_tests_method_resolutionuse_360!();
+        Depcrate_consteval_tests_method_resolutionuse_361!();
+        Depcrate_consteval_tests_method_resolutionuse_362!();
+        Depcrate_consteval_tests_method_resolutionMethodResolutionUnstableFeatures!();
+        Depcrate_consteval_tests_method_resolutionimpl_364!();
+        Depcrate_consteval_tests_method_resolutionMethodResolutionContext!();
+        Depcrate_consteval_tests_method_resolutionCandidateId!();
+        Depcrate_consteval_tests_method_resolutionmacro_367!();
+        Depcrate_consteval_tests_method_resolutionimpl_368!();
+        Depcrate_consteval_tests_method_resolutionMethodCallee!();
+        Depcrate_consteval_tests_method_resolutionMethodError!();
+        Depcrate_consteval_tests_method_resolutionCandidateSource!();
+        Depcrate_consteval_tests_method_resolutionimpl_372!();
+        Depcrate_consteval_tests_method_resolutionTreatNotYetDefinedOpaques!();
+        Depcrate_consteval_tests_method_resolutionimpl_374!();
+        Depcrate_consteval_tests_method_resolutionlookup_impl_const!();
+        Depcrate_consteval_tests_method_resolutionis_dyn_method!();
+        Depcrate_consteval_tests_method_resolutionlookup_impl_method_query!();
+        Depcrate_consteval_tests_method_resolutionlookup_impl_assoc_item_for_trait_ref!();
+        Depcrate_consteval_tests_method_resolutionfind_matching_impl!();
+        Depcrate_consteval_tests_method_resolutioncrates_containing_incoherent_inherent_impls!();
+        Depcrate_consteval_tests_method_resolutionincoherent_inherent_impls!();
+        Depcrate_consteval_tests_method_resolutionsimplified_type_module!();
+        Depcrate_consteval_tests_method_resolutionInherentImpls!();
+        Depcrate_consteval_tests_method_resolutionimpl_384!();
+        Depcrate_consteval_tests_method_resolutionimpl_385!();
+        Depcrate_consteval_tests_method_resolutionOneTraitImpls!();
+        Depcrate_consteval_tests_method_resolutionOneTraitImplsBuilder!();
+        Depcrate_consteval_tests_method_resolutionimpl_388!();
+        Depcrate_consteval_tests_method_resolutionTraitImpls!();
+        Depcrate_consteval_tests_method_resolutionimpl_390!();
+        Depcrate_consteval_tests_method_resolutionimpl_391!();
+    };
+}

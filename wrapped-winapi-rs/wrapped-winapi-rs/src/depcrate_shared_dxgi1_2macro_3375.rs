@@ -1,0 +1,9 @@
+// Generated macro for macro_3375 (macro)
+macro_rules! Depcrate_shared_dxgi1_2macro_3375 {
+() => {
+// Module: crate::shared::dxgi1_2
+// Provides: {"macro_3375"}
+// Dependencies: {}
+ENUM ! { enum DXGI_COMPUTE_PREEMPTION_GRANULARITY { DXGI_COMPUTE_PREEMPTION_DMA_BUFFER_BOUNDARY = 0 , DXGI_COMPUTE_PREEMPTION_DISPATCH_BOUNDARY = 1 , DXGI_COMPUTE_PREEMPTION_THREAD_GROUP_BOUNDARY = 2 , DXGI_COMPUTE_PREEMPTION_THREAD_BOUNDARY = 3 , DXGI_COMPUTE_PREEMPTION_INSTRUCTION_BOUNDARY = 4 , } }
+};
+}

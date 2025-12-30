@@ -1,0 +1,68 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcrate_platformuse_36.rs");
+include!("depcrate_platform_unixos_handler.rs");
+include!("depcrate_platform_windowserror.rs");
+include!("depcrate_errorimpl_8.rs");
+include!("depcrate_platform_uniximplementation.rs");
+include!("depcrate_signalsignaltype.rs");
+include!("depcrateuse_41.rs");
+include!("depcrateinit_and_set_handler.rs");
+include!("depcrate_platform_unixuse_11.rs");
+include!("depcrateerror.rs");
+include!("depcrate_platform_unixblock_ctrl_c.rs");
+include!("depcrate_platform_windowsuse_24.rs");
+include!("depcrate_platform_windowsuse_23.rs");
+include!("depcrateset_handler.rs");
+include!("depcrate_platform_windowsinit_os_handler.rs");
+include!("depcrateuse_37.rs");
+include!("depcrateinit_lock.rs");
+include!("depcrate_errorimpl_6.rs");
+include!("depcrate_platform_windowssemaphore.rs");
+include!("depcrateinit.rs");
+include!("depcrate_platform_windowsuse_25.rs");
+include!("depcrate_errorerror.rs");
+include!("depcrate_platform_windowsblock_ctrl_c.rs");
+include!("depcrate_platform_unixinit_os_handler.rs");
+include!("depcrateplatform.rs");
+include!("depcrate_errorimpl_7.rs");
+include!("depcrate_platform_windowstrue.rs");
+include!("depcrate_errorimpl_5.rs");
+include!("depcrate_platformuse_35.rs");
+include!("depcrate_platformunix.rs");
+include!("depcrate_erroruse_3.rs");
+include!("depcrate_platform_unixsignal.rs");
+include!("depcrate_signaluse_39.rs");
+include!("depcrate_platform_windowsmax_sem_count.rs");
+include!("depcrate_platform_windowsfalse.rs");
+include!("depcrate_platformwindows.rs");
+include!("depcrate_platform_windowssignal.rs");
+include!("depcrate_erroruse_2.rs");
+include!("depcrate_platform_windowsos_handler.rs");
+include!("depcrate_platform_unixerror.rs");
+include!("depcratesignal.rs");
+include!("depcrateuse_42.rs");
+include!("depcrateuse_44.rs");
+include!("depcratetry_set_handler.rs");
+include!("depcrateset_handler_inner.rs");
+include!("depcrateuse_43.rs");
+include!("depcrateuse_45.rs");
+include!("depcrate_platform_windowsuse_20.rs");
+include!("depcrate_platform_windowsuse_21.rs");
+include!("depcrate_platform_windowsuse_22.rs");
+include!("modcrate.rs");
+include!("modcrate_platform_windows.rs");
+include!("modcrate_signal.rs");
+include!("modcrate_platform_unix.rs");
+include!("modcrate_error.rs");
+include!("modcrate_platform.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate!();
+    Modcrate_platform_windows!();
+    Modcrate_signal!();
+    Modcrate_platform_unix!();
+    Modcrate_error!();
+    Modcrate_platform!();
+}

@@ -1,0 +1,9 @@
+// Generated macro for iterate_method_candidates_by_receiver (function)
+macro_rules! Depcrate_consteval_tests_method_resolutioniterate_method_candidates_by_receiver {
+() => {
+// Module: crate::consteval::tests::method_resolution
+// Provides: {"iterate_method_candidates_by_receiver"}
+// Dependencies: {}
+# [tracing :: instrument (skip_all , fields (name = ? name))] fn iterate_method_candidates_by_receiver (table : & mut InferenceTable < '_ > , receiver_ty : Canonical < Ty > , receiver_adjustments : ReceiverAdjustments , traits_in_scope : & FxHashSet < TraitId > , visible_from_module : VisibleFromModule , name : Option < & Name > , callback : & mut dyn MethodCandidateCallback ,) -> ControlFlow < () > { let receiver_ty = table . instantiate_canonical (receiver_ty) ; table . run_in_snapshot (| table | { let mut autoderef = autoderef :: Autoderef :: new_no_tracking (table , receiver_ty . clone () , true , true) ; while let Some ((self_ty , _)) = autoderef . next () { iterate_inherent_methods (& self_ty , autoderef . table , name , Some (& receiver_ty) , Some (receiver_adjustments . clone ()) , visible_from_module , & mut | adjustments , item , is_visible | { callback . on_inherent_method (adjustments , item , is_visible) } ,) ? } ControlFlow :: Continue (()) }) ? ; table . run_in_snapshot (| table | { let mut autoderef = autoderef :: Autoderef :: new_no_tracking (table , receiver_ty . clone () , true , true) ; while let Some ((self_ty , _)) = autoderef . next () { if matches ! (self_ty . kind (Interner) , TyKind :: InferenceVar (_ , TyVariableKind :: General)) { return ControlFlow :: Continue (()) ; } iterate_trait_method_candidates (& self_ty , autoderef . table , traits_in_scope , name , Some (& receiver_ty) , Some (receiver_adjustments . clone ()) , & mut | adjustments , item , is_visible | { callback . on_trait_method (adjustments , item , is_visible) } ,) ? } ControlFlow :: Continue (()) }) }
+};
+}

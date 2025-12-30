@@ -1,0 +1,47 @@
+// Generated module macro for crate::isa::aarch64::inst::regs
+macro_rules! Modcrate_isa_aarch64_inst_regs {
+() => {
+        Depcrate_isa_aarch64_inst_regsuse_1632!();
+        Depcrate_isa_aarch64_inst_regsuse_1633!();
+        Depcrate_isa_aarch64_inst_regsuse_1634!();
+        Depcrate_isa_aarch64_inst_regsuse_1635!();
+        Depcrate_isa_aarch64_inst_regsuse_1636!();
+        Depcrate_isa_aarch64_inst_regsuse_1637!();
+        Depcrate_isa_aarch64_inst_regsuse_1638!();
+        Depcrate_isa_aarch64_inst_regsuse_1639!();
+        Depcrate_isa_aarch64_inst_regsPINNED_REG!();
+        Depcrate_isa_aarch64_inst_regsxreg!();
+        Depcrate_isa_aarch64_inst_regsxreg_preg!();
+        Depcrate_isa_aarch64_inst_regswritable_xreg!();
+        Depcrate_isa_aarch64_inst_regsvreg!();
+        Depcrate_isa_aarch64_inst_regsvreg_preg!();
+        Depcrate_isa_aarch64_inst_regswritable_vreg!();
+        Depcrate_isa_aarch64_inst_regszero_reg!();
+        Depcrate_isa_aarch64_inst_regswritable_zero_reg!();
+        Depcrate_isa_aarch64_inst_regsstack_reg!();
+        Depcrate_isa_aarch64_inst_regswritable_stack_reg!();
+        Depcrate_isa_aarch64_inst_regslink_reg!();
+        Depcrate_isa_aarch64_inst_regspinned_reg!();
+        Depcrate_isa_aarch64_inst_regswritable_link_reg!();
+        Depcrate_isa_aarch64_inst_regsfp_reg!();
+        Depcrate_isa_aarch64_inst_regswritable_fp_reg!();
+        Depcrate_isa_aarch64_inst_regsspilltmp_reg!();
+        Depcrate_isa_aarch64_inst_regswritable_spilltmp_reg!();
+        Depcrate_isa_aarch64_inst_regstmp2_reg!();
+        Depcrate_isa_aarch64_inst_regswritable_tmp2_reg!();
+        Depcrate_isa_aarch64_inst_regsshow_ireg!();
+        Depcrate_isa_aarch64_inst_regsshow_vreg!();
+        Depcrate_isa_aarch64_inst_regsshow_reg!();
+        Depcrate_isa_aarch64_inst_regspretty_print_reg!();
+        Depcrate_isa_aarch64_inst_regsshow_reg_sized!();
+        Depcrate_isa_aarch64_inst_regspretty_print_reg_sized!();
+        Depcrate_isa_aarch64_inst_regsshow_ireg_sized!();
+        Depcrate_isa_aarch64_inst_regsshow_vreg_scalar!();
+        Depcrate_isa_aarch64_inst_regsshow_vreg_vector!();
+        Depcrate_isa_aarch64_inst_regsshow_vreg_element!();
+        Depcrate_isa_aarch64_inst_regspretty_print_ireg!();
+        Depcrate_isa_aarch64_inst_regspretty_print_vreg_scalar!();
+        Depcrate_isa_aarch64_inst_regspretty_print_vreg_vector!();
+        Depcrate_isa_aarch64_inst_regspretty_print_vreg_element!();
+    };
+}

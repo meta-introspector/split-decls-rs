@@ -1,0 +1,9 @@
+// Generated macro for generate_rule_break_data_override (function)
+macro_rules! Depcrate_segmentergenerate_rule_break_data_override {
+() => {
+// Module: crate::segmenter
+// Provides: {"generate_rule_break_data_override"}
+// Dependencies: {}
+# [cfg (any (feature = "use_wasm" , feature = "use_icu4c"))] fn generate_rule_break_data_override (provider : & SourceDataProvider , rules_file : & str , trie_type : crate :: TrieType ,) -> RuleBreakDataOverride < 'static > { let segmenter = provider . icuexport () . unwrap () . read_and_parse_toml :: < SegmenterRuleTable > (rules_file) . expect ("The data should be valid!") ; const CODEPOINT_TABLE_LEN : usize = 0xE1000 ; let mut properties_map = vec ! [0 ; CODEPOINT_TABLE_LEN] ; let mut properties_names = Vec :: < String > :: new () ; properties_names . push ("Unknown" . to_string ()) ; for p in & segmenter . tables { let property_index = if ! properties_names . contains (& p . name) { properties_names . push (p . name . clone ()) ; (properties_names . len () - 1) . try_into () . unwrap () } else { continue ; } ; if p . left . is_none () && p . right . is_none () { match & * segmenter . segmenter_type { "word" => { if p . name == "MidLetter" { properties_map [0x003a] = property_index ; properties_map [0xfe55] = property_index ; properties_map [0xff1a] = property_index ; } } "sentence" => { if p . name == "STerm" { properties_map [0x003b] = property_index ; properties_map [0x037e] = property_index ; } } _ => { } } } } RuleBreakDataOverride { property_table_override : CodePointTrieBuilder { data : CodePointTrieBuilderData :: ValuesByCodePoint (& properties_map) , default_value : 0 , error_value : 0 , trie_type : match trie_type { crate :: TrieType :: Fast => codepointtrie :: TrieType :: Fast , crate :: TrieType :: Small => codepointtrie :: TrieType :: Small , } , } . build () , } }
+};
+}

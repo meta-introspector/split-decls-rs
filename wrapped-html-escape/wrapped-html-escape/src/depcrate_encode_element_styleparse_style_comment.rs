@@ -1,0 +1,9 @@
+// Generated macro for parse_style_comment (macro)
+macro_rules! Depcrate_encode_element_styleparse_style_comment {
+() => {
+// Module: crate::encode::element::style
+// Provides: {"parse_style_comment"}
+// Dependencies: {}
+macro_rules ! parse_style_comment { ($ e : expr , $ step : ident , $ b : block , $ bq : block , $ bc : block $ (, $ ($ addi : expr) ,+) ?) => { match $ step { 0 => { match $ e { b'<' => $ step = 1 , $ (b'\\' => $ step = 100 , $ (| $ addi) + => $ bq ,) ? _ => () , } } 1 => { match $ e { b'/' => $ step = 2 , b'!' => $ step = 10 , $ (b'\\' => $ step = 100 , $ (| $ addi) + => { $ step = 0 ; $ bq } ,) ? _ => $ step = 0 , } } 2 => { match $ e { b's' | b'S' => $ step = 3 , $ (b'\\' => $ step = 100 , $ (| $ addi) + => { $ step = 0 ; $ bq } ,) ? _ => $ step = 0 , } } 3 => { match $ e { b't' | b'T' => $ step = 4 , $ (b'\\' => $ step = 100 , $ (| $ addi) + => { $ step = 0 ; $ bq } ,) ? _ => $ step = 0 , } } 4 => { match $ e { b'y' | b'Y' => $ step = 5 , $ (b'\\' => $ step = 100 , $ (| $ addi) + => { $ step = 0 ; $ bq } ,) ? _ => $ step = 0 , } } 5 => { match $ e { b'l' | b'L' => $ step = 6 , $ (b'\\' => $ step = 100 , $ (| $ addi) + => { $ step = 0 ; $ bq } ,) ? _ => $ step = 0 , } } 6 => { match $ e { b'e' | b'E' => $ step = 7 , $ (b'\\' => $ step = 100 , $ (| $ addi) + => { $ step = 0 ; $ bq } ,) ? _ => $ step = 0 , } } 7 => { match $ e { b'>' | 9 ..= 13 | 28 ..= 32 => { $ step = 0 ; $ b } , $ (b'\\' => $ step = 100 , $ (| $ addi) + => { $ step = 0 ; $ bq } ,) ? _ => $ step = 0 , } } 10 => { match $ e { b'-' => $ step = 11 , $ (b'\\' => $ step = 100 , $ (| $ addi) + => { $ step = 0 ; $ bq } ,) ? _ => $ step = 0 , } } 11 => { match $ e { b'-' => { $ step = 0 ; $ bc } , $ (b'\\' => $ step = 100 , $ (| $ addi) + => { $ step = 0 ; $ bq } ,) ? _ => $ step = 0 , } } 100 => { match $ e { b'<' => $ step = 1 , _ => $ step = 0 , } } _ => unreachable ! () , } } ; }
+};
+}

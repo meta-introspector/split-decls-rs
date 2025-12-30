@@ -1,0 +1,48 @@
+// Generated module macro for crate::fn_ctxt::checks
+macro_rules! Modcrate_fn_ctxt_checks {
+() => {
+        Depcrate_fn_ctxt_checksuse_487!();
+        Depcrate_fn_ctxt_checksuse_488!();
+        Depcrate_fn_ctxt_checksuse_489!();
+        Depcrate_fn_ctxt_checksuse_490!();
+        Depcrate_fn_ctxt_checksuse_491!();
+        Depcrate_fn_ctxt_checksuse_492!();
+        Depcrate_fn_ctxt_checksuse_493!();
+        Depcrate_fn_ctxt_checksuse_494!();
+        Depcrate_fn_ctxt_checksuse_495!();
+        Depcrate_fn_ctxt_checksuse_496!();
+        Depcrate_fn_ctxt_checksuse_497!();
+        Depcrate_fn_ctxt_checksuse_498!();
+        Depcrate_fn_ctxt_checksuse_499!();
+        Depcrate_fn_ctxt_checksuse_500!();
+        Depcrate_fn_ctxt_checksuse_501!();
+        Depcrate_fn_ctxt_checksuse_502!();
+        Depcrate_fn_ctxt_checksuse_503!();
+        Depcrate_fn_ctxt_checksuse_504!();
+        Depcrate_fn_ctxt_checksuse_505!();
+        Depcrate_fn_ctxt_checksuse_506!();
+        Depcrate_fn_ctxt_checksuse_507!();
+        Depcrate_fn_ctxt_checksuse_508!();
+        Depcrate_fn_ctxt_checksuse_509!();
+        Depcrate_fn_ctxt_checksuse_510!();
+        Depcrate_fn_ctxt_checksuse_511!();
+        Depcrate_fn_ctxt_checksuse_512!();
+        Depcrate_fn_ctxt_checksuse_513!();
+        Depcrate_fn_ctxt_checksuse_514!();
+        Depcrate_fn_ctxt_checksuse_515!();
+        Depcrate_fn_ctxt_checksuse_516!();
+        Depcrate_fn_ctxt_checksuse_517!();
+        Depcrate_fn_ctxt_checksuse_518!();
+        Depcrate_fn_ctxt_checksuse_519!();
+        Depcrate_fn_ctxt_checksuse_520!();
+        Depcrate_fn_ctxt_checksuse_521!();
+        Depcrate_fn_ctxt_checksuse_522!();
+        Depcrate_fn_ctxt_checksmacro_523!();
+        Depcrate_fn_ctxt_checksDivergingBlockBehavior!();
+        Depcrate_fn_ctxt_checksimpl_525!();
+        Depcrate_fn_ctxt_checksFindClosureArg!();
+        Depcrate_fn_ctxt_checksimpl_527!();
+        Depcrate_fn_ctxt_checksFnParam!();
+        Depcrate_fn_ctxt_checksimpl_529!();
+    };
+}

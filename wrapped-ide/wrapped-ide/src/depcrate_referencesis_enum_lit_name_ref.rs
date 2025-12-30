@@ -1,0 +1,9 @@
+// Generated macro for is_enum_lit_name_ref (function)
+macro_rules! Depcrate_referencesis_enum_lit_name_ref {
+() => {
+// Module: crate::references
+// Provides: {"is_enum_lit_name_ref"}
+// Dependencies: {}
+# [doc = " Checks if a name reference is part of an enum variant literal expression."] # [doc = " Used to filter references when searching for enum variant constructors."] # [doc = ""] # [doc = " # Arguments"] # [doc = " * `sema` - Semantic analysis context"] # [doc = " * `enum_` - The enum type to check against"] # [doc = " * `name_ref` - The name reference to check"] # [doc = ""] # [doc = " # Returns"] # [doc = " `true` if the name reference is used as part of constructing a variant of the given enum."] fn is_enum_lit_name_ref (sema : & Semantics < '_ , RootDatabase > , enum_ : hir :: Enum , name_ref : & ast :: NameRef ,) -> bool { let path_is_variant_of_enum = | path : ast :: Path | { matches ! (sema . resolve_path (& path) , Some (PathResolution :: Def (hir :: ModuleDef :: Variant (variant))) if variant . parent_enum (sema . db) == enum_) } ; name_ref . syntax () . ancestors () . find_map (| ancestor | { match_ast ! { match ancestor { ast :: PathExpr (path_expr) => path_expr . path () . map (path_is_variant_of_enum) , ast :: RecordExpr (record_expr) => record_expr . path () . map (path_is_variant_of_enum) , _ => None , } } }) . unwrap_or (false) }
+};
+}

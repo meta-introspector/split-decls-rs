@@ -1,0 +1,9 @@
+// Generated macro for BTH_LE_GAP_APPEARANCE_CYCLING_SUBCATEGORY_CADENCE_SENSOR (const)
+macro_rules! Depcrate_um_bthledefBTH_LE_GAP_APPEARANCE_CYCLING_SUBCATEGORY_CADENCE_SENSOR {
+() => {
+// Module: crate::um::bthledef
+// Provides: {"BTH_LE_GAP_APPEARANCE_CYCLING_SUBCATEGORY_CADENCE_SENSOR"}
+// Dependencies: {}
+pub const BTH_LE_GAP_APPEARANCE_CYCLING_SUBCATEGORY_CADENCE_SENSOR : UCHAR = 0x03 ;
+};
+}

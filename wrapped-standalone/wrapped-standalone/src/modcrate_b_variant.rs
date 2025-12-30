@@ -1,0 +1,45 @@
+// Generated module macro for crate::b_variant
+macro_rules! Modcrate_b_variant {
+() => {
+        Depcrate_b_variantADVANCED_FEATURE_FLAGS!();
+        Depcrate_b_variantBOOL!();
+        Depcrate_b_variantBSTR!();
+        Depcrate_b_variantother_273!();
+        Depcrate_b_variantimpl_274!();
+        Depcrate_b_variantCY_0!();
+        Depcrate_b_variantDECIMAL!();
+        Depcrate_b_variantimpl_277!();
+        Depcrate_b_variantother_278!();
+        Depcrate_b_variantimpl_279!();
+        Depcrate_b_variantDECIMAL_0_0!();
+        Depcrate_b_variantother_281!();
+        Depcrate_b_variantimpl_282!();
+        Depcrate_b_variantDECIMAL_1_0!();
+        Depcrate_b_variantGUID!();
+        Depcrate_b_variantimpl_285!();
+        Depcrate_b_variantHRESULT!();
+        Depcrate_b_variantIID_IDispatch!();
+        Depcrate_b_variantIDispatch_Vtbl!();
+        Depcrate_b_variantIID_IRecordInfo!();
+        Depcrate_b_variantIRecordInfo_Vtbl!();
+        Depcrate_b_variantIID_IUnknown!();
+        Depcrate_b_variantIUnknown_Vtbl!();
+        Depcrate_b_variantPCWSTR!();
+        Depcrate_b_variantPSTR!();
+        Depcrate_b_variantSAFEARRAY!();
+        Depcrate_b_variantimpl_296!();
+        Depcrate_b_variantSAFEARRAYBOUND!();
+        Depcrate_b_variantVARENUM!();
+        Depcrate_b_variantVARIANT!();
+        Depcrate_b_variantimpl_300!();
+        Depcrate_b_variantother_301!();
+        Depcrate_b_variantimpl_302!();
+        Depcrate_b_variantVARIANT_0_0!();
+        Depcrate_b_variantimpl_304!();
+        Depcrate_b_variantother_305!();
+        Depcrate_b_variantimpl_306!();
+        Depcrate_b_variantVARIANT_0_0_0_0!();
+        Depcrate_b_variantimpl_308!();
+        Depcrate_b_variantVARIANT_BOOL!();
+    };
+}

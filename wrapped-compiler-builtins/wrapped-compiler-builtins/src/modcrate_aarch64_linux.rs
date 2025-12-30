@@ -1,0 +1,45 @@
+// Generated module macro for crate::aarch64_linux
+macro_rules! Modcrate_aarch64_linux {
+() => {
+        Depcrate_aarch64_linuxuse_256!();
+        Depcrate_aarch64_linuxHAVE_LSE_ATOMICS!();
+        Depcrate_aarch64_linuxmacro_258!();
+        Depcrate_aarch64_linuxint_ty!();
+        Depcrate_aarch64_linuxreg!();
+        Depcrate_aarch64_linuxacquire!();
+        Depcrate_aarch64_linuxrelease!();
+        Depcrate_aarch64_linuxsize!();
+        Depcrate_aarch64_linuxuxt!();
+        Depcrate_aarch64_linuxldxr!();
+        Depcrate_aarch64_linuxstxr!();
+        Depcrate_aarch64_linuxldxp!();
+        Depcrate_aarch64_linuxstxp!();
+        Depcrate_aarch64_linuxtry_lse_op!();
+        Depcrate_aarch64_linuxlse_mem_sfx!();
+        Depcrate_aarch64_linuxlse!();
+        Depcrate_aarch64_linuxcompare_and_swap!();
+        Depcrate_aarch64_linuxcompare_and_swap_i128!();
+        Depcrate_aarch64_linuxswap!();
+        Depcrate_aarch64_linuxfetch_op!();
+        Depcrate_aarch64_linuxadd!();
+        Depcrate_aarch64_linuxand!();
+        Depcrate_aarch64_linuxxor!();
+        Depcrate_aarch64_linuxor!();
+        Depcrate_aarch64_linuxforeach_ordering!();
+        Depcrate_aarch64_linuxforeach_bytes!();
+        Depcrate_aarch64_linuxforeach_cas!();
+        Depcrate_aarch64_linuxforeach_cas16!();
+        Depcrate_aarch64_linuxforeach_swp!();
+        Depcrate_aarch64_linuxforeach_ldadd!();
+        Depcrate_aarch64_linuxforeach_ldclr!();
+        Depcrate_aarch64_linuxforeach_ldeor!();
+        Depcrate_aarch64_linuxforeach_ldset!();
+        Depcrate_aarch64_linuxmacro_289!();
+        Depcrate_aarch64_linuxmacro_290!();
+        Depcrate_aarch64_linuxmacro_291!();
+        Depcrate_aarch64_linuxmacro_292!();
+        Depcrate_aarch64_linuxmacro_293!();
+        Depcrate_aarch64_linuxmacro_294!();
+        Depcrate_aarch64_linuxmacro_295!();
+    };
+}

@@ -1,0 +1,59 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcrate_service_spanuse_20.rs");
+include!("depcrate_request_spanimpl_18.rs");
+include!("depcrate_service_spanimpl_31.rs");
+include!("depcrate_httpmacro_34.rs");
+include!("depcrateimpl_41.rs");
+include!("depcrate_httptrace_request.rs");
+include!("depcraterequest_span.rs");
+include!("depcrate_service_spanuse_24.rs");
+include!("depcrate_service_spanmake.rs");
+include!("depcrate_request_spanuse_14.rs");
+include!("depcrateuse_1.rs");
+include!("depcrate_request_spanimpl_17.rs");
+include!("depcratesealed.rs");
+include!("depcrate_request_spanlayer.rs");
+include!("depcrate_service_spanuse_21.rs");
+include!("depcrate_request_spanuse_10.rs");
+include!("depcrate_service_spanimpl_30.rs");
+include!("depcrate_request_spanuse_8.rs");
+include!("depcrate_service_spanuse_22.rs");
+include!("depcrate_request_spanmake.rs");
+include!("depcrate_request_spanimpl_16.rs");
+include!("depcrate_httpmake_req_fns.rs");
+include!("depcrateservice_span.rs");
+include!("depcrateinstrumentableservice.rs");
+include!("depcrate_request_spanuse_6.rs");
+include!("depcrate_request_spanservice.rs");
+include!("depcrate_service_spanuse_23.rs");
+include!("depcrate_service_spanservice.rs");
+include!("depcrateimpl_39.rs");
+include!("depcrate_request_spanuse_5.rs");
+include!("depcrate_request_spanuse_12.rs");
+include!("depcrate_httpdebug_request.rs");
+include!("depcrateinstrumentedservice.rs");
+include!("depcrate_service_spanuse_26.rs");
+include!("depcrateuse_3.rs");
+include!("depcrategetspan.rs");
+include!("depcrateimpl_44.rs");
+include!("depcrate_request_spanuse_7.rs");
+include!("depcrateimpl_43.rs");
+include!("depcrateuse_2.rs");
+include!("depcrate_service_spanlayer.rs");
+include!("depcrate_request_spanuse_9.rs");
+include!("depcratehttp.rs");
+include!("depcrateimpl_42.rs");
+include!("depcrate_service_spanimpl_29.rs");
+include!("modcrate.rs");
+include!("modcrate_service_span.rs");
+include!("modcrate_http.rs");
+include!("modcrate_request_span.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate!();
+    Modcrate_service_span!();
+    Modcrate_http!();
+    Modcrate_request_span!();
+}

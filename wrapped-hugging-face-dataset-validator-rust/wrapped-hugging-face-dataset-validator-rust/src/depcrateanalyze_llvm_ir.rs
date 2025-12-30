@@ -1,0 +1,9 @@
+// Generated macro for analyze_llvm_ir (function)
+macro_rules! Depcrateanalyze_llvm_ir {
+() => {
+// Module: crate
+// Provides: {"analyze_llvm_ir"}
+// Dependencies: {}
+# [doc = " Analyze LLVM IR generation from Rust source"] # [doc = " "] # [doc = " This function uses the LLVM IR extractor to analyze how Rust source code"] # [doc = " is compiled to LLVM IR, capturing optimization passes and code generation."] fn analyze_llvm_ir (source_path : & str , output_path : & str , opt_levels_str : & str) -> Result < () , ValidationError > { use llvm_ir_extractor :: { LLVMIRExtractor , LLVMAnalysisPhase } ; let source_path = Path :: new (source_path) ; let output_path = Path :: new (output_path) ; if ! source_path . exists () { return Err (ValidationError :: InvalidInput (format ! ("Source path does not exist: {}" , source_path . display ()))) ; } let opt_levels : Vec < & str > = opt_levels_str . split (',') . collect () ; println ! ("🔍 Analyzing LLVM IR generation: {}" , source_path . display ()) ; println ! ("📊 Output directory: {}" , output_path . display ()) ; println ! ("⚡ Optimization levels: {:?}" , opt_levels) ; let mut extractor = LLVMIRExtractor :: new () . map_err (| e | ValidationError :: ProcessingError (format ! ("Failed to create LLVM IR extractor: {}" , e))) ? ; let phases = vec ! [LLVMAnalysisPhase :: IRGeneration , LLVMAnalysisPhase :: OptimizationPasses , LLVMAnalysisPhase :: CodeGeneration , LLVMAnalysisPhase :: PerformanceAnalysis , LLVMAnalysisPhase :: TypeSystemMapping , LLVMAnalysisPhase :: MemoryAnalysis ,] ; extractor . extract_ir_to_parquet (source_path , & phases , output_path , & opt_levels) . map_err (| e | ValidationError :: ProcessingError (format ! ("LLVM IR extraction failed: {}" , e))) ? ; println ! ("✅ LLVM IR analysis complete!") ; println ! ("📁 Dataset files written to: {}" , output_path . display ()) ; generate_llvm_dataset_readme (output_path , source_path , & opt_levels) ? ; Ok (()) }
+};
+}

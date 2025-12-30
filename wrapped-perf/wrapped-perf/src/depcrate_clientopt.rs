@@ -1,0 +1,9 @@
+// Generated macro for Opt (struct)
+macro_rules! Depcrate_clientOpt {
+() => {
+// Module: crate::client
+// Provides: {"Opt"}
+// Dependencies: {}
+# [doc = " Connects to a QUIC perf server and maintains a specified pattern of requests until interrupted"] # [derive (Parser)] # [clap (name = "client")] pub struct Opt { # [doc = " Host to connect to"] # [clap (default_value = "localhost:4433")] host : String , # [doc = " Override DNS resolution for host"] # [clap (long)] ip : Option < IpAddr > , # [doc = " Specify the local socket address"] # [clap (long)] local_addr : Option < SocketAddr > , # [doc = " Number of unidirectional requests to maintain concurrently"] # [clap (long , default_value = "0")] uni_requests : u64 , # [doc = " Number of bidirectional requests to maintain concurrently"] # [clap (long , default_value = "1")] bi_requests : u64 , # [doc = " Number of bytes to request"] # [doc = ""] # [doc = " This can use SI suffixes for sizes. For example, 1M will transfer"] # [doc = " 1MiB, 10G will transfer 10GiB."] # [clap (long , default_value = "1M" , value_parser = parse_byte_size)] download_size : u64 , # [doc = " Number of bytes to transmit, in addition to the request header"] # [doc = ""] # [doc = " This can use SI suffixes for sizes. For example, 1M will transfer"] # [doc = " 1MiB, 10G will transfer 10GiB."] # [clap (long , default_value = "1M" , value_parser = parse_byte_size)] upload_size : u64 , # [doc = " The time to run in seconds"] # [clap (long , default_value = "60")] duration : u64 , # [doc = " The interval in seconds at which stats are reported"] # [clap (long , default_value = "1")] interval : u64 , # [doc = " File path to output JSON statistics to. If the file is '-', stdout will be used"] # [cfg (feature = "json-output")] # [clap (long)] json : Option < PathBuf > , # [doc = " Common options"] # [command (flatten)] common : CommonOpt , }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for OID_DOT11_UNREACHABLE_DETECTION_THRESHOLD (const)
+macro_rules! Depcrate_shared_windot11OID_DOT11_UNREACHABLE_DETECTION_THRESHOLD {
+() => {
+// Module: crate::shared::windot11
+// Provides: {"OID_DOT11_UNREACHABLE_DETECTION_THRESHOLD"}
+// Dependencies: {}
+pub const OID_DOT11_UNREACHABLE_DETECTION_THRESHOLD : u32 = NWF_DEFINE_OID ! (148 , NWF_OPERATIONAL_OID , NWF_MANDATORY_OID) ;
+};
+}

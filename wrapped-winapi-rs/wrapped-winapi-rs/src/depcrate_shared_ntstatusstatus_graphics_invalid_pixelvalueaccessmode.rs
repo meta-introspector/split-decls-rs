@@ -1,0 +1,9 @@
+// Generated macro for STATUS_GRAPHICS_INVALID_PIXELVALUEACCESSMODE (const)
+macro_rules! Depcrate_shared_ntstatusSTATUS_GRAPHICS_INVALID_PIXELVALUEACCESSMODE {
+() => {
+// Module: crate::shared::ntstatus
+// Provides: {"STATUS_GRAPHICS_INVALID_PIXELVALUEACCESSMODE"}
+// Dependencies: {}
+pub const STATUS_GRAPHICS_INVALID_PIXELVALUEACCESSMODE : NTSTATUS = 0xC01E033F ;
+};
+}

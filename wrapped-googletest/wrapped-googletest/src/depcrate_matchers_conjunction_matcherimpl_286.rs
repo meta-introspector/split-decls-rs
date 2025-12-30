@@ -1,0 +1,9 @@
+// Generated macro for impl_286 (impl)
+macro_rules! Depcrate_matchers_conjunction_matcherimpl_286 {
+() => {
+// Module: crate::matchers::conjunction_matcher
+// Provides: {"impl_286"}
+// Dependencies: {}
+impl < T : Debug + Copy , M1 : Matcher < T > , M2 : Matcher < T > > Matcher < T > for ConjunctionMatcher < M1 , M2 > { fn matches (& self , actual : T) -> MatcherResult { match (self . m1 . matches (actual) , self . m2 . matches (actual)) { (MatcherResult :: Match , MatcherResult :: Match) => MatcherResult :: Match , _ => MatcherResult :: NoMatch , } } fn explain_match (& self , actual : T) -> Description { match (self . m1 . matches (actual) , self . m2 . matches (actual)) { (MatcherResult :: NoMatch , MatcherResult :: Match) => self . m1 . explain_match (actual) , (MatcherResult :: Match , MatcherResult :: NoMatch) => self . m2 . explain_match (actual) , (_ , _) => { let m1_description = self . m1 . explain_match (actual) ; if m1_description . is_conjunction_description () { m1_description . nested (self . m2 . explain_match (actual)) } else { Description :: new () . bullet_list () . collect ([m1_description , self . m2 . explain_match (actual)]) . conjunction_description () } } } } fn describe (& self , matcher_result : MatcherResult) -> Description { let m1_description = self . m1 . describe (matcher_result) ; if m1_description . is_conjunction_description () { m1_description . push_in_last_nested (self . m2 . describe (matcher_result)) } else { let header = if matcher_result . into () { "has all the following properties:" } else { "has at least one of the following properties:" } ; Description :: new () . text (header) . nested (Description :: new () . bullet_list () . collect ([m1_description , self . m2 . describe (matcher_result)]) ,) . conjunction_description () } } }
+};
+}

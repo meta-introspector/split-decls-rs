@@ -1,0 +1,9 @@
+// Generated macro for impl_55 (impl)
+macro_rules! Depcrate_globimpl_55 {
+() => {
+// Module: crate::glob
+// Provides: {"impl_55"}
+// Dependencies: {}
+impl < 'a > Fragment < 'a > { pub (crate) fn parse (string : & 'a str) -> Fragment < 'a > { let mut literal = true ; let mut parts = Vec :: new () ; let mut start = None ; for (n , c) in string . char_indices () { if c == '*' { if let Some (s) = start . take () { parts . push (Part :: Literal (& string [s .. n])) ; } if mem :: take (& mut literal) { parts . push (Part :: Star) ; } } else { if start . is_none () { start = Some (n) ; } literal = true ; } } if let Some (s) = start { parts . push (Part :: Literal (& string [s ..])) ; } Fragment { parts : parts . into () , } } # [doc = " Test if the given string matches the current fragment."] pub (crate) fn is_match (& self , string : & str) -> bool { let mut backtrack = VecDeque :: new () ; backtrack . push_back ((self . parts . as_ref () , string)) ; while let Some ((mut parts , mut string)) = backtrack . pop_front () { while let Some (part) = parts . first () { match part { Part :: Star => { let Some (Part :: Literal (peek)) = parts . get (1) else { return true ; } ; let Some (peek) = peek . chars () . next () else { return true ; } ; while let Some (c) = string . chars () . next () { if c == peek { backtrack . push_front ((parts , string . get (c . len_utf8 () ..) . unwrap_or_default () ,)) ; break ; } string = string . get (c . len_utf8 () ..) . unwrap_or_default () ; } } Part :: Literal (literal) => { let Some (remainder) = string . strip_prefix (literal) else { return false ; } ; string = remainder ; } } parts = parts . get (1 ..) . unwrap_or_default () ; } if string . is_empty () { return true ; } } false } # [doc = " Treat the fragment as a single normal component."] fn as_literal (& self) -> Option < & 'a str > { if let [Part :: Literal (one)] = self . parts . as_ref () { Some (one) } else { None } } }
+};
+}

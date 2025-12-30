@@ -1,0 +1,9 @@
+// Generated macro for STATUS_GRAPHICS_INVALID_VIDEOPRESENTSOURCESET (const)
+macro_rules! Depcrate_shared_ntstatusSTATUS_GRAPHICS_INVALID_VIDEOPRESENTSOURCESET {
+() => {
+// Module: crate::shared::ntstatus
+// Provides: {"STATUS_GRAPHICS_INVALID_VIDEOPRESENTSOURCESET"}
+// Dependencies: {}
+pub const STATUS_GRAPHICS_INVALID_VIDEOPRESENTSOURCESET : NTSTATUS = 0xC01E0315 ;
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for impl_32 (impl)
+macro_rules! Depcrate_backends_macosimpl_32 {
+() => {
+// Module: crate::backends::macos
+// Provides: {"impl_32"}
+// Dependencies: {}
+impl HostInfoBackend for MacOSHostInfoBackend { fn calendar () -> Result < Option < CalendarAlgorithm > , HostInfoError > { Ok (Self :: raw_calendar () ? . and_then (| raw | { let canonical = match raw . as_str () { "gregorian" => "gregory" , r => r , } ; unicode :: Value :: from_str (canonical) . ok () }) . and_then (| value | CalendarAlgorithm :: try_from (& value) . ok ())) } fn hour_cycle () -> Result < Option < HourCycle > , HostInfoError > { with_current_locale (| locale | { let template = CFString :: new ("j") ; let format = unsafe { CFDateFormatterCreateDateFormatFromTemplate (kCFAllocatorDefault , template . as_concrete_TypeRef () , 0 , locale ,) } ; if format . is_null () { return None ; } let format_string = unsafe { CFString :: wrap_under_create_rule (format) } ; match format_string . to_string () . chars () . next () { Some ('K') => Some (HourCycle :: H11) , Some ('h') => Some (HourCycle :: H12) , Some ('H') => Some (HourCycle :: H23) , _ => None , } }) } fn measurement_system () -> Result < Option < MeasurementSystem > , HostInfoError > { Ok (Self :: raw_measurement_system () ? . and_then (| raw | match raw . as_str () { "U.S." => Some (MeasurementSystem :: USSystem) , "U.K." => Some (MeasurementSystem :: UKSystem) , "Metric" => Some (MeasurementSystem :: Metric) , _ => None , }) ,) } fn collation () -> Result < Option < (Language , CollationType) > , HostInfoError > { Ok (Self :: raw_collation () ? . and_then (| (lang , col) | { if let Ok (val) = unicode :: Value :: from_str (& col) { if let Ok (col) = CollationType :: try_from (& val) { let lang = Language :: try_from_str (lang . as_str ()) . unwrap_or (Language :: UNKNOWN) ; Some ((lang , col)) } else { None } } else { None } })) } }
+};
+}

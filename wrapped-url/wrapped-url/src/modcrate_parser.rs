@@ -1,0 +1,56 @@
+// Generated module macro for crate::parser
+macro_rules! Modcrate_parser {
+() => {
+        Depcrate_parseruse_67!();
+        Depcrate_parseruse_68!();
+        Depcrate_parseruse_69!();
+        Depcrate_parseruse_70!();
+        Depcrate_parseruse_71!();
+        Depcrate_parseruse_72!();
+        Depcrate_parseruse_73!();
+        Depcrate_parseruse_74!();
+        Depcrate_parserFRAGMENT!();
+        Depcrate_parserPATH!();
+        Depcrate_parserUSERINFO!();
+        Depcrate_parserPATH_SEGMENT!();
+        Depcrate_parserSPECIAL_PATH_SEGMENT!();
+        Depcrate_parserQUERY!();
+        Depcrate_parserSPECIAL_QUERY!();
+        Depcrate_parserParseResult!();
+        Depcrate_parsersimple_enum_error!();
+        Depcrate_parserascii_tab_or_new_line_pattern!();
+        Depcrate_parserimpl_85!();
+        Depcrate_parserimpl_86!();
+        Depcrate_parsermacro_87!();
+        Depcrate_parserimpl_88!();
+        Depcrate_parsersyntax_violation_enum!();
+        Depcrate_parsermacro_90!();
+        Depcrate_parserimpl_91!();
+        Depcrate_parserSchemeType!();
+        Depcrate_parserimpl_93!();
+        Depcrate_parserimpl_94!();
+        Depcrate_parserdefault_port!();
+        Depcrate_parserInput!();
+        Depcrate_parserimpl_97!();
+        Depcrate_parserPattern!();
+        Depcrate_parserimpl_99!();
+        Depcrate_parserimpl_100!();
+        Depcrate_parserimpl_101!();
+        Depcrate_parserimpl_102!();
+        Depcrate_parserParser!();
+        Depcrate_parserContext!();
+        Depcrate_parserimpl_105!();
+        Depcrate_parsercheck_url_code_point!();
+        Depcrate_parseris_url_code_point!();
+        Depcrate_parserc0_control_or_space!();
+        Depcrate_parserascii_tab_or_new_line!();
+        Depcrate_parserascii_alpha!();
+        Depcrate_parserto_u32!();
+        Depcrate_parseris_normalized_windows_drive_letter!();
+        Depcrate_parseris_windows_drive_letter!();
+        Depcrate_parserpath_starts_with_windows_drive_letter!();
+        Depcrate_parserstarts_with_windows_drive_letter!();
+        Depcrate_parserstarts_with_windows_drive_letter_segment!();
+        Depcrate_parserfast_u16_to_str!();
+    };
+}

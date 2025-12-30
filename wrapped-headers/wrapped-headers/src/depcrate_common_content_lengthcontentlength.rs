@@ -1,0 +1,9 @@
+// Generated macro for ContentLength (struct)
+macro_rules! Depcrate_common_content_lengthContentLength {
+() => {
+// Module: crate::common::content_length
+// Provides: {"ContentLength"}
+// Dependencies: {}
+# [doc = " `Content-Length` header, defined in"] # [doc = " [RFC7230](https://datatracker.ietf.org/doc/html/rfc7230#section-3.3.2)"] # [doc = ""] # [doc = " When a message does not have a `Transfer-Encoding` header field, a"] # [doc = " Content-Length header field can provide the anticipated size, as a"] # [doc = " decimal number of octets, for a potential payload body.  For messages"] # [doc = " that do include a payload body, the Content-Length field-value"] # [doc = " provides the framing information necessary for determining where the"] # [doc = " body (and message) ends.  For messages that do not include a payload"] # [doc = " body, the Content-Length indicates the size of the selected"] # [doc = " representation."] # [doc = ""] # [doc = " Note that setting this header will *remove* any previously set"] # [doc = " `Transfer-Encoding` header, in accordance with"] # [doc = " [RFC7230](https://datatracker.ietf.org/doc/html/rfc7230#section-3.3.2):"] # [doc = ""] # [doc = " > A sender MUST NOT send a Content-Length header field in any message"] # [doc = " > that contains a Transfer-Encoding header field."] # [doc = ""] # [doc = " ## ABNF"] # [doc = ""] # [doc = " ```text"] # [doc = " Content-Length = 1*DIGIT"] # [doc = " ```"] # [doc = ""] # [doc = " ## Example values"] # [doc = ""] # [doc = " * `3495`"] # [doc = ""] # [doc = " # Example"] # [doc = ""] # [doc = " ```"] # [doc = " use headers::ContentLength;"] # [doc = ""] # [doc = " let len = ContentLength(1_000);"] # [doc = " ```"] # [derive (Clone , Copy , Debug , PartialEq)] pub struct ContentLength (pub u64) ;
+};
+}

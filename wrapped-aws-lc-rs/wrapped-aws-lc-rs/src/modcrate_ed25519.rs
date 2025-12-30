@@ -1,0 +1,47 @@
+// Generated module macro for crate::ed25519
+macro_rules! Modcrate_ed25519 {
+() => {
+        Depcrate_ed25519use_635!();
+        Depcrate_ed25519use_636!();
+        Depcrate_ed25519use_637!();
+        Depcrate_ed25519use_638!();
+        Depcrate_ed25519use_639!();
+        Depcrate_ed25519use_640!();
+        Depcrate_ed25519use_641!();
+        Depcrate_ed25519use_642!();
+        Depcrate_ed25519use_643!();
+        Depcrate_ed25519use_644!();
+        Depcrate_ed25519use_645!();
+        Depcrate_ed25519use_646!();
+        Depcrate_ed25519use_647!();
+        Depcrate_ed25519use_648!();
+        Depcrate_ed25519use_649!();
+        Depcrate_ed25519ED25519_PUBLIC_KEY_LEN!();
+        Depcrate_ed25519ED25519_SIGNATURE_LEN!();
+        Depcrate_ed25519ED25519_SEED_LEN!();
+        Depcrate_ed25519EdDSAParameters!();
+        Depcrate_ed25519impl_654!();
+        Depcrate_ed25519impl_655!();
+        Depcrate_ed25519impl_656!();
+        Depcrate_ed25519parse_ed25519_public_key!();
+        Depcrate_ed25519Ed25519KeyPair!();
+        Depcrate_ed25519impl_659!();
+        Depcrate_ed25519Seed!();
+        Depcrate_ed25519impl_661!();
+        Depcrate_ed25519impl_662!();
+        Depcrate_ed25519PublicKey!();
+        Depcrate_ed25519impl_664!();
+        Depcrate_ed25519impl_665!();
+        Depcrate_ed25519impl_666!();
+        Depcrate_ed25519impl_667!();
+        Depcrate_ed25519impl_668!();
+        Depcrate_ed25519impl_669!();
+        Depcrate_ed25519impl_670!();
+        Depcrate_ed25519impl_671!();
+        Depcrate_ed25519generate_key!();
+        Depcrate_ed25519impl_673!();
+        Depcrate_ed25519impl_674!();
+        Depcrate_ed25519impl_675!();
+        Depcrate_ed25519tests!();
+    };
+}

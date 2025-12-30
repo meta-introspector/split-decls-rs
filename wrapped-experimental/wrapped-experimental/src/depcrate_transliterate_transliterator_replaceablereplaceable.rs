@@ -1,0 +1,9 @@
+// Generated macro for Replaceable (struct)
+macro_rules! Depcrate_transliterate_transliterator_replaceableReplaceable {
+() => {
+// Module: crate::transliterate::transliterator::replaceable
+// Provides: {"Replaceable"}
+// Dependencies: {}
+# [doc = " Represents a transliteration run. It is aware of the range of the input that is allowed"] # [doc = " to be transliterated, according to the filter."] # [doc = ""] # [doc = " `Replaceable`s are made to be stacked. This means that while a given `Replaceable` represents"] # [doc = " a single run, it can be used to iterate over all sub-runs with a given filter of itself using"] # [doc = " [`for_each_run`](Replaceable::for_each_run)."] # [doc = ""] # [doc = " Typical usage of a `Replaceable` depends on the client:"] # [doc = " - When transliterating transform rules, the `cursor`-related methods, as well as [`start_match`](Replaceable::start_match)"] # [doc = "   will be of interest."] # [doc = " - When transliterating with a black box, most likely [`replace_modifiable_with_str`](Replaceable::replace_modifiable_with_str)"] # [doc = "   is the only method that will be used."] # [doc = ""] # [doc = " # Safety"] # [doc = " Note: `content` is a `Hide`. Whenever `content` is mentioned, only the *visible* part of it is"] # [doc = " meant."] # [doc = ""] # [doc = " The invariants of this struct are as follows:"] # [doc = " - (The visible part of) `content` must be valid UTF-8."] # [doc = " - `cursor` must be a valid UTF-8 index into the visible part of `content`."] # [doc = " - `run_range()` (as defined by `freeze_pre_len` and `freeze_post_len`), must always be a valid"] # [doc = "   UTF-8 range into `content`."] pub (crate) struct Replaceable < 'a > { content : Hide < 'a > , freeze_pre_len : usize , freeze_post_len : usize , cursor : usize , }
+};
+}

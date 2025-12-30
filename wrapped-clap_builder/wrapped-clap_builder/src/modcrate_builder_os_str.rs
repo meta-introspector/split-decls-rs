@@ -1,0 +1,49 @@
+// Generated module macro for crate::builder::os_str
+macro_rules! Modcrate_builder_os_str {
+() => {
+        Depcrate_builder_os_struse_176!();
+        Depcrate_builder_os_struse_177!();
+        Depcrate_builder_os_strOsStr!();
+        Depcrate_builder_os_strimpl_179!();
+        Depcrate_builder_os_strimpl_180!();
+        Depcrate_builder_os_strimpl_181!();
+        Depcrate_builder_os_strimpl_182!();
+        Depcrate_builder_os_strimpl_183!();
+        Depcrate_builder_os_strimpl_184!();
+        Depcrate_builder_os_strimpl_185!();
+        Depcrate_builder_os_strimpl_186!();
+        Depcrate_builder_os_strimpl_187!();
+        Depcrate_builder_os_strimpl_188!();
+        Depcrate_builder_os_strimpl_189!();
+        Depcrate_builder_os_strimpl_190!();
+        Depcrate_builder_os_strimpl_191!();
+        Depcrate_builder_os_strimpl_192!();
+        Depcrate_builder_os_strimpl_193!();
+        Depcrate_builder_os_strimpl_194!();
+        Depcrate_builder_os_strimpl_195!();
+        Depcrate_builder_os_strimpl_196!();
+        Depcrate_builder_os_strimpl_197!();
+        Depcrate_builder_os_strimpl_198!();
+        Depcrate_builder_os_strimpl_199!();
+        Depcrate_builder_os_strimpl_200!();
+        Depcrate_builder_os_strimpl_201!();
+        Depcrate_builder_os_strimpl_202!();
+        Depcrate_builder_os_strimpl_203!();
+        Depcrate_builder_os_strimpl_204!();
+        Depcrate_builder_os_strimpl_205!();
+        Depcrate_builder_os_strimpl_206!();
+        Depcrate_builder_os_strimpl_207!();
+        Depcrate_builder_os_strimpl_208!();
+        Depcrate_builder_os_strimpl_209!();
+        Depcrate_builder_os_strinner!();
+        Depcrate_builder_os_strinner!();
+        Depcrate_builder_os_struse_212!();
+        Depcrate_builder_os_strimpl_213!();
+        Depcrate_builder_os_strimpl_214!();
+        Depcrate_builder_os_strimpl_215!();
+        Depcrate_builder_os_strimpl_216!();
+        Depcrate_builder_os_strimpl_217!();
+        Depcrate_builder_os_strimpl_218!();
+        Depcrate_builder_os_strtests!();
+    };
+}

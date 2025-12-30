@@ -1,0 +1,42 @@
+// Generated module macro for crate::quic
+macro_rules! Modcrate_quic {
+() => {
+        Depcrate_quicuse_130!();
+        Depcrate_quicuse_131!();
+        Depcrate_quicuse_132!();
+        Depcrate_quicEvent!();
+        Depcrate_quicQuicSessionParams!();
+        Depcrate_quicQuicSessionEvent!();
+        Depcrate_quicQuicSessionTransportParametersSentParams!();
+        Depcrate_quicQuicSessionTransportParametersSentEvent!();
+        Depcrate_quicQuicSessionTransportParametersReceivedParams!();
+        Depcrate_quicQuicSessionTransportParametersReceivedEvent!();
+        Depcrate_quicTransportParameters!();
+        Depcrate_quicimpl_141!();
+        Depcrate_quicimpl_142!();
+        Depcrate_quicimpl_143!();
+        Depcrate_quicQuicSessionUnauthenticatedPacketHeaderReceivedParams!();
+        Depcrate_quicQuicSessionUnauthenticatedPacketHeaderReceived!();
+        Depcrate_quicQuicSessionPacketSentParams!();
+        Depcrate_quicQuicSessionPacketSent!();
+        Depcrate_quicQuicSessionAckFrameSentParams!();
+        Depcrate_quicQuicSessionAckFrameSent!();
+        Depcrate_quicQuicSessionAckFrameReceivedParams!();
+        Depcrate_quicQuicSessionAckFrameReceived!();
+        Depcrate_quicQuicSessionStreamFrameReceivedParams!();
+        Depcrate_quicQuicSessionStreamFrameReceivedEvent!();
+        Depcrate_quicQuicSessionStopSendingFrameSentParams!();
+        Depcrate_quicQuicSessionStopSendingFrameSentEvent!();
+        Depcrate_quicQuicSessionRstStreamFrameSentParams!();
+        Depcrate_quicQuicSessionRstStreamFrameSentEvent!();
+        Depcrate_quicQuicSessionRstStreamFrameReceivedParams!();
+        Depcrate_quicQuicSessionRstStreamFrameReceivedEvent!();
+        Depcrate_quicQuicSessionBlockedFrameReceivedParams!();
+        Depcrate_quicQuicSessionBlockedFrameReceivedEvent!();
+        Depcrate_quicQuicSessionWindowUpdateFrameSentParams!();
+        Depcrate_quicQuicSessionWindowUpdateFrameSentEvent!();
+        Depcrate_quicQuicSessionClosedParams!();
+        Depcrate_quicQuicSessionClosedEvent!();
+        Depcrate_quicparse_event!();
+    };
+}

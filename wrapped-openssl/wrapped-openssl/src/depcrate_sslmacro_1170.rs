@@ -1,0 +1,9 @@
+// Generated macro for macro_1170 (macro)
+macro_rules! Depcrate_sslmacro_1170 {
+() => {
+// Module: crate::ssl
+// Provides: {"macro_1170"}
+// Dependencies: {}
+# [cfg (ossl111)] bitflags ! { # [doc = " Which messages and under which conditions an extension should be added or expected."] # [derive (Copy , Clone , Debug , Eq , Hash , Ord , PartialEq , PartialOrd)] # [repr (transparent)] pub struct ExtensionContext : c_uint { # [doc = " This extension is only allowed in TLS"] const TLS_ONLY = ffi :: SSL_EXT_TLS_ONLY ; # [doc = " This extension is only allowed in DTLS"] const DTLS_ONLY = ffi :: SSL_EXT_DTLS_ONLY ; # [doc = " Some extensions may be allowed in DTLS but we don't implement them for it"] const TLS_IMPLEMENTATION_ONLY = ffi :: SSL_EXT_TLS_IMPLEMENTATION_ONLY ; # [doc = " Most extensions are not defined for SSLv3 but EXT_TYPE_renegotiate is"] const SSL3_ALLOWED = ffi :: SSL_EXT_SSL3_ALLOWED ; # [doc = " Extension is only defined for TLS1.2 and below"] const TLS1_2_AND_BELOW_ONLY = ffi :: SSL_EXT_TLS1_2_AND_BELOW_ONLY ; # [doc = " Extension is only defined for TLS1.3 and above"] const TLS1_3_ONLY = ffi :: SSL_EXT_TLS1_3_ONLY ; # [doc = " Ignore this extension during parsing if we are resuming"] const IGNORE_ON_RESUMPTION = ffi :: SSL_EXT_IGNORE_ON_RESUMPTION ; const CLIENT_HELLO = ffi :: SSL_EXT_CLIENT_HELLO ; # [doc = " Really means TLS1.2 or below"] const TLS1_2_SERVER_HELLO = ffi :: SSL_EXT_TLS1_2_SERVER_HELLO ; const TLS1_3_SERVER_HELLO = ffi :: SSL_EXT_TLS1_3_SERVER_HELLO ; const TLS1_3_ENCRYPTED_EXTENSIONS = ffi :: SSL_EXT_TLS1_3_ENCRYPTED_EXTENSIONS ; const TLS1_3_HELLO_RETRY_REQUEST = ffi :: SSL_EXT_TLS1_3_HELLO_RETRY_REQUEST ; const TLS1_3_CERTIFICATE = ffi :: SSL_EXT_TLS1_3_CERTIFICATE ; const TLS1_3_NEW_SESSION_TICKET = ffi :: SSL_EXT_TLS1_3_NEW_SESSION_TICKET ; const TLS1_3_CERTIFICATE_REQUEST = ffi :: SSL_EXT_TLS1_3_CERTIFICATE_REQUEST ; } }
+};
+}

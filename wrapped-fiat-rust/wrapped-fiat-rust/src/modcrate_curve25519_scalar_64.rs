@@ -1,0 +1,41 @@
+// Generated module macro for crate::curve25519_scalar_64
+macro_rules! Modcrate_curve25519_scalar_64 {
+() => {
+        Depcrate_curve25519_scalar_64IndexConst!();
+        Depcrate_curve25519_scalar_64impl_106!();
+        Depcrate_curve25519_scalar_64impl_107!();
+        Depcrate_curve25519_scalar_64fiat_25519_scalar_u1!();
+        Depcrate_curve25519_scalar_64fiat_25519_scalar_i1!();
+        Depcrate_curve25519_scalar_64fiat_25519_scalar_u2!();
+        Depcrate_curve25519_scalar_64fiat_25519_scalar_i2!();
+        Depcrate_curve25519_scalar_64fiat_25519_scalar_montgomery_domain_field_element!();
+        Depcrate_curve25519_scalar_64impl_113!();
+        Depcrate_curve25519_scalar_64impl_114!();
+        Depcrate_curve25519_scalar_64impl_115!();
+        Depcrate_curve25519_scalar_64impl_116!();
+        Depcrate_curve25519_scalar_64fiat_25519_scalar_non_montgomery_domain_field_element!();
+        Depcrate_curve25519_scalar_64impl_118!();
+        Depcrate_curve25519_scalar_64impl_119!();
+        Depcrate_curve25519_scalar_64impl_120!();
+        Depcrate_curve25519_scalar_64impl_121!();
+        Depcrate_curve25519_scalar_64fiat_25519_scalar_addcarryx_u64!();
+        Depcrate_curve25519_scalar_64fiat_25519_scalar_subborrowx_u64!();
+        Depcrate_curve25519_scalar_64fiat_25519_scalar_mulx_u64!();
+        Depcrate_curve25519_scalar_64fiat_25519_scalar_cmovznz_u64!();
+        Depcrate_curve25519_scalar_64fiat_25519_scalar_mul!();
+        Depcrate_curve25519_scalar_64fiat_25519_scalar_square!();
+        Depcrate_curve25519_scalar_64fiat_25519_scalar_add!();
+        Depcrate_curve25519_scalar_64fiat_25519_scalar_sub!();
+        Depcrate_curve25519_scalar_64fiat_25519_scalar_opp!();
+        Depcrate_curve25519_scalar_64fiat_25519_scalar_from_montgomery!();
+        Depcrate_curve25519_scalar_64fiat_25519_scalar_to_montgomery!();
+        Depcrate_curve25519_scalar_64fiat_25519_scalar_nonzero!();
+        Depcrate_curve25519_scalar_64fiat_25519_scalar_selectznz!();
+        Depcrate_curve25519_scalar_64fiat_25519_scalar_to_bytes!();
+        Depcrate_curve25519_scalar_64fiat_25519_scalar_from_bytes!();
+        Depcrate_curve25519_scalar_64fiat_25519_scalar_set_one!();
+        Depcrate_curve25519_scalar_64fiat_25519_scalar_msat!();
+        Depcrate_curve25519_scalar_64fiat_25519_scalar_divstep!();
+        Depcrate_curve25519_scalar_64fiat_25519_scalar_divstep_precomp!();
+    };
+}

@@ -4,6 +4,6 @@ macro_rules! Depcrate_wrappingimpl_489 {
 // Module: crate::wrapping
 // Provides: {"impl_489"}
 // Dependencies: {}
-impl < T : WrappingMul > Mul < Wrapping < T > > for & Wrapping < T > { type Output = Wrapping < T > ; # [inline] fn mul (self , rhs : Wrapping < T >) -> Self :: Output { Wrapping (self . 0 . wrapping_mul (& rhs . 0)) } }
+impl < T : ConditionallySelectable > ConditionallySelectable for Wrapping < T > { # [inline] fn conditional_select (a : & Self , b : & Self , choice : Choice) -> Self { Wrapping (T :: conditional_select (& a . 0 , & b . 0 , choice)) } }
 };
 }

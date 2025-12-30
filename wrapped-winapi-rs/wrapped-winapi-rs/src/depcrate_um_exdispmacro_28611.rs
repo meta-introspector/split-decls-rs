@@ -1,0 +1,9 @@
+// Generated macro for macro_28611 (macro)
+macro_rules! Depcrate_um_exdispmacro_28611 {
+() => {
+// Module: crate::um::exdisp
+// Provides: {"macro_28611"}
+// Dependencies: {}
+RIDL ! { # [uuid (0xd30c1661 , 0xcdaf , 0x11d0 , 0x8a , 0x3e , 0x00 , 0xc0 , 0x4f , 0xc9 , 0xe2 , 0x6e)] interface IWebBrowser2 (IWebBrowser2Vtbl) : IWebBrowserApp (IWebBrowserAppVtbl) { fn Navigate2 (URL : * const VARIANT , Flags : * const VARIANT , TargetFrameName : * const VARIANT , PostData : * const VARIANT , Headers : * const VARIANT ,) -> HRESULT , fn QueryStatusWB (cmdID : OLECMDID , pcmdf : * mut OLECMDF ,) -> HRESULT , fn ExecWB (cmdID : OLECMDID , cmdexecopt : OLECMDEXECOPT , pvaIn : * const VARIANT , pvaOut : * mut VARIANT ,) -> HRESULT , fn ShowBrowserBar (pvaClsid : * const VARIANT , pvarShow : * const VARIANT , pvarSize : * const VARIANT ,) -> HRESULT , fn get_ReadyState (plReadyState : * mut READYSTATE ,) -> HRESULT , fn get_Offline (pbOffline : * mut VARIANT_BOOL ,) -> HRESULT , fn put_Offline (bOffline : VARIANT_BOOL ,) -> HRESULT , fn get_Silent (pbSilent : * mut VARIANT_BOOL ,) -> HRESULT , fn put_Silent (bSilent : VARIANT_BOOL ,) -> HRESULT , fn get_RegisterAsBrowser (pbRegister : * mut VARIANT_BOOL ,) -> HRESULT , fn put_RegisterAsBrowser (bRegister : VARIANT_BOOL ,) -> HRESULT , fn get_RegisterAsDropTarget (pbRegister : * mut VARIANT_BOOL ,) -> HRESULT , fn put_RegisterAsDropTarget (bRegister : VARIANT_BOOL ,) -> HRESULT , fn get_TheaterMode (pbRegister : * mut VARIANT_BOOL ,) -> HRESULT , fn put_TheaterMode (bRegister : VARIANT_BOOL ,) -> HRESULT , fn get_AddressBar (Value : * mut VARIANT_BOOL ,) -> HRESULT , fn put_AddressBar (Value : VARIANT_BOOL ,) -> HRESULT , fn get_Resizable (Value : * mut VARIANT_BOOL ,) -> HRESULT , fn put_Resizable (Value : VARIANT_BOOL ,) -> HRESULT , } }
+};
+}

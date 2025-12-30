@@ -1,0 +1,9 @@
+// Generated macro for EXTI (struct)
+macro_rules! Depcrate_stm32f446EXTI {
+() => {
+// Module: crate::stm32f446
+// Provides: {"EXTI"}
+// Dependencies: {}
+# [doc = "External interrupt/event controller"] pub struct EXTI { _marker : PhantomData < * const () > , }
+};
+}

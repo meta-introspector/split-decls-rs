@@ -1,0 +1,9 @@
+// Generated macro for use_1076 (use)
+macro_rules! Depcrate_ntldruse_1076 {
+() => {
+// Module: crate::ntldr
+// Provides: {"use_1076"}
+// Dependencies: {}
+use winapi :: um :: winnt :: { ACCESS_MASK , ACTIVATION_CONTEXT , IMAGE_RESOURCE_DIRECTORY_ENTRY , PCIMAGE_DELAYLOAD_DESCRIPTOR , PIMAGE_BASE_RELOCATION , PIMAGE_IMPORT_DESCRIPTOR , PIMAGE_RESOURCE_DATA_ENTRY , PIMAGE_RESOURCE_DIRECTORY , PIMAGE_RESOURCE_DIRECTORY_STRING , PIMAGE_THUNK_DATA , } ;
+};
+}

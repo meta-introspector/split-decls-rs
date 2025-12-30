@@ -1,0 +1,47 @@
+// Generated module macro for crate::geometry::isometry_ops
+macro_rules! Modcrate_geometry_isometry_ops {
+() => {
+        Depcrate_geometry_isometry_opsuse_2308!();
+        Depcrate_geometry_isometry_opsuse_2309!();
+        Depcrate_geometry_isometry_opsuse_2310!();
+        Depcrate_geometry_isometry_opsuse_2311!();
+        Depcrate_geometry_isometry_opsuse_2312!();
+        Depcrate_geometry_isometry_opsuse_2313!();
+        Depcrate_geometry_isometry_opsuse_2314!();
+        Depcrate_geometry_isometry_opsisometry_binop_impl!();
+        Depcrate_geometry_isometry_opsisometry_binop_impl_all!();
+        Depcrate_geometry_isometry_opsisometry_binop_assign_impl_all!();
+        Depcrate_geometry_isometry_opsmacro_2318!();
+        Depcrate_geometry_isometry_opsmacro_2319!();
+        Depcrate_geometry_isometry_opsmacro_2320!();
+        Depcrate_geometry_isometry_opsmacro_2321!();
+        Depcrate_geometry_isometry_opsmacro_2322!();
+        Depcrate_geometry_isometry_opsmacro_2323!();
+        Depcrate_geometry_isometry_opsmacro_2324!();
+        Depcrate_geometry_isometry_opsmacro_2325!();
+        Depcrate_geometry_isometry_opsmacro_2326!();
+        Depcrate_geometry_isometry_opsmacro_2327!();
+        Depcrate_geometry_isometry_opsmacro_2328!();
+        Depcrate_geometry_isometry_opsmacro_2329!();
+        Depcrate_geometry_isometry_opsmacro_2330!();
+        Depcrate_geometry_isometry_opsmacro_2331!();
+        Depcrate_geometry_isometry_opsmacro_2332!();
+        Depcrate_geometry_isometry_opsmacro_2333!();
+        Depcrate_geometry_isometry_opsisometry_from_composition_impl!();
+        Depcrate_geometry_isometry_opsisometry_from_composition_impl_all!();
+        Depcrate_geometry_isometry_opsmacro_2336!();
+        Depcrate_geometry_isometry_opsmacro_2337!();
+        Depcrate_geometry_isometry_opsmacro_2338!();
+        Depcrate_geometry_isometry_opsmacro_2339!();
+        Depcrate_geometry_isometry_opsmacro_2340!();
+        Depcrate_geometry_isometry_opsmacro_2341!();
+        Depcrate_geometry_isometry_opsmacro_2342!();
+        Depcrate_geometry_isometry_opsmacro_2343!();
+        Depcrate_geometry_isometry_opsmacro_2344!();
+        Depcrate_geometry_isometry_opsmacro_2345!();
+        Depcrate_geometry_isometry_opsmacro_2346!();
+        Depcrate_geometry_isometry_opsmacro_2347!();
+        Depcrate_geometry_isometry_opsmacro_2348!();
+        Depcrate_geometry_isometry_opsmacro_2349!();
+    };
+}

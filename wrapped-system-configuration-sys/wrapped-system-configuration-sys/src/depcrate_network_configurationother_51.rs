@@ -1,0 +1,9 @@
+// Generated macro for other_51 (other)
+macro_rules! Depcrate_network_configurationother_51 {
+() => {
+// Module: crate::network_configuration
+// Provides: {"other_51"}
+// Dependencies: {}
+extern "C" { pub fn SCNetworkConnectionGetTypeID () -> CFTypeID ; pub fn SCNetworkConnectionCopyUserPreferences (selectionOptions : CFDictionaryRef , serviceID : * mut CFStringRef , userOptions : * mut CFDictionaryRef ,) -> Boolean ; pub fn SCNetworkConnectionCreateWithServiceID (allocator : CFAllocatorRef , serviceID : CFStringRef , callout : SCNetworkConnectionCallBack , context : * mut SCNetworkConnectionContext ,) -> SCNetworkConnectionRef ; pub fn SCNetworkConnectionCopyServiceID (connection : SCNetworkConnectionRef) -> CFStringRef ; pub fn SCNetworkConnectionGetStatus (connection : SCNetworkConnectionRef ,) -> SCNetworkConnectionStatus ; pub fn SCNetworkConnectionCopyExtendedStatus (connection : SCNetworkConnectionRef ,) -> CFDictionaryRef ; pub fn SCNetworkConnectionCopyStatistics (connection : SCNetworkConnectionRef) -> CFDictionaryRef ; pub fn SCNetworkConnectionStart (connection : SCNetworkConnectionRef , userOptions : CFDictionaryRef , linger : Boolean ,) -> Boolean ; pub fn SCNetworkConnectionStop (connection : SCNetworkConnectionRef , forceDisconnect : Boolean ,) -> Boolean ; pub fn SCNetworkConnectionCopyUserOptions (connection : SCNetworkConnectionRef ,) -> CFDictionaryRef ; pub fn SCNetworkConnectionScheduleWithRunLoop (connection : SCNetworkConnectionRef , runLoop : CFRunLoopRef , runLoopMode : CFStringRef ,) -> Boolean ; pub fn SCNetworkConnectionUnscheduleFromRunLoop (connection : SCNetworkConnectionRef , runLoop : CFRunLoopRef , runLoopMode : CFStringRef ,) -> Boolean ; pub fn SCNetworkConnectionSetDispatchQueue (connection : SCNetworkConnectionRef , queue : dispatch_queue_t ,) -> Boolean ; }
+};
+}

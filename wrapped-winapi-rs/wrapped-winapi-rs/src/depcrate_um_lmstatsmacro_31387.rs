@@ -1,0 +1,9 @@
+// Generated macro for macro_31387 (macro)
+macro_rules! Depcrate_um_lmstatsmacro_31387 {
+() => {
+// Module: crate::um::lmstats
+// Provides: {"macro_31387"}
+// Dependencies: {}
+STRUCT ! { struct STAT_WORKSTATION_0 { StatisticsStartTime : LARGE_INTEGER , BytesReceived : LARGE_INTEGER , SmbsReceived : LARGE_INTEGER , PagingReadBytesRequested : LARGE_INTEGER , NonPagingReadBytesRequested : LARGE_INTEGER , CacheReadBytesRequested : LARGE_INTEGER , NetworkReadBytesRequested : LARGE_INTEGER , BytesTransmitted : LARGE_INTEGER , SmbsTransmitted : LARGE_INTEGER , PagingWriteBytesRequested : LARGE_INTEGER , NonPagingWriteBytesRequested : LARGE_INTEGER , CacheWriteBytesRequested : LARGE_INTEGER , NetworkWriteBytesRequested : LARGE_INTEGER , InitiallyFailedOperations : DWORD , FailedCompletionOperations : DWORD , ReadOperations : DWORD , RandomReadOperations : DWORD , ReadSmbs : DWORD , LargeReadSmbs : DWORD , SmallReadSmbs : DWORD , WriteOperations : DWORD , RandomWriteOperations : DWORD , WriteSmbs : DWORD , LargeWriteSmbs : DWORD , SmallWriteSmbs : DWORD , RawReadsDenied : DWORD , RawWritesDenied : DWORD , NetworkErrors : DWORD , Sessions : DWORD , FailedSessions : DWORD , Reconnects : DWORD , CoreConnects : DWORD , Lanman20Connects : DWORD , Lanman21Connects : DWORD , LanmanNtConnects : DWORD , ServerDisconnects : DWORD , HungSessions : DWORD , UseCount : DWORD , FailedUseCount : DWORD , CurrentCommands : DWORD , } }
+};
+}

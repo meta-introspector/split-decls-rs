@@ -1,0 +1,9 @@
+// Generated macro for SV_MAXPAGEDPOOLCHUNKSIZE_INFOLEVEL (const)
+macro_rules! Depcrate_um_lmserverSV_MAXPAGEDPOOLCHUNKSIZE_INFOLEVEL {
+() => {
+// Module: crate::um::lmserver
+// Provides: {"SV_MAXPAGEDPOOLCHUNKSIZE_INFOLEVEL"}
+// Dependencies: {}
+pub const SV_MAXPAGEDPOOLCHUNKSIZE_INFOLEVEL : DWORD = PARMNUM_BASE_INFOLEVEL + SV_MAXPAGEDPOOLCHUNKSIZE_PARMNUM ;
+};
+}

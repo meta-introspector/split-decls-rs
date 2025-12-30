@@ -1,0 +1,9 @@
+// Generated macro for impl_123 (impl)
+macro_rules! Depcrate_hygieneimpl_123 {
+() => {
+// Module: crate::hygiene
+// Provides: {"impl_123"}
+// Dependencies: {}
+impl HygieneEncodeContext { # [doc = " Record the fact that we need to serialize the corresponding `ExpnData`."] pub fn schedule_expn_data_for_encoding (& self , expn : ExpnId) { if ! self . serialized_expns . lock () . contains (& expn) { self . latest_expns . lock () . insert (expn) ; } } pub fn encode < T > (& self , encoder : & mut T , mut encode_ctxt : impl FnMut (& mut T , u32 , & SyntaxContextKey) , mut encode_expn : impl FnMut (& mut T , ExpnId , & ExpnData , ExpnHash) ,) { while ! self . latest_ctxts . lock () . is_empty () || ! self . latest_expns . lock () . is_empty () { debug ! ("encode_hygiene: Serializing a round of {:?} SyntaxContextData: {:?}" , self . latest_ctxts . lock () . len () , self . latest_ctxts) ; # [allow (rustc :: potential_query_instability)] let latest_ctxts = { mem :: take (& mut * self . latest_ctxts . lock ()) } . into_iter () ; let all_ctxt_data : Vec < _ > = HygieneData :: with (| data | { latest_ctxts . map (| ctxt | (ctxt , data . syntax_context_data [ctxt . 0 as usize] . key ())) . collect () }) ; for (ctxt , ctxt_key) in all_ctxt_data { if self . serialized_ctxts . lock () . insert (ctxt) { encode_ctxt (encoder , ctxt . 0 , & ctxt_key) ; } } # [allow (rustc :: potential_query_instability)] let latest_expns = { mem :: take (& mut * self . latest_expns . lock ()) } . into_iter () ; let all_expn_data : Vec < _ > = HygieneData :: with (| data | { latest_expns . map (| expn | (expn , data . expn_data (expn) . clone () , data . expn_hash (expn))) . collect () }) ; for (expn , expn_data , expn_hash) in all_expn_data { if self . serialized_expns . lock () . insert (expn) { encode_expn (encoder , expn , & expn_data , expn_hash) ; } } } debug ! ("encode_hygiene: Done serializing SyntaxContextData") ; } }
+};
+}

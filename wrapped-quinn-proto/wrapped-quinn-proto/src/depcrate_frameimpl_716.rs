@@ -1,0 +1,9 @@
+// Generated macro for impl_716 (impl)
+macro_rules! Depcrate_frameimpl_716 {
+() => {
+// Module: crate::frame
+// Provides: {"impl_716"}
+// Dependencies: {}
+impl Frame { pub (crate) fn ty (& self) -> FrameType { use Frame :: * ; match * self { Padding => FrameType :: PADDING , ResetStream (_) => FrameType :: RESET_STREAM , Close (self :: Close :: Connection (_)) => FrameType :: CONNECTION_CLOSE , Close (self :: Close :: Application (_)) => FrameType :: APPLICATION_CLOSE , MaxData (_) => FrameType :: MAX_DATA , MaxStreamData { .. } => FrameType :: MAX_STREAM_DATA , MaxStreams { dir : Dir :: Bi , .. } => FrameType :: MAX_STREAMS_BIDI , MaxStreams { dir : Dir :: Uni , .. } => FrameType :: MAX_STREAMS_UNI , Ping => FrameType :: PING , DataBlocked { .. } => FrameType :: DATA_BLOCKED , StreamDataBlocked { .. } => FrameType :: STREAM_DATA_BLOCKED , StreamsBlocked { dir : Dir :: Bi , .. } => FrameType :: STREAMS_BLOCKED_BIDI , StreamsBlocked { dir : Dir :: Uni , .. } => FrameType :: STREAMS_BLOCKED_UNI , StopSending { .. } => FrameType :: STOP_SENDING , RetireConnectionId { .. } => FrameType :: RETIRE_CONNECTION_ID , Ack (_) => FrameType :: ACK , Stream (ref x) => { let mut ty = * STREAM_TYS . start () ; if x . fin { ty |= 0x01 ; } if x . offset != 0 { ty |= 0x04 ; } FrameType (ty) } PathChallenge (_) => FrameType :: PATH_CHALLENGE , PathResponse (_) => FrameType :: PATH_RESPONSE , NewConnectionId { .. } => FrameType :: NEW_CONNECTION_ID , Crypto (_) => FrameType :: CRYPTO , NewToken (_) => FrameType :: NEW_TOKEN , Datagram (_) => FrameType (* DATAGRAM_TYS . start ()) , AckFrequency (_) => FrameType :: ACK_FREQUENCY , ImmediateAck => FrameType :: IMMEDIATE_ACK , HandshakeDone => FrameType :: HANDSHAKE_DONE , } } pub (crate) fn is_ack_eliciting (& self) -> bool { ! matches ! (* self , Self :: Ack (_) | Self :: Padding | Self :: Close (_)) } }
+};
+}

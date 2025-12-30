@@ -1,0 +1,43 @@
+// Generated module macro for crate::deserializer
+macro_rules! Modcrate_deserializer {
+() => {
+        Depcrate_deserializeruse_44!();
+        Depcrate_deserializeruse_45!();
+        Depcrate_deserializeruse_46!();
+        Depcrate_deserializeruse_47!();
+        Depcrate_deserializerdeserialize_string_record!();
+        Depcrate_deserializerdeserialize_byte_record!();
+        Depcrate_deserializerDeRecord!();
+        Depcrate_deserializerDeRecordWrap!();
+        Depcrate_deserializerimpl_52!();
+        Depcrate_deserializerDeStringRecord!();
+        Depcrate_deserializerimpl_54!();
+        Depcrate_deserializerDeByteRecord!();
+        Depcrate_deserializerimpl_56!();
+        Depcrate_deserializerdeserialize_int!();
+        Depcrate_deserializerimpl_58!();
+        Depcrate_deserializerimpl_59!();
+        Depcrate_deserializerimpl_60!();
+        Depcrate_deserializerimpl_61!();
+        Depcrate_deserializerimpl_62!();
+        Depcrate_deserializerDeserializeError!();
+        Depcrate_deserializerDeserializeErrorKind!();
+        Depcrate_deserializerimpl_65!();
+        Depcrate_deserializerimpl_66!();
+        Depcrate_deserializerimpl_67!();
+        Depcrate_deserializerimpl_68!();
+        Depcrate_deserializerimpl_69!();
+        Depcrate_deserializerimpl_70!();
+        Depcrate_deserializertry_positive_integer128!();
+        Depcrate_deserializertry_negative_integer128!();
+        Depcrate_deserializertry_positive_integer64!();
+        Depcrate_deserializertry_negative_integer64!();
+        Depcrate_deserializertry_float!();
+        Depcrate_deserializertry_positive_integer64_bytes!();
+        Depcrate_deserializertry_negative_integer64_bytes!();
+        Depcrate_deserializertry_positive_integer128_bytes!();
+        Depcrate_deserializertry_negative_integer128_bytes!();
+        Depcrate_deserializertry_float_bytes!();
+        Depcrate_deserializertests!();
+    };
+}

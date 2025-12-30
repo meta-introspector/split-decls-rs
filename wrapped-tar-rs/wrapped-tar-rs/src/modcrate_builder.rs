@@ -1,0 +1,44 @@
+// Generated module macro for crate::builder
+macro_rules! Modcrate_builder {
+() => {
+        Depcrate_builderuse_41!();
+        Depcrate_builderuse_42!();
+        Depcrate_builderuse_43!();
+        Depcrate_builderuse_44!();
+        Depcrate_builderuse_45!();
+        Depcrate_builderuse_46!();
+        Depcrate_builderuse_47!();
+        Depcrate_builderuse_48!();
+        Depcrate_builderuse_49!();
+        Depcrate_builderuse_50!();
+        Depcrate_builderBuilder!();
+        Depcrate_builderBuilderOptions!();
+        Depcrate_builderimpl_53!();
+        Depcrate_builderSeekWrite!();
+        Depcrate_builderimpl_55!();
+        Depcrate_builderEntryWriter!();
+        Depcrate_builderimpl_57!();
+        Depcrate_builderimpl_58!();
+        Depcrate_builderimpl_59!();
+        Depcrate_builderappend!();
+        Depcrate_builderpad_zeroes!();
+        Depcrate_builderappend_path_with_name!();
+        Depcrate_builderappend_special!();
+        Depcrate_builderappend_file!();
+        Depcrate_builderappend_dir!();
+        Depcrate_builderprepare_header!();
+        Depcrate_builderprepare_header_path!();
+        Depcrate_builderprepare_header_link!();
+        Depcrate_builderprepare_header_sparse!();
+        Depcrate_builderappend_extended_sparse_headers!();
+        Depcrate_builderappend_fs!();
+        Depcrate_builderappend_dir_all!();
+        Depcrate_builderSparseEntries!();
+        Depcrate_builderimpl_74!();
+        Depcrate_builderSparseEntry!();
+        Depcrate_builderfind_sparse_entries!();
+        Depcrate_builderfind_sparse_entries_seek!();
+        Depcrate_builderimpl_78!();
+        Depcrate_buildertests!();
+    };
+}

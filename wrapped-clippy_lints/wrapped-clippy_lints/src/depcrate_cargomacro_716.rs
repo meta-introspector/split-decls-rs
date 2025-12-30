@@ -1,0 +1,9 @@
+// Generated macro for macro_716 (macro)
+macro_rules! Depcrate_cargomacro_716 {
+() => {
+// Module: crate::cargo
+// Provides: {"macro_716"}
+// Dependencies: {}
+declare_clippy_lint ! { # [doc = " ### What it does"] # [doc = " Checks to see if all common metadata is defined in"] # [doc = " `Cargo.toml`. See: https://rust-lang-nursery.github.io/api-guidelines/documentation.html#cargotoml-includes-all-common-metadata-c-metadata"] # [doc = ""] # [doc = " ### Why is this bad?"] # [doc = " It will be more difficult for users to discover the"] # [doc = " purpose of the crate, and key information related to it."] # [doc = ""] # [doc = " ### Example"] # [doc = " ```toml"] # [doc = " # This `Cargo.toml` is missing a description field:"] # [doc = " [package]"] # [doc = " name = \"clippy\""] # [doc = " version = \"0.0.212\""] # [doc = " repository = \"https://github.com/rust-lang/rust-clippy\""] # [doc = " readme = \"README.md\""] # [doc = " license = \"MIT OR Apache-2.0\""] # [doc = " keywords = [\"clippy\", \"lint\", \"plugin\"]"] # [doc = " categories = [\"development-tools\", \"development-tools::cargo-plugins\"]"] # [doc = " ```"] # [doc = ""] # [doc = " Should include a description field like:"] # [doc = ""] # [doc = " ```toml"] # [doc = " # This `Cargo.toml` includes all common metadata"] # [doc = " [package]"] # [doc = " name = \"clippy\""] # [doc = " version = \"0.0.212\""] # [doc = " description = \"A bunch of helpful lints to avoid common pitfalls in Rust\""] # [doc = " repository = \"https://github.com/rust-lang/rust-clippy\""] # [doc = " readme = \"README.md\""] # [doc = " license = \"MIT OR Apache-2.0\""] # [doc = " keywords = [\"clippy\", \"lint\", \"plugin\"]"] # [doc = " categories = [\"development-tools\", \"development-tools::cargo-plugins\"]"] # [doc = " ```"] # [clippy :: version = "1.32.0"] pub CARGO_COMMON_METADATA , cargo , "common metadata is defined in `Cargo.toml`" }
+};
+}

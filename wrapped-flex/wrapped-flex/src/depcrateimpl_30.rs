@@ -1,0 +1,9 @@
+// Generated macro for impl_30 (impl)
+macro_rules! Depcrateimpl_30 {
+() => {
+// Module: crate
+// Provides: {"impl_30"}
+// Dependencies: {}
+impl Example { fn render_spacer (spacer : Rect , buf : & mut Buffer) { if spacer . width > 1 { let corners_only = symbols :: border :: Set { top_left : line :: NORMAL . top_left , top_right : line :: NORMAL . top_right , bottom_left : line :: NORMAL . bottom_left , bottom_right : line :: NORMAL . bottom_right , vertical_left : " " , vertical_right : " " , horizontal_top : " " , horizontal_bottom : " " , } ; Block :: bordered () . border_set (corners_only) . border_style (Style :: reset () . dark_gray ()) . render (spacer , buf) ; } else { Paragraph :: new (Text :: from (vec ! [Line :: from ("") , Line :: from ("│") , Line :: from ("│") , Line :: from ("") ,])) . style (Style :: reset () . dark_gray ()) . render (spacer , buf) ; } let width = spacer . width ; let label = if width > 4 { format ! ("{width} px") } else if width > 2 { format ! ("{width}") } else { String :: new () } ; let text = Text :: from (vec ! [Line :: raw ("") , Line :: raw ("") , Line :: styled (label , Style :: reset () . dark_gray ()) ,]) ; Paragraph :: new (text) . style (Style :: reset () . dark_gray ()) . alignment (Alignment :: Center) . render (spacer , buf) ; } fn illustration (constraint : Constraint , width : u16) -> impl Widget { let main_color = color_for_constraint (constraint) ; let fg_color = Color :: White ; let title = format ! ("{constraint}") ; let content = format ! ("{width} px") ; let text = format ! ("{title}\n{content}") ; let block = Block :: bordered () . border_set (symbols :: border :: QUADRANT_OUTSIDE) . border_style (Style :: reset () . fg (main_color) . reversed ()) . style (Style :: default () . fg (fg_color) . bg (main_color)) ; Paragraph :: new (text) . centered () . block (block) } }
+};
+}

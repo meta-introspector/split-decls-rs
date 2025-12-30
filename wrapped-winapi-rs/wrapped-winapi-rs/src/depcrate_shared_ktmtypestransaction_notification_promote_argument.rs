@@ -1,0 +1,9 @@
+// Generated macro for TRANSACTION_NOTIFICATION_PROMOTE_ARGUMENT (type)
+macro_rules! Depcrate_shared_ktmtypesTRANSACTION_NOTIFICATION_PROMOTE_ARGUMENT {
+() => {
+// Module: crate::shared::ktmtypes
+// Provides: {"TRANSACTION_NOTIFICATION_PROMOTE_ARGUMENT"}
+// Dependencies: {}
+pub type TRANSACTION_NOTIFICATION_PROMOTE_ARGUMENT = TRANSACTION_NOTIFICATION_PROPAGATE_ARGUMENT ;
+};
+}

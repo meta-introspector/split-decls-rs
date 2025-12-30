@@ -1,0 +1,9 @@
+// Generated macro for add_step (function)
+macro_rules! Depcrate_proofadd_step {
+() => {
+// Module: crate::proof
+// Provides: {"add_step"}
+// Dependencies: {}
+# [doc = " Add a step to the proof."] # [doc = ""] # [doc = " Ignored when proof generation is disabled."] # [doc = ""] # [doc = " When `solver_vars` is true, all variables and literals will be converted from solver to global"] # [doc = " vars. Otherwise the proof step needs to use global vars."] pub fn add_step < 'a , 's > (mut ctx : partial ! (Context <'a >, mut ProofP <'a >, mut SolverStateP , VariablesP) , solver_vars : bool , step : & 's ProofStep < 's > ,) { if ctx . part (SolverStateP) . solver_error . is_some () { return ; } if ctx . part (SolverStateP) . solver_error . is_some () { return ; } let (variables , mut ctx) = ctx . split_part (VariablesP) ; let proof = ctx . part_mut (ProofP) ; let map_vars = | var | { if solver_vars { variables . global_from_solver () . get (var) . expect ("no existing global var for solver var") } else { var } } ; let io_result = match proof . format { Some (ProofFormat :: Varisat) => write_varisat_step (ctx . borrow () , map_vars , step) , Some (ProofFormat :: Drat) => { let step = proof . map_step . map (step , map_vars , | hash | hash) ; drat :: write_step (& mut proof . target , & step) } Some (ProofFormat :: BinaryDrat) => { let step = proof . map_step . map (step , map_vars , | hash | hash) ; drat :: write_binary_step (& mut proof . target , & step) } None => Ok (()) , } ; if io_result . is_ok () { let proof = ctx . part_mut (ProofP) ; if let Some (checker) = & mut proof . checker { let step = proof . map_step . map (step , map_vars , | hash | hash) ; let result = checker . self_check_step (step) ; handle_self_check_result (ctx . borrow () , result) ; } } handle_io_errors (ctx . borrow () , io_result) ; }
+};
+}

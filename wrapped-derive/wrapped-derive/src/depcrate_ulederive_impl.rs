@@ -1,0 +1,9 @@
+// Generated macro for derive_impl (function)
+macro_rules! Depcrate_ulederive_impl {
+() => {
+// Module: crate::ule
+// Provides: {"derive_impl"}
+// Dependencies: {}
+pub fn derive_impl (input : & DeriveInput) -> TokenStream2 { if ! utils :: ReprInfo :: compute (& input . attrs) . cpacked_or_transparent () { return Error :: new (input . span () , "derive(ULE) must be applied to a #[repr(C, packed)] or #[repr(transparent)] type" ,) . to_compile_error () ; } if input . generics . type_params () . next () . is_some () || input . generics . lifetimes () . next () . is_some () || input . generics . const_params () . next () . is_some () { return Error :: new (input . generics . span () , "derive(ULE) must be applied to a struct without any generics" ,) . to_compile_error () ; } let struc = if let Data :: Struct (ref s) = input . data { if s . fields . iter () . next () . is_none () { return Error :: new (input . span () , "derive(ULE) must be applied to a non-empty struct" ,) . to_compile_error () ; } s } else { return Error :: new (input . span () , "derive(ULE) must be applied to a struct") . to_compile_error () ; } ; let fields = FieldInfo :: make_list (struc . fields . iter ()) ; let (validators , remaining_offset) = generate_ule_validators (& fields) ; let name = & input . ident ; quote ! { unsafe impl zerovec :: ule :: ULE for # name { # [inline] fn validate_bytes (bytes : & [u8]) -> Result < () , zerovec :: ule :: UleError > { const SIZE : usize = :: core :: mem :: size_of ::<# name > () ; # [expect (clippy :: modulo_one)] if bytes . len () % SIZE != 0 { return Err (zerovec :: ule :: UleError :: length ::< Self > (bytes . len ())) ; } # [expect (clippy :: indexing_slicing)] for chunk in bytes . chunks_exact (SIZE) { # validators debug_assert_eq ! (# remaining_offset , SIZE) ; } Ok (()) } } } }
+};
+}

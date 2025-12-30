@@ -4,6 +4,6 @@ macro_rules! Depcrateuse_142 {
 // Module: crate
 // Provides: {"use_142"}
 // Dependencies: {}
-pub use self :: fair_mutex :: { const_fair_mutex , FairMutex , FairMutexGuard , MappedFairMutexGuard } ;
+pub use self :: once :: { Once , OnceState } ;
 };
 }

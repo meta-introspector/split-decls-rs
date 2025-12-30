@@ -1,0 +1,12 @@
+// Generated macro for assert_matches (macro)
+macro_rules! Depcrateassert_matches {
+() => {
+// Module: crate
+// Provides: {"assert_matches"}
+// Dependencies: {}
+# [doc = " Asserts that a value matches a pattern."] # [doc = ""] # [doc = " On panic, this macro will print a diff derived from [`Debug`] representation of"] # [doc = " the value, and a string representation of the pattern."] # [doc = ""] # [doc = " This is a drop in replacement for [`core::assert_matches::assert_matches!`]."] # [doc = " You can provide a custom panic message if desired."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " use pretty_assertions::assert_matches;"] # [doc = ""] # [doc = " let a = Some(3);"] # [doc = " assert_matches!(a, Some(_));"] # [doc = ""] # [doc = " assert_matches!(a, Some(value) if value > 2, \"we are testing {:?} with a pattern\", a);"] # [doc = " ```"] # [doc = ""] # [doc = " # Features"] # [doc = ""] # [doc = " Requires the `unstable` feature to be enabled."] # [doc = ""] # [doc = " **Please note:** implementation under the `unstable` feature may be changed between"] # [doc = " patch versions without warning."] # [cfg (feature = "unstable")] # [macro_export] macro_rules ! assert_matches { ($ left : expr , $ ($ pattern : pat) |+ $ (if $ guard : expr) ? $ (,) ?) => ({ match $ left { $ ($ pattern) |+ $ (if $ guard) ? => { } ref left_val => { $ crate :: assert_matches ! (@ left_val , :: core :: stringify ! ($ ($ pattern) |+ $ (if $ guard) ?) , "" , "") ; } } }) ; ($ left : expr , $ ($ pattern : pat) |+ $ (if $ guard : expr) ?, $ ($ arg : tt) +) => ({ match $ left { $ ($ pattern) |+ $ (if $ guard) ? => { } ref left_val => { $ crate :: assert_matches ! (@ left_val , :: core :: stringify ! ($ ($ pattern) |+ $ (if $ guard) ?) , ": " , $ ($ arg) +) ; } } }) ; (@ $ left : expr , $ right : expr , $ maybe_colon : expr , $ ($ arg : tt) *) => ({ match (& ($ left) , & ($ right)) { (left_val , right_val) => { struct Pattern <'a > (&'a str) ; impl :: core :: fmt :: Debug for Pattern <'_ > { fn fmt (& self , f : & mut :: core :: fmt :: Formatter <'_ >) -> :: core :: fmt :: Result { :: core :: fmt :: Display :: fmt (self . 0 , f) } } :: core :: panic ! ("assertion failed: `(left matches right)`{}{}\
+                   \n\
+                   \n{}\
+                   \n" , $ maybe_colon , format_args ! ($ ($ arg) *) , $ crate :: Comparison :: new (left_val , & Pattern (right_val))) } } }) ; }
+};
+}

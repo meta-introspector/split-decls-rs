@@ -1,0 +1,50 @@
+// Generated module macro for crate::rust_type
+macro_rules! Modcrate_rust_type {
+() => {
+        Depcrate_rust_typeuse_295!();
+        Depcrate_rust_typeuse_296!();
+        Depcrate_rust_typeuse_297!();
+        Depcrate_rust_typeuse_298!();
+        Depcrate_rust_typeuse_299!();
+        Depcrate_rust_typeuse_300!();
+        Depcrate_rust_typeuse_301!();
+        Depcrate_rust_typeuse_302!();
+        Depcrate_rust_typeuse_303!();
+        Depcrate_rust_typeuse_304!();
+        Depcrate_rust_typeuse_305!();
+        Depcrate_rust_typeuse_306!();
+        Depcrate_rust_typeuse_307!();
+        Depcrate_rust_typeuse_308!();
+        Depcrate_rust_typeuse_309!();
+        Depcrate_rust_typeuse_310!();
+        Depcrate_rust_typeParsePosition!();
+        Depcrate_rust_typeimpl_312!();
+        Depcrate_rust_typeAttributeParser!();
+        Depcrate_rust_typeimpl_314!();
+        Depcrate_rust_typeimpl_315!();
+        Depcrate_rust_typeimpl_316!();
+        Depcrate_rust_typeLifetime!();
+        Depcrate_rust_typeimpl_318!();
+        Depcrate_rust_typeupdate_nullability!();
+        Depcrate_rust_typecheck_nullability!();
+        Depcrate_rust_typeMethodArgumentQualifier!();
+        Depcrate_rust_typeSafetyProperty!();
+        Depcrate_rust_typeimpl_323!();
+        Depcrate_rust_typeTypeSafety!();
+        Depcrate_rust_typeimpl_325!();
+        Depcrate_rust_typePrimitive!();
+        Depcrate_rust_typeimpl_327!();
+        Depcrate_rust_typeimpl_328!();
+        Depcrate_rust_typeget_class_data!();
+        Depcrate_rust_typeparse_protocol!();
+        Depcrate_rust_typepad_generics!();
+        Depcrate_rust_typePointeeTy!();
+        Depcrate_rust_typeimpl_333!();
+        Depcrate_rust_typeTy!();
+        Depcrate_rust_typeimpl_335!();
+        Depcrate_rust_typemaybemaybeuninit!();
+        Depcrate_rust_typeparse_unexposed_tokens!();
+        Depcrate_rust_typeseparate_with_comma_and!();
+        Depcrate_rust_typetests!();
+    };
+}

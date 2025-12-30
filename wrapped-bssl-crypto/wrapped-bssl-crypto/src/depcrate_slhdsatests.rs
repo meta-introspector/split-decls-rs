@@ -1,0 +1,9 @@
+// Generated macro for tests (module)
+macro_rules! Depcrate_slhdsatests {
+() => {
+// Module: crate::slhdsa
+// Provides: {"tests"}
+// Dependencies: {}
+# [cfg (test)] mod tests { use super :: * ; # [test] fn test_key_generation_and_signature () { let (public_key , private_key) = PrivateKey :: generate () ; let msg = b"test message" ; let sig = private_key . sign (msg) ; assert ! (public_key . verify (msg , & sig) . is_ok ()) ; let mut invalid_sig = sig . clone () ; invalid_sig [0] ^= 1 ; assert ! (public_key . verify (msg , & invalid_sig) . is_err ()) ; } # [test] fn test_sign_and_verify_with_context () { let (public_key , private_key) = PrivateKey :: generate () ; let msg = b"test message" ; let context = b"test context" ; let sig = private_key . sign_with_context (msg , context) . unwrap () ; assert ! (public_key . verify_with_context (msg , & sig , context) . is_ok ()) ; assert ! (public_key . verify_with_context (msg , & sig , b"wrong context") . is_err ()) ; } # [test] fn test_public_key_from_private () { let (public_key , private_key) = PrivateKey :: generate () ; let derived_public_key = private_key . to_public_key () ; assert_eq ! (public_key . 0 , derived_public_key . 0) ; } # [test] fn test_empty_message_and_context () { let (public_key , private_key) = PrivateKey :: generate () ; let msg = b"" ; let context = b"" ; let sig = private_key . sign_with_context (msg , context) . unwrap () ; assert ! (public_key . verify_with_context (msg , & sig , context) . is_ok ()) ; } # [test] fn test_max_context_length () { let (public_key , private_key) = PrivateKey :: generate () ; let msg = b"test message" ; let context = vec ! [0u8 ; 255] ; let sig = private_key . sign_with_context (msg , & context) . unwrap () ; assert ! (public_key . verify_with_context (msg , & sig , & context) . is_ok ()) ; let too_long_context = vec ! [0u8 ; 256] ; assert ! (private_key . sign_with_context (msg , & too_long_context) . is_none ()) ; } }
+};
+}

@@ -1,0 +1,46 @@
+// Generated module macro for crate::server
+macro_rules! Modcrate_server {
+() => {
+        Depcrate_serveruse_829!();
+        Depcrate_serveruse_830!();
+        Depcrate_serveruse_831!();
+        Depcrate_serveruse_832!();
+        Depcrate_serveruse_833!();
+        Depcrate_serveruse_834!();
+        Depcrate_serveruse_835!();
+        Depcrate_serveruse_836!();
+        Depcrate_serveruse_837!();
+        Depcrate_serveruse_838!();
+        Depcrate_serveruse_839!();
+        Depcrate_serveruse_840!();
+        Depcrate_serveruse_841!();
+        Depcrate_serverHandshake!();
+        Depcrate_serverConnection!();
+        Depcrate_serverBuilder!();
+        Depcrate_serverSendResponse!();
+        Depcrate_serverSendPushedResponse!();
+        Depcrate_serverimpl_847!();
+        Depcrate_serverHandshaking!();
+        Depcrate_serverFlush!();
+        Depcrate_serverReadPreface!();
+        Depcrate_serverPeer!();
+        Depcrate_serverPREFACE!();
+        Depcrate_serverhandshake!();
+        Depcrate_serverimpl_854!();
+        Depcrate_serverimpl_855!();
+        Depcrate_serverimpl_856!();
+        Depcrate_serverimpl_857!();
+        Depcrate_serverimpl_858!();
+        Depcrate_serverimpl_859!();
+        Depcrate_serverimpl_860!();
+        Depcrate_serverimpl_861!();
+        Depcrate_serverimpl_862!();
+        Depcrate_serverimpl_863!();
+        Depcrate_serverimpl_864!();
+        Depcrate_serverimpl_865!();
+        Depcrate_serverimpl_866!();
+        Depcrate_serverimpl_867!();
+        Depcrate_serverimpl_868!();
+        Depcrate_serverimpl_869!();
+    };
+}

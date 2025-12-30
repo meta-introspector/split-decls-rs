@@ -1,0 +1,9 @@
+// Generated macro for serde (module)
+macro_rules! Depcrateserde {
+() => {
+// Module: crate
+// Provides: {"serde"}
+// Dependencies: {}
+mod serde ;
+};
+}

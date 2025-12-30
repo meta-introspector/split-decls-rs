@@ -1,0 +1,9 @@
+// Generated macro for test_tcp_accept_multi (function)
+macro_rules! Depcrate_tests_nettest_tcp_accept_multi {
+() => {
+// Module: crate::tests::net
+// Provides: {"test_tcp_accept_multi"}
+// Dependencies: {}
+pub fn test_tcp_accept_multi < S : squeue :: EntryMarker , C : cqueue :: EntryMarker > (ring : & mut IoUring < S , C > , test : & Test ,) -> anyhow :: Result < () > { require ! (test ; test . probe . is_supported (opcode :: Accept :: CODE) ; test . probe . is_supported (opcode :: Socket :: CODE) ;) ; println ! ("test tcp_accept_multi") ; let listener = TCP_LISTENER . get_or_try_init (| | TcpListener :: bind ("127.0.0.1:0")) ? ; let addr = listener . local_addr () ? ; let fd = types :: Fd (listener . as_raw_fd ()) ; let _stream1 = TcpStream :: connect (addr) ? ; let _stream2 = TcpStream :: connect (addr) ? ; let accept_e = opcode :: AcceptMulti :: new (fd) ; unsafe { ring . submission () . push (& accept_e . build () . user_data (2002) . into ()) . expect ("queue is full") ; } ring . submit_and_wait (2) ? ; let cqes : Vec < cqueue :: Entry > = ring . completion () . map (Into :: into) . collect () ; assert_eq ! (cqes . len () , 2) ; for cqe in cqes { assert_eq ! (cqe . user_data () , 2002) ; assert ! (cqe . result () >= 0) ; let fd = cqe . result () ; unsafe { libc :: close (fd) ; } } let cancel_e = opcode :: AsyncCancel :: new (2002) ; unsafe { ring . submission () . push (& cancel_e . build () . user_data (2003) . into ()) . expect ("queue is full") ; } ring . submit_and_wait (2) ? ; let cqes : Vec < cqueue :: Entry > = ring . completion () . map (Into :: into) . collect () ; assert_eq ! (cqes . len () , 2) ; let (op1 , op2) = match cqes [0] . user_data () { 2002 => (0 , 1) , _ => (1 , 0) , } ; assert_eq ! (cqes [op1] . user_data () , 2002) ; assert_eq ! (cqes [op2] . user_data () , 2003) ; assert_eq ! (cqes [op1] . result () , - libc :: ECANCELED) ; assert_eq ! (cqes [op2] . result () , 0) ; Ok (()) }
+};
+}

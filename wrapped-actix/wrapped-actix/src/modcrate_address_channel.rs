@@ -1,0 +1,53 @@
+// Generated module macro for crate::address::channel
+macro_rules! Modcrate_address_channel {
+() => {
+        Depcrate_address_channeluse_20!();
+        Depcrate_address_channeluse_21!();
+        Depcrate_address_channeluse_22!();
+        Depcrate_address_channeluse_23!();
+        Depcrate_address_channeluse_24!();
+        Depcrate_address_channeluse_25!();
+        Depcrate_address_channelSender!();
+        Depcrate_address_channelimpl_27!();
+        Depcrate_address_channelWeakSender!();
+        Depcrate_address_channelAddressSender!();
+        Depcrate_address_channelimpl_30!();
+        Depcrate_address_channelWeakAddressSender!();
+        Depcrate_address_channelimpl_32!();
+        Depcrate_address_channelimpl_33!();
+        Depcrate_address_channelimpl_34!();
+        Depcrate_address_channelimpl_35!();
+        Depcrate_address_channelAssertKinds!();
+        Depcrate_address_channelAddressReceiver!();
+        Depcrate_address_channelAddressSenderProducer!();
+        Depcrate_address_channelInner!();
+        Depcrate_address_channelState!();
+        Depcrate_address_channelimpl_41!();
+        Depcrate_address_channelOPEN_MASK!();
+        Depcrate_address_channelINIT_STATE!();
+        Depcrate_address_channelMAX_CAPACITY!();
+        Depcrate_address_channelMAX_BUFFER!();
+        Depcrate_address_channelSenderTask!();
+        Depcrate_address_channelimpl_47!();
+        Depcrate_address_channelchannel!();
+        Depcrate_address_channelimpl_49!();
+        Depcrate_address_channelimpl_50!();
+        Depcrate_address_channelimpl_51!();
+        Depcrate_address_channelimpl_52!();
+        Depcrate_address_channelimpl_53!();
+        Depcrate_address_channelimpl_54!();
+        Depcrate_address_channelimpl_55!();
+        Depcrate_address_channelimpl_56!();
+        Depcrate_address_channelimpl_57!();
+        Depcrate_address_channelimpl_58!();
+        Depcrate_address_channelimpl_59!();
+        Depcrate_address_channelimpl_60!();
+        Depcrate_address_channelimpl_61!();
+        Depcrate_address_channelimpl_62!();
+        Depcrate_address_channelimpl_63!();
+        Depcrate_address_channelimpl_64!();
+        Depcrate_address_channeldecode_state!();
+        Depcrate_address_channelencode_state!();
+        Depcrate_address_channeltests!();
+    };
+}

@@ -1,0 +1,9 @@
+// Generated macro for ERROR_GRAPHICS_OPM_VIDEO_OUTPUT_DOES_NOT_HAVE_OPM_SEMANTICS (const)
+macro_rules! Depcrate_shared_winerrorERROR_GRAPHICS_OPM_VIDEO_OUTPUT_DOES_NOT_HAVE_OPM_SEMANTICS {
+() => {
+// Module: crate::shared::winerror
+// Provides: {"ERROR_GRAPHICS_OPM_VIDEO_OUTPUT_DOES_NOT_HAVE_OPM_SEMANTICS"}
+// Dependencies: {}
+pub const ERROR_GRAPHICS_OPM_VIDEO_OUTPUT_DOES_NOT_HAVE_OPM_SEMANTICS : HRESULT = 0xC026251F ;
+};
+}

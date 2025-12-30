@@ -1,0 +1,9 @@
+// Generated macro for create_comp_flags_from_zip_params (function)
+macro_rules! Depcrate_deflate_corecreate_comp_flags_from_zip_params {
+() => {
+// Module: crate::deflate::core
+// Provides: {"create_comp_flags_from_zip_params"}
+// Dependencies: {}
+# [doc = " Create a set of compression flags using parameters used by zlib and other compressors."] # [doc = " Mainly intended for use with transition from c libraries as it deals with raw integers."] # [doc = ""] # [doc = " # Parameters"] # [doc = " `level` determines compression level. Clamped to maximum of 10. Negative values result in"] # [doc = " `CompressionLevel::DefaultLevel`."] # [doc = " `window_bits`: Above 0, wraps the stream in a zlib wrapper, 0 or negative for a raw deflate"] # [doc = " stream."] # [doc = " `strategy`: Sets the strategy if this conforms to any of the values in `CompressionStrategy`."] # [doc = ""] # [doc = " # Notes"] # [doc = " This function may be removed or moved to the `miniz_oxide_c_api` in the future."] pub fn create_comp_flags_from_zip_params (level : i32 , window_bits : i32 , strategy : i32) -> u32 { let num_probes = (if level >= 0 { cmp :: min (10 , level) } else { CompressionLevel :: DefaultLevel as i32 }) as usize ; let greedy = if level <= 3 { TDEFL_GREEDY_PARSING_FLAG } else { 0 } ; let mut comp_flags = u32 :: from (NUM_PROBES [num_probes]) | greedy ; if window_bits > 0 { comp_flags |= TDEFL_WRITE_ZLIB_HEADER ; } if level == 0 { comp_flags |= TDEFL_FORCE_ALL_RAW_BLOCKS ; } else if strategy == CompressionStrategy :: Filtered as i32 { comp_flags |= TDEFL_FILTER_MATCHES ; } else if strategy == CompressionStrategy :: HuffmanOnly as i32 { comp_flags &= ! MAX_PROBES_MASK ; } else if strategy == CompressionStrategy :: Fixed as i32 { comp_flags |= TDEFL_FORCE_ALL_STATIC_BLOCKS ; } else if strategy == CompressionStrategy :: RLE as i32 { comp_flags |= TDEFL_RLE_MATCHES ; } comp_flags }
+};
+}

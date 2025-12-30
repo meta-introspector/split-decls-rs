@@ -1,0 +1,9 @@
+// Generated macro for extent_alloc_t (type)
+macro_rules! Depcrateextent_alloc_t {
+() => {
+// Module: crate
+// Provides: {"extent_alloc_t"}
+// Dependencies: {}
+# [doc = " Extent allocation function."] # [doc = ""] # [doc = " On success returns a pointer to `size` bytes of mapped memory on behalf of"] # [doc = " arena `arena_ind` such that the extent's base address is a multiple of"] # [doc = " `alignment`, as well as setting `*zero` to indicate whether the extent is"] # [doc = " zeroed and `*commit` to indicate whether the extent is committed."] # [doc = ""] # [doc = " Zeroing is mandatory if `*zero` is `true` upon function entry. Committing is mandatory if"] # [doc = " `*commit` is true upon function entry. If `new_addr` is not null, the returned"] # [doc = " pointer must be `new_addr` on success or null on error."] # [doc = ""] # [doc = " Committed memory may be committed in absolute terms as on a system that does"] # [doc = " not overcommit, or in implicit terms as on a system that overcommits and"] # [doc = " satisfies physical memory needs on demand via soft page faults. Note that"] # [doc = " replacing the default extent allocation function makes the arena's"] # [doc = " `arena.<i>.dss` setting irrelevant."] # [doc = ""] # [doc = " # Errors"] # [doc = ""] # [doc = " On error the function returns null and leaves `*zero` and `*commit` unmodified."] # [doc = ""] # [doc = " # Safety"] # [doc = ""] # [doc = " The behavior is _undefined_ if:"] # [doc = ""] # [doc = " * the `size` parameter is not a multiple of the page size"] # [doc = " * the `alignment` parameter is not a power of two at least as large as the page size"] pub type extent_alloc_t = unsafe extern "C" fn (extent_hooks : * mut extent_hooks_t , new_addr : * mut c_void , size : size_t , alignment : size_t , zero : * mut c_bool , commit : * mut c_bool , arena_ind : c_uint ,) -> * mut c_void ;
+};
+}

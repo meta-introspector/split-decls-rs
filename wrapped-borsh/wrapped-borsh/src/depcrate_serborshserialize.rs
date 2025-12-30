@@ -1,0 +1,9 @@
+// Generated macro for BorshSerialize (trait)
+macro_rules! Depcrate_serBorshSerialize {
+() => {
+// Module: crate::ser
+// Provides: {"BorshSerialize"}
+// Dependencies: {}
+# [doc = " A data-structure that can be serialized into binary format by NBOR."] # [doc = ""] # [doc = " ```"] # [doc = " use borsh::BorshSerialize;"] # [doc = ""] # [doc = " /// derive is only available if borsh is built with `features = [\"derive\"]`"] # [doc = " # #[cfg(feature = \"derive\")]"] # [doc = " #[derive(BorshSerialize)]"] # [doc = " struct MyBorshSerializableStruct {"] # [doc = "     value: String,"] # [doc = " }"] # [doc = ""] # [doc = ""] # [doc = " # #[cfg(feature = \"derive\")]"] # [doc = " let x = MyBorshSerializableStruct { value: \"hello\".to_owned() };"] # [doc = " let mut buffer: Vec<u8> = Vec::new();"] # [doc = " # #[cfg(feature = \"derive\")]"] # [doc = " x.serialize(&mut buffer).unwrap();"] # [doc = " # #[cfg(feature = \"derive\")]"] # [doc = " let single_serialized_buffer_len = buffer.len();"] # [doc = ""] # [doc = " # #[cfg(feature = \"derive\")]"] # [doc = " x.serialize(&mut buffer).unwrap();"] # [doc = " # #[cfg(feature = \"derive\")]"] # [doc = " assert_eq!(buffer.len(), single_serialized_buffer_len * 2);"] # [doc = ""] # [doc = " # #[cfg(feature = \"derive\")]"] # [doc = " let mut buffer: Vec<u8> = vec![0; 1024 + single_serialized_buffer_len];"] # [doc = " # #[cfg(feature = \"derive\")]"] # [doc = " let mut buffer_slice_enough_for_the_data = &mut buffer[1024..1024 + single_serialized_buffer_len];"] # [doc = " # #[cfg(feature = \"derive\")]"] # [doc = " x.serialize(&mut buffer_slice_enough_for_the_data).unwrap();"] # [doc = " ```"] pub trait BorshSerialize { fn serialize < W : Write > (& self , writer : & mut W) -> Result < () > ; # [inline] # [doc (hidden)] fn u8_slice (slice : & [Self]) -> Option < & [u8] > where Self : Sized , { let _ = slice ; None } }
+};
+}

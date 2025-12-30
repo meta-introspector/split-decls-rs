@@ -4,6 +4,6 @@ macro_rules! Depcrate_uintimpl_447 {
 // Module: crate::uint
 // Provides: {"impl_447"}
 // Dependencies: {}
-impl < const LIMBS : usize > Unsigned for Uint < LIMBS > { type Monty = MontyForm < LIMBS > ; fn from_limb_like (limb : Limb , _other : & Self) -> Self { Self :: from (limb) } }
+impl < const LIMBS : usize > fmt :: Debug for Uint < LIMBS > { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { write ! (f , "Uint(0x{:X})" , self . as_uint_ref ()) } }
 };
 }

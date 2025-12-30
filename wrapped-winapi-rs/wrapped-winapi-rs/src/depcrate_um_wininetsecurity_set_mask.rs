@@ -1,0 +1,9 @@
+// Generated macro for SECURITY_SET_MASK (const)
+macro_rules! Depcrate_um_wininetSECURITY_SET_MASK {
+() => {
+// Module: crate::um::wininet
+// Provides: {"SECURITY_SET_MASK"}
+// Dependencies: {}
+pub const SECURITY_SET_MASK : DWORD = SECURITY_FLAG_IGNORE_REVOCATION | SECURITY_FLAG_IGNORE_UNKNOWN_CA | SECURITY_FLAG_IGNORE_CERT_CN_INVALID | SECURITY_FLAG_IGNORE_CERT_DATE_INVALID | SECURITY_FLAG_IGNORE_WRONG_USAGE ;
+};
+}

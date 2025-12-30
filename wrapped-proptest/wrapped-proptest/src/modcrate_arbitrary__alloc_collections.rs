@@ -1,0 +1,46 @@
+// Generated module macro for crate::arbitrary::_alloc::collections
+macro_rules! Modcrate_arbitrary__alloc_collections {
+() => {
+        Depcrate_arbitrary__alloc_collectionsuse_293!();
+        Depcrate_arbitrary__alloc_collectionsuse_294!();
+        Depcrate_arbitrary__alloc_collectionsuse_295!();
+        Depcrate_arbitrary__alloc_collectionsuse_296!();
+        Depcrate_arbitrary__alloc_collectionsuse_297!();
+        Depcrate_arbitrary__alloc_collectionsuse_298!();
+        Depcrate_arbitrary__alloc_collectionsuse_299!();
+        Depcrate_arbitrary__alloc_collectionsuse_300!();
+        Depcrate_arbitrary__alloc_collectionsRangedParams1!();
+        Depcrate_arbitrary__alloc_collectionsRangedParams2!();
+        Depcrate_arbitrary__alloc_collectionsimpl_1!();
+        Depcrate_arbitrary__alloc_collectionsmacro_304!();
+        Depcrate_arbitrary__alloc_collectionsdst_wrapped!();
+        Depcrate_arbitrary__alloc_collectionsmacro_306!();
+        Depcrate_arbitrary__alloc_collectionsmacro_307!();
+        Depcrate_arbitrary__alloc_collectionsmacro_308!();
+        Depcrate_arbitrary__alloc_collectionsmacro_309!();
+        Depcrate_arbitrary__alloc_collectionsmacro_310!();
+        Depcrate_arbitrary__alloc_collectionsmacro_311!();
+        Depcrate_arbitrary__alloc_collectionsmacro_312!();
+        Depcrate_arbitrary__alloc_collectionsinto_iter_1!();
+        Depcrate_arbitrary__alloc_collectionsmacro_314!();
+        Depcrate_arbitrary__alloc_collectionsmacro_315!();
+        Depcrate_arbitrary__alloc_collectionsmacro_316!();
+        Depcrate_arbitrary__alloc_collectionsmacro_317!();
+        Depcrate_arbitrary__alloc_collectionsmacro_318!();
+        Depcrate_arbitrary__alloc_collectionsmacro_319!();
+        Depcrate_arbitrary__alloc_collectionsmacro_320!();
+        Depcrate_arbitrary__alloc_collectionsmacro_321!();
+        Depcrate_arbitrary__alloc_collectionsmacro_322!();
+        Depcrate_arbitrary__alloc_collectionsmacro_323!();
+        Depcrate_arbitrary__alloc_collectionsimpl_324!();
+        Depcrate_arbitrary__alloc_collectionsimpl_325!();
+        Depcrate_arbitrary__alloc_collectionsmacro_326!();
+        Depcrate_arbitrary__alloc_collectionsmacro_327!();
+        Depcrate_arbitrary__alloc_collectionsimpl_328!();
+        Depcrate_arbitrary__alloc_collectionsmacro_329!();
+        Depcrate_arbitrary__alloc_collectionsimpl_330!();
+        Depcrate_arbitrary__alloc_collectionsmacro_331!();
+        Depcrate_arbitrary__alloc_collectionsmacro_332!();
+        Depcrate_arbitrary__alloc_collectionstest!();
+    };
+}

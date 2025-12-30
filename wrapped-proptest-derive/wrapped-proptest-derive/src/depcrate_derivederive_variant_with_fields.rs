@@ -1,0 +1,9 @@
+// Generated macro for derive_variant_with_fields (function)
+macro_rules! Depcrate_derivederive_variant_with_fields {
+() => {
+// Module: crate::derive
+// Provides: {"derive_variant_with_fields"}
+// Dependencies: {}
+# [doc = " Derive for a variant which has fields and where the"] # [doc = " variant or its fields may specify `params` or `no_params`."] fn derive_variant_with_fields < C > (ctx : Ctx , ut : & mut UseTracker , v_path : Path , attrs : ParsedAttributes , fields : Vec < Field > , acc : & mut PartsAcc < C > ,) -> DeriveResult < StratPair > { let filter = attrs . filter . clone () ; let pair = match attrs . params { ParamsMode :: Passthrough => match attrs . strategy { StratMode :: Strategy (strat) => { deny_all_attrs_on_fields (ctx , fields) ? ; pair_existential_self (strat) } StratMode :: Value (value) => { deny_all_attrs_on_fields (ctx , fields) ? ; pair_value_self (value) } StratMode :: Regex (regex) => { deny_all_attrs_on_fields (ctx , fields) ? ; pair_regex_self (regex) } StratMode :: Arbitrary => { variant_no_explicit_strategy (ctx , ut , v_path , fields , acc) ? } } , ParamsMode :: Default => { variant_handle_default_params (ctx , ut , v_path , attrs , fields) ? } ParamsMode :: Specified (params_ty) => extract_nparam (acc , params_ty , match attrs . strategy { StratMode :: Strategy (strat) => { deny_all_attrs_on_fields (ctx , fields) ? ; pair_existential_self (strat) } StratMode :: Value (value) => { deny_all_attrs_on_fields (ctx , fields) ? ; pair_value_exist_self (value) } StratMode :: Regex (regex) => { error :: cant_set_param_and_regex (ctx , error :: ENUM_VARIANT) ; deny_all_attrs_on_fields (ctx , fields) ? ; pair_regex_self (regex) } StratMode :: Arbitrary => { let ty = self_ty () ; error :: cant_set_param_but_not_strat (ctx , & ty , error :: ENUM_VARIANT ,) ? } } ,) , } ; let pair = add_filter_self (filter , pair) ; Ok (pair) }
+};
+}

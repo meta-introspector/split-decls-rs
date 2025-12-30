@@ -1,0 +1,44 @@
+// Generated module macro for crate::rc::retained_forwarding_impls
+macro_rules! Modcrate_rc_retained_forwarding_impls {
+() => {
+        Depcrate_rc_retained_forwarding_implsuse_793!();
+        Depcrate_rc_retained_forwarding_implsuse_794!();
+        Depcrate_rc_retained_forwarding_implsuse_795!();
+        Depcrate_rc_retained_forwarding_implsuse_796!();
+        Depcrate_rc_retained_forwarding_implsuse_797!();
+        Depcrate_rc_retained_forwarding_implsuse_798!();
+        Depcrate_rc_retained_forwarding_implsuse_799!();
+        Depcrate_rc_retained_forwarding_implsuse_800!();
+        Depcrate_rc_retained_forwarding_implsuse_801!();
+        Depcrate_rc_retained_forwarding_implsuse_802!();
+        Depcrate_rc_retained_forwarding_implsimpl_803!();
+        Depcrate_rc_retained_forwarding_implsimpl_804!();
+        Depcrate_rc_retained_forwarding_implsimpl_805!();
+        Depcrate_rc_retained_forwarding_implsimpl_806!();
+        Depcrate_rc_retained_forwarding_implsimpl_807!();
+        Depcrate_rc_retained_forwarding_implsimpl_808!();
+        Depcrate_rc_retained_forwarding_implsimpl_809!();
+        Depcrate_rc_retained_forwarding_implsforward_fmt_impl!();
+        Depcrate_rc_retained_forwarding_implsmacro_811!();
+        Depcrate_rc_retained_forwarding_implsmacro_812!();
+        Depcrate_rc_retained_forwarding_implsmacro_813!();
+        Depcrate_rc_retained_forwarding_implsmacro_814!();
+        Depcrate_rc_retained_forwarding_implsmacro_815!();
+        Depcrate_rc_retained_forwarding_implsmacro_816!();
+        Depcrate_rc_retained_forwarding_implsmacro_817!();
+        Depcrate_rc_retained_forwarding_implsmacro_818!();
+        Depcrate_rc_retained_forwarding_implsimpl_819!();
+        Depcrate_rc_retained_forwarding_implsimpl_820!();
+        Depcrate_rc_retained_forwarding_implsimpl_821!();
+        Depcrate_rc_retained_forwarding_implsimpl_822!();
+        Depcrate_rc_retained_forwarding_implsimpl_823!();
+        Depcrate_rc_retained_forwarding_implsimpl_824!();
+        Depcrate_rc_retained_forwarding_implsimpl_825!();
+        Depcrate_rc_retained_forwarding_implsimpl_826!();
+        Depcrate_rc_retained_forwarding_implsimpl_827!();
+        Depcrate_rc_retained_forwarding_implsimpl_828!();
+        Depcrate_rc_retained_forwarding_implsimpl_829!();
+        Depcrate_rc_retained_forwarding_implsimpl_830!();
+        Depcrate_rc_retained_forwarding_implsimpl_831!();
+    };
+}

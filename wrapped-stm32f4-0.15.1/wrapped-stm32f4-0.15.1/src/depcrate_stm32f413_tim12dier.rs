@@ -1,0 +1,9 @@
+// Generated macro for dier (module)
+macro_rules! Depcrate_stm32f413_tim12dier {
+() => {
+// Module: crate::stm32f413::tim12
+// Provides: {"dier"}
+// Dependencies: {}
+# [doc = "DMA/Interrupt enable register"] pub mod dier ;
+};
+}

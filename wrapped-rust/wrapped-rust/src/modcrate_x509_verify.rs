@@ -1,0 +1,49 @@
+// Generated module macro for crate::x509::verify
+macro_rules! Modcrate_x509_verify {
+() => {
+        Depcrate_x509_verifyuse_1077!();
+        Depcrate_x509_verifyuse_1078!();
+        Depcrate_x509_verifyuse_1079!();
+        Depcrate_x509_verifyuse_1080!();
+        Depcrate_x509_verifyuse_1081!();
+        Depcrate_x509_verifyuse_1082!();
+        Depcrate_x509_verifyuse_1083!();
+        Depcrate_x509_verifyuse_1084!();
+        Depcrate_x509_verifyextension_policy!();
+        Depcrate_x509_verifypolicy!();
+        Depcrate_x509_verifyuse_1116!();
+        Depcrate_x509_verifyuse_1117!();
+        Depcrate_x509_verifyuse_1118!();
+        Depcrate_x509_verifyuse_1119!();
+        Depcrate_x509_verifyuse_1120!();
+        Depcrate_x509_verifyuse_1121!();
+        Depcrate_x509_verifyuse_1122!();
+        Depcrate_x509_verifyuse_1123!();
+        Depcrate_x509_verifyuse_1124!();
+        Depcrate_x509_verifyPyCryptoOps!();
+        Depcrate_x509_verifyimpl_1126!();
+        Depcrate_x509_verifymacro_1127!();
+        Depcrate_x509_verifypolicy_builder_set_once_check!();
+        Depcrate_x509_verifyPolicyBuilder!();
+        Depcrate_x509_verifyimpl_1130!();
+        Depcrate_x509_verifyimpl_1131!();
+        Depcrate_x509_verifyPyCryptoPolicyDefinition!();
+        Depcrate_x509_verifySubjectOwner!();
+        Depcrate_x509_verifymacro_1134!();
+        Depcrate_x509_verifyPyVerifiedClient!();
+        Depcrate_x509_verifyPyClientVerifier!();
+        Depcrate_x509_verifyimpl_1137!();
+        Depcrate_x509_verifyimpl_1138!();
+        Depcrate_x509_verifyPyServerVerifier!();
+        Depcrate_x509_verifyimpl_1140!();
+        Depcrate_x509_verifyimpl_1141!();
+        Depcrate_x509_verifybuild_subject_owner!();
+        Depcrate_x509_verifybuild_subject!();
+        Depcrate_x509_verifyhandle_validation_error!();
+        Depcrate_x509_verifyPyCryptoOpsStore!();
+        Depcrate_x509_verifymacro_1146!();
+        Depcrate_x509_verifyPyStore!();
+        Depcrate_x509_verifyimpl_1148!();
+        Depcrate_x509_verifytests!();
+    };
+}

@@ -1,0 +1,9 @@
+// Generated macro for PUSB_FRAME_NUMBER_AND_QPC_FOR_TIME_SYNC_INFORMATION (type)
+macro_rules! Depcrate_shared_usbioctlPUSB_FRAME_NUMBER_AND_QPC_FOR_TIME_SYNC_INFORMATION {
+() => {
+// Module: crate::shared::usbioctl
+// Provides: {"PUSB_FRAME_NUMBER_AND_QPC_FOR_TIME_SYNC_INFORMATION"}
+// Dependencies: {}
+pub type PUSB_FRAME_NUMBER_AND_QPC_FOR_TIME_SYNC_INFORMATION = * mut USB_FRAME_NUMBER_AND_QPC_FOR_TIME_SYNC_INFORMATION ;
+};
+}

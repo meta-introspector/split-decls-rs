@@ -1,0 +1,41 @@
+// Generated module macro for crate::pax
+macro_rules! Modcrate_pax {
+() => {
+        Depcrate_paxuse_181!();
+        Depcrate_paxuse_182!();
+        Depcrate_paxuse_183!();
+        Depcrate_paxuse_184!();
+        Depcrate_paxuse_185!();
+        Depcrate_paxPAX_NONE!();
+        Depcrate_paxPAX_PATH!();
+        Depcrate_paxPAX_LINKPATH!();
+        Depcrate_paxPAX_SIZE!();
+        Depcrate_paxPAX_UID!();
+        Depcrate_paxPAX_GID!();
+        Depcrate_paxPAX_UNAME!();
+        Depcrate_paxPAX_GNAME!();
+        Depcrate_paxPAX_MTIME!();
+        Depcrate_paxPAX_ATIME!();
+        Depcrate_paxPAX_CTIME!();
+        Depcrate_paxPAX_CHARSET!();
+        Depcrate_paxPAX_COMMENT!();
+        Depcrate_paxPAX_SCHILYXATTR!();
+        Depcrate_paxPAX_GNUSPARSE!();
+        Depcrate_paxPAX_GNUSPARSENUMBLOCKS!();
+        Depcrate_paxPAX_GNUSPARSEOFFSET!();
+        Depcrate_paxPAX_GNUSPARSENUMBYTES!();
+        Depcrate_paxPAX_GNUSPARSEMAP!();
+        Depcrate_paxPAX_GNUSPARSENAME!();
+        Depcrate_paxPAX_GNUSPARSEMAJOR!();
+        Depcrate_paxPAX_GNUSPARSEMINOR!();
+        Depcrate_paxPAX_GNUSPARSESIZE!();
+        Depcrate_paxPAX_GNUSPARSEREALSIZE!();
+        Depcrate_paxPaxExtensions!();
+        Depcrate_paximpl_211!();
+        Depcrate_paxPaxExtension!();
+        Depcrate_paxpax_extensions_value!();
+        Depcrate_paximpl_214!();
+        Depcrate_paximpl_215!();
+        Depcrate_paximpl_216!();
+    };
+}

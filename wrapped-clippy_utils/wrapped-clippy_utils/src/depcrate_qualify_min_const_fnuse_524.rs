@@ -1,0 +1,9 @@
+// Generated macro for use_524 (use)
+macro_rules! Depcrate_qualify_min_const_fnuse_524 {
+() => {
+// Module: crate::qualify_min_const_fn
+// Provides: {"use_524"}
+// Dependencies: {}
+use rustc_middle :: mir :: { Body , CastKind , NonDivergingIntrinsic , NullOp , Operand , Place , ProjectionElem , Rvalue , Statement , StatementKind , Terminator , TerminatorKind , } ;
+};
+}

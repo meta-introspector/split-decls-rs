@@ -1,0 +1,43 @@
+// Generated module macro for crate::zone
+macro_rules! Modcrate_zone {
+() => {
+        Depcrate_zoneiana!();
+        Depcrate_zoneoffset!();
+        Depcrate_zonewindows!();
+        Depcrate_zonezone_name_timestamp!();
+        Depcrate_zoneuse_183!();
+        Depcrate_zoneuse_184!();
+        Depcrate_zoneuse_185!();
+        Depcrate_zoneuse_186!();
+        Depcrate_zoneuse_187!();
+        Depcrate_zoneuse_188!();
+        Depcrate_zoneuse_189!();
+        Depcrate_zoneuse_190!();
+        Depcrate_zoneuse_191!();
+        Depcrate_zoneuse_192!();
+        Depcrate_zoneuse_193!();
+        Depcrate_zoneuse_194!();
+        Depcrate_zoneuse_195!();
+        Depcrate_zoneuse_196!();
+        Depcrate_zoneuse_197!();
+        Depcrate_zoneuse_198!();
+        Depcrate_zonemodels!();
+        Depcrate_zoneTimeZone!();
+        Depcrate_zoneimpl_201!();
+        Depcrate_zoneimpl_202!();
+        Depcrate_zoneimpl_203!();
+        Depcrate_zoneimpl_204!();
+        Depcrate_zoneTimeZoneInfo!();
+        Depcrate_zoneimpl_206!();
+        Depcrate_zoneimpl_207!();
+        Depcrate_zoneimpl_208!();
+        Depcrate_zoneimpl_209!();
+        Depcrate_zoneimpl_210!();
+        Depcrate_zoneimpl_211!();
+        Depcrate_zoneimpl_212!();
+        Depcrate_zoneimpl_213!();
+        Depcrate_zoneuse_214!();
+        Depcrate_zoneimpl_215!();
+        Depcrate_zonetest_zone_info_equality!();
+    };
+}

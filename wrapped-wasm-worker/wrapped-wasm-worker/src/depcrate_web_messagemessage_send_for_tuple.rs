@@ -1,0 +1,9 @@
+// Generated macro for message_send_for_tuple (macro)
+macro_rules! Depcrate_web_messagemessage_send_for_tuple {
+() => {
+// Module: crate::web::message
+// Provides: {"message_send_for_tuple"}
+// Dependencies: {}
+# [doc = " Implement [`MessageSend`] for a tuple."] macro_rules ! message_send_for_tuple { ($ size : literal , $ _ : ident , $ ($ generic : ident => $ index : tt) ,+) => { impl <$ ($ generic : MessageSend) ,+> MessageSend for ($ ($ generic ,) +) { type Send = ($ (Option <$ generic :: Send >,) +) ; fn send < E : Extend < JsValue >> (self , transfer : & mut E) -> RawMessage < Self :: Send > { let mut serialize_builder = None ; let mut empty_serialize_count = 0 ; let mut has_send = false ; let send = ($ ({ let message = self .$ index . send (transfer) ; # [allow (clippy :: mixed_read_write_in_expression , unused_assignments)] if let Some (serialize) = message . serialize { serialize_builder . get_or_insert_with (|| { let mut builder = ArrayBuilder :: new () ; builder . extend (iter :: repeat (JsValue :: NULL) . take (empty_serialize_count)) ; builder }) . push (serialize) ; } else { empty_serialize_count += 1 ; } if message . send . is_some () { has_send = true ; } message . send } ,) +) ; RawMessage { send : has_send . then_some (send) , serialize : serialize_builder . and_then (ArrayBuilder :: finish) . map (Array :: unchecked_into) , } } fn receive (serialized : Option < JsValue >, mut sent : Option < Self :: Send >) -> Self { let serialized = serialized . map (Array :: unchecked_from_js) ; if let Some (serialized) = & serialized { debug_assert_eq ! (serialized . length () , $ size , "unexpected array size during message receival") ; } ($ ({ let serialized = serialized . as_ref () . map (| serialized | serialized . get ($ index)) . filter (| value | ! value . is_null ()) ; let sent = sent . as_mut () . and_then (| sent | sent .$ index . take ()) ; $ generic :: receive (serialized , sent) } ,) +) } } } ; }
+};
+}

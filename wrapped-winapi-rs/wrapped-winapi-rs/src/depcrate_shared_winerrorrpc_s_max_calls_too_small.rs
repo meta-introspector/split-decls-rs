@@ -1,0 +1,9 @@
+// Generated macro for RPC_S_MAX_CALLS_TOO_SMALL (const)
+macro_rules! Depcrate_shared_winerrorRPC_S_MAX_CALLS_TOO_SMALL {
+() => {
+// Module: crate::shared::winerror
+// Provides: {"RPC_S_MAX_CALLS_TOO_SMALL"}
+// Dependencies: {}
+pub const RPC_S_MAX_CALLS_TOO_SMALL : DWORD = 1742 ;
+};
+}

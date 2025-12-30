@@ -1,0 +1,9 @@
+// Generated macro for PMEMORY_PARTITION_PAGEFILE_INFORMATION (type)
+macro_rules! Depcrate_ntmmapiPMEMORY_PARTITION_PAGEFILE_INFORMATION {
+() => {
+// Module: crate::ntmmapi
+// Provides: {"PMEMORY_PARTITION_PAGEFILE_INFORMATION"}
+// Dependencies: {}
+pub type PMEMORY_PARTITION_PAGEFILE_INFORMATION = * mut MEMORY_PARTITION_PAGEFILE_INFORMATION ;
+};
+}

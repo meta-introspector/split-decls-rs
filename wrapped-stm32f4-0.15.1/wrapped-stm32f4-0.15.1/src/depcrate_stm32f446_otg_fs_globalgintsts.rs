@@ -1,0 +1,9 @@
+// Generated macro for gintsts (module)
+macro_rules! Depcrate_stm32f446_otg_fs_globalgintsts {
+() => {
+// Module: crate::stm32f446::otg_fs_global
+// Provides: {"gintsts"}
+// Dependencies: {}
+# [doc = "OTG_FS core interrupt register (OTG_FS_GINTSTS)"] pub mod gintsts ;
+};
+}

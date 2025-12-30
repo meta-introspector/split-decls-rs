@@ -1,0 +1,9 @@
+// Generated macro for ZeroTrieSimpleAscii (struct)
+macro_rules! Depcrate_zerotrieZeroTrieSimpleAscii {
+() => {
+// Module: crate::zerotrie
+// Provides: {"ZeroTrieSimpleAscii"}
+// Dependencies: {}
+# [doc = " A data structure that compactly maps from ASCII strings to integers."] # [doc = ""] # [doc = " For more information, see [`ZeroTrie`]."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " use litemap::LiteMap;"] # [doc = " use zerotrie::ZeroTrieSimpleAscii;"] # [doc = ""] # [doc = " let mut map = LiteMap::new_vec();"] # [doc = " map.insert(&b\"foo\"[..], 1);"] # [doc = " map.insert(b\"bar\", 2);"] # [doc = " map.insert(b\"bazzoo\", 3);"] # [doc = ""] # [doc = " let trie = ZeroTrieSimpleAscii::try_from(&map)?;"] # [doc = ""] # [doc = " assert_eq!(trie.get(b\"foo\"), Some(1));"] # [doc = " assert_eq!(trie.get(b\"bar\"), Some(2));"] # [doc = " assert_eq!(trie.get(b\"bazzoo\"), Some(3));"] # [doc = " assert_eq!(trie.get(b\"unknown\"), None);"] # [doc = ""] # [doc = " # Ok::<_, zerotrie::ZeroTrieBuildError>(())"] # [doc = " ```"] # [doc = ""] # [doc = " The trie can only store ASCII bytes; a string with non-ASCII always returns None:"] # [doc = ""] # [doc = " ```"] # [doc = " use zerotrie::ZeroTrieSimpleAscii;"] # [doc = ""] # [doc = " // A trie with two values: \"abc\" and \"abcdef\""] # [doc = " let trie = ZeroTrieSimpleAscii::from_bytes(b\"abc\\x80def\\x81\");"] # [doc = ""] # [doc = " assert!(trie.get(b\"ab\\xFF\").is_none());"] # [doc = " ```"] # [repr (transparent)] # [derive (Debug , Default , Clone , Copy , PartialEq , Eq)] # [cfg_attr (feature = "databake" , derive (databake :: Bake))] # [cfg_attr (feature = "databake" , databake (path = zerotrie))] # [allow (clippy :: exhaustive_structs)] pub struct ZeroTrieSimpleAscii < Store : ? Sized > { # [doc (hidden)] pub store : Store , }
+};
+}

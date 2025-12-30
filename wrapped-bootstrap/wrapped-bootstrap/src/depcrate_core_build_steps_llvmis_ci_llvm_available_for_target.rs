@@ -1,0 +1,9 @@
+// Generated macro for is_ci_llvm_available_for_target (function)
+macro_rules! Depcrate_core_build_steps_llvmis_ci_llvm_available_for_target {
+() => {
+// Module: crate::core::build_steps::llvm
+// Provides: {"is_ci_llvm_available_for_target"}
+// Dependencies: {}
+# [doc = " Returns whether the CI-found LLVM is currently usable."] # [doc = ""] # [doc = " This checks the build triple platform to confirm we're usable at all, and if LLVM"] # [doc = " with/without assertions is available."] pub (crate) fn is_ci_llvm_available_for_target (host_target : & TargetSelection , asserts : bool ,) -> bool { let supported_platforms = [("aarch64-unknown-linux-gnu" , false) , ("aarch64-apple-darwin" , false) , ("aarch64-pc-windows-msvc" , false) , ("i686-pc-windows-gnu" , false) , ("i686-pc-windows-msvc" , false) , ("i686-unknown-linux-gnu" , false) , ("x86_64-unknown-linux-gnu" , true) , ("x86_64-apple-darwin" , true) , ("x86_64-pc-windows-gnu" , true) , ("x86_64-pc-windows-msvc" , true) , ("aarch64-unknown-linux-musl" , false) , ("arm-unknown-linux-gnueabi" , false) , ("arm-unknown-linux-gnueabihf" , false) , ("armv7-unknown-linux-gnueabihf" , false) , ("loongarch64-unknown-linux-gnu" , false) , ("loongarch64-unknown-linux-musl" , false) , ("powerpc-unknown-linux-gnu" , false) , ("powerpc64-unknown-linux-gnu" , false) , ("powerpc64le-unknown-linux-gnu" , false) , ("powerpc64le-unknown-linux-musl" , false) , ("riscv64gc-unknown-linux-gnu" , false) , ("s390x-unknown-linux-gnu" , false) , ("x86_64-unknown-freebsd" , false) , ("x86_64-unknown-illumos" , false) , ("x86_64-unknown-linux-musl" , false) , ("x86_64-unknown-netbsd" , false) ,] ; if ! supported_platforms . contains (& (& * host_target . triple , asserts)) && (asserts || ! supported_platforms . contains (& (& * host_target . triple , true))) { return false ; } true }
+};
+}

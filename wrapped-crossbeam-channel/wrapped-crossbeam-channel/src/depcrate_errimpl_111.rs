@@ -1,0 +1,9 @@
+// Generated macro for impl_111 (impl)
+macro_rules! Depcrate_errimpl_111 {
+() => {
+// Module: crate::err
+// Provides: {"impl_111"}
+// Dependencies: {}
+impl < T > SendTimeoutError < T > { # [doc = " Unwraps the message."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " use std::time::Duration;"] # [doc = " use crossbeam_channel::unbounded;"] # [doc = ""] # [doc = " let (s, r) = unbounded();"] # [doc = ""] # [doc = " if let Err(err) = s.send_timeout(\"foo\", Duration::from_secs(1)) {"] # [doc = "     assert_eq!(err.into_inner(), \"foo\");"] # [doc = " }"] # [doc = " ```"] pub fn into_inner (self) -> T { match self { Self :: Timeout (v) => v , Self :: Disconnected (v) => v , } } # [doc = " Returns `true` if the send operation timed out."] pub fn is_timeout (& self) -> bool { matches ! (self , Self :: Timeout (_)) } # [doc = " Returns `true` if the send operation failed because the channel is disconnected."] pub fn is_disconnected (& self) -> bool { matches ! (self , Self :: Disconnected (_)) } }
+};
+}

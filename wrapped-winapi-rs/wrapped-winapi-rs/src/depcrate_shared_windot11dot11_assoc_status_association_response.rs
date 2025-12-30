@@ -1,0 +1,9 @@
+// Generated macro for DOT11_ASSOC_STATUS_ASSOCIATION_RESPONSE (const)
+macro_rules! Depcrate_shared_windot11DOT11_ASSOC_STATUS_ASSOCIATION_RESPONSE {
+() => {
+// Module: crate::shared::windot11
+// Provides: {"DOT11_ASSOC_STATUS_ASSOCIATION_RESPONSE"}
+// Dependencies: {}
+pub const DOT11_ASSOC_STATUS_ASSOCIATION_RESPONSE : DOT11_ASSOC_STATUS = 0x00030000 ;
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for Definition (struct)
+macro_rules! Depcrate_graphql_scalarDefinition {
+() => {
+// Module: crate::graphql_scalar
+// Provides: {"Definition"}
+// Dependencies: {}
+# [doc = " Definition of [GraphQL scalar][1] for code generation."] # [doc = ""] # [doc = " [1]: https://spec.graphql.org/October2021#sec-Scalars"] struct Definition { # [doc = " Name of this [GraphQL scalar][1] in GraphQL schema."] # [doc = ""] # [doc = " [1]: https://spec.graphql.org/October2021#sec-Scalars"] name : String , # [doc = " [`TypeOrIdent`] of this [GraphQL scalar][1] in GraphQL schema."] # [doc = ""] # [doc = " [1]: https://spec.graphql.org/October2021#sec-Scalars"] ty : TypeOrIdent , # [doc = " Additional [`Self::generics`] [`syn::WhereClause`] predicates."] where_clause : Vec < syn :: WherePredicate > , # [doc = " Generics of the Rust type that this [GraphQL scalar][1] is implemented"] # [doc = " for."] # [doc = ""] # [doc = " [1]: https://spec.graphql.org/October2021#sec-Scalars"] generics : syn :: Generics , # [doc = " [`GraphQLScalarMethods`] representing [GraphQL scalar][1]."] # [doc = ""] # [doc = " [1]: https://spec.graphql.org/October2021#sec-Scalars"] methods : Methods , # [doc = " Description of this [GraphQL scalar][1] to put into GraphQL schema."] # [doc = ""] # [doc = " [1]: https://spec.graphql.org/October2021#sec-Scalars"] description : Option < Description > , # [doc = " Spec [`Url`] of this [GraphQL scalar][1] to put into GraphQL schema."] # [doc = ""] # [doc = " [1]: https://spec.graphql.org/October2021#sec-Scalars"] specified_by_url : Option < Url > , # [doc = " [`ScalarValue`] parametrization to generate [`GraphQLType`]"] # [doc = " implementation with for this [GraphQL scalar][1]."] # [doc = ""] # [doc = " [`GraphQLType`]: juniper::GraphQLType"] # [doc = " [`ScalarValue`]: juniper::ScalarValue"] # [doc = " [1]: https://spec.graphql.org/October2021#sec-Scalars"] scalar : scalar :: Type , }
+};
+}

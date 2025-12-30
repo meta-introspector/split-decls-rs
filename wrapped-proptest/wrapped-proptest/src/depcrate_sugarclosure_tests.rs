@@ -1,0 +1,9 @@
+// Generated macro for closure_tests (module)
+macro_rules! Depcrate_sugarclosure_tests {
+() => {
+// Module: crate::sugar
+// Provides: {"closure_tests"}
+// Dependencies: {}
+# [cfg (test)] mod closure_tests { # [test] fn test_simple () { let x = 420 ; proptest ! (| (y : i32) | { assert ! (x != y) ; }) ; proptest ! (| (y in 0 .. 100) | { println ! ("{}" , y) ; assert ! (x != y) ; }) ; proptest ! (| (y : i32 ,) | { assert ! (x != y) ; }) ; proptest ! (| (y in 0 .. 100 ,) | { println ! ("{}" , y) ; assert ! (x != y) ; }) ; } # [test] fn test_move () { let foo = Foo ; proptest ! (move | (x in 1 .. 100 , y in 0 .. 100) | { assert ! (x + y > 0 , "foo: {:?}" , foo) ; }) ; let foo = Foo ; proptest ! (move | (x : () , y : ()) | { assert ! (x == y , "foo: {:?}" , foo) ; }) ; # [derive (Debug)] struct Foo ; } # [test] # [should_panic] # [allow (unreachable_code)] fn fails_if_closure_panics () { proptest ! (| (_ in 0 .. 1) | { panic ! () }) ; } # [test] fn accepts_unblocked_syntax () { proptest ! (| (x in 0u32 .. 10 , y in 10u32 .. 20) | assert ! (x < y)) ; proptest ! (| (x in 0u32 .. 10 , y in 10u32 .. 20 ,) | assert ! (x < y)) ; } # [test] fn accepts_custom_config () { let conf = crate :: test_runner :: Config :: default () ; proptest ! (conf , | (x in 0u32 .. 10 , y in 10u32 .. 20) | assert ! (x < y)) ; proptest ! (& conf , | (x in 0u32 .. 10 , y in 10u32 .. 20) | assert ! (x < y)) ; proptest ! (conf , move | (x in 0u32 .. 10 , y in 10u32 .. 20) | assert ! (x < y)) ; proptest ! (conf , | (_x : u32 , _y : u32) | { }) ; proptest ! (conf , move | (_x : u32 , _y : u32) | { }) ; proptest ! (conf , | (x in 0u32 .. 10 , y in 10u32 .. 20 ,) | assert ! (x < y)) ; proptest ! (& conf , | (x in 0u32 .. 10 , y in 10u32 .. 20 ,) | assert ! (x < y)) ; proptest ! (conf , move | (x in 0u32 .. 10 , y in 10u32 .. 20 ,) | assert ! (x < y)) ; proptest ! (conf , | (_x : u32 , _y : u32 ,) | { }) ; proptest ! (conf , move | (_x : u32 , _y : u32 ,) | { }) ; } }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for impl_20 (impl)
+macro_rules! Depcrateimpl_20 {
+() => {
+// Module: crate
+// Provides: {"impl_20"}
+// Dependencies: {}
+impl Tai64N { # [doc = " Unix epoch in `TAI64N`: 1970-01-01 00:00:37 TAI."] pub const UNIX_EPOCH : Self = Self (Tai64 :: UNIX_EPOCH , 0) ; # [doc = " Length of serialized `TAI64N` timestamp."] pub const BYTE_SIZE : usize = 12 ; # [doc = " Get `TAI64N` timestamp according to system clock."] # [cfg (feature = "std")] pub fn now () -> Self { Self :: from_system_time (& SystemTime :: now ()) } # [doc = " Parse TAI64N from a byte slice"] pub fn from_slice (slice : & [u8]) -> Result < Self , Error > { slice . try_into () } # [doc = " Serialize TAI64N as bytes"] pub fn to_bytes (self) -> [u8 ; Tai64N :: BYTE_SIZE] { self . into () } # [doc = " Calculate how much time passes since the `other` timestamp."] # [doc = ""] # [doc = " Returns `Ok(Duration)` if `other` is earlier than `self`,"] # [doc = " `Err(Duration)` otherwise."] pub fn duration_since (& self , other : & Self) -> Result < Duration , Duration > { if self >= other { let (carry , n) = if self . 1 >= other . 1 { (0 , self . 1 - other . 1) } else { (1 , NANOS_PER_SECOND + self . 1 - other . 1) } ; let s = (self . 0) . 0 - carry - (other . 0) . 0 ; Ok (Duration :: new (s , n)) } else { # [allow (clippy :: unwrap_used)] Err (other . duration_since (self) . unwrap ()) } } # [doc = " Convert `SystemTime` to `TAI64N`."] # [allow (clippy :: trivially_copy_pass_by_ref)] # [cfg (feature = "std")] pub fn from_system_time (t : & SystemTime) -> Self { match t . duration_since (UNIX_EPOCH) { Ok (d) => Self :: UNIX_EPOCH + d , Err (e) => Self :: UNIX_EPOCH - e . duration () , } } # [doc = " Convert `TAI64N`to `SystemTime`."] # [cfg (feature = "std")] pub fn to_system_time (self) -> SystemTime { match self . duration_since (& Self :: UNIX_EPOCH) { Ok (d) => UNIX_EPOCH + d , Err (d) => UNIX_EPOCH - d , } } }
+};
+}

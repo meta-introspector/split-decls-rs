@@ -1,0 +1,9 @@
+// Generated macro for impl_100 (impl)
+macro_rules! Depcrate_check_consts_opsimpl_100 {
+() => {
+// Module: crate::check_consts::ops
+// Provides: {"impl_100"}
+// Dependencies: {}
+impl < 'tcx > NonConstOp < 'tcx > for RawPtrToIntCast { fn build_error (& self , ccx : & ConstCx < '_ , 'tcx > , span : Span) -> Diag < 'tcx > { ccx . dcx () . create_err (errors :: RawPtrToIntErr { span }) } }
+};
+}

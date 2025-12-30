@@ -1,0 +1,62 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcrateimpl_32.rs");
+include!("depcrate_memfduse_8.rs");
+include!("depcrateput_value.rs");
+include!("depcrate_socketsend_one_fd_to.rs");
+include!("depcrateuse_1.rs");
+include!("depcrate_socketother_26.rs");
+include!("depcrateimpl_40.rs");
+include!("depcrateimpl_38.rs");
+include!("depcrateimpl_44.rs");
+include!("depcrate_socketuse_19.rs");
+include!("depcratespanfields.rs");
+include!("depcrate_memfduse_7.rs");
+include!("depcrate_socketcmsg_bufsize.rs");
+include!("depcratejournald_path.rs");
+include!("depcrate_socketuse_17.rs");
+include!("depcratepriority.rs");
+include!("depcrateput_metadata.rs");
+include!("depcratespanvisitor.rs");
+include!("depcrate_socketuse_23.rs");
+include!("depcrate_memfdmemfd_create_syscall.rs");
+include!("depcrate_socketuse_18.rs");
+include!("depcrate_socketuse_20.rs");
+include!("depcrate_memfdcreate_sealable.rs");
+include!("depcrate_memfduse_10.rs");
+include!("depcratelayer.rs");
+include!("depcrate_socketuse_21.rs");
+include!("depcratelayer.rs");
+include!("depcrate_memfdseal_fully.rs");
+include!("depcrateimpl_34.rs");
+include!("depcrate_socketassert_cmsg_bufsize.rs");
+include!("depcratememfd.rs");
+include!("depcrate_memfduse_9.rs");
+include!("depcratesocket.rs");
+include!("depcrateprioritymappings.rs");
+include!("depcrate_memfduse_11.rs");
+include!("depcrate_socketuse_24.rs");
+include!("depcrateimpl_37.rs");
+include!("depcrate_memfdcreate.rs");
+include!("depcrateput_field_length_encoded.rs");
+include!("depcrateput_field_wellformed.rs");
+include!("depcrate_socketuse_22.rs");
+include!("depcrate_memfduse_6.rs");
+include!("depcrateimpl_41.rs");
+include!("depcrateeventvisitor.rs");
+include!("depcrateuse_2.rs");
+include!("depcrate_socketcmsg_buffer_size_for_one_fd.rs");
+include!("depcrateuse_3.rs");
+include!("depcrateuse_4.rs");
+include!("depcrateimpl_45.rs");
+include!("depcratesanitize_name.rs");
+include!("modcrate.rs");
+include!("modcrate_socket.rs");
+include!("modcrate_memfd.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate!();
+    Modcrate_socket!();
+    Modcrate_memfd!();
+}

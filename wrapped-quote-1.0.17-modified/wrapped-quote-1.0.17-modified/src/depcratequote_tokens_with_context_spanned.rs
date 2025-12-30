@@ -1,0 +1,9 @@
+// Generated macro for quote_tokens_with_context_spanned (macro)
+macro_rules! Depcratequote_tokens_with_context_spanned {
+() => {
+// Module: crate
+// Provides: {"quote_tokens_with_context_spanned"}
+// Dependencies: {}
+# [macro_export] # [doc (hidden)] macro_rules ! quote_tokens_with_context_spanned { ($ tokens : ident $ span : ident ($ ($ b3 : tt) *) ($ ($ b2 : tt) *) ($ ($ b1 : tt) *) ($ ($ curr : tt) *) ($ ($ a1 : tt) *) ($ ($ a2 : tt) *) ($ ($ a3 : tt) *)) => { $ ($ crate :: quote_token_with_context_spanned ! ($ tokens $ span $ b3 $ b2 $ b1 $ curr $ a1 $ a2 $ a3) ;) * } ; }
+};
+}

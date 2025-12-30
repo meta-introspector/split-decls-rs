@@ -1,0 +1,46 @@
+// Generated module macro for crate::lifetime_free
+macro_rules! Modcrate_lifetime_free {
+() => {
+        Depcrate_lifetime_freeLifetimeFree!();
+        Depcrate_lifetime_freeimpl_26!();
+        Depcrate_lifetime_freeimpl_27!();
+        Depcrate_lifetime_freeimpl_28!();
+        Depcrate_lifetime_freeimpl_29!();
+        Depcrate_lifetime_freeimpl_30!();
+        Depcrate_lifetime_freeimpl_31!();
+        Depcrate_lifetime_freeimpl_32!();
+        Depcrate_lifetime_freeimpl_33!();
+        Depcrate_lifetime_freeimpl_34!();
+        Depcrate_lifetime_freeimpl_35!();
+        Depcrate_lifetime_freeimpl_36!();
+        Depcrate_lifetime_freeimpl_37!();
+        Depcrate_lifetime_freeimpl_38!();
+        Depcrate_lifetime_freeimpl_39!();
+        Depcrate_lifetime_freeimpl_40!();
+        Depcrate_lifetime_freeimpl_41!();
+        Depcrate_lifetime_freeimpl_42!();
+        Depcrate_lifetime_freeimpl_43!();
+        Depcrate_lifetime_freeimpl_44!();
+        Depcrate_lifetime_freeimpl_45!();
+        Depcrate_lifetime_freeimpl_46!();
+        Depcrate_lifetime_freeimpl_47!();
+        Depcrate_lifetime_freeimpl_48!();
+        Depcrate_lifetime_freeimpl_49!();
+        Depcrate_lifetime_freeimpl_50!();
+        Depcrate_lifetime_freeimpl_51!();
+        Depcrate_lifetime_freeimpl_52!();
+        Depcrate_lifetime_freeimpl_53!();
+        Depcrate_lifetime_freeimpl_54!();
+        Depcrate_lifetime_freeimpl_55!();
+        Depcrate_lifetime_freeimpl_56!();
+        Depcrate_lifetime_freeimpl_57!();
+        Depcrate_lifetime_freeimpl_58!();
+        Depcrate_lifetime_freeimpl_59!();
+        Depcrate_lifetime_freeimpl_60!();
+        Depcrate_lifetime_freeimpl_61!();
+        Depcrate_lifetime_freeimpl_62!();
+        Depcrate_lifetime_freetuple_impls!();
+        Depcrate_lifetime_freemacro_64!();
+        Depcrate_lifetime_freealloc_impls!();
+    };
+}

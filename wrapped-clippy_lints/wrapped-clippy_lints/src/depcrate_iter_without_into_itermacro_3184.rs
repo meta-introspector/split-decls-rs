@@ -1,0 +1,9 @@
+// Generated macro for macro_3184 (macro)
+macro_rules! Depcrate_iter_without_into_itermacro_3184 {
+() => {
+// Module: crate::iter_without_into_iter
+// Provides: {"macro_3184"}
+// Dependencies: {}
+declare_clippy_lint ! { # [doc = " ### What it does"] # [doc = " Looks for `iter` and `iter_mut` methods without an associated `IntoIterator for (&|&mut) Type` implementation."] # [doc = ""] # [doc = " ### Why is this bad?"] # [doc = " It's not bad, but having them is idiomatic and allows the type to be used in for loops directly"] # [doc = " (`for val in &iter {}`), without having to first call `iter()` or `iter_mut()`."] # [doc = ""] # [doc = " ### Limitations"] # [doc = " This lint focuses on providing an idiomatic API. Therefore, it will only"] # [doc = " lint on types which are accessible outside of the crate. For internal types,"] # [doc = " the `IntoIterator` trait can be implemented on demand if it is actually needed."] # [doc = ""] # [doc = " ### Example"] # [doc = " ```no_run"] # [doc = " struct MySlice<'a>(&'a [u8]);"] # [doc = " impl<'a> MySlice<'a> {"] # [doc = "     pub fn iter(&self) -> std::slice::Iter<'a, u8> {"] # [doc = "         self.0.iter()"] # [doc = "     }"] # [doc = " }"] # [doc = " ```"] # [doc = " Use instead:"] # [doc = " ```no_run"] # [doc = " struct MySlice<'a>(&'a [u8]);"] # [doc = " impl<'a> MySlice<'a> {"] # [doc = "     pub fn iter(&self) -> std::slice::Iter<'a, u8> {"] # [doc = "         self.0.iter()"] # [doc = "     }"] # [doc = " }"] # [doc = " impl<'a> IntoIterator for &MySlice<'a> {"] # [doc = "     type Item = &'a u8;"] # [doc = "     type IntoIter = std::slice::Iter<'a, u8>;"] # [doc = "     fn into_iter(self) -> Self::IntoIter {"] # [doc = "         self.iter()"] # [doc = "     }"] # [doc = " }"] # [doc = " ```"] # [clippy :: version = "1.75.0"] pub ITER_WITHOUT_INTO_ITER , pedantic , "implementing `iter(_mut)` without an associated `IntoIterator for (&|&mut) Type` impl" }
+};
+}

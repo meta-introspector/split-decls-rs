@@ -1,0 +1,9 @@
+// Generated macro for impl_344 (impl)
+macro_rules! Depcrate_collections_btree_borrowimpl_344 {
+() => {
+// Module: crate::collections::btree::borrow
+// Provides: {"impl_344"}
+// Dependencies: {}
+impl < 'a , T > DormantMutRef < 'a , T > { # [doc = " Capture a unique borrow, and immediately reborrow it. For the compiler,"] # [doc = " the lifetime of the new reference is the same as the lifetime of the"] # [doc = " original reference, but you promise to use it for a shorter period."] pub (super) fn new (t : & 'a mut T) -> (& 'a mut T , Self) { let ptr = NonNull :: from (t) ; let new_ref = unsafe { & mut * ptr . as_ptr () } ; (new_ref , Self { ptr , _marker : PhantomData }) } # [doc = " Revert to the unique borrow initially captured."] # [doc = ""] # [doc = " # Safety"] # [doc = ""] # [doc = " The reborrow must have ended, i.e., the reference returned by `new` and"] # [doc = " all pointers and references derived from it, must not be used anymore."] pub (super) unsafe fn awaken (self) -> & 'a mut T { unsafe { & mut * self . ptr . as_ptr () } } # [doc = " Borrows a new mutable reference from the unique borrow initially captured."] # [doc = ""] # [doc = " # Safety"] # [doc = ""] # [doc = " The reborrow must have ended, i.e., the reference returned by `new` and"] # [doc = " all pointers and references derived from it, must not be used anymore."] pub (super) unsafe fn reborrow (& mut self) -> & 'a mut T { unsafe { & mut * self . ptr . as_ptr () } } # [doc = " Borrows a new shared reference from the unique borrow initially captured."] # [doc = ""] # [doc = " # Safety"] # [doc = ""] # [doc = " The reborrow must have ended, i.e., the reference returned by `new` and"] # [doc = " all pointers and references derived from it, must not be used anymore."] pub (super) unsafe fn reborrow_shared (& self) -> & 'a T { unsafe { & * self . ptr . as_ptr () } } }
+};
+}

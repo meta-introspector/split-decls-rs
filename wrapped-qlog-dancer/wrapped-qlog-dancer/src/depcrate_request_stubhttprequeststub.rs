@@ -1,0 +1,9 @@
+// Generated macro for HttpRequestStub (struct)
+macro_rules! Depcrate_request_stubHttpRequestStub {
+() => {
+// Module: crate::request_stub
+// Provides: {"HttpRequestStub"}
+// Dependencies: {}
+# [derive (Debug , Default)] pub struct HttpRequestStub { pub request_actor : RequestActor , pub stream_id : u64 , pub host : NaOption < String > , pub method : NaOption < String > , pub path : NaOption < String > , pub status : NaOption < String > , pub client_content_length : NaOption < String > , pub server_content_length : NaOption < String > , pub client_pri_hdr : NaOption < String > , pub server_pri_hdr : NaOption < String > , pub priority_updates : Vec < String > , pub time_discovery : Option < f32 > , pub time_first_headers_rx : Option < f32 > , pub time_first_headers_tx : Option < f32 > , pub time_first_data_rx : Option < f32 > , pub time_first_data_tx : Option < f32 > , pub time_last_data_rx : Option < f32 > , pub time_last_data_tx : Option < f32 > , pub time_fin_rx : Option < f32 > , pub time_data_rx_set : Vec < (f32 , u64) > , pub time_data_tx_set : Vec < (f32 , u64) > , pub client_transferred_bytes : NaOption < u64 > , pub server_transferred_bytes : NaOption < u64 > , pub avg_upload_rate : NaOption < f64 > , pub avg_download_rate_d2d : NaOption < f64 > , pub avg_download_rate_h2d : NaOption < f64 > , pub at_client_deltas : Option < RequestAtClientDeltas > , pub at_server_deltas : Option < RequestAtServerDeltas > , pub quic_stream_stop_sending_sent : Option < QuicStreamStopSending > , pub quic_stream_stop_sending_received : Option < QuicStreamStopSending > , pub quic_stream_reset_sent : Option < QuicStreamReset > , pub quic_stream_reset_received : Option < QuicStreamReset > , pub h2_stream_reset_sent : Option < H2StreamReset > , pub h2_stream_reset_receive : Option < H2StreamReset > , }
+};
+}

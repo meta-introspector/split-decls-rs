@@ -1,0 +1,9 @@
+// Generated macro for impl_1459 (impl)
+macro_rules! Depcrate_sourceimpl_1459 {
+() => {
+// Module: crate::source
+// Provides: {"impl_1459"}
+// Dependencies: {}
+impl SerdeCache { pub fn new (root : AbstractFs) -> Self { Self { root , cache : FrozenMap :: new () , } } fn read_and_parse < S > (& self , path : & str , parser : fn (& [u8]) -> Result < S , DataError > ,) -> Result < & S , DataError > where for < 'de > S : serde :: Deserialize < 'de > + 'static + Send + Sync , { match self . cache . get (path) { Some (x) => x , None => self . cache . insert (path . to_string () , Box :: new (parser (& self . root . read_to_buf (path) ?) . map_err (| e | e . with_path_context (std :: path :: Path :: new (path))) ? ,) ,) , } . downcast_ref :: < S > () . ok_or_else (| | DataError :: custom ("Cache error") . with_type_context :: < S > ()) } pub fn read_and_parse_json < S > (& self , path : & str) -> Result < & S , DataError > where for < 'de > S : serde :: Deserialize < 'de > + 'static + Send + Sync , { self . read_and_parse (path , | bytes | { serde_json :: from_slice (bytes) . map_err (| e | DataError :: custom ("JSON deserialize") . with_display_context (& e)) }) } pub fn read_and_parse_toml < S > (& self , path : & str) -> Result < & S , DataError > where for < 'de > S : serde :: Deserialize < 'de > + 'static + Send + Sync , { self . read_and_parse (path , | bytes | { toml :: from_str (std :: str :: from_utf8 (bytes) . map_err (| e | DataError :: custom ("TOML UTF8") . with_display_context (& e)) ? ,) . map_err (| e | DataError :: custom ("TOML deserialize") . with_display_context (& e)) }) } pub fn list (& self , path : & str) -> Result < impl Iterator < Item = String > , DataError > { self . root . list (path) } pub fn file_exists (& self , path : & str) -> Result < bool , DataError > { self . root . file_exists (path) } }
+};
+}

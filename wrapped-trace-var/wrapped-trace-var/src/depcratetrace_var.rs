@@ -1,0 +1,9 @@
+// Generated macro for trace_var (function)
+macro_rules! Depcratetrace_var {
+() => {
+// Module: crate
+// Provides: {"trace_var"}
+// Dependencies: {}
+# [doc = " Attribute to print the value of the given variables each time they are"] # [doc = " reassigned."] # [doc = ""] # [doc = " # Example"] # [doc = ""] # [doc = " ```"] # [doc = " #[trace_var(p, n)]"] # [doc = " fn factorial(mut n: u64) -> u64 {"] # [doc = "     let mut p = 1;"] # [doc = "     while n > 1 {"] # [doc = "         p *= n;"] # [doc = "         n -= 1;"] # [doc = "     }"] # [doc = "     p"] # [doc = " }"] # [doc = " ```"] # [proc_macro_attribute] pub fn trace_var (args : TokenStream , input : TokenStream) -> TokenStream { let input = parse_macro_input ! (input as ItemFn) ; let mut args = parse_macro_input ! (args as Args) ; let output = args . fold_item_fn (input) ; TokenStream :: from (quote ! (# output)) }
+};
+}

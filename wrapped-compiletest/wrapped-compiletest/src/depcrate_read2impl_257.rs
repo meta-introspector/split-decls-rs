@@ -1,0 +1,9 @@
+// Generated macro for impl_257 (impl)
+macro_rules! Depcrate_read2impl_257 {
+() => {
+// Module: crate::read2
+// Provides: {"impl_257"}
+// Dependencies: {}
+impl ProcOutput { fn new () -> Self { ProcOutput :: Full { bytes : Vec :: new () , filtered_len : 0 } } fn truncated (& self) -> bool { matches ! (self , Self :: Abbreviated { .. }) } fn extend (& mut self , data : & [u8] , filter_paths_from_len : & [String]) { let new_self = match * self { ProcOutput :: Full { ref mut bytes , ref mut filtered_len } => { let old_len = bytes . len () ; bytes . extend_from_slice (data) ; * filtered_len += data . len () ; for path in filter_paths_from_len { let path_bytes = path . as_bytes () ; let matches = (& bytes [(old_len . saturating_sub (path_bytes . len () - 1)) ..]) . windows (path_bytes . len ()) . filter (| window | window == & path_bytes) . count () ; * filtered_len -= matches * path_bytes . len () ; * filtered_len += matches * FILTERED_PATHS_PLACEHOLDER_LEN ; } let new_len = bytes . len () ; if (* filtered_len) . min (new_len) <= MAX_OUT_LEN { return ; } let mut head = std :: mem :: take (bytes) ; if head . last () != Some (& b'\n') { head . truncate (MAX_OUT_LEN) ; } let skipped = new_len - head . len () ; ProcOutput :: Abbreviated { head , skipped } } ProcOutput :: Abbreviated { ref mut skipped , .. } => { * skipped += data . len () ; return ; } } ; * self = new_self ; } fn into_bytes (self) -> Vec < u8 > { match self { ProcOutput :: Full { bytes , .. } => bytes , ProcOutput :: Abbreviated { mut head , skipped } => { let head_note = format ! ("<<<<<< TRUNCATED, SHOWING THE FIRST {} BYTES >>>>>>\n\n" , head . len ()) ; head . splice (0 .. 0 , head_note . into_bytes ()) ; write ! (& mut head , "\n\n<<<<<< TRUNCATED, DROPPED {} BYTES >>>>>>" , skipped) . unwrap () ; head } } } }
+};
+}

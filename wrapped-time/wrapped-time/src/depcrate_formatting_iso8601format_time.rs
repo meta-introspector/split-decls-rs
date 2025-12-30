@@ -1,0 +1,9 @@
+// Generated macro for format_time (function)
+macro_rules! Depcrate_formatting_iso8601format_time {
+() => {
+// Module: crate::formatting::iso8601
+// Provides: {"format_time"}
+// Dependencies: {}
+# [doc = " Format the time portion of ISO 8601."] # [inline] pub (super) fn format_time < const CONFIG : EncodedConfig > (output : & mut (impl io :: Write + ? Sized) , time : Time ,) -> Result < usize , error :: Format > { let mut bytes = 0 ; bytes += write_if (output , Iso8601 :: < CONFIG > :: USE_SEPARATORS || Iso8601 :: < CONFIG > :: FORMAT_DATE , b"T" ,) ? ; let (hours , minutes , seconds , nanoseconds) = time . as_hms_nano () ; match Iso8601 :: < CONFIG > :: TIME_PRECISION { TimePrecision :: Hour { decimal_digits } => { let hours = (hours as f64) + (minutes as f64) / Minute :: per_t :: < f64 > (Hour) + (seconds as f64) / Second :: per_t :: < f64 > (Hour) + (nanoseconds as f64) / Nanosecond :: per_t :: < f64 > (Hour) ; format_float (output , hours , 2 , decimal_digits) ? ; } TimePrecision :: Minute { decimal_digits } => { bytes += format_number_pad_zero :: < 2 > (output , hours) ? ; bytes += write_if (output , Iso8601 :: < CONFIG > :: USE_SEPARATORS , b":") ? ; let minutes = (minutes as f64) + (seconds as f64) / Second :: per_t :: < f64 > (Minute) + (nanoseconds as f64) / Nanosecond :: per_t :: < f64 > (Minute) ; bytes += format_float (output , minutes , 2 , decimal_digits) ? ; } TimePrecision :: Second { decimal_digits } => { bytes += format_number_pad_zero :: < 2 > (output , hours) ? ; bytes += write_if (output , Iso8601 :: < CONFIG > :: USE_SEPARATORS , b":") ? ; bytes += format_number_pad_zero :: < 2 > (output , minutes) ? ; bytes += write_if (output , Iso8601 :: < CONFIG > :: USE_SEPARATORS , b":") ? ; let seconds = (seconds as f64) + (nanoseconds as f64) / Nanosecond :: per_t :: < f64 > (Second) ; bytes += format_float (output , seconds , 2 , decimal_digits) ? ; } } Ok (bytes) }
+};
+}

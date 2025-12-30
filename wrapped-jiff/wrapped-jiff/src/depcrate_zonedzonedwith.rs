@@ -1,0 +1,9 @@
+// Generated macro for ZonedWith (struct)
+macro_rules! Depcrate_zonedZonedWith {
+() => {
+// Module: crate::zoned
+// Provides: {"ZonedWith"}
+// Dependencies: {}
+# [doc = " A builder for setting the fields on a [`Zoned`]."] # [doc = ""] # [doc = " This builder is constructed via [`Zoned::with`]."] # [doc = ""] # [doc = " # Example"] # [doc = ""] # [doc = " The builder ensures one can chain together the individual components of a"] # [doc = " zoned datetime without it failing at an intermediate step. For example,"] # [doc = " if you had a date of `2024-10-31T00:00:00[America/New_York]` and wanted"] # [doc = " to change both the day and the month, and each setting was validated"] # [doc = " independent of the other, you would need to be careful to set the day first"] # [doc = " and then the month. In some cases, you would need to set the month first"] # [doc = " and then the day!"] # [doc = ""] # [doc = " But with the builder, you can set values in any order:"] # [doc = ""] # [doc = " ```"] # [doc = " use jiff::civil::date;"] # [doc = ""] # [doc = " let zdt1 = date(2024, 10, 31).at(0, 0, 0, 0).in_tz(\"America/New_York\")?;"] # [doc = " let zdt2 = zdt1.with().month(11).day(30).build()?;"] # [doc = " assert_eq!("] # [doc = "     zdt2,"] # [doc = "     date(2024, 11, 30).at(0, 0, 0, 0).in_tz(\"America/New_York\")?,"] # [doc = " );"] # [doc = ""] # [doc = " let zdt1 = date(2024, 4, 30).at(0, 0, 0, 0).in_tz(\"America/New_York\")?;"] # [doc = " let zdt2 = zdt1.with().day(31).month(7).build()?;"] # [doc = " assert_eq!("] # [doc = "     zdt2,"] # [doc = "     date(2024, 7, 31).at(0, 0, 0, 0).in_tz(\"America/New_York\")?,"] # [doc = " );"] # [doc = ""] # [doc = " # Ok::<(), Box<dyn std::error::Error>>(())"] # [doc = " ```"] # [derive (Clone , Debug)] pub struct ZonedWith { original : Zoned , datetime_with : DateTimeWith , offset : Option < Offset > , disambiguation : Disambiguation , offset_conflict : OffsetConflict , }
+};
+}

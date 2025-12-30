@@ -1,0 +1,46 @@
+// Generated module macro for crate::sqlite::connection
+macro_rules! Modcrate_sqlite_connection {
+() => {
+        Depcrate_sqlite_connectionother_3641!();
+        Depcrate_sqlite_connectionbind_collector!();
+        Depcrate_sqlite_connectionfunctions!();
+        Depcrate_sqlite_connectionowned_row!();
+        Depcrate_sqlite_connectionraw!();
+        Depcrate_sqlite_connectionrow!();
+        Depcrate_sqlite_connectionserialized_database!();
+        Depcrate_sqlite_connectionsqlite_value!();
+        Depcrate_sqlite_connectionstatement_iterator!();
+        Depcrate_sqlite_connectionstmt!();
+        Depcrate_sqlite_connectionuse_3831!();
+        Depcrate_sqlite_connectionuse_3832!();
+        Depcrate_sqlite_connectionuse_3833!();
+        Depcrate_sqlite_connectionuse_3834!();
+        Depcrate_sqlite_connectionuse_3835!();
+        Depcrate_sqlite_connectionuse_3836!();
+        Depcrate_sqlite_connectionuse_3837!();
+        Depcrate_sqlite_connectionuse_3838!();
+        Depcrate_sqlite_connectionuse_3839!();
+        Depcrate_sqlite_connectionuse_3840!();
+        Depcrate_sqlite_connectionuse_3841!();
+        Depcrate_sqlite_connectionuse_3842!();
+        Depcrate_sqlite_connectionuse_3843!();
+        Depcrate_sqlite_connectionuse_3844!();
+        Depcrate_sqlite_connectionuse_3845!();
+        Depcrate_sqlite_connectionuse_3846!();
+        Depcrate_sqlite_connectionuse_3847!();
+        Depcrate_sqlite_connectionuse_3848!();
+        Depcrate_sqlite_connectionuse_3849!();
+        Depcrate_sqlite_connectionSqliteConnection!();
+        Depcrate_sqlite_connectionimpl_3851!();
+        Depcrate_sqlite_connectionimpl_3852!();
+        Depcrate_sqlite_connectionimpl_3853!();
+        Depcrate_sqlite_connectionimpl_3854!();
+        Depcrate_sqlite_connectionimpl_3855!();
+        Depcrate_sqlite_connectionimpl_3856!();
+        Depcrate_sqlite_connectionimpl_3857!();
+        Depcrate_sqlite_connectionimpl_3858!();
+        Depcrate_sqlite_connectionimpl_3859!();
+        Depcrate_sqlite_connectionerror_message!();
+        Depcrate_sqlite_connectiontests!();
+    };
+}

@@ -1,0 +1,41 @@
+// Generated module macro for crate::generated
+macro_rules! Modcrate_generated {
+() => {
+        Depcrate_generatedother_4!();
+        Depcrate_generated__CNAssetInfo!();
+        Depcrate_generated__CNCinematicBase!();
+        Depcrate_generated__CNCinematicError!();
+        Depcrate_generated__CNDecision!();
+        Depcrate_generated__CNDetection!();
+        Depcrate_generated__CNDetectionTrack!();
+        Depcrate_generated__CNObjectTracker!();
+        Depcrate_generated__CNRenderingSession!();
+        Depcrate_generated__CNScript!();
+        Depcrate_generated__CNSpatialAudio!();
+        Depcrate_generateduse_15!();
+        Depcrate_generateduse_16!();
+        Depcrate_generateduse_17!();
+        Depcrate_generateduse_18!();
+        Depcrate_generateduse_19!();
+        Depcrate_generateduse_20!();
+        Depcrate_generateduse_21!();
+        Depcrate_generateduse_22!();
+        Depcrate_generateduse_23!();
+        Depcrate_generateduse_24!();
+        Depcrate_generateduse_25!();
+        Depcrate_generateduse_26!();
+        Depcrate_generateduse_27!();
+        Depcrate_generateduse_28!();
+        Depcrate_generateduse_29!();
+        Depcrate_generateduse_30!();
+        Depcrate_generateduse_31!();
+        Depcrate_generateduse_32!();
+        Depcrate_generateduse_33!();
+        Depcrate_generateduse_34!();
+        Depcrate_generateduse_35!();
+        Depcrate_generateduse_36!();
+        Depcrate_generateduse_37!();
+        Depcrate_generateduse_38!();
+        Depcrate_generateduse_39!();
+    };
+}

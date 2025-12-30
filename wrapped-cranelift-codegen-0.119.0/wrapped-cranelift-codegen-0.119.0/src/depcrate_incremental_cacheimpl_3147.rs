@@ -1,0 +1,9 @@
+// Generated macro for impl_3147 (impl)
+macro_rules! Depcrate_incremental_cacheimpl_3147 {
+() => {
+// Module: crate::incremental_cache
+// Provides: {"impl_3147"}
+// Dependencies: {}
+impl Context { # [doc = " Compile the function, as in `compile`, but tries to reuse compiled artifacts from former"] # [doc = " compilations using the provided cache store."] pub fn compile_with_cache (& mut self , isa : & dyn TargetIsa , cache_store : & mut dyn CacheKvStore , ctrl_plane : & mut ControlPlane ,) -> CompileResult < (& CompiledCode , bool) > { let cache_key_hash = { let _tt = timing :: try_incremental_cache () ; let cache_key_hash = compute_cache_key (isa , & self . func) ; if let Some (blob) = cache_store . get (& cache_key_hash . 0) { match try_finish_recompile (& self . func , & blob) { Ok (compiled_code) => { let info = compiled_code . code_info () ; if isa . flags () . enable_incremental_compilation_cache_checks () { let actual_result = self . compile (isa , ctrl_plane) ? ; assert_eq ! (* actual_result , compiled_code) ; assert_eq ! (actual_result . code_info () , info) ; return Ok ((actual_result , true)) ; } let compiled_code = self . compiled_code . insert (compiled_code) ; return Ok ((compiled_code , true)) ; } Err (err) => { trace ! ("error when finishing recompilation: {err}") ; } } } cache_key_hash } ; let stencil = self . compile_stencil (isa , ctrl_plane) . map_err (| err | CompileError { inner : err , func : & self . func , }) ? ; let stencil = { let _tt = timing :: store_incremental_cache () ; let (stencil , res) = serialize_compiled (stencil) ; if let Ok (blob) = res { cache_store . insert (& cache_key_hash . 0 , blob) ; } stencil } ; let compiled_code = self . compiled_code . insert (stencil . apply_params (& self . func . params)) ; Ok ((compiled_code , false)) } }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for would_print_as_wildcard (function)
+macro_rules! Depcrate_rustcwould_print_as_wildcard {
+() => {
+// Module: crate::rustc
+// Provides: {"would_print_as_wildcard"}
+// Dependencies: {}
+# [doc = " Returns `true` if the given pattern would be printed as a wildcard (`_`)."] fn would_print_as_wildcard (tcx : TyCtxt < '_ > , p : & WitnessPat < '_ , '_ >) -> bool { match p . ctor () { Constructor :: IntRange (IntRange { lo : MaybeInfiniteInt :: NegInfinity , hi : MaybeInfiniteInt :: PosInfinity , }) | Constructor :: Wildcard | Constructor :: NonExhaustive | Constructor :: Hidden | Constructor :: PrivateUninhabited => true , Constructor :: Never if ! tcx . features () . never_patterns () => true , _ => false , } }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for tests (module)
+macro_rules! Depcratetests {
+() => {
+// Module: crate
+// Provides: {"tests"}
+// Dependencies: {}
+# [cfg (test)] mod tests { use crate :: Utf16CharsEx ; # [test] fn test_boundaries () { assert ! ([0xD7FFu16] . as_slice () . chars () . eq (core :: iter :: once ('\u{D7FF}'))) ; assert ! ([0xE000u16] . as_slice () . chars () . eq (core :: iter :: once ('\u{E000}'))) ; assert ! ([0xD800u16] . as_slice () . chars () . eq (core :: iter :: once ('\u{FFFD}'))) ; assert ! ([0xDFFFu16] . as_slice () . chars () . eq (core :: iter :: once ('\u{FFFD}'))) ; } # [test] fn test_unpaired () { assert ! ([0xD800u16 , 0x0061u16] . as_slice () . chars () . eq ([0xFFFDu16 , 0x0061u16] . as_slice () . chars ())) ; assert ! ([0xDFFFu16 , 0x0061u16] . as_slice () . chars () . eq ([0xFFFDu16 , 0x0061u16] . as_slice () . chars ())) ; } # [test] fn test_unpaired_rev () { assert ! ([0xD800u16 , 0x0061u16] . as_slice () . chars () . rev () . eq ([0xFFFDu16 , 0x0061u16] . as_slice () . chars () . rev ())) ; assert ! ([0xDFFFu16 , 0x0061u16] . as_slice () . chars () . rev () . eq ([0xFFFDu16 , 0x0061u16] . as_slice () . chars () . rev ())) ; } # [test] fn test_paired () { assert ! ([0xD83Eu16 , 0xDD73u16] . as_slice () . chars () . eq (core :: iter :: once ('🥳'))) ; } # [test] fn test_paired_rev () { assert ! ([0xD83Eu16 , 0xDD73u16] . as_slice () . chars () . rev () . eq (core :: iter :: once ('🥳'))) ; } # [test] fn test_as_slice () { let mut iter = [0x0061u16 , 0x0062u16] . as_slice () . chars () ; let at_start = iter . as_slice () ; assert_eq ! (iter . next () , Some ('a')) ; let in_middle = iter . as_slice () ; assert_eq ! (iter . next () , Some ('b')) ; let at_end = iter . as_slice () ; assert_eq ! (at_start . len () , 2) ; assert_eq ! (in_middle . len () , 1) ; assert_eq ! (at_end . len () , 0) ; assert_eq ! (at_start [0] , 0x0061u16) ; assert_eq ! (at_start [1] , 0x0062u16) ; assert_eq ! (in_middle [0] , 0x0062u16) ; } }
+};
+}

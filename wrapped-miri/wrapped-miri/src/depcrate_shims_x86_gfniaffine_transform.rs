@@ -1,0 +1,9 @@
+// Generated macro for affine_transform (function)
+macro_rules! Depcrate_shims_x86_gfniaffine_transform {
+() => {
+// Module: crate::shims::x86::gfni
+// Provides: {"affine_transform"}
+// Dependencies: {}
+# [doc = " Calculates the affine transformation `right * left + imm8` inside the finite field GF(2^8)."] # [doc = " `right` is an 8x8 bit matrix, `left` and `imm8` are bit vectors."] # [doc = " If `inverse` is set, then the inverse transformation with respect to the reduction polynomial"] # [doc = " x^8 + x^4 + x^3 + x + 1 is performed instead."] fn affine_transform < 'tcx > (ecx : & mut MiriInterpCx < 'tcx > , left : & OpTy < 'tcx > , right : & OpTy < 'tcx > , imm8 : & OpTy < 'tcx > , dest : & MPlaceTy < 'tcx > , inverse : bool ,) -> InterpResult < 'tcx , () > { let (left , left_len) = ecx . project_to_simd (left) ? ; let (right , right_len) = ecx . project_to_simd (right) ? ; let (dest , dest_len) = ecx . project_to_simd (dest) ? ; assert_eq ! (dest_len , right_len) ; assert_eq ! (dest_len , left_len) ; let imm8 = ecx . read_scalar (imm8) ? . to_u8 () ? ; for i in (0 .. dest_len) . step_by (8) { let mut matrix = [0u8 ; 8] ; for j in 0 .. 8 { matrix [usize :: try_from (j) . unwrap ()] = ecx . read_scalar (& ecx . project_index (& right , i . wrapping_add (j)) ?) ? . to_u8 () ? ; } for j in 0 .. 8 { let index = i . wrapping_add (j) ; let left = ecx . read_scalar (& ecx . project_index (& left , index) ?) ? . to_u8 () ? ; let left = if inverse { TABLE [usize :: from (left)] } else { left } ; let mut res = 0 ; for bit in 0u8 .. 8 { let mut b = matrix [usize :: from (bit)] & left ; b = (b & 0b1111) ^ (b >> 4) ; b = (b & 0b11) ^ (b >> 2) ; b = (b & 0b1) ^ (b >> 1) ; res |= b << 7u8 . wrapping_sub (bit) ; } res ^= imm8 ; let dest = ecx . project_index (& dest , index) ? ; ecx . write_scalar (Scalar :: from_u8 (res) , & dest) ? ; } } interp_ok (()) }
+};
+}

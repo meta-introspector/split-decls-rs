@@ -1,0 +1,9 @@
+// Generated macro for macro_96 (macro)
+macro_rules! Depcrate_builtinmacro_96 {
+() => {
+// Module: crate::builtin
+// Provides: {"macro_96"}
+// Dependencies: {}
+declare_lint ! { # [doc = " The `unexpected_cfgs` lint detects unexpected conditional compilation conditions."] # [doc = ""] # [doc = " ### Example"] # [doc = ""] # [doc = " ```text"] # [doc = " rustc --check-cfg 'cfg()'"] # [doc = " ```"] # [doc = ""] # [doc = " ```rust,ignore (needs command line option)"] # [doc = " #[cfg(widnows)]"] # [doc = " fn foo() {}"] # [doc = " ```"] # [doc = ""] # [doc = " This will produce:"] # [doc = ""] # [doc = " ```text"] # [doc = " warning: unexpected `cfg` condition name: `widnows`"] # [doc = "  --> lint_example.rs:1:7"] # [doc = "   |"] # [doc = " 1 | #[cfg(widnows)]"] # [doc = "   |       ^^^^^^^"] # [doc = "   |"] # [doc = "   = note: `#[warn(unexpected_cfgs)]` on by default"] # [doc = " ```"] # [doc = ""] # [doc = " ### Explanation"] # [doc = ""] # [doc = " This lint is only active when [`--check-cfg`][check-cfg] arguments are being"] # [doc = " passed to the compiler and triggers whenever an unexpected condition name or value is"] # [doc = " used."] # [doc = ""] # [doc = " See the [Checking Conditional Configurations][check-cfg] section for more"] # [doc = " details."] # [doc = ""] # [doc = " See the [Cargo Specifics][unexpected_cfgs_lint_config] section for configuring this lint in"] # [doc = " `Cargo.toml`."] # [doc = ""] # [doc = " [check-cfg]: https://doc.rust-lang.org/nightly/rustc/check-cfg.html"] # [doc = " [unexpected_cfgs_lint_config]: https://doc.rust-lang.org/nightly/rustc/check-cfg/cargo-specifics.html#check-cfg-in-lintsrust-table"] pub UNEXPECTED_CFGS , Warn , "detects unexpected names and values in `#[cfg]` conditions" , report_in_external_macro }
+};
+}

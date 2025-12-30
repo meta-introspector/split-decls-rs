@@ -4,6 +4,6 @@ macro_rules! Depcrate_updatemacro_617 {
 // Module: crate::update
 // Provides: {"macro_617"}
 // Dependencies: {}
-# [cfg (feature = "compact_str")] fallback_impl ! { compact_str :: CompactString , }
+tuple_impl ! (A ; a) ;
 };
 }

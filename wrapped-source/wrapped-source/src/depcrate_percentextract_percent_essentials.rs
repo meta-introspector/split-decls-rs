@@ -1,0 +1,9 @@
+// Generated macro for extract_percent_essentials (function)
+macro_rules! Depcrate_percentextract_percent_essentials {
+() => {
+// Module: crate::percent
+// Provides: {"extract_percent_essentials"}
+// Dependencies: {}
+fn extract_percent_essentials < 'data > (numbers_resource : & cldr_serde :: numbers :: Resource ,) -> Result < PercentEssentials < 'data > , DataError > { let percent_patterns = & & numbers_resource . main . value . numbers . numsys_data . percent_patterns . get ("latn") . ok_or_else (| | DataError :: custom ("Could not find the standard pattern")) ? ; let symbols = & & numbers_resource . main . value . numbers . numsys_data . symbols . get ("latn") . ok_or_else (| | DataError :: custom ("Could not find the percent symbol")) ? ; let localized_approximately_sign = symbols . approximately_sign . to_owned () ; let localized_minus_sign = symbols . minus_sign . to_owned () ; let localized_percent_sign = symbols . percent_sign . to_owned () ; let localized_plus_sign = symbols . plus_sign . to_owned () ; let standard_pattern = percent_patterns . standard . to_owned () ; let mut split = standard_pattern . split (';') ; let unsigned_pattern = split . next () . unwrap () ; let signed_pattern : Cow < str > = match split . next () { Some (negative) => Cow :: Borrowed (negative) , None if standard_pattern . contains ('-') => Cow :: Borrowed (& standard_pattern) , None => Cow :: Owned (String :: from ("-") + & standard_pattern) , } ; Ok (PercentEssentials { unsigned_pattern : create_unsigned_pattern (unsigned_pattern , & localized_percent_sign) ? , signed_pattern : create_signed_pattern (& signed_pattern , & localized_percent_sign) ? , approximately_sign : localized_approximately_sign . into () , minus_sign : localized_minus_sign . into () , plus_sign : localized_plus_sign . into () , }) }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for check_transmute (function)
+macro_rules! Depcrate_intrinsicckcheck_transmute {
+() => {
+// Module: crate::intrinsicck
+// Provides: {"check_transmute"}
+// Dependencies: {}
+fn check_transmute < 'tcx > (tcx : TyCtxt < 'tcx > , typing_env : ty :: TypingEnv < 'tcx > , from : Ty < 'tcx > , to : Ty < 'tcx > , hir_id : HirId ,) { let span = | | tcx . hir_span (hir_id) ; let normalize = | ty | { if let Ok (ty) = tcx . try_normalize_erasing_regions (typing_env , ty) { ty } else { Ty :: new_error_with_message (tcx , span () , format ! ("tried to normalize non-wf type {ty:#?} in check_transmute") ,) } } ; let from = normalize (from) ; let to = normalize (to) ; trace ! (? from , ? to) ; if from == to { return ; } let sk_from = SizeSkeleton :: compute (from , tcx , typing_env) ; let sk_to = SizeSkeleton :: compute (to , tcx , typing_env) ; trace ! (? sk_from , ? sk_to) ; if let Ok (sk_from) = sk_from && let Ok (sk_to) = sk_to { if sk_from . same_size (sk_to) { return ; } let from = unpack_option_like (tcx , from) ; if let ty :: FnDef (..) = from . kind () && let SizeSkeleton :: Known (size_to , _) = sk_to && size_to == Pointer (tcx . data_layout . instruction_address_space) . size (& tcx) { struct_span_code_err ! (tcx . sess . dcx () , span () , E0591 , "can't transmute zero-sized type") . with_note (format ! ("source type: {from}")) . with_note (format ! ("target type: {to}")) . with_help ("cast with `as` to a pointer instead") . emit () ; return ; } } let mut err = struct_span_code_err ! (tcx . sess . dcx () , span () , E0512 , "cannot transmute between types of different sizes, or dependently-sized types") ; if from == to { err . note (format ! ("`{from}` does not have a fixed size")) ; err . emit () ; } else { err . note (format ! ("source type: `{}` ({})" , from , skeleton_string (from , sk_from))) ; err . note (format ! ("target type: `{}` ({})" , to , skeleton_string (to , sk_to))) ; err . emit () ; } }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for impl_4 (impl)
+macro_rules! Depcrate_display_hintimpl_4 {
+() => {
+// Module: crate::display_hint
+// Provides: {"impl_4"}
+// Dependencies: {}
+impl DisplayHint { # [doc = " Parses the display hint (e.g. the `#x` in `{=u8:#x}`)"] pub (crate) fn parse (mut s : & str) -> Option < Self > { const BITFLAGS_HINT_START : & str = "__internal_bitflags_" ; let alternate = if let Some (rest) = s . strip_prefix ('#') { s = rest ; true } else { false } ; let zero_pad = if let Some (rest) = s . strip_prefix ('0') { let (rest , columns) = parse_integer :: < usize > (rest) ? ; s = rest ; columns } else { 0 } ; if let Some (stripped) = s . strip_prefix (BITFLAGS_HINT_START) { let parts = stripped . split ('@') . collect :: < Vec < _ > > () ; if parts . len () < 3 || parts . len () > 4 { return Some (DisplayHint :: Unknown (s . into ())) ; } return Some (DisplayHint :: Bitflags { name : parts [0] . into () , package : parts [1] . into () , disambiguator : parts [2] . into () , crate_name : parts . get (3) . map (| & s | s . to_string ()) , }) ; } Some (match s { "" => DisplayHint :: NoHint { zero_pad } , "us" => DisplayHint :: Seconds (TimePrecision :: Micros) , "ms" => DisplayHint :: Seconds (TimePrecision :: Millis) , "tus" => DisplayHint :: Time (TimePrecision :: Micros) , "tms" => DisplayHint :: Time (TimePrecision :: Millis) , "ts" => DisplayHint :: Time (TimePrecision :: Seconds) , "a" => DisplayHint :: Ascii , "b" => DisplayHint :: Binary { alternate , zero_pad , } , "o" => DisplayHint :: Octal { alternate , zero_pad , } , "x" => DisplayHint :: Hexadecimal { alternate , uppercase : false , zero_pad , } , "X" => DisplayHint :: Hexadecimal { alternate , uppercase : true , zero_pad , } , "iso8601ms" => DisplayHint :: ISO8601 (TimePrecision :: Millis) , "iso8601s" => DisplayHint :: ISO8601 (TimePrecision :: Seconds) , "cbor" => DisplayHint :: Cbor , "?" => DisplayHint :: Debug , _ => return None , }) } }
+};
+}

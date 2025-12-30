@@ -1,0 +1,9 @@
+// Generated macro for BlamePathEntry (struct)
+macro_rules! Depcrate_typesBlamePathEntry {
+() => {
+// Module: crate::types
+// Provides: {"BlamePathEntry"}
+// Dependencies: {}
+# [doc = " Represents a change during history traversal for blame. It is supposed to capture enough"] # [doc = " information to allow reconstruction of the way a blame was performed, i. e. the path the"] # [doc = " history traversal, combined with repeated diffing of two subsequent states in this history, has"] # [doc = " taken."] # [doc = ""] # [doc = " This is intended for debugging purposes."] # [derive (Clone , Debug)] pub struct BlamePathEntry { # [doc = " The path to the *Source File* in the blob after the change."] pub source_file_path : BString , # [doc = " The path to the *Source File* in the blob before the change. Allows"] # [doc = " detection of renames. `None` for root commits."] pub previous_source_file_path : Option < BString > , # [doc = " The commit id associated with the state after the change."] pub commit_id : ObjectId , # [doc = " The blob id associated with the state after the change."] pub blob_id : ObjectId , # [doc = " The blob id associated with the state before the change."] pub previous_blob_id : ObjectId , # [doc = " When there is more than one `BlamePathEntry` for a commit, this indicates to which parent"] # [doc = " commit the change is related."] pub parent_index : usize , }
+};
+}

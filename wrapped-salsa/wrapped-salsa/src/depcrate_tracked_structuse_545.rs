@@ -4,6 +4,6 @@ macro_rules! Depcrate_tracked_structuse_545 {
 // Module: crate::tracked_struct
 // Provides: {"use_545"}
 // Dependencies: {}
-use crate :: key :: DatabaseKeyIndex ;
+use crate :: runtime :: Stamp ;
 };
 }

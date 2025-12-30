@@ -1,0 +1,9 @@
+// Generated macro for concrete_type_sort (module)
+macro_rules! Depcrate_schema_modelconcrete_type_sort {
+() => {
+// Module: crate::schema::model
+// Provides: {"concrete_type_sort"}
+// Dependencies: {}
+# [doc = " Evaluation of a [`TypeType`] weights for sorting (for concrete types only)."] # [doc = ""] # [doc = " Used for deterministic introspection output."] mod concrete_type_sort { use crate :: meta :: MetaType ; use super :: TypeType ; # [doc = " Returns a [`TypeType`] sorting weight by its type."] pub fn by_type < S > (t : & TypeType < S >) -> u8 { match t { TypeType :: Concrete (MetaType :: Enum (..)) => 0 , TypeType :: Concrete (MetaType :: InputObject (..)) => 1 , TypeType :: Concrete (MetaType :: Interface (..)) => 2 , TypeType :: Concrete (MetaType :: Scalar (..)) => 3 , TypeType :: Concrete (MetaType :: Object (..)) => 4 , TypeType :: Concrete (MetaType :: Union (..)) => 5 , TypeType :: Concrete (MetaType :: List (..) | MetaType :: Nullable (..) | MetaType :: Placeholder (..) ,) => 6 , TypeType :: List (..) | TypeType :: NonNull (..) => 7 , } } # [doc = " Returns a [`TypeType`] sorting weight by its name."] pub fn by_name < 'a , S > (t : & 'a TypeType < 'a , S >) -> Option < & 'a str > { match t { TypeType :: Concrete (MetaType :: Enum (meta)) => Some (& meta . name) , TypeType :: Concrete (MetaType :: InputObject (meta)) => Some (& meta . name) , TypeType :: Concrete (MetaType :: Interface (meta)) => Some (& meta . name) , TypeType :: Concrete (MetaType :: Scalar (meta)) => Some (& meta . name) , TypeType :: Concrete (MetaType :: Object (meta)) => Some (& meta . name) , TypeType :: Concrete (MetaType :: Union (meta)) => Some (& meta . name) , TypeType :: Concrete (MetaType :: List (..) | MetaType :: Nullable (..) | MetaType :: Placeholder (..) ,) | TypeType :: List (..) | TypeType :: NonNull (..) => None , } } }
+};
+}

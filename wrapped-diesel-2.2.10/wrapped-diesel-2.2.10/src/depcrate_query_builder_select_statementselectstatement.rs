@@ -1,0 +1,9 @@
+// Generated macro for SelectStatement (struct)
+macro_rules! Depcrate_query_builder_select_statementSelectStatement {
+() => {
+// Module: crate::query_builder::select_statement
+// Provides: {"SelectStatement"}
+// Dependencies: {}
+# [doc = " This type represents a select query"] # [doc = ""] # [doc = " Using this type directly is only meaningful for custom backends"] # [doc = " that need to provide a custom [`QueryFragment`] implementation"] # [diesel_derives :: __diesel_public_if (feature = "i-implement-a-third-party-backend-and-opt-into-breaking-changes" , public_fields (select , from , distinct , where_clause , order , limit_offset , group_by , having , locking))] # [derive (Debug , Clone , Copy , QueryId)] # [must_use = "Queries are only executed when calling `load`, `get_result` or similar."] pub struct SelectStatement < From , Select = DefaultSelectClause < From > , Distinct = NoDistinctClause , Where = NoWhereClause , Order = NoOrderClause , LimitOffset = LimitOffsetClause < NoLimitClause , NoOffsetClause > , GroupBy = NoGroupByClause , Having = NoHavingClause , Locking = NoLockingClause , > { # [doc = " The select clause of the query"] pub (crate) select : Select , # [doc = " The from clause of the query"] pub (crate) from : From , # [doc = " The distinct clause of the query"] pub (crate) distinct : Distinct , # [doc = " The where clause of the query"] pub (crate) where_clause : Where , # [doc = " The order clause of the query"] pub (crate) order : Order , # [doc = " The combined limit/offset clause of the query"] pub (crate) limit_offset : LimitOffset , # [doc = " The group by clause of the query"] pub (crate) group_by : GroupBy , # [doc = " The having clause of the query"] pub (crate) having : Having , # [doc = " The locking clause of the query"] pub (crate) locking : Locking , }
+};
+}

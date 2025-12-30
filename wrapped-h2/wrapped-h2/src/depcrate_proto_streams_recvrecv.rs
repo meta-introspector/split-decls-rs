@@ -1,0 +1,9 @@
+// Generated macro for Recv (struct)
+macro_rules! Depcrate_proto_streams_recvRecv {
+() => {
+// Module: crate::proto::streams::recv
+// Provides: {"Recv"}
+// Dependencies: {}
+# [derive (Debug)] pub (super) struct Recv { # [doc = " Initial window size of remote initiated streams"] init_window_sz : WindowSize , # [doc = " Connection level flow control governing received data"] flow : FlowControl , # [doc = " Amount of connection window capacity currently used by outstanding streams."] in_flight_data : WindowSize , # [doc = " The lowest stream ID that is still idle"] next_stream_id : Result < StreamId , StreamIdOverflow > , # [doc = " The stream ID of the last processed stream"] last_processed_id : StreamId , # [doc = " Any streams with a higher ID are ignored."] # [doc = ""] # [doc = " This starts as MAX, but is lowered when a GOAWAY is received."] # [doc = ""] # [doc = " > After sending a GOAWAY frame, the sender can discard frames for"] # [doc = " > streams initiated by the receiver with identifiers higher than"] # [doc = " > the identified last stream."] max_stream_id : StreamId , # [doc = " Streams that have pending window updates"] pending_window_updates : store :: Queue < stream :: NextWindowUpdate > , # [doc = " New streams to be accepted"] pending_accept : store :: Queue < stream :: NextAccept > , # [doc = " Locally reset streams that should be reaped when they expire"] pending_reset_expired : store :: Queue < stream :: NextResetExpire > , # [doc = " How long locally reset streams should ignore received frames"] reset_duration : Duration , # [doc = " Holds frames that are waiting to be read"] buffer : Buffer < Event > , # [doc = " Refused StreamId, this represents a frame that must be sent out."] refused : Option < StreamId > , # [doc = " If push promises are allowed to be received."] is_push_enabled : bool , # [doc = " If extended connect protocol is enabled."] is_extended_connect_protocol_enabled : bool , }
+};
+}

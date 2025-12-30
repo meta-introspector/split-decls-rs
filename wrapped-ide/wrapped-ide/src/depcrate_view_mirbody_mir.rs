@@ -1,0 +1,9 @@
+// Generated macro for body_mir (function)
+macro_rules! Depcrate_view_mirbody_mir {
+() => {
+// Module: crate::view_mir
+// Provides: {"body_mir"}
+// Dependencies: {}
+fn body_mir (db : & RootDatabase , position : FilePosition) -> Option < String > { let sema = Semantics :: new (db) ; let source_file = sema . parse_guess_edition (position . file_id) ; let item = ancestors_at_offset (source_file . syntax () , position . offset) . filter (| it | ! ast :: MacroCall :: can_cast (it . kind ())) . find_map (ast :: Item :: cast) ? ; let def : DefWithBody = match item { ast :: Item :: Fn (it) => sema . to_def (& it) ? . into () , ast :: Item :: Const (it) => sema . to_def (& it) ? . into () , ast :: Item :: Static (it) => sema . to_def (& it) ? . into () , _ => return None , } ; Some (def . debug_mir (db)) }
+};
+}

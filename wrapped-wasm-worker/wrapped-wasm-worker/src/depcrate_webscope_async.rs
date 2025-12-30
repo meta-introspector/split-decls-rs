@@ -1,0 +1,9 @@
+// Generated macro for scope_async (function)
+macro_rules! Depcrate_webscope_async {
+() => {
+// Module: crate::web
+// Provides: {"scope_async"}
+// Dependencies: {}
+# [doc = " Async version of [`scope()`](crate::scope)."] # [doc = ""] # [doc = " # Notes"] # [doc = ""] # [doc = " Keep in mind that if [`ScopeFuture`] is dropped it will block, or spinloop"] # [doc = " if blocking is not supported on this thread (see"] # [doc = " [`has_block_support()`]), until all threads are joined but does not continue"] # [doc = " polling the passed [`Future`]."] # [doc = ""] # [doc = " # Example"] # [doc = ""] # [doc = " ```"] # [doc = " # #[cfg(all(target_feature = \"atomics\", not(unsupported_spawn)))]"] # [doc = " # wasm_bindgen_test::wasm_bindgen_test_configure!(run_in_browser);"] # [doc = " # #[cfg_attr(all(target_feature = \"atomics\", not(unsupported_spawn)), wasm_bindgen_test::wasm_bindgen_test)]"] # [doc = " # async fn test() {"] # [doc = " # use std::sync::atomic::{AtomicUsize, Ordering};"] # [doc = " #"] # [doc = " let value = AtomicUsize::new(0);"] # [doc = ""] # [doc = " web_thread::web::scope_async(|scope| async {"] # [doc = " \t(0..3).for_each(|_| {"] # [doc = " \t\tscope.spawn(|| value.fetch_add(1, Ordering::Relaxed));"] # [doc = " \t});"] # [doc = ""] # [doc = " \tvalue.fetch_add(1, Ordering::Relaxed);"] # [doc = " }).await;"] # [doc = ""] # [doc = " assert_eq!(value.load(Ordering::Relaxed), 4);"] # [doc = " # }"] # [doc = " # #[cfg(not(all(target_feature = \"atomics\", not(unsupported_spawn))))]"] # [doc = " # let _ = test();"] # [doc = " ```"] pub fn scope_async < 'scope , 'env : 'scope , F1 , F2 , T > (# [allow (clippy :: min_ident_chars)] f : F1 ,) -> ScopeFuture < 'scope , 'env , F2 , T > where F1 : FnOnce (& 'scope Scope < 'scope , 'env >) -> F2 , F2 : Future < Output = T > , { ScopeFuture (thread :: scope_async (f)) }
+};
+}

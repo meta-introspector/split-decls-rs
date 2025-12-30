@@ -1,0 +1,46 @@
+// Generated module macro for crate::tokenizer
+macro_rules! Modcrate_tokenizer {
+() => {
+        Depcrate_tokenizeruse_15!();
+        Depcrate_tokenizeruse_16!();
+        Depcrate_tokenizeruse_17!();
+        Depcrate_tokenizeruse_18!();
+        Depcrate_tokenizeruse_19!();
+        Depcrate_tokenizeruse_20!();
+        Depcrate_tokenizeruse_21!();
+        Depcrate_tokenizeruse_22!();
+        Depcrate_tokenizeruse_23!();
+        Depcrate_tokenizeruse_24!();
+        Depcrate_tokenizeruse_25!();
+        Depcrate_tokenizeruse_26!();
+        Depcrate_tokenizeruse_27!();
+        Depcrate_tokenizeruse_28!();
+        Depcrate_tokenizeruse_29!();
+        Depcrate_tokenizeruse_30!();
+        Depcrate_tokenizeruse_31!();
+        Depcrate_tokenizeruse_32!();
+        Depcrate_tokenizeruse_33!();
+        Depcrate_tokenizeruse_34!();
+        Depcrate_tokenizerstates!();
+        Depcrate_tokenizerinterface!();
+        Depcrate_tokenizerchar_ref!();
+        Depcrate_tokenizerbuffer_queue!();
+        Depcrate_tokenizeroption_push!();
+        Depcrate_tokenizerTokenizerOpts!();
+        Depcrate_tokenizerimpl_93!();
+        Depcrate_tokenizerTokenizer!();
+        Depcrate_tokenizerimpl_95!();
+        Depcrate_tokenizershorthand!();
+        Depcrate_tokenizersh_trace!();
+        Depcrate_tokenizersh_trace!();
+        Depcrate_tokenizergo!();
+        Depcrate_tokenizergo_match!();
+        Depcrate_tokenizerget_char!();
+        Depcrate_tokenizerpeek!();
+        Depcrate_tokenizerpop_except_from!();
+        Depcrate_tokenizereat!();
+        Depcrate_tokenizereat_exact!();
+        Depcrate_tokenizerimpl_106!();
+        Depcrate_tokenizertest!();
+    };
+}

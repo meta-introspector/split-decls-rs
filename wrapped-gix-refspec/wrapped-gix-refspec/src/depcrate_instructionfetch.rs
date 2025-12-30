@@ -1,0 +1,9 @@
+// Generated macro for Fetch (enum)
+macro_rules! Depcrate_instructionFetch {
+() => {
+// Module: crate::instruction
+// Provides: {"Fetch"}
+// Dependencies: {}
+# [doc = " Any source can either be a ref name (full or partial) or a fully spelled out hex-sha for an object, on the remote side."] # [doc = ""] # [doc = " Destinations can only be a partial or full ref-names on the local side."] # [derive (PartialOrd , Ord , PartialEq , Eq , Copy , Clone , Hash , Debug)] pub enum Fetch < 'a > { # [doc = " Fetch a ref or refs, without updating local branches."] Only { # [doc = " The partial or full ref name to fetch on the remote side or the full object hex-name, without updating the local side."] # [doc = " Note that this may not be a glob pattern, as those need to be matched by a destination which isn't present here."] src : & 'a BStr , } , # [doc = " Exclude a single ref."] Exclude { # [doc = " A single partial or full ref name to exclude on the remote, or a pattern with a single `*`. It cannot be a spelled out object hash."] src : & 'a BStr , } , # [doc = " Fetch from `src` and update the corresponding destination branches in `dst` accordingly."] AndUpdate { # [doc = " The ref name to fetch on the remote side, or a pattern with a single `*` to match against, or the full object hex-name."] src : & 'a BStr , # [doc = " The local destination to update with what was fetched, or a pattern whose single `*` will be replaced with the matching portion"] # [doc = " of the `*` from `src`."] dst : & 'a BStr , # [doc = " If true, allow non-fast-forward updates of `dest`."] allow_non_fast_forward : bool , } , }
+};
+}

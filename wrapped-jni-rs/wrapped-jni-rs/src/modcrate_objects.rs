@@ -1,0 +1,41 @@
+// Generated module macro for crate::objects
+macro_rules! Modcrate_objects {
+() => {
+        Depcrate_objectsjobject!();
+        Depcrate_objectsuse_277!();
+        Depcrate_objectsjthrowable!();
+        Depcrate_objectsuse_293!();
+        Depcrate_objectsjstack_trace_element!();
+        Depcrate_objectsuse_308!();
+        Depcrate_objectsjclass!();
+        Depcrate_objectsuse_324!();
+        Depcrate_objectsjclass_loader!();
+        Depcrate_objectsuse_340!();
+        Depcrate_objectsjstring!();
+        Depcrate_objectsuse_358!();
+        Depcrate_objectsjcollection!();
+        Depcrate_objectsuse_374!();
+        Depcrate_objectsjset!();
+        Depcrate_objectsuse_391!();
+        Depcrate_objectsjiterator!();
+        Depcrate_objectsuse_406!();
+        Depcrate_objectsjmap!();
+        Depcrate_objectsuse_433!();
+        Depcrate_objectsjlist!();
+        Depcrate_objectsuse_449!();
+        Depcrate_objectsjbytebuffer!();
+        Depcrate_objectsuse_464!();
+        Depcrate_objectsjthread!();
+        Depcrate_objectsuse_480!();
+        Depcrate_objectsjobject_array!();
+        Depcrate_objectsuse_497!();
+        Depcrate_objectstype_array!();
+        Depcrate_objectsuse_510!();
+        Depcrate_objectsjprimitive_array!();
+        Depcrate_objectsuse_547!();
+        Depcrate_objectsuse_548!();
+        Depcrate_objectsuse_549!();
+        Depcrate_objectsuse_550!();
+        Depcrate_objectsuse_551!();
+    };
+}

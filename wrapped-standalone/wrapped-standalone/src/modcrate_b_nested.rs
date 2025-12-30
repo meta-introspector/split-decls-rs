@@ -1,0 +1,42 @@
+// Generated module macro for crate::b_nested
+macro_rules! Modcrate_b_nested {
+() => {
+        Depcrate_b_nestedDEVMODEW!();
+        Depcrate_b_nestedimpl_122!();
+        Depcrate_b_nestedother_123!();
+        Depcrate_b_nestedimpl_124!();
+        Depcrate_b_nestedDEVMODEW_0_0!();
+        Depcrate_b_nestedDEVMODEW_0_1!();
+        Depcrate_b_nestedother_127!();
+        Depcrate_b_nestedimpl_128!();
+        Depcrate_b_nestedDEVMODE_COLLATE!();
+        Depcrate_b_nestedDEVMODE_COLOR!();
+        Depcrate_b_nestedDEVMODE_DISPLAY_FIXED_OUTPUT!();
+        Depcrate_b_nestedDEVMODE_DISPLAY_ORIENTATION!();
+        Depcrate_b_nestedDEVMODE_DUPLEX!();
+        Depcrate_b_nestedDEVMODE_FIELD_FLAGS!();
+        Depcrate_b_nestedDEVMODE_TRUETYPE_OPTION!();
+        Depcrate_b_nestedGUID!();
+        Depcrate_b_nestedimpl_137!();
+        Depcrate_b_nestedHBITMAP!();
+        Depcrate_b_nestedHENHMETAFILE!();
+        Depcrate_b_nestedHGDIOBJ!();
+        Depcrate_b_nestedHGLOBAL!();
+        Depcrate_b_nestedHRESULT!();
+        Depcrate_b_nestedIID_ISequentialStream!();
+        Depcrate_b_nestedISequentialStream_Vtbl!();
+        Depcrate_b_nestedIID_IStorage!();
+        Depcrate_b_nestedIStorage_Vtbl!();
+        Depcrate_b_nestedIID_IStream!();
+        Depcrate_b_nestedIStream_Vtbl!();
+        Depcrate_b_nestedIID_IUnknown!();
+        Depcrate_b_nestedIUnknown_Vtbl!();
+        Depcrate_b_nestedPCWSTR!();
+        Depcrate_b_nestedPOINTL!();
+        Depcrate_b_nestedPWSTR!();
+        Depcrate_b_nestedSTGMEDIUM!();
+        Depcrate_b_nestedimpl_155!();
+        Depcrate_b_nestedother_156!();
+        Depcrate_b_nestedimpl_157!();
+    };
+}

@@ -1,0 +1,53 @@
+// Generated module macro for crate::stream
+macro_rules! Modcrate_stream {
+() => {
+        Depcrate_streamuse_521!();
+        Depcrate_streamuse_522!();
+        Depcrate_streamstream!();
+        Depcrate_streamuse_1166!();
+        Depcrate_streamuse_1167!();
+        Depcrate_streamuse_1168!();
+        Depcrate_streamuse_1169!();
+        Depcrate_streamuse_1170!();
+        Depcrate_streamuse_1171!();
+        Depcrate_streamuse_1172!();
+        Depcrate_streamtry_stream!();
+        Depcrate_streamuse_1516!();
+        Depcrate_streamuse_1517!();
+        Depcrate_streamuse_1518!();
+        Depcrate_streamuse_1519!();
+        Depcrate_streamuse_1520!();
+        Depcrate_streamiter!();
+        Depcrate_streamuse_1531!();
+        Depcrate_streamrepeat!();
+        Depcrate_streamuse_1542!();
+        Depcrate_streamrepeat_with!();
+        Depcrate_streamuse_1553!();
+        Depcrate_streamempty!();
+        Depcrate_streamuse_1566!();
+        Depcrate_streamonce!();
+        Depcrate_streamuse_1580!();
+        Depcrate_streampending!();
+        Depcrate_streamuse_1593!();
+        Depcrate_streampoll_fn!();
+        Depcrate_streamuse_1605!();
+        Depcrate_streampoll_immediate!();
+        Depcrate_streamuse_1615!();
+        Depcrate_streamselect!();
+        Depcrate_streamuse_1628!();
+        Depcrate_streamselect_with_strategy!();
+        Depcrate_streamuse_1648!();
+        Depcrate_streamunfold!();
+        Depcrate_streamuse_1664!();
+        Depcrate_streamfutures_ordered!();
+        Depcrate_streamuse_1692!();
+        Depcrate_streamfutures_unordered!();
+        Depcrate_streamuse_1788!();
+        Depcrate_streamselect_all!();
+        Depcrate_streamuse_1819!();
+        Depcrate_streamabortable!();
+        Depcrate_streamuse_1825!();
+        Depcrate_streamuse_1826!();
+        Depcrate_streamassert_stream!();
+    };
+}

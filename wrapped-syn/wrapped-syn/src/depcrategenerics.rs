@@ -4,6 +4,6 @@ macro_rules! Depcrategenerics {
 // Module: crate
 // Provides: {"generics"}
 // Dependencies: {}
-# [cfg (any (feature = "full" , feature = "derive"))] mod generics ;
+mod generics ;
 };
 }

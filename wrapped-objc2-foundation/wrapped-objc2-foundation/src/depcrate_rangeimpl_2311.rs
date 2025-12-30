@@ -1,0 +1,9 @@
+// Generated macro for impl_2311 (impl)
+macro_rules! Depcrate_rangeimpl_2311 {
+() => {
+// Module: crate::range
+// Provides: {"impl_2311"}
+// Dependencies: {}
+impl NSRange { # [doc = " Create a new range with the given values."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " use objc2_foundation::NSRange;"] # [doc = " assert_eq!(NSRange::new(3, 2), NSRange::from(3..5));"] # [doc = " ```"] # [inline] # [doc (alias = "NSMakeRange")] pub const fn new (location : usize , length : usize) -> Self { Self { location , length } } # [doc = " Returns `true` if the range contains no items."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " use objc2_foundation::NSRange;"] # [doc = ""] # [doc = " assert!(!NSRange::from(3..5).is_empty());"] # [doc = " assert!( NSRange::from(3..3).is_empty());"] # [doc = " ```"] # [inline] pub fn is_empty (& self) -> bool { self . length == 0 } # [doc = " Returns `true` if the index is within the range."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " use objc2_foundation::NSRange;"] # [doc = ""] # [doc = " assert!(!NSRange::from(3..5).contains(2));"] # [doc = " assert!( NSRange::from(3..5).contains(3));"] # [doc = " assert!( NSRange::from(3..5).contains(4));"] # [doc = " assert!(!NSRange::from(3..5).contains(5));"] # [doc = ""] # [doc = " assert!(!NSRange::from(3..3).contains(3));"] # [doc = " ```"] # [inline] # [doc (alias = "NSLocationInRange")] pub fn contains (& self , index : usize) -> bool { if let Some (len) = index . checked_sub (self . location) { len < self . length } else { false } } # [doc = " Returns the upper bound of the range (exclusive)."] # [inline] # [doc (alias = "NSMaxRange")] pub fn end (& self) -> usize { self . location . checked_add (self . length) . expect ("NSRange too large") } }
+};
+}

@@ -1,0 +1,47 @@
+// Generated module macro for crate::string_cow
+macro_rules! Modcrate_string_cow {
+() => {
+        Depcrate_string_cowuse_77!();
+        Depcrate_string_cowuse_78!();
+        Depcrate_string_cowuse_79!();
+        Depcrate_string_cowuse_80!();
+        Depcrate_string_cowStdString!();
+        Depcrate_string_cowBoxedStr!();
+        Depcrate_string_cowKStringCow!();
+        Depcrate_string_cowKStringCowBase!();
+        Depcrate_string_cowKStringCowInner!();
+        Depcrate_string_cowimpl_86!();
+        Depcrate_string_cowimpl_87!();
+        Depcrate_string_cowimpl_88!();
+        Depcrate_string_cowimpl_89!();
+        Depcrate_string_cowimpl_90!();
+        Depcrate_string_cowimpl_91!();
+        Depcrate_string_cowimpl_92!();
+        Depcrate_string_cowimpl_93!();
+        Depcrate_string_cowimpl_94!();
+        Depcrate_string_cowimpl_95!();
+        Depcrate_string_cowimpl_96!();
+        Depcrate_string_cowimpl_97!();
+        Depcrate_string_cowimpl_98!();
+        Depcrate_string_cowimpl_99!();
+        Depcrate_string_cowimpl_100!();
+        Depcrate_string_cowimpl_101!();
+        Depcrate_string_cowimpl_102!();
+        Depcrate_string_cowimpl_103!();
+        Depcrate_string_cowimpl_104!();
+        Depcrate_string_cowimpl_105!();
+        Depcrate_string_cowimpl_106!();
+        Depcrate_string_cowimpl_107!();
+        Depcrate_string_cowimpl_108!();
+        Depcrate_string_cowimpl_109!();
+        Depcrate_string_cowimpl_110!();
+        Depcrate_string_cowimpl_111!();
+        Depcrate_string_cowimpl_112!();
+        Depcrate_string_cowimpl_113!();
+        Depcrate_string_cowimpl_114!();
+        Depcrate_string_cowimpl_115!();
+        Depcrate_string_cowimpl_116!();
+        Depcrate_string_cowimpl_117!();
+        Depcrate_string_cowtest!();
+    };
+}

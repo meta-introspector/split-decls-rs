@@ -1,0 +1,9 @@
+// Generated macro for demonstrate_dataset_loading (function)
+macro_rules! Depcrate_dataset_loader_exampledemonstrate_dataset_loading {
+() => {
+// Module: crate::dataset_loader_example
+// Provides: {"demonstrate_dataset_loading"}
+// Dependencies: {}
+# [doc = " CLI function to demonstrate dataset loading"] pub fn demonstrate_dataset_loading (dataset_dir : & str) -> Result < () , ValidationError > { println ! ("📚 Demonstrating Dataset Loading") ; println ! ("{}" , "=" . repeat (50)) ; let loader = DatasetLoader :: new (dataset_dir) ? ; let splits = loader . get_splits () ; println ! ("Available splits: {:?}" , splits) ; let stats = loader . get_stats () ? ; println ! ("\nDataset statistics:") ; for (split , count) in & stats { println ! ("  {}: {} examples" , split , count) ; } if splits . contains (& "train" . to_string ()) { println ! ("\n🔍 Sample from train split:") ; let train_examples = loader . load_split ("train") ? ; for (i , example) in train_examples . iter () . take (3) . enumerate () { println ! ("  Example {}:" , i + 1) ; println ! ("    Term: '{}'" , example . term) ; println ! ("    Count: {}" , example . count) ; println ! ("    Character Group: '{}'" , example . character_group) ; println ! ("    Category: '{}'" , example . category) ; } println ! ("\n🔎 Searching for terms containing 'rust':") ; let rust_terms = loader . search_by_term ("train" , "rust") ? ; println ! ("  Found {} terms containing 'rust'" , rust_terms . len ()) ; for term in rust_terms . iter () . take (5) { println ! ("    '{}' (count: {})" , term . term , term . count) ; } println ! ("\n📝 Terms in character group 'r':") ; let r_terms = loader . get_by_character_group ("train" , "r") ? ; println ! ("  Found {} terms in group 'r'" , r_terms . len ()) ; for term in r_terms . iter () . take (5) { println ! ("    '{}' (count: {})" , term . term , term . count) ; } } println ! ("\n✅ Dataset loading demonstration completed!") ; Ok (()) }
+};
+}

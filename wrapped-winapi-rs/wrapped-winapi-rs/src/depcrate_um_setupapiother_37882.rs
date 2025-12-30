@@ -1,0 +1,9 @@
+// Generated macro for other_37882 (other)
+macro_rules! Depcrate_um_setupapiother_37882 {
+() => {
+// Module: crate::um::setupapi
+// Provides: {"other_37882"}
+// Dependencies: {}
+extern "system" { pub fn SetupDiOpenDeviceInterfaceA (DeviceInfoSet : HDEVINFO , DevicePath : PCSTR , OpenFlags : DWORD , DeviceInterfaceData : PSP_DEVICE_INTERFACE_DATA ,) -> BOOL ; pub fn SetupDiOpenDeviceInterfaceW (DeviceInfoSet : HDEVINFO , DevicePath : PCWSTR , OpenFlags : DWORD , DeviceInterfaceData : PSP_DEVICE_INTERFACE_DATA ,) -> BOOL ; pub fn SetupDiGetDeviceInterfaceAlias (DeviceInfoSet : HDEVINFO , DeviceInterfaceData : PSP_DEVICE_INTERFACE_DATA , AliasInterfaceClassGuid : * const GUID , AliasDeviceInterfaceData : PSP_DEVICE_INTERFACE_DATA ,) -> BOOL ; pub fn SetupDiDeleteDeviceInterfaceData (DeviceInfoSet : HDEVINFO , DeviceInterfaceData : PSP_DEVICE_INTERFACE_DATA ,) -> BOOL ; pub fn SetupDiRemoveDeviceInterface (DeviceInfoSet : HDEVINFO , DeviceInterfaceData : PSP_DEVICE_INTERFACE_DATA ,) -> BOOL ; pub fn SetupDiGetDeviceInterfaceDetailA (DeviceInfoSet : HDEVINFO , DeviceInterfaceData : PSP_DEVICE_INTERFACE_DATA , DeviceInterfaceDetailData : PSP_DEVICE_INTERFACE_DETAIL_DATA_A , DeviceInterfaceDetailDataSize : DWORD , RequiredSize : PDWORD , DeviceInfoData : PSP_DEVINFO_DATA ,) -> BOOL ; pub fn SetupDiGetDeviceInterfaceDetailW (DeviceInfoSet : HDEVINFO , DeviceInterfaceData : PSP_DEVICE_INTERFACE_DATA , DeviceInterfaceDetailData : PSP_DEVICE_INTERFACE_DETAIL_DATA_W , DeviceInterfaceDetailDataSize : DWORD , RequiredSize : PDWORD , DeviceInfoData : PSP_DEVINFO_DATA ,) -> BOOL ; pub fn SetupDiInstallDeviceInterfaces (DeviceInfoSet : HDEVINFO , DeviceInfoData : PSP_DEVINFO_DATA ,) -> BOOL ; pub fn SetupDiSetDeviceInterfaceDefault (DeviceInfoSet : HDEVINFO , DeviceInfoData : PSP_DEVINFO_DATA , Flags : DWORD , Reserved : PVOID ,) -> BOOL ; }
+};
+}

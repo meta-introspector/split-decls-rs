@@ -1,0 +1,9 @@
+// Generated macro for Result (type)
+macro_rules! DepcrateResult {
+() => {
+// Module: crate
+// Provides: {"Result"}
+// Dependencies: {}
+# [doc = " type alias for `Result<T, Report>`"] # [doc = ""] # [doc = " This is a reasonable return type to use throughout your application but also for `fn main`; if"] # [doc = " you do, failures will be printed along with a backtrace if one was captured."] # [doc = ""] # [doc = " `eyre::Result` may be used with one *or* two type parameters."] # [doc = ""] # [doc = " ```rust"] # [doc = " use eyre::Result;"] # [doc = ""] # [doc = " # const IGNORE: &str = stringify! {"] # [doc = " fn demo1() -> Result<T> {...}"] # [doc = "            // ^ equivalent to std::result::Result<T, eyre::Report>"] # [doc = ""] # [doc = " fn demo2() -> Result<T, OtherError> {...}"] # [doc = "            // ^ equivalent to std::result::Result<T, OtherError>"] # [doc = " # };"] # [doc = " ```"] # [doc = ""] # [doc = " # Example"] # [doc = ""] # [doc = " ```"] # [doc = " # pub trait Deserialize {}"] # [doc = " #"] # [doc = " # mod serde_json {"] # [doc = " #     use super::Deserialize;"] # [doc = " #     use std::io;"] # [doc = " #"] # [doc = " #     pub fn from_str<T: Deserialize>(json: &str) -> io::Result<T> {"] # [doc = " #         unimplemented!()"] # [doc = " #     }"] # [doc = " # }"] # [doc = " #"] # [doc = " # #[derive(Debug)]"] # [doc = " # struct ClusterMap;"] # [doc = " #"] # [doc = " # impl Deserialize for ClusterMap {}"] # [doc = " #"] # [doc = " use eyre::Result;"] # [doc = ""] # [doc = " fn main() -> Result<()> {"] # [doc = "     # return Ok(());"] # [doc = "     let config = std::fs::read_to_string(\"cluster.json\")?;"] # [doc = "     let map: ClusterMap = serde_json::from_str(&config)?;"] # [doc = "     println!(\"cluster info: {:#?}\", map);"] # [doc = "     Ok(())"] # [doc = " }"] # [doc = " ```"] pub type Result < T , E = Report > = core :: result :: Result < T , E > ;
+};
+}

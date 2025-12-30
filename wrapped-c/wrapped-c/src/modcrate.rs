@@ -1,0 +1,57 @@
+// Generated module macro for crate
+macro_rules! Modcrate {
+() => {
+        Depcratecomponent_type_object!();
+        Depcrateuse_9!();
+        Depcrateuse_10!();
+        Depcrateuse_11!();
+        Depcrateuse_12!();
+        Depcrateuse_13!();
+        Depcrateuse_14!();
+        Depcrateuse_15!();
+        Depcrateuse_16!();
+        Depcrateuse_17!();
+        DepcrateC!();
+        DepcrateResourceInfo!();
+        DepcrateEnabled!();
+        Depcrateimpl_21!();
+        DepcrateOpts!();
+        Depcrateparse_rename!();
+        Depcrateimpl_24!();
+        DepcrateReturn!();
+        DepcrateCSig!();
+        DepcrateScalar!();
+        Depcrateimpl_28!();
+        Depcrateimpl_29!();
+        Depcrateimported_types_used_by_exported_interfaces!();
+        Depcrateis_prim_type!();
+        Depcrateis_prim_type_id!();
+        Depcratepush_ty_name!();
+        Depcrateowner_namespace!();
+        Depcrateinterface_identifier!();
+        Depcratec_func_name!();
+        DepcrateInterfaceGenerator!();
+        Depcrateimpl_38!();
+        Depcrateimpl_39!();
+        Depcrateimpl_40!();
+        Depcrateimpl_41!();
+        DepcrateCTypeNameInfo!();
+        Depcrategen_type_name!();
+        Depcrateimpl_44!();
+        DepcratePayloadFor!();
+        DepcrateDroppableBorrow!();
+        DepcrateFunctionBindgen!();
+        DepcrateDeferredTaskReturn!();
+        Depcrateimpl_49!();
+        Depcrateimpl_50!();
+        DepcrateSourceType!();
+        DepcrateSource!();
+        Depcrateimpl_53!();
+        Depcratewasm_type!();
+        Depcrateint_repr!();
+        Depcrateflags_repr!();
+        Depcrateis_arg_by_pointer!();
+        Depcrateto_c_ident!();
+        DepcratePOINTER_SIZE_EXPRESSION!();
+    };
+}

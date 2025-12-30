@@ -1,0 +1,9 @@
+// Generated macro for impl_9840 (impl)
+macro_rules! Depcrate_single_option_mapimpl_9840 {
+() => {
+// Module: crate::single_option_map
+// Provides: {"impl_9840"}
+// Dependencies: {}
+impl < 'tcx > LateLintPass < 'tcx > for SingleOptionMap { fn check_fn (& mut self , cx : & LateContext < 'tcx > , kind : FnKind < 'tcx > , decl : & 'tcx FnDecl < 'tcx > , body : & 'tcx Body < 'tcx > , span : Span , _fn_def : LocalDefId ,) { if let FnRetTy :: Return (_ret) = decl . output && matches ! (kind , FnKind :: ItemFn (_ , _ , _) | FnKind :: Method (_ , _)) { let func_body = peel_blocks (body . value) ; if let ExprKind :: MethodCall (method_name , callee , args , _span) = func_body . kind && method_name . ident . name == sym :: map && let callee_type = cx . typeck_results () . expr_ty (callee) && callee_type . is_diag_item (cx , sym :: Option) && let ExprKind :: Path (_path) = callee . kind && matches ! (callee . basic_res () , Res :: Local (_)) && ! matches ! (args [0] . kind , ExprKind :: Path (_)) { if let ExprKind :: Closure (closure) = args [0] . kind { let Body { params : [..] , value } = cx . tcx . hir_body (closure . body) ; if let ExprKind :: Call (func , f_args) = value . kind && matches ! (func . kind , ExprKind :: Path (_)) && f_args . iter () . all (| arg | matches ! (arg . kind , ExprKind :: Path (_))) { return ; } else if let ExprKind :: MethodCall (_segment , receiver , method_args , _span) = value . kind && matches ! (receiver . kind , ExprKind :: Path (_)) && method_args . iter () . all (| arg | matches ! (arg . kind , ExprKind :: Path (_))) && method_args . iter () . all (| arg | matches ! (arg . basic_res () , Res :: Local (_))) { return ; } } span_lint_and_help (cx , SINGLE_OPTION_MAP , span , "`fn` that only maps over argument" , None , "move the `.map` to the caller or to an `_opt` function" ,) ; } } } }
+};
+}

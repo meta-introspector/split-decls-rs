@@ -1,0 +1,9 @@
+// Generated macro for DiskUsage (struct)
+macro_rules! Depcrate_commonDiskUsage {
+() => {
+// Module: crate::common
+// Provides: {"DiskUsage"}
+// Dependencies: {}
+# [doc = " Type containing read and written bytes."] # [doc = ""] # [doc = " It is returned by [`Process::disk_usage`][crate::Process::disk_usage] and [`Disk::usage`][crate::Disk::usage]."] # [doc = ""] # [cfg_attr (not (all (feature = "system" , feature = "disk")) , doc = "```ignore")] # [doc = " ```no_run"] # [doc = " use sysinfo::{Disks, System};"] # [doc = ""] # [doc = " let s = System::new_all();"] # [doc = " for (pid, process) in s.processes() {"] # [doc = "     let disk_usage = process.disk_usage();"] # [doc = "     println!(\"[{}] read bytes   : new/total => {}/{} B\","] # [doc = "         pid,"] # [doc = "         disk_usage.read_bytes,"] # [doc = "         disk_usage.total_read_bytes,"] # [doc = "     );"] # [doc = "     println!(\"[{}] written bytes: new/total => {}/{} B\","] # [doc = "         pid,"] # [doc = "         disk_usage.written_bytes,"] # [doc = "         disk_usage.total_written_bytes,"] # [doc = "     );"] # [doc = " }"] # [doc = ""] # [doc = " let disks = Disks::new_with_refreshed_list();"] # [doc = " for disk in disks.list() {"] # [doc = "     println!(\"[{:?}] disk usage: {:?}\", disk.name(), disk.usage());"] # [doc = " }"] # [doc = " ```"] # [cfg (any (feature = "disk" , feature = "system"))] # [derive (Debug , Default , Clone , Copy , PartialEq , Eq , PartialOrd)] pub struct DiskUsage { # [doc = " Total number of written bytes."] pub total_written_bytes : u64 , # [doc = " Number of written bytes since the last refresh."] pub written_bytes : u64 , # [doc = " Total number of read bytes."] pub total_read_bytes : u64 , # [doc = " Number of read bytes since the last refresh."] pub read_bytes : u64 , }
+};
+}

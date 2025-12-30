@@ -1,0 +1,9 @@
+// Generated macro for impl_145 (impl)
+macro_rules! Depcrate_generatedimpl_145 {
+() => {
+// Module: crate::generated
+// Provides: {"impl_145"}
+// Dependencies: {}
+impl NFCVASErrorCode { # [doc (alias = "NFCVASErrorCodeSuccess")] pub const Success : Self = Self (0x9000) ; # [doc (alias = "NFCVASErrorCodeDataNotFound")] pub const DataNotFound : Self = Self (0x6A83) ; # [doc (alias = "NFCVASErrorCodeDataNotActivated")] pub const DataNotActivated : Self = Self (0x6287) ; # [doc (alias = "NFCVASErrorCodeWrongParameters")] pub const WrongParameters : Self = Self (0x6B00) ; # [doc (alias = "NFCVASErrorCodeWrongLCField")] pub const WrongLCField : Self = Self (0x6700) ; # [doc (alias = "NFCVASErrorCodeUserIntervention")] pub const UserIntervention : Self = Self (0x6984) ; # [doc (alias = "NFCVASErrorCodeIncorrectData")] pub const IncorrectData : Self = Self (0x6A80) ; # [doc (alias = "NFCVASErrorCodeUnsupportedApplicationVersion")] pub const UnsupportedApplicationVersion : Self = Self (0x6340) ; # [deprecated] pub const VASErrorCodeSuccess : Self = Self (NFCVASErrorCode :: Success . 0) ; # [deprecated] pub const VASErrorCodeDataNotFound : Self = Self (NFCVASErrorCode :: DataNotFound . 0) ; # [deprecated] pub const VASErrorCodeDataNotActivated : Self = Self (NFCVASErrorCode :: DataNotActivated . 0) ; # [deprecated] pub const VASErrorCodeWrongParameters : Self = Self (NFCVASErrorCode :: WrongParameters . 0) ; # [deprecated] pub const VASErrorCodeWrongLCField : Self = Self (NFCVASErrorCode :: WrongLCField . 0) ; # [deprecated] pub const VASErrorCodeUserIntervention : Self = Self (NFCVASErrorCode :: UserIntervention . 0) ; # [deprecated] pub const VASErrorCodeIncorrectData : Self = Self (NFCVASErrorCode :: IncorrectData . 0) ; # [deprecated] pub const VASErrorCodeUnsupportedApplicationVersion : Self = Self (NFCVASErrorCode :: UnsupportedApplicationVersion . 0) ; }
+};
+}

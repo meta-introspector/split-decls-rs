@@ -1,0 +1,39 @@
+// Generated module macro for crate::sample
+macro_rules! Modcrate_sample {
+() => {
+        Depcrate_sampleuse_1372!();
+        Depcrate_sampleuse_1373!();
+        Depcrate_sampleuse_1374!();
+        Depcrate_sampleuse_1375!();
+        Depcrate_sampleuse_1376!();
+        Depcrate_sampleuse_1377!();
+        Depcrate_sampleuse_1378!();
+        Depcrate_sampleuse_1379!();
+        Depcrate_sampleuse_1380!();
+        Depcrate_sampleuse_1381!();
+        Depcrate_sampleuse_1382!();
+        Depcrate_samplesubsequence!();
+        Depcrate_sampleSubsequence!();
+        Depcrate_sampleimpl_1385!();
+        Depcrate_sampleSubsequenceValueTree!();
+        Depcrate_sampleimpl_1387!();
+        Depcrate_sampleSelectMapFn!();
+        Depcrate_sampleimpl_1389!();
+        Depcrate_samplemacro_1390!();
+        Depcrate_sampleselect!();
+        Depcrate_sampleIndex!();
+        Depcrate_sampleimpl_1393!();
+        Depcrate_sampleimpl_1394!();
+        Depcrate_samplemacro_1395!();
+        Depcrate_samplemacro_1396!();
+        Depcrate_sampleimpl_1397!();
+        Depcrate_sampleSelector!();
+        Depcrate_sampleSelectorStrategy!();
+        Depcrate_sampleSelectorValueTree!();
+        Depcrate_sampleimpl_1401!();
+        Depcrate_sampleimpl_1402!();
+        Depcrate_sampleimpl_1403!();
+        Depcrate_sampleimpl_1404!();
+        Depcrate_sampletest!();
+    };
+}

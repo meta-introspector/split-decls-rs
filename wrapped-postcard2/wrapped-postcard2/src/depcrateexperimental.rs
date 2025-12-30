@@ -1,0 +1,9 @@
+// Generated macro for experimental (module)
+macro_rules! Depcrateexperimental {
+() => {
+// Module: crate
+// Provides: {"experimental"}
+// Dependencies: {}
+# [doc = " # Experimental Postcard Features"] # [doc = ""] # [doc = " Items inside this module require various feature flags, and are not"] # [doc = " subject to SemVer stability. Items may be removed or deprecated at"] # [doc = " any point."] # [doc = ""] # [doc = " ## Derive"] # [doc = ""] # [doc = " The `experimental-derive` feature enables one experimental feature:"] # [doc = ""] # [doc = " * Max size calculation"] # [doc = ""] # [doc = " ### Max Size Calculation"] # [doc = ""] # [doc = " This features enables calculation of the Max serialized size of a message as"] # [doc = " an associated `usize` constant called `POSTCARD_MAX_SIZE`. It also provides a"] # [doc = " `#[derive(MaxSize)]` macro that can be used for calculating user types."] # [doc = ""] # [doc = " This is useful for determining the maximum buffer size needed when receiving"] # [doc = " or sending a message that has been serialized."] # [doc = ""] # [doc = " NOTE: This only covers the size of \"plain\" flavored messages, e.g. not with COBS"] # [doc = " or any other Flavors applied. The overhead for these flavors must be calculated"] # [doc = " separately."] # [doc = ""] # [doc = " Please report any missing types, or any incorrectly calculated values."] # [doc = ""] # [doc = " ### Message Schema Generation"] # [doc = ""] # [doc = " This now lives in the `postcard-schema` crate."] pub mod experimental { # [doc = " Compile time max-serialization size calculation"] # [cfg (feature = "experimental-derive")] # [cfg_attr (docsrs , doc (cfg (feature = "experimental-derive")))] pub mod max_size { pub use crate :: max_size :: MaxSize ; pub use postcard_derive_ng :: MaxSize ; } pub use crate :: ser :: serialized_size ; }
+};
+}

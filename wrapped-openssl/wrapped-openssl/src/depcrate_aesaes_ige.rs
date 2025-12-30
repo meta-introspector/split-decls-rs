@@ -1,0 +1,9 @@
+// Generated macro for aes_ige (function)
+macro_rules! Depcrate_aesaes_ige {
+() => {
+// Module: crate::aes
+// Provides: {"aes_ige"}
+// Dependencies: {}
+# [doc = " Performs AES IGE encryption or decryption"] # [doc = ""] # [doc = " AES IGE (Infinite Garble Extension) is a form of AES block cipher utilized in"] # [doc = " OpenSSL.  Infinite Garble refers to propagating forward errors.  IGE, like other"] # [doc = " block ciphers implemented for AES requires an initialization vector.  The IGE mode"] # [doc = " allows a stream of blocks to be encrypted or decrypted without having the entire"] # [doc = " plaintext available.  For more information, visit [AES IGE Encryption]."] # [doc = ""] # [doc = " This block cipher uses 16 byte blocks.  The rust implementation will panic"] # [doc = " if the input or output does not meet this 16-byte boundary.  Attention must"] # [doc = " be made in this low level implementation to pad the value to the 128-bit boundary."] # [doc = ""] # [doc = " [AES IGE Encryption]: http://www.links.org/files/openssl-ige.pdf"] # [doc = ""] # [doc = " # Panics"] # [doc = ""] # [doc = " Panics if `in_` is not the same length as `out`, if that length is not a multiple of 16, or if"] # [doc = " `iv` is not at least 32 bytes."] # [cfg (not (any (boringssl , awslc)))] # [cfg (not (osslconf = "OPENSSL_NO_DEPRECATED_3_0"))] # [corresponds (AES_ige_encrypt)] pub fn aes_ige (in_ : & [u8] , out : & mut [u8] , key : & AesKey , iv : & mut [u8] , mode : Mode) { unsafe { assert ! (in_ . len () == out . len ()) ; assert ! (in_ . len () % ffi :: AES_BLOCK_SIZE as usize == 0) ; assert ! (iv . len () >= ffi :: AES_BLOCK_SIZE as usize * 2) ; let mode = match mode { Mode :: Encrypt => ffi :: AES_ENCRYPT , Mode :: Decrypt => ffi :: AES_DECRYPT , } ; ffi :: AES_ige_encrypt (in_ . as_ptr () as * const _ , out . as_mut_ptr () as * mut _ , in_ . len () , & key . 0 , iv . as_mut_ptr () as * mut _ , mode ,) ; } }
+};
+}

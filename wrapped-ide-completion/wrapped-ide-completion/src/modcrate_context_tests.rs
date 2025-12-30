@@ -1,0 +1,53 @@
+// Generated module macro for crate::context::tests
+macro_rules! Modcrate_context_tests {
+() => {
+        Depcrate_context_testsattribute!();
+        Depcrate_context_testsexpression!();
+        Depcrate_context_testsflyimport!();
+        Depcrate_context_testsfn_param!();
+        Depcrate_context_testsitem!();
+        Depcrate_context_testsitem_list!();
+        Depcrate_context_testspattern!();
+        Depcrate_context_testspredicate!();
+        Depcrate_context_testsproc_macros!();
+        Depcrate_context_testsraw_identifiers!();
+        Depcrate_context_testsrecord!();
+        Depcrate_context_testsspecial!();
+        Depcrate_context_teststype_pos!();
+        Depcrate_context_testsuse_tree!();
+        Depcrate_context_testsvisibility!();
+        Depcrate_context_testsuse_100!();
+        Depcrate_context_testsuse_101!();
+        Depcrate_context_testsuse_102!();
+        Depcrate_context_testsuse_103!();
+        Depcrate_context_testsuse_104!();
+        Depcrate_context_testsuse_105!();
+        Depcrate_context_testsuse_106!();
+        Depcrate_context_testsuse_107!();
+        Depcrate_context_testsuse_108!();
+        Depcrate_context_testsuse_109!();
+        Depcrate_context_testsBASE_ITEMS_FIXTURE!();
+        Depcrate_context_testsTEST_CONFIG!();
+        Depcrate_context_testscompletion_list!();
+        Depcrate_context_testscompletion_list_no_kw!();
+        Depcrate_context_testscompletion_list_no_kw_with_private_editable!();
+        Depcrate_context_testscompletion_list_with_trigger_character!();
+        Depcrate_context_testscompletion_list_with_config_raw!();
+        Depcrate_context_testscompletion_list_with_config!();
+        Depcrate_context_testsposition!();
+        Depcrate_context_testsdo_completion!();
+        Depcrate_context_testsdo_completion_with_config!();
+        Depcrate_context_testsrender_completion_list!();
+        Depcrate_context_testscheck_edit!();
+        Depcrate_context_testscheck_edit_with_config!();
+        Depcrate_context_testscheck!();
+        Depcrate_context_testscheck_with_base_items!();
+        Depcrate_context_testscheck_no_kw!();
+        Depcrate_context_testscheck_with_private_editable!();
+        Depcrate_context_testscheck_with_trigger_character!();
+        Depcrate_context_testsget_all_items!();
+        Depcrate_context_teststest_no_completions_in_for_loop_in_kw_pos!();
+        Depcrate_context_testsregression_10042!();
+        Depcrate_context_testsno_completions_in_comments!();
+    };
+}

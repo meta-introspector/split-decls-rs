@@ -1,0 +1,40 @@
+// Generated module macro for crate::lru_disk_cache
+macro_rules! Modcrate_lru_disk_cache {
+() => {
+        Depcrate_lru_disk_cachelru_cache!();
+        Depcrate_lru_disk_cacheuse_1235!();
+        Depcrate_lru_disk_cacheuse_1236!();
+        Depcrate_lru_disk_cacheuse_1237!();
+        Depcrate_lru_disk_cacheuse_1238!();
+        Depcrate_lru_disk_cacheuse_1239!();
+        Depcrate_lru_disk_cacheuse_1240!();
+        Depcrate_lru_disk_cacheuse_1241!();
+        Depcrate_lru_disk_cacheuse_1242!();
+        Depcrate_lru_disk_cacheuse_1243!();
+        Depcrate_lru_disk_cacheuse_1244!();
+        Depcrate_lru_disk_cacheuse_1245!();
+        Depcrate_lru_disk_cacheuse_1246!();
+        Depcrate_lru_disk_cacheuse_1247!();
+        Depcrate_lru_disk_cacheuse_1248!();
+        Depcrate_lru_disk_cacheuse_1249!();
+        Depcrate_lru_disk_cacheuse_1250!();
+        Depcrate_lru_disk_cacheuse_1251!();
+        Depcrate_lru_disk_cacheTEMPFILE_PREFIX!();
+        Depcrate_lru_disk_cacheFileSize!();
+        Depcrate_lru_disk_cacheimpl_1254!();
+        Depcrate_lru_disk_cacheget_all_files!();
+        Depcrate_lru_disk_cacheLruDiskCache!();
+        Depcrate_lru_disk_cacheError!();
+        Depcrate_lru_disk_cacheimpl_1258!();
+        Depcrate_lru_disk_cacheimpl_1259!();
+        Depcrate_lru_disk_cacheimpl_1260!();
+        Depcrate_lru_disk_cacheResult!();
+        Depcrate_lru_disk_cacheReadSeek!();
+        Depcrate_lru_disk_cacheimpl_1263!();
+        Depcrate_lru_disk_cacheAddFile!();
+        Depcrate_lru_disk_cacheLruDiskCacheAddEntry!();
+        Depcrate_lru_disk_cacheimpl_1266!();
+        Depcrate_lru_disk_cacheimpl_1267!();
+        Depcrate_lru_disk_cachetests!();
+    };
+}

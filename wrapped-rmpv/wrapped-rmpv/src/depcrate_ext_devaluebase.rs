@@ -1,0 +1,9 @@
+// Generated macro for ValueBase (trait)
+macro_rules! Depcrate_ext_deValueBase {
+() => {
+// Module: crate::ext::de
+// Provides: {"ValueBase"}
+// Dependencies: {}
+trait ValueBase < 'de > : Deserializer < 'de , Error = Error > + ValueExt { type Item : ValueBase < 'de > ; type Iter : ExactSizeIterator < Item = Self :: Item > ; type MapIter : Iterator < Item = (Self :: Item , Self :: Item) > ; type MapDeserializer : Deserializer < 'de > ; fn is_nil (& self) -> bool ; fn into_iter (self) -> Result < Self :: Iter , Self :: Item > ; fn into_map_iter (self) -> Result < Self :: MapIter , Self :: Item > ; # [inline] fn deserialize_option < V > (self , visitor : V) -> Result < V :: Value , Self :: Error > where V : Visitor < 'de > { if self . is_nil () { visitor . visit_none () } else { visitor . visit_some (self) } } # [inline] fn deserialize_enum < V > (self , visitor : V) -> Result < V :: Value , Self :: Error > where V : Visitor < 'de > { match self . into_iter () { Ok (mut iter) => { if ! (iter . len () == 1 || iter . len () == 2) { return Err (de :: Error :: invalid_length (iter . len () , & "array with one or two elements")) ; } let id = match iter . next () { Some (id) => deserialize_from (id) ? , None => { return Err (de :: Error :: invalid_value (Unexpected :: Seq , & "array with one or two elements")) ; } } ; visitor . visit_enum (EnumDeserializer :: new (id , iter . next ())) } Err (other) => { Err (de :: Error :: invalid_type (other . unexpected () , & "array, map or int")) } } } # [inline] fn deserialize_unit_struct < V > (self , visitor : V) -> Result < V :: Value , Self :: Error > where V : Visitor < 'de > { match self . into_iter () { Ok (iter) => { if iter . len () == 0 { visitor . visit_unit () } else { Err (de :: Error :: invalid_type (Unexpected :: Seq , & "empty array")) } } Err (other) => Err (de :: Error :: invalid_type (other . unexpected () , & "empty array")) , } } }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for impl_64 (impl)
+macro_rules! Depcrate_linuximpl_64 {
+() => {
+// Module: crate::linux
+// Provides: {"impl_64"}
+// Dependencies: {}
+impl < 'a > SharedLibrary < 'a > { unsafe fn new (info : & 'a libc :: dl_phdr_info , size : usize , is_first_lib : bool) -> Self { let mut name = Cow :: Borrowed (if info . dlpi_name . is_null () { CStr :: from_bytes_with_nul_unchecked (b"\0") } else { CStr :: from_ptr (info . dlpi_name) }) ; if name . to_bytes () . is_empty () { if is_first_lib { if let Ok (exe) = current_exe () { name = Cow :: Owned (CString :: from_vec_unchecked (exe . into_os_string () . into_vec ())) ; } } else { let mut dlinfo : libc :: Dl_info = mem :: zeroed () ; if libc :: dladdr (info . dlpi_addr as * const libc :: c_void , & mut dlinfo) != 0 { name = Cow :: Owned (CString :: from (CStr :: from_ptr (dlinfo . dli_fname))) ; } } } SharedLibrary { size : size , addr : info . dlpi_addr as usize as * const _ , name , headers : slice :: from_raw_parts (info . dlpi_phdr , info . dlpi_phnum as usize) , } } unsafe extern "C" fn callback < F , C > (info : * mut libc :: dl_phdr_info , size : usize , state : * mut libc :: c_void ,) -> libc :: c_int where F : FnMut (& Self) -> C , C : Into < IterationControl > , { if (* info) . dlpi_phdr . is_null () { return CONTINUE ; } let state = & mut * (state as * mut IterState < F >) ; state . idx += 1 ; match panic :: catch_unwind (panic :: AssertUnwindSafe (| | { let info = info . as_ref () . unwrap () ; let shlib = SharedLibrary :: new (info , size , state . idx == 1) ; (state . f) (& shlib) . into () })) { Ok (IterationControl :: Continue) => CONTINUE , Ok (IterationControl :: Break) => BREAK , Err (panicked) => { state . panic = Some (panicked) ; BREAK } } } fn note_segments (& self) -> impl Iterator < Item = Segment < 'a > > { self . segments () . filter (| s | s . is_note ()) } }
+};
+}

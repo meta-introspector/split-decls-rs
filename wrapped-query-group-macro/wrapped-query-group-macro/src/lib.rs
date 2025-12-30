@@ -1,0 +1,65 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcrateimpl_41.rs");
+include!("depcrateuse_10.rs");
+include!("depcrateremoveattrsfromtraitmethods.rs");
+include!("depcrateinputstructfield.rs");
+include!("depcrate_queriessetterkind.rs");
+include!("depcrateimpl_38.rs");
+include!("depcrate_queriesimpl_33.rs");
+include!("depcratefilter_attrs.rs");
+include!("depcratequerykind.rs");
+include!("depcrateselftodbrewriter.rs");
+include!("depcrate_queriestransparent.rs");
+include!("depcrateuse_3.rs");
+include!("depcrate_queriesimpl_26.rs");
+include!("depcrate_queriesimpl_18.rs");
+include!("depcrate_queriesuse_15.rs");
+include!("depcrateimpl_46.rs");
+include!("depcrateuse_2.rs");
+include!("depcrateuse_1.rs");
+include!("depcrateuse_8.rs");
+include!("depcrate_queriestrackedquery.rs");
+include!("depcratequeries.rs");
+include!("depcrateuse_7.rs");
+include!("depcrate_queriesimpl_22.rs");
+include!("depcrateuse_6.rs");
+include!("depcrateimpl_40.rs");
+include!("depcrate_queriesuse_14.rs");
+include!("depcrate_queriesuse_13.rs");
+include!("depcratequery_group_impl.rs");
+include!("depcrate_queriesintern.rs");
+include!("depcratecycle.rs");
+include!("depcrate_queriesimpl_20.rs");
+include!("depcrateuse_11.rs");
+include!("depcrate_queriesgeneratedinputstruct.rs");
+include!("depcrate_queriesinputquery.rs");
+include!("depcrate_queriesimpl_24.rs");
+include!("depcrate_querieslookup.rs");
+include!("depcrate_queriesimpl_35.rs");
+include!("depcratesalsaattr.rs");
+include!("depcrate_queriesinputsetter.rs");
+include!("depcrateis_not_salsa_attr_path.rs");
+include!("depcrate_queriesimpl_28.rs");
+include!("depcratemake_trait_method.rs");
+include!("depcrateimpl_52.rs");
+include!("depcratetoken_stream_with_error.rs");
+include!("depcrate_queriesimpl_32.rs");
+include!("depcrate_queriesimpl_30.rs");
+include!("depcratequery_group.rs");
+include!("depcrateuse_9.rs");
+include!("depcrateparenthesized.rs");
+include!("depcrate_queriesinputsetterwithdurability.rs");
+include!("depcrateimpl_55.rs");
+include!("depcrateimpl_49.rs");
+include!("depcrateuse_4.rs");
+include!("depcrateuse_5.rs");
+include!("depcrate_queriesqueries.rs");
+include!("modcrate_queries.rs");
+include!("modcrate.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate_queries!();
+    Modcrate!();
+}

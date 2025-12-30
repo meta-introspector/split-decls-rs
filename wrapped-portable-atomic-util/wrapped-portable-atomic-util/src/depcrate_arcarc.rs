@@ -1,0 +1,9 @@
+// Generated macro for Arc (struct)
+macro_rules! Depcrate_arcArc {
+() => {
+// Module: crate::arc
+// Provides: {"Arc"}
+// Dependencies: {}
+# [doc = " A thread-safe reference-counting pointer. 'Arc' stands for 'Atomically"] # [doc = " Reference Counted'."] # [doc = ""] # [doc = " This is an equivalent to [`std::sync::Arc`], but using [portable-atomic] for synchronization."] # [doc = " See the documentation for [`std::sync::Arc`] for more details."] # [doc = ""] # [doc = " **Note:** Unlike `std::sync::Arc`, coercing `Arc<T>` to `Arc<U>` is only possible if"] # [doc = " the optional cfg `portable_atomic_unstable_coerce_unsized` is enabled, as documented at the crate-level documentation,"] # [doc = " and this optional cfg item is only supported with Rust nightly version."] # [doc = " This is because coercing the pointee requires the"] # [doc = " [unstable `CoerceUnsized` trait](https://doc.rust-lang.org/nightly/core/ops/trait.CoerceUnsized.html)."] # [doc = " See [this issue comment](https://github.com/taiki-e/portable-atomic/issues/143#issuecomment-1866488569)"] # [doc = " for a workaround that works without depending on unstable features."] # [doc = ""] # [doc = " [portable-atomic]: https://crates.io/crates/portable-atomic"] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " use portable_atomic_util::Arc;"] # [doc = " use std::thread;"] # [doc = ""] # [doc = " let five = Arc::new(5);"] # [doc = ""] # [doc = " for _ in 0..10 {"] # [doc = "     let five = Arc::clone(&five);"] # [doc = ""] # [doc = "     thread::spawn(move || {"] # [doc = "         assert_eq!(*five, 5);"] # [doc = "     });"] # [doc = " }"] # [doc = " # if cfg!(miri) { std::thread::sleep(std::time::Duration::from_millis(500)); } // wait for background threads closed: https://github.com/rust-lang/miri/issues/1371"] # [doc = " ```"] pub struct Arc < T : ? Sized > { ptr : NonNull < ArcInner < T > > , phantom : PhantomData < ArcInner < T > > , }
+};
+}

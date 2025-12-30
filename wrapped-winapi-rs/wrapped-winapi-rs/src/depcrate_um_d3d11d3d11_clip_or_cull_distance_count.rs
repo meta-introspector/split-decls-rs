@@ -1,0 +1,9 @@
+// Generated macro for D3D11_CLIP_OR_CULL_DISTANCE_COUNT (const)
+macro_rules! Depcrate_um_d3d11D3D11_CLIP_OR_CULL_DISTANCE_COUNT {
+() => {
+// Module: crate::um::d3d11
+// Provides: {"D3D11_CLIP_OR_CULL_DISTANCE_COUNT"}
+// Dependencies: {}
+pub const D3D11_CLIP_OR_CULL_DISTANCE_COUNT : DWORD = 8 ;
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for generate_where_clause (function)
+macro_rules! Depcrate_expandgenerate_where_clause {
+() => {
+// Module: crate::expand
+// Provides: {"generate_where_clause"}
+// Dependencies: {}
+# [doc = " Generate a `where` clause that ensures all generic type parameters `impl`"] # [doc = " [core::fmt::Display] unless already constrained."] # [doc = ""] # [doc = " This approach allows struct/enum definitions deriving [crate::Display] to avoid hardcoding"] # [doc = " a [core::fmt::Display] constraint into every type parameter."] # [doc = ""] # [doc = " If the type parameter isn't already constrained, we add a `where _: Display` clause to our"] # [doc = " display implementation to expect to be able to format every enum case or struct member."] # [doc = ""] # [doc = " In fact, we would preferably only require `where _: Display` or `where _: Debug` where the"] # [doc = " format string actually requires it. However, while [`std::fmt` defines a formal syntax for"] # [doc = " `format!()`][format syntax], it *doesn't* expose the actual logic to parse the format string,"] # [doc = " which appears to live in [`rustc_parse_format`]. While we use the [`syn`] crate to parse rust"] # [doc = " syntax, it also doesn't currently provide any method to introspect a `format!()` string. It"] # [doc = " would be nice to contribute this upstream in [`syn`]."] # [doc = ""] # [doc = " [format syntax]: std::fmt#syntax"] # [doc = " [`rustc_parse_format`]: https://doc.rust-lang.org/nightly/nightly-rustc/rustc_parse_format/index.html"] fn generate_where_clause (generics : & Generics , where_clause : Option < & WhereClause >) -> WhereClause { let mut where_clause = where_clause . cloned () . unwrap_or_else (new_empty_where_clause) ; let type_params : Vec < & TypeParam > = generics . type_params () . collect () ; ensure_where_clause_has_display_for_all_unconstrained_members (& mut where_clause , & type_params) ; where_clause }
+};
+}

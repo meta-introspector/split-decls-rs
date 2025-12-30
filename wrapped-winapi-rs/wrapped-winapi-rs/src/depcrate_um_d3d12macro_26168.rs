@@ -1,0 +1,9 @@
+// Generated macro for macro_26168 (macro)
+macro_rules! Depcrate_um_d3d12macro_26168 {
+() => {
+// Module: crate::um::d3d12
+// Provides: {"macro_26168"}
+// Dependencies: {}
+ENUM ! { enum D3D12_SHADER_CACHE_SUPPORT_FLAGS { D3D12_SHADER_CACHE_SUPPORT_NONE = 0 , D3D12_SHADER_CACHE_SUPPORT_SINGLE_PSO = 0x1 , D3D12_SHADER_CACHE_SUPPORT_LIBRARY = 0x2 , D3D12_SHADER_CACHE_SUPPORT_AUTOMATIC_INPROC_CACHE = 0x4 , D3D12_SHADER_CACHE_SUPPORT_AUTOMATIC_DISK_CACHE = 0x8 , } }
+};
+}

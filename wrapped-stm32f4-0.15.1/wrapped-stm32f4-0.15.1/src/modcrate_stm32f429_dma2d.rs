@@ -1,0 +1,50 @@
+// Generated module macro for crate::stm32f429::dma2d
+macro_rules! Modcrate_stm32f429_dma2d {
+() => {
+        Depcrate_stm32f429_dma2dRegisterBlock!();
+        Depcrate_stm32f429_dma2dCR!();
+        Depcrate_stm32f429_dma2dcr!();
+        Depcrate_stm32f429_dma2dISR!();
+        Depcrate_stm32f429_dma2disr!();
+        Depcrate_stm32f429_dma2dIFCR!();
+        Depcrate_stm32f429_dma2difcr!();
+        Depcrate_stm32f429_dma2dFGMAR!();
+        Depcrate_stm32f429_dma2dfgmar!();
+        Depcrate_stm32f429_dma2dFGOR!();
+        Depcrate_stm32f429_dma2dfgor!();
+        Depcrate_stm32f429_dma2dBGMAR!();
+        Depcrate_stm32f429_dma2dbgmar!();
+        Depcrate_stm32f429_dma2dBGOR!();
+        Depcrate_stm32f429_dma2dbgor!();
+        Depcrate_stm32f429_dma2dFGPFCCR!();
+        Depcrate_stm32f429_dma2dfgpfccr!();
+        Depcrate_stm32f429_dma2dFGCOLR!();
+        Depcrate_stm32f429_dma2dfgcolr!();
+        Depcrate_stm32f429_dma2dBGPFCCR!();
+        Depcrate_stm32f429_dma2dbgpfccr!();
+        Depcrate_stm32f429_dma2dBGCOLR!();
+        Depcrate_stm32f429_dma2dbgcolr!();
+        Depcrate_stm32f429_dma2dFGCMAR!();
+        Depcrate_stm32f429_dma2dfgcmar!();
+        Depcrate_stm32f429_dma2dBGCMAR!();
+        Depcrate_stm32f429_dma2dbgcmar!();
+        Depcrate_stm32f429_dma2dOPFCCR!();
+        Depcrate_stm32f429_dma2dopfccr!();
+        Depcrate_stm32f429_dma2dOCOLR!();
+        Depcrate_stm32f429_dma2docolr!();
+        Depcrate_stm32f429_dma2dOMAR!();
+        Depcrate_stm32f429_dma2domar!();
+        Depcrate_stm32f429_dma2dOOR!();
+        Depcrate_stm32f429_dma2door!();
+        Depcrate_stm32f429_dma2dNLR!();
+        Depcrate_stm32f429_dma2dnlr!();
+        Depcrate_stm32f429_dma2dLWR!();
+        Depcrate_stm32f429_dma2dlwr!();
+        Depcrate_stm32f429_dma2dAMTCR!();
+        Depcrate_stm32f429_dma2damtcr!();
+        Depcrate_stm32f429_dma2dFGCLUT!();
+        Depcrate_stm32f429_dma2dfgclut!();
+        Depcrate_stm32f429_dma2dBGCLUT!();
+        Depcrate_stm32f429_dma2dbgclut!();
+    };
+}

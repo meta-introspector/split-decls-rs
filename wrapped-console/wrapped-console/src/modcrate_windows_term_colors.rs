@@ -1,0 +1,43 @@
+// Generated module macro for crate::windows_term::colors
+macro_rules! Modcrate_windows_term_colors {
+() => {
+        Depcrate_windows_term_colorsuse_195!();
+        Depcrate_windows_term_colorsuse_196!();
+        Depcrate_windows_term_colorsuse_197!();
+        Depcrate_windows_term_colorsuse_198!();
+        Depcrate_windows_term_colorsuse_199!();
+        Depcrate_windows_term_colorsuse_200!();
+        Depcrate_windows_term_colorsuse_201!();
+        Depcrate_windows_term_colorsuse_202!();
+        Depcrate_windows_term_colorsWORD!();
+        Depcrate_windows_term_colorsFG_CYAN!();
+        Depcrate_windows_term_colorsFG_MAGENTA!();
+        Depcrate_windows_term_colorsFG_YELLOW!();
+        Depcrate_windows_term_colorsFG_WHITE!();
+        Depcrate_windows_term_colorsscreen_buffer_info!();
+        Depcrate_windows_term_colorsset_text_attributes!();
+        Depcrate_windows_term_colorsScreenBufferInfo!();
+        Depcrate_windows_term_colorsimpl_211!();
+        Depcrate_windows_term_colorsConsole!();
+        Depcrate_windows_term_colorsHandleKind!();
+        Depcrate_windows_term_colorsimpl_214!();
+        Depcrate_windows_term_colorsimpl_215!();
+        Depcrate_windows_term_colorsTextAttributes!();
+        Depcrate_windows_term_colorsimpl_217!();
+        Depcrate_windows_term_colorsIntense!();
+        Depcrate_windows_term_colorsimpl_219!();
+        Depcrate_windows_term_colorsColor!();
+        Depcrate_windows_term_colorsimpl_221!();
+        Depcrate_windows_term_colorsconsole_colors!();
+        Depcrate_windows_term_colorsFgBg!();
+        Depcrate_windows_term_colorsimpl_224!();
+        Depcrate_windows_term_colorsdriver!();
+        Depcrate_windows_term_colorsparse_color!();
+        Depcrate_windows_term_colorsparse_attr!();
+        Depcrate_windows_term_colorsparse_prefix!();
+        Depcrate_windows_term_colorsparse_intense_color_ansi!();
+        Depcrate_windows_term_colorsnormal_color_ansi_from_byte!();
+        Depcrate_windows_term_colorsparse_suffix!();
+        Depcrate_windows_term_colorstests!();
+    };
+}

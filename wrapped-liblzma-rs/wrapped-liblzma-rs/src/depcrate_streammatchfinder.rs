@@ -1,0 +1,9 @@
+// Generated macro for MatchFinder (enum)
+macro_rules! Depcrate_streamMatchFinder {
+() => {
+// Module: crate::stream
+// Provides: {"MatchFinder"}
+// Dependencies: {}
+# [doc = " Match finders"] # [doc = ""] # [doc = " Match finder has major effect on both speed and compression ratio. Usually"] # [doc = " hash chains are faster than binary trees."] # [doc = ""] # [doc = " If you will use `SyncFlush` often, the hash chains may be a better choice,"] # [doc = " because binary trees get much higher compression ratio penalty with"] # [doc = " `SyncFlush`."] # [doc = ""] # [doc = " The memory usage formulas are only rough estimates, which are closest to"] # [doc = " reality when dict_size is a power of two. The formulas are  more complex in"] # [doc = " reality, and can also change a little between liblzma versions."] # [derive (Debug , Copy , Clone)] pub enum MatchFinder { # [doc = " Hash Chain with 2- and 3-byte hashing"] HashChain3 = liblzma_sys :: LZMA_MF_HC3 as isize , # [doc = " Hash Chain with 2-, 3-, and 4-byte hashing"] HashChain4 = liblzma_sys :: LZMA_MF_HC4 as isize , # [doc = " Binary Tree with 2-byte hashing"] BinaryTree2 = liblzma_sys :: LZMA_MF_BT2 as isize , # [doc = " Binary Tree with 2- and 3-byte hashing"] BinaryTree3 = liblzma_sys :: LZMA_MF_BT3 as isize , # [doc = " Binary Tree with 2-, 3-, and 4-byte hashing"] BinaryTree4 = liblzma_sys :: LZMA_MF_BT4 as isize , }
+};
+}

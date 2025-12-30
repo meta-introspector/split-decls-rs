@@ -1,0 +1,47 @@
+// Generated module macro for crate::output::table
+macro_rules! Modcrate_output_table {
+() => {
+        Depcrate_output_tableuse_812!();
+        Depcrate_output_tableuse_813!();
+        Depcrate_output_tableuse_814!();
+        Depcrate_output_tableuse_815!();
+        Depcrate_output_tableuse_816!();
+        Depcrate_output_tableuse_817!();
+        Depcrate_output_tableuse_818!();
+        Depcrate_output_tableuse_819!();
+        Depcrate_output_tableuse_820!();
+        Depcrate_output_tableuse_821!();
+        Depcrate_output_tableuse_822!();
+        Depcrate_output_tableuse_823!();
+        Depcrate_output_tableuse_824!();
+        Depcrate_output_tableuse_825!();
+        Depcrate_output_tableuse_826!();
+        Depcrate_output_tableuse_827!();
+        Depcrate_output_tableuse_828!();
+        Depcrate_output_tableuse_829!();
+        Depcrate_output_tableOptions!();
+        Depcrate_output_tableColumns!();
+        Depcrate_output_tableimpl_832!();
+        Depcrate_output_tableColumn!();
+        Depcrate_output_tableAlignment!();
+        Depcrate_output_tableimpl_835!();
+        Depcrate_output_tableSizeFormat!();
+        Depcrate_output_tableUserFormat!();
+        Depcrate_output_tableGroupFormat!();
+        Depcrate_output_tableTimeType!();
+        Depcrate_output_tableimpl_840!();
+        Depcrate_output_tableFlagsFormat!();
+        Depcrate_output_tableimpl_842!();
+        Depcrate_output_tableTimeTypes!();
+        Depcrate_output_tableimpl_844!();
+        Depcrate_output_tableEnvironment!();
+        Depcrate_output_tableimpl_846!();
+        Depcrate_output_tableENVIRONMENT!();
+        Depcrate_output_tableTable!();
+        Depcrate_output_tableRow!();
+        Depcrate_output_tableimpl_850!();
+        Depcrate_output_tableTableWidths!();
+        Depcrate_output_tableimpl_852!();
+        Depcrate_output_tableimpl_853!();
+    };
+}

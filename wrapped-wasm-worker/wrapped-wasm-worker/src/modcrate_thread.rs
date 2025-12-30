@@ -1,0 +1,49 @@
+// Generated module macro for crate::thread
+macro_rules! Modcrate_thread {
+() => {
+        Depcrate_threadatomics!();
+        Depcrate_threadaudio_worklet!();
+        Depcrate_threadbuilder!();
+        Depcrate_threadglobal!();
+        Depcrate_threadjs!();
+        Depcrate_threadscope!();
+        Depcrate_threadspawn!();
+        Depcrate_threadunsupported!();
+        Depcrate_threadyield_now!();
+        Depcrate_threaduse_482!();
+        Depcrate_threaduse_483!();
+        Depcrate_threaduse_484!();
+        Depcrate_threaduse_485!();
+        Depcrate_threaduse_486!();
+        Depcrate_threaduse_487!();
+        Depcrate_threaduse_488!();
+        Depcrate_threaduse_489!();
+        Depcrate_threaduse_490!();
+        Depcrate_threaduse_491!();
+        Depcrate_threaduse_492!();
+        Depcrate_threaduse_493!();
+        Depcrate_threaduse_494!();
+        Depcrate_threaduse_495!();
+        Depcrate_threaduse_496!();
+        Depcrate_threaduse_497!();
+        Depcrate_threaduse_498!();
+        Depcrate_threaduse_499!();
+        Depcrate_threaduse_500!();
+        Depcrate_threadThread!();
+        Depcrate_threadThreadInner!();
+        Depcrate_threadmacro_503!();
+        Depcrate_threadimpl_504!();
+        Depcrate_threadThreadId!();
+        Depcrate_threadimpl_506!();
+        Depcrate_threadavailable_parallelism!();
+        Depcrate_threadcurrent!();
+        Depcrate_threadpark!();
+        Depcrate_threadpark_timeout!();
+        Depcrate_threadpark_timeout_ms!();
+        Depcrate_threadsleep!();
+        Depcrate_threadsleep_ms!();
+        Depcrate_threadhas_block_support!();
+        Depcrate_threadhas_spawn_support!();
+        Depcrate_threadhas_shared_array_buffer_support!();
+    };
+}

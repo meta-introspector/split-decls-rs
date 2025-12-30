@@ -1,0 +1,9 @@
+// Generated macro for impl_956 (impl)
+macro_rules! Depcrate_validation_rules_variables_in_allowed_positionimpl_956 {
+() => {
+// Module: crate::validation::rules::variables_in_allowed_position
+// Provides: {"impl_956"}
+// Dependencies: {}
+impl < 'a , S > Visitor < 'a , S > for VariableInAllowedPosition < 'a , S > where S : ScalarValue , { fn exit_document (& mut self , ctx : & mut ValidatorContext < 'a , S > , _ : & 'a Document < S >) { for (op_scope , var_defs) in & self . variable_defs { self . collect_incorrect_usages (op_scope , var_defs , ctx , & mut HashSet :: new ()) ; } } fn enter_fragment_definition (& mut self , _ : & mut ValidatorContext < 'a , S > , fragment : & 'a Spanning < Fragment < S > > ,) { self . current_scope = Some (Scope :: Fragment (fragment . item . name . item)) ; } fn enter_operation_definition (& mut self , _ : & mut ValidatorContext < 'a , S > , op : & 'a Spanning < Operation < S > > ,) { self . current_scope = Some (Scope :: Operation (op . item . name . as_ref () . map (| s | s . item))) ; } fn enter_fragment_spread (& mut self , _ : & mut ValidatorContext < 'a , S > , spread : & 'a Spanning < FragmentSpread < S > > ,) { if let Some (ref scope) = self . current_scope { self . spreads . entry (scope . clone ()) . or_default () . insert (spread . item . name . item) ; } } fn enter_variable_definition (& mut self , _ : & mut ValidatorContext < 'a , S > , def : & 'a (Spanning < & 'a str > , VariableDefinition < S >) ,) { if let Some (ref scope) = self . current_scope { self . variable_defs . entry (scope . clone ()) . or_default () . push (def) ; } } fn enter_variable_value (& mut self , ctx : & mut ValidatorContext < 'a , S > , var_name : SpannedInput < 'a , String > ,) { if let (Some (scope) , Some (input_type)) = (& self . current_scope , ctx . current_input_type_literal ()) { self . variable_usages . entry (scope . clone ()) . or_default () . push ((var_name , input_type)) ; } } }
+};
+}

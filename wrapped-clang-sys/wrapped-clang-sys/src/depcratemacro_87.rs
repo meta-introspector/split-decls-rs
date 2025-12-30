@@ -1,0 +1,9 @@
+// Generated macro for macro_87 (macro)
+macro_rules! Depcratemacro_87 {
+() => {
+// Module: crate
+// Provides: {"macro_87"}
+// Dependencies: {}
+cenum ! { enum CXTranslationUnit_Flags { const CXTranslationUnit_None = 0 ; const CXTranslationUnit_DetailedPreprocessingRecord = 1 ; const CXTranslationUnit_Incomplete = 2 ; const CXTranslationUnit_PrecompiledPreamble = 4 ; const CXTranslationUnit_CacheCompletionResults = 8 ; const CXTranslationUnit_ForSerialization = 16 ; const CXTranslationUnit_CXXChainedPCH = 32 ; const CXTranslationUnit_SkipFunctionBodies = 64 ; const CXTranslationUnit_IncludeBriefCommentsInCodeCompletion = 128 ; # [doc = " Only available on `libclang` 3.8 and later."] # [cfg (feature = "clang_3_8")] const CXTranslationUnit_CreatePreambleOnFirstParse = 256 ; # [doc = " Only available on `libclang` 3.9 and later."] # [cfg (feature = "clang_3_9")] const CXTranslationUnit_KeepGoing = 512 ; # [doc = " Only available on `libclang` 5.0 and later."] # [cfg (feature = "clang_5_0")] const CXTranslationUnit_SingleFileParse = 1024 ; # [doc = " Only available on `libclang` 7.0 and later."] # [cfg (feature = "clang_7_0")] const CXTranslationUnit_LimitSkipFunctionBodiesToPreamble = 2048 ; # [doc = " Only available on `libclang` 8.0 and later."] # [cfg (feature = "clang_8_0")] const CXTranslationUnit_IncludeAttributedTypes = 4096 ; # [doc = " Only available on `libclang` 8.0 and later."] # [cfg (feature = "clang_8_0")] const CXTranslationUnit_VisitImplicitAttributes = 8192 ; # [doc = " Only available on `libclang` 9.0 and later."] # [cfg (feature = "clang_9_0")] const CXTranslationUnit_IgnoreNonErrorsFromIncludedFiles = 16384 ; # [doc = " Only available on `libclang` 10.0 and later."] # [cfg (feature = "clang_10_0")] const CXTranslationUnit_RetainExcludedConditionalBlocks = 32768 ; } }
+};
+}

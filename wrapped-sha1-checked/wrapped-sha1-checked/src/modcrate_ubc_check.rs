@@ -1,0 +1,41 @@
+// Generated module macro for crate::ubc_check
+macro_rules! Modcrate_ubc_check {
+() => {
+        Depcrate_ubc_checkDV_I_43_0_BIT!();
+        Depcrate_ubc_checkDV_I_44_0_BIT!();
+        Depcrate_ubc_checkDV_I_45_0_BIT!();
+        Depcrate_ubc_checkDV_I_46_0_BIT!();
+        Depcrate_ubc_checkDV_I_46_2_BIT!();
+        Depcrate_ubc_checkDV_I_47_0_BIT!();
+        Depcrate_ubc_checkDV_I_47_2_BIT!();
+        Depcrate_ubc_checkDV_I_48_0_BIT!();
+        Depcrate_ubc_checkDV_I_48_2_BIT!();
+        Depcrate_ubc_checkDV_I_49_0_BIT!();
+        Depcrate_ubc_checkDV_I_49_2_BIT!();
+        Depcrate_ubc_checkDV_I_50_0_BIT!();
+        Depcrate_ubc_checkDV_I_50_2_BIT!();
+        Depcrate_ubc_checkDV_I_51_0_BIT!();
+        Depcrate_ubc_checkDV_I_51_2_BIT!();
+        Depcrate_ubc_checkDV_I_52_0_BIT!();
+        Depcrate_ubc_checkDV_II_45_0_BIT!();
+        Depcrate_ubc_checkDV_II_46_0_BIT!();
+        Depcrate_ubc_checkDV_II_46_2_BIT!();
+        Depcrate_ubc_checkDV_II_47_0_BIT!();
+        Depcrate_ubc_checkDV_II_48_0_BIT!();
+        Depcrate_ubc_checkDV_II_49_0_BIT!();
+        Depcrate_ubc_checkDV_II_49_2_BIT!();
+        Depcrate_ubc_checkDV_II_50_0_BIT!();
+        Depcrate_ubc_checkDV_II_50_2_BIT!();
+        Depcrate_ubc_checkDV_II_51_0_BIT!();
+        Depcrate_ubc_checkDV_II_51_2_BIT!();
+        Depcrate_ubc_checkDV_II_52_0_BIT!();
+        Depcrate_ubc_checkDV_II_53_0_BIT!();
+        Depcrate_ubc_checkDV_II_54_0_BIT!();
+        Depcrate_ubc_checkDV_II_55_0_BIT!();
+        Depcrate_ubc_checkDV_II_56_0_BIT!();
+        Depcrate_ubc_checkInfo!();
+        Depcrate_ubc_checkTestt!();
+        Depcrate_ubc_checkSHA1_DVS!();
+        Depcrate_ubc_checkubc_check!();
+    };
+}

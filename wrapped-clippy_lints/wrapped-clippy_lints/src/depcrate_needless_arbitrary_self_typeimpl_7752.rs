@@ -1,0 +1,9 @@
+// Generated macro for impl_7752 (impl)
+macro_rules! Depcrate_needless_arbitrary_self_typeimpl_7752 {
+() => {
+// Module: crate::needless_arbitrary_self_type
+// Provides: {"impl_7752"}
+// Dependencies: {}
+impl EarlyLintPass for NeedlessArbitrarySelfType { fn check_param (& mut self , cx : & EarlyContext < '_ > , p : & Param) { if ! p . is_self () || p . span . from_expansion () { return ; } let (path , binding_mode , mutbl) = match & p . ty . kind { TyKind :: Path (None , path) if let PatKind :: Ident (BindingMode (ByRef :: No , mutbl) , _ , _) = p . pat . kind => { (path , Mode :: Value , mutbl) } , TyKind :: Ref (lifetime , mut_ty) if let TyKind :: Path (None , path) = & mut_ty . ty . kind && let PatKind :: Ident (BindingMode :: NONE , _ , _) = p . pat . kind => { (path , Mode :: Ref (* lifetime) , mut_ty . mutbl) } , _ => return , } ; let span = p . span . to (p . ty . span) ; if let [segment] = & path . segments [..] && segment . ident . name == kw :: SelfUpper { span_lint_and_then (cx , NEEDLESS_ARBITRARY_SELF_TYPE , span , "the type of the `self` parameter does not need to be arbitrary" , | diag | { let mut applicability = Applicability :: MachineApplicable ; let add = match binding_mode { Mode :: Value => String :: new () , Mode :: Ref (None) => mutbl . ref_prefix_str () . to_string () , Mode :: Ref (Some (lifetime)) => { let lt_name = if lifetime . ident . span . from_expansion () { applicability = Applicability :: HasPlaceholders ; "'_" . into () } else { snippet_with_applicability (cx , lifetime . ident . span , "'_" , & mut applicability) } ; format ! ("&{lt_name} {mut_}" , mut_ = mutbl . prefix_str ()) } , } ; let mut sugg = vec ! [(p . ty . span . with_lo (p . span . hi ()) , String :: new ())] ; if ! add . is_empty () { sugg . push ((p . span . shrink_to_lo () , add)) ; } diag . multipart_suggestion_verbose ("remove the type" , sugg , applicability) ; } ,) ; } } }
+};
+}

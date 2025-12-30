@@ -4,6 +4,6 @@ macro_rules! Depcrateuse_763 {
 // Module: crate
 // Provides: {"use_763"}
 // Dependencies: {}
-pub use self :: return_mode :: SalsaAsRef ;
+pub use self :: storage :: { Storage , StorageHandle } ;
 };
 }

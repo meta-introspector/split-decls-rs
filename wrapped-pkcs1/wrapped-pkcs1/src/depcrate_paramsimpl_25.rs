@@ -1,0 +1,9 @@
+// Generated macro for impl_25 (impl)
+macro_rules! Depcrate_paramsimpl_25 {
+() => {
+// Module: crate::params
+// Provides: {"impl_25"}
+// Dependencies: {}
+impl < 'a > RsaPssParams < 'a > { # [doc = " Default RSA PSS Salt length in RsaPssParams"] pub const SALT_LEN_DEFAULT : u8 = 20 ; # [doc = " Create new RsaPssParams for the provided digest and salt len"] pub fn new < D > (salt_len : u8) -> Self where D : AssociatedOid , { Self { hash : AlgorithmIdentifierRef { oid : D :: OID , parameters : Some (AnyRef :: NULL) , } , mask_gen : AlgorithmIdentifier { oid : OID_MGF_1 , parameters : Some (AlgorithmIdentifierRef { oid : D :: OID , parameters : Some (AnyRef :: NULL) , }) , } , salt_len , trailer_field : Default :: default () , } } fn context_specific_hash (& self) -> Option < ContextSpecificRef < '_ , AlgorithmIdentifierRef < 'a > > > { if self . hash == SHA_1_AI { None } else { Some (ContextSpecificRef { tag_number : TagNumber (0) , tag_mode : TagMode :: Explicit , value : & self . hash , }) } } fn context_specific_mask_gen (& self ,) -> Option < ContextSpecificRef < '_ , AlgorithmIdentifier < AlgorithmIdentifierRef < 'a > > > > { if self . mask_gen == default_mgf1_sha1 () { None } else { Some (ContextSpecificRef { tag_number : TagNumber (1) , tag_mode : TagMode :: Explicit , value : & self . mask_gen , }) } } fn context_specific_salt_len (& self) -> Option < ContextSpecificRef < '_ , u8 > > { if self . salt_len == RsaPssParams :: SALT_LEN_DEFAULT { None } else { Some (ContextSpecificRef { tag_number : TagNumber (2) , tag_mode : TagMode :: Explicit , value : & self . salt_len , }) } } fn context_specific_trailer_field (& self) -> Option < ContextSpecificRef < '_ , TrailerField > > { if self . trailer_field == TrailerField :: default () { None } else { Some (ContextSpecificRef { tag_number : TagNumber (3) , tag_mode : TagMode :: Explicit , value : & self . trailer_field , }) } } }
+};
+}

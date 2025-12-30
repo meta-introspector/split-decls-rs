@@ -1,0 +1,9 @@
+// Generated macro for SplitMsvcResponseFileArgs (struct)
+macro_rules! Depcrate_compiler_msvcSplitMsvcResponseFileArgs {
+() => {
+// Module: crate::compiler::msvc
+// Provides: {"SplitMsvcResponseFileArgs"}
+// Dependencies: {}
+# [doc = " An iterator over the arguments in a Windows command line."] # [doc = ""] # [doc = " This produces results identical to `CommandLineToArgvW` except in the"] # [doc = " following cases:"] # [doc = ""] # [doc = "  1. When passed an empty string, CommandLineToArgvW returns the path to the"] # [doc = "     current executable file. Here, the iterator will simply be empty."] # [doc = "  2. CommandLineToArgvW interprets the first argument differently than the"] # [doc = "     rest. Here, all arguments are treated in identical fashion."] # [doc = ""] # [doc = " Parsing rules:"] # [doc = ""] # [doc = "  - Arguments are delimited by whitespace (either a space or tab)."] # [doc = "  - A string surrounded by double quotes is interpreted as a single argument."] # [doc = "  - Backslashes are interpreted literally unless followed by a double quote."] # [doc = "  - 2n backslashes followed by a double quote reduce to n backslashes and we"] # [doc = "    enter the \"in quote\" state."] # [doc = "  - 2n+1 backslashes followed by a double quote reduces to n backslashes,"] # [doc = "    we do *not* enter the \"in quote\" state, and the double quote is"] # [doc = "    interpreted literally."] # [doc = ""] # [doc = " References:"] # [doc = "  - https://msdn.microsoft.com/en-us/library/windows/desktop/bb776391(v=vs.85).aspx"] # [doc = "  - https://msdn.microsoft.com/en-us/library/windows/desktop/17w5ykft(v=vs.85).aspx"] # [derive (Clone , Debug)] struct SplitMsvcResponseFileArgs < 'a > { # [doc = " String slice of the file content that is being parsed."] # [doc = " Slice is mutated as this iterator is executed."] file_content : & 'a str , }
+};
+}

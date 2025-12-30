@@ -1,0 +1,40 @@
+// Generated module macro for crate::call
+macro_rules! Modcrate_call {
+() => {
+        Depcrate_calluse_8!();
+        Depcrate_calluse_9!();
+        Depcrate_callclose!();
+        Depcrate_callclock_gettime!();
+        Depcrate_calldup!();
+        Depcrate_calldup2!();
+        Depcrate_callfchmod!();
+        Depcrate_callfchown!();
+        Depcrate_callfcntl!();
+        Depcrate_callfmap!();
+        Depcrate_callfunmap!();
+        Depcrate_callfpath!();
+        Depcrate_callflink!();
+        Depcrate_callfrename!();
+        Depcrate_callfstat!();
+        Depcrate_callfstatvfs!();
+        Depcrate_callfsync!();
+        Depcrate_callftruncate!();
+        Depcrate_callfutimens!();
+        Depcrate_callfutex!();
+        Depcrate_calllseek!();
+        Depcrate_callmkns!();
+        Depcrate_callmprotect!();
+        Depcrate_callnanosleep!();
+        Depcrate_callopen!();
+        Depcrate_callopenat!();
+        Depcrate_callread!();
+        Depcrate_callrmdir!();
+        Depcrate_callunlink!();
+        Depcrate_callwrite!();
+        Depcrate_callsched_yield!();
+        Depcrate_callsendfd!();
+        Depcrate_callcall_ro!();
+        Depcrate_callcall_wo!();
+        Depcrate_callcall_rw!();
+    };
+}

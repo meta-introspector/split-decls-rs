@@ -1,0 +1,9 @@
+// Generated macro for other_746 (other)
+macro_rules! Depcrate_features_gen_BrowserElementDownloadOptionsother_746 {
+() => {
+// Module: crate::features::gen_BrowserElementDownloadOptions
+// Provides: {"other_746"}
+// Dependencies: {}
+# [wasm_bindgen] extern "C" { # [wasm_bindgen (extends = :: js_sys :: Object , js_name = BrowserElementDownloadOptions)] # [derive (Debug , Clone , PartialEq , Eq)] # [doc = "The `BrowserElementDownloadOptions` dictionary."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `BrowserElementDownloadOptions`*"] pub type BrowserElementDownloadOptions ; # [doc = "Get the `filename` field of this object."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `BrowserElementDownloadOptions`*"] # [wasm_bindgen (method , getter = "filename")] pub fn get_filename (this : & BrowserElementDownloadOptions) -> Option < :: alloc :: string :: String > ; # [doc = "Change the `filename` field of this object."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `BrowserElementDownloadOptions`*"] # [wasm_bindgen (method , setter = "filename")] pub fn set_filename (this : & BrowserElementDownloadOptions , val : Option < & str >) ; # [doc = "Get the `referrer` field of this object."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `BrowserElementDownloadOptions`*"] # [wasm_bindgen (method , getter = "referrer")] pub fn get_referrer (this : & BrowserElementDownloadOptions) -> Option < :: alloc :: string :: String > ; # [doc = "Change the `referrer` field of this object."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `BrowserElementDownloadOptions`*"] # [wasm_bindgen (method , setter = "referrer")] pub fn set_referrer (this : & BrowserElementDownloadOptions , val : Option < & str >) ; }
+};
+}

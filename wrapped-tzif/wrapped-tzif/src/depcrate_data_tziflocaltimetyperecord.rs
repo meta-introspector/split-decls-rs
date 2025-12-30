@@ -1,0 +1,9 @@
+// Generated macro for LocalTimeTypeRecord (struct)
+macro_rules! Depcrate_data_tzifLocalTimeTypeRecord {
+() => {
+// Module: crate::data::tzif
+// Provides: {"LocalTimeTypeRecord"}
+// Dependencies: {}
+# [doc = " A record specifying a local time type."] # [derive (Debug , Clone , Copy , Default , PartialEq , Eq)] pub struct LocalTimeTypeRecord { # [doc = " A signed integer specifying the number of"] # [doc = " seconds to be added to UT in order to determine local time."] # [doc = " The value MUST NOT be -2**31 and SHOULD be in the range"] # [doc = " [-89999, 93599] (i.e., its value SHOULD be more than -25 hours"] # [doc = " and less than 26 hours).  Avoiding -2**31 allows 32-bit clients"] # [doc = " to negate the value without overflow.  Restricting it to"] # [doc = " [-89999, 93599] allows easy support by implementations that"] # [doc = " already support the POSIX-required range [-24:59:59, 25:59:59]."] pub utoff : Seconds , # [doc = " A value indicating whether local time should"] # [doc = " be considered Daylight Saving Time (DST).  The value MUST be 0"] # [doc = " A value of [`true`] indicates that this type of time is DST."] # [doc = " A value of [`false`] indicates that this time type is standard time."] pub is_dst : bool , # [doc = " An unsigned integer specifying a zero-based"] # [doc = " index into the series of time zone designation bytes, thereby"] # [doc = " selecting a particular designation string.  Each index MUST be"] # [doc = " in the range [0, \"charcnt\" - 1]; it designates the"] # [doc = " NUL-terminated string of bytes starting at position \"idx\" in"] # [doc = " the time zone designations.  (This string MAY be empty.)  A NUL"] # [doc = " byte MUST exist in the time zone designations at or after"] # [doc = " position \"idx\"."] pub idx : usize , }
+};
+}

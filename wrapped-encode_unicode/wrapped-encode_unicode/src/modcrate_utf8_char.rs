@@ -1,0 +1,53 @@
+// Generated module macro for crate::utf8_char
+macro_rules! Modcrate_utf8_char {
+() => {
+        Depcrate_utf8_charuse_60!();
+        Depcrate_utf8_charuse_61!();
+        Depcrate_utf8_charuse_62!();
+        Depcrate_utf8_charuse_63!();
+        Depcrate_utf8_charother_64!();
+        Depcrate_utf8_charuse_65!();
+        Depcrate_utf8_charuse_66!();
+        Depcrate_utf8_charuse_67!();
+        Depcrate_utf8_charuse_68!();
+        Depcrate_utf8_charuse_69!();
+        Depcrate_utf8_charother_70!();
+        Depcrate_utf8_charuse_71!();
+        Depcrate_utf8_charUtf8Char!();
+        Depcrate_utf8_charimpl_73!();
+        Depcrate_utf8_charimpl_74!();
+        Depcrate_utf8_charimpl_75!();
+        Depcrate_utf8_charimpl_76!();
+        Depcrate_utf8_charimpl_77!();
+        Depcrate_utf8_charimpl_78!();
+        Depcrate_utf8_charimpl_79!();
+        Depcrate_utf8_charimpl_80!();
+        Depcrate_utf8_charimpl_81!();
+        Depcrate_utf8_charimpl_82!();
+        Depcrate_utf8_charimpl_83!();
+        Depcrate_utf8_charimpl_84!();
+        Depcrate_utf8_charimpl_85!();
+        Depcrate_utf8_charimpl_86!();
+        Depcrate_utf8_charimpl_87!();
+        Depcrate_utf8_charimpl_88!();
+        Depcrate_utf8_charimpl_89!();
+        Depcrate_utf8_charimpl_90!();
+        Depcrate_utf8_charimpl_91!();
+        Depcrate_utf8_charimpl_92!();
+        Depcrate_utf8_charimpl_93!();
+        Depcrate_utf8_charimpl_94!();
+        Depcrate_utf8_charimpl_95!();
+        Depcrate_utf8_charimpl_96!();
+        Depcrate_utf8_charimpl_97!();
+        Depcrate_utf8_charimpl_98!();
+        Depcrate_utf8_charimpl_99!();
+        Depcrate_utf8_charimpl_100!();
+        Depcrate_utf8_charimpl_101!();
+        Depcrate_utf8_charimpl_102!();
+        Depcrate_utf8_charimpl_103!();
+        Depcrate_utf8_charimpl_104!();
+        Depcrate_utf8_charimpl_105!();
+        Depcrate_utf8_charimpl_106!();
+        Depcrate_utf8_charimpl_107!();
+    };
+}

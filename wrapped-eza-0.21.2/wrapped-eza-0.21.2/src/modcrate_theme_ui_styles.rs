@@ -1,0 +1,42 @@
+// Generated module macro for crate::theme::ui_styles
+macro_rules! Modcrate_theme_ui_styles {
+() => {
+        Depcrate_theme_ui_stylesuse_925!();
+        Depcrate_theme_ui_stylesuse_926!();
+        Depcrate_theme_ui_stylesuse_927!();
+        Depcrate_theme_ui_stylesuse_928!();
+        Depcrate_theme_ui_stylesuse_929!();
+        Depcrate_theme_ui_stylesIconStyle!();
+        Depcrate_theme_ui_stylesFileNameStyle!();
+        Depcrate_theme_ui_stylesUiStyles!();
+        Depcrate_theme_ui_stylesfield_accessors!();
+        Depcrate_theme_ui_stylesupdate_field_accessors!();
+        Depcrate_theme_ui_stylesmacro_935!();
+        Depcrate_theme_ui_stylesmacro_936!();
+        Depcrate_theme_ui_stylesFileKinds!();
+        Depcrate_theme_ui_stylesimpl_938!();
+        Depcrate_theme_ui_stylesmacro_939!();
+        Depcrate_theme_ui_stylesPermissions!();
+        Depcrate_theme_ui_stylesmacro_941!();
+        Depcrate_theme_ui_stylesSize!();
+        Depcrate_theme_ui_stylesmacro_943!();
+        Depcrate_theme_ui_stylesUsers!();
+        Depcrate_theme_ui_stylesmacro_945!();
+        Depcrate_theme_ui_stylesLinks!();
+        Depcrate_theme_ui_stylesmacro_947!();
+        Depcrate_theme_ui_stylesGit!();
+        Depcrate_theme_ui_stylesmacro_949!();
+        Depcrate_theme_ui_stylesimpl_950!();
+        Depcrate_theme_ui_stylesGitRepo!();
+        Depcrate_theme_ui_stylesmacro_952!();
+        Depcrate_theme_ui_stylesimpl_953!();
+        Depcrate_theme_ui_stylesSELinuxContext!();
+        Depcrate_theme_ui_stylesmacro_955!();
+        Depcrate_theme_ui_stylesSecurityContext!();
+        Depcrate_theme_ui_stylesmacro_957!();
+        Depcrate_theme_ui_stylesimpl_958!();
+        Depcrate_theme_ui_stylesFileType!();
+        Depcrate_theme_ui_stylesimpl_960!();
+        Depcrate_theme_ui_stylesimpl_961!();
+    };
+}

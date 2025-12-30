@@ -1,0 +1,9 @@
+// Generated macro for parse_cfg_if_inner (function)
+macro_rules! Depcrate_parse_macros_cfg_ifparse_cfg_if_inner {
+() => {
+// Module: crate::parse::macros::cfg_if
+// Provides: {"parse_cfg_if_inner"}
+// Dependencies: {}
+fn parse_cfg_if_inner < 'a > (psess : & 'a ParseSess , mac : & 'a ast :: MacCall ,) -> Result < Vec < ast :: Item > , & 'static str > { let ts = mac . args . tokens . clone () ; let mut parser = build_stream_parser (psess . inner () , ts) ; let mut items = vec ! [] ; let mut process_if_cfg = true ; while parser . token . kind != TokenKind :: Eof { if process_if_cfg { if ! parser . eat_keyword (exp ! (If)) { return Err ("Expected `if`") ; } if ! matches ! (parser . token . kind , TokenKind :: Pound) { return Err ("Failed to parse attributes") ; } parser . parse_attribute (rustc_parse :: parser :: attr :: InnerAttrPolicy :: Permitted) . map_err (| e | { e . cancel () ; "Failed to parse attributes" }) ? ; } if ! parser . eat (exp ! (OpenBrace)) { return Err ("Expected an opening brace") ; } while parser . token != TokenKind :: CloseDelim (Delimiter :: Brace) && parser . token . kind != TokenKind :: Eof { let item = match parser . parse_item (ForceCollect :: No) { Ok (Some (item_ptr)) => item_ptr . into_inner () , Ok (None) => continue , Err (err) => { err . cancel () ; parser . psess . dcx () . reset_err_count () ; return Err ("Expected item inside cfg_if block, but failed to parse it as an item" ,) ; } } ; if let ast :: ItemKind :: Mod (..) = item . kind { items . push (item) ; } } if ! parser . eat (exp ! (CloseBrace)) { return Err ("Expected a closing brace") ; } if parser . eat (exp ! (Eof)) { break ; } if ! parser . eat_keyword (exp ! (Else)) { return Err ("Expected `else`") ; } process_if_cfg = parser . token . is_keyword (kw :: If) ; } Ok (items) }
+};
+}

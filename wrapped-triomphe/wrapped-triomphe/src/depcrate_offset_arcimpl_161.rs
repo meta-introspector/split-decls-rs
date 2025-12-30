@@ -1,0 +1,9 @@
+// Generated macro for impl_161 (impl)
+macro_rules! Depcrate_offset_arcimpl_161 {
+() => {
+// Module: crate::offset_arc
+// Provides: {"impl_161"}
+// Dependencies: {}
+impl < T > OffsetArc < T > { # [doc = " Temporarily converts |self| into a bonafide Arc and exposes it to the"] # [doc = " provided callback. The refcount is not modified."] # [inline] pub fn with_arc < F , U > (& self , f : F) -> U where F : FnOnce (& Arc < T >) -> U , { let transient = unsafe { ManuallyDrop :: new (Arc :: from_raw (self . ptr . as_ptr ())) } ; f (& transient) } # [doc = " If uniquely owned, provide a mutable reference"] # [doc = " Else create a copy, and mutate that"] # [doc = ""] # [doc = " This is functionally the same thing as `Arc::make_mut`"] # [inline] pub fn make_mut (& mut self) -> & mut T where T : Clone , { unsafe { let this = ptr :: read (self) ; let mut arc = ManuallyDrop :: new (Arc :: from_raw_offset (this)) ; let ret = Arc :: make_mut (& mut * arc) as * mut _ ; ptr :: write (self , Arc :: into_raw_offset (ManuallyDrop :: into_inner (arc))) ; & mut * ret } } # [doc = " Clone it as an `Arc`"] # [inline] pub fn clone_arc (& self) -> Arc < T > { OffsetArc :: with_arc (self , | a | a . clone ()) } # [doc = " Produce a pointer to the data that can be converted back"] # [doc = " to an `Arc`"] # [inline] pub fn borrow_arc (& self) -> ArcBorrow < '_ , T > { ArcBorrow (self . ptr , PhantomData) } # [doc = " The reference count of this `Arc`."] # [doc = ""] # [doc = " The number does not include borrowed pointers,"] # [doc = " or temporary `Arc` pointers created with functions like"] # [doc = " [`ArcBorrow::with_arc`]."] # [doc = ""] # [doc = " The function is called `strong_count` to mirror `std::sync::Arc::strong_count`,"] # [doc = " however `triomphe::Arc` does not support weak references."] # [inline] pub fn strong_count (this : & Self) -> usize { Self :: with_arc (this , | arc | Arc :: strong_count (arc)) } }
+};
+}

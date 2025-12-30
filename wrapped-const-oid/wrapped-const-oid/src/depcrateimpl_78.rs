@@ -1,0 +1,9 @@
+// Generated macro for impl_78 (impl)
+macro_rules! Depcrateimpl_78 {
+() => {
+// Module: crate
+// Provides: {"impl_78"}
+// Dependencies: {}
+impl ObjectIdentifierRef { # [doc = " Create an [`ObjectIdentifierRef`], validating that the provided byte slice contains a valid"] # [doc = " BER/DER encoding."] pub fn from_bytes (ber : & [u8]) -> Result < & Self > { let mut arcs = Arcs :: new (ber) ; while arcs . try_next () ? . is_some () { } Ok (Self :: from_bytes_unchecked (ber)) } # [doc = " Create an [`ObjectIdentifierRef`] from the given byte slice without first checking that it"] # [doc = " contains valid BER/DER."] pub (crate) const fn from_bytes_unchecked (ber : & [u8]) -> & Self { debug_assert ! (! ber . is_empty ()) ; # [allow (unsafe_code)] unsafe { & * (ber as * const [u8] as * const ObjectIdentifierRef) } } # [doc = " Get the BER/DER serialization of this OID as bytes."] # [doc = ""] # [doc = " Note that this encoding omits the ASN.1 tag/length, and only contains the value portion of"] # [doc = " the encoded OID."] pub const fn as_bytes (& self) -> & [u8] { & self . ber } # [doc = " Return the arc with the given index, if it exists."] pub fn arc (& self , index : usize) -> Option < Arc > { self . arcs () . nth (index) } # [doc = " Iterate over the arcs (a.k.a. nodes) of an [`ObjectIdentifier`]."] # [doc = ""] # [doc = " Returns [`Arcs`], an iterator over [`Arc`] values."] pub fn arcs (& self) -> Arcs < '_ > { Arcs :: new (self . ber . as_ref ()) } # [doc = " Get the length of this [`ObjectIdentifier`] in arcs."] pub fn len (& self) -> usize { self . arcs () . count () } }
+};
+}

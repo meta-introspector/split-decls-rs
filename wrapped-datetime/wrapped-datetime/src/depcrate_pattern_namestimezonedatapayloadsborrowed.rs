@@ -1,0 +1,9 @@
+// Generated macro for TimeZoneDataPayloadsBorrowed (struct)
+macro_rules! Depcrate_pattern_namesTimeZoneDataPayloadsBorrowed {
+() => {
+// Module: crate::pattern::names
+// Provides: {"TimeZoneDataPayloadsBorrowed"}
+// Dependencies: {}
+# [doc = " A container contains all data payloads for time zone formatting (borrowed version)."] # [derive (Debug , Copy , Clone , Default)] pub (crate) struct TimeZoneDataPayloadsBorrowed < 'a > { # [doc = " The data that contains meta information about how to display content."] pub (crate) essentials : Option < & 'a tz :: Essentials < 'a > > , # [doc = " The root location names, e.g. Italy"] pub (crate) locations_root : Option < & 'a tz :: Locations < 'a > > , # [doc = " The language specific location names, e.g. Italia"] pub (crate) locations : Option < & 'a tz :: Locations < 'a > > , # [doc = " The root exemplar city names, e.g. Rome"] pub (crate) exemplars_root : Option < & 'a tz :: ExemplarCities < 'a > > , # [doc = " The language specific exemplar names, e.g. Roma"] pub (crate) exemplars : Option < & 'a tz :: ExemplarCities < 'a > > , # [doc = " The generic long metazone names, e.g. Pacific Time"] pub (crate) mz_generic_long : Option < & 'a tz :: MzGeneric < 'a > > , # [doc = " The long metazone names shared between generic and standard, e.g. Gulf Standard Time"] pub (crate) mz_standard_long : Option < & 'a tz :: MzGeneric < 'a > > , # [doc = " The generic short metazone names, e.g. PT"] pub (crate) mz_generic_short : Option < & 'a tz :: MzGeneric < 'a > > , # [doc = " The specific long metazone names, e.g. Pacific Daylight Time"] pub (crate) mz_specific_long : Option < & 'a tz :: MzSpecific < 'a > > , # [doc = " The specific short metazone names, e.g. Pacific Daylight Time"] pub (crate) mz_specific_short : Option < & 'a tz :: MzSpecific < 'a > > , # [doc = " The metazone lookup"] pub (crate) mz_periods : Option < & 'a tz :: MzPeriod < 'a > > , }
+};
+}

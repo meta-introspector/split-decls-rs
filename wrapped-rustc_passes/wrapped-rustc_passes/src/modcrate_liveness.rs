@@ -1,0 +1,50 @@
+// Generated module macro for crate::liveness
+macro_rules! Modcrate_liveness {
+() => {
+        Depcrate_livenessuse_452!();
+        Depcrate_livenessuse_453!();
+        Depcrate_livenessuse_454!();
+        Depcrate_livenessuse_455!();
+        Depcrate_livenessuse_456!();
+        Depcrate_livenessuse_457!();
+        Depcrate_livenessuse_458!();
+        Depcrate_livenessuse_459!();
+        Depcrate_livenessuse_460!();
+        Depcrate_livenessuse_461!();
+        Depcrate_livenessuse_462!();
+        Depcrate_livenessuse_463!();
+        Depcrate_livenessuse_464!();
+        Depcrate_livenessuse_465!();
+        Depcrate_livenessuse_466!();
+        Depcrate_livenessuse_467!();
+        Depcrate_livenessuse_468!();
+        Depcrate_livenessuse_469!();
+        Depcrate_livenessuse_470!();
+        Depcrate_livenessuse_471!();
+        Depcrate_livenessuse_472!();
+        Depcrate_livenessuse_473!();
+        Depcrate_livenessrwu_table!();
+        Depcrate_livenessmacro_475!();
+        Depcrate_livenessmacro_476!();
+        Depcrate_livenessLiveNodeKind!();
+        Depcrate_livenesslive_node_kind_to_string!();
+        Depcrate_livenesscheck_liveness!();
+        Depcrate_livenessprovide!();
+        Depcrate_livenessCaptureInfo!();
+        Depcrate_livenessLocalInfo!();
+        Depcrate_livenessVarKind!();
+        Depcrate_livenessCollectLitsVisitor!();
+        Depcrate_livenessimpl_485!();
+        Depcrate_livenessIrMaps!();
+        Depcrate_livenessimpl_487!();
+        Depcrate_livenessimpl_488!();
+        Depcrate_livenessACC_READ!();
+        Depcrate_livenessACC_WRITE!();
+        Depcrate_livenessACC_USE!();
+        Depcrate_livenessLiveness!();
+        Depcrate_livenessimpl_493!();
+        Depcrate_livenessimpl_494!();
+        Depcrate_livenesscheck_expr!();
+        Depcrate_livenessimpl_496!();
+    };
+}

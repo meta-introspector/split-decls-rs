@@ -1,0 +1,9 @@
+// Generated macro for remove_dir (function)
+macro_rules! Depcrate_fsremove_dir {
+() => {
+// Module: crate::fs
+// Provides: {"remove_dir"}
+// Dependencies: {}
+# [doc = " Removes an empty directory."] # [doc = ""] # [doc = " If you want to remove a directory that is not empty, as well as all"] # [doc = " of its contents recursively, consider using [`remove_dir_all`]"] # [doc = " instead."] # [doc = ""] # [doc = " # Platform-specific behavior"] # [doc = ""] # [doc = " This function currently corresponds to the `rmdir` function on Unix"] # [doc = " and the `RemoveDirectory` function on Windows."] # [doc = " Note that, this [may change in the future][changes]."] # [doc = ""] # [doc = " [changes]: io#platform-specific-behavior"] # [doc = ""] # [doc = " # Errors"] # [doc = ""] # [doc = " This function will return an error in the following situations, but is not"] # [doc = " limited to just these cases:"] # [doc = ""] # [doc = " * `path` doesn't exist."] # [doc = " * `path` isn't a directory."] # [doc = " * The user lacks permissions to remove the directory at the provided `path`."] # [doc = " * The directory isn't empty."] # [doc = ""] # [doc = " This function will only ever return an error of kind `NotFound` if the given"] # [doc = " path does not exist. Note that the inverse is not true,"] # [doc = " ie. if a path does not exist, its removal may fail for a number of reasons,"] # [doc = " such as insufficient permissions."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```no_run"] # [doc = " use std::fs;"] # [doc = ""] # [doc = " fn main() -> std::io::Result<()> {"] # [doc = "     fs::remove_dir(\"/some/dir\")?;"] # [doc = "     Ok(())"] # [doc = " }"] # [doc = " ```"] # [doc (alias = "rmdir" , alias = "RemoveDirectory")] # [stable (feature = "rust1" , since = "1.0.0")] pub fn remove_dir < P : AsRef < Path > > (path : P) -> io :: Result < () > { fs_imp :: remove_dir (path . as_ref ()) }
+};
+}

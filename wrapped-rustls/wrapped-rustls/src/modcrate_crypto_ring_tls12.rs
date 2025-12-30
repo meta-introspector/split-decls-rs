@@ -1,0 +1,42 @@
+// Generated module macro for crate::crypto::ring::tls12
+macro_rules! Modcrate_crypto_ring_tls12 {
+() => {
+        Depcrate_crypto_ring_tls12use_919!();
+        Depcrate_crypto_ring_tls12use_920!();
+        Depcrate_crypto_ring_tls12use_921!();
+        Depcrate_crypto_ring_tls12use_922!();
+        Depcrate_crypto_ring_tls12use_923!();
+        Depcrate_crypto_ring_tls12use_924!();
+        Depcrate_crypto_ring_tls12use_925!();
+        Depcrate_crypto_ring_tls12use_926!();
+        Depcrate_crypto_ring_tls12use_927!();
+        Depcrate_crypto_ring_tls12use_928!();
+        Depcrate_crypto_ring_tls12use_929!();
+        Depcrate_crypto_ring_tls12TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256!();
+        Depcrate_crypto_ring_tls12TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256!();
+        Depcrate_crypto_ring_tls12TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256!();
+        Depcrate_crypto_ring_tls12TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384!();
+        Depcrate_crypto_ring_tls12TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256!();
+        Depcrate_crypto_ring_tls12TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384!();
+        Depcrate_crypto_ring_tls12TLS12_ECDSA_SCHEMES!();
+        Depcrate_crypto_ring_tls12TLS12_RSA_SCHEMES!();
+        Depcrate_crypto_ring_tls12AES128_GCM!();
+        Depcrate_crypto_ring_tls12AES256_GCM!();
+        Depcrate_crypto_ring_tls12GcmAlgorithm!();
+        Depcrate_crypto_ring_tls12impl_941!();
+        Depcrate_crypto_ring_tls12ChaCha20Poly1305!();
+        Depcrate_crypto_ring_tls12impl_943!();
+        Depcrate_crypto_ring_tls12GcmMessageEncrypter!();
+        Depcrate_crypto_ring_tls12GcmMessageDecrypter!();
+        Depcrate_crypto_ring_tls12GCM_EXPLICIT_NONCE_LEN!();
+        Depcrate_crypto_ring_tls12GCM_OVERHEAD!();
+        Depcrate_crypto_ring_tls12impl_948!();
+        Depcrate_crypto_ring_tls12impl_949!();
+        Depcrate_crypto_ring_tls12ChaCha20Poly1305MessageEncrypter!();
+        Depcrate_crypto_ring_tls12ChaCha20Poly1305MessageDecrypter!();
+        Depcrate_crypto_ring_tls12CHACHAPOLY1305_OVERHEAD!();
+        Depcrate_crypto_ring_tls12impl_953!();
+        Depcrate_crypto_ring_tls12impl_954!();
+        Depcrate_crypto_ring_tls12gcm_iv!();
+    };
+}

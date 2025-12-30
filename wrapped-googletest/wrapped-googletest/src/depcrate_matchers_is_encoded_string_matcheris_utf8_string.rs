@@ -1,0 +1,9 @@
+// Generated macro for is_utf8_string (function)
+macro_rules! Depcrate_matchers_is_encoded_string_matcheris_utf8_string {
+() => {
+// Module: crate::matchers::is_encoded_string_matcher
+// Provides: {"is_utf8_string"}
+// Dependencies: {}
+# [doc = " Matches a byte sequence which is a UTF-8 encoded string matched by `inner`."] # [doc = ""] # [doc = " The matcher reports no match if either the string is not UTF-8 encoded or if"] # [doc = " `inner` does not match on the decoded string."] # [doc = ""] # [doc = " The input may be a slice `&[u8]` or a `Vec` of bytes."] # [doc = ""] # [doc = " ```"] # [doc = " # use googletest::prelude::*;"] # [doc = " # fn should_pass() -> Result<()> {"] # [doc = " let bytes: &[u8] = \"A string\".as_bytes();"] # [doc = " verify_that!(bytes, is_utf8_string(eq(\"A string\")))?; // Passes"] # [doc = " let bytes: Vec<u8> = \"A string\".as_bytes().to_vec();"] # [doc = " verify_that!(bytes, is_utf8_string(eq(\"A string\")))?; // Passes"] # [doc = " #     Ok(())"] # [doc = " # }"] # [doc = " # fn should_fail_1() -> Result<()> {"] # [doc = " # let bytes: &[u8] = \"A string\".as_bytes();"] # [doc = " verify_that!(bytes, is_utf8_string(eq(\"Another string\")))?; // Fails (inner matcher does not match)"] # [doc = " #     Ok(())"] # [doc = " # }"] # [doc = " # fn should_fail_2() -> Result<()> {"] # [doc = " let bytes: Vec<u8> = vec![255, 64, 128, 32];"] # [doc = " verify_that!(bytes, is_utf8_string(anything()))?; // Fails (not UTF-8 encoded)"] # [doc = " #     Ok(())"] # [doc = " # }"] # [doc = " # should_pass().unwrap();"] # [doc = " # should_fail_1().unwrap_err();"] # [doc = " # should_fail_2().unwrap_err();"] # [doc = " ```"] pub fn is_utf8_string < InnerMatcherT > (inner : InnerMatcherT) -> IsEncodedStringMatcher < InnerMatcherT > where InnerMatcherT : for < 'a > Matcher < & 'a str > , { IsEncodedStringMatcher { inner } }
+};
+}

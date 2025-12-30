@@ -1,0 +1,9 @@
+// Generated macro for macro_9501 (macro)
+macro_rules! Depcrate_single_call_fnmacro_9501 {
+() => {
+// Module: crate::single_call_fn
+// Provides: {"macro_9501"}
+// Dependencies: {}
+declare_clippy_lint ! { # [doc = " ### What it does"] # [doc = " Checks for functions that are only used once. Does not lint tests."] # [doc = ""] # [doc = " ### Why restrict this?"] # [doc = " If a function is only used once (perhaps because it used to be used more widely),"] # [doc = " then the code could be simplified by moving that function's code into its caller."] # [doc = ""] # [doc = " However, there are reasons not to do this everywhere:"] # [doc = ""] # [doc = " * Splitting a large function into multiple parts often improves readability"] # [doc = "   by giving names to its parts."] # [doc = " * A function’s signature might serve a necessary purpose, such as constraining"] # [doc = "   the type of a closure passed to it."] # [doc = " * Generic functions might call non-generic functions to reduce duplication"] # [doc = "   in the produced machine code."] # [doc = ""] # [doc = " If this lint is used, prepare to `#[allow]` it a lot."] # [doc = ""] # [doc = " ### Example"] # [doc = " ```no_run"] # [doc = " pub fn a<T>(t: &T)"] # [doc = " where"] # [doc = "     T: AsRef<str>,"] # [doc = " {"] # [doc = "     a_inner(t.as_ref())"] # [doc = " }"] # [doc = ""] # [doc = " fn a_inner(t: &str) {"] # [doc = "     /* snip */"] # [doc = " }"] # [doc = ""] # [doc = " ```"] # [doc = " Use instead:"] # [doc = " ```no_run"] # [doc = " pub fn a<T>(t: &T)"] # [doc = " where"] # [doc = "     T: AsRef<str>,"] # [doc = " {"] # [doc = "     let t = t.as_ref();"] # [doc = "     /* snip */"] # [doc = " }"] # [doc = ""] # [doc = " ```"] # [clippy :: version = "1.72.0"] pub SINGLE_CALL_FN , restriction , "checks for functions that are only used once" }
+};
+}

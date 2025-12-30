@@ -1,0 +1,9 @@
+// Generated macro for AllFixedCalendarFormattingDataMarkers (trait)
+macro_rules! Depcrate_scaffold_fieldset_traitsAllFixedCalendarFormattingDataMarkers {
+() => {
+// Module: crate::scaffold::fieldset_traits
+// Provides: {"AllFixedCalendarFormattingDataMarkers"}
+// Dependencies: {}
+# [doc = " Trait to consolidate data provider markers defined by this crate"] # [doc = " for datetime formatting with a fixed calendar."] # [doc = ""] # [doc = " This trait is implemented on all providers that support datetime formatting,"] # [doc = " including [`crate::provider::Baked`]."] # [rustfmt :: skip] pub trait AllFixedCalendarFormattingDataMarkers < C : CldrCalendar , FSet : DateTimeMarkers > : DataProvider < < FSet :: D as TypedDateDataMarkers < C > > :: YearNamesV1 > + DataProvider < < FSet :: D as TypedDateDataMarkers < C > > :: MonthNamesV1 > + DataProvider < < FSet :: D as TypedDateDataMarkers < C > > :: WeekdayNamesV1 > + DataProvider < < FSet :: T as TimeMarkers > :: DayPeriodNamesV1 > + DataProvider < < FSet :: Z as ZoneMarkers > :: EssentialsV1 > + DataProvider < < FSet :: Z as ZoneMarkers > :: LocationsV1 > + DataProvider < < FSet :: Z as ZoneMarkers > :: LocationsRootV1 > + DataProvider < < FSet :: Z as ZoneMarkers > :: ExemplarCitiesV1 > + DataProvider < < FSet :: Z as ZoneMarkers > :: ExemplarCitiesRootV1 > + DataProvider < < FSet :: Z as ZoneMarkers > :: GenericLongV1 > + DataProvider < < FSet :: Z as ZoneMarkers > :: GenericShortV1 > + DataProvider < < FSet :: Z as ZoneMarkers > :: StandardLongV1 > + DataProvider < < FSet :: Z as ZoneMarkers > :: SpecificLongV1 > + DataProvider < < FSet :: Z as ZoneMarkers > :: SpecificShortV1 > + DataProvider < < FSet :: Z as ZoneMarkers > :: MetazonePeriodV1 > + AllFixedCalendarPatternDataMarkers < C , FSet > where FSet :: D : TypedDateDataMarkers < C > , FSet :: T : TimeMarkers , FSet :: Z : ZoneMarkers , { }
+};
+}

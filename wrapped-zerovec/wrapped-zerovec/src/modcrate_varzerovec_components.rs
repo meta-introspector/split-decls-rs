@@ -1,0 +1,40 @@
+// Generated module macro for crate::varzerovec::components
+macro_rules! Modcrate_varzerovec_components {
+() => {
+        Depcrate_varzerovec_componentsuse_311!();
+        Depcrate_varzerovec_componentsuse_312!();
+        Depcrate_varzerovec_componentsuse_313!();
+        Depcrate_varzerovec_componentsuse_314!();
+        Depcrate_varzerovec_componentsuse_315!();
+        Depcrate_varzerovec_componentsuse_316!();
+        Depcrate_varzerovec_componentsuse_317!();
+        Depcrate_varzerovec_componentsVarZeroVecFormat!();
+        Depcrate_varzerovec_componentsIntegerULE!();
+        Depcrate_varzerovec_componentsIndex8!();
+        Depcrate_varzerovec_componentsIndex16!();
+        Depcrate_varzerovec_componentsIndex32!();
+        Depcrate_varzerovec_componentsimpl_323!();
+        Depcrate_varzerovec_componentsimpl_324!();
+        Depcrate_varzerovec_componentsimpl_325!();
+        Depcrate_varzerovec_componentsimpl_326!();
+        Depcrate_varzerovec_componentsimpl_327!();
+        Depcrate_varzerovec_componentsimpl_328!();
+        Depcrate_varzerovec_componentsVarZeroVecComponents!();
+        Depcrate_varzerovec_componentsimpl_330!();
+        Depcrate_varzerovec_componentsimpl_331!();
+        Depcrate_varzerovec_componentsimpl_332!();
+        Depcrate_varzerovec_componentsimpl_333!();
+        Depcrate_varzerovec_componentsimpl_334!();
+        Depcrate_varzerovec_componentsVarZeroSliceIter!();
+        Depcrate_varzerovec_componentsimpl_336!();
+        Depcrate_varzerovec_componentsimpl_337!();
+        Depcrate_varzerovec_componentsimpl_338!();
+        Depcrate_varzerovec_componentsimpl_339!();
+        Depcrate_varzerovec_componentsimpl_340!();
+        Depcrate_varzerovec_componentsget_serializable_bytes_non_empty!();
+        Depcrate_varzerovec_componentswrite_serializable_bytes_without_length!();
+        Depcrate_varzerovec_componentswrite_serializable_bytes!();
+        Depcrate_varzerovec_componentscompute_serializable_len_without_length!();
+        Depcrate_varzerovec_componentscompute_serializable_len!();
+    };
+}

@@ -1,0 +1,41 @@
+// Generated module macro for crate::worker
+macro_rules! Modcrate_worker {
+() => {
+        Depcrate_workeruse_134!();
+        Depcrate_workeruse_135!();
+        Depcrate_workeruse_136!();
+        Depcrate_workeruse_137!();
+        Depcrate_workeruse_138!();
+        Depcrate_workeruse_139!();
+        Depcrate_workerStop!();
+        Depcrate_workerConn!();
+        Depcrate_workerhandle_pair!();
+        Depcrate_workerCounter!();
+        Depcrate_workerimpl_144!();
+        Depcrate_workerWorkerCounter!();
+        Depcrate_workerimpl_146!();
+        Depcrate_workerimpl_147!();
+        Depcrate_workerWorkerCounterGuard!();
+        Depcrate_workerimpl_149!();
+        Depcrate_workerWorkerHandleAccept!();
+        Depcrate_workerimpl_151!();
+        Depcrate_workerWorkerHandleServer!();
+        Depcrate_workerimpl_153!();
+        Depcrate_workerServerWorker!();
+        Depcrate_workerWorkerService!();
+        Depcrate_workerimpl_156!();
+        Depcrate_workerWorkerServiceStatus!();
+        Depcrate_workerimpl_158!();
+        Depcrate_workerServerWorkerConfig!();
+        Depcrate_workerimpl_160!();
+        Depcrate_workerimpl_161!();
+        Depcrate_workerimpl_162!();
+        Depcrate_workerWorkerState!();
+        Depcrate_workerRestart!();
+        Depcrate_workerShutdown!();
+        Depcrate_workerimpl_166!();
+        Depcrate_workerimpl_167!();
+        Depcrate_workerimpl_168!();
+        Depcrate_workerwrap_worker_services!();
+    };
+}

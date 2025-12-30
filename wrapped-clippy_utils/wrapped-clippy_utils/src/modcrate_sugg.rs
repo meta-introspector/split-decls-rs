@@ -1,0 +1,54 @@
+// Generated module macro for crate::sugg
+macro_rules! Modcrate_sugg {
+() => {
+        Depcrate_sugguse_660!();
+        Depcrate_sugguse_661!();
+        Depcrate_sugguse_662!();
+        Depcrate_sugguse_663!();
+        Depcrate_sugguse_664!();
+        Depcrate_sugguse_665!();
+        Depcrate_sugguse_666!();
+        Depcrate_sugguse_667!();
+        Depcrate_sugguse_668!();
+        Depcrate_sugguse_669!();
+        Depcrate_sugguse_670!();
+        Depcrate_sugguse_671!();
+        Depcrate_sugguse_672!();
+        Depcrate_sugguse_673!();
+        Depcrate_sugguse_674!();
+        Depcrate_sugguse_675!();
+        Depcrate_sugguse_676!();
+        Depcrate_suggSugg!();
+        Depcrate_suggZERO!();
+        Depcrate_suggONE!();
+        Depcrate_suggEMPTY!();
+        Depcrate_suggimpl_681!();
+        Depcrate_suggimpl_682!();
+        Depcrate_suggbinop_to_string!();
+        Depcrate_sugghas_enclosing_paren!();
+        Depcrate_suggforward_binop_impls_to_ref!();
+        Depcrate_suggimpl_686!();
+        Depcrate_suggimpl_687!();
+        Depcrate_suggmacro_688!();
+        Depcrate_suggmacro_689!();
+        Depcrate_suggimpl_690!();
+        Depcrate_suggimpl_691!();
+        Depcrate_suggParenHelper!();
+        Depcrate_suggimpl_693!();
+        Depcrate_suggimpl_694!();
+        Depcrate_suggmake_unop!();
+        Depcrate_suggmake_assoc!();
+        Depcrate_suggmake_binop!();
+        Depcrate_suggAssociativity!();
+        Depcrate_suggassociativity!();
+        Depcrate_suggindentation!();
+        Depcrate_suggDiagExt!();
+        Depcrate_suggimpl_702!();
+        Depcrate_suggDerefClosure!();
+        Depcrate_suggderef_closure_args!();
+        Depcrate_suggDerefDelegate!();
+        Depcrate_suggimpl_706!();
+        Depcrate_suggimpl_707!();
+        Depcrate_suggtest!();
+    };
+}

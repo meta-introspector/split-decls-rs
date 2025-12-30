@@ -1,0 +1,9 @@
+// Generated macro for tool_rustc_extended (macro)
+macro_rules! Depcrate_core_build_steps_tooltool_rustc_extended {
+() => {
+// Module: crate::core::build_steps::tool
+// Provides: {"tool_rustc_extended"}
+// Dependencies: {}
+# [doc = " Creates a step that builds an extended `Mode::ToolRustcPrivate` tool"] # [doc = " and installs it into the sysroot of a corresponding compiler."] macro_rules ! tool_rustc_extended { ($ name : ident { path : $ path : expr , tool_name : $ tool_name : expr , stable : $ stable : expr $ (, add_bins_to_sysroot : $ add_bins_to_sysroot : expr) ? $ (, add_features : $ add_features : expr) ? $ (, cargo_args : $ cargo_args : expr) ? $ (,) ? }) => { # [derive (Debug , Clone , Hash , PartialEq , Eq)] pub struct $ name { compilers : RustcPrivateCompilers , } impl $ name { pub fn from_compilers (compilers : RustcPrivateCompilers) -> Self { Self { compilers , } } } impl Step for $ name { type Output = ToolBuildResult ; const DEFAULT : bool = true ; const IS_HOST : bool = true ; fn should_run (run : ShouldRun <'_ >) -> ShouldRun <'_ > { should_run_extended_rustc_tool (run , $ tool_name , $ path , $ stable ,) } fn make_run (run : RunConfig <'_ >) { run . builder . ensure ($ name { compilers : RustcPrivateCompilers :: new (run . builder , run . builder . top_stage , run . target) , }) ; } fn run (self , builder : & Builder <'_ >) -> ToolBuildResult { let Self { compilers } = self ; build_extended_rustc_tool (builder , compilers , $ tool_name , $ path , None $ (. or (Some (&$ add_bins_to_sysroot))) ?, None $ (. or (Some ($ add_features))) ?, None $ (. or (Some ($ cargo_args))) ?,) } fn metadata (& self) -> Option < StepMetadata > { Some (StepMetadata :: build ($ tool_name , self . compilers . target ()) . built_by (self . compilers . build_compiler)) } } } }
+};
+}

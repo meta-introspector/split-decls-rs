@@ -1,0 +1,9 @@
+// Generated macro for BTH_LE_GATT_CHARACTERISTIC_TYPE_PERIPHERAL_PRIVACY_FLAG (const)
+macro_rules! Depcrate_um_bthledefBTH_LE_GATT_CHARACTERISTIC_TYPE_PERIPHERAL_PRIVACY_FLAG {
+() => {
+// Module: crate::um::bthledef
+// Provides: {"BTH_LE_GATT_CHARACTERISTIC_TYPE_PERIPHERAL_PRIVACY_FLAG"}
+// Dependencies: {}
+pub const BTH_LE_GATT_CHARACTERISTIC_TYPE_PERIPHERAL_PRIVACY_FLAG : USHORT = 0x2A02 ;
+};
+}

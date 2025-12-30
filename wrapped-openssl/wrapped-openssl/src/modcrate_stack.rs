@@ -1,0 +1,56 @@
+// Generated module macro for crate::stack
+macro_rules! Modcrate_stack {
+() => {
+        Depcrate_stackuse_1243!();
+        Depcrate_stackuse_1244!();
+        Depcrate_stackuse_1245!();
+        Depcrate_stackuse_1246!();
+        Depcrate_stackuse_1247!();
+        Depcrate_stackuse_1248!();
+        Depcrate_stackuse_1249!();
+        Depcrate_stackuse_1250!();
+        Depcrate_stackuse_1251!();
+        Depcrate_stackuse_1252!();
+        Depcrate_stackuse_1253!();
+        Depcrate_stackuse_1254!();
+        Depcrate_stackuse_1255!();
+        Depcrate_stackmacro_1256!();
+        Depcrate_stackStackable!();
+        Depcrate_stackStack!();
+        Depcrate_stackimpl_1259!();
+        Depcrate_stackimpl_1260!();
+        Depcrate_stackimpl_1261!();
+        Depcrate_stackimpl_1262!();
+        Depcrate_stackimpl_1263!();
+        Depcrate_stackimpl_1264!();
+        Depcrate_stackimpl_1265!();
+        Depcrate_stackimpl_1266!();
+        Depcrate_stackimpl_1267!();
+        Depcrate_stackimpl_1268!();
+        Depcrate_stackimpl_1269!();
+        Depcrate_stackIntoIter!();
+        Depcrate_stackimpl_1271!();
+        Depcrate_stackimpl_1272!();
+        Depcrate_stackimpl_1273!();
+        Depcrate_stackimpl_1274!();
+        Depcrate_stackStackRef!();
+        Depcrate_stackimpl_1276!();
+        Depcrate_stackimpl_1277!();
+        Depcrate_stackimpl_1278!();
+        Depcrate_stackimpl_1279!();
+        Depcrate_stackimpl_1280!();
+        Depcrate_stackimpl_1281!();
+        Depcrate_stackimpl_1282!();
+        Depcrate_stackimpl_1283!();
+        Depcrate_stackimpl_1284!();
+        Depcrate_stackimpl_1285!();
+        Depcrate_stackIter!();
+        Depcrate_stackimpl_1287!();
+        Depcrate_stackimpl_1288!();
+        Depcrate_stackimpl_1289!();
+        Depcrate_stackIterMut!();
+        Depcrate_stackimpl_1291!();
+        Depcrate_stackimpl_1292!();
+        Depcrate_stackimpl_1293!();
+    };
+}

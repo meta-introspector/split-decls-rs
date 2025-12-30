@@ -1,0 +1,9 @@
+// Generated macro for impl_934 (impl)
+macro_rules! Depcrate_fd_socket_tcpimpl_934 {
+() => {
+// Module: crate::fd::socket::tcp
+// Provides: {"impl_934"}
+// Dependencies: {}
+impl Socket { pub fn new (h : Handle , domain : Af) -> Self { let mut handle = BTreeSet :: new () ; handle . insert (h) ; let endpoint = if domain == Af :: Inet { IpEndpoint :: new (Ipv4Address :: UNSPECIFIED . into () , 0) } else if domain == Af :: Inet6 { IpEndpoint :: new (Ipv6Address :: UNSPECIFIED . into () , 0) } else { panic ! ("Unsupported domain for TCP socket: {domain:?}") ; } ; Self { handle , endpoint , is_nonblocking : false , is_listen : false , } } fn with < R > (& self , f : impl FnOnce (& mut tcp :: Socket < '_ >) -> R) -> R { let mut guard = NIC . lock () ; let nic = guard . as_nic_mut () . unwrap () ; f (nic . get_mut_socket :: < tcp :: Socket < '_ > > (* self . handle . first () . unwrap ())) } fn with_context < R > (& self , f : impl FnOnce (& mut tcp :: Socket < '_ > , & mut iface :: Context) -> R) -> R { let mut guard = NIC . lock () ; let nic = guard . as_nic_mut () . unwrap () ; let (s , cx) = nic . get_socket_and_context :: < tcp :: Socket < '_ > > (* self . handle . first () . unwrap ()) ; f (s , cx) } async fn close (& self) -> io :: Result < () > { self . with (| socket | { if ! socket . is_active () { return Err (Errno :: Io) ; } socket . close () ; Ok (()) }) ? ; if self . handle . len () > 1 { let mut guard = NIC . lock () ; let nic = guard . as_nic_mut () . unwrap () ; for handle in self . handle . iter () . skip (1) { let socket = nic . get_mut_socket :: < tcp :: Socket < '_ > > (* handle) ; if socket . is_active () { socket . close () ; } } } future :: poll_fn (| cx | { self . with (| socket | { if socket . is_active () { socket . register_send_waker (cx . waker ()) ; socket . register_recv_waker (cx . waker ()) ; Poll :: Pending } else { Poll :: Ready (Ok (())) } }) }) . await } }
+};
+}

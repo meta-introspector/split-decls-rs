@@ -1,0 +1,47 @@
+// Generated module macro for crate::crypto::ring
+macro_rules! Modcrate_crypto_ring {
+() => {
+        Depcrate_crypto_ringuse_786!();
+        Depcrate_crypto_ringuse_787!();
+        Depcrate_crypto_ringuse_788!();
+        Depcrate_crypto_ringuse_789!();
+        Depcrate_crypto_ringuse_790!();
+        Depcrate_crypto_ringuse_791!();
+        Depcrate_crypto_ringuse_792!();
+        Depcrate_crypto_ringuse_793!();
+        Depcrate_crypto_ringuse_794!();
+        Depcrate_crypto_ringuse_795!();
+        Depcrate_crypto_ringuse_796!();
+        Depcrate_crypto_ringuse_797!();
+        Depcrate_crypto_ringuse_798!();
+        Depcrate_crypto_ringuse_799!();
+        Depcrate_crypto_ringsign!();
+        Depcrate_crypto_ringuse_839!();
+        Depcrate_crypto_ringhash!();
+        Depcrate_crypto_ringhmac!();
+        Depcrate_crypto_ringkx!();
+        Depcrate_crypto_ringquic!();
+        Depcrate_crypto_ringticketer!();
+        Depcrate_crypto_ringuse_917!();
+        Depcrate_crypto_ringtls12!();
+        Depcrate_crypto_ringtls13!();
+        Depcrate_crypto_ringDEFAULT_PROVIDER!();
+        Depcrate_crypto_ringDEFAULT_TLS13_PROVIDER!();
+        Depcrate_crypto_ringDEFAULT_TLS12_PROVIDER!();
+        Depcrate_crypto_ringRing!();
+        Depcrate_crypto_ringimpl_993!();
+        Depcrate_crypto_ringimpl_994!();
+        Depcrate_crypto_ringimpl_995!();
+        Depcrate_crypto_ringDEFAULT_TLS12_CIPHER_SUITES!();
+        Depcrate_crypto_ringALL_TLS12_CIPHER_SUITES!();
+        Depcrate_crypto_ringDEFAULT_TLS13_CIPHER_SUITES!();
+        Depcrate_crypto_ringALL_TLS13_CIPHER_SUITES!();
+        Depcrate_crypto_ringcipher_suite!();
+        Depcrate_crypto_ringSUPPORTED_SIG_ALGS!();
+        Depcrate_crypto_ringkx_group!();
+        Depcrate_crypto_ringDEFAULT_KX_GROUPS!();
+        Depcrate_crypto_ringALL_KX_GROUPS!();
+        Depcrate_crypto_ringring_shim!();
+        Depcrate_crypto_ringfips!();
+    };
+}

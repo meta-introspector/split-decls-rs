@@ -1,0 +1,9 @@
+// Generated macro for SummaryKind (enum)
+macro_rules! Depcrate_summarySummaryKind {
+() => {
+// Module: crate::summary
+// Provides: {"SummaryKind"}
+// Dependencies: {}
+# [doc = " The type of summary output (if any) to print."] # [derive (Clone , Copy , Debug , Eq , PartialEq)] pub enum SummaryKind { # [doc = " Show only a count of the total number of matches (counting each line"] # [doc = " at most once) found."] # [doc = ""] # [doc = " If the `path` setting is enabled, then the count is prefixed by the"] # [doc = " corresponding file path."] Count , # [doc = " Show only a count of the total number of matches (counting possibly"] # [doc = " many matches on each line) found."] # [doc = ""] # [doc = " If the `path` setting is enabled, then the count is prefixed by the"] # [doc = " corresponding file path."] CountMatches , # [doc = " Show only the file path if and only if a match was found."] # [doc = ""] # [doc = " This ignores the `path` setting and always shows the file path. If no"] # [doc = " file path is provided, then searching will immediately stop and return"] # [doc = " an error."] PathWithMatch , # [doc = " Show only the file path if and only if a match was found."] # [doc = ""] # [doc = " This ignores the `path` setting and always shows the file path. If no"] # [doc = " file path is provided, then searching will immediately stop and return"] # [doc = " an error."] PathWithoutMatch , # [doc = " Don't show any output and the stop the search once a match is found."] # [doc = ""] # [doc = " Note that if `stats` is enabled, then searching continues in order to"] # [doc = " compute statistics."] QuietWithMatch , # [doc = " Don't show any output and the stop the search once a non-matching file"] # [doc = " is found."] # [doc = ""] # [doc = " Note that if `stats` is enabled, then searching continues in order to"] # [doc = " compute statistics."] QuietWithoutMatch , }
+};
+}

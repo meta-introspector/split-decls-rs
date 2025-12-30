@@ -1,0 +1,9 @@
+// Generated macro for parse_contains (function)
+macro_rules! Depcrate_attr_parse_metaparse_contains {
+() => {
+// Module: crate::attr::parse_meta
+// Provides: {"parse_contains"}
+// Dependencies: {}
+pub fn parse_contains (outer_meta : CustomMeta , cx : & AttrCtxt) -> Result < Expr , () > { enum ContainsFormat { Metas (Punctuated < CustomMeta , Token ! [,] >) , Expr (Expr) , } impl Parse for ContainsFormat { fn parse (input : ParseStream) -> syn :: Result < Self > { if input . peek2 (Token ! [,]) || input . peek2 (Token ! [=]) { Punctuated :: parse_terminated (input) . map (Self :: Metas) } else { input . parse () . map (Self :: Expr) } } } let nested_meta_or_expr = match cx . attr_type { "validate" => parse_meta_list_with (& outer_meta , cx , Punctuated :: parse_terminated) . map (ContainsFormat :: Metas) , "garde" => parse_meta_list_with (& outer_meta , cx , Expr :: parse) . map (ContainsFormat :: Expr) , "schemars" => parse_meta_list_with (& outer_meta , cx , ContainsFormat :: parse) , wat => { unreachable ! ("Unexpected attr type `{wat}` for `contains` item. This is a bug in schemars, please raise an issue!") } } ? ; let nested_metas = match nested_meta_or_expr { ContainsFormat :: Expr (expr) => return Ok (expr) , ContainsFormat :: Metas (m) => m , } ; let mut pattern = None ; for nested_meta in nested_metas { match path_str (nested_meta . path ()) . as_str () { "pattern" => match & pattern { Some (_) => cx . duplicate_error (& nested_meta) , None => pattern = parse_name_value_expr (nested_meta , cx) . ok () , } , unknown => { if cx . attr_type == "schemars" { cx . error_spanned_by (nested_meta , format_args ! ("unknown item in schemars `contains` attribute: `{unknown}`") ,) ; } } } } pattern . ok_or_else (| | { cx . error_spanned_by (outer_meta , "`contains` attribute item requires `pattern = ...`" ,) ; }) }
+};
+}

@@ -1,0 +1,51 @@
+// Generated module macro for crate::idl_type
+macro_rules! Modcrate_idl_type {
+() => {
+        Depcrate_idl_typeuse_132!();
+        Depcrate_idl_typeuse_133!();
+        Depcrate_idl_typeuse_134!();
+        Depcrate_idl_typeuse_135!();
+        Depcrate_idl_typeuse_136!();
+        Depcrate_idl_typeuse_137!();
+        Depcrate_idl_typeuse_138!();
+        Depcrate_idl_typeuse_139!();
+        Depcrate_idl_typeuse_140!();
+        Depcrate_idl_typeIdlType!();
+        Depcrate_idl_typeIdentifierType!();
+        Depcrate_idl_typeToIdlType!();
+        Depcrate_idl_typeimpl_144!();
+        Depcrate_idl_typeimpl_145!();
+        Depcrate_idl_typeimpl_146!();
+        Depcrate_idl_typeimpl_147!();
+        Depcrate_idl_typeimpl_148!();
+        Depcrate_idl_typeimpl_149!();
+        Depcrate_idl_typeimpl_150!();
+        Depcrate_idl_typeimpl_151!();
+        Depcrate_idl_typeimpl_152!();
+        Depcrate_idl_typeimpl_153!();
+        Depcrate_idl_typeimpl_154!();
+        Depcrate_idl_typeimpl_155!();
+        Depcrate_idl_typeimpl_156!();
+        Depcrate_idl_typeimpl_157!();
+        Depcrate_idl_typeimpl_158!();
+        Depcrate_idl_typeimpl_159!();
+        Depcrate_idl_typeimpl_160!();
+        Depcrate_idl_typeimpl_161!();
+        Depcrate_idl_typeimpl_162!();
+        Depcrate_idl_typeimpl_163!();
+        Depcrate_idl_typeimpl_164!();
+        Depcrate_idl_typeimpl_165!();
+        Depcrate_idl_typeimpl_166!();
+        Depcrate_idl_typeimpl_167!();
+        Depcrate_idl_typeimpl_168!();
+        Depcrate_idl_typeterms_to_idl_type!();
+        Depcrate_idl_typeterms_to_idl_type_maybe_immutable!();
+        Depcrate_idl_typemacro_171!();
+        Depcrate_idl_typemacro_172!();
+        Depcrate_idl_typeTypeError!();
+        Depcrate_idl_typeimpl_174!();
+        Depcrate_idl_typeimpl_175!();
+        Depcrate_idl_typeidl_type_flatten_test!();
+        Depcrate_idl_typeclamped!();
+    };
+}

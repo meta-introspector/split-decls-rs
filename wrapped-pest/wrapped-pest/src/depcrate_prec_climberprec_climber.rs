@@ -1,0 +1,9 @@
+// Generated macro for prec_climber (macro)
+macro_rules! Depcrate_prec_climberprec_climber {
+() => {
+// Module: crate::prec_climber
+// Provides: {"prec_climber"}
+// Dependencies: {}
+# [doc = " Macro for more convenient const fn definition of `prec_climber::PrecClimber`."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " # use pest::prec_climber::{Assoc, PrecClimber};"] # [doc = " # use pest::prec_climber;"] # [doc = " # #[allow(non_camel_case_types)]"] # [doc = " # #[allow(dead_code)]"] # [doc = " # #[derive(Clone, Copy, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]"] # [doc = " # enum Rule {"] # [doc = " #     plus,"] # [doc = " #     minus,"] # [doc = " #     times,"] # [doc = " #     divide,"] # [doc = " #     power"] # [doc = " # }"] # [doc = " static CLIMBER: PrecClimber<Rule> = prec_climber!["] # [doc = "     L   plus | minus,"] # [doc = "     L   times | divide,"] # [doc = "     R   power,"] # [doc = " ];"] # [doc = " ```"] # [cfg (feature = "const_prec_climber")] # [macro_export] macro_rules ! prec_climber { ($ ($ assoc : ident $ rule : ident $ (| $ rules : ident) *) ,+ $ (,) ?) => { { prec_climber ! (@ precedences { 1u32 } $ ([$ rule $ ($ rules) *]) *) ; $ crate :: prec_climber :: PrecClimber :: new_const (prec_climber ! (@ array $ ($ assoc $ rule $ (, $ assoc $ rules) *) ,*)) } } ; (@ assoc L) => { $ crate :: prec_climber :: Assoc :: Left } ; (@ assoc R) => { $ crate :: prec_climber :: Assoc :: Right } ; (@ array $ ($ assoc : ident $ rule : ident) ,*) => { & [$ ((Rule ::$ rule , $ rule , prec_climber ! (@ assoc $ assoc) ,)) ,*] } ; (@ precedences { $ precedence : expr }) => { } ; (@ precedences { $ precedence : expr } [$ ($ rule : ident) *] $ ([$ ($ rules : ident) *]) *) => { $ (# [allow (non_upper_case_globals)] const $ rule : u32 = $ precedence ;) * prec_climber ! (@ precedences { 1u32 + $ precedence } $ ([$ ($ rules) *]) *) ; } ; }
+};
+}

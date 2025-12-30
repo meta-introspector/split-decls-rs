@@ -1,0 +1,9 @@
+// Generated macro for DEFAULT_LOCALE_RESOURCES (static)
+macro_rules! DepcrateDEFAULT_LOCALE_RESOURCES {
+() => {
+// Module: crate
+// Provides: {"DEFAULT_LOCALE_RESOURCES"}
+// Dependencies: {}
+pub static DEFAULT_LOCALE_RESOURCES : & [& str] = & [crate :: DEFAULT_LOCALE_RESOURCE , rustc_ast_lowering :: DEFAULT_LOCALE_RESOURCE , rustc_ast_passes :: DEFAULT_LOCALE_RESOURCE , rustc_attr_parsing :: DEFAULT_LOCALE_RESOURCE , rustc_borrowck :: DEFAULT_LOCALE_RESOURCE , rustc_builtin_macros :: DEFAULT_LOCALE_RESOURCE , rustc_codegen_ssa :: DEFAULT_LOCALE_RESOURCE , rustc_const_eval :: DEFAULT_LOCALE_RESOURCE , rustc_errors :: DEFAULT_LOCALE_RESOURCE , rustc_expand :: DEFAULT_LOCALE_RESOURCE , rustc_hir_analysis :: DEFAULT_LOCALE_RESOURCE , rustc_hir_typeck :: DEFAULT_LOCALE_RESOURCE , rustc_incremental :: DEFAULT_LOCALE_RESOURCE , rustc_infer :: DEFAULT_LOCALE_RESOURCE , rustc_interface :: DEFAULT_LOCALE_RESOURCE , rustc_lint :: DEFAULT_LOCALE_RESOURCE , rustc_metadata :: DEFAULT_LOCALE_RESOURCE , rustc_middle :: DEFAULT_LOCALE_RESOURCE , rustc_mir_build :: DEFAULT_LOCALE_RESOURCE , rustc_mir_dataflow :: DEFAULT_LOCALE_RESOURCE , rustc_mir_transform :: DEFAULT_LOCALE_RESOURCE , rustc_monomorphize :: DEFAULT_LOCALE_RESOURCE , rustc_parse :: DEFAULT_LOCALE_RESOURCE , rustc_passes :: DEFAULT_LOCALE_RESOURCE , rustc_pattern_analysis :: DEFAULT_LOCALE_RESOURCE , rustc_privacy :: DEFAULT_LOCALE_RESOURCE , rustc_query_system :: DEFAULT_LOCALE_RESOURCE , rustc_resolve :: DEFAULT_LOCALE_RESOURCE , rustc_session :: DEFAULT_LOCALE_RESOURCE , rustc_trait_selection :: DEFAULT_LOCALE_RESOURCE , rustc_ty_utils :: DEFAULT_LOCALE_RESOURCE ,] ;
+};
+}

@@ -1,0 +1,46 @@
+// Generated module macro for crate::def
+macro_rules! Modcrate_def {
+() => {
+        Depcrate_defuse_83!();
+        Depcrate_defuse_84!();
+        Depcrate_defuse_85!();
+        Depcrate_defuse_86!();
+        Depcrate_defuse_87!();
+        Depcrate_defuse_88!();
+        Depcrate_defuse_89!();
+        Depcrate_defuse_90!();
+        Depcrate_defuse_91!();
+        Depcrate_defuse_92!();
+        Depcrate_defuse_93!();
+        Depcrate_defuse_94!();
+        Depcrate_defuse_95!();
+        Depcrate_defuse_96!();
+        Depcrate_defCtorOf!();
+        Depcrate_defCtorKind!();
+        Depcrate_defMacroKinds!();
+        Depcrate_defmacro_100!();
+        Depcrate_defimpl_101!();
+        Depcrate_defimpl_102!();
+        Depcrate_defNonMacroAttrKind!();
+        Depcrate_defDefKind!();
+        Depcrate_defimpl_105!();
+        Depcrate_defRes!();
+        Depcrate_defimpl_107!();
+        Depcrate_defPartialRes!();
+        Depcrate_defimpl_109!();
+        Depcrate_defNamespace!();
+        Depcrate_defimpl_111!();
+        Depcrate_defimpl_112!();
+        Depcrate_defimpl_113!();
+        Depcrate_defPerNS!();
+        Depcrate_defimpl_115!();
+        Depcrate_defimpl_116!();
+        Depcrate_defimpl_117!();
+        Depcrate_defimpl_118!();
+        Depcrate_defimpl_119!();
+        Depcrate_defimpl_120!();
+        Depcrate_defimpl_121!();
+        Depcrate_defLifetimeRes!();
+        Depcrate_defDocLinkResMap!();
+    };
+}

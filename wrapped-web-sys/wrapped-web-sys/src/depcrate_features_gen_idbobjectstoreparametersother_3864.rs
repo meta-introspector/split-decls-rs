@@ -1,0 +1,9 @@
+// Generated macro for other_3864 (other)
+macro_rules! Depcrate_features_gen_IdbObjectStoreParametersother_3864 {
+() => {
+// Module: crate::features::gen_IdbObjectStoreParameters
+// Provides: {"other_3864"}
+// Dependencies: {}
+# [wasm_bindgen] extern "C" { # [wasm_bindgen (extends = :: js_sys :: Object , js_name = IDBObjectStoreParameters)] # [derive (Debug , Clone , PartialEq , Eq)] # [doc = "The `IdbObjectStoreParameters` dictionary."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `IdbObjectStoreParameters`*"] pub type IdbObjectStoreParameters ; # [doc = "Get the `autoIncrement` field of this object."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `IdbObjectStoreParameters`*"] # [wasm_bindgen (method , getter = "autoIncrement")] pub fn get_auto_increment (this : & IdbObjectStoreParameters) -> Option < bool > ; # [doc = "Change the `autoIncrement` field of this object."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `IdbObjectStoreParameters`*"] # [wasm_bindgen (method , setter = "autoIncrement")] pub fn set_auto_increment (this : & IdbObjectStoreParameters , val : bool) ; # [doc = "Get the `keyPath` field of this object."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `IdbObjectStoreParameters`*"] # [wasm_bindgen (method , getter = "keyPath")] pub fn get_key_path (this : & IdbObjectStoreParameters) -> :: wasm_bindgen :: JsValue ; # [doc = "Change the `keyPath` field of this object."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `IdbObjectStoreParameters`*"] # [wasm_bindgen (method , setter = "keyPath")] pub fn set_key_path (this : & IdbObjectStoreParameters , val : & :: wasm_bindgen :: JsValue) ; }
+};
+}

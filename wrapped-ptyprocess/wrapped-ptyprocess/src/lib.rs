@@ -1,0 +1,67 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcrateuse_15.rs");
+include!("depcrateget_slave_name.rs");
+include!("depcrateptyprocess.rs");
+include!("depcrateuse_9.rs");
+include!("depcrateget_term_size.rs");
+include!("depcratedefault_term_rows.rs");
+include!("depcratemaster.rs");
+include!("depcrateget_untouched_fds.rs");
+include!("depcrate_streamimpl_4.rs");
+include!("depcrateuse_13.rs");
+include!("depcratestream.rs");
+include!("depcrateuse_12.rs");
+include!("depcrateuse_20.rs");
+include!("depcrateuse_25.rs");
+include!("depcrateclose_all_descriptors.rs");
+include!("depcrateuse_11.rs");
+include!("depcrateuse_28.rs");
+include!("depcrateuse_17.rs");
+include!("depcrateset_echo.rs");
+include!("depcrateimpl_37.rs");
+include!("depcrateimpl_41.rs");
+include!("depcrateuse_14.rs");
+include!("depcratefiodgname_arg.rs");
+include!("depcratefdevname_r.rs");
+include!("depcrateset_raw.rs");
+include!("depcratedefault_veof_char.rs");
+include!("depcrate_streamimpl_5.rs");
+include!("depcrateget_term_char.rs");
+include!("depcrateuse_18.rs");
+include!("depcratedefault_term_cols.rs");
+include!("depcrateuse_27.rs");
+include!("depcrateset_term_size.rs");
+include!("depcrateget_this_term_char.rs");
+include!("depcrate_streamhas_reached_end_of_sdtout.rs");
+include!("depcrateuse_19.rs");
+include!("depcrateisptmaster.rs");
+include!("depcrate_streamuse_2.rs");
+include!("depcratedefault_terminate_delay.rs");
+include!("depcrateuse_22.rs");
+include!("depcrateuse_23.rs");
+include!("depcrateimpl_42.rs");
+include!("depcrate_streamimpl_6.rs");
+include!("depcrateget_eof_char.rs");
+include!("depcrateget_intr_char.rs");
+include!("depcrateuse_29.rs");
+include!("depcrateimpl_36.rs");
+include!("depcrate_streamimpl_7.rs");
+include!("depcrate_streamstream.rs");
+include!("depcrateuse_26.rs");
+include!("depcratetests.rs");
+include!("depcrateuse_24.rs");
+include!("depcrateuse_10.rs");
+include!("depcratemake_controlling_tty.rs");
+include!("depcratedefault_intr_char.rs");
+include!("depcrateredirect_std_streams.rs");
+include!("depcrateuse_16.rs");
+include!("depcrateuse_21.rs");
+include!("modcrate_stream.rs");
+include!("modcrate.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate_stream!();
+    Modcrate!();
+}

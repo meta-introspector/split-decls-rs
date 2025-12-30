@@ -1,0 +1,70 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcrate_seg_queueimpl_53.rs");
+include!("depcrateseg_queue.rs");
+include!("depcrate_seg_queueuse_29.rs");
+include!("depcrate_seg_queueuse_25.rs");
+include!("depcrate_seg_queueuse_33.rs");
+include!("depcrate_array_queueimpl_18.rs");
+include!("depcrate_seg_queueimpl_54.rs");
+include!("depcrate_array_queueimpl_16.rs");
+include!("depcrate_seg_queuesegqueue.rs");
+include!("depcrate_seg_queueuse_26.rs");
+include!("depcrate_array_queueuse_6.rs");
+include!("depcrate_array_queueimpl_14.rs");
+include!("depcrate_seg_queuewrite.rs");
+include!("depcrate_seg_queueshift.rs");
+include!("depcrate_seg_queueimpl_42.rs");
+include!("depcrate_array_queueuse_9.rs");
+include!("depcrate_seg_queueuse_30.rs");
+include!("depcrate_array_queueuse_10.rs");
+include!("depcrate_seg_queuelap.rs");
+include!("depcrate_seg_queueintoiter.rs");
+include!("depcrate_seg_queueimpl_49.rs");
+include!("depcrate_seg_queueuse_24.rs");
+include!("depcrate_seg_queueimpl_47.rs");
+include!("depcrate_array_queueslot.rs");
+include!("depcrate_array_queueimpl_15.rs");
+include!("depcrateother_1.rs");
+include!("depcrateother_2.rs");
+include!("depcrate_array_queueimpl_22.rs");
+include!("depcrate_seg_queueuse_27.rs");
+include!("depcrate_seg_queueblock.rs");
+include!("depcrate_seg_queueimpl_57.rs");
+include!("depcrate_seg_queueslot.rs");
+include!("depcrate_array_queueuse_4.rs");
+include!("depcrate_array_queueimpl_19.rs");
+include!("depcrate_seg_queueimpl_55.rs");
+include!("depcrate_seg_queueuse_28.rs");
+include!("depcrate_array_queueuse_7.rs");
+include!("depcrate_seg_queueuse_31.rs");
+include!("depcrate_array_queueimpl_20.rs");
+include!("depcrate_seg_queueread.rs");
+include!("depcrate_seg_queuedestroy.rs");
+include!("depcrate_seg_queueblock_cap.rs");
+include!("depcrate_array_queuearrayqueue.rs");
+include!("depcrate_seg_queuehas_next.rs");
+include!("depcrate_seg_queueimpl_48.rs");
+include!("depcratearray_queue.rs");
+include!("depcrate_array_queueimpl_17.rs");
+include!("depcrate_array_queueuse_5.rs");
+include!("depcrate_array_queueintoiter.rs");
+include!("depcrate_seg_queueposition.rs");
+include!("depcrate_seg_queueimpl_44.rs");
+include!("depcrate_seg_queueimpl_51.rs");
+include!("depcrateuse_58.rs");
+include!("depcrate_array_queueimpl_13.rs");
+include!("depcrate_seg_queueimpl_52.rs");
+include!("depcrate_seg_queueimpl_50.rs");
+include!("depcrate_array_queueuse_8.rs");
+include!("depcrate_seg_queueuse_32.rs");
+include!("modcrate_seg_queue.rs");
+include!("modcrate.rs");
+include!("modcrate_array_queue.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate_seg_queue!();
+    Modcrate!();
+    Modcrate_array_queue!();
+}

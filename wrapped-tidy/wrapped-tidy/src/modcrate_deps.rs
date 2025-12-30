@@ -1,0 +1,41 @@
+// Generated module macro for crate::deps
+macro_rules! Modcrate_deps {
+() => {
+        Depcrate_depsuse_46!();
+        Depcrate_depsuse_47!();
+        Depcrate_depsuse_48!();
+        Depcrate_depsuse_49!();
+        Depcrate_depsuse_50!();
+        Depcrate_depsuse_51!();
+        Depcrate_depsuse_52!();
+        Depcrate_depsproc_macro_deps!();
+        Depcrate_depsLICENSES!();
+        Depcrate_depsExceptionList!();
+        Depcrate_depsWORKSPACES!();
+        Depcrate_depsEXCEPTIONS!();
+        Depcrate_depsEXCEPTIONS_STDLIB!();
+        Depcrate_depsEXCEPTIONS_CARGO!();
+        Depcrate_depsEXCEPTIONS_RUST_ANALYZER!();
+        Depcrate_depsEXCEPTIONS_RUSTC_PERF!();
+        Depcrate_depsEXCEPTIONS_RUSTBOOK!();
+        Depcrate_depsEXCEPTIONS_CRANELIFT!();
+        Depcrate_depsEXCEPTIONS_GCC!();
+        Depcrate_depsEXCEPTIONS_BOOTSTRAP!();
+        Depcrate_depsEXCEPTIONS_UEFI_QEMU_TEST!();
+        Depcrate_depsPERMITTED_DEPS_LOCATION!();
+        Depcrate_depsPERMITTED_RUSTC_DEPENDENCIES!();
+        Depcrate_depsPERMITTED_STDLIB_DEPENDENCIES!();
+        Depcrate_depsPERMITTED_CRANELIFT_DEPENDENCIES!();
+        Depcrate_depscheck!();
+        Depcrate_depscheck_proc_macro_dep_list!();
+        Depcrate_depshas_missing_submodule!();
+        Depcrate_depscheck_runtime_license_exceptions!();
+        Depcrate_depscheck_license_exceptions!();
+        Depcrate_depscheck_runtime_no_duplicate_dependencies!();
+        Depcrate_depscheck_runtime_no_proc_macros!();
+        Depcrate_depscheck_permitted_dependencies!();
+        Depcrate_depspkg_from_name!();
+        Depcrate_depspkg_from_id!();
+        Depcrate_depsdeps_of!();
+    };
+}

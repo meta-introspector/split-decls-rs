@@ -1,0 +1,74 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcrate_connectoruse_18.rs");
+include!("depcrate_configconfigbuilderext.rs");
+include!("depcrate_configimpl_8.rs");
+include!("depcrate_connectorimpl_30.rs");
+include!("depcrate_configuse_4.rs");
+include!("depcratebuilderstates.rs");
+include!("depcrate_connectoruse_21.rs");
+include!("depcrate_connectoruse_14.rs");
+include!("depcrate_connectorimpl_28.rs");
+include!("depcrate_streamuse_42.rs");
+include!("depcrate_configuse_2.rs");
+include!("depcrate_configuse_3.rs");
+include!("depcrate_connectorresolveservername.rs");
+include!("depcrate_connectorimpl_36.rs");
+include!("depcrate_connectorimpl_27.rs");
+include!("depcrate_connectorbuilder.rs");
+include!("depcrateconfig.rs");
+include!("depcrate_connectortests.rs");
+include!("depcrate_connectoruse_22.rs");
+include!("depcrate_connectorhttpsconnector.rs");
+include!("depcrate_streamuse_43.rs");
+include!("depcrate_streamimpl_49.rs");
+include!("depcrate_connectoruse_13.rs");
+include!("depcrate_streamuse_44.rs");
+include!("depcrate_streamuse_45.rs");
+include!("depcrate_connectorimpl_34.rs");
+include!("depcrate_streammaybehttpsstream.rs");
+include!("depcrate_configuse_5.rs");
+include!("depcrate_connectorimpl_29.rs");
+include!("depcrate_connectorimpl_32.rs");
+include!("depcrate_connectoruse_20.rs");
+include!("depcrate_streamuse_41.rs");
+include!("depcrate_configuse_6.rs");
+include!("depcrate_streamimpl_53.rs");
+include!("depcrate_streamimpl_51.rs");
+include!("depcrate_connectoruse_15.rs");
+include!("depcrate_streamuse_46.rs");
+include!("depcrate_connectoruse_16.rs");
+include!("depcrate_connectoruse_23.rs");
+include!("depcrate_streamuse_40.rs");
+include!("depcrate_connectoruse_19.rs");
+include!("depcratelog.rs");
+include!("depcrateuse_59.rs");
+include!("depcrate_configsealed.rs");
+include!("depcrate_connectoruse_17.rs");
+include!("depcrate_streamuse_47.rs");
+include!("depcrateuse_60.rs");
+include!("depcrate_connectorfixedservernameresolver.rs");
+include!("depcratestream.rs");
+include!("depcrate_streamimpl_52.rs");
+include!("depcrate_streamimpl_54.rs");
+include!("depcrate_connectoruse_11.rs");
+include!("depcrateuse_58.rs");
+include!("depcrateuse_57.rs");
+include!("depcrateconnector.rs");
+include!("depcrate_connectordefaultservernameresolver.rs");
+include!("depcrate_connectoruse_12.rs");
+include!("depcrate_connectorimpl_35.rs");
+include!("depcrate_connectorboxerror.rs");
+include!("depcrate_streamimpl_50.rs");
+include!("modcrate_stream.rs");
+include!("modcrate_connector.rs");
+include!("modcrate_config.rs");
+include!("modcrate.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate_stream!();
+    Modcrate_connector!();
+    Modcrate_config!();
+    Modcrate!();
+}

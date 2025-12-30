@@ -1,0 +1,9 @@
+// Generated macro for bool (function)
+macro_rules! Depcrate_binary_bitsbool {
+() => {
+// Module: crate::binary::bits
+// Provides: {"bool"}
+// Dependencies: {}
+# [doc = " Parses one specific bit as a bool."] # [doc = ""] # [doc = " # Effective Signature"] # [doc = ""] # [doc = " Assuming you are parsing a `(&[u8], usize)` bit [Stream]:"] # [doc = " ```rust"] # [doc = " # use winnow::prelude::*;;"] # [doc = " # use winnow::error::ContextError;"] # [doc = " pub fn bool(input: &mut (&[u8], usize)) -> ModalResult<bool>"] # [doc = " # {"] # [doc = " #     winnow::binary::bits::bool.parse_next(input)"] # [doc = " # }"] # [doc = " ```"] # [doc = ""] # [doc = " # Example"] # [doc = ""] # [doc = " ```rust"] # [doc = " # use winnow::prelude::*;"] # [doc = " # use winnow::Bytes;"] # [doc = " # use winnow::error::InputError;"] # [doc = " use winnow::binary::bits::bool;"] # [doc = ""] # [doc = " type Stream<'i> = &'i Bytes;"] # [doc = ""] # [doc = " fn stream(b: &[u8]) -> Stream<'_> {"] # [doc = "     Bytes::new(b)"] # [doc = " }"] # [doc = ""] # [doc = " fn parse(input: &mut (Stream<'_>, usize)) -> ModalResult<bool> {"] # [doc = "     bool.parse_next(input)"] # [doc = " }"] # [doc = ""] # [doc = " assert_eq!(parse.parse_peek((stream(&[0b10000000]), 0)), Ok(((stream(&[0b10000000]), 1), true)));"] # [doc = " assert_eq!(parse.parse_peek((stream(&[0b10000000]), 1)), Ok(((stream(&[0b10000000]), 2), false)));"] # [doc = " ```"] # [doc (alias = "any")] pub fn bool < Input , Error : ParserError < (Input , usize) > > (input : & mut (Input , usize) ,) -> Result < bool , Error > where Input : Stream < Token = u8 > + StreamIsPartial + Clone , { trace ("bool" , | input : & mut (Input , usize) | { let bit : u32 = take (1usize) . parse_next (input) ? ; Ok (bit != 0) }) . parse_next (input) }
+};
+}

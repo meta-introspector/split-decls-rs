@@ -1,0 +1,9 @@
+// Generated macro for sr (module)
+macro_rules! Depcrate_stm32f429_dacsr {
+() => {
+// Module: crate::stm32f429::dac
+// Provides: {"sr"}
+// Dependencies: {}
+# [doc = "status register"] pub mod sr ;
+};
+}

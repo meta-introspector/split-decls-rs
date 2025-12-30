@@ -1,0 +1,9 @@
+// Generated macro for PSYSTEM_PROCESSOR_CYCLE_STATS_INFORMATION (type)
+macro_rules! Depcrate_ntexapiPSYSTEM_PROCESSOR_CYCLE_STATS_INFORMATION {
+() => {
+// Module: crate::ntexapi
+// Provides: {"PSYSTEM_PROCESSOR_CYCLE_STATS_INFORMATION"}
+// Dependencies: {}
+pub type PSYSTEM_PROCESSOR_CYCLE_STATS_INFORMATION = * mut SYSTEM_PROCESSOR_CYCLE_STATS_INFORMATION ;
+};
+}

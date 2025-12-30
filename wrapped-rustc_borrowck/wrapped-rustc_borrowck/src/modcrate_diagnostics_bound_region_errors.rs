@@ -1,0 +1,45 @@
+// Generated module macro for crate::diagnostics::bound_region_errors
+macro_rules! Modcrate_diagnostics_bound_region_errors {
+() => {
+        Depcrate_diagnostics_bound_region_errorsuse_250!();
+        Depcrate_diagnostics_bound_region_errorsuse_251!();
+        Depcrate_diagnostics_bound_region_errorsuse_252!();
+        Depcrate_diagnostics_bound_region_errorsuse_253!();
+        Depcrate_diagnostics_bound_region_errorsuse_254!();
+        Depcrate_diagnostics_bound_region_errorsuse_255!();
+        Depcrate_diagnostics_bound_region_errorsuse_256!();
+        Depcrate_diagnostics_bound_region_errorsuse_257!();
+        Depcrate_diagnostics_bound_region_errorsuse_258!();
+        Depcrate_diagnostics_bound_region_errorsuse_259!();
+        Depcrate_diagnostics_bound_region_errorsuse_260!();
+        Depcrate_diagnostics_bound_region_errorsuse_261!();
+        Depcrate_diagnostics_bound_region_errorsuse_262!();
+        Depcrate_diagnostics_bound_region_errorsuse_263!();
+        Depcrate_diagnostics_bound_region_errorsuse_264!();
+        Depcrate_diagnostics_bound_region_errorsuse_265!();
+        Depcrate_diagnostics_bound_region_errorsuse_266!();
+        Depcrate_diagnostics_bound_region_errorsuse_267!();
+        Depcrate_diagnostics_bound_region_errorsuse_268!();
+        Depcrate_diagnostics_bound_region_errorsUniverseInfo!();
+        Depcrate_diagnostics_bound_region_errorsimpl_270!();
+        Depcrate_diagnostics_bound_region_errorsToUniverseInfo!();
+        Depcrate_diagnostics_bound_region_errorsimpl_272!();
+        Depcrate_diagnostics_bound_region_errorsimpl_273!();
+        Depcrate_diagnostics_bound_region_errorsimpl_274!();
+        Depcrate_diagnostics_bound_region_errorsimpl_275!();
+        Depcrate_diagnostics_bound_region_errorsimpl_276!();
+        Depcrate_diagnostics_bound_region_errorsimpl_277!();
+        Depcrate_diagnostics_bound_region_errorsTypeOpInfo!();
+        Depcrate_diagnostics_bound_region_errorsPredicateQuery!();
+        Depcrate_diagnostics_bound_region_errorsimpl_280!();
+        Depcrate_diagnostics_bound_region_errorsNormalizeQuery!();
+        Depcrate_diagnostics_bound_region_errorsimpl_282!();
+        Depcrate_diagnostics_bound_region_errorsDeeplyNormalizeQuery!();
+        Depcrate_diagnostics_bound_region_errorsimpl_284!();
+        Depcrate_diagnostics_bound_region_errorsAscribeUserTypeQuery!();
+        Depcrate_diagnostics_bound_region_errorsimpl_286!();
+        Depcrate_diagnostics_bound_region_errorsimpl_287!();
+        Depcrate_diagnostics_bound_region_errorstry_extract_error_from_fulfill_cx!();
+        Depcrate_diagnostics_bound_region_errorstry_extract_error_from_region_constraints!();
+    };
+}

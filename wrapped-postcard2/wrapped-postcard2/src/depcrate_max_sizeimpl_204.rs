@@ -1,0 +1,9 @@
+// Generated macro for impl_204 (impl)
+macro_rules! Depcrate_max_sizeimpl_204 {
+() => {
+// Module: crate::max_size
+// Provides: {"impl_204"}
+// Dependencies: {}
+impl < A : MaxSize , B : MaxSize > MaxSize for (A , B) { const POSTCARD_MAX_SIZE : usize = A :: POSTCARD_MAX_SIZE + B :: POSTCARD_MAX_SIZE ; }
+};
+}

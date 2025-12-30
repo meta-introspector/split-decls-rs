@@ -1,0 +1,9 @@
+// Generated macro for type_foldable_derive (function)
+macro_rules! Depcratetype_foldable_derive {
+() => {
+// Module: crate
+// Provides: {"type_foldable_derive"}
+// Dependencies: {}
+fn type_foldable_derive (mut s : synstructure :: Structure < '_ >) -> proc_macro2 :: TokenStream { if let syn :: Data :: Union (_) = s . ast () . data { panic ! ("cannot derive on union") } if ! s . ast () . generics . lifetimes () . any (| lt | lt . lifetime . ident == "db") { s . add_impl_generic (parse_quote ! { 'db }) ; } s . add_bounds (synstructure :: AddBounds :: Generics) ; s . bind_with (| _ | synstructure :: BindStyle :: Move) ; let try_body_fold = s . each_variant (| vi | { let bindings = vi . bindings () ; vi . construct (| _ , index | { let bind = & bindings [index] ; if has_ignore_attr (& bind . ast () . attrs , "type_foldable" , "identity") { bind . to_token_stream () } else { quote ! { :: rustc_type_ir :: TypeFoldable :: try_fold_with (# bind , __folder) ? } } }) }) ; let body_fold = s . each_variant (| vi | { let bindings = vi . bindings () ; vi . construct (| _ , index | { let bind = & bindings [index] ; if has_ignore_attr (& bind . ast () . attrs , "type_foldable" , "identity") { bind . to_token_stream () } else { quote ! { :: rustc_type_ir :: TypeFoldable :: fold_with (# bind , __folder) } } }) }) ; s . bound_impl (quote ! (:: rustc_type_ir :: TypeFoldable <:: hir_ty :: next_solver :: DbInterner <'db >>) , quote ! { fn try_fold_with < __F : :: rustc_type_ir :: FallibleTypeFolder <:: hir_ty :: next_solver :: DbInterner <'db >>> (self , __folder : & mut __F) -> Result < Self , __F :: Error > { Ok (match self { # try_body_fold }) } fn fold_with < __F : :: rustc_type_ir :: TypeFolder <:: hir_ty :: next_solver :: DbInterner <'db >>> (self , __folder : & mut __F) -> Self { match self { # body_fold } } } ,) }
+};
+}

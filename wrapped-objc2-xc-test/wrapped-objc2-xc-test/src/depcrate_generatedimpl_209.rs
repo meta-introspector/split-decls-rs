@@ -1,0 +1,9 @@
+// Generated macro for impl_209 (impl)
+macro_rules! Depcrate_generatedimpl_209 {
+() => {
+// Module: crate::generated
+// Provides: {"impl_209"}
+// Dependencies: {}
+# [doc = " XCTBuiltinOSSignposts."] # [doc = ""] # [doc = " Interface extension describing OS Signposts that are instrumented by the OS."] impl XCTOSSignpostMetric { extern_methods ! (# [doc = " The XCTOSSignpostMetric object covering application launch"] # [deprecated = "Use XCTApplicationLaunchMetric instead"] # [unsafe (method (applicationLaunchMetric))] # [unsafe (method_family = none)] pub fn applicationLaunchMetric () -> Retained < XCTOSSignpostMetric >; # [doc = " The XCTMetric object covering navigation transitions between views"] # [unsafe (method (navigationTransitionMetric))] # [unsafe (method_family = none)] pub fn navigationTransitionMetric () -> Retained < ProtocolObject < dyn XCTMetric >>; # [doc = " The XCTMetric object covering custom navigation transitions between views"] # [unsafe (method (customNavigationTransitionMetric))] # [unsafe (method_family = none)] pub fn customNavigationTransitionMetric () -> Retained < ProtocolObject < dyn XCTMetric >>; # [doc = " The XCTMetric object covering both the scroll and deceleration animations"] # [unsafe (method (scrollingAndDecelerationMetric))] # [unsafe (method_family = none)] pub fn scrollingAndDecelerationMetric () -> Retained < ProtocolObject < dyn XCTMetric >>; # [doc = " The XCTMetric object covering scroll deceleration animations"] # [deprecated] # [unsafe (method (scrollDecelerationMetric))] # [unsafe (method_family = none)] pub fn scrollDecelerationMetric () -> Retained < ProtocolObject < dyn XCTMetric >>; # [doc = " The XCTMetric object covering scroll dragging animations"] # [deprecated] # [unsafe (method (scrollDraggingMetric))] # [unsafe (method_family = none)] pub fn scrollDraggingMetric () -> Retained < ProtocolObject < dyn XCTMetric >>;) ; }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for other_6396 (other)
+macro_rules! Depcrate_features_gen_RtcSessionDescriptionInitother_6396 {
+() => {
+// Module: crate::features::gen_RtcSessionDescriptionInit
+// Provides: {"other_6396"}
+// Dependencies: {}
+# [wasm_bindgen] extern "C" { # [wasm_bindgen (extends = :: js_sys :: Object , js_name = RTCSessionDescriptionInit)] # [derive (Debug , Clone , PartialEq , Eq)] # [doc = "The `RtcSessionDescriptionInit` dictionary."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `RtcSessionDescriptionInit`*"] pub type RtcSessionDescriptionInit ; # [doc = "Get the `sdp` field of this object."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `RtcSessionDescriptionInit`*"] # [wasm_bindgen (method , getter = "sdp")] pub fn get_sdp (this : & RtcSessionDescriptionInit) -> Option < :: alloc :: string :: String > ; # [doc = "Change the `sdp` field of this object."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `RtcSessionDescriptionInit`*"] # [wasm_bindgen (method , setter = "sdp")] pub fn set_sdp (this : & RtcSessionDescriptionInit , val : & str) ; # [cfg (feature = "RtcSdpType")] # [doc = "Get the `type` field of this object."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `RtcSdpType`, `RtcSessionDescriptionInit`*"] # [wasm_bindgen (method , getter = "type")] pub fn get_type (this : & RtcSessionDescriptionInit) -> RtcSdpType ; # [cfg (feature = "RtcSdpType")] # [doc = "Change the `type` field of this object."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `RtcSdpType`, `RtcSessionDescriptionInit`*"] # [wasm_bindgen (method , setter = "type")] pub fn set_type (this : & RtcSessionDescriptionInit , val : RtcSdpType) ; }
+};
+}

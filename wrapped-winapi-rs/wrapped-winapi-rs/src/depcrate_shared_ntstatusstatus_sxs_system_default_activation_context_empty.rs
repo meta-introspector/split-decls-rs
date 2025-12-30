@@ -1,0 +1,9 @@
+// Generated macro for STATUS_SXS_SYSTEM_DEFAULT_ACTIVATION_CONTEXT_EMPTY (const)
+macro_rules! Depcrate_shared_ntstatusSTATUS_SXS_SYSTEM_DEFAULT_ACTIVATION_CONTEXT_EMPTY {
+() => {
+// Module: crate::shared::ntstatus
+// Provides: {"STATUS_SXS_SYSTEM_DEFAULT_ACTIVATION_CONTEXT_EMPTY"}
+// Dependencies: {}
+pub const STATUS_SXS_SYSTEM_DEFAULT_ACTIVATION_CONTEXT_EMPTY : NTSTATUS = 0xC0150012 ;
+};
+}

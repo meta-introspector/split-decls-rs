@@ -1,0 +1,40 @@
+// Generated module macro for crate::item_scope
+macro_rules! Modcrate_item_scope {
+() => {
+        Depcrate_item_scopeuse_77!();
+        Depcrate_item_scopeuse_78!();
+        Depcrate_item_scopeuse_79!();
+        Depcrate_item_scopeuse_80!();
+        Depcrate_item_scopeuse_81!();
+        Depcrate_item_scopeuse_82!();
+        Depcrate_item_scopeuse_83!();
+        Depcrate_item_scopeuse_84!();
+        Depcrate_item_scopeuse_85!();
+        Depcrate_item_scopeuse_86!();
+        Depcrate_item_scopeuse_87!();
+        Depcrate_item_scopeuse_88!();
+        Depcrate_item_scopeuse_89!();
+        Depcrate_item_scopePerNsGlobImports!();
+        Depcrate_item_scopeImportOrExternCrate!();
+        Depcrate_item_scopeimpl_92!();
+        Depcrate_item_scopeimpl_93!();
+        Depcrate_item_scopeImportOrGlob!();
+        Depcrate_item_scopeimpl_95!();
+        Depcrate_item_scopeImportOrDef!();
+        Depcrate_item_scopeimpl_97!();
+        Depcrate_item_scopeimpl_98!();
+        Depcrate_item_scopeImportId!();
+        Depcrate_item_scopeGlobId!();
+        Depcrate_item_scopeimpl_101!();
+        Depcrate_item_scopeItemScope!();
+        Depcrate_item_scopeDeriveMacroInvocation!();
+        Depcrate_item_scopeBUILTIN_SCOPE!();
+        Depcrate_item_scopeBuiltinShadowMode!();
+        Depcrate_item_scopeimpl_106!();
+        Depcrate_item_scopeimpl_107!();
+        Depcrate_item_scopeimpl_108!();
+        Depcrate_item_scopeimpl_109!();
+        Depcrate_item_scopeItemInNs!();
+        Depcrate_item_scopeimpl_111!();
+    };
+}

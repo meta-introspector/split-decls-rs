@@ -1,0 +1,9 @@
+// Generated macro for DOT11_WFD_STATUS_FAILED_UNABLE_TO_ACCOMODATE_REQUEST (const)
+macro_rules! Depcrate_shared_windot11DOT11_WFD_STATUS_FAILED_UNABLE_TO_ACCOMODATE_REQUEST {
+() => {
+// Module: crate::shared::windot11
+// Provides: {"DOT11_WFD_STATUS_FAILED_UNABLE_TO_ACCOMODATE_REQUEST"}
+// Dependencies: {}
+pub const DOT11_WFD_STATUS_FAILED_UNABLE_TO_ACCOMODATE_REQUEST : DOT11_WFD_STATUS_CODE = 5 ;
+};
+}

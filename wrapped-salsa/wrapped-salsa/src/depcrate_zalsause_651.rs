@@ -4,6 +4,6 @@ macro_rules! Depcrate_zalsause_651 {
 // Module: crate::zalsa
 // Provides: {"use_651"}
 // Dependencies: {}
-use std :: hash :: BuildHasherDefault ;
+use rustc_hash :: FxHashMap ;
 };
 }

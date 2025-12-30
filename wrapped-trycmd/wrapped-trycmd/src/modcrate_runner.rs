@@ -1,0 +1,48 @@
+// Generated module macro for crate::runner
+macro_rules! Modcrate_runner {
+() => {
+        Depcrate_runneruse_56!();
+        Depcrate_runneruse_57!();
+        Depcrate_runneruse_58!();
+        Depcrate_runneruse_59!();
+        Depcrate_runneruse_60!();
+        Depcrate_runneruse_61!();
+        Depcrate_runneruse_62!();
+        Depcrate_runneruse_63!();
+        Depcrate_runneruse_64!();
+        Depcrate_runneruse_65!();
+        Depcrate_runneruse_66!();
+        Depcrate_runnerRunner!();
+        Depcrate_runnerimpl_68!();
+        Depcrate_runnerimpl_69!();
+        Depcrate_runnerCase!();
+        Depcrate_runnerimpl_71!();
+        Depcrate_runnerOutput!();
+        Depcrate_runnerimpl_73!();
+        Depcrate_runnerimpl_74!();
+        Depcrate_runnerSpawn!();
+        Depcrate_runnerimpl_76!();
+        Depcrate_runnerimpl_77!();
+        Depcrate_runnerimpl_78!();
+        Depcrate_runnerSpawnStatus!();
+        Depcrate_runnerimpl_80!();
+        Depcrate_runnerStream!();
+        Depcrate_runnerimpl_82!();
+        Depcrate_runnerimpl_83!();
+        Depcrate_runnerStreamStatus!();
+        Depcrate_runnerimpl_85!();
+        Depcrate_runnerStdio!();
+        Depcrate_runnerimpl_87!();
+        Depcrate_runnerimpl_88!();
+        Depcrate_runnerFilesystem!();
+        Depcrate_runnerimpl_90!();
+        Depcrate_runnerimpl_91!();
+        Depcrate_runnerFileStatus!();
+        Depcrate_runnerimpl_93!();
+        Depcrate_runnerimpl_94!();
+        Depcrate_runnerimpl_95!();
+        Depcrate_runnerMode!();
+        Depcrate_runnerimpl_97!();
+        Depcrate_runnerfs_context!();
+    };
+}

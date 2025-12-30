@@ -1,0 +1,9 @@
+// Generated macro for TimeZoneFollowingTransitions (struct)
+macro_rules! Depcrate_tz_timezoneTimeZoneFollowingTransitions {
+() => {
+// Module: crate::tz::timezone
+// Provides: {"TimeZoneFollowingTransitions"}
+// Dependencies: {}
+# [doc = " An iterator over time zone transitions going forward in time."] # [doc = ""] # [doc = " This iterator is created by [`TimeZone::following`]."] # [doc = ""] # [doc = " # Example: show the 5 next time zone transitions"] # [doc = ""] # [doc = " This shows how to find the 5 following time zone transitions (from a"] # [doc = " particular datetime) for a particular time zone:"] # [doc = ""] # [doc = " ```"] # [doc = " use jiff::{tz::offset, Zoned};"] # [doc = ""] # [doc = " let now: Zoned = \"2024-12-31 18:25-05[US/Eastern]\".parse()?;"] # [doc = " let transitions = now"] # [doc = "     .time_zone()"] # [doc = "     .following(now.timestamp())"] # [doc = "     .take(5)"] # [doc = "     .map(|t| ("] # [doc = "         t.timestamp().to_zoned(now.time_zone().clone()),"] # [doc = "         t.offset(),"] # [doc = "         t.abbreviation().to_string(),"] # [doc = "     ))"] # [doc = "     .collect::<Vec<_>>();"] # [doc = " assert_eq!(transitions, vec!["] # [doc = "     (\"2025-03-09 03:00-04[US/Eastern]\".parse()?, offset(-4), \"EDT\".to_string()),"] # [doc = "     (\"2025-11-02 01:00-05[US/Eastern]\".parse()?, offset(-5), \"EST\".to_string()),"] # [doc = "     (\"2026-03-08 03:00-04[US/Eastern]\".parse()?, offset(-4), \"EDT\".to_string()),"] # [doc = "     (\"2026-11-01 01:00-05[US/Eastern]\".parse()?, offset(-5), \"EST\".to_string()),"] # [doc = "     (\"2027-03-14 03:00-04[US/Eastern]\".parse()?, offset(-4), \"EDT\".to_string()),"] # [doc = " ]);"] # [doc = ""] # [doc = " # Ok::<(), Box<dyn std::error::Error>>(())"] # [doc = " ```"] # [derive (Clone , Debug)] pub struct TimeZoneFollowingTransitions < 't > { tz : & 't TimeZone , cur : Timestamp , }
+};
+}

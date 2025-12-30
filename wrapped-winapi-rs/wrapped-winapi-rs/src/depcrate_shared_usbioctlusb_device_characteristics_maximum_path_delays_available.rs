@@ -1,0 +1,9 @@
+// Generated macro for USB_DEVICE_CHARACTERISTICS_MAXIMUM_PATH_DELAYS_AVAILABLE (const)
+macro_rules! Depcrate_shared_usbioctlUSB_DEVICE_CHARACTERISTICS_MAXIMUM_PATH_DELAYS_AVAILABLE {
+() => {
+// Module: crate::shared::usbioctl
+// Provides: {"USB_DEVICE_CHARACTERISTICS_MAXIMUM_PATH_DELAYS_AVAILABLE"}
+// Dependencies: {}
+pub const USB_DEVICE_CHARACTERISTICS_MAXIMUM_PATH_DELAYS_AVAILABLE : ULONG = 0x1 ;
+};
+}

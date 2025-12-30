@@ -1,0 +1,51 @@
+// Generated module macro for crate::ops::saturating
+macro_rules! Modcrate_ops_saturating {
+() => {
+        Depcrate_ops_saturatinguse_524!();
+        Depcrate_ops_saturatingSaturating!();
+        Depcrate_ops_saturatingdeprecated_saturating_impl!();
+        Depcrate_ops_saturatingmacro_527!();
+        Depcrate_ops_saturatingmacro_528!();
+        Depcrate_ops_saturatingsaturating_impl!();
+        Depcrate_ops_saturatingSaturatingAdd!();
+        Depcrate_ops_saturatingmacro_531!();
+        Depcrate_ops_saturatingmacro_532!();
+        Depcrate_ops_saturatingmacro_533!();
+        Depcrate_ops_saturatingmacro_534!();
+        Depcrate_ops_saturatingmacro_535!();
+        Depcrate_ops_saturatingmacro_536!();
+        Depcrate_ops_saturatingmacro_537!();
+        Depcrate_ops_saturatingmacro_538!();
+        Depcrate_ops_saturatingmacro_539!();
+        Depcrate_ops_saturatingmacro_540!();
+        Depcrate_ops_saturatingmacro_541!();
+        Depcrate_ops_saturatingmacro_542!();
+        Depcrate_ops_saturatingSaturatingSub!();
+        Depcrate_ops_saturatingmacro_544!();
+        Depcrate_ops_saturatingmacro_545!();
+        Depcrate_ops_saturatingmacro_546!();
+        Depcrate_ops_saturatingmacro_547!();
+        Depcrate_ops_saturatingmacro_548!();
+        Depcrate_ops_saturatingmacro_549!();
+        Depcrate_ops_saturatingmacro_550!();
+        Depcrate_ops_saturatingmacro_551!();
+        Depcrate_ops_saturatingmacro_552!();
+        Depcrate_ops_saturatingmacro_553!();
+        Depcrate_ops_saturatingmacro_554!();
+        Depcrate_ops_saturatingmacro_555!();
+        Depcrate_ops_saturatingSaturatingMul!();
+        Depcrate_ops_saturatingmacro_557!();
+        Depcrate_ops_saturatingmacro_558!();
+        Depcrate_ops_saturatingmacro_559!();
+        Depcrate_ops_saturatingmacro_560!();
+        Depcrate_ops_saturatingmacro_561!();
+        Depcrate_ops_saturatingmacro_562!();
+        Depcrate_ops_saturatingmacro_563!();
+        Depcrate_ops_saturatingmacro_564!();
+        Depcrate_ops_saturatingmacro_565!();
+        Depcrate_ops_saturatingmacro_566!();
+        Depcrate_ops_saturatingmacro_567!();
+        Depcrate_ops_saturatingmacro_568!();
+        Depcrate_ops_saturatingtest_saturating_traits!();
+    };
+}

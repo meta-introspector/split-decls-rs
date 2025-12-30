@@ -1,0 +1,44 @@
+// Generated module macro for crate::test::utils
+macro_rules! Modcrate_test_utils {
+() => {
+        Depcrate_test_utilsuse_17!();
+        Depcrate_test_utilsuse_18!();
+        Depcrate_test_utilsuse_19!();
+        Depcrate_test_utilsuse_20!();
+        Depcrate_test_utilsuse_21!();
+        Depcrate_test_utilsuse_22!();
+        Depcrate_test_utilsuse_23!();
+        Depcrate_test_utilsuse_24!();
+        Depcrate_test_utilsuse_25!();
+        Depcrate_test_utilsuse_26!();
+        Depcrate_test_utilsuse_27!();
+        Depcrate_test_utilsuse_28!();
+        Depcrate_test_utilsuse_29!();
+        Depcrate_test_utilsstringvec!();
+        Depcrate_test_utilsovec!();
+        Depcrate_test_utilspathvec!();
+        Depcrate_test_utilsassert_neq!();
+        Depcrate_test_utilsassert_map_contains!();
+        Depcrate_test_utilsnew_creator!();
+        Depcrate_test_utilsnext_command!();
+        Depcrate_test_utilsnext_command_calls!();
+        Depcrate_test_utilsfind_sccache_binary!();
+        Depcrate_test_utilsTestFixture!();
+        Depcrate_test_utilsSUBDIRS!();
+        Depcrate_test_utilsBIN_NAME!();
+        Depcrate_test_utilscreate_file!();
+        Depcrate_test_utilstouch!();
+        Depcrate_test_utilsmk_bin_contents!();
+        Depcrate_test_utilsmk_bin!();
+        Depcrate_test_utilsmk_bin_contents!();
+        Depcrate_test_utilsmk_bin!();
+        Depcrate_test_utilsimpl_48!();
+        Depcrate_test_utilssingle_threaded_runtime!();
+        Depcrate_test_utilsWaiter!();
+        Depcrate_test_utilsimpl_51!();
+        Depcrate_test_utilstest_map_contains_ok!();
+        Depcrate_test_utilstest_map_contains_extra_key!();
+        Depcrate_test_utilstest_map_contains_missing_key!();
+        Depcrate_test_utilstest_map_contains_wrong_value!();
+    };
+}

@@ -1,0 +1,49 @@
+// Generated module macro for crate::generator
+macro_rules! Modcrate_generator {
+() => {
+        Depcrate_generatoruse_87!();
+        Depcrate_generatoruse_88!();
+        Depcrate_generatoruse_89!();
+        Depcrate_generatoruse_90!();
+        Depcrate_generatoruse_91!();
+        Depcrate_generatoruse_92!();
+        Depcrate_generatoruse_93!();
+        Depcrate_generatoruse_94!();
+        Depcrate_generatoruse_95!();
+        Depcrate_generatoruse_96!();
+        Depcrate_generatoruse_97!();
+        Depcrate_generatoruse_98!();
+        Depcrate_generatoruse_99!();
+        Depcrate_generatoradd_features!();
+        Depcrate_generatorget_features_doc!();
+        Depcrate_generatorcomment!();
+        Depcrate_generatormaybe_unstable_attr!();
+        Depcrate_generatormaybe_unstable_docs!();
+        Depcrate_generatorgenerate_arguments!();
+        Depcrate_generatorgenerate_variadic!();
+        Depcrate_generatorEnumVariant!();
+        Depcrate_generatorimpl_108!();
+        Depcrate_generatorEnum!();
+        Depcrate_generatorimpl_110!();
+        Depcrate_generatorConstValue!();
+        Depcrate_generatorimpl_112!();
+        Depcrate_generatorConst!();
+        Depcrate_generatorimpl_114!();
+        Depcrate_generatorInterfaceAttributeKind!();
+        Depcrate_generatorInterfaceAttribute!();
+        Depcrate_generatorimpl_117!();
+        Depcrate_generatorInterfaceMethodKind!();
+        Depcrate_generatorInterfaceMethod!();
+        Depcrate_generatorimpl_120!();
+        Depcrate_generatorInterface!();
+        Depcrate_generatorimpl_122!();
+        Depcrate_generatorDictionaryField!();
+        Depcrate_generatorimpl_124!();
+        Depcrate_generatorDictionary!();
+        Depcrate_generatorimpl_126!();
+        Depcrate_generatorFunction!();
+        Depcrate_generatorimpl_128!();
+        Depcrate_generatorNamespace!();
+        Depcrate_generatorimpl_130!();
+    };
+}

@@ -1,0 +1,9 @@
+// Generated macro for edit_distance_with_substrings (function)
+macro_rules! Depcrate_edit_distanceedit_distance_with_substrings {
+() => {
+// Module: crate::edit_distance
+// Provides: {"edit_distance_with_substrings"}
+// Dependencies: {}
+# [doc = " Provides a word similarity score between two words that accounts for substrings being more"] # [doc = " meaningful than a typical edit distance. The lower the score, the closer the match. 0 is an"] # [doc = " identical match."] # [doc = ""] # [doc = " Uses the edit distance between the two strings and removes the cost of the length difference."] # [doc = " If this is 0 then it is either a substring match or a full word match, in the substring match"] # [doc = " case we detect this and return `1`. To prevent finding meaningless substrings, eg. \"in\" in"] # [doc = " \"shrink\", we only perform this subtraction of length difference if one of the words is not"] # [doc = " greater than twice the length of the other. For cases where the words are close in size but not"] # [doc = " an exact substring then the cost of the length difference is discounted by half."] # [doc = ""] # [doc = " Returns `None` if the distance exceeds the limit."] pub fn edit_distance_with_substrings (a : & str , b : & str , limit : usize) -> Option < usize > { let n = a . chars () . count () ; let m = b . chars () . count () ; let big_len_diff = (n * 2) < m || (m * 2) < n ; let len_diff = m . abs_diff (n) ; let distance = edit_distance (a , b , limit + len_diff) ? ; let score = distance - len_diff ; let score = if score == 0 && len_diff > 0 && ! big_len_diff { 1 } else if ! big_len_diff { score + len_diff . div_ceil (2) } else { score + len_diff } ; (score <= limit) . then_some (score) }
+};
+}

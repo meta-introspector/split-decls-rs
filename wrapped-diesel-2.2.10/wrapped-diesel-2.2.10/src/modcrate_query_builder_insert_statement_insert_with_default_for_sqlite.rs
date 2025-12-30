@@ -1,0 +1,46 @@
+// Generated module macro for crate::query_builder::insert_statement::insert_with_default_for_sqlite
+macro_rules! Modcrate_query_builder_insert_statement_insert_with_default_for_sqlite {
+() => {
+        Depcrate_query_builder_insert_statement_insert_with_default_for_sqliteuse_973!();
+        Depcrate_query_builder_insert_statement_insert_with_default_for_sqliteuse_974!();
+        Depcrate_query_builder_insert_statement_insert_with_default_for_sqliteuse_975!();
+        Depcrate_query_builder_insert_statement_insert_with_default_for_sqliteuse_976!();
+        Depcrate_query_builder_insert_statement_insert_with_default_for_sqliteuse_977!();
+        Depcrate_query_builder_insert_statement_insert_with_default_for_sqliteuse_978!();
+        Depcrate_query_builder_insert_statement_insert_with_default_for_sqliteuse_979!();
+        Depcrate_query_builder_insert_statement_insert_with_default_for_sqliteuse_980!();
+        Depcrate_query_builder_insert_statement_insert_with_default_for_sqliteuse_981!();
+        Depcrate_query_builder_insert_statement_insert_with_default_for_sqliteDebugQueryHelper!();
+        Depcrate_query_builder_insert_statement_insert_with_default_for_sqliteimpl_983!();
+        Depcrate_query_builder_insert_statement_insert_with_default_for_sqliteimpl_984!();
+        Depcrate_query_builder_insert_statement_insert_with_default_for_sqliteimpl_985!();
+        Depcrate_query_builder_insert_statement_insert_with_default_for_sqliteimpl_986!();
+        Depcrate_query_builder_insert_statement_insert_with_default_for_sqliteYes!();
+        Depcrate_query_builder_insert_statement_insert_with_default_for_sqliteimpl_988!();
+        Depcrate_query_builder_insert_statement_insert_with_default_for_sqliteNo!();
+        Depcrate_query_builder_insert_statement_insert_with_default_for_sqliteimpl_990!();
+        Depcrate_query_builder_insert_statement_insert_with_default_for_sqliteAny!();
+        Depcrate_query_builder_insert_statement_insert_with_default_for_sqliteimpl_992!();
+        Depcrate_query_builder_insert_statement_insert_with_default_for_sqliteimpl_993!();
+        Depcrate_query_builder_insert_statement_insert_with_default_for_sqliteimpl_994!();
+        Depcrate_query_builder_insert_statement_insert_with_default_for_sqliteimpl_995!();
+        Depcrate_query_builder_insert_statement_insert_with_default_for_sqliteContainsDefaultableValue!();
+        Depcrate_query_builder_insert_statement_insert_with_default_for_sqliteimpl_997!();
+        Depcrate_query_builder_insert_statement_insert_with_default_for_sqliteimpl_998!();
+        Depcrate_query_builder_insert_statement_insert_with_default_for_sqliteimpl_999!();
+        Depcrate_query_builder_insert_statement_insert_with_default_for_sqliteimpl_1000!();
+        Depcrate_query_builder_insert_statement_insert_with_default_for_sqliteimpl_1001!();
+        Depcrate_query_builder_insert_statement_insert_with_default_for_sqliteimpl_1002!();
+        Depcrate_query_builder_insert_statement_insert_with_default_for_sqliteimpl_1003!();
+        Depcrate_query_builder_insert_statement_insert_with_default_for_sqliteSqliteBatchInsertWrapper!();
+        Depcrate_query_builder_insert_statement_insert_with_default_for_sqliteimpl_1005!();
+        Depcrate_query_builder_insert_statement_insert_with_default_for_sqliteSqliteCanInsertInSingleQueryHelper!();
+        Depcrate_query_builder_insert_statement_insert_with_default_for_sqliteimpl_1007!();
+        Depcrate_query_builder_insert_statement_insert_with_default_for_sqliteimpl_1008!();
+        Depcrate_query_builder_insert_statement_insert_with_default_for_sqliteimpl_1009!();
+        Depcrate_query_builder_insert_statement_insert_with_default_for_sqliteimpl_1010!();
+        Depcrate_query_builder_insert_statement_insert_with_default_for_sqlitetuple_impls!();
+        Depcrate_query_builder_insert_statement_insert_with_default_for_sqliteimpl_contains_defaultable_value!();
+        Depcrate_query_builder_insert_statement_insert_with_default_for_sqlitemacro_1013!();
+    };
+}

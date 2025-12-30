@@ -1,0 +1,43 @@
+// Generated module macro for crate
+macro_rules! Modcrate {
+() => {
+        Depcrateanalysis!();
+        Depcratecpu_usage!();
+        Depcratedatadog!();
+        Depcrategithub!();
+        Depcratejobs!();
+        Depcratemetrics!();
+        Depcratetest_dashboard!();
+        Depcrateutils!();
+        Depcrateuse_117!();
+        Depcrateuse_118!();
+        Depcrateuse_119!();
+        Depcrateuse_120!();
+        Depcrateuse_121!();
+        Depcrateuse_122!();
+        Depcrateuse_123!();
+        Depcrateuse_124!();
+        Depcrateuse_125!();
+        Depcrateuse_126!();
+        Depcrateuse_127!();
+        Depcrateuse_128!();
+        Depcrateuse_129!();
+        Depcrateuse_130!();
+        Depcrateuse_131!();
+        Depcrateuse_132!();
+        DepcrateCI_DIRECTORY!();
+        DepcrateDOCKER_DIRECTORY!();
+        DepcrateJOBS_YML_PATH!();
+        DepcrateGitHubContext!();
+        Depcrateimpl_137!();
+        Depcrateload_github_ctx!();
+        Depcrateyaml_map_to_json!();
+        Depcraterun_workflow_locally!();
+        Depcrateupload_ci_metrics!();
+        Depcratepostprocess_metrics!();
+        Depcratepost_merge_report!();
+        DepcrateArgs!();
+        DepcrateJobType!();
+        Depcratemain!();
+    };
+}

@@ -1,0 +1,9 @@
+// Generated macro for macro_9300 (macro)
+macro_rules! Depcrate_reserve_after_initializationmacro_9300 {
+() => {
+// Module: crate::reserve_after_initialization
+// Provides: {"macro_9300"}
+// Dependencies: {}
+impl_lint_pass ! (ReserveAfterInitialization => [RESERVE_AFTER_INITIALIZATION]) ;
+};
+}

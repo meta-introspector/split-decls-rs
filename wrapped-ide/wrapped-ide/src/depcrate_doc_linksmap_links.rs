@@ -1,0 +1,9 @@
+// Generated macro for map_links (function)
+macro_rules! Depcrate_doc_linksmap_links {
+() => {
+// Module: crate::doc_links
+// Provides: {"map_links"}
+// Dependencies: {}
+# [doc = " Rewrites a markdown document, applying 'callback' to each link."] fn map_links < 'e > (events : impl Iterator < Item = (Event < 'e > , Range < usize >) > , callback : impl Fn (& str , & str , Range < usize > , LinkType) -> (Option < LinkType > , String , String) ,) -> impl Iterator < Item = Event < 'e > > { let mut in_link = false ; let mut end_link_target : Option < CowStr < '_ > > = None ; let mut end_link_type : Option < LinkType > = None ; events . map (move | (evt , range) | match evt { Event :: Start (Tag :: Link (link_type , ref target , _)) => { in_link = true ; end_link_target = Some (target . clone ()) ; end_link_type = Some (link_type) ; evt } Event :: End (Tag :: Link (link_type , target , _)) => { in_link = false ; Event :: End (Tag :: Link (end_link_type . take () . unwrap_or (link_type) , end_link_target . take () . unwrap_or (target) , CowStr :: Borrowed ("") ,)) } Event :: Text (s) if in_link => { let (link_type , link_target_s , link_name) = callback (& end_link_target . take () . unwrap () , & s , range , end_link_type . unwrap ()) ; end_link_target = Some (CowStr :: Boxed (link_target_s . into ())) ; if ! matches ! (end_link_type , Some (LinkType :: Autolink)) && link_type . is_some () { end_link_type = link_type ; } Event :: Text (CowStr :: Boxed (link_name . into ())) } Event :: Code (s) if in_link => { let (link_type , link_target_s , link_name) = callback (& end_link_target . take () . unwrap () , & s , range , end_link_type . unwrap ()) ; end_link_target = Some (CowStr :: Boxed (link_target_s . into ())) ; if ! matches ! (end_link_type , Some (LinkType :: Autolink)) && link_type . is_some () { end_link_type = link_type ; } Event :: Code (CowStr :: Boxed (link_name . into ())) } _ => evt , }) }
+};
+}

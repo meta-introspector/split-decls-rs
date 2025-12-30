@@ -4,6 +4,6 @@ macro_rules! Depcrate_tracked_structuse_535 {
 // Module: crate::tracked_struct
 // Provides: {"use_535"}
 // Dependencies: {}
-use std :: ops :: Index ;
+use hashbrown :: hash_table :: Entry ;
 };
 }

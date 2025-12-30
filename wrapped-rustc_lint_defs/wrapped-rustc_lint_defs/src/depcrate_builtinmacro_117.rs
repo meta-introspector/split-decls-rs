@@ -1,0 +1,9 @@
+// Generated macro for macro_117 (macro)
+macro_rules! Depcrate_builtinmacro_117 {
+() => {
+// Module: crate::builtin
+// Provides: {"macro_117"}
+// Dependencies: {}
+declare_lint ! { # [doc = " The `text_direction_codepoint_in_comment` lint detects Unicode codepoints in comments that"] # [doc = " change the visual representation of text on screen in a way that does not correspond to"] # [doc = " their on memory representation."] # [doc = ""] # [doc = " ### Example"] # [doc = ""] # [doc = " ```rust,compile_fail"] # [doc = " #![deny(text_direction_codepoint_in_comment)]"] # [doc = " fn main() {"] # [doc = "    println!(\"{:?}\"); // '\u{202E}');"] # [doc = " }"] # [doc = " ```"] # [doc = ""] # [doc = " {{produces}}"] # [doc = ""] # [doc = " ### Explanation"] # [doc = ""] # [doc = " Unicode allows changing the visual flow of text on screen in order to support scripts that"] # [doc = " are written right-to-left, but a specially crafted comment can make code that will be"] # [doc = " compiled appear to be part of a comment, depending on the software used to read the code."] # [doc = " To avoid potential problems or confusion, such as in CVE-2021-42574, by default we deny"] # [doc = " their use."] pub TEXT_DIRECTION_CODEPOINT_IN_COMMENT , Deny , "invisible directionality-changing codepoints in comment" , crate_level_only }
+};
+}

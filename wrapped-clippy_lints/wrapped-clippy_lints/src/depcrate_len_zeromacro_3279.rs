@@ -1,0 +1,9 @@
+// Generated macro for macro_3279 (macro)
+macro_rules! Depcrate_len_zeromacro_3279 {
+() => {
+// Module: crate::len_zero
+// Provides: {"macro_3279"}
+// Dependencies: {}
+declare_lint_pass ! (LenZero => [LEN_ZERO , LEN_WITHOUT_IS_EMPTY , COMPARISON_TO_EMPTY]) ;
+};
+}

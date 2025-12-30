@@ -1,0 +1,55 @@
+// Generated module macro for crate::canvas
+macro_rules! Modcrate_canvas {
+() => {
+        Depcrate_canvasuse_63!();
+        Depcrate_canvasuse_64!();
+        Depcrate_canvasuse_65!();
+        Depcrate_canvasuse_66!();
+        Depcrate_canvasuse_67!();
+        Depcrate_canvasuse_68!();
+        Depcrate_canvasuse_69!();
+        Depcrate_canvasuse_70!();
+        Depcrate_canvasuse_71!();
+        Depcrate_canvasuse_72!();
+        Depcrate_canvasuse_73!();
+        Depcrate_canvasuse_74!();
+        Depcrate_canvasuse_75!();
+        Depcrate_canvasuse_76!();
+        Depcrate_canvasuse_77!();
+        Depcrate_canvasuse_78!();
+        Depcrate_canvasuse_79!();
+        Depcrate_canvasuse_80!();
+        Depcrate_canvasuse_81!();
+        Depcrate_canvasuse_82!();
+        Depcrate_canvascircle!();
+        Depcrate_canvasline!();
+        Depcrate_canvasmap!();
+        Depcrate_canvaspoints!();
+        Depcrate_canvasrectangle!();
+        Depcrate_canvasworld!();
+        Depcrate_canvasShape!();
+        Depcrate_canvasLabel!();
+        Depcrate_canvasLayer!();
+        Depcrate_canvasGrid!();
+        Depcrate_canvasBrailleGrid!();
+        Depcrate_canvasimpl_94!();
+        Depcrate_canvasimpl_95!();
+        Depcrate_canvasCharGrid!();
+        Depcrate_canvasimpl_97!();
+        Depcrate_canvasimpl_98!();
+        Depcrate_canvasHalfBlockGrid!();
+        Depcrate_canvasimpl_100!();
+        Depcrate_canvasimpl_101!();
+        Depcrate_canvasPainter!();
+        Depcrate_canvasimpl_103!();
+        Depcrate_canvasimpl_104!();
+        Depcrate_canvasContext!();
+        Depcrate_canvasimpl_106!();
+        Depcrate_canvasCanvas!();
+        Depcrate_canvasimpl_108!();
+        Depcrate_canvasimpl_109!();
+        Depcrate_canvasimpl_110!();
+        Depcrate_canvasimpl_111!();
+        Depcrate_canvastests!();
+    };
+}

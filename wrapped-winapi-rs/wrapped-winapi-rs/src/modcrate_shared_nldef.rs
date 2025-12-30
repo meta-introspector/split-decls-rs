@@ -1,0 +1,41 @@
+// Generated module macro for crate::shared::nldef
+macro_rules! Modcrate_shared_nldef {
+() => {
+        Depcrate_shared_nldefuse_5736!();
+        Depcrate_shared_nldefuse_5737!();
+        Depcrate_shared_nldefuse_5738!();
+        Depcrate_shared_nldefmacro_5739!();
+        Depcrate_shared_nldefNlpoOther!();
+        Depcrate_shared_nldefNlpoManual!();
+        Depcrate_shared_nldefNlpoWellKnown!();
+        Depcrate_shared_nldefNlpoDhcp!();
+        Depcrate_shared_nldefNlpoRouterAdvertisement!();
+        Depcrate_shared_nldefmacro_5745!();
+        Depcrate_shared_nldefmacro_5746!();
+        Depcrate_shared_nldefNL_MAX_METRIC_COMPONENT!();
+        Depcrate_shared_nldefmacro_5748!();
+        Depcrate_shared_nldefPNL_ROUTE_PROTOCOL!();
+        Depcrate_shared_nldefmacro_5750!();
+        Depcrate_shared_nldefPNL_ADDRESS_TYPE!();
+        Depcrate_shared_nldefmacro_5752!();
+        Depcrate_shared_nldefPNL_ROUTE_ORIGIN!();
+        Depcrate_shared_nldefmacro_5754!();
+        Depcrate_shared_nldefPNL_NEIGHBOR_STATE!();
+        Depcrate_shared_nldefmacro_5756!();
+        Depcrate_shared_nldefmacro_5757!();
+        Depcrate_shared_nldefmacro_5758!();
+        Depcrate_shared_nldefPNL_INTERFACE_OFFLOAD_ROD!();
+        Depcrate_shared_nldefmacro_5760!();
+        Depcrate_shared_nldefmacro_5761!();
+        Depcrate_shared_nldefPNL_BANDWIDTH_FLAG!();
+        Depcrate_shared_nldefmacro_5763!();
+        Depcrate_shared_nldefPNL_PATH_BANDWIDTH_ROD!();
+        Depcrate_shared_nldefmacro_5765!();
+        Depcrate_shared_nldefPNL_NETWORK_CATEGORY!();
+        Depcrate_shared_nldefmacro_5767!();
+        Depcrate_shared_nldefPNL_INTERFACE_NETWORK_CATEGORY_STATE!();
+        Depcrate_shared_nldefNET_IF_CURRENT_SESSION!();
+        Depcrate_shared_nldefmacro_5770!();
+        Depcrate_shared_nldefPNL_BANDWIDTH_INFORMATION!();
+    };
+}

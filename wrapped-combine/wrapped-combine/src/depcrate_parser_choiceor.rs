@@ -1,0 +1,9 @@
+// Generated macro for or (function)
+macro_rules! Depcrate_parser_choiceor {
+() => {
+// Module: crate::parser::choice
+// Provides: {"or"}
+// Dependencies: {}
+# [doc = " Equivalent to [`p1.or(p2)`]."] # [doc = ""] # [doc = " If you are looking to chain 3 or more parsers using `or` you may consider using the"] # [doc = " [`choice!`] macro instead, which can be clearer and may result in a faster parser."] # [doc = ""] # [doc = " ```"] # [doc = " # extern crate combine;"] # [doc = " # use combine::*;"] # [doc = " # use combine::parser::choice::or;"] # [doc = " # use combine::parser::char::{digit, string};"] # [doc = " # fn main() {"] # [doc = " let mut parser = or("] # [doc = "     string(\"let\"),"] # [doc = "     or(digit().map(|_| \"digit\"), string(\"led\")),"] # [doc = " );"] # [doc = " assert_eq!(parser.parse(\"let\"), Ok((\"let\", \"\")));"] # [doc = " assert_eq!(parser.parse(\"1\"), Ok((\"digit\", \"\")));"] # [doc = " assert!(parser.parse(\"led\").is_err());"] # [doc = ""] # [doc = " let mut parser2 = or(string(\"two\"), string(\"three\"));"] # [doc = " // Fails as the parser for \"two\" consumes the first 't' before failing"] # [doc = " assert!(parser2.parse(\"three\").is_err());"] # [doc = ""] # [doc = " // Use 'attempt' to make failing parsers always act as if they have not committed any input"] # [doc = " let mut parser3 = or(attempt(string(\"two\")), attempt(string(\"three\")));"] # [doc = " assert_eq!(parser3.parse(\"three\"), Ok((\"three\", \"\")));"] # [doc = " # }"] # [doc = " ```"] # [doc = ""] # [doc = " [`choice!`]: ../../macro.choice.html"] # [doc = " [`p1.or(p2)`]: ../trait.Parser.html#method.or"] pub fn or < Input , P1 , P2 > (p1 : P1 , p2 : P2) -> Or < P1 , P2 > where Input : Stream , P1 : Parser < Input > , P2 : Parser < Input , Output = P1 :: Output > , { Or (choice ((p1 , p2))) }
+};
+}

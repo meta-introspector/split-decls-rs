@@ -1,0 +1,39 @@
+// Generated module macro for crate::windows::system
+macro_rules! Modcrate_windows_system {
+() => {
+        Depcrate_windows_systemuse_1267!();
+        Depcrate_windows_systemuse_1268!();
+        Depcrate_windows_systemuse_1269!();
+        Depcrate_windows_systemuse_1270!();
+        Depcrate_windows_systemuse_1271!();
+        Depcrate_windows_systemuse_1272!();
+        Depcrate_windows_systemuse_1273!();
+        Depcrate_windows_systemuse_1274!();
+        Depcrate_windows_systemuse_1275!();
+        Depcrate_windows_systemuse_1276!();
+        Depcrate_windows_systemuse_1277!();
+        Depcrate_windows_systemuse_1278!();
+        Depcrate_windows_systemuse_1279!();
+        Depcrate_windows_systemuse_1280!();
+        Depcrate_windows_systemuse_1281!();
+        Depcrate_windows_systemuse_1282!();
+        Depcrate_windows_systemmacro_1283!();
+        Depcrate_windows_systemSUPPORTED_SIGNALS!();
+        Depcrate_windows_systemMINIMUM_CPU_UPDATE_INTERVAL!();
+        Depcrate_windows_systemWINDOWS_ELEVEN_BUILD_NUMBER!();
+        Depcrate_windows_systemimpl_1287!();
+        Depcrate_windows_systemboot_time!();
+        Depcrate_windows_systemSystemInner!();
+        Depcrate_windows_systemimpl_1290!();
+        Depcrate_windows_systemis_proc_running!();
+        Depcrate_windows_systemget_dns_hostname!();
+        Depcrate_windows_systemadd_english_counter!();
+        Depcrate_windows_systemget_now!();
+        Depcrate_windows_systemutf16_str!();
+        Depcrate_windows_systemRegKey!();
+        Depcrate_windows_systemimpl_1297!();
+        Depcrate_windows_systemimpl_1298!();
+        Depcrate_windows_systemget_reg_string_value!();
+        Depcrate_windows_systemget_reg_value_u32!();
+    };
+}

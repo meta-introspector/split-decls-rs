@@ -1,0 +1,44 @@
+// Generated module macro for crate::redaction
+macro_rules! Modcrate_redaction {
+() => {
+        Depcrate_redactionuse_394!();
+        Depcrate_redactionuse_395!();
+        Depcrate_redactionuse_396!();
+        Depcrate_redactionuse_397!();
+        Depcrate_redactionuse_398!();
+        Depcrate_redactionSelectorParseError!();
+        Depcrate_redactionimpl_400!();
+        Depcrate_redactionContentPath!();
+        Depcrate_redactionimpl_402!();
+        Depcrate_redactionRedaction!();
+        Depcrate_redactionimpl_from!();
+        Depcrate_redactionmacro_405!();
+        Depcrate_redactionmacro_406!();
+        Depcrate_redactionmacro_407!();
+        Depcrate_redactionmacro_408!();
+        Depcrate_redactionmacro_409!();
+        Depcrate_redactionmacro_410!();
+        Depcrate_redactionmacro_411!();
+        Depcrate_redactionmacro_412!();
+        Depcrate_redactionmacro_413!();
+        Depcrate_redactionmacro_414!();
+        Depcrate_redactionmacro_415!();
+        Depcrate_redactionmacro_416!();
+        Depcrate_redactionmacro_417!();
+        Depcrate_redactionmacro_418!();
+        Depcrate_redactionmacro_419!();
+        Depcrate_redactionimpl_420!();
+        Depcrate_redactionimpl_421!();
+        Depcrate_redactiondynamic_redaction!();
+        Depcrate_redactionsorted_redaction!();
+        Depcrate_redactionrounded_redaction!();
+        Depcrate_redactionimpl_425!();
+        Depcrate_redactionSelectParser!();
+        Depcrate_redactionPathItem!();
+        Depcrate_redactionimpl_428!();
+        Depcrate_redactionSegment!();
+        Depcrate_redactionSelector!();
+        Depcrate_redactionimpl_431!();
+        Depcrate_redactiontest_range_checks!();
+    };
+}

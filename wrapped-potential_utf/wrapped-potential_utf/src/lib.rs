@@ -1,0 +1,71 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcrate_ustrimpl_36.rs");
+include!("depcrate_ustrimpl_30.rs");
+include!("depcrateother_1.rs");
+include!("depcrate_ustrimpl_42.rs");
+include!("depcrate_ustrpotentialutf16.rs");
+include!("depcrate_ustrimpl_35.rs");
+include!("depcrateuse_47.rs");
+include!("depcrate_ustrimpl_40.rs");
+include!("depcrate_writeableimpl_55.rs");
+include!("depcrate_ucharimpl_19.rs");
+include!("depcrate_ustrimpl_41.rs");
+include!("depcratewriteable.rs");
+include!("depcrate_ucharimpl_16.rs");
+include!("depcrate_ucharimpl_7.rs");
+include!("depcrate_ucharimpl_14.rs");
+include!("depcrate_ustrimpl_38.rs");
+include!("depcrateuse_48.rs");
+include!("depcrate_ucharimpl_20.rs");
+include!("depcrate_ucharimpl_21.rs");
+include!("depcrateuchar.rs");
+include!("depcrate_ucharpotentialcodepoint.rs");
+include!("depcrate_writeabletest.rs");
+include!("depcrate_ucharimpl_17.rs");
+include!("depcrate_ustruse_25.rs");
+include!("depcrate_ustrimpl_32.rs");
+include!("depcrate_ustrimpl_37.rs");
+include!("depcrate_ustruse_26.rs");
+include!("depcrate_writeableuse_51.rs");
+include!("depcrate_ustrimpl_45.rs");
+include!("depcrate_ucharimpl_11.rs");
+include!("depcrate_ustrimpl_46.rs");
+include!("depcrate_ustrimpl_33.rs");
+include!("depcrateustr.rs");
+include!("depcrate_writeableimpl_56.rs");
+include!("depcrate_uchartest.rs");
+include!("depcrate_ucharimpl_9.rs");
+include!("depcrate_ucharimpl_12.rs");
+include!("depcrate_ustrpotentialutf8.rs");
+include!("depcrate_ustrimpl_31.rs");
+include!("depcrate_writeableuse_54.rs");
+include!("depcrate_ustruse_27.rs");
+include!("depcrate_ucharimpl_15.rs");
+include!("depcrateuse_49.rs");
+include!("depcrate_ucharuse_4.rs");
+include!("depcrate_ucharimpl_13.rs");
+include!("depcrate_ustruse_28.rs");
+include!("depcrate_ucharimpl_10.rs");
+include!("depcrate_ucharimpl_8.rs");
+include!("depcrate_ucharuse_3.rs");
+include!("depcrate_ucharimpl_22.rs");
+include!("depcrate_ucharimpl_18.rs");
+include!("depcrate_ustrimpl_34.rs");
+include!("depcrate_ucharimpl_6.rs");
+include!("depcrate_writeableuse_53.rs");
+include!("depcrate_ustrimpl_43.rs");
+include!("depcrate_writeableuse_52.rs");
+include!("depcrate_ustrimpl_39.rs");
+include!("modcrate_uchar.rs");
+include!("modcrate.rs");
+include!("modcrate_writeable.rs");
+include!("modcrate_ustr.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate_uchar!();
+    Modcrate!();
+    Modcrate_writeable!();
+    Modcrate_ustr!();
+}

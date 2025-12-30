@@ -1,0 +1,9 @@
+// Generated macro for shadow (module)
+macro_rules! Depcrateshadow {
+() => {
+// Module: crate
+// Provides: {"shadow"}
+// Dependencies: {}
+# [cfg (test)] mod shadow ;
+};
+}

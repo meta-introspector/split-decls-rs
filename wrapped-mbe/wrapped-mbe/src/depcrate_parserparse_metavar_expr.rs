@@ -1,0 +1,9 @@
+// Generated macro for parse_metavar_expr (function)
+macro_rules! Depcrate_parserparse_metavar_expr {
+() => {
+// Module: crate::parser
+// Provides: {"parse_metavar_expr"}
+// Dependencies: {}
+fn parse_metavar_expr (src : & mut TtIter < '_ , Span >) -> Result < Op , () > { let func = src . expect_ident () ? ; let (args , mut args_iter) = src . expect_subtree () ? ; if args . delimiter . kind != tt :: DelimiterKind :: Parenthesis { return Err (()) ; } let op = match & func . sym { s if sym :: ignore == * s => { args_iter . expect_dollar () ? ; let ident = args_iter . expect_ident () ? ; Op :: Ignore { name : ident . sym . clone () , id : ident . span } } s if sym :: index == * s => Op :: Index { depth : parse_depth (& mut args_iter) ? } , s if sym :: len == * s => Op :: Len { depth : parse_depth (& mut args_iter) ? } , s if sym :: count == * s => { args_iter . expect_dollar () ? ; let ident = args_iter . expect_ident () ? ; let depth = if try_eat_comma (& mut args_iter) { Some (parse_depth (& mut args_iter) ?) } else { None } ; Op :: Count { name : ident . sym . clone () , depth } } s if sym :: concat == * s => { let mut elements = Vec :: new () ; while let Some (next) = args_iter . peek () { let element = if let TtElement :: Leaf (tt :: Leaf :: Literal (lit)) = next { args_iter . next () . expect ("already peeked") ; ConcatMetaVarExprElem :: Literal (lit . clone ()) } else { let is_var = try_eat_dollar (& mut args_iter) ; let ident = args_iter . expect_ident_or_underscore () ? . clone () ; if is_var { ConcatMetaVarExprElem :: Var (ident) } else { ConcatMetaVarExprElem :: Ident (ident) } } ; elements . push (element) ; if ! args_iter . is_empty () { args_iter . expect_comma () ? ; } } if elements . len () < 2 { return Err (()) ; } Op :: Concat { elements : elements . into_boxed_slice () , span : func . span } } _ => return Err (()) , } ; if args_iter . next () . is_some () { return Err (()) ; } Ok (op) }
+};
+}

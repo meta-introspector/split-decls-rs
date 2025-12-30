@@ -1,0 +1,9 @@
+// Generated macro for channel (function)
+macro_rules! Depcrate_oneshotchannel {
+() => {
+// Module: crate::oneshot
+// Provides: {"channel"}
+// Dependencies: {}
+# [doc = " Creates a new one-shot channel for sending a single value across asynchronous tasks."] # [doc = ""] # [doc = " The channel works for a spsc (single-producer, single-consumer) scheme."] # [doc = ""] # [doc = " This function is similar to Rust's channel constructor found in the standard"] # [doc = " library. Two halves are returned, the first of which is a `Sender` handle,"] # [doc = " used to signal the end of a computation and provide its value. The second"] # [doc = " half is a `Receiver` which implements the `Future` trait, resolving to the"] # [doc = " value that was given to the `Sender` handle."] # [doc = ""] # [doc = " Each half can be separately owned and sent across tasks."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " use futures::channel::oneshot;"] # [doc = " use std::{thread, time::Duration};"] # [doc = ""] # [doc = " let (sender, receiver) = oneshot::channel::<i32>();"] # [doc = ""] # [doc = " thread::spawn(|| {"] # [doc = "     println!(\"THREAD: sleeping zzz...\");"] # [doc = "     thread::sleep(Duration::from_millis(1000));"] # [doc = "     println!(\"THREAD: i'm awake! sending.\");"] # [doc = "     sender.send(3).unwrap();"] # [doc = " });"] # [doc = ""] # [doc = " println!(\"MAIN: doing some useful stuff\");"] # [doc = ""] # [doc = " futures::executor::block_on(async {"] # [doc = "     println!(\"MAIN: waiting for msg...\");"] # [doc = "     println!(\"MAIN: got: {:?}\", receiver.await)"] # [doc = " });"] # [doc = " ```"] pub fn channel < T > () -> (Sender < T > , Receiver < T >) { let inner = Arc :: new (Inner :: new ()) ; let receiver = Receiver { inner : inner . clone () } ; let sender = Sender { inner } ; (sender , receiver) }
+};
+}

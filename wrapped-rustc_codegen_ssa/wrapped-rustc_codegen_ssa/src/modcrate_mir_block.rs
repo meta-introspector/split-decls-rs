@@ -1,0 +1,39 @@
+// Generated module macro for crate::mir::block
+macro_rules! Modcrate_mir_block {
+() => {
+        Depcrate_mir_blockuse_821!();
+        Depcrate_mir_blockuse_822!();
+        Depcrate_mir_blockuse_823!();
+        Depcrate_mir_blockuse_824!();
+        Depcrate_mir_blockuse_825!();
+        Depcrate_mir_blockuse_826!();
+        Depcrate_mir_blockuse_827!();
+        Depcrate_mir_blockuse_828!();
+        Depcrate_mir_blockuse_829!();
+        Depcrate_mir_blockuse_830!();
+        Depcrate_mir_blockuse_831!();
+        Depcrate_mir_blockuse_832!();
+        Depcrate_mir_blockuse_833!();
+        Depcrate_mir_blockuse_834!();
+        Depcrate_mir_blockuse_835!();
+        Depcrate_mir_blockuse_836!();
+        Depcrate_mir_blockuse_837!();
+        Depcrate_mir_blockuse_838!();
+        Depcrate_mir_blockuse_839!();
+        Depcrate_mir_blockuse_840!();
+        Depcrate_mir_blockuse_841!();
+        Depcrate_mir_blockuse_842!();
+        Depcrate_mir_blockuse_843!();
+        Depcrate_mir_blockuse_844!();
+        Depcrate_mir_blockuse_845!();
+        Depcrate_mir_blockuse_846!();
+        Depcrate_mir_blockMergingSucc!();
+        Depcrate_mir_blockCallKind!();
+        Depcrate_mir_blockTerminatorCodegenHelper!();
+        Depcrate_mir_blockimpl_850!();
+        Depcrate_mir_blockimpl_851!();
+        Depcrate_mir_blockReturnDest!();
+        Depcrate_mir_blockload_cast!();
+        Depcrate_mir_blockstore_cast!();
+    };
+}

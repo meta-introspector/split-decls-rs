@@ -1,0 +1,45 @@
+// Generated module macro for crate::common
+macro_rules! Modcrate_common {
+() => {
+        Depcrate_commonuse_104!();
+        Depcrate_commonuse_105!();
+        Depcrate_commonparse!();
+        Depcrate_commonparse_by_codepoint!();
+        Depcrate_commonparse_many_by_codepoint!();
+        Depcrate_commonucd_directory_version!();
+        Depcrate_commonfirst_line!();
+        Depcrate_commonparse_codepoint_association!();
+        Depcrate_commonparse_codepoint_sequence!();
+        Depcrate_commonparse_break_test!();
+        Depcrate_commonUcdFile!();
+        Depcrate_commonUcdFileByCodepoint!();
+        Depcrate_commonUcdLineParser!();
+        Depcrate_commonimpl_117!();
+        Depcrate_commonimpl_118!();
+        Depcrate_commonimpl_119!();
+        Depcrate_commonCodepoints!();
+        Depcrate_commonimpl_121!();
+        Depcrate_commonimpl_122!();
+        Depcrate_commonimpl_123!();
+        Depcrate_commonimpl_124!();
+        Depcrate_commonimpl_125!();
+        Depcrate_commonimpl_126!();
+        Depcrate_commonimpl_127!();
+        Depcrate_commonimpl_128!();
+        Depcrate_commonCodepointRange!();
+        Depcrate_commonimpl_130!();
+        Depcrate_commonimpl_131!();
+        Depcrate_commonimpl_132!();
+        Depcrate_commonimpl_133!();
+        Depcrate_commonimpl_134!();
+        Depcrate_commonCodepoint!();
+        Depcrate_commonimpl_136!();
+        Depcrate_commonimpl_137!();
+        Depcrate_commonimpl_138!();
+        Depcrate_commonimpl_139!();
+        Depcrate_commonimpl_140!();
+        Depcrate_commonimpl_141!();
+        Depcrate_commonCodepointIter!();
+        Depcrate_commonimpl_143!();
+    };
+}

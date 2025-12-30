@@ -1,0 +1,9 @@
+// Generated macro for HexError (struct)
+macro_rules! DepcrateHexError {
+() => {
+// Module: crate
+// Provides: {"HexError"}
+// Dependencies: {}
+# [doc = " The error type for [`Hash::from_hex`]."] # [doc = ""] # [doc = " The `.to_string()` representation of this error currently distinguishes between bad length"] # [doc = " errors and bad character errors. This is to help with logging and debugging, but it isn't a"] # [doc = " stable API detail, and it may change at any time."] # [derive (Clone , Debug)] pub struct HexError (HexErrorInner) ;
+};
+}

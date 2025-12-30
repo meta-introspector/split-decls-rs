@@ -1,0 +1,9 @@
+// Generated macro for impl_1195 (impl)
+macro_rules! Depcrate_jobserverimpl_1195 {
+() => {
+// Module: crate::jobserver
+// Provides: {"impl_1195"}
+// Dependencies: {}
+impl Client { pub fn new () -> Client { Client :: new_num (crate :: util :: num_cpus ()) } pub fn new_num (num : usize) -> Client { let inner = jobserver :: Client :: new (num) . expect ("failed to create jobserver") ; Client :: _new (inner , false) } fn _new (inner : jobserver :: Client , inherited : bool) -> Client { let (helper , tx) = if inherited { (None , None) } else { let (tx , mut rx) = mpsc :: unbounded :: < oneshot :: Sender < _ > > () ; let helper = inner . clone () . into_helper_thread (move | token | { let rt = tokio :: runtime :: Builder :: new_current_thread () . build () . unwrap () ; rt . block_on (async { if let Some (sender) = rx . next () . await { drop (sender . send (token)) ; } }) ; }) . expect ("failed to spawn helper thread") ; (Some (Arc :: new (helper)) , Some (tx)) } ; Client { inner , helper , tx } } # [doc = " Configures this jobserver to be inherited by the specified command"] pub fn configure (& self , cmd : & mut Command) { self . inner . configure (cmd) ; } # [doc = " Returns a future that represents an acquired jobserver token."] # [doc = ""] # [doc = " This should be invoked before any \"work\" is spawned (for whatever the"] # [doc = " definition of \"work\" is) to ensure that the system is properly"] # [doc = " rate-limiting itself."] pub async fn acquire (& self) -> Result < Acquired > { let (helper , tx) = match (self . helper . as_ref () , self . tx . as_ref ()) { (Some (a) , Some (b)) => (a , b) , _ => return Ok (Acquired { _token : None }) , } ; let (mytx , myrx) = oneshot :: channel () ; helper . request_token () ; tx . unbounded_send (mytx) . unwrap () ; let acquired = myrx . await . context ("jobserver helper panicked") ? . context ("failed to acquire jobserver token") ? ; Ok (Acquired { _token : Some (acquired) , }) } }
+};
+}

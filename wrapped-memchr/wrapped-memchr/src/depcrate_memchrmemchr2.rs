@@ -1,9 +1,9 @@
-// Generated macro for Memchr2 (struct)
-macro_rules! Depcrate_memchrMemchr2 {
+// Generated macro for memchr2 (function)
+macro_rules! Depcrate_memchrmemchr2 {
 () => {
 // Module: crate::memchr
-// Provides: {"Memchr2"}
+// Provides: {"memchr2"}
 // Dependencies: {}
-# [doc = " An iterator over all occurrences of two possible bytes in a haystack."] # [doc = ""] # [doc = " This iterator implements `DoubleEndedIterator`, which means it can also be"] # [doc = " used to find occurrences in reverse order."] # [doc = ""] # [doc = " This iterator is created by the [`memchr2_iter`] or `[memrchr2_iter`]"] # [doc = " functions. It can also be created with the [`Memchr2::new`] method."] # [doc = ""] # [doc = " The lifetime parameter `'h` refers to the lifetime of the haystack being"] # [doc = " searched."] # [derive (Clone , Debug)] pub struct Memchr2 < 'h > { needle1 : u8 , needle2 : u8 , it : crate :: arch :: generic :: memchr :: Iter < 'h > , }
+# [doc = " Search for the first occurrence of two possible bytes in a haystack."] # [doc = ""] # [doc = " This returns the index corresponding to the first occurrence of one of the"] # [doc = " needle bytes in `haystack`, or `None` if one is not found. If an index is"] # [doc = " returned, it is guaranteed to be less than `haystack.len()`."] # [doc = ""] # [doc = " While this is semantically the same as something like"] # [doc = " `haystack.iter().position(|&b| b == needle1 || b == needle2)`, this routine"] # [doc = " will attempt to use highly optimized vector operations that can be an order"] # [doc = " of magnitude faster (or more)."] # [doc = ""] # [doc = " # Example"] # [doc = ""] # [doc = " This shows how to find the first position of one of two possible bytes in a"] # [doc = " haystack."] # [doc = ""] # [doc = " ```"] # [doc = " use memchr::memchr2;"] # [doc = ""] # [doc = " let haystack = b\"the quick brown fox\";"] # [doc = " assert_eq!(memchr2(b'k', b'q', haystack), Some(4));"] # [doc = " ```"] # [inline] pub fn memchr2 (needle1 : u8 , needle2 : u8 , haystack : & [u8]) -> Option < usize > { unsafe { generic :: search_slice_with_raw (haystack , | start , end | { memchr2_raw (needle1 , needle2 , start , end) }) } }
 };
 }

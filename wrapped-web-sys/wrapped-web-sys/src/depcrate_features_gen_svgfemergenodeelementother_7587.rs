@@ -1,0 +1,9 @@
+// Generated macro for other_7587 (other)
+macro_rules! Depcrate_features_gen_SvgfeMergeNodeElementother_7587 {
+() => {
+// Module: crate::features::gen_SvgfeMergeNodeElement
+// Provides: {"other_7587"}
+// Dependencies: {}
+# [wasm_bindgen] extern "C" { # [wasm_bindgen (extends = SvgElement , extends = Element , extends = Node , extends = EventTarget , extends = :: js_sys :: Object , js_name = SVGFEMergeNodeElement , typescript_type = "SVGFEMergeNodeElement")] # [derive (Debug , Clone , PartialEq , Eq)] # [doc = "The `SvgfeMergeNodeElement` class."] # [doc = ""] # [doc = "[MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/API/SVGFEMergeNodeElement)"] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `SvgfeMergeNodeElement`*"] pub type SvgfeMergeNodeElement ; # [cfg (feature = "SvgAnimatedString")] # [wasm_bindgen (structural , method , getter , js_class = "SVGFEMergeNodeElement" , js_name = in1)] # [doc = "Getter for the `in1` field of this object."] # [doc = ""] # [doc = "[MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/API/SVGFEMergeNodeElement/in1)"] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `SvgAnimatedString`, `SvgfeMergeNodeElement`*"] pub fn in1 (this : & SvgfeMergeNodeElement) -> SvgAnimatedString ; }
+};
+}

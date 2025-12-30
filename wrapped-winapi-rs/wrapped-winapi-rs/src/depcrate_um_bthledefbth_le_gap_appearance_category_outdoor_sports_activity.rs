@@ -1,0 +1,9 @@
+// Generated macro for BTH_LE_GAP_APPEARANCE_CATEGORY_OUTDOOR_SPORTS_ACTIVITY (const)
+macro_rules! Depcrate_um_bthledefBTH_LE_GAP_APPEARANCE_CATEGORY_OUTDOOR_SPORTS_ACTIVITY {
+() => {
+// Module: crate::um::bthledef
+// Provides: {"BTH_LE_GAP_APPEARANCE_CATEGORY_OUTDOOR_SPORTS_ACTIVITY"}
+// Dependencies: {}
+pub const BTH_LE_GAP_APPEARANCE_CATEGORY_OUTDOOR_SPORTS_ACTIVITY : USHORT = 0x0051 ;
+};
+}

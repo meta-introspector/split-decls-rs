@@ -1,0 +1,9 @@
+// Generated macro for impl_3106 (impl)
+macro_rules! Depcrate_sparse_cs_matrix_opsimpl_3106 {
+() => {
+// Module: crate::sparse::cs_matrix_ops
+// Provides: {"impl_3106"}
+// Dependencies: {}
+impl < 'a , 'b , T , R1 , R2 , C1 , C2 , S1 , S2 > Mul < & 'b CsMatrix < T , R2 , C2 , S2 > > for & 'a CsMatrix < T , R1 , C1 , S1 > where T : Scalar + ClosedAddAssign + ClosedMulAssign + Zero , R1 : Dim , C1 : Dim , R2 : Dim , C2 : Dim , S1 : CsStorage < T , R1 , C1 > , S2 : CsStorage < T , R2 , C2 > , ShapeConstraint : AreMultipliable < R1 , C1 , R2 , C2 > , DefaultAllocator : Allocator < C2 > + Allocator < R1 > + Allocator < R1 > , { type Output = CsMatrix < T , R1 , C2 > ; fn mul (self , rhs : & 'b CsMatrix < T , R2 , C2 , S2 >) -> Self :: Output { let (nrows1 , ncols1) = self . data . shape () ; let (nrows2 , ncols2) = rhs . data . shape () ; assert_eq ! (ncols1 . value () , nrows2 . value () , "Mismatched dimensions for matrix multiplication.") ; let mut res = CsMatrix :: new_uninitialized_generic (nrows1 , ncols2 , self . len () + rhs . len ()) ; let mut workspace = OVector :: < T , R1 > :: zeros_generic (nrows1 , Const :: < 1 >) ; let mut nz = 0 ; for j in 0 .. ncols2 . value () { res . data . p [j] = nz ; let new_size_bound = nz + nrows1 . value () ; res . data . i . resize (new_size_bound , 0) ; res . data . vals . resize (new_size_bound , T :: zero ()) ; for (i , beta) in rhs . data . column_entries (j) { for (k , val) in self . data . column_entries (i) { workspace [k] += val . clone () * beta . clone () ; } } for (i , val) in workspace . as_mut_slice () . iter_mut () . enumerate () { if ! val . is_zero () { res . data . i [nz] = i ; res . data . vals [nz] = val . clone () ; * val = T :: zero () ; nz += 1 ; } } } res . data . i . truncate (nz) ; res . data . i . shrink_to_fit () ; res . data . vals . truncate (nz) ; res . data . vals . shrink_to_fit () ; res } }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for Stack (struct)
+macro_rules! Depcrate_stackStack {
+() => {
+// Module: crate::stack
+// Provides: {"Stack"}
+// Dependencies: {}
+# [doc = " Implementation of a `Stack` which maintains popped elements and length of previous states"] # [doc = " in order to rewind the stack to a previous state."] # [derive (Debug)] pub struct Stack < T : Clone > { # [doc = " All elements in the stack."] cache : Vec < T > , # [doc = " All elements that are in previous snapshots but may not be in the next state."] # [doc = " They will be pushed back to `cache` if the snapshot is restored,"] # [doc = " otherwise be dropped if the snapshot is cleared."] # [doc = ""] # [doc = " Those elements from a sequence of snapshots are stacked in one [`Vec`], and"] # [doc = " `popped.len() == lengths.iter().map(|(len, remained)| len - remained).sum()`"] popped : Vec < T > , # [doc = " Every element corresponds to a snapshot, and each element has two fields:"] # [doc = " - Length of `cache` when corresponding snapshot is taken (AKA `len`)."] # [doc = " - Count of elements that come from corresponding snapshot"] # [doc = "   and are still in next snapshot or current state (AKA `remained`)."] # [doc = ""] # [doc = " And `len` is never less than `remained`."] # [doc = ""] # [doc = " On restoring, the `cache` can be divided into two parts:"] # [doc = " - `0..remained` are untouched since the snapshot is taken."] # [doc = ""] # [doc = "   There's nothing to do with those elements. Just let them stay where they are."] # [doc = ""] # [doc = " - `remained..cache.len()` are pushed after the snapshot is taken."] lengths : Vec < (usize , usize) > , }
+};
+}

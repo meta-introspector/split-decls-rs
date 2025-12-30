@@ -1,0 +1,9 @@
+// Generated macro for LabelUse (enum)
+macro_rules! Depcrate_isa_riscv64_instLabelUse {
+() => {
+// Module: crate::isa::riscv64::inst
+// Provides: {"LabelUse"}
+// Dependencies: {}
+# [doc = " Different forms of label references for different instruction formats."] # [derive (Clone , Copy , Debug , PartialEq , Eq)] pub enum LabelUse { # [doc = " 20-bit branch offset (unconditional branches). PC-rel, offset is"] # [doc = " imm << 1. Immediate is 20 signed bits. Use in Jal instructions."] Jal20 , # [doc = " The unconditional jump instructions all use PC-relative"] # [doc = " addressing to help support position independent code. The JALR"] # [doc = " instruction was defined to enable a two-instruction sequence to"] # [doc = " jump anywhere in a 32-bit absolute address range. A LUI"] # [doc = " instruction can first load rs1 with the upper 20 bits of a"] # [doc = " target address, then JALR can add in the lower bits. Similarly,"] # [doc = " AUIPC then JALR can jump anywhere in a 32-bit pc-relative"] # [doc = " address range."] PCRel32 , # [doc = " All branch instructions use the B-type instruction format. The"] # [doc = " 12-bit B-immediate encodes signed offsets in multiples of 2, and"] # [doc = " is added to the current pc to give the target address. The"] # [doc = " conditional branch range is ±4 KiB."] B12 , # [doc = " Equivalent to the `R_RISCV_PCREL_HI20` relocation, Allows setting"] # [doc = " the immediate field of an `auipc` instruction."] PCRelHi20 , # [doc = " Similar to the `R_RISCV_PCREL_LO12_I` relocation but pointing to"] # [doc = " the final address, instead of the `PCREL_HI20` label. Allows setting"] # [doc = " the immediate field of I Type instructions such as `addi` or `lw`."] # [doc = ""] # [doc = " Since we currently don't support offsets in labels, this relocation has"] # [doc = " an implicit offset of 4."] PCRelLo12I , # [doc = " 11-bit PC-relative jump offset. Equivalent to the `RVC_JUMP` relocation"] RVCJump , }
+};
+}

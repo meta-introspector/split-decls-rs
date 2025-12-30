@@ -1,0 +1,9 @@
+// Generated macro for ValueKind (enum)
+macro_rules! Depcrate_valueValueKind {
+() => {
+// Module: crate::value
+// Provides: {"ValueKind"}
+// Dependencies: {}
+# [derive (Debug , Clone , PartialEq)] enum ValueKind < 'sval > { Null , Bool (bool) , U8 (u8) , U16 (u16) , U32 (u32) , U64 (u64) , U128 (u128) , I8 (i8) , I16 (i16) , I32 (i32) , I64 (i64) , I128 (i128) , F32 (f32) , F64 (f64) , Text (TextBuf < 'sval >) , Binary (BinaryBuf < 'sval >) , Map { len : usize , num_entries_hint : Option < usize > , } , MapKey { len : usize , } , MapValue { len : usize , } , Seq { len : usize , num_entries_hint : Option < usize > , } , SeqValue { len : usize , } , Tag { tag : Option < sval :: Tag > , label : Option < sval :: Label < 'static > > , index : Option < sval :: Index > , } , TagHint { tag : sval :: Tag , } , Enum { len : usize , tag : Option < sval :: Tag > , label : Option < sval :: Label < 'static > > , index : Option < sval :: Index > , } , Tagged { len : usize , tag : Option < sval :: Tag > , label : Option < sval :: Label < 'static > > , index : Option < sval :: Index > , } , Record { len : usize , tag : Option < sval :: Tag > , label : Option < sval :: Label < 'static > > , index : Option < sval :: Index > , num_entries : Option < usize > , } , RecordValue { len : usize , tag : Option < sval :: Tag > , label : sval :: Label < 'static > , } , Tuple { len : usize , tag : Option < sval :: Tag > , label : Option < sval :: Label < 'static > > , index : Option < sval :: Index > , num_entries : Option < usize > , } , TupleValue { len : usize , tag : Option < sval :: Tag > , index : sval :: Index , } , RecordTuple { len : usize , tag : Option < sval :: Tag > , label : Option < sval :: Label < 'static > > , index : Option < sval :: Index > , num_entries : Option < usize > , } , RecordTupleValue { len : usize , tag : Option < sval :: Tag > , label : sval :: Label < 'static > , index : sval :: Index , } , }
+};
+}

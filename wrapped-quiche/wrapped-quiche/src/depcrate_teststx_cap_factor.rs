@@ -1,0 +1,9 @@
+// Generated macro for tx_cap_factor (function)
+macro_rules! Depcrate_teststx_cap_factor {
+() => {
+// Module: crate::tests
+// Provides: {"tx_cap_factor"}
+// Dependencies: {}
+# [test] fn tx_cap_factor () { let mut config = Config :: new (PROTOCOL_VERSION) . unwrap () ; config . set_application_protos (& [b"proto1" , b"proto2"]) . unwrap () ; config . load_cert_chain_from_pem_file ("examples/cert.crt") . unwrap () ; config . load_priv_key_from_pem_file ("examples/cert.key") . unwrap () ; config . set_initial_max_data (50000) ; config . set_initial_max_stream_data_bidi_local (12000) ; config . set_initial_max_stream_data_bidi_remote (12000) ; config . set_initial_max_streams_bidi (3) ; config . set_initial_max_streams_uni (3) ; config . set_max_recv_udp_payload_size (1200) ; config . verify_peer (false) ; config . set_send_capacity_factor (2.0) ; let mut pipe = test_utils :: Pipe :: with_config (& mut config) . unwrap () ; assert_eq ! (pipe . handshake () , Ok (())) ; assert_eq ! (pipe . client . stream_send (0 , b"a" , true) , Ok (1)) ; assert_eq ! (pipe . client . stream_send (4 , b"a" , true) , Ok (1)) ; assert_eq ! (pipe . advance () , Ok (())) ; let mut b = [0 ; 50000] ; pipe . server . stream_recv (0 , & mut b) . unwrap () ; assert_eq ! (pipe . advance () , Ok (())) ; let send_buf = [0 ; 50000] ; assert_eq ! (pipe . server . stream_send (0 , & send_buf , false) , Ok (12000)) ; assert_eq ! (pipe . server . stream_send (4 , & send_buf , false) , Ok (12000)) ; assert_eq ! (pipe . advance () , Ok (())) ; let mut r = pipe . client . readable () ; assert_eq ! (r . next () , Some (0)) ; assert_eq ! (pipe . client . stream_recv (0 , & mut b) , Ok ((12000 , false))) ; assert_eq ! (r . next () , Some (4)) ; assert_eq ! (pipe . client . stream_recv (4 , & mut b) , Ok ((12000 , false))) ; assert_eq ! (r . next () , None) ; }
+};
+}

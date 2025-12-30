@@ -1,0 +1,9 @@
+// Generated macro for impl_41 (impl)
+macro_rules! Depcrate_ustrimpl_41 {
+() => {
+// Module: crate::ustr
+// Provides: {"impl_41"}
+// Dependencies: {}
+# [doc = " This impl requires enabling the optional `serde` Cargo feature"] # [cfg (feature = "serde")] impl serde_core :: Serialize for PotentialUtf8 { fn serialize < S > (& self , serializer : S) -> Result < S :: Ok , S :: Error > where S : serde_core :: Serializer , { use serde_core :: ser :: Error ; let s = self . try_as_str () . map_err (| _ | S :: Error :: custom ("invalid UTF-8 in PotentialUtf8")) ? ; if serializer . is_human_readable () { serializer . serialize_str (s) } else { serializer . serialize_bytes (s . as_bytes ()) } } }
+};
+}

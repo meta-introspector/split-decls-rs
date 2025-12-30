@@ -1,0 +1,9 @@
+// Generated macro for impl_220 (impl)
+macro_rules! Depcrate_backend_hashesimpl_220 {
+() => {
+// Module: crate::backend::hashes
+// Provides: {"impl_220"}
+// Dependencies: {}
+# [pyo3 :: pymethods] impl Hash { # [new] # [pyo3 (signature = (algorithm , backend = None))] pub (crate) fn new (py : pyo3 :: Python < '_ > , algorithm : & pyo3 :: Bound < '_ , pyo3 :: PyAny > , backend : Option < & pyo3 :: Bound < '_ , pyo3 :: PyAny > > ,) -> CryptographyResult < Hash > { let _ = backend ; let md = message_digest_from_algorithm (py , algorithm) ? ; let ctx = openssl :: hash :: Hasher :: new (md) ? ; Ok (Hash { algorithm : algorithm . clone () . unbind () , ctx : Some (ctx) , }) } fn update (& mut self , data : CffiBuf < '_ >) -> CryptographyResult < () > { self . update_bytes (data . as_bytes ()) } pub (crate) fn finalize < 'p > (& mut self , py : pyo3 :: Python < 'p > ,) -> CryptographyResult < pyo3 :: Bound < 'p , pyo3 :: types :: PyBytes > > { # [cfg (not (any (CRYPTOGRAPHY_IS_LIBRESSL , CRYPTOGRAPHY_IS_BORINGSSL)))] { let algorithm = self . algorithm . clone_ref (py) ; let algorithm = algorithm . bind (py) ; if algorithm . is_instance (& types :: EXTENDABLE_OUTPUT_FUNCTION . get (py) ?) ? { let ctx = self . get_mut_ctx () ? ; let digest_size = algorithm . getattr (pyo3 :: intern ! (py , "digest_size")) ? . extract :: < usize > () ? ; let result = pyo3 :: types :: PyBytes :: new_with (py , digest_size , | b | { ctx . finish_xof (b) . unwrap () ; Ok (()) }) ? ; self . ctx = None ; return Ok (result) ; } } let data = self . get_mut_ctx () ? . finish () ? ; self . ctx = None ; Ok (pyo3 :: types :: PyBytes :: new (py , & data)) } fn copy (& self , py : pyo3 :: Python < '_ >) -> CryptographyResult < Hash > { Ok (Hash { algorithm : self . algorithm . clone_ref (py) , ctx : Some (self . get_ctx () ? . clone ()) , }) } }
+};
+}

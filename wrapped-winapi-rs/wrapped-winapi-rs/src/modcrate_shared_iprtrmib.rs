@@ -1,0 +1,49 @@
+// Generated module macro for crate::shared::iprtrmib
+macro_rules! Modcrate_shared_iprtrmib {
+() => {
+        Depcrate_shared_iprtrmibuse_4806!();
+        Depcrate_shared_iprtrmibuse_4807!();
+        Depcrate_shared_iprtrmibuse_4808!();
+        Depcrate_shared_iprtrmibMAX_SCOPE_NAME_LEN!();
+        Depcrate_shared_iprtrmibMAX_MIB_OFFSET!();
+        Depcrate_shared_iprtrmibANY_SIZE!();
+        Depcrate_shared_iprtrmibmacro_4812!();
+        Depcrate_shared_iprtrmibPMIB_OPAQUE_QUERY!();
+        Depcrate_shared_iprtrmibmacro_4814!();
+        Depcrate_shared_iprtrmibPTCP_TABLE_CLASS!();
+        Depcrate_shared_iprtrmibmacro_4816!();
+        Depcrate_shared_iprtrmibPUDP_TABLE_CLASS!();
+        Depcrate_shared_iprtrmibmacro_4818!();
+        Depcrate_shared_iprtrmibPTCPIP_OWNER_MODULE_INFO_CLASS!();
+        Depcrate_shared_iprtrmibmacro_4820!();
+        Depcrate_shared_iprtrmibPTCPIP_OWNER_MODULE_BASIC_INFO!();
+        Depcrate_shared_iprtrmibmacro_4822!();
+        Depcrate_shared_iprtrmibPMIB_IPMCAST_BOUNDARY!();
+        Depcrate_shared_iprtrmibmacro_4824!();
+        Depcrate_shared_iprtrmibPMIB_IPMCAST_BOUNDARY_TABLE!();
+        Depcrate_shared_iprtrmibmacro_4826!();
+        Depcrate_shared_iprtrmibPMIB_BOUNDARYROW!();
+        Depcrate_shared_iprtrmibmacro_4828!();
+        Depcrate_shared_iprtrmibPMIB_MCAST_LIMIT_ROW!();
+        Depcrate_shared_iprtrmibSN_CHAR!();
+        Depcrate_shared_iprtrmibSCOPE_NAME_BUFFER!();
+        Depcrate_shared_iprtrmibSCOPE_NAME!();
+        Depcrate_shared_iprtrmibmacro_4833!();
+        Depcrate_shared_iprtrmibPMIB_IPMCAST_SCOPE!();
+        Depcrate_shared_iprtrmibmacro_4835!();
+        Depcrate_shared_iprtrmibPMIB_IPDESTROW!();
+        Depcrate_shared_iprtrmibmacro_4837!();
+        Depcrate_shared_iprtrmibPMIB_IPDESTTABLE!();
+        Depcrate_shared_iprtrmibmacro_4839!();
+        Depcrate_shared_iprtrmibPMIB_BEST_IF!();
+        Depcrate_shared_iprtrmibmacro_4841!();
+        Depcrate_shared_iprtrmibPMIB_PROXYARP!();
+        Depcrate_shared_iprtrmibmacro_4843!();
+        Depcrate_shared_iprtrmibPMIB_IFSTATUS!();
+        Depcrate_shared_iprtrmibmacro_4845!();
+        Depcrate_shared_iprtrmibPMIB_ROUTESTATE!();
+        Depcrate_shared_iprtrmibmacro_4847!();
+        Depcrate_shared_iprtrmibmacro_4848!();
+        Depcrate_shared_iprtrmibPMIB_OPAQUE_INFO!();
+    };
+}

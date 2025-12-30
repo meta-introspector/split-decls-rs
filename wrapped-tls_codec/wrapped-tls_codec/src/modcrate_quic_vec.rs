@@ -1,0 +1,49 @@
+// Generated module macro for crate::quic_vec
+macro_rules! Modcrate_quic_vec {
+() => {
+        Depcrate_quic_vecuse_59!();
+        Depcrate_quic_vecuse_60!();
+        Depcrate_quic_vecuse_61!();
+        Depcrate_quic_vecuse_62!();
+        Depcrate_quic_vecuse_63!();
+        Depcrate_quic_vecuse_64!();
+        Depcrate_quic_vecMAX_LEN!();
+        Depcrate_quic_vecMAX_LEN_LEN_LOG!();
+        Depcrate_quic_vecMAX_LEN!();
+        Depcrate_quic_vecMAX_LEN_LEN_LOG!();
+        Depcrate_quic_veccheck_min_length!();
+        Depcrate_quic_veccalculate_length!();
+        Depcrate_quic_vecread_variable_length_bytes!();
+        Depcrate_quic_veclength_encoding_bytes!();
+        Depcrate_quic_vecwrite_variable_length!();
+        Depcrate_quic_vecimpl_74!();
+        Depcrate_quic_vecimpl_75!();
+        Depcrate_quic_vecimpl_76!();
+        Depcrate_quic_vecimpl_77!();
+        Depcrate_quic_vecimpl_78!();
+        Depcrate_quic_vecimpl_79!();
+        Depcrate_quic_vecimpl_80!();
+        Depcrate_quic_vecwrite_hex!();
+        Depcrate_quic_vecimpl_vl_bytes_generic!();
+        Depcrate_quic_vecVLBytes!();
+        Depcrate_quic_vecimpl_84!();
+        Depcrate_quic_vecmacro_85!();
+        Depcrate_quic_vecimpl_86!();
+        Depcrate_quic_vectls_serialize_bytes_len!();
+        Depcrate_quic_vecimpl_88!();
+        Depcrate_quic_vecimpl_89!();
+        Depcrate_quic_vecimpl_90!();
+        Depcrate_quic_vecserde_impl!();
+        Depcrate_quic_vecVLByteSlice!();
+        Depcrate_quic_vecimpl_93!();
+        Depcrate_quic_vecimpl_94!();
+        Depcrate_quic_vecimpl_95!();
+        Depcrate_quic_vecimpl_96!();
+        Depcrate_quic_vecrw!();
+        Depcrate_quic_vecrw_bytes!();
+        Depcrate_quic_vecsecret_bytes!();
+        Depcrate_quic_vecuse_100!();
+        Depcrate_quic_vecimpl_101!();
+        Depcrate_quic_vectest!();
+    };
+}

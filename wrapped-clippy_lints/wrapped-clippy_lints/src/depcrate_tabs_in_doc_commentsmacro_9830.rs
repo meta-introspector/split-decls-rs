@@ -1,0 +1,9 @@
+// Generated macro for macro_9830 (macro)
+macro_rules! Depcrate_tabs_in_doc_commentsmacro_9830 {
+() => {
+// Module: crate::tabs_in_doc_comments
+// Provides: {"macro_9830"}
+// Dependencies: {}
+declare_clippy_lint ! { # [doc = " ### What it does"] # [doc = " Checks doc comments for usage of tab characters."] # [doc = ""] # [doc = " ### Why is this bad?"] # [doc = " The rust style-guide promotes spaces instead of tabs for indentation."] # [doc = " To keep a consistent view on the source, also doc comments should not have tabs."] # [doc = " Also, explaining ascii-diagrams containing tabs can get displayed incorrectly when the"] # [doc = " display settings of the author and reader differ."] # [doc = ""] # [doc = " ### Example"] # [doc = " ```no_run"] # [doc = " ///"] # [doc = " /// Struct to hold two strings:"] # [doc = " /// \t- first\t\tone"] # [doc = " /// \t- second\tone"] # [doc = " pub struct DoubleString {"] # [doc = "    ///"] # [doc = "    /// \t- First String:"] # [doc = "    /// \t\t- needs to be inside here"] # [doc = "    first_string: String,"] # [doc = "    ///"] # [doc = "    /// \t- Second String:"] # [doc = "    /// \t\t- needs to be inside here"] # [doc = "    second_string: String,"] # [doc = "}"] # [doc = " ```"] # [doc = ""] # [doc = " Will be converted to:"] # [doc = " ```no_run"] # [doc = " ///"] # [doc = " /// Struct to hold two strings:"] # [doc = " ///     - first        one"] # [doc = " ///     - second    one"] # [doc = " pub struct DoubleString {"] # [doc = "    ///"] # [doc = "    ///     - First String:"] # [doc = "    ///         - needs to be inside here"] # [doc = "    first_string: String,"] # [doc = "    ///"] # [doc = "    ///     - Second String:"] # [doc = "    ///         - needs to be inside here"] # [doc = "    second_string: String,"] # [doc = "}"] # [doc = " ```"] # [clippy :: version = "1.41.0"] pub TABS_IN_DOC_COMMENTS , style , "using tabs in doc comments is not recommended" }
+};
+}

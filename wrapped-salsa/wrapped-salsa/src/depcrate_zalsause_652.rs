@@ -4,6 +4,6 @@ macro_rules! Depcrate_zalsause_652 {
 // Module: crate::zalsa
 // Provides: {"use_652"}
 // Dependencies: {}
-use std :: panic :: RefUnwindSafe ;
+use crate :: database :: RawDatabase ;
 };
 }

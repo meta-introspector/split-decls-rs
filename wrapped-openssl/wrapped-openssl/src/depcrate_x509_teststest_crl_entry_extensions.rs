@@ -1,0 +1,9 @@
+// Generated macro for test_crl_entry_extensions (function)
+macro_rules! Depcrate_x509_teststest_crl_entry_extensions {
+() => {
+// Module: crate::x509::tests
+// Provides: {"test_crl_entry_extensions"}
+// Dependencies: {}
+# [test] fn test_crl_entry_extensions () { let crl = include_bytes ! ("../../test/entry_extensions.crl") ; let crl = X509Crl :: from_pem (crl) . unwrap () ; let (critical , access_info) = crl . extension :: < AuthorityInformationAccess > () . unwrap () . expect ("Authority Information Access extension should be present") ; assert ! (! critical , "Authority Information Access extension is not critical") ; assert_eq ! (access_info . len () , 1 , "Authority Information Access should have one entry") ; assert_eq ! (access_info [0] . method () . to_string () , "CA Issuers") ; assert_eq ! (access_info [0] . location () . uri () , Some ("http://www.example.com/ca.crt")) ; let revoked_certs = crl . get_revoked () . unwrap () ; let entry = & revoked_certs [0] ; let (critical , issuer) = entry . extension :: < CertificateIssuer > () . unwrap () . expect ("Certificate issuer extension should be present") ; assert ! (critical , "Certificate issuer extension is critical") ; assert_eq ! (issuer . len () , 1 , "Certificate issuer should have one entry") ; let issuer = issuer [0] . directory_name () . expect ("Issuer should be a directory name") ; assert_eq ! (format ! ("{:?}" , issuer) , r#"[countryName = "GB", commonName = "Test CA"]"#) ; # [allow (unused_variables)] let (critical , reason_code) = entry . extension :: < ReasonCode > () . unwrap () . expect ("Reason code extension should be present") ; assert ! (! critical , "Reason code extension is not critical") ; # [cfg (ossl110)] assert_eq ! (CrlReason :: KEY_COMPROMISE , CrlReason :: from_raw (reason_code . get_i64 () . unwrap () as ffi :: c_int)) ; }
+};
+}

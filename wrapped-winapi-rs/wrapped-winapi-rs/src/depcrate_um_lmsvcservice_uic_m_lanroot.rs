@@ -1,0 +1,9 @@
+// Generated macro for SERVICE_UIC_M_LANROOT (const)
+macro_rules! Depcrate_um_lmsvcSERVICE_UIC_M_LANROOT {
+() => {
+// Module: crate::um::lmsvc
+// Provides: {"SERVICE_UIC_M_LANROOT"}
+// Dependencies: {}
+pub const SERVICE_UIC_M_LANROOT : DWORD = SERVICE_BASE + 25 ;
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for parse (function)
+macro_rules! Depcrateparse {
+() => {
+// Module: crate
+// Provides: {"parse"}
+// Dependencies: {}
+pub fn parse (format_string : & str , mode : ParserMode) -> Result < Vec < Fragment < '_ > > , Error > { let mut fragments = Vec :: new () ; let mut end_pos = 0 ; let mut next_arg_index = 0 ; let mut chars = format_string . char_indices () ; while let Some ((brace_pos , ch)) = chars . next () { if ch != '{' { continue ; } if chars . as_str () . starts_with ('{') { chars . next () ; continue ; } if brace_pos > end_pos { let unescaped_literal = & format_string [end_pos .. brace_pos] ; push_literal (& mut fragments , unescaped_literal) ? ; } let len = chars . as_str () . find ('}') . ok_or (Error :: UnmatchedOpenBracket) ? ; end_pos = brace_pos + 1 + len + 1 ; let param_str = & format_string [brace_pos + 1 ..] [.. len] ; let param = parse_param (param_str , mode) ? ; fragments . push (Fragment :: Parameter (Parameter { index : param . index . unwrap_or_else (| | { let idx = next_arg_index ; next_arg_index += 1 ; idx }) , ty : param . ty , hint : param . hint , })) ; } if end_pos != format_string . len () { push_literal (& mut fragments , & format_string [end_pos ..]) ? ; } let mut args = Vec :: new () ; for frag in & fragments { if let Fragment :: Parameter (Parameter { index , ty , .. }) = frag { if args . len () <= * index { args . resize (* index + 1 , None) ; } match & args [* index] { None => args [* index] = Some (ty . clone ()) , Some (other_ty) => match (other_ty , ty) { (Type :: BitField (_) , Type :: BitField (_)) => { } (a , b) if a != b => { return Err (Error :: ConflictingTypes (* index , a . clone () , b . clone ())) } _ => { } } , } } } for (index , arg) in args . iter () . enumerate () { if arg . is_none () { return Err (Error :: UnusedArgument (index)) ; } } Ok (fragments) }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for macro_11 (macro)
+macro_rules! Depcrate_constantsmacro_11 {
+() => {
+// Module: crate::constants
+// Provides: {"macro_11"}
+// Dependencies: {}
+names ! { STAR , "*" ; TEXT , "text" ; IMAGE , "image" ; AUDIO , "audio" ; VIDEO , "video" ; APPLICATION , "application" ; MULTIPART , "multipart" ; MESSAGE , "message" ; MODEL , "model" ; FONT , "font" ; PLAIN , "plain" ; HTML , "html" ; XML , "xml" ; JAVASCRIPT , "javascript" ; CSS , "css" ; CSV , "csv" ; EVENT_STREAM , "event-stream" ; VCARD , "vcard" ; TAB_SEPARATED_VALUES , "tab-separated-values" ; JSON , "json" ; WWW_FORM_URLENCODED , "x-www-form-urlencoded" ; MSGPACK , "msgpack" ; OCTET_STREAM , "octet-stream" ; PDF , "pdf" ; WOFF , "woff" ; WOFF2 , "woff2" ; FORM_DATA , "form-data" ; BMP , "bmp" ; GIF , "gif" ; JPEG , "jpeg" ; PNG , "png" ; SVG , "svg+xml" ; BASIC , "basic" ; MPEG , "mpeg" ; MP4 , "mp4" ; OGG , "ogg" ; CHARSET , "charset" ; BOUNDARY , "boundary" ; }
+};
+}

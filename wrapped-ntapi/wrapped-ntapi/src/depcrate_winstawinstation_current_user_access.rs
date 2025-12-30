@@ -1,0 +1,9 @@
+// Generated macro for WINSTATION_CURRENT_USER_ACCESS (const)
+macro_rules! Depcrate_winstaWINSTATION_CURRENT_USER_ACCESS {
+() => {
+// Module: crate::winsta
+// Provides: {"WINSTATION_CURRENT_USER_ACCESS"}
+// Dependencies: {}
+pub const WINSTATION_CURRENT_USER_ACCESS : u32 = WINSTATION_SET | WINSTATION_RESET | WINSTATION_VIRTUAL | WINSTATION_LOGOFF | WINSTATION_DISCONNECT ;
+};
+}

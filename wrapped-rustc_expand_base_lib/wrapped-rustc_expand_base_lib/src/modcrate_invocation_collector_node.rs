@@ -1,0 +1,39 @@
+// Generated module macro for crate::invocation_collector_node
+macro_rules! Modcrate_invocation_collector_node {
+() => {
+        Depcrate_invocation_collector_nodeuse_121!();
+        Depcrate_invocation_collector_nodeuse_122!();
+        Depcrate_invocation_collector_nodeuse_123!();
+        Depcrate_invocation_collector_nodeuse_124!();
+        Depcrate_invocation_collector_nodeExpandedItem!();
+        Depcrate_invocation_collector_nodeExpandedAssocItem!();
+        Depcrate_invocation_collector_nodeExpandedForeignItem!();
+        Depcrate_invocation_collector_nodeExpandedVariant!();
+        Depcrate_invocation_collector_nodeExpandedWherePredicate!();
+        Depcrate_invocation_collector_nodeExpandedFieldDef!();
+        Depcrate_invocation_collector_nodeExpandedPatField!();
+        Depcrate_invocation_collector_nodeExpandedExprField!();
+        Depcrate_invocation_collector_nodeExpandedParam!();
+        Depcrate_invocation_collector_nodeExpandedGenericParam!();
+        Depcrate_invocation_collector_nodeExpandedArm!();
+        Depcrate_invocation_collector_nodeExpandedCrate!();
+        Depcrate_invocation_collector_nodeExpandedTy!();
+        Depcrate_invocation_collector_nodeExpandedPat!();
+        Depcrate_invocation_collector_nodeExpandedExpr!();
+        Depcrate_invocation_collector_nodeimpl_140!();
+        Depcrate_invocation_collector_nodeimpl_141!();
+        Depcrate_invocation_collector_nodeimpl_142!();
+        Depcrate_invocation_collector_nodeimpl_143!();
+        Depcrate_invocation_collector_nodeimpl_144!();
+        Depcrate_invocation_collector_nodeimpl_145!();
+        Depcrate_invocation_collector_nodeimpl_146!();
+        Depcrate_invocation_collector_nodeimpl_147!();
+        Depcrate_invocation_collector_nodeimpl_148!();
+        Depcrate_invocation_collector_nodeimpl_149!();
+        Depcrate_invocation_collector_nodeExpandedAstNodeWrapper!();
+        Depcrate_invocation_collector_nodeuse_151!();
+        Depcrate_invocation_collector_nodeuse_152!();
+        Depcrate_invocation_collector_nodeuse_153!();
+        Depcrate_invocation_collector_nodeInvocationCollectorNode!();
+    };
+}

@@ -1,0 +1,48 @@
+// Generated module macro for crate::types::scalars
+macro_rules! Modcrate_types_scalars {
+() => {
+        Depcrate_types_scalarsuse_620!();
+        Depcrate_types_scalarsuse_621!();
+        Depcrate_types_scalarsuse_622!();
+        Depcrate_types_scalarsuse_623!();
+        Depcrate_types_scalarsID!();
+        Depcrate_types_scalarsimpl_625!();
+        Depcrate_types_scalarsimpl_626!();
+        Depcrate_types_scalarsString!();
+        Depcrate_types_scalarsimpl_string_scalar!();
+        Depcrate_types_scalarsArcStr!();
+        Depcrate_types_scalarsimpl_arcstr_scalar!();
+        Depcrate_types_scalarsCompactString!();
+        Depcrate_types_scalarsimpl_compactstring_scalar!();
+        Depcrate_types_scalarsimpl_633!();
+        Depcrate_types_scalarsimpl_634!();
+        Depcrate_types_scalarsimpl_635!();
+        Depcrate_types_scalarsimpl_636!();
+        Depcrate_types_scalarsimpl_637!();
+        Depcrate_types_scalarsimpl_638!();
+        Depcrate_types_scalarsimpl_639!();
+        Depcrate_types_scalarsimpl_640!();
+        Depcrate_types_scalarsimpl_641!();
+        Depcrate_types_scalarsBoolean!();
+        Depcrate_types_scalarsimpl_boolean_scalar!();
+        Depcrate_types_scalarsInt!();
+        Depcrate_types_scalarsimpl_int_scalar!();
+        Depcrate_types_scalarsFloat!();
+        Depcrate_types_scalarsimpl_float_scalar!();
+        Depcrate_types_scalarsEmptyMutation!();
+        Depcrate_types_scalarsmacro_649!();
+        Depcrate_types_scalarsimpl_650!();
+        Depcrate_types_scalarsimpl_651!();
+        Depcrate_types_scalarsimpl_652!();
+        Depcrate_types_scalarsimpl_653!();
+        Depcrate_types_scalarsimpl_654!();
+        Depcrate_types_scalarsEmptySubscription!();
+        Depcrate_types_scalarsmacro_656!();
+        Depcrate_types_scalarsimpl_657!();
+        Depcrate_types_scalarsimpl_658!();
+        Depcrate_types_scalarsimpl_659!();
+        Depcrate_types_scalarsimpl_660!();
+        Depcrate_types_scalarsimpl_661!();
+        Depcrate_types_scalarstests!();
+    };
+}

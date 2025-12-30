@@ -1,0 +1,49 @@
+// Generated module macro for crate::string
+macro_rules! Modcrate_string {
+() => {
+        Depcrate_stringuse_32!();
+        Depcrate_stringuse_33!();
+        Depcrate_stringuse_34!();
+        Depcrate_stringuse_35!();
+        Depcrate_stringStdString!();
+        Depcrate_stringKString!();
+        Depcrate_stringKStringBase!();
+        Depcrate_stringimpl_39!();
+        Depcrate_stringimpl_40!();
+        Depcrate_stringimpl_41!();
+        Depcrate_stringimpl_42!();
+        Depcrate_stringimpl_43!();
+        Depcrate_stringimpl_44!();
+        Depcrate_stringimpl_45!();
+        Depcrate_stringimpl_46!();
+        Depcrate_stringimpl_47!();
+        Depcrate_stringimpl_48!();
+        Depcrate_stringimpl_49!();
+        Depcrate_stringimpl_50!();
+        Depcrate_stringimpl_51!();
+        Depcrate_stringimpl_52!();
+        Depcrate_stringimpl_53!();
+        Depcrate_stringimpl_54!();
+        Depcrate_stringimpl_55!();
+        Depcrate_stringimpl_56!();
+        Depcrate_stringimpl_57!();
+        Depcrate_stringimpl_58!();
+        Depcrate_stringimpl_59!();
+        Depcrate_stringimpl_60!();
+        Depcrate_stringimpl_61!();
+        Depcrate_stringimpl_62!();
+        Depcrate_stringimpl_63!();
+        Depcrate_stringimpl_64!();
+        Depcrate_stringimpl_65!();
+        Depcrate_stringimpl_66!();
+        Depcrate_stringimpl_67!();
+        Depcrate_stringimpl_68!();
+        Depcrate_stringimpl_69!();
+        Depcrate_stringStringVisitor!();
+        Depcrate_stringimpl_71!();
+        Depcrate_stringuse_72!();
+        Depcrate_stringinner!();
+        Depcrate_stringinner!();
+        Depcrate_stringtest!();
+    };
+}

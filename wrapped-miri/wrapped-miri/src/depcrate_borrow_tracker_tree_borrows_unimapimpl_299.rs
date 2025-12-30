@@ -1,0 +1,9 @@
+// Generated macro for impl_299 (impl)
+macro_rules! Depcrate_borrow_tracker_tree_borrows_unimapimpl_299 {
+() => {
+// Module: crate::borrow_tracker::tree_borrows::unimap
+// Provides: {"impl_299"}
+// Dependencies: {}
+impl < V > UniValMap < V > { # [doc = " Whether this index has an associated value."] pub fn contains_idx (& self , idx : UniIndex) -> bool { self . data . get (idx . idx . to_usize ()) . and_then (Option :: as_ref) . is_some () } # [doc = " Reserve enough space to insert the value at the right index."] fn extend_to_length (& mut self , len : usize) { if len > self . data . len () { let nb = len - self . data . len () ; self . data . reserve (nb) ; for _ in 0 .. nb { self . data . push (None) ; } } } # [doc = " Assign a value to the index. Permanently overwrites any previous value."] pub fn insert (& mut self , idx : UniIndex , val : V) { self . extend_to_length (idx . idx . to_usize () + 1) ; self . data [idx . idx . to_usize ()] = Some (val) } # [doc = " Get the value at this index, if it exists."] pub fn get (& self , idx : UniIndex) -> Option < & V > { self . data . get (idx . idx . to_usize ()) . and_then (Option :: as_ref) } # [doc = " Get the value at this index mutably, if it exists."] pub fn get_mut (& mut self , idx : UniIndex) -> Option < & mut V > { self . data . get_mut (idx . idx . to_usize ()) . and_then (Option :: as_mut) } # [doc = " Delete any value associated with this index."] # [doc = " Returns None if the value was not present, otherwise"] # [doc = " returns the previously stored value."] pub fn remove (& mut self , idx : UniIndex) -> Option < V > { if idx . idx . to_usize () >= self . data . len () { return None ; } let mut res = None ; mem :: swap (& mut res , & mut self . data [idx . idx . to_usize ()]) ; res } }
+};
+}

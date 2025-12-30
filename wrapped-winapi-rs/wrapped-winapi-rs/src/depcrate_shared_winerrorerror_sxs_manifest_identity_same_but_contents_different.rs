@@ -1,0 +1,9 @@
+// Generated macro for ERROR_SXS_MANIFEST_IDENTITY_SAME_BUT_CONTENTS_DIFFERENT (const)
+macro_rules! Depcrate_shared_winerrorERROR_SXS_MANIFEST_IDENTITY_SAME_BUT_CONTENTS_DIFFERENT {
+() => {
+// Module: crate::shared::winerror
+// Provides: {"ERROR_SXS_MANIFEST_IDENTITY_SAME_BUT_CONTENTS_DIFFERENT"}
+// Dependencies: {}
+pub const ERROR_SXS_MANIFEST_IDENTITY_SAME_BUT_CONTENTS_DIFFERENT : DWORD = 14101 ;
+};
+}

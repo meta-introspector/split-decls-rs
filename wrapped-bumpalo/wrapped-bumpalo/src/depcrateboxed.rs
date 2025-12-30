@@ -1,0 +1,9 @@
+// Generated macro for boxed (module)
+macro_rules! Depcrateboxed {
+() => {
+// Module: crate
+// Provides: {"boxed"}
+// Dependencies: {}
+# [cfg (feature = "boxed")] pub mod boxed ;
+};
+}

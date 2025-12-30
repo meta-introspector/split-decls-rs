@@ -1,0 +1,9 @@
+// Generated macro for test (module)
+macro_rules! Depcrate_cert_contexttest {
+() => {
+// Module: crate::cert_context
+// Provides: {"test"}
+// Dependencies: {}
+# [cfg (test)] mod test { use super :: * ; # [test] fn decode () { let der = include_bytes ! ("../test/cert.der") ; let pem = include_str ! ("../test/cert.pem") ; let der = CertContext :: new (der) . unwrap () ; let pem = CertContext :: from_pem (pem) . unwrap () ; assert_eq ! (der , pem) ; } # [test] fn certcontext_to_der () { let der = include_bytes ! ("../test/cert.der") ; let cert = CertContext :: new (der) . unwrap () ; let der2 = CertContext :: to_der (& cert) ; assert_eq ! (der as & [u8] , der2) ; } # [test] fn certcontext_to_pem () { let der = include_bytes ! ("../test/cert.der") ; let pem1 = include_str ! ("../test/cert.pem") . replace ('\r' , "") ; let der = CertContext :: new (der) . unwrap () ; let pem2 = CertContext :: to_pem (& der) . unwrap () . replace ('\r' , "") ; assert_eq ! (pem1 , pem2) ; } # [test] fn fingerprint () { let der = include_bytes ! ("../test/cert.der") ; let pem = include_str ! ("../test/cert.pem") ; let der = CertContext :: new (der) . unwrap () ; let pem = CertContext :: from_pem (pem) . unwrap () ; let hash = der . fingerprint (HashAlgorithm :: sha1 ()) . unwrap () ; assert_eq ! (hash , vec ! [0x59 , 0x17 , 0x2D , 0x93 , 0x13 , 0xE8 , 0x44 , 0x59 , 0xBC , 0xFF , 0x27 , 0xF9 , 0x67 , 0xE7 , 0x9E , 0x6E , 0x92 , 0x17 , 0xE5 , 0x84]) ; assert_eq ! (hash , pem . fingerprint (HashAlgorithm :: sha1 ()) . unwrap ()) ; let hash = der . fingerprint (HashAlgorithm :: sha256 ()) . unwrap () ; assert_eq ! (hash , vec ! [0x47 , 0x12 , 0xB9 , 0x39 , 0xFB , 0xCB , 0x42 , 0xA6 , 0xB5 , 0x10 , 0x1B , 0x42 , 0x13 , 0x9A , 0x25 , 0xB1 , 0x4F , 0x81 , 0xB4 , 0x18 , 0xFA , 0xCA , 0xBD , 0x37 , 0x87 , 0x46 , 0xF1 , 0x2F , 0x85 , 0xCC , 0x65 , 0x44]) ; assert_eq ! (hash , pem . fingerprint (HashAlgorithm :: sha256 ()) . unwrap ()) ; } }
+};
+}

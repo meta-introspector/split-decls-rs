@@ -1,0 +1,9 @@
+// Generated macro for use_146 (pub_use)
+macro_rules! Depcrate_generateduse_146 {
+() => {
+// Module: crate::generated
+// Provides: {"use_146"}
+// Dependencies: {}
+# [cfg (all (feature = "ARHitTestResult" , feature = "objc2"))] pub use self :: __ARHitTestResult :: ARHitTestResult ;
+};
+}

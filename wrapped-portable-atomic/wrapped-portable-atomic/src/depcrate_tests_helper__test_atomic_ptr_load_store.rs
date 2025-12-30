@@ -1,0 +1,9 @@
+// Generated macro for __test_atomic_ptr_load_store (macro)
+macro_rules! Depcrate_tests_helper__test_atomic_ptr_load_store {
+() => {
+// Module: crate::tests::helper
+// Provides: {"__test_atomic_ptr_load_store"}
+// Dependencies: {}
+macro_rules ! __test_atomic_ptr_load_store { ($ atomic_type : ty , single_thread) => { __test_atomic_common ! ($ atomic_type , * mut u8) ; use crate :: tests :: helper :: { self , * } ; use std :: ptr ; # [test] fn accessor () { let mut v = 1 ; let a = <$ atomic_type >:: new (ptr :: null_mut ()) ; unsafe { assert ! ((* a . as_ptr ()) . is_null ()) ; * a . as_ptr () = & mut v ; assert_eq ! (a . as_ptr () as * const () , & a as * const _ as * const ()) ; assert ! (! (* a . as_ptr ()) . is_null ()) ; } } # [test] fn static_load_only () { static VAR : $ atomic_type = <$ atomic_type >:: new (ptr :: null_mut ()) ; for & order in & helper :: LOAD_ORDERINGS { assert_eq ! (VAR . load (order) , ptr :: null_mut ()) ; } } # [test] fn load_store () { static VAR : $ atomic_type = <$ atomic_type >:: new (ptr :: null_mut ()) ; test_load_ordering (| order | VAR . load (order)) ; test_store_ordering (| order | VAR . store (ptr :: null_mut () , order)) ; let mut v = 1_u8 ; let p = & mut v as * mut u8 ; for (& load_order , & store_order) in helper :: LOAD_ORDERINGS . iter () . zip (& helper :: STORE_ORDERINGS) { assert_eq ! (VAR . load (load_order) , ptr :: null_mut ()) ; VAR . store (p , store_order) ; assert_eq ! (VAR . load (load_order) , p) ; VAR . store (ptr :: null_mut () , store_order) ; let a = <$ atomic_type >:: new (p) ; assert_eq ! (a . load (load_order) , p) ; a . store (ptr :: null_mut () , store_order) ; assert_eq ! (a . load (load_order) , ptr :: null_mut ()) ; } } } ; ($ atomic_type : ty) => { __test_atomic_ptr_load_store ! ($ atomic_type , single_thread) ; } ; }
+};
+}

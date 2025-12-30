@@ -1,0 +1,46 @@
+// Generated module macro for crate::expr
+macro_rules! Modcrate_expr {
+() => {
+        Depcrate_expruse_3!();
+        Depcrate_expruse_4!();
+        Depcrate_expruse_5!();
+        Depcrate_expruse_6!();
+        Depcrate_expruse_7!();
+        Depcrate_expruse_8!();
+        Depcrate_expruse_9!();
+        Depcrate_expruse_10!();
+        Depcrate_expruse_11!();
+        Depcrate_expruse_12!();
+        Depcrate_expruse_13!();
+        Depcrate_exprIdentifierParser!();
+        Depcrate_exprPRef!();
+        Depcrate_exprCResult!();
+        Depcrate_exprEvalResult!();
+        Depcrate_exprresult_opt!();
+        Depcrate_exprimpl_19!();
+        Depcrate_exprimpl_20!();
+        Depcrate_exprexact_token!();
+        Depcrate_expridentifier_token!();
+        Depcrate_exprp!();
+        Depcrate_exprone_of_punctuation!();
+        Depcrate_exprimpl_25!();
+        Depcrate_exprimpl_26!();
+        Depcrate_exprimpl_27!();
+        Depcrate_exprimpl_28!();
+        Depcrate_exprimpl_29!();
+        Depcrate_exprimpl_30!();
+        Depcrate_exprimpl_31!();
+        Depcrate_exprimpl_32!();
+        Depcrate_exprimpl_33!();
+        Depcrate_exprimpl_34!();
+        Depcrate_exprunary_op!();
+        Depcrate_exprnumeric!();
+        Depcrate_exprimpl_37!();
+        Depcrate_exprimpl_38!();
+        Depcrate_exprimpl_39!();
+        Depcrate_exprimpl_40!();
+        Depcrate_exprexpr!();
+        Depcrate_exprmacro_definition!();
+        Depcrate_exprfn_macro_declaration!();
+    };
+}

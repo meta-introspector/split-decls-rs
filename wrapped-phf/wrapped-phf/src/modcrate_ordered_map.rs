@@ -1,0 +1,39 @@
+// Generated module macro for crate::ordered_map
+macro_rules! Modcrate_ordered_map {
+() => {
+        Depcrate_ordered_mapuse_50!();
+        Depcrate_ordered_mapuse_51!();
+        Depcrate_ordered_mapuse_52!();
+        Depcrate_ordered_mapuse_53!();
+        Depcrate_ordered_mapuse_54!();
+        Depcrate_ordered_mapuse_55!();
+        Depcrate_ordered_mapOrderedMap!();
+        Depcrate_ordered_mapimpl_57!();
+        Depcrate_ordered_mapimpl_58!();
+        Depcrate_ordered_mapimpl_59!();
+        Depcrate_ordered_mapimpl_60!();
+        Depcrate_ordered_mapimpl_61!();
+        Depcrate_ordered_mapimpl_62!();
+        Depcrate_ordered_mapEntries!();
+        Depcrate_ordered_mapimpl_64!();
+        Depcrate_ordered_mapimpl_65!();
+        Depcrate_ordered_mapimpl_66!();
+        Depcrate_ordered_mapimpl_67!();
+        Depcrate_ordered_mapimpl_68!();
+        Depcrate_ordered_mapimpl_69!();
+        Depcrate_ordered_mapKeys!();
+        Depcrate_ordered_mapimpl_71!();
+        Depcrate_ordered_mapimpl_72!();
+        Depcrate_ordered_mapimpl_73!();
+        Depcrate_ordered_mapimpl_74!();
+        Depcrate_ordered_mapimpl_75!();
+        Depcrate_ordered_mapimpl_76!();
+        Depcrate_ordered_mapValues!();
+        Depcrate_ordered_mapimpl_78!();
+        Depcrate_ordered_mapimpl_79!();
+        Depcrate_ordered_mapimpl_80!();
+        Depcrate_ordered_mapimpl_81!();
+        Depcrate_ordered_mapimpl_82!();
+        Depcrate_ordered_mapimpl_83!();
+    };
+}

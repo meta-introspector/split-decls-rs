@@ -1,0 +1,9 @@
+// Generated macro for impl_100 (impl)
+macro_rules! Depcrateimpl_100 {
+() => {
+// Module: crate
+// Provides: {"impl_100"}
+// Dependencies: {}
+impl < P : Permutation > KeccakState < P > { fn new (rate : usize , delim : u8) -> Self { assert ! (rate != 0 , "rate cannot be equal 0") ; KeccakState { buffer : Buffer :: default () , offset : 0 , rate , delim , mode : Mode :: Absorbing , permutation : core :: marker :: PhantomData , } } fn keccak (& mut self) { P :: execute (& mut self . buffer) ; } fn update (& mut self , input : & [u8]) { if let Mode :: Squeezing = self . mode { self . mode = Mode :: Absorbing ; self . fill_block () ; } let mut ip = 0 ; let mut l = input . len () ; let mut rate = self . rate - self . offset ; let mut offset = self . offset ; while l >= rate { self . buffer . xorin (& input [ip ..] , offset , rate) ; self . keccak () ; ip += rate ; l -= rate ; rate = self . rate ; offset = 0 ; } self . buffer . xorin (& input [ip ..] , offset , l) ; self . offset = offset + l ; } fn pad (& mut self) { self . buffer . pad (self . offset , self . delim , self . rate) ; } fn squeeze (& mut self , output : & mut [u8]) { if let Mode :: Absorbing = self . mode { self . mode = Mode :: Squeezing ; self . pad () ; self . fill_block () ; } let mut op = 0 ; let mut l = output . len () ; let mut rate = self . rate - self . offset ; let mut offset = self . offset ; while l >= rate { self . buffer . setout (& mut output [op ..] , offset , rate) ; self . keccak () ; op += rate ; l -= rate ; rate = self . rate ; offset = 0 ; } self . buffer . setout (& mut output [op ..] , offset , l) ; self . offset = offset + l ; } fn finalize (mut self , output : & mut [u8]) { self . squeeze (output) ; } fn fill_block (& mut self) { self . keccak () ; self . offset = 0 ; } fn reset (& mut self) { self . buffer = Buffer :: default () ; self . offset = 0 ; self . mode = Mode :: Absorbing ; } }
+};
+}

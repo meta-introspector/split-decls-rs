@@ -1,0 +1,9 @@
+// Generated macro for ERROR_INTERNET_LOGIN_FAILURE_DISPLAY_ENTITY_BODY (const)
+macro_rules! Depcrate_um_wininetERROR_INTERNET_LOGIN_FAILURE_DISPLAY_ENTITY_BODY {
+() => {
+// Module: crate::um::wininet
+// Provides: {"ERROR_INTERNET_LOGIN_FAILURE_DISPLAY_ENTITY_BODY"}
+// Dependencies: {}
+pub const ERROR_INTERNET_LOGIN_FAILURE_DISPLAY_ENTITY_BODY : DWORD = INTERNET_ERROR_BASE + 174 ;
+};
+}

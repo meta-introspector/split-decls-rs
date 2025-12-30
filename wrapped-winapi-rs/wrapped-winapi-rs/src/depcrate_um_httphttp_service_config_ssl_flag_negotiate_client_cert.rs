@@ -1,0 +1,9 @@
+// Generated macro for HTTP_SERVICE_CONFIG_SSL_FLAG_NEGOTIATE_CLIENT_CERT (const)
+macro_rules! Depcrate_um_httpHTTP_SERVICE_CONFIG_SSL_FLAG_NEGOTIATE_CLIENT_CERT {
+() => {
+// Module: crate::um::http
+// Provides: {"HTTP_SERVICE_CONFIG_SSL_FLAG_NEGOTIATE_CLIENT_CERT"}
+// Dependencies: {}
+pub const HTTP_SERVICE_CONFIG_SSL_FLAG_NEGOTIATE_CLIENT_CERT : DWORD = 0x00000002 ;
+};
+}

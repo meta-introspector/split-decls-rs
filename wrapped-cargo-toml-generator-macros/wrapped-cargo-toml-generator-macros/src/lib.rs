@@ -1,0 +1,59 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcrate_macrosdep_table_impl.rs");
+include!("depcrate_parsersuse_21.rs");
+include!("depcrate_parsersparse_dependency_table.rs");
+include!("depcrate_macrosworkspace_members_list_impl.rs");
+include!("depcrate_parsersimpl_34.rs");
+include!("depcrate_macrosuse_3.rs");
+include!("depcrate_parserskeyvalue.rs");
+include!("depcrate_parsersrootitem.rs");
+include!("depcrate_parsersimpl_28.rs");
+include!("depcrate_parsersbracketedstringlist.rs");
+include!("depcrate_macrosuse_7.rs");
+include!("depcratemacros.rs");
+include!("depcrate_parsersimpl_32.rs");
+include!("depcrate_parsersuse_24.rs");
+include!("depcrate_macrosuse_4.rs");
+include!("depcrate_parsersparse_dependencies_map.rs");
+include!("depcrate_macrosdep_version_impl.rs");
+include!("depcratedep_table.rs");
+include!("depcrate_macrosdefine_root_cargo_toml_impl.rs");
+include!("depcrate_parsersrootinput.rs");
+include!("depcrate_macrosuse_8.rs");
+include!("depcrate_macrosuse_6.rs");
+include!("depcrate_parsersuse_25.rs");
+include!("depcrate_parsersparse_string_list.rs");
+include!("depcratedep_path.rs");
+include!("depcrate_parsersimpl_27.rs");
+include!("depcratedefine_root_cargo_toml.rs");
+include!("depcrate_parsersimpl_30.rs");
+include!("depcrate_parsersimpl_36.rs");
+include!("depcrate_parsersinlinetable.rs");
+include!("depcrate_macroswrappedcargotoml.rs");
+include!("depcrate_macrosuse_9.rs");
+include!("depcrate_macrosimpl_17.rs");
+include!("depcrate_macrosdep_path_impl.rs");
+include!("depcrate_parsersuse_23.rs");
+include!("depcrateuse_1.rs");
+include!("depcrate_parsersparse_inline_table.rs");
+include!("depcratedep_version.rs");
+include!("depcrate_parsersimpl_39.rs");
+include!("depcrate_macrosimpl_13.rs");
+include!("depcrateworkspace_members_list.rs");
+include!("depcrate_macrosdeptableinput.rs");
+include!("depcrateparsers.rs");
+include!("depcrate_parsersuse_20.rs");
+include!("depcrate_macrosuse_5.rs");
+include!("depcrate_parsersuse_22.rs");
+include!("depcrate_parserstomlsection.rs");
+include!("modcrate_macros.rs");
+include!("modcrate_parsers.rs");
+include!("modcrate.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate_macros!();
+    Modcrate_parsers!();
+    Modcrate!();
+}

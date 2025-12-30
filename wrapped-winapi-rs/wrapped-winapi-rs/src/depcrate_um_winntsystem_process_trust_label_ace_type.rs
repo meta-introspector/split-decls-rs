@@ -1,0 +1,9 @@
+// Generated macro for SYSTEM_PROCESS_TRUST_LABEL_ACE_TYPE (const)
+macro_rules! Depcrate_um_winntSYSTEM_PROCESS_TRUST_LABEL_ACE_TYPE {
+() => {
+// Module: crate::um::winnt
+// Provides: {"SYSTEM_PROCESS_TRUST_LABEL_ACE_TYPE"}
+// Dependencies: {}
+pub const SYSTEM_PROCESS_TRUST_LABEL_ACE_TYPE : BYTE = 0x14 ;
+};
+}

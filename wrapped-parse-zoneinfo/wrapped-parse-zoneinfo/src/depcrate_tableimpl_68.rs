@@ -1,0 +1,9 @@
+// Generated macro for impl_68 (impl)
+macro_rules! Depcrate_tableimpl_68 {
+() => {
+// Module: crate::table
+// Provides: {"impl_68"}
+// Dependencies: {}
+impl Format { # [doc = " Convert the template into one of the `Format` variants. This can’t"] # [doc = " fail, as any syntax that doesn’t match one of the two formats will"] # [doc = " just be a ‘constant’ format."] pub fn new (template : & str) -> Format { if let Some (pos) = template . find ('/') { Format :: Alternate { standard : template [.. pos] . to_owned () , dst : template [pos + 1 ..] . to_owned () , } } else if template . contains ("%s") { Format :: Placeholder (template . to_owned ()) } else if template == "%z" { Format :: Offset } else { Format :: Constant (template . to_owned ()) } } pub fn format (& self , utc_offset : i64 , dst_offset : i64 , letters : Option < & String >) -> String { let letters = match letters { Some (l) => & * * l , None => "" , } ; match * self { Format :: Constant (ref s) => s . clone () , Format :: Placeholder (ref s) => s . replace ("%s" , letters) , Format :: Alternate { ref standard , .. } if dst_offset == 0 => standard . clone () , Format :: Alternate { ref dst , .. } => dst . clone () , Format :: Offset => { let offset = utc_offset + dst_offset ; let (sign , off) = if offset < 0 { ('-' , - offset) } else { ('+' , offset) } ; let mut f = String :: from (sign) ; let minutes = off / 60 ; let secs = (off % 60) as u8 ; let mins = (minutes % 60) as u8 ; let hours = (minutes / 60) as u8 ; assert ! (secs == 0 , "numeric names are not used if the offset has fractional minutes") ; let _ = write ! (& mut f , "{hours:02}") ; if mins != 0 { let _ = write ! (& mut f , "{mins:02}") ; } f } } } pub fn format_constant (& self) -> String { if let Format :: Constant (ref s) = * self { s . clone () } else { panic ! ("Expected a constant formatting string") ; } } }
+};
+}

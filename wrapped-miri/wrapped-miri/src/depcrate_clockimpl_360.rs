@@ -1,0 +1,9 @@
+// Generated macro for impl_360 (impl)
+macro_rules! Depcrate_clockimpl_360 {
+() => {
+// Module: crate::clock
+// Provides: {"impl_360"}
+// Dependencies: {}
+impl MonotonicClock { # [doc = " Create a new clock based on the availability of communication with the host."] pub fn new (communicate : bool) -> Self { let kind = if communicate { MonotonicClockKind :: Host { epoch : StdInstant :: now () } } else { MonotonicClockKind :: Virtual { nanoseconds : 0 . into () } } ; Self { kind } } # [doc = " Let the time pass for a small interval."] pub fn tick (& self) { match & self . kind { MonotonicClockKind :: Host { .. } => { } MonotonicClockKind :: Virtual { nanoseconds } => { nanoseconds . update (| x | x + NANOSECONDS_PER_BASIC_BLOCK) ; } } } # [doc = " Sleep for the desired duration."] pub fn sleep (& self , duration : Duration) { match & self . kind { MonotonicClockKind :: Host { .. } => std :: thread :: sleep (duration) , MonotonicClockKind :: Virtual { nanoseconds } => { let nanos : u128 = duration . as_nanos () ; nanoseconds . update (| x | { x . checked_add (nanos) . expect ("Miri's virtual clock cannot represent an execution this long") }) ; } } } # [doc = " Return the `epoch` instant (time = 0), to convert between monotone instants and absolute durations."] pub fn epoch (& self) -> Instant { match & self . kind { MonotonicClockKind :: Host { epoch } => Instant { kind : InstantKind :: Host (* epoch) } , MonotonicClockKind :: Virtual { .. } => Instant { kind : InstantKind :: Virtual { nanoseconds : 0 } } , } } pub fn now (& self) -> Instant { match & self . kind { MonotonicClockKind :: Host { .. } => Instant { kind : InstantKind :: Host (StdInstant :: now ()) } , MonotonicClockKind :: Virtual { nanoseconds } => Instant { kind : InstantKind :: Virtual { nanoseconds : nanoseconds . get () } } , } } }
+};
+}

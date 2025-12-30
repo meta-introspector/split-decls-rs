@@ -1,0 +1,9 @@
+// Generated macro for clone_source_borrows_from_dest (function)
+macro_rules! Depcrate_assigning_clonesclone_source_borrows_from_dest {
+() => {
+// Module: crate::assigning_clones
+// Provides: {"clone_source_borrows_from_dest"}
+// Dependencies: {}
+# [doc = " Checks if the data being cloned borrows from the place that is being assigned to:"] # [doc = ""] # [doc = " ```"] # [doc = " let mut s = String::new();"] # [doc = " let s2 = &s;"] # [doc = " s = s2.to_owned();"] # [doc = " ```"] # [doc = ""] # [doc = " This cannot be written `s2.clone_into(&mut s)` because it has conflicting borrows."] fn clone_source_borrows_from_dest (cx : & LateContext < '_ > , lhs : & Expr < '_ > , call_span : Span) -> bool { let Some (mir) = enclosing_mir (cx . tcx , lhs . hir_id) else { return false ; } ; let PossibleBorrowerMap { map : borrow_map , .. } = PossibleBorrowerMap :: new (cx , mir) ; if let Some (terminator) = mir . basic_blocks . iter () . map (mir :: BasicBlockData :: terminator) . find (| term | term . source_info . span == call_span) && let mir :: TerminatorKind :: Call { ref args , target : Some (assign_bb) , .. } = terminator . kind && let [source] = & * * args && let mir :: Operand :: Move (source) = & source . node && let assign_bb = & mir . basic_blocks [assign_bb] && let assign_bb = match assign_bb . terminator () . kind { mir :: TerminatorKind :: Drop { target , .. } => & mir . basic_blocks [target] , _ => assign_bb , } && let Some (assignment) = assign_bb . statements . iter () . find (| stmt | { ! matches ! (stmt . kind , mir :: StatementKind :: StorageDead (_) | mir :: StatementKind :: StorageLive (_)) }) && let mir :: StatementKind :: Assign (box (borrowed , _)) = & assignment . kind && let Some (borrowers) = borrow_map . get (& borrowed . local) { borrowers . contains (source . local) } else { false } }
+};
+}

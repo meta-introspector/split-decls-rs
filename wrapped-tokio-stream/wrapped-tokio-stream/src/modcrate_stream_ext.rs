@@ -1,0 +1,49 @@
+// Generated module macro for crate::stream_ext
+macro_rules! Modcrate_stream_ext {
+() => {
+        Depcrate_stream_extuse_21!();
+        Depcrate_stream_extuse_22!();
+        Depcrate_stream_extall!();
+        Depcrate_stream_extuse_24!();
+        Depcrate_stream_extany!();
+        Depcrate_stream_extuse_26!();
+        Depcrate_stream_extchain!();
+        Depcrate_stream_extuse_28!();
+        Depcrate_stream_extcollect!();
+        Depcrate_stream_extuse_30!();
+        Depcrate_stream_extfilter!();
+        Depcrate_stream_extuse_32!();
+        Depcrate_stream_extfilter_map!();
+        Depcrate_stream_extuse_34!();
+        Depcrate_stream_extfold!();
+        Depcrate_stream_extuse_36!();
+        Depcrate_stream_extfuse!();
+        Depcrate_stream_extuse_38!();
+        Depcrate_stream_extmap!();
+        Depcrate_stream_extuse_40!();
+        Depcrate_stream_extmap_while!();
+        Depcrate_stream_extuse_42!();
+        Depcrate_stream_extmerge!();
+        Depcrate_stream_extuse_44!();
+        Depcrate_stream_extnext!();
+        Depcrate_stream_extuse_46!();
+        Depcrate_stream_extskip!();
+        Depcrate_stream_extuse_48!();
+        Depcrate_stream_extskip_while!();
+        Depcrate_stream_extuse_50!();
+        Depcrate_stream_exttake!();
+        Depcrate_stream_extuse_52!();
+        Depcrate_stream_exttake_while!();
+        Depcrate_stream_extuse_54!();
+        Depcrate_stream_extthen!();
+        Depcrate_stream_extuse_56!();
+        Depcrate_stream_exttry_next!();
+        Depcrate_stream_extuse_58!();
+        Depcrate_stream_extpeekable!();
+        Depcrate_stream_extuse_60!();
+        Depcrate_stream_extmacro_61!();
+        Depcrate_stream_extStreamExt!();
+        Depcrate_stream_extimpl_63!();
+        Depcrate_stream_extmerge_size_hints!();
+    };
+}

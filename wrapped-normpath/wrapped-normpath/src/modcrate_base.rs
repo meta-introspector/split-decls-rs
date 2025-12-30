@@ -1,0 +1,56 @@
+// Generated module macro for crate::base
+macro_rules! Modcrate_base {
+() => {
+        Depcrate_baseuse_7!();
+        Depcrate_baseuse_8!();
+        Depcrate_baseuse_9!();
+        Depcrate_baseuse_10!();
+        Depcrate_baseuse_11!();
+        Depcrate_baseuse_12!();
+        Depcrate_baseuse_13!();
+        Depcrate_baseuse_14!();
+        Depcrate_baseuse_15!();
+        Depcrate_baseuse_16!();
+        Depcrate_baseuse_17!();
+        Depcrate_baseuse_18!();
+        Depcrate_baseuse_19!();
+        Depcrate_baseuse_20!();
+        Depcrate_baseuse_21!();
+        Depcrate_baseuse_22!();
+        Depcrate_baseuse_23!();
+        Depcrate_baseuse_24!();
+        Depcrate_baseuse_25!();
+        Depcrate_baseuse_26!();
+        Depcrate_baseuse_27!();
+        Depcrate_basecow_path_into_base_path!();
+        Depcrate_baseBasePath!();
+        Depcrate_baseimpl_30!();
+        Depcrate_baseimpl_31!();
+        Depcrate_baseimpl_32!();
+        Depcrate_baseimpl_33!();
+        Depcrate_baseimpl_34!();
+        Depcrate_baseimpl_35!();
+        Depcrate_baseimpl_36!();
+        Depcrate_baseimpl_37!();
+        Depcrate_baseimpl_38!();
+        Depcrate_baseimpl_39!();
+        Depcrate_baseBasePathBuf!();
+        Depcrate_baseimpl_41!();
+        Depcrate_baseimpl_42!();
+        Depcrate_baseimpl_43!();
+        Depcrate_baseimpl_44!();
+        Depcrate_baseimpl_45!();
+        Depcrate_baseimpl_46!();
+        Depcrate_baseimpl_47!();
+        Depcrate_baseimpl_48!();
+        Depcrate_baseimpl_49!();
+        Depcrate_baseimpl_50!();
+        Depcrate_baseimpl_51!();
+        Depcrate_baseimpl_52!();
+        Depcrate_baseimpl_53!();
+        Depcrate_baseimpl_54!();
+        Depcrate_baseprint_bytes!();
+        Depcrate_baseserde!();
+        Depcrate_baseuniquote!();
+    };
+}

@@ -1,0 +1,9 @@
+// Generated macro for BTH_LE_GAP_APPEARANCE_CYCLING_SUBCATEGORY_SPEED_SENSOR (const)
+macro_rules! Depcrate_um_bthledefBTH_LE_GAP_APPEARANCE_CYCLING_SUBCATEGORY_SPEED_SENSOR {
+() => {
+// Module: crate::um::bthledef
+// Provides: {"BTH_LE_GAP_APPEARANCE_CYCLING_SUBCATEGORY_SPEED_SENSOR"}
+// Dependencies: {}
+pub const BTH_LE_GAP_APPEARANCE_CYCLING_SUBCATEGORY_SPEED_SENSOR : UCHAR = 0x02 ;
+};
+}

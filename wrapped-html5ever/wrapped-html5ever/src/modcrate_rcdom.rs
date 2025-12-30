@@ -1,0 +1,41 @@
+// Generated module macro for crate::rcdom
+macro_rules! Modcrate_rcdom {
+() => {
+        Depcrate_rcdomuse_266!();
+        Depcrate_rcdomuse_267!();
+        Depcrate_rcdomuse_268!();
+        Depcrate_rcdomuse_269!();
+        Depcrate_rcdomuse_270!();
+        Depcrate_rcdomuse_271!();
+        Depcrate_rcdomuse_272!();
+        Depcrate_rcdomuse_273!();
+        Depcrate_rcdomuse_274!();
+        Depcrate_rcdomuse_275!();
+        Depcrate_rcdomuse_276!();
+        Depcrate_rcdomuse_277!();
+        Depcrate_rcdomuse_278!();
+        Depcrate_rcdomuse_279!();
+        Depcrate_rcdomuse_280!();
+        Depcrate_rcdomuse_281!();
+        Depcrate_rcdomuse_282!();
+        Depcrate_rcdomuse_283!();
+        Depcrate_rcdomuse_284!();
+        Depcrate_rcdomElementEnum!();
+        Depcrate_rcdomNodeEnum!();
+        Depcrate_rcdomNode!();
+        Depcrate_rcdomimpl_288!();
+        Depcrate_rcdomHandle!();
+        Depcrate_rcdomimpl_290!();
+        Depcrate_rcdomWeakHandle!();
+        Depcrate_rcdomsame_node!();
+        Depcrate_rcdomnew_node!();
+        Depcrate_rcdomappend!();
+        Depcrate_rcdomget_parent_and_index!();
+        Depcrate_rcdomappend_to_existing_text!();
+        Depcrate_rcdomremove_from_parent!();
+        Depcrate_rcdomRcDom!();
+        Depcrate_rcdomimpl_299!();
+        Depcrate_rcdomimpl_300!();
+        Depcrate_rcdomimpl_301!();
+    };
+}

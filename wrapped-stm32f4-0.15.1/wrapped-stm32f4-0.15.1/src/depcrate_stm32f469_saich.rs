@@ -1,0 +1,9 @@
+// Generated macro for ch (module)
+macro_rules! Depcrate_stm32f469_saich {
+() => {
+// Module: crate::stm32f469::sai
+// Provides: {"ch"}
+// Dependencies: {}
+# [doc = r"Register block"] # [doc = "Cluster CH%s, containing ?CR1, ?CR2, ?FRCR, ?SLOTR, ?IM, ?SR, ?CLRFR, ?DR"] pub mod ch ;
+};
+}

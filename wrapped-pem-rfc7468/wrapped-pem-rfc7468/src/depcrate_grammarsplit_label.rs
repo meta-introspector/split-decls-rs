@@ -1,0 +1,9 @@
+// Generated macro for split_label (function)
+macro_rules! Depcrate_grammarsplit_label {
+() => {
+// Module: crate::grammar
+// Provides: {"split_label"}
+// Dependencies: {}
+# [doc = " Split a slice beginning with a type label as located in an encapsulation"] # [doc = " boundary. Returns the label as a `&str`, and slice beginning with the"] # [doc = " encapsulated text with leading `-----` and newline removed."] # [doc = ""] # [doc = " This implementation follows the rules put forth in Section 2, which are"] # [doc = " stricter than those found in the ABNF grammar:"] # [doc = ""] # [doc = " > Labels are formally case-sensitive, uppercase, and comprised of zero or more"] # [doc = " > characters; they do not contain consecutive spaces or hyphen-minuses,"] # [doc = " > nor do they contain spaces or hyphen-minuses at either end."] # [doc = ""] # [doc = " We apply a slightly stricter interpretation:"] # [doc = " - Labels MAY be empty"] # [doc = " - Non-empty labels MUST start with an upper-case letter: `'A'..='Z'`"] # [doc = " - The only allowable characters subsequently are `'A'..='Z'` or WSP."] # [doc = "   (NOTE: this is an overly strict initial implementation and should be relaxed)"] # [doc = " - Whitespace MUST NOT contain more than one consecutive WSP character"] pub (crate) fn split_label (bytes : & [u8]) -> Option < (& str , & [u8]) > { let mut n = 0usize ; let mut last_was_wsp = false ; for & char in bytes { if is_labelchar (char) { last_was_wsp = false ; } else if char == b'-' { break ; } else if n != 0 && is_wsp (char) { if last_was_wsp { return None ; } last_was_wsp = true ; } else { return None ; } n = n . checked_add (1) ? ; } let (raw_label , rest) = bytes . split_at (n) ; let label = str :: from_utf8 (raw_label) . ok () ? ; match rest { [b'-' , b'-' , b'-' , b'-' , b'-' , body @ ..] => Some ((label , strip_leading_eol (body) ?)) , _ => None , } }
+};
+}

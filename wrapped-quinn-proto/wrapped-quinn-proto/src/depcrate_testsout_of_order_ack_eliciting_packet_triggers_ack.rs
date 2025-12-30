@@ -1,0 +1,9 @@
+// Generated macro for out_of_order_ack_eliciting_packet_triggers_ack (function)
+macro_rules! Depcrate_testsout_of_order_ack_eliciting_packet_triggers_ack {
+() => {
+// Module: crate::tests
+// Provides: {"out_of_order_ack_eliciting_packet_triggers_ack"}
+// Dependencies: {}
+# [test] fn out_of_order_ack_eliciting_packet_triggers_ack () { let _guard = subscribe () ; let mut pair = Pair :: default_with_deterministic_pns () ; let (client_ch , server_ch) = pair . connect_with (client_config_with_deterministic_pns ()) ; pair . drive () ; let default_mtu = pair . mtu ; let client_stats_after_connect = pair . client_conn_mut (client_ch) . stats () ; let server_stats_after_connect = pair . server_conn_mut (server_ch) . stats () ; pair . mtu = 0 ; pair . client_conn_mut (client_ch) . ping () ; pair . drive_client () ; let client_stats_after_first_ping = pair . client_conn_mut (client_ch) . stats () ; assert_eq ! (client_stats_after_first_ping . frame_tx . ping - client_stats_after_connect . frame_tx . ping , 1) ; assert_eq ! (client_stats_after_first_ping . frame_rx . acks - client_stats_after_connect . frame_rx . acks , 0) ; pair . mtu = default_mtu ; pair . client_conn_mut (client_ch) . ping () ; pair . drive_client () ; pair . drive_server () ; pair . drive_client () ; let client_stats_after_second_ping = pair . client_conn_mut (client_ch) . stats () ; assert_eq ! (client_stats_after_second_ping . frame_tx . ping - client_stats_after_connect . frame_tx . ping , 2) ; assert_eq ! (client_stats_after_second_ping . frame_rx . acks - client_stats_after_connect . frame_rx . acks , 1) ; let server_stats_after_second_ping = pair . server_conn_mut (server_ch) . stats () ; assert_eq ! (server_stats_after_second_ping . frame_rx . ping - server_stats_after_connect . frame_rx . ping , 1) ; assert_eq ! (server_stats_after_second_ping . frame_tx . acks - server_stats_after_connect . frame_tx . acks , 1) ; }
+};
+}

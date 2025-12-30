@@ -1,0 +1,49 @@
+// Generated module macro for crate::os
+macro_rules! Modcrate_os {
+() => {
+        Depcrate_osraw!();
+        Depcrate_osdarwin!();
+        Depcrate_osunix!();
+        Depcrate_oslinux!();
+        Depcrate_oswasi!();
+        Depcrate_oswindows!();
+        Depcrate_osdarwin!();
+        Depcrate_osunix!();
+        Depcrate_oslinux!();
+        Depcrate_oswasi!();
+        Depcrate_oswasip2!();
+        Depcrate_oswindows!();
+        Depcrate_osaix!();
+        Depcrate_osandroid!();
+        Depcrate_oscygwin!();
+        Depcrate_osdragonfly!();
+        Depcrate_osemscripten!();
+        Depcrate_osespidf!();
+        Depcrate_osfortanix_sgx!();
+        Depcrate_osfreebsd!();
+        Depcrate_osfuchsia!();
+        Depcrate_oshaiku!();
+        Depcrate_oshermit!();
+        Depcrate_oshorizon!();
+        Depcrate_oshurd!();
+        Depcrate_osillumos!();
+        Depcrate_osios!();
+        Depcrate_osl4re!();
+        Depcrate_osmacos!();
+        Depcrate_osnetbsd!();
+        Depcrate_osnto!();
+        Depcrate_osnuttx!();
+        Depcrate_osopenbsd!();
+        Depcrate_osredox!();
+        Depcrate_osrtems!();
+        Depcrate_ossolaris!();
+        Depcrate_ossolid!();
+        Depcrate_ostrusty!();
+        Depcrate_osuefi!();
+        Depcrate_osvita!();
+        Depcrate_osvxworks!();
+        Depcrate_osxous!();
+        Depcrate_osfd!();
+        Depcrate_osnet!();
+    };
+}

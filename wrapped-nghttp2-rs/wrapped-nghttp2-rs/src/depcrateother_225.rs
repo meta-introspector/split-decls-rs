@@ -1,0 +1,9 @@
+// Generated macro for other_225 (other)
+macro_rules! Depcrateother_225 {
+() => {
+// Module: crate
+// Provides: {"other_225"}
+// Dependencies: {}
+extern "C" { # [doc = " @function"] # [doc = ""] # [doc = " Signals to the client that the server started graceful shutdown"] # [doc = " procedure."] # [doc = ""] # [doc = " This function is only usable for server.  If this function is"] # [doc = " called with client side session, this function returns"] # [doc = " :enum:`NGHTTP2_ERR_INVALID_STATE`."] # [doc = ""] # [doc = " To gracefully shutdown HTTP/2 session, server should call this"] # [doc = " function to send GOAWAY with last_stream_id (1u << 31) - 1.  And"] # [doc = " after some delay (e.g., 1 RTT), send another GOAWAY with the stream"] # [doc = " ID that the server has some processing using"] # [doc = " `nghttp2_submit_goaway()`.  See also"] # [doc = " `nghttp2_session_get_last_proc_stream_id()`."] # [doc = ""] # [doc = " Unlike `nghttp2_submit_goaway()`, this function just sends GOAWAY"] # [doc = " and does nothing more.  This is a mere indication to the client"] # [doc = " that session shutdown is imminent.  The application should call"] # [doc = " `nghttp2_submit_goaway()` with appropriate last_stream_id after"] # [doc = " this call."] # [doc = ""] # [doc = " If one or more GOAWAY frame have been already sent by either"] # [doc = " `nghttp2_submit_goaway()` or `nghttp2_session_terminate_session()`,"] # [doc = " this function has no effect."] # [doc = ""] # [doc = " This function returns 0 if it succeeds, or one of the following"] # [doc = " negative error codes:"] # [doc = ""] # [doc = " :enum:`NGHTTP2_ERR_NOMEM`"] # [doc = "     Out of memory."] # [doc = " :enum:`NGHTTP2_ERR_INVALID_STATE`"] # [doc = "     The |session| is initialized as client."] pub fn nghttp2_submit_shutdown_notice (session : * mut nghttp2_session) -> :: std :: os :: raw :: c_int ; }
+};
+}

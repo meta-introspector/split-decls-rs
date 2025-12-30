@@ -1,0 +1,43 @@
+// Generated module macro for crate::generated
+macro_rules! Modcrate_generated {
+() => {
+        Depcrate_generatedother_4!();
+        Depcrate_generated__NSItemProvider_SWCollaborationMetadata!();
+        Depcrate_generated__NSPasteboardItem_SWCollaborationMetadata!();
+        Depcrate_generated__SWAttributionView!();
+        Depcrate_generated__SWCollaborationHighlight!();
+        Depcrate_generated__SWCollaborationView!();
+        Depcrate_generated__SWErrors!();
+        Depcrate_generated__SWHighlight!();
+        Depcrate_generated__SWHighlightCenter!();
+        Depcrate_generated__SWHighlightChangeEvent!();
+        Depcrate_generated__SWHighlightEvent!();
+        Depcrate_generated__SWHighlightMembershipEvent!();
+        Depcrate_generated__SWHighlightMentionEvent!();
+        Depcrate_generated__SWHighlightPersistenceEvent!();
+        Depcrate_generated__SWRemoveParticipantAlert!();
+        Depcrate_generateduse_19!();
+        Depcrate_generateduse_20!();
+        Depcrate_generateduse_21!();
+        Depcrate_generateduse_22!();
+        Depcrate_generateduse_23!();
+        Depcrate_generateduse_24!();
+        Depcrate_generateduse_25!();
+        Depcrate_generateduse_26!();
+        Depcrate_generateduse_27!();
+        Depcrate_generateduse_28!();
+        Depcrate_generateduse_29!();
+        Depcrate_generateduse_30!();
+        Depcrate_generateduse_31!();
+        Depcrate_generateduse_32!();
+        Depcrate_generateduse_33!();
+        Depcrate_generateduse_34!();
+        Depcrate_generateduse_35!();
+        Depcrate_generateduse_36!();
+        Depcrate_generateduse_37!();
+        Depcrate_generateduse_38!();
+        Depcrate_generateduse_39!();
+        Depcrate_generateduse_40!();
+        Depcrate_generateduse_41!();
+    };
+}

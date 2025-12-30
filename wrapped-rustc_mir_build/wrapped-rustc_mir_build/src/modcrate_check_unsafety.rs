@@ -1,0 +1,40 @@
+// Generated module macro for crate::check_unsafety
+macro_rules! Modcrate_check_unsafety {
+() => {
+        Depcrate_check_unsafetyuse_412!();
+        Depcrate_check_unsafetyuse_413!();
+        Depcrate_check_unsafetyuse_414!();
+        Depcrate_check_unsafetyuse_415!();
+        Depcrate_check_unsafetyuse_416!();
+        Depcrate_check_unsafetyuse_417!();
+        Depcrate_check_unsafetyuse_418!();
+        Depcrate_check_unsafetyuse_419!();
+        Depcrate_check_unsafetyuse_420!();
+        Depcrate_check_unsafetyuse_421!();
+        Depcrate_check_unsafetyuse_422!();
+        Depcrate_check_unsafetyuse_423!();
+        Depcrate_check_unsafetyuse_424!();
+        Depcrate_check_unsafetyuse_425!();
+        Depcrate_check_unsafetyuse_426!();
+        Depcrate_check_unsafetyuse_427!();
+        Depcrate_check_unsafetyuse_428!();
+        Depcrate_check_unsafetyuse_429!();
+        Depcrate_check_unsafetyuse_430!();
+        Depcrate_check_unsafetyuse_431!();
+        Depcrate_check_unsafetyuse_432!();
+        Depcrate_check_unsafetyuse_433!();
+        Depcrate_check_unsafetyUnsafetyVisitor!();
+        Depcrate_check_unsafetyimpl_435!();
+        Depcrate_check_unsafetyLayoutConstrainedPlaceVisitor!();
+        Depcrate_check_unsafetyimpl_437!();
+        Depcrate_check_unsafetyimpl_438!();
+        Depcrate_check_unsafetyimpl_439!();
+        Depcrate_check_unsafetySafetyContext!();
+        Depcrate_check_unsafetyNestedUsedBlock!();
+        Depcrate_check_unsafetyUnusedUnsafeWarning!();
+        Depcrate_check_unsafetyUnsafeOpKind!();
+        Depcrate_check_unsafetyuse_444!();
+        Depcrate_check_unsafetyimpl_445!();
+        Depcrate_check_unsafetycheck_unsafety!();
+    };
+}

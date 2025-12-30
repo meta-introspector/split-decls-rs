@@ -1,0 +1,9 @@
+// Generated macro for impl_52 (impl)
+macro_rules! Depcrateimpl_52 {
+() => {
+// Module: crate
+// Provides: {"impl_52"}
+// Dependencies: {}
+impl Hasher { pub fn new () -> Self { let mut c_state = MaybeUninit :: uninit () ; unsafe { ffi :: blake3_hasher_init (c_state . as_mut_ptr ()) ; Self (c_state . assume_init ()) } } pub fn new_keyed (key : & [u8 ; 32]) -> Self { let mut c_state = MaybeUninit :: uninit () ; unsafe { ffi :: blake3_hasher_init_keyed (c_state . as_mut_ptr () , key . as_ptr ()) ; Self (c_state . assume_init ()) } } pub fn new_derive_key (context : & str) -> Self { let mut c_state = MaybeUninit :: uninit () ; let context_c_string = CString :: new (context) . expect ("valid C string, no null bytes") ; unsafe { ffi :: blake3_hasher_init_derive_key (c_state . as_mut_ptr () , context_c_string . as_ptr ()) ; Self (c_state . assume_init ()) } } pub fn new_derive_key_raw (context : & [u8]) -> Self { let mut c_state = MaybeUninit :: uninit () ; unsafe { ffi :: blake3_hasher_init_derive_key_raw (c_state . as_mut_ptr () , context . as_ptr () as * const _ , context . len () ,) ; Self (c_state . assume_init ()) } } pub fn update (& mut self , input : & [u8]) { unsafe { ffi :: blake3_hasher_update (& mut self . 0 , input . as_ptr () as * const c_void , input . len ()) ; } } # [cfg (feature = "tbb")] pub fn update_tbb (& mut self , input : & [u8]) { unsafe { ffi :: blake3_hasher_update_tbb (& mut self . 0 , input . as_ptr () as * const c_void , input . len () ,) ; } } pub fn finalize (& self , output : & mut [u8]) { unsafe { ffi :: blake3_hasher_finalize (& self . 0 , output . as_mut_ptr () , output . len ()) ; } } pub fn finalize_seek (& self , seek : u64 , output : & mut [u8]) { unsafe { ffi :: blake3_hasher_finalize_seek (& self . 0 , seek , output . as_mut_ptr () , output . len ()) ; } } pub fn reset (& mut self) { unsafe { ffi :: blake3_hasher_reset (& mut self . 0) ; } } }
+};
+}

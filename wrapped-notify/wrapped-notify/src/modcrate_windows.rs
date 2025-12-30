@@ -1,0 +1,42 @@
+// Generated module macro for crate::windows
+macro_rules! Modcrate_windows {
+() => {
+        Depcrate_windowsuse_100!();
+        Depcrate_windowsuse_101!();
+        Depcrate_windowsuse_102!();
+        Depcrate_windowsuse_103!();
+        Depcrate_windowsuse_104!();
+        Depcrate_windowsuse_105!();
+        Depcrate_windowsuse_106!();
+        Depcrate_windowsuse_107!();
+        Depcrate_windowsuse_108!();
+        Depcrate_windowsuse_109!();
+        Depcrate_windowsuse_110!();
+        Depcrate_windowsuse_111!();
+        Depcrate_windowsuse_112!();
+        Depcrate_windowsuse_113!();
+        Depcrate_windowsuse_114!();
+        Depcrate_windowsuse_115!();
+        Depcrate_windowsuse_116!();
+        Depcrate_windowsuse_117!();
+        Depcrate_windowsBUF_SIZE!();
+        Depcrate_windowsReadData!();
+        Depcrate_windowsReadDirectoryRequest!();
+        Depcrate_windowsimpl_121!();
+        Depcrate_windowsAction!();
+        Depcrate_windowsMetaEvent!();
+        Depcrate_windowsWatchState!();
+        Depcrate_windowsReadDirectoryChangesServer!();
+        Depcrate_windowsimpl_126!();
+        Depcrate_windowsstop_watch!();
+        Depcrate_windowsstart_read!();
+        Depcrate_windowshandle_event!();
+        Depcrate_windowsReadDirectoryChangesWatcher!();
+        Depcrate_windowsimpl_131!();
+        Depcrate_windowsimpl_132!();
+        Depcrate_windowsimpl_133!();
+        Depcrate_windowsimpl_134!();
+        Depcrate_windowsimpl_135!();
+        Depcrate_windowstests!();
+    };
+}

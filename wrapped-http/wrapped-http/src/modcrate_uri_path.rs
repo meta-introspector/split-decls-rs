@@ -1,0 +1,39 @@
+// Generated module macro for crate::uri::path
+macro_rules! Modcrate_uri_path {
+() => {
+        Depcrate_uri_pathuse_422!();
+        Depcrate_uri_pathuse_423!();
+        Depcrate_uri_pathuse_424!();
+        Depcrate_uri_pathuse_425!();
+        Depcrate_uri_pathuse_426!();
+        Depcrate_uri_pathuse_427!();
+        Depcrate_uri_pathPathAndQuery!();
+        Depcrate_uri_pathNONE!();
+        Depcrate_uri_pathimpl_430!();
+        Depcrate_uri_pathimpl_431!();
+        Depcrate_uri_pathimpl_432!();
+        Depcrate_uri_pathimpl_433!();
+        Depcrate_uri_pathimpl_434!();
+        Depcrate_uri_pathimpl_435!();
+        Depcrate_uri_pathimpl_436!();
+        Depcrate_uri_pathimpl_437!();
+        Depcrate_uri_pathimpl_438!();
+        Depcrate_uri_pathimpl_439!();
+        Depcrate_uri_pathimpl_440!();
+        Depcrate_uri_pathimpl_441!();
+        Depcrate_uri_pathimpl_442!();
+        Depcrate_uri_pathimpl_443!();
+        Depcrate_uri_pathimpl_444!();
+        Depcrate_uri_pathimpl_445!();
+        Depcrate_uri_pathimpl_446!();
+        Depcrate_uri_pathimpl_447!();
+        Depcrate_uri_pathimpl_448!();
+        Depcrate_uri_pathimpl_449!();
+        Depcrate_uri_pathimpl_450!();
+        Depcrate_uri_pathimpl_451!();
+        Depcrate_uri_pathimpl_452!();
+        Depcrate_uri_pathimpl_453!();
+        Depcrate_uri_pathimpl_454!();
+        Depcrate_uri_pathtests!();
+    };
+}

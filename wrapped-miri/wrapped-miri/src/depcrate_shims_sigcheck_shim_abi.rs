@@ -1,0 +1,9 @@
+// Generated macro for check_shim_abi (function)
+macro_rules! Depcrate_shims_sigcheck_shim_abi {
+() => {
+// Module: crate::shims::sig
+// Provides: {"check_shim_abi"}
+// Dependencies: {}
+# [doc = " Helper function to compare two ABIs."] fn check_shim_abi < 'tcx > (this : & MiriInterpCx < 'tcx > , callee_abi : & FnAbi < 'tcx , Ty < 'tcx > > , caller_abi : & FnAbi < 'tcx , Ty < 'tcx > > ,) -> InterpResult < 'tcx > { if callee_abi . conv != caller_abi . conv { throw_ub_format ! (r#"calling a function with calling convention "{callee}" using caller calling convention "{caller}""# , callee = callee_abi . conv , caller = caller_abi . conv ,) ; } if callee_abi . can_unwind && ! caller_abi . can_unwind { throw_ub_format ! ("ABI mismatch: callee may unwind, but caller-side signature prohibits unwinding" ,) ; } if caller_abi . c_variadic && ! callee_abi . c_variadic { throw_ub_format ! ("ABI mismatch: calling a non-variadic function with a variadic caller-side signature") ; } if ! caller_abi . c_variadic && callee_abi . c_variadic { throw_ub_format ! ("ABI mismatch: calling a variadic function with a non-variadic caller-side signature") ; } if callee_abi . fixed_count != caller_abi . fixed_count { throw_ub_format ! ("ABI mismatch: expected {} arguments, found {} arguments " , callee_abi . fixed_count , caller_abi . fixed_count) ; } if ! this . check_argument_compat (& caller_abi . ret , & callee_abi . ret) ? { throw_ub ! (AbiMismatchReturn { caller_ty : caller_abi . ret . layout . ty , callee_ty : callee_abi . ret . layout . ty }) ; } for (idx , (caller_arg , callee_arg)) in caller_abi . args . iter () . zip (callee_abi . args . iter ()) . enumerate () { if ! this . check_argument_compat (caller_arg , callee_arg) ? { throw_ub ! (AbiMismatchArgument { arg_idx : idx , caller_ty : caller_abi . args [idx] . layout . ty , callee_ty : callee_abi . args [idx] . layout . ty }) ; } } interp_ok (()) }
+};
+}

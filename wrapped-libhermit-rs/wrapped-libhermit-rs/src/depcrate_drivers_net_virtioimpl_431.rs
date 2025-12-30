@@ -1,0 +1,9 @@
+// Generated macro for impl_431 (impl)
+macro_rules! Depcrate_drivers_net_virtioimpl_431 {
+() => {
+// Module: crate::drivers::net::virtio
+// Provides: {"impl_431"}
+// Dependencies: {}
+impl smoltcp :: phy :: Device for VirtioNetDriver { type TxToken < 'a > = TxToken < 'a > ; type RxToken < 'a > = RxToken < 'a > ; fn capabilities (& self) -> DeviceCapabilities { let mut device_capabilities = DeviceCapabilities :: default () ; device_capabilities . medium = smoltcp :: phy :: Medium :: Ethernet ; device_capabilities . max_transmission_unit = self . inner . mtu . into () ; device_capabilities . max_burst_size = Some (usize :: try_from (self . inner . send_capacity) . unwrap () / usize :: from (BUFF_PER_PACKET)) ; device_capabilities . checksum = self . checksums . clone () ; device_capabilities } fn receive (& mut self , _timestamp : smoltcp :: time :: Instant ,) -> Option < (Self :: RxToken < '_ > , Self :: TxToken < '_ >) > { if self . inner . recv_vqs . has_packet () && { self . free_up_send_capacity () ; self . inner . send_capacity >= u32 :: from (BUFF_PER_PACKET) } { self . inner . send_capacity -= u32 :: from (BUFF_PER_PACKET) ; Some ((RxToken { recv_vqs : & mut self . inner . recv_vqs , is_mrg_rxbuf_enabled : self . dev_cfg . features . contains (virtio :: net :: F :: MRG_RXBUF) , } , TxToken { send_vqs : & mut self . inner . send_vqs , checksums : self . checksums . clone () , send_capacity : & mut self . inner . send_capacity , } ,)) } else { None } } fn transmit (& mut self , _timestamp : smoltcp :: time :: Instant) -> Option < Self :: TxToken < '_ > > { self . free_up_send_capacity () ; if self . inner . send_capacity >= u32 :: from (BUFF_PER_PACKET) { self . inner . send_capacity -= u32 :: from (BUFF_PER_PACKET) ; Some (TxToken { send_vqs : & mut self . inner . send_vqs , checksums : self . checksums . clone () , send_capacity : & mut self . inner . send_capacity , }) } else { None } } }
+};
+}

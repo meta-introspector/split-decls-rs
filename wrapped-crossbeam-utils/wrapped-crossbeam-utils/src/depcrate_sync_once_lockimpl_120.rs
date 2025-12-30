@@ -1,0 +1,9 @@
+// Generated macro for impl_120 (impl)
+macro_rules! Depcrate_sync_once_lockimpl_120 {
+() => {
+// Module: crate::sync::once_lock
+// Provides: {"impl_120"}
+// Dependencies: {}
+impl < T > Drop for OnceLock < T > { fn drop (& mut self) { if self . once . is_completed () { unsafe { self . value . get () . cast :: < T > () . drop_in_place () } ; } } }
+};
+}

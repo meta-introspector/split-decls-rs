@@ -1,0 +1,43 @@
+// Generated module macro for crate::stm32f469::rtc
+macro_rules! Modcrate_stm32f469_rtc {
+() => {
+        Depcrate_stm32f469_rtcRegisterBlock!();
+        Depcrate_stm32f469_rtcimpl_16457!();
+        Depcrate_stm32f469_rtcTR!();
+        Depcrate_stm32f469_rtctr!();
+        Depcrate_stm32f469_rtcDR!();
+        Depcrate_stm32f469_rtcdr!();
+        Depcrate_stm32f469_rtcCR!();
+        Depcrate_stm32f469_rtccr!();
+        Depcrate_stm32f469_rtcISR!();
+        Depcrate_stm32f469_rtcisr!();
+        Depcrate_stm32f469_rtcPRER!();
+        Depcrate_stm32f469_rtcprer!();
+        Depcrate_stm32f469_rtcWUTR!();
+        Depcrate_stm32f469_rtcwutr!();
+        Depcrate_stm32f469_rtcCALIBR!();
+        Depcrate_stm32f469_rtccalibr!();
+        Depcrate_stm32f469_rtcALRMR!();
+        Depcrate_stm32f469_rtcalrmr!();
+        Depcrate_stm32f469_rtcWPR!();
+        Depcrate_stm32f469_rtcwpr!();
+        Depcrate_stm32f469_rtcSSR!();
+        Depcrate_stm32f469_rtcssr!();
+        Depcrate_stm32f469_rtcSHIFTR!();
+        Depcrate_stm32f469_rtcshiftr!();
+        Depcrate_stm32f469_rtcTSTR!();
+        Depcrate_stm32f469_rtctstr!();
+        Depcrate_stm32f469_rtcTSDR!();
+        Depcrate_stm32f469_rtctsdr!();
+        Depcrate_stm32f469_rtcTSSSR!();
+        Depcrate_stm32f469_rtctsssr!();
+        Depcrate_stm32f469_rtcCALR!();
+        Depcrate_stm32f469_rtccalr!();
+        Depcrate_stm32f469_rtcTAFCR!();
+        Depcrate_stm32f469_rtctafcr!();
+        Depcrate_stm32f469_rtcALRMSSR!();
+        Depcrate_stm32f469_rtcalrmssr!();
+        Depcrate_stm32f469_rtcBKPR!();
+        Depcrate_stm32f469_rtcbkpr!();
+    };
+}

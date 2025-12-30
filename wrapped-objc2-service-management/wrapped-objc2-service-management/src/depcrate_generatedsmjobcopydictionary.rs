@@ -1,0 +1,9 @@
+// Generated macro for SMJobCopyDictionary (function)
+macro_rules! Depcrate_generatedSMJobCopyDictionary {
+() => {
+// Module: crate::generated
+// Provides: {"SMJobCopyDictionary"}
+// Dependencies: {}
+# [doc = " Copy the job description dictionary for the given job label."] # [doc = ""] # [doc = ""] # [doc = " Parameter `domain`: The job's domain (e.g. {"] # [doc = ""] # [doc = " ```text"] # [doc = "  kSMDomainSystemLaunchd} or"] # [doc = "  {@link kSMDomainUserLaunchd})."] # [doc = ""] # [doc = "  @param jobLabel"] # [doc = "  The label identifier for the job to copy."] # [doc = ""] # [doc = "  @result"] # [doc = "  A new dictionary describing the job, or NULL if the job could not be found."] # [doc = "  Must be released by the caller."] # [doc = ""] # [doc = "  @discussion"] # [doc = "  The contents of the returned dictionary are NOT wholy representative of the"] # [doc = "  property list on-disk and are not stable from release to release. This"] # [doc = "  routine is deprecated and will be removed in a future release. There will be"] # [doc = "  no provided replacement."] # [doc = "  "] # [doc = ""] # [doc = " ```"] # [doc = ""] # [doc = " # Safety"] # [doc = ""] # [doc = " - `domain` might not allow `None`."] # [doc = " - `job_label` might not allow `None`."] # [cfg (feature = "objc2-core-foundation")] # [deprecated] # [inline] pub unsafe extern "C-unwind" fn SMJobCopyDictionary (domain : Option < & CFString > , job_label : Option < & CFString > ,) -> Option < CFRetained < CFDictionary > > { extern "C-unwind" { fn SMJobCopyDictionary (domain : Option < & CFString > , job_label : Option < & CFString > ,) -> Option < NonNull < CFDictionary > > ; } let ret = unsafe { SMJobCopyDictionary (domain , job_label) } ; ret . map (| ret | unsafe { CFRetained :: from_raw (ret) }) }
+};
+}

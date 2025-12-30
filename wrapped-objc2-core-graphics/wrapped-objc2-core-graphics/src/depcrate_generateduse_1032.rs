@@ -1,0 +1,9 @@
+// Generated macro for use_1032 (pub_use)
+macro_rules! Depcrate_generateduse_1032 {
+() => {
+// Module: crate::generated
+// Provides: {"use_1032"}
+// Dependencies: {}
+# [cfg (feature = "CGWindow")] pub use self :: __CGWindow :: CGWindowID ;
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for PSYSTEM_REGISTRY_APPEND_STRING_PARAMETERS (type)
+macro_rules! Depcrate_ntexapiPSYSTEM_REGISTRY_APPEND_STRING_PARAMETERS {
+() => {
+// Module: crate::ntexapi
+// Provides: {"PSYSTEM_REGISTRY_APPEND_STRING_PARAMETERS"}
+// Dependencies: {}
+pub type PSYSTEM_REGISTRY_APPEND_STRING_PARAMETERS = * mut SYSTEM_REGISTRY_APPEND_STRING_PARAMETERS ;
+};
+}

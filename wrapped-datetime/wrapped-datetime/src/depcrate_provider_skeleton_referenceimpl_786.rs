@@ -1,0 +1,9 @@
+// Generated macro for impl_786 (impl)
+macro_rules! Depcrate_provider_skeleton_referenceimpl_786 {
+() => {
+// Module: crate::provider::skeleton::reference
+// Provides: {"impl_786"}
+// Dependencies: {}
+# [doc = " Convert a Pattern into a Skeleton. This will remove all of the string literals, and sort"] # [doc = " the fields into the canonical sort order. Not all fields are supported by Skeletons, so map"] # [doc = " fields into skeleton-appropriate ones. For instance, in the \"ja\" locale the pattern \"aK:mm\""] # [doc = " gets transformed into the skeleton \"hmm\"."] # [doc = ""] # [doc = " At the time of this writing, it's being used for applying hour cycle preferences and should not"] # [doc = " be exposed as a public API for end users."] impl From < & Pattern > for Skeleton { fn from (pattern : & Pattern) -> Self { let mut fields : SmallVec < [fields :: Field ; 5] > = SmallVec :: new () ; for item in pattern . items () { if let crate :: provider :: pattern :: PatternItem :: Field (field) = item { let mut field = * field ; field . symbol = match field . symbol { FieldSymbol :: Month (_) => FieldSymbol :: Month (fields :: Month :: Format) , FieldSymbol :: Weekday (_) => FieldSymbol :: Weekday (fields :: Weekday :: Format) , FieldSymbol :: DayPeriod (fields :: DayPeriod :: AmPm) | FieldSymbol :: DayPeriod (fields :: DayPeriod :: NoonMidnight) => continue , FieldSymbol :: Hour (fields :: Hour :: H11) | FieldSymbol :: Hour (fields :: Hour :: H12) => { FieldSymbol :: Hour (fields :: Hour :: H12) } FieldSymbol :: Hour (fields :: Hour :: H23) => FieldSymbol :: Hour (fields :: Hour :: H23) , FieldSymbol :: Minute | FieldSymbol :: Second (_) | FieldSymbol :: TimeZone (_) | FieldSymbol :: DecimalSecond (_) | FieldSymbol :: Era | FieldSymbol :: Year (_) | FieldSymbol :: Week (_) | FieldSymbol :: Day (_) => field . symbol , } ; if let Err (pos) = fields . binary_search (& field) { fields . insert (pos , field) } } } Self (fields) } }
+};
+}

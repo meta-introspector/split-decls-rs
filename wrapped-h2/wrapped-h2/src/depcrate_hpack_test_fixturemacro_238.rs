@@ -1,0 +1,9 @@
+// Generated macro for macro_238 (macro)
+macro_rules! Depcrate_hpack_test_fixturemacro_238 {
+() => {
+// Module: crate::hpack::test::fixture
+// Provides: {"macro_238"}
+// Dependencies: {}
+fixture_mod ! (haskell_http2_static => { (story_00 , "haskell-http2-static/story_00.json") ; (story_01 , "haskell-http2-static/story_01.json") ; (story_02 , "haskell-http2-static/story_02.json") ; (story_03 , "haskell-http2-static/story_03.json") ; (story_04 , "haskell-http2-static/story_04.json") ; (story_05 , "haskell-http2-static/story_05.json") ; (story_06 , "haskell-http2-static/story_06.json") ; (story_07 , "haskell-http2-static/story_07.json") ; (story_08 , "haskell-http2-static/story_08.json") ; (story_09 , "haskell-http2-static/story_09.json") ; (story_10 , "haskell-http2-static/story_10.json") ; (story_11 , "haskell-http2-static/story_11.json") ; (story_12 , "haskell-http2-static/story_12.json") ; (story_13 , "haskell-http2-static/story_13.json") ; (story_14 , "haskell-http2-static/story_14.json") ; (story_15 , "haskell-http2-static/story_15.json") ; (story_16 , "haskell-http2-static/story_16.json") ; (story_17 , "haskell-http2-static/story_17.json") ; (story_18 , "haskell-http2-static/story_18.json") ; (story_19 , "haskell-http2-static/story_19.json") ; (story_20 , "haskell-http2-static/story_20.json") ; (story_21 , "haskell-http2-static/story_21.json") ; (story_22 , "haskell-http2-static/story_22.json") ; (story_23 , "haskell-http2-static/story_23.json") ; (story_24 , "haskell-http2-static/story_24.json") ; (story_25 , "haskell-http2-static/story_25.json") ; (story_26 , "haskell-http2-static/story_26.json") ; (story_27 , "haskell-http2-static/story_27.json") ; (story_28 , "haskell-http2-static/story_28.json") ; (story_29 , "haskell-http2-static/story_29.json") ; (story_30 , "haskell-http2-static/story_30.json") ; (story_31 , "haskell-http2-static/story_31.json") ; }) ;
+};
+}

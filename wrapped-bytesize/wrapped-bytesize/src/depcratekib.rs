@@ -1,9 +1,9 @@
-// Generated macro for KIB (const)
-macro_rules! DepcrateKIB {
+// Generated macro for kib (function)
+macro_rules! Depcratekib {
 () => {
 // Module: crate
-// Provides: {"KIB"}
+// Provides: {"kib"}
 // Dependencies: {}
-# [doc = " Number of bytes in 1 kibibyte."] pub const KIB : u64 = 1_024 ;
+# [doc = " Converts a quantity of kibibytes to bytes."] pub fn kib < V : Into < u64 > > (size : V) -> u64 { size . into () * KIB }
 };
 }

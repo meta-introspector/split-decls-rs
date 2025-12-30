@@ -1,0 +1,9 @@
+// Generated macro for ClassQuery (enum)
+macro_rules! Depcrate_unicodeClassQuery {
+() => {
+// Module: crate::unicode
+// Provides: {"ClassQuery"}
+// Dependencies: {}
+# [doc = " A query for finding a character class defined by Unicode. This supports"] # [doc = " either use of a property name directly, or lookup by property value. The"] # [doc = " former generally refers to Binary properties (see UTS#44, Table 8), but"] # [doc = " as a special exception (see UTS#18, Section 1.2) both general categories"] # [doc = " (an enumeration) and scripts (a catalog) are supported as if each of their"] # [doc = " possible values were a binary property."] # [doc = ""] # [doc = " In all circumstances, property names and values are normalized and"] # [doc = " canonicalized. That is, `GC == gc == GeneralCategory == general_category`."] # [doc = ""] # [doc = " The lifetime `'a` refers to the shorter of the lifetimes of property name"] # [doc = " and property value."] # [derive (Debug)] pub enum ClassQuery < 'a > { # [doc = " Return a class corresponding to a Unicode binary property, named by"] # [doc = " a single letter."] OneLetter (char) , # [doc = " Return a class corresponding to a Unicode binary property."] # [doc = ""] # [doc = " Note that, by special exception (see UTS#18, Section 1.2), both"] # [doc = " general category values and script values are permitted here as if"] # [doc = " they were a binary property."] Binary (& 'a str) , # [doc = " Return a class corresponding to all codepoints whose property"] # [doc = " (identified by `property_name`) corresponds to the given value"] # [doc = " (identified by `property_value`)."] ByValue { # [doc = " A property name."] property_name : & 'a str , # [doc = " A property value."] property_value : & 'a str , } , }
+};
+}

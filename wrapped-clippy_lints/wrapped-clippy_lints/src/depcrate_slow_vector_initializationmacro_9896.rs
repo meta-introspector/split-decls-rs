@@ -1,0 +1,9 @@
+// Generated macro for macro_9896 (macro)
+macro_rules! Depcrate_slow_vector_initializationmacro_9896 {
+() => {
+// Module: crate::slow_vector_initialization
+// Provides: {"macro_9896"}
+// Dependencies: {}
+declare_clippy_lint ! { # [doc = " ### What it does"] # [doc = " Checks slow zero-filled vector initialization"] # [doc = ""] # [doc = " ### Why is this bad?"] # [doc = " These structures are non-idiomatic and less efficient than simply using"] # [doc = " `vec![0; len]`."] # [doc = ""] # [doc = " Specifically, for `vec![0; len]`, the compiler can use a specialized type of allocation"] # [doc = " that also zero-initializes the allocated memory in the same call"] # [doc = " (see: [alloc_zeroed](https://doc.rust-lang.org/stable/std/alloc/trait.GlobalAlloc.html#method.alloc_zeroed))."] # [doc = ""] # [doc = " Writing `Vec::new()` followed by `vec.resize(len, 0)` is suboptimal because,"] # [doc = " while it does do the same number of allocations,"] # [doc = " it involves two operations for allocating and initializing."] # [doc = " The `resize` call first allocates memory (since `Vec::new()` did not), and only *then* zero-initializes it."] # [doc = ""] # [doc = " ### Example"] # [doc = " ```no_run"] # [doc = " # use core::iter::repeat;"] # [doc = " # let len = 4;"] # [doc = " let mut vec1 = Vec::new();"] # [doc = " vec1.resize(len, 0);"] # [doc = ""] # [doc = " let mut vec2 = Vec::with_capacity(len);"] # [doc = " vec2.resize(len, 0);"] # [doc = ""] # [doc = " let mut vec3 = Vec::with_capacity(len);"] # [doc = " vec3.extend(repeat(0).take(len));"] # [doc = " ```"] # [doc = ""] # [doc = " Use instead:"] # [doc = " ```no_run"] # [doc = " # let len = 4;"] # [doc = " let mut vec1 = vec![0; len];"] # [doc = " let mut vec2 = vec![0; len];"] # [doc = " let mut vec3 = vec![0; len];"] # [doc = " ```"] # [clippy :: version = "1.32.0"] pub SLOW_VECTOR_INITIALIZATION , perf , "slow vector initialization" }
+};
+}

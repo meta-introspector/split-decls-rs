@@ -1,0 +1,9 @@
+// Generated macro for PDOT11_SEND_INVITATION_RESPONSE_PARAMETERS (type)
+macro_rules! Depcrate_shared_windot11PDOT11_SEND_INVITATION_RESPONSE_PARAMETERS {
+() => {
+// Module: crate::shared::windot11
+// Provides: {"PDOT11_SEND_INVITATION_RESPONSE_PARAMETERS"}
+// Dependencies: {}
+pub type PDOT11_SEND_INVITATION_RESPONSE_PARAMETERS = * mut DOT11_SEND_INVITATION_RESPONSE_PARAMETERS ;
+};
+}

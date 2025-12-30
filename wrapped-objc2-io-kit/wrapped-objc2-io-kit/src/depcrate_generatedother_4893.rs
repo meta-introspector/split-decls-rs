@@ -1,0 +1,9 @@
+// Generated macro for other_4893 (other)
+macro_rules! Depcrate_generatedother_4893 {
+() => {
+// Module: crate::generated
+// Provides: {"other_4893"}
+// Dependencies: {}
+extern "C-unwind" { # [doc = " Enqueues a new entry on the queue."] # [doc = ""] # [doc = " This method adds a new data entry of dataSize to the queue.  It sets the size parameter of the entry pointed to by the tail value and copies the memory pointed to by the data parameter in place in the queue.  Once that is done, it moves the tail to the next available location.  When attempting to add a new entry towards the end of the queue and there isn't enough space at the end, it wraps back to the beginning."] # [doc = " <br>"] # [doc = " If the queue is empty when a new entry is added, the port specified in IODataQueueSetNotificationPort will be used to send a message to the client process that data is now available."] # [doc = " <br>"] # [doc = " <b>"] # [doc = " Please note that using this method without mapped memory create from an IOSharedDataQueue will result in undefined behavior."] # [doc = " </b>"] # [doc = ""] # [doc = " Parameter `dataQueue`: The IODataQueueMemory region mapped from the kernel created from an IOSharedDataQueue."] # [doc = ""] # [doc = " Parameter `data`: Pointer to the data to be added to the queue."] # [doc = ""] # [doc = " Parameter `dataSize`: Size of the data pointed to by data."] # [doc = ""] # [doc = " Returns: Returns kIOReturnSuccess on success.  Other return values possible are: kIOReturnOverrun - queue is full."] # [doc = ""] # [doc = " # Safety"] # [doc = ""] # [doc = " - `data_queue` must be a valid pointer."] # [doc = " - `data` must be a valid pointer."] pub fn IODataQueueEnqueue (data_queue : * mut IODataQueueMemory , data : * mut c_void , data_size : u32 ,) -> IOReturn ; }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for spawn_unchecked (function)
+macro_rules! Depcrate_runnablespawn_unchecked {
+() => {
+// Module: crate::runnable
+// Provides: {"spawn_unchecked"}
+// Dependencies: {}
+# [doc = " Creates a new task without [`Send`], [`Sync`], and `'static` bounds."] # [doc = ""] # [doc = " This function is same as [`spawn()`], except it does not require [`Send`], [`Sync`], and"] # [doc = " `'static` on `future` and `schedule`."] # [doc = ""] # [doc = " # Safety"] # [doc = ""] # [doc = " - If `future` is not [`Send`], its [`Runnable`] must be used and dropped on the original"] # [doc = "   thread."] # [doc = " - If `future` is not `'static`, borrowed variables must outlive its [`Runnable`]."] # [doc = " - If `schedule` is not [`Send`] and [`Sync`], all instances of the [`Runnable`]'s [`Waker`]"] # [doc = "   must be used and dropped on the original thread."] # [doc = " - If `schedule` is not `'static`, borrowed variables must outlive all instances of the"] # [doc = "   [`Runnable`]'s [`Waker`]."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " // The future inside the task."] # [doc = " let future = async {"] # [doc = "     println!(\"Hello, world!\");"] # [doc = " };"] # [doc = ""] # [doc = " // If the task gets woken up, it will be sent into this channel."] # [doc = " let (s, r) = flume::unbounded();"] # [doc = " let schedule = move |runnable| s.send(runnable).unwrap();"] # [doc = ""] # [doc = " // Create a task with the future and the schedule function."] # [doc = " let (runnable, task) = unsafe { async_task::spawn_unchecked(future, schedule) };"] # [doc = " ```"] pub unsafe fn spawn_unchecked < F , S > (future : F , schedule : S) -> (Runnable , Task < F :: Output >) where F : Future , S : Schedule , { let builder = Builder :: new () ; spawn_unchecked ! (F , S , () , builder , schedule , raw => { future }) }
+};
+}

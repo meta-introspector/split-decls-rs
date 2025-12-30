@@ -4,6 +4,6 @@ macro_rules! Depcrate_wrappingimpl_501 {
 // Module: crate::wrapping
 // Provides: {"impl_501"}
 // Dependencies: {}
-impl < T : num_traits :: Zero + WrappingAdd > num_traits :: Zero for Wrapping < T > { # [inline] fn zero () -> Self { Wrapping (T :: zero ()) } # [inline] fn is_zero (& self) -> bool { self . 0 . is_zero () } }
+# [cfg (feature = "serde")] impl < 'de , T : Deserialize < 'de > > Deserialize < 'de > for Wrapping < T > { fn deserialize < D > (deserializer : D) -> Result < Self , D :: Error > where D : Deserializer < 'de > , { Ok (Self (T :: deserialize (deserializer) ?)) } }
 };
 }

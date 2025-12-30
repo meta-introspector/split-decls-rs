@@ -1,0 +1,9 @@
+// Generated macro for tests (module)
+macro_rules! Depcrate_nametests {
+() => {
+// Module: crate::name
+// Provides: {"tests"}
+// Dependencies: {}
+# [cfg (test)] mod tests { use super :: { character_name_normalize , character_name_normalize_bytes , symbolic_name_normalize , symbolic_name_normalize_bytes , } ; fn char_norm (s : & str) -> String { let mut s = s . to_string () ; character_name_normalize (& mut s) ; s } fn sym_norm (s : & str) -> String { let mut s = s . to_string () ; symbolic_name_normalize (& mut s) ; s } # [test] fn char_normalize () { assert_eq ! (char_norm ("HANGUL JUNGSEONG O-E") , "hanguljungseongo-e") ; assert_eq ! (char_norm ("HANGUL JUNGSEONG O-E _") , "hanguljungseongo-e") ; assert_eq ! (char_norm ("zero-width space") , "zerowidthspace") ; assert_eq ! (char_norm ("zerowidthspace") , "zerowidthspace") ; assert_eq ! (char_norm ("ZERO WIDTH SPACE") , "zerowidthspace") ; assert_eq ! (char_norm ("TIBETAN MARK TSA -PHRU") , "tibetanmarktsa-phru") ; assert_eq ! (char_norm ("tibetan_letter_-a") , "tibetanletter-a") ; } # [test] fn sym_normalize () { assert_eq ! (sym_norm ("Line_Break") , "linebreak") ; assert_eq ! (sym_norm ("Line-break") , "linebreak") ; assert_eq ! (sym_norm ("linebreak") , "linebreak") ; assert_eq ! (sym_norm ("BA") , "ba") ; assert_eq ! (sym_norm ("ba") , "ba") ; assert_eq ! (sym_norm ("Greek") , "greek") ; assert_eq ! (sym_norm ("isGreek") , "greek") ; assert_eq ! (sym_norm ("IS_Greek") , "greek") ; assert_eq ! (sym_norm ("isc") , "isc") ; assert_eq ! (sym_norm ("is c") , "isc") ; assert_eq ! (sym_norm ("is_c") , "isc") ; assert_eq ! (sym_norm ("IS") , "is") ; } # [test] fn valid_utf8_character () { let mut x = b"abc\xFFxyz" . to_vec () ; let y = character_name_normalize_bytes (& mut x) ; assert_eq ! (y , b"abcxyz") ; } # [test] fn valid_utf8_symbolic () { let mut x = b"abc\xFFxyz" . to_vec () ; let y = symbolic_name_normalize_bytes (& mut x) ; assert_eq ! (y , b"abcxyz") ; } }
+};
+}

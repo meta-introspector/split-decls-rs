@@ -1,0 +1,9 @@
+// Generated macro for resource (module)
+macro_rules! Depcrateresource {
+() => {
+// Module: crate
+// Provides: {"resource"}
+// Dependencies: {}
+# [cfg (feature = "MTLResource")] mod resource ;
+};
+}

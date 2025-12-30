@@ -1,0 +1,9 @@
+// Generated macro for parse_public_key (function)
+macro_rules! Depcrate_signatureparse_public_key {
+() => {
+// Module: crate::signature
+// Provides: {"parse_public_key"}
+// Dependencies: {}
+pub (crate) fn parse_public_key (bytes : & [u8] , algorithm : & 'static dyn VerificationAlgorithm ,) -> Result < ParsedPublicKey , KeyRejected > { let parsed_algorithm : & 'static dyn ParsedVerificationAlgorithm ; let key = if algorithm . type_id () == TypeId :: of :: < EcdsaVerificationAlgorithm > () { # [allow (clippy :: cast_ptr_alignment)] let ec_alg = unsafe { & * (algorithm as * const dyn VerificationAlgorithm) . cast :: < EcdsaVerificationAlgorithm > () } ; parsed_algorithm = ec_alg ; parse_ec_public_key (bytes , ec_alg . id . nid ()) ? } else if algorithm . type_id () == TypeId :: of :: < EdDSAParameters > () { # [allow (clippy :: cast_ptr_alignment)] let ed_alg = unsafe { & * (algorithm as * const dyn VerificationAlgorithm) . cast :: < EdDSAParameters > () } ; parsed_algorithm = ed_alg ; parse_ed25519_public_key (bytes) ? } else if algorithm . type_id () == TypeId :: of :: < RsaParameters > () { # [allow (clippy :: cast_ptr_alignment)] let rsa_alg = unsafe { & * (algorithm as * const dyn VerificationAlgorithm) . cast :: < RsaParameters > () } ; parsed_algorithm = rsa_alg ; parse_rsa_public_key (bytes) ? } else { # [cfg (all (feature = "unstable" , not (feature = "fips")))] if algorithm . type_id () == TypeId :: of :: < PqdsaVerificationAlgorithm > () { # [allow (clippy :: cast_ptr_alignment)] let pqdsa_alg = unsafe { & * (algorithm as * const dyn VerificationAlgorithm) . cast :: < PqdsaVerificationAlgorithm > () } ; parsed_algorithm = pqdsa_alg ; parse_pqdsa_public_key (bytes , pqdsa_alg . id) ? } else { unreachable ! () } # [cfg (any (not (feature = "unstable") , feature = "fips"))] unreachable ! () } ; let bytes = bytes . to_vec () . into_boxed_slice () ; Ok (ParsedPublicKey { algorithm , parsed_algorithm , key , bytes , }) }
+};
+}

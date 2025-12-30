@@ -1,0 +1,9 @@
+// Generated macro for Layered (struct)
+macro_rules! Depcrate_layer_layeredLayered {
+() => {
+// Module: crate::layer::layered
+// Provides: {"Layered"}
+// Dependencies: {}
+# [doc = " A [`Subscriber`] composed of a `Subscriber` wrapped by one or more"] # [doc = " [`Layer`]s."] # [doc = ""] # [doc = " [`Layer`]: crate::Layer"] # [doc = " [`Subscriber`]: tracing_core::Subscriber"] # [derive (Clone)] pub struct Layered < L , I , S = I > { # [doc = " The layer."] layer : L , # [doc = " The inner value that `self.layer` was layered onto."] # [doc = ""] # [doc = " If this is also a `Layer`, then this `Layered` will implement `Layer`."] # [doc = " If this is a `Subscriber`, then this `Layered` will implement"] # [doc = " `Subscriber` instead."] inner : I , # [doc = " Is `self.inner` a `Registry`?"] # [doc = ""] # [doc = " If so, when combining `Interest`s, we want to \"bubble up\" its"] # [doc = " `Interest`."] inner_is_registry : bool , # [doc = " Does `self.layer` have per-layer filters?"] # [doc = ""] # [doc = " This will be true if:"] # [doc = " - `self.inner` is a `Filtered`."] # [doc = " - `self.inner` is a tree of `Layered`s where _all_ arms of those"] # [doc = "   `Layered`s have per-layer filters."] # [doc = ""] # [doc = " Otherwise, if it's a `Layered` with one per-layer filter in one branch,"] # [doc = " but a non-per-layer-filtered layer in the other branch, this will be"] # [doc = " _false_, because the `Layered` is already handling the combining of"] # [doc = " per-layer filter `Interest`s and max level hints with its non-filtered"] # [doc = " `Layer`."] has_layer_filter : bool , # [doc = " Does `self.inner` have per-layer filters?"] # [doc = ""] # [doc = " This is determined according to the same rules as"] # [doc = " `has_layer_filter` above."] inner_has_layer_filter : bool , _s : PhantomData < fn (S) > , }
+};
+}

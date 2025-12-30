@@ -1,0 +1,9 @@
+// Generated macro for impl_8266 (impl)
+macro_rules! Depcrate_non_std_lazy_staticsimpl_8266 {
+() => {
+// Module: crate::non_std_lazy_statics
+// Provides: {"impl_8266"}
+// Dependencies: {}
+impl LazyInfo { fn from_item (cx : & LateContext < '_ > , item : & Item < '_ >) -> Option < Self > { if let ItemKind :: Static (_ , _ , ty , body_id) = item . kind && let Some (path_def_id) = ty . basic_res () . opt_def_id () && let hir :: TyKind :: Path (hir :: QPath :: Resolved (_ , path)) = ty . kind && paths :: ONCE_CELL_SYNC_LAZY . matches (cx , path_def_id) { let ty_span_no_args = path_span_without_args (path) ; let body = cx . tcx . hir_body (body_id) ; let mut new_fn_calls = FxIndexMap :: default () ; for_each_expr :: < () , () > (cx , body , | ex | { if let Some ((fn_did , call_span)) = fn_def_id_and_span_from_body (cx , ex , body_id) && paths :: ONCE_CELL_SYNC_LAZY_NEW . matches (cx , fn_did) { new_fn_calls . insert (call_span , fn_did) ; } std :: ops :: ControlFlow :: Continue (()) }) ; Some (LazyInfo { ty_span_no_args , item_hir_id : item . hir_id () , calls_span_and_id : new_fn_calls , }) } else { None } } fn lint (& self , cx : & LateContext < '_ > , sugg_map : & FxIndexMap < DefId , Option < String > >) { let mut app = Applicability :: MachineApplicable ; let mut suggs = vec ! [(self . ty_span_no_args , "std::sync::LazyLock" . to_string ())] ; for (span , def_id) in & self . calls_span_and_id { let maybe_sugg = sugg_map . get (def_id) . cloned () . flatten () ; if let Some (sugg) = maybe_sugg { suggs . push ((* span , sugg)) ; } else { app = Applicability :: Unspecified ; } } span_lint_hir_and_then (cx , NON_STD_LAZY_STATICS , self . item_hir_id , self . ty_span_no_args , "this type has been superseded by `LazyLock` in the standard library" , | diag | { diag . multipart_suggestion ("use `std::sync::LazyLock` instead" , suggs , app) ; } ,) ; } }
+};
+}

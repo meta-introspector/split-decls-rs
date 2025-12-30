@@ -1,0 +1,9 @@
+// Generated macro for TstInfo (struct)
+macro_rules! DepcrateTstInfo {
+() => {
+// Module: crate
+// Provides: {"TstInfo"}
+// Dependencies: {}
+# [doc = " ```text"] # [doc = " TSTInfo ::= SEQUENCE  {"] # [doc = "     version                      INTEGER  { v1(1) },"] # [doc = "     policy                       TSAPolicyId,"] # [doc = "     messageImprint               MessageImprint,"] # [doc = "       -- MUST have the same value as the similar field in"] # [doc = "       -- TimeStampReq"] # [doc = "     serialNumber                 INTEGER,"] # [doc = "       -- Time-Stamping users MUST be ready to accommodate integers"] # [doc = "       -- up to 160 bits."] # [doc = "     genTime                      GeneralizedTime,"] # [doc = "     accuracy                     Accuracy                 OPTIONAL,"] # [doc = "     ordering                     BOOLEAN             DEFAULT FALSE,"] # [doc = "     nonce                        INTEGER                  OPTIONAL,"] # [doc = "       -- MUST be present if the similar field was present"] # [doc = "       -- in TimeStampReq.  In that case it MUST have the same value."] # [doc = "     tsa                          [0] GeneralName          OPTIONAL,"] # [doc = "     extensions                   [1] IMPLICIT Extensions   OPTIONAL  }"] # [doc = " ```"] # [derive (Clone , Debug , Eq , PartialEq , Sequence)] pub struct TstInfo { pub version : TspVersion , pub policy : TsaPolicyId , pub message_imprint : MessageImprint , pub serial_number : Int , pub gen_time : GeneralizedTimeNanos , # [asn1 (optional = "true")] pub accuracy : Option < Accuracy > , # [asn1 (default = "Default::default")] pub ordering : bool , # [asn1 (optional = "true")] pub nonce : Option < Int > , # [asn1 (context_specific = "0" , tag_mode = "EXPLICIT" , optional = "true")] pub tsa : Option < GeneralName > , # [asn1 (context_specific = "1" , tag_mode = "IMPLICIT" , optional = "true")] pub extensions : Option < Extensions > , }
+};
+}

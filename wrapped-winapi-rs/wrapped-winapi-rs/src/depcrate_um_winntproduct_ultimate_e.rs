@@ -1,0 +1,9 @@
+// Generated macro for PRODUCT_ULTIMATE_E (const)
+macro_rules! Depcrate_um_winntPRODUCT_ULTIMATE_E {
+() => {
+// Module: crate::um::winnt
+// Provides: {"PRODUCT_ULTIMATE_E"}
+// Dependencies: {}
+pub const PRODUCT_ULTIMATE_E : DWORD = 0x00000047 ;
+};
+}

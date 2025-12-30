@@ -1,0 +1,9 @@
+// Generated macro for impl_95 (impl)
+macro_rules! Depcrate_dfa_onepassimpl_95 {
+() => {
+// Module: crate::dfa::onepass
+// Provides: {"impl_95"}
+// Dependencies: {}
+impl core :: fmt :: Debug for Transition { fn fmt (& self , f : & mut core :: fmt :: Formatter) -> core :: fmt :: Result { if self . is_dead () { return write ! (f , "0") ; } write ! (f , "{}" , self . state_id () . as_usize ()) ? ; if self . match_wins () { write ! (f , "-MW") ? ; } if ! self . epsilons () . is_empty () { write ! (f , "-{:?}" , self . epsilons ()) ? ; } Ok (()) } }
+};
+}

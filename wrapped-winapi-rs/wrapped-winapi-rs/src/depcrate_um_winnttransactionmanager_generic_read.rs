@@ -1,0 +1,9 @@
+// Generated macro for TRANSACTIONMANAGER_GENERIC_READ (const)
+macro_rules! Depcrate_um_winntTRANSACTIONMANAGER_GENERIC_READ {
+() => {
+// Module: crate::um::winnt
+// Provides: {"TRANSACTIONMANAGER_GENERIC_READ"}
+// Dependencies: {}
+pub const TRANSACTIONMANAGER_GENERIC_READ : DWORD = STANDARD_RIGHTS_READ | TRANSACTIONMANAGER_QUERY_INFORMATION ;
+};
+}

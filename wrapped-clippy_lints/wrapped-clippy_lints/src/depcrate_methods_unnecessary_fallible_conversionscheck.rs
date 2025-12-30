@@ -1,0 +1,9 @@
+// Generated macro for check (function)
+macro_rules! Depcrate_methods_unnecessary_fallible_conversionscheck {
+() => {
+// Module: crate::methods::unnecessary_fallible_conversions
+// Provides: {"check"}
+// Dependencies: {}
+fn check < 'tcx > (cx : & LateContext < 'tcx > , expr : & Expr < '_ > , node_args : ty :: GenericArgsRef < 'tcx > , kind : FunctionKind , primary_span : Span ,) { if let & [self_ty , other_ty] = node_args . as_slice () && self_ty != other_ty && let Some (self_ty) = self_ty . as_type () && let Some (from_into_trait) = cx . tcx . get_diagnostic_item (match kind { FunctionKind :: TryFromFunction (_) => sym :: From , FunctionKind :: TryIntoMethod | FunctionKind :: TryIntoFunction (_) => sym :: Into , }) && implements_trait (cx , self_ty , from_into_trait , & [other_ty]) && let Some (other_ty) = other_ty . as_type () { let parent_unwrap_call = get_parent_expr (cx , expr) . and_then (| parent | { if let ExprKind :: MethodCall (path , .. , span) = parent . kind && let sym :: unwrap | sym :: expect = path . ident . name { Some (span . with_lo (expr . span . hi ())) } else { None } }) ; let span = if let Some (unwrap_call) = parent_unwrap_call { primary_span . with_hi (unwrap_call . hi ()) } else { primary_span } ; let (source_ty , target_ty) = match kind { FunctionKind :: TryIntoMethod | FunctionKind :: TryIntoFunction (_) => (self_ty , other_ty) , FunctionKind :: TryFromFunction (_) => (other_ty , self_ty) , } ; let (applicability , sugg) = kind . appl_sugg (parent_unwrap_call , primary_span) ; span_lint_and_then (cx , UNNECESSARY_FALLIBLE_CONVERSIONS , span , "use of a fallible conversion when an infallible one could be used" , | diag | { with_forced_trimmed_paths ! ({ diag . note (format ! ("converting `{source_ty}` to `{target_ty}` cannot fail")) ; }) ; diag . multipart_suggestion ("use" , sugg , applicability) ; } ,) ; } }
+};
+}

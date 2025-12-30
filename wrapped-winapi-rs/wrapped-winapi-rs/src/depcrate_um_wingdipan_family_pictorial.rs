@@ -1,0 +1,9 @@
+// Generated macro for PAN_FAMILY_PICTORIAL (const)
+macro_rules! Depcrate_um_wingdiPAN_FAMILY_PICTORIAL {
+() => {
+// Module: crate::um::wingdi
+// Provides: {"PAN_FAMILY_PICTORIAL"}
+// Dependencies: {}
+pub const PAN_FAMILY_PICTORIAL : BYTE = 5 ;
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for use_2982 (use)
+macro_rules! Depcrate_ntzwapiuse_2982 {
+() => {
+// Module: crate::ntzwapi
+// Provides: {"use_2982"}
+// Dependencies: {}
+use crate :: ntioapi :: { FILE_INFORMATION_CLASS , FILE_IO_COMPLETION_INFORMATION , FS_INFORMATION_CLASS , IO_COMPLETION_INFORMATION_CLASS , IO_SESSION_EVENT , IO_SESSION_STATE , PFILE_BASIC_INFORMATION , PFILE_IO_COMPLETION_INFORMATION , PFILE_NETWORK_OPEN_INFORMATION , PIO_APC_ROUTINE , PIO_STATUS_BLOCK , } ;
+};
+}

@@ -1,7 +1,7 @@
 // Generated wrapped crate with macro-based items
 
-include!("depcratedefmac.rs");
 include!("depcratetests.rs");
+include!("depcratedefmac.rs");
 include!("modcrate.rs");
 
 // Execute all items

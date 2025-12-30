@@ -1,0 +1,45 @@
+// Generated module macro for crate::tz::offset
+macro_rules! Modcrate_tz_offset {
+() => {
+        Depcrate_tz_offsetuse_982!();
+        Depcrate_tz_offsetuse_983!();
+        Depcrate_tz_offsetDst!();
+        Depcrate_tz_offsetimpl_985!();
+        Depcrate_tz_offsetimpl_986!();
+        Depcrate_tz_offsetOffset!();
+        Depcrate_tz_offsetimpl_988!();
+        Depcrate_tz_offsetimpl_989!();
+        Depcrate_tz_offsetimpl_990!();
+        Depcrate_tz_offsetimpl_991!();
+        Depcrate_tz_offsetimpl_992!();
+        Depcrate_tz_offsetimpl_993!();
+        Depcrate_tz_offsetimpl_994!();
+        Depcrate_tz_offsetimpl_995!();
+        Depcrate_tz_offsetimpl_996!();
+        Depcrate_tz_offsetimpl_997!();
+        Depcrate_tz_offsetimpl_998!();
+        Depcrate_tz_offsetimpl_999!();
+        Depcrate_tz_offsetimpl_1000!();
+        Depcrate_tz_offsetimpl_1001!();
+        Depcrate_tz_offsetimpl_1002!();
+        Depcrate_tz_offsetimpl_1003!();
+        Depcrate_tz_offsetimpl_1004!();
+        Depcrate_tz_offsetimpl_1005!();
+        Depcrate_tz_offsetimpl_1006!();
+        Depcrate_tz_offsetOffsetArithmetic!();
+        Depcrate_tz_offsetimpl_1008!();
+        Depcrate_tz_offsetimpl_1009!();
+        Depcrate_tz_offsetimpl_1010!();
+        Depcrate_tz_offsetimpl_1011!();
+        Depcrate_tz_offsetimpl_1012!();
+        Depcrate_tz_offsetimpl_1013!();
+        Depcrate_tz_offsetimpl_1014!();
+        Depcrate_tz_offsetOffsetRound!();
+        Depcrate_tz_offsetimpl_1016!();
+        Depcrate_tz_offsetimpl_1017!();
+        Depcrate_tz_offsetimpl_1018!();
+        Depcrate_tz_offsetimpl_1019!();
+        Depcrate_tz_offsetOffsetConflict!();
+        Depcrate_tz_offsetimpl_1021!();
+    };
+}

@@ -1,0 +1,9 @@
+// Generated macro for find_lang_feature_issue (function)
+macro_rules! Depcratefind_lang_feature_issue {
+() => {
+// Module: crate
+// Provides: {"find_lang_feature_issue"}
+// Dependencies: {}
+fn find_lang_feature_issue (feature : Symbol) -> Option < NonZero < u32 > > { if let Some (f) = UNSTABLE_LANG_FEATURES . iter () . find (| f | f . name == feature) { return f . issue ; } if let Some (f) = ACCEPTED_LANG_FEATURES . iter () . find (| f | f . name == feature) { return f . issue ; } if let Some (f) = REMOVED_LANG_FEATURES . iter () . find (| f | f . feature . name == feature) { return f . feature . issue ; } panic ! ("feature `{feature}` is not declared anywhere") ; }
+};
+}

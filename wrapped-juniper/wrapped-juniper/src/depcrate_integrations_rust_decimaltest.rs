@@ -1,0 +1,9 @@
+// Generated macro for test (module)
+macro_rules! Depcrate_integrations_rust_decimaltest {
+() => {
+// Module: crate::integrations::rust_decimal
+// Provides: {"test"}
+// Dependencies: {}
+# [cfg (test)] mod test { use crate :: { FromInputValue as _ , InputValue , ToInputValue as _ , graphql } ; use super :: Decimal ; # [test] fn parses_correct_input () { for (input , expected) in [(graphql :: input_value ! ("4.20") , "4.20") , (graphql :: input_value ! ("0") , "0") , (graphql :: input_value ! ("999.999999999") , "999.999999999") , (graphql :: input_value ! ("875533788") , "875533788") , (graphql :: input_value ! (123) , "123") , (graphql :: input_value ! (0) , "0") , (graphql :: input_value ! (43.44) , "43.44") ,] { let input : InputValue = input ; let parsed = Decimal :: from_input_value (& input) ; let expected = expected . parse :: < Decimal > () . unwrap () ; assert ! (parsed . is_ok () , "failed to parse `{input:?}`: {:?}" , parsed . unwrap_err () ,) ; assert_eq ! (parsed . unwrap () , expected , "input: {input:?}") ; } } # [test] fn fails_on_invalid_input () { for input in [graphql :: input_value ! ("") , graphql :: input_value ! ("0,0") , graphql :: input_value ! ("12,") , graphql :: input_value ! ("1996-12-19T14:23:43") , graphql :: input_value ! ("99999999999999999999999999999999999999") , graphql :: input_value ! ("99999999999999999999999999999999999999.99") , graphql :: input_value ! ("i'm not even a number") , graphql :: input_value ! (null) , graphql :: input_value ! (false) ,] { let input : InputValue = input ; let parsed = Decimal :: from_input_value (& input) ; assert ! (parsed . is_err () , "allows input: {input:?}") ; } } # [test] fn formats_correctly () { for raw in ["4.20" , "0" , "999.999999999" , "875533788" , "123" , "43.44"] { let actual : InputValue = raw . parse :: < Decimal > () . unwrap () . to_input_value () ; assert_eq ! (actual , graphql :: input_value ! ((raw)) , "on value: {raw}") ; } } }
+};
+}

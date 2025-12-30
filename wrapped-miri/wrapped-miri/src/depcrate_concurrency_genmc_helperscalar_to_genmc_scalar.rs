@@ -1,0 +1,9 @@
+// Generated macro for scalar_to_genmc_scalar (function)
+macro_rules! Depcrate_concurrency_genmc_helperscalar_to_genmc_scalar {
+() => {
+// Module: crate::concurrency::genmc::helper
+// Provides: {"scalar_to_genmc_scalar"}
+// Dependencies: {}
+# [doc = " Inverse function to `scalar_to_genmc_scalar`."] # [doc = ""] # [doc = " Convert a Miri `Scalar` to a `GenmcScalar`."] # [doc = " To be able to restore pointer provenance from a `GenmcScalar`, the base address of the allocation of the pointer is also stored in the `GenmcScalar`."] # [doc = " We cannot use the `AllocId` instead of the base address, since Miri has no control over the `AllocId`, and it may change across executions."] # [doc = " Pointers with `Wildcard` provenance are not supported."] pub fn scalar_to_genmc_scalar < 'tcx > (ecx : & MiriInterpCx < 'tcx > , genmc_ctx : & GenmcCtx , scalar : Scalar ,) -> InterpResult < 'tcx , GenmcScalar > { interp_ok (match scalar { rustc_const_eval :: interpret :: Scalar :: Int (scalar_int) => { let value : u64 = scalar_int . to_uint (scalar_int . size ()) . try_into () . unwrap () ; GenmcScalar { value , provenance : 0 , is_init : true } } rustc_const_eval :: interpret :: Scalar :: Ptr (pointer , size) => { let addr = crate :: Pointer :: from (pointer) . addr () ; if let crate :: Provenance :: Wildcard = pointer . provenance { throw_unsup_format ! ("Pointers with wildcard provenance not allowed in GenMC mode") ; } let (alloc_id , _size , _prov_extra) = rustc_const_eval :: interpret :: Machine :: ptr_get_alloc (ecx , pointer , size . into ()) . unwrap () ; let base_addr = ecx . addr_from_alloc_id (alloc_id , None) ? ; genmc_ctx . exec_state . genmc_shared_allocs_map . borrow_mut () . insert (base_addr , alloc_id) ; GenmcScalar { value : addr . bytes () , provenance : base_addr , is_init : true } } }) }
+};
+}

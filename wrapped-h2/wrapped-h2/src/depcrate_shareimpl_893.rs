@@ -1,0 +1,9 @@
+// Generated macro for impl_893 (impl)
+macro_rules! Depcrate_shareimpl_893 {
+() => {
+// Module: crate::share
+// Provides: {"impl_893"}
+// Dependencies: {}
+impl FlowControl { pub (crate) fn new (inner : proto :: OpaqueStreamRef) -> Self { FlowControl { inner } } # [doc = " Returns the stream ID of the stream whose capacity will"] # [doc = " be released by this `FlowControl`."] pub fn stream_id (& self) -> StreamId { StreamId :: from_internal (self . inner . stream_id ()) } # [doc = " Get the current available capacity of data this stream *could* receive."] pub fn available_capacity (& self) -> isize { self . inner . available_recv_capacity () } # [doc = " Get the currently *used* capacity for this stream."] # [doc = ""] # [doc = " This is the amount of bytes that can be released back to the remote."] pub fn used_capacity (& self) -> usize { self . inner . used_recv_capacity () as usize } # [doc = " Release window capacity back to remote stream."] # [doc = ""] # [doc = " This releases capacity back to the stream level and the connection level"] # [doc = " windows. Both window sizes will be increased by `sz`."] # [doc = ""] # [doc = " See [struct level] documentation for more details."] # [doc = ""] # [doc = " # Errors"] # [doc = ""] # [doc = " This function errors if increasing the receive window size by `sz` would"] # [doc = " result in a window size greater than the target window size. In other"] # [doc = " words, the caller cannot release more capacity than data has been"] # [doc = " received. If 1024 bytes of data have been received, at most 1024 bytes"] # [doc = " can be released."] # [doc = ""] # [doc = " [struct level]: #"] pub fn release_capacity (& mut self , sz : usize) -> Result < () , crate :: Error > { if sz > proto :: MAX_WINDOW_SIZE as usize { return Err (UserError :: ReleaseCapacityTooBig . into ()) ; } self . inner . release_capacity (sz as proto :: WindowSize) . map_err (Into :: into) } }
+};
+}

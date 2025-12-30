@@ -1,0 +1,42 @@
+// Generated module macro for crate
+macro_rules! Modcrate {
+() => {
+        Depcrateuse_1!();
+        Depcrateuse_2!();
+        Depcrateuse_3!();
+        Depcrateuse_4!();
+        Depcrateuse_5!();
+        Depcrateuse_6!();
+        Depcrateuse_7!();
+        Depcrateuse_8!();
+        Depcrateuse_9!();
+        Depcrateuse_10!();
+        Depcrateuse_11!();
+        Depcrateuse_12!();
+        Depcrateuse_13!();
+        Depcrateuse_14!();
+        Depcrateid_to_string!();
+        DepcrateAnnNode!();
+        DepcrateNested!();
+        DepcratePpAnn!();
+        Depcrateimpl_19!();
+        DepcrateState!();
+        Depcrateimpl_21!();
+        Depcrateimpl_22!();
+        Depcrateimpl_23!();
+        Depcrateimpl_24!();
+        DepcrateINDENT_UNIT!();
+        Depcrateprint_crate!();
+        Depcrateto_string!();
+        Depcrateattribute_to_string!();
+        Depcratety_to_string!();
+        Depcrateqpath_to_string!();
+        Depcratepat_to_string!();
+        Depcrateexpr_to_string!();
+        Depcrateitem_to_string!();
+        Depcrateimpl_34!();
+        Depcrateexpr_requires_semi_to_be_stmt!();
+        Depcratestmt_ends_with_semi!();
+        Depcratecontains_exterior_struct_lit!();
+    };
+}

@@ -1,0 +1,9 @@
+// Generated macro for PCACTIVATION_CONTEXT_RUN_LEVEL_INFORMATION (type)
+macro_rules! Depcrate_um_winntPCACTIVATION_CONTEXT_RUN_LEVEL_INFORMATION {
+() => {
+// Module: crate::um::winnt
+// Provides: {"PCACTIVATION_CONTEXT_RUN_LEVEL_INFORMATION"}
+// Dependencies: {}
+pub type PCACTIVATION_CONTEXT_RUN_LEVEL_INFORMATION = * const ACTIVATION_CONTEXT_RUN_LEVEL_INFORMATION ;
+};
+}

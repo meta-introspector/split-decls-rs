@@ -1,0 +1,9 @@
+// Generated macro for CERT_ACCESS_STATE_SHARED_USER_FLAG (const)
+macro_rules! Depcrate_um_wincryptCERT_ACCESS_STATE_SHARED_USER_FLAG {
+() => {
+// Module: crate::um::wincrypt
+// Provides: {"CERT_ACCESS_STATE_SHARED_USER_FLAG"}
+// Dependencies: {}
+pub const CERT_ACCESS_STATE_SHARED_USER_FLAG : DWORD = 0x10 ;
+};
+}

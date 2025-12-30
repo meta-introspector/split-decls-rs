@@ -1,0 +1,9 @@
+// Generated macro for domain_to_unicode (function)
+macro_rules! Depcratedomain_to_unicode {
+() => {
+// Module: crate
+// Provides: {"domain_to_unicode"}
+// Dependencies: {}
+# [doc = " The [domain to Unicode](https://url.spec.whatwg.org/#concept-domain-to-unicode) algorithm;"] # [doc = " version returning `String` and no ASCII deny list (i.e. _UseSTD3ASCIIRules=false_)."] # [doc = ""] # [doc = " This function exists for backward-compatibility. Consider using [`Uts46::to_user_interface`]"] # [doc = " or [`Uts46::to_unicode`]."] # [doc = ""] # [doc = " Return the Unicode representation of a domain name,"] # [doc = " normalizing characters (upper-case to lower-case and other kinds of equivalence)"] # [doc = " and decoding Punycode as necessary."] # [doc = ""] # [doc = " If the second item of the tuple indicates an error, the first item of the tuple"] # [doc = " denotes errors using the REPLACEMENT CHARACTERs in order to be able to illustrate"] # [doc = " errors to the user. When the second item of the return tuple signals an error,"] # [doc = " the first item of the tuple must not be used in a network protocol."] pub fn domain_to_unicode (domain : & str) -> (String , Result < () , Errors >) { let (cow , result) = Uts46 :: new () . to_unicode (domain . as_bytes () , uts46 :: AsciiDenyList :: EMPTY , uts46 :: Hyphens :: Allow ,) ; (cow . into_owned () , result) }
+};
+}

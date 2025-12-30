@@ -1,0 +1,43 @@
+// Generated module macro for crate::serde
+macro_rules! Modcrate_serde {
+() => {
+        Depcrate_serdeitem!();
+        Depcrate_serdeiso8601!();
+        Depcrate_serderfc2822!();
+        Depcrate_serderfc3339!();
+        Depcrate_serdetimestamp!();
+        Depcrate_serdevisitor!();
+        Depcrate_serdeuse_953!();
+        Depcrate_serdeuse_954!();
+        Depcrate_serdeuse_955!();
+        Depcrate_serdeuse_956!();
+        Depcrate_serdeuse_957!();
+        Depcrate_serdeuse_958!();
+        Depcrate_serdeuse_959!();
+        Depcrate_serdeuse_960!();
+        Depcrate_serdeDATE_FORMAT!();
+        Depcrate_serdeimpl_962!();
+        Depcrate_serdeimpl_963!();
+        Depcrate_serdeimpl_964!();
+        Depcrate_serdeimpl_965!();
+        Depcrate_serdeOFFSET_DATE_TIME_FORMAT!();
+        Depcrate_serdeimpl_967!();
+        Depcrate_serdeimpl_968!();
+        Depcrate_serdePRIMITIVE_DATE_TIME_FORMAT!();
+        Depcrate_serdeimpl_970!();
+        Depcrate_serdeimpl_971!();
+        Depcrate_serdeUTC_DATE_TIME_FORMAT!();
+        Depcrate_serdeimpl_973!();
+        Depcrate_serdeimpl_974!();
+        Depcrate_serdeTIME_FORMAT!();
+        Depcrate_serdeimpl_976!();
+        Depcrate_serdeimpl_977!();
+        Depcrate_serdeUTC_OFFSET_FORMAT!();
+        Depcrate_serdeimpl_979!();
+        Depcrate_serdeimpl_980!();
+        Depcrate_serdeimpl_981!();
+        Depcrate_serdeimpl_982!();
+        Depcrate_serdeimpl_983!();
+        Depcrate_serdeimpl_984!();
+    };
+}

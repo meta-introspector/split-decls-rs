@@ -1,0 +1,9 @@
+// Generated macro for impl_52 (impl)
+macro_rules! Depcrate_affineimpl_52 {
+() => {
+// Module: crate::affine
+// Provides: {"impl_52"}
+// Dependencies: {}
+impl < C > TryFrom < & EncodedPoint < C > > for AffinePoint < C > where C : PrimeCurveParams , FieldBytes < C > : Copy , FieldBytesSize < C > : ModulusSize , CompressedPoint < C > : Copy , { type Error = Error ; fn try_from (point : & EncodedPoint < C >) -> Result < AffinePoint < C > > { Option :: from (AffinePoint :: < C > :: from_encoded_point (point)) . ok_or (Error) } }
+};
+}

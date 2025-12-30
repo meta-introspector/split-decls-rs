@@ -1,0 +1,9 @@
+// Generated macro for impl_377 (impl)
+macro_rules! Depcrateimpl_377 {
+() => {
+// Module: crate
+// Provides: {"impl_377"}
+// Dependencies: {}
+impl fmt :: Debug for Span { fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { fn fallback (span : Span , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { f . debug_struct ("Span") . field ("lo" , & span . lo ()) . field ("hi" , & span . hi ()) . field ("ctxt" , & span . ctxt ()) . finish () } if SESSION_GLOBALS . is_set () { with_session_globals (| session_globals | { if let Some (source_map) = & session_globals . source_map { write ! (f , "{} ({:?})" , source_map . span_to_diagnostic_string (* self) , self . ctxt ()) } else { fallback (* self , f) } }) } else { fallback (* self , f) } } }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for impl_681 (impl)
+macro_rules! Depcrate_polonius_legacy_loan_killsimpl_681 {
+() => {
+// Module: crate::polonius::legacy::loan_kills
+// Provides: {"impl_681"}
+// Dependencies: {}
+impl < 'a , 'tcx > Visitor < 'tcx > for LoanKillsGenerator < 'a , 'tcx > { fn visit_statement (& mut self , statement : & Statement < 'tcx > , location : Location) { self . facts . cfg_edge . push ((self . location_table . start_index (location) , self . location_table . mid_index (location) ,)) ; self . facts . cfg_edge . push ((self . location_table . mid_index (location) , self . location_table . start_index (location . successor_within_block ()) ,)) ; if let StatementKind :: StorageDead (local) = statement . kind { self . record_killed_borrows_for_local (local , location) ; } self . super_statement (statement , location) ; } fn visit_assign (& mut self , place : & Place < 'tcx > , rvalue : & Rvalue < 'tcx > , location : Location) { self . record_killed_borrows_for_place (* place , location) ; self . super_assign (place , rvalue , location) ; } fn visit_terminator (& mut self , terminator : & Terminator < 'tcx > , location : Location) { self . facts . cfg_edge . push ((self . location_table . start_index (location) , self . location_table . mid_index (location) ,)) ; let successor_blocks = terminator . successors () ; self . facts . cfg_edge . reserve (successor_blocks . size_hint () . 0) ; for successor_block in successor_blocks { self . facts . cfg_edge . push ((self . location_table . mid_index (location) , self . location_table . start_index (successor_block . start_location ()) ,)) ; } if let TerminatorKind :: Call { destination , .. } = terminator . kind { self . record_killed_borrows_for_place (destination , location) ; } self . super_terminator (terminator , location) ; } }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for check (function)
+macro_rules! Depcrate_matches_match_as_refcheck {
+() => {
+// Module: crate::matches::match_as_ref
+// Provides: {"check"}
+// Dependencies: {}
+pub (crate) fn check (cx : & LateContext < '_ > , ex : & Expr < '_ > , arms : & [Arm < '_ >] , expr : & Expr < '_ >) { if let [arm1 , arm2] = arms && arm1 . guard . is_none () && arm2 . guard . is_none () && let Some (arm_ref_mutbl) = if is_none_arm (cx , arm1) { as_ref_some_arm (cx , arm2) } else if is_none_arm (cx , arm2) { as_ref_some_arm (cx , arm1) } else { None } && let output_ty = cx . typeck_results () . expr_ty (expr) && let input_ty = cx . typeck_results () . expr_ty (ex) && let Some (input_ty) = option_arg_ty (cx , input_ty) && let Some (output_ty) = option_arg_ty (cx , output_ty) && let ty :: Ref (_ , output_ty , output_mutbl) = * output_ty . kind () { let method = match arm_ref_mutbl { Mutability :: Not => "as_ref" , Mutability :: Mut => "as_mut" , } ; let need_as_ref = arm_ref_mutbl == Mutability :: Mut && output_mutbl == Mutability :: Not ; let cast = if input_ty == output_ty { "" } else { ".map(|x| x as _)" } ; let mut applicability = Applicability :: MachineApplicable ; span_lint_and_then (cx , MATCH_AS_REF , expr . span , format ! ("manual implementation of `Option::{method}`") , | diag | { if need_as_ref { diag . note ("but the type is coerced to a non-mutable reference, and so `as_ref` can used instead") ; diag . span_suggestion_verbose (expr . span , "use `Option::as_ref()`" , format ! ("{}.as_ref(){cast}" , Sugg :: hir_with_applicability (cx , ex , "_" , & mut applicability) . maybe_paren () ,) , applicability ,) ; } else { diag . span_suggestion_verbose (expr . span , format ! ("use `Option::{method}()` directly") , format ! ("{}.{method}(){cast}" , Sugg :: hir_with_applicability (cx , ex , "_" , & mut applicability) . maybe_paren () ,) , applicability ,) ; } } ,) ; } }
+};
+}

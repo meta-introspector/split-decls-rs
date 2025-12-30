@@ -1,0 +1,9 @@
+// Generated macro for self_hosting_parsing (function)
+macro_rules! Depcrate_testsself_hosting_parsing {
+() => {
+// Module: crate::tests
+// Provides: {"self_hosting_parsing"}
+// Dependencies: {}
+# [doc = " Test that Rust-analyzer can parse and validate the rust-analyzer"] # [test] fn self_hosting_parsing () { let crates_dir = project_root () . join ("crates") ; let mut files = Vec :: new () ; let mut work = vec ! [crates_dir . into_std_path_buf ()] ; while let Some (dir) = work . pop () { for entry in dir . read_dir () . unwrap () { let entry = entry . unwrap () ; let file_type = entry . file_type () . unwrap () ; let path = entry . path () ; let file_name = & path . file_name () . unwrap_or_default () . to_str () . unwrap_or_default () ; let is_hidden = file_name . starts_with ('.') ; if ! is_hidden { if file_type . is_dir () { work . push (path) ; } else if file_type . is_file () && file_name . ends_with (".rs") { files . push (path) ; } } } } files . retain (| path | { ! path . components () . any (| component | component . as_os_str () == "test_data") }) ; assert ! (files . len () > 100 , "self_hosting_parsing found too few files - is it running in the right directory?") ; let errors = files . into_par_iter () . filter_map (| file | { let text = read_text (& file) ; match SourceFile :: parse (& text , Edition :: CURRENT) . ok () { Ok (_) => None , Err (err) => Some ((file , err)) , } }) . collect :: < Vec < _ > > () ; if ! errors . is_empty () { let errors = errors . into_iter () . fold (String :: new () , | mut acc , (path , err) | { format_to_acc ! (acc , "{}: {:?}\n" , path . display () , err [0]) }) ; panic ! ("Parsing errors:\n{errors}\n") ; } }
+};
+}

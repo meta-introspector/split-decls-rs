@@ -1,0 +1,9 @@
+// Generated macro for eventfd_read (function)
+macro_rules! Depcrate_shims_unix_linux_like_eventfdeventfd_read {
+() => {
+// Module: crate::shims::unix::linux_like::eventfd
+// Provides: {"eventfd_read"}
+// Dependencies: {}
+# [doc = " Block thread if the current counter is 0,"] # [doc = " else just return the current counter value to the caller and set the counter to 0."] fn eventfd_read < 'tcx > (buf_place : MPlaceTy < 'tcx > , eventfd : FileDescriptionRef < EventFd > , ecx : & mut MiriInterpCx < 'tcx > , finish : DynMachineCallback < 'tcx , Result < usize , IoError > > ,) -> InterpResult < 'tcx > { let counter = eventfd . counter . replace (0) ; if counter == 0 { if eventfd . is_nonblock { return finish . call (ecx , Err (ErrorKind :: WouldBlock . into ())) ; } eventfd . blocked_read_tid . borrow_mut () . push (ecx . active_thread ()) ; let weak_eventfd = FileDescriptionRef :: downgrade (& eventfd) ; ecx . block_thread (BlockReason :: Eventfd , None , callback ! (@ capture <'tcx > { buf_place : MPlaceTy <'tcx >, finish : DynMachineCallback <'tcx , Result < usize , IoError >>, weak_eventfd : WeakFileDescriptionRef < EventFd >, } | this , unblock : UnblockKind | { assert_eq ! (unblock , UnblockKind :: Ready) ; let eventfd_ref = weak_eventfd . upgrade () . unwrap () ; eventfd_read (buf_place , eventfd_ref , this , finish) }) ,) ; } else { ecx . acquire_clock (& eventfd . clock . borrow ()) ; ecx . write_int (counter , & buf_place) ? ; let waiting_threads = std :: mem :: take (& mut * eventfd . blocked_write_tid . borrow_mut ()) ; for thread_id in waiting_threads { ecx . unblock_thread (thread_id , BlockReason :: Eventfd) ? ; } ecx . check_and_update_readiness (eventfd) ? ; return finish . call (ecx , Ok (buf_place . layout . size . bytes_usize ())) ; } interp_ok (()) }
+};
+}

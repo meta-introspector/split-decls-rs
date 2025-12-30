@@ -1,0 +1,43 @@
+// Generated module macro for crate::const_eval::machine
+macro_rules! Modcrate_const_eval_machine {
+() => {
+        Depcrate_const_eval_machineuse_245!();
+        Depcrate_const_eval_machineuse_246!();
+        Depcrate_const_eval_machineuse_247!();
+        Depcrate_const_eval_machineuse_248!();
+        Depcrate_const_eval_machineuse_249!();
+        Depcrate_const_eval_machineuse_250!();
+        Depcrate_const_eval_machineuse_251!();
+        Depcrate_const_eval_machineuse_252!();
+        Depcrate_const_eval_machineuse_253!();
+        Depcrate_const_eval_machineuse_254!();
+        Depcrate_const_eval_machineuse_255!();
+        Depcrate_const_eval_machineuse_256!();
+        Depcrate_const_eval_machineuse_257!();
+        Depcrate_const_eval_machineuse_258!();
+        Depcrate_const_eval_machineuse_259!();
+        Depcrate_const_eval_machineuse_260!();
+        Depcrate_const_eval_machineuse_261!();
+        Depcrate_const_eval_machineuse_262!();
+        Depcrate_const_eval_machineuse_263!();
+        Depcrate_const_eval_machineuse_264!();
+        Depcrate_const_eval_machineuse_265!();
+        Depcrate_const_eval_machineLINT_TERMINATOR_LIMIT!();
+        Depcrate_const_eval_machineTINY_LINT_TERMINATOR_LIMIT!();
+        Depcrate_const_eval_machinePROGRESS_INDICATOR_START!();
+        Depcrate_const_eval_machineCompileTimeMachine!();
+        Depcrate_const_eval_machineCheckAlignment!();
+        Depcrate_const_eval_machineCanAccessMutGlobal!();
+        Depcrate_const_eval_machineimpl_272!();
+        Depcrate_const_eval_machineimpl_273!();
+        Depcrate_const_eval_machineimpl_274!();
+        Depcrate_const_eval_machineCompileTimeInterpCx!();
+        Depcrate_const_eval_machineMemoryKind!();
+        Depcrate_const_eval_machineimpl_277!();
+        Depcrate_const_eval_machineimpl_278!();
+        Depcrate_const_eval_machineimpl_279!();
+        Depcrate_const_eval_machineimpl_280!();
+        Depcrate_const_eval_machineimpl_281!();
+        Depcrate_const_eval_machineimpl_282!();
+    };
+}

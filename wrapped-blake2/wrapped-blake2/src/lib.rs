@@ -1,0 +1,70 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcrate_as_bytesuse_8.rs");
+include!("depcrate_as_bytesasbytes.rs");
+include!("depcrate_as_bytesimpl_14.rs");
+include!("depcrateuse_3.rs");
+include!("depcrate_constsblake2b_iv.rs");
+include!("depcrate_constsblake2s_iv.rs");
+include!("depcrateblake2b256.rs");
+include!("depcrateblake2smac256.rs");
+include!("depcrateblake2s128.rs");
+include!("depcrate_as_bytesimpl_13.rs");
+include!("depcrateuse_4.rs");
+include!("depcrate_constssigma.rs");
+include!("depcrate_simdsimd_opt.rs");
+include!("depcrate_simdsimdint.rs");
+include!("depcrate_as_bytesimpl_16.rs");
+include!("depcrate_as_bytesuse_7.rs");
+include!("depcrate_macrosblake2_mac_impl.rs");
+include!("depcrateconsts.rs");
+include!("depcrate_as_bytesimpl_12.rs");
+include!("depcrateuse_39.rs");
+include!("depcrate_simduse_29.rs");
+include!("depcrate_simdsimdop.rs");
+include!("depcrate_simdmacro_32.rs");
+include!("depcrate_simdimpl_vector4.rs");
+include!("depcrateuse_37.rs");
+include!("depcratemacro_41.rs");
+include!("depcrate_as_bytesimpl_11.rs");
+include!("depcrate_simdvector4.rs");
+include!("depcrateimpl_42.rs");
+include!("depcratemacro_46.rs");
+include!("depcrateblake2bmac512.rs");
+include!("depcratemacro_49.rs");
+include!("depcratesimd.rs");
+include!("depcrate_as_bytessafe.rs");
+include!("depcrate_as_bytesimpl_15.rs");
+include!("depcrate_simdsimdty.rs");
+include!("depcrate_as_bytesimpl_19.rs");
+include!("depcrateas_bytes.rs");
+include!("depcrateuse_38.rs");
+include!("depcrateuse_1.rs");
+include!("depcrateuse_5.rs");
+include!("depcrate_as_bytesimpl_18.rs");
+include!("depcrateblake2b512.rs");
+include!("depcrateimpl_50.rs");
+include!("depcratemacros.rs");
+include!("depcrateblake2s256.rs");
+include!("depcrateuse_2.rs");
+include!("depcrateblake2b128.rs");
+include!("depcratemacro_53.rs");
+include!("depcrate_as_bytesimpl_17.rs");
+include!("depcrate_simdmacro_33.rs");
+include!("depcratemacro_40.rs");
+include!("depcratemacro_48.rs");
+include!("depcrate_macrosblake2_impl.rs");
+include!("modcrate_macros.rs");
+include!("modcrate_as_bytes.rs");
+include!("modcrate_simd.rs");
+include!("modcrate.rs");
+include!("modcrate_consts.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate_macros!();
+    Modcrate_as_bytes!();
+    Modcrate_simd!();
+    Modcrate!();
+    Modcrate_consts!();
+}

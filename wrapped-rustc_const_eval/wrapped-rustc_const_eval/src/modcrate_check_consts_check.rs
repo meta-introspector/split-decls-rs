@@ -1,0 +1,42 @@
+// Generated module macro for crate::check_consts::check
+macro_rules! Modcrate_check_consts_check {
+() => {
+        Depcrate_check_consts_checkuse_11!();
+        Depcrate_check_consts_checkuse_12!();
+        Depcrate_check_consts_checkuse_13!();
+        Depcrate_check_consts_checkuse_14!();
+        Depcrate_check_consts_checkuse_15!();
+        Depcrate_check_consts_checkuse_16!();
+        Depcrate_check_consts_checkuse_17!();
+        Depcrate_check_consts_checkuse_18!();
+        Depcrate_check_consts_checkuse_19!();
+        Depcrate_check_consts_checkuse_20!();
+        Depcrate_check_consts_checkuse_21!();
+        Depcrate_check_consts_checkuse_22!();
+        Depcrate_check_consts_checkuse_23!();
+        Depcrate_check_consts_checkuse_24!();
+        Depcrate_check_consts_checkuse_25!();
+        Depcrate_check_consts_checkuse_26!();
+        Depcrate_check_consts_checkuse_27!();
+        Depcrate_check_consts_checkuse_28!();
+        Depcrate_check_consts_checkuse_29!();
+        Depcrate_check_consts_checkuse_30!();
+        Depcrate_check_consts_checkuse_31!();
+        Depcrate_check_consts_checkuse_32!();
+        Depcrate_check_consts_checkuse_33!();
+        Depcrate_check_consts_checkuse_34!();
+        Depcrate_check_consts_checkuse_35!();
+        Depcrate_check_consts_checkuse_36!();
+        Depcrate_check_consts_checkuse_37!();
+        Depcrate_check_consts_checkQualifResults!();
+        Depcrate_check_consts_checkConstConditionsHold!();
+        Depcrate_check_consts_checkQualifs!();
+        Depcrate_check_consts_checkimpl_41!();
+        Depcrate_check_consts_checkChecker!();
+        Depcrate_check_consts_checkimpl_43!();
+        Depcrate_check_consts_checkimpl_44!();
+        Depcrate_check_consts_checkimpl_45!();
+        Depcrate_check_consts_checkis_int_bool_float_or_char!();
+        Depcrate_check_consts_checkemit_unstable_in_stable_exposed_error!();
+    };
+}

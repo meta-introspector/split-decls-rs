@@ -1,0 +1,9 @@
+// Generated macro for macro_1761 (macro)
+macro_rules! Depcrate_docmacro_1761 {
+() => {
+// Module: crate::doc
+// Provides: {"macro_1761"}
+// Dependencies: {}
+declare_clippy_lint ! { # [doc = " ### What it does"] # [doc = " Checks for the presence of `_`, `::` or camel-case words"] # [doc = " outside ticks in documentation."] # [doc = ""] # [doc = " ### Why is this bad?"] # [doc = " *Rustdoc* supports markdown formatting, `_`, `::` and"] # [doc = " camel-case probably indicates some code which should be included between"] # [doc = " ticks. `_` can also be used for emphasis in markdown, this lint tries to"] # [doc = " consider that."] # [doc = ""] # [doc = " ### Known problems"] # [doc = " Lots of bad docs won’t be fixed, what the lint checks"] # [doc = " for is limited, and there are still false positives. HTML elements and their"] # [doc = " content are not linted."] # [doc = ""] # [doc = " In addition, when writing documentation comments, including `[]` brackets"] # [doc = " inside a link text would trip the parser. Therefore, documenting link with"] # [doc = " `[`SmallVec<[T; INLINE_CAPACITY]>`]` and then [`SmallVec<[T; INLINE_CAPACITY]>`]: SmallVec"] # [doc = " would fail."] # [doc = ""] # [doc = " ### Examples"] # [doc = " ```no_run"] # [doc = " /// Do something with the foo_bar parameter. See also"] # [doc = " /// that::other::module::foo."] # [doc = " // ^ `foo_bar` and `that::other::module::foo` should be ticked."] # [doc = " fn doit(foo_bar: usize) {}"] # [doc = " ```"] # [doc = ""] # [doc = " ```no_run"] # [doc = " // Link text with `[]` brackets should be written as following:"] # [doc = " /// Consume the array and return the inner"] # [doc = " /// [`SmallVec<[T; INLINE_CAPACITY]>`][SmallVec]."] # [doc = " /// [SmallVec]: SmallVec"] # [doc = " fn main() {}"] # [doc = " ```"] # [clippy :: version = "pre 1.29.0"] pub DOC_MARKDOWN , pedantic , "presence of `_`, `::` or camel-case outside backticks in documentation" }
+};
+}

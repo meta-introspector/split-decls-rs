@@ -1,0 +1,9 @@
+// Generated macro for impl_1290 (impl)
+macro_rules! Depcrate_mock_commandimpl_1290 {
+() => {
+// Module: crate::mock_command
+// Provides: {"impl_1290"}
+// Dependencies: {}
+# [doc = " Trivial implementation of `RunCommand` for `std::process::Command`."] # [async_trait] impl RunCommand for AsyncCommand { type C = Child ; fn arg < S : AsRef < OsStr > > (& mut self , arg : S) -> & mut AsyncCommand { self . inner () . arg (arg) ; self } fn args < S : AsRef < OsStr > > (& mut self , args : & [S]) -> & mut AsyncCommand { self . inner () . args (args) ; self } fn env < K , V > (& mut self , key : K , val : V) -> & mut AsyncCommand where K : AsRef < OsStr > , V : AsRef < OsStr > , { self . inner () . env (key , val) ; self } fn envs < I , K , V > (& mut self , vars : I) -> & mut Self where I : IntoIterator < Item = (K , V) > , K : AsRef < OsStr > , V : AsRef < OsStr > , { self . inner () . envs (vars) ; self } fn env_clear (& mut self) -> & mut AsyncCommand { self . inner () . env_clear () ; self } fn current_dir < P : AsRef < Path > > (& mut self , dir : P) -> & mut AsyncCommand { self . inner () . current_dir (dir) ; self } fn stdin (& mut self , cfg : Stdio) -> & mut AsyncCommand { self . inner () . stdin (cfg) ; self } fn stdout (& mut self , cfg : Stdio) -> & mut AsyncCommand { self . inner () . stdout (cfg) ; self } fn stderr (& mut self , cfg : Stdio) -> & mut AsyncCommand { self . inner () . stderr (cfg) ; self } async fn spawn (& mut self) -> Result < Child > { let mut inner = self . inner . take () . unwrap () ; inner . env_remove ("MAKEFLAGS") ; inner . env_remove ("MFLAGS") ; inner . env_remove ("CARGO_MAKEFLAGS") ; self . jobserver . configure (& mut inner) ; let token = self . jobserver . acquire () . await ? ; let mut inner = tokio :: process :: Command :: from (inner) ; let child = inner . spawn () . with_context (| | format ! ("failed to spawn {:?}" , inner)) ? ; Ok (Child { inner : child , token , }) } }
+};
+}

@@ -1,0 +1,56 @@
+// Generated module macro for crate::um::dinput
+macro_rules! Modcrate_um_dinput {
+() => {
+        Depcrate_um_dinputmacro_27342!();
+        Depcrate_um_dinputmacro_27343!();
+        Depcrate_um_dinputmacro_27344!();
+        Depcrate_um_dinputmacro_27345!();
+        Depcrate_um_dinputmacro_27346!();
+        Depcrate_um_dinputmacro_27347!();
+        Depcrate_um_dinputmacro_27348!();
+        Depcrate_um_dinputmacro_27349!();
+        Depcrate_um_dinputmacro_27350!();
+        Depcrate_um_dinputmacro_27351!();
+        Depcrate_um_dinputmacro_27352!();
+        Depcrate_um_dinputmacro_27353!();
+        Depcrate_um_dinputmacro_27354!();
+        Depcrate_um_dinputmacro_27355!();
+        Depcrate_um_dinputmacro_27356!();
+        Depcrate_um_dinputmacro_27357!();
+        Depcrate_um_dinputmacro_27358!();
+        Depcrate_um_dinputmacro_27359!();
+        Depcrate_um_dinputmacro_27360!();
+        Depcrate_um_dinputmacro_27361!();
+        Depcrate_um_dinputmacro_27362!();
+        Depcrate_um_dinputmacro_27363!();
+        Depcrate_um_dinputmacro_27364!();
+        Depcrate_um_dinputmacro_27365!();
+        Depcrate_um_dinputmacro_27366!();
+        Depcrate_um_dinputmacro_27367!();
+        Depcrate_um_dinputmacro_27368!();
+        Depcrate_um_dinputmacro_27369!();
+        Depcrate_um_dinputmacro_27370!();
+        Depcrate_um_dinputmacro_27371!();
+        Depcrate_um_dinputmacro_27372!();
+        Depcrate_um_dinputmacro_27373!();
+        Depcrate_um_dinputmacro_27374!();
+        Depcrate_um_dinputmacro_27375!();
+        Depcrate_um_dinputmacro_27376!();
+        Depcrate_um_dinputmacro_27377!();
+        Depcrate_um_dinputmacro_27378!();
+        Depcrate_um_dinputmacro_27379!();
+        Depcrate_um_dinputmacro_27380!();
+        Depcrate_um_dinputmacro_27381!();
+        Depcrate_um_dinputmacro_27382!();
+        Depcrate_um_dinputmacro_27383!();
+        Depcrate_um_dinputmacro_27384!();
+        Depcrate_um_dinputmacro_27385!();
+        Depcrate_um_dinputmacro_27386!();
+        Depcrate_um_dinputmacro_27387!();
+        Depcrate_um_dinputmacro_27388!();
+        Depcrate_um_dinputmacro_27389!();
+        Depcrate_um_dinputmacro_27390!();
+        Depcrate_um_dinputmacro_27391!();
+        Depcrate_um_dinputmacro_27392!();
+    };
+}

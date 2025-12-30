@@ -1,0 +1,43 @@
+// Generated module macro for crate::crypto::ring::sign
+macro_rules! Modcrate_crypto_ring_sign {
+() => {
+        Depcrate_crypto_ring_signuse_801!();
+        Depcrate_crypto_ring_signuse_802!();
+        Depcrate_crypto_ring_signuse_803!();
+        Depcrate_crypto_ring_signuse_804!();
+        Depcrate_crypto_ring_signuse_805!();
+        Depcrate_crypto_ring_signuse_806!();
+        Depcrate_crypto_ring_signuse_807!();
+        Depcrate_crypto_ring_signuse_808!();
+        Depcrate_crypto_ring_signuse_809!();
+        Depcrate_crypto_ring_signuse_810!();
+        Depcrate_crypto_ring_signuse_811!();
+        Depcrate_crypto_ring_signuse_812!();
+        Depcrate_crypto_ring_signuse_813!();
+        Depcrate_crypto_ring_signuse_814!();
+        Depcrate_crypto_ring_signRsaSigningKey!();
+        Depcrate_crypto_ring_signimpl_816!();
+        Depcrate_crypto_ring_signimpl_817!();
+        Depcrate_crypto_ring_signimpl_818!();
+        Depcrate_crypto_ring_signimpl_819!();
+        Depcrate_crypto_ring_signRsaSigner!();
+        Depcrate_crypto_ring_signimpl_821!();
+        Depcrate_crypto_ring_signimpl_822!();
+        Depcrate_crypto_ring_signimpl_823!();
+        Depcrate_crypto_ring_signEcdsaSigner!();
+        Depcrate_crypto_ring_signimpl_825!();
+        Depcrate_crypto_ring_signimpl_826!();
+        Depcrate_crypto_ring_signimpl_827!();
+        Depcrate_crypto_ring_signimpl_828!();
+        Depcrate_crypto_ring_signimpl_829!();
+        Depcrate_crypto_ring_signEd25519Signer!();
+        Depcrate_crypto_ring_signimpl_831!();
+        Depcrate_crypto_ring_signimpl_832!();
+        Depcrate_crypto_ring_signimpl_833!();
+        Depcrate_crypto_ring_signimpl_834!();
+        Depcrate_crypto_ring_signimpl_835!();
+        Depcrate_crypto_ring_signload_key!();
+        Depcrate_crypto_ring_signtests!();
+        Depcrate_crypto_ring_signbenchmarks!();
+    };
+}

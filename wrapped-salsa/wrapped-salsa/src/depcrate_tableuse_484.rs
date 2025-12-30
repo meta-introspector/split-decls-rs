@@ -4,6 +4,6 @@ macro_rules! Depcrate_tableuse_484 {
 // Module: crate::table
 // Provides: {"use_484"}
 // Dependencies: {}
-use crate :: sync :: atomic :: { AtomicUsize , Ordering } ;
+use crate :: { Id , IngredientIndex , Revision } ;
 };
 }

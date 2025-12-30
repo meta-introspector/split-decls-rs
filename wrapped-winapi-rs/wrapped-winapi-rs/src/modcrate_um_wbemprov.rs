@@ -1,0 +1,51 @@
+// Generated module macro for crate::um::wbemprov
+macro_rules! Modcrate_um_wbemprov {
+() => {
+        Depcrate_um_wbemprovuse_39745!();
+        Depcrate_um_wbemprovuse_39746!();
+        Depcrate_um_wbemprovuse_39747!();
+        Depcrate_um_wbemprovuse_39748!();
+        Depcrate_um_wbemprovuse_39749!();
+        Depcrate_um_wbemprovuse_39750!();
+        Depcrate_um_wbemprovuse_39751!();
+        Depcrate_um_wbemprovuse_39752!();
+        Depcrate_um_wbemprovWBEM_VARIANT!();
+        Depcrate_um_wbemprovWBEM_WSTR!();
+        Depcrate_um_wbemprovWBEM_CWSTR!();
+        Depcrate_um_wbemprovmacro_39756!();
+        Depcrate_um_wbemprovmacro_39757!();
+        Depcrate_um_wbemprovmacro_39758!();
+        Depcrate_um_wbemprovmacro_39759!();
+        Depcrate_um_wbemprovmacro_39760!();
+        Depcrate_um_wbemprovmacro_39761!();
+        Depcrate_um_wbemprovmacro_39762!();
+        Depcrate_um_wbemprovmacro_39763!();
+        Depcrate_um_wbemprovmacro_39764!();
+        Depcrate_um_wbemprovmacro_39765!();
+        Depcrate_um_wbemprovmacro_39766!();
+        Depcrate_um_wbemprovmacro_39767!();
+        Depcrate_um_wbemprovmacro_39768!();
+        Depcrate_um_wbemprovmacro_39769!();
+        Depcrate_um_wbemprovmacro_39770!();
+        Depcrate_um_wbemprovmacro_39771!();
+        Depcrate_um_wbemprovmacro_39772!();
+        Depcrate_um_wbemprovmacro_39773!();
+        Depcrate_um_wbemprovmacro_39774!();
+        Depcrate_um_wbemprovmacro_39775!();
+        Depcrate_um_wbemprovmacro_39776!();
+        Depcrate_um_wbemprovmacro_39777!();
+        Depcrate_um_wbemprovmacro_39778!();
+        Depcrate_um_wbemprovmacro_39779!();
+        Depcrate_um_wbemprovmacro_39780!();
+        Depcrate_um_wbemprovmacro_39781!();
+        Depcrate_um_wbemprovmacro_39782!();
+        Depcrate_um_wbemprovmacro_39783!();
+        Depcrate_um_wbemprovmacro_39784!();
+        Depcrate_um_wbemprovmacro_39785!();
+        Depcrate_um_wbemprovmacro_39786!();
+        Depcrate_um_wbemprovmacro_39787!();
+        Depcrate_um_wbemprovmacro_39788!();
+        Depcrate_um_wbemprovmacro_39789!();
+        Depcrate_um_wbemprovmacro_39790!();
+    };
+}

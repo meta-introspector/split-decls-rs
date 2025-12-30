@@ -1,0 +1,9 @@
+// Generated macro for other_3871 (other)
+macro_rules! Depcrate_features_gen_IdbOpenDbOptionsother_3871 {
+() => {
+// Module: crate::features::gen_IdbOpenDbOptions
+// Provides: {"other_3871"}
+// Dependencies: {}
+# [wasm_bindgen] extern "C" { # [wasm_bindgen (extends = :: js_sys :: Object , js_name = IDBOpenDBOptions)] # [derive (Debug , Clone , PartialEq , Eq)] # [doc = "The `IdbOpenDbOptions` dictionary."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `IdbOpenDbOptions`*"] # [deprecated] pub type IdbOpenDbOptions ; # [cfg (feature = "StorageType")] # [doc = "Get the `storage` field of this object."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `IdbOpenDbOptions`, `StorageType`*"] # [deprecated] # [wasm_bindgen (method , getter = "storage")] pub fn get_storage (this : & IdbOpenDbOptions) -> Option < StorageType > ; # [cfg (feature = "StorageType")] # [doc = "Change the `storage` field of this object."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `IdbOpenDbOptions`, `StorageType`*"] # [deprecated] # [wasm_bindgen (method , setter = "storage")] pub fn set_storage (this : & IdbOpenDbOptions , val : StorageType) ; # [doc = "Get the `version` field of this object."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `IdbOpenDbOptions`*"] # [deprecated] # [wasm_bindgen (method , getter = "version")] pub fn get_version (this : & IdbOpenDbOptions) -> Option < f64 > ; # [doc = "Change the `version` field of this object."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `IdbOpenDbOptions`*"] # [deprecated] # [wasm_bindgen (method , setter = "version")] pub fn set_version (this : & IdbOpenDbOptions , val : f64) ; }
+};
+}

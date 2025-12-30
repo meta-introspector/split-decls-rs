@@ -4,6 +4,6 @@ macro_rules! Depcrate_tracked_structuse_534 {
 // Module: crate::tracked_struct
 // Provides: {"use_534"}
 // Dependencies: {}
-use std :: marker :: PhantomData ;
+use crossbeam_queue :: SegQueue ;
 };
 }

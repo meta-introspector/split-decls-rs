@@ -1,0 +1,9 @@
+// Generated macro for wrap_static (function)
+macro_rules! Depcratewrap_static {
+() => {
+// Module: crate
+// Provides: {"wrap_static"}
+// Dependencies: {}
+# [proc_macro_attribute] pub fn wrap_static (_attr : ProcMacroTokenStream , item_ts : ProcMacroTokenStream) -> ProcMacroTokenStream { let item_static : ItemStatic = parse_macro_input ! (item_ts as ItemStatic) ; let mut output_tokens = TokenStream :: new () ; if is_public (& item_static . vis) { let hook_macro_def = generate_item_hook_macro ("static" , & Item :: Static (item_static . clone ()) , Some (& item_static . ident)) ; output_tokens . extend (hook_macro_def) ; } output_tokens . extend (item_static . to_token_stream ()) ; output_tokens . into () }
+};
+}

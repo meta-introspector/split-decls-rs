@@ -1,0 +1,9 @@
+// Generated macro for other_1310 (other)
+macro_rules! Depcrate_features_gen_CryptoKeyPairother_1310 {
+() => {
+// Module: crate::features::gen_CryptoKeyPair
+// Provides: {"other_1310"}
+// Dependencies: {}
+# [wasm_bindgen] extern "C" { # [wasm_bindgen (extends = :: js_sys :: Object , js_name = CryptoKeyPair)] # [derive (Debug , Clone , PartialEq , Eq)] # [doc = "The `CryptoKeyPair` dictionary."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `CryptoKeyPair`*"] pub type CryptoKeyPair ; # [cfg (feature = "CryptoKey")] # [doc = "Get the `privateKey` field of this object."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `CryptoKey`, `CryptoKeyPair`*"] # [wasm_bindgen (method , getter = "privateKey")] pub fn get_private_key (this : & CryptoKeyPair) -> CryptoKey ; # [cfg (feature = "CryptoKey")] # [doc = "Change the `privateKey` field of this object."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `CryptoKey`, `CryptoKeyPair`*"] # [wasm_bindgen (method , setter = "privateKey")] pub fn set_private_key (this : & CryptoKeyPair , val : & CryptoKey) ; # [cfg (feature = "CryptoKey")] # [doc = "Get the `publicKey` field of this object."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `CryptoKey`, `CryptoKeyPair`*"] # [wasm_bindgen (method , getter = "publicKey")] pub fn get_public_key (this : & CryptoKeyPair) -> CryptoKey ; # [cfg (feature = "CryptoKey")] # [doc = "Change the `publicKey` field of this object."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `CryptoKey`, `CryptoKeyPair`*"] # [wasm_bindgen (method , setter = "publicKey")] pub fn set_public_key (this : & CryptoKeyPair , val : & CryptoKey) ; }
+};
+}

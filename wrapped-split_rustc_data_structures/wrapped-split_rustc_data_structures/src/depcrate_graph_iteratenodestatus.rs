@@ -1,0 +1,9 @@
+// Generated macro for NodeStatus (enum)
+macro_rules! Depcrate_graph_iterateNodeStatus {
+() => {
+// Module: crate::graph::iterate
+// Provides: {"NodeStatus"}
+// Dependencies: {}
+# [doc = " The status of a node in the depth-first search."] # [doc = ""] # [doc = " See the documentation of `TriColorDepthFirstSearch` to see how a node's status is updated"] # [doc = " during DFS."] # [derive (Clone , Copy , Debug , PartialEq , Eq)] pub enum NodeStatus { # [doc = " This node has been examined by the depth-first search but is not yet `Settled`."] # [doc = ""] # [doc = " Also referred to as \"gray\" or \"discovered\" nodes in [CLR]."] # [doc = ""] # [doc = " [CLR]: https://en.wikipedia.org/wiki/Introduction_to_Algorithms"] Visited , # [doc = " This node and all nodes reachable from it have been examined by the depth-first search."] # [doc = ""] # [doc = " Also referred to as \"black\" or \"finished\" nodes in [CLR]."] # [doc = ""] # [doc = " [CLR]: https://en.wikipedia.org/wiki/Introduction_to_Algorithms"] Settled , }
+};
+}

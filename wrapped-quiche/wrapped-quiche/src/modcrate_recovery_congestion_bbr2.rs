@@ -1,0 +1,52 @@
+// Generated module macro for crate::recovery::congestion::bbr2
+macro_rules! Modcrate_recovery_congestion_bbr2 {
+() => {
+        Depcrate_recovery_congestion_bbr2use_1189!();
+        Depcrate_recovery_congestion_bbr2use_1190!();
+        Depcrate_recovery_congestion_bbr2use_1191!();
+        Depcrate_recovery_congestion_bbr2use_1192!();
+        Depcrate_recovery_congestion_bbr2use_1193!();
+        Depcrate_recovery_congestion_bbr2BBR2!();
+        Depcrate_recovery_congestion_bbr2PACING_MARGIN_PERCENT!();
+        Depcrate_recovery_congestion_bbr2STARTUP_PACING_GAIN!();
+        Depcrate_recovery_congestion_bbr2PROBE_DOWN_PACING_GAIN!();
+        Depcrate_recovery_congestion_bbr2PROBE_UP_PACING_GAIN!();
+        Depcrate_recovery_congestion_bbr2PACING_GAIN!();
+        Depcrate_recovery_congestion_bbr2STARTUP_CWND_GAIN!();
+        Depcrate_recovery_congestion_bbr2CWND_GAIN!();
+        Depcrate_recovery_congestion_bbr2LOSS_THRESH!();
+        Depcrate_recovery_congestion_bbr2FULL_LOSS_COUNT!();
+        Depcrate_recovery_congestion_bbr2BETA!();
+        Depcrate_recovery_congestion_bbr2HEADROOM!();
+        Depcrate_recovery_congestion_bbr2MIN_PIPE_CWND_PKTS!();
+        Depcrate_recovery_congestion_bbr2MIN_RTT_FILTER_LEN!();
+        Depcrate_recovery_congestion_bbr2PROBE_RTT_CWND_GAIN!();
+        Depcrate_recovery_congestion_bbr2PROBE_RTT_DURATION!();
+        Depcrate_recovery_congestion_bbr2PROBE_RTT_INTERVAL!();
+        Depcrate_recovery_congestion_bbr2MAX_BW_GROWTH_THRESHOLD!();
+        Depcrate_recovery_congestion_bbr2MAX_BW_COUNT!();
+        Depcrate_recovery_congestion_bbr2BBR2StateMachine!();
+        Depcrate_recovery_congestion_bbr2impl_1214!();
+        Depcrate_recovery_congestion_bbr2BBR2AckPhase!();
+        Depcrate_recovery_congestion_bbr2State!();
+        Depcrate_recovery_congestion_bbr2impl_1217!();
+        Depcrate_recovery_congestion_bbr2bbr2_enter_recovery!();
+        Depcrate_recovery_congestion_bbr2bbr2_exit_recovery!();
+        Depcrate_recovery_congestion_bbr2on_init!();
+        Depcrate_recovery_congestion_bbr2on_packet_sent!();
+        Depcrate_recovery_congestion_bbr2on_packets_acked!();
+        Depcrate_recovery_congestion_bbr2congestion_event!();
+        Depcrate_recovery_congestion_bbr2checkpoint!();
+        Depcrate_recovery_congestion_bbr2rollback!();
+        Depcrate_recovery_congestion_bbr2has_custom_pacing!();
+        Depcrate_recovery_congestion_bbr2rate_kbps!();
+        Depcrate_recovery_congestion_bbr2state_str!();
+        Depcrate_recovery_congestion_bbr2debug_fmt!();
+        Depcrate_recovery_congestion_bbr2tests!();
+        Depcrate_recovery_congestion_bbr2init!();
+        Depcrate_recovery_congestion_bbr2pacing!();
+        Depcrate_recovery_congestion_bbr2per_ack!();
+        Depcrate_recovery_congestion_bbr2per_loss!();
+        Depcrate_recovery_congestion_bbr2per_transmit!();
+    };
+}

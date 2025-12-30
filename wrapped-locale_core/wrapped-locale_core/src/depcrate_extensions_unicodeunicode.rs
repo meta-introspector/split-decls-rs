@@ -1,0 +1,9 @@
+// Generated macro for Unicode (struct)
+macro_rules! Depcrate_extensions_unicodeUnicode {
+() => {
+// Module: crate::extensions::unicode
+// Provides: {"Unicode"}
+// Dependencies: {}
+# [doc = " Unicode Extensions provide information about user preferences in a given locale."] # [doc = ""] # [doc = " A list of [`Unicode BCP47 U Extensions`] as defined in [`Unicode Locale"] # [doc = " Identifier`] specification."] # [doc = ""] # [doc = " Unicode extensions provide subtags that specify language and/or locale-based behavior"] # [doc = " or refinements to language tags, according to work done by the Unicode Consortium."] # [doc = " (See [`RFC 6067`] for details)."] # [doc = ""] # [doc = " [`Unicode BCP47 U Extensions`]: https://unicode.org/reports/tr35/#u_Extension"] # [doc = " [`RFC 6067`]: https://www.ietf.org/rfc/rfc6067.txt"] # [doc = " [`Unicode Locale Identifier`]: https://unicode.org/reports/tr35/#Unicode_locale_identifier"] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " use icu::locale::extensions::unicode::{key, value};"] # [doc = " use icu::locale::Locale;"] # [doc = ""] # [doc = " let loc: Locale ="] # [doc = "     \"de-u-hc-h12-ca-buddhist\".parse().expect(\"Parsing failed.\");"] # [doc = ""] # [doc = " assert_eq!("] # [doc = "     loc.extensions.unicode.keywords.get(&key!(\"ca\")),"] # [doc = "     Some(&value!(\"buddhist\"))"] # [doc = " );"] # [doc = " ```"] # [derive (Clone , PartialEq , Eq , Debug , Default , Hash)] # [allow (clippy :: exhaustive_structs)] pub struct Unicode { # [doc = " The key-value pairs present in this locale extension, with each extension key subtag"] # [doc = " associated to its provided value subtag."] pub keywords : Keywords , # [doc = " A canonically ordered sequence of single standalone subtags for this locale extension."] pub attributes : Attributes , }
+};
+}

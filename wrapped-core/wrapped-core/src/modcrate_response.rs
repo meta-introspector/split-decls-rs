@@ -1,0 +1,50 @@
+// Generated module macro for crate::response
+macro_rules! Modcrate_response {
+() => {
+        Depcrate_responseuse_199!();
+        Depcrate_responseuse_200!();
+        Depcrate_responseuse_201!();
+        Depcrate_responseuse_202!();
+        Depcrate_responseuse_203!();
+        Depcrate_responseuse_204!();
+        Depcrate_responseuse_205!();
+        Depcrate_responseuse_206!();
+        Depcrate_responseuse_207!();
+        Depcrate_responseuse_208!();
+        Depcrate_responseuse_209!();
+        Depcrate_responseuse_210!();
+        Depcrate_responseDataResponseMetadata!();
+        Depcrate_responseimpl_212!();
+        Depcrate_responseDataPayload!();
+        Depcrate_responseDataPayloadOr!();
+        Depcrate_responseDataPayloadInner!();
+        Depcrate_responseDataPayloadOrInner!();
+        Depcrate_responseDataPayloadOrInnerInner!();
+        Depcrate_responseCart!();
+        Depcrate_responseCartInner!();
+        Depcrate_responseCartInner!();
+        Depcrate_responseimpl_221!();
+        Depcrate_responseimpl_222!();
+        Depcrate_responseimpl_223!();
+        Depcrate_responseimpl_224!();
+        Depcrate_responseimpl_225!();
+        Depcrate_responseimpl_226!();
+        Depcrate_responseimpl_227!();
+        Depcrate_responseimpl_228!();
+        Depcrate_responseimpl_229!();
+        Depcrate_responseimpl_230!();
+        Depcrate_responseimpl_231!();
+        Depcrate_responseimpl_232!();
+        Depcrate_responsetest_clone_eq!();
+        Depcrate_responseimpl_234!();
+        Depcrate_responseimpl_235!();
+        Depcrate_responseimpl_236!();
+        Depcrate_responseimpl_237!();
+        Depcrate_responseimpl_238!();
+        Depcrate_responseDataResponse!();
+        Depcrate_responseimpl_240!();
+        Depcrate_responseimpl_241!();
+        Depcrate_responseimpl_242!();
+        Depcrate_responsetest_debug!();
+    };
+}

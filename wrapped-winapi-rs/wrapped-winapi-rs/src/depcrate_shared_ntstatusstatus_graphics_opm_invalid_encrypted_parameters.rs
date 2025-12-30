@@ -1,0 +1,9 @@
+// Generated macro for STATUS_GRAPHICS_OPM_INVALID_ENCRYPTED_PARAMETERS (const)
+macro_rules! Depcrate_shared_ntstatusSTATUS_GRAPHICS_OPM_INVALID_ENCRYPTED_PARAMETERS {
+() => {
+// Module: crate::shared::ntstatus
+// Provides: {"STATUS_GRAPHICS_OPM_INVALID_ENCRYPTED_PARAMETERS"}
+// Dependencies: {}
+pub const STATUS_GRAPHICS_OPM_INVALID_ENCRYPTED_PARAMETERS : NTSTATUS = 0xC01E0503 ;
+};
+}

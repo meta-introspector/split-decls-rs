@@ -1,0 +1,49 @@
+// Generated module macro for crate
+macro_rules! Modcrate {
+() => {
+        Depcrateuse_1!();
+        Depcrateuse_2!();
+        Depcrateuse_3!();
+        Depcratefields!();
+        DepcrateSerializeField!();
+        Depcrateimpl_15!();
+        DepcrateSerializeFieldSet!();
+        Depcrateimpl_17!();
+        DepcrateSerializeLevel!();
+        Depcrateimpl_19!();
+        DepcrateSerializeId!();
+        Depcrateimpl_21!();
+        DepcrateSerializeMetadata!();
+        Depcrateimpl_23!();
+        DepcrateSerializeEvent!();
+        Depcrateimpl_25!();
+        DepcrateSerializeAttributes!();
+        Depcrateimpl_27!();
+        DepcrateSerializeRecord!();
+        Depcrateimpl_29!();
+        DepcrateSerdeMapVisitor!();
+        Depcrateimpl_31!();
+        Depcrateimpl_32!();
+        DepcrateSerdeStructVisitor!();
+        Depcrateimpl_34!();
+        Depcrateimpl_35!();
+        DepcrateAsSerde!();
+        Depcrateimpl_37!();
+        Depcrateimpl_38!();
+        Depcrateimpl_39!();
+        Depcrateimpl_40!();
+        Depcrateimpl_41!();
+        Depcrateimpl_42!();
+        Depcrateimpl_43!();
+        Depcrateimpl_44!();
+        Depcrateimpl_45!();
+        Depcrateimpl_46!();
+        Depcrateimpl_47!();
+        Depcrateimpl_48!();
+        Depcrateimpl_49!();
+        Depcrateimpl_50!();
+        Depcrateimpl_51!();
+        Depcrateimpl_52!();
+        Depcratesealed!();
+    };
+}

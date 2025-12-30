@@ -1,0 +1,9 @@
+// Generated macro for macro_328 (macro)
+macro_rules! Depcrate_taskmacro_328 {
+() => {
+// Module: crate::task
+// Provides: {"macro_328"}
+// Dependencies: {}
+cfg_rt ! { pub use crate :: runtime :: task :: { JoinError , JoinHandle } ; mod blocking ; pub use blocking :: spawn_blocking ; mod spawn ; pub use spawn :: spawn ; cfg_rt_multi_thread ! { pub use blocking :: block_in_place ; } mod yield_now ; pub use yield_now :: yield_now ; pub mod coop ; # [doc (hidden)] # [deprecated = "Moved to tokio::task::coop::consume_budget"] pub use coop :: consume_budget ; # [doc (hidden)] # [deprecated = "Moved to tokio::task::coop::unconstrained"] pub use coop :: unconstrained ; # [doc (hidden)] # [deprecated = "Moved to tokio::task::coop::Unconstrained"] pub use coop :: Unconstrained ; mod local ; pub use local :: { spawn_local , LocalSet , LocalEnterGuard } ; mod task_local ; pub use task_local :: LocalKey ; # [doc (inline)] pub use join_set :: JoinSet ; pub use crate :: runtime :: task :: AbortHandle ; # [cfg (not (tokio_unstable))] mod join_set ; # [cfg (tokio_unstable)] pub mod join_set ; pub use crate :: runtime :: task :: { Id , id , try_id } ; cfg_trace ! { mod builder ; pub use builder :: Builder ; } # [doc = " Task-related futures."] pub mod futures { pub use super :: task_local :: TaskLocalFuture ; } }
+};
+}

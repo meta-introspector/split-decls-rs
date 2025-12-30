@@ -1,0 +1,9 @@
+// Generated macro for BlockHeader (struct)
+macro_rules! Depcrate_abiBlockHeader {
+() => {
+// Module: crate::abi
+// Provides: {"BlockHeader"}
+// Dependencies: {}
+# [doc = " The expected header of every block."] # [repr (C)] # [doc (alias = "__block_literal")] # [doc (alias = "Block_layout")] # [doc (alias = "Block_basic")] # [allow (missing_debug_implementations)] # [derive (Clone , Copy)] pub struct BlockHeader { # [doc = " Class pointer."] # [doc = ""] # [doc = " Always initialised to &_NSConcreteStackBlock for blocks that are"] # [doc = " created on the stack or &_NSConcreteGlobalBlock for blocks that are"] # [doc = " created in global storage."] pub isa : * const Class , # [doc = " Flags."] # [doc = ""] # [doc = " See the `BlockFlags` enumerated type for possible values."] # [doc = ""] # [doc = " Contains reference count in Apple's and ObjFW's runtime."] # [doc (alias = "Block_flags")] pub (crate) flags : BlockFlags , # [doc = " Reserved."] # [doc = ""] # [doc = " Initialized to 0 by the compiler, but is said to be uninitialized in"] # [doc = " the specification."] # [doc = ""] # [doc = " Used for the reference count in GNUStep's and WinObjC's runtime."] # [doc (alias = "Block_size")] pub (crate) reserved : MaybeUninit < c_int > , # [doc = " The function that implements the block."] # [doc = ""] # [doc = " The first parameter is a pointer to this structure, the subsequent"] # [doc = " parameters are the block's explicit parameters."] # [doc = ""] # [doc = " If the BLOCK_USE_SRET & BLOCK_HAS_SIGNATURE flag is set, there is an"] # [doc = " additional hidden parameter, which is a pointer to the space on the"] # [doc = " stack allocated to hold the return value."] pub invoke : Option < unsafe extern "C-unwind" fn () > , # [doc = " The block's descriptor."] pub (crate) descriptor : BlockDescriptorPtr , }
+};
+}

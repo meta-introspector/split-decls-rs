@@ -1,0 +1,9 @@
+// Generated macro for other_6167 (other)
+macro_rules! Depcrate_features_gen_RtcIdentityProviderother_6167 {
+() => {
+// Module: crate::features::gen_RtcIdentityProvider
+// Provides: {"other_6167"}
+// Dependencies: {}
+# [wasm_bindgen] extern "C" { # [wasm_bindgen (extends = :: js_sys :: Object , js_name = RTCIdentityProvider)] # [derive (Debug , Clone , PartialEq , Eq)] # [doc = "The `RtcIdentityProvider` dictionary."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `RtcIdentityProvider`*"] pub type RtcIdentityProvider ; # [doc = "Get the `generateAssertion` field of this object."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `RtcIdentityProvider`*"] # [wasm_bindgen (method , getter = "generateAssertion")] pub fn get_generate_assertion (this : & RtcIdentityProvider) -> :: js_sys :: Function ; # [doc = "Change the `generateAssertion` field of this object."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `RtcIdentityProvider`*"] # [wasm_bindgen (method , setter = "generateAssertion")] pub fn set_generate_assertion (this : & RtcIdentityProvider , val : & :: js_sys :: Function) ; # [doc = "Get the `validateAssertion` field of this object."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `RtcIdentityProvider`*"] # [wasm_bindgen (method , getter = "validateAssertion")] pub fn get_validate_assertion (this : & RtcIdentityProvider) -> :: js_sys :: Function ; # [doc = "Change the `validateAssertion` field of this object."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `RtcIdentityProvider`*"] # [wasm_bindgen (method , setter = "validateAssertion")] pub fn set_validate_assertion (this : & RtcIdentityProvider , val : & :: js_sys :: Function) ; }
+};
+}

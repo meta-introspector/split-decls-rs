@@ -1,0 +1,9 @@
+// Generated macro for impl_98 (impl)
+macro_rules! Depcrate_client_legacy_connect_dnsimpl_98 {
+() => {
+// Module: crate::client::legacy::connect::dns
+// Provides: {"impl_98"}
+// Dependencies: {}
+impl SocketAddrs { pub (super) fn new (addrs : Vec < SocketAddr >) -> Self { SocketAddrs { iter : addrs . into_iter () , } } pub (super) fn try_parse (host : & str , port : u16) -> Option < SocketAddrs > { if let Ok (addr) = host . parse :: < Ipv4Addr > () { let addr = SocketAddrV4 :: new (addr , port) ; return Some (SocketAddrs { iter : vec ! [SocketAddr :: V4 (addr)] . into_iter () , }) ; } if let Ok (addr) = host . parse :: < Ipv6Addr > () { let addr = SocketAddrV6 :: new (addr , port , 0 , 0) ; return Some (SocketAddrs { iter : vec ! [SocketAddr :: V6 (addr)] . into_iter () , }) ; } None } # [inline] fn filter (self , predicate : impl FnMut (& SocketAddr) -> bool) -> SocketAddrs { SocketAddrs :: new (self . iter . filter (predicate) . collect ()) } pub (super) fn split_by_preference (self , local_addr_ipv4 : Option < Ipv4Addr > , local_addr_ipv6 : Option < Ipv6Addr > ,) -> (SocketAddrs , SocketAddrs) { match (local_addr_ipv4 , local_addr_ipv6) { (Some (_) , None) => (self . filter (SocketAddr :: is_ipv4) , SocketAddrs :: new (vec ! [])) , (None , Some (_)) => (self . filter (SocketAddr :: is_ipv6) , SocketAddrs :: new (vec ! [])) , _ => { let preferring_v6 = self . iter . as_slice () . first () . map (SocketAddr :: is_ipv6) . unwrap_or (false) ; let (preferred , fallback) = self . iter . partition :: < Vec < _ > , _ > (| addr | addr . is_ipv6 () == preferring_v6) ; (SocketAddrs :: new (preferred) , SocketAddrs :: new (fallback)) } } } pub (super) fn is_empty (& self) -> bool { self . iter . as_slice () . is_empty () } pub (super) fn len (& self) -> usize { self . iter . as_slice () . len () } }
+};
+}

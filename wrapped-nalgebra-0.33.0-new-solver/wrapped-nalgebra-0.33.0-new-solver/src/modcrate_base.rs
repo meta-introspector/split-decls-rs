@@ -1,0 +1,55 @@
+// Generated module macro for crate::base
+macro_rules! Modcrate_base {
+() => {
+        Depcrate_baseallocator!();
+        Depcrate_baseblas!();
+        Depcrate_baseconstraint!();
+        Depcrate_basecoordinates!();
+        Depcrate_basedefault_allocator!();
+        Depcrate_basedimension!();
+        Depcrate_baseiter!();
+        Depcrate_baseops!();
+        Depcrate_basestorage!();
+        Depcrate_basealias!();
+        Depcrate_basealias_slice!();
+        Depcrate_basealias_view!();
+        Depcrate_basearray_storage!();
+        Depcrate_basecg!();
+        Depcrate_basecomponentwise!();
+        Depcrate_baseconstruction!();
+        Depcrate_baseconstruction_view!();
+        Depcrate_baseconversion!();
+        Depcrate_baseedition!();
+        Depcrate_baseindexing!();
+        Depcrate_basematrix!();
+        Depcrate_basematrix_simba!();
+        Depcrate_basematrix_view!();
+        Depcrate_basenorm!();
+        Depcrate_baseproperties!();
+        Depcrate_basescalar!();
+        Depcrate_basestatistics!();
+        Depcrate_baseswizzle!();
+        Depcrate_baseunit!();
+        Depcrate_basevec_storage!();
+        Depcrate_baseblas_uninit!();
+        Depcrate_basehelper!();
+        Depcrate_baseinterpolation!();
+        Depcrate_basemin_max!();
+        Depcrate_baseuninit!();
+        Depcrate_basepar_iter!();
+        Depcrate_baserkyv_wrappers!();
+        Depcrate_baseuse_1191!();
+        Depcrate_baseuse_1192!();
+        Depcrate_baseuse_1193!();
+        Depcrate_baseuse_1194!();
+        Depcrate_baseuse_1195!();
+        Depcrate_baseuse_1196!();
+        Depcrate_baseuse_1197!();
+        Depcrate_baseuse_1198!();
+        Depcrate_baseuse_1199!();
+        Depcrate_baseuse_1200!();
+        Depcrate_baseuse_1201!();
+        Depcrate_baseuse_1202!();
+        Depcrate_baseuse_1203!();
+    };
+}

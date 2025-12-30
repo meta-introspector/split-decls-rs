@@ -1,0 +1,9 @@
+// Generated macro for PCLAIM_SECURITY_ATTRIBUTES_INFORMATION (type)
+macro_rules! Depcrate_um_winntPCLAIM_SECURITY_ATTRIBUTES_INFORMATION {
+() => {
+// Module: crate::um::winnt
+// Provides: {"PCLAIM_SECURITY_ATTRIBUTES_INFORMATION"}
+// Dependencies: {}
+pub type PCLAIM_SECURITY_ATTRIBUTES_INFORMATION = * mut CLAIM_SECURITY_ATTRIBUTES_INFORMATION ;
+};
+}

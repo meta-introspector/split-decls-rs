@@ -1,0 +1,42 @@
+// Generated module macro for crate::bindings
+macro_rules! Modcrate_bindings {
+() => {
+        Depcrate_bindingsmacro_2!();
+        Depcrate_bindingsimpl_3!();
+        Depcrate_bindingsimpl_4!();
+        Depcrate_bindingsIInstance_Impl!();
+        Depcrate_bindingsimpl_6!();
+        Depcrate_bindingsIInstance_Vtbl!();
+        Depcrate_bindingsmacro_8!();
+        Depcrate_bindingsimpl_9!();
+        Depcrate_bindingsimpl_10!();
+        Depcrate_bindingsIMissing_Impl!();
+        Depcrate_bindingsimpl_12!();
+        Depcrate_bindingsIMissing_Vtbl!();
+        Depcrate_bindingsmacro_14!();
+        Depcrate_bindingsimpl_15!();
+        Depcrate_bindingsimpl_16!();
+        Depcrate_bindingsIStaticStatics_Impl!();
+        Depcrate_bindingsimpl_18!();
+        Depcrate_bindingsIStaticStatics_Vtbl!();
+        Depcrate_bindingsInstance!();
+        Depcrate_bindingsmacro_21!();
+        Depcrate_bindingsimpl_22!();
+        Depcrate_bindingsimpl_23!();
+        Depcrate_bindingsimpl_24!();
+        Depcrate_bindingsimpl_25!();
+        Depcrate_bindingsimpl_26!();
+        Depcrate_bindingsimpl_27!();
+        Depcrate_bindingsMissing!();
+        Depcrate_bindingsmacro_29!();
+        Depcrate_bindingsimpl_30!();
+        Depcrate_bindingsimpl_31!();
+        Depcrate_bindingsimpl_32!();
+        Depcrate_bindingsimpl_33!();
+        Depcrate_bindingsimpl_34!();
+        Depcrate_bindingsimpl_35!();
+        Depcrate_bindingsStatic!();
+        Depcrate_bindingsimpl_37!();
+        Depcrate_bindingsimpl_38!();
+    };
+}

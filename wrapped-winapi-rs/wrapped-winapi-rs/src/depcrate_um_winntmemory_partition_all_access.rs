@@ -1,0 +1,9 @@
+// Generated macro for MEMORY_PARTITION_ALL_ACCESS (const)
+macro_rules! Depcrate_um_winntMEMORY_PARTITION_ALL_ACCESS {
+() => {
+// Module: crate::um::winnt
+// Provides: {"MEMORY_PARTITION_ALL_ACCESS"}
+// Dependencies: {}
+pub const MEMORY_PARTITION_ALL_ACCESS : DWORD = STANDARD_RIGHTS_REQUIRED | SYNCHRONIZE | MEMORY_PARTITION_QUERY_ACCESS | MEMORY_PARTITION_MODIFY_ACCESS ;
+};
+}

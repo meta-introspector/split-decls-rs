@@ -1,0 +1,9 @@
+// Generated macro for macro_27229 (macro)
+macro_rules! Depcrate_um_dcompanimationmacro_27229 {
+() => {
+// Module: crate::um::dcompanimation
+// Provides: {"macro_27229"}
+// Dependencies: {}
+RIDL ! { # [uuid (0xcbfd91d9 , 0x51b2 , 0x45e4 , 0xb3 , 0xde , 0xd1 , 0x9c , 0xcf , 0xb8 , 0x63 , 0xc5)] interface IDCompositionAnimation (IDCompositionAnimationVtbl) : IUnknown (IUnknownVtbl) { fn Reset () -> HRESULT , fn SetAbsoluteBeginTime (beginTime : LARGE_INTEGER ,) -> HRESULT , fn AddCubic (beginOffset : c_double , constantCoefficient : c_float , linearCoefficient : c_float , quadraticCoefficient : c_float , cubicCoefficient : c_float ,) -> HRESULT , fn AddSinusoidal (beginOffset : c_double , bias : c_float , amplitude : c_float , frequency : c_float , phase : c_float ,) -> HRESULT , fn AddRepeat (beginOffset : c_double , durationToRepeat : c_double ,) -> HRESULT , fn End (endOffset : c_double , endValue : c_float ,) -> HRESULT , } }
+};
+}

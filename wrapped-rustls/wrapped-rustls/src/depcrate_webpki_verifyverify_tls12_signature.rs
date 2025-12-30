@@ -1,0 +1,9 @@
+// Generated macro for verify_tls12_signature (function)
+macro_rules! Depcrate_webpki_verifyverify_tls12_signature {
+() => {
+// Module: crate::webpki::verify
+// Provides: {"verify_tls12_signature"}
+// Dependencies: {}
+# [doc = " Verify a message signature using the `cert` public key and any supported scheme."] # [doc = ""] # [doc = " This function verifies the `dss` signature over `message` using the subject public key from"] # [doc = " `cert`. Since TLS 1.2 doesn't provide enough information to map the `dss.scheme` into a single"] # [doc = " [`SignatureVerificationAlgorithm`], this function will map to several candidates and try each in"] # [doc = " succession until one succeeds or we exhaust all candidates."] # [doc = ""] # [doc = " See [WebPkiSupportedAlgorithms::mapping] for more information."] pub fn verify_tls12_signature (input : & SignatureVerificationInput < '_ > , supported_schemes : & WebPkiSupportedAlgorithms ,) -> Result < HandshakeSignatureValid , Error > { let possible_algs = supported_schemes . convert_scheme (input . signature . scheme) ? ; let cert = match input . signer { SignerPublicKey :: X509 (cert_der) => { webpki :: EndEntityCert :: try_from (* cert_der) . map_err (pki_error) ? } SignerPublicKey :: RawPublicKey (_) => { return Err (ApiMisuse :: InvalidSignerForProtocolVersion . into ()) ; } } ; let mut error = None ; for alg in possible_algs { match cert . verify_signature (* alg , input . message , input . signature . signature ()) { Err (err @ webpki :: Error :: UnsupportedSignatureAlgorithmForPublicKey (_)) => { error = Some (err) ; continue ; } Err (e) => return Err (pki_error (e)) , Ok (()) => return Ok (HandshakeSignatureValid :: assertion ()) , } } Err (match error { Some (e) => pki_error (e) , None => Error :: ApiMisuse (ApiMisuse :: NoSignatureVerificationAlgorithms) , }) }
+};
+}

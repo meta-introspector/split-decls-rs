@@ -1,0 +1,39 @@
+// Generated module macro for crate::string_ref
+macro_rules! Modcrate_string_ref {
+() => {
+        Depcrate_string_refuse_120!();
+        Depcrate_string_refuse_121!();
+        Depcrate_string_refuse_122!();
+        Depcrate_string_refStdString!();
+        Depcrate_string_refBoxedStr!();
+        Depcrate_string_refKStringRef!();
+        Depcrate_string_refKStringRefInner!();
+        Depcrate_string_refimpl_127!();
+        Depcrate_string_refimpl_128!();
+        Depcrate_string_refimpl_129!();
+        Depcrate_string_refimpl_130!();
+        Depcrate_string_refimpl_131!();
+        Depcrate_string_refimpl_132!();
+        Depcrate_string_refimpl_133!();
+        Depcrate_string_refimpl_134!();
+        Depcrate_string_refimpl_135!();
+        Depcrate_string_refimpl_136!();
+        Depcrate_string_refimpl_137!();
+        Depcrate_string_refimpl_138!();
+        Depcrate_string_refimpl_139!();
+        Depcrate_string_refimpl_140!();
+        Depcrate_string_refimpl_141!();
+        Depcrate_string_refimpl_142!();
+        Depcrate_string_refimpl_143!();
+        Depcrate_string_refimpl_144!();
+        Depcrate_string_refimpl_145!();
+        Depcrate_string_refimpl_146!();
+        Depcrate_string_refimpl_147!();
+        Depcrate_string_refimpl_148!();
+        Depcrate_string_refimpl_149!();
+        Depcrate_string_refimpl_150!();
+        Depcrate_string_refimpl_151!();
+        Depcrate_string_refimpl_152!();
+        Depcrate_string_reftest!();
+    };
+}

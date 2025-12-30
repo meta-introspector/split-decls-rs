@@ -1,0 +1,45 @@
+// Generated module macro for crate::raw
+macro_rules! Modcrate_raw {
+() => {
+        Depcrate_rawuse_732!();
+        Depcrate_rawuse_733!();
+        Depcrate_rawuse_734!();
+        Depcrate_rawuse_735!();
+        Depcrate_rawuse_736!();
+        Depcrate_rawuse_737!();
+        Depcrate_rawuse_738!();
+        Depcrate_rawuse_739!();
+        Depcrate_rawuse_740!();
+        Depcrate_rawuse_741!();
+        Depcrate_rawRawValue!();
+        Depcrate_rawimpl_743!();
+        Depcrate_rawimpl_744!();
+        Depcrate_rawimpl_745!();
+        Depcrate_rawimpl_746!();
+        Depcrate_rawimpl_747!();
+        Depcrate_rawimpl_748!();
+        Depcrate_rawimpl_749!();
+        Depcrate_rawimpl_750!();
+        Depcrate_rawto_raw_value!();
+        Depcrate_rawTOKEN!();
+        Depcrate_rawimpl_753!();
+        Depcrate_rawimpl_754!();
+        Depcrate_rawimpl_755!();
+        Depcrate_rawRawKey!();
+        Depcrate_rawimpl_757!();
+        Depcrate_rawReferenceFromString!();
+        Depcrate_rawimpl_759!();
+        Depcrate_rawimpl_760!();
+        Depcrate_rawBoxedFromString!();
+        Depcrate_rawimpl_762!();
+        Depcrate_rawimpl_763!();
+        Depcrate_rawRawKeyDeserializer!();
+        Depcrate_rawimpl_765!();
+        Depcrate_rawOwnedRawDeserializer!();
+        Depcrate_rawimpl_767!();
+        Depcrate_rawBorrowedRawDeserializer!();
+        Depcrate_rawimpl_769!();
+        Depcrate_rawimpl_770!();
+        Depcrate_rawimpl_771!();
+    };
+}

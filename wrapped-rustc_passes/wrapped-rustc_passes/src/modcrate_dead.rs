@@ -1,0 +1,39 @@
+// Generated module macro for crate::dead
+macro_rules! Modcrate_dead {
+() => {
+        Depcrate_deaduse_101!();
+        Depcrate_deaduse_102!();
+        Depcrate_deaduse_103!();
+        Depcrate_deaduse_104!();
+        Depcrate_deaduse_105!();
+        Depcrate_deaduse_106!();
+        Depcrate_deaduse_107!();
+        Depcrate_deaduse_108!();
+        Depcrate_deaduse_109!();
+        Depcrate_deaduse_110!();
+        Depcrate_deaduse_111!();
+        Depcrate_deaduse_112!();
+        Depcrate_deaduse_113!();
+        Depcrate_deaduse_114!();
+        Depcrate_deaduse_115!();
+        Depcrate_deaduse_116!();
+        Depcrate_deaduse_117!();
+        Depcrate_deaduse_118!();
+        Depcrate_deadshould_explore!();
+        Depcrate_deadComesFromAllowExpect!();
+        Depcrate_deadMarkSymbolVisitor!();
+        Depcrate_deadimpl_122!();
+        Depcrate_deadimpl_123!();
+        Depcrate_deadhas_allow_dead_code_or_lang_attr!();
+        Depcrate_deadmaybe_record_as_seed!();
+        Depcrate_deadcreate_and_seed_worklist!();
+        Depcrate_deadlive_symbols_and_ignored_derived_traits!();
+        Depcrate_deadDeadItem!();
+        Depcrate_deadDeadVisitor!();
+        Depcrate_deadShouldWarnAboutField!();
+        Depcrate_deadReportOn!();
+        Depcrate_deadimpl_132!();
+        Depcrate_deadcheck_mod_deathness!();
+        Depcrate_deadprovide!();
+    };
+}

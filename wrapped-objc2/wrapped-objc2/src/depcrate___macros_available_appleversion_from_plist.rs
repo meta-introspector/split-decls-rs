@@ -1,0 +1,9 @@
+// Generated macro for version_from_plist (function)
+macro_rules! Depcrate___macros_available_appleversion_from_plist {
+() => {
+// Module: crate::__macros::available::apple
+// Provides: {"version_from_plist"}
+// Dependencies: {}
+# [doc = " Look up the current OS version(s) from `/System/Library/CoreServices/SystemVersion.plist`."] # [doc = ""] # [doc = " More specifically, from the `ProductVersion` and `iOSSupportVersion` keys, and from"] # [doc = " `$IPHONE_SIMULATOR_ROOT/System/Library/CoreServices/SystemVersion.plist` on the simulator."] # [doc = ""] # [doc = " This file was introduced in macOS 10.3, which is well below the minimum supported version by"] # [doc = " `rustc`, which is (at the time of writing) macOS 10.12."] # [doc = ""] # [doc = " # Implementation"] # [doc = ""] # [doc = " We do roughly the same thing in here as `compiler-rt`, and dynamically look up CoreFoundation"] # [doc = " utilities for parsing PLists (to avoid having to re-implement that in here, as pulling in a full"] # [doc = " PList parser into `std` seems costly)."] # [doc = ""] # [doc = " If this is found to be undesirable, we _could_ possibly hack it by parsing the PList manually"] # [doc = " (it seems to use the plain-text \"xml1\" encoding/format in all versions), but that seems brittle."] fn version_from_plist () -> OSVersion { let root = if cfg ! (target_simulator) { PathBuf :: from (env :: var_os ("IPHONE_SIMULATOR_ROOT") . expect ("environment variable `IPHONE_SIMULATOR_ROOT` must be set when executing under simulator" ,)) } else { PathBuf :: from ("/") } ; let path = root . join ("System/Library/CoreServices/SystemVersion.plist") ; let plist_buffer = fs :: read (& path) . unwrap_or_else (| e | panic ! ("failed reading {path:?}: {e}")) ; parse_version_from_plist (& root , & plist_buffer) }
+};
+}

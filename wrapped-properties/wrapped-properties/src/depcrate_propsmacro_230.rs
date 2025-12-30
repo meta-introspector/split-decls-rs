@@ -1,0 +1,9 @@
+// Generated macro for macro_230 (macro)
+macro_rules! Depcrate_propsmacro_230 {
+() => {
+// Module: crate::props
+// Provides: {"macro_230"}
+// Dependencies: {}
+make_binary_property ! { name : "Id_Start" ; short_name : "IDS" ; ident : IdStart ; data_marker : crate :: provider :: PropertyBinaryIdStartV1 ; singleton : SINGLETON_PROPERTY_BINARY_ID_START_V1 ; # [doc = " Characters that can begin an identifier."] # [doc = ""] # [doc = " If using NFKC to fold differences between"] # [doc = " characters, use [`XidStart`] instead.  See [`Unicode Standard Annex"] # [doc = " #31`](https://www.unicode.org/reports/tr31/tr31-35.html) for more details."] # [doc = ""] # [doc = " # Example"] # [doc = ""] # [doc = " ```"] # [doc = " use icu::properties::CodePointSetData;"] # [doc = " use icu::properties::props::IdStart;"] # [doc = ""] # [doc = " let id_start = CodePointSetData::new::<IdStart>();"] # [doc = ""] # [doc = " assert!(id_start.contains('x'));"] # [doc = " assert!(!id_start.contains('1'));"] # [doc = " assert!(!id_start.contains('_'));"] # [doc = " assert!(id_start.contains('ߝ'));  // U+07DD NKO LETTER FA"] # [doc = " assert!(!id_start.contains('ⓧ'));  // U+24E7 CIRCLED LATIN SMALL LETTER X"] # [doc = " assert!(id_start.contains('\\u{FC5E}'));  // ARABIC LIGATURE SHADDA WITH DAMMATAN ISOLATED FORM"] # [doc = " ```"] }
+};
+}

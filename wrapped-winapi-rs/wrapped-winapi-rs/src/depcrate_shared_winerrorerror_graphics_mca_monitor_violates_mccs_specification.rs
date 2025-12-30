@@ -1,0 +1,9 @@
+// Generated macro for ERROR_GRAPHICS_MCA_MONITOR_VIOLATES_MCCS_SPECIFICATION (const)
+macro_rules! Depcrate_shared_winerrorERROR_GRAPHICS_MCA_MONITOR_VIOLATES_MCCS_SPECIFICATION {
+() => {
+// Module: crate::shared::winerror
+// Provides: {"ERROR_GRAPHICS_MCA_MONITOR_VIOLATES_MCCS_SPECIFICATION"}
+// Dependencies: {}
+pub const ERROR_GRAPHICS_MCA_MONITOR_VIOLATES_MCCS_SPECIFICATION : HRESULT = 0xC02625DA ;
+};
+}

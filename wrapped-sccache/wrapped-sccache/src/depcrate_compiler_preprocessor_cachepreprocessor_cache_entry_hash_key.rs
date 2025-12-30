@@ -1,0 +1,9 @@
+// Generated macro for preprocessor_cache_entry_hash_key (function)
+macro_rules! Depcrate_compiler_preprocessor_cachepreprocessor_cache_entry_hash_key {
+() => {
+// Module: crate::compiler::preprocessor_cache
+// Provides: {"preprocessor_cache_entry_hash_key"}
+// Dependencies: {}
+# [doc = " Compute the hash key of compiler preprocessing `input` with `args`."] # [allow (clippy :: too_many_arguments)] pub fn preprocessor_cache_entry_hash_key (compiler_digest : & str , language : Language , arguments : & [OsString] , extra_hashes : & [String] , env_vars : & [(OsString , OsString)] , input_file : & Path , plusplus : bool , config : PreprocessorCacheModeConfig ,) -> anyhow :: Result < Option < String > > { let mut m = Digest :: new () ; m . update (compiler_digest . as_bytes ()) ; m . update (& [plusplus as u8]) ; m . update (& [FORMAT_VERSION]) ; m . update (language . as_str () . as_bytes ()) ; for arg in arguments { arg . hash (& mut HashToDigest { digest : & mut m }) ; } for hash in extra_hashes { m . update (hash . as_bytes ()) ; } for (var , val) in env_vars . iter () { if CACHED_ENV_VARS . contains (var . as_os_str ()) { var . hash (& mut HashToDigest { digest : & mut m }) ; m . update (& b"=" [..]) ; val . hash (& mut HashToDigest { digest : & mut m }) ; } } let mut buf = vec ! [] ; encode_path (& mut buf , input_file) ? ; m . update (& buf) ; let reader = std :: fs :: File :: open (input_file) . with_context (| | format ! ("while hashing the input file '{}'" , input_file . display ())) ? ; let digest = if config . ignore_time_macros { Digest :: reader_sync (reader) ? } else { let (digest , finder) = Digest :: reader_sync_time_macros (reader) ? ; if finder . found_time () { debug ! ("Found __TIME__ in {}" , input_file . display ()) ; return Ok (None) ; } digest } ; m . update (digest . as_bytes ()) ; Ok (Some (m . finish ())) }
+};
+}

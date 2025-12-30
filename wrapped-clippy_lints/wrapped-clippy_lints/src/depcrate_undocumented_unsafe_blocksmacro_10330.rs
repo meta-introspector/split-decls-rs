@@ -1,0 +1,9 @@
+// Generated macro for macro_10330 (macro)
+macro_rules! Depcrate_undocumented_unsafe_blocksmacro_10330 {
+() => {
+// Module: crate::undocumented_unsafe_blocks
+// Provides: {"macro_10330"}
+// Dependencies: {}
+declare_clippy_lint ! { # [doc = " ### What it does"] # [doc = " Checks for `unsafe` blocks and impls without a `// SAFETY: ` comment"] # [doc = " explaining why the unsafe operations performed inside"] # [doc = " the block are safe."] # [doc = ""] # [doc = " Note the comment must appear on the line(s) preceding the unsafe block"] # [doc = " with nothing appearing in between. The following is ok:"] # [doc = " ```ignore"] # [doc = " foo("] # [doc = "     // SAFETY:"] # [doc = "     // This is a valid safety comment"] # [doc = "     unsafe { *x }"] # [doc = " )"] # [doc = " ```"] # [doc = " But neither of these are:"] # [doc = " ```ignore"] # [doc = " // SAFETY:"] # [doc = " // This is not a valid safety comment"] # [doc = " foo("] # [doc = "     /* SAFETY: Neither is this */ unsafe { *x },"] # [doc = " );"] # [doc = " ```"] # [doc = ""] # [doc = " ### Why restrict this?"] # [doc = " Undocumented unsafe blocks and impls can make it difficult to read and maintain code."] # [doc = " Writing out the safety justification may help in discovering unsoundness or bugs."] # [doc = ""] # [doc = " ### Example"] # [doc = " ```no_run"] # [doc = " use std::ptr::NonNull;"] # [doc = " let a = &mut 42;"] # [doc = ""] # [doc = " let ptr = unsafe { NonNull::new_unchecked(a) };"] # [doc = " ```"] # [doc = " Use instead:"] # [doc = " ```no_run"] # [doc = " use std::ptr::NonNull;"] # [doc = " let a = &mut 42;"] # [doc = ""] # [doc = " // SAFETY: references are guaranteed to be non-null."] # [doc = " let ptr = unsafe { NonNull::new_unchecked(a) };"] # [doc = " ```"] # [clippy :: version = "1.58.0"] pub UNDOCUMENTED_UNSAFE_BLOCKS , restriction , "creating an unsafe block without explaining why it is safe" }
+};
+}

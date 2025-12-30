@@ -1,0 +1,9 @@
+// Generated macro for Variable (struct)
+macro_rules! DepcrateVariable {
+() => {
+// Module: crate
+// Provides: {"Variable"}
+// Dependencies: {}
+# [doc = " An monotonically increasing set of `Tuple`s."] # [doc = ""] # [doc = " There are three stages in the lifecycle of a tuple:"] # [doc = ""] # [doc = "   1. A tuple is added to `self.to_add`, but is not yet visible externally."] # [doc = "   2. Newly added tuples are then promoted to `self.recent` for one iteration."] # [doc = "   3. After one iteration, recent tuples are moved to `self.tuples` for posterity."] # [doc = ""] # [doc = " Each time `self.changed()` is called, the `recent` relation is folded into `tuples`,"] # [doc = " and the `to_add` relations are merged, potentially deduplicated against `tuples`, and"] # [doc = " then made  `recent`. This way, across calls to `changed()` all added tuples are in"] # [doc = " `recent` at least once and eventually all are in `tuples`."] # [doc = ""] # [doc = " A `Variable` may optionally be instructed not to de-duplicate its tuples, for reasons"] # [doc = " of performance. Such a variable cannot be relied on to terminate iterative computation,"] # [doc = " and it is important that any cycle of derivations have at least one de-duplicating"] # [doc = " variable on it."] pub struct Variable < Tuple : Ord > { # [doc = " Should the variable be maintained distinctly."] distinct : bool , # [doc = " A useful name for the variable."] name : String , # [doc = " A list of relations whose union are the accepted tuples."] pub stable : Rc < RefCell < Vec < Relation < Tuple > > > > , # [doc = " A list of recent tuples, still to be processed."] pub recent : Rc < RefCell < Relation < Tuple > > > , # [doc = " A list of future tuples, to be introduced."] to_add : Rc < RefCell < Vec < Relation < Tuple > > > > , }
+};
+}

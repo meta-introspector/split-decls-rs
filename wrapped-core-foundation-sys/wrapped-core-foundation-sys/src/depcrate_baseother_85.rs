@@ -1,0 +1,9 @@
+// Generated macro for other_85 (other)
+macro_rules! Depcrate_baseother_85 {
+() => {
+// Module: crate::base
+// Provides: {"other_85"}
+// Dependencies: {}
+unsafe extern "C" { pub static kCFAllocatorDefault : CFAllocatorRef ; pub static kCFAllocatorSystemDefault : CFAllocatorRef ; pub static kCFAllocatorMalloc : CFAllocatorRef ; pub static kCFAllocatorMallocZone : CFAllocatorRef ; pub static kCFAllocatorNull : CFAllocatorRef ; pub static kCFAllocatorUseContext : CFAllocatorRef ; pub fn CFAllocatorCreate (allocator : CFAllocatorRef , context : * mut CFAllocatorContext ,) -> CFAllocatorRef ; pub fn CFAllocatorAllocate (allocator : CFAllocatorRef , size : CFIndex , hint : CFOptionFlags ,) -> * mut c_void ; pub fn CFAllocatorDeallocate (allocator : CFAllocatorRef , ptr : * mut c_void) ; pub fn CFAllocatorGetPreferredSizeForSize (allocator : CFAllocatorRef , size : CFIndex , hint : CFOptionFlags ,) -> CFIndex ; pub fn CFAllocatorReallocate (allocator : CFAllocatorRef , ptr : * mut c_void , newsize : CFIndex , hint : CFOptionFlags ,) -> * mut c_void ; pub fn CFAllocatorGetDefault () -> CFAllocatorRef ; pub fn CFAllocatorSetDefault (allocator : CFAllocatorRef) ; pub fn CFAllocatorGetContext (allocator : CFAllocatorRef , context : * mut CFAllocatorContext) ; pub fn CFAllocatorGetTypeID () -> CFTypeID ; pub static kCFNull : CFNullRef ; pub fn CFNullGetTypeID () -> CFTypeID ; pub fn CFCopyTypeIDDescription (type_id : CFTypeID) -> CFStringRef ; pub fn CFGetAllocator (cf : CFTypeRef) -> CFAllocatorRef ; pub fn CFCopyDescription (cf : CFTypeRef) -> CFStringRef ; pub fn CFEqual (cf1 : CFTypeRef , cf2 : CFTypeRef) -> Boolean ; pub fn CFGetRetainCount (cf : CFTypeRef) -> CFIndex ; pub fn CFGetTypeID (cf : CFTypeRef) -> CFTypeID ; pub fn CFHash (cf : CFTypeRef) -> CFHashCode ; pub fn CFRelease (cf : CFTypeRef) ; pub fn CFRetain (cf : CFTypeRef) -> CFTypeRef ; pub fn CFShow (obj : CFTypeRef) ; }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for use_386 (pub_use)
+macro_rules! Depcrate_generateduse_386 {
+() => {
+// Module: crate::generated
+// Provides: {"use_386"}
+// Dependencies: {}
+# [cfg (feature = "DOMNode")] pub use self :: __DOMNode :: DOM_DOCUMENT_POSITION_DISCONNECTED ;
+};
+}

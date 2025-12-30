@@ -1,0 +1,47 @@
+// Generated module macro for crate::suspicious_operation_groupings
+macro_rules! Modcrate_suspicious_operation_groupings {
+() => {
+        Depcrate_suspicious_operation_groupingsuse_10004!();
+        Depcrate_suspicious_operation_groupingsuse_10005!();
+        Depcrate_suspicious_operation_groupingsuse_10006!();
+        Depcrate_suspicious_operation_groupingsuse_10007!();
+        Depcrate_suspicious_operation_groupingsuse_10008!();
+        Depcrate_suspicious_operation_groupingsuse_10009!();
+        Depcrate_suspicious_operation_groupingsuse_10010!();
+        Depcrate_suspicious_operation_groupingsuse_10011!();
+        Depcrate_suspicious_operation_groupingsuse_10012!();
+        Depcrate_suspicious_operation_groupingsuse_10013!();
+        Depcrate_suspicious_operation_groupingsuse_10014!();
+        Depcrate_suspicious_operation_groupingsuse_10015!();
+        Depcrate_suspicious_operation_groupingsmacro_10016!();
+        Depcrate_suspicious_operation_groupingsmacro_10017!();
+        Depcrate_suspicious_operation_groupingsimpl_10018!();
+        Depcrate_suspicious_operation_groupingscheck_binops!();
+        Depcrate_suspicious_operation_groupingsattempt_to_emit_no_difference_lint!();
+        Depcrate_suspicious_operation_groupingsemit_suggestion!();
+        Depcrate_suspicious_operation_groupingsident_swap_sugg!();
+        Depcrate_suspicious_operation_groupingsreplace_left_sugg!();
+        Depcrate_suspicious_operation_groupingsreplace_right_sugg!();
+        Depcrate_suspicious_operation_groupingsBinaryOp!();
+        Depcrate_suspicious_operation_groupingsimpl_10026!();
+        Depcrate_suspicious_operation_groupingsstrip_non_ident_wrappers!();
+        Depcrate_suspicious_operation_groupingsextract_related_binops!();
+        Depcrate_suspicious_operation_groupingsif_statement_binops!();
+        Depcrate_suspicious_operation_groupingsappend_opt_vecs!();
+        Depcrate_suspicious_operation_groupingschained_binops!();
+        Depcrate_suspicious_operation_groupingschained_binops_helper!();
+        Depcrate_suspicious_operation_groupingsIdentLocation!();
+        Depcrate_suspicious_operation_groupingsimpl_10034!();
+        Depcrate_suspicious_operation_groupingsimpl_10035!();
+        Depcrate_suspicious_operation_groupingsIdentDifference!();
+        Depcrate_suspicious_operation_groupingsimpl_10037!();
+        Depcrate_suspicious_operation_groupingsimpl_10038!();
+        Depcrate_suspicious_operation_groupingsimpl_10039!();
+        Depcrate_suspicious_operation_groupingsident_difference_expr!();
+        Depcrate_suspicious_operation_groupingsident_difference_expr_with_base_location!();
+        Depcrate_suspicious_operation_groupingsident_difference_via_ident_iter_with_base_location!();
+        Depcrate_suspicious_operation_groupingsget_ident!();
+        Depcrate_suspicious_operation_groupingssuggestion_with_swapped_ident!();
+        Depcrate_suspicious_operation_groupingsskip_index!();
+    };
+}

@@ -1,0 +1,9 @@
+// Generated macro for impl_744 (impl)
+macro_rules! Depcrate_core_build_steps_toolimpl_744 {
+() => {
+// Module: crate::core::build_steps::tool
+// Provides: {"impl_744"}
+// Dependencies: {}
+impl Step for RustAnalyzerProcMacroSrv { type Output = ToolBuildResult ; const DEFAULT : bool = true ; const IS_HOST : bool = true ; fn should_run (run : ShouldRun < '_ >) -> ShouldRun < '_ > { let builder = run . builder ; run . path ("src/tools/rust-analyzer") . path ("src/tools/rust-analyzer/crates/proc-macro-srv-cli") . default_condition (builder . tool_enabled ("rust-analyzer") || builder . tool_enabled ("rust-analyzer-proc-macro-srv") ,) } fn make_run (run : RunConfig < '_ >) { run . builder . ensure (RustAnalyzerProcMacroSrv { compilers : RustcPrivateCompilers :: new (run . builder , run . builder . top_stage , run . target) , }) ; } fn run (self , builder : & Builder < '_ >) -> Self :: Output { let tool_result = builder . ensure (ToolBuild { build_compiler : self . compilers . build_compiler , target : self . compilers . target () , tool : "rust-analyzer-proc-macro-srv" , mode : Mode :: ToolRustcPrivate , path : "src/tools/rust-analyzer/crates/proc-macro-srv-cli" , extra_features : vec ! ["in-rust-tree" . to_owned ()] , source_type : SourceType :: InTree , allow_features : RustAnalyzer :: ALLOW_FEATURES , cargo_args : Vec :: new () , artifact_kind : ToolArtifactKind :: Binary , }) ; let libexec_path = builder . sysroot (self . compilers . target_compiler) . join ("libexec") ; t ! (fs :: create_dir_all (& libexec_path)) ; builder . copy_link (& tool_result . tool_path , & libexec_path . join ("rust-analyzer-proc-macro-srv") , FileType :: Executable ,) ; tool_result } fn metadata (& self) -> Option < StepMetadata > { Some (StepMetadata :: build ("rust-analyzer-proc-macro-srv" , self . compilers . target ()) . built_by (self . compilers . build_compiler) ,) } }
+};
+}

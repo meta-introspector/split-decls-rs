@@ -1,0 +1,42 @@
+// Generated module macro for crate::back::archive
+macro_rules! Modcrate_back_archive {
+() => {
+        Depcrate_back_archiveuse_75!();
+        Depcrate_back_archiveuse_76!();
+        Depcrate_back_archiveuse_77!();
+        Depcrate_back_archiveuse_78!();
+        Depcrate_back_archiveuse_79!();
+        Depcrate_back_archiveuse_80!();
+        Depcrate_back_archiveuse_81!();
+        Depcrate_back_archiveuse_82!();
+        Depcrate_back_archiveuse_83!();
+        Depcrate_back_archiveuse_84!();
+        Depcrate_back_archiveuse_85!();
+        Depcrate_back_archiveuse_86!();
+        Depcrate_back_archiveuse_87!();
+        Depcrate_back_archiveuse_88!();
+        Depcrate_back_archiveuse_89!();
+        Depcrate_back_archiveuse_90!();
+        Depcrate_back_archiveuse_91!();
+        Depcrate_back_archiveuse_92!();
+        Depcrate_back_archiveuse_93!();
+        Depcrate_back_archiveuse_94!();
+        Depcrate_back_archiveuse_95!();
+        Depcrate_back_archiveImportLibraryItem!();
+        Depcrate_back_archiveimpl_97!();
+        Depcrate_back_archiveArchiveBuilderBuilder!();
+        Depcrate_back_archivecreate_mingw_dll_import_lib!();
+        Depcrate_back_archivefind_binutils_dlltool!();
+        Depcrate_back_archiveArchiveBuilder!();
+        Depcrate_back_archiveArArchiveBuilderBuilder!();
+        Depcrate_back_archiveimpl_103!();
+        Depcrate_back_archiveArArchiveBuilder!();
+        Depcrate_back_archiveArchiveEntry!();
+        Depcrate_back_archiveimpl_106!();
+        Depcrate_back_archivetry_filter_fat_archs!();
+        Depcrate_back_archivetry_extract_macho_fat_archive!();
+        Depcrate_back_archiveimpl_109!();
+        Depcrate_back_archiveimpl_110!();
+        Depcrate_back_archiveio_error_context!();
+    };
+}

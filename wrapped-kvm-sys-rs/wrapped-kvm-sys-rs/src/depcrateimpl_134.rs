@@ -1,0 +1,9 @@
+// Generated macro for impl_134 (impl)
+macro_rules! Depcrateimpl_134 {
+() => {
+// Module: crate
+// Provides: {"impl_134"}
+// Dependencies: {}
+impl fmt :: Debug for Run { fn fmt (& self , fmt : & mut fmt :: Formatter) -> fmt :: Result { let mut s = fmt . debug_struct ("Run") ; s . field ("request_interrupt_window" , & self . request_interrupt_window) . field ("exit_reason" , & self . exit_reason) . field ("ready_for_interrupt_injection" , & self . ready_for_interrupt_injection) . field ("if_flag" , & self . if_flag) . field ("flags" , & self . flags) . field ("cr8" , & self . cr8) ; unsafe { match self . exit_reason { Exit :: Unknown => s . field ("hw" , & * self . hw ()) , Exit :: FailEntry => s . field ("fail_entry" , & * self . fail_entry ()) , Exit :: Exception => s . field ("ex" , & * self . ex ()) , Exit :: Io => s . field ("io" , & * self . io ()) , Exit :: Debug => s . field ("debug" , & * self . debug ()) , Exit :: Mmio => s . field ("mmio" , & * self . mmio ()) , Exit :: Hypercall => s . field ("hypercall" , & * self . hypercall ()) , Exit :: TprAccess => s . field ("tpr_access" , & * self . tpr_access ()) , Exit :: S390Sieic => s . field ("s390_sieic" , & * self . s390_sieic ()) , Exit :: S390Reset => s . field ("s390_reset_flags" , & * self . s390_reset_flags ()) , Exit :: S390Ucontrol => s . field ("s390_ucontrol" , & * self . s390_ucontrol ()) , Exit :: Dcr => s . field ("dcr" , & * self . dcr ()) , Exit :: Osi => s . field ("osi" , & * self . osi ()) , Exit :: PaprHcall => s . field ("papr_hcall" , & * self . papr_hcall ()) , Exit :: S390Tsch => s . field ("s390_tsch" , & * self . s390_tsch ()) , Exit :: Epr => s . field ("epr" , & * self . epr ()) , Exit :: SystemEvent => s . field ("system_event" , & * self . system_event ()) , _ => & mut s , } } . finish () } }
+};
+}

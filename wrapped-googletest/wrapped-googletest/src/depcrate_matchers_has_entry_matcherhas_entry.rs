@@ -1,0 +1,9 @@
+// Generated macro for has_entry (function)
+macro_rules! Depcrate_matchers_has_entry_matcherhas_entry {
+() => {
+// Module: crate::matchers::has_entry_matcher
+// Provides: {"has_entry"}
+// Dependencies: {}
+# [doc = " Matches a `&HashMap` containing the given `key` whose value is matched by"] # [doc = " the matcher `inner`."] # [doc = ""] # [doc = " ```"] # [doc = " # use googletest::prelude::*;"] # [doc = " # use std::collections::HashMap;"] # [doc = " # fn should_pass() -> Result<()> {"] # [doc = " let value = HashMap::from([(0, 1), (1, -1)]);"] # [doc = " verify_that!(value, has_entry(0, eq(&1)))?;  // Passes"] # [doc = " #     Ok(())"] # [doc = " # }"] # [doc = " # fn should_fail_1() -> Result<()> {"] # [doc = " # let value = HashMap::from([(0, 1), (1, -1)]);"] # [doc = " verify_that!(value, has_entry(1, gt(&0)))?;  // Fails: value not matched"] # [doc = " #     Ok(())"] # [doc = " # }"] # [doc = " # fn should_fail_2() -> Result<()> {"] # [doc = " # let value = HashMap::from([(0, 1), (1, -1)]);"] # [doc = " verify_that!(value, has_entry(2, eq(&0)))?;  // Fails: key not present"] # [doc = " #     Ok(())"] # [doc = " # }"] # [doc = " # should_pass().unwrap();"] # [doc = " # should_fail_1().unwrap_err();"] # [doc = " # should_fail_2().unwrap_err();"] # [doc = " ```"] # [doc = ""] # [doc = " Note: One could obtain the same effect by using `contains` and a"] # [doc = " `Matcher<(&Key, &Value)>`:"] # [doc = ""] # [doc = " ```"] # [doc = " # use googletest::prelude::*;"] # [doc = " # use std::collections::HashMap;"] # [doc = " # fn should_pass() -> Result<()> {"] # [doc = " let value = HashMap::from([(0, 1), (1, -1)]);"] # [doc = " verify_that!(value, contains(eq((&0, &1))))?;"] # [doc = " #     Ok(())"] # [doc = " # }"] # [doc = " # should_pass().unwrap();"] # [doc = " ```"] pub fn has_entry < KeyT , MatcherT > (key : KeyT , inner : MatcherT) -> HasEntryMatcher < KeyT , MatcherT > { HasEntryMatcher { key , inner } }
+};
+}

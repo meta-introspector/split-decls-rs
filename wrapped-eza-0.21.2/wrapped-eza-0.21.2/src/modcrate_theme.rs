@@ -1,0 +1,50 @@
+// Generated module macro for crate::theme
+macro_rules! Modcrate_theme {
+() => {
+        Depcrate_themeuse_916!();
+        Depcrate_themeuse_917!();
+        Depcrate_themeuse_918!();
+        Depcrate_themeuse_919!();
+        Depcrate_themeuse_920!();
+        Depcrate_themeuse_921!();
+        Depcrate_themeuse_922!();
+        Depcrate_themeuse_923!();
+        Depcrate_themeui_styles!();
+        Depcrate_themeuse_962!();
+        Depcrate_themeuse_963!();
+        Depcrate_themeuse_964!();
+        Depcrate_themelsc!();
+        Depcrate_themeuse_977!();
+        Depcrate_themedefault_theme!();
+        Depcrate_themeOptions!();
+        Depcrate_themeUseColours!();
+        Depcrate_themeDefinitions!();
+        Depcrate_themeTheme!();
+        Depcrate_themeimpl_991!();
+        Depcrate_themeimpl_992!();
+        Depcrate_themeFileStyle!();
+        Depcrate_themeNoFileStyle!();
+        Depcrate_themeimpl_995!();
+        Depcrate_themeimpl_996!();
+        Depcrate_themeExtensionMappings!();
+        Depcrate_themeGlobPattern!();
+        Depcrate_themeimpl_999!();
+        Depcrate_themeis_simple_pattern!();
+        Depcrate_themeimpl_1001!();
+        Depcrate_themeFileTypes!();
+        Depcrate_themeimpl_1003!();
+        Depcrate_themeimpl_1004!();
+        Depcrate_themeimpl_1005!();
+        Depcrate_themeimpl_1006!();
+        Depcrate_themeimpl_1007!();
+        Depcrate_themeimpl_1008!();
+        Depcrate_themeimpl_1009!();
+        Depcrate_themeimpl_1010!();
+        Depcrate_themeimpl_1011!();
+        Depcrate_themeimpl_1012!();
+        Depcrate_themeimpl_1013!();
+        Depcrate_themeimpl_1014!();
+        Depcrate_themeapply_overlay!();
+        Depcrate_themecustoms_test!();
+    };
+}

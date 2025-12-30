@@ -1,0 +1,9 @@
+// Generated macro for ERROR_GRAPHICS_UNSWIZZLING_APERTURE_UNSUPPORTED (const)
+macro_rules! Depcrate_shared_winerrorERROR_GRAPHICS_UNSWIZZLING_APERTURE_UNSUPPORTED {
+() => {
+// Module: crate::shared::winerror
+// Provides: {"ERROR_GRAPHICS_UNSWIZZLING_APERTURE_UNSUPPORTED"}
+// Dependencies: {}
+pub const ERROR_GRAPHICS_UNSWIZZLING_APERTURE_UNSUPPORTED : HRESULT = 0xC0262108 ;
+};
+}

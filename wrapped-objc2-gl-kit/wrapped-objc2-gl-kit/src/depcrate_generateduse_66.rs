@@ -1,0 +1,9 @@
+// Generated macro for use_66 (pub_use)
+macro_rules! Depcrate_generateduse_66 {
+() => {
+// Module: crate::generated
+// Provides: {"use_66"}
+// Dependencies: {}
+# [cfg (all (feature = "GLKMatrixStack" , feature = "objc2-core-foundation"))] pub use self :: __GLKMatrixStack :: GLKMatrixStackCreate ;
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for extract_dependency_metadata (function)
+macro_rules! Depcrate_dependenciesextract_dependency_metadata {
+() => {
+// Module: crate::dependencies
+// Provides: {"extract_dependency_metadata"}
+// Dependencies: {}
+# [doc = " Extract metadata from a dependency value"] fn extract_dependency_metadata (name : & str , value : & Value) -> DependencyMetadata { let mut metadata = DependencyMetadata { name : name . to_string () , value : value . clone () , default_features : None , features : Vec :: new () , optional : false , } ; if let Some (table) = value . as_table () { if let Some (package_name) = table . get ("package") . and_then (| v | v . as_str ()) { metadata . name = package_name . to_string () ; } if let Some (default_features) = table . get ("default-features") . and_then (| v | v . as_bool ()) { metadata . default_features = Some (default_features) ; } if let Some (features) = table . get ("features") . and_then (| v | v . as_array ()) { metadata . features = features . iter () . filter_map (| f | f . as_str () . map (| s | s . to_string ())) . collect () ; } if let Some (optional) = table . get ("optional") . and_then (| v | v . as_bool ()) { metadata . optional = optional ; } } metadata }
+};
+}

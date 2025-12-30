@@ -1,0 +1,9 @@
+// Generated macro for impl_511 (impl)
+macro_rules! Depcrate_os_macos_secure_transportimpl_511 {
+() => {
+// Module: crate::os::macos::secure_transport
+// Provides: {"impl_511"}
+// Dependencies: {}
+impl SslContextExt for SslContext { fn diffie_hellman_params (& self) -> Result < Option < & [u8] > > { unsafe { let mut ptr = ptr :: null () ; let mut len = 0 ; cvt (SSLGetDiffieHellmanParams (self . as_inner () , & mut ptr , & mut len ,)) ? ; if ptr . is_null () { Ok (None) } else { Ok (Some (slice :: from_raw_parts (ptr . cast :: < u8 > () , len))) } } } fn set_diffie_hellman_params (& mut self , dh_params : & [u8]) -> Result < () > { unsafe { cvt (SSLSetDiffieHellmanParams (self . as_inner () , dh_params . as_ptr () . cast () , dh_params . len () ,)) } } fn certificate_authorities (& self) -> Result < Option < Vec < SecCertificate > > > { unsafe { let mut raw_certs = ptr :: null () ; cvt (SSLCopyCertificateAuthorities (self . as_inner () , & mut raw_certs ,)) ? ; if raw_certs . is_null () { Ok (None) } else { let certs = CFArray :: < SecCertificate > :: wrap_under_create_rule (raw_certs) . iter () . map (| c | c . clone ()) . collect () ; Ok (Some (certs)) } } } fn set_certificate_authorities (& mut self , certs : & [SecCertificate]) -> Result < () > { unsafe { let certs = CFArray :: from_CFTypes (certs) ; cvt (SSLSetCertificateAuthorities (self . as_inner () , certs . as_CFTypeRef () , 1 ,)) } } fn add_certificate_authorities (& mut self , certs : & [SecCertificate]) -> Result < () > { unsafe { let certs = CFArray :: from_CFTypes (certs) ; cvt (SSLSetCertificateAuthorities (self . as_inner () , certs . as_CFTypeRef () , 0 ,)) } } impl_options ! { const kSSLSessionOptionAllowServerIdentityChange : allow_server_identity_change & set_allow_server_identity_change , const kSSLSessionOptionFallback : fallback & set_fallback , const kSSLSessionOptionBreakOnClientHello : break_on_client_hello & set_break_on_client_hello , } }
+};
+}

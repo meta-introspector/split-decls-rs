@@ -1,0 +1,43 @@
+// Generated module macro for crate::proto::streams::streams
+macro_rules! Modcrate_proto_streams_streams {
+() => {
+        Depcrate_proto_streams_streamsuse_509!();
+        Depcrate_proto_streams_streamsuse_510!();
+        Depcrate_proto_streams_streamsuse_511!();
+        Depcrate_proto_streams_streamsuse_512!();
+        Depcrate_proto_streams_streamsuse_513!();
+        Depcrate_proto_streams_streamsuse_514!();
+        Depcrate_proto_streams_streamsuse_515!();
+        Depcrate_proto_streams_streamsuse_516!();
+        Depcrate_proto_streams_streamsuse_517!();
+        Depcrate_proto_streams_streamsuse_518!();
+        Depcrate_proto_streams_streamsuse_519!();
+        Depcrate_proto_streams_streamsuse_520!();
+        Depcrate_proto_streams_streamsuse_521!();
+        Depcrate_proto_streams_streamsuse_522!();
+        Depcrate_proto_streams_streamsStreams!();
+        Depcrate_proto_streams_streamsDynStreams!();
+        Depcrate_proto_streams_streamsStreamRef!();
+        Depcrate_proto_streams_streamsOpaqueStreamRef!();
+        Depcrate_proto_streams_streamsInner!();
+        Depcrate_proto_streams_streamsActions!();
+        Depcrate_proto_streams_streamsSendBuffer!();
+        Depcrate_proto_streams_streamsimpl_530!();
+        Depcrate_proto_streams_streamsimpl_531!();
+        Depcrate_proto_streams_streamsimpl_532!();
+        Depcrate_proto_streams_streamsimpl_533!();
+        Depcrate_proto_streams_streamsimpl_534!();
+        Depcrate_proto_streams_streamsimpl_535!();
+        Depcrate_proto_streams_streamsimpl_536!();
+        Depcrate_proto_streams_streamsimpl_537!();
+        Depcrate_proto_streams_streamsimpl_538!();
+        Depcrate_proto_streams_streamsimpl_539!();
+        Depcrate_proto_streams_streamsimpl_540!();
+        Depcrate_proto_streams_streamsimpl_541!();
+        Depcrate_proto_streams_streamsimpl_542!();
+        Depcrate_proto_streams_streamsdrop_stream_ref!();
+        Depcrate_proto_streams_streamsmaybe_cancel!();
+        Depcrate_proto_streams_streamsimpl_545!();
+        Depcrate_proto_streams_streamsimpl_546!();
+    };
+}

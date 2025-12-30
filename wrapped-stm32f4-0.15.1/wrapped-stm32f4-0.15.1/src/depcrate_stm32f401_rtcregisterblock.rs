@@ -1,0 +1,9 @@
+// Generated macro for RegisterBlock (struct)
+macro_rules! Depcrate_stm32f401_rtcRegisterBlock {
+() => {
+// Module: crate::stm32f401::rtc
+// Provides: {"RegisterBlock"}
+// Dependencies: {}
+# [doc = r"Register block"] # [repr (C)] pub struct RegisterBlock { # [doc = "0x00 - time register"] pub tr : crate :: Reg < tr :: TR_SPEC > , # [doc = "0x04 - date register"] pub dr : crate :: Reg < dr :: DR_SPEC > , # [doc = "0x08 - control register"] pub cr : crate :: Reg < cr :: CR_SPEC > , # [doc = "0x0c - initialization and status register"] pub isr : crate :: Reg < isr :: ISR_SPEC > , # [doc = "0x10 - prescaler register"] pub prer : crate :: Reg < prer :: PRER_SPEC > , # [doc = "0x14 - wakeup timer register"] pub wutr : crate :: Reg < wutr :: WUTR_SPEC > , # [doc = "0x18 - calibration register"] pub calibr : crate :: Reg < calibr :: CALIBR_SPEC > , # [doc = "0x1c..0x24 - Alarm register"] pub alrmr : [crate :: Reg < alrmr :: ALRMR_SPEC > ; 2] , # [doc = "0x24 - write protection register"] pub wpr : crate :: Reg < wpr :: WPR_SPEC > , # [doc = "0x28 - sub second register"] pub ssr : crate :: Reg < ssr :: SSR_SPEC > , # [doc = "0x2c - shift control register"] pub shiftr : crate :: Reg < shiftr :: SHIFTR_SPEC > , # [doc = "0x30 - time stamp time register"] pub tstr : crate :: Reg < tstr :: TSTR_SPEC > , # [doc = "0x34 - time stamp date register"] pub tsdr : crate :: Reg < tsdr :: TSDR_SPEC > , # [doc = "0x38 - timestamp sub second register"] pub tsssr : crate :: Reg < tsssr :: TSSSR_SPEC > , # [doc = "0x3c - calibration register"] pub calr : crate :: Reg < calr :: CALR_SPEC > , # [doc = "0x40 - tamper and alternate function configuration register"] pub tafcr : crate :: Reg < tafcr :: TAFCR_SPEC > , # [doc = "0x44..0x4c - Alarm sub-second register"] pub alrmssr : [crate :: Reg < alrmssr :: ALRMSSR_SPEC > ; 2] , _reserved17 : [u8 ; 0x04] , # [doc = "0x50..0xa0 - backup register"] pub bkpr : [crate :: Reg < bkpr :: BKPR_SPEC > ; 20] , }
+};
+}

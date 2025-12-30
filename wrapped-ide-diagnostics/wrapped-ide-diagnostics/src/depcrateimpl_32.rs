@@ -1,0 +1,9 @@
+// Generated macro for impl_32 (impl)
+macro_rules! Depcrateimpl_32 {
+() => {
+// Module: crate
+// Provides: {"impl_32"}
+// Dependencies: {}
+impl Diagnostic { fn new (code : DiagnosticCode , message : impl Into < String > , range : impl Into < FileRange > ,) -> Diagnostic { let message = message . into () ; Diagnostic { code , message , range : range . into () , severity : match code { DiagnosticCode :: RustcHardError (_) | DiagnosticCode :: SyntaxError => Severity :: Error , DiagnosticCode :: RustcLint (_) => Severity :: Warning , DiagnosticCode :: Clippy (_) => Severity :: WeakWarning , DiagnosticCode :: Ra (_ , s) => s , } , unused : false , experimental : true , fixes : None , main_node : None , } } fn new_with_syntax_node_ptr (ctx : & DiagnosticsContext < '_ > , code : DiagnosticCode , message : impl Into < String > , node : InFile < SyntaxNodePtr > ,) -> Diagnostic { Diagnostic :: new (code , message , ctx . sema . diagnostics_display_range (node)) . with_main_node (node) } fn stable (mut self) -> Diagnostic { self . experimental = false ; self } fn with_main_node (mut self , main_node : InFile < SyntaxNodePtr >) -> Diagnostic { self . main_node = Some (main_node) ; self } fn with_fixes (mut self , fixes : Option < Vec < Assist > >) -> Diagnostic { self . fixes = fixes ; self } fn with_unused (mut self , unused : bool) -> Diagnostic { self . unused = unused ; self } }
+};
+}

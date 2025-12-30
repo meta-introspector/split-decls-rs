@@ -1,0 +1,9 @@
+// Generated macro for impl_value_getter (macro)
+macro_rules! Depcrate_namesimpl_value_getter {
+() => {
+// Module: crate::names
+// Provides: {"impl_value_getter"}
+// Dependencies: {}
+macro_rules ! impl_value_getter { (impl $ ty : ident { $ marker_n2e : ident / $ singleton_n2e : ident ; $ ($ (# [$ meta : meta]) * $ data_struct_s : ident / $ marker_e2sn : ident / $ singleton_e2sn : ident ; $ data_struct_l : ident / $ marker_e2ln : ident / $ singleton_e2ln : ident ;) ? }) => { impl ParseableEnumeratedProperty for $ ty { type DataMarker = $ marker_n2e ; # [cfg (feature = "compiled_data")] const SINGLETON : &'static PropertyValueNameToEnumMap <'static > = crate :: provider :: Baked ::$ singleton_n2e ; } $ ($ (# [$ meta]) * impl NamedEnumeratedProperty for $ ty { type DataStructLong = $ data_struct_l <'static >; type DataStructShort = $ data_struct_s <'static >; type DataStructLongBorrowed <'a > = $ data_struct_l <'a >; type DataStructShortBorrowed <'a > = $ data_struct_s <'a >; type DataMarkerLong = crate :: provider ::$ marker_e2ln ; type DataMarkerShort = crate :: provider ::$ marker_e2sn ; # [cfg (feature = "compiled_data")] const SINGLETON_LONG : &'static Self :: DataStructLong = crate :: provider :: Baked ::$ singleton_e2ln ; # [cfg (feature = "compiled_data")] const SINGLETON_SHORT : &'static Self :: DataStructShort = crate :: provider :: Baked ::$ singleton_e2sn ; fn nep_long_identity <'a > (yoked : &'a $ data_struct_l <'a >) -> &'a Self :: DataStructLongBorrowed <'a > { yoked } fn nep_long_identity_static (stat : &'static $ data_struct_l <'static >) -> &'static $ data_struct_l <'static > { stat } fn nep_short_identity <'a > (yoked : &'a $ data_struct_s <'a >) -> &'a Self :: DataStructShortBorrowed <'a > { yoked } fn nep_short_identity_static (stat : &'static $ data_struct_s <'static >) -> &'static $ data_struct_s <'static > { stat } }) ? } ; }
+};
+}

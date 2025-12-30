@@ -1,0 +1,45 @@
+// Generated module macro for crate::rustcrypto_impl
+macro_rules! Modcrate_rustcrypto_impl {
+() => {
+        Depcrate_rustcrypto_impluse_31!();
+        Depcrate_rustcrypto_impluse_32!();
+        Depcrate_rustcrypto_impluse_33!();
+        Depcrate_rustcrypto_impluse_34!();
+        Depcrate_rustcrypto_impluse_35!();
+        Depcrate_rustcrypto_impluse_36!();
+        Depcrate_rustcrypto_impluse_37!();
+        Depcrate_rustcrypto_implBIG_LEN!();
+        Depcrate_rustcrypto_implSMALL_LEN!();
+        Depcrate_rustcrypto_implBuffer!();
+        Depcrate_rustcrypto_implX!();
+        Depcrate_rustcrypto_implO!();
+        Depcrate_rustcrypto_implChaChaAny!();
+        Depcrate_rustcrypto_implimpl_44!();
+        Depcrate_rustcrypto_implmacro_45!();
+        Depcrate_rustcrypto_implmacro_46!();
+        Depcrate_rustcrypto_implimpl_47!();
+        Depcrate_rustcrypto_implimpl_48!();
+        Depcrate_rustcrypto_implimpl_49!();
+        Depcrate_rustcrypto_implimpl_50!();
+        Depcrate_rustcrypto_implimpl_51!();
+        Depcrate_rustcrypto_implimpl_52!();
+        Depcrate_rustcrypto_implimpl_53!();
+        Depcrate_rustcrypto_implimpl_54!();
+        Depcrate_rustcrypto_implimpl_55!();
+        Depcrate_rustcrypto_implAsBool!();
+        Depcrate_rustcrypto_implWideEnabled!();
+        Depcrate_rustcrypto_implimpl_58!();
+        Depcrate_rustcrypto_implWideDisabled!();
+        Depcrate_rustcrypto_implimpl_60!();
+        Depcrate_rustcrypto_implmacro_61!();
+        Depcrate_rustcrypto_implmacro_62!();
+        Depcrate_rustcrypto_implIetf!();
+        Depcrate_rustcrypto_implChaCha8!();
+        Depcrate_rustcrypto_implChaCha12!();
+        Depcrate_rustcrypto_implChaCha20!();
+        Depcrate_rustcrypto_implXChaCha8!();
+        Depcrate_rustcrypto_implXChaCha12!();
+        Depcrate_rustcrypto_implXChaCha20!();
+        Depcrate_rustcrypto_impltests!();
+    };
+}

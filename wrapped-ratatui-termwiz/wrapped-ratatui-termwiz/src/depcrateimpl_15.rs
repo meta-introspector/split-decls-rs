@@ -1,0 +1,9 @@
+// Generated macro for impl_15 (impl)
+macro_rules! Depcrateimpl_15 {
+() => {
+// Module: crate
+// Provides: {"impl_15"}
+// Dependencies: {}
+impl TermwizBackend { # [doc = " Creates a new Termwiz backend instance."] # [doc = ""] # [doc = " The backend will automatically enable raw mode and enter the alternate screen."] # [doc = ""] # [doc = " # Errors"] # [doc = ""] # [doc = " Returns an error if unable to do any of the following:"] # [doc = " - query the terminal capabilities."] # [doc = " - enter raw mode."] # [doc = " - enter the alternate screen."] # [doc = " - create the system or buffered terminal."] # [doc = ""] # [doc = " # Example"] # [doc = ""] # [doc = " ```rust,no_run"] # [doc = " use ratatui::backend::TermwizBackend;"] # [doc = ""] # [doc = " let backend = TermwizBackend::new()?;"] # [doc = " # Ok::<(), Box<dyn std::error::Error>>(())"] # [doc = " ```"] pub fn new () -> Result < Self , Box < dyn Error > > { let mut buffered_terminal = BufferedTerminal :: new (SystemTerminal :: new (Capabilities :: new_from_env () ?) ?) ? ; buffered_terminal . terminal () . set_raw_mode () ? ; buffered_terminal . terminal () . enter_alternate_screen () ? ; Ok (Self { buffered_terminal }) } # [doc = " Creates a new Termwiz backend instance with the given buffered terminal."] pub const fn with_buffered_terminal (instance : BufferedTerminal < SystemTerminal >) -> Self { Self { buffered_terminal : instance , } } # [doc = " Returns a reference to the buffered terminal used by the backend."] pub const fn buffered_terminal (& self) -> & BufferedTerminal < SystemTerminal > { & self . buffered_terminal } # [doc = " Returns a mutable reference to the buffered terminal used by the backend."] pub const fn buffered_terminal_mut (& mut self) -> & mut BufferedTerminal < SystemTerminal > { & mut self . buffered_terminal } }
+};
+}

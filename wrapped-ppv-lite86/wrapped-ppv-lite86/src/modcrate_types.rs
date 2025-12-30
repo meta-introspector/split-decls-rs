@@ -1,0 +1,41 @@
+// Generated module macro for crate::types
+macro_rules! Modcrate_types {
+() => {
+        Depcrate_typesuse_72!();
+        Depcrate_typesAndNot!();
+        Depcrate_typesBSwap!();
+        Depcrate_typesArithOps!();
+        Depcrate_typesBitOps0!();
+        Depcrate_typesBitOps32!();
+        Depcrate_typesBitOps64!();
+        Depcrate_typesBitOps128!();
+        Depcrate_typesRotateEachWord32!();
+        Depcrate_typesRotateEachWord64!();
+        Depcrate_typesRotateEachWord128!();
+        Depcrate_typesuse_83!();
+        Depcrate_typesUnsafeFrom!();
+        Depcrate_typesVec2!();
+        Depcrate_typesVec4!();
+        Depcrate_typesVec4Ext!();
+        Depcrate_typesVector!();
+        Depcrate_typesWords4!();
+        Depcrate_typesLaneWords4!();
+        Depcrate_typesSwap64!();
+        Depcrate_typesu32x4!();
+        Depcrate_typesu64x2!();
+        Depcrate_typesu128x1!();
+        Depcrate_typesu32x4x2!();
+        Depcrate_typesu64x2x2!();
+        Depcrate_typesu64x4!();
+        Depcrate_typesu128x2!();
+        Depcrate_typesu32x4x4!();
+        Depcrate_typesu64x2x4!();
+        Depcrate_typesu128x4!();
+        Depcrate_typesMultiLane!();
+        Depcrate_typesVZip!();
+        Depcrate_typesimpl_104!();
+        Depcrate_typesMachine!();
+        Depcrate_typesStore!();
+        Depcrate_typesStoreBytes!();
+    };
+}

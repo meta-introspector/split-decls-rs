@@ -1,0 +1,9 @@
+// Generated macro for impl_390 (impl)
+macro_rules! Depcrate_writeimpl_390 {
+() => {
+// Module: crate::write
+// Provides: {"impl_390"}
+// Dependencies: {}
+impl < T : FileOptionExtension > Default for FileOptions < '_ , T > { # [doc = " Construct a new FileOptions object"] fn default () -> Self { Self { compression_method : Default :: default () , compression_level : None , last_modified_time : DateTime :: default_for_write () , permissions : None , large_file : false , encrypt_with : None , extended_options : T :: default () , alignment : 1 , # [cfg (feature = "deflate-zopfli")] zopfli_buffer_size : Some (1 << 15) , # [cfg (feature = "aes-crypto")] aes_mode : None , } } }
+};
+}

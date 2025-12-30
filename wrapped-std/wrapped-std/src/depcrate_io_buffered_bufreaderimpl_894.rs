@@ -1,0 +1,9 @@
+// Generated macro for impl_894 (impl)
+macro_rules! Depcrate_io_buffered_bufreaderimpl_894 {
+() => {
+// Module: crate::io::buffered::bufreader
+// Provides: {"impl_894"}
+// Dependencies: {}
+impl < R : Read + ? Sized > BufReader < R > { # [doc = " Attempt to look ahead `n` bytes."] # [doc = ""] # [doc = " `n` must be less than or equal to `capacity`."] # [doc = ""] # [doc = " The returned slice may be less than `n` bytes long if"] # [doc = " end of file is reached."] # [doc = ""] # [doc = " After calling this method, you may call [`consume`](BufRead::consume)"] # [doc = " with a value less than or equal to `n` to advance over some or all of"] # [doc = " the returned bytes."] # [doc = ""] # [doc = " ## Examples"] # [doc = ""] # [doc = " ```rust"] # [doc = " #![feature(bufreader_peek)]"] # [doc = " use std::io::{Read, BufReader};"] # [doc = ""] # [doc = " let mut bytes = &b\"oh, hello there\"[..];"] # [doc = " let mut rdr = BufReader::with_capacity(6, &mut bytes);"] # [doc = " assert_eq!(rdr.peek(2).unwrap(), b\"oh\");"] # [doc = " let mut buf = [0; 4];"] # [doc = " rdr.read(&mut buf[..]).unwrap();"] # [doc = " assert_eq!(&buf, b\"oh, \");"] # [doc = " assert_eq!(rdr.peek(5).unwrap(), b\"hello\");"] # [doc = " let mut s = String::new();"] # [doc = " rdr.read_to_string(&mut s).unwrap();"] # [doc = " assert_eq!(&s, \"hello there\");"] # [doc = " assert_eq!(rdr.peek(1).unwrap().len(), 0);"] # [doc = " ```"] # [unstable (feature = "bufreader_peek" , issue = "128405")] pub fn peek (& mut self , n : usize) -> io :: Result < & [u8] > { assert ! (n <= self . capacity ()) ; while n > self . buf . buffer () . len () { if self . buf . pos () > 0 { self . buf . backshift () ; } let new = self . buf . read_more (& mut self . inner) ? ; if new == 0 { return Ok (& self . buf . buffer () [..]) ; } debug_assert_eq ! (self . buf . pos () , 0) ; } Ok (& self . buf . buffer () [.. n]) } }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for use_84 (use)
+macro_rules! Depcrate_erroruse_84 {
+() => {
+// Module: crate::error
+// Provides: {"use_84"}
+// Dependencies: {}
+use std :: error :: Error ;
+};
+}

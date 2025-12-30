@@ -1,0 +1,9 @@
+// Generated macro for is_expr_same_child_or_parent_field (function)
+macro_rules! Depcrate_loops_while_let_on_iteratoris_expr_same_child_or_parent_field {
+() => {
+// Module: crate::loops::while_let_on_iterator
+// Provides: {"is_expr_same_child_or_parent_field"}
+// Dependencies: {}
+# [doc = " Checks if the given expression is the same field as, is a child of, or is the parent of the"] # [doc = " given field. Used to check if the expression can be used while the given field is borrowed"] # [doc = " mutably. e.g. if checking for `x.y`, then `x.y`, `x.y.z`, and `x` will all return true, but"] # [doc = " `x.z`, and `y` will return false."] fn is_expr_same_child_or_parent_field (cx : & LateContext < '_ > , expr : & Expr < '_ > , fields : & [Symbol] , path_res : Res) -> bool { match expr . kind { ExprKind :: Field (base , name) => { if let Some ((head_field , tail_fields)) = fields . split_first () { if name . name == * head_field && is_expr_same_field (cx , base , tail_fields , path_res) { return true ; } let mut fields_iter = tail_fields . iter () ; while let Some (field) = fields_iter . next () { if * field == name . name && is_expr_same_field (cx , base , fields_iter . as_slice () , path_res) { return true ; } } } let mut e = base ; loop { match e . kind { ExprKind :: Field (..) if is_expr_same_field (cx , e , fields , path_res) => break true , ExprKind :: Field (base , _) | ExprKind :: DropTemps (base) | ExprKind :: Type (base , _) => e = base , ExprKind :: Path (ref path) if fields . is_empty () => { break cx . qpath_res (path , e . hir_id) == path_res ; } , _ => break false , } } } , ExprKind :: Path (ref path) => cx . qpath_res (path , expr . hir_id) == path_res , ExprKind :: DropTemps (base) | ExprKind :: Type (base , _) | ExprKind :: AddrOf (_ , _ , base) => { is_expr_same_child_or_parent_field (cx , base , fields , path_res) } , _ => false , } }
+};
+}

@@ -1,0 +1,63 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcrate_generateduse_8.rs");
+include!("depcrate_generatedmacro_32.rs");
+include!("depcrate_generatedother_12.rs");
+include!("depcrate_generatedmacro_35.rs");
+include!("depcrate_generatedmacro_46.rs");
+include!("depcrate_generatedimpl_51.rs");
+include!("depcrate_generatedmacro_28.rs");
+include!("depcrate_generateduse_9.rs");
+include!("depcrate_generatedother_13.rs");
+include!("depcrate_generatedimpl_44.rs");
+include!("depcrate_generatedimpl_24.rs");
+include!("depcrate_generatedimpl_42.rs");
+include!("depcrate_generatedother_14.rs");
+include!("depcrate_generateduse_6.rs");
+include!("depcrate_generatedimpl_26.rs");
+include!("depcrate_generatedimpl_29.rs");
+include!("depcrate_generatedmacro_47.rs");
+include!("depcrate_generateduse_5.rs");
+include!("depcrate_generatedossystemextensionreplacementaction.rs");
+include!("depcrateother_2.rs");
+include!("depcrate_generatedimpl_52.rs");
+include!("depcrate_generatedmacro_43.rs");
+include!("depcrate_generatedimpl_48.rs");
+include!("depcrate_generatedossystemextensionerrorcode.rs");
+include!("depcrate_generatedimpl_25.rs");
+include!("depcrate_generatedimpl_33.rs");
+include!("depcrate_generatedmacro_36.rs");
+include!("depcrate_generatedimpl_45.rs");
+include!("depcrate_generatedimpl_41.rs");
+include!("depcrate_generatedmacro_50.rs");
+include!("depcrate_generatedmacro_27.rs");
+include!("depcrate_generatedossystemextensionrequestresult.rs");
+include!("depcrate_generatedimpl_22.rs");
+include!("depcrate_generatedimpl_16.rs");
+include!("depcrate_generatedimpl_30.rs");
+include!("depcrate_generatedmacro_31.rs");
+include!("depcrate_generatedmacro_37.rs");
+include!("depcrateother_1.rs");
+include!("depcrate_generatedother_11.rs");
+include!("depcrate_generatedimpl_49.rs");
+include!("depcrate_generatedimpl_18.rs");
+include!("depcrategenerated.rs");
+include!("depcrate_generatedother_4.rs");
+include!("depcrate_generatedmacro_40.rs");
+include!("depcrate_generateduse_7.rs");
+include!("depcrate_generateduse_10.rs");
+include!("depcrate_generatedimpl_20.rs");
+include!("depcrate_generatedimpl_39.rs");
+include!("depcrateuse_53.rs");
+include!("depcrate_generatedimpl_21.rs");
+include!("depcrate_generatedimpl_17.rs");
+include!("depcrate_generatedimpl_34.rs");
+include!("depcrate_generatedimpl_38.rs");
+include!("modcrate.rs");
+include!("modcrate_generated.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate!();
+    Modcrate_generated!();
+}

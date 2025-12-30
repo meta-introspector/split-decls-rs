@@ -1,0 +1,47 @@
+// Generated module macro for crate::geometry::similarity_ops
+macro_rules! Modcrate_geometry_similarity_ops {
+() => {
+        Depcrate_geometry_similarity_opsuse_2425!();
+        Depcrate_geometry_similarity_opsuse_2426!();
+        Depcrate_geometry_similarity_opsuse_2427!();
+        Depcrate_geometry_similarity_opsuse_2428!();
+        Depcrate_geometry_similarity_opsuse_2429!();
+        Depcrate_geometry_similarity_opsuse_2430!();
+        Depcrate_geometry_similarity_opssimilarity_binop_impl!();
+        Depcrate_geometry_similarity_opssimilarity_binop_impl_all!();
+        Depcrate_geometry_similarity_opssimilarity_binop_assign_impl_all!();
+        Depcrate_geometry_similarity_opsmacro_2434!();
+        Depcrate_geometry_similarity_opsmacro_2435!();
+        Depcrate_geometry_similarity_opsmacro_2436!();
+        Depcrate_geometry_similarity_opsmacro_2437!();
+        Depcrate_geometry_similarity_opsmacro_2438!();
+        Depcrate_geometry_similarity_opsmacro_2439!();
+        Depcrate_geometry_similarity_opsmacro_2440!();
+        Depcrate_geometry_similarity_opsmacro_2441!();
+        Depcrate_geometry_similarity_opsmacro_2442!();
+        Depcrate_geometry_similarity_opsmacro_2443!();
+        Depcrate_geometry_similarity_opsmacro_2444!();
+        Depcrate_geometry_similarity_opsmacro_2445!();
+        Depcrate_geometry_similarity_opsmacro_2446!();
+        Depcrate_geometry_similarity_opsmacro_2447!();
+        Depcrate_geometry_similarity_opsmacro_2448!();
+        Depcrate_geometry_similarity_opsmacro_2449!();
+        Depcrate_geometry_similarity_opsmacro_2450!();
+        Depcrate_geometry_similarity_opsmacro_2451!();
+        Depcrate_geometry_similarity_opsmacro_2452!();
+        Depcrate_geometry_similarity_opsmacro_2453!();
+        Depcrate_geometry_similarity_opsmacro_2454!();
+        Depcrate_geometry_similarity_opssimilarity_from_composition_impl!();
+        Depcrate_geometry_similarity_opssimilarity_from_composition_impl_all!();
+        Depcrate_geometry_similarity_opsmacro_2457!();
+        Depcrate_geometry_similarity_opsmacro_2458!();
+        Depcrate_geometry_similarity_opsmacro_2459!();
+        Depcrate_geometry_similarity_opsmacro_2460!();
+        Depcrate_geometry_similarity_opsmacro_2461!();
+        Depcrate_geometry_similarity_opsmacro_2462!();
+        Depcrate_geometry_similarity_opsmacro_2463!();
+        Depcrate_geometry_similarity_opsmacro_2464!();
+        Depcrate_geometry_similarity_opsmacro_2465!();
+        Depcrate_geometry_similarity_opsmacro_2466!();
+    };
+}

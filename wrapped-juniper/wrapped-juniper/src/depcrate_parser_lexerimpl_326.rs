@@ -1,0 +1,9 @@
+// Generated macro for impl_326 (impl)
+macro_rules! Depcrate_parser_lexerimpl_326 {
+() => {
+// Module: crate::parser::lexer
+// Provides: {"impl_326"}
+// Dependencies: {}
+impl < 'a > Iterator for Lexer < 'a > { type Item = LexerResult < 'a > ; fn next (& mut self) -> Option < Self :: Item > { if self . has_reached_eof { return None ; } self . scan_over_whitespace () ; let ch = self . iterator . peek () . map (| & (_ , ch) | ch) ; Some (match ch { Some ('!') => Ok (self . emit_single_char (Token :: ExclamationMark)) , Some ('$') => Ok (self . emit_single_char (Token :: Dollar)) , Some ('(') => Ok (self . emit_single_char (Token :: ParenOpen)) , Some (')') => Ok (self . emit_single_char (Token :: ParenClose)) , Some ('[') => Ok (self . emit_single_char (Token :: BracketOpen)) , Some (']') => Ok (self . emit_single_char (Token :: BracketClose)) , Some ('{') => Ok (self . emit_single_char (Token :: CurlyOpen)) , Some ('}') => Ok (self . emit_single_char (Token :: CurlyClose)) , Some (':') => Ok (self . emit_single_char (Token :: Colon)) , Some ('=') => Ok (self . emit_single_char (Token :: Equals)) , Some ('@') => Ok (self . emit_single_char (Token :: At)) , Some ('|') => Ok (self . emit_single_char (Token :: Pipe)) , Some ('.') => self . scan_ellipsis () , Some ('"') => { if self . iterator . peek_nth (1) . map (| & (_ , ch) | ch) == Some ('"') && self . iterator . peek_nth (2) . map (| & (_ , ch) | ch) == Some ('"') { self . scan_block_string () } else { self . scan_string () } } Some (ch) => { if is_number_start (ch) { self . scan_number () } else if is_name_start (ch) { self . scan_name () } else { Err (Spanning :: zero_width (& self . position , LexerError :: UnknownCharacter (ch) ,)) } } None => { self . has_reached_eof = true ; Ok (Spanning :: zero_width (& self . position , Token :: EndOfFile)) } }) } }
+};
+}

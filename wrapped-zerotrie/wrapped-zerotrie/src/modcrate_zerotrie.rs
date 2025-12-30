@@ -1,0 +1,40 @@
+// Generated module macro for crate::zerotrie
+macro_rules! Modcrate_zerotrie {
+() => {
+        Depcrate_zerotrieuse_239!();
+        Depcrate_zerotrieuse_240!();
+        Depcrate_zerotrieuse_241!();
+        Depcrate_zerotrieuse_242!();
+        Depcrate_zerotrieuse_243!();
+        Depcrate_zerotrieZeroTrie!();
+        Depcrate_zerotrieZeroTrieFlavor!();
+        Depcrate_zerotrieZeroTrieSimpleAscii!();
+        Depcrate_zerotrieimpl_247!();
+        Depcrate_zerotrieimpl_248!();
+        Depcrate_zerotrieZeroAsciiIgnoreCaseTrie!();
+        Depcrate_zerotrieimpl_250!();
+        Depcrate_zerotrieZeroTriePerfectHash!();
+        Depcrate_zerotrieimpl_252!();
+        Depcrate_zerotrieimpl_253!();
+        Depcrate_zerotrieZeroTrieExtendedCapacity!();
+        Depcrate_zerotrieimpl_255!();
+        Depcrate_zerotrieimpl_256!();
+        Depcrate_zerotrieimpl_zerotrie_subtype!();
+        Depcrate_zerotriestring_to_box_u8!();
+        Depcrate_zerotrieZeroTrieStringIterator!();
+        Depcrate_zerotriemacro_260!();
+        Depcrate_zerotriemacro_261!();
+        Depcrate_zerotriemacro_262!();
+        Depcrate_zerotriemacro_263!();
+        Depcrate_zerotrieimpl_dispatch!();
+        Depcrate_zerotrieimpl_265!();
+        Depcrate_zerotrieimpl_266!();
+        Depcrate_zerotrieimpl_267!();
+        Depcrate_zerotrieimpl_268!();
+        Depcrate_zerotrieimpl_269!();
+        Depcrate_zerotrieimpl_270!();
+        Depcrate_zerotrieimpl_271!();
+        Depcrate_zerotrieimpl_272!();
+        Depcrate_zerotrieimpl_273!();
+    };
+}

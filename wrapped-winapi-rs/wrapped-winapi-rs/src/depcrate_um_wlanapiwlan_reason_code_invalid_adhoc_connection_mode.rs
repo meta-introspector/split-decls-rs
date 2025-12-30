@@ -1,0 +1,9 @@
+// Generated macro for WLAN_REASON_CODE_INVALID_ADHOC_CONNECTION_MODE (const)
+macro_rules! Depcrate_um_wlanapiWLAN_REASON_CODE_INVALID_ADHOC_CONNECTION_MODE {
+() => {
+// Module: crate::um::wlanapi
+// Provides: {"WLAN_REASON_CODE_INVALID_ADHOC_CONNECTION_MODE"}
+// Dependencies: {}
+pub const WLAN_REASON_CODE_INVALID_ADHOC_CONNECTION_MODE : WLAN_REASON_CODE = WLAN_REASON_CODE_PROFILE_BASE + 14 ;
+};
+}

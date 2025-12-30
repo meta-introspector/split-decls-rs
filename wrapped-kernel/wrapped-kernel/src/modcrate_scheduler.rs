@@ -1,0 +1,54 @@
+// Generated module macro for crate::scheduler
+macro_rules! Modcrate_scheduler {
+() => {
+        Depcrate_scheduleruse_1340!();
+        Depcrate_scheduleruse_1341!();
+        Depcrate_scheduleruse_1342!();
+        Depcrate_scheduleruse_1343!();
+        Depcrate_scheduleruse_1344!();
+        Depcrate_scheduleruse_1345!();
+        Depcrate_scheduleruse_1346!();
+        Depcrate_scheduleruse_1347!();
+        Depcrate_scheduleruse_1348!();
+        Depcrate_scheduleruse_1349!();
+        Depcrate_scheduleruse_1350!();
+        Depcrate_scheduleruse_1351!();
+        Depcrate_scheduleruse_1352!();
+        Depcrate_scheduleruse_1353!();
+        Depcrate_scheduleruse_1354!();
+        Depcrate_scheduleruse_1355!();
+        Depcrate_scheduleruse_1356!();
+        Depcrate_scheduleruse_1357!();
+        Depcrate_scheduleruse_1358!();
+        Depcrate_scheduleruse_1359!();
+        Depcrate_scheduleruse_1360!();
+        Depcrate_scheduleruse_1361!();
+        Depcrate_scheduleruse_1362!();
+        Depcrate_schedulertask!();
+        Depcrate_schedulerNO_TASKS!();
+        Depcrate_schedulerSCHEDULER_INPUTS!();
+        Depcrate_schedulerCORE_HLT_STATE!();
+        Depcrate_schedulerWAITING_TASKS!();
+        Depcrate_schedulerTASKS!();
+        Depcrate_schedulerCoreId!();
+        Depcrate_schedulerSchedulerInput!();
+        Depcrate_schedulerimpl_1429!();
+        Depcrate_schedulerPerCoreScheduler!();
+        Depcrate_schedulerPerCoreSchedulerExt!();
+        Depcrate_schedulerimpl_1432!();
+        Depcrate_schedulerNewTask!();
+        Depcrate_schedulerimpl_1434!();
+        Depcrate_schedulerimpl_1435!();
+        Depcrate_schedulerget_tid!();
+        Depcrate_schedulerabort!();
+        Depcrate_scheduleradd_current_core!();
+        Depcrate_schedulertake_core_hlt_state!();
+        Depcrate_schedulerget_scheduler_input!();
+        Depcrate_schedulerspawn!();
+        Depcrate_schedulerjoin!();
+        Depcrate_schedulershutdown!();
+        Depcrate_schedulerget_task_handle!();
+        Depcrate_schedulerBOOT_ROOT_PAGE_TABLE!();
+        Depcrate_schedulerget_root_page_table!();
+    };
+}

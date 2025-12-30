@@ -1,0 +1,9 @@
+// Generated macro for impl_22 (impl)
+macro_rules! Depcrate_event_payloadimpl_22 {
+() => {
+// Module: crate::event_payload
+// Provides: {"impl_22"}
+// Dependencies: {}
+impl EventPayload { pub fn from_raw_event (raw_event : & RawEvent , start_time : SystemTime) -> Self { if raw_event . is_integer () { Self :: Integer (raw_event . value ()) } else { Self :: Timestamp (Timestamp :: from_raw_event (raw_event , start_time)) } } # [doc = " Returns true if the time interval of `self` completely contains the"] # [doc = " time interval of `other`."] pub fn contains (& self , other : & Self) -> bool { match self { EventPayload :: Timestamp (Timestamp :: Interval { start : self_start , end : self_end , }) => match other { EventPayload :: Timestamp (Timestamp :: Interval { start : other_start , end : other_end , }) => self_start <= other_start && other_end <= self_end , EventPayload :: Timestamp (Timestamp :: Instant (other_t)) => { self_start <= other_t && other_t <= self_end } EventPayload :: Integer (_) => false , } , EventPayload :: Timestamp (Timestamp :: Instant (_)) | EventPayload :: Integer (_) => false , } } pub fn duration (& self) -> Option < Duration > { if let EventPayload :: Timestamp (t) = * self { t . duration () } else { None } } pub fn is_interval (& self) -> bool { matches ! (self , & Self :: Timestamp (Timestamp :: Interval { .. })) } pub fn is_instant (& self) -> bool { matches ! (self , & Self :: Timestamp (Timestamp :: Instant (_))) } pub fn is_integer (& self) -> bool { matches ! (self , & Self :: Integer (_)) } pub fn timestamp (& self) -> Option < Timestamp > { match self { Self :: Timestamp (t) => Some (* t) , Self :: Integer (_) => None , } } pub fn integer (& self) -> Option < u64 > { match self { Self :: Timestamp (_) => None , Self :: Integer (i) => Some (* i) , } } }
+};
+}

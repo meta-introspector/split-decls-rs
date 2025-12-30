@@ -1,0 +1,9 @@
+// Generated macro for other_40 (other)
+macro_rules! Depcrate_bagother_40 {
+() => {
+// Module: crate::bag
+// Provides: {"other_40"}
+// Dependencies: {}
+unsafe extern "C" { pub static kCFTypeBagCallBacks : CFBagCallBacks ; pub static kCFCopyStringBagCallBacks : CFBagCallBacks ; pub fn CFBagCreate (allocator : CFAllocatorRef , values : * const * const c_void , numValues : CFIndex , callBacks : * const CFBagCallBacks ,) -> CFBagRef ; pub fn CFBagCreateCopy (allocator : CFAllocatorRef , theBag : CFBagRef) -> CFBagRef ; pub fn CFBagContainsValue (theBag : CFBagRef , value : * const c_void) -> Boolean ; pub fn CFBagGetCount (theBag : CFBagRef) -> CFIndex ; pub fn CFBagGetCountOfValue (theBag : CFBagRef , value : * const c_void) -> CFIndex ; pub fn CFBagGetValue (theBag : CFBagRef , value : * const c_void) -> * const c_void ; pub fn CFBagGetValueIfPresent (theBag : CFBagRef , candidate : * const c_void , value : * const * const c_void ,) -> Boolean ; pub fn CFBagGetValues (theBag : CFBagRef , values : * const * const c_void) ; pub fn CFBagApplyFunction (theBag : CFBagRef , applier : CFBagApplierFunction , context : * mut c_void ,) ; pub fn CFBagGetTypeID () -> CFTypeID ; pub fn CFBagCreateMutable (allocator : CFAllocatorRef , capacity : CFIndex , callBacks : * const CFBagCallBacks ,) -> CFMutableBagRef ; pub fn CFBagCreateMutableCopy (allocator : CFAllocatorRef , capacity : CFIndex , theBag : CFBagRef ,) -> CFMutableBagRef ; pub fn CFBagAddValue (theBag : CFMutableBagRef , value : * const c_void) ; pub fn CFBagRemoveAllValues (theBag : CFMutableBagRef) ; pub fn CFBagRemoveValue (theBag : CFMutableBagRef , value : * const c_void) ; pub fn CFBagReplaceValue (theBag : CFMutableBagRef , value : * const c_void) ; pub fn CFBagSetValue (theBag : CFMutableBagRef , value : * const c_void) ; }
+};
+}

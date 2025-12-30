@@ -1,0 +1,47 @@
+// Generated module macro for crate::config
+macro_rules! Modcrate_config {
+() => {
+        Depcrate_configuse_756!();
+        Depcrate_configuse_757!();
+        Depcrate_configuse_758!();
+        Depcrate_configcache!();
+        Depcrate_configsnapshot!();
+        Depcrate_configuse_834!();
+        Depcrate_configoverrides!();
+        Depcrate_configtree!();
+        Depcrate_configuse_1099!();
+        Depcrate_configSnapshot!();
+        Depcrate_configSnapshotMut!();
+        Depcrate_configCommitAutoRollback!();
+        Depcrate_configsection!();
+        Depcrate_configset_value!();
+        Depcrate_configError!();
+        Depcrate_configmerge!();
+        Depcrate_configdiff!();
+        Depcrate_configstat_options!();
+        Depcrate_configcheckout_options!();
+        Depcrate_configcommand_context!();
+        Depcrate_configexclude_stack!();
+        Depcrate_configattribute_stack!();
+        Depcrate_configprotocol!();
+        Depcrate_configssh_connect_options!();
+        Depcrate_configkey!();
+        Depcrate_configencoding!();
+        Depcrate_configcheckout!();
+        Depcrate_configabbrev!();
+        Depcrate_configremote!();
+        Depcrate_configtime!();
+        Depcrate_configlock_timeout!();
+        Depcrate_configduration!();
+        Depcrate_configboolean!();
+        Depcrate_configunsigned_integer!();
+        Depcrate_configurl!();
+        Depcrate_configstring!();
+        Depcrate_configrefspec!();
+        Depcrate_configrefs_namespace!();
+        Depcrate_configssl_version!();
+        Depcrate_configtransport!();
+        Depcrate_configCache!();
+        Depcrate_configshared!();
+    };
+}

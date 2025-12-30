@@ -1,0 +1,9 @@
+// Generated macro for diff_unicode_words (function)
+macro_rules! Depcrate_utilsdiff_unicode_words {
+() => {
+// Module: crate::utils
+// Provides: {"diff_unicode_words"}
+// Dependencies: {}
+# [doc = " Shortcut for making a unicode word level diff."] # [doc = ""] # [doc = " This function produces the diff of two strings and returns a vector"] # [doc = " with the changes.  It returns connected slices into the original string"] # [doc = " rather than word level slices."] # [doc = ""] # [doc = " ```rust"] # [doc = " use similar::{Algorithm, ChangeTag};"] # [doc = " use similar::utils::diff_unicode_words;"] # [doc = ""] # [doc = " let old = \"The quick (\\\"brown\\\") fox can't jump 32.3 feet, right?\";"] # [doc = " let new = \"The quick (\\\"brown\\\") fox can't jump 9.84 meters, right?\";"] # [doc = " assert_eq!(diff_unicode_words(Algorithm::Myers, old, new), vec!["] # [doc = "     (ChangeTag::Equal, \"The quick (\\\"brown\\\") fox can\\'t jump \"),"] # [doc = "     (ChangeTag::Delete, \"32.3\"),"] # [doc = "     (ChangeTag::Insert, \"9.84\"),"] # [doc = "     (ChangeTag::Equal, \" \"),"] # [doc = "     (ChangeTag::Delete, \"feet\"),"] # [doc = "     (ChangeTag::Insert, \"meters\"),"] # [doc = "     (ChangeTag::Equal, \", right?\")"] # [doc = " ]);"] # [doc = " ```"] # [doc = ""] # [doc = " This requires the `unicode` feature."] # [cfg (feature = "unicode")] pub fn diff_unicode_words < 'x , T : DiffableStrRef + ? Sized > (alg : Algorithm , old : & 'x T , new : & 'x T ,) -> Vec < (ChangeTag , & 'x T :: Output) > { let old = old . as_diffable_str () ; let new = new . as_diffable_str () ; let diff = TextDiff :: configure () . algorithm (alg) . diff_unicode_words (old , new) ; let remapper = TextDiffRemapper :: from_text_diff (& diff , old , new) ; diff . ops () . iter () . flat_map (move | x | remapper . iter_slices (x)) . collect () }
+};
+}

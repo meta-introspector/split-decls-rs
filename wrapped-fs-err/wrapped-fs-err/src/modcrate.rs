@@ -1,0 +1,41 @@
+// Generated module macro for crate
+macro_rules! Modcrate {
+() => {
+        Depcratedir!();
+        Depcrateerrors!();
+        Depcratefile!();
+        Depcrateopen_options!();
+        Depcrateos!();
+        Depcratepath!();
+        Depcratetokio!();
+        Depcrateuse_150!();
+        Depcrateuse_151!();
+        Depcrateuse_152!();
+        Depcrateuse_153!();
+        Depcrateuse_154!();
+        Depcrateuse_155!();
+        Depcrateuse_156!();
+        Depcrateuse_157!();
+        Depcrateread!();
+        Depcrateread_to_string!();
+        Depcratewrite!();
+        Depcratecopy!();
+        Depcratecreate_dir!();
+        Depcratecreate_dir_all!();
+        Depcrateremove_dir!();
+        Depcrateremove_dir_all!();
+        Depcrateremove_file!();
+        Depcratemetadata!();
+        Depcrateexists!();
+        Depcratecanonicalize!();
+        Depcratehard_link!();
+        Depcrateread_link!();
+        Depcraterename!();
+        Depcratesoft_link!();
+        Depcratesymlink_metadata!();
+        Depcrateset_permissions!();
+        Depcrateinitial_buffer_size!();
+        Depcrateuse_177!();
+        Depcrateprivate!();
+    };
+}

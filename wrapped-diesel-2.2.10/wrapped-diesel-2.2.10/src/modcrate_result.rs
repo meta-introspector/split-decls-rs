@@ -1,0 +1,44 @@
+// Generated module macro for crate::result
+macro_rules! Modcrate_result {
+() => {
+        Depcrate_resultuse_1953!();
+        Depcrate_resultuse_1954!();
+        Depcrate_resultuse_1955!();
+        Depcrate_resultError!();
+        Depcrate_resultDatabaseErrorKind!();
+        Depcrate_resultDatabaseErrorInformation!();
+        Depcrate_resultimpl_1959!();
+        Depcrate_resultimpl_1960!();
+        Depcrate_resultConnectionError!();
+        Depcrate_resultQueryResult!();
+        Depcrate_resultConnectionResult!();
+        Depcrate_resultOptionalExtension!();
+        Depcrate_resultimpl_1965!();
+        Depcrate_resultOptionalEmptyChangesetExtension!();
+        Depcrate_resultimpl_1967!();
+        Depcrate_resultimpl_1968!();
+        Depcrate_resultimpl_1969!();
+        Depcrate_resultimpl_1970!();
+        Depcrate_resultimpl_1971!();
+        Depcrate_resultimpl_1972!();
+        Depcrate_resultimpl_1973!();
+        Depcrate_resultimpl_1974!();
+        Depcrate_resulterror_impls_send!();
+        Depcrate_resultUnexpectedNullError!();
+        Depcrate_resultimpl_1977!();
+        Depcrate_resultimpl_1978!();
+        Depcrate_resultUnexpectedEndOfRow!();
+        Depcrate_resultimpl_1980!();
+        Depcrate_resultimpl_1981!();
+        Depcrate_resultEmptyChangeset!();
+        Depcrate_resultimpl_1983!();
+        Depcrate_resultimpl_1984!();
+        Depcrate_resultEmptyQuery!();
+        Depcrate_resultimpl_1986!();
+        Depcrate_resultimpl_1987!();
+        Depcrate_resultDeserializeFieldError!();
+        Depcrate_resultimpl_1989!();
+        Depcrate_resultimpl_1990!();
+        Depcrate_resultimpl_1991!();
+    };
+}

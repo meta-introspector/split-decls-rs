@@ -1,0 +1,42 @@
+// Generated module macro for crate::reduced
+macro_rules! Modcrate_reduced {
+() => {
+        Depcrate_reduceduse_125!();
+        Depcrate_reduceduse_126!();
+        Depcrate_reduceduse_127!();
+        Depcrate_reducedReducedInt!();
+        Depcrate_reducedimpl_129!();
+        Depcrate_reducedimpl_130!();
+        Depcrate_reducedimpl_binops!();
+        Depcrate_reducedmacro_132!();
+        Depcrate_reducedmacro_133!();
+        Depcrate_reducedmacro_134!();
+        Depcrate_reducedimpl_135!();
+        Depcrate_reducedimpl_136!();
+        Depcrate_reducedINV_ERR_MSG!();
+        Depcrate_reducedimpl_138!();
+        Depcrate_reducedimpl_139!();
+        Depcrate_reducedimpl_140!();
+        Depcrate_reducedimpl_141!();
+        Depcrate_reducedimpl_142!();
+        Depcrate_reducedimpl_143!();
+        Depcrate_reducedimpl_144!();
+        Depcrate_reducedimpl_145!();
+        Depcrate_reducedimpl_146!();
+        Depcrate_reducedVanilla!();
+        Depcrate_reducedimpl_uprim_vanilla_core_const!();
+        Depcrate_reducedmacro_149!();
+        Depcrate_reducedimpl_reduced_binary_pow!();
+        Depcrate_reduceduse_151!();
+        Depcrate_reducedimpl_uprim_vanilla_core!();
+        Depcrate_reducedimpl_uprim_vanilla!();
+        Depcrate_reducedmacro_154!();
+        Depcrate_reducedmacro_155!();
+        Depcrate_reducedmacro_156!();
+        Depcrate_reducedmacro_157!();
+        Depcrate_reducedmacro_158!();
+        Depcrate_reducedimpl_159!();
+        Depcrate_reducedVanillaInt!();
+        Depcrate_reducedtests!();
+    };
+}

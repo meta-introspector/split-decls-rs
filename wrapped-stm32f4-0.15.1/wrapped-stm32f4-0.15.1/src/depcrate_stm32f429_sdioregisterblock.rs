@@ -1,0 +1,9 @@
+// Generated macro for RegisterBlock (struct)
+macro_rules! Depcrate_stm32f429_sdioRegisterBlock {
+() => {
+// Module: crate::stm32f429::sdio
+// Provides: {"RegisterBlock"}
+// Dependencies: {}
+# [doc = r"Register block"] # [repr (C)] pub struct RegisterBlock { # [doc = "0x00 - power control register"] pub power : crate :: Reg < power :: POWER_SPEC > , # [doc = "0x04 - SDI clock control register"] pub clkcr : crate :: Reg < clkcr :: CLKCR_SPEC > , # [doc = "0x08 - argument register"] pub arg : crate :: Reg < arg :: ARG_SPEC > , # [doc = "0x0c - command register"] pub cmd : crate :: Reg < cmd :: CMD_SPEC > , # [doc = "0x10 - command response register"] pub respcmd : crate :: Reg < respcmd :: RESPCMD_SPEC > , # [doc = "0x14 - response 1..4 register"] pub resp1 : crate :: Reg < resp1 :: RESP1_SPEC > , # [doc = "0x18 - response 1..4 register"] pub resp2 : crate :: Reg < resp2 :: RESP2_SPEC > , # [doc = "0x1c - response 1..4 register"] pub resp3 : crate :: Reg < resp3 :: RESP3_SPEC > , # [doc = "0x20 - response 1..4 register"] pub resp4 : crate :: Reg < resp4 :: RESP4_SPEC > , # [doc = "0x24 - data timer register"] pub dtimer : crate :: Reg < dtimer :: DTIMER_SPEC > , # [doc = "0x28 - data length register"] pub dlen : crate :: Reg < dlen :: DLEN_SPEC > , # [doc = "0x2c - data control register"] pub dctrl : crate :: Reg < dctrl :: DCTRL_SPEC > , # [doc = "0x30 - data counter register"] pub dcount : crate :: Reg < dcount :: DCOUNT_SPEC > , # [doc = "0x34 - status register"] pub sta : crate :: Reg < sta :: STA_SPEC > , # [doc = "0x38 - interrupt clear register"] pub icr : crate :: Reg < icr :: ICR_SPEC > , # [doc = "0x3c - mask register"] pub mask : crate :: Reg < mask :: MASK_SPEC > , _reserved16 : [u8 ; 0x08] , # [doc = "0x48 - FIFO counter register"] pub fifocnt : crate :: Reg < fifocnt :: FIFOCNT_SPEC > , _reserved17 : [u8 ; 0x34] , # [doc = "0x80 - data FIFO register"] pub fifo : crate :: Reg < fifo :: FIFO_SPEC > , }
+};
+}

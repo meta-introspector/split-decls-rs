@@ -1,0 +1,9 @@
+// Generated macro for symbol_name_for_instance_in_crate (function)
+macro_rules! Depcrate_back_symbol_exportsymbol_name_for_instance_in_crate {
+() => {
+// Module: crate::back::symbol_export
+// Provides: {"symbol_name_for_instance_in_crate"}
+// Dependencies: {}
+# [doc = " This is the symbol name of the given instance instantiated in a specific crate."] pub (crate) fn symbol_name_for_instance_in_crate < 'tcx > (tcx : TyCtxt < 'tcx > , symbol : ExportedSymbol < 'tcx > , instantiating_crate : CrateNum ,) -> String { if instantiating_crate == LOCAL_CRATE { return symbol . symbol_name_for_local_instance (tcx) . to_string () ; } match symbol { ExportedSymbol :: NonGeneric (def_id) => { rustc_symbol_mangling :: symbol_name_for_instance_in_crate (tcx , Instance :: mono (tcx , def_id) , instantiating_crate ,) } ExportedSymbol :: Generic (def_id , args) => { rustc_symbol_mangling :: symbol_name_for_instance_in_crate (tcx , Instance :: new_raw (def_id , args) , instantiating_crate ,) } ExportedSymbol :: ThreadLocalShim (def_id) => { rustc_symbol_mangling :: symbol_name_for_instance_in_crate (tcx , ty :: Instance { def : ty :: InstanceKind :: ThreadLocalShim (def_id) , args : ty :: GenericArgs :: empty () , } , instantiating_crate ,) } ExportedSymbol :: DropGlue (ty) => rustc_symbol_mangling :: symbol_name_for_instance_in_crate (tcx , Instance :: resolve_drop_in_place (tcx , ty) , instantiating_crate ,) , ExportedSymbol :: AsyncDropGlueCtorShim (ty) => { rustc_symbol_mangling :: symbol_name_for_instance_in_crate (tcx , Instance :: resolve_async_drop_in_place (tcx , ty) , instantiating_crate ,) } ExportedSymbol :: AsyncDropGlue (def_id , ty) => { rustc_symbol_mangling :: symbol_name_for_instance_in_crate (tcx , Instance :: resolve_async_drop_in_place_poll (tcx , def_id , ty) , instantiating_crate ,) } ExportedSymbol :: NoDefId (symbol_name) => symbol_name . to_string () , } }
+};
+}

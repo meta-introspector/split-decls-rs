@@ -1,0 +1,9 @@
+// Generated macro for SOCKET_SETTINGS_IPSEC_ALLOW_FIRST_INBOUND_PKT_UNENCRYPTED (const)
+macro_rules! Depcrate_shared_mstcpipSOCKET_SETTINGS_IPSEC_ALLOW_FIRST_INBOUND_PKT_UNENCRYPTED {
+() => {
+// Module: crate::shared::mstcpip
+// Provides: {"SOCKET_SETTINGS_IPSEC_ALLOW_FIRST_INBOUND_PKT_UNENCRYPTED"}
+// Dependencies: {}
+pub const SOCKET_SETTINGS_IPSEC_ALLOW_FIRST_INBOUND_PKT_UNENCRYPTED : ULONG = 0x4 ;
+};
+}

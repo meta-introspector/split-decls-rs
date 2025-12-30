@@ -1,0 +1,9 @@
+// Generated macro for impl_109 (impl)
+macro_rules! Depcrate_dictionaryimpl_109 {
+() => {
+// Module: crate::dictionary
+// Provides: {"impl_109"}
+// Dependencies: {}
+# [doc = " Various mutation methods."] impl < K : ? Sized , V : ? Sized > CFMutableDictionary < K , V > { # [doc = " Add the key-value pair to the dictionary if no such key already exist."] # [inline] # [doc (alias = "CFDictionaryAddValue")] pub fn add (& self , key : & K , value : & V) where K : Type + Sized + PartialEq + Hash , V : Type + Sized , { unsafe { CFMutableDictionary :: add_value (Some (self . as_opaque ()) , to_void (key) , to_void (value)) } } # [doc = " Set the value of the key in the dictionary."] # [inline] # [doc (alias = "CFDictionarySetValue")] pub fn set (& self , key : & K , value : & V) where K : Type + Sized + PartialEq + Hash , V : Type + Sized , { unsafe { CFMutableDictionary :: set_value (Some (self . as_opaque ()) , to_void (key) , to_void (value)) } } # [doc = " Replace the value of the key in the dictionary."] # [inline] # [doc (alias = "CFDictionaryReplaceValue")] pub fn replace (& self , key : & K , value : & V) where K : Type + Sized + PartialEq + Hash , V : Type + Sized , { unsafe { CFMutableDictionary :: replace_value (Some (self . as_opaque ()) , to_void (key) , to_void (value)) } } # [doc = " Remove the value from the dictionary associated with the key."] # [inline] # [doc (alias = "CFDictionaryRemoveValue")] pub fn remove (& self , key : & K) where K : Type + Sized + PartialEq + Hash , { unsafe { CFMutableDictionary :: remove_value (Some (self . as_opaque ()) , to_void (key)) } } # [doc = " Remove all keys and values from the dictionary."] # [inline] # [doc (alias = "CFDictionaryRemoveAllValues")] pub fn clear (& self) { CFMutableDictionary :: remove_all_values (Some (self . as_opaque ())) } }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for DOT11_WFD_STATUS_FAILED_INFORMATION_IS_UNAVAILABLE (const)
+macro_rules! Depcrate_shared_windot11DOT11_WFD_STATUS_FAILED_INFORMATION_IS_UNAVAILABLE {
+() => {
+// Module: crate::shared::windot11
+// Provides: {"DOT11_WFD_STATUS_FAILED_INFORMATION_IS_UNAVAILABLE"}
+// Dependencies: {}
+pub const DOT11_WFD_STATUS_FAILED_INFORMATION_IS_UNAVAILABLE : DOT11_WFD_STATUS_CODE = 1 ;
+};
+}

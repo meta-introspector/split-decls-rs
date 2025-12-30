@@ -1,0 +1,9 @@
+// Generated macro for ACTIVATION_CONTEXT_SECTION_COM_PROGID_REDIRECTION (const)
+macro_rules! Depcrate_um_winntACTIVATION_CONTEXT_SECTION_COM_PROGID_REDIRECTION {
+() => {
+// Module: crate::um::winnt
+// Provides: {"ACTIVATION_CONTEXT_SECTION_COM_PROGID_REDIRECTION"}
+// Dependencies: {}
+pub const ACTIVATION_CONTEXT_SECTION_COM_PROGID_REDIRECTION : ULONG = 7 ;
+};
+}

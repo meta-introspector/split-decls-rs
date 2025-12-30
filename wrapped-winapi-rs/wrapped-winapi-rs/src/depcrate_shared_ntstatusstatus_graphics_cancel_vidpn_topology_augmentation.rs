@@ -1,0 +1,9 @@
+// Generated macro for STATUS_GRAPHICS_CANCEL_VIDPN_TOPOLOGY_AUGMENTATION (const)
+macro_rules! Depcrate_shared_ntstatusSTATUS_GRAPHICS_CANCEL_VIDPN_TOPOLOGY_AUGMENTATION {
+() => {
+// Module: crate::shared::ntstatus
+// Provides: {"STATUS_GRAPHICS_CANCEL_VIDPN_TOPOLOGY_AUGMENTATION"}
+// Dependencies: {}
+pub const STATUS_GRAPHICS_CANCEL_VIDPN_TOPOLOGY_AUGMENTATION : NTSTATUS = 0xC01E035A ;
+};
+}

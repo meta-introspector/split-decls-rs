@@ -1,0 +1,53 @@
+// Generated module macro for crate::server
+macro_rules! Modcrate_server {
+() => {
+        Depcrate_serveruse_365!();
+        Depcrate_serveruse_366!();
+        Depcrate_serveruse_367!();
+        Depcrate_serveruse_368!();
+        Depcrate_serveruse_369!();
+        Depcrate_serveruse_370!();
+        Depcrate_serveruse_371!();
+        Depcrate_serveruse_372!();
+        Depcrate_serveruse_373!();
+        Depcrate_serveruse_374!();
+        Depcrate_serveruse_375!();
+        Depcrate_serveruse_376!();
+        Depcrate_serveruse_377!();
+        Depcrate_serveruse_378!();
+        Depcrate_serveruse_379!();
+        Depcrate_serveruse_380!();
+        Depcrate_serveruse_381!();
+        Depcrate_serveruse_382!();
+        Depcrate_serveruse_383!();
+        Depcrate_serveruse_384!();
+        Depcrate_serveruse_385!();
+        Depcrate_serverrustls_server_config_builder!();
+        Depcrate_serverimpl_387!();
+        Depcrate_serverServerConfigBuilder!();
+        Depcrate_serverrustls_server_config!();
+        Depcrate_serverimpl_390!();
+        Depcrate_serverimpl_391!();
+        Depcrate_serverimpl_392!();
+        Depcrate_serverrustls_server_connection_get_server_name!();
+        Depcrate_serverResolvesServerCertFromChoices!();
+        Depcrate_serverimpl_395!();
+        Depcrate_serverimpl_396!();
+        Depcrate_serverrustls_client_hello!();
+        Depcrate_serverimpl_398!();
+        Depcrate_serverrustls_client_hello_userdata!();
+        Depcrate_serverrustls_client_hello_callback!();
+        Depcrate_serverClientHelloCallback!();
+        Depcrate_serverClientHelloResolver!();
+        Depcrate_serverimpl_403!();
+        Depcrate_serverimpl_404!();
+        Depcrate_serverimpl_405!();
+        Depcrate_serverimpl_406!();
+        Depcrate_serverimpl_407!();
+        Depcrate_serverimpl_408!();
+        Depcrate_serversigschemes!();
+        Depcrate_serverrustls_client_hello_select_certified_key!();
+        Depcrate_serverimpl_411!();
+        Depcrate_servertests!();
+    };
+}

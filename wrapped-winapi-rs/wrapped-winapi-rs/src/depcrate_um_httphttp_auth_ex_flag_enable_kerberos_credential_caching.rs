@@ -1,0 +1,9 @@
+// Generated macro for HTTP_AUTH_EX_FLAG_ENABLE_KERBEROS_CREDENTIAL_CACHING (const)
+macro_rules! Depcrate_um_httpHTTP_AUTH_EX_FLAG_ENABLE_KERBEROS_CREDENTIAL_CACHING {
+() => {
+// Module: crate::um::http
+// Provides: {"HTTP_AUTH_EX_FLAG_ENABLE_KERBEROS_CREDENTIAL_CACHING"}
+// Dependencies: {}
+pub const HTTP_AUTH_EX_FLAG_ENABLE_KERBEROS_CREDENTIAL_CACHING : UCHAR = 0x01 ;
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for impl_1973 (impl)
+macro_rules! Depcrate_equatable_if_letimpl_1973 {
+() => {
+// Module: crate::equatable_if_let
+// Provides: {"impl_1973"}
+// Dependencies: {}
+impl < 'tcx > LateLintPass < 'tcx > for PatternEquality { fn check_expr (& mut self , cx : & LateContext < 'tcx > , expr : & 'tcx Expr < 'tcx >) { if let ExprKind :: Let (let_expr) = expr . kind && unary_pattern (let_expr . pat) && ! expr . span . in_external_macro (cx . sess () . source_map ()) { let exp_ty = cx . typeck_results () . expr_ty (let_expr . init) ; let pat_ty = cx . typeck_results () . pat_ty (let_expr . pat) ; let mut applicability = Applicability :: MachineApplicable ; if is_structural_partial_eq (cx , exp_ty , pat_ty) && ! contains_type_mismatch (cx , let_expr . pat) { let pat_str = match let_expr . pat . kind { PatKind :: Struct (..) => format ! ("({})" , snippet_with_context (cx , let_expr . pat . span , expr . span . ctxt () , ".." , & mut applicability) . 0 ,) , _ => snippet_with_context (cx , let_expr . pat . span , expr . span . ctxt () , ".." , & mut applicability) . 0 . to_string () , } ; span_lint_and_sugg (cx , EQUATABLE_IF_LET , expr . span , "this pattern matching can be expressed using equality" , "try" , format ! ("{} == {pat_str}" , snippet_with_context (cx , let_expr . init . span , expr . span . ctxt () , ".." , & mut applicability) . 0 ,) , applicability ,) ; } else { span_lint_and_sugg (cx , EQUATABLE_IF_LET , expr . span , "this pattern matching can be expressed using `matches!`" , "try" , format ! ("matches!({}, {})" , snippet_with_context (cx , let_expr . init . span , expr . span . ctxt () , ".." , & mut applicability) . 0 , snippet_with_context (cx , let_expr . pat . span , expr . span . ctxt () , ".." , & mut applicability) . 0 ,) , applicability ,) ; } } } }
+};
+}

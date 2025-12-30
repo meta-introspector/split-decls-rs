@@ -1,0 +1,9 @@
+// Generated macro for impl_2058 (impl)
+macro_rules! Depcrate_excessive_boolsimpl_2058 {
+() => {
+// Module: crate::excessive_bools
+// Provides: {"impl_2058"}
+// Dependencies: {}
+impl < 'tcx > LateLintPass < 'tcx > for ExcessiveBools { fn check_item (& mut self , cx : & LateContext < 'tcx > , item : & 'tcx Item < 'tcx >) { if let ItemKind :: Struct (_ , _ , variant_data) = & item . kind && variant_data . fields () . len () as u64 > self . max_struct_bools && has_n_bools (variant_data . fields () . iter () . map (| field | field . ty) , self . max_struct_bools ,) && ! has_repr_attr (cx , item . hir_id ()) && ! item . span . from_expansion () { span_lint_and_help (cx , STRUCT_EXCESSIVE_BOOLS , item . span , format ! ("more than {} bools in a struct" , self . max_struct_bools) , None , "consider using a state machine or refactoring bools into two-variant enums" ,) ; } } fn check_trait_item (& mut self , cx : & LateContext < 'tcx > , trait_item : & 'tcx TraitItem < 'tcx >) { if let TraitItemKind :: Fn (fn_sig , TraitFn :: Required (_)) = & trait_item . kind && fn_sig . header . abi == ExternAbi :: Rust && fn_sig . decl . inputs . len () as u64 > self . max_fn_params_bools { check_fn_decl (cx , fn_sig . decl , fn_sig . span , self . max_fn_params_bools) ; } } fn check_fn (& mut self , cx : & LateContext < 'tcx > , fn_kind : FnKind < 'tcx > , fn_decl : & 'tcx FnDecl < 'tcx > , _ : & 'tcx Body < 'tcx > , span : Span , def_id : LocalDefId ,) { if let Some (fn_header) = fn_kind . header () && fn_header . abi == ExternAbi :: Rust && fn_decl . inputs . len () as u64 > self . max_fn_params_bools && get_parent_as_impl (cx . tcx , cx . tcx . local_def_id_to_hir_id (def_id)) . is_none_or (| impl_item | impl_item . of_trait . is_none ()) { check_fn_decl (cx , fn_decl , span , self . max_fn_params_bools) ; } } }
+};
+}

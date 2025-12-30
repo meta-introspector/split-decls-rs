@@ -1,0 +1,77 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcrate_preludeuse_18.rs");
+include!("depcrate_widgetsuse_36.rs");
+include!("depcrate_inituse_54.rs");
+include!("depcrate_preludeuse_20.rs");
+include!("depcrateother_2.rs");
+include!("depcrate_preludeuse_16.rs");
+include!("depcrateother_1.rs");
+include!("depcrate_preludeuse_22.rs");
+include!("depcrate_preludeuse_14.rs");
+include!("depcrate_widgetsuse_28.rs");
+include!("depcrate_widgetsuse_39.rs");
+include!("depcrate_widgetsuse_42.rs");
+include!("depcrate_widgetswidget_ref.rs");
+include!("depcrate_inittry_init.rs");
+include!("depcrate_widgetsuse_29.rs");
+include!("depcrate_widgetsimpl_47.rs");
+include!("depcrate_inittry_init_with_options.rs");
+include!("depcrateuse_5.rs");
+include!("depcrate_preludeuse_21.rs");
+include!("depcrateuse_9.rs");
+include!("depcrate_widgetsuse_26.rs");
+include!("depcrate_widgetsuse_33.rs");
+include!("depcrate_initset_panic_hook.rs");
+include!("depcrate_widgetsuse_34.rs");
+include!("depcrate_widgetsuse_27.rs");
+include!("depcrate_widgetsuse_31.rs");
+include!("depcrate_widgetsuse_32.rs");
+include!("depcrateuse_7.rs");
+include!("depcrate_initdefaultterminal.rs");
+include!("depcrate_initrun.rs");
+include!("depcrate_widgetsuse_41.rs");
+include!("depcrate_inittry_restore.rs");
+include!("depcrate_widgetsuse_38.rs");
+include!("depcrate_widgetsstateful_widget_ref.rs");
+include!("depcrate_inituse_52.rs");
+include!("depcrate_preludeuse_19.rs");
+include!("depcrate_preludeuse_13.rs");
+include!("depcrate_widgetsuse_30.rs");
+include!("depcratebackend.rs");
+include!("depcrateprelude.rs");
+include!("depcrate_preludeuse_15.rs");
+include!("depcrateuse_48.rs");
+include!("depcrate_widgetsuse_35.rs");
+include!("depcrate_inituse_50.rs");
+include!("depcrateuse_6.rs");
+include!("depcrateuse_10.rs");
+include!("depcrateinit.rs");
+include!("depcrate_initinit_with_options.rs");
+include!("depcratewidgets.rs");
+include!("depcrateuse_3.rs");
+include!("depcrateuse_23.rs");
+include!("depcrateuse_8.rs");
+include!("depcrate_widgetsframeext.rs");
+include!("depcrate_inituse_53.rs");
+include!("depcrate_initinit.rs");
+include!("depcrate_widgetsuse_37.rs");
+include!("depcrate_preludeuse_17.rs");
+include!("depcrate_widgetsuse_40.rs");
+include!("depcrate_initrestore.rs");
+include!("depcrate_inituse_51.rs");
+include!("depcrateuse_4.rs");
+include!("depcrate_widgetsuse_45.rs");
+include!("depcrate_widgetsuse_25.rs");
+include!("modcrate_prelude.rs");
+include!("modcrate_init.rs");
+include!("modcrate.rs");
+include!("modcrate_widgets.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate_prelude!();
+    Modcrate_init!();
+    Modcrate!();
+    Modcrate_widgets!();
+}

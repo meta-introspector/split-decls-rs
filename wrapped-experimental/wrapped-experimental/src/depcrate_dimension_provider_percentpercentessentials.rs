@@ -1,0 +1,9 @@
+// Generated macro for PercentEssentials (struct)
+macro_rules! Depcrate_dimension_provider_percentPercentEssentials {
+() => {
+// Module: crate::dimension::provider::percent
+// Provides: {"PercentEssentials"}
+// Dependencies: {}
+# [derive (Clone , PartialEq , Debug , yoke :: Yokeable , zerofrom :: ZeroFrom)] # [cfg_attr (feature = "datagen" , derive (serde :: Serialize , databake :: Bake))] # [cfg_attr (feature = "datagen" , databake (path = icu_experimental :: dimension :: provider :: percent))] # [cfg_attr (feature = "serde" , derive (serde :: Deserialize))] # [doc = " A struct including the essentials to create a Percent."] # [doc = ""] # [doc = " If an `approximate` or `explicit plus` are required, use the negative pattern as explained below:"] # [doc = " <https://www.unicode.org/reports/tr35/tr35-numbers.html#approximate-number-formatting>"] # [doc = " <https://www.unicode.org/reports/tr35/tr35-numbers.html#explicit-plus-signs>"] pub struct PercentEssentials < 'data > { # [cfg_attr (feature = "serde" , serde (borrow))] # [doc = " Represents the standard pattern for signed percents."] # [doc = " NOTE: place holder 0 is the place of the percent value."] # [doc = "       place holder 1 is the place of the plus, minus, or approximate signs."] pub signed_pattern : VarZeroCow < 'data , DoublePlaceholderPattern > , # [cfg_attr (feature = "serde" , serde (borrow))] # [doc = " Represents the standard pattern for unsigned percents."] pub unsigned_pattern : VarZeroCow < 'data , SinglePlaceholderPattern > , # [cfg_attr (feature = "serde" , serde (borrow))] # [doc = " The localize approximate sign."] pub approximately_sign : Cow < 'data , str > , # [cfg_attr (feature = "serde" , serde (borrow))] # [doc = " The localize minus sign."] pub minus_sign : Cow < 'data , str > , # [cfg_attr (feature = "serde" , serde (borrow))] # [doc = " The localize plus sign."] pub plus_sign : Cow < 'data , str > , }
+};
+}

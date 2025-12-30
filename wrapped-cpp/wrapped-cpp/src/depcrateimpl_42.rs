@@ -1,0 +1,9 @@
+// Generated macro for impl_42 (impl)
+macro_rules! Depcrateimpl_42 {
+() => {
+// Module: crate
+// Provides: {"impl_42"}
+// Dependencies: {}
+impl < 'a , 'b > FunctionBindgen < 'a , 'b > { fn new (gen : & 'b mut CppInterfaceGenerator < 'a > , params : Vec < String >) -> Self { Self { gen , params , tmp : 0 , namespace : Default :: default () , src : Default :: default () , block_storage : Default :: default () , blocks : Default :: default () , payloads : Default :: default () , variant : AbiVariant :: GuestImport , cabi_post : None , needs_dealloc : false , leak_on_insertion : None , } } fn tmp (& mut self) -> usize { let ret = self . tmp ; self . tmp += 1 ; ret } fn tempname (& self , base : & str , idx : usize) -> String { format ! ("{base}{idx}") } fn push_str (& mut self , s : & str) { self . src . push_str (s) ; } fn let_results (& mut self , amt : usize , results : & mut Vec < String >) { if amt > 0 { let tmp = self . tmp () ; let res = format ! ("result{}" , tmp) ; self . push_str ("auto ") ; self . push_str (& res) ; self . push_str (" = ") ; if amt == 1 { results . push (res) ; } else { for i in 0 .. amt { results . push (format ! ("std::get<{i}>({res})")) ; } } } } fn load (& mut self , ty : & str , offset : ArchitectureSize , operands : & [String] , results : & mut Vec < String > ,) { results . push (format ! ("*(({}*) ({} + {}))" , ty , operands [0] , offset . format (POINTER_SIZE_EXPRESSION))) ; } fn load_ext (& mut self , ty : & str , offset : ArchitectureSize , operands : & [String] , results : & mut Vec < String > ,) { self . load (ty , offset , operands , results) ; let result = results . pop () . unwrap () ; results . push (format ! ("(int32_t) ({})" , result)) ; } fn store (& mut self , ty : & str , offset : ArchitectureSize , operands : & [String]) { uwriteln ! (self . src , "*(({}*)({} + {})) = {};" , ty , operands [1] , offset . format (POINTER_SIZE_EXPRESSION) , operands [0]) ; } }
+};
+}

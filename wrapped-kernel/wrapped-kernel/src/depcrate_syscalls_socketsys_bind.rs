@@ -1,0 +1,9 @@
+// Generated macro for sys_bind (function)
+macro_rules! Depcrate_syscalls_socketsys_bind {
+() => {
+// Module: crate::syscalls::socket
+// Provides: {"sys_bind"}
+// Dependencies: {}
+# [hermit_macro :: system (errno)] # [unsafe (no_mangle)] pub unsafe extern "C" fn sys_bind (fd : i32 , name : * const sockaddr , namelen : socklen_t) -> i32 { if name . is_null () { return - i32 :: from (Errno :: Destaddrreq) ; } let Ok (family) = (unsafe { Af :: try_from ((* name) . sa_family) }) else { return - i32 :: from (Errno :: Inval) ; } ; let obj = get_object (fd) ; obj . map_or_else (| e | - i32 :: from (e) , | v | match family { # [cfg (feature = "net")] Af :: Inet => { if namelen < u32 :: try_from (size_of :: < sockaddr_in > ()) . unwrap () { return - i32 :: from (Errno :: Inval) ; } let endpoint = IpListenEndpoint :: from (unsafe { * name . cast :: < sockaddr_in > () }) ; block_on (async { v . write () . await . bind (ListenEndpoint :: Ip (endpoint)) . await } , None ,) . map_or_else (| e | - i32 :: from (e) , | () | 0) } # [cfg (feature = "net")] Af :: Inet6 => { if namelen < u32 :: try_from (size_of :: < sockaddr_in6 > ()) . unwrap () { return - i32 :: from (Errno :: Inval) ; } let endpoint = IpListenEndpoint :: from (unsafe { * name . cast :: < sockaddr_in6 > () }) ; block_on (async { v . write () . await . bind (ListenEndpoint :: Ip (endpoint)) . await } , None ,) . map_or_else (| e | - i32 :: from (e) , | () | 0) } # [cfg (feature = "vsock")] Af :: Vsock => { if namelen < u32 :: try_from (size_of :: < sockaddr_vm > ()) . unwrap () { return - i32 :: from (Errno :: Inval) ; } let endpoint = VsockListenEndpoint :: from (unsafe { * name . cast :: < sockaddr_vm > () }) ; block_on (async { v . write () . await . bind (ListenEndpoint :: Vsock (endpoint)) . await } , None ,) . map_or_else (| e | - i32 :: from (e) , | () | 0) } _ => - i32 :: from (Errno :: Inval) , } ,) }
+};
+}

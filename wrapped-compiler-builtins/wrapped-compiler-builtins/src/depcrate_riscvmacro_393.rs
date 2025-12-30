@@ -1,0 +1,9 @@
+// Generated macro for macro_393 (macro)
+macro_rules! Depcrate_riscvmacro_393 {
+() => {
+// Module: crate::riscv
+// Provides: {"macro_393"}
+// Dependencies: {}
+intrinsics ! { pub extern "C" fn __mulsi3 (a : u32 , b : u32) -> u32 { let (mut a , mut b) = (a , b) ; let mut r : u32 = 0 ; while a > 0 { if a & 1 > 0 { r = r . wrapping_add (b) ; } a >>= 1 ; b <<= 1 ; } r } # [cfg (not (target_feature = "m"))] pub extern "C" fn __muldi3 (a : u64 , b : u64) -> u64 { let (mut a , mut b) = (a , b) ; let mut r : u64 = 0 ; while a > 0 { if a & 1 > 0 { r = r . wrapping_add (b) ; } a >>= 1 ; b <<= 1 ; } r } }
+};
+}

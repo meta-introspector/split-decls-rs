@@ -1,0 +1,67 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcrate_parserseq_rule.rs");
+include!("depcratenode.rs");
+include!("depcrate_errorimpl_7.rs");
+include!("depcrate_lexeruse_14.rs");
+include!("depcrate_lexeris_ident_char.rs");
+include!("depcrate_parserparse.rs");
+include!("depcrate_parserdummy_rule.rs");
+include!("depcrateparser.rs");
+include!("depcratenodedata.rs");
+include!("depcratetoken.rs");
+include!("depcrate_parserrule.rs");
+include!("depcrate_lexerlocation.rs");
+include!("depcratetest_rust_grammar.rs");
+include!("depcrate_error_format_err.rs");
+include!("depcrate_errorimpl_6.rs");
+include!("depcrate_lexertoken.rs");
+include!("depcrateerror.rs");
+include!("depcrate_errorerror.rs");
+include!("depcrate_errorresult.rs");
+include!("depcrate_parserimpl_33.rs");
+include!("depcraterule.rs");
+include!("depcrate_parserbail.rs");
+include!("depcrate_parseropt_atom_rule.rs");
+include!("depcrate_parseruse_28.rs");
+include!("depcrate_lexerskip_comment.rs");
+include!("depcrate_erroruse_2.rs");
+include!("depcrate_errorimpl_8.rs");
+include!("depcrate_parsernode.rs");
+include!("depcrategrammar.rs");
+include!("depcratetokendata.rs");
+include!("depcratelexer.rs");
+include!("depcrateimpl_48.rs");
+include!("depcrate_erroruse_10.rs");
+include!("depcrate_error_bail.rs");
+include!("depcrateuse_40.rs");
+include!("depcrate_erroruse_12.rs");
+include!("depcrate_parserparser.rs");
+include!("depcrate_lexeradvance.rs");
+include!("depcrate_lexertokenkind.rs");
+include!("depcrate_parseratom_rule.rs");
+include!("depcrate_lexertokenize.rs");
+include!("depcrateimpl_45.rs");
+include!("depcrateimpl_46.rs");
+include!("depcrate_lexeris_whitespace.rs");
+include!("depcratesmoke.rs");
+include!("depcrateimpl_47.rs");
+include!("depcrate_lexerskip_ws.rs");
+include!("depcrate_lexeris_escapable.rs");
+include!("depcrateuse_39.rs");
+include!("depcrate_erroruse_3.rs");
+include!("depcrate_parseruse_27.rs");
+include!("depcraterust_grammar.rs");
+include!("depcrate_lexerimpl_18.rs");
+include!("modcrate_lexer.rs");
+include!("modcrate.rs");
+include!("modcrate_error.rs");
+include!("modcrate_parser.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate_lexer!();
+    Modcrate!();
+    Modcrate_error!();
+    Modcrate_parser!();
+}

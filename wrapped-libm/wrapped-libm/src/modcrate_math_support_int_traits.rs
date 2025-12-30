@@ -1,0 +1,47 @@
+// Generated module macro for crate::math::support::int_traits
+macro_rules! Modcrate_math_support_int_traits {
+() => {
+        Depcrate_math_support_int_traitsuse_108!();
+        Depcrate_math_support_int_traitsnarrowing_div!();
+        Depcrate_math_support_int_traitsuse_110!();
+        Depcrate_math_support_int_traitsMinInt!();
+        Depcrate_math_support_int_traitsOtherSign!();
+        Depcrate_math_support_int_traitsInt!();
+        Depcrate_math_support_int_traitsint_impl_common!();
+        Depcrate_math_support_int_traitsint_impl!();
+        Depcrate_math_support_int_traitsmacro_116!();
+        Depcrate_math_support_int_traitsmacro_117!();
+        Depcrate_math_support_int_traitsmacro_118!();
+        Depcrate_math_support_int_traitsmacro_119!();
+        Depcrate_math_support_int_traitsmacro_120!();
+        Depcrate_math_support_int_traitsmacro_121!();
+        Depcrate_math_support_int_traitsDInt!();
+        Depcrate_math_support_int_traitsHInt!();
+        Depcrate_math_support_int_traitsimpl_d_int!();
+        Depcrate_math_support_int_traitsimpl_h_int!();
+        Depcrate_math_support_int_traitsmacro_126!();
+        Depcrate_math_support_int_traitsmacro_127!();
+        Depcrate_math_support_int_traitsCastInto!();
+        Depcrate_math_support_int_traitsCastFrom!();
+        Depcrate_math_support_int_traitsimpl_130!();
+        Depcrate_math_support_int_traitscast_into!();
+        Depcrate_math_support_int_traitscast_into_float!();
+        Depcrate_math_support_int_traitsmacro_133!();
+        Depcrate_math_support_int_traitsmacro_134!();
+        Depcrate_math_support_int_traitsmacro_135!();
+        Depcrate_math_support_int_traitsmacro_136!();
+        Depcrate_math_support_int_traitsmacro_137!();
+        Depcrate_math_support_int_traitsmacro_138!();
+        Depcrate_math_support_int_traitsmacro_139!();
+        Depcrate_math_support_int_traitsmacro_140!();
+        Depcrate_math_support_int_traitsmacro_141!();
+        Depcrate_math_support_int_traitsmacro_142!();
+        Depcrate_math_support_int_traitsmacro_143!();
+        Depcrate_math_support_int_traitsmacro_144!();
+        Depcrate_math_support_int_traitsmacro_145!();
+        Depcrate_math_support_int_traitsmacro_146!();
+        Depcrate_math_support_int_traitsmacro_147!();
+        Depcrate_math_support_int_traitsmacro_148!();
+        Depcrate_math_support_int_traitsmacro_149!();
+    };
+}

@@ -1,0 +1,50 @@
+// Generated module macro for crate
+macro_rules! Modcrate {
+() => {
+        Depcrateuse_1!();
+        Depcrateuse_2!();
+        Depcrateuse_3!();
+        Depcrateuse_4!();
+        Depcrateuse_5!();
+        Depcrateuse_6!();
+        Depcrateuse_7!();
+        Depcrateuse_8!();
+        Depcrateuse_9!();
+        Depcrateuse_10!();
+        Depcrateuse_11!();
+        DepcrateWORKSPACE!();
+        DepcrateWithFixture!();
+        Depcrateimpl_14!();
+        DepcrateChangeFixture!();
+        DepcrateSOURCE_ROOT_PREFIX!();
+        Depcrateimpl_17!();
+        Depcrateparse_target_arch!();
+        Depcratedefault_test_proc_macros!();
+        Depcratefilter_test_proc_macros!();
+        DepcrateSourceRootKind!();
+        DepcrateFileMeta!();
+        Depcrateimpl_23!();
+        DepcrateForceNoneLangOrigin!();
+        Depcrateparse_crate!();
+        DepcrateIdentityProcMacroExpander!();
+        Depcrateimpl_27!();
+        DepcrateIssue18089ProcMacroExpander!();
+        Depcrateimpl_29!();
+        DepcrateAttributeInputReplaceProcMacroExpander!();
+        Depcrateimpl_31!();
+        DepcrateIssue18840ProcMacroExpander!();
+        Depcrateimpl_33!();
+        DepcrateMirrorProcMacroExpander!();
+        Depcrateimpl_35!();
+        DepcrateShortenProcMacroExpander!();
+        Depcrateimpl_37!();
+        DepcrateIssue17479ProcMacroExpander!();
+        Depcrateimpl_39!();
+        DepcrateIssue18898ProcMacroExpander!();
+        Depcrateimpl_41!();
+        DepcrateDisallowCfgProcMacroExpander!();
+        Depcrateimpl_43!();
+        DepcrateGenerateSuffixedTypeProcMacroExpander!();
+        Depcrateimpl_45!();
+    };
+}

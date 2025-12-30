@@ -1,0 +1,9 @@
+// Generated macro for implement_linear_interpolation_color_map (macro)
+macro_rules! Depcrate_style_colors_colormapsimplement_linear_interpolation_color_map {
+() => {
+// Module: crate::style::colors::colormaps
+// Provides: {"implement_linear_interpolation_color_map"}
+// Dependencies: {}
+# [macro_export] # [doc (hidden)] # [doc = " Implements the [ColorMap] trait on a given color scale."] macro_rules ! implement_linear_interpolation_color_map { ($ color_scale_name : ident , $ color_type : ident) => { impl < FloatType : std :: fmt :: Debug + num_traits :: Float + num_traits :: FromPrimitive + num_traits :: ToPrimitive > ColorMap <$ color_type , FloatType > for $ color_scale_name { fn get_color_normalized (& self , h : FloatType , min : FloatType , max : FloatType ,) -> $ color_type { let (relative_difference , index_lower , index_upper) = calculate_relative_difference_index_lower_upper (h , min , max , Self :: COLORS . len ()) ; $ crate :: calculate_new_color_value ! (relative_difference , Self :: COLORS , index_upper , index_lower , $ color_type) } } impl $ color_scale_name { # [doc = "Get color value from `"] # [doc = stringify ! ($ color_scale_name)] # [doc = "` by supplying a parameter 0.0 <= h <= 1.0"] pub fn get_color < FloatType : std :: fmt :: Debug + num_traits :: Float + num_traits :: FromPrimitive + num_traits :: ToPrimitive > (h : FloatType ,) -> $ color_type { let color_scale = $ color_scale_name { } ; color_scale . get_color (h) } # [doc = "Get color value from `"] # [doc = stringify ! ($ color_scale_name)] # [doc = "` by supplying lower and upper bounds min, max and a parameter h where min <= h <= max"] pub fn get_color_normalized < FloatType : std :: fmt :: Debug + num_traits :: Float + num_traits :: FromPrimitive + num_traits :: ToPrimitive , > (h : FloatType , min : FloatType , max : FloatType ,) -> $ color_type { let color_scale = $ color_scale_name { } ; color_scale . get_color_normalized (h , min , max) } } } ; }
+};
+}

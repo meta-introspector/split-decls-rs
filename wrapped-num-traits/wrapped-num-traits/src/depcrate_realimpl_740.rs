@@ -1,0 +1,9 @@
+// Generated macro for impl_740 (impl)
+macro_rules! Depcrate_realimpl_740 {
+() => {
+// Module: crate::real
+// Provides: {"impl_740"}
+// Dependencies: {}
+impl < T : Float > Real for T { forward ! { Float :: min_value () -> Self ; Float :: min_positive_value () -> Self ; Float :: epsilon () -> Self ; Float :: max_value () -> Self ; } forward ! { Float :: floor (self) -> Self ; Float :: ceil (self) -> Self ; Float :: round (self) -> Self ; Float :: trunc (self) -> Self ; Float :: fract (self) -> Self ; Float :: abs (self) -> Self ; Float :: signum (self) -> Self ; Float :: is_sign_positive (self) -> bool ; Float :: is_sign_negative (self) -> bool ; Float :: mul_add (self , a : Self , b : Self) -> Self ; Float :: recip (self) -> Self ; Float :: powi (self , n : i32) -> Self ; Float :: powf (self , n : Self) -> Self ; Float :: sqrt (self) -> Self ; Float :: exp (self) -> Self ; Float :: exp2 (self) -> Self ; Float :: ln (self) -> Self ; Float :: log (self , base : Self) -> Self ; Float :: log2 (self) -> Self ; Float :: log10 (self) -> Self ; Float :: to_degrees (self) -> Self ; Float :: to_radians (self) -> Self ; Float :: max (self , other : Self) -> Self ; Float :: min (self , other : Self) -> Self ; Float :: abs_sub (self , other : Self) -> Self ; Float :: cbrt (self) -> Self ; Float :: hypot (self , other : Self) -> Self ; Float :: sin (self) -> Self ; Float :: cos (self) -> Self ; Float :: tan (self) -> Self ; Float :: asin (self) -> Self ; Float :: acos (self) -> Self ; Float :: atan (self) -> Self ; Float :: atan2 (self , other : Self) -> Self ; Float :: sin_cos (self) -> (Self , Self) ; Float :: exp_m1 (self) -> Self ; Float :: ln_1p (self) -> Self ; Float :: sinh (self) -> Self ; Float :: cosh (self) -> Self ; Float :: tanh (self) -> Self ; Float :: asinh (self) -> Self ; Float :: acosh (self) -> Self ; Float :: atanh (self) -> Self ; } }
+};
+}

@@ -1,0 +1,44 @@
+// Generated module macro for crate::drivers::pci
+macro_rules! Modcrate_drivers_pci {
+() => {
+        Depcrate_drivers_pciuse_444!();
+        Depcrate_drivers_pciuse_445!();
+        Depcrate_drivers_pciuse_446!();
+        Depcrate_drivers_pciuse_447!();
+        Depcrate_drivers_pciuse_448!();
+        Depcrate_drivers_pciuse_449!();
+        Depcrate_drivers_pciuse_450!();
+        Depcrate_drivers_pciuse_451!();
+        Depcrate_drivers_pciuse_452!();
+        Depcrate_drivers_pciuse_453!();
+        Depcrate_drivers_pciuse_454!();
+        Depcrate_drivers_pciuse_455!();
+        Depcrate_drivers_pciuse_456!();
+        Depcrate_drivers_pciuse_457!();
+        Depcrate_drivers_pciuse_458!();
+        Depcrate_drivers_pciuse_459!();
+        Depcrate_drivers_pciuse_460!();
+        Depcrate_drivers_pciuse_461!();
+        Depcrate_drivers_pciuse_462!();
+        Depcrate_drivers_pciuse_463!();
+        Depcrate_drivers_pciuse_464!();
+        Depcrate_drivers_pciuse_465!();
+        Depcrate_drivers_pciPCI_DEVICES!();
+        Depcrate_drivers_pciPCI_DRIVERS!();
+        Depcrate_drivers_pciPciDevice!();
+        Depcrate_drivers_pciimpl_469!();
+        Depcrate_drivers_pciimpl_470!();
+        Depcrate_drivers_pciprint_information!();
+        Depcrate_drivers_pciPciDriver!();
+        Depcrate_drivers_pciimpl_473!();
+        Depcrate_drivers_pciregister_driver!();
+        Depcrate_drivers_pciget_interrupt_handlers!();
+        Depcrate_drivers_pciNetworkDevice!();
+        Depcrate_drivers_pciNetworkDevice!();
+        Depcrate_drivers_pciget_console_driver!();
+        Depcrate_drivers_pciget_vsock_driver!();
+        Depcrate_drivers_pciget_filesystem_driver!();
+        Depcrate_drivers_pciinit!();
+        Depcrate_drivers_pcierror!();
+    };
+}

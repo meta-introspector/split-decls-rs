@@ -1,9 +1,9 @@
-// Generated macro for Duplicates (type)
-macro_rules! Depcrate_duplicates_implDuplicates {
+// Generated macro for duplicates (function)
+macro_rules! Depcrate_duplicates_implduplicates {
 () => {
 // Module: crate::duplicates_impl
-// Provides: {"Duplicates"}
+// Provides: {"duplicates"}
 // Dependencies: {}
-# [doc = " An iterator adapter to filter out duplicate elements."] # [doc = ""] # [doc = " See [`.duplicates()`](crate::Itertools::duplicates) for more information."] pub type Duplicates < I > = private :: DuplicatesBy < I , < I as Iterator > :: Item , private :: ById > ;
+# [doc = " Create a new `Duplicates` iterator."] pub fn duplicates < I > (iter : I) -> Duplicates < I > where I : Iterator , I :: Item : Eq + Hash , { Duplicates :: new (iter , private :: ById) }
 };
 }

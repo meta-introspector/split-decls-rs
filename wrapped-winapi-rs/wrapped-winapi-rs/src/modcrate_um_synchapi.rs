@@ -1,0 +1,39 @@
+// Generated module macro for crate::um::synchapi
+macro_rules! Modcrate_um_synchapi {
+() => {
+        Depcrate_um_synchapiuse_38888!();
+        Depcrate_um_synchapiuse_38889!();
+        Depcrate_um_synchapiuse_38890!();
+        Depcrate_um_synchapiuse_38891!();
+        Depcrate_um_synchapiSRWLOCK_INIT!();
+        Depcrate_um_synchapiSRWLOCK!();
+        Depcrate_um_synchapiPSRWLOCK!();
+        Depcrate_um_synchapiother_38895!();
+        Depcrate_um_synchapiINIT_ONCE!();
+        Depcrate_um_synchapiPINIT_ONCE!();
+        Depcrate_um_synchapiLPINIT_ONCE!();
+        Depcrate_um_synchapimacro_38899!();
+        Depcrate_um_synchapiother_38900!();
+        Depcrate_um_synchapiCONDITION_VARIABLE!();
+        Depcrate_um_synchapiPCONDITION_VARIABLE!();
+        Depcrate_um_synchapiCONDITION_VARIABLE_INIT!();
+        Depcrate_um_synchapiother_38904!();
+        Depcrate_um_synchapiother_38905!();
+        Depcrate_um_synchapimacro_38906!();
+        Depcrate_um_synchapiother_38907!();
+        Depcrate_um_synchapiCREATE_MUTEX_INITIAL_OWNER!();
+        Depcrate_um_synchapiother_38909!();
+        Depcrate_um_synchapiCREATE_EVENT_MANUAL_RESET!();
+        Depcrate_um_synchapiCREATE_EVENT_INITIAL_SET!();
+        Depcrate_um_synchapiother_38912!();
+        Depcrate_um_synchapiCREATE_WAITABLE_TIMER_MANUAL_RESET!();
+        Depcrate_um_synchapiother_38914!();
+        Depcrate_um_synchapiSYNCHRONIZATION_BARRIER!();
+        Depcrate_um_synchapiPSYNCHRONIZATION_BARRIER!();
+        Depcrate_um_synchapiLPSYNCHRONIZATION_BARRIER!();
+        Depcrate_um_synchapiSYNCHRONIZATION_BARRIER_FLAGS_SPIN_ONLY!();
+        Depcrate_um_synchapiSYNCHRONIZATION_BARRIER_FLAGS_BLOCK_ONLY!();
+        Depcrate_um_synchapiSYNCHRONIZATION_BARRIER_FLAGS_NO_DELETE!();
+        Depcrate_um_synchapiother_38921!();
+    };
+}

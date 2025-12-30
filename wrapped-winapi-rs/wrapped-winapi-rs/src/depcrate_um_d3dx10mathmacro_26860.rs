@@ -1,0 +1,9 @@
+// Generated macro for macro_26860 (macro)
+macro_rules! Depcrate_um_d3dx10mathmacro_26860 {
+() => {
+// Module: crate::um::d3dx10math
+// Provides: {"macro_26860"}
+// Dependencies: {}
+DEFINE_GUID ! { IID_ID3DXMatrixStack , 0xc7885ba7 , 0xf990 , 0x4fe7 , 0x92 , 0x2d , 0x85 , 0x15 , 0xe4 , 0x77 , 0xdd , 0x85 }
+};
+}

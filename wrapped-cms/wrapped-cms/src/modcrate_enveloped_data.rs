@@ -1,0 +1,39 @@
+// Generated module macro for crate::enveloped_data
+macro_rules! Modcrate_enveloped_data {
+() => {
+        Depcrate_enveloped_datause_153!();
+        Depcrate_enveloped_datause_154!();
+        Depcrate_enveloped_datause_155!();
+        Depcrate_enveloped_datause_156!();
+        Depcrate_enveloped_datause_157!();
+        Depcrate_enveloped_datause_158!();
+        Depcrate_enveloped_datause_159!();
+        Depcrate_enveloped_datause_160!();
+        Depcrate_enveloped_datause_161!();
+        Depcrate_enveloped_datause_162!();
+        Depcrate_enveloped_datause_163!();
+        Depcrate_enveloped_dataEnvelopedData!();
+        Depcrate_enveloped_dataOriginatorInfo!();
+        Depcrate_enveloped_dataRecipientInfos!();
+        Depcrate_enveloped_datamacro_167!();
+        Depcrate_enveloped_dataimpl_168!();
+        Depcrate_enveloped_dataEncryptedContentInfo!();
+        Depcrate_enveloped_dataRecipientInfo!();
+        Depcrate_enveloped_dataimpl_171!();
+        Depcrate_enveloped_dataEncryptedKey!();
+        Depcrate_enveloped_dataKeyTransRecipientInfo!();
+        Depcrate_enveloped_dataRecipientIdentifier!();
+        Depcrate_enveloped_dataKeyAgreeRecipientInfo!();
+        Depcrate_enveloped_dataOriginatorIdentifierOrKey!();
+        Depcrate_enveloped_dataOriginatorPublicKey!();
+        Depcrate_enveloped_dataRecipientEncryptedKeys!();
+        Depcrate_enveloped_dataRecipientEncryptedKey!();
+        Depcrate_enveloped_dataKeyAgreeRecipientIdentifier!();
+        Depcrate_enveloped_dataRecipientKeyIdentifier!();
+        Depcrate_enveloped_dataKekRecipientInfo!();
+        Depcrate_enveloped_dataKekIdentifier!();
+        Depcrate_enveloped_dataPasswordRecipientInfo!();
+        Depcrate_enveloped_dataOtherRecipientInfo!();
+        Depcrate_enveloped_dataUserKeyingMaterial!();
+    };
+}

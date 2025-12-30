@@ -1,0 +1,9 @@
+// Generated macro for impl_5 (impl)
+macro_rules! Depcrateimpl_5 {
+() => {
+// Module: crate
+// Provides: {"impl_5"}
+// Dependencies: {}
+impl Drop for ThreadPool { fn drop (& mut self) { for worker in & mut self . workers { println ! ("Shutting down worker {}" , worker . id) ; if let Some (thread) = worker . thread . take () { thread . join () . unwrap () ; } } } }
+};
+}

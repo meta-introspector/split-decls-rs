@@ -1,0 +1,12 @@
+// Generated module macro for crate
+macro_rules! Modcrate {
+() => {
+        Depcrateuse_1!();
+        Depcrateuse_2!();
+        DepcratePresigner!();
+        Depcrateimpl_4!();
+        Depcrateimpl_5!();
+        Depcrateimpl_6!();
+        Depcratetests!();
+    };
+}

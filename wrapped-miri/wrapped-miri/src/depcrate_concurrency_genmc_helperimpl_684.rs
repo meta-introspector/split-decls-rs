@@ -1,0 +1,9 @@
+// Generated macro for impl_684 (impl)
+macro_rules! Depcrate_concurrency_genmc_helperimpl_684 {
+() => {
+// Module: crate::concurrency::genmc::helper
+// Provides: {"impl_684"}
+// Dependencies: {}
+impl AtomicRwOrd { # [doc = " Split up an atomic read-write memory ordering into a separate read and write ordering."] pub (super) fn split_memory_orderings (self) -> (AtomicReadOrd , AtomicWriteOrd) { match self { AtomicRwOrd :: Relaxed => (AtomicReadOrd :: Relaxed , AtomicWriteOrd :: Relaxed) , AtomicRwOrd :: Acquire => (AtomicReadOrd :: Acquire , AtomicWriteOrd :: Relaxed) , AtomicRwOrd :: Release => (AtomicReadOrd :: Relaxed , AtomicWriteOrd :: Release) , AtomicRwOrd :: AcqRel => (AtomicReadOrd :: Acquire , AtomicWriteOrd :: Release) , AtomicRwOrd :: SeqCst => (AtomicReadOrd :: SeqCst , AtomicWriteOrd :: SeqCst) , } } # [doc = " Split up an atomic read-write memory ordering into a separate read and write ordering."] fn from_split_memory_orderings (read_ordering : AtomicReadOrd , write_ordering : AtomicWriteOrd ,) -> Self { match (read_ordering , write_ordering) { (AtomicReadOrd :: Relaxed , AtomicWriteOrd :: Relaxed) => AtomicRwOrd :: Relaxed , (AtomicReadOrd :: Acquire , AtomicWriteOrd :: Relaxed) => AtomicRwOrd :: Acquire , (AtomicReadOrd :: Relaxed , AtomicWriteOrd :: Release) => AtomicRwOrd :: Release , (AtomicReadOrd :: Acquire , AtomicWriteOrd :: Release) => AtomicRwOrd :: AcqRel , (AtomicReadOrd :: SeqCst , AtomicWriteOrd :: SeqCst) => AtomicRwOrd :: SeqCst , _ => panic ! ("Unsupported memory ordering combination ({read_ordering:?}, {write_ordering:?})") , } } pub (super) fn to_genmc (self) -> MemOrdering { match self { AtomicRwOrd :: Relaxed => MemOrdering :: Relaxed , AtomicRwOrd :: Acquire => MemOrdering :: Acquire , AtomicRwOrd :: Release => MemOrdering :: Release , AtomicRwOrd :: AcqRel => MemOrdering :: AcquireRelease , AtomicRwOrd :: SeqCst => MemOrdering :: SequentiallyConsistent , } } }
+};
+}

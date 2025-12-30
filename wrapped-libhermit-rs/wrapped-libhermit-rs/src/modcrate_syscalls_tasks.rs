@@ -1,0 +1,43 @@
+// Generated module macro for crate::syscalls::tasks
+macro_rules! Modcrate_syscalls_tasks {
+() => {
+        Depcrate_syscalls_tasksuse_1793!();
+        Depcrate_syscalls_tasksuse_1794!();
+        Depcrate_syscalls_tasksuse_1795!();
+        Depcrate_syscalls_tasksuse_1796!();
+        Depcrate_syscalls_tasksuse_1797!();
+        Depcrate_syscalls_tasksuse_1798!();
+        Depcrate_syscalls_tasksuse_1799!();
+        Depcrate_syscalls_tasksuse_1800!();
+        Depcrate_syscalls_tasksuse_1801!();
+        Depcrate_syscalls_tasksuse_1802!();
+        Depcrate_syscalls_tasksSignalHandler!();
+        Depcrate_syscalls_tasksTid!();
+        Depcrate_syscalls_taskssys_getpid!();
+        Depcrate_syscalls_taskssys_getprio!();
+        Depcrate_syscalls_taskssys_setprio!();
+        Depcrate_syscalls_tasksexit!();
+        Depcrate_syscalls_taskssys_exit!();
+        Depcrate_syscalls_taskssys_thread_exit!();
+        Depcrate_syscalls_taskssys_abort!();
+        Depcrate_syscalls_tasksusleep!();
+        Depcrate_syscalls_taskssys_msleep!();
+        Depcrate_syscalls_taskssys_usleep!();
+        Depcrate_syscalls_taskssys_nanosleep!();
+        Depcrate_syscalls_taskssys_clone!();
+        Depcrate_syscalls_taskssys_yield!();
+        Depcrate_syscalls_taskssys_kill!();
+        Depcrate_syscalls_taskssys_signal!();
+        Depcrate_syscalls_taskssys_spawn2!();
+        Depcrate_syscalls_taskssys_spawn!();
+        Depcrate_syscalls_taskssys_join!();
+        Depcrate_syscalls_tasksBLOCKED_TASKS!();
+        Depcrate_syscalls_tasksblock_current_task!();
+        Depcrate_syscalls_taskssys_block_current_task!();
+        Depcrate_syscalls_taskssys_block_current_task_with_timeout!();
+        Depcrate_syscalls_taskssys_wakeup_task!();
+        Depcrate_syscalls_taskssys_get_priority!();
+        Depcrate_syscalls_taskssys_set_priority!();
+        Depcrate_syscalls_taskssys_set_current_task_priority!();
+    };
+}

@@ -1,0 +1,55 @@
+// Generated module macro for crate::dispatcher
+macro_rules! Modcrate_dispatcher {
+() => {
+        Depcrate_dispatcheruse_79!();
+        Depcrate_dispatcheruse_80!();
+        Depcrate_dispatcheruse_81!();
+        Depcrate_dispatcheruse_82!();
+        Depcrate_dispatcheruse_83!();
+        Depcrate_dispatcherDispatch!();
+        Depcrate_dispatcherWeakDispatch!();
+        Depcrate_dispatcherKind!();
+        Depcrate_dispatchermacro_87!();
+        Depcrate_dispatcherEXISTS!();
+        Depcrate_dispatcherGLOBAL_INIT!();
+        Depcrate_dispatcherSCOPED_COUNT!();
+        Depcrate_dispatcherUNINITIALIZED!();
+        Depcrate_dispatcherINITIALIZING!();
+        Depcrate_dispatcherINITIALIZED!();
+        Depcrate_dispatcherGLOBAL_DISPATCH!();
+        Depcrate_dispatcherNONE!();
+        Depcrate_dispatcherNO_SUBSCRIBER!();
+        Depcrate_dispatcherState!();
+        Depcrate_dispatcherEntered!();
+        Depcrate_dispatcherDefaultGuard!();
+        Depcrate_dispatcherwith_default!();
+        Depcrate_dispatcherset_default!();
+        Depcrate_dispatcherset_global_default!();
+        Depcrate_dispatcherhas_been_set!();
+        Depcrate_dispatcherSetGlobalDefaultError!();
+        Depcrate_dispatcherimpl_105!();
+        Depcrate_dispatcherimpl_106!();
+        Depcrate_dispatcherimpl_107!();
+        Depcrate_dispatcherimpl_108!();
+        Depcrate_dispatcherget_default!();
+        Depcrate_dispatcherget_current!();
+        Depcrate_dispatcherget_current!();
+        Depcrate_dispatcherget_default!();
+        Depcrate_dispatcherget_global!();
+        Depcrate_dispatcherRegistrar!();
+        Depcrate_dispatcherimpl_115!();
+        Depcrate_dispatcherimpl_116!();
+        Depcrate_dispatcherimpl_117!();
+        Depcrate_dispatcherimpl_118!();
+        Depcrate_dispatcherimpl_119!();
+        Depcrate_dispatcherimpl_120!();
+        Depcrate_dispatcherimpl_121!();
+        Depcrate_dispatcherimpl_122!();
+        Depcrate_dispatcherimpl_123!();
+        Depcrate_dispatcherimpl_124!();
+        Depcrate_dispatcherimpl_125!();
+        Depcrate_dispatcherimpl_126!();
+        Depcrate_dispatcherimpl_127!();
+        Depcrate_dispatchertest!();
+    };
+}

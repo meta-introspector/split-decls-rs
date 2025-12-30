@@ -1,0 +1,9 @@
+// Generated macro for yield_now (function)
+macro_rules! Depcrate_threadyield_now {
+() => {
+// Module: crate::thread
+// Provides: {"yield_now"}
+// Dependencies: {}
+# [doc = " Cooperatively gives up a timeslice to the OS scheduler."] # [doc = ""] # [doc = " This calls the underlying OS scheduler's yield primitive, signaling"] # [doc = " that the calling thread is willing to give up its remaining timeslice"] # [doc = " so that the OS may schedule other threads on the CPU."] # [doc = ""] # [doc = " A drawback of yielding in a loop is that if the OS does not have any"] # [doc = " other ready threads to run on the current CPU, the thread will effectively"] # [doc = " busy-wait, which wastes CPU time and energy."] # [doc = ""] # [doc = " Therefore, when waiting for events of interest, a programmer's first"] # [doc = " choice should be to use synchronization devices such as [`channel`]s,"] # [doc = " [`Condvar`]s, [`Mutex`]es or [`join`] since these primitives are"] # [doc = " implemented in a blocking manner, giving up the CPU until the event"] # [doc = " of interest has occurred which avoids repeated yielding."] # [doc = ""] # [doc = " `yield_now` should thus be used only rarely, mostly in situations where"] # [doc = " repeated polling is required because there is no other suitable way to"] # [doc = " learn when an event of interest has occurred."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " use std::thread;"] # [doc = ""] # [doc = " thread::yield_now();"] # [doc = " ```"] # [doc = ""] # [doc = " [`channel`]: crate::sync::mpsc"] # [doc = " [`join`]: JoinHandle::join"] # [doc = " [`Condvar`]: crate::sync::Condvar"] # [doc = " [`Mutex`]: crate::sync::Mutex"] # [stable (feature = "rust1" , since = "1.0.0")] pub fn yield_now () { imp :: yield_now () }
+};
+}

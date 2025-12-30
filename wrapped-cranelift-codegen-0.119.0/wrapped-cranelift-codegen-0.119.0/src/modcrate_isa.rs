@@ -1,0 +1,50 @@
+// Generated module macro for crate::isa
+macro_rules! Modcrate_isa {
+() => {
+        Depcrate_isause_1116!();
+        Depcrate_isause_1117!();
+        Depcrate_isause_1118!();
+        Depcrate_isause_1119!();
+        Depcrate_isause_1120!();
+        Depcrate_isause_1121!();
+        Depcrate_isause_1122!();
+        Depcrate_isause_1123!();
+        Depcrate_isause_1124!();
+        Depcrate_isause_1125!();
+        Depcrate_isause_1126!();
+        Depcrate_isause_1127!();
+        Depcrate_isause_1128!();
+        Depcrate_isause_1129!();
+        Depcrate_isause_1130!();
+        Depcrate_isause_1131!();
+        Depcrate_isax64!();
+        Depcrate_isaaarch64!();
+        Depcrate_isariscv64!();
+        Depcrate_isas390x!();
+        Depcrate_isapulley32!();
+        Depcrate_isapulley64!();
+        Depcrate_isapulley_shared!();
+        Depcrate_isaunwind!();
+        Depcrate_isacall_conv!();
+        Depcrate_isawinch!();
+        Depcrate_isaisa_builder!();
+        Depcrate_isalookup!();
+        Depcrate_isaALL_ARCHITECTURES!();
+        Depcrate_isalookup_by_name!();
+        Depcrate_isaLookupError!();
+        Depcrate_isaimpl_2690!();
+        Depcrate_isaimpl_2691!();
+        Depcrate_isaOwnedTargetIsa!();
+        Depcrate_isaBuilder!();
+        Depcrate_isaIsaBuilder!();
+        Depcrate_isaimpl_2695!();
+        Depcrate_isaimpl_2696!();
+        Depcrate_isaLegalize!();
+        Depcrate_isaTargetFrontendConfig!();
+        Depcrate_isaimpl_2699!();
+        Depcrate_isaTargetIsa!();
+        Depcrate_isaFunctionAlignment!();
+        Depcrate_isaimpl_2702!();
+        Depcrate_isaimpl_2703!();
+    };
+}

@@ -1,0 +1,9 @@
+// Generated macro for Attr (enum)
+macro_rules! Depcrate_events_attributesAttr {
+() => {
+// Module: crate::events::attributes
+// Provides: {"Attr"}
+// Dependencies: {}
+# [doc = " A struct representing a key/value XML or HTML [attribute]."] # [doc = ""] # [doc = " [attribute]: https://www.w3.org/TR/xml11/#NT-Attribute"] # [derive (Clone , PartialEq , Eq , PartialOrd , Ord , Hash)] pub enum Attr < T > { # [doc = " Attribute with value enclosed in double quotes (`\"`). Attribute key and"] # [doc = " value provided. This is a canonical XML-style attribute."] DoubleQ (T , T) , # [doc = " Attribute with value enclosed in single quotes (`'`). Attribute key and"] # [doc = " value provided. This is an XML-style attribute."] SingleQ (T , T) , # [doc = " Attribute with value not enclosed in quotes. Attribute key and value"] # [doc = " provided. This is HTML-style attribute, it can be returned in HTML-mode"] # [doc = " parsing only. In an XML mode [`AttrError::UnquotedValue`] will be raised"] # [doc = " instead."] # [doc = ""] # [doc = " Attribute value can be invalid according to the [HTML specification],"] # [doc = " in particular, it can contain `\"`, `'`, `=`, `<`, and <code>&#96;</code>"] # [doc = " characters. The absence of the `>` character is nevertheless guaranteed,"] # [doc = " since the parser extracts [events] based on them even before the start"] # [doc = " of parsing attributes."] # [doc = ""] # [doc = " [HTML specification]: https://html.spec.whatwg.org/#unquoted"] # [doc = " [events]: crate::events::Event::Start"] Unquoted (T , T) , # [doc = " Attribute without value. Attribute key provided. This is HTML-style attribute,"] # [doc = " it can be returned in HTML-mode parsing only. In XML mode"] # [doc = " [`AttrError::ExpectedEq`] will be raised instead."] Empty (T) , }
+};
+}

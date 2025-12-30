@@ -1,0 +1,50 @@
+// Generated module macro for crate::pkcs7
+macro_rules! Modcrate_pkcs7 {
+() => {
+        Depcrate_pkcs7use_553!();
+        Depcrate_pkcs7use_554!();
+        Depcrate_pkcs7use_555!();
+        Depcrate_pkcs7use_556!();
+        Depcrate_pkcs7use_557!();
+        Depcrate_pkcs7use_558!();
+        Depcrate_pkcs7use_559!();
+        Depcrate_pkcs7use_560!();
+        Depcrate_pkcs7use_561!();
+        Depcrate_pkcs7use_562!();
+        Depcrate_pkcs7use_563!();
+        Depcrate_pkcs7use_564!();
+        Depcrate_pkcs7use_565!();
+        Depcrate_pkcs7use_566!();
+        Depcrate_pkcs7use_567!();
+        Depcrate_pkcs7use_568!();
+        Depcrate_pkcs7use_569!();
+        Depcrate_pkcs7use_570!();
+        Depcrate_pkcs7use_571!();
+        Depcrate_pkcs7use_572!();
+        Depcrate_pkcs7use_573!();
+        Depcrate_pkcs7use_574!();
+        Depcrate_pkcs7use_575!();
+        Depcrate_pkcs7PKCS7_CONTENT_TYPE_OID!();
+        Depcrate_pkcs7PKCS7_MESSAGE_DIGEST_OID!();
+        Depcrate_pkcs7PKCS7_SIGNING_TIME_OID!();
+        Depcrate_pkcs7PKCS7_SMIME_CAP_OID!();
+        Depcrate_pkcs7OIDS_TO_MIC_NAME!();
+        Depcrate_pkcs7serialize_certificates!();
+        Depcrate_pkcs7encrypt_and_serialize!();
+        Depcrate_pkcs7decrypt_smime!();
+        Depcrate_pkcs7decrypt_pem!();
+        Depcrate_pkcs7decrypt_der!();
+        Depcrate_pkcs7check_decrypt_parameters!();
+        Depcrate_pkcs7symmetric_decrypt!();
+        Depcrate_pkcs7sign_and_serialize!();
+        Depcrate_pkcs7compute_pkcs7_signature_algorithm!();
+        Depcrate_pkcs7smime_canonicalize!();
+        Depcrate_pkcs7load_pkcs7_certificates!();
+        Depcrate_pkcs7try_list_of_certificates!();
+        Depcrate_pkcs7load_pkcs7_certificates_rust!();
+        Depcrate_pkcs7load_pem_pkcs7_certificates!();
+        Depcrate_pkcs7load_der_pkcs7_certificates!();
+        Depcrate_pkcs7pkcs7_mod!();
+        Depcrate_pkcs7tests!();
+    };
+}

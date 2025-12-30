@@ -1,0 +1,47 @@
+// Generated module macro for crate::stm32f427::fsmc
+macro_rules! Modcrate_stm32f427_fsmc {
+() => {
+        Depcrate_stm32f427_fsmcRegisterBlock!();
+        Depcrate_stm32f427_fsmcimpl_11726!();
+        Depcrate_stm32f427_fsmcBCR1!();
+        Depcrate_stm32f427_fsmcbcr1!();
+        Depcrate_stm32f427_fsmcBTR!();
+        Depcrate_stm32f427_fsmcbtr!();
+        Depcrate_stm32f427_fsmcBCR!();
+        Depcrate_stm32f427_fsmcbcr!();
+        Depcrate_stm32f427_fsmcPCR!();
+        Depcrate_stm32f427_fsmcpcr!();
+        Depcrate_stm32f427_fsmcSR!();
+        Depcrate_stm32f427_fsmcsr!();
+        Depcrate_stm32f427_fsmcPMEM2!();
+        Depcrate_stm32f427_fsmcpmem2!();
+        Depcrate_stm32f427_fsmcPATT2!();
+        Depcrate_stm32f427_fsmcpatt2!();
+        Depcrate_stm32f427_fsmcECCR2!();
+        Depcrate_stm32f427_fsmceccr2!();
+        Depcrate_stm32f427_fsmcPMEM3!();
+        Depcrate_stm32f427_fsmcpmem3!();
+        Depcrate_stm32f427_fsmcPATT3!();
+        Depcrate_stm32f427_fsmcpatt3!();
+        Depcrate_stm32f427_fsmcECCR3!();
+        Depcrate_stm32f427_fsmceccr3!();
+        Depcrate_stm32f427_fsmcPMEM4!();
+        Depcrate_stm32f427_fsmcpmem4!();
+        Depcrate_stm32f427_fsmcPATT4!();
+        Depcrate_stm32f427_fsmcpatt4!();
+        Depcrate_stm32f427_fsmcPIO4!();
+        Depcrate_stm32f427_fsmcpio4!();
+        Depcrate_stm32f427_fsmcBWTR!();
+        Depcrate_stm32f427_fsmcbwtr!();
+        Depcrate_stm32f427_fsmcSDCR!();
+        Depcrate_stm32f427_fsmcsdcr!();
+        Depcrate_stm32f427_fsmcSDTR!();
+        Depcrate_stm32f427_fsmcsdtr!();
+        Depcrate_stm32f427_fsmcSDCMR!();
+        Depcrate_stm32f427_fsmcsdcmr!();
+        Depcrate_stm32f427_fsmcSDRTR!();
+        Depcrate_stm32f427_fsmcsdrtr!();
+        Depcrate_stm32f427_fsmcSDSR!();
+        Depcrate_stm32f427_fsmcsdsr!();
+    };
+}

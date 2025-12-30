@@ -1,0 +1,49 @@
+// Generated module macro for crate
+macro_rules! Modcrate {
+() => {
+        Depcrateother_1!();
+        Depcrateuse_2!();
+        Depcrateuse_3!();
+        Depcrateuse_4!();
+        Depcrateuse_5!();
+        Depcrateuse_6!();
+        Depcrateuse_7!();
+        Depcrateother_8!();
+        Depcrateuse_9!();
+        Depcrateuse_10!();
+        DepcrateMatchWords!();
+        Depcrateblocks_for_bits!();
+        Depcratematch_words!();
+        DepcrateBitSet!();
+        Depcrateimpl_15!();
+        Depcrateimpl_16!();
+        Depcrateimpl_17!();
+        Depcrateimpl_18!();
+        Depcrateimpl_19!();
+        Depcrateimpl_20!();
+        Depcrateimpl_21!();
+        Depcrateimpl_22!();
+        Depcrateimpl_23!();
+        Depcrateimpl_24!();
+        Depcrateimpl_25!();
+        Depcrateimpl_26!();
+        Depcrateimpl_27!();
+        DepcrateBlockIter!();
+        Depcrateimpl_29!();
+        DepcrateTwoBitPositions!();
+        DepcrateIter!();
+        DepcrateUnion!();
+        DepcrateIntersection!();
+        DepcrateDifference!();
+        DepcrateSymmetricDifference!();
+        Depcrateimpl_36!();
+        Depcrateimpl_37!();
+        Depcrateimpl_38!();
+        Depcrateimpl_39!();
+        Depcrateimpl_40!();
+        Depcrateimpl_41!();
+        Depcrateimpl_42!();
+        Depcrateimpl_43!();
+        Depcratetests!();
+    };
+}

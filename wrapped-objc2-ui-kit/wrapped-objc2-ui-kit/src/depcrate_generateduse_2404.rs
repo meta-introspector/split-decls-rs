@@ -1,0 +1,9 @@
+// Generated macro for use_2404 (pub_use)
+macro_rules! Depcrate_generateduse_2404 {
+() => {
+// Module: crate::generated
+// Provides: {"use_2404"}
+// Dependencies: {}
+# [cfg (feature = "UIWindow")] pub use self :: __UIWindow :: UIKeyboardFrameBeginUserInfoKey ;
+};
+}

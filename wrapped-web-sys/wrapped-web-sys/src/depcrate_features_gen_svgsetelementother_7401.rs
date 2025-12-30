@@ -1,0 +1,9 @@
+// Generated macro for other_7401 (other)
+macro_rules! Depcrate_features_gen_SvgSetElementother_7401 {
+() => {
+// Module: crate::features::gen_SvgSetElement
+// Provides: {"other_7401"}
+// Dependencies: {}
+# [wasm_bindgen] extern "C" { # [wasm_bindgen (extends = SvgAnimationElement , extends = SvgElement , extends = Element , extends = Node , extends = EventTarget , extends = :: js_sys :: Object , js_name = SVGSetElement , typescript_type = "SVGSetElement")] # [derive (Debug , Clone , PartialEq , Eq)] # [doc = "The `SvgSetElement` class."] # [doc = ""] # [doc = "[MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/API/SVGSetElement)"] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `SvgSetElement`*"] pub type SvgSetElement ; }
+};
+}

@@ -1,0 +1,47 @@
+// Generated module macro for crate::x509::ocsp_resp
+macro_rules! Modcrate_x509_ocsp_resp {
+() => {
+        Depcrate_x509_ocsp_respuse_990!();
+        Depcrate_x509_ocsp_respuse_991!();
+        Depcrate_x509_ocsp_respuse_992!();
+        Depcrate_x509_ocsp_respuse_993!();
+        Depcrate_x509_ocsp_respuse_994!();
+        Depcrate_x509_ocsp_respuse_995!();
+        Depcrate_x509_ocsp_respuse_996!();
+        Depcrate_x509_ocsp_respuse_997!();
+        Depcrate_x509_ocsp_respBASIC_RESPONSE_OID!();
+        Depcrate_x509_ocsp_respload_der_ocsp_response!();
+        Depcrate_x509_ocsp_respmacro_1000!();
+        Depcrate_x509_ocsp_respOCSPResponse!();
+        Depcrate_x509_ocsp_respimpl_1002!();
+        Depcrate_x509_ocsp_respSUCCESSFUL_RESPONSE!();
+        Depcrate_x509_ocsp_respMALFORMED_REQUEST_RESPONSE!();
+        Depcrate_x509_ocsp_respINTERNAL_ERROR_RESPONSE!();
+        Depcrate_x509_ocsp_respTRY_LATER_RESPONSE!();
+        Depcrate_x509_ocsp_respSIG_REQUIRED_RESPONSE!();
+        Depcrate_x509_ocsp_respUNAUTHORIZED_RESPONSE!();
+        Depcrate_x509_ocsp_respimpl_1009!();
+        Depcrate_x509_ocsp_respmap_arc_data_ocsp_response!();
+        Depcrate_x509_ocsp_resptry_map_arc_data_mut_ocsp_response_iterator!();
+        Depcrate_x509_ocsp_respsingle_response!();
+        Depcrate_x509_ocsp_respsingleresp_py_serial_number!();
+        Depcrate_x509_ocsp_respsingleresp_py_certificate_status!();
+        Depcrate_x509_ocsp_respsingleresp_py_hash_algorithm!();
+        Depcrate_x509_ocsp_respsingleresp_py_this_update!();
+        Depcrate_x509_ocsp_respsingleresp_py_this_update_utc!();
+        Depcrate_x509_ocsp_respsingleresp_py_next_update!();
+        Depcrate_x509_ocsp_respsingleresp_py_next_update_utc!();
+        Depcrate_x509_ocsp_respsingleresp_py_revocation_reason!();
+        Depcrate_x509_ocsp_respsingleresp_py_revocation_time!();
+        Depcrate_x509_ocsp_respsingleresp_py_revocation_time_utc!();
+        Depcrate_x509_ocsp_respcreate_ocsp_response!();
+        Depcrate_x509_ocsp_respRawOCSPResponseIterator!();
+        Depcrate_x509_ocsp_respmacro_1025!();
+        Depcrate_x509_ocsp_respOCSPResponseIterator!();
+        Depcrate_x509_ocsp_respimpl_1027!();
+        Depcrate_x509_ocsp_respmacro_1028!();
+        Depcrate_x509_ocsp_respOCSPSingleResponse!();
+        Depcrate_x509_ocsp_respimpl_1030!();
+        Depcrate_x509_ocsp_respimpl_1031!();
+    };
+}

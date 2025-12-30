@@ -1,0 +1,9 @@
+// Generated macro for WLAN_REASON_CODE_MSMSEC_PROFILE_PASSPHRASE_CHAR (const)
+macro_rules! Depcrate_um_wlanapiWLAN_REASON_CODE_MSMSEC_PROFILE_PASSPHRASE_CHAR {
+() => {
+// Module: crate::um::wlanapi
+// Provides: {"WLAN_REASON_CODE_MSMSEC_PROFILE_PASSPHRASE_CHAR"}
+// Dependencies: {}
+pub const WLAN_REASON_CODE_MSMSEC_PROFILE_PASSPHRASE_CHAR : WLAN_REASON_CODE = WLAN_REASON_CODE_MSMSEC_BASE + 22 ;
+};
+}

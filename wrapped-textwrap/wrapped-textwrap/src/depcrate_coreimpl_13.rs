@@ -1,0 +1,9 @@
+// Generated macro for impl_13 (impl)
+macro_rules! Depcrate_coreimpl_13 {
+() => {
+// Module: crate::core
+// Provides: {"impl_13"}
+// Dependencies: {}
+impl < 'a > Word < 'a > { # [doc = " Construct a `Word` from a string."] # [doc = ""] # [doc = " A trailing stretch of `' '` is automatically taken to be the"] # [doc = " whitespace part of the word."] pub fn from (word : & str) -> Word < '_ > { let trimmed = word . trim_end_matches (' ') ; Word { word : trimmed , width : display_width (trimmed) , whitespace : & word [trimmed . len () ..] , penalty : "" , } } # [doc = " Break this word into smaller words with a width of at most"] # [doc = " `line_width`. The whitespace and penalty from this `Word` is"] # [doc = " added to the last piece."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " use textwrap::core::Word;"] # [doc = " assert_eq!("] # [doc = "     Word::from(\"Hello!  \").break_apart(3).collect::<Vec<_>>(),"] # [doc = "     vec![Word::from(\"Hel\"), Word::from(\"lo!  \")]"] # [doc = " );"] # [doc = " ```"] pub fn break_apart < 'b > (& 'b self , line_width : usize) -> impl Iterator < Item = Word < 'a > > + 'b { let mut char_indices = self . word . char_indices () ; let mut offset = 0 ; let mut width = 0 ; std :: iter :: from_fn (move | | { while let Some ((idx , ch)) = char_indices . next () { if skip_ansi_escape_sequence (ch , & mut char_indices . by_ref () . map (| (_ , ch) | ch)) { continue ; } if width > 0 && width + ch_width (ch) > line_width { let word = Word { word : & self . word [offset .. idx] , width : width , whitespace : "" , penalty : "" , } ; offset = idx ; width = ch_width (ch) ; return Some (word) ; } width += ch_width (ch) ; } if offset < self . word . len () { let word = Word { word : & self . word [offset ..] , width : width , whitespace : self . whitespace , penalty : self . penalty , } ; offset = self . word . len () ; return Some (word) ; } None }) } }
+};
+}

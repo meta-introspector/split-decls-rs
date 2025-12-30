@@ -1,0 +1,9 @@
+// Generated macro for macro_39639 (macro)
+macro_rules! Depcrate_um_wbemclimacro_39639 {
+() => {
+// Module: crate::um::wbemcli
+// Provides: {"macro_39639"}
+// Dependencies: {}
+ENUM ! { enum WBEM_COMPILER_OPTIONS { WBEM_FLAG_CHECK_ONLY = 0x1 , WBEM_FLAG_AUTORECOVER = 0x2 , WBEM_FLAG_WMI_CHECK = 0x4 , WBEM_FLAG_CONSOLE_PRINT = 0x8 , WBEM_FLAG_DONT_ADD_TO_LIST = 0x10 , WBEM_FLAG_SPLIT_FILES = 0x20 , WBEM_FLAG_STORE_FILE = 0x100 , } }
+};
+}

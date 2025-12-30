@@ -1,0 +1,42 @@
+// Generated module macro for crate::ranges
+macro_rules! Modcrate_ranges {
+() => {
+        Depcrate_rangesuse_9144!();
+        Depcrate_rangesuse_9145!();
+        Depcrate_rangesuse_9146!();
+        Depcrate_rangesuse_9147!();
+        Depcrate_rangesuse_9148!();
+        Depcrate_rangesuse_9149!();
+        Depcrate_rangesuse_9150!();
+        Depcrate_rangesuse_9151!();
+        Depcrate_rangesuse_9152!();
+        Depcrate_rangesuse_9153!();
+        Depcrate_rangesuse_9154!();
+        Depcrate_rangesuse_9155!();
+        Depcrate_rangesuse_9156!();
+        Depcrate_rangesuse_9157!();
+        Depcrate_rangesuse_9158!();
+        Depcrate_rangesuse_9159!();
+        Depcrate_rangesuse_9160!();
+        Depcrate_rangesuse_9161!();
+        Depcrate_rangesuse_9162!();
+        Depcrate_rangesmacro_9163!();
+        Depcrate_rangesmacro_9164!();
+        Depcrate_rangesmacro_9165!();
+        Depcrate_rangesmacro_9166!();
+        Depcrate_rangesRanges!();
+        Depcrate_rangesimpl_9168!();
+        Depcrate_rangesmacro_9169!();
+        Depcrate_rangesimpl_9170!();
+        Depcrate_rangescheck_possible_range_contains!();
+        Depcrate_rangesRangeBounds!();
+        Depcrate_rangescheck_range_bounds!();
+        Depcrate_rangescan_switch_ranges!();
+        Depcrate_rangescheck_exclusive_range_plus_one!();
+        Depcrate_rangescheck_inclusive_range_minus_one!();
+        Depcrate_rangescheck_range_switch!();
+        Depcrate_rangescheck_reversed_empty_range!();
+        Depcrate_rangesy_plus_one!();
+        Depcrate_rangesy_minus_one!();
+    };
+}

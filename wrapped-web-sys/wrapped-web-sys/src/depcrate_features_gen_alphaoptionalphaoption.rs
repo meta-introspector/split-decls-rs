@@ -1,0 +1,9 @@
+// Generated macro for AlphaOption (enum)
+macro_rules! Depcrate_features_gen_AlphaOptionAlphaOption {
+() => {
+// Module: crate::features::gen_AlphaOption
+// Provides: {"AlphaOption"}
+// Dependencies: {}
+# [cfg (web_sys_unstable_apis)] # [wasm_bindgen] # [doc = "The `AlphaOption` enum."] # [doc = ""] # [doc = "*This API requires the following crate features to be activated: `AlphaOption`*"] # [doc = ""] # [doc = "*This API is unstable and requires `--cfg=web_sys_unstable_apis` to be activated, as"] # [doc = "[described in the `wasm-bindgen` guide](https://wasm-bindgen.github.io/wasm-bindgen/web-sys/unstable-apis.html)*"] # [derive (Debug , Clone , Copy , PartialEq , Eq)] pub enum AlphaOption { Keep = "keep" , Discard = "discard" , }
+};
+}

@@ -1,0 +1,49 @@
+// Generated module macro for crate::zerovec
+macro_rules! Modcrate_zerovec {
+() => {
+        Depcrate_zerovecdatabake!();
+        Depcrate_zerovecserde!();
+        Depcrate_zerovecslice!();
+        Depcrate_zerovecuse_526!();
+        Depcrate_zerovecuse_527!();
+        Depcrate_zerovecuse_528!();
+        Depcrate_zerovecuse_529!();
+        Depcrate_zerovecuse_530!();
+        Depcrate_zerovecuse_531!();
+        Depcrate_zerovecuse_532!();
+        Depcrate_zerovecuse_533!();
+        Depcrate_zerovecuse_534!();
+        Depcrate_zerovecuse_535!();
+        Depcrate_zerovecuse_536!();
+        Depcrate_zerovecuse_537!();
+        Depcrate_zerovecZeroVec!();
+        Depcrate_zerovecimpl_539!();
+        Depcrate_zerovecimpl_540!();
+        Depcrate_zerovecimpl_541!();
+        Depcrate_zerovecEyepatchHackVector!();
+        Depcrate_zerovecimpl_543!();
+        Depcrate_zerovecimpl_544!();
+        Depcrate_zerovecimpl_545!();
+        Depcrate_zerovecimpl_546!();
+        Depcrate_zerovecimpl_547!();
+        Depcrate_zerovecimpl_548!();
+        Depcrate_zerovecimpl_549!();
+        Depcrate_zerovecimpl_550!();
+        Depcrate_zerovecimpl_551!();
+        Depcrate_zerovecimpl_552!();
+        Depcrate_zerovecimpl_553!();
+        Depcrate_zerovecimpl_554!();
+        Depcrate_zerovecimpl_555!();
+        Depcrate_zerovecimpl_556!();
+        Depcrate_zerovecimpl_557!();
+        Depcrate_zerovecimpl_558!();
+        Depcrate_zerovecimpl_559!();
+        Depcrate_zerovecimpl_560!();
+        Depcrate_zerovecimpl_561!();
+        Depcrate_zerovecimpl_562!();
+        Depcrate_zerovecimpl_563!();
+        Depcrate_zeroveczeroslice!();
+        Depcrate_zeroveczerovec!();
+        Depcrate_zerovectests!();
+    };
+}

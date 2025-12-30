@@ -1,0 +1,9 @@
+// Generated macro for write_complex (macro)
+macro_rules! Depcratewrite_complex {
+() => {
+// Module: crate
+// Provides: {"write_complex"}
+// Dependencies: {}
+macro_rules ! write_complex { ($ f : ident , $ t : expr , $ prefix : expr , $ re : expr , $ im : expr , $ T : ident) => { { let abs_re = if $ re < Zero :: zero () { $ T :: zero () - $ re . clone () } else { $ re . clone () } ; let abs_im = if $ im < Zero :: zero () { $ T :: zero () - $ im . clone () } else { $ im . clone () } ; return if let Some (prec) = $ f . precision () { fmt_re_im ($ f , $ re < $ T :: zero () , $ im < $ T :: zero () , format_args ! (concat ! ("{:.1$" , $ t , "}") , abs_re , prec) , format_args ! (concat ! ("{:.1$" , $ t , "}") , abs_im , prec) ,) } else { fmt_re_im ($ f , $ re < $ T :: zero () , $ im < $ T :: zero () , format_args ! (concat ! ("{:" , $ t , "}") , abs_re) , format_args ! (concat ! ("{:" , $ t , "}") , abs_im) ,) } ; fn fmt_re_im (f : & mut fmt :: Formatter <'_ >, re_neg : bool , im_neg : bool , real : fmt :: Arguments <'_ >, imag : fmt :: Arguments <'_ >,) -> fmt :: Result { let prefix = if f . alternate () { $ prefix } else { "" } ; let sign = if re_neg { "-" } else if f . sign_plus () { "+" } else { "" } ; if im_neg { fmt_complex (f , format_args ! ("{}{pre}{re}-{pre}{im}i" , sign , re = real , im = imag , pre = prefix) ,) } else { fmt_complex (f , format_args ! ("{}{pre}{re}+{pre}{im}i" , sign , re = real , im = imag , pre = prefix) ,) } } # [cfg (feature = "std")] fn fmt_complex (f : & mut fmt :: Formatter <'_ >, complex : fmt :: Arguments <'_ >) -> fmt :: Result { use std :: string :: ToString ; if let Some (width) = f . width () { write ! (f , "{0: >1$}" , complex . to_string () , width) } else { write ! (f , "{}" , complex) } } # [cfg (not (feature = "std"))] fn fmt_complex (f : & mut fmt :: Formatter <'_ >, complex : fmt :: Arguments <'_ >) -> fmt :: Result { write ! (f , "{}" , complex) } } } ; }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for check_builtin_macro_attribute (function)
+macro_rules! Depcrate_utilcheck_builtin_macro_attribute {
+() => {
+// Module: crate::util
+// Provides: {"check_builtin_macro_attribute"}
+// Dependencies: {}
+pub (crate) fn check_builtin_macro_attribute (ecx : & ExtCtxt < '_ > , meta_item : & MetaItem , name : Symbol) { let template = AttributeTemplate { word : true , .. Default :: default () } ; validate_attr :: check_builtin_meta_item (& ecx . sess . psess , meta_item , AttrStyle :: Outer , name , template , true ,) ; }
+};
+}

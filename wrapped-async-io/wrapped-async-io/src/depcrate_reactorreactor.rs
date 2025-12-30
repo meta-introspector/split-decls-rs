@@ -1,0 +1,9 @@
+// Generated macro for Reactor (struct)
+macro_rules! Depcrate_reactorReactor {
+() => {
+// Module: crate::reactor
+// Provides: {"Reactor"}
+// Dependencies: {}
+# [doc = " The reactor."] # [doc = ""] # [doc = " There is only one global instance of this type, accessible by [`Reactor::get()`]."] pub (crate) struct Reactor { # [doc = " Portable bindings to epoll/kqueue/event ports/IOCP."] # [doc = ""] # [doc = " This is where I/O is polled, producing I/O events."] pub (crate) poller : Poller , # [doc = " Ticker bumped before polling."] # [doc = ""] # [doc = " This is useful for checking what is the current \"round\" of `ReactorLock::react()` when"] # [doc = " synchronizing things in `Source::readable()` and `Source::writable()`. Both of those"] # [doc = " methods must make sure they don't receive stale I/O events - they only accept events from a"] # [doc = " fresh \"round\" of `ReactorLock::react()`."] ticker : AtomicUsize , # [doc = " Registered sources."] sources : Mutex < Slab < Arc < Source > > > , # [doc = " Temporary storage for I/O events when polling the reactor."] # [doc = ""] # [doc = " Holding a lock on this event list implies the exclusive right to poll I/O."] events : Mutex < Events > , # [doc = " An ordered map of registered timers."] # [doc = ""] # [doc = " Timers are in the order in which they fire. The `usize` in this type is a timer ID used to"] # [doc = " distinguish timers that fire at the same time. The `Waker` represents the task awaiting the"] # [doc = " timer."] timers : Mutex < BTreeMap < (Instant , usize) , Waker > > , # [doc = " A queue of timer operations (insert and remove)."] # [doc = ""] # [doc = " When inserting or removing a timer, we don't process it immediately - we just push it into"] # [doc = " this queue. Timers actually get processed when the queue fills up or the reactor is polled."] timer_ops : ConcurrentQueue < TimerOp > , }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for macro_163 (macro)
+macro_rules! Depcrate_ntexapimacro_163 {
+() => {
+// Module: crate::ntexapi
+// Provides: {"macro_163"}
+// Dependencies: {}
+EXTERN ! { extern "system" { fn NtCreateWnfStateName (StateName : PWNF_STATE_NAME , NameLifetime : WNF_STATE_NAME_LIFETIME , DataScope : WNF_DATA_SCOPE , PersistData : BOOLEAN , TypeId : PCWNF_TYPE_ID , MaximumStateSize : ULONG , SecurityDescriptor : PSECURITY_DESCRIPTOR ,) -> NTSTATUS ; fn NtDeleteWnfStateName (StateName : PCWNF_STATE_NAME ,) -> NTSTATUS ; fn NtUpdateWnfStateData (StateName : PCWNF_STATE_NAME , Buffer : * const VOID , Length : ULONG , TypeId : PCWNF_TYPE_ID , ExplicitScope : * const VOID , MatchingChangeStamp : WNF_CHANGE_STAMP , CheckStamp : LOGICAL ,) -> NTSTATUS ; fn NtDeleteWnfStateData (StateName : PCWNF_STATE_NAME , ExplicitScope : * const VOID ,) -> NTSTATUS ; fn NtQueryWnfStateData (StateName : PCWNF_STATE_NAME , TypeId : PCWNF_TYPE_ID , ExplicitScope : * const VOID , ChangeStamp : PWNF_CHANGE_STAMP , Buffer : PVOID , BufferSize : PULONG ,) -> NTSTATUS ; fn NtQueryWnfStateNameInformation (StateName : PCWNF_STATE_NAME , NameInfoClass : WNF_STATE_NAME_INFORMATION , ExplicitScope : * const VOID , InfoBuffer : PVOID , InfoBufferSize : ULONG ,) -> NTSTATUS ; fn NtSubscribeWnfStateChange (StateName : PCWNF_STATE_NAME , ChangeStamp : WNF_CHANGE_STAMP , EventMask : ULONG , SubscriptionId : PULONG64 ,) -> NTSTATUS ; fn NtUnsubscribeWnfStateChange (StateName : PCWNF_STATE_NAME ,) -> NTSTATUS ; fn NtGetCompleteWnfStateSubscription (OldDescriptorStateName : PWNF_STATE_NAME , OldSubscriptionId : * mut ULONG64 , OldDescriptorEventMask : ULONG , OldDescriptorStatus : ULONG , NewDeliveryDescriptor : PWNF_DELIVERY_DESCRIPTOR , DescriptorSize : ULONG ,) -> NTSTATUS ; fn NtSetWnfProcessNotificationEvent (NotificationEvent : HANDLE ,) -> NTSTATUS ; } }
+};
+}

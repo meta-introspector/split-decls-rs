@@ -1,0 +1,9 @@
+// Generated macro for impl_108 (impl)
+macro_rules! Depcrate_dictionaryimpl_108 {
+() => {
+// Module: crate::dictionary
+// Provides: {"impl_108"}
+// Dependencies: {}
+# [doc = " Various accessor methods."] impl < K : ? Sized , V : ? Sized > CFDictionary < K , V > { # [doc = " The amount of elements in the dictionary."] # [inline] # [doc (alias = "CFDictionaryGetCount")] pub fn len (& self) -> usize { self . as_opaque () . count () as _ } # [doc = " Whether the dictionary is empty or not."] # [inline] pub fn is_empty (& self) -> bool { self . len () == 0 } # [doc = " Retrieve the object at the given index."] # [doc = ""] # [doc = " Returns `None` if the index was out of bounds."] # [doc (alias = "CFDictionaryGetValue")] pub fn get (& self , key : & K) -> Option < CFRetained < V > > where K : Type + Sized + PartialEq + Hash , V : Type + Sized , { unsafe { self . get_unchecked (key) } . map (V :: retain) } # [doc = " Two vectors containing respectively the dictionary's keys and values."] # [cfg (feature = "alloc")] # [doc (alias = "CFDictionaryGetKeysAndValues")] pub fn to_vecs (& self) -> (Vec < CFRetained < K > > , Vec < CFRetained < V > >) where K : Type + Sized , V : Type + Sized , { let (keys , objects) = unsafe { self . to_vecs_unchecked () } ; (keys . into_iter () . map (K :: retain) . collect () , objects . into_iter () . map (V :: retain) . collect () ,) } # [doc = " Whether the key is in the dictionary."] # [inline] # [doc (alias = "CFDictionaryContainsKey")] pub fn contains_key (& self , key : & K) -> bool where K : Type + Sized + PartialEq + Hash , { unsafe { self . as_opaque () . contains_ptr_key (to_void (key)) } } # [doc = " Whether the value can be found anywhere in the dictionary."] # [inline] # [doc (alias = "CFDictionaryContainsValue")] pub fn contains_value (& self , value : & V) -> bool where V : Type + Sized + PartialEq , { unsafe { self . as_opaque () . contains_ptr_value (to_void (value)) } } }
+};
+}
