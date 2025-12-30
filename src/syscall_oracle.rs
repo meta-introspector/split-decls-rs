@@ -5,7 +5,7 @@ use quote::{quote, ToTokens};
 use proc_macro2::TokenStream;
 use anyhow::Result;
 use serde::{Deserialize, Serialize};
-use crate::syscall_prelude::*;
+//use crate::syscall_prelude::*;
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct SyscallInterceptor {

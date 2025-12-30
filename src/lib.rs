@@ -49,7 +49,7 @@ pub mod syscall_prelude;
 pub use syscall_prelude::*;
 
 pub mod syscall_macros;
-pub use syscall_macros::*;
+//pub use syscall_macros::*;
 
 pub mod syscall_traits;
 pub use syscall_traits::*;

@@ -98,7 +98,7 @@ fn main() -> Result<()> {
     Ok(())
 }
 
-fn print_statistics(stats: &split_decls_rs::signature_compressor::SignatureStats) {
+fn print_statistics(stats: &SignatureStats) {
     println!("\n📊 Signature Compression Statistics:");
     println!("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
     println!("📈 Total unique signatures: {}", stats.total_signatures);

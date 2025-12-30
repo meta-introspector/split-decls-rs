@@ -46,6 +46,13 @@ The codebase has undergone significant quality improvements and **SUCCESSFUL ECO
 - **SPARQL-like RDF Querying**: Advanced semantic querying of code structures with complexity analysis
 - **Ontology Generation**: Automated generation of OWL ontologies from Rust code structures
 
+#### 🐛 Major Bug Fix: Duplicate Macro Generation (December 30, 2025)
+- **Issue**: The `generate_pure_macros.rs` script was creating multiple import macros for the same file
+- **Root Cause**: Multiple dependency names mapped to the same file path, causing symbol redefinition errors
+- **Fix**: Added deduplication by file path in `write_import_macros()` function
+- **Impact**: Eliminates compilation errors from duplicate symbol definitions
+- **Example**: `try_ref_from_prefix_suffix.rs` was included by 12 different macros, now only included once
+
 #### 🧬 Ecosystem Secretome Analysis
 - **Complete Symbol Mapping**: Generated emoji mappings for 5,702 symbols across the Rust ecosystem
 - **Semantic Categorization**: Organized symbols into 6 major categories (compiler_core, memory_mgmt, etc.)

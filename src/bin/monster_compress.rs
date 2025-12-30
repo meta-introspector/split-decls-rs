@@ -1,7 +1,7 @@
 use anyhow::Result;
 use clap::{Arg, Command};
 use std::fs;
-use split_decls_rs::monster_compressor::{MonsterCompressor, MonsterSignature};
+//use split_decls_rs::monster_compressor::{MonsterCompressor, MonsterSignature};
 
 fn main() -> Result<()> {
     let matches = 

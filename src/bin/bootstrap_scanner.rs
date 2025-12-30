@@ -3,7 +3,7 @@ use std::fs;
 use std::path::Path;
 use anyhow::Result;
 use split_decls_rs::{
-    rdf_url_blob::RdfUrlBlob,
+    //rdf_url_blob::RdfUrlBlob,
     output2_macro_system::{Output2MacroSystem, MacroDeclaration},
 };
 

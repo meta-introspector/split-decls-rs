@@ -248,3 +248,28 @@ recursive-analysis:
 	@echo "📖 Full documentation: RECURSIVE_DEPENDENCY_ANALYSIS.md"
 
 .PHONY: recursive-analysis
+# Quick test targets for dependency resolution debugging
+
+.PHONY: test-compile test-errors clean-test
+
+# Quick compile test - shows first few errors
+test-compile:
+	@echo "🧪 Testing compilation with current mkbin..."
+	@cargo run --bin rustc_traced_compile 2>&1 | head -20
+
+# Full error analysis - saves to file and shows summary
+test-errors:
+	@echo "🔍 Running full error analysis..."
+	@cargo run --bin rustc_traced_compile > test_output.log 2>&1 || true
+	@echo "📊 Error Summary:"
+	@grep -E "error\[" test_output.log | sort | uniq -c | sort -rn | head -10
+	@echo "📁 Saved full output to test_output.log"
+
+# Clean test artifacts
+clean-test:
+	@rm -f test_output.log rustc_*.log
+
+# Quick bisection test - comment/uncomment imports and test
+bisect-test:
+	@echo "🔄 Quick bisection test..."
+	@cargo run --bin rustc_traced_compile 2>&1 | grep -E "(error\[|Loading:)" | head -10
