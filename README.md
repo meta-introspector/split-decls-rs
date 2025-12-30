@@ -97,21 +97,21 @@ The system can manage local crates or external repositories. The `handle_git_ove
 
 ### 2. The Transformation Workflow
 For every package in the "overlay" set, `split-decls-rs` performs a series of structural transformations:
-*   **Backup:** It renames the original `src/lib.rs` to `src/oldlib.rs` and the original `build.rs` to `src/oldbuild.rs`. If these files don't exist, empty placeholders are created. This preserves the original content for later use.
 *   **Library Injection:** It generates a new, minimal `src/lib.rs` that acts as a gateway, re-exporting a generated `decls` module and prelude macros. This new `lib.rs` primarily re-exports prelude macros from `introspector_decl2_macros` and declares/exports a `decls` module (`pub mod decls; pub use decls::*;`).
-*   **Build-Time Synthesis:** It generates a specialized `build.rs` for the target crate based on a template (`src/buildrscontent.rst`) or modular generator logic. This generated `build.rs` includes logic to read the content of `src/oldlib.rs`, process these declarations, and generate individual declaration files (`.rs` files) within the target crate's `src/decls/` directory.
+*   **Build-Time Synthesis:** It generates a specialized `build.rs` for the target crate that processes the original declarations and generates individual declaration files (`.rs` files) within the target crate's `src/decls/` directory.
 
 ### 3. Patch Application via `build.rs`
 The generated `build.rs` script becomes the active agent for the "package's" build process. It performs the following at compile-time:
-*   **AST Parsing:** It reads the `src/oldlib.rs` content and parses it into an Abstract Syntax Tree using the `syn` crate.
+The generated `build.rs` script becomes the active agent for the "package's" build process. It performs the following at compile-time:
+*   **AST Parsing:** It reads the original `src/lib.rs` content and parses it into an Abstract Syntax Tree using the `syn` crate.
 *   **Semantic Patching:** It identifies patches relevant to the crate from the configuration and applies them to the AST. This includes name-based replacement of items (functions, structs, etc.) or the addition of entirely new items.
 *   **Modularization:** It splits the patched AST into individual declaration files, injecting a custom prelude and common `use` statements into each. This ensures that each original declaration becomes a separate, addressable unit, making it amenable to granular reflection, analysis, and targeted patching by the broader "Rust Overlay" system.
 
 The generated `build.rs` performs these detailed steps:
-1.  **Dependency Tracking:** Sets `cargo:rerun-if-changed` directives for `build.rs` itself, `oldlib.rs`, and `oldbuild.rs` to ensure the build script is re-executed if any of these files change.
-2.  **Read and Parse `oldlib.rs`:** Reads the content of the `src/oldlib.rs` (the backed-up original `lib.rs`) and parses it into a `syn::File` (Abstract Syntax Tree).
+1.  **Dependency Tracking:** Sets `cargo:rerun-if-changed` directives for `build.rs` itself and `lib.rs` to ensure the build script is re-executed if any of these files change.
+2.  **Read and Parse `lib.rs`:** Reads the content of the `src/lib.rs` and parses it into a `syn::File` (Abstract Syntax Tree).
 3.  **Collect `use` Statements:** A custom `UseStatementCollector` visits the parsed AST to gather all top-level `use` statements. These are then aggregated and injected into each generated declaration file as `common_uses`.
-4.  **Extract and Split Declarations:** Iterates through each top-level `syn::Item` in `oldlib.rs`.
+4.  **Extract and Split Declarations:** Iterates through each top-level `syn::Item` in the original `lib.rs`.
     *   For supported declaration types (functions, structs, enums, consts, statics, traits, impls, types, unions), it extracts the `TokenStream` of the declaration.
     *   It *skips* top-level `use` statements (which are handled by the collector), `macro` invocations, and `mod` declarations.
     *   For each extracted declaration, it creates a new Rust file within the target crate's `src/decls/` directory (e.g., `src/decls/{crate_name}_decls_{decl_name}.rs`).
@@ -355,6 +355,17 @@ fn main() {
 
 ## Testing 
 
+**Simple Split (Recommended):**
+```bash
+# Split individual crates
+make simple_split_syn
+make simple_split_quote
+
+# Split all crates from config
+make simple_split_all
 ```
+
+**Full Bootstrap (Legacy):**
+```bash
 cargo run --bin split-decls-rs -- bootstrap
 ```

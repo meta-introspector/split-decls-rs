@@ -6,28 +6,91 @@ use syn::{File, Item};
 use quote::ToTokens;
 
 #[derive(Debug, Clone)]
-struct DeclInfo {
+struct WrappedItem {
     name: String,
-    imports: HashSet<String>,
-    exports: HashSet<String>,
-    item_tokens: String, // Store the actual item as tokens
+    module_path: String,
+    item_type: String,
+    macro_name: String,
+    dependencies: HashSet<String>,
+    provides: HashSet<String>,
+    tokens: String,
+}
+
+#[derive(Debug, Clone)]
+struct ModuleMacros {
+    module_name: String,
+    items: Vec<String>,
+}
+
+fn main() -> Result<()> {
+    let args: Vec<String> = std::env::args().collect();
+    if args.len() < 2 {
+        eprintln!("Usage: {} <crate_path> [--output-dir <dir>]", args[0]);
+        std::process::exit(1);
+    }
+
+    let crate_path = Path::new(&args[1]);
+    let output_dir = if args.len() > 3 && args[2] == "--output-dir" {
+        Path::new(&args[3])
+    } else {
+        Path::new("output2")
+    };
+
+    println!("🚀 Simple Split: Wrapping all items in macros");
+    println!("📂 Crate: {}", crate_path.display());
+    println!("📁 Output: {}", output_dir.display());
+
+    let mut wrapped_items = HashMap::new();
+    let mut modules = HashMap::new();
+    let mut count = 0;
+
+    let lib_rs = crate_path.join("src/lib.rs");
+    if !lib_rs.exists() {
+        eprintln!("❌ No src/lib.rs found in {}", crate_path.display());
+        std::process::exit(1);
+    }
+
+    // Process the crate starting from lib.rs
+    let crate_name = crate_path.file_name().unwrap().to_str().unwrap();
+    process_file_recursively(&lib_rs, crate_path, output_dir, &mut wrapped_items, &mut modules, "crate", &mut count)?;
+
+    // Generate macro files
+    generate_macro_files(output_dir, crate_name, &wrapped_items, &modules)?;
+
+    println!("✅ Wrapped {} items in {} modules", wrapped_items.len(), modules.len());
+    Ok(())
 }
 
 fn process_file_recursively(
     file_path: &Path,
     crate_root: &Path,
     output_dir: &Path,
-    declarations: &mut HashMap<String, DeclInfo>,
+    wrapped_items: &mut HashMap<String, WrappedItem>,
+    modules: &mut HashMap<String, ModuleMacros>,
+    current_module: &str,
     count: &mut usize,
 ) -> Result<()> {
-    println!("📖 Processing file: {}", file_path.display());
+    println!("📖 Processing file: {} (module: {})", file_path.display(), current_module);
     
     let content = fs::read_to_string(file_path)?;
     let parsed: File = syn::parse_file(&content)?;
     
-    // Process all items in this file
+    let mut module_macros = ModuleMacros {
+        module_name: current_module.to_string(),
+        items: Vec::new(),
+    };
+    
+    // Process ALL items and wrap them in macros
     for item in &parsed.items {
-        let (name, item_type) = match &item {
+        *count += 1;
+        
+        let (base_name, item_type) = match &item {
+            Item::Use(use_item) => {
+                let use_name = format!("use_{}", *count);
+                let is_pub = matches!(use_item.vis, syn::Visibility::Public(_));
+                println!("  📥 Found {} use: {}", if is_pub { "pub" } else { "private" }, use_name);
+                (use_name, if is_pub { "pub_use" } else { "use" })
+            },
             Item::Fn(f) => {
                 println!("  📝 Found function: {}", f.sig.ident);
                 (f.sig.ident.to_string(), "function")
@@ -63,52 +126,62 @@ fn process_file_recursively(
             },
             Item::Mod(m) => {
                 println!("  📦 Found module: {}", m.ident);
+                let mod_name = format!("{}::{}", current_module, m.ident);
                 
-                // Process module recursively
-                if m.content.is_some() {
-                    // Inline module - items are already in this file
-                    println!("    → Inline module (already processed)");
-                } else {
-                    // External module - find and process the .rs file
-                    let module_file = find_module_file(file_path, &m.ident.to_string())?;
-                    if let Some(mod_path) = module_file {
+                // Process module recursively if external
+                if m.content.is_none() {
+                    if let Ok(Some(mod_path)) = find_module_file(file_path, &m.ident.to_string()) {
                         println!("    → External module, processing: {}", mod_path.display());
-                        process_file_recursively(&mod_path, crate_root, output_dir, declarations, count)?;
+                        process_file_recursively(&mod_path, crate_root, output_dir, wrapped_items, modules, &mod_name, count)?;
                     }
                 }
                 (m.ident.to_string(), "module")
             },
-            Item::Use(_) => {
-                println!("  📥 Found use statement (skipping)");
-                continue;
-            },
             Item::Macro(m) => {
-                if let Some(ident) = &m.ident {
+                let macro_name = if let Some(ident) = &m.ident {
                     println!("  🪄 Found macro: {}", ident);
-                    (ident.to_string(), "macro")
+                    ident.to_string()
                 } else {
-                    let macro_name = format!("macro_{}", *count);
-                    println!("  🪄 Found unnamed macro: {}", macro_name);
-                    (macro_name, "macro")
-                }
+                    let name = format!("macro_{}", *count);
+                    println!("  🪄 Found unnamed macro: {}", name);
+                    name
+                };
+                (macro_name, "macro")
             },
             _ => {
                 let other_name = format!("other_{}", *count);
-                println!("  ❓ Found other item: {} (type: {:?})", other_name, std::mem::discriminant(item));
+                println!("  ❓ Found other item: {}", other_name);
                 (other_name, "other")
             },
         };
         
-        let imports = extract_imports(item);
-        let exports = extract_exports(item);
-        let item_tokens = item.to_token_stream().to_string();
+        // Create unique macro name: Dep<ModuleName><ItemName>
+        let safe_module = current_module.replace("::", "_").replace("-", "_");
+        let safe_name = base_name.replace("-", "_").replace(":", "_");
+        let macro_name = format!("Dep{}{}", safe_module, safe_name);
         
-        println!("    → {} ({}): {} imports, {} exports", name, item_type, imports.len(), exports.len());
+        // Extract dependencies and provides (simplified for now)
+        let mut dependencies = HashSet::new();
+        let mut provides = HashSet::new();
         
-        declarations.insert(name.clone(), DeclInfo { name, imports, exports, item_tokens });
-        *count += 1;
+        // For now, assume the item provides its own name
+        provides.insert(base_name.clone());
+        
+        let wrapped_item = WrappedItem {
+            name: base_name.clone(),
+            module_path: current_module.to_string(),
+            item_type: item_type.to_string(),
+            macro_name: macro_name.clone(),
+            dependencies,
+            provides,
+            tokens: item.to_token_stream().to_string(),
+        };
+        
+        wrapped_items.insert(macro_name.clone(), wrapped_item);
+        module_macros.items.push(macro_name);
     }
     
+    modules.insert(current_module.to_string(), module_macros);
     Ok(())
 }
 
@@ -127,131 +200,93 @@ fn find_module_file(current_file: &Path, module_name: &str) -> Result<Option<Pat
         return Ok(Some(mod_dir));
     }
     
-    println!("    ⚠️  Module file not found for: {}", module_name);
     Ok(None)
 }
 
-fn extract_imports(item: &Item) -> HashSet<String> {
-    let mut imports = HashSet::new();
-    let tokens = item.to_token_stream().to_string();
+fn generate_macro_files(
+    output_dir: &Path,
+    crate_name: &str,
+    wrapped_items: &HashMap<String, WrappedItem>,
+    modules: &HashMap<String, ModuleMacros>,
+) -> Result<()> {
+    fs::create_dir_all(output_dir)?;
     
-    for word in tokens.split_whitespace() {
-        let clean = word.trim_matches(|c: char| !c.is_alphanumeric());
-        if !clean.is_empty() && clean.chars().next().unwrap().is_uppercase() {
-            if clean.len() > 1 && clean != "Self" {
-                imports.insert(clean.to_string());
-            }
-        }
-    }
-    imports
-}
-
-fn extract_exports(item: &Item) -> HashSet<String> {
-    let mut exports = HashSet::new();
-    match item {
-        Item::Fn(f) => { exports.insert(f.sig.ident.to_string()); }
-        Item::Struct(s) => { exports.insert(s.ident.to_string()); }
-        Item::Enum(e) => { exports.insert(e.ident.to_string()); }
-        Item::Trait(t) => { exports.insert(t.ident.to_string()); }
-        Item::Type(t) => { exports.insert(t.ident.to_string()); }
-        _ => {}
-    }
-    exports
-}
-
-fn main() -> Result<()> {
-    let args: Vec<String> = std::env::args().collect();
-    let mut crate_path = ".";
-    let mut output_dir_base = "output";
+    let wrapped_crate_name = format!("wrapped-{}", crate_name);
+    let crate_dir = output_dir.join(&wrapped_crate_name);
+    fs::create_dir_all(&crate_dir.join("src"))?;
     
-    // Parse arguments
-    let mut i = 1;
-    while i < args.len() {
-        match args[i].as_str() {
-            "--output-dir" => {
-                if i + 1 < args.len() {
-                    output_dir_base = &args[i + 1];
-                    i += 2;
-                } else {
-                    i += 1;
-                }
-            }
-            _ => {
-                crate_path = &args[i];
-                i += 1;
-            }
-        }
+    // Generate individual macro files for each item
+    for (macro_name, item) in wrapped_items {
+        let macro_content = format!(
+            "// Generated macro for {} ({})\n\
+             macro_rules! {} {{\n\
+             () => {{\n\
+             // Module: {}\n\
+             // Provides: {:?}\n\
+             // Dependencies: {:?}\n\
+             {}\n\
+             }};\n\
+             }}\n",
+            item.name,
+            item.item_type,
+            macro_name,
+            item.module_path,
+            item.provides,
+            item.dependencies,
+            item.tokens
+        );
+        
+        let macro_file = crate_dir.join("src").join(format!("{}.rs", macro_name.to_lowercase()));
+        fs::write(macro_file, macro_content)?;
     }
     
-    println!("🔍 Splitting crate: {}", crate_path);
-    
-    let lib_rs = Path::new(crate_path).join("src/lib.rs");
-    if !lib_rs.exists() {
-        println!("❌ No src/lib.rs found at: {}", lib_rs.display());
-        return Ok(());
-    }
-
-    println!("📖 Reading file: {}", lib_rs.display());
-    let content = fs::read_to_string(&lib_rs)?;
-    let parsed: File = syn::parse_file(&content)?;
-    
-    // Create output directory in specified location
-    let crate_name = Path::new(crate_path).file_name().unwrap().to_str().unwrap();
-    let output_dir = Path::new(output_dir_base).join(format!("wrapped-{}", crate_name)).join("src/decls");
-    println!("📁 Creating output directory: {}", output_dir.display());
-    fs::create_dir_all(&output_dir)?;
-    
-    let mut declarations = HashMap::new();
-    let mut count = 0;
-    
-    // Recursively process all files starting from lib.rs or main.rs
-    println!("🔍 Recursively processing all files:");
-    process_file_recursively(&lib_rs, Path::new(crate_path), &output_dir, &mut declarations, &mut count)?;
-    
-    // Second pass: write files with macro system (using all collected declarations)
-    println!("✍️  Second pass - writing declaration files:");
-    let mut file_count = 0;
-    
-    for (name, decl_info) in &declarations {
-        // Find macro dependencies
-        let mut macro_deps = Vec::new();
-        for import in &decl_info.imports {
-            for (other_name, other_decl) in &declarations {
-                if other_name != name && other_decl.exports.contains(import) {
-                    macro_deps.push(format!("{}!()", other_name));
-                }
-            }
+    // Generate module macro files
+    for (module_name, module_macros) in modules {
+        let safe_module_name = module_name.replace("::", "_").replace("-", "_");
+        let module_macro_name = format!("Mod{}", safe_module_name);
+        
+        let mut module_content = format!(
+            "// Generated module macro for {}\n\
+             macro_rules! {} {{\n\
+             () => {{\n",
+            module_name,
+            module_macro_name
+        );
+        
+        for item_macro in &module_macros.items {
+            module_content.push_str(&format!("        {}!();\n", item_macro));
         }
         
-        let mut content = String::new();
+        module_content.push_str("    };\n}\n");
         
-        if !macro_deps.is_empty() {
-            content.push_str("macro_rules! deps {\n");
-            content.push_str("    () => {\n");
-            for dep in &macro_deps {
-                content.push_str(&format!("        {};\n", dep));
-            }
-            content.push_str("    };\n");
-            content.push_str("}\n\n");
-        }
-        
-        content.push_str(&format!("macro_rules! {} {{\n", name));
-        content.push_str("    () => {\n");
-        if !macro_deps.is_empty() {
-            content.push_str("        deps!();\n");
-        }
-        content.push_str(&format!("        {}\n", decl_info.item_tokens));
-        content.push_str("    };\n");
-        content.push_str("}\n\n");
-        content.push_str(&format!("{}!();", name));
-        
-        let file_path = output_dir.join(format!("{}.rs", name));
-        println!("  💾 Writing declaration file: {}", file_path.display());
-        fs::write(&file_path, content)?;
-        file_count += 1;
+        let module_file = crate_dir.join("src").join(format!("{}.rs", module_macro_name.to_lowercase()));
+        fs::write(module_file, module_content)?;
     }
     
-    println!("✅ Split {} declarations with macro dependencies", count);
+    // Generate main lib.rs that includes all macros
+    let mut lib_content = String::new();
+    lib_content.push_str("// Generated wrapped crate with macro-based items\n\n");
+    
+    for macro_name in wrapped_items.keys() {
+        lib_content.push_str(&format!("include!(\"{}.rs\");\n", macro_name.to_lowercase()));
+    }
+    
+    for module_name in modules.keys() {
+        let safe_module_name = module_name.replace("::", "_").replace("-", "_");
+        let module_macro_name = format!("Mod{}", safe_module_name);
+        lib_content.push_str(&format!("include!(\"{}.rs\");\n", module_macro_name.to_lowercase()));
+    }
+    
+    lib_content.push_str("\n// Execute all items\npub fn execute_all() {\n");
+    for module_name in modules.keys() {
+        let safe_module_name = module_name.replace("::", "_").replace("-", "_");
+        let module_macro_name = format!("Mod{}", safe_module_name);
+        lib_content.push_str(&format!("    {}!();\n", module_macro_name));
+    }
+    lib_content.push_str("}\n");
+    
+    fs::write(crate_dir.join("src/lib.rs"), lib_content)?;
+    
+    println!("📝 Generated {} item macros and {} module macros", wrapped_items.len(), modules.len());
     Ok(())
 }
-
