@@ -1,0 +1,9 @@
+// Generated macro for io_uring_probe (struct)
+macro_rules! Depcrate_io_uringio_uring_probe {
+() => {
+// Module: crate::io_uring
+// Provides: {"io_uring_probe"}
+// Dependencies: {}
+# [allow (missing_docs)] # [repr (C)] # [derive (Debug , Default)] # [non_exhaustive] pub struct io_uring_probe { pub last_op : IoringOp , pub ops_len : u8 , # [doc (hidden)] pub resv : u16 , # [doc (hidden)] pub resv2 : [u32 ; 3] , pub ops : IncompleteArrayField < io_uring_probe_op > , }
+};
+}

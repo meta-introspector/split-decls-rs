@@ -1,0 +1,9 @@
+// Generated macro for impl_640 (impl)
+macro_rules! Depcrate_iter_flat_mapimpl_640 {
+() => {
+// Module: crate::iter::flat_map
+// Provides: {"impl_640"}
+// Dependencies: {}
+impl < I , F , PI > ParallelIterator for FlatMap < I , F > where I : ParallelIterator , F : Fn (I :: Item) -> PI + Sync + Send , PI : IntoParallelIterator , { type Item = PI :: Item ; fn drive_unindexed < C > (self , consumer : C) -> C :: Result where C : UnindexedConsumer < Self :: Item > , { let consumer = FlatMapConsumer :: new (consumer , & self . map_op) ; self . base . drive_unindexed (consumer) } }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for Interleave (struct)
+macro_rules! Depcrate_iter_interleaveInterleave {
+() => {
+// Module: crate::iter::interleave
+// Provides: {"Interleave"}
+// Dependencies: {}
+# [doc = " `Interleave` is an iterator that interleaves elements of iterators"] # [doc = " `i` and `j` in one continuous iterator. This struct is created by"] # [doc = " the [`interleave()`] method on [`IndexedParallelIterator`]"] # [doc = ""] # [doc = " [`interleave()`]: IndexedParallelIterator::interleave()"] # [must_use = "iterator adaptors are lazy and do nothing unless consumed"] # [derive (Debug , Clone)] pub struct Interleave < I , J > { i : I , j : J , }
+};
+}

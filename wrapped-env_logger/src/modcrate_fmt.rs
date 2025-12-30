@@ -1,0 +1,45 @@
+// Generated module macro for crate::fmt
+macro_rules! Modcrate_fmt {
+() => {
+        Depcrate_fmtuse_59!();
+        Depcrate_fmtuse_60!();
+        Depcrate_fmtuse_61!();
+        Depcrate_fmtuse_62!();
+        Depcrate_fmtuse_63!();
+        Depcrate_fmtuse_64!();
+        Depcrate_fmtuse_65!();
+        Depcrate_fmthumantime!();
+        Depcrate_fmtkv!();
+        Depcrate_fmtuse_87!();
+        Depcrate_fmtuse_88!();
+        Depcrate_fmtuse_89!();
+        Depcrate_fmtuse_90!();
+        Depcrate_fmtuse_91!();
+        Depcrate_fmtuse_92!();
+        Depcrate_fmtTimestampPrecision!();
+        Depcrate_fmtimpl_94!();
+        Depcrate_fmtFormatter!();
+        Depcrate_fmtimpl_96!();
+        Depcrate_fmtimpl_97!();
+        Depcrate_fmtimpl_98!();
+        Depcrate_fmtimpl_99!();
+        Depcrate_fmtRecordFormat!();
+        Depcrate_fmtimpl_101!();
+        Depcrate_fmtFormatFn!();
+        Depcrate_fmtBuilder!();
+        Depcrate_fmtimpl_104!();
+        Depcrate_fmtSubtleStyle!();
+        Depcrate_fmtSubtleStyle!();
+        Depcrate_fmtStyledValue!();
+        Depcrate_fmtimpl_108!();
+        Depcrate_fmtStyledValue!();
+        Depcrate_fmtConfigurableFormat!();
+        Depcrate_fmtimpl_111!();
+        Depcrate_fmtimpl_112!();
+        Depcrate_fmtimpl_113!();
+        Depcrate_fmtimpl_114!();
+        Depcrate_fmtConfigurableFormatWriter!();
+        Depcrate_fmtimpl_116!();
+        Depcrate_fmttests!();
+    };
+}

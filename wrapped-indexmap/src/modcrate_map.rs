@@ -1,0 +1,49 @@
+// Generated module macro for crate::map
+macro_rules! Modcrate_map {
+() => {
+        Depcrate_mapcore!();
+        Depcrate_mapiter!();
+        Depcrate_mapmutable!();
+        Depcrate_mapslice!();
+        Depcrate_mapserde_seq!();
+        Depcrate_maptests!();
+        Depcrate_mapuse_67!();
+        Depcrate_mapuse_68!();
+        Depcrate_mapuse_69!();
+        Depcrate_mapuse_70!();
+        Depcrate_mapuse_71!();
+        Depcrate_mapuse_72!();
+        Depcrate_mapuse_73!();
+        Depcrate_mapuse_74!();
+        Depcrate_mapuse_75!();
+        Depcrate_mapuse_76!();
+        Depcrate_mapuse_77!();
+        Depcrate_mapuse_78!();
+        Depcrate_mapuse_79!();
+        Depcrate_mapuse_80!();
+        Depcrate_mapuse_81!();
+        Depcrate_mapuse_82!();
+        Depcrate_mapuse_83!();
+        Depcrate_mapuse_84!();
+        Depcrate_mapIndexMap!();
+        Depcrate_mapIndexMap!();
+        Depcrate_mapimpl_87!();
+        Depcrate_mapimpl_88!();
+        Depcrate_mapimpl_89!();
+        Depcrate_mapimpl_90!();
+        Depcrate_mapimpl_91!();
+        Depcrate_mapimpl_92!();
+        Depcrate_mapimpl_93!();
+        Depcrate_mapimpl_94!();
+        Depcrate_mapimpl_95!();
+        Depcrate_mapimpl_96!();
+        Depcrate_mapimpl_97!();
+        Depcrate_mapimpl_98!();
+        Depcrate_mapimpl_99!();
+        Depcrate_mapimpl_100!();
+        Depcrate_mapimpl_101!();
+        Depcrate_mapimpl_102!();
+        Depcrate_mapimpl_103!();
+        Depcrate_mapimpl_104!();
+    };
+}

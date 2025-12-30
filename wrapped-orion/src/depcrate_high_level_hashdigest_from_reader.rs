@@ -1,0 +1,9 @@
+// Generated macro for digest_from_reader (function)
+macro_rules! Depcrate_high_level_hashdigest_from_reader {
+() => {
+// Module: crate::high_level::hash
+// Provides: {"digest_from_reader"}
+// Dependencies: {}
+# [doc = " Hash data from a [`Read`](std::io::Read)` type using BLAKE2b-256."] # [doc = ""] # [doc = " See the [module-level docs](crate::hash) for an example of how to use this function."] # [doc = " Internally calls [`std::io::copy`]() to move data from the reader into the Blake2b writer."] # [doc = " Note that the [`std::io::copy`]() function buffers reads, so passing in a"] # [doc = " [`BufReader`](std::io::BufReader) may be unnecessary."] # [doc = ""] # [doc = " For lower-level control over reads, writes, buffer sizes, *etc.*, consider using the"] # [doc = " [`Blake2b`](crate::hazardous::hash::blake2::blake2b::Blake2b) type and its"] # [doc = " [`Write`](std::io::Write) implementation directly. See `Blake2b`'s `Write` implementation"] # [doc = " and/or its `Write` documentation for an example."] # [doc = ""] # [doc = " ## Errors:"] # [doc = " This function will only ever return the [`std::io::ErrorKind::Other`]()"] # [doc = " variant when it returns an error. Additionally, this will always contain Orion's"] # [doc = " [`UnknownCryptoError`](crate::errors::UnknownCryptoError) type."] # [doc = ""] # [doc = " Note that if an error is returned, data may still have been consumed from the given reader."] # [cfg (feature = "safe_api")] # [must_use = "SECURITY WARNING: Ignoring a Result can have real security implications."] pub fn digest_from_reader (mut reader : impl std :: io :: Read) -> Result < Digest , UnknownCryptoError > { let mut hasher = blake2b :: Blake2b :: new (32) ? ; std :: io :: copy (& mut reader , & mut hasher) . map_err (| _ | UnknownCryptoError) ? ; hasher . finalize () }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for R_TILEGX_IMM16_X0_HW0_LAST_PCREL (const)
+macro_rules! Depcrate_elfR_TILEGX_IMM16_X0_HW0_LAST_PCREL {
+() => {
+// Module: crate::elf
+// Provides: {"R_TILEGX_IMM16_X0_HW0_LAST_PCREL"}
+// Dependencies: {}
+# [doc = " X0 pipe PC-rel last hword 0"] pub const R_TILEGX_IMM16_X0_HW0_LAST_PCREL : u32 = 58 ;
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for impl_238 (impl)
+macro_rules! Depcrateimpl_238 {
+() => {
+// Module: crate
+// Provides: {"impl_238"}
+// Dependencies: {}
+# [cfg (feature = "std")] impl std :: io :: Seek for OutputReader { fn seek (& mut self , pos : std :: io :: SeekFrom) -> std :: io :: Result < u64 > { let max_position = u64 :: max_value () as i128 ; let target_position : i128 = match pos { std :: io :: SeekFrom :: Start (x) => x as i128 , std :: io :: SeekFrom :: Current (x) => self . position () as i128 + x as i128 , std :: io :: SeekFrom :: End (_) => { return Err (std :: io :: Error :: new (std :: io :: ErrorKind :: InvalidInput , "seek from end not supported" ,)) ; } } ; if target_position < 0 { return Err (std :: io :: Error :: new (std :: io :: ErrorKind :: InvalidInput , "seek before start" ,)) ; } self . set_position (cmp :: min (target_position , max_position) as u64) ; Ok (self . position ()) } }
+};
+}

@@ -1,0 +1,43 @@
+// Generated module macro for crate::connection
+macro_rules! Modcrate_connection {
+() => {
+        Depcrate_connectionuse_95!();
+        Depcrate_connectionuse_96!();
+        Depcrate_connectionuse_97!();
+        Depcrate_connectionuse_98!();
+        Depcrate_connectionuse_99!();
+        Depcrate_connectionuse_100!();
+        Depcrate_connectionuse_101!();
+        Depcrate_connectionuse_102!();
+        Depcrate_connectionMessageError!();
+        Depcrate_connectionimpl_104!();
+        Depcrate_connectionimpl_105!();
+        Depcrate_connectionimpl_106!();
+        Depcrate_connectionimpl_107!();
+        Depcrate_connectionimpl_108!();
+        Depcrate_connectionRUNNER_MAGIC_NUMBER!();
+        Depcrate_connectionRUNNER_HELLO_SIZE!();
+        Depcrate_connectionBENCHMARK_MAGIC_NUMBER!();
+        Depcrate_connectionBENCHMARK_HELLO_SIZE!();
+        Depcrate_connectionPROTOCOL_VERSION!();
+        Depcrate_connectionPROTOCOL_FORMAT!();
+        Depcrate_connectionInnerConnection!();
+        Depcrate_connectionimpl_116!();
+        Depcrate_connectionConnection!();
+        Depcrate_connectionimpl_118!();
+        Depcrate_connectionIncomingMessage!();
+        Depcrate_connectionOutgoingMessage!();
+        Depcrate_connectionRawBenchmarkId!();
+        Depcrate_connectionimpl_122!();
+        Depcrate_connectionAxisScale!();
+        Depcrate_connectionimpl_124!();
+        Depcrate_connectionPlotConfiguration!();
+        Depcrate_connectionimpl_126!();
+        Depcrate_connectionDuration!();
+        Depcrate_connectionimpl_128!();
+        Depcrate_connectionBenchmarkConfig!();
+        Depcrate_connectionimpl_130!();
+        Depcrate_connectionSamplingMethod!();
+        Depcrate_connectionimpl_132!();
+    };
+}

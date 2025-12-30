@@ -1,0 +1,9 @@
+// Generated macro for partition_map (function)
+macro_rules! Depcrate_iter_unzippartition_map {
+() => {
+// Module: crate::iter::unzip
+// Provides: {"partition_map"}
+// Dependencies: {}
+# [doc = " Partitions and maps the items of a parallel iterator into a pair of"] # [doc = " arbitrary `ParallelExtend` containers."] # [doc = ""] # [doc = " This called by `ParallelIterator::partition_map`."] pub (super) fn partition_map < I , A , B , P , L , R > (pi : I , predicate : P) -> (A , B) where I : ParallelIterator , A : Default + Send + ParallelExtend < L > , B : Default + Send + ParallelExtend < R > , P : Fn (I :: Item) -> Either < L , R > + Sync + Send , L : Send , R : Send , { execute (pi , PartitionMap { predicate }) }
+};
+}

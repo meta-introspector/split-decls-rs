@@ -1,0 +1,39 @@
+// Generated module macro for crate::upgrade
+macro_rules! Modcrate_upgrade {
+() => {
+        Depcrate_upgradeuse_305!();
+        Depcrate_upgradeuse_306!();
+        Depcrate_upgradeuse_307!();
+        Depcrate_upgradeuse_308!();
+        Depcrate_upgradeuse_309!();
+        Depcrate_upgradeuse_310!();
+        Depcrate_upgradeuse_311!();
+        Depcrate_upgradeuse_312!();
+        Depcrate_upgradeuse_313!();
+        Depcrate_upgradeuse_314!();
+        Depcrate_upgradeuse_315!();
+        Depcrate_upgradeuse_316!();
+        Depcrate_upgradeUpgraded!();
+        Depcrate_upgradeOnUpgrade!();
+        Depcrate_upgradeParts!();
+        Depcrate_upgradeon!();
+        Depcrate_upgradePending!();
+        Depcrate_upgradepending!();
+        Depcrate_upgradeimpl_323!();
+        Depcrate_upgradeimpl_324!();
+        Depcrate_upgradeimpl_325!();
+        Depcrate_upgradeimpl_326!();
+        Depcrate_upgradeimpl_327!();
+        Depcrate_upgradeimpl_328!();
+        Depcrate_upgradeimpl_329!();
+        Depcrate_upgradeimpl_330!();
+        Depcrate_upgradeUpgradeExpected!();
+        Depcrate_upgradeimpl_332!();
+        Depcrate_upgradeimpl_333!();
+        Depcrate_upgradeIo!();
+        Depcrate_upgradeimpl_335!();
+        Depcrate_upgradeimpl_336!();
+        Depcrate_upgradesealed!();
+        Depcrate_upgradetests!();
+    };
+}

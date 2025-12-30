@@ -1,0 +1,9 @@
+// Generated macro for Bfs (struct)
+macro_rules! Depcrate_visit_traversalBfs {
+() => {
+// Module: crate::visit::traversal
+// Provides: {"Bfs"}
+// Dependencies: {}
+# [doc = " A breadth first search (BFS) of a graph."] # [doc = ""] # [doc = " The traversal starts at a given node and only traverses nodes reachable"] # [doc = " from it."] # [doc = ""] # [doc = " `Bfs` is not recursive."] # [doc = ""] # [doc = " `Bfs` does not itself borrow the graph, and because of this you can run"] # [doc = " a traversal over a graph while still retaining mutable access to it, if you"] # [doc = " use it like the following example:"] # [doc = ""] # [doc = " ```"] # [doc = " use petgraph::Graph;"] # [doc = " use petgraph::visit::Bfs;"] # [doc = ""] # [doc = " let mut graph = Graph::<_,()>::new();"] # [doc = " let a = graph.add_node(0);"] # [doc = ""] # [doc = " let mut bfs = Bfs::new(&graph, a);"] # [doc = " while let Some(nx) = bfs.next(&graph) {"] # [doc = "     // we can access `graph` mutably here still"] # [doc = "     graph[nx] += 1;"] # [doc = " }"] # [doc = ""] # [doc = " assert_eq!(graph[a], 1);"] # [doc = " ```"] # [doc = ""] # [doc = " **Note:** The algorithm may not behave correctly if nodes are removed"] # [doc = " during iteration. It may not necessarily visit added nodes or edges."] # [derive (Clone)] pub struct Bfs < N , VM > { # [doc = " The queue of nodes to visit"] pub stack : VecDeque < N > , # [doc = " The map of discovered nodes"] pub discovered : VM , }
+};
+}

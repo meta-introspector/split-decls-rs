@@ -1,0 +1,9 @@
+// Generated macro for impl_202 (impl)
+macro_rules! Depcrate_limbimpl_202 {
+() => {
+// Module: crate::limb
+// Provides: {"impl_202"}
+// Dependencies: {}
+impl fmt :: LowerHex for Limb { # [inline] fn fmt (& self , f : & mut fmt :: Formatter < '_ >) -> fmt :: Result { if f . alternate () { write ! (f , "0x") ? ; } write ! (f , "{:0width$x}" , & self . 0 , width = Self :: BYTES * 2) } }
+};
+}

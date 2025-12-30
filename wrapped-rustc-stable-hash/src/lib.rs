@@ -1,0 +1,62 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcrate_int_overflowmacro_7.rs");
+include!("depcrate_stable_hashertests.rs");
+include!("depcrate_int_overflowmacro_6.rs");
+include!("depcratehashers.rs");
+include!("depcrate_sip128state.rs");
+include!("depcrateuse_45.rs");
+include!("depcrate_stable_hasheruse_33.rs");
+include!("depcrate_stable_hasherimpl_41.rs");
+include!("depcrate_sip128use_11.rs");
+include!("depcrate_sip128use_12.rs");
+include!("depcrate_sip128impl_28.rs");
+include!("depcrate_int_overflowdebugstrictadd.rs");
+include!("depcrate_sip128use_9.rs");
+include!("depcrate_sip128siphasher128.rs");
+include!("depcrate_sip128compress.rs");
+include!("depcrate_sip128tests.rs");
+include!("depcrate_sip128buffer_spill_index.rs");
+include!("depcrate_sip128buffer_capacity.rs");
+include!("depcrate_sip128siphasher128hash.rs");
+include!("depcrate_sip128buffer_with_spill_size.rs");
+include!("depcrate_sip128impl_26.rs");
+include!("depcrate_sip128buffer_size.rs");
+include!("depcrate_stable_hasherextendedhasher.rs");
+include!("depcrate_stable_hasherfromstablehash.rs");
+include!("depcrate_stable_hasherimpl_39.rs");
+include!("depcrate_sip128buffer_with_spill_capacity.rs");
+include!("depcrate_sip128use_10.rs");
+include!("depcrate_sip128sip13rounds.rs");
+include!("depcrate_sip128elem_size.rs");
+include!("depcrate_sip128impl_31.rs");
+include!("depcrate_sip128impl_29.rs");
+include!("depcrateint_overflow.rs");
+include!("depcrate_stable_hasheruse_34.rs");
+include!("depcrate_stable_hasherimpl_43.rs");
+include!("depcrate_stable_hasherimpl_42.rs");
+include!("depcrate_sip128copy_nonoverlapping_small.rs");
+include!("depcrate_int_overflowdebugstrictsub.rs");
+include!("depcratestable_hasher.rs");
+include!("depcrateuse_46.rs");
+include!("depcrateuse_48.rs");
+include!("depcrate_int_overflowimpl_debug_strict_add.rs");
+include!("depcrate_int_overflowimpl_debug_strict_sub.rs");
+include!("depcrate_stable_hasherimpl_40.rs");
+include!("depcrate_sip128impl_27.rs");
+include!("depcrate_stable_hasherstablehasher.rs");
+include!("depcrate_sip128use_13.rs");
+include!("depcratesip128.rs");
+include!("depcrateuse_47.rs");
+include!("modcrate.rs");
+include!("modcrate_stable_hasher.rs");
+include!("modcrate_sip128.rs");
+include!("modcrate_int_overflow.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate!();
+    Modcrate_stable_hasher!();
+    Modcrate_sip128!();
+    Modcrate_int_overflow!();
+}

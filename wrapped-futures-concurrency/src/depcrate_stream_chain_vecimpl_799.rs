@@ -1,0 +1,9 @@
+// Generated macro for impl_799 (impl)
+macro_rules! Depcrate_stream_chain_vecimpl_799 {
+() => {
+// Module: crate::stream::chain::vec
+// Provides: {"impl_799"}
+// Dependencies: {}
+impl < S : Stream > Stream for Chain < S > { type Item = S :: Item ; fn poll_next (self : Pin < & mut Self > , cx : & mut Context < '_ >) -> Poll < Option < Self :: Item > > { let mut this = self . project () ; assert ! (!* this . done , "Stream should not be polled after completion") ; loop { if this . index == this . len { * this . done = true ; return Poll :: Ready (None) ; } let stream = utils :: iter_pin_mut_vec (this . streams . as_mut ()) . nth (* this . index) . unwrap () ; match stream . poll_next (cx) { Poll :: Ready (Some (item)) => return Poll :: Ready (Some (item)) , Poll :: Ready (None) => { * this . index += 1 ; continue ; } Poll :: Pending => return Poll :: Pending , } } } }
+};
+}

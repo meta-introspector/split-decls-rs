@@ -1,0 +1,9 @@
+// Generated macro for LEFTMOST_FIRST (const)
+macro_rules! Depcrate_packed_testsLEFTMOST_FIRST {
+() => {
+// Module: crate::packed::tests
+// Provides: {"LEFTMOST_FIRST"}
+// Dependencies: {}
+# [doc = " Tests for non-overlapping leftmost-first match semantics. These tests"] # [doc = " should generally be specific to leftmost-first, which means they should"] # [doc = " generally fail under leftmost-longest semantics."] const LEFTMOST_FIRST : & 'static [SearchTest] = & [t ! (leftfirst000 , & ["ab" , "abcd"] , "abcd" , & [(0 , 0 , 2)]) , t ! (leftfirst020 , & ["abcd" , "ab"] , "abcd" , & [(0 , 0 , 4)]) , t ! (leftfirst030 , & ["ab" , "ab"] , "abcd" , & [(0 , 0 , 2)]) , t ! (leftfirst040 , & ["a" , "ab"] , "xayabbbz" , & [(0 , 1 , 2) , (0 , 3 , 4)]) , t ! (leftfirst100 , & ["abcdefg" , "bcde" , "bcdef"] , "abcdef" , & [(1 , 1 , 5)]) , t ! (leftfirst110 , & ["abcdefg" , "bcdef" , "bcde"] , "abcdef" , & [(1 , 1 , 6)]) , t ! (leftfirst300 , & ["abcd" , "b" , "bce"] , "abce" , & [(1 , 1 , 2)]) , t ! (leftfirst310 , & ["abcd" , "b" , "bce" , "ce"] , "abce" , & [(1 , 1 , 2) , (3 , 2 , 4) ,]) , t ! (leftfirst320 , & ["a" , "abcdefghi" , "hz" , "abcdefgh"] , "abcdefghz" , & [(0 , 0 , 1) , (2 , 7 , 9) ,]) , t ! (leftfirst330 , & ["a" , "abab"] , "abab" , & [(0 , 0 , 1) , (0 , 2 , 3)]) , t ! (leftfirst340 , & ["abcdef" , "x" , "x" , "x" , "x" , "x" , "x" , "abcde"] , "abcdef" , & [(0 , 0 , 6)]) ,] ;
+};
+}

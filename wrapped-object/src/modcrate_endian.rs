@@ -1,0 +1,50 @@
+// Generated module macro for crate::endian
+macro_rules! Modcrate_endian {
+() => {
+        Depcrate_endianuse_26!();
+        Depcrate_endianuse_27!();
+        Depcrate_endianuse_28!();
+        Depcrate_endianEndian!();
+        Depcrate_endianEndianness!();
+        Depcrate_endianimpl_31!();
+        Depcrate_endianimpl_32!();
+        Depcrate_endianLittleEndian!();
+        Depcrate_endianimpl_34!();
+        Depcrate_endianimpl_35!();
+        Depcrate_endianBigEndian!();
+        Depcrate_endianimpl_37!();
+        Depcrate_endianimpl_38!();
+        Depcrate_endianNativeEndian!();
+        Depcrate_endianNativeEndian!();
+        Depcrate_endianNativeEndian!();
+        Depcrate_endianNativeEndian!();
+        Depcrate_endianunsafe_impl_endian_pod!();
+        Depcrate_endianaligned!();
+        Depcrate_endianuse_45!();
+        Depcrate_endianU16!();
+        Depcrate_endianU32!();
+        Depcrate_endianU64!();
+        Depcrate_endianI16!();
+        Depcrate_endianI32!();
+        Depcrate_endianI64!();
+        Depcrate_endianU16Bytes!();
+        Depcrate_endianimpl_53!();
+        Depcrate_endianU32Bytes!();
+        Depcrate_endianimpl_55!();
+        Depcrate_endianU64Bytes!();
+        Depcrate_endianimpl_57!();
+        Depcrate_endianI16Bytes!();
+        Depcrate_endianimpl_59!();
+        Depcrate_endianI32Bytes!();
+        Depcrate_endianimpl_61!();
+        Depcrate_endianI64Bytes!();
+        Depcrate_endianimpl_63!();
+        Depcrate_endianimpl_64!();
+        Depcrate_endianimpl_65!();
+        Depcrate_endianimpl_66!();
+        Depcrate_endianimpl_67!();
+        Depcrate_endianimpl_68!();
+        Depcrate_endianimpl_69!();
+        Depcrate_endianmacro_70!();
+    };
+}

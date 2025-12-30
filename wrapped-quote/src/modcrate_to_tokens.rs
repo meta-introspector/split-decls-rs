@@ -1,0 +1,44 @@
+// Generated module macro for crate::to_tokens
+macro_rules! Modcrate_to_tokens {
+() => {
+        Depcrate_to_tokensuse_26!();
+        Depcrate_to_tokensuse_27!();
+        Depcrate_to_tokensuse_28!();
+        Depcrate_to_tokensuse_29!();
+        Depcrate_to_tokensuse_30!();
+        Depcrate_to_tokensuse_31!();
+        Depcrate_to_tokensToTokens!();
+        Depcrate_to_tokensimpl_33!();
+        Depcrate_to_tokensimpl_34!();
+        Depcrate_to_tokensimpl_35!();
+        Depcrate_to_tokensimpl_36!();
+        Depcrate_to_tokensimpl_37!();
+        Depcrate_to_tokensimpl_38!();
+        Depcrate_to_tokensimpl_39!();
+        Depcrate_to_tokensimpl_40!();
+        Depcrate_to_tokensimpl_41!();
+        Depcrate_to_tokensimpl_42!();
+        Depcrate_to_tokensimpl_43!();
+        Depcrate_to_tokensimpl_44!();
+        Depcrate_to_tokensimpl_45!();
+        Depcrate_to_tokensimpl_46!();
+        Depcrate_to_tokensimpl_47!();
+        Depcrate_to_tokensimpl_48!();
+        Depcrate_to_tokensimpl_49!();
+        Depcrate_to_tokensimpl_50!();
+        Depcrate_to_tokensimpl_51!();
+        Depcrate_to_tokensimpl_52!();
+        Depcrate_to_tokensimpl_53!();
+        Depcrate_to_tokensimpl_54!();
+        Depcrate_to_tokensimpl_55!();
+        Depcrate_to_tokensimpl_56!();
+        Depcrate_to_tokensimpl_57!();
+        Depcrate_to_tokensimpl_58!();
+        Depcrate_to_tokensimpl_59!();
+        Depcrate_to_tokensimpl_60!();
+        Depcrate_to_tokensimpl_61!();
+        Depcrate_to_tokensimpl_62!();
+        Depcrate_to_tokensimpl_63!();
+        Depcrate_to_tokensimpl_64!();
+    };
+}

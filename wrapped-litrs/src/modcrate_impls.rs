@@ -1,0 +1,45 @@
+// Generated module macro for crate::impls
+macro_rules! Modcrate_impls {
+() => {
+        Depcrate_implsuse_175!();
+        Depcrate_implsuse_176!();
+        Depcrate_implshelper!();
+        Depcrate_implshelper_no_refs!();
+        Depcrate_implsimpl_specific_lit_to_lit!();
+        Depcrate_implsmacro_180!();
+        Depcrate_implsmacro_181!();
+        Depcrate_implsmacro_182!();
+        Depcrate_implsmacro_183!();
+        Depcrate_implsmacro_184!();
+        Depcrate_implsmacro_185!();
+        Depcrate_implsmacro_186!();
+        Depcrate_implsmacro_187!();
+        Depcrate_implsimpl_tt_to_lit!();
+        Depcrate_implsmacro_189!();
+        Depcrate_implsimpl_tt_to_lit!();
+        Depcrate_implsmacro_191!();
+        Depcrate_implskind_of!();
+        Depcrate_implsimpl_for_specific_lit!();
+        Depcrate_implsmacro_194!();
+        Depcrate_implsmacro_195!();
+        Depcrate_implsmacro_196!();
+        Depcrate_implsmacro_197!();
+        Depcrate_implsmacro_198!();
+        Depcrate_implsmacro_199!();
+        Depcrate_implsmacro_200!();
+        Depcrate_implsimpl_specific_lit_to_pm_lit!();
+        Depcrate_implsmacro_202!();
+        Depcrate_implsmacro_203!();
+        Depcrate_implsmacro_204!();
+        Depcrate_implsmacro_205!();
+        Depcrate_implsmacro_206!();
+        Depcrate_implsmacro_207!();
+        Depcrate_implsmacro_208!();
+        Depcrate_implsimpl_from_tt_for_bool!();
+        Depcrate_implsmacro_210!();
+        Depcrate_implsimpl_bool_lit_to_pm_lit!();
+        Depcrate_implsmacro_212!();
+        Depcrate_implstests!();
+        Depcrate_implstests_proc_macro2!();
+    };
+}

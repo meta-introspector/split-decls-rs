@@ -1,0 +1,9 @@
+// Generated macro for hwexpand (function)
+macro_rules! Depcrate_legacy_reducehwexpand {
+() => {
+// Module: crate::legacy::reduce
+// Provides: {"hwexpand"}
+// Dependencies: {}
+fn hwexpand (src : & [u8] , uncomp_len : usize , comp_factor : u8 , dst : & mut Vec < u8 >) -> io :: Result < () > { debug_assert ! ((1 ..= 4) . contains (& comp_factor)) ; dst . reserve (uncomp_len) ; let mut is = BitReader :: endian (src , LittleEndian) ; let mut fsets = read_follower_sets (& mut is) ? ; let v_len_bits = 8 - comp_factor ; let mut curr_byte = 0 ; while dst . len () < uncomp_len { curr_byte = read_next_byte (& mut is , curr_byte , & mut fsets) ? ; if curr_byte != DLE_BYTE { dst . push (curr_byte) ; continue ; } curr_byte = read_next_byte (& mut is , curr_byte , & mut fsets) ? ; if curr_byte == 0 { dst . push (DLE_BYTE) ; continue ; } let v = curr_byte ; let mut len = lsb (v , v_len_bits) as usize ; if len == (1 << v_len_bits) - 1 { curr_byte = read_next_byte (& mut is , curr_byte , & mut fsets) ? ; len += curr_byte as usize ; } len += 3 ; curr_byte = read_next_byte (& mut is , curr_byte , & mut fsets) ? ; let dist = (((v as usize) >> v_len_bits) << 8) + curr_byte as usize + 1 ; debug_assert ! (len <= max_len (comp_factor)) ; debug_assert ! (dist <= max_dist (comp_factor)) ; if dist <= dst . len () { if dist >= len { let start = dst . len () - dist ; dst . extend_from_within (start .. start + len . min (uncomp_len - dst . len ())) ; } else { let copy_len = len . min (uncomp_len - dst . len ()) ; for _ in 0 .. copy_len { let byte = dst [dst . len () - dist] ; dst . push (byte) ; } } } else { let copy_len = len . min (uncomp_len - dst . len ()) ; for _ in 0 .. copy_len { if dist > dst . len () { dst . push (0) ; } else { let byte = dst [dst . len () - dist] ; dst . push (byte) ; } } } } Ok (()) }
+};
+}

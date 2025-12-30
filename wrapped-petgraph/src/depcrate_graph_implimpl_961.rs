@@ -1,0 +1,9 @@
+// Generated macro for impl_961 (impl)
+macro_rules! Depcrate_graph_implimpl_961 {
+() => {
+// Module: crate::graph_impl
+// Provides: {"impl_961"}
+// Dependencies: {}
+impl < E , Ix > Iterator for Neighbors < '_ , E , Ix > where Ix : IndexType , { type Item = NodeIndex < Ix > ; fn next (& mut self) -> Option < NodeIndex < Ix > > { match self . edges . get (self . next [0] . index ()) { None => { } Some (edge) => { self . next [0] = edge . next [0] ; return Some (edge . node [1]) ; } } while let Some (edge) = self . edges . get (self . next [1] . index ()) { self . next [1] = edge . next [1] ; if edge . node [0] != self . skip_start { return Some (edge . node [0]) ; } } None } }
+};
+}

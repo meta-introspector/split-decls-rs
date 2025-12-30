@@ -1,0 +1,9 @@
+// Generated macro for WithRawSiginfo (struct)
+macro_rules! Depcrate_iterator_exfiltrator_rawWithRawSiginfo {
+() => {
+// Module: crate::iterator::exfiltrator::raw
+// Provides: {"WithRawSiginfo"}
+// Dependencies: {}
+# [doc = " The [`Exfiltrator`][crate::iterator::exfiltrator::Exfiltrator] that produces the raw"] # [doc = " [`libc::siginfo_t`]. Note that it might look differently on different OSes and its API is a"] # [doc = " little bit more limited than its C counterpart."] # [doc = ""] # [doc = " You might prefer the [`WithOrigin`][super::WithOrigin] if you simply need information about the"] # [doc = " origin of the signal."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```rust"] # [doc = " # use signal_hook::consts::SIGUSR1;"] # [doc = " # use signal_hook::iterator::SignalsInfo;"] # [doc = " # use signal_hook::iterator::exfiltrator::WithRawSiginfo;"] # [doc = " #"] # [doc = " # fn main() -> Result<(), std::io::Error> {"] # [doc = " // Subscribe to SIGUSR1, with information about the process."] # [doc = " let mut signals = SignalsInfo::<WithRawSiginfo>::new(&[SIGUSR1])?;"] # [doc = ""] # [doc = " // Send ourselves a signal."] # [doc = " signal_hook::low_level::raise(SIGUSR1)?;"] # [doc = ""] # [doc = " // Grab the signal and look into the details."] # [doc = " let received = signals.wait().next().unwrap();"] # [doc = ""] # [doc = " // Not much else is useful in a cross-platform way :-("] # [doc = " assert_eq!(SIGUSR1, received.si_signo);"] # [doc = " # Ok(()) }"] # [doc = " ```"] # [derive (Copy , Clone , Debug , Default)] pub struct WithRawSiginfo ;
+};
+}

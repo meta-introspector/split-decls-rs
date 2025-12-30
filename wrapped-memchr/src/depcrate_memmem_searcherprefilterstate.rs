@@ -1,0 +1,9 @@
+// Generated macro for PrefilterState (struct)
+macro_rules! Depcrate_memmem_searcherPrefilterState {
+() => {
+// Module: crate::memmem::searcher
+// Provides: {"PrefilterState"}
+// Dependencies: {}
+# [doc = " PrefilterState tracks state associated with the effectiveness of a"] # [doc = " prefilter. It is used to track how many bytes, on average, are skipped by"] # [doc = " the prefilter. If this average dips below a certain threshold over time,"] # [doc = " then the state renders the prefilter inert and stops using it."] # [doc = ""] # [doc = " A prefilter state should be created for each search. (Where creating an"] # [doc = " iterator is treated as a single search.) A prefilter state should only be"] # [doc = " created from a `Freqy`. e.g., An inert `Freqy` will produce an inert"] # [doc = " `PrefilterState`."] # [derive (Clone , Copy , Debug)] pub (crate) struct PrefilterState { # [doc = " The number of skips that has been executed. This is always 1 greater"] # [doc = " than the actual number of skips. The special sentinel value of 0"] # [doc = " indicates that the prefilter is inert. This is useful to avoid"] # [doc = " additional checks to determine whether the prefilter is still"] # [doc = " \"effective.\" Once a prefilter becomes inert, it should no longer be"] # [doc = " used (according to our heuristics)."] skips : u32 , # [doc = " The total number of bytes that have been skipped."] skipped : u32 , }
+};
+}

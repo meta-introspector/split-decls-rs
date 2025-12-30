@@ -1,0 +1,56 @@
+// Generated module macro for crate::non_zero
+macro_rules! Modcrate_non_zero {
+() => {
+        Depcrate_non_zerouse_209!();
+        Depcrate_non_zerouse_210!();
+        Depcrate_non_zerouse_211!();
+        Depcrate_non_zerouse_212!();
+        Depcrate_non_zerouse_213!();
+        Depcrate_non_zerouse_214!();
+        Depcrate_non_zerouse_215!();
+        Depcrate_non_zerouse_216!();
+        Depcrate_non_zeroNonZeroUint!();
+        Depcrate_non_zeroNonZeroInt!();
+        Depcrate_non_zeroNonZeroBoxedUint!();
+        Depcrate_non_zeroNonZero!();
+        Depcrate_non_zeroimpl_221!();
+        Depcrate_non_zeroimpl_222!();
+        Depcrate_non_zeroimpl_223!();
+        Depcrate_non_zeroimpl_224!();
+        Depcrate_non_zeroimpl_225!();
+        Depcrate_non_zeroimpl_226!();
+        Depcrate_non_zeroimpl_227!();
+        Depcrate_non_zeroimpl_228!();
+        Depcrate_non_zeroimpl_229!();
+        Depcrate_non_zeroimpl_230!();
+        Depcrate_non_zeroimpl_231!();
+        Depcrate_non_zeroimpl_232!();
+        Depcrate_non_zeroimpl_233!();
+        Depcrate_non_zeroimpl_234!();
+        Depcrate_non_zeroimpl_235!();
+        Depcrate_non_zeroimpl_236!();
+        Depcrate_non_zeroimpl_237!();
+        Depcrate_non_zeroimpl_238!();
+        Depcrate_non_zeroimpl_239!();
+        Depcrate_non_zeroimpl_240!();
+        Depcrate_non_zeroimpl_241!();
+        Depcrate_non_zeroimpl_242!();
+        Depcrate_non_zeroimpl_243!();
+        Depcrate_non_zeroimpl_244!();
+        Depcrate_non_zeroimpl_245!();
+        Depcrate_non_zeroimpl_246!();
+        Depcrate_non_zeroimpl_247!();
+        Depcrate_non_zeroimpl_248!();
+        Depcrate_non_zeroimpl_249!();
+        Depcrate_non_zeroimpl_250!();
+        Depcrate_non_zeroimpl_251!();
+        Depcrate_non_zeroimpl_252!();
+        Depcrate_non_zeroimpl_253!();
+        Depcrate_non_zeroimpl_254!();
+        Depcrate_non_zeroimpl_255!();
+        Depcrate_non_zeroimpl_256!();
+        Depcrate_non_zeroimpl_257!();
+        Depcrate_non_zerotests!();
+        Depcrate_non_zerotests_serde!();
+    };
+}

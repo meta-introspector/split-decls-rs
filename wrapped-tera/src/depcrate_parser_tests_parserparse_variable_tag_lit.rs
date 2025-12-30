@@ -1,0 +1,9 @@
+// Generated macro for parse_variable_tag_lit (function)
+macro_rules! Depcrate_parser_tests_parserparse_variable_tag_lit {
+() => {
+// Module: crate::parser::tests::parser
+// Provides: {"parse_variable_tag_lit"}
+// Dependencies: {}
+# [test] fn parse_variable_tag_lit () { let ast = parse ("{{ 2 }}{{ 3.18 }}{{ \"hey\" }}{{ true }}") . unwrap () ; assert_eq ! (ast [0] , Node :: VariableBlock (WS :: default () , Expr :: new (ExprVal :: Int (2)))) ; assert_eq ! (ast [1] , Node :: VariableBlock (WS :: default () , Expr :: new (ExprVal :: Float (3.18)))) ; assert_eq ! (ast [2] , Node :: VariableBlock (WS :: default () , Expr :: new (ExprVal :: String ("hey" . to_string ()))) ,) ; assert_eq ! (ast [3] , Node :: VariableBlock (WS :: default () , Expr :: new (ExprVal :: Bool (true)))) ; }
+};
+}

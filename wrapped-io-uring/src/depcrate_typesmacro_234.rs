@@ -1,0 +1,9 @@
+// Generated macro for macro_234 (macro)
+macro_rules! Depcrate_typesmacro_234 {
+() => {
+// Module: crate::types
+// Provides: {"macro_234"}
+// Dependencies: {}
+bitflags ! { # [doc = " Options for [`AsyncCancel`](super::AsyncCancel) and"] # [doc = " [`Submitter::register_sync_cancel`](super::Submitter::register_sync_cancel)."] # [derive (Debug , Clone , Copy , PartialEq , Eq , PartialOrd , Ord)] pub (crate) struct AsyncCancelFlags : u32 { # [doc = " Cancel all requests that match the given criteria, rather"] # [doc = " than just canceling the first one found."] # [doc = ""] # [doc = " Available since 5.19."] const ALL = sys :: IORING_ASYNC_CANCEL_ALL ; # [doc = " Match based on the file descriptor used in the original"] # [doc = " request rather than the user_data."] # [doc = ""] # [doc = " Available since 5.19."] const FD = sys :: IORING_ASYNC_CANCEL_FD ; # [doc = " Match any request in the ring, regardless of user_data or"] # [doc = " file descriptor.  Can be used to cancel any pending"] # [doc = " request in the ring."] # [doc = ""] # [doc = " Available since 5.19."] const ANY = sys :: IORING_ASYNC_CANCEL_ANY ; # [doc = " Match based on the fixed file descriptor used in the original"] # [doc = " request rather than the user_data."] # [doc = ""] # [doc = " Available since 6.0"] const FD_FIXED = sys :: IORING_ASYNC_CANCEL_FD_FIXED ; } }
+};
+}

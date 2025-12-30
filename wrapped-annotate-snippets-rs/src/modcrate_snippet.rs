@@ -1,0 +1,48 @@
+// Generated module macro for crate::snippet
+macro_rules! Modcrate_snippet {
+() => {
+        Depcrate_snippetuse_151!();
+        Depcrate_snippetuse_152!();
+        Depcrate_snippetuse_153!();
+        Depcrate_snippetuse_154!();
+        Depcrate_snippetERROR_TXT!();
+        Depcrate_snippetHELP_TXT!();
+        Depcrate_snippetINFO_TXT!();
+        Depcrate_snippetNOTE_TXT!();
+        Depcrate_snippetWARNING_TXT!();
+        Depcrate_snippetReport!();
+        Depcrate_snippetId!();
+        Depcrate_snippetGroup!();
+        Depcrate_snippetimpl_163!();
+        Depcrate_snippetElement!();
+        Depcrate_snippetimpl_165!();
+        Depcrate_snippetimpl_166!();
+        Depcrate_snippetimpl_167!();
+        Depcrate_snippetimpl_168!();
+        Depcrate_snippetimpl_169!();
+        Depcrate_snippetPadding!();
+        Depcrate_snippetTitle!();
+        Depcrate_snippetimpl_172!();
+        Depcrate_snippetMessage!();
+        Depcrate_snippetSnippet!();
+        Depcrate_snippetimpl_175!();
+        Depcrate_snippetimpl_176!();
+        Depcrate_snippetimpl_177!();
+        Depcrate_snippetAnnotation!();
+        Depcrate_snippetimpl_179!();
+        Depcrate_snippetAnnotationKind!();
+        Depcrate_snippetimpl_181!();
+        Depcrate_snippetPatch!();
+        Depcrate_snippetimpl_183!();
+        Depcrate_snippetOrigin!();
+        Depcrate_snippetimpl_185!();
+        Depcrate_snippetimpl_186!();
+        Depcrate_snippetOptionCow!();
+        Depcrate_snippetimpl_188!();
+        Depcrate_snippetimpl_189!();
+        Depcrate_snippetimpl_190!();
+        Depcrate_snippetimpl_191!();
+        Depcrate_snippetimpl_192!();
+        Depcrate_snippetimpl_193!();
+    };
+}

@@ -1,0 +1,52 @@
+// Generated module macro for crate::odd
+macro_rules! Modcrate_odd {
+() => {
+        Depcrate_odduse_261!();
+        Depcrate_odduse_262!();
+        Depcrate_odduse_263!();
+        Depcrate_odduse_264!();
+        Depcrate_odduse_265!();
+        Depcrate_odduse_266!();
+        Depcrate_odduse_267!();
+        Depcrate_odduse_268!();
+        Depcrate_odduse_269!();
+        Depcrate_oddOddUint!();
+        Depcrate_oddOddInt!();
+        Depcrate_oddOddBoxedUint!();
+        Depcrate_oddOdd!();
+        Depcrate_oddimpl_274!();
+        Depcrate_oddimpl_275!();
+        Depcrate_oddimpl_276!();
+        Depcrate_oddimpl_277!();
+        Depcrate_oddimpl_278!();
+        Depcrate_oddimpl_279!();
+        Depcrate_oddimpl_280!();
+        Depcrate_oddimpl_281!();
+        Depcrate_oddimpl_282!();
+        Depcrate_oddimpl_283!();
+        Depcrate_oddimpl_284!();
+        Depcrate_oddimpl_285!();
+        Depcrate_oddimpl_286!();
+        Depcrate_oddimpl_287!();
+        Depcrate_oddimpl_288!();
+        Depcrate_oddimpl_289!();
+        Depcrate_oddimpl_290!();
+        Depcrate_oddimpl_291!();
+        Depcrate_oddimpl_292!();
+        Depcrate_oddimpl_293!();
+        Depcrate_oddimpl_294!();
+        Depcrate_oddimpl_295!();
+        Depcrate_oddimpl_296!();
+        Depcrate_oddimpl_297!();
+        Depcrate_oddimpl_298!();
+        Depcrate_oddimpl_299!();
+        Depcrate_oddimpl_300!();
+        Depcrate_oddimpl_301!();
+        Depcrate_oddimpl_302!();
+        Depcrate_oddimpl_303!();
+        Depcrate_oddimpl_304!();
+        Depcrate_oddimpl_305!();
+        Depcrate_oddimpl_306!();
+        Depcrate_oddtests!();
+    };
+}

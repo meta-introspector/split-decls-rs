@@ -1,0 +1,9 @@
+// Generated macro for replace_case_insensitive (function)
+macro_rules! Depcrate_normalizereplace_case_insensitive {
+() => {
+// Module: crate::normalize
+// Provides: {"replace_case_insensitive"}
+// Dependencies: {}
+fn replace_case_insensitive (line : & str , pattern : & str , replacement : & str) -> String { let line_lower = line . to_ascii_lowercase () . replace ('\\' , "/") ; let pattern_lower = pattern . to_ascii_lowercase () . replace ('\\' , "/") ; let mut replaced = String :: with_capacity (line . len ()) ; let line_lower = line_lower . as_str () ; let mut split = line_lower . split (& pattern_lower) ; let mut pos = 0 ; let mut insert_replacement = false ; while let Some (keep) = split . next () { if insert_replacement { replaced . push_str (replacement) ; pos += pattern . len () ; } let mut keep = & line [pos .. pos + keep . len ()] ; if insert_replacement { let end_of_maybe_path = keep . find (& [' ' , ':'] [..]) . unwrap_or (keep . len ()) ; replaced . push_str (& keep [.. end_of_maybe_path] . replace ('\\' , "/")) ; pos += end_of_maybe_path ; keep = & keep [end_of_maybe_path ..] ; } replaced . push_str (keep) ; pos += keep . len () ; insert_replacement = true ; if replaced . ends_with (| ch : char | ch . is_ascii_alphanumeric ()) { if let Some (ch) = line [pos ..] . chars () . next () { replaced . push (ch) ; pos += ch . len_utf8 () ; split = line_lower [pos ..] . split (& pattern_lower) ; insert_replacement = false ; } } } replaced }
+};
+}

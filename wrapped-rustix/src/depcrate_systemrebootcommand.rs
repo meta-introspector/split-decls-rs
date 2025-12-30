@@ -1,0 +1,9 @@
+// Generated macro for RebootCommand (enum)
+macro_rules! Depcrate_systemRebootCommand {
+() => {
+// Module: crate::system
+// Provides: {"RebootCommand"}
+// Dependencies: {}
+# [doc = " Reboot command for use with [`reboot`]."] # [cfg (target_os = "linux")] # [derive (Copy , Clone , Debug , Eq , PartialEq)] # [repr (i32)] # [non_exhaustive] pub enum RebootCommand { # [doc = " Disables the Ctrl-Alt-Del keystroke."] # [doc = ""] # [doc = " When disabled, the keystroke will send a [`Signal::INT`] to"] # [doc = " [`Pid::INIT`]."] # [doc = ""] # [doc = " [`Signal::INT`]: crate::process::Signal::INT"] # [doc = " [`Pid::INIT`]: crate::process::Pid::INIT"] CadOff = c :: LINUX_REBOOT_CMD_CAD_OFF , # [doc = " Enables the Ctrl-Alt-Del keystroke."] # [doc = ""] # [doc = " When enabled, the keystroke will trigger a [`Restart`]."] # [doc = ""] # [doc = " [`Restart`]: Self::Restart"] CadOn = c :: LINUX_REBOOT_CMD_CAD_ON , # [doc = " Prints the message \"System halted\" and halts the system"] Halt = c :: LINUX_REBOOT_CMD_HALT , # [doc = " Execute a kernel that has been loaded earlier with [`kexec_load`]."] # [doc = ""] # [doc = " [`kexec_load`]: https://man7.org/linux/man-pages/man2/kexec_load.2.html"] Kexec = c :: LINUX_REBOOT_CMD_KEXEC , # [doc = " Prints the message \"Power down.\", stops the system, and tries to remove"] # [doc = " all power"] PowerOff = c :: LINUX_REBOOT_CMD_POWER_OFF , # [doc = " Prints the message \"Restarting system.\" and triggers a restart"] Restart = c :: LINUX_REBOOT_CMD_RESTART , # [doc = " Hibernate the system by suspending to disk"] SwSuspend = c :: LINUX_REBOOT_CMD_SW_SUSPEND , }
+};
+}

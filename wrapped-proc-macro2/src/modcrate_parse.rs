@@ -1,0 +1,54 @@
+// Generated module macro for crate::parse
+macro_rules! Modcrate_parse {
+() => {
+        Depcrate_parseuse_14!();
+        Depcrate_parseuse_15!();
+        Depcrate_parseuse_16!();
+        Depcrate_parseuse_17!();
+        Depcrate_parseCursor!();
+        Depcrate_parseimpl_19!();
+        Depcrate_parseReject!();
+        Depcrate_parsePResult!();
+        Depcrate_parseskip_whitespace!();
+        Depcrate_parseblock_comment!();
+        Depcrate_parseis_whitespace!();
+        Depcrate_parseword_break!();
+        Depcrate_parseERROR!();
+        Depcrate_parsetoken_stream!();
+        Depcrate_parselex_error!();
+        Depcrate_parseleaf_token!();
+        Depcrate_parseident!();
+        Depcrate_parseident_any!();
+        Depcrate_parseident_not_raw!();
+        Depcrate_parseliteral!();
+        Depcrate_parseliteral_nocapture!();
+        Depcrate_parseliteral_suffix!();
+        Depcrate_parsestring!();
+        Depcrate_parsecooked_string!();
+        Depcrate_parseraw_string!();
+        Depcrate_parsebyte_string!();
+        Depcrate_parsecooked_byte_string!();
+        Depcrate_parsedelimiter_of_raw_string!();
+        Depcrate_parseraw_byte_string!();
+        Depcrate_parsec_string!();
+        Depcrate_parseraw_c_string!();
+        Depcrate_parsecooked_c_string!();
+        Depcrate_parsebyte!();
+        Depcrate_parsecharacter!();
+        Depcrate_parsenext_ch!();
+        Depcrate_parsebackslash_x_char!();
+        Depcrate_parsebackslash_x_byte!();
+        Depcrate_parsebackslash_x_nonzero!();
+        Depcrate_parsebackslash_u!();
+        Depcrate_parsetrailing_backslash!();
+        Depcrate_parsefloat!();
+        Depcrate_parsefloat_digits!();
+        Depcrate_parseint!();
+        Depcrate_parsedigits!();
+        Depcrate_parsepunct!();
+        Depcrate_parsepunct_char!();
+        Depcrate_parsedoc_comment!();
+        Depcrate_parsedoc_comment_contents!();
+        Depcrate_parsetake_until_newline_or_eof!();
+    };
+}

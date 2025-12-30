@@ -1,0 +1,52 @@
+// Generated module macro for crate::db
+macro_rules! Modcrate_db {
+() => {
+        Depcrate_dbuse_119!();
+        Depcrate_dbuse_120!();
+        Depcrate_dbuse_121!();
+        Depcrate_dbuse_122!();
+        Depcrate_dbuse_123!();
+        Depcrate_dbuse_124!();
+        Depcrate_dbuse_125!();
+        Depcrate_dbuse_126!();
+        Depcrate_dbuse_127!();
+        Depcrate_dbuse_128!();
+        Depcrate_dbuse_129!();
+        Depcrate_dbuse_130!();
+        Depcrate_dbuse_131!();
+        Depcrate_dbuse_132!();
+        Depcrate_dbuse_133!();
+        Depcrate_dbuse_134!();
+        Depcrate_dbuse_135!();
+        Depcrate_dbRange!();
+        Depcrate_dbimpl_137!();
+        Depcrate_dbThreadMode!();
+        Depcrate_dbSingleThreaded!();
+        Depcrate_dbMultiThreaded!();
+        Depcrate_dbimpl_141!();
+        Depcrate_dbimpl_142!();
+        Depcrate_dbDBInner!();
+        Depcrate_dbDBCommon!();
+        Depcrate_dbDBAccess!();
+        Depcrate_dbimpl_146!();
+        Depcrate_dbDBWithThreadModeInner!();
+        Depcrate_dbimpl_148!();
+        Depcrate_dbimpl_149!();
+        Depcrate_dbDBWithThreadMode!();
+        Depcrate_dbDB!();
+        Depcrate_dbDB!();
+        Depcrate_dbimpl_153!();
+        Depcrate_dbimpl_154!();
+        Depcrate_dbAccessType!();
+        Depcrate_dbimpl_156!();
+        Depcrate_dbimpl_157!();
+        Depcrate_dbimpl_158!();
+        Depcrate_dbimpl_159!();
+        Depcrate_dbimpl_160!();
+        Depcrate_dbimpl_161!();
+        Depcrate_dbColumnFamilyMetaData!();
+        Depcrate_dbLiveFile!();
+        Depcrate_dbconvert_options!();
+        Depcrate_dbconvert_values!();
+    };
+}

@@ -1,0 +1,9 @@
+// Generated macro for X_MAC_CYRILLIC (static)
+macro_rules! DepcrateX_MAC_CYRILLIC {
+() => {
+// Module: crate
+// Provides: {"X_MAC_CYRILLIC"}
+// Dependencies: {}
+# [doc = " The x-mac-cyrillic encoding."] # [doc = ""] # [doc = " This is the MacUkrainian encoding from Mac OS Classic."] # [doc = ""] # [doc = " [Index visualization](https://encoding.spec.whatwg.org/x-mac-cyrillic.html),"] # [doc = " [Visualization of BMP coverage](https://encoding.spec.whatwg.org/x-mac-cyrillic-bmp.html)"] # [doc = ""] # [doc = " This encoding matches the Windows code page 10017."] # [doc = ""] # [doc = " This will change from `static` to `const` if Rust changes"] # [doc = " to make the referent of `pub const FOO: &'static Encoding`"] # [doc = " unique cross-crate, so don't take the address of this"] # [doc = " `static`."] pub static X_MAC_CYRILLIC : & 'static Encoding = & X_MAC_CYRILLIC_INIT ;
+};
+}

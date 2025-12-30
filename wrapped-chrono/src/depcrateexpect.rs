@@ -1,0 +1,9 @@
+// Generated macro for expect (function)
+macro_rules! Depcrateexpect {
+() => {
+// Module: crate
+// Provides: {"expect"}
+// Dependencies: {}
+# [doc = " Workaround because `.expect()` is not (yet) available in const context."] pub (crate) const fn expect < T : Copy > (opt : Option < T > , msg : & str) -> T { match opt { Some (val) => val , None => panic ! ("{}" , msg) , } }
+};
+}

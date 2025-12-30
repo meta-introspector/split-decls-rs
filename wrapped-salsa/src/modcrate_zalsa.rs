@@ -1,0 +1,42 @@
+// Generated module macro for crate::zalsa
+macro_rules! Modcrate_zalsa {
+() => {
+        Depcrate_zalsause_650!();
+        Depcrate_zalsause_651!();
+        Depcrate_zalsause_652!();
+        Depcrate_zalsause_653!();
+        Depcrate_zalsause_654!();
+        Depcrate_zalsause_655!();
+        Depcrate_zalsause_656!();
+        Depcrate_zalsause_657!();
+        Depcrate_zalsause_658!();
+        Depcrate_zalsause_659!();
+        Depcrate_zalsause_660!();
+        Depcrate_zalsause_661!();
+        Depcrate_zalsause_662!();
+        Depcrate_zalsause_663!();
+        Depcrate_zalsause_664!();
+        Depcrate_zalsaZalsaDatabase!();
+        Depcrate_zalsaviews!();
+        Depcrate_zalsaStorageNonce!();
+        Depcrate_zalsaNONCE!();
+        Depcrate_zalsaIngredientIndex!();
+        Depcrate_zalsaimpl_670!();
+        Depcrate_zalsaMemoIngredientIndex!();
+        Depcrate_zalsaimpl_672!();
+        Depcrate_zalsaZalsa!();
+        Depcrate_zalsaimpl_674!();
+        Depcrate_zalsaimpl_675!();
+        Depcrate_zalsaimpl_676!();
+        Depcrate_zalsaErasedJar!();
+        Depcrate_zalsaJarKind!();
+        Depcrate_zalsaimpl_679!();
+        Depcrate_zalsaHasJar!();
+        Depcrate_zalsamacro_681!();
+        Depcrate_zalsause_682!();
+        Depcrate_zalsaregister_jar!();
+        Depcrate_zalsause_684!();
+        Depcrate_zalsatransmute_data_ptr!();
+        Depcrate_zalsatransmute_data_mut_ptr!();
+    };
+}

@@ -1,0 +1,47 @@
+// Generated module macro for crate::read::line
+macro_rules! Modcrate_read_line {
+() => {
+        Depcrate_read_lineuse_504!();
+        Depcrate_read_lineuse_505!();
+        Depcrate_read_lineuse_506!();
+        Depcrate_read_lineuse_507!();
+        Depcrate_read_lineuse_508!();
+        Depcrate_read_lineuse_509!();
+        Depcrate_read_lineDebugLine!();
+        Depcrate_read_lineimpl_511!();
+        Depcrate_read_lineimpl_512!();
+        Depcrate_read_lineimpl_513!();
+        Depcrate_read_lineimpl_514!();
+        Depcrate_read_lineimpl_515!();
+        Depcrate_read_lineLineProgram!();
+        Depcrate_read_lineimpl_517!();
+        Depcrate_read_lineimpl_518!();
+        Depcrate_read_lineLineRows!();
+        Depcrate_read_lineOneShotLineRows!();
+        Depcrate_read_lineResumedLineRows!();
+        Depcrate_read_lineimpl_522!();
+        Depcrate_read_lineLineInstruction!();
+        Depcrate_read_lineimpl_524!();
+        Depcrate_read_lineLineInstructions!();
+        Depcrate_read_lineimpl_526!();
+        Depcrate_read_lineimpl_527!();
+        Depcrate_read_lineLineRow!();
+        Depcrate_read_lineimpl_529!();
+        Depcrate_read_lineColumnType!();
+        Depcrate_read_lineLineSequence!();
+        Depcrate_read_lineLineProgramHeader!();
+        Depcrate_read_lineimpl_533!();
+        Depcrate_read_lineIncompleteLineProgram!();
+        Depcrate_read_lineimpl_535!();
+        Depcrate_read_lineCompleteLineProgram!();
+        Depcrate_read_lineimpl_537!();
+        Depcrate_read_lineFileEntry!();
+        Depcrate_read_lineimpl_539!();
+        Depcrate_read_lineFileEntryFormat!();
+        Depcrate_read_lineimpl_541!();
+        Depcrate_read_lineparse_directory_v5!();
+        Depcrate_read_lineparse_file_v5!();
+        Depcrate_read_lineparse_attribute!();
+        Depcrate_read_linetests!();
+    };
+}

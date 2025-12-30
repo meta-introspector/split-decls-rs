@@ -1,0 +1,44 @@
+// Generated module macro for crate::wrapping
+macro_rules! Modcrate_wrapping {
+() => {
+        Depcrate_wrappinguse_473!();
+        Depcrate_wrappinguse_474!();
+        Depcrate_wrappinguse_475!();
+        Depcrate_wrappinguse_476!();
+        Depcrate_wrappinguse_477!();
+        Depcrate_wrappingWrapping!();
+        Depcrate_wrappingimpl_479!();
+        Depcrate_wrappingimpl_480!();
+        Depcrate_wrappingimpl_481!();
+        Depcrate_wrappingimpl_482!();
+        Depcrate_wrappingimpl_483!();
+        Depcrate_wrappingimpl_484!();
+        Depcrate_wrappingimpl_485!();
+        Depcrate_wrappingimpl_486!();
+        Depcrate_wrappingimpl_487!();
+        Depcrate_wrappingimpl_488!();
+        Depcrate_wrappingimpl_489!();
+        Depcrate_wrappingimpl_490!();
+        Depcrate_wrappingimpl_491!();
+        Depcrate_wrappingimpl_492!();
+        Depcrate_wrappingimpl_493!();
+        Depcrate_wrappingimpl_494!();
+        Depcrate_wrappingimpl_495!();
+        Depcrate_wrappingimpl_496!();
+        Depcrate_wrappingimpl_497!();
+        Depcrate_wrappingimpl_498!();
+        Depcrate_wrappingimpl_499!();
+        Depcrate_wrappingimpl_500!();
+        Depcrate_wrappingimpl_501!();
+        Depcrate_wrappingimpl_502!();
+        Depcrate_wrappingimpl_503!();
+        Depcrate_wrappingimpl_504!();
+        Depcrate_wrappingimpl_505!();
+        Depcrate_wrappingimpl_506!();
+        Depcrate_wrappingimpl_507!();
+        Depcrate_wrappingimpl_508!();
+        Depcrate_wrappingimpl_509!();
+        Depcrate_wrappingimpl_510!();
+        Depcrate_wrappingtests!();
+    };
+}

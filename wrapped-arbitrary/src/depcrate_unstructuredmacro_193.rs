@@ -1,0 +1,9 @@
+// Generated macro for macro_193 (macro)
+macro_rules! Depcrate_unstructuredmacro_193 {
+() => {
+// Module: crate::unstructured
+// Provides: {"macro_193"}
+// Dependencies: {}
+impl_int ! { u8 : u8 ; u16 : u16 ; u32 : u32 ; u64 : u64 ; u128 : u128 ; usize : usize ; i8 : u8 ; i16 : u16 ; i32 : u32 ; i64 : u64 ; i128 : u128 ; isize : usize ; }
+};
+}

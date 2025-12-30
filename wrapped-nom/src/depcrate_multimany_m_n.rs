@@ -1,0 +1,9 @@
+// Generated macro for many_m_n (function)
+macro_rules! Depcrate_multimany_m_n {
+() => {
+// Module: crate::multi
+// Provides: {"many_m_n"}
+// Dependencies: {}
+# [doc = " Repeats the embedded parser `m..=n` times"] # [doc = ""] # [doc = " This stops before `n` when the parser returns [`Err::Error`]  and returns the results that were accumulated. To instead chain an error up, see"] # [doc = " [`cut`][crate::combinator::cut]."] # [doc = ""] # [doc = " # Arguments"] # [doc = " * `m` The minimum number of iterations."] # [doc = " * `n` The maximum number of iterations."] # [doc = " * `f` The parser to apply."] # [doc = ""] # [doc = " *Note*: If the parser passed to `many1` accepts empty inputs"] # [doc = " (like `alpha0` or `digit0`), `many1` will return an error,"] # [doc = " to prevent going into an infinite loop."] # [doc = ""] # [doc = " ```rust"] # [doc = " # use nom::{Err, error::ErrorKind, Needed, IResult, Parser};"] # [doc = " use nom::multi::many_m_n;"] # [doc = " use nom::bytes::complete::tag;"] # [doc = ""] # [doc = " fn parser(s: &str) -> IResult<&str, Vec<&str>> {"] # [doc = "   many_m_n(0, 2, tag(\"abc\")).parse(s)"] # [doc = " }"] # [doc = ""] # [doc = " assert_eq!(parser(\"abcabc\"), Ok((\"\", vec![\"abc\", \"abc\"])));"] # [doc = " assert_eq!(parser(\"abc123\"), Ok((\"123\", vec![\"abc\"])));"] # [doc = " assert_eq!(parser(\"123123\"), Ok((\"123123\", vec![])));"] # [doc = " assert_eq!(parser(\"\"), Ok((\"\", vec![])));"] # [doc = " assert_eq!(parser(\"abcabcabc\"), Ok((\"abc\", vec![\"abc\", \"abc\"])));"] # [doc = " ```"] # [cfg (feature = "alloc")] # [cfg_attr (feature = "docsrs" , doc (cfg (feature = "alloc")))] pub fn many_m_n < I , E , F > (min : usize , max : usize , parser : F ,) -> impl Parser < I , Output = Vec < < F as Parser < I > > :: Output > , Error = E > where I : Clone + Input , F : Parser < I , Error = E > , E : ParseError < I > , { ManyMN { parser , min , max } }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for macro_258 (macro)
+macro_rules! Depcrate_iomacro_258 {
+() => {
+// Module: crate::io
+// Provides: {"macro_258"}
+// Dependencies: {}
+pin_project ! { # [doc = " Adds buffering to a reader."] # [doc = ""] # [doc = " It can be excessively inefficient to work directly with an [`AsyncRead`] instance. A"] # [doc = " [`BufReader`] performs large, infrequent reads on the underlying [`AsyncRead`] and"] # [doc = " maintains an in-memory buffer of the incoming byte stream."] # [doc = ""] # [doc = " [`BufReader`] can improve the speed of programs that make *small* and *repeated* reads to"] # [doc = " the same file or networking socket. It does not help when reading very large amounts at"] # [doc = " once, or reading just once or a few times. It also provides no advantage when reading from"] # [doc = " a source that is already in memory, like a `Vec<u8>`."] # [doc = ""] # [doc = " When a [`BufReader`] is dropped, the contents of its buffer are discarded. Creating"] # [doc = " multiple instances of [`BufReader`] on the same reader can cause data loss."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " use futures_lite::io::{AsyncBufReadExt, BufReader};"] # [doc = ""] # [doc = " # spin_on::spin_on(async {"] # [doc = " let input: &[u8] = b\"hello\";"] # [doc = " let mut reader = BufReader::new(input);"] # [doc = ""] # [doc = " let mut line = String::new();"] # [doc = " reader.read_line(&mut line).await?;"] # [doc = " # std::io::Result::Ok(()) });"] # [doc = " ```"] pub struct BufReader < R > { # [pin] inner : R , buf : Box < [u8] >, pos : usize , cap : usize , } }
+};
+}

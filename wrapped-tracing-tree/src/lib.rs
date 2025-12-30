@@ -1,0 +1,77 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcrate_formatconfig.rs");
+include!("depcrate_timeuptime.rs");
+include!("depcrateimpl_52.rs");
+include!("depcrateimpl_64.rs");
+include!("depcrate_timeimpl_34.rs");
+include!("depcrate_timeformat_timestamp_with_decimals.rs");
+include!("depcrate_formatline_vert.rs");
+include!("depcrateformat.rs");
+include!("depcrate_timeimpl_37.rs");
+include!("depcrate_formatimpl_19.rs");
+include!("depcrate_timeimpl_38.rs");
+include!("depcrate_timewrite_style_timestamp.rs");
+include!("depcrateuse_48.rs");
+include!("depcrateuse_49.rs");
+include!("depcrateuse_50.rs");
+include!("depcrate_timeimpl_30.rs");
+include!("depcrate_formatline_close2.rs");
+include!("depcrateimpl_60.rs");
+include!("depcrateimpl_61.rs");
+include!("depcrateimpl_65.rs");
+include!("depcrate_formatline_close.rs");
+include!("depcrate_timeuse_26.rs");
+include!("depcrate_formatwrite_span_mode.rs");
+include!("depcrateuse_47.rs");
+include!("depcrateimpl_56.rs");
+include!("depcratescope_path.rs");
+include!("depcrate_timeformattime.rs");
+include!("depcrate_timestyle_timestamp.rs");
+include!("depcratedata.rs");
+include!("depcrate_formatimpl_17.rs");
+include!("depcratehierarchicallayer.rs");
+include!("depcrate_formatline_open.rs");
+include!("depcrate_formatbuffers.rs");
+include!("depcrate_timelocaldatetime.rs");
+include!("depcrate_timeimpl_36.rs");
+include!("depcrate_formatindent_block_with_lines.rs");
+include!("depcrate_formatuse_4.rs");
+include!("depcrate_timeutcdatetime.rs");
+include!("depcratestyled.rs");
+include!("depcrate_formatfmtevent.rs");
+include!("depcrate_formatline_open2.rs");
+include!("depcrateimpl_57.rs");
+include!("depcratedifferenceiter.rs");
+include!("depcrateuse_45.rs");
+include!("depcrate_timeuse_27.rs");
+include!("depcrate_formatindent_block.rs");
+include!("depcrate_formatspanmode.rs");
+include!("depcrateuse_44.rs");
+include!("depcrateuse_46.rs");
+include!("depcrate_formatline_horiz.rs");
+include!("depcrate_timeformat_timestamp.rs");
+include!("depcrate_formatline_branch.rs");
+include!("depcrate_timeimpl_32.rs");
+include!("depcratetime.rs");
+include!("depcrate_formatimpl_21.rs");
+include!("depcrateimpl_53.rs");
+include!("depcraterecursiveguard.rs");
+include!("depcrate_formatimpl_14.rs");
+include!("depcrate_timeimpl_43.rs");
+include!("depcrate_formatuse_2.rs");
+include!("depcrate_formatuse_3.rs");
+include!("depcrate_formatimpl_15.rs");
+include!("depcrateimpl_55.rs");
+include!("depcrate_timeuse_28.rs");
+include!("depcrate_formatcolorlevel.rs");
+include!("modcrate_time.rs");
+include!("modcrate.rs");
+include!("modcrate_format.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate_time!();
+    Modcrate!();
+    Modcrate_format!();
+}

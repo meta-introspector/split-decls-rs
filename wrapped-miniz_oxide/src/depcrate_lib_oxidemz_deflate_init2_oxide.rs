@@ -1,0 +1,9 @@
+// Generated macro for mz_deflate_init2_oxide (function)
+macro_rules! Depcrate_lib_oxidemz_deflate_init2_oxide {
+() => {
+// Module: crate::lib_oxide
+// Provides: {"mz_deflate_init2_oxide"}
+// Dependencies: {}
+# [doc = " Initialize the compressor with the requested parameters."] # [doc = ""] # [doc = " # Params"] # [doc = " stream_oxide: The stream to be initialized."] # [doc = " level: Compression level (0-10)."] # [doc = " method: Compression method. Only `MZ_DEFLATED` is accepted."] # [doc = " window_bits: Number of bits used to represent the compression sliding window."] # [doc = "              Only `MZ_DEFAULT_WINDOW_BITS` is currently supported."] # [doc = "              A negative value, i.e `-MZ_DEFAULT_WINDOW_BITS` indicates that the stream"] # [doc = "              should be not be wrapped in a zlib wrapper."] # [doc = " mem_level: Currently unused. Only values from 1 to and including 9 are accepted."] # [doc = " strategy: Compression strategy. See `deflate::CompressionStrategy` for accepted options."] # [doc = "           The default, which is used in most cases, is 0."] pub fn mz_deflate_init2_oxide (stream_oxide : & mut StreamOxide < Compressor > , level : i32 , method : i32 , window_bits : i32 , mem_level : i32 , strategy : i32 ,) -> MZResult { let comp_flags = deflate_flags :: TDEFL_COMPUTE_ADLER32 | create_comp_flags_from_zip_params (level , window_bits , strategy) ; let invalid_level = ! (1 ..= 9) . contains (& mem_level) ; if (method != MZ_DEFLATED) || invalid_level || invalid_window_bits (window_bits) { return Err (MZError :: Param) ; } stream_oxide . adler = MZ_ADLER32_INIT ; stream_oxide . total_in = 0 ; stream_oxide . total_out = 0 ; let mut compr : Box < Compressor > = Box :: default () ; compr . inner = Some (CompressorOxide :: new (comp_flags)) ; stream_oxide . state = Some (Box :: new (InternalState :: Deflate (compr))) ; Ok (MZStatus :: Ok) }
+};
+}

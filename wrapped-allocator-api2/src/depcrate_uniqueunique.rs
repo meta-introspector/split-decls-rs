@@ -1,0 +1,9 @@
+// Generated macro for Unique (struct)
+macro_rules! Depcrate_uniqueUnique {
+() => {
+// Module: crate::unique
+// Provides: {"Unique"}
+// Dependencies: {}
+# [doc = " A wrapper around a raw non-null `*mut T` that indicates that the possessor"] # [doc = " of this wrapper owns the referent. Useful for building abstractions like"] # [doc = " `Box<T>`, `Vec<T>`, `String`, and `HashMap<K, V>`."] # [doc = ""] # [doc = " Unlike `*mut T`, `Unique<T>` behaves \"as if\" it were an instance of `T`."] # [doc = " It implements `Send`/`Sync` if `T` is `Send`/`Sync`. It also implies"] # [doc = " the kind of strong aliasing guarantees an instance of `T` can expect:"] # [doc = " the referent of the pointer should not be modified without a unique path to"] # [doc = " its owning Unique."] # [doc = ""] # [doc = " If you're uncertain of whether it's correct to use `Unique` for your purposes,"] # [doc = " consider using `NonNull`, which has weaker semantics."] # [doc = ""] # [doc = " Unlike `*mut T`, the pointer must always be non-null, even if the pointer"] # [doc = " is never dereferenced. This is so that enums may use this forbidden value"] # [doc = " as a discriminant -- `Option<Unique<T>>` has the same size as `Unique<T>`."] # [doc = " However the pointer may still dangle if it isn't dereferenced."] # [doc = ""] # [doc = " Unlike `*mut T`, `Unique<T>` is covariant over `T`. This should always be correct"] # [doc = " for any type which upholds Unique's aliasing requirements."] # [repr (transparent)] pub (crate) struct Unique < T : ? Sized > { pointer : NonNull < T > , _marker : PhantomData < T > , }
+};
+}

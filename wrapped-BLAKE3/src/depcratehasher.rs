@@ -1,0 +1,9 @@
+// Generated macro for Hasher (struct)
+macro_rules! DepcrateHasher {
+() => {
+// Module: crate
+// Provides: {"Hasher"}
+// Dependencies: {}
+# [doc = " An incremental hash state that can accept any number of writes."] # [doc = ""] # [doc = " The `rayon` and `mmap` Cargo features enable additional methods on this"] # [doc = " type related to multithreading and memory-mapped IO."] # [doc = ""] # [doc = " When the `traits-preview` Cargo feature is enabled, this type implements"] # [doc = " several commonly used traits from the"] # [doc = " [`digest`](https://crates.io/crates/digest) crate. However, those"] # [doc = " traits aren't stable, and they're expected to change in incompatible ways"] # [doc = " before that crate reaches 1.0. For that reason, this crate makes no SemVer"] # [doc = " guarantees for this feature, and callers who use it should expect breaking"] # [doc = " changes between patch versions."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " # fn main() -> Result<(), Box<dyn std::error::Error>> {"] # [doc = " // Hash an input incrementally."] # [doc = " let mut hasher = blake3::Hasher::new();"] # [doc = " hasher.update(b\"foo\");"] # [doc = " hasher.update(b\"bar\");"] # [doc = " hasher.update(b\"baz\");"] # [doc = " assert_eq!(hasher.finalize(), blake3::hash(b\"foobarbaz\"));"] # [doc = ""] # [doc = " // Extended output. OutputReader also implements Read and Seek."] # [doc = " # #[cfg(feature = \"std\")] {"] # [doc = " let mut output = [0; 1000];"] # [doc = " let mut output_reader = hasher.finalize_xof();"] # [doc = " output_reader.fill(&mut output);"] # [doc = " assert_eq!(&output[..32], blake3::hash(b\"foobarbaz\").as_bytes());"] # [doc = " # }"] # [doc = " # Ok(())"] # [doc = " # }"] # [doc = " ```"] # [derive (Clone)] pub struct Hasher { key : CVWords , chunk_state : ChunkState , initial_chunk_counter : u64 , cv_stack : ArrayVec < CVBytes , { MAX_DEPTH + 1 } > , }
+};
+}

@@ -1,0 +1,45 @@
+// Generated module macro for crate::read::xcoff::symbol
+macro_rules! Modcrate_read_xcoff_symbol {
+() => {
+        Depcrate_read_xcoff_symboluse_1160!();
+        Depcrate_read_xcoff_symboluse_1161!();
+        Depcrate_read_xcoff_symboluse_1162!();
+        Depcrate_read_xcoff_symboluse_1163!();
+        Depcrate_read_xcoff_symboluse_1164!();
+        Depcrate_read_xcoff_symboluse_1165!();
+        Depcrate_read_xcoff_symboluse_1166!();
+        Depcrate_read_xcoff_symboluse_1167!();
+        Depcrate_read_xcoff_symboluse_1168!();
+        Depcrate_read_xcoff_symboluse_1169!();
+        Depcrate_read_xcoff_symbolSymbolTable!();
+        Depcrate_read_xcoff_symbolimpl_1171!();
+        Depcrate_read_xcoff_symbolimpl_1172!();
+        Depcrate_read_xcoff_symbolSymbolIterator!();
+        Depcrate_read_xcoff_symbolimpl_1174!();
+        Depcrate_read_xcoff_symbolXcoffSymbolTable32!();
+        Depcrate_read_xcoff_symbolXcoffSymbolTable64!();
+        Depcrate_read_xcoff_symbolXcoffSymbolTable!();
+        Depcrate_read_xcoff_symbolimpl_1178!();
+        Depcrate_read_xcoff_symbolimpl_1179!();
+        Depcrate_read_xcoff_symbolXcoffSymbolIterator32!();
+        Depcrate_read_xcoff_symbolXcoffSymbolIterator64!();
+        Depcrate_read_xcoff_symbolXcoffSymbolIterator!();
+        Depcrate_read_xcoff_symbolimpl_1183!();
+        Depcrate_read_xcoff_symbolimpl_1184!();
+        Depcrate_read_xcoff_symbolXcoffSymbol32!();
+        Depcrate_read_xcoff_symbolXcoffSymbol64!();
+        Depcrate_read_xcoff_symbolXcoffSymbol!();
+        Depcrate_read_xcoff_symbolimpl_1188!();
+        Depcrate_read_xcoff_symbolimpl_1189!();
+        Depcrate_read_xcoff_symbolimpl_1190!();
+        Depcrate_read_xcoff_symbolSymbol!();
+        Depcrate_read_xcoff_symbolimpl_1192!();
+        Depcrate_read_xcoff_symbolimpl_1193!();
+        Depcrate_read_xcoff_symbolFileAux!();
+        Depcrate_read_xcoff_symbolimpl_1195!();
+        Depcrate_read_xcoff_symbolimpl_1196!();
+        Depcrate_read_xcoff_symbolCsectAux!();
+        Depcrate_read_xcoff_symbolimpl_1198!();
+        Depcrate_read_xcoff_symbolimpl_1199!();
+    };
+}

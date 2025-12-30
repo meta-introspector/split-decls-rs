@@ -1,0 +1,9 @@
+// Generated macro for compute_error_scaled (function)
+macro_rules! Depcrate_lemirecompute_error_scaled {
+() => {
+// Module: crate::lemire
+// Provides: {"compute_error_scaled"}
+// Dependencies: {}
+# [doc = " Compute the error from a mantissa scaled to the exponent."] # [inline] pub fn compute_error_scaled < F : Float > (q : i32 , mut w : u64 , lz : i32) -> ExtendedFloat { let hilz = (w >> 63) as i32 ^ 1 ; w <<= hilz ; let power2 = power (q as i32) + F :: EXPONENT_BIAS - hilz - lz - 62 ; ExtendedFloat { mant : w , exp : power2 + F :: INVALID_FP , } }
+};
+}

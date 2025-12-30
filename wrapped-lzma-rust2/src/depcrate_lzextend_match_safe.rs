@@ -1,0 +1,9 @@
+// Generated macro for extend_match_safe (function)
+macro_rules! Depcrate_lzextend_match_safe {
+() => {
+// Module: crate::lz
+// Provides: {"extend_match_safe"}
+// Dependencies: {}
+# [doc = " Extends a match between two slices to its maximum possible length."] # [doc = ""] # [doc = " This function is optimized using native word-at-a-time comparisons."] # [cfg (feature = "optimization")] # [inline (always)] fn extend_match_safe (s1 : & [u8] , s2 : & [u8]) -> usize { const WORD_SIZE : usize = size_of :: < usize > () ; let len = s1 . len () . min (s2 . len ()) ; unsafe { let mut ptr1 = s1 . as_ptr () ; let mut ptr2 = s2 . as_ptr () ; let mut extended_len = 0 ; while extended_len + WORD_SIZE <= len { let word1 = (ptr1 as * const usize) . read_unaligned () ; let word2 = (ptr2 as * const usize) . read_unaligned () ; if word1 == word2 { extended_len += WORD_SIZE ; ptr1 = ptr1 . add (WORD_SIZE) ; ptr2 = ptr2 . add (WORD_SIZE) ; } else { let diff_bits = word1 ^ word2 ; # [cfg (all (target_endian = "little" , not (all (target_arch = "x86_64" , target_feature = "bmi1"))))] let matching_bytes = (diff_bits . trailing_zeros () / 8) as usize ; # [cfg (all (target_endian = "little" , all (target_arch = "x86_64" , target_feature = "bmi1")))] let matching_bytes = (core :: arch :: x86_64 :: _tzcnt_u64 (diff_bits as u64) / 8) as usize ; # [cfg (target_endian = "big")] let matching_bytes = (diff_bits . leading_zeros () / 8) as usize ; return extended_len + matching_bytes ; } } while extended_len < len && * ptr1 == * ptr2 { extended_len += 1 ; ptr1 = ptr1 . add (1) ; ptr2 = ptr2 . add (1) ; } extended_len } }
+};
+}

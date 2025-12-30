@@ -1,0 +1,40 @@
+// Generated module macro for crate::field25519
+macro_rules! Modcrate_field25519 {
+() => {
+        Depcrate_field25519use_21!();
+        Depcrate_field25519use_22!();
+        Depcrate_field25519use_23!();
+        Depcrate_field25519fiat_25519_u1!();
+        Depcrate_field25519fiat_25519_i1!();
+        Depcrate_field25519fiat_25519_i2!();
+        Depcrate_field25519fiat_25519_addcarryx_u51!();
+        Depcrate_field25519fiat_25519_subborrowx_u51!();
+        Depcrate_field25519fiat_25519_cmovznz_u64!();
+        Depcrate_field25519fiat_25519_carry_mul!();
+        Depcrate_field25519fiat_25519_carry_square!();
+        Depcrate_field25519fiat_25519_carry!();
+        Depcrate_field25519fiat_25519_add!();
+        Depcrate_field25519fiat_25519_sub!();
+        Depcrate_field25519fiat_25519_opp!();
+        Depcrate_field25519fiat_25519_selectznz!();
+        Depcrate_field25519fiat_25519_to_bytes!();
+        Depcrate_field25519Fe!();
+        Depcrate_field25519impl_39!();
+        Depcrate_field25519impl_40!();
+        Depcrate_field25519FE_ZERO!();
+        Depcrate_field25519FE_ONE!();
+        Depcrate_field25519FE_SQRTM1!();
+        Depcrate_field25519FE_D!();
+        Depcrate_field25519FE_D2!();
+        Depcrate_field25519FE_CURVE25519_BASEPOINT!();
+        Depcrate_field25519load_8u!();
+        Depcrate_field25519load_4u!();
+        Depcrate_field25519load_4i!();
+        Depcrate_field25519load_3u!();
+        Depcrate_field25519load_3i!();
+        Depcrate_field25519impl_52!();
+        Depcrate_field25519impl_53!();
+        Depcrate_field25519impl_54!();
+        Depcrate_field25519impl_55!();
+    };
+}

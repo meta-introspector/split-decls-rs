@@ -1,0 +1,41 @@
+// Generated module macro for crate::error
+macro_rules! Modcrate_error {
+() => {
+        Depcrate_erroruse_33!();
+        Depcrate_erroruse_34!();
+        Depcrate_erroruse_35!();
+        Depcrate_erroruse_36!();
+        Depcrate_errorErrorExtensionValues!();
+        Depcrate_errorimpl_38!();
+        Depcrate_errorServerError!();
+        Depcrate_errorerror_extensions_is_empty!();
+        Depcrate_errorimpl_41!();
+        Depcrate_errorimpl_42!();
+        Depcrate_errorimpl_43!();
+        Depcrate_errorimpl_44!();
+        Depcrate_errorimpl_45!();
+        Depcrate_errorimpl_46!();
+        Depcrate_errorPathSegment!();
+        Depcrate_errorServerResult!();
+        Depcrate_errorInputValueError!();
+        Depcrate_errorimpl_50!();
+        Depcrate_errorimpl_51!();
+        Depcrate_errorInputValueResult!();
+        Depcrate_errorError!();
+        Depcrate_errorimpl_54!();
+        Depcrate_errorimpl_55!();
+        Depcrate_errorimpl_56!();
+        Depcrate_errorimpl_57!();
+        Depcrate_errorimpl_58!();
+        Depcrate_errorimpl_59!();
+        Depcrate_errorResult!();
+        Depcrate_errorParseRequestError!();
+        Depcrate_errorimpl_62!();
+        Depcrate_errorimpl_63!();
+        Depcrate_errorErrorExtensions!();
+        Depcrate_errorimpl_65!();
+        Depcrate_errorimpl_66!();
+        Depcrate_errorResultExt!();
+        Depcrate_errorimpl_68!();
+    };
+}

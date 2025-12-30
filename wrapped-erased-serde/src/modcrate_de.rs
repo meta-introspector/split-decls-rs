@@ -1,0 +1,51 @@
+// Generated module macro for crate::de
+macro_rules! Modcrate_de {
+() => {
+        Depcrate_deuse_21!();
+        Depcrate_deuse_22!();
+        Depcrate_deuse_23!();
+        Depcrate_deuse_24!();
+        Depcrate_deuse_25!();
+        Depcrate_deuse_26!();
+        Depcrate_deuse_27!();
+        Depcrate_deuse_28!();
+        Depcrate_dedeserialize!();
+        Depcrate_deDeserializeSeed!();
+        Depcrate_deDeserializer!();
+        Depcrate_deVisitor!();
+        Depcrate_deSeqAccess!();
+        Depcrate_deMapAccess!();
+        Depcrate_deEnumAccess!();
+        Depcrate_deimpl_36!();
+        Depcrate_deOut!();
+        Depcrate_deimpl_38!();
+        Depcrate_deerase!();
+        Depcrate_deimpl_40!();
+        Depcrate_deimpl_41!();
+        Depcrate_deimpl_42!();
+        Depcrate_deimpl_43!();
+        Depcrate_deimpl_44!();
+        Depcrate_deimpl_45!();
+        Depcrate_deimpl_46!();
+        Depcrate_deimpl_47!();
+        Depcrate_deimpl_deserializer_for_trait_object!();
+        Depcrate_demacro_49!();
+        Depcrate_demacro_50!();
+        Depcrate_demacro_51!();
+        Depcrate_demacro_52!();
+        Depcrate_demacro_53!();
+        Depcrate_demacro_54!();
+        Depcrate_demacro_55!();
+        Depcrate_demacro_56!();
+        Depcrate_deimpl_57!();
+        Depcrate_deimpl_58!();
+        Depcrate_deimpl_59!();
+        Depcrate_deimpl_60!();
+        Depcrate_deVariant!();
+        Depcrate_deimpl_62!();
+        Depcrate_dederef_erased_deserializer!();
+        Depcrate_demacro_64!();
+        Depcrate_demacro_65!();
+        Depcrate_detests!();
+    };
+}

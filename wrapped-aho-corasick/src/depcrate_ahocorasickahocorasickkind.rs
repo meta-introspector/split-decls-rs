@@ -1,0 +1,9 @@
+// Generated macro for AhoCorasickKind (enum)
+macro_rules! Depcrate_ahocorasickAhoCorasickKind {
+() => {
+// Module: crate::ahocorasick
+// Provides: {"AhoCorasickKind"}
+// Dependencies: {}
+# [doc = " The type of Aho-Corasick implementation to use in an [`AhoCorasick`]"] # [doc = " searcher."] # [doc = ""] # [doc = " This is principally used as an input to the"] # [doc = " [`AhoCorasickBuilder::start_kind`] method. Its documentation goes into more"] # [doc = " detail about each choice."] # [non_exhaustive] # [derive (Clone , Copy , Debug , Eq , PartialEq)] pub enum AhoCorasickKind { # [doc = " Use a noncontiguous NFA."] NoncontiguousNFA , # [doc = " Use a contiguous NFA."] ContiguousNFA , # [doc = " Use a DFA. Warning: DFAs typically use a large amount of memory."] DFA , }
+};
+}

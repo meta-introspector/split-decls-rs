@@ -1,0 +1,9 @@
+// Generated macro for State (struct)
+macro_rules! Depcrate_rt_mpscState {
+() => {
+// Module: crate::rt::mpsc
+// Provides: {"State"}
+// Dependencies: {}
+# [derive (Debug)] pub (super) struct State { # [doc = " Count of messages in the channel."] msg_cnt : usize , # [doc = " Last access that was a send operation."] last_send_access : Option < Access > , # [doc = " Last access that was a receive operation."] last_recv_access : Option < Access > , # [doc = " A synchronization point for synchronizing the sending threads and the"] # [doc = " channel."] # [doc = ""] # [doc = " The `mpsc` channels have a guarantee that the messages will be received"] # [doc = " in the same order in which they were sent. Therefore, if thread `t1`"] # [doc = " managed to send `m1` before `t2` sent `m2`, the thread that received"] # [doc = " `m2` can be sure that `m1` was already sent and received. In other"] # [doc = " words, it is sound for the receiver of `m2` to know that `m1` happened"] # [doc = " before `m2`. That is why we have a single `sender_synchronize` for"] # [doc = " senders which we use to \"timestamp\" each message put in the channel."] # [doc = " However, in our example, the receiver of `m1` does not know whether `m2`"] # [doc = " was already sent or not and, therefore, by reading from the channel it"] # [doc = " should not learn any facts about `happens_before(send(m2), recv(m1))`."] # [doc = " That is why we cannot use single `Synchronize` for the entire channel"] # [doc = " and on the receiver side we need to use `Synchronize` per message."] sender_synchronize : Synchronize , # [doc = " A synchronization point per message synchronizing the receiving thread"] # [doc = " with the channel state at the point when the received message was sent."] receiver_synchronize : VecDeque < Synchronize > , created : Location , }
+};
+}

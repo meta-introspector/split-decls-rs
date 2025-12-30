@@ -1,0 +1,9 @@
+// Generated macro for impl_1248 (impl)
+macro_rules! Depcrate_iter_updateimpl_1248 {
+() => {
+// Module: crate::iter::update
+// Provides: {"impl_1248"}
+// Dependencies: {}
+impl < I , F > DoubleEndedIterator for UpdateSeq < I , F > where I : DoubleEndedIterator , F : Fn (& mut I :: Item) , { fn next_back (& mut self) -> Option < Self :: Item > { let mut v = self . base . next_back () ? ; (self . update_op) (& mut v) ; Some (v) } }
+};
+}

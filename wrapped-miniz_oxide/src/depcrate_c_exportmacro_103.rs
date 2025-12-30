@@ -1,0 +1,9 @@
+// Generated macro for macro_103 (macro)
+macro_rules! Depcrate_c_exportmacro_103 {
+() => {
+// Module: crate::c_export
+// Provides: {"macro_103"}
+// Dependencies: {}
+unmangle ! (# [doc = " Default allocation function using `malloc`."] pub unsafe extern "C" fn miniz_def_alloc_func (_opaque : * mut c_void , items : size_t , size : size_t ,) -> * mut c_void { libc :: malloc (items * size) } # [doc = " Default free function using `free`."] pub unsafe extern "C" fn miniz_def_free_func (_opaque : * mut c_void , address : * mut c_void) { libc :: free (address) } pub unsafe extern "C" fn miniz_def_realloc_func (_opaque : * mut c_void , address : * mut c_void , items : size_t , size : size_t ,) -> * mut c_void { libc :: realloc (address , items * size) } # [doc = " Calculate adler32 checksum of the provided buffer with the initial adler32 checksum of `adler`."] # [doc = " If c_ulong is wider than 32 bits, only the lower 32 bits will be used."] # [doc = ""] # [doc = " Returns MZ_ADLER32_INIT if ptr is `ptr::null`."] pub unsafe extern "C" fn mz_adler32 (adler : c_ulong , ptr : * const u8 , buf_len : usize) -> c_ulong { ptr . as_ref () . map_or (MZ_ADLER32_INIT as c_ulong , | r | { let data = slice :: from_raw_parts (r , buf_len) ; mz_adler32_oxide (adler as u32 , data) as c_ulong }) } # [doc = " Calculate crc-32 of the provided buffer with the initial CRC32 checksum of `crc`."] # [doc = " If c_ulong is wider than 32 bits, only the lower 32 bits will be used."] # [doc = ""] # [doc = " Returns MZ_CRC32_INIT if ptr is `ptr::null`."] pub unsafe extern "C" fn mz_crc32 (crc : c_ulong , ptr : * const u8 , buf_len : size_t) -> c_ulong { ptr . as_ref () . map_or (MZ_CRC32_INIT , | r | { let data = slice :: from_raw_parts (r , buf_len) ; mz_crc32_oxide (crc as u32 , data) as c_ulong }) }) ;
+};
+}

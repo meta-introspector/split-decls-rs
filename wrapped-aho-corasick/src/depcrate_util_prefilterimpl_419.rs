@@ -1,0 +1,26 @@
+// Generated macro for impl_419 (impl)
+macro_rules! Depcrate_util_prefilterimpl_419 {
+() => {
+// Module: crate::util::prefilter
+// Provides: {"impl_419"}
+// Dependencies: {}
+impl Builder { # [doc = " Create a new builder for constructing the best possible prefilter."] pub (crate) fn new (kind : MatchKind) -> Builder { let pbuilder = kind . as_packed () . map (| kind | packed :: Config :: new () . match_kind (kind) . builder ()) ; Builder { count : 0 , ascii_case_insensitive : false , start_bytes : StartBytesBuilder :: new () , rare_bytes : RareBytesBuilder :: new () , memmem : MemmemBuilder :: default () , packed : pbuilder , enabled : true , } } # [doc = " Enable ASCII case insensitivity. When set, byte strings added to this"] # [doc = " builder will be interpreted without respect to ASCII case."] pub (crate) fn ascii_case_insensitive (mut self , yes : bool) -> Builder { self . ascii_case_insensitive = yes ; self . start_bytes = self . start_bytes . ascii_case_insensitive (yes) ; self . rare_bytes = self . rare_bytes . ascii_case_insensitive (yes) ; self } # [doc = " Return a prefilter suitable for quickly finding potential matches."] # [doc = ""] # [doc = " All patterns added to an Aho-Corasick automaton should be added to this"] # [doc = " builder before attempting to construct the prefilter."] pub (crate) fn build (& self) -> Option < Prefilter > { if ! self . enabled { debug ! ("prefilter not enabled, skipping") ; return None ; } if ! self . ascii_case_insensitive { if let Some (pre) = self . memmem . build () { debug ! ("using memmem prefilter") ; return Some (pre) ; } } let (packed , patlen , minlen) = if self . ascii_case_insensitive { (None , usize :: MAX , 0) } else { let patlen = self . packed . as_ref () . map_or (usize :: MAX , | p | p . len ()) ; let minlen = self . packed . as_ref () . map_or (0 , | p | p . minimum_len ()) ; let packed = self . packed . as_ref () . and_then (| b | b . build ()) . map (| s | { let memory_usage = s . memory_usage () ; debug ! ("built packed prefilter (len: {}, \
+                         minimum pattern len: {}, memory usage: {}) \
+                         for consideration" , patlen , minlen , memory_usage ,) ; Prefilter { finder : Arc :: new (Packed (s)) , memory_usage } }) ; (packed , patlen , minlen) } ; match (self . start_bytes . build () , self . rare_bytes . build ()) { (prestart @ Some (_) , prerare @ Some (_)) => { debug ! ("both start (len={}, rank={}) and \
+                     rare (len={}, rank={}) byte prefilters \
+                     are available" , self . start_bytes . count , self . start_bytes . rank_sum , self . rare_bytes . count , self . rare_bytes . rank_sum ,) ; if patlen <= 16 && minlen >= 2 && self . start_bytes . count >= 3 && self . rare_bytes . count >= 3 { debug ! ("start and rare byte prefilters available, but \
+                             they're probably slower than packed so using \
+                             packed") ; return packed ; } let has_fewer_bytes = self . start_bytes . count < self . rare_bytes . count ; let has_rarer_bytes = self . start_bytes . rank_sum <= self . rare_bytes . rank_sum + 50 ; if has_fewer_bytes { debug ! ("using start byte prefilter because it has fewer
+                         bytes to search for than the rare byte prefilter" ,) ; prestart } else if has_rarer_bytes { debug ! ("using start byte prefilter because its byte \
+                         frequency rank was determined to be \
+                         \"good enough\" relative to the rare byte prefilter \
+                         byte frequency rank" ,) ; prestart } else { debug ! ("using rare byte prefilter") ; prerare } } (prestart @ Some (_) , None) => { if patlen <= 16 && minlen >= 2 && self . start_bytes . count >= 3 { debug ! ("start byte prefilter available, but \
+                         it's probably slower than packed so using \
+                         packed") ; return packed ; } debug ! ("have start byte prefilter but not rare byte prefilter, \
+                     so using start byte prefilter" ,) ; prestart } (None , prerare @ Some (_)) => { if patlen <= 16 && minlen >= 2 && self . rare_bytes . count >= 3 { debug ! ("rare byte prefilter available, but \
+                         it's probably slower than packed so using \
+                         packed") ; return packed ; } debug ! ("have rare byte prefilter but not start byte prefilter, \
+                     so using rare byte prefilter" ,) ; prerare } (None , None) if self . ascii_case_insensitive => { debug ! ("no start or rare byte prefilter and ASCII case \
+                     insensitivity was enabled, so skipping prefilter" ,) ; None } (None , None) => { if packed . is_some () { debug ! ("falling back to packed prefilter") ; } else { debug ! ("no prefilter available") ; } packed } } } # [doc = " Add a literal string to this prefilter builder."] pub (crate) fn add (& mut self , bytes : & [u8]) { if bytes . is_empty () { self . enabled = false ; } if ! self . enabled { return ; } self . count += 1 ; self . start_bytes . add (bytes) ; self . rare_bytes . add (bytes) ; self . memmem . add (bytes) ; if let Some (ref mut pbuilder) = self . packed { pbuilder . add (bytes) ; } } }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for adjust_rev_for_regional_indicator (function)
+macro_rules! Depcrate_unicode_graphemeadjust_rev_for_regional_indicator {
+() => {
+// Module: crate::unicode::grapheme
+// Provides: {"adjust_rev_for_regional_indicator"}
+// Dependencies: {}
+# [doc = " Return the correct offset for the next grapheme decoded at the end of the"] # [doc = " given byte string, where `i` is the initial guess. In particular,"] # [doc = " `&bs[i..]` represents the candidate grapheme."] # [doc = ""] # [doc = " `i` is returned by this function in all cases except when `&bs[i..]` is"] # [doc = " a pair of regional indicator codepoints. In that case, if an odd number of"] # [doc = " additional regional indicator codepoints precedes `i`, then `i` is"] # [doc = " adjusted such that it points to only a single regional indicator."] # [doc = ""] # [doc = " This \"fixing\" is necessary to handle the requirement that a break cannot"] # [doc = " occur between regional indicators where it would cause an odd number of"] # [doc = " regional indicators to exist before the break from the *start* of the"] # [doc = " string. A reverse regex cannot detect this case easily without look-around."] fn adjust_rev_for_regional_indicator (mut bs : & [u8] , i : usize) -> usize { if bs . len () - i != 8 { return i ; } let mut count = 0 ; while let Some (hm) = { let input = Input :: new (bs) . anchored (Anchored :: Yes) ; REGIONAL_INDICATOR_REV . try_search_rev (& input) . unwrap () } { bs = & bs [.. hm . offset ()] ; count += 1 ; } if count % 2 == 0 { i } else { i + 4 } }
+};
+}

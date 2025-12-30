@@ -1,0 +1,46 @@
+// Generated module macro for crate::function
+macro_rules! Modcrate_function {
+() => {
+        Depcrate_functionuse_154!();
+        Depcrate_functionuse_155!();
+        Depcrate_functionuse_156!();
+        Depcrate_functionuse_157!();
+        Depcrate_functionuse_158!();
+        Depcrate_functionuse_159!();
+        Depcrate_functionuse_160!();
+        Depcrate_functionuse_161!();
+        Depcrate_functionuse_162!();
+        Depcrate_functionuse_163!();
+        Depcrate_functionuse_164!();
+        Depcrate_functionuse_165!();
+        Depcrate_functionuse_166!();
+        Depcrate_functionuse_167!();
+        Depcrate_functionuse_168!();
+        Depcrate_functionuse_169!();
+        Depcrate_functionuse_170!();
+        Depcrate_functionuse_171!();
+        Depcrate_functionuse_172!();
+        Depcrate_functionuse_173!();
+        Depcrate_functionuse_174!();
+        Depcrate_functionuse_175!();
+        Depcrate_functionaccumulated!();
+        Depcrate_functionbackdate!();
+        Depcrate_functiondelete!();
+        Depcrate_functiondiff_outputs!();
+        Depcrate_functionexecute!();
+        Depcrate_functionfetch!();
+        Depcrate_functioninputs!();
+        Depcrate_functionlru!();
+        Depcrate_functionmaybe_changed_after!();
+        Depcrate_functionmemo!();
+        Depcrate_functionspecify!();
+        Depcrate_functionsync!();
+        Depcrate_functionMemo!();
+        Depcrate_functionConfiguration!();
+        Depcrate_functionIngredientImpl!();
+        Depcrate_functionimpl_194!();
+        Depcrate_functionimpl_195!();
+        Depcrate_functionimpl_196!();
+        Depcrate_functionpersistence!();
+    };
+}

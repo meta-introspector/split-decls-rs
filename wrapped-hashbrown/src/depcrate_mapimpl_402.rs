@@ -1,0 +1,9 @@
+// Generated macro for impl_402 (impl)
+macro_rules! Depcrate_mapimpl_402 {
+() => {
+// Module: crate::map
+// Provides: {"impl_402"}
+// Dependencies: {}
+impl < K , V , S , A > FromIterator < (K , V) > for HashMap < K , V , S , A > where K : Eq + Hash , S : BuildHasher + Default , A : Default + Allocator , { # [cfg_attr (feature = "inline-more" , inline)] fn from_iter < T : IntoIterator < Item = (K , V) > > (iter : T) -> Self { let iter = iter . into_iter () ; let mut map = Self :: with_capacity_and_hasher_in (iter . size_hint () . 0 , S :: default () , A :: default ()) ; iter . for_each (| (k , v) | { map . insert (k , v) ; }) ; map } }
+};
+}

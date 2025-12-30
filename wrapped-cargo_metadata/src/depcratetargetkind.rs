@@ -1,0 +1,9 @@
+// Generated macro for TargetKind (enum)
+macro_rules! DepcrateTargetKind {
+() => {
+// Module: crate
+// Provides: {"TargetKind"}
+// Dependencies: {}
+# [doc = " Kind of target."] # [doc = ""] # [doc = " The possible values are `example`, `test`, `bench`, `custom-build` and"] # [doc = " [Cargo crate types](https://doc.rust-lang.org/cargo/reference/cargo-targets.html#the-crate-type-field):"] # [doc = " `bin`, `lib`, `rlib`, `dylib`, `cdylib`, `staticlib`, `proc-macro`."] # [doc = ""] # [doc = " Other possible values may be added in the future."] # [derive (Clone , Serialize , Deserialize , Debug , PartialEq , Eq , Hash , PartialOrd , Ord)] # [non_exhaustive] pub enum TargetKind { # [doc = " `cargo bench` target"] # [serde (rename = "bench")] Bench , # [doc = " Binary executable target"] # [serde (rename = "bin")] Bin , # [doc = " Custom build target"] # [serde (rename = "custom-build")] CustomBuild , # [doc = " Dynamic system library target"] # [serde (rename = "cdylib")] CDyLib , # [doc = " Dynamic Rust library target"] # [serde (rename = "dylib")] DyLib , # [doc = " Example target"] # [serde (rename = "example")] Example , # [doc = " Rust library"] # [serde (rename = "lib")] Lib , # [doc = " Procedural Macro"] # [serde (rename = "proc-macro")] ProcMacro , # [doc = " Rust library for use as an intermediate artifact"] # [serde (rename = "rlib")] RLib , # [doc = " Static system library"] # [serde (rename = "staticlib")] StaticLib , # [doc = " Test target"] # [serde (rename = "test")] Test , # [doc = " Unknown type"] # [serde (untagged)] Unknown (String) , }
+};
+}

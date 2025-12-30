@@ -1,0 +1,39 @@
+// Generated module macro for crate::plot::gnuplot_backend
+macro_rules! Modcrate_plot_gnuplot_backend {
+() => {
+        Depcrate_plot_gnuplot_backenduse_267!();
+        Depcrate_plot_gnuplot_backenduse_268!();
+        Depcrate_plot_gnuplot_backenduse_269!();
+        Depcrate_plot_gnuplot_backenduse_270!();
+        Depcrate_plot_gnuplot_backenduse_271!();
+        Depcrate_plot_gnuplot_backenddistributions!();
+        Depcrate_plot_gnuplot_backenditeration_times!();
+        Depcrate_plot_gnuplot_backendpdf!();
+        Depcrate_plot_gnuplot_backendregression!();
+        Depcrate_plot_gnuplot_backendsummary!();
+        Depcrate_plot_gnuplot_backendt_test!();
+        Depcrate_plot_gnuplot_backenduse_339!();
+        Depcrate_plot_gnuplot_backenduse_340!();
+        Depcrate_plot_gnuplot_backenduse_341!();
+        Depcrate_plot_gnuplot_backenduse_342!();
+        Depcrate_plot_gnuplot_backenduse_343!();
+        Depcrate_plot_gnuplot_backenduse_344!();
+        Depcrate_plot_gnuplot_backenduse_345!();
+        Depcrate_plot_gnuplot_backenduse_346!();
+        Depcrate_plot_gnuplot_backenduse_347!();
+        Depcrate_plot_gnuplot_backenduse_348!();
+        Depcrate_plot_gnuplot_backenduse_349!();
+        Depcrate_plot_gnuplot_backendgnuplot_escape!();
+        Depcrate_plot_gnuplot_backendDEFAULT_FONT!();
+        Depcrate_plot_gnuplot_backendKDE_POINTS!();
+        Depcrate_plot_gnuplot_backendSIZE!();
+        Depcrate_plot_gnuplot_backendLINEWIDTH!();
+        Depcrate_plot_gnuplot_backendPOINT_SIZE!();
+        Depcrate_plot_gnuplot_backendDARK_BLUE!();
+        Depcrate_plot_gnuplot_backendDARK_ORANGE!();
+        Depcrate_plot_gnuplot_backendDARK_RED!();
+        Depcrate_plot_gnuplot_backenddebug_script!();
+        Depcrate_plot_gnuplot_backendGnuplot!();
+        Depcrate_plot_gnuplot_backendimpl_361!();
+    };
+}

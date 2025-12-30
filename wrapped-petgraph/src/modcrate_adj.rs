@@ -1,0 +1,55 @@
+// Generated module macro for crate::adj
+macro_rules! Modcrate_adj {
+() => {
+        Depcrate_adjuse_323!();
+        Depcrate_adjuse_324!();
+        Depcrate_adjuse_325!();
+        Depcrate_adjuse_326!();
+        Depcrate_adjuse_327!();
+        Depcrate_adjuse_328!();
+        Depcrate_adjuse_329!();
+        Depcrate_adjNodeIndex!();
+        Depcrate_adjEdgeIndex!();
+        Depcrate_adjmacro_332!();
+        Depcrate_adjWSuc!();
+        Depcrate_adjRow!();
+        Depcrate_adjRowIter!();
+        Depcrate_adjmacro_336!();
+        Depcrate_adjEdgeReference!();
+        Depcrate_adjimpl_338!();
+        Depcrate_adjimpl_339!();
+        Depcrate_adjimpl_340!();
+        Depcrate_adjEdgeIndices!();
+        Depcrate_adjimpl_342!();
+        Depcrate_adjmacro_343!();
+        Depcrate_adjList!();
+        Depcrate_adjimpl_345!();
+        Depcrate_adjUnweightedList!();
+        Depcrate_adjimpl_347!();
+        Depcrate_adjimpl_348!();
+        Depcrate_adjimpl_349!();
+        Depcrate_adjimpl_350!();
+        Depcrate_adjimpl_351!();
+        Depcrate_adjimpl_352!();
+        Depcrate_adjimpl_353!();
+        Depcrate_adjimpl_354!();
+        Depcrate_adjimpl_355!();
+        Depcrate_adjimpl_356!();
+        Depcrate_adjSomeIter!();
+        Depcrate_adjmacro_358!();
+        Depcrate_adjimpl_359!();
+        Depcrate_adjproj1!();
+        Depcrate_adjproj2!();
+        Depcrate_adjimpl_362!();
+        Depcrate_adjmacro_363!();
+        Depcrate_adjimpl_364!();
+        Depcrate_adjimpl_365!();
+        Depcrate_adjimpl_366!();
+        Depcrate_adjimpl_367!();
+        Depcrate_adjimpl_368!();
+        Depcrate_adjimpl_369!();
+        Depcrate_adjimpl_370!();
+        Depcrate_adjimpl_371!();
+        Depcrate_adjimpl_372!();
+    };
+}

@@ -1,0 +1,54 @@
+// Generated module macro for crate::net::send_recv::msg
+macro_rules! Modcrate_net_send_recv_msg {
+() => {
+        Depcrate_net_send_recv_msguse_870!();
+        Depcrate_net_send_recv_msguse_871!();
+        Depcrate_net_send_recv_msguse_872!();
+        Depcrate_net_send_recv_msguse_873!();
+        Depcrate_net_send_recv_msguse_874!();
+        Depcrate_net_send_recv_msguse_875!();
+        Depcrate_net_send_recv_msguse_876!();
+        Depcrate_net_send_recv_msguse_877!();
+        Depcrate_net_send_recv_msguse_878!();
+        Depcrate_net_send_recv_msguse_879!();
+        Depcrate_net_send_recv_msguse_880!();
+        Depcrate_net_send_recv_msguse_881!();
+        Depcrate_net_send_recv_msgcmsg_space!();
+        Depcrate_net_send_recv_msgcmsg_aligned_space!();
+        Depcrate_net_send_recv_msg__cmsg_space!();
+        Depcrate_net_send_recv_msg__cmsg_aligned_space!();
+        Depcrate_net_send_recv_msgSendAncillaryMessage!();
+        Depcrate_net_send_recv_msgimpl_887!();
+        Depcrate_net_send_recv_msgRecvAncillaryMessage!();
+        Depcrate_net_send_recv_msgSendAncillaryBuffer!();
+        Depcrate_net_send_recv_msgimpl_890!();
+        Depcrate_net_send_recv_msgimpl_891!();
+        Depcrate_net_send_recv_msgimpl_892!();
+        Depcrate_net_send_recv_msgimpl_893!();
+        Depcrate_net_send_recv_msgRecvAncillaryBuffer!();
+        Depcrate_net_send_recv_msgimpl_895!();
+        Depcrate_net_send_recv_msgimpl_896!();
+        Depcrate_net_send_recv_msgimpl_897!();
+        Depcrate_net_send_recv_msgalign_for_cmsghdr!();
+        Depcrate_net_send_recv_msgAncillaryDrain!();
+        Depcrate_net_send_recv_msgimpl_900!();
+        Depcrate_net_send_recv_msgimpl_901!();
+        Depcrate_net_send_recv_msgimpl_902!();
+        Depcrate_net_send_recv_msgMMsgHdr!();
+        Depcrate_net_send_recv_msgimpl_904!();
+        Depcrate_net_send_recv_msgsendmsg!();
+        Depcrate_net_send_recv_msgsendmsg_addr!();
+        Depcrate_net_send_recv_msgsendmmsg!();
+        Depcrate_net_send_recv_msgrecvmsg!();
+        Depcrate_net_send_recv_msgRecvMsg!();
+        Depcrate_net_send_recv_msgAncillaryIter!();
+        Depcrate_net_send_recv_msgimpl_911!();
+        Depcrate_net_send_recv_msgimpl_912!();
+        Depcrate_net_send_recv_msgimpl_913!();
+        Depcrate_net_send_recv_msgimpl_914!();
+        Depcrate_net_send_recv_msgimpl_915!();
+        Depcrate_net_send_recv_msgimpl_916!();
+        Depcrate_net_send_recv_msgmessages!();
+        Depcrate_net_send_recv_msgtests!();
+    };
+}

@@ -1,0 +1,9 @@
+// Generated macro for task_local (macro)
+macro_rules! Depcrate_macrostask_local {
+() => {
+// Module: crate::macros
+// Provides: {"task_local"}
+// Dependencies: {}
+# [doc = " Declares task-local values."] # [doc = ""] # [doc = " The macro wraps any number of static declarations and makes them task-local. Attributes and"] # [doc = " visibility modifiers are allowed."] # [doc = ""] # [doc = " Each declared value is of the accessor type [`LocalKey`]."] # [doc = ""] # [doc = " [`LocalKey`]: task/struct.LocalKey.html"] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " #"] # [doc = " use std::cell::Cell;"] # [doc = ""] # [doc = " use async_std::prelude::*;"] # [doc = " use async_std::task;"] # [doc = ""] # [doc = " task_local! {"] # [doc = "     static VAL: Cell<u32> = Cell::new(5);"] # [doc = " }"] # [doc = ""] # [doc = " task::block_on(async {"] # [doc = "     let v = VAL.with(|c| c.get());"] # [doc = "     assert_eq!(v, 5);"] # [doc = " });"] # [doc = " ```"] # [cfg (feature = "default")] # [macro_export] macro_rules ! task_local { () => () ; ($ (# [$ attr : meta]) * $ vis : vis static $ name : ident : $ t : ty = $ init : expr) => ($ (# [$ attr]) * $ vis static $ name : $ crate :: task :: LocalKey <$ t > = { # [inline] fn __init () -> $ t { $ init } $ crate :: task :: LocalKey { __init , __key : :: std :: sync :: atomic :: AtomicU32 :: new (0) , } } ;) ; ($ (# [$ attr : meta]) * $ vis : vis static $ name : ident : $ t : ty = $ init : expr ; $ ($ rest : tt) *) => ($ crate :: task_local ! ($ (# [$ attr]) * $ vis static $ name : $ t = $ init) ; $ crate :: task_local ! ($ ($ rest) *) ;) ; }
+};
+}

@@ -1,0 +1,50 @@
+// Generated module macro for crate::global_rng
+macro_rules! Modcrate_global_rng {
+() => {
+        Depcrate_global_rnguse_7!();
+        Depcrate_global_rnguse_8!();
+        Depcrate_global_rnguse_9!();
+        Depcrate_global_rnguse_10!();
+        Depcrate_global_rngDEFAULT_RNG_SEED!();
+        Depcrate_global_rngimpl_12!();
+        Depcrate_global_rngimpl_13!();
+        Depcrate_global_rngmacro_14!();
+        Depcrate_global_rngwith_rng!();
+        Depcrate_global_rngtry_with_rng!();
+        Depcrate_global_rngRestoreOnDrop!();
+        Depcrate_global_rngimpl_18!();
+        Depcrate_global_rngseed!();
+        Depcrate_global_rngget_seed!();
+        Depcrate_global_rngbool!();
+        Depcrate_global_rngalphabetic!();
+        Depcrate_global_rngalphanumeric!();
+        Depcrate_global_rnglowercase!();
+        Depcrate_global_rnguppercase!();
+        Depcrate_global_rngchoice!();
+        Depcrate_global_rngdigit!();
+        Depcrate_global_rngshuffle!();
+        Depcrate_global_rngfill!();
+        Depcrate_global_rnginteger!();
+        Depcrate_global_rngmacro_31!();
+        Depcrate_global_rngmacro_32!();
+        Depcrate_global_rngmacro_33!();
+        Depcrate_global_rngmacro_34!();
+        Depcrate_global_rngmacro_35!();
+        Depcrate_global_rngmacro_36!();
+        Depcrate_global_rngmacro_37!();
+        Depcrate_global_rngmacro_38!();
+        Depcrate_global_rngmacro_39!();
+        Depcrate_global_rngmacro_40!();
+        Depcrate_global_rngmacro_41!();
+        Depcrate_global_rngmacro_42!();
+        Depcrate_global_rngmacro_43!();
+        Depcrate_global_rngf32!();
+        Depcrate_global_rngf32_inclusive!();
+        Depcrate_global_rngf64!();
+        Depcrate_global_rngf64_inclusive!();
+        Depcrate_global_rngchoose_multiple!();
+        Depcrate_global_rngrandom_seed!();
+        Depcrate_global_rngrandom_seed!();
+        Depcrate_global_rngrandom_seed!();
+    };
+}

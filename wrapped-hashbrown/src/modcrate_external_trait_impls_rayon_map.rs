@@ -1,0 +1,48 @@
+// Generated module macro for crate::external_trait_impls::rayon::map
+macro_rules! Modcrate_external_trait_impls_rayon_map {
+() => {
+        Depcrate_external_trait_impls_rayon_mapuse_155!();
+        Depcrate_external_trait_impls_rayon_mapuse_156!();
+        Depcrate_external_trait_impls_rayon_mapuse_157!();
+        Depcrate_external_trait_impls_rayon_mapuse_158!();
+        Depcrate_external_trait_impls_rayon_mapuse_159!();
+        Depcrate_external_trait_impls_rayon_mapuse_160!();
+        Depcrate_external_trait_impls_rayon_mapuse_161!();
+        Depcrate_external_trait_impls_rayon_mapuse_162!();
+        Depcrate_external_trait_impls_rayon_mapParIter!();
+        Depcrate_external_trait_impls_rayon_mapimpl_164!();
+        Depcrate_external_trait_impls_rayon_mapimpl_165!();
+        Depcrate_external_trait_impls_rayon_mapimpl_166!();
+        Depcrate_external_trait_impls_rayon_mapParKeys!();
+        Depcrate_external_trait_impls_rayon_mapimpl_168!();
+        Depcrate_external_trait_impls_rayon_mapimpl_169!();
+        Depcrate_external_trait_impls_rayon_mapimpl_170!();
+        Depcrate_external_trait_impls_rayon_mapParValues!();
+        Depcrate_external_trait_impls_rayon_mapimpl_172!();
+        Depcrate_external_trait_impls_rayon_mapimpl_173!();
+        Depcrate_external_trait_impls_rayon_mapimpl_174!();
+        Depcrate_external_trait_impls_rayon_mapParIterMut!();
+        Depcrate_external_trait_impls_rayon_mapimpl_176!();
+        Depcrate_external_trait_impls_rayon_mapimpl_177!();
+        Depcrate_external_trait_impls_rayon_mapParValuesMut!();
+        Depcrate_external_trait_impls_rayon_mapimpl_179!();
+        Depcrate_external_trait_impls_rayon_mapimpl_180!();
+        Depcrate_external_trait_impls_rayon_mapIntoParIter!();
+        Depcrate_external_trait_impls_rayon_mapimpl_182!();
+        Depcrate_external_trait_impls_rayon_mapimpl_183!();
+        Depcrate_external_trait_impls_rayon_mapParDrain!();
+        Depcrate_external_trait_impls_rayon_mapimpl_185!();
+        Depcrate_external_trait_impls_rayon_mapimpl_186!();
+        Depcrate_external_trait_impls_rayon_mapimpl_187!();
+        Depcrate_external_trait_impls_rayon_mapimpl_188!();
+        Depcrate_external_trait_impls_rayon_mapimpl_189!();
+        Depcrate_external_trait_impls_rayon_mapimpl_190!();
+        Depcrate_external_trait_impls_rayon_mapimpl_191!();
+        Depcrate_external_trait_impls_rayon_mapimpl_192!();
+        Depcrate_external_trait_impls_rayon_mapimpl_193!();
+        Depcrate_external_trait_impls_rayon_mapimpl_194!();
+        Depcrate_external_trait_impls_rayon_mapimpl_195!();
+        Depcrate_external_trait_impls_rayon_mapextend!();
+        Depcrate_external_trait_impls_rayon_maptest_par_map!();
+    };
+}

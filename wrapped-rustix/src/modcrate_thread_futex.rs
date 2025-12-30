@@ -1,0 +1,43 @@
+// Generated module macro for crate::thread::futex
+macro_rules! Modcrate_thread_futex {
+() => {
+        Depcrate_thread_futexuse_1765!();
+        Depcrate_thread_futexuse_1766!();
+        Depcrate_thread_futexuse_1767!();
+        Depcrate_thread_futexuse_1768!();
+        Depcrate_thread_futexuse_1769!();
+        Depcrate_thread_futexuse_1770!();
+        Depcrate_thread_futexuse_1771!();
+        Depcrate_thread_futexuse_1772!();
+        Depcrate_thread_futexuse_1773!();
+        Depcrate_thread_futexuse_1774!();
+        Depcrate_thread_futexuse_1775!();
+        Depcrate_thread_futexwait!();
+        Depcrate_thread_futexwake!();
+        Depcrate_thread_futexfd!();
+        Depcrate_thread_futexrequeue!();
+        Depcrate_thread_futexcmp_requeue!();
+        Depcrate_thread_futexWakeOp!();
+        Depcrate_thread_futexWakeOpCmp!();
+        Depcrate_thread_futexwake_op!();
+        Depcrate_thread_futexlock_pi!();
+        Depcrate_thread_futexunlock_pi!();
+        Depcrate_thread_futextrylock_pi!();
+        Depcrate_thread_futexwait_bitset!();
+        Depcrate_thread_futexwake_bitset!();
+        Depcrate_thread_futexwait_requeue_pi!();
+        Depcrate_thread_futexcmp_requeue_pi!();
+        Depcrate_thread_futexlock_pi2!();
+        Depcrate_thread_futexWaitPtr!();
+        Depcrate_thread_futeximpl_1793!();
+        Depcrate_thread_futeximpl_1794!();
+        Depcrate_thread_futeximpl_1795!();
+        Depcrate_thread_futeximpl_1796!();
+        Depcrate_thread_futexWait!();
+        Depcrate_thread_futeximpl_1798!();
+        Depcrate_thread_futeximpl_1799!();
+        Depcrate_thread_futexwaitv!();
+        Depcrate_thread_futexmacro_1801!();
+        Depcrate_thread_futextests!();
+    };
+}

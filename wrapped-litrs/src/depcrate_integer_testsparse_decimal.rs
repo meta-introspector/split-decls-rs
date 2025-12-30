@@ -1,0 +1,9 @@
+// Generated macro for parse_decimal (function)
+macro_rules! Depcrate_integer_testsparse_decimal {
+() => {
+// Module: crate::integer::tests
+// Provides: {"parse_decimal"}
+// Dependencies: {}
+# [test] fn parse_decimal () { check ("0" , 0u128 , Decimal , "0" , None) ; check ("1" , 1u8 , Decimal , "1" , None) ; check ("8" , 8u16 , Decimal , "8" , None) ; check ("9" , 9u32 , Decimal , "9" , None) ; check ("10" , 10u64 , Decimal , "10" , None) ; check ("11" , 11i8 , Decimal , "11" , None) ; check ("123456789" , 123456789i128 , Decimal , "123456789" , None) ; check ("05" , 5i16 , Decimal , "05" , None) ; check ("00005" , 5i32 , Decimal , "00005" , None) ; check ("0123456789" , 123456789i64 , Decimal , "0123456789" , None) ; check ("123_456_789" , 123_456_789 , Decimal , "123_456_789" , None) ; check ("0___4" , 4 , Decimal , "0___4" , None) ; check ("0___4_3" , 43 , Decimal , "0___4_3" , None) ; check ("0___4_3" , 43 , Decimal , "0___4_3" , None) ; check ("123___________" , 123 , Decimal , "123___________" , None) ; check ("340282366920938463463374607431768211455" , 340282366920938463463374607431768211455u128 , Decimal , "340282366920938463463374607431768211455" , None ,) ; check ("340_282_366_920_938_463_463_374_607_431_768_211_455" , 340282366920938463463374607431768211455u128 , Decimal , "340_282_366_920_938_463_463_374_607_431_768_211_455" , None ,) ; check ("3_40_282_3669_20938_463463_3746074_31768211_455___" , 340282366920938463463374607431768211455u128 , Decimal , "3_40_282_3669_20938_463463_3746074_31768211_455___" , None ,) ; }
+};
+}

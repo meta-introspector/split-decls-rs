@@ -1,0 +1,50 @@
+// Generated module macro for crate
+macro_rules! Modcrate {
+() => {
+        Depcrateother_1!();
+        Depcrateother_2!();
+        Depcrateother_3!();
+        Depcratestatic_assertions!();
+        Depcratebuffer!();
+        Depcratecstr!();
+        Depcrateutils!();
+        Depcratemaybe_polyfill!();
+        Depcratecheck_types!();
+        Depcratebitcast!();
+        Depcrateweak!();
+        Depcratebackend!();
+        Depcratefd!();
+        Depcrateevent!();
+        Depcrateffi!();
+        Depcratefs!();
+        Depcrateio!();
+        Depcrateio_uring!();
+        Depcrateioctl!();
+        Depcratemm!();
+        Depcratemount!();
+        Depcratenet!();
+        Depcrateparam!();
+        Depcratepath!();
+        Depcratepipe!();
+        Depcrateprocess!();
+        Depcratepty!();
+        Depcraterand!();
+        Depcrateshm!();
+        Depcratestdio!();
+        Depcratesystem!();
+        Depcratetermios!();
+        Depcratethread!();
+        Depcratetime!();
+        Depcrateruntime!();
+        Depcratefs!();
+        Depcratepath!();
+        Depcrateclockid!();
+        Depcratekernel_sigset!();
+        Depcratepid!();
+        Depcrateprctl!();
+        Depcratesignal!();
+        Depcratetimespec!();
+        Depcrateugid!();
+        Depcratenot_implemented!();
+    };
+}

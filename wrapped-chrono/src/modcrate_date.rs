@@ -1,0 +1,39 @@
+// Generated module macro for crate::date
+macro_rules! Modcrate_date {
+() => {
+        Depcrate_dateuse_46!();
+        Depcrate_dateuse_47!();
+        Depcrate_dateuse_48!();
+        Depcrate_dateuse_49!();
+        Depcrate_dateuse_50!();
+        Depcrate_dateuse_51!();
+        Depcrate_dateuse_52!();
+        Depcrate_dateuse_53!();
+        Depcrate_dateuse_54!();
+        Depcrate_dateuse_55!();
+        Depcrate_dateDate!();
+        Depcrate_dateMIN_DATE!();
+        Depcrate_dateMAX_DATE!();
+        Depcrate_dateimpl_59!();
+        Depcrate_datemap_local!();
+        Depcrate_dateimpl_61!();
+        Depcrate_dateimpl_62!();
+        Depcrate_dateimpl_63!();
+        Depcrate_dateimpl_64!();
+        Depcrate_dateimpl_65!();
+        Depcrate_dateimpl_66!();
+        Depcrate_dateimpl_67!();
+        Depcrate_dateimpl_68!();
+        Depcrate_dateimpl_69!();
+        Depcrate_dateimpl_70!();
+        Depcrate_dateimpl_71!();
+        Depcrate_dateimpl_72!();
+        Depcrate_dateimpl_73!();
+        Depcrate_dateimpl_74!();
+        Depcrate_dateimpl_75!();
+        Depcrate_dateimpl_76!();
+        Depcrate_dateimpl_77!();
+        Depcrate_dateimpl_78!();
+        Depcrate_datetests!();
+    };
+}

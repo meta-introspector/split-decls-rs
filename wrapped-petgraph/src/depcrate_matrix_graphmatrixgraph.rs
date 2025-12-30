@@ -1,0 +1,9 @@
+// Generated macro for MatrixGraph (struct)
+macro_rules! Depcrate_matrix_graphMatrixGraph {
+() => {
+// Module: crate::matrix_graph
+// Provides: {"MatrixGraph"}
+// Dependencies: {}
+# [doc = " `MatrixGraph<N, E, Ty, Null>` is a graph datastructure using an adjacency matrix"] # [doc = " representation."] # [doc = ""] # [doc = " `MatrixGraph` is parameterized over:"] # [doc = ""] # [doc = " - Associated data `N` for nodes and `E` for edges, called *weights*."] # [doc = "   The associated data can be of arbitrary type."] # [doc = " - Edge type `Ty` that determines whether the graph edges are directed or undirected."] # [doc = " - Nullable type `Null`, which denotes the edges' presence (defaults to `Option<E>`). You may"] # [doc = "   specify [`NotZero<E>`](struct.NotZero.html) if you want to use a sentinel value (such as 0)"] # [doc = "   to mark the absence of an edge."] # [doc = " - Index type `Ix` that sets the maximum size for the graph (defaults to `DefaultIx`)."] # [doc = ""] # [doc = " The graph uses **O(|V^2|)** space, with fast edge insertion & amortized node insertion, as well"] # [doc = " as efficient graph search and graph algorithms on dense graphs."] # [doc = ""] # [doc = " This graph is backed by a flattened 2D array. For undirected graphs, only the lower triangular"] # [doc = " matrix is stored. Since the backing array stores edge weights, it is recommended to box large"] # [doc = " edge weights."] # [derive (Clone)] pub struct MatrixGraph < N , E , # [cfg (not (feature = "std"))] S , # [cfg (feature = "std")] S = RandomState , Ty = Directed , Null : Nullable < Wrapped = E > = Option < E > , Ix = DefaultIx , > { node_adjacencies : Vec < Null > , node_capacity : usize , nodes : IdStorage < N , S > , nb_edges : usize , ty : PhantomData < Ty > , ix : PhantomData < Ix > , }
+};
+}

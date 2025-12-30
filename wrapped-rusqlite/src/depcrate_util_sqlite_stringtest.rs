@@ -1,0 +1,9 @@
+// Generated macro for test (module)
+macro_rules! Depcrate_util_sqlite_stringtest {
+() => {
+// Module: crate::util::sqlite_string
+// Provides: {"test"}
+// Dependencies: {}
+# [cfg (test)] mod test { use super :: * ; # [test] fn test_from_str () { let to_check = [("" , "") , ("\0" , "␀") , ("␀" , "␀") , ("\0bar" , "␀bar") , ("foo\0bar" , "foo␀bar") , ("foo\0" , "foo␀") , ("a\0b\0c\0\0d" , "a␀b␀c␀␀d") , ("foobar0123" , "foobar0123") ,] ; for & (input , output) in & to_check { let s = SqliteMallocString :: from_str (input) ; assert_eq ! (s . to_string_lossy () , output) ; assert_eq ! (s . as_cstr () . to_str () . unwrap () , output) ; } } # [test] fn test_lossy () { let p = SqliteMallocString :: from_str ("abcd") . into_raw () ; let s = unsafe { p . cast :: < u8 > () . write (b'\xff') ; SqliteMallocString :: from_raw (p) . unwrap () } ; assert_eq ! (s . to_string_lossy () . as_ref () , "\u{FFFD}bcd") ; } # [test] fn test_into_raw () { let mut v = vec ! [] ; for i in 0 .. 1000 { v . push (SqliteMallocString :: from_str (& i . to_string ()) . into_raw ()) ; v . push (SqliteMallocString :: from_str (& format ! ("abc {i} 😀")) . into_raw ()) ; } unsafe { for (i , s) in v . chunks_mut (2) . enumerate () { let s0 = std :: mem :: replace (& mut s [0] , std :: ptr :: null_mut ()) ; let s1 = std :: mem :: replace (& mut s [1] , std :: ptr :: null_mut ()) ; assert_eq ! (std :: ffi :: CStr :: from_ptr (s0) . to_str () . unwrap () , & i . to_string ()) ; assert_eq ! (std :: ffi :: CStr :: from_ptr (s1) . to_str () . unwrap () , & format ! ("abc {i} 😀")) ; let _ = SqliteMallocString :: from_raw (s0) . unwrap () ; let _ = SqliteMallocString :: from_raw (s1) . unwrap () ; } } } # [test] fn test_alloc () { let err = alloc ("error") ; unsafe { ffi :: sqlite3_free (err . cast ()) } ; } }
+};
+}

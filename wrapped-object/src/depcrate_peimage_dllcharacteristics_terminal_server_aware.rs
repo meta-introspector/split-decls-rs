@@ -1,0 +1,9 @@
+// Generated macro for IMAGE_DLLCHARACTERISTICS_TERMINAL_SERVER_AWARE (const)
+macro_rules! Depcrate_peIMAGE_DLLCHARACTERISTICS_TERMINAL_SERVER_AWARE {
+() => {
+// Module: crate::pe
+// Provides: {"IMAGE_DLLCHARACTERISTICS_TERMINAL_SERVER_AWARE"}
+// Dependencies: {}
+pub const IMAGE_DLLCHARACTERISTICS_TERMINAL_SERVER_AWARE : u16 = 0x8000 ;
+};
+}

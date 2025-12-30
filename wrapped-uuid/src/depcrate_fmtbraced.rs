@@ -1,0 +1,9 @@
+// Generated macro for Braced (struct)
+macro_rules! Depcrate_fmtBraced {
+() => {
+// Module: crate::fmt
+// Provides: {"Braced"}
+// Dependencies: {}
+# [doc = " Format a [`Uuid`] as a braced hyphenated string, like"] # [doc = " `{67e55044-10b1-426f-9247-bb680e5fe0c8}`."] # [derive (Clone , Copy , Debug , Default , Eq , Hash , Ord , PartialEq , PartialOrd)] # [cfg_attr (all (uuid_unstable , feature = "zerocopy") , derive (zerocopy :: IntoBytes , zerocopy :: FromBytes , zerocopy :: KnownLayout , zerocopy :: Immutable , zerocopy :: Unaligned))] # [repr (transparent)] pub struct Braced (Uuid) ;
+};
+}

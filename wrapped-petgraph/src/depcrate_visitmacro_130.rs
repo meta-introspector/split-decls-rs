@@ -1,0 +1,9 @@
+// Generated macro for macro_130 (macro)
+macro_rules! Depcrate_visitmacro_130 {
+() => {
+// Module: crate::visit
+// Provides: {"macro_130"}
+// Dependencies: {}
+trait_template ! { # [doc = " A graph with a known edge count."] # [allow (clippy :: needless_arbitrary_self_type)] pub trait EdgeCount : GraphBase { @ section self # [doc = " Return the number of edges in the graph."] fn edge_count (self : & Self) -> usize ; } }
+};
+}

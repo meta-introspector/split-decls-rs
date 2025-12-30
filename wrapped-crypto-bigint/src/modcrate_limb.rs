@@ -1,0 +1,49 @@
+// Generated module macro for crate::limb
+macro_rules! Modcrate_limb {
+() => {
+        Depcrate_limbadd!();
+        Depcrate_limbbit_and!();
+        Depcrate_limbbit_not!();
+        Depcrate_limbbit_or!();
+        Depcrate_limbbit_xor!();
+        Depcrate_limbbits!();
+        Depcrate_limbcmp!();
+        Depcrate_limbencoding!();
+        Depcrate_limbfrom!();
+        Depcrate_limbmul!();
+        Depcrate_limbneg!();
+        Depcrate_limbshl!();
+        Depcrate_limbshr!();
+        Depcrate_limbsub!();
+        Depcrate_limbrand!();
+        Depcrate_limbuse_179!();
+        Depcrate_limbuse_180!();
+        Depcrate_limbuse_181!();
+        Depcrate_limbuse_182!();
+        Depcrate_limbmacro_183!();
+        Depcrate_limbWord!();
+        Depcrate_limbWideWord!();
+        Depcrate_limbWord!();
+        Depcrate_limbWideWord!();
+        Depcrate_limbLimb!();
+        Depcrate_limbimpl_189!();
+        Depcrate_limbimpl_190!();
+        Depcrate_limbimpl_191!();
+        Depcrate_limbimpl_192!();
+        Depcrate_limbimpl_193!();
+        Depcrate_limbimpl_194!();
+        Depcrate_limbimpl_195!();
+        Depcrate_limbimpl_196!();
+        Depcrate_limbimpl_197!();
+        Depcrate_limbimpl_198!();
+        Depcrate_limbimpl_199!();
+        Depcrate_limbimpl_200!();
+        Depcrate_limbimpl_201!();
+        Depcrate_limbimpl_202!();
+        Depcrate_limbimpl_203!();
+        Depcrate_limbimpl_204!();
+        Depcrate_limbimpl_205!();
+        Depcrate_limbimpl_206!();
+        Depcrate_limbtests!();
+    };
+}

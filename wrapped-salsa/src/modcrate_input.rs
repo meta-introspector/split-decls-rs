@@ -1,0 +1,40 @@
+// Generated module macro for crate::input
+macro_rules! Modcrate_input {
+() => {
+        Depcrate_inputuse_249!();
+        Depcrate_inputuse_250!();
+        Depcrate_inputuse_251!();
+        Depcrate_inputinput_field!();
+        Depcrate_inputsetter!();
+        Depcrate_inputsingleton!();
+        Depcrate_inputuse_255!();
+        Depcrate_inputuse_256!();
+        Depcrate_inputuse_257!();
+        Depcrate_inputuse_258!();
+        Depcrate_inputuse_259!();
+        Depcrate_inputuse_260!();
+        Depcrate_inputuse_261!();
+        Depcrate_inputuse_262!();
+        Depcrate_inputuse_263!();
+        Depcrate_inputuse_264!();
+        Depcrate_inputuse_265!();
+        Depcrate_inputuse_266!();
+        Depcrate_inputuse_267!();
+        Depcrate_inputuse_268!();
+        Depcrate_inputConfiguration!();
+        Depcrate_inputJarImpl!();
+        Depcrate_inputimpl_271!();
+        Depcrate_inputimpl_272!();
+        Depcrate_inputIngredientImpl!();
+        Depcrate_inputimpl_274!();
+        Depcrate_inputStructEntry!();
+        Depcrate_inputimpl_276!();
+        Depcrate_inputimpl_277!();
+        Depcrate_inputimpl_278!();
+        Depcrate_inputValue!();
+        Depcrate_inputimpl_280!();
+        Depcrate_inputHasBuilder!();
+        Depcrate_inputimpl_282!();
+        Depcrate_inputpersistence!();
+    };
+}

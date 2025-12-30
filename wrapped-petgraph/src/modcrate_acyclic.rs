@@ -1,0 +1,39 @@
+// Generated module macro for crate::acyclic
+macro_rules! Modcrate_acyclic {
+() => {
+        Depcrate_acyclicuse_288!();
+        Depcrate_acyclicuse_289!();
+        Depcrate_acyclicuse_290!();
+        Depcrate_acyclicuse_291!();
+        Depcrate_acyclicorder_map!();
+        Depcrate_acyclicuse_293!();
+        Depcrate_acyclicuse_294!();
+        Depcrate_acyclicuse_295!();
+        Depcrate_acyclicAcyclic!();
+        Depcrate_acyclicAcyclicEdgeError!();
+        Depcrate_acyclicimpl_298!();
+        Depcrate_acyclicimpl_299!();
+        Depcrate_acyclicimpl_300!();
+        Depcrate_acyclicimpl_301!();
+        Depcrate_acyclicimpl_302!();
+        Depcrate_acyclicimpl_303!();
+        Depcrate_acyclicimpl_304!();
+        Depcrate_acyclicimpl_305!();
+        Depcrate_acyclicdfs!();
+        Depcrate_acyclicimpl_307!();
+        Depcrate_acyclicimpl_308!();
+        Depcrate_acyclicimpl_309!();
+        Depcrate_acyclicimpl_310!();
+        Depcrate_acyclicimpl_311!();
+        Depcrate_acyclicimpl_312!();
+        Depcrate_acyclicimpl_313!();
+        Depcrate_acyclicimpl_314!();
+        Depcrate_acyclicimpl_315!();
+        Depcrate_acyclicimpl_316!();
+        Depcrate_acyclicimpl_317!();
+        Depcrate_acyclicimpl_graph_traits!();
+        Depcrate_acyclicmacro_319!();
+        Depcrate_acyclicmacro_320!();
+        Depcrate_acyclictests!();
+    };
+}

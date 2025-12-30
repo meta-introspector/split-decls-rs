@@ -1,0 +1,9 @@
+// Generated macro for demangle (function)
+macro_rules! Depcrate_legacydemangle {
+() => {
+// Module: crate::legacy
+// Provides: {"demangle"}
+// Dependencies: {}
+# [doc = " De-mangles a Rust symbol into a more readable version"] # [doc = ""] # [doc = " All Rust symbols by default are mangled as they contain characters that"] # [doc = " cannot be represented in all object files. The mangling mechanism is similar"] # [doc = " to C++'s, but Rust has a few specifics to handle items like lifetimes in"] # [doc = " symbols."] # [doc = ""] # [doc = " This function will take a **mangled** symbol and return a value. When printed,"] # [doc = " the de-mangled version will be written. If the symbol does not look like"] # [doc = " a mangled symbol, the original value will be written instead."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " use rustc_demangle::demangle;"] # [doc = ""] # [doc = " assert_eq!(demangle(\"_ZN4testE\").to_string(), \"test\");"] # [doc = " assert_eq!(demangle(\"_ZN3foo3barE\").to_string(), \"foo::bar\");"] # [doc = " assert_eq!(demangle(\"foo\").to_string(), \"foo\");"] # [doc = " ```"] pub fn demangle (s : & str) -> Result < (Demangle , & str) , () > { let inner = if s . starts_with ("_ZN") { & s [3 ..] } else if s . starts_with ("ZN") { & s [2 ..] } else if s . starts_with ("__ZN") { & s [4 ..] } else { return Err (()) ; } ; if inner . bytes () . any (| c | c & 0x80 != 0) { return Err (()) ; } let mut elements = 0 ; let mut chars = inner . chars () ; let mut c = chars . next () . ok_or (()) ? ; while c != 'E' { if ! c . is_digit (10) { return Err (()) ; } let mut len = 0usize ; while let Some (d) = c . to_digit (10) { len = len . checked_mul (10) . and_then (| len | len . checked_add (d as usize)) . ok_or (()) ? ; c = chars . next () . ok_or (()) ? ; } for _ in 0 .. len { c = chars . next () . ok_or (()) ? ; } elements += 1 ; } Ok ((Demangle { inner , elements } , chars . as_str ())) }
+};
+}

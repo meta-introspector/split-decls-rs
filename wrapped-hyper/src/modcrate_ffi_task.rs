@@ -1,0 +1,53 @@
+// Generated module macro for crate::ffi::task
+macro_rules! Modcrate_ffi_task {
+() => {
+        Depcrate_ffi_taskuse_476!();
+        Depcrate_ffi_taskuse_477!();
+        Depcrate_ffi_taskuse_478!();
+        Depcrate_ffi_taskuse_479!();
+        Depcrate_ffi_taskuse_480!();
+        Depcrate_ffi_taskuse_481!();
+        Depcrate_ffi_taskuse_482!();
+        Depcrate_ffi_taskuse_483!();
+        Depcrate_ffi_taskuse_484!();
+        Depcrate_ffi_taskBoxFuture!();
+        Depcrate_ffi_taskBoxAny!();
+        Depcrate_ffi_taskHYPER_POLL_READY!();
+        Depcrate_ffi_taskHYPER_POLL_PENDING!();
+        Depcrate_ffi_taskHYPER_POLL_ERROR!();
+        Depcrate_ffi_taskhyper_executor!();
+        Depcrate_ffi_taskWeakExec!();
+        Depcrate_ffi_taskExecWaker!();
+        Depcrate_ffi_taskhyper_task!();
+        Depcrate_ffi_taskTaskFuture!();
+        Depcrate_ffi_taskhyper_context!();
+        Depcrate_ffi_taskhyper_waker!();
+        Depcrate_ffi_taskhyper_task_return_type!();
+        Depcrate_ffi_taskAsTaskType!();
+        Depcrate_ffi_taskIntoDynTaskType!();
+        Depcrate_ffi_taskimpl_500!();
+        Depcrate_ffi_taskimpl_501!();
+        Depcrate_ffi_taskimpl_502!();
+        Depcrate_ffi_taskimpl_503!();
+        Depcrate_ffi_taskmacro_504!();
+        Depcrate_ffi_taskmacro_505!();
+        Depcrate_ffi_taskmacro_506!();
+        Depcrate_ffi_taskmacro_507!();
+        Depcrate_ffi_taskimpl_508!();
+        Depcrate_ffi_taskimpl_509!();
+        Depcrate_ffi_taskmacro_510!();
+        Depcrate_ffi_taskmacro_511!();
+        Depcrate_ffi_taskmacro_512!();
+        Depcrate_ffi_taskmacro_513!();
+        Depcrate_ffi_taskmacro_514!();
+        Depcrate_ffi_taskimpl_515!();
+        Depcrate_ffi_taskimpl_516!();
+        Depcrate_ffi_taskimpl_517!();
+        Depcrate_ffi_taskimpl_518!();
+        Depcrate_ffi_taskimpl_519!();
+        Depcrate_ffi_taskimpl_520!();
+        Depcrate_ffi_taskmacro_521!();
+        Depcrate_ffi_taskmacro_522!();
+        Depcrate_ffi_taskmacro_523!();
+    };
+}

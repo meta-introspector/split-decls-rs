@@ -1,0 +1,45 @@
+// Generated module macro for crate::bit
+macro_rules! Modcrate_bit {
+() => {
+        Depcrate_bituse_3!();
+        Depcrate_bituse_4!();
+        Depcrate_bituse_5!();
+        Depcrate_bitB0!();
+        Depcrate_bitimpl_7!();
+        Depcrate_bitB1!();
+        Depcrate_bitimpl_9!();
+        Depcrate_bitimpl_10!();
+        Depcrate_bitimpl_11!();
+        Depcrate_bitimpl_12!();
+        Depcrate_bitimpl_13!();
+        Depcrate_bitimpl_14!();
+        Depcrate_bitimpl_15!();
+        Depcrate_bitimpl_16!();
+        Depcrate_bitimpl_17!();
+        Depcrate_bitimpl_18!();
+        Depcrate_bitimpl_19!();
+        Depcrate_bitimpl_20!();
+        Depcrate_bitimpl_21!();
+        Depcrate_bitimpl_22!();
+        Depcrate_bitimpl_23!();
+        Depcrate_bitimpl_24!();
+        Depcrate_bitimpl_25!();
+        Depcrate_bitimpl_26!();
+        Depcrate_bitbit_op_tests!();
+        Depcrate_bitimpl_28!();
+        Depcrate_bitimpl_29!();
+        Depcrate_bitimpl_30!();
+        Depcrate_bitimpl_31!();
+        Depcrate_bituse_32!();
+        Depcrate_bitimpl_33!();
+        Depcrate_bitimpl_34!();
+        Depcrate_bitimpl_35!();
+        Depcrate_bitimpl_36!();
+        Depcrate_bituse_37!();
+        Depcrate_bitimpl_38!();
+        Depcrate_bitimpl_39!();
+        Depcrate_bitimpl_40!();
+        Depcrate_bitimpl_41!();
+        Depcrate_bitbit_creation_tests!();
+    };
+}

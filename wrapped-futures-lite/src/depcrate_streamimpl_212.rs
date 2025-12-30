@@ -1,0 +1,9 @@
+// Generated macro for impl_212 (impl)
+macro_rules! Depcrate_streamimpl_212 {
+() => {
+// Module: crate::stream
+// Provides: {"impl_212"}
+// Dependencies: {}
+impl < 'a , S : Unpin + ? Sized > Drain < 'a , S > { # [doc = " Get a reference to the underlying stream."] # [doc = ""] # [doc = " ## Examples"] # [doc = ""] # [doc = " ```"] # [doc = " use futures_lite::{prelude::*, stream};"] # [doc = ""] # [doc = " # spin_on::spin_on(async {"] # [doc = " let mut s = stream::iter(vec![1, 2, 3]);"] # [doc = " let s2 = s.drain();"] # [doc = ""] # [doc = " let inner = s2.get_ref();"] # [doc = " // s and inner are the same."] # [doc = " # });"] # [doc = " ```"] pub fn get_ref (& self) -> & S { & self . stream } # [doc = " Get a mutable reference to the underlying stream."] # [doc = ""] # [doc = " ## Examples"] # [doc = ""] # [doc = " ```"] # [doc = " use futures_lite::{prelude::*, stream};"] # [doc = ""] # [doc = " # spin_on::spin_on(async {"] # [doc = " let mut s = stream::iter(vec![1, 2, 3]);"] # [doc = " let mut s2 = s.drain();"] # [doc = ""] # [doc = " let inner = s2.get_mut();"] # [doc = " assert_eq!(inner.collect::<Vec<_>>().await, vec![1, 2, 3]);"] # [doc = " # });"] # [doc = " ```"] pub fn get_mut (& mut self) -> & mut S { & mut self . stream } # [doc = " Consume this stream and get the underlying stream."] # [doc = ""] # [doc = " ## Examples"] # [doc = ""] # [doc = " ```"] # [doc = " use futures_lite::{prelude::*, stream};"] # [doc = ""] # [doc = " # spin_on::spin_on(async {"] # [doc = " let mut s = stream::iter(vec![1, 2, 3]);"] # [doc = " let mut s2 = s.drain();"] # [doc = ""] # [doc = " let inner = s2.into_inner();"] # [doc = " assert_eq!(inner.collect::<Vec<_>>().await, vec![1, 2, 3]);"] # [doc = " # });"] # [doc = " ```"] pub fn into_inner (self) -> & 'a mut S { self . stream } }
+};
+}

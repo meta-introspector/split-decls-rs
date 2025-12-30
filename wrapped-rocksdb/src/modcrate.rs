@@ -1,0 +1,40 @@
+// Generated module macro for crate
+macro_rules! Modcrate {
+() => {
+        Depcrateffi_util!();
+        Depcratebackup!();
+        Depcratecheckpoint!();
+        Depcratecolumn_family!();
+        Depcratecompaction_filter!();
+        Depcratecompaction_filter_factory!();
+        Depcratecomparator!();
+        Depcratedb!();
+        Depcratedb_iterator!();
+        Depcratedb_options!();
+        Depcratedb_pinnable_slice!();
+        Depcrateenv!();
+        Depcrateiter_range!();
+        Depcratemerge_operator!();
+        Depcrateperf!();
+        Depcrateprop_name!();
+        Depcrateproperties!();
+        Depcrateslice_transform!();
+        Depcratesnapshot!();
+        Depcratesst_file_writer!();
+        Depcratestatistics!();
+        Depcratetransactions!();
+        Depcratewrite_batch!();
+        Depcrateuse_586!();
+        Depcrateuse_587!();
+        Depcrateuse_588!();
+        Depcrateuse_589!();
+        DepcrateErrorKind!();
+        DepcrateError!();
+        Depcrateimpl_592!();
+        Depcrateimpl_593!();
+        Depcrateimpl_594!();
+        Depcrateimpl_595!();
+        Depcrateimpl_596!();
+        Depcratetest!();
+    };
+}

@@ -1,0 +1,9 @@
+// Generated macro for macro_531 (macro)
+macro_rules! Depcrate_itemmacro_531 {
+() => {
+// Module: crate::item
+// Provides: {"macro_531"}
+// Dependencies: {}
+ast_struct ! { # [doc = " A foreign static item in an `extern` block: `static ext: u8`."] # [cfg_attr (docsrs , doc (cfg (feature = "full")))] pub struct ForeignItemStatic { pub attrs : Vec < Attribute >, pub vis : Visibility , pub static_token : Token ! [static] , pub mutability : StaticMutability , pub ident : Ident , pub colon_token : Token ! [:] , pub ty : Box < Type >, pub semi_token : Token ! [;] , } }
+};
+}

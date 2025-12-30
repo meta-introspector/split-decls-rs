@@ -1,0 +1,9 @@
+// Generated macro for sc_invert (function)
+macro_rules! Depcrate_edwards25519sc_invert {
+() => {
+// Module: crate::edwards25519
+// Provides: {"sc_invert"}
+// Dependencies: {}
+# [cfg (feature = "blind-keys")] pub fn sc_invert (s : & [u8 ; 32]) -> [u8 ; 32] { let _10 = sc_sq (s) ; let _11 = sc_mul (s , & _10) ; let _100 = sc_mul (s , & _11) ; let _1000 = sc_sq (& _100) ; let _1010 = sc_mul (& _10 , & _1000) ; let _1011 = sc_mul (s , & _1010) ; let _10000 = sc_sq (& _1000) ; let _10110 = sc_sq (& _1011) ; let _100000 = sc_mul (& _1010 , & _10110) ; let _100110 = sc_mul (& _10000 , & _10110) ; let _1000000 = sc_sq (& _100000) ; let _1010000 = sc_mul (& _10000 , & _1000000) ; let _1010011 = sc_mul (& _11 , & _1010000) ; let _1100011 = sc_mul (& _10000 , & _1010011) ; let _1100111 = sc_mul (& _100 , & _1100011) ; let _1101011 = sc_mul (& _100 , & _1100111) ; let _10010011 = sc_mul (& _1000000 , & _1010011) ; let _10010111 = sc_mul (& _100 , & _10010011) ; let _10111101 = sc_mul (& _100110 , & _10010111) ; let _11010011 = sc_mul (& _10110 , & _10111101) ; let _11100111 = sc_mul (& _1010000 , & _10010111) ; let _11101011 = sc_mul (& _100 , & _11100111) ; let _11110101 = sc_mul (& _1010 , & _11101011) ; let mut recip = sc_mul (& _1011 , & _11110101) ; recip = sc_sqmul (& recip , 126 , & _1010011) ; recip = sc_sqmul (& recip , 9 , & _10) ; recip = sc_mul (& recip , & _11110101) ; recip = sc_sqmul (& recip , 7 , & _1100111) ; recip = sc_sqmul (& recip , 9 , & _11110101) ; recip = sc_sqmul (& recip , 11 , & _10111101) ; recip = sc_sqmul (& recip , 8 , & _11100111) ; recip = sc_sqmul (& recip , 9 , & _1101011) ; recip = sc_sqmul (& recip , 6 , & _1011) ; recip = sc_sqmul (& recip , 14 , & _10010011) ; recip = sc_sqmul (& recip , 10 , & _1100011) ; recip = sc_sqmul (& recip , 9 , & _10010111) ; recip = sc_sqmul (& recip , 10 , & _11110101) ; recip = sc_sqmul (& recip , 8 , & _11010011) ; recip = sc_sqmul (& recip , 8 , & _11101011) ; recip }
+};
+}

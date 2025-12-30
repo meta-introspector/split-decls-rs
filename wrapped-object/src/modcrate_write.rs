@@ -1,0 +1,47 @@
+// Generated module macro for crate::write
+macro_rules! Modcrate_write {
+() => {
+        Depcrate_writeuse_1327!();
+        Depcrate_writeuse_1328!();
+        Depcrate_writeuse_1329!();
+        Depcrate_writeuse_1330!();
+        Depcrate_writeuse_1331!();
+        Depcrate_writeuse_1332!();
+        Depcrate_writeuse_1333!();
+        Depcrate_writeuse_1334!();
+        Depcrate_writecoff!();
+        Depcrate_writeuse_1370!();
+        Depcrate_writeelf!();
+        Depcrate_writemacho!();
+        Depcrate_writeuse_1437!();
+        Depcrate_writepe!();
+        Depcrate_writexcoff!();
+        Depcrate_writestring!();
+        Depcrate_writeuse_1474!();
+        Depcrate_writeutil!();
+        Depcrate_writeuse_1494!();
+        Depcrate_writeError!();
+        Depcrate_writeimpl_1496!();
+        Depcrate_writeimpl_1497!();
+        Depcrate_writeimpl_1498!();
+        Depcrate_writeResult!();
+        Depcrate_writeObject!();
+        Depcrate_writeimpl_1501!();
+        Depcrate_writeStandardSegment!();
+        Depcrate_writeStandardSection!();
+        Depcrate_writeimpl_1504!();
+        Depcrate_writeSectionId!();
+        Depcrate_writeSection!();
+        Depcrate_writeimpl_1507!();
+        Depcrate_writeSymbolSection!();
+        Depcrate_writeimpl_1509!();
+        Depcrate_writeSymbolId!();
+        Depcrate_writeSymbol!();
+        Depcrate_writeimpl_1512!();
+        Depcrate_writeRelocation!();
+        Depcrate_writeComdatId!();
+        Depcrate_writeComdat!();
+        Depcrate_writeMangling!();
+        Depcrate_writeimpl_1517!();
+    };
+}

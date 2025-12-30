@@ -1,0 +1,9 @@
+// Generated macro for impl_200 (impl)
+macro_rules! Depcrate_dataimpl_200 {
+() => {
+// Module: crate::data
+// Provides: {"impl_200"}
+// Dependencies: {}
+impl < 'a > IntoIterator for & 'a Fields { type Item = & 'a Field ; type IntoIter = punctuated :: Iter < 'a , Field > ; fn into_iter (self) -> Self :: IntoIter { self . iter () } }
+};
+}

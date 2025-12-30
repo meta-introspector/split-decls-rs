@@ -1,0 +1,9 @@
+// Generated macro for BlockOn (struct)
+macro_rules! Depcrate_ioBlockOn {
+() => {
+// Module: crate::io
+// Provides: {"BlockOn"}
+// Dependencies: {}
+# [doc = " Blocks on all async I/O operations and implements [`std::io`] traits."] # [doc = ""] # [doc = " Sometimes async I/O needs to be used in a blocking manner. If calling [`future::block_on()`]"] # [doc = " manually all the time becomes too tedious, use this type for more convenient blocking on async"] # [doc = " I/O operations."] # [doc = ""] # [doc = " This type implements traits [`Read`][`std::io::Read`], [`Write`][`std::io::Write`], or"] # [doc = " [`Seek`][`std::io::Seek`] if the inner type implements [`AsyncRead`], [`AsyncWrite`], or"] # [doc = " [`AsyncSeek`], respectively."] # [doc = ""] # [doc = " If writing data through the [`Write`][`std::io::Write`] trait, make sure to flush before"] # [doc = " dropping the [`BlockOn`] handle or some buffered data might get lost."] # [doc = ""] # [doc = " # Examples"] # [doc = ""] # [doc = " ```"] # [doc = " use futures_lite::io::BlockOn;"] # [doc = " use futures_lite::pin;"] # [doc = " use std::io::Read;"] # [doc = ""] # [doc = " let reader: &[u8] = b\"hello\";"] # [doc = " pin!(reader);"] # [doc = ""] # [doc = " let mut blocking_reader = BlockOn::new(reader);"] # [doc = " let mut contents = String::new();"] # [doc = ""] # [doc = " // This line blocks - note that there is no await:"] # [doc = " blocking_reader.read_to_string(&mut contents)?;"] # [doc = " # std::io::Result::Ok(())"] # [doc = " ```"] # [derive (Debug)] pub struct BlockOn < T > (T) ;
+};
+}

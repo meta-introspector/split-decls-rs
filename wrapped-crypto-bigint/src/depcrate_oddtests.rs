@@ -1,0 +1,9 @@
+// Generated macro for tests (module)
+macro_rules! Depcrate_oddtests {
+() => {
+// Module: crate::odd
+// Provides: {"tests"}
+// Dependencies: {}
+# [cfg (test)] mod tests { # [cfg (feature = "alloc")] use super :: BoxedUint ; use super :: { Odd , Uint } ; # [test] fn not_odd_numbers () { let zero = Odd :: new (Uint :: < 4 > :: ZERO) ; assert ! (bool :: from (zero . is_none ())) ; let two = Odd :: new (Uint :: < 4 > :: from (2u8)) ; assert ! (bool :: from (two . is_none ())) ; } # [cfg (feature = "alloc")] # [test] fn not_odd_numbers_boxed () { let zero = Odd :: new (BoxedUint :: zero ()) ; assert ! (bool :: from (zero . is_none ())) ; let two = Odd :: new (BoxedUint :: from (2u8)) ; assert ! (bool :: from (two . is_none ())) ; } # [cfg (feature = "serde")] mod serde_tests { use crate :: { Odd , U64 , U128 } ; # [test] fn roundtrip () { let uint = Odd :: new (U64 :: from_u64 (0x00123)) . unwrap () ; let ser = bincode :: serde :: encode_to_vec (uint , bincode :: config :: standard ()) . unwrap () ; let deser = bincode :: serde :: decode_from_slice :: < Odd < U64 > , _ > (& ser , bincode :: config :: standard ()) . unwrap () . 0 ; assert_eq ! (uint , deser) ; } # [test] fn even_values_do_not_deserialize () { let two = U128 :: from_u64 (0x2) ; let two_ser = bincode :: serde :: encode_to_vec (two , bincode :: config :: standard ()) . unwrap () ; assert ! (bincode :: serde :: decode_from_slice ::< Odd < U128 >, _ > (& two_ser , bincode :: config :: standard ()) . is_err ()) ; } # [test] fn zero_does_not_deserialize () { let zero = U64 :: ZERO ; let zero_ser = bincode :: serde :: encode_to_vec (zero , bincode :: config :: standard ()) . unwrap () ; assert ! (bincode :: serde :: decode_from_slice ::< Odd < U64 >, _ > (& zero_ser , bincode :: config :: standard ()) . is_err ()) ; } } }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for constant_time_eq_neon (function)
+macro_rules! Depcrate_neonconstant_time_eq_neon {
+() => {
+// Module: crate::neon
+// Provides: {"constant_time_eq_neon"}
+// Dependencies: {}
+# [doc = " NEON implementation of `constant_time_eq` and `constant_time_eq_n`."] # [must_use] # [inline (always)] fn constant_time_eq_neon (mut a : & [u8] , mut b : & [u8]) -> bool { if a . len () != b . len () { return false ; } b = & b [.. a . len ()] ; const LANES : usize = 16 ; let tmp = if a . len () >= LANES * 2 { let tmpa = vld1q_u8_x2_safe (& a [.. LANES * 2]) ; let tmpb = vld1q_u8_x2_safe (& b [.. LANES * 2]) ; a = & a [LANES * 2 ..] ; b = & b [LANES * 2 ..] ; let mut mask0 = vceqq_u8_hide (tmpa . 0 , tmpb . 0) ; let mut mask1 = vceqq_u8_hide (tmpa . 1 , tmpb . 1) ; while a . len () >= LANES * 2 { let tmpa = vld1q_u8_x2_safe (& a [.. LANES * 2]) ; let tmpb = vld1q_u8_x2_safe (& b [.. LANES * 2]) ; a = & a [LANES * 2 ..] ; b = & b [LANES * 2 ..] ; let tmp0 = vceqq_u8_hide (tmpa . 0 , tmpb . 0) ; let tmp1 = vceqq_u8_hide (tmpa . 1 , tmpb . 1) ; mask0 = vandq_u8_hide (mask0 , tmp0) ; mask1 = vandq_u8_hide (mask1 , tmp1) ; } if a . len () >= LANES { let tmpa = vld1q_u8_safe (& a [.. LANES]) ; let tmpb = vld1q_u8_safe (& b [.. LANES]) ; a = & a [LANES ..] ; b = & b [LANES ..] ; let tmp = vceqq_u8_hide (tmpa , tmpb) ; mask0 = vandq_u8_hide (mask0 , tmp) ; } let mask = vandq_u8_hide (mask0 , mask1) ; get_mask_u64 (mask) ^ ! 0 } else if a . len () >= LANES { let tmpa = vld1q_u8_safe (& a [.. LANES]) ; let tmpb = vld1q_u8_safe (& b [.. LANES]) ; a = & a [LANES ..] ; b = & b [LANES ..] ; let mask = vceqq_u8_hide (tmpa , tmpb) ; get_mask_u64 (mask) ^ ! 0 } else { 0 } ; crate :: generic :: constant_time_eq_impl (a , b , tmp) }
+};
+}

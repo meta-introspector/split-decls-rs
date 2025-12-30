@@ -1,0 +1,55 @@
+// Generated module macro for crate::error
+macro_rules! Modcrate_error {
+() => {
+        Depcrate_erroruse_197!();
+        Depcrate_erroruse_198!();
+        Depcrate_erroruse_199!();
+        Depcrate_erroruse_200!();
+        Depcrate_erroruse_201!();
+        Depcrate_errorConvertError!();
+        Depcrate_errorimpl_203!();
+        Depcrate_errorimpl_204!();
+        Depcrate_errorimpl_205!();
+        Depcrate_errorimpl_206!();
+        Depcrate_errorAlignmentError!();
+        Depcrate_errorimpl_208!();
+        Depcrate_errorimpl_209!();
+        Depcrate_errorimpl_210!();
+        Depcrate_errorimpl_211!();
+        Depcrate_errorimpl_212!();
+        Depcrate_errorimpl_213!();
+        Depcrate_errorimpl_214!();
+        Depcrate_errorimpl_215!();
+        Depcrate_errorimpl_216!();
+        Depcrate_errorimpl_217!();
+        Depcrate_errorSizeError!();
+        Depcrate_errorimpl_219!();
+        Depcrate_errorimpl_220!();
+        Depcrate_errorimpl_221!();
+        Depcrate_errorimpl_222!();
+        Depcrate_errorimpl_223!();
+        Depcrate_errorimpl_224!();
+        Depcrate_errorimpl_225!();
+        Depcrate_errorimpl_226!();
+        Depcrate_errorValidityError!();
+        Depcrate_errorimpl_228!();
+        Depcrate_errorimpl_229!();
+        Depcrate_errorimpl_230!();
+        Depcrate_errorimpl_231!();
+        Depcrate_errorimpl_232!();
+        Depcrate_errorimpl_233!();
+        Depcrate_errorimpl_234!();
+        Depcrate_errorimpl_235!();
+        Depcrate_errorCastError!();
+        Depcrate_errorimpl_237!();
+        Depcrate_errorimpl_238!();
+        Depcrate_errorTryCastError!();
+        Depcrate_errorimpl_240!();
+        Depcrate_errorimpl_241!();
+        Depcrate_errorTryReadError!();
+        Depcrate_errorimpl_243!();
+        Depcrate_errorAlignedTryCastError!();
+        Depcrate_errorAllocError!();
+        Depcrate_errortests!();
+    };
+}

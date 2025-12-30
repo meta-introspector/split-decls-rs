@@ -1,0 +1,9 @@
+// Generated macro for SectionHeader (trait)
+macro_rules! Depcrate_read_xcoff_sectionSectionHeader {
+() => {
+// Module: crate::read::xcoff::section
+// Provides: {"SectionHeader"}
+// Dependencies: {}
+# [doc = " A trait for generic access to [`xcoff::SectionHeader32`] and [`xcoff::SectionHeader64`]."] # [allow (missing_docs)] pub trait SectionHeader : Debug + Pod { type Word : Into < u64 > ; type HalfWord : Into < u32 > ; type Xcoff : FileHeader < SectionHeader = Self , Word = Self :: Word > ; type Rel : Rel < Word = Self :: Word > ; fn s_name (& self) -> & [u8 ; 8] ; fn s_paddr (& self) -> Self :: Word ; fn s_vaddr (& self) -> Self :: Word ; fn s_size (& self) -> Self :: Word ; fn s_scnptr (& self) -> Self :: Word ; fn s_relptr (& self) -> Self :: Word ; fn s_lnnoptr (& self) -> Self :: Word ; fn s_nreloc (& self) -> Self :: HalfWord ; fn s_nlnno (& self) -> Self :: HalfWord ; fn s_flags (& self) -> u32 ; # [doc = " Return the section name."] fn name (& self) -> & [u8] { let sectname = & self . s_name () [..] ; match memchr :: memchr (b'\0' , sectname) { Some (end) => & sectname [.. end] , None => sectname , } } # [doc = " Return the offset and size of the section in the file."] fn file_range (& self) -> Option < (u64 , u64) > { Some ((self . s_scnptr () . into () , self . s_size () . into ())) } # [doc = " Return the section data."] # [doc = ""] # [doc = " Returns `Ok(&[])` if the section has no data."] # [doc = " Returns `Err` for invalid values."] fn data < 'data , R : ReadRef < 'data > > (& self , data : R) -> result :: Result < & 'data [u8] , () > { if let Some ((offset , size)) = self . file_range () { data . read_bytes_at (offset , size) } else { Ok (& []) } } # [doc = " Read the relocations."] fn relocations < 'data , R : ReadRef < 'data > > (& self , data : R) -> read :: Result < & 'data [Self :: Rel] > ; }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for impl_1513 (impl)
+macro_rules! Depcrate_registry_export_sdlimpl_1513 {
+() => {
+// Module: crate::registry::export_sdl
+// Provides: {"impl_1513"}
+// Dependencies: {}
+impl SDLExportOptions { # [doc = " Create a `SDLExportOptions`"] # [inline] pub fn new () -> Self { Default :: default () } # [doc = " Export sorted fields"] # [inline] # [must_use] pub fn sorted_fields (self) -> Self { Self { sorted_fields : true , .. self } } # [doc = " Export sorted field arguments"] # [inline] # [must_use] pub fn sorted_arguments (self) -> Self { Self { sorted_arguments : true , .. self } } # [doc = " Export sorted enum items"] # [inline] # [must_use] pub fn sorted_enum_items (self) -> Self { Self { sorted_enum_values : true , .. self } } # [doc = " Export as Federation SDL(Schema Definition Language)"] # [inline] # [must_use] pub fn federation (self) -> Self { Self { federation : true , .. self } } # [doc = " When possible, write one-line instead of three-line descriptions"] # [inline] # [must_use] pub fn prefer_single_line_descriptions (self) -> Self { Self { prefer_single_line_descriptions : true , .. self } } # [doc = " Includes `specifiedBy` directive in SDL"] pub fn include_specified_by (self) -> Self { Self { include_specified_by : true , .. self } } # [doc = " Enable `composeDirective` if federation is enabled"] pub fn compose_directive (self) -> Self { Self { compose_directive : true , .. self } } # [doc = " Use spaces for indentation instead of tabs"] pub fn use_space_ident (self) -> Self { Self { use_space_ident : true , .. self } } # [doc = " Set the number of spaces to use for each indentation level (default: 2)."] # [doc = " Only applies when `use_space_indent` is true"] pub fn indent_width (self , width : u8) -> Self { Self { indent_width : width , .. self } } }
+};
+}

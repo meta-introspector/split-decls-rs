@@ -1,0 +1,52 @@
+// Generated module macro for crate
+macro_rules! Modcrate {
+() => {
+        Depcrateother_1!();
+        Depcrateother_2!();
+        Depcrateother_3!();
+        Depcrateother_4!();
+        Depcrateother_5!();
+        Depcrateother_6!();
+        Depcrateother_7!();
+        Depcrateuse_8!();
+        Depcrateuse_9!();
+        Depcratemacros!();
+        Depcratescored!();
+        Depcratevisit!();
+        Depcratedata!();
+        Depcrateacyclic!();
+        Depcrateadj!();
+        Depcratealgo!();
+        Depcratecsr!();
+        Depcratedot!();
+        Depcrategenerate!();
+        Depcrategraph6!();
+        Depcrategraph_impl!();
+        Depcrategraphmap!();
+        Depcrateiter_format!();
+        Depcrateiter_utils!();
+        Depcratematrix_graph!();
+        Depcratequickcheck!();
+        Depcrateserde_utils!();
+        Depcratetraits_graph!();
+        Depcrateunionfind!();
+        Depcrateoperator!();
+        Depcrateprelude!();
+        Depcrategraph!();
+        Depcrateuse_1411!();
+        DepcrateDirection!();
+        Depcrateimpl_1413!();
+        Depcrateuse_1414!();
+        DepcrateDirected!();
+        DepcrateUndirected!();
+        DepcrateEdgeType!();
+        Depcrateimpl_1418!();
+        Depcrateimpl_1419!();
+        DepcrateIntoWeightedEdge!();
+        Depcrateimpl_1421!();
+        Depcrateimpl_1422!();
+        Depcrateimpl_1423!();
+        Depcrateimpl_1424!();
+        Depcrateimpl_1425!();
+    };
+}

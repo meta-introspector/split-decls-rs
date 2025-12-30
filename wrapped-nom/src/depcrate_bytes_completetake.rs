@@ -1,0 +1,9 @@
+// Generated macro for take (function)
+macro_rules! Depcrate_bytes_completetake {
+() => {
+// Module: crate::bytes::complete
+// Provides: {"take"}
+// Dependencies: {}
+# [doc = " Returns an input slice containing the first N input elements (Input[..N])."] # [doc = ""] # [doc = " It will return `Err(Err::Error((_, ErrorKind::Eof)))` if the input is shorter than the argument."] # [doc = " # Example"] # [doc = " ```rust"] # [doc = " # use nom::{Err, error::{Error, ErrorKind}, Needed, IResult};"] # [doc = " use nom::bytes::complete::take;"] # [doc = ""] # [doc = " fn take6(s: &str) -> IResult<&str, &str> {"] # [doc = "   take(6usize)(s)"] # [doc = " }"] # [doc = ""] # [doc = " assert_eq!(take6(\"1234567\"), Ok((\"7\", \"123456\")));"] # [doc = " assert_eq!(take6(\"things\"), Ok((\"\", \"things\")));"] # [doc = " assert_eq!(take6(\"short\"), Err(Err::Error(Error::new(\"short\", ErrorKind::Eof))));"] # [doc = " assert_eq!(take6(\"\"), Err(Err::Error(Error::new(\"\", ErrorKind::Eof))));"] # [doc = " ```"] # [doc = ""] # [doc = " The units that are taken will depend on the input type. For example, for a"] # [doc = " `&str` it will take a number of `char`'s, whereas for a `&[u8]` it will"] # [doc = " take that many `u8`'s:"] # [doc = ""] # [doc = " ```rust"] # [doc = " use nom::error::Error;"] # [doc = " use nom::bytes::complete::take;"] # [doc = ""] # [doc = " assert_eq!(take::<_, _, Error<_>>(1usize)(\"💙\"), Ok((\"\", \"💙\")));"] # [doc = " assert_eq!(take::<_, _, Error<_>>(1usize)(\"💙\".as_bytes()), Ok((b\"\\x9F\\x92\\x99\".as_ref(), b\"\\xF0\".as_ref())));"] # [doc = " ```"] pub fn take < C , I , Error : ParseError < I > > (count : C) -> impl FnMut (I) -> IResult < I , I , Error > where I : Input , C : ToUsize , { let mut parser = super :: take (count) ; move | i : I | parser . process :: < OutputM < Emit , Emit , Complete > > (i) }
+};
+}

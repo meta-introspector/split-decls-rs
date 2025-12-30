@@ -1,0 +1,9 @@
+// Generated macro for Array (trait)
+macro_rules! Depcrate_arrayArray {
+() => {
+// Module: crate::array
+// Provides: {"Array"}
+// Dependencies: {}
+# [doc = " A trait for types that are an array."] # [doc = ""] # [doc = " An \"array\", for our purposes, has the following properties:"] # [doc = " * Owns some number of elements."] # [doc = " * The element type can be generic, but must implement [`Default`]."] # [doc = " * The capacity is fixed at compile time, based on the implementing type."] # [doc = " * You can get a shared or mutable slice to the elements."] # [doc = ""] # [doc = " You are generally **not** expected to need to implement this yourself. It is"] # [doc = " already implemented for all array lengths."] # [doc = ""] # [doc = " **Additional lengths can easily be added upon request.**"] # [doc = ""] # [doc = " ## Safety Reminder"] # [doc = ""] # [doc = " Just a reminder: this trait is 100% safe, which means that `unsafe` code"] # [doc = " **must not** rely on an instance of this trait being correct."] pub trait Array { # [doc = " The type of the items in the thing."] type Item : Default ; # [doc = " The number of slots in the thing."] const CAPACITY : usize ; # [doc = " Gives a shared slice over the whole thing."] # [doc = ""] # [doc = " A correct implementation will return a slice with a length equal to the"] # [doc = " `CAPACITY` value."] fn as_slice (& self) -> & [Self :: Item] ; # [doc = " Gives a unique slice over the whole thing."] # [doc = ""] # [doc = " A correct implementation will return a slice with a length equal to the"] # [doc = " `CAPACITY` value."] fn as_slice_mut (& mut self) -> & mut [Self :: Item] ; # [doc = " Create a default-initialized instance of ourself, similar to the"] # [doc = " [`Default`] trait, but implemented for the same range of sizes as"] # [doc = " [`Array`]."] fn default () -> Self ; }
+};
+}

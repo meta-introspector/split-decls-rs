@@ -1,0 +1,9 @@
+// Generated macro for test_probe_layout (function)
+macro_rules! Depcrate_registertest_probe_layout {
+() => {
+// Module: crate::register
+// Provides: {"test_probe_layout"}
+// Dependencies: {}
+# [test] fn test_probe_layout () { use std :: alloc :: Layout ; use std :: mem ; let probe = Probe :: new () ; assert_eq ! (Layout :: new ::< sys :: io_uring_probe > () . size () + mem :: size_of ::< sys :: io_uring_probe_op > () * 256 , Layout :: for_value (& probe . 0) . size ()) ; assert_eq ! (Layout :: new ::< sys :: io_uring_probe > () . align () , Layout :: for_value (& probe . 0) . align ()) ; }
+};
+}

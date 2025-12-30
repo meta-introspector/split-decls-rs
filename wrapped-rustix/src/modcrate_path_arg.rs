@@ -1,0 +1,45 @@
+// Generated module macro for crate::path::arg
+macro_rules! Modcrate_path_arg {
+() => {
+        Depcrate_path_arguse_2339!();
+        Depcrate_path_arguse_2340!();
+        Depcrate_path_arguse_2341!();
+        Depcrate_path_arguse_2342!();
+        Depcrate_path_arguse_2343!();
+        Depcrate_path_arguse_2344!();
+        Depcrate_path_arguse_2345!();
+        Depcrate_path_arguse_2346!();
+        Depcrate_path_arguse_2347!();
+        Depcrate_path_arguse_2348!();
+        Depcrate_path_arguse_2349!();
+        Depcrate_path_arguse_2350!();
+        Depcrate_path_arguse_2351!();
+        Depcrate_path_arguse_2352!();
+        Depcrate_path_argArg!();
+        Depcrate_path_argoption_into_with_c_str!();
+        Depcrate_path_argimpl_2355!();
+        Depcrate_path_argimpl_2356!();
+        Depcrate_path_argimpl_2357!();
+        Depcrate_path_argimpl_2358!();
+        Depcrate_path_argimpl_2359!();
+        Depcrate_path_argimpl_2360!();
+        Depcrate_path_argimpl_2361!();
+        Depcrate_path_argimpl_2362!();
+        Depcrate_path_argimpl_2363!();
+        Depcrate_path_argimpl_2364!();
+        Depcrate_path_argimpl_2365!();
+        Depcrate_path_argimpl_2366!();
+        Depcrate_path_argimpl_2367!();
+        Depcrate_path_argimpl_2368!();
+        Depcrate_path_argimpl_2369!();
+        Depcrate_path_argimpl_2370!();
+        Depcrate_path_argimpl_2371!();
+        Depcrate_path_argimpl_2372!();
+        Depcrate_path_argimpl_2373!();
+        Depcrate_path_argimpl_2374!();
+        Depcrate_path_argimpl_2375!();
+        Depcrate_path_argimpl_2376!();
+        Depcrate_path_argwith_c_str!();
+        Depcrate_path_argwith_c_str_slow_path!();
+    };
+}

@@ -1,0 +1,9 @@
+// Generated macro for GB2312_SYMBOLS_AFTER_GREEK (static)
+macro_rules! Depcrate_dataGB2312_SYMBOLS_AFTER_GREEK {
+() => {
+// Module: crate::data
+// Provides: {"GB2312_SYMBOLS_AFTER_GREEK"}
+// Dependencies: {}
+pub static GB2312_SYMBOLS_AFTER_GREEK : [u16 ; 22] = [0xFE35 , 0xFE36 , 0xFE39 , 0xFE3A , 0xFE3F , 0xFE40 , 0xFE3D , 0xFE3E , 0xFE41 , 0xFE42 , 0xFE43 , 0xFE44 , 0xFE17 , 0xFE18 , 0xFE3B , 0xFE3C , 0xFE37 , 0xFE38 , 0xFE31 , 0xFE19 , 0xFE33 , 0xFE34 ,] ;
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for KSX1001_UPPERCASE (static)
+macro_rules! Depcrate_dataKSX1001_UPPERCASE {
+() => {
+// Module: crate::data
+// Provides: {"KSX1001_UPPERCASE"}
+// Dependencies: {}
+pub static KSX1001_UPPERCASE : [u16 ; 15] = [0x00C6 , 0x00D0 , 0x00AA , 0x0126 , 0x0000 , 0x0132 , 0x0000 , 0x013F , 0x0141 , 0x00D8 , 0x0152 , 0x00BA , 0x00DE , 0x0166 , 0x014A ,] ;
+};
+}

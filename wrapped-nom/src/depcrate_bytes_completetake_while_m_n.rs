@@ -1,0 +1,9 @@
+// Generated macro for take_while_m_n (function)
+macro_rules! Depcrate_bytes_completetake_while_m_n {
+() => {
+// Module: crate::bytes::complete
+// Provides: {"take_while_m_n"}
+// Dependencies: {}
+# [doc = " Returns the longest (m <= len <= n) input slice that matches the predicate."] # [doc = ""] # [doc = " The parser will return the longest slice that matches the given predicate *(a function that"] # [doc = " takes the input and returns a bool)*."] # [doc = ""] # [doc = " It will return an `Err::Error((_, ErrorKind::TakeWhileMN))` if the pattern wasn't met or is out"] # [doc = " of range (m <= len <= n)."] # [doc = " # Example"] # [doc = " ```rust"] # [doc = " # use nom::{Err, error::{Error, ErrorKind}, Needed, IResult};"] # [doc = " use nom::bytes::complete::take_while_m_n;"] # [doc = " use nom::AsChar;"] # [doc = ""] # [doc = " fn short_alpha(s: &[u8]) -> IResult<&[u8], &[u8]> {"] # [doc = "   take_while_m_n(3, 6, AsChar::is_alpha)(s)"] # [doc = " }"] # [doc = ""] # [doc = " assert_eq!(short_alpha(b\"latin123\"), Ok((&b\"123\"[..], &b\"latin\"[..])));"] # [doc = " assert_eq!(short_alpha(b\"lengthy\"), Ok((&b\"y\"[..], &b\"length\"[..])));"] # [doc = " assert_eq!(short_alpha(b\"latin\"), Ok((&b\"\"[..], &b\"latin\"[..])));"] # [doc = " assert_eq!(short_alpha(b\"ed\"), Err(Err::Error(Error::new(&b\"ed\"[..], ErrorKind::TakeWhileMN))));"] # [doc = " assert_eq!(short_alpha(b\"12345\"), Err(Err::Error(Error::new(&b\"12345\"[..], ErrorKind::TakeWhileMN))));"] # [doc = " ```"] pub fn take_while_m_n < F , I , Error : ParseError < I > > (m : usize , n : usize , cond : F ,) -> impl FnMut (I) -> IResult < I , I , Error > where I : Input , F : Fn (< I as Input > :: Item) -> bool , { let mut parser = super :: take_while_m_n (m , n , cond) ; move | i : I | parser . process :: < OutputM < Emit , Emit , Complete > > (i) }
+};
+}

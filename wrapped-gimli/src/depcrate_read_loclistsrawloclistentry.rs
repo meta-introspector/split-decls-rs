@@ -1,0 +1,9 @@
+// Generated macro for RawLocListEntry (enum)
+macro_rules! Depcrate_read_loclistsRawLocListEntry {
+() => {
+// Module: crate::read::loclists
+// Provides: {"RawLocListEntry"}
+// Dependencies: {}
+# [doc = " A raw entry in .debug_loclists."] # [derive (Clone , Debug)] pub enum RawLocListEntry < R : Reader > { # [doc = " A location from DWARF version <= 4."] AddressOrOffsetPair { # [doc = " Start of range. May be an address or an offset."] begin : u64 , # [doc = " End of range. May be an address or an offset."] end : u64 , # [doc = " expression"] data : Expression < R > , } , # [doc = " DW_LLE_base_address"] BaseAddress { # [doc = " base address"] addr : u64 , } , # [doc = " DW_LLE_base_addressx"] BaseAddressx { # [doc = " base address"] addr : DebugAddrIndex < R :: Offset > , } , # [doc = " DW_LLE_startx_endx"] StartxEndx { # [doc = " start of range"] begin : DebugAddrIndex < R :: Offset > , # [doc = " end of range"] end : DebugAddrIndex < R :: Offset > , # [doc = " expression"] data : Expression < R > , } , # [doc = " DW_LLE_startx_length"] StartxLength { # [doc = " start of range"] begin : DebugAddrIndex < R :: Offset > , # [doc = " length of range"] length : u64 , # [doc = " expression"] data : Expression < R > , } , # [doc = " DW_LLE_offset_pair"] OffsetPair { # [doc = " start of range"] begin : u64 , # [doc = " end of range"] end : u64 , # [doc = " expression"] data : Expression < R > , } , # [doc = " DW_LLE_default_location"] DefaultLocation { # [doc = " expression"] data : Expression < R > , } , # [doc = " DW_LLE_start_end"] StartEnd { # [doc = " start of range"] begin : u64 , # [doc = " end of range"] end : u64 , # [doc = " expression"] data : Expression < R > , } , # [doc = " DW_LLE_start_length"] StartLength { # [doc = " start of range"] begin : u64 , # [doc = " length of range"] length : u64 , # [doc = " expression"] data : Expression < R > , } , }
+};
+}

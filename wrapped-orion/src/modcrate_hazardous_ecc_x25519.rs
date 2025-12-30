@@ -1,0 +1,45 @@
+// Generated module macro for crate::hazardous::ecc::x25519
+macro_rules! Modcrate_hazardous_ecc_x25519 {
+() => {
+        Depcrate_hazardous_ecc_x25519use_451!();
+        Depcrate_hazardous_ecc_x25519use_452!();
+        Depcrate_hazardous_ecc_x25519use_453!();
+        Depcrate_hazardous_ecc_x25519use_454!();
+        Depcrate_hazardous_ecc_x25519use_455!();
+        Depcrate_hazardous_ecc_x25519PUBLIC_KEY_SIZE!();
+        Depcrate_hazardous_ecc_x25519PRIVATE_KEY_SIZE!();
+        Depcrate_hazardous_ecc_x25519SHARED_KEY_SIZE!();
+        Depcrate_hazardous_ecc_x25519BASEPOINT!();
+        Depcrate_hazardous_ecc_x25519LOW_ORDER_POINT_RESULT!();
+        Depcrate_hazardous_ecc_x25519FieldElement!();
+        Depcrate_hazardous_ecc_x25519impl_462!();
+        Depcrate_hazardous_ecc_x25519impl_463!();
+        Depcrate_hazardous_ecc_x25519impl_464!();
+        Depcrate_hazardous_ecc_x25519impl_465!();
+        Depcrate_hazardous_ecc_x25519impl_466!();
+        Depcrate_hazardous_ecc_x25519impl_467!();
+        Depcrate_hazardous_ecc_x25519impl_468!();
+        Depcrate_hazardous_ecc_x25519Scalar!();
+        Depcrate_hazardous_ecc_x25519impl_470!();
+        Depcrate_hazardous_ecc_x25519impl_471!();
+        Depcrate_hazardous_ecc_x25519impl_472!();
+        Depcrate_hazardous_ecc_x25519impl_473!();
+        Depcrate_hazardous_ecc_x25519mont_ladder!();
+        Depcrate_hazardous_ecc_x25519PublicKey!();
+        Depcrate_hazardous_ecc_x25519impl_476!();
+        Depcrate_hazardous_ecc_x25519impl_477!();
+        Depcrate_hazardous_ecc_x25519macro_478!();
+        Depcrate_hazardous_ecc_x25519macro_479!();
+        Depcrate_hazardous_ecc_x25519impl_480!();
+        Depcrate_hazardous_ecc_x25519impl_481!();
+        Depcrate_hazardous_ecc_x25519PrivateKey!();
+        Depcrate_hazardous_ecc_x25519impl_483!();
+        Depcrate_hazardous_ecc_x25519impl_484!();
+        Depcrate_hazardous_ecc_x25519impl_485!();
+        Depcrate_hazardous_ecc_x25519impl_486!();
+        Depcrate_hazardous_ecc_x25519macro_487!();
+        Depcrate_hazardous_ecc_x25519macro_488!();
+        Depcrate_hazardous_ecc_x25519key_agreement!();
+        Depcrate_hazardous_ecc_x25519public!();
+    };
+}

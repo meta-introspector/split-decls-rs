@@ -1,0 +1,43 @@
+// Generated module macro for crate::inline_array
+macro_rules! Modcrate_inline_array {
+() => {
+        Depcrate_inline_arrayuse_2!();
+        Depcrate_inline_arrayuse_3!();
+        Depcrate_inline_arrayuse_4!();
+        Depcrate_inline_arrayuse_5!();
+        Depcrate_inline_arrayuse_6!();
+        Depcrate_inline_arrayuse_7!();
+        Depcrate_inline_arrayuse_8!();
+        Depcrate_inline_arrayuse_9!();
+        Depcrate_inline_arrayuse_10!();
+        Depcrate_inline_arrayuse_11!();
+        Depcrate_inline_arrayuse_12!();
+        Depcrate_inline_arrayiter!();
+        Depcrate_inline_arrayuse_26!();
+        Depcrate_inline_arrayInlineArray!();
+        Depcrate_inline_arraycapacity!();
+        Depcrate_inline_arrayimpl_29!();
+        Depcrate_inline_arrayimpl_30!();
+        Depcrate_inline_arrayimpl_31!();
+        Depcrate_inline_arrayimpl_32!();
+        Depcrate_inline_arrayimpl_33!();
+        Depcrate_inline_arrayimpl_34!();
+        Depcrate_inline_arrayimpl_35!();
+        Depcrate_inline_arrayimpl_36!();
+        Depcrate_inline_arrayimpl_37!();
+        Depcrate_inline_arrayimpl_38!();
+        Depcrate_inline_arrayimpl_39!();
+        Depcrate_inline_arrayimpl_40!();
+        Depcrate_inline_arrayimpl_41!();
+        Depcrate_inline_arrayimpl_42!();
+        Depcrate_inline_arrayimpl_43!();
+        Depcrate_inline_arrayimpl_44!();
+        Depcrate_inline_arrayimpl_45!();
+        Depcrate_inline_arrayimpl_46!();
+        Depcrate_inline_arrayimpl_47!();
+        Depcrate_inline_arrayimpl_48!();
+        Depcrate_inline_arrayimpl_49!();
+        Depcrate_inline_arrayimpl_50!();
+        Depcrate_inline_arraytest!();
+    };
+}

@@ -1,0 +1,9 @@
+// Generated macro for impl_61 (impl)
+macro_rules! Depcrate_dateimpl_61 {
+() => {
+// Module: crate::date
+// Provides: {"impl_61"}
+// Dependencies: {}
+impl < Tz : TimeZone > Date < Tz > where Tz :: Offset : fmt :: Display , { # [doc = " Formats the date with the specified formatting items."] # [cfg (feature = "alloc")] # [inline] # [must_use] pub fn format_with_items < 'a , I , B > (& self , items : I) -> DelayedFormat < I > where I : Iterator < Item = B > + Clone , B : Borrow < Item < 'a > > , { DelayedFormat :: new_with_offset (Some (self . naive_local ()) , None , & self . offset , items) } # [doc = " Formats the date with the specified format string."] # [doc = " See the [`crate::format::strftime`] module"] # [doc = " on the supported escape sequences."] # [cfg (feature = "alloc")] # [inline] # [must_use] pub fn format < 'a > (& self , fmt : & 'a str) -> DelayedFormat < StrftimeItems < 'a > > { self . format_with_items (StrftimeItems :: new (fmt)) } # [doc = " Formats the date with the specified formatting items and locale."] # [cfg (all (feature = "unstable-locales" , feature = "alloc"))] # [inline] # [must_use] pub fn format_localized_with_items < 'a , I , B > (& self , items : I , locale : Locale ,) -> DelayedFormat < I > where I : Iterator < Item = B > + Clone , B : Borrow < Item < 'a > > , { DelayedFormat :: new_with_offset_and_locale (Some (self . naive_local ()) , None , & self . offset , items , locale ,) } # [doc = " Formats the date with the specified format string and locale."] # [doc = " See the [`crate::format::strftime`] module"] # [doc = " on the supported escape sequences."] # [cfg (all (feature = "unstable-locales" , feature = "alloc"))] # [inline] # [must_use] pub fn format_localized < 'a > (& self , fmt : & 'a str , locale : Locale ,) -> DelayedFormat < StrftimeItems < 'a > > { self . format_localized_with_items (StrftimeItems :: new_with_locale (fmt , locale) , locale) } }
+};
+}

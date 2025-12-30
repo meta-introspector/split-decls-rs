@@ -1,0 +1,9 @@
+// Generated macro for impl_86 (impl)
+macro_rules! Depcrate_big5impl_86 {
+() => {
+// Module: crate::big5
+// Provides: {"impl_86"}
+// Dependencies: {}
+impl Big5Encoder { pub fn new (encoding : & 'static Encoding) -> Encoder { Encoder :: new (encoding , VariantEncoder :: Big5 (Big5Encoder)) } pub fn max_buffer_length_from_utf16_without_replacement (& self , u16_length : usize ,) -> Option < usize > { u16_length . checked_mul (2) } pub fn max_buffer_length_from_utf8_without_replacement (& self , byte_length : usize ,) -> Option < usize > { byte_length . checked_add (1) } ascii_compatible_encoder_functions ! ({ if let Some ((lead , trail)) = big5_level1_hanzi_encode (bmp) { handle . write_two (lead , trail) } else { let pointer = if let Some (pointer) = big5_box_encode (bmp) { pointer } else if let Some (pointer) = big5_other_encode (bmp) { pointer } else { return (EncoderResult :: unmappable_from_bmp (bmp) , source . consumed () , handle . written () ,) ; } ; let lead = pointer / 157 + 0x81 ; let remainder = pointer % 157 ; let trail = if remainder < 0x3F { remainder + 0x40 } else { remainder + 0x62 } ; handle . write_two (lead as u8 , trail as u8) } } , { if in_inclusive_range32 (astral as u32 , 0x2008A , 0x2F8A6) { if let Some (rebased_pointer) = big5_astral_encode (astral as u16) { let lead = rebased_pointer / 157 + 0x87 ; let remainder = rebased_pointer % 157 ; let trail = if remainder < 0x3F { remainder + 0x40 } else { remainder + 0x62 } ; handle . write_two (lead as u8 , trail as u8) } else { return (EncoderResult :: Unmappable (astral) , source . consumed () , handle . written () ,) ; } } else { return (EncoderResult :: Unmappable (astral) , source . consumed () , handle . written () ,) ; } } , bmp , astral , self , source , handle , copy_ascii_to_check_space_two , check_space_two , false) ; }
+};
+}

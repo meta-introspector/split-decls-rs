@@ -1,0 +1,9 @@
+// Generated macro for impl_175 (impl)
+macro_rules! Depcrate_snippetimpl_175 {
+() => {
+// Module: crate::snippet
+// Provides: {"impl_175"}
+// Dependencies: {}
+impl < 'a , T : Clone > Snippet < 'a , T > { # [doc = " The source code to be rendered"] # [doc = ""] # [doc = " <div class=\"warning\">"] # [doc = ""] # [doc = " Text passed to this function is considered \"untrusted input\", as such"] # [doc = " all text is passed through a normalization function. Pre-styled text is"] # [doc = " not allowed to be passed to this function."] # [doc = ""] # [doc = " </div>"] pub fn source (source : impl Into < Cow < 'a , str > >) -> Self { Self { path : None , line_start : 1 , source : source . into () , markers : vec ! [] , fold : true , } } # [doc = " When manually [`fold`][Self::fold]ing,"] # [doc = " the [`source`][Self::source]s line offset from the original start"] pub fn line_start (mut self , line_start : usize) -> Self { self . line_start = line_start ; self } # [doc = " The location of the [`source`][Self::source] (e.g. a path)"] # [doc = ""] # [doc = " <div class=\"warning\">"] # [doc = ""] # [doc = " Text passed to this function is considered \"untrusted input\", as such"] # [doc = " all text is passed through a normalization function. Pre-styled text is"] # [doc = " not allowed to be passed to this function."] # [doc = ""] # [doc = " </div>"] pub fn path (mut self , path : impl Into < OptionCow < 'a > >) -> Self { self . path = path . into () . 0 ; self } # [doc = " Control whether lines without [`Annotation`]s are shown"] # [doc = ""] # [doc = " The default is `fold(true)`, collapsing uninteresting lines."] # [doc = ""] # [doc = " See [`AnnotationKind::Visible`] to force specific spans to be shown."] pub fn fold (mut self , fold : bool) -> Self { self . fold = fold ; self } }
+};
+}

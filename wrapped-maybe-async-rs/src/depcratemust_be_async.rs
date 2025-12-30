@@ -1,0 +1,9 @@
+// Generated macro for must_be_async (function)
+macro_rules! Depcratemust_be_async {
+() => {
+// Module: crate
+// Provides: {"must_be_async"}
+// Dependencies: {}
+# [doc = " convert marked async code to async code with `async-trait`"] # [proc_macro_attribute] pub fn must_be_async (args : TokenStream , input : TokenStream) -> TokenStream { let mode = match async_mode (args . to_string () . replace (" " , "") . as_str ()) { Ok (m) => m , Err (e) => return e . to_compile_error () . into () , } ; let mut item = parse_macro_input ! (input as Item) ; convert_async (& mut item , mode) . into () }
+};
+}

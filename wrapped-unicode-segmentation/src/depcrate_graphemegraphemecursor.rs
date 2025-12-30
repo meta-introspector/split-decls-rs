@@ -1,0 +1,9 @@
+// Generated macro for GraphemeCursor (struct)
+macro_rules! Depcrate_graphemeGraphemeCursor {
+() => {
+// Module: crate::grapheme
+// Provides: {"GraphemeCursor"}
+// Dependencies: {}
+# [doc = " Cursor-based segmenter for grapheme clusters."] # [doc = ""] # [doc = " This allows working with ropes and other datastructures where the string is not contiguous or"] # [doc = " fully known at initialization time."] # [derive (Clone , Debug)] pub struct GraphemeCursor { # [doc = " Current cursor position."] offset : usize , # [doc = " Total length of the string."] len : usize , # [doc = " A config flag indicating whether this cursor computes legacy or extended"] # [doc = " grapheme cluster boundaries (enables GB9a and GB9b if set)."] is_extended : bool , # [doc = " Information about the potential boundary at `offset`"] state : GraphemeState , # [doc = " Category of codepoint immediately preceding cursor, if known."] cat_before : Option < GraphemeCat > , # [doc = " Category of codepoint immediately after cursor, if known."] cat_after : Option < GraphemeCat > , # [doc = " If set, at least one more codepoint immediately preceding this offset"] # [doc = " is needed to resolve whether there's a boundary at `offset`."] pre_context_offset : Option < usize > , # [doc = " The number of `InCB=Linker` codepoints preceding `offset`"] # [doc = " (potentially intermingled with `InCB=Extend`)."] incb_linker_count : Option < usize > , # [doc = " The number of RIS codepoints preceding `offset`. If `pre_context_offset`"] # [doc = " is set, then counts the number of RIS between that and `offset`, otherwise"] # [doc = " is an accurate count relative to the string."] ris_count : Option < usize > , # [doc = " Set if a call to `prev_boundary` or `next_boundary` was suspended due"] # [doc = " to needing more input."] resuming : bool , # [doc = " Cached grapheme category and associated scalar value range."] grapheme_cat_cache : (u32 , u32 , GraphemeCat) , }
+};
+}

@@ -1,0 +1,9 @@
+// Generated macro for R_XTENSA_GLOB_DAT (const)
+macro_rules! Depcrate_elfR_XTENSA_GLOB_DAT {
+() => {
+// Module: crate::elf
+// Provides: {"R_XTENSA_GLOB_DAT"}
+// Dependencies: {}
+pub const R_XTENSA_GLOB_DAT : u32 = 3 ;
+};
+}

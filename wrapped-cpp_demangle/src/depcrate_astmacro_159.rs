@@ -1,0 +1,9 @@
+// Generated macro for macro_159 (macro)
+macro_rules! Depcrate_astmacro_159 {
+() => {
+// Module: crate::ast
+// Provides: {"macro_159"}
+// Dependencies: {}
+define_vocabulary ! { # [doc = " The `<simple-operator-name>` production."] # [derive (Clone , Debug , PartialEq , Eq)] pub enum SimpleOperatorName { New (b"nw" , "new" , 3) , NewArray (b"na" , "new[]" , 3) , Delete (b"dl" , "delete" , 1) , DeleteArray (b"da" , "delete[]" , 1) , UnaryPlus (b"ps" , "+" , 1) , Neg (b"ng" , "-" , 1) , AddressOf (b"ad" , "&" , 1) , Deref (b"de" , "*" , 1) , BitNot (b"co" , "~" , 1) , Add (b"pl" , "+" , 2) , Sub (b"mi" , "-" , 2) , Mul (b"ml" , "*" , 2) , Div (b"dv" , "/" , 2) , Rem (b"rm" , "%" , 2) , BitAnd (b"an" , "&" , 2) , BitOr (b"or" , "|" , 2) , BitXor (b"eo" , "^" , 2) , Assign (b"aS" , "=" , 2) , AddAssign (b"pL" , "+=" , 2) , SubAssign (b"mI" , "-=" , 2) , MulAssign (b"mL" , "*=" , 2) , DivAssign (b"dV" , "/=" , 2) , RemAssign (b"rM" , "%=" , 2) , BitAndAssign (b"aN" , "&=" , 2) , BitOrAssign (b"oR" , "|=" , 2) , BitXorAssign (b"eO" , "^=" , 2) , Shl (b"ls" , "<<" , 2) , Shr (b"rs" , ">>" , 2) , ShlAssign (b"lS" , "<<=" , 2) , ShrAssign (b"rS" , ">>=" , 2) , Eq (b"eq" , "==" , 2) , Ne (b"ne" , "!=" , 2) , Less (b"lt" , "<" , 2) , Greater (b"gt" , ">" , 2) , LessEq (b"le" , "<=" , 2) , GreaterEq (b"ge" , ">=" , 2) , Not (b"nt" , "!" , 1) , LogicalAnd (b"aa" , "&&" , 2) , LogicalOr (b"oo" , "||" , 2) , PostInc (b"pp" , "++" , 1) , PostDec (b"mm" , "--" , 1) , Comma (b"cm" , "," , 2) , DerefMemberPtr (b"pm" , "->*" , 2) , DerefMember (b"pt" , "->" , 2) , Call (b"cl" , "()" , 2) , Index (b"ix" , "[]" , 2) , Question (b"qu" , "?:" , 3) , Spaceship (b"ss" , "<=>" , 2) } impl SimpleOperatorName { fn arity (& self) -> u8 ; } }
+};
+}

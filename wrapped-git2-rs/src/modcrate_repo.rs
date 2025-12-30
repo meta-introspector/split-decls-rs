@@ -1,0 +1,45 @@
+// Generated module macro for crate::repo
+macro_rules! Modcrate_repo {
+() => {
+        Depcrate_repouse_1049!();
+        Depcrate_repouse_1050!();
+        Depcrate_repouse_1051!();
+        Depcrate_repouse_1052!();
+        Depcrate_repouse_1053!();
+        Depcrate_repouse_1054!();
+        Depcrate_repouse_1055!();
+        Depcrate_repouse_1056!();
+        Depcrate_repouse_1057!();
+        Depcrate_repouse_1058!();
+        Depcrate_repouse_1059!();
+        Depcrate_repouse_1060!();
+        Depcrate_repouse_1061!();
+        Depcrate_repouse_1062!();
+        Depcrate_repouse_1063!();
+        Depcrate_repouse_1064!();
+        Depcrate_repouse_1065!();
+        Depcrate_repouse_1066!();
+        Depcrate_repouse_1067!();
+        Depcrate_repouse_1068!();
+        Depcrate_repouse_1069!();
+        Depcrate_repouse_1070!();
+        Depcrate_repouse_1071!();
+        Depcrate_repouse_1072!();
+        Depcrate_repouse_1073!();
+        Depcrate_repouse_1074!();
+        Depcrate_repoMergeheadForeachCb!();
+        Depcrate_repoFetchheadForeachCb!();
+        Depcrate_repoFetchheadForeachCbData!();
+        Depcrate_repoMergeheadForeachCbData!();
+        Depcrate_repomergehead_foreach_cb!();
+        Depcrate_repofetchhead_foreach_cb!();
+        Depcrate_repoRepository!();
+        Depcrate_repoimpl_1082!();
+        Depcrate_repoRepositoryInitOptions!();
+        Depcrate_repoimpl_1084!();
+        Depcrate_repoimpl_1085!();
+        Depcrate_repoimpl_1086!();
+        Depcrate_repoimpl_1087!();
+        Depcrate_repotests!();
+    };
+}

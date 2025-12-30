@@ -1,0 +1,9 @@
+// Generated macro for ref_from_prefix_suffix (function)
+macro_rules! Depcrateref_from_prefix_suffix {
+() => {
+// Module: crate
+// Provides: {"ref_from_prefix_suffix"}
+// Dependencies: {}
+# [doc = " Interprets the given affix of the given bytes as a `&Self`."] # [doc = ""] # [doc = " This method computes the largest possible size of `Self` that can fit in the"] # [doc = " prefix or suffix bytes of `source`, then attempts to return both a reference"] # [doc = " to those bytes interpreted as a `Self`, and a reference to the excess bytes."] # [doc = " If there are insufficient bytes, or if that affix of `source` is not"] # [doc = " appropriately aligned, this returns `Err`."] # [inline (always)] fn ref_from_prefix_suffix < T : FromBytes + KnownLayout + Immutable + ? Sized > (source : & [u8] , meta : Option < T :: PointerMetadata > , cast_type : CastType ,) -> Result < (& T , & [u8]) , CastError < & [u8] , T > > { let (slf , prefix_suffix) = Ptr :: from_ref (source) . try_cast_into :: < _ , BecauseImmutable > (cast_type , meta) . map_err (| err | err . map_src (| s | s . as_ref ())) ? ; Ok ((slf . recall_validity () . as_ref () , prefix_suffix . as_ref ())) }
+};
+}

@@ -1,0 +1,49 @@
+// Generated module macro for crate::read::elf::relocation
+macro_rules! Modcrate_read_elf_relocation {
+() => {
+        Depcrate_read_elf_relocationuse_490!();
+        Depcrate_read_elf_relocationuse_491!();
+        Depcrate_read_elf_relocationuse_492!();
+        Depcrate_read_elf_relocationuse_493!();
+        Depcrate_read_elf_relocationuse_494!();
+        Depcrate_read_elf_relocationuse_495!();
+        Depcrate_read_elf_relocationuse_496!();
+        Depcrate_read_elf_relocationuse_497!();
+        Depcrate_read_elf_relocationuse_498!();
+        Depcrate_read_elf_relocationRelocationSections!();
+        Depcrate_read_elf_relocationimpl_500!();
+        Depcrate_read_elf_relocationElfRelocationIterator!();
+        Depcrate_read_elf_relocationimpl_502!();
+        Depcrate_read_elf_relocationimpl_503!();
+        Depcrate_read_elf_relocationElfDynamicRelocationIterator32!();
+        Depcrate_read_elf_relocationElfDynamicRelocationIterator64!();
+        Depcrate_read_elf_relocationElfDynamicRelocationIterator!();
+        Depcrate_read_elf_relocationimpl_507!();
+        Depcrate_read_elf_relocationimpl_508!();
+        Depcrate_read_elf_relocationElfSectionRelocationIterator32!();
+        Depcrate_read_elf_relocationElfSectionRelocationIterator64!();
+        Depcrate_read_elf_relocationElfSectionRelocationIterator!();
+        Depcrate_read_elf_relocationimpl_512!();
+        Depcrate_read_elf_relocationimpl_513!();
+        Depcrate_read_elf_relocationparse_relocation!();
+        Depcrate_read_elf_relocationRel!();
+        Depcrate_read_elf_relocationimpl_516!();
+        Depcrate_read_elf_relocationimpl_517!();
+        Depcrate_read_elf_relocationRela!();
+        Depcrate_read_elf_relocationimpl_519!();
+        Depcrate_read_elf_relocationimpl_520!();
+        Depcrate_read_elf_relocationRelrIterator!();
+        Depcrate_read_elf_relocationimpl_522!();
+        Depcrate_read_elf_relocationimpl_523!();
+        Depcrate_read_elf_relocationRelr!();
+        Depcrate_read_elf_relocationimpl_525!();
+        Depcrate_read_elf_relocationimpl_526!();
+        Depcrate_read_elf_relocationCrel!();
+        Depcrate_read_elf_relocationimpl_528!();
+        Depcrate_read_elf_relocationCrelIteratorHeader!();
+        Depcrate_read_elf_relocationCrelIteratorState!();
+        Depcrate_read_elf_relocationCrelIterator!();
+        Depcrate_read_elf_relocationimpl_532!();
+        Depcrate_read_elf_relocationimpl_533!();
+    };
+}

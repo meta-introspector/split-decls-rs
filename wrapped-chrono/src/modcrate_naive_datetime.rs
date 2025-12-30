@@ -1,0 +1,47 @@
+// Generated module macro for crate::naive::datetime
+macro_rules! Modcrate_naive_datetime {
+() => {
+        Depcrate_naive_datetimeuse_508!();
+        Depcrate_naive_datetimeuse_509!();
+        Depcrate_naive_datetimeuse_510!();
+        Depcrate_naive_datetimeuse_511!();
+        Depcrate_naive_datetimeuse_512!();
+        Depcrate_naive_datetimeuse_513!();
+        Depcrate_naive_datetimeuse_514!();
+        Depcrate_naive_datetimeuse_515!();
+        Depcrate_naive_datetimeuse_516!();
+        Depcrate_naive_datetimeuse_517!();
+        Depcrate_naive_datetimeuse_518!();
+        Depcrate_naive_datetimeuse_519!();
+        Depcrate_naive_datetimeuse_520!();
+        Depcrate_naive_datetimeserde!();
+        Depcrate_naive_datetimetests!();
+        Depcrate_naive_datetimeMIN_DATETIME!();
+        Depcrate_naive_datetimeMAX_DATETIME!();
+        Depcrate_naive_datetimeNaiveDateTime!();
+        Depcrate_naive_datetimeimpl_561!();
+        Depcrate_naive_datetimeimpl_562!();
+        Depcrate_naive_datetimeimpl_563!();
+        Depcrate_naive_datetimeimpl_564!();
+        Depcrate_naive_datetimeimpl_565!();
+        Depcrate_naive_datetimeimpl_566!();
+        Depcrate_naive_datetimeimpl_567!();
+        Depcrate_naive_datetimeimpl_568!();
+        Depcrate_naive_datetimeimpl_569!();
+        Depcrate_naive_datetimeimpl_570!();
+        Depcrate_naive_datetimeimpl_571!();
+        Depcrate_naive_datetimeimpl_572!();
+        Depcrate_naive_datetimeimpl_573!();
+        Depcrate_naive_datetimeimpl_574!();
+        Depcrate_naive_datetimeimpl_575!();
+        Depcrate_naive_datetimeimpl_576!();
+        Depcrate_naive_datetimeimpl_577!();
+        Depcrate_naive_datetimeimpl_578!();
+        Depcrate_naive_datetimeimpl_579!();
+        Depcrate_naive_datetimeimpl_580!();
+        Depcrate_naive_datetimeimpl_581!();
+        Depcrate_naive_datetimeimpl_582!();
+        Depcrate_naive_datetimeimpl_583!();
+        Depcrate_naive_datetimeimpl_584!();
+    };
+}

@@ -1,0 +1,48 @@
+// Generated module macro for crate::util::macro_util
+macro_rules! Modcrate_util_macro_util {
+() => {
+        Depcrate_util_macro_utiluse_29!();
+        Depcrate_util_macro_utiluse_30!();
+        Depcrate_util_macro_utiluse_31!();
+        Depcrate_util_macro_utilField!();
+        Depcrate_util_macro_utilPaddingFree!();
+        Depcrate_util_macro_utilimpl_34!();
+        Depcrate_util_macro_utilDynamicPaddingFree!();
+        Depcrate_util_macro_utilimpl_36!();
+        Depcrate_util_macro_utilAlignOf!();
+        Depcrate_util_macro_utilimpl_38!();
+        Depcrate_util_macro_utilother_39!();
+        Depcrate_util_macro_utilimpl_40!();
+        Depcrate_util_macro_util_64K!();
+        Depcrate_util_macro_utilAligned64kAllocation!();
+        Depcrate_util_macro_utilALIGNED_64K_ALLOCATION!();
+        Depcrate_util_macro_utiltrailing_field_offset!();
+        Depcrate_util_macro_utilalign_of!();
+        Depcrate_util_macro_utilsize_to_tag!();
+        Depcrate_util_macro_utilSizeToTag!();
+        Depcrate_util_macro_util__size_of!();
+        Depcrate_util_macro_utiluse_49!();
+        Depcrate_util_macro_utiluse_50!();
+        Depcrate_util_macro_utilstruct_padding!();
+        Depcrate_util_macro_utilrepr_c_struct_has_padding!();
+        Depcrate_util_macro_utilunion_padding!();
+        Depcrate_util_macro_utilenum_padding!();
+        Depcrate_util_macro_utilassert_align_gt_eq!();
+        Depcrate_util_macro_utilassert_size_eq!();
+        Depcrate_util_macro_utiltry_cast_or_pme!();
+        Depcrate_util_macro_utiltry_transmute!();
+        Depcrate_util_macro_utiltry_transmute_ref!();
+        Depcrate_util_macro_utiltry_transmute_mut!();
+        Depcrate_util_macro_utilWrap!();
+        Depcrate_util_macro_utilimpl_62!();
+        Depcrate_util_macro_utilimpl_63!();
+        Depcrate_util_macro_utilimpl_64!();
+        Depcrate_util_macro_utilTransmuteRefDst!();
+        Depcrate_util_macro_utilimpl_66!();
+        Depcrate_util_macro_utilTransmuteMutDst!();
+        Depcrate_util_macro_utilimpl_68!();
+        Depcrate_util_macro_utilmust_use!();
+        Depcrate_util_macro_utilcore_reexport!();
+        Depcrate_util_macro_utiltests!();
+    };
+}

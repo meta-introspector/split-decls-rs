@@ -1,0 +1,39 @@
+// Generated module macro for crate::changelog
+macro_rules! Modcrate_changelog {
+() => {
+        Depcrate_changelogr0_9_0!();
+        Depcrate_changelogr0_8_9!();
+        Depcrate_changelogr0_8_8!();
+        Depcrate_changelogr0_8_7!();
+        Depcrate_changelogr0_8_4!();
+        Depcrate_changelogr0_8_3!();
+        Depcrate_changelogr0_8_2!();
+        Depcrate_changelogr0_8_1!();
+        Depcrate_changelogr0_8_0!();
+        Depcrate_changelogr0_7_4!();
+        Depcrate_changelogr0_7_3!();
+        Depcrate_changelogr0_7_2!();
+        Depcrate_changelogr0_7_1!();
+        Depcrate_changelogr0_7_0!();
+        Depcrate_changelogr0_6_7!();
+        Depcrate_changelogr0_6_6!();
+        Depcrate_changelogr0_6_5!();
+        Depcrate_changelogr0_6_4!();
+        Depcrate_changelogr0_6_3!();
+        Depcrate_changelogr0_6_2!();
+        Depcrate_changelogr0_6_1!();
+        Depcrate_changelogr0_6_0!();
+        Depcrate_changelogr0_5_2!();
+        Depcrate_changelogr0_5_1!();
+        Depcrate_changelogr0_5_0!();
+        Depcrate_changelogr0_4_3!();
+        Depcrate_changelogr0_4_2!();
+        Depcrate_changelogr0_4_1!();
+        Depcrate_changelogr0_4_0!();
+        Depcrate_changelogr0_3_4!();
+        Depcrate_changelogr0_3_3!();
+        Depcrate_changelogr0_3_2!();
+        Depcrate_changelogr0_3_1!();
+        Depcrate_changelogr0_3_0!();
+    };
+}

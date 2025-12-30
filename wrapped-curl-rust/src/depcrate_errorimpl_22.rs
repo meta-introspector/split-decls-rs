@@ -1,0 +1,9 @@
+// Generated macro for impl_22 (impl)
+macro_rules! Depcrate_errorimpl_22 {
+() => {
+// Module: crate::error
+// Provides: {"impl_22"}
+// Dependencies: {}
+impl MultiError { # [doc = " Creates a new error from the underlying code returned by libcurl."] pub fn new (code : curl_sys :: CURLMcode) -> MultiError { MultiError { code } } # [doc = " Returns whether this error corresponds to CURLM_BAD_HANDLE."] pub fn is_bad_handle (& self) -> bool { self . code == curl_sys :: CURLM_BAD_HANDLE } # [doc = " Returns whether this error corresponds to CURLM_BAD_EASY_HANDLE."] pub fn is_bad_easy_handle (& self) -> bool { self . code == curl_sys :: CURLM_BAD_EASY_HANDLE } # [doc = " Returns whether this error corresponds to CURLM_OUT_OF_MEMORY."] pub fn is_out_of_memory (& self) -> bool { self . code == curl_sys :: CURLM_OUT_OF_MEMORY } # [doc = " Returns whether this error corresponds to CURLM_INTERNAL_ERROR."] pub fn is_internal_error (& self) -> bool { self . code == curl_sys :: CURLM_INTERNAL_ERROR } # [doc = " Returns whether this error corresponds to CURLM_BAD_SOCKET."] pub fn is_bad_socket (& self) -> bool { self . code == curl_sys :: CURLM_BAD_SOCKET } # [doc = " Returns whether this error corresponds to CURLM_UNKNOWN_OPTION."] pub fn is_unknown_option (& self) -> bool { self . code == curl_sys :: CURLM_UNKNOWN_OPTION } # [doc = " Returns whether this error corresponds to CURLM_CALL_MULTI_PERFORM."] pub fn is_call_perform (& self) -> bool { self . code == curl_sys :: CURLM_CALL_MULTI_PERFORM } # [doc = " Returns the value of the underlying error corresponding to libcurl."] pub fn code (& self) -> curl_sys :: CURLMcode { self . code } # [doc = " Returns curl's human-readable description of this error."] pub fn description (& self) -> & str { unsafe { let s = curl_sys :: curl_multi_strerror (self . code) ; assert ! (! s . is_null ()) ; str :: from_utf8 (CStr :: from_ptr (s) . to_bytes ()) . unwrap () } } }
+};
+}

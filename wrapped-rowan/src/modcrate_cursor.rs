@@ -1,0 +1,51 @@
+// Generated module macro for crate::cursor
+macro_rules! Modcrate_cursor {
+() => {
+        Depcrate_cursoruse_13!();
+        Depcrate_cursoruse_14!();
+        Depcrate_cursoruse_15!();
+        Depcrate_cursorGreen!();
+        Depcrate_cursor_SyntaxElement!();
+        Depcrate_cursorNodeData!();
+        Depcrate_cursorimpl_19!();
+        Depcrate_cursorSyntaxElement!();
+        Depcrate_cursorSyntaxNode!();
+        Depcrate_cursorimpl_22!();
+        Depcrate_cursorimpl_23!();
+        Depcrate_cursorSyntaxToken!();
+        Depcrate_cursorimpl_25!();
+        Depcrate_cursorimpl_26!();
+        Depcrate_cursorfree!();
+        Depcrate_cursorimpl_28!();
+        Depcrate_cursorimpl_29!();
+        Depcrate_cursorimpl_30!();
+        Depcrate_cursorimpl_31!();
+        Depcrate_cursorimpl_32!();
+        Depcrate_cursorimpl_33!();
+        Depcrate_cursorimpl_34!();
+        Depcrate_cursorimpl_35!();
+        Depcrate_cursorimpl_36!();
+        Depcrate_cursorimpl_37!();
+        Depcrate_cursorimpl_38!();
+        Depcrate_cursorimpl_39!();
+        Depcrate_cursorimpl_40!();
+        Depcrate_cursorimpl_41!();
+        Depcrate_cursorimpl_42!();
+        Depcrate_cursorSyntaxNodeChildren!();
+        Depcrate_cursorimpl_44!();
+        Depcrate_cursorimpl_45!();
+        Depcrate_cursorSyntaxNodeChildrenByKind!();
+        Depcrate_cursorimpl_47!();
+        Depcrate_cursorSyntaxElementChildren!();
+        Depcrate_cursorimpl_49!();
+        Depcrate_cursorimpl_50!();
+        Depcrate_cursorSyntaxElementChildrenByKind!();
+        Depcrate_cursorimpl_52!();
+        Depcrate_cursorPreorder!();
+        Depcrate_cursorimpl_54!();
+        Depcrate_cursorimpl_55!();
+        Depcrate_cursorPreorderWithTokens!();
+        Depcrate_cursorimpl_57!();
+        Depcrate_cursorimpl_58!();
+    };
+}

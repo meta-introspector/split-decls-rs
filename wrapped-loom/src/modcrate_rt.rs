@@ -1,0 +1,55 @@
+// Generated module macro for crate::rt
+macro_rules! Modcrate_rt {
+() => {
+        Depcrate_rtlocation!();
+        Depcrate_rtuse_17!();
+        Depcrate_rtaccess!();
+        Depcrate_rtuse_22!();
+        Depcrate_rtalloc!();
+        Depcrate_rtuse_34!();
+        Depcrate_rtarc!();
+        Depcrate_rtuse_46!();
+        Depcrate_rtatomic!();
+        Depcrate_rtuse_74!();
+        Depcrate_rtcell!();
+        Depcrate_rtuse_86!();
+        Depcrate_rtcondvar!();
+        Depcrate_rtuse_97!();
+        Depcrate_rtexecution!();
+        Depcrate_rtuse_109!();
+        Depcrate_rtnotify!();
+        Depcrate_rtuse_120!();
+        Depcrate_rtnum!();
+        Depcrate_rtuse_127!();
+        Depcrate_rtobject!();
+        Depcrate_rtmpsc!();
+        Depcrate_rtuse_169!();
+        Depcrate_rtmutex!();
+        Depcrate_rtuse_179!();
+        Depcrate_rtpath!();
+        Depcrate_rtuse_193!();
+        Depcrate_rtrwlock!();
+        Depcrate_rtuse_205!();
+        Depcrate_rtscheduler!();
+        Depcrate_rtuse_220!();
+        Depcrate_rtsynchronize!();
+        Depcrate_rtuse_226!();
+        Depcrate_rtlazy_static!();
+        Depcrate_rtthread!();
+        Depcrate_rtvv!();
+        Depcrate_rtuse_274!();
+        Depcrate_rtuse_275!();
+        Depcrate_rtMAX_THREADS!();
+        Depcrate_rtMAX_ATOMIC_HISTORY!();
+        Depcrate_rtspawn!();
+        Depcrate_rtpark!();
+        Depcrate_rtbranch!();
+        Depcrate_rtsynchronize!();
+        Depcrate_rtyield_now!();
+        Depcrate_rtexecution!();
+        Depcrate_rtthread_done!();
+        Depcrate_rtexplore!();
+        Depcrate_rtstop_exploring!();
+        Depcrate_rtskip_branch!();
+    };
+}

@@ -1,0 +1,9 @@
+// Generated macro for arr (macro)
+macro_rules! Depcrate_arrarr {
+() => {
+// Module: crate::arr
+// Provides: {"arr"}
+// Dependencies: {}
+# [doc = " Macro allowing for easy construction of Generic Arrays."] # [doc = ""] # [doc = " Type-inference works similarly to `vec![]`"] # [doc = ""] # [doc = " **`arr!` can be used in `const` expressions.**"] # [doc = ""] # [doc = " Example:"] # [doc = " ```"] # [doc = " # use generic_array::arr;"] # [doc = " use generic_array::typenum::U6;"] # [doc = ""] # [doc = " let test = arr![1, 2, 3]; // implicit length"] # [doc = " let test = arr![1; 6];    // explicit length via `Const<N>`"] # [doc = " let test = arr![1; U6];   // explicit length via typenum"] # [doc = " ```"] # [doc = ""] # [doc = " # NOTES AND LIMITATIONS"] # [doc = " * As of `generic-array 1.0`, [`From`]/[`from_array`](crate::GenericArray::from_array) can be used directly for a wide range of regular arrays."] # [doc = " * The `[T; N: ArrayLength]` and `[T; usize]` explicit forms are limited to `Copy` values. Use"] # [doc = "   [`GenericArray::generate(|| value.clone())`](crate::GenericSequence::generate) for non-`Copy` items."] # [doc = " * The `[T; usize]` explicit and `[0, 1, 2, 3]` implicit forms are limited to lengths supported by [`Const<U>`](typenum::Const)"] # [macro_export] macro_rules ! arr { ($ ($ x : expr) ,* $ (,) *) => ($ crate :: GenericArray :: from_array ([$ ($ x) ,*])) ; ($ x : expr ; $ N : ty) => ({ const __INPUT_LENGTH : usize = <$ N as $ crate :: typenum :: Unsigned >:: USIZE ; # [inline (always)] const fn __do_transmute < T , N : $ crate :: ArrayLength > (arr : [T ; __INPUT_LENGTH]) -> $ crate :: GenericArray < T , N > { unsafe { $ crate :: const_transmute (arr) } } __do_transmute ::< _ , $ N > ([$ x ; __INPUT_LENGTH]) }) ; ($ x : expr ; $ n : expr) => ($ crate :: GenericArray :: from_array ([$ x ; $ n])) ; }
+};
+}

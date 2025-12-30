@@ -1,0 +1,67 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcrateimpl_48.rs");
+include!("depcrate_legacytests.rs");
+include!("depcrate_v0ident.rs");
+include!("depcratedemangle_line.rs");
+include!("depcrateimpl_52.rs");
+include!("depcratetests.rs");
+include!("depcrate_v0hexnibbles.rs");
+include!("depcrate_v0parser.rs");
+include!("depcratev0.rs");
+include!("depcrate_v0impl_29.rs");
+include!("depcrate_legacydemangle.rs");
+include!("depcrate_v0impl_26.rs");
+include!("depcratemax_size.rs");
+include!("depcrate_v0parseerror.rs");
+include!("depcrate_v0impl_31.rs");
+include!("depcrate_v0impl_20.rs");
+include!("depcratelegacy.rs");
+include!("depcrate_v0max_depth.rs");
+include!("depcrate_v0demangle.rs");
+include!("depcratedemangle_stream.rs");
+include!("depcrate_v0parse.rs");
+include!("depcratedemangle.rs");
+include!("depcrateassert_ends_with.rs");
+include!("depcrate_legacyimpl_10.rs");
+include!("depcrateis_symbol_like.rs");
+include!("depcrateuse_36.rs");
+include!("depcrateimpl_53.rs");
+include!("depcrate_legacyuse_6.rs");
+include!("depcrate_legacydemangle.rs");
+include!("depcrate_v0small_punycode_len.rs");
+include!("depcrate_v0write.rs");
+include!("depcrateimpl_44.rs");
+include!("depcratedemanglestyle.rs");
+include!("depcrate_v0tests.rs");
+include!("depcratesizelimitedfmtadapter.rs");
+include!("depcratedemangle.rs");
+include!("depcrateimpl_54.rs");
+include!("depcrate_v0impl_34.rs");
+include!("depcrateother_1.rs");
+include!("depcrate_v0use_13.rs");
+include!("depcrateassert_contains.rs");
+include!("depcrate_v0basic_type.rs");
+include!("depcrate_v0use_14.rs");
+include!("depcratetry_demangle.rs");
+include!("depcrateis_ascii_alphanumeric.rs");
+include!("depcrateis_ascii_punctuation.rs");
+include!("depcrate_v0printer.rs");
+include!("depcratesizelimitexhausted.rs");
+include!("depcrate_v0impl_24.rs");
+include!("depcrate_v0impl_23.rs");
+include!("depcrate_v0invalid.rs");
+include!("depcrate_legacyis_rust_hash.rs");
+include!("depcrate_legacyuse_5.rs");
+include!("depcratetrydemangleerror.rs");
+include!("depcrate_v0demangle.rs");
+include!("modcrate.rs");
+include!("modcrate_legacy.rs");
+include!("modcrate_v0.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate!();
+    Modcrate_legacy!();
+    Modcrate_v0!();
+}

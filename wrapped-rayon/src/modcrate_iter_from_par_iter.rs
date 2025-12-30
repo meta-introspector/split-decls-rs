@@ -1,0 +1,39 @@
+// Generated module macro for crate::iter::from_par_iter
+macro_rules! Modcrate_iter_from_par_iter {
+() => {
+        Depcrate_iter_from_par_iteruse_737!();
+        Depcrate_iter_from_par_iteruse_738!();
+        Depcrate_iter_from_par_iteruse_739!();
+        Depcrate_iter_from_par_iteruse_740!();
+        Depcrate_iter_from_par_iteruse_741!();
+        Depcrate_iter_from_par_iteruse_742!();
+        Depcrate_iter_from_par_iteruse_743!();
+        Depcrate_iter_from_par_iteruse_744!();
+        Depcrate_iter_from_par_iteruse_745!();
+        Depcrate_iter_from_par_iteruse_746!();
+        Depcrate_iter_from_par_itercollect_extended!();
+        Depcrate_iter_from_par_iterimpl_748!();
+        Depcrate_iter_from_par_iterimpl_749!();
+        Depcrate_iter_from_par_iterimpl_750!();
+        Depcrate_iter_from_par_iterimpl_751!();
+        Depcrate_iter_from_par_iterimpl_752!();
+        Depcrate_iter_from_par_iterimpl_753!();
+        Depcrate_iter_from_par_iterimpl_754!();
+        Depcrate_iter_from_par_iterimpl_755!();
+        Depcrate_iter_from_par_iterimpl_756!();
+        Depcrate_iter_from_par_iterimpl_757!();
+        Depcrate_iter_from_par_iterimpl_758!();
+        Depcrate_iter_from_par_itercollect_string!();
+        Depcrate_iter_from_par_itermacro_760!();
+        Depcrate_iter_from_par_itermacro_761!();
+        Depcrate_iter_from_par_itermacro_762!();
+        Depcrate_iter_from_par_itermacro_763!();
+        Depcrate_iter_from_par_itermacro_764!();
+        Depcrate_iter_from_par_itermacro_765!();
+        Depcrate_iter_from_par_iterimpl_766!();
+        Depcrate_iter_from_par_iterimpl_767!();
+        Depcrate_iter_from_par_iterimpl_768!();
+        Depcrate_iter_from_par_iterimpl_769!();
+        Depcrate_iter_from_par_iterimpl_770!();
+    };
+}

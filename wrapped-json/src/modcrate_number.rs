@@ -1,0 +1,48 @@
+// Generated module macro for crate::number
+macro_rules! Modcrate_number {
+() => {
+        Depcrate_numberuse_699!();
+        Depcrate_numberuse_700!();
+        Depcrate_numberuse_701!();
+        Depcrate_numberuse_702!();
+        Depcrate_numberuse_703!();
+        Depcrate_numberuse_704!();
+        Depcrate_numberuse_705!();
+        Depcrate_numberuse_706!();
+        Depcrate_numberuse_707!();
+        Depcrate_numberuse_708!();
+        Depcrate_numberTOKEN!();
+        Depcrate_numberNumber!();
+        Depcrate_numberN!();
+        Depcrate_numberimpl_712!();
+        Depcrate_numberimpl_713!();
+        Depcrate_numberimpl_714!();
+        Depcrate_numberN!();
+        Depcrate_numberimpl_716!();
+        Depcrate_numberimpl_717!();
+        Depcrate_numberimpl_718!();
+        Depcrate_numberimpl_719!();
+        Depcrate_numberimpl_720!();
+        Depcrate_numberNumberKey!();
+        Depcrate_numberimpl_722!();
+        Depcrate_numberNumberFromString!();
+        Depcrate_numberimpl_724!();
+        Depcrate_numberinvalid_number!();
+        Depcrate_numberdeserialize_any!();
+        Depcrate_numberdeserialize_number!();
+        Depcrate_numberimpl_728!();
+        Depcrate_numberimpl_729!();
+        Depcrate_numberNumberDeserializer!();
+        Depcrate_numberimpl_731!();
+        Depcrate_numberNumberFieldDeserializer!();
+        Depcrate_numberimpl_733!();
+        Depcrate_numberimpl_734!();
+        Depcrate_numberimpl_from_unsigned!();
+        Depcrate_numberimpl_from_signed!();
+        Depcrate_numbermacro_737!();
+        Depcrate_numbermacro_738!();
+        Depcrate_numbermacro_739!();
+        Depcrate_numbermacro_740!();
+        Depcrate_numberimpl_741!();
+    };
+}

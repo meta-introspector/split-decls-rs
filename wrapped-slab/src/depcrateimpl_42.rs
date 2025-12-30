@@ -1,0 +1,9 @@
+// Generated macro for impl_42 (impl)
+macro_rules! Depcrateimpl_42 {
+() => {
+// Module: crate
+// Provides: {"impl_42"}
+// Dependencies: {}
+impl < T > fmt :: Debug for Slab < T > where T : fmt :: Debug , { fn fmt (& self , fmt : & mut fmt :: Formatter < '_ >) -> fmt :: Result { if fmt . alternate () { fmt . debug_map () . entries (self . iter ()) . finish () } else { fmt . debug_struct ("Slab") . field ("len" , & self . len) . field ("cap" , & self . capacity ()) . finish () } } }
+};
+}

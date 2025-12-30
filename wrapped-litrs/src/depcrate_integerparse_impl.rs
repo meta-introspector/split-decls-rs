@@ -1,0 +1,9 @@
+// Generated macro for parse_impl (function)
+macro_rules! Depcrate_integerparse_impl {
+() => {
+// Module: crate::integer
+// Provides: {"parse_impl"}
+// Dependencies: {}
+# [doc = " Precondition: first byte of string has to be in `b'0'..=b'9'`."] # [inline (never)] pub (crate) fn parse_impl (input : & str , first : u8) -> Result < IntegerLit < & str > , ParseError > { let (end_prefix , base) = match (first , input . as_bytes () . get (1)) { (b'0' , Some (b'b')) => (2 , IntegerBase :: Binary) , (b'0' , Some (b'o')) => (2 , IntegerBase :: Octal) , (b'0' , Some (b'x')) => (2 , IntegerBase :: Hexadecimal) , _ => (0 , IntegerBase :: Decimal) , } ; let without_prefix = & input [end_prefix ..] ; let is_valid_digit = match base { IntegerBase :: Binary => | b | matches ! (b , b'0' | b'1' | b'_') , IntegerBase :: Octal => | b | matches ! (b , b'0' ..= b'7' | b'_') , IntegerBase :: Decimal => | b | matches ! (b , b'0' ..= b'9' | b'_') , IntegerBase :: Hexadecimal => | b | matches ! (b , b'0' ..= b'9' | b'a' ..= b'f' | b'A' ..= b'F' | b'_') , } ; let end_main = without_prefix . bytes () . position (| b | ! is_valid_digit (b)) . unwrap_or (without_prefix . len ()) ; let (main_part , suffix) = without_prefix . split_at (end_main) ; check_suffix (suffix) . map_err (| kind | { let first = suffix . as_bytes () [0] ; if ! is_valid_digit (first) && first . is_ascii_digit () { perr (end_main + end_prefix , InvalidDigit) } else { perr (end_main + end_prefix .. input . len () , kind) } }) ? ; if suffix . starts_with ('e') || suffix . starts_with ('E') { return Err (perr (end_main , IntegerSuffixStartingWithE)) ; } if main_part . bytes () . filter (| & b | b != b'_') . count () == 0 { return Err (perr (end_prefix .. end_prefix + end_main , NoDigits)) ; } Ok (IntegerLit { raw : input , start_main_part : end_prefix , end_main_part : end_main + end_prefix , base , }) }
+};
+}

@@ -1,0 +1,39 @@
+// Generated module macro for crate::tests::loom_slab
+macro_rules! Modcrate_tests_loom_slab {
+() => {
+        Depcrate_tests_loom_slabuse_285!();
+        Depcrate_tests_loom_slabuse_286!();
+        Depcrate_tests_loom_slabuse_287!();
+        Depcrate_tests_loom_slabuse_288!();
+        Depcrate_tests_loom_slabuse_289!();
+        Depcrate_tests_loom_slabuse_290!();
+        Depcrate_tests_loom_slabtake_local!();
+        Depcrate_tests_loom_slabtake_remote!();
+        Depcrate_tests_loom_slabracy_take!();
+        Depcrate_tests_loom_slabracy_take_local!();
+        Depcrate_tests_loom_slabconcurrent_insert_take!();
+        Depcrate_tests_loom_slabtake_remote_and_reuse!();
+        Depcrate_tests_loom_slabstore_when_free!();
+        Depcrate_tests_loom_slabTinierConfig!();
+        Depcrate_tests_loom_slabimpl_299!();
+        Depcrate_tests_loom_slabconcurrent_remove_remote_and_reuse!();
+        Depcrate_tests_loom_slabSetDropped!();
+        Depcrate_tests_loom_slabAssertDropped!();
+        Depcrate_tests_loom_slabimpl_303!();
+        Depcrate_tests_loom_slabimpl_304!();
+        Depcrate_tests_loom_slabremove_local!();
+        Depcrate_tests_loom_slabremove_remote!();
+        Depcrate_tests_loom_slabremove_remote_during_insert!();
+        Depcrate_tests_loom_slabunique_iter!();
+        Depcrate_tests_loom_slabcustom_page_sz!();
+        Depcrate_tests_loom_slabmax_refs!();
+        Depcrate_tests_loom_slabfree_list_reuse!();
+        Depcrate_tests_loom_slabvacant_entry!();
+        Depcrate_tests_loom_slabvacant_entry_2!();
+        Depcrate_tests_loom_slabvacant_entry_remove!();
+        Depcrate_tests_loom_slabowned_entry_send_out_of_local!();
+        Depcrate_tests_loom_slabowned_entrys_outlive_slab!();
+        Depcrate_tests_loom_slabowned_entry_ping_pong!();
+        Depcrate_tests_loom_slabowned_entry_drop_from_other_threads!();
+    };
+}

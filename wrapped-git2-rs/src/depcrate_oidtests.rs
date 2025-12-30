@@ -1,0 +1,9 @@
+// Generated macro for tests (module)
+macro_rules! Depcrate_oidtests {
+() => {
+// Module: crate::oid
+// Provides: {"tests"}
+// Dependencies: {}
+# [cfg (test)] mod tests { use std :: fs :: File ; use std :: io :: prelude :: * ; use super :: Error ; use super :: Oid ; use crate :: ObjectType ; use tempfile :: TempDir ; # [test] fn conversions () { assert ! (Oid :: from_str ("foo") . is_err ()) ; assert ! (Oid :: from_str ("decbf2be529ab6557d5429922251e5ee36519817") . is_ok ()) ; assert ! (Oid :: from_bytes (b"foo") . is_err ()) ; assert ! (Oid :: from_bytes (b"00000000000000000000") . is_ok ()) ; } # [test] fn comparisons () -> Result < () , Error > { assert_eq ! (Oid :: from_str ("decbf2b") ?, Oid :: from_str ("decbf2b") ?) ; assert ! (Oid :: from_str ("decbf2b") ? <= Oid :: from_str ("decbf2b") ?) ; assert ! (Oid :: from_str ("decbf2b") ? >= Oid :: from_str ("decbf2b") ?) ; { let o = Oid :: from_str ("decbf2b") ? ; assert_eq ! (o , o) ; assert ! (o <= o) ; assert ! (o >= o) ; } assert_eq ! (Oid :: from_str ("decbf2b") ?, Oid :: from_str ("decbf2b000000000000000000000000000000000") ?) ; assert ! (Oid :: from_bytes (b"00000000000000000000") ? < Oid :: from_bytes (b"00000000000000000001") ?) ; assert ! (Oid :: from_bytes (b"00000000000000000000") ? < Oid :: from_str ("decbf2b") ?) ; assert_eq ! (Oid :: from_bytes (b"00000000000000000000") ?, Oid :: from_str ("3030303030303030303030303030303030303030") ?) ; Ok (()) } # [test] fn zero_is_zero () { assert ! (Oid :: zero () . is_zero ()) ; } # [test] fn hash_object () { let bytes = "Hello" . as_bytes () ; assert ! (Oid :: hash_object (ObjectType :: Blob , bytes) . is_ok ()) ; } # [test] fn hash_file () { let td = TempDir :: new () . unwrap () ; let path = td . path () . join ("hello.txt") ; let mut file = File :: create (& path) . unwrap () ; file . write_all ("Hello" . as_bytes ()) . unwrap () ; assert ! (Oid :: hash_file (ObjectType :: Blob , & path) . is_ok ()) ; } }
+};
+}

@@ -1,0 +1,49 @@
+// Generated module macro for crate::naive::date::tests
+macro_rules! Modcrate_naive_date_tests {
+() => {
+        Depcrate_naive_date_testsuse_419!();
+        Depcrate_naive_date_testsuse_420!();
+        Depcrate_naive_date_testsuse_421!();
+        Depcrate_naive_date_teststest_date_bounds!();
+        Depcrate_naive_date_testsdiff_months!();
+        Depcrate_naive_date_teststest_readme_doomsday!();
+        Depcrate_naive_date_teststest_date_from_ymd!();
+        Depcrate_naive_date_teststest_date_from_yo!();
+        Depcrate_naive_date_teststest_date_from_isoywd!();
+        Depcrate_naive_date_teststest_date_from_isoywd_and_iso_week!();
+        Depcrate_naive_date_teststest_date_from_num_days_from_ce!();
+        Depcrate_naive_date_teststest_date_from_epoch_days!();
+        Depcrate_naive_date_teststest_date_from_weekday_of_month_opt!();
+        Depcrate_naive_date_teststest_date_fields!();
+        Depcrate_naive_date_teststest_date_weekday!();
+        Depcrate_naive_date_teststest_date_with_fields!();
+        Depcrate_naive_date_teststest_date_with_ordinal!();
+        Depcrate_naive_date_teststest_date_num_days_from_ce!();
+        Depcrate_naive_date_teststest_date_to_epoch_days!();
+        Depcrate_naive_date_teststest_date_succ!();
+        Depcrate_naive_date_teststest_date_pred!();
+        Depcrate_naive_date_teststest_date_checked_add_signed!();
+        Depcrate_naive_date_teststest_date_signed_duration_since!();
+        Depcrate_naive_date_teststest_date_add_days!();
+        Depcrate_naive_date_teststest_date_sub_days!();
+        Depcrate_naive_date_teststest_date_addassignment!();
+        Depcrate_naive_date_teststest_date_subassignment!();
+        Depcrate_naive_date_teststest_date_fmt!();
+        Depcrate_naive_date_teststest_date_from_str!();
+        Depcrate_naive_date_teststest_date_parse_from_str!();
+        Depcrate_naive_date_teststest_day_iterator_limit!();
+        Depcrate_naive_date_teststest_week_iterator_limit!();
+        Depcrate_naive_date_teststest_weeks_from!();
+        Depcrate_naive_date_teststest_with_0_overflow!();
+        Depcrate_naive_date_teststest_leap_year!();
+        Depcrate_naive_date_teststest_date_yearflags!();
+        Depcrate_naive_date_teststest_weekday_with_yearflags!();
+        Depcrate_naive_date_teststest_isoweekdate_with_yearflags!();
+        Depcrate_naive_date_teststest_date_to_mdf_to_date!();
+        Depcrate_naive_date_testsYEAR_FLAGS!();
+        Depcrate_naive_date_teststest_rkyv_validation!();
+        Depcrate_naive_date_testsMAX_DAYS_FROM_YEAR_0!();
+        Depcrate_naive_date_testsMIN_DAYS_FROM_YEAR_0!();
+        Depcrate_naive_date_testsMAX_BITS!();
+    };
+}

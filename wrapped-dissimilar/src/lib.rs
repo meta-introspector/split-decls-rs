@@ -1,0 +1,72 @@
+// Generated wrapped crate with macro-based items
+
+include!("depcratecleanup_semantic_score.rs");
+include!("depcrate_rangeslice.rs");
+include!("depcrate_finduse_2.rs");
+include!("depcrate_rangeimpl_17.rs");
+include!("depcratechunk.rs");
+include!("depcrate_findmaximal_suffix.rs");
+include!("depcrate_rangeuse_11.rs");
+include!("depcrate_teststest_common_suffix.rs");
+include!("depcrate_rangerangebounds.rs");
+include!("depcratefind.rs");
+include!("depcratecommon_prefix.rs");
+include!("depcrate_testsassert_diffs.rs");
+include!("depcrate_rangeimpl_15.rs");
+include!("depcrate_rangerange.rs");
+include!("depcrateimpl_43.rs");
+include!("depcrate_teststest_cleanup_semantic.rs");
+include!("depcrateuse_39.rs");
+include!("depcrate_findbyteset_contains.rs");
+include!("depcrate_testsuse_22.rs");
+include!("depcrate_teststest_main.rs");
+include!("depcratecleanup_semantic.rs");
+include!("depcraterange.rs");
+include!("depcrate_teststest_cleanup_merge.rs");
+include!("depcrateimpl_58.rs");
+include!("depcrate_finduse_3.rs");
+include!("depcrate_teststest_bisect.rs");
+include!("depcrate_rangeuse_10.rs");
+include!("depcrate_testssame_diffs.rs");
+include!("depcratediff.rs");
+include!("depcrateimpl_59.rs");
+include!("depcrateuse_40.rs");
+include!("depcrate_testsrange.rs");
+include!("depcratecleanup_char_boundary.rs");
+include!("depcratediff.rs");
+include!("depcratebisect.rs");
+include!("depcratecleanup_semantic_lossless.rs");
+include!("depcrate_rangeimpl_18.rs");
+include!("depcratecompute.rs");
+include!("depcratecleanup_merge.rs");
+include!("depcrateuse_37.rs");
+include!("depcrate_testsuse_23.rs");
+include!("depcrate_testsdiff_list.rs");
+include!("depcrate_teststest_cleanup_semantic_lossless.rs");
+include!("depcrateuse_38.rs");
+include!("depcrate_rangeimpl_19.rs");
+include!("depcrate_teststest_common_overlap.rs");
+include!("depcrate_rangeuse_9.rs");
+include!("depcratecommon_overlap.rs");
+include!("depcrate_rangeimpl_20.rs");
+include!("depcratecommon_suffix.rs");
+include!("depcratemain.rs");
+include!("depcrate_rangeimpl_13.rs");
+include!("depcratetests.rs");
+include!("depcrate_findbyteset_create.rs");
+include!("depcrate_findfind.rs");
+include!("depcratebisect_split.rs");
+include!("depcrate_teststest_common_prefix.rs");
+include!("depcratesolution.rs");
+include!("modcrate_find.rs");
+include!("modcrate_tests.rs");
+include!("modcrate_range.rs");
+include!("modcrate.rs");
+
+// Execute all items
+pub fn execute_all() {
+    Modcrate_find!();
+    Modcrate_tests!();
+    Modcrate_range!();
+    Modcrate!();
+}

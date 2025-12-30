@@ -1,0 +1,40 @@
+// Generated module macro for crate::spsc
+macro_rules! Modcrate_spsc {
+() => {
+        Depcrate_spscuse_532!();
+        Depcrate_spscuse_533!();
+        Depcrate_spscuse_534!();
+        Depcrate_spscuse_535!();
+        Depcrate_spscuse_536!();
+        Depcrate_spscQueueInner!();
+        Depcrate_spscQueue!();
+        Depcrate_spscQueueView!();
+        Depcrate_spscimpl_540!();
+        Depcrate_spscimpl_541!();
+        Depcrate_spscimpl_542!();
+        Depcrate_spscimpl_543!();
+        Depcrate_spscimpl_544!();
+        Depcrate_spscimpl_545!();
+        Depcrate_spscimpl_546!();
+        Depcrate_spscimpl_547!();
+        Depcrate_spscIter!();
+        Depcrate_spscimpl_549!();
+        Depcrate_spscIterMut!();
+        Depcrate_spscimpl_551!();
+        Depcrate_spscimpl_552!();
+        Depcrate_spscimpl_553!();
+        Depcrate_spscimpl_554!();
+        Depcrate_spscimpl_555!();
+        Depcrate_spscimpl_556!();
+        Depcrate_spscimpl_557!();
+        Depcrate_spscimpl_558!();
+        Depcrate_spscimpl_559!();
+        Depcrate_spscConsumer!();
+        Depcrate_spscimpl_561!();
+        Depcrate_spscProducer!();
+        Depcrate_spscimpl_563!();
+        Depcrate_spscimpl_564!();
+        Depcrate_spscimpl_565!();
+        Depcrate_spsctests!();
+    };
+}

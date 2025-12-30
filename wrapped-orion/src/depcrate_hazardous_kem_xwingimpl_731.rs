@@ -1,0 +1,9 @@
+// Generated macro for impl_731 (impl)
+macro_rules! Depcrate_hazardous_kem_xwingimpl_731 {
+() => {
+// Module: crate::hazardous::kem::xwing
+// Provides: {"impl_731"}
+// Dependencies: {}
+impl KeyPair { # [doc = " Deterministically generate a [KeyPair] from a private [Seed]."] pub fn generate_deterministic (seed : & Seed) -> Result < Self , UnknownCryptoError > { let mut expanded = Zeroizing :: new ([0u8 ; 96]) ; let mut shake = Shake256 :: new () ; shake . absorb (seed . unprotected_as_bytes ()) ? ; shake . squeeze (expanded . as_mut ()) ? ; let seed_m = mlkem768 :: Seed :: from_slice (& expanded [.. 64]) ? ; let kp_m = mlkem768 :: KeyPair :: try_from (& seed_m) ? ; let sk_x = x25519 :: PrivateKey :: from_slice (& expanded [64 .. 96]) ? ; let pk_x = x25519 :: PublicKey :: try_from (& sk_x) ? ; let mut xwing_pk = [0u8 ; mlkem768 :: MlKem768 :: EK_SIZE + x25519 :: PUBLIC_KEY_SIZE] ; xwing_pk [.. mlkem768 :: MlKem768 :: EK_SIZE] . copy_from_slice (kp_m . public () . as_ref ()) ; xwing_pk [mlkem768 :: MlKem768 :: EK_SIZE ..] . copy_from_slice (& pk_x . to_bytes ()) ; Ok (Self { ek : EncapsulationKey :: from (xwing_pk) , dk : DecapsulationKey { seed : Seed :: from_slice (seed . unprotected_as_bytes ()) ? , kp_m , sk_x , pk_x , } , }) } # [cfg (feature = "safe_api")] # [cfg_attr (docsrs , doc (cfg (feature = "safe_api")))] # [doc = " Generate a fresh [KeyPair]."] pub fn generate () -> Result < Self , UnknownCryptoError > { let seed = Seed :: generate () ; Self :: generate_deterministic (& seed) } # [doc = " Get the public [EncapsulationKey] corresponding to this keypair."] pub fn public (& self) -> & EncapsulationKey { & self . ek } # [doc = " Get the private [DecapsulationKey] used to generate this keypair."] pub fn private (& self) -> & DecapsulationKey { & self . dk } }
+};
+}

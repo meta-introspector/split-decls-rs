@@ -1,0 +1,9 @@
+// Generated macro for macro_448 (macro)
+macro_rules! Depcrate_value_partial_eqmacro_448 {
+() => {
+// Module: crate::value::partial_eq
+// Provides: {"macro_448"}
+// Dependencies: {}
+partialeq_numeric ! { eq_i64 [i8 i16 i32 i64 isize] eq_u64 [u8 u16 u32 u64 usize] eq_f32 [f32] eq_f64 [f64] eq_bool [bool] }
+};
+}

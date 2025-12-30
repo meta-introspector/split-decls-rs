@@ -1,0 +1,9 @@
+// Generated macro for other_124 (other)
+macro_rules! Depcrate_windows_sysother_124 {
+() => {
+// Module: crate::windows_sys
+// Provides: {"other_124"}
+// Dependencies: {}
+# [repr (C)] # [derive (Clone , Copy)] pub union ARM64_NT_NEON128 { pub Anonymous : ARM64_NT_NEON128_0 , pub D : [f64 ; 2] , pub S : [f32 ; 4] , pub H : [u16 ; 8] , pub B : [u8 ; 16] , }
+};
+}

@@ -1,0 +1,46 @@
+// Generated module macro for crate::session
+macro_rules! Modcrate_session {
+() => {
+        Depcrate_sessionuse_421!();
+        Depcrate_sessionuse_422!();
+        Depcrate_sessionuse_423!();
+        Depcrate_sessionuse_424!();
+        Depcrate_sessionuse_425!();
+        Depcrate_sessionuse_426!();
+        Depcrate_sessionuse_427!();
+        Depcrate_sessionuse_428!();
+        Depcrate_sessionuse_429!();
+        Depcrate_sessionuse_430!();
+        Depcrate_sessionuse_431!();
+        Depcrate_sessionuse_432!();
+        Depcrate_sessionFilter!();
+        Depcrate_sessionSession!();
+        Depcrate_sessionimpl_435!();
+        Depcrate_sessionimpl_436!();
+        Depcrate_sessioninvert_strm!();
+        Depcrate_sessionconcat_strm!();
+        Depcrate_sessionChangeset!();
+        Depcrate_sessionimpl_440!();
+        Depcrate_sessionimpl_441!();
+        Depcrate_sessionChangesetIter!();
+        Depcrate_sessionimpl_443!();
+        Depcrate_sessionimpl_444!();
+        Depcrate_sessionOperation!();
+        Depcrate_sessionimpl_446!();
+        Depcrate_sessionimpl_447!();
+        Depcrate_sessionChangesetItem!();
+        Depcrate_sessionimpl_449!();
+        Depcrate_sessionChangegroup!();
+        Depcrate_sessionimpl_451!();
+        Depcrate_sessionimpl_452!();
+        Depcrate_sessionimpl_453!();
+        Depcrate_sessionConflictType!();
+        Depcrate_sessionimpl_455!();
+        Depcrate_sessionConflictAction!();
+        Depcrate_sessioncall_filter!();
+        Depcrate_sessioncall_conflict!();
+        Depcrate_sessionx_input!();
+        Depcrate_sessionx_output!();
+        Depcrate_sessiontest!();
+    };
+}

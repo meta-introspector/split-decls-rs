@@ -1,0 +1,39 @@
+// Generated module macro for crate::fs::at
+macro_rules! Modcrate_fs_at {
+() => {
+        Depcrate_fs_atuse_2082!();
+        Depcrate_fs_atuse_2083!();
+        Depcrate_fs_atuse_2084!();
+        Depcrate_fs_atuse_2085!();
+        Depcrate_fs_atuse_2086!();
+        Depcrate_fs_atuse_2087!();
+        Depcrate_fs_atuse_2088!();
+        Depcrate_fs_atuse_2089!();
+        Depcrate_fs_atuse_2090!();
+        Depcrate_fs_atuse_2091!();
+        Depcrate_fs_atuse_2092!();
+        Depcrate_fs_atuse_2093!();
+        Depcrate_fs_atuse_2094!();
+        Depcrate_fs_atuse_2095!();
+        Depcrate_fs_atUTIME_NOW!();
+        Depcrate_fs_atUTIME_OMIT!();
+        Depcrate_fs_atopenat!();
+        Depcrate_fs_atreadlinkat!();
+        Depcrate_fs_at_readlinkat!();
+        Depcrate_fs_atreadlinkat_raw!();
+        Depcrate_fs_atmkdirat!();
+        Depcrate_fs_atlinkat!();
+        Depcrate_fs_atunlinkat!();
+        Depcrate_fs_atrenameat!();
+        Depcrate_fs_atrenameat_with!();
+        Depcrate_fs_atsymlinkat!();
+        Depcrate_fs_atstatat!();
+        Depcrate_fs_ataccessat!();
+        Depcrate_fs_atutimensat!();
+        Depcrate_fs_atchmodat!();
+        Depcrate_fs_atfclonefileat!();
+        Depcrate_fs_atmknodat!();
+        Depcrate_fs_atmkfifoat!();
+        Depcrate_fs_atchownat!();
+    };
+}

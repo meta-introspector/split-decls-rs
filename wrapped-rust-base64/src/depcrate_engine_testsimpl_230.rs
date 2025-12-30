@@ -1,0 +1,9 @@
+// Generated macro for impl_230 (impl)
+macro_rules! Depcrate_engine_testsimpl_230 {
+() => {
+// Module: crate::engine::tests
+// Provides: {"impl_230"}
+// Dependencies: {}
+impl EngineWrapper for NaiveWrapper { type Engine = naive :: Naive ; fn standard () -> Self :: Engine { naive :: Naive :: new (& STANDARD , naive :: NaiveConfig { encode_padding : true , decode_allow_trailing_bits : false , decode_padding_mode : DecodePaddingMode :: RequireCanonical , } ,) } fn standard_unpadded () -> Self :: Engine { naive :: Naive :: new (& STANDARD , naive :: NaiveConfig { encode_padding : false , decode_allow_trailing_bits : false , decode_padding_mode : DecodePaddingMode :: RequireNone , } ,) } fn standard_with_pad_mode (encode_pad : bool , decode_pad_mode : DecodePaddingMode ,) -> Self :: Engine { naive :: Naive :: new (& STANDARD , naive :: NaiveConfig { encode_padding : encode_pad , decode_allow_trailing_bits : false , decode_padding_mode : decode_pad_mode , } ,) } fn standard_allow_trailing_bits () -> Self :: Engine { naive :: Naive :: new (& STANDARD , naive :: NaiveConfig { encode_padding : true , decode_allow_trailing_bits : true , decode_padding_mode : DecodePaddingMode :: RequireCanonical , } ,) } fn random < R : rand :: Rng > (rng : & mut R) -> Self :: Engine { let alphabet = random_alphabet (rng) ; Self :: random_alphabet (rng , alphabet) } fn random_alphabet < R : rand :: Rng > (rng : & mut R , alphabet : & Alphabet) -> Self :: Engine { let mode = rng . gen () ; let config = naive :: NaiveConfig { encode_padding : match mode { DecodePaddingMode :: Indifferent => rng . gen () , DecodePaddingMode :: RequireCanonical => true , DecodePaddingMode :: RequireNone => false , } , decode_allow_trailing_bits : rng . gen () , decode_padding_mode : mode , } ; naive :: Naive :: new (alphabet , config) } }
+};
+}

@@ -1,0 +1,54 @@
+// Generated module macro for crate::fs
+macro_rules! Modcrate_fs {
+() => {
+        Depcrate_fsabs!();
+        Depcrate_fsat!();
+        Depcrate_fsconstants!();
+        Depcrate_fscopy_file_range!();
+        Depcrate_fsdir!();
+        Depcrate_fsfadvise!();
+        Depcrate_fsfcntl!();
+        Depcrate_fsfcntl_apple!();
+        Depcrate_fsfcopyfile!();
+        Depcrate_fsfd!();
+        Depcrate_fsgetpath!();
+        Depcrate_fsid!();
+        Depcrate_fsinotify!();
+        Depcrate_fsioctl!();
+        Depcrate_fsmakedev!();
+        Depcrate_fsmemfd_create!();
+        Depcrate_fsopenat2!();
+        Depcrate_fsraw_dir!();
+        Depcrate_fsseek_from!();
+        Depcrate_fssendfile!();
+        Depcrate_fsspecial!();
+        Depcrate_fsstatx!();
+        Depcrate_fssync!();
+        Depcrate_fsxattr!();
+        Depcrate_fsuse_2312!();
+        Depcrate_fsuse_2313!();
+        Depcrate_fsuse_2314!();
+        Depcrate_fsuse_2315!();
+        Depcrate_fsuse_2316!();
+        Depcrate_fsuse_2317!();
+        Depcrate_fsuse_2318!();
+        Depcrate_fsuse_2319!();
+        Depcrate_fsuse_2320!();
+        Depcrate_fsuse_2321!();
+        Depcrate_fsuse_2322!();
+        Depcrate_fsuse_2323!();
+        Depcrate_fsuse_2324!();
+        Depcrate_fsuse_2325!();
+        Depcrate_fsuse_2326!();
+        Depcrate_fsuse_2327!();
+        Depcrate_fsuse_2328!();
+        Depcrate_fsuse_2329!();
+        Depcrate_fsuse_2330!();
+        Depcrate_fsuse_2331!();
+        Depcrate_fsuse_2332!();
+        Depcrate_fsuse_2333!();
+        Depcrate_fsuse_2334!();
+        Depcrate_fsuse_2335!();
+        Depcrate_fsuse_2336!();
+    };
+}

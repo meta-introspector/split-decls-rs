@@ -1,0 +1,43 @@
+// Generated module macro for crate::cycle
+macro_rules! Modcrate_cycle {
+() => {
+        Depcrate_cycleuse_72!();
+        Depcrate_cycleuse_73!();
+        Depcrate_cycleuse_74!();
+        Depcrate_cycleuse_75!();
+        Depcrate_cycleuse_76!();
+        Depcrate_cycleuse_77!();
+        Depcrate_cycleMAX_ITERATIONS!();
+        Depcrate_cycleCycleRecoveryStrategy!();
+        Depcrate_cycleCycleHead!();
+        Depcrate_cycleimpl_81!();
+        Depcrate_cycleimpl_82!();
+        Depcrate_cycleIterationCount!();
+        Depcrate_cycleimpl_84!();
+        Depcrate_cycleimpl_85!();
+        Depcrate_cycleAtomicIterationCount!();
+        Depcrate_cycleimpl_87!();
+        Depcrate_cycleimpl_88!();
+        Depcrate_cycleimpl_89!();
+        Depcrate_cycleimpl_90!();
+        Depcrate_cycleimpl_91!();
+        Depcrate_cycleCycleHeads!();
+        Depcrate_cycleimpl_93!();
+        Depcrate_cycleimpl_94!();
+        Depcrate_cycleimpl_95!();
+        Depcrate_cycleimpl_96!();
+        Depcrate_cycleCycleHeadsIterator!();
+        Depcrate_cycleimpl_98!();
+        Depcrate_cycleimpl_99!();
+        Depcrate_cycleimpl_100!();
+        Depcrate_cycleimpl_101!();
+        Depcrate_cycleimpl_102!();
+        Depcrate_cycleempty_cycle_heads!();
+        Depcrate_cycleCycleHeadIdsIterator!();
+        Depcrate_cycleimpl_105!();
+        Depcrate_cycleCycle!();
+        Depcrate_cycleimpl_107!();
+        Depcrate_cycleProvisionalStatus!();
+        Depcrate_cycleimpl_109!();
+    };
+}

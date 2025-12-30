@@ -1,0 +1,56 @@
+// Generated module macro for crate::types::from_sql
+macro_rules! Modcrate_types_from_sql {
+() => {
+        Depcrate_types_from_sqluse_540!();
+        Depcrate_types_from_sqluse_541!();
+        Depcrate_types_from_sqluse_542!();
+        Depcrate_types_from_sqluse_543!();
+        Depcrate_types_from_sqlFromSqlError!();
+        Depcrate_types_from_sqlimpl_545!();
+        Depcrate_types_from_sqlimpl_546!();
+        Depcrate_types_from_sqlimpl_547!();
+        Depcrate_types_from_sqlimpl_548!();
+        Depcrate_types_from_sqlFromSqlResult!();
+        Depcrate_types_from_sqlFromSql!();
+        Depcrate_types_from_sqlfrom_sql_integral!();
+        Depcrate_types_from_sqlmacro_552!();
+        Depcrate_types_from_sqlmacro_553!();
+        Depcrate_types_from_sqlmacro_554!();
+        Depcrate_types_from_sqlmacro_555!();
+        Depcrate_types_from_sqlmacro_556!();
+        Depcrate_types_from_sqlmacro_557!();
+        Depcrate_types_from_sqlmacro_558!();
+        Depcrate_types_from_sqlmacro_559!();
+        Depcrate_types_from_sqlmacro_560!();
+        Depcrate_types_from_sqlmacro_561!();
+        Depcrate_types_from_sqlmacro_562!();
+        Depcrate_types_from_sqlmacro_563!();
+        Depcrate_types_from_sqlmacro_564!();
+        Depcrate_types_from_sqlmacro_565!();
+        Depcrate_types_from_sqlmacro_566!();
+        Depcrate_types_from_sqlmacro_567!();
+        Depcrate_types_from_sqlmacro_568!();
+        Depcrate_types_from_sqlmacro_569!();
+        Depcrate_types_from_sqlmacro_570!();
+        Depcrate_types_from_sqlmacro_571!();
+        Depcrate_types_from_sqlimpl_572!();
+        Depcrate_types_from_sqlimpl_573!();
+        Depcrate_types_from_sqlimpl_574!();
+        Depcrate_types_from_sqlimpl_575!();
+        Depcrate_types_from_sqlimpl_576!();
+        Depcrate_types_from_sqlimpl_577!();
+        Depcrate_types_from_sqlimpl_578!();
+        Depcrate_types_from_sqlimpl_579!();
+        Depcrate_types_from_sqlimpl_580!();
+        Depcrate_types_from_sqlimpl_581!();
+        Depcrate_types_from_sqlimpl_582!();
+        Depcrate_types_from_sqlimpl_583!();
+        Depcrate_types_from_sqlimpl_584!();
+        Depcrate_types_from_sqlimpl_585!();
+        Depcrate_types_from_sqlimpl_586!();
+        Depcrate_types_from_sqlimpl_587!();
+        Depcrate_types_from_sqlimpl_588!();
+        Depcrate_types_from_sqlimpl_589!();
+        Depcrate_types_from_sqltest!();
+    };
+}

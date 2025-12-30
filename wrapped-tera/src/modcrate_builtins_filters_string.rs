@@ -1,0 +1,44 @@
+// Generated module macro for crate::builtins::filters::string
+macro_rules! Modcrate_builtins_filters_string {
+() => {
+        Depcrate_builtins_filters_stringuse_62!();
+        Depcrate_builtins_filters_stringuse_63!();
+        Depcrate_builtins_filters_stringuse_64!();
+        Depcrate_builtins_filters_stringuse_65!();
+        Depcrate_builtins_filters_stringuse_66!();
+        Depcrate_builtins_filters_stringuse_67!();
+        Depcrate_builtins_filters_stringuse_68!();
+        Depcrate_builtins_filters_stringuse_69!();
+        Depcrate_builtins_filters_stringFRAGMENT_ENCODE_SET!();
+        Depcrate_builtins_filters_stringPATH_ENCODE_SET!();
+        Depcrate_builtins_filters_stringUSERINFO_ENCODE_SET!();
+        Depcrate_builtins_filters_stringPYTHON_ENCODE_SET!();
+        Depcrate_builtins_filters_stringmacro_74!();
+        Depcrate_builtins_filters_stringupper!();
+        Depcrate_builtins_filters_stringlower!();
+        Depcrate_builtins_filters_stringtrim!();
+        Depcrate_builtins_filters_stringtrim_start!();
+        Depcrate_builtins_filters_stringtrim_end!();
+        Depcrate_builtins_filters_stringtrim_start_matches!();
+        Depcrate_builtins_filters_stringtrim_end_matches!();
+        Depcrate_builtins_filters_stringtruncate!();
+        Depcrate_builtins_filters_stringwordcount!();
+        Depcrate_builtins_filters_stringreplace!();
+        Depcrate_builtins_filters_stringcapitalize!();
+        Depcrate_builtins_filters_stringurlencode!();
+        Depcrate_builtins_filters_stringurlencode_strict!();
+        Depcrate_builtins_filters_stringaddslashes!();
+        Depcrate_builtins_filters_stringslugify!();
+        Depcrate_builtins_filters_stringtitle!();
+        Depcrate_builtins_filters_stringlinebreaksbr!();
+        Depcrate_builtins_filters_stringindent!();
+        Depcrate_builtins_filters_stringstriptags!();
+        Depcrate_builtins_filters_stringspaceless!();
+        Depcrate_builtins_filters_stringescape_html!();
+        Depcrate_builtins_filters_stringescape_xml!();
+        Depcrate_builtins_filters_stringsplit!();
+        Depcrate_builtins_filters_stringint!();
+        Depcrate_builtins_filters_stringfloat!();
+        Depcrate_builtins_filters_stringtests!();
+    };
+}

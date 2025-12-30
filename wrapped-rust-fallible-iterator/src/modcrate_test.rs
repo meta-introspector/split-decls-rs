@@ -1,0 +1,49 @@
+// Generated module macro for crate::test
+macro_rules! Modcrate_test {
+() => {
+        Depcrate_testuse_8!();
+        Depcrate_testuse_9!();
+        Depcrate_testuse_10!();
+        Depcrate_testall!();
+        Depcrate_testany!();
+        Depcrate_testchain!();
+        Depcrate_testcount!();
+        Depcrate_testsum!();
+        Depcrate_testproduct!();
+        Depcrate_testenumerate!();
+        Depcrate_testfilter!();
+        Depcrate_testfilter_map!();
+        Depcrate_testfind!();
+        Depcrate_testfold!();
+        Depcrate_testfor_each!();
+        Depcrate_testiterator!();
+        Depcrate_testlast!();
+        Depcrate_testmap!();
+        Depcrate_testmap_err!();
+        Depcrate_testmax!();
+        Depcrate_testmax_by_key!();
+        Depcrate_testmax_by!();
+        Depcrate_testmin!();
+        Depcrate_testmin_by_key!();
+        Depcrate_testmin_by!();
+        Depcrate_testnth!();
+        Depcrate_testpeekable!();
+        Depcrate_testposition!();
+        Depcrate_testscan!();
+        Depcrate_testskip!();
+        Depcrate_testskip_while!();
+        Depcrate_teststep_by!();
+        Depcrate_testtake!();
+        Depcrate_testtake_while!();
+        Depcrate_testflat_map!();
+        Depcrate_testflatten!();
+        Depcrate_testinspect!();
+        Depcrate_testpartition!();
+        Depcrate_testfind_map!();
+        Depcrate_testunzip!();
+        Depcrate_testcycle!();
+        Depcrate_testunwrap!();
+        Depcrate_testunwrap_panic!();
+        Depcrate_testwrap_std_iter_into_fallible!();
+    };
+}

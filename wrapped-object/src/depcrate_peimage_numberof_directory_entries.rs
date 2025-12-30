@@ -1,0 +1,9 @@
+// Generated macro for IMAGE_NUMBEROF_DIRECTORY_ENTRIES (const)
+macro_rules! Depcrate_peIMAGE_NUMBEROF_DIRECTORY_ENTRIES {
+() => {
+// Module: crate::pe
+// Provides: {"IMAGE_NUMBEROF_DIRECTORY_ENTRIES"}
+// Dependencies: {}
+pub const IMAGE_NUMBEROF_DIRECTORY_ENTRIES : usize = 16 ;
+};
+}

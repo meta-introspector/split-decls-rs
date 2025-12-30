@@ -1,0 +1,39 @@
+// Generated module macro for crate::read::rnglists
+macro_rules! Modcrate_read_rnglists {
+() => {
+        Depcrate_read_rnglistsuse_695!();
+        Depcrate_read_rnglistsuse_696!();
+        Depcrate_read_rnglistsuse_697!();
+        Depcrate_read_rnglistsuse_698!();
+        Depcrate_read_rnglistsDebugRanges!();
+        Depcrate_read_rnglistsimpl_700!();
+        Depcrate_read_rnglistsimpl_701!();
+        Depcrate_read_rnglistsimpl_702!();
+        Depcrate_read_rnglistsimpl_703!();
+        Depcrate_read_rnglistsDebugRngLists!();
+        Depcrate_read_rnglistsimpl_705!();
+        Depcrate_read_rnglistsimpl_706!();
+        Depcrate_read_rnglistsimpl_707!();
+        Depcrate_read_rnglistsimpl_708!();
+        Depcrate_read_rnglistsRngListsHeader!();
+        Depcrate_read_rnglistsimpl_710!();
+        Depcrate_read_rnglistsRangeLists!();
+        Depcrate_read_rnglistsimpl_712!();
+        Depcrate_read_rnglistsimpl_713!();
+        Depcrate_read_rnglistsimpl_714!();
+        Depcrate_read_rnglistsRangeListsFormat!();
+        Depcrate_read_rnglistsRawRngListIter!();
+        Depcrate_read_rnglistsRawRngListEntry!();
+        Depcrate_read_rnglistsimpl_718!();
+        Depcrate_read_rnglistsimpl_719!();
+        Depcrate_read_rnglistsimpl_720!();
+        Depcrate_read_rnglistsRngListIter!();
+        Depcrate_read_rnglistsimpl_722!();
+        Depcrate_read_rnglistsimpl_723!();
+        Depcrate_read_rnglistsRawRange!();
+        Depcrate_read_rnglistsimpl_725!();
+        Depcrate_read_rnglistsRange!();
+        Depcrate_read_rnglistsimpl_727!();
+        Depcrate_read_rngliststests!();
+    };
+}

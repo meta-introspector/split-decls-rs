@@ -1,0 +1,56 @@
+// Generated module macro for crate::update
+macro_rules! Modcrate_update {
+() => {
+        Depcrate_updateuse_583!();
+        Depcrate_updateuse_584!();
+        Depcrate_updateuse_585!();
+        Depcrate_updateuse_586!();
+        Depcrate_updateuse_587!();
+        Depcrate_updateuse_588!();
+        Depcrate_updateuse_589!();
+        Depcrate_updatehelper!();
+        Depcrate_updateupdate_fallback!();
+        Depcrate_updatealways_update!();
+        Depcrate_updateUpdate!();
+        Depcrate_updateimpl_594!();
+        Depcrate_updatemaybe_update_vec!();
+        Depcrate_updateimpl_596!();
+        Depcrate_updateimpl_597!();
+        Depcrate_updateimpl_598!();
+        Depcrate_updatemaybe_update_set!();
+        Depcrate_updateimpl_600!();
+        Depcrate_updateimpl_601!();
+        Depcrate_updatemaybe_update_map!();
+        Depcrate_updateimpl_603!();
+        Depcrate_updateimpl_604!();
+        Depcrate_updateimpl_605!();
+        Depcrate_updateimpl_606!();
+        Depcrate_updateimpl_607!();
+        Depcrate_updateimpl_608!();
+        Depcrate_updateimpl_609!();
+        Depcrate_updateimpl_610!();
+        Depcrate_updateimpl_611!();
+        Depcrate_updateimpl_612!();
+        Depcrate_updateimpl_613!();
+        Depcrate_updateimpl_614!();
+        Depcrate_updatefallback_impl!();
+        Depcrate_updatemacro_616!();
+        Depcrate_updatemacro_617!();
+        Depcrate_updatetuple_impl!();
+        Depcrate_updatemacro_619!();
+        Depcrate_updatemacro_620!();
+        Depcrate_updatemacro_621!();
+        Depcrate_updatemacro_622!();
+        Depcrate_updatemacro_623!();
+        Depcrate_updatemacro_624!();
+        Depcrate_updatemacro_625!();
+        Depcrate_updatemacro_626!();
+        Depcrate_updatemacro_627!();
+        Depcrate_updatemacro_628!();
+        Depcrate_updatemacro_629!();
+        Depcrate_updatemacro_630!();
+        Depcrate_updatemacro_631!();
+        Depcrate_updateimpl_632!();
+        Depcrate_updateimpl_633!();
+    };
+}

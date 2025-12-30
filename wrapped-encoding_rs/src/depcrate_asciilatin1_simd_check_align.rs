@@ -1,0 +1,9 @@
+// Generated macro for latin1_simd_check_align (macro)
+macro_rules! Depcrate_asciilatin1_simd_check_align {
+() => {
+// Module: crate::ascii
+// Provides: {"latin1_simd_check_align"}
+// Dependencies: {}
+# [allow (unused_macros)] macro_rules ! latin1_simd_check_align { ($ name : ident , $ src_unit : ty , $ dst_unit : ty , $ stride_both_aligned : ident , $ stride_src_aligned : ident , $ stride_dst_aligned : ident , $ stride_neither_aligned : ident) => { # [doc = " Safety: src/dst must be valid for reads/writes of `len` elements of their units."] # [inline (always)] pub unsafe fn $ name (src : * const $ src_unit , dst : * mut $ dst_unit , len : usize) { let mut offset = 0usize ; if SIMD_STRIDE_SIZE <= len { let len_minus_stride = len - SIMD_STRIDE_SIZE ; let dst_masked = (dst as usize) & SIMD_ALIGNMENT_MASK ; if ((src as usize) & SIMD_ALIGNMENT_MASK) == 0 { if dst_masked == 0 { loop { $ stride_both_aligned (src . add (offset) , dst . add (offset)) ; offset += SIMD_STRIDE_SIZE ; if offset > len_minus_stride { break ; } } } else { loop { $ stride_src_aligned (src . add (offset) , dst . add (offset)) ; offset += SIMD_STRIDE_SIZE ; if offset > len_minus_stride { break ; } } } } else { if dst_masked == 0 { loop { $ stride_dst_aligned (src . add (offset) , dst . add (offset)) ; offset += SIMD_STRIDE_SIZE ; if offset > len_minus_stride { break ; } } } else { loop { $ stride_neither_aligned (src . add (offset) , dst . add (offset)) ; offset += SIMD_STRIDE_SIZE ; if offset > len_minus_stride { break ; } } } } } while offset < len { let code_unit = * (src . add (offset)) ; * (dst . add (offset)) = code_unit as $ dst_unit ; offset += 1 ; } } } ; }
+};
+}

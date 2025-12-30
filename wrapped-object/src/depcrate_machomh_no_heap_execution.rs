@@ -1,0 +1,9 @@
+// Generated macro for MH_NO_HEAP_EXECUTION (const)
+macro_rules! Depcrate_machoMH_NO_HEAP_EXECUTION {
+() => {
+// Module: crate::macho
+// Provides: {"MH_NO_HEAP_EXECUTION"}
+// Dependencies: {}
+# [doc = " When this bit is set, the OS will run the main executable with a non-executable heap even on platforms (e.g. i386) that don't require it. Only used in MH_EXECUTE filetypes."] pub const MH_NO_HEAP_EXECUTION : u32 = 0x100_0000 ;
+};
+}

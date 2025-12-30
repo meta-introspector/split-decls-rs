@@ -1,0 +1,9 @@
+// Generated macro for Pair (struct)
+macro_rules! Depcrate_arch_all_packedpairPair {
+() => {
+// Module: crate::arch::all::packedpair
+// Provides: {"Pair"}
+// Dependencies: {}
+# [doc = " A pair of byte offsets into a needle to use as a predicate."] # [doc = ""] # [doc = " This pair is used as a predicate to quickly filter out positions in a"] # [doc = " haystack in which a needle cannot match. In some cases, this pair can even"] # [doc = " be used in vector algorithms such that the vector algorithm only switches"] # [doc = " over to scalar code once this pair has been found."] # [doc = ""] # [doc = " A pair of offsets can be used in both substring search implementations and"] # [doc = " in prefilters. The former will report matches of a needle in a haystack"] # [doc = " where as the latter will only report possible matches of a needle."] # [doc = ""] # [doc = " The offsets are limited each to a maximum of 255 to keep memory usage low."] # [doc = " Moreover, it's rarely advantageous to create a predicate using offsets"] # [doc = " greater than 255 anyway."] # [doc = ""] # [doc = " The only guarantee enforced on the pair of offsets is that they are not"] # [doc = " equivalent. It is not necessarily the case that `index1 < index2` for"] # [doc = " example. By convention, `index1` corresponds to the byte in the needle"] # [doc = " that is believed to be most the predictive. Note also that because of the"] # [doc = " requirement that the indices be both valid for the needle used to build"] # [doc = " the pair and not equal, it follows that a pair can only be constructed for"] # [doc = " needles with length at least 2."] # [derive (Clone , Copy , Debug)] pub struct Pair { index1 : u8 , index2 : u8 , }
+};
+}

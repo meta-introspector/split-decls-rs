@@ -1,0 +1,9 @@
+// Generated macro for impl_1045 (impl)
+macro_rules! Depcrate_read_pe_resourceimpl_1045 {
+() => {
+// Module: crate::read::pe::resource
+// Provides: {"impl_1045"}
+// Dependencies: {}
+impl pe :: ImageResourceDirectoryEntry { # [doc = " Returns true if the entry has a name, rather than an ID."] pub fn has_name (& self) -> bool { self . name_or_id . get (LE) & pe :: IMAGE_RESOURCE_NAME_IS_STRING != 0 } # [doc = " Returns the section offset of the name."] # [doc = ""] # [doc = " Valid if `has_name()` returns true."] fn name (& self) -> ResourceName { let offset = self . name_or_id . get (LE) & ! pe :: IMAGE_RESOURCE_NAME_IS_STRING ; ResourceName { offset } } # [doc = " Returns the ID."] # [doc = ""] # [doc = " Valid if `has_string_name()` returns false."] fn id (& self) -> u16 { (self . name_or_id . get (LE) & 0x0000_FFFF) as u16 } # [doc = " Returns the entry name"] pub fn name_or_id (& self) -> ResourceNameOrId { if self . has_name () { ResourceNameOrId :: Name (self . name ()) } else { ResourceNameOrId :: Id (self . id ()) } } # [doc = " Returns true if the entry is a subtable."] pub fn is_table (& self) -> bool { self . offset_to_data_or_directory . get (LE) & pe :: IMAGE_RESOURCE_DATA_IS_DIRECTORY != 0 } # [doc = " Returns the section offset of the associated table or data."] pub fn data_offset (& self) -> u32 { self . offset_to_data_or_directory . get (LE) & ! pe :: IMAGE_RESOURCE_DATA_IS_DIRECTORY } # [doc = " Returns the data associated to this directory entry."] pub fn data < 'data > (& self , section : ResourceDirectory < 'data > ,) -> Result < ResourceDirectoryEntryData < 'data > > { if self . is_table () { ResourceDirectoryTable :: parse (section . data , self . data_offset ()) . map (ResourceDirectoryEntryData :: Table) } else { section . data . read_at :: < pe :: ImageResourceDataEntry > (self . data_offset () . into ()) . read_error ("Invalid resource entry") . map (ResourceDirectoryEntryData :: Data) } } }
+};
+}

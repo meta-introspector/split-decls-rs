@@ -1,0 +1,9 @@
+// Generated macro for open (function)
+macro_rules! Depcrate_hazardous_aead_chacha20poly1305open {
+() => {
+// Module: crate::hazardous::aead::chacha20poly1305
+// Provides: {"open"}
+// Dependencies: {}
+# [must_use = "SECURITY WARNING: Ignoring a Result can have real security implications."] # [doc = " AEAD ChaCha20Poly1305 decryption and authentication as specified in the [RFC 8439](https://tools.ietf.org/html/rfc8439)."] pub fn open (secret_key : & SecretKey , nonce : & Nonce , ciphertext_with_tag : & [u8] , ad : Option < & [u8] > , dst_out : & mut [u8] ,) -> Result < () , UnknownCryptoError > { if u64 :: try_from (ciphertext_with_tag . len ()) . map_err (| _ | UnknownCryptoError) ? > C_MAX { return Err (UnknownCryptoError) ; } let ad = ad . unwrap_or (& [0u8 ; 0]) ; # [allow (clippy :: absurd_extreme_comparisons)] if u64 :: try_from (ad . len ()) . map_err (| _ | UnknownCryptoError) ? > A_MAX { return Err (UnknownCryptoError) ; } if ciphertext_with_tag . len () < POLY1305_OUTSIZE { return Err (UnknownCryptoError) ; } if dst_out . len () < ciphertext_with_tag . len () - POLY1305_OUTSIZE { return Err (UnknownCryptoError) ; } let mut dec_ctx = ChaCha20 :: new (secret_key . unprotected_as_bytes () , nonce . as_ref () , true) . unwrap () ; let mut tmp = Zeroizing :: new ([0u8 ; CHACHA_BLOCKSIZE]) ; let mut auth_ctx = Poly1305 :: new (& poly1305_key_gen (& mut dec_ctx , & mut tmp)) ; let ciphertext_len = ciphertext_with_tag . len () - POLY1305_OUTSIZE ; process_authentication (& mut auth_ctx , ad , & ciphertext_with_tag [.. ciphertext_len]) ? ; util :: secure_cmp (auth_ctx . finalize () ? . unprotected_as_bytes () , & ciphertext_with_tag [ciphertext_len ..] ,) ? ; if ciphertext_len != 0 { dst_out [.. ciphertext_len] . copy_from_slice (& ciphertext_with_tag [.. ciphertext_len]) ; chacha20 :: xor_keystream (& mut dec_ctx , ENC_CTR , tmp . as_mut () , & mut dst_out [.. ciphertext_len] ,) ? ; } Ok (()) }
+};
+}

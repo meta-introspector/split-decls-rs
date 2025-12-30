@@ -1,0 +1,57 @@
+// Generated module macro for crate::unistd
+macro_rules! Modcrate_unistd {
+() => {
+        Depcrate_unistduse_252!();
+        Depcrate_unistduse_253!();
+        Depcrate_unistduse_254!();
+        Depcrate_unistduse_255!();
+        Depcrate_unistduse_256!();
+        Depcrate_unistduse_257!();
+        Depcrate_unistduse_258!();
+        Depcrate_unistduse_259!();
+        Depcrate_unistduse_260!();
+        Depcrate_unistduse_261!();
+        Depcrate_unistduse_262!();
+        Depcrate_unistduse_263!();
+        Depcrate_unistduse_264!();
+        Depcrate_unistdmacro_265!();
+        Depcrate_unistduse_266!();
+        Depcrate_unistduse_267!();
+        Depcrate_unistdmacro_268!();
+        Depcrate_unistdmacro_269!();
+        Depcrate_unistdmacro_270!();
+        Depcrate_unistdmacro_271!();
+        Depcrate_unistdmacro_272!();
+        Depcrate_unistdreserve_double_buffer_size!();
+        Depcrate_unistdmacro_274!();
+        Depcrate_unistdmacro_275!();
+        Depcrate_unistdmacro_276!();
+        Depcrate_unistdmacro_277!();
+        Depcrate_unistdclose!();
+        Depcrate_unistdread!();
+        Depcrate_unistdwrite!();
+        Depcrate_unistdmacro_281!();
+        Depcrate_unistdpipe!();
+        Depcrate_unistdmacro_283!();
+        Depcrate_unistdmacro_284!();
+        Depcrate_unistdmacro_285!();
+        Depcrate_unistdmacro_286!();
+        Depcrate_unistdmacro_287!();
+        Depcrate_unistdsleep!();
+        Depcrate_unistdmacro_289!();
+        Depcrate_unistdmacro_290!();
+        Depcrate_unistdmacro_291!();
+        Depcrate_unistdmacro_292!();
+        Depcrate_unistdpivot_root!();
+        Depcrate_unistdsetres!();
+        Depcrate_unistdgetres!();
+        Depcrate_unistdmacro_296!();
+        Depcrate_unistdmacro_297!();
+        Depcrate_unistdmacro_298!();
+        Depcrate_unistdmacro_299!();
+        Depcrate_unistdmacro_300!();
+        Depcrate_unistdmacro_301!();
+        Depcrate_unistdmacro_302!();
+        Depcrate_unistdmacro_303!();
+    };
+}

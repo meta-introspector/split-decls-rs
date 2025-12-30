@@ -1,0 +1,48 @@
+// Generated module macro for crate::byteorder
+macro_rules! Modcrate_byteorder {
+() => {
+        Depcrate_byteorderuse_129!();
+        Depcrate_byteorderuse_130!();
+        Depcrate_byteorderByteOrder!();
+        Depcrate_byteorderprivate!();
+        Depcrate_byteorderOrder!();
+        Depcrate_byteorderBigEndian!();
+        Depcrate_byteorderimpl_135!();
+        Depcrate_byteorderimpl_136!();
+        Depcrate_byteorderLittleEndian!();
+        Depcrate_byteorderimpl_138!();
+        Depcrate_byteorderimpl_139!();
+        Depcrate_byteorderNativeEndian!();
+        Depcrate_byteorderNativeEndian!();
+        Depcrate_byteorderNetworkEndian!();
+        Depcrate_byteorderBE!();
+        Depcrate_byteorderLE!();
+        Depcrate_byteorderimpl_fmt_trait!();
+        Depcrate_byteorderimpl_fmt_traits!();
+        Depcrate_byteorderimpl_ops_traits!();
+        Depcrate_byteorderdoc_comment!();
+        Depcrate_byteorderdefine_max_value_constant!();
+        Depcrate_byteorderdefine_type!();
+        Depcrate_byteordermacro_151!();
+        Depcrate_byteordermacro_152!();
+        Depcrate_byteordermacro_153!();
+        Depcrate_byteordermacro_154!();
+        Depcrate_byteordermacro_155!();
+        Depcrate_byteordermacro_156!();
+        Depcrate_byteordermacro_157!();
+        Depcrate_byteordermacro_158!();
+        Depcrate_byteordermacro_159!();
+        Depcrate_byteordermacro_160!();
+        Depcrate_byteorderdefine_float_conversion!();
+        Depcrate_byteordermacro_162!();
+        Depcrate_byteordermacro_163!();
+        Depcrate_byteordermacro_164!();
+        Depcrate_byteordermacro_165!();
+        Depcrate_byteordermodule!();
+        Depcrate_byteordermacro_167!();
+        Depcrate_byteordermacro_168!();
+        Depcrate_byteordermacro_169!();
+        Depcrate_byteordermacro_170!();
+        Depcrate_byteordertests!();
+    };
+}

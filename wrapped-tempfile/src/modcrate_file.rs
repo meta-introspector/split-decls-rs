@@ -1,0 +1,57 @@
+// Generated module macro for crate::file
+macro_rules! Modcrate_file {
+() => {
+        Depcrate_fileuse_50!();
+        Depcrate_fileuse_51!();
+        Depcrate_fileuse_52!();
+        Depcrate_fileuse_53!();
+        Depcrate_fileuse_54!();
+        Depcrate_fileuse_55!();
+        Depcrate_fileuse_56!();
+        Depcrate_fileuse_57!();
+        Depcrate_fileuse_58!();
+        Depcrate_fileuse_59!();
+        Depcrate_fileuse_60!();
+        Depcrate_fileuse_61!();
+        Depcrate_fileuse_62!();
+        Depcrate_fileuse_63!();
+        Depcrate_fileimp!();
+        Depcrate_filetempfile!();
+        Depcrate_filetempfile_in!();
+        Depcrate_filePathPersistError!();
+        Depcrate_fileimpl_70!();
+        Depcrate_fileimpl_71!();
+        Depcrate_fileimpl_72!();
+        Depcrate_fileimpl_73!();
+        Depcrate_fileTempPath!();
+        Depcrate_fileimpl_75!();
+        Depcrate_fileimpl_76!();
+        Depcrate_fileimpl_77!();
+        Depcrate_fileimpl_78!();
+        Depcrate_fileimpl_79!();
+        Depcrate_fileimpl_80!();
+        Depcrate_fileNamedTempFile!();
+        Depcrate_fileimpl_82!();
+        Depcrate_fileimpl_83!();
+        Depcrate_filePersistError!();
+        Depcrate_fileimpl_85!();
+        Depcrate_fileimpl_86!();
+        Depcrate_fileimpl_87!();
+        Depcrate_fileimpl_88!();
+        Depcrate_fileimpl_89!();
+        Depcrate_fileimpl_90!();
+        Depcrate_fileimpl_91!();
+        Depcrate_fileimpl_92!();
+        Depcrate_fileimpl_93!();
+        Depcrate_fileimpl_94!();
+        Depcrate_fileimpl_95!();
+        Depcrate_fileimpl_96!();
+        Depcrate_fileimpl_97!();
+        Depcrate_fileimpl_98!();
+        Depcrate_fileimpl_99!();
+        Depcrate_fileimpl_100!();
+        Depcrate_fileimpl_101!();
+        Depcrate_fileimpl_102!();
+        Depcrate_filecreate_named!();
+    };
+}

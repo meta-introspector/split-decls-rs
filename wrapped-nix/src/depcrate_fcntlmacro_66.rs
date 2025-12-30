@@ -1,0 +1,9 @@
+// Generated macro for macro_66 (macro)
+macro_rules! Depcrate_fcntlmacro_66 {
+() => {
+// Module: crate::fcntl
+// Provides: {"macro_66"}
+// Dependencies: {}
+# [cfg (target_os = "linux")] # [cfg (feature = "fs")] libc_bitflags ! (# [doc = " Mode argument flags for fallocate determining operation performed on a given range."] # [cfg_attr (docsrs , doc (cfg (feature = "fs")))] pub struct FallocateFlags : c_int { # [doc = " File size is not changed."] # [doc = ""] # [doc = " offset + len can be greater than file size."] FALLOC_FL_KEEP_SIZE ; # [doc = " Deallocates space by creating a hole."] # [doc = ""] # [doc = " Must be ORed with FALLOC_FL_KEEP_SIZE. Byte range starts at offset and continues for len bytes."] FALLOC_FL_PUNCH_HOLE ; # [doc = " Removes byte range from a file without leaving a hole."] # [doc = ""] # [doc = " Byte range to collapse starts at offset and continues for len bytes."] FALLOC_FL_COLLAPSE_RANGE ; # [doc = " Zeroes space in specified byte range."] # [doc = ""] # [doc = " Byte range starts at offset and continues for len bytes."] FALLOC_FL_ZERO_RANGE ; # [doc = " Increases file space by inserting a hole within the file size."] # [doc = ""] # [doc = " Does not overwrite existing data. Hole starts at offset and continues for len bytes."] FALLOC_FL_INSERT_RANGE ; # [doc = " Shared file data extants are made private to the file."] # [doc = ""] # [doc = " Guarantees that a subsequent write will not fail due to lack of space."] FALLOC_FL_UNSHARE_RANGE ; }) ;
+};
+}

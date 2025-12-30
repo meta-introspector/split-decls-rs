@@ -1,0 +1,49 @@
+// Generated module macro for crate::test
+macro_rules! Modcrate_test {
+() => {
+        Depcrate_testuse_2!();
+        Depcrate_testuse_3!();
+        Depcrate_testuse_4!();
+        Depcrate_testuse_5!();
+        Depcrate_testuse_6!();
+        Depcrate_testTEST_CASES!();
+        Depcrate_testTEST_CASES_MAX!();
+        Depcrate_testTEST_KEY!();
+        Depcrate_testTEST_KEY_WORDS!();
+        Depcrate_testpaint_test_input!();
+        Depcrate_testCompressInPlaceFn!();
+        Depcrate_testCompressXofFn!();
+        Depcrate_testtest_compress_fn!();
+        Depcrate_testHashManyFn!();
+        Depcrate_testtest_hash_many_fn!();
+        Depcrate_testXofManyFunction!();
+        Depcrate_testtest_xof_many_fn!();
+        Depcrate_testtest_key_bytes_equal_key_words!();
+        Depcrate_testtest_reference_impl_size!();
+        Depcrate_testtest_counter_words!();
+        Depcrate_testtest_largest_power_of_two_leq!();
+        Depcrate_testtest_compare_reference_impl!();
+        Depcrate_testtest_compare_reference_impl_long_xof!();
+        Depcrate_testtest_xof_partial_blocks!();
+        Depcrate_testreference_hash!();
+        Depcrate_testtest_compare_update_multiple!();
+        Depcrate_testtest_fuzz_hasher!();
+        Depcrate_testtest_fuzz_xof!();
+        Depcrate_testtest_xof_seek!();
+        Depcrate_testtest_msg_schedule_permutation!();
+        Depcrate_testtest_reset!();
+        Depcrate_testtest_hex_encoding_decoding!();
+        Depcrate_testtest_issue_206_windows_sse2!();
+        Depcrate_testtest_hash_conversions!();
+        Depcrate_testtest_hash_const_conversions!();
+        Depcrate_testtest_zeroize!();
+        Depcrate_testtest_update_reader!();
+        Depcrate_testtest_update_reader_interrupted!();
+        Depcrate_testtest_mmap!();
+        Depcrate_testtest_mmap_virtual_file!();
+        Depcrate_testtest_mmap_rayon!();
+        Depcrate_testtest_serde!();
+        Depcrate_testtest_miri_smoketest!();
+        Depcrate_testguts_tests!();
+    };
+}

@@ -1,0 +1,9 @@
+// Generated macro for timespec (module)
+macro_rules! Depcratetimespec {
+() => {
+// Module: crate
+// Provides: {"timespec"}
+// Dependencies: {}
+# [cfg (any (feature = "fs" , feature = "event" , feature = "process" , feature = "runtime" , feature = "thread" , feature = "time" , all (feature = "event" , any (bsd , linux_kernel , windows , target_os = "wasi")) , all (linux_raw , not (feature = "use-libc-auxv") , not (feature = "use-explicitly-provided-auxv") , any (feature = "param" , feature = "process" , feature = "runtime" , feature = "time" , target_arch = "x86" ,))))] mod timespec ;
+};
+}

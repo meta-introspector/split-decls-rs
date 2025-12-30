@@ -1,0 +1,39 @@
+// Generated module macro for crate::adaptors::coalesce
+macro_rules! Modcrate_adaptors_coalesce {
+() => {
+        Depcrate_adaptors_coalesceuse_41!();
+        Depcrate_adaptors_coalesceuse_42!();
+        Depcrate_adaptors_coalesceuse_43!();
+        Depcrate_adaptors_coalesceCoalesceBy!();
+        Depcrate_adaptors_coalesceimpl_45!();
+        Depcrate_adaptors_coalesceimpl_46!();
+        Depcrate_adaptors_coalesceCoalescePredicate!();
+        Depcrate_adaptors_coalesceimpl_48!();
+        Depcrate_adaptors_coalesceimpl_49!();
+        Depcrate_adaptors_coalesceNoCount!();
+        Depcrate_adaptors_coalesceWithCount!();
+        Depcrate_adaptors_coalesceCountItem!();
+        Depcrate_adaptors_coalesceimpl_53!();
+        Depcrate_adaptors_coalesceimpl_54!();
+        Depcrate_adaptors_coalesceCoalesce!();
+        Depcrate_adaptors_coalesceimpl_56!();
+        Depcrate_adaptors_coalescecoalesce!();
+        Depcrate_adaptors_coalesceDedupBy!();
+        Depcrate_adaptors_coalesceDedupPred2CoalescePred!();
+        Depcrate_adaptors_coalesceimpl_60!();
+        Depcrate_adaptors_coalesceDedupPredicate!();
+        Depcrate_adaptors_coalesceimpl_62!();
+        Depcrate_adaptors_coalesceDedupEq!();
+        Depcrate_adaptors_coalesceimpl_64!();
+        Depcrate_adaptors_coalesceimpl_65!();
+        Depcrate_adaptors_coalescededup_by!();
+        Depcrate_adaptors_coalesceDedup!();
+        Depcrate_adaptors_coalescededup!();
+        Depcrate_adaptors_coalesceDedupByWithCount!();
+        Depcrate_adaptors_coalesceDedupPredWithCount2CoalescePred!();
+        Depcrate_adaptors_coalesceimpl_71!();
+        Depcrate_adaptors_coalesceDedupWithCount!();
+        Depcrate_adaptors_coalescededup_by_with_count!();
+        Depcrate_adaptors_coalescededup_with_count!();
+    };
+}

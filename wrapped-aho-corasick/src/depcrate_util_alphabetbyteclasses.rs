@@ -1,0 +1,9 @@
+// Generated macro for ByteClasses (struct)
+macro_rules! Depcrate_util_alphabetByteClasses {
+() => {
+// Module: crate::util::alphabet
+// Provides: {"ByteClasses"}
+// Dependencies: {}
+# [doc = " A representation of byte oriented equivalence classes."] # [doc = ""] # [doc = " This is used in finite state machines to reduce the size of the transition"] # [doc = " table. This can have a particularly large impact not only on the total size"] # [doc = " of an FSM, but also on FSM build times because it reduces the number of"] # [doc = " transitions that need to be visited/set."] # [derive (Clone , Copy)] pub (crate) struct ByteClasses ([u8 ; 256]) ;
+};
+}

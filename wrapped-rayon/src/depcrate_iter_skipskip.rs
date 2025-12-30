@@ -1,0 +1,9 @@
+// Generated macro for Skip (struct)
+macro_rules! Depcrate_iter_skipSkip {
+() => {
+// Module: crate::iter::skip
+// Provides: {"Skip"}
+// Dependencies: {}
+# [doc = " `Skip` is an iterator that skips over the first `n` elements."] # [doc = " This struct is created by the [`skip()`] method on [`IndexedParallelIterator`]"] # [doc = ""] # [doc = " [`skip()`]: IndexedParallelIterator::skip()"] # [must_use = "iterator adaptors are lazy and do nothing unless consumed"] # [derive (Debug , Clone)] pub struct Skip < I > { base : I , n : usize , }
+};
+}

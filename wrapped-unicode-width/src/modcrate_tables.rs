@@ -1,0 +1,57 @@
+// Generated module macro for crate::tables
+macro_rules! Modcrate_tables {
+() => {
+        Depcrate_tablesuse_3!();
+        Depcrate_tablesWidthInfo!();
+        Depcrate_tablesLIGATURE_TRANSPARENT_MASK!();
+        Depcrate_tablesimpl_6!();
+        Depcrate_tablesUNICODE_VERSION!();
+        Depcrate_tableslookup_width!();
+        Depcrate_tablessingle_char_width!();
+        Depcrate_tableswidth_in_str!();
+        Depcrate_tablesstr_width!();
+        Depcrate_tableslookup_width_cjk!();
+        Depcrate_tablessingle_char_width_cjk!();
+        Depcrate_tableswidth_in_str_cjk!();
+        Depcrate_tablesstr_width_cjk!();
+        Depcrate_tablesis_transparent_zero_width!();
+        Depcrate_tablesis_ligature_transparent!();
+        Depcrate_tablesis_solidus_transparent!();
+        Depcrate_tablesstarts_emoji_presentation_seq!();
+        Depcrate_tablesstarts_non_ideographic_text_presentation_seq!();
+        Depcrate_tablesis_emoji_modifier_base!();
+        Depcrate_tablesAlign32!();
+        Depcrate_tablesAlign64!();
+        Depcrate_tablesAlign128!();
+        Depcrate_tablesWIDTH_ROOT!();
+        Depcrate_tablesWIDTH_ROOT_CJK!();
+        Depcrate_tablesWIDTH_MIDDLE_LEN!();
+        Depcrate_tablesWIDTH_MIDDLE_LEN!();
+        Depcrate_tablesWIDTH_MIDDLE!();
+        Depcrate_tablesWIDTH_LEAVES_LEN!();
+        Depcrate_tablesWIDTH_LEAVES_LEN!();
+        Depcrate_tablesWIDTH_LEAVES!();
+        Depcrate_tablesNON_TRANSPARENT_ZERO_WIDTHS!();
+        Depcrate_tablesSOLIDUS_TRANSPARENT!();
+        Depcrate_tablesEMOJI_PRESENTATION_LEAVES!();
+        Depcrate_tablesTEXT_PRESENTATION_LEAF_0!();
+        Depcrate_tablesTEXT_PRESENTATION_LEAF_1!();
+        Depcrate_tablesTEXT_PRESENTATION_LEAF_2!();
+        Depcrate_tablesTEXT_PRESENTATION_LEAF_3!();
+        Depcrate_tablesTEXT_PRESENTATION_LEAF_4!();
+        Depcrate_tablesTEXT_PRESENTATION_LEAF_5!();
+        Depcrate_tablesTEXT_PRESENTATION_LEAF_6!();
+        Depcrate_tablesTEXT_PRESENTATION_LEAF_7!();
+        Depcrate_tablesTEXT_PRESENTATION_LEAF_8!();
+        Depcrate_tablesTEXT_PRESENTATION_LEAF_9!();
+        Depcrate_tablesEMOJI_MODIFIER_LEAF_0!();
+        Depcrate_tablesEMOJI_MODIFIER_LEAF_1!();
+        Depcrate_tablesEMOJI_MODIFIER_LEAF_2!();
+        Depcrate_tablesEMOJI_MODIFIER_LEAF_3!();
+        Depcrate_tablesEMOJI_MODIFIER_LEAF_4!();
+        Depcrate_tablesEMOJI_MODIFIER_LEAF_5!();
+        Depcrate_tablesEMOJI_MODIFIER_LEAF_6!();
+        Depcrate_tablesEMOJI_MODIFIER_LEAF_7!();
+        Depcrate_tablestests!();
+    };
+}

@@ -1,0 +1,9 @@
+// Generated macro for SectionData (enum)
+macro_rules! Depcrate_build_elfSectionData {
+() => {
+// Module: crate::build::elf
+// Provides: {"SectionData"}
+// Dependencies: {}
+# [doc = " The data for a [`Section`]."] # [derive (Debug , Clone)] pub enum SectionData < 'data > { # [doc = " The section contains the given raw data bytes."] Data (Bytes < 'data >) , # [doc = " The section contains uninitialised data bytes of the given length."] UninitializedData (u64) , # [doc = " The section contains relocations."] Relocation (Vec < Relocation >) , # [doc = " The section contains dynamic relocations."] DynamicRelocation (Vec < DynamicRelocation >) , # [doc = " The section contains notes."] Note (Bytes < 'data >) , # [doc = " The section contains dynamic entries."] Dynamic (Vec < Dynamic < 'data > >) , # [doc = " The section contains attributes."] # [doc = ""] # [doc = " This may be GNU attributes or other vendor-specific attributes."] Attributes (AttributesSection < 'data >) , # [doc = " The section contains the strings for the section headers."] SectionString , # [doc = " The section contains the symbol table."] Symbol , # [doc = " The section contains the extended section index for the symbol table."] SymbolSectionIndex , # [doc = " The section contains the strings for symbol table."] String , # [doc = " The section contains the dynamic symbol table."] DynamicSymbol , # [doc = " The section contains the dynamic string table."] DynamicString , # [doc = " The section contains the hash table."] Hash , # [doc = " The section contains the GNU hash table."] GnuHash , # [doc = " The section contains the GNU symbol versions."] GnuVersym , # [doc = " The section contains the GNU version definitions."] GnuVerdef , # [doc = " The section contains the GNU version dependencies."] GnuVerneed , }
+};
+}

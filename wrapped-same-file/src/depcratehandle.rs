@@ -1,0 +1,9 @@
+// Generated macro for Handle (struct)
+macro_rules! DepcrateHandle {
+() => {
+// Module: crate
+// Provides: {"Handle"}
+// Dependencies: {}
+# [doc = " A handle to a file that can be tested for equality with other handles."] # [doc = ""] # [doc = " If two files are the same, then any two handles of those files will compare"] # [doc = " equal. If two files are not the same, then any two handles of those files"] # [doc = " will compare not-equal."] # [doc = ""] # [doc = " A handle consumes an open file resource as long as it exists."] # [doc = ""] # [doc = " Equality is determined by comparing inode numbers on Unix and a combination"] # [doc = " of identifier, volume serial, and file size on Windows. Note that it's"] # [doc = " possible for comparing two handles to produce a false positive on some"] # [doc = " platforms. Namely, two handles can compare equal even if the two handles"] # [doc = " *don't* point to the same file. Check the [source] for specific"] # [doc = " implementation details."] # [doc = ""] # [doc = " [source]: https://github.com/BurntSushi/same-file/tree/master/src"] # [derive (Debug , Eq , PartialEq , Hash)] pub struct Handle (imp :: Handle) ;
+};
+}

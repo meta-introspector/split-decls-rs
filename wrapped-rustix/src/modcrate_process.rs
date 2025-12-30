@@ -1,0 +1,39 @@
+// Generated module macro for crate::process
+macro_rules! Modcrate_process {
+() => {
+        Depcrate_processchdir!();
+        Depcrate_processchroot!();
+        Depcrate_processexit!();
+        Depcrate_processfcntl_getlk!();
+        Depcrate_processid!();
+        Depcrate_processioctl!();
+        Depcrate_processkill!();
+        Depcrate_processpidfd!();
+        Depcrate_processpidfd_getfd!();
+        Depcrate_processpivot_root!();
+        Depcrate_processprctl!();
+        Depcrate_processpriority!();
+        Depcrate_processprocctl!();
+        Depcrate_processrlimit!();
+        Depcrate_processtypes!();
+        Depcrate_processumask!();
+        Depcrate_processwait!();
+        Depcrate_processuse_1599!();
+        Depcrate_processuse_1600!();
+        Depcrate_processuse_1601!();
+        Depcrate_processuse_1602!();
+        Depcrate_processuse_1603!();
+        Depcrate_processuse_1604!();
+        Depcrate_processuse_1605!();
+        Depcrate_processuse_1606!();
+        Depcrate_processuse_1607!();
+        Depcrate_processuse_1608!();
+        Depcrate_processuse_1609!();
+        Depcrate_processuse_1610!();
+        Depcrate_processuse_1611!();
+        Depcrate_processuse_1612!();
+        Depcrate_processuse_1613!();
+        Depcrate_processuse_1614!();
+        Depcrate_processuse_1615!();
+    };
+}

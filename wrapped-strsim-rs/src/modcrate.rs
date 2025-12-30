@@ -1,0 +1,47 @@
+// Generated module macro for crate
+macro_rules! Modcrate {
+() => {
+        Depcrateuse_1!();
+        Depcrateuse_2!();
+        Depcrateuse_3!();
+        Depcrateuse_4!();
+        Depcrateuse_5!();
+        Depcrateuse_6!();
+        Depcrateuse_7!();
+        Depcrateuse_8!();
+        Depcrateuse_9!();
+        DepcrateStrSimError!();
+        Depcrateimpl_11!();
+        Depcrateimpl_12!();
+        DepcrateHammingResult!();
+        Depcrategeneric_hamming!();
+        Depcratehamming!();
+        Depcrategeneric_jaro!();
+        DepcrateStringWrapper!();
+        Depcrateimpl_18!();
+        Depcratejaro!();
+        Depcrategeneric_jaro_winkler!();
+        Depcratejaro_winkler!();
+        Depcrategeneric_levenshtein!();
+        Depcratelevenshtein!();
+        Depcratenormalized_levenshtein!();
+        Depcrateosa_distance!();
+        Depcrateflat_index!();
+        Depcrategeneric_damerau_levenshtein!();
+        DepcrateRowId!();
+        Depcrateimpl_29!();
+        DepcrateGrowingHashmapMapElemChar!();
+        DepcrateGrowingHashmapChar!();
+        Depcrateimpl_32!();
+        Depcrateimpl_33!();
+        DepcrateHybridGrowingHashmapChar!();
+        Depcrateimpl_35!();
+        Depcrateimpl_36!();
+        Depcratedamerau_levenshtein_impl!();
+        Depcratedamerau_levenshtein!();
+        Depcratenormalized_damerau_levenshtein!();
+        Depcratebigrams!();
+        Depcratesorensen_dice!();
+        Depcratetests!();
+    };
+}

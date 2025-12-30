@@ -1,0 +1,53 @@
+// Generated module macro for crate::array_string
+macro_rules! Modcrate_array_string {
+() => {
+        Depcrate_array_stringuse_8!();
+        Depcrate_array_stringuse_9!();
+        Depcrate_array_stringuse_10!();
+        Depcrate_array_stringuse_11!();
+        Depcrate_array_stringuse_12!();
+        Depcrate_array_stringuse_13!();
+        Depcrate_array_stringuse_14!();
+        Depcrate_array_stringuse_15!();
+        Depcrate_array_stringuse_16!();
+        Depcrate_array_stringuse_17!();
+        Depcrate_array_stringuse_18!();
+        Depcrate_array_stringuse_19!();
+        Depcrate_array_stringuse_20!();
+        Depcrate_array_stringuse_21!();
+        Depcrate_array_stringuse_22!();
+        Depcrate_array_stringuse_23!();
+        Depcrate_array_stringuse_24!();
+        Depcrate_array_stringuse_25!();
+        Depcrate_array_stringArrayString!();
+        Depcrate_array_stringimpl_27!();
+        Depcrate_array_stringimpl_28!();
+        Depcrate_array_stringimpl_29!();
+        Depcrate_array_stringimpl_30!();
+        Depcrate_array_stringimpl_31!();
+        Depcrate_array_stringimpl_32!();
+        Depcrate_array_stringimpl_33!();
+        Depcrate_array_stringimpl_34!();
+        Depcrate_array_stringimpl_35!();
+        Depcrate_array_stringimpl_36!();
+        Depcrate_array_stringimpl_37!();
+        Depcrate_array_stringimpl_38!();
+        Depcrate_array_stringimpl_39!();
+        Depcrate_array_stringimpl_40!();
+        Depcrate_array_stringimpl_41!();
+        Depcrate_array_stringimpl_42!();
+        Depcrate_array_stringimpl_43!();
+        Depcrate_array_stringimpl_44!();
+        Depcrate_array_stringimpl_45!();
+        Depcrate_array_stringimpl_46!();
+        Depcrate_array_stringimpl_47!();
+        Depcrate_array_stringimpl_48!();
+        Depcrate_array_stringimpl_49!();
+        Depcrate_array_stringimpl_50!();
+        Depcrate_array_stringimpl_51!();
+        Depcrate_array_stringimpl_52!();
+        Depcrate_array_stringimpl_53!();
+        Depcrate_array_stringimpl_54!();
+        Depcrate_array_stringimpl_55!();
+    };
+}

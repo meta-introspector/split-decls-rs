@@ -1,0 +1,46 @@
+// Generated module macro for crate::hazardous::kem::ml_kem::internal
+macro_rules! Modcrate_hazardous_kem_ml_kem_internal {
+() => {
+        Depcrate_hazardous_kem_ml_kem_internalfe!();
+        Depcrate_hazardous_kem_ml_kem_internalre!();
+        Depcrate_hazardous_kem_ml_kem_internalserialization!();
+        Depcrate_hazardous_kem_ml_kem_internalsampling!();
+        Depcrate_hazardous_kem_ml_kem_internaluse_598!();
+        Depcrate_hazardous_kem_ml_kem_internaluse_599!();
+        Depcrate_hazardous_kem_ml_kem_internaluse_600!();
+        Depcrate_hazardous_kem_ml_kem_internaluse_601!();
+        Depcrate_hazardous_kem_ml_kem_internaluse_602!();
+        Depcrate_hazardous_kem_ml_kem_internaluse_603!();
+        Depcrate_hazardous_kem_ml_kem_internaluse_604!();
+        Depcrate_hazardous_kem_ml_kem_internaluse_605!();
+        Depcrate_hazardous_kem_ml_kem_internaluse_606!();
+        Depcrate_hazardous_kem_ml_kem_internaluse_607!();
+        Depcrate_hazardous_kem_ml_kem_internaluse_608!();
+        Depcrate_hazardous_kem_ml_kem_internaluse_609!();
+        Depcrate_hazardous_kem_ml_kem_internalKYBER_POLY_DEG!();
+        Depcrate_hazardous_kem_ml_kem_internalENCODE_SIZE_POLY!();
+        Depcrate_hazardous_kem_ml_kem_internalmat_mul_vec_transposed!();
+        Depcrate_hazardous_kem_ml_kem_internalg!();
+        Depcrate_hazardous_kem_ml_kem_internalPkeParameters!();
+        Depcrate_hazardous_kem_ml_kem_internalMlKem512Internal!();
+        Depcrate_hazardous_kem_ml_kem_internalimpl_616!();
+        Depcrate_hazardous_kem_ml_kem_internalMlKem768Internal!();
+        Depcrate_hazardous_kem_ml_kem_internalimpl_618!();
+        Depcrate_hazardous_kem_ml_kem_internalMlKem1024Internal!();
+        Depcrate_hazardous_kem_ml_kem_internalimpl_620!();
+        Depcrate_hazardous_kem_ml_kem_internalEncapKey!();
+        Depcrate_hazardous_kem_ml_kem_internalimpl_622!();
+        Depcrate_hazardous_kem_ml_kem_internalimpl_623!();
+        Depcrate_hazardous_kem_ml_kem_internalimpl_624!();
+        Depcrate_hazardous_kem_ml_kem_internalDecapKey!();
+        Depcrate_hazardous_kem_ml_kem_internalimpl_626!();
+        Depcrate_hazardous_kem_ml_kem_internalimpl_627!();
+        Depcrate_hazardous_kem_ml_kem_internalimpl_628!();
+        Depcrate_hazardous_kem_ml_kem_internalimpl_629!();
+        Depcrate_hazardous_kem_ml_kem_internalimpl_630!();
+        Depcrate_hazardous_kem_ml_kem_internalimpl_631!();
+        Depcrate_hazardous_kem_ml_kem_internalKeyPairInternal!();
+        Depcrate_hazardous_kem_ml_kem_internalimpl_633!();
+        Depcrate_hazardous_kem_ml_kem_internaltests!();
+    };
+}

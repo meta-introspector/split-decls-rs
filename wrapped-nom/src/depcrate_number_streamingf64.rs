@@ -1,0 +1,9 @@
+// Generated macro for f64 (function)
+macro_rules! Depcrate_number_streamingf64 {
+() => {
+// Module: crate::number::streaming
+// Provides: {"f64"}
+// Dependencies: {}
+# [doc = " Recognizes an 8 byte floating point number"] # [doc = ""] # [doc = " If the parameter is `nom::number::Endianness::Big`, parse a big endian f64 float,"] # [doc = " otherwise if `nom::number::Endianness::Little` parse a little endian f64 float."] # [doc = " *Streaming version*: Will return `Err(nom::Err::Incomplete(_))` if there is not enough data."] # [doc = " ```rust"] # [doc = " # use nom::{Err, error::ErrorKind, Needed};"] # [doc = " # use nom::Needed::Size;"] # [doc = " use nom::number::streaming::f64;"] # [doc = ""] # [doc = " let be_f64 = |s| {"] # [doc = "   f64::<_, (_, ErrorKind)>(nom::number::Endianness::Big)(s)"] # [doc = " };"] # [doc = ""] # [doc = " assert_eq!(be_f64(&[0x40, 0x29, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00][..]), Ok((&b\"\"[..], 12.5)));"] # [doc = " assert_eq!(be_f64(&b\"abc\"[..]), Err(Err::Incomplete(Needed::new(5))));"] # [doc = ""] # [doc = " let le_f64 = |s| {"] # [doc = "   f64::<_, (_, ErrorKind)>(nom::number::Endianness::Little)(s)"] # [doc = " };"] # [doc = ""] # [doc = " assert_eq!(le_f64(&[0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x29, 0x40][..]), Ok((&b\"\"[..], 12.5)));"] # [doc = " assert_eq!(le_f64(&b\"abc\"[..]), Err(Err::Incomplete(Needed::new(5))));"] # [doc = " ```"] # [inline] pub fn f64 < I , E : ParseError < I > > (endian : crate :: number :: Endianness) -> fn (I) -> IResult < I , f64 , E > where I : Input < Item = u8 > , { match endian { crate :: number :: Endianness :: Big => be_f64 , crate :: number :: Endianness :: Little => le_f64 , # [cfg (target_endian = "big")] crate :: number :: Endianness :: Native => be_f64 , # [cfg (target_endian = "little")] crate :: number :: Endianness :: Native => le_f64 , } }
+};
+}

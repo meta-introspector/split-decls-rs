@@ -1,0 +1,9 @@
+// Generated macro for searcher_kind_empty (function)
+macro_rules! Depcrate_memmem_searchersearcher_kind_empty {
+() => {
+// Module: crate::memmem::searcher
+// Provides: {"searcher_kind_empty"}
+// Dependencies: {}
+# [doc = " Reads from the `empty` field of `SearcherKind` to handle the case of"] # [doc = " searching for the empty needle. Works on all platforms."] # [doc = ""] # [doc = " # Safety"] # [doc = ""] # [doc = " Callers must ensure that the `searcher.kind.empty` union field is set."] unsafe fn searcher_kind_empty (_searcher : & Searcher , _prestate : & mut PrefilterState , _haystack : & [u8] , _needle : & [u8] ,) -> Option < usize > { Some (0) }
+};
+}

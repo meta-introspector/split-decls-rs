@@ -1,0 +1,9 @@
+// Generated macro for impl_186 (impl)
+macro_rules! Depcrate_sys_sysinfoimpl_186 {
+() => {
+// Module: crate::sys::sysinfo
+// Provides: {"impl_186"}
+// Dependencies: {}
+impl SysInfo { # [doc = " Returns the load average tuple."] # [doc = ""] # [doc = " The returned values represent the load average over time intervals of"] # [doc = " 1, 5, and 15 minutes, respectively."] pub fn load_average (& self) -> (f64 , f64 , f64) { (self . 0 . loads [0] as f64 / (1 << SI_LOAD_SHIFT) as f64 , self . 0 . loads [1] as f64 / (1 << SI_LOAD_SHIFT) as f64 , self . 0 . loads [2] as f64 / (1 << SI_LOAD_SHIFT) as f64 ,) } # [doc = " Returns the time since system boot."] # [allow (clippy :: unnecessary_cast)] pub fn uptime (& self) -> Duration { Duration :: from_secs (cmp :: max (self . 0 . uptime , 0) as u64) } # [doc = " Current number of processes."] pub fn process_count (& self) -> u16 { self . 0 . procs } # [doc = " Returns the amount of swap memory in Bytes."] pub fn swap_total (& self) -> u64 { self . scale_mem (self . 0 . totalswap) } # [doc = " Returns the amount of unused swap memory in Bytes."] pub fn swap_free (& self) -> u64 { self . scale_mem (self . 0 . freeswap) } # [doc = " Returns the total amount of installed RAM in Bytes."] pub fn ram_total (& self) -> u64 { self . scale_mem (self . 0 . totalram) } # [doc = " Returns the amount of completely unused RAM in Bytes."] # [doc = ""] # [doc = " \"Unused\" in this context means that the RAM in neither actively used by"] # [doc = " programs, nor by the operating system as disk cache or buffer. It is"] # [doc = " \"wasted\" RAM since it currently serves no purpose."] pub fn ram_unused (& self) -> u64 { self . scale_mem (self . 0 . freeram) } # [allow (clippy :: unnecessary_cast)] fn scale_mem (& self , units : mem_blocks_t) -> u64 { units as u64 * self . 0 . mem_unit as u64 } }
+};
+}

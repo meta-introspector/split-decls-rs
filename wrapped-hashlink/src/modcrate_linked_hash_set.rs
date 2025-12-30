@@ -1,0 +1,57 @@
+// Generated module macro for crate::linked_hash_set
+macro_rules! Modcrate_linked_hash_set {
+() => {
+        Depcrate_linked_hash_setuse_138!();
+        Depcrate_linked_hash_setuse_139!();
+        Depcrate_linked_hash_setuse_140!();
+        Depcrate_linked_hash_setLinkedHashSet!();
+        Depcrate_linked_hash_setimpl_142!();
+        Depcrate_linked_hash_setimpl_143!();
+        Depcrate_linked_hash_setimpl_144!();
+        Depcrate_linked_hash_setimpl_145!();
+        Depcrate_linked_hash_setimpl_146!();
+        Depcrate_linked_hash_setimpl_147!();
+        Depcrate_linked_hash_setimpl_148!();
+        Depcrate_linked_hash_setimpl_149!();
+        Depcrate_linked_hash_setimpl_150!();
+        Depcrate_linked_hash_setimpl_151!();
+        Depcrate_linked_hash_setimpl_152!();
+        Depcrate_linked_hash_setimpl_153!();
+        Depcrate_linked_hash_setimpl_154!();
+        Depcrate_linked_hash_setimpl_155!();
+        Depcrate_linked_hash_setimpl_156!();
+        Depcrate_linked_hash_setimpl_157!();
+        Depcrate_linked_hash_setIter!();
+        Depcrate_linked_hash_setIntoIter!();
+        Depcrate_linked_hash_setDrain!();
+        Depcrate_linked_hash_setIntersection!();
+        Depcrate_linked_hash_setDifference!();
+        Depcrate_linked_hash_setSymmetricDifference!();
+        Depcrate_linked_hash_setUnion!();
+        Depcrate_linked_hash_setimpl_165!();
+        Depcrate_linked_hash_setimpl_166!();
+        Depcrate_linked_hash_setimpl_167!();
+        Depcrate_linked_hash_setimpl_168!();
+        Depcrate_linked_hash_setimpl_169!();
+        Depcrate_linked_hash_setimpl_170!();
+        Depcrate_linked_hash_setimpl_171!();
+        Depcrate_linked_hash_setimpl_172!();
+        Depcrate_linked_hash_setimpl_173!();
+        Depcrate_linked_hash_setimpl_174!();
+        Depcrate_linked_hash_setimpl_175!();
+        Depcrate_linked_hash_setimpl_176!();
+        Depcrate_linked_hash_setimpl_177!();
+        Depcrate_linked_hash_setimpl_178!();
+        Depcrate_linked_hash_setimpl_179!();
+        Depcrate_linked_hash_setimpl_180!();
+        Depcrate_linked_hash_setimpl_181!();
+        Depcrate_linked_hash_setimpl_182!();
+        Depcrate_linked_hash_setimpl_183!();
+        Depcrate_linked_hash_setimpl_184!();
+        Depcrate_linked_hash_setimpl_185!();
+        Depcrate_linked_hash_setimpl_186!();
+        Depcrate_linked_hash_setimpl_187!();
+        Depcrate_linked_hash_setimpl_188!();
+        Depcrate_linked_hash_setimpl_189!();
+    };
+}

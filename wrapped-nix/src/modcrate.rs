@@ -1,0 +1,43 @@
+// Generated module macro for crate
+macro_rules! Modcrate {
+() => {
+        Depcrateuse_1!();
+        Depcratemacros!();
+        Depcratemacro_6!();
+        Depcratemacro_7!();
+        Depcrateerrno!();
+        Depcratemacro_40!();
+        Depcratefcntl!();
+        Depcratemacro_68!();
+        Depcratemacro_69!();
+        Depcratemacro_70!();
+        Depcratemacro_71!();
+        Depcratemacro_72!();
+        Depcratemacro_73!();
+        Depcratemacro_74!();
+        Depcratesys!();
+        Depcratemacro_249!();
+        Depcratemacro_250!();
+        Depcrateunistd!();
+        Depcratepoll_timeout!();
+        Depcratemacro_334!();
+        Depcratemacro_335!();
+        Depcrateuse_336!();
+        Depcrateuse_337!();
+        Depcrateuse_338!();
+        Depcrateuse_339!();
+        Depcrateuse_340!();
+        Depcrateuse_341!();
+        DepcrateResult!();
+        DepcrateError!();
+        DepcrateNixPath!();
+        Depcrateimpl_345!();
+        Depcrateimpl_346!();
+        Depcrateimpl_347!();
+        Depcrateimpl_348!();
+        Depcratewith_nix_path_allocating!();
+        Depcrateimpl_350!();
+        Depcrateimpl_351!();
+        Depcratewith_opt_nix_path!();
+    };
+}

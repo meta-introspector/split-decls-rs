@@ -1,0 +1,9 @@
+// Generated macro for set_socket_send_buffer_size_force (function)
+macro_rules! Depcrate_net_sockoptset_socket_send_buffer_size_force {
+() => {
+// Module: crate::net::sockopt
+// Provides: {"set_socket_send_buffer_size_force"}
+// Dependencies: {}
+# [doc = " `setsockopt(fd, SOL_SOCKET, SO_SNDBUFFORCE, value)`"] # [doc = ""] # [doc = " See the [module-level documentation] for more."] # [doc = ""] # [doc = " [module-level documentation]: self#references-for-get_socket_-and-set_socket_-functions"] # [cfg (any (linux_kernel , target_os = "fuchsia" , target_os = "redox"))] # [inline] # [doc (alias = "SO_SNDBUFFORCE")] pub fn set_socket_send_buffer_size_force < Fd : AsFd > (fd : Fd , value : usize) -> io :: Result < () > { backend :: net :: sockopt :: set_socket_send_buffer_size_force (fd . as_fd () , value) }
+};
+}

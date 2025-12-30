@@ -1,0 +1,9 @@
+// Generated macro for impl_298 (impl)
+macro_rules! Depcrate_astimpl_298 {
+() => {
+// Module: crate::ast
+// Provides: {"impl_298"}
+// Dependencies: {}
+impl < 'subs > ArgScope < 'subs , 'subs > for ClosureTypeName { fn leaf_name (& 'subs self) -> Result < LeafName < 'subs > > { Ok (LeafName :: Closure (self)) } fn get_template_arg (& 'subs self , _ : usize ,) -> Result < (& 'subs TemplateArg , & 'subs TemplateArgs) > { Err (error :: Error :: BadTemplateArgReference) } fn get_function_arg (& 'subs self , _ : usize) -> Result < & 'subs Type > { Err (error :: Error :: BadFunctionArgReference) } }
+};
+}

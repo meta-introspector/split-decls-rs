@@ -1,0 +1,44 @@
+// Generated module macro for crate::tests::helper
+macro_rules! Modcrate_tests_helper {
+() => {
+        Depcrate_tests_helperuse_36!();
+        Depcrate_tests_helperuse_37!();
+        Depcrate_tests_helperuse_38!();
+        Depcrate_tests_helperuse_39!();
+        Depcrate_tests_helpertest_common!();
+        Depcrate_tests_helpertest_atomic_load_store!();
+        Depcrate_tests_helpertest_atomic!();
+        Depcrate_tests_helper__test_atomic!();
+        Depcrate_tests_helperassert_panic!();
+        Depcrate_tests_helperLOAD_ORDERINGS!();
+        Depcrate_tests_helperrand_load_ordering!();
+        Depcrate_tests_helpertest_load_ordering!();
+        Depcrate_tests_helperSTORE_ORDERINGS!();
+        Depcrate_tests_helperrand_store_ordering!();
+        Depcrate_tests_helpertest_store_ordering!();
+        Depcrate_tests_helperSWAP_ORDERINGS!();
+        Depcrate_tests_helperrand_swap_ordering!();
+        Depcrate_tests_helpertest_swap_ordering!();
+        Depcrate_tests_helperCOMPARE_EXCHANGE_ORDERINGS!();
+        Depcrate_tests_helperrand_compare_exchange_ordering!();
+        Depcrate_tests_helpertest_compare_exchange_ordering!();
+        Depcrate_tests_helperstress_test_config!();
+        Depcrate_tests_helperIMP_ARM_LINUX!();
+        Depcrate_tests_helperIMP_EMU_SUB_WORD_CAS!();
+        Depcrate_tests_helpermark_no_access!();
+        Depcrate_tests_helpermark_defined!();
+        Depcrate_tests_helpermark_aligned_defined!();
+        Depcrate_tests_helpermark_aligned_undefined!();
+        Depcrate_tests_helperskip_should_panic_test!();
+        Depcrate_tests_helperis_panic_abort!();
+        Depcrate_tests_helperAlign16!();
+        Depcrate_tests_helperArray!();
+        Depcrate_tests_helperimpl_68!();
+        Depcrate_tests_helper__stress_test_acquire_release!();
+        Depcrate_tests_helper__stress_test_seqcst!();
+        Depcrate_tests_helpercatch_unwind_on_weak_memory_arch!();
+        Depcrate_tests_helpercatch_unwind_on_non_seqcst_arch!();
+        Depcrate_tests_helperstress_test_load_store!();
+        Depcrate_tests_helperstress_test!();
+    };
+}

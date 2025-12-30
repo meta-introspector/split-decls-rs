@@ -1,0 +1,9 @@
+// Generated macro for erase (module)
+macro_rules! Depcrate_deerase {
+() => {
+// Module: crate::de
+// Provides: {"erase"}
+// Dependencies: {}
+mod erase { pub struct DeserializeSeed < D > { state : Option < D > , } impl < D > DeserializeSeed < D > { pub (crate) fn new (seed : D) -> Self { DeserializeSeed { state : Some (seed) } } pub (crate) fn take (& mut self) -> D { self . state . take () . unwrap () } } pub struct Deserializer < D > { state : Option < D > , } impl < D > Deserializer < D > { pub (crate) fn new (deserializer : D) -> Self { Deserializer { state : Some (deserializer) , } } pub (crate) fn take (& mut self) -> D { self . state . take () . unwrap () } pub (crate) fn as_ref (& self) -> & D { self . state . as_ref () . unwrap () } } pub struct Visitor < D > { state : Option < D > , } impl < D > Visitor < D > { pub (crate) fn new (visitor : D) -> Self { Visitor { state : Some (visitor) , } } pub (crate) fn take (& mut self) -> D { self . state . take () . unwrap () } pub (crate) fn as_ref (& self) -> & D { self . state . as_ref () . unwrap () } } pub struct SeqAccess < D > { state : D , } impl < D > SeqAccess < D > { pub (crate) fn new (seq_access : D) -> Self { SeqAccess { state : seq_access } } pub (crate) fn as_ref (& self) -> & D { & self . state } pub (crate) fn as_mut (& mut self) -> & mut D { & mut self . state } } pub struct MapAccess < D > { state : D , } impl < D > MapAccess < D > { pub (crate) fn new (map_access : D) -> Self { MapAccess { state : map_access } } pub (crate) fn as_ref (& self) -> & D { & self . state } pub (crate) fn as_mut (& mut self) -> & mut D { & mut self . state } } pub struct EnumAccess < D > { state : Option < D > , } impl < D > EnumAccess < D > { pub (crate) fn new (enum_access : D) -> Self { EnumAccess { state : Some (enum_access) , } } pub (crate) fn take (& mut self) -> D { self . state . take () . unwrap () } } }
+};
+}

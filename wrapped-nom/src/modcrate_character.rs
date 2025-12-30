@@ -1,0 +1,39 @@
+// Generated module macro for crate::character
+macro_rules! Modcrate_character {
+() => {
+        Depcrate_characteruse_626!();
+        Depcrate_characteruse_627!();
+        Depcrate_characteruse_628!();
+        Depcrate_characteruse_629!();
+        Depcrate_characteruse_630!();
+        Depcrate_characteruse_631!();
+        Depcrate_charactertests!();
+        Depcrate_charactercomplete!();
+        Depcrate_characterstreaming!();
+        Depcrate_characteris_alphabetic!();
+        Depcrate_characteris_digit!();
+        Depcrate_characteris_hex_digit!();
+        Depcrate_characteris_oct_digit!();
+        Depcrate_characteris_bin_digit!();
+        Depcrate_characteris_alphanumeric!();
+        Depcrate_characteris_space!();
+        Depcrate_characteris_newline!();
+        Depcrate_characterchar!();
+        Depcrate_characterChar!();
+        Depcrate_characterimpl_738!();
+        Depcrate_charactersatisfy!();
+        Depcrate_characterSatisfy!();
+        Depcrate_characterimpl_741!();
+        Depcrate_characterone_of!();
+        Depcrate_characternone_of!();
+        Depcrate_characteranychar!();
+        Depcrate_characterAnyChar!();
+        Depcrate_characterimpl_746!();
+        Depcrate_characterdigit1!();
+        Depcrate_characterDigit1!();
+        Depcrate_characterimpl_749!();
+        Depcrate_charactermultispace0!();
+        Depcrate_characterMultiSpace0!();
+        Depcrate_characterimpl_752!();
+    };
+}

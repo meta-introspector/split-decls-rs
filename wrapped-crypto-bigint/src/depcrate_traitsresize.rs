@@ -1,0 +1,9 @@
+// Generated macro for Resize (trait)
+macro_rules! Depcrate_traitsResize {
+() => {
+// Module: crate::traits
+// Provides: {"Resize"}
+// Dependencies: {}
+# [doc = " Methods for resizing the allocated storage."] pub trait Resize : Sized { # [doc = " The result of the resizing."] type Output ; # [doc = " Resizes to the minimum storage that fits `at_least_bits_precision`"] # [doc = " without checking if the bit size of `self` is larger than `at_least_bits_precision`."] # [doc = ""] # [doc = " Variable-time w.r.t. `at_least_bits_precision`."] fn resize_unchecked (self , at_least_bits_precision : u32) -> Self :: Output ; # [doc = " Resizes to the minimum storage that fits `at_least_bits_precision`"] # [doc = " returning `None` if the bit size of `self` is larger than `at_least_bits_precision`."] # [doc = ""] # [doc = " Variable-time w.r.t. `at_least_bits_precision`."] fn try_resize (self , at_least_bits_precision : u32) -> Option < Self :: Output > ; # [doc = " Resizes to the minimum storage that fits `at_least_bits_precision`"] # [doc = " panicking if the bit size of `self` is larger than `at_least_bits_precision`."] # [doc = ""] # [doc = " Variable-time w.r.t. `at_least_bits_precision`."] fn resize (self , at_least_bits_precision : u32) -> Self :: Output { self . try_resize (at_least_bits_precision) . unwrap_or_else (| | { panic ! ("The bit size of `self` is larger than `at_least_bits_precision`") }) } }
+};
+}

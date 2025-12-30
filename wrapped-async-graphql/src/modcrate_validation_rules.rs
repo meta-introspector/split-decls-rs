@@ -1,0 +1,49 @@
+// Generated module macro for crate::validation::rules
+macro_rules! Modcrate_validation_rules {
+() => {
+        Depcrate_validation_rulesarguments_of_correct_type!();
+        Depcrate_validation_rulesdefault_values_of_correct_type!();
+        Depcrate_validation_rulesdirectives_unique!();
+        Depcrate_validation_rulesfields_on_correct_type!();
+        Depcrate_validation_rulesfragments_on_composite_types!();
+        Depcrate_validation_rulesknown_argument_names!();
+        Depcrate_validation_rulesknown_directives!();
+        Depcrate_validation_rulesknown_fragment_names!();
+        Depcrate_validation_rulesknown_type_names!();
+        Depcrate_validation_rulesno_fragment_cycles!();
+        Depcrate_validation_rulesno_undefined_variables!();
+        Depcrate_validation_rulesno_unused_fragments!();
+        Depcrate_validation_rulesno_unused_variables!();
+        Depcrate_validation_rulesoverlapping_fields_can_be_merged!();
+        Depcrate_validation_rulespossible_fragment_spreads!();
+        Depcrate_validation_rulesprovided_non_null_arguments!();
+        Depcrate_validation_rulesscalar_leafs!();
+        Depcrate_validation_rulesunique_argument_names!();
+        Depcrate_validation_rulesunique_variable_names!();
+        Depcrate_validation_rulesupload_file!();
+        Depcrate_validation_rulesvariables_are_input_types!();
+        Depcrate_validation_rulesvariables_in_allowed_position!();
+        Depcrate_validation_rulesuse_370!();
+        Depcrate_validation_rulesuse_371!();
+        Depcrate_validation_rulesuse_372!();
+        Depcrate_validation_rulesuse_373!();
+        Depcrate_validation_rulesuse_374!();
+        Depcrate_validation_rulesuse_375!();
+        Depcrate_validation_rulesuse_376!();
+        Depcrate_validation_rulesuse_377!();
+        Depcrate_validation_rulesuse_378!();
+        Depcrate_validation_rulesuse_379!();
+        Depcrate_validation_rulesuse_380!();
+        Depcrate_validation_rulesuse_381!();
+        Depcrate_validation_rulesuse_382!();
+        Depcrate_validation_rulesuse_383!();
+        Depcrate_validation_rulesuse_384!();
+        Depcrate_validation_rulesuse_385!();
+        Depcrate_validation_rulesuse_386!();
+        Depcrate_validation_rulesuse_387!();
+        Depcrate_validation_rulesuse_388!();
+        Depcrate_validation_rulesuse_389!();
+        Depcrate_validation_rulesuse_390!();
+        Depcrate_validation_rulesuse_391!();
+    };
+}

@@ -1,0 +1,49 @@
+// Generated module macro for crate::future
+macro_rules! Modcrate_future {
+() => {
+        Depcrate_futureuse_6!();
+        Depcrate_futureuse_7!();
+        Depcrate_futureuse_8!();
+        Depcrate_futureuse_9!();
+        Depcrate_futureuse_10!();
+        Depcrate_futureuse_11!();
+        Depcrate_futureuse_12!();
+        Depcrate_futureuse_13!();
+        Depcrate_futureblock_on!();
+        Depcrate_futurepoll_once!();
+        Depcrate_futuremacro_16!();
+        Depcrate_futureimpl_17!();
+        Depcrate_futureimpl_18!();
+        Depcrate_futurepoll_fn!();
+        Depcrate_futuremacro_20!();
+        Depcrate_futureimpl_21!();
+        Depcrate_futureimpl_22!();
+        Depcrate_futureyield_now!();
+        Depcrate_futureYieldNow!();
+        Depcrate_futureimpl_25!();
+        Depcrate_futurezip!();
+        Depcrate_futuremacro_27!();
+        Depcrate_futuretake_zip_from_parts!();
+        Depcrate_futureimpl_29!();
+        Depcrate_futuretry_zip!();
+        Depcrate_futuremacro_31!();
+        Depcrate_futureimpl_32!();
+        Depcrate_futureor!();
+        Depcrate_futuremacro_34!();
+        Depcrate_futureimpl_35!();
+        Depcrate_futurefuse!();
+        Depcrate_futuremacro_37!();
+        Depcrate_futureimpl_38!();
+        Depcrate_futureimpl_39!();
+        Depcrate_futurerace!();
+        Depcrate_futurerace_with_seed!();
+        Depcrate_futuremacro_42!();
+        Depcrate_futureimpl_43!();
+        Depcrate_futuremacro_44!();
+        Depcrate_futureimpl_45!();
+        Depcrate_futureBoxed!();
+        Depcrate_futureBoxedLocal!();
+        Depcrate_futureFutureExt!();
+        Depcrate_futureimpl_49!();
+    };
+}

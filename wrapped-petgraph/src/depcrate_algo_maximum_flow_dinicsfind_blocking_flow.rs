@@ -1,0 +1,9 @@
+// Generated macro for find_blocking_flow (function)
+macro_rules! Depcrate_algo_maximum_flow_dinicsfind_blocking_flow {
+() => {
+// Module: crate::algo::maximum_flow::dinics
+// Provides: {"find_blocking_flow"}
+// Dependencies: {}
+# [doc = " Find blocking flow for current level graph by repeatingly finding"] # [doc = " augmenting paths in it."] # [doc = ""] # [doc = " Attach computed flows to `flows` and returns the total flow increase from"] # [doc = " edges available in `level_edges` at this iteration."] fn find_blocking_flow < G > (network : G , source : G :: NodeId , destination : G :: NodeId , flows : & mut [G :: EdgeWeight] , level_edges : & mut [Vec < G :: EdgeRef >] , visited : & mut G :: Map ,) -> G :: EdgeWeight where G : NodeCount + IntoEdges + NodeIndexable + EdgeIndexable + Visitable , G :: EdgeWeight : Sub < Output = G :: EdgeWeight > + PositiveMeasure , { let mut flow_increase = G :: EdgeWeight :: zero () ; let mut edge_to = vec ! [None ; network . node_bound ()] ; while find_augmenting_path (& network , source , destination , flows , level_edges , visited , & mut edge_to ,) { let mut path_flow = G :: EdgeWeight :: max () ; let mut vertex = destination ; while let Some (edge) = edge_to [NodeIndexable :: to_index (& network , vertex)] { let edge_index = EdgeIndexable :: to_index (& network , edge . id ()) ; let residual_capacity = residual_capacity (& network , edge , vertex , flows [edge_index]) ; path_flow = min :: < G > (path_flow , residual_capacity) ; vertex = other_endpoint (& network , edge , vertex) ; } let mut vertex = destination ; while let Some (edge) = edge_to [NodeIndexable :: to_index (& network , vertex)] { let edge_index = EdgeIndexable :: to_index (& network , edge . id ()) ; flows [edge_index] = adjusted_residual_flow (& network , edge , vertex , flows [edge_index] , path_flow) ; vertex = other_endpoint (& network , edge , vertex) ; } flow_increase = flow_increase + path_flow ; } flow_increase }
+};
+}

@@ -1,0 +1,42 @@
+// Generated module macro for crate::slicevec
+macro_rules! Modcrate_slicevec {
+() => {
+        Depcrate_slicevecuse_95!();
+        Depcrate_slicevecSliceVec!();
+        Depcrate_slicevecimpl_97!();
+        Depcrate_slicevecimpl_98!();
+        Depcrate_slicevecimpl_99!();
+        Depcrate_slicevecimpl_100!();
+        Depcrate_slicevecimpl_101!();
+        Depcrate_slicevecimpl_102!();
+        Depcrate_slicevecimpl_103!();
+        Depcrate_slicevecimpl_104!();
+        Depcrate_slicevecimpl_105!();
+        Depcrate_slicevecSliceVecDrain!();
+        Depcrate_slicevecimpl_107!();
+        Depcrate_slicevecimpl_108!();
+        Depcrate_slicevecimpl_109!();
+        Depcrate_slicevecimpl_110!();
+        Depcrate_slicevecimpl_111!();
+        Depcrate_slicevecimpl_112!();
+        Depcrate_slicevecimpl_113!();
+        Depcrate_slicevecimpl_114!();
+        Depcrate_slicevecimpl_115!();
+        Depcrate_slicevecimpl_116!();
+        Depcrate_slicevecimpl_117!();
+        Depcrate_slicevecimpl_118!();
+        Depcrate_slicevecimpl_119!();
+        Depcrate_slicevecimpl_120!();
+        Depcrate_slicevecimpl_121!();
+        Depcrate_slicevecimpl_122!();
+        Depcrate_slicevecimpl_123!();
+        Depcrate_slicevecimpl_124!();
+        Depcrate_slicevecimpl_125!();
+        Depcrate_slicevecimpl_126!();
+        Depcrate_slicevecimpl_127!();
+        Depcrate_slicevecimpl_128!();
+        Depcrate_slicevecimpl_129!();
+        Depcrate_slicevecimpl_130!();
+        Depcrate_slicevecimpl_131!();
+    };
+}

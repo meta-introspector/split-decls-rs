@@ -1,0 +1,41 @@
+// Generated module macro for crate::wasm32_simd
+macro_rules! Modcrate_wasm32_simd {
+() => {
+        Depcrate_wasm32_simduse_105!();
+        Depcrate_wasm32_simduse_106!();
+        Depcrate_wasm32_simduse_107!();
+        Depcrate_wasm32_simdDEGREE!();
+        Depcrate_wasm32_simdloadu!();
+        Depcrate_wasm32_simdstoreu!();
+        Depcrate_wasm32_simdadd!();
+        Depcrate_wasm32_simdxor!();
+        Depcrate_wasm32_simdset1!();
+        Depcrate_wasm32_simdset4!();
+        Depcrate_wasm32_simdrot16!();
+        Depcrate_wasm32_simdrot12!();
+        Depcrate_wasm32_simdrot8!();
+        Depcrate_wasm32_simdrot7!();
+        Depcrate_wasm32_simdg1!();
+        Depcrate_wasm32_simdg2!();
+        Depcrate_wasm32_simdshuffle!();
+        Depcrate_wasm32_simdunpacklo_epi64!();
+        Depcrate_wasm32_simdunpackhi_epi64!();
+        Depcrate_wasm32_simdunpacklo_epi32!();
+        Depcrate_wasm32_simdunpackhi_epi32!();
+        Depcrate_wasm32_simdshuffle_epi32!();
+        Depcrate_wasm32_simdblend_epi16!();
+        Depcrate_wasm32_simddiagonalize!();
+        Depcrate_wasm32_simdundiagonalize!();
+        Depcrate_wasm32_simdcompress_pre!();
+        Depcrate_wasm32_simdcompress_in_place!();
+        Depcrate_wasm32_simdcompress_xof!();
+        Depcrate_wasm32_simdround!();
+        Depcrate_wasm32_simdtranspose_vecs!();
+        Depcrate_wasm32_simdtranspose_msg_vecs!();
+        Depcrate_wasm32_simdload_counters!();
+        Depcrate_wasm32_simdhash4!();
+        Depcrate_wasm32_simdhash1!();
+        Depcrate_wasm32_simdhash_many!();
+        Depcrate_wasm32_simdtest!();
+    };
+}
