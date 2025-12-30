@@ -5,9 +5,9 @@ decl_type: "function",
 source_file: "./src/conformal_field_theory.rs",
 source_crate: ".",
 deps: [],
-uses: ["Deserialize", "Clone", "CorrelationFunction", "String", "Serialize", "Vec", "Debug"],
+uses: ["Debug", "Clone", "Serialize", "Deserialize", "CorrelationFunction", "Vec", "String"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! CorrelationFunction {

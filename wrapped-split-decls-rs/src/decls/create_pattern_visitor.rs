@@ -4,16 +4,16 @@ name: "create_pattern_visitor",
 decl_type: "function",
 source_file: "./src/meta_pattern_visitor.rs",
 source_crate: ".",
-deps: ["RdfStateMachine", "AstStatistics"],
-uses: ["RdfStateMachine", "AstStatistics"],
+deps: ["AstStatistics", "RdfStateMachine"],
+uses: ["AstStatistics", "RdfStateMachine"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! deps {
     () => {
-        RdfStateMachine!();
         AstStatistics!();
+        RdfStateMachine!();
     };
 }
 

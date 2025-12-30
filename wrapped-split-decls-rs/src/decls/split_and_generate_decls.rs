@@ -4,16 +4,16 @@ name: "split_and_generate_decls",
 decl_type: "function",
 source_file: "./src/eager_splitter.rs",
 source_crate: ".",
-deps: ["ModuleNotFoundReport", "CratePaths"],
-uses: ["Dry-run", "Ident", "DEBUG", "Cell", "Vec", "ModuleNotFoundReport", "TokenStream", "Created", "Failed", "UseStatementCollector", "Span", "SplitDeclsConfig", "CratePaths", "Result", "Some", "Force", "Collected", "Processing", "RECURSION_DEPTH", "AST", "Mod", "Ok", "Performs", "Item", "File", "Write", "Would"],
+deps: ["CratePaths", "ModuleNotFoundReport"],
+uses: ["UseStatementCollector", "Failed", "Processing", "Mod", "Result", "Item", "TokenStream", "Ident", "Force", "DEBUG", "RECURSION_DEPTH", "AST", "Cell", "Ok", "Some", "Span", "Would", "SplitDeclsConfig", "Collected", "CratePaths", "Performs", "Write", "ModuleNotFoundReport", "File", "Created", "Dry-run", "Vec"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! deps {
     () => {
-        ModuleNotFoundReport!();
         CratePaths!();
+        ModuleNotFoundReport!();
     };
 }
 

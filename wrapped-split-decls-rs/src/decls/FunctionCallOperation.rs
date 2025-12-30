@@ -5,9 +5,9 @@ decl_type: "function",
 source_file: "./src/goal_parser.rs",
 source_crate: ".",
 deps: [],
-uses: ["Option", "Deserialize", "Vec", "String", "Serialize", "Clone", "FunctionCallOperation", "Debug"],
+uses: ["Clone", "Option", "Debug", "Vec", "Serialize", "String", "FunctionCallOperation", "Deserialize"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! FunctionCallOperation {

@@ -4,16 +4,16 @@ name: "ConformalFieldTheory",
 decl_type: "function",
 source_file: "./src/conformal_field_theory.rs",
 source_crate: ".",
-deps: ["CorrelationFunction", "PrimaryField"],
-uses: ["Debug", "HashMap", "Serialize", "Vec", "ConformalFieldTheory", "String", "CorrelationFunction", "Clone", "Deserialize", "PrimaryField"],
+deps: ["PrimaryField", "CorrelationFunction"],
+uses: ["Clone", "Serialize", "ConformalFieldTheory", "Debug", "PrimaryField", "HashMap", "Deserialize", "String", "Vec", "CorrelationFunction"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! deps {
     () => {
-        CorrelationFunction!();
         PrimaryField!();
+        CorrelationFunction!();
     };
 }
 

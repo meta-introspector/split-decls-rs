@@ -5,9 +5,9 @@ decl_type: "function",
 source_file: "./src/rustfmt_utils.rs",
 source_crate: ".",
 deps: [],
-uses: ["DEBUG", "Skipping", "Ok", "Path", "Result", "SPLIT_DECLS_DEBUG", "String"],
+uses: ["Skipping", "Path", "Ok", "Result", "String", "SPLIT_DECLS_DEBUG", "DEBUG"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! format_rust_file {

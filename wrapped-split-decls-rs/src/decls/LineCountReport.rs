@@ -4,16 +4,16 @@ name: "LineCountReport",
 decl_type: "function",
 source_file: "./src/line_counter.rs",
 source_crate: ".",
-deps: ["SkippedItem", "ErrorItem"],
-uses: ["SkippedItem", "LineCountReport", "ErrorItem", "Default", "Clone", "Vec", "Debug"],
+deps: ["ErrorItem", "SkippedItem"],
+uses: ["Vec", "ErrorItem", "Clone", "Default", "LineCountReport", "Debug", "SkippedItem"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! deps {
     () => {
-        SkippedItem!();
         ErrorItem!();
+        SkippedItem!();
     };
 }
 

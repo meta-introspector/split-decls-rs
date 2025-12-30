@@ -4,18 +4,18 @@ name: "impl_102",
 decl_type: "function",
 source_file: "./src/bootstrap_tracer.rs",
 source_crate: ".",
-deps: ["ExecutionState", "BootstrapTrace", "BootstrapTracer", "RdfTriple"],
-uses: ["Proof\\n", "Nat", "None", "Result", "BootstrapState,\\n", "Ok", "ExecutionState", "HashMap", "Execution", "Vec", "UNIX_EPOCH", "BootstrapTrace", "String", "BootstrapTracer", "Some", "BootstrapState", "RdfTriple", "Bootstrap", "CFT", "BootstrapState\\n", "Transition", "Prop", "Self-carrying", "True", "List", "SystemTime", "Transition.{}\\n"],
+deps: ["RdfTriple", "BootstrapTrace", "ExecutionState", "BootstrapTracer"],
+uses: ["Ok", "Transition", "CFT", "Transition.{}\\n", "RdfTriple", "Prop", "BootstrapState,\\n", "BootstrapTrace", "SystemTime", "Vec", "BootstrapState\\n", "ExecutionState", "BootstrapTracer", "Execution", "HashMap", "List", "Bootstrap", "Self-carrying", "BootstrapState", "True", "String", "Some", "UNIX_EPOCH", "Proof\\n", "None", "Nat", "Result"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! deps {
     () => {
-        ExecutionState!();
-        BootstrapTrace!();
-        BootstrapTracer!();
         RdfTriple!();
+        BootstrapTrace!();
+        ExecutionState!();
+        BootstrapTracer!();
     };
 }
 

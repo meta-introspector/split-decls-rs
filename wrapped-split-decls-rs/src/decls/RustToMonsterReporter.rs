@@ -5,9 +5,9 @@ decl_type: "function",
 source_file: "./src/rust_to_monster_reporter.rs",
 source_crate: ".",
 deps: ["MonsterCompressor"],
-uses: ["Rust", "Group", "Monster", "RustToMonsterReporter", "MonsterCompressor", "Generate"],
+uses: ["Monster", "Generate", "Rust", "Group", "RustToMonsterReporter", "MonsterCompressor"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! deps {

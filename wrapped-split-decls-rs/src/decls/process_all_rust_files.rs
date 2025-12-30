@@ -4,16 +4,16 @@ name: "process_all_rust_files",
 decl_type: "function",
 source_file: "./src/eager_splitter.rs",
 source_crate: ".",
-deps: ["ModuleNotFoundReport", "CratePaths"],
-uses: ["Result", "FOUND", "FAILED", "SplitDeclsConfig", "STACK", "Dry-run", "LLM", "CRATE", "Struct", "TO", "PROCESSING", "Formatting", "ModuleNotFoundReport", "Impl", "Box", "Macro", "EXAMINING", "CratePaths", "RECURSION_DEPTH", "Processes", "Err", "Parsing", "Use", "EXCEEDED", "Stack", "LitStr", "Ident", "IN", "Failed", "Cell", "Span", "Enum", "The", "PROCESS", "Type", "Const", "RefCell", "Item", "DEPTH", "READ", "Fn", "Trait", "Static", "File", "RECURSION", "OVERFLOW", "RUST", "TokenStream", "FILE", "PARSED", "Error", "SUCCESSFULLY", "String", "Vec", "READING", "SUCCESS", "Mod", "FILES", "Ok", "Would", "Thread", "SKIPPED", "Some", "CURRENT_FILE"],
+deps: ["CratePaths", "ModuleNotFoundReport"],
+uses: ["SplitDeclsConfig", "Enum", "Parsing", "FILE", "Fn", "READ", "Vec", "PROCESSING", "FAILED", "Use", "Processes", "Cell", "Failed", "READING", "RUST", "FOUND", "DEPTH", "OVERFLOW", "Span", "Would", "Macro", "Err", "Mod", "Error", "LitStr", "Impl", "Dry-run", "EXAMINING", "LLM", "CratePaths", "SKIPPED", "SUCCESSFULLY", "FILES", "TO", "Result", "Ident", "Type", "IN", "CURRENT_FILE", "EXCEEDED", "Some", "STACK", "File", "Thread", "PROCESS", "String", "PARSED", "Const", "RECURSION", "Item", "Struct", "Trait", "RECURSION_DEPTH", "SUCCESS", "RefCell", "ModuleNotFoundReport", "Formatting", "Ok", "Box", "Static", "The", "CRATE", "TokenStream", "Stack"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! deps {
     () => {
-        ModuleNotFoundReport!();
         CratePaths!();
+        ModuleNotFoundReport!();
     };
 }
 

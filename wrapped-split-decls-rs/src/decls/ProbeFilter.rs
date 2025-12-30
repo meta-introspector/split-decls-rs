@@ -5,9 +5,9 @@ decl_type: "function",
 source_file: "./src/ast_reflector.rs",
 source_crate: ".",
 deps: [],
-uses: ["Serialize", "Vec", "String", "Debug", "Option", "Deserialize", "ProbeFilter", "Clone"],
+uses: ["Serialize", "Debug", "Deserialize", "String", "Option", "ProbeFilter", "Vec", "Clone"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! ProbeFilter {

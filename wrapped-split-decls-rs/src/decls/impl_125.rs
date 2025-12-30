@@ -4,20 +4,20 @@ name: "impl_125",
 decl_type: "function",
 source_file: "./src/ast_reflector.rs",
 source_crate: ".",
-deps: ["ProbeContext", "AstReflector", "ProbeAction", "AstProbe", "AstNodeType", "ProbeFilter"],
-uses: ["InjectCode", "Ok", "Vec", "Enhanced", "ProbeContext", "Reflection", "Transformed", "TokenStream", "AST", "DefaultHasher", "AddAttribute", "WalkDir", "File", "Transform", "Result", "Loaded", "Attribute", "WrapFunction", "Collect", "Enhance", "Data", "Log", "AstReflector", "Reflecting", "ProbeAction", "AstProbe", "Path", "Hash", "Option", "Some", "Hasher", "PathBuf", "None", "Summary", "Collected", "AstNodeType", "ProbeFilter"],
+deps: ["ProbeAction", "AstProbe", "ProbeFilter", "AstNodeType", "ProbeContext", "AstReflector"],
+uses: ["Enhanced", "PathBuf", "Attribute", "Hash", "WrapFunction", "ProbeAction", "AddAttribute", "AstProbe", "DefaultHasher", "AST", "ProbeFilter", "Option", "InjectCode", "Ok", "AstNodeType", "Enhance", "WalkDir", "Transformed", "Log", "TokenStream", "Reflection", "ProbeContext", "Result", "File", "Transform", "Some", "None", "Vec", "AstReflector", "Loaded", "Reflecting", "Summary", "Collected", "Hasher", "Path", "Collect", "Data"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! deps {
     () => {
-        ProbeContext!();
-        AstReflector!();
         ProbeAction!();
         AstProbe!();
-        AstNodeType!();
         ProbeFilter!();
+        AstNodeType!();
+        ProbeContext!();
+        AstReflector!();
     };
 }
 

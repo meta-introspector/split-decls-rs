@@ -4,20 +4,20 @@ name: "impl_288",
 decl_type: "function",
 source_file: "./src/introspect_macro.rs",
 source_crate: ".",
-deps: ["IntrospectionData", "AbstractionBundle", "AbstractionContent", "BottLevel", "IntrospectMacro", "BottMap"],
-uses: ["Two", "Item", "Meta-analysis", "Bott", "Pattern", "SeqCst", "IntrospectionData", "String", "Enum", "Trait", "Apply", "TokenStream", "Real", "Vec", "Ordering", "Meta-Level", "AtomicUsize", "Four", "Level", "AbstractionBundle", "Analysis", "CompileTime", "AbstractionContent", "Introspection", "Impl", "AST", "Struct", "Emergent", "Runtime", "META_INFO", "One", "BottLevel", "Concrete", "Meta-pattern", "Quaternionic", "Generic", "Zero", "Generate", "Fn", "IntrospectMacro", "BottMap", "CALL_COUNT"],
+deps: ["AbstractionContent", "AbstractionBundle", "BottMap", "BottLevel", "IntrospectionData", "IntrospectMacro"],
+uses: ["AST", "Quaternionic", "Real", "AbstractionContent", "Generic", "Introspection", "Ordering", "Enum", "Fn", "Generate", "Vec", "Two", "AtomicUsize", "META_INFO", "Level", "Meta-Level", "Emergent", "CALL_COUNT", "Meta-pattern", "Runtime", "Meta-analysis", "String", "Struct", "Four", "One", "TokenStream", "CompileTime", "Analysis", "AbstractionBundle", "Impl", "Bott", "Concrete", "BottMap", "BottLevel", "Apply", "Zero", "IntrospectionData", "IntrospectMacro", "Item", "Pattern", "SeqCst", "Trait"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! deps {
     () => {
-        IntrospectionData!();
-        AbstractionBundle!();
         AbstractionContent!();
-        BottLevel!();
-        IntrospectMacro!();
+        AbstractionBundle!();
         BottMap!();
+        BottLevel!();
+        IntrospectionData!();
+        IntrospectMacro!();
     };
 }
 

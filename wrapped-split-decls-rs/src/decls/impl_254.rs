@@ -4,16 +4,16 @@ name: "impl_254",
 decl_type: "function",
 source_file: "./src/syn_cache.rs",
 source_crate: ".",
-deps: ["SynCache", "FileCache"],
-uses: ["Ok", "Path", "SynCache", "UNIX_EPOCH", "Result", "FileCache", "None", "Some", "HashMap", "String", "SystemTime"],
+deps: ["FileCache", "SynCache"],
+uses: ["FileCache", "SynCache", "UNIX_EPOCH", "HashMap", "Result", "SystemTime", "None", "String", "Path", "Ok", "Some"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! deps {
     () => {
-        SynCache!();
         FileCache!();
+        SynCache!();
     };
 }
 

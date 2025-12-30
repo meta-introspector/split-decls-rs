@@ -4,19 +4,19 @@ name: "impl_148",
 decl_type: "function",
 source_file: "./src/bott_periodicity.rs",
 source_crate: ".",
-deps: ["BottLevel", "BottPeriodicityCache", "BottMap", "AbstractionBundle", "AbstractionContent"],
-uses: ["BottLevel", "BottPeriodicityCache", "BottMap", "HashMap", "String", "AbstractionBundle", "AbstractionContent", "Ok", "Concrete", "Branch_Gen", "Result", "Vec"],
+deps: ["BottPeriodicityCache", "AbstractionBundle", "BottLevel", "AbstractionContent", "BottMap"],
+uses: ["BottPeriodicityCache", "AbstractionBundle", "HashMap", "Ok", "BottLevel", "Concrete", "AbstractionContent", "String", "Vec", "BottMap", "Result", "Branch_Gen"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! deps {
     () => {
-        BottLevel!();
         BottPeriodicityCache!();
-        BottMap!();
         AbstractionBundle!();
+        BottLevel!();
         AbstractionContent!();
+        BottMap!();
     };
 }
 

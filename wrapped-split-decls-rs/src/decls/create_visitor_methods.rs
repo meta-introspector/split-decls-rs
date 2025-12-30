@@ -5,9 +5,9 @@ decl_type: "function",
 source_file: "./src/meta_pattern_visitor.rs",
 source_crate: ".",
 deps: [],
-uses: ["Item", "Pat", "ExprCall", "Visit", "File", "Expr", "Ident", "ItemFn", "ItemStruct", "Type", "Block"],
+uses: ["Block", "Item", "ExprCall", "Visit", "ItemFn", "File", "Type", "Pat", "Ident", "ItemStruct", "Expr"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! create_visitor_methods {

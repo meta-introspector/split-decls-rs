@@ -5,9 +5,9 @@ decl_type: "function",
 source_file: "./src/bott_periodicity.rs",
 source_crate: ".",
 deps: [],
-uses: ["Trilinear", "Zero", "In", "Copy", "K^n(X", "Level", "Bott", "Five", "Seven", "One", "PartialEq", "Debug", "K-theory", "Two", "Three", "Quaternionic", "Four", "Clone", "BottLevel", "Linear", "Six", "K^{n+8}(X", "Concrete", "Bilinear"],
+uses: ["Bilinear", "K-theory", "BottLevel", "Five", "Six", "One", "Copy", "Bott", "In", "Zero", "K^{n+8}(X", "Level", "K^n(X", "Clone", "Three", "Debug", "Linear", "Seven", "Quaternionic", "Trilinear", "PartialEq", "Two", "Four", "Concrete"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! BottLevel {

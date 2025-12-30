@@ -5,9 +5,9 @@ decl_type: "function",
 source_file: "./src/syn_cache.rs",
 source_crate: ".",
 deps: ["FileCache"],
-uses: ["HashMap", "String", "Debug", "FileCache", "Default", "SynCache"],
+uses: ["HashMap", "String", "FileCache", "Debug", "Default", "SynCache"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! deps {

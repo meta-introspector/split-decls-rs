@@ -5,9 +5,9 @@ decl_type: "function",
 source_file: "./src/syn_mold.rs",
 source_crate: ".",
 deps: ["SynUsageVisitor"],
-uses: ["Vec", "Visit", "Macro", "SynUsageVisitor", "ItemFn"],
+uses: ["Vec", "ItemFn", "SynUsageVisitor", "Macro", "Visit"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! deps {

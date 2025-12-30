@@ -5,9 +5,9 @@ decl_type: "function",
 source_file: "./src/bott_periodicity.rs",
 source_crate: ".",
 deps: ["AbstractionBundle"],
-uses: ["BottPeriodicityCache", "AbstractionBundle", "Clone", "Cache", "Vec", "Debug", "Bott", "HashMap", "String"],
+uses: ["AbstractionBundle", "Clone", "Vec", "HashMap", "BottPeriodicityCache", "String", "Cache", "Debug", "Bott"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! deps {

@@ -5,9 +5,9 @@ decl_type: "function",
 source_file: "./src/output2_macro_system.rs",
 source_crate: ".",
 deps: ["LispInterpreter", "MacroDeclaration"],
-uses: ["Import", "String", "Creates", "Lisp-like", "HashMap", "Runtime", "Output2MacroSystem", "LispInterpreter", "All", "MacroDeclaration", "Debug"],
+uses: ["Output2MacroSystem", "LispInterpreter", "Creates", "HashMap", "MacroDeclaration", "Runtime", "Import", "String", "All", "Lisp-like", "Debug"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! deps {

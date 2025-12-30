@@ -5,9 +5,9 @@ decl_type: "function",
 source_file: "./src/monster_compressor.rs",
 source_crate: ".",
 deps: ["MonsterCompressor", "MonsterSignature"],
-uses: ["Apply", "MonsterCompressor", "Some", "Extract", "Monster", "Result", "Group", "MonsterSignature", "Assign", "HashMap", "String", "ALL", "Vec", "Generate", "Create", "None", "Option", "ℕ", "Ok", "Find"],
+uses: ["Result", "Create", "Generate", "ALL", "Ok", "Some", "Monster", "Vec", "Assign", "String", "Group", "Extract", "Find", "HashMap", "MonsterCompressor", "Option", "MonsterSignature", "Apply", "None", "ℕ"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! deps {

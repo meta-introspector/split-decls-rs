@@ -2,6 +2,7 @@ use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
 mkdeclfn! {
+println!("🔧 Calling function: test_eager_splitting_and_patching");
 # [test] fn test_eager_splitting_and_patching () -> Result < () > { let temp_dir = tempdir () . context ("Failed to create temporary directory") ? ; let test_crate_path = temp_dir . path () . join ("my_test_crate") ; fs :: create_dir (& test_crate_path) ? ; fs :: create_dir (test_crate_path . join ("src")) ? ; let cargo_toml_content = r#"
         [package]
         name = "my-test-crate"

@@ -5,9 +5,9 @@ decl_type: "function",
 source_file: "./src/patch_config.rs",
 source_crate: ".",
 deps: ["PatchConfig"],
-uses: ["Ok", "Patch", "Path", "Result", "PatchConfig"],
+uses: ["Patch", "PatchConfig", "Path", "Result", "Ok"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! deps {

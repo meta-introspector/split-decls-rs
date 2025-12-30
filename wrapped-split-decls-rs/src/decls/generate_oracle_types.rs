@@ -4,17 +4,17 @@ name: "generate_oracle_types",
 decl_type: "function",
 source_file: "./src/syscall_oracle.rs",
 source_crate: ".",
-deps: ["FileSystemOracle", "ProcessOracle", "NetworkOracle"],
-uses: ["FileSystemOracle", "PhantomData", "Debug", "Path", "Medium", "SystemOracle", "String", "PolicyRule", "PolicyAction", "OracleResult", "Deserialize", "Allow", "Result", "SocketAddr", "Critical", "RequireApproval", "ProcessOracle", "DaoPolicy", "Oracle", "TokenStream", "Serialize", "Ok", "NetworkOracle", "ErrorKind", "Command", "Vec", "Dangerous", "Deny", "Audit", "Process", "Low", "Network", "FileSystem", "Clone", "High", "PathBuf", "Err", "PermissionDenied", "Severity", "Error"],
+deps: ["FileSystemOracle", "NetworkOracle", "ProcessOracle"],
+uses: ["Severity", "Debug", "SystemOracle", "Network", "ErrorKind", "RequireApproval", "PolicyRule", "PhantomData", "Oracle", "Medium", "Audit", "FileSystemOracle", "Result", "Dangerous", "NetworkOracle", "PermissionDenied", "Allow", "Ok", "String", "ProcessOracle", "TokenStream", "Critical", "PathBuf", "FileSystem", "Low", "High", "Error", "Path", "SocketAddr", "Command", "Process", "Err", "Serialize", "DaoPolicy", "PolicyAction", "Clone", "Vec", "OracleResult", "Deserialize", "Deny"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! deps {
     () => {
         FileSystemOracle!();
-        ProcessOracle!();
         NetworkOracle!();
+        ProcessOracle!();
     };
 }
 

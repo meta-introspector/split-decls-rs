@@ -4,16 +4,16 @@ name: "impl_109",
 decl_type: "function",
 source_file: "./src/bootstrap_cache.rs",
 source_crate: ".",
-deps: ["BootstrapCache", "FileCache"],
-uses: ["Option", "Path", "BootstrapCache", "Result", "Command", "Some", "Ok", "None", "UNIX_EPOCH", "FileCache", "String"],
+deps: ["FileCache", "BootstrapCache"],
+uses: ["Result", "Command", "FileCache", "Ok", "Option", "UNIX_EPOCH", "None", "Some", "BootstrapCache", "Path", "String"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! deps {
     () => {
-        BootstrapCache!();
         FileCache!();
+        BootstrapCache!();
     };
 }
 

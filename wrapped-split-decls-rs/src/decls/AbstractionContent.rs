@@ -5,9 +5,9 @@ decl_type: "function",
 source_file: "./src/bott_periodicity.rs",
 source_crate: ".",
 deps: [],
-uses: ["Concrete", "Box", "MetaMetaPattern", "Quaternionic", "Meta-pattern", "Meta-meta-pattern", "Level", "MetaPattern", "AbstractionContent", "Dual", "Pattern", "String", "Clone", "Debug", "TokenStream"],
+uses: ["Pattern", "MetaPattern", "Debug", "Meta-pattern", "Quaternionic", "Concrete", "Meta-meta-pattern", "AbstractionContent", "Level", "TokenStream", "Clone", "Dual", "Box", "MetaMetaPattern", "String"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! AbstractionContent {

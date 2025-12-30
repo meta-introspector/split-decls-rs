@@ -5,9 +5,9 @@ decl_type: "function",
 source_file: "./src/generate_new_workspace.rs",
 source_crate: ".",
 deps: [],
-uses: ["Failed", "Dry-run", "Generated", "Path", "Result", "Ok", "Generates", "Cargo.toml", "PathBuf", "Would", "Takes", "Vec"],
+uses: ["Takes", "Vec", "Generated", "Ok", "Dry-run", "Path", "Would", "Cargo.toml", "Result", "Failed", "PathBuf", "Generates"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! generate_root_toml {

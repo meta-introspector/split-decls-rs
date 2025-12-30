@@ -5,9 +5,9 @@ decl_type: "function",
 source_file: "./src/syn_type_discovery.rs",
 source_crate: ".",
 deps: ["SynTypeDiscovery", "TypeExtractorVisitor"],
-uses: ["Type", "Some", "Enum", "TYPE", "DISCOVERY", "Block", "Missing", "Discovered", "String", "None", "SYN", "Vec", "File", "Visit<'ast", "SynTypeDiscovery", "Pat", "Item", "Expr", "DISCOVERED", "Option", "Visit", "Result", "TypeExtractorVisitor", "Ok", "REPORT", "Parse", "Ident", "Stmt", "SynTypeDiscovery::new();\\n", "Insufficient", "TYPES"],
+uses: ["Stmt", "Item", "Block", "Insufficient", "String", "Result", "Ident", "Option", "Ok", "Discovered", "DISCOVERED", "None", "Type", "SynTypeDiscovery", "TYPES", "Expr", "SynTypeDiscovery::new();\\n", "Visit", "SYN", "Parse", "REPORT", "Some", "Vec", "TYPE", "DISCOVERY", "Visit<'ast", "Enum", "TypeExtractorVisitor", "File", "Missing", "Pat"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! deps {

@@ -4,17 +4,17 @@ name: "SynMold",
 decl_type: "function",
 source_file: "./src/syn_mold.rs",
 source_crate: ".",
-deps: ["UsagePattern", "SynSignature", "ComplexityMetrics"],
-uses: ["String", "Vec", "UsagePattern", "SynSignature", "HashMap", "SynMold", "ComplexityMetrics", "Clone", "Debug"],
+deps: ["ComplexityMetrics", "UsagePattern", "SynSignature"],
+uses: ["Vec", "SynMold", "Debug", "ComplexityMetrics", "UsagePattern", "Clone", "HashMap", "SynSignature", "String"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! deps {
     () => {
+        ComplexityMetrics!();
         UsagePattern!();
         SynSignature!();
-        ComplexityMetrics!();
     };
 }
 

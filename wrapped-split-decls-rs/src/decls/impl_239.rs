@@ -4,16 +4,16 @@ name: "impl_239",
 decl_type: "function",
 source_file: "./src/syscall_traits.rs",
 source_crate: ".",
-deps: ["FileSystemOracle", "DefaultFileSystemOracle"],
-uses: ["FS_AUDIT", "Result", "String", "Ok", "FileSystemOracle", "DefaultFileSystemOracle", "Write", "Read"],
+deps: ["DefaultFileSystemOracle", "FileSystemOracle"],
+uses: ["Read", "Ok", "Write", "DefaultFileSystemOracle", "Result", "FS_AUDIT", "FileSystemOracle", "String"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! deps {
     () => {
-        FileSystemOracle!();
         DefaultFileSystemOracle!();
+        FileSystemOracle!();
     };
 }
 

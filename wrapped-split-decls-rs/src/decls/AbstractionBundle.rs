@@ -4,16 +4,16 @@ name: "AbstractionBundle",
 decl_type: "function",
 source_file: "./src/bott_periodicity.rs",
 source_crate: ".",
-deps: ["AbstractionContent", "BottLevel"],
-uses: ["Debug", "AbstractionBundle", "The", "Vec", "AbstractionContent", "Characteristic", "An", "Absolute", "Bott", "Clone", "BottLevel", "Which"],
+deps: ["BottLevel", "AbstractionContent"],
+uses: ["Characteristic", "Debug", "Vec", "Clone", "Which", "An", "BottLevel", "AbstractionBundle", "Bott", "Absolute", "AbstractionContent", "The"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! deps {
     () => {
-        AbstractionContent!();
         BottLevel!();
+        AbstractionContent!();
     };
 }
 

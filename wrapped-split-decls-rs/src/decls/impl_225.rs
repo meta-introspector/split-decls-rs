@@ -4,25 +4,25 @@ name: "impl_225",
 decl_type: "function",
 source_file: "./src/syscall_decoupling_template.rs",
 source_crate: ".",
-deps: ["WrapperMacro", "TraitMethod", "SafetyLevel", "DecouplingStrategy", "SyscallCategory", "SyscallDecouplingGenerator", "ImplementationType", "SyscallTrait", "SyscallAnalysisReport", "TraitDecouplingTemplate", "ImplAdapter"],
-uses: ["Logged", "Result<*mut", "ProcessError", "Debug", "Result<TcpStream", "ProcessOps", "NetworkError", "IO", "Sync", "WrapperMacro", "TraitMethod", "Path", "Vec", "Mock", "Process", "Send", "Network", "SafetyLevel", "IoError", "EnvError", "DecouplingStrategy", "GenericBound", "FileSystem", "Arc", "Result<String", "SystemTime", "Unsafe", "Environment", "Result", "FileSystemOps", "Critical", "SyscallCategory", "Result<ProcessHandle", "AtomicUsize", "Result<PathBuf", "IOOps", "Box", "Result<usize", "SyscallDecouplingGenerator", "Result<ProcessOutput", "MemoryOps", "HashMap", "DependencyInject", "NetworkOps", "Fn", "Time", "Safe", "Auto-generated", "TimeOps", "ImplementationType", "SyscallTrait", "SyscallAnalysisReport", "String", "TraitDecouplingTemplate", "TraitObject", "EnvironmentOps", "Result<Vec<u8", "Production", "Memory", "TokenStream", "ImplAdapter", "Default", "Impl", "Governed", "SocketAddr", "DaoPolicy", "MemoryError"],
+deps: ["DecouplingStrategy", "SyscallCategory", "ImplAdapter", "ImplementationType", "SyscallAnalysisReport", "SyscallDecouplingGenerator", "SafetyLevel", "WrapperMacro", "TraitMethod", "TraitDecouplingTemplate", "SyscallTrait"],
+uses: ["Send", "Process", "Default", "Production", "Result<String", "Impl", "DecouplingStrategy", "ProcessOps", "String", "Result<PathBuf", "Network", "Unsafe", "Logged", "Path", "DependencyInject", "SyscallCategory", "Result<Vec<u8", "Result", "Mock", "DaoPolicy", "MemoryOps", "ImplAdapter", "Critical", "Sync", "ImplementationType", "GenericBound", "IOOps", "Result<*mut", "FileSystemOps", "Result<ProcessOutput", "Result<TcpStream", "SyscallAnalysisReport", "TraitObject", "IoError", "NetworkError", "SyscallDecouplingGenerator", "SafetyLevel", "WrapperMacro", "Debug", "Auto-generated", "FileSystem", "Arc", "IO", "HashMap", "NetworkOps", "TimeOps", "Environment", "TraitMethod", "Safe", "Time", "SocketAddr", "Governed", "TraitDecouplingTemplate", "Box", "Memory", "Result<ProcessHandle", "MemoryError", "Result<usize", "TokenStream", "EnvironmentOps", "SyscallTrait", "ProcessError", "EnvError", "AtomicUsize", "Fn", "SystemTime", "Vec"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! deps {
     () => {
-        WrapperMacro!();
-        TraitMethod!();
-        SafetyLevel!();
         DecouplingStrategy!();
         SyscallCategory!();
-        SyscallDecouplingGenerator!();
-        ImplementationType!();
-        SyscallTrait!();
-        SyscallAnalysisReport!();
-        TraitDecouplingTemplate!();
         ImplAdapter!();
+        ImplementationType!();
+        SyscallAnalysisReport!();
+        SyscallDecouplingGenerator!();
+        SafetyLevel!();
+        WrapperMacro!();
+        TraitMethod!();
+        TraitDecouplingTemplate!();
+        SyscallTrait!();
     };
 }
 

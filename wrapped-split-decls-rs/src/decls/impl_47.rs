@@ -5,9 +5,9 @@ decl_type: "function",
 source_file: "./src/output2_macro_system.rs",
 source_crate: ".",
 deps: ["MacroValue", "LispInterpreter"],
-uses: ["Ok", "MacroValue", "Generated", "LispInterpreter", "Result", "Calling", "Interpret", "Unknown", "HashMap", "Lisp", "Vec", "Lisp-like", "Generate", "String", "Creating", "Expression"],
+uses: ["Expression", "Calling", "Lisp", "Creating", "MacroValue", "Unknown", "Generate", "HashMap", "Vec", "Lisp-like", "Interpret", "String", "Generated", "Result", "LispInterpreter", "Ok"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! deps {

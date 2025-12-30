@@ -5,9 +5,9 @@ decl_type: "function",
 source_file: "./src/cargo_feature_fixer.rs",
 source_crate: ".",
 deps: [],
-uses: ["Table", "Item", "Value", "Path", "DocumentMut", "Ok", "Fix", "Array", "Some", "Cargo.toml", "Vec", "Removing", "Result"],
+uses: ["Result", "Some", "Array", "Item", "DocumentMut", "Vec", "Table", "Value", "Path", "Ok", "Removing", "Cargo.toml", "Fix"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! fix_cargo_features {

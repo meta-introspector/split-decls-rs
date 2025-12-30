@@ -5,9 +5,9 @@ decl_type: "function",
 source_file: "./src/ast_reflector.rs",
 source_crate: ".",
 deps: [],
-uses: ["InjectionPosition", "Serialize", "After", "Replace", "Deserialize", "Inside", "Clone", "Debug", "Before"],
+uses: ["Replace", "Deserialize", "Debug", "Clone", "Before", "InjectionPosition", "Serialize", "After", "Inside"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! InjectionPosition {

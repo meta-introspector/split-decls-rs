@@ -5,9 +5,9 @@ decl_type: "function",
 source_file: "./src/cargo_guided_analysis.rs",
 source_crate: ".",
 deps: ["PackageField"],
-uses: ["Deserialize", "String", "Debug", "Option", "Serialize", "PreservationTrace", "Clone", "PackageField", "Vec"],
+uses: ["PreservationTrace", "Deserialize", "Clone", "PackageField", "Vec", "Option", "Debug", "Serialize", "String"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! deps {

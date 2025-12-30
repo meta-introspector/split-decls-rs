@@ -5,9 +5,9 @@ decl_type: "function",
 source_file: "./src/macro_analyzer_parts/scoring.rs",
 source_crate: ".",
 deps: [],
-uses: ["MAX", "PRIMES"],
+uses: ["PRIMES", "MAX"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! get_closest_prime_reciprocal {

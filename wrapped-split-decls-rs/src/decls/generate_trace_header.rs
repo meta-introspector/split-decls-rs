@@ -5,9 +5,9 @@ decl_type: "function",
 source_file: "./src/trace_header.rs",
 source_crate: ".",
 deps: [],
-uses: ["Option", "String", "Generates"],
+uses: ["Generates", "Option", "String"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! generate_trace_header {

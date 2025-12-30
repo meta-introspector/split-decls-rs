@@ -5,9 +5,9 @@ decl_type: "function",
 source_file: "./src/buildrs_generator/build_script_composer.rs",
 source_crate: ".",
 deps: ["Input"],
-uses: ["Successfully", "Result", "This", "String", "Input", "Attempting", "Vec", "Each", "Some", "Composes", "Reading", "Checking", "Found", "Failed", "Generated", "Ok", "DBG", "Warning", "Path", "Do", "Entering"],
+uses: ["Result", "Found", "Input", "Attempting", "Successfully", "Checking", "Generated", "Composes", "Some", "Each", "Do", "Path", "Warning", "This", "Ok", "DBG", "String", "Failed", "Entering", "Reading", "Vec"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! deps {

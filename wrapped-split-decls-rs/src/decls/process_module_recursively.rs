@@ -5,9 +5,9 @@ decl_type: "function",
 source_file: "./src/process_module_recursivly.rs",
 source_crate: ".",
 deps: ["ModuleNotFoundReport", "CratePaths"],
-uses: ["Result", "SplitDeclsConfig", "TokenStream", "ModuleNotFoundReport", "CratePaths", "Vec", "Ident"],
+uses: ["Ident", "ModuleNotFoundReport", "TokenStream", "SplitDeclsConfig", "Vec", "Result", "CratePaths"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! deps {

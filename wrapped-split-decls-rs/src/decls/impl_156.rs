@@ -4,17 +4,17 @@ name: "impl_156",
 decl_type: "function",
 source_file: "./src/bott_periodicity.rs",
 source_crate: ".",
-deps: ["AbstractionContent", "BottMap", "AbstractionBundle", "SuspensionTower"],
-uses: ["Generate", "Level", "AbstractionContent", "Concrete", "Pattern", "MetaPattern", "BottMap", "AbstractionBundle", "Suspend", "SuspensionTower", "TokenStream", "Build"],
+deps: ["BottMap", "AbstractionBundle", "AbstractionContent", "SuspensionTower"],
+uses: ["MetaPattern", "BottMap", "Build", "TokenStream", "AbstractionBundle", "Suspend", "Level", "Generate", "AbstractionContent", "SuspensionTower", "Concrete", "Pattern"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! deps {
     () => {
-        AbstractionContent!();
         BottMap!();
         AbstractionBundle!();
+        AbstractionContent!();
         SuspensionTower!();
     };
 }

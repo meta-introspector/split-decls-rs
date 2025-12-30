@@ -4,20 +4,20 @@ name: "impl_167",
 decl_type: "function",
 source_file: "./src/syn_mold.rs",
 source_crate: ".",
-deps: ["SynUsageVisitor", "ComplexityMetrics", "MoldExtraction", "PatternType", "SynSignature", "UsagePattern", "SynMold"],
-uses: ["Vec", "ParseQuote", "SynUsageVisitor", "AttributeProcessing", "Error", "Extract", "SynMoldCheck", "ComplexityMetrics", "Ok", "Parse", "MoldedParse", "File", "HashMap", "COMPLEXITY_SCORE", "PhantomData", "MoldExtraction", "OPERATION_TYPE", "PatternType", "TokenStreamGeneration", "SynSignature", "UsagePattern", "TokenStream", "MacroExpansion", "VisitMut", "Generate", "Result", "SynMold"],
+deps: ["PatternType", "ComplexityMetrics", "SynUsageVisitor", "MoldExtraction", "UsagePattern", "SynSignature", "SynMold"],
+uses: ["Result", "PatternType", "PhantomData", "TokenStreamGeneration", "Extract", "VisitMut", "ParseQuote", "AttributeProcessing", "HashMap", "File", "MacroExpansion", "TokenStream", "ComplexityMetrics", "Error", "SynMoldCheck", "COMPLEXITY_SCORE", "OPERATION_TYPE", "SynUsageVisitor", "MoldExtraction", "UsagePattern", "Ok", "SynSignature", "Generate", "Vec", "Parse", "SynMold", "MoldedParse"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! deps {
     () => {
-        SynUsageVisitor!();
-        ComplexityMetrics!();
-        MoldExtraction!();
         PatternType!();
-        SynSignature!();
+        ComplexityMetrics!();
+        SynUsageVisitor!();
+        MoldExtraction!();
         UsagePattern!();
+        SynSignature!();
         SynMold!();
     };
 }

@@ -4,17 +4,17 @@ name: "impl_178",
 decl_type: "function",
 source_file: "./src/signature_compressor.rs",
 source_crate: ".",
-deps: ["SignatureCompressor", "MacroBindingSignature", "SignatureStats"],
-uses: ["Result", "Extract", "Some", "HashMap", "Ok", "Parse", "Find", "SignatureCompressor", "Get", "Generate", "String", "Reassign", "MacroBindingSignature", "SignatureStats", "Check", "Vec", "Calculate"],
+deps: ["SignatureCompressor", "SignatureStats", "MacroBindingSignature"],
+uses: ["SignatureCompressor", "Some", "Reassign", "Extract", "Generate", "HashMap", "Calculate", "Check", "SignatureStats", "Result", "Ok", "String", "Get", "Find", "Vec", "MacroBindingSignature", "Parse"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! deps {
     () => {
         SignatureCompressor!();
-        MacroBindingSignature!();
         SignatureStats!();
+        MacroBindingSignature!();
     };
 }
 

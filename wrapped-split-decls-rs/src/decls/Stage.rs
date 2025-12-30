@@ -4,18 +4,18 @@ name: "Stage",
 decl_type: "function",
 source_file: "./src/goal_parser.rs",
 source_crate: ".",
-deps: ["Input", "Operation", "Output", "Task"],
-uses: ["Stage", "Deserialize", "Input", "Debug", "Operation", "Clone", "Serialize", "Output", "Vec", "Task", "Option", "String"],
+deps: ["Output", "Task", "Operation", "Input"],
+uses: ["Stage", "Serialize", "Option", "Output", "Task", "Operation", "Debug", "Vec", "Deserialize", "Clone", "Input", "String"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! deps {
     () => {
-        Input!();
-        Operation!();
         Output!();
         Task!();
+        Operation!();
+        Input!();
     };
 }
 

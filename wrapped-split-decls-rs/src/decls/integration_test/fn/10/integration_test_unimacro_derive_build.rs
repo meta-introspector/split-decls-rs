@@ -2,6 +2,7 @@ use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
 mkdeclfn! {
+println!("🔧 Calling function: integration_test_unimacro_derive_build");
 # [test] fn integration_test_unimacro_derive_build () -> Result < () > { let temp_dir = tempdir () . context ("Failed to create temporary directory") ? ; let temp_path = temp_dir . path () ; println ! ("Test workspace created at: {}" , temp_path . display ()) ; let test_crate_name = "unimacro_derive" ; let original_test_crate_path = PathBuf :: from ("../../unimacro_derive") ; let original_patch_build_rs_path = PathBuf :: from ("../patch-build-rs") ; let temp_test_crate_path = temp_path . join (test_crate_name) ; let temp_patch_build_rs_path = temp_path . join ("patch-build-rs") ; let temp_global_config_path = temp_path . join ("split-decls-rs.toml") ; let temp_workspace_cargo_toml = temp_path . join ("Cargo.toml") ; let workspace_cargo_toml_content = format ! (r#"
         [workspace]
         members = [

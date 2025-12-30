@@ -5,9 +5,9 @@ decl_type: "function",
 source_file: "./src/cargo_guided_analysis.rs",
 source_crate: ".",
 deps: ["BuildStep"],
-uses: ["String", "Clone", "Deserialize", "BuildStep", "CargoBuildOrder", "Debug", "Serialize", "PathBuf", "Vec"],
+uses: ["Deserialize", "Serialize", "PathBuf", "CargoBuildOrder", "Debug", "Vec", "BuildStep", "Clone", "String"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! deps {

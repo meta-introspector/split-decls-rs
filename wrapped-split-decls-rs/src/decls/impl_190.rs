@@ -4,16 +4,16 @@ name: "impl_190",
 decl_type: "function",
 source_file: "./src/rust_to_monster_reporter.rs",
 source_crate: ".",
-deps: ["RustToMonsterReporter", "MonsterCompressor"],
-uses: ["Mathematical", "Each", "Practical", "Ninth", "Prime", "Report", "Universal", "Moonshine", "String", "VISUAL", "Dominant", "Rarest", "Actual", "MATHEMATICAL", "Pentagonal", "Group", "Pairs)\\n", "Fast", "Vertex", "FAME", "TRIPLES", "For", "Ok", "EPIC", "Frequency", "Theory", "From", "Status", "Coverage", "Group.*\\n\\n", "Unique", "PAIRS", "Slots", "Compression", "Groups", "GROUP", "PRIME", "Perfect", "Factor", "RustToMonsterReporter", "Unlocked", "Diamond", "HALL", "EMOJI", "Sparkle", "Seven\\n", "Order", "Seventh", "Monster", "Threat\\n", "Singleton", "Stellar", "Theatrical", "Declarations", "Level", "ANALYSIS\\n\\n", "Rate", "Theoretical", "Beauty", "Transformation", "Efficiency\\n", "Achievement", "Operator", "Every", "In", "CONCLUSION", "FACTOR\\n\\n", "MONSTER", "Epic", "Second", "REPORT", "What", "Fourth", "Significance", "TO", "COMPRESSION", "Encoding", "Fifth", "Thus", "Processed", "And", "Connections", "Force", "THE", "Pair", "Ultimate", "This", "RUST", "BREAKDOWN", "Magnificent", "These", "AI-assisted", "Some", "Now", "The", "MonsterCompressor", "Result", "Connection\\n", "Means", "Words", "Elegance", "Its", "TRANSFORMATION", "Engine", "Rarity", "Analysis\\n", "Top", "Sporadic", "Triple", "Eighth", "Used", "Factorization", "Algebraic", "Utilization", "Future", "Sixth", "Distribution", "Rare\\n\\n", "OF", "Journey", "Max", "Final", "Code", "Perfection", "SINGLETON", "MAP\\n\\n", "Foundation", "Mystical", "Majesty", "Common", "Making", "Patterns\\n", "Group's", "Magic", "Total", "ENCODING\\n", "Analyzed", "Flame", "Vec", "Rust", "We", "Patterns**:\\n", "Third", "Our", "Signatures", "Signature", "Rainbow", "Algebras", "SINGLETONS", "Compile-time", "Awaiting", "BY", "Lightning"],
+deps: ["MonsterCompressor", "RustToMonsterReporter"],
+uses: ["Lightning", "Seven\\n", "Flame", "Rare\\n\\n", "CONCLUSION", "Algebras", "Prime", "Actual", "String", "Rust", "In", "Third", "Level", "Group", "GROUP", "REPORT", "Ultimate", "Result", "Diamond", "Epic", "Transformation", "Utilization", "Signatures", "Fourth", "Slots", "Pairs)\\n", "Triple", "Means", "Sparkle", "Dominant", "Thus", "Monster", "Theoretical", "Vertex", "TO", "Total", "FAME", "Status", "Coverage", "MonsterCompressor", "Vec", "EMOJI", "Top", "Patterns\\n", "Rate", "Pentagonal", "For", "Stellar", "The", "Making", "Foundation", "Engine", "Threat\\n", "Beauty", "BREAKDOWN", "ANALYSIS\\n\\n", "Fast", "Analysis\\n", "Magnificent", "MAP\\n\\n", "RUST", "Code", "Encoding", "Factor", "Its", "Processed", "Perfection", "Efficiency\\n", "COMPRESSION", "PAIRS", "Majesty", "Some", "Each", "Rarity", "Used", "Practical", "MATHEMATICAL", "Universal", "Analyzed", "Ninth", "Common", "Distribution", "FACTOR\\n\\n", "Eighth", "Ok", "Our", "Words", "Elegance", "Sixth", "TRIPLES", "SINGLETON", "TRANSFORMATION", "Groups", "Final", "Operator", "Awaiting", "Singleton", "HALL", "What", "ENCODING\\n", "We", "Journey", "Unique", "Frequency", "Mathematical", "Patterns**:\\n", "Pair", "Mystical", "SINGLETONS", "Seventh", "Declarations", "Report", "Perfect", "Now", "Future", "Second", "Compile-time", "THE", "Factorization", "Moonshine", "Connections", "PRIME", "And", "RustToMonsterReporter", "Force", "Theatrical", "Theory", "Algebraic", "Achievement", "Rarest", "BY", "Sporadic", "OF", "Magic", "Order", "Rainbow", "Max", "Group's", "Signature", "Every", "Unlocked", "EPIC", "MONSTER", "AI-assisted", "Connection\\n", "This", "VISUAL", "From", "Fifth", "Significance", "Group.*\\n\\n", "Compression", "These"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! deps {
     () => {
-        RustToMonsterReporter!();
         MonsterCompressor!();
+        RustToMonsterReporter!();
     };
 }
 

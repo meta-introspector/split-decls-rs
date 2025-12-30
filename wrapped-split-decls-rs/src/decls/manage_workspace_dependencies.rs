@@ -5,9 +5,9 @@ decl_type: "function",
 source_file: "./src/workspace_manager.rs",
 source_crate: ".",
 deps: [],
-uses: ["Vec", "Workspace", "Manages", "Option", "PathBuf", "Resolved", "Cargo.toml", "Dry-run", "String", "Deserialize", "Generated", "Failed", "HashMap", "Result", "Table", "Debug", "Some", "Path", "Default", "Value", "Serialize", "UTF-8", "Successfully", "CargoToml", "Ok"],
+uses: ["UTF-8", "Default", "Dry-run", "Path", "Deserialize", "PathBuf", "Result", "Generated", "Some", "HashMap", "Option", "Debug", "Manages", "Table", "CargoToml", "Value", "Failed", "Successfully", "Ok", "Resolved", "String", "Vec", "Workspace", "Serialize", "Cargo.toml"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! manage_workspace_dependencies {

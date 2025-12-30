@@ -4,16 +4,16 @@ name: "IntrospectMacro",
 decl_type: "function",
 source_file: "./src/introspect_macro.rs",
 source_crate: ".",
-deps: ["BottLevel", "InjectionPoint"],
-uses: ["Vec", "Introspection", "Bott", "BottLevel", "InjectionPoint", "IntrospectMacro"],
+deps: ["InjectionPoint", "BottLevel"],
+uses: ["Bott", "InjectionPoint", "Introspection", "IntrospectMacro", "Vec", "BottLevel"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! deps {
     () => {
-        BottLevel!();
         InjectionPoint!();
+        BottLevel!();
     };
 }
 

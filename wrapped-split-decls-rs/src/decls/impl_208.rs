@@ -4,18 +4,18 @@ name: "impl_208",
 decl_type: "function",
 source_file: "./src/syscall_oracle.rs",
 source_crate: ".",
-deps: ["SyscallAstTransformer", "SyscallWrapper", "TypeSafetyLevel", "SyscallInterceptor"],
-uses: ["Ok", "SyscallAstTransformer", "File", "Paranoid", "Path", "Result", "Option", "TokenStream", "Permissive", "Strict", "SyscallWrapper", "HashMap", "TypeSafetyLevel", "Expr", "None", "String", "SyscallInterceptor", "Some"],
+deps: ["TypeSafetyLevel", "SyscallWrapper", "SyscallInterceptor", "SyscallAstTransformer"],
+uses: ["String", "File", "Expr", "TypeSafetyLevel", "SyscallWrapper", "SyscallInterceptor", "HashMap", "TokenStream", "Ok", "Strict", "Paranoid", "Option", "SyscallAstTransformer", "Path", "Result", "Permissive", "None", "Some"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! deps {
     () => {
-        SyscallAstTransformer!();
-        SyscallWrapper!();
         TypeSafetyLevel!();
+        SyscallWrapper!();
         SyscallInterceptor!();
+        SyscallAstTransformer!();
     };
 }
 

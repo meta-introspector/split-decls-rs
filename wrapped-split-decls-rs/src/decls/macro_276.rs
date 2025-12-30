@@ -5,9 +5,9 @@ decl_type: "function",
 source_file: "./src/meta_pattern_visitor.rs",
 source_crate: ".",
 deps: ["SynLangPatterns"],
-uses: ["Expr", "Type", "ExprUnary", "Pat", "PatIdent", "PatStruct", "ExprPath", "Signature", "ItemMod", "TypePath", "TypeTuple", "Item", "ItemUse", "ExprBlock", "ExprMethodCall", "Generics", "ItemEnum", "ItemStatic", "ExprBinary", "ItemTrait", "ItemConst", "ExprCall", "Path", "Ident", "ItemStruct", "Block", "ItemFn", "TypeReference", "SynLangPatterns", "PatTuple", "ExprLit", "ExprMatch", "ItemImpl", "File", "ExprIf"],
+uses: ["ExprBinary", "ItemConst", "TypePath", "Item", "File", "Type", "ItemEnum", "Signature", "ExprMatch", "Pat", "Expr", "Generics", "ItemStatic", "PatIdent", "ExprMethodCall", "ExprCall", "ExprLit", "TypeTuple", "ExprBlock", "ExprUnary", "ItemStruct", "Block", "Path", "ItemMod", "ItemFn", "ItemUse", "SynLangPatterns", "ExprPath", "ExprIf", "PatStruct", "PatTuple", "TypeReference", "ItemTrait", "Ident", "ItemImpl"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! deps {

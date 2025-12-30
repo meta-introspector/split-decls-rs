@@ -4,17 +4,17 @@ name: "impl_55",
 decl_type: "function",
 source_file: "./src/url_matrix.rs",
 source_crate: ".",
-deps: ["RdfUrlBlob", "EigenForm", "UrlMatrix"],
-uses: ["Compression", "Visualization", "Visualize", "Computing", "Reconstruct", "Eigenvalues", "Extract", "RdfUrlBlob", "Option", "Err", "Eigenvectors", "Matrix", "String", "Reconstructing", "Empty", "Generate", "EigenForm", "Simplified", "RDF", "SVD/PCA", "Show", "Result", "Create", "Eigenform", "URL", "Ok", "Invalid", "Some", "Compress", "Dimensions", "URLs", "HashSet", "Features", "ASCII", "Statistics", "U{:2", "Project", "Engine", "Vec", "URL_SAFE_NO_PAD", "UrlMatrix", "None", "Created"],
+deps: ["RdfUrlBlob", "UrlMatrix", "EigenForm"],
+uses: ["Extract", "Compress", "Create", "HashSet", "Show", "Empty", "Engine", "Matrix", "RdfUrlBlob", "U{:2", "Option", "URLs", "Reconstruct", "None", "Features", "Statistics", "Created", "Eigenform", "RDF", "Generate", "UrlMatrix", "Invalid", "Project", "Computing", "URL", "Compression", "Ok", "Visualize", "Dimensions", "String", "Simplified", "Vec", "Eigenvalues", "Eigenvectors", "Visualization", "Result", "URL_SAFE_NO_PAD", "ASCII", "SVD/PCA", "Some", "Reconstructing", "EigenForm", "Err"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! deps {
     () => {
         RdfUrlBlob!();
-        EigenForm!();
         UrlMatrix!();
+        EigenForm!();
     };
 }
 

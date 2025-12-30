@@ -1,0 +1,7 @@
+use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+
+mkdeclfn! {
+println!("🔧 Calling function: process_crate");
+pub fn process_crate (crate_path : & Path , output_dir : & Path) -> Result < () , Box < dyn std :: error :: Error > > { println ! ("🔄 Processing crate: {}" , crate_path . display ()) ; let entry_file = if crate_path . join ("src/lib.rs") . exists () { crate_path . join ("src/lib.rs") } else if crate_path . join ("src/main.rs") . exists () { crate_path . join ("src/main.rs") } else { return Ok (()) ; } ; let content = wrapped_fs_read_to_string ! (& entry_file) ? ; let crate_name = crate_path . file_name () . unwrap () . to_string_lossy () . replace ('-' , "_") ; let out_dir = output_dir . join (format ! ("wrapped-{}" , crate_name)) ; wrapped_fs_create_dir_all ! (& out_dir . join ("src/decls")) ? ; let macro_content = format ! ("macro_rules! {} {{\n    () => {{\n        {}\n    }};\n}}\n\n{}!();" , crate_name , content , crate_name) ; let file_path = out_dir . join ("src/decls") . join (format ! ("{}.rs" , crate_name)) ; wrapped_fs_write ! (& file_path , macro_content) ? ; let lib_content = "pub mod decls;\npub use decls::*;\n" ; wrapped_fs_write ! (out_dir . join ("src/lib.rs") , lib_content) ? ; let cargo_content = format ! ("[package]\nname = \"wrapped-{}\"\nversion = \"0.1.0\"\nedition = \"2021\"\n" , crate_name) ; wrapped_fs_write ! (out_dir . join ("Cargo.toml") , cargo_content) ? ; println ! ("✅ Processed crate using ALL WRAPPED functions") ; Ok (()) }
+}

@@ -5,9 +5,9 @@ decl_type: "function",
 source_file: "./src/macro_analyzer_parts/terms.rs",
 source_crate: ".",
 deps: [],
-uses: ["BooleanLiteral", "Term", "Hash", "Debug", "Clone", "ByteLiteral", "PartialEq", "Serialize", "NumericLiteral", "Deserialize", "String", "FloatLiteral", "Eq", "FunctionCall", "StringLiteral", "Identifier", "CharLiteral"],
+uses: ["BooleanLiteral", "Identifier", "Hash", "CharLiteral", "String", "Clone", "Eq", "FunctionCall", "Term", "Debug", "Serialize", "Deserialize", "StringLiteral", "ByteLiteral", "NumericLiteral", "PartialEq", "FloatLiteral"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! Term {

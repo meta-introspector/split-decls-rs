@@ -4,17 +4,17 @@ name: "impl_266",
 decl_type: "function",
 source_file: "./src/ast_statistics.rs",
 source_crate: ".",
-deps: ["AstVisitor", "AstStatistics", "RdfStateMachine"],
-uses: ["Struct", "Path", "Ident", "File", "Some", "Typed", "AstVisitor", "Item", "Fields", "StatisticalAnalysis", "Enum", "AstStatistics", "Unnamed", "FnArg", "EightDimensionalTypeSpace", "Fn", "Result", "Unit", "String", "Vec", "Ok", "Pat", "RdfStateMachine", "Type", "Named"],
+deps: ["AstStatistics", "RdfStateMachine", "AstVisitor"],
+uses: ["AstStatistics", "FnArg", "Type", "Fn", "Item", "Path", "String", "Unnamed", "Typed", "Pat", "Enum", "Named", "StatisticalAnalysis", "Vec", "Ident", "EightDimensionalTypeSpace", "RdfStateMachine", "Unit", "Fields", "Struct", "Result", "Ok", "File", "Some", "AstVisitor"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! deps {
     () => {
-        AstVisitor!();
         AstStatistics!();
         RdfStateMachine!();
+        AstVisitor!();
     };
 }
 

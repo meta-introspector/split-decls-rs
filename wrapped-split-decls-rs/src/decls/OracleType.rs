@@ -5,9 +5,9 @@ decl_type: "function",
 source_file: "./src/syscall_oracle.rs",
 source_crate: ".",
 deps: [],
-uses: ["Serialize", "Debug", "Time", "OracleType", "Clone", "Deserialize", "Network", "Crypto", "FileSystem", "Process", "Custom", "Memory", "String"],
+uses: ["Memory", "Crypto", "Custom", "Clone", "OracleType", "Debug", "FileSystem", "Network", "Serialize", "Process", "String", "Deserialize", "Time"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! OracleType {

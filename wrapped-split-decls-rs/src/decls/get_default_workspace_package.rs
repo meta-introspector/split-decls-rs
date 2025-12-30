@@ -5,9 +5,9 @@ decl_type: "function",
 source_file: "./src/workspace_manager.rs",
 source_crate: ".",
 deps: [],
-uses: ["Value", "String", "Table", "Boolean", "AGPL", "Array"],
+uses: ["Table", "Boolean", "String", "Value", "AGPL", "Array"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! get_default_workspace_package {

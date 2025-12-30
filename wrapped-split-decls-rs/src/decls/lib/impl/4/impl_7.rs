@@ -2,5 +2,5 @@ use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
 mkdeclimpl! {
-impl Display for MatcherLoc { fn fmt (& self , f : & mut std :: fmt :: Formatter < '_ >) -> std :: fmt :: Result { match self { MatcherLoc :: Token { token } | MatcherLoc :: SequenceSep { separator : token } => { write ! (f , "{:?}" , token) } MatcherLoc :: MetaVarDecl { bind , kind , .. } => { write ! (f , "meta-variable `${bind}:{kind}`") } MatcherLoc :: Eof => f . write_str ("end of macro") , MatcherLoc :: Delimited => f . write_str ("delimiter") , MatcherLoc :: Sequence { .. } => f . write_str ("sequence start") , MatcherLoc :: SequenceKleeneOpNoSep { .. } => f . write_str ("sequence end") , MatcherLoc :: SequenceKleeneOpAfterSep { .. } => f . write_str ("sequence end") , } } }
+impl < 'de > Deserialize < 'de > for Dependency { fn deserialize < D > (deserializer : D) -> Result < Self , D :: Error > where D : serde :: Deserializer < 'de > , { use serde :: de :: Error ; let value = toml :: Value :: deserialize (deserializer) ? ; match value { toml :: Value :: String (s) => Ok (Dependency :: Version (s)) , toml :: Value :: Table (_) => { let table = DependencyTable :: deserialize (value) . map_err (D :: Error :: custom) ? ; Ok (Dependency :: Table (table)) } _ => Err (D :: Error :: custom ("Invalid dependency format")) , } } }
 }

@@ -5,9 +5,9 @@ decl_type: "function",
 source_file: "./src/ast_statistics.rs",
 source_crate: ".",
 deps: ["AstVisitor"],
-uses: ["ExprPath", "Item", "ExprCall", "ExprMethodCall", "Visit", "ExprBinary", "ItemMod", "Generics", "ItemUse", "Expr", "Pat", "ExprMatch", "ExprUnary", "TypeTuple", "ItemStatic", "TypeReference", "PatIdent", "Signature", "ItemTrait", "ItemConst", "ItemImpl", "ItemFn", "ExprLit", "ItemEnum", "Path", "ItemStruct", "TypePath", "PatStruct", "File", "ExprIf", "AstVisitor", "ExprBlock", "PatTuple", "Type", "Ident", "Block"],
+uses: ["PatStruct", "ItemTrait", "Generics", "ItemUse", "PatTuple", "Visit", "Block", "ExprPath", "ItemConst", "ExprUnary", "ItemStatic", "File", "ItemEnum", "Type", "ExprCall", "ItemStruct", "Path", "ItemFn", "Expr", "ExprIf", "TypePath", "TypeReference", "ItemImpl", "Ident", "ExprBinary", "Item", "Signature", "PatIdent", "AstVisitor", "ExprMatch", "Pat", "TypeTuple", "ItemMod", "ExprLit", "ExprBlock", "ExprMethodCall"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! deps {

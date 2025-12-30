@@ -5,9 +5,9 @@ decl_type: "function",
 source_file: "./src/syscall_decoupling_template.rs",
 source_crate: ".",
 deps: ["ImplementationType"],
-uses: ["ImplAdapter", "Serialize", "String", "ImplementationType", "Debug", "Deserialize"],
+uses: ["ImplementationType", "String", "ImplAdapter", "Serialize", "Deserialize", "Debug"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! deps {

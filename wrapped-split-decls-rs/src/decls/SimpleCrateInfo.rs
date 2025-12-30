@@ -5,9 +5,9 @@ decl_type: "function",
 source_file: "./src/simple_crate_info.rs",
 source_crate: ".",
 deps: [],
-uses: ["PartialEq", "Deserialize", "String", "Clone", "Debug", "PathBuf", "Serialize", "SimpleCrateInfo", "Eq"],
+uses: ["Eq", "SimpleCrateInfo", "Deserialize", "Debug", "Clone", "PathBuf", "String", "Serialize", "PartialEq"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! SimpleCrateInfo {

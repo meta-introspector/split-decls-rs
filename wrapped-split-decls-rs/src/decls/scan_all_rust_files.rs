@@ -5,9 +5,9 @@ decl_type: "function",
 source_file: "./src/all_file_scanner.rs",
 source_crate: ".",
 deps: [],
-uses: ["Rust", "Item", "Ok", "Result", "Path", "PathBuf", "Vec", "Scan"],
+uses: ["Ok", "Item", "PathBuf", "Scan", "Path", "Result", "Rust", "Vec"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! scan_all_rust_files {

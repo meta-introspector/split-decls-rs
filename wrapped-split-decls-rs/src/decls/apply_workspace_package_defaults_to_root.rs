@@ -5,9 +5,9 @@ decl_type: "function",
 source_file: "./src/workspace_manager.rs",
 source_crate: ".",
 deps: [],
-uses: ["String", "Workspace", "Dry-run", "Successfully", "Ok", "Failed", "Cargo.toml", "Vec", "Path", "Generated", "Result", "Deserialize", "Option", "HashMap", "Table", "Default", "Some", "Value", "Debug", "Serialize", "CargoToml"],
+uses: ["String", "Path", "Default", "Result", "Deserialize", "Vec", "Value", "Cargo.toml", "CargoToml", "Some", "Successfully", "Serialize", "Debug", "Workspace", "Generated", "Failed", "HashMap", "Dry-run", "Table", "Ok", "Option"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! apply_workspace_package_defaults_to_root {

@@ -4,23 +4,23 @@ name: "impl_198",
 decl_type: "function",
 source_file: "./src/sparql_probe_bridge.rs",
 source_crate: ".",
-deps: ["AstNodeType", "ComplexityResult", "SparqlQuery", "QueryType", "AstProbe", "ProbeAction", "SparqlProbeGenerator", "InjectionPosition", "ProbeFilter", "ProbeTemplate"],
-uses: ["AstNodeType", "Some", "CrossLayerRelation", "MaxComplexity", "None", "Before", "FrequencyAbove", "Result", "InjectCode", "String", "RDF", "ComplexityResult", "Option", "SparqlQuery", "QueryType", "HashMap", "AstProbe", "ProbeAction", "Loaded", "Vec", "PatternMatch", "Frequency", "Function", "Complexity", "SparqlProbeGenerator", "WrapFunction", "InjectionPosition", "Ok", "ProbeFilter", "ProbeTemplate", "ComplexityAbove"],
+deps: ["QueryType", "AstProbe", "SparqlProbeGenerator", "ProbeAction", "AstNodeType", "SparqlQuery", "ProbeFilter", "InjectionPosition", "ComplexityResult", "ProbeTemplate"],
+uses: ["None", "Some", "Loaded", "String", "QueryType", "AstProbe", "SparqlProbeGenerator", "ProbeAction", "InjectCode", "RDF", "AstNodeType", "FrequencyAbove", "ComplexityAbove", "Before", "SparqlQuery", "ProbeFilter", "InjectionPosition", "Vec", "ComplexityResult", "Ok", "MaxComplexity", "Function", "Option", "Result", "PatternMatch", "CrossLayerRelation", "Complexity", "Frequency", "HashMap", "WrapFunction", "ProbeTemplate"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! deps {
     () => {
-        AstNodeType!();
-        ComplexityResult!();
-        SparqlQuery!();
         QueryType!();
         AstProbe!();
-        ProbeAction!();
         SparqlProbeGenerator!();
-        InjectionPosition!();
+        ProbeAction!();
+        AstNodeType!();
+        SparqlQuery!();
         ProbeFilter!();
+        InjectionPosition!();
+        ComplexityResult!();
         ProbeTemplate!();
     };
 }

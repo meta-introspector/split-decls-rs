@@ -5,9 +5,9 @@ decl_type: "function",
 source_file: "./src/rdf_url_blob.rs",
 source_crate: ".",
 deps: ["BlobMetadata"],
-uses: ["Blob", "RDF/Turtle", "String", "Base64", "Metadata", "RdfUrlBlob", "BlobMetadata", "RDF", "Complete", "URL", "Debug", "Clone"],
+uses: ["RDF", "Clone", "URL", "Complete", "RDF/Turtle", "BlobMetadata", "Metadata", "Blob", "Debug", "Base64", "RdfUrlBlob", "String"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! deps {

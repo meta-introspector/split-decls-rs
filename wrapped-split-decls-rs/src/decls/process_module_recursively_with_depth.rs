@@ -5,9 +5,9 @@ decl_type: "function",
 source_file: "./src/process_module_recursivly.rs",
 source_crate: ".",
 deps: ["CratePaths", "ModuleNotFoundReport"],
-uses: ["TokenStream", "CratePaths", "Failed", "ModuleNotFoundReport", "Ok", "MAX_RECURSION_DEPTH", "SKIPPED", "Span", "Parsing", "Err", "Dry-run", "LLM", "DEBUG", "Some", "Maximum", "Mod", "MODULE", "LitStr", "Ident", "Error", "Formatting", "Vec", "SplitDeclsConfig", "The", "Processing", "MISSING", "TEST/PRIVATE", "Item", "WARNING", "Result", "Skipping", "Would", "File"],
+uses: ["Processing", "Some", "WARNING", "Skipping", "DEBUG", "Vec", "Error", "Mod", "LitStr", "Span", "Maximum", "TEST/PRIVATE", "Failed", "CratePaths", "SKIPPED", "LLM", "ModuleNotFoundReport", "MISSING", "Would", "Parsing", "Ident", "Formatting", "Result", "TokenStream", "Ok", "Dry-run", "File", "MODULE", "MAX_RECURSION_DEPTH", "Err", "Item", "The", "SplitDeclsConfig"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! deps {

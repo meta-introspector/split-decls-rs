@@ -4,16 +4,16 @@ name: "impl_243",
 decl_type: "function",
 source_file: "./src/syscall_traits.rs",
 source_crate: ".",
-deps: ["NetworkOracle", "DefaultNetworkOracle"],
-uses: ["NetworkOracle", "DefaultNetworkOracle", "String", "Ok", "NET_AUDIT", "Result", "Connect"],
+deps: ["DefaultNetworkOracle", "NetworkOracle"],
+uses: ["DefaultNetworkOracle", "NetworkOracle", "NET_AUDIT", "Connect", "Ok", "Result", "String"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! deps {
     () => {
-        NetworkOracle!();
         DefaultNetworkOracle!();
+        NetworkOracle!();
     };
 }
 

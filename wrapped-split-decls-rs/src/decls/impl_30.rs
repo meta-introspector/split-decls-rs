@@ -4,16 +4,16 @@ name: "impl_30",
 decl_type: "function",
 source_file: "./src/macro_analyzer_parts/term_collector.rs",
 source_crate: ".",
-deps: ["TermCollector", "Term"],
-uses: ["Visit", "ExprMethodCall", "ExprPath", "Token", "TermCollector", "LitStr", "LitByte", "Debug", "FloatLiteral", "PartialEq", "Clone", "Package", "Vec", "DepTableInput", "Identifier", "CharLiteral", "FunctionCall", "HashMap", "ByteLiteral", "CargoToml", "WrappedCargoToml", "Expr", "Ident", "LitBool", "Punctuated", "Hash", "String", "NumericLiteral", "ItemFn", "Some", "TokenStream", "Eq", "ToTokens", "StringLiteral", "Term", "LitChar", "Dependency", "LitFloat", "Default", "BooleanLiteral", "Result", "Path", "ExprCall", "LitInt"],
+deps: ["Term", "TermCollector"],
+uses: ["String", "Vec", "LitByte", "Term", "Eq", "ItemFn", "ExprMethodCall", "LitStr", "LitInt", "LitChar", "CargoToml", "Some", "Result", "TokenStream", "ByteLiteral", "Default", "ExprCall", "Expr", "HashMap", "BooleanLiteral", "Path", "Hash", "StringLiteral", "NumericLiteral", "ExprPath", "LitBool", "Visit", "Debug", "ToTokens", "Punctuated", "PartialEq", "Clone", "WrappedCargoToml", "Dependency", "FunctionCall", "DepTableInput", "Ident", "TermCollector", "LitFloat", "Token", "FloatLiteral", "Package", "Identifier", "CharLiteral"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! deps {
     () => {
-        TermCollector!();
         Term!();
+        TermCollector!();
     };
 }
 

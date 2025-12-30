@@ -2,8 +2,6 @@ use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
 mkdeclfn! {
-fn main () { let code = r#"fn example() {
-    std::fs::write("test.txt", "data").unwrap();
-    std::fs::read_to_string("test.txt").unwrap();
-}"# ; let annotated = code . replace ("std::fs::write" , & format ! ("{}\n    std::fs::write" , syscallclippy ! ("write"))) . replace ("std::fs::read" , & format ! ("{}\n    std::fs::read" , syscallclippy ! ("read"))) ; println ! ("Original code:\n{}\n" , code) ; println ! ("Annotated code:\n{}" , annotated) ; fs :: write ("annotated_code.rs" , & annotated) . unwrap () ; println ! ("\n✅ 8-level recursive syscall annotations added!") ; println ! ("✅ File written: annotated_code.rs") ; }
+println!("🔧 Calling function: main");
+fn main () -> Result < () , Box < dyn std :: error :: Error > > { let output3_dir = Path :: new ("../output3") ; let output4_dir = Path :: new ("../output4") ; println ! ("🔧 Bootstrap4: Proving ALL functions are wrapped!") ; println ! ("📂 Input:  {}" , output3_dir . display ()) ; println ! ("📂 Output: {}" , output4_dir . display ()) ; bootstrap_from_output3 (output3_dir , output4_dir) ? ; println ! ("✨ Bootstrap4 completed with ALL WRAPPED functions!") ; Ok (()) }
 }

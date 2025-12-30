@@ -4,19 +4,19 @@ name: "Operation",
 decl_type: "function",
 source_file: "./src/goal_parser.rs",
 source_crate: ".",
-deps: ["SequenceOperation", "LoopOperation", "ShellCommandOperation", "SwitchOperation", "FunctionCallOperation"],
-uses: ["SequenceOperation", "Shell", "Serialize", "Clone", "LoopOperation", "Loop", "Value", "ShellCommandOperation", "Sequence", "FunctionCall", "Switch", "Debug", "Operation", "Unknown", "SwitchOperation", "Deserialize", "FunctionCallOperation"],
+deps: ["ShellCommandOperation", "FunctionCallOperation", "LoopOperation", "SwitchOperation", "SequenceOperation"],
+uses: ["FunctionCall", "Serialize", "Value", "Switch", "ShellCommandOperation", "Debug", "Sequence", "FunctionCallOperation", "LoopOperation", "Operation", "Deserialize", "Loop", "SwitchOperation", "SequenceOperation", "Clone", "Unknown", "Shell"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! deps {
     () => {
-        SequenceOperation!();
-        LoopOperation!();
         ShellCommandOperation!();
-        SwitchOperation!();
         FunctionCallOperation!();
+        LoopOperation!();
+        SwitchOperation!();
+        SequenceOperation!();
     };
 }
 

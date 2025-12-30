@@ -2,20 +2,6 @@ use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
 mkdeclfn! {
-fn main () { let out_dir = PathBuf :: from (env :: var ("OUT_DIR") . unwrap ()) ; let dest_path = out_dir . join ("generated.rs") ; let mut generated_code = String :: new () ; let src_dir = PathBuf :: from (env :: var ("CARGO_MANIFEST_DIR") . unwrap ()) . join ("src") ; let mut file_names = Vec :: new () ; let mut test_routines = Vec :: new () ; for entry in fs :: read_dir (& src_dir) . unwrap () { let entry = entry . unwrap () ; let path = entry . path () ; if path . is_file () { if let Some (file_name_os) = path . file_stem () { if let Some (file_name) = file_name_os . to_str () { file_names . push (format ! ("\"{}\"" , file_name)) ; if path . extension () . map_or (false , | ext | ext == "rs") && file_name != "lib" { test_routines . push (format ! (r###"
-                            #[test]
-                            fn test_module_{0}() {{
-                                // A placeholder test: ensures the module can be referred to.
-                                // Further specific tests would be added manually.
-                                let _ = crate::{1};
-                                assert!(true);
-                            }}
-			    "### , file_name , file_name)) ; } } } } } generated_code . push_str (& format ! (r###"
-        /// Returns a list of all source file names in this crate's src directory.
-        pub fn get_src_file_names() -> Vec<&'static str> {{
-            vec![{}]
-        }}
-        "### , file_names . join (", "))) ; generated_code . push_str ("#[cfg(test)]\nmod generated_tests {
-") ; for test_routine in test_routines { generated_code . push_str (& test_routine) ; generated_code . push_str ("\n") ; } generated_code . push_str ("}
-") ; fs :: write (& dest_path , & generated_code) . unwrap () ; println ! ("cargo:rerun-if-changed={}" , src_dir . display ()) ; }
+println!("🔧 Calling function: main");
+fn main () { let mut generated_code = String :: new () ; generated_code . push_str ("#[macro_export]\n") ; generated_code . push_str ("macro_rules! trace_call {\n") ; generated_code . push_str ("    ($func:ident($($arg:expr),*)) => {\n") ; generated_code . push_str ("        {\n") ; generated_code . push_str ("            println!(\"🔧 TRACE: Calling {}({})\", stringify!($func), stringify!($($arg),*));\n") ; generated_code . push_str ("            let start = std::time::Instant::now();\n") ; generated_code . push_str ("            let result = $func($($arg),*);\n") ; generated_code . push_str ("            let duration = start.elapsed();\n") ; generated_code . push_str ("            match &result {\n") ; generated_code . push_str ("                Ok(_) => println!(\"✅ TRACE: {} completed in {:?}\", stringify!($func), duration),\n") ; generated_code . push_str ("                Err(e) => println!(\"❌ TRACE: {} failed in {:?}: {}\", stringify!($func), duration, e),\n") ; generated_code . push_str ("            }\n") ; generated_code . push_str ("            result\n") ; generated_code . push_str ("        }\n") ; generated_code . push_str ("    };\n") ; generated_code . push_str ("}\n\n") ; generated_code . push_str ("#[macro_export]\n") ; generated_code . push_str ("macro_rules! traced_bootstrap {\n") ; generated_code . push_str ("    () => {\n") ; generated_code . push_str ("        {\n") ; generated_code . push_str ("            println!(\"🚀 TRACED BOOTSTRAP EXECUTION START\");\n") ; generated_code . push_str ("            let scan_root = std::path::Path::new(\"../../\");\n") ; generated_code . push_str ("            \n") ; generated_code . push_str ("            // Call the real bootstrap functions with tracing\n") ; generated_code . push_str ("            trace_call!(split_decls_rs::run_bootstrap_mode(scan_root, false, false, true))\n") ; generated_code . push_str ("        }\n") ; generated_code . push_str ("    };\n") ; generated_code . push_str ("}\n") ; let out_dir = std :: env :: var ("OUT_DIR") . unwrap () ; let dest_path = Path :: new (& out_dir) . join ("generated.rs") ; let mut f = fs :: File :: create (& dest_path) . unwrap () ; f . write_all (generated_code . as_bytes ()) . unwrap () ; }
 }

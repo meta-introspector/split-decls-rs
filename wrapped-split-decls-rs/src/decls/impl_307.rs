@@ -4,20 +4,20 @@ name: "impl_307",
 decl_type: "function",
 source_file: "./src/cargo_guided_analysis.rs",
 source_crate: ".",
-deps: ["CargoGuidedAnalysis", "PreservationTrace", "CargoBuildOrder", "BuildStep", "PackageField", "CargoLockPreservation"],
-uses: ["PathBuf", "Value", "Some", "TRACING", "Cargo.lock", "PRESERVATION", "Summary\\n", "It", "Captured", "CARGO", "CargoGuidedAnalysis", "Steps", "ORDER", "Analyzed", "Generated", "CARGO-GUIDED", "PreservationTrace", "Vec", "Cargo.toml", "Total", "CARGO.LOCK", "Version", "CargoBuildOrder", "PACKAGE", "No", "ANALYSIS", "None", "Cargo", "Processed", "BuildStep", "Compiling", "CRATES", "GENERATING", "HashMap", "Not", "ALL", "Building", "Found", "Referenced", "Details\\n\\n", "Result", "Parsed", "Wrapped", "CAPTURING", "Path", "ANALYZING", "HashSet", "REPORT\\n\\n", "Command", "PackageField", "CargoLockPreservation", "TOML", "IN", "LOCK", "Checking", "Ok", "This", "String", "QUEUE", "BUILD", "PARSING", "Preservation", "WORKSPACE", "Preserved", "Err", "Package"],
+deps: ["PreservationTrace", "PackageField", "CargoGuidedAnalysis", "BuildStep", "CargoLockPreservation", "CargoBuildOrder"],
+uses: ["Building", "ANALYZING", "PreservationTrace", "Command", "Captured", "Cargo.toml", "Cargo.lock", "PackageField", "Not", "Checking", "Wrapped", "None", "Analyzed", "QUEUE", "Package", "Cargo", "TOML", "Vec", "Ok", "CRATES", "Preservation", "Steps", "Err", "HashMap", "LOCK", "TRACING", "CARGO.LOCK", "ORDER", "Value", "Compiling", "PRESERVATION", "ALL", "Details\\n\\n", "Version", "CARGO", "CARGO-GUIDED", "Summary\\n", "Total", "Some", "PACKAGE", "Path", "Processed", "HashSet", "CargoGuidedAnalysis", "PathBuf", "WORKSPACE", "String", "BuildStep", "REPORT\\n\\n", "Parsed", "Generated", "PARSING", "It", "This", "Referenced", "Result", "IN", "Found", "Preserved", "BUILD", "No", "GENERATING", "CargoLockPreservation", "CargoBuildOrder", "ANALYSIS", "CAPTURING"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! deps {
     () => {
-        CargoGuidedAnalysis!();
         PreservationTrace!();
-        CargoBuildOrder!();
-        BuildStep!();
         PackageField!();
+        CargoGuidedAnalysis!();
+        BuildStep!();
         CargoLockPreservation!();
+        CargoBuildOrder!();
     };
 }
 

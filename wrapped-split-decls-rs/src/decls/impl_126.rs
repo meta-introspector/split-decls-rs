@@ -5,9 +5,9 @@ decl_type: "function",
 source_file: "./src/ast_reflector.rs",
 source_crate: ".",
 deps: ["AstNodeType"],
-uses: ["Static", "Impl", "Struct", "Const", "Macro", "Expr", "Stmt", "Pat", "Trait", "All", "Enum", "Function", "AstNodeType", "Use", "Module", "Type"],
+uses: ["Function", "Type", "Module", "Macro", "Expr", "Const", "Static", "Stmt", "AstNodeType", "Pat", "Struct", "Enum", "Use", "Trait", "Impl", "All"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! deps {

@@ -4,21 +4,21 @@ name: "impl_298",
 decl_type: "function",
 source_file: "./src/conformal_field_theory.rs",
 source_crate: ".",
-deps: ["ConformalFieldTheory", "PrimaryField", "CorrelationFunction", "Level8DPoint", "CFTSimulation", "SourceArrow", "AnglePreservation", "ConformalMap"],
-uses: ["The", "MAP", "N1", "Bott", "Ok", "ConformalFieldTheory", "C1.correlation_functions", "Correlation", "C2", "VERIFYING", "Define", "PrimaryField", "COMPUTING", "ANGLE", "Set", "Some", "String", "PI", "Option", "PRESERVATION", "CorrelationFunction", "Level8DPoint", "C2.correlation_functions", "HashMap", "Fin", "Mathlib.Geometry.Manifold.ConformalGroupoid", "C1", "CFTSimulation", "SourceArrow", "Δ", "RustC_CFT", "None", "Vec", "AnglePreservation", "FUNCTIONS", "Mathlib.Analysis.Complex.Basic", "ℝ", "Output2_CFT", "Lean4", "ℂ", "ConformalMap", "CFT", "Main", "Angle", "CONFORMAL", "CORRELATION", "Result", "C1.primary_fields"],
+deps: ["Level8DPoint", "ConformalFieldTheory", "CFTSimulation", "PrimaryField", "AnglePreservation", "SourceArrow", "CorrelationFunction", "ConformalMap"],
+uses: ["C1", "C1.correlation_functions", "RustC_CFT", "Ok", "Mathlib.Geometry.Manifold.ConformalGroupoid", "Bott", "COMPUTING", "C2.correlation_functions", "Vec", "FUNCTIONS", "ℂ", "Lean4", "Δ", "Fin", "Output2_CFT", "CONFORMAL", "Angle", "Result", "Some", "Level8DPoint", "ConformalFieldTheory", "ANGLE", "PRESERVATION", "CFTSimulation", "Define", "PrimaryField", "Option", "N1", "AnglePreservation", "ℝ", "Correlation", "SourceArrow", "MAP", "Main", "Mathlib.Analysis.Complex.Basic", "String", "CorrelationFunction", "None", "ConformalMap", "CORRELATION", "PI", "HashMap", "C2", "CFT", "C1.primary_fields", "The", "Set", "VERIFYING"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! deps {
     () => {
-        ConformalFieldTheory!();
-        PrimaryField!();
-        CorrelationFunction!();
         Level8DPoint!();
+        ConformalFieldTheory!();
         CFTSimulation!();
-        SourceArrow!();
+        PrimaryField!();
         AnglePreservation!();
+        SourceArrow!();
+        CorrelationFunction!();
         ConformalMap!();
     };
 }

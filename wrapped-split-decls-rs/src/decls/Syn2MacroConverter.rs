@@ -4,16 +4,16 @@ name: "Syn2MacroConverter",
 decl_type: "function",
 source_file: "./src/syn2macro.rs",
 source_crate: ".",
-deps: ["BottMacroGenerator", "SecurityContext"],
-uses: ["Option", "Syn2MacroConverter", "BottMacroGenerator", "Bott", "SecurityContext", "Main"],
+deps: ["SecurityContext", "BottMacroGenerator"],
+uses: ["SecurityContext", "Bott", "Option", "Syn2MacroConverter", "BottMacroGenerator", "Main"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! deps {
     () => {
-        BottMacroGenerator!();
         SecurityContext!();
+        BottMacroGenerator!();
     };
 }
 

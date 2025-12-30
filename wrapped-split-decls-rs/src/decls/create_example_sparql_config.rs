@@ -4,19 +4,19 @@ name: "create_example_sparql_config",
 decl_type: "function",
 source_file: "./src/sparql_probe_bridge.rs",
 source_crate: ".",
-deps: ["QueryType", "ProbeTemplate", "SparqlQuery", "SparqlToProbeConfig", "AstNodeType"],
-uses: ["QueryType", "ComplexityAbove", "FrequencyAbove", "Some", "ProbeTemplate", "Function", "SparqlQuery", "SparqlToProbeConfig", "HashMap", "AstNodeType", "MaxComplexity", "None"],
+deps: ["SparqlToProbeConfig", "SparqlQuery", "AstNodeType", "QueryType", "ProbeTemplate"],
+uses: ["Some", "SparqlToProbeConfig", "SparqlQuery", "HashMap", "None", "FrequencyAbove", "MaxComplexity", "AstNodeType", "QueryType", "ProbeTemplate", "Function", "ComplexityAbove"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! deps {
     () => {
+        SparqlToProbeConfig!();
+        SparqlQuery!();
+        AstNodeType!();
         QueryType!();
         ProbeTemplate!();
-        SparqlQuery!();
-        SparqlToProbeConfig!();
-        AstNodeType!();
     };
 }
 

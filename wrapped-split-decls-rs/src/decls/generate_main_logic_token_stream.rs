@@ -5,9 +5,9 @@ decl_type: "function",
 source_file: "./src/buildrs_generator/main_logic.rs",
 source_crate: ".",
 deps: [],
-uses: ["TokenStream", "Result", "LitStr", "CARGO_MANIFEST_DIR", "Some", "Failed", "Ok", "If", "SplitDeclsConfig", "PathBuf"],
+uses: ["PathBuf", "Ok", "Result", "CARGO_MANIFEST_DIR", "LitStr", "TokenStream", "Some", "SplitDeclsConfig", "If", "Failed"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! generate_main_logic_token_stream {

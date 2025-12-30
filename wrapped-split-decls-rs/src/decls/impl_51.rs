@@ -4,17 +4,17 @@ name: "impl_51",
 decl_type: "function",
 source_file: "./src/rdf_url_blob.rs",
 source_crate: ".",
-deps: ["BlobMetadata", "RdfUrlBlob", "Output2MacroSystem"],
-uses: ["String", "RDF", "BlobMetadata", "Capabilities", "RdfUrlBlob", "Vec", "Generated", "Print", "Info", "Exported", "Size", "Create", "Generate", "Blob", "Utc", "Some", "Simple", "State", "Macros", "Read", "Content\\n\\n```turtle\\n{}\\n```\\n", "Result", "Timestamp", "URL_SAFE_NO_PAD", "URL", "Encode", "Export", "RDF/Turtle", "Unknown", "Ok", "System", "Documentation\\n\\n", "Rust", "Parse", "Invalid", "Macro", "Output2MacroSystem", "Err"],
+deps: ["BlobMetadata", "Output2MacroSystem", "RdfUrlBlob"],
+uses: ["Generated", "Documentation\\n\\n", "Macro", "URL", "Utc", "URL_SAFE_NO_PAD", "Exported", "Export", "BlobMetadata", "Some", "Output2MacroSystem", "Parse", "Unknown", "Info", "Invalid", "Err", "RdfUrlBlob", "Ok", "Encode", "Read", "Capabilities", "Generate", "Create", "Print", "Blob", "RDF/Turtle", "String", "Vec", "RDF", "Simple", "Macros", "State", "Size", "System", "Content\\n\\n```turtle\\n{}\\n```\\n", "Result", "Rust", "Timestamp"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! deps {
     () => {
         BlobMetadata!();
-        RdfUrlBlob!();
         Output2MacroSystem!();
+        RdfUrlBlob!();
     };
 }
 

@@ -5,9 +5,9 @@ decl_type: "function",
 source_file: "./src/url_matrix.rs",
 source_crate: ".",
 deps: [],
-uses: ["Compression", "Eigenvectors", "Clone", "EigenForm", "Vec", "Compressed", "Debug", "Eigenvalues"],
+uses: ["Compression", "Eigenvectors", "Clone", "EigenForm", "Compressed", "Eigenvalues", "Debug", "Vec"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! EigenForm {

@@ -5,9 +5,9 @@ decl_type: "function",
 source_file: "./src/workspace_manager.rs",
 source_crate: ".",
 deps: [],
-uses: ["Ok", "Result", "Default", "Cargo.toml", "Author", "This", "Workspace"],
+uses: ["Default", "Workspace", "Author", "Ok", "This", "Result", "Cargo.toml"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! test_apply_workspace_package_defaults_to_root {

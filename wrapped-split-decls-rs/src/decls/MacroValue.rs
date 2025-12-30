@@ -5,9 +5,9 @@ decl_type: "function",
 source_file: "./src/output2_macro_system.rs",
 source_crate: ".",
 deps: [],
-uses: ["Generated", "Macro", "Debug", "String", "Enum", "Function", "Struct", "Clone", "MacroValue"],
+uses: ["MacroValue", "Function", "Enum", "Clone", "Macro", "String", "Struct", "Debug", "Generated"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! MacroValue {

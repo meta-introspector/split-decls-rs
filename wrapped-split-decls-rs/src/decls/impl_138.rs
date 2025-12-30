@@ -4,20 +4,20 @@ name: "impl_138",
 decl_type: "function",
 source_file: "./src/syn2macro.rs",
 source_crate: ".",
-deps: ["SecureExecution", "BottMacroGenerator", "SecurityContext", "Syn2MacroConverter", "AstOperation", "UniversalAst"],
-uses: ["Fn", "Err", "Some", "ItemFn", "SecureExecution", "TransformItem", "ItemStruct", "Trait", "Permission", "BottMacroGenerator", "SecurityContext", "Item", "Bott", "Result", "Syn2MacroConverter", "Impl", "Universal", "AstOperation", "None", "Fields", "Convert", "Unsupported", "UniversalImpl", "UniversalAst", "ParseItem", "ItemEnum", "Struct", "Ok", "TokenStream", "ItemImpl", "Enum", "Variants", "ItemTrait"],
+deps: ["BottMacroGenerator", "SecurityContext", "AstOperation", "UniversalAst", "Syn2MacroConverter", "SecureExecution"],
+uses: ["UniversalImpl", "ItemImpl", "Fn", "Impl", "Fields", "Enum", "BottMacroGenerator", "SecurityContext", "TransformItem", "AstOperation", "Bott", "Struct", "Trait", "UniversalAst", "Permission", "Syn2MacroConverter", "Unsupported", "ItemTrait", "TokenStream", "ItemEnum", "Variants", "Convert", "Universal", "Some", "None", "Item", "Result", "Err", "ItemFn", "SecureExecution", "Ok", "ItemStruct", "ParseItem"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! deps {
     () => {
-        SecureExecution!();
         BottMacroGenerator!();
         SecurityContext!();
-        Syn2MacroConverter!();
         AstOperation!();
         UniversalAst!();
+        Syn2MacroConverter!();
+        SecureExecution!();
     };
 }
 

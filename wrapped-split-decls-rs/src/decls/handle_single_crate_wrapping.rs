@@ -5,9 +5,9 @@ decl_type: "function",
 source_file: "./src/wrapped_workspace_handlers/single_crate.rs",
 source_crate: ".",
 deps: ["PatchConfig"],
-uses: ["No", "Boolean", "Some", "PatchConfig", "SplitDeclsConfig", "Option", "Failed", "Table", "Result", "Path", "HashMap", "Value", "Ok", "String"],
+uses: ["String", "No", "Table", "PatchConfig", "Result", "SplitDeclsConfig", "Option", "Some", "Ok", "Boolean", "Failed", "Value", "HashMap", "Path"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! deps {

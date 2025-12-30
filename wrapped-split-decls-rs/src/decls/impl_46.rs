@@ -4,17 +4,17 @@ name: "impl_46",
 decl_type: "function",
 source_file: "./src/output2_macro_system.rs",
 source_crate: ".",
-deps: ["MacroDeclaration", "Output2MacroSystem", "LispInterpreter"],
-uses: ["HashMap", "Lisp-like", "Parse", "String", "All", "MacroDeclaration", "Generation\\n", "Output2MacroSystem", "Vec", "Functions\\n\\n", "Overlay", "Structs\\n\\n", "Macros\\n\\n", "Source", "Scan", "System", "Imported", "Path", "Calling", "Generate", "Callable", "Result", "Output2", "Code", "Invoking", "Macro", "Creatable", "Runtime", "Overlaid", "Ok", "None", "Import", "LispInterpreter", "Creating", "Invokable", "Some"],
+deps: ["LispInterpreter", "MacroDeclaration", "Output2MacroSystem"],
+uses: ["Creatable", "Some", "System", "Scan", "Import", "Invokable", "Callable", "Ok", "Overlay", "Creating", "Source", "Overlaid", "LispInterpreter", "Macro", "Lisp-like", "Macros\\n\\n", "All", "Parse", "Result", "Path", "Calling", "String", "Structs\\n\\n", "HashMap", "Vec", "Invoking", "Generate", "MacroDeclaration", "Imported", "Runtime", "Output2MacroSystem", "Generation\\n", "Functions\\n\\n", "Code", "None", "Output2"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! deps {
     () => {
+        LispInterpreter!();
         MacroDeclaration!();
         Output2MacroSystem!();
-        LispInterpreter!();
     };
 }
 

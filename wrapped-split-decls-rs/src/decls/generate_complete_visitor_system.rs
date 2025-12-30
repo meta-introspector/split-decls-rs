@@ -4,16 +4,16 @@ name: "generate_complete_visitor_system",
 decl_type: "function",
 source_file: "./src/meta_pattern_visitor.rs",
 source_crate: ".",
-deps: ["AstStatistics", "SynLangPatterns", "RdfStateMachine"],
-uses: ["Analyzed", "AstStatistics", "SynLangPatterns", "COMPLETE", "File", "ALL", "AST", "ANALYSIS", "Visit", "RdfStateMachine", "PATTERN"],
+deps: ["SynLangPatterns", "AstStatistics", "RdfStateMachine"],
+uses: ["ALL", "File", "SynLangPatterns", "PATTERN", "AstStatistics", "ANALYSIS", "RdfStateMachine", "COMPLETE", "Analyzed", "AST", "Visit"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! deps {
     () => {
-        AstStatistics!();
         SynLangPatterns!();
+        AstStatistics!();
         RdfStateMachine!();
     };
 }

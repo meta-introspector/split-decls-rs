@@ -5,9 +5,9 @@ decl_type: "function",
 source_file: "./src/buildrs_generator/mod.rs",
 source_crate: ".",
 deps: [],
-uses: ["HashMap", "Item", "Path", "PatchSpec", "StringReplacement", "LitStr", "Generates", "Span", "SplitDeclsConfig", "Context", "TokenStream", "PathBuf", "VisitMut", "Result", "Visit", "Ok"],
+uses: ["Visit", "HashMap", "Result", "Context", "PathBuf", "SplitDeclsConfig", "LitStr", "Ok", "VisitMut", "Span", "Item", "StringReplacement", "Generates", "TokenStream", "PatchSpec", "Path"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! generate_build_rs_token_stream {

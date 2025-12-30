@@ -4,16 +4,16 @@ name: "RdfStateMachine",
 decl_type: "function",
 source_file: "./src/macro_interpreter.rs",
 source_crate: ".",
-deps: ["RdfTriple", "ExecutionState"],
-uses: ["Vec", "RdfTriple", "ExecutionState", "Debug", "Default", "RdfStateMachine"],
+deps: ["ExecutionState", "RdfTriple"],
+uses: ["ExecutionState", "Default", "RdfTriple", "Vec", "RdfStateMachine", "Debug"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! deps {
     () => {
-        RdfTriple!();
         ExecutionState!();
+        RdfTriple!();
     };
 }
 

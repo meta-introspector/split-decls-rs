@@ -2,5 +2,6 @@ use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
 mkdeclfn! {
+println!("🔧 Calling function: deref");
 # [test] fn deref () { use std :: string :: String ; fn is_str (_ : & str) { } let value : Either < String , & str > = Left (String :: from ("test")) ; is_str (& value) ; }
 }

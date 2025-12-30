@@ -5,9 +5,9 @@ decl_type: "function",
 source_file: "./src/all_file_scanner.rs",
 source_crate: ".",
 deps: [],
-uses: ["Fn", "Result}};\\nuse", "Path", "PathBuf}};\\nuse", "Generate", "Original", "Function", "Generated", "Item", "String"],
+uses: ["PathBuf}};\\nuse", "Generated", "Generate", "Function", "Item", "Fn", "Original", "String", "Result}};\\nuse", "Path"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! generate_wrapped_decl_with_origin {

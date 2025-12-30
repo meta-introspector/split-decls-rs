@@ -4,21 +4,21 @@ name: "create_default_syscall_interceptor",
 decl_type: "function",
 source_file: "./src/syscall_oracle.rs",
 source_crate: ".",
-deps: ["NetworkOracle", "ProcessOracle", "TypeSafetyLevel", "SyscallInterceptor", "SyscallWrapper", "OracleType", "FileSystemOracle"],
-uses: ["NetworkOracle", "ProcessOracle", "MemoryOracle", "Network", "TypeSafetyLevel", "FileSystem", "Strict", "Process", "Memory", "TimeOracle", "SyscallInterceptor", "SyscallWrapper", "HashMap", "Time", "OracleType", "Some", "FileSystemOracle"],
+deps: ["SyscallWrapper", "ProcessOracle", "FileSystemOracle", "NetworkOracle", "SyscallInterceptor", "TypeSafetyLevel", "OracleType"],
+uses: ["TimeOracle", "Time", "MemoryOracle", "HashMap", "SyscallWrapper", "Network", "Process", "ProcessOracle", "Memory", "Strict", "FileSystemOracle", "NetworkOracle", "SyscallInterceptor", "FileSystem", "TypeSafetyLevel", "Some", "OracleType"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! deps {
     () => {
-        NetworkOracle!();
-        ProcessOracle!();
-        TypeSafetyLevel!();
-        SyscallInterceptor!();
         SyscallWrapper!();
-        OracleType!();
+        ProcessOracle!();
         FileSystemOracle!();
+        NetworkOracle!();
+        SyscallInterceptor!();
+        TypeSafetyLevel!();
+        OracleType!();
     };
 }
 

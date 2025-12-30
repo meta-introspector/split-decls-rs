@@ -4,18 +4,18 @@ name: "create_example_probes",
 decl_type: "function",
 source_file: "./src/ast_reflector.rs",
 source_crate: ".",
-deps: ["ProbeFilter", "ProbeAction", "AstNodeType", "AstProbe"],
-uses: ["ProbeFilter", "AddAttribute", "Function", "Collect", "ProbeAction", "Struct", "Enhance", "High", "AstNodeType", "WrapFunction", "Vec", "AstProbe", "None", "Some"],
+deps: ["AstProbe", "ProbeFilter", "ProbeAction", "AstNodeType"],
+uses: ["AstProbe", "Struct", "Collect", "Enhance", "Some", "ProbeFilter", "Function", "None", "ProbeAction", "AddAttribute", "Vec", "AstNodeType", "High", "WrapFunction"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! deps {
     () => {
+        AstProbe!();
         ProbeFilter!();
         ProbeAction!();
         AstNodeType!();
-        AstProbe!();
     };
 }
 

@@ -5,9 +5,9 @@ decl_type: "function",
 source_file: "./src/auto_workspace_generator.rs",
 source_crate: ".",
 deps: [],
-uses: ["Cargo.toml", "Result", "PathBuf", "Some", "Ok", "Vec", "Path"],
+uses: ["Result", "Vec", "Some", "Ok", "Path", "Cargo.toml", "PathBuf"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! find_cargo_tomls {

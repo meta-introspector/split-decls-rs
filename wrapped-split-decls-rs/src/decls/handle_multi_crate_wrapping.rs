@@ -4,16 +4,16 @@ name: "handle_multi_crate_wrapping",
 decl_type: "function",
 source_file: "./src/wrapped_workspace_handlers/multi_crate.rs",
 source_crate: ".",
-deps: ["ModuleNotFoundReport", "PatchConfig", "Output"],
-uses: ["Ok", "Cargo.toml", "Some", "Could", "Value", "None", "ModuleNotFoundReport", "Crate", "FROM", "CRATES", "PROCESSING", "Result", "String", "PatchConfig", "Using", "ERROR", "Override", "Err", "PathBuf", "Found", "STARTING", "Checking", "DEBUG", "Table", "Submodule", "Direct", "ROOT", "Vec", "CONFIG", "DIRECTORY", "SCAN", "Path", "CRATE", "No", "Calling", "Output", "SplitDeclsConfig", "Option", "Generated", "SUCCESS"],
+deps: ["PatchConfig", "ModuleNotFoundReport", "Output"],
+uses: ["Found", "ROOT", "PatchConfig", "ModuleNotFoundReport", "SplitDeclsConfig", "Result", "Some", "No", "FROM", "Direct", "DEBUG", "PROCESSING", "STARTING", "PathBuf", "Table", "Using", "CONFIG", "Generated", "Value", "Cargo.toml", "Override", "None", "String", "Crate", "Calling", "Option", "Checking", "Path", "ERROR", "CRATES", "Output", "Submodule", "Could", "DIRECTORY", "SUCCESS", "Err", "Vec", "SCAN", "Ok", "CRATE"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! deps {
     () => {
-        ModuleNotFoundReport!();
         PatchConfig!();
+        ModuleNotFoundReport!();
         Output!();
     };
 }

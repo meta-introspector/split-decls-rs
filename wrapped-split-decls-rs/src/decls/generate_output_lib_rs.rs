@@ -5,9 +5,9 @@ decl_type: "function",
 source_file: "./src/eager_splitter.rs",
 source_crate: ".",
 deps: ["CratePaths"],
-uses: ["Result", "Failed", "Re-exports", "Err", "Ok", "Formatting", "CratePaths", "Generated", "Re-export", "The", "Generate", "Error"],
+uses: ["CratePaths", "Failed", "Result", "Generate", "Err", "Formatting", "The", "Re-export", "Generated", "Ok", "Re-exports", "Error"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! deps {

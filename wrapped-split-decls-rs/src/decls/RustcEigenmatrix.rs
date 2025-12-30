@@ -4,17 +4,17 @@ name: "RustcEigenmatrix",
 decl_type: "function",
 source_file: "./src/rustc_eigenmatrix.rs",
 source_crate: ".",
-deps: ["UrlMatrix", "RustcAnalysis", "CompilerEigenform"],
-uses: ["Feature", "UrlMatrix", "RustcEigenmatrix", "RustcAnalysis", "Mathematical", "CompilerEigenform", "Option", "Eigenform", "Rustc", "Eigenmatrix", "Debug"],
+deps: ["CompilerEigenform", "UrlMatrix", "RustcAnalysis"],
+uses: ["Feature", "Eigenform", "Mathematical", "Option", "CompilerEigenform", "RustcEigenmatrix", "UrlMatrix", "Rustc", "Debug", "Eigenmatrix", "RustcAnalysis"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! deps {
     () => {
+        CompilerEigenform!();
         UrlMatrix!();
         RustcAnalysis!();
-        CompilerEigenform!();
     };
 }
 

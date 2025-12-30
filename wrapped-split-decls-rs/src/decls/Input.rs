@@ -5,9 +5,9 @@ decl_type: "function",
 source_file: "./src/goal_parser.rs",
 source_crate: ".",
 deps: [],
-uses: ["String", "Deserialize", "Serialize", "Input", "Option", "Debug", "Clone"],
+uses: ["Option", "Debug", "Serialize", "Input", "Deserialize", "String", "Clone"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! Input {

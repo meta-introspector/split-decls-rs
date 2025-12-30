@@ -5,9 +5,9 @@ decl_type: "function",
 source_file: "./src/crate_finder.rs",
 source_crate: ".",
 deps: ["CrateInfo"],
-uses: ["Failed", "Result", "WalkDir", "CrateInfo", "Path", "Vec", "Ok", "Cargo.toml"],
+uses: ["Path", "Vec", "CrateInfo", "Ok", "Cargo.toml", "Result", "Failed", "WalkDir"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! deps {

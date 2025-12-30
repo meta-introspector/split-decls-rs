@@ -5,9 +5,9 @@ decl_type: "function",
 source_file: "./src/macro_analyzer_parts/analysis_data.rs",
 source_crate: ".",
 deps: ["Term"],
-uses: ["Vec", "Default", "Term", "TermAnalysis", "HashMap", "Debug", "String"],
+uses: ["String", "TermAnalysis", "Vec", "HashMap", "Debug", "Default", "Term"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! deps {

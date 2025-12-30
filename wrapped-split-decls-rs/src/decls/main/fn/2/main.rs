@@ -3,5 +3,5 @@ use std::collections::HashMap;
 
 mkdeclfn! {
 println!("🔧 Calling function: main");
-fn main () -> Result < () , Box < dyn std :: error :: Error > > { bootstrap3 :: test_bootstrap3 () ? ; Ok (()) }
+fn main () { println ! ("Testing includemod! macro") ; let result = test_mod :: test_function () ; println ! ("Result: {:?}" , result) ; }
 }

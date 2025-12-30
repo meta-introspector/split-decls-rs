@@ -5,9 +5,9 @@ decl_type: "function",
 source_file: "./src/monster_compressor.rs",
 source_crate: ".",
 deps: [],
-uses: ["Clone", "Vec", "Debug", "MonsterSignature", "String"],
+uses: ["String", "Vec", "MonsterSignature", "Clone", "Debug"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! MonsterSignature {

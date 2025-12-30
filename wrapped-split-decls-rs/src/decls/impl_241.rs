@@ -4,16 +4,16 @@ name: "impl_241",
 decl_type: "function",
 source_file: "./src/syscall_traits.rs",
 source_crate: ".",
-deps: ["DefaultProcessOracle", "ProcessOracle"],
-uses: ["PROC_AUDIT", "Exec", "Ok", "DefaultProcessOracle", "Result", "ProcessOracle", "String"],
+deps: ["ProcessOracle", "DefaultProcessOracle"],
+uses: ["Exec", "Ok", "Result", "String", "ProcessOracle", "DefaultProcessOracle", "PROC_AUDIT"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! deps {
     () => {
-        DefaultProcessOracle!();
         ProcessOracle!();
+        DefaultProcessOracle!();
     };
 }
 

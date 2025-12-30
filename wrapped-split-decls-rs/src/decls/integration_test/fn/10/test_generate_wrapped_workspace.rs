@@ -2,6 +2,7 @@ use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
 mkdeclfn! {
+println!("🔧 Calling function: test_generate_wrapped_workspace");
 # [test] fn test_generate_wrapped_workspace () -> Result < () > { let temp_dir = tempdir () . context ("Failed to create temporary directory") ? ; let original_project_root = temp_dir . path () . join ("original_project") ; fs :: create_dir (& original_project_root) ? ; let original_crate_a_path = original_project_root . join ("crate_a") ; fs :: create_dir_all (original_crate_a_path . join ("src")) ? ; fs :: write (original_crate_a_path . join ("Cargo.toml") , r#"
         [package]
         name = "crate-a"

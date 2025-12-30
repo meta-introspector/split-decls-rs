@@ -4,16 +4,16 @@ name: "impl_127",
 decl_type: "function",
 source_file: "./src/ast_reflector.rs",
 source_crate: ".",
-deps: ["AstNodeType", "AstReflector"],
-uses: ["ItemStruct", "Struct", "ItemImpl", "ItemTrait", "AstNodeType", "ItemEnum", "AstReflector", "Function", "Trait", "AST", "Impl", "Enum", "VisitMut", "ItemFn", "Probe"],
+deps: ["AstReflector", "AstNodeType"],
+uses: ["AstReflector", "Probe", "VisitMut", "ItemStruct", "Impl", "ItemImpl", "Trait", "ItemFn", "Enum", "AST", "AstNodeType", "ItemEnum", "Function", "ItemTrait", "Struct"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! deps {
     () => {
-        AstNodeType!();
         AstReflector!();
+        AstNodeType!();
     };
 }
 

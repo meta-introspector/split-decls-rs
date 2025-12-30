@@ -5,9 +5,9 @@ decl_type: "function",
 source_file: "./src/bott_periodicity.rs",
 source_crate: ".",
 deps: ["BottLevel"],
-uses: ["Three", "Six", "Zero", "BottLevel", "Five", "Two", "One", "Four", "Seven"],
+uses: ["Six", "Two", "One", "Three", "Seven", "Four", "Five", "Zero", "BottLevel"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! deps {

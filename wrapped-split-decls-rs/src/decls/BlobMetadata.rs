@@ -5,9 +5,9 @@ decl_type: "function",
 source_file: "./src/rdf_url_blob.rs",
 source_crate: ".",
 deps: [],
-uses: ["Debug", "String", "BlobMetadata", "Vec", "Clone"],
+uses: ["Clone", "Debug", "Vec", "BlobMetadata", "String"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! BlobMetadata {

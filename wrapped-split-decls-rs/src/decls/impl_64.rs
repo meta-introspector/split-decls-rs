@@ -4,22 +4,22 @@ name: "impl_64",
 decl_type: "function",
 source_file: "./src/rustc_eigenmatrix.rs",
 source_crate: ".",
-deps: ["CompilerPhase", "PrincipalComponent", "ComplexityMetrics", "CrateFeatures", "RustcEigenmatrix", "RustcAnalysis", "CompilerEigenform", "UrlMatrix"],
-uses: ["CompilerPhase", "Codegen", "HashMap", "Analysis", "Path", "Err", "Complexity", "Eigenform", "Some", "Core", "Cognitive", "Total", "Rustc", "Vec", "Engine", "Halstead", "Compression", "Result", "Generation", "PrincipalComponent", "Parsing", "Generate", "Maintainability", "Standard", "Components", "Ok", "Create", "Compute", "Perform", "ComplexityMetrics", "Analyzing", "CrateFeatures", "RustcEigenmatrix", "Crates", "None", "RustcAnalysis", "Language", "Type", "CompilerEigenform", "LOC", "String", "Analyze", "URL_SAFE_NO_PAD", "Print", "Cyclomatic", "Library", "Code", "Fidelity", "Computing", "URL", "Eigenmatrix", "UrlMatrix", "Component", "Compiler", "System", "Phases"],
+deps: ["CompilerEigenform", "UrlMatrix", "RustcEigenmatrix", "ComplexityMetrics", "CrateFeatures", "PrincipalComponent", "CompilerPhase", "RustcAnalysis"],
+uses: ["Codegen", "Generate", "String", "Rustc", "Type", "CompilerEigenform", "UrlMatrix", "Code", "HashMap", "Maintainability", "Compiler", "Err", "RustcEigenmatrix", "Eigenmatrix", "ComplexityMetrics", "Parsing", "Generation", "Cyclomatic", "Analyzing", "Compute", "Core", "Analyze", "Crates", "Total", "Perform", "Analysis", "Some", "Standard", "LOC", "CrateFeatures", "Result", "None", "PrincipalComponent", "URL", "CompilerPhase", "Create", "Print", "RustcAnalysis", "Complexity", "Cognitive", "Eigenform", "Compression", "Components", "Path", "Library", "Computing", "Engine", "Fidelity", "Phases", "Vec", "Language", "System", "Component", "URL_SAFE_NO_PAD", "Halstead", "Ok"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! deps {
     () => {
-        CompilerPhase!();
-        PrincipalComponent!();
-        ComplexityMetrics!();
-        CrateFeatures!();
-        RustcEigenmatrix!();
-        RustcAnalysis!();
         CompilerEigenform!();
         UrlMatrix!();
+        RustcEigenmatrix!();
+        ComplexityMetrics!();
+        CrateFeatures!();
+        PrincipalComponent!();
+        CompilerPhase!();
+        RustcAnalysis!();
     };
 }
 

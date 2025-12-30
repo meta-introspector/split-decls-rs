@@ -5,9 +5,9 @@ decl_type: "function",
 source_file: "./src/special_print.rs",
 source_crate: ".",
 deps: [],
-uses: ["Do", "Your", "Some", "Utc", "Write", "Generated"],
+uses: ["Write", "Do", "Your", "Utc", "Generated", "Some"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! add_generated_header {

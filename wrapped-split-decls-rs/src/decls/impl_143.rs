@@ -4,18 +4,18 @@ name: "impl_143",
 decl_type: "function",
 source_file: "./src/syn2macro.rs",
 source_crate: ".",
-deps: ["SecurityError", "SecureExecution", "AstOperation", "StrictSecurity"],
-uses: ["Result", "SecurityError", "SecureExecution", "AstOperation", "FnOnce", "StrictSecurity", "Ok"],
+deps: ["StrictSecurity", "AstOperation", "SecurityError", "SecureExecution"],
+uses: ["StrictSecurity", "AstOperation", "Result", "SecurityError", "FnOnce", "SecureExecution", "Ok"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! deps {
     () => {
+        StrictSecurity!();
+        AstOperation!();
         SecurityError!();
         SecureExecution!();
-        AstOperation!();
-        StrictSecurity!();
     };
 }
 

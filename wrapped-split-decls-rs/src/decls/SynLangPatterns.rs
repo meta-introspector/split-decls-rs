@@ -5,9 +5,9 @@ decl_type: "function",
 source_file: "./src/meta_pattern_visitor.rs",
 source_crate: ".",
 deps: [],
-uses: ["ItemUse", "ExprMatch", "Signature", "Copy", "ItemStatic", "ItemImpl", "PartialEq", "ExprBlock", "ItemFn", "TypeTuple", "Generics", "ExprCall", "Pat", "ExprBinary", "Debug", "Eq", "ItemConst", "PatIdent", "ItemTrait", "ExprUnary", "PatTuple", "Block", "Item", "Clone", "Ident", "Path", "ItemMod", "Expr", "SynLangPatterns", "File", "ExprIf", "Hash", "ItemEnum", "ExprMethodCall", "ExprPath", "Type", "TypePath", "PatStruct", "ExprLit", "ItemStruct", "TypeReference"],
+uses: ["ItemStruct", "PartialEq", "ItemUse", "Hash", "TypePath", "ExprIf", "Signature", "ExprBinary", "ItemStatic", "Type", "Generics", "Expr", "Clone", "Ident", "ExprMethodCall", "Pat", "Path", "ItemConst", "ItemMod", "Item", "Copy", "ExprUnary", "File", "Block", "ItemFn", "ExprCall", "PatTuple", "Debug", "TypeReference", "PatStruct", "ItemEnum", "ExprMatch", "SynLangPatterns", "ExprBlock", "Eq", "ItemTrait", "ExprLit", "ExprPath", "TypeTuple", "ItemImpl", "PatIdent"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! SynLangPatterns {

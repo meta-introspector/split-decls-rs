@@ -5,9 +5,9 @@ decl_type: "function",
 source_file: "./src/macro_analyzer_parts/file_analyzer.rs",
 source_crate: ".",
 deps: ["Term", "TermCollector"],
-uses: ["Item", "Vec", "Rust", "Result", "Term", "Fn", "HashMap", "String", "Public", "TermCollector", "Ok", "Path", "Visibility", "Failed"],
+uses: ["Visibility", "Public", "Term", "HashMap", "Fn", "Result", "TermCollector", "String", "Vec", "Failed", "Rust", "Ok", "Path", "Item"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! deps {

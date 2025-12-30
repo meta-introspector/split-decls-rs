@@ -2,5 +2,6 @@ use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
 mkdeclfn! {
+println!("🔧 Calling function: cleanup_semantic_score");
 fn cleanup_semantic_score (one : Range , two : Range) -> usize { if one . is_empty () || two . is_empty () { return 6 ; } let char1 = one . chars () . next_back () . unwrap () ; let char2 = two . chars () . next () . unwrap () ; let non_alphanumeric1 = ! char1 . is_ascii_alphanumeric () ; let non_alphanumeric2 = ! char2 . is_ascii_alphanumeric () ; let whitespace1 = non_alphanumeric1 && char1 . is_ascii_whitespace () ; let whitespace2 = non_alphanumeric2 && char2 . is_ascii_whitespace () ; let line_break1 = whitespace1 && char1 . is_control () ; let line_break2 = whitespace2 && char2 . is_control () ; let blank_line1 = line_break1 && (one . ends_with (['\n' , '\n']) || one . ends_with (['\n' , '\r' , '\n'])) ; let blank_line2 = line_break2 && (two . starts_with (['\n' , '\n']) || two . starts_with (['\r' , '\n' , '\r' , '\n'])) ; if blank_line1 || blank_line2 { 5 } else if line_break1 || line_break2 { 4 } else if non_alphanumeric1 && ! whitespace1 && whitespace2 { 3 } else if whitespace1 || whitespace2 { 2 } else if non_alphanumeric1 || non_alphanumeric2 { 1 } else { 0 } }
 }

@@ -4,16 +4,16 @@ name: "CargoLockPreservation",
 decl_type: "function",
 source_file: "./src/cargo_guided_analysis.rs",
 source_crate: ".",
-deps: ["PackageField", "PreservationTrace"],
-uses: ["Vec", "HashMap", "PackageField", "PathBuf", "String", "Deserialize", "Serialize", "PreservationTrace", "CargoLockPreservation", "Clone", "Debug"],
+deps: ["PreservationTrace", "PackageField"],
+uses: ["Serialize", "PathBuf", "CargoLockPreservation", "PreservationTrace", "Vec", "HashMap", "Deserialize", "Debug", "String", "PackageField", "Clone"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! deps {
     () => {
-        PackageField!();
         PreservationTrace!();
+        PackageField!();
     };
 }
 

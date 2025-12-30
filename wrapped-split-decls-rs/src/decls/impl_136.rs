@@ -5,9 +5,9 @@ decl_type: "function",
 source_file: "./src/syn2macro.rs",
 source_crate: ".",
 deps: ["AstOperation", "SecurityContext"],
-uses: ["AstOperation", "Strict", "SecurityContext", "Default"],
+uses: ["AstOperation", "Default", "SecurityContext", "Strict"],
 fields: [],
-generated_at: "2025-12-29 16:02:27 UTC"
+generated_at: "2025-12-29 17:10:19 UTC"
 });
 
 macro_rules! deps {
