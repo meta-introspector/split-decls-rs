@@ -82,6 +82,17 @@ fn generate_complete_includes(crate_files: &HashMap<String, Vec<String>>) -> Res
     writeln!(include_file, "// All rustc crates and submodules in dependency order")?;
     writeln!(include_file)?;
     
+    // Create rustc_complete module structure with common submodules
+    writeln!(include_file, "pub mod rustc_complete {{")?;
+    writeln!(include_file, "    pub use crate::*;")?;
+    writeln!(include_file, "    pub mod ty {{ pub use crate::*; }}")?;
+    writeln!(include_file, "    pub mod def_id {{ pub use crate::*; }}")?;
+    writeln!(include_file, "    pub mod mir {{ pub use crate::*; }}")?;
+    writeln!(include_file, "    pub mod traits {{ pub use crate::*; }}")?;
+    writeln!(include_file, "    pub mod query {{ pub use crate::*; }}")?;
+    writeln!(include_file, "}}")?;
+    writeln!(include_file)?;
+    
     // Add collected extern crate declarations at the top
     if let Ok(extern_crates) = fs::read_to_string("src/extern_crates.txt") {
         writeln!(include_file, "// Extern crate declarations moved to crate root")?;
