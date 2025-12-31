@@ -131,6 +131,11 @@ fn generate_complete_includes(crate_files: &HashMap<String, Vec<String>>) -> Res
             
             // Include all files in this crate with preprocessing
             for file in files {
+                // Skip entire proc-macro modules since we're building a lib crate
+                if file.contains("rustc_macros") {
+                    continue;
+                }
+                
                 let relative_path = file.replace("../rust/compiler/", "../../rust/compiler/");
                 
                 // Read, patch, and write preprocessed file
