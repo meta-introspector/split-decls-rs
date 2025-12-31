@@ -47,6 +47,82 @@ impl SymbolVisitor {
     pub fn set_file(&mut self, file_path: String) {
         self.current_file = file_path;
     }
+    
+    pub fn visit_file(&mut self, file: &syn::File) {
+        // First pass: collect all use statements at file level
+        let mut use_mappings = HashMap::new();
+        for item in &file.items {
+            if let syn::Item::Use(use_item) = item {
+                self.extract_use_mappings_to_map(&use_item.tree, Vec::new(), &mut use_mappings);
+            }
+        }
+        
+        // Second pass: visit all items with use mappings available
+        for item in &file.items {
+            match item {
+                syn::Item::Fn(func) => {
+                    let body_analysis = analyze_function_body_ast(&func.block);
+                    let mut deps = extract_function_dependencies_ast(func);
+                    
+                    // Apply use mappings to resolve short names
+                    deps = deps.into_iter().map(|dep| {
+                        // Handle method calls like "Instant::now" -> extract "Instant"
+                        let base_type = if dep.contains("::") {
+                            dep.split("::").next().unwrap_or(&dep)
+                        } else {
+                            &dep
+                        };
+                        
+                        if let Some(full_path) = use_mappings.get(base_type) {
+                            // Reconstruct with full path: "std::time::Instant::now"
+                            if dep.contains("::") {
+                                let method = dep.split("::").skip(1).collect::<Vec<_>>().join("::");
+                                format!("{}::{}", full_path, method)
+                            } else {
+                                full_path.clone()
+                            }
+                        } else {
+                            dep
+                        }
+                    }).collect();
+                    
+                    let symbol = Symbol {
+                        name: func.sig.ident.to_string(),
+                        symbol_type: body_analysis,
+                        source_file: self.current_file.clone(),
+                        crate_name: self.current_crate.clone(),
+                        dependencies: deps,
+                    };
+                    self.symbols.push(symbol);
+                }
+                _ => {
+                    syn::visit::visit_item(self, item);
+                }
+            }
+        }
+    }
+    
+    fn extract_use_mappings_to_map(&self, tree: &syn::UseTree, prefix: Vec<String>, mappings: &mut HashMap<String, String>) {
+        match tree {
+            syn::UseTree::Path(path) => {
+                let mut new_prefix = prefix;
+                new_prefix.push(path.ident.to_string());
+                self.extract_use_mappings_to_map(&path.tree, new_prefix, mappings);
+            }
+            syn::UseTree::Name(name) => {
+                let mut full_path = prefix;
+                full_path.push(name.ident.to_string());
+                let short_name = name.ident.to_string();
+                mappings.insert(short_name, full_path.join("::"));
+            }
+            syn::UseTree::Group(group) => {
+                for item in &group.items {
+                    self.extract_use_mappings_to_map(item, prefix.clone(), mappings);
+                }
+            }
+            _ => {}
+        }
+    }
 }
 
 impl<'ast> Visit<'ast> for SymbolVisitor {

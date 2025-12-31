@@ -1,0 +1,3760 @@
+🔬 RUSTC DEPENDENCY LATTICE - CRYSTAL STRUCTURE
+==============================================
+Lattice Depth: 42 levels
+Structure: Tree → DAG → Lattice → Crystal
+
+LEVEL 0 - 🌱 LEAF LEVEL (Standalone - No Dependencies) (2 functions)
+├─ Lattice Position: 0/41
+├─ Crystal Layer: 0
+└─ Functions:
+   ├─ rustc
+   └─ rustc_driver_impl
+
+LEVEL 1 - 🔧 CORE LEVEL (Basic Operations) (15 functions)
+├─ Lattice Position: 1/41
+├─ Crystal Layer: 1
+└─ Functions:
+   ├─ std
+   ├─ rustc_interface
+   ├─ alloctests
+   ├─ std
+   ├─ alloc
+   ├─ rustc_data_structures
+   ├─ compiler-builtins
+   ├─ std
+   ├─ rustc_codegen_ssa
+   ├─ alloctests
+   ├─ rustc_driver_impl
+   ├─ rustc_driver_impl
+   ├─ rustc_driver_impl
+   ├─ rustc_driver_impl
+   └─ rustc_data_structures
+
+LEVEL 2 - 🏗️ BUILD LEVEL (Construction) (42 functions)
+├─ Lattice Position: 2/41
+├─ Crystal Layer: 2
+└─ Functions:
+   ├─ rustc_attr_parsing
+   ├─ rustc_type_ir
+   ├─ proc_macro
+   ├─ rustc_data_structures
+   ├─ rustc_codegen_cranelift
+   ├─ core
+   ├─ rustc_middle
+   ├─ std
+   ├─ std
+   ├─ core
+   ├─ rustc_data_structures
+   ├─ coretests
+   ├─ core
+   ├─ rustc_hir
+   ├─ rustc_codegen_gcc
+   ├─ std
+   ├─ std
+   ├─ std
+   ├─ std
+   ├─ std
+   ├─ rustc_codegen_ssa
+   ├─ rustc_incremental
+   ├─ std
+   ├─ rustc_ast
+   ├─ std
+   ├─ rustc_codegen_ssa
+   ├─ std
+   ├─ rustc_errors
+   ├─ rustc_middle
+   ├─ rustc_incremental
+   ├─ rustc_session
+   ├─ std
+   ├─ rustc_driver_impl
+   ├─ rustc_const_eval
+   ├─ std
+   ├─ std
+   ├─ rustc_session
+   ├─ std
+   ├─ rustc_session
+   ├─ rustc_data_structures
+   ├─ rustc_lint
+   └─ core
+
+LEVEL 3 - 🎯 LOGIC LEVEL (Business Logic) (56 functions)
+├─ Lattice Position: 3/41
+├─ Crystal Layer: 3
+└─ Functions:
+   ├─ std
+   ├─ core
+   ├─ rustc_codegen_gcc
+   ├─ core
+   ├─ core
+   ├─ std
+   ├─ core
+   ├─ alloc
+   ├─ core
+   ├─ std
+   ├─ std
+   ├─ std
+   ├─ std
+   ├─ std
+   ├─ core
+   ├─ rustc_trait_selection
+   ├─ rustc_middle
+   ├─ std
+   ├─ std
+   ├─ std
+   ├─ std
+   ├─ rustc_attr_parsing
+   ├─ rustc_hir_analysis
+   ├─ std
+   ├─ std
+   ├─ std
+   ├─ core
+   ├─ rustc_passes
+   ├─ rustc_ast
+   ├─ rustc_span
+   ├─ rustc_passes
+   ├─ rustc_codegen_cranelift
+   ├─ rustc_ast_pretty
+   ├─ rustc_ast
+   ├─ rustc_builtin_macros
+   ├─ rustc_hir
+   ├─ rustc_public
+   ├─ core
+   ├─ std
+   ├─ rustc_trait_selection
+   ├─ std
+   ├─ std
+   ├─ core
+   ├─ std
+   ├─ std
+   ├─ std
+   ├─ stdarch
+   ├─ core
+   ├─ rustc_mir_transform
+   ├─ rustc_codegen_gcc
+   ├─ rustc_errors
+   ├─ std
+   ├─ rustc_hir_typeck
+   ├─ rustc_lint
+   ├─ rustc_lint
+   └─ core
+
+LEVEL 4 - 🚀 MAIN LEVEL (Entry Points) (28 functions)
+├─ Lattice Position: 4/41
+├─ Crystal Layer: 4
+└─ Functions:
+   ├─ core
+   ├─ core
+   ├─ rustc_middle
+   ├─ std
+   ├─ std
+   ├─ std
+   ├─ std
+   ├─ std
+   ├─ std
+   ├─ alloc
+   ├─ rustc_monomorphize
+   ├─ rustc_span
+   ├─ rustc_mir_transform
+   ├─ std
+   ├─ panic_unwind
+   ├─ core
+   ├─ rustc_borrowck
+   ├─ std
+   ├─ std
+   ├─ std
+   ├─ core
+   ├─ core
+   ├─ portable-simd
+   ├─ stdarch
+   ├─ stdarch
+   ├─ std
+   ├─ std
+   └─ rustc_errors
+
+LEVEL 5 - 📊 COMPOSITE LEVEL (15 functions)
+├─ Lattice Position: 5/41
+├─ Crystal Layer: 5
+└─ Functions:
+   ├─ compiler-builtins
+   ├─ compiler-builtins
+   ├─ compiler-builtins
+   ├─ compiler-builtins
+   ├─ core
+   ├─ std
+   ├─ alloc
+   ├─ core
+   ├─ stdarch
+   ├─ rustc_errors
+   ├─ rustc_errors
+   ├─ rustc_span
+   ├─ rustc_errors
+   ├─ rustc_errors
+   └─ rustc_errors
+
+LEVEL 6 - 📊 COMPOSITE LEVEL (7 functions)
+├─ Lattice Position: 6/41
+├─ Crystal Layer: 6
+└─ Functions:
+   ├─ core
+   ├─ std
+   ├─ alloc
+   ├─ core
+   ├─ rustc_errors
+   ├─ rustc_log
+   └─ rustc_errors
+
+LEVEL 7 - 📊 COMPOSITE LEVEL (29 functions)
+├─ Lattice Position: 7/41
+├─ Crystal Layer: 7
+└─ Functions:
+   ├─ rustc_resolve
+   ├─ rustc_builtin_macros
+   ├─ rustc_hir_analysis
+   ├─ rustc_mir_build
+   ├─ rustc_resolve
+   ├─ rustc_metadata
+   ├─ std
+   ├─ rustc_mir_dataflow
+   ├─ alloc
+   ├─ rustc_error_messages
+   ├─ rustc_codegen_ssa
+   ├─ rustc_lint_defs
+   ├─ rustc_errors
+   ├─ rustc_errors
+   ├─ rustc_errors
+   ├─ rustc_errors
+   ├─ std
+   ├─ rustc_errors
+   ├─ rustc_attr_parsing
+   ├─ rustc_errors
+   ├─ rustc_errors
+   ├─ rustc_errors
+   ├─ rustc_error_messages
+   ├─ rustc_errors
+   ├─ rustc_errors
+   ├─ rustc_span
+   ├─ rustc_borrowck
+   ├─ rustc_ast_passes
+   └─ rustc_expand
+
+LEVEL 8 - 📊 COMPOSITE LEVEL (23 functions)
+├─ Lattice Position: 8/41
+├─ Crystal Layer: 8
+└─ Functions:
+   ├─ rustc_hir_analysis
+   ├─ rustc_middle
+   ├─ rustc_mir_build
+   ├─ rustc_ty_utils
+   ├─ core
+   ├─ alloc
+   ├─ alloc
+   ├─ rustc_error_messages
+   ├─ rustc_ast_pretty
+   ├─ rustc_hir_id
+   ├─ rustc_errors
+   ├─ rustc_data_structures
+   ├─ rustc_error_messages
+   ├─ rustc_error_messages
+   ├─ std
+   ├─ rustc_middle
+   ├─ rustc_passes
+   ├─ rustc_session
+   ├─ rustc_span
+   ├─ rustc_span
+   ├─ rustc_span
+   ├─ rustc_ast_passes
+   └─ rustc_expand
+
+LEVEL 9 - 📊 COMPOSITE LEVEL (27 functions)
+├─ Lattice Position: 9/41
+├─ Crystal Layer: 9
+└─ Functions:
+   ├─ alloc
+   ├─ rustc_hir_id
+   ├─ rustc_middle
+   ├─ rustc_borrowck
+   ├─ core
+   ├─ proc_macro
+   ├─ compiler-builtins
+   ├─ rustc_builtin_macros
+   ├─ test
+   ├─ alloc
+   ├─ rustc_session
+   ├─ rustc_session
+   ├─ rustc_session
+   ├─ rustc_session
+   ├─ rustc_data_structures
+   ├─ rustc_errors
+   ├─ rustc_session
+   ├─ rustc_session
+   ├─ rustc_session
+   ├─ rustc_lint
+   ├─ rustc_session
+   ├─ rustc_expand
+   ├─ rustc_expand
+   ├─ rustc_expand
+   ├─ rustc_expand
+   ├─ rustc_ast
+   └─ rustc_expand
+
+LEVEL 10 - 📊 COMPOSITE LEVEL (46 functions)
+├─ Lattice Position: 10/41
+├─ Crystal Layer: 10
+└─ Functions:
+   ├─ alloc
+   ├─ rustc_trait_selection
+   ├─ alloc
+   ├─ rustc_borrowck
+   ├─ rustc_lint
+   ├─ alloctests
+   ├─ rustc_middle
+   ├─ alloc
+   ├─ rustc_feature
+   ├─ rustc_interface
+   ├─ rustc_session
+   ├─ rustc_span
+   ├─ rustc_data_structures
+   ├─ rustc_span
+   ├─ rustc_session
+   ├─ rustc_session
+   ├─ rustc_ast
+   ├─ rustc_macros
+   ├─ rustc_codegen_ssa
+   ├─ rustc_data_structures
+   ├─ rustc_data_structures
+   ├─ std
+   ├─ rustc_errors
+   ├─ rustc_session
+   ├─ rustc_data_structures
+   ├─ rustc_session
+   ├─ rustc_hir
+   ├─ rustc_expand
+   ├─ rustc_resolve
+   ├─ rustc_expand
+   ├─ rustc_query_system
+   ├─ rustc_expand
+   ├─ rustc_expand
+   ├─ rustc_span
+   ├─ rustc_builtin_macros
+   ├─ rustc_expand
+   ├─ rustc_hir
+   ├─ rustc_codegen_gcc
+   ├─ rustc_lint_defs
+   ├─ proc_macro
+   ├─ rustc_data_structures
+   ├─ rustc_public
+   ├─ rustc_expand
+   ├─ rustc_expand
+   ├─ rustc_expand
+   └─ rustc_index
+
+LEVEL 11 - 📊 COMPOSITE LEVEL (28 functions)
+├─ Lattice Position: 11/41
+├─ Crystal Layer: 11
+└─ Functions:
+   ├─ test
+   ├─ proc_macro
+   ├─ rustc_attr_parsing
+   ├─ rustc_ty_utils
+   ├─ rustc_data_structures
+   ├─ rustc_span
+   ├─ rustc_data_structures
+   ├─ rustc_span
+   ├─ rustc_span
+   ├─ std
+   ├─ rustc_macros
+   ├─ rustc_codegen_llvm
+   ├─ rustc_query_impl
+   ├─ rustc_session
+   ├─ rustc_session
+   ├─ rustc_expand
+   ├─ rustc_expand
+   ├─ rustc_builtin_macros
+   ├─ rustc_expand
+   ├─ rustc_expand
+   ├─ rustc_hir
+   ├─ rustc_hir
+   ├─ rustc_metadata
+   ├─ rustc_codegen_gcc
+   ├─ std
+   ├─ std
+   ├─ rustc_const_eval
+   └─ rustc_middle
+
+LEVEL 12 - 📊 COMPOSITE LEVEL (22 functions)
+├─ Lattice Position: 12/41
+├─ Crystal Layer: 12
+└─ Functions:
+   ├─ test
+   ├─ test
+   ├─ std
+   ├─ rustc_span
+   ├─ rustc_span
+   ├─ rustc_data_structures
+   ├─ rustc_parse
+   ├─ rustc_macros
+   ├─ std
+   ├─ rustc_span
+   ├─ rustc_span
+   ├─ rustc_macros
+   ├─ rustc_session
+   ├─ rustc_builtin_macros
+   ├─ rustc_span
+   ├─ rustc_expand
+   ├─ rustc_expand
+   ├─ rustc_ast
+   ├─ rustc_expand
+   ├─ rustc_hir
+   ├─ rustc_hir
+   └─ std
+
+LEVEL 13 - 📊 COMPOSITE LEVEL (43 functions)
+├─ Lattice Position: 13/41
+├─ Crystal Layer: 13
+└─ Functions:
+   ├─ rustc_span
+   ├─ rustc_span
+   ├─ rustc_data_structures
+   ├─ rustc_span
+   ├─ rustc_trait_selection
+   ├─ rustc_span
+   ├─ rustc_span
+   ├─ rustc_span
+   ├─ rustc_span
+   ├─ rustc_span
+   ├─ rustc_public
+   ├─ rustc_data_structures
+   ├─ rustc_attr_parsing
+   ├─ rustc_macros
+   ├─ rustc_parse
+   ├─ rustc_borrowck
+   ├─ rustc_hir_typeck
+   ├─ rustc_middle
+   ├─ std
+   ├─ rustc_incremental
+   ├─ rustc_thread_pool
+   ├─ backtrace
+   ├─ rustc_session
+   ├─ std
+   ├─ rustc_monomorphize
+   ├─ rustc_borrowck
+   ├─ stdarch
+   ├─ std
+   ├─ alloctests
+   ├─ rustc_lint
+   ├─ std
+   ├─ std
+   ├─ core
+   ├─ std
+   ├─ rustc_middle
+   ├─ rustc_expand
+   ├─ rustc_expand
+   ├─ rustc_expand
+   ├─ rustc_ast
+   ├─ rustc_ast
+   ├─ rustc_hir
+   ├─ rustc_hir
+   └─ std
+
+LEVEL 14 - 📊 COMPOSITE LEVEL (56 functions)
+├─ Lattice Position: 14/41
+├─ Crystal Layer: 14
+└─ Functions:
+   ├─ rustc_span
+   ├─ rustc_hashes
+   ├─ rustc_span
+   ├─ rustc_span
+   ├─ rustc_span
+   ├─ rustc_hashes
+   ├─ compiler-builtins
+   ├─ rustc_ast
+   ├─ rustc_parse
+   ├─ rustc_mir_dataflow
+   ├─ std
+   ├─ std
+   ├─ stdarch
+   ├─ std
+   ├─ std
+   ├─ std
+   ├─ rustc_codegen_llvm
+   ├─ rustc_hir_analysis
+   ├─ rustc_borrowck
+   ├─ std
+   ├─ rustc_macros
+   ├─ rustc_attr_parsing
+   ├─ rustc_lint
+   ├─ alloc
+   ├─ rustc_interface
+   ├─ rustc_passes
+   ├─ coretests
+   ├─ std
+   ├─ core
+   ├─ alloc
+   ├─ rustc_query_impl
+   ├─ rustc_mir_transform
+   ├─ alloc
+   ├─ rustc_borrowck
+   ├─ rustc_borrowck
+   ├─ rustc_borrowck
+   ├─ rustc_middle
+   ├─ alloctests
+   ├─ std
+   ├─ std
+   ├─ rustc_hir_typeck
+   ├─ rustc_middle
+   ├─ rustc_expand
+   ├─ rustc_ast
+   ├─ std
+   ├─ rustc_public
+   ├─ rustc_public
+   ├─ rustc_lint
+   ├─ stdarch
+   ├─ rustc_ast
+   ├─ rustc_hir
+   ├─ test
+   ├─ rustc_hir_typeck
+   ├─ rustc_borrowck
+   ├─ rustc_ast
+   └─ rustc_hir
+
+LEVEL 15 - 📊 COMPOSITE LEVEL (28 functions)
+├─ Lattice Position: 15/41
+├─ Crystal Layer: 15
+└─ Functions:
+   ├─ rustc_expand
+   ├─ rustc_ast
+   ├─ rustc_parse
+   ├─ rustc_expand
+   ├─ rustc_mir_dataflow
+   ├─ compiler-builtins
+   ├─ rustc_mir_dataflow
+   ├─ rustc_index
+   ├─ std
+   ├─ std
+   ├─ std
+   ├─ alloctests
+   ├─ std
+   ├─ std
+   ├─ alloc
+   ├─ rustc_transmute
+   ├─ core
+   ├─ core
+   ├─ alloc
+   ├─ std
+   ├─ rustc_borrowck
+   ├─ rustc_borrowck
+   ├─ std
+   ├─ rustc_ast
+   ├─ rustc_ast
+   ├─ rustc_public
+   ├─ rustc_public
+   └─ rustc_ast
+
+LEVEL 16 - 📊 COMPOSITE LEVEL (15 functions)
+├─ Lattice Position: 16/41
+├─ Crystal Layer: 16
+└─ Functions:
+   ├─ rustc_ast
+   ├─ rustc_ast
+   ├─ rustc_index
+   ├─ core
+   ├─ alloc
+   ├─ rustc_codegen_llvm
+   ├─ rustc_index
+   ├─ rustc_lint
+   ├─ stdarch
+   ├─ core
+   ├─ core
+   ├─ alloc
+   ├─ alloc
+   ├─ rustc_borrowck
+   └─ rustc_parse
+
+LEVEL 17 - 📊 COMPOSITE LEVEL (23 functions)
+├─ Lattice Position: 17/41
+├─ Crystal Layer: 17
+└─ Functions:
+   ├─ rustc_ast
+   ├─ rustc_codegen_cranelift
+   ├─ stdarch
+   ├─ rustc_transmute
+   ├─ rustc_parse
+   ├─ rustc_next_trait_solver
+   ├─ rustc_ast_lowering
+   ├─ stdarch
+   ├─ rustc_next_trait_solver
+   ├─ alloctests
+   ├─ rustc_trait_selection
+   ├─ core
+   ├─ alloc
+   ├─ alloc
+   ├─ rustc_data_structures
+   ├─ rustc_borrowck
+   ├─ rustc_borrowck
+   ├─ rustc_borrowck
+   ├─ rustc_borrowck
+   ├─ rustc_borrowck
+   ├─ rustc_borrowck
+   ├─ rustc_borrowck
+   └─ rustc_borrowck
+
+LEVEL 18 - 📊 COMPOSITE LEVEL (22 functions)
+├─ Lattice Position: 18/41
+├─ Crystal Layer: 18
+└─ Functions:
+   ├─ rustc_ast
+   ├─ rustc_ast
+   ├─ rustc_ast
+   ├─ core
+   ├─ rustc_transmute
+   ├─ rustc_trait_selection
+   ├─ alloc
+   ├─ alloc
+   ├─ rustc_infer
+   ├─ rustc_public
+   ├─ rustc_mir_dataflow
+   ├─ rustc_index
+   ├─ rustc_borrowck
+   ├─ rustc_borrowck
+   ├─ rustc_borrowck
+   ├─ rustc_borrowck
+   ├─ rustc_borrowck
+   ├─ rustc_data_structures
+   ├─ rustc_borrowck
+   ├─ rustc_borrowck
+   ├─ rustc_borrowck
+   └─ rustc_borrowck
+
+LEVEL 19 - 📊 COMPOSITE LEVEL (20 functions)
+├─ Lattice Position: 19/41
+├─ Crystal Layer: 19
+└─ Functions:
+   ├─ rustc_ast
+   ├─ rustc_ast
+   ├─ rustc_ast
+   ├─ rustc_transmute
+   ├─ rustc_transmute
+   ├─ alloc
+   ├─ rustc_middle
+   ├─ rustc_borrowck
+   ├─ rustc_index
+   ├─ rustc_index
+   ├─ rustc_borrowck
+   ├─ rustc_borrowck
+   ├─ rustc_middle
+   ├─ rustc_type_ir
+   ├─ rustc_data_structures
+   ├─ rustc_errors
+   ├─ rustc_borrowck
+   ├─ rustc_middle
+   ├─ std
+   └─ rustc_borrowck
+
+LEVEL 20 - 📊 COMPOSITE LEVEL (17 functions)
+├─ Lattice Position: 20/41
+├─ Crystal Layer: 20
+└─ Functions:
+   ├─ rustc_ast
+   ├─ rustc_ast
+   ├─ rustc_macros
+   ├─ compiler-builtins
+   ├─ rustc_trait_selection
+   ├─ rustc_trait_selection
+   ├─ rustc_middle
+   ├─ rustc_middle
+   ├─ rustc_data_structures
+   ├─ rustc_errors
+   ├─ rustc_borrowck
+   ├─ core
+   ├─ rustc_borrowck
+   ├─ rustc_borrowck
+   ├─ rustc_borrowck
+   ├─ rustc_borrowck
+   └─ rustc_middle
+
+LEVEL 21 - 📊 COMPOSITE LEVEL (10 functions)
+├─ Lattice Position: 21/41
+├─ Crystal Layer: 21
+└─ Functions:
+   ├─ rustc_trait_selection
+   ├─ rustc_public
+   ├─ rustc_middle
+   ├─ rustc_borrowck
+   ├─ rustc_borrowck
+   ├─ rustc_borrowck
+   ├─ rustc_borrowck
+   ├─ rustc_borrowck
+   ├─ rustc_borrowck
+   └─ rustc_borrowck
+
+LEVEL 22 - 📊 COMPOSITE LEVEL (21 functions)
+├─ Lattice Position: 22/41
+├─ Crystal Layer: 22
+└─ Functions:
+   ├─ rustc_trait_selection
+   ├─ rustc_middle
+   ├─ rustc_middle
+   ├─ rustc_borrowck
+   ├─ rustc_public
+   ├─ rustc_mir_dataflow
+   ├─ rustc_borrowck
+   ├─ rustc_borrowck
+   ├─ rustc_borrowck
+   ├─ rustc_infer
+   ├─ rustc_borrowck
+   ├─ rustc_borrowck
+   ├─ rustc_borrowck
+   ├─ rustc_borrowck
+   ├─ rustc_borrowck
+   ├─ rustc_borrowck
+   ├─ rustc_borrowck
+   ├─ rustc_borrowck
+   ├─ rustc_borrowck
+   ├─ rustc_borrowck
+   └─ rustc_borrowck
+
+LEVEL 23 - 📊 COMPOSITE LEVEL (23 functions)
+├─ Lattice Position: 23/41
+├─ Crystal Layer: 23
+└─ Functions:
+   ├─ rustc_trait_selection
+   ├─ rustc_infer
+   ├─ rustc_borrowck
+   ├─ rustc_mir_transform
+   ├─ rustc_mir_dataflow
+   ├─ rustc_borrowck
+   ├─ rustc_mir_dataflow
+   ├─ rustc_mir_dataflow
+   ├─ rustc_mir_dataflow
+   ├─ rustc_borrowck
+   ├─ rustc_middle
+   ├─ rustc_borrowck
+   ├─ rustc_borrowck
+   ├─ rustc_data_structures
+   ├─ rustc_borrowck
+   ├─ rustc_borrowck
+   ├─ rustc_borrowck
+   ├─ rustc_trait_selection
+   ├─ rustc_borrowck
+   ├─ rustc_borrowck
+   ├─ rustc_borrowck
+   ├─ rustc_borrowck
+   └─ rustc_borrowck
+
+LEVEL 24 - 📊 COMPOSITE LEVEL (18 functions)
+├─ Lattice Position: 24/41
+├─ Crystal Layer: 24
+└─ Functions:
+   ├─ rustc_middle
+   ├─ rustc_hir
+   ├─ rustc_passes
+   ├─ rustc_infer
+   ├─ rustc_infer
+   ├─ rustc_middle
+   ├─ rustc_middle
+   ├─ rustc_next_trait_solver
+   ├─ rustc_infer
+   ├─ rustc_middle
+   ├─ rustc_mir_dataflow
+   ├─ rustc_middle
+   ├─ rustc_middle
+   ├─ rustc_borrowck
+   ├─ rustc_mir_build
+   ├─ rustc_data_structures
+   ├─ rustc_index
+   └─ rustc_borrowck
+
+LEVEL 25 - 📊 COMPOSITE LEVEL (20 functions)
+├─ Lattice Position: 25/41
+├─ Crystal Layer: 25
+└─ Functions:
+   ├─ rustc_middle
+   ├─ rustc_infer
+   ├─ rustc_infer
+   ├─ rustc_infer
+   ├─ rustc_infer
+   ├─ rustc_infer
+   ├─ rustc_infer
+   ├─ rustc_middle
+   ├─ rustc_infer
+   ├─ rustc_infer
+   ├─ rustc_query_impl
+   ├─ test
+   ├─ rustc_middle
+   ├─ rustc_middle
+   ├─ rustc_next_trait_solver
+   ├─ rustc_type_ir
+   ├─ rustc_middle
+   ├─ rustc_middle
+   ├─ rustc_data_structures
+   └─ rustc_borrowck
+
+LEVEL 26 - 📊 COMPOSITE LEVEL (16 functions)
+├─ Lattice Position: 26/41
+├─ Crystal Layer: 26
+└─ Functions:
+   ├─ rustc_infer
+   ├─ rustc_data_structures
+   ├─ rustc_infer
+   ├─ rustc_infer
+   ├─ rustc_infer
+   ├─ rustc_infer
+   ├─ rustc_infer
+   ├─ rustc_infer
+   ├─ rustc_public
+   ├─ rustc_infer
+   ├─ rustc_infer
+   ├─ rustc_infer
+   ├─ rustc_infer
+   ├─ rustc_public
+   ├─ rustc_middle
+   └─ rustc_data_structures
+
+LEVEL 27 - 📊 COMPOSITE LEVEL (18 functions)
+├─ Lattice Position: 27/41
+├─ Crystal Layer: 27
+└─ Functions:
+   ├─ rustc_data_structures
+   ├─ rustc_public
+   ├─ rustc_next_trait_solver
+   ├─ rustc_infer
+   ├─ rustc_middle
+   ├─ rustc_infer
+   ├─ rustc_infer
+   ├─ rustc_public
+   ├─ rustc_type_ir
+   ├─ rustc_infer
+   ├─ rustc_borrowck
+   ├─ rustc_infer
+   ├─ rustc_infer
+   ├─ rustc_infer
+   ├─ rustc_infer
+   ├─ rustc_middle
+   ├─ rustc_middle
+   └─ rustc_middle
+
+LEVEL 28 - 📊 COMPOSITE LEVEL (9 functions)
+├─ Lattice Position: 28/41
+├─ Crystal Layer: 28
+└─ Functions:
+   ├─ rustc_infer
+   ├─ rustc_public
+   ├─ rustc_public
+   ├─ rustc_infer
+   ├─ rustc_middle
+   ├─ rustc_infer
+   ├─ rustc_infer
+   ├─ rustc_infer
+   └─ rustc_type_ir
+
+LEVEL 29 - 📊 COMPOSITE LEVEL (13 functions)
+├─ Lattice Position: 29/41
+├─ Crystal Layer: 29
+└─ Functions:
+   ├─ rustc_infer
+   ├─ rustc_public
+   ├─ rustc_public
+   ├─ rustc_public
+   ├─ rustc_public
+   ├─ std
+   ├─ rustc_infer
+   ├─ rustc_hir_analysis
+   ├─ rustc_middle
+   ├─ rustc_public
+   ├─ rustc_infer
+   ├─ rustc_mir_transform
+   └─ rustc_type_ir
+
+LEVEL 30 - 📊 COMPOSITE LEVEL (11 functions)
+├─ Lattice Position: 30/41
+├─ Crystal Layer: 30
+└─ Functions:
+   ├─ rustc_infer
+   ├─ std
+   ├─ rustc_type_ir
+   ├─ rustc_middle
+   ├─ rustc_middle
+   ├─ rustc_public
+   ├─ rustc_public
+   ├─ core
+   ├─ rustc_type_ir
+   ├─ rustc_type_ir
+   └─ rustc_public
+
+LEVEL 31 - 📊 COMPOSITE LEVEL (16 functions)
+├─ Lattice Position: 31/41
+├─ Crystal Layer: 31
+└─ Functions:
+   ├─ rustc_infer
+   ├─ rustc_codegen_llvm
+   ├─ rustc_type_ir
+   ├─ rustc_codegen_llvm
+   ├─ std
+   ├─ std
+   ├─ rustc_lint
+   ├─ rustc_passes
+   ├─ proc_macro
+   ├─ rustc_codegen_cranelift
+   ├─ portable-simd
+   ├─ alloc
+   ├─ rustc_type_ir
+   ├─ rustc_type_ir
+   ├─ core
+   └─ core
+
+LEVEL 32 - 📊 COMPOSITE LEVEL (115 functions)
+├─ Lattice Position: 32/41
+├─ Crystal Layer: 32
+└─ Functions:
+   ├─ rustc_middle
+   ├─ std
+   ├─ rustc_data_structures
+   ├─ portable-simd
+   ├─ test
+   ├─ rustc_type_ir
+   ├─ rustc_type_ir
+   ├─ rustc_type_ir
+   ├─ rustc_resolve
+   ├─ rustc_interface
+   ├─ std
+   ├─ rustc_type_ir
+   ├─ rustc_monomorphize
+   ├─ rustc_data_structures
+   ├─ core
+   ├─ rustc_parse
+   ├─ rustc_trait_selection
+   ├─ rustc_lint
+   ├─ alloctests
+   ├─ rustc_hir_analysis
+   ├─ rustc_const_eval
+   ├─ rustc_mir_transform
+   ├─ rustc_mir_transform
+   ├─ rustc_codegen_ssa
+   ├─ core
+   ├─ std
+   ├─ core
+   ├─ rustc_type_ir
+   ├─ core
+   ├─ rustc_builtin_macros
+   ├─ core
+   ├─ std
+   ├─ std
+   ├─ core
+   ├─ rustc_parse
+   ├─ stdarch
+   ├─ coretests
+   ├─ core
+   ├─ core
+   ├─ coretests
+   ├─ core
+   ├─ core
+   ├─ rustc_passes
+   ├─ rustc_resolve
+   ├─ rustc_type_ir
+   ├─ rustc_mir_transform
+   ├─ std
+   ├─ rustc_trait_selection
+   ├─ core
+   ├─ rustc_mir_transform
+   ├─ rustc_lint
+   ├─ rustc_mir_build
+   ├─ core
+   ├─ core
+   ├─ std
+   ├─ alloctests
+   ├─ core
+   ├─ coretests
+   ├─ core
+   ├─ core
+   ├─ core
+   ├─ core
+   ├─ core
+   ├─ rustc_passes
+   ├─ core
+   ├─ core
+   ├─ core
+   ├─ core
+   ├─ core
+   ├─ rustc_errors
+   ├─ rustc_ast
+   ├─ std
+   ├─ core
+   ├─ rustc_thread_pool
+   ├─ compiler-builtins
+   ├─ core
+   ├─ std
+   ├─ rustc_parse
+   ├─ core
+   ├─ rustc_expand
+   ├─ std
+   ├─ rustc_hir_typeck
+   ├─ core
+   ├─ core
+   ├─ core
+   ├─ core
+   ├─ coretests
+   ├─ rustc_codegen_cranelift
+   ├─ core
+   ├─ std
+   ├─ rustc_symbol_mangling
+   ├─ std
+   ├─ coretests
+   ├─ rustc_mir_build
+   ├─ rustc_codegen_gcc
+   ├─ std
+   ├─ test
+   ├─ std
+   ├─ core
+   ├─ core
+   ├─ alloc
+   ├─ rustc_privacy
+   ├─ core
+   ├─ rustc_passes
+   ├─ core
+   ├─ core
+   ├─ core
+   ├─ rustc_query_system
+   ├─ core
+   ├─ core
+   ├─ core
+   ├─ alloctests
+   ├─ std
+   ├─ coretests
+   └─ core
+
+LEVEL 33 - 📊 COMPOSITE LEVEL (71 functions)
+├─ Lattice Position: 33/41
+├─ Crystal Layer: 33
+└─ Functions:
+   ├─ rustc_middle
+   ├─ std
+   ├─ portable-simd
+   ├─ portable-simd
+   ├─ rustc_type_ir
+   ├─ rustc_type_ir
+   ├─ rustc_middle
+   ├─ stdarch
+   ├─ rustc_type_ir
+   ├─ rustc_codegen_gcc
+   ├─ rustc_lint
+   ├─ rustc_codegen_llvm
+   ├─ rustc_mir_transform
+   ├─ rustc_data_structures
+   ├─ rustc_index
+   ├─ rustc_hir
+   ├─ rustc_trait_selection
+   ├─ rustc_lint
+   ├─ core
+   ├─ core
+   ├─ rustc_codegen_llvm
+   ├─ rustc_type_ir
+   ├─ rustc_parse
+   ├─ core
+   ├─ std
+   ├─ test
+   ├─ rustc_hir_analysis
+   ├─ core
+   ├─ std
+   ├─ rustc_borrowck
+   ├─ rustc_mir_transform
+   ├─ rustc_mir_dataflow
+   ├─ rustc_thread_pool
+   ├─ coretests
+   ├─ rustc_builtin_macros
+   ├─ rustc_codegen_cranelift
+   ├─ rustc_borrowck
+   ├─ rustc_codegen_llvm
+   ├─ rustc_codegen_ssa
+   ├─ std
+   ├─ std
+   ├─ coretests
+   ├─ coretests
+   ├─ core
+   ├─ rustc_hir
+   ├─ rustc_middle
+   ├─ coretests
+   ├─ core
+   ├─ std
+   ├─ core
+   ├─ rustc_resolve
+   ├─ coretests
+   ├─ coretests
+   ├─ core
+   ├─ rustc_codegen_ssa
+   ├─ rustc_codegen_cranelift
+   ├─ rustc_codegen_cranelift
+   ├─ rustc_lint
+   ├─ std
+   ├─ std
+   ├─ test
+   ├─ test
+   ├─ core
+   ├─ alloc
+   ├─ core
+   ├─ core
+   ├─ std
+   ├─ core
+   ├─ core
+   ├─ compiler-builtins
+   └─ rustc_codegen_ssa
+
+LEVEL 34 - 📊 COMPOSITE LEVEL (70 functions)
+├─ Lattice Position: 34/41
+├─ Crystal Layer: 34
+└─ Functions:
+   ├─ rustc_middle
+   ├─ std
+   ├─ rustc_hir_analysis
+   ├─ rustc_hir_analysis
+   ├─ rustc_builtin_macros
+   ├─ core
+   ├─ proc_macro
+   ├─ rustc_ast_ir
+   ├─ rustc_infer
+   ├─ rustc_middle
+   ├─ rustc_public
+   ├─ rustc_ast
+   ├─ rustc_trait_selection
+   ├─ rustc_infer
+   ├─ core
+   ├─ core
+   ├─ rustc_trait_selection
+   ├─ core
+   ├─ core
+   ├─ rustc_pattern_analysis
+   ├─ rustc_mir_transform
+   ├─ stdarch
+   ├─ stdarch
+   ├─ core
+   ├─ rustc_macros
+   ├─ core
+   ├─ rustc_mir_transform
+   ├─ rustc_middle
+   ├─ rustc_hir
+   ├─ rustc_hir
+   ├─ rustc_hir
+   ├─ rustc_hir
+   ├─ rustc_hir
+   ├─ rustc_data_structures
+   ├─ rustc_errors
+   ├─ rustc_hir_analysis
+   ├─ rustc_middle
+   ├─ rustc_resolve
+   ├─ rustc_resolve
+   ├─ core
+   ├─ rustc_codegen_cranelift
+   ├─ rustc_codegen_llvm
+   ├─ rustc_codegen_llvm
+   ├─ rustc_hir_typeck
+   ├─ rustc_codegen_llvm
+   ├─ rustc_public
+   ├─ rustc_codegen_ssa
+   ├─ rustc_codegen_ssa
+   ├─ rustc_codegen_ssa
+   ├─ rustc_codegen_gcc
+   ├─ rustc_codegen_ssa
+   ├─ rustc_codegen_ssa
+   ├─ rustc_codegen_llvm
+   ├─ rustc_codegen_cranelift
+   ├─ rustc_codegen_cranelift
+   ├─ rustc_attr_parsing
+   ├─ rustc_lint
+   ├─ rustc_hir
+   ├─ rustc_ast
+   ├─ rustc_codegen_gcc
+   ├─ rustc_hir_analysis
+   ├─ rustc_lint
+   ├─ std
+   ├─ std
+   ├─ std
+   ├─ test
+   ├─ test
+   ├─ rustc_middle
+   ├─ rustc_parse
+   └─ core
+
+LEVEL 35 - 📊 COMPOSITE LEVEL (54 functions)
+├─ Lattice Position: 35/41
+├─ Crystal Layer: 35
+└─ Functions:
+   ├─ rustc_trait_selection
+   ├─ rustc_middle
+   ├─ rustc_public_bridge
+   ├─ rustc_middle
+   ├─ rustc_middle
+   ├─ rustc_middle
+   ├─ rustc_hir_analysis
+   ├─ rustc_middle
+   ├─ rustc_middle
+   ├─ rustc_middle
+   ├─ std
+   ├─ rustc_trait_selection
+   ├─ core
+   ├─ core
+   ├─ rustc_middle
+   ├─ rustc_ast_passes
+   ├─ rustc_trait_selection
+   ├─ rustc_middle
+   ├─ rustc_hir_analysis
+   ├─ core
+   ├─ rustc_resolve
+   ├─ core
+   ├─ rustc_hir
+   ├─ rustc_data_structures
+   ├─ rustc_hir
+   ├─ rustc_errors
+   ├─ rustc_ast
+   ├─ rustc_codegen_cranelift
+   ├─ rustc_type_ir
+   ├─ rustc_codegen_llvm
+   ├─ rustc_public
+   ├─ rustc_public
+   ├─ rustc_codegen_ssa
+   ├─ rustc_codegen_ssa
+   ├─ rustc_hir_typeck
+   ├─ rustc_borrowck
+   ├─ rustc_hir
+   ├─ rustc_middle
+   ├─ rustc_middle
+   ├─ rustc_hir
+   ├─ rustc_ast
+   ├─ rustc_ast
+   ├─ rustc_ast
+   ├─ rustc_ast
+   ├─ rustc_ast
+   ├─ rustc_ast
+   ├─ rustc_ast
+   ├─ rustc_trait_selection
+   ├─ core
+   ├─ std
+   ├─ std
+   ├─ test
+   ├─ rustc_builtin_macros
+   └─ test
+
+LEVEL 36 - 📊 COMPOSITE LEVEL (39 functions)
+├─ Lattice Position: 36/41
+├─ Crystal Layer: 36
+└─ Functions:
+   ├─ rustc_middle
+   ├─ rustc_middle
+   ├─ rustc_hir
+   ├─ rustc_hir_analysis
+   ├─ rustc_middle
+   ├─ rustc_middle
+   ├─ rustc_infer
+   ├─ rustc_infer
+   ├─ core
+   ├─ rustc_lint_defs
+   ├─ rustc_errors
+   ├─ rustc_public
+   ├─ rustc_ast
+   ├─ std
+   ├─ rustc_codegen_llvm
+   ├─ rustc_codegen_ssa
+   ├─ rustc_resolve
+   ├─ rustc_middle
+   ├─ rustc_hir_typeck
+   ├─ rustc_hir
+   ├─ rustc_middle
+   ├─ rustc_middle
+   ├─ rustc_middle
+   ├─ rustc_mir_transform
+   ├─ rustc_ast
+   ├─ rustc_middle
+   ├─ rustc_middle
+   ├─ rustc_middle
+   ├─ rustc_mir_build
+   ├─ rustc_data_structures
+   ├─ rustc_hir_typeck
+   ├─ rustc_middle
+   ├─ rustc_data_structures
+   ├─ rustc_middle
+   ├─ rustc_middle
+   ├─ rustc_lint
+   ├─ rustc_borrowck
+   ├─ rustc_ast
+   └─ test
+
+LEVEL 37 - 📊 COMPOSITE LEVEL (19 functions)
+├─ Lattice Position: 37/41
+├─ Crystal Layer: 37
+└─ Functions:
+   ├─ rustc_type_ir
+   ├─ rustc_middle
+   ├─ rustc_lint
+   ├─ rustc_errors
+   ├─ rustc_data_structures
+   ├─ rustc_lint_defs
+   ├─ rustc_ast
+   ├─ std
+   ├─ rustc_codegen_ssa
+   ├─ rustc_ty_utils
+   ├─ rustc_hir
+   ├─ rustc_borrowck
+   ├─ rustc_hir
+   ├─ rustc_borrowck
+   ├─ rustc_middle
+   ├─ rustc_mir_transform
+   ├─ rustc_ast
+   ├─ rustc_middle
+   └─ rustc_middle
+
+LEVEL 38 - 📊 COMPOSITE LEVEL (10 functions)
+├─ Lattice Position: 38/41
+├─ Crystal Layer: 38
+└─ Functions:
+   ├─ rustc_errors
+   ├─ portable-simd
+   ├─ rustc_data_structures
+   ├─ rustc_lint_defs
+   ├─ rustc_lint_defs
+   ├─ rustc_span
+   ├─ rustc_ast
+   ├─ std
+   ├─ rustc_codegen_ssa
+   └─ rustc_middle
+
+LEVEL 39 - 📊 COMPOSITE LEVEL (3 functions)
+├─ Lattice Position: 39/41
+├─ Crystal Layer: 39
+└─ Functions:
+   ├─ rustc_errors
+   ├─ compiler-builtins
+   └─ rustc_middle
+
+LEVEL 40 - 📊 COMPOSITE LEVEL (2 functions)
+├─ Lattice Position: 40/41
+├─ Crystal Layer: 40
+└─ Functions:
+   ├─ compiler-builtins
+   └─ rustc_middle
+
+LEVEL 41 - 📊 COMPOSITE LEVEL (1 functions)
+├─ Lattice Position: 41/41
+├─ Crystal Layer: 41
+└─ Functions:
+   └─ std
+
+🏗️ CRYSTAL CONSTRUCTION ORDER (Bottom → Top)
+===========================================
+// Crystal Layer 0: Build 2 functions
+rustc!(); // Level 0
+rustc_driver_impl!(); // Level 0
+
+// Crystal Layer 1: Build 15 functions
+std!(); // Level 1
+rustc_interface!(); // Level 1
+alloctests!(); // Level 1
+std!(); // Level 1
+alloc!(); // Level 1
+rustc_data_structures!(); // Level 1
+compiler-builtins!(); // Level 1
+std!(); // Level 1
+rustc_codegen_ssa!(); // Level 1
+alloctests!(); // Level 1
+rustc_driver_impl!(); // Level 1
+rustc_driver_impl!(); // Level 1
+rustc_driver_impl!(); // Level 1
+rustc_driver_impl!(); // Level 1
+rustc_data_structures!(); // Level 1
+
+// Crystal Layer 2: Build 42 functions
+rustc_attr_parsing!(); // Level 2
+rustc_type_ir!(); // Level 2
+proc_macro!(); // Level 2
+rustc_data_structures!(); // Level 2
+rustc_codegen_cranelift!(); // Level 2
+core!(); // Level 2
+rustc_middle!(); // Level 2
+std!(); // Level 2
+std!(); // Level 2
+core!(); // Level 2
+rustc_data_structures!(); // Level 2
+coretests!(); // Level 2
+core!(); // Level 2
+rustc_hir!(); // Level 2
+rustc_codegen_gcc!(); // Level 2
+std!(); // Level 2
+std!(); // Level 2
+std!(); // Level 2
+std!(); // Level 2
+std!(); // Level 2
+rustc_codegen_ssa!(); // Level 2
+rustc_incremental!(); // Level 2
+std!(); // Level 2
+rustc_ast!(); // Level 2
+std!(); // Level 2
+rustc_codegen_ssa!(); // Level 2
+std!(); // Level 2
+rustc_errors!(); // Level 2
+rustc_middle!(); // Level 2
+rustc_incremental!(); // Level 2
+rustc_session!(); // Level 2
+std!(); // Level 2
+rustc_driver_impl!(); // Level 2
+rustc_const_eval!(); // Level 2
+std!(); // Level 2
+std!(); // Level 2
+rustc_session!(); // Level 2
+std!(); // Level 2
+rustc_session!(); // Level 2
+rustc_data_structures!(); // Level 2
+rustc_lint!(); // Level 2
+core!(); // Level 2
+
+// Crystal Layer 3: Build 56 functions
+std!(); // Level 3
+core!(); // Level 3
+rustc_codegen_gcc!(); // Level 3
+core!(); // Level 3
+core!(); // Level 3
+std!(); // Level 3
+core!(); // Level 3
+alloc!(); // Level 3
+core!(); // Level 3
+std!(); // Level 3
+std!(); // Level 3
+std!(); // Level 3
+std!(); // Level 3
+std!(); // Level 3
+core!(); // Level 3
+rustc_trait_selection!(); // Level 3
+rustc_middle!(); // Level 3
+std!(); // Level 3
+std!(); // Level 3
+std!(); // Level 3
+std!(); // Level 3
+rustc_attr_parsing!(); // Level 3
+rustc_hir_analysis!(); // Level 3
+std!(); // Level 3
+std!(); // Level 3
+std!(); // Level 3
+core!(); // Level 3
+rustc_passes!(); // Level 3
+rustc_ast!(); // Level 3
+rustc_span!(); // Level 3
+rustc_passes!(); // Level 3
+rustc_codegen_cranelift!(); // Level 3
+rustc_ast_pretty!(); // Level 3
+rustc_ast!(); // Level 3
+rustc_builtin_macros!(); // Level 3
+rustc_hir!(); // Level 3
+rustc_public!(); // Level 3
+core!(); // Level 3
+std!(); // Level 3
+rustc_trait_selection!(); // Level 3
+std!(); // Level 3
+std!(); // Level 3
+core!(); // Level 3
+std!(); // Level 3
+std!(); // Level 3
+std!(); // Level 3
+stdarch!(); // Level 3
+core!(); // Level 3
+rustc_mir_transform!(); // Level 3
+rustc_codegen_gcc!(); // Level 3
+rustc_errors!(); // Level 3
+std!(); // Level 3
+rustc_hir_typeck!(); // Level 3
+rustc_lint!(); // Level 3
+rustc_lint!(); // Level 3
+core!(); // Level 3
+
+// Crystal Layer 4: Build 28 functions
+core!(); // Level 4
+core!(); // Level 4
+rustc_middle!(); // Level 4
+std!(); // Level 4
+std!(); // Level 4
+std!(); // Level 4
+std!(); // Level 4
+std!(); // Level 4
+std!(); // Level 4
+alloc!(); // Level 4
+rustc_monomorphize!(); // Level 4
+rustc_span!(); // Level 4
+rustc_mir_transform!(); // Level 4
+std!(); // Level 4
+panic_unwind!(); // Level 4
+core!(); // Level 4
+rustc_borrowck!(); // Level 4
+std!(); // Level 4
+std!(); // Level 4
+std!(); // Level 4
+core!(); // Level 4
+core!(); // Level 4
+portable-simd!(); // Level 4
+stdarch!(); // Level 4
+stdarch!(); // Level 4
+std!(); // Level 4
+std!(); // Level 4
+rustc_errors!(); // Level 4
+
+// Crystal Layer 5: Build 15 functions
+compiler-builtins!(); // Level 5
+compiler-builtins!(); // Level 5
+compiler-builtins!(); // Level 5
+compiler-builtins!(); // Level 5
+core!(); // Level 5
+std!(); // Level 5
+alloc!(); // Level 5
+core!(); // Level 5
+stdarch!(); // Level 5
+rustc_errors!(); // Level 5
+rustc_errors!(); // Level 5
+rustc_span!(); // Level 5
+rustc_errors!(); // Level 5
+rustc_errors!(); // Level 5
+rustc_errors!(); // Level 5
+
+// Crystal Layer 6: Build 7 functions
+core!(); // Level 6
+std!(); // Level 6
+alloc!(); // Level 6
+core!(); // Level 6
+rustc_errors!(); // Level 6
+rustc_log!(); // Level 6
+rustc_errors!(); // Level 6
+
+// Crystal Layer 7: Build 29 functions
+rustc_resolve!(); // Level 7
+rustc_builtin_macros!(); // Level 7
+rustc_hir_analysis!(); // Level 7
+rustc_mir_build!(); // Level 7
+rustc_resolve!(); // Level 7
+rustc_metadata!(); // Level 7
+std!(); // Level 7
+rustc_mir_dataflow!(); // Level 7
+alloc!(); // Level 7
+rustc_error_messages!(); // Level 7
+rustc_codegen_ssa!(); // Level 7
+rustc_lint_defs!(); // Level 7
+rustc_errors!(); // Level 7
+rustc_errors!(); // Level 7
+rustc_errors!(); // Level 7
+rustc_errors!(); // Level 7
+std!(); // Level 7
+rustc_errors!(); // Level 7
+rustc_attr_parsing!(); // Level 7
+rustc_errors!(); // Level 7
+rustc_errors!(); // Level 7
+rustc_errors!(); // Level 7
+rustc_error_messages!(); // Level 7
+rustc_errors!(); // Level 7
+rustc_errors!(); // Level 7
+rustc_span!(); // Level 7
+rustc_borrowck!(); // Level 7
+rustc_ast_passes!(); // Level 7
+rustc_expand!(); // Level 7
+
+// Crystal Layer 8: Build 23 functions
+rustc_hir_analysis!(); // Level 8
+rustc_middle!(); // Level 8
+rustc_mir_build!(); // Level 8
+rustc_ty_utils!(); // Level 8
+core!(); // Level 8
+alloc!(); // Level 8
+alloc!(); // Level 8
+rustc_error_messages!(); // Level 8
+rustc_ast_pretty!(); // Level 8
+rustc_hir_id!(); // Level 8
+rustc_errors!(); // Level 8
+rustc_data_structures!(); // Level 8
+rustc_error_messages!(); // Level 8
+rustc_error_messages!(); // Level 8
+std!(); // Level 8
+rustc_middle!(); // Level 8
+rustc_passes!(); // Level 8
+rustc_session!(); // Level 8
+rustc_span!(); // Level 8
+rustc_span!(); // Level 8
+rustc_span!(); // Level 8
+rustc_ast_passes!(); // Level 8
+rustc_expand!(); // Level 8
+
+// Crystal Layer 9: Build 27 functions
+alloc!(); // Level 9
+rustc_hir_id!(); // Level 9
+rustc_middle!(); // Level 9
+rustc_borrowck!(); // Level 9
+core!(); // Level 9
+proc_macro!(); // Level 9
+compiler-builtins!(); // Level 9
+rustc_builtin_macros!(); // Level 9
+test!(); // Level 9
+alloc!(); // Level 9
+rustc_session!(); // Level 9
+rustc_session!(); // Level 9
+rustc_session!(); // Level 9
+rustc_session!(); // Level 9
+rustc_data_structures!(); // Level 9
+rustc_errors!(); // Level 9
+rustc_session!(); // Level 9
+rustc_session!(); // Level 9
+rustc_session!(); // Level 9
+rustc_lint!(); // Level 9
+rustc_session!(); // Level 9
+rustc_expand!(); // Level 9
+rustc_expand!(); // Level 9
+rustc_expand!(); // Level 9
+rustc_expand!(); // Level 9
+rustc_ast!(); // Level 9
+rustc_expand!(); // Level 9
+
+// Crystal Layer 10: Build 46 functions
+alloc!(); // Level 10
+rustc_trait_selection!(); // Level 10
+alloc!(); // Level 10
+rustc_borrowck!(); // Level 10
+rustc_lint!(); // Level 10
+alloctests!(); // Level 10
+rustc_middle!(); // Level 10
+alloc!(); // Level 10
+rustc_feature!(); // Level 10
+rustc_interface!(); // Level 10
+rustc_session!(); // Level 10
+rustc_span!(); // Level 10
+rustc_data_structures!(); // Level 10
+rustc_span!(); // Level 10
+rustc_session!(); // Level 10
+rustc_session!(); // Level 10
+rustc_ast!(); // Level 10
+rustc_macros!(); // Level 10
+rustc_codegen_ssa!(); // Level 10
+rustc_data_structures!(); // Level 10
+rustc_data_structures!(); // Level 10
+std!(); // Level 10
+rustc_errors!(); // Level 10
+rustc_session!(); // Level 10
+rustc_data_structures!(); // Level 10
+rustc_session!(); // Level 10
+rustc_hir!(); // Level 10
+rustc_expand!(); // Level 10
+rustc_resolve!(); // Level 10
+rustc_expand!(); // Level 10
+rustc_query_system!(); // Level 10
+rustc_expand!(); // Level 10
+rustc_expand!(); // Level 10
+rustc_span!(); // Level 10
+rustc_builtin_macros!(); // Level 10
+rustc_expand!(); // Level 10
+rustc_hir!(); // Level 10
+rustc_codegen_gcc!(); // Level 10
+rustc_lint_defs!(); // Level 10
+proc_macro!(); // Level 10
+rustc_data_structures!(); // Level 10
+rustc_public!(); // Level 10
+rustc_expand!(); // Level 10
+rustc_expand!(); // Level 10
+rustc_expand!(); // Level 10
+rustc_index!(); // Level 10
+
+// Crystal Layer 11: Build 28 functions
+test!(); // Level 11
+proc_macro!(); // Level 11
+rustc_attr_parsing!(); // Level 11
+rustc_ty_utils!(); // Level 11
+rustc_data_structures!(); // Level 11
+rustc_span!(); // Level 11
+rustc_data_structures!(); // Level 11
+rustc_span!(); // Level 11
+rustc_span!(); // Level 11
+std!(); // Level 11
+rustc_macros!(); // Level 11
+rustc_codegen_llvm!(); // Level 11
+rustc_query_impl!(); // Level 11
+rustc_session!(); // Level 11
+rustc_session!(); // Level 11
+rustc_expand!(); // Level 11
+rustc_expand!(); // Level 11
+rustc_builtin_macros!(); // Level 11
+rustc_expand!(); // Level 11
+rustc_expand!(); // Level 11
+rustc_hir!(); // Level 11
+rustc_hir!(); // Level 11
+rustc_metadata!(); // Level 11
+rustc_codegen_gcc!(); // Level 11
+std!(); // Level 11
+std!(); // Level 11
+rustc_const_eval!(); // Level 11
+rustc_middle!(); // Level 11
+
+// Crystal Layer 12: Build 22 functions
+test!(); // Level 12
+test!(); // Level 12
+std!(); // Level 12
+rustc_span!(); // Level 12
+rustc_span!(); // Level 12
+rustc_data_structures!(); // Level 12
+rustc_parse!(); // Level 12
+rustc_macros!(); // Level 12
+std!(); // Level 12
+rustc_span!(); // Level 12
+rustc_span!(); // Level 12
+rustc_macros!(); // Level 12
+rustc_session!(); // Level 12
+rustc_builtin_macros!(); // Level 12
+rustc_span!(); // Level 12
+rustc_expand!(); // Level 12
+rustc_expand!(); // Level 12
+rustc_ast!(); // Level 12
+rustc_expand!(); // Level 12
+rustc_hir!(); // Level 12
+rustc_hir!(); // Level 12
+std!(); // Level 12
+
+// Crystal Layer 13: Build 43 functions
+rustc_span!(); // Level 13
+rustc_span!(); // Level 13
+rustc_data_structures!(); // Level 13
+rustc_span!(); // Level 13
+rustc_trait_selection!(); // Level 13
+rustc_span!(); // Level 13
+rustc_span!(); // Level 13
+rustc_span!(); // Level 13
+rustc_span!(); // Level 13
+rustc_span!(); // Level 13
+rustc_public!(); // Level 13
+rustc_data_structures!(); // Level 13
+rustc_attr_parsing!(); // Level 13
+rustc_macros!(); // Level 13
+rustc_parse!(); // Level 13
+rustc_borrowck!(); // Level 13
+rustc_hir_typeck!(); // Level 13
+rustc_middle!(); // Level 13
+std!(); // Level 13
+rustc_incremental!(); // Level 13
+rustc_thread_pool!(); // Level 13
+backtrace!(); // Level 13
+rustc_session!(); // Level 13
+std!(); // Level 13
+rustc_monomorphize!(); // Level 13
+rustc_borrowck!(); // Level 13
+stdarch!(); // Level 13
+std!(); // Level 13
+alloctests!(); // Level 13
+rustc_lint!(); // Level 13
+std!(); // Level 13
+std!(); // Level 13
+core!(); // Level 13
+std!(); // Level 13
+rustc_middle!(); // Level 13
+rustc_expand!(); // Level 13
+rustc_expand!(); // Level 13
+rustc_expand!(); // Level 13
+rustc_ast!(); // Level 13
+rustc_ast!(); // Level 13
+rustc_hir!(); // Level 13
+rustc_hir!(); // Level 13
+std!(); // Level 13
+
+// Crystal Layer 14: Build 56 functions
+rustc_span!(); // Level 14
+rustc_hashes!(); // Level 14
+rustc_span!(); // Level 14
+rustc_span!(); // Level 14
+rustc_span!(); // Level 14
+rustc_hashes!(); // Level 14
+compiler-builtins!(); // Level 14
+rustc_ast!(); // Level 14
+rustc_parse!(); // Level 14
+rustc_mir_dataflow!(); // Level 14
+std!(); // Level 14
+std!(); // Level 14
+stdarch!(); // Level 14
+std!(); // Level 14
+std!(); // Level 14
+std!(); // Level 14
+rustc_codegen_llvm!(); // Level 14
+rustc_hir_analysis!(); // Level 14
+rustc_borrowck!(); // Level 14
+std!(); // Level 14
+rustc_macros!(); // Level 14
+rustc_attr_parsing!(); // Level 14
+rustc_lint!(); // Level 14
+alloc!(); // Level 14
+rustc_interface!(); // Level 14
+rustc_passes!(); // Level 14
+coretests!(); // Level 14
+std!(); // Level 14
+core!(); // Level 14
+alloc!(); // Level 14
+rustc_query_impl!(); // Level 14
+rustc_mir_transform!(); // Level 14
+alloc!(); // Level 14
+rustc_borrowck!(); // Level 14
+rustc_borrowck!(); // Level 14
+rustc_borrowck!(); // Level 14
+rustc_middle!(); // Level 14
+alloctests!(); // Level 14
+std!(); // Level 14
+std!(); // Level 14
+rustc_hir_typeck!(); // Level 14
+rustc_middle!(); // Level 14
+rustc_expand!(); // Level 14
+rustc_ast!(); // Level 14
+std!(); // Level 14
+rustc_public!(); // Level 14
+rustc_public!(); // Level 14
+rustc_lint!(); // Level 14
+stdarch!(); // Level 14
+rustc_ast!(); // Level 14
+rustc_hir!(); // Level 14
+test!(); // Level 14
+rustc_hir_typeck!(); // Level 14
+rustc_borrowck!(); // Level 14
+rustc_ast!(); // Level 14
+rustc_hir!(); // Level 14
+
+// Crystal Layer 15: Build 28 functions
+rustc_expand!(); // Level 15
+rustc_ast!(); // Level 15
+rustc_parse!(); // Level 15
+rustc_expand!(); // Level 15
+rustc_mir_dataflow!(); // Level 15
+compiler-builtins!(); // Level 15
+rustc_mir_dataflow!(); // Level 15
+rustc_index!(); // Level 15
+std!(); // Level 15
+std!(); // Level 15
+std!(); // Level 15
+alloctests!(); // Level 15
+std!(); // Level 15
+std!(); // Level 15
+alloc!(); // Level 15
+rustc_transmute!(); // Level 15
+core!(); // Level 15
+core!(); // Level 15
+alloc!(); // Level 15
+std!(); // Level 15
+rustc_borrowck!(); // Level 15
+rustc_borrowck!(); // Level 15
+std!(); // Level 15
+rustc_ast!(); // Level 15
+rustc_ast!(); // Level 15
+rustc_public!(); // Level 15
+rustc_public!(); // Level 15
+rustc_ast!(); // Level 15
+
+// Crystal Layer 16: Build 15 functions
+rustc_ast!(); // Level 16
+rustc_ast!(); // Level 16
+rustc_index!(); // Level 16
+core!(); // Level 16
+alloc!(); // Level 16
+rustc_codegen_llvm!(); // Level 16
+rustc_index!(); // Level 16
+rustc_lint!(); // Level 16
+stdarch!(); // Level 16
+core!(); // Level 16
+core!(); // Level 16
+alloc!(); // Level 16
+alloc!(); // Level 16
+rustc_borrowck!(); // Level 16
+rustc_parse!(); // Level 16
+
+// Crystal Layer 17: Build 23 functions
+rustc_ast!(); // Level 17
+rustc_codegen_cranelift!(); // Level 17
+stdarch!(); // Level 17
+rustc_transmute!(); // Level 17
+rustc_parse!(); // Level 17
+rustc_next_trait_solver!(); // Level 17
+rustc_ast_lowering!(); // Level 17
+stdarch!(); // Level 17
+rustc_next_trait_solver!(); // Level 17
+alloctests!(); // Level 17
+rustc_trait_selection!(); // Level 17
+core!(); // Level 17
+alloc!(); // Level 17
+alloc!(); // Level 17
+rustc_data_structures!(); // Level 17
+rustc_borrowck!(); // Level 17
+rustc_borrowck!(); // Level 17
+rustc_borrowck!(); // Level 17
+rustc_borrowck!(); // Level 17
+rustc_borrowck!(); // Level 17
+rustc_borrowck!(); // Level 17
+rustc_borrowck!(); // Level 17
+rustc_borrowck!(); // Level 17
+
+// Crystal Layer 18: Build 22 functions
+rustc_ast!(); // Level 18
+rustc_ast!(); // Level 18
+rustc_ast!(); // Level 18
+core!(); // Level 18
+rustc_transmute!(); // Level 18
+rustc_trait_selection!(); // Level 18
+alloc!(); // Level 18
+alloc!(); // Level 18
+rustc_infer!(); // Level 18
+rustc_public!(); // Level 18
+rustc_mir_dataflow!(); // Level 18
+rustc_index!(); // Level 18
+rustc_borrowck!(); // Level 18
+rustc_borrowck!(); // Level 18
+rustc_borrowck!(); // Level 18
+rustc_borrowck!(); // Level 18
+rustc_borrowck!(); // Level 18
+rustc_data_structures!(); // Level 18
+rustc_borrowck!(); // Level 18
+rustc_borrowck!(); // Level 18
+rustc_borrowck!(); // Level 18
+rustc_borrowck!(); // Level 18
+
+// Crystal Layer 19: Build 20 functions
+rustc_ast!(); // Level 19
+rustc_ast!(); // Level 19
+rustc_ast!(); // Level 19
+rustc_transmute!(); // Level 19
+rustc_transmute!(); // Level 19
+alloc!(); // Level 19
+rustc_middle!(); // Level 19
+rustc_borrowck!(); // Level 19
+rustc_index!(); // Level 19
+rustc_index!(); // Level 19
+rustc_borrowck!(); // Level 19
+rustc_borrowck!(); // Level 19
+rustc_middle!(); // Level 19
+rustc_type_ir!(); // Level 19
+rustc_data_structures!(); // Level 19
+rustc_errors!(); // Level 19
+rustc_borrowck!(); // Level 19
+rustc_middle!(); // Level 19
+std!(); // Level 19
+rustc_borrowck!(); // Level 19
+
+// Crystal Layer 20: Build 17 functions
+rustc_ast!(); // Level 20
+rustc_ast!(); // Level 20
+rustc_macros!(); // Level 20
+compiler-builtins!(); // Level 20
+rustc_trait_selection!(); // Level 20
+rustc_trait_selection!(); // Level 20
+rustc_middle!(); // Level 20
+rustc_middle!(); // Level 20
+rustc_data_structures!(); // Level 20
+rustc_errors!(); // Level 20
+rustc_borrowck!(); // Level 20
+core!(); // Level 20
+rustc_borrowck!(); // Level 20
+rustc_borrowck!(); // Level 20
+rustc_borrowck!(); // Level 20
+rustc_borrowck!(); // Level 20
+rustc_middle!(); // Level 20
+
+// Crystal Layer 21: Build 10 functions
+rustc_trait_selection!(); // Level 21
+rustc_public!(); // Level 21
+rustc_middle!(); // Level 21
+rustc_borrowck!(); // Level 21
+rustc_borrowck!(); // Level 21
+rustc_borrowck!(); // Level 21
+rustc_borrowck!(); // Level 21
+rustc_borrowck!(); // Level 21
+rustc_borrowck!(); // Level 21
+rustc_borrowck!(); // Level 21
+
+// Crystal Layer 22: Build 21 functions
+rustc_trait_selection!(); // Level 22
+rustc_middle!(); // Level 22
+rustc_middle!(); // Level 22
+rustc_borrowck!(); // Level 22
+rustc_public!(); // Level 22
+rustc_mir_dataflow!(); // Level 22
+rustc_borrowck!(); // Level 22
+rustc_borrowck!(); // Level 22
+rustc_borrowck!(); // Level 22
+rustc_infer!(); // Level 22
+rustc_borrowck!(); // Level 22
+rustc_borrowck!(); // Level 22
+rustc_borrowck!(); // Level 22
+rustc_borrowck!(); // Level 22
+rustc_borrowck!(); // Level 22
+rustc_borrowck!(); // Level 22
+rustc_borrowck!(); // Level 22
+rustc_borrowck!(); // Level 22
+rustc_borrowck!(); // Level 22
+rustc_borrowck!(); // Level 22
+rustc_borrowck!(); // Level 22
+
+// Crystal Layer 23: Build 23 functions
+rustc_trait_selection!(); // Level 23
+rustc_infer!(); // Level 23
+rustc_borrowck!(); // Level 23
+rustc_mir_transform!(); // Level 23
+rustc_mir_dataflow!(); // Level 23
+rustc_borrowck!(); // Level 23
+rustc_mir_dataflow!(); // Level 23
+rustc_mir_dataflow!(); // Level 23
+rustc_mir_dataflow!(); // Level 23
+rustc_borrowck!(); // Level 23
+rustc_middle!(); // Level 23
+rustc_borrowck!(); // Level 23
+rustc_borrowck!(); // Level 23
+rustc_data_structures!(); // Level 23
+rustc_borrowck!(); // Level 23
+rustc_borrowck!(); // Level 23
+rustc_borrowck!(); // Level 23
+rustc_trait_selection!(); // Level 23
+rustc_borrowck!(); // Level 23
+rustc_borrowck!(); // Level 23
+rustc_borrowck!(); // Level 23
+rustc_borrowck!(); // Level 23
+rustc_borrowck!(); // Level 23
+
+// Crystal Layer 24: Build 18 functions
+rustc_middle!(); // Level 24
+rustc_hir!(); // Level 24
+rustc_passes!(); // Level 24
+rustc_infer!(); // Level 24
+rustc_infer!(); // Level 24
+rustc_middle!(); // Level 24
+rustc_middle!(); // Level 24
+rustc_next_trait_solver!(); // Level 24
+rustc_infer!(); // Level 24
+rustc_middle!(); // Level 24
+rustc_mir_dataflow!(); // Level 24
+rustc_middle!(); // Level 24
+rustc_middle!(); // Level 24
+rustc_borrowck!(); // Level 24
+rustc_mir_build!(); // Level 24
+rustc_data_structures!(); // Level 24
+rustc_index!(); // Level 24
+rustc_borrowck!(); // Level 24
+
+// Crystal Layer 25: Build 20 functions
+rustc_middle!(); // Level 25
+rustc_infer!(); // Level 25
+rustc_infer!(); // Level 25
+rustc_infer!(); // Level 25
+rustc_infer!(); // Level 25
+rustc_infer!(); // Level 25
+rustc_infer!(); // Level 25
+rustc_middle!(); // Level 25
+rustc_infer!(); // Level 25
+rustc_infer!(); // Level 25
+rustc_query_impl!(); // Level 25
+test!(); // Level 25
+rustc_middle!(); // Level 25
+rustc_middle!(); // Level 25
+rustc_next_trait_solver!(); // Level 25
+rustc_type_ir!(); // Level 25
+rustc_middle!(); // Level 25
+rustc_middle!(); // Level 25
+rustc_data_structures!(); // Level 25
+rustc_borrowck!(); // Level 25
+
+// Crystal Layer 26: Build 16 functions
+rustc_infer!(); // Level 26
+rustc_data_structures!(); // Level 26
+rustc_infer!(); // Level 26
+rustc_infer!(); // Level 26
+rustc_infer!(); // Level 26
+rustc_infer!(); // Level 26
+rustc_infer!(); // Level 26
+rustc_infer!(); // Level 26
+rustc_public!(); // Level 26
+rustc_infer!(); // Level 26
+rustc_infer!(); // Level 26
+rustc_infer!(); // Level 26
+rustc_infer!(); // Level 26
+rustc_public!(); // Level 26
+rustc_middle!(); // Level 26
+rustc_data_structures!(); // Level 26
+
+// Crystal Layer 27: Build 18 functions
+rustc_data_structures!(); // Level 27
+rustc_public!(); // Level 27
+rustc_next_trait_solver!(); // Level 27
+rustc_infer!(); // Level 27
+rustc_middle!(); // Level 27
+rustc_infer!(); // Level 27
+rustc_infer!(); // Level 27
+rustc_public!(); // Level 27
+rustc_type_ir!(); // Level 27
+rustc_infer!(); // Level 27
+rustc_borrowck!(); // Level 27
+rustc_infer!(); // Level 27
+rustc_infer!(); // Level 27
+rustc_infer!(); // Level 27
+rustc_infer!(); // Level 27
+rustc_middle!(); // Level 27
+rustc_middle!(); // Level 27
+rustc_middle!(); // Level 27
+
+// Crystal Layer 28: Build 9 functions
+rustc_infer!(); // Level 28
+rustc_public!(); // Level 28
+rustc_public!(); // Level 28
+rustc_infer!(); // Level 28
+rustc_middle!(); // Level 28
+rustc_infer!(); // Level 28
+rustc_infer!(); // Level 28
+rustc_infer!(); // Level 28
+rustc_type_ir!(); // Level 28
+
+// Crystal Layer 29: Build 13 functions
+rustc_infer!(); // Level 29
+rustc_public!(); // Level 29
+rustc_public!(); // Level 29
+rustc_public!(); // Level 29
+rustc_public!(); // Level 29
+std!(); // Level 29
+rustc_infer!(); // Level 29
+rustc_hir_analysis!(); // Level 29
+rustc_middle!(); // Level 29
+rustc_public!(); // Level 29
+rustc_infer!(); // Level 29
+rustc_mir_transform!(); // Level 29
+rustc_type_ir!(); // Level 29
+
+// Crystal Layer 30: Build 11 functions
+rustc_infer!(); // Level 30
+std!(); // Level 30
+rustc_type_ir!(); // Level 30
+rustc_middle!(); // Level 30
+rustc_middle!(); // Level 30
+rustc_public!(); // Level 30
+rustc_public!(); // Level 30
+core!(); // Level 30
+rustc_type_ir!(); // Level 30
+rustc_type_ir!(); // Level 30
+rustc_public!(); // Level 30
+
+// Crystal Layer 31: Build 16 functions
+rustc_infer!(); // Level 31
+rustc_codegen_llvm!(); // Level 31
+rustc_type_ir!(); // Level 31
+rustc_codegen_llvm!(); // Level 31
+std!(); // Level 31
+std!(); // Level 31
+rustc_lint!(); // Level 31
+rustc_passes!(); // Level 31
+proc_macro!(); // Level 31
+rustc_codegen_cranelift!(); // Level 31
+portable-simd!(); // Level 31
+alloc!(); // Level 31
+rustc_type_ir!(); // Level 31
+rustc_type_ir!(); // Level 31
+core!(); // Level 31
+core!(); // Level 31
+
+// Crystal Layer 32: Build 115 functions
+rustc_middle!(); // Level 32
+std!(); // Level 32
+rustc_data_structures!(); // Level 32
+portable-simd!(); // Level 32
+test!(); // Level 32
+rustc_type_ir!(); // Level 32
+rustc_type_ir!(); // Level 32
+rustc_type_ir!(); // Level 32
+rustc_resolve!(); // Level 32
+rustc_interface!(); // Level 32
+std!(); // Level 32
+rustc_type_ir!(); // Level 32
+rustc_monomorphize!(); // Level 32
+rustc_data_structures!(); // Level 32
+core!(); // Level 32
+rustc_parse!(); // Level 32
+rustc_trait_selection!(); // Level 32
+rustc_lint!(); // Level 32
+alloctests!(); // Level 32
+rustc_hir_analysis!(); // Level 32
+rustc_const_eval!(); // Level 32
+rustc_mir_transform!(); // Level 32
+rustc_mir_transform!(); // Level 32
+rustc_codegen_ssa!(); // Level 32
+core!(); // Level 32
+std!(); // Level 32
+core!(); // Level 32
+rustc_type_ir!(); // Level 32
+core!(); // Level 32
+rustc_builtin_macros!(); // Level 32
+core!(); // Level 32
+std!(); // Level 32
+std!(); // Level 32
+core!(); // Level 32
+rustc_parse!(); // Level 32
+stdarch!(); // Level 32
+coretests!(); // Level 32
+core!(); // Level 32
+core!(); // Level 32
+coretests!(); // Level 32
+core!(); // Level 32
+core!(); // Level 32
+rustc_passes!(); // Level 32
+rustc_resolve!(); // Level 32
+rustc_type_ir!(); // Level 32
+rustc_mir_transform!(); // Level 32
+std!(); // Level 32
+rustc_trait_selection!(); // Level 32
+core!(); // Level 32
+rustc_mir_transform!(); // Level 32
+rustc_lint!(); // Level 32
+rustc_mir_build!(); // Level 32
+core!(); // Level 32
+core!(); // Level 32
+std!(); // Level 32
+alloctests!(); // Level 32
+core!(); // Level 32
+coretests!(); // Level 32
+core!(); // Level 32
+core!(); // Level 32
+core!(); // Level 32
+core!(); // Level 32
+core!(); // Level 32
+rustc_passes!(); // Level 32
+core!(); // Level 32
+core!(); // Level 32
+core!(); // Level 32
+core!(); // Level 32
+core!(); // Level 32
+rustc_errors!(); // Level 32
+rustc_ast!(); // Level 32
+std!(); // Level 32
+core!(); // Level 32
+rustc_thread_pool!(); // Level 32
+compiler-builtins!(); // Level 32
+core!(); // Level 32
+std!(); // Level 32
+rustc_parse!(); // Level 32
+core!(); // Level 32
+rustc_expand!(); // Level 32
+std!(); // Level 32
+rustc_hir_typeck!(); // Level 32
+core!(); // Level 32
+core!(); // Level 32
+core!(); // Level 32
+core!(); // Level 32
+coretests!(); // Level 32
+rustc_codegen_cranelift!(); // Level 32
+core!(); // Level 32
+std!(); // Level 32
+rustc_symbol_mangling!(); // Level 32
+std!(); // Level 32
+coretests!(); // Level 32
+rustc_mir_build!(); // Level 32
+rustc_codegen_gcc!(); // Level 32
+std!(); // Level 32
+test!(); // Level 32
+std!(); // Level 32
+core!(); // Level 32
+core!(); // Level 32
+alloc!(); // Level 32
+rustc_privacy!(); // Level 32
+core!(); // Level 32
+rustc_passes!(); // Level 32
+core!(); // Level 32
+core!(); // Level 32
+core!(); // Level 32
+rustc_query_system!(); // Level 32
+core!(); // Level 32
+core!(); // Level 32
+core!(); // Level 32
+alloctests!(); // Level 32
+std!(); // Level 32
+coretests!(); // Level 32
+core!(); // Level 32
+
+// Crystal Layer 33: Build 71 functions
+rustc_middle!(); // Level 33
+std!(); // Level 33
+portable-simd!(); // Level 33
+portable-simd!(); // Level 33
+rustc_type_ir!(); // Level 33
+rustc_type_ir!(); // Level 33
+rustc_middle!(); // Level 33
+stdarch!(); // Level 33
+rustc_type_ir!(); // Level 33
+rustc_codegen_gcc!(); // Level 33
+rustc_lint!(); // Level 33
+rustc_codegen_llvm!(); // Level 33
+rustc_mir_transform!(); // Level 33
+rustc_data_structures!(); // Level 33
+rustc_index!(); // Level 33
+rustc_hir!(); // Level 33
+rustc_trait_selection!(); // Level 33
+rustc_lint!(); // Level 33
+core!(); // Level 33
+core!(); // Level 33
+rustc_codegen_llvm!(); // Level 33
+rustc_type_ir!(); // Level 33
+rustc_parse!(); // Level 33
+core!(); // Level 33
+std!(); // Level 33
+test!(); // Level 33
+rustc_hir_analysis!(); // Level 33
+core!(); // Level 33
+std!(); // Level 33
+rustc_borrowck!(); // Level 33
+rustc_mir_transform!(); // Level 33
+rustc_mir_dataflow!(); // Level 33
+rustc_thread_pool!(); // Level 33
+coretests!(); // Level 33
+rustc_builtin_macros!(); // Level 33
+rustc_codegen_cranelift!(); // Level 33
+rustc_borrowck!(); // Level 33
+rustc_codegen_llvm!(); // Level 33
+rustc_codegen_ssa!(); // Level 33
+std!(); // Level 33
+std!(); // Level 33
+coretests!(); // Level 33
+coretests!(); // Level 33
+core!(); // Level 33
+rustc_hir!(); // Level 33
+rustc_middle!(); // Level 33
+coretests!(); // Level 33
+core!(); // Level 33
+std!(); // Level 33
+core!(); // Level 33
+rustc_resolve!(); // Level 33
+coretests!(); // Level 33
+coretests!(); // Level 33
+core!(); // Level 33
+rustc_codegen_ssa!(); // Level 33
+rustc_codegen_cranelift!(); // Level 33
+rustc_codegen_cranelift!(); // Level 33
+rustc_lint!(); // Level 33
+std!(); // Level 33
+std!(); // Level 33
+test!(); // Level 33
+test!(); // Level 33
+core!(); // Level 33
+alloc!(); // Level 33
+core!(); // Level 33
+core!(); // Level 33
+std!(); // Level 33
+core!(); // Level 33
+core!(); // Level 33
+compiler-builtins!(); // Level 33
+rustc_codegen_ssa!(); // Level 33
+
+// Crystal Layer 34: Build 70 functions
+rustc_middle!(); // Level 34
+std!(); // Level 34
+rustc_hir_analysis!(); // Level 34
+rustc_hir_analysis!(); // Level 34
+rustc_builtin_macros!(); // Level 34
+core!(); // Level 34
+proc_macro!(); // Level 34
+rustc_ast_ir!(); // Level 34
+rustc_infer!(); // Level 34
+rustc_middle!(); // Level 34
+rustc_public!(); // Level 34
+rustc_ast!(); // Level 34
+rustc_trait_selection!(); // Level 34
+rustc_infer!(); // Level 34
+core!(); // Level 34
+core!(); // Level 34
+rustc_trait_selection!(); // Level 34
+core!(); // Level 34
+core!(); // Level 34
+rustc_pattern_analysis!(); // Level 34
+rustc_mir_transform!(); // Level 34
+stdarch!(); // Level 34
+stdarch!(); // Level 34
+core!(); // Level 34
+rustc_macros!(); // Level 34
+core!(); // Level 34
+rustc_mir_transform!(); // Level 34
+rustc_middle!(); // Level 34
+rustc_hir!(); // Level 34
+rustc_hir!(); // Level 34
+rustc_hir!(); // Level 34
+rustc_hir!(); // Level 34
+rustc_hir!(); // Level 34
+rustc_data_structures!(); // Level 34
+rustc_errors!(); // Level 34
+rustc_hir_analysis!(); // Level 34
+rustc_middle!(); // Level 34
+rustc_resolve!(); // Level 34
+rustc_resolve!(); // Level 34
+core!(); // Level 34
+rustc_codegen_cranelift!(); // Level 34
+rustc_codegen_llvm!(); // Level 34
+rustc_codegen_llvm!(); // Level 34
+rustc_hir_typeck!(); // Level 34
+rustc_codegen_llvm!(); // Level 34
+rustc_public!(); // Level 34
+rustc_codegen_ssa!(); // Level 34
+rustc_codegen_ssa!(); // Level 34
+rustc_codegen_ssa!(); // Level 34
+rustc_codegen_gcc!(); // Level 34
+rustc_codegen_ssa!(); // Level 34
+rustc_codegen_ssa!(); // Level 34
+rustc_codegen_llvm!(); // Level 34
+rustc_codegen_cranelift!(); // Level 34
+rustc_codegen_cranelift!(); // Level 34
+rustc_attr_parsing!(); // Level 34
+rustc_lint!(); // Level 34
+rustc_hir!(); // Level 34
+rustc_ast!(); // Level 34
+rustc_codegen_gcc!(); // Level 34
+rustc_hir_analysis!(); // Level 34
+rustc_lint!(); // Level 34
+std!(); // Level 34
+std!(); // Level 34
+std!(); // Level 34
+test!(); // Level 34
+test!(); // Level 34
+rustc_middle!(); // Level 34
+rustc_parse!(); // Level 34
+core!(); // Level 34
+
+// Crystal Layer 35: Build 54 functions
+rustc_trait_selection!(); // Level 35
+rustc_middle!(); // Level 35
+rustc_public_bridge!(); // Level 35
+rustc_middle!(); // Level 35
+rustc_middle!(); // Level 35
+rustc_middle!(); // Level 35
+rustc_hir_analysis!(); // Level 35
+rustc_middle!(); // Level 35
+rustc_middle!(); // Level 35
+rustc_middle!(); // Level 35
+std!(); // Level 35
+rustc_trait_selection!(); // Level 35
+core!(); // Level 35
+core!(); // Level 35
+rustc_middle!(); // Level 35
+rustc_ast_passes!(); // Level 35
+rustc_trait_selection!(); // Level 35
+rustc_middle!(); // Level 35
+rustc_hir_analysis!(); // Level 35
+core!(); // Level 35
+rustc_resolve!(); // Level 35
+core!(); // Level 35
+rustc_hir!(); // Level 35
+rustc_data_structures!(); // Level 35
+rustc_hir!(); // Level 35
+rustc_errors!(); // Level 35
+rustc_ast!(); // Level 35
+rustc_codegen_cranelift!(); // Level 35
+rustc_type_ir!(); // Level 35
+rustc_codegen_llvm!(); // Level 35
+rustc_public!(); // Level 35
+rustc_public!(); // Level 35
+rustc_codegen_ssa!(); // Level 35
+rustc_codegen_ssa!(); // Level 35
+rustc_hir_typeck!(); // Level 35
+rustc_borrowck!(); // Level 35
+rustc_hir!(); // Level 35
+rustc_middle!(); // Level 35
+rustc_middle!(); // Level 35
+rustc_hir!(); // Level 35
+rustc_ast!(); // Level 35
+rustc_ast!(); // Level 35
+rustc_ast!(); // Level 35
+rustc_ast!(); // Level 35
+rustc_ast!(); // Level 35
+rustc_ast!(); // Level 35
+rustc_ast!(); // Level 35
+rustc_trait_selection!(); // Level 35
+core!(); // Level 35
+std!(); // Level 35
+std!(); // Level 35
+test!(); // Level 35
+rustc_builtin_macros!(); // Level 35
+test!(); // Level 35
+
+// Crystal Layer 36: Build 39 functions
+rustc_middle!(); // Level 36
+rustc_middle!(); // Level 36
+rustc_hir!(); // Level 36
+rustc_hir_analysis!(); // Level 36
+rustc_middle!(); // Level 36
+rustc_middle!(); // Level 36
+rustc_infer!(); // Level 36
+rustc_infer!(); // Level 36
+core!(); // Level 36
+rustc_lint_defs!(); // Level 36
+rustc_errors!(); // Level 36
+rustc_public!(); // Level 36
+rustc_ast!(); // Level 36
+std!(); // Level 36
+rustc_codegen_llvm!(); // Level 36
+rustc_codegen_ssa!(); // Level 36
+rustc_resolve!(); // Level 36
+rustc_middle!(); // Level 36
+rustc_hir_typeck!(); // Level 36
+rustc_hir!(); // Level 36
+rustc_middle!(); // Level 36
+rustc_middle!(); // Level 36
+rustc_middle!(); // Level 36
+rustc_mir_transform!(); // Level 36
+rustc_ast!(); // Level 36
+rustc_middle!(); // Level 36
+rustc_middle!(); // Level 36
+rustc_middle!(); // Level 36
+rustc_mir_build!(); // Level 36
+rustc_data_structures!(); // Level 36
+rustc_hir_typeck!(); // Level 36
+rustc_middle!(); // Level 36
+rustc_data_structures!(); // Level 36
+rustc_middle!(); // Level 36
+rustc_middle!(); // Level 36
+rustc_lint!(); // Level 36
+rustc_borrowck!(); // Level 36
+rustc_ast!(); // Level 36
+test!(); // Level 36
+
+// Crystal Layer 37: Build 19 functions
+rustc_type_ir!(); // Level 37
+rustc_middle!(); // Level 37
+rustc_lint!(); // Level 37
+rustc_errors!(); // Level 37
+rustc_data_structures!(); // Level 37
+rustc_lint_defs!(); // Level 37
+rustc_ast!(); // Level 37
+std!(); // Level 37
+rustc_codegen_ssa!(); // Level 37
+rustc_ty_utils!(); // Level 37
+rustc_hir!(); // Level 37
+rustc_borrowck!(); // Level 37
+rustc_hir!(); // Level 37
+rustc_borrowck!(); // Level 37
+rustc_middle!(); // Level 37
+rustc_mir_transform!(); // Level 37
+rustc_ast!(); // Level 37
+rustc_middle!(); // Level 37
+rustc_middle!(); // Level 37
+
+// Crystal Layer 38: Build 10 functions
+rustc_errors!(); // Level 38
+portable-simd!(); // Level 38
+rustc_data_structures!(); // Level 38
+rustc_lint_defs!(); // Level 38
+rustc_lint_defs!(); // Level 38
+rustc_span!(); // Level 38
+rustc_ast!(); // Level 38
+std!(); // Level 38
+rustc_codegen_ssa!(); // Level 38
+rustc_middle!(); // Level 38
+
+// Crystal Layer 39: Build 3 functions
+rustc_errors!(); // Level 39
+compiler-builtins!(); // Level 39
+rustc_middle!(); // Level 39
+
+// Crystal Layer 40: Build 2 functions
+compiler-builtins!(); // Level 40
+rustc_middle!(); // Level 40
+
+// Crystal Layer 41: Build 1 functions
+std!(); // Level 41
+
+🔮 MACRO LATTICE COMPOSITION
+============================
+macro_rules! build_rustc_lattice {
+    () => {
+        // Lattice Level 0
+        rustc!();
+        rustc_driver_impl!();
+
+        // Lattice Level 1
+        std!();
+        rustc_interface!();
+        alloctests!();
+        std!();
+        alloc!();
+        rustc_data_structures!();
+        compiler-builtins!();
+        std!();
+        rustc_codegen_ssa!();
+        alloctests!();
+        rustc_driver_impl!();
+        rustc_driver_impl!();
+        rustc_driver_impl!();
+        rustc_driver_impl!();
+        rustc_data_structures!();
+
+        // Lattice Level 2
+        rustc_attr_parsing!();
+        rustc_type_ir!();
+        proc_macro!();
+        rustc_data_structures!();
+        rustc_codegen_cranelift!();
+        core!();
+        rustc_middle!();
+        std!();
+        std!();
+        core!();
+        rustc_data_structures!();
+        coretests!();
+        core!();
+        rustc_hir!();
+        rustc_codegen_gcc!();
+        std!();
+        std!();
+        std!();
+        std!();
+        std!();
+        rustc_codegen_ssa!();
+        rustc_incremental!();
+        std!();
+        rustc_ast!();
+        std!();
+        rustc_codegen_ssa!();
+        std!();
+        rustc_errors!();
+        rustc_middle!();
+        rustc_incremental!();
+        rustc_session!();
+        std!();
+        rustc_driver_impl!();
+        rustc_const_eval!();
+        std!();
+        std!();
+        rustc_session!();
+        std!();
+        rustc_session!();
+        rustc_data_structures!();
+        rustc_lint!();
+        core!();
+
+        // Lattice Level 3
+        std!();
+        core!();
+        rustc_codegen_gcc!();
+        core!();
+        core!();
+        std!();
+        core!();
+        alloc!();
+        core!();
+        std!();
+        std!();
+        std!();
+        std!();
+        std!();
+        core!();
+        rustc_trait_selection!();
+        rustc_middle!();
+        std!();
+        std!();
+        std!();
+        std!();
+        rustc_attr_parsing!();
+        rustc_hir_analysis!();
+        std!();
+        std!();
+        std!();
+        core!();
+        rustc_passes!();
+        rustc_ast!();
+        rustc_span!();
+        rustc_passes!();
+        rustc_codegen_cranelift!();
+        rustc_ast_pretty!();
+        rustc_ast!();
+        rustc_builtin_macros!();
+        rustc_hir!();
+        rustc_public!();
+        core!();
+        std!();
+        rustc_trait_selection!();
+        std!();
+        std!();
+        core!();
+        std!();
+        std!();
+        std!();
+        stdarch!();
+        core!();
+        rustc_mir_transform!();
+        rustc_codegen_gcc!();
+        rustc_errors!();
+        std!();
+        rustc_hir_typeck!();
+        rustc_lint!();
+        rustc_lint!();
+        core!();
+
+        // Lattice Level 4
+        core!();
+        core!();
+        rustc_middle!();
+        std!();
+        std!();
+        std!();
+        std!();
+        std!();
+        std!();
+        alloc!();
+        rustc_monomorphize!();
+        rustc_span!();
+        rustc_mir_transform!();
+        std!();
+        panic_unwind!();
+        core!();
+        rustc_borrowck!();
+        std!();
+        std!();
+        std!();
+        core!();
+        core!();
+        portable-simd!();
+        stdarch!();
+        stdarch!();
+        std!();
+        std!();
+        rustc_errors!();
+
+        // Lattice Level 5
+        compiler-builtins!();
+        compiler-builtins!();
+        compiler-builtins!();
+        compiler-builtins!();
+        core!();
+        std!();
+        alloc!();
+        core!();
+        stdarch!();
+        rustc_errors!();
+        rustc_errors!();
+        rustc_span!();
+        rustc_errors!();
+        rustc_errors!();
+        rustc_errors!();
+
+        // Lattice Level 6
+        core!();
+        std!();
+        alloc!();
+        core!();
+        rustc_errors!();
+        rustc_log!();
+        rustc_errors!();
+
+        // Lattice Level 7
+        rustc_resolve!();
+        rustc_builtin_macros!();
+        rustc_hir_analysis!();
+        rustc_mir_build!();
+        rustc_resolve!();
+        rustc_metadata!();
+        std!();
+        rustc_mir_dataflow!();
+        alloc!();
+        rustc_error_messages!();
+        rustc_codegen_ssa!();
+        rustc_lint_defs!();
+        rustc_errors!();
+        rustc_errors!();
+        rustc_errors!();
+        rustc_errors!();
+        std!();
+        rustc_errors!();
+        rustc_attr_parsing!();
+        rustc_errors!();
+        rustc_errors!();
+        rustc_errors!();
+        rustc_error_messages!();
+        rustc_errors!();
+        rustc_errors!();
+        rustc_span!();
+        rustc_borrowck!();
+        rustc_ast_passes!();
+        rustc_expand!();
+
+        // Lattice Level 8
+        rustc_hir_analysis!();
+        rustc_middle!();
+        rustc_mir_build!();
+        rustc_ty_utils!();
+        core!();
+        alloc!();
+        alloc!();
+        rustc_error_messages!();
+        rustc_ast_pretty!();
+        rustc_hir_id!();
+        rustc_errors!();
+        rustc_data_structures!();
+        rustc_error_messages!();
+        rustc_error_messages!();
+        std!();
+        rustc_middle!();
+        rustc_passes!();
+        rustc_session!();
+        rustc_span!();
+        rustc_span!();
+        rustc_span!();
+        rustc_ast_passes!();
+        rustc_expand!();
+
+        // Lattice Level 9
+        alloc!();
+        rustc_hir_id!();
+        rustc_middle!();
+        rustc_borrowck!();
+        core!();
+        proc_macro!();
+        compiler-builtins!();
+        rustc_builtin_macros!();
+        test!();
+        alloc!();
+        rustc_session!();
+        rustc_session!();
+        rustc_session!();
+        rustc_session!();
+        rustc_data_structures!();
+        rustc_errors!();
+        rustc_session!();
+        rustc_session!();
+        rustc_session!();
+        rustc_lint!();
+        rustc_session!();
+        rustc_expand!();
+        rustc_expand!();
+        rustc_expand!();
+        rustc_expand!();
+        rustc_ast!();
+        rustc_expand!();
+
+        // Lattice Level 10
+        alloc!();
+        rustc_trait_selection!();
+        alloc!();
+        rustc_borrowck!();
+        rustc_lint!();
+        alloctests!();
+        rustc_middle!();
+        alloc!();
+        rustc_feature!();
+        rustc_interface!();
+        rustc_session!();
+        rustc_span!();
+        rustc_data_structures!();
+        rustc_span!();
+        rustc_session!();
+        rustc_session!();
+        rustc_ast!();
+        rustc_macros!();
+        rustc_codegen_ssa!();
+        rustc_data_structures!();
+        rustc_data_structures!();
+        std!();
+        rustc_errors!();
+        rustc_session!();
+        rustc_data_structures!();
+        rustc_session!();
+        rustc_hir!();
+        rustc_expand!();
+        rustc_resolve!();
+        rustc_expand!();
+        rustc_query_system!();
+        rustc_expand!();
+        rustc_expand!();
+        rustc_span!();
+        rustc_builtin_macros!();
+        rustc_expand!();
+        rustc_hir!();
+        rustc_codegen_gcc!();
+        rustc_lint_defs!();
+        proc_macro!();
+        rustc_data_structures!();
+        rustc_public!();
+        rustc_expand!();
+        rustc_expand!();
+        rustc_expand!();
+        rustc_index!();
+
+        // Lattice Level 11
+        test!();
+        proc_macro!();
+        rustc_attr_parsing!();
+        rustc_ty_utils!();
+        rustc_data_structures!();
+        rustc_span!();
+        rustc_data_structures!();
+        rustc_span!();
+        rustc_span!();
+        std!();
+        rustc_macros!();
+        rustc_codegen_llvm!();
+        rustc_query_impl!();
+        rustc_session!();
+        rustc_session!();
+        rustc_expand!();
+        rustc_expand!();
+        rustc_builtin_macros!();
+        rustc_expand!();
+        rustc_expand!();
+        rustc_hir!();
+        rustc_hir!();
+        rustc_metadata!();
+        rustc_codegen_gcc!();
+        std!();
+        std!();
+        rustc_const_eval!();
+        rustc_middle!();
+
+        // Lattice Level 12
+        test!();
+        test!();
+        std!();
+        rustc_span!();
+        rustc_span!();
+        rustc_data_structures!();
+        rustc_parse!();
+        rustc_macros!();
+        std!();
+        rustc_span!();
+        rustc_span!();
+        rustc_macros!();
+        rustc_session!();
+        rustc_builtin_macros!();
+        rustc_span!();
+        rustc_expand!();
+        rustc_expand!();
+        rustc_ast!();
+        rustc_expand!();
+        rustc_hir!();
+        rustc_hir!();
+        std!();
+
+        // Lattice Level 13
+        rustc_span!();
+        rustc_span!();
+        rustc_data_structures!();
+        rustc_span!();
+        rustc_trait_selection!();
+        rustc_span!();
+        rustc_span!();
+        rustc_span!();
+        rustc_span!();
+        rustc_span!();
+        rustc_public!();
+        rustc_data_structures!();
+        rustc_attr_parsing!();
+        rustc_macros!();
+        rustc_parse!();
+        rustc_borrowck!();
+        rustc_hir_typeck!();
+        rustc_middle!();
+        std!();
+        rustc_incremental!();
+        rustc_thread_pool!();
+        backtrace!();
+        rustc_session!();
+        std!();
+        rustc_monomorphize!();
+        rustc_borrowck!();
+        stdarch!();
+        std!();
+        alloctests!();
+        rustc_lint!();
+        std!();
+        std!();
+        core!();
+        std!();
+        rustc_middle!();
+        rustc_expand!();
+        rustc_expand!();
+        rustc_expand!();
+        rustc_ast!();
+        rustc_ast!();
+        rustc_hir!();
+        rustc_hir!();
+        std!();
+
+        // Lattice Level 14
+        rustc_span!();
+        rustc_hashes!();
+        rustc_span!();
+        rustc_span!();
+        rustc_span!();
+        rustc_hashes!();
+        compiler-builtins!();
+        rustc_ast!();
+        rustc_parse!();
+        rustc_mir_dataflow!();
+        std!();
+        std!();
+        stdarch!();
+        std!();
+        std!();
+        std!();
+        rustc_codegen_llvm!();
+        rustc_hir_analysis!();
+        rustc_borrowck!();
+        std!();
+        rustc_macros!();
+        rustc_attr_parsing!();
+        rustc_lint!();
+        alloc!();
+        rustc_interface!();
+        rustc_passes!();
+        coretests!();
+        std!();
+        core!();
+        alloc!();
+        rustc_query_impl!();
+        rustc_mir_transform!();
+        alloc!();
+        rustc_borrowck!();
+        rustc_borrowck!();
+        rustc_borrowck!();
+        rustc_middle!();
+        alloctests!();
+        std!();
+        std!();
+        rustc_hir_typeck!();
+        rustc_middle!();
+        rustc_expand!();
+        rustc_ast!();
+        std!();
+        rustc_public!();
+        rustc_public!();
+        rustc_lint!();
+        stdarch!();
+        rustc_ast!();
+        rustc_hir!();
+        test!();
+        rustc_hir_typeck!();
+        rustc_borrowck!();
+        rustc_ast!();
+        rustc_hir!();
+
+        // Lattice Level 15
+        rustc_expand!();
+        rustc_ast!();
+        rustc_parse!();
+        rustc_expand!();
+        rustc_mir_dataflow!();
+        compiler-builtins!();
+        rustc_mir_dataflow!();
+        rustc_index!();
+        std!();
+        std!();
+        std!();
+        alloctests!();
+        std!();
+        std!();
+        alloc!();
+        rustc_transmute!();
+        core!();
+        core!();
+        alloc!();
+        std!();
+        rustc_borrowck!();
+        rustc_borrowck!();
+        std!();
+        rustc_ast!();
+        rustc_ast!();
+        rustc_public!();
+        rustc_public!();
+        rustc_ast!();
+
+        // Lattice Level 16
+        rustc_ast!();
+        rustc_ast!();
+        rustc_index!();
+        core!();
+        alloc!();
+        rustc_codegen_llvm!();
+        rustc_index!();
+        rustc_lint!();
+        stdarch!();
+        core!();
+        core!();
+        alloc!();
+        alloc!();
+        rustc_borrowck!();
+        rustc_parse!();
+
+        // Lattice Level 17
+        rustc_ast!();
+        rustc_codegen_cranelift!();
+        stdarch!();
+        rustc_transmute!();
+        rustc_parse!();
+        rustc_next_trait_solver!();
+        rustc_ast_lowering!();
+        stdarch!();
+        rustc_next_trait_solver!();
+        alloctests!();
+        rustc_trait_selection!();
+        core!();
+        alloc!();
+        alloc!();
+        rustc_data_structures!();
+        rustc_borrowck!();
+        rustc_borrowck!();
+        rustc_borrowck!();
+        rustc_borrowck!();
+        rustc_borrowck!();
+        rustc_borrowck!();
+        rustc_borrowck!();
+        rustc_borrowck!();
+
+        // Lattice Level 18
+        rustc_ast!();
+        rustc_ast!();
+        rustc_ast!();
+        core!();
+        rustc_transmute!();
+        rustc_trait_selection!();
+        alloc!();
+        alloc!();
+        rustc_infer!();
+        rustc_public!();
+        rustc_mir_dataflow!();
+        rustc_index!();
+        rustc_borrowck!();
+        rustc_borrowck!();
+        rustc_borrowck!();
+        rustc_borrowck!();
+        rustc_borrowck!();
+        rustc_data_structures!();
+        rustc_borrowck!();
+        rustc_borrowck!();
+        rustc_borrowck!();
+        rustc_borrowck!();
+
+        // Lattice Level 19
+        rustc_ast!();
+        rustc_ast!();
+        rustc_ast!();
+        rustc_transmute!();
+        rustc_transmute!();
+        alloc!();
+        rustc_middle!();
+        rustc_borrowck!();
+        rustc_index!();
+        rustc_index!();
+        rustc_borrowck!();
+        rustc_borrowck!();
+        rustc_middle!();
+        rustc_type_ir!();
+        rustc_data_structures!();
+        rustc_errors!();
+        rustc_borrowck!();
+        rustc_middle!();
+        std!();
+        rustc_borrowck!();
+
+        // Lattice Level 20
+        rustc_ast!();
+        rustc_ast!();
+        rustc_macros!();
+        compiler-builtins!();
+        rustc_trait_selection!();
+        rustc_trait_selection!();
+        rustc_middle!();
+        rustc_middle!();
+        rustc_data_structures!();
+        rustc_errors!();
+        rustc_borrowck!();
+        core!();
+        rustc_borrowck!();
+        rustc_borrowck!();
+        rustc_borrowck!();
+        rustc_borrowck!();
+        rustc_middle!();
+
+        // Lattice Level 21
+        rustc_trait_selection!();
+        rustc_public!();
+        rustc_middle!();
+        rustc_borrowck!();
+        rustc_borrowck!();
+        rustc_borrowck!();
+        rustc_borrowck!();
+        rustc_borrowck!();
+        rustc_borrowck!();
+        rustc_borrowck!();
+
+        // Lattice Level 22
+        rustc_trait_selection!();
+        rustc_middle!();
+        rustc_middle!();
+        rustc_borrowck!();
+        rustc_public!();
+        rustc_mir_dataflow!();
+        rustc_borrowck!();
+        rustc_borrowck!();
+        rustc_borrowck!();
+        rustc_infer!();
+        rustc_borrowck!();
+        rustc_borrowck!();
+        rustc_borrowck!();
+        rustc_borrowck!();
+        rustc_borrowck!();
+        rustc_borrowck!();
+        rustc_borrowck!();
+        rustc_borrowck!();
+        rustc_borrowck!();
+        rustc_borrowck!();
+        rustc_borrowck!();
+
+        // Lattice Level 23
+        rustc_trait_selection!();
+        rustc_infer!();
+        rustc_borrowck!();
+        rustc_mir_transform!();
+        rustc_mir_dataflow!();
+        rustc_borrowck!();
+        rustc_mir_dataflow!();
+        rustc_mir_dataflow!();
+        rustc_mir_dataflow!();
+        rustc_borrowck!();
+        rustc_middle!();
+        rustc_borrowck!();
+        rustc_borrowck!();
+        rustc_data_structures!();
+        rustc_borrowck!();
+        rustc_borrowck!();
+        rustc_borrowck!();
+        rustc_trait_selection!();
+        rustc_borrowck!();
+        rustc_borrowck!();
+        rustc_borrowck!();
+        rustc_borrowck!();
+        rustc_borrowck!();
+
+        // Lattice Level 24
+        rustc_middle!();
+        rustc_hir!();
+        rustc_passes!();
+        rustc_infer!();
+        rustc_infer!();
+        rustc_middle!();
+        rustc_middle!();
+        rustc_next_trait_solver!();
+        rustc_infer!();
+        rustc_middle!();
+        rustc_mir_dataflow!();
+        rustc_middle!();
+        rustc_middle!();
+        rustc_borrowck!();
+        rustc_mir_build!();
+        rustc_data_structures!();
+        rustc_index!();
+        rustc_borrowck!();
+
+        // Lattice Level 25
+        rustc_middle!();
+        rustc_infer!();
+        rustc_infer!();
+        rustc_infer!();
+        rustc_infer!();
+        rustc_infer!();
+        rustc_infer!();
+        rustc_middle!();
+        rustc_infer!();
+        rustc_infer!();
+        rustc_query_impl!();
+        test!();
+        rustc_middle!();
+        rustc_middle!();
+        rustc_next_trait_solver!();
+        rustc_type_ir!();
+        rustc_middle!();
+        rustc_middle!();
+        rustc_data_structures!();
+        rustc_borrowck!();
+
+        // Lattice Level 26
+        rustc_infer!();
+        rustc_data_structures!();
+        rustc_infer!();
+        rustc_infer!();
+        rustc_infer!();
+        rustc_infer!();
+        rustc_infer!();
+        rustc_infer!();
+        rustc_public!();
+        rustc_infer!();
+        rustc_infer!();
+        rustc_infer!();
+        rustc_infer!();
+        rustc_public!();
+        rustc_middle!();
+        rustc_data_structures!();
+
+        // Lattice Level 27
+        rustc_data_structures!();
+        rustc_public!();
+        rustc_next_trait_solver!();
+        rustc_infer!();
+        rustc_middle!();
+        rustc_infer!();
+        rustc_infer!();
+        rustc_public!();
+        rustc_type_ir!();
+        rustc_infer!();
+        rustc_borrowck!();
+        rustc_infer!();
+        rustc_infer!();
+        rustc_infer!();
+        rustc_infer!();
+        rustc_middle!();
+        rustc_middle!();
+        rustc_middle!();
+
+        // Lattice Level 28
+        rustc_infer!();
+        rustc_public!();
+        rustc_public!();
+        rustc_infer!();
+        rustc_middle!();
+        rustc_infer!();
+        rustc_infer!();
+        rustc_infer!();
+        rustc_type_ir!();
+
+        // Lattice Level 29
+        rustc_infer!();
+        rustc_public!();
+        rustc_public!();
+        rustc_public!();
+        rustc_public!();
+        std!();
+        rustc_infer!();
+        rustc_hir_analysis!();
+        rustc_middle!();
+        rustc_public!();
+        rustc_infer!();
+        rustc_mir_transform!();
+        rustc_type_ir!();
+
+        // Lattice Level 30
+        rustc_infer!();
+        std!();
+        rustc_type_ir!();
+        rustc_middle!();
+        rustc_middle!();
+        rustc_public!();
+        rustc_public!();
+        core!();
+        rustc_type_ir!();
+        rustc_type_ir!();
+        rustc_public!();
+
+        // Lattice Level 31
+        rustc_infer!();
+        rustc_codegen_llvm!();
+        rustc_type_ir!();
+        rustc_codegen_llvm!();
+        std!();
+        std!();
+        rustc_lint!();
+        rustc_passes!();
+        proc_macro!();
+        rustc_codegen_cranelift!();
+        portable-simd!();
+        alloc!();
+        rustc_type_ir!();
+        rustc_type_ir!();
+        core!();
+        core!();
+
+        // Lattice Level 32
+        rustc_middle!();
+        std!();
+        rustc_data_structures!();
+        portable-simd!();
+        test!();
+        rustc_type_ir!();
+        rustc_type_ir!();
+        rustc_type_ir!();
+        rustc_resolve!();
+        rustc_interface!();
+        std!();
+        rustc_type_ir!();
+        rustc_monomorphize!();
+        rustc_data_structures!();
+        core!();
+        rustc_parse!();
+        rustc_trait_selection!();
+        rustc_lint!();
+        alloctests!();
+        rustc_hir_analysis!();
+        rustc_const_eval!();
+        rustc_mir_transform!();
+        rustc_mir_transform!();
+        rustc_codegen_ssa!();
+        core!();
+        std!();
+        core!();
+        rustc_type_ir!();
+        core!();
+        rustc_builtin_macros!();
+        core!();
+        std!();
+        std!();
+        core!();
+        rustc_parse!();
+        stdarch!();
+        coretests!();
+        core!();
+        core!();
+        coretests!();
+        core!();
+        core!();
+        rustc_passes!();
+        rustc_resolve!();
+        rustc_type_ir!();
+        rustc_mir_transform!();
+        std!();
+        rustc_trait_selection!();
+        core!();
+        rustc_mir_transform!();
+        rustc_lint!();
+        rustc_mir_build!();
+        core!();
+        core!();
+        std!();
+        alloctests!();
+        core!();
+        coretests!();
+        core!();
+        core!();
+        core!();
+        core!();
+        core!();
+        rustc_passes!();
+        core!();
+        core!();
+        core!();
+        core!();
+        core!();
+        rustc_errors!();
+        rustc_ast!();
+        std!();
+        core!();
+        rustc_thread_pool!();
+        compiler-builtins!();
+        core!();
+        std!();
+        rustc_parse!();
+        core!();
+        rustc_expand!();
+        std!();
+        rustc_hir_typeck!();
+        core!();
+        core!();
+        core!();
+        core!();
+        coretests!();
+        rustc_codegen_cranelift!();
+        core!();
+        std!();
+        rustc_symbol_mangling!();
+        std!();
+        coretests!();
+        rustc_mir_build!();
+        rustc_codegen_gcc!();
+        std!();
+        test!();
+        std!();
+        core!();
+        core!();
+        alloc!();
+        rustc_privacy!();
+        core!();
+        rustc_passes!();
+        core!();
+        core!();
+        core!();
+        rustc_query_system!();
+        core!();
+        core!();
+        core!();
+        alloctests!();
+        std!();
+        coretests!();
+        core!();
+
+        // Lattice Level 33
+        rustc_middle!();
+        std!();
+        portable-simd!();
+        portable-simd!();
+        rustc_type_ir!();
+        rustc_type_ir!();
+        rustc_middle!();
+        stdarch!();
+        rustc_type_ir!();
+        rustc_codegen_gcc!();
+        rustc_lint!();
+        rustc_codegen_llvm!();
+        rustc_mir_transform!();
+        rustc_data_structures!();
+        rustc_index!();
+        rustc_hir!();
+        rustc_trait_selection!();
+        rustc_lint!();
+        core!();
+        core!();
+        rustc_codegen_llvm!();
+        rustc_type_ir!();
+        rustc_parse!();
+        core!();
+        std!();
+        test!();
+        rustc_hir_analysis!();
+        core!();
+        std!();
+        rustc_borrowck!();
+        rustc_mir_transform!();
+        rustc_mir_dataflow!();
+        rustc_thread_pool!();
+        coretests!();
+        rustc_builtin_macros!();
+        rustc_codegen_cranelift!();
+        rustc_borrowck!();
+        rustc_codegen_llvm!();
+        rustc_codegen_ssa!();
+        std!();
+        std!();
+        coretests!();
+        coretests!();
+        core!();
+        rustc_hir!();
+        rustc_middle!();
+        coretests!();
+        core!();
+        std!();
+        core!();
+        rustc_resolve!();
+        coretests!();
+        coretests!();
+        core!();
+        rustc_codegen_ssa!();
+        rustc_codegen_cranelift!();
+        rustc_codegen_cranelift!();
+        rustc_lint!();
+        std!();
+        std!();
+        test!();
+        test!();
+        core!();
+        alloc!();
+        core!();
+        core!();
+        std!();
+        core!();
+        core!();
+        compiler-builtins!();
+        rustc_codegen_ssa!();
+
+        // Lattice Level 34
+        rustc_middle!();
+        std!();
+        rustc_hir_analysis!();
+        rustc_hir_analysis!();
+        rustc_builtin_macros!();
+        core!();
+        proc_macro!();
+        rustc_ast_ir!();
+        rustc_infer!();
+        rustc_middle!();
+        rustc_public!();
+        rustc_ast!();
+        rustc_trait_selection!();
+        rustc_infer!();
+        core!();
+        core!();
+        rustc_trait_selection!();
+        core!();
+        core!();
+        rustc_pattern_analysis!();
+        rustc_mir_transform!();
+        stdarch!();
+        stdarch!();
+        core!();
+        rustc_macros!();
+        core!();
+        rustc_mir_transform!();
+        rustc_middle!();
+        rustc_hir!();
+        rustc_hir!();
+        rustc_hir!();
+        rustc_hir!();
+        rustc_hir!();
+        rustc_data_structures!();
+        rustc_errors!();
+        rustc_hir_analysis!();
+        rustc_middle!();
+        rustc_resolve!();
+        rustc_resolve!();
+        core!();
+        rustc_codegen_cranelift!();
+        rustc_codegen_llvm!();
+        rustc_codegen_llvm!();
+        rustc_hir_typeck!();
+        rustc_codegen_llvm!();
+        rustc_public!();
+        rustc_codegen_ssa!();
+        rustc_codegen_ssa!();
+        rustc_codegen_ssa!();
+        rustc_codegen_gcc!();
+        rustc_codegen_ssa!();
+        rustc_codegen_ssa!();
+        rustc_codegen_llvm!();
+        rustc_codegen_cranelift!();
+        rustc_codegen_cranelift!();
+        rustc_attr_parsing!();
+        rustc_lint!();
+        rustc_hir!();
+        rustc_ast!();
+        rustc_codegen_gcc!();
+        rustc_hir_analysis!();
+        rustc_lint!();
+        std!();
+        std!();
+        std!();
+        test!();
+        test!();
+        rustc_middle!();
+        rustc_parse!();
+        core!();
+
+        // Lattice Level 35
+        rustc_trait_selection!();
+        rustc_middle!();
+        rustc_public_bridge!();
+        rustc_middle!();
+        rustc_middle!();
+        rustc_middle!();
+        rustc_hir_analysis!();
+        rustc_middle!();
+        rustc_middle!();
+        rustc_middle!();
+        std!();
+        rustc_trait_selection!();
+        core!();
+        core!();
+        rustc_middle!();
+        rustc_ast_passes!();
+        rustc_trait_selection!();
+        rustc_middle!();
+        rustc_hir_analysis!();
+        core!();
+        rustc_resolve!();
+        core!();
+        rustc_hir!();
+        rustc_data_structures!();
+        rustc_hir!();
+        rustc_errors!();
+        rustc_ast!();
+        rustc_codegen_cranelift!();
+        rustc_type_ir!();
+        rustc_codegen_llvm!();
+        rustc_public!();
+        rustc_public!();
+        rustc_codegen_ssa!();
+        rustc_codegen_ssa!();
+        rustc_hir_typeck!();
+        rustc_borrowck!();
+        rustc_hir!();
+        rustc_middle!();
+        rustc_middle!();
+        rustc_hir!();
+        rustc_ast!();
+        rustc_ast!();
+        rustc_ast!();
+        rustc_ast!();
+        rustc_ast!();
+        rustc_ast!();
+        rustc_ast!();
+        rustc_trait_selection!();
+        core!();
+        std!();
+        std!();
+        test!();
+        rustc_builtin_macros!();
+        test!();
+
+        // Lattice Level 36
+        rustc_middle!();
+        rustc_middle!();
+        rustc_hir!();
+        rustc_hir_analysis!();
+        rustc_middle!();
+        rustc_middle!();
+        rustc_infer!();
+        rustc_infer!();
+        core!();
+        rustc_lint_defs!();
+        rustc_errors!();
+        rustc_public!();
+        rustc_ast!();
+        std!();
+        rustc_codegen_llvm!();
+        rustc_codegen_ssa!();
+        rustc_resolve!();
+        rustc_middle!();
+        rustc_hir_typeck!();
+        rustc_hir!();
+        rustc_middle!();
+        rustc_middle!();
+        rustc_middle!();
+        rustc_mir_transform!();
+        rustc_ast!();
+        rustc_middle!();
+        rustc_middle!();
+        rustc_middle!();
+        rustc_mir_build!();
+        rustc_data_structures!();
+        rustc_hir_typeck!();
+        rustc_middle!();
+        rustc_data_structures!();
+        rustc_middle!();
+        rustc_middle!();
+        rustc_lint!();
+        rustc_borrowck!();
+        rustc_ast!();
+        test!();
+
+        // Lattice Level 37
+        rustc_type_ir!();
+        rustc_middle!();
+        rustc_lint!();
+        rustc_errors!();
+        rustc_data_structures!();
+        rustc_lint_defs!();
+        rustc_ast!();
+        std!();
+        rustc_codegen_ssa!();
+        rustc_ty_utils!();
+        rustc_hir!();
+        rustc_borrowck!();
+        rustc_hir!();
+        rustc_borrowck!();
+        rustc_middle!();
+        rustc_mir_transform!();
+        rustc_ast!();
+        rustc_middle!();
+        rustc_middle!();
+
+        // Lattice Level 38
+        rustc_errors!();
+        portable-simd!();
+        rustc_data_structures!();
+        rustc_lint_defs!();
+        rustc_lint_defs!();
+        rustc_span!();
+        rustc_ast!();
+        std!();
+        rustc_codegen_ssa!();
+        rustc_middle!();
+
+        // Lattice Level 39
+        rustc_errors!();
+        compiler-builtins!();
+        rustc_middle!();
+
+        // Lattice Level 40
+        compiler-builtins!();
+        rustc_middle!();
+
+        // Lattice Level 41
+        std!();
+
+    };
+}

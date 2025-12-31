@@ -1,0 +1,81 @@
+🔬 RUSTC TOPOLOGICAL SORT
+=========================
+Total Functions: 73
+Total Files: 0
+
+📋 FUNCTION EVALUATION ORDER:
+  1. Dependency Depth: 0
+  2. Functions:
+  3. rustc
+  4. Dependency Depth: 1
+  5. Functions:
+  6. rustc_span
+  7. rustc_const_eval
+  8. rustc_transmute
+  9. rustc_ast_passes
+ 10. rustc_symbol_mangling
+ 11. rustc_privacy
+ 12. portable-simd
+ 13. rustc_parse
+ 14. rustc_public_bridge
+ 15. proc_macro
+ 16. panic_unwind
+ 17. rustc_expand
+ 18. rustc_hir
+ 19. rustc_pattern_analysis
+ 20. rustc_next_trait_solver
+ 21. rustc_trait_selection
+ 22. rustc_codegen_cranelift
+ 23. rustc_index
+ 24. rustc_resolve
+ 25. rustc_error_messages
+ 26. rustc_driver_impl
+ 27. coretests
+ 28. rustc_query_impl
+ 29. alloc
+ 30. rustc_thread_pool
+ 31. core
+ 32. rustc_public
+ 33. rustc_passes
+ 34. rustc_codegen_llvm
+ 35. rustc_ast_pretty
+ 36. rustc_ast_lowering
+ 37. rustc_hir_typeck
+ 38. rustc_ty_utils
+ 39. rustc_codegen_ssa
+ 40. rustc_monomorphize
+ 41. rustc_lint
+ 42. rustc_feature
+ 43. rustc_ast
+ 44. rustc_incremental
+ 45. rustc_hashes
+ 46. rustc_mir_build
+ 47. rustc_hir_id
+ 48. rustc_data_structures
+ 49. rustc_mir_transform
+ 50. std
+ 51. rustc_infer
+ 52. test
+ 53. rustc_query_system
+ 54. rustc_log
+ 55. rustc_mir_dataflow
+ 56. rustc_attr_parsing
+ 57. rustc_session
+ 58. rustc_macros
+ 59. rustc_interface
+ 60. rustc_ast_ir
+ 61. rustc_metadata
+ 62. stdarch
+ 63. rustc_codegen_gcc
+ 64. rustc_errors
+ 65. rustc_borrowck
+ 66. backtrace
+ 67. compiler-builtins
+ 68. rustc_builtin_macros
+ 69. rustc_middle
+ 70. rustc_hir_analysis
+ 71. rustc_lint_defs
+ 72. rustc_type_ir
+ 73. alloctests
+
+📁 FILE EVALUATION ORDER:

@@ -1,0 +1,82 @@
+🔬 FIXED RUSTC DEPENDENCY LATTICE
+=================================
+Total Levels: 2
+Structure: Leaves (Level 0) → Main (Level 1)
+
+LEVEL 0 - 🌱 LEAF LEVEL (No Dependencies) (1 functions)
+├─ Dependency Depth: 0
+└─ Functions:
+   └─ rustc
+
+LEVEL 1 - 🚀 MAIN LEVEL (Entry Point) (68 functions)
+├─ Dependency Depth: 1
+└─ Functions:
+   ├─ rustc_span
+   ├─ rustc_const_eval
+   ├─ rustc_transmute
+   ├─ rustc_ast_passes
+   ├─ rustc_symbol_mangling
+   ├─ rustc_privacy
+   ├─ portable-simd
+   ├─ rustc_parse
+   ├─ rustc_public_bridge
+   ├─ proc_macro
+   ├─ panic_unwind
+   ├─ rustc_expand
+   ├─ rustc_hir
+   ├─ rustc_pattern_analysis
+   ├─ rustc_next_trait_solver
+   ├─ rustc_trait_selection
+   ├─ rustc_codegen_cranelift
+   ├─ rustc_index
+   ├─ rustc_resolve
+   ├─ rustc_error_messages
+   ├─ rustc_driver_impl
+   ├─ coretests
+   ├─ rustc_query_impl
+   ├─ alloc
+   ├─ rustc_thread_pool
+   ├─ core
+   ├─ rustc_public
+   ├─ rustc_passes
+   ├─ rustc_codegen_llvm
+   ├─ rustc_ast_pretty
+   ├─ rustc_ast_lowering
+   ├─ rustc_hir_typeck
+   ├─ rustc_ty_utils
+   ├─ rustc_codegen_ssa
+   ├─ rustc_monomorphize
+   ├─ rustc_lint
+   ├─ rustc_feature
+   ├─ rustc_ast
+   ├─ rustc_incremental
+   ├─ rustc_hashes
+   ├─ rustc_mir_build
+   ├─ rustc_hir_id
+   ├─ rustc_data_structures
+   ├─ rustc_mir_transform
+   ├─ std
+   ├─ rustc_infer
+   ├─ test
+   ├─ rustc_query_system
+   ├─ rustc_log
+   ├─ rustc_mir_dataflow
+   ├─ rustc_attr_parsing
+   ├─ rustc_session
+   ├─ rustc_macros
+   ├─ rustc_interface
+   ├─ rustc_ast_ir
+   ├─ rustc_metadata
+   ├─ stdarch
+   ├─ rustc_codegen_gcc
+   ├─ rustc_errors
+   ├─ rustc_borrowck
+   ├─ backtrace
+   ├─ compiler-builtins
+   ├─ rustc_builtin_macros
+   ├─ rustc_middle
+   ├─ rustc_hir_analysis
+   ├─ rustc_lint_defs
+   ├─ rustc_type_ir
+   └─ alloctests
+
