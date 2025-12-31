@@ -27,7 +27,10 @@ pub mod rustc_infer {
     pub mod infer { pub use crate::*; }
     pub mod traits { pub use crate::*; }
 }
-pub mod rustc_trait_selection {}
+pub mod rustc_trait_selection {
+    pub mod infer { pub use crate::*; }
+    pub mod traits { pub use crate::*; }
+}
 pub mod error_reporting {
     pub mod infer { pub use crate::*; }
 }
@@ -36,7 +39,11 @@ pub mod traits {
 }
 pub mod stable_hasher {}
 pub mod rustc_data_structures {
-    pub mod fx { pub use crate::*; }
+    pub mod fx { 
+        pub use crate::*; 
+        pub struct FxHashSet<T>(std::collections::HashSet<T>);
+        pub struct FxHashMap<K, V>(std::collections::HashMap<K, V>);
+    }
 }
 pub mod rustc_macros {
     // Common rustc_macros items that are imported
@@ -46,8 +53,12 @@ pub mod rustc_macros {
 pub mod rustc_abi {}
 pub mod rustc_index {}
 pub mod rustc_codegen_ssa {}
-pub mod rustc_hir {}
-pub mod rustc_target {}
+pub mod rustc_mir_dataflow {}
+pub mod rustc_index {}
+pub mod coverage { pub use crate::*; }
+pub mod llvm { pub use crate::*; }
+pub mod common { pub use crate::*; }
+pub mod inherent { pub use crate::*; }
 pub mod errors {}
 pub mod infer { pub use crate::*; }
 
@@ -60,31 +71,50 @@ pub mod rustc_complete {
         pub struct Ty;
         pub mod print { pub use crate::*; }
         pub mod layout { pub use crate::*; }
-        pub mod error { pub use crate::*; }
+        pub mod adjustment { pub use crate::*; }
     }
     pub mod def_id { 
         pub use crate::*; 
         pub struct DefId;
         pub struct LocalDefId;
     }
-    pub mod mir { pub use crate::*; }
+    pub mod def {
+        pub use crate::*;
+        pub struct DefKind;
+    }
+    pub mod mir { 
+        pub use crate::*; 
+        pub mod visit { pub use crate::*; }
+        pub mod interpret { pub use crate::*; }
+    }
     pub mod traits { 
         pub use crate::*; 
         pub mod query { pub use crate::*; }
     }
     pub mod query { pub use crate::*; }
-    pub mod def { pub use crate::*; }
     pub mod errors { pub use crate::*; }
     pub mod infer { pub use crate::*; }
     pub mod sym { pub use crate::*; }
     pub mod parse { pub use crate::*; }
     pub mod middle { pub use crate::*; }
     pub mod attrs { pub use crate::*; }
+    pub mod thir { pub use crate::*; }
+    pub mod source_map { 
+        pub use crate::*; 
+        pub struct Spanned<T>(pub T);
+    }
+    pub mod codes { pub use crate::*; }
+    pub mod config { pub use crate::*; }
+    pub struct Session;
     pub struct Span;
+    pub const DUMMY_SP: Span = Span;
 }
 
 pub mod mini_core { pub use crate::*; }
 pub mod context { pub use crate::*; }
+pub mod prelude { pub use crate::*; }
+pub mod ty { pub use crate::*; }
+pub mod builder { pub use crate::*; }
 
 pub mod rustc_complete;
 
