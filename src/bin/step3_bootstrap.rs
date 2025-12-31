@@ -48,7 +48,7 @@ macro_rules! mkcompiler {
         
         impl $name {
             pub fn compile(&self, source: &str) -> Result<String, String> {
-                format!("Compiled {} with {}", source, self.version).into()
+                Ok(format!("Compiled {} with {}", source, self.version))
             }
         }
     };
@@ -70,6 +70,33 @@ macro_rules! mkrust {
 "#;
     
     fs::write(instance_path.join("src/compiler_macros.rs"), compiler_macro)?;
+    
+    // Generate test binary with correct imports
+    let test_compiler = r#"use split_decls_genesis::{mkrust, mkcompiler};
+
+fn main() {
+    println!("🧬 Testing compiler integration macros...");
+    
+    // Create the Rust universe using our mkrust! macro
+    mkrust!();
+    
+    let compiler = create_rust_universe();
+    println!("✅ Created Rust compiler: version {}", compiler.version);
+    println!("✅ Features: {:?}", compiler.features);
+    
+    // Test compilation
+    let source_code = "fn hello() { println!(\"Hello from generated code!\"); }";
+    match compiler.compile(source_code) {
+        Ok(result) => println!("✅ Compilation result: {}", result),
+        Err(e) => println!("❌ Compilation error: {}", e),
+    }
+    
+    println!("🎉 Compiler integration test complete!");
+}
+"#;
+    
+    fs::create_dir_all(instance_path.join("src/bin"))?;
+    fs::write(instance_path.join("src/bin/test_compiler.rs"), test_compiler)?;
     
     // Update lib.rs to include compiler macros
     let lib_content = fs::read_to_string(instance_path.join("src/lib.rs"))?;
