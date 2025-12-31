@@ -1,0 +1,1 @@
+// Generated lib from macro parameter
