@@ -98,10 +98,80 @@ fn main() {
     fs::create_dir_all(instance_path.join("src/bin"))?;
     fs::write(instance_path.join("src/bin/test_compiler.rs"), test_compiler)?;
     
-    // Update lib.rs to include compiler macros
-    let lib_content = fs::read_to_string(instance_path.join("src/lib.rs"))?;
-    let enhanced_lib = format!("{}\npub mod compiler_macros;\npub use compiler_macros::*;", lib_content);
-    fs::write(instance_path.join("src/lib.rs"), enhanced_lib)?;
+    // Create the build.rs that generates lib.rs with module declarations (this was the manual fix)
+    let build_rs_content = r#"// build.rs - The Genesis Build System
+use anyhow::Result;
+use std::fs;
+
+fn main() -> Result<()> {
+    println!("🧬 GENESIS BUILD SYSTEM ACTIVATED");
+    
+    // Generate the complete system in src/lib.rs with module declarations
+    let system_code = r#"
+//! # Split-Decls-Genesis: Pure Macro System
+
+pub mod blockchain_macros;
+pub mod compiler_macros;
+
+// Re-export all macros
+pub use blockchain_macros::*;
+pub use compiler_macros::*;
+
+/// Core system initialization macro
+#[macro_export]
+macro_rules! mknix {
+    () => {
+        // NIX environment setup
+    };
+}
+
+/// Git repository management macro  
+#[macro_export]
+macro_rules! mkgit {
+    ($repo:expr) => {
+        // Git repository configuration
+    };
+}
+
+/// Function declaration wrapper macro
+#[macro_export]
+macro_rules! mkdeclfn {
+    ($vis:vis fn $name:ident($($args:tt)*) -> $ret:ty $body:block) => {
+        $vis fn $name($($args)*) -> $ret {
+            println!("🔧 EXECUTING: {}", stringify!($name));
+            $body
+        }
+    };
+}
+
+/// Complete system orchestration macro
+#[macro_export]
+macro_rules! mksystem {
+    () => {
+        mknix!();
+        mkgit!("split-decls-genesis");
+        
+        mkdeclfn! {
+            pub fn run_system() -> anyhow::Result<()> {
+                println!("🚀 SYSTEM: Complete macro-driven system running!");
+                Ok(())
+            }
+        }
+    };
+}
+
+// Initialize the complete system
+mksystem!();
+"#;
+
+    fs::write("src/lib.rs", system_code)?;
+    
+    println!("✨ Generated complete macro-driven system with module declarations!");
+    Ok(())
+}
+"#;
+    
+    fs::write(instance_path.join("build.rs"), build_rs_content)?;
     
     Ok(())
 }
