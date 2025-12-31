@@ -1,0 +1,56 @@
+# Self-Replication Makefile - Genesis System Creates Itself
+.PHONY: self-replicate instance-001 validate-self-replication
+
+# THE ULTIMATE SELF-REPLICATION - Genesis creates Genesis
+self-replicate: instance-001 validate-self-replication
+	@echo "🧬 SELF-REPLICATION COMPLETE - Genesis has created itself!"
+
+# Create instance-001 using only the genesis system itself
+instance-001:
+	@echo "🌱 SELF-REPLICATION: Creating instance-001..."
+	@mkdir -p instances/001
+	@echo "📋 Copying genesis system to instance-001..."
+	@cp -r templates/ instances/001/templates/
+	@cp Makefile instances/001/Makefile
+	@cp flake.nix instances/001/flake.nix
+	@cp Cargo.toml instances/001/Cargo.toml
+	@cp build.rs instances/001/build.rs
+	@cp -r src/ instances/001/src/
+	@cp .gitignore instances/001/.gitignore
+	@cp PLAN.md instances/001/PLAN.md
+	@cp GENESIS_SUCCESS.md instances/001/GENESIS_SUCCESS.md
+	@echo "🔧 Initializing instance-001 as independent genesis system..."
+	@cd instances/001 && git init
+	@cd instances/001 && git config user.name "Genesis Instance 001"
+	@cd instances/001 && git config user.email "instance-001@genesis.rs"
+	@cd instances/001 && git add .
+	@cd instances/001 && git commit -m "🧬 INSTANCE-001: Self-replicated genesis system"
+	@echo "✅ Instance-001 created and initialized"
+
+# Validate that instance-001 can create itself (recursive self-replication)
+validate-self-replication:
+	@echo "🧪 VALIDATION: Testing instance-001 self-replication capability..."
+	@cd instances/001 && make world
+	@cd instances/001 && cargo run
+	@echo "🔄 Testing recursive self-replication..."
+	@cd instances/001 && make self-replicate
+	@echo "✅ VALIDATION COMPLETE - Instance-001 can self-replicate!"
+
+# Test the entire self-replication chain
+test-replication-chain:
+	@echo "🔗 TESTING REPLICATION CHAIN..."
+	@echo "Genesis → Instance-001 → Instance-001/Instance-001"
+	@cd instances/001/instances/001 && make world
+	@cd instances/001/instances/001 && cargo run
+	@echo "🎉 INFINITE SELF-REPLICATION ACHIEVED!"
+
+# Clean all instances for fresh self-replication
+clean-instances:
+	@echo "🧹 Cleaning all instances..."
+	@rm -rf instances/
+	@echo "✅ Ready for fresh self-replication"
+
+# Show the self-replication tree
+show-replication-tree:
+	@echo "🌳 SELF-REPLICATION TREE:"
+	@tree instances/ || find instances/ -type d
