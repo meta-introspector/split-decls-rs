@@ -1,6 +1,6 @@
 // Attributes that can be found in function body.
 
-use super::prelude::*;
+use crate::prelude::*;
 
 pub(crate) struct CoroutineParser;
 

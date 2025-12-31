@@ -234,6 +234,9 @@ fn generate_complete_includes(crate_files: &HashMap<String, Vec<String>>) -> Res
                     patched_content = patched_content.replace("extern \"system\" {", "unsafe extern \"system\" {");
                     patched_content = patched_content.replace("extern {", "unsafe extern {");
                     
+                    // Fix super::prelude imports
+                    patched_content = patched_content.replace("super::prelude", "crate::prelude");
+                    
                     // Fix macro name conflicts by making them crate-specific
                     if crate_name == "rustc_hir" && patched_content.contains("macro_rules! arena_types") {
                         patched_content = patched_content.replace("macro_rules! arena_types", "macro_rules! hir_arena_types");

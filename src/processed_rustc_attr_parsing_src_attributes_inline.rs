@@ -4,7 +4,7 @@
 
 use crate::rustc_complete::attrs::{AttributeKind, InlineAttr};
 
-use super::prelude::*;
+use crate::prelude::*;
 
 pub(crate) struct InlineParser;
 

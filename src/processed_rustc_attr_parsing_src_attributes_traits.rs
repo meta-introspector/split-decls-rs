@@ -2,7 +2,7 @@ use std::mem;
 
 use rustc_feature::AttributeType;
 
-use super::prelude::*;
+use crate::prelude::*;
 use crate::attributes::{
     AttributeOrder, NoArgsAttributeParser, OnDuplicate, SingleAttributeParser,
 };

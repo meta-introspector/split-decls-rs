@@ -1,6 +1,6 @@
 use crate::rustc_complete::DiagArgValue;
 
-use super::prelude::*;
+use crate::prelude::*;
 use crate::session_diagnostics::IllFormedAttributeInputLint;
 
 pub(crate) struct MustUseParser;

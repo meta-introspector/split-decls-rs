@@ -1,6 +1,6 @@
 use std::iter;
 
-use super::prelude::*;
+use crate::prelude::*;
 use crate::session_diagnostics;
 
 pub(crate) struct AllowInternalUnstableParser;

@@ -1,4 +1,4 @@
-use super::prelude::*;
+use crate::prelude::*;
 use super::util::parse_single_integer;
 
 pub(crate) struct RustcLayoutScalarValidRangeStart;

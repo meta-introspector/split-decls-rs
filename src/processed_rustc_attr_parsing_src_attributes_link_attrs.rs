@@ -6,7 +6,7 @@ use crate::rustc_complete::parse::feature_err;
 use crate::rustc_complete::kw;
 use rustc_target::spec::BinaryFormat;
 
-use super::prelude::*;
+use crate::prelude::*;
 use super::util::parse_single_integer;
 use crate::attributes::cfg::parse_cfg_entry;
 use crate::fluent_generated;

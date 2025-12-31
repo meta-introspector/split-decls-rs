@@ -2,7 +2,7 @@ use rustc_abi::Align;
 use crate::rustc_complete::{IntTy, LitIntType, LitKind, UintTy};
 use crate::rustc_complete::attrs::{IntType, ReprAttr};
 
-use super::prelude::*;
+use crate::prelude::*;
 use crate::session_diagnostics::{self, IncorrectReprFormatGenericCause};
 
 /// Parse #[repr(...)] forms.

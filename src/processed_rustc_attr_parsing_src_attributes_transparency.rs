@@ -1,6 +1,6 @@
 use crate::rustc_complete::hygiene::Transparency;
 
-use super::prelude::*;
+use crate::prelude::*;
 
 pub(crate) struct TransparencyParser;
 

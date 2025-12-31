@@ -1,4 +1,4 @@
-use super::prelude::*;
+use crate::prelude::*;
 
 pub(crate) struct AsPtrParser;
 impl<S: Stage> NoArgsAttributeParser<S> for AsPtrParser {

@@ -6,7 +6,7 @@ use crate::rustc_complete::{
     StableSince, Target, UnstableReason, VERSION_PLACEHOLDER,
 };
 
-use super::prelude::*;
+use crate::prelude::*;
 use super::util::parse_version;
 use crate::session_diagnostics::{self, UnsupportedLiteralReason};
 

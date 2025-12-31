@@ -2,7 +2,7 @@ use std::num::IntErrorKind;
 
 use crate::rustc_complete::limit::Limit;
 
-use super::prelude::*;
+use crate::prelude::*;
 use crate::session_diagnostics::LimitInvalid;
 
 impl<S: Stage> AcceptContext<'_, '_, S> {

@@ -1,4 +1,4 @@
-use super::prelude::*;
+use crate::prelude::*;
 
 pub(crate) struct LoopMatchParser;
 impl<S: Stage> NoArgsAttributeParser<S> for LoopMatchParser {

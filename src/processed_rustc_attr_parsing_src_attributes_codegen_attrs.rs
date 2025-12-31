@@ -1,7 +1,7 @@
 use crate::rustc_complete::attrs::{CoverageAttrKind, OptimizeAttr, SanitizerSet, UsedBy};
 use crate::rustc_complete::parse::feature_err;
 
-use super::prelude::*;
+use crate::prelude::*;
 use crate::session_diagnostics::{NakedFunctionIncompatibleAttribute, NullOnExport};
 
 pub(crate) struct OptimizeParser;

@@ -1,7 +1,7 @@
 use crate::rustc_complete::DiagArgValue;
 use crate::rustc_complete::attrs::MacroUseArgs;
 
-use super::prelude::*;
+use crate::prelude::*;
 use crate::session_diagnostics::IllFormedAttributeInputLint;
 
 pub(crate) struct MacroEscapeParser;

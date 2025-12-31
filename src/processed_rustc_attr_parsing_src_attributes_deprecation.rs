@@ -1,6 +1,6 @@
 use crate::rustc_complete::attrs::{DeprecatedSince, Deprecation};
 
-use super::prelude::*;
+use crate::prelude::*;
 use super::util::parse_version;
 use crate::session_diagnostics::{
     DeprecatedItemSuggestion, InvalidSince, MissingNote, MissingSince,

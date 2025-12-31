@@ -1,4 +1,4 @@
-use super::prelude::*;
+use crate::prelude::*;
 
 const PROC_MACRO_ALLOWED_TARGETS: AllowedTargets =
     AllowedTargets::AllowList(&[Allow(Target::Fn), Warn(Target::Crate), Warn(Target::MacroCall)]);
