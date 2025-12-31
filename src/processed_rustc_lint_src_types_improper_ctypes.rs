@@ -29,7 +29,7 @@ declare_lint! {
     /// ### Example
     ///
     /// ```rust
-    /// unsafe extern "C" {
+    /// unsafe unsafe extern "C" {
     ///     static STATIC: String;
     /// }
     /// ```
@@ -945,7 +945,7 @@ impl<'tcx> ImproperCTypesLint {
 }
 
 /// `ImproperCTypesDefinitions` checks items outside of foreign items (e.g. stuff that isn't in
-/// `extern "C" { }` blocks):
+/// `unsafe extern "C" { }` blocks):
 ///
 /// - `extern "<abi>" fn` definitions are checked in the same way as the
 ///   `ImproperCtypesDeclarations` visitor checks functions if `<abi>` is external (e.g. "C").

@@ -19,7 +19,7 @@ fn call_func(func: fn(i16) -> i8, param: i16) -> i8 {
     func(param)
 }
 
-#[no_mangle]
+#[unsafe(no_mangle)]
 extern "C" fn main(argc: i32, _argv: *const *const u8) -> i32 {
     unsafe {
         let result = call_func(i16_as_i8, argc as i16) as isize;

@@ -24,7 +24,7 @@ fn one() -> isize {
     1
 }
 
-#[no_mangle]
+#[unsafe(no_mangle)]
 extern "C" fn main(argc: i32, _argv: *const *const u8) -> i32 {
     let test = Test { field: one() };
     let two = Two { two: 2 };

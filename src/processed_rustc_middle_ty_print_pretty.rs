@@ -3093,7 +3093,7 @@ define_print! {
         write!(p, "{}", self.safety.prefix_str())?;
 
         if self.abi != ExternAbi::Rust {
-            write!(p, "extern {} ", self.abi)?;
+            write!(p, "unsafe extern {} ", self.abi)?;
         }
 
         write!(p, "fn")?;

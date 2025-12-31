@@ -15,7 +15,7 @@
 
 use mini_core::*;
 
-#[no_mangle]
+#[unsafe(no_mangle)]
 extern "C" fn main(argc: isize, _argv: *const *const u8) -> i32 {
     let string = "Arg: %d\n\0";
     let mut closure = || unsafe {

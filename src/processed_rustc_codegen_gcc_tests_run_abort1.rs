@@ -14,7 +14,7 @@ fn test_fail() -> ! {
     unsafe { intrinsics::abort() };
 }
 
-#[no_mangle]
+#[unsafe(no_mangle)]
 extern "C" fn main(argc: i32, _argv: *const *const u8) -> i32 {
     test_fail();
 }

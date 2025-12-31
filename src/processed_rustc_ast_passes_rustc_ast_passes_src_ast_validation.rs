@@ -66,7 +66,7 @@ struct AstValidator<'a> {
     sess: &'a Session,
     features: &'a Features,
 
-    /// The span of the `extern` in an `extern { ... }` block, if any.
+    /// The span of the `extern` in an `unsafe extern { ... }` block, if any.
     extern_mod_span: Option<Span>,
 
     outer_trait_or_trait_impl: Option<TraitOrTraitImpl>,
@@ -606,7 +606,7 @@ impl<'a> AstValidator<'a> {
         });
     }
 
-    /// An `fn` in `extern { ... }` cannot have a body `{ ... }`.
+    /// An `fn` in `unsafe extern { ... }` cannot have a body `{ ... }`.
     fn check_foreign_fn_bodyless(&self, ident: Ident, body: Option<&Block>) {
         let Some(body) = body else {
             return;
@@ -622,7 +622,7 @@ impl<'a> AstValidator<'a> {
         self.sess.source_map().guess_head_span(self.extern_mod_span.unwrap())
     }
 
-    /// An `fn` in `extern { ... }` cannot have qualifiers, e.g. `async fn`.
+    /// An `fn` in `unsafe extern { ... }` cannot have qualifiers, e.g. `async fn`.
     fn check_foreign_fn_headerless(
         &self,
         // Deconstruct to ensure exhaustiveness
@@ -649,7 +649,7 @@ impl<'a> AstValidator<'a> {
         }
     }
 
-    /// An item in `extern { ... }` cannot use non-ascii identifier.
+    /// An item in `unsafe extern { ... }` cannot use non-ascii identifier.
     fn check_foreign_item_ascii_only(&self, ident: Ident) {
         if !ident.as_str().is_ascii() {
             self.dcx().emit_err(errors::ExternItemAscii {

@@ -20,7 +20,7 @@ fn int_cast(a: u16, b: i16) -> (u8, u16, u32, usize, i8, i16, i32, isize, u8, u3
     )
 }
 
-#[no_mangle]
+#[unsafe(no_mangle)]
 extern "C" fn main(argc: i32, _argv: *const *const u8) -> i32 {
     let (a, b, c, d, e, f, g, h, i, j) = int_cast(10, 42);
     unsafe {

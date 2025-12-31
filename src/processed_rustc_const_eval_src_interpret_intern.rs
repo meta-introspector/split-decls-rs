@@ -164,7 +164,7 @@ fn intern_as_new_static<'tcx>(
     }
 
     // These do not inherit the codegen attrs of the parent static allocation, since
-    // it doesn't make sense for them to inherit their `#[no_mangle]` and `#[link_name = ..]`
+    // it doesn't make sense for them to inherit their `#[unsafe(no_mangle)]` and `#[link_name = ..]`
     // and the like.
     feed.codegen_fn_attrs(CodegenFnAttrs::new());
 

@@ -51,7 +51,7 @@ fn reachable_non_generics_provider(tcx: TyCtxt<'_>, _: LocalCrate) -> DefIdMap<S
 
     // Check to see if this crate is a "special runtime crate". These
     // crates, implementation details of the standard library, typically
-    // have a bunch of `pub extern` and `#[no_mangle]` functions as the
+    // have a bunch of `pub extern` and `#[unsafe(no_mangle)]` functions as the
     // ABI between them. We don't want their symbols to have a `C`
     // export level, however, as they're just implementation details.
     // Down below we'll hardwire all of the symbols to the `Rust` export

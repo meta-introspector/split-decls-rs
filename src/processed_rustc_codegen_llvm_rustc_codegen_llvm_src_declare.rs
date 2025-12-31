@@ -223,7 +223,7 @@ impl<'ll, CX: Borrow<SCx<'ll>>> GenericCx<'ll, CX> {
     /// Use this function when you intend to define a global. This function will
     /// return `None` if the name already has a definition associated with it. In that
     /// case an error should be reported to the user, because it usually happens due
-    /// to user’s fault (e.g., misuse of `#[no_mangle]` or `#[export_name]` attributes).
+    /// to user’s fault (e.g., misuse of `#[unsafe(no_mangle)]` or `#[unsafe(export_name]` attributes).
     pub(crate) fn define_global(&self, name: &str, ty: &'ll Type) -> Option<&'ll Value> {
         if self.get_defined_value(name).is_some() {
             None

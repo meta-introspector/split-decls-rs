@@ -116,7 +116,7 @@ impl<'gcc, 'tcx> StaticCodegenMethods for CodegenCx<'gcc, 'tcx> {
             //
             // To workaround the bug, we trick LLVM into not increasing
             // the global's alignment by explicitly assigning a section to it
-            // (equivalent to automatically generating a `#[link_section]` attribute).
+            // (equivalent to automatically generating a `#[unsafe(link_section]` attribute).
             // See the comment in the `GlobalValue::canIncreaseAlignment()` function
             // of `lib/IR/Globals.cpp` for why this works.
             //

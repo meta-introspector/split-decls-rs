@@ -161,7 +161,7 @@ impl<'tcx> FunctionItemRefChecker<'_, 'tcx> {
         let unsafety = fn_sig.safety().prefix_str();
         let abi = match fn_sig.abi() {
             ExternAbi::Rust => String::from(""),
-            other_abi => format!("extern {other_abi} "),
+            other_abi => format!("unsafe extern {other_abi} "),
         };
         let ident = self.tcx.item_ident(fn_id);
         let ty_params = fn_args.types().map(|ty| format!("{ty}"));

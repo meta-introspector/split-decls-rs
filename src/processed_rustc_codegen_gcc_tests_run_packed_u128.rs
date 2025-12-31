@@ -16,12 +16,12 @@ pub struct ScalarInt {
     size: u8,
 }
 #[inline(never)]
-#[no_mangle]
+#[unsafe(no_mangle)]
 fn read_data(a: &ScalarInt) {
     black_box(a.data);
 }
 
-#[no_mangle]
+#[unsafe(no_mangle)]
 extern "C" fn main(argc: i32, _argv: *const *const u8) -> i32 {
     let data =
         [black_box(ScalarInt { data: 0, size: 1 }), black_box(ScalarInt { data: 0, size: 1 })];

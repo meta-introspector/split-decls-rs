@@ -200,6 +200,16 @@ fn generate_complete_includes(crate_files: &HashMap<String, Vec<String>>) -> Res
                     patched_content = patched_content.replace("#[proc_macro]", "// #[proc_macro] - removed");
                     patched_content = patched_content.replace("#[proc_macro_derive", "// #[proc_macro_derive");
                     
+                    // Fix unsafe attributes for Rust 2024 edition
+                    patched_content = patched_content.replace("#[no_mangle]", "#[unsafe(no_mangle)]");
+                    patched_content = patched_content.replace("#[export_name", "#[unsafe(export_name");
+                    patched_content = patched_content.replace("#[link_section", "#[unsafe(link_section");
+                    
+                    // Fix extern blocks to be unsafe for Rust 2024 edition
+                    patched_content = patched_content.replace("extern \"C\" {", "unsafe extern \"C\" {");
+                    patched_content = patched_content.replace("extern \"system\" {", "unsafe extern \"system\" {");
+                    patched_content = patched_content.replace("extern {", "unsafe extern {");
+                    
                     // Fix macro name conflicts by making them crate-specific
                     if crate_name == "rustc_hir" && patched_content.contains("macro_rules! arena_types") {
                         patched_content = patched_content.replace("macro_rules! arena_types", "macro_rules! hir_arena_types");

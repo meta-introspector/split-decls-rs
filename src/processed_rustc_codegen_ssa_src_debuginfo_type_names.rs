@@ -368,7 +368,7 @@ fn push_debuginfo_type_name<'tcx>(
                 output.push_str(sig.safety.prefix_str());
 
                 if sig.abi != rustc_abi::ExternAbi::Rust {
-                    let _ = write!(output, "extern {} ", sig.abi);
+                    let _ = write!(output, "unsafe extern {} ", sig.abi);
                 }
 
                 output.push_str("fn(");

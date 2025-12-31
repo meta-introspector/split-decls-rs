@@ -105,7 +105,7 @@ impl From<Ident> for LifetimeSyntax {
 /// ```
 /// #[repr(C)]
 /// struct S<'a>(&'a u32);       // res=Param, name='a, source=Reference, syntax=ExplicitBound
-/// unsafe extern "C" {
+/// unsafe unsafe extern "C" {
 ///     fn f1(s: S);             // res=Param, name='_, source=Path, syntax=Implicit
 ///     fn f2(s: S<'_>);         // res=Param, name='_, source=Path, syntax=ExplicitAnonymous
 ///     fn f3<'a>(s: S<'a>);     // res=Param, name='a, source=Path, syntax=ExplicitBound
@@ -4383,7 +4383,7 @@ pub enum ItemKind<'hir> {
     Macro(Ident, &'hir ast::MacroDef, MacroKinds),
     /// A module.
     Mod(Ident, &'hir Mod<'hir>),
-    /// An external module, e.g. `extern { .. }`.
+    /// An external module, e.g. `unsafe extern { .. }`.
     ForeignMod { abi: ExternAbi, items: &'hir [ForeignItemId] },
     /// Module-level inline assembly (from `global_asm!`).
     GlobalAsm {

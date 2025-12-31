@@ -52,7 +52,7 @@ mod platform {
         use core::ffi::{c_void, c_int};
 
         #[link(name = "c")]
-        extern "C" {
+        unsafe extern "C" {
             pub fn malloc(size: usize) -> *mut c_void;
             pub fn realloc(ptr: *mut c_void, size: usize) -> *mut c_void;
             pub fn calloc(nmemb: usize, size: usize) -> *mut c_void;
@@ -155,7 +155,7 @@ mod platform {
     type SIZE_T = usize;
     type DWORD = u32;
     type BOOL = i32;
-    extern "system" {
+    unsafe extern "system" {
         fn GetProcessHeap() -> HANDLE;
         fn HeapAlloc(hHeap: HANDLE, dwFlags: DWORD, dwBytes: SIZE_T) -> LPVOID;
         fn HeapReAlloc(hHeap: HANDLE, dwFlags: DWORD, lpMem: LPVOID, dwBytes: SIZE_T) -> LPVOID;

@@ -1646,8 +1646,8 @@ impl<'hir> LoweringContext<'_, 'hir> {
             if let ExternAbi::Stdcall { unwind } = extern_abi {
                 let c_abi = ExternAbi::C { unwind };
                 let system_abi = ExternAbi::System { unwind };
-                err.help(format!("if you need `extern {extern_abi}` on win32 and `extern {c_abi}` everywhere else, \
-                    use `extern {system_abi}`"
+                err.help(format!("if you need `unsafe extern {extern_abi}` on win32 and `unsafe extern {c_abi}` everywhere else, \
+                    use `unsafe extern {system_abi}`"
                 ));
             }
             err.emit();

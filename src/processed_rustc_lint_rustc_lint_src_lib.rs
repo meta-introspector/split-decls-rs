@@ -410,11 +410,11 @@ fn register_builtins(store: &mut LintStore) {
     );
     store.register_removed(
         "private_no_mangle_fns",
-        "no longer a warning, `#[no_mangle]` functions always exported",
+        "no longer a warning, `#[unsafe(no_mangle)]` functions always exported",
     );
     store.register_removed(
         "private_no_mangle_statics",
-        "no longer a warning, `#[no_mangle]` statics always exported",
+        "no longer a warning, `#[unsafe(no_mangle)]` statics always exported",
     );
     store.register_removed("bad_repr", "replaced with a generic attribute input check");
     store.register_removed(

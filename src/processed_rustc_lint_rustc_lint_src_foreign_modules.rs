@@ -37,12 +37,12 @@ declare_lint! {
     ///
     /// ```rust
     /// mod m {
-    ///     unsafe extern "C" {
+    ///     unsafe unsafe extern "C" {
     ///         fn foo();
     ///     }
     /// }
     ///
-    /// unsafe extern "C" {
+    /// unsafe unsafe extern "C" {
     ///     fn foo(_: u32);
     /// }
     /// ```

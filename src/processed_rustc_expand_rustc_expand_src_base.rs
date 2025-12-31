@@ -437,7 +437,7 @@ pub trait MacResult {
         None
     }
 
-    /// Creates zero or more items in an `extern {}` block
+    /// Creates zero or more items in an `unsafe extern {}` block
     fn make_foreign_items(self: Box<Self>) -> Option<SmallVec<[Box<ast::ForeignItem>; 1]>> {
         None
     }

@@ -12,7 +12,7 @@ use alloc_system::System;
 static ALLOC: System = System;
 
 #[link(name = "c")]
-extern "C" {
+unsafe extern "C" {
     fn puts(s: *const u8) -> i32;
 }
 
@@ -31,12 +31,12 @@ fn eh_personality() -> ! {
     loop {}
 }
 
-#[no_mangle]
+#[unsafe(no_mangle)]
 unsafe extern "C" fn _Unwind_Resume() {
     core::intrinsics::unreachable();
 }
 
-#[no_mangle]
+#[unsafe(no_mangle)]
 extern "C" fn main(_argc: core::ffi::c_int, _argv: *const *const u8) -> core::ffi::c_int {
     let world: Box<&str> = Box::new("Hello World!\0");
     unsafe {

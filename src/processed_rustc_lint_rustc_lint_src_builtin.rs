@@ -204,14 +204,14 @@ declare_lint! {
     ///     }
     /// }
     ///
-    /// #[no_mangle]
+    /// #[unsafe(no_mangle)]
     /// fn func_0() { }
     ///
-    /// #[export_name = "exported_symbol_name"]
+    /// #[unsafe(export_name = "exported_symbol_name"]
     /// pub fn name_in_rust() { }
     ///
-    /// #[no_mangle]
-    /// #[link_section = ".example_section"]
+    /// #[unsafe(no_mangle)]
+    /// #[unsafe(link_section = ".example_section"]
     /// pub static VAR1: u32 = 1;
     /// ```
     ///
@@ -913,7 +913,7 @@ declare_lint! {
     /// ### Example
     ///
     /// ```rust,compile_fail,edition2021
-    /// #[no_mangle]
+    /// #[unsafe(no_mangle)]
     /// const FOO: i32 = 5;
     /// ```
     ///

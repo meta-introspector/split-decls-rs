@@ -44,13 +44,13 @@ use crate::check::wfcheck::{
 fn add_abi_diag_help<T: EmissionGuarantee>(abi: ExternAbi, diag: &mut Diag<'_, T>) {
     if let ExternAbi::Cdecl { unwind } = abi {
         let c_abi = ExternAbi::C { unwind };
-        diag.help(format!("use `extern {c_abi}` instead",));
+        diag.help(format!("use `unsafe extern {c_abi}` instead",));
     } else if let ExternAbi::Stdcall { unwind } = abi {
         let c_abi = ExternAbi::C { unwind };
         let system_abi = ExternAbi::System { unwind };
         diag.help(format!(
-            "if you need `extern {abi}` on win32 and `extern {c_abi}` everywhere else, \
-                use `extern {system_abi}`"
+            "if you need `unsafe extern {abi}` on win32 and `unsafe extern {c_abi}` everywhere else, \
+                use `unsafe extern {system_abi}`"
         ));
     }
 }

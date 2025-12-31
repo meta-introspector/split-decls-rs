@@ -21,7 +21,7 @@ fn inc(num: isize) -> isize {
     num + 1
 }
 
-#[no_mangle]
+#[unsafe(no_mangle)]
 extern "C" fn main(mut argc: isize, _argv: *const *const u8) -> i32 {
     argc = inc(argc);
     unsafe {

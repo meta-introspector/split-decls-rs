@@ -241,7 +241,7 @@ fn prefix_and_suffix<'tcx>(
             write_linkage(&mut begin).unwrap();
             match item_data.visibility {
                 Visibility::Default | Visibility::Protected => {}
-                Visibility::Hidden => writeln!(begin, ".private_extern {asm_name}").unwrap(),
+                Visibility::Hidden => writeln!(begin, ".private_unsafe extern {asm_name}").unwrap(),
             }
             writeln!(begin, "{asm_name}:").unwrap();
 

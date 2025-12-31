@@ -184,7 +184,7 @@ impl<'tcx> ReachableContext<'tcx> {
                 CodegenFnAttrs::EMPTY
             };
             let is_extern = codegen_attrs.contains_extern_indicator();
-            if is_extern {
+            if is_unsafe extern {
                 self.reachable_symbols.insert(search_item);
             }
         } else {

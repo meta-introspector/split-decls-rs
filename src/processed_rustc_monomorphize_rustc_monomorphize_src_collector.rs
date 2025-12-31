@@ -66,7 +66,7 @@
 // consider non-generic items, an empty type-parameters set. (In eager
 // collection mode, during incremental compilation, all non-generic functions
 // are considered as roots, as well as when the `-Clink-dead-code` option is
-// specified. Functions marked `#[no_mangle]` and functions called by inlinable
+// specified. Functions marked `#[unsafe(no_mangle)]` and functions called by inlinable
 // functions also always act as roots.)
 //
 // ### Finding uses

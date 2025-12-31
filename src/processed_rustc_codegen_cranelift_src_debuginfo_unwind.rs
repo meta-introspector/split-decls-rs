@@ -143,7 +143,7 @@ impl UnwindContext {
     }
 }
 
-extern "C" {
+unsafe extern "C" {
     // libunwind import
     fn __register_frame(fde: *const u8);
 }

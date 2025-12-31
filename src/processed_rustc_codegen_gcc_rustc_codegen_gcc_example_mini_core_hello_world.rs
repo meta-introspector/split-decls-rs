@@ -265,13 +265,13 @@ fn main() {
 
     assert_eq!(((|()| 42u8) as fn(()) -> u8)(()), 42);
 
-    extern "C" {
+    unsafe extern "C" {
         #[linkage = "weak"]
         static ABC: *const u8;
     }
 
     {
-        extern "C" {
+        unsafe extern "C" {
             #[linkage = "weak"]
             static ABC: *const u8;
         }
@@ -293,7 +293,7 @@ fn main() {
 
     check_niche_behavior();
 
-    extern "C" {
+    unsafe extern "C" {
         type ExternType;
     }
 
@@ -328,7 +328,7 @@ struct pthread_attr_t {
 }
 
 #[link(name = "pthread")]
-extern "C" {
+unsafe extern "C" {
     fn pthread_attr_init(attr: *mut pthread_attr_t) -> c_int;
 
     fn pthread_create(

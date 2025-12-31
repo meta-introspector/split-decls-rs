@@ -1940,7 +1940,7 @@ fn add_post_link_args(cmd: &mut dyn Linker, sess: &Session, flavor: LinkerFlavor
 /// Background: we implement rlibs as static library (archives). Linkers treat archives
 /// differently from object files: all object files participate in linking, while archives will
 /// only participate in linking if they can satisfy at least one undefined reference (version
-/// scripts doesn't count). This causes `#[no_mangle]` or `#[used]` items to be ignored by the
+/// scripts doesn't count). This causes `#[unsafe(no_mangle)]` or `#[used]` items to be ignored by the
 /// linker, and since they never participate in the linking, using `KEEP` in the linker scripts
 /// can't keep them either. This causes #47384.
 ///
@@ -1955,7 +1955,7 @@ fn add_post_link_args(cmd: &mut dyn Linker, sess: &Session, flavor: LinkerFlavor
 /// This method creates a synthetic object file, which contains undefined references to all symbols
 /// that are necessary for the linking. They are only present in symbol table but not actually
 /// used in any sections, so the linker will therefore pick relevant rlibs for linking, but
-/// unused `#[no_mangle]` or `#[used(compiler)]` can still be discard by GC sections.
+/// unused `#[unsafe(no_mangle)]` or `#[used(compiler)]` can still be discard by GC sections.
 ///
 /// There's a few internal crates in the standard library (aka libcore and
 /// libstd) which actually have a circular dependence upon one another. This
@@ -1989,7 +1989,7 @@ fn add_linked_symbol_object(
 
     if file.format() == object::BinaryFormat::MachO {
         // Divide up the sections into sub-sections via symbols for dead code stripping.
-        // Without this flag, unused `#[no_mangle]` or `#[used(compiler)]` cannot be
+        // Without this flag, unused `#[unsafe(no_mangle)]` or `#[used(compiler)]` cannot be
         // discard on MachO targets.
         file.set_subsections_via_symbols();
     }

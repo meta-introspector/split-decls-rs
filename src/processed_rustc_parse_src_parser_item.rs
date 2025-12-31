@@ -1233,8 +1233,8 @@ impl<'a> Parser<'a> {
     /// # Examples
     ///
     /// ```ignore (only-for-syntax-highlight)
-    /// extern "C" {}
-    /// extern {}
+    /// unsafe extern "C" {}
+    /// unsafe extern {}
     /// ```
     fn parse_item_foreign_mod(
         &mut self,
@@ -1260,7 +1260,7 @@ impl<'a> Parser<'a> {
         }))
     }
 
-    /// Parses a foreign item (one in an `extern { ... }` block).
+    /// Parses a foreign item (one in an `unsafe extern { ... }` block).
     pub fn parse_foreign_item(
         &mut self,
         force_collect: ForceCollect,
@@ -2660,7 +2660,7 @@ impl<'a> Parser<'a> {
                                     exp.kw.as_str() == i.name.as_str().to_lowercase()
                                 }))
                         )
-                        // Rule out `unsafe extern {`.
+                        // Rule out `unsafe unsafe extern {`.
                         && !self.is_unsafe_foreign_mod()
                         // Rule out `async gen {` and `async gen move {`
                         && !self.is_async_gen_block())

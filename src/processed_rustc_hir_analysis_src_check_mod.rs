@@ -149,17 +149,17 @@ pub(super) fn maybe_check_static_with_link_section(tcx: TyCtxt<'_>, id: LocalDef
         return;
     }
 
-    // If `#[link_section]` is missing, then nothing to verify
+    // If `#[unsafe(link_section]` is missing, then nothing to verify
     let Some(link_section) = tcx.codegen_fn_attrs(id).link_section else {
         return;
     };
 
-    // For the wasm32 target statics with `#[link_section]` other than `.init_array`
+    // For the wasm32 target statics with `#[unsafe(link_section]` other than `.init_array`
     // are placed into custom sections of the final output file, but this isn't like
     // custom sections of other executable formats. Namely we can only embed a list
     // of bytes, nothing with provenance (pointers to anything else). If any
     // provenance show up, reject it here.
-    // `#[link_section]` may contain arbitrary, or even undefined bytes, but it is
+    // `#[unsafe(link_section]` may contain arbitrary, or even undefined bytes, but it is
     // the consumer's responsibility to ensure all bytes that have been read
     // have defined values.
     //
@@ -169,10 +169,10 @@ pub(super) fn maybe_check_static_with_link_section(tcx: TyCtxt<'_>, id: LocalDef
     //
     //   * The linker fails to merge multiple items in a crate into the .init_array section.
     //     To work around this, a single array can be used placing multiple items in the array.
-    //     #[link_section = ".init_array"]
+    //     #[unsafe(link_section = ".init_array"]
     //     static FOO: [unsafe extern "C" fn(); 2] = [ctor, ctor];
     //   * Even symbols marked used get gc'd from dependant crates unless at least one symbol
-    //     in the crate is marked with an `#[export_name]`
+    //     in the crate is marked with an `#[unsafe(export_name]`
     //
     //  Once `.init_array` support in wasm-ld is complete, the user code workarounds should
     //  continue to work, but would no longer be necessary.
@@ -181,7 +181,7 @@ pub(super) fn maybe_check_static_with_link_section(tcx: TyCtxt<'_>, id: LocalDef
         && !alloc.inner().provenance().ptrs().is_empty()
         && !link_section.as_str().starts_with(".init_array")
     {
-        let msg = "statics with a custom `#[link_section]` must be a \
+        let msg = "statics with a custom `#[unsafe(link_section]` must be a \
                         simple list of bytes on the wasm target with no \
                         extra levels of indirection such as references";
         tcx.dcx().span_err(tcx.def_span(id), msg);

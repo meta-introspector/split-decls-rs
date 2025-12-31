@@ -20,7 +20,7 @@ fn make_array() -> [u8; 3] {
     [42, 10, 5]
 }
 
-#[no_mangle]
+#[unsafe(no_mangle)]
 extern "C" fn main(argc: i32, _argv: *const *const u8) -> i32 {
     let array = [42, 7, 5];
     let array2 = make_array();

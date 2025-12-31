@@ -14,7 +14,7 @@
 #[no_core]
 #[allow(dead_code, internal_features, ambiguous_wide_pointer_comparisons)]
 
-#[no_mangle]
+#[unsafe(no_mangle)]
 unsafe extern "C" fn _Unwind_Resume() {
     intrinsics::unreachable();
 }
@@ -684,7 +684,7 @@ pub mod intrinsics {
 
 pub mod libc {
     #[link(name = "c")]
-    extern "C" {
+    unsafe extern "C" {
         pub fn puts(s: *const u8) -> i32;
         pub fn printf(format: *const i8, ...) -> i32;
         pub fn malloc(size: usize) -> *mut u8;
@@ -721,7 +721,7 @@ impl<T> Index<usize> for [T] {
     }
 }
 
-extern "C" {
+unsafe extern "C" {
     type VaListImpl;
 }
 
@@ -762,7 +762,7 @@ struct PanicLocation {
     column: u32,
 }
 
-#[no_mangle]
+#[unsafe(no_mangle)]
 pub fn get_tls() -> u8 {
     #[thread_local]
     static A: u8 = 42;

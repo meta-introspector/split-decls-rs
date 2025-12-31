@@ -3208,7 +3208,7 @@ pub struct ModSpans {
 
 /// Foreign module declaration.
 ///
-/// E.g., `extern { .. }` or `extern "C" { .. }`.
+/// E.g., `unsafe extern { .. }` or `unsafe extern "C" { .. }`.
 #[derive(Clone, Encodable, Decodable, Debug, Walkable)]
 pub struct ForeignMod {
     /// Span of the `extern` keyword.
@@ -3786,7 +3786,7 @@ pub enum ItemKind {
     Mod(Safety, Ident, ModKind),
     /// An external module (`extern`).
     ///
-    /// E.g., `extern {}` or `extern "C" {}`.
+    /// E.g., `unsafe extern {}` or `unsafe extern "C" {}`.
     ForeignMod(ForeignMod),
     /// Module-level inline assembly (from `global_asm!()`).
     GlobalAsm(Box<InlineAsm>),

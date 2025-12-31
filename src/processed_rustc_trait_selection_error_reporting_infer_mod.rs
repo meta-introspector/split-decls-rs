@@ -898,10 +898,10 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
         // unsafe extern "C" for<'a> fn(&'a T) -> &'a T
         //        ^^^^^^^^^^
         if sig1.abi != ExternAbi::Rust {
-            values.0.push(format!("extern {} ", sig1.abi), sig1.abi != sig2.abi);
+            values.0.push(format!("unsafe extern {} ", sig1.abi), sig1.abi != sig2.abi);
         }
         if sig2.abi != ExternAbi::Rust {
-            values.1.push(format!("extern {} ", sig2.abi), sig1.abi != sig2.abi);
+            values.1.push(format!("unsafe extern {} ", sig2.abi), sig1.abi != sig2.abi);
         }
 
         // unsafe extern "C" for<'a> fn(&'a T) -> &'a T

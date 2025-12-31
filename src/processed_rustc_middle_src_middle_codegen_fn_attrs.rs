@@ -35,7 +35,7 @@ pub struct CodegenFnAttrs {
     /// Parsed representation of the `#[optimize]` attribute
     pub optimize: OptimizeAttr,
     /// The name this function will be imported/exported under. This can be set
-    /// using the `#[export_name = "..."]` or `#[link_name = "..."]` attribute
+    /// using the `#[unsafe(export_name = "..."]` or `#[link_name = "..."]` attribute
     /// depending on if this is a function definition or foreign function.
     pub symbol_name: Option<Symbol>,
     /// The `#[link_ordinal = "..."]` attribute, indicating an ordinal an
@@ -53,7 +53,7 @@ pub struct CodegenFnAttrs {
     pub linkage: Option<Linkage>,
     /// The `#[linkage = "..."]` attribute on foreign items and the value we found.
     pub import_linkage: Option<Linkage>,
-    /// The `#[link_section = "..."]` attribute, or what executable section this
+    /// The `#[unsafe(link_section = "..."]` attribute, or what executable section this
     /// should be placed in.
     pub link_section: Option<Symbol>,
     /// The `#[sanitize(xyz = "off")]` attribute. Indicates sanitizers for which
@@ -125,7 +125,7 @@ bitflags::bitflags! {
         /// `#[naked]`: an indicator to LLVM that no function prologue/epilogue
         /// should be generated.
         const NAKED                     = 1 << 2;
-        /// `#[no_mangle]`: an indicator that the function's name should be the same
+        /// `#[unsafe(no_mangle)]`: an indicator that the function's name should be the same
         /// as its symbol.
         const NO_MANGLE                 = 1 << 3;
         /// `#[rustc_std_internal_symbol]`: an indicator that this symbol is a
@@ -190,8 +190,8 @@ impl CodegenFnAttrs {
 
     /// Returns `true` if it looks like this symbol needs to be exported, for example:
     ///
-    /// * `#[no_mangle]` is present
-    /// * `#[export_name(...)]` is present
+    /// * `#[unsafe(no_mangle)]` is present
+    /// * `#[unsafe(export_name(...)]` is present
     /// * `#[linkage]` is present
     ///
     /// Keep this in sync with the logic for the unused_attributes for `#[inline]` lint.

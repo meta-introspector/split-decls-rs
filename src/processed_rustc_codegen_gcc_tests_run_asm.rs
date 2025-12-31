@@ -17,7 +17,7 @@ add_asm:
 );
 
 #[cfg(target_arch = "x86_64")]
-extern "C" {
+unsafe extern "C" {
     fn add_asm(a: i64, b: i64) -> i64;
 }
 

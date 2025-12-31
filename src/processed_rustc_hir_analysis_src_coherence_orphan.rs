@@ -151,7 +151,7 @@ pub(crate) fn orphan_check_impl(
                 },
             ),
 
-            // extern { type OpaqueType; }
+            // unsafe extern { type OpaqueType; }
             // impl AutoTrait for OpaqueType {}
             ty::Foreign(did) => (
                 LocalImpl::Allow,

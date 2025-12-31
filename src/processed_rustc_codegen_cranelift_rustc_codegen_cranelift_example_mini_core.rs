@@ -545,7 +545,7 @@ fn panic_in_cleanup() -> ! {
 
 #[cfg(all(unix, not(target_vendor = "apple")))]
 #[link(name = "gcc_s")]
-extern "C" {
+unsafe extern "C" {
     fn _Unwind_Resume(exc: *mut ()) -> !;
 }
 
@@ -677,13 +677,13 @@ pub mod libc {
     // symbols to link against.
     #[cfg_attr(unix, link(name = "c"))]
     #[cfg_attr(target_env = "msvc", link(name = "legacy_stdio_definitions"))]
-    extern "C" {
+    unsafe extern "C" {
         pub fn printf(format: *const i8, ...) -> i32;
     }
 
     #[cfg_attr(unix, link(name = "c"))]
     #[cfg_attr(target_env = "msvc", link(name = "msvcrt"))]
-    extern "C" {
+    unsafe extern "C" {
         pub fn puts(s: *const i8) -> i32;
         pub fn malloc(size: usize) -> *mut u8;
         pub fn free(ptr: *mut u8);
@@ -715,7 +715,7 @@ impl<T> Index<usize> for [T] {
     }
 }
 
-extern "C" {
+unsafe extern "C" {
     type VaListImpl;
 }
 
@@ -774,7 +774,7 @@ struct PanicLocation {
     column: u32,
 }
 
-#[no_mangle]
+#[unsafe(no_mangle)]
 #[cfg(not(all(windows, target_env = "gnu")))]
 pub fn get_tls() -> u8 {
     #[thread_local]

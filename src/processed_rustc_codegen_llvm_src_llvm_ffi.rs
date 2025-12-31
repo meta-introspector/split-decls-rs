@@ -665,7 +665,7 @@ pub(crate) enum DiagnosticLevel {
     Remark,
 }
 
-unsafe extern "C" {
+unsafe unsafe extern "C" {
     // LLVMRustThinLTOData
     pub(crate) type ThinLTOData;
 
@@ -786,7 +786,7 @@ pub(crate) enum Opcode {
     CatchSwitch = 65,
 }
 
-unsafe extern "C" {
+unsafe unsafe extern "C" {
     type Opaque;
 }
 #[repr(C)]
@@ -796,7 +796,7 @@ struct InvariantOpaque<'a> {
 }
 
 // Opaque pointer types
-unsafe extern "C" {
+unsafe unsafe extern "C" {
     pub(crate) type Module;
     pub(crate) type Context;
     pub(crate) type Type;
@@ -811,10 +811,10 @@ unsafe extern "C" {
 pub(crate) struct Builder<'a>(InvariantOpaque<'a>);
 #[repr(C)]
 pub(crate) struct PassManager<'a>(InvariantOpaque<'a>);
-unsafe extern "C" {
+unsafe unsafe extern "C" {
     pub type TargetMachine;
 }
-unsafe extern "C" {
+unsafe unsafe extern "C" {
     pub(crate) type Twine;
     pub(crate) type DiagnosticInfo;
     pub(crate) type SMDiagnostic;
@@ -825,7 +825,7 @@ pub(crate) struct OperandBundle<'a>(InvariantOpaque<'a>);
 #[repr(C)]
 pub(crate) struct Linker<'a>(InvariantOpaque<'a>);
 
-unsafe extern "C" {
+unsafe unsafe extern "C" {
     pub(crate) type DiagnosticHandler;
 }
 
@@ -1021,7 +1021,7 @@ bitflags! {
     }
 }
 
-unsafe extern "C" {
+unsafe unsafe extern "C" {
     pub(crate) type ModuleBuffer;
 }
 
@@ -1043,7 +1043,7 @@ impl From<MetadataType> for MetadataKindId {
     }
 }
 
-unsafe extern "C" {
+unsafe unsafe extern "C" {
     // Create and destroy contexts.
     pub(crate) fn LLVMContextDispose(C: &'static mut Context);
     pub(crate) fn LLVMGetMDKindIDInContext(
@@ -1834,7 +1834,7 @@ unsafe extern "C" {
 // FIXME(#134001): Audit all `Option` parameters, especially in lists, to check
 // that they really are nullable on the C/C++ side. LLVM doesn't appear to
 // actually document which ones are nullable.
-unsafe extern "C" {
+unsafe unsafe extern "C" {
     pub(crate) fn LLVMCreateDIBuilder<'ll>(M: &'ll Module) -> *mut DIBuilder<'ll>;
     pub(crate) fn LLVMDisposeDIBuilder<'ll>(Builder: ptr::NonNull<DIBuilder<'ll>>);
 
@@ -1873,7 +1873,7 @@ unsafe extern "C" {
 }
 
 #[link(name = "llvm-wrapper", kind = "static")]
-unsafe extern "C" {
+unsafe unsafe extern "C" {
     pub(crate) fn LLVMRustInstallErrorHandlers();
     pub(crate) fn LLVMRustDisableSystemDialogsOnCrash();
 

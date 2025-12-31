@@ -2135,12 +2135,12 @@ impl<'tcx> CheckAttrVisitor<'tcx> {
             let no_mangle_attr = if no_mangle_span.edition() >= Edition::Edition2024 {
                 "#[unsafe(no_mangle)]"
             } else {
-                "#[no_mangle]"
+                "#[unsafe(no_mangle)]"
             };
             let export_name_attr = if export_name_span.edition() >= Edition::Edition2024 {
                 "#[unsafe(export_name)]"
             } else {
-                "#[export_name]"
+                "#[unsafe(export_name]"
             };
 
             self.tcx.emit_node_span_lint(

@@ -276,13 +276,13 @@ fn main() {
 
     #[cfg(not(any(jit, target_vendor = "apple", windows)))]
     {
-        extern "C" {
+        unsafe extern "C" {
             #[linkage = "extern_weak"]
             static ABC: *const u8;
         }
 
         {
-            extern "C" {
+            unsafe extern "C" {
                 #[linkage = "extern_weak"]
                 static ABC: *const u8;
             }
@@ -309,7 +309,7 @@ fn main() {
 
     check_niche_behavior();
 
-    extern "C" {
+    unsafe extern "C" {
         type ExternType;
     }
 
@@ -363,7 +363,7 @@ fn stack_val_align() {
 }
 
 #[cfg(all(not(jit), target_arch = "x86_64", any(target_os = "linux", target_os = "macos")))]
-extern "C" {
+unsafe extern "C" {
     fn global_asm_test();
 }
 
@@ -411,7 +411,7 @@ struct pthread_attr_t {
 
 #[link(name = "pthread")]
 #[cfg(unix)]
-extern "C" {
+unsafe extern "C" {
     fn pthread_attr_init(attr: *mut pthread_attr_t) -> c_int;
 
     fn pthread_create(
@@ -432,7 +432,7 @@ type HANDLE = *mut c_void;
 
 #[link(name = "msvcrt")]
 #[cfg(windows)]
-extern "C" {
+unsafe extern "C" {
     fn WaitForSingleObject(hHandle: LPVOID, dwMilliseconds: DWORD) -> DWORD;
 
     fn CreateThread(

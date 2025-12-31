@@ -12,7 +12,7 @@
 
 use mini_core::*;
 
-#[no_mangle]
+#[unsafe(no_mangle)]
 extern "C" fn main(argc: i32, _argv: *const *const u8) -> i32 {
     unsafe {
         if argc == 1 {

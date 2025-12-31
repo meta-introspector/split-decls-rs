@@ -216,7 +216,7 @@ fn compute_symbol_name<'tcx>(
         //
         // [1]: https://bugs.llvm.org/show_bug.cgi?id=44316
         //
-        // So, on wasm if a foreign item loses its `#[no_mangle]`, it might *still*
+        // So, on wasm if a foreign item loses its `#[unsafe(no_mangle)]`, it might *still*
         // be mangled if we're forced to. Note: I don't like this.
         // These kinds of exceptions should be added during the `codegen_attrs` query.
         // However, we don't have the wasm import module map there yet.

@@ -869,7 +869,7 @@ impl<'ll, 'tcx> MiscCodegenMethods<'tcx> for CodegenCx<'ll, 'tcx> {
             Some(llfn)
         } else {
             // If the symbol already exists, it is an error: for example, the user wrote
-            // #[no_mangle] extern "C" fn main(..) {..}
+            // #[unsafe(no_mangle)] extern "C" fn main(..) {..}
             None
         }
     }

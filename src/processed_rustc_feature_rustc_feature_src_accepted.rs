@@ -288,7 +288,7 @@ declare_features! (
     (accepted, macro_rules, "1.0.0", None),
     /// Allows use of the `:vis` macro fragment specifier
     (accepted, macro_vis_matcher, "1.30.0", Some(41022)),
-    /// Allows macro invocations in `extern {}` blocks.
+    /// Allows macro invocations in `unsafe extern {}` blocks.
     (accepted, macros_in_extern, "1.40.0", Some(49476)),
     /// Allows '|' at beginning of match arms (RFC 1925).
     (accepted, match_beginning_vert, "1.25.0", Some(44101)),

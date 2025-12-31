@@ -516,7 +516,7 @@ fn handle_lang_items(
             .dcx()
             .struct_span_err(
                 interesting_spans.no_mangle.unwrap_or_default(),
-                "`#[no_mangle]` cannot be used on internal language items",
+                "`#[unsafe(no_mangle)]` cannot be used on internal language items",
             )
             .with_note("Rustc requires this item to have a specific mangled name.")
             .with_span_label(tcx.def_span(did), "should be the internal language item");

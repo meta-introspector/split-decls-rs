@@ -220,7 +220,7 @@ pub(crate) enum BuiltinUnusedDocCommentSub {
 #[derive(LintDiagnostic)]
 #[diag(lint_builtin_no_mangle_generic)]
 pub(crate) struct BuiltinNoMangleGeneric {
-    // Use of `#[no_mangle]` suggests FFI intent; correct
+    // Use of `#[unsafe(no_mangle)]` suggests FFI intent; correct
     // fix may be to monomorphize source by hand
     #[suggestion(style = "short", code = "", applicability = "maybe-incorrect")]
     pub suggestion: Span,

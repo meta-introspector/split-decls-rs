@@ -489,7 +489,7 @@ impl<S: Stage> SingleAttributeParser<S> for LinkSectionParser {
             return None;
         };
         if name.as_str().contains('\0') {
-            // `#[link_section = ...]` will be converted to a null-terminated string,
+            // `#[unsafe(link_section = ...]` will be converted to a null-terminated string,
             // so it may not contain any null characters.
             cx.emit_err(NullOnLinkSection { span: cx.attr_span });
             return None;

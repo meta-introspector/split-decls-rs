@@ -503,7 +503,7 @@ pub enum AttributeKind {
     /// Represents `#[rustc_dummy]`.
     Dummy,
 
-    /// Represents [`#[export_name]`](https://doc.rust-lang.org/reference/abi.html#the-export_name-attribute).
+    /// Represents [`#[unsafe(export_name]`](https://doc.rust-lang.org/reference/abi.html#the-export_name-attribute).
     ExportName {
         /// The name to export this item with.
         /// It may not contain \0 bytes as it will be converted to a null-terminated string.
@@ -542,7 +542,7 @@ pub enum AttributeKind {
     /// Represents `#[link_ordinal]`.
     LinkOrdinal { ordinal: u16, span: Span },
 
-    /// Represents [`#[link_section]`](https://doc.rust-lang.org/reference/abi.html#the-link_section-attribute)
+    /// Represents [`#[unsafe(link_section]`](https://doc.rust-lang.org/reference/abi.html#the-link_section-attribute)
     LinkSection { name: Symbol, span: Span },
 
     /// Represents `#[linkage]`.
@@ -585,7 +585,7 @@ pub enum AttributeKind {
     /// Represents `#[no_implicit_prelude]`
     NoImplicitPrelude(Span),
 
-    /// Represents `#[no_mangle]`
+    /// Represents `#[unsafe(no_mangle)]`
     NoMangle(Span),
 
     /// Represents `#[no_std]`

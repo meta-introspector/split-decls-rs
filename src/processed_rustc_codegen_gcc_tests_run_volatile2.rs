@@ -5,7 +5,7 @@
 
 mod libc {
     #[link(name = "c")]
-    extern "C" {
+    unsafe extern "C" {
         pub fn sigaction(signum: i32, act: *const sigaction, oldact: *mut sigaction) -> i32;
         pub fn mmap(
             addr: *mut (),

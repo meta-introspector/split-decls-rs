@@ -15,7 +15,7 @@ fn fail() -> i32 {
     0
 }
 
-#[no_mangle]
+#[unsafe(no_mangle)]
 extern "C" fn main(argc: i32, _argv: *const *const u8) -> i32 {
     fail();
     0

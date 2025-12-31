@@ -3449,7 +3449,7 @@ impl<'tcx> TyCtxt<'tcx> {
 
     /// Named module children from all kinds of items, including imports.
     /// In addition to regular items this list also includes struct and variant constructors, and
-    /// items inside `extern {}` blocks because all of them introduce names into parent module.
+    /// items inside `unsafe extern {}` blocks because all of them introduce names into parent module.
     ///
     /// Module here is understood in name resolution sense - it can be a `mod` item,
     /// or a crate root, or an enum, or a trait.

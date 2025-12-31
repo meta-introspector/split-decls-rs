@@ -381,7 +381,7 @@ impl<'tcx> LateLintPass<'tcx> for NonSnakeCase {
                 AssocContainer::TraitImpl(_) => {}
             },
             FnKind::ItemFn(ident, _, header) => {
-                // Skip foreign-ABI #[no_mangle] functions (Issue #31924)
+                // Skip foreign-ABI #[unsafe(no_mangle)] functions (Issue #31924)
                 if header.abi != ExternAbi::Rust
                     && find_attr!(cx.tcx.get_all_attrs(id), AttributeKind::NoMangle(..))
                 {

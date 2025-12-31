@@ -25,7 +25,7 @@ fn update_num(num: &mut isize) {
     *num = *num + 5;
 }
 
-#[no_mangle]
+#[unsafe(no_mangle)]
 extern "C" fn main(mut argc: isize, _argv: *const *const u8) -> i32 {
     let mut test = test(argc);
     unsafe {

@@ -141,7 +141,7 @@ impl<S: Stage> SingleAttributeParser<S> for ExportNameParser {
             return None;
         };
         if name.as_str().contains('\0') {
-            // `#[export_name = ...]` will be converted to a null-terminated string,
+            // `#[unsafe(export_name = ...]` will be converted to a null-terminated string,
             // so it may not contain any null characters.
             cx.emit_err(NullOnExport { span: cx.attr_span });
             return None;

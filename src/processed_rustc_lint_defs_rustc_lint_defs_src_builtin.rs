@@ -2648,7 +2648,7 @@ declare_lint! {
     ///
     /// ```rust
     /// enum Void {}
-    /// unsafe extern {
+    /// unsafe unsafe extern {
     ///     static EXTERN: Void;
     /// }
     /// ```
@@ -3961,7 +3961,7 @@ declare_lint! {
     ///
     /// ```rust,ignore (needs CLI args, platform-specific)
     /// #[warn(linker_messages)]
-    /// extern "C" {
+    /// unsafe extern "C" {
     ///   fn foo();
     /// }
     /// fn main () { unsafe { foo(); } }
@@ -4755,7 +4755,7 @@ declare_lint! {
     /// #[warn(missing_unsafe_on_extern)]
     /// #[allow(dead_code)]
     ///
-    /// extern "C" {
+    /// unsafe extern "C" {
     ///     fn foo(_: i32);
     /// }
     ///
@@ -4791,7 +4791,7 @@ declare_lint! {
     /// ```rust,edition2021
     /// #[warn(unsafe_attr_outside_unsafe)]
     ///
-    /// #[no_mangle]
+    /// #[unsafe(no_mangle)]
     /// extern "C" fn foo() {}
     ///
     /// fn main() {}

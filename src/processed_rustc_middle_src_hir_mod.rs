@@ -158,7 +158,7 @@ impl<'tcx> TyCtxt<'tcx> {
         }
     }
 
-    /// Returns `true` if this is a foreign item (i.e., linked via `extern { ... }`).
+    /// Returns `true` if this is a foreign item (i.e., linked via `unsafe extern { ... }`).
     pub fn is_foreign_item(self, def_id: impl Into<DefId>) -> bool {
         self.opt_parent(def_id.into())
             .is_some_and(|parent| matches!(self.def_kind(parent), DefKind::ForeignMod))

@@ -406,33 +406,33 @@ fn define_all_allocs(tcx: TyCtxt<'_>, module: &mut dyn Module, cx: &mut Constant
                 let mut parts = section_name.as_str().split(',');
                 let Some(segment_name) = parts.next() else {
                     tcx.dcx().fatal(format!(
-                        "#[link_section = \"{}\"] is not valid for macos target: must be segment and section separated by comma",
+                        "#[unsafe(link_section = \"{}\"] is not valid for macos target: must be segment and section separated by comma",
                         section_name
                     ));
                 };
                 let Some(section_name) = parts.next() else {
                     tcx.dcx().fatal(format!(
-                        "#[link_section = \"{}\"] is not valid for macos target: must be segment and section separated by comma",
+                        "#[unsafe(link_section = \"{}\"] is not valid for macos target: must be segment and section separated by comma",
                         section_name
                     ));
                 };
                 if section_name.len() > 16 {
                     tcx.dcx().fatal(format!(
-                        "#[link_section = \"{}\"] is not valid for macos target: section name bigger than 16 bytes",
+                        "#[unsafe(link_section = \"{}\"] is not valid for macos target: section name bigger than 16 bytes",
                         section_name
                     ));
                 }
                 let section_type = parts.next().unwrap_or("regular");
                 if section_type != "regular" && section_type != "cstring_literals" {
                     tcx.dcx().fatal(format!(
-                        "#[link_section = \"{}\"] is not supported: unsupported section type {}",
+                        "#[unsafe(link_section = \"{}\"] is not supported: unsupported section type {}",
                         section_name, section_type,
                     ));
                 }
                 let _attrs = parts.next();
                 if parts.next().is_some() {
                     tcx.dcx().fatal(format!(
-                        "#[link_section = \"{}\"] is not valid for macos target: too many components",
+                        "#[unsafe(link_section = \"{}\"] is not valid for macos target: too many components",
                         section_name
                     ));
                 }

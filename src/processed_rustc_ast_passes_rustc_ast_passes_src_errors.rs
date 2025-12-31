@@ -203,7 +203,7 @@ pub(crate) struct FnWithoutBody {
 pub(crate) enum ExternBlockSuggestion {
     #[multipart_suggestion(ast_passes_extern_block_suggestion, applicability = "maybe-incorrect")]
     Implicit {
-        #[suggestion_part(code = "extern {{")]
+        #[suggestion_part(code = "unsafe extern {{")]
         start_span: Span,
         #[suggestion_part(code = " }}")]
         end_span: Span,
@@ -864,7 +864,7 @@ pub(crate) struct MissingAbi {
 #[derive(LintDiagnostic)]
 #[diag(ast_passes_extern_without_abi_sugg)]
 pub(crate) struct MissingAbiSugg {
-    #[suggestion(code = "extern {default_abi}", applicability = "machine-applicable")]
+    #[suggestion(code = "unsafe extern {default_abi}", applicability = "machine-applicable")]
     pub span: Span,
     pub default_abi: ExternAbi,
 }

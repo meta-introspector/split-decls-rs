@@ -56,10 +56,10 @@ impl fmt::Display for UnstableAbi {
         let Self { abi, .. } = self;
         match self.explain {
             GateReason::Experimental => {
-                write!(f, "the extern {abi} ABI is experimental and subject to change")
+                write!(f, "the unsafe extern {abi} ABI is experimental and subject to change")
             }
             GateReason::ImplDetail => {
-                write!(f, "the extern {abi} ABI is an implementation detail and perma-unstable")
+                write!(f, "the unsafe extern {abi} ABI is an implementation detail and perma-unstable")
             }
         }
     }
