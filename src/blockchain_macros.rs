@@ -1,0 +1,1 @@
+pub struct Contract { pub address: &'static str }

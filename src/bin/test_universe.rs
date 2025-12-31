@@ -1,0 +1,1 @@
+fn main() { println!("Test from clean functions!"); }

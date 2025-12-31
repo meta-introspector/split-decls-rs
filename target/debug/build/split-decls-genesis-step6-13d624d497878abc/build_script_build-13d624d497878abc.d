@@ -1,0 +1,5 @@
+/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/instances/006/target/debug/build/split-decls-genesis-step6-13d624d497878abc/build_script_build-13d624d497878abc.d: build.rs
+
+/mnt/data1/nix/vendor/rust/cargo2nix/submodules/split-decls-genesis/instances/006/target/debug/build/split-decls-genesis-step6-13d624d497878abc/build_script_build-13d624d497878abc: build.rs
+
+build.rs:
